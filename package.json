@@ -1,6 +1,6 @@
 {
-  "name": "mpss-front",
-  "version": "1.0.0",
+  "name": "uikit",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
     "@types/rc-slider": "^8.6.5",
