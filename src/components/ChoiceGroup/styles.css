@@ -1,0 +1,114 @@
+.choice-group {
+  display: inline-flex;
+  font-size: 0;
+  border-radius: var(--control-radius);
+  box-shadow: inset 0 0 0 2px var(--control-color-bg-border-default);
+
+  &__button {
+    position: relative;
+    z-index: 0;
+    box-sizing: border-box;
+    color: var(--control-color-typo-default);
+    transition: color 0.1s, box-shadow 0.1s;
+    overflow: visible;
+    pointer-events: none;
+
+    &::before {
+      transform: scale(0.8);
+      background-color: rgba(0, 0, 0, 0);
+      transition: background-color 0.15s, transform 0.15s;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: calc(var(--control-border-width) * -1);
+      width: var(--control-border-width);
+      height: 65%;
+      background-color: var(--control-color-bg-border-default);
+    }
+
+    &_checked {
+      color: var(--control-color-typo-checked);
+
+      &::before {
+        transform: scale(1);
+        background-color: var(--control-color-bg-checked);
+
+        /* right: -2px; TODO Подумать как убрать границы между айтемами в состоянии checked */
+      }
+    }
+  }
+
+  &_form_round {
+    border-radius: 999rem;
+
+    .choice-group__button::after {
+      left: calc(var(--control-border-width) * -2);
+      width: calc(var(--control-border-width) * 3);
+      height: calc(var(--control-border-width) * 3);
+      border-radius: 99rem;
+    }
+  }
+
+  &_form_brick {
+    border-radius: 0;
+  }
+
+  &_disabled {
+    pointer-events: none;
+    .choice-group__button {
+      color: var(--control-color-typo-disable);
+
+      &::after {
+        color: var(--control-color-bg-border-disable);
+        opacity: 0;
+      }
+
+      &_checked::before {
+        background-color: var(--control-color-bg-disable);
+        border-color: transparent;
+      }
+    }
+  }
+
+  &__input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: absolute;
+
+    &:focus {
+      outline: none;
+
+      & + .choice-group__button {
+        transition: color 0.1s, box-shadow 0.1s 0.1s;
+        outline: none;
+        box-shadow: 0 0 3px 2px var(--control-color-bg-border-focus);
+      }
+    }
+  }
+
+  &__item {
+    display: inline-block;
+    border-radius: var(--control-radius);
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-right: 2px;
+    }
+    &:first-child {
+      .choice-group__button::after {
+        content: none;
+      }
+    }
+
+    /* &:hover {
+			.choice-group__button {
+				color: var(--control-color-typo-default);
+			}
+		} */ /* TODO добавить ховер */
+  }
+}

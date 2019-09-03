@@ -1,0 +1,1329 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Button С текстом 1`] = `
+<div
+  className="theme theme_breakpoint_default theme_color_gpn-default theme_control_gpn-default theme_font_small theme_gap_small theme_size_gpn-default theme_space_default"
+>
+  <div
+    id="app"
+  >
+    <button
+      className="button button_size_m button_view_primary button_width_default button_form_default"
+      disabled={false}
+      onClick={[Function]}
+    >
+      I am button
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Checkbox Чекбокс 1`] = `
+<div
+  className="theme theme_breakpoint_default theme_color_gpn-default theme_control_gpn-default theme_font_small theme_gap_small theme_size_gpn-default theme_space_default"
+>
+  <div
+    id="app"
+  >
+    <label
+      className="checkbox checkbox_size_m"
+    >
+      <input
+        className="checkbox__input"
+        disabled={false}
+        type="checkbox"
+      />
+      <div
+        className="checkbox__box"
+      />
+      <span
+        className="checkbox__text"
+      >
+        Check me, baby!
+      </span>
+    </label>
+  </div>
+</div>
+`;
+
+exports[`Storyshots ChoiceGroup Множественный выбор 1`] = `
+<div
+  className="theme theme_breakpoint_default theme_color_gpn-default theme_control_gpn-default theme_font_small theme_gap_small theme_size_gpn-default theme_space_default"
+>
+  <div
+    id="app"
+  >
+    <div
+      className="choice-group choice-group_multiple choice-group_form_default"
+    >
+      <label
+        className="choice-group__item"
+        tabIndex={-1}
+      >
+        <input
+          checked={false}
+          className="choice-group__input"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <button
+          className="button button_size_m button_view_primary button_form_default choice-group__button"
+          onBlur={[Function]}
+          tabIndex={-1}
+          type="button"
+        >
+          1 choice
+        </button>
+      </label>
+      <label
+        className="choice-group__item"
+        tabIndex={-1}
+      >
+        <input
+          checked={false}
+          className="choice-group__input"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <button
+          className="button button_size_m button_view_primary button_form_default choice-group__button"
+          onBlur={[Function]}
+          tabIndex={-1}
+          type="button"
+        >
+          2 choice
+        </button>
+      </label>
+      <label
+        className="choice-group__item"
+        tabIndex={-1}
+      >
+        <input
+          checked={false}
+          className="choice-group__input"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <button
+          className="button button_size_m button_view_primary button_form_default choice-group__button"
+          onBlur={[Function]}
+          tabIndex={-1}
+          type="button"
+        >
+          3 choice
+        </button>
+      </label>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots ChoiceGroup Один вариант выбора 1`] = `
+<div
+  className="theme theme_breakpoint_default theme_color_gpn-default theme_control_gpn-default theme_font_small theme_gap_small theme_size_gpn-default theme_space_default"
+>
+  <div
+    id="app"
+  >
+    <div
+      className="choice-group choice-group_form_default"
+    >
+      <label
+        className="choice-group__item"
+        tabIndex={-1}
+      >
+        <input
+          checked={false}
+          className="choice-group__input"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <button
+          className="button button_size_m button_view_primary button_form_default choice-group__button"
+          onBlur={[Function]}
+          tabIndex={-1}
+          type="button"
+        >
+          1 choice
+        </button>
+      </label>
+      <label
+        className="choice-group__item"
+        tabIndex={-1}
+      >
+        <input
+          checked={false}
+          className="choice-group__input"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <button
+          className="button button_size_m button_view_primary button_form_default choice-group__button"
+          onBlur={[Function]}
+          tabIndex={-1}
+          type="button"
+        >
+          2 choice
+        </button>
+      </label>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Common Общий список 1`] = `
+<div
+  className="theme theme_breakpoint_default theme_color_gpn-default theme_control_gpn-default theme_font_small theme_gap_small theme_size_gpn-default theme_space_default"
+>
+  <div
+    id="app"
+  >
+    <div
+      className="common"
+    >
+      <section
+        className="common__buttons"
+      >
+        <h2>
+          Buttons
+        </h2>
+        <div>
+          <button
+            className="button button_width_default button_form_default button_size_xl button_view_primary"
+            disabled={false}
+            onClick={[Function]}
+          >
+            I am button
+          </button>
+          <button
+            className="button button_width_default button_form_default button_size_l button_view_primary"
+            disabled={false}
+            onClick={[Function]}
+          >
+            I am button
+          </button>
+          <button
+            className="button button_width_default button_form_default button_size_m button_view_primary"
+            disabled={false}
+            onClick={[Function]}
+          >
+            I am button
+          </button>
+          <button
+            className="button button_width_default button_form_default button_size_s button_view_primary"
+            disabled={false}
+            onClick={[Function]}
+          >
+            I am button
+          </button>
+        </div>
+        <div>
+          <button
+            className="button button_width_default button_form_default button_size_xl button_view_secondary"
+            disabled={false}
+            onClick={[Function]}
+          >
+            I am button
+          </button>
+          <button
+            className="button button_width_default button_form_default button_size_l button_view_secondary"
+            disabled={false}
+            onClick={[Function]}
+          >
+            I am button
+          </button>
+          <button
+            className="button button_width_default button_form_default button_size_m button_view_secondary"
+            disabled={false}
+            onClick={[Function]}
+          >
+            I am button
+          </button>
+          <button
+            className="button button_width_default button_form_default button_size_s button_view_secondary"
+            disabled={false}
+            onClick={[Function]}
+          >
+            I am button
+          </button>
+        </div>
+        <div>
+          <button
+            className="button button_width_default button_form_default button_size_xl button_view_ghost"
+            disabled={false}
+            onClick={[Function]}
+          >
+            I am button
+          </button>
+          <button
+            className="button button_width_default button_form_default button_size_l button_view_ghost"
+            disabled={false}
+            onClick={[Function]}
+          >
+            I am button
+          </button>
+          <button
+            className="button button_width_default button_form_default button_size_m button_view_ghost"
+            disabled={false}
+            onClick={[Function]}
+          >
+            I am button
+          </button>
+          <button
+            className="button button_width_default button_form_default button_size_s button_view_ghost"
+            disabled={false}
+            onClick={[Function]}
+          >
+            I am button
+          </button>
+        </div>
+        <div>
+          <button
+            className="button button_width_default button_form_default button_size_xl button_view_clear"
+            disabled={false}
+            onClick={[Function]}
+          >
+            I am button
+          </button>
+          <button
+            className="button button_width_default button_form_default button_size_l button_view_clear"
+            disabled={false}
+            onClick={[Function]}
+          >
+            I am button
+          </button>
+          <button
+            className="button button_width_default button_form_default button_size_m button_view_clear"
+            disabled={false}
+            onClick={[Function]}
+          >
+            I am button
+          </button>
+          <button
+            className="button button_width_default button_form_default button_size_s button_view_clear"
+            disabled={false}
+            onClick={[Function]}
+          >
+            I am button
+          </button>
+        </div>
+      </section>
+      <section
+        className="common__inputs"
+      >
+        <h2>
+          Inputs
+        </h2>
+        <div>
+          <textarea
+            className="input input_view_default input_width_default input_type_textarea input_size_xl"
+            disabled={false}
+            form="default"
+            placeholder="My placeholder"
+          />
+          <input
+            className="input input_view_default input_width_default input_form_default input_size_xl"
+            disabled={false}
+            placeholder="My placeholder"
+            type="text"
+          />
+        </div>
+        <div>
+          <textarea
+            className="input input_view_default input_width_default input_type_textarea input_size_l"
+            disabled={false}
+            form="default"
+            placeholder="My placeholder"
+          />
+          <input
+            className="input input_view_default input_width_default input_form_default input_size_l"
+            disabled={false}
+            placeholder="My placeholder"
+            type="text"
+          />
+        </div>
+        <div>
+          <textarea
+            className="input input_view_default input_width_default input_type_textarea input_size_m"
+            disabled={false}
+            form="default"
+            placeholder="My placeholder"
+          />
+          <input
+            className="input input_view_default input_width_default input_form_default input_size_m"
+            disabled={false}
+            placeholder="My placeholder"
+            type="text"
+          />
+        </div>
+        <div>
+          <textarea
+            className="input input_view_default input_width_default input_type_textarea input_size_s"
+            disabled={false}
+            form="default"
+            placeholder="My placeholder"
+          />
+          <input
+            className="input input_view_default input_width_default input_form_default input_size_s"
+            disabled={false}
+            placeholder="My placeholder"
+            type="text"
+          />
+        </div>
+        <h3>
+          Input + input
+        </h3>
+        <input
+          className="input input_view_default input_size_m input_form_default-clear"
+          placeholder="My placeholder"
+          type="text"
+        />
+        <input
+          className="input input_view_default input_size_m input_form_brick-default"
+          placeholder="My placeholder"
+          type="text"
+        />
+        <h3>
+          Input + input + input
+        </h3>
+        <input
+          className="input input_view_default input_size_m input_form_default-clear"
+          placeholder="My placeholder"
+          type="text"
+        />
+        <input
+          className="input input_view_default input_size_m input_form_brick-clear"
+          placeholder="My placeholder"
+          type="text"
+        />
+        <input
+          className="input input_view_default input_size_m input_form_brick-default"
+          placeholder="My placeholder"
+          type="text"
+        />
+        <h3>
+          Input + button
+        </h3>
+        <input
+          className="input input_view_default input_size_m input_form_default-clear"
+          placeholder="My placeholder"
+          type="text"
+        />
+        <button
+          className="button button_size_m button_view_primary button_form_brick-default"
+          onClick={[Function]}
+        >
+          I am button
+        </button>
+        <h3>
+          Input + input + button
+        </h3>
+        <input
+          className="input input_view_default input_size_m input_form_default-clear"
+          placeholder="My placeholder"
+          type="text"
+        />
+        <input
+          className="input input_view_default input_size_m input_form_brick-clear"
+          placeholder="My placeholder"
+          type="text"
+        />
+        <button
+          className="button button_size_m button_view_primary button_form_brick-default"
+          onClick={[Function]}
+        >
+          I am button
+        </button>
+      </section>
+      <section>
+        <h2>
+          ChoiceGroup
+        </h2>
+        <div
+          className="choice-group choice-group_form_default"
+        >
+          <label
+            className="choice-group__item"
+            tabIndex={-1}
+          >
+            <input
+              checked={false}
+              className="choice-group__input"
+              disabled={false}
+              onBlur={[Function]}
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <button
+              className="button button_size_l button_view_primary button_form_default choice-group__button"
+              onBlur={[Function]}
+              tabIndex={-1}
+              type="button"
+            >
+              1 choice
+            </button>
+          </label>
+          <label
+            className="choice-group__item"
+            tabIndex={-1}
+          >
+            <input
+              checked={false}
+              className="choice-group__input"
+              disabled={false}
+              onBlur={[Function]}
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <button
+              className="button button_size_l button_view_primary button_form_default choice-group__button"
+              onBlur={[Function]}
+              tabIndex={-1}
+              type="button"
+            >
+              2 choice
+            </button>
+          </label>
+          <label
+            className="choice-group__item"
+            tabIndex={-1}
+          >
+            <input
+              checked={false}
+              className="choice-group__input"
+              disabled={false}
+              onBlur={[Function]}
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <button
+              className="button button_size_l button_view_primary button_form_default choice-group__button"
+              onBlur={[Function]}
+              tabIndex={-1}
+              type="button"
+            >
+              The third choice
+            </button>
+          </label>
+        </div>
+      </section>
+      <section
+        className="common__checkbox"
+      >
+        <h2>
+          Checkbox
+        </h2>
+        <div>
+          <label
+            className="checkbox checkbox_size_m"
+          >
+            <input
+              className="checkbox__input"
+              disabled={false}
+              type="checkbox"
+            />
+            <div
+              className="checkbox__box"
+            />
+            <span
+              className="checkbox__text"
+            >
+              Check me, baby!
+            </span>
+          </label>
+          <label
+            className="checkbox checkbox_size_m"
+          >
+            <input
+              className="checkbox__input"
+              disabled={false}
+              type="checkbox"
+            />
+            <div
+              className="checkbox__box"
+            />
+            <span
+              className="checkbox__text"
+            >
+              Check me, baby!
+            </span>
+          </label>
+        </div>
+        <div>
+          <label
+            className="checkbox checkbox_size_l"
+          >
+            <input
+              className="checkbox__input"
+              disabled={false}
+              type="checkbox"
+            />
+            <div
+              className="checkbox__box"
+            />
+            <span
+              className="checkbox__text"
+            >
+              Check me, baby!
+            </span>
+          </label>
+          <label
+            className="checkbox checkbox_size_l"
+          >
+            <input
+              className="checkbox__input"
+              disabled={false}
+              type="checkbox"
+            />
+            <div
+              className="checkbox__box"
+            />
+            <span
+              className="checkbox__text"
+            >
+              Check me, baby!
+            </span>
+          </label>
+        </div>
+      </section>
+      <section
+        className="common__radio"
+      >
+        <h2>
+          Radio
+        </h2>
+        <div>
+          <label
+            className="radio radio_size_m"
+          >
+            <input
+              className="radio__input"
+              disabled={false}
+              type="radio"
+            />
+            <div
+              className="radio__box"
+            />
+            <span
+              className="radio__text"
+            >
+              I am radio
+            </span>
+          </label>
+          <label
+            className="radio radio_size_m"
+          >
+            <input
+              className="radio__input"
+              disabled={false}
+              type="radio"
+            />
+            <div
+              className="radio__box"
+            />
+            <span
+              className="radio__text"
+            >
+              I am radio
+            </span>
+          </label>
+        </div>
+        <div>
+          <label
+            className="radio radio_size_l"
+          >
+            <input
+              className="radio__input"
+              disabled={false}
+              type="radio"
+            />
+            <div
+              className="radio__box"
+            />
+            <span
+              className="radio__text"
+            >
+              I am radio
+            </span>
+          </label>
+          <label
+            className="radio radio_size_l"
+          >
+            <input
+              className="radio__input"
+              disabled={false}
+              type="radio"
+            />
+            <div
+              className="radio__box"
+            />
+            <span
+              className="radio__text"
+            >
+              I am radio
+            </span>
+          </label>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Input Текстовый инпут 1`] = `
+<div
+  className="theme theme_breakpoint_default theme_color_gpn-default theme_control_gpn-default theme_font_small theme_gap_small theme_size_gpn-default theme_space_default"
+>
+  <div
+    id="app"
+  >
+    <input
+      className="input input_view_default input_width_default input_size_m input_form_default"
+      disabled={false}
+      placeholder="My placeholder"
+      type="text"
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots Loader Точки 1`] = `
+<div
+  className="theme theme_breakpoint_default theme_color_gpn-default theme_control_gpn-default theme_font_small theme_gap_small theme_size_gpn-default theme_space_default"
+>
+  <div
+    id="app"
+  >
+    <div
+      className="loader loader_size_s"
+    >
+      <div
+        className="loader__dot"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots NumberInput c ограничениями 1`] = `
+<div
+  className="theme theme_breakpoint_default theme_color_gpn-default theme_control_gpn-default theme_font_small theme_gap_small theme_size_gpn-default theme_space_default"
+>
+  <div
+    id="app"
+  >
+    <div
+      style={
+        Object {
+          "width": "200px",
+        }
+      }
+    >
+      <input
+        className="input input_size_s"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onMouseUp={[Function]}
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots NumberInput default 1`] = `
+<div
+  className="theme theme_breakpoint_default theme_color_gpn-default theme_control_gpn-default theme_font_small theme_gap_small theme_size_gpn-default theme_space_default"
+>
+  <div
+    id="app"
+  >
+    <div
+      style={
+        Object {
+          "width": "200px",
+        }
+      }
+    >
+      <input
+        className="input input_size_s"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onMouseUp={[Function]}
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Radio Радио кнопка 1`] = `
+<div
+  className="theme theme_breakpoint_default theme_color_gpn-default theme_control_gpn-default theme_font_small theme_gap_small theme_size_gpn-default theme_space_default"
+>
+  <div
+    id="app"
+  >
+    <label
+      className="radio radio_size_m"
+    >
+      <input
+        className="radio__input"
+        disabled={false}
+        type="radio"
+      />
+      <div
+        className="radio__box"
+      />
+      <span
+        className="radio__text"
+      >
+        I am radio
+      </span>
+    </label>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Slider Конкретные деления 1`] = `
+<div
+  className="theme theme_breakpoint_default theme_color_gpn-default theme_control_gpn-default theme_font_small theme_gap_small theme_size_gpn-default theme_space_default"
+>
+  <div
+    id="app"
+  >
+    <div
+      className="Slider"
+    >
+      <div
+        className="rc-slider rc-slider-with-marks"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
+        onTouchStart={[Function]}
+      >
+        <div
+          className="rc-slider-rail"
+          style={Object {}}
+        />
+        <div
+          className="rc-slider-track"
+          style={
+            Object {
+              "left": "0%",
+              "width": "0%",
+            }
+          }
+        />
+        <div
+          className="rc-slider-step"
+        >
+          <span
+            className="rc-slider-dot rc-slider-dot-active"
+            style={
+              Object {
+                "left": "0%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "33.33333333333333%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "100%",
+              }
+            }
+          />
+        </div>
+        <div
+          aria-disabled={false}
+          aria-valuemax={80}
+          aria-valuemin={20}
+          aria-valuenow={20}
+          className="rc-slider-handle"
+          onBlur={[Function]}
+          onKeyDown={[Function]}
+          onMouseDown={[Function]}
+          role="slider"
+          style={
+            Object {
+              "left": "0%",
+            }
+          }
+          tabIndex={0}
+        />
+        <div
+          className="rc-slider-mark"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Slider Много делений 1`] = `
+<div
+  className="theme theme_breakpoint_default theme_color_gpn-default theme_control_gpn-default theme_font_small theme_gap_small theme_size_gpn-default theme_space_default"
+>
+  <div
+    id="app"
+  >
+    <div
+      className="Slider"
+    >
+      <div
+        className="rc-slider"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
+        onTouchStart={[Function]}
+      >
+        <div
+          className="rc-slider-rail"
+          style={Object {}}
+        />
+        <div
+          className="rc-slider-track"
+          style={
+            Object {
+              "left": "0%",
+              "width": "0%",
+            }
+          }
+        />
+        <div
+          className="rc-slider-step"
+        >
+          <span
+            className="rc-slider-dot rc-slider-dot-active"
+            style={
+              Object {
+                "left": "0%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "5.263157894736842%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "10.526315789473683%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "15.789473684210526%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "21.052631578947366%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "26.31578947368421%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "31.57894736842105%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "36.84210526315789%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "42.10526315789473%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "47.368421052631575%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "52.63157894736842%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "57.89473684210527%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "63.1578947368421%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "68.42105263157895%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "73.68421052631578%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "78.94736842105263%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "84.21052631578947%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "89.47368421052632%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "94.73684210526315%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "100%",
+              }
+            }
+          />
+        </div>
+        <div
+          aria-disabled={false}
+          aria-valuemax={20}
+          aria-valuemin={1}
+          aria-valuenow={1}
+          className="rc-slider-handle"
+          onBlur={[Function]}
+          onKeyDown={[Function]}
+          onMouseDown={[Function]}
+          role="slider"
+          style={
+            Object {
+              "left": "0%",
+            }
+          }
+          tabIndex={0}
+        />
+        <div
+          className="rc-slider-mark"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Slider Обычный 1`] = `
+<div
+  className="theme theme_breakpoint_default theme_color_gpn-default theme_control_gpn-default theme_font_small theme_gap_small theme_size_gpn-default theme_space_default"
+>
+  <div
+    id="app"
+  >
+    <div
+      className="Slider"
+    >
+      <div
+        className="rc-slider"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
+        onTouchStart={[Function]}
+      >
+        <div
+          className="rc-slider-rail"
+          style={Object {}}
+        />
+        <div
+          className="rc-slider-track"
+          style={
+            Object {
+              "left": "0%",
+              "width": "0%",
+            }
+          }
+        />
+        <div
+          className="rc-slider-step"
+        />
+        <div
+          aria-disabled={false}
+          aria-valuemax={5}
+          aria-valuemin={1}
+          aria-valuenow={1}
+          className="rc-slider-handle"
+          onBlur={[Function]}
+          onKeyDown={[Function]}
+          onMouseDown={[Function]}
+          role="slider"
+          style={
+            Object {
+              "left": "0%",
+            }
+          }
+          tabIndex={0}
+        />
+        <div
+          className="rc-slider-mark"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Slider С разделителем 1`] = `
+<div
+  className="theme theme_breakpoint_default theme_color_gpn-default theme_control_gpn-default theme_font_small theme_gap_small theme_size_gpn-default theme_space_default"
+>
+  <div
+    id="app"
+  >
+    <div
+      className="Slider"
+    >
+      <div
+        className="rc-slider"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
+        onTouchStart={[Function]}
+      >
+        <div
+          className="rc-slider-rail"
+          style={Object {}}
+        />
+        <div
+          className="rc-slider-track"
+          style={
+            Object {
+              "left": "0%",
+              "width": "0%",
+            }
+          }
+        />
+        <div
+          className="rc-slider-step"
+        >
+          <span
+            className="rc-slider-dot rc-slider-dot-active"
+            style={
+              Object {
+                "left": "0%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "25%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "50%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "75%",
+              }
+            }
+          />
+          <span
+            className="rc-slider-dot"
+            style={
+              Object {
+                "left": "100%",
+              }
+            }
+          />
+        </div>
+        <div
+          aria-disabled={false}
+          aria-valuemax={5}
+          aria-valuemin={1}
+          aria-valuenow={1}
+          className="rc-slider-handle"
+          onBlur={[Function]}
+          onKeyDown={[Function]}
+          onMouseDown={[Function]}
+          role="slider"
+          style={
+            Object {
+              "left": "0%",
+            }
+          }
+          tabIndex={0}
+        />
+        <div
+          className="rc-slider-mark"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Textarea Текстовый инпут 1`] = `
+<div
+  className="theme theme_breakpoint_default theme_color_gpn-default theme_control_gpn-default theme_font_small theme_gap_small theme_size_gpn-default theme_space_default"
+>
+  <div
+    id="app"
+  >
+    <div
+      style={
+        Object {
+          "width": "200px",
+        }
+      }
+    >
+      <textarea
+        className="input input_view_default input_width_full input_size_m input_type_textarea"
+        disabled={false}
+        placeholder="My placeholder"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots storybook-features/Linking First 1`] = `
+<div
+  className="theme theme_breakpoint_default theme_color_gpn-default theme_control_gpn-default theme_font_small theme_gap_small theme_size_gpn-default theme_space_default"
+>
+  <div
+    id="app"
+  >
+    <button
+      onClick={[Function]}
+    >
+      Go to "Second"
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Storyshots storybook-features/Linking Second 1`] = `
+<div
+  className="theme theme_breakpoint_default theme_color_gpn-default theme_control_gpn-default theme_font_small theme_gap_small theme_size_gpn-default theme_space_default"
+>
+  <div
+    id="app"
+  >
+    <button
+      onClick={[Function]}
+    >
+      Go to "First"
+    </button>
+  </div>
+</div>
+`;

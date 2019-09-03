@@ -1,0 +1,198 @@
+.button {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  width: auto;
+  border: none;
+  appearance: none;
+  margin: initial;
+  box-sizing: border-box;
+  font-weight: normal;
+  text-align: center;
+  max-width: 100%;
+
+  /* font-family: var(--font-sans); */
+  text-decoration: none;
+  border-radius: var(--control-radius);
+  transition: background 0.15s ease, box-shadow 0.15s ease, color 0.15s ease, fill 0.15s ease;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: transparent;
+  font-size: var(--button-font-size);
+  line-height: var(--button-height);
+  height: var(--button-height);
+  padding: 0 var(--button-space);
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: var(--control-radius);
+    transition: box-shadow 0.15s, background-color 0.15s, transform 0.2s;
+  }
+
+  &:hover {
+    color: var(--color-hover);
+  }
+
+  &:focus {
+    /* outline-offset: 2px; */
+
+    /* outline: 2px solid var(--control-color-bg-border-focus); */
+    outline: none;
+
+    /* box-shadow: 0 0 3px 2px var(--control-color-bg-border-focus); */
+  }
+
+  &_form_brick {
+    border-radius: 0;
+    &::before {
+      border-radius: 0;
+    }
+  }
+
+  &_form_round::before {
+    border-radius: 99rem;
+  }
+
+  &_form_brick-default {
+    border-radius: 0 var(--control-radius) var(--control-radius) 0;
+    &::before {
+      border-radius: 0 var(--control-radius) var(--control-radius) 0;
+    }
+  }
+
+  &_form_default-brick {
+    border-radius: var(--control-radius) 0 0 var(--control-radius);
+    &::before {
+      border-radius: var(--control-radius) 0 0 var(--control-radius);
+    }
+  }
+
+  &_form_brick-round {
+    border-radius: 0 99rem 99rem 0;
+    &::before {
+      border-radius: 0 99rem 99rem 0;
+    }
+  }
+
+  &_form_round-brick {
+    border-radius: 99rem 0 0 99rem;
+    &::before {
+      border-radius: 99rem 0 0 99rem;
+    }
+  }
+
+  &_size_s {
+    --button-height: var(--control-height-s);
+    --button-font-size: var(--control-text-size-s, 13px); /* TODO Удалить перед мёрджем */
+    --button-space: var(--control-space-s);
+  }
+
+  &_size_m {
+    --button-height: var(--control-height-m);
+    --button-font-size: var(--control-text-size-m, 15px); /* TODO Удалить перед мёрджем */
+    --button-space: var(--control-space-m);
+  }
+
+  &_size_l {
+    --button-height: var(--control-height-l);
+    --button-font-size: var(--control-text-size-l, 18px); /* TODO Удалить перед мёрджем */
+    --button-space: var(--control-space-l);
+  }
+
+  &_size_xl {
+    --button-height: var(--control-height-xl);
+    --button-font-size: var(--control-text-size-xl, 21px); /* TODO Удалить перед мёрджем */
+    --button-space: var(--control-space-xl);
+  }
+
+  &_view_clear {
+    --color-hover: var(--control-color-typo-clear-hover);
+
+    color: var(--control-color-typo-clear);
+
+    &::before {
+      background-color: var(--control-color-bg-clear);
+    }
+
+    &:hover&::before {
+      background-color: var(--control-color-bg-clear-hover);
+    }
+    &:active&::before {
+      transform: var(--control-press-scale);
+    }
+  }
+
+  &_view_ghost {
+    --color-hover: var(--control-color-typo-ghost-hover);
+
+    color: var(--control-color-typo-ghost);
+
+    &::before {
+      background-color: var(--control-color-bg-ghost);
+    }
+
+    &:hover&::before {
+      background-color: var(--control-color-bg-ghost-hover);
+    }
+    &:active&::before {
+      transform: var(--control-press-scale);
+    }
+  }
+
+  &_view_primary {
+    --color-hover: var(--control-color-typo-primary-hover);
+
+    color: var(--control-color-typo-primary);
+
+    &::before {
+      background-color: var(--control-color-bg-primary);
+    }
+
+    &:hover&::before {
+      background-color: var(--control-color-bg-primary-hover);
+    }
+    &:active&::before {
+      transform: var(--control-press-scale);
+    }
+  }
+
+  &_view_secondary {
+    --color-hover: var(--control-color-typo-secondary-hover);
+
+    color: var(--control-color-typo-secondary);
+
+    &::before {
+      border: var(--control-border-width) solid var(--control-color-bg-secondary);
+    }
+
+    &:hover&::before {
+      border-color: var(--control-color-bg-secondary-hover);
+      background-color: var(--control-color-bg-default-hover);
+    }
+    &:active&::before {
+      transform: var(--control-press-scale);
+    }
+  }
+
+  &:disabled,
+  &_disabled {
+    pointer-events: none;
+    color: var(--control-color-typo-disable);
+    &::before {
+      background-color: var(--control-color-bg-disable);
+      border-color: transparent;
+    }
+  }
+
+  &_width_full {
+    width: 100%;
+  }
+}

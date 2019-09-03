@@ -1,0 +1,163 @@
+.input {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+
+  /* font-family: var(--font-sans); */
+  font-weight: normal;
+  font-size: var(--input-font-size);
+  height: var(--input-height);
+  padding: 0 var(--input-space);
+  transition: border-color 0.15s;
+
+  &.input_type_textarea {
+    padding-bottom: var(--input-space);
+  }
+
+  &:disabled,
+  &_disabled {
+    pointer-events: none;
+    border-color: var(--control-color-bg-border-disable);
+    background-color: var(--control-color-bg-disable);
+    color: var(--control-color-typo-disable);
+
+    &::placeholder {
+      color: var(--control-color-typo-disable);
+    }
+  }
+
+  &_size_s {
+    --input-height: var(--control-height-s);
+    --input-font-size: var(--control-text-size-s);
+    --input-space: calc(var(--control-space-s) * 0.66);
+  }
+
+  &_size_m {
+    --input-height: var(--control-height-m);
+    --input-font-size: var(--control-text-size-m);
+    --input-space: calc(var(--control-space-m) * 0.66);
+  }
+
+  &_size_l {
+    --input-height: var(--control-height-l);
+    --input-font-size: var(--control-text-size-l);
+    --input-space: calc(var(--control-space-l) * 0.66);
+  }
+
+  &_size_xl {
+    --input-height: var(--control-height-xl);
+    --input-font-size: var(--control-text-size-xl);
+    --input-space: calc(var(--control-space-xl) * 0.66);
+  }
+
+  &_view_default {
+    background: var(--control-color-bg-default);
+    border: var(--control-border-width) solid var(--control-color-bg-border-default);
+    border-radius: var(--control-radius);
+    color: var(--control-color-typo-default);
+
+    &::placeholder {
+      color: var(--control-color-typo-placeholder);
+    }
+
+    &:hover {
+      border-color: var(--control-color-bg-border-default-hover);
+    }
+    &:focus {
+      outline: none;
+      border-color: var(--control-color-bg-border-focus);
+    }
+
+    &.input_state {
+      &_alert {
+        border-color: var(--color-bg-alert);
+      }
+      &_success {
+        border-color: var(--color-bg-success);
+      }
+      &_warning {
+        border-color: var(--color-bg-warning);
+      }
+    }
+  }
+
+  &_form_round {
+    border-radius: 999rem;
+  }
+
+  &_form_brick {
+    border-radius: 0;
+  }
+
+  &_form_clear {
+    border-radius: 0;
+    border-width: 0;
+    border-bottom-width: var(--control-border-width);
+  }
+
+  &_form_default-clear {
+    border-radius: var(--control-radius) 0 0 var(--control-radius);
+    border-right-width: 0;
+  }
+
+  &_form_clear-default {
+    border-radius: 0 var(--control-radius) var(--control-radius) 0;
+    border-left-width: 0;
+  }
+
+  &_form_default-brick {
+    border-radius: var(--control-radius) 0 0 var(--control-radius);
+  }
+
+  &_form_brick-default {
+    border-radius: 0 var(--control-radius) var(--control-radius) 0;
+  }
+
+  &_form_round-brick {
+    border-radius: 99rem 0 0 99rem;
+  }
+
+  &_form_brick-round {
+    border-radius: 0 99rem 99rem 0;
+  }
+
+  &_form_brick-clear {
+    border-radius: 0;
+    border-right-width: 0;
+  }
+
+  &_form_clear-brick {
+    border-radius: 0;
+    border-left-width: 0;
+  }
+
+  &_form_clear-round {
+    border-radius: 0 99rem 99rem 0;
+    border-left-width: 0;
+  }
+
+  &_form_round-clear {
+    border-radius: 99rem 0 0 99rem;
+    border-right-width: 0;
+  }
+
+  &_form_clear-clear {
+    border-radius: 0;
+    border-width: 0;
+    border-top-width: var(--control-border-width);
+    border-bottom-width: var(--control-border-width);
+  }
+
+  &_type_textarea {
+    height: initial;
+    width: 100%;
+    resize: none;
+    padding-top: calc(
+      (var(--input-height) - var(--input-font-size)) / 2 - var(--control-border-width)
+    );
+  }
+
+  &_width_full {
+    width: 100%;
+  }
+}

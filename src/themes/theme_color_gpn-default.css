@@ -1,0 +1,96 @@
+/* Базовые цвета от которых выстраивается вся политра */
+$color-base-base: #002033; /* Базовый цвет содержимого, от которого выстраиваются цвета текста, иконок, ... */
+$color-base-essential: #fff; /* Базовый цвет поверхностей */
+$color-base-project: #0071b2; /* Проектный цвет, от которого выстраивают акцентные состояния */
+$color-base-phantom: #002033; /* Тонирующий цвет, от которого выстраиватся бордеры, паранджа, ... */
+$color-base-path: #0096eb; /* Ссылочный цвет, от которого выстраиваются все их состояния */
+
+$color-base-success: #20b55f; /* Цвет успеха */
+$color-base-alert: #eb5757; /* Цвет ошибки */
+$color-base-warning: #f38b00; /* Цвет предупреждения */
+$color-base-caution: #f2c94c; /* Цвет осторожности */
+$color-base-normal: #56b9f2; /* Цвет нейтральный */
+$color-base-additional: #9b51e0; /* Цвет нейтральный */
+$color-base-critical: #33000f;
+$color-base-system: #a9bbc6; /* Цвет системнный */
+
+/* Цвета фона */
+$color-bg-brand: color($color-base-project a(100%)); /* Цвет фона брендированый */
+$color-bg-border: color($color-base-phantom a(20%) l(+10)); /* Цвет границ */
+$color-bg-stripe: color($color-base-phantom a(5%)); /* Цвет зебры */
+$color-bg-ghost: color($color-base-phantom a(8%)); /* Цвет затенения */
+$color-bg-default: color($color-base-essential a(100%)); /* Цвет дефолта */
+$color-bg-tone: color($color-base-phantom a(100%)); /* Цвет паранджи */
+$color-bg-soft: color($color-base-essential a(97%)); /* Цвет молока */
+$color-bg-link: color($color-base-path a(100%)); /* Цвет фона ссылки */
+
+$color-bg-success: color($color-base-success a(100%)); /* Цвет фона успеха */
+$color-bg-alert: color($color-base-alert a(100%)); /* Цвет фона ошибки */
+$color-bg-warning: color($color-base-warning a(100%)); /* Цвет фона предупреждения */
+$color-bg-caution: color($color-base-caution a(100%)); /* Цвет фона осторожности */
+$color-bg-normal: color($color-base-normal a(100%)); /* Цвет фона нейтральный */
+$color-bg-system: color($color-base-system a(100%)); /* Цвет фона системнный */
+$color-bg-critical: color($color-base-critical a(100%)); /* Цвет фона системнный */
+$color-bg-additional: color($color-base-additional a(100%)); /* Цвет фона нейтральный */
+
+/* Цвета текста */
+$color-typo-brand: color($color-base-project a(100%)); /* Цвет брендового текста */
+$color-typo-primary: color($color-base-base l(-2)); /* Цвет основного текста */
+$color-typo-secondary: color($color-base-base a(60%)); /* Цвет второстепенного текста */
+$color-typo-ghost: color($color-base-base a(30%)); /* Цвет дополнительного текста */
+$color-typo-disable: color($color-base-base a(30%)); /* Цвет неактивного текста */
+
+$color-typo-success: color($color-base-success s(+14) l(-8)); /* Цвет текста успеха */
+$color-typo-alert: color($color-base-alert s(+3) l(-7)); /* Цвет текста ошибки */
+$color-typo-warning: color($color-base-warning h(-4) h(-2) l(-2)); /* Цвет текста предупреждения */
+$color-typo-caution: color($color-base-caution s(+15) h(-8) l(-10)); /* Цвет текста осторожности */
+$color-typo-normal: color($color-base-normal s(+14) l(-4)); /* Цвет фона нейтральный */
+$color-typo-system: color($color-base-system s(+6) l(-8)); /* Цвет фона системнный */
+$color-typo-critical: color($color-base-critical a(100%)); /* Цвет фона системнный */
+$color-typo-additional: color($color-base-additional s(+20) l(-8)); /* Цвет фона нейтральный */
+
+/* Цвета ссылок */
+$color-link: $color-base-path; /* Цвет основной ссылки */
+$color-link-minor: color($color-base-path s(-50%) l(+20%)); /* Цвет второстепенной ссылки */
+$color-link-hover: color($color-base-path l(-7%)); /* Цвет ховера ссылки */
+
+.theme_color_gpn-default {
+  /* Цвета блоков */
+  --color-bg-brand: $color-bg-brand; /* Цвет фона брендированый */
+  --color-bg-border: $color-bg-border; /* Цвет границ */
+  --color-bg-stripe: $color-bg-stripe; /* Цвет зебры */
+  --color-bg-ghost: $color-bg-ghost; /* Цвет затенения */
+  --color-bg-default: $color-bg-default; /* Цвет дефолта */
+  --color-bg-tone: $color-bg-tone; /* Цвет паранджи */
+  --color-bg-soft: $color-bg-soft; /* Цвет молока */
+  --color-bg-link: $color-bg-link; /* Цвет фона ссылки */
+  --color-bg-success: $color-bg-success; /* Цвет фона успеха */
+  --color-bg-alert: $color-bg-alert; /* Цвет фона ошибки */
+  --color-bg-warning: $color-bg-warning; /* Цвет фона предупреждения */
+  --color-bg-caution: $color-bg-caution; /* Цвет фона осторожности */
+  --color-bg-normal: $color-bg-normal; /* Цвет фона нейтральный */
+  --color-bg-system: $color-bg-system; /* Цвет фона системнный */
+  --color-bg-critical: $color-base-critical; /* Цвет фона системнный */
+  --color-bg-additional: $color-bg-additional; /* Цвет фона нейтральный */
+
+  /* Цвета текста */
+  --color-typo-brand: $color-typo-brand; /* Цвет брендового текста */
+  --color-typo-primary: $color-typo-primary; /* Цвет основного текста */
+  --color-typo-secondary: $color-typo-secondary; /* Цвет второстепенного текста */
+  --color-typo-ghost: $color-typo-ghost; /* Цвет дополнительного текста */
+  --color-typo-disable: $color-typo-disable; /* Цвет неактивного текста */
+  --color-typo-success: $color-typo-success; /* Цвет текста успеха */
+  --color-typo-alert: $color-typo-alert; /* Цвет текста ошибки */
+  --color-typo-warning: $color-typo-warning; /* Цвет текста предупреждения */
+  --color-typo-caution: $color-typo-caution; /* Цвет текста осторожности */
+  --color-typo-normal: $color-typo-normal; /* Цвет фона нейтральный */
+  --color-typo-system: $color-typo-system; /* Цвет фона системнный */
+  --color-typo-critical: $color-base-critical; /* Цвет фона системнный */
+  --color-typo-additional: $color-typo-additional; /* Цвет фона нейтральный */
+
+  /* Цвета ссылок */
+  --color-link: $color-link; /* Цвет основной ссылки */
+  --color-link-minor: $color-link-minor; /* Цвет второстепенной ссылки */
+  --color-link-hover: $color-link-hover; /* Цвет ховера ссылки */
+  --color-nums-shadow: 0, 32, 51;
+}

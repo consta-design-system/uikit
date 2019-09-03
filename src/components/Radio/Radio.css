@@ -1,0 +1,99 @@
+.radio {
+  position: relative;
+  cursor: pointer;
+  display: inline-flex;
+  -ms-align-items: center;
+  align-items: center;
+  font-family: var(--font-sans);
+
+  &__box {
+    position: relative;
+    width: var(--box-size);
+    height: var(--box-size);
+    box-sizing: border-box;
+    border-radius: 50%;
+    border: var(--control-border-width) solid var(--control-color-bg-border-default);
+    margin-right: var(--space-xs);
+    transition: border-color 0.15s, background-color 0.15s;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: var(--box-size);
+      height: var(--box-size);
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      background-color: var(--control-color-bg-checked);
+      border-radius: 50%;
+      top: calc(50% - var(--box-size) / 2);
+      left: calc(50% - var(--box-size) / 2);
+      opacity: 0;
+      transform: scale(0, 0);
+      transition: opacity 0.15s, transform 0.15s;
+    }
+  }
+
+  &__text {
+    color: var(--control-color-typo-default);
+    font-size: var(--radio-font-size);
+  }
+
+  &:hover {
+    .radio__box {
+      border-color: var(--control-color-bg-border-default-hover);
+    }
+  }
+
+  &_size_m {
+    --radio-font-size: var(--control-text-size-m);
+    --box-size: var(--control-box-size-m);
+
+    height: var(--control-height-m);
+  }
+
+  &_size_l {
+    --radio-font-size: var(--control-text-size-l);
+    --box-size: var(--control-box-size-l);
+
+    height: var(--control-height-l);
+  }
+
+  &__input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: absolute;
+
+    &:checked {
+      + .radio__box {
+        border-color: var(--control-color-bg-border-checked);
+
+        &::before {
+          opacity: 1;
+          transform: scale(0.4, 0.4);
+        }
+      }
+    }
+
+    &:focus {
+      + .radio__box {
+        box-shadow: 0 0 2px 1px var(--control-color-bg-border-focus);
+      }
+    }
+  }
+
+  &_disabled {
+    pointer-events: none;
+    .radio__input:disabled + .radio__box {
+      border-color: transparent;
+      background-color: var(--control-color-bg-disable);
+
+      &::before {
+        background-color: var(--control-color-typo-disable);
+      }
+    }
+    .radio__input:disabled + .radio__text {
+      color: var(--control-color-typo-disable);
+    }
+  }
+}

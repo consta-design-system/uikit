@@ -1,0 +1,20 @@
+.theme_size_gpn-default {
+  /* Размер текста */
+  --size-typo-2xs: 9px;
+  --size-typo-xs: 11px;
+  --size-typo-s: 13px;
+  --size-typo-m: 15px;
+  --size-typo-l: 18px;
+  --size-typo-xl: 20px;
+  --size-typo-2xl: 24px;
+  --size-typo-3xl: 32px;
+  --size-typo-4xl: 48px;
+  --size-typo-5xl: 72px;
+  --size-typo-6xl: 96px;
+
+  /* Межстрочный интервал */
+  --line-height-typo-xs: 1.2em;
+  --line-height-typo-s: 1.4em;
+  --line-height-typo-m: 1.5em;
+  --line-height-typo-l: 1.6em;
+}
