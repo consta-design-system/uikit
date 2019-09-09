@@ -2,7 +2,7 @@ import React from 'react';
 import { withKnobs, text, select, boolean } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import Button from './Button';
+import Button from '.';
 
 const knobs = () => ({
   width: select('Width', ['full', 'default'], 'default'),

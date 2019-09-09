@@ -8,7 +8,8 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
-    "bem-cn": "^3.0.1"
+    "bem-cn": "^3.0.1",
+    "@yankovsky/whitepaper-bem": "^2.1.0"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.es.js",
@@ -102,7 +103,6 @@
     "@typescript-eslint/parser": "^1.11.0",
     "@typescript-eslint/typescript-estree": "^1.11.0",
     "@yankovsky/final-form-focus": "^1.1.4",
-    "@yankovsky/whitepaper-bem": "^2.1.0",
     "babel-loader": "8.0.5",
     "concurrently": "^4.1.1",
     "date-fns": "^1.30.1",

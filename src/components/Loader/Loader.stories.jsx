@@ -1,7 +1,7 @@
 import React from 'react';
 import { withKnobs, select } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import Loader from './Loader';
+import Loader from '.';
 
 const knobs = () => ({
   wpSize: select('Size', ['s', 'm'], 's'),

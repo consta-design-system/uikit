@@ -5,12 +5,12 @@ import { action } from '@storybook/addon-actions';
 import ValueKeeper from '../../utils/testHelpers/ValueKeeper';
 import './styles.css';
 
-import Button from '../Button/Button.tsx';
-import Textarea from '../Textarea/index.tsx';
-import Input from '../Input/index.tsx';
-import ChoiceGroup from '../ChoiceGroup/index.tsx';
-import Checkbox from '../Checkbox/index.tsx';
-import Radio from '../Radio/Radio.jsx';
+import Button from '../Button';
+import Textarea from '../Textarea';
+import Input from '../Input';
+import ChoiceGroup from '../ChoiceGroup';
+import Checkbox from '../Checkbox';
+import Radio from '../Radio';
 
 const buttonKnobs = () => ({
   width: select('Button Width', ['full', 'default'], 'default'),
