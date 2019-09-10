@@ -4,25 +4,27 @@
   "private": true,
   "dependencies": {
     "@types/rc-slider": "^8.6.5",
+    "@yankovsky/whitepaper-bem": "^2.1.0",
     "axios": "^0.19.0",
+    "bem-cn": "^3.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1",
-    "bem-cn": "^3.0.1",
-    "@yankovsky/whitepaper-bem": "^2.1.0"
+    "react-scripts": "3.0.1"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.es.js",
   "types": "./dist/components/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "src/themes/*.css"
   ],
   "scripts": {
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "start": "start-storybook -p 6006 -s public",
     "build": "rollup -c",
-    "build:sb": "build-storybook -s public -o build/storybook",
+    "build:storybook": "build-storybook -s public -o build/storybook",
+    "deploy:storybook": "storybook-to-ghpages --out=build/storybook",
     "tsc-dry-run": "tsc --noEmit",
     "lint:js": "eslint --ext .js,.jsx,.tsx,.ts --fix .",
     "lint:css": "stylelint --fix src/**/*.css",
@@ -66,7 +68,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
-    "@babel/runtime": "^7.4.5",
     "@babel/plugin-external-helpers": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.5.0",
     "@babel/plugin-proposal-decorators": "^7.4.4",
@@ -77,6 +78,7 @@
     "@babel/plugin-proposal-pipeline-operator": "^7.5.0",
     "@babel/preset-env": "^7.5.0",
     "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.4.5",
     "@storybook/addon-a11y": "^5.1.9",
     "@storybook/addon-actions": "^5.1.9",
     "@storybook/addon-knobs": "^5.1.9",
@@ -86,6 +88,7 @@
     "@storybook/addon-viewport": "^5.1.9",
     "@storybook/addons": "^5.1.9",
     "@storybook/react": "^5.1.9",
+    "@storybook/storybook-deployer": "^2.8.1",
     "@types/classnames": "^2.2.9",
     "@types/enzyme": "^3.10.3",
     "@types/jest": "^24.0.15",
