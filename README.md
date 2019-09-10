@@ -11,6 +11,26 @@
 
 Запуск тестов `yarn run test`
 
+# Использование
+
+Для использования компонентов на проекте следует подключить стили компонентов, базовые стили дизайн-системы и сам компонент:
+
+```javascript
+import 'uikit/dist/style.css';
+import '@yankovsky/whitepaper-bem';
+import { Button } from 'uikit';
+```
+
+Затем следует повесить на блок-контейнер классы тем:
+
+```html
+<body
+  className="theme theme_breakpoint_default theme_color_gpn-default theme_control_gpn-default theme_font_small theme_gap_small theme_size_gpn-default theme_space_default"
+>
+  <button type="button" view="primary" wpSize="l" from="default" width="auto">Кнопка</button>
+</body>
+```
+
 # Хитрости
 
 Движение по схеме возможно через скролл и через space + движение с зажатой левой клавишой мыши.
