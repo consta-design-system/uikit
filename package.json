@@ -30,7 +30,8 @@
     "lint:css": "stylelint --fix src/**/*.css",
     "format": "prettier --write '**/*.{json,md}'",
     "svgo": "svgo -f src/icons --config=src/config/svgo.config.json",
-    "lint": "concurrently --raw 'yarn run lint:js' 'yarn run lint:css' 'yarn run format'"
+    "lint": "concurrently --raw 'yarn run lint:js' 'yarn run lint:css' 'yarn run format'",
+    "prepush": "concurrently \"yarn run tsc-dry-run\" \"yarn run deploy:storybook\""
   },
   "browserslist": [
     "last 2 version",
@@ -45,7 +46,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "npm run tsc-dry-run"
+      "pre-push": "yarn run prepush"
     }
   },
   "lint-staged": {
