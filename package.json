@@ -1,7 +1,6 @@
 {
-  "name": "uikit",
+  "name": "@gpn-design/uikit",
   "version": "0.0.1",
-  "private": true,
   "dependencies": {
     "@types/rc-slider": "^8.6.5",
     "@yankovsky/whitepaper-bem": "^2.1.0",
@@ -24,14 +23,13 @@
     "start": "start-storybook -p 6006 -s public",
     "build": "rollup -c",
     "build:storybook": "build-storybook -s public -o build/storybook",
-    "deploy:storybook": "storybook-to-ghpages --out=build/storybook",
     "tsc-dry-run": "tsc --noEmit",
     "lint:js": "eslint --ext .js,.jsx,.tsx,.ts --fix .",
     "lint:css": "stylelint --fix src/**/*.css",
     "format": "prettier --write '**/*.{json,md}'",
     "svgo": "svgo -f src/icons --config=src/config/svgo.config.json",
     "lint": "concurrently --raw 'yarn run lint:js' 'yarn run lint:css' 'yarn run format'",
-    "prepush": "concurrently \"yarn run tsc-dry-run\" \"yarn run deploy:storybook\""
+    "prepush": "yarn run tsc-dry-run"
   },
   "browserslist": [
     "last 2 version",
@@ -89,7 +87,6 @@
     "@storybook/addon-viewport": "^5.1.9",
     "@storybook/addons": "^5.1.9",
     "@storybook/react": "^5.1.9",
-    "@storybook/storybook-deployer": "^2.8.1",
     "@types/classnames": "^2.2.9",
     "@types/enzyme": "^3.10.3",
     "@types/jest": "^24.0.15",
@@ -163,5 +160,6 @@
     "ts-essentials": "^3.0.0",
     "typescript": "^3.5.3",
     "yup": "^0.27.0"
-  }
+  },
+  "homepage": "https://gpn-prototypes.github.io/ui-kit"
 }
