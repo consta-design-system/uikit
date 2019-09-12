@@ -17,6 +17,9 @@
     "dist",
     "src/themes/*.css"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
