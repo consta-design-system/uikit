@@ -15,10 +15,16 @@
 
 # Использование
 
+### Установка
+
+`yarn add @gpn-design/uikit`
+
+### Применение
+
 Для использования компонентов на проекте следует подключить стили компонентов, базовые стили дизайн-системы и сам компонент:
 
 ```javascript
-import 'uikit/dist/style.css';
+import '@gpn-design/uikit/dist/style.css';
 import '@yankovsky/whitepaper-bem';
 import { Button } from 'uikit';
 ```
