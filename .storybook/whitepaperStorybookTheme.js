@@ -30,6 +30,7 @@ export default create({
   // inputTextColor: 'black',
   // inputBorderRadius: 4,
   //
+  brandTitle: 'GPN UI-Kit',
   // brandUrl: 'https://example.com',
   // brandImage: 'https://placehold.it/350x150',
 });

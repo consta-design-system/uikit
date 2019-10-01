@@ -1,7 +1,7 @@
 /* TODO из-за этого импорта происходит дублирование color_gpn-default https://jira.csssr.io/browse/GMPSS-199 */
 @import './theme_color_gpn-dark.css';
 
-/* stylelint-disable  no-descending-specificity  */
+/* stylelint-disable */
 .theme_control_gpn-dark {
   /* Default */
   --control-color-bg-default: color($color-base-essential); /* Цвет фона контрола */
@@ -12,11 +12,11 @@
   --control-color-typo-default: color($color-base-base); /* Цвет основного текста контрола */
   --control-color-typo-placeholder: color($color-base-base a(35%)); /* Цвет плейсхолдера контрола */
   --control-color-bg-border-default: color(
-    $color-base-phantom a(11%)
+    $color-base-phantom a(14%)
   ); /* Цвет фона бордеров котрола */
 
   --control-color-bg-border-default-hover: color(
-    $color-base-phantom a(40%)
+    $color-base-phantom a(44%)
   ); /* Цвет фона бордеров контрола по ховеру */
 
   --control-color-bg-border-focus: color(
@@ -100,7 +100,7 @@
   --control-color-typo-disable: color(
     $color-base-phantom s(-70) a(18%)
   ); /* Цвет основного текста неактивного контрола */
-  /* stylelint-enable  no-descending-specificity  */
+  /* stylelint-enable */
 
   /* Others */
   --control-press-scale: scale(0.95);
