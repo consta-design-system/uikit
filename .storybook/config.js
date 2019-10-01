@@ -27,13 +27,23 @@ addParameters({
 addDecorator(withA11y);
 
 addDecorator(story => {
-  document.documentElement.style.padding = '50px';
-  document.documentElement.style.background = '#efefef';
+  // document.documentElement.style.padding = '50px';
+  // document.documentElement.style.background = '#efefef';
   return story();
 });
 
 addDecorator(story => {
-  return <div id="app">{story()}</div>;
+  const appStyles = {
+    background: 'var(--color-bg-default)',
+    padding: 'var(--space-3xl)',
+    minHeight: '100vh',
+  };
+
+  return (
+    <div id="app" style={appStyles}>
+      {story()}
+    </div>
+  );
 });
 
 addDecorator(withThemes);

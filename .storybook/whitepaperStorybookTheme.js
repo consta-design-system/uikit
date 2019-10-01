@@ -2,7 +2,6 @@ import { create } from '@storybook/theming';
 
 export default create({
   // base: 'dark',
-
   // colorPrimary: 'hotpink',
   // colorSecondary: 'deepskyblue',
   //
@@ -31,7 +30,7 @@ export default create({
   // inputTextColor: 'black',
   // inputBorderRadius: 4,
   //
-  brandTitle: 'Whitepaper',
+  brandTitle: 'GPN UI-Kit',
   // brandUrl: 'https://example.com',
   // brandImage: 'https://placehold.it/350x150',
 });
