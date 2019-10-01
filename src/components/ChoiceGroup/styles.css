@@ -105,10 +105,10 @@
       }
     }
 
-    /* &:hover {
-			.choice-group__button {
-				color: var(--control-color-typo-default);
-			}
-		} */ /* TODO добавить ховер */
+    &:hover {
+      .choice-group__button:not(.choice-group__button_checked) {
+        color: var(--control-color-typo-secondary-hover);
+      }
+    }
   }
 }
