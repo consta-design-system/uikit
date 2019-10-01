@@ -91,25 +91,25 @@
 
   &_size_s {
     --button-height: var(--control-height-s);
-    --button-font-size: var(--control-text-size-s, 13px); /* TODO Удалить перед мёрджем */
+    --button-font-size: var(--control-text-size-s);
     --button-space: var(--control-space-s);
   }
 
   &_size_m {
     --button-height: var(--control-height-m);
-    --button-font-size: var(--control-text-size-m, 15px); /* TODO Удалить перед мёрджем */
+    --button-font-size: var(--control-text-size-m);
     --button-space: var(--control-space-m);
   }
 
   &_size_l {
     --button-height: var(--control-height-l);
-    --button-font-size: var(--control-text-size-l, 18px); /* TODO Удалить перед мёрджем */
+    --button-font-size: var(--control-text-size-l);
     --button-space: var(--control-space-l);
   }
 
   &_size_xl {
     --button-height: var(--control-height-xl);
-    --button-font-size: var(--control-text-size-xl, 21px); /* TODO Удалить перед мёрджем */
+    --button-font-size: var(--control-text-size-xl);
     --button-space: var(--control-space-xl);
   }
 
@@ -194,5 +194,37 @@
 
   &_width_full {
     width: 100%;
+  }
+
+  &_icon-only {
+    width: var(--button-height);
+    padding: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &_with-icon_left,
+  &_with-icon_right {
+    --icon-indent: calc(var(--button-space) * 0.5);
+
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &_with-icon_left {
+    .button__icon,
+    .icon {
+      order: -1;
+      margin: 0 var(--icon-indent) 0 0;
+    }
+  }
+
+  &_with-icon_right {
+    .button__icon,
+    .icon {
+      order: 1;
+      margin: 0 0 0 var(--icon-indent);
+    }
   }
 }

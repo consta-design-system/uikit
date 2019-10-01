@@ -20,6 +20,8 @@ type Props = {
     | 'round-brick'
     | 'brick-default'
     | 'default-brick';
+  iconOnly?: boolean;
+  withIcon?: 'left' | 'right';
   children?: React.ReactNode;
   className?: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -34,6 +36,8 @@ const Button: React.FC<Props> = ({
   view,
   width,
   form,
+  iconOnly,
+  withIcon,
   onClick,
   onBlur,
   children,
@@ -44,7 +48,10 @@ const Button: React.FC<Props> = ({
     <button
       type={type}
       disabled={disabled}
-      className={b({ size: wpSize, view, width, form, disabled }, className)}
+      className={b(
+        { size: wpSize, view, width, form, disabled, 'with-icon': withIcon, 'icon-only': iconOnly },
+        className,
+      )}
       onClick={onClick}
       onBlur={onBlur}
       {...restProps}
