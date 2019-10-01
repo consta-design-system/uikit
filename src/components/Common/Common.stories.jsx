@@ -68,7 +68,7 @@ const radioKnobs = () => ({
   // wpSize: select('Radio Size', ['m', 'l'], 'm'),
 });
 
-storiesOf('Common', module)
+storiesOf('Common List', module)
   .addDecorator(withKnobs)
   .add('Общий список', () => {
     const items = [
@@ -89,7 +89,7 @@ storiesOf('Common', module)
     return (
       <div className="common">
         <section className="common__buttons">
-          <h2>Buttons</h2>
+          <h2 className="text text_size_3xl text_view_primary text_weight-bold">Buttons</h2>
           <div>
             <Button
               onClick={action('click')}
@@ -210,10 +210,70 @@ storiesOf('Common', module)
               {text('Button Content', 'I am button')}
             </Button>
           </div>
+          <div>
+            <Button
+              onClick={action('click')}
+              {...buttonKnobs()}
+              className="button_size_xl button_view_clear"
+            >
+              {text('Button Content', 'I am button')}
+            </Button>
+            <Button
+              onClick={action('click')}
+              {...buttonKnobs()}
+              className="button_size_l button_view_clear"
+            >
+              {text('Button Content', 'I am button')}
+            </Button>
+            <Button
+              onClick={action('click')}
+              {...buttonKnobs()}
+              className="button_size_m button_view_clear"
+            >
+              {text('Button Content', 'I am button')}
+            </Button>
+            <Button
+              onClick={action('click')}
+              {...buttonKnobs()}
+              className="button_size_s button_view_clear"
+            >
+              {text('Button Content', 'I am button')}
+            </Button>
+          </div>
+          <div>
+            <Button
+              onClick={action('click')}
+              {...buttonKnobs()}
+              className="button_size_xl button_view_clear"
+            >
+              {text('Button Content', 'I am button')}
+            </Button>
+            <Button
+              onClick={action('click')}
+              {...buttonKnobs()}
+              className="button_size_l button_view_clear"
+            >
+              {text('Button Content', 'I am button')}
+            </Button>
+            <Button
+              onClick={action('click')}
+              {...buttonKnobs()}
+              className="button_size_m button_view_clear"
+            >
+              {text('Button Content', 'I am button')}
+            </Button>
+            <Button
+              onClick={action('click')}
+              {...buttonKnobs()}
+              className="button_size_s button_view_clear"
+            >
+              {text('Button Content', 'I am button')}
+            </Button>
+          </div>
         </section>
 
         <section className="common__inputs">
-          <h2>Inputs</h2>
+          <h2 className="text text_size_3xl text_view_primary text_weight-bold">Inputs</h2>
           <div>
             <Textarea
               placeholder={text('Placeholder', 'My placeholder')}
@@ -317,7 +377,7 @@ storiesOf('Common', module)
         </section>
 
         <section>
-          <h2>ChoiceGroup</h2>
+          <h2 className="text text_size_3xl text_view_primary text_weight-bold">ChoiceGroup</h2>
           <ValueKeeper
             onChange={action('onChange')}
             onBlur={action('onBlur')}
@@ -337,7 +397,7 @@ storiesOf('Common', module)
         </section>
 
         <section className="common__checkbox">
-          <h2>Checkbox</h2>
+          <h2 className="text text_size_3xl text_view_primary text_weight-bold">Checkbox</h2>
           <div>
             <Checkbox {...checkboxKnobs()} className="checkbox_size_m">
               {'Check me, baby!'}
@@ -357,7 +417,7 @@ storiesOf('Common', module)
         </section>
 
         <section className="common__radio">
-          <h2>Radio</h2>
+          <h2 className="text text_size_3xl text_view_primary text_weight-bold">Radio</h2>
           <div>
             <Radio {...radioKnobs()} className="radio_size_m">
               {text('Content', 'I am radio')}

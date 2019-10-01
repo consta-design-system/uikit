@@ -1,8 +1,4 @@
 .common {
-  padding: var(--space-4xl);
-  background-color: var(--color-bg-default);
-  border-radius: 8px;
-
   h2 {
     margin-top: var(--space-3xl);
     margin-bottom: var(--space-xl);
