@@ -210,66 +210,6 @@ storiesOf('Common List', module)
               {text('Button Content', 'I am button')}
             </Button>
           </div>
-          <div>
-            <Button
-              onClick={action('click')}
-              {...buttonKnobs()}
-              className="button_size_xl button_view_clear"
-            >
-              {text('Button Content', 'I am button')}
-            </Button>
-            <Button
-              onClick={action('click')}
-              {...buttonKnobs()}
-              className="button_size_l button_view_clear"
-            >
-              {text('Button Content', 'I am button')}
-            </Button>
-            <Button
-              onClick={action('click')}
-              {...buttonKnobs()}
-              className="button_size_m button_view_clear"
-            >
-              {text('Button Content', 'I am button')}
-            </Button>
-            <Button
-              onClick={action('click')}
-              {...buttonKnobs()}
-              className="button_size_s button_view_clear"
-            >
-              {text('Button Content', 'I am button')}
-            </Button>
-          </div>
-          <div>
-            <Button
-              onClick={action('click')}
-              {...buttonKnobs()}
-              className="button_size_xl button_view_clear"
-            >
-              {text('Button Content', 'I am button')}
-            </Button>
-            <Button
-              onClick={action('click')}
-              {...buttonKnobs()}
-              className="button_size_l button_view_clear"
-            >
-              {text('Button Content', 'I am button')}
-            </Button>
-            <Button
-              onClick={action('click')}
-              {...buttonKnobs()}
-              className="button_size_m button_view_clear"
-            >
-              {text('Button Content', 'I am button')}
-            </Button>
-            <Button
-              onClick={action('click')}
-              {...buttonKnobs()}
-              className="button_size_s button_view_clear"
-            >
-              {text('Button Content', 'I am button')}
-            </Button>
-          </div>
         </section>
 
         <section className="common__inputs">

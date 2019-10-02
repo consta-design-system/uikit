@@ -27,8 +27,6 @@ addParameters({
 addDecorator(withA11y);
 
 addDecorator(story => {
-  // document.documentElement.style.padding = '50px';
-  // document.documentElement.style.background = '#efefef';
   return story();
 });
 
