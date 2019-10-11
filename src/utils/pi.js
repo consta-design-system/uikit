@@ -21,7 +21,7 @@ const COMPONENT_TEMPLATE = cases => {
     'import React from "react";\n' +
     'const SVG = props => {\n' +
     '  switch (props.size) {\n' +
-    `   ${cases}` +
+    ` ${cases}` +
     '  }\n' +
     '};\n' +
     'export default SVG;\n'
@@ -29,7 +29,7 @@ const COMPONENT_TEMPLATE = cases => {
 };
 
 const COMPONENT_CASE = (iconSize, svgCode) => {
-  return `    case '${iconSize}':\n` + '      return (\n' + `        ${svgCode}\n` + '      );\n';
+  return `  case '${iconSize}':\n` + '      return (\n' + `        ${svgCode}\n` + '      );\n';
 };
 
 const WRAPPER_CASE = name => {
@@ -99,8 +99,8 @@ const getComponentName = arr => {
   const bufArr = [];
   // вытаскивает имя без _
   for (let i = 0; i < arr.length; i++) {
-    let line = arr[i].split(/(_.*-)/)[1];
-    bufArr.push(line.slice(1, -1));
+    let ln = arr[i].split(/(_.*_)/)[1];
+    bufArr.push(ln.slice(1, -1));
   }
   // удаляет дубликаты
   for (let i = 0; i < bufArr.length; i++) {
@@ -145,7 +145,6 @@ fs.readdir(IMPORT_FOLDER_PATH, function(err, fileNames) {
   let wrapImports = [];
   let wrapCases = [];
   componentNames.forEach(name => {
-    // let fixed = name.replace(/-/g,'')
     let fixed = name.toCamelCase();
     wrapImports.push(WRAPPER_IMPORT(fixed));
     wrapCases.push(WRAPPER_CASE(fixed));
@@ -158,13 +157,10 @@ fs.readdir(IMPORT_FOLDER_PATH, function(err, fileNames) {
   for (let i = 0; i < componentNames.length; i++) {
     let fileNamesSeparated = [];
     let arr = [];
-
     // console.log('componentNames[i]', componentNames[i]);
-
     requiredFileNames.forEach(rFileName => {
-      let line = rFileName.split(/(_.*-)/)[1].slice(1, -1);
+      let line = rFileName.split(/(_.*_)/)[1].slice(1, -1);
       line === componentNames[i].toLowerCase() ? fileNamesSeparated.push(rFileName) : '';
-      // rFileName.includes(componentNames[i].toLowerCase()) ? fileNamesSeparated.push(rFileName) : ''
     });
     // console.log('fileNamesSeparated ', fileNamesSeparated);
 
