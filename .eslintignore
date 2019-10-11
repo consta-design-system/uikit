@@ -1,3 +1,4 @@
 !/.storybook
 node_modules/*
 build
+src/components/Icon/components

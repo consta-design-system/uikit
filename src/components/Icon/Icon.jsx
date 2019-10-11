@@ -46,8 +46,8 @@ import Italic from './components/Italic';
 import Kebab from './components/Kebab';
 import Leaf from './components/Leaf';
 import Link from './components/Link';
-import List from './components/List';
 import ListNumbered from './components/ListNumbered';
+import List from './components/List';
 import Lock from './components/Lock';
 import Mail from './components/Mail';
 import Meatball from './components/Meatball';
@@ -63,8 +63,8 @@ import Rouble from './components/Rouble';
 import Save1 from './components/Save1';
 import Save2 from './components/Save2';
 import Search from './components/Search';
-import Select from './components/Select';
 import SelectOpen from './components/SelectOpen';
+import Select from './components/Select';
 import Settings from './components/Settings';
 import SortDown2 from './components/SortDown2';
 import SortDown from './components/SortDown';
@@ -73,15 +73,13 @@ import SortUp from './components/SortUp';
 import Stop from './components/Stop';
 import Strikethrough from './components/Strikethrough';
 import Table2 from './components/Table2';
-import TableM from './components/TableM';
+import Table3 from './components/Table3';
 import Table from './components/Table';
-import TableS from './components/TableS';
 import Test from './components/Test';
 import ThumbUp from './components/ThumbUp';
 import Tie from './components/Tie';
 import Top from './components/Top';
 import Trash from './components/Trash';
-import TypeM from './components/TypeM';
 import Type from './components/Type';
 import Underline from './components/Underline';
 import User from './components/User';
@@ -184,10 +182,10 @@ const Icon = props => {
       return <Leaf {...props} />;
     case 'link':
       return <Link {...props} />;
-    case 'list':
-      return <List {...props} />;
     case 'listNumbered':
       return <ListNumbered {...props} />;
+    case 'list':
+      return <List {...props} />;
     case 'lock':
       return <Lock {...props} />;
     case 'mail':
@@ -218,10 +216,10 @@ const Icon = props => {
       return <Save2 {...props} />;
     case 'search':
       return <Search {...props} />;
-    case 'select':
-      return <Select {...props} />;
     case 'selectOpen':
       return <SelectOpen {...props} />;
+    case 'select':
+      return <Select {...props} />;
     case 'settings':
       return <Settings {...props} />;
     case 'sortDown2':
@@ -238,12 +236,10 @@ const Icon = props => {
       return <Strikethrough {...props} />;
     case 'table2':
       return <Table2 {...props} />;
-    case 'tableM':
-      return <TableM {...props} />;
+    case 'table3':
+      return <Table3 {...props} />;
     case 'table':
       return <Table {...props} />;
-    case 'tableS':
-      return <TableS {...props} />;
     case 'test':
       return <Test {...props} />;
     case 'thumbUp':
@@ -254,8 +250,6 @@ const Icon = props => {
       return <Top {...props} />;
     case 'trash':
       return <Trash {...props} />;
-    case 'typeM':
-      return <TypeM {...props} />;
     case 'type':
       return <Type {...props} />;
     case 'underline':
