@@ -6,7 +6,7 @@ import ValueKeeper from '../../utils/testHelpers/ValueKeeper';
 import ChoiceGroup from '.';
 
 const knobs = () => ({
-  wpSize: select('Size', ['s', 'm', 'l', 'xl'], 'm'),
+  wpSize: select('Size', ['xs', 's', 'm', 'l'], 'm'),
   form: select('Form', ['default', 'round', 'brick'], 'default'),
   disabled: boolean('Disabled', false),
 });

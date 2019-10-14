@@ -34,7 +34,6 @@ const inputKnobs = () => ({
       'default',
       'brick',
       'round',
-      'clear',
       'clear-round',
       'round-clear',
       'clear-default',
@@ -52,7 +51,7 @@ const inputKnobs = () => ({
 });
 
 const choiceGroupKnobs = () => ({
-  wpSize: select('ChoiceGroup Size', ['s', 'm', 'l', 'xl'], 'l'),
+  wpSize: select('ChoiceGroup Size', ['xs', 's', 'm', 'l'], 'l'),
   form: select('ChoiceGroup Form', ['default', 'round', 'brick'], 'default'),
   disabled: boolean('ChoiceGroup Disabled', false),
 });
@@ -94,13 +93,6 @@ storiesOf('Common List', module)
             <Button
               onClick={action('click')}
               {...buttonKnobs()}
-              className="button_size_xl button_view_primary"
-            >
-              {text('Button Content', 'I am button')}
-            </Button>
-            <Button
-              onClick={action('click')}
-              {...buttonKnobs()}
               className="button_size_l button_view_primary"
             >
               {text('Button Content', 'I am button')}
@@ -119,15 +111,15 @@ storiesOf('Common List', module)
             >
               {text('Button Content', 'I am button')}
             </Button>
-          </div>
-          <div>
             <Button
               onClick={action('click')}
               {...buttonKnobs()}
-              className="button_size_xl button_view_secondary"
+              className="button_size_xs button_view_primary"
             >
               {text('Button Content', 'I am button')}
             </Button>
+          </div>
+          <div>
             <Button
               onClick={action('click')}
               {...buttonKnobs()}
@@ -149,15 +141,15 @@ storiesOf('Common List', module)
             >
               {text('Button Content', 'I am button')}
             </Button>
-          </div>
-          <div>
             <Button
               onClick={action('click')}
               {...buttonKnobs()}
-              className="button_size_xl button_view_ghost"
+              className="button_size_xs button_view_secondary"
             >
               {text('Button Content', 'I am button')}
             </Button>
+          </div>
+          <div>
             <Button
               onClick={action('click')}
               {...buttonKnobs()}
@@ -179,15 +171,15 @@ storiesOf('Common List', module)
             >
               {text('Button Content', 'I am button')}
             </Button>
-          </div>
-          <div>
             <Button
               onClick={action('click')}
               {...buttonKnobs()}
-              className="button_size_xl button_view_clear"
+              className="button_size_xs button_view_ghost"
             >
               {text('Button Content', 'I am button')}
             </Button>
+          </div>
+          <div>
             <Button
               onClick={action('click')}
               {...buttonKnobs()}
@@ -209,6 +201,13 @@ storiesOf('Common List', module)
             >
               {text('Button Content', 'I am button')}
             </Button>
+            <Button
+              onClick={action('click')}
+              {...buttonKnobs()}
+              className="button_size_xs button_view_clear"
+            >
+              {text('Button Content', 'I am button')}
+            </Button>
           </div>
         </section>
 
@@ -218,18 +217,6 @@ storiesOf('Common List', module)
             <Textarea
               placeholder={text('Placeholder', 'My placeholder')}
               {...inputKnobs()}
-              className="input_size_xl"
-            />
-            <Input
-              placeholder={text('Input Placeholder', 'My placeholder')}
-              {...inputKnobs()}
-              className="input_size_xl"
-            />
-          </div>
-          <div>
-            <Textarea
-              placeholder={text('Placeholder', 'My placeholder')}
-              {...inputKnobs()}
               className="input_size_l"
             />
             <Input
@@ -260,6 +247,18 @@ storiesOf('Common List', module)
               placeholder={text('Input Placeholder', 'My placeholder')}
               {...inputKnobs()}
               className="input_size_s"
+            />
+          </div>
+          <div>
+            <Textarea
+              placeholder={text('Placeholder', 'My placeholder')}
+              {...inputKnobs()}
+              className="input_size_xs"
+            />
+            <Input
+              placeholder={text('Input Placeholder', 'My placeholder')}
+              {...inputKnobs()}
+              className="input_size_xs"
             />
           </div>
 

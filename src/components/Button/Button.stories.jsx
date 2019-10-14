@@ -6,7 +6,7 @@ import Button from '.';
 
 const defaultKnobs = () => ({
   width: select('Width', ['full', 'default'], 'default'),
-  wpSize: select('Size', ['s', 'm', 'l', 'xl'], 'm'),
+  wpSize: select('Size', ['xs', 's', 'm', 'l'], 'm'),
   view: select('View', ['clear', 'primary', 'secondary', 'ghost'], 'primary'),
   form: select(
     'Form',

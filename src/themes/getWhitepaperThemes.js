@@ -46,7 +46,7 @@ const getWhitepaperThemes = () => {
             class: {
               breakpoint: 'theme_breakpoint_default',
               color: 'theme_color_default',
-              font: 'theme_font_small',
+              font: 'theme_font_gpn-default',
               gap: 'theme_gap_small',
               size: 'theme_size_default',
               space: 'theme_space_default',

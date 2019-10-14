@@ -10,8 +10,7 @@
   font-weight: normal;
   text-align: center;
   max-width: 100%;
-
-  /* font-family: var(--font-sans); */
+  font-family: var(--font-primary);
   text-decoration: none;
   border-radius: var(--control-radius);
   transition: background 0.15s ease, box-shadow 0.15s ease, color 0.15s ease, fill 0.15s ease;
@@ -89,6 +88,12 @@
     }
   }
 
+  &_size_xs {
+    --button-height: var(--control-height-xs);
+    --button-font-size: var(--control-text-size-xs);
+    --button-space: var(--control-space-xs);
+  }
+
   &_size_s {
     --button-height: var(--control-height-s);
     --button-font-size: var(--control-text-size-s);
@@ -105,12 +110,6 @@
     --button-height: var(--control-height-l);
     --button-font-size: var(--control-text-size-l);
     --button-space: var(--control-space-l);
-  }
-
-  &_size_xl {
-    --button-height: var(--control-height-xl);
-    --button-font-size: var(--control-text-size-xl);
-    --button-space: var(--control-space-xl);
   }
 
   &_view_clear {
@@ -170,12 +169,13 @@
     color: var(--control-color-typo-secondary);
 
     &::before {
-      border: var(--control-border-width) solid var(--control-color-bg-secondary);
+      border: var(--control-border-width) solid var(--control-color-bg-border-secondary);
+      background-color: var(--control-color-bg-secondary);
     }
 
     &:hover&::before {
-      border-color: var(--control-color-bg-secondary-hover);
-      background-color: var(--control-color-bg-default-hover);
+      border-color: var(--control-color-bg-border-secondary-hover);
+      background-color: var(--control-color-bg-secondary-hover);
     }
     &:active&::before {
       transform: var(--control-press-scale);

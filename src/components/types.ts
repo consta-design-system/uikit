@@ -1,2 +1,2 @@
 /* Whitepaper size*/
-export type WpSize = 's' | 'm' | 'l' | 'xl';
+export type WpSize = 'xs' | 's' | 'm' | 'l';
