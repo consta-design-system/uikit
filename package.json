@@ -1,6 +1,6 @@
 {
   "name": "@gpn-design/uikit",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "dependencies": {
     "@types/rc-slider": "^8.6.5",
     "@yankovsky/whitepaper-bem": "^2.1.0",
