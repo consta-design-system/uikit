@@ -6,7 +6,7 @@ import Textarea from '.';
 const knobs = () => ({
   view: select('View', ['default'], 'default'),
   width: select('Width', ['full', 'default'], 'full'),
-  wpSize: select('Size', ['s', 'm', 'l', 'xl'], 'm'),
+  wpSize: select('Size', ['xs', 's', 'm', 'l'], 'm'),
   state: select('State', ['', 'alert', 'success', 'warning'], ''),
   disabled: boolean('Disabled', false),
 });

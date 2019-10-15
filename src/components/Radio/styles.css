@@ -13,7 +13,6 @@
     box-sizing: border-box;
     border-radius: 50%;
     border: var(--control-border-width) solid var(--control-color-bg-border-default);
-    margin-right: var(--space-xs);
     transition: border-color 0.15s, background-color 0.15s;
 
     &::before {
@@ -34,6 +33,7 @@
   }
 
   &__text {
+    margin-left: var(--offset);
     color: var(--control-color-typo-default);
     font-size: var(--radio-font-size);
   }
@@ -47,15 +47,13 @@
   &_size_m {
     --radio-font-size: var(--control-text-size-m);
     --box-size: var(--control-box-size-m);
-
-    height: var(--control-height-m);
+    --offset: var(--space-xs);
   }
 
   &_size_l {
     --radio-font-size: var(--control-text-size-l);
     --box-size: var(--control-box-size-l);
-
-    height: var(--control-height-l);
+    --offset: var(--space-s);
   }
 
   &__input {

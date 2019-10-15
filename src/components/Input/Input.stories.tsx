@@ -6,14 +6,13 @@ import Input from '.';
 const knobs = () => ({
   view: select('View', ['default'], 'default'),
   width: select('Width', ['full', 'default'], 'default'),
-  wpSize: select('Size', ['s', 'm', 'l', 'xl'], 'm'),
+  wpSize: select('Size', ['xs', 's', 'm', 'l'], 'm'),
   form: select(
     'Form',
     [
       'default',
       'brick',
       'round',
-      'clear',
       'clear-round',
       'round-clear',
       'clear-default',

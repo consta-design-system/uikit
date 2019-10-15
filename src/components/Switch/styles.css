@@ -1,0 +1,139 @@
+.switch {
+  position: relative;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-primary);
+
+  &__box {
+    position: relative;
+    display: inline-block;
+    width: var(--box-width);
+    height: var(--box-height);
+    border-radius: 99rem;
+    background-color: var(--control-color-bg-ghost);
+    transition: background-color 0.15s;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      height: calc(var(--box-height) - var(--control-border-width) * 4);
+      width: calc(var(--box-height) - var(--control-border-width) * 4);
+      box-sizing: border-box;
+      border-radius: 999rem;
+      background-color: var(--control-color-bg-default);
+      transition: transform 0.15s;
+    }
+
+    /* TODO: Добавить галочку */
+
+    /* &::after {
+  		content: '';
+  		position: absolute;
+  		box-sizing: border-box;
+  		z-index: 1;
+  		background-color: var(--control-color-bg-affect);
+  		border-bottom: 2px solid var(--control-color-bg-default-affect);
+  		border-left: 2px solid var(--control-color-bg-default-affect);
+  		opacity: 0;
+  		transform-origin: 0 0;
+  		transform: rotate(-50deg) scale(0, 1);
+  		transition: opacity .15s, transform .15s;
+  	} */
+  }
+
+  &_size {
+    &_m {
+      --switch-height: var(--control-height-m);
+      --box-width: 36px;
+      --box-height: 20px;
+      --switch-font-size: var(--control-text-size-m);
+      --offset: var(--space-xs);
+
+      .switch__box {
+        &::before {
+          transform: translateX(-16px);
+          box-shadow: 0 0 1px rgba(var(--color-nums-shadow), 0.26),
+            0 1px 2px rgba(var(--color-nums-shadow), 0.24);
+        }
+
+        /* &::after {
+    			width: calc(var(--control-checkbox-size-l) * .6);
+    			height: calc(var(--control-checkbox-size-l) * .35);
+    			top: 0;
+    			left: 0;
+    		} */
+      }
+    }
+
+    &_l {
+      --switch-height: var(--control-height-m);
+      --box-width: 44px;
+      --box-height: 24px;
+      --switch-font-size: var(--control-text-size-l);
+      --offset: var(--space-s);
+
+      .switch__box {
+        &::before {
+          transform: translateX(-20px);
+          box-shadow: 0 0 2px rgba(var(--color-nums-shadow), 0.26),
+            0 2px 4px rgba(var(--color-nums-shadow), 0.18);
+        }
+
+        /* &::after {
+    			width: calc(var(--control-checkbox-size-l) * .6);
+    			height: calc(var(--control-checkbox-size-l) * .35);
+    			top: 0;
+    			left: 0;
+    		} */
+      }
+    }
+  }
+
+  &__input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: absolute;
+
+    &:checked {
+      + .switch__box {
+        background-color: var(--control-color-bg-checked);
+
+        &::before {
+          transform: translateX(0);
+        }
+      }
+    }
+  }
+
+  &__text {
+    margin-left: var(--offset);
+    color: var(--control-color-typo-default);
+    font-size: var(--switch-font-size);
+  }
+
+  &:hover {
+    .switch__box {
+      background-color: var(--control-color-bg-ghost-hover);
+    }
+    .switch__input:checked + .switch__box {
+      background-color: var(--control-color-bg-checked-hover);
+    }
+  }
+
+  /* stylelint-disable  no-descending-specificity  */
+  &_disabled {
+    pointer-events: none;
+    .switch__input:disabled + .switch__box {
+      background-color: var(--control-color-bg-disable);
+      &::before {
+        background-color: var(--control-color-typo-disable);
+        box-shadow: none;
+      }
+    }
+  }
+  /* stylelint-enable  no-descending-specificity  */
+}

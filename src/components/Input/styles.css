@@ -2,13 +2,13 @@
   position: relative;
   display: inline-block;
   box-sizing: border-box;
-
-  /* font-family: var(--font-sans); */
+  font-family: var(--font-primary);
   font-weight: normal;
   font-size: var(--input-font-size);
   height: var(--input-height);
+  line-height: var(--input-height);
   padding: 0 var(--input-space);
-  transition: border-color 0.15s;
+  transition: border-color 0.15s, box-shadow 0.15s;
 
   &.input_type_textarea {
     padding-bottom: var(--input-space);
@@ -26,28 +26,28 @@
     }
   }
 
+  &_size_xs {
+    --input-height: var(--control-height-xs);
+    --input-font-size: var(--control-text-size-xs);
+    --input-space: calc(var(--control-space-xs) * 0.5);
+  }
+
   &_size_s {
     --input-height: var(--control-height-s);
     --input-font-size: var(--control-text-size-s);
-    --input-space: calc(var(--control-space-s) * 0.66);
+    --input-space: calc(var(--control-space-s) * 0.5);
   }
 
   &_size_m {
     --input-height: var(--control-height-m);
     --input-font-size: var(--control-text-size-m);
-    --input-space: calc(var(--control-space-m) * 0.66);
+    --input-space: calc(var(--control-space-m) * 0.5);
   }
 
   &_size_l {
     --input-height: var(--control-height-l);
     --input-font-size: var(--control-text-size-l);
-    --input-space: calc(var(--control-space-l) * 0.66);
-  }
-
-  &_size_xl {
-    --input-height: var(--control-height-xl);
-    --input-font-size: var(--control-text-size-xl);
-    --input-space: calc(var(--control-space-xl) * 0.66);
+    --input-space: calc(var(--control-space-l) * 0.5);
   }
 
   &_view_default {
@@ -148,13 +148,28 @@
     border-bottom-width: var(--control-border-width);
   }
 
+  &_form_default-clear:hover,
+  &_form_brick-clear:hover,
+  &_form_round-clear:hover {
+    z-index: 1;
+    box-shadow: 2px 0 0 var(--control-color-bg-border-default-hover);
+  }
+  &_form_default-clear:focus,
+  &_form_brick-clear:focus,
+  &_form_round-clear:focus {
+    z-index: 1;
+    box-shadow: 2px 0 0 var(--control-color-bg-border-focus);
+  }
+
   &_type_textarea {
     height: initial;
+    line-height: var(--line-height-typo-m);
     width: 100%;
     resize: none;
     padding-top: calc(
-      (var(--input-height) - var(--input-font-size)) / 2 - var(--control-border-width)
+      (var(--input-height) - var(--line-height-typo-m)) / 2 - var(--control-border-width)
     );
+    padding-top: calc(var(--input-space) * 0.66);
   }
 
   &_width_full {

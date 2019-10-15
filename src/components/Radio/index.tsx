@@ -1,7 +1,7 @@
 import React from 'react';
 import bem from '../../utils/bem';
 
-import './Radio.css';
+import './styles.css';
 
 const b = bem('radio');
 
