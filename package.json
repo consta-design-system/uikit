@@ -4,7 +4,6 @@
   "dependencies": {
     "@types/rc-slider": "^8.6.5",
     "@yankovsky/whitepaper-bem": "^2.1.0",
-    "axios": "^0.19.0",
     "bem-cn": "^3.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
