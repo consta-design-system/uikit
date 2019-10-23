@@ -150,7 +150,6 @@
     "rollup-plugin-terser": "^5.1.1",
     "rollup-plugin-typescript2": "^0.24.0",
     "rollup-plugin-visualizer": "^2.5.4",
-    "shave": "^2.5.4",
     "storybook-addon-themes": "^5.2.0",
     "stylelint": "^10.1.0",
     "stylelint-config-prettier": "^5.2.0",
