@@ -2426,11 +2426,6 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
-"@yankovsky/final-form-focus@^1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@yankovsky/final-form-focus/-/final-form-focus-1.1.4.tgz#98ca15130b2b34e1ae24d08323f67af41b7e8ba1"
-  integrity sha512-6fy7qiPlqQ+o34vck3grDPBYa0syDoNsXoJAiNMpVBcb6Si/4XGB+P+TfGeGTnvEWSEMpQekZaET4dkBH4mK4w==
-
 "@yankovsky/whitepaper-bem@^2.1.0":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@yankovsky/whitepaper-bem/-/whitepaper-bem-2.1.0.tgz#7fb5fc46f3816a292ad9483f838bf6750b55f484"
