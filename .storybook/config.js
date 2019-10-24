@@ -1,9 +1,12 @@
 import React from 'react';
 import requireContext from 'require-context.macro';
 import { setAppElement } from 'react-modal';
+
+// Storybook modules
 import { addParameters, configure, addDecorator } from '@storybook/react';
 import { withA11y } from '@storybook/addon-a11y';
 import { withThemes } from 'storybook-addon-themes';
+
 import whitepaperStorybookTheme from './whitepaperStorybookTheme';
 import '@yankovsky/whitepaper-bem';
 import '../src/config/react-modal/config';
