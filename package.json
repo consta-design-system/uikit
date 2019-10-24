@@ -90,7 +90,6 @@
     "@types/node": "^12.0.8",
     "@types/react": "^16.8.20",
     "@types/react-dom": "^16.8.4",
-    "@types/storybook__addon-knobs": "^5.0.3",
     "@types/storybook__react": "^4.0.2",
     "@typescript-eslint/eslint-plugin": "^1.11.0",
     "@typescript-eslint/parser": "^1.11.0",
@@ -136,5 +135,17 @@
     "ts-essentials": "^3.0.0",
     "typescript": "^3.5.3"
   },
-  "homepage": "https://gpn-prototypes.github.io/ui-kit"
+  "homepage": "https://gpn-prototypes.github.io/ui-kit",
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/config/setupTests.js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json",
+      "ts",
+      "tsx"
+    ]
+  }
 }
