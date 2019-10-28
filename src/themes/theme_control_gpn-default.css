@@ -5,7 +5,7 @@
 .theme_control_gpn-default {
   /* Default */
   --control-color-bg-default: color($color-base-essential); /* Цвет фона контрола */
-  --control-color-bg-default-hover: color($color-base-phantom l(98%)); /* Цвет фона контрола по ховеру */
+  --control-color-bg-default-hover: color($color-base-phantom l(96%)); /* Цвет фона контрола по ховеру */
   --control-color-typo-default: color($color-base-base); /* Цвет основного текста контрола */
   --control-color-typo-placeholder: color($color-base-base a(35%)); /* Цвет плейсхолдера контрола */
   --control-color-bg-border-default: color($color-base-phantom a(9%)); /* Цвет фона бордеров котрола */
