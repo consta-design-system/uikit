@@ -140,7 +140,7 @@
   "scripts": {
     "test": "node ./scripts/test.js ",
     "start": "start-storybook -p 6006 -s public",
-    "build": "rollup -c",
+    "build": "NODE_ENV='production' rollup -c",
     "build:storybook": "build-storybook -s public -o build/storybook",
     "tsc-dry-run": "tsc --noEmit",
     "lint:js": "eslint --ext .js,.jsx,.tsx,.ts --fix .",
