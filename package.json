@@ -135,17 +135,5 @@
     "ts-essentials": "^3.0.0",
     "typescript": "^3.5.3"
   },
-  "homepage": "https://gpn-prototypes.github.io/ui-kit",
-  "jest": {
-    "setupFilesAfterEnv": [
-      "<rootDir>/src/config/setupTests.js"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "json",
-      "ts",
-      "tsx"
-    ]
-  }
+  "homepage": "https://gpn-prototypes.github.io/ui-kit"
 }
