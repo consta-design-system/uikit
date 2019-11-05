@@ -41,6 +41,7 @@ export default {
     babel({
       extensions,
       exclude: 'node_modules/**',
+      runtimeHelpers: true,
     }),
     commonjs(),
     json(),
