@@ -1,10 +1,10 @@
 /* Базовые цвета от которых выстраивается вся политра */
-$color-base-base: #fff; /* Базовый цвет содержимого, от которого выстраиваются цвета текста, иконок, ... */
-$color-base-essential: #22272B; /* Базовый цвет поверхностей */
+$color-base-base: #f6fbfd; /* Базовый цвет содержимого, от которого выстраиваются цвета текста, иконок, ... */
+$color-base-essential: #002033; /* Базовый цвет поверхностей */
 $color-base-project: #0071b2; /* Проектный цвет, от которого выстраивают акцентные состояния */
 $color-base-phantom: #f6fbfd; /* Тонирующий цвет, от которого выстраиватся бордеры, паранджа, ... */
 $color-base-path: #0096eb; /* Ссылочный цвет, от которого выстраиваются все их состояния */
-$color-base-system: #4b5963; /* Цвет системнный */
+$color-base-system: #2b4150; /* Цвет системнный */
 
 $color-base-success: #20b55f; /* Цвет успеха */
 $color-base-alert: #eb5757; /* Цвет ошибки */
@@ -13,16 +13,16 @@ $color-base-caution: #f2c94c; /* Цвет осторожности */
 $color-base-normal: #56b9f2; /* Цвет нейтральный */
 $color-base-critical: #33000f;
 
-.theme_color_gpn-dark {
+.theme_color_gpn-brand {
   /* Цвета фона */
   --color-bg-default: color($color-base-essential a(100%)); /* Цвет дефолта */
-  --color-bg-secondary: color($color-base-essential l(+10)); /* Цвет дефолта */
+  --color-bg-secondary: color($color-base-essential s(+25) l(+4)); /* Цвет дефолта */
   --color-bg-brand: color($color-base-project a(100%)); /* Цвет фона брендированый */
   --color-bg-link: color($color-base-path a(100%)); /* Цвет фона ссылки */
   --color-bg-border: color($color-base-phantom a(20%) l(+10)); /* Цвет границ */
   --color-bg-stripe: color($color-base-phantom a(5%)); /* Цвет зебры */
   --color-bg-ghost: color($color-base-phantom a(8%)); /* Цвет затенения */
-  --color-bg-tone: color($color-base-phantom l(-92%) a(85%)); /* Цвет паранджи */
+  --color-bg-tone: color($color-base-phantom s(+100%) l(-92%) a(85%)); /* Цвет паранджи */
   --color-bg-soft: color($color-base-essential l(+100%) a(90%)); /* Цвет молока */
   --color-bg-system: color($color-base-system a(100%)); /* Цвет фона системнный */
   --color-bg-success: color($color-base-success a(100%)); /* Цвет фона успеха */
@@ -34,7 +34,7 @@ $color-base-critical: #33000f;
 
   /* Цвета текста */
   --color-typo-brand: color($color-base-project a(100%)); /* Цвет брендового текста */
-  --color-typo-primary: color($color-base-base l(-2)); /* Цвет основного текста */
+  --color-typo-primary: color($color-base-base); /* Цвет основного текста */
   --color-typo-secondary: color($color-base-base a(60%)); /* Цвет второстепенного текста */
   --color-typo-ghost: color($color-base-base a(30%)); /* Цвет дополнительного текста */
   --color-typo-disable: color($color-base-base a(30%)); /* Цвет неактивного текста */
@@ -45,8 +45,8 @@ $color-base-critical: #33000f;
   --color-typo-normal: color($color-base-normal s(+14) l(-4)); /* Цвет фона нейтральный */
   --color-typo-system: color($color-base-system s(+6) l(+12)); /* Цвет фона системнный */
   --color-typo-critical: color($color-base-critical a(100%)); /* Цвет фона системнный */
-  --color-typo-link: $color-base-path; /* Цвет основной ссылки */
+  --color-typo-link: color($color-base-path a(100%)); /* Цвет основной ссылки */
   --color-typo-link-minor: color($color-base-path s(-50%) l(+20%)); /* Цвет второстепенной ссылки */
   --color-typo-link-hover: color($color-base-path l(-7%)); /* Цвет ховера ссылки */
-  --color-nums-shadow: 0, 0, 0;
+  --color-nums-shadow: 0, 2, 5;
 }

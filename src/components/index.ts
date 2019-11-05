@@ -1,9 +1,14 @@
-import '../themes/theme_color_gpn-dark.css';
+// Темы на цвета
 import '../themes/theme_color_gpn-default.css';
-import '../themes/theme_control_gpn-dark.css';
+import '../themes/theme_color_gpn-dark.css';
+import '../themes/theme_color_gpn-brand.css';
+import '../themes/theme_control_gpn-brand.css';
 import '../themes/theme_control_gpn-default.css';
+
+// Прочие темы
 import '../themes/theme_size_gpn-default.css';
 import '../themes/theme_font_gpn-default.css';
+import '../themes/theme_space_gpn-default.css';
 
 export { default as Button } from './Button';
 export { default as Checkbox } from './Checkbox';
