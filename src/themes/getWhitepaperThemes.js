@@ -4,7 +4,7 @@ const { DEFAULT_THEME } = require('./defaultTheme');
 
 const DEFAULT_COLOR = '#aaaaaa';
 const COLOR_THEME_MOD = 'color';
-const THEME_COLOR_REGEXP = /\$color-base-project: (.+);/;
+const THEME_COLOR_REGEXP = /\$color-base-essential: (.+);/;
 const THEMES_PATH = __dirname;
 
 const getThemeProps = filename => {
@@ -47,9 +47,9 @@ const getWhitepaperThemes = () => {
               breakpoint: 'theme_breakpoint_default',
               color: 'theme_color_default',
               font: 'theme_font_gpn-default',
-              gap: 'theme_gap_small',
-              size: 'theme_size_default',
-              space: 'theme_space_default',
+              gap: 'theme_gap_medium',
+              size: 'theme_size_gpn-default',
+              space: 'theme_space_gpn-default',
             },
           };
         }
