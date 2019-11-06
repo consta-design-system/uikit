@@ -27,8 +27,8 @@
   --control-color-typo-secondary-hover: color($color-base-project l(+22%)); /* Цвет акцентного текста */
 
   /* Ghost */
-  --control-color-bg-ghost: color($color-base-phantom s(-100) a(7%)); /* Цвет фона дополнительного контрола */
-  --control-color-bg-ghost-hover: color($color-base-phantom s(-90) a(12%)); /* Цвет фона дополнительного контрола по ховеру */
+  --control-color-bg-ghost: color($color-base-phantom s(-100) a(9%)); /* Цвет фона дополнительного контрола */
+  --control-color-bg-ghost-hover: color($color-base-phantom s(-90) a(15%)); /* Цвет фона дополнительного контрола по ховеру */
   --control-color-typo-ghost: color($color-base-base a(70%)); /* Цвет дополнительного текста контрола */
   --control-color-typo-ghost-hover: color($color-base-base a(90%)); /* Цвет акцентного текста */
 

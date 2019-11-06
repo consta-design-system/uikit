@@ -37,7 +37,6 @@ $color-base-critical: #33000f;
   --color-typo-secondary: color($color-base-base a(60%)); /* Цвет второстепенного текста */
   --color-typo-ghost: color($color-base-base a(30%)); /* Цвет дополнительного текста */
   --color-typo-brand: color($color-base-project a(100%)); /* Цвет брендового текста */
-  --color-typo-disable: color($color-base-base a(30%)); /* Цвет неактивного текста */
   --color-typo-system: color($color-base-system s(+6) l(-8)); /* Цвет фона системнный */
   --color-typo-normal: color($color-base-normal s(+14) l(-4)); /* Цвет фона нейтральный */
   --color-typo-success: color($color-base-success s(+14) l(-8)); /* Цвет текста успеха */
