@@ -5,9 +5,8 @@ cache:
   directories:
     - node_modules
 script:
-    - npm version patch
-    - yarn run build
-    - yarn run build:storybook
+  - yarn run build
+  - yarn run build:storybook
 deploy:
   - provider: pages
     skip_cleanup: true
@@ -17,7 +16,7 @@ deploy:
       branch: master
   - provider: npm
     skip_cleanup: true
-    email: "nikolay.vasilyev@nexign.com"
+    email: $USER_MAIL
     api_key: $NPM_TOKEN
     tag: latest
     on:
