@@ -13,7 +13,7 @@ $color-base-caution: #f2c94c; /* Цвет осторожности */
 $color-base-normal: #56b9f2; /* Цвет нейтральный */
 $color-base-critical: #33000f;
 
-.theme_color_gpn-brand {
+.theme_color_gpn-display {
   /* Цвета фона */
   --color-bg-default: color($color-base-essential a(100%)); /* Цвет дефолта */
   --color-bg-secondary: color($color-base-essential s(+25) l(+4)); /* Цвет дефолта */

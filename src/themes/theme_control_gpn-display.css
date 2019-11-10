@@ -1,8 +1,8 @@
 /* TODO из-за этого импорта происходит дублирование */
-@import './theme_color_gpn-brand.css';
+@import './theme_color_gpn-display.css';
 
 /* stylelint-disable */
-.theme_control_gpn-brand {
+.theme_control_gpn-display {
   /* Default */
   --control-color-bg-default: color($color-base-essential); /* Цвет фона контрола */
   --control-color-bg-default-hover: color($color-base-phantom s(+20%) l(16%)); /* Цвет фона контрола по ховеру */
