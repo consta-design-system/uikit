@@ -5,16 +5,16 @@ import './styles.css';
 
 const b = bem('header');
 
-export type ModuleT<T> = {
+export type ModuleT = {
   children?: React.ReactNode;
 };
 
-export type LeftSideT<T> = {
-  items: ModuleT<T>[];
+export type LeftSideT = {
+  items: ModuleT[];
 };
 
-export type RightSideT<T> = {
-  items: ModuleT<T>[];
+export type RightSideT = {
+  items: ModuleT[];
 };
 
 type HeaderProps = {

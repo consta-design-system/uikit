@@ -5,14 +5,14 @@ import './styles.css';
 
 const b = bem('menu');
 
-export type ItemT<T> = {
+export type ItemT = {
   name: string;
   link: string;
   active?: boolean;
 };
 
-type MenuProps<T> = {
-  items: ItemT<T>[];
+type MenuProps = {
+  items: ItemT[];
   className;
 };
 
