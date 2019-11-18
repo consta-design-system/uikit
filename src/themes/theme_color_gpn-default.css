@@ -6,7 +6,7 @@ $color-base-phantom: #002033; /* Тонирующий цвет, от котор�
 $color-base-path: #0096eb; /* Ссылочный цвет, от которого выстраиваются все их состояния */
 $color-base-system: #ced8de; /* Цвет системнный */
 
-$color-base-success: #20b55f; /* Цвет успеха */
+$color-base-success: #22C38E; /* Цвет успеха */
 $color-base-alert: #eb5757; /* Цвет ошибки */
 $color-base-warning: #f38b00; /* Цвет предупреждения */
 $color-base-caution: #f2c94c; /* Цвет осторожности */
@@ -39,7 +39,7 @@ $color-base-critical: #33000f;
   --color-typo-brand: color($color-base-project a(100%)); /* Цвет брендового текста */
   --color-typo-system: color($color-base-system s(+6) l(-8)); /* Цвет фона системнный */
   --color-typo-normal: color($color-base-normal s(+14) l(-4)); /* Цвет фона нейтральный */
-  --color-typo-success: color($color-base-success s(+14) l(-8)); /* Цвет текста успеха */
+  --color-typo-success: color($color-base-success s(+20) l(-8)); /* Цвет текста успеха */
   --color-typo-caution: color($color-base-caution s(+15) h(-8) l(-10)); /* Цвет текста осторожности */
   --color-typo-warning: color($color-base-warning h(-4) h(-2) l(-2)); /* Цвет текста предупреждения */
   --color-typo-alert: color($color-base-alert s(+3) l(-7)); /* Цвет текста ошибки */
