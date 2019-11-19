@@ -9,6 +9,7 @@ const b = bem('input');
 export type InputProps = {
   value?: string;
   placeholder?: string;
+  type?: string;
   view?: 'default';
   width?: 'full' | 'default';
   wpSize: WpSize;
@@ -46,7 +47,6 @@ const Input: React.FC<InputProps> = ({
   return (
     <input
       {...rest}
-      type="text"
       disabled={disabled}
       placeholder={placeholder}
       className={b({ view, width, size: wpSize, state, form, disabled }, className)}
