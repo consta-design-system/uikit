@@ -6,6 +6,7 @@ import './styles.css';
 const b = bem('header');
 
 export type ModuleT = {
+  indent?: 's' | 'm' | 'l';
   children?: React.ReactNode;
 };
 
@@ -27,7 +28,7 @@ const Header: React.FC<HeaderProps> = ({ leftSide, rightSide, className, ...rest
   const collectItems = arr => {
     return arr.map((item, index) => {
       return (
-        <div className={b('module')} key={`module-${index}`}>
+        <div className={b('module', { indent: item.indent })} key={`module-${index}`}>
           {item.children}
         </div>
       );

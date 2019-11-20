@@ -1,8 +1,7 @@
 .search-bar {
   position: relative;
-  width: 100%;
-  min-width: 25vw;
-  max-width: 300px;
+  width: 25vw;
+  max-width: 260px;
 
   &__input {
     width: 100%;

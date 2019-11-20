@@ -14,7 +14,7 @@ type Props = {
   personInfo?: string;
   personStatus?: 'active' | 'remote' | 'out';
   linkToPhoto?: string;
-  altToPhoto?: string;
+  altForPhoto?: string;
   isMinified?: boolean;
   state?: string;
   className?: string;
@@ -89,7 +89,7 @@ const Login: React.FC<Props> = ({
       </div>
     </button>
   ) : (
-    <Button onClick={'click'} wpSize="s" view="primary">
+    <Button type="button" onClick={onClick} wpSize="s" view="primary">
       Войти
     </Button>
   );
