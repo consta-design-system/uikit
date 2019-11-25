@@ -211,32 +211,32 @@ storiesOf('Themes', module).add('Цвета', () => (
                 Цвета для большинства нейтральных контролов
               </p>
               <div className="tpl-grid tpl-grid_col-gap_full tpl-grid_row-gap_full">
-                <ColorPreview color={'--control-color-bg-default'} description={'Фоновый цвет'} />
+                <ColorPreview color={'--color-control-bg-default'} description={'Фоновый цвет'} />
 
                 <ColorPreview
-                  color={'--control-color-bg-default-hover'}
+                  color={'--color-control-bg-default-hover'}
                   description={'Фоновый цвет по наведению'}
                 />
 
-                <ColorPreview color={'--control-color-typo-default'} description={'Цвет текста'} />
+                <ColorPreview color={'--color-control-typo-default'} description={'Цвет текста'} />
 
                 <ColorPreview
-                  color={'--control-color-typo-placeholder'}
+                  color={'--color-control-typo-placeholder'}
                   description={'Цвет текста по наведению'}
                 />
 
                 <ColorPreview
-                  color={'--control-color-bg-border-default'}
+                  color={'--color-control-bg-border-default'}
                   description={'Цвет бордеров'}
                 />
 
                 <ColorPreview
-                  color={'--control-color-bg-border-default-hover'}
+                  color={'--color-control-bg-border-default-hover'}
                   description={'Цвет бордеров по наведению'}
                 />
 
                 <ColorPreview
-                  color={'--control-color-bg-border-focus'}
+                  color={'--color-control-bg-border-focus'}
                   description={'Цвет бордеров в состоянии фокуса'}
                 />
               </div>
@@ -250,25 +250,25 @@ storiesOf('Themes', module).add('Цвета', () => (
                 Цвета для выбранного состояния в контролах
               </p>
               <div className="tpl-grid tpl-grid_col-gap_full tpl-grid_row-gap_full">
-                <ColorPreview color={'--control-color-bg-checked'} description={'Фоновый цвет'} />
+                <ColorPreview color={'--color-control-bg-checked'} description={'Фоновый цвет'} />
 
                 <ColorPreview
-                  color={'--control-color-bg-checked-hover'}
+                  color={'--color-control-bg-checked-hover'}
                   description={'Фоновый цвет по наведению'}
                 />
 
                 <ColorPreview
-                  color={'--control-color-typo-checked'}
+                  color={'--color-control-typo-checked'}
                   description={'Цвет текста по наведению'}
                 />
 
                 <ColorPreview
-                  color={'--control-color-bg-border-checked'}
+                  color={'--color-control-bg-border-checked'}
                   description={'Цвет бордеров'}
                 />
 
                 <ColorPreview
-                  color={'--control-color-bg-border-checked-hover'}
+                  color={'--color-control-bg-border-checked-hover'}
                   description={'Цвет бордеров по наведению'}
                 />
               </div>
@@ -282,25 +282,25 @@ storiesOf('Themes', module).add('Цвета', () => (
                 Цвета для выбранного состояния в контролах
               </p>
               <div className="tpl-grid tpl-grid_col-gap_full tpl-grid_row-gap_full">
-                <ColorPreview color={'--control-color-bg-checked'} description={'Фоновый цвет'} />
+                <ColorPreview color={'--color-control-bg-checked'} description={'Фоновый цвет'} />
 
                 <ColorPreview
-                  color={'--control-color-bg-checked-hover'}
+                  color={'--color-control-bg-checked-hover'}
                   description={'Фоновый цвет по наведению'}
                 />
 
                 <ColorPreview
-                  color={'--control-color-typo-checked'}
+                  color={'--color-control-typo-checked'}
                   description={'Цвет текста по наведению'}
                 />
 
                 <ColorPreview
-                  color={'--control-color-bg-border-checked'}
+                  color={'--color-control-bg-border-checked'}
                   description={'Цвет бордеров'}
                 />
 
                 <ColorPreview
-                  color={'--control-color-bg-border-checked-hover'}
+                  color={'--color-control-bg-border-checked-hover'}
                   description={'Цвет бордеров по наведению'}
                 />
               </div>
@@ -314,17 +314,17 @@ storiesOf('Themes', module).add('Цвета', () => (
                 Цвета для акцентных контролов и состояний
               </p>
               <div className="tpl-grid tpl-grid_col-gap_full tpl-grid_row-gap_full">
-                <ColorPreview color={'--control-color-bg-primary'} description={'Фоновый цвет'} />
+                <ColorPreview color={'--color-control-bg-primary'} description={'Фоновый цвет'} />
 
                 <ColorPreview
-                  color={'--control-color-bg-primary-hover'}
+                  color={'--color-control-bg-primary-hover'}
                   description={'Фоновый цвет по наведению'}
                 />
 
-                <ColorPreview color={'--control-color-typo-primary'} description={'Цвет текста'} />
+                <ColorPreview color={'--color-control-typo-primary'} description={'Цвет текста'} />
 
                 <ColorPreview
-                  color={'--control-color-typo-primary-hover'}
+                  color={'--color-control-typo-primary-hover'}
                   description={'Цвет текста по наведению'}
                 />
               </div>
@@ -338,30 +338,30 @@ storiesOf('Themes', module).add('Цвета', () => (
                 Цвета для второстепенных контролов (преимущественно кнопки)
               </p>
               <div className="tpl-grid tpl-grid_col-gap_full tpl-grid_row-gap_full">
-                <ColorPreview color={'--control-color-bg-secondary'} description={'Фоновый цвет'} />
+                <ColorPreview color={'--color-control-bg-secondary'} description={'Фоновый цвет'} />
 
                 <ColorPreview
-                  color={'--control-color-bg-secondary-hover'}
+                  color={'--color-control-bg-secondary-hover'}
                   description={'Фоновый цвет по наведению'}
                 />
 
                 <ColorPreview
-                  color={'--control-color-typo-secondary'}
+                  color={'--color-control-typo-secondary'}
                   description={'Цвет текста'}
                 />
 
                 <ColorPreview
-                  color={'--control-color-typo-secondary-hover'}
+                  color={'--color-control-typo-secondary-hover'}
                   description={'Цвет текста по наведению'}
                 />
 
                 <ColorPreview
-                  color={'--control-color-bg-border-secondary'}
+                  color={'--color-control-bg-border-secondary'}
                   description={'Цвет бордеров'}
                 />
 
                 <ColorPreview
-                  color={'--control-color-bg-border-secondary-hover'}
+                  color={'--color-control-bg-border-secondary-hover'}
                   description={'Цвет бордеров по наведению'}
                 />
               </div>
@@ -375,17 +375,17 @@ storiesOf('Themes', module).add('Цвета', () => (
                 Цвета для третьестепенных контролов, часто идущих в паре с Primary
               </p>
               <div className="tpl-grid tpl-grid_col-gap_full tpl-grid_row-gap_full">
-                <ColorPreview color={'--control-color-bg-ghost'} description={'Фоновый цвет'} />
+                <ColorPreview color={'--color-control-bg-ghost'} description={'Фоновый цвет'} />
 
                 <ColorPreview
-                  color={'--control-color-bg-ghost-hover'}
+                  color={'--color-control-bg-ghost-hover'}
                   description={'Фоновый цвет по наведению'}
                 />
 
-                <ColorPreview color={'--control-color-typo-ghost'} description={'Цвет текста'} />
+                <ColorPreview color={'--color-control-typo-ghost'} description={'Цвет текста'} />
 
                 <ColorPreview
-                  color={'--control-color-typo-ghost-hover'}
+                  color={'--color-control-typo-ghost-hover'}
                   description={'Цвет текста по наведению'}
                 />
               </div>
@@ -399,17 +399,17 @@ storiesOf('Themes', module).add('Цвета', () => (
                 Цвета для «невидимых» контролов (примущественно кнопки без явной границы)
               </p>
               <div className="tpl-grid tpl-grid_col-gap_full tpl-grid_row-gap_full">
-                <ColorPreview color={'--control-color-bg-clear'} description={'Фоновый цвет'} />
+                <ColorPreview color={'--color-control-bg-clear'} description={'Фоновый цвет'} />
 
                 <ColorPreview
-                  color={'--control-color-bg-clear-hover'}
+                  color={'--color-control-bg-clear-hover'}
                   description={'Фоновый цвет по наведению'}
                 />
 
-                <ColorPreview color={'--control-color-typo-clear'} description={'Цвет текста'} />
+                <ColorPreview color={'--color-control-typo-clear'} description={'Цвет текста'} />
 
                 <ColorPreview
-                  color={'--control-color-typo-clear-hover'}
+                  color={'--color-control-typo-clear-hover'}
                   description={'Цвет текста по наведению'}
                 />
               </div>
@@ -423,12 +423,12 @@ storiesOf('Themes', module).add('Цвета', () => (
                 Цвета для недоступных контролов
               </p>
               <div className="tpl-grid tpl-grid_col-gap_full tpl-grid_row-gap_full">
-                <ColorPreview color={'--control-color-bg-disable'} description={'Фоновый цвет'} />
+                <ColorPreview color={'--color-control-bg-disable'} description={'Фоновый цвет'} />
 
-                <ColorPreview color={'--control-color-typo-disable'} description={'Цвет текста'} />
+                <ColorPreview color={'--color-control-typo-disable'} description={'Цвет текста'} />
 
                 <ColorPreview
-                  color={'--control-color-bg-border-disable'}
+                  color={'--color-control-bg-border-disable'}
                   description={'Цвет бордеров'}
                 />
               </div>

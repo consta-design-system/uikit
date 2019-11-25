@@ -12,7 +12,7 @@
     height: var(--box-size);
     box-sizing: border-box;
     border-radius: 50%;
-    border: var(--control-border-width) solid var(--control-color-bg-border-default);
+    border: var(--control-border-width) solid var(--color-control-bg-border-default);
     transition: border-color 0.15s, background-color 0.15s;
 
     &::before {
@@ -22,7 +22,7 @@
       height: var(--box-size);
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
-      background-color: var(--control-color-bg-checked);
+      background-color: var(--color-control-bg-checked);
       border-radius: 50%;
       top: calc(50% - var(--box-size) / 2);
       left: calc(50% - var(--box-size) / 2);
@@ -34,13 +34,13 @@
 
   &__text {
     margin-left: var(--offset);
-    color: var(--control-color-typo-default);
+    color: var(--color-control-typo-default);
     font-size: var(--radio-font-size);
   }
 
   &:hover {
     .radio__box {
-      border-color: var(--control-color-bg-border-default-hover);
+      border-color: var(--color-control-bg-border-default-hover);
     }
   }
 
@@ -64,7 +64,7 @@
 
     &:checked {
       + .radio__box {
-        border-color: var(--control-color-bg-border-checked);
+        border-color: var(--color-control-bg-border-checked);
 
         &::before {
           opacity: 1;
@@ -75,7 +75,7 @@
 
     &:focus {
       + .radio__box {
-        box-shadow: 0 0 2px 1px var(--control-color-bg-border-focus);
+        box-shadow: 0 0 2px 1px var(--color-control-bg-border-focus);
       }
     }
   }
@@ -84,14 +84,14 @@
     pointer-events: none;
     .radio__input:disabled + .radio__box {
       border-color: transparent;
-      background-color: var(--control-color-bg-disable);
+      background-color: var(--color-control-bg-disable);
 
       &::before {
-        background-color: var(--control-color-typo-disable);
+        background-color: var(--color-control-typo-disable);
       }
     }
     .radio__input:disabled + .radio__text {
-      color: var(--control-color-typo-disable);
+      color: var(--color-control-typo-disable);
     }
   }
 }

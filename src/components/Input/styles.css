@@ -17,12 +17,12 @@
   &:disabled,
   &_disabled {
     pointer-events: none;
-    border-color: var(--control-color-bg-border-disable);
-    background-color: var(--control-color-bg-disable);
-    color: var(--control-color-typo-disable);
+    border-color: var(--color-control-bg-border-disable);
+    background-color: var(--color-control-bg-disable);
+    color: var(--color-control-typo-disable);
 
     &::placeholder {
-      color: var(--control-color-typo-disable);
+      color: var(--color-control-typo-disable);
     }
   }
 
@@ -51,21 +51,21 @@
   }
 
   &_view_default {
-    background: var(--control-color-bg-default);
-    border: var(--control-border-width) solid var(--control-color-bg-border-default);
+    background: var(--color-control-bg-default);
+    border: var(--control-border-width) solid var(--color-control-bg-border-default);
     border-radius: var(--control-radius);
-    color: var(--control-color-typo-default);
+    color: var(--color-control-typo-default);
 
     &::placeholder {
-      color: var(--control-color-typo-placeholder);
+      color: var(--color-control-typo-placeholder);
     }
 
     &:hover {
-      border-color: var(--control-color-bg-border-default-hover);
+      border-color: var(--color-control-bg-border-default-hover);
     }
     &:focus {
       outline: none;
-      border-color: var(--control-color-bg-border-focus);
+      border-color: var(--color-control-bg-border-focus);
     }
 
     &.input_state {
@@ -152,13 +152,13 @@
   &_form_brick-clear:hover,
   &_form_round-clear:hover {
     z-index: 1;
-    box-shadow: 2px 0 0 var(--control-color-bg-border-default-hover);
+    box-shadow: 2px 0 0 var(--color-control-bg-border-default-hover);
   }
   &_form_default-clear:focus,
   &_form_brick-clear:focus,
   &_form_round-clear:focus {
     z-index: 1;
-    box-shadow: 2px 0 0 var(--control-color-bg-border-focus);
+    box-shadow: 2px 0 0 var(--color-control-bg-border-focus);
   }
 
   &_type_textarea {
