@@ -10,6 +10,7 @@
     box-sizing: border-box;
     width: var(--box-size);
     height: var(--box-size);
+    flex-shrink: 0;
     border-radius: var(--control-radius);
     border: var(--control-border-width) solid var(--control-color-bg-border-default);
     background-color: transparent;

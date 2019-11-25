@@ -1,8 +1,67 @@
 {
   "name": "@gpn-design/uikit",
-  "version": "0.0.5",
-  "license": "MIT",
+  "version": "0.0.8",
   "dependencies": {
+    "@types/rc-slider": "^8.6.5",
+    "@yankovsky/whitepaper-bem": "^2.1.0",
+    "bem-cn": "^3.0.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/components/index.d.ts",
+  "files": [
+    "dist",
+    "src/themes/*.css"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject",
+    "start": "start-storybook -p 6006 -s public",
+    "build": "rollup -c",
+    "build:storybook": "build-storybook -s public -o build/storybook",
+    "tsc-dry-run": "tsc --noEmit",
+    "lint:js": "eslint --ext .js,.jsx,.tsx,.ts --fix .",
+    "lint:css": "stylelint --fix src/**/*.css",
+    "format": "prettier --write '**/*.{json,md}'",
+    "svgo": "svgo -f src/icons --config=src/config/svgo.config.json",
+    "lint": "concurrently --raw 'yarn run lint:js' 'yarn run lint:css' 'yarn run format'",
+    "prepush": "yarn run tsc-dry-run"
+  },
+  "browserslist": [
+    "last 2 version",
+    "> 1%",
+    "not ie 11"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn run prepush"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.css": [
+      "stylelint --fix",
+      "git add"
+    ],
+    "*.{json,md}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.svg": [
+      "svgo --config=src/config/svgo.config.json",
+      "git add"
+    ]
+  },
+  "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/plugin-external-helpers": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.5.0",
@@ -74,6 +133,7 @@
     "react-app-polyfill": "^1.0.4",
     "react-dom": "^16.8.6",
     "react-modal": "^3.9.1",
+    "react-scripts": "3.0.1",
     "react-test-renderer": "^16.8.6",
     "require-context.macro": "^1.0.4",
     "resolve": "1.10.0",
