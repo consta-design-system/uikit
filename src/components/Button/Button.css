@@ -43,10 +43,10 @@
   &:focus {
     /* outline-offset: 2px; */
 
-    /* outline: 2px solid var(--control-color-bg-border-focus); */
+    /* outline: 2px solid var(--color-control-bg-border-focus); */
     outline: none;
 
-    /* box-shadow: 0 0 3px 2px var(--control-color-bg-border-focus); */
+    /* box-shadow: 0 0 3px 2px var(--color-control-bg-border-focus); */
   }
 
   &_form_brick {
@@ -113,16 +113,16 @@
   }
 
   &_view_clear {
-    --color-hover: var(--control-color-typo-clear-hover);
+    --color-hover: var(--color-control-typo-clear-hover);
 
-    color: var(--control-color-typo-clear);
+    color: var(--color-control-typo-clear);
 
     &::before {
-      background-color: var(--control-color-bg-clear);
+      background-color: var(--color-control-bg-clear);
     }
 
     &:hover&::before {
-      background-color: var(--control-color-bg-clear-hover);
+      background-color: var(--color-control-bg-clear-hover);
     }
     &:active&::before {
       transform: var(--control-press-scale);
@@ -130,16 +130,16 @@
   }
 
   &_view_ghost {
-    --color-hover: var(--control-color-typo-ghost-hover);
+    --color-hover: var(--color-control-typo-ghost-hover);
 
-    color: var(--control-color-typo-ghost);
+    color: var(--color-control-typo-ghost);
 
     &::before {
-      background-color: var(--control-color-bg-ghost);
+      background-color: var(--color-control-bg-ghost);
     }
 
     &:hover&::before {
-      background-color: var(--control-color-bg-ghost-hover);
+      background-color: var(--color-control-bg-ghost-hover);
     }
     &:active&::before {
       transform: var(--control-press-scale);
@@ -147,16 +147,16 @@
   }
 
   &_view_primary {
-    --color-hover: var(--control-color-typo-primary-hover);
+    --color-hover: var(--color-control-typo-primary-hover);
 
-    color: var(--control-color-typo-primary);
+    color: var(--color-control-typo-primary);
 
     &::before {
-      background-color: var(--control-color-bg-primary);
+      background-color: var(--color-control-bg-primary);
     }
 
     &:hover&::before {
-      background-color: var(--control-color-bg-primary-hover);
+      background-color: var(--color-control-bg-primary-hover);
     }
     &:active&::before {
       transform: var(--control-press-scale);
@@ -164,18 +164,18 @@
   }
 
   &_view_secondary {
-    --color-hover: var(--control-color-typo-secondary-hover);
+    --color-hover: var(--color-control-typo-secondary-hover);
 
-    color: var(--control-color-typo-secondary);
+    color: var(--color-control-typo-secondary);
 
     &::before {
-      border: var(--control-border-width) solid var(--control-color-bg-border-secondary);
-      background-color: var(--control-color-bg-secondary);
+      border: var(--control-border-width) solid var(--color-control-bg-border-secondary);
+      background-color: var(--color-control-bg-secondary);
     }
 
     &:hover&::before {
-      border-color: var(--control-color-bg-border-secondary-hover);
-      background-color: var(--control-color-bg-secondary-hover);
+      border-color: var(--color-control-bg-border-secondary-hover);
+      background-color: var(--color-control-bg-secondary-hover);
     }
     &:active&::before {
       transform: var(--control-press-scale);
@@ -185,9 +185,9 @@
   &:disabled,
   &_disabled {
     pointer-events: none;
-    color: var(--control-color-typo-disable);
+    color: var(--color-control-typo-disable);
     &::before {
-      background-color: var(--control-color-bg-disable);
+      background-color: var(--color-control-bg-disable);
       border-color: transparent;
     }
   }

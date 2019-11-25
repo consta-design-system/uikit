@@ -13,8 +13,10 @@ $color-base-caution: #f2c94c; /* Цвет осторожности */
 $color-base-normal: #56b9f2; /* Цвет нейтральный */
 $color-base-critical: #33000f;
 
+/* stylelint-disable */
 .theme_color_gpn-dark {
-  /* Цвета фона */
+  /* //////////////////////////////
+  // Цвета фонов /////////////// */
   --color-bg-default: color($color-base-essential a(100%)); /* Цвет дефолта */
   --color-bg-secondary: color($color-base-essential l(+10)); /* Цвет дефолта */
   --color-bg-brand: color($color-base-project a(100%)); /* Цвет фона брендированый */
@@ -32,7 +34,8 @@ $color-base-critical: #33000f;
   --color-bg-alert: color($color-base-alert s(+10)); /* Цвет фона ошибки */
   --color-bg-critical: color($color-base-critical a(100%)); /* Цвет фона системнный */
 
-  /* Цвета текста */
+  /* //////////////////////////////
+  // Цвета текста ////////////// */
   --color-typo-primary: color($color-base-base l(-2)); /* Цвет основного текста */
   --color-typo-secondary: color($color-base-base a(60%)); /* Цвет второстепенного текста */
   --color-typo-ghost: color($color-base-base a(30%)); /* Цвет дополнительного текста */
@@ -48,4 +51,55 @@ $color-base-critical: #33000f;
   --color-typo-link-minor: color($color-base-path s(-50%) l(+20%)); /* Цвет второстепенной ссылки */
   --color-typo-link-hover: color($color-base-path l(-7%)); /* Цвет ховера ссылки */
   --color-nums-shadow: 0, 0, 0;
+
+  /* /////////////////////////////
+  // Цвета контролов /////////// */
+
+  /* Default */
+  --color-control-bg-default: color($color-base-essential); /* Цвет фона контрола */
+  --color-control-bg-default-hover: color($color-base-phantom s(+20%) l(16%)); /* Цвет фона контрола по ховеру */
+  --color-control-typo-default: color($color-base-base); /* Цвет основного текста контрола */
+  --color-control-typo-placeholder: color($color-base-base a(35%)); /* Цвет плейсхолдера контрола */
+  --color-control-bg-border-default: color($color-base-phantom a(14%)); /* Цвет фона бордеров котрола */
+  --color-control-bg-border-default-hover: color($color-base-phantom a(44%)); /* Цвет фона бордеров контрола по ховеру */
+  --color-control-bg-border-focus: color($color-base-project l(+10%)); /* Цвет аутлайна контролов при фокусе */ /* TODO заменить на правило целиком */
+
+  /* Primary */
+  --color-control-bg-primary: color($color-base-project l(+10%)); /* Цвет фона активного контрола */
+  --color-control-bg-primary-hover: color($color-base-project l(+18%)); /* Цвет фона активного контрола по ховеру */
+  --color-control-typo-primary: color($color-base-base l(+100%)); /* Цвет акцентного текста */
+  --color-control-typo-primary-hover: color($color-base-base l(+100%)); /* Цвет акцентного текста */
+
+  /* Secondary */
+  --color-control-bg-secondary: color($color-base-essential a(0%)); /* Цвет фона бордеров котрола */
+  --color-control-bg-secondary-hover: color($color-base-project a(5%)); /* Цвет фона бордеров контрола по ховеру */
+  --color-control-bg-border-secondary: color($color-base-project l(+10%)); /* Цвет фона бордеров котрола */
+  --color-control-bg-border-secondary-hover: color($color-base-project l(+18%)); /* Цвет фона бордеров контрола по ховеру */
+  --color-control-typo-secondary: color($color-base-project l(+14%)); /* Цвет второстепеного текста контрола */
+  --color-control-typo-secondary-hover: color($color-base-project l(+22%)); /* Цвет акцентного текста */
+
+  /* Ghost */
+  --color-control-bg-ghost: color($color-base-phantom s(-100) a(9%)); /* Цвет фона дополнительного контрола */
+  --color-control-bg-ghost-hover: color($color-base-phantom s(-90) a(15%)); /* Цвет фона дополнительного контрола по ховеру */
+  --color-control-typo-ghost: color($color-base-base a(70%)); /* Цвет дополнительного текста контрола */
+  --color-control-typo-ghost-hover: color($color-base-base a(90%)); /* Цвет акцентного текста */
+
+  /* Clear */
+  --color-control-bg-clear: color($color-base-phantom a(0%)); /* Цвет фона чистого контрола */
+  --color-control-bg-clear-hover: color($color-base-phantom a(7%)); /* Цвет фона чистого контрола по ховеру */
+  --color-control-typo-clear: color($color-base-base a(70%)); /* Цвет акцентного текста */
+  --color-control-typo-clear-hover: color($color-base-base a(90%)); /* Цвет акцентного текста */
+
+  /* Checked */
+  --color-control-bg-checked: color($color-base-project l(+5%)); /* Цвет фона активного контрола */
+  --color-control-bg-checked-hover: color($color-base-project l(+11%)); /* Цвет фона активного контрола по ховеру */
+  --color-control-typo-checked: color($color-base-base l(+100%)); /* Цвет фона содержимого контрола */
+  --color-control-bg-border-checked: color($color-base-project l(+5%)); /* Цвет фона бордеров котрола */
+  --color-control-bg-border-checked-hover: color($color-base-project l(+11%)); /* Цвет фона бордеров контрола по ховеру */
+
+  /* Disable */
+  --color-control-bg-disable: color($color-base-phantom s(-20) l(16%)); /* Цвет фона неактивного контрола */
+  --color-control-bg-border-disable: color($color-base-phantom s(-32) l(32%) a(20%)); /* Цвет фона бордеров неактивного контрола */
+  --color-control-typo-disable: color($color-base-phantom s(-70) a(18%)); /* Цвет основного текста неактивного контрола */
 }
+/* stylelint-enable */
