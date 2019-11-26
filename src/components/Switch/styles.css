@@ -11,7 +11,7 @@
     width: var(--box-width);
     height: var(--box-height);
     border-radius: 99rem;
-    background-color: var(--control-color-bg-ghost);
+    background-color: var(--color-control-bg-ghost);
     transition: background-color 0.15s;
 
     &::before {
@@ -23,7 +23,7 @@
       width: calc(var(--box-height) - var(--control-border-width) * 4);
       box-sizing: border-box;
       border-radius: 999rem;
-      background-color: var(--control-color-bg-default);
+      background-color: var(--color-control-bg-default);
       transition: transform 0.15s;
     }
 
@@ -34,9 +34,9 @@
   		position: absolute;
   		box-sizing: border-box;
   		z-index: 1;
-  		background-color: var(--control-color-bg-affect);
-  		border-bottom: 2px solid var(--control-color-bg-default-affect);
-  		border-left: 2px solid var(--control-color-bg-default-affect);
+  		background-color: var(--color-control-bg-affect);
+  		border-bottom: 2px solid var(--color-control-bg-default-affect);
+  		border-left: 2px solid var(--color-control-bg-default-affect);
   		opacity: 0;
   		transform-origin: 0 0;
   		transform: rotate(-50deg) scale(0, 1);
@@ -100,7 +100,7 @@
 
     &:checked {
       + .switch__box {
-        background-color: var(--control-color-bg-checked);
+        background-color: var(--color-control-bg-checked);
 
         &::before {
           transform: translateX(0);
@@ -111,16 +111,16 @@
 
   &__text {
     margin-left: var(--offset);
-    color: var(--control-color-typo-default);
+    color: var(--color-control-typo-default);
     font-size: var(--switch-font-size);
   }
 
   &:hover {
     .switch__box {
-      background-color: var(--control-color-bg-ghost-hover);
+      background-color: var(--color-control-bg-ghost-hover);
     }
     .switch__input:checked + .switch__box {
-      background-color: var(--control-color-bg-checked-hover);
+      background-color: var(--color-control-bg-checked-hover);
     }
   }
 
@@ -128,9 +128,9 @@
   &_disabled {
     pointer-events: none;
     .switch__input:disabled + .switch__box {
-      background-color: var(--control-color-bg-disable);
+      background-color: var(--color-control-bg-disable);
       &::before {
-        background-color: var(--control-color-typo-disable);
+        background-color: var(--color-control-typo-disable);
         box-shadow: none;
       }
     }

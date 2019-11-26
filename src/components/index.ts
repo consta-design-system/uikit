@@ -2,11 +2,9 @@
 import '../themes/theme_color_gpn-default.css';
 import '../themes/theme_color_gpn-dark.css';
 import '../themes/theme_color_gpn-display.css';
-import '../themes/theme_control_gpn-default.css';
-import '../themes/theme_control_gpn-dark.css';
-import '../themes/theme_control_gpn-display.css';
 
 // Прочие темы
+import '../themes/theme_control_gpn-default.css';
 import '../themes/theme_size_gpn-default.css';
 import '../themes/theme_font_gpn-default.css';
 import '../themes/theme_space_gpn-default.css';
