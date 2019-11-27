@@ -3,7 +3,7 @@ import React, { FocusEventHandler } from 'react';
 import Button from '../../../Button';
 
 type Props = {
-  icon: string;
+  // icon: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onBlur?: FocusEventHandler<HTMLElement>;
   tabIndex?: number;
@@ -11,7 +11,7 @@ type Props = {
 };
 
 const IconButton: React.FC<Props> = ({
-  icon,
+  children,
   onClick,
   onBlur,
   tabIndex,
@@ -31,7 +31,7 @@ const IconButton: React.FC<Props> = ({
       className={className}
       {...restProps}
     >
-      {icon}
+      {children}
     </Button>
   );
 };

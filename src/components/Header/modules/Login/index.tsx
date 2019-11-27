@@ -16,7 +16,6 @@ type Props = {
   linkToPhoto?: string;
   altForPhoto?: string;
   isMinified?: boolean;
-  state?: string;
   className?: string;
 };
 
@@ -29,7 +28,6 @@ const Login: React.FC<Props> = ({
   linkToPhoto,
   altForPhoto,
   isMinified,
-  state,
   className,
   ...restProps
 }) => {
@@ -39,7 +37,7 @@ const Login: React.FC<Props> = ({
   return isLoggedIn ? (
     <button
       className={b(
-        { state, minified: isMinified },
+        { minified: isMinified },
         'pt-icon-plus pt-icon-plus_vertical-align_center',
         className,
       )}
@@ -54,7 +52,7 @@ const Login: React.FC<Props> = ({
           'pt-icon-plus__icon pt-icon-plus__icon_indent-r_s',
         )}
       >
-        <img className={b('photo', {})} src={linkToPhoto} alt={altForPhoto} />
+        <img className={b('photo')} src={linkToPhoto} alt={altForPhoto} />
       </div>
 
       <div className={b('person', {}, 'pt-icon-plus__block')}>

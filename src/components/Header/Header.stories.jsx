@@ -11,11 +11,6 @@ import Menu from './modules/Menu/index';
 import Login from './modules/Login/index';
 import IconButton from './modules/IconButton/index';
 
-// const props = () => ({
-//   logo: 'Logotipee',
-//   searchBar: true,
-// });
-
 storiesOf('Header', module)
   .add('Полный', () => {
     const menuItems = [
@@ -56,18 +51,26 @@ storiesOf('Header', module)
     const rightSide = [
       {
         indent: 's',
-        children: <IconButton icon={<IconRingM />}></IconButton>,
+        children: (
+          <IconButton>
+            <IconRingM />
+          </IconButton>
+        ),
       },
       {
         indent: 's',
-        children: <IconButton icon={<IconChatM />}></IconButton>,
+        children: (
+          <IconButton>
+            <IconChatM />
+          </IconButton>
+        ),
       },
       {
         indent: 's',
         children: (
           <Login
-            isLogged={true}
-            // isMinified={true}
+            isLogged
+            // isMinified
             personName={'Вадим Матвеев'}
             personInfo={'В другом офисе'}
             personStatus={'active'}
@@ -118,18 +121,26 @@ storiesOf('Header', module)
     const rightSide = [
       {
         indent: 's',
-        children: <IconButton icon={<IconRingM />}></IconButton>,
+        children: (
+          <IconButton>
+            <IconRingM />
+          </IconButton>
+        ),
       },
       {
         indent: 's',
-        children: <IconButton icon={<IconChatM />}></IconButton>,
+        children: (
+          <IconButton>
+            <IconChatM />
+          </IconButton>
+        ),
       },
       {
         indent: 's',
         children: (
           <Login
-            isLogged={true}
-            // isMinified={true}
+            isLogged
+            // isMinified
             personName={'Вадим Матвеев'}
             personInfo={'В другом офисе'}
             personStatus={'active'}
@@ -180,11 +191,19 @@ storiesOf('Header', module)
     const rightSide = [
       {
         indent: 's',
-        children: <IconButton icon={<IconRingM />}></IconButton>,
+        children: (
+          <IconButton>
+            <IconRingM />
+          </IconButton>
+        ),
       },
       {
         indent: 's',
-        children: <IconButton icon={<IconChatM />}></IconButton>,
+        children: (
+          <IconButton>
+            <IconChatM />
+          </IconButton>
+        ),
       },
       {
         indent: 'l',
@@ -234,18 +253,26 @@ storiesOf('Header', module)
     const rightSide = [
       {
         indent: 's',
-        children: <IconButton icon={<IconRingM />}></IconButton>,
+        children: (
+          <IconButton>
+            <IconRingM />
+          </IconButton>
+        ),
       },
       {
         indent: 's',
-        children: <IconButton icon={<IconChatM />}></IconButton>,
+        children: (
+          <IconButton>
+            <IconChatM />
+          </IconButton>
+        ),
       },
       {
         indent: 's',
         children: (
           <Login
-            isLogged={true}
-            isMinified={true}
+            isLogged
+            isMinified
             personName={'Вадим Матвеев'}
             personInfo={'В другом офисе'}
             personStatus={'active'}
@@ -280,18 +307,26 @@ storiesOf('Header', module)
     const rightSide = [
       {
         indent: 's',
-        children: <IconButton icon={<IconRingM />}></IconButton>,
+        children: (
+          <IconButton>
+            <IconRingM />
+          </IconButton>
+        ),
       },
       {
         indent: 's',
-        children: <IconButton icon={<IconChatM />}></IconButton>,
+        children: (
+          <IconButton>
+            <IconChatM />
+          </IconButton>
+        ),
       },
       {
         indent: 's',
         children: (
           <Login
-            isLogged={true}
-            // isMinified={true}
+            isLogged
+            // isMinified
             personName={'Вадим Матвеев'}
             personInfo={'В другом офисе'}
             personStatus={'active'}
@@ -366,18 +401,26 @@ storiesOf('Header', module)
     const rightSide = [
       {
         indent: 's',
-        children: <IconButton icon={<IconRingM />}></IconButton>,
+        children: (
+          <IconButton>
+            <IconRingM />
+          </IconButton>
+        ),
       },
       {
         indent: 's',
-        children: <IconButton icon={<IconChatM />}></IconButton>,
+        children: (
+          <IconButton>
+            <IconChatM />
+          </IconButton>
+        ),
       },
       {
         indent: 's',
         children: (
           <Login
-            isLogged={true}
-            // isMinified={true}
+            isLogged
+            // isMinified
             personName={'Вадим Матвеев'}
             personInfo={'В другом офисе'}
             personStatus={'active'}
@@ -430,8 +473,8 @@ storiesOf('Header', module)
         indent: 's',
         children: (
           <Login
-            isLogged={true}
-            // isMinified={true}
+            isLogged
+            // isMinified
             personName={'Вадим Матвеев'}
             personInfo={'В другом офисе'}
             personStatus={'active'}

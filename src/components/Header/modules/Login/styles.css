@@ -20,10 +20,15 @@
     width: calc(100% + var(--space-l));
     height: 100%;
     border-radius: 99rem;
-    background-color: var(--control-color-bg-clear-hover);
+    background-color: var(--color-control-bg-clear-hover);
     opacity: 0;
     transform: scale(1.1);
     transition: opacity 0.24s, transform 0.24s;
+  }
+
+  &:hover::before {
+    opacity: 1;
+    transform: scale(1);
   }
 
   &__avatar {
@@ -75,11 +80,6 @@
   &__name,
   &__info {
     line-height: var(--line-height-typo-xs);
-  }
-
-  &:hover::before {
-    opacity: 1;
-    transform: scale(1);
   }
 
   &__arrow {

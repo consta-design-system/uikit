@@ -19,10 +19,10 @@ type MenuProps = {
 const Menu: React.FC<MenuProps> = ({ items, className, ...restProps }) => {
   return (
     <nav className={b({}, className)} {...restProps}>
-      <ul className={b('list', {})}>
+      <ul className={b('list')}>
         {items.map((item, index) => {
           return (
-            <li className={b('item', {})} key={`menu-item-${index}`}>
+            <li className={b('item')} key={`menu-item-${index}`}>
               <a className={b('link', { active: item.active })} href={item.link}>
                 {item.name}
               </a>

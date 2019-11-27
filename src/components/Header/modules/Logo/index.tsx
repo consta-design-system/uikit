@@ -6,7 +6,6 @@ import './styles.css';
 const b = bem('logo');
 
 type Props = {
-  children: React.ReactNode;
   locked?: boolean;
   className?: string;
 };
