@@ -1,0 +1,27 @@
+.search-bar {
+  position: relative;
+  width: 25vw;
+  max-width: 260px;
+
+  &__input {
+    width: 100%;
+  }
+
+  &__label {
+    position: absolute;
+    padding: 0;
+    width: 1px;
+    height: 1px;
+    border: 0;
+    overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &__button {
+    position: absolute;
+    right: var(--space-2xs);
+    top: var(--space-2xs);
+  }
+}
