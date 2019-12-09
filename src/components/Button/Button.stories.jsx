@@ -65,4 +65,9 @@ storiesOf('Button', module)
         />
       </svg>
     </Button>
+  ))
+  .add('В роли ссылки', () => (
+    <Button url="/" {...defaultKnobs()}>
+      {text('Content', 'I am link')}
+    </Button>
   ));
