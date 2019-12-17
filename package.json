@@ -1,6 +1,6 @@
 {
   "name": "@gpn-design/uikit",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "dependencies": {
     "bem-cn": "^3.0.1",
     "react": "^16.8.6",
