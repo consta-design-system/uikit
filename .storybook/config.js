@@ -1,6 +1,5 @@
 import React from 'react';
 import requireContext from 'require-context.macro';
-import { setAppElement } from 'react-modal';
 
 // Storybook modules
 import { addParameters, configure, addDecorator } from '@storybook/react';
@@ -8,11 +7,8 @@ import { withA11y } from '@storybook/addon-a11y';
 import { withThemes } from 'storybook-addon-themes';
 
 import whitepaperStorybookTheme from './whitepaperStorybookTheme';
-import '@yankovsky/whitepaper-bem';
-import '../src/config/react-modal/config';
+import '../src/whitepaper.css';
 import '../src/index.css';
-
-setAppElement(document.body);
 
 // Подключаем все темы для возможности переключения в storybook'е
 const requireTheme = requireContext('../src/themes', false, /\.css$/);
