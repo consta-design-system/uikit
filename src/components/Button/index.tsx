@@ -6,9 +6,7 @@ import { WpSize } from '../types';
 
 const b = bem('button');
 
-type Props = {
-  type: 'submit' | 'reset' | 'button';
-  disabled?: boolean;
+type CommonProps = {
   wpSize: WpSize;
   view: 'clear' | 'ghost' | 'primary' | 'secondary';
   width?: 'auto' | 'full';
@@ -24,37 +22,63 @@ type Props = {
   withIcon?: 'left' | 'right';
   children?: React.ReactNode;
   className?: string;
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onBlur?: FocusEventHandler<HTMLElement>;
   tabIndex?: number;
 };
 
-const Button: React.FC<Props> = ({
-  type,
-  disabled,
-  wpSize,
-  view,
-  width,
-  form,
-  iconOnly,
-  withIcon,
-  onClick,
-  onBlur,
-  children,
-  className,
-  ...restProps
-}) => {
+type ButtonProps = {
+  isLink?: false;
+  type?: 'submit' | 'reset' | 'button';
+  disabled?: boolean;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onBlur?: FocusEventHandler<HTMLElement>;
+} & CommonProps;
+
+type LinkProps = {
+  isLink: true;
+  href: string;
+  target?: string;
+  rel?: string;
+} & CommonProps;
+
+const Button: React.FC<ButtonProps | LinkProps> = props => {
+  const { wpSize, view, width, form, iconOnly, withIcon, children, className } = props;
+
+  if (props.isLink) {
+    return (
+      <a
+        href={props.href}
+        className={b(
+          { size: wpSize, view, width, form, 'with-icon': withIcon, 'icon-only': iconOnly },
+          className,
+        )}
+        target={props.target}
+        rel={props.rel}
+        tabIndex={props.tabIndex}
+      >
+        {children}
+      </a>
+    );
+  }
+
   return (
     <button
-      type={type}
-      disabled={disabled}
+      onClick={props.onClick}
+      onBlur={props.onBlur}
       className={b(
-        { size: wpSize, view, width, form, disabled, 'with-icon': withIcon, 'icon-only': iconOnly },
+        {
+          size: wpSize,
+          view,
+          width,
+          form,
+          disabled: props.disabled,
+          'with-icon': withIcon,
+          'icon-only': iconOnly,
+        },
         className,
       )}
-      onClick={onClick}
-      onBlur={onBlur}
-      {...restProps}
+      type={props.type}
+      disabled={props.disabled}
+      tabIndex={props.tabIndex}
     >
       {children}
     </button>
