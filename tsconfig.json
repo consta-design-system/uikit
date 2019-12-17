@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "declaration": false,
+    "declaration": true,
     "noImplicitAny": false,
     "outDir": "./dist",
     "target": "es5",
