@@ -2,6 +2,7 @@
   &__group {
     position: relative;
   }
+
   &__collapse {
     position: absolute;
     right: 12px;
@@ -12,28 +13,27 @@
     border: none;
     cursor: pointer;
 
-    & svg {
-      width: 11px;
-      height: 11px;
-      opacity: 0.4;
-      transition: opacity 0.2s linear;
-    }
-
-    &_down {
-      & svg {
-        transform: rotate(180deg);
-      }
-    }
-
-    &:not(&_down) svg {
-      opacity: 1;
-    }
-
     &:hover {
       background-color: transparent;
-      & svg {
-        opacity: 1;
-      }
     }
+  }
+
+  &__icon {
+    width: 11px;
+    height: 11px;
+    opacity: 0.4;
+    transition: opacity 0.2s linear;
+  }
+
+  &__collapse_down &__icon {
+    transform: rotate(180deg);
+  }
+
+  &__collapse:not(&__collapse_down) &__icon {
+    opacity: 1;
+  }
+
+  &__collapse:hover &__icon {
+    opacity: 1;
   }
 }

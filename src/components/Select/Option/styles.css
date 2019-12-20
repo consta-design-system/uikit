@@ -28,7 +28,7 @@
     color: hsl(0, 0%, 60%);
   }
 
-  &_new::before {
+  &_new:not(:only-child)::before {
     position: absolute;
     bottom: 0;
     left: var(--space-s);

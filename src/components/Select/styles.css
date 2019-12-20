@@ -184,6 +184,7 @@
     max-height: 98px;
     overflow-y: scroll;
     line-height: initial;
+    scrollbar-width: none;
 
     &::-webkit-scrollbar {
       display: none;
