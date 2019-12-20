@@ -5,6 +5,7 @@
     "bem-cn": "^3.0.1",
     "lodash": "^4.17.15",
     "react": "^16.8.6",
+    "react-collapse": "^5.0.0",
     "react-dom": "^16.8.6"
   },
   "main": "./dist/index.js",

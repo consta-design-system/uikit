@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useRef } from 'react';
+import bem from '../../../utils/bem';
 
 import './styles.css';
-import bem from '../../../utils/bem';
 
 const b = bem('autoresize-input');
 

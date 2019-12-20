@@ -1,9 +1,23 @@
 import React, { memo } from 'react';
 
 import './styles.css';
-import bem from '../../../utils/bem';
-import { Checkbox } from '../../';
 import { WpSize } from '../../types';
+import bem from '../../../utils/bem';
+import Checkbox from '../../Checkbox';
+
+type Props = {
+  value: string;
+  isSelected: boolean;
+  isFocused: boolean;
+  indentLevel?: number;
+  isMulti?: boolean;
+  isIntermediate?: boolean;
+  isNewOption?: boolean;
+  focusedRef?: React.RefObject<HTMLDivElement>;
+  children: React.ReactNode;
+  onSelect: (value: string) => void;
+  wpSize: WpSize;
+};
 
 const IconPlus = ({ className }: { className?: string }) => (
   <svg
@@ -18,37 +32,22 @@ const IconPlus = ({ className }: { className?: string }) => (
   </svg>
 );
 
-type Props = {
-  value: string;
-  isSelected: boolean;
-  isFocused: boolean;
-  isAllOption?: boolean;
-  isSubOption?: boolean;
-  isMulti?: boolean;
-  isIntermediate?: boolean;
-  isNewOption?: boolean;
-  focusedRef?: React.RefObject<HTMLDivElement>;
-  children: React.ReactNode;
-  onSelect: (value: string) => void;
-  wpSize: WpSize;
-};
-
 const b = bem('select-option');
 
-const OptionComponent: React.FC<Props> = ({
-  value,
-  isFocused,
-  isAllOption,
-  isSubOption,
-  isMulti,
-  isSelected,
-  isIntermediate,
-  isNewOption,
-  focusedRef,
-  children,
-  onSelect,
-  wpSize,
-}) => {
+const OptionComponent: React.FC<Props> = props => {
+  const {
+    value,
+    isFocused,
+    indentLevel,
+    isMulti,
+    isSelected,
+    isIntermediate,
+    isNewOption,
+    focusedRef,
+    children,
+    onSelect,
+    wpSize,
+  } = props;
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
 
@@ -61,8 +60,7 @@ const OptionComponent: React.FC<Props> = ({
         selected: isSelected,
         focused: isFocused,
         new: isNewOption,
-        allOption: isAllOption,
-        isSubOption,
+        indent: indentLevel || 0,
         size: wpSize,
       })}
       key={value}
@@ -73,7 +71,7 @@ const OptionComponent: React.FC<Props> = ({
       {isMulti && (
         <Checkbox
           className={b('check')}
-          wpSize="m"
+          wpSize={wpSize === 'l' ? 'l' : 'm'}
           value={isSelected}
           onChange={() => {}}
           tabIndex={-1}

@@ -2,15 +2,83 @@
   position: relative;
   display: flex;
   align-items: center;
+  font-size: var(--size-typo-m);
   padding: var(--space-xs) var(--space-s);
   width: 100%;
   user-select: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   box-sizing: border-box;
+  line-height: var(--line-height-typo-s);
   color: var(--color-control-typo-default);
   transition: color 0.2s;
   overflow: hidden;
   cursor: pointer;
+
+  &_selected {
+    background-color: var(--color-control-bg-default-hover);
+  }
+
+  &_focused {
+    color: var(--color-control-bg-checked-hover);
+  }
+
+  &_empty {
+    pointer-events: none;
+    text-align: center;
+    color: hsl(0, 0%, 60%);
+  }
+
+  &_new::before {
+    position: absolute;
+    bottom: 0;
+    left: var(--space-s);
+    content: '';
+    width: calc(100% - (var(--space-s) * 2));
+    height: 1px;
+    background-color: var(--color-control-bg-border-default);
+  }
+
+  &_isSubOption {
+    padding-left: calc(var(--space-s) + var(--space-xs));
+  }
+
+  &__check {
+    height: 18px;
+    pointer-events: none;
+  }
+
+  &_focused &__check {
+    .checkbox__box {
+      border-color: var(--color-control-bg-border-default-hover);
+    }
+    .checkbox__input:checked + .checkbox__box {
+      background-color: var(--color-control-bg-checked-hover);
+      border-color: var(--color-control-bg-border-checked-hover);
+    }
+  }
+
+  &__label {
+    flex: 1;
+    pointer-events: none;
+  }
+
+  &__suggestion {
+    color: var(--color-control-bg-default);
+  }
+
+  &__new-label {
+    display: block;
+  }
+
+  &__icon {
+    position: relative;
+    top: 2px;
+    margin-right: 8px;
+  }
+
+  &__new-value {
+    font-weight: 600;
+  }
 
   &_size_xs {
     font-size: var(--control-text-size-xs);
@@ -32,51 +100,18 @@
     line-height: var(--line-height-typo-l);
   }
 
-  &_selected {
-    background-color: var(--color-control-bg-default-hover);
-  }
-
-  &_focused {
-    color: var(--color-control-bg-checked-hover);
-  }
-
-  &_empty {
-    pointer-events: none;
-    text-align: center;
-    color: hsl(0, 0%, 60%);
-  }
-
-  &_isSubOption {
-    padding-left: calc(var(--space-s) + var(--space-xs));
-  }
-
-  &__check {
-    height: 18px;
-    pointer-events: none;
-  }
-
-  &__label {
-    flex: 1;
-    pointer-events: none;
-  }
-
-  &__suggestion {
-    color: var(--color-control-bg-default);
-  }
-
-  &__new-label {
-    display: block;
-    font-size: 15px;
-    line-height: 21px;
-  }
-
-  &__icon {
-    position: relative;
-    top: 2px;
-    margin-right: 8px;
-  }
-
-  &__new-value {
-    font-weight: 600;
+  &_indent {
+    &_0 {
+      padding-left: var(--space-xs);
+    }
+    &_1 {
+      padding-left: calc(var(--space-xs) + var(--space-xl));
+    }
+    &_2 {
+      padding-left: calc(var(--space-xs) + var(--space-xl) * 2);
+    }
+    &_3 {
+      padding-left: calc(var(--space-xs) + var(--space-xl) * 3);
+    }
   }
 }

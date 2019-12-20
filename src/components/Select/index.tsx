@@ -7,45 +7,50 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import differenceBy from 'lodash/differenceBy';
-import difference from 'lodash/difference';
+import orderBy from 'lodash/orderBy';
 
 import bem from '../../utils/bem';
-import Input, { InputStub } from '../Input';
-import Popover, { Directions } from '../Popover';
 import { useClickOutside } from '../../hooks/useClickOutside';
 import { usePrevious } from '../../hooks/usePrevious';
+
 import { WpSize } from '../types';
-import { Button } from '../';
+import Input, { InputStub } from '../Input';
+import Button from '../Button';
+import { Popover, Directions } from '../Popover';
 import {
   checkValue,
   fireCloseEvent,
-  getIntermediateMultiValues,
-  getMultiValues,
-  getValue,
+  getSelectedOptions,
   scrollIntoOption,
   SELECT_CLOSE_EVENT,
   SelectCloseEventDetail,
   filterOptions as filterOptionsByLabel,
+  createFlatOptionValue,
+  parseFlatOptionValue,
+  getFlatOptionsList,
+  NEW_OPTION_VALUE,
+  getOptionsRelations,
+  toggleValue,
 } from './utils';
 import { AutoResizeInput } from './AutoResizeInput';
 import { MultiValueOption } from './MultiValueOption';
-import { Option, EmptyOption, NewOption } from './Option';
-
+import { OptionsList } from './OptionsList';
 import './styles.css';
 
 export type SelectOptionT = {
   value: string;
   label: string;
+  subOptions?: SelectOptionT[];
 };
 
-type NewOptionValueType = 'new';
-
-export const NEW_OPTION_VALUE: NewOptionValueType = 'new';
-
-export type NewOptionT = {
-  value: NewOptionValueType;
+export type SelectOptionWithLevelT = {
+  value: string;
   label: string;
+  level: number;
+  originalValue: string;
+  parentValue: string | null;
+  selectedParentValue: string | null;
+  selectionState: 'selected' | 'part' | 'none';
 };
 
 type CommonProps = {
@@ -53,33 +58,50 @@ type CommonProps = {
   name: string;
   onClearValue: () => void;
   isError?: boolean;
-  allOption?: SelectOptionT;
-  excludedOptions?: SelectOptionT[];
   placeholder?: string;
   onInputChange?: (value: string) => void;
   autoFocus?: boolean;
   autoOpen?: boolean;
   isDisabled?: boolean;
   inputRef?: React.RefObject<HTMLInputElement>;
-  wpSize: WpSize;
-  formatLabel?: (option: SelectOptionT) => React.ReactNode;
-  filterOptions?: (options: SelectOptionT[], inputValue: string) => SelectOptionT[];
+  wpSize?: WpSize;
+  formatLabel?: (option: SelectOptionWithLevelT) => React.ReactNode;
+  filterOptions?: (
+    options: SelectOptionWithLevelT[],
+    inputValue: string,
+  ) => SelectOptionWithLevelT[];
   onBlur?: (event?: React.FocusEvent<HTMLElement>) => void;
   onFocus?: (event?: React.FocusEvent<HTMLElement>) => void;
 };
 
-type MultiValueProps = {
-  onChange: (selectValue: string[]) => void;
-  value?: string[];
-};
+type SimpleValueT = string;
+export type ObjectValueT = { value: string; level: number };
 
-type SingleValueProps = {
-  onChange: (selectValue: string) => void;
-  value?: string;
-};
+export type SelectValueTypeT = SimpleValueT | ObjectValueT;
+
+type HierarchicalSelectProps<
+  NonHierarchicalValueT extends SimpleValueT | SimpleValueT[],
+  HierarchicalT extends ObjectValueT | ObjectValueT[]
+> =
+  | {
+      isHierarchical?: false;
+      onChange: (selectValue: NonHierarchicalValueT | undefined) => void;
+      value?: NonHierarchicalValueT;
+      excludedValues?: string[];
+    }
+  | {
+      isHierarchical: true;
+      onChange: (selectValue: HierarchicalT | undefined) => void;
+      value?: HierarchicalT;
+      excludedValues?: ObjectValueT[];
+    };
+
+type MultiValueProps = HierarchicalSelectProps<SimpleValueT[], ObjectValueT[]>;
+
+type SingleValueProps = HierarchicalSelectProps<SimpleValueT, ObjectValueT>;
 
 type CreatableValueProps = {
-  onNewOptionCreate: (value: NewOptionT) => void;
+  onNewOptionCreate: (value: SelectOptionT) => void;
   newValueText: string;
 };
 
@@ -87,7 +109,7 @@ export type SelectProps = CommonProps & SingleValueProps;
 
 export type MultiSelectProps = CommonProps & MultiValueProps;
 
-export type CreatableSelectProps = SelectProps & CreatableValueProps;
+export type CreatableSelectProps = CreatableValueProps & SelectProps;
 
 type MultiProps = {
   isMulti: true;
@@ -144,7 +166,7 @@ const IconArrow = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const MENU_DIRECTIONS: Directions[] = ['bottom-center', 'top-center'];
+const SELECT_MENU_DIRECTIONS: Directions[] = ['bottom-center', 'top-center'];
 
 const BaseSelect: React.FC<BaseSelectProps> = props => {
   const {
@@ -161,27 +183,59 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
     onBlur,
     isDisabled,
     isMulti,
-    allOption,
     autoFocus,
     autoOpen,
-    excludedOptions,
     formatLabel,
     filterOptions = filterOptionsByLabel,
   } = props;
-  const allOptions = useMemo(() => {
-    if (allOption) {
-      return [allOption, ...startOptions];
+
+  const leveledValue = useMemo(() => {
+    if (props.isMulti) {
+      return props.isHierarchical
+        ? (props.value && props.value.map(createFlatOptionValue)) || []
+        : (props.value && props.value.map(v => createFlatOptionValue({ value: v, level: 0 }))) ||
+            [];
     }
 
-    return startOptions;
-  }, [JSON.stringify(allOption), JSON.stringify(startOptions)]);
+    return props.isHierarchical
+      ? props.value && createFlatOptionValue(props.value)
+      : props.value && createFlatOptionValue({ value: props.value, level: 0 });
+  }, [props.value]);
+
+  const allOptions: SelectOptionWithLevelT[] = useMemo(() => {
+    const { list } = getFlatOptionsList(startOptions, leveledValue);
+    return list;
+  }, [JSON.stringify(startOptions), leveledValue]);
+
   const options = useMemo(() => {
-    return excludedOptions && excludedOptions.length
-      ? differenceBy(allOptions, excludedOptions, 'value')
+    if (!props.excludedValues || !props.excludedValues.length) {
+      return allOptions;
+    }
+
+    const excludedLeveledValues = props.isHierarchical
+      ? (props.excludedValues && props.excludedValues.map(v => createFlatOptionValue(v))) || []
+      : (props.excludedValues &&
+          props.excludedValues.map(v => createFlatOptionValue({ value: v, level: 0 }))) ||
+        [];
+
+    return excludedLeveledValues.length
+      ? allOptions.filter(
+          o =>
+            !excludedLeveledValues.includes(o.value) ||
+            (Array.isArray(leveledValue)
+              ? leveledValue.includes(o.value)
+              : leveledValue === o.value),
+        )
       : allOptions;
-  }, [JSON.stringify(excludedOptions), allOptions]);
+  }, [JSON.stringify(props.excludedValues), allOptions]);
+
   const prevOptions = usePrevious(options);
-  const selectedValue = value && getValue(allOptions, value, allOption);
+
+  const selectedOption = leveledValue ? getSelectedOptions(options, leveledValue) : null;
+  const parentChildRelations = useMemo(() => getOptionsRelations(options, selectedOption), [
+    props.value,
+    options,
+  ]);
   const rootRef = useRef<HTMLDivElement>(null);
   const updateScrollBuffer = useRef(false);
   const updateValuesScrollBuffer = useRef(false);
@@ -192,23 +246,18 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
   const valuesRef = useRef<HTMLDivElement>(null);
   const controlRef = useRef<HTMLInputElement>(null);
   const inputRef = ref || controlRef;
+
   const [inputValue, setInputValue] = useState(
-    selectedValue && !Array.isArray(selectedValue) ? selectedValue.label : '',
+    selectedOption && !Array.isArray(selectedOption) ? selectedOption.label : '',
   );
   const [availableOptions, setAvailableOptions] = useState(options);
   const [focusedOption, setFocusedOption] = useState<string>();
   const [isFocused, setIsFocused] = useState(false);
   const [showMenu, setShowMenu] = useClickOutside();
-  const values = useMemo(() => {
+  const availableOptionsValues = useMemo(() => {
     return availableOptions.map(item => item.value);
   }, [availableOptions]);
-  const isAllOptionSelected = useMemo(() => {
-    if (allOption && selectedValue && Array.isArray(selectedValue)) {
-      return Boolean(selectedValue.find(item => item.value === allOption.value));
-    }
 
-    return false;
-  }, [allOption, selectedValue]);
   const propagateEvent = useCallback(() => {
     if (rootRef.current) {
       rootRef.current.dispatchEvent(
@@ -242,21 +291,56 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
     }
 
     const trimmedInput = inputValue.trim();
+
+    const addParentOptions = (
+      optionsToFindParents: SelectOptionWithLevelT[],
+      foundParents: SelectOptionWithLevelT[] = optionsToFindParents,
+    ): SelectOptionWithLevelT[] => {
+      if (!optionsToFindParents.length) {
+        return [];
+      }
+      const parentValues = optionsToFindParents
+        .filter(o => o.parentValue !== null)
+        .map(o => o.parentValue);
+
+      const parentOptions = options.filter(o => parentValues.includes(o.value));
+      const notFoundParents = parentOptions.filter(o => !foundParents.includes(o));
+
+      return [
+        ...foundParents,
+        ...notFoundParents,
+        ...addParentOptions(notFoundParents, [...foundParents, ...notFoundParents]),
+      ];
+    };
+
     const filteredOptions = filterOptions(options, trimmedInput);
+    const filteredValuesWithParents = addParentOptions(filteredOptions).map(o => o.value);
+    const filteredOptionsWithParents = options.filter(o =>
+      filteredValuesWithParents.includes(o.value),
+    );
+
     const isIncludedExactLabel = filteredOptions.some(
       item => item.label.toLowerCase() === trimmedInput.toLowerCase(),
     );
 
     if (props.isCreatable && !isMulti && inputValue && !isIncludedExactLabel) {
-      const newOption: NewOptionT = {
-        value: NEW_OPTION_VALUE,
+      const newOption: SelectOptionWithLevelT = {
+        value: createFlatOptionValue({ value: NEW_OPTION_VALUE, level: 0 }),
+        originalValue: NEW_OPTION_VALUE,
         label: trimmedInput,
+        level: 0,
+        parentValue: null,
+        selectedParentValue: null,
+        selectionState: 'none',
       };
 
-      setAvailableOptions([newOption, ...filteredOptions]);
-      props.onNewOptionCreate(newOption);
+      setAvailableOptions([newOption, ...filteredOptionsWithParents]);
+      props.onNewOptionCreate({
+        value: newOption.originalValue,
+        label: newOption.label,
+      });
     } else {
-      setAvailableOptions(filteredOptions);
+      setAvailableOptions(filteredOptionsWithParents);
     }
 
     if (!showMenu) {
@@ -269,68 +353,81 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
     }
   };
 
-  const setSelectValue = (newValue: string, removeValue?: boolean) => {
-    if (newValue) {
-      if (!props.isMulti) {
-        props.onChange(newValue);
-        closeMenu();
+  const setSelectValue = useCallback(
+    (newValue: string, removeValue?: boolean) => {
+      if (newValue) {
+        if (!props.isMulti) {
+          if (props.isHierarchical) {
+            props.onChange(parseFlatOptionValue(newValue));
+          } else {
+            props.onChange(parseFlatOptionValue(newValue).value);
+          }
+          closeMenu();
+        }
+
+        if (props.isMulti && Array.isArray(selectedOption) && Array.isArray(leveledValue)) {
+          if (removeValue) {
+            const { value: parsedNewValue } = parseFlatOptionValue(newValue);
+            if (props.isHierarchical) {
+              props.onChange((props.value || []).filter(v => v.value !== parsedNewValue));
+            } else {
+              props.onChange((props.value || []).filter(v => v !== parsedNewValue));
+            }
+          } else {
+            const newValues = toggleValue({
+              values: leveledValue,
+              newValue,
+              optionsRelations: parentChildRelations,
+            });
+            const parsedValues = orderBy(newValues.map(parseFlatOptionValue), o => o.level);
+
+            if (props.isHierarchical) {
+              props.onChange(parsedValues);
+            } else {
+              props.onChange(parsedValues.map(o => o.value));
+            }
+          }
+
+          setInputValue('');
+          setAvailableOptions(options);
+        }
       }
-
-      if (props.isMulti) {
-        const selectedValues =
-          isAllOptionSelected && allOption && newValue !== allOption.value
-            ? getIntermediateMultiValues(values, newValue, allOption && allOption.value)
-            : getMultiValues({
-                values: props.value || [],
-                newValue,
-                remove: removeValue,
-                allOption: allOption && allOption.value,
-              });
-
-        const notSelectedOptions = difference(values, selectedValues);
-        const isSelectedAllOptionsExceptCommon =
-          allOption &&
-          newValue !== allOption.value &&
-          notSelectedOptions.length === 1 &&
-          notSelectedOptions[0] === allOption.value;
-
-        props.onChange(
-          isSelectedAllOptionsExceptCommon && allOption ? [allOption.value] : selectedValues,
-        );
-        setInputValue('');
-        setAvailableOptions(options);
-      }
-    }
-  };
+    },
+    [leveledValue, parentChildRelations],
+  );
 
   const handleLabelClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
+    if (!isDisabled) {
+      e.stopPropagation();
 
-    if (!isDisabled && !showMenu) {
-      setShowMenu(true);
-    }
-
-    if (rootRef.current) {
-      fireCloseEvent(rootRef.current);
-    }
-  };
-
-  const handleArrowClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (showMenu) {
-      closeMenu();
-      propagateEvent();
-    } else if (!isDisabled) {
-      setShowMenu(true);
-
-      if (inputRef.current) {
-        inputRef.current.focus();
+      if (!showMenu) {
+        setShowMenu(true);
       }
 
       if (rootRef.current) {
         fireCloseEvent(rootRef.current);
+      }
+    }
+  };
+
+  const handleArrowClick = (e: React.MouseEvent) => {
+    if (!isDisabled) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (showMenu) {
+        closeMenu();
+        propagateEvent();
+      } else {
+        setShowMenu(true);
+
+        if (inputRef.current) {
+          inputRef.current.focus();
+        }
+
+        if (rootRef.current) {
+          fireCloseEvent(rootRef.current);
+        }
       }
     }
   };
@@ -347,8 +444,8 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
     propagateEvent();
   };
 
-  const handleDeleteMultiValue = (optionValue: string) => {
-    setSelectValue(optionValue, true);
+  const handleDeleteMultiValue = (value: string) => {
+    setSelectValue(value, true);
 
     if (!showMenu) {
       propagateEvent();
@@ -392,32 +489,36 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
     }
   };
 
-  const handleOptionSelect = (value: string) => {
-    if (isMulti) {
-      updateValuesScrollBuffer.current = true;
-    } else {
-      propagateEvent();
-    }
-    setSelectValue(value);
-  };
+  const handleOptionSelect = useCallback(
+    (value: string) => {
+      if (isMulti) {
+        updateValuesScrollBuffer.current = true;
+      } else {
+        propagateEvent();
+      }
+
+      setSelectValue(value);
+    },
+    [isMulti, updateValuesScrollBuffer, setSelectValue],
+  );
 
   const handleKeyDown = (e: KeyboardEvent) => {
     blockMouseOverRef.current = true;
     if (e.key === 'ArrowUp') {
-      const currentFocus = focusedOption ? values.indexOf(focusedOption) : -1;
+      const currentFocus = focusedOption ? availableOptionsValues.indexOf(focusedOption) : -1;
 
       if (currentFocus > 0) {
-        setFocusedOption(values[currentFocus - 1]);
+        setFocusedOption(availableOptionsValues[currentFocus - 1]);
       } else {
-        setFocusedOption(values[values.length - 1]);
+        setFocusedOption(availableOptionsValues[availableOptionsValues.length - 1]);
       }
       updateScrollBuffer.current = true;
     }
 
     if (e.key === 'ArrowDown') {
-      const currentFocus = focusedOption ? values.indexOf(focusedOption) : -1;
+      const currentFocus = focusedOption ? availableOptionsValues.indexOf(focusedOption) : -1;
 
-      setFocusedOption(values[(currentFocus + 1) % values.length]);
+      setFocusedOption(availableOptionsValues[(currentFocus + 1) % availableOptionsValues.length]);
       updateScrollBuffer.current = true;
     }
 
@@ -466,17 +567,15 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
   useEffect(() => {
     if (
       !isMulti &&
-      selectedValue &&
-      !Array.isArray(selectedValue) &&
-      selectedValue.label !== inputValue
+      selectedOption &&
+      !Array.isArray(selectedOption) &&
+      selectedOption.label !== inputValue
     ) {
-      setInputValue(selectedValue.label);
-    }
-
-    if (!selectedValue && prevOptions !== options) {
+      setInputValue(selectedOption.label);
+    } else if (!selectedOption || prevOptions !== options) {
       setInputValue('');
     }
-  }, [selectedValue, isMulti, options]);
+  }, [selectedOption, isMulti, options]);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -488,7 +587,7 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
         root.removeEventListener('keydown', handleKeyDown);
       };
     }
-  }, [showMenu, rootRef, focusedOption, availableOptions, selectedValue, isDisabled, isMulti]);
+  }, [showMenu, rootRef, focusedOption, availableOptions, selectedOption, isDisabled, isMulti]);
 
   useEffect(() => {
     if (!showMenu && focusedOption) {
@@ -540,11 +639,11 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
       }
 
       if (!isMulti) {
-        if (selectedValue && !Array.isArray(selectedValue)) {
+        if (selectedOption && !Array.isArray(selectedOption)) {
           updateScrollBuffer.current = true;
-          setFocusedOption(selectedValue.value);
+          setFocusedOption(selectedOption.value);
+          setAvailableOptions(options);
         }
-        setAvailableOptions(options);
       }
 
       window.addEventListener('keydown', handleEscape, true);
@@ -556,8 +655,12 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
       };
     }
 
+    if (!showMenu) {
+      setAvailableOptions(options);
+    }
+
     if (!showMenu && !isMulti) {
-      setInputValue(selectedValue && !Array.isArray(selectedValue) ? selectedValue.label : '');
+      setInputValue(selectedOption && !Array.isArray(selectedOption) ? selectedOption.label : '');
     }
   }, [showMenu, isMulti]);
 
@@ -572,6 +675,8 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
   }, []);
 
   const hasValue = checkValue(value);
+
+  const popupPositionDeps = ([availableOptions.length] as any[]).concat(isMulti ? [value] : []);
 
   return (
     <div
@@ -601,8 +706,8 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
             form="default"
           >
             <div className={b('values')} ref={valuesRef}>
-              {Array.isArray(selectedValue) &&
-                selectedValue.map(item => (
+              {Array.isArray(selectedOption) &&
+                selectedOption.map(item => (
                   <MultiValueOption
                     label={item.label}
                     value={item.value}
@@ -622,6 +727,7 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
                   onKeyDown={handleInputKeyDown}
                   inputRef={inputRef}
                   disabled={isDisabled}
+                  name={name}
                 />
               </div>
             </div>
@@ -639,7 +745,7 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
             onChange={handleInputChange}
             inputRef={inputRef}
             placeholder={
-              selectedValue && !Array.isArray(selectedValue) ? selectedValue.label : placeholder
+              selectedOption && !Array.isArray(selectedOption) ? selectedOption.label : placeholder
             }
             value={inputValue}
             onFocus={handleInputFocus}
@@ -651,77 +757,57 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
         )}
 
         <div className={b('icon', { type: 'arrow' })} onClick={handleArrowClick}>
-          <span className={b('delimiter')} />
           <div className={b('icon-wrapper')}>
             <IconArrow className={b('arrow', { opened: showMenu && !isDisabled })} />
           </div>
         </div>
         {!isDisabled && hasValue && (
-          <Button
-            wpSize="xs"
-            view="clear"
-            iconOnly
-            type="button"
-            tabIndex={-1}
-            className={b('icon', { type: 'delete' })}
-            onClick={handleDeleteClick}
-          >
-            <div className={b('icon-wrapper')}>
-              <IconClose
-                size={wpSize === 'l' || wpSize === 'm' ? 's' : 'xs'}
-                className={b('close')}
-              />
-            </div>
-          </Button>
+          <>
+            <span className={b('delimiter')} />
+            <Button
+              wpSize="xs"
+              view="clear"
+              iconOnly
+              type="button"
+              tabIndex={-1}
+              className={b('icon', { type: 'delete' })}
+              onClick={handleDeleteClick}
+            >
+              <div className={b('icon-wrapper')}>
+                <IconClose
+                  size={wpSize === 'l' || wpSize === 'm' ? 's' : 'xs'}
+                  className={b('close')}
+                />
+              </div>
+            </Button>
+          </>
         )}
         <Popover
           className={b('menu')}
           anchor={rootRef}
-          directions={MENU_DIRECTIONS}
+          directions={SELECT_MENU_DIRECTIONS}
           visible={showMenu && !isDisabled}
           offset={4}
           popoverWidth={rootRef.current ? rootRef.current.offsetWidth : undefined}
-          positionDependencies={isMulti ? [value] : undefined}
+          positionDependencies={popupPositionDeps}
         >
           <div className={b('options')} ref={menuRef}>
-            {!availableOptions.length && <EmptyOption>Нет подходящих вариантов</EmptyOption>}
-            {availableOptions.map(option => {
-              const { value, label } = option;
-              const isSelected = Array.isArray(selectedValue)
-                ? Boolean(selectedValue.find(item => item.value === value))
-                : selectedValue && selectedValue.value === value;
-              const isIntermediate =
-                isMulti &&
-                Boolean(allOption && allOption.value === value) &&
-                !isAllOptionSelected &&
-                Array.isArray(selectedValue) &&
-                selectedValue.length > 0;
-
-              return (
-                <Option
-                  key={value}
-                  isSelected={Boolean(isSelected) || isAllOptionSelected}
-                  isNewOption={value === 'new'}
-                  isIntermediate={isIntermediate}
-                  isFocused={value === focusedOption}
-                  isAllOption={allOption && allOption.value === value}
-                  isSubOption={allOption && allOption.value !== value}
-                  value={value}
-                  isMulti={isMulti}
-                  focusedRef={value === focusedOption ? focusedElementRef : undefined}
-                  onSelect={handleOptionSelect}
-                  wpSize={wpSize}
-                >
-                  {props.isCreatable && value === 'new' ? (
-                    <NewOption placeholder={props.newValueText}>{label}</NewOption>
-                  ) : formatLabel ? (
-                    formatLabel(option)
-                  ) : (
-                    label
-                  )}
-                </Option>
-              );
-            })}
+            <OptionsList
+              availableOptions={availableOptions}
+              selectedOption={selectedOption}
+              parentChildRelations={parentChildRelations}
+              isMulti={isMulti}
+              focusedOption={focusedOption}
+              focusedElementRef={focusedElementRef}
+              formatLabel={formatLabel}
+              handleOptionSelect={handleOptionSelect}
+              name={name}
+              isCreatable={props.isCreatable}
+              newValueText={props.isCreatable ? props.newValueText : ''}
+              expandAll={Boolean(inputValue)}
+              isHierarchical={props.isHierarchical}
+              wpSize={wpSize}
+            />
           </div>
         </Popover>
       </label>
@@ -729,8 +815,8 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
   );
 };
 
-const MultiSelectComponent: React.FC<MultiSelectProps> = props => {
-  return <BaseSelect {...props} isMulti />;
+const MultiSelectComponent: React.FC<MultiSelectProps & { isDisabled?: false }> = props => {
+  return <BaseSelect {...props} isMulti isDisabled={false} />;
 };
 
 const SelectComponent: React.FC<SelectProps> = props => {

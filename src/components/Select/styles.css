@@ -56,6 +56,7 @@
     padding-top: var(--space-xs);
     padding-bottom: var(--space-xs);
     overflow-y: auto;
+    overflow-x: hidden;
     box-sizing: border-box;
     border: var(--control-border-width) solid var(--color-control-bg-border-default);
     box-shadow: 0 2px 2px rgba(var(--color-nums-shadow), 0.04),
@@ -77,9 +78,18 @@
       cursor: text;
       min-height: var(--input-height);
       height: auto;
-      padding-top: 4px;
-      padding-bottom: 4px;
+      padding-top: 3px;
+      padding-bottom: 3px;
     }
+  }
+
+  &_size_s &__input_multi {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+  &_size_xs &__input_multi {
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   &_selected &__input {
@@ -120,12 +130,29 @@
   }
 
   &__delimiter {
-    align-self: stretch;
-    margin-bottom: var(--space-xs);
-    margin-top: var(--space-xs);
+    position: absolute;
+    top: 50%;
+    right: 32px;
+    height: 24px;
     width: 1px;
-    box-sizing: border-box;
+    transform: translateY(-50%);
     background-color: var(--color-control-bg-border-default);
+  }
+
+  &_size_xs &__delimiter {
+    height: 12px;
+  }
+
+  &_size_s &__delimiter {
+    height: 16px;
+  }
+
+  &_size_m &__delimiter {
+    height: 24px;
+  }
+
+  &_size_l &__delimiter {
+    height: 32px;
   }
 
   &__placeholder {

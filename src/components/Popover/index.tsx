@@ -37,19 +37,16 @@ export type PopoverProps = {
 const b = bem('popover');
 export const DEFAULT_OFFSET = 10;
 
-export const Popover = (
-  {
-    anchor,
-    visible,
-    directions,
-    children,
-    className = '',
-    offset = DEFAULT_OFFSET,
-    popoverWidth,
-    positionDependencies = [],
-  }: PopoverProps,
-  ref: React.Ref<HTMLDivElement> | null,
-) => {
+export const Popover = ({
+  anchor,
+  visible,
+  directions,
+  children,
+  className = '',
+  offset = DEFAULT_OFFSET,
+  popoverWidth,
+  positionDependencies = [],
+}: PopoverProps) => {
   const [position, setPosition] = useState({ left: 0, top: 0 });
   const [show, setShow] = useState(false);
   const [direction, setDirection] = useState(directions[0]);
@@ -128,7 +125,7 @@ export const Popover = (
 
   return (
     <Portal>
-      <div className={b({ visible, direction }, className)} style={style} ref={ref}>
+      <div className={b({ visible, direction }, className)} style={style}>
         <div className={b('children')} ref={contentRef}>
           {content}
         </div>
@@ -137,4 +134,4 @@ export const Popover = (
   );
 };
 
-export default React.forwardRef(Popover);
+export default Popover;

@@ -1,9 +1,8 @@
 import React, { memo } from 'react';
 
-import bem from '../../../utils/bem';
+import { IconClose, SelectOptionT } from '..';
 import { WpSize } from '../../types';
-import { IconClose, SelectOptionT } from '../';
-
+import bem from '../../../utils/bem';
 import './styles.css';
 
 type Props = SelectOptionT & {
@@ -13,7 +12,7 @@ type Props = SelectOptionT & {
 
 const b = bem('multi-value');
 
-const MultiValueComponent: React.FC<Props> = ({ value, label, onDelete, wpSize }) => {
+const MultiValueComponent: React.FC<Props> = ({ value, label, onDelete, wpSize = 'm' }) => {
   const handleDeleteClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -25,7 +24,7 @@ const MultiValueComponent: React.FC<Props> = ({ value, label, onDelete, wpSize }
     <div className={b({ size: wpSize })}>
       <div className={b('label')}>{label}</div>
       <div className={b('delete')} onClick={handleDeleteClick}>
-        <IconClose className={b('icon')} size="s" />
+        <IconClose className={b('icon')} size="xs" />
       </div>
     </div>
   );

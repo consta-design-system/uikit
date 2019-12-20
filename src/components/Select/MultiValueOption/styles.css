@@ -11,27 +11,13 @@
   &__label {
     border-radius: 2px;
     color: var(--color-control-typo-ghost);
+    font-size: var(--size-typo-s);
+    line-height: var(--line-height-typo-s);
     overflow: hidden;
     padding: 0 var(--space-2xs);
     text-overflow: ellipsis;
     white-space: nowrap;
     box-sizing: border-box;
-  }
-
-  &_size_xs {
-    height: 18px;
-  }
-
-  &_size_s {
-    height: 20px;
-  }
-
-  &_size_m {
-    height: 24px;
-  }
-
-  &_size_l {
-    height: 28px;
   }
 
   &_size_xs &__label,
@@ -67,7 +53,39 @@
   }
 
   &__icon {
-    width: 10px;
-    height: 10px;
+    width: var(--icon-size);
+    height: var(--icon-size);
+  }
+
+  &_size_xs {
+    height: 16px;
+    font-size: var(--size-typo-xs);
+    line-height: var(--line-height-typo-s);
+
+    --icon-size: 9px;
+  }
+
+  &_size_s {
+    height: 20px;
+    font-size: var(--size-typo-xs);
+    line-height: var(--line-height-typo-s);
+
+    --icon-size: 9px;
+  }
+
+  &_size_m {
+    height: 24px;
+    font-size: var(--size-typo-s);
+    line-height: var(--line-height-typo-s);
+
+    --icon-size: 11px;
+  }
+
+  &_size_l {
+    height: 28px;
+    font-size: var(--size-typo-s);
+    line-height: var(--line-height-typo-s);
+
+    --icon-size: 11px;
   }
 }
