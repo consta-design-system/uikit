@@ -6,7 +6,6 @@
   font-weight: normal;
   font-size: var(--input-font-size);
   height: var(--input-height);
-  line-height: var(--input-height);
   padding: 0 var(--input-space);
   transition: border-color 0.15s, box-shadow 0.15s;
 

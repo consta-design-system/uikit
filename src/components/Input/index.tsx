@@ -30,6 +30,7 @@ export type InputProps = {
   state?: '' | 'alert' | 'success' | 'warning';
   disabled?: boolean;
   className?: string;
+  inputRef?: React.RefObject<HTMLInputElement>;
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'width' | 'form'>;
 
 const Input: React.FC<InputProps> = ({
@@ -42,17 +43,51 @@ const Input: React.FC<InputProps> = ({
   disabled,
   className,
   children,
+  inputRef,
   ...rest
 }) => {
   return (
     <input
       {...rest}
+      ref={inputRef}
       disabled={disabled}
       placeholder={placeholder}
       className={b({ view, width, size: wpSize, state, form, disabled }, className)}
     >
       {children}
     </input>
+  );
+};
+
+type InputStubProps = {
+  view?: InputProps['view'];
+  width?: InputProps['width'];
+  wpSize: WpSize;
+  form?: InputProps['form'];
+  state: InputProps['state'];
+  disabled?: boolean;
+  className?: string;
+  inputRef?: React.RefObject<HTMLDivElement>;
+};
+
+export const InputStub: React.FC<InputStubProps> = ({
+  view,
+  width,
+  wpSize,
+  form,
+  state,
+  disabled,
+  className,
+  children,
+  inputRef,
+}) => {
+  return (
+    <div
+      ref={inputRef}
+      className={b({ view, width, size: wpSize, state, form, disabled }, className)}
+    >
+      {children}
+    </div>
   );
 };
 
