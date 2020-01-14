@@ -3,13 +3,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { ReactComponent as IconRingM } from '../../icons/icon_ring_m.svg';
 import { ReactComponent as IconChatM } from '../../icons/icon_chat_m.svg';
-import Header from './';
-
-import Logo from './modules/Logo/index';
-import SearchBar from './modules/SearchBar/index';
-import Menu from './modules/Menu/index';
-import Login from './modules/Login/index';
-import IconButton from './modules/IconButton/index';
+import Header, { Logo, SearchBar, Menu, Login, IconButton } from './index';
 
 storiesOf('Header', module)
   .add('Полный', () => {

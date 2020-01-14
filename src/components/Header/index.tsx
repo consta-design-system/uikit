@@ -44,4 +44,10 @@ const Header: React.FC<HeaderProps> = ({ leftSide, rightSide, className, ...rest
   );
 };
 
+export { Logo } from './modules/Logo';
+export { SearchBar } from './modules/SearchBar';
+export { Menu } from './modules/Menu';
+export { Login } from './modules/Login';
+export { IconButton } from './modules/IconButton';
+
 export default Header;

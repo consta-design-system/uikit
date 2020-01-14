@@ -26,4 +26,4 @@ const Logo: React.FC<Props> = ({ children, locked, className, ...restProps }) =>
   }
 };
 
-export default Logo;
+export { Logo };

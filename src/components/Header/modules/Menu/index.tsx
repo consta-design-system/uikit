@@ -34,4 +34,4 @@ const Menu: React.FC<MenuProps> = ({ items, className, ...restProps }) => {
   );
 };
 
-export default Menu;
+export { Menu };
