@@ -25,7 +25,6 @@
 
 ```javascript
 import '@gpn-design/uikit/dist/style.css';
-import '@yankovsky/whitepaper-bem';
 import { Button } from 'uikit';
 ```
 

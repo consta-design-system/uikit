@@ -93,4 +93,4 @@ const Login: React.FC<Props> = ({
   );
 };
 
-export default Login;
+export { Login };

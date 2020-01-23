@@ -47,4 +47,4 @@ const SearchBar: React.FC<Props> = ({ placeholder, label, className, ...restProp
   );
 };
 
-export default SearchBar;
+export { SearchBar };

@@ -28,7 +28,16 @@ export default {
       compact: true,
     },
   ],
-  external: ['react', 'react-dom'],
+  external: [
+    'react',
+    'react-dom',
+    'lodash/throttle',
+    'react-collapse',
+    'bem-cn',
+    'lodash/orderBy',
+    'lodash/sortBy',
+    'lodash/flatMap',
+  ],
   treeshake: true,
   plugins: [
     postcss({
