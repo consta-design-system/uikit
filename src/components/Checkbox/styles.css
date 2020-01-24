@@ -127,7 +127,7 @@
         border-color: var(--color-control-typo-disable);
       }
     }
-    .checkbox__input:disabled + .checkbox__text {
+    .checkbox__input:disabled ~ .checkbox__text {
       color: var(--color-control-typo-disable);
     }
   }
