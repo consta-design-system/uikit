@@ -35,14 +35,46 @@
     }
   }
 
+  &__select {
+    > div {
+      display: flex;
+      margin-bottom: var(--space-m);
+    }
+    .Select {
+      width: 420px;
+      margin-right: var(--space-xl);
+    }
+  }
+
   &__checkbox {
+    > div {
+      margin-bottom: var(--space-m);
+    }
     .checkbox {
       margin-right: var(--space-xl);
     }
   }
 
   &__radio {
+    > div {
+      margin-bottom: var(--space-m);
+    }
     .radio {
+      margin-right: var(--space-xl);
+    }
+  }
+
+  &__choicegroup {
+    > div {
+      margin-bottom: var(--space-m);
+    }
+  }
+
+  &__switch {
+    > div {
+      margin-bottom: var(--space-m);
+    }
+    .switch {
       margin-right: var(--space-xl);
     }
   }
