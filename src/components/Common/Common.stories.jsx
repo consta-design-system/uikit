@@ -1,5 +1,5 @@
 import React from 'react';
-import { withKnobs, text, select, boolean } from '@storybook/addon-knobs';
+import { withKnobs, select, boolean, radios } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import ValueKeeper from '../../utils/testHelpers/ValueKeeper';
@@ -11,11 +11,11 @@ import Input from '../Input';
 import ChoiceGroup from '../ChoiceGroup';
 import Checkbox from '../Checkbox';
 import Radio from '../Radio';
+import Switch from '../Switch';
+import { Select, MultiSelect } from '../Select';
 
 const buttonKnobs = () => ({
-  width: select('Button Width', ['full', 'default'], 'default'),
-  // wpSize: select('Button Size', ['s', 'm', 'l', 'xl'], 'm'),
-  // view: select('Button View', ['clear', 'primary', 'secondary', 'ghost'], 'primary'),
+  width: radios('Button Width', ['full', 'default'], 'default'),
   form: select(
     'Button Form',
     ['default', 'brick', 'round', 'brick-round', 'round-brick', 'brick-default', 'default-brick'],
@@ -27,7 +27,6 @@ const buttonKnobs = () => ({
 const inputKnobs = () => ({
   view: select('Input View', ['default'], 'default'),
   width: select('Input Width', ['full', 'default'], 'default'),
-  // wpSize: select('Input Size', ['s', 'm', 'l', 'xl'], 'm'),
   form: select(
     'Input Form',
     [
@@ -51,26 +50,18 @@ const inputKnobs = () => ({
 });
 
 const choiceGroupKnobs = () => ({
-  wpSize: select('ChoiceGroup Size', ['xs', 's', 'm', 'l'], 'l'),
   form: select('ChoiceGroup Form', ['default', 'round', 'brick'], 'default'),
   disabled: boolean('ChoiceGroup Disabled', false),
 });
 
-const checkboxKnobs = () => ({
-  disabled: boolean('Checkbox Disabled', false),
-  intermediate: boolean('Checkbox Intermediate', false),
-  // wpSize: select('Checkbox Size', ['m', 'l'], 'm'),
-});
-
 const radioKnobs = () => ({
   disabled: boolean('Radio Disabled', false),
-  // wpSize: select('Radio Size', ['m', 'l'], 'm'),
 });
 
-storiesOf('Common List', module)
+storiesOf('Common controls', module)
   .addDecorator(withKnobs)
-  .add('Общий список', () => {
-    const items = [
+  .add('Общий список контролов', () => {
+    const choiceGroupItems = [
       {
         value: 1,
         label: '1 choice',
@@ -85,6 +76,18 @@ storiesOf('Common List', module)
       },
     ];
 
+    const selectOptions = [
+      { value: 'value-0', label: 'Fantastic!' },
+      { value: 'value-1', label: 'Awesome!' },
+      { value: 'value-2', label: 'Fine.' },
+      { value: 'value-3', label: 'Ok.' },
+      { value: 'value-4', label: 'Not bad.' },
+      { value: 'value-5', label: "Could've been better" },
+      { value: 'value-6', label: 'Not so good' },
+      { value: 'value-7', label: 'Bad' },
+      { value: 'value-8', label: 'Awful' },
+    ];
+
     return (
       <div className="common">
         <section className="common__buttons">
@@ -95,28 +98,28 @@ storiesOf('Common List', module)
               {...buttonKnobs()}
               className="button_size_l button_view_primary"
             >
-              {text('Button Content', 'I am button')}
+              Click me, babe!
             </Button>
             <Button
               onClick={action('click')}
               {...buttonKnobs()}
               className="button_size_m button_view_primary"
             >
-              {text('Button Content', 'I am button')}
+              Click me, babe!
             </Button>
             <Button
               onClick={action('click')}
               {...buttonKnobs()}
               className="button_size_s button_view_primary"
             >
-              {text('Button Content', 'I am button')}
+              Click me, babe!
             </Button>
             <Button
               onClick={action('click')}
               {...buttonKnobs()}
               className="button_size_xs button_view_primary"
             >
-              {text('Button Content', 'I am button')}
+              Click me, babe!
             </Button>
           </div>
           <div>
@@ -125,28 +128,28 @@ storiesOf('Common List', module)
               {...buttonKnobs()}
               className="button_size_l button_view_secondary"
             >
-              {text('Button Content', 'I am button')}
+              Click me, babe!
             </Button>
             <Button
               onClick={action('click')}
               {...buttonKnobs()}
               className="button_size_m button_view_secondary"
             >
-              {text('Button Content', 'I am button')}
+              Click me, babe!
             </Button>
             <Button
               onClick={action('click')}
               {...buttonKnobs()}
               className="button_size_s button_view_secondary"
             >
-              {text('Button Content', 'I am button')}
+              Click me, babe!
             </Button>
             <Button
               onClick={action('click')}
               {...buttonKnobs()}
               className="button_size_xs button_view_secondary"
             >
-              {text('Button Content', 'I am button')}
+              Click me, babe!
             </Button>
           </div>
           <div>
@@ -155,28 +158,28 @@ storiesOf('Common List', module)
               {...buttonKnobs()}
               className="button_size_l button_view_ghost"
             >
-              {text('Button Content', 'I am button')}
+              Click me, babe!
             </Button>
             <Button
               onClick={action('click')}
               {...buttonKnobs()}
               className="button_size_m button_view_ghost"
             >
-              {text('Button Content', 'I am button')}
+              Click me, babe!
             </Button>
             <Button
               onClick={action('click')}
               {...buttonKnobs()}
               className="button_size_s button_view_ghost"
             >
-              {text('Button Content', 'I am button')}
+              Click me, babe!
             </Button>
             <Button
               onClick={action('click')}
               {...buttonKnobs()}
               className="button_size_xs button_view_ghost"
             >
-              {text('Button Content', 'I am button')}
+              Click me, babe!
             </Button>
           </div>
           <div>
@@ -185,28 +188,28 @@ storiesOf('Common List', module)
               {...buttonKnobs()}
               className="button_size_l button_view_clear"
             >
-              {text('Button Content', 'I am button')}
+              Click me, babe!
             </Button>
             <Button
               onClick={action('click')}
               {...buttonKnobs()}
               className="button_size_m button_view_clear"
             >
-              {text('Button Content', 'I am button')}
+              Click me, babe!
             </Button>
             <Button
               onClick={action('click')}
               {...buttonKnobs()}
               className="button_size_s button_view_clear"
             >
-              {text('Button Content', 'I am button')}
+              Click me, babe!
             </Button>
             <Button
               onClick={action('click')}
               {...buttonKnobs()}
               className="button_size_xs button_view_clear"
             >
-              {text('Button Content', 'I am button')}
+              Click me, babe!
             </Button>
           </div>
         </section>
@@ -214,142 +217,332 @@ storiesOf('Common List', module)
         <section className="common__inputs">
           <h2 className="text text_size_3xl text_view_primary text_weight-bold">Inputs</h2>
           <div>
-            <Textarea
-              placeholder={text('Placeholder', 'My placeholder')}
-              {...inputKnobs()}
-              className="input_size_l"
-            />
-            <Input
-              placeholder={text('Input Placeholder', 'My placeholder')}
-              {...inputKnobs()}
-              className="input_size_l"
-            />
+            <Textarea placeholder="Type something" {...inputKnobs()} className="input_size_l" />
+            <Input placeholder="Type something" {...inputKnobs()} className="input_size_l" />
           </div>
           <div>
-            <Textarea
-              placeholder={text('Placeholder', 'My placeholder')}
-              {...inputKnobs()}
-              className="input_size_m"
-            />
-            <Input
-              placeholder={text('Input Placeholder', 'My placeholder')}
-              {...inputKnobs()}
-              className="input_size_m"
-            />
+            <Textarea placeholder="Type something" {...inputKnobs()} className="input_size_m" />
+            <Input placeholder="Type something" {...inputKnobs()} className="input_size_m" />
           </div>
           <div>
-            <Textarea
-              placeholder={text('Placeholder', 'My placeholder')}
-              {...inputKnobs()}
-              className="input_size_s"
-            />
-            <Input
-              placeholder={text('Input Placeholder', 'My placeholder')}
-              {...inputKnobs()}
-              className="input_size_s"
-            />
+            <Textarea placeholder="Type something" {...inputKnobs()} className="input_size_s" />
+            <Input placeholder="Type something" {...inputKnobs()} className="input_size_s" />
           </div>
           <div>
-            <Textarea
-              placeholder={text('Placeholder', 'My placeholder')}
-              {...inputKnobs()}
-              className="input_size_xs"
-            />
-            <Input
-              placeholder={text('Input Placeholder', 'My placeholder')}
-              {...inputKnobs()}
-              className="input_size_xs"
-            />
+            <Textarea placeholder="Type something" {...inputKnobs()} className="input_size_xs" />
+            <Input placeholder="Type something" {...inputKnobs()} className="input_size_xs" />
           </div>
 
           <h3>Input + input</h3>
           <Input
-            placeholder={text('Input Placeholder', 'My placeholder')}
+            placeholder="Type something"
             className="input_view_default input_size_m input_form_default-clear"
           />
           <Input
-            placeholder={text('Input Placeholder', 'My placeholder')}
+            placeholder="Type something"
             className="input_view_default input_size_m input_form_brick-default"
           />
 
           <h3>Input + input + input</h3>
           <Input
-            placeholder={text('Input Placeholder', 'My placeholder')}
+            placeholder="Type something"
             className="input_view_default input_size_m input_form_default-clear"
           />
           <Input
-            placeholder={text('Input Placeholder', 'My placeholder')}
+            placeholder="Type something"
             className="input_view_default input_size_m input_form_brick-clear"
           />
           <Input
-            placeholder={text('Input Placeholder', 'My placeholder')}
+            placeholder="Type something"
             className="input_view_default input_size_m input_form_brick-default"
           />
 
           <h3>Input + button</h3>
           <Input
-            placeholder={text('Input Placeholder', 'My placeholder')}
+            placeholder="Type something"
             className="input_view_default input_size_m input_form_default-clear"
           />
           <Button
             onClick={action('click')}
             className="button_size_m button_view_primary button_form_brick-default"
           >
-            {text('Button Content', 'I am button')}
+            Click me, babe!
           </Button>
 
           <h3>Input + input + button</h3>
           <Input
-            placeholder={text('Input Placeholder', 'My placeholder')}
+            placeholder="Type something"
             className="input_view_default input_size_m input_form_default-clear"
           />
           <Input
-            placeholder={text('Input Placeholder', 'My placeholder')}
+            placeholder="Type something"
             className="input_view_default input_size_m input_form_brick-clear"
           />
           <Button
             onClick={action('click')}
             className="button_size_m button_view_primary button_form_brick-default"
           >
-            {text('Button Content', 'I am button')}
+            Click me, babe!
           </Button>
         </section>
 
-        <section>
-          <h2 className="text text_size_3xl text_view_primary text_weight-bold">ChoiceGroup</h2>
-          <ValueKeeper
-            onChange={action('onChange')}
-            onBlur={action('onBlur')}
-            render={({ value, onChange, onBlur }) => {
-              return (
-                <ChoiceGroup
-                  isMultiple={false}
+        <section className="common__select">
+          <h2 className="text text_size_3xl text_view_primary text_weight-bold">Select</h2>
+          <div>
+            <ValueKeeper
+              onChange={action('onChange')}
+              render={({ value, onChange }) => (
+                <Select
+                  name="storySelect"
+                  placeholder="Howdily doodily?"
+                  options={selectOptions}
                   value={value}
-                  items={items}
-                  {...choiceGroupKnobs()}
                   onChange={onChange}
-                  onBlur={onBlur}
+                  onClearValue={() => {
+                    onChange(undefined);
+                  }}
+                  isDisabled={boolean('isDisabled', false)}
+                  wpSize="l"
                 />
-              );
-            }}
-          />
+              )}
+            />
+            <ValueKeeper
+              onChange={action('onChange')}
+              render={({ value, onChange }) => (
+                <MultiSelect
+                  name="storySelect"
+                  placeholder="Howdily doodily?"
+                  options={selectOptions}
+                  value={value}
+                  onChange={onChange}
+                  onClearValue={() => {
+                    onChange(undefined);
+                  }}
+                  isHierarchical
+                  wpSize="l"
+                />
+              )}
+            />
+          </div>
+          <div>
+            <ValueKeeper
+              onChange={action('onChange')}
+              render={({ value, onChange }) => (
+                <Select
+                  name="storySelect"
+                  placeholder="Howdily doodily?"
+                  options={selectOptions}
+                  value={value}
+                  onChange={onChange}
+                  onClearValue={() => {
+                    onChange(undefined);
+                  }}
+                  isDisabled={boolean('isDisabled', false)}
+                  wpSize="m"
+                />
+              )}
+            />
+            <ValueKeeper
+              onChange={action('onChange')}
+              render={({ value, onChange }) => (
+                <MultiSelect
+                  name="storySelect"
+                  placeholder="Howdily doodily?"
+                  options={selectOptions}
+                  value={value}
+                  onChange={onChange}
+                  onClearValue={() => {
+                    onChange(undefined);
+                  }}
+                  isHierarchical
+                  wpSize="m"
+                />
+              )}
+            />
+          </div>
+          <div>
+            <ValueKeeper
+              onChange={action('onChange')}
+              render={({ value, onChange }) => (
+                <Select
+                  name="storySelect"
+                  placeholder="Howdily doodily?"
+                  options={selectOptions}
+                  value={value}
+                  onChange={onChange}
+                  onClearValue={() => {
+                    onChange(undefined);
+                  }}
+                  isDisabled={boolean('isDisabled', false)}
+                  wpSize="s"
+                />
+              )}
+            />
+            <ValueKeeper
+              onChange={action('onChange')}
+              render={({ value, onChange }) => (
+                <MultiSelect
+                  name="storySelect"
+                  placeholder="Howdily doodily?"
+                  options={selectOptions}
+                  value={value}
+                  onChange={onChange}
+                  onClearValue={() => {
+                    onChange(undefined);
+                  }}
+                  isHierarchical
+                  wpSize="s"
+                />
+              )}
+            />
+          </div>
+          <div>
+            <ValueKeeper
+              onChange={action('onChange')}
+              render={({ value, onChange }) => (
+                <Select
+                  name="storySelect"
+                  placeholder="Howdily doodily?"
+                  options={selectOptions}
+                  value={value}
+                  onChange={onChange}
+                  onClearValue={() => {
+                    onChange(undefined);
+                  }}
+                  isDisabled={boolean('isDisabled', false)}
+                  wpSize="xs"
+                />
+              )}
+            />
+            <ValueKeeper
+              onChange={action('onChange')}
+              render={({ value, onChange }) => (
+                <MultiSelect
+                  name="storySelect"
+                  placeholder="Howdily doodily?"
+                  options={selectOptions}
+                  value={value}
+                  onChange={onChange}
+                  onClearValue={() => {
+                    onChange(undefined);
+                  }}
+                  isHierarchical
+                  wpSize="xs"
+                />
+              )}
+            />
+          </div>
+        </section>
+
+        <section className="common__choicegroup">
+          <h2 className="text text_size_3xl text_view_primary text_weight-bold">ChoiceGroup</h2>
+          <div>
+            <ValueKeeper
+              onChange={action('onChange')}
+              onBlur={action('onBlur')}
+              render={({ value, onChange, onBlur }) => {
+                return (
+                  <ChoiceGroup
+                    isMultiple={false}
+                    value={value}
+                    wpSize="l"
+                    items={choiceGroupItems}
+                    {...choiceGroupKnobs()}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                  />
+                );
+              }}
+            />
+          </div>
+          <div>
+            <ValueKeeper
+              onChange={action('onChange')}
+              onBlur={action('onBlur')}
+              render={({ value, onChange, onBlur }) => {
+                return (
+                  <ChoiceGroup
+                    isMultiple={false}
+                    value={value}
+                    wpSize="m"
+                    items={choiceGroupItems}
+                    {...choiceGroupKnobs()}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                  />
+                );
+              }}
+            />
+          </div>
+          <div>
+            <ValueKeeper
+              onChange={action('onChange')}
+              onBlur={action('onBlur')}
+              render={({ value, onChange, onBlur }) => {
+                return (
+                  <ChoiceGroup
+                    isMultiple={false}
+                    value={value}
+                    wpSize="s"
+                    items={choiceGroupItems}
+                    {...choiceGroupKnobs()}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                  />
+                );
+              }}
+            />
+          </div>
+          <div>
+            <ValueKeeper
+              onChange={action('onChange')}
+              onBlur={action('onBlur')}
+              render={({ value, onChange, onBlur }) => {
+                return (
+                  <ChoiceGroup
+                    isMultiple={false}
+                    value={value}
+                    wpSize="xs"
+                    items={choiceGroupItems}
+                    {...choiceGroupKnobs()}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                  />
+                );
+              }}
+            />
+          </div>
         </section>
 
         <section className="common__checkbox">
           <h2 className="text text_size_3xl text_view_primary text_weight-bold">Checkbox</h2>
           <div>
-            <Checkbox {...checkboxKnobs()} className="checkbox_size_m">
+            <Checkbox className="checkbox_size_m">{'Check me, baby!'}</Checkbox>
+            <Checkbox className="checkbox_size_m" value={true}>
               {'Check me, baby!'}
             </Checkbox>
-            <Checkbox {...checkboxKnobs()} className="checkbox_size_m">
+            <Checkbox className="checkbox_size_m" intermediate={true}>
+              {'Check me, baby!'}
+            </Checkbox>
+            <Checkbox className="checkbox_size_m" disabled>
+              {'Check me, baby!'}
+            </Checkbox>
+            <Checkbox className="checkbox_size_m" value={true} disabled>
               {'Check me, baby!'}
             </Checkbox>
           </div>
           <div>
-            <Checkbox {...checkboxKnobs()} className="checkbox_size_l">
+            <Checkbox className="checkbox_size_l">{'Check me, baby!'}</Checkbox>
+            <Checkbox className="checkbox_size_l" value={true}>
               {'Check me, baby!'}
             </Checkbox>
-            <Checkbox {...checkboxKnobs()} className="checkbox_size_l">
+            <Checkbox className="checkbox_size_l" intermediate={true}>
+              {'Check me, baby!'}
+            </Checkbox>
+            <Checkbox className="checkbox_size_l" disabled>
+              {'Check me, baby!'}
+            </Checkbox>
+            <Checkbox className="checkbox_size_l" value={true} disabled>
               {'Check me, baby!'}
             </Checkbox>
           </div>
@@ -359,19 +552,59 @@ storiesOf('Common List', module)
           <h2 className="text text_size_3xl text_view_primary text_weight-bold">Radio</h2>
           <div>
             <Radio {...radioKnobs()} className="radio_size_m">
-              {text('Content', 'I am radio')}
+              I am radio
             </Radio>
-            <Radio {...radioKnobs()} className="radio_size_m">
-              {text('Content', 'I am radio')}
+            <Radio {...radioKnobs()} className="radio_size_m" value={true}>
+              I am radio
+            </Radio>
+            <Radio {...radioKnobs()} className="radio_size_m" disabled>
+              I am radio
+            </Radio>
+            <Radio {...radioKnobs()} className="radio_size_m" disabled value={true}>
+              I am radio
             </Radio>
           </div>
           <div>
             <Radio {...radioKnobs()} className="radio_size_l">
-              {text('Content', 'I am radio')}
+              I am radio
             </Radio>
-            <Radio {...radioKnobs()} className="radio_size_l">
-              {text('Content', 'I am radio')}
+            <Radio {...radioKnobs()} className="radio_size_l" value={true}>
+              I am radio
             </Radio>
+            <Radio {...radioKnobs()} className="radio_size_l" disabled>
+              I am radio
+            </Radio>
+            <Radio {...radioKnobs()} className="radio_size_l" disabled value={true}>
+              I am radio
+            </Radio>
+          </div>
+        </section>
+
+        <section className="common__switch">
+          <h2 className="text text_size_3xl text_view_primary text_weight-bold">Switch</h2>
+          <div>
+            <Switch wpSize="m">Move me, I beg you!</Switch>
+            <Switch wpSize="m" value={true}>
+              Move me, I beg you!
+            </Switch>
+            <Switch wpSize="m" disabled>
+              Move me, I beg you!
+            </Switch>
+            <Switch wpSize="m" value={true} disabled>
+              Move me, I beg you!
+            </Switch>
+          </div>
+          <div>
+            <Switch wpSize="l">Move me, I beg you!</Switch>
+            <Switch wpSize="l" value={true}>
+              Move me, I beg you!
+            </Switch>
+            <Switch wpSize="l" disabled>
+              Move me, I beg you!
+            </Switch>
+            <Switch wpSize="l" value={true} disabled>
+              Move me, I beg you!
+            </Switch>
           </div>
         </section>
       </div>
