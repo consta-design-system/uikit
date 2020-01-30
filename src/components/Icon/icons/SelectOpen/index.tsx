@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Icon } from '../../../index';
+import Icon from '../../../Icon';
 
 const SVG_XS = <path d="M6 3.5L10 8H2L6 3.5Z" />;
 
