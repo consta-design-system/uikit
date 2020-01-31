@@ -6,12 +6,11 @@ const b = bem('icon');
 type CommonProps = {
   view: 'alert' | 'brand' | 'ghost' | 'link' | 'primary' | 'secondary' | 'success' | 'warning';
   size: 'xs' | 's' | 'm';
-  name: string;
   className?: string;
 };
 
 const Icon: React.FC<CommonProps> = props => {
-  const { view, size, name, children, className } = props;
+  const { view, size, children, className } = props;
   let width;
 
   if (size === 'xs') width = 11;
@@ -24,7 +23,6 @@ const Icon: React.FC<CommonProps> = props => {
         {
           view,
           size,
-          name,
         },
         className,
       )}
