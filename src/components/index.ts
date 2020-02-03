@@ -26,6 +26,7 @@ export { default as Icon } from './Icon';
 export { default as Loader } from './Loader';
 
 // Другие компоненты
+export { default as Informer } from './Informer';
 export { default as Popover } from './Popover';
 
 // Куски интерфейсов
