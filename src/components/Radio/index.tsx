@@ -2,17 +2,42 @@ import React from 'react';
 import bem from '../../utils/bem';
 
 import './styles.css';
+import { WpSize } from '../types';
 
 const b = bem('radio');
 
-function Radio({ id, name, wpSize, disabled, children, className }) {
+export type RadioProps = {
+  value?: boolean;
+  wpSize: WpSize;
+  disabled?: boolean;
+  className?: string;
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value'>;
+
+const Radio: React.FC<RadioProps> = ({
+  value,
+  id,
+  name,
+  wpSize,
+  disabled,
+  children,
+  className,
+  ...rest
+}) => {
   return (
-    <label className={b({ size: wpSize, disabled }, className)}>
-      <input type="radio" id={id} name={name} disabled={disabled} className={b('input')} />
-      <div className={b('box')}></div>
+    <label className={b({ size: wpSize, disabled }, className || '')}>
+      <input
+        {...rest}
+        type="radio"
+        id={id}
+        name={name}
+        className={b('input')}
+        checked={value}
+        disabled={disabled}
+      />
+      <div className={b('box')} />
       <span className={b('text')}>{children}</span>
     </label>
   );
-}
+};
 
 export default Radio;

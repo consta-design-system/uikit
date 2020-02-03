@@ -60,7 +60,7 @@ $color-base-critical: #33000f;
   --color-control-bg-default-hover: color($color-base-phantom l(96%)); /* Цвет фона контрола по ховеру */
   --color-control-typo-default: color($color-base-base); /* Цвет основного текста контрола */
   --color-control-typo-placeholder: color($color-base-base a(35%)); /* Цвет плейсхолдера контрола */
-  --color-control-bg-border-default: color($color-base-phantom a(9%)); /* Цвет фона бордеров котрола */
+  --color-control-bg-border-default: color($color-base-phantom a(12%)); /* Цвет фона бордеров котрола */
   --color-control-bg-border-default-hover: color($color-base-phantom l(76%)); /* Цвет фона бордеров контрола по ховеру */
   --color-control-bg-border-focus: color($color-base-project l(+10%)); /* Цвет аутлайна контролов при фокусе */ /* TODO заменить на правило целиком */
 

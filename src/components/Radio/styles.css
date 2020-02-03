@@ -90,7 +90,7 @@
         background-color: var(--color-control-typo-disable);
       }
     }
-    .radio__input:disabled + .radio__text {
+    .radio__input:disabled ~ .radio__text {
       color: var(--color-control-typo-disable);
     }
   }
