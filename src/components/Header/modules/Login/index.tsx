@@ -1,6 +1,7 @@
 import React from 'react';
 import bem from '../../../../utils/bem';
 
+import IconArrowDown from '../../../Icon/icons/ArrowDown';
 import Button from '../../../Button';
 
 import './styles.css';
@@ -70,20 +71,7 @@ const Login: React.FC<Props> = ({
             ''
           )}
         </div>
-        {/* TODO заменить на icon в будущем */}
-        <svg
-          className={b('arrow', {}, 'icon icon_size_xs')}
-          fill="currentColor"
-          width="16"
-          height="16"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M8 9.593L3.703 5.296 2.289 6.71 8 12.421l5.711-5.71-1.414-1.415L8 9.593z"
-          />
-        </svg>
+        <IconArrowDown size={'s'} className={b('icon')} />
       </div>
     </button>
   ) : (

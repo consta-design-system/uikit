@@ -2,6 +2,7 @@ import React from 'react';
 import { withKnobs, text, select, boolean, radios } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import IconUser from '../Icon/icons/User';
 import Button from '.';
 
 const defaultKnobs = () => ({
@@ -29,41 +30,13 @@ storiesOf('Button', module)
   ))
   .add('С иконкой', () => (
     <Button onClick={action('click')} {...defaultKnobs()} className="button_icon-only">
-      {/* Временное решение, пока не появится сборка иконок */}
-      <svg
-        className="icon_user_xs button__icon"
-        width="11"
-        height="11"
-        fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <circle cx="5.5" cy="2.5" r="2.5" />
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M10 11c0-2.734-1-4.5-4.5-4.5S1 8.266 1 11h9z"
-        />
-      </svg>
+      <IconUser size={'xs'} className={'button__icon'} />
     </Button>
   ))
   .add('С текстом и иконкой', () => (
     <Button onClick={action('click')} {...defaultKnobs()} {...withIconKnobs()}>
       {text('Content', 'I am button')}
-      {/* Временное решение, пока не появится сборка иконок */}
-      <svg
-        className="icon_user_xs button__icon"
-        width="11"
-        height="11"
-        fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <circle cx="5.5" cy="2.5" r="2.5" />
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M10 11c0-2.734-1-4.5-4.5-4.5S1 8.266 1 11h9z"
-        />
-      </svg>
+      <IconUser size={'xs'} className={'button__icon'} />
     </Button>
   ))
   .add('В роли ссылки', () => (

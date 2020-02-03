@@ -17,6 +17,7 @@ import { WpSize } from '../types';
 import Input, { InputStub } from '../Input';
 import Button from '../Button';
 import { Popover, Directions } from '../Popover';
+import IconSelect from '../Icon/icons/Select';
 import {
   checkValue,
   fireCloseEvent,
@@ -134,17 +135,7 @@ type BaseSelectProps = CommonProps &
 const b = bem('Select');
 
 const IconArrow = ({ className }: { className?: string }) => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 16 16"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    className={className}
-  >
-    <path d="M2 2h12v12H2z" />
-    <path d="M8 10.5L12 6H4l4 4.5z" fill="currentColor" />
-  </svg>
+  <IconSelect size={'s'} className={className} />
 );
 
 const SELECT_MENU_DIRECTIONS: Directions[] = ['bottom-center', 'top-center'];

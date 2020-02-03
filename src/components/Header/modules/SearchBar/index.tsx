@@ -5,6 +5,7 @@ import './styles.css';
 
 import Input from '../../../Input/index';
 import Button from '../../../Button/index';
+import IconSearch from '../../../Icon/icons/Search';
 
 const b = bem('search-bar');
 
@@ -35,13 +36,7 @@ const SearchBar: React.FC<Props> = ({ placeholder, label, className, ...restProp
         view="clear"
         className={b('button', {}, 'button_icon-only')}
       >
-        <svg width="16" height="16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M9.618 11.032a5.5 5.5 0 111.414-1.414l3.97 3.969L13.586 15l-3.97-3.97zM10 6.5a3.5 3.5 0 11-7 0 3.5 3.5 0 017 0z"
-          />
-        </svg>
+        <IconSearch size={'s'} />
       </Button>
     </form>
   );
