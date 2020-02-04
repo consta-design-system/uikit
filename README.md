@@ -32,7 +32,7 @@ import { Button } from 'uikit';
 
 ```html
 <body
-  className="theme theme_breakpoint_default theme_color_gpn-default theme_control_gpn-default theme_font_small theme_gap_small theme_size_gpn-default theme_space_default"
+  className="theme theme_breakpoint_default theme_color_gpn-default theme_control_gpn-default theme_font_small theme_gap_small theme_size_gpn-default theme_space_gpn-default"
 >
   <button type="button" view="primary" wpSize="l" from="default" width="auto">Кнопка</button>
 </body>
