@@ -4,6 +4,10 @@ node_js:
 cache:
   directories:
     - node_modules
+addons:
+  apt:
+    packages:
+      - libgmp3-dev
 script:
     - yarn run build
     - yarn run build:storybook
