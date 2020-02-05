@@ -1,17 +1,15 @@
 language: node_js
+version: 1.0
 node_js:
   - node
 cache:
   directories:
     - node_modules
-addons:
-  apt:
-    packages:
-      - libgmp3-dev
 script:
     - yarn run build
     - yarn run build:storybook
 deploy:
+    edge: true
   - provider: pages
     skip_cleanup: true
     local_dir: build/storybook
