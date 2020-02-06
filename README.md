@@ -25,7 +25,7 @@
 
 ```javascript
 import '@gpn-design/uikit/dist/style.css';
-import { Button } from 'uikit';
+import { Button } from '@gpn-design/uikit';
 ```
 
 Затем следует повесить на блок-контейнер классы тем:
