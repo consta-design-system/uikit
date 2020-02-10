@@ -12,8 +12,8 @@
   --control-space-m: var(--space-l);
   --control-space-s: var(--space-m);
   --control-space-xs: var(--space-s);
-  --control-text-size-l: var(--size-typo-l);
-  --control-text-size-m: var(--size-typo-m);
-  --control-text-size-s: var(--size-typo-s);
-  --control-text-size-xs: var(--size-typo-xs);
+  --control-text-size-l: var(--size-text-l);
+  --control-text-size-m: var(--size-text-m);
+  --control-text-size-s: var(--size-text-s);
+  --control-text-size-xs: var(--size-text-xs);
 }

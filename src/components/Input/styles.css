@@ -162,11 +162,11 @@
 
   &_type_textarea {
     height: initial;
-    line-height: var(--line-height-typo-m);
+    line-height: var(--line-height-text-m);
     width: 100%;
     resize: none;
     padding-top: calc(
-      (var(--input-height) - var(--line-height-typo-m)) / 2 - var(--control-border-width)
+      (var(--input-height) - var(--line-height-text-m)) / 2 - var(--control-border-width)
     );
     padding-top: calc(var(--input-space) * 0.66);
   }
