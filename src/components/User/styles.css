@@ -1,0 +1,65 @@
+.user {
+  display: inline-flex;
+  border-radius: 99em;
+  text-decoration: none;
+  transition: background-color 0.25s ease;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &__avatar {
+    padding: var(--space-2xs);
+    box-sizing: content-box;
+    border-radius: 50%;
+
+    &_size {
+      &_s {
+        width: 24px;
+        height: 24px;
+      }
+      &_m {
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    &_status {
+      &_available {
+        box-shadow: inset 0 0 0 var(--space-3xs) var(--color-bg-success);
+      }
+      &_away {
+        box-shadow: inset 0 0 0 var(--space-3xs) var(--color-bg-warning);
+      }
+      &_off {
+        box-shadow: inset 0 0 0 var(--space-3xs) var(--color-bg-alert);
+      }
+    }
+  }
+  &_view {
+    &_clear:hover {
+      background-color: var(--color-control-bg-clear-hover);
+    }
+    &_secondary {
+      background-color: var(--color-control-bg-ghost);
+
+      &:hover {
+        background-color: var(--color-control-bg-ghost-hover);
+      }
+    }
+  }
+  &_size {
+    &_m:not(&_only-avatar) {
+      padding-right: var(--space-l);
+    }
+    &_m&_only-avatar {
+      padding-right: var(--space-m);
+    }
+    &_s:not(&_only-avatar) {
+      padding-right: var(--space-m);
+    }
+    &_s&_only-avatar {
+      padding-right: var(--space-s);
+    }
+  }
+}
