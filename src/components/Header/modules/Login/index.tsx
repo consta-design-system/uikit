@@ -11,7 +11,7 @@ type Props = {
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   personName: string;
   personInfo?: string;
-  personStatus?: 'active' | 'remote' | 'out';
+  personStatus?: undefined | 'available' | 'remote' | 'out';
   linkToPhoto?: string;
   isMinified?: boolean;
   className?: string;

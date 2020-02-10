@@ -1,4 +1,4 @@
-import React, { FocusEventHandler } from 'react';
+import React from 'react';
 import bem from '../../utils/bem';
 import './styles.css';
 import IconArrowDown from '../Icon/icons/ArrowDown';
@@ -9,14 +9,13 @@ type CommonProps = {
   type: 'link' | 'button' | 'static';
   view: 'secondary' | 'clear';
   size: 's' | 'm';
-  status: undefined | 'available' | 'remote' | 'out';
+  status?: undefined | 'available' | 'remote' | 'out';
   avatar?: string;
   name?: string;
   info?: string;
   href?: string;
   onlyAvatar?: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onBlur?: FocusEventHandler<HTMLElement>;
   className?: string;
 };
 
@@ -32,7 +31,6 @@ const User: React.FC<CommonProps> = props => {
     avatar,
     href,
     onClick,
-    onBlur,
     className,
   } = props;
   const _className = className + ` pt-icon-plus pt-icon-plus_vertical-align_center`;
@@ -94,17 +92,16 @@ const User: React.FC<CommonProps> = props => {
       <button
         className={b({ size: size, view: view, 'only-avatar': onlyAvatar }, _className)}
         onClick={onClick}
-        onBlur={onBlur}
       >
         {content}
       </button>
     );
-  else if (type == 'static' || !type)
-    return (
-      <div className={b({ size: size, view: view, 'only-avatar': onlyAvatar }, _className)}>
-        {content}
-      </div>
-    );
+
+  return (
+    <div className={b({ size: size, view: view, 'only-avatar': onlyAvatar }, _className)}>
+      {content}
+    </div>
+  );
 };
 
 export default User;

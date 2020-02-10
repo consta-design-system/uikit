@@ -6,7 +6,7 @@ import User from './';
 const defaultKnobs = () => ({
   view: select('View', ['secondary', 'clear'], 'clear'),
   size: select('Size', ['s', 'm'], 'm'),
-  status: select('Status', ['default', 'available', 'remote', 'out'], 'default'),
+  status: select('Status', ['available', 'remote', 'out'], undefined),
   avatar: text(
     'Avatar Url',
     `https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png`,
