@@ -71,7 +71,6 @@ storiesOf('Header', module)
             linkToPhoto={
               'https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png'
             }
-            altForPhoto={'Фотография Вадима Матвеева'}
           />
         ),
       },
@@ -141,7 +140,6 @@ storiesOf('Header', module)
             linkToPhoto={
               'https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png'
             }
-            altForPhoto={'Фотография Вадима Матвеева'}
           />
         ),
       },
@@ -273,7 +271,6 @@ storiesOf('Header', module)
             linkToPhoto={
               'https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png'
             }
-            altForPhoto={'Фотография Вадима Матвеева'}
           />
         ),
       },
@@ -327,7 +324,6 @@ storiesOf('Header', module)
             linkToPhoto={
               'https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png'
             }
-            altForPhoto={'Фотография Вадима Матвеева'}
           />
         ),
       },
@@ -421,7 +417,6 @@ storiesOf('Header', module)
             linkToPhoto={
               'https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png'
             }
-            altForPhoto={'Фотография Вадима Матвеева'}
           />
         ),
       },
@@ -475,7 +470,6 @@ storiesOf('Header', module)
             linkToPhoto={
               'https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png'
             }
-            altForPhoto={'Фотография Вадима Матвеева'}
           />
         ),
       },

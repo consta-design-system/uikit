@@ -28,6 +28,7 @@ export { default as Loader } from './Loader';
 // Другие компоненты
 export { default as Informer } from './Informer';
 export { default as Popover } from './Popover';
+export { default as User } from './User';
 
 // Куски интерфейсов
 export { default as Header } from './Header';
