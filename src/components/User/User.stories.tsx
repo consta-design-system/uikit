@@ -6,7 +6,7 @@ import User from './';
 const defaultKnobs = () => ({
   view: select('View', ['secondary', 'clear'], 'clear'),
   size: select('Size', ['s', 'm'], 'm'),
-  status: select('Status', ['default', 'available', 'away', 'off'], 'default'),
+  status: select('Status', ['default', 'available', 'remote', 'out'], 'default'),
   avatar: text(
     'Avatar Url',
     `https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png`,
@@ -21,12 +21,6 @@ const fullKnobs = () => ({
 storiesOf('User', module)
   .addDecorator(withKnobs)
   .add('Full', () => (
-    <div>
-      <User type={'link'} href={`http://google.com`} {...defaultKnobs()} {...fullKnobs()} />
-    </div>
+    <User type={'link'} href={`http://google.com`} {...defaultKnobs()} {...fullKnobs()} />
   ))
-  .add('Mini', () => (
-    <div>
-      <User type={'button'} onlyAvatar={true} {...defaultKnobs()} />
-    </div>
-  ));
+  .add('Mini', () => <User type={'button'} onlyAvatar={true} {...defaultKnobs()} />);

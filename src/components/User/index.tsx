@@ -9,7 +9,7 @@ type CommonProps = {
   type: 'link' | 'button' | 'static';
   view: 'secondary' | 'clear';
   size: 's' | 'm';
-  status: 'default' | 'available' | 'away' | 'off';
+  status: undefined | 'available' | 'remote' | 'out';
   avatar?: string;
   name?: string;
   info?: string;
