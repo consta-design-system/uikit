@@ -1,7 +1,7 @@
 .informer {
   padding: var(--space-s) var(--space-m);
   border-radius: var(--control-radius);
-  font-size: var(--size-typo-m);
+  font-size: var(--size-text-m);
   color: var(--color-typo-primary);
 
   &_status {

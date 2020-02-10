@@ -2,13 +2,13 @@
   position: relative;
   display: flex;
   align-items: center;
-  font-size: var(--size-typo-m);
+  font-size: var(--size-text-m);
   padding: var(--space-xs) var(--space-s);
   width: 100%;
   user-select: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   box-sizing: border-box;
-  line-height: var(--line-height-typo-s);
+  line-height: var(--line-height-text-s);
   color: var(--color-control-typo-default);
   transition: color 0.2s;
   overflow: hidden;
@@ -82,22 +82,22 @@
 
   &_size_xs {
     font-size: var(--control-text-size-xs);
-    line-height: var(--line-height-typo-xs);
+    line-height: var(--line-height-text-xs);
   }
 
   &_size_s {
     font-size: var(--control-text-size-s);
-    line-height: var(--line-height-typo-s);
+    line-height: var(--line-height-text-s);
   }
 
   &_size_m {
     font-size: var(--control-text-size-m);
-    line-height: var(--line-height-typo-m);
+    line-height: var(--line-height-text-m);
   }
 
   &_size_l {
     font-size: var(--control-text-size-l);
-    line-height: var(--line-height-typo-l);
+    line-height: var(--line-height-text-l);
   }
 
   &_indent {
