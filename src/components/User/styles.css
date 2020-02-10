@@ -1,10 +1,12 @@
 .user {
   display: inline-flex;
   border-radius: 99em;
+  border: 0;
   text-decoration: none;
   transition: background-color 0.25s ease;
 
-  &:hover {
+  a&,
+  button& {
     cursor: pointer;
   }
 
@@ -37,8 +39,12 @@
     }
   }
   &_view {
-    &_clear:hover {
-      background-color: var(--color-control-bg-clear-hover);
+    &_clear {
+      background-color: var(--color-control-bg-clear);
+
+      &:hover {
+        background-color: var(--color-control-bg-clear-hover);
+      }
     }
     &_secondary {
       background-color: var(--color-control-bg-ghost);

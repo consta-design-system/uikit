@@ -14,7 +14,6 @@ const defaultKnobs = () => ({
 });
 
 const fullKnobs = () => ({
-  profileLink: text('Url', `http://ya.ru`),
   name: text('Name', `Имя Фамилия`),
   info: text('Info', `Сегодня на Почтамской`),
 });
@@ -23,11 +22,11 @@ storiesOf('User', module)
   .addDecorator(withKnobs)
   .add('Full', () => (
     <div>
-      <User {...defaultKnobs()} {...fullKnobs()} />
+      <User type={'link'} href={`http://google.com`} {...defaultKnobs()} {...fullKnobs()} />
     </div>
   ))
   .add('Mini', () => (
     <div>
-      <User onlyAvatar={true} {...defaultKnobs()} />
+      <User type={'button'} onlyAvatar={true} {...defaultKnobs()} />
     </div>
   ));
