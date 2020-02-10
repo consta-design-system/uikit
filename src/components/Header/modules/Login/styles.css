@@ -79,7 +79,7 @@
 
   &__name,
   &__info {
-    line-height: var(--line-height-typo-xs);
+    line-height: var(--line-height-text-xs);
   }
 
   &__arrow {

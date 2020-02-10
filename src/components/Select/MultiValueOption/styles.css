@@ -11,8 +11,8 @@
   &__label {
     border-radius: 2px;
     color: var(--color-control-typo-ghost);
-    font-size: var(--size-typo-s);
-    line-height: var(--line-height-typo-s);
+    font-size: var(--size-text-s);
+    line-height: var(--line-height-text-s);
     overflow: hidden;
     padding: 0 var(--space-2xs);
     text-overflow: ellipsis;
@@ -23,13 +23,13 @@
   &_size_xs &__label,
   &_size_s &__label {
     font-size: var(--control-text-size-xs);
-    line-height: var(--line-height-typo-m);
+    line-height: var(--line-height-text-m);
   }
 
   &_size_m &__label,
   &_size_l &__label {
     font-size: var(--control-text-size-s);
-    line-height: var(--line-height-typo-s);
+    line-height: var(--line-height-text-s);
   }
 
   &__delete {
@@ -59,32 +59,32 @@
 
   &_size_xs {
     height: 16px;
-    font-size: var(--size-typo-xs);
-    line-height: var(--line-height-typo-s);
+    font-size: var(--size-text-xs);
+    line-height: var(--line-height-text-s);
 
     --icon-size: 9px;
   }
 
   &_size_s {
     height: 20px;
-    font-size: var(--size-typo-xs);
-    line-height: var(--line-height-typo-s);
+    font-size: var(--size-text-xs);
+    line-height: var(--line-height-text-s);
 
     --icon-size: 9px;
   }
 
   &_size_m {
     height: 24px;
-    font-size: var(--size-typo-s);
-    line-height: var(--line-height-typo-s);
+    font-size: var(--size-text-s);
+    line-height: var(--line-height-text-s);
 
     --icon-size: 11px;
   }
 
   &_size_l {
     height: 28px;
-    font-size: var(--size-typo-s);
-    line-height: var(--line-height-typo-s);
+    font-size: var(--size-text-s);
+    line-height: var(--line-height-text-s);
 
     --icon-size: 11px;
   }
