@@ -23,6 +23,7 @@ export { Select, MultiSelect, CreatableSelect } from './Select';
 
 // Графика
 export { default as Icon } from './Icon';
+export { default as File } from './File';
 export { default as Loader } from './Loader';
 
 // Другие компоненты
