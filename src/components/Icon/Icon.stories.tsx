@@ -29,7 +29,6 @@ import IconColumns from './icons/Columns';
 import IconComment from './icons/Comment';
 import IconConnection from './icons/Connection';
 import IconCopy from './icons/Copy';
-import IconCreate from './icons/Create';
 import IconCrown from './icons/Crown';
 import IconDiamond from './icons/Diamond';
 import IconDown from './icons/Down';
@@ -130,7 +129,6 @@ storiesOf('Icon', module)
       <IconComment {...defaultKnobs()} />
       <IconConnection {...defaultKnobs()} />
       <IconCopy {...defaultKnobs()} />
-      <IconCreate {...defaultKnobs()} />
       <IconCrown {...defaultKnobs()} />
       <IconDiamond {...defaultKnobs()} />
       <IconDown {...defaultKnobs()} />
