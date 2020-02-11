@@ -1,10 +1,9 @@
 .radio {
   position: relative;
-  cursor: pointer;
-  display: inline-flex;
-  -ms-align-items: center;
   align-items: center;
+  display: inline-flex;
   font-family: var(--font-sans);
+  cursor: pointer;
 
   &__box {
     position: relative;
@@ -18,14 +17,13 @@
     &::before {
       content: '';
       position: absolute;
-      width: var(--box-size);
-      height: var(--box-size);
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      background-color: var(--color-control-bg-checked);
-      border-radius: 50%;
       top: calc(50% - var(--box-size) / 2);
       left: calc(50% - var(--box-size) / 2);
+      width: var(--box-size);
+      height: var(--box-size);
+      box-sizing: border-box;
+      border-radius: 50%;
+      background-color: var(--color-control-bg-checked);
       opacity: 0;
       transform: scale(0, 0);
       transition: opacity 0.15s, transform 0.15s;
@@ -57,10 +55,8 @@
   }
 
   &__input {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
     position: absolute;
+    appearance: none;
 
     &:checked {
       + .radio__box {

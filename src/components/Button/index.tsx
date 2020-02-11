@@ -1,7 +1,7 @@
 import React, { FocusEventHandler } from 'react';
 import bem from '../../utils/bem';
 
-import './Button.css';
+import './styles.css';
 
 const b = bem('button');
 

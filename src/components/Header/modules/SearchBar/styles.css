@@ -12,8 +12,8 @@
     padding: 0;
     width: 1px;
     height: 1px;
-    border: 0;
     overflow: hidden;
+    border: 0;
     visibility: hidden;
     opacity: 0;
     pointer-events: none;

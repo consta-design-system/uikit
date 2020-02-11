@@ -1,31 +1,31 @@
 .checkbox {
   position: relative;
-  cursor: pointer;
-  display: inline-flex;
   align-items: center;
+  display: inline-flex;
   font-family: var(--font-sans);
+  cursor: pointer;
 
   &__box {
     position: relative;
-    box-sizing: border-box;
+    flex-shrink: 0;
     width: var(--box-size);
     height: var(--box-size);
-    flex-shrink: 0;
-    border-radius: var(--control-radius);
+    box-sizing: border-box;
     border: var(--control-border-width) solid var(--color-control-bg-border-default);
+    border-radius: var(--control-radius);
     background-color: transparent;
     transition: border-color 0.15s, background-color 0.15s;
 
     &::before {
       content: '';
       position: absolute;
-      box-sizing: border-box;
+      z-index: 1;
       width: calc(var(--box-size) * 0.6);
       height: calc(var(--box-size) * 0.35);
-      z-index: 1;
-      background-color: var(--color-control-bg-affect);
+      box-sizing: border-box;
       border-bottom: var(--control-border-width) solid var(--color-control-typo-checked);
       border-left: var(--control-border-width) solid var(--color-control-typo-checked);
+      background-color: var(--color-control-bg-affect);
       opacity: 0;
       transform-origin: 0 0;
       transform: rotate(-50deg) scale(0, 1);
@@ -66,10 +66,8 @@
   }
 
   &__input {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
     position: absolute;
+    appearance: none;
 
     &:checked {
       + .checkbox__box {
@@ -95,8 +93,8 @@
       border-color: var(--color-control-bg-border-default-hover);
     }
     .checkbox__input:checked + .checkbox__box {
-      background-color: var(--color-control-bg-checked-hover);
       border-color: var(--color-control-bg-border-checked-hover);
+      background-color: var(--color-control-bg-checked-hover);
     }
   }
 
@@ -109,10 +107,10 @@
       background-color: var(--color-control-bg-checked);
 
       &::before {
-        opacity: 1;
-        transform: rotate(0) scale(1, 0.35) translate(0, -50%);
         background-color: var(--color-control-typo-checked);
         transition: opacity 0.15s, transform 0.15s, background-color 0.08s 0.04s;
+        transform: rotate(0) scale(1, 0.35) translate(0, -50%);
+        opacity: 1;
       }
     }
   }
