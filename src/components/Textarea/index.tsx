@@ -1,7 +1,6 @@
 import React from 'react';
 import bem from '../../utils/bem';
 import '../Input/styles.css';
-import { WpSize } from '../types';
 
 const b = bem('input');
 
@@ -9,7 +8,7 @@ export type TextareaProps = {
   placeholder?: string;
   view?: 'default';
   width?: 'full' | 'default';
-  wpSize?: WpSize;
+  wpSize?: 'xs' | 's' | 'm' | 'l';
   form?: 'default' | 'brick' | 'round';
   state?: '' | 'alert' | 'success' | 'warning';
   disabled?: boolean;

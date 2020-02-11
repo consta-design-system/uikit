@@ -1,13 +1,12 @@
 import React, { memo } from 'react';
 
-import { WpSize } from '../../types';
 import bem from '../../../utils/bem';
 import { SelectOptionT } from '../';
 import './styles.css';
 
 type Props = SelectOptionT & {
   onDelete: (value: string) => void;
-  wpSize: WpSize;
+  wpSize: 'xs' | 's' | 'm' | 'l';
 };
 
 const b = bem('multi-value');

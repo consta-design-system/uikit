@@ -1,7 +1,6 @@
 import React, { memo } from 'react';
 
 import './styles.css';
-import { WpSize } from '../../types';
 import bem from '../../../utils/bem';
 import Checkbox from '../../Checkbox';
 
@@ -16,7 +15,7 @@ type Props = {
   focusedRef?: React.RefObject<HTMLDivElement>;
   children: React.ReactNode;
   onSelect: (value: string) => void;
-  wpSize: WpSize;
+  wpSize: 'xs' | 's' | 'm' | 'l';
 };
 
 const IconPlus = ({ className }: { className?: string }) => (

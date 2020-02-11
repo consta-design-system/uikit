@@ -2,13 +2,12 @@ import React from 'react';
 import bem from '../../utils/bem';
 
 import './styles.css';
-import { WpSize } from '../types';
 
 const b = bem('checkbox');
 
 export type CheckboxProps = {
   value?: boolean;
-  wpSize: WpSize;
+  wpSize: 'm' | 'l';
   disabled?: boolean;
   intermediate?: boolean;
   className?: string;
