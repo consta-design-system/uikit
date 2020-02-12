@@ -101,93 +101,354 @@ const defaultKnobs = () => ({
 storiesOf('Icon', module)
   .addDecorator(withKnobs)
   .add('Icon', () => (
-    <div>
-      <IconAdd {...defaultKnobs()} />
-      <IconAlert {...defaultKnobs()} />
-      <IconAlignCenter {...defaultKnobs()} />
-      <IconAlignJustify {...defaultKnobs()} />
-      <IconAlignLeft {...defaultKnobs()} />
-      <IconAlignRight {...defaultKnobs()} />
-      <IconArrowDown {...defaultKnobs()} />
-      <IconArrowLeft {...defaultKnobs()} />
-      <IconArrowRight {...defaultKnobs()} />
-      <IconArrowUp {...defaultKnobs()} />
-      <IconAttach {...defaultKnobs()} />
-      <IconBackward {...defaultKnobs()} />
-      <IconBarrier {...defaultKnobs()} />
-      <IconBento {...defaultKnobs()} />
-      <IconBold {...defaultKnobs()} />
-      <IconCalendar {...defaultKnobs()} />
-      <IconCamera {...defaultKnobs()} />
-      <IconCancel {...defaultKnobs()} />
-      <IconChat {...defaultKnobs()} />
-      <IconCheck {...defaultKnobs()} />
-      <IconClose {...defaultKnobs()} />
-      <IconCollapse {...defaultKnobs()} />
-      <IconColorFill {...defaultKnobs()} />
-      <IconColorText {...defaultKnobs()} />
-      <IconColumns {...defaultKnobs()} />
-      <IconComment {...defaultKnobs()} />
-      <IconConnection {...defaultKnobs()} />
-      <IconCopy {...defaultKnobs()} />
-      <IconCreate {...defaultKnobs()} />
-      <IconCrown {...defaultKnobs()} />
-      <IconDiamond {...defaultKnobs()} />
-      <IconDown {...defaultKnobs()} />
-      <IconDrag {...defaultKnobs()} />
-      <IconDrop {...defaultKnobs()} />
-      <IconEdit {...defaultKnobs()} />
-      <IconExpand {...defaultKnobs()} />
-      <IconEye {...defaultKnobs()} />
-      <IconFavorite {...defaultKnobs()} />
-      <IconFilter {...defaultKnobs()} />
-      <IconForward {...defaultKnobs()} />
-      <IconFunnel {...defaultKnobs()} />
-      <IconGas {...defaultKnobs()} />
-      <IconHamburger {...defaultKnobs()} />
-      <IconItalic {...defaultKnobs()} />
-      <IconKebab {...defaultKnobs()} />
-      <IconLeaf {...defaultKnobs()} />
-      <IconLink {...defaultKnobs()} />
-      <IconList {...defaultKnobs()} />
-      <IconListNumbered {...defaultKnobs()} />
-      <IconLock {...defaultKnobs()} />
-      <IconMail {...defaultKnobs()} />
-      <IconMeatball {...defaultKnobs()} />
-      <IconOpenInNew {...defaultKnobs()} />
-      <IconPause {...defaultKnobs()} />
-      <IconPhoto {...defaultKnobs()} />
-      <IconPlay {...defaultKnobs()} />
-      <IconProcessing {...defaultKnobs()} />
-      <IconQuestion {...defaultKnobs()} />
-      <IconQuote {...defaultKnobs()} />
-      <IconRecord {...defaultKnobs()} />
-      <IconRemove {...defaultKnobs()} />
-      <IconRevert {...defaultKnobs()} />
-      <IconRing {...defaultKnobs()} />
-      <IconRouble {...defaultKnobs()} />
-      <IconSave1 {...defaultKnobs()} />
-      <IconSave2 {...defaultKnobs()} />
-      <IconSearch {...defaultKnobs()} />
-      <IconSelect {...defaultKnobs()} />
-      <IconSelectOpen {...defaultKnobs()} />
-      <IconSettings {...defaultKnobs()} />
-      <IconShuffle {...defaultKnobs()} />
-      <IconSortDown {...defaultKnobs()} />
-      <IconSortDown2 {...defaultKnobs()} />
-      <IconSortUp {...defaultKnobs()} />
-      <IconSortUp2 {...defaultKnobs()} />
-      <IconStop {...defaultKnobs()} />
-      <IconStrikethrough {...defaultKnobs()} />
-      <IconTable {...defaultKnobs()} />
-      <IconTest {...defaultKnobs()} />
-      <IconThumbUp {...defaultKnobs()} />
-      <IconTie {...defaultKnobs()} />
-      <IconTop {...defaultKnobs()} />
-      <IconTrash {...defaultKnobs()} />
-      <IconType {...defaultKnobs()} />
-      <IconUnderline {...defaultKnobs()} />
-      <IconUser {...defaultKnobs()} />
-      <IconWorld {...defaultKnobs()} />
+    <div className={'tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full'}>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconAdd {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Add</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconAlert {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Alert</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconAlignCenter {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>AlignCenter</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconAlignJustify {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>AlignJustify</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconAlignLeft {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>AlignLeft</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconAlignRight {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>AlignRight</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconArrowDown {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>ArrowDown</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconArrowLeft {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>ArrowLeft</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconArrowRight {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>ArrowRight</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconArrowUp {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>ArrowUp</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconAttach {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Attach</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconBackward {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Backward</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconBarrier {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Barrier</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconBento {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Bento</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconBold {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Bold</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconCalendar {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Calendar</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconCamera {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Camera</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconCancel {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Cancel</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconChat {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Chat</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconCheck {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Check</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconClose {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Close</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconCollapse {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Collapse</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconColorFill {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>ColorFill</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconColorText {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>ColorText</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconColumns {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Columns</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconComment {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Comment</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconConnection {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Connection</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconCopy {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Copy</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconCreate {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Create</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconCrown {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Crown</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconDiamond {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Diamond</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconDown {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Down</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconDrag {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Drag</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconDrop {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Drop</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconEdit {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Edit</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconExpand {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Expand</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconEye {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Eye</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconFavorite {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Favorite</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconFilter {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Filter</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconForward {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Forward</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconFunnel {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Funnel</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconGas {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Gas</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconHamburger {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Hamburger</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconItalic {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Italic</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconKebab {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Kebab</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconLeaf {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Leaf</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconLink {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Link</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconList {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>List</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconListNumbered {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>ListNumbered</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconLock {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Lock</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconMail {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Mail</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconMeatball {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Meatball</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconOpenInNew {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>OpenInNew</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconPause {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Pause</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconPhoto {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Photo</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconPlay {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Play</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconProcessing {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Processing</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconQuestion {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Question</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconQuote {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Quote</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconRecord {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Record</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconRemove {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Remove</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconRevert {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Revert</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconRing {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Ring</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconRouble {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Rouble</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconSave1 {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Save1</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconSave2 {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Save2</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconSearch {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Search</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconSelect {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Select</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconSelectOpen {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>SelectOpen</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconSettings {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Settings</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconShuffle {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Shuffle</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconSortDown {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>SortDown</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconSortDown2 {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>SortDown2</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconSortUp {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>SortUp</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconSortUp2 {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>SortUp2</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconStop {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Stop</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconStrikethrough {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Strikethrough</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconTable {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Table</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconTest {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Test</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconThumbUp {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>ThumbUp</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconTie {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Tie</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconTop {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Top</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconTrash {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Trash</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconType {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Type</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconUnderline {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>Underline</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconUser {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>User</div>
+      </div>
+      <div className={'tpl-grid__fraction text text_align_center'}>
+        <IconWorld {...defaultKnobs()} />
+        <div className={'text_size_s text_view_secondary'}>World</div>
+      </div>
     </div>
   ));
