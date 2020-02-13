@@ -3,22 +3,22 @@
 
   &__input {
     box-sizing: content-box;
-    background: 0 center;
-    border: 0;
-    font-size: inherit;
-    opacity: 1;
-    outline: 0;
     padding: 0;
+    border: 0;
+    background: 0 center;
+    font-size: inherit;
     color: inherit;
+    outline: 0;
+    opacity: 1;
   }
 
   &__sizer {
     position: absolute;
     top: 0;
     left: 0;
-    visibility: hidden;
     height: 0;
-    overflow: scroll;
+    visibility: hidden;
     white-space: pre;
+    overflow: scroll;
   }
 }

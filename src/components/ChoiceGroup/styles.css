@@ -1,41 +1,41 @@
 .choice-group {
   display: inline-flex;
-  font-size: 0;
   border-radius: var(--control-radius);
   box-shadow: inset 0 0 0 2px var(--color-control-bg-border-default);
+  font-size: 0;
 
   &__button {
     position: relative;
     z-index: 0;
     box-sizing: border-box;
+    overflow: visible;
     color: var(--color-control-typo-default);
     transition: color 0.1s, box-shadow 0.1s;
-    overflow: visible;
     pointer-events: none;
 
     &::before {
-      transform: scale(0.8);
       background-color: rgba(0, 0, 0, 0);
       transition: background-color 0.15s, transform 0.15s;
+      transform: scale(0.8);
     }
 
     &::after {
       content: '';
       position: absolute;
       top: 50%;
-      transform: translateY(-50%);
       left: calc(var(--control-border-width) * -1);
       width: var(--control-border-width);
       height: 65%;
       background-color: var(--color-control-bg-border-default);
+      transform: translateY(-50%);
     }
 
     &_checked {
       color: var(--color-control-typo-checked);
 
       &::before {
-        transform: scale(1);
         background-color: var(--color-control-bg-checked);
+        transform: scale(1);
 
         /* right: -2px; TODO Подумать как убрать границы между айтемами в состоянии checked */
       }
@@ -68,25 +68,23 @@
       }
 
       &_checked::before {
-        background-color: var(--color-control-bg-disable);
         border-color: transparent;
+        background-color: var(--color-control-bg-disable);
       }
     }
   }
 
   &__input {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
     position: absolute;
+    appearance: none;
 
     &:focus {
       outline: none;
 
       & + .choice-group__button {
-        transition: color 0.1s, box-shadow 0.1s 0.1s;
-        outline: none;
         box-shadow: 0 0 3px 2px var(--color-control-bg-border-focus);
+        outline: none;
+        transition: color 0.1s, box-shadow 0.1s 0.1s;
       }
     }
   }

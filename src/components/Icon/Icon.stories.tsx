@@ -29,7 +29,6 @@ import IconColumns from './icons/Columns';
 import IconComment from './icons/Comment';
 import IconConnection from './icons/Connection';
 import IconCopy from './icons/Copy';
-import IconCreate from './icons/Create';
 import IconCrown from './icons/Crown';
 import IconDiamond from './icons/Diamond';
 import IconDown from './icons/Down';
@@ -213,10 +212,6 @@ storiesOf('Icon', module)
       <div className={'tpl-grid__fraction text text_align_center'}>
         <IconCopy {...defaultKnobs()} />
         <div className={'text_size_s text_view_secondary'}>Copy</div>
-      </div>
-      <div className={'tpl-grid__fraction text text_align_center'}>
-        <IconCreate {...defaultKnobs()} />
-        <div className={'text_size_s text_view_secondary'}>Create</div>
       </div>
       <div className={'tpl-grid__fraction text text_align_center'}>
         <IconCrown {...defaultKnobs()} />

@@ -7,10 +7,10 @@
     position: absolute;
     right: 12px;
     top: 8px;
-    color: var(--color-typo-primary);
-    background-color: transparent;
-    outline: none;
     border: none;
+    background-color: transparent;
+    color: var(--color-typo-primary);
+    outline: none;
     cursor: pointer;
 
     &:hover {

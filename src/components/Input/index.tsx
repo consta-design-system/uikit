@@ -2,7 +2,6 @@ import React from 'react';
 import bem from '../../utils/bem';
 
 import './styles.css';
-import { WpSize } from '../types';
 
 const b = bem('input');
 
@@ -12,7 +11,7 @@ export type InputProps = {
   type?: string;
   view?: 'default';
   width?: 'full' | 'default';
-  wpSize: WpSize;
+  wpSize: 'xs' | 's' | 'm' | 'l';
   form?:
     | 'default'
     | 'brick'
@@ -62,7 +61,7 @@ const Input: React.FC<InputProps> = ({
 type InputStubProps = {
   view?: InputProps['view'];
   width?: InputProps['width'];
-  wpSize: WpSize;
+  wpSize: 'xs' | 's' | 'm' | 'l';
   form?: InputProps['form'];
   state: InputProps['state'];
   disabled?: boolean;

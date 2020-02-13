@@ -3,7 +3,6 @@ import bem from '../../utils/bem';
 
 import './styles.css';
 import Button from '../Button';
-import { WpSize } from '../types';
 
 const b = bem('choice-group');
 
@@ -24,7 +23,7 @@ type MultiValueSpecificProps<T> = {
 };
 export type ChoiceGroupProps<T> = {
   items: ChoiceT<T>[];
-  wpSize: WpSize;
+  wpSize: 'xs' | 's' | 'm' | 'l';
   form?: 'default' | 'brick' | 'round';
   className?: string;
   disabled?: boolean;

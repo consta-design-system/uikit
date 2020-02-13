@@ -13,7 +13,6 @@ import bem from '../../utils/bem';
 import { useClickOutside } from '../../hooks/useClickOutside';
 import { usePrevious } from '../../hooks/usePrevious';
 
-import { WpSize } from '../types';
 import Input, { InputStub } from '../Input';
 import Button from '../Button';
 import { Popover, Directions } from '../Popover';
@@ -65,7 +64,7 @@ type CommonProps = {
   autoOpen?: boolean;
   isDisabled?: boolean;
   inputRef?: React.RefObject<HTMLInputElement>;
-  wpSize?: WpSize;
+  wpSize?: 'xs' | 's' | 'm' | 'l';
   formatLabel?: (option: SelectOptionWithLevelT) => React.ReactNode;
   filterOptions?: (
     options: SelectOptionWithLevelT[],

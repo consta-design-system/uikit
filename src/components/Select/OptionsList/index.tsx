@@ -2,7 +2,6 @@ import React, { useMemo, useEffect } from 'react';
 import { SelectOptionWithLevelT } from '..';
 import { parseFlatOptionValue, NEW_OPTION_VALUE, OptionsChildsT } from '../utils';
 import { Option, EmptyOption, NewOption } from '../Option';
-import { WpSize } from '../../types';
 import bem from '../../../utils/bem';
 
 import './styles.css';
@@ -40,7 +39,7 @@ type Props = {
   expandAll: boolean;
   name: string;
   isHierarchical?: boolean;
-  wpSize: WpSize;
+  wpSize: 'xs' | 's' | 'm' | 'l';
 };
 const OptionsGroup: React.FC<
   {

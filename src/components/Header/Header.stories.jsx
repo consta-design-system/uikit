@@ -1,8 +1,8 @@
 import React from 'react';
 // import { withKnobs, text, select, boolean } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import { ReactComponent as IconRingM } from '../../icons/icon_ring_m.svg';
-import { ReactComponent as IconChatM } from '../../icons/icon_chat_m.svg';
+import IconChat from '../Icon/icons/Chat';
+import IconRing from '../Icon/icons/Ring';
 import Header, { Logo, SearchBar, Menu, Login, IconButton } from './index';
 
 storiesOf('Header', module)
@@ -47,7 +47,7 @@ storiesOf('Header', module)
         indent: 's',
         children: (
           <IconButton>
-            <IconRingM />
+            <IconRing size={'m'} view={'secondary'} />
           </IconButton>
         ),
       },
@@ -55,7 +55,7 @@ storiesOf('Header', module)
         indent: 's',
         children: (
           <IconButton>
-            <IconChatM />
+            <IconChat size={'m'} view={'secondary'} />
           </IconButton>
         ),
       },
@@ -116,7 +116,7 @@ storiesOf('Header', module)
         indent: 's',
         children: (
           <IconButton>
-            <IconRingM />
+            <IconRing size={'m'} view={'secondary'} />
           </IconButton>
         ),
       },
@@ -124,7 +124,7 @@ storiesOf('Header', module)
         indent: 's',
         children: (
           <IconButton>
-            <IconChatM />
+            <IconChat size={'m'} view={'secondary'} />
           </IconButton>
         ),
       },
@@ -185,7 +185,7 @@ storiesOf('Header', module)
         indent: 's',
         children: (
           <IconButton>
-            <IconRingM />
+            <IconRing size={'m'} view={'secondary'} />
           </IconButton>
         ),
       },
@@ -193,7 +193,7 @@ storiesOf('Header', module)
         indent: 's',
         children: (
           <IconButton>
-            <IconChatM />
+            <IconChat size={'m'} view={'secondary'} />
           </IconButton>
         ),
       },
@@ -247,7 +247,7 @@ storiesOf('Header', module)
         indent: 's',
         children: (
           <IconButton>
-            <IconRingM />
+            <IconRing size={'m'} view={'secondary'} />
           </IconButton>
         ),
       },
@@ -255,7 +255,7 @@ storiesOf('Header', module)
         indent: 's',
         children: (
           <IconButton>
-            <IconChatM />
+            <IconChat size={'m'} view={'secondary'} />
           </IconButton>
         ),
       },
@@ -300,7 +300,7 @@ storiesOf('Header', module)
         indent: 's',
         children: (
           <IconButton>
-            <IconRingM />
+            <IconRing size={'m'} view={'secondary'} />
           </IconButton>
         ),
       },
@@ -308,7 +308,7 @@ storiesOf('Header', module)
         indent: 's',
         children: (
           <IconButton>
-            <IconChatM />
+            <IconChat size={'m'} view={'secondary'} />
           </IconButton>
         ),
       },
@@ -393,7 +393,7 @@ storiesOf('Header', module)
         indent: 's',
         children: (
           <IconButton>
-            <IconRingM />
+            <IconRing size={'m'} view={'secondary'} />
           </IconButton>
         ),
       },
@@ -401,7 +401,7 @@ storiesOf('Header', module)
         indent: 's',
         children: (
           <IconButton>
-            <IconChatM />
+            <IconChat size={'m'} view={'secondary'} />
           </IconButton>
         ),
       },

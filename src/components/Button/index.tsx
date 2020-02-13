@@ -1,13 +1,12 @@
 import React, { FocusEventHandler } from 'react';
 import bem from '../../utils/bem';
 
-import './Button.css';
-import { WpSize } from '../types';
+import './styles.css';
 
 const b = bem('button');
 
 type CommonProps = {
-  wpSize: WpSize;
+  wpSize: 'xs' | 's' | 'm' | 'l';
   view: 'clear' | 'ghost' | 'primary' | 'secondary';
   width?: 'auto' | 'full';
   form?:

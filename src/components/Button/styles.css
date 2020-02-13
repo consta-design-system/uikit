@@ -1,28 +1,24 @@
 .button {
-  display: inline-block;
   position: relative;
   z-index: 1;
-  width: auto;
-  border: none;
-  appearance: none;
-  margin: initial;
-  box-sizing: border-box;
-  font-weight: normal;
-  text-align: center;
+  display: inline-block;
   max-width: 100%;
-  font-family: var(--font-primary);
-  text-decoration: none;
-  border-radius: var(--control-radius);
-  transition: background 0.15s ease, box-shadow 0.15s ease, color 0.15s ease, fill 0.15s ease;
-  cursor: pointer;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  background: transparent;
-  font-size: var(--button-font-size);
-  line-height: var(--button-height);
   height: var(--button-height);
   padding: 0 var(--button-space);
+  margin: initial;
+  box-sizing: border-box;
+  border: none;
+  border-radius: var(--control-radius);
+  background: transparent;
+  font-size: var(--button-font-size);
+  font-weight: normal;
+  font-family: var(--font-primary);
+  line-height: var(--button-height);
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: background 0.15s ease, box-shadow 0.15s ease, color 0.15s ease, fill 0.15s ease;
+  cursor: pointer;
 
   &::before {
     content: '';
@@ -41,12 +37,7 @@
   }
 
   &:focus {
-    /* outline-offset: 2px; */
-
-    /* outline: 2px solid var(--color-control-bg-border-focus); */
     outline: none;
-
-    /* box-shadow: 0 0 3px 2px var(--color-control-bg-border-focus); */
   }
 
   &_form_brick {
@@ -187,8 +178,8 @@
     pointer-events: none;
     color: var(--color-control-typo-disable);
     &::before {
-      background-color: var(--color-control-bg-disable);
       border-color: transparent;
+      background-color: var(--color-control-bg-disable);
     }
   }
 
@@ -197,11 +188,11 @@
   }
 
   &_icon-only {
-    width: var(--button-height);
-    padding: 0;
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    width: var(--button-height);
+    padding: 0;
   }
 
   &_with-icon_left,
