@@ -6,7 +6,8 @@
     "lodash": "^4.17.15",
     "react": "^16.8.6",
     "react-collapse": "^5.0.0",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "yarn": "^1.22.0"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.es.js",
