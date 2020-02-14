@@ -3,7 +3,7 @@ import React from 'react';
 import './styles.css';
 
 export type TabItemProps = {
-  content: string;
+  content: JSX.Element;
   isActive?: boolean;
   className?: string;
 };
