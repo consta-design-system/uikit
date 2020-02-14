@@ -10,7 +10,7 @@ export type TabsProps = {
   wpSize: 'm' | 's';
   className?: string;
   width?: 'auto' | 'full';
-  list: {
+  list?: {
     label: string;
     content: string;
   }[];
