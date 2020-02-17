@@ -76,6 +76,7 @@
 
   &__input {
     position: absolute;
+    -webkit-appearance: none;
     appearance: none;
 
     &:focus {
