@@ -9,7 +9,6 @@ deploy:
   skip_cleanup: true
   local_dir: build/storybook
   github_token: $GITHUB_TOKEN
-  local_dir: deploy
   on:
     branch: master
     node_js: "node"
