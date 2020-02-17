@@ -6,10 +6,9 @@ import './styles.css';
 const b = bem('tabs');
 
 export type TabsProps = {
-  style: 'border' | 'clear';
+  view: 'bordered' | 'clear';
   wpSize: 'm' | 's';
   className?: string;
-  width?: 'auto' | 'full';
   list: {
     label: string;
     content: JSX.Element;
@@ -17,7 +16,7 @@ export type TabsProps = {
 };
 
 const Tabs: React.FC<TabsProps> = props => {
-  const { style, list, wpSize, width, className } = props;
+  const { view, list, wpSize, className } = props;
 
   function updateLine(item: object) {
     console.log(item, 'item');
@@ -28,29 +27,28 @@ const Tabs: React.FC<TabsProps> = props => {
     // line.style.transform = `translateX(${getOffsetElement(button).left - getOffsetElement(this.$el).left - this.$refs.header.offsetLeft}px) translateX(${this.$refs.header.scrollLeft}px)`;
   }
 
-  function onClick(item: object, index: number) {
-    console.log(item, index);
+  function onClick(item: object) {
     updateLine(item);
   }
 
-  const ListLabel = list.map((item, index, isActive) => {
+  const ListLabel = list.map((item, isActive) => {
     return (
       <button
-        className={b(`button ${isActive ? 'tabs__button_active' : ''}`)}
-        onClick={() => onClick(item, index)}
-        key={index}
+        className={b(`button ${!isActive ? 'tabs__button_active' : ''}`)}
+        onClick={() => onClick(item)}
+        key={Math.random()}
       >
         {item.label}
       </button>
     );
   });
 
-  const Items = list.map((item, index, isActive) => {
+  const Items = list.map((item, isActive) => {
     return (
       <TabsItem
-        key={index}
+        key={Math.random()}
         content={item.content}
-        className={b(`item ${isActive ? 'tabs__item_active' : ''}`)}
+        className={b(`item ${!isActive ? 'tabs__item_active' : ''}`)}
       />
     );
   });
@@ -63,8 +61,7 @@ const Tabs: React.FC<TabsProps> = props => {
             'header',
             {
               size: wpSize,
-              style,
-              width,
+              view,
             },
             className,
           )}

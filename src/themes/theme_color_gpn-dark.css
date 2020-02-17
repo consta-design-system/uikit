@@ -12,7 +12,6 @@ $color-base-warning: #f38b00; /* Цвет предупреждения */
 $color-base-caution: #f2c94c; /* Цвет осторожности */
 $color-base-normal: #56b9f2; /* Цвет нейтральный */
 $color-base-critical: #33000f;
-$color-base-accent: #0081cc; /* Цвет акцента */
 
 /* stylelint-disable */
 .theme_color_gpn-dark {
@@ -64,7 +63,6 @@ $color-base-accent: #0081cc; /* Цвет акцента */
   --color-control-bg-border-default: color($color-base-phantom a(16%)); /* Цвет фона бордеров котрола */
   --color-control-bg-border-default-hover: color($color-base-phantom a(44%)); /* Цвет фона бордеров контрола по ховеру */
   --color-control-bg-border-focus: color($color-base-project l(+10%)); /* Цвет аутлайна контролов при фокусе */ /* TODO заменить на правило целиком */
-  --color-control-bg-line-tabs: color($color-base-accent); /* Цвет линии активного таба */
 
   /* Primary */
   --color-control-bg-primary: color($color-base-project l(+10%)); /* Цвет фона активного контрола */

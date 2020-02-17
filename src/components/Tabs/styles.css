@@ -12,12 +12,15 @@
     color: var(--color-typo-primary);
     opacity: 0.6;
     cursor: pointer;
-    margin-right: var(--space-m);
     transition: opacity 0.2s ease;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: var(--space-xs);
+    background-color: transparent;
+    margin-right: 0;
 
-    &:last-child {
-      width: 100%;
-      margin-right: 0;
+    &:not(:last-child) {
+      margin-right: var(--size-text-m);
     }
 
     &_active {
@@ -32,9 +35,7 @@
   &__header {
     position: relative;
     display: flex;
-    flex-direction: row;
     width: 100%;
-    padding-bottom: var(--space-xs);
     border-bottom: 1px solid transparent;
 
     &_size_m {
@@ -63,11 +64,11 @@
   &__line {
     width: 0;
     height: 2px;
-    background-color: var(--color-control-bg-line-tabs);
+    background-color: var(--color-control-bg-border-checked);
     position: absolute;
     bottom: 0;
     left: 0;
-    transition: width 0.3s ease, transform 0.3s ease;
+    transition: transform 0.3s ease;
   }
 
   &__item {
@@ -75,7 +76,7 @@
     visibility: hidden;
     opacity: 0;
     width: 100%;
-    transition: opacity 0.2s ease, visibility 0.2s ease;
+    transition: opacity 0.2s ease;
 
     &_active {
       display: block;

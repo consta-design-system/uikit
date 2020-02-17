@@ -27,6 +27,6 @@ const list = [
 
 storiesOf('Tabs', module).add('Табы', () => (
   <div>
-    <Tabs style="border" wpSize="m" list={list} />
+    <Tabs view="bordered" wpSize="m" list={list} />
   </div>
 ));
