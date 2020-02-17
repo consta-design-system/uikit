@@ -1,6 +1,6 @@
 {
   "name": "@gpn-design/uikit",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "dependencies": {
     "bem-cn": "^3.0.1",
     "lodash": "^4.17.15",
@@ -95,6 +95,7 @@
     "@typescript-eslint/eslint-plugin": "^1.11.0",
     "@typescript-eslint/parser": "^1.11.0",
     "@typescript-eslint/typescript-estree": "^1.11.0",
+    "autoprefixer": "^9.7.4",
     "babel-loader": "8.0.5",
     "concurrently": "^4.1.1",
     "enzyme": "^3.10.0",
