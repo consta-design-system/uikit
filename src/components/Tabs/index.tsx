@@ -33,7 +33,7 @@ class Tabs extends React.Component<TabsProps, TabProp> {
     };
   }
 
-  updateLine(tab: string) {
+  updateLine(tab: string | undefined) {
     const button = document.querySelector<HTMLElement>(`.tabs__button[data-name="${tab}"]`);
     const line = this.lineRef.current;
     const header = this.headerRef.current;
