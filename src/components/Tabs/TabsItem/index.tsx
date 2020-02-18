@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './styles.css';
 
 export type TabItemProps = {
-  activeTab: string;
+  activeTab: string | undefined;
   label: string;
   onClick: Function;
   className: string;

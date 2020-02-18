@@ -16,7 +16,11 @@ type TabsProps = {
   }[];
 };
 
-class Tabs extends React.Component<TabsProps> {
+type TabProp = {
+  activeTab?: string | undefined;
+};
+
+class Tabs extends React.Component<TabsProps, TabProp> {
   private lineRef = React.createRef<HTMLDivElement>();
   private buttonRef = React.createRef<HTMLDivElement>();
   private headerRef = React.createRef<HTMLDivElement>();
@@ -33,11 +37,6 @@ class Tabs extends React.Component<TabsProps> {
     const button = document.querySelector<HTMLElement>(`.tabs__button[data-name="${tab}"]`);
     const line = this.lineRef.current;
     const header = this.headerRef.current;
-
-    // console.log(this.buttonRef.current);
-    // console.log(document.querySelector<HTMLElement>(`.tabs__button[data-name="${tab}"]`));
-
-    // debugger;
 
     if (line !== null && button !== null && header !== null) {
       line.style.width = `${button.clientWidth}px`;
