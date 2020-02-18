@@ -1,15 +1,37 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import './styles.css';
 
 export type TabItemProps = {
-  content: JSX.Element;
-  isActive?: boolean;
-  className?: string;
+  activeTab: string;
+  label: string;
+  onClick: Function;
+  className: string;
+  isRef?: any;
 };
 
-const TabItem: React.FC<TabItemProps> = ({ content, className }) => {
-  return <div className={className}>{content}</div>;
-};
+class Tab extends Component<TabItemProps> {
+  onClick = () => {
+    const { label, onClick } = this.props;
+    onClick(label);
+  };
 
-export default TabItem;
+  render() {
+    let {
+      onClick,
+      props: { activeTab, label, className, isRef },
+    } = this;
+
+    if (activeTab === label) {
+      className += ' tabs__button_active';
+    }
+
+    return (
+      <span className={className} onClick={onClick} data-name={label} ref={isRef}>
+        {label}
+      </span>
+    );
+  }
+}
+
+export default Tab;

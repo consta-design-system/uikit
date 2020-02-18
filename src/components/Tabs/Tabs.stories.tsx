@@ -8,20 +8,20 @@ import Tabs from '../Tabs';
 
 const list = [
   {
-    label: 'Пункт_1',
-    content: <p>Test content</p>,
+    label: 'Пункт',
+    content: <p>Test content 1</p>,
   },
   {
-    label: 'Пункт_2',
-    content: <p>Test content</p>,
+    label: 'Пункт 2',
+    content: <p>Test content 2</p>,
   },
   {
-    label: 'Пункт_3',
-    content: <p>Test content</p>,
+    label: 'Пункт 2.2',
+    content: <p>Test content 3</p>,
   },
   {
-    label: 'Пункт_4',
-    content: <p>Test content</p>,
+    label: 'Пунктик 3',
+    content: <p>Test content 4</p>,
   },
 ];
 

@@ -1,11 +1,12 @@
 import React from 'react';
 import bem from '../../utils/bem';
-import TabsItem from './TabsItem/index';
+import Tab from './TabsItem/index';
+
 import './styles.css';
 
 const b = bem('tabs');
 
-export type TabsProps = {
+type TabsProps = {
   view: 'bordered' | 'clear';
   wpSize: 'm' | 's';
   className?: string;
@@ -15,64 +16,79 @@ export type TabsProps = {
   }[];
 };
 
-const Tabs: React.FC<TabsProps> = props => {
-  const { view, list, wpSize, className } = props;
+class Tabs extends React.Component<TabsProps> {
+  private lineRef = React.createRef<HTMLDivElement>();
+  private buttonRef = React.createRef<HTMLDivElement>();
+  private headerRef = React.createRef<HTMLDivElement>();
 
-  function updateLine(item: object) {
-    console.log(item, 'item');
-    // const line = document.querySelector('.tabs__line');
-    // const button = document.querySelector('tabs__button_active');
+  constructor(props) {
+    super(props);
 
-    // line.style.width = `${button.clientWidth}px`;
-    // line.style.transform = `translateX(${getOffsetElement(button).left - getOffsetElement(this.$el).left - this.$refs.header.offsetLeft}px) translateX(${this.$refs.header.scrollLeft}px)`;
+    this.state = {
+      activeTab: this.props.list[0].label,
+    };
   }
 
-  function onClick(item: object) {
-    updateLine(item);
+  updateLine(tab: string) {
+    const button = document.querySelector<HTMLElement>(`.tabs__button[data-name="${tab}"]`);
+    const line = this.lineRef.current;
+    const header = this.headerRef.current;
+
+    // console.log(this.buttonRef.current);
+    // console.log(document.querySelector<HTMLElement>(`.tabs__button[data-name="${tab}"]`));
+
+    // debugger;
+
+    if (line !== null && button !== null && header !== null) {
+      line.style.width = `${button.clientWidth}px`;
+      line.style.transform = `translateX(${button.offsetLeft - line.offsetLeft}px)`;
+    }
   }
 
-  const ListLabel = list.map((item, isActive) => {
-    return (
-      <button
-        className={b(`button ${!isActive ? 'tabs__button_active' : ''}`)}
-        onClick={() => onClick(item)}
-        key={Math.random()}
-      >
-        {item.label}
-      </button>
-    );
-  });
+  onClickTabItem = tab => {
+    this.setState({ activeTab: tab });
+    this.updateLine(tab);
+  };
 
-  const Items = list.map((item, isActive) => {
-    return (
-      <TabsItem
-        key={Math.random()}
-        content={item.content}
-        className={b(`item ${!isActive ? 'tabs__item_active' : ''}`)}
-      />
-    );
-  });
+  render() {
+    const {
+      onClickTabItem,
+      props: { list, view, wpSize },
+      state: { activeTab },
+    } = this;
 
-  return (
-    <div className={b('')}>
-      <div className={b('wrapper')}>
-        <div
-          className={b(
-            'header',
-            {
-              size: wpSize,
-              view,
-            },
-            className,
-          )}
-        >
-          {ListLabel}
-          <div className={b('line')} />
+    return (
+      <div className={b('')}>
+        <div className={b('header', { view, wpSize })} ref={this.headerRef}>
+          {list.map(child => {
+            return (
+              <Tab
+                activeTab={activeTab}
+                key={child.label}
+                label={child.label}
+                onClick={onClickTabItem}
+                className={b('button')}
+                isRef={this.buttonRef}
+              />
+            );
+          })}
+          <div className={b('line')} ref={this.lineRef} />
         </div>
-        <div className={b('body')}>{Items}</div>
+        <div className={b('body')}>
+          {list.map(child => {
+            if (child.label !== activeTab) return undefined;
+            return <div key={child.label}>{child.content}</div>;
+          })}
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.updateLine(this.state.activeTab);
+    }, 500);
+  }
+}
 
 export default Tabs;
