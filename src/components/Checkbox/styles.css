@@ -5,7 +5,7 @@
   font-family: var(--font-sans);
   cursor: pointer;
 
-  &__box {
+  &__input {
     position: relative;
     flex-shrink: 0;
     width: var(--box-size);
@@ -14,6 +14,7 @@
     border: var(--control-border-width) solid var(--color-control-bg-border-default);
     border-radius: var(--control-radius);
     background-color: transparent;
+    appearance: none;
     transition: border-color 0.15s, background-color 0.15s;
 
     &::before {
@@ -31,6 +32,20 @@
       transform: rotate(-50deg) scale(0, 1);
       transition: opacity 0.15s, transform 0.15s, background-color 0.08s;
     }
+
+    &:checked {
+      border-color: var(--color-control-bg-border-checked);
+      background-color: var(--color-control-bg-checked);
+
+      &::before {
+        opacity: 1;
+        transform: rotate(-50deg) scale(1, 1);
+      }
+    }
+
+    &:focus {
+      box-shadow: 0 0 2px 1px var(--color-control-bg-border-focus);
+    }
   }
 
   &__text {
@@ -44,7 +59,7 @@
     --box-size: var(--control-box-size-m);
     --offset: var(--space-xs);
 
-    .checkbox__box {
+    .checkbox__input {
       &::before {
         top: 6px;
         left: 1px;
@@ -57,7 +72,7 @@
     --box-size: var(--control-box-size-l);
     --offset: var(--space-s);
 
-    .checkbox__box {
+    .checkbox__input {
       &::before {
         top: 8px;
         left: 2px;
@@ -65,34 +80,10 @@
     }
   }
 
-  &__input {
-    position: absolute;
-    appearance: none;
-
-    &:checked {
-      + .checkbox__box {
-        border-color: var(--color-control-bg-border-checked);
-        background-color: var(--color-control-bg-checked);
-
-        &::before {
-          opacity: 1;
-          transform: rotate(-50deg) scale(1, 1);
-        }
-      }
-    }
-
-    &:focus {
-      + .checkbox__box {
-        box-shadow: 0 0 2px 1px var(--color-control-bg-border-focus);
-      }
-    }
-  }
-
   &:hover {
-    .checkbox__box {
-      border-color: var(--color-control-bg-border-default-hover);
-    }
-    .checkbox__input:checked + .checkbox__box {
+    border-color: var(--color-control-bg-border-default-hover);
+
+    .checkbox__input:checked {
       border-color: var(--color-control-bg-border-checked-hover);
       background-color: var(--color-control-bg-checked-hover);
     }
@@ -101,8 +92,8 @@
   /* stylelint-disable  no-descending-specificity  */
   &_intermediate,
   &_intermediate:hover {
-    .checkbox__box,
-    .checkbox__input:checked + .checkbox__box {
+    .checkbox__input,
+    .checkbox__input:checked {
       border-color: var(--color-control-bg-border-checked);
       background-color: var(--color-control-bg-checked);
 
@@ -117,7 +108,7 @@
 
   &_disabled {
     pointer-events: none;
-    .checkbox__input:disabled + .checkbox__box {
+    .checkbox__input:disabled {
       border-color: transparent;
       background-color: var(--color-control-bg-disable);
 

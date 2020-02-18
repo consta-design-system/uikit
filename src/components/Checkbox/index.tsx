@@ -35,7 +35,6 @@ const Checkbox: React.FC<CheckboxProps> = ({
         checked={value}
         disabled={disabled}
       />
-      <div className={b('box')} />
       <span className={b('text')}>{children}</span>
     </label>
   );

@@ -5,13 +5,14 @@
   font-family: var(--font-sans);
   cursor: pointer;
 
-  &__box {
+  &__input {
     position: relative;
     width: var(--box-size);
     height: var(--box-size);
     box-sizing: border-box;
     border-radius: 50%;
     border: var(--control-border-width) solid var(--color-control-bg-border-default);
+    appearance: none;
     transition: border-color 0.15s, background-color 0.15s;
 
     &::before {
@@ -28,6 +29,31 @@
       transform: scale(0, 0);
       transition: opacity 0.15s, transform 0.15s;
     }
+
+    &:checked {
+      border-color: var(--color-control-bg-border-checked);
+
+      &::before {
+        opacity: 1;
+        transform: scale(0.4, 0.4);
+      }
+    }
+
+    &:focus {
+      + .radio__box {
+        box-shadow: 0 0 2px 1px var(--color-control-bg-border-focus);
+      }
+    }
+
+    &:disabled {
+      border-color: transparent;
+      background-color: var(--color-control-bg-disable);
+      color: var(--color-control-typo-disable);
+
+      &::before {
+        background-color: var(--color-control-typo-disable);
+      }
+    }
   }
 
   &__text {
@@ -37,9 +63,7 @@
   }
 
   &:hover {
-    .radio__box {
-      border-color: var(--color-control-bg-border-default-hover);
-    }
+    border-color: var(--color-control-bg-border-default-hover);
   }
 
   &_size_m {
@@ -54,40 +78,7 @@
     --offset: var(--space-s);
   }
 
-  &__input {
-    position: absolute;
-    appearance: none;
-
-    &:checked {
-      + .radio__box {
-        border-color: var(--color-control-bg-border-checked);
-
-        &::before {
-          opacity: 1;
-          transform: scale(0.4, 0.4);
-        }
-      }
-    }
-
-    &:focus {
-      + .radio__box {
-        box-shadow: 0 0 2px 1px var(--color-control-bg-border-focus);
-      }
-    }
-  }
-
   &_disabled {
     pointer-events: none;
-    .radio__input:disabled + .radio__box {
-      border-color: transparent;
-      background-color: var(--color-control-bg-disable);
-
-      &::before {
-        background-color: var(--color-control-typo-disable);
-      }
-    }
-    .radio__input:disabled ~ .radio__text {
-      color: var(--color-control-typo-disable);
-    }
   }
 }

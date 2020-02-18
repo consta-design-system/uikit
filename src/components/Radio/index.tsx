@@ -33,7 +33,6 @@ const Radio: React.FC<RadioProps> = ({
         checked={value}
         disabled={disabled}
       />
-      <div className={b('box')} />
       <span className={b('text')}>{children}</span>
     </label>
   );

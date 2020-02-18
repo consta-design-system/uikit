@@ -4,22 +4,38 @@
   box-shadow: inset 0 0 0 2px var(--color-control-bg-border-default);
   font-size: 0;
 
-  &__button {
+  &__input {
     position: relative;
     z-index: 0;
+    max-width: 100%;
+    margin-top: 0;
+    margin-left: 0;
+    margin-bottom: 0;
     box-sizing: border-box;
     overflow: visible;
-    color: var(--color-control-typo-default);
     transition: color 0.1s, box-shadow 0.1s;
-    pointer-events: none;
+    appearance: none;
+    cursor: pointer;
 
     &::before {
-      background-color: rgba(0, 0, 0, 0);
-      transition: background-color 0.15s, transform 0.15s;
-      transform: scale(0.8);
+      content: attr(attr-label);
+      position: relative;
+      display: block;
+      height: var(--button-height);
+      padding: 0 var(--button-space);
+      border-radius: var(--control-radius);
+      color: var(--color-control-typo-default);
+      font-size: var(--button-font-size);
+      font-weight: normal;
+      font-family: var(--font-primary);
+      line-height: var(--button-height);
+      text-decoration: none;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      transition: background-color 0.15s ease, color 0.15s ease;
     }
 
-    &::after {
+    &:not(:first-child)::after {
       content: '';
       position: absolute;
       top: 50%;
@@ -28,85 +44,84 @@
       height: 65%;
       background-color: var(--color-control-bg-border-default);
       transform: translateY(-50%);
+      transition: background-color 0.15s ease;
     }
-
-    &_checked {
-      color: var(--color-control-typo-checked);
-
-      &::before {
-        background-color: var(--color-control-bg-checked);
-        transform: scale(1);
-
-        /* right: -2px; TODO Подумать как убрать границы между айтемами в состоянии checked */
-      }
-    }
-  }
-
-  &_form_round {
-    border-radius: 999rem;
-
-    .choice-group__button::after {
-      left: calc(var(--control-border-width) * -2);
-      width: calc(var(--control-border-width) * 3);
-      height: calc(var(--control-border-width) * 3);
-      border-radius: 99rem;
-    }
-  }
-
-  &_form_brick {
-    border-radius: 0;
-  }
-
-  &_disabled {
-    pointer-events: none;
-    .choice-group__button {
-      color: var(--color-control-typo-disable);
-
-      &::after {
-        color: var(--color-control-bg-border-disable);
-        opacity: 0;
-      }
-
-      &_checked::before {
-        border-color: transparent;
-        background-color: var(--color-control-bg-disable);
-      }
-    }
-  }
-
-  &__input {
-    position: absolute;
-    appearance: none;
-
-    &:focus {
-      outline: none;
-
-      & + .choice-group__button {
-        box-shadow: 0 0 3px 2px var(--color-control-bg-border-focus);
-        outline: none;
-        transition: color 0.1s, box-shadow 0.1s 0.1s;
-      }
-    }
-  }
-
-  &__item {
-    display: inline-block;
-    border-radius: var(--control-radius);
-    cursor: pointer;
 
     &:not(:last-child) {
       margin-right: 2px;
     }
-    &:first-child {
-      .choice-group__button::after {
-        content: none;
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:checked {
+      &::before {
+        background-color: var(--color-control-bg-primary);
+        color: var(--color-control-typo-checked);
+        transform: scale(1);
+      }
+      &:hover::before {
+        background-color: var(--color-control-bg-primary-hover);
+      }
+
+      &::after {
+        background-color: transparent;
+      }
+      & + .choice-group__input::after {
+        background-color: transparent;
       }
     }
 
-    &:hover {
-      .choice-group__button:not(.choice-group__button_checked) {
-        color: var(--color-control-typo-secondary-hover);
+    &:hover:not(:checked)::before {
+      color: var(--color-control-typo-secondary-hover);
+    }
+  }
+
+  &_form {
+    &_round {
+      --control-radius: 999px;
+
+      /* stylelint-disable  no-descending-specificity  */
+      .choice-group__input::after {
+        left: calc(var(--control-border-width) * -2);
+        width: calc(var(--control-border-width) * 3);
+        height: calc(var(--control-border-width) * 3);
+        border-radius: 99rem;
       }
+    }
+
+    &_brick {
+      --control-radius: 0;
+    }
+  }
+
+  &_size {
+    &_xs {
+      --button-height: var(--control-height-xs);
+      --button-font-size: var(--control-text-size-xs);
+      --button-space: var(--control-space-xs);
+    }
+
+    &_s {
+      --button-height: var(--control-height-s);
+      --button-font-size: var(--control-text-size-s);
+      --button-space: var(--control-space-s);
+    }
+
+    &_m {
+      --button-height: var(--control-height-m);
+      --button-font-size: var(--control-text-size-m);
+      --button-space: var(--control-space-m);
+    }
+
+    &_l {
+      --button-height: var(--control-height-l);
+      --button-font-size: var(--control-text-size-l);
+      --button-space: var(--control-space-l);
     }
   }
 }

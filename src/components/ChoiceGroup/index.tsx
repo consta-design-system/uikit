@@ -1,87 +1,66 @@
-import React, { ChangeEvent, FocusEventHandler } from 'react';
+import React from 'react';
 import bem from '../../utils/bem';
 
 import './styles.css';
-import Button from '../Button';
 
 const b = bem('choice-group');
 
-export type ChoiceT<T> = {
-  value: T;
+type CommonProps = {
+  items: ItemProps[];
+  wpSize: 'xs' | 's' | 'm' | 'l';
+  form?: 'default' | 'brick' | 'round';
+  groupName: string;
+  isMultiple?: boolean;
+  disabled?: boolean;
+  className?: string | '';
+};
+
+export type ItemProps = {
+  value: string | number;
   label: string;
 };
 
-type SingleValueSpecificProps<T> = {
-  isMultiple: false;
-  value?: T | null;
-  onChange?: (value: T | null) => void;
-};
-type MultiValueSpecificProps<T> = {
-  isMultiple: true;
-  value: T[];
-  onChange?: (value: T[]) => void;
-};
-export type ChoiceGroupProps<T> = {
-  items: ChoiceT<T>[];
-  wpSize: 'xs' | 's' | 'm' | 'l';
-  form?: 'default' | 'brick' | 'round';
-  className?: string;
-  disabled?: boolean;
-  onBlur?: FocusEventHandler<HTMLElement>;
-} & (SingleValueSpecificProps<T> | MultiValueSpecificProps<T>);
+const ChoiceGroup: React.FC<CommonProps> = props => {
+  const { items, wpSize, form, isMultiple, disabled, groupName, className } = props;
 
-function ChoiceGroup<T>(props: ChoiceGroupProps<T>) {
-  const { items, wpSize, form, isMultiple, disabled, className, onBlur } = props;
-
-  const handleChange = (itemValue: T) => (e: ChangeEvent<HTMLInputElement>) => {
-    const checked = e.target.checked;
-
-    if (props.isMultiple) {
-      if (checked && !props.value.includes(itemValue)) {
-        props.onChange && props.onChange([...props.value, itemValue]);
-      }
-      if (!checked && props.value.includes(itemValue)) {
-        props.onChange && props.onChange(props.value.filter(v => v !== itemValue));
-      }
-      return;
-    }
-    if (props.onChange) {
-      checked ? props.onChange(itemValue) : props.onChange(null);
-    }
-  };
-
-  const selectedValues = props.isMultiple ? props.value : [props.value];
-
-  return (
-    <div className={b({ multiple: isMultiple, disabled, form }, className || '')}>
-      {items.map((item, index) => {
-        const checked = selectedValues.includes(item.value);
-        return (
-          <label tabIndex={-1} className={b('item')} key={`choice-${index}`}>
+  if (isMultiple)
+    return (
+      <div className={b({ disabled, form, size: wpSize }, className)}>
+        {items.map((item, index) => {
+          return (
             <input
               type="checkbox"
               className={b('input')}
-              checked={checked}
-              onChange={handleChange(item.value)}
-              onBlur={onBlur}
               disabled={disabled}
+              key={`choice-${index}`}
+              value={item.value}
+              attr-label={item.label}
+              name={groupName}
             />
-            <Button
-              type="button"
-              tabIndex={-1}
-              className={b('button', { checked })}
-              view="primary"
-              wpSize={wpSize}
-              form={form}
-              onBlur={onBlur}
-            >
-              {item.label}
-            </Button>
-          </label>
-        );
-      })}
-    </div>
+          );
+        })}
+      </div>
+    );
+
+  return (
+    <React.Fragment>
+      <div className={b({ disabled, form, size: wpSize }, className)}>
+        {items.map((item, index) => {
+          return (
+            <input
+              type="radio"
+              className={b('input')}
+              disabled={disabled}
+              key={`choice-${index}`}
+              value={item.value}
+              attr-label={item.label}
+              name={groupName}
+            />
+          );
+        })}
+      </div>
+    </React.Fragment>
   );
-}
+};
 
 export default ChoiceGroup;
