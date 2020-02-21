@@ -5,10 +5,9 @@
   &__button {
     border: none;
     font-family: var(--font-primary);
-    color: var(--color-typo-primary);
-    opacity: 0.6;
+    color: var(--color-typo-secondary);
     cursor: pointer;
-    transition: opacity 0.2s ease;
+    transition: color 0.15s;
     padding-left: 0;
     padding-right: 0;
     padding-bottom: var(--space-xs);
@@ -19,12 +18,9 @@
       margin-right: var(--size-text-m);
     }
 
-    &_active {
-      opacity: 1;
-    }
-
+    &_active,
     &:hover {
-      opacity: 1;
+      color: var(--color-typo-primary);
     }
   }
 
@@ -66,20 +62,10 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    transition: width 0.2s ease, transform 0.3s ease;
+    transition: width 0.15s, transform 0.25s;
   }
 
-  &__item {
-    display: none;
-    visibility: hidden;
-    opacity: 0;
-    width: 100%;
-    transition: opacity 0.2s ease, visibility 0.2s ease;
-
-    &_active {
-      display: block;
-      opacity: 1;
-      visibility: visible;
-    }
+  &__body {
+    color: var(--color-typo-primary);
   }
 }
