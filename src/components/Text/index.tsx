@@ -48,7 +48,7 @@ const Text: React.FC<CommonProps> = props => {
     width,
     className,
     children,
-    ...compProps
+    ...rest
   } = props;
 
   return React.createElement(
@@ -72,7 +72,7 @@ const Text: React.FC<CommonProps> = props => {
         },
         className,
       ),
-      ...compProps,
+      ...rest,
     },
     children,
   );
