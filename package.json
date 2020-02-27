@@ -30,7 +30,8 @@
     "format": "prettier --write '**/*.{json,md}'",
     "svgo": "svgo -f src/icons --config=src/config/svgo.config.json",
     "lint": "concurrently --raw 'yarn run lint:js' 'yarn run lint:css' 'yarn run format'",
-    "prepush": "yarn run tsc-dry-run"
+    "prepush": "yarn run tsc-dry-run",
+    "prepublishOnly": "yarn --frozen-lockfile && yarn build"
   },
   "browserslist": [
     "last 2 version",
