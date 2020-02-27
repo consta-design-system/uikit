@@ -7,10 +7,10 @@ $color-base-path: #0096eb; /* Ссылочный цвет, от которого
 $color-base-system: #4b5963; /* Цвет системнный */
 
 $color-base-success: #22C38E; /* Цвет успеха */
-$color-base-alert: #eb5757; /* Цвет ошибки */
+$color-base-alert: #f54d4d; /* Цвет ошибки */
 $color-base-warning: #f38b00; /* Цвет предупреждения */
 $color-base-caution: #f2c94c; /* Цвет осторожности */
-$color-base-normal: #56b9f2; /* Цвет нейтральный */
+$color-base-normal: #0aa5ff; /* Цвет нейтральный */
 $color-base-critical: #33000f;
 
 /* stylelint-disable */
@@ -46,7 +46,7 @@ $color-base-critical: #33000f;
   --color-typo-caution: color($color-base-caution s(+7) l(-3)); /* Цвет текста осторожности */
   --color-typo-warning: color($color-base-warning s(+7) l(-3)); /* Цвет текста предупреждения */
   --color-typo-alert: color($color-base-alert s(+3) l(-3)); /* Цвет текста ошибки */
-  --color-typo-critical: color($color-base-critical a(100%)); /* Цвет фона системнный */
+  --color-typo-critical: color($color-base-critical l(+9%)); /* Цвет фона системнный */
   --color-typo-link: color($color-base-path a(100%)); /* Цвет основной ссылки */
   --color-typo-link-minor: color($color-base-path s(-50%) l(+20%)); /* Цвет второстепенной ссылки */
   --color-typo-link-hover: color($color-base-path l(-7%)); /* Цвет ховера ссылки */
