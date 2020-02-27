@@ -1,0 +1,140 @@
+.badge1 {
+  position: relative;
+  display: inline-block;
+  height: var(--badge-size);
+  box-sizing: border-box;
+  border: 1px solid var(--badge-border-color);
+  background: var(--badge-bg-color);
+  color: var(--badge-text-color);
+  font-size: var(--badge-text-size);
+  line-height: calc(var(--badge-size) - 2px); /* нивелируем толлщину бордера */
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  &_size {
+    &_s {
+      --badge-size: 20px;
+      --badge-text-size: var(--size-text-2xs);
+
+      padding: 0 var(--space-2xs);
+    }
+
+    &_m {
+      --badge-size: 24px;
+      --badge-text-size: var(--size-text-2xs);
+
+      padding: 0 var(--space-xs);
+    }
+  }
+
+  &_form {
+    &_default {
+      border-radius: var(--control-radius);
+    }
+
+    &_round {
+      border-radius: 99em;
+
+      &.badge1_size_s {
+        padding: 0 var(--space-xs);
+      }
+      &.badge1_size_m {
+        padding: 0 var(--space-s);
+      }
+    }
+  }
+
+  &_view {
+    &_filled {
+      --badge-text-color: var(--color-typo-primary);
+      --badge-border-color: transparent;
+      &.badge1_status {
+        &_success {
+          --badge-bg-color: var(--color-bg-success);
+        }
+        &_error {
+          --badge-bg-color: var(--color-bg-alert);
+        }
+        &_warning {
+          --badge-bg-color: var(--color-bg-warning);
+        }
+        &_normal {
+          --badge-bg-color: var(--color-bg-normal);
+        }
+        &_system {
+          --badge-bg-color: var(--color-bg-system);
+          --badge-text-color: var(--color-typo-secondary);
+        }
+      }
+    }
+
+    &_stroked {
+      --badge-bg-color: transparent;
+      &.badge1_status {
+        &_success {
+          --badge-text-color: var(--color-typo-success);
+          --badge-border-color: var(--color-bg-success);
+        }
+        &_error {
+          --badge-text-color: var(--color-typo-alert);
+          --badge-border-color: var(--color-bg-alert);
+        }
+        &_warning {
+          --badge-text-color: var(--color-typo-warning);
+          --badge-border-color: var(--color-bg-warning);
+        }
+        &_normal {
+          --badge-text-color: var(--color-typo-normal);
+          --badge-border-color: var(--color-bg-normal);
+        }
+        &_system {
+          --badge-text-color: var(--color-typo-system);
+          --badge-border-color: var(--color-bg-system);
+        }
+      }
+    }
+  }
+
+  &_minified {
+    --badge-text-size: 0;
+
+    border: none;
+    overflow: hidden;
+    background: transparent;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--badge-bg-color);
+      border-radius: 50%;
+    }
+    &.badge1_size_s {
+      width: 12px;
+      height: 12px;
+      padding: 0;
+
+      &::before {
+        width: 10px;
+        height: 10px;
+      }
+    }
+    &.badge1_size_m {
+      width: 16px;
+      height: 16px;
+      padding: 0;
+
+      &::before {
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
+
+  &__icon {
+    font-size: 0;
+    line-height: 1em;
+  }
+}

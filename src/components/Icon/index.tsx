@@ -13,7 +13,7 @@ const Icon: React.FC<CommonProps> = props => {
   const { view, size, children, className } = props;
   let width;
 
-  if (size === 'xs') width = 11;
+  if (size === 'xs') width = 12;
   else if (size === 's') width = 16;
   else if (size === 'm') width = 24;
 
