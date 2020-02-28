@@ -40,9 +40,7 @@ const Badge: React.FC<BadgeProps> = props => {
         className={b(
           {
             size: wpSize,
-            view: 'filled',
             status,
-            form: 'round',
             minified: isMinified,
           },
           _className,
