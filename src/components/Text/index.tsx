@@ -1,5 +1,6 @@
 import React from 'react';
 import bem from '../../utils/bem';
+import './styles.css';
 
 const b = bem('text');
 

@@ -17,11 +17,11 @@
     transition: color 0.2s;
 
     &:hover {
-      color: var(--color-link-hover);
+      color: var(--color-typo-link-hover);
     }
 
     &_active {
-      color: var(--color-link);
+      color: var(--color-typo-link);
       pointer-events: none;
 
       &::before {
@@ -32,7 +32,7 @@
         width: 100%;
         height: 4px;
         max-width: 40px;
-        background-color: var(--color-link);
+        background-color: var(--color-typo-link);
         border-radius: 4px 4px 0 0;
         transform: translateX(-50%);
       }

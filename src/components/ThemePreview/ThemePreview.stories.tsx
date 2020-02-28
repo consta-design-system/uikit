@@ -139,21 +139,21 @@ storiesOf('Themes', module).add('Цвета', () => (
             />
 
             <ColorPreview
-              color={'--color-link'}
+              color={'--color-typo-link'}
               description={
                 'Полупрозрачный цвет для дополнительного выделения или разделения блоков или секций. Обычно используется поверх основных фонов (default или secondary)'
               }
             />
 
             <ColorPreview
-              color={'--color-link-hover'}
+              color={'--color-typo-link-hover'}
               description={
                 'Цвет для едва заметного разделения, например чтобы разделить строки в таблицах'
               }
             />
 
             <ColorPreview
-              color={'--color-link-minor'}
+              color={'--color-typo-link-minor'}
               description={'Цвет большинства бордеров и тонких разделителей'}
             />
 

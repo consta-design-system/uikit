@@ -47,9 +47,9 @@ $color-base-critical: #33000f;
   --color-typo-warning: color($color-base-warning s(+7) l(-3)); /* Цвет текста предупреждения */
   --color-typo-alert: color($color-base-alert s(+3) l(-3)); /* Цвет текста ошибки */
   --color-typo-critical: color($color-base-critical a(100%)); /* Цвет фона системнный */
-  --color-link: color($color-base-path a(100%)); /* Цвет основной ссылки */
-  --color-link-minor: color($color-base-path s(-50%) l(+20%)); /* Цвет второстепенной ссылки */
-  --color-link-hover: color($color-base-path l(-7%)); /* Цвет ховера ссылки */
+  --color-typo-link: color($color-base-path a(100%)); /* Цвет основной ссылки */
+  --color-typo-link-minor: color($color-base-path s(-50%) l(+20%)); /* Цвет второстепенной ссылки */
+  --color-typo-link-hover: color($color-base-path l(-7%)); /* Цвет ховера ссылки */
   --color-nums-shadow: 0, 0, 0;
 
   /* /////////////////////////////
