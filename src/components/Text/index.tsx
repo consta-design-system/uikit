@@ -1,5 +1,6 @@
 import React from 'react';
 import bem from '../../utils/bem';
+import './styles.css';
 
 const b = bem('text');
 
@@ -10,7 +11,7 @@ type CommonProps = {
   display?: 'block' | 'inline-block' | 'inline';
   font?: 'mono' | 'sans' | 'serif';
   lineHeight?: '2xs' | 'xs' | 's' | 'm' | 'l';
-  size?: '2xs' | 'xs' | 'm' | 'l' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl';
+  size?: '2xs' | 'xs' | 's' | 'm' | 'l' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl';
   spacing?: 'xs' | 's' | 'm' | 'l';
   fontStyle?: 'italic';
   transform?: 'uppercase';
@@ -20,7 +21,7 @@ type CommonProps = {
     | 'brand'
     | 'ghost'
     | 'link'
-    | 'link'
+    | 'link-minor'
     | 'primary'
     | 'secondary'
     | 'success'
