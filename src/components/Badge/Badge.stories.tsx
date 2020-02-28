@@ -9,7 +9,7 @@ const defaultKnobs = () => ({
   view: select('View', ['filled', 'stroked'], 'filled'),
   status: select('Status', ['success', 'error', 'warning', 'normal', 'system'], 'success'),
   form: select('Form', ['default', 'round'], 'default'),
-  minified: boolean('Minified', false),
+  isMinified: boolean('Minified', false),
 });
 
 storiesOf('Badge', module)

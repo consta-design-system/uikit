@@ -31,6 +31,7 @@ export { default as Text } from './Text';
 export { default as Informer } from './Informer';
 export { default as Popover } from './Popover';
 export { default as User } from './User';
+export { default as Badge } from './Badge';
 
 // Куски интерфейсов
 export { default as Header } from './Header';

@@ -11,9 +11,9 @@ type BadgeProps = {
   status: 'success' | 'error' | 'warning' | 'normal' | 'system';
   form?: 'default' | 'round';
   withIcon?: boolean;
-  minified?: boolean;
+  isMinified?: boolean;
   icon?: React.ReactNode;
-  children?: React.ReactNode;
+  children?: string;
   className?: string;
 };
 
@@ -27,14 +27,14 @@ const Badge: React.FC<BadgeProps> = props => {
     icon,
     children,
     className,
-    minified,
+    isMinified,
   } = props;
   let _className = className;
 
   if (status != 'system' && view == 'filled') _className += ' theme theme_color_gpn-dark';
   else _className += ' theme theme_color_gpn-default';
 
-  if (minified) {
+  if (isMinified) {
     return (
       <div
         className={b(
@@ -43,15 +43,14 @@ const Badge: React.FC<BadgeProps> = props => {
             view: 'filled',
             status,
             form: 'round',
-            'with-icon': false,
-            minified,
+            minified: isMinified,
           },
           _className,
         )}
-        title={`${children}`}
+        title={children}
       ></div>
     );
-  } else if (!minified && withIcon) {
+  } else if (!isMinified && withIcon) {
     return (
       <div
         className={b(
@@ -61,7 +60,6 @@ const Badge: React.FC<BadgeProps> = props => {
             status,
             form,
             'with-icon': withIcon,
-            minified: false,
           },
           _className,
         )}
@@ -85,7 +83,6 @@ const Badge: React.FC<BadgeProps> = props => {
           status,
           form,
           'with-icon': withIcon,
-          minified: false,
         },
         _className,
       )}
