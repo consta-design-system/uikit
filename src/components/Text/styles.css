@@ -1,0 +1,12 @@
+.text {
+  &_view_link {
+    color: var(--color-typo-link);
+  }
+  &_view_link-minor {
+    color: var(--color-typo-link-minor);
+  }
+  &_view_link:hover,
+  &_view_link-minor:hover {
+    color: var(--color-typo-link-hover);
+  }
+}
