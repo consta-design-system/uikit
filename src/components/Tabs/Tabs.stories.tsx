@@ -1,4 +1,5 @@
 import React from 'react';
+import { withKnobs, select } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 
 import '../Common/styles.css';
@@ -25,8 +26,15 @@ const list = [
   },
 ];
 
-storiesOf('Tabs', module).add('Табы', () => (
-  <div>
-    <Tabs view="bordered" wpSize="m" list={list} />
-  </div>
-));
+const defaultKnobs = () => ({
+  wpSize: select('Size', ['s', 'm'], 'm'),
+  view: select('View', ['bordered', 'clear'], 'bordered'),
+});
+
+storiesOf('Tabs', module)
+  .addDecorator(withKnobs)
+  .add('Табы', () => (
+    <div>
+      <Tabs list={list} {...defaultKnobs()} />
+    </div>
+  ));

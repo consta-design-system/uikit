@@ -24,6 +24,7 @@ class Tabs extends React.Component<TabsProps, TabProp> {
   private lineRef = React.createRef<HTMLDivElement>();
   private buttonRef = React.createRef<HTMLDivElement>();
   private headerRef = React.createRef<HTMLDivElement>();
+  private rootRef = React.createRef<HTMLDivElement>();
 
   constructor(props) {
     super(props);
@@ -34,13 +35,19 @@ class Tabs extends React.Component<TabsProps, TabProp> {
   }
 
   updateLine(tab: string | undefined) {
-    const button = document.querySelector<HTMLElement>(`.tabs__button[data-name="${tab}"]`);
+    if (this.rootRef.current === null) return;
+
+    const button = this.rootRef.current.querySelector<HTMLElement>(
+      `.tabs__button[data-name="${tab}"]`,
+    );
+
     const line = this.lineRef.current;
     const header = this.headerRef.current;
 
     if (line !== null && button !== null && header !== null) {
-      line.style.width = `${button.clientWidth}px`;
-      line.style.transform = `translateX(${button.offsetLeft - line.offsetLeft}px)`;
+      const scaleX = button.clientWidth / header.clientWidth;
+      line.style.transform = `translateX(${button.offsetLeft -
+        line.offsetLeft}px) scaleX(${scaleX})`;
     }
   }
 
@@ -57,7 +64,7 @@ class Tabs extends React.Component<TabsProps, TabProp> {
     } = this;
 
     return (
-      <div className={b('')}>
+      <div className={b('')} ref={this.rootRef}>
         <div className={b('header', { view, wpSize })} ref={this.headerRef}>
           {list.map(child => {
             return (
