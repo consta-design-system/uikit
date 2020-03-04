@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import bem from '../../utils/bem';
-import Tab from './TabsItem/index';
 
 import './styles.css';
 
@@ -9,92 +8,109 @@ const b = bem('tabs');
 type TabsProps = {
   view: 'bordered' | 'clear';
   wpSize: 'm' | 's';
+  activeCode: string;
   className?: string;
   list: {
     label: string;
-    content: JSX.Element;
+    code: string;
   }[];
+  onChange: (code: string) => void;
 };
 
-type TabProp = {
-  activeTab?: string | undefined;
-};
+const Tabs: React.FC<TabsProps> = ({ activeCode, list, view, wpSize, onChange }) => {
+  const refInner = useRef<HTMLDivElement>(null);
+  const refLine = useRef<HTMLDivElement>(null);
+  const refRoot = useRef<HTMLDivElement>(null);
 
-class Tabs extends React.Component<TabsProps, TabProp> {
-  private lineRef = React.createRef<HTMLDivElement>();
-  private buttonRef = React.createRef<HTMLDivElement>();
-  private headerRef = React.createRef<HTMLDivElement>();
-  private rootRef = React.createRef<HTMLDivElement>();
+  const updateLine = () => {
+    const lineElement = refLine.current;
+    const innerElement = refInner.current;
 
-  constructor(props) {
-    super(props);
+    if (lineElement === null) return;
+    if (innerElement === null) return;
 
-    this.state = {
-      activeTab: this.props.list[0].label,
-    };
-  }
+    const activeItemElement = innerElement.querySelector<HTMLElement>(`[href="#${activeCode}"]`);
 
-  updateLine(tab: string | undefined) {
-    if (this.rootRef.current === null) return;
+    if (activeItemElement === null) return;
 
-    const button = this.rootRef.current.querySelector<HTMLElement>(
-      `.tabs__button[data-name="${tab}"]`,
-    );
-
-    const line = this.lineRef.current;
-    const header = this.headerRef.current;
-
-    if (line !== null && button !== null && header !== null) {
-      const scaleX = button.clientWidth / header.clientWidth;
-      line.style.transform = `translateX(${button.offsetLeft -
-        line.offsetLeft}px) scaleX(${scaleX})`;
-    }
-  }
-
-  onClickTabItem = tab => {
-    this.setState({ activeTab: tab });
-    this.updateLine(tab);
+    const scaleX = activeItemElement.clientWidth / innerElement.clientWidth;
+    lineElement.style.transform = `translateX(${activeItemElement.offsetLeft -
+      lineElement.offsetLeft}px) scaleX(${scaleX})`;
   };
 
-  render() {
-    const {
-      onClickTabItem,
-      props: { list, view, wpSize },
-      state: { activeTab },
-    } = this;
+  useEffect(updateLine, [activeCode]);
 
-    return (
-      <div className={b('')} ref={this.rootRef}>
-        <div className={b('header', { view, wpSize })} ref={this.headerRef}>
-          {list.map(child => {
-            return (
-              <Tab
-                activeTab={activeTab}
-                key={child.label}
-                label={child.label}
-                onClick={onClickTabItem}
-                className={b('button')}
-                isRef={this.buttonRef}
-              />
-            );
-          })}
-          <div className={b('line')} ref={this.lineRef} />
-        </div>
-        <div className={b('body')}>
-          {list.map(child => {
-            if (child.label !== activeTab) return undefined;
-            return <div key={child.label}>{child.content}</div>;
-          })}
-        </div>
+  const [drag, setIsDrag] = useState({
+    start: 0,
+    current: 0,
+    isActive: false,
+  });
+
+  const onMoveStart = e => {
+    if (drag.isActive) return;
+    const rootElement = refRoot.current;
+
+    if (rootElement === null) return;
+    setIsDrag({
+      ...drag,
+      start: e.pageX,
+      current: rootElement.scrollLeft,
+      isActive: true,
+    });
+  };
+
+  const onMoveEnd = () => {
+    setIsDrag({
+      ...drag,
+      isActive: false,
+    });
+  };
+
+  const onMove = e => {
+    if (!drag.isActive) return;
+    const rootElement = refRoot.current;
+    if (rootElement === null) return;
+    rootElement.scrollLeft = drag.current - (e.pageX - drag.start);
+  };
+
+  const onClick = (e, code) => {
+    e.preventDefault();
+    onChange(code);
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onMoveEnd);
+
+    return () => {
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onMoveEnd);
+    };
+  }, [onMove, onMoveEnd]);
+
+  useEffect(() => {
+    setTimeout(updateLine, 150);
+  }, []);
+
+  return (
+    <div className={b({ view, wpSize })} ref={refRoot}>
+      <div className={b('inner')} ref={refInner} onMouseDown={onMoveStart}>
+        {list.map(({ label, code }) => (
+          <a
+            key={code}
+            draggable={false}
+            href={`#${code}`}
+            className={b('item', { active: code === activeCode })}
+            aria-label={label}
+            onClick={e => onClick(e, code)}
+          >
+            {label}
+          </a>
+        ))}
+        <div className={b('line')} ref={refLine} />
       </div>
-    );
-  }
-
-  componentDidMount() {
-    setTimeout(() => {
-      this.updateLine(this.state.activeTab);
-    }, 500);
-  }
-}
+    </div>
+  );
+};
 
 export default Tabs;
