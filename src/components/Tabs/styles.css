@@ -21,8 +21,8 @@
     flex-shrink: 0;
     user-select: none;
 
-    &:not(:last-child) {
-      margin-right: var(--size-text-m);
+    & + & {
+      margin-left: var(--size-text-m);
     }
 
     &_active,
