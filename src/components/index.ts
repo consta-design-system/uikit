@@ -11,6 +11,8 @@ import '../themes/theme_size_gpn-default.css';
 import '../themes/theme_font_gpn-default.css';
 import '../themes/theme_space_gpn-default.css';
 
+import './Icon/export.ts';
+
 // Контролы
 export { default as Button } from './Button';
 export { default as Checkbox } from './Checkbox';
