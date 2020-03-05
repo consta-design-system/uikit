@@ -3,6 +3,9 @@ import bem from '../../utils/bem';
 
 import './styles.css';
 
+import FileLoading from '../File/icons/Loading';
+import { getFileSizeStr, getFileIconComponentName } from './utils';
+
 // import FileAvi from '../File/icons/Avi';
 // import FileBmp from '../File/icons/Bmp';
 // import FileCsv from '../File/icons/Csv';
@@ -29,23 +32,60 @@ import './styles.css';
 const b = bem('attach');
 
 type CommonProps = {
-  status: 'loaded' | 'loading' | 'error' | 'content';
+  fileName: string;
 };
 
-const Attach: React.FC<CommonProps> = props => {
-  const { status } = props;
+type LoadedProps = {
+  status: 'loaded' | string;
+  fileSize: number;
+  timestamp: number;
+  onDelete?: () => void;
+} & CommonProps;
 
-  const FileIcon = lazy(() => import('../File/icons/Avi'));
+type LoadingProps = {
+  status: 'loading' | string;
+  progress: number;
+  onCancel?: () => void;
+} & CommonProps;
 
+type ErrorProps = {
+  status: 'error' | string;
+  message: string;
+  onCancel?: () => void;
+} & CommonProps;
+
+type ContentProps = {
+  status: 'content' | string;
+  fileSize: number;
+  timestamp: number;
+  href: string;
+} & CommonProps;
+
+type AttachType = LoadedProps | LoadingProps | ErrorProps | ContentProps;
+
+const Attach: React.FC<AttachType> = props => {
+  const { status, fileName, timestamp, fileSize } = props;
+
+  // console.log(`../File/icons/${getFileIconComponentName(fileName)}`);
+  const name = 'Undefined';
+  const FileIcon = lazy(() => import(`../File/icons/${name}`));
+
+  console.log(`../File/icons/${getFileIconComponentName(fileName)}`);
   return (
-    <a className={b({ status })}>
-      <span className={b('icon')}>
-        <Suspense fallback={null}>
+    <div className={b({ status })}>
+      <div className={b('icon')}>
+        <Suspense fallback={<FileLoading size="s" />}>
           <FileIcon size="s" />
         </Suspense>
-      </span>
-      <span className={b('content')}></span>
-    </a>
+      </div>
+      <div className={b('content')}>
+        <div className={b('name')}>{fileName}</div>
+        <div className={b('information')}>
+          <div className={b('information-item')}>{getFileSizeStr(fileSize)}</div>
+          <div className={b('information-item')}>{timestamp}</div>
+        </div>
+      </div>
+    </div>
   );
 };
 

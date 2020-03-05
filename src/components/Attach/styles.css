@@ -1,6 +1,8 @@
 .attach {
+  position: relative;
   display: inline-flex;
   align-items: flex-start;
+  padding: var(--space-xs);
 
   &__icon {
     display: block;
@@ -11,5 +13,29 @@
   &__content {
     display: block;
     position: relative;
+  }
+
+  &__name {
+    display: block;
+    font-size: var(--size-text-s);
+    line-height: var(--line-height-text-s);
+    color: var(--color-typo-primary);
+  }
+
+  &__information {
+    display: flex;
+  }
+
+  &__information-item {
+    display: block;
+    flex-shrink: 0;
+    font-size: var(--size-text-xs);
+    line-height: var(--line-height-text-s);
+    color: var(--color-typo-ghost);
+    margin-right: var(--size-text-xs);
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
