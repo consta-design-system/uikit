@@ -1,0 +1,15 @@
+.attach {
+  display: inline-flex;
+  align-items: flex-start;
+
+  &__icon {
+    display: block;
+    flex-shrink: 0;
+    margin-right: var(--space-xs);
+  }
+
+  &__content {
+    display: block;
+    position: relative;
+  }
+}
