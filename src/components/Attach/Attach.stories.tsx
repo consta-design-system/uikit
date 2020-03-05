@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import Attach from '../Attach';
 
 const defaultKnobs = () => ({
-  fileName: text('fileName', 'Название_файла.js'),
+  fileName: text('fileName', 'Название_файла.pdf'),
 });
 
 const loadedKnobs = () => ({
@@ -37,7 +37,7 @@ const contentKnobs = () => ({
   status: 'content',
   fileSize: number('fileSize', 1.5 * 1024 * 1024),
   timestamp: date('timestamp', new Date('03-03-2020')),
-  href: text('href', 'http://example.com/file.js'),
+  href: text('href', 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'),
 });
 
 storiesOf('Attach', module)

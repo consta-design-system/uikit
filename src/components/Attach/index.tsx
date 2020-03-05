@@ -4,35 +4,22 @@ import bem from '../../utils/bem';
 import './styles.css';
 
 import FileLoading from '../File/icons/Loading';
-import { getFileSizeStr, getFileIconComponentName } from './utils';
-
-// import FileAvi from '../File/icons/Avi';
-// import FileBmp from '../File/icons/Bmp';
-// import FileCsv from '../File/icons/Csv';
-// import FileDoc from '../File/icons/Doc';
-// import FileExe from '../File/icons/Exe';
-// import FileGif from '../File/icons/Gif';
-// import FileJpg from '../File/icons/Jpg';
-// import FileLoading from '../File/icons/Loading';
-// import FileMov from '../File/icons/Mov';
-// import FileMp3 from '../File/icons/Mp3';
-// import FileMp4 from '../File/icons/Mp4';
-// import FilePdf from '../File/icons/Pdf';
-// import FilePng from '../File/icons/Png';
-// import FilePpt from '../File/icons/Ppt';
-// import FileRar from '../File/icons/Rar';
-// import FileRtf from '../File/icons/Rtf';
-// import FileTiff from '../File/icons/Tiff';
-// import FileTxt from '../File/icons/Txt';
-// import FileUndefined from '../File/icons/Undefined';
-// import FileWav from '../File/icons/Wav';
-// import FileXls from '../File/icons/Xls';
-// import FileZip from '../File/icons/Zip';
+import Button from '../Button';
+import IconTrash from '../Icon/icons/Trash';
+import IconClose from '../Icon/icons/Close';
+import { getFileSizeStr, getFileIconComponentName, getStrFromTimestamp } from './utils';
 
 const b = bem('attach');
 
 type CommonProps = {
   fileName: string;
+  timestamp?: number;
+  fileSize?: number;
+  progress?: number;
+  message?: number;
+  href?: string;
+  onDelete?: () => void;
+  onCancel?: () => void;
 };
 
 type LoadedProps = {
@@ -64,15 +51,40 @@ type ContentProps = {
 type AttachType = LoadedProps | LoadingProps | ErrorProps | ContentProps;
 
 const Attach: React.FC<AttachType> = props => {
-  const { status, fileName, timestamp, fileSize } = props;
+  const {
+    status,
+    fileName,
+    timestamp,
+    fileSize,
+    progress,
+    message,
+    href,
+    onDelete,
+    onCancel,
+  } = props;
 
-  // console.log(`../File/icons/${getFileIconComponentName(fileName)}`);
-  const name = 'Undefined';
-  const FileIcon = lazy(() => import(`../File/icons/${name}`));
+  const FileIconComponentName = getFileIconComponentName(fileName);
+  const FileIcon =
+    status === 'loading'
+      ? FileLoading
+      : lazy(() => import(`../File/icons/${FileIconComponentName}`));
 
-  console.log(`../File/icons/${getFileIconComponentName(fileName)}`);
   return (
     <div className={b({ status })}>
+      {status === 'content' && <a className={b('link')} href={href} download={true} />}
+
+      {status === 'loaded' && onDelete && (
+        <Button wpSize="xs" view="clear" iconOnly={true} className={b('action')} onClick={onDelete}>
+          <IconTrash size={'s'} />
+        </Button>
+      )}
+
+      {(status === 'loading' || status === 'error') && onCancel && (
+        <Button wpSize="xs" view="clear" iconOnly={true} className={b('action')} onClick={onCancel}>
+          <IconClose size={'s'} />
+        </Button>
+      )}
+
       <div className={b('icon')}>
         <Suspense fallback={<FileLoading size="s" />}>
           <FileIcon size="s" />
@@ -81,8 +93,22 @@ const Attach: React.FC<AttachType> = props => {
       <div className={b('content')}>
         <div className={b('name')}>{fileName}</div>
         <div className={b('information')}>
-          <div className={b('information-item')}>{getFileSizeStr(fileSize)}</div>
-          <div className={b('information-item')}>{timestamp}</div>
+          {(status === 'loaded' || status === 'content') && (
+            <React.Fragment>
+              {fileSize && <div className={b('information-item')}>{getFileSizeStr(fileSize)}</div>}
+              {timestamp && (
+                <div className={b('information-item')}>{getStrFromTimestamp(timestamp)}</div>
+              )}
+            </React.Fragment>
+          )}
+
+          {status === 'loading' && (
+            <div className={b('information-item')}>Загрузка {progress} %</div>
+          )}
+
+          {status === 'error' && (
+            <div className={b('information-item', { error: true })}>{message}</div>
+          )}
         </div>
       </div>
     </div>
