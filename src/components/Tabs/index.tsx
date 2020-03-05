@@ -18,21 +18,21 @@ type TabsProps = {
 };
 
 const Tabs: React.FC<TabsProps> = ({ activeCode, list, view, wpSize, onChange }) => {
-  const refInner = useRef<HTMLDivElement>(null);
+  const refRoot = useRef<HTMLDivElement>(null);
   const refLine = useRef<HTMLDivElement>(null);
 
   const updateLine = () => {
     const lineElement = refLine.current;
-    const innerElement = refInner.current;
+    const wrapperElement = refRoot.current;
 
     if (lineElement === null) return;
-    if (innerElement === null) return;
+    if (wrapperElement === null) return;
 
-    const activeItemElement = innerElement.querySelector<HTMLElement>(`[href="#${activeCode}"]`);
+    const activeItemElement = wrapperElement.querySelector<HTMLElement>(`[href="#${activeCode}"]`);
 
     if (activeItemElement === null) return;
 
-    const scaleX = activeItemElement.clientWidth / innerElement.clientWidth;
+    const scaleX = activeItemElement.clientWidth / wrapperElement.clientWidth;
     lineElement.style.transform = `translateX(${activeItemElement.offsetLeft -
       lineElement.offsetLeft}px) scaleX(${scaleX})`;
   };
@@ -49,22 +49,19 @@ const Tabs: React.FC<TabsProps> = ({ activeCode, list, view, wpSize, onChange })
   }, []);
 
   return (
-    <div className={b({ view, wpSize })}>
-      <div className={b('inner')} ref={refInner}>
-        {list.map(({ label, code }) => (
-          <a
-            key={code}
-            draggable={false}
-            href={`#${code}`}
-            className={b('item', { active: code === activeCode })}
-            aria-label={label}
-            onClick={e => onClick(e, code)}
-          >
-            {label}
-          </a>
-        ))}
-        <div className={b('line')} ref={refLine} />
-      </div>
+    <div className={b({ view, size: wpSize })} ref={refRoot}>
+      {list.map(({ label, code }) => (
+        <a
+          key={code}
+          href={`#${code}`}
+          className={b('item', { active: code === activeCode })}
+          aria-label={label}
+          onClick={e => onClick(e, code)}
+        >
+          {label}
+        </a>
+      ))}
+      <div className={b('line')} ref={refLine} />
     </div>
   );
 };

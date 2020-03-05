@@ -1,28 +1,23 @@
 .tabs {
-  display: block;
+  position: relative;
+  display: flex;
   overflow: hidden;
 
-  &__inner {
-    display: inline-flex;
-    min-width: 100%;
-    position: relative;
-    border-bottom: 1px solid transparent;
-  }
-
   &__item {
-    text-decoration: none;
+    display: block;
+    flex-shrink: 0;
+    padding-bottom: var(--space-xs);
     font-family: var(--font-primary);
+    font-size: var(--tabs-size-text);
+    line-height: var(--tabs-line-text);
+    text-decoration: none;
     color: var(--color-typo-secondary);
     cursor: pointer;
-    transition: color 0.15s;
-    padding-bottom: var(--space-xs);
-    margin-right: 0;
     white-space: nowrap;
-    flex-shrink: 0;
-    user-select: none;
+    transition: color 0.15s;
 
     & + & {
-      margin-left: var(--size-text-m);
+      margin-left: var(--space-m);
     }
 
     &_active,
@@ -32,40 +27,32 @@
   }
 
   &__line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
     width: 100%;
     height: 2px;
     background-color: var(--color-control-bg-border-checked);
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    transform: scaleX(0);
     transform-origin: left center;
+    transform: scaleX(0);
     transition: transform 0.25s;
   }
 
-  &_wpSize_m & {
-    &__item {
-      font-size: var(--size-text-m);
-      line-height: var(--line-height-text-xs);
-    }
+  &_size_m {
+    --tabs-size-text: var(--size-text-m);
+    --tabs-line-text: var(--line-height-text-xs);
   }
 
-  &_wpSize_s & {
-    &__item {
-      font-size: var(--size-text-s);
-      line-height: var(--line-height-text-s);
-    }
+  &_size_s {
+    --tabs-size-text: var(--size-text-s);
+    --tabs-line-text: var(--line-height-text-s);
   }
 
-  &_view_bordered & {
-    &__inner {
-      border-color: var(--color-bg-border);
-    }
+  &_view_bordered {
+    border-bottom: 1px solid var(--color-bg-border);
   }
 
-  &_view_clear & {
-    &__inner {
-      border-color: transparent;
-    }
+  &_view_clear {
+    border: none;
   }
 }
