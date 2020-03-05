@@ -6,15 +6,17 @@
   &__item {
     display: block;
     flex-shrink: 0;
-    padding-bottom: var(--space-xs);
-    font-family: var(--font-primary);
+    padding: 0 0 var(--space-xs);
+    border: none;
+    background: none;
     font-size: var(--tabs-size-text);
     line-height: var(--tabs-line-text);
-    text-decoration: none;
     color: var(--color-typo-secondary);
     cursor: pointer;
     white-space: nowrap;
+    appearance: none;
     transition: color 0.15s;
+    outline: none;
 
     & + & {
       margin-left: var(--space-m);
@@ -50,9 +52,5 @@
 
   &_view_bordered {
     border-bottom: 1px solid var(--color-bg-border);
-  }
-
-  &_view_clear {
-    border: none;
   }
 }

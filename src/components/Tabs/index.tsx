@@ -8,16 +8,16 @@ const b = bem('tabs');
 type TabsProps = {
   view: 'bordered' | 'clear';
   wpSize: 'm' | 's';
-  activeCode: string;
+  value: string;
   className?: string;
-  list: {
+  items: {
     label: string;
-    code: string;
+    value: string;
   }[];
-  onChange: (code: string) => void;
+  onChange: (value: string) => void;
 };
 
-const Tabs: React.FC<TabsProps> = ({ activeCode, list, view, wpSize, onChange }) => {
+const Tabs: React.FC<TabsProps> = ({ className, value, items, view, wpSize, onChange }) => {
   const refRoot = useRef<HTMLDivElement>(null);
   const refLine = useRef<HTMLDivElement>(null);
 
@@ -28,8 +28,7 @@ const Tabs: React.FC<TabsProps> = ({ activeCode, list, view, wpSize, onChange })
     if (lineElement === null) return;
     if (wrapperElement === null) return;
 
-    const activeItemElement = wrapperElement.querySelector<HTMLElement>(`[href="#${activeCode}"]`);
-
+    const activeItemElement = wrapperElement.querySelector<HTMLElement>(`[value="${value}"]`);
     if (activeItemElement === null) return;
 
     const scaleX = activeItemElement.clientWidth / wrapperElement.clientWidth;
@@ -37,11 +36,11 @@ const Tabs: React.FC<TabsProps> = ({ activeCode, list, view, wpSize, onChange })
       lineElement.offsetLeft}px) scaleX(${scaleX})`;
   };
 
-  useEffect(updateLine, [activeCode]);
+  useEffect(updateLine, [value, items]);
 
-  const onClick = (e, code) => {
+  const onClick = (e, itemValue) => {
     e.preventDefault();
-    onChange(code);
+    onChange(itemValue);
   };
 
   useEffect(() => {
@@ -49,17 +48,17 @@ const Tabs: React.FC<TabsProps> = ({ activeCode, list, view, wpSize, onChange })
   }, []);
 
   return (
-    <div className={b({ view, size: wpSize })} ref={refRoot}>
-      {list.map(({ label, code }) => (
-        <a
-          key={code}
-          href={`#${code}`}
-          className={b('item', { active: code === activeCode })}
-          aria-label={label}
-          onClick={e => onClick(e, code)}
+    <div className={b({ view, size: wpSize }, className)} ref={refRoot}>
+      {items.map(item => (
+        <button
+          key={item.value}
+          value={item.value}
+          className={b('item', { active: item.value === value })}
+          aria-label={item.label}
+          onClick={e => onClick(e, item.value)}
         >
-          {label}
-        </a>
+          {item.label}
+        </button>
       ))}
       <div className={b('line')} ref={refLine} />
     </div>

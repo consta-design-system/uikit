@@ -7,21 +7,21 @@ import './styles.css';
 
 import Tabs from '../Tabs';
 
-const list = [
+const items = [
   {
-    code: 'tab1',
+    value: 'tab1',
     label: 'Пункт',
   },
   {
-    code: 'tab2',
+    value: 'tab2',
     label: 'Пункт 2',
   },
   {
-    code: 'tab3',
+    value: 'tab3',
     label: 'Пункт 2.2',
   },
   {
-    code: 'tab4',
+    value: 'tab4',
     label: 'Пунктик 3',
   },
 ];
@@ -34,23 +34,21 @@ const defaultKnobs = () => ({
 storiesOf('Tabs', module)
   .addDecorator(withKnobs)
   .add('Табы', () => {
-    const [activeCode, setActiveCode] = useState(list[0].code);
+    const [value, setValue] = useState(items[2].value);
+
+    const activeItem = items.find(item => item.value === value);
 
     return (
       <div>
-        <Tabs activeCode={activeCode} list={list} onChange={setActiveCode} {...defaultKnobs()} />
-        <div>
-          {activeCode === list[0].code && <div>Контент для {list[0].label}</div>}
-          {activeCode === list[1].code && <div>Контент для {list[1].label}</div>}
-          {activeCode === list[2].code && <div>Контент для {list[2].label}</div>}
-          {activeCode === list[3].code && <div>Контент для {list[3].label}</div>}
-        </div>
+        <Tabs value={value} items={items} onChange={setValue} {...defaultKnobs()} />
+        <div>{activeItem && <div>Контент для {activeItem.label}</div>}</div>
       </div>
     );
   })
   .add('Табы в контенте', () => {
-    const [activeCode, setActiveCode] = useState(list[0].code);
+    const [value, setValue] = useState(items[0].value);
 
+    const activeItem = items.find(item => item.value === value);
     return (
       <div>
         <div style={{ display: 'flex' }}>
@@ -59,14 +57,9 @@ storiesOf('Tabs', module)
           >
             Любой компонент
           </div>
-          <Tabs activeCode={activeCode} list={list} onChange={setActiveCode} {...defaultKnobs()} />
+          <Tabs value={value} items={items} onChange={setValue} {...defaultKnobs()} />
         </div>
-        <div>
-          {activeCode === list[0].code && <div>Контент для {list[0].label}</div>}
-          {activeCode === list[1].code && <div>Контент для {list[1].label}</div>}
-          {activeCode === list[2].code && <div>Контент для {list[2].label}</div>}
-          {activeCode === list[3].code && <div>Контент для {list[3].label}</div>}
-        </div>
+        <div>{activeItem && <div>Контент для {activeItem.label}</div>}</div>
       </div>
     );
   });
