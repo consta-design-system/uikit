@@ -16,7 +16,7 @@ type CommonProps = {
   timestamp?: number;
   fileSize?: number;
   progress?: number;
-  message?: number;
+  message?: string;
   href?: string;
   onDelete?: () => void;
   onCancel?: () => void;
