@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import bem from '../../utils/bem';
 
 import './styles.css';
@@ -20,20 +20,31 @@ type TabsProps = {
 const Tabs: React.FC<TabsProps> = ({ className, value, items, view, wpSize, onChange }) => {
   const refRoot = useRef<HTMLDivElement>(null);
   const refLine = useRef<HTMLDivElement>(null);
+  const refItems = useRef<(HTMLButtonElement | null)[]>([]);
+
+  const [lineStyles, setLineStyles] = useState({ x: 0, scale: 0 });
 
   const updateLine = () => {
     const lineElement = refLine.current;
     const wrapperElement = refRoot.current;
+    const itemElements = refItems.current;
 
     if (lineElement === null) return;
     if (wrapperElement === null) return;
+    if (itemElements.length === 0) return;
 
-    const activeItemElement = wrapperElement.querySelector<HTMLElement>(`[value="${value}"]`);
+    let activeIndex = 0;
+    for (; activeIndex < items.length; activeIndex += 1) {
+      if (items[activeIndex].value === value) break;
+    }
+
+    const activeItemElement = itemElements[activeIndex];
     if (activeItemElement === null) return;
 
-    const scaleX = activeItemElement.clientWidth / wrapperElement.clientWidth;
-    lineElement.style.transform = `translateX(${activeItemElement.offsetLeft -
-      lineElement.offsetLeft}px) scaleX(${scaleX})`;
+    setLineStyles({
+      x: activeItemElement.offsetLeft - lineElement.offsetLeft,
+      scale: activeItemElement.clientWidth / wrapperElement.clientWidth,
+    });
   };
 
   useEffect(updateLine, [value, items]);
@@ -49,18 +60,23 @@ const Tabs: React.FC<TabsProps> = ({ className, value, items, view, wpSize, onCh
 
   return (
     <div className={b({ view, size: wpSize }, className)} ref={refRoot}>
-      {items.map(item => (
+      {items.map((item, index) => (
         <button
           key={item.value}
           value={item.value}
           className={b('item', { active: item.value === value })}
           aria-label={item.label}
           onClick={e => onClick(e, item.value)}
+          ref={el => (refItems.current[index] = el)}
         >
           {item.label}
         </button>
       ))}
-      <div className={b('line')} ref={refLine} />
+      <div
+        className={b('line')}
+        ref={refLine}
+        style={{ transform: `translateX(${lineStyles.x}px) scaleX(${lineStyles.scale})` }}
+      />
     </div>
   );
 };
