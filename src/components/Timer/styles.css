@@ -1,0 +1,27 @@
+.timer {
+  position: relative;
+  display: block;
+  width: var(--size-text-2xl);
+  height: var(--size-text-2xl);
+  border-radius: 50%;
+  background-color: var(--color-control-bg-ghost);
+
+  &__count {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: var(--size-text-xs);
+    line-height: 1;
+    color: var(--color-control-typo-ghost);
+  }
+
+  &__progress {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(100% - var(--space-2xs));
+    height: calc(100% - var(--space-2xs));
+    transform: translate(-50%, -50%) rotate(-90deg);
+  }
+}

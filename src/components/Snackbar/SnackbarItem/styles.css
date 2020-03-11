@@ -1,0 +1,58 @@
+.snackBarItem {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.07), 0 2px 2px rgba(0, 0, 0, 0.07),
+    0 4px 4px rgba(0, 0, 0, 0.07), 0 6px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+  border-radius: 8px;
+  padding: var(--space-m) var(--space-2xl) var(--space-m) var(--space-m);
+  box-sizing: border-box;
+
+  &__icon {
+    color: var(--color-typo-primary);
+    flex-shrink: 0;
+    margin-right: var(--space-m);
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__text {
+    display: -webkit-box;
+    font-size: 16px;
+    line-height: 22px;
+    color: var(--color-typo-primary);
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+
+  &__action {
+    margin-top: var(--space-s);
+  }
+
+  &__close {
+    position: absolute;
+    top: var(--space-2xs);
+    right: var(--space-2xs);
+    color: var(--color-control-typo-ghost);
+  }
+
+  &_view_system {
+    background-color: var(--color-bg-normal);
+  }
+
+  &_view_success {
+    background-color: var(--color-bg-success);
+  }
+
+  &_view_warning {
+    background-color: var(--color-bg-warning);
+  }
+
+  &_view_alert {
+    background-color: var(--color-bg-alert);
+  }
+}
