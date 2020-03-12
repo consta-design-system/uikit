@@ -4,7 +4,6 @@ import requireContext from 'require-context.macro';
 // Storybook modules
 import { addParameters, configure, addDecorator } from '@storybook/react';
 import { withA11y } from '@storybook/addon-a11y';
-import { withThemes } from 'storybook-addon-themes';
 
 import whitepaperStorybookTheme from './whitepaperStorybookTheme';
 import '../src/whitepaper.css';
@@ -42,8 +41,6 @@ addDecorator(story => {
     </div>
   );
 });
-
-addDecorator(withThemes);
 
 const req = requireContext('../src', true, /.stories.(j|t)sx$/); // TODO: изменить на /.stories.tsx$/
 

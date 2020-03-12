@@ -26,7 +26,6 @@ const Timer: React.FC<Timer> = props => {
 
   return (
     <div className={b()}>
-      <div className={b('count')}>{remainingTime}</div>
       <svg className={b('progress')} viewBox="0 0 24 24">
         <circle
           cx="12"
@@ -39,6 +38,7 @@ const Timer: React.FC<Timer> = props => {
           strokeDashoffset={strokeDashoffset}
         />
       </svg>
+      <div className={b('count')}>{remainingTime}</div>
     </div>
   );
 };

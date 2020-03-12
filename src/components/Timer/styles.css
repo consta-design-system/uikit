@@ -7,13 +7,11 @@
   background-color: var(--color-control-bg-ghost);
 
   &__count {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: var(--size-text-2xl);
     font-size: var(--size-text-xs);
-    line-height: 1;
+    line-height: var(--size-text-2xl);
     color: var(--color-control-typo-ghost);
+    text-align: center;
   }
 
   &__progress {

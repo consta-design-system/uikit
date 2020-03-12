@@ -8,6 +8,7 @@
   border-radius: 8px;
   padding: var(--space-m) var(--space-2xl) var(--space-m) var(--space-m);
   box-sizing: border-box;
+  margin-bottom: var(--space-s);
 
   &__icon {
     color: var(--color-typo-primary);
