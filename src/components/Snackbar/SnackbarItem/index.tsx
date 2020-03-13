@@ -47,17 +47,21 @@ const SnackBarItem: React.FC<CommonProps> = props => {
 
   return (
     <div
-      className={b({ view }, ['theme_color_gpn-dark', className])}
+      className={b({ view }, ['theme_color_gpn-dark pt-icon-plus', className])}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      {!timer && icon && <div className={b('icon')}>{icon}</div>}
+      {!timer && icon && (
+        <div className={b('icon', {}, 'pt-icon-plus__icon pt-icon-plus__icon_indent-r_m')}>
+          {icon}
+        </div>
+      )}
       {timer && (
-        <div className={b('icon')}>
+        <div className={b('icon', {}, 'pt-icon-plus__icon pt-icon-plus__icon_indent-r_m')}>
           <Timer timer={timer} onComplete={onClose} isPlaying={isPlaying} />
         </div>
       )}
-      <div className={b('content')}>
+      <div className="pt-icon-plus__block">
         <div className={b('text')}>{text}</div>
         {button && <div className={b('action')}>{button(onClose)}</div>}
       </div>

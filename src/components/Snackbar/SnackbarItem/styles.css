@@ -1,23 +1,13 @@
 .snackBarItem {
   position: relative;
-  display: flex;
-  align-items: flex-start;
   box-sizing: border-box;
   padding: var(--space-m) var(--space-2xl) var(--space-m) var(--space-m);
   margin-bottom: var(--space-s);
   width: 100%;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.07), 0 2px 2px rgba(0, 0, 0, 0.07),
-    0 4px 4px rgba(0, 0, 0, 0.07), 0 6px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
   border-radius: 8px;
 
   &__icon {
-    margin-right: var(--space-m);
     color: var(--color-typo-primary);
-    flex-shrink: 0;
-  }
-
-  &__content {
-    flex: 1;
   }
 
   &__text {
