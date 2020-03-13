@@ -1,27 +1,28 @@
 .snackbar {
   position: fixed;
-  max-width: 400px;
-  width: 100%;
-  transform: translateX(-50%);
   bottom: var(--space-l, 20px);
   left: 50%;
+  box-sizing: border-box;
+  max-width: 400px;
+  width: 100%;
   font-size: 14px;
   color: black;
-  box-sizing: border-box;
   overflow: hidden;
+  z-index: 1000;
+  transform: translateX(-50%);
 
   &__item {
-    overflow: hidden;
     height: 0;
+    overflow: hidden;
     transition: transform 300ms ease, opacity 300ms ease, height 300ms ease;
 
     &_animation_entering {
-      transform: translate3d(0, 110%, 0);
+      transform: translateY(100%);
     }
 
     &_animation_exiting {
-      transform: scale(0.8);
       opacity: 0;
+      transform: scale(0.8);
     }
   }
 }

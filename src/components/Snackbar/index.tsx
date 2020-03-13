@@ -54,12 +54,12 @@ const SnackbarContainer: React.FC = props => {
 };
 
 export const useSnackbar = () => {
-  const { items, setItems } = useContext(Context);
+  const { setItems } = useContext(Context);
 
   return {
     add(props) {
       const id = generateId();
-      setItems([...items, { id, ...props }]);
+      setItems(prevState => [...prevState, { id, ...props }]);
       return id;
     },
     remove(id: Id) {
