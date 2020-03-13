@@ -18,7 +18,7 @@ type Context = {
   setItems?: any;
 };
 
-type Animation = {
+type AnimationProps = {
   entered: {
     opacity: number;
     transform: string;
@@ -40,12 +40,12 @@ const SnackbarContainer: React.FC = props => {
   const refItems = useRef<(HTMLDivElement | null)[]>([]);
   const portalTarget = canUseDOM ? document.body : null;
   const [items, setItems] = useState([]);
-  const [styles, setStyles] = useState<Animation[]>([]);
+  const [styles, setStyles] = useState<AnimationProps[]>([]);
 
   useEffect(() => {
-    let arr: Animation[] = [];
+    let arr: AnimationProps[] = [];
     let sum = 0;
-    for (let i = items.length - 1; i >= 0; i -= 1) {
+    for (let i = 0; i < items.length; i += 1) {
       if (refItems.current[i] !== null) {
         arr.push({
           entered: {

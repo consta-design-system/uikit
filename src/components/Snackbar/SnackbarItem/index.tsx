@@ -9,7 +9,7 @@ import Timer from '../../Timer';
 import IconClose from '../../Icon/icons/Close';
 import { useSnackbar } from '../index';
 
-const b = bem('snackBarItem');
+const b = bem('snackbarItem');
 
 export type CommonProps = {
   id: string;
