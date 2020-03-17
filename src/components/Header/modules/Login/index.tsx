@@ -1,7 +1,7 @@
 import React from 'react';
 import bem from '../../../../utils/bem';
 
-import Button from '../../../Button';
+import Button from '../../../Button/Button';
 import User from '../../../User';
 
 const b = bem('login');

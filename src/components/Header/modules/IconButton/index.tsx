@@ -1,6 +1,6 @@
 import React, { FocusEventHandler } from 'react';
 
-import Button from '../../../Button';
+import Button from '../../../Button/Button';
 
 type Props = {
   // icon: string;

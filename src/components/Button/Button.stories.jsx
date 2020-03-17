@@ -3,7 +3,7 @@ import { withKnobs, text, select, boolean, radios } from '@storybook/addon-knobs
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import IconUser from '../Icon/icons/User';
-import Button from '.';
+import Button from './Button';
 
 const defaultKnobs = () => ({
   width: select('Width', ['full', 'default'], 'default'),

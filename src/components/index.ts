@@ -12,7 +12,7 @@ import '../themes/theme_font_gpn-default.css';
 import '../themes/theme_space_gpn-default.css';
 
 // Контролы
-export { default as Button } from './Button';
+export { default as Button } from './Button/Button';
 export { default as Checkbox } from './Checkbox';
 export { default as ChoiceGroup } from './ChoiceGroup';
 export { default as Input } from './Input';
