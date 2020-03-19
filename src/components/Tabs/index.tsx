@@ -5,7 +5,7 @@ import './styles.css';
 
 const b = bem('tabs');
 
-type Item = any;
+type Item = string | number | {};
 
 type TabsProps = {
   view: 'bordered' | 'clear';
@@ -13,13 +13,13 @@ type TabsProps = {
   value: Item;
   className?: string;
   items: Item[];
-  onChange: ({ e: Event, value: string }) => void;
+  onChange: ({ e: Event, value: Item }) => void;
   getKey?: (item: Item) => string | number;
   getLabel?: (item: Item) => string;
 };
 
-const defaultGetKey = (item: Item) => item.id;
-const defaultGetLabel = (item: Item) => item.label;
+const defaultGetKey = item => item.id;
+const defaultGetLabel = item => item.label;
 
 const Tabs: React.FC<TabsProps> = ({
   className,
@@ -31,7 +31,7 @@ const Tabs: React.FC<TabsProps> = ({
   getKey = defaultGetKey,
   getLabel = defaultGetLabel,
 }) => {
-  const refRoot = useRef<HTMLDivElement>(null);
+  const refTabs = useRef<HTMLDivElement>(null);
   const refLine = useRef<HTMLDivElement>(null);
   const refItems = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -39,17 +39,15 @@ const Tabs: React.FC<TabsProps> = ({
 
   const updateLine = () => {
     const lineElement = refLine.current;
-    const wrapperElement = refRoot.current;
+    const wrapperElement = refTabs.current;
     const itemElements = refItems.current;
 
     if (lineElement === null) return;
     if (wrapperElement === null) return;
     if (itemElements.length === 0) return;
 
-    let activeIndex = 0;
-    for (; activeIndex < items.length; activeIndex += 1) {
-      if (getKey(items[activeIndex]) === getKey(value)) break;
-    }
+    const valueKey = getKey(value);
+    let activeIndex = items.findIndex(item => getKey(item) === valueKey);
 
     const activeItemElement = itemElements[activeIndex];
     if (activeItemElement === null) return;
@@ -72,19 +70,24 @@ const Tabs: React.FC<TabsProps> = ({
   }, []);
 
   return (
-    <div className={b({ view, size: wpSize }, className)} ref={refRoot}>
-      {items.map((item, index) => (
-        <button
-          key={getKey(item)}
-          value={item}
-          className={b('item', { active: getKey(item) === getKey(value) })}
-          aria-label={getLabel(item)}
-          onClick={e => onClick({ e, value: item })}
-          ref={el => (refItems.current[index] = el)}
-        >
-          {getLabel(item)}
-        </button>
-      ))}
+    <div className={b({ view, size: wpSize }, className)} ref={refTabs}>
+      {items.map((item, index) => {
+        const label = getLabel(item);
+        const key = getKey(item);
+
+        return (
+          <button
+            key={key}
+            value={getKey(item)}
+            className={b('item', { active: getKey(item) === key })}
+            aria-label={label}
+            onClick={e => onClick({ e, value: item })}
+            ref={el => (refItems.current[index] = el)}
+          >
+            {label}
+          </button>
+        );
+      })}
       <div
         className={b('line')}
         ref={refLine}
