@@ -5,19 +5,32 @@ import './styles.css';
 
 const b = bem('tabs');
 
+type Item = any;
+
 type TabsProps = {
   view: 'bordered' | 'clear';
   wpSize: 'm' | 's';
-  value: string;
+  value: Item;
   className?: string;
-  items: {
-    label: string;
-    value: string;
-  }[];
+  items: Item[];
   onChange: ({ e: Event, value: string }) => void;
+  getKey?: (item: Item) => string | number;
+  getLabel?: (item: Item) => string;
 };
 
-const Tabs: React.FC<TabsProps> = ({ className, value, items, view, wpSize, onChange }) => {
+const defaultGetKey = (item: Item) => item.id;
+const defaultGetLabel = (item: Item) => item.label;
+
+const Tabs: React.FC<TabsProps> = ({
+  className,
+  value,
+  items,
+  view,
+  wpSize,
+  onChange,
+  getKey = defaultGetKey,
+  getLabel = defaultGetLabel,
+}) => {
   const refRoot = useRef<HTMLDivElement>(null);
   const refLine = useRef<HTMLDivElement>(null);
   const refItems = useRef<(HTMLButtonElement | null)[]>([]);
@@ -35,7 +48,7 @@ const Tabs: React.FC<TabsProps> = ({ className, value, items, view, wpSize, onCh
 
     let activeIndex = 0;
     for (; activeIndex < items.length; activeIndex += 1) {
-      if (items[activeIndex].value === value) break;
+      if (getKey(items[activeIndex]) === getKey(value)) break;
     }
 
     const activeItemElement = itemElements[activeIndex];
@@ -62,14 +75,14 @@ const Tabs: React.FC<TabsProps> = ({ className, value, items, view, wpSize, onCh
     <div className={b({ view, size: wpSize }, className)} ref={refRoot}>
       {items.map((item, index) => (
         <button
-          key={item.value}
-          value={item.value}
-          className={b('item', { active: item.value === value })}
-          aria-label={item.label}
-          onClick={e => onClick({ e, value: item.value })}
+          key={getKey(item)}
+          value={item}
+          className={b('item', { active: getKey(item) === getKey(value) })}
+          aria-label={getLabel(item)}
+          onClick={e => onClick({ e, value: item })}
           ref={el => (refItems.current[index] = el)}
         >
-          {item.label}
+          {getLabel(item)}
         </button>
       ))}
       <div
