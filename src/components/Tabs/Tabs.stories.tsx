@@ -37,10 +37,13 @@ storiesOf('Tabs', module)
     const [value, setValue] = useState(items[2].value);
 
     const activeItem = items.find(item => item.value === value);
+    const onChange = ({ value }) => {
+      setValue(value);
+    };
 
     return (
       <div>
-        <Tabs value={value} items={items} onChange={setValue} {...defaultKnobs()} />
+        <Tabs value={value} items={items} onChange={onChange} {...defaultKnobs()} />
         <div>{activeItem && <div>Контент для {activeItem.label}</div>}</div>
       </div>
     );
@@ -49,6 +52,10 @@ storiesOf('Tabs', module)
     const [value, setValue] = useState(items[0].value);
 
     const activeItem = items.find(item => item.value === value);
+    const onChange = ({ value }) => {
+      setValue(value);
+    };
+
     return (
       <div>
         <div style={{ display: 'flex' }}>
@@ -57,7 +64,7 @@ storiesOf('Tabs', module)
           >
             Любой компонент
           </div>
-          <Tabs value={value} items={items} onChange={setValue} {...defaultKnobs()} />
+          <Tabs value={value} items={items} onChange={onChange} {...defaultKnobs()} />
         </div>
         <div>{activeItem && <div>Контент для {activeItem.label}</div>}</div>
       </div>

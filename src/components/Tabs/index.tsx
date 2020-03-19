@@ -14,7 +14,7 @@ type TabsProps = {
     label: string;
     value: string;
   }[];
-  onChange: (value: string) => void;
+  onChange: ({ e: Event, value: string }) => void;
 };
 
 const Tabs: React.FC<TabsProps> = ({ className, value, items, view, wpSize, onChange }) => {
@@ -51,7 +51,7 @@ const Tabs: React.FC<TabsProps> = ({ className, value, items, view, wpSize, onCh
 
   const onClick = ({ e, value }) => {
     e.preventDefault();
-    onChange(value);
+    onChange({ e, value });
   };
 
   useEffect(() => {
