@@ -8,10 +8,6 @@
     0 4px 4px rgba(0, 0, 0, 0.07), 0 6px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
   border-radius: 8px;
 
-  &__icon {
-    color: var(--color-typo-primary);
-  }
-
   &__text {
     display: -webkit-box;
     font-size: var(--size-text-m);
@@ -30,7 +26,6 @@
     position: absolute;
     top: var(--space-2xs);
     right: var(--space-2xs);
-    color: var(--color-control-typo-ghost);
   }
 
   &_view_system {

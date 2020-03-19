@@ -1,12 +1,13 @@
 import React from 'react';
-import { withKnobs, number, boolean } from '@storybook/addon-knobs';
+import { withKnobs, number, boolean, select } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 
 import Timer from '.';
 
 const defaultKnobs = () => ({
-  timer: number('Timer', 100),
-  isPlaying: boolean('isPlaying', false),
+  wpSize: select('Size', ['s', 'm'], 'm'),
+  timer: number('Timer', 10),
+  isPlaying: boolean('isPlaying', true),
 });
 
 storiesOf('Timer', module)

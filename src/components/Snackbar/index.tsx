@@ -1,22 +1,12 @@
-import React, { useRef, useState, useContext, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Transition, TransitionGroup } from 'react-transition-group';
 import bem from '../../utils/bem';
-import { Id, generateId, canUseDOM, getIndex } from './utils';
+import { canUseDOM } from './utils';
 
 import './styles.css';
 
 import SnackbarItem, { CommonProps as SnackbarItemProps } from './SnackbarItem';
-
-export type useSnackbarProps = {
-  add: (props: SnackbarItemProps) => Id;
-  remove: (id: Id) => void;
-};
-
-type Context = {
-  items: SnackbarItemProps[];
-  setItems?: any;
-};
 
 type AnimationProps = {
   entered: {
@@ -31,21 +21,22 @@ type AnimationProps = {
   };
 };
 
+type CommonProps = {
+  items: SnackbarItemProps[];
+};
+
 const b = bem('snackbar');
 
-const Context = React.createContext<Context>({ items: [] });
-
-const SnackbarContainer: React.FC = props => {
-  const { children } = props;
+const SnackbarContainer: React.FC<CommonProps> = props => {
+  const { items } = props;
   const refItems = useRef<(HTMLDivElement | null)[]>([]);
   const portalTarget = canUseDOM ? document.body : null;
-  const [items, setItems] = useState([]);
   const [styles, setStyles] = useState<AnimationProps[]>([]);
 
   useEffect(() => {
     let arr: AnimationProps[] = [];
     let sum = 0;
-    for (let i = 0; i < items.length; i += 1) {
+    for (let i = items.length - 1; i >= 0; i -= 1) {
       if (refItems.current[i] !== null) {
         arr.push({
           entered: {
@@ -66,8 +57,7 @@ const SnackbarContainer: React.FC = props => {
   }, [items]);
 
   return (
-    <Context.Provider value={{ items, setItems }}>
-      {children}
+    <>
       {portalTarget
         ? createPortal(
             <div className={b()}>
@@ -98,29 +88,8 @@ const SnackbarContainer: React.FC = props => {
             portalTarget,
           )
         : null}
-    </Context.Provider>
+    </>
   );
-};
-
-export const useSnackbar = () => {
-  const { setItems } = useContext(Context);
-
-  return {
-    add(props) {
-      const id = generateId();
-      setItems(prevState => [...prevState, { id, ...props }]);
-      return id;
-    },
-    remove(id: Id) {
-      setItems(prevState => {
-        const newState = [...prevState];
-        const index = getIndex(id, newState);
-        if (index === -1) return newState;
-        newState.splice(index, 1);
-        return newState;
-      });
-    },
-  };
 };
 
 export default SnackbarContainer;
