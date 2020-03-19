@@ -66,7 +66,7 @@ const SnackBarItem: React.FC<CommonProps> = props => {
         {button && <div className={b('action')}>{button(onClose)}</div>}
       </div>
       <Button wpSize="xs" view="clear" iconOnly={true} className={b('close')} onClick={onClose}>
-        <IconClose size={'xs'} />
+        <IconClose size="xs" />
       </Button>
     </div>
   );
