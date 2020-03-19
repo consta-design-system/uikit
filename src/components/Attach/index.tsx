@@ -109,8 +109,8 @@ const Attach: React.FC<AttachType> = props => {
             </React.Fragment>
           )}
 
-          {status === 'loading' && progress && (
-            <div className={b('information-item')}>Загрузка {progress} %</div>
+          {status === 'loading' && (
+            <div className={b('information-item')}>Загрузка {progress && `${progress} %`}</div>
           )}
 
           {status === 'error' && (
