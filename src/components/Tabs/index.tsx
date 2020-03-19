@@ -49,9 +49,9 @@ const Tabs: React.FC<TabsProps> = ({ className, value, items, view, wpSize, onCh
 
   useEffect(updateLine, [value, items]);
 
-  const onClick = (e, itemValue) => {
+  const onClick = ({ e, value }) => {
     e.preventDefault();
-    onChange(itemValue);
+    onChange(value);
   };
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const Tabs: React.FC<TabsProps> = ({ className, value, items, view, wpSize, onCh
           value={item.value}
           className={b('item', { active: item.value === value })}
           aria-label={item.label}
-          onClick={e => onClick(e, item.value)}
+          onClick={e => onClick({ e, value: item.value })}
           ref={el => (refItems.current[index] = el)}
         >
           {item.label}
