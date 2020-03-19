@@ -70,7 +70,7 @@ const SnackBarItem: React.FC<CommonProps> = props => {
           <Timer wpSize="m" timer={timer} onComplete={close} isPlaying={isPlaying} />
         </div>
       )}
-      <div className="pt-icon-plus__block">
+      <div className={b('content', {}, 'pt-icon-plus__block')}>
         <div className={b('text')}>{text}</div>
         {button && (
           <div className={b('action')}>

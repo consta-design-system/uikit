@@ -10,12 +10,20 @@
 
   &__text {
     display: -webkit-box;
+    width: 100%;
     font-size: var(--size-text-m);
     line-height: var(--line-height-text-s);
     color: var(--color-typo-primary);
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  &__content {
+    /* 24 временно пока нет переменных для размеров */
+    width: calc(100% - var(--space-m) - 24px);
   }
 
   &__action {
