@@ -67,7 +67,14 @@ const Attach: React.FC<AttachType> = props => {
   const FileIcon =
     status === 'loading'
       ? FileLoading
-      : lazy(() => import(`../File/icons/${FileIconComponentName}`));
+      : lazy(async () => {
+          try {
+            const result = await import(`../File/icons/${FileIconComponentName}`);
+            return result;
+          } catch (e) {
+            return null;
+          }
+        });
 
   return (
     <div className={b({ status })}>
@@ -102,7 +109,7 @@ const Attach: React.FC<AttachType> = props => {
             </React.Fragment>
           )}
 
-          {status === 'loading' && (
+          {status === 'loading' && progress && (
             <div className={b('information-item')}>Загрузка {progress} %</div>
           )}
 
