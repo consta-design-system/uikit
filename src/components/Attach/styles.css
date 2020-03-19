@@ -6,15 +6,7 @@
   background-color: var(--attach-bg, transparent);
   padding: var(--space-xs) var(--space-3xl) var(--space-xs) var(--space-xs);
   transition: background-color 0.25s;
-
-  &__link {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-  }
+  text-decoration: none;
 
   & &__action {
     position: absolute;
@@ -30,6 +22,7 @@
     display: block;
     flex-shrink: 0;
     margin-right: var(--space-xs);
+    transition: opacity 0.3s ease;
 
     svg {
       display: block;
@@ -39,13 +32,16 @@
   &__content {
     display: block;
     position: relative;
+    width: 100%;
   }
 
   &__name {
     display: block;
     font-size: var(--size-text-s);
-    line-height: var(--line-height-text-s);
+    line-height: var(--line-height-text-2xs);
     color: var(--color-typo-primary);
+    margin-bottom: var(--space-3xs);
+    word-wrap: break-word;
   }
 
   &__information {
@@ -71,6 +67,8 @@
 
   &_status_loading & {
     &__icon {
+      opacity: 0.4;
+
       &::before,
       &::after {
         content: '';
@@ -95,6 +93,12 @@
         transform-origin: center;
         animation: attachSpinnerRotate 1s linear infinite;
       }
+    }
+  }
+
+  &_status_error & {
+    &__icon {
+      opacity: 0.4;
     }
   }
 

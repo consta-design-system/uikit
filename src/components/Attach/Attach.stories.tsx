@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, text, number, date } from '@storybook/addon-knobs';
+import { withKnobs, text, number } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import Attach from '../Attach';
 
@@ -11,7 +11,7 @@ const defaultKnobs = () => ({
 const loadedKnobs = () => ({
   status: 'loaded',
   fileSize: number('fileSize', 1.5 * 1024 * 1024),
-  timestamp: date('timestamp', new Date('03-03-2020')),
+  timestamp: number('timestamp', 1583182800000),
   onDelete: () => {
     action('onDelete');
   },
@@ -36,13 +36,23 @@ const errorKnobs = () => ({
 const contentKnobs = () => ({
   status: 'content',
   fileSize: number('fileSize', 1.5 * 1024 * 1024),
-  timestamp: date('timestamp', new Date('03-03-2020')),
+  timestamp: number('timestamp', 1583182800000),
   href: text('href', 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'),
 });
+
+const getIconComponentName = (findedName, fileName) => {
+  const ext = fileName.split('.').pop();
+  return ext === 'someextension' ? 'Jpg' : findedName;
+};
 
 storiesOf('Attach', module)
   .addDecorator(withKnobs)
   .add('Загружен', () => <Attach {...{ ...defaultKnobs(), ...loadedKnobs() }} />)
   .add('Загрузка', () => <Attach {...{ ...defaultKnobs(), ...loadingKnobs() }} />)
   .add('Ошибка', () => <Attach {...{ ...defaultKnobs(), ...errorKnobs() }} />)
-  .add('Контент', () => <Attach {...{ ...defaultKnobs(), ...contentKnobs() }} />);
+  .add('Контент', () => <Attach {...{ ...defaultKnobs(), ...contentKnobs() }} />)
+  .add('Кастомная функция иконки', () => (
+    <Attach
+      {...{ fileName: 'Название_файла.someextension', ...contentKnobs(), getIconComponentName }}
+    />
+  ));

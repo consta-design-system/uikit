@@ -18,6 +18,7 @@ type CommonProps = {
   progress?: number;
   message?: string;
   href?: string;
+  getIconComponentName?: (findedName: string, fileName: string) => string;
   onDelete?: () => void;
   onCancel?: () => void;
 };
@@ -61,9 +62,12 @@ const Attach: React.FC<AttachType> = props => {
     href,
     onDelete,
     onCancel,
+    getIconComponentName,
   } = props;
 
-  const FileIconComponentName = getFileIconComponentName(fileName);
+  const FileIconComponentName = getIconComponentName
+    ? getIconComponentName(getFileIconComponentName(fileName), fileName)
+    : getFileIconComponentName(fileName);
   const FileIcon =
     status === 'loading'
       ? FileLoading
@@ -76,10 +80,15 @@ const Attach: React.FC<AttachType> = props => {
           }
         });
 
-  return (
-    <div className={b({ status })}>
-      {status === 'content' && <a className={b('link')} href={href} download={true} />}
+  const RootElement = status === 'content' ? 'a' : 'div';
 
+  const defaultProps = {
+    className: b({ status }),
+    ...(status === 'content' && { href, download: true }),
+  };
+
+  return (
+    <RootElement {...defaultProps}>
       {status === 'loaded' && onDelete && (
         <Button wpSize="xs" view="clear" iconOnly={true} className={b('action')} onClick={onDelete}>
           <IconTrash size={'s'} />
@@ -92,33 +101,35 @@ const Attach: React.FC<AttachType> = props => {
         </Button>
       )}
 
-      <div className={b('icon')}>
+      <span className={b('icon')}>
         <Suspense fallback={<FileLoading size="s" />}>
           <FileIcon size="s" />
         </Suspense>
-      </div>
-      <div className={b('content')}>
-        <div className={b('name')}>{fileName}</div>
-        <div className={b('information')}>
+      </span>
+      <span className={b('content')}>
+        <span className={b('name')}>{fileName}</span>
+        <span className={b('information')}>
           {(status === 'loaded' || status === 'content') && (
             <React.Fragment>
-              {fileSize && <div className={b('information-item')}>{getFileSizeStr(fileSize)}</div>}
+              {fileSize && (
+                <span className={b('information-item')}>{getFileSizeStr(fileSize)}</span>
+              )}
               {timestamp && (
-                <div className={b('information-item')}>{getStrFromTimestamp(timestamp)}</div>
+                <span className={b('information-item')}>{getStrFromTimestamp(timestamp)}</span>
               )}
             </React.Fragment>
           )}
 
           {status === 'loading' && (
-            <div className={b('information-item')}>Загрузка {progress && `${progress} %`}</div>
+            <span className={b('information-item')}>Загрузка {progress && `${progress} %`}</span>
           )}
 
           {status === 'error' && (
-            <div className={b('information-item', { error: true })}>{message}</div>
+            <span className={b('information-item', { error: true })}>{message}</span>
           )}
-        </div>
-      </div>
-    </div>
+        </span>
+      </span>
+    </RootElement>
   );
 };
 

@@ -22,30 +22,38 @@ export const getFileIconComponentName = (fileName: string): string => {
 
   if (typeof ext !== 'string') return 'Undefined';
 
-  const extensions = [
-    'Avi',
-    'Bmp',
-    'Csv',
-    'Doc',
-    'Exe',
-    'Gif',
-    'Jpg',
-    'Mov',
-    'Mp3',
-    'Mp4',
-    'Pdf',
-    'Png',
-    'Ppt',
-    'Rar',
-    'Rtf',
-    'Tiff',
-    'Txt',
-    'Wav',
-    'Xls',
-    'Zip',
-  ];
+  const extensionsMap = {
+    avi: 'Avi',
+    bmp: 'Bmp',
+    csv: 'Csv',
+    csvx: 'Csv',
+    doc: 'Doc',
+    docx: 'Doc',
+    exe: 'Exe',
+    gif: 'Gif',
+    jpg: 'Jpg',
+    jpeg: 'Jpg',
+    jp2: 'Jpg',
+    mov: 'Mov',
+    mp3: 'Mp3',
+    mp4: 'Mp4',
+    pdf: 'Pdf',
+    png: 'Png',
+    ppt: 'Ppt',
+    pptx: 'Ppt',
+    rar: 'Rar',
+    rtf: 'Rtf',
+    rtfx: 'Rtf',
+    tiff: 'Tiff',
+    txt: 'Txt',
+    wav: 'Wav',
+    xls: 'Xls',
+    xlsx: 'Xls',
+    zip: 'Zip',
+  };
 
-  return extensions.find(name => name.toLowerCase() === ext) || 'Undefined';
+  const key = Object.keys(extensionsMap).find(name => name === ext);
+  return key ? extensionsMap[key] : 'Undefined';
 };
 
 export const pad = (n: number): string => {
