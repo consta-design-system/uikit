@@ -38,7 +38,7 @@ type LinkProps = {
   rel?: string;
 } & CommonProps;
 
-const Button: React.FC<ButtonProps | LinkProps> = props => {
+const Button: React.FC<ButtonProps | LinkProps> = (props) => {
   const { wpSize, view, width, form, iconOnly, withIcon, children, className } = props;
 
   if (props.isLink) {
@@ -47,7 +47,7 @@ const Button: React.FC<ButtonProps | LinkProps> = props => {
         href={props.href}
         className={b(
           { size: wpSize, view, width, form, 'with-icon': withIcon, 'icon-only': iconOnly },
-          className,
+          className
         )}
         target={props.target}
         rel={props.rel}
@@ -72,7 +72,7 @@ const Button: React.FC<ButtonProps | LinkProps> = props => {
           'with-icon': withIcon,
           'icon-only': iconOnly,
         },
-        className,
+        className
       )}
       type={props.type}
       disabled={props.disabled}
