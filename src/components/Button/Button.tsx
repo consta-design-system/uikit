@@ -4,7 +4,7 @@ import { cn } from '../../utils/bem';
 import { IIconProps } from '../Icon';
 import * as wp from '../../utils/whitepaper/whitepaper';
 
-const cnButton = cn('button');
+export const cnButton = cn('button');
 
 export type ButtonProps = {
   size: 'xs' | 's' | 'm' | 'l';
@@ -32,7 +32,7 @@ export type ButtonProps = {
   as?: ElementType;
 };
 
-const Button: React.FC<ButtonProps | any> = (props) => {
+export const Button: React.FC<ButtonProps | any> = (props) => {
   const {
     size = 'm',
     view = 'primary',
