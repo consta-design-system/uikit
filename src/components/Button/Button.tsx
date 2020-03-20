@@ -1,14 +1,16 @@
 import './Button.css';
-import React, { FocusEventHandler } from 'react';
-import bem from '../../utils/bem';
+import React, { Fragment, FocusEventHandler, ElementType } from 'react';
+import { cn } from '../../utils/bem';
+import { IIconProps } from '../Icon';
+import * as wp from '../../utils/whitepaper/whitepaper';
 
-const b = bem('button');
+const cnButton = cn('button');
 
-type CommonProps = {
-  wpSize: 'xs' | 's' | 'm' | 'l';
+export type ButtonProps = {
+  size: 'xs' | 's' | 'm' | 'l';
   view: 'clear' | 'ghost' | 'primary' | 'secondary';
-  width?: 'auto' | 'full';
-  form?:
+  width?: 'default' | 'full';
+  form:
     | 'default'
     | 'brick'
     | 'round'
@@ -16,70 +18,92 @@ type CommonProps = {
     | 'round-brick'
     | 'brick-default'
     | 'default-brick';
-  iconOnly?: boolean;
-  withIcon?: 'left' | 'right';
+  iconPosition?: 'left' | 'right';
   children?: React.ReactNode;
   className?: string;
   tabIndex?: number;
-};
-
-type ButtonProps = {
-  isLink?: false;
-  type?: 'submit' | 'reset' | 'button';
   disabled?: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onBlur?: FocusEventHandler<HTMLElement>;
-} & CommonProps;
+  label: string;
+  type?: 'submit' | 'reset' | 'button';
+  iconLeft?: React.FC<IIconProps>;
+  iconRight?: React.FC<IIconProps>;
+  as?: ElementType;
+};
 
-type LinkProps = {
-  isLink: true;
-  href: string;
-  target?: string;
-  rel?: string;
-} & CommonProps;
+const Button: React.FC<ButtonProps | any> = (props) => {
+  const {
+    size = 'm',
+    view = 'primary',
+    width,
+    form = 'default',
+    iconLeft,
+    iconRight,
+    label,
+    className,
+    onClick,
+    onBlur,
+    disabled,
+    type,
+    tabIndex,
+    as = 'button',
+    ...otherProps
+  } = props;
 
-const Button: React.FC<ButtonProps | LinkProps> = (props) => {
-  const { wpSize, view, width, form, iconOnly, withIcon, children, className } = props;
-
-  if (props.isLink) {
-    return (
-      <a
-        href={props.href}
-        className={b(
-          { size: wpSize, view, width, form, 'with-icon': withIcon, 'icon-only': iconOnly },
-          className
-        )}
-        target={props.target}
-        rel={props.rel}
-        tabIndex={props.tabIndex}
-      >
-        {children}
-      </a>
-    );
-  }
+  const Component = as;
+  const IconOnly = !label && (iconLeft || iconRight);
+  const IconLeft = iconLeft;
+  const IconRight = iconRight;
+  const withIcon = !!iconLeft || !!iconRight;
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!disabled && onClick) {
+      onClick(e);
+    }
+  };
 
   return (
-    <button
-      onClick={props.onClick}
-      onBlur={props.onBlur}
-      className={b(
+    <Component
+      onClick={handleClick}
+      onBlur={onBlur}
+      className={cnButton(
         {
-          size: wpSize,
+          size,
           view,
           width,
           form,
-          disabled: props.disabled,
+          disabled,
           'with-icon': withIcon,
-          'icon-only': iconOnly,
+          'icon-only': !!IconOnly,
         },
-        className
+        [className]
       )}
-      type={props.type}
-      disabled={props.disabled}
-      tabIndex={props.tabIndex}
+      type={type}
+      disabled={disabled}
+      tabIndex={tabIndex}
+      otherProps={otherProps}
     >
-      {children}
-    </button>
+      {IconOnly && <IconOnly size="xs" />}
+      {(IconLeft || IconRight) && label ? (
+        <Fragment>
+          {IconLeft && (
+            <IconLeft
+              className={cnButton('icon', [wp.ptIconPlus('icon', { 'indent-r': '2xs' })])}
+              size="xs"
+            />
+          )}
+          <span className={cnButton('label', [wp.ptIconPlus('block')])}>{label}</span>
+          {IconRight && (
+            <IconRight
+              className={cnButton('icon', [wp.ptIconPlus('icon', { 'indent-l': '2xs' })])}
+              size="xs"
+            />
+          )}
+        </Fragment>
+      ) : (
+        label
+      )}
+    </Component>
   );
 };
 

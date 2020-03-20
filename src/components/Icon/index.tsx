@@ -3,13 +3,13 @@ import bem from '../../utils/bem';
 
 const b = bem('icon');
 
-export type IconProps = {
+export type IIconProps = {
   view?: 'alert' | 'brand' | 'ghost' | 'link' | 'primary' | 'secondary' | 'success' | 'warning';
   size: 'xs' | 's' | 'm';
   className?: string;
 };
 
-const Icon: React.FC<IconProps> = (props) => {
+const Icon: React.FC<IIconProps> = (props) => {
   const { view, size = 'm', children, className } = props;
   let width;
 

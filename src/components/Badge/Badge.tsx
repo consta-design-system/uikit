@@ -4,23 +4,23 @@ import React from 'react';
 import { classnames } from '@bem-react/classnames';
 import { cn } from '../../utils/bem';
 import * as wp from '../../utils/whitepaper/whitepaper';
-import { IconProps } from '../Icon';
+import { IIconProps } from '../Icon';
 
 export const cnBadge = cn('badge1');
 
-export type BadgeProps = {
+export type IBadgeProps = {
   size: 's' | 'm';
   view: 'filled' | 'stroked';
   status: 'success' | 'error' | 'warning' | 'normal' | 'system';
   form: 'default' | 'round';
   minified?: boolean;
-  icon?: React.FC<IconProps>;
+  icon?: React.FC<IIconProps>;
   innerRef?: () => void;
   label?: string;
   className?: string;
 };
 
-export const Badge: React.FC<BadgeProps> = (props) => {
+export const Badge: React.FC<IBadgeProps> = (props) => {
   const {
     size = 'm',
     view = 'filled',
@@ -31,6 +31,7 @@ export const Badge: React.FC<BadgeProps> = (props) => {
     className,
     label,
     innerRef,
+    ...customProps
   } = props;
 
   const _className =
@@ -46,12 +47,17 @@ export const Badge: React.FC<BadgeProps> = (props) => {
         className={cnBadge({ size, status, minified }, [_className])}
         title={label}
         ref={innerRef}
+        {...customProps}
       />
     );
   }
 
   return (
-    <div className={cnBadge({ size, view, status, form, withIcon }, [_className])} ref={innerRef}>
+    <div
+      className={cnBadge({ size, view, status, form, withIcon }, [_className])}
+      ref={innerRef}
+      {...customProps}
+    >
       {Icon ? (
         <div className={wp.ptIconPlus({ 'vertical-align': 'center' })}>
           <div className={cnBadge('icon', [wp.ptIconPlus('icon', { 'indent-r': '2xs' })])}>
