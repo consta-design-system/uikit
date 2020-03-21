@@ -23,8 +23,8 @@
       width: calc(var(--box-size) * 0.6);
       height: calc(var(--box-size) * 0.35);
       box-sizing: border-box;
-      border-bottom: var(--control-border-width) solid var(--color-control-typo-checked);
-      border-left: var(--control-border-width) solid var(--color-control-typo-checked);
+      border-bottom: var(--control-border-width) solid var(--color-control-typo-primary);
+      border-left: var(--control-border-width) solid var(--color-control-typo-primary);
       background-color: var(--color-control-bg-affect);
       opacity: 0;
       transform-origin: 0 0;
@@ -71,19 +71,13 @@
 
     &:checked {
       + .checkbox__box {
-        border-color: var(--color-control-bg-border-checked);
-        background-color: var(--color-control-bg-checked);
+        border-color: var(--color-control-bg-primary);
+        background-color: var(--color-control-bg-primary);
 
         &::before {
           opacity: 1;
           transform: rotate(-50deg) scale(1, 1);
         }
-      }
-    }
-
-    &:focus {
-      + .checkbox__box {
-        box-shadow: 0 0 2px 1px var(--color-control-bg-border-focus);
       }
     }
   }
@@ -93,8 +87,8 @@
       border-color: var(--color-control-bg-border-default-hover);
     }
     .checkbox__input:checked + .checkbox__box {
-      border-color: var(--color-control-bg-border-checked-hover);
-      background-color: var(--color-control-bg-checked-hover);
+      border-color: var(--color-control-bg-primary-hover);
+      background-color: var(--color-control-bg-primary-hover);
     }
   }
 
@@ -103,11 +97,11 @@
   &_intermediate:hover {
     .checkbox__box,
     .checkbox__input:checked + .checkbox__box {
-      border-color: var(--color-control-bg-border-checked);
-      background-color: var(--color-control-bg-checked);
+      border-color: var(--color-control-bg-primary);
+      background-color: var(--color-control-bg-primary);
 
       &::before {
-        background-color: var(--color-control-typo-checked);
+        background-color: var(--color-control-typo-primary);
         transition: opacity 0.15s, transform 0.15s, background-color 0.08s 0.04s;
         transform: rotate(0) scale(1, 0.35) translate(0, -50%);
         opacity: 1;
