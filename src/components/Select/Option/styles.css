@@ -19,7 +19,7 @@
   }
 
   &_focused {
-    color: var(--color-control-bg-checked-hover);
+    color: var(--color-control-bg-primary-hover);
   }
 
   &_empty {
@@ -52,8 +52,8 @@
       border-color: var(--color-control-bg-border-default-hover);
     }
     .checkbox__input:checked + .checkbox__box {
-      border-color: var(--color-control-bg-border-checked-hover);
-      background-color: var(--color-control-bg-checked-hover);
+      border-color: var(--color-control-bg-primary-hover);
+      background-color: var(--color-control-bg-primary-hover);
     }
   }
 

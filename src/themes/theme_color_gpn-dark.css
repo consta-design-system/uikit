@@ -90,13 +90,6 @@ $color-base-critical: #33000f;
   --color-control-typo-clear: color($color-base-base a(70%)); /* Цвет акцентного текста */
   --color-control-typo-clear-hover: color($color-base-base a(90%)); /* Цвет акцентного текста */
 
-  /* Checked */
-  --color-control-bg-checked: color($color-base-project l(+5%)); /* Цвет фона активного контрола */
-  --color-control-bg-checked-hover: color($color-base-project l(+11%)); /* Цвет фона активного контрола по ховеру */
-  --color-control-typo-checked: color($color-base-base l(+100%)); /* Цвет фона содержимого контрола */
-  --color-control-bg-border-checked: color($color-base-project l(+5%)); /* Цвет фона бордеров котрола */
-  --color-control-bg-border-checked-hover: color($color-base-project l(+11%)); /* Цвет фона бордеров контрола по ховеру */
-
   /* Disable */
   --color-control-bg-disable: color($color-base-phantom s(-100) l(24%)); /* Цвет фона неактивного контрола */
   --color-control-bg-border-disable: color($color-base-phantom s(-32) l(32%) a(20%)); /* Цвет фона бордеров неактивного контрола */
