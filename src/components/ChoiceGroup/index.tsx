@@ -2,7 +2,7 @@ import React, { ChangeEvent, FocusEventHandler } from 'react';
 import bem from '../../utils/bem';
 
 import './styles.css';
-import Button from '../Button';
+import Button from '../Button/Button';
 
 const b = bem('choice-group');
 

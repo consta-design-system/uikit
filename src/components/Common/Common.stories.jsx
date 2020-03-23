@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import ValueKeeper from '../../utils/testHelpers/ValueKeeper';
 import './styles.css';
 
-import Button from '../Button';
+import Button from '../Button/Button';
 import Textarea from '../Textarea';
 import Input from '../Input';
 import ChoiceGroup from '../ChoiceGroup';
