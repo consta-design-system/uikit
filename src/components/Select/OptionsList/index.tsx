@@ -6,7 +6,7 @@ import bem from '../../../utils/bem';
 
 import './styles.css';
 import { useCollapseContent } from '../../../hooks/useCollapseContent';
-import Button from '../../Button/Button';
+import Button from '../../Button';
 
 const b = bem('select-options-list');
 

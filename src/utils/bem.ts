@@ -1,6 +1,4 @@
 import { block, BemMods } from 'bem-cn';
-import { withNaming } from '@bem-react/classname';
-export const cn = withNaming({ e: '__', m: '_', v: '_' });
 
 // bem-cn в вызовах вида b('my-element') возвращает не строку, а объект с методом toString.
 // React начиная с 16 версии перестал вызывать на атрибуте className метод toString.
@@ -14,7 +12,7 @@ export default (blockName: string) => {
   return (
     elemNameOrBlockMods?: string | BemMods,
     elemModsOrMixins?: BemMods | string,
-    mixins?: string
+    mixins?: string,
   ): string => {
     if (elemNameOrBlockMods && elemModsOrMixins && mixins) {
       // b('my-element-name', {my: 'modifier'}, 'my other mixin classes')
