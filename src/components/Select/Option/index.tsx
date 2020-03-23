@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 import './styles.css';
 import bem from '../../../utils/bem';
-import Checkbox from '../../Checkbox';
+import Checkbox from '../../Checkbox/Checkbox';
 
 type Props = {
   value: string;
@@ -33,7 +33,7 @@ const IconPlus = ({ className }: { className?: string }) => (
 
 const b = bem('select-option');
 
-const OptionComponent: React.FC<Props> = props => {
+const OptionComponent: React.FC<Props> = (props) => {
   const {
     value,
     isFocused,

@@ -1,7 +1,8 @@
 import React from 'react';
+// import { cn } from '../../utils/bem';
 import bem from '../../utils/bem';
 
-import './styles.css';
+import './Checkbox.css';
 
 const b = bem('checkbox');
 
