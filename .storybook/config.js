@@ -7,12 +7,12 @@ import { withA11y } from '@storybook/addon-a11y';
 import { withThemes } from 'storybook-addon-themes';
 
 import whitepaperStorybookTheme from './whitepaperStorybookTheme';
-import '../src/utils/whitepaper/whitepaper.css';
+import '../src/whitepaper.css';
 import '../src/index.css';
 
 // Подключаем все темы для возможности переключения в storybook'е
 const requireTheme = requireContext('../src/themes', false, /\.css$/);
-requireTheme.keys().forEach((filename) => requireTheme(filename));
+requireTheme.keys().forEach(filename => requireTheme(filename));
 
 addParameters({
   options: {
@@ -25,11 +25,11 @@ addParameters({
 
 addDecorator(withA11y);
 
-addDecorator((story) => {
+addDecorator(story => {
   return story();
 });
 
-addDecorator((story) => {
+addDecorator(story => {
   const appStyles = {
     background: 'var(--color-bg-default)',
     padding: 'var(--space-3xl)',
@@ -48,7 +48,7 @@ addDecorator(withThemes);
 const req = requireContext('../src', true, /.stories.(j|t)sx$/); // TODO: изменить на /.stories.tsx$/
 
 function loadStories() {
-  req.keys().forEach((filename) => req(filename));
+  req.keys().forEach(filename => req(filename));
 }
 
 configure(loadStories, module);

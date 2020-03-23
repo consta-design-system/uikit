@@ -3,7 +3,7 @@ const getWhitepaperThemes = require('../src/themes/getWhitepaperThemes');
 
 module.exports = async ({ config }) => {
   // Remove the existing css rule
-  config.module.rules = config.module.rules.filter((f) => f.test.toString() !== '/\\.css$/');
+  config.module.rules = config.module.rules.filter(f => f.test.toString() !== '/\\.css$/');
 
   config.module.rules.push({
     test: /\.css$/,
@@ -26,7 +26,7 @@ module.exports = async ({ config }) => {
   config.plugins.push(
     new webpack.DefinePlugin({
       WHITEPAPER_THEMES: JSON.stringify(getWhitepaperThemes()),
-    })
+    }),
   );
 
   return config;
