@@ -4,7 +4,7 @@ import bem from '../../../../utils/bem';
 import './styles.css';
 
 import Input from '../../../Input/index';
-import Button from '../../../Button/index';
+import Button from '../../../Button/Button';
 import IconSearch from '../../../Icon/icons/Search';
 
 const b = bem('search-bar');
