@@ -10,7 +10,7 @@ import Textarea from '../Textarea';
 import Input from '../Input';
 import ChoiceGroup from '../ChoiceGroup';
 import Checkbox from '../Checkbox/Checkbox';
-import Radio from '../Radio';
+import Radio from '../Radio/Radio';
 import Switch from '../Switch';
 import { Select, MultiSelect } from '../Select';
 

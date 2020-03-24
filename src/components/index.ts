@@ -16,7 +16,7 @@ export { default as Button } from './Button/Button';
 export { default as Checkbox } from './Checkbox/Checkbox';
 export { default as ChoiceGroup } from './ChoiceGroup';
 export { default as Input } from './Input';
-export { default as Radio } from './Radio';
+export { default as Radio } from './Radio/Radio';
 export { default as Textarea } from './Textarea';
 export { default as Switch } from './Switch';
 export { Select, MultiSelect, CreatableSelect } from './Select';
