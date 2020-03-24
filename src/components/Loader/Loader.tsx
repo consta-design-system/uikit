@@ -9,10 +9,10 @@ export interface ILoader {
 
 export const cnLoader = cn('loader');
 
-export function Loader({ className, size = 'm' }: ILoader) {
+export const Loader: React.FC<ILoader> = ({ className, size = 'm' }) => {
   return (
     <div className={cnLoader({ size }, [className])}>
       <div className={cnLoader('dot')} />
     </div>
   );
-}
+};
