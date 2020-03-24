@@ -70,7 +70,7 @@ const OptionComponent: React.FC<Props> = (props) => {
       {isMulti && (
         <Checkbox
           className={b('check')}
-          wpSize={wpSize === 'l' ? 'l' : 'm'}
+          size={wpSize === 'l' ? 'l' : 'm'}
           value={isSelected}
           onChange={() => {}}
           tabIndex={-1}
