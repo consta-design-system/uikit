@@ -1,12 +1,23 @@
 import './Button.css';
-import React, { Fragment, FocusEventHandler, ElementType } from 'react';
+
+import React, { Fragment, FocusEventHandler } from 'react';
 import { cn } from '../../utils/bem';
 import { IIconProps } from '../Icon';
 import * as wp from '../../utils/whitepaper/whitepaper';
 
 export const cnButton = cn('button');
 
-export type ButtonProps = {
+export type PropName = string | number;
+export type PropId = string | number;
+export type PropOnClickProps = {
+  e: React.MouseEvent;
+  id?: PropId;
+  name?: PropName;
+};
+
+export interface IButton {
+  id?: PropId;
+  name?: PropName;
   size: 'xs' | 's' | 'm' | 'l';
   view: 'clear' | 'ghost' | 'primary' | 'secondary';
   width?: 'default' | 'full';
@@ -18,21 +29,22 @@ export type ButtonProps = {
     | 'round-brick'
     | 'brick-default'
     | 'default-brick';
-  iconPosition?: 'left' | 'right';
   children?: React.ReactNode;
   className?: string;
   tabIndex?: number;
   disabled?: boolean;
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (object: PropOnClickProps) => void;
   onBlur?: FocusEventHandler<HTMLElement>;
   label: string;
   type?: 'submit' | 'reset' | 'button';
   iconLeft?: React.FC<IIconProps>;
   iconRight?: React.FC<IIconProps>;
-  as?: ElementType;
-};
+  as?: React.ElementType;
+}
 
-export const Button: React.FC<ButtonProps | any> = (props) => {
+//TODO: <IButton | any> - в дальнейшем подумать как избежать Any
+
+export const Button: React.FC<IButton | any> = (props) => {
   const {
     size = 'm',
     view = 'primary',
@@ -48,6 +60,8 @@ export const Button: React.FC<ButtonProps | any> = (props) => {
     type,
     tabIndex,
     as = 'button',
+    id,
+    name,
     ...otherProps
   } = props;
 
@@ -58,7 +72,7 @@ export const Button: React.FC<ButtonProps | any> = (props) => {
   const withIcon = !!iconLeft || !!iconRight;
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!disabled && onClick) {
-      onClick(e);
+      onClick({ e, id, name });
     }
   };
 
@@ -81,7 +95,9 @@ export const Button: React.FC<ButtonProps | any> = (props) => {
       type={type}
       disabled={disabled}
       tabIndex={tabIndex}
-      otherProps={otherProps}
+      name={name}
+      id={id}
+      {...otherProps}
     >
       {IconOnly && <IconOnly size="xs" />}
       {(IconLeft || IconRight) && label ? (

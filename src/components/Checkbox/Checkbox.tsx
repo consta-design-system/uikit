@@ -1,43 +1,74 @@
-import React from 'react';
-// import { cn } from '../../utils/bem';
-import bem from '../../utils/bem';
-
 import './Checkbox.css';
 
-const b = bem('checkbox');
+import React from 'react';
+import { cn } from '../../utils/bem';
 
-export type CheckboxProps = {
-  value?: boolean;
-  wpSize: 'm' | 'l';
+export type PropName = string | undefined;
+export type PropId = string | number | undefined;
+export type PropValue = any;
+export type PropChecked = boolean;
+export type PropOnClickProps = {
+  e: React.ChangeEvent<HTMLInputElement>;
+  id?: PropId;
+  name?: PropName;
+  value?: PropValue;
+  checked?: PropChecked;
+};
+
+export interface ICheckbox {
+  value?: PropValue;
+  checked?: boolean;
+  size: 'm' | 'l';
   disabled?: boolean;
   intermediate?: boolean;
   className?: string;
-} & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value'>;
+  label?: string;
+  onChange?: (object: PropOnClickProps) => void;
+  id?: PropId;
+  name?: PropName;
+}
 
-const Checkbox: React.FC<CheckboxProps> = ({
+declare type excludeInputHTMLAttributes = 'value' | 'size';
+declare type InputProps = Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  excludeInputHTMLAttributes
+>;
+
+const cnCheckbox = cn('checkbox');
+
+export const Checkbox: React.FC<ICheckbox & InputProps> = ({
   value,
+  checked,
   id,
   name,
-  wpSize,
+  size,
   disabled,
   intermediate,
   className,
-  children,
-  ...rest
+  label,
+  onChange,
+  ...otherProps
 }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!disabled && onChange) {
+      onChange({ e, id, name, value, checked: !checked });
+    }
+  };
+
   return (
-    <label className={b({ size: wpSize, disabled, intermediate }, className || '')}>
+    <label className={cnCheckbox({ size, disabled, intermediate }, [className])}>
       <input
-        {...rest}
         type="checkbox"
-        id={id}
+        id={id ? id.toString() : undefined}
         name={name}
-        className={b('input')}
-        checked={value}
+        className={cnCheckbox('input')}
+        checked={checked}
         disabled={disabled}
+        onChange={handleChange}
+        {...otherProps}
       />
-      <div className={b('box')} />
-      <span className={b('text')}>{children}</span>
+      <div className={cnCheckbox('box')} />
+      {label && <span className={cnCheckbox('text')}>{label}</span>}
     </label>
   );
 };
