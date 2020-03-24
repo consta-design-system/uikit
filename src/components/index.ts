@@ -18,7 +18,7 @@ export { default as ChoiceGroup } from './ChoiceGroup';
 export { default as Input } from './Input';
 export { Radio } from './Radio/Radio';
 export { default as Textarea } from './Textarea';
-export { default as Switch } from './Switch';
+export { Switch } from './Switch/Switch';
 export { Select, MultiSelect, CreatableSelect } from './Select';
 
 // Графика
