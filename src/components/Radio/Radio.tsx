@@ -1,7 +1,7 @@
-import './Checkbox.css';
-
 import React from 'react';
 import { cn } from '../../utils/bem';
+
+import './Radio.css';
 
 export type PropName = string | undefined;
 export type PropId = string | number | undefined;
@@ -15,12 +15,11 @@ export type PropOnClickProps = {
   checked?: PropChecked;
 };
 
-export interface ICheckbox {
+export interface IRadio {
   value?: PropValue;
   checked?: boolean;
   size: 'm' | 'l';
   disabled?: boolean;
-  intermediate?: boolean;
   className?: string;
   label?: string;
   onChange?: (object: PropOnClickProps) => void;
@@ -31,7 +30,6 @@ export interface ICheckbox {
 declare type excludeInputHTMLAttributes =
   | 'value'
   | 'size'
-  | 'intermediate'
   | 'checked'
   | 'disabled'
   | 'className'
@@ -44,18 +42,17 @@ declare type InputProps = Omit<
   excludeInputHTMLAttributes
 >;
 
-const cnCheckbox = cn('checkbox');
+const cnRadio = cn('radio');
 
-export const Checkbox: React.FC<ICheckbox & InputProps> = ({
+export const Radio: React.FC<IRadio & InputProps> = ({
   value,
-  checked,
   id,
   name,
   size,
   disabled,
-  intermediate,
-  className,
   label,
+  className,
+  checked,
   onChange,
   ...otherProps
 }) => {
@@ -66,21 +63,19 @@ export const Checkbox: React.FC<ICheckbox & InputProps> = ({
   };
 
   return (
-    <label className={cnCheckbox({ size, disabled, intermediate }, [className])}>
+    <label className={cnRadio({ size, disabled }, [className])}>
       <input
-        type="checkbox"
+        type="radio"
         id={id ? id.toString() : undefined}
         name={name}
-        className={cnCheckbox('input')}
+        onChange={handleChange}
+        className={cnRadio('input')}
         checked={checked}
         disabled={disabled}
-        onChange={handleChange}
         {...otherProps}
       />
-      <div className={cnCheckbox('box')} />
-      {label && <span className={cnCheckbox('label')}>{label}</span>}
+      <div className={cnRadio('box')} />
+      {label && <span className={cnRadio('label')}>{label}</span>}
     </label>
   );
 };
-
-export default Checkbox;

@@ -5,12 +5,12 @@ import { action } from '@storybook/addon-actions';
 import ValueKeeper from '../../utils/testHelpers/ValueKeeper';
 import './styles.css';
 
-import Button from '../Button/Button';
+import { Button } from '../Button/Button';
 import Textarea from '../Textarea';
 import Input from '../Input';
 import ChoiceGroup from '../ChoiceGroup';
-import Checkbox from '../Checkbox/Checkbox';
-import Radio from '../Radio';
+import { Checkbox } from '../Checkbox/Checkbox';
+import { Radio } from '../Radio/Radio';
 import Switch from '../Switch';
 import { Select, MultiSelect } from '../Select';
 
@@ -517,34 +517,18 @@ storiesOf('Common controls', module)
         <section className="common__checkbox">
           <h2 className="text text_size_3xl text_view_primary text_weight-bold">Checkbox</h2>
           <div>
-            <Checkbox className="checkbox_size_m">{'Check me, baby!'}</Checkbox>
-            <Checkbox className="checkbox_size_m" value={true}>
-              {'Check me, baby!'}
-            </Checkbox>
-            <Checkbox className="checkbox_size_m" intermediate={true}>
-              {'Check me, baby!'}
-            </Checkbox>
-            <Checkbox className="checkbox_size_m" disabled>
-              {'Check me, baby!'}
-            </Checkbox>
-            <Checkbox className="checkbox_size_m" value={true} disabled>
-              {'Check me, baby!'}
-            </Checkbox>
+            <Checkbox label="Check me, baby!" />
+            <Checkbox label="Check me, baby!" checked />
+            <Checkbox label="Check me, baby!" intermediate />
+            <Checkbox label="Check me, baby!" disabled />
+            <Checkbox label="Check me, baby!" checked disabled />
           </div>
           <div>
-            <Checkbox className="checkbox_size_l">{'Check me, baby!'}</Checkbox>
-            <Checkbox className="checkbox_size_l" value={true}>
-              {'Check me, baby!'}
-            </Checkbox>
-            <Checkbox className="checkbox_size_l" intermediate={true}>
-              {'Check me, baby!'}
-            </Checkbox>
-            <Checkbox className="checkbox_size_l" disabled>
-              {'Check me, baby!'}
-            </Checkbox>
-            <Checkbox className="checkbox_size_l" value={true} disabled>
-              {'Check me, baby!'}
-            </Checkbox>
+            <Checkbox label="Check me, baby!" size="l" />
+            <Checkbox label="Check me, baby!" size="l" checked />
+            <Checkbox label="Check me, baby!" size="l" intermediate />
+            <Checkbox label="Check me, baby!" size="l" disabled />
+            <Checkbox label="Check me, baby!" size="l" checked disabled />
           </div>
         </section>
 
