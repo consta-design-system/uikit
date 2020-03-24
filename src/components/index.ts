@@ -13,7 +13,7 @@ import '../themes/theme_space_gpn-default.css';
 
 // Контролы
 export { default as Button } from './Button/Button';
-export { default as Checkbox } from './Checkbox';
+export { default as Checkbox } from './Checkbox/Checkbox';
 export { default as ChoiceGroup } from './ChoiceGroup';
 export { default as Input } from './Input';
 export { default as Radio } from './Radio';

@@ -6,8 +6,6 @@ import { cn } from '../../utils/bem';
 import * as wp from '../../utils/whitepaper/whitepaper';
 import { IIconProps } from '../Icon';
 
-export const cnBadge = cn('badge1');
-
 export type IBadgeProps = {
   size: 's' | 'm';
   view: 'filled' | 'stroked';
@@ -19,6 +17,8 @@ export type IBadgeProps = {
   label?: string;
   className?: string;
 };
+
+export const cnBadge = cn('badge1');
 
 export const Badge: React.FC<IBadgeProps> = (props) => {
   const {

@@ -19,8 +19,8 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-member-accessibility': 'off',
     '@typescript-eslint/prefer-interface': 'off',
-    '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
     '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/interface-name-prefix': ['error', 'always'],
     'react/prop-types': 'off',
     'import/order': [
       'error',

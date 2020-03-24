@@ -9,7 +9,7 @@ import Button from '../Button/Button';
 import Textarea from '../Textarea';
 import Input from '../Input';
 import ChoiceGroup from '../ChoiceGroup';
-import Checkbox from '../Checkbox';
+import Checkbox from '../Checkbox/Checkbox';
 import Radio from '../Radio';
 import Switch from '../Switch';
 import { Select, MultiSelect } from '../Select';
@@ -19,7 +19,7 @@ const buttonKnobs = () => ({
   form: select(
     'Button Form',
     ['default', 'brick', 'round', 'brick-round', 'round-brick', 'brick-default', 'default-brick'],
-    'default',
+    'default'
   ),
   disabled: boolean('Button Disabled', false),
 });
@@ -43,7 +43,7 @@ const inputKnobs = () => ({
       'clear-brick',
       'clear-clear',
     ],
-    'default',
+    'default'
   ),
   state: select('Input State', ['', 'alert', 'success', 'warning'], ''),
   disabled: boolean('Input Disabled', false),
