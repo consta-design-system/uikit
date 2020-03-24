@@ -25,7 +25,7 @@ export { Select, MultiSelect, CreatableSelect } from './Select';
 export * from './Icon/export';
 export { default as Icon } from './Icon';
 export { default as File } from './File';
-export { default as Loader } from './Loader';
+export { default as Loader } from './Loader/Loader';
 
 // Другие компоненты
 export { default as Text } from './Text';
