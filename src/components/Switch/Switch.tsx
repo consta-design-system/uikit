@@ -43,7 +43,7 @@ declare type InputProps = Omit<
   excludeInputHTMLAttributes
 >;
 
-const cnSwitch = cn('switch');
+export const cnSwitch = cn('switch');
 
 export const Switch: React.FC<ISwitch & InputProps> = ({
   value,

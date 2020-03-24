@@ -44,7 +44,7 @@ declare type InputProps = Omit<
   excludeInputHTMLAttributes
 >;
 
-const cnCheckbox = cn('checkbox');
+export const cnCheckbox = cn('checkbox');
 
 export const Checkbox: React.FC<ICheckbox & InputProps> = ({
   value,
