@@ -95,7 +95,7 @@
     }
   }
 
-  &__text {
+  &__label {
     margin-left: var(--offset);
     color: var(--color-control-typo-default);
     font-size: var(--switch-font-size);
@@ -121,7 +121,7 @@
         opacity: 0.4;
       }
     }
-    .switch__input:disabled ~ .switch__text {
+    .switch__input:disabled ~ .switch__label {
       color: var(--color-control-typo-disable);
     }
   }

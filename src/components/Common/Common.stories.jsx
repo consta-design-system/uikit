@@ -11,7 +11,7 @@ import Input from '../Input';
 import ChoiceGroup from '../ChoiceGroup';
 import { Checkbox } from '../Checkbox/Checkbox';
 import { Radio } from '../Radio/Radio';
-import Switch from '../Switch';
+import { Switch } from '../Switch/Switch';
 import { Select, MultiSelect } from '../Select';
 
 const buttonKnobs = () => ({
