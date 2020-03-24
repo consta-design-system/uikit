@@ -71,7 +71,7 @@ const OptionComponent: React.FC<Props> = (props) => {
         <Checkbox
           className={b('check')}
           size={wpSize === 'l' ? 'l' : 'm'}
-          value={isSelected}
+          checked={isSelected}
           onChange={() => {}}
           tabIndex={-1}
           intermediate={isIntermediate}
