@@ -1,0 +1,35 @@
+import React from 'react';
+import { withKnobs, text, select } from '@storybook/addon-knobs';
+import { storiesOf } from '@storybook/react';
+import { Text } from './Text';
+
+const defaultKnobs = () => ({
+  as: select('as', ['p', 'div', 'a', 'span', 'h1', 'h2'], 'p'),
+  align: select('align', ['left', 'center', 'right'], ''),
+  decoration: select('decoration', ['underline', ''], ''),
+  display: select('display', ['block', 'inline-block', 'inline'], ''),
+  font: select('font', ['mono', 'sans', 'serif'], 'serif'),
+  lineHeight: select('lineHeight', ['2xs', 'xs', 's', 'm', 'l'], ''),
+  size: select('size', ['2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'], ''),
+  spacing: select('spacing', ['xs', 's', 'm', 'l', ''], ''),
+  fontStyle: select('fontStyle', ['italic', ''], ''),
+  transform: select('transform', ['uppercase', ''], ''),
+  type: select('type', ['blockquote', 'p', 'h3', 'h2', 'h1', ''], ''),
+  view: select(
+    'View',
+    ['alert', 'brand', 'ghost', 'link', 'link-minor', 'primary', 'secondary', 'success', 'warning'],
+    'primary'
+  ),
+  weight: select('weight', ['black', 'bold', 'light', 'regular', 'semibold', 'thin'], 'regular'),
+});
+
+storiesOf('Text', module)
+  .addDecorator(withKnobs)
+  .add('Текст', () => (
+    <Text<{ href: string }> href="#" {...defaultKnobs()}>
+      {text(
+        'Content',
+        'Чтобы человек захотел это прочитать, у него должна быть очень веская причина. Может быть, его заставили. Может быть, это модный автор, и все друзья уже прочитали. Может быть, где-то здесь в тексте решение его насущной проблемы. Или он просто устроился в кресле, чтобы познакомиться с классной книгой. В любом случае нужна веская причина. Сам по себе этот текст ничем не привлекает.'
+      )}
+    </Text>
+  ));

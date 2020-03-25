@@ -28,7 +28,7 @@ export { default as File } from './File';
 export { Loader } from './Loader/Loader';
 
 // Другие компоненты
-export { Text } from './Text';
+export { Text } from './Text/Text';
 export { Informer } from './Informer/Informer';
 export { default as Popover } from './Popover';
 export { default as User } from './User';

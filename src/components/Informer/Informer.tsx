@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { classnames } from '@bem-react/classnames';
 import { cn } from '../../utils/bem';
 import { IIconProps } from '../Icon';
-import { Text } from '../Text';
+import { Text } from '../Text/Text';
 
 import './Informer.css';
 import '../../themes/theme_color_gpn-default.css';
@@ -16,13 +16,14 @@ type CommonProps = {
   view: 'filled' | 'bordered';
   status: 'system' | 'alert' | 'warning' | 'success';
   icon?: React.FC<IIconProps>;
-  label?: string;
+  label?: React.ReactNode;
+  children?: React.ReactNode;
   title?: string;
   className?: string;
 };
 
 export const Informer: React.FC<CommonProps> = (props) => {
-  const { className, view, status, icon, label, title } = props;
+  const { className, view, status, icon, label, title, children } = props;
   const Icon = icon;
   const withIcon = !!icon;
   const _className =
@@ -50,12 +51,12 @@ export const Informer: React.FC<CommonProps> = (props) => {
       {Icon ? (
         <div className={wp.ptIconPlus('block')}>
           {title && <Text weight="bold">{title}</Text>}
-          {label && <Text>{label}</Text>}
+          {label || children}
         </div>
       ) : (
         <Fragment>
           {title && <Text weight="bold">{title}</Text>}
-          {label && <Text>{label}</Text>}
+          {label || children}
         </Fragment>
       )}
     </div>
