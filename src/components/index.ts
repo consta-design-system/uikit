@@ -28,8 +28,8 @@ export { default as File } from './File';
 export { Loader } from './Loader/Loader';
 
 // Другие компоненты
-export { default as Text } from './Text';
-export { default as Informer } from './Informer';
+export { Text } from './Text';
+export { Informer } from './Informer/Informer';
 export { default as Popover } from './Popover';
 export { default as User } from './User';
 export { Badge } from './Badge/Badge';

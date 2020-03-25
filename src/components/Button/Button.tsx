@@ -40,7 +40,7 @@ export type ButtonProps = {
   as?: React.ElementType;
 };
 
-declare type excludeInputHTMLAttributes =
+declare type excludeHTMLAttributes =
   | 'id'
   | 'name'
   | 'size'
@@ -58,10 +58,10 @@ declare type excludeInputHTMLAttributes =
 
 export type IButton<T> = ButtonProps &
   (
-    | Omit<React.ButtonHTMLAttributes<Element>, excludeInputHTMLAttributes>
-    | Omit<T, excludeInputHTMLAttributes>);
+    | Omit<React.ButtonHTMLAttributes<Element>, excludeHTMLAttributes>
+    | Omit<T, excludeHTMLAttributes>);
 
-// При использовании as позаботьтесь об интерфейсе прокинутого компонента.
+// При использовании "as" позаботьтесь об интерфейсе прокинутого компонента.
 // При вызове кнопки:
 // <Button<T>/>
 
