@@ -3,14 +3,14 @@ import bem from '../../utils/bem';
 
 const b = bem('icon');
 
-type CommonProps = {
-  view: 'alert' | 'brand' | 'ghost' | 'link' | 'primary' | 'secondary' | 'success' | 'warning';
+export interface IIconProps {
+  view?: 'alert' | 'brand' | 'ghost' | 'link' | 'primary' | 'secondary' | 'success' | 'warning';
   size: 'xs' | 's' | 'm';
   className?: string;
-};
+}
 
-const Icon: React.FC<CommonProps> = props => {
-  const { view, size, children, className } = props;
+const Icon: React.FC<IIconProps> = (props) => {
+  const { view, size = 'm', children, className } = props;
   let width;
 
   if (size === 'xs') width = 12;
@@ -24,7 +24,7 @@ const Icon: React.FC<CommonProps> = props => {
           view,
           size,
         },
-        className,
+        className
       )}
       width={width}
       height={width}

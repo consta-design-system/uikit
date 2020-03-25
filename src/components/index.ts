@@ -1,4 +1,4 @@
-import '../whitepaper.css';
+import '../utils/whitepaper/whitepaper.css';
 
 // Темы на цвета
 import '../themes/theme_color_gpn-default.css';
@@ -12,27 +12,27 @@ import '../themes/theme_font_gpn-default.css';
 import '../themes/theme_space_gpn-default.css';
 
 // Контролы
-export { default as Button } from './Button';
-export { default as Checkbox } from './Checkbox';
+export { Button } from './Button/Button';
+export { Checkbox } from './Checkbox/Checkbox';
 export { default as ChoiceGroup } from './ChoiceGroup';
 export { default as Input } from './Input';
-export { default as Radio } from './Radio';
+export { Radio } from './Radio/Radio';
 export { default as Textarea } from './Textarea';
-export { default as Switch } from './Switch';
+export { Switch } from './Switch/Switch';
 export { Select, MultiSelect, CreatableSelect } from './Select';
 
 // Графика
 export * from './Icon/export';
 export { default as Icon } from './Icon';
 export { default as File } from './File';
-export { default as Loader } from './Loader';
+export { Loader } from './Loader/Loader';
 
 // Другие компоненты
 export { default as Text } from './Text';
 export { default as Informer } from './Informer';
 export { default as Popover } from './Popover';
 export { default as User } from './User';
-export { default as Badge } from './Badge';
+export { Badge } from './Badge/Badge';
 
 // Куски интерфейсов
 export { default as Header } from './Header';

@@ -25,4 +25,5 @@ __diff_output__
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+yarn.lock
 *.code-workspace

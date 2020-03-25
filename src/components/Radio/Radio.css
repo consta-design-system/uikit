@@ -30,7 +30,7 @@
     }
   }
 
-  &__text {
+  &__label {
     margin-left: var(--offset);
     color: var(--color-control-typo-default);
     font-size: var(--radio-font-size);
@@ -78,7 +78,7 @@
         background-color: var(--color-control-typo-disable);
       }
     }
-    .radio__input:disabled ~ .radio__text {
+    .radio__input:disabled ~ .radio__label {
       color: var(--color-control-typo-disable);
     }
   }

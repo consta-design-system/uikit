@@ -33,7 +33,7 @@
     }
   }
 
-  &__text {
+  &__label {
     margin-left: var(--offset);
     color: var(--color-control-typo-default);
     font-size: var(--checkbox-font-size);
@@ -119,7 +119,13 @@
         border-color: var(--color-control-typo-disable);
       }
     }
-    .checkbox__input:disabled ~ .checkbox__text {
+
+    &.checkbox_intermediate .checkbox__input:disabled + .checkbox__box {
+      &::before {
+        background-color: var(--color-control-typo-disable);
+      }
+    }
+    .checkbox__input:disabled ~ .checkbox__label {
       color: var(--color-control-typo-disable);
     }
   }
