@@ -6,7 +6,7 @@ import { cn } from '../../utils/bem';
 import * as wp from '../../utils/whitepaper/whitepaper';
 import { IIconProps } from '../Icon';
 
-export type IBadgeProps = {
+export type BadgeProps = {
   size: 's' | 'm';
   view: 'filled' | 'stroked';
   status: 'success' | 'error' | 'warning' | 'normal' | 'system';
@@ -16,11 +16,30 @@ export type IBadgeProps = {
   innerRef?: () => void;
   label?: string;
   className?: string;
+  as?: React.ElementType;
 };
+
+declare type excludeHTMLAttributes =
+  | 'size'
+  | 'view'
+  | 'status'
+  | 'form'
+  | 'minified'
+  | 'icon'
+  | 'innerRef'
+  | 'label'
+  | 'className';
+
+export type IBadge<T> = BadgeProps &
+  (Omit<React.HTMLAttributes<Element>, excludeHTMLAttributes> | Omit<T, excludeHTMLAttributes>);
 
 export const cnBadge = cn('badge1');
 
-export const Badge: React.FC<IBadgeProps> = (props) => {
+// При использовании "as" позаботьтесь об интерфейсе прокинутого компонента.
+// При вызове кнопки:
+// <Button<T>/>
+
+export function Badge<T>(props: IBadge<T>) {
   const {
     size = 'm',
     view = 'filled',
@@ -31,9 +50,11 @@ export const Badge: React.FC<IBadgeProps> = (props) => {
     className,
     label,
     innerRef,
+    as = 'div',
     ...customProps
   } = props;
 
+  const Component = as;
   const _className =
     status != 'system' && view == 'filled'
       ? classnames(className, wp.theme({ color: 'gpn-dark' }))
@@ -43,7 +64,7 @@ export const Badge: React.FC<IBadgeProps> = (props) => {
 
   if (minified) {
     return (
-      <div
+      <Component
         className={cnBadge({ size, status, minified }, [_className])}
         title={label}
         ref={innerRef}
@@ -53,7 +74,7 @@ export const Badge: React.FC<IBadgeProps> = (props) => {
   }
 
   return (
-    <div
+    <Component
       className={cnBadge({ size, view, status, form, withIcon }, [_className])}
       ref={innerRef}
       {...customProps}
@@ -68,6 +89,6 @@ export const Badge: React.FC<IBadgeProps> = (props) => {
       ) : (
         label
       )}
-    </div>
+    </Component>
   );
-};
+}

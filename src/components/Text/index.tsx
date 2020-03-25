@@ -5,7 +5,7 @@ import './styles.css';
 const b = bem('text');
 
 type CommonProps = {
-  tag: string;
+  tag?: string;
   align?: 'left' | 'center' | 'right';
   decoration?: 'underline';
   display?: 'block' | 'inline-block' | 'inline';
@@ -31,7 +31,7 @@ type CommonProps = {
   className?: string;
 };
 
-const Text: React.FC<CommonProps> = props => {
+export const Text: React.FC<CommonProps> = (props) => {
   const {
     tag = 'div',
     align,
@@ -71,12 +71,10 @@ const Text: React.FC<CommonProps> = props => {
           weight,
           width,
         },
-        className,
+        className
       ),
       ...rest,
     },
-    children,
+    children
   );
 };
-
-export default Text;
