@@ -6,7 +6,7 @@ import bem from '../../../utils/bem';
 
 import './styles.css';
 import { useCollapseContent } from '../../../hooks/useCollapseContent';
-import Button from '../../Button/Button';
+import { Button } from '../../Button/Button';
 
 const b = bem('select-options-list');
 
@@ -73,8 +73,8 @@ const OptionsGroup: React.FC<
   const originalValue = parseFlatOptionValue(option.value).value;
 
   const availableChildOptions: SelectOptionWithLevelT[] = useMemo(
-    () => childOptions.filter(o => availableOptions.includes(o)),
-    [availableOptions],
+    () => childOptions.filter((o) => availableOptions.includes(o)),
+    [availableOptions]
   );
 
   const {
@@ -84,7 +84,7 @@ const OptionsGroup: React.FC<
   } = useCollapseContent({
     children: (
       <>
-        {availableChildOptions.map(childOption => (
+        {availableChildOptions.map((childOption) => (
           <OptionsGroup
             key={`group:${childOption.value}`}
             parentChildRelations={parentChildRelations}
@@ -114,7 +114,7 @@ const OptionsGroup: React.FC<
     }
   }, [expandAll]);
 
-  const toggleChildOptions = (e: React.MouseEvent) => {
+  const toggleChildOptions = ({ e }: { e: React.MouseEvent }) => {
     e.stopPropagation();
     onCollapseClick();
   };
@@ -143,29 +143,27 @@ const OptionsGroup: React.FC<
       </Option>
       {Boolean(childOptions.length) && (
         <Button
-          wpSize="xs"
+          size="xs"
           view="clear"
-          iconOnly
           type="button"
           tabIndex={-1}
           onClick={toggleChildOptions}
           className={b('collapse', { down: !childOptionsIsOpened })}
-        >
-          <ArrowUpIcon className={b('icon')} />
-        </Button>
+          iconLeft={ArrowUpIcon}
+        />
       )}
       {childOptionsContent}
     </div>
   );
 };
 
-export const OptionsList: React.FC<Props> = props => {
+export const OptionsList: React.FC<Props> = (props) => {
   const { availableOptions, wpSize } = props;
   const renderHierachicalList = () => {
-    const rootOptions = availableOptions.filter(o => o.parentValue === null);
+    const rootOptions = availableOptions.filter((o) => o.parentValue === null);
     return (
       <>
-        {rootOptions.map(option => (
+        {rootOptions.map((option) => (
           <OptionsGroup key={`group:${option.value}`} option={option} {...props} />
         ))}
       </>
@@ -186,7 +184,7 @@ export const OptionsList: React.FC<Props> = props => {
 
     return (
       <>
-        {availableOptions.map(option => {
+        {availableOptions.map((option) => {
           const isSelected = option.selectionState === 'selected';
           const isIntermediate = option.selectionState === 'part';
 

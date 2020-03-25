@@ -5,7 +5,7 @@ const b = bem('icon');
 
 export interface IIconProps {
   view?: 'alert' | 'brand' | 'ghost' | 'link' | 'primary' | 'secondary' | 'success' | 'warning';
-  size: 'xs' | 's' | 'm';
+  size?: 'xs' | 's' | 'm';
   className?: string;
 }
 

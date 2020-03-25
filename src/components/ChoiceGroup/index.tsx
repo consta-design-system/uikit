@@ -2,7 +2,7 @@ import React, { ChangeEvent, FocusEventHandler } from 'react';
 import bem from '../../utils/bem';
 
 import './styles.css';
-import Button from '../Button/Button';
+import { Button } from '../Button/Button';
 
 const b = bem('choice-group');
 
@@ -41,7 +41,7 @@ function ChoiceGroup<T>(props: ChoiceGroupProps<T>) {
         props.onChange && props.onChange([...props.value, itemValue]);
       }
       if (!checked && props.value.includes(itemValue)) {
-        props.onChange && props.onChange(props.value.filter(v => v !== itemValue));
+        props.onChange && props.onChange(props.value.filter((v) => v !== itemValue));
       }
       return;
     }
@@ -67,16 +67,16 @@ function ChoiceGroup<T>(props: ChoiceGroupProps<T>) {
               disabled={disabled}
             />
             <Button
+              as="div"
               type="button"
               tabIndex={-1}
               className={b('button', { checked })}
               view="primary"
-              wpSize={wpSize}
+              size={wpSize}
               form={form}
               onBlur={onBlur}
-            >
-              {item.label}
-            </Button>
+              label={item.label}
+            />
           </label>
         );
       })}

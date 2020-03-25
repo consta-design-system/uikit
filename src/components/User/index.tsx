@@ -2,7 +2,7 @@ import React from 'react';
 import bem from '../../utils/bem';
 import './styles.css';
 import IconArrowDown from '../Icon/icons/ArrowDown';
-
+import { PropOnClick } from '../Button/Button';
 const b = bem('user');
 
 type CommonProps = {
@@ -15,11 +15,11 @@ type CommonProps = {
   info?: string;
   href?: string;
   onlyAvatar?: boolean;
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: PropOnClick;
   className?: string;
 };
 
-const User: React.FC<CommonProps> = props => {
+const User: React.FC<CommonProps> = (props) => {
   const {
     type,
     onlyAvatar,
@@ -44,6 +44,12 @@ const User: React.FC<CommonProps> = props => {
   };
   let content;
 
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (onClick) {
+      onClick({ e });
+    }
+  };
+
   if (onlyAvatar)
     content = (
       <React.Fragment>
@@ -51,7 +57,7 @@ const User: React.FC<CommonProps> = props => {
           className={b(
             'avatar',
             { size: size, status: status },
-            `pt-icon-plus__icon pt-icon-plus__icon_indent-r_2xs`,
+            `pt-icon-plus__icon pt-icon-plus__icon_indent-r_2xs`
           )}
           src={avatar}
           alt={``}
@@ -66,7 +72,7 @@ const User: React.FC<CommonProps> = props => {
           className={b(
             'avatar',
             { size: size, status: status },
-            `pt-icon-plus__icon pt-icon-plus__icon_indent-r_xs`,
+            `pt-icon-plus__icon pt-icon-plus__icon_indent-r_xs`
           )}
           src={avatar}
           alt={``}
@@ -91,7 +97,7 @@ const User: React.FC<CommonProps> = props => {
     return (
       <button
         className={b({ size: size, view: view, 'only-avatar': onlyAvatar }, _className)}
-        onClick={onClick}
+        onClick={handleClick}
       >
         {content}
       </button>

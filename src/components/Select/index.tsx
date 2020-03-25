@@ -14,7 +14,7 @@ import { useClickOutside } from '../../hooks/useClickOutside';
 import { usePrevious } from '../../hooks/usePrevious';
 
 import Input, { InputStub } from '../Input';
-import Button from '../Button/Button';
+import { Button } from '../Button/Button';
 import { Popover, Directions } from '../Popover';
 import IconSelect from '../Icon/icons/Select';
 import {
@@ -68,7 +68,7 @@ type CommonProps = {
   formatLabel?: (option: SelectOptionWithLevelT) => React.ReactNode;
   filterOptions?: (
     options: SelectOptionWithLevelT[],
-    inputValue: string,
+    inputValue: string
   ) => SelectOptionWithLevelT[];
   onBlur?: (event?: React.FocusEvent<HTMLElement>) => void;
   onFocus?: (event?: React.FocusEvent<HTMLElement>) => void;
@@ -139,7 +139,7 @@ const IconArrow = ({ className }: { className?: string }) => (
 
 const SELECT_MENU_DIRECTIONS: Directions[] = ['bottom-center', 'top-center'];
 
-const BaseSelect: React.FC<BaseSelectProps> = props => {
+const BaseSelect: React.FC<BaseSelectProps> = (props) => {
   const {
     isError,
     onInputChange,
@@ -164,7 +164,7 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
     if (props.isMulti) {
       return props.isHierarchical
         ? (props.value && props.value.map(createFlatOptionValue)) || []
-        : (props.value && props.value.map(v => createFlatOptionValue({ value: v, level: 0 }))) ||
+        : (props.value && props.value.map((v) => createFlatOptionValue({ value: v, level: 0 }))) ||
             [];
     }
 
@@ -184,18 +184,18 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
     }
 
     const excludedLeveledValues = props.isHierarchical
-      ? (props.excludedValues && props.excludedValues.map(v => createFlatOptionValue(v))) || []
+      ? (props.excludedValues && props.excludedValues.map((v) => createFlatOptionValue(v))) || []
       : (props.excludedValues &&
-          props.excludedValues.map(v => createFlatOptionValue({ value: v, level: 0 }))) ||
+          props.excludedValues.map((v) => createFlatOptionValue({ value: v, level: 0 }))) ||
         [];
 
     return excludedLeveledValues.length
       ? allOptions.filter(
-          o =>
+          (o) =>
             !excludedLeveledValues.includes(o.value) ||
             (Array.isArray(leveledValue)
               ? leveledValue.includes(o.value)
-              : leveledValue === o.value),
+              : leveledValue === o.value)
         )
       : allOptions;
   }, [JSON.stringify(props.excludedValues), allOptions]);
@@ -219,14 +219,14 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
   const inputRef = ref || controlRef;
 
   const [inputValue, setInputValue] = useState(
-    selectedOption && !Array.isArray(selectedOption) ? selectedOption.label : '',
+    selectedOption && !Array.isArray(selectedOption) ? selectedOption.label : ''
   );
   const [availableOptions, setAvailableOptions] = useState(options);
   const [focusedOption, setFocusedOption] = useState<string>();
   const [isFocused, setIsFocused] = useState(false);
   const [showMenu, setShowMenu] = useClickOutside();
   const availableOptionsValues = useMemo(() => {
-    return availableOptions.map(item => item.value);
+    return availableOptions.map((item) => item.value);
   }, [availableOptions]);
 
   const propagateEvent = useCallback(() => {
@@ -236,7 +236,7 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
           view: window,
           bubbles: true,
           cancelable: true,
-        }),
+        })
       );
     }
   }, [rootRef]);
@@ -265,17 +265,17 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
 
     const addParentOptions = (
       optionsToFindParents: SelectOptionWithLevelT[],
-      foundParents: SelectOptionWithLevelT[] = optionsToFindParents,
+      foundParents: SelectOptionWithLevelT[] = optionsToFindParents
     ): SelectOptionWithLevelT[] => {
       if (!optionsToFindParents.length) {
         return [];
       }
       const parentValues = optionsToFindParents
-        .filter(o => o.parentValue !== null)
-        .map(o => o.parentValue);
+        .filter((o) => o.parentValue !== null)
+        .map((o) => o.parentValue);
 
-      const parentOptions = options.filter(o => parentValues.includes(o.value));
-      const notFoundParents = parentOptions.filter(o => !foundParents.includes(o));
+      const parentOptions = options.filter((o) => parentValues.includes(o.value));
+      const notFoundParents = parentOptions.filter((o) => !foundParents.includes(o));
 
       return [
         ...foundParents,
@@ -285,13 +285,13 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
     };
 
     const filteredOptions = filterOptions(options, trimmedInput);
-    const filteredValuesWithParents = addParentOptions(filteredOptions).map(o => o.value);
-    const filteredOptionsWithParents = options.filter(o =>
-      filteredValuesWithParents.includes(o.value),
+    const filteredValuesWithParents = addParentOptions(filteredOptions).map((o) => o.value);
+    const filteredOptionsWithParents = options.filter((o) =>
+      filteredValuesWithParents.includes(o.value)
     );
 
     const isIncludedExactLabel = filteredOptions.some(
-      item => item.label.toLowerCase() === trimmedInput.toLowerCase(),
+      (item) => item.label.toLowerCase() === trimmedInput.toLowerCase()
     );
 
     if (props.isCreatable && !isMulti && inputValue && !isIncludedExactLabel) {
@@ -340,9 +340,9 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
           if (removeValue) {
             const { value: parsedNewValue } = parseFlatOptionValue(newValue);
             if (props.isHierarchical) {
-              props.onChange((props.value || []).filter(v => v.value !== parsedNewValue));
+              props.onChange((props.value || []).filter((v) => v.value !== parsedNewValue));
             } else {
-              props.onChange((props.value || []).filter(v => v !== parsedNewValue));
+              props.onChange((props.value || []).filter((v) => v !== parsedNewValue));
             }
           } else {
             const newValues = toggleValue({
@@ -350,12 +350,12 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
               newValue,
               optionsRelations: parentChildRelations,
             });
-            const parsedValues = orderBy(newValues.map(parseFlatOptionValue), o => o.level);
+            const parsedValues = orderBy(newValues.map(parseFlatOptionValue), (o) => o.level);
 
             if (props.isHierarchical) {
               props.onChange(parsedValues);
             } else {
-              props.onChange(parsedValues.map(o => o.value));
+              props.onChange(parsedValues.map((o) => o.value));
             }
           }
 
@@ -364,7 +364,7 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
         }
       }
     },
-    [leveledValue, parentChildRelations],
+    [leveledValue, parentChildRelations]
   );
 
   const handleLabelClick = (e: React.MouseEvent) => {
@@ -403,7 +403,7 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
     }
   };
 
-  const handleDeleteClick = (e: React.MouseEvent) => {
+  const handleDeleteClick = ({ e }: { e: React.MouseEvent }) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -470,7 +470,7 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
 
       setSelectValue(value);
     },
-    [isMulti, updateValuesScrollBuffer, setSelectValue],
+    [isMulti, updateValuesScrollBuffer, setSelectValue]
   );
 
   const handleKeyDown = (e: KeyboardEvent) => {
@@ -678,7 +678,7 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
           >
             <div className={b('values')} ref={valuesRef}>
               {Array.isArray(selectedOption) &&
-                selectedOption.map(item => (
+                selectedOption.map((item) => (
                   <MultiValueOption
                     label={item.label}
                     value={item.value}
@@ -736,21 +736,14 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
           <>
             <span className={b('delimiter')} />
             <Button
-              wpSize="xs"
+              size="xs"
               view="clear"
-              iconOnly
               type="button"
               tabIndex={-1}
               className={b('icon', { type: 'delete' })}
               onClick={handleDeleteClick}
-            >
-              <div className={b('icon-wrapper')}>
-                <IconClose
-                  size={wpSize === 'l' || wpSize === 'm' ? 's' : 'xs'}
-                  className={b('close')}
-                />
-              </div>
-            </Button>
+              iconLeft={IconClose}
+            />
           </>
         )}
         <Popover
@@ -786,15 +779,15 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
   );
 };
 
-const MultiSelectComponent: React.FC<MultiSelectProps & { isDisabled?: false }> = props => {
+const MultiSelectComponent: React.FC<MultiSelectProps & { isDisabled?: false }> = (props) => {
   return <BaseSelect {...props} isMulti isDisabled={false} />;
 };
 
-const SelectComponent: React.FC<SelectProps> = props => {
+const SelectComponent: React.FC<SelectProps> = (props) => {
   return <BaseSelect {...props} />;
 };
 
-const CreatableSelectComponent: React.FC<CreatableSelectProps> = props => {
+const CreatableSelectComponent: React.FC<CreatableSelectProps> = (props) => {
   return <BaseSelect {...props} isCreatable />;
 };
 

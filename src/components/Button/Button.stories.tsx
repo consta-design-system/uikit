@@ -26,12 +26,6 @@ const withIconRightKnobs = () => ({
   iconRight: IconUser,
 });
 
-const withAsLink = () => ({
-  as: 'a',
-  href: '#',
-  target: '_blank',
-});
-
 storiesOf('Button', module)
   .addDecorator(withKnobs)
   .add('С текстом', () => <Button onClick={action('click')} {...defaultKnobs()} />)
@@ -50,5 +44,11 @@ storiesOf('Button', module)
     />
   ))
   .add('Как ссылка', () => (
-    <Button onClick={action('click')} {...defaultKnobs()} {...withAsLink()} />
+    <Button<{ href: string; target: string }>
+      as="a"
+      href="#"
+      target="_blank"
+      onClick={action('click')}
+      {...defaultKnobs()}
+    />
   ));
