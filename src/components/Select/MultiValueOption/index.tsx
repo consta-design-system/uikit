@@ -11,7 +11,7 @@ type Props = SelectOptionT & {
 
 const b = bem('multi-value');
 
-export const IconClose = ({ className, size }: { className?: string; size: 's' | 'xs' }) =>
+export const IconClose = ({ className, size }: { className?: string; size?: 's' | 'xs' | 'm' }) =>
   size == 's' ? (
     <svg
       viewBox="0 0 12 12"
