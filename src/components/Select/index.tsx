@@ -145,7 +145,7 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
     isError,
     onInputChange,
     inputRef: ref,
-    dropdownRef: propsDropdownRef,
+    dropdownRef: propsMenuRef,
     wpSize = 'm',
     placeholder,
     options: startOptions,
@@ -215,8 +215,8 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
   const preserveInputValueBuffer = useRef(false);
   const blockMouseOverRef = useRef(false);
   const focusedElementRef = useRef<HTMLDivElement>(null);
-  const localDropdownRef = useRef<HTMLDivElement>(null);
-  const menuRef = propsDropdownRef || localDropdownRef;
+  const localMenuRef = useRef<HTMLDivElement>(null);
+  const menuRef = propsMenuRef || localMenuRef;
   const valuesRef = useRef<HTMLDivElement>(null);
   const controlRef = useRef<HTMLInputElement>(null);
   const inputRef = ref || controlRef;
