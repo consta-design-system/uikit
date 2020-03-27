@@ -64,7 +64,7 @@ type CommonProps = {
   autoOpen?: boolean;
   isDisabled?: boolean;
   inputRef?: React.RefObject<HTMLInputElement>;
-  dropdownRef?: React.RefObject<HTMLDivElement>;
+  menuRef?: React.RefObject<HTMLDivElement>;
   wpSize?: 'xs' | 's' | 'm' | 'l';
   formatLabel?: (option: SelectOptionWithLevelT) => React.ReactNode;
   filterOptions?: (
@@ -145,7 +145,7 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
     isError,
     onInputChange,
     inputRef: ref,
-    dropdownRef: propsMenuRef,
+    menuRef: propsMenuRef,
     wpSize = 'm',
     placeholder,
     options: startOptions,
