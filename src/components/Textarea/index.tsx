@@ -35,7 +35,7 @@ const Textarea: React.FC<TextareaProps> = ({
       placeholder={placeholder}
       className={b(
         { view, width, size: wpSize, state, disabled, type: 'textarea' },
-        className || '',
+        className || ''
       )}
       value={value}
     >
