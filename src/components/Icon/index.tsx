@@ -3,9 +3,11 @@ import bem from '../../utils/bem';
 
 const b = bem('icon');
 
+export type PropSize = 'xs' | 's' | 'm' | undefined;
+
 export interface IIconProps {
   view?: 'alert' | 'brand' | 'ghost' | 'link' | 'primary' | 'secondary' | 'success' | 'warning';
-  size?: 'xs' | 's' | 'm';
+  size?: PropSize;
   className?: string;
 }
 

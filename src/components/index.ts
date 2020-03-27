@@ -20,6 +20,7 @@ export { Radio } from './Radio/Radio';
 export { default as Textarea } from './Textarea';
 export { Switch } from './Switch/Switch';
 export { Select, MultiSelect, CreatableSelect } from './Select';
+export { TextField } from './TextField/TextField';
 
 // Графика
 export * from './Icon/export';
