@@ -75,7 +75,6 @@ export const Switch: React.FC<ISwitch & InputProps> = ({
         onChange={handleChange}
         {...otherProps}
       />
-      <div className={cnSwitch('box')} />
       {label && <span className={cnSwitch('label')}>{label}</span>}
     </label>
   );

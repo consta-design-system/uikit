@@ -1,5 +1,4 @@
 .theme_control_gpn-default {
-  --control-press-scale: scale(0.95);
   --control-radius: 4px; /* Основной радиус скругления контроллов */
   --control-border-width: 2px; /* Основная толщина контроллов */
   --control-height-l: var(--space-4xl);

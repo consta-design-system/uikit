@@ -77,7 +77,6 @@ export const Checkbox: React.FC<ICheckbox & InputProps> = ({
         onChange={handleChange}
         {...otherProps}
       />
-      <div className={cnCheckbox('box')} />
       {label && <span className={cnCheckbox('label')}>{label}</span>}
     </label>
   );

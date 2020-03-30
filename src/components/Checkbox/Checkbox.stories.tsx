@@ -8,7 +8,6 @@ const knobs = () => ({
   intermediate: boolean('intermediate', false),
   size: select('size', ['m', 'l'], 'm'),
   label: text('label', 'Check me, baby!'),
-  checked: boolean('checked', true),
 });
 
 storiesOf('Checkbox', module)

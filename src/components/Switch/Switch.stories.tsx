@@ -7,7 +7,6 @@ const knobs = () => ({
   disabled: boolean('disabled', false),
   size: select('size', ['m', 'l'], 'm'),
   label: text('label', 'Move me, I beg you!'),
-  checked: boolean('checked', true),
 });
 
 storiesOf('Switch', module)

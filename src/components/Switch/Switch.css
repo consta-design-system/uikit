@@ -5,15 +5,46 @@
   font-family: var(--font-primary);
   cursor: pointer;
 
-  &__box {
+  /* stylelint-disable  no-descending-specificity  */
+
+  &_size {
+    &_m {
+      --switch-height: var(--control-height-m);
+      --box-width: 36px;
+      --box-height: 20px;
+      --switch-font-size: var(--control-text-size-m);
+      --offset: var(--space-xs);
+
+      .switch__input::before {
+        transform: translateX(-16px);
+      }
+    }
+
+    &_l {
+      --switch-height: var(--control-height-m);
+      --box-width: 44px;
+      --box-height: 24px;
+      --switch-font-size: var(--control-text-size-l);
+      --offset: var(--space-s);
+
+      .switch__input::before {
+        transform: translateX(-20px);
+      }
+    }
+  }
+
+  &__input {
     position: relative;
     display: inline-block;
     width: var(--box-width);
     height: var(--box-height);
+    margin: 0;
     box-sizing: border-box;
     border-radius: 99rem;
     border: var(--control-border-width) solid var(--background-color);
     transition: background-color 0.15s, border-color 0.15s;
+    -webkit-appearance: none;
+    cursor: pointer;
 
     &::before {
       content: '';
@@ -27,39 +58,20 @@
       background-color: var(--content-color);
       transition: transform 0.15s, background-color 0.15s;
     }
-  }
 
-  &_size {
-    &_m {
-      --switch-height: var(--control-height-m);
-      --box-width: 36px;
-      --box-height: 20px;
-      --switch-font-size: var(--control-text-size-m);
-      --offset: var(--space-xs);
-
-      .switch__box::before {
-        transform: translateX(-16px);
-      }
+    &:focus,
+    &:focus:hover {
+      box-shadow: 0 0 0 2px var(--color-control-bg-focus);
+      animation: switchFocusAnimation 0.4s ease-in;
+      outline: none;
     }
 
-    &_l {
-      --switch-height: var(--control-height-m);
-      --box-width: 44px;
-      --box-height: 24px;
-      --switch-font-size: var(--control-text-size-l);
-      --offset: var(--space-s);
-
-      .switch__box::before {
-        transform: translateX(-20px);
-      }
+    &:focus:active,
+    &:focus:active:hover {
+      animation-name: none !important;
     }
-  }
 
-  &__input {
-    position: absolute;
-    appearance: none;
-
-    &:checked + .switch__box {
+    &:checked {
       --background-color: var(--color-control-bg-primary);
       --content-color: var(--color-control-typo-primary);
 
@@ -70,7 +82,7 @@
       }
     }
 
-    &:not(:checked) + .switch__box {
+    &:not(:checked) {
       --background-color: var(--color-control-bg-border-default);
       --content-color: var(--color-control-bg-border-default);
     }
@@ -83,24 +95,23 @@
   }
 
   &:hover {
-    .switch__input:not(:checked) + .switch__box {
+    .switch__input:not(:checked) {
       --background-color: var(--color-control-bg-border-default-hover);
       --content-color: var(--color-control-bg-border-default-hover);
     }
-    .switch__input:checked + .switch__box {
+    .switch__input:checked {
       --background-color: var(--color-control-bg-primary-hover);
       --content-color: var(--color-control-typo-primary-hover);
     }
   }
 
-  /* stylelint-disable  no-descending-specificity  */
   &_disabled {
     pointer-events: none;
-    .switch__input:not(:checked):disabled + .switch__box {
+    .switch__input:not(:checked):disabled {
       --background-color: var(--color-control-bg-border-disable);
       --content-color: var(--color-control-typo-disable);
     }
-    .switch__input:checked:disabled + .switch__box {
+    .switch__input:checked:disabled {
       --background-color: var(--color-control-bg-border-disable);
       --content-color: var(--color-control-typo-disable);
 
@@ -111,4 +122,13 @@
     }
   }
   /* stylelint-enable  no-descending-specificity  */
+}
+
+@keyframes switchFocusAnimation {
+  from {
+    box-shadow: 0 0 0 0 var(--color-control-bg-focus), 0 0 0 0 var(--color-control-bg-active);
+  }
+  to {
+    box-shadow: 0 0 0 2px var(--color-control-bg-focus), 0 0 0 6px transparent;
+  }
 }
