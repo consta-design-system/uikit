@@ -13,7 +13,6 @@ export type PropOnChangeFunctionArgs<T> = {
 };
 export type Props<T> = {
   multiply?: boolean;
-  as?: React.ElementType;
   className?: string;
   items?: T[];
   value?: PropValue<T>;
@@ -51,7 +50,6 @@ export type ItemProps<T> = {
 export function BaseCheckGroupField<T>(props: Props<T>) {
   const {
     className,
-    as = 'div',
     items,
     componentItem,
     getItemKey = (item: T | any) => item.id,
@@ -62,7 +60,6 @@ export function BaseCheckGroupField<T>(props: Props<T>) {
     id,
     name,
   } = props;
-  const Component = as;
   const ComponentItem = componentItem;
 
   let valueByKey = {};
@@ -87,7 +84,7 @@ export function BaseCheckGroupField<T>(props: Props<T>) {
   const getChecked = (item) => !!valueByKey[getItemKey(item)];
 
   return (
-    <Component className={className}>
+    <div className={className}>
       {items
         ? items.map((item) => (
             <ComponentItem
@@ -97,9 +94,10 @@ export function BaseCheckGroupField<T>(props: Props<T>) {
               value={item}
               id={getItemKey(item)}
               checked={getChecked(item)}
+              multiply={multiply}
             />
           ))
         : null}
-    </Component>
+    </div>
   );
 }
