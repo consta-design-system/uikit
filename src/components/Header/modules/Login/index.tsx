@@ -1,14 +1,14 @@
 import React from 'react';
 import bem from '../../../../utils/bem';
 
-import Button from '../../../Button/Button';
+import { Button, PropOnClick } from '../../../Button/Button';
 import User from '../../../User';
 
 const b = bem('login');
 
 type Props = {
   isLogged: boolean;
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick: PropOnClick;
   personName: string;
   personInfo?: string;
   personStatus?: undefined | 'available' | 'remote' | 'out';
@@ -43,9 +43,14 @@ const Login: React.FC<Props> = ({
       className={b({}, className)}
     />
   ) : (
-    <Button type="button" onClick={onClick} wpSize="s" view="primary" className={b({}, className)}>
-      Войти
-    </Button>
+    <Button
+      className={b({}, className)}
+      type="button"
+      onClick={onClick}
+      size="s"
+      view="primary"
+      label="Войти"
+    />
   );
 };
 

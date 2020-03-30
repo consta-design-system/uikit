@@ -9,6 +9,7 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   white-space: nowrap;
+  text-decoration: none;
 
   &_size {
     &_s {

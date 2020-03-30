@@ -1,6 +1,6 @@
 import './Button.css';
 
-import React, { Fragment, FocusEventHandler } from 'react';
+import React, { Fragment } from 'react';
 import { cn } from '../../utils/bem';
 import { IIconProps } from '../Icon';
 import * as wp from '../../utils/whitepaper/whitepaper';
@@ -14,14 +14,15 @@ export type PropOnClickProps = {
   id?: PropId;
   name?: PropName;
 };
+export type PropOnClick = (object: PropOnClickProps) => void;
 
-export interface IButton {
+export type ButtonProps = {
   id?: PropId;
   name?: PropName;
   size: 'xs' | 's' | 'm' | 'l';
   view: 'clear' | 'ghost' | 'primary' | 'secondary';
   width?: 'default' | 'full';
-  form:
+  form?:
     | 'default'
     | 'brick'
     | 'round'
@@ -29,22 +30,42 @@ export interface IButton {
     | 'round-brick'
     | 'brick-default'
     | 'default-brick';
-  children?: React.ReactNode;
   className?: string;
   tabIndex?: number;
   disabled?: boolean;
-  onClick?: (object: PropOnClickProps) => void;
-  onBlur?: FocusEventHandler<HTMLElement>;
-  label: string;
-  type?: 'submit' | 'reset' | 'button';
+  onClick?: PropOnClick;
+  label?: string;
   iconLeft?: React.FC<IIconProps>;
   iconRight?: React.FC<IIconProps>;
   as?: React.ElementType;
-}
+};
 
-//TODO: <IButton | any> - в дальнейшем подумать как избежать Any
+declare type excludeHTMLAttributes =
+  | 'id'
+  | 'name'
+  | 'size'
+  | 'view'
+  | 'width'
+  | 'form'
+  | 'className'
+  | 'tabIndex'
+  | 'disabled'
+  | 'onClick'
+  | 'label'
+  | 'iconLeft'
+  | 'iconRight'
+  | 'as';
 
-export const Button: React.FC<IButton | any> = (props) => {
+export type IButton<T> = ButtonProps &
+  (
+    | Omit<React.ButtonHTMLAttributes<Element>, excludeHTMLAttributes>
+    | Omit<T, excludeHTMLAttributes>);
+
+// При использовании "as" позаботьтесь об интерфейсе прокинутого компонента.
+// При вызове кнопки:
+// <Button<T>/>
+
+export function Button<T>(props: IButton<T>) {
   const {
     size = 'm',
     view = 'primary',
@@ -55,9 +76,7 @@ export const Button: React.FC<IButton | any> = (props) => {
     label,
     className,
     onClick,
-    onBlur,
     disabled,
-    type,
     tabIndex,
     as = 'button',
     id,
@@ -78,8 +97,7 @@ export const Button: React.FC<IButton | any> = (props) => {
 
   return (
     <Component
-      onClick={handleClick}
-      onBlur={onBlur}
+      onClick={onClick ? handleClick : undefined}
       className={cnButton(
         {
           size,
@@ -92,14 +110,10 @@ export const Button: React.FC<IButton | any> = (props) => {
         },
         [className]
       )}
-      type={type}
-      disabled={disabled}
       tabIndex={tabIndex}
-      name={name}
-      id={id}
       {...otherProps}
     >
-      {IconOnly && <IconOnly size="xs" />}
+      {IconOnly && <IconOnly className={cnButton('icon')} size="xs" />}
       {(IconLeft || IconRight) && label ? (
         <Fragment>
           {IconLeft && (
@@ -121,6 +135,4 @@ export const Button: React.FC<IButton | any> = (props) => {
       )}
     </Component>
   );
-};
-
-export default Button;
+}
