@@ -64,6 +64,7 @@ type CommonProps = {
   autoOpen?: boolean;
   isDisabled?: boolean;
   inputRef?: React.RefObject<HTMLInputElement>;
+  menuRef?: React.RefObject<HTMLDivElement>;
   wpSize?: 'xs' | 's' | 'm' | 'l';
   formatLabel?: (option: SelectOptionWithLevelT) => React.ReactNode;
   filterOptions?: (
@@ -144,6 +145,7 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
     isError,
     onInputChange,
     inputRef: ref,
+    menuRef: propsMenuRef,
     wpSize = 'm',
     placeholder,
     options: startOptions,
@@ -213,7 +215,8 @@ const BaseSelect: React.FC<BaseSelectProps> = props => {
   const preserveInputValueBuffer = useRef(false);
   const blockMouseOverRef = useRef(false);
   const focusedElementRef = useRef<HTMLDivElement>(null);
-  const menuRef = useRef<HTMLDivElement>(null);
+  const localMenuRef = useRef<HTMLDivElement>(null);
+  const menuRef = propsMenuRef || localMenuRef;
   const valuesRef = useRef<HTMLDivElement>(null);
   const controlRef = useRef<HTMLInputElement>(null);
   const inputRef = ref || controlRef;
