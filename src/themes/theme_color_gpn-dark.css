@@ -63,6 +63,8 @@ $color-base-critical: #33000f;
   --color-control-bg-border-default: color($color-base-phantom a(16%)); /* Цвет фона бордеров котрола */
   --color-control-bg-border-default-hover: color($color-base-phantom a(44%)); /* Цвет фона бордеров контрола по ховеру */
   --color-control-bg-border-focus: color($color-base-project l(+10%)); /* Цвет аутлайна контролов при фокусе */ /* TODO заменить на правило целиком */
+  --color-control-bg-focus: color($color-base-path a(40%)); /* Цвет фона активного контрола */
+  --color-control-bg-active: color($color-base-path a(70%)); /* Цвет фона активного контрола */
 
   /* Primary */
   --color-control-bg-primary: color($color-base-project l(+10%)); /* Цвет фона активного контрола */
