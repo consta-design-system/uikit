@@ -16,6 +16,7 @@ const defaultKnobs = () => ({
   ),
   disabled: boolean('disabled', false),
   label: text('Content', 'I am button'),
+  onlyIcon: boolean('onlyIcon', false),
 });
 
 const withIconLeftKnobs = () => ({
@@ -49,6 +50,7 @@ storiesOf('Button', module)
       href="#"
       target="_blank"
       onClick={action('click')}
+      {...withIconLeftKnobs()}
       {...defaultKnobs()}
     />
   ));

@@ -205,9 +205,19 @@
   }
 
   &_with-icon {
-    --icon-indent: calc(var(--button-space) * 0.5);
+    --icon-indent: calc(var(--button-space) * 0.7);
 
     display: inline-flex;
     align-items: center;
+  }
+
+  &__icon {
+    display: block;
+    &_position_left {
+      margin-right: var(--icon-indent);
+    }
+    &_position_right {
+      margin-left: var(--icon-indent);
+    }
   }
 }
