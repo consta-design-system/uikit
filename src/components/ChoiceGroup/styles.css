@@ -31,10 +31,10 @@
     }
 
     &_checked {
-      color: var(--color-control-typo-checked);
+      color: var(--color-control-typo-primary);
 
       &::before {
-        background-color: var(--color-control-bg-checked);
+        background-color: var(--color-control-bg-primary);
         transform: scale(1);
 
         /* right: -2px; TODO Подумать как убрать границы между айтемами в состоянии checked */

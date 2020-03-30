@@ -2,7 +2,6 @@
   position: relative;
   z-index: 1;
   display: inline-block;
-  overflow: hidden;
   max-width: 100%;
   height: var(--button-height);
   padding: 0 var(--button-space);
@@ -18,159 +17,126 @@
   text-decoration: none;
   text-overflow: ellipsis;
   white-space: nowrap;
-  transition: background 0.15s ease, box-shadow 0.15s ease, color 0.15s ease, fill 0.15s ease;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease, fill 0.15s ease;
   cursor: pointer;
+  -webkit-appearance: none;
 
-  &::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    border-radius: var(--control-radius);
-    transition: box-shadow 0.15s, background-color 0.15s, transform 0.2s;
-  }
+  /* stylelint-disable  no-descending-specificity  */
 
   &:hover {
     color: var(--color-hover);
   }
 
-  &:focus {
+  &:focus,
+  &:focus:hover {
+    box-shadow: 0 0 0 3px var(--color-control-bg-focus);
+    animation: buttonFocusAnimation 0.5s ease-in;
     outline: none;
   }
 
-  &_form_brick {
-    border-radius: 0;
-    &::before {
+  &:focus:active,
+  &:focus:active:hover {
+    animation-name: none !important;
+  }
+
+  &_form {
+    &_brick {
       border-radius: 0;
     }
-  }
 
-  &_form_round::before {
-    border-radius: 99rem;
-  }
+    &_round {
+      border-radius: 99rem;
+    }
 
-  &_form_brick-default {
-    border-radius: 0 var(--control-radius) var(--control-radius) 0;
-    &::before {
+    &_brick-default {
       border-radius: 0 var(--control-radius) var(--control-radius) 0;
     }
-  }
 
-  &_form_default-brick {
-    border-radius: var(--control-radius) 0 0 var(--control-radius);
-    &::before {
+    &_default-brick {
       border-radius: var(--control-radius) 0 0 var(--control-radius);
     }
-  }
 
-  &_form_brick-round {
-    border-radius: 0 99rem 99rem 0;
-    &::before {
+    &_brick-round {
       border-radius: 0 99rem 99rem 0;
     }
-  }
 
-  &_form_round-brick {
-    border-radius: 99rem 0 0 99rem;
-    &::before {
+    &_round-brick {
       border-radius: 99rem 0 0 99rem;
     }
   }
 
-  &_size_xs {
-    --button-height: var(--control-height-xs);
-    --button-font-size: var(--control-text-size-xs);
-    --button-space: var(--control-space-xs);
+  &_size {
+    &_xs {
+      --button-height: var(--control-height-xs);
+      --button-font-size: var(--control-text-size-xs);
+      --button-space: var(--control-space-xs);
+    }
+
+    &_s {
+      --button-height: var(--control-height-s);
+      --button-font-size: var(--control-text-size-s);
+      --button-space: var(--control-space-s);
+    }
+
+    &_m {
+      --button-height: var(--control-height-m);
+      --button-font-size: var(--control-text-size-m);
+      --button-space: var(--control-space-m);
+    }
+
+    &_l {
+      --button-height: var(--control-height-l);
+      --button-font-size: var(--control-text-size-l);
+      --button-space: var(--control-space-l);
+    }
   }
 
-  &_size_s {
-    --button-height: var(--control-height-s);
-    --button-font-size: var(--control-text-size-s);
-    --button-space: var(--control-space-s);
-  }
+  &_view {
+    &_clear {
+      --color-hover: var(--color-control-typo-clear-hover);
 
-  &_size_m {
-    --button-height: var(--control-height-m);
-    --button-font-size: var(--control-text-size-m);
-    --button-space: var(--control-space-m);
-  }
-
-  &_size_l {
-    --button-height: var(--control-height-l);
-    --button-font-size: var(--control-text-size-l);
-    --button-space: var(--control-space-l);
-  }
-
-  &_view_clear {
-    --color-hover: var(--color-control-typo-clear-hover);
-
-    color: var(--color-control-typo-clear);
-
-    &::before {
+      color: var(--color-control-typo-clear);
       background-color: var(--color-control-bg-clear);
+
+      &:hover {
+        background-color: var(--color-control-bg-clear-hover);
+      }
     }
 
-    &:hover&::before {
-      background-color: var(--color-control-bg-clear-hover);
-    }
-    &:active&::before {
-      transform: var(--control-press-scale);
-    }
-  }
+    &_ghost {
+      --color-hover: var(--color-control-typo-ghost-hover);
 
-  &_view_ghost {
-    --color-hover: var(--color-control-typo-ghost-hover);
-
-    color: var(--color-control-typo-ghost);
-
-    &::before {
+      color: var(--color-control-typo-ghost);
       background-color: var(--color-control-bg-ghost);
+
+      &:hover {
+        background-color: var(--color-control-bg-ghost-hover);
+      }
     }
 
-    &:hover&::before {
-      background-color: var(--color-control-bg-ghost-hover);
-    }
-    &:active&::before {
-      transform: var(--control-press-scale);
-    }
-  }
+    &_primary {
+      --color-hover: var(--color-control-typo-primary-hover);
 
-  &_view_primary {
-    --color-hover: var(--color-control-typo-primary-hover);
-
-    color: var(--color-control-typo-primary);
-
-    &::before {
+      color: var(--color-control-typo-primary);
       background-color: var(--color-control-bg-primary);
+
+      &:hover {
+        background-color: var(--color-control-bg-primary-hover);
+      }
     }
 
-    &:hover&::before {
-      background-color: var(--color-control-bg-primary-hover);
-    }
-    &:active&::before {
-      transform: var(--control-press-scale);
-    }
-  }
+    &_secondary {
+      --color-hover: var(--color-control-typo-secondary-hover);
 
-  &_view_secondary {
-    --color-hover: var(--color-control-typo-secondary-hover);
-
-    color: var(--color-control-typo-secondary);
-
-    &::before {
+      color: var(--color-control-typo-secondary);
       border: var(--control-border-width) solid var(--color-control-bg-border-secondary);
       background-color: var(--color-control-bg-secondary);
-    }
+      line-height: calc(var(--button-height) - var(--control-border-width) * 2);
 
-    &:hover&::before {
-      border-color: var(--color-control-bg-border-secondary-hover);
-      background-color: var(--color-control-bg-secondary-hover);
-    }
-    &:active&::before {
-      transform: var(--control-press-scale);
+      &:hover {
+        border-color: var(--color-control-bg-border-secondary-hover);
+        background-color: var(--color-control-bg-secondary-hover);
+      }
     }
   }
 
@@ -178,10 +144,8 @@
   &_disabled {
     pointer-events: none;
     color: var(--color-control-typo-disable);
-    &::before {
-      border-color: transparent;
-      background-color: var(--color-control-bg-disable);
-    }
+    border-color: transparent;
+    background-color: var(--color-control-bg-disable);
   }
 
   &__label {
@@ -209,5 +173,16 @@
 
     display: inline-flex;
     align-items: center;
+  }
+
+  /* stylelint-enable  no-descending-specificity  */
+}
+
+@keyframes buttonFocusAnimation {
+  from {
+    box-shadow: 0 0 0 0 var(--color-control-bg-focus), 0 0 0 0 var(--color-control-bg-active);
+  }
+  to {
+    box-shadow: 0 0 0 3px var(--color-control-bg-focus), 0 0 0 6px transparent;
   }
 }

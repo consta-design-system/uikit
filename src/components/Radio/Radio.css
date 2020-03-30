@@ -5,14 +5,19 @@
   font-family: var(--font-sans);
   cursor: pointer;
 
-  &__box {
+  /* stylelint-disable  no-descending-specificity  */
+
+  &__input {
     position: relative;
     width: var(--box-size);
     height: var(--box-size);
+    margin: 0;
     box-sizing: border-box;
     border-radius: 50%;
     border: var(--control-border-width) solid var(--color-control-bg-border-default);
     transition: border-color 0.15s, background-color 0.15s;
+    -webkit-appearance: none;
+    cursor: pointer;
 
     &::before {
       content: '';
@@ -23,10 +28,22 @@
       height: var(--box-size);
       box-sizing: border-box;
       border-radius: 50%;
-      background-color: var(--color-control-bg-checked);
+      background-color: var(--color-control-bg-primary);
       opacity: 0;
       transform: scale(0, 0);
       transition: opacity 0.15s, transform 0.15s;
+    }
+
+    &:focus,
+    &:focus:hover {
+      box-shadow: 0 0 0 2px var(--color-control-bg-focus);
+      animation: radioFocusAnimation 0.5s ease-in;
+      outline: none;
+    }
+
+    &:focus:active,
+    &:focus:active:hover {
+      animation-name: none !important;
     }
   }
 
@@ -36,49 +53,36 @@
     font-size: var(--radio-font-size);
   }
 
-  &:hover {
-    .radio__box {
-      border-color: var(--color-control-bg-border-default-hover);
+  &:hover &__input {
+    border-color: var(--color-control-bg-border-default-hover);
+  }
+
+  &_size {
+    &_m {
+      --radio-font-size: var(--control-text-size-m);
+      --box-size: var(--control-box-size-m);
+      --offset: var(--space-xs);
+    }
+
+    &_l {
+      --radio-font-size: var(--control-text-size-l);
+      --box-size: var(--control-box-size-l);
+      --offset: var(--space-s);
     }
   }
 
-  &_size_m {
-    --radio-font-size: var(--control-text-size-m);
-    --box-size: var(--control-box-size-m);
-    --offset: var(--space-xs);
-  }
+  &__input:checked {
+    border-color: var(--color-control-bg-primary);
 
-  &_size_l {
-    --radio-font-size: var(--control-text-size-l);
-    --box-size: var(--control-box-size-l);
-    --offset: var(--space-s);
-  }
-
-  &__input {
-    position: absolute;
-    appearance: none;
-
-    &:checked {
-      + .radio__box {
-        border-color: var(--color-control-bg-border-checked);
-
-        &::before {
-          opacity: 1;
-          transform: scale(0.4, 0.4);
-        }
-      }
-    }
-
-    &:focus {
-      + .radio__box {
-        box-shadow: 0 0 2px 1px var(--color-control-bg-border-focus);
-      }
+    &::before {
+      opacity: 1;
+      transform: scale(0.4, 0.4);
     }
   }
 
   &_disabled {
     pointer-events: none;
-    .radio__input:disabled + .radio__box {
+    .radio__input:disabled {
       border-color: transparent;
       background-color: var(--color-control-bg-disable);
 
@@ -89,5 +93,15 @@
     .radio__input:disabled ~ .radio__label {
       color: var(--color-control-typo-disable);
     }
+  }
+  /* stylelint-enable  no-descending-specificity  */
+}
+
+@keyframes radioFocusAnimation {
+  from {
+    box-shadow: 0 0 0 0 var(--color-control-bg-focus), 0 0 0 0 var(--color-control-bg-active);
+  }
+  to {
+    box-shadow: 0 0 0 2px var(--color-control-bg-focus), 0 0 0 6px transparent;
   }
 }
