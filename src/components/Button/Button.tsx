@@ -108,7 +108,7 @@ export function Button<T>(props: IButton<T>) {
           'with-icon': withIcon,
           'icon-only': !!IconOnly,
         },
-        [className]
+        [className, wp.ptIconPlus()]
       )}
       tabIndex={tabIndex}
       {...otherProps}
