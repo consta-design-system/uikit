@@ -36,14 +36,6 @@ storiesOf('Button', module)
   .add('С иконкой справа', () => (
     <Button onClick={action('click')} {...defaultKnobs()} {...withIconRightKnobs()} />
   ))
-  .add('С иконкой справа и слева', () => (
-    <Button
-      onClick={action('click')}
-      {...defaultKnobs()}
-      {...withIconLeftKnobs()}
-      {...withIconRightKnobs()}
-    />
-  ))
   .add('Как ссылка', () => (
     <Button<{ href: string; target: string }>
       as="a"

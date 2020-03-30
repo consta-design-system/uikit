@@ -15,6 +15,7 @@
   font-family: var(--font-primary);
   line-height: var(--button-height);
   text-decoration: none;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   transition: background-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease, fill 0.15s ease;
@@ -151,6 +152,7 @@
   &__label {
     overflow: hidden;
     text-overflow: ellipsis;
+    flex: 1;
   }
 
   &_width_full {
@@ -177,6 +179,7 @@
 
   &__icon {
     display: block;
+    flex: none;
     &_position_left {
       margin-right: var(--icon-indent);
     }
