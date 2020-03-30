@@ -17,8 +17,7 @@
   text-decoration: none;
   text-overflow: ellipsis;
   white-space: nowrap;
-  transition: background-color 0.15s ease, box-shadow 0.15s ease, outline 0.25s ease,
-    color 0.15s ease, fill 0.15s ease;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease, fill 0.15s ease;
   cursor: pointer;
   -webkit-appearance: none;
 
@@ -123,9 +122,6 @@
 
       &:hover {
         background-color: var(--color-control-bg-primary-hover);
-      }
-      &:active {
-        animation-name: none !important;
       }
     }
 
