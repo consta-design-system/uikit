@@ -74,7 +74,6 @@ export const Radio: React.FC<IRadio & InputProps> = ({
         disabled={disabled}
         {...otherProps}
       />
-      <div className={cnRadio('box')} />
       {label && <span className={cnRadio('label')}>{label}</span>}
     </label>
   );

@@ -3,7 +3,7 @@ $color-base-base: #f6fbfd; /* Базовый цвет содержимого, о
 $color-base-essential: #002033; /* Базовый цвет поверхностей */
 $color-base-project: #0071b2; /* Проектный цвет, от которого выстраивают акцентные состояния */
 $color-base-phantom: #f6fbfd; /* Тонирующий цвет, от которого выстраиватся бордеры, паранджа, ... */
-$color-base-path: #0096eb; /* Ссылочный цвет, от которого выстраиваются все их состояния */
+$color-base-path: #0096eb; /* Цвет ссылок и контролов, от которого выстраиваются все их состояния */
 $color-base-system: #2b4150; /* Цвет системнный */
 
 $color-base-success: #22C38E; /* Цвет успеха */
@@ -63,6 +63,8 @@ $color-base-critical: #33000f;
   --color-control-bg-border-default: color($color-base-phantom a(16%)); /* Цвет фона бордеров котрола */
   --color-control-bg-border-default-hover: color($color-base-phantom a(44%)); /* Цвет фона бордеров контрола по ховеру */
   --color-control-bg-border-focus: color($color-base-project l(+10%)); /* Цвет аутлайна контролов при фокусе */ /* TODO заменить на правило целиком */
+  --color-control-bg-focus: color($color-base-path a(40%)); /* Цвет фона активного контрола */
+  --color-control-bg-active: color($color-base-path a(80%)); /* Цвет фона активного контрола */
 
   /* Primary */
   --color-control-bg-primary: color($color-base-project l(+10%)); /* Цвет фона активного контрола */
@@ -89,13 +91,6 @@ $color-base-critical: #33000f;
   --color-control-bg-clear-hover: color($color-base-phantom a(7%)); /* Цвет фона чистого контрола по ховеру */
   --color-control-typo-clear: color($color-base-base a(70%)); /* Цвет акцентного текста */
   --color-control-typo-clear-hover: color($color-base-base a(90%)); /* Цвет акцентного текста */
-
-  /* Checked */
-  --color-control-bg-checked: color($color-base-project l(+5%)); /* Цвет фона активного контрола */
-  --color-control-bg-checked-hover: color($color-base-project l(+11%)); /* Цвет фона активного контрола по ховеру */
-  --color-control-typo-checked: color($color-base-base l(+100%)); /* Цвет фона содержимого контрола */
-  --color-control-bg-border-checked: color($color-base-project l(+5%)); /* Цвет фона бордеров котрола */
-  --color-control-bg-border-checked-hover: color($color-base-project l(+11%)); /* Цвет фона бордеров контрола по ховеру */
 
   /* Disable */
   --color-control-bg-disable: color($color-base-phantom s(-16) l(16%)); /* Цвет фона неактивного контрола */

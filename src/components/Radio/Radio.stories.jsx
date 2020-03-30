@@ -7,7 +7,6 @@ const knobs = () => ({
   disabled: boolean('disabled', false),
   size: select('size', ['m', 'l'], 'm'),
   label: text('label', 'I am radio'),
-  checked: boolean('checked', true),
 });
 
 storiesOf('Radio', module)
