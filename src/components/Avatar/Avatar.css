@@ -1,0 +1,16 @@
+.avatar1 {
+  border-radius: 50%;
+  overflow: hidden;
+  &_size_s {
+    width: 24px;
+    height: 24px;
+  }
+  &_size_m {
+    width: 32px;
+    height: 32px;
+  }
+  &__image {
+    width: 100%;
+    height: 100%;
+  }
+}
