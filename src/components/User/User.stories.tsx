@@ -4,7 +4,8 @@ import { storiesOf } from '@storybook/react';
 import { User } from './User';
 
 const defaultKnobs = () => ({
-  view: select('view', ['secondary', 'clear'], 'clear'),
+  view: select('view', ['ghost', 'clear'], 'clear'),
+  width: select('width', ['full', 'default'], 'default'),
   size: select('size', ['s', 'm'], 'm'),
   status: select('status', ['available', 'remote', 'out', ''], ''),
   avatarUrl: text(
