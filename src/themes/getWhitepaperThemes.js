@@ -6,9 +6,11 @@ const DEFAULT_COLOR = '#aaaaaa';
 const COLOR_THEME_MOD = 'color';
 const THEME_COLOR_REGEXP = /\$color-base-essential: (.+);/;
 const THEMES_PATH = __dirname;
+const REGEXP_THEME_FILE_NAME = /(theme_(.+)_(.+)).css/;
 
 const getThemeProps = (filename) => {
-  const [className, themeMod, themeName] = filename.match(/(theme_(.+)_(.+)).css/);
+  const [, className, themeMod, themeName] = filename.match(REGEXP_THEME_FILE_NAME);
+
   return {
     className,
     themeMod,
@@ -34,7 +36,7 @@ const getWhitepaperThemes = () => {
 
   return Object.values(
     files
-      .filter((filename) => /\.css$/.test(filename))
+      .filter((filename) => REGEXP_THEME_FILE_NAME.test(filename))
       .reduce((acc, filename) => {
         const { className, themeMod, themeName } = getThemeProps(filename);
 
