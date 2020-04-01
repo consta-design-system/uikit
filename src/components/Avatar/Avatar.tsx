@@ -3,13 +3,16 @@ import './Avatar.css';
 import React from 'react';
 import { cn } from '../../utils/bem';
 
+export type AvatarPropSize = 's' | 'm';
+export type AvatarPropForm = 'round' | 'brick' | 'default';
+
 declare type AvatarProps = {
   url?: string;
   name?: string;
   as?: React.ElementType;
   className?: string;
-  size?: 's' | 'm';
-  form?: 'round' | 'brick' | 'default';
+  size?: AvatarPropSize;
+  form?: AvatarPropForm;
 };
 
 export type IAvatar<T = {}> = AvatarProps &
