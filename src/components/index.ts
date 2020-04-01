@@ -1,4 +1,5 @@
 import '../utils/whitepaper/whitepaper.css';
+import '../themes/theme.css';
 
 // Темы на цвета
 import '../themes/theme_color_gpn-default.css';
