@@ -80,42 +80,8 @@ export type TextFieldProps = {
   tabIndex?: number;
 };
 
-declare type excludeHTMLAttributes =
-  | 'className'
-  | 'value'
-  | 'onChange'
-  | 'id'
-  | 'name'
-  | 'type'
-  | 'disabled'
-  | 'innerRef'
-  | 'inputRef'
-  | 'rows'
-  | 'minRows'
-  | 'maxRows'
-  | 'maxLength'
-  | 'size'
-  | 'view'
-  | 'form'
-  | 'state'
-  | 'width'
-  | 'onFocus'
-  | 'onBlur'
-  | 'autoFocus'
-  | 'placeholder'
-  | 'leftSide'
-  | 'rightSide'
-  | 'autoComplete'
-  | 'max'
-  | 'min'
-  | 'readOnly'
-  | 'required'
-  | 'step'
-  | 'cols'
-  | 'tabIndex';
-
 export type ITextField = TextFieldProps &
-  Omit<React.HTMLAttributes<HTMLDivElement>, excludeHTMLAttributes>;
+  Omit<React.HTMLAttributes<HTMLDivElement>, keyof TextFieldProps>;
 
 const cnTextField = cn('text-field');
 
@@ -163,11 +129,11 @@ export const TextField: React.FC<ITextField> = ({
   const rightSideIsString = typeof rightSide === 'string';
 
   const getIconSizeByTextFieldSize = (textFieldSize: PropSize): IconPropSize => {
-    const sizeObj: { xs: IconPropSize; s: IconPropSize; m: IconPropSize; l: IconPropSize } = {
+    const sizeObj: Record<PropSize, IconPropSize> = {
       xs: 'xs',
       s: 's',
       m: 's',
-      l: 'm',
+      l: 's',
     };
 
     return sizeObj[textFieldSize];

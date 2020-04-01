@@ -4,14 +4,30 @@ import './Text.css';
 
 export const cnText = cn('text');
 
+export type TextPropSize =
+  | '2xs'
+  | 'xs'
+  | 's'
+  | 'm'
+  | 'l'
+  | 'xl'
+  | '2xl'
+  | '3xl'
+  | '4xl'
+  | '5xl'
+  | '6xl'
+  | '';
+
+export type TextPropLineHeight = '2xs' | 'xs' | 's' | 'm' | 'l' | '';
+
 export type TextProps = {
   as?: React.ElementType;
   align?: 'left' | 'center' | 'right' | '';
   decoration?: 'underline' | '';
   display?: 'block' | 'inline-block' | 'inline' | '';
   font?: 'mono' | 'sans' | 'serif' | '';
-  lineHeight?: '2xs' | 'xs' | 's' | 'm' | 'l' | '';
-  size?: '2xs' | 'xs' | 's' | 'm' | 'l' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '';
+  lineHeight?: TextPropLineHeight;
+  size?: TextPropSize;
   spacing?: 'xs' | 's' | 'm' | 'l' | '';
   fontStyle?: 'italic' | '';
   transform?: 'uppercase' | '';
