@@ -50,7 +50,13 @@ $color-base-critical: #33000f;
   --color-typo-link: color($color-base-path a(100%)); /* Цвет основной ссылки */
   --color-typo-link-minor: color($color-base-path s(-50%) l(+20%)); /* Цвет второстепенной ссылки */
   --color-typo-link-hover: color($color-base-path l(-7%)); /* Цвет ховера ссылки */
-  --color-nums-shadow: 0, 0, 0;
+  --color-nums-shadow: 0, 0, 0; /* Значения RGB для указания теней в конструкции rgba(R,G,B, alpha) */
+
+  /* //////////////////////////////
+  // Цвета скроллбара ////////////// */
+  --color-scroll-bg: color($color-base-phantom a(6%));
+  --color-scroll-thumb: color($color-base-phantom a(24%));
+  --color-scroll-thumb-hover: color($color-base-phantom a(32%));
 
   /* /////////////////////////////
   // Цвета контролов /////////// */
