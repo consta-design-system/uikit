@@ -1,14 +1,29 @@
 .avatar1 {
-  border-radius: 50%;
   overflow: hidden;
-  &_size_s {
-    width: 24px;
-    height: 24px;
+
+  &_size {
+    &_s {
+      width: 24px;
+      height: 24px;
+    }
+    &_m {
+      width: 32px;
+      height: 32px;
+    }
   }
-  &_size_m {
-    width: 32px;
-    height: 32px;
+
+  &_form {
+    &_round {
+      border-radius: 50%;
+    }
+    &_brick {
+      border-radius: 0;
+    }
+    &_default {
+      border-radius: var(--control-radius);
+    }
   }
+
   &__image {
     width: 100%;
     height: 100%;
