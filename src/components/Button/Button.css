@@ -127,11 +127,12 @@
 
     &_secondary {
       --color-hover: var(--color-control-typo-secondary-hover);
+      --border-width: 2px;
 
       color: var(--color-control-typo-secondary);
-      border: var(--control-border-width) solid var(--color-control-bg-border-secondary);
+      border: var(--border-width) solid var(--color-control-bg-border-secondary);
       background-color: var(--color-control-bg-secondary);
-      line-height: calc(var(--button-height) - var(--control-border-width) * 2);
+      line-height: calc(var(--button-height) - var(--border-width) * 2);
 
       &:hover {
         border-color: var(--color-control-bg-border-secondary-hover);
