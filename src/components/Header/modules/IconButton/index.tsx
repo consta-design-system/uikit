@@ -1,10 +1,9 @@
 import React, { FocusEventHandler } from 'react';
 
-import { Button, PropOnClick } from '../../../Button/Button';
+import { Button } from '../../../Button/Button';
 
 type Props = {
-  // icon: string;
-  onClick?: PropOnClick;
+  onClick?: React.EventHandler<React.MouseEvent>;
   onBlur?: FocusEventHandler<HTMLElement>;
   tabIndex?: number;
   className?: string;

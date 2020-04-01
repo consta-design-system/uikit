@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 import './styles.css';
 import bem from '../../../utils/bem';
-import Checkbox from '../../Checkbox/Checkbox';
+import { Checkbox } from '../../Checkbox/Checkbox';
 
 type Props = {
   value: string;

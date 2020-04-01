@@ -5,8 +5,12 @@ import { cn } from '../../utils/bem';
 import { Avatar } from '../Avatar/Avatar';
 import { Text, TextPropSize } from '../Text/Text';
 import IconSelect from '../Icon/icons/Select';
+import { IconPropSize } from '../Icon';
 
 export type UserPropSize = 's' | 'm';
+export type UserPropView = 'clear' | 'ghost';
+export type UserPropWidth = 'default' | 'full';
+export type UserPropStatus = 'available' | 'remote' | 'out';
 
 declare type UserProps = {
   avatarUrl?: string;
@@ -14,9 +18,9 @@ declare type UserProps = {
   as?: React.ElementType;
   className?: string;
   size?: UserPropSize;
-  view: 'clear' | 'ghost';
-  width?: 'default' | 'full';
-  status?: 'available' | 'remote' | 'out' | '';
+  view?: UserPropView;
+  width?: UserPropWidth;
+  status?: UserPropStatus;
   onlyAvatar?: boolean;
   withArrow?: boolean;
   info?: string;
@@ -53,8 +57,8 @@ export function User<T>(props: IUser<T>): React.ReactElement | null {
     return sizeObj[userSize];
   };
 
-  const getArrowSizeByUserSize = (userSize: UserPropSize) => {
-    const sizeObj = {
+  const getArrowSizeByUserSize = (userSize: UserPropSize): IconPropSize => {
+    const sizeObj: Record<UserPropSize, IconPropSize> = {
       s: 'xs',
       m: 's',
     };
