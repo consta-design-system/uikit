@@ -49,8 +49,8 @@
     &::before {
       content: '';
       position: absolute;
-      top: 2px;
-      right: 2px;
+      top: 1px;
+      right: 1px;
       height: calc(var(--box-height) - var(--control-border-width) * 4);
       width: calc(var(--box-height) - var(--control-border-width) * 4);
       box-sizing: border-box;
