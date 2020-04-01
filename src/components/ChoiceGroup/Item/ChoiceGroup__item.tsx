@@ -9,13 +9,14 @@ export function ChoiceGroupItem<T>(props: ItemProps<T>): React.ReactElement {
 
   return (
     <React.Fragment>
-      <input type={multiply ? 'checkbox' : 'radio'} className={cnChoiceGroup('input')} id={id} />
+      {/* <input type={multiply ? 'checkbox' : 'radio'} className={cnChoiceGroup('input')} id={id} /> */}
+      <input type={multiply ? 'checkbox' : 'radio'} className={cnChoiceGroup('input')} />
       <label
         className={cnChoiceGroup('label', { size: 'm', checkbox: multiply }, [className])}
         onClick={(e) => {
           onChange({ e, value, id, checked: !checked });
         }}
-        htmlFor={id}
+        // htmlFor={id}
       >
         {label}
       </label>
