@@ -23,6 +23,7 @@ storiesOf('ChoiceGroup', module)
         getItemKey={(item) => item}
         getItemLabel={(item) => item}
         onChange={({ value }) => setValue(value)}
+        className="choice-group_view_primary"
       />
     );
   });

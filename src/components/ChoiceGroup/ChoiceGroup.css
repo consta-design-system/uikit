@@ -1,3 +1,87 @@
 .choice-group {
-  display: block;
+  position: relative;
+  display: inline-flex;
+  max-width: 100%;
+  border-radius: var(--control-radius);
+  box-shadow: inset 0 0 0 var(--control-border-width) var(--color-control-bg-border-default);
+
+  &_view {
+    &_primary {
+      --choice-bg-color: var(--color-control-bg-primary);
+      --choice-text-color: var(--color-control-typo-primary);
+
+      /* --choice-height: var(--control-height-xs); */
+
+      /* --choice-font-size: var(--control-text-size-xs); */
+
+      /* --choice-space: var(--control-space-xs); */
+    }
+  }
+
+  &__label_size {
+    &_xs {
+      --choice-height: var(--control-height-xs);
+      --choice-font-size: var(--control-text-size-xs);
+      --choice-space: var(--control-space-xs);
+    }
+    &_s {
+      --choice-height: var(--control-height-s);
+      --choice-font-size: var(--control-text-size-s);
+      --choice-space: var(--control-space-s);
+    }
+
+    &_m {
+      --choice-height: var(--control-height-m);
+      --choice-font-size: var(--control-text-size-m);
+      --choice-space: var(--control-space-m);
+    }
+
+    &_l {
+      --choice-height: var(--control-height-l);
+      --choice-font-size: var(--control-text-size-l);
+      --choice-space: var(--control-space-l);
+    }
+  }
+
+  &__input {
+    position: absolute;
+    -webkit-appearance: none;
+  }
+  &__input + &__label {
+    position: relative;
+    padding: 0 var(--choice-space);
+    box-sizing: border-box;
+    border-radius: var(--control-radius);
+    color: var(--color-control-typo-default);
+    font-size: var(--choice-font-size);
+    font-weight: normal;
+    line-height: var(--choice-height);
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease,
+      fill 0.15s ease;
+    cursor: pointer;
+  }
+
+  &__input:not(:first-child) + &__label::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: calc(var(--control-border-width) / 2 * -1);
+    width: var(--control-border-width);
+    height: 65%;
+    background-color: var(--color-control-bg-border-default);
+    transform: translateY(-50%);
+  }
+
+  &__input:checked + &__label {
+    background-color: var(--choice-bg-color);
+    color: var(--choice-text-color);
+
+    &::before,
+    & ~ .choice-group__label::before {
+      background-color: transparent;
+    }
+  }
 }
