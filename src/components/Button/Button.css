@@ -18,7 +18,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  transition: background-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease, fill 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease,
+    color 0.15s ease, fill 0.15s ease;
   cursor: pointer;
   -webkit-appearance: none;
 
@@ -143,6 +144,7 @@
 
   &:disabled,
   &_disabled {
+    cursor: not-allowed;
     pointer-events: none;
     color: var(--color-control-typo-disable);
     border-color: transparent;
