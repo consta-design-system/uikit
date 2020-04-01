@@ -114,7 +114,7 @@ const OptionsGroup: React.FC<
     }
   }, [expandAll]);
 
-  const toggleChildOptions = ({ e }: { e: React.MouseEvent }) => {
+  const toggleChildOptions = (e: React.MouseEvent) => {
     e.stopPropagation();
     onCollapseClick();
   };
