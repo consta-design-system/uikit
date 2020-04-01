@@ -16,6 +16,7 @@ const defaultKnobs = () => ({
   ),
   disabled: boolean('disabled', false),
   label: text('Content', 'I am button'),
+  onlyIcon: boolean('onlyIcon', false),
 });
 
 const withIconLeftKnobs = () => ({
@@ -35,20 +36,13 @@ storiesOf('Button', module)
   .add('С иконкой справа', () => (
     <Button onClick={action('click')} {...defaultKnobs()} {...withIconRightKnobs()} />
   ))
-  .add('С иконкой справа и слева', () => (
-    <Button
-      onClick={action('click')}
-      {...defaultKnobs()}
-      {...withIconLeftKnobs()}
-      {...withIconRightKnobs()}
-    />
-  ))
   .add('Как ссылка', () => (
     <Button<{ href: string; target: string }>
       as="a"
       href="#"
       target="_blank"
       onClick={action('click')}
+      {...withIconLeftKnobs()}
       {...defaultKnobs()}
     />
   ));
