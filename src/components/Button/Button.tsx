@@ -2,8 +2,7 @@ import './Button.css';
 
 import React, { Fragment } from 'react';
 import { cn } from '../../utils/bem';
-import { IIconProps } from '../Icon';
-import * as wp from '../../utils/whitepaper/whitepaper';
+import { IIconProps, PropSize as IconPropSize } from '../Icon';
 
 export const cnButton = cn('button');
 
@@ -15,11 +14,12 @@ export type PropOnClickProps = {
   name?: PropName;
 };
 export type PropOnClick = (object: PropOnClickProps) => void;
+export type PropSize = 'xs' | 's' | 'm' | 'l';
 
 export type ButtonProps = {
   id?: PropId;
   name?: PropName;
-  size: 'xs' | 's' | 'm' | 'l';
+  size: PropSize;
   view: 'clear' | 'ghost' | 'primary' | 'secondary';
   width?: 'default' | 'full';
   form?:
@@ -38,6 +38,9 @@ export type ButtonProps = {
   iconLeft?: React.FC<IIconProps>;
   iconRight?: React.FC<IIconProps>;
   as?: React.ElementType;
+  onlyIcon?: boolean;
+  iconSize?: IconPropSize;
+  title?: string;
 };
 
 declare type excludeHTMLAttributes =
@@ -54,7 +57,10 @@ declare type excludeHTMLAttributes =
   | 'label'
   | 'iconLeft'
   | 'iconRight'
-  | 'as';
+  | 'as'
+  | 'onlyIcon'
+  | 'iconSize'
+  | 'title';
 
 export type IButton<T> = ButtonProps &
   (
@@ -81,11 +87,14 @@ export function Button<T>(props: IButton<T>) {
     as = 'button',
     id,
     name,
+    onlyIcon,
+    iconSize,
+    title,
     ...otherProps
   } = props;
 
   const Component = as;
-  const IconOnly = !label && (iconLeft || iconRight);
+  const IconOnly = (!label || onlyIcon) && (iconLeft || iconRight);
   const IconLeft = iconLeft;
   const IconRight = iconRight;
   const withIcon = !!iconLeft || !!iconRight;
@@ -94,6 +103,20 @@ export function Button<T>(props: IButton<T>) {
       onClick({ e, id, name });
     }
   };
+
+  const getIconSizeByButtonSize = (buttonSize: PropSize): IconPropSize => {
+    const sizeObj: { xs: IconPropSize; s: IconPropSize; m: IconPropSize; l: IconPropSize } = {
+      xs: 'xs',
+      s: 'xs',
+      m: 's',
+      l: 'm',
+    };
+
+    return sizeObj[buttonSize];
+  };
+
+  const _iconSize = iconSize || getIconSizeByButtonSize(size);
+  const _title = title || (!!IconOnly && label);
 
   return (
     <Component
@@ -111,28 +134,24 @@ export function Button<T>(props: IButton<T>) {
         [className]
       )}
       tabIndex={tabIndex}
+      title={_title}
       {...otherProps}
     >
-      {IconOnly && <IconOnly className={cnButton('icon')} size="xs" />}
-      {(IconLeft || IconRight) && label ? (
-        <Fragment>
-          {IconLeft && (
-            <IconLeft
-              className={cnButton('icon', [wp.ptIconPlus('icon', { 'indent-r': '2xs' })])}
-              size="xs"
-            />
-          )}
-          <span className={cnButton('label', [wp.ptIconPlus('block')])}>{label}</span>
-          {IconRight && (
-            <IconRight
-              className={cnButton('icon', [wp.ptIconPlus('icon', { 'indent-l': '2xs' })])}
-              size="xs"
-            />
-          )}
-        </Fragment>
-      ) : (
-        label
-      )}
+      {IconOnly && <IconOnly className={cnButton('icon')} size={_iconSize} />}
+      {!IconOnly &&
+        ((IconLeft || IconRight) && label ? (
+          <Fragment>
+            {IconLeft && (
+              <IconLeft className={cnButton('icon', { position: 'left' })} size={_iconSize} />
+            )}
+            <span className={cnButton('label')}>{label}</span>
+            {IconRight && (
+              <IconRight className={cnButton('icon', { position: 'right' })} size={_iconSize} />
+            )}
+          </Fragment>
+        ) : (
+          label
+        ))}
     </Component>
   );
 }
