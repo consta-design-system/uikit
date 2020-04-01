@@ -33,7 +33,7 @@ export { Loader } from './Loader/Loader';
 export { Text } from './Text/Text';
 export { Informer } from './Informer/Informer';
 export { default as Popover } from './Popover';
-export { default as User } from './User';
+export { User } from './User/User';
 export { Badge } from './Badge/Badge';
 
 // Куски интерфейсов

@@ -2,7 +2,7 @@ import React from 'react';
 import bem from '../../../../utils/bem';
 
 import { Button, PropOnClick } from '../../../Button/Button';
-import User from '../../../User';
+import { User } from '../../../User/User';
 
 const b = bem('login');
 
@@ -31,15 +31,16 @@ const Login: React.FC<Props> = ({
 
   return isLoggedIn ? (
     <User
-      type={'button'}
-      view={'clear'}
-      size={'m'}
-      avatar={linkToPhoto}
+      as="button"
+      view="clear"
+      size="m"
+      avatarUrl={linkToPhoto}
       status={personStatus}
       name={personName}
       info={personInfo}
       onlyAvatar={isMinified}
-      onClick={onClick}
+      withArrow={isMinified}
+      onClick={(e) => onClick({ e })}
       className={b({}, className)}
     />
   ) : (
