@@ -4,7 +4,7 @@ import React from 'react';
 import { classnames } from '@bem-react/classnames';
 import { cn } from '../../utils/bem';
 import * as wp from '../../utils/whitepaper/whitepaper';
-import { IIconProps } from '../Icon';
+import { IIcon } from '../Icon';
 
 export type BadgeProps = {
   size: 's' | 'm';
@@ -12,7 +12,7 @@ export type BadgeProps = {
   status: 'success' | 'error' | 'warning' | 'normal' | 'system';
   form: 'default' | 'round';
   minified?: boolean;
-  icon?: React.FC<IIconProps>;
+  icon?: React.FC<IIcon>;
   innerRef?: () => void;
   label?: string;
   className?: string;
