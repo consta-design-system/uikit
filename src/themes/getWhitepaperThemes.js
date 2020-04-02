@@ -6,9 +6,11 @@ const DEFAULT_COLOR = '#aaaaaa';
 const COLOR_THEME_MOD = 'color';
 const THEME_COLOR_REGEXP = /\$color-base-essential: (.+);/;
 const THEMES_PATH = __dirname;
+const REGEXP_THEME_FILE_NAME = /(theme_(.+)_(.+)).css/;
 
-const getThemeProps = filename => {
-  const [, className, themeMod, themeName] = filename.match(/(theme_(.+)_(.+)).css/);
+const getThemeProps = (filename) => {
+  const [, className, themeMod, themeName] = filename.match(REGEXP_THEME_FILE_NAME);
+
   return {
     className,
     themeMod,
@@ -16,13 +18,13 @@ const getThemeProps = filename => {
   };
 };
 
-const getThemeColorFromFile = filename => {
+const getThemeColorFromFile = (filename) => {
   const absolutePath = path.join(THEMES_PATH, filename);
   const themeColorFileContent = fs.readFileSync(absolutePath, 'utf8');
   const matches = themeColorFileContent.match(THEME_COLOR_REGEXP);
   if (!matches) {
     throw new Error(
-      `Цвет темы не найден в файле ${absolutePath} используя regexp ${THEME_COLOR_REGEXP.toString()}`,
+      `Цвет темы не найден в файле ${absolutePath} используя regexp ${THEME_COLOR_REGEXP.toString()}`
     );
   }
   const [, themeColor] = matches;
@@ -34,7 +36,7 @@ const getWhitepaperThemes = () => {
 
   return Object.values(
     files
-      .filter(filename => /\.css$/.test(filename))
+      .filter((filename) => REGEXP_THEME_FILE_NAME.test(filename))
       .reduce((acc, filename) => {
         const { className, themeMod, themeName } = getThemeProps(filename);
 
@@ -62,8 +64,8 @@ const getWhitepaperThemes = () => {
         }
 
         return acc;
-      }, {}),
-  ).map(themeConfig => {
+      }, {})
+  ).map((themeConfig) => {
     // Сортируем классы здесь, чтобы снапшот тесты работали предсказуемо
     const classes = ['theme'].concat(Object.values(themeConfig.class).sort());
     return {

@@ -4,17 +4,21 @@ import { storiesOf } from '@storybook/react';
 import { Text } from './Text';
 
 const defaultKnobs = () => ({
-  as: select('as', ['p', 'div', 'a', 'span', 'h1', 'h2'], 'p'),
-  align: select('align', ['left', 'center', 'right'], ''),
-  decoration: select('decoration', ['underline', ''], ''),
-  display: select('display', ['block', 'inline-block', 'inline'], ''),
+  as: select('as', ['p', 'div', 'a', 'span', 'h1', 'h2'], undefined),
+  align: select('align', ['left', 'center', 'right'], undefined),
+  decoration: select('decoration', ['underline'], undefined),
+  display: select('display', ['block', 'inline-block', 'inline'], undefined),
   font: select('font', ['mono', 'sans', 'serif'], 'serif'),
-  lineHeight: select('lineHeight', ['2xs', 'xs', 's', 'm', 'l'], ''),
-  size: select('size', ['2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'], ''),
-  spacing: select('spacing', ['xs', 's', 'm', 'l', ''], ''),
-  fontStyle: select('fontStyle', ['italic', ''], ''),
-  transform: select('transform', ['uppercase', ''], ''),
-  type: select('type', ['blockquote', 'p', 'h3', 'h2', 'h1', ''], ''),
+  lineHeight: select('lineHeight', ['2xs', 'xs', 's', 'm', 'l'], undefined),
+  size: select(
+    'size',
+    ['2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'],
+    undefined
+  ),
+  spacing: select('spacing', ['xs', 's', 'm', 'l'], undefined),
+  fontStyle: select('fontStyle', ['italic'], undefined),
+  transform: select('transform', ['uppercase'], undefined),
+  type: select('type', ['blockquote', 'p', 'h3', 'h2', 'h1'], undefined),
   view: select(
     'View',
     ['alert', 'brand', 'ghost', 'link', 'link-minor', 'primary', 'secondary', 'success', 'warning'],

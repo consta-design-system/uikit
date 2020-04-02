@@ -1,28 +1,30 @@
-import React, { Fragment } from 'react';
-import { classnames } from '@bem-react/classnames';
-import { cn } from '../../utils/bem';
-import { IIconProps } from '../Icon';
-import { Text } from '../Text/Text';
-
 import './Informer.css';
 import '../../themes/theme_color_gpn-default.css';
 import '../../themes/theme_color_gpn-dark.css';
 
+import React, { Fragment } from 'react';
+import { classnames } from '@bem-react/classnames';
+import { cn } from '../../utils/bem';
+import { IIcon } from '../Icon';
+import { Text } from '../Text/Text';
 import * as wp from '../../utils/whitepaper/whitepaper';
 
-const cnInformer = cn('informer');
+export type InformerPropView = 'filled' | 'bordered';
+export type InformerPropStatus = 'system' | 'alert' | 'warning' | 'success';
 
-type CommonProps = {
-  view: 'filled' | 'bordered';
-  status: 'system' | 'alert' | 'warning' | 'success';
-  icon?: React.FC<IIconProps>;
+export type IInformer = {
+  view: InformerPropView;
+  status: InformerPropStatus;
+  icon?: React.FC<IIcon>;
   label?: React.ReactNode;
   children?: React.ReactNode;
   title?: string;
   className?: string;
 };
 
-export const Informer: React.FC<CommonProps> = (props) => {
+const cnInformer = cn('informer');
+
+export const Informer: React.FC<IInformer> = (props) => {
   const { className, view, status, icon, label, title, children } = props;
   const Icon = icon;
   const withIcon = !!icon;

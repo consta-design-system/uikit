@@ -403,7 +403,7 @@ const BaseSelect: React.FC<BaseSelectProps> = (props) => {
     }
   };
 
-  const handleDeleteClick = ({ e }: { e: React.MouseEvent }) => {
+  const handleDeleteClick: React.EventHandler<React.MouseEvent> = (e) => {
     e.preventDefault();
     e.stopPropagation();
 

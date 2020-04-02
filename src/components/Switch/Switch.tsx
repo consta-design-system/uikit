@@ -3,60 +3,49 @@ import './Switch.css';
 import React from 'react';
 import { cn } from '../../utils/bem';
 
-export type PropName = string | undefined;
-export type PropId = string | number | undefined;
-export type PropValue = any;
-export type PropChecked = boolean;
-export type PropOnClickProps = {
+export type SwitchPropName = string;
+export type SwitchPropId = string | number;
+export type SwitchPropValue<T = any> = T | null;
+export type SwitchPropChecked = boolean;
+export type SwitchPropSize = 'm' | 'l';
+export type SwitchOnChangeArguments<T = any> = {
   e: React.ChangeEvent<HTMLInputElement>;
-  id?: PropId;
-  name?: PropName;
-  value?: PropValue;
-  checked?: PropChecked;
+  id?: SwitchPropId;
+  name?: SwitchPropName;
+  value: SwitchPropValue<T>;
+  checked: SwitchPropChecked;
 };
 
-export interface ISwitch {
-  value?: PropValue;
-  checked?: boolean;
-  size: 'm' | 'l';
+export type SwitchProps<T = any> = {
+  value?: SwitchPropValue<T>;
+  checked?: SwitchPropChecked;
+  size?: SwitchPropSize;
   disabled?: boolean;
-  intermediate?: boolean;
   className?: string;
   label?: string;
-  onChange?: (object: PropOnClickProps) => void;
-  id?: PropId;
-  name?: PropName;
-}
+  onChange?: (object: SwitchOnChangeArguments<T>) => void;
+  id?: SwitchPropId;
+  name?: SwitchPropName;
+};
 
-declare type excludeInputHTMLAttributes =
-  | 'value'
-  | 'size'
-  | 'checked'
-  | 'disabled'
-  | 'className'
-  | 'label'
-  | 'onChange'
-  | 'id'
-  | 'name';
-declare type InputProps = Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  excludeInputHTMLAttributes
->;
+declare type ISwitch<T = any> = SwitchProps<T> &
+  Omit<React.InputHTMLAttributes<HTMLInputElement>, keyof SwitchProps<T>>;
 
-export const cnSwitch = cn('switch');
+export const cnCheckbox = cn('switch');
 
-export const Switch: React.FC<ISwitch & InputProps> = ({
-  value,
-  checked,
-  id,
-  name,
-  size,
-  disabled,
-  className,
-  label,
-  onChange,
-  ...otherProps
-}) => {
+export function Switch<T = any>(props: ISwitch<T>): React.ReactElement | null {
+  const {
+    value = null,
+    checked = false,
+    id,
+    name,
+    size = 'm',
+    disabled,
+    className,
+    label,
+    onChange,
+    ...otherProps
+  } = props;
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!disabled && onChange) {
       onChange({ e, id, name, value, checked: !checked });
@@ -64,18 +53,18 @@ export const Switch: React.FC<ISwitch & InputProps> = ({
   };
 
   return (
-    <label className={cnSwitch({ size, disabled }, [className])}>
+    <label className={cnCheckbox({ size, disabled }, [className])}>
       <input
         type="checkbox"
         id={id ? id.toString() : undefined}
         name={name}
-        className={cnSwitch('input')}
+        className={cnCheckbox('input')}
         checked={checked}
         disabled={disabled}
         onChange={handleChange}
         {...otherProps}
       />
-      {label && <span className={cnSwitch('label')}>{label}</span>}
+      {label && <span className={cnCheckbox('label')}>{label}</span>}
     </label>
   );
-};
+}

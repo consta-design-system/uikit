@@ -1,0 +1,106 @@
+.user {
+  display: inline-flex;
+  border-radius: 99em;
+  border: 0;
+  text-decoration: none;
+  text-align: left;
+  transition: background-color 0.25s ease;
+  align-items: center;
+
+  &__block {
+    flex-grow: 2;
+  }
+
+  &__avatar-wrapper {
+    padding: var(--space-2xs);
+    box-sizing: content-box;
+    border-radius: 50%;
+    margin-right: var(--indent);
+
+    &_status {
+      &_available {
+        box-shadow: inset 0 0 0 var(--space-3xs) var(--color-bg-success);
+      }
+      &_remote {
+        box-shadow: inset 0 0 0 var(--space-3xs) var(--color-bg-warning);
+      }
+      &_out {
+        box-shadow: inset 0 0 0 var(--space-3xs) var(--color-bg-alert);
+      }
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &_view {
+    &_clear {
+      background-color: var(--color-control-bg-clear);
+
+      &:hover {
+        background-color: var(--color-control-bg-clear-hover);
+      }
+    }
+    &_ghost {
+      background-color: var(--color-control-bg-ghost);
+
+      &:hover {
+        background-color: var(--color-control-bg-ghost-hover);
+      }
+    }
+  }
+
+  &__name,
+  &__info {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+
+  &__name {
+    max-width: 20ch;
+  }
+  &__info {
+    max-width: 28ch;
+  }
+
+  &_size {
+    &_s {
+      --indent-r: var(--space-s);
+      --indent: var(--space-xs);
+      --icon-indent: var(--space-m);
+    }
+    &_m {
+      --indent-r: var(--space-m);
+      --indent: var(--space-s);
+      --icon-indent: var(--space-l);
+      .user__name {
+        margin-bottom: var(--space-3xs);
+      }
+    }
+    &_s:not(.user_with-arrow) {
+      --indent-r: var(--space-m);
+    }
+    &_m:not(.user_with-arrow) {
+      --indent-r: var(--space-l);
+    }
+  }
+
+  &:not(.user_minified)&_width_full {
+    width: 100%;
+
+    .user__name,
+    .user__info {
+      max-width: none;
+    }
+  }
+
+  &:not(.user_minified) &__arrow {
+    margin-left: var(--icon-indent);
+  }
+
+  > *:last-child:not(:first-child) {
+    margin-right: var(--indent-r);
+  }
+}

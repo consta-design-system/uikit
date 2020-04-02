@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withKnobs, text, select, boolean } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { Checkbox } from './Checkbox';
@@ -12,4 +12,10 @@ const knobs = () => ({
 
 storiesOf('Checkbox', module)
   .addDecorator(withKnobs)
-  .add('Чекбокс', () => <Checkbox {...knobs()} />);
+  .add('Чекбокс', () => {
+    const [checked, setChecked] = useState<boolean>(false);
+    const handleChange = ({ checked }) => {
+      setChecked(checked);
+    };
+    return <Checkbox onChange={handleChange} checked={checked} {...knobs()} />;
+  });

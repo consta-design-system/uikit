@@ -15,10 +15,10 @@ import '../themes/theme_space_gpn-default.css';
 // Контролы
 export { Button } from './Button/Button';
 export { Checkbox } from './Checkbox/Checkbox';
-export { ChoiceGroup } from './ChoiceGroup/ChoiceGroup';
-export { default as Input } from './Input';
+export { default as ChoiceGroup } from './ChoiceGroup';
+// export { default as Input } from './Input';
 export { Radio } from './Radio/Radio';
-export { default as Textarea } from './Textarea';
+// export { default as Textarea } from './Textarea';
 export { Switch } from './Switch/Switch';
 export { Select, MultiSelect, CreatableSelect } from './Select';
 export { TextField } from './TextField/TextField';
@@ -33,9 +33,9 @@ export { Loader } from './Loader/Loader';
 export { Text } from './Text/Text';
 export { Informer } from './Informer/Informer';
 export { default as Popover } from './Popover';
-export { default as User } from './User';
+export { User } from './User/User';
 export { Badge } from './Badge/Badge';
 
 // Куски интерфейсов
-export { default as Header } from './Header';
-export { Logo, SearchBar, Menu, Login, IconButton } from './Header';
+// export { default as Header } from './Header';
+// export { Logo, SearchBar, Menu, Login, IconButton } from './Header';

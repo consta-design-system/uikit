@@ -3,42 +3,60 @@ import './TextField.css';
 import React, { useState } from 'react';
 import TextAreaAutoSize from 'react-textarea-autosize';
 import { cn } from '../../utils/bem';
-import { IIconProps, PropSize as IconPropSize } from '../Icon';
+import { IIcon, IconPropSize } from '../Icon';
 
-export type PropValue = string | null;
-export type PropName = string;
-export type PropId = string | number;
-export type PropSize = 'xs' | 's' | 'm' | 'l';
-export type PropOnChange = (args: PropOnChangeFunctionArgs) => void;
-
-export type PropOnChangeFunctionArgs = {
+export type TextFieldPropValue = string | null;
+export type TextFieldPropName = string;
+export type TextFieldPropId = string | number;
+export type TextFieldPropSize = 'xs' | 's' | 'm' | 'l';
+export type TextFieldPropOnChange = (args: TextFieldOnChangeArguments) => void;
+export type TextFieldOnChangeArguments = {
   e: React.ChangeEvent;
-  id?: PropId;
-  name?: PropName;
-  value?: PropValue;
+  id?: TextFieldPropId;
+  name?: TextFieldPropName;
+  value: TextFieldPropValue;
 };
+export type TextFieldPropType =
+  | 'text'
+  | 'textarea'
+  | 'color'
+  | 'email'
+  | 'number'
+  | 'search'
+  | 'tel'
+  | 'date'
+  | 'time'
+  | 'datetime'
+  | 'datetime-local'
+  | 'url'
+  | 'month'
+  | 'week';
+export type TextFieldPropView = 'default';
+export type TextFieldPropForm =
+  | 'default'
+  | 'brick'
+  | 'round'
+  | 'clear'
+  | 'clear-round'
+  | 'round-clear'
+  | 'clear-default'
+  | 'default-clear'
+  | 'default-brick'
+  | 'brick-default'
+  | 'brick-clear'
+  | 'clear-brick'
+  | 'clear-clear';
+export type TextFieldPropState = 'alert' | 'success' | 'warning';
+export type TextFieldPropWidth = 'full' | 'default';
+export type TextFieldPropAutoComplete = 'on' | 'off';
 
 export type TextFieldProps = {
   className?: string;
-  value?: PropValue;
-  onChange?: PropOnChange;
-  id?: PropId;
-  name?: PropName;
-  type?:
-    | 'text'
-    | 'textarea'
-    | 'color'
-    | 'email'
-    | 'number'
-    | 'search'
-    | 'tel'
-    | 'date'
-    | 'time'
-    | 'datetime'
-    | 'datetime-local'
-    | 'url'
-    | 'month'
-    | 'week';
+  value?: TextFieldPropValue;
+  onChange?: TextFieldPropOnChange;
+  id?: TextFieldPropId;
+  name?: TextFieldPropName;
+  type?: TextFieldPropType;
   disabled?: boolean;
   innerRef?: (node: HTMLDivElement) => void;
   inputRef?: (node: HTMLTextAreaElement | HTMLInputElement) => void;
@@ -47,31 +65,18 @@ export type TextFieldProps = {
   minRows?: number;
   maxRows?: number;
   maxLength?: number;
-  size?: PropSize;
-  view?: 'default';
-  form?:
-    | 'default'
-    | 'brick'
-    | 'round'
-    | 'clear'
-    | 'clear-round'
-    | 'round-clear'
-    | 'clear-default'
-    | 'default-clear'
-    | 'default-brick'
-    | 'brick-default'
-    | 'brick-clear'
-    | 'clear-brick'
-    | 'clear-clear';
-  state?: 'alert' | 'success' | 'warning' | '';
-  width?: 'full' | 'default';
+  size?: TextFieldPropSize;
+  view?: TextFieldPropView;
+  form?: TextFieldPropForm;
+  state?: TextFieldPropState;
+  width?: TextFieldPropWidth;
   onFocus?: React.FocusEventHandler<HTMLTextAreaElement | HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLTextAreaElement | HTMLInputElement>;
   autoFocus?: boolean;
   placeholder?: string;
-  leftSide?: string | React.FC<IIconProps>;
-  rightSide?: string | React.FC<IIconProps>;
-  autoComplete?: 'on' | 'off';
+  leftSide?: string | React.FC<IIcon>;
+  rightSide?: string | React.FC<IIcon>;
+  autoComplete?: TextFieldPropAutoComplete;
   max?: number | string;
   min?: number | string;
   readOnly?: boolean;
@@ -80,42 +85,8 @@ export type TextFieldProps = {
   tabIndex?: number;
 };
 
-declare type excludeHTMLAttributes =
-  | 'className'
-  | 'value'
-  | 'onChange'
-  | 'id'
-  | 'name'
-  | 'type'
-  | 'disabled'
-  | 'innerRef'
-  | 'inputRef'
-  | 'rows'
-  | 'minRows'
-  | 'maxRows'
-  | 'maxLength'
-  | 'size'
-  | 'view'
-  | 'form'
-  | 'state'
-  | 'width'
-  | 'onFocus'
-  | 'onBlur'
-  | 'autoFocus'
-  | 'placeholder'
-  | 'leftSide'
-  | 'rightSide'
-  | 'autoComplete'
-  | 'max'
-  | 'min'
-  | 'readOnly'
-  | 'required'
-  | 'step'
-  | 'cols'
-  | 'tabIndex';
-
 export type ITextField = TextFieldProps &
-  Omit<React.HTMLAttributes<HTMLDivElement>, excludeHTMLAttributes>;
+  Omit<React.HTMLAttributes<HTMLDivElement>, keyof TextFieldProps>;
 
 const cnTextField = cn('text-field');
 
@@ -162,8 +133,8 @@ export const TextField: React.FC<ITextField> = ({
   const leftSideIsString = typeof leftSide === 'string';
   const rightSideIsString = typeof rightSide === 'string';
 
-  const getIconSizeByTextFieldSize = (textFieldSize: PropSize): IconPropSize => {
-    const sizeObj: { xs: IconPropSize; s: IconPropSize; m: IconPropSize; l: IconPropSize } = {
+  const getIconSizeByTextFieldSize = (textFieldSize: TextFieldPropSize): IconPropSize => {
+    const sizeObj: Record<TextFieldPropSize, IconPropSize> = {
       xs: 'xs',
       s: 's',
       m: 's',

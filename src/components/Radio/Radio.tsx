@@ -1,61 +1,53 @@
+import './Radio.css';
+
 import React from 'react';
 import { cn } from '../../utils/bem';
 
-import './Radio.css';
-
-export type PropName = string | undefined;
-export type PropId = string | number | undefined;
-export type PropValue = any;
-export type PropChecked = boolean;
-export type PropOnClickProps = {
+export type RadioPropName = string;
+export type RadioPropId = string | number;
+export type RadioPropValue<T = any> = T | null;
+export type RadioPropChecked = boolean;
+export type RadioPropIntermediate = boolean;
+export type RadioPropSize = 'm' | 'l';
+export type RadioOnChangeArguments<T = any> = {
   e: React.ChangeEvent<HTMLInputElement>;
-  id?: PropId;
-  name?: PropName;
-  value?: PropValue;
-  checked?: PropChecked;
+  id?: RadioPropId;
+  name?: RadioPropName;
+  value: RadioPropValue<T>;
+  checked: RadioPropChecked;
 };
 
-export interface IRadio {
-  value?: PropValue;
-  checked?: boolean;
-  size: 'm' | 'l';
+export type RadioProps<T = any> = {
+  value?: RadioPropValue<T>;
+  checked?: RadioPropChecked;
+  size?: RadioPropSize;
   disabled?: boolean;
+  intermediate?: RadioPropIntermediate;
   className?: string;
   label?: string;
-  onChange?: (object: PropOnClickProps) => void;
-  id?: PropId;
-  name?: PropName;
-}
+  onChange?: (object: RadioOnChangeArguments<T>) => void;
+  id?: RadioPropId;
+  name?: RadioPropName;
+};
 
-declare type excludeInputHTMLAttributes =
-  | 'value'
-  | 'size'
-  | 'checked'
-  | 'disabled'
-  | 'className'
-  | 'label'
-  | 'onChange'
-  | 'id'
-  | 'name';
-declare type InputProps = Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  excludeInputHTMLAttributes
->;
+declare type IRadio<T = any> = RadioProps<T> &
+  Omit<React.InputHTMLAttributes<HTMLInputElement>, keyof RadioProps<T>>;
 
-const cnRadio = cn('radio');
+export const cnRadio = cn('radio');
 
-export const Radio: React.FC<IRadio & InputProps> = ({
-  value,
-  id,
-  name,
-  size,
-  disabled,
-  label,
-  className,
-  checked,
-  onChange,
-  ...otherProps
-}) => {
+export function Radio<T = any>(props: IRadio<T>): React.ReactElement | null {
+  const {
+    value = null,
+    checked = false,
+    id,
+    name,
+    size = 'm',
+    disabled,
+    className,
+    label,
+    onChange,
+    ...otherProps
+  } = props;
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!disabled && onChange) {
       onChange({ e, id, name, value, checked: !checked });
@@ -68,13 +60,13 @@ export const Radio: React.FC<IRadio & InputProps> = ({
         type="radio"
         id={id ? id.toString() : undefined}
         name={name}
-        onChange={handleChange}
         className={cnRadio('input')}
         checked={checked}
         disabled={disabled}
+        onChange={handleChange}
         {...otherProps}
       />
       {label && <span className={cnRadio('label')}>{label}</span>}
     </label>
   );
-};
+}
