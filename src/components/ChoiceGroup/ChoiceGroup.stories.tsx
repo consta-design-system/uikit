@@ -5,7 +5,7 @@ import { ChoiceGroup } from '../ChoiceGroup/ChoiceGroup';
 
 declare type Item = string;
 
-const items = ['один', 'два', 'три'];
+const items = ['один', 'два', 'три', 'четыре'];
 
 const knobs = () => ({
   multiply: boolean('multiply', false),
