@@ -15,7 +15,7 @@ import '../themes/theme_space_gpn-default.css';
 // Контролы
 export { Button } from './Button/Button';
 export { Checkbox } from './Checkbox/Checkbox';
-export { default as ChoiceGroup } from './ChoiceGroup';
+export { ChoiceGroup } from './ChoiceGroup/ChoiceGroup';
 // export { default as Input } from './Input';
 export { Radio } from './Radio/Radio';
 // export { default as Textarea } from './Textarea';
