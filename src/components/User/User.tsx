@@ -40,13 +40,14 @@ export function User<T>(props: IUser<T>): React.ReactElement | null {
     name,
     view = 'clear',
     width,
-    onlyAvatar,
+    onlyAvatar: propOnlyAvatar,
     withArrow,
     info,
     status,
     ...otherProps
   } = props;
   const Component = as;
+  const onlyAvatar = propOnlyAvatar || (!name && !info);
 
   const getInfoSizeByUserSize = (userSize: UserPropSize): TextPropSize => {
     const sizeObj: Record<UserPropSize, TextPropSize> = {

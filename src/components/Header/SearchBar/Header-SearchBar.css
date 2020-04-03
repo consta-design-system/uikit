@@ -1,13 +1,10 @@
-.search-bar {
-  position: relative;
-  width: 25vw;
-  max-width: 260px;
-
-  &__input {
-    width: 100%;
+.header {
+  &__search-bar {
+    position: relative;
+    width: 25vw;
+    max-width: 260px;
   }
-
-  &__label {
+  &__search-bar-label {
     position: absolute;
     padding: 0;
     width: 1px;
@@ -18,8 +15,7 @@
     opacity: 0;
     pointer-events: none;
   }
-
-  &__button {
+  &__search-bar-button {
     position: absolute;
     right: var(--space-2xs);
     top: var(--space-2xs);

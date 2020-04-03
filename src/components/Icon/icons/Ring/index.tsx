@@ -13,7 +13,7 @@ const SVG_M = (
   <path d="M12 22C13.1 22 14 21.1 14 20H10C10 21.1 10.89 22 12 22ZM18 16V11C18 7.93 16.36 5.36 13.5 4.68V4C13.5 3.17 12.83 2.5 12 2.5C11.17 2.5 10.5 3.17 10.5 4V4.68C7.63 5.36 6 7.92 6 11V16H5.5C4.67157 16 4 16.6716 4 17.5C4 18.3284 4.67157 19 5.5 19H18.5C19.3284 19 20 18.3284 20 17.5C20 16.6716 19.3284 16 18.5 16H18Z" />
 );
 
-const Ring = props => {
+export const IconRing = (props) => {
   let svg;
 
   if (props.size === 'xs')
@@ -25,4 +25,4 @@ const Ring = props => {
   return <Icon {...props}>{svg}</Icon>;
 };
 
-export default Ring;
+export default IconRing;

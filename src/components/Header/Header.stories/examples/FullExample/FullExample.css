@@ -1,0 +1,12 @@
+.full-example {
+  margin-bottom: var(--space-3xl);
+  &__login {
+    cursor: pointer;
+    &_is-logged {
+      padding: 0;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}

@@ -26,7 +26,7 @@ const SVG_M = (
   />
 );
 
-const Search = props => {
+export const IconSearch = (props) => {
   let svg;
 
   if (props.size === 'xs') svg = SVG_XS;
@@ -36,4 +36,4 @@ const Search = props => {
   return <Icon {...props}>{svg}</Icon>;
 };
 
-export default Search;
+export default IconSearch;
