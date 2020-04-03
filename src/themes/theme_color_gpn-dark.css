@@ -63,7 +63,6 @@ $color-base-critical: #33000f;
 
   /* Default */
   --color-control-bg-default: color($color-base-essential); /* Цвет фона контрола */
-  --color-control-bg-default-hover: color($color-base-phantom s(+20%) l(16%)); /* Цвет фона контрола по ховеру */
   --color-control-typo-default: color($color-base-base a(80%)); /* Цвет основного текста контрола */
   --color-control-typo-placeholder: color($color-base-base a(35%)); /* Цвет плейсхолдера контрола */
   --color-control-bg-border-default: color($color-base-phantom a(28%)); /* Цвет фона бордеров котрола */
@@ -99,7 +98,7 @@ $color-base-critical: #33000f;
 
   /* Disable */
   --color-control-bg-disable: color($color-base-phantom s(-100) a(16%)); /* Цвет фона неактивного контрола */
-  --color-control-bg-border-disable: color($color-base-phantom a(0%)); /* Цвет фона бордеров неактивного контрола */
+  --color-control-bg-border-disable: color($color-base-phantom s(-100) a(0%)); /* Цвет фона бордеров неактивного контрола */
   --color-control-typo-disable: color($color-base-base a(24%)); /* Цвет основного текста неактивного контрола */
 }
 /* stylelint-enable */
