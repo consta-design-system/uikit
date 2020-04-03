@@ -30,7 +30,7 @@ export { Loader } from './Loader/Loader';
 // Другие компоненты
 export { Text } from './Text/Text';
 export { Informer } from './Informer/Informer';
-// export { default as Popover } from './Popover';
+export { default as Popover } from './Popover';
 export { User } from './User/User';
 export { Badge } from './Badge/Badge';
 
