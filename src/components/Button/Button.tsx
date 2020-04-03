@@ -16,8 +16,8 @@ export type ButtonPropForm =
   | 'default-brick';
 
 export type ButtonProps = {
-  size: ButtonPropSize;
-  view: ButtonPropView;
+  size?: ButtonPropSize;
+  view?: ButtonPropView;
   width?: ButtonPropWidth;
   form?: ButtonPropForm;
   className?: string;
@@ -33,7 +33,7 @@ export type ButtonProps = {
   title?: string;
 };
 
-export type IButton<T> = ButtonProps &
+export type IButton<T = {}> = ButtonProps &
   (Omit<React.ButtonHTMLAttributes<Element>, keyof ButtonProps> | Omit<T, keyof ButtonProps>);
 
 // При использовании "as" позаботьтесь об интерфейсе прокинутого елемента, по умолчанию он button
