@@ -31,7 +31,7 @@ export type TextFieldPropType =
   | 'url'
   | 'month'
   | 'week';
-export type TextFieldPropView = 'default';
+export type TextFieldPropView = 'default' | 'clear';
 export type TextFieldPropForm =
   | 'default'
   | 'brick'

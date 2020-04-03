@@ -76,7 +76,7 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
   const getIconSizeByButtonSize = (buttonSize: ButtonPropSize): IconPropSize => {
     const sizeObj: Record<ButtonPropSize, IconPropSize> = {
       xs: 'xs',
-      s: 'xs',
+      s: 's',
       m: 's',
       l: 'm',
     };

@@ -26,6 +26,7 @@ const knobs = () => ({
   ),
   state: select('state', ['', 'alert', 'success', 'warning'], ''),
   size: select('size', ['xs', 's', 'm', 'l'], 'm'),
+  view: select('view', ['default', 'clear'], 'default'),
   disabled: boolean('disabled', false),
   type: select(
     'type',
@@ -62,6 +63,7 @@ function Stories({
   form,
   state,
   size,
+  view,
   type,
   maxLength,
   minRows,
@@ -97,6 +99,7 @@ function Stories({
       form={form}
       state={state}
       size={size}
+      view={view}
       type={type}
       maxLength={maxLength}
       minRows={minRows}
