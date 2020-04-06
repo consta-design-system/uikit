@@ -21,12 +21,11 @@ export type ChoiceGroupProps<T> = {
   getItemIcon?: (item: T) => React.FC<IIcon> | undefined;
 };
 
-export type IChoiceGroupProps<T> = ChoiceGroupProps<T> &
-  Omit<IBaseCheckGroupField<T>, 'componentItem'>;
+export type IChoiceGroup<T> = Omit<IBaseCheckGroupField<T, ChoiceGroupProps<T>>, 'componentItem'>;
 
 export const cnChoiceGroup = cn('choice-group');
 
-export function ChoiceGroup<T>(props: IChoiceGroupProps<T>): React.ReactElement {
+export function ChoiceGroup<T>(props: IChoiceGroup<T>): React.ReactElement {
   const {
     size = 'm',
     form = 'default',
@@ -36,17 +35,22 @@ export function ChoiceGroup<T>(props: IChoiceGroupProps<T>): React.ReactElement 
     ...otherProps
   } = props;
 
-  const getAdditionalPropsForItem: BaseCheckGroupFieldPropGetAdditionalPropsForItem<T> = (item) => {
+  const getAdditionalPropsForItem: BaseCheckGroupFieldPropGetAdditionalPropsForItem<
+    T,
+    ChoiceGroupProps<T>
+  > = (item, { size }) => {
     return {
       ...(getItemIcon ? { icon: getItemIcon(item) } : {}),
+      size,
     };
   };
 
   return (
-    <BaseCheckGroupField<T>
+    <BaseCheckGroupField<T, IChoiceGroup<T>>
       className={cnChoiceGroup({ size, form, view }, [className])}
       componentItem={ChoiceGroupItem}
       getAdditionalPropsForItem={getAdditionalPropsForItem}
+      size={size}
       {...otherProps}
     />
   );
