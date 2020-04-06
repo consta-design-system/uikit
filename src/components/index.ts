@@ -37,5 +37,12 @@ export { User } from './User/User';
 export { Badge } from './Badge/Badge';
 
 // Куски интерфейсов
-// export { default as Header } from './Header';
-// export { Logo, SearchBar, Menu, Login, IconButton } from './Header';
+
+export {
+  Header,
+  HeaderButton,
+  HeaderLogin,
+  HeaderLogo,
+  HeaderMenu,
+  HeaderSearchBar,
+} from './Header/Header';

@@ -53,7 +53,7 @@ export type TextProps = {
   weight?: TextPropWeight;
   width?: TextPropWidth;
   className?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 export type IText<T> = TextProps &
@@ -61,7 +61,7 @@ export type IText<T> = TextProps &
 
 export const cnText = cn('text');
 
-export function Text<T>(props: IText<T>) {
+export function Text<T>(props: IText<T>): React.ReactElement | null {
   const {
     as = 'div',
     align,
@@ -69,12 +69,12 @@ export function Text<T>(props: IText<T>) {
     display,
     font,
     lineHeight,
-    size,
+    size = 'm',
     spacing,
     fontStyle,
     transform,
     type,
-    view,
+    view = 'primary',
     weight,
     width,
     className,

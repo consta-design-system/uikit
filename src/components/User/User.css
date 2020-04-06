@@ -8,7 +8,11 @@
   align-items: center;
 
   &__block {
-    flex-grow: 2;
+    flex: 1;
+  }
+
+  &__arrow {
+    flex: none;
   }
 
   &__avatar-wrapper {
@@ -16,6 +20,7 @@
     box-sizing: content-box;
     border-radius: 50%;
     margin-right: var(--indent);
+    flex: none;
 
     &_status {
       &_available {

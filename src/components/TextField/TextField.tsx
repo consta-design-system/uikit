@@ -228,6 +228,7 @@ export const TextField: React.FC<ITextField> = ({
         readOnly={readOnly}
         required={required}
         tabIndex={tabIndex}
+        name={name}
         {...(textarea ? textareaProps : inputProps)}
       />
       {RightIcon && (

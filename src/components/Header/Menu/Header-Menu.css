@@ -1,20 +1,26 @@
-.menu {
-  &__list {
+.header {
+  &__menu-list {
     display: flex;
     list-style-type: none;
+    margin: 0;
+    padding: 0;
   }
 
-  &__item {
+  &__menu-item {
     margin-right: var(--space-m);
+    &:last-child {
+      margin-right: 0;
+    }
   }
 
-  &__link {
+  &__menu-link {
     position: relative;
     display: inline-block;
     text-decoration: none;
     color: var(--color-typo-primary);
     line-height: var(--header-height);
     transition: color 0.2s;
+    cursor: pointer;
 
     &:hover {
       color: var(--color-typo-link-hover);
