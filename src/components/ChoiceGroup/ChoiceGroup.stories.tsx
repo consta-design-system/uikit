@@ -32,6 +32,7 @@ const items = [
 
 const knobs = () => ({
   multiply: boolean('multiply', false),
+  onlyIcon: boolean('onlyIcon', false),
   size: select('size', ['xs', 's', 'm', 'l'], 'm'),
   form: select('form', ['default', 'round', 'brick'], 'default'),
 });

@@ -10,7 +10,7 @@ export type BaseCheckGroupFieldItemOnChangeFunctionArguments<T> = {
   checked: boolean;
 };
 export type BaseCheckGroupFieldItemPropItemKey = string | number;
-export type BaseCheckGroupFieldItemPropItemLabel = string | number;
+export type BaseCheckGroupFieldItemPropItemLabel = string;
 export type BaseCheckGroupFieldPropGetItemKey<T> = (item: T) => BaseCheckGroupFieldItemPropItemKey;
 export type BaseCheckGroupFieldPropGetItemLabel<T> = (
   item: T
@@ -102,23 +102,18 @@ export function BaseCheckGroupField<T, T2 = {}>(props: IBaseCheckGroupField<T, T
   return (
     <div className={className}>
       {items
-        ? items.map((item) => {
-            const additionalPropsForItem = getAdditionalPropsForItem
-              ? getAdditionalPropsForItem(item, props)
-              : {};
-            return (
-              <ComponentItem
-                {...additionalPropsForItem}
-                onChange={handleItemChange}
-                key={getItemKey(item)}
-                label={getItemLabel(item)}
-                value={item}
-                id={getItemKey(item)}
-                checked={getChecked(item)}
-                multiply={multiply}
-              />
-            );
-          })
+        ? items.map((item) => (
+            <ComponentItem
+              {...(getAdditionalPropsForItem ? getAdditionalPropsForItem(item, props) : {})}
+              onChange={handleItemChange}
+              key={getItemKey(item)}
+              label={getItemLabel(item)}
+              value={item}
+              id={getItemKey(item)}
+              checked={getChecked(item)}
+              multiply={multiply}
+            />
+          ))
         : null}
     </div>
   );
