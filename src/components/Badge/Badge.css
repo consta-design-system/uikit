@@ -25,6 +25,13 @@
 
       padding: 0 var(--space-xs);
     }
+
+    &_l {
+      --badge-size: 32px;
+      --badge-text-size: var(--size-text-s);
+
+      padding: 0 var(--space-xs);
+    }
   }
 
   &_form {
@@ -40,6 +47,9 @@
       }
       &.badge1_size_m {
         padding: 0 var(--space-s);
+      }
+      &.badge1_size_l {
+        padding: 0 var(--space-m);
       }
     }
   }
@@ -100,18 +110,26 @@
     background: transparent;
 
     &.badge1_size_s {
-      width: 12px;
-      height: 12px;
-      padding: 0;
-      border: 1px solid transparent;
-      box-shadow: inset 0 0 0 10px var(--badge-bg-color);
-    }
-    &.badge1_size_m {
       width: 16px;
       height: 16px;
       padding: 0;
-      border: 2px solid transparent;
+      border: 3px solid transparent;
       box-shadow: inset 0 0 0 10px var(--badge-bg-color);
+    }
+    &.badge1_size_m {
+      width: 24px;
+      height: 24px;
+      padding: 0;
+      border: 4px solid transparent;
+      box-shadow: inset 0 0 0 12px var(--badge-bg-color);
+    }
+
+    &.badge1_size_l {
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      border: 5px solid transparent;
+      box-shadow: inset 0 0 0 14px var(--badge-bg-color);
     }
   }
 

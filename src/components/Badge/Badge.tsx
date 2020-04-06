@@ -7,7 +7,7 @@ import * as wp from '../../utils/whitepaper/whitepaper';
 import { IIcon } from '../Icon';
 
 export type BadgeProps = {
-  size: 's' | 'm';
+  size: 's' | 'm' | 'l';
   view: 'filled' | 'stroked';
   status: 'success' | 'error' | 'warning' | 'normal' | 'system';
   form: 'default' | 'round';
