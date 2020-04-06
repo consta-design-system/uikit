@@ -7,10 +7,10 @@ import * as wp from '../../utils/whitepaper/whitepaper';
 import { IIcon } from '../Icon';
 
 export type BadgeProps = {
-  size: 's' | 'm' | 'l';
-  view: 'filled' | 'stroked';
-  status: 'success' | 'error' | 'warning' | 'normal' | 'system';
-  form: 'default' | 'round';
+  size?: 's' | 'm' | 'l';
+  view?: 'filled' | 'stroked';
+  status?: 'success' | 'error' | 'warning' | 'normal' | 'system';
+  form?: 'default' | 'round';
   minified?: boolean;
   icon?: React.FC<IIcon>;
   innerRef?: () => void;
