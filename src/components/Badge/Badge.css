@@ -21,7 +21,7 @@
 
     &_m {
       --badge-size: 24px;
-      --badge-text-size: var(--size-text-2xs);
+      --badge-text-size: var(--size-text-xs);
 
       padding: 0 var(--space-xs);
     }
