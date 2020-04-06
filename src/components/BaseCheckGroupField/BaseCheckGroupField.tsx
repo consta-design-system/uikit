@@ -10,7 +10,7 @@ export type BaseCheckGroupFieldItemOnChangeFunctionArguments<T> = {
   checked: boolean;
 };
 export type BaseCheckGroupFieldItemPropItemKey = string | number;
-export type BaseCheckGroupFieldItemPropItemLabel = string | number;
+export type BaseCheckGroupFieldItemPropItemLabel = string;
 export type BaseCheckGroupFieldPropGetItemKey<T> = (item: T) => BaseCheckGroupFieldItemPropItemKey;
 export type BaseCheckGroupFieldPropGetItemLabel<T> = (
   item: T

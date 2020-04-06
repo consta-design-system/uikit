@@ -7,6 +7,7 @@ import {
   BaseCheckGroupField,
   IBaseCheckGroupField,
   BaseCheckGroupFieldPropGetAdditionalPropsForItem,
+  BaseCheckGroupFieldPropGetItemLabel,
 } from '../BaseCheckGroupField/BaseCheckGroupField';
 import { ChoiceGroupItem } from './Item/ChoiceGroup__item';
 
@@ -18,7 +19,9 @@ export type ChoiceGroupProps<T> = {
   size?: ChoiceGroupPropSize;
   form?: ChoiceGroupPropForm;
   view?: ChoiceGroupPropView;
+  onlyIcon?: boolean;
   getItemIcon?: (item: T) => React.FC<IIcon> | undefined;
+  getItemTitle?: BaseCheckGroupFieldPropGetItemLabel<T>;
 };
 
 export type IChoiceGroup<T> = Omit<
@@ -35,16 +38,20 @@ export function ChoiceGroup<T>(props: IChoiceGroup<T>): React.ReactElement {
     className,
     view = 'primary',
     getItemIcon,
+    getItemTitle,
+    onlyIcon,
     ...otherProps
   } = props;
 
   const getAdditionalPropsForItem: BaseCheckGroupFieldPropGetAdditionalPropsForItem<
     T,
     ChoiceGroupProps<T>
-  > = (item, { size }) => {
+  > = (item, { size, onlyIcon }) => {
     return {
       ...(getItemIcon ? { icon: getItemIcon(item) } : {}),
+      ...(getItemTitle ? { title: getItemTitle(item) } : {}),
       size,
+      onlyIcon,
     };
   };
 
@@ -54,6 +61,7 @@ export function ChoiceGroup<T>(props: IChoiceGroup<T>): React.ReactElement {
       componentItem={ChoiceGroupItem}
       getAdditionalPropsForItem={getAdditionalPropsForItem}
       size={size}
+      onlyIcon={onlyIcon}
       {...otherProps}
     />
   );

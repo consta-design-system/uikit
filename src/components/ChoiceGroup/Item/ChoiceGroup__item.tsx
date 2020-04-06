@@ -6,14 +6,28 @@ import { IconPropSize, IIcon } from '../../Icon';
 export type ChoiceGroupItemProps = {
   icon?: React.FC<IIcon>;
   size?: ChoiceGroupPropSize;
+  onlyIcon?: boolean;
+  title?: string;
 };
 
 export type IChoiceGroupItem<T> = ItemProps<T> & ChoiceGroupItemProps;
 
 export function ChoiceGroupItem<T>(props: IChoiceGroupItem<T>): React.ReactElement {
-  const { className, label, onChange, checked, id, multiply, value, icon, size = 'm' } = props;
+  const {
+    className,
+    label,
+    onChange,
+    checked,
+    id,
+    multiply,
+    value,
+    icon: Icon,
+    size = 'm',
+    onlyIcon,
+    title: titleProp,
+  } = props;
   const stringId = id.toString();
-  const Icon = icon;
+  const title = titleProp || (onlyIcon ? label : undefined);
 
   const getIconSizeChoiceGroupSize = (buttonSize: ChoiceGroupPropSize): IconPropSize => {
     const sizeObj: Record<ChoiceGroupPropSize, IconPropSize> = {
@@ -40,6 +54,7 @@ export function ChoiceGroupItem<T>(props: IChoiceGroupItem<T>): React.ReactEleme
           onChange({ e, value, id, checked: !checked });
         }}
         htmlFor={stringId}
+        title={title}
       >
         {Icon && <Icon size={getIconSizeChoiceGroupSize(size)} />}
         {label}
