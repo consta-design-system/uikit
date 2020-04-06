@@ -7,10 +7,10 @@ import * as wp from '../../utils/whitepaper/whitepaper';
 import { IIcon } from '../Icon';
 
 export type BadgeProps = {
-  size: 's' | 'm';
-  view: 'filled' | 'stroked';
-  status: 'success' | 'error' | 'warning' | 'normal' | 'system';
-  form: 'default' | 'round';
+  size?: 's' | 'm';
+  view?: 'filled' | 'stroked';
+  status?: 'success' | 'error' | 'warning' | 'normal' | 'system';
+  form?: 'default' | 'round';
   minified?: boolean;
   icon?: React.FC<IIcon>;
   innerRef?: () => void;
@@ -33,7 +33,7 @@ declare type excludeHTMLAttributes =
 export type IBadge<T> = BadgeProps &
   (Omit<React.HTMLAttributes<Element>, excludeHTMLAttributes> | Omit<T, excludeHTMLAttributes>);
 
-export const cnBadge = cn('badge1');
+export const cnBadge = cn('Badge');
 
 // При использовании "as" позаботьтесь об интерфейсе прокинутого компонента.
 // При вызове кнопки:
@@ -81,7 +81,7 @@ export function Badge<T>(props: IBadge<T>) {
     >
       {Icon ? (
         <div className={wp.ptIconPlus({ 'vertical-align': 'center' })}>
-          <div className={cnBadge('icon', [wp.ptIconPlus('icon', { 'indent-r': '2xs' })])}>
+          <div className={cnBadge('Icon', [wp.ptIconPlus('icon', { 'indent-r': '2xs' })])}>
             <Icon size="xs" />
           </div>
           <span className={wp.ptIconPlus('block')}>{label}</span>

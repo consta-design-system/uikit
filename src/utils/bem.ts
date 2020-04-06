@@ -1,6 +1,6 @@
 import { block, BemMods } from 'bem-cn';
 import { withNaming } from '@bem-react/classname';
-export const cn = withNaming({ e: '__', m: '_', v: '_' });
+export const cn = withNaming({ e: '-', m: '_', v: '_' });
 
 // bem-cn в вызовах вида b('my-element') возвращает не строку, а объект с методом toString.
 // React начиная с 16 версии перестал вызывать на атрибуте className метод toString.

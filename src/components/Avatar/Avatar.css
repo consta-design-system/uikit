@@ -1,4 +1,4 @@
-.avatar1 {
+.Avatar {
   overflow: hidden;
 
   &_size {
@@ -24,7 +24,7 @@
     }
   }
 
-  &__image {
+  &-Image {
     width: 100%;
     height: 100%;
   }

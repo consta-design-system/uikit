@@ -1,4 +1,5 @@
-.button {
+/* stylelint-disable  no-descending-specificity  */
+.Button {
   position: relative;
   z-index: 1;
   display: inline-block;
@@ -23,8 +24,6 @@
     color 0.15s ease, fill 0.15s ease;
   cursor: pointer;
   -webkit-appearance: none;
-
-  /* stylelint-disable  no-descending-specificity  */
 
   &:hover {
     color: var(--color-hover);
@@ -51,19 +50,19 @@
       border-radius: 99rem;
     }
 
-    &_brick-default {
+    &_brickDefault {
       border-radius: 0 var(--control-radius) var(--control-radius) 0;
     }
 
-    &_default-brick {
+    &_defaultBrick {
       border-radius: var(--control-radius) 0 0 var(--control-radius);
     }
 
-    &_brick-round {
+    &_brickRound {
       border-radius: 0 99rem 99rem 0;
     }
 
-    &_round-brick {
+    &_roundBrick {
       border-radius: 99rem 0 0 99rem;
     }
   }
@@ -143,8 +142,8 @@
     }
   }
 
-  &:disabled,
-  &_disabled {
+  &_disabled,
+  &:disabled {
     cursor: not-allowed;
     pointer-events: none;
     color: var(--color-control-typo-disable);
@@ -152,21 +151,14 @@
     background-color: var(--color-control-bg-disable);
   }
 
-  &__label {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex-grow: 1;
-    flex-shrink: 0;
-  }
-
   &_width_full {
     width: 100%;
-    & .button__label {
+    & .Button-Label {
       flex: 1;
     }
   }
 
-  &_icon-only {
+  &_iconOnly {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -174,25 +166,32 @@
     padding: 0;
   }
 
-  &_with-icon {
+  &_withIcon {
     --icon-indent: calc(var(--button-space) * 0.7);
 
     display: inline-flex;
     align-items: center;
   }
 
-  &__icon {
+  &-Icon {
     display: block;
     flex-shrink: 0;
-    &_position_left {
-      margin-right: var(--icon-indent);
-    }
-    &_position_right {
-      margin-left: var(--icon-indent);
+    &_position {
+      &_left {
+        margin-right: var(--icon-indent);
+      }
+      &_right {
+        margin-left: var(--icon-indent);
+      }
     }
   }
 
-  /* stylelint-enable  no-descending-specificity  */
+  &-Label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+    flex-shrink: 0;
+  }
 }
 
 @keyframes buttonFocusAnimation {
