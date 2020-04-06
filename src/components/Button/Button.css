@@ -2,6 +2,7 @@
   position: relative;
   z-index: 1;
   display: inline-block;
+  flex-shrink: 0;
   max-width: 100%;
   height: var(--button-height);
   padding: 0 var(--button-space);
@@ -154,7 +155,8 @@
   &__label {
     overflow: hidden;
     text-overflow: ellipsis;
-    flex: 1;
+    flex-grow: 1;
+    flex-shrink: 0;
   }
 
   &_width_full {
@@ -181,7 +183,7 @@
 
   &__icon {
     display: block;
-    flex: none;
+    flex-shrink: 0;
     &_position_left {
       margin-right: var(--icon-indent);
     }
