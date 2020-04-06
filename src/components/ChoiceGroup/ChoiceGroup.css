@@ -69,6 +69,8 @@
   &__label {
     position: relative;
     z-index: 0;
+    display: flex;
+    align-items: center;
     padding: 0 calc(var(--choice-space) + var(--control-border-width)) 0 var(--choice-space);
     box-sizing: border-box;
     height: var(--choice-height);
@@ -162,6 +164,10 @@
     & + .choice-group__input + .choice-group__label::before {
       background-color: transparent;
     }
+  }
+
+  &__icon {
+    margin-right: calc(var(--choice-space) * 0.5);
   }
 }
 /* stylelint-enable */

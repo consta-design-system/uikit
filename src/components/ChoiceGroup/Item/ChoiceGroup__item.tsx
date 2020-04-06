@@ -41,7 +41,7 @@ export function ChoiceGroupItem<T>(props: IChoiceGroupItem<T>): React.ReactEleme
         }}
         htmlFor={stringId}
       >
-        {Icon && <Icon size={getIconSizeChoiceGroupSize(size)} />}
+        {Icon && <Icon size={getIconSizeChoiceGroupSize(size)} className={cnChoiceGroup('icon')} />}
         {label}
       </label>
     </React.Fragment>

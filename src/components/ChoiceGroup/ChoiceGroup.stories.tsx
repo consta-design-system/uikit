@@ -3,8 +3,9 @@ import { select, boolean, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { ChoiceGroup } from '../ChoiceGroup/ChoiceGroup';
 import { IIcon } from '../Icon';
-import { IconCamera } from '../Icon/icons/Camera';
-import { IconCopy } from '../Icon/icons/Copy';
+import IconCamera from '../Icon/icons/Camera';
+import IconCopy from '../Icon/icons/Copy';
+import IconFavorite from '../Icon/icons/Favorite';
 
 declare type Item = {
   name: string;
@@ -20,12 +21,12 @@ const items = [
     name: 'два',
   },
   {
-    name: 'три',
+    name: '',
     icon: IconCopy,
   },
   {
     name: 'четыре',
-    icon: IconCamera,
+    icon: IconFavorite,
   },
 ];
 
