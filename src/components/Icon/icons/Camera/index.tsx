@@ -32,7 +32,7 @@ const SVG_M = (
   </g>
 );
 
-const Camera = props => {
+export const IconCamera = (props) => {
   let svg;
 
   if (props.size === 'xs') svg = SVG_XS;
@@ -42,4 +42,4 @@ const Camera = props => {
   return <Icon {...props}>{svg}</Icon>;
 };
 
-export default Camera;
+export default IconCamera;

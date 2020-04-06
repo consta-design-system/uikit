@@ -15,6 +15,10 @@ export type BaseCheckGroupFieldPropGetItemKey<T> = (item: T) => BaseCheckGroupFi
 export type BaseCheckGroupFieldPropGetItemLabel<T> = (
   item: T
 ) => BaseCheckGroupFieldItemPropItemLabel;
+export type BaseCheckGroupFieldPropGetAdditionalPropsForItem<T> = (
+  item: T,
+  props: IBaseCheckGroupField<T>
+) => {};
 
 export type ItemProps<T> = {
   multiply?: boolean;
@@ -52,6 +56,7 @@ export type IBaseCheckGroupField<T> = {
   onChange?: BaseCheckGroupFieldPropOnChange<T>;
   getItemKey?: BaseCheckGroupFieldPropGetItemKey<T>;
   getItemLabel?: BaseCheckGroupFieldPropGetItemLabel<T>;
+  getAdditionalPropsForItem?: BaseCheckGroupFieldPropGetAdditionalPropsForItem<T>;
   componentItem: React.FC<ItemProps<T>>;
 };
 
@@ -62,6 +67,7 @@ export function BaseCheckGroupField<T>(props: IBaseCheckGroupField<T>) {
     componentItem,
     getItemKey = (item: T | any) => item.id,
     getItemLabel = (item: T | any) => item.label,
+    getAdditionalPropsForItem,
     multiply,
     value = null,
     onChange,
@@ -94,17 +100,23 @@ export function BaseCheckGroupField<T>(props: IBaseCheckGroupField<T>) {
   return (
     <div className={className}>
       {items
-        ? items.map((item) => (
-            <ComponentItem
-              onChange={handleItemChange}
-              key={getItemKey(item)}
-              label={getItemLabel(item)}
-              value={item}
-              id={getItemKey(item)}
-              checked={getChecked(item)}
-              multiply={multiply}
-            />
-          ))
+        ? items.map((item) => {
+            const additionalPropsForItem = getAdditionalPropsForItem
+              ? getAdditionalPropsForItem(item, props)
+              : {};
+            return (
+              <ComponentItem
+                {...additionalPropsForItem}
+                onChange={handleItemChange}
+                key={getItemKey(item)}
+                label={getItemLabel(item)}
+                value={item}
+                id={getItemKey(item)}
+                checked={getChecked(item)}
+                multiply={multiply}
+              />
+            );
+          })
         : null}
     </div>
   );
