@@ -47,6 +47,7 @@ export function ChoiceGroupItem<T>(props: IChoiceGroupItem<T>): React.ReactEleme
         className={cnChoiceGroup('input')}
         id={stringId}
         checked={checked}
+        name={!multiply ? 'radio' : undefined}
       />
       <label
         className={cnChoiceGroup('label', { size, checkbox: multiply }, [className])}
@@ -57,7 +58,7 @@ export function ChoiceGroupItem<T>(props: IChoiceGroupItem<T>): React.ReactEleme
         title={title}
       >
         {Icon && <Icon size={getIconSizeChoiceGroupSize(size)} className={cnChoiceGroup('icon')} />}
-        {label}
+        {!onlyIcon ? label : undefined}
       </label>
     </React.Fragment>
   );

@@ -166,8 +166,17 @@
     }
   }
 
-  &__icon {
+  &:not(.choice-group_icon-only) &__icon {
     margin-right: calc(var(--choice-space) * 0.5);
+  }
+
+  &_icon-only {
+    .choice-group__input + .choice-group__label {
+      justify-content: center;
+      padding: 0;
+      padding-right: var(--control-border-width);
+      width: var(--choice-height);
+    }
   }
 }
 /* stylelint-enable */

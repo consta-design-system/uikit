@@ -15,13 +15,26 @@ declare type Item = {
 const items = [
   {
     name: 'один',
-    icon: IconCamera,
   },
   {
     name: 'два',
   },
   {
-    name: '',
+    name: 'три',
+    icon: IconFavorite,
+  },
+  {
+    name: 'четыре',
+  },
+];
+
+const onlyIconItems = [
+  {
+    name: 'один',
+    icon: IconCamera,
+  },
+  {
+    name: 'два',
     icon: IconCopy,
   },
   {
@@ -32,7 +45,6 @@ const items = [
 
 const knobs = () => ({
   multiply: boolean('multiply', false),
-  onlyIcon: boolean('onlyIcon', false),
   size: select('size', ['xs', 's', 'm', 'l'], 'm'),
   form: select('form', ['default', 'round', 'brick'], 'default'),
 });
@@ -45,6 +57,21 @@ storiesOf('ChoiceGroup', module)
       <ChoiceGroup<Item>
         {...knobs()}
         items={items}
+        value={value}
+        getItemKey={(item) => item.name}
+        getItemLabel={(item) => item.name}
+        onChange={({ value }) => setValue(value)}
+        getItemIcon={(item) => item.icon}
+      />
+    );
+  })
+  .add('OnlyIcon', () => {
+    const [value, setValue] = useState<Item[] | null>(null);
+    return (
+      <ChoiceGroup<Item>
+        {...knobs()}
+        onlyIcon={true}
+        items={onlyIconItems}
         value={value}
         getItemKey={(item) => item.name}
         getItemLabel={(item) => item.name}

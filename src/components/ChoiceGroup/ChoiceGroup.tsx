@@ -55,7 +55,7 @@ export function ChoiceGroup<T>(props: IChoiceGroup<T>): React.ReactElement {
 
   return (
     <BaseCheckGroupField<T, IChoiceGroup<T>>
-      className={cnChoiceGroup({ size, form, view }, [className])}
+      className={cnChoiceGroup({ size, form, view, 'icon-only': onlyIcon }, [className])}
       componentItem={ChoiceGroupItem}
       getAdditionalPropsForItem={getAdditionalPropsForItem}
       size={size}
