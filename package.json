@@ -1,6 +1,6 @@
 {
   "name": "@gpn-design/uikit",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "dependencies": {
     "bem-cn": "^3.0.1",
     "lodash": "^4.17.15",
