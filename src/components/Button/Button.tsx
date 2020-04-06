@@ -16,8 +16,8 @@ export type ButtonPropForm =
   | 'default-brick';
 
 export type ButtonProps = {
-  size: ButtonPropSize;
-  view: ButtonPropView;
+  size?: ButtonPropSize;
+  view?: ButtonPropView;
   width?: ButtonPropWidth;
   form?: ButtonPropForm;
   className?: string;
