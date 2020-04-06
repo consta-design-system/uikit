@@ -2,9 +2,11 @@ import React from 'react';
 import { cn } from '../../utils/bem';
 import './Loader.css';
 
+export type LoaderPropSize = 's' | 'm';
+
 export interface ILoader {
   className?: string;
-  size?: 'm' | 'l';
+  size?: LoaderPropSize;
 }
 
 export const cnLoader = cn('loader');

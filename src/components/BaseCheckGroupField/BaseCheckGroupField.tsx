@@ -1,53 +1,61 @@
 import React from 'react';
 
-export type PropName = string;
-export type PropId = string | number;
-export type PropValue<T> = T[] | null;
-export type PropOnChange<T> = (args: PropOnChangeFunctionArgs<T>) => void;
-
-export type PropOnChangeFunctionArgs<T> = {
+export type BaseCheckGroupFieldItemPropOnChange<T> = (
+  args: BaseCheckGroupFieldItemOnChangeFunctionArguments<T>
+) => void;
+export type BaseCheckGroupFieldItemOnChangeFunctionArguments<T> = {
   e: React.MouseEvent;
-  id?: PropId;
-  name?: PropName;
-  value: PropValue<T>;
-};
-export type Props<T> = {
-  multiply?: boolean;
-  className?: string;
-  items?: T[];
-  value?: PropValue<T>;
-  id?: PropId;
-  name?: PropName;
-  onChange?: PropOnChange<T>;
-  getItemKey?: PropGetItemKey<T>;
-  getItemLabel?: PropGetItemLabel<T>;
-  componentItem: React.FC<ItemProps<T>>;
-};
-
-export type ItemPropOnChange<T> = (args: ItemPropOnChangeFunctionArgs<T>) => void;
-export type ItemPropOnChangeFunctionArgs<T> = {
-  e: React.MouseEvent;
-  id: ItemPropItemKey;
+  id: BaseCheckGroupFieldItemPropItemKey;
   value: T;
   checked: boolean;
 };
-export type ItemPropItemKey = string | number;
-export type ItemPropItemLabel = string | number;
-export type PropGetItemKey<T> = (item: T) => ItemPropItemKey;
-export type PropGetItemLabel<T> = (item: T) => ItemPropItemLabel;
+export type BaseCheckGroupFieldItemPropItemKey = string | number;
+export type BaseCheckGroupFieldItemPropItemLabel = string | number;
+export type BaseCheckGroupFieldPropGetItemKey<T> = (item: T) => BaseCheckGroupFieldItemPropItemKey;
+export type BaseCheckGroupFieldPropGetItemLabel<T> = (
+  item: T
+) => BaseCheckGroupFieldItemPropItemLabel;
 
 export type ItemProps<T> = {
   multiply?: boolean;
   className?: string;
-  onChange: ItemPropOnChange<T>;
+  onChange: BaseCheckGroupFieldItemPropOnChange<T>;
   value: T;
   checked: boolean;
-  key: ItemPropItemKey;
-  id: ItemPropItemKey;
-  label?: ItemPropItemLabel;
+  key: BaseCheckGroupFieldItemPropItemKey;
+  id: BaseCheckGroupFieldItemPropItemKey;
+  label?: BaseCheckGroupFieldItemPropItemLabel;
 };
 
-export function BaseCheckGroupField<T>(props: Props<T>) {
+export type BaseCheckGroupFieldPropName = string;
+export type BaseCheckGroupFieldPropId = string | number;
+export type BaseCheckGroupFieldPropValue<T> = T[] | null;
+export type BaseCheckGroupFieldPropOnChange<T> = (
+  args: BaseCheckGroupFieldOnChangeArguments<T>
+) => void;
+
+export type BaseCheckGroupFieldOnChangeArguments<T> = {
+  e: React.MouseEvent;
+  id?: BaseCheckGroupFieldPropId;
+  name?: BaseCheckGroupFieldPropName;
+  value: BaseCheckGroupFieldPropValue<T>;
+};
+
+export type IBaseCheckGroupField<T> = {
+  multiply?: boolean;
+  as?: React.ElementType;
+  className?: string;
+  items?: T[];
+  value?: BaseCheckGroupFieldPropValue<T>;
+  id?: BaseCheckGroupFieldPropId;
+  name?: BaseCheckGroupFieldPropName;
+  onChange?: BaseCheckGroupFieldPropOnChange<T>;
+  getItemKey?: BaseCheckGroupFieldPropGetItemKey<T>;
+  getItemLabel?: BaseCheckGroupFieldPropGetItemLabel<T>;
+  componentItem: React.FC<ItemProps<T>>;
+};
+
+export function BaseCheckGroupField<T>(props: IBaseCheckGroupField<T>) {
   const {
     className,
     items,

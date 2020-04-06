@@ -2,70 +2,47 @@ import './Button.css';
 
 import React, { Fragment } from 'react';
 import { cn } from '../../utils/bem';
-import { IIconProps } from '../Icon';
-import * as wp from '../../utils/whitepaper/whitepaper';
-
-export const cnButton = cn('button');
-
-export type PropName = string | number;
-export type PropId = string | number;
-export type PropOnClickProps = {
-  e: React.MouseEvent;
-  id?: PropId;
-  name?: PropName;
-};
-export type PropOnClick = (object: PropOnClickProps) => void;
+import { IIcon, IconPropSize } from '../Icon';
+export type ButtonPropSize = 'xs' | 's' | 'm' | 'l';
+export type ButtonPropView = 'clear' | 'ghost' | 'primary' | 'secondary';
+export type ButtonPropWidth = 'full' | 'default';
+export type ButtonPropForm =
+  | 'default'
+  | 'brick'
+  | 'round'
+  | 'brick-round'
+  | 'round-brick'
+  | 'brick-default'
+  | 'default-brick';
 
 export type ButtonProps = {
-  id?: PropId;
-  name?: PropName;
-  size: 'xs' | 's' | 'm' | 'l';
-  view: 'clear' | 'ghost' | 'primary' | 'secondary';
-  width?: 'default' | 'full';
-  form?:
-    | 'default'
-    | 'brick'
-    | 'round'
-    | 'brick-round'
-    | 'round-brick'
-    | 'brick-default'
-    | 'default-brick';
+  size: ButtonPropSize;
+  view: ButtonPropView;
+  width?: ButtonPropWidth;
+  form?: ButtonPropForm;
   className?: string;
   tabIndex?: number;
   disabled?: boolean;
-  onClick?: PropOnClick;
   label?: string;
-  iconLeft?: React.FC<IIconProps>;
-  iconRight?: React.FC<IIconProps>;
+  onClick?: React.EventHandler<React.MouseEvent>;
+  iconLeft?: React.FC<IIcon>;
+  iconRight?: React.FC<IIcon>;
   as?: React.ElementType;
+  onlyIcon?: boolean;
+  iconSize?: IconPropSize;
+  title?: string;
 };
 
-declare type excludeHTMLAttributes =
-  | 'id'
-  | 'name'
-  | 'size'
-  | 'view'
-  | 'width'
-  | 'form'
-  | 'className'
-  | 'tabIndex'
-  | 'disabled'
-  | 'onClick'
-  | 'label'
-  | 'iconLeft'
-  | 'iconRight'
-  | 'as';
-
 export type IButton<T> = ButtonProps &
-  (
-    | Omit<React.ButtonHTMLAttributes<Element>, excludeHTMLAttributes>
-    | Omit<T, excludeHTMLAttributes>);
+  (Omit<React.ButtonHTMLAttributes<Element>, keyof ButtonProps> | Omit<T, keyof ButtonProps>);
 
-// При использовании "as" позаботьтесь об интерфейсе прокинутого компонента.
+// При использовании "as" позаботьтесь об интерфейсе прокинутого елемента, по умолчанию он button
 // При вызове кнопки:
 // <Button<T>/>
 
-export function Button<T>(props: IButton<T>) {
+export const cnButton = cn('button');
+
+export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
   const {
     size = 'm',
     view = 'primary',
@@ -79,21 +56,36 @@ export function Button<T>(props: IButton<T>) {
     disabled,
     tabIndex,
     as = 'button',
-    id,
-    name,
+    onlyIcon,
+    iconSize,
+    title,
     ...otherProps
   } = props;
 
   const Component = as;
-  const IconOnly = !label && (iconLeft || iconRight);
+  const IconOnly = (!label || onlyIcon) && (iconLeft || iconRight);
   const IconLeft = iconLeft;
   const IconRight = iconRight;
   const withIcon = !!iconLeft || !!iconRight;
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!disabled && onClick) {
-      onClick({ e, id, name });
+      onClick(e);
     }
   };
+
+  const getIconSizeByButtonSize = (buttonSize: ButtonPropSize): IconPropSize => {
+    const sizeObj: Record<ButtonPropSize, IconPropSize> = {
+      xs: 'xs',
+      s: 'xs',
+      m: 's',
+      l: 'm',
+    };
+
+    return sizeObj[buttonSize];
+  };
+
+  const _iconSize = iconSize || getIconSizeByButtonSize(size);
+  const _title = title || (!!IconOnly && label);
 
   return (
     <Component
@@ -111,28 +103,24 @@ export function Button<T>(props: IButton<T>) {
         [className]
       )}
       tabIndex={tabIndex}
+      title={_title}
       {...otherProps}
     >
-      {IconOnly && <IconOnly className={cnButton('icon')} size="xs" />}
-      {(IconLeft || IconRight) && label ? (
-        <Fragment>
-          {IconLeft && (
-            <IconLeft
-              className={cnButton('icon', [wp.ptIconPlus('icon', { 'indent-r': '2xs' })])}
-              size="xs"
-            />
-          )}
-          <span className={cnButton('label', [wp.ptIconPlus('block')])}>{label}</span>
-          {IconRight && (
-            <IconRight
-              className={cnButton('icon', [wp.ptIconPlus('icon', { 'indent-l': '2xs' })])}
-              size="xs"
-            />
-          )}
-        </Fragment>
-      ) : (
-        label
-      )}
+      {IconOnly && <IconOnly className={cnButton('icon')} size={_iconSize} />}
+      {!IconOnly &&
+        ((IconLeft || IconRight) && label ? (
+          <Fragment>
+            {IconLeft && (
+              <IconLeft className={cnButton('icon', { position: 'left' })} size={_iconSize} />
+            )}
+            <span className={cnButton('label')}>{label}</span>
+            {IconRight && (
+              <IconRight className={cnButton('icon', { position: 'right' })} size={_iconSize} />
+            )}
+          </Fragment>
+        ) : (
+          label
+        ))}
     </Component>
   );
 }

@@ -72,7 +72,7 @@ function Stories({
   rightSideType,
   rightSideText,
   disabled,
-}: any) {
+}) {
   const [value, setValue] = useState<string | null | undefined>(undefined);
 
   const leftSideSelect = {
