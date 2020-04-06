@@ -21,7 +21,10 @@ export type ChoiceGroupProps<T> = {
   getItemIcon?: (item: T) => React.FC<IIcon> | undefined;
 };
 
-export type IChoiceGroup<T> = Omit<IBaseCheckGroupField<T, ChoiceGroupProps<T>>, 'componentItem'>;
+export type IChoiceGroup<T> = Omit<
+  IBaseCheckGroupField<T, ChoiceGroupProps<T>>,
+  'componentItem' | 'getAdditionalPropsForItem'
+>;
 
 export const cnChoiceGroup = cn('choice-group');
 
