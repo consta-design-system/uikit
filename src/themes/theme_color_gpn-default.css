@@ -64,7 +64,6 @@ $color-base-critical: #33000f;
 
   /* Default */
   --color-control-bg-default: color($color-base-essential); /* Цвет фона контрола */
-  --color-control-bg-default-hover: color($color-base-phantom l(96%)); /* Цвет фона контрола по ховеру */
   --color-control-typo-default: color($color-base-base); /* Цвет основного текста контрола */
   --color-control-typo-placeholder: color($color-base-base a(35%)); /* Цвет плейсхолдера контрола */
   --color-control-bg-border-default: color($color-base-phantom a(28%)); /* Цвет фона бордеров котрола */
