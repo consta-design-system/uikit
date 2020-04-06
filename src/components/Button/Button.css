@@ -48,6 +48,8 @@
 
     &_round {
       border-radius: 99rem;
+      padding-left: calc(var(--button-space) * 1.2);
+      padding-right: calc(var(--button-space) * 1.2);
     }
 
     &_brick-default {
@@ -60,9 +62,11 @@
 
     &_brick-round {
       border-radius: 0 99rem 99rem 0;
+      padding-right: calc(var(--button-space) * 1.2);
     }
 
     &_round-brick {
+      padding-left: calc(var(--button-space) * 1.2);
       border-radius: 99rem 0 0 99rem;
     }
   }

@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { boolean, withKnobs } from '@storybook/addon-knobs';
+import { select, boolean, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { ChoiceGroup } from '../ChoiceGroup/ChoiceGroup';
 
 declare type Item = string;
 
-const items = ['один', 'два', 'три'];
+const items = ['один', 'два', 'три', 'четыре'];
 
 const knobs = () => ({
-  multiply: boolean('multiply', false),
+  multiply: boolean('multiply', true),
+  size: select('size', ['xs', 's', 'm', 'l'], 'm'),
+  form: select('form', ['default', 'round', 'brick'], 'default'),
 });
 
 storiesOf('ChoiceGroup', module)
@@ -23,6 +25,7 @@ storiesOf('ChoiceGroup', module)
         getItemKey={(item) => item}
         getItemLabel={(item) => item}
         onChange={({ value }) => setValue(value)}
+        className="choice-group_view_primary"
       />
     );
   });
