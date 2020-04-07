@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { select, boolean, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { ChoiceGroup } from '../ChoiceGroup/ChoiceGroup';
@@ -53,30 +53,38 @@ storiesOf('ChoiceGroup', module)
   .addDecorator(withKnobs)
   .add('Custom', () => {
     const [value, setValue] = useState<Item[] | null>(null);
+    const [onlyIconValue, setOnlyIconValue] = useState<Item[] | null>(null);
+
+    console.log(value);
+    console.log(onlyIconValue);
+
     return (
-      <ChoiceGroup<Item>
-        {...knobs()}
-        items={items}
-        value={value}
-        getItemKey={(item) => item.name}
-        getItemLabel={(item) => item.name}
-        onChange={({ value }) => setValue(value)}
-        getItemIcon={(item) => item.icon}
-      />
-    );
-  })
-  .add('OnlyIcon', () => {
-    const [value, setValue] = useState<Item[] | null>(null);
-    return (
-      <ChoiceGroup<Item>
-        {...knobs()}
-        onlyIcon={true}
-        items={onlyIconItems}
-        value={value}
-        getItemKey={(item) => item.name}
-        getItemLabel={(item) => item.name}
-        onChange={({ value }) => setValue(value)}
-        getItemIcon={(item) => item.icon}
-      />
+      <Fragment>
+        <form>
+          <ChoiceGroup<Item>
+            {...knobs()}
+            items={items}
+            value={value}
+            getItemKey={(item) => item.name}
+            getItemLabel={(item) => item.name}
+            onChange={({ value }) => setValue(value)}
+            getItemIcon={(item) => item.icon}
+            name="ChoiceGroup"
+          />
+        </form>
+        <form>
+          <ChoiceGroup<Item>
+            {...knobs()}
+            onlyIcon={true}
+            items={onlyIconItems}
+            value={onlyIconValue}
+            getItemKey={(item) => item.name}
+            getItemLabel={(item) => item.name}
+            onChange={({ value }) => setOnlyIconValue(value)}
+            getItemIcon={(item) => item.icon}
+            name="ChoiceGroup2"
+          />
+        </form>
+      </Fragment>
     );
   });

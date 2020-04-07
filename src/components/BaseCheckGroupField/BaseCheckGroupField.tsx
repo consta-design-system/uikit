@@ -4,7 +4,7 @@ export type BaseCheckGroupFieldItemPropOnChange<T> = (
   args: BaseCheckGroupFieldItemOnChangeFunctionArguments<T>
 ) => void;
 export type BaseCheckGroupFieldItemOnChangeFunctionArguments<T> = {
-  e: React.MouseEvent;
+  e: React.MouseEvent | React.ChangeEvent;
   id: BaseCheckGroupFieldItemPropItemKey;
   value: T;
   checked: boolean;
@@ -29,6 +29,7 @@ export type ItemProps<T> = {
   key: BaseCheckGroupFieldItemPropItemKey;
   id: BaseCheckGroupFieldItemPropItemKey;
   label?: BaseCheckGroupFieldItemPropItemLabel;
+  name?: BaseCheckGroupFieldPropName;
 };
 
 export type BaseCheckGroupFieldPropName = string;
@@ -112,6 +113,7 @@ export function BaseCheckGroupField<T, T2 = {}>(props: IBaseCheckGroupField<T, T
               id={getItemKey(item)}
               checked={getChecked(item)}
               multiply={multiply}
+              name={name}
             />
           ))
         : null}
