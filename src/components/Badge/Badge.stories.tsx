@@ -6,7 +6,7 @@ import { Badge } from './Badge';
 
 const defaultKnobs = () => ({
   label: text('label', 'Statusing along'),
-  size: select('size', ['s', 'm'], 'm'),
+  size: select('size', ['s', 'm', 'l'], 'm'),
   view: select('view', ['filled', 'stroked'], 'filled'),
   status: select('status', ['success', 'error', 'warning', 'normal', 'system'], 'success'),
   form: select('form', ['default', 'round'], 'default'),
