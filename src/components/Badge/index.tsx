@@ -6,7 +6,7 @@ import './styles.css';
 const b = bem('badge1');
 
 type BadgeProps = {
-  wpSize: 's' | 'm';
+  wpSize: 's' | 'm' | 'l';
   view: 'filled' | 'stroked';
   status: 'success' | 'error' | 'warning' | 'normal' | 'system';
   form?: 'default' | 'round';

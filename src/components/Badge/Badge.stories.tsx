@@ -5,7 +5,7 @@ import IconUser from '../Icon/icons/User';
 import Badge from '.';
 
 const defaultKnobs = () => ({
-  wpSize: select('Size', ['s', 'm'], 'm'),
+  wpSize: select('Size', ['s', 'm', 'l'], 'm'),
   view: select('View', ['filled', 'stroked'], 'filled'),
   status: select('Status', ['success', 'error', 'warning', 'normal', 'system'], 'success'),
   form: select('Form', ['default', 'round'], 'default'),
