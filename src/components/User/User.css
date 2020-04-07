@@ -1,4 +1,4 @@
-.user {
+.User {
   display: inline-flex;
   border-radius: 99em;
   border: 0;
@@ -7,15 +7,15 @@
   transition: background-color 0.25s ease;
   align-items: center;
 
-  &__block {
+  &-Block {
     flex: 1;
   }
 
-  &__arrow {
+  &-Arrow {
     flex: none;
   }
 
-  &__avatar-wrapper {
+  &-AvatarWrapper {
     padding: var(--space-2xs);
     box-sizing: content-box;
     border-radius: 50%;
@@ -55,18 +55,18 @@
     }
   }
 
-  &__name,
-  &__info {
+  &-Name,
+  &-Info {
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
   }
 
-  &__name {
+  &-Name {
     max-width: 20ch;
   }
-  &__info {
+  &-Info {
     max-width: 28ch;
   }
 
@@ -95,13 +95,13 @@
   &:not(.user_minified)&_width_full {
     width: 100%;
 
-    .user__name,
-    .user__info {
+    .User-Name,
+    .User-Info {
       max-width: none;
     }
   }
 
-  &:not(.user_minified) &__arrow {
+  &:not(.User_minified) &-Arrow {
     margin-left: var(--icon-indent);
   }
 

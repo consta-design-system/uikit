@@ -2,6 +2,7 @@ import './Text.css';
 
 import React from 'react';
 import { cn } from '../../utils/bem';
+import * as wp from '../../utils/whitepaper/whitepaper';
 
 export type TextPropAlign = 'left' | 'center' | 'right';
 export type TextPropDecoration = 'underline';
@@ -59,7 +60,7 @@ export type TextProps = {
 export type IText<T> = TextProps &
   (Omit<React.HTMLAttributes<Element>, keyof TextProps> | Omit<T, keyof TextProps>);
 
-export const cnText = cn('text');
+export const cnText = cn('Text');
 
 export function Text<T>(props: IText<T>): React.ReactElement | null {
   const {
@@ -86,8 +87,8 @@ export function Text<T>(props: IText<T>): React.ReactElement | null {
 
   return (
     <Component
-      className={cnText(
-        {
+      className={cnText(null, [
+        wp.text({
           align,
           decoration,
           display,
@@ -101,9 +102,9 @@ export function Text<T>(props: IText<T>): React.ReactElement | null {
           view,
           weight,
           width,
-        },
-        [className]
-      )}
+        }),
+        className,
+      ])}
       {...otherProps}
     >
       {children}
