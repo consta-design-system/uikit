@@ -1,4 +1,4 @@
-.loader {
+.Loader {
   position: relative;
   left: 50%;
   top: 50%;
@@ -29,7 +29,7 @@
     animation: loader 1s -0.36s ease infinite;
   }
 
-  &__dot {
+  &-Dot {
     position: absolute;
     top: calc(50% - (var(--loader-size) * 0.5));
     left: calc(50% - (var(--loader-size) * 0.5));

@@ -4,7 +4,7 @@ import { Text } from '../Text/Text';
 import './styles.css';
 
 storiesOf('ScrollExample', module).add('Пример скролла', () => (
-  <div className="container">
+  <div className="Container">
     <Text as="p" view="primary" size="l">
       :horizontal – The horizontal pseudo-class applies to any scrollbar pieces that have a
       horizontal orientation.

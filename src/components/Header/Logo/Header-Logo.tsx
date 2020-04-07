@@ -16,7 +16,7 @@ export function HeaderLogo<T>(props: IHeaderLogo<T>): React.ReactElement | null 
   const { children, as = 'div', className, ...otherProps } = props;
   const Component = as;
   return (
-    <Component className={cnHeader('logo', [className])} {...otherProps}>
+    <Component className={cnHeader('Logo', [className])} {...otherProps}>
       {children}
     </Component>
   );

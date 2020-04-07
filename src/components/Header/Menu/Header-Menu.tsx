@@ -18,14 +18,14 @@ export type IMenu = {
 
 export const HeaderMenu: React.FC<IMenu> = ({ items, className }) => {
   return (
-    <nav className={cnHeader('menu', [className])}>
-      <ul className={cnHeader('menu-list')}>
+    <nav className={cnHeader('Menu', [className])}>
+      <ul className={cnHeader('MenuList')}>
         {items.map(({ label, href, target, active, onClick }, index) => {
           const Component = href ? 'a' : 'div';
           return (
-            <li className={cnHeader('menu-item')} key={cnHeader('menu-item', { index })}>
+            <li className={cnHeader('MenuItem')} key={cnHeader('MenuItem', { index })}>
               <Component
-                className={cnHeader('menu-link', { active })}
+                className={cnHeader('MenuLink', { active })}
                 href={href}
                 target={target}
                 onClick={onClick}

@@ -31,7 +31,7 @@ export type SwitchProps<T = any> = {
 declare type ISwitch<T = any> = SwitchProps<T> &
   Omit<React.InputHTMLAttributes<HTMLInputElement>, keyof SwitchProps<T>>;
 
-export const cnCheckbox = cn('switch');
+export const cnCheckbox = cn('Switch');
 
 export function Switch<T = any>(props: ISwitch<T>): React.ReactElement | null {
   const {
@@ -58,13 +58,13 @@ export function Switch<T = any>(props: ISwitch<T>): React.ReactElement | null {
         type="checkbox"
         id={id ? id.toString() : undefined}
         name={name}
-        className={cnCheckbox('input')}
+        className={cnCheckbox('Input')}
         checked={checked}
         disabled={disabled}
         onChange={handleChange}
         {...otherProps}
       />
-      {label && <span className={cnCheckbox('label')}>{label}</span>}
+      {label && <span className={cnCheckbox('Label')}>{label}</span>}
     </label>
   );
 }

@@ -1,19 +1,19 @@
-.header {
-  &__menu-list {
+.Header {
+  &-MenuList {
     display: flex;
     list-style-type: none;
     margin: 0;
     padding: 0;
   }
 
-  &__menu-item {
+  &-MenuItem {
     margin-right: var(--space-m);
     &:last-child {
       margin-right: 0;
     }
   }
 
-  &__menu-link {
+  &-MenuLink {
     position: relative;
     display: inline-block;
     text-decoration: none;

@@ -13,7 +13,7 @@ import { IconRing } from '../../../../Icon/icons/Ring';
 import { IconChat } from '../../../../Icon/icons/Chat';
 import { cn } from '../../../../../utils/bem';
 
-const cnExample = cn('minify-login-example');
+const cnExample = cn('MinifyLoginExample');
 
 export function MinifyLoginExample() {
   const [value, setValue] = useState<string | null>(null);
@@ -74,7 +74,7 @@ export function MinifyLoginExample() {
           </HeaderModule>
           <HeaderModule indent="s">
             <HeaderLogin
-              className={cnExample('login', { 'is-logged': isLogged })}
+              className={cnExample('Login', { isLogged })}
               isLogged={isLogged}
               personName="Вадим Матвеев"
               personInfo="В другом офисе"

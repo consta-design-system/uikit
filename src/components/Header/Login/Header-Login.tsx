@@ -36,11 +36,11 @@ export const HeaderLogin: React.FC<Props> = ({
       onlyAvatar={isMinified}
       withArrow={isMinified}
       onClick={onClick}
-      className={cnHeader('login', [className])}
+      className={cnHeader('Login', [className])}
     />
   ) : (
     <Button
-      className={cnHeader('login', [className])}
+      className={cnHeader('Login', [className])}
       type="button"
       onClick={onClick}
       size="s"
