@@ -34,7 +34,7 @@ export type CheckboxProps<T = any> = {
 declare type ICheckbox<T = any> = CheckboxProps<T> &
   Omit<React.InputHTMLAttributes<HTMLInputElement>, keyof CheckboxProps<T>>;
 
-export const cnCheckbox = cn('checkbox');
+export const cnCheckbox = cn('Checkbox');
 
 export function Checkbox<T = any>(props: ICheckbox<T>): React.ReactElement | null {
   const {
@@ -62,13 +62,13 @@ export function Checkbox<T = any>(props: ICheckbox<T>): React.ReactElement | nul
         type="checkbox"
         id={id ? id.toString() : undefined}
         name={name}
-        className={cnCheckbox('input')}
+        className={cnCheckbox('Input')}
         checked={checked}
         disabled={disabled}
         onChange={handleChange}
         {...otherProps}
       />
-      {label && <span className={cnCheckbox('label')}>{label}</span>}
+      {label && <span className={cnCheckbox('Label')}>{label}</span>}
     </label>
   );
 }

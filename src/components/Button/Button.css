@@ -151,14 +151,13 @@
     background-color: var(--color-control-bg-disable);
   }
 
-  &_width_full {
-    width: 100%;
-    & .Button-Label {
-      flex: 1;
+  &_width {
+    &_full {
+      width: 100%;
     }
   }
 
-  &_iconOnly {
+  &_onlyIcon {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -190,7 +189,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     flex-grow: 1;
-    flex-shrink: 0;
+    flex-shrink: 1;
   }
 }
 

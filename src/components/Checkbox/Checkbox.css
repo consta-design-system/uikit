@@ -1,13 +1,12 @@
-.checkbox {
+/* stylelint-disable  no-descending-specificity  */
+.Checkbox {
   position: relative;
   align-items: center;
   display: inline-flex;
   font-family: var(--font-sans);
   cursor: pointer;
 
-  /* stylelint-disable  no-descending-specificity  */
-
-  &__input {
+  &-Input {
     position: relative;
     flex-shrink: 0;
     width: var(--box-size);
@@ -50,7 +49,7 @@
     }
   }
 
-  &__label {
+  &-Label {
     margin-left: var(--offset);
     color: var(--color-control-typo-default);
     font-size: var(--checkbox-font-size);
@@ -62,7 +61,7 @@
       --box-size: var(--control-box-size-m);
       --offset: var(--space-xs);
 
-      .checkbox__input {
+      .Checkbox-Input {
         &::before {
           top: 7px;
           left: 1px;
@@ -75,7 +74,7 @@
       --box-size: var(--control-box-size-l);
       --offset: var(--space-s);
 
-      .checkbox__input {
+      .Checkbox-Input {
         &::before {
           top: 9px;
           left: 2px;
@@ -84,7 +83,7 @@
     }
   }
 
-  &__input:checked {
+  &-Input:checked {
     border-color: var(--color-control-bg-primary);
     background-color: var(--color-control-bg-primary);
 
@@ -94,7 +93,7 @@
     }
   }
 
-  &:hover &__input {
+  &:hover &-Input {
     border-color: var(--color-control-bg-border-default-hover);
 
     &:checked {
@@ -105,8 +104,8 @@
 
   &_intermediate,
   &_intermediate:hover {
-    .checkbox__input,
-    .checkbox__input:checked {
+    .Checkbox-Input,
+    .Checkbox-Input:checked {
       border-color: var(--color-control-bg-primary);
       background-color: var(--color-control-bg-primary);
 
@@ -121,7 +120,7 @@
 
   &_disabled {
     pointer-events: none;
-    .checkbox__input:disabled {
+    .Checkbox-Input:disabled {
       border-color: transparent;
       background-color: var(--color-control-bg-disable);
 
@@ -130,16 +129,15 @@
       }
     }
 
-    &.checkbox_intermediate .checkbox__input:disabled {
+    &.Checkbox_intermediate .Checkbox-Input:disabled {
       &::before {
         background-color: var(--color-control-typo-disable);
       }
     }
-    .checkbox__input:disabled ~ .checkbox__label {
+    .Checkbox-Input:disabled ~ .Checkbox-Label {
       color: var(--color-control-typo-disable);
     }
   }
-  /* stylelint-enable  no-descending-specificity  */
 }
 
 @keyframes checkboxFocusAnimation {

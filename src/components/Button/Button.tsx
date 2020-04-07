@@ -40,7 +40,7 @@ export type IButton<T = {}> = ButtonProps &
 // При вызове кнопки:
 // <Button<T>/>
 
-export const cnButton = cn('button');
+export const cnButton = cn('Button');
 
 export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
   const {
@@ -98,7 +98,7 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
           form,
           disabled,
           withIcon,
-          IconOnly: !!IconOnly,
+          onlyIcon: !!IconOnly,
         },
         [className]
       )}
