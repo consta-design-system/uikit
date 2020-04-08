@@ -186,10 +186,11 @@
   }
 
   &-Label {
-    overflow: hidden;
-    text-overflow: ellipsis;
     flex-grow: 1;
     flex-shrink: 1;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
   }
 }
 
