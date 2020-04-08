@@ -2,22 +2,21 @@
   "compilerOptions": {
     "declaration": true,
     "noImplicitAny": false,
-    "outDir": "./dist",
-    "target": "es5",
+    "outDir": "./dist/__internal__",
     "lib": ["dom", "dom.iterable", "esnext"],
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "noEmit": true,
-    "jsx": "preserve",
+    "noEmit": false,
+    "jsx": "react",
     "allowJs": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "importHelpers": true
   },
-  "include": ["src/**/*"],
+  "include": ["./src/**/*"],
   "exclude": ["node_modules"]
 }

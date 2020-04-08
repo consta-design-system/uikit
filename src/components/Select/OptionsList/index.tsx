@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo, useEffect, Fragment } from 'react';
 import { SelectOptionWithLevelT } from '..';
 import { parseFlatOptionValue, NEW_OPTION_VALUE, OptionsChildsT } from '../utils';
 import { Option, EmptyOption, NewOption } from '../Option';
@@ -83,7 +83,7 @@ const OptionsGroup: React.FC<
     isOpened: childOptionsIsOpened,
   } = useCollapseContent({
     children: (
-      <>
+      <Fragment>
         {availableChildOptions.map((childOption) => (
           <OptionsGroup
             key={`group:${childOption.value}`}
@@ -103,7 +103,7 @@ const OptionsGroup: React.FC<
             wpSize={wpSize}
           />
         ))}
-      </>
+      </Fragment>
     ),
     defaultOpen: isIntermediate || expandAll || level === 0,
   });
@@ -162,11 +162,11 @@ export const OptionsList: React.FC<Props> = (props) => {
   const renderHierachicalList = () => {
     const rootOptions = availableOptions.filter((o) => o.parentValue === null);
     return (
-      <>
+      <Fragment>
         {rootOptions.map((option) => (
           <OptionsGroup key={`group:${option.value}`} option={option} {...props} />
         ))}
-      </>
+      </Fragment>
     );
   };
 
@@ -183,7 +183,7 @@ export const OptionsList: React.FC<Props> = (props) => {
     } = props;
 
     return (
-      <>
+      <Fragment>
         {availableOptions.map((option) => {
           const isSelected = option.selectionState === 'selected';
           const isIntermediate = option.selectionState === 'part';
@@ -215,15 +215,15 @@ export const OptionsList: React.FC<Props> = (props) => {
             </Option>
           );
         })}
-      </>
+      </Fragment>
     );
   };
 
   const options = (
-    <>
+    <Fragment>
       {!availableOptions.length && <EmptyOption>Нет подходящих вариантов</EmptyOption>}
       {props.isHierarchical ? renderHierachicalList() : renderFlatList()}
-    </>
+    </Fragment>
   );
 
   return options;
