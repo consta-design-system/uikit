@@ -1,11 +1,11 @@
-.switch {
+/* stylelint-disable  no-descending-specificity  */
+
+.Switch {
   position: relative;
   display: inline-flex;
   align-items: center;
   font-family: var(--font-primary);
   cursor: pointer;
-
-  /* stylelint-disable  no-descending-specificity  */
 
   &_size {
     &_m {
@@ -15,7 +15,7 @@
       --switch-font-size: var(--control-text-size-m);
       --offset: var(--space-xs);
 
-      .switch__input::before {
+      .Switch-Input::before {
         transform: translateX(-16px);
       }
     }
@@ -27,13 +27,13 @@
       --switch-font-size: var(--control-text-size-l);
       --offset: var(--space-s);
 
-      .switch__input::before {
+      .Switch-Input::before {
         transform: translateX(-20px);
       }
     }
   }
 
-  &__input {
+  &-Input {
     position: relative;
     display: inline-block;
     width: var(--box-width);
@@ -88,18 +88,18 @@
     }
   }
 
-  &__label {
+  &-Label {
     margin-left: var(--offset);
     color: var(--color-control-typo-default);
     font-size: var(--switch-font-size);
   }
 
   &:hover {
-    .switch__input:not(:checked) {
+    .Switch-Input:not(:checked) {
       --background-color: var(--color-control-bg-border-default-hover);
       --content-color: var(--color-control-bg-border-default-hover);
     }
-    .switch__input:checked {
+    .Switch-Input:checked {
       --background-color: var(--color-control-bg-primary-hover);
       --content-color: var(--color-control-typo-primary-hover);
     }
@@ -107,21 +107,20 @@
 
   &_disabled {
     pointer-events: none;
-    .switch__input:not(:checked):disabled {
+    .Switch-Input:not(:checked):disabled {
       --background-color: var(--color-control-bg-border-disable);
       --content-color: var(--color-control-typo-disable);
     }
-    .switch__input:checked:disabled {
+    .Switch-Input:checked:disabled {
       --background-color: var(--color-control-bg-border-disable);
       --content-color: var(--color-control-typo-disable);
 
       background-color: var(--background-color);
     }
-    .switch__input:disabled ~ .switch__label {
+    .Switch-Input:disabled ~ .switch__label {
       color: var(--color-control-typo-disable);
     }
   }
-  /* stylelint-enable  no-descending-specificity  */
 }
 
 @keyframes switchFocusAnimation {

@@ -12,7 +12,7 @@ import { IconRing } from '../../../../Icon/icons/Ring';
 import { IconChat } from '../../../../Icon/icons/Chat';
 import { cn } from '../../../../../utils/bem';
 
-const cnExample = cn('without-search-example');
+const cnExample = cn('WithoutSearchExample');
 
 export function WithoutSearchExample() {
   const [isLogged, setIsLogged] = useState<boolean>(false);
@@ -67,7 +67,7 @@ export function WithoutSearchExample() {
               personStatus="available"
               personAvatarUrl="https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png"
               onClick={handleLogin}
-              className={cnExample('login', { 'is-logged': isLogged })}
+              className={cnExample('Login', { isLogged })}
             />
           </HeaderModule>
         </Fragment>

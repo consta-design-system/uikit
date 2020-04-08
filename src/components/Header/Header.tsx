@@ -9,14 +9,14 @@ export type IHeader = {
   className?: string;
 };
 
-export const cnHeader = cn('header');
+export const cnHeader = cn('Header');
 
 export function Header(props: IHeader): React.ReactElement {
   const { leftSide, rightSide, className } = props;
   return (
     <header className={cnHeader(null, [className])}>
-      {leftSide && <div className={cnHeader('left-side')}>{leftSide}</div>}
-      {rightSide && <div className={cnHeader('right-side')}>{rightSide}</div>}
+      {leftSide && <div className={cnHeader('LeftSide')}>{leftSide}</div>}
+      {rightSide && <div className={cnHeader('RightSide')}>{rightSide}</div>}
     </header>
   );
 }

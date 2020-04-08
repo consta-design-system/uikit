@@ -13,6 +13,6 @@ export type HeaderModuleProps = {
 export type IHeaderModule = HeaderModuleProps &
   (Omit<React.HTMLAttributes<Element>, keyof HeaderModuleProps>);
 
-export const HeaderModule: React.FC<IHeaderModule> = ({ children, indent }) => {
-  return <div className={cnHeader('module', { indent })}>{children}</div>;
+export const HeaderModule: React.FC<IHeaderModule> = ({ className, children, indent }) => {
+  return <div className={cnHeader('Module', { indent }, [className])}>{children}</div>;
 };

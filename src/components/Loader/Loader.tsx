@@ -9,12 +9,12 @@ export interface ILoader {
   size?: LoaderPropSize;
 }
 
-export const cnLoader = cn('loader');
+export const cnLoader = cn('Loader');
 
 export const Loader: React.FC<ILoader> = ({ className, size = 'm' }) => {
   return (
     <div className={cnLoader({ size }, [className])}>
-      <div className={cnLoader('dot')} />
+      <div className={cnLoader('Dot')} />
     </div>
   );
 };

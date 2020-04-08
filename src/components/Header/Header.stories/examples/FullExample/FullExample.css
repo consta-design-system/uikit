@@ -1,8 +1,8 @@
-.full-example {
+.FullExample {
   margin-bottom: var(--space-3xl);
-  &__login {
+  &-Login {
     cursor: pointer;
-    &_is-logged {
+    &_isLogged {
       padding: 0;
       &:focus {
         outline: none;

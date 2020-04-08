@@ -1,13 +1,12 @@
-.radio {
+/* stylelint-disable  no-descending-specificity  */
+.Radio {
   position: relative;
   align-items: center;
   display: inline-flex;
   font-family: var(--font-sans);
   cursor: pointer;
 
-  /* stylelint-disable  no-descending-specificity  */
-
-  &__input {
+  &-Input {
     position: relative;
     width: var(--box-size);
     height: var(--box-size);
@@ -47,13 +46,13 @@
     }
   }
 
-  &__label {
+  &-Label {
     margin-left: var(--offset);
     color: var(--color-control-typo-default);
     font-size: var(--radio-font-size);
   }
 
-  &:hover &__input {
+  &:hover &-Input {
     border-color: var(--color-control-bg-border-default-hover);
   }
 
@@ -71,7 +70,7 @@
     }
   }
 
-  &__input:checked {
+  &-Input:checked {
     border-color: var(--color-control-bg-primary);
 
     &::before {
@@ -82,7 +81,7 @@
 
   &_disabled {
     pointer-events: none;
-    .radio__input:disabled {
+    .Radio-Input:disabled {
       border-color: transparent;
       background-color: var(--color-control-bg-disable);
 
@@ -90,11 +89,10 @@
         background-color: var(--color-control-typo-disable);
       }
     }
-    .radio__input:disabled ~ .radio__label {
+    .Radio-Input:disabled ~ .radio-Label {
       color: var(--color-control-typo-disable);
     }
   }
-  /* stylelint-enable  no-descending-specificity  */
 }
 
 @keyframes radioFocusAnimation {

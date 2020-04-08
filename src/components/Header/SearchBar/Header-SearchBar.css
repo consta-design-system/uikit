@@ -1,10 +1,10 @@
-.header {
-  &__search-bar {
+.Header {
+  &-SearchBar {
     position: relative;
     width: 25vw;
     max-width: 260px;
   }
-  &__search-bar-label {
+  &-SearchBarLabel {
     position: absolute;
     padding: 0;
     width: 1px;
@@ -15,7 +15,7 @@
     opacity: 0;
     pointer-events: none;
   }
-  &__search-bar-button {
+  &-SearchBarButton {
     position: absolute;
     right: var(--space-2xs);
     top: var(--space-2xs);

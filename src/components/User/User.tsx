@@ -29,7 +29,7 @@ declare type UserProps = {
 export type IUser<T = {}> = UserProps &
   (Omit<React.HTMLAttributes<HTMLDivElement>, keyof UserProps> | Omit<T, keyof UserProps>);
 
-const cnUser = cn('user');
+const cnUser = cn('User');
 
 export function User<T>(props: IUser<T>): React.ReactElement | null {
   const {
@@ -72,29 +72,27 @@ export function User<T>(props: IUser<T>): React.ReactElement | null {
 
   return (
     <Component
-      className={cnUser({ size, view, width, 'with-arrow': withArrow, minified: onlyAvatar }, [
-        className,
-      ])}
+      className={cnUser({ size, view, width, withArrow, minified: onlyAvatar }, [className])}
       {...otherProps}
     >
-      <div className={cnUser('avatar-wrapper', { status })}>
-        <Avatar className={cnUser('avatar', { status })} size={size} url={avatarUrl} name={name} />
+      <div className={cnUser('AvatarWrapper', { status })}>
+        <Avatar className={cnUser('Avatar', { status })} size={size} url={avatarUrl} name={name} />
       </div>
       {!onlyAvatar && (name || info) && (
-        <div className={cnUser('block')}>
+        <div className={cnUser('Block')}>
           {name && (
-            <Text className={cnUser('name')} size={size} view="primary" lineHeight="2xs">
+            <Text className={cnUser('Name')} size={size} view="primary" lineHeight="2xs">
               {name}
             </Text>
           )}
           {info && (
-            <Text className={cnUser('info')} size={infoSize} view="secondary" lineHeight="2xs">
+            <Text className={cnUser('Info')} size={infoSize} view="secondary" lineHeight="2xs">
               {info}
             </Text>
           )}
         </div>
       )}
-      {withArrow && <IconSelect className={cnUser('arrow')} size={arrowSize} view="secondary" />}
+      {withArrow && <IconSelect className={cnUser('Arrow')} size={arrowSize} view="secondary" />}
     </Component>
   );
 }
