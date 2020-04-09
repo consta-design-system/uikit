@@ -11,7 +11,7 @@ const defaultKnobs = () => ({
   view: select('view', ['clear', 'primary', 'secondary', 'ghost'], 'primary'),
   form: select(
     'form',
-    ['default', 'brick', 'round', 'brick-round', 'round-brick', 'brick-default', 'default-brick'],
+    ['default', 'brick', 'round', 'brickRound', 'roundBrick', 'brickDefault', 'defaultBrick'],
     'default'
   ),
   disabled: boolean('disabled', false),

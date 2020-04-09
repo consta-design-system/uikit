@@ -10,10 +10,10 @@ export type ButtonPropForm =
   | 'default'
   | 'brick'
   | 'round'
-  | 'brick-round'
-  | 'round-brick'
-  | 'brick-default'
-  | 'default-brick';
+  | 'brickRound'
+  | 'roundBrick'
+  | 'brickDefault'
+  | 'defaultBrick';
 
 export type ButtonProps = {
   size?: ButtonPropSize;
@@ -40,7 +40,7 @@ export type IButton<T = {}> = ButtonProps &
 // При вызове кнопки:
 // <Button<T>/>
 
-export const cnButton = cn('button');
+export const cnButton = cn('Button');
 
 export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
   const {
@@ -97,8 +97,8 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
           width,
           form,
           disabled,
-          'with-icon': withIcon,
-          'icon-only': !!IconOnly,
+          withIcon,
+          onlyIcon: !!IconOnly,
         },
         [className]
       )}
@@ -106,16 +106,16 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
       title={_title}
       {...otherProps}
     >
-      {IconOnly && <IconOnly className={cnButton('icon')} size={_iconSize} />}
+      {IconOnly && <IconOnly className={cnButton('Icon')} size={_iconSize} />}
       {!IconOnly &&
         ((IconLeft || IconRight) && label ? (
           <Fragment>
             {IconLeft && (
-              <IconLeft className={cnButton('icon', { position: 'left' })} size={_iconSize} />
+              <IconLeft className={cnButton('Icon', { position: 'left' })} size={_iconSize} />
             )}
-            <span className={cnButton('label')}>{label}</span>
+            <span className={cnButton('Label')}>{label}</span>
             {IconRight && (
-              <IconRight className={cnButton('icon', { position: 'right' })} size={_iconSize} />
+              <IconRight className={cnButton('Icon', { position: 'right' })} size={_iconSize} />
             )}
           </Fragment>
         ) : (

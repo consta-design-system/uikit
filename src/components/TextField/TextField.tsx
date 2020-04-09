@@ -31,21 +31,21 @@ export type TextFieldPropType =
   | 'url'
   | 'month'
   | 'week';
-export type TextFieldPropView = 'default';
+export type TextFieldPropView = 'default' | 'clear';
 export type TextFieldPropForm =
   | 'default'
   | 'brick'
   | 'round'
   | 'clear'
-  | 'clear-round'
-  | 'round-clear'
-  | 'clear-default'
-  | 'default-clear'
-  | 'default-brick'
-  | 'brick-default'
-  | 'brick-clear'
-  | 'clear-brick'
-  | 'clear-clear';
+  | 'clearRound'
+  | 'roundClear'
+  | 'clearDefault'
+  | 'defaultClear'
+  | 'defaultBrick'
+  | 'brickDefault'
+  | 'brickClear'
+  | 'clearBrick'
+  | 'clearClear';
 export type TextFieldPropState = 'alert' | 'success' | 'warning';
 export type TextFieldPropWidth = 'full' | 'default';
 export type TextFieldPropAutoComplete = 'on' | 'off';
@@ -88,7 +88,7 @@ export type TextFieldProps = {
 export type ITextField = TextFieldProps &
   Omit<React.HTMLAttributes<HTMLDivElement>, keyof TextFieldProps>;
 
-const cnTextField = cn('text-field');
+const cnTextField = cn('TextField');
 
 export const TextField: React.FC<ITextField> = ({
   className,
@@ -193,7 +193,7 @@ export const TextField: React.FC<ITextField> = ({
           width,
           type,
           focus,
-          'with-value': !!value,
+          withValue: !!value,
         },
         [className]
       )}
@@ -202,7 +202,7 @@ export const TextField: React.FC<ITextField> = ({
     >
       {LeftIcon && (
         <div
-          className={cnTextField('side', {
+          className={cnTextField('Side', {
             position: 'left',
             type: leftSideIsString ? 'string' : 'icon',
           })}
@@ -210,12 +210,12 @@ export const TextField: React.FC<ITextField> = ({
           {leftSideIsString ? (
             leftSide
           ) : (
-            <LeftIcon className={cnTextField('icon')} size={getIconSizeByTextFieldSize(size)} />
+            <LeftIcon className={cnTextField('Icon')} size={getIconSizeByTextFieldSize(size)} />
           )}
         </div>
       )}
       <Input
-        className={cnTextField('input')}
+        className={cnTextField('Input')}
         value={value || ''}
         onChange={handleChange}
         maxLength={maxLength}
@@ -233,7 +233,7 @@ export const TextField: React.FC<ITextField> = ({
       />
       {RightIcon && (
         <div
-          className={cnTextField('side', {
+          className={cnTextField('Side', {
             position: 'right',
             type: rightSideIsString ? 'string' : 'icon',
           })}
@@ -241,7 +241,7 @@ export const TextField: React.FC<ITextField> = ({
           {rightSideIsString ? (
             rightSide
           ) : (
-            <RightIcon className={cnTextField('icon')} size={getIconSizeByTextFieldSize(size)} />
+            <RightIcon className={cnTextField('Icon')} size={getIconSizeByTextFieldSize(size)} />
           )}
         </div>
       )}

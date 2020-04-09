@@ -1,5 +1,5 @@
-.header {
-  &__module {
+.Header {
+  &-Module {
     margin-left: var(--module-indent);
     &_indent {
       &_s {

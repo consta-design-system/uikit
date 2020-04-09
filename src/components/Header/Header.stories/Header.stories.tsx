@@ -6,11 +6,6 @@ import { WithoutSearchExample } from './examples/WithoutSearchExample/WithoutSea
 import { MinifyLoginExample } from './examples/MinifyLoginExample/MinifyLoginExample';
 import { WithoutMenuExample } from './examples/WithoutMenuExample/WithoutMenuExample';
 import { WithLogoExample } from './examples/WithLogoExample/WithLogoExample';
-// import { HeaderButton } from '../../Header/Button/Header-Button';
-// import { HeaderLogin } from '../../Header/Login/Header-Login';
-// import { HeaderLogo } from '../../Header/Logo/Header-Logo';
-// import { HeaderMenu } from '../../Header/Menu/Header-Menu';
-// import { HeaderSearchBar } from '../../Header/SearchBar/Header-SearchBar';
 
 storiesOf('Header', module).add('Примеры', () => {
   return (

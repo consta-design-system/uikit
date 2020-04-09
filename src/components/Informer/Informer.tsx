@@ -22,7 +22,7 @@ export type IInformer = {
   className?: string;
 };
 
-const cnInformer = cn('informer');
+const cnInformer = cn('Informer');
 
 export const Informer: React.FC<IInformer> = (props) => {
   const { className, view, status, icon, label, title, children } = props;
@@ -41,17 +41,12 @@ export const Informer: React.FC<IInformer> = (props) => {
           status,
           withIcon,
         },
-        [_className, withIcon ? wp.ptIconPlus() : '']
+        [_className]
       )}
     >
-      {Icon && (
-        <Icon
-          size="s"
-          className={cnInformer('icon', [wp.ptIconPlus('icon', { 'indent-r': 's' })])}
-        />
-      )}
+      {Icon && <Icon className={cnInformer('Icon')} size="s" />}
       {Icon ? (
-        <div className={wp.ptIconPlus('block')}>
+        <div className={cnInformer('Content')}>
           {title && <Text weight="bold">{title}</Text>}
           {label || children}
         </div>

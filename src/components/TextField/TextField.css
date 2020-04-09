@@ -1,15 +1,14 @@
-.text-field {
+.TextField {
   position: relative;
   display: inline-flex;
   min-height: var(--input-height);
-  padding: 0 var(--input-space);
-  margin: initial;
   box-sizing: border-box;
   font-family: var(--font-primary);
   font-weight: normal;
   transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
 
-  &__input {
+  /* stylelint-disable  no-descending-specificity  */
+  &-Input {
     height: calc(var(--input-height) - (var(--control-border-width) * 2));
     font-size: var(--input-font-size);
     font-family: var(--font-primary);
@@ -22,46 +21,80 @@
     }
   }
 
-  &__side {
+  &-Side {
     display: flex;
     align-items: center;
     height: calc(var(--input-height) - (var(--control-border-width) * 2));
-    &_position_left {
-      padding-right: var(--input-space);
+    &_position {
+      &_left {
+        padding-right: var(--input-space);
+      }
+      &_right {
+        padding-left: var(--input-space);
+      }
     }
-    &_position_right {
-      padding-left: var(--input-space);
+    &_type {
+      &_string {
+        font-size: var(--input-font-size);
+        white-space: nowrap;
+      }
     }
-    &_type_string {
-      font-size: var(--input-font-size);
+  }
+
+  &_size {
+    &_xs {
+      --input-height: var(--control-height-xs);
+      --input-font-size: var(--control-text-size-xs);
+      --input-space: calc(var(--control-space-xs) * 0.5);
+    }
+
+    &_s {
+      --input-height: var(--control-height-s);
+      --input-font-size: var(--control-text-size-s);
+      --input-space: calc(var(--control-space-s) * 0.5);
+    }
+
+    &_m {
+      --input-height: var(--control-height-m);
+      --input-font-size: var(--control-text-size-m);
+      --input-space: calc(var(--control-space-m) * 0.5);
+    }
+
+    &_l {
+      --input-height: var(--control-height-l);
+      --input-font-size: var(--control-text-size-l);
+      --input-space: calc(var(--control-space-l) * 0.5);
     }
   }
 
-  &_size_xs {
-    --input-height: var(--control-height-xs);
-    --input-font-size: var(--control-text-size-xs);
-    --input-space: calc(var(--control-space-xs) * 0.5);
-  }
+  &_view_clear,
+  &_view_clear:hover,
+  &_view_clear:focus {
+    padding: 0;
+    color: var(--color-control-typo-default);
 
-  &_size_s {
-    --input-height: var(--control-height-s);
-    --input-font-size: var(--control-text-size-s);
-    --input-space: calc(var(--control-space-s) * 0.5);
-  }
+    &.TextField_disabled {
+      pointer-events: none;
 
-  &_size_m {
-    --input-height: var(--control-height-m);
-    --input-font-size: var(--control-text-size-m);
-    --input-space: calc(var(--control-space-m) * 0.5);
-  }
-
-  &_size_l {
-    --input-height: var(--control-height-l);
-    --input-font-size: var(--control-text-size-l);
-    --input-space: calc(var(--control-space-l) * 0.5);
+      & .TextField-Input {
+        color: var(--color-control-typo-disable);
+      }
+      & .TextField-Input::placeholder {
+        color: var(--color-control-typo-disable);
+      }
+      & .TextField-Side_type_string,
+      &.TextField_withValue .TextField-Side_type_string {
+        color: var(--color-control-typo-disable);
+      }
+      &.TextField .TextField-Icon,
+      &.TextField_withValue .TextField-Icon {
+        fill: var(--color-control-typo-disable);
+      }
+    }
   }
 
   &_view_default {
+    padding: 0 var(--input-space);
     border: var(--control-border-width) solid var(--color-control-bg-border-default);
     border-radius: var(--control-radius);
     background: var(--color-control-bg-default);
@@ -71,7 +104,7 @@
       border-color: var(--color-control-bg-border-default-hover);
     }
 
-    &.text-field_state {
+    &.TextField_state {
       &_alert {
         border-color: var(--color-bg-alert);
       }
@@ -82,132 +115,155 @@
         border-color: var(--color-bg-warning);
       }
     }
-    & .text-field__input {
+    & .TextField-Input {
       color: var(--color-control-typo-default);
       &::placeholder {
         color: var(--color-control-typo-placeholder);
       }
     }
 
-    & .text-field__side {
+    & .TextField-Side {
       &_type_string {
         color: var(--color-control-typo-placeholder);
       }
     }
 
-    & .text-field__icon {
+    & .TextField-Icon {
       fill: var(--color-control-typo-placeholder);
     }
 
-    &.text-field_with-value {
-      & .text-field__side.text-field__side_type_string {
+    &.TextField_withValue {
+      & .TextField-Side.TextField-Side_type_string {
         color: var(--color-control-typo-default);
       }
-      & .text-field__icon {
+      & .TextField-Icon {
         fill: var(--color-typo-secondary);
       }
     }
 
-    &.text-field_focus {
+    &.TextField_focus {
       border-color: var(--color-control-bg-border-focus);
       outline: none;
+      z-index: 1;
+
+      &.TextField_form_clear,
+      &.TextField_form_clearClear {
+        box-shadow: var(--control-border-width) 0 var(--color-control-bg-border-focus),
+          calc(-1 * var(--control-border-width)) 0 var(--color-control-bg-border-focus);
+      }
+
+      &.TextField_form_defaultClear,
+      &.TextField_form_brickClear,
+      &.TextField_form_roundClear {
+        box-shadow: var(--control-border-width) 0 var(--color-control-bg-border-focus);
+      }
+
+      &.TextField_form_clearDefault,
+      &.TextField_form_clearBrick,
+      &.TextField_form_clearRound {
+        box-shadow: calc(-1 * var(--control-border-width)) 0 var(--color-control-bg-border-focus);
+      }
     }
 
-    &.text-field_disabled {
+    &.TextField_disabled {
       border-color: var(--color-control-bg-border-disable);
       background: var(--color-control-bg-disable);
-      color: var(--color-control-typo-disable);
       pointer-events: none;
 
-      & .text-field__input::placeholder {
+      & .TextField-Input {
         color: var(--color-control-typo-disable);
       }
-      & .text-field__side_type_string,
-      &.text-field_with-value .text-field__side_type_string {
+      & .TextField-Input::placeholder {
         color: var(--color-control-typo-disable);
       }
-      &.text-field .text-field__icon,
-      &.text-field_with-value .text-field__icon {
+      & .TextField-Side_type_string,
+      &.TextField_withValue .TextField-Side_type_string {
+        color: var(--color-control-typo-disable);
+      }
+      &.TextField .TextField-Icon,
+      &.TextField_withValue .TextField-Icon {
         fill: var(--color-control-typo-disable);
       }
     }
   }
 
-  &_form_round {
-    border-radius: calc(var(--input-height) / 2);
-    padding-left: calc(var(--input-space) * 1.6);
-    padding-right: calc(var(--input-space) * 1.6);
-  }
+  &_form {
+    &_round {
+      border-radius: calc(var(--input-height) / 2);
+      padding-left: calc(var(--input-space) * 1.6);
+      padding-right: calc(var(--input-space) * 1.6);
+    }
 
-  &_form_brick {
-    border-radius: 0;
-  }
+    &_brick {
+      border-radius: 0;
+    }
 
-  &_form_clear {
-    border-radius: 0;
-    border-width: 0;
-    border-bottom-width: var(--control-border-width);
-  }
+    &_clear {
+      border-radius: 0;
+      border-width: 0;
+      border-bottom-width: var(--control-border-width);
+    }
 
-  &_form_default-clear {
-    border-radius: var(--control-radius) 0 0 var(--control-radius);
-    border-right-width: 0;
-  }
+    &_defaultClear {
+      border-radius: var(--control-radius) 0 0 var(--control-radius);
+      border-right-width: 0;
+    }
 
-  &_form_clear-default {
-    border-radius: 0 var(--control-radius) var(--control-radius) 0;
-    border-left-width: 0;
-  }
+    &_clearDefault {
+      border-radius: 0 var(--control-radius) var(--control-radius) 0;
+      border-left-width: 0;
+    }
 
-  &_form_default-brick {
-    border-radius: var(--control-radius) 0 0 var(--control-radius);
-  }
+    &_defaultBrick {
+      border-radius: var(--control-radius) 0 0 var(--control-radius);
+    }
 
-  &_form_brick-default {
-    border-radius: 0 var(--control-radius) var(--control-radius) 0;
-  }
+    &_brickDefault {
+      border-radius: 0 var(--control-radius) var(--control-radius) 0;
+    }
 
-  &_form_round-brick {
-    padding-left: calc(var(--input-space) * 1.6);
-    border-radius: calc(var(--input-height) / 2) 0 0 calc(var(--input-height) / 2);
-  }
+    &_roundBrick {
+      border-radius: calc(var(--input-height) / 2) 0 0 calc(var(--input-height) / 2);
+      padding-left: calc(var(--input-space) * 1.6);
+    }
 
-  &_form_brick-round {
-    padding-right: calc(var(--input-space) * 1.6);
-    border-radius: 0 calc(var(--input-height) / 2) 99rem calc(var(--input-height) / 2);
-  }
+    &_brickRound {
+      border-radius: 0 calc(var(--input-height) / 2) 99rem calc(var(--input-height) / 2);
+      padding-right: calc(var(--input-space) * 1.6);
+    }
 
-  &_form_brick-clear {
-    border-radius: 0;
-    border-right-width: 0;
-  }
+    &_brickClear {
+      border-radius: 0;
+      border-right-width: 0;
+    }
 
-  &_form_clear-brick {
-    border-radius: 0;
-    border-left-width: 0;
-  }
+    &_clearBrick {
+      border-radius: 0;
+      border-left-width: 0;
+    }
 
-  &_form_clear-round {
-    padding-right: calc(var(--input-space) * 1.6);
-    border-radius: 0 calc(var(--input-height) / 2) calc(var(--input-height) / 2) 0;
-    border-left-width: 0;
-  }
+    &_clearRound {
+      border-radius: 0 calc(var(--input-height) / 2) calc(var(--input-height) / 2) 0;
+      border-left-width: 0;
+      padding-right: calc(var(--input-space) * 1.6);
+    }
 
-  &_form_round-clear {
-    padding-left: calc(var(--input-space) * 1.6);
-    border-radius: calc(var(--input-height) / 2) 0 0 calc(var(--input-height) / 2);
-    border-right-width: 0;
-  }
+    &_roundClear {
+      border-radius: calc(var(--input-height) / 2) 0 0 calc(var(--input-height) / 2);
+      border-right-width: 0;
+      padding-left: calc(var(--input-space) * 1.6);
+    }
 
-  &_form_clear-clear {
-    border-radius: 0;
-    border-width: 0;
-    border-top-width: var(--control-border-width);
-    border-bottom-width: var(--control-border-width);
+    &_clearClear {
+      border-radius: 0;
+      border-width: 0;
+      border-top-width: var(--control-border-width);
+      border-bottom-width: var(--control-border-width);
+    }
   }
 
   &_type_textarea {
-    & .text-field__input {
+    & .TextField-Input {
       padding-bottom: calc(
         (var(--input-height) - (var(--control-border-width) * 2) - var(--line-height-text-m)) / 2
       );
@@ -222,8 +278,10 @@
 
   &_width_full {
     width: 100%;
-    & .text-field__input {
+    & .TextField-Input {
       width: 100%;
     }
   }
+
+  /* stylelint-enable  no-descending-specificity  */
 }

@@ -37,15 +37,15 @@ export const HeaderSearchBar: React.FC<ISearchBar> = ({
   };
 
   return (
-    <form onSubmit={handleSearch} className={cnHeader('search-bar', [className])}>
+    <form onSubmit={handleSearch} className={cnHeader('SearchBar', [className])}>
       {label && (
-        <label className={cnHeader('search-bar-label')} htmlFor="main-search">
+        <label className={cnHeader('SearchBarLabel')} htmlFor={cnHeader('SearchBarInput')}>
           {label}
         </label>
       )}
       <TextField
-        className={cnHeader('search-bar-input')}
-        name={cnHeader('search-bar-input')}
+        className={cnHeader('SearchBarInput')}
+        name={cnHeader('SearchBarInput')}
         placeholder={placeholder}
         size="m"
         width="full"

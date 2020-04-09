@@ -33,7 +33,7 @@ export type RadioProps<T = any> = {
 declare type IRadio<T = any> = RadioProps<T> &
   Omit<React.InputHTMLAttributes<HTMLInputElement>, keyof RadioProps<T>>;
 
-export const cnRadio = cn('radio');
+export const cnRadio = cn('Radio');
 
 export function Radio<T = any>(props: IRadio<T>): React.ReactElement | null {
   const {
@@ -60,13 +60,13 @@ export function Radio<T = any>(props: IRadio<T>): React.ReactElement | null {
         type="radio"
         id={id ? id.toString() : undefined}
         name={name}
-        className={cnRadio('input')}
+        className={cnRadio('Input')}
         checked={checked}
         disabled={disabled}
         onChange={handleChange}
         {...otherProps}
       />
-      {label && <span className={cnRadio('label')}>{label}</span>}
+      {label && <span className={cnRadio('Label')}>{label}</span>}
     </label>
   );
 }

@@ -12,7 +12,7 @@ import { IconRing } from '../../../../Icon/icons/Ring';
 import { IconChat } from '../../../../Icon/icons/Chat';
 import { cn } from '../../../../../utils/bem';
 
-const cnExample = cn('with-logo-example');
+const cnExample = cn('WithLogoExample');
 
 export function WithLogoExample() {
   const [value, setValue] = useState<string | null>(null);
@@ -97,7 +97,7 @@ export function WithLogoExample() {
               personStatus="available"
               personAvatarUrl="https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png"
               onClick={handleLogin}
-              className={cnExample('login', { 'is-logged': isLogged })}
+              className={cnExample('Login', { isLogged })}
             />
           </HeaderModule>
         </Fragment>

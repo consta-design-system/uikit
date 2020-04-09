@@ -12,20 +12,21 @@ const knobs = () => ({
       'default',
       'brick',
       'round',
-      'clear-round',
-      'round-clear',
-      'clear-default',
-      'default-clear',
-      'default-brick',
-      'brick-default',
-      'brick-clear',
-      'clear-brick',
-      'clear-clear',
+      'clearRound',
+      'roundClear',
+      'clearDefault',
+      'defaultClear',
+      'defaultBrick',
+      'brickDefault',
+      'brickClear',
+      'clearBrick',
+      'clearClear',
     ],
     'default'
   ),
   state: select('state', ['', 'alert', 'success', 'warning'], ''),
   size: select('size', ['xs', 's', 'm', 'l'], 'm'),
+  view: select('view', ['default', 'clear'], 'default'),
   disabled: boolean('disabled', false),
   type: select(
     'type',
@@ -62,6 +63,7 @@ function Stories({
   form,
   state,
   size,
+  view,
   type,
   maxLength,
   minRows,
@@ -97,6 +99,7 @@ function Stories({
       form={form}
       state={state}
       size={size}
+      view={view}
       type={type}
       maxLength={maxLength}
       minRows={minRows}
