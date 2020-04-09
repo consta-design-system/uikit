@@ -242,9 +242,6 @@ const generateReExports = (ignore, src, [distSrc, distEsSrc], distPath) =>
 
         const bundleFiles = await fg(bundleFilesTest);
 
-        console.log(bundleFilesTest);
-        console.log(bundleFiles);
-
         if (bundleFiles.length === 1) {
           const bundleDir = join(platformDir, '');
           await ensureDir(bundleDir);
@@ -260,12 +257,6 @@ const generateReExports = (ignore, src, [distSrc, distEsSrc], distPath) =>
             join(bundleDir, 'index'),
             join(blockDir, distEsSrc, platformPath)
           );
-
-          console.log({
-            platformPath,
-            cjsFilePath,
-            esmFilePath,
-          });
 
           const bundleCJS = [];
           const bundleESM = [];
