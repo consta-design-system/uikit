@@ -18,7 +18,7 @@ $color-base-critical: #33000f;
   /* //////////////////////////////
   // Цвета фонов /////////////// */
   --color-bg-default: color($color-base-essential a(100%)); /* Цвет дефолта */
-  --color-bg-secondary: color($color-base-essential l(+10)); /* Цвет дефолта */
+  --color-bg-secondary: color($color-base-essential l(-5)); /* Дополнительный цвет фона */
   --color-bg-brand: color($color-base-project a(100%)); /* Цвет фона брендированый */
   --color-bg-link: color($color-base-path a(100%)); /* Цвет фона ссылки */
   --color-bg-border: color($color-base-phantom a(20%) l(+10)); /* Цвет границ */
