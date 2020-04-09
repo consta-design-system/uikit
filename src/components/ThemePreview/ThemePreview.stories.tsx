@@ -231,7 +231,7 @@ storiesOf('Themes', module).add('Цвета', () => (
 
                 <ColorPreview
                   color={'--color-control-typo-placeholder'}
-                  description={'Цвет текста по наведению'}
+                  description={'Цвет плейсхолдера'}
                 />
 
                 <ColorPreview
