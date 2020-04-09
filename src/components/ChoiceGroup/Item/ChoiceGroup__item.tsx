@@ -28,7 +28,6 @@ export function ChoiceGroupItem<T>(props: IChoiceGroupItem<T>): React.ReactEleme
     name,
   } = props;
   const [focus, setFocus] = useState<boolean>(false);
-  const stringId = id ? id.toString() : undefined;
   const stringValue = `${id}${name ? `-${name}` : ''}`;
   const title = titleProp || (onlyIcon ? label : undefined);
 
@@ -50,13 +49,12 @@ export function ChoiceGroupItem<T>(props: IChoiceGroupItem<T>): React.ReactEleme
   return (
     <Fragment>
       <label
-        className={cnChoiceGroup('label', { size, checkbox: multiply, focus }, [className])}
+        className={cnChoiceGroup('Label', { size, multiply, focus, checked }, [className])}
         title={title}
       >
         <input
           type={multiply ? 'checkbox' : 'radio'}
-          className={cnChoiceGroup('input')}
-          id={stringId}
+          className={cnChoiceGroup('Input')}
           checked={checked}
           onFocus={handleFocus}
           onBlur={handleBlur}
@@ -64,7 +62,7 @@ export function ChoiceGroupItem<T>(props: IChoiceGroupItem<T>): React.ReactEleme
           value={stringValue}
           onChange={handleChange}
         />
-        {Icon && <Icon className={cnChoiceGroup('icon')} size={getIconSizeChoiceGroupSize(size)} />}
+        {Icon && <Icon className={cnChoiceGroup('Icon')} size={getIconSizeChoiceGroupSize(size)} />}
         {!onlyIcon && label}
       </label>
     </Fragment>

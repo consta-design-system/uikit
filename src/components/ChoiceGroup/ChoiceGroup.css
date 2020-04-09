@@ -1,4 +1,4 @@
-.choice-group {
+.ChoiceGroup {
   position: relative;
   display: inline-flex;
   max-width: 100%;
@@ -55,7 +55,7 @@
       --divider-width: 4px;
       --divider-height: 4px;
 
-      .choice-group__label {
+      .ChoiceGroup-Label {
         padding-left: calc(var(--choice-space) * 1.2);
         padding-right: calc(var(--choice-space) * 1.2 + var(--control-border-width));
 
@@ -66,7 +66,7 @@
     }
   }
 
-  &__label {
+  &-Label {
     position: relative;
     z-index: 0;
     display: flex;
@@ -103,25 +103,25 @@
     }
   }
 
-  &__input {
+  &-Input {
     position: absolute;
     -webkit-appearance: none;
     appearance: none;
   }
 
-  &__input:focus + &__label::after,
-  &__input:focus:hover + &__label::after {
+  &-Input:focus + &-Label::after,
+  &-Input:focus:hover + &-Label::after {
     box-shadow: 0 0 0 3px var(--color-control-bg-focus);
     animation: choiceGroupItemFocusAnimation 0.5s ease-in;
     outline: none;
   }
 
-  &__input:focus:active + &__label::after,
-  &__input:focus:active:hover + &__label::after {
+  &-Input:focus:active + &-Label::after,
+  &-Input:focus:active:hover + &-Label::after {
     animation-name: none !important;
   }
 
-  &__input:first-child + &__label {
+  &-Input:first-child + &-Label {
     border-radius: var(--choice-radius) 0 0 var(--choice-radius);
     border-left: var(--control-border-width) solid var(--color-control-bg-border-default);
 
@@ -129,7 +129,7 @@
       left: calc(var(--control-border-width) * -1);
     }
   }
-  &__input:nth-last-child(2) + &__label {
+  &-Input:nth-last-child(2) + &-Label {
     border-radius: 0 var(--choice-radius) var(--choice-radius) 0;
     border-right: var(--control-border-width) solid var(--color-control-bg-border-default);
     padding-right: var(--choice-space);
@@ -139,7 +139,7 @@
     }
   }
 
-  &__input:not(:first-child) + &__label::before {
+  &-Input:not(:first-child) + &-Label::before {
     content: '';
     position: absolute;
     top: 50%;
@@ -150,18 +150,18 @@
     transform: translateY(-50%);
   }
 
-  &__input:not(:checked) + &__label::before {
+  &-Input:not(:checked) + &-Label::before {
     background-color: var(--color-control-bg-border-default);
   }
 
-  &__input:checked + &__label {
+  &-Input:checked + &-Label {
     color: var(--choice-text-color);
 
     &::after {
       background-color: var(--choice-bg-color);
     }
 
-    & + .choice-group__input + .choice-group__label::before {
+    & + .ChoiceGroup-Input + .ChoiceGroup-Label::before {
       background-color: transparent;
     }
   }
@@ -170,8 +170,8 @@
     margin-right: calc(var(--choice-space) * 0.5);
   }
 
-  &_icon-only {
-    .choice-group__input + .choice-group__label {
+  &_onlyIcon {
+    .ChoiceGroup-Input + .ChoiceGroup-Label {
       justify-content: center;
       padding: 0;
       padding-right: var(--control-border-width);
