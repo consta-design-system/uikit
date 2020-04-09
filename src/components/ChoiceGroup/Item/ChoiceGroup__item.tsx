@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { cnChoiceGroup, ChoiceGroupPropSize } from '../ChoiceGroup';
 import { ItemProps } from '../../BaseCheckGroupField/BaseCheckGroupField';
 import { IconPropSize, IIcon } from '../../Icon';
@@ -27,9 +27,14 @@ export function ChoiceGroupItem<T>(props: IChoiceGroupItem<T>): React.ReactEleme
     title: titleProp,
     name,
   } = props;
+  const [focus, setFocus] = useState<boolean>(false);
   const stringId = id ? id.toString() : undefined;
   const stringValue = `${id}${name ? `-${name}` : ''}`;
   const title = titleProp || (onlyIcon ? label : undefined);
+
+  const handleBlur = () => setFocus(false);
+  const handleFocus = () => setFocus(true);
+  const handleChange = (e) => onChange({ e, value, id, checked: !checked });
 
   const getIconSizeChoiceGroupSize = (buttonSize: ChoiceGroupPropSize): IconPropSize => {
     const sizeObj: Record<ChoiceGroupPropSize, IconPropSize> = {
@@ -45,7 +50,7 @@ export function ChoiceGroupItem<T>(props: IChoiceGroupItem<T>): React.ReactEleme
   return (
     <Fragment>
       <label
-        className={cnChoiceGroup('label', { size, checkbox: multiply }, [className])}
+        className={cnChoiceGroup('label', { size, checkbox: multiply, focus }, [className])}
         title={title}
       >
         <input
@@ -53,9 +58,11 @@ export function ChoiceGroupItem<T>(props: IChoiceGroupItem<T>): React.ReactEleme
           className={cnChoiceGroup('input')}
           id={stringId}
           checked={checked}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           name={name}
           value={stringValue}
-          onChange={(e) => onChange({ e, value, id, checked: !checked })}
+          onChange={handleChange}
         />
         {Icon && <Icon className={cnChoiceGroup('icon')} size={getIconSizeChoiceGroupSize(size)} />}
         {!onlyIcon && label}
