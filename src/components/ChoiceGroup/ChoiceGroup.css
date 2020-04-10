@@ -1,7 +1,9 @@
 .ChoiceGroup {
   position: relative;
   display: inline-flex;
-  max-width: 100%;
+
+  /* max-width: 100%; */
+  border: var(--control-border-width) solid var(--color-control-bg-border-default);
   border-radius: var(--choice-radius);
 
   /* stylelint-disable */
@@ -9,6 +11,35 @@
     &_primary {
       --choice-bg-color: var(--color-control-bg-primary);
       --choice-text-color: var(--color-control-typo-primary);
+    }
+    &_ghost {
+      --choice-bg-color: var(--color-control-bg-ghost);
+      --choice-text-color: var(--color-control-typo-ghost);
+
+      .ChoiceGroup-Label::after {
+        border-radius: 0;
+      }
+      .ChoiceGroup-Label:first-child::after {
+        border-radius: var(--choice-radius) 0 0 var(--choice-radius);
+      }
+      .ChoiceGroup-Label:last-child::after {
+        border-radius: 0 var(--choice-radius) var(--choice-radius) 0;
+      }
+
+      /* .ChoiceGroup-Label_checked::after {
+        background-image: 
+          linear-gradient(to bottom, var(--choice-bg-color), var(--choice-bg-color)),
+          linear-gradient(to bottom, var(--color-bg-default), var(--color-bg-default))
+          ;
+      } */
+    }
+    &_secondary {
+      --choice-bg-color: var(--color-control-bg-secondary);
+      --choice-text-color: var(--color-control-typo-secondary);
+
+      .ChoiceGroup-Label_checked::after {
+        box-shadow: inset 0 0 0 1px var(--color-control-bg-border-secondary);
+      }
     }
   }
 
@@ -74,8 +105,6 @@
     padding: 0 calc(var(--choice-space) + var(--control-border-width)) 0 var(--choice-space);
     box-sizing: border-box;
     height: var(--choice-height);
-    border-top: var(--control-border-width) solid var(--color-control-bg-border-default);
-    border-bottom: var(--control-border-width) solid var(--color-control-bg-border-default);
     color: var(--color-control-typo-default);
     font-size: var(--choice-font-size);
     font-weight: normal;
@@ -86,10 +115,6 @@
     transition: background-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease,
       fill 0.15s ease;
     cursor: pointer;
-
-    &:hover {
-      color: var(--color-control-typo-secondary-hover);
-    }
 
     &::after {
       content: '';
@@ -109,29 +134,26 @@
     appearance: none;
   }
 
-  &-Input:focus + &-Label::after,
-  &-Input:focus:hover + &-Label::after {
+  /* Focus и Active */
+
+  &-Label_focus::after,
+  &-Label_focus:hover::after {
     box-shadow: 0 0 0 3px var(--color-control-bg-focus);
     animation: choiceGroupItemFocusAnimation 0.5s ease-in;
     outline: none;
   }
 
-  &-Input:focus:active + &-Label::after,
-  &-Input:focus:active:hover + &-Label::after {
+  &-Label_focus:active::after,
+  &-Label_focus:active:hover::after {
     animation-name: none !important;
   }
 
-  &-Input:first-child + &-Label {
-    border-radius: var(--choice-radius) 0 0 var(--choice-radius);
-    border-left: var(--control-border-width) solid var(--color-control-bg-border-default);
+  /* Скругление углов */
 
-    &::after {
-      left: calc(var(--control-border-width) * -1);
-    }
+  &-Label:first-child::after {
+    left: calc(var(--control-border-width) * -1);
   }
-  &-Input:nth-last-child(2) + &-Label {
-    border-radius: 0 var(--choice-radius) var(--choice-radius) 0;
-    border-right: var(--control-border-width) solid var(--color-control-bg-border-default);
+  &-Label:last-child {
     padding-right: var(--choice-space);
 
     &::after {
@@ -139,7 +161,9 @@
     }
   }
 
-  &-Input:not(:first-child) + &-Label::before {
+  /* Палочка */
+
+  &-Label:not(:first-child)::before {
     content: '';
     position: absolute;
     top: 50%;
@@ -150,28 +174,34 @@
     transform: translateY(-50%);
   }
 
-  &-Input:not(:checked) + &-Label::before {
-    background-color: var(--color-control-bg-border-default);
+  &-Label:not(.ChoiceGroup-Label_checked) {
+    &:hover {
+      color: var(--color-control-typo-secondary-hover);
+    }
+
+    &::before {
+      background-color: var(--color-control-bg-border-default);
+    }
   }
 
-  &-Input:checked + &-Label {
+  &-Label_checked {
     color: var(--choice-text-color);
 
     &::after {
       background-color: var(--choice-bg-color);
     }
 
-    & + .ChoiceGroup-Input + .ChoiceGroup-Label::before {
+    & + .ChoiceGroup-Label::before {
       background-color: transparent;
     }
   }
 
-  &:not(.choice-group_icon-only) &__icon {
+  &:not(.ChoiceGroup_onlyIcon) &-Icon {
     margin-right: calc(var(--choice-space) * 0.5);
   }
 
   &_onlyIcon {
-    .ChoiceGroup-Input + .ChoiceGroup-Label {
+    .ChoiceGroup-Label {
       justify-content: center;
       padding: 0;
       padding-right: var(--control-border-width);

@@ -13,7 +13,7 @@ import { ChoiceGroupItem } from './Item/ChoiceGroup__item';
 
 export type ChoiceGroupPropSize = 'xs' | 's' | 'm' | 'l';
 export type ChoiceGroupPropForm = 'default' | 'brick' | 'round';
-export type ChoiceGroupPropView = 'primary';
+export type ChoiceGroupPropView = 'primary' | 'ghost' | 'secondary';
 
 export type ChoiceGroupProps<T> = {
   size?: ChoiceGroupPropSize;
