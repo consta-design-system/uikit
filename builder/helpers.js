@@ -7,6 +7,7 @@ const fg = require('fast-glob');
 const postcss = require('postcss');
 const { react } = require('@bem/sdk.naming.presets');
 const createMatch = require('@bem/sdk.naming.cell.match');
+const svgr = require('@svgr/core').default;
 
 // TODO: https://github.com/bem/bem-sdk/issues/385
 const enhancedReactNaming = {
@@ -15,6 +16,14 @@ const enhancedReactNaming = {
 };
 
 const nestedModernMatch = createMatch(enhancedReactNaming);
+
+const copyPackageJson = async (distPaths) => {
+  const file = await readFile('package.json', 'utf8');
+  const outPaths = `${distPaths}/package.json`;
+  console.log(outPaths);
+  await ensureDir(dirname(outPaths));
+  await writeFile(outPaths, file);
+};
 
 const transformCSS = async (ignore, src, distPaths, options) => {
   const { postcss: postcssUserPlugins = [] } = options;
@@ -34,6 +43,66 @@ const transformCSS = async (ignore, src, distPaths, options) => {
       const newPath = resolve(distPath, relative(src, fileName));
       await ensureDir(dirname(newPath));
       writeFile(newPath, processedCss);
+    }
+  });
+};
+
+const iconsTransformed = async (ignore, src) => {
+  const iconComponentIsValid = (obj) => {
+    return !!(obj.m && obj.s && obj.xs);
+  };
+  const iconParse = async ({ componentName, path, pathOutdir }) => {
+    const svg = await readFile(path, 'utf8');
+    const jsCode = await svgr(svg, { typescript: true }, { componentName });
+    const jsPatch = `${pathOutdir}/${componentName}.tsx`;
+    await ensureDir(dirname(jsPatch));
+    await writeFile(jsPatch, jsCode);
+  };
+  const createComponent = async ({ componentName, pathOutdir, templatePath }) => {
+    const template = await readFile(templatePath, 'utf8');
+    const jsCode = template.replace('#componentName#', componentName);
+    const jsPatch = `${pathOutdir}/${componentName}.tsx`;
+    await ensureDir(dirname(jsPatch));
+    await writeFile(jsPatch, jsCode);
+  };
+
+  const svgFiles = await fg([`${src}/icons/**/*.{svg}`], { ignore });
+
+  const test = /.\/src\/icons\/(.+)\/(.+).svg/;
+  const svgComponents = {};
+
+  svgFiles.forEach((fileName) => {
+    if (test.test(fileName)) {
+      const [file, componentName, size] = test.exec(fileName);
+      if (!svgComponents[componentName]) {
+        svgComponents[componentName] = {};
+      }
+      svgComponents[componentName][size.toLowerCase()] = file;
+    }
+  });
+
+  Object.keys(svgComponents).forEach(async (componentName) => {
+    if (iconComponentIsValid(svgComponents[componentName])) {
+      await iconParse({
+        componentName: 'Xs',
+        path: svgComponents[componentName].xs,
+        pathOutdir: `./src/icons/${componentName}/`,
+      });
+      await iconParse({
+        componentName: 'S',
+        path: svgComponents[componentName].s,
+        pathOutdir: `./src/icons/${componentName}/`,
+      });
+      await iconParse({
+        componentName: 'M',
+        path: svgComponents[componentName].m,
+        pathOutdir: `./src/icons/${componentName}/`,
+      });
+      await createComponent({
+        componentName,
+        pathOutdir: `./src/icons/${componentName}/`,
+        templatePath: './builder/templates/Icon.js.template',
+      });
     }
   });
 };
@@ -138,20 +207,16 @@ const updateGitignore = async (allKeys, gitignorePath) => {
   await writeFile(gitignorePath, gitignore.join('\n'));
 };
 
-const generateReExports = (ignore, src, [distSrc, distEsSrc], distPath) =>
-  fg([join(src, 'components', '**'), join(src, 'hocs', '**')], { ignore }).then(async (files) => {
+const generateReExports = (
+  ignore,
+  src,
+  [distSrc, distEsSrc],
+  distPath,
+  componentFolder = 'components'
+) =>
+  fg([join(src, componentFolder, '**')], { ignore }).then(async (files) => {
     const packPath = join(distPath, 'package.json');
     const pack = await readJSON(packPath);
-
-    /**
-     * Components : {
-     *   [component.id]: {
-     *      [platform.id]: {
-     *          [entity.id]: { path }
-     *      }
-     *   }
-     * }
-     */
     const components = new Map();
 
     // Collect components
@@ -160,7 +225,7 @@ const generateReExports = (ignore, src, [distSrc, distEsSrc], distPath) =>
       .filter((fileName) => fileName.match(/\.tsx?$/))
       .forEach((fileName) => {
         const filePath = fileName.replace(normalize(src), '');
-        const entityName = filePath.replace('/components/', '').replace('/hocs/', '');
+        const entityName = filePath.replace(`/${componentFolder}/`, '');
 
         const { cell } = nestedModernMatch(entityName);
 
@@ -238,7 +303,7 @@ const generateReExports = (ignore, src, [distSrc, distEsSrc], distPath) =>
          */
 
         // const bundleFilesTest =`${src}/components/${componentName}/${componentName}.bundle/${platform}.{ts,tsx}`
-        const bundleFilesTest = `${src}/components/${componentName}/${componentName}.{ts,tsx}`;
+        const bundleFilesTest = `${src}/${componentFolder}/${componentName}/${componentName}.{ts,tsx}`;
 
         const bundleFiles = await fg(bundleFilesTest);
 
@@ -248,7 +313,7 @@ const generateReExports = (ignore, src, [distSrc, distEsSrc], distPath) =>
 
           const platformPath = bundleFiles[0]
             .replace(/\.tsx?$/, '')
-            .replace('src/components', 'components');
+            .replace(`src/${componentFolder}`, componentFolder);
           const cjsFilePath = relative(
             join(bundleDir, 'index'),
             join(blockDir, distSrc, platformPath)
@@ -313,4 +378,6 @@ module.exports = {
   transformCSS,
   copyAssets,
   generateReExports,
+  iconsTransformed,
+  copyPackageJson,
 };

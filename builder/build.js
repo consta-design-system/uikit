@@ -7,7 +7,7 @@ const { Command, flags } = require('@oclif/command');
 const logSymbols = require('log-symbols');
 const { remove, ensureDir } = require('fs-extra');
 
-const { transformCSS, generateReExports, copyAssets } = require('./helpers');
+const { transformCSS, generateReExports, copyAssets, copyPackageJson } = require('./helpers');
 
 const execAsync = promisify(exec);
 const INTERNAL_PREFIX = '__internal__';
@@ -82,6 +82,8 @@ class GenerateCommand extends Command {
 
     try {
       // TODO: separate commands
+      await copyPackageJson(distPath);
+
       await Promise.all([
         transformCSS(ignore, srcPath, [distSrc, distEsSrc], { namespace, naming, postcss }).then(
           () => this.log(logSymbols.success, 'css copied & transformed')
@@ -90,7 +92,10 @@ class GenerateCommand extends Command {
           this.log(logSymbols.success, 'svg & png copied')
         ),
         generateReExports(ignore, srcPath, [jsSrc, esSrc], distPath).then(() =>
-          this.log(logSymbols.success, 'reExports generated!')
+          this.log(logSymbols.success, 'components reExports generated!')
+        ),
+        generateReExports(ignore, srcPath, [jsSrc, esSrc], distPath, 'icons').then(() =>
+          this.log(logSymbols.success, 'icons reExports generated!')
         ),
       ]);
       await this.safeInvokeHook(afterBuild);
@@ -100,7 +105,7 @@ class GenerateCommand extends Command {
 
     const hrend = process.hrtime(hrstart);
 
-    this.log(logSymbols.success, `${process.env.npm_package_name} generated!💥`);
+    this.log(logSymbols.success, `${process.env.npm_package_name} generated!📦💥`);
     this.log(`Execution time: ${hrend[0]}s`);
   }
 }

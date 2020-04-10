@@ -3,15 +3,13 @@
 
 module.exports = {
   srcPath: './src',
-  // NOTE: ignore используется при обработке статики или css,
-  // но не ts файлов, для ts это правило описывается в tsconfig::exclude.
+  // NOTE: ignore уберет файлы из reExport, но в бандле файлы отстанутся
+  // для ts это правило описывается в tsconfig::exclude.
   ignore: [
     'src/internal/**',
     'src/index.css',
     'src/__tests__/**',
     'src/components/index.ts',
-    'src/components/**/*.tests/**/*.png',
-    'src/components/**/*.tests/**/*.css',
     'src/components/**/*.stories/**',
     'src/components/**/*.stories.*',
     'src/components/Input/**',
@@ -24,6 +22,8 @@ module.exports = {
     'src/components/Icon/**',
     'src/components/Popover/**',
     'src/components/Textarea/**',
+    'src/icons/BaseIconHoc/**',
+    'src/icons/Icon/**',
   ],
   tsconfig: 'tsconfig.json',
   postcssConfig: 'postcss.config.js',
@@ -35,21 +35,4 @@ module.exports = {
     require('postcss-calc')({}),
     require('postcss-nested')({}),
   ],
-  // afterBuild: () => {
-  //   execSync('rm -rf Theme');
-  //   // Копируем компонент `Theme` в рут после компиляции,
-  //   // т.к. он не является реакт-компонентом,
-  //   // и не создается автоматически при компиляции.
-  //   execSync('cp -r __internal__/cjs-src/components/Theme Theme', { stdio: 'inherit' });
-  //   // Корректируем пути в импортах:
-  //   // `../../lib/canUseDom` -> `../__internal__/cjs-src/lib/canUseDom`.
-  //   writeFileSync(
-  //     'Theme/index.js',
-  //     readFileSync('Theme/index.js', 'utf-8').replace(/(\.\.\/){1,}/, '../__internal__/cjs-src/')
-  //   );
-  //   writeFileSync(
-  //     'Theme/index.d.ts',
-  //     readFileSync('Theme/index.d.ts', 'utf-8').replace(/(\.\.\/){1,}/, '../__internal__/cjs-src/')
-  //   );
-  // },
 };
