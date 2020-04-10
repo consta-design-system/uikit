@@ -92,14 +92,14 @@ const defaultKnobs = () => ({
   view: select(
     'View',
     ['primary', 'secondary', 'ghost', 'link', 'brand', 'alert', 'warning', 'success'],
-    'primary',
+    'primary'
   ),
   size: select('Size', ['xs', 's', 'm'], 's'),
 });
 
-storiesOf('Icon', module)
+storiesOf('Icons', module)
   .addDecorator(withKnobs)
-  .add('Icon', () => (
+  .add('Icons', () => (
     <div className={'tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full'}>
       <div className={'tpl-grid__fraction text text_align_center'}>
         <IconAdd {...defaultKnobs()} />

@@ -8,4 +8,5 @@ export const #componentName# = BaseIconHoc({
   m: M,
   s: S,
   xs: Xs,
+  name: '#componentName#',
 })(Icon);
