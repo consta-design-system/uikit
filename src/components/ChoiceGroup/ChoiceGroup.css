@@ -25,13 +25,6 @@
       .ChoiceGroup-Label:last-child::after {
         border-radius: 0 var(--choice-radius) var(--choice-radius) 0;
       }
-
-      /* .ChoiceGroup-Label_checked::after {
-        background-image: 
-          linear-gradient(to bottom, var(--choice-bg-color), var(--choice-bg-color)),
-          linear-gradient(to bottom, var(--color-bg-default), var(--color-bg-default))
-          ;
-      } */
     }
     &_secondary {
       --choice-bg-color: var(--color-control-bg-secondary);
@@ -205,7 +198,7 @@
       justify-content: center;
       padding: 0;
       padding-right: var(--control-border-width);
-      width: var(--choice-height);
+      width: calc(var(--choice-height) + var(--control-border-width) * 2);
     }
   }
 }
