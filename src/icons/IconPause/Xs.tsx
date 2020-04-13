@@ -1,0 +1,11 @@
+import * as React from 'react';
+
+function Xs(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 12 12" {...props}>
+      <path d="M5 3H2v7h3V3zM9 3H6v7h3V3z" />
+    </svg>
+  );
+}
+
+export default Xs;

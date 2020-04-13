@@ -140,7 +140,7 @@ const iconsTransformed = async (ignore, src) => {
 };
 
 const copyAssets = async (ignore, src, distPaths) => {
-  const assetFiles = await fg([`${src}/**/*.{jpg,png,gif,md}`], { ignore });
+  const assetFiles = await fg([`${src}/**/*.{svg,jpg,png,gif,md}`], { ignore });
 
   assetFiles.forEach(async (fileName) => {
     const asset = await readFile(fileName);

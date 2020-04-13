@@ -28,7 +28,7 @@ export function BaseIconHoc({ m, s, xs, name }: BaseIconHocArguments) {
       const Svg: SizeComponent = getSvgBySize(props.size);
 
       return (
-        <IconComponent className={name} {...props}>
+        <IconComponent {...props} className={cnIcon(null, [name, props.className])}>
           <Svg className={cnIcon('Svg')} />
         </IconComponent>
       );

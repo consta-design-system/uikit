@@ -5,8 +5,6 @@
   overflow: hidden;
   width: var(--icon-size);
   height: var(--icon-size);
-  fill: var(--icon-color);
-  color: var(--icon-color);
 
   &_size {
     &_xs {
@@ -49,5 +47,7 @@
   &-Svg {
     width: 100%;
     height: 100%;
+    fill: var(--icon-color);
+    color: var(--icon-color);
   }
 }
