@@ -15,6 +15,7 @@
     padding: 0;
     border: none;
     outline: none;
+    color: currentColor;
     background: transparent;
     &:focus {
       outline: none;
@@ -39,6 +40,10 @@
         white-space: nowrap;
       }
     }
+  }
+
+  &-Icon {
+    fill: var(--color-control-typo-placeholder);
   }
 
   &_size {
@@ -125,19 +130,6 @@
     & .TextField-Side {
       &_type_string {
         color: var(--color-control-typo-placeholder);
-      }
-    }
-
-    & .TextField-Icon {
-      fill: var(--color-control-typo-placeholder);
-    }
-
-    &.TextField_withValue {
-      & .TextField-Side.TextField-Side_type_string {
-        color: var(--color-control-typo-default);
-      }
-      & .TextField-Icon {
-        fill: var(--color-typo-secondary);
       }
     }
 
@@ -253,6 +245,15 @@
       border-width: 0;
       border-top-width: var(--control-border-width);
       border-bottom-width: var(--control-border-width);
+    }
+  }
+
+  &_withValue {
+    & .TextField-Side.TextField-Side_type_string {
+      color: var(--color-control-typo-default);
+    }
+    & .TextField-Icon {
+      fill: var(--color-typo-secondary);
     }
   }
 
