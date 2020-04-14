@@ -199,6 +199,20 @@ storiesOf('Themes', module).add('Цвета', () => (
         </section>
 
         <section>
+          <h2 className="text text_size_4xl text_view_primary text_weight-bold decorator decorator_indent-t_6xl decorator_indent-b_3xl">
+            Цвета скроллбара
+          </h2>
+          <div className="tpl-grid tpl-grid_s-ratio_1-1-1 tpl-grid_col-gap_full tpl-grid_row-gap_full">
+            <ColorPreview color={'--color-scroll-bg'} description={'Цвет фонового трека'} />
+            <ColorPreview color={'--color-scroll-thumb'} description={'Цвет ползунка'} />
+            <ColorPreview
+              color={'--color-scroll-thumb-hover'}
+              description={'Цвет ползунка по наведению'}
+            />
+          </div>
+        </section>
+
+        <section>
           <h2 className="text text_size_4xl text_view_primary text_weight-bold decorator decorator_indent-t_6xl decorator_indent-b_2xl">
             Цвета контролов
           </h2>
@@ -213,16 +227,11 @@ storiesOf('Themes', module).add('Цвета', () => (
               <div className="tpl-grid tpl-grid_col-gap_full tpl-grid_row-gap_full">
                 <ColorPreview color={'--color-control-bg-default'} description={'Фоновый цвет'} />
 
-                <ColorPreview
-                  color={'--color-control-bg-default-hover'}
-                  description={'Фоновый цвет по наведению'}
-                />
-
                 <ColorPreview color={'--color-control-typo-default'} description={'Цвет текста'} />
 
                 <ColorPreview
                   color={'--color-control-typo-placeholder'}
-                  description={'Цвет текста по наведению'}
+                  description={'Цвет плейсхолдера'}
                 />
 
                 <ColorPreview
@@ -239,69 +248,14 @@ storiesOf('Themes', module).add('Цвета', () => (
                   color={'--color-control-bg-border-focus'}
                   description={'Цвет бордеров в состоянии фокуса'}
                 />
-              </div>
-            </section>
-
-            <section>
-              <h3 className="text text_size_l text_view_secondary text_transform_uppercase text_weight-semibold text_spacing_xs decorator decorator_indent-b_xs">
-                Checked
-              </h3>
-              <p className="text text_size_m text_view_secondary decorator decorator_indent-b_3xl decorator_space-b_m decorator_border_b">
-                Цвета для выбранного состояния в контролах
-              </p>
-              <div className="tpl-grid tpl-grid_col-gap_full tpl-grid_row-gap_full">
-                <ColorPreview color={'--color-control-bg-checked'} description={'Фоновый цвет'} />
 
                 <ColorPreview
-                  color={'--color-control-bg-checked-hover'}
-                  description={'Фоновый цвет по наведению'}
+                  color={'--color-control-bg-focus'}
+                  description={'Цвет тени в состонии фокуса'}
                 />
-
                 <ColorPreview
-                  color={'--color-control-typo-checked'}
-                  description={'Цвет текста по наведению'}
-                />
-
-                <ColorPreview
-                  color={'--color-control-bg-border-checked'}
-                  description={'Цвет бордеров'}
-                />
-
-                <ColorPreview
-                  color={'--color-control-bg-border-checked-hover'}
-                  description={'Цвет бордеров по наведению'}
-                />
-              </div>
-            </section>
-
-            <section>
-              <h3 className="text text_size_l text_view_secondary text_transform_uppercase text_weight-semibold text_spacing_xs decorator decorator_indent-b_xs">
-                Primary
-              </h3>
-              <p className="text text_size_m text_view_secondary decorator decorator_indent-b_3xl decorator_space-b_m decorator_border_b">
-                Цвета для выбранного состояния в контролах
-              </p>
-              <div className="tpl-grid tpl-grid_col-gap_full tpl-grid_row-gap_full">
-                <ColorPreview color={'--color-control-bg-checked'} description={'Фоновый цвет'} />
-
-                <ColorPreview
-                  color={'--color-control-bg-checked-hover'}
-                  description={'Фоновый цвет по наведению'}
-                />
-
-                <ColorPreview
-                  color={'--color-control-typo-checked'}
-                  description={'Цвет текста по наведению'}
-                />
-
-                <ColorPreview
-                  color={'--color-control-bg-border-checked'}
-                  description={'Цвет бордеров'}
-                />
-
-                <ColorPreview
-                  color={'--color-control-bg-border-checked-hover'}
-                  description={'Цвет бордеров по наведению'}
+                  color={'--color-control-bg-active'}
+                  description={'Цвет тени в состонии нажатия'}
                 />
               </div>
             </section>
@@ -339,11 +293,6 @@ storiesOf('Themes', module).add('Цвета', () => (
               </p>
               <div className="tpl-grid tpl-grid_col-gap_full tpl-grid_row-gap_full">
                 <ColorPreview color={'--color-control-bg-secondary'} description={'Фоновый цвет'} />
-
-                <ColorPreview
-                  color={'--color-control-bg-secondary-hover'}
-                  description={'Фоновый цвет по наведению'}
-                />
 
                 <ColorPreview
                   color={'--color-control-typo-secondary'}
@@ -417,7 +366,7 @@ storiesOf('Themes', module).add('Цвета', () => (
 
             <section>
               <h3 className="text text_size_l text_view_secondary text_transform_uppercase text_weight-semibold text_spacing_xs decorator decorator_indent-b_xs">
-                Clear
+                Disable
               </h3>
               <p className="text text_size_m text_view_secondary decorator decorator_indent-b_3xl decorator_space-b_m decorator_border_b">
                 Цвета для недоступных контролов

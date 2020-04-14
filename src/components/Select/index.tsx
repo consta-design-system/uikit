@@ -6,6 +6,7 @@ import React, {
   useMemo,
   useRef,
   useState,
+  Fragment,
 } from 'react';
 import orderBy from 'lodash/orderBy';
 
@@ -647,6 +648,7 @@ const BaseSelect: React.FC<BaseSelectProps> = (props) => {
 
   const hasValue = checkValue(value);
 
+  //@typescript-eslint/no-explicit-any
   const popupPositionDeps = ([availableOptions.length] as any[]).concat(isMulti ? [value] : []);
 
   return (
@@ -733,7 +735,7 @@ const BaseSelect: React.FC<BaseSelectProps> = (props) => {
           </div>
         </div>
         {!isDisabled && hasValue && (
-          <>
+          <Fragment>
             <span className={b('delimiter')} />
             <Button
               size="xs"
@@ -744,7 +746,7 @@ const BaseSelect: React.FC<BaseSelectProps> = (props) => {
               onClick={handleDeleteClick}
               iconLeft={IconClose}
             />
-          </>
+          </Fragment>
         )}
         <Popover
           className={b('menu')}

@@ -8,7 +8,7 @@ const SVG_S = <path d="M9 2H7V7H2V9H7V14H9V9H14V7H9V2Z" />;
 
 const SVG_M = <path d="M13 2H11V11H2V13H11V22H13V13H22V11H13V2Z" />;
 
-const Add = props => {
+const Add = (props) => {
   let svg;
 
   if (props.size === 'xs') svg = SVG_XS;
