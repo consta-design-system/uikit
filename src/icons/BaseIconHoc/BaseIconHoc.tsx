@@ -2,9 +2,14 @@ import React from 'react';
 import { IIcon, cnIcon } from '../Icon/Icon';
 
 export type SizeComponent = React.FC<React.SVGProps<SVGSVGElement>>;
-export type Sizes = { m: SizeComponent; s: SizeComponent; xs: SizeComponent };
+export type BaseIconHocArguments = {
+  m: SizeComponent;
+  s: SizeComponent;
+  xs: SizeComponent;
+  name: string;
+};
 
-export function BaseIconHoc({ m, s, xs }: Sizes) {
+export function BaseIconHoc({ m, s, xs, name }: BaseIconHocArguments) {
   return function(IconComponent: React.FC<IIcon>) {
     return function(props: IIcon) {
       function getSvgBySize(size) {
@@ -23,7 +28,7 @@ export function BaseIconHoc({ m, s, xs }: Sizes) {
       const Svg: SizeComponent = getSvgBySize(props.size);
 
       return (
-        <IconComponent {...props}>
+        <IconComponent {...props} className={cnIcon(null, [name, props.className])}>
           <Svg className={cnIcon('Svg')} />
         </IconComponent>
       );

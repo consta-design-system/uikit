@@ -47,20 +47,51 @@ const transformCSS = async (ignore, src, distPaths, options) => {
   });
 };
 
+const iconComponentIsValid = (obj) => {
+  return !!(obj.m && obj.s && obj.xs);
+};
+
+const createIconStories = async (svgComponents, src) => {
+  const templatePath = './builder/templates/Icon.stories.tsx.template';
+  const template = await readFile(templatePath, 'utf8');
+
+  let imports = '';
+  let items = '';
+
+  Object.keys(svgComponents).forEach(async (componentName) => {
+    if (iconComponentIsValid(svgComponents[componentName])) {
+      imports += `import { ${componentName} } from '../../${componentName}/${componentName}';\n`;
+      items += `<IconsItem name="${componentName}" icon={${componentName}} {...defaultKnobs()} />\n`;
+    }
+  });
+
+  const jsCode = template.replace(/#imports#/g, imports).replace(/#items#/g, items);
+  const jsPatch = `${src}/icons/Icon/Icons.stories/Icons.stories.tsx`;
+  await ensureDir(dirname(jsPatch));
+  await writeFile(jsPatch, jsCode);
+};
+
 const iconsTransformed = async (ignore, src) => {
-  const iconComponentIsValid = (obj) => {
-    return !!(obj.m && obj.s && obj.xs);
-  };
   const iconParse = async ({ componentName, path, pathOutdir }) => {
     const svg = await readFile(path, 'utf8');
-    const jsCode = await svgr(svg, { typescript: true }, { componentName });
+    const jsCode = await svgr(
+      svg,
+      {
+        plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx', '@svgr/plugin-prettier'],
+        typescript: true,
+        dimensions: false,
+        svgo: true,
+      },
+      { componentName }
+    );
     const jsPatch = `${pathOutdir}/${componentName}.tsx`;
     await ensureDir(dirname(jsPatch));
     await writeFile(jsPatch, jsCode);
   };
   const createComponent = async ({ componentName, pathOutdir, templatePath }) => {
     const template = await readFile(templatePath, 'utf8');
-    const jsCode = template.replace('#componentName#', componentName);
+    const jsCode = template.replace(/#componentName#/g, componentName);
+
     const jsPatch = `${pathOutdir}/${componentName}.tsx`;
     await ensureDir(dirname(jsPatch));
     await writeFile(jsPatch, jsCode);
@@ -105,10 +136,11 @@ const iconsTransformed = async (ignore, src) => {
       });
     }
   });
+  await createIconStories(svgComponents, src);
 };
 
 const copyAssets = async (ignore, src, distPaths) => {
-  const assetFiles = await fg([`${src}/**/*.{jpg,png,gif,md}`], { ignore });
+  const assetFiles = await fg([`${src}/**/*.{svg,jpg,png,gif,md}`], { ignore });
 
   assetFiles.forEach(async (fileName) => {
     const asset = await readFile(fileName);

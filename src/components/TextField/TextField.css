@@ -7,6 +7,10 @@
   font-weight: normal;
   transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
 
+  &_width_full {
+    width: 100%;
+  }
+
   /* stylelint-disable  no-descending-specificity  */
   &-Input {
     height: calc(var(--input-height) - (var(--control-border-width) * 2));
@@ -17,6 +21,7 @@
     outline: none;
     color: currentColor;
     background: transparent;
+    width: 100%;
     &:focus {
       outline: none;
     }
@@ -274,13 +279,6 @@
       line-height: var(--line-height-text-m);
       resize: none;
       display: block;
-    }
-  }
-
-  &_width_full {
-    width: 100%;
-    & .TextField-Input {
-      width: 100%;
     }
   }
 
