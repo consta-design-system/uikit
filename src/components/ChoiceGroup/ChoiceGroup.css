@@ -1,0 +1,214 @@
+.ChoiceGroup {
+  position: relative;
+  display: inline-flex;
+
+  /* max-width: 100%; */
+  border: var(--control-border-width) solid var(--color-control-bg-border-default);
+  border-radius: var(--choice-radius);
+
+  /* stylelint-disable */
+  &_view {
+    &_primary {
+      --choice-bg-color: var(--color-control-bg-primary);
+      --choice-text-color: var(--color-control-typo-primary);
+    }
+    &_ghost {
+      --choice-bg-color: var(--color-control-bg-ghost);
+      --choice-text-color: var(--color-control-typo-ghost);
+
+      .ChoiceGroup-Label::after {
+        border-radius: 0;
+      }
+      .ChoiceGroup-Label:first-child::after {
+        border-radius: var(--choice-radius) 0 0 var(--choice-radius);
+      }
+      .ChoiceGroup-Label:last-child::after {
+        border-radius: 0 var(--choice-radius) var(--choice-radius) 0;
+      }
+    }
+    &_secondary {
+      --choice-bg-color: var(--color-control-bg-secondary);
+      --choice-text-color: var(--color-control-typo-secondary);
+
+      .ChoiceGroup-Label_checked::after {
+        box-shadow: inset 0 0 0 1px var(--color-control-bg-border-secondary);
+      }
+    }
+  }
+
+  &_size {
+    &_xs {
+      --choice-height: var(--control-height-xs);
+      --choice-font-size: var(--control-text-size-xs);
+      --choice-space: var(--control-space-xs);
+    }
+    &_s {
+      --choice-height: var(--control-height-s);
+      --choice-font-size: var(--control-text-size-s);
+      --choice-space: var(--control-space-s);
+    }
+
+    &_m {
+      --choice-height: var(--control-height-m);
+      --choice-font-size: var(--control-text-size-m);
+      --choice-space: var(--control-space-m);
+    }
+
+    &_l {
+      --choice-height: var(--control-height-l);
+      --choice-font-size: var(--control-text-size-l);
+      --choice-space: var(--control-space-l);
+    }
+  }
+
+  &_form {
+    &_default,
+    &_brick {
+      --divider-width: var(--control-border-width);
+      --divider-height: 65%;
+    }
+
+    &_default {
+      --choice-radius: var(--control-radius);
+    }
+    &_brick {
+      --choice-radius: 0;
+    }
+    &_round {
+      --choice-radius: 99em;
+      --divider-width: 4px;
+      --divider-height: 4px;
+
+      .ChoiceGroup-Label {
+        padding-left: calc(var(--choice-space) * 1.2);
+        padding-right: calc(var(--choice-space) * 1.2 + var(--control-border-width));
+
+        &::before {
+          border-radius: 99em;
+        }
+      }
+    }
+  }
+
+  &-Label {
+    position: relative;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 calc(var(--choice-space) + var(--control-border-width)) 0 var(--choice-space);
+    box-sizing: border-box;
+    height: var(--choice-height);
+    color: var(--color-control-typo-default);
+    font-size: var(--choice-font-size);
+    font-weight: normal;
+    line-height: calc(var(--choice-height) - var(--control-border-width) * 2);
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease,
+      fill 0.15s ease;
+    cursor: pointer;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: var(--control-border-width);
+      top: calc(var(--control-border-width) * -1);
+      bottom: calc(var(--control-border-width) * -1);
+      z-index: -1;
+      border-radius: var(--choice-radius);
+    }
+  }
+
+  &-Input {
+    position: absolute;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  /* Focus и Active */
+
+  &-Label_focus::after,
+  &-Label_focus:hover::after {
+    box-shadow: 0 0 0 3px var(--color-control-bg-focus);
+    animation: choiceGroupItemFocusAnimation 0.5s ease-in;
+    outline: none;
+  }
+
+  &-Label_focus:active::after,
+  &-Label_focus:active:hover::after {
+    animation-name: none !important;
+  }
+
+  /* Скругление углов */
+
+  &-Label:first-child::after {
+    left: calc(var(--control-border-width) * -1);
+  }
+  &-Label:last-child {
+    padding-right: var(--choice-space);
+
+    &::after {
+      right: calc(var(--control-border-width) * -1);
+    }
+  }
+
+  /* Палочка */
+
+  &-Label:not(:first-child)::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: calc(var(--control-border-width) * -1);
+    z-index: -1;
+    width: var(--divider-width);
+    height: var(--divider-height);
+    transform: translateY(-50%);
+  }
+
+  &-Label:not(.ChoiceGroup-Label_checked) {
+    &:hover {
+      color: var(--color-control-typo-secondary-hover);
+    }
+
+    &::before {
+      background-color: var(--color-control-bg-border-default);
+    }
+  }
+
+  &-Label_checked {
+    color: var(--choice-text-color);
+
+    &::after {
+      background-color: var(--choice-bg-color);
+    }
+
+    & + .ChoiceGroup-Label::before {
+      background-color: transparent;
+    }
+  }
+
+  &:not(.ChoiceGroup_onlyIcon) &-Icon {
+    margin-right: calc(var(--choice-space) * 0.5);
+  }
+
+  &_onlyIcon {
+    .ChoiceGroup-Label {
+      justify-content: center;
+      padding: 0;
+      padding-right: var(--control-border-width);
+      width: calc(var(--choice-height) + var(--control-border-width) * 2);
+    }
+  }
+}
+/* stylelint-enable */
+
+@keyframes choiceGroupItemFocusAnimation {
+  from {
+    box-shadow: 0 0 0 0 var(--color-control-bg-focus), 0 0 0 0 var(--color-control-bg-active);
+  }
+  to {
+    box-shadow: 0 0 0 3px var(--color-control-bg-focus), 0 0 0 6px transparent;
+  }
+}

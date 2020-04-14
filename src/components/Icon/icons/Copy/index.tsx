@@ -35,7 +35,7 @@ const SVG_M = (
   </g>
 );
 
-const Copy = props => {
+export const IconCopy = (props) => {
   let svg;
 
   if (props.size === 'xs') svg = SVG_XS;
@@ -45,4 +45,4 @@ const Copy = props => {
   return <Icon {...props}>{svg}</Icon>;
 };
 
-export default Copy;
+export default IconCopy;

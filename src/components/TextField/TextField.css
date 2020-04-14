@@ -182,6 +182,8 @@
   &_form {
     &_round {
       border-radius: calc(var(--input-height) / 2);
+      padding-left: calc(var(--input-space) * 1.6);
+      padding-right: calc(var(--input-space) * 1.6);
     }
 
     &_brick {
@@ -214,10 +216,12 @@
 
     &_roundBrick {
       border-radius: calc(var(--input-height) / 2) 0 0 calc(var(--input-height) / 2);
+      padding-left: calc(var(--input-space) * 1.6);
     }
 
     &_brickRound {
       border-radius: 0 calc(var(--input-height) / 2) 99rem calc(var(--input-height) / 2);
+      padding-right: calc(var(--input-space) * 1.6);
     }
 
     &_brickClear {
@@ -233,11 +237,13 @@
     &_clearRound {
       border-radius: 0 calc(var(--input-height) / 2) calc(var(--input-height) / 2) 0;
       border-left-width: 0;
+      padding-right: calc(var(--input-space) * 1.6);
     }
 
     &_roundClear {
       border-radius: calc(var(--input-height) / 2) 0 0 calc(var(--input-height) / 2);
       border-right-width: 0;
+      padding-left: calc(var(--input-space) * 1.6);
     }
 
     &_clearClear {
