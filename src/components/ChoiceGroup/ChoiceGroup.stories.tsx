@@ -2,10 +2,11 @@ import React, { useState, Fragment } from 'react';
 import { select, boolean, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { ChoiceGroup } from '../ChoiceGroup/ChoiceGroup';
-import { IIcon } from '../Icon';
-import IconCamera from '../Icon/icons/Camera';
-import IconCopy from '../Icon/icons/Copy';
-import IconFavorite from '../Icon/icons/Favorite';
+import { IIcon } from '../../icons/Icon/Icon';
+
+import { IconCamera } from '../../icons/IconCamera/IconCamera';
+import { IconCopy } from '../../icons/IconCopy/IconCopy';
+import { IconFavorite } from '../../icons/IconFavorite/IconFavorite';
 
 declare type Item = {
   name: string;

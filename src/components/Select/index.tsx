@@ -17,7 +17,7 @@ import { usePrevious } from '../../hooks/usePrevious';
 import Input, { InputStub } from '../Input';
 import { Button } from '../Button/Button';
 import { Popover, Directions } from '../Popover';
-import IconSelect from '../Icon/icons/Select';
+import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import {
   checkValue,
   fireCloseEvent,

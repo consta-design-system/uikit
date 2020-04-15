@@ -9,7 +9,6 @@ module.exports = {
     'src/internal/**',
     'src/index.css',
     'src/__tests__/**',
-    'src/components/index.ts',
     'src/**/*.stories/**',
     'src/**/*.stories.*',
     'src/components/Input/**',

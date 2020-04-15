@@ -1,3 +1,3 @@
 module.exports = {
-  DEFAULT_THEME: 'gpn-default',
+  DEFAULT_THEME: 'gpnDefault',
 };

@@ -2,7 +2,7 @@ import './ChoiceGroup.css';
 
 import React from 'react';
 import { cn } from '../../utils/bem';
-import { IIcon } from '../Icon';
+import { IIcon } from '../../icons/Icon/Icon';
 import {
   BaseCheckGroupField,
   IBaseCheckGroupField,

@@ -8,8 +8,8 @@ import { HeaderLogin } from '../../../Login/Header-Login';
 import { HeaderLogo } from '../../../Logo/Header-Logo';
 import { HeaderMenu } from '../../../Menu/Header-Menu';
 import { HeaderModule } from '../../../Module/Header-Module';
-import { IconRing } from '../../../../Icon/icons/Ring';
-import { IconChat } from '../../../../Icon/icons/Chat';
+import { IconRing } from '../../../../../icons/IconRing/IconRing';
+import { IconChat } from '../../../../../icons/IconChat/IconChat';
 import { cn } from '../../../../../utils/bem';
 
 const cnExample = cn('WithoutSearchExample');

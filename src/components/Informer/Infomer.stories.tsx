@@ -1,7 +1,7 @@
 import React from 'react';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import IconUser from '../Icon/icons/User';
+import { IconUser } from '../../icons/IconUser/IconUser';
 import { Informer } from './Informer';
 
 const defaultKnobs = () => ({

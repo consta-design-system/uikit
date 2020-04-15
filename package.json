@@ -12,10 +12,7 @@
     "react-textarea-autosize": "^7.1.2",
     "tslib": "^1.11.1"
   },
-  "files": [
-    "dist",
-    "src/themes/*.css"
-  ],
+  "files": [],
   "publishConfig": {
     "access": "public"
   },

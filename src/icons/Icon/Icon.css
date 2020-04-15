@@ -19,35 +19,34 @@
   }
   &_view {
     &_alert {
-      --icon-color: var(--color-typo-alert);
+      color: var(--color-typo-alert);
     }
     &_brand {
-      --icon-color: var(--color-typo-brand);
+      color: var(--color-typo-brand);
     }
     &_ghost {
-      --icon-color: var(--color-typo-ghost);
+      color: var(--color-typo-ghost);
     }
     &_link {
-      --icon-color: var(--color-typo-link);
+      color: var(--color-typo-link);
     }
     &_primary {
-      --icon-color: var(--color-typo-primary);
+      color: var(--color-typo-primary);
     }
     &_secondary {
-      --icon-color: var(--color-typo-secondary);
+      color: var(--color-typo-secondary);
     }
     &_success {
-      --icon-color: var(--color-typo-success);
+      color: var(--color-typo-success);
     }
     &_warning {
-      --icon-color: var(--color-typo-warning);
+      color: var(--color-typo-warning);
     }
   }
 
   &-Svg {
     width: 100%;
     height: 100%;
-    fill: var(--icon-color);
-    color: var(--icon-color);
+    fill: currentcolor;
   }
 }

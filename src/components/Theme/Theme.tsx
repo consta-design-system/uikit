@@ -1,43 +1,26 @@
-import '../../utils/whitepaper/whitepaper.css';
-import './Theme.css';
-import './_color/Theme_color_gpnDark.css';
-import './_color/Theme_color_gpnDefault.css';
-import './_color/Theme_color_gpnDisplay.css';
-import './_control/Theme_control_gpnDefault.css';
-import './_font/theme_font_gpnDefault.css';
-import './_size/Theme_size_gpnDefault.css';
-import './_space/Theme_space_gpnDefault.css';
-
 import React from 'react';
 import { cn } from '../../utils/bem';
 
-export const cnTheme = cn('Theme');
 export type IThemePropColor = 'gpnDark' | 'gpnDefault' | 'gpnDisplay';
-
+export type IThemePropGap = 's' | 'm' | 'l';
 export type ThemeProps = {
   className?: string;
 };
-
 export type HOCArguments = {
   color?: IThemePropColor;
   control?: 'gpnDefault';
   font?: 'gpnDefault';
   size?: 'gpnDefault';
   space?: 'gpnDefault';
+  gap?: IThemePropGap;
 };
-
 export type IComponentWithTheme<T = {}> = ThemeProps & Omit<T, keyof ThemeProps>;
-
 export type ITheme = HOCArguments & Omit<React.HTMLAttributes<Element>, keyof HOCArguments>;
 
+export const cnTheme = cn('Theme');
+
 export function withThemeHOC<T>(props: HOCArguments | undefined = {}) {
-  const {
-    color = 'gpnDefault',
-    control = 'gpnDefault',
-    size = 'gpnDefault',
-    font = 'gpnDefault',
-    space = 'gpnDefault',
-  } = props;
+  const { color, control, size, font, space, gap } = props;
   return function(Component: React.ElementType) {
     return function ComponentWithTheme({
       className,
@@ -45,7 +28,7 @@ export function withThemeHOC<T>(props: HOCArguments | undefined = {}) {
     }: IComponentWithTheme<T>): React.ReactElement {
       return (
         <Component
-          className={cnTheme({ color, control, size, font, space }, [className])}
+          className={cnTheme({ color, control, size, font, space, gap }, [className])}
           {...otherProps}
         />
       );
@@ -54,16 +37,8 @@ export function withThemeHOC<T>(props: HOCArguments | undefined = {}) {
 }
 
 export function Theme(props: ITheme): React.ReactElement {
-  const {
-    color = 'gpnDefault',
-    control = 'gpnDefault',
-    size = 'gpnDefault',
-    font = 'gpnDefault',
-    space = 'gpnDefault',
-    ...otherProps
-  } = props;
-
-  const DivWithTheme = withThemeHOC({ color, control, size, font, space })('div');
+  const { color, control, size, font, space, gap, ...otherProps } = props;
+  const DivWithTheme = withThemeHOC({ color, control, size, font, space, gap })('div');
 
   return <DivWithTheme {...otherProps} />;
 }

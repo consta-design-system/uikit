@@ -1,11 +1,23 @@
+import './styles.css';
+import '../../utils/whitepaper/whitepaper.css';
+import '../Theme/Theme.css';
+import '../Theme/_color/Theme_color_gpnDark.css';
+import '../Theme/_color/Theme_color_gpnDefault.css';
+import '../Theme/_color/Theme_color_gpnDisplay.css';
+import '../Theme/_control/Theme_control_gpnDefault.css';
+import '../Theme/_font/theme_font_gpnDefault.css';
+import '../Theme/_size/Theme_size_gpnDefault.css';
+import '../Theme/_space/Theme_space_gpnDefault.css';
+import '../Theme/_gap/Theme_gap_l.css';
+import '../Theme/_gap/Theme_gap_m.css';
+import '../Theme/_gap/Theme_gap_s.css';
+
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import './styles.css';
-
 import ColorPreview from './ColorPreview';
 
-storiesOf('Themes', module).add('Цвета', () => (
+storiesOf('Theme', module).add('Цвета', () => (
   <div className="tpl-layout">
     <div className="tpl-layout__content">
       <div className="tpl-layout__container tpl-layout__container_size_m">
