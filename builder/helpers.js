@@ -72,7 +72,7 @@ const createIconStories = async (svgComponents, src) => {
 };
 
 const iconsTransformed = async (ignore, src) => {
-  const iconParse = async ({ componentName, path, pathOutdir }) => {
+  const iconParse = async ({ componentName, path, pathOutdir, fileName }) => {
     const svg = await readFile(path, 'utf8');
     const jsCode = await svgr(
       svg,
@@ -84,10 +84,11 @@ const iconsTransformed = async (ignore, src) => {
       },
       { componentName }
     );
-    const jsPatch = `${pathOutdir}/${componentName}.tsx`;
+    const jsPatch = `${pathOutdir}/${fileName}.tsx`;
     await ensureDir(dirname(jsPatch));
     await writeFile(jsPatch, jsCode);
   };
+
   const createComponent = async ({ componentName, pathOutdir, templatePath }) => {
     const template = await readFile(templatePath, 'utf8');
     const jsCode = template.replace(/#componentName#/g, componentName);
@@ -99,33 +100,38 @@ const iconsTransformed = async (ignore, src) => {
 
   const svgFiles = await fg([`${src}/icons/**/*.{svg}`], { ignore });
 
-  const test = /.\/src\/icons\/(.+)\/(.+).svg/;
+  const test = /.\/src\/icons\/(.+)\/(.+)_size_(.+).svg/;
   const svgComponents = {};
 
   svgFiles.forEach((fileName) => {
     if (test.test(fileName)) {
-      const [file, componentName, size] = test.exec(fileName);
-      if (!svgComponents[componentName]) {
-        svgComponents[componentName] = {};
+      const [file, componentName, svgName, size] = test.exec(fileName);
+      if (componentName === svgName) {
+        if (!svgComponents[componentName]) {
+          svgComponents[componentName] = {};
+        }
+        svgComponents[componentName][size.toLowerCase()] = file;
       }
-      svgComponents[componentName][size.toLowerCase()] = file;
     }
   });
 
   Object.keys(svgComponents).forEach(async (componentName) => {
     if (iconComponentIsValid(svgComponents[componentName])) {
       await iconParse({
-        componentName: 'Xs',
+        componentName: `${componentName}SizeXs`,
+        fileName: `${componentName}_size_xs`,
         path: svgComponents[componentName].xs,
         pathOutdir: `./src/icons/${componentName}/`,
       });
       await iconParse({
-        componentName: 'S',
+        componentName: `${componentName}SizeS`,
+        fileName: `${componentName}_size_s`,
         path: svgComponents[componentName].s,
         pathOutdir: `./src/icons/${componentName}/`,
       });
       await iconParse({
-        componentName: 'M',
+        componentName: `${componentName}SizeM`,
+        fileName: `${componentName}_size_m`,
         path: svgComponents[componentName].m,
         pathOutdir: `./src/icons/${componentName}/`,
       });
@@ -133,52 +139,6 @@ const iconsTransformed = async (ignore, src) => {
         componentName,
         pathOutdir: `./src/icons/${componentName}/`,
         templatePath: './builder/templates/Icon.js.template',
-      });
-    }
-  });
-  await createIconStories(svgComponents, src);
-};
-
-const iconsRenamerToBem = async (ignore, src) => {
-  const iconParse = async ({ componentName, path, pathOutdir }) => {
-    const svg = await readFile(path, 'utf8');
-    const jsPatch = `${pathOutdir}/${componentName}.svg`;
-    await ensureDir(dirname(jsPatch));
-    await writeFile(jsPatch, svg);
-    await remove(path);
-  };
-
-  const svgFiles = await fg([`${src}/icons/**/*.{svg}`], { ignore });
-
-  const test = /.\/src\/icons\/(.+)\/(.+).svg/;
-  const svgComponents = {};
-
-  svgFiles.forEach((fileName) => {
-    if (test.test(fileName)) {
-      const [file, componentName, size] = test.exec(fileName);
-      if (!svgComponents[componentName]) {
-        svgComponents[componentName] = {};
-      }
-      svgComponents[componentName][size.toLowerCase()] = file;
-    }
-  });
-
-  Object.keys(svgComponents).forEach(async (componentName) => {
-    if (iconComponentIsValid(svgComponents[componentName])) {
-      await iconParse({
-        componentName: `${componentName}_size_xs`,
-        path: svgComponents[componentName].xs,
-        pathOutdir: `./src/icons/${componentName}/`,
-      });
-      await iconParse({
-        componentName: `${componentName}_size_s`,
-        path: svgComponents[componentName].s,
-        pathOutdir: `./src/icons/${componentName}/`,
-      });
-      await iconParse({
-        componentName: `${componentName}_size_xs`,
-        path: svgComponents[componentName].m,
-        pathOutdir: `./src/icons/${componentName}/`,
       });
     }
   });
@@ -458,5 +418,4 @@ module.exports = {
   generateReExports,
   iconsTransformed,
   copyPackageJson,
-  iconsRenamerToBem,
 };

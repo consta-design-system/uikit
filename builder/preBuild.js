@@ -33,14 +33,8 @@ class GenerateCommand extends Command {
     const { srcPath, ignore = [], afterBuild } = config;
 
     try {
-      // TODO: separate commands
-      // await Promise.all([
-      //   iconsTransformed(ignore, srcPath).then(() =>
-      //     this.log(logSymbols.success, 'icon copied & transformed')
-      //   ),
-      // ]);
       await Promise.all([
-        iconsRenamerToBem(ignore, srcPath).then(() =>
+        iconsTransformed(ignore, srcPath).then(() =>
           this.log(logSymbols.success, 'icon copied & transformed')
         ),
       ]);

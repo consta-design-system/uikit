@@ -1,12 +1,12 @@
 import { BaseIconHoc } from '../BaseIconHoc/BaseIconHoc';
 import { Icon } from '../Icon/Icon';
-import M from './M';
-import S from './S';
-import Xs from './Xs';
+import IconHamburgerSizeM from './IconHamburger_size_m';
+import IconHamburgerSizeS from './IconHamburger_size_s';
+import IconHamburgerSizeXs from './IconHamburger_size_xs';
 
 export const IconHamburger = BaseIconHoc({
-  m: M,
-  s: S,
-  xs: Xs,
+  m: IconHamburgerSizeM,
+  s: IconHamburgerSizeS,
+  xs: IconHamburgerSizeXs,
   name: 'IconHamburger',
 })(Icon);
