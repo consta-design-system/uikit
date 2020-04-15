@@ -458,4 +458,5 @@ module.exports = {
   generateReExports,
   iconsTransformed,
   copyPackageJson,
+  iconsRenamerToBem,
 };
