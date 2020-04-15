@@ -1,13 +1,13 @@
 import './Informer.css';
-import '../../themes/theme_color_gpn-default.css';
-import '../../themes/theme_color_gpn-dark.css';
+import '../Theme/_color/Theme_color_gpnDefault.css';
+import '../Theme/_color/Theme_color_gpnDark.css';
 
 import React, { Fragment } from 'react';
 import { classnames } from '@bem-react/classnames';
 import { cn } from '../../utils/bem';
-import { IIcon } from '../Icon';
+import { IIcon } from '../../icons/Icon/Icon';
 import { Text } from '../Text/Text';
-import * as wp from '../../utils/whitepaper/whitepaper';
+import { cnTheme } from '../Theme/Theme';
 
 export type InformerPropView = 'filled' | 'bordered';
 export type InformerPropStatus = 'system' | 'alert' | 'warning' | 'success';
@@ -30,8 +30,8 @@ export const Informer: React.FC<IInformer> = (props) => {
   const withIcon = !!icon;
   const _className =
     status != 'system' && view == 'filled'
-      ? classnames(className, wp.theme({ color: 'gpn-dark' }))
-      : classnames(className, wp.theme({ color: 'gpn-default' }));
+      ? classnames(className, cnTheme({ color: 'gpn-dark' }))
+      : classnames(className, cnTheme({ color: 'gpn-default' }));
 
   return (
     <div

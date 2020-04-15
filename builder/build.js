@@ -69,7 +69,7 @@ class GenerateCommand extends Command {
     this.log('starting to compile ts to js with commonJS');
     try {
       await Promise.all([
-        execAsync(`npx tsc -p ${tsconfig} --outDir ${distEsSrc}`),
+        execAsync(`npx tsc -p ${tsconfig} --target es6 --outDir ${distEsSrc}`),
         execAsync(`npx tsc -p ${tsconfig} --module commonjs --outDir ${distSrc}`),
       ]);
     } catch (err) {
@@ -83,7 +83,6 @@ class GenerateCommand extends Command {
     try {
       // TODO: separate commands
       await copyPackageJson(distPath);
-
       await Promise.all([
         transformCSS(ignore, srcPath, [distSrc, distEsSrc], { namespace, naming, postcss }).then(
           () => this.log(logSymbols.success, 'css copied & transformed')
@@ -91,13 +90,13 @@ class GenerateCommand extends Command {
         copyAssets(ignore, srcPath, [distSrc, distEsSrc]).then(() =>
           this.log(logSymbols.success, 'svg & png copied')
         ),
-        generateReExports(ignore, srcPath, [jsSrc, esSrc], distPath).then(() =>
-          this.log(logSymbols.success, 'components reExports generated!')
-        ),
-        generateReExports(ignore, srcPath, [jsSrc, esSrc], distPath, 'icons').then(() =>
-          this.log(logSymbols.success, 'icons reExports generated!')
-        ),
       ]);
+      await generateReExports(ignore, srcPath, [jsSrc, esSrc], distPath).then(() =>
+        this.log(logSymbols.success, 'components reExports generated!')
+      );
+      await generateReExports(ignore, srcPath, [jsSrc, esSrc], distPath, 'icons').then(() =>
+        this.log(logSymbols.success, 'icons reExports generated!')
+      );
       await this.safeInvokeHook(afterBuild);
     } catch (err) {
       this.error(err);
@@ -119,7 +118,7 @@ GenerateCommand.flags = {
 
 GenerateCommand.description = `Generate ts dist package
 ...
-Write now works only with @yandex-lego/components
+Write now works only with @yandex-lego/components =)
 `;
 
 GenerateCommand.run();

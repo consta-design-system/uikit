@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { cnChoiceGroup, ChoiceGroupPropSize } from '../ChoiceGroup';
 import { ItemProps } from '../../BaseCheckGroupField/BaseCheckGroupField';
-import { IconPropSize, IIcon } from '../../Icon';
+import { IconPropSize, IIcon } from '../../../icons/Icon/Icon';
 
 export type ChoiceGroupItemProps = {
   icon?: React.FC<IIcon>;

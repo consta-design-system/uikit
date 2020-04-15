@@ -1,10 +1,13 @@
 import './Badge.css';
+import '../Theme/_color/Theme_color_gpnDefault.css';
+import '../Theme/_color/Theme_color_gpnDark.css';
 
 import React from 'react';
 import { classnames } from '@bem-react/classnames';
 import { cn } from '../../utils/bem';
 import * as wp from '../../utils/whitepaper/whitepaper';
-import { IIcon } from '../Icon';
+import { IIcon } from '../../icons/Icon/Icon';
+import { cnTheme } from '../Theme/Theme';
 
 export type BadgeProps = {
   size?: 's' | 'm' | 'l';
@@ -57,8 +60,8 @@ export function Badge<T>(props: IBadge<T>) {
   const Component = as;
   const _className =
     status != 'system' && view == 'filled'
-      ? classnames(className, wp.theme({ color: 'gpn-dark' }))
-      : classnames(className, wp.theme({ color: 'gpn-default' }));
+      ? classnames(className, cnTheme({ color: 'gpnDark' }))
+      : classnames(className, cnTheme({ color: 'gpnDefault' }));
   const Icon = icon;
   const withIcon = !!icon;
 

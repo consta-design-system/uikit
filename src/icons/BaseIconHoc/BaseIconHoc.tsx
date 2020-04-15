@@ -1,5 +1,5 @@
 import React from 'react';
-import { IIcon, cnIcon } from '../Icon/Icon';
+import { IIcon, cnIcon, IconPropSize } from '../Icon/Icon';
 
 export type SizeComponent = React.FC<React.SVGProps<SVGSVGElement>>;
 export type BaseIconHocArguments = {
@@ -12,7 +12,7 @@ export type BaseIconHocArguments = {
 export function BaseIconHoc({ m, s, xs, name }: BaseIconHocArguments) {
   return function(IconComponent: React.FC<IIcon>) {
     return function(props: IIcon) {
-      function getSvgBySize(size) {
+      function getSvgBySize(size: IconPropSize | undefined) {
         switch (size) {
           case 'xs':
             return xs;

@@ -2,7 +2,7 @@ import './Header-SearchBar.css';
 
 import React from 'react';
 import { TextField, TextFieldPropValue, TextFieldPropOnChange } from '../../TextField/TextField';
-import { IconSearch } from '../../Icon/icons/Search';
+import { IconSearch } from '../../../icons/IconSearch/IconSearch';
 import { cnHeader } from '../Header';
 
 export type SearchBarPropValue = TextFieldPropValue;

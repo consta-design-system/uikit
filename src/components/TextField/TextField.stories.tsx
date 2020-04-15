@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { boolean, text, withKnobs, number, select } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import Icon from '../Icon/icons/Photo';
+import { IconPhoto } from '../../icons/IconPhoto/IconPhoto';
 import { TextField } from './TextField';
 
 const knobs = () => ({
@@ -79,13 +79,13 @@ function Stories({
 
   const leftSideSelect = {
     text: leftSideText,
-    icon: Icon,
+    icon: IconPhoto,
     false: null,
   };
 
   const rightSideSelect = {
     text: rightSideText,
-    icon: Icon,
+    icon: IconPhoto,
     false: null,
   };
 

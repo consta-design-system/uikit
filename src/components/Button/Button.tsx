@@ -2,7 +2,7 @@ import './Button.css';
 
 import React, { Fragment } from 'react';
 import { cn } from '../../utils/bem';
-import { IIcon, IconPropSize } from '../Icon';
+import { IIcon, IconPropSize } from '../../icons/Icon/Icon';
 export type ButtonPropSize = 'xs' | 's' | 'm' | 'l';
 export type ButtonPropView = 'clear' | 'ghost' | 'primary' | 'secondary';
 export type ButtonPropWidth = 'full' | 'default';

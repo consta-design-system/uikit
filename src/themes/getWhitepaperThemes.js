@@ -5,8 +5,8 @@ const { DEFAULT_THEME } = require('./defaultTheme');
 const DEFAULT_COLOR = '#aaaaaa';
 const COLOR_THEME_MOD = 'color';
 const THEME_COLOR_REGEXP = /\$color-base-essential: (.+);/;
-const THEMES_PATH = __dirname;
-const REGEXP_THEME_FILE_NAME = /(theme_(.+)_(.+)).css/;
+const THEMES_PATH = __dirname + '/../components/Theme/_color';
+const REGEXP_THEME_FILE_NAME = /(Theme_(.+)_(.+)).css/;
 
 const getThemeProps = (filename) => {
   const [, className, themeMod, themeName] = filename.match(REGEXP_THEME_FILE_NAME);
@@ -46,13 +46,13 @@ const getWhitepaperThemes = () => {
             default: themeName === DEFAULT_THEME,
             color: DEFAULT_COLOR,
             class: {
-              breakpoint: 'theme_breakpoint_default',
-              control: 'theme_control_gpn-default',
-              color: 'theme_color_default',
-              font: 'theme_font_gpn-default',
-              gap: 'theme_gap_medium',
-              size: 'theme_size_gpn-default',
-              space: 'theme_space_gpn-default',
+              breakpoint: 'Theme_breakpoint_default',
+              control: 'Theme_control_gpnDefault',
+              color: 'Theme_colorDefault',
+              font: 'Theme_font_gpnDefault',
+              gap: 'Theme_gap_m',
+              size: 'Theme_size_gpnDefault',
+              space: 'Theme_space_gpnDefault',
             },
           };
         }
