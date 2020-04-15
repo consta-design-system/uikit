@@ -1,10 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import '../Common/styles.css';
 import './styles.css';
 
-import ColorPreview from '../_bricks/ColorPreview/index';
+import ColorPreview from './ColorPreview';
 
 storiesOf('Themes', module).add('Цвета', () => (
   <div className="tpl-layout">

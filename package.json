@@ -12,9 +12,6 @@
     "react-textarea-autosize": "^7.1.2",
     "tslib": "^1.11.1"
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.es.js",
-  "types": "./dist/components/index.d.ts",
   "files": [
     "dist",
     "src/themes/*.css"
@@ -23,7 +20,6 @@
     "access": "public"
   },
   "scripts": {
-    "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "start": "start-storybook -p 6006 -s public",
     "build:storybook": "build-storybook -s public -o build/storybook",
@@ -62,10 +58,6 @@
     "*.{json,md}": [
       "prettier --write",
       "git add"
-    ],
-    "*.svg": [
-      "svgo --config=src/config/svgo.config.json",
-      "git add"
     ]
   },
   "devDependencies": {
@@ -96,7 +88,6 @@
     "@storybook/addons": "^5.2.5",
     "@storybook/react": "^5.2.5",
     "@svgr/core": "^5.3.1",
-    "@svgr/webpack": "^5.3.1",
     "@svgr/plugin-jsx": "^5.3.1",
     "@svgr/plugin-prettier": "^5.3.1",
     "@svgr/plugin-svgo": "^5.3.0",
@@ -109,20 +100,14 @@
     "@types/react-collapse": "^5.0.0",
     "@types/react-dom": "^16.8.4",
     "@types/storybook__react": "^4.0.2",
-    "@typescript-eslint/eslint-plugin": "^1.11.0",
-    "@typescript-eslint/parser": "^1.11.0",
-    "@typescript-eslint/typescript-estree": "^1.11.0",
     "autoprefixer": "^9.7.4",
     "babel-loader": "8.0.5",
     "concurrently": "^4.1.1",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.14.0",
     "eslint-config-prettier": "^5.0.0",
     "eslint-config-react-app": "^4.0.1",
     "eslint-plugin-prettier": "^3.1.0",
     "fast-glob": "^3.2.2",
     "fs-extra": "^9.0.0",
-    "husky": "^2.4.1",
     "jest-enzyme": "^7.0.2",
     "lint-staged": "^8.2.1",
     "log-symbols": "^3.0.0",
@@ -133,30 +118,17 @@
     "postcss-nested": "^4.1.2",
     "postcss-simple-vars": "^5.0.2",
     "prettier": "^1.18.2",
-    "react-app-rewire-postcss": "^3.0.2",
-    "react-app-rewired": "^2.1.3",
     "react-scripts": "3.0.1",
     "react-test-renderer": "^16.8.6",
     "require-context.macro": "^1.0.4",
-    "rollup": "^1.20.3",
-    "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-json": "^4.0.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-peer-deps-external": "^2.2.0",
-    "rollup-plugin-postcss": "^2.0.3",
-    "rollup-plugin-terser": "^5.1.1",
-    "rollup-plugin-typescript2": "^0.24.0",
-    "rollup-plugin-visualizer": "^2.5.4",
     "storybook-addon-themes": "^5.2.0",
     "stylelint": "^10.1.0",
     "stylelint-config-prettier": "^5.2.0",
     "stylelint-config-standard": "^18.3.0",
     "stylelint-prettier": "^1.1.1",
-    "svgo": "^1.3.0",
     "ts-essentials": "^3.0.0",
     "ts-node": "^8.8.2",
-    "typescript": "^3.7.3"
+    "typescript": "^3.8.3"
   },
   "homepage": "https://gpn-prototypes.github.io/ui-kit",
   "jest": {

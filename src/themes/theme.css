@@ -24,7 +24,7 @@
 
 .theme *::-webkit-scrollbar-thumb {
   background-color: var(--color-scroll-thumb);
-  border-radius: 4px; 
+  border-radius: 4px;
 }
 
 .theme *::-webkit-scrollbar-thumb:hover {

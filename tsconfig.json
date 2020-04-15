@@ -2,7 +2,6 @@
   "compilerOptions": {
     "declaration": true,
     "noImplicitAny": false,
-    "outDir": "./dist/__internal__",
     "lib": ["dom", "dom.iterable", "esnext"],
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -18,5 +17,11 @@
     "importHelpers": true
   },
   "include": ["./src/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "./src/__tests__/*",
+    "./src/storybook-features/*",
+    "./src/**/*.stories/**",
+    "./src/**/*.stories.*"
+  ]
 }

@@ -57,7 +57,7 @@ export type TextProps = {
   children?: React.ReactNode;
 };
 
-export type IText<T> = TextProps &
+export type IText<T = {}> = TextProps &
   (Omit<React.HTMLAttributes<Element>, keyof TextProps> | Omit<T, keyof TextProps>);
 
 export const cnText = cn('Text');

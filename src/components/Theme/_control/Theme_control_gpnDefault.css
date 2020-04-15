@@ -1,0 +1,18 @@
+.Theme_control_gpnDefault {
+  --control-radius: 4px; /* Основной радиус скругления контроллов */
+  --control-border-width: 1px; /* Основная толщина контроллов */
+  --control-height-l: var(--space-4xl);
+  --control-height-m: var(--space-3xl);
+  --control-height-s: var(--space-2xl);
+  --control-height-xs: var(--space-xl);
+  --control-box-size-m: var(--space-m);
+  --control-box-size-l: var(--space-l);
+  --control-space-l: var(--space-xl);
+  --control-space-m: var(--space-l);
+  --control-space-s: var(--space-m);
+  --control-space-xs: var(--space-s);
+  --control-text-size-l: var(--size-text-l);
+  --control-text-size-m: var(--size-text-m);
+  --control-text-size-s: var(--size-text-s);
+  --control-text-size-xs: var(--size-text-xs);
+}

@@ -1,0 +1,26 @@
+import React from 'react';
+import { withKnobs } from '@storybook/addon-knobs';
+import { storiesOf } from '@storybook/react';
+
+import { Button } from '../Button/Button';
+import { Text, IText } from '../Text/Text';
+
+import { ThemeDefault, withThemeHOC, Theme } from './Theme';
+
+const TextWithDarkTheme = withThemeHOC<IText>({ color: 'gpnDark' })(Text);
+
+storiesOf('Theme', module)
+  .addDecorator(withKnobs)
+  .add('Theme', () => (
+    <ThemeDefault>
+      <Button label="кнопка" />
+
+      <Text> Текст </Text>
+
+      <TextWithDarkTheme> Текст </TextWithDarkTheme>
+
+      <Theme className="sdf" color="gpnDark">
+        <Text> Текст </Text>
+      </Theme>
+    </ThemeDefault>
+  ));

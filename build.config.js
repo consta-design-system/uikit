@@ -22,6 +22,7 @@ module.exports = {
     'src/components/Icon/**',
     'src/components/Popover/**',
     'src/components/Textarea/**',
+    'src/components/ThemePreview/**',
     'src/icons/BaseIconHoc/**',
   ],
   tsconfig: 'tsconfig.json',

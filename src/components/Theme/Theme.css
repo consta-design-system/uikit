@@ -1,0 +1,32 @@
+.Theme {
+  --graphics-size-xs: 12px;
+  --graphics-size-s: 16px;
+  --graphics-size-m: 24px;
+  --graphics-size-l: 32px;
+  --graphics-size-xl: 40px;
+  --graphics-size-2xl: 60px;
+  --graphics-size-3xl: 80px;
+  --graphics-size-4xl: 120px;
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background-color: var(--color-scroll-bg);
+  }
+
+  *::-webkit-scrollbar-corner {
+    background-color: var(--color-scroll-bg);
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--color-scroll-thumb);
+    border-radius: 4px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-scroll-thumb-hover);
+  }
+}

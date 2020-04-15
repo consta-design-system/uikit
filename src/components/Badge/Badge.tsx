@@ -4,7 +4,7 @@ import React from 'react';
 import { classnames } from '@bem-react/classnames';
 import { cn } from '../../utils/bem';
 import * as wp from '../../utils/whitepaper/whitepaper';
-import { IIcon } from '../Icon';
+import { IIcon } from '../../icons/Icon/Icon';
 
 export type BadgeProps = {
   size?: 's' | 'm' | 'l';
