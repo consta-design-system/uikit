@@ -47,10 +47,6 @@ const transformCSS = async (ignore, src, distPaths, options) => {
   });
 };
 
-const iconComponentIsValid = (obj) => {
-  return !!(obj.m && obj.s && obj.xs);
-};
-
 const createIconStories = async (svgComponents, src) => {
   const templatePath = './builder/templates/Icon.stories.tsx.template';
   const template = await readFile(templatePath, 'utf8');
@@ -71,31 +67,35 @@ const createIconStories = async (svgComponents, src) => {
   await writeFile(jsPatch, jsCode);
 };
 
+const iconParse = async ({ componentName, path, pathOutdir, fileName }) => {
+  const svg = await readFile(path, 'utf8');
+  const jsCode = await svgr(
+    svg,
+    {
+      plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx', '@svgr/plugin-prettier'],
+      typescript: true,
+      dimensions: false,
+      svgo: true,
+    },
+    { componentName }
+  );
+  const jsPatch = `${pathOutdir}/${fileName}.tsx`;
+  await ensureDir(dirname(jsPatch));
+  await writeFile(jsPatch, jsCode);
+};
+
+const createComponent = async ({ componentName, pathOutdir, templatePath }) => {
+  const template = await readFile(templatePath, 'utf8');
+  const jsCode = template.replace(/#componentName#/g, componentName);
+
+  const jsPatch = `${pathOutdir}/${componentName}.tsx`;
+  await ensureDir(dirname(jsPatch));
+  await writeFile(jsPatch, jsCode);
+};
+
 const iconsTransformed = async (ignore, src) => {
-  const iconParse = async ({ componentName, path, pathOutdir, fileName }) => {
-    const svg = await readFile(path, 'utf8');
-    const jsCode = await svgr(
-      svg,
-      {
-        plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx', '@svgr/plugin-prettier'],
-        typescript: true,
-        dimensions: false,
-        svgo: true,
-      },
-      { componentName }
-    );
-    const jsPatch = `${pathOutdir}/${fileName}.tsx`;
-    await ensureDir(dirname(jsPatch));
-    await writeFile(jsPatch, jsCode);
-  };
-
-  const createComponent = async ({ componentName, pathOutdir, templatePath }) => {
-    const template = await readFile(templatePath, 'utf8');
-    const jsCode = template.replace(/#componentName#/g, componentName);
-
-    const jsPatch = `${pathOutdir}/${componentName}.tsx`;
-    await ensureDir(dirname(jsPatch));
-    await writeFile(jsPatch, jsCode);
+  const iconComponentIsValid = (obj) => {
+    return !!(obj.m && obj.s);
   };
 
   const svgFiles = await fg([`${src}/icons/**/*.{svg}`], { ignore });
@@ -139,6 +139,52 @@ const iconsTransformed = async (ignore, src) => {
         componentName,
         pathOutdir: `./src/icons/${componentName}/`,
         templatePath: './builder/templates/Icon.js.template',
+      });
+    }
+  });
+  await createIconStories(svgComponents, src);
+};
+
+const iconsFileTransformed = async (ignore, src) => {
+  const iconComponentIsValid = (obj) => {
+    return !!(obj.m && obj.s && obj.xs);
+  };
+
+  const svgFiles = await fg([`${src}/fileIcons/**/*.{svg}`], { ignore });
+
+  const test = /.\/src\/fileIcons\/(.+)\/(.+)_size_(.+).svg/;
+  const svgComponents = {};
+
+  svgFiles.forEach((fileName) => {
+    if (test.test(fileName)) {
+      const [file, componentName, svgName, size] = test.exec(fileName);
+      if (componentName === svgName) {
+        if (!svgComponents[componentName]) {
+          svgComponents[componentName] = {};
+        }
+        svgComponents[componentName][size.toLowerCase()] = file;
+      }
+    }
+  });
+
+  Object.keys(svgComponents).forEach(async (componentName) => {
+    if (iconComponentIsValid(svgComponents[componentName])) {
+      await iconParse({
+        componentName: `${componentName}SizeS`,
+        fileName: `${componentName}_size_s`,
+        path: svgComponents[componentName].s,
+        pathOutdir: `./src/icons/${componentName}/`,
+      });
+      await iconParse({
+        componentName: `${componentName}SizeM`,
+        fileName: `${componentName}_size_m`,
+        path: svgComponents[componentName].m,
+        pathOutdir: `./src/icons/${componentName}/`,
+      });
+      await createComponent({
+        componentName,
+        pathOutdir: `./src/icons/${componentName}/`,
+        templatePath: './builder/templates/IconFile.js.template',
       });
     }
   });
@@ -418,4 +464,5 @@ module.exports = {
   generateReExports,
   iconsTransformed,
   copyPackageJson,
+  iconsFileTransformed,
 };

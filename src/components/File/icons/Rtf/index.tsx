@@ -42,7 +42,7 @@ const SVG_M = (
   </React.Fragment>
 );
 
-const Rtf = props => {
+const Rtf = (props) => {
   let svg;
 
   if (props.size === 's') svg = SVG_S;

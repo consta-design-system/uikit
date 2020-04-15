@@ -8,7 +8,7 @@ type CommonProps = {
   className?: string;
 };
 
-const File: React.FC<CommonProps> = props => {
+const File: React.FC<CommonProps> = (props) => {
   const { size, children, className } = props;
   let width, height;
 
