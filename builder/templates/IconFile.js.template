@@ -1,9 +1,9 @@
 import { BaseFileIconHoc } from '../BaseFileIconHoc/BaseFileIconHoc';
-import { IconFile } from '../IconIconFile/IconIconFile';
+import { IconFile } from '../IconFile/IconFile';
 import #componentName#SizeM from './#componentName#_size_m';
 import #componentName#SizeS from './#componentName#_size_s';
 
-export const #componentName# = BaseIconHoc({
+export const #componentName# = BaseFileIconHoc({
   m: #componentName#SizeM,
   s: #componentName#SizeS,
   name: '#componentName#',

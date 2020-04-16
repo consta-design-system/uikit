@@ -17,6 +17,14 @@ const enhancedReactNaming = {
 
 const nestedModernMatch = createMatch(enhancedReactNaming);
 
+const iconFileComponentIsValid = (obj) => {
+  return !!(obj.m && obj.s);
+};
+
+const iconComponentIsValid = (obj) => {
+  return !!(obj.m && obj.s && obj.xs);
+};
+
 const copyPackageJson = async (distPaths) => {
   const file = await readFile('package.json', 'utf8');
   const outPaths = `${distPaths}/package.json`;
@@ -48,7 +56,7 @@ const transformCSS = async (ignore, src, distPaths, options) => {
 };
 
 const createIconStories = async (svgComponents, src) => {
-  const templatePath = './builder/templates/Icon.stories.tsx.template';
+  const templatePath = './builder/templates/Icons.stories.tsx.template';
   const template = await readFile(templatePath, 'utf8');
 
   let imports = '';
@@ -63,6 +71,26 @@ const createIconStories = async (svgComponents, src) => {
 
   const jsCode = template.replace(/#imports#/g, imports).replace(/#items#/g, items);
   const jsPatch = `${src}/icons/Icon/Icons.stories/Icons.stories.tsx`;
+  await ensureDir(dirname(jsPatch));
+  await writeFile(jsPatch, jsCode);
+};
+
+const createFileIconsStories = async (svgComponents, src) => {
+  const templatePath = './builder/templates/FileIcons.stories.tsx.template';
+  const template = await readFile(templatePath, 'utf8');
+
+  let imports = '';
+  let items = '';
+
+  Object.keys(svgComponents).forEach(async (componentName) => {
+    if (iconFileComponentIsValid(svgComponents[componentName])) {
+      imports += `import { ${componentName} } from '../../${componentName}/${componentName}';\n`;
+      items += `<IconsItem name="${componentName}" icon={${componentName}} {...defaultKnobs()} />\n`;
+    }
+  });
+
+  const jsCode = template.replace(/#imports#/g, imports).replace(/#items#/g, items);
+  const jsPatch = `${src}/fileIcons/IconFile/FileIcons.stories/FileIcons.stories.tsx`;
   await ensureDir(dirname(jsPatch));
   await writeFile(jsPatch, jsCode);
 };
@@ -94,10 +122,6 @@ const createComponent = async ({ componentName, pathOutdir, templatePath }) => {
 };
 
 const iconsTransformed = async (ignore, src) => {
-  const iconComponentIsValid = (obj) => {
-    return !!(obj.m && obj.s);
-  };
-
   const svgFiles = await fg([`${src}/icons/**/*.{svg}`], { ignore });
 
   const test = /.\/src\/icons\/(.+)\/(.+)_size_(.+).svg/;
@@ -146,10 +170,6 @@ const iconsTransformed = async (ignore, src) => {
 };
 
 const iconsFileTransformed = async (ignore, src) => {
-  const iconComponentIsValid = (obj) => {
-    return !!(obj.m && obj.s && obj.xs);
-  };
-
   const svgFiles = await fg([`${src}/fileIcons/**/*.{svg}`], { ignore });
 
   const test = /.\/src\/fileIcons\/(.+)\/(.+)_size_(.+).svg/;
@@ -168,27 +188,27 @@ const iconsFileTransformed = async (ignore, src) => {
   });
 
   Object.keys(svgComponents).forEach(async (componentName) => {
-    if (iconComponentIsValid(svgComponents[componentName])) {
+    if (iconFileComponentIsValid(svgComponents[componentName])) {
       await iconParse({
         componentName: `${componentName}SizeS`,
         fileName: `${componentName}_size_s`,
         path: svgComponents[componentName].s,
-        pathOutdir: `./src/icons/${componentName}/`,
+        pathOutdir: `./src/fileIcons/${componentName}/`,
       });
       await iconParse({
         componentName: `${componentName}SizeM`,
         fileName: `${componentName}_size_m`,
         path: svgComponents[componentName].m,
-        pathOutdir: `./src/icons/${componentName}/`,
+        pathOutdir: `./src/fileIcons/${componentName}/`,
       });
       await createComponent({
         componentName,
-        pathOutdir: `./src/icons/${componentName}/`,
+        pathOutdir: `./src/fileIcons/${componentName}/`,
         templatePath: './builder/templates/IconFile.js.template',
       });
     }
   });
-  await createIconStories(svgComponents, src);
+  await createFileIconsStories(svgComponents, src);
 };
 
 const copyAssets = async (ignore, src, distPaths) => {

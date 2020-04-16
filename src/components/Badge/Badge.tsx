@@ -22,19 +22,8 @@ export type BadgeProps = {
   as?: React.ElementType;
 };
 
-declare type excludeHTMLAttributes =
-  | 'size'
-  | 'view'
-  | 'status'
-  | 'form'
-  | 'minified'
-  | 'icon'
-  | 'innerRef'
-  | 'label'
-  | 'className';
-
 export type IBadge<T> = BadgeProps &
-  (Omit<React.HTMLAttributes<Element>, excludeHTMLAttributes> | Omit<T, excludeHTMLAttributes>);
+  (Omit<React.HTMLAttributes<Element>, keyof BadgeProps> | Omit<T, keyof BadgeProps>);
 
 export const cnBadge = cn('Badge');
 

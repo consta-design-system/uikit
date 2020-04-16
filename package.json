@@ -29,7 +29,7 @@
     "pre-push": "yarn run tsc-dry-run",
     "pre-commit": "yarn run lint-staged",
     "build-old": "rollup -c",
-    "build": "node builder/build.js --config=./build.config.js",
+    "build": "rm -rf dist && node builder/build.js --config=./build.config.js",
     "pre-build": "node builder/preBuild.js --config=./build.config.js"
   },
   "browserslist": [

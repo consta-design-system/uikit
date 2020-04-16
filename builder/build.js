@@ -97,6 +97,9 @@ class GenerateCommand extends Command {
       await generateReExports(ignore, srcPath, [jsSrc, esSrc], distPath, 'icons').then(() =>
         this.log(logSymbols.success, 'icons reExports generated!')
       );
+      await generateReExports(ignore, srcPath, [jsSrc, esSrc], distPath, 'fileIcons').then(() =>
+        this.log(logSymbols.success, 'fileIcons reExports generated!')
+      );
       await this.safeInvokeHook(afterBuild);
     } catch (err) {
       this.error(err);
