@@ -373,8 +373,8 @@ const generateReExports = (
         await writeFile(
           join(platformDir, 'package.json'),
           getPackageTemplate({
-            name: `${componentName}/${platform}`,
-            // version: pack.version,
+            name: `${pack.name}/${componentName}`,
+            version: pack.version,
           })
         );
 
@@ -406,9 +406,7 @@ const generateReExports = (
          * Складываем bundle для платформы, если файл представлен
          */
 
-        // const bundleFilesTest =`${src}/components/${componentName}/${componentName}.bundle/${platform}.{ts,tsx}`
         const bundleFilesTest = `${src}/${componentFolder}/${componentName}/${componentName}.{ts,tsx}`;
-
         const bundleFiles = await fg(bundleFilesTest);
 
         if (bundleFiles.length === 1) {
@@ -449,8 +447,8 @@ const generateReExports = (
           writeFile(
             join(bundleDir, 'package.json'),
             getPackageTemplate({
-              name: `${componentName}/${platform}/bundle`,
-              // version: pack.version,
+              name: `${pack.name}/${componentName}`,
+              version: pack.version,
             })
           );
         }

@@ -23,6 +23,7 @@ module.exports = {
     'src/components/BaseCheckGroupField/**',
     'src/icons/BaseIconHoc/**',
     'src/fileIcons/BaseFileIconHoc/**',
+    'src/themes/**',
   ],
   tsconfig: 'tsconfig.json',
   postcssConfig: 'postcss.config.js',

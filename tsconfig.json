@@ -21,6 +21,7 @@
     "./src/__tests__/*",
     "./src/storybook-features/*",
     "./src/**/*.stories/**",
-    "./src/**/*.stories.*"
+    "./src/**/*.stories.*",
+    "./src/themes/*"
   ]
 }
