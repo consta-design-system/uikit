@@ -1,0 +1,61 @@
+.FileIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  &_size {
+    &_s {
+      width: 21px;
+      height: 28px;
+    }
+    &_m {
+      width: 30px;
+      height: 40px;
+    }
+  }
+
+  &-Svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    fill: currentcolor;
+  }
+
+  &.FileIconLoading,
+  &.FileIconUndefined,
+  &.FileIconExe,
+  &.FileIconRar,
+  &.FileIconZip {
+    color: #c3cad1;
+  }
+  &.FileIconAvi,
+  &.FileIconMov,
+  &.FileIconMp4 {
+    color: #fcd55f;
+  }
+  &.FileIconBmp,
+  &.FileIconGif,
+  &.FileIconJpg,
+  &.FileIconPng,
+  &.FileIconPtt,
+  &.FileIconTiff {
+    color: #ed9254;
+  }
+  &.FileIconCsv,
+  &.FileIconXls {
+    color: #69c57f;
+  }
+  &.FileIconDoc,
+  &.FileIconRtf,
+  &.FileIconTxt {
+    color: #75adea;
+  }
+  &.FileIconPdf {
+    color: #fb6a6a;
+  }
+  &.FileIconMp3,
+  &.FileIconWav {
+    color: #b56afb;
+  }
+}

@@ -67,9 +67,6 @@ storiesOf('ChoiceGroup', module)
     const [onlyIconValue, setOnlyIconValue] = useState<Item[] | null>(null);
     const [twoItemsValue, setTwoItemsValue] = useState<Item[] | null>(null);
 
-    console.log(value);
-    console.log(onlyIconValue);
-
     return (
       <Fragment>
         <form className="decorator decorator_indent-b_m">

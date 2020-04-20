@@ -1,0 +1,10 @@
+import { BaseFileIconHoc } from '../BaseFileIconHoc/BaseFileIconHoc';
+import { FileIcon } from '../FileIcon/FileIcon';
+import #componentName#SizeM from './#componentName#_size_m';
+import #componentName#SizeS from './#componentName#_size_s';
+
+export const #componentName# = BaseFileIconHoc({
+  m: #componentName#SizeM,
+  s: #componentName#SizeS,
+  name: '#componentName#',
+})(FileIcon);

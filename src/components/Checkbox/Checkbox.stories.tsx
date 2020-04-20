@@ -14,8 +14,10 @@ storiesOf('Checkbox', module)
   .addDecorator(withKnobs)
   .add('Чекбокс', () => {
     const [checked, setChecked] = useState<boolean>(false);
+
     const handleChange = ({ checked }) => {
       setChecked(checked);
     };
+
     return <Checkbox onChange={handleChange} checked={checked} {...knobs()} />;
   });

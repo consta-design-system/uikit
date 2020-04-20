@@ -1,3 +1,18 @@
+import '../src/utils/whitepaper/whitepaper.css';
+import '../src/components/Theme/Theme.css';
+import '../src/components/Theme/_color/Theme_color_gpnDark.css';
+import '../src/components/Theme/_color/Theme_color_gpnDefault.css';
+import '../src/components/Theme/_color/Theme_color_gpnDisplay.css';
+import '../src/components/Theme/_control/Theme_control_gpnDefault.css';
+import '../src/components/Theme/_font/theme_font_gpnDefault.css';
+import '../src/components/Theme/_size/Theme_size_gpnDefault.css';
+import '../src/components/Theme/_space/Theme_space_gpnDefault.css';
+import '../src/components/Theme/_gap/Theme_gap_l.css';
+import '../src/components/Theme/_gap/Theme_gap_m.css';
+import '../src/components/Theme/_gap/Theme_gap_s.css';
+
+import '../src/index.css';
+
 import React from 'react';
 import requireContext from 'require-context.macro';
 
@@ -7,8 +22,6 @@ import { withA11y } from '@storybook/addon-a11y';
 import { withThemes } from 'storybook-addon-themes';
 
 import whitepaperStorybookTheme from './whitepaperStorybookTheme';
-import '../src/utils/whitepaper/whitepaper.css';
-import '../src/index.css';
 
 // Подключаем все темы для возможности переключения в storybook'е
 const requireTheme = requireContext('../src/themes', false, /\.css$/);

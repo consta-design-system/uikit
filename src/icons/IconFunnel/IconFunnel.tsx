@@ -1,12 +1,12 @@
 import { BaseIconHoc } from '../BaseIconHoc/BaseIconHoc';
 import { Icon } from '../Icon/Icon';
-import M from './M';
-import S from './S';
-import Xs from './Xs';
+import IconFunnelSizeM from './IconFunnel_size_m';
+import IconFunnelSizeS from './IconFunnel_size_s';
+import IconFunnelSizeXs from './IconFunnel_size_xs';
 
 export const IconFunnel = BaseIconHoc({
-  m: M,
-  s: S,
-  xs: Xs,
+  m: IconFunnelSizeM,
+  s: IconFunnelSizeS,
+  xs: IconFunnelSizeXs,
   name: 'IconFunnel',
 })(Icon);

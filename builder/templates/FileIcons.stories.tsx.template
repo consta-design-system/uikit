@@ -1,0 +1,18 @@
+import React from 'react';
+import { withKnobs, select } from '@storybook/addon-knobs';
+import { storiesOf } from '@storybook/react';
+#imports#
+import { IconsItem } from './Item/Icons-Item';
+
+const defaultKnobs = () => ({
+  size: select('size', ['s', 'm'], 'm'),
+});
+
+storiesOf('FileIcons', module)
+  .addDecorator(withKnobs)
+  .add('FileIcons', () => (
+    <div className={'tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full'}>
+    #items#
+    </div>
+  ));
+

@@ -3,6 +3,7 @@ import './Text.css';
 import React from 'react';
 import { cn } from '../../utils/bem';
 import * as wp from '../../utils/whitepaper/whitepaper';
+import { componentIsFunction } from '../../utils/componentIsFunction';
 
 export type TextPropAlign = 'left' | 'center' | 'right';
 export type TextPropDecoration = 'underline';
@@ -55,10 +56,11 @@ export type TextProps = {
   width?: TextPropWidth;
   className?: string;
   children?: React.ReactNode;
+  innerRef?: React.Ref<any>;
 };
 
 export type IText<T = {}> = TextProps &
-  (Omit<React.HTMLAttributes<Element>, keyof TextProps> | Omit<T, keyof TextProps>);
+  (Omit<React.HTMLAttributes<Element>, keyof (TextProps & T)> & Omit<T, keyof TextProps>);
 
 export const cnText = cn('Text');
 
@@ -80,6 +82,7 @@ export function Text<T>(props: IText<T>): React.ReactElement | null {
     width,
     className,
     children,
+    innerRef,
     ...otherProps
   } = props;
 
@@ -87,6 +90,7 @@ export function Text<T>(props: IText<T>): React.ReactElement | null {
 
   return (
     <Component
+      {...otherProps}
       className={cnText(null, [
         wp.text({
           align,
@@ -105,7 +109,8 @@ export function Text<T>(props: IText<T>): React.ReactElement | null {
         }),
         className,
       ])}
-      {...otherProps}
+      ref={innerRef}
+      {...(componentIsFunction(Component) && { innerRef })}
     >
       {children}
     </Component>

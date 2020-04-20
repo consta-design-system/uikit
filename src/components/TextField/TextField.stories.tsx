@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { boolean, text, withKnobs, number, select } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { IconPhoto } from '../../icons/IconPhoto/IconPhoto';
@@ -76,7 +76,9 @@ function Stories({
   disabled,
 }) {
   const [value, setValue] = useState<string | null | undefined>(undefined);
-
+  const inputRef = useRef(null);
+  const ref = useRef(null);
+  const innerRef = useRef(null);
   const leftSideSelect = {
     text: leftSideText,
     icon: IconPhoto,
@@ -92,6 +94,13 @@ function Stories({
   const leftSide = leftSideSelect[leftSideType];
   const rightSide = rightSideSelect[rightSideType];
 
+  const handleChange = ({ value }) => {
+    setValue(value);
+
+    console.log(inputRef);
+    console.log(ref);
+  };
+
   return (
     <TextField
       value={value}
@@ -105,10 +114,12 @@ function Stories({
       minRows={minRows}
       maxRows={maxRows}
       placeholder={placeholder}
-      onChange={({ value }) => setValue(value)}
+      onChange={handleChange}
       leftSide={leftSide}
       rightSide={rightSide}
       disabled={disabled}
+      inputRef={inputRef}
+      innerRef={ref}
     />
   );
 }

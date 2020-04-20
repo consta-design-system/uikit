@@ -8,6 +8,7 @@ import { cn } from '../../utils/bem';
 import * as wp from '../../utils/whitepaper/whitepaper';
 import { IIcon } from '../../icons/Icon/Icon';
 import { cnTheme } from '../Theme/Theme';
+import { componentIsFunction } from '../../utils/componentIsFunction';
 
 export type BadgeProps = {
   size?: 's' | 'm' | 'l';
@@ -16,25 +17,14 @@ export type BadgeProps = {
   form?: 'default' | 'round';
   minified?: boolean;
   icon?: React.FC<IIcon>;
-  innerRef?: () => void;
+  innerRef?: React.Ref<any>;
   label?: string;
   className?: string;
   as?: React.ElementType;
 };
 
-declare type excludeHTMLAttributes =
-  | 'size'
-  | 'view'
-  | 'status'
-  | 'form'
-  | 'minified'
-  | 'icon'
-  | 'innerRef'
-  | 'label'
-  | 'className';
-
-export type IBadge<T> = BadgeProps &
-  (Omit<React.HTMLAttributes<Element>, excludeHTMLAttributes> | Omit<T, excludeHTMLAttributes>);
+export type IBadge<T = {}> = BadgeProps &
+  (Omit<React.HTMLAttributes<Element>, keyof (BadgeProps & T)> & Omit<T, keyof BadgeProps>);
 
 export const cnBadge = cn('Badge');
 
@@ -54,7 +44,7 @@ export function Badge<T>(props: IBadge<T>) {
     label,
     innerRef,
     as = 'div',
-    ...customProps
+    ...otherProps
   } = props;
 
   const Component = as;
@@ -68,19 +58,21 @@ export function Badge<T>(props: IBadge<T>) {
   if (minified) {
     return (
       <Component
+        {...otherProps}
         className={cnBadge({ size, status, minified }, [_className])}
         title={label}
         ref={innerRef}
-        {...customProps}
+        {...(componentIsFunction(Component) && { innerRef })}
       />
     );
   }
 
   return (
     <Component
+      {...otherProps}
       className={cnBadge({ size, view, status, form, withIcon }, [_className])}
       ref={innerRef}
-      {...customProps}
+      {...(componentIsFunction(Component) && { innerRef })}
     >
       {Icon ? (
         <div className={wp.ptIconPlus({ 'vertical-align': 'center' })}>

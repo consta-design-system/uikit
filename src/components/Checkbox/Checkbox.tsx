@@ -29,10 +29,19 @@ export type CheckboxProps<T = any> = {
   onChange?: (object: CheckboxOnChangeArguments<T>) => void;
   id?: CheckboxPropId;
   name?: CheckboxPropName;
+  onFocus?: React.FocusEventHandler<HTMLInputElement>;
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
+  autoFocus?: boolean;
+  readOnly?: boolean;
+  required?: boolean;
+  step?: number | string;
+  tabIndex?: number;
+  inputRef?: React.Ref<HTMLInputElement>;
+  innerRef?: React.Ref<HTMLLabelElement>;
 };
 
 declare type ICheckbox<T = any> = CheckboxProps<T> &
-  Omit<React.InputHTMLAttributes<HTMLInputElement>, keyof CheckboxProps<T>>;
+  Omit<React.HTMLAttributes<HTMLLabelElement>, keyof CheckboxProps<T>>;
 
 export const cnCheckbox = cn('Checkbox');
 
@@ -48,6 +57,14 @@ export function Checkbox<T = any>(props: ICheckbox<T>): React.ReactElement | nul
     className,
     label,
     onChange,
+    onFocus,
+    onBlur,
+    readOnly,
+    required,
+    step,
+    tabIndex,
+    inputRef,
+    innerRef,
     ...otherProps
   } = props;
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +74,11 @@ export function Checkbox<T = any>(props: ICheckbox<T>): React.ReactElement | nul
   };
 
   return (
-    <label className={cnCheckbox({ size, disabled, intermediate }, [className])}>
+    <label
+      {...otherProps}
+      className={cnCheckbox({ size, disabled, intermediate }, [className])}
+      ref={innerRef}
+    >
       <input
         type="checkbox"
         id={id ? id.toString() : undefined}
@@ -66,7 +87,13 @@ export function Checkbox<T = any>(props: ICheckbox<T>): React.ReactElement | nul
         checked={checked}
         disabled={disabled}
         onChange={handleChange}
-        {...otherProps}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        readOnly={readOnly}
+        required={required}
+        step={step}
+        tabIndex={tabIndex}
+        ref={inputRef}
       />
       {label && <span className={cnCheckbox('Label')}>{label}</span>}
     </label>

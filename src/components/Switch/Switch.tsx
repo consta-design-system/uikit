@@ -26,12 +26,21 @@ export type SwitchProps<T = any> = {
   onChange?: (object: SwitchOnChangeArguments<T>) => void;
   id?: SwitchPropId;
   name?: SwitchPropName;
+  onFocus?: React.FocusEventHandler<HTMLInputElement>;
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
+  autoFocus?: boolean;
+  readOnly?: boolean;
+  required?: boolean;
+  step?: number | string;
+  tabIndex?: number;
+  inputRef?: React.Ref<HTMLInputElement>;
+  innerRef?: React.Ref<HTMLLabelElement>;
 };
 
 declare type ISwitch<T = any> = SwitchProps<T> &
-  Omit<React.InputHTMLAttributes<HTMLInputElement>, keyof SwitchProps<T>>;
+  Omit<React.InputHTMLAttributes<HTMLLabelElement>, keyof SwitchProps<T>>;
 
-export const cnCheckbox = cn('Switch');
+export const cnSwitch = cn('Switch');
 
 export function Switch<T = any>(props: ISwitch<T>): React.ReactElement | null {
   const {
@@ -44,6 +53,14 @@ export function Switch<T = any>(props: ISwitch<T>): React.ReactElement | null {
     className,
     label,
     onChange,
+    onFocus,
+    onBlur,
+    readOnly,
+    required,
+    step,
+    tabIndex,
+    inputRef,
+    innerRef,
     ...otherProps
   } = props;
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,18 +70,24 @@ export function Switch<T = any>(props: ISwitch<T>): React.ReactElement | null {
   };
 
   return (
-    <label className={cnCheckbox({ size, disabled }, [className])}>
+    <label {...otherProps} className={cnSwitch({ size, disabled }, [className])} ref={innerRef}>
       <input
         type="checkbox"
         id={id ? id.toString() : undefined}
         name={name}
-        className={cnCheckbox('Input')}
+        className={cnSwitch('Input')}
         checked={checked}
         disabled={disabled}
         onChange={handleChange}
-        {...otherProps}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        readOnly={readOnly}
+        required={required}
+        step={step}
+        tabIndex={tabIndex}
+        ref={inputRef}
       />
-      {label && <span className={cnCheckbox('Label')}>{label}</span>}
+      {label && <span className={cnSwitch('Label')}>{label}</span>}
     </label>
   );
 }
