@@ -2,8 +2,8 @@ import React from 'react';
 import { withKnobs, select } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { IconFileAvi } from '../../IconFileAvi/IconFileAvi';
-import { IconFileBmp } from '../../IconFileBmp/IconFileBmp';
 import { IconFileCsv } from '../../IconFileCsv/IconFileCsv';
+import { IconFileBmp } from '../../IconFileBmp/IconFileBmp';
 import { IconFileDoc } from '../../IconFileDoc/IconFileDoc';
 import { IconFileExe } from '../../IconFileExe/IconFileExe';
 import { IconFileGif } from '../../IconFileGif/IconFileGif';
@@ -35,8 +35,8 @@ storiesOf('FileIcons', module)
   .add('FileIcons', () => (
     <div className={'tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full'}>
     <IconsItem name="IconFileAvi" icon={IconFileAvi} {...defaultKnobs()} />
-<IconsItem name="IconFileBmp" icon={IconFileBmp} {...defaultKnobs()} />
 <IconsItem name="IconFileCsv" icon={IconFileCsv} {...defaultKnobs()} />
+<IconsItem name="IconFileBmp" icon={IconFileBmp} {...defaultKnobs()} />
 <IconsItem name="IconFileDoc" icon={IconFileDoc} {...defaultKnobs()} />
 <IconsItem name="IconFileExe" icon={IconFileExe} {...defaultKnobs()} />
 <IconsItem name="IconFileGif" icon={IconFileGif} {...defaultKnobs()} />
