@@ -3,6 +3,8 @@ import './Button.css';
 import React, { Fragment } from 'react';
 import { cn } from '../../utils/bem';
 import { IIcon, IconPropSize } from '../../icons/Icon/Icon';
+import { componentIsFunction } from '../../utils/componentIsFunction';
+
 export type ButtonPropSize = 'xs' | 's' | 'm' | 'l';
 export type ButtonPropView = 'clear' | 'ghost' | 'primary' | 'secondary';
 export type ButtonPropWidth = 'full' | 'default';
@@ -87,7 +89,7 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
   };
 
   const _iconSize = iconSize || getIconSizeByButtonSize(size);
-  const _title = title || (!!IconOnly && label);
+  const _title = title || (!!IconOnly && label) || undefined;
 
   return (
     <Component
@@ -107,7 +109,7 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
       tabIndex={tabIndex}
       title={_title}
       ref={innerRef}
-      innerRef={innerRef}
+      {...(componentIsFunction(Component) && { innerRef })}
       {...otherProps}
     >
       {IconOnly && <IconOnly className={cnButton('Icon')} size={_iconSize} />}

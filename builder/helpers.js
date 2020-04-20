@@ -90,7 +90,7 @@ const createFileIconsStories = async (svgComponents, src) => {
   });
 
   const jsCode = template.replace(/#imports#/g, imports).replace(/#items#/g, items);
-  const jsPatch = `${src}/fileIcons/IconFile/FileIcons.stories/FileIcons.stories.tsx`;
+  const jsPatch = `${src}/fileIcons/FileIcon/FileIcons.stories/FileIcons.stories.tsx`;
   await ensureDir(dirname(jsPatch));
   await writeFile(jsPatch, jsCode);
 };
@@ -204,71 +204,8 @@ const iconsFileTransformed = async (ignore, src) => {
       await createComponent({
         componentName,
         pathOutdir: `./src/fileIcons/${componentName}/`,
-        templatePath: './builder/templates/IconFile.js.template',
+        templatePath: './builder/templates/FileIcon.js.template',
       });
-    }
-  });
-  await createFileIconsStories(svgComponents, src);
-};
-
-const iconsFileRenamer = async (ignore, src) => {
-  const svgFiles = await fg([`${src}/fileIcons/**/*.{svg}`], { ignore });
-
-  const test = /.\/src\/fileIcons\/(.+)\/(.+)_size_(.+).svg/;
-  const svgComponents = {};
-
-  svgFiles.forEach((fileName) => {
-    if (test.test(fileName)) {
-      const [file, componentName, svgName, size] = test.exec(fileName);
-      if (componentName === svgName) {
-        if (!svgComponents[componentName]) {
-          svgComponents[componentName] = {};
-        }
-        svgComponents[componentName][size.toLowerCase()] = file;
-      }
-    }
-  });
-
-  console.log(svgComponents);
-
-  const fileNameTest = /IconFile(.+)/;
-
-  Object.keys(svgComponents).forEach(async (componentName) => {
-    if (iconFileComponentIsValid(svgComponents[componentName])) {
-      const [_, fileName] = fileNameTest.exec(componentName);
-
-      console.log(fileName);
-      console.log(componentName);
-
-      const svgS = await readFile(svgComponents[componentName].s, 'utf8');
-      const svgM = await readFile(svgComponents[componentName].m, 'utf8');
-
-      const newFilePatchS = `./src/fileIcons/FileIcon${fileName}/FileIcon${fileName}_size_s.svg`;
-      const newFilePatchM = `./src/fileIcons/FileIcon${fileName}/FileIcon${fileName}_size_m.svg`;
-
-      await ensureDir(dirname(newFilePatchS));
-      await writeFile(newFilePatchS, svgS);
-
-      await ensureDir(dirname(newFilePatchM));
-      await writeFile(newFilePatchM, svgM);
-
-      // await iconParse({
-      //   componentName: `${componentName}SizeS`,
-      //   fileName: `${componentName}_size_s`,
-      //   path: svgComponents[componentName].s,
-      //   pathOutdir: `./src/fileIcons/${componentName}/`,
-      // });
-      // await iconParse({
-      //   componentName: `${componentName}SizeM`,
-      //   fileName: `${componentName}_size_m`,
-      //   path: svgComponents[componentName].m,
-      //   pathOutdir: `./src/fileIcons/${componentName}/`,
-      // });
-      // await createComponent({
-      //   componentName,
-      //   pathOutdir: `./src/fileIcons/${componentName}/`,
-      //   templatePath: './builder/templates/IconFile.js.template',
-      // });
     }
   });
   await createFileIconsStories(svgComponents, src);
@@ -546,5 +483,4 @@ module.exports = {
   iconsTransformed,
   copyPackageJson,
   iconsFileTransformed,
-  iconsFileRenamer,
 };

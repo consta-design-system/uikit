@@ -6,6 +6,7 @@ import { Avatar } from '../Avatar/Avatar';
 import { Text, TextPropSize } from '../Text/Text';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { IconPropSize } from '../../icons/Icon/Icon';
+import { componentIsFunction } from '../../utils/componentIsFunction';
 
 export type UserPropSize = 's' | 'm';
 export type UserPropView = 'clear' | 'ghost';
@@ -76,8 +77,8 @@ export function User<T>(props: IUser<T>): React.ReactElement | null {
     <Component
       {...otherProps}
       className={cnUser({ size, view, width, withArrow, minified: onlyAvatar }, [className])}
-      innerRef={innerRef}
       ref={innerRef}
+      {...(componentIsFunction(Component) && { innerRef })}
     >
       <div className={cnUser('AvatarWrapper', { status })}>
         <Avatar className={cnUser('Avatar', { status })} size={size} url={avatarUrl} name={name} />

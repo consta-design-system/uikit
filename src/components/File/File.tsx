@@ -1,75 +1,75 @@
 import React from 'react';
-import { IIconFile } from '../../fileIcons/IconFile/IconFile';
-import { IconFileBmp } from '../../fileIcons/IconFileBmp/IconFileBmp';
-import { IconFileCsv } from '../../fileIcons/IconFileCsv/IconFileCsv';
-import { IconFileAvi } from '../../fileIcons/IconFileAvi/IconFileAvi';
-import { IconFileDoc } from '../../fileIcons/IconFileDoc/IconFileDoc';
-import { IconFileGif } from '../../fileIcons/IconFileGif/IconFileGif';
-import { IconFileExe } from '../../fileIcons/IconFileExe/IconFileExe';
-import { IconFileJpg } from '../../fileIcons/IconFileJpg/IconFileJpg';
-import { IconFileLoading } from '../../fileIcons/IconFileLoading/IconFileLoading';
-import { IconFileMp3 } from '../../fileIcons/IconFileMp3/IconFileMp3';
-import { IconFileMov } from '../../fileIcons/IconFileMov/IconFileMov';
-import { IconFilePdf } from '../../fileIcons/IconFilePdf/IconFilePdf';
-import { IconFileMp4 } from '../../fileIcons/IconFileMp4/IconFileMp4';
-import { IconFilePtt } from '../../fileIcons/IconFilePtt/IconFilePtt';
-import { IconFilePng } from '../../fileIcons/IconFilePng/IconFilePng';
-import { IconFileRar } from '../../fileIcons/IconFileRar/IconFileRar';
-import { IconFileRtf } from '../../fileIcons/IconFileRtf/IconFileRtf';
-import { IconFileTiff } from '../../fileIcons/IconFileTiff/IconFileTiff';
-import { IconFileTxt } from '../../fileIcons/IconFileTxt/IconFileTxt';
-import { IconFileUndefined } from '../../fileIcons/IconFileUndefined/IconFileUndefined';
-import { IconFileWav } from '../../fileIcons/IconFileWav/IconFileWav';
-import { IconFileZip } from '../../fileIcons/IconFileZip/IconFileZip';
-import { IconFileXls } from '../../fileIcons/IconFileXls/IconFileXls';
+import { IFileIcon } from '../../fileIcons/FileIcon/FileIcon';
+import { FileIconAvi } from '../../fileIcons/FileIconAvi/FileIconAvi';
+import { FileIconBmp } from '../../fileIcons/FileIconBmp/FileIconBmp';
+import { FileIconCsv } from '../../fileIcons/FileIconCsv/FileIconCsv';
+import { FileIconDoc } from '../../fileIcons/FileIconDoc/FileIconDoc';
+import { FileIconExe } from '../../fileIcons/FileIconExe/FileIconExe';
+import { FileIconGif } from '../../fileIcons/FileIconGif/FileIconGif';
+import { FileIconJpg } from '../../fileIcons/FileIconJpg/FileIconJpg';
+import { FileIconLoading } from '../../fileIcons/FileIconLoading/FileIconLoading';
+import { FileIconMov } from '../../fileIcons/FileIconMov/FileIconMov';
+import { FileIconMp3 } from '../../fileIcons/FileIconMp3/FileIconMp3';
+import { FileIconMp4 } from '../../fileIcons/FileIconMp4/FileIconMp4';
+import { FileIconPdf } from '../../fileIcons/FileIconPdf/FileIconPdf';
+import { FileIconPng } from '../../fileIcons/FileIconPng/FileIconPng';
+import { FileIconPtt } from '../../fileIcons/FileIconPtt/FileIconPtt';
+import { FileIconRar } from '../../fileIcons/FileIconRar/FileIconRar';
+import { FileIconRtf } from '../../fileIcons/FileIconRtf/FileIconRtf';
+import { FileIconTiff } from '../../fileIcons/FileIconTiff/FileIconTiff';
+import { FileIconTxt } from '../../fileIcons/FileIconTxt/FileIconTxt';
+import { FileIconUndefined } from '../../fileIcons/FileIconUndefined/FileIconUndefined';
+import { FileIconWav } from '../../fileIcons/FileIconWav/FileIconWav';
+import { FileIconXls } from '../../fileIcons/FileIconXls/FileIconXls';
+import { FileIconZip } from '../../fileIcons/FileIconZip/FileIconZip';
 
 export type FileProps = {
   extension?: string;
   loading?: boolean;
 };
 
-export type IFile = FileProps & IIconFile & (Omit<IIconFile, keyof FileProps>);
+export type IFile = FileProps & (Omit<IFileIcon, keyof FileProps>);
 
 export function File(props: IFile) {
   const { extension, loading, ...otherProps } = props;
 
   if (loading) {
-    return <IconFileLoading {...otherProps} />;
+    return <FileIconLoading {...otherProps} />;
   }
 
   const extensionToSvg = {
-    bmp: IconFileBmp,
-    csv: IconFileCsv,
-    avi: IconFileAvi,
-    doc: IconFileDoc,
-    docx: IconFileDoc,
-    gif: IconFileGif,
-    exe: IconFileExe,
-    jpg: IconFileJpg,
-    jpeg: IconFileJpg,
-    mp3: IconFileMp3,
-    mov: IconFileMov,
-    mp4: IconFileMp4,
-    pdf: IconFilePdf,
-    ptt: IconFilePtt,
-    pttx: IconFilePtt,
-    png: IconFilePng,
-    rar: IconFileRar,
-    rtf: IconFileRtf,
-    tiff: IconFileTiff,
-    txt: IconFileTxt,
-    wav: IconFileWav,
-    zip: IconFileZip,
-    gz: IconFileZip,
-    xls: IconFileXls,
-    xlsx: IconFileXls,
+    bmp: FileIconBmp,
+    csv: FileIconCsv,
+    avi: FileIconAvi,
+    doc: FileIconDoc,
+    docx: FileIconDoc,
+    gif: FileIconGif,
+    exe: FileIconExe,
+    jpg: FileIconJpg,
+    jpeg: FileIconJpg,
+    mp3: FileIconMp3,
+    mov: FileIconMov,
+    mp4: FileIconMp4,
+    pdf: FileIconPdf,
+    ptt: FileIconPtt,
+    pttx: FileIconPtt,
+    png: FileIconPng,
+    rar: FileIconRar,
+    rtf: FileIconRtf,
+    tiff: FileIconTiff,
+    txt: FileIconTxt,
+    wav: FileIconWav,
+    zip: FileIconZip,
+    gz: FileIconZip,
+    xls: FileIconXls,
+    xlsx: FileIconXls,
   };
 
-  function getIconByExtension(extension?: string): React.FC<IIconFile> {
+  function getIconByExtension(extension?: string): React.FC<IFileIcon> {
     if (!extension) {
-      return IconFileUndefined;
+      return FileIconUndefined;
     }
-    return extensionToSvg[extension.toLowerCase()] || IconFileUndefined;
+    return extensionToSvg[extension.toLowerCase()] || FileIconUndefined;
   }
 
   const Icon = getIconByExtension(extension);

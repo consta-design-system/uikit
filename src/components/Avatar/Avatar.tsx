@@ -2,6 +2,7 @@ import './Avatar.css';
 
 import React from 'react';
 import { cn } from '../../utils/bem';
+import { componentIsFunction } from '../../utils/componentIsFunction';
 
 export type AvatarPropSize = 's' | 'm';
 export type AvatarPropForm = 'round' | 'brick' | 'default';
@@ -38,8 +39,8 @@ export function Avatar<T>(props: IAvatar<T>): React.ReactElement | null {
     <Component
       {...otherProps}
       className={cnAvatar({ size, form }, [className])}
+      {...(componentIsFunction(Component) && { innerRef })}
       ref={innerRef}
-      innerRef={innerRef}
     >
       <img className={cnAvatar('Image')} src={url} alt={name} />
     </Component>

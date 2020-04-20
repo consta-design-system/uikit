@@ -3,6 +3,7 @@ import './Text.css';
 import React from 'react';
 import { cn } from '../../utils/bem';
 import * as wp from '../../utils/whitepaper/whitepaper';
+import { componentIsFunction } from '../../utils/componentIsFunction';
 
 export type TextPropAlign = 'left' | 'center' | 'right';
 export type TextPropDecoration = 'underline';
@@ -89,6 +90,7 @@ export function Text<T>(props: IText<T>): React.ReactElement | null {
 
   return (
     <Component
+      {...otherProps}
       className={cnText(null, [
         wp.text({
           align,
@@ -108,8 +110,7 @@ export function Text<T>(props: IText<T>): React.ReactElement | null {
         className,
       ])}
       ref={innerRef}
-      innerRef={innerRef}
-      {...otherProps}
+      {...(componentIsFunction(Component) && { innerRef })}
     >
       {children}
     </Component>

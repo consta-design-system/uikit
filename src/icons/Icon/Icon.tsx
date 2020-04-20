@@ -13,14 +13,28 @@ export type IconPropView =
   | 'success'
   | 'warning';
 
-export interface IIcon {
+export type IconProps = {
   view?: IconPropView;
   size?: IconPropSize;
   className?: string;
-}
+  innerRef?: React.Ref<HTMLDivElement>;
+};
+
+export type IIcon = IconProps & (Omit<React.HTMLAttributes<HTMLDivElement>, keyof IconProps>);
 
 export const cnIcon = cn('Icon');
 
-export const Icon: React.FC<IIcon> = ({ children, className, size = 'm', view }) => {
-  return <div className={cnIcon({ size, view }, [className])}>{children}</div>;
+export const Icon: React.FC<IIcon> = ({
+  children,
+  className,
+  size = 'm',
+  view,
+  innerRef,
+  ...otherProps
+}) => {
+  return (
+    <div {...otherProps} className={cnIcon({ size, view }, [className])} ref={innerRef}>
+      {children}
+    </div>
+  );
 };

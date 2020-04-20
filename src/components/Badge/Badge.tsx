@@ -8,6 +8,7 @@ import { cn } from '../../utils/bem';
 import * as wp from '../../utils/whitepaper/whitepaper';
 import { IIcon } from '../../icons/Icon/Icon';
 import { cnTheme } from '../Theme/Theme';
+import { componentIsFunction } from '../../utils/componentIsFunction';
 
 export type BadgeProps = {
   size?: 's' | 'm' | 'l';
@@ -57,11 +58,11 @@ export function Badge<T>(props: IBadge<T>) {
   if (minified) {
     return (
       <Component
+        {...otherProps}
         className={cnBadge({ size, status, minified }, [_className])}
         title={label}
         ref={innerRef}
-        innerRef={innerRef}
-        {...otherProps}
+        {...(componentIsFunction(Component) && { innerRef })}
       />
     );
   }
@@ -71,7 +72,7 @@ export function Badge<T>(props: IBadge<T>) {
       {...otherProps}
       className={cnBadge({ size, view, status, form, withIcon }, [_className])}
       ref={innerRef}
-      innerRef={innerRef}
+      {...(componentIsFunction(Component) && { innerRef })}
     >
       {Icon ? (
         <div className={wp.ptIconPlus({ 'vertical-align': 'center' })}>
