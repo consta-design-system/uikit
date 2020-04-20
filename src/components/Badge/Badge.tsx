@@ -22,8 +22,8 @@ export type BadgeProps = {
   as?: React.ElementType;
 };
 
-export type IBadge<T> = BadgeProps &
-  (Omit<React.HTMLAttributes<Element>, keyof BadgeProps> | Omit<T, keyof BadgeProps>);
+export type IBadge<T = {}> = BadgeProps &
+  (Omit<React.HTMLAttributes<Element>, keyof (BadgeProps & T)> & Omit<T, keyof BadgeProps>);
 
 export const cnBadge = cn('Badge');
 
@@ -68,10 +68,10 @@ export function Badge<T>(props: IBadge<T>) {
 
   return (
     <Component
+      {...otherProps}
       className={cnBadge({ size, view, status, form, withIcon }, [_className])}
       ref={innerRef}
       innerRef={innerRef}
-      {...otherProps}
     >
       {Icon ? (
         <div className={wp.ptIconPlus({ 'vertical-align': 'center' })}>

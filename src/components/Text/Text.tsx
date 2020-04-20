@@ -59,7 +59,7 @@ export type TextProps = {
 };
 
 export type IText<T = {}> = TextProps &
-  (Omit<React.HTMLAttributes<Element>, keyof TextProps> | Omit<T, keyof TextProps>);
+  (Omit<React.HTMLAttributes<Element>, keyof (TextProps & T)> & Omit<T, keyof TextProps>);
 
 export const cnText = cn('Text');
 

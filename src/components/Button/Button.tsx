@@ -34,11 +34,8 @@ export type ButtonProps = {
   innerRef?: React.Ref<any>;
 };
 
-export type ButtonPropsAndUserProps<T> = ButtonProps & T;
-
 export type IButton<T = {}> = ButtonProps &
-  (Omit<React.ButtonHTMLAttributes<Element>, keyof ButtonPropsAndUserProps<T>> &
-    Omit<T, keyof ButtonProps>);
+  (Omit<React.ButtonHTMLAttributes<Element>, keyof (ButtonProps & T)> & Omit<T, keyof ButtonProps>);
 
 // При использовании "as" позаботьтесь об интерфейсе прокинутого елемента, по умолчанию он button
 // При вызове кнопки:

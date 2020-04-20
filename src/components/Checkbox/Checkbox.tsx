@@ -36,12 +36,12 @@ export type CheckboxProps<T = any> = {
   required?: boolean;
   step?: number | string;
   tabIndex?: number;
-  inputRef?: React.Ref<any>;
-  innerRef?: React.Ref<any>;
+  inputRef?: React.Ref<HTMLInputElement>;
+  innerRef?: React.Ref<HTMLLabelElement>;
 };
 
 declare type ICheckbox<T = any> = CheckboxProps<T> &
-  Omit<React.HTMLAttributes<Element>, keyof CheckboxProps<T>>;
+  Omit<React.HTMLAttributes<HTMLLabelElement>, keyof CheckboxProps<T>>;
 
 export const cnCheckbox = cn('Checkbox');
 
@@ -76,8 +76,8 @@ export function Checkbox<T = any>(props: ICheckbox<T>): React.ReactElement | nul
   return (
     <label
       {...otherProps}
-      ref={innerRef}
       className={cnCheckbox({ size, disabled, intermediate }, [className])}
+      ref={innerRef}
     >
       <input
         type="checkbox"

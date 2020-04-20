@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { withKnobs, text, select, boolean } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { IconUser } from '../../icons/IconUser/IconUser';
@@ -16,4 +16,4 @@ const defaultKnobs = () => ({
 storiesOf('Badge', module)
   .addDecorator(withKnobs)
   .add('Текстовый', () => <Badge {...defaultKnobs()} />)
-  .add('С иконкой', () => <Badge form={234} {...defaultKnobs()} icon={IconUser} />);
+  .add('С иконкой', () => <Badge {...defaultKnobs()} icon={IconUser} />);

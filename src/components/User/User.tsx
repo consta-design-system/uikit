@@ -24,10 +24,11 @@ declare type UserProps = {
   onlyAvatar?: boolean;
   withArrow?: boolean;
   info?: string;
+  innerRef?: React.Ref<any>;
 };
 
 export type IUser<T = {}> = UserProps &
-  (Omit<React.HTMLAttributes<HTMLDivElement>, keyof UserProps> | Omit<T, keyof UserProps>);
+  (Omit<React.HTMLAttributes<HTMLDivElement>, keyof (UserProps & T)> & Omit<T, keyof UserProps>);
 
 const cnUser = cn('User');
 
@@ -44,6 +45,7 @@ export function User<T>(props: IUser<T>): React.ReactElement | null {
     withArrow,
     info,
     status,
+    innerRef,
     ...otherProps
   } = props;
   const Component = as;
@@ -72,8 +74,10 @@ export function User<T>(props: IUser<T>): React.ReactElement | null {
 
   return (
     <Component
-      className={cnUser({ size, view, width, withArrow, minified: onlyAvatar }, [className])}
       {...otherProps}
+      className={cnUser({ size, view, width, withArrow, minified: onlyAvatar }, [className])}
+      innerRef={innerRef}
+      ref={innerRef}
     >
       <div className={cnUser('AvatarWrapper', { status })}>
         <Avatar className={cnUser('Avatar', { status })} size={size} url={avatarUrl} name={name} />

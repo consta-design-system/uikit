@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconFilePropSize, IIconFile } from '../../fileIcons/IconFile/IconFile';
+import { IIconFile } from '../../fileIcons/IconFile/IconFile';
 import { IconFileBmp } from '../../fileIcons/IconFileBmp/IconFileBmp';
 import { IconFileCsv } from '../../fileIcons/IconFileCsv/IconFileCsv';
 import { IconFileAvi } from '../../fileIcons/IconFileAvi/IconFileAvi';

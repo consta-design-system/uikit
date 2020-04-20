@@ -6,10 +6,12 @@ export type IconFilePropSize = 's' | 'm';
 
 export type IconFileProps = {
   size?: IconFilePropSize;
-  className?: string;
+  className: string;
+  innerRef?: React.Ref<HTMLDivElement>;
 };
 
-export type IIconFile = IconFileProps & (Omit<React.HTMLAttributes<Element>, keyof IconFileProps>);
+export type IIconFile = IconFileProps &
+  (Omit<React.HTMLAttributes<HTMLDivElement>, keyof IconFileProps>);
 
 export const cnIconFile = cn('IconFile');
 
@@ -17,10 +19,11 @@ export const IconFile: React.FC<IIconFile> = ({
   children,
   className,
   size = 'm',
+  innerRef,
   ...otherProps
 }) => {
   return (
-    <div className={cnIconFile({ size }, [className])} {...otherProps}>
+    <div {...otherProps} ref={innerRef} className={cnIconFile({ size }, [className])}>
       {children}
     </div>
   );

@@ -12,7 +12,7 @@ import { cnTheme } from '../Theme/Theme';
 export type InformerPropView = 'filled' | 'bordered';
 export type InformerPropStatus = 'system' | 'alert' | 'warning' | 'success';
 
-export type IInformer = {
+export type InformerProps = {
   view: InformerPropView;
   status: InformerPropStatus;
   icon?: React.FC<IIcon>;
@@ -20,12 +20,16 @@ export type IInformer = {
   children?: React.ReactNode;
   title?: string;
   className?: string;
+  innerRef?: React.Ref<HTMLDivElement>;
 };
+
+export type IInformer = InformerProps &
+  (Omit<React.HTMLAttributes<HTMLDivElement>, keyof InformerProps>);
 
 const cnInformer = cn('Informer');
 
 export const Informer: React.FC<IInformer> = (props) => {
-  const { className, view, status, icon, label, title, children } = props;
+  const { className, view, status, icon, label, title, children, innerRef, ...otherProps } = props;
   const Icon = icon;
   const withIcon = !!icon;
   const _className =
@@ -35,6 +39,7 @@ export const Informer: React.FC<IInformer> = (props) => {
 
   return (
     <div
+      {...otherProps}
       className={cnInformer(
         {
           view,
@@ -43,6 +48,7 @@ export const Informer: React.FC<IInformer> = (props) => {
         },
         [_className]
       )}
+      ref={innerRef}
     >
       {Icon && <Icon className={cnInformer('Icon')} size="s" />}
       {Icon ? (

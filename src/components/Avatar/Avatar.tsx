@@ -16,8 +16,6 @@ declare type AvatarProps = {
   innerRef?: React.Ref<any>;
 };
 
-export type AvatarPropsAndUserProps<T> = AvatarProps & T;
-
 export type IAvatar<T = {}> = AvatarProps &
   (Omit<React.HTMLAttributes<HTMLDivElement>, keyof (AvatarProps & T)> &
     Omit<T, keyof AvatarProps>);
@@ -38,10 +36,10 @@ export function Avatar<T>(props: IAvatar<T>): React.ReactElement | null {
   const Component = as;
   return (
     <Component
+      {...otherProps}
       className={cnAvatar({ size, form }, [className])}
       ref={innerRef}
       innerRef={innerRef}
-      {...otherProps}
     >
       <img className={cnAvatar('Image')} src={url} alt={name} />
     </Component>
