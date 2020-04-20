@@ -11,10 +11,12 @@ export type ItemT = {
   onClick?: React.EventHandler<React.MouseEvent>;
 };
 
-export type IMenu = {
+export type MenuProps = {
   items: ItemT[];
   className?;
 };
+
+export type IMenu = MenuProps & Omit<React.HTMLAttributes<Element>, keyof MenuProps>;
 
 export const HeaderMenu: React.FC<IMenu> = ({ items, className }) => {
   return (

@@ -11,4 +11,6 @@ const defaultKnobs = () => ({
 
 storiesOf('Avatar', module)
   .addDecorator(withKnobs)
-  .add('Avatar', () => <Avatar {...defaultKnobs()} />);
+  .add('Avatar', () => (
+    <Avatar as="div" style={{ color: '#000' }} form="round" {...defaultKnobs()} />
+  ));

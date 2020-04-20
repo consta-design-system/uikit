@@ -58,8 +58,6 @@ export type TextFieldProps = {
   name?: TextFieldPropName;
   type?: TextFieldPropType;
   disabled?: boolean;
-  innerRef?: (node: HTMLDivElement) => void;
-  inputRef?: (node: HTMLTextAreaElement | HTMLInputElement) => void;
   rows?: number;
   cols?: number;
   minRows?: number;
@@ -83,6 +81,8 @@ export type TextFieldProps = {
   required?: boolean;
   step?: number | string;
   tabIndex?: number;
+  inputRef?: React.Ref<any>;
+  innerRef?: React.Ref<HTMLDivElement>;
 };
 
 export type ITextField = TextFieldProps &
@@ -149,12 +149,6 @@ export const TextField: React.FC<ITextField> = ({
     !disabled && onChange && onChange({ e, id, name, value: value ? value : null });
   };
 
-  const getRef = (func) => (el) => {
-    if (el && func) {
-      func(el);
-    }
-  };
-
   const handleBlur = (e) => {
     setFocus(false);
     onBlur && onBlur(e);
@@ -170,15 +164,20 @@ export const TextField: React.FC<ITextField> = ({
     cols,
     minRows,
     maxRows,
-    inputRef,
+    inputRef:
+      inputRef === null
+        ? undefined
+        : (inputRef as
+            | ((node: HTMLTextAreaElement) => void)
+            | React.RefObject<HTMLTextAreaElement>),
   };
 
   const inputProps = {
-    ref: getRef(inputRef),
     type,
     max,
     min,
     step,
+    ref: inputRef,
   };
 
   return (
@@ -197,7 +196,7 @@ export const TextField: React.FC<ITextField> = ({
         },
         [className]
       )}
-      ref={getRef(innerRef)}
+      ref={innerRef}
       {...otherProps}
     >
       {LeftIcon && (

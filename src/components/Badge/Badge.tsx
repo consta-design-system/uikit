@@ -16,7 +16,7 @@ export type BadgeProps = {
   form?: 'default' | 'round';
   minified?: boolean;
   icon?: React.FC<IIcon>;
-  innerRef?: () => void;
+  innerRef?: React.Ref<any>;
   label?: string;
   className?: string;
   as?: React.ElementType;
@@ -43,7 +43,7 @@ export function Badge<T>(props: IBadge<T>) {
     label,
     innerRef,
     as = 'div',
-    ...customProps
+    ...otherProps
   } = props;
 
   const Component = as;
@@ -60,7 +60,8 @@ export function Badge<T>(props: IBadge<T>) {
         className={cnBadge({ size, status, minified }, [_className])}
         title={label}
         ref={innerRef}
-        {...customProps}
+        innerRef={innerRef}
+        {...otherProps}
       />
     );
   }
@@ -69,7 +70,8 @@ export function Badge<T>(props: IBadge<T>) {
     <Component
       className={cnBadge({ size, view, status, form, withIcon }, [_className])}
       ref={innerRef}
-      {...customProps}
+      innerRef={innerRef}
+      {...otherProps}
     >
       {Icon ? (
         <div className={wp.ptIconPlus({ 'vertical-align': 'center' })}>

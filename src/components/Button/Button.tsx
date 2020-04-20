@@ -31,10 +31,14 @@ export type ButtonProps = {
   onlyIcon?: boolean;
   iconSize?: IconPropSize;
   title?: string;
+  innerRef?: React.Ref<any>;
 };
 
+export type ButtonPropsAndUserProps<T> = ButtonProps & T;
+
 export type IButton<T = {}> = ButtonProps &
-  (Omit<React.ButtonHTMLAttributes<Element>, keyof ButtonProps> | Omit<T, keyof ButtonProps>);
+  (Omit<React.ButtonHTMLAttributes<Element>, keyof ButtonPropsAndUserProps<T>> &
+    Omit<T, keyof ButtonProps>);
 
 // При использовании "as" позаботьтесь об интерфейсе прокинутого елемента, по умолчанию он button
 // При вызове кнопки:
@@ -59,6 +63,7 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
     onlyIcon,
     iconSize,
     title,
+    innerRef,
     ...otherProps
   } = props;
 
@@ -104,6 +109,8 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
       )}
       tabIndex={tabIndex}
       title={_title}
+      ref={innerRef}
+      innerRef={innerRef}
       {...otherProps}
     >
       {IconOnly && <IconOnly className={cnButton('Icon')} size={_iconSize} />}

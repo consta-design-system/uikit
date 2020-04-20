@@ -61,7 +61,8 @@ export type IBaseCheckGroupFieldProps<T> = {
 
 export type IBaseCheckGroupField<T, T2 = {}> = IBaseCheckGroupFieldProps<T> & {
   getAdditionalPropsForItem?: BaseCheckGroupFieldPropGetAdditionalPropsForItem<T, T2>;
-} & Omit<T2, keyof IBaseCheckGroupFieldProps<T>>;
+} & Omit<T2, keyof IBaseCheckGroupFieldProps<T>> &
+  Omit<React.HTMLAttributes<Element>, keyof IBaseCheckGroupFieldProps<T>>;
 
 export function BaseCheckGroupField<T, T2 = {}>(props: IBaseCheckGroupField<T, T2>) {
   const {
@@ -76,6 +77,7 @@ export function BaseCheckGroupField<T, T2 = {}>(props: IBaseCheckGroupField<T, T
     onChange,
     id,
     name,
+    ...otherProps
   } = props;
   const ComponentItem = componentItem;
 
@@ -101,7 +103,7 @@ export function BaseCheckGroupField<T, T2 = {}>(props: IBaseCheckGroupField<T, T
   const getChecked = (item) => !!valueByKey[getItemKey(item)];
 
   return (
-    <div className={className}>
+    <div className={className} {...otherProps}>
       {items
         ? items.map((item) => (
             <ComponentItem

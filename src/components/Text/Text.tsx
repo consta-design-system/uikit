@@ -55,6 +55,7 @@ export type TextProps = {
   width?: TextPropWidth;
   className?: string;
   children?: React.ReactNode;
+  innerRef?: React.Ref<any>;
 };
 
 export type IText<T = {}> = TextProps &
@@ -80,6 +81,7 @@ export function Text<T>(props: IText<T>): React.ReactElement | null {
     width,
     className,
     children,
+    innerRef,
     ...otherProps
   } = props;
 
@@ -105,6 +107,8 @@ export function Text<T>(props: IText<T>): React.ReactElement | null {
         }),
         className,
       ])}
+      ref={innerRef}
+      innerRef={innerRef}
       {...otherProps}
     >
       {children}
