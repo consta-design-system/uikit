@@ -6,7 +6,7 @@ export type FileIconPropSize = 's' | 'm';
 
 export type FileIconProps = {
   size?: FileIconPropSize;
-  className: string;
+  className?: string;
   innerRef?: React.Ref<HTMLDivElement>;
 };
 

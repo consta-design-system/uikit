@@ -26,11 +26,16 @@ const iconComponentIsValid = (obj) => {
 };
 
 const copyPackageJson = async (distPaths) => {
-  const file = await readFile('package.json', 'utf8');
+  const pack = await readJSON('package.json');
+  delete pack.devDependencies;
+  delete pack.jest;
+  delete pack.husky;
+  delete pack.scripts;
+  delete pack.browserslist;
+  delete pack['lint-staged'];
   const outPaths = `${distPaths}/package.json`;
-  console.log(outPaths);
   await ensureDir(dirname(outPaths));
-  await writeFile(outPaths, file);
+  await writeJSON(outPaths, pack, { spaces: 2 });
 };
 
 const transformCSS = async (ignore, src, distPaths, options) => {

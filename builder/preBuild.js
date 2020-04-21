@@ -40,9 +40,6 @@ class GenerateCommand extends Command {
         iconsFileTransformed(ignore, srcPath).then(() =>
           this.log(logSymbols.success, 'fileIcons copied & transformed')
         ),
-        // iconsFileRenamer(ignore, srcPath).then(() =>
-        //   this.log(logSymbols.success, 'fileIcons copied & transformed')
-        // ),
       ]);
       await this.safeInvokeHook(afterBuild);
     } catch (err) {

@@ -13,8 +13,8 @@ export type InformerPropView = 'filled' | 'bordered';
 export type InformerPropStatus = 'system' | 'alert' | 'warning' | 'success';
 
 export type InformerProps = {
-  view: InformerPropView;
-  status: InformerPropStatus;
+  view?: InformerPropView;
+  status?: InformerPropStatus;
   icon?: React.FC<IIcon>;
   label?: React.ReactNode;
   children?: React.ReactNode;

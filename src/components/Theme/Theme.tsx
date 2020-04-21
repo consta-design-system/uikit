@@ -1,5 +1,5 @@
-import React from 'react';
-import { cn } from '../../utils/bem';
 import './Theme.css';
+
+import { cn } from '../../utils/bem';
 
 export const cnTheme = cn('Theme');
