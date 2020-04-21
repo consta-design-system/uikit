@@ -69,7 +69,7 @@ class GenerateCommand extends Command {
     this.log('starting to compile ts to js with commonJS');
     try {
       await Promise.all([
-        execAsync(`npx tsc -p ${tsconfig} --target es6 --outDir ${distEsSrc}`),
+        execAsync(`npx tsc -p ${tsconfig} --module es6 --outDir ${distEsSrc}`),
         execAsync(`npx tsc -p ${tsconfig} --module commonjs --outDir ${distSrc}`),
       ]);
     } catch (err) {

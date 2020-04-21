@@ -67,7 +67,7 @@ const getWhitepaperThemes = () => {
       }, {})
   ).map((themeConfig) => {
     // Сортируем классы здесь, чтобы снапшот тесты работали предсказуемо
-    const classes = ['theme'].concat(Object.values(themeConfig.class).sort());
+    const classes = ['Theme'].concat(Object.values(themeConfig.class).sort());
     return {
       ...themeConfig,
       class: classes,
