@@ -1,7 +1,10 @@
 import React from 'react';
 import { withKnobs, text, select, boolean } from '@storybook/addon-knobs';
+import { withDocs } from '@storybook-addons/docs';
+import figmaDecorator from 'storybook-addon-figma-new';
 import { storiesOf } from '@storybook/react';
 import { IconUser } from '../../icons/IconUser/IconUser';
+import { StoryBookExample } from '../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Badge } from './Badge';
 
 const defaultKnobs = () => ({
@@ -13,7 +16,52 @@ const defaultKnobs = () => ({
   minified: boolean('minified', false),
 });
 
-storiesOf('Badge', module)
+storiesOf('UI-KIT|/Badge', module)
   .addDecorator(withKnobs)
-  .add('Текстовый', () => <Badge {...defaultKnobs()} />)
-  .add('С иконкой', () => <Badge {...defaultKnobs()} icon={IconUser} />);
+  .addDecorator(
+    withDocs({
+      readme: {
+        content: require('./Badge.md')['default'],
+      },
+    })
+  )
+  .addDecorator(
+    figmaDecorator({
+      url: 'https://www.figma.com/file/FLCwrJTceo6xB9VInayasa/UI-Kit%2FDefault?node-id=2222%3A5588',
+    })
+  )
+  .add('playground', () => <Badge {...defaultKnobs()} />);
+
+storiesOf('UI-KIT|/Examples/Badge', module)
+  .add('_size', () => (
+    <StoryBookExample>
+      <Badge size="s" label="Badge" />
+      <Badge size="m" label="Badge" />
+      <Badge size="l" label="Badge" />
+    </StoryBookExample>
+  ))
+  .add('_view', () => (
+    <StoryBookExample>
+      <Badge view="filled" label="Badge" />
+      <Badge view="stroked" label="Badge" />
+    </StoryBookExample>
+  ))
+  .add('_status', () => (
+    <StoryBookExample>
+      <Badge status="success" label="Badge" />
+      <Badge status="error" label="Badge" />
+      <Badge status="warning" label="Badge" />
+      <Badge status="normal" label="Badge" />
+      <Badge status="system" label="Badge" />
+    </StoryBookExample>
+  ))
+  .add('_minified', () => (
+    <StoryBookExample>
+      <Badge minified label="Badge" />
+    </StoryBookExample>
+  ))
+  .add('_icon', () => (
+    <StoryBookExample>
+      <Badge icon={IconUser} label="Badge" />
+    </StoryBookExample>
+  ));
