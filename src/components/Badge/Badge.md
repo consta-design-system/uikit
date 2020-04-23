@@ -73,3 +73,4 @@ const App = () => {
 ```ts
 <Badge<{ href: string }> as="a" href="#" label="Лэйбл" />
 ```
+{{%story::ui-kit-examples-badge--as%}}

@@ -76,9 +76,6 @@ function Stories({
   disabled,
 }) {
   const [value, setValue] = useState<string | null | undefined>(undefined);
-  const inputRef = useRef(null);
-  const ref = useRef(null);
-  const innerRef = useRef(null);
   const leftSideSelect = {
     text: leftSideText,
     icon: IconPhoto,
@@ -96,9 +93,6 @@ function Stories({
 
   const handleChange = ({ value }) => {
     setValue(value);
-
-    console.log(inputRef);
-    console.log(ref);
   };
 
   return (
@@ -118,8 +112,6 @@ function Stories({
       leftSide={leftSide}
       rightSide={rightSide}
       disabled={disabled}
-      inputRef={inputRef}
-      innerRef={ref}
     />
   );
 }
