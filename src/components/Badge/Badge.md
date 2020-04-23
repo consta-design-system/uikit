@@ -39,11 +39,22 @@ const App = () => {
 
 Чтобы изменить размер бейджа, используйте модификатор `_size`.
 
+```ts
+<Badge size="s" label="Badge" />
+<Badge size="m" label="Badge" />
+<Badge size="l" label="Badge" />
+```
+
 {{%story::desktop:ui-kit-examples-badge--size%}}
 
 ### Вид бейджа
 
 Чтобы изменить вид бейджа, используйте модификатор `_view`.
+
+```ts
+<Badge view="filled" label="Badge" />
+<Badge view="stroked" label="Badge" />
+```
 
 {{%story::ui-kit-examples-badge--view%}}
 
@@ -51,17 +62,33 @@ const App = () => {
 
 Чтобы изменить статус бейджа, используйте модификатор `_status`.
 
+```ts
+<Badge status="success" label="Badge" />
+<Badge status="error" label="Badge" />
+<Badge status="warning" label="Badge" />
+<Badge status="normal" label="Badge" />
+<Badge status="system" label="Badge" />
+```
+
 {{%story::ui-kit-examples-badge--status%}}
 
 ### Маленький бейдж
 
 Чтобы использолвать маленький бейдж, используйте модификатор `_minified`.
 
+```ts
+<Badge minified label="Badge" />
+```
+
 {{%story::ui-kit-examples-badge--minified%}}
 
 ### Бейдж с иконкой
 
 Чтобы получить бейдж сиконкой, используйте модификатор `_icon`.
+
+```ts
+<Badge icon={IconUser} label="Badge" />
+```
 
 {{%story::ui-kit-examples-badge--icon%}}
 
@@ -73,4 +100,5 @@ const App = () => {
 ```ts
 <Badge<{ href: string }> as="a" href="#" label="Лэйбл" />
 ```
+
 {{%story::ui-kit-examples-badge--as%}}
