@@ -237,7 +237,7 @@ const copyAssets = async (ignore, src, distPaths) => {
 const platforms = ['common'];
 
 const layerToPlatform = {
-  common: ['common', 'desktop', 'touch-phone', 'touch-pad'],
+  common: ['common'],
   desktop: ['desktop'],
   deskpad: ['touch-pad', 'desktop'],
   touch: ['touch-phone', 'touch-pad'],
@@ -340,7 +340,7 @@ const generateReExports = (
 
         if (!cell) {
           // eslint-disable-next-line no-console
-          console.log(logSymbols.warning, 'not exported:', entityName);
+          // console.log(logSymbols.warning, 'not exported:', entityName);
           return;
         }
 
@@ -354,10 +354,10 @@ const generateReExports = (
             for (let platform of layerToPlatform[layer]) {
               // what we do with elements ?
               if (!entity.elem) {
-                components.get(entity.block).get(platform);
-                // .set(entity.id, { filePath });
-              } else {
-                // console.log(entity);
+                components
+                  .get(entity.block)
+                  .get(platform)
+                  .set(entity.id, { filePath });
               }
             }
           }
@@ -388,8 +388,8 @@ const generateReExports = (
 
         // eslint-disable-next-line no-unused-vars
         // eslint-disable @typescript-eslint/no-unused-vars
-        for (let [a, { filePath }] of entities) {
-          console.log(a);
+        for (let [_, { filePath }] of entities) {
+          // console.log(a);
           const exportESMTemplate = getESMExportTemplate({
             filePath: relative(
               join(platformDir, 'index'),
