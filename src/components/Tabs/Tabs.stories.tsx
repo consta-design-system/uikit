@@ -14,18 +14,18 @@ declare type Item2 = {
   icon?: IIcon;
 };
 
-const items = ['Один', 'Два', 'Три'];
+const items = ['Первый', 'Второй', 'Третий вариант'];
 const items2 = [
   {
-    name: 'Один',
+    name: 'Первый',
     icon: IconPhoto,
   },
   {
-    name: 'Два',
+    name: 'Второй',
     icon: IconRing,
   },
   {
-    name: 'Три',
+    name: 'Третий вариант',
     icon: IconCamera,
   },
 ];
@@ -39,10 +39,10 @@ const knobs = () => ({
 storiesOf('Tabs', module)
   .addDecorator(withKnobs)
   .add('Tabs', () => {
-    const [value, setValue] = useState<Item[] | null>(['Один']);
+    const [value, setValue] = useState<Item[] | null>(['Первый']);
     const [value2, setValue2] = useState<Item2[] | null>([
       {
-        name: 'Два',
+        name: 'Второй',
         icon: <IconPhoto />,
       },
     ]);
@@ -56,6 +56,7 @@ storiesOf('Tabs', module)
           getItemKey={(item) => item}
           getItemLabel={(item) => item}
           onChange={({ value }) => setValue(value)}
+          className='decorator decorator_indent-b_3xl'
         />
         <Tabs<Item2>
           {...knobs()}

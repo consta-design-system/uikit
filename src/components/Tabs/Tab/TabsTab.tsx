@@ -43,7 +43,7 @@ export function TabsTab<T>(props: ITabsTab<T>): React.ReactElement {
   };
   return (
     <button
-      className={cnTabs('Tab', { size, active: checked })}
+      className={cnTabs('Tab', { size, active: checked, onlyIcon })}
       onClick={handleChange}
       ref={innerRef}
       role="tab"

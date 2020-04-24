@@ -29,4 +29,8 @@
   &_view_clear {
     border-bottom: none;
   }
+
+  &-RunningLine {
+    transform: translateX(var(--tabOffsetLeft)) scaleX(var(--tabWidth));
+  }
 }
