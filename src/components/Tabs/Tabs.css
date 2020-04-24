@@ -1,0 +1,32 @@
+.Tabs {
+  position: relative;
+  width: 100%;
+  &::before,
+  &-RunningLine {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  &_view {
+    &_bordered::before {
+      content: '';
+      height: 1px;
+      background-color: var(--color-bg-border);
+    }
+  }
+  &-List {
+    width: 100%;
+  }
+  &-RunningLine {
+    height: 2px;
+    background-color: var(--color-bg-brand);
+    transform: scaleX(0.00001);
+    transform-origin: left center;
+    transition: transform 0.25s;
+  }
+
+  &_view_clear {
+    border-bottom: none;
+  }
+}

@@ -1,0 +1,38 @@
+.Tabs-Tab {
+  color: var(--color-typo-secondary);
+  display: inline-flex;
+  transition: color 0.2s;
+  cursor: pointer;
+  align-items: center;
+  padding: 0 0 var(--space-xs);
+  background-color: transparent;
+  border: none;
+
+  &:not(:last-child) {
+    margin-right: var(--size-text-m);
+  }
+  &_active,
+  &:hover {
+    color: var(--color-typo-primary);
+  }
+
+  &_size {
+    &_s {
+      font-size: var(--size-text-s);
+      line-height: var(--line-height-text-s);
+    }
+    &_m {
+      font-size: var(--size-text-m);
+      line-height: var(--line-height-text-xs);
+    }
+  }
+
+  &Input {
+    position: absolute;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  &Icon {
+    margin-right: calc(var(--choice-space) * 0.5);
+  }
+}
