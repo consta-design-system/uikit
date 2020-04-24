@@ -86,7 +86,11 @@ export class Tabs<T> extends Component<ITabs<T>> {
         const rootWidth = this.rootRef.current.offsetWidth;
         const itemWidth = activeItemRef.current.offsetWidth;
         const itemOffsetLeft = activeItemRef.current.offsetLeft;
-        this.lineRef.current.style.setProperty('--tabWidth', `${itemWidth / rootWidth}`);
+        // this.lineRef.current.style.transform = `translateX(${itemOffsetLeft}px) scaleX(${itemWidth /
+        //   rootWidth})`;
+        this.lineRef.current.style.setProperty('--tabsWidth', `${rootWidth}px`);
+        this.lineRef.current.style.setProperty('--tabWidth', `${itemWidth}px`);
+        this.lineRef.current.style.setProperty('--tabRatio', `${itemWidth / rootWidth}`);
         this.lineRef.current.style.setProperty('--tabOffsetLeft', `${itemOffsetLeft}px`);
       }
     }

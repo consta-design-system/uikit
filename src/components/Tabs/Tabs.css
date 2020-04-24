@@ -1,8 +1,8 @@
 .Tabs {
   position: relative;
   width: 100%;
-  &::before,
-  &-RunningLine {
+
+  &::before {
     width: 100%;
     position: absolute;
     bottom: 0;
@@ -19,18 +19,41 @@
     width: 100%;
   }
   &-RunningLine {
-    height: 2px;
-    background-color: var(--color-bg-brand);
-    transform: scaleX(0.00001);
-    transform-origin: left center;
-    transition: transform 0.25s;
+    &,
+    &::before,
+    &::after {
+      position: absolute;
+      bottom: 0;
+      height: 2px;
+      background-color: var(--color-bg-brand);
+      transform-origin: left center;
+      transition: transform 0.25s;
+    }
+  }
+
+  &-RunningLine {
+    left: -1px;
+    width: 1px;
+    border-radius: 1px 0 0 0;
+    transform: translateX(var(--tabOffsetLeft, 0));
+
+    &::before {
+      content: '';
+      left: 1px;
+      width: var(--tabsWidth);
+      transform: scaleX(var(--tabRatio, 0.0001));
+    }
+
+    &::after {
+      content: '';
+      left: 1px;
+      width: 1px;
+      border-radius: 0 1px 0 0;
+      transform: translateX(var(--tabWidth));
+    }
   }
 
   &_view_clear {
     border-bottom: none;
-  }
-
-  &-RunningLine {
-    transform: translateX(var(--tabOffsetLeft)) scaleX(var(--tabWidth));
   }
 }
