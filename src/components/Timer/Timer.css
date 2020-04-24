@@ -1,0 +1,38 @@
+.Timer {
+  position: relative;
+  display: inline-block;
+  border-radius: 50%;
+  background-color: var(--color-control-bg-ghost);
+  width: var(--timer-size);
+  height: var(--timer-size);
+  &_size {
+    &_s {
+      --timer-size: 16px;
+      --timer-count-display: none;
+    }
+    &_m {
+      --timer-size: 24px;
+      --timer-count-display: block;
+    }
+  }
+
+  &-Counter {
+    display: var(--timer-count-display);
+    width: 100%;
+    font-size: var(--size-text-xs);
+    line-height: var(--timer-size);
+    font-weight: bold;
+    color: var(--color-control-typo-ghost);
+    text-align: center;
+  }
+
+  &-Progress {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(100% - var(--space-2xs));
+    height: calc(100% - var(--space-2xs));
+    stroke: var(--color-control-typo-ghost);
+    transform: translate(-50%, -50%) rotate(-90deg);
+  }
+}
