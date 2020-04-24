@@ -1,6 +1,7 @@
 import './Tabs.css';
 
-import React, { Component, createRef, RefObject } from 'react';
+import React, { createRef, useEffect, useRef, useCallback, useMemo } from 'react';
+import { useForkRef } from '../../utils/useForkRef';
 import { cn } from '../../utils/bem';
 import { IIcon } from '../../icons/Icon/Icon';
 import {
@@ -19,20 +20,39 @@ export type TabsProps<T> = {
   view?: TabsPropView;
   getItemIcon?: (item: T) => React.FC<IIcon> | undefined;
 };
-export type ITabs<T> = Omit<
+export type TabsPropsWithIBaseCheckGroupField<T> = Omit<
   IBaseCheckGroupField<T, TabsProps<T>>,
   'componentItem' | 'getAdditionalPropsForItem' | 'multiply'
 >;
 
+export type ITabs<T = {}> = TabsPropsWithIBaseCheckGroupField<T> &
+  Omit<React.HTMLAttributes<HTMLDivElement>, keyof TabsPropsWithIBaseCheckGroupField<T>>;
+
 export const cnTabs = cn('Tabs');
 
-export class Tabs<T> extends Component<ITabs<T>> {
-  constructItemRefs: () => Record<
+export function Tabs<T>(props: ITabs<T>) {
+  const {
+    size = 'm',
+    className,
+    items,
+    getItemKey,
+    view = 'bordered',
+    innerRef,
+    value,
+    onlyIcon,
+    getItemIcon,
+    getItemLabel,
+    id,
+    name,
+    onChange,
+    ...otherProps
+  } = props;
+
+  const constructItemRefs: () => Record<
     BaseCheckGroupFieldItemPropItemKey,
-    RefObject<HTMLButtonElement>
+    React.RefObject<HTMLButtonElement>
   > = () => {
-    const { items, getItemKey } = this.props;
-    const refs: Record<BaseCheckGroupFieldItemPropItemKey, RefObject<HTMLButtonElement>> = {};
+    const refs: Record<BaseCheckGroupFieldItemPropItemKey, React.RefObject<HTMLButtonElement>> = {};
     if (items) {
       for (const item of items) {
         if (getItemKey) {
@@ -43,81 +63,78 @@ export class Tabs<T> extends Component<ITabs<T>> {
     return refs;
   };
 
-  private buttonRefs = this.constructItemRefs();
-  private rootRef = React.createRef<HTMLDivElement>();
-  private lineRef = React.createRef<HTMLDivElement>();
-  private timeOut;
+  const buttonRefs = useMemo(constructItemRefs, [items, getItemKey]);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
 
-  componentDidMount() {
-    const { value } = this.props;
-    if (value && value.length) {
-      this.timeOut = setTimeout(() => {
-        this.updateLine(value[0]);
-      }, 500);
+  function setStyleForLine(tabsWidth, tabWidth, tabRatio, tabOffsetLeft) {
+    if (lineRef.current) {
+      const lineStyle = lineRef.current.style;
+      lineStyle.setProperty('--tabsWidth', `${tabsWidth}px`);
+      lineStyle.setProperty('--tabWidth', `${tabWidth}px`);
+      lineStyle.setProperty('--tabRatio', `${tabRatio}`);
+      lineStyle.setProperty('--tabOffsetLeft', `${tabOffsetLeft}px`);
     }
   }
 
-  componentWillUnmount() {
-    clearTimeout(this.timeOut);
-  }
-
-  getAdditionalPropsForItem: BaseCheckGroupFieldPropGetAdditionalPropsForItem<T, TabsProps<T>> = (
-    item,
-    index,
-    { size, getItemKey, getItemIcon, onlyIcon }
-  ) => ({
-    ...(getItemIcon ? { icon: getItemIcon(item) } : {}),
-    size,
-    onlyIcon,
-    innerRef: getItemKey ? this.buttonRefs[getItemKey(item)] : null,
-    handleItemChange: this.handleItemChange,
-  });
-
-  handleItemChange = ({ value }) => {
-    this.updateLine(value);
-  };
-
-  updateLine = (item) => {
-    const { getItemKey } = this.props;
-
-    if (this.rootRef.current && this.lineRef.current && item) {
-      const activeItemRef = getItemKey ? this.buttonRefs[getItemKey(item)] : undefined;
-      if (activeItemRef && activeItemRef.current) {
-        const rootWidth = this.rootRef.current.offsetWidth;
-        const itemWidth = activeItemRef.current.offsetWidth;
-        const itemOffsetLeft = activeItemRef.current.offsetLeft;
-        // this.lineRef.current.style.transform = `translateX(${itemOffsetLeft}px) scaleX(${itemWidth /
-        //   rootWidth})`;
-        this.lineRef.current.style.setProperty('--tabsWidth', `${rootWidth}px`);
-        this.lineRef.current.style.setProperty('--tabWidth', `${itemWidth}px`);
-        this.lineRef.current.style.setProperty('--tabRatio', `${itemWidth / rootWidth}`);
-        this.lineRef.current.style.setProperty('--tabOffsetLeft', `${itemOffsetLeft}px`);
+  const updateLine = () => {
+    if (rootRef.current && lineRef.current && buttonRefs) {
+      const rootWidth = rootRef.current.offsetWidth;
+      if (value && value.length > 0) {
+        const activeItemRef = getItemKey ? buttonRefs[getItemKey(value[0])] : undefined;
+        if (activeItemRef && activeItemRef.current) {
+          const itemWidth = activeItemRef.current.offsetWidth;
+          const itemOffsetLeft = activeItemRef.current.offsetLeft;
+          setStyleForLine(rootWidth, itemWidth, itemWidth / rootWidth, itemOffsetLeft);
+        }
+      } else {
+        setStyleForLine(rootWidth, 1, 0.00001, 1);
       }
     }
   };
 
-  render() {
-    const {
-      size = 'm',
-      className,
-      items,
-      getItemKey,
-      view = 'bordered',
-      ...otherProps
-    } = this.props;
-    return (
-      <div className={cnTabs({ size, view }, [className])} ref={this.rootRef}>
-        <BaseCheckGroupField<T, ITabs<T>>
-          className={cnTabs('List')}
-          componentItem={TabsTab}
-          size={size}
-          getAdditionalPropsForItem={this.getAdditionalPropsForItem}
-          items={items}
-          getItemKey={getItemKey}
-          {...otherProps}
-        />
-        <div className={cnTabs('RunningLine')} ref={this.lineRef} />
-      </div>
-    );
-  }
+  useEffect(() => {
+    updateLine();
+  }, [value, size, onlyIcon, items]);
+
+  const onMount = useCallback(() => {
+    updateLine();
+  }, []);
+
+  const getAdditionalPropsForItem: BaseCheckGroupFieldPropGetAdditionalPropsForItem<
+    T,
+    TabsProps<T>
+  > = (item, index, { size, getItemKey, getItemIcon, onlyIcon }) => ({
+    ...(getItemIcon ? { icon: getItemIcon(item) } : {}),
+    size,
+    onlyIcon,
+    innerRef: getItemKey ? buttonRefs[getItemKey(item)] : null,
+  });
+
+  const withOutValue = !(value && value.length > 0);
+
+  return (
+    <div
+      className={cnTabs({ size, view }, [className])}
+      ref={useForkRef<HTMLDivElement>([innerRef, rootRef, onMount])}
+      {...otherProps}
+    >
+      <BaseCheckGroupField<T, ITabs<T>>
+        className={cnTabs('List')}
+        componentItem={TabsTab}
+        size={size}
+        getAdditionalPropsForItem={getAdditionalPropsForItem}
+        items={items}
+        getItemKey={getItemKey}
+        value={value}
+        onlyIcon={onlyIcon}
+        getItemIcon={getItemIcon}
+        getItemLabel={getItemLabel}
+        id={id}
+        name={name}
+        onChange={onChange}
+      />
+      <div className={cnTabs('RunningLine', { withOutValue })} ref={lineRef} />
+    </div>
+  );
 }

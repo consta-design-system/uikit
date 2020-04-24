@@ -5,17 +5,14 @@ import { IIcon } from '../../icons/Icon/Icon';
 import { IconPhoto } from '../../icons/IconPhoto/IconPhoto';
 import { IconRing } from '../../icons/IconRing/IconRing';
 import { IconCamera } from '../../icons/IconCamera/IconCamera';
-
 import { Tabs } from './Tabs';
 
-declare type Item = string;
-declare type Item2 = {
+declare type Item = {
   name?: string;
   icon?: IIcon;
 };
 
-const items = ['Первый', 'Второй', 'Третий вариант'];
-const items2 = [
+const items = [
   {
     name: 'Первый',
     icon: IconPhoto,
@@ -30,43 +27,40 @@ const items2 = [
   },
 ];
 
+function Stories({ size, view, onlyIcon, withIcon }) {
+  const [value, setValue] = useState<Item[] | null>([
+    {
+      name: 'Второй',
+      icon: <IconPhoto />,
+    },
+  ]);
+
+  return (
+    <Fragment>
+      <Tabs<Item>
+        items={items}
+        value={value}
+        getItemKey={(item) => item.name}
+        getItemLabel={(item) => item.name}
+        getItemIcon={withIcon ? (item) => item.icon : null}
+        onChange={({ value }) => setValue(value)}
+        size={size}
+        view={view}
+        onlyIcon={onlyIcon}
+      />
+    </Fragment>
+  );
+}
+
 const knobs = () => ({
   size: select('size', ['s', 'm'], 'm'),
   view: select('view', ['bordered', 'clear'], 'bordered'),
+  withIcon: boolean('withIcon', false),
   onlyIcon: boolean('onlyIcon', false),
 });
 
 storiesOf('Tabs', module)
   .addDecorator(withKnobs)
   .add('Tabs', () => {
-    const [value, setValue] = useState<Item[] | null>(['Первый']);
-    const [value2, setValue2] = useState<Item2[] | null>([
-      {
-        name: 'Второй',
-        icon: <IconPhoto />,
-      },
-    ]);
-
-    return (
-      <Fragment>
-        <Tabs<Item>
-          {...knobs()}
-          items={items}
-          value={value}
-          getItemKey={(item) => item}
-          getItemLabel={(item) => item}
-          onChange={({ value }) => setValue(value)}
-          className='decorator decorator_indent-b_3xl'
-        />
-        <Tabs<Item2>
-          {...knobs()}
-          items={items2}
-          value={value2}
-          getItemKey={(item) => item.name}
-          getItemLabel={(item) => item.name}
-          getItemIcon={(item) => item.icon}
-          onChange={({ value }) => setValue2(value)}
-        />
-      </Fragment>
-    );
+    return <Stories {...knobs()} />;
   });

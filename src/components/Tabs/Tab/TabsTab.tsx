@@ -9,7 +9,6 @@ import { cnTabs, TabsPropSize } from '../Tabs';
 export type TabsTabProps<T> = {
   size?: TabsPropSize;
   innerRef?: React.Ref<HTMLButtonElement>;
-  handleItemChange?: ({ value: T }) => void;
   onlyIcon?: boolean;
   icon?: React.FC<IIcon>;
 };
@@ -17,22 +16,8 @@ export type TabsTabProps<T> = {
 export type ITabsTab<T> = BaseCheckGroupItemProps<T> & TabsTabProps<T>;
 
 export function TabsTab<T>(props: ITabsTab<T>): React.ReactElement {
-  const {
-    label,
-    onChange,
-    size,
-    checked,
-    id,
-    value,
-    innerRef,
-    handleItemChange,
-    onlyIcon,
-    icon: Icon,
-  } = props;
-  const handleChange = (e) => {
-    onChange({ e, value, checked: !checked, id });
-    handleItemChange && handleItemChange({ value });
-  };
+  const { label, onChange, size, checked, id, value, innerRef, onlyIcon, icon: Icon } = props;
+  const handleChange = (e) => onChange({ e, value, checked: !checked, id });
   const getIconSizeByTabsSize = (buttonSize: TabsPropSize = 's'): IconPropSize => {
     const sizeObj: Record<TabsPropSize, IconPropSize> = {
       s: 'xs',

@@ -41,13 +41,15 @@
       bottom: 0;
       border-radius: var(--control-radius);
     }
-    
-    &:focus { outline: none; }
+
+    &:focus {
+      outline: none;
+    }
 
     &:focus::before,
     &:focus:hover::before {
       box-shadow: 0 0 0 3px var(--color-control-bg-focus);
-      animation: tabFocusAnimation 0.5s ease-in;
+      animation: Tabs-TabFocusAnimation 0.5s ease-in;
     }
 
     &:focus:active::before,
@@ -67,7 +69,7 @@
 
     &_onlyIcon {
       justify-content: center;
-      
+
       &.Tabs-Tab_size_s {
         width: 20px;
       }
@@ -78,7 +80,7 @@
   }
 }
 
-@keyframes tabFocusAnimation {
+@keyframes Tabs-TabFocusAnimation {
   from {
     box-shadow: 0 0 0 0 var(--color-control-bg-focus), 0 0 0 0 var(--color-control-bg-active);
   }
