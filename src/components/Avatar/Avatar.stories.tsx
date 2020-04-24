@@ -1,5 +1,6 @@
 import React from 'react';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
+import figmaDecorator from 'storybook-addon-figma-new';
 import { storiesOf } from '@storybook/react';
 import { Avatar } from './Avatar';
 
@@ -9,6 +10,11 @@ const defaultKnobs = () => ({
   form: select('form', ['round', 'brick', 'default'], 'round'),
 });
 
-storiesOf('Avatar', module)
+var withFigma = figmaDecorator({
+  url: 'https://www.figma.com/file/FLCwrJTceo6xB9VInayasa/UI-Kit%2FDefault?node-id=2222%3A5588',
+});
+
+storiesOf('UI-KIT|/Avatar', module)
   .addDecorator(withKnobs)
-  .add('Avatar', () => <Avatar {...defaultKnobs()} />);
+  .addDecorator(withFigma)
+  .add('playground', () => <Avatar {...defaultKnobs()} />);
