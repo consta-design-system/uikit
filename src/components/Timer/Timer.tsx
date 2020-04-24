@@ -18,13 +18,13 @@ export const cnTimer = cn('Timer');
 export const Timer: React.FC<Timer> = (props) => {
   const { numberOfSeconds = 5, onComplete, isPlaying = true, size: sizeProp } = props;
 
-  function getSizeOfPixel(size: TimerPropSize): number {
-    const sizeObj: Record<TimerPropSize, number> = {
-      s: 16,
-      m: 24,
-    };
-    return sizeObj[size];
-  }
+  // function getSizeOfPixel(size: TimerPropSize): number {
+  //   const sizeObj: Record<TimerPropSize, number> = {
+  //     s: 16,
+  //     m: 24,
+  //   };
+  //   return sizeObj[size];
+  // }
 
   let size;
   const strokeWidth = 2;
