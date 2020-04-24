@@ -57,12 +57,6 @@
       animation-name: none !important;
     }
 
-    &Input {
-      position: absolute;
-      -webkit-appearance: none;
-      appearance: none;
-    }
-
     &:not(.Tabs-Tab_onlyIcon) .Tabs-Icon {
       margin-right: calc(var(--tab-indent) * 0.5);
     }
