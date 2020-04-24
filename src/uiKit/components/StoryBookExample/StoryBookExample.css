@@ -1,0 +1,6 @@
+.StoryBookExample {
+  &-Children {
+    margin-bottom: 20px;
+    margin-right: 20px;
+  }
+}

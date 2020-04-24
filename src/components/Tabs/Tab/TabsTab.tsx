@@ -48,7 +48,7 @@ export function TabsTab<T>(props: ITabsTab<T>): React.ReactElement {
       ref={innerRef}
       role="tab"
     >
-      {Icon && <Icon className={cnTabs('TabIcon')} size={getIconSizeByTabsSize(size)} />}
+      {Icon && <Icon className={cnTabs('Icon')} size={getIconSizeByTabsSize(size)} />}
       {!onlyIcon && label}
     </button>
   );
