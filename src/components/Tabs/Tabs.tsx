@@ -95,7 +95,7 @@ export function Tabs<T>(props: ITabs<T>) {
 
   useEffect(() => {
     updateLine();
-  }, [value, size, onlyIcon, items]);
+  });
 
   const onMount = useCallback(() => {
     updateLine();
