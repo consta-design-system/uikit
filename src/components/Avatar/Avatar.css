@@ -1,12 +1,21 @@
 .Avatar {
+  --fontSize: ;
+  --backgroundColor: ;
+
   overflow: hidden;
+  background: linear-gradient(rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0)),
+    linear-gradient(var(--backgroundColor), var(--backgroundColor));
 
   &_size {
     &_s {
+      --fontSize: 8px;
+
       width: 24px;
       height: 24px;
     }
     &_m {
+      --fontSize: 10px;
+
       width: 32px;
       height: 32px;
     }
@@ -27,5 +36,17 @@
   &-Image {
     width: 100%;
     height: 100%;
+  }
+
+  &-Initials {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: var(--fontSize);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: #fff;
   }
 }
