@@ -12,16 +12,22 @@ import './_gap/Theme_gap_m.css';
 import './_gap/Theme_gap_s.css';
 
 import React from 'react';
+import { withDocs } from '@storybook-addons/docs';
 import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 
-import { Text } from '../Text/Text';
-
 import { cnTheme } from './Theme';
 
-storiesOf('Theme', module)
+storiesOf('UI-KIT|/Theme', module)
   .addDecorator(withKnobs)
-  .add('Theme', () => (
+  .addDecorator(
+    withDocs({
+      readme: {
+        content: require('./Theme.md')['default'],
+      },
+    })
+  )
+  .add('documentation', () => (
     <div
       className={cnTheme({
         color: 'gpnDefault',
@@ -31,8 +37,5 @@ storiesOf('Theme', module)
         space: 'gpnDefault',
         gap: 'm',
       })}
-    >
-      <Text> Текст </Text>
-      <Text className={cnTheme({ color: 'gpnDark' })}> Текст </Text>
-    </div>
+    />
   ));
