@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { withKnobs, text, select, boolean } from '@storybook/addon-knobs';
 import { withDocs } from '@storybook-addons/docs';
-import figmaDecorator from 'storybook-addon-figma-new';
 import { storiesOf } from '@storybook/react';
 import { IconUser } from '../../icons/IconUser/IconUser';
 import { StoryBookExample } from '../../uiKit/components/StoryBookExample/StoryBookExample';
@@ -41,11 +40,11 @@ storiesOf('UI-KIT|/Badge', module)
       },
     })
   )
-  .addDecorator(
-    figmaDecorator({
-      url: 'https://www.figma.com/file/FLCwrJTceo6xB9VInayasa/UI-Kit%2FDefault?node-id=2222%3A5588',
-    })
-  )
+  // .addDecorator(
+  //   figmaDecorator({
+  //     url: 'https://www.figma.com/file/FLCwrJTceo6xB9VInayasa/UI-Kit%2FDefault?node-id=2222%3A5588',
+  //   })
+  // )
   .add('playground', () => <Stories {...defaultKnobs()} />);
 
 storiesOf('UI-KIT|/Examples/Badge', module)

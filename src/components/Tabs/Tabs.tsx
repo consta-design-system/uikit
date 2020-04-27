@@ -136,7 +136,9 @@ export function Tabs<T>(props: ITabs<T>) {
         name={name}
         onChange={onChange}
       />
-      <div className={cnTabs('RunningLine', { withOutValue, mounted })} ref={lineRef} />
+      <div className={cnTabs('WrapperRunningLine')}>
+        <div className={cnTabs('RunningLine', { withOutValue, mounted })} ref={lineRef} />
+      </div>
     </div>
   );
 }

@@ -48,6 +48,7 @@
       left: 1px;
       width: var(--tabsWidth);
       transform: scaleX(var(--tabRatio, 0.0001));
+      transition: transform 0.25s;
     }
 
     &::after {
@@ -56,10 +57,12 @@
       width: 1px;
       border-radius: 0 1px 0 0;
       transform: translateX(var(--tabWidth));
+      transition: transform 0.25s;
     }
   }
 
-  &_view_clear {
-    border-bottom: none;
+  &-WrapperRunningLine {
+    width: 100%;
+    overflow: hidden;
   }
 }
