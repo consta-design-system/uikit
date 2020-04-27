@@ -27,6 +27,8 @@
       height: 2px;
       background-color: var(--color-bg-brand);
       transform-origin: left center;
+    }
+    &_mounted {
       transition: opacity 0.2s, transform 0.25s;
     }
   }

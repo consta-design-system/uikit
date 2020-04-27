@@ -1,6 +1,6 @@
 import './Tabs.css';
 
-import React, { createRef, useEffect, useRef, useCallback, useMemo } from 'react';
+import React, { createRef, useEffect, useRef, useCallback, useMemo, useState } from 'react';
 import { useForkRef } from '../../utils/useForkRef';
 import { cn } from '../../utils/bem';
 import { IIcon } from '../../icons/Icon/Icon';
@@ -47,6 +47,7 @@ export function Tabs<T>(props: ITabs<T>) {
     onChange,
     ...otherProps
   } = props;
+  const [mounted, setMounted] = useState<boolean>(false);
 
   const constructItemRefs: () => Record<
     BaseCheckGroupFieldItemPropItemKey,
@@ -99,6 +100,7 @@ export function Tabs<T>(props: ITabs<T>) {
 
   const onMount = useCallback(() => {
     updateLine();
+    setMounted(true);
   }, []);
 
   const getAdditionalPropsForItem: BaseCheckGroupFieldPropGetAdditionalPropsForItem<
@@ -134,7 +136,7 @@ export function Tabs<T>(props: ITabs<T>) {
         name={name}
         onChange={onChange}
       />
-      <div className={cnTabs('RunningLine', { withOutValue })} ref={lineRef} />
+      <div className={cnTabs('RunningLine', { withOutValue, mounted })} ref={lineRef} />
     </div>
   );
 }
