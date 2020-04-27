@@ -105,7 +105,7 @@ export function Avatar<T>(props: IAvatar<T>): React.ReactElement | null {
   const initials = useMemo(() => getInitials(name), [name]);
   const backgroundColor = useMemo(() => getBackgroundColor(name), [name]);
 
-  const localRef = useRef();
+  const localRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     localRef.current && localRef.current.style.setProperty('--backgroundColor', backgroundColor);
