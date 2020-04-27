@@ -4,6 +4,7 @@ import React, { Fragment } from 'react';
 import { cn } from '../../utils/bem';
 import { IIcon, IconPropSize } from '../../icons/Icon/Icon';
 import { componentIsFunction } from '../../utils/componentIsFunction';
+import { Loader } from '../Loader/Loader';
 
 export type ButtonPropSize = 'xs' | 's' | 'm' | 'l';
 export type ButtonPropView = 'clear' | 'ghost' | 'primary' | 'secondary';
@@ -25,6 +26,7 @@ export type ButtonProps = {
   className?: string;
   tabIndex?: number;
   disabled?: boolean;
+  loading?: boolean;
   label?: string;
   onClick?: React.EventHandler<React.MouseEvent>;
   iconLeft?: React.FC<IIcon>;
@@ -57,6 +59,7 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
     className,
     onClick,
     disabled,
+    loading,
     tabIndex,
     as = 'button',
     onlyIcon,
@@ -72,7 +75,7 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
   const IconRight = iconRight;
   const withIcon = !!iconLeft || !!iconRight;
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!disabled && onClick) {
+    if (!disabled && !loading && onClick) {
       onClick(e);
     }
   };
@@ -101,6 +104,7 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
           width,
           form,
           disabled,
+          loading,
           withIcon,
           onlyIcon: !!IconOnly,
         },
@@ -119,14 +123,15 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
             {IconLeft && (
               <IconLeft className={cnButton('Icon', { position: 'left' })} size={_iconSize} />
             )}
-            <span className={cnButton('Label')}>{label}</span>
+            <span className={cnButton('Label', { withIcon })}>{label}</span>
             {IconRight && (
               <IconRight className={cnButton('Icon', { position: 'right' })} size={_iconSize} />
             )}
           </Fragment>
         ) : (
-          label
+          <span className={cnButton('Label')}>{label}</span>
         ))}
+      {loading && <Loader className={cnButton('Loader')} size="s" currentColor />}
     </Component>
   );
 }

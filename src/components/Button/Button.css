@@ -1,5 +1,7 @@
 /* stylelint-disable  no-descending-specificity  */
 .Button {
+  --contentVisibility: visible;
+
   position: relative;
   z-index: 1;
   display: inline-block;
@@ -147,12 +149,17 @@
   }
 
   &_disabled,
-  &:disabled {
+  &:disabled,
+  &_loading {
     cursor: not-allowed;
     pointer-events: none;
     color: var(--color-control-typo-disable);
     border-color: transparent;
     background-color: var(--color-control-bg-disable);
+  }
+
+  &_loading {
+    --contentVisibility: hidden;
   }
 
   &_width {
@@ -179,6 +186,8 @@
   &-Icon {
     display: block;
     flex-shrink: 0;
+    visibility: var(--contentVisibility);
+
     &_position {
       &_left {
         margin-right: var(--icon-indent);
@@ -190,11 +199,19 @@
   }
 
   &-Label {
-    flex-grow: 1;
-    flex-shrink: 1;
     overflow: hidden;
     text-align: center;
     text-overflow: ellipsis;
+    visibility: var(--contentVisibility);
+
+    &_withIcon {
+      flex-grow: 1;
+      flex-shrink: 1;
+    }
+  }
+
+  &-Loader {
+    position: absolute !important;
   }
 }
 
