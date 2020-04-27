@@ -22,6 +22,7 @@
     "./src/storybook-features/*",
     "./src/**/*.stories/**",
     "./src/**/*.stories.*",
-    "./src/themes/*"
+    "./src/themes/*",
+    "./src/uiKit/*"
   ]
 }

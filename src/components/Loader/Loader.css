@@ -42,10 +42,10 @@
 
   &_size {
     &_s {
-      --loader-size: var(--space-2xs);
+      --loader-size: 4px;
     }
     &_m {
-      --loader-size: var(--space-xs);
+      --loader-size: 8px;
     }
   }
 }

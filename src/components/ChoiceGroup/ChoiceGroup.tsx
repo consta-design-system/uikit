@@ -37,16 +37,16 @@ export function ChoiceGroup<T>(props: IChoiceGroup<T>): React.ReactElement {
     form = 'default',
     className,
     view = 'primary',
-    getItemIcon,
     getItemTitle,
     onlyIcon,
+    getItemIcon,
     ...otherProps
   } = props;
 
   const getAdditionalPropsForItem: BaseCheckGroupFieldPropGetAdditionalPropsForItem<
     T,
     ChoiceGroupProps<T>
-  > = (item, { size, onlyIcon }) => ({
+  > = (item, index, { size, onlyIcon, getItemIcon, getItemTitle }) => ({
     ...(getItemIcon ? { icon: getItemIcon(item) } : {}),
     ...(getItemTitle ? { title: getItemTitle(item) } : {}),
     size,
@@ -60,6 +60,8 @@ export function ChoiceGroup<T>(props: IChoiceGroup<T>): React.ReactElement {
       getAdditionalPropsForItem={getAdditionalPropsForItem}
       size={size}
       onlyIcon={onlyIcon}
+      getItemIcon={getItemIcon}
+      getItemTitle={getItemTitle}
       {...otherProps}
     />
   );

@@ -24,6 +24,7 @@ module.exports = {
     'src/icons/BaseIconHoc/**',
     'src/fileIcons/BaseFileIconHoc/**',
     'src/themes/**',
+    'src/uiKit/**',
   ],
   tsconfig: 'tsconfig.json',
   postcssConfig: 'postcss.config.js',
