@@ -20,7 +20,7 @@ const items = [
     icon: IconPhoto,
   },
   {
-    name: 'Второй Второй Второй Второй',
+    name: 'Очень длинный второй вариант',
     icon: IconRing,
   },
   {
@@ -32,8 +32,8 @@ const items = [
 function Stories({ size, view, onlyIcon, withIcon }) {
   const [value, setValue] = useState<Item[] | null>([
     {
-      name: 'Второй',
-      icon: <IconPhoto />,
+      name: 'Первый',
+      icon: IconPhoto,
     },
   ]);
 
