@@ -17,10 +17,11 @@ export type BaseCheckGroupFieldPropGetItemLabel<T> = (
 ) => BaseCheckGroupFieldItemPropItemLabel;
 export type BaseCheckGroupFieldPropGetAdditionalPropsForItem<T, T2 = {}> = (
   item: T,
+  index: number,
   props: IBaseCheckGroupField<T, T2>
 ) => {};
 
-export type ItemProps<T> = {
+export type BaseCheckGroupItemProps<T> = {
   multiply?: boolean;
   className?: string;
   onChange: BaseCheckGroupFieldItemPropOnChange<T>;
@@ -55,7 +56,7 @@ export type IBaseCheckGroupFieldProps<T> = {
   onChange?: BaseCheckGroupFieldPropOnChange<T>;
   getItemKey?: BaseCheckGroupFieldPropGetItemKey<T>;
   getItemLabel?: BaseCheckGroupFieldPropGetItemLabel<T>;
-  componentItem: React.FC<ItemProps<T>>;
+  componentItem: React.FC<BaseCheckGroupItemProps<T>>;
   innerRef?: React.Ref<HTMLDivElement>;
   className?: string;
   style?: CSSProperties;
@@ -65,7 +66,9 @@ export type IBaseCheckGroupField<T, T2 = {}> = IBaseCheckGroupFieldProps<T> & {
   getAdditionalPropsForItem?: BaseCheckGroupFieldPropGetAdditionalPropsForItem<T, T2>;
 } & Omit<T2, keyof IBaseCheckGroupFieldProps<T>>;
 
-export function BaseCheckGroupField<T, T2 = {}>(props: IBaseCheckGroupField<T, T2>) {
+export function BaseCheckGroupField<T, T2 = {}>(
+  props: IBaseCheckGroupField<T, T2>
+): React.ReactElement | null {
   const {
     items,
     componentItem,
@@ -107,9 +110,9 @@ export function BaseCheckGroupField<T, T2 = {}>(props: IBaseCheckGroupField<T, T
   return (
     <div className={className} style={style} ref={innerRef}>
       {items
-        ? items.map((item) => (
+        ? items.map((item, index) => (
             <ComponentItem
-              {...(getAdditionalPropsForItem ? getAdditionalPropsForItem(item, props) : {})}
+              {...(getAdditionalPropsForItem ? getAdditionalPropsForItem(item, index, props) : {})}
               onChange={handleItemChange}
               key={getItemKey(item)}
               label={getItemLabel(item)}
