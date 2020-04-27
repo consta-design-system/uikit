@@ -7,6 +7,7 @@ export function setRef<T>(
   if (typeof ref === 'function') {
     ref(value);
   } else if (ref) {
+    // @ts-ignore
     ref.current = value;
   }
 }

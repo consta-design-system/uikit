@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { select, withKnobs, boolean } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { IIcon } from '../../icons/Icon/Icon';
@@ -36,19 +36,17 @@ function Stories({ size, view, onlyIcon, withIcon }) {
   ]);
 
   return (
-    <Fragment>
-      <Tabs<Item>
-        items={items}
-        value={value}
-        getItemKey={(item) => item.name}
-        getItemLabel={(item) => item.name}
-        getItemIcon={withIcon ? (item) => item.icon : null}
-        onChange={({ value }) => setValue(value)}
-        size={size}
-        view={view}
-        onlyIcon={onlyIcon}
-      />
-    </Fragment>
+    <Tabs<Item>
+      items={items}
+      value={value}
+      getItemKey={(item) => item.name}
+      getItemLabel={(item) => item.name}
+      getItemIcon={withIcon ? (item) => item.icon : null}
+      onChange={({ value }) => setValue(value)}
+      size={size}
+      view={view}
+      onlyIcon={onlyIcon}
+    />
   );
 }
 
