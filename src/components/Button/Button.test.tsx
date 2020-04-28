@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 
-import { Button, ButtonProps, ButtonPropWidth } from './Button';
+import { Button, ButtonProps } from './Button';
 
 const testId = 'button';
 
@@ -11,7 +11,7 @@ const renderComponent = (props: ButtonProps = {}) => {
 };
 
 describe('Компонент Button', () => {
-  it('рендериться без ошибок', () => {
+  it('должен рендериться без ошибок', () => {
     expect(renderComponent).not.toThrow();
   });
 
@@ -24,7 +24,7 @@ describe('Компонент Button', () => {
 
           const button = screen.getByTestId(testId);
 
-          expect(button.classList.contains(`Button_size_${size}`)).toBe(true);
+          expect(button).toHaveClass(`Button_size_${size}`);
         });
       });
     });
@@ -37,7 +37,7 @@ describe('Компонент Button', () => {
 
           const button = screen.getByTestId(testId);
 
-          expect(button.classList.contains(`Button_view_${view}`)).toBe(true);
+          expect(button).toHaveClass(`Button_view_${view}`);
         });
       });
     });
@@ -50,7 +50,7 @@ describe('Компонент Button', () => {
 
           const button = screen.getByTestId(testId);
 
-          expect(button.classList.contains(`Button_width_${width}`)).toBe(true);
+          expect(button).toHaveClass(`Button_width_${width}`);
         });
       });
     });
@@ -72,7 +72,7 @@ describe('Компонент Button', () => {
 
           const button = screen.getByTestId(testId);
 
-          expect(button.classList.contains(`Button_form_${form}`)).toBe(true);
+          expect(button).toHaveClass(`Button_form_${form}`);
         });
       });
     });
@@ -88,10 +88,18 @@ describe('Компонент Button', () => {
           expect(button.tagName).toEqual(el.toUpperCase());
         });
       });
+
+      it(`должен рендериться как функциональный компонент`, () => {
+        renderComponent({ as: (props) => <span {...props} /> });
+
+        const button = screen.getByTestId(testId);
+
+        expect(button.tagName).toEqual('SPAN');
+      });
     });
 
     describe('проверка disabled', () => {
-      it('должен отключать <button>', () => {
+      it.skip('должен отключать <button>', () => {
         const handleClick = jest.fn();
 
         renderComponent({ disabled: true, onClick: handleClick });
@@ -101,7 +109,9 @@ describe('Компонент Button', () => {
         fireEvent.click(button);
 
         expect(handleClick).toHaveBeenCalledTimes(0);
-        expect(button.classList.contains('Button_disabled')).toBe(true);
+
+        expect(button).toBeDisabled();
+        expect(button).toHaveClass('Button_disabled');
       });
 
       it('должен вешать класс disabled на <a> элемент', () => {
@@ -114,84 +124,84 @@ describe('Компонент Button', () => {
         fireEvent.click(button);
 
         expect(handleClick).toHaveBeenCalledTimes(0);
-        expect(button.classList.contains('Button_disabled')).toBe(true);
+        expect(button).toHaveClass('Button_disabled');
       });
     });
+  });
 
-    it('должен работать обработчик onClick, если кнопка не отключена', () => {
-      const handleClick = jest.fn();
+  it('должен отображать текст в кнопке', () => {
+    const label = 'Это кнопка';
 
-      renderComponent({ onClick: handleClick });
+    renderComponent({ label });
+
+    const button = screen.getByTestId(testId);
+
+    expect(button.textContent).toEqual(label);
+  });
+
+  it('должен работать onClick, если кнопка не отключена', () => {
+    const handleClick = jest.fn();
+
+    renderComponent({ onClick: handleClick });
+
+    const button = screen.getByTestId(testId);
+
+    fireEvent.click(button);
+
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+
+  describe('проверка иконки', () => {
+    it('должен отображать иконку слева', () => {
+      const label = 'Текст кнопки';
+      const iconLeftText = 'Иконка слева';
+      const IconLeft = () => <span>{iconLeftText}</span>;
+
+      renderComponent({ label, iconLeft: IconLeft });
 
       const button = screen.getByTestId(testId);
 
-      fireEvent.click(button);
-
-      expect(handleClick).toHaveBeenCalledTimes(1);
+      expect(button).toHaveTextContent(iconLeftText + label);
     });
 
-    it('должен отображать текст в кнопке', () => {
-      const label = 'Это кнопка';
+    it('должен отображать иконку справа', () => {
+      const label = 'Текст кнопки';
+      const iconRightText = 'Иконка справа';
+      const IconRight = () => <span>{iconRightText}</span>;
 
-      renderComponent({ label });
+      renderComponent({ label, iconRight: IconRight });
 
       const button = screen.getByTestId(testId);
 
-      expect(button.textContent).toEqual(label);
+      expect(button).toHaveTextContent(label + iconRightText);
     });
 
-    describe('проверка иконки', () => {
-      it('должен отображать иконку слева', () => {
-        const label = 'Текст кнопки';
-        const iconLeftText = 'Иконка слева';
-        const IconLeft = () => <span>{iconLeftText}</span>;
+    it('должен отображать иконки слева и справа', () => {
+      const label = 'Текст кнопки';
+      const iconRightText = 'Иконка справа';
+      const iconLeftText = 'Иконка слева';
 
-        renderComponent({ label, iconLeft: IconLeft });
+      const IconLeft = () => <span>{iconLeftText}</span>;
+      const IconRight = () => <span>{iconRightText}</span>;
 
-        const button = screen.getByTestId(testId);
+      renderComponent({ label, iconRight: IconRight, iconLeft: IconLeft });
 
-        expect(button.textContent).toEqual(iconLeftText + label);
-      });
+      const button = screen.getByTestId(testId);
 
-      it('должен отображать иконку справа', () => {
-        const label = 'Текст кнопки';
-        const iconRightText = 'Иконка справа';
-        const IconRight = () => <span>{iconRightText}</span>;
+      expect(button).toHaveTextContent(iconLeftText + label + iconRightText);
+    });
 
-        renderComponent({ label, iconRight: IconRight });
+    it('должен отображать только иконку', () => {
+      const label = 'Текст кнопки';
+      const iconLeftText = 'Иконка слева';
 
-        const button = screen.getByTestId(testId);
+      const IconLeft = () => <span>{iconLeftText}</span>;
 
-        expect(button.textContent).toEqual(label + iconRightText);
-      });
+      renderComponent({ label, iconLeft: IconLeft, onlyIcon: true });
 
-      it('должен отображать иконки слева и справа', () => {
-        const label = 'Текст кнопки';
-        const iconRightText = 'Иконка справа';
-        const iconLeftText = 'Иконка слева';
+      const button = screen.getByTestId(testId);
 
-        const IconLeft = () => <span>{iconLeftText}</span>;
-        const IconRight = () => <span>{iconRightText}</span>;
-
-        renderComponent({ label, iconRight: IconRight, iconLeft: IconLeft });
-
-        const button = screen.getByTestId(testId);
-
-        expect(button.textContent).toEqual(iconLeftText + label + iconRightText);
-      });
-
-      it('должен отображать только иконку', () => {
-        const label = 'Текст кнопки';
-        const iconLeftText = 'Иконка слева';
-
-        const IconLeft = () => <span>{iconLeftText}</span>;
-
-        renderComponent({ label, iconLeft: IconLeft, onlyIcon: true });
-
-        const button = screen.getByTestId(testId);
-
-        expect(button.textContent).toEqual(iconLeftText);
-      });
+      expect(button).toHaveTextContent(iconLeftText);
     });
   });
 });
