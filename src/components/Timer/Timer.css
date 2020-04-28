@@ -26,13 +26,11 @@
     text-align: center;
   }
 
-  &-Progress {
+  &-Progress.ProgressSpin {
+    --animation-duration: 1s;
+
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: calc(100% - var(--space-2xs));
-    height: calc(100% - var(--space-2xs));
-    stroke: var(--color-control-typo-ghost);
-    transform: translate(-50%, -50%) rotate(-90deg);
+    top: 2px;
+    left: 2px;
   }
 }

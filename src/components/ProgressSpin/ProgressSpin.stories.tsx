@@ -1,19 +1,19 @@
 import * as React from 'react';
-import { withKnobs, select, boolean, number } from '@storybook/addon-knobs';
+import { withKnobs, select, number, boolean } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import { Timer } from './Timer';
+import { ProgressSpin } from './ProgressSpin';
 
-function Stories({ size, playing, seconds }) {
-  return <Timer size={size} playing={playing} seconds={seconds} />;
+function Stories({ size, progress, animation }) {
+  return <ProgressSpin size={size} progress={progress} animation={animation} />;
 }
 
 const defaultKnobs = () => ({
-  seconds: number('seconds', 5),
+  progress: number('progress', 50),
   size: select('size', ['s', 'm'], 'm'),
-  playing: boolean('playing', false),
+  animation: boolean('animation', false),
 });
 
-storiesOf('UI-KIT|/Timer', module)
+storiesOf('UI-KIT|/ProgressSpin', module)
   .addDecorator(withKnobs)
   // .addDecorator(
   //   withDocs({

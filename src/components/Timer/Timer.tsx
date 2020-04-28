@@ -1,68 +1,71 @@
 import './Timer.css';
 
-import React, { useMemo } from 'react';
-import { useElapsedTime } from 'use-elapsed-time';
+import React, { useEffect } from 'react';
+import { useTimer } from 'use-timer';
+import { ProgressSpin, ProgressSpinPropSize } from '../ProgressSpin/ProgressSpin';
 import { cn } from '../../utils/bem';
 
-export type TimerPropSize = 'm' | 's';
+export type TimerPropSize = ProgressSpinPropSize;
+export type TimerPropOnTimerInit = (obj: {
+  isRunning: boolean;
+  pause: () => void;
+  reset: () => void;
+  start: () => void;
+  time: number;
+}) => void;
 
-export type Timer = {
+export type TimerProps = {
   size?: TimerPropSize;
-  numberOfSeconds?: number;
-  onComplete?: () => undefined | [boolean, number];
-  isPlaying?: boolean;
+  seconds?: number;
+  onComplete?: () => void;
+  onTimerInit: TimerPropOnTimerInit;
+  playing?: boolean;
+  innerRef?: React.Ref<HTMLDivElement>;
 };
 
 export const cnTimer = cn('Timer');
 
-export const Timer: React.FC<Timer> = (props) => {
-  const { numberOfSeconds = 5, onComplete, isPlaying = true, size: sizeProp } = props;
+export type ITimer = TimerProps & (Omit<React.HTMLAttributes<HTMLDivElement>, keyof TimerProps>);
 
-  function getSizeOfPixel(size: TimerPropSize): number {
-    const sizeObj: Record<TimerPropSize, number> = {
-      s: 16,
-      m: 24,
-    };
-    return sizeObj[size];
-  }
+export function Timer(props: ITimer): React.ReactElement {
+  const {
+    seconds = 5,
+    onComplete,
+    playing = false,
+    size = 'm',
+    onTimerInit,
+    innerRef,
+    ...otherProps
+  } = props;
 
-  let size;
-  const strokeWidth = 2;
+  const { time, start, pause, reset, isRunning } = useTimer({
+    timerType: 'DECREMENTAL',
+    endTime: 0,
+    initialTime: seconds,
+    step: 1,
+    interval: 1000,
+    onTimeOver: () => onComplete && onComplete(),
+  });
 
-  if (sizeProp === 'm') {
-    size = 24;
-  } else if (sizeProp === 's') {
-    size = 16;
-  }
+  useEffect(() => {
+    onTimerInit && onTimerInit({ time, start, pause, reset, isRunning });
+  }, []);
 
-  const durationMilliseconds = useMemo(() => numberOfSeconds * 1000, [numberOfSeconds]);
-  const elapsedTime = useElapsedTime(isPlaying, { durationMilliseconds, onComplete });
-  const remainingTime = Math.ceil((durationMilliseconds - elapsedTime) / 1000);
+  useEffect(() => {
+    if (playing && !isRunning) {
+      start();
+    }
+    if (!playing && isRunning) {
+      pause();
+    }
+  }, [playing]);
 
-  const r = size / 2 - strokeWidth;
-  const percent = (elapsedTime * 100) / durationMilliseconds;
-  const strokeDasharray = r * 2 * Math.PI;
-  const strokeDashoffset = strokeDasharray - (strokeDasharray * percent) / 100;
+  const progress = (time / seconds) * 100;
 
   return (
-    <div className={cnTimer({ size: sizeProp })}>
-      <svg
-        className={cnTimer('Progress')}
-        width={size}
-        height={size}
-        viewBox={`0 0 ${size} ${size}`}
-      >
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={r}
-          fill="none"
-          strokeWidth={strokeWidth}
-          strokeDasharray={strokeDasharray}
-          strokeDashoffset={strokeDashoffset}
-        />
-      </svg>
-      <div className={cnTimer('Counter')}>{remainingTime}</div>
+    <div {...otherProps} className={cnTimer({ size })} ref={innerRef}>
+      <ProgressSpin className={cnTimer('Progress')} size={size} progress={progress} animation />
+      <div className={cnTimer('Counter')}>{time}</div>
     </div>
   );
-};
+}
