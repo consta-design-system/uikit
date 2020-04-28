@@ -123,15 +123,15 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
             {IconLeft && (
               <IconLeft className={cnButton('Icon', { position: 'left' })} size={_iconSize} />
             )}
-            <span className={cnButton('Label', { withIcon })}>{label}</span>
+            <span className={cnButton('Label')}>{label}</span>
             {IconRight && (
               <IconRight className={cnButton('Icon', { position: 'right' })} size={_iconSize} />
             )}
           </Fragment>
         ) : (
-          <span className={cnButton('Label')}>{label}</span>
+          label
         ))}
-      {loading && <Loader className={cnButton('Loader')} size="s" currentColor />}
+      {loading && <Loader className={cnButton('Loader')} size="s" />}
     </Component>
   );
 }

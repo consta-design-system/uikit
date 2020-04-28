@@ -1,5 +1,5 @@
 .Loader {
-  --backgroundColor: var(--color-control-bg-primary);
+  --backgroundColor: var(--loaderBackgroundColor, var(--color-control-bg-primary));
 
   position: relative;
   left: 50%;
@@ -49,10 +49,6 @@
     &_m {
       --loader-size: 8px;
     }
-  }
-
-  &_currentColor {
-    --backgroundColor: currentColor;
   }
 }
 
