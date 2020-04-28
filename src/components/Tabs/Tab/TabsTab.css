@@ -1,0 +1,84 @@
+.Tabs {
+  &-Tab {
+    --tab-indent: var(--space-m);
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-xs) 0;
+    border: none;
+    font-family: var(--font);
+    font-size: var(--tab-font-size);
+    line-height: var(--line-height-text-s);
+    color: var(--color-typo-secondary);
+    background-color: transparent;
+    cursor: pointer;
+    transition: color 0.2s;
+
+    &:not(:last-child) {
+      margin-right: var(--space-m);
+    }
+    &_active,
+    &:hover {
+      color: var(--color-typo-primary);
+    }
+
+    &_size {
+      &_s {
+        --tab-font-size: var(--size-text-s);
+      }
+      &_m {
+        --tab-font-size: var(--size-text-m);
+      }
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      display: block;
+      left: -4px;
+      right: -4px;
+      top: 0;
+      bottom: 0;
+      border-radius: var(--control-radius);
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus::before,
+    &:focus:hover::before {
+      box-shadow: 0 0 0 3px var(--color-control-bg-focus);
+      animation: Tabs-TabFocusAnimation 0.5s ease-in;
+    }
+
+    &:focus:active::before,
+    &:focus:active:hover::before {
+      animation-name: none !important;
+    }
+
+    &:not(.Tabs-Tab_onlyIcon) .Tabs-Icon {
+      margin-right: calc(var(--tab-indent) * 0.5);
+    }
+
+    &_onlyIcon {
+      justify-content: center;
+
+      &.Tabs-Tab_size_s {
+        width: 20px;
+      }
+      &.Tabs-Tab_size_m {
+        width: 24px;
+      }
+    }
+  }
+}
+
+@keyframes Tabs-TabFocusAnimation {
+  from {
+    box-shadow: 0 0 0 0 var(--color-control-bg-focus), 0 0 0 0 var(--color-control-bg-active);
+  }
+  to {
+    box-shadow: 0 0 0 3px var(--color-control-bg-focus), 0 0 0 6px transparent;
+  }
+}

@@ -1,0 +1,68 @@
+.Tabs {
+  position: relative;
+  width: 100%;
+
+  &::before {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  &_view {
+    &_bordered::before {
+      content: '';
+      height: 1px;
+      background-color: var(--color-bg-border);
+    }
+  }
+  &-List {
+    width: 100%;
+  }
+  &-RunningLine {
+    &,
+    &::before,
+    &::after {
+      position: absolute;
+      bottom: 0;
+      height: 2px;
+      background-color: var(--color-bg-brand);
+      transform-origin: left center;
+    }
+    &_mounted {
+      transition: opacity 0.2s, transform 0.25s;
+    }
+  }
+
+  &-RunningLine {
+    left: -1px;
+    width: 1px;
+    border-radius: 1px 0 0 0;
+    transform: translateX(var(--tabOffsetLeft, 0));
+
+    &_withOutValue {
+      opacity: 0;
+    }
+
+    &::before {
+      content: '';
+      left: 1px;
+      width: var(--tabsWidth);
+      transform: scaleX(var(--tabRatio, 0.0001));
+      transition: transform 0.25s;
+    }
+
+    &::after {
+      content: '';
+      left: 1px;
+      width: 1px;
+      border-radius: 0 1px 0 0;
+      transform: translateX(var(--tabWidth));
+      transition: transform 0.25s;
+    }
+  }
+
+  &-WrapperRunningLine {
+    width: 100%;
+    overflow: hidden;
+  }
+}
