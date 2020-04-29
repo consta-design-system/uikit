@@ -91,4 +91,11 @@ storiesOf('UI-KIT|/Examples/Text', module)
         </Text>
       </StoryBookExample>
     );
+  })
+  .add('_label', () => {
+    return (
+      <Text size="l" align="left" font="sans" view="primary">
+        ЭТА СТОРИС НЕ РАБОТАЕТ
+      </Text>
+    );
   });

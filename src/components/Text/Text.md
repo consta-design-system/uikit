@@ -124,3 +124,7 @@ function App() {
 ```
 
 {{%story::desktop:ui-kit-examples-text--view%}}
+
+### Сторис ниже не работает
+
+{{%story::desktop:ui-kit-examples-text--label%}}
