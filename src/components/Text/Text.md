@@ -25,7 +25,9 @@ export function App() {
       weight = 'regular'
       width = 'default'
       className = 'custom-class-name'
-    />
+    >
+      Текст
+    </>
   );
 }
 ```
