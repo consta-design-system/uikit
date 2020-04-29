@@ -56,3 +56,69 @@ export function App() {
 
 <!-- props:end -->
 
+## Примеры
+
+### Заголовок с абзацем
+
+Пример классической конструкции: заголовок и абзац текста
+
+```ts
+import React, { Fragment } from 'react';
+import { Text } from '@gpn-design/uikit/Text';
+
+function App() {
+  return (
+      <Fragment>
+        <Text
+          as="div"
+          align="left"
+          font="sans"
+          lineHeight="l"
+          size="2xl"
+          spacing="m"
+          transform="uppercase"
+          view="primary"
+          weight="bold"
+        >
+          Заголовок несет суть
+        </Text>
+        <Text as="p" align="left" font="serif" lineHeight="s" size="s" view="primary">
+          Абзац – это часть текста между отступами с новой строки. Абзац можно назвать микротекстом.
+          В общей теме могут выделяться и микротемы. При этом каждый абзац раскрывает свою
+          микротему. Что же ещё можно сказать про абзацы? Мы видим, что обычно в абзацах несколько
+          предложений. И в таком случае каждый абзац служит для выделения своей микротемы.
+        </Text>
+      </Fragment>
+  );
+}
+```
+
+{{%story::desktop:ui-kit-examples-text--size%}}
+
+### Примеры внешнего вида текста
+
+```ts
+import React, { Fragment } from 'react';
+import { Text } from '@gpn-design/uikit/Text';
+
+function App() {
+  return (
+      <Fragment>
+        <Text size="l" align="left" font="sans" view="primary">
+          Primary используется для основного текста
+        </Text>
+        <Text size="l" align="left" font="sans" view="secondary">
+          Secondary используется для второстепенного текста
+        </Text>
+        <Text size="l" align="left" font="sans" view="warning">
+          Warning используется для предупреждений
+        </Text>
+        <Text size="l" align="left" font="sans" view="alert">
+          Alert используется для ошибок
+        </Text>
+      </Fragment>
+  );
+}
+```
+
+{{%story::desktop:ui-kit-examples-text--view%}}

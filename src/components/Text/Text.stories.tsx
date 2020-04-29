@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { withDocs } from '@storybook-addons/docs';
+import { StoryBookExample } from '../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Text } from './Text';
 
 const defaultKnobs = () => ({
@@ -28,7 +29,7 @@ const defaultKnobs = () => ({
   weight: select('weight', ['black', 'bold', 'light', 'regular', 'semibold', 'thin'], 'regular'),
 });
 
-storiesOf('Text', module)
+storiesOf('UI-KIT|/Text', module)
   .addDecorator(withKnobs)
   .addDecorator(
     withDocs({
@@ -45,3 +46,49 @@ storiesOf('Text', module)
       )}
     </Text>
   ));
+
+storiesOf('UI-KIT|/Examples/Text', module)
+  .add('_size', () => {
+    return (
+      <Fragment>
+        <Text
+          as="div"
+          align="left"
+          font="sans"
+          lineHeight="l"
+          size="2xl"
+          spacing="m"
+          transform="uppercase"
+          view="primary"
+          weight="bold"
+          type="h3"
+        >
+          Заголовок несет суть
+        </Text>
+        <Text as="p" align="left" font="serif" lineHeight="s" size="s" view="primary">
+          Абзац – это часть текста между отступами с новой строки. Абзац можно назвать микротекстом.
+          В общей теме могут выделяться и микротемы. При этом каждый абзац раскрывает свою
+          микротему. Что же ещё можно сказать про абзацы? Мы видим, что обычно в абзацах несколько
+          предложений. И в таком случае каждый абзац служит для выделения своей микротемы.
+        </Text>
+      </Fragment>
+    );
+  })
+  .add('_view', () => {
+    return (
+      <StoryBookExample>
+        <Text size="l" align="left" font="sans" view="primary">
+          Primary используется для основного текста
+        </Text>
+        <Text size="l" align="left" font="sans" view="secondary">
+          Secondary используется для второстепенного текста
+        </Text>
+        <Text size="l" align="left" font="sans" view="warning">
+          Warning используется для предупреждений
+        </Text>
+        <Text size="l" align="left" font="sans" view="alert">
+          Alert используется для ошибок
+        </Text>
+      </StoryBookExample>
+    );
+  });
