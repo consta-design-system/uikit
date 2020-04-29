@@ -90,7 +90,9 @@ describe('Компонент Button', () => {
       });
 
       it(`должен рендериться как функциональный компонент`, () => {
-        renderComponent({ as: (props) => <span {...props} /> });
+        const Component = (props: ButtonProps = {}) => <span {...props} />;
+
+        renderComponent({ as: Component });
 
         const button = screen.getByTestId(testId);
 
