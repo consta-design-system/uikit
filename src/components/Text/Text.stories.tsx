@@ -1,6 +1,7 @@
 import React from 'react';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
+import { withDocs } from '@storybook-addons/docs';
 import { Text } from './Text';
 
 const defaultKnobs = () => ({
@@ -29,6 +30,13 @@ const defaultKnobs = () => ({
 
 storiesOf('Text', module)
   .addDecorator(withKnobs)
+  .addDecorator(
+    withDocs({
+      readme: {
+        content: require('./Text.md')['default'],
+      },
+    })
+  )
   .add('Текст', () => (
     <Text<{ href: string }> href="#" {...defaultKnobs()}>
       {text(
