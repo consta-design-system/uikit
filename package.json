@@ -113,7 +113,6 @@
     "eslint-plugin-prettier": "^3.1.0",
     "fast-glob": "^3.2.2",
     "fs-extra": "^9.0.0",
-    "identity-obj-proxy": "^3.0.0",
     "jest": "^25.4.0",
     "lint-staged": "^8.2.1",
     "log-symbols": "^3.0.0",
