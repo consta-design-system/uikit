@@ -13,6 +13,12 @@
       background: var(--color-control-bg-clear-hover);
     }
   }
+  &-File {
+    transition: opacity 0.2s;
+    &_error {
+      opacity: 0.4;
+    }
+  }
   &-File,
   &-Button {
     flex: none;
