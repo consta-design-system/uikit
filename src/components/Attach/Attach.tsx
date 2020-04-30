@@ -76,7 +76,7 @@ export function Attach(props: IAttachProps): React.ReactElement {
             {fileName}
           </Text>
         )}
-        {fileDescription && (
+        {fileDescription && !loading && (
           <Text className={cnAttach('FileDescription')} size="xs" view="ghost">
             {fileDescription}
           </Text>
