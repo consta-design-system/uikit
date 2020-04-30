@@ -27,7 +27,7 @@ function getSizeOfPixel(size: ProgressSpinPropSize): number {
 function getSvgParamsBySize(size: ProgressSpinPropSize): [number, number, number, number] {
   const sizeOfPixels = getSizeOfPixel(size);
   const strokeWidth = 2;
-  const radius = sizeOfPixels / 2 - strokeWidth;
+  const radius = (sizeOfPixels - strokeWidth) / 2;
   const strokeDasharray = radius * 2 * Math.PI;
 
   return [sizeOfPixels, strokeWidth, radius, strokeDasharray];

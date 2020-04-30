@@ -33,7 +33,7 @@ export type ButtonProps = {
   onlyIcon?: boolean;
   iconSize?: IconPropSize;
   title?: string;
-  innerRef?: React.Ref<any>;
+  innerRef?: React.Ref<HTMLElement>;
 };
 
 export type IButton<T = {}> = ButtonProps &

@@ -119,9 +119,6 @@ GenerateCommand.flags = {
   }),
 };
 
-GenerateCommand.description = `Generate ts dist package
-...
-Write now works only with @yandex-lego/components =)
-`;
+GenerateCommand.description = 'Generate ts dist package';
 
 GenerateCommand.run();

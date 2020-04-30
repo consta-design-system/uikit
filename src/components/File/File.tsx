@@ -1,4 +1,8 @@
+import './File.css';
+
 import React from 'react';
+import { cn } from '../../utils/bem';
+import { ProgressSpin } from '../ProgressSpin/ProgressSpin';
 import { IFileIcon } from '../../fileIcons/FileIcon/FileIcon';
 import { FileIconAvi } from '../../fileIcons/FileIconAvi/FileIconAvi';
 import { FileIconBmp } from '../../fileIcons/FileIconBmp/FileIconBmp';
@@ -26,15 +30,31 @@ import { FileIconZip } from '../../fileIcons/FileIconZip/FileIconZip';
 export type FileProps = {
   extension?: string;
   loading?: boolean;
+  loadingProgress?: number;
 };
 
 export type IFile = FileProps & (Omit<IFileIcon, keyof FileProps>);
 
+export const cnFile = cn('File');
+
 export function File(props: IFile) {
-  const { extension, loading, ...otherProps } = props;
+  const { extension, loading, loadingProgress, className, size = 'm', ...otherProps } = props;
 
   if (loading) {
-    return <FileIconLoading {...otherProps} />;
+    const spin = !loadingProgress;
+
+    return (
+      <FileIconLoading className={cnFile(null, [className])} size={size} {...otherProps}>
+        <div className={cnFile('Loader', { spin, size })}>
+          <ProgressSpin
+            className={cnFile('Progress')}
+            size={size}
+            progress={spin ? 50 : loadingProgress}
+            animation
+          />
+        </div>
+      </FileIconLoading>
+    );
   }
 
   const extensionToSvg = {
@@ -74,5 +94,5 @@ export function File(props: IFile) {
 
   const Icon = getIconByExtension(extension);
 
-  return <Icon {...otherProps} />;
+  return <Icon className={cnFile(null, [className])} size={size} {...otherProps} />;
 }

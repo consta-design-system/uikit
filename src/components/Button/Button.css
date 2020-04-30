@@ -7,7 +7,6 @@
   max-width: 100%;
   height: var(--button-height);
   padding: 0 var(--button-space);
-  margin: initial;
   box-sizing: border-box;
   border: none;
   border-radius: var(--control-radius);

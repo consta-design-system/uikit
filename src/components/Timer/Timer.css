@@ -5,19 +5,17 @@
   background-color: var(--color-control-bg-ghost);
   width: var(--timer-size);
   height: var(--timer-size);
+  overflow: hidden;
   &_size {
     &_s {
       --timer-size: 16px;
-      --timer-count-display: none;
     }
     &_m {
       --timer-size: 24px;
-      --timer-count-display: block;
     }
   }
 
   &-Counter {
-    display: var(--timer-count-display);
     width: 100%;
     font-size: var(--size-text-xs);
     line-height: var(--timer-size);

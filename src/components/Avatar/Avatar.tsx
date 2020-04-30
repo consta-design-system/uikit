@@ -14,7 +14,7 @@ declare type AvatarProps = {
   className?: string;
   size?: AvatarPropSize;
   form?: AvatarPropForm;
-  innerRef?: React.Ref<any>;
+  innerRef?: React.Ref<HTMLElement>;
 };
 
 export type IAvatar<T = {}> = AvatarProps &

@@ -4,12 +4,12 @@ import { cn } from '../../../utils/bem';
 import React from 'react';
 export type StoryBookModsProps = {
   children: React.ReactNode;
-};
+} & React.HTMLAttributes<HTMLDivElement>;
 
 export const cnStoryBookExample = cn('StoryBookExample');
 
 export function StoryBookExample(props: StoryBookModsProps): React.ReactElement {
-  const { children } = props;
+  const { children, className, ...otherProps } = props;
 
   function renderCildren(children, key = 0) {
     if (!children || children === null) {
@@ -23,7 +23,7 @@ export function StoryBookExample(props: StoryBookModsProps): React.ReactElement 
   }
 
   return (
-    <div className={cnStoryBookExample()}>
+    <div className={cnStoryBookExample(null, [className])} {...otherProps}>
       {Array.isArray(children)
         ? children.map((item, index) => renderCildren(item, index))
         : renderCildren(children)}
