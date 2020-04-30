@@ -1,4 +1,7 @@
-# Text
+# Text  
+
+Весь текст на странице должен быть обернут в компонент `Text`, а стили должны задаваться модификаторами.
+::::: ИЛИ ПРОПСАМИ, ИЛИ СВОЙСТВАМИ ???? :::::
 
 ## Пример использования
 
@@ -60,6 +63,23 @@ export function App() {
 
 ## Примеры
 
+### Align
+
+Модификатор на выравнивание текста
+
+```ts
+import React, { Fragment } from 'react';
+import { Text } from '@gpn-design/uikit/Text';
+
+function App() {
+  return (
+      
+  );
+}
+```
+
+{{%story::desktop:ui-kit-examples-text--align%}}
+
 ### Заголовок с абзацем
 
 Пример классической конструкции: заголовок и абзац текста
@@ -95,36 +115,4 @@ function App() {
 }
 ```
 
-{{%story::desktop:ui-kit-examples-text--size%}}
-
-### Примеры внешнего вида текста
-
-```ts
-import React, { Fragment } from 'react';
-import { Text } from '@gpn-design/uikit/Text';
-
-function App() {
-  return (
-      <Fragment>
-        <Text size="l" align="left" font="sans" view="primary">
-          Primary используется для основного текста
-        </Text>
-        <Text size="l" align="left" font="sans" view="secondary">
-          Secondary используется для второстепенного текста
-        </Text>
-        <Text size="l" align="left" font="sans" view="warning">
-          Warning используется для предупреждений
-        </Text>
-        <Text size="l" align="left" font="sans" view="alert">
-          Alert используется для ошибок
-        </Text>
-      </Fragment>
-  );
-}
-```
-
-{{%story::desktop:ui-kit-examples-text--view%}}
-
-### Сторис ниже не работает
-
-{{%story::desktop:ui-kit-examples-text--label%}}
+{{%story::desktop:ui-kit-examples-text--headingandparagraph%}}

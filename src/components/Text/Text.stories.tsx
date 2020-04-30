@@ -29,6 +29,13 @@ const defaultKnobs = () => ({
   weight: select('weight', ['black', 'bold', 'light', 'regular', 'semibold', 'thin'], 'regular'),
 });
 
+// классы для tpl-grid из whitepaper
+// используется ТОЛЬКО для документации
+const grid = {
+  parent: 'tpl-grid tpl-grid_xs-columns_3 tpl-grid_col-gap_third tpl-grid_row-gap_third',
+  fraction: 'tpl-grid__fraction tpl-grid__fraction_s-col_1',
+};
+
 storiesOf('UI-KIT|/Text', module)
   .addDecorator(withKnobs)
   .addDecorator(
@@ -48,7 +55,20 @@ storiesOf('UI-KIT|/Text', module)
   ));
 
 storiesOf('UI-KIT|/Examples/Text', module)
-  .add('_size', () => {
+  .add('_align', () => {
+    // const align = ['left', 'center', 'right'];
+    const align: Array<TextPropAlign> = ['left', 'center', 'right'];
+    return (
+      <div className={grid.parent}>
+        {align.map((el) => {
+          <div className={grid.fraction}>
+            <Text align={el}>Газпром Нефть</Text>
+          </div>;
+        })}
+      </div>
+    );
+  })
+  .add('_headingandparagraph', () => {
     return (
       <Fragment>
         <Text
@@ -72,30 +92,5 @@ storiesOf('UI-KIT|/Examples/Text', module)
           предложений. И в таком случае каждый абзац служит для выделения своей микротемы.
         </Text>
       </Fragment>
-    );
-  })
-  .add('_view', () => {
-    return (
-      <StoryBookExample>
-        <Text size="l" align="left" font="sans" view="primary">
-          Primary используется для основного текста
-        </Text>
-        <Text size="l" align="left" font="sans" view="secondary">
-          Secondary используется для второстепенного текста
-        </Text>
-        <Text size="l" align="left" font="sans" view="warning">
-          Warning используется для предупреждений
-        </Text>
-        <Text size="l" align="left" font="sans" view="alert">
-          Alert используется для ошибок
-        </Text>
-      </StoryBookExample>
-    );
-  })
-  .add('_label', () => {
-    return (
-      <Text size="l" align="left" font="sans" view="primary">
-        ЭТА СТОРИС НЕ РАБОТАЕТ
-      </Text>
     );
   });
