@@ -21,9 +21,11 @@
   &-Content {
     flex: 1;
     margin-right: var(--space-xs);
+    overflow: hidden;
   }
   &-Button,
   &-Content {
+    word-wrap: break-word;
     &:last-child {
       margin-right: 0;
     }

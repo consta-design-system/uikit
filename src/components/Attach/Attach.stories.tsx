@@ -14,31 +14,36 @@ function Stories({
   errorText,
   fileDescription,
   withButtonAction,
+  fileExtension,
 }) {
   return (
-    <Attach
-      loading={loading}
-      loadingText={loadingText}
-      fileName={fileName}
-      loadingProgress={loadingProgress}
-      errorText={errorText}
-      fileDescription={fileDescription}
-      buttonIcon={IconTrash}
-      buttonTitle="Удалить"
-      {...(withButtonAction && {
-        onButtonClick: (e) => {
-          e.stopPropagation();
-          console.log('onButtonClick');
-        },
-      })}
-      onClick={() => console.log('onClick')}
-    />
+    <div style={{ maxWidth: 320 }}>
+      <Attach
+        loading={loading}
+        loadingText={loadingText}
+        fileName={fileName}
+        loadingProgress={loadingProgress}
+        errorText={errorText}
+        fileDescription={fileDescription}
+        buttonIcon={IconTrash}
+        buttonTitle="Удалить"
+        fileExtension={fileExtension}
+        {...(withButtonAction && {
+          onButtonClick: (e) => {
+            e.stopPropagation();
+            console.log('onButtonClick');
+          },
+        })}
+        onClick={() => console.log('onClick')}
+      />
+    </div>
   );
 }
 
 const defaultKnobs = () => ({
   fileName: text('fileName', 'Приложенный документ'),
   fileDescription: text('fileDescription', '1,5 Mб 21.02.2019, 14:12'),
+  fileExtension: text('fileExtension', 'doc'),
   errorText: text('errorText', ''),
   loading: boolean('loading', false),
   loadingProgress: number('loadingProgress', 70),
