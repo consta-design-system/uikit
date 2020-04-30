@@ -3,6 +3,7 @@ import { withKnobs, text, select } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { withDocs } from '@storybook-addons/docs';
 import { StoryBookExample } from '../../uiKit/components/StoryBookExample/StoryBookExample';
+import * as wp from '../../utils/whitepaper/whitepaper';
 import { Text, TextPropAlign } from './Text';
 
 const defaultKnobs = () => ({
@@ -29,13 +30,6 @@ const defaultKnobs = () => ({
   weight: select('weight', ['black', 'bold', 'light', 'regular', 'semibold', 'thin'], 'regular'),
 });
 
-// классы для tpl-grid из whitepaper
-// используется ТОЛЬКО для документации
-const grid = {
-  parent: 'tpl-grid tpl-grid_xs-columns_3 tpl-grid_col-gap_third tpl-grid_row-gap_third',
-  fraction: 'tpl-grid__fraction tpl-grid__fraction_s-col_1',
-};
-
 storiesOf('UI-KIT|/Text', module)
   .addDecorator(withKnobs)
   .addDecorator(
@@ -59,9 +53,9 @@ storiesOf('UI-KIT|/Examples/Text', module)
     // const align = ['left', 'center', 'right'];
     const align: Array<TextPropAlign> = ['left', 'center', 'right'];
     return (
-      <div className={grid.parent}>
+      <div className={wp.tplGrid({ 'xs-columns': 3, col: 'gap_third', row: 'third' })}>
         {align.map((item, index) => (
-          <div key={index} className={grid.fraction}>
+          <div key={index} className={wp.tplGrid('fraction', { row: 'third' })}>
             <Text align={item}>Газпром Нефть</Text>
           </div>
         ))}
