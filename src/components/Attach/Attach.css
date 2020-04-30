@@ -14,26 +14,22 @@
     }
   }
   &-File {
+    flex: none;
     transition: opacity 0.2s;
+    margin: var(--space-2xs) var(--space-xs) var(--space-2xs) 0;
     &_error {
       opacity: 0.4;
     }
   }
-  &-File,
   &-Button {
     flex: none;
-    margin: var(--space-2xs) var(--space-xs) var(--space-2xs) 0;
   }
   &-Content {
     flex: 1;
-    margin-right: var(--space-xs);
     overflow: hidden;
-  }
-  &-Button,
-  &-Content {
     word-wrap: break-word;
-    &:last-child {
-      margin-right: 0;
+    &:not(:last-child) {
+      margin-right: var(--space-xs);
     }
   }
 }
