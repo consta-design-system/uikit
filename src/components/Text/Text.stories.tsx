@@ -3,7 +3,7 @@ import { withKnobs, text, select } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { withDocs } from '@storybook-addons/docs';
 import { StoryBookExample } from '../../uiKit/components/StoryBookExample/StoryBookExample';
-import { Text } from './Text';
+import { Text, TextPropAlign } from './Text';
 
 const defaultKnobs = () => ({
   as: select('as', ['p', 'div', 'a', 'span', 'h1', 'h2'], undefined),
@@ -60,11 +60,11 @@ storiesOf('UI-KIT|/Examples/Text', module)
     const align: Array<TextPropAlign> = ['left', 'center', 'right'];
     return (
       <div className={grid.parent}>
-        {align.map((el) => {
-          <div className={grid.fraction}>
-            <Text align={el}>Газпром Нефть</Text>
-          </div>;
-        })}
+        {align.map((item, index) => (
+          <div key={index} className={grid.fraction}>
+            <Text align={item}>Газпром Нефть</Text>
+          </div>
+        ))}
       </div>
     );
   })
