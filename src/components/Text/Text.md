@@ -67,16 +67,9 @@ export function App() {
 Модификатор на выравнивание текста
 
 ```ts
-import React from 'react';
-import Text from '@gpn-design/uikit/Text';
-
-function App() {
-  return (
-    <Text align="left">Газпром Нефть</Text>
-    <Text align="center">Газпром Нефть</Text>
-    <Text align="right">Газпром Нефть</Text>
-  );
-}
+<Text align="left">Газпром Нефть</Text>
+<Text align="center">Газпром Нефть</Text>
+<Text align="right">Газпром Нефть</Text>
 ```
 
 {{%story::desktop:ui-kit-examples-text--align%}}
@@ -86,14 +79,7 @@ function App() {
 Модификатор на декорирование текста
 
 ```ts
-import React from 'react';
-import Text from '@gpn-design/uikit/Text';
-
-function App() {
-  return (
-    <Text decoration="underline">Газпром Нефть</Text>
-  );
-}
+<Text decoration="underline">Газпром Нефть</Text>
 ```
 
 {{%story::desktop:ui-kit-examples-text--decoration%}}
@@ -103,28 +89,21 @@ function App() {
 Модификатор на высоту строки
 
 ```ts
-import React from 'react';
-import Text from '@gpn-design/uikit/Text';
-
-function App() {
-  return (
-    <Text lineHeight="2xs">
-      «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
-    </Text>
-    <Text lineHeight="xs">
-      «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
-    </Text>
-    <Text lineHeight="s">
-      «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
-    </Text>
-    <Text lineHeight="m">
-      «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
-    </Text>
-    <Text lineHeight="l">
-      «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
-    </Text>
-  );
-}
+<Text lineHeight="2xs">
+  «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
+</Text>
+<Text lineHeight="xs">
+  «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
+</Text>
+<Text lineHeight="s">
+  «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
+</Text>
+<Text lineHeight="m">
+  «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
+</Text>
+<Text lineHeight="l">
+  «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
+</Text>
 ```
 
 {{%story::desktop:ui-kit-examples-text--lineheight%}}
@@ -134,24 +113,17 @@ function App() {
 Модификатор на размер текста
 
 ```ts
-import React from 'react';
-import Text from '@gpn-design/uikit/Text';
-
-function App() {
-  return (
-    <Text size="2xs">Нефть</Text>
-    <Text size="xs">Нефть</Text>
-    <Text size="s">Нефть</Text>
-    <Text size="m">Нефть</Text>
-    <Text size="l">Нефть</Text>
-    <Text size="xl">Нефть</Text>
-    <Text size="2xl">Нефть</Text>
-    <Text size="3xl">Нефть</Text>
-    <Text size="4xl">Нефть</Text>
-    <Text size="5xl">Нефть</Text>
-    <Text size="6xl">Нефть</Text>
-  );
-}
+<Text size="2xs">Нефть</Text>
+<Text size="xs">Нефть</Text>
+<Text size="s">Нефть</Text>
+<Text size="m">Нефть</Text>
+<Text size="l">Нефть</Text>
+<Text size="xl">Нефть</Text>
+<Text size="2xl">Нефть</Text>
+<Text size="3xl">Нефть</Text>
+<Text size="4xl">Нефть</Text>
+<Text size="5xl">Нефть</Text>
+<Text size="6xl">Нефть</Text>
 ```
 
 {{%story::desktop:ui-kit-examples-text--size%}}
@@ -161,25 +133,18 @@ function App() {
 Модификатор на межбуквенное расстояние
 
 ```ts
-import React from 'react';
-import Text from '@gpn-design/uikit/Text';
-
-function App() {
-  return (
-    <Text spacing="xs">
-      «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
-    </Text>
-    <Text spacing="s">
-      «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
-    </Text>
-    <Text spacing="m">
-      «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
-    </Text>
-    <Text spacing="l">
-      «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
-    </Text>
-  );
-}
+<Text spacing="xs">
+  «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
+</Text>
+<Text spacing="s">
+  «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
+</Text>
+<Text spacing="m">
+  «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
+</Text>
+<Text spacing="l">
+  «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
+</Text>
 ```
 
 {{%story::desktop:ui-kit-examples-text--spacing%}}
@@ -189,14 +154,7 @@ function App() {
 Модификатор на начертание
 
 ```ts
-import React from 'react';
-import Text from '@gpn-design/uikit/Text';
-
-function App() {
-  return (
-    <Text fontStyle="italic">Газпром Нефть</Text>
-  );
-}
+<Text fontStyle="italic">Газпром Нефть</Text>
 ```
 
 {{%story::desktop:ui-kit-examples-text--style%}}
@@ -206,14 +164,7 @@ function App() {
 Модификатор на регистр
 
 ```ts
-import React from 'react';
-import Text from '@gpn-design/uikit/Text';
-
-function App() {
-  return (
-    <Text transform="uppercase">Газпром Нефть</Text>
-  );
-}
+<Text transform="uppercase">Газпром Нефть</Text>
 ```
 
 {{%story::desktop:ui-kit-examples-text--transform%}}
@@ -223,22 +174,15 @@ function App() {
 Модификатор на описание цвета текста
 
 ```ts
-import React from 'react';
-import Text from '@gpn-design/uikit/Text';
-
-function App() {
-  return (
-    <Text view="alert">Газпром Нефть</Text>
-    <Text view="brand">Газпром Нефть</Text>
-    <Text view="ghost">Газпром Нефть</Text>
-    <Text view="link">Газпром Нефть</Text>
-    <Text view="link-minor">Газпром Нефть</Text>
-    <Text view="primary">Газпром Нефть</Text>
-    <Text view="secondary">Газпром Нефть</Text>
-    <Text view="success">Газпром Нефть</Text>
-    <Text view="warning">Газпром Нефть</Text>
-  );
-}
+<Text view="alert">Газпром Нефть</Text>
+<Text view="brand">Газпром Нефть</Text>
+<Text view="ghost">Газпром Нефть</Text>
+<Text view="link">Газпром Нефть</Text>
+<Text view="link-minor">Газпром Нефть</Text>
+<Text view="primary">Газпром Нефть</Text>
+<Text view="secondary">Газпром Нефть</Text>
+<Text view="success">Газпром Нефть</Text>
+<Text view="warning">Газпром Нефть</Text>
 ```
 
 {{%story::desktop:ui-kit-examples-text--view%}}
@@ -250,19 +194,12 @@ function App() {
 > Браузер имитирует шрифт с заданной жирностью, если такового нет в наборе. Поэтому убедитесь, что жирность, которую вы используете, существует.
 
 ```ts
-import React from 'react';
-import Text from '@gpn-design/uikit/Text';
-
-function App() {
-  return (
-    <Text weight="black">Газпром Нефть</Text>
-    <Text weight="bold">Газпром Нефть</Text>
-    <Text weight="semibold">Газпром Нефть</Text>
-    <Text weight="regular">Газпром Нефть</Text>
-    <Text weight="light">Газпром Нефть</Text>
-    <Text weight="thin">Газпром Нефть</Text>
-  );
-}
+<Text weight="black">Газпром Нефть</Text>
+<Text weight="bold">Газпром Нефть</Text>
+<Text weight="semibold">Газпром Нефть</Text>
+<Text weight="regular">Газпром Нефть</Text>
+<Text weight="light">Газпром Нефть</Text>
+<Text weight="thin">Газпром Нефть</Text>
 ```
 
 {{%story::desktop:ui-kit-examples-text--weight%}}
@@ -272,32 +209,25 @@ function App() {
 Пример классической конструкции: заголовок и абзац текста
 
 ```ts
-import React from 'react';
-import Text from '@gpn-design/uikit/Text';
-
-function App() {
-  return (
-    <Text
-      as="div"
-      align="left"
-      font="sans"
-      lineHeight="l"
-      size="2xl"
-      spacing="m"
-      transform="uppercase"
-      view="primary"
-      weight="bold"
-    >
-      Заголовок несет суть
-    </Text>
-    <Text as="p" align="left" font="serif" lineHeight="s" size="s" view="primary">
-      Абзац – это часть текста между отступами с новой строки. Абзац можно назвать микротекстом.
-      В общей теме могут выделяться и микротемы. При этом каждый абзац раскрывает свою
-      микротему. Что же ещё можно сказать про абзацы? Мы видим, что обычно в абзацах несколько
-      предложений. И в таком случае каждый абзац служит для выделения своей микротемы.
-    </Text>
-  );
-}
+<Text
+  as="div"
+  align="left"
+  font="sans"
+  lineHeight="l"
+  size="2xl"
+  spacing="m"
+  transform="uppercase"
+  view="primary"
+  weight="bold"
+>
+  Заголовок несет суть
+</Text>
+<Text as="p" align="left" font="serif" lineHeight="s" size="s" view="primary">
+  Абзац – это часть текста между отступами с новой строки. Абзац можно назвать микротекстом.
+  В общей теме могут выделяться и микротемы. При этом каждый абзац раскрывает свою
+  микротему. Что же ещё можно сказать про абзацы? Мы видим, что обычно в абзацах несколько
+  предложений. И в таком случае каждый абзац служит для выделения своей микротемы.
+</Text>
 ```
 
 {{%story::desktop:ui-kit-examples-text--headingandparagraph%}}
@@ -307,31 +237,24 @@ function App() {
 Используется в формах с данными
 
 ```ts
-import React from 'react';
-import Text from '@gpn-design/uikit/Text';
-
-function App() {
-  return (
-    <Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary" type="p">
-      ФИО
-    </Text>
-    <Text as="div" align="left" font="serif" lineHeight="l" size="l" view="primary">
-      Колебаев Илья Сергеевич
-    </Text>
-    <Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary" type="p">
-      Должность сотрудника
-    </Text>
-    <Text as="div" align="left" font="serif" lineHeight="l" size="l" view="primary">
-      Инженер по бурению
-    </Text>
-    <Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary" type="p">
-      Подразделение
-    </Text>
-    <Text as="div" align="left" font="serif" lineHeight="l" size="l" view="primary">
-      Группа разведки и бурения
-    </Text>
-  );
-}
+<Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary" type="p">
+  ФИО
+</Text>
+<Text as="div" align="left" font="serif" lineHeight="l" size="l" view="primary">
+  Колебаев Илья Сергеевич
+</Text>
+<Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary" type="p">
+  Должность сотрудника
+</Text>
+<Text as="div" align="left" font="serif" lineHeight="l" size="l" view="primary">
+  Инженер по бурению
+</Text>
+<Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary" type="p">
+  Подразделение
+</Text>
+<Text as="div" align="left" font="serif" lineHeight="l" size="l" view="primary">
+  Группа разведки и бурения
+</Text>
 ```
 
 {{%story::desktop:ui-kit-examples-text--labelanddata%}}
@@ -341,23 +264,16 @@ function App() {
 Чтобы обратить внимание на важные части текста
 
 ```ts
-import React from 'react';
-import Text from '@gpn-design/uikit/Text';
-
-function App() {
-  return (
-    <Text as="div" align="left" font="sans" lineHeight="l" size="m" view="primary" type="p">
-      <Text as="span" fontStyle="italic">
-        Примечание.&nbsp;
-      </Text>
-      База скважин сформирована на основе отчетов сотрудников. Любые&nbsp;
-      <Text weight="black" as="span">
-        срочные изменения
-      </Text>{' '}
-      должны вноситься по регламенту в сроки, указанные Центром Разработок.
-    </Text>
-  );
-}
+<Text as="div" align="left" font="sans" lineHeight="l" size="m" view="primary" type="p">
+  <Text as="span" fontStyle="italic">
+    Примечание.&nbsp;
+  </Text>
+  База скважин сформирована на основе отчетов сотрудников. Любые&nbsp;
+  <Text weight="black" as="span">
+    срочные изменения
+  </Text>{' '}
+  должны вноситься по регламенту в сроки, указанные Центром Разработок.
+</Text>
 ```
 
 {{%story::desktop:ui-kit-examples-text--combinedweightandstyle%}}

@@ -156,7 +156,7 @@ storiesOf('UI-KIT|/Examples/Text', module)
     return (
       <Fragment>
         <Text size="s" view="ghost" className={wp.decorator({ 'indent-b': 'm' })}>
-          text_style_italic
+          text_transform_uppercase
         </Text>
         <Text transform="uppercase">Газпром Нефть</Text>
       </Fragment>
