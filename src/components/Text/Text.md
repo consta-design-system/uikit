@@ -14,7 +14,7 @@ import { Text } from '@gpn-design/uikit/Text';
 export function App() {
   return (
     <Text
-      as = 'div'
+      as = 'p'
       align = 'center'
       decoration = 'none'
       display = 'block'
@@ -67,22 +67,14 @@ export function App() {
 Модификатор на выравнивание текста
 
 ```ts
-import React, { Fragment } from 'react';
-import { Text, TextPropAlign } from '@gpn-design/uikit/Text';
+import React from 'react';
+import Text from '@gpn-design/uikit/Text';
 
 function App() {
-  const align: Array<TextPropAlign> = ['left', 'center', 'right'];
   return (
-    <div className={wp.tplGrid({ 'xs-columns': 3, col: 'gap_third', row: 'third' })}>
-      {align.map((item, index) => (
-        <div key={index} className={wp.tplGrid('fraction', { row: 'third' })}>
-          <Text size="s" view="ghost" className={wp.decorator({ 'indent-b': 'xs' })}>
-            {`text_align_${item}`}
-          </Text>
-          <Text align={item}>Газпром Нефть</Text>
-        </div>
-      ))}
-    </div>
+    <Text align="left">Газпром Нефть</Text>
+    <Text align="center">Газпром Нефть</Text>
+    <Text align="right">Газпром Нефть</Text>
   );
 }
 ```
@@ -94,17 +86,12 @@ function App() {
 Модификатор на декорирование текста
 
 ```ts
-import React, { Fragment } from 'react';
+import React from 'react';
 import Text from '@gpn-design/uikit/Text';
 
 function App() {
   return (
-    <Fragment>
-      <Text size="s" view="ghost" className={wp.decorator({ 'indent-b': 'xs' })}>
-        text_decoration_underline
-      </Text>
-      <Text decoration="underline">Газпром Нефть</Text>
-    </Fragment>
+    <Text decoration="underline">Газпром Нефть</Text>
   );
 }
 ```
@@ -116,24 +103,26 @@ function App() {
 Модификатор на высоту строки
 
 ```ts
-import React, { Fragment } from 'react';
-import { Text, TextPropLineHeight } from '@gpn-design/uikit/Text';
+import React from 'react';
+import Text from '@gpn-design/uikit/Text';
 
 function App() {
-  const lineHeight: Array<TextPropLineHeight> = ['2xs', 'xs', 's', 'm', 'l'];
   return (
-    <div className={wp.tplGrid({ 'xs-columns': 2, 'col-gap': 'full', 'row-gap': 'full' })}>
-      {lineHeight.map((item, index) => (
-        <div key={index} className={wp.tplGrid('fraction', { row: 'third' })}>
-          <Text size="s" view="ghost" className={wp.decorator({ 'indent-b': 'xs' })}>
-            {`text_line-height_${item}`}
-          </Text>
-          <Text lineHeight={item}>
-            «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
-          </Text>
-        </div>
-      ))}
-    </div>
+    <Text lineHeight="2xs">
+      «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
+    </Text>
+    <Text lineHeight="xs">
+      «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
+    </Text>
+    <Text lineHeight="s">
+      «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
+    </Text>
+    <Text lineHeight="m">
+      «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
+    </Text>
+    <Text lineHeight="l">
+      «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
+    </Text>
   );
 }
 ```
@@ -145,35 +134,23 @@ function App() {
 Модификатор на размер текста
 
 ```ts
-import React, { Fragment } from 'react';
-import { Text, TextPropSize } from '@gpn-design/uikit/Text';
+import React from 'react';
+import Text from '@gpn-design/uikit/Text';
 
 function App() {
-  const size: Array<TextPropSize> = [
-      '2xs',
-      'xs',
-      's',
-      'm',
-      'l',
-      'xl',
-      '2xl',
-      '3xl',
-      '4xl',
-      '5xl',
-      '6xl',
-    ];
-    return (
-      <div className={wp.tplGrid({ 'xs-columns': 2, 'col-gap': 'full', 'row-gap': 'full' })}>
-        {size.map((item, index) => (
-          <div key={index} className={wp.tplGrid('fraction', { row: 'third' })}>
-            <Text size="s" view="ghost" className={wp.decorator({ 'indent-b': 'm' })}>
-              {`text_size_${item}`}
-            </Text>
-            <Text size={item}>Нефть</Text>
-          </div>
-        ))}
-      </div>
-    );
+  return (
+    <Text size="2xs">Нефть</Text>
+    <Text size="xs">Нефть</Text>
+    <Text size="s">Нефть</Text>
+    <Text size="m">Нефть</Text>
+    <Text size="l">Нефть</Text>
+    <Text size="xl">Нефть</Text>
+    <Text size="2xl">Нефть</Text>
+    <Text size="3xl">Нефть</Text>
+    <Text size="4xl">Нефть</Text>
+    <Text size="5xl">Нефть</Text>
+    <Text size="6xl">Нефть</Text>
+  );
 }
 ```
 
@@ -184,24 +161,23 @@ function App() {
 Модификатор на межбуквенное расстояние
 
 ```ts
-import React, { Fragment } from 'react';
-import { Text, TextPropSpacing } from '@gpn-design/uikit/Text';
+import React from 'react';
+import Text from '@gpn-design/uikit/Text';
 
 function App() {
-  const spacing: Array<TextPropSpacing> = ['xs', 's', 'm', 'l'];
   return (
-    <div className={wp.tplGrid({ 'xs-columns': 2, 'col-gap': 'full', 'row-gap': 'full' })}>
-      {spacing.map((item, index) => (
-        <div key={index} className={wp.tplGrid('fraction', { row: 'third' })}>
-          <Text size="s" view="ghost" className={wp.decorator({ 'indent-b': 'xs' })}>
-            {`text_spacing_${item}`}
-          </Text>
-          <Text spacing={item}>
-            «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
-          </Text>
-        </div>
-      ))}
-    </div>
+    <Text spacing="xs">
+      «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
+    </Text>
+    <Text spacing="s">
+      «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
+    </Text>
+    <Text spacing="m">
+      «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
+    </Text>
+    <Text spacing="l">
+      «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
+    </Text>
   );
 }
 ```
@@ -213,17 +189,12 @@ function App() {
 Модификатор на начертание
 
 ```ts
-import React, { Fragment } from 'react';
+import React from 'react';
 import Text from '@gpn-design/uikit/Text';
 
 function App() {
   return (
-    <Fragment>
-      <Text size="s" view="ghost" className={wp.decorator({ 'indent-b': 'm' })}>
-        text_style_italic
-      </Text>
-      <Text fontStyle="italic">Газпром Нефть</Text>
-    </Fragment>
+    <Text fontStyle="italic">Газпром Нефть</Text>
   );
 }
 ```
@@ -235,17 +206,12 @@ function App() {
 Модификатор на регистр
 
 ```ts
-import React, { Fragment } from 'react';
+import React from 'react';
 import Text from '@gpn-design/uikit/Text';
 
 function App() {
   return (
-    <Fragment>
-      <Text size="s" view="ghost" className={wp.decorator({ 'indent-b': 'm' })}>
-        text_style_italic
-      </Text>
-      <Text transform="uppercase">Газпром Нефть</Text>
-    </Fragment>
+    <Text transform="uppercase">Газпром Нефть</Text>
   );
 }
 ```
@@ -257,34 +223,20 @@ function App() {
 Модификатор на описание цвета текста
 
 ```ts
-import React, { Fragment } from 'react';
-import { Text, TextPropView } from '@gpn-design/uikit/Text';
+import React from 'react';
+import Text from '@gpn-design/uikit/Text';
 
 function App() {
-  const view: Array<TextPropView> = [
-    'alert',
-    'brand',
-    'ghost',
-    'link',
-    'link-minor',
-    'primary',
-    'secondary',
-    'success',
-    'warning',
-  ];
   return (
-    <div className={wp.tplGrid({ 'xs-columns': 3, 'col-gap': 'full', 'row-gap': 'full' })}>
-      {view.map((item, index) => (
-        <div key={index} className={wp.tplGrid('fraction', { row: 'third' })}>
-          <Text size="s" view="ghost" className={wp.decorator({ 'indent-b': 'xs' })}>
-            {`text_view_${item}`}
-          </Text>
-          <Text size="l" view={item}>
-            Газпром Нефть
-          </Text>
-        </div>
-      ))}
-    </div>
+    <Text view="alert">Газпром Нефть</Text>
+    <Text view="brand">Газпром Нефть</Text>
+    <Text view="ghost">Газпром Нефть</Text>
+    <Text view="link">Газпром Нефть</Text>
+    <Text view="link-minor">Газпром Нефть</Text>
+    <Text view="primary">Газпром Нефть</Text>
+    <Text view="secondary">Газпром Нефть</Text>
+    <Text view="success">Газпром Нефть</Text>
+    <Text view="warning">Газпром Нефть</Text>
   );
 }
 ```
@@ -298,24 +250,17 @@ function App() {
 > Браузер имитирует шрифт с заданной жирностью, если такового нет в наборе. Поэтому убедитесь, что жирность, которую вы используете, существует.
 
 ```ts
-import React, { Fragment } from 'react';
-import { Text, TextPropWeight } from '@gpn-design/uikit/Text';
+import React from 'react';
+import Text from '@gpn-design/uikit/Text';
 
 function App() {
-  const weight: Array<TextPropWeight> = ['black', 'bold', 'semibold', 'regular', 'light', 'thin'];
   return (
-    <div className={wp.tplGrid({ 'xs-columns': 3, 'col-gap': 'full', 'row-gap': 'full' })}>
-      {weight.map((item, index) => (
-        <div key={index} className={wp.tplGrid('fraction', { row: 'third' })}>
-          <Text size="s" view="ghost" className={wp.decorator({ 'indent-b': 'xs' })}>
-            {`text_weight_${item}`}
-          </Text>
-          <Text size="l" weight={item}>
-            Газпром Нефть
-          </Text>
-        </div>
-      ))}
-    </div>
+    <Text weight="black">Газпром Нефть</Text>
+    <Text weight="bold">Газпром Нефть</Text>
+    <Text weight="semibold">Газпром Нефть</Text>
+    <Text weight="regular">Газпром Нефть</Text>
+    <Text weight="light">Газпром Нефть</Text>
+    <Text weight="thin">Газпром Нефть</Text>
   );
 }
 ```
@@ -327,32 +272,30 @@ function App() {
 Пример классической конструкции: заголовок и абзац текста
 
 ```ts
-import React, { Fragment } from 'react';
-import { Text } from '@gpn-design/uikit/Text';
+import React from 'react';
+import Text from '@gpn-design/uikit/Text';
 
 function App() {
   return (
-      <Fragment>
-        <Text
-          as="div"
-          align="left"
-          font="sans"
-          lineHeight="l"
-          size="2xl"
-          spacing="m"
-          transform="uppercase"
-          view="primary"
-          weight="bold"
-        >
-          Заголовок несет суть
-        </Text>
-        <Text as="p" align="left" font="serif" lineHeight="s" size="s" view="primary">
-          Абзац – это часть текста между отступами с новой строки. Абзац можно назвать микротекстом.
-          В общей теме могут выделяться и микротемы. При этом каждый абзац раскрывает свою
-          микротему. Что же ещё можно сказать про абзацы? Мы видим, что обычно в абзацах несколько
-          предложений. И в таком случае каждый абзац служит для выделения своей микротемы.
-        </Text>
-      </Fragment>
+    <Text
+      as="div"
+      align="left"
+      font="sans"
+      lineHeight="l"
+      size="2xl"
+      spacing="m"
+      transform="uppercase"
+      view="primary"
+      weight="bold"
+    >
+      Заголовок несет суть
+    </Text>
+    <Text as="p" align="left" font="serif" lineHeight="s" size="s" view="primary">
+      Абзац – это часть текста между отступами с новой строки. Абзац можно назвать микротекстом.
+      В общей теме могут выделяться и микротемы. При этом каждый абзац раскрывает свою
+      микротему. Что же ещё можно сказать про абзацы? Мы видим, что обычно в абзацах несколько
+      предложений. И в таком случае каждый абзац служит для выделения своей микротемы.
+    </Text>
   );
 }
 ```
@@ -364,38 +307,29 @@ function App() {
 Используется в формах с данными
 
 ```ts
-import React, { Fragment } from 'react';
-import { Text } from '@gpn-design/uikit/Text';
-import * as wp from '../../utils/whitepaper/whitepaper';
+import React from 'react';
+import Text from '@gpn-design/uikit/Text';
 
 function App() {
   return (
-    <Fragment>
-      <div className={wp.decorator({ 'indent-b': 'm' })}>
-        <Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary" type="p">
-          ФИО
-        </Text>
-        <Text as="div" align="left" font="serif" lineHeight="l" size="l" view="primary">
-          Колебаев Илья Сергеевич
-        </Text>
-      </div>
-      <div className={wp.decorator({ 'indent-b': 'm' })}>
-        <Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary" type="p">
-          Должность сотрудника
-        </Text>
-        <Text as="div" align="left" font="serif" lineHeight="l" size="l" view="primary">
-          Инженер по бурению
-        </Text>
-      </div>
-      <div className={wp.decorator({ 'indent-b': 'm' })}>
-        <Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary" type="p">
-          Подразделение
-        </Text>
-        <Text as="div" align="left" font="serif" lineHeight="l" size="l" view="primary">
-          Группа разведки и бурения
-        </Text>
-      </div>
-    </Fragment>
+    <Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary" type="p">
+      ФИО
+    </Text>
+    <Text as="div" align="left" font="serif" lineHeight="l" size="l" view="primary">
+      Колебаев Илья Сергеевич
+    </Text>
+    <Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary" type="p">
+      Должность сотрудника
+    </Text>
+    <Text as="div" align="left" font="serif" lineHeight="l" size="l" view="primary">
+      Инженер по бурению
+    </Text>
+    <Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary" type="p">
+      Подразделение
+    </Text>
+    <Text as="div" align="left" font="serif" lineHeight="l" size="l" view="primary">
+      Группа разведки и бурения
+    </Text>
   );
 }
 ```
@@ -408,7 +342,7 @@ function App() {
 
 ```ts
 import React from 'react';
-import { Text } from '@gpn-design/uikit/Text';
+import Text from '@gpn-design/uikit/Text';
 
 function App() {
   return (
