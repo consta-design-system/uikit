@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { withDocs } from '@storybook-addons/docs';
-import { StoryBookExample } from '../../uiKit/components/StoryBookExample/StoryBookExample';
 import * as wp from '../../utils/whitepaper/whitepaper';
 import {
   Text,
@@ -11,7 +10,7 @@ import {
   TextPropSize,
   TextPropSpacing,
   TextPropView,
-  TextPropWeight
+  TextPropWeight,
 } from './Text';
 
 const defaultKnobs = () => ({
@@ -231,5 +230,49 @@ storiesOf('UI-KIT|/Examples/Text', module)
           предложений. И в таком случае каждый абзац служит для выделения своей микротемы.
         </Text>
       </Fragment>
+    );
+  })
+  .add('_labelanddata', () => {
+    return (
+      <Fragment>
+        <div className={wp.decorator({ 'indent-b': 'm' })}>
+          <Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary" type="p">
+            ФИО
+          </Text>
+          <Text as="div" align="left" font="serif" lineHeight="l" size="l" view="primary">
+            Иванов Дмитрий Петрович
+          </Text>
+        </div>
+        <div className={wp.decorator({ 'indent-b': 'm' })}>
+          <Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary" type="p">
+            Должность сотрудника
+          </Text>
+          <Text as="div" align="left" font="serif" lineHeight="l" size="l" view="primary">
+            Инженер по бурению
+          </Text>
+        </div>
+        <div className={wp.decorator({ 'indent-b': 'm' })}>
+          <Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary" type="p">
+            Подразделение
+          </Text>
+          <Text as="div" align="left" font="serif" lineHeight="l" size="l" view="primary">
+            Группа разведки и бурения
+          </Text>
+        </div>
+      </Fragment>
+    );
+  })
+  .add('_combinedweightandstyle', () => {
+    return (
+      <Text as="div" align="left" font="sans" lineHeight="l" size="m" view="primary" type="p">
+        <Text as="span" fontStyle="italic">
+          Примечание.&nbsp;
+        </Text>
+        База скважин сформирована на основе отчетов сотрудников. Любые&nbsp;
+        <Text weight="black" as="span">
+          срочные изменения
+        </Text>{' '}
+        должны вноситься по регламенту в сроки, указанные Центром Разработок.
+      </Text>
     );
   });

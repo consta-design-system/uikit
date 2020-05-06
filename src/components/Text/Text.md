@@ -1,7 +1,6 @@
 # Text  
 
-Весь текст на странице должен быть обернут в компонент `Text`, а стили должны задаваться модификаторами.
-::::: ИЛИ ПРОПСАМИ, ИЛИ СВОЙСТВАМИ ???? :::::
+Весь текст на странице должен быть обернут в компонент `Text`, а стили должны задаваться свойствами.
 
 ## Пример использования
 
@@ -323,9 +322,6 @@ function App() {
 
 {{%story::desktop:ui-kit-examples-text--weight%}}
 
-
-———————————
-
 ### Заголовок с абзацем
 
 Пример классической конструкции: заголовок и абзац текста
@@ -362,3 +358,72 @@ function App() {
 ```
 
 {{%story::desktop:ui-kit-examples-text--headingandparagraph%}}
+
+### Подпись и данные
+
+Используется в формах с данными
+
+```ts
+import React, { Fragment } from 'react';
+import { Text } from '@gpn-design/uikit/Text';
+import * as wp from '../../utils/whitepaper/whitepaper';
+
+function App() {
+  return (
+    <Fragment>
+      <div className={wp.decorator({ 'indent-b': 'm' })}>
+        <Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary" type="p">
+          ФИО
+        </Text>
+        <Text as="div" align="left" font="serif" lineHeight="l" size="l" view="primary">
+          Колебаев Илья Сергеевич
+        </Text>
+      </div>
+      <div className={wp.decorator({ 'indent-b': 'm' })}>
+        <Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary" type="p">
+          Должность сотрудника
+        </Text>
+        <Text as="div" align="left" font="serif" lineHeight="l" size="l" view="primary">
+          Инженер по бурению
+        </Text>
+      </div>
+      <div className={wp.decorator({ 'indent-b': 'm' })}>
+        <Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary" type="p">
+          Подразделение
+        </Text>
+        <Text as="div" align="left" font="serif" lineHeight="l" size="l" view="primary">
+          Группа разведки и бурения
+        </Text>
+      </div>
+    </Fragment>
+  );
+}
+```
+
+{{%story::desktop:ui-kit-examples-text--labelanddata%}}
+
+### Форматирование частей абзаца
+
+Чтобы обратить внимание на важные части текста
+
+```ts
+import React from 'react';
+import { Text } from '@gpn-design/uikit/Text';
+
+function App() {
+  return (
+    <Text as="div" align="left" font="sans" lineHeight="l" size="m" view="primary" type="p">
+      <Text as="span" fontStyle="italic">
+        Примечание.&nbsp;
+      </Text>
+      База скважин сформирована на основе отчетов сотрудников. Любые&nbsp;
+      <Text weight="black" as="span">
+        срочные изменения
+      </Text>{' '}
+      должны вноситься по регламенту в сроки, указанные Центром Разработок.
+    </Text>
+  );
+}
+```
+
+{{%story::desktop:ui-kit-examples-text--combinedweightandstyle%}}
