@@ -24,5 +24,6 @@ export function Header(props: IHeader): React.ReactElement {
 export { HeaderLogo } from './Logo/Header-Logo';
 export { HeaderSearchBar } from './SearchBar/Header-SearchBar';
 export { HeaderMenu } from './Menu/Header-Menu';
+export { HeaderModule } from './Module/Header-Module';
 export { HeaderLogin } from './Login/Header-Login';
 export { HeaderButton } from './Button/Header-Button';
