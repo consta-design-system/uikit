@@ -123,7 +123,7 @@ export function SnackBarItem<ITEM>(props: ISnackBarItem<ITEM>): React.ReactEleme
       )}
       {!initialTime && Icon && <Icon className={cnSnackBar('Icon')} size="m" />}
       <div className={cnSnackBar('Content')}>
-        {message && <Text>{message}</Text>}
+        {message && <Text lineHeight='s'>{message}</Text>}
         {action && <SnackBarActionButton<ITEM> action={action} />}
       </div>
       {handleClose && (

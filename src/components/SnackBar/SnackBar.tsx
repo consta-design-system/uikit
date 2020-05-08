@@ -13,7 +13,7 @@ export type SnackBarPropItemAction<ITEM> = {
   label: string | number;
   onClick: React.EventHandler<React.MouseEvent>;
 };
-export type SnackBarPropItemStatus = 'system' | 'success' | 'warning' | 'alert';
+export type SnackBarPropItemStatus = 'system' | 'success' | 'warning' | 'alert' | 'normal';
 export type SnackBarPropGetItemMessage<ITEM> = (item: ITEM) => string | number | undefined;
 export type SnackBarPropGetItemKey<ITEM> = (item: ITEM) => string | number;
 export type SnackBarPropGetItemAutoClose<ITEM> = (item: ITEM) => boolean | number | undefined;

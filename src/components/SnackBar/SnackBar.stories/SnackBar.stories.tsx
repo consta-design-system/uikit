@@ -88,6 +88,7 @@ storiesOf('UI-KIT|/SnackBar', module).add('playground', () => {
   const handleWarningAdd = generateHandleAdd('warning');
   const handleAlertAdd = generateHandleAdd('alert');
   const handleSystemAdd = generateHandleAdd('system');
+  const handleNormalAdd = generateHandleAdd('normal');
 
   return (
     <div className={cnSnackBarStories()}>
@@ -115,6 +116,12 @@ storiesOf('UI-KIT|/SnackBar', module).add('playground', () => {
           iconLeft={IconAdd}
           label="Системное"
           onClick={handleSystemAdd}
+        />
+        <Button
+          className={cnSnackBarStories('ButtonAdd')}
+          iconLeft={IconAdd}
+          label="Нормальное"
+          onClick={handleNormalAdd}
         />
       </div>
       <SnackBar<Item>
