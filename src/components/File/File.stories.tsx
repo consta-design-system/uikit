@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { withKnobs, select, number, boolean, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { withDocs } from '@storybook-addons/docs';
@@ -10,10 +10,11 @@ function Stories(props) {
 }
 
 const defaultKnobs = () => ({
-  extension: text('extension', 'doc'),
-  loadingProgress: number('loadingProgress', 70),
-  loading: boolean('loading', false),
   size: select('size', ['s', 'm'], 'm'),
+  extension: text('extension', 'doc'),
+  loading: boolean('loading', false),
+  loadingWithProgressSpin: boolean('loadingWithProgressSpin', false),
+  loadingProgress: number('loadingProgress', 70),
 });
 
 storiesOf('UI-KIT|/File', module)
@@ -45,9 +46,10 @@ storiesOf('UI-KIT|/Examples/File', module)
   ))
   .add('_loading', () => (
     <StoryBookExample>
-      <File loading loadingProgress={30} />
-      <File loading loadingProgress={60} />
-      <File loading loadingProgress={90} />
+      <File loading loadingWithProgressSpin loadingProgress={30} />
+      <File loading loadingWithProgressSpin loadingProgress={60} />
+      <File loading loadingWithProgressSpin loadingProgress={90} />
+      <File loading loadingWithProgressSpin />
       <File loading />
     </StoryBookExample>
   ));

@@ -67,6 +67,7 @@ export function Attach(props: IAttachProps): React.ReactElement {
         className={cnAttach('File', { error: Boolean(errorText) })}
         extension={fileExtension}
         loading={loading}
+        loadingWithProgressSpin
         loadingProgress={loadingProgress}
         size="s"
       />
