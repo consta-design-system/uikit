@@ -25,7 +25,7 @@ export type ButtonProps = {
   className?: string;
   tabIndex?: number;
   disabled?: boolean;
-  label?: string;
+  label?: string | number;
   onClick?: React.EventHandler<React.MouseEvent>;
   iconLeft?: React.FC<IIcon>;
   iconRight?: React.FC<IIcon>;

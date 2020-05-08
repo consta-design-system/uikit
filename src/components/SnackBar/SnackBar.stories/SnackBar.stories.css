@@ -1,0 +1,27 @@
+.SnackBarStories {
+  display: flex;
+  flex-direction: row;
+  margin-left: calc(-1 * var(--space-xs));
+  margin-right: calc(-1 * var(--space-xs));
+  height: calc(100vh - var(--space-3xl));
+  &-SnackBar {
+    padding-left: var(--space-xs);
+    padding-right: var(--space-xs);
+    width: 400px;
+    flex: none;
+    overflow: auto;
+  }
+  &-Buttons {
+    padding-left: var(--space-xs);
+    padding-right: var(--space-xs);
+    flex: 1;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: flex-end;
+  }
+  &-ButtonAdd {
+    margin-bottom: var(--space-m);
+  }
+}

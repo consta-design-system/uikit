@@ -1,0 +1,9 @@
+.SnackBar {
+  &-ActionButtonsWrapper {
+    margin: var(--space-xs) calc(-1 * var(--space-xs)) calc(-1 * var(--space-xs))
+      calc(-1 * var(--space-xs));
+  }
+  &-ActionButton {
+    margin: var(--space-xs);
+  }
+}
