@@ -64,7 +64,7 @@
       .Checkbox-Input {
         &::before {
           top: 7px;
-          left: 1px;
+          left: 2px;
         }
       }
     }
