@@ -18,14 +18,15 @@ const App = () => {
 
 <!-- props:start -->
 
-| Свойство         | Тип                         | По умолчанию | Описание                                  |
-| ---------------- | --------------------------- | ------------ | ----------------------------------------- |
-| size?            | `'m' | 's'`                 | `'m'`        | Размер                                    |
-| extension?       | `string`                    | -            | Расширение файла                          |
-| loading?         | `boolean`                   | -            | Индикация загрузки                        |
-| loadingProgress? | `number`                    | -            | Указывает прогресс индикации загрузки     |
-| className?       | `string`                    | -            | Дополнительный класс                      |
-| innerRef?        | `React.Ref<HTMLDivElement>` | -            | Ссылка на корневой DOM элемент компонента |
+| Свойство                 | Тип                         | По умолчанию | Описание                                     |
+| ------------------------ | --------------------------- | ------------ | -------------------------------------------- |
+| size?                    | `'m' | 's'`                 | `'m'`        | Размер                                       |
+| extension?               | `string`                    | -            | Расширение файла                             |
+| loading?                 | `boolean`                   | -            | Индикация загрузки                           |
+| loadingWithProgressSpin? | `boolean`                   | -            | Показать/скрыть индикатор прогресса загрузки |
+| loadingProgress?         | `number`                    | -            | Указывает прогресс индикации загрузки        |
+| className?               | `string`                    | -            | Дополнительный класс                         |
+| innerRef?                | `React.Ref<HTMLDivElement>` | -            | Ссылка на корневой DOM элемент компонента    |
 
 <!-- props:end -->
 
@@ -61,10 +62,11 @@ const App = () => {
 Указывая свойство `loading` включаете индикацию загрузки, также можете управлять прогрессбаром загрузки через свойство `loadingProgress`
 
 ```ts
+<File loading loadingWithProgressSpin loadingProgress={30} />
+<File loading loadingWithProgressSpin loadingProgress={60} />
+<File loading loadingWithProgressSpin loadingProgress={90} />
+<File loading loadingWithProgressSpin />
 <File loading />
-<File loading loadingProgress={30} />
-<File loading loadingProgress={60} />
-<File loading loadingProgress={90} />
 ```
 
 {{%story::desktop:ui-kit-examples-file--loading%}}

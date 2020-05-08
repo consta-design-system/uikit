@@ -30,6 +30,7 @@ import { FileIconZip } from '../../fileIcons/FileIconZip/FileIconZip';
 export type FileProps = {
   extension?: string;
   loading?: boolean;
+  loadingWithProgressSpin?: boolean;
   loadingProgress?: number;
 };
 
@@ -38,21 +39,31 @@ export type IFile = FileProps & (Omit<IFileIcon, keyof FileProps>);
 export const cnFile = cn('File');
 
 export function File(props: IFile) {
-  const { extension, loading, loadingProgress, className, size = 'm', ...otherProps } = props;
+  const {
+    extension,
+    loading,
+    loadingProgress,
+    className,
+    size = 'm',
+    loadingWithProgressSpin,
+    ...otherProps
+  } = props;
 
   if (loading) {
     const spin = !loadingProgress;
 
     return (
       <FileIconLoading className={cnFile(null, [className])} size={size} {...otherProps}>
-        <div className={cnFile('Loader', { spin, size })}>
-          <ProgressSpin
-            className={cnFile('Progress')}
-            size={size}
-            progress={spin ? 50 : loadingProgress}
-            animation
-          />
-        </div>
+        {loadingWithProgressSpin && (
+          <div className={cnFile('Loader', { spin, size })}>
+            <ProgressSpin
+              className={cnFile('Progress')}
+              size={size}
+              progress={spin ? 50 : loadingProgress}
+              animation
+            />
+          </div>
+        )}
       </FileIconLoading>
     );
   }
