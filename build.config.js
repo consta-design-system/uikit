@@ -1,6 +1,3 @@
-// const { execSync } = require('child_process');
-// const { readFileSync, writeFileSync } = require('fs');
-
 module.exports = {
   srcPath: './src',
   // NOTE: ignore уберет файлы из reExport, но в бандле файлы отстанутся
@@ -11,14 +8,10 @@ module.exports = {
     'src/__tests__/**',
     'src/**/*.stories/**',
     'src/**/*.stories.*',
-    'src/components/Input/**',
     'src/components/_bricks/**',
     'src/components/Common/**',
     'src/components/ScrollExample/**',
-    'src/components/Select/**',
     'src/components/ThemePreview/**',
-    'src/components/Popover/**',
-    'src/components/Textarea/**',
     'src/components/ThemePreview/**',
     'src/components/BaseCheckGroupField/**',
     'src/icons/BaseIconHoc/**',
