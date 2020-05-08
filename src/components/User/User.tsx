@@ -25,13 +25,31 @@ declare type UserProps = {
   onlyAvatar?: boolean;
   withArrow?: boolean;
   info?: string;
-  innerRef?: React.Ref<any>;
+  innerRef?: React.Ref<HTMLElement>;
 };
 
 export type IUser<T = {}> = UserProps &
   (Omit<React.HTMLAttributes<HTMLDivElement>, keyof (UserProps & T)> & Omit<T, keyof UserProps>);
 
 const cnUser = cn('User');
+
+const getInfoSizeByUserSize = (userSize: UserPropSize): TextPropSize => {
+  const sizeObj: Record<UserPropSize, TextPropSize> = {
+    s: '2xs',
+    m: 'xs',
+  };
+
+  return sizeObj[userSize];
+};
+
+const getArrowSizeByUserSize = (userSize: UserPropSize): IconPropSize => {
+  const sizeObj: Record<UserPropSize, IconPropSize> = {
+    s: 'xs',
+    m: 's',
+  };
+
+  return sizeObj[userSize];
+};
 
 export function User<T>(props: IUser<T>): React.ReactElement | null {
   const {
@@ -51,25 +69,6 @@ export function User<T>(props: IUser<T>): React.ReactElement | null {
   } = props;
   const Component = as;
   const onlyAvatar = propOnlyAvatar || (!name && !info);
-
-  const getInfoSizeByUserSize = (userSize: UserPropSize): TextPropSize => {
-    const sizeObj: Record<UserPropSize, TextPropSize> = {
-      s: '2xs',
-      m: 'xs',
-    };
-
-    return sizeObj[userSize];
-  };
-
-  const getArrowSizeByUserSize = (userSize: UserPropSize): IconPropSize => {
-    const sizeObj: Record<UserPropSize, IconPropSize> = {
-      s: 'xs',
-      m: 's',
-    };
-
-    return sizeObj[userSize];
-  };
-
   const infoSize = getInfoSizeByUserSize(size);
   const arrowSize = getArrowSizeByUserSize(size);
 
