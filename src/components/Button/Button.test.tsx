@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 
-import { Button, ButtonProps } from './Button';
+import { Button, IButton, cnButton } from './Button';
 
 const testId = 'button';
 
-const renderComponent = (props: ButtonProps = {}) => {
+const renderComponent = (props: IButton = {}) => {
   const { label = 'Текст кнопки', ...rest } = props;
   return render(<Button data-testid={testId} label={label} {...rest} />);
 };
@@ -24,7 +24,7 @@ describe('Компонент Button', () => {
 
           const button = screen.getByTestId(testId);
 
-          expect(button).toHaveClass(`Button_size_${size}`);
+          expect(button).toHaveClass(cnButton({ size }));
         });
       });
     });
@@ -37,7 +37,7 @@ describe('Компонент Button', () => {
 
           const button = screen.getByTestId(testId);
 
-          expect(button).toHaveClass(`Button_view_${view}`);
+          expect(button).toHaveClass(cnButton({ view }));
         });
       });
     });
@@ -50,7 +50,7 @@ describe('Компонент Button', () => {
 
           const button = screen.getByTestId(testId);
 
-          expect(button).toHaveClass(`Button_width_${width}`);
+          expect(button).toHaveClass(cnButton({ width }));
         });
       });
     });
@@ -72,7 +72,7 @@ describe('Компонент Button', () => {
 
           const button = screen.getByTestId(testId);
 
-          expect(button).toHaveClass(`Button_form_${form}`);
+          expect(button).toHaveClass(cnButton({ form }));
         });
       });
     });
@@ -90,7 +90,11 @@ describe('Компонент Button', () => {
       });
 
       it(`должен рендериться как функциональный компонент`, () => {
-        const Component = (props: ButtonProps = {}) => <span {...props} />;
+        const Component = ({ children, innerRef, ...otherProps }) => (
+          <span {...otherProps} ref={innerRef}>
+            {children}
+          </span>
+        );
 
         renderComponent({ as: Component });
 
@@ -113,7 +117,7 @@ describe('Компонент Button', () => {
         expect(handleClick).toHaveBeenCalledTimes(0);
 
         expect(button).toBeDisabled();
-        expect(button).toHaveClass('Button_disabled');
+        expect(button).toHaveClass(cnButton({ disabled: true }));
       });
 
       it('должен вешать класс disabled на <a> элемент', () => {
@@ -126,7 +130,7 @@ describe('Компонент Button', () => {
         fireEvent.click(button);
 
         expect(handleClick).toHaveBeenCalledTimes(0);
-        expect(button).toHaveClass('Button_disabled');
+        expect(button).toHaveClass(cnButton({ disabled: true }));
       });
     });
   });

@@ -6,13 +6,6 @@
   background: var(--color-control-bg-clear);
   border-radius: var(--control-radius);
   box-sizing: border-box;
-  &_withAction {
-    cursor: pointer;
-    transition: background 0.2s ease;
-    &:hover {
-      background: var(--color-control-bg-clear-hover);
-    }
-  }
   &-File {
     flex: none;
     transition: opacity 0.2s;
@@ -23,13 +16,24 @@
   }
   &-Button {
     flex: none;
+    opacity: 0;
   }
   &-Content {
     flex: 1;
+    margin-top: var(--space-3xs);
     overflow: hidden;
     word-wrap: break-word;
     &:not(:last-child) {
       margin-right: var(--space-xs);
+    }
+  }
+  &_withAction {
+    padding: var(--space-2xs) var(--space-2xs) var(--space-2xs) var(--space-xs);
+    cursor: pointer;
+    transition: background 0.2s ease;
+    &:hover {
+      background: var(--color-control-bg-clear-hover);
+      .Attach-Button { opacity: 1; }
     }
   }
 }

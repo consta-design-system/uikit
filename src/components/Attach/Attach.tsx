@@ -73,7 +73,7 @@ export function Attach(props: IAttachProps): React.ReactElement {
       />
       <div className={cnAttach('Content')}>
         {fileName && (
-          <Text className={cnAttach('FileName')} size="s" view="primary">
+          <Text className={cnAttach('FileName')} size="s" view="primary" lineHeight="xs">
             {fileName}
           </Text>
         )}

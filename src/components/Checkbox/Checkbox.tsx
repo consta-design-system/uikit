@@ -1,33 +1,21 @@
 import './Checkbox.css';
 
-import React from 'react';
+import React, { ChangeEventHandler } from 'react';
 import { cn } from '../../utils/bem';
 
 export type CheckboxPropName = string;
-export type CheckboxPropId = string | number;
-export type CheckboxPropValue<T = any> = T | null;
 export type CheckboxPropChecked = boolean;
 export type CheckboxPropIntermediate = boolean;
 export type CheckboxPropSize = 'm' | 'l';
-export type CheckboxOnChangeArguments<T = any> = {
-  e: React.ChangeEvent<HTMLInputElement>;
-  id?: CheckboxPropId;
-  name?: CheckboxPropName;
-  value: CheckboxPropValue<T>;
-  checked: CheckboxPropChecked;
-  intermediate: CheckboxPropIntermediate;
-};
 
-export type CheckboxProps<T = any> = {
-  value?: CheckboxPropValue<T>;
+export type CheckboxProps = {
   checked?: CheckboxPropChecked;
   size?: CheckboxPropSize;
   disabled?: boolean;
   intermediate?: CheckboxPropIntermediate;
   className?: string;
   label?: string;
-  onChange?: (object: CheckboxOnChangeArguments<T>) => void;
-  id?: CheckboxPropId;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
   name?: CheckboxPropName;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
@@ -40,14 +28,13 @@ export type CheckboxProps<T = any> = {
   innerRef?: React.Ref<HTMLLabelElement>;
 };
 
-declare type ICheckbox<T = any> = CheckboxProps<T> &
-  Omit<React.HTMLAttributes<HTMLLabelElement>, keyof CheckboxProps<T>>;
+declare type ICheckbox = CheckboxProps &
+  Omit<React.HTMLAttributes<HTMLLabelElement>, keyof CheckboxProps>;
 
 export const cnCheckbox = cn('Checkbox');
 
-export function Checkbox<T = any>(props: ICheckbox<T>): React.ReactElement | null {
+export function Checkbox(props: ICheckbox): React.ReactElement | null {
   const {
-    value = null,
     checked = false,
     id,
     name,
@@ -67,11 +54,6 @@ export function Checkbox<T = any>(props: ICheckbox<T>): React.ReactElement | nul
     innerRef,
     ...otherProps
   } = props;
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!disabled && onChange) {
-      onChange({ e, id, name, value, checked: !checked, intermediate });
-    }
-  };
 
   return (
     <label
@@ -81,12 +63,11 @@ export function Checkbox<T = any>(props: ICheckbox<T>): React.ReactElement | nul
     >
       <input
         type="checkbox"
-        id={id ? id.toString() : undefined}
         name={name}
         className={cnCheckbox('Input')}
         checked={checked}
         disabled={disabled}
-        onChange={handleChange}
+        onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
         readOnly={readOnly}
