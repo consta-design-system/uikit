@@ -26,3 +26,4 @@ export { HeaderSearchBar } from './SearchBar/Header-SearchBar';
 export { HeaderMenu } from './Menu/Header-Menu';
 export { HeaderLogin } from './Login/Header-Login';
 export { HeaderButton } from './Button/Header-Button';
+export { HeaderModule } from './Module/Header-Module';

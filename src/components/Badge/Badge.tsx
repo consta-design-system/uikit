@@ -17,7 +17,7 @@ export type BadgeProps = {
   form?: 'default' | 'round';
   minified?: boolean;
   icon?: React.FC<IIcon>;
-  innerRef?: React.Ref<any>;
+  innerRef?: React.Ref<HTMLElement>;
   label?: string;
   className?: string;
   as?: React.ElementType;
