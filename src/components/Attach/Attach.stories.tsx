@@ -68,7 +68,7 @@ storiesOf('UI-KIT|/Examples/Attach', module)
       <Attach
         fileName="Документация"
         fileExtension="docx"
-        fileDescription="1,5 Mб 21.02.2020, 14:12"
+        fileDescription="1,5 Mб • 21.02.2019, 14:12"
         loadingText="Загрузка"
         loading
         loadingProgress={70}
