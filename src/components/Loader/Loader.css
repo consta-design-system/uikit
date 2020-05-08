@@ -1,4 +1,6 @@
 .Loader {
+  --backgroundColor: var(--loaderBackgroundColor, var(--color-control-bg-primary));
+
   position: relative;
   left: 50%;
   top: 50%;
@@ -14,7 +16,7 @@
     height: var(--loader-size);
     width: var(--loader-size);
     border-radius: 50%;
-    background: var(--color-control-bg-primary);
+    background: var(--backgroundColor);
     animation: loader 1s ease infinite;
   }
   &::after {
@@ -25,7 +27,7 @@
     height: var(--loader-size);
     width: var(--loader-size);
     border-radius: 50%;
-    background: var(--color-control-bg-primary);
+    background: var(--backgroundColor);
     animation: loader 1s -0.36s ease infinite;
   }
 
@@ -36,7 +38,7 @@
     height: var(--loader-size);
     width: var(--loader-size);
     border-radius: 50%;
-    background: var(--color-control-bg-primary);
+    background: var(--backgroundColor);
     animation: loader 1s -0.18s ease infinite;
   }
 

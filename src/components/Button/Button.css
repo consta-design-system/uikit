@@ -146,12 +146,21 @@
   }
 
   &_disabled,
-  &:disabled {
+  &:disabled,
+  &_loading {
     cursor: not-allowed;
     pointer-events: none;
-    color: var(--color-control-typo-disable);
     border-color: transparent;
     background-color: var(--color-control-bg-disable);
+  }
+
+  &_disabled,
+  &:disabled {
+    color: var(--color-control-typo-disable);
+  }
+
+  &_loading {
+    color: transparent;
   }
 
   &_width {
@@ -178,6 +187,7 @@
   &-Icon {
     display: block;
     flex-shrink: 0;
+
     &_position {
       &_left {
         margin-right: var(--icon-indent);
@@ -194,6 +204,12 @@
     overflow: hidden;
     text-align: center;
     text-overflow: ellipsis;
+  }
+
+  &_loading &-Loader {
+    --loaderBackgroundColor: var(--color-control-typo-disable);
+
+    position: absolute;
   }
 }
 
