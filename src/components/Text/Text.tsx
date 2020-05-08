@@ -8,7 +8,7 @@ import { componentIsFunction } from '../../utils/componentIsFunction';
 export type TextPropAlign = 'left' | 'center' | 'right';
 export type TextPropDecoration = 'underline';
 export type TextPropDisplay = 'block' | 'inline-block' | 'inline';
-export type TextPropFont = 'mono' | 'sans' | 'serif';
+export type TextPropFont = 'primary' | 'mono';
 export type TextPropLineHeight = '2xs' | 'xs' | 's' | 'm' | 'l';
 export type TextPropSize =
   | '2xs'
@@ -56,7 +56,7 @@ export type TextProps = {
   width?: TextPropWidth;
   className?: string;
   children?: React.ReactNode;
-  innerRef?: React.Ref<any>;
+  innerRef?: React.Ref<HTMLElement>;
 };
 
 export type IText<T = {}> = TextProps &
@@ -66,7 +66,7 @@ export const cnText = cn('Text');
 
 export function Text<T>(props: IText<T>): React.ReactElement | null {
   const {
-    as = 'div',
+    as: Component = 'div',
     align,
     decoration,
     display,
@@ -85,8 +85,6 @@ export function Text<T>(props: IText<T>): React.ReactElement | null {
     innerRef,
     ...otherProps
   } = props;
-
-  const Component = as;
 
   return (
     <Component
