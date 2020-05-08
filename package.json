@@ -32,7 +32,10 @@
     "pre-commit": "yarn run lint-staged",
     "build-old": "rollup -c",
     "build": "rm -rf dist && node builder/build.js --config=./build.config.js",
-    "pre-build": "node builder/preBuild.js --config=./build.config.js"
+    "pre-build": "node builder/preBuild.js --config=./build.config.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "coverage": "jest --all --coverage"
   },
   "browserslist": [
     "last 2 version",
@@ -91,9 +94,10 @@
     "@svgr/plugin-jsx": "^5.3.1",
     "@svgr/plugin-prettier": "^5.3.1",
     "@svgr/plugin-svgo": "^5.3.0",
+    "@testing-library/jest-dom": "^5.5.0",
+    "@testing-library/react": "^10.0.3",
     "@types/classnames": "^2.2.9",
-    "@types/enzyme": "^3.10.3",
-    "@types/jest": "^24.0.15",
+    "@types/jest": "^25.2.1",
     "@types/lodash-es": "^4.17.3",
     "@types/node": "^12.0.8",
     "@types/react": "^16.8.20",
@@ -109,7 +113,7 @@
     "eslint-plugin-prettier": "^3.1.0",
     "fast-glob": "^3.2.2",
     "fs-extra": "^9.0.0",
-    "jest-enzyme": "^7.0.2",
+    "jest": "^25.4.0",
     "lint-staged": "^8.2.1",
     "log-symbols": "^3.0.0",
     "postcss": "^7.0.27",
@@ -129,20 +133,9 @@
     "stylelint-config-standard": "^18.3.0",
     "stylelint-prettier": "^1.1.1",
     "ts-essentials": "^3.0.0",
+    "ts-jest": "^25.4.0",
     "ts-node": "^8.8.2",
     "typescript": "^3.8.3"
   },
-  "homepage": "https://gpn-prototypes.github.io/ui-kit",
-  "jest": {
-    "setupFilesAfterEnv": [
-      "<rootDir>/src/config/setupTests.js"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "json",
-      "ts",
-      "tsx"
-    ]
-  }
+  "homepage": "https://gpn-prototypes.github.io/ui-kit"
 }
