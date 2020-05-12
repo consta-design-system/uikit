@@ -25,3 +25,6 @@
     margin-bottom: var(--space-m);
   }
 }
+iframe[src='iframe.html?id=ui-kit-examples-snackbar--example&embeded=true'] {
+  height: 600px;
+}
