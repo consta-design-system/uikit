@@ -78,17 +78,17 @@ export function Attach(props: IAttachProps): React.ReactElement {
           </Text>
         )}
         {fileDescription && !loading && (
-          <Text className={cnAttach('FileDescription')} size="xs" view="ghost">
+          <Text className={cnAttach('FileDescription')} size="xs" lineHeight="xs" view="ghost">
             {fileDescription}
           </Text>
         )}
         {loadingText && loading && (
-          <Text className={cnAttach('LoadingText')} size="xs" view="ghost">
+          <Text className={cnAttach('LoadingText')} size="xs" lineHeight="xs" view="ghost">
             {loadingProgress ? `${loadingText} ${loadingProgress}%` : `${loadingText}...`}
           </Text>
         )}
         {errorText && (
-          <Text className={cnAttach('ErrorText')} size="xs" view="alert">
+          <Text className={cnAttach('ErrorText')} size="xs" lineHeight="xs" view="alert">
             {errorText}
           </Text>
         )}
