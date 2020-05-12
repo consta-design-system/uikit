@@ -2,17 +2,17 @@ import './SnackBar-ActionButton.css';
 
 import React from 'react';
 
-import { SnackBarPropItemActionButton, cnSnackBar } from '../SnackBar';
+import { SnackBarPropItemAction, cnSnackBar } from '../SnackBar';
 import { Button } from '../../Button/Button';
 
 export type ISnackBarActionButton<ITEM> = {
-  action: SnackBarPropItemActionButton<ITEM> | SnackBarPropItemActionButton<ITEM>[];
+  action: SnackBarPropItemAction<ITEM> | SnackBarPropItemAction<ITEM>[];
 };
 
 export function SnackBarActionButton<ITEM>(props: ISnackBarActionButton<ITEM>) {
   const { action } = props;
 
-  let actions: SnackBarPropItemActionButton<ITEM>[];
+  let actions: SnackBarPropItemAction<ITEM>[];
   if (Array.isArray(action)) {
     actions = action;
   } else {
