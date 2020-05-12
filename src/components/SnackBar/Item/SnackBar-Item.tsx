@@ -56,6 +56,7 @@ export function SnackBarItem<ITEM>(props: ISnackBarItem<ITEM>): React.ReactEleme
     getMessage,
     item,
   ]);
+
   const initialTime = useMemo<number | undefined>(() => {
     const autoClose = getAutoClose && getAutoClose(item);
     if (autoClose) {
@@ -66,27 +67,33 @@ export function SnackBarItem<ITEM>(props: ISnackBarItem<ITEM>): React.ReactEleme
       }
     }
   }, [getAutoClose, item]);
-  const status = useMemo<SnackBarPropItemStatus>(() => (getStatus ? getStatus(item) : 'system'), [
+
+  const status = useMemo<SnackBarPropItemStatus>(() => (getStatus ? getStatus(item) : 'normal'), [
     getStatus,
     item,
   ]);
+
   const Icon = useMemo<React.FC<IIcon> | undefined>(() => getIcon && getIcon(item), [
     getIcon,
     item,
   ]);
+
   const action = useMemo<SnackBarPropItemAction<ITEM> | SnackBarPropItemAction<ITEM>[] | undefined>(
     () => getAction && getAction(item),
     [getAction, item]
   );
+
   const handleClick = useMemo<React.EventHandler<React.MouseEvent> | undefined>(
     () => getOnClick && getOnClick(item),
     [getOnClick, item]
   );
+
   const handleClose = useMemo<SnackBarItemOnClose | undefined>(
     () => getOnClose && getOnClose(item),
     [getOnClose, item]
   );
-  const handleMountTimer = (object) => setTimerFunctions(object);
+
+  const handleMountTimer = (timerFunctions) => setTimerFunctions(timerFunctions);
   const handleMouseEnter = () => setHover(true);
   const handleMouseLeave = () => setHover(false);
 
@@ -111,8 +118,8 @@ export function SnackBarItem<ITEM>(props: ISnackBarItem<ITEM>): React.ReactEleme
         cnTheme({ color: 'gpnDark' }),
       ])}
       onClick={handleClick}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={initialTime ? handleMouseEnter : undefined}
+      onMouseLeave={initialTime ? handleMouseLeave : undefined}
     >
       {initialTime && (
         <SnackBarTimer
@@ -123,7 +130,7 @@ export function SnackBarItem<ITEM>(props: ISnackBarItem<ITEM>): React.ReactEleme
       )}
       {!initialTime && Icon && <Icon className={cnSnackBar('Icon')} size="m" />}
       <div className={cnSnackBar('Content')}>
-        {message && <Text lineHeight='s'>{message}</Text>}
+        {message && <Text lineHeight="s">{message}</Text>}
         {action && <SnackBarActionButton<ITEM> action={action} />}
       </div>
       {handleClose && (

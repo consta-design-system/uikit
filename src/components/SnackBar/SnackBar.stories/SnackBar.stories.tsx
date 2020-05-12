@@ -2,19 +2,21 @@ import './SnackBar.stories.css';
 
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
+import { boolean, withKnobs } from '@storybook/addon-knobs';
+import { cn } from '../../../utils/bem';
 import { Button } from '../../Button/Button';
+import { IIcon } from '../../../icons/Icon/Icon';
 import { IconAdd } from '../../../icons/IconAdd/IconAdd';
 import { IconThumbUp } from '../../../icons/IconThumbUp/IconThumbUp';
 import { IconAlert } from '../../../icons/IconAlert/IconAlert';
-
-import { cn } from '../../../utils/bem';
+import { IconRing } from '../../../icons/IconRing/IconRing';
+import { IconProcessing } from '../../../icons/IconProcessing/IconProcessing';
 import {
   SnackBar,
   SnackBarPropItemAction,
   SnackBarPropItemStatus,
   SnackBarPropGetItemOnClose,
 } from '../SnackBar';
-import { IIcon } from '../../../icons/Icon/Icon';
 
 declare type Item = {
   key: number;
@@ -23,7 +25,12 @@ declare type Item = {
   status?: SnackBarPropItemStatus;
 };
 
-const cnSnackBarStories = cn('SnackBarStories');
+const knobs = () => ({
+  withIcon: boolean('withIcon', false),
+  withActionButtons: boolean('withActionButtons', false),
+  withAutoClose: boolean('withAutoClose', false),
+  withCloseButton: boolean('withCloseButton', true),
+});
 
 const itemDefault: Item = {
   key: 1,
@@ -57,13 +64,15 @@ const getItemIcon = (item: Item): React.FC<IIcon> | undefined => {
     success: IconThumbUp,
     warning: IconAlert,
     alert: IconAlert,
-    system: undefined,
+    system: IconProcessing,
+    normal: IconRing,
   };
   return mapIconByStatus[item.status];
 };
-const getItemAutoClose = (item) => (item.status === 'system' ? 3 : false);
+const getItemAutoClose = () => 3;
+const cnSnackBarStories = cn('SnackBarStories');
 
-storiesOf('UI-KIT|/SnackBar', module).add('playground', () => {
+function Stories({ withIcon, withActionButtons, withAutoClose, withCloseButton }) {
   const [items, setItems] = React.useState<Item[]>(itemsInit);
 
   const getItemOnClose: SnackBarPropGetItemOnClose<Item> = (closedItem) => (
@@ -129,12 +138,16 @@ storiesOf('UI-KIT|/SnackBar', module).add('playground', () => {
         items={items}
         getItemKey={getItemKey}
         getItemMessage={getItemMessage}
-        getItemIcon={getItemIcon}
-        getItemOnClose={getItemOnClose}
-        getItemAction={getItemActions}
-        getItemAutoClose={getItemAutoClose}
+        getItemIcon={withIcon && getItemIcon}
+        getItemOnClose={withCloseButton && getItemOnClose}
+        getItemAction={withActionButtons && getItemActions}
+        getItemAutoClose={withAutoClose && getItemAutoClose}
         getItemStatus={getItemStatus}
       />
     </div>
   );
-});
+}
+
+storiesOf('UI-KIT|/SnackBar', module)
+  .addDecorator(withKnobs)
+  .add('playground', () => <Stories {...knobs()} />);

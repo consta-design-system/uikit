@@ -1,14 +1,12 @@
 import './SnackBar.css';
 
 import React from 'react';
-import { TransitionGroup, CSSTransition } from 'react-transition-group/esm';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { cnForCssTransition } from '../../utils/cnForCssTransition';
 import { cn } from '../../utils/bem';
 import { IIcon } from '../../icons/Icon/Icon';
 import { SnackBarItem } from './Item/SnackBar-Item';
 
-export const cnSnackBar = cn('SnackBar');
-export const cnSnackBarItem = cn('SnackBar', 'Item');
 export type SnackBarPropItemAction<ITEM> = {
   label: string | number;
   onClick: React.EventHandler<React.MouseEvent>;
@@ -41,6 +39,11 @@ export type SnackBarProps<ITEM> = {
 declare type ISnackBar<ITEM> = SnackBarProps<ITEM> &
   Omit<React.HTMLAttributes<HTMLDivElement>, keyof SnackBarProps<ITEM>>;
 
+export const cnSnackBar = cn('SnackBar');
+export const cnSnackBarItem = cn('SnackBar', 'Item');
+
+const cssTransitionClassNames = cnForCssTransition(cnSnackBarItem);
+
 export function SnackBar<ITEM>(props: ISnackBar<ITEM>): React.ReactElement {
   const {
     items,
@@ -63,13 +66,13 @@ export function SnackBar<ITEM>(props: ISnackBar<ITEM>): React.ReactElement {
       ref={innerRef}
       className={cnSnackBar(null, [className])}
       appear
-      entrer
+      enter
       exit
     >
       {items.map((item) => {
         const key = getItemKey(item);
         return (
-          <CSSTransition classNames={cnForCssTransition(cnSnackBarItem)} key={key} timeout={200}>
+          <CSSTransition classNames={cssTransitionClassNames} key={key} timeout={200}>
             <SnackBarItem<ITEM>
               key={key}
               getMessage={getItemMessage}
