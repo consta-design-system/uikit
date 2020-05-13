@@ -146,7 +146,6 @@
   }
 
   &_disabled,
-  &:disabled,
   &_loading {
     cursor: not-allowed;
     pointer-events: none;
@@ -154,8 +153,7 @@
     background-color: var(--color-control-bg-disable);
   }
 
-  &_disabled,
-  &:disabled {
+  &_disabled {
     color: var(--color-control-typo-disable);
   }
 

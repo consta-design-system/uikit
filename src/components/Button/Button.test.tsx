@@ -105,7 +105,7 @@ describe('Компонент Button', () => {
     });
 
     describe('проверка disabled', () => {
-      it.skip('должен отключать <button>', () => {
+      it('должен отключать <button>', () => {
         const handleClick = jest.fn();
 
         renderComponent({ disabled: true, onClick: handleClick });
@@ -131,6 +131,35 @@ describe('Компонент Button', () => {
 
         expect(handleClick).toHaveBeenCalledTimes(0);
         expect(button).toHaveClass(cnButton({ disabled: true }));
+      });
+    });
+    describe('проверка loading', () => {
+      it('должен отключать <button>', () => {
+        const handleClick = jest.fn();
+
+        renderComponent({ loading: true, onClick: handleClick });
+
+        const button = screen.getByTestId(testId);
+
+        fireEvent.click(button);
+
+        expect(handleClick).toHaveBeenCalledTimes(0);
+
+        expect(button).toBeDisabled();
+        expect(button).toHaveClass(cnButton({ loading: true }));
+      });
+
+      it('должен вешать класс loading на <a> элемент', () => {
+        const handleClick = jest.fn();
+
+        renderComponent({ loading: true, as: 'a', onClick: handleClick });
+
+        const button = screen.getByTestId(testId);
+
+        fireEvent.click(button);
+
+        expect(handleClick).toHaveBeenCalledTimes(0);
+        expect(button).toHaveClass(cnButton({ loading: true }));
       });
     });
   });
