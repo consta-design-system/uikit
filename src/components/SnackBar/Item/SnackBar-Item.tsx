@@ -13,14 +13,13 @@ import { cnSnackBar, cnSnackBarItem } from '../SnackBar';
 import {
   SnackBarPropGetItemMessage,
   SnackBarPropGetItemAutoClose,
-  SnackBarPropItemAction,
   SnackBarPropGetItemStatus,
   SnackBarPropItemStatus,
   SnackBarPropGetItemIcon,
   SnackBarPropGetItemAction,
   SnackBarPropGetItemOnClose,
-  SnackBarItemOnClose,
 } from '../SnackBar';
+import { SnackBarTimerPropOnMount } from '../Timer/SnackBar-Timer';
 
 export type ISnackBarItem<ITEM> = {
   item: ITEM;
@@ -43,40 +42,15 @@ export function SnackBarItem<ITEM>(props: ISnackBarItem<ITEM>): React.ReactEleme
   } | null>(null);
   const [hover, setHover] = useState<boolean>(false);
   const [timeIsOver, setTimeIsOver] = useState<boolean>(false);
-
-  const message = useMemo<string | number | undefined>(() => getMessage && getMessage(item), [
-    getMessage,
-    item,
-  ]);
-
-  const initialTime = useMemo<number | undefined>(() => {
-    const autoClose = getAutoClose && getAutoClose(item);
-    if (autoClose) {
-      return typeof autoClose === 'number' ? autoClose : defaultInitialTimerTime;
-    }
-  }, [getAutoClose, item]);
-
-  const status = useMemo<SnackBarPropItemStatus>(
-    () => (getStatus ? getStatus(item) : defaultStatus),
-    [getStatus, item]
-  );
-
-  const Icon = useMemo<React.FC<IIcon> | undefined>(() => getIcon && getIcon(item), [
-    getIcon,
-    item,
-  ]);
-
-  const action = useMemo<SnackBarPropItemAction<ITEM> | SnackBarPropItemAction<ITEM>[] | undefined>(
-    () => getAction && getAction(item),
-    [getAction, item]
-  );
-
-  const handleClose = useMemo<SnackBarItemOnClose | undefined>(
-    () => getOnClose && getOnClose(item),
-    [getOnClose, item]
-  );
-
-  const handleMountTimer = (timerFunctions) => setTimerFunctions(timerFunctions);
+  const message = getMessage && getMessage(item);
+  const autoClose = getAutoClose && getAutoClose(item);
+  const initialTime = typeof autoClose === 'number' ? autoClose : defaultInitialTimerTime;
+  const status = getStatus ? getStatus(item) : defaultStatus;
+  const Icon = getIcon && getIcon(item);
+  const action = getAction && getAction(item);
+  const handleClose = getOnClose && getOnClose(item);
+  const handleMountTimer: SnackBarTimerPropOnMount = (timerFunctions) =>
+    setTimerFunctions(timerFunctions);
   const handleMouseEnter = () => setHover(true);
   const handleMouseLeave = () => setHover(false);
 

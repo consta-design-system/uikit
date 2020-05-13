@@ -5,8 +5,10 @@ import { useTimer } from '../../../utils/useTimer';
 import { Timer } from '../../Timer/Timer';
 import { cnSnackBar } from '../SnackBar';
 
+export type SnackBarTimerPropOnMount = (object: { pause: () => void; start: () => void }) => void;
+
 export type ISnackBarTimer = {
-  onMount: (object: { pause: () => void; start: () => void }) => void;
+  onMount: SnackBarTimerPropOnMount;
   onTimeIsOver: () => void;
   initialTime: number;
 };
