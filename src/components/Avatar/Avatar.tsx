@@ -1,10 +1,9 @@
 import './Avatar.css';
 
-import React, { useRef, useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import random from 'lodash/random';
 import { cn } from '../../utils/bem';
 import { componentIsFunction } from '../../utils/componentIsFunction';
-import { useForkRef } from '../../utils/useForkRef';
 
 export type AvatarPropSize = 's' | 'm';
 export type AvatarPropForm = 'round' | 'brick' | 'default';
@@ -62,7 +61,7 @@ export function Avatar<T>(props: IAvatar<T>): React.ReactElement | null {
     form = 'round',
     url,
     name,
-    innerRef: ref,
+    innerRef,
     ...otherProps
   } = props;
   const Component = as;
@@ -71,20 +70,13 @@ export function Avatar<T>(props: IAvatar<T>): React.ReactElement | null {
   const initials = useMemo(() => getInitials(name), [name]);
   const colorIndex = useMemo(() => getColorIndexForName(name), [name]);
 
-  const localRef = useRef<HTMLElement>(null);
-  const handleRef = useForkRef([localRef, ref]);
-
-  useEffect(() => {
-    localRef.current &&
-      localRef.current.style.setProperty('--avatar-color', `var(--avatar-color-${colorIndex})`);
-  }, [colorIndex]);
-
   return (
     <Component
       {...otherProps}
+      style={!showImage ? { '--avatar-color': `var(--avatar-color-${colorIndex})` } : {}}
       className={cnAvatar({ size, form }, [className])}
-      {...(componentIsFunction(Component) && { innerRef: handleRef })}
-      ref={handleRef}
+      {...(componentIsFunction(Component) && { innerRef })}
+      ref={innerRef}
     >
       {showImage && <img className={cnAvatar('Image')} src={url} alt={name} />}
       {!showImage && initials}
