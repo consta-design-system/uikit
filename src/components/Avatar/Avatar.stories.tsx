@@ -11,7 +11,7 @@ const defaultKnobs = () => ({
   form: select('form', ['round', 'brick', 'default'], 'round'),
 });
 
-var withFigma = figmaDecorator({
+const withFigma = figmaDecorator({
   url: 'https://www.figma.com/file/FLCwrJTceo6xB9VInayasa/UI-Kit%2FDefault?node-id=2222%3A5588',
 });
 

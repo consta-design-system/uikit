@@ -22,10 +22,14 @@ export type IAvatar<T = {}> = AvatarProps &
   (Omit<React.HTMLAttributes<HTMLDivElement>, keyof (AvatarProps & T)> &
     Omit<T, keyof AvatarProps>);
 
-const cnAvatar = cn('Avatar');
+export const cnAvatar = cn('Avatar');
 
-const getColorIndexForName = (name: string | undefined) => {
-  const LAST_COLOR_INDEX = 17;
+const MAX_COLOR_INDEX = 17;
+
+export const getColorIndexForName = (
+  name: string | undefined,
+  maxIndex: number | undefined = MAX_COLOR_INDEX
+) => {
   let index = 0;
 
   if (name) {
@@ -33,15 +37,15 @@ const getColorIndexForName = (name: string | undefined) => {
       name
         .split('')
         .map((c) => c.charCodeAt(0))
-        .reduce((acc, code) => acc + code, 0) % LAST_COLOR_INDEX;
+        .reduce((acc, code) => acc + code, 0) % maxIndex;
   } else {
-    index = random(0, LAST_COLOR_INDEX);
+    index = random(0, maxIndex);
   }
 
   return index;
 };
 
-const getInitials = (name: string | undefined) => {
+export const getInitialsForName = (name: string | undefined) => {
   if (!name) {
     return '';
   }
@@ -67,7 +71,7 @@ export function Avatar<T>(props: IAvatar<T>): React.ReactElement | null {
   const Component = as;
 
   const showImage = Boolean(url);
-  const initials = useMemo(() => getInitials(name), [name]);
+  const initials = useMemo(() => getInitialsForName(name), [name]);
   const colorIndex = useMemo(() => getColorIndexForName(name), [name]);
 
   return (
