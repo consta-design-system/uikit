@@ -22,21 +22,20 @@ export type SnackBarPropGetItemAction<ITEM> = (
 ) => SnackBarPropItemAction<ITEM> | SnackBarPropItemAction<ITEM>[];
 export type SnackBarItemOnClose = (e?: React.MouseEvent) => void;
 export type SnackBarPropGetItemOnClose<ITEM> = (item: ITEM) => SnackBarItemOnClose;
-export type SnackBarPropGetItemOnClick<ITEM> = (item: ITEM) => React.EventHandler<React.MouseEvent>;
+
 export type SnackBarProps<ITEM> = {
   items: ITEM[];
   getItemMessage?: SnackBarPropGetItemMessage<ITEM>;
   getItemKey: SnackBarPropGetItemKey<ITEM>;
   getItemAutoClose?: SnackBarPropGetItemAutoClose<ITEM>;
   getItemOnClose?: SnackBarPropGetItemOnClose<ITEM>;
-  getItemOnClick?: SnackBarPropGetItemOnClick<ITEM>;
   getItemStatus?: SnackBarPropGetItemStatus<ITEM>;
   getItemIcon?: SnackBarPropGetItemIcon<ITEM>;
   getItemAction?: SnackBarPropGetItemAction<ITEM>;
   innerRef?: React.Ref<HTMLDivElement>;
 };
 
-declare type ISnackBar<ITEM> = SnackBarProps<ITEM> &
+export type ISnackBar<ITEM> = SnackBarProps<ITEM> &
   Omit<React.HTMLAttributes<HTMLDivElement>, keyof SnackBarProps<ITEM>>;
 
 export const cnSnackBar = cn('SnackBar');
@@ -54,7 +53,6 @@ export function SnackBar<ITEM>(props: ISnackBar<ITEM>): React.ReactElement {
     getItemStatus,
     getItemIcon,
     getItemOnClose,
-    getItemOnClick,
     className,
     innerRef,
     ...otherProps
@@ -81,7 +79,6 @@ export function SnackBar<ITEM>(props: ISnackBar<ITEM>): React.ReactElement {
               getStatus={getItemStatus}
               getIcon={getItemIcon}
               getOnClose={getItemOnClose}
-              getOnClick={getItemOnClick}
               item={item}
             />
           </CSSTransition>

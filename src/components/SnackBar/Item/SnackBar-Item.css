@@ -25,9 +25,6 @@
         background-color: var(--color-bg-alert);
       }
     }
-    &_clickable {
-      cursor: pointer;
-    }
   }
   &-Icon {
     margin-right: var(--space-m);

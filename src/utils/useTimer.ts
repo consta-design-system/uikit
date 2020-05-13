@@ -1,17 +1,25 @@
 import { useEffect, useRef, useState } from 'react';
 
-export type TimerType = 'DECREMENTAL' | 'INCREMENTAL';
+export type Timer = 'DECREMENTAL' | 'INCREMENTAL';
 
-export type IConfig = {
+/**
+ * interval - tick duration
+ * endTime - stop timer in ticks
+ * initialTime: start time in ticks
+ * onTimeOver?: timer over callback
+ * step: step size in ticks
+ */
+
+export type Config = {
+  interval: number;
   endTime: number | null;
   initialTime: number;
-  interval: number;
   onTimeOver?: () => void;
   step: number;
-  timerType: TimerType;
+  timerType: Timer;
 };
 
-export type IValues = {
+export type Values = {
   isRunning: boolean;
   pause: () => void;
   reset: () => void;
@@ -19,15 +27,15 @@ export type IValues = {
   time: number;
 };
 
-const initialConfig: IConfig = {
+const initialConfig: Config = {
+  interval: 1000,
   endTime: null,
   initialTime: 0,
-  interval: 1000,
   step: 1,
   timerType: 'INCREMENTAL',
 };
 
-export function useTimer(config?: Partial<IConfig>): IValues {
+export function useTimer(config?: Partial<Config>): Values {
   const { endTime, initialTime, interval, onTimeOver, step, timerType } = {
     ...initialConfig,
     ...config,

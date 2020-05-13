@@ -1,8 +1,5 @@
 # SnackBar
 
-Компоненту обязательно нужно расширить его интерфейс:
-`<SnackBar<ITEM>>` - ITEM - интерфейс элемента массива items
-
 ## Свойства
 
 <!-- props:start -->
@@ -22,7 +19,36 @@
 
 <!-- props:end -->
 
-## Пример
+## Простой пример
+
+```ts
+import * as React from 'react';
+import { SnackBar } from '@gpn-design/uikit/SnackBar';
+
+type Item = {
+  key: number;
+  message: string;
+};
+
+type Items = Item[];
+
+const Items = [
+  {
+    key: 1,
+    message: 'Сообщение о каком-то событии',
+  },
+];
+const getItemKey = (item: Item) => item.key;
+const getItemMessage = (item: Item) => item.message;
+
+function MySnackBar() {
+  return <SnackBar items={items} getItemKey={getItemKey} getItemMessage={getItemMessage} />;
+}
+```
+
+{{%story::desktop:ui-kit-examples-snackbar--example%}}
+
+## Пример с кнопками
 
 ```ts
 import './SnackBarStories.css';
@@ -43,7 +69,7 @@ import {
   SnackBarPropGetItemOnClose,
 } from '@gpn-design/uikit/SnackBar';
 
-declare type Item = {
+type Item = {
   key: number;
   message: string;
   actions?: SnackBarPropItemAction<Item> | SnackBarPropItemAction<Item>[];
@@ -152,7 +178,7 @@ function SnackBarStories() {
           onClick={handleNormalAdd}
         />
       </div>
-      <SnackBar<Item>
+      <SnackBar
         className={cnSnackBarStories('SnackBar')}
         items={items}
         getItemKey={getItemKey}
@@ -168,4 +194,34 @@ function SnackBarStories() {
 }
 ```
 
-{{%story::desktop:ui-kit-examples-snackbar--example%}}
+```css
+.SnackBarStories {
+  display: flex;
+  flex-direction: row;
+  margin-left: calc(-1 * var(--space-xs));
+  margin-right: calc(-1 * var(--space-xs));
+  height: calc(100vh - var(--space-3xl));
+  &-SnackBar {
+    padding-left: var(--space-xs);
+    padding-right: var(--space-xs);
+    width: 400px;
+    flex: none;
+    overflow: auto;
+  }
+  &-Buttons {
+    padding-left: var(--space-xs);
+    padding-right: var(--space-xs);
+    flex: 1;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: flex-end;
+  }
+  &-ButtonAdd {
+    margin-bottom: var(--space-m);
+  }
+}
+```
+
+{{%story::desktop:ui-kit-examples-snackbar--example2%}}

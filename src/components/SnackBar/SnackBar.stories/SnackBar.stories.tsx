@@ -70,7 +70,7 @@ const getItemIcon = (item: Item): React.FC<IIcon> | undefined => {
   };
   return mapIconByStatus[item.status];
 };
-const getItemAutoClose = () => 3;
+const getItemAutoClose = () => true;
 const getItemAutoCloseForExaple = (item: Item) =>
   item.status === 'normal' || item.status === 'system' ? 5 : false;
 const cnSnackBarStories = cn('SnackBarStories');
@@ -136,7 +136,7 @@ function SnackBarStories({ withIcon, withActionButtons, withAutoClose, withClose
           onClick={handleNormalAdd}
         />
       </div>
-      <SnackBar<Item>
+      <SnackBar
         className={cnSnackBarStories('SnackBar')}
         items={items}
         getItemKey={getItemKey}
@@ -152,6 +152,19 @@ function SnackBarStories({ withIcon, withActionButtons, withAutoClose, withClose
 }
 
 function SnackBarExample() {
+  return (
+    <div className={cnSnackBarStories({ example: 1 })}>
+      <SnackBar<Item>
+        className={cnSnackBarStories('SnackBar')}
+        items={itemsInit}
+        getItemKey={getItemKey}
+        getItemMessage={getItemMessage}
+      />
+    </div>
+  );
+}
+
+function SnackBarExample2() {
   const [items, setItems] = React.useState<Item[]>(itemsInit);
 
   const getItemOnClose: SnackBarPropGetItemOnClose<Item> = (closedItem) => (
@@ -179,7 +192,7 @@ function SnackBarExample() {
   const handleNormalAdd = generateHandleAdd('normal');
 
   return (
-    <div className={cnSnackBarStories({ example: true })}>
+    <div className={cnSnackBarStories({ example: 2 })}>
       <div className={cnSnackBarStories('Buttons')}>
         <Button
           className={cnSnackBarStories('ButtonAdd')}
@@ -212,7 +225,7 @@ function SnackBarExample() {
           onClick={handleNormalAdd}
         />
       </div>
-      <SnackBar<Item>
+      <SnackBar
         className={cnSnackBarStories('SnackBar')}
         items={items}
         getItemKey={getItemKey}
@@ -238,4 +251,6 @@ storiesOf('UI-KIT|/SnackBar', module)
   )
   .add('playground', () => <SnackBarStories {...knobs()} />);
 
-storiesOf('UI-KIT|/Examples/SnackBar', module).add('_example', SnackBarExample);
+storiesOf('UI-KIT|/Examples/SnackBar', module)
+  .add('_example', SnackBarExample)
+  .add('_example2', SnackBarExample2);

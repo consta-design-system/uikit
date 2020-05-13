@@ -18,7 +18,6 @@ import {
   SnackBarPropItemStatus,
   SnackBarPropGetItemIcon,
   SnackBarPropGetItemAction,
-  SnackBarPropGetItemOnClick,
   SnackBarPropGetItemOnClose,
   SnackBarItemOnClose,
 } from '../SnackBar';
@@ -29,22 +28,15 @@ export type ISnackBarItem<ITEM> = {
   getAutoClose?: SnackBarPropGetItemAutoClose<ITEM>;
   getOnClose?: SnackBarPropGetItemOnClose<ITEM>;
   getAction?: SnackBarPropGetItemAction<ITEM>;
-  getOnClick?: SnackBarPropGetItemOnClick<ITEM>;
   getStatus?: SnackBarPropGetItemStatus<ITEM>;
   getIcon?: SnackBarPropGetItemIcon<ITEM>;
 };
 
+const defaultInitialTimerTime: number = 3;
+const defaultStatus: SnackBarPropItemStatus = 'normal';
+
 export function SnackBarItem<ITEM>(props: ISnackBarItem<ITEM>): React.ReactElement {
-  const {
-    getMessage,
-    item,
-    getAutoClose,
-    getOnClose,
-    getAction,
-    getOnClick,
-    getStatus,
-    getIcon,
-  } = props;
+  const { getMessage, item, getAutoClose, getOnClose, getAction, getStatus, getIcon } = props;
   const [timerFunctions, setTimerFunctions] = useState<{
     start: () => void;
     pause: () => void;
@@ -60,18 +52,14 @@ export function SnackBarItem<ITEM>(props: ISnackBarItem<ITEM>): React.ReactEleme
   const initialTime = useMemo<number | undefined>(() => {
     const autoClose = getAutoClose && getAutoClose(item);
     if (autoClose) {
-      if (Number(autoClose) === autoClose) {
-        return autoClose;
-      } else {
-        return 3;
-      }
+      return typeof autoClose === 'number' ? autoClose : defaultInitialTimerTime;
     }
   }, [getAutoClose, item]);
 
-  const status = useMemo<SnackBarPropItemStatus>(() => (getStatus ? getStatus(item) : 'normal'), [
-    getStatus,
-    item,
-  ]);
+  const status = useMemo<SnackBarPropItemStatus>(
+    () => (getStatus ? getStatus(item) : defaultStatus),
+    [getStatus, item]
+  );
 
   const Icon = useMemo<React.FC<IIcon> | undefined>(() => getIcon && getIcon(item), [
     getIcon,
@@ -81,11 +69,6 @@ export function SnackBarItem<ITEM>(props: ISnackBarItem<ITEM>): React.ReactEleme
   const action = useMemo<SnackBarPropItemAction<ITEM> | SnackBarPropItemAction<ITEM>[] | undefined>(
     () => getAction && getAction(item),
     [getAction, item]
-  );
-
-  const handleClick = useMemo<React.EventHandler<React.MouseEvent> | undefined>(
-    () => getOnClick && getOnClick(item),
-    [getOnClick, item]
   );
 
   const handleClose = useMemo<SnackBarItemOnClose | undefined>(
@@ -114,10 +97,7 @@ export function SnackBarItem<ITEM>(props: ISnackBarItem<ITEM>): React.ReactEleme
 
   return (
     <div
-      className={cnSnackBarItem({ status, clickable: Boolean(handleClick) }, [
-        cnTheme({ color: 'gpnDark' }),
-      ])}
-      onClick={handleClick}
+      className={cnSnackBarItem({ status }, [cnTheme({ color: 'gpnDark' })])}
       onMouseEnter={initialTime ? handleMouseEnter : undefined}
       onMouseLeave={initialTime ? handleMouseLeave : undefined}
     >

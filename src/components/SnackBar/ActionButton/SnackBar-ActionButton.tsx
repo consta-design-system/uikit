@@ -12,12 +12,7 @@ export type ISnackBarActionButton<ITEM> = {
 export function SnackBarActionButton<ITEM>(props: ISnackBarActionButton<ITEM>) {
   const { action } = props;
 
-  let actions: SnackBarPropItemAction<ITEM>[];
-  if (Array.isArray(action)) {
-    actions = action;
-  } else {
-    actions = [action];
-  }
+  const actions: SnackBarPropItemAction<ITEM>[] = Array.isArray(action) ? action : [action];
 
   if (actions.length < 1) {
     return null;

@@ -4,6 +4,14 @@
   margin-left: calc(-1 * var(--space-xs));
   margin-right: calc(-1 * var(--space-xs));
   height: calc(100vh - var(--space-3xl));
+  &_example {
+    &_1 {
+      min-height: 300px;
+    }
+    &_2 {
+      min-height: 500px;
+    }
+  }
   &-SnackBar {
     padding-left: var(--space-xs);
     padding-right: var(--space-xs);
@@ -25,6 +33,7 @@
     margin-bottom: var(--space-m);
   }
 }
-iframe[src='iframe.html?id=ui-kit-examples-snackbar--example&embeded=true'] {
+
+iframe[src='iframe.html?id=ui-kit-examples-snackbar--example2&embeded=true'] {
   height: 600px;
 }
