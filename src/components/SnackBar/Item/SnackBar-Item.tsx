@@ -1,10 +1,9 @@
 import '../../Theme/_color/Theme_color_gpnDark.css';
 import './SnackBar-Item.css';
 
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { cnTheme } from '../../Theme/Theme';
 import { IconClose } from '../../../icons/IconClose/IconClose';
-import { IIcon } from '../../../icons/Icon/Icon';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 import { SnackBarActionButton } from '../ActionButton/SnackBar-ActionButton';
