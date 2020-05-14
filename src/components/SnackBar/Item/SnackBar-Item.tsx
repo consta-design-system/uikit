@@ -9,49 +9,34 @@ import { Text } from '../../Text/Text';
 import { SnackBarActionButton } from '../ActionButton/SnackBar-ActionButton';
 import { SnackBarTimer } from '../Timer/SnackBar-Timer';
 import { cnSnackBar, cnSnackBarItem } from '../SnackBar';
-import {
-  SnackBarPropGetItemMessage,
-  SnackBarPropGetItemAutoClose,
-  SnackBarPropGetItemStatus,
-  SnackBarPropItemStatus,
-  SnackBarPropGetItemIcon,
-  SnackBarPropGetItemAction,
-  SnackBarPropGetItemOnClose,
-} from '../SnackBar';
+import { Item, SnackBarPropItemStatus } from '../SnackBar';
 import { SnackBarTimerPropOnMount } from '../Timer/SnackBar-Timer';
 
-export type ISnackBarItem<ITEM> = {
-  item: ITEM;
-  getMessage?: SnackBarPropGetItemMessage<ITEM>;
-  getAutoClose?: SnackBarPropGetItemAutoClose<ITEM>;
-  getOnClose?: SnackBarPropGetItemOnClose<ITEM>;
-  getAction?: SnackBarPropGetItemAction<ITEM>;
-  getStatus?: SnackBarPropGetItemStatus<ITEM>;
-  getIcon?: SnackBarPropGetItemIcon<ITEM>;
+export type ISnackBarItem = {
+  item: Item;
 };
 
-const defaultInitialTimerTime: number = 3;
+const defaultInitialTimerTime: number = 3000;
 const defaultStatus: SnackBarPropItemStatus = 'normal';
 
-export function SnackBarItem<ITEM>(props: ISnackBarItem<ITEM>): React.ReactElement {
-  const { getMessage, item, getAutoClose, getOnClose, getAction, getStatus, getIcon } = props;
+export function SnackBarItem(props: ISnackBarItem): React.ReactElement {
+  const { item } = props;
+  const { onClose, autoClose, icon: Icon, message, actions, status } = item;
   const [timerFunctions, setTimerFunctions] = useState<{
     start: () => void;
     pause: () => void;
   } | null>(null);
   const [hover, setHover] = useState<boolean>(false);
   const [timeIsOver, setTimeIsOver] = useState<boolean>(false);
-  const message = getMessage && getMessage(item);
-  const autoClose = getAutoClose && getAutoClose(item);
-  const initialTime = typeof autoClose === 'number' ? autoClose : defaultInitialTimerTime;
-  const status = getStatus ? getStatus(item) : defaultStatus;
-  const Icon = getIcon && getIcon(item);
-  const action = getAction && getAction(item);
-  const handleClose = getOnClose && getOnClose(item);
   const handleMountTimer: SnackBarTimerPropOnMount = (timerFunctions) =>
     setTimerFunctions(timerFunctions);
   const handleMouseEnter = () => setHover(true);
   const handleMouseLeave = () => setHover(false);
+  const autoCloseTime = autoClose
+    ? typeof autoClose === 'number'
+      ? autoClose
+      : defaultInitialTimerTime
+    : false;
 
   useEffect(() => {
     if (!timeIsOver) {
@@ -65,35 +50,37 @@ export function SnackBarItem<ITEM>(props: ISnackBarItem<ITEM>): React.ReactEleme
 
   const handleTimeIsOver = () => {
     setTimeIsOver(true);
-    handleClose && handleClose();
+    onClose && onClose(item);
   };
+
+  const handleClick = onClose ? () => onClose(item) : undefined;
 
   return (
     <div
       className={cnSnackBarItem({ status }, [cnTheme({ color: 'gpnDark' })])}
-      onMouseEnter={initialTime ? handleMouseEnter : undefined}
-      onMouseLeave={initialTime ? handleMouseLeave : undefined}
+      onMouseEnter={autoCloseTime ? handleMouseEnter : undefined}
+      onMouseLeave={autoCloseTime ? handleMouseLeave : undefined}
     >
-      {initialTime && (
+      {autoCloseTime && (
         <SnackBarTimer
           onMount={handleMountTimer}
           onTimeIsOver={handleTimeIsOver}
-          initialTime={initialTime}
+          startTime={autoCloseTime}
         />
       )}
-      {!initialTime && Icon && <Icon className={cnSnackBar('Icon')} size="m" />}
+      {!autoCloseTime && Icon && <Icon className={cnSnackBar('Icon')} size="m" />}
       <div className={cnSnackBar('Content')}>
         {message && <Text lineHeight="s">{message}</Text>}
-        {action && <SnackBarActionButton<ITEM> action={action} />}
+        {actions && <SnackBarActionButton actions={actions} />}
       </div>
-      {handleClose && (
+      {onClose && (
         <Button
           className={cnSnackBar('CloseButton')}
           view="clear"
           iconLeft={IconClose}
           form="round"
           size="xs"
-          onClick={handleClose}
+          onClick={handleClick}
         />
       )}
     </div>

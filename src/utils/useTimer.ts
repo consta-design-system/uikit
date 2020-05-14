@@ -2,20 +2,16 @@ import { useEffect, useRef, useState } from 'react';
 
 export type Timer = 'DECREMENTAL' | 'INCREMENTAL';
 
-/**
- * interval - tick duration
- * endTime - stop timer in ticks
- * initialTime: start time in ticks
- * onTimeOver?: timer over callback
- * step: step size in ticks
- */
-
 export type Config = {
+  /** tick duration */
   interval: number;
+  /**  stop timer in ms */
   endTime: number | null;
-  initialTime: number;
+  /**  start timer in ms */
+  startTime: number;
+  /** timer over callback */
   onTimeOver?: () => void;
-  step: number;
+  /** timer type */
   timerType: Timer;
 };
 
@@ -30,20 +26,19 @@ export type Values = {
 const initialConfig: Config = {
   interval: 1000,
   endTime: null,
-  initialTime: 0,
-  step: 1,
+  startTime: 0,
   timerType: 'INCREMENTAL',
 };
 
 export function useTimer(config?: Partial<Config>): Values {
-  const { endTime, initialTime, interval, onTimeOver, step, timerType } = {
+  const { endTime, startTime, interval, onTimeOver, timerType } = {
     ...initialConfig,
     ...config,
   };
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const pausedTimeRef = useRef<number | null>(null);
   const [shouldResetTime, setShouldResetTime] = useState(false);
-  const [time, setTime] = useState(initialTime);
+  const [time, setTime] = useState(startTime);
   const [isRunning, setIsRunning] = useState(false);
 
   const cancelInterval = () => {
@@ -59,9 +54,13 @@ export function useTimer(config?: Partial<Config>): Values {
 
     intervalRef.current = setInterval(() => {
       setTime((previousTime) => {
-        const newTime = timerType === 'INCREMENTAL' ? previousTime + step : previousTime - step;
+        const newTime =
+          timerType === 'INCREMENTAL' ? previousTime + interval : previousTime - interval;
 
-        if (endTime !== null && newTime === endTime) {
+        if (
+          endTime !== null &&
+          (timerType === 'INCREMENTAL' ? newTime >= endTime : newTime <= endTime)
+        ) {
           stopTimerWhenTimeIsOver();
         }
 
@@ -77,7 +76,7 @@ export function useTimer(config?: Partial<Config>): Values {
   };
 
   const resetTime = () => {
-    setTime(initialTime);
+    setTime(startTime);
   };
 
   const reset = () => {

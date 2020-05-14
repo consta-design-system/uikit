@@ -10,32 +10,41 @@ export type SnackBarTimerPropOnMount = (object: { pause: () => void; start: () =
 export type ISnackBarTimer = {
   onMount: SnackBarTimerPropOnMount;
   onTimeIsOver: () => void;
-  initialTime: number;
+  startTime: number;
 };
+
+const interval = 1000;
 
 export function SnackBarTimer(props: ISnackBarTimer) {
   const [running, setRunning] = useState<boolean>(false);
-  const { onMount, onTimeIsOver, initialTime } = props;
-  const { time, start, pause, isRunning } = useTimer({
+  const { onMount, onTimeIsOver, startTime: startTimeprop } = props;
+  const startTime = startTimeprop * interval;
+  const { time, start, pause, isRunning, reset } = useTimer({
     endTime: 0,
-    initialTime,
+    startTime,
     timerType: 'DECREMENTAL',
+    onTimeOver: onTimeIsOver,
   });
+
   useEffect(() => {
     onMount({ start, pause });
     start();
   }, []);
-  useEffect(() => {
-    if (time <= 0) {
-      onTimeIsOver();
-    }
-  }, [time]);
+
   useEffect(() => {
     setRunning(isRunning);
   }, [isRunning]);
 
-  const progress = running ? ((time - 1) / initialTime) * 100 : (time / initialTime) * 100;
+  const progress = running ? ((time - interval) / startTime) * 100 : (time / startTime) * 100;
+  const seconds = time ? time / interval : 0;
+
   return (
-    <Timer className={cnSnackBar('Timer')} seconds={time} progress={progress} size="m" animation />
+    <Timer
+      className={cnSnackBar('Timer')}
+      seconds={seconds}
+      progress={progress}
+      size="m"
+      animation
+    />
   );
 }
