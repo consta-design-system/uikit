@@ -1,11 +1,11 @@
 import React from 'react';
 import { withKnobs, select } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import { IconAdd } from '../../IconAdd/IconAdd';
-import { IconAlert } from '../../IconAlert/IconAlert';
-import { IconAlignCenter } from '../../IconAlignCenter/IconAlignCenter';
 import { IconAlignJustify } from '../../IconAlignJustify/IconAlignJustify';
+import { IconAdd } from '../../IconAdd/IconAdd';
 import { IconAlignLeft } from '../../IconAlignLeft/IconAlignLeft';
+import { IconAlignCenter } from '../../IconAlignCenter/IconAlignCenter';
+import { IconAlert } from '../../IconAlert/IconAlert';
 import { IconAlignRight } from '../../IconAlignRight/IconAlignRight';
 import { IconArrowDown } from '../../IconArrowDown/IconArrowDown';
 import { IconArrowLeft } from '../../IconArrowLeft/IconArrowLeft';
@@ -41,13 +41,13 @@ import { IconDown } from '../../IconDown/IconDown';
 import { IconDrag } from '../../IconDrag/IconDrag';
 import { IconDrop } from '../../IconDrop/IconDrop';
 import { IconEdit } from '../../IconEdit/IconEdit';
-import { IconEye } from '../../IconEye/IconEye';
 import { IconExpand } from '../../IconExpand/IconExpand';
-import { IconForward } from '../../IconForward/IconForward';
+import { IconEye } from '../../IconEye/IconEye';
 import { IconFilter } from '../../IconFilter/IconFilter';
-import { IconFavorite } from '../../IconFavorite/IconFavorite';
+import { IconForward } from '../../IconForward/IconForward';
 import { IconFunnel } from '../../IconFunnel/IconFunnel';
 import { IconGas } from '../../IconGas/IconGas';
+import { IconFavorite } from '../../IconFavorite/IconFavorite';
 import { IconHamburger } from '../../IconHamburger/IconHamburger';
 import { IconItalic } from '../../IconItalic/IconItalic';
 import { IconKebab } from '../../IconKebab/IconKebab';
@@ -70,9 +70,9 @@ import { IconRemove } from '../../IconRemove/IconRemove';
 import { IconRevert } from '../../IconRevert/IconRevert';
 import { IconRing } from '../../IconRing/IconRing';
 import { IconRouble } from '../../IconRouble/IconRouble';
-import { IconSearch } from '../../IconSearch/IconSearch';
 import { IconSelect } from '../../IconSelect/IconSelect';
 import { IconSelectOpen } from '../../IconSelectOpen/IconSelectOpen';
+import { IconSearch } from '../../IconSearch/IconSearch';
 import { IconSettings } from '../../IconSettings/IconSettings';
 import { IconShuffle } from '../../IconShuffle/IconShuffle';
 import { IconSortDown } from '../../IconSortDown/IconSortDown';
@@ -107,11 +107,11 @@ storiesOf('Icons', module)
   .addDecorator(withKnobs)
   .add('IconsNew', () => (
     <div className={'tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full'}>
-     <IconsItem name="IconAdd" icon={IconAdd} {...defaultKnobs()} />
-<IconsItem name="IconAlert" icon={IconAlert} {...defaultKnobs()} />
-<IconsItem name="IconAlignCenter" icon={IconAlignCenter} {...defaultKnobs()} />
-<IconsItem name="IconAlignJustify" icon={IconAlignJustify} {...defaultKnobs()} />
+     <IconsItem name="IconAlignJustify" icon={IconAlignJustify} {...defaultKnobs()} />
+<IconsItem name="IconAdd" icon={IconAdd} {...defaultKnobs()} />
 <IconsItem name="IconAlignLeft" icon={IconAlignLeft} {...defaultKnobs()} />
+<IconsItem name="IconAlignCenter" icon={IconAlignCenter} {...defaultKnobs()} />
+<IconsItem name="IconAlert" icon={IconAlert} {...defaultKnobs()} />
 <IconsItem name="IconAlignRight" icon={IconAlignRight} {...defaultKnobs()} />
 <IconsItem name="IconArrowDown" icon={IconArrowDown} {...defaultKnobs()} />
 <IconsItem name="IconArrowLeft" icon={IconArrowLeft} {...defaultKnobs()} />
@@ -147,13 +147,13 @@ storiesOf('Icons', module)
 <IconsItem name="IconDrag" icon={IconDrag} {...defaultKnobs()} />
 <IconsItem name="IconDrop" icon={IconDrop} {...defaultKnobs()} />
 <IconsItem name="IconEdit" icon={IconEdit} {...defaultKnobs()} />
-<IconsItem name="IconEye" icon={IconEye} {...defaultKnobs()} />
 <IconsItem name="IconExpand" icon={IconExpand} {...defaultKnobs()} />
-<IconsItem name="IconForward" icon={IconForward} {...defaultKnobs()} />
+<IconsItem name="IconEye" icon={IconEye} {...defaultKnobs()} />
 <IconsItem name="IconFilter" icon={IconFilter} {...defaultKnobs()} />
-<IconsItem name="IconFavorite" icon={IconFavorite} {...defaultKnobs()} />
+<IconsItem name="IconForward" icon={IconForward} {...defaultKnobs()} />
 <IconsItem name="IconFunnel" icon={IconFunnel} {...defaultKnobs()} />
 <IconsItem name="IconGas" icon={IconGas} {...defaultKnobs()} />
+<IconsItem name="IconFavorite" icon={IconFavorite} {...defaultKnobs()} />
 <IconsItem name="IconHamburger" icon={IconHamburger} {...defaultKnobs()} />
 <IconsItem name="IconItalic" icon={IconItalic} {...defaultKnobs()} />
 <IconsItem name="IconKebab" icon={IconKebab} {...defaultKnobs()} />
@@ -176,9 +176,9 @@ storiesOf('Icons', module)
 <IconsItem name="IconRevert" icon={IconRevert} {...defaultKnobs()} />
 <IconsItem name="IconRing" icon={IconRing} {...defaultKnobs()} />
 <IconsItem name="IconRouble" icon={IconRouble} {...defaultKnobs()} />
-<IconsItem name="IconSearch" icon={IconSearch} {...defaultKnobs()} />
 <IconsItem name="IconSelect" icon={IconSelect} {...defaultKnobs()} />
 <IconsItem name="IconSelectOpen" icon={IconSelectOpen} {...defaultKnobs()} />
+<IconsItem name="IconSearch" icon={IconSearch} {...defaultKnobs()} />
 <IconsItem name="IconSettings" icon={IconSettings} {...defaultKnobs()} />
 <IconsItem name="IconShuffle" icon={IconShuffle} {...defaultKnobs()} />
 <IconsItem name="IconSortDown" icon={IconSortDown} {...defaultKnobs()} />

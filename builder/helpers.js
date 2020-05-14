@@ -109,6 +109,16 @@ const iconParse = async ({ componentName, path, pathOutdir, fileName }) => {
       typescript: true,
       dimensions: false,
       svgo: true,
+      svgoConfig: {
+        plugins: [
+          {
+            prefixIds: {
+              prefix: `Svg${fileName}`,
+            },
+          },
+          { cleanupIDs: false },
+        ],
+      },
     },
     { componentName }
   );

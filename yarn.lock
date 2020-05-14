@@ -16605,11 +16605,6 @@ use-callback-ref@^1.2.1:
   resolved "https://registry.yarnpkg.com/use-callback-ref/-/use-callback-ref-1.2.3.tgz#9f939dfb5740807bbf9dd79cdd4e99d27e827756"
   integrity sha512-DPBPh1i2adCZoIArRlTuKRy7yue7QogtEnfv0AKrWsY+GA+4EKe37zhRDouNnyWMoNQFYZZRF+2dLHsWE4YvJA==
 
-use-elapsed-time@^1.1.6:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/use-elapsed-time/-/use-elapsed-time-1.2.1.tgz#5c313ea78be9750a4d7173c7bfe900ee011af730"
-  integrity sha512-dbZ3XXOPMu8KPgr+4Vwhl4XU0m84s4KSIMq+M3mmKWnZrau28YyEi0QCsf/69QznXo1535FlWL8TILWe08IrhQ==
-
 use-sidecar@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/use-sidecar/-/use-sidecar-1.0.2.tgz#e72f582a75842f7de4ef8becd6235a4720ad8af6"
@@ -16617,11 +16612,6 @@ use-sidecar@^1.0.1:
   dependencies:
     detect-node "^2.0.4"
     tslib "^1.9.3"
-
-use-timer@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/use-timer/-/use-timer-1.2.0.tgz#3597649114a8212863658e417d64eee447e2dec6"
-  integrity sha512-FFFHWe/3gr9lis2rI0Ct9hVKiI4eJnDWVJWax02ckIaZMv529rzKYB0+vnLNnFXoCzA65cEvq4wnpq6HlDiDYA==
 
 use@^3.1.0:
   version "3.1.1"
