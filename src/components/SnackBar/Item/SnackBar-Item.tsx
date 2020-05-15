@@ -9,19 +9,18 @@ import { Text } from '../../Text/Text';
 import { SnackBarActionButton } from '../ActionButton/SnackBar-ActionButton';
 import { SnackBarTimer } from '../Timer/SnackBar-Timer';
 import { cnSnackBar, cnSnackBarItem } from '../SnackBar';
-import { Item, SnackBarPropItemStatus } from '../SnackBar';
+import { Item } from '../SnackBar';
 import { SnackBarTimerPropOnMount } from '../Timer/SnackBar-Timer';
 
-export type ISnackBarItem = {
+export type SnackBarItemProps = {
   item: Item;
 };
 
 const defaultInitialTimerTime: number = 3000;
-const defaultStatus: SnackBarPropItemStatus = 'normal';
 
-export function SnackBarItem(props: ISnackBarItem): React.ReactElement {
+export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
   const { item } = props;
-  const { onClose, autoClose, icon: Icon, message, actions, status } = item;
+  const { onClose, autoClose, icon: Icon, message, actions, status = 'normal' } = item;
   const [timerFunctions, setTimerFunctions] = useState<{
     start: () => void;
     pause: () => void;
@@ -85,4 +84,4 @@ export function SnackBarItem(props: ISnackBarItem): React.ReactElement {
       )}
     </div>
   );
-}
+};

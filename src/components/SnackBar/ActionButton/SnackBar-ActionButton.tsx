@@ -4,11 +4,11 @@ import React from 'react';
 import { SnackBarPropItemAction, cnSnackBar } from '../SnackBar';
 import { Button } from '../../Button/Button';
 
-export type ISnackBarActionButton = {
+export type SnackBarActionButtonProps = {
   actions: SnackBarPropItemAction[];
 };
 
-export function SnackBarActionButton(props: ISnackBarActionButton) {
+export const SnackBarActionButton: React.FC<SnackBarActionButtonProps> = (props) => {
   const { actions } = props;
 
   if (actions.length < 1) {
@@ -29,4 +29,4 @@ export function SnackBarActionButton(props: ISnackBarActionButton) {
       ))}
     </div>
   );
-}
+};

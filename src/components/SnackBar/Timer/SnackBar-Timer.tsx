@@ -7,7 +7,7 @@ import { cnSnackBar } from '../SnackBar';
 
 export type SnackBarTimerPropOnMount = (object: { pause: () => void; start: () => void }) => void;
 
-export type ISnackBarTimer = {
+export type SnackBarTimerProps = {
   onMount: SnackBarTimerPropOnMount;
   onTimeIsOver: () => void;
   startTime: number;
@@ -15,7 +15,7 @@ export type ISnackBarTimer = {
 
 const interval = 1000;
 
-export function SnackBarTimer(props: ISnackBarTimer) {
+export const SnackBarTimer: React.FC<SnackBarTimerProps> = (props) => {
   const [running, setRunning] = useState<boolean>(false);
   const { onMount, onTimeIsOver, startTime: startTimeprop } = props;
   const startTime = startTimeprop * interval;
@@ -47,4 +47,4 @@ export function SnackBarTimer(props: ISnackBarTimer) {
       animation
     />
   );
-}
+};
