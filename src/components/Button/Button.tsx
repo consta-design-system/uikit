@@ -113,6 +113,7 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
       tabIndex={tabIndex}
       title={_title}
       ref={innerRef}
+      {...(Component === 'button' ? { disabled: disabled || loading } : {})}
       {...(componentIsFunction(Component) && { innerRef })}
       {...otherProps}
     >
