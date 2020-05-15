@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 export type Timer = 'DECREMENTAL' | 'INCREMENTAL';
 
 export type Config = {
-  /** tick duration */
+  /** interval in ms  */
   interval: number;
   /**  stop timer in ms */
   endTime: number | null;
