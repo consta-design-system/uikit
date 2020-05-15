@@ -11,7 +11,6 @@ export type Config = {
   startTime: number;
   /** timer over callback */
   onTimeOver?: () => void;
-  /** timer type */
   timerType: Timer;
 };
 
