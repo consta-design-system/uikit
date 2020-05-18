@@ -19,7 +19,7 @@ export function ChoiceGroupItem<T>(props: IChoiceGroupItem<T>): React.ReactEleme
     onChange,
     checked,
     id,
-    multiply,
+    multiple,
     value,
     icon: Icon,
     size = 'm',
@@ -48,11 +48,11 @@ export function ChoiceGroupItem<T>(props: IChoiceGroupItem<T>): React.ReactEleme
 
   return (
     <label
-      className={cnChoiceGroup('Label', { size, multiply, focus, checked }, [className])}
+      className={cnChoiceGroup('Label', { size, multiple, focus, checked }, [className])}
       title={title}
     >
       <input
-        type={multiply ? 'checkbox' : 'radio'}
+        type={multiple ? 'checkbox' : 'radio'}
         className={cnChoiceGroup('Input')}
         checked={checked}
         onFocus={handleFocus}
