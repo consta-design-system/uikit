@@ -12,7 +12,7 @@ import { IconThumbUp } from '../../../icons/IconThumbUp/IconThumbUp';
 import { IconAlert } from '../../../icons/IconAlert/IconAlert';
 import { IconRing } from '../../../icons/IconRing/IconRing';
 import { IconProcessing } from '../../../icons/IconProcessing/IconProcessing';
-import { SnackBar, SnackBarPropItemAction, SnackBarPropItemStatus, Item } from '../SnackBar';
+import { SnackBar, SnackBarItemStatus, Item } from '../SnackBar';
 
 const knobs = () => ({
   withIcon: boolean('withIcon', false),
@@ -21,8 +21,8 @@ const knobs = () => ({
   withCloseButton: boolean('withCloseButton', true),
 });
 
-const getItemIconByStatus = (status: SnackBarPropItemStatus): React.FC<IIcon> | undefined => {
-  const mapIconByStatus: Record<SnackBarPropItemStatus, React.FC<IIcon>> = {
+const getItemIconByStatus = (status: SnackBarItemStatus): React.FC<IIcon> | undefined => {
+  const mapIconByStatus: Record<SnackBarItemStatus, React.FC<IIcon>> = {
     success: IconThumbUp,
     warning: IconAlert,
     alert: IconAlert,
@@ -48,7 +48,7 @@ function reducer(
 
 function SnackBarStories({ withIcon, withActionButtons, withAutoClose, withCloseButton }) {
   const [items, dispatchItems] = React.useReducer(reducer, []);
-  const generateHandleAdd = (status: SnackBarPropItemStatus) => () => {
+  const generateHandleAdd = (status: SnackBarItemStatus) => () => {
     const key = items.length + 1;
     const item: Item = {
       key,
@@ -124,94 +124,92 @@ function SnackBarStories({ withIcon, withActionButtons, withAutoClose, withClose
   );
 }
 
-// function SnackBarExample() {
-//   return (
-//     <div className={cnSnackBarStories({ example: 1 })}>
-//       <SnackBar
-//         className={cnSnackBarStories('SnackBar')}
-//         items={itemsInit}
-//         getItemKey={getItemKey}
-//         getItemMessage={getItemMessage}
-//       />
-//     </div>
-//   );
-// }
+function SnackBarExample() {
+  const items = [
+    {
+      key: 1,
+      message: 'Сообщение',
+    },
+  ];
+  return (
+    <div className={cnSnackBarStories({ example: 1 })}>
+      <SnackBar className={cnSnackBarStories('SnackBar')} items={items} />
+    </div>
+  );
+}
 
-// function SnackBarExample2() {
-//   const [items, setItems] = React.useState<Item[]>(itemsInit);
+function reducerExample2(
+  state: Item[],
+  action: { type: 'add' | 'remove'; item?: Item; key?: number | string }
+) {
+  switch (action.type) {
+    case 'add':
+      return [...state, action.item];
+    case 'remove':
+      return state.filter((item) => item.key !== action.key);
+  }
+}
 
-//   const getItemOnClose: SnackBarPropGetItemOnClose<Item> = (closedItem) => (
-//     e?: React.MouseEvent
-//   ) => {
-//     e && e.stopPropagation();
-//     setItems(items.filter((item) => item.key !== closedItem.key));
-//   };
+function SnackBarExample2() {
+  const [items, dispatchItems] = React.useReducer(reducerExample2, []);
+  const generateHandleAdd = (status: SnackBarItemStatus) => () => {
+    const key = items.length + 1;
+    const item: Item = {
+      key,
+      message: `Сообщение о каком-то событии - ${key}`,
+      status,
+      icon: getItemIconByStatus(status),
+      onClose: () => dispatchItems({ type: 'remove', key }),
+    };
+    dispatchItems({ type: 'add', item });
+  };
 
-//   const generateHandleAdd = (status: SnackBarPropItemStatus) => () => {
-//     setItems([
-//       ...items,
-//       {
-//         ...itemDefault,
-//         key: items.length + 1,
-//         status,
-//       },
-//     ]);
-//   };
+  const handleSuccessAdd = generateHandleAdd('success');
+  const handleWarningAdd = generateHandleAdd('warning');
+  const handleAlertAdd = generateHandleAdd('alert');
+  const handleSystemAdd = generateHandleAdd('system');
+  const handleNormalAdd = generateHandleAdd('normal');
 
-//   const handleSuccessAdd = generateHandleAdd('success');
-//   const handleWarningAdd = generateHandleAdd('warning');
-//   const handleAlertAdd = generateHandleAdd('alert');
-//   const handleSystemAdd = generateHandleAdd('system');
-//   const handleNormalAdd = generateHandleAdd('normal');
+  React.useEffect(() => handleNormalAdd(), []);
 
-//   return (
-//     <div className={cnSnackBarStories({ example: 2 })}>
-//       <div className={cnSnackBarStories('Buttons')}>
-//         <Button
-//           className={cnSnackBarStories('ButtonAdd')}
-//           iconLeft={IconAdd}
-//           label="Выполненно"
-//           onClick={handleSuccessAdd}
-//         />
-//         <Button
-//           className={cnSnackBarStories('ButtonAdd')}
-//           iconLeft={IconAdd}
-//           label="Ошибка"
-//           onClick={handleAlertAdd}
-//         />
-//         <Button
-//           className={cnSnackBarStories('ButtonAdd')}
-//           iconLeft={IconAdd}
-//           label="Предупреждение"
-//           onClick={handleWarningAdd}
-//         />
-//         <Button
-//           className={cnSnackBarStories('ButtonAdd')}
-//           iconLeft={IconAdd}
-//           label="Системное"
-//           onClick={handleSystemAdd}
-//         />
-//         <Button
-//           className={cnSnackBarStories('ButtonAdd')}
-//           iconLeft={IconAdd}
-//           label="Нормальное"
-//           onClick={handleNormalAdd}
-//         />
-//       </div>
-//       <SnackBar
-//         className={cnSnackBarStories('SnackBar')}
-//         items={items}
-//         getItemKey={getItemKey}
-//         getItemMessage={getItemMessage}
-//         getItemIcon={getItemIcon}
-//         getItemOnClose={getItemOnClose}
-//         getItemAction={getItemActions}
-//         getItemAutoClose={getItemAutoCloseForExaple}
-//         getItemStatus={getItemStatus}
-//       />
-//     </div>
-//   );
-// }
+  return (
+    <div className={cnSnackBarStories({ example: 2 })}>
+      <div className={cnSnackBarStories('Buttons')}>
+        <Button
+          className={cnSnackBarStories('ButtonAdd')}
+          iconLeft={IconAdd}
+          label="Выполненно"
+          onClick={handleSuccessAdd}
+        />
+        <Button
+          className={cnSnackBarStories('ButtonAdd')}
+          iconLeft={IconAdd}
+          label="Ошибка"
+          onClick={handleAlertAdd}
+        />
+        <Button
+          className={cnSnackBarStories('ButtonAdd')}
+          iconLeft={IconAdd}
+          label="Предупреждение"
+          onClick={handleWarningAdd}
+        />
+        <Button
+          className={cnSnackBarStories('ButtonAdd')}
+          iconLeft={IconAdd}
+          label="Системное"
+          onClick={handleSystemAdd}
+        />
+        <Button
+          className={cnSnackBarStories('ButtonAdd')}
+          iconLeft={IconAdd}
+          label="Нормальное"
+          onClick={handleNormalAdd}
+        />
+      </div>
+      <SnackBar className={cnSnackBarStories('SnackBar')} items={items} />
+    </div>
+  );
+}
 
 storiesOf('UI-KIT|/SnackBar', module)
   .addDecorator(withKnobs)
@@ -224,6 +222,6 @@ storiesOf('UI-KIT|/SnackBar', module)
   )
   .add('playground', () => <SnackBarStories {...knobs()} />);
 
-// storiesOf('UI-KIT|/Examples/SnackBar', module)
-//   .add('_example', SnackBarExample)
-//   .add('_example2', SnackBarExample2);
+storiesOf('UI-KIT|/Examples/SnackBar', module)
+  .add('_example', SnackBarExample)
+  .add('_example2', SnackBarExample2);

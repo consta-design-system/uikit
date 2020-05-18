@@ -1,50 +1,32 @@
 # SnackBar
 
-## Свойства
-
-<!-- props:start -->
-
-| Свойство          | Тип                                                                                                                                                                   | По умолчанию     | Описание                                                                                         |
-| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------ |
-| className?        | `string`                                                                                                                                                              | -                | Дополнительный класс                                                                             |
-| innerRef?         | `React.Ref<HTMLDivElement>`                                                                                                                                           | -                | Ссылка на корневой DOM элемент компонента                                                        |
-| items             | `ITEM[]`                                                                                                                                                              | -                | Массив элементов                                                                                 |
-| getItemKey        | `(item: ITEM) => string | number;`                                                                                                                                    | -                | Ожидается что результат функции возвращает уникальный ключ каждого из `items`                    |
-| getItemMessage?   | `(item: ITEM) => string | number | undefined;`                                                                                                                        | -                | Результат функции будет использоваться в качестве сообщения                                      |
-| getItemAutoClose? | `(item: ITEM) => boolean | number | undefined;`                                                                                                                       | -                | Результат функции укажет количество секунд после которого сообщение скроется, `true` = 3 секунды |
-| getItemOnClose?   | `(item: ITEM) => (e?: React.MouseEvent) => void;`                                                                                                                     | -                | Результат функции будет функция которая сработает при закрытии сообщения                         |
-| getItemStatus?    | `(item: ITEM) => 'system' | 'success' | 'warning' | 'alert' | 'normal';`                                                                                              | `() => 'normal'` | Результат функции укажет модификатор статуса каждого из `items`, если статус не                  |
-| getItemIcon?      | `(item: ITEM) => React.FC<IIcon> | undefined;`                                                                                                                        | -                | Результат функции будет использоваться в качестве иконки                                         |
-| getItemAction?    | `(item: ITEM) => {label: string | number;onClick: React.EventHandler<React.MouseEvent>;} | {label: string | number;onClick: React.EventHandler<React.MouseEvent>;}[]` | -                | Результат функции будет использоваться в качестве кнопок в теле сообщения                        |
-
-<!-- props:end -->
-
-## Простой пример
+## Пример
 
 ```ts
 import * as React from 'react';
 import { SnackBar } from '@gpn-design/uikit/SnackBar';
 
-type Item = {
-  key: number;
-  message: string;
-};
-
-type Items = Item[];
-
-const Items = [
-  {
-    key: 1,
-    message: 'Сообщение о каком-то событии',
-  },
-];
-const getItemKey = (item: Item) => item.key;
-const getItemMessage = (item: Item) => item.message;
-
-function MySnackBar() {
-  return <SnackBar items={items} getItemKey={getItemKey} getItemMessage={getItemMessage} />;
+function SnackBarExample() {
+  const items = [
+    {
+      key: 1,
+      message: 'Сообщение',
+    },
+  ];
+  return <SnackBar items={items} />;
 }
 ```
+
+## Свойства
+
+<!-- props:start -->
+
+| Свойство   | Тип                                                                                                                                                                                                                                                                                                    | По умолчанию | Описание             |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ | -------------------- |
+| className? | `string`                                                                                                                                                                                                                                                                                               | -            | Дополнительный класс |
+| items      | `{ key: string | number; message?: string | number; status?: 'system' | 'success' | 'warning' | 'alert' | 'normal' ; autoClose?: boolean | number; icon?: React.FC<IIcon>; actions?: { label: string | number; onClick: React.EventHandler<React.MouseEvent>; }[];onClose?: (item: Item) => void; }[]` | -            | Массив элементов     |
+
+<!-- props:end -->
 
 {{%story::desktop:ui-kit-examples-snackbar--example%}}
 
@@ -62,80 +44,45 @@ import { IconThumbUp } from '@gpn-design/uikit/IconThumbUp';
 import { IconAlert } from '@gpn-design/uikit/IconAlert';
 import { IconRing } from '@gpn-design/uikit/IconRing';
 import { IconProcessing } from '@gpn-design/uikit/IconProcessing';
-import {
-  SnackBar,
-  SnackBarPropItemAction,
-  SnackBarPropItemStatus,
-  SnackBarPropGetItemOnClose,
-} from '@gpn-design/uikit/SnackBar';
+import { SnackBar, SnackBarItemStatus, Item } from '@gpn-design/uikit/SnackBar';
 
-type Item = {
-  key: number;
-  message: string;
-  actions?: SnackBarPropItemAction<Item> | SnackBarPropItemAction<Item>[];
-  status?: SnackBarPropItemStatus;
-};
+function reducer(
+  state: Item[],
+  action: { type: 'add' | 'remove'; item?: Item; key?: number | string }
+) {
+  switch (action.type) {
+    case 'add':
+      return [...state, action.item];
+    case 'remove':
+      return state.filter((item) => item.key !== action.key);
+  }
+}
 
-const itemDefault: Item = {
-  key: 1,
-  message: 'Сообщение о каком-то событии',
-  status: 'warning',
-  actions: [
-    {
-      label: 'Согласен',
-      onClick: (e) => {
-        e.stopPropagation();
-        console.log('Согласен');
-      },
-    },
-    {
-      label: 'Не согласен',
-      onClick: (e) => {
-        e.stopPropagation();
-        console.log('Не согласен');
-      },
-    },
-  ],
-};
-
-const itemsInit: Item[] = [itemDefault];
-const getItemKey = (item: Item) => item.key;
-const getItemMessage = (item: Item) => item.message;
-const getItemActions = (item: Item) => item.actions;
-const getItemStatus = (item: Item) => item.status;
-const getItemIcon = (item: Item): React.FC<IIcon> | undefined => {
-  const mapIconByStatus: Record<SnackBarPropItemStatus, React.FC<IIcon>> = {
+const getItemIconByStatus = (status: SnackBarItemStatus): React.FC<IIcon> | undefined => {
+  const mapIconByStatus: Record<SnackBarItemStatus, React.FC<IIcon>> = {
     success: IconThumbUp,
     warning: IconAlert,
     alert: IconAlert,
     system: IconProcessing,
     normal: IconRing,
   };
-  return mapIconByStatus[item.status];
+  return mapIconByStatus[status];
 };
-const getItemAutoClose = (item: Item) =>
-  item.status === 'normal' || item.status === 'system' ? 5 : false;
+
 const cnSnackBarStories = cn('SnackBarStories');
 
-function SnackBarStories() {
-  const [items, setItems] = React.useState<Item[]>(itemsInit);
-
-  const getItemOnClose: SnackBarPropGetItemOnClose<Item> = (closedItem) => (
-    e?: React.MouseEvent
-  ) => {
-    e && e.stopPropagation();
-    setItems(items.filter((item) => item.key !== closedItem.key));
-  };
-
-  const generateHandleAdd = (status: SnackBarPropItemStatus) => () => {
-    setItems([
-      ...items,
-      {
-        ...itemDefault,
-        key: items.length + 1,
-        status,
-      },
-    ]);
+function SnackBarExample() {
+  const [items, dispatchItems] = React.useReducer(reducer, []);
+  const generateHandleAdd = (status: SnackBarItemStatus) => () => {
+    const key = items.length + 1;
+    const item: Item = {
+      key,
+      message: `Сообщение о каком-то событии - ${key}`,
+      status,
+      icon: getItemIconByStatus(status),
+      onClose: () => dispatchItems({ type: 'remove', key }),
+    };
+    dispatchItems({ type: 'add', item });
   };
 
   const handleSuccessAdd = generateHandleAdd('success');
@@ -143,6 +90,8 @@ function SnackBarStories() {
   const handleAlertAdd = generateHandleAdd('alert');
   const handleSystemAdd = generateHandleAdd('system');
   const handleNormalAdd = generateHandleAdd('normal');
+
+  React.useEffect(() => handleNormalAdd(), []);
 
   return (
     <div className={cnSnackBarStories()}>
@@ -178,17 +127,7 @@ function SnackBarStories() {
           onClick={handleNormalAdd}
         />
       </div>
-      <SnackBar
-        className={cnSnackBarStories('SnackBar')}
-        items={items}
-        getItemKey={getItemKey}
-        getItemMessage={getItemMessage}
-        getItemIcon={getItemIcon}
-        getItemOnClose={getItemOnClose}
-        getItemAction={getItemActions}
-        getItemAutoClose={getItemAutoCloseForExaple}
-        getItemStatus={getItemStatus}
-      />
+      <SnackBar className={cnSnackBarStories('SnackBar')} items={items} />
     </div>
   );
 }
