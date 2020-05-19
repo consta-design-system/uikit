@@ -1,14 +1,12 @@
 import './Badge.css';
-import '../Theme/_color/Theme_color_gpnDefault.css';
-import '../Theme/_color/Theme_color_gpnDark.css';
 
 import React from 'react';
 import { classnames } from '@bem-react/classnames';
 import { cn } from '../../utils/bem';
 import * as wp from '../../utils/whitepaper/whitepaper';
 import { IIcon } from '../../icons/Icon/Icon';
-import { cnTheme } from '../Theme/Theme';
 import { componentIsFunction } from '../../utils/componentIsFunction';
+import { cnTheme, useTheme, getAccentColor } from '../Theme/Theme';
 
 export type BadgeProps = {
   size?: 's' | 'm' | 'l';
@@ -48,10 +46,12 @@ export function Badge<T>(props: IBadge<T>) {
   } = props;
 
   const Component = as;
+  const { theme } = useTheme();
+
   const _className =
     status != 'system' && view == 'filled'
-      ? classnames(className, cnTheme({ color: 'gpnDark' }))
-      : classnames(className, cnTheme({ color: 'gpnDefault' }));
+      ? classnames(className, cnTheme({ color: getAccentColor(theme) }))
+      : '';
   const Icon = icon;
   const withIcon = !!icon;
 

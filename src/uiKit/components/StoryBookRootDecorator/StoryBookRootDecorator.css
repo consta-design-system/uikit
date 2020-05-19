@@ -7,3 +7,9 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+.StoryBookRootDecorator {
+  background: var(--color-bg-default);
+  padding: var(--space-3xl);
+  min-height: 100vh;
+}

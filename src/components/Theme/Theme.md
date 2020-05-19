@@ -6,58 +6,51 @@
 
 ```ts
 // src/App.ts
-import '@gpn-design/uikit/__internal__/src/utils/whitepaper/whitepaper.css';
-import '@gpn-design/uikit/__internal__/src/components/Theme/Theme.css';
-import '@gpn-design/uikit/__internal__/src/components/Theme/_color/Theme_color_gpnDefault.css';
-import '@gpn-design/uikit/__internal__/src/components/Theme/_space/Theme_space_gpnDefault.css';
-import '@gpn-design/uikit/__internal__/src/components/Theme/_size/Theme_size_gpnDefault.css';
-import '@gpn-design/uikit/__internal__/src/components/Theme/_font/theme_font_gpnDefault.css';
-import '@gpn-design/uikit/__internal__/src/components/Theme/_control/Theme_control_gpnDefault.css';
-
 import React from 'react';
-import { cnTheme } from '@gpn-design/uikit/Theme';
+import { createTheme, presetGpnDefault } from '@gpn-design/uikit/Theme';
+
+const Theme = createTheme(presetGpnDefault);
+
+const App = () => {
+  return <Theme>your code</Theme>;
+};
+```
+
+### Переопределение темы
+
+```ts
+import React from 'react';
+import { createTheme, presetGpnDefault, presetGpnDark } from '@gpn-design/uikit/Theme';
+
+const Theme = createTheme(presetGpnDefault);
+const ThemeDark = createTheme(presetGpnDark);
 
 const App = () => {
   return (
-    <div
-      className={cnTheme({
-        color: 'gpnDefault',
-        space: 'gpnDefault',
-        size: 'gpnDefault',
-        font: 'gpnDefault',
-        control: 'gpnDefault',
-      })}
-    >
-      // your code
-    </div>
+    <Theme>
+      your code
+      <ThemeDark>your code</ThemeDark>
+    </Theme>
   );
 };
 ```
 
-### Переопределение темы конкретного DOM-узла:
+### использование useTheme
+
+`useTheme` вернет `{ theme, setTheme }`
+
+`theme` - текущее состояние темы
+
+`setTheme` - функция с помощью которой можно измениеть состояние ближайщего по дереву вверх компонента темы.
 
 ```ts
-import '@gpn-design/uikit/__internal__/src/components/Theme/_color/Theme_color_gpnDark.css';
-
-import React from 'react';
-import { cnTheme } from '@gpn-design/uikit/Theme';
-import { Component } from '@gpn-design/uikit/Component';
+import { useTheme } from '@gpn-design/uikit/Theme';
 
 const App = () => {
-  return <div className={cnTheme({ color: 'gpnDefault' })}>your code</div>;
-};
-```
+  const { theme, setTheme } = useTheme();
 
-### Переопределение темы компонента
+  const handleClick = () => setTheme({ ...theme, size: 'mySize' });
 
-```ts
-import '@gpn-design/uikit/__internal__/src/components/Theme/_color/Theme_color_gpnDark.css';
-
-import React from 'react';
-import { cnTheme } from '@gpn-design/uikit/Theme';
-import { Component } from '@gpn-design/uikit/Component';
-
-const App = () => {
-  return <Component className={cnTheme({ color: 'gpnDefault' })} />;
+  <button onClick={handleClick}>set my size</button>;
 };
 ```
