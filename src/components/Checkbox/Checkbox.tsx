@@ -12,7 +12,7 @@ export type CheckboxPropOnChange = (object: {
 }) => void;
 
 type Props = {
-  checked?: boolean;
+  checked: boolean | undefined;
   size?: CheckboxPropSize;
   disabled?: boolean;
   intermediate?: boolean;
@@ -54,7 +54,7 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>((props
   } = props;
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    onChange && onChange({ e, checked: !checked });
+    onChange({ e, checked: !checked });
   };
 
   return (

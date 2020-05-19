@@ -12,7 +12,7 @@ export type RadioPropOnChange = (object: {
 }) => void;
 
 export type Props = {
-  checked?: boolean;
+  checked: boolean | undefined;
   size?: RadioPropSize;
   disabled?: boolean;
   intermediate?: boolean;
@@ -54,7 +54,7 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>((props, ref)
   } = props;
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    onChange && onChange({ e, checked: !checked });
+    onChange({ e, checked: !checked });
   };
 
   return (

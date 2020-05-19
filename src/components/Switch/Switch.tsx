@@ -12,7 +12,7 @@ export type SwitchPropOnChange = (object: {
 }) => void;
 
 type Props = {
-  checked?: boolean;
+  checked: boolean | undefined;
   size?: SwitchPropSize;
   disabled?: boolean;
   className?: string;
@@ -53,7 +53,7 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>((props, re
   } = props;
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    onChange && onChange({ e, checked: !checked });
+    onChange({ e, checked: !checked });
   };
 
   return (
