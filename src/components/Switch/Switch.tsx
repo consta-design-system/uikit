@@ -17,7 +17,7 @@ type Props = {
   disabled?: boolean;
   className?: string;
   label?: string;
-  onChange?: SwitchPropOnChange;
+  onChange: SwitchPropOnChange;
   name?: string;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;

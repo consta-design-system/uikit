@@ -17,7 +17,7 @@ type Props = {
   disabled?: boolean;
   intermediate?: boolean;
   label?: string;
-  onChange?: CheckboxPropOnChange;
+  onChange: CheckboxPropOnChange;
   name?: string;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;

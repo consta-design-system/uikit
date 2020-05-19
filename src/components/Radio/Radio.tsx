@@ -18,7 +18,7 @@ export type Props = {
   intermediate?: boolean;
   className?: string;
   label?: string;
-  onChange?: RadioPropOnChange;
+  onChange: RadioPropOnChange;
   name?: string;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
