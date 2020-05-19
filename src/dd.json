@@ -1,0 +1,158 @@
+[
+  {
+    "test": {},
+    "use": [
+      {
+        "loader": "babel-loader",
+        "options": {
+          "cacheDirectory": "/Users/gizeasy/projects/ui-kit/node_modules/.cache/storybook",
+          "presets": [
+            "/Users/gizeasy/projects/ui-kit/node_modules/babel-preset-react-app/index.js"
+          ],
+          "plugins": [
+            [
+              "/Users/gizeasy/projects/ui-kit/node_modules/babel-plugin-named-asset-import/index.js",
+              {
+                "loaderMap": { "svg": { "ReactComponent": "@svgr/webpack?-prettier,-svgo![path]" } }
+              }
+            ],
+            [
+              "/Users/gizeasy/projects/ui-kit/node_modules/babel-plugin-react-docgen/lib/index.js",
+              { "DOC_GEN_COLLECTION_NAME": "STORYBOOK_REACT_CLASSES" }
+            ]
+          ]
+        }
+      }
+    ],
+    "include": ["/Users/gizeasy/projects/ui-kit"],
+    "exclude": ["/Users/gizeasy/projects/ui-kit/node_modules"]
+  },
+  {
+    "test": {},
+    "use": [
+      {
+        "loader": "/Users/gizeasy/projects/ui-kit/node_modules/@storybook/core/node_modules/raw-loader/dist/cjs.js"
+      }
+    ]
+  },
+  {
+    "test": {},
+    "loader": "/Users/gizeasy/projects/ui-kit/node_modules/file-loader/dist/cjs.js",
+    "query": { "name": "static/media/[name].[hash:8].[ext]" }
+  },
+  {
+    "test": {},
+    "loader": "/Users/gizeasy/projects/ui-kit/node_modules/@storybook/core/node_modules/url-loader/dist/cjs.js",
+    "query": { "limit": 10000, "name": "static/media/[name].[hash:8].[ext]" }
+  },
+  {
+    "test": {},
+    "exclude": {},
+    "use": [
+      "/Users/gizeasy/projects/ui-kit/node_modules/style-loader/index.js",
+      {
+        "loader": "/Users/gizeasy/projects/ui-kit/node_modules/css-loader/dist/cjs.js",
+        "options": { "importLoaders": 1, "sourceMap": false }
+      },
+      {
+        "loader": "/Users/gizeasy/projects/ui-kit/node_modules/postcss-loader/src/index.js",
+        "options": { "ident": "postcss", "sourceMap": false }
+      }
+    ],
+    "sideEffects": true
+  },
+  {
+    "test": {},
+    "use": [
+      "/Users/gizeasy/projects/ui-kit/node_modules/style-loader/index.js",
+      {
+        "loader": "/Users/gizeasy/projects/ui-kit/node_modules/css-loader/dist/cjs.js",
+        "options": { "importLoaders": 1, "sourceMap": false, "modules": true }
+      },
+      {
+        "loader": "/Users/gizeasy/projects/ui-kit/node_modules/postcss-loader/src/index.js",
+        "options": { "ident": "postcss", "sourceMap": false }
+      }
+    ]
+  },
+  {
+    "test": {},
+    "exclude": {},
+    "use": [
+      "/Users/gizeasy/projects/ui-kit/node_modules/style-loader/index.js",
+      {
+        "loader": "/Users/gizeasy/projects/ui-kit/node_modules/css-loader/dist/cjs.js",
+        "options": { "importLoaders": 2, "sourceMap": false }
+      },
+      {
+        "loader": "/Users/gizeasy/projects/ui-kit/node_modules/postcss-loader/src/index.js",
+        "options": { "ident": "postcss", "sourceMap": false }
+      },
+      {
+        "loader": "/Users/gizeasy/projects/ui-kit/node_modules/sass-loader/lib/loader.js",
+        "options": { "sourceMap": false }
+      }
+    ],
+    "sideEffects": true
+  },
+  {
+    "test": {},
+    "use": [
+      "/Users/gizeasy/projects/ui-kit/node_modules/style-loader/index.js",
+      {
+        "loader": "/Users/gizeasy/projects/ui-kit/node_modules/css-loader/dist/cjs.js",
+        "options": { "importLoaders": 2, "sourceMap": false, "modules": true }
+      },
+      {
+        "loader": "/Users/gizeasy/projects/ui-kit/node_modules/postcss-loader/src/index.js",
+        "options": { "ident": "postcss", "sourceMap": false }
+      },
+      {
+        "loader": "/Users/gizeasy/projects/ui-kit/node_modules/sass-loader/lib/loader.js",
+        "options": { "sourceMap": false }
+      }
+    ]
+  },
+  {
+    "test": {},
+    "enforce": "pre",
+    "use": [
+      {
+        "options": {
+          "formatter": "/Users/gizeasy/projects/ui-kit/node_modules/react-dev-utils/eslintFormatter.js",
+          "eslintPath": "/Users/gizeasy/projects/ui-kit/node_modules/eslint/lib/api.js",
+          "baseConfig": {
+            "extends": [
+              "/Users/gizeasy/projects/ui-kit/node_modules/eslint-config-react-app/index.js"
+            ]
+          },
+          "ignore": false,
+          "useEslintrc": false
+        },
+        "loader": "/Users/gizeasy/projects/ui-kit/node_modules/eslint-loader/index.js"
+      }
+    ],
+    "include": ["/Users/gizeasy/projects/ui-kit/src", "/Users/gizeasy/projects/ui-kit/.storybook"]
+  },
+  {
+    "test": {},
+    "include": ["/Users/gizeasy/projects/ui-kit/src", "/Users/gizeasy/projects/ui-kit/.storybook"],
+    "loader": "/Users/gizeasy/projects/ui-kit/node_modules/babel-loader/lib/index.js",
+    "options": {
+      "customize": "/Users/gizeasy/projects/ui-kit/node_modules/babel-preset-react-app/webpack-overrides.js",
+      "babelrc": false,
+      "configFile": false,
+      "presets": ["/Users/gizeasy/projects/ui-kit/node_modules/babel-preset-react-app/index.js"],
+      "cacheIdentifier": "development:babel-plugin-named-asset-import@0.3.4:babel-preset-react-app@9.0.2:react-dev-utils@9.1.0:react-scripts@3.0.1",
+      "plugins": [
+        [
+          "/Users/gizeasy/projects/ui-kit/node_modules/babel-plugin-named-asset-import/index.js",
+          { "loaderMap": { "svg": { "ReactComponent": "@svgr/webpack?-svgo,+ref![path]" } } }
+        ]
+      ],
+      "cacheDirectory": true,
+      "cacheCompression": false,
+      "compact": false
+    }
+  }
+]
