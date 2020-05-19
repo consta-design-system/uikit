@@ -45,8 +45,9 @@ addDecorator((story) => {
 addDecorator((story) => {
   const appStyles = {
     background: 'var(--color-bg-default)',
-    padding: 'var(--space-3xl)',
+    padding: 'var(--space-l)',
     minHeight: '100vh',
+    boxSizing: 'border-box',
   };
 
   return (
