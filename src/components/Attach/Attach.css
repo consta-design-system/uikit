@@ -33,9 +33,7 @@
     transition: background 0.2s ease;
     &:hover {
       background: var(--color-control-bg-clear-hover);
-      .Attach-Button {
-        opacity: 1;
-      }
+      .Attach-Button { opacity: 1; }
     }
   }
 }
