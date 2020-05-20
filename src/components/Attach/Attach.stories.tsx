@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
+import { withKnobs, select, boolean, number, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { withDocs } from '@storybook-addons/docs';
 import { StoryBookExample } from '../../uiKit/components/StoryBookExample/StoryBookExample';
