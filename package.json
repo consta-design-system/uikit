@@ -1,6 +1,6 @@
 {
   "name": "@gpn-design/uikit",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "dependencies": {
     "tslib": "^1.11.1"
   },
