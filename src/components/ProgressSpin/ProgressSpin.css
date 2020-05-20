@@ -1,0 +1,13 @@
+.ProgressSpin {
+  --animation-duration: 0.3s;
+
+  color: var(--color-control-typo-ghost);
+  stroke: currentColor;
+  transform: rotate(-90deg);
+
+  &-Circle {
+    &_animation {
+      transition: var(--animation-duration) linear;
+    }
+  }
+}

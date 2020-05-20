@@ -1,33 +1,25 @@
 import './Radio.css';
 
-import React from 'react';
+import React, { ChangeEventHandler } from 'react';
 import { cn } from '../../utils/bem';
+import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
-export type RadioPropName = string;
-export type RadioPropId = string | number;
-export type RadioPropValue<T = any> = T | null;
-export type RadioPropChecked = boolean;
-export type RadioPropIntermediate = boolean;
 export type RadioPropSize = 'm' | 'l';
-export type RadioOnChangeArguments<T = any> = {
-  e: React.ChangeEvent<HTMLInputElement>;
-  id?: RadioPropId;
-  name?: RadioPropName;
-  value: RadioPropValue<T>;
-  checked: RadioPropChecked;
-};
 
-export type RadioProps<T = any> = {
-  value?: RadioPropValue<T>;
-  checked?: RadioPropChecked;
+export type RadioPropOnChange = (object: {
+  e: React.ChangeEvent<HTMLInputElement>;
+  checked: boolean;
+}) => void;
+
+export type Props = {
+  checked: boolean | undefined;
   size?: RadioPropSize;
   disabled?: boolean;
-  intermediate?: RadioPropIntermediate;
+  intermediate?: boolean;
   className?: string;
   label?: string;
-  onChange?: (object: RadioOnChangeArguments<T>) => void;
-  id?: RadioPropId;
-  name?: RadioPropName;
+  onChange: RadioPropOnChange;
+  name?: string;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   autoFocus?: boolean;
@@ -36,19 +28,15 @@ export type RadioProps<T = any> = {
   step?: number | string;
   tabIndex?: number;
   inputRef?: React.Ref<HTMLInputElement>;
-  innerRef?: React.Ref<HTMLLabelElement>;
 };
 
-declare type IRadio<T = any> = RadioProps<T> &
-  Omit<React.InputHTMLAttributes<HTMLLabelElement>, keyof RadioProps<T>>;
+export type RadioProps = PropsWithHTMLAttributes<Props, HTMLLabelElement>;
 
 export const cnRadio = cn('Radio');
 
-export function Radio<T = any>(props: IRadio<T>): React.ReactElement | null {
+export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>((props, ref) => {
   const {
-    value = null,
     checked = false,
-    id,
     name,
     size = 'm',
     disabled,
@@ -62,20 +50,17 @@ export function Radio<T = any>(props: IRadio<T>): React.ReactElement | null {
     step,
     tabIndex,
     inputRef,
-    innerRef,
     ...otherProps
   } = props;
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!disabled && onChange) {
-      onChange({ e, id, name, value, checked: !checked });
-    }
+
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    onChange({ e, checked: !checked });
   };
 
   return (
-    <label {...otherProps} className={cnRadio({ size, disabled }, [className])} ref={innerRef}>
+    <label {...otherProps} className={cnRadio({ size, disabled }, [className])} ref={ref}>
       <input
         type="radio"
-        id={id ? id.toString() : undefined}
         name={name}
         className={cnRadio('Input')}
         checked={checked}
@@ -92,4 +77,4 @@ export function Radio<T = any>(props: IRadio<T>): React.ReactElement | null {
       {label && <span className={cnRadio('Label')}>{label}</span>}
     </label>
   );
-}
+});

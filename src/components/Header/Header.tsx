@@ -27,3 +27,4 @@ export { HeaderMenu } from './Menu/Header-Menu';
 export { HeaderModule } from './Module/Header-Module';
 export { HeaderLogin } from './Login/Header-Login';
 export { HeaderButton } from './Button/Header-Button';
+export { HeaderModule } from './Module/Header-Module';

@@ -27,6 +27,7 @@ export function BaseFileIconHoc({ m, s, name }: BaseIconHocArguments) {
       return (
         <IconComponent {...props} className={cnIconFile(null, [name, props.className])}>
           <Svg className={cnIconFile('Svg')} />
+          {props.children}
         </IconComponent>
       );
     };

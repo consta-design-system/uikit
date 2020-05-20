@@ -15,6 +15,7 @@ const defaultKnobs = () => ({
     'default'
   ),
   disabled: boolean('disabled', false),
+  loading: boolean('loading', false),
   label: text('Content', 'I am button'),
   onlyIcon: boolean('onlyIcon', false),
 });

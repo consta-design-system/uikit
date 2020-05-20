@@ -19,7 +19,7 @@ const knobs = () => ({
       id: 'eeeeeee',
     },
   ],
-  multiply: boolean('multiply', false),
+  multiple: boolean('multiple', false),
 });
 
 storiesOf('CheckGroupMainField', module)

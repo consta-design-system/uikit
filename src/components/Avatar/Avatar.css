@@ -1,14 +1,44 @@
 .Avatar {
+  --avatar-color: transparent;
+  --avatar-color-0: #f9a825;
+  --avatar-color-1: #f56b00;
+  --avatar-color-2: #c62828;
+  --avatar-color-3: #c2185b;
+  --avatar-color-4: #e92064;
+  --avatar-color-5: #911fa2;
+  --avatar-color-6: #9010d1;
+  --avatar-color-7: #7448dd;
+  --avatar-color-8: #3e3acb;
+  --avatar-color-9: #2044d5;
+  --avatar-color-10: #016bdc;
+  --avatar-color-11: #2196f3;
+  --avatar-color-12: #00bcd4;
+  --avatar-color-13: #0088a3;
+  --avatar-color-14: #008f7c;
+  --avatar-color-15: #00a352;
+  --avatar-color-16: #1abc1a;
+  --avatar-color-17: #6fb80a;
+
   overflow: hidden;
+  background: linear-gradient(rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0)),
+    linear-gradient(var(--avatar-color), var(--avatar-color));
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #fff;
 
   &_size {
     &_s {
       width: 24px;
       height: 24px;
+      font-size: 8px;
+      line-height: 24px;
     }
     &_m {
       width: 32px;
       height: 32px;
+      font-size: 10px;
+      line-height: 32px;
     }
   }
 

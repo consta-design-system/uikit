@@ -54,7 +54,7 @@ const twoItems = [
 ];
 
 const knobs = () => ({
-  multiply: boolean('multiply', false),
+  multiple: boolean('multiple', false),
   size: select('size', ['xs', 's', 'm', 'l'], 'm'),
   view: select('view', ['primary', 'ghost', 'secondary'], 'primary'),
   form: select('form', ['default', 'round', 'brick'], 'default'),

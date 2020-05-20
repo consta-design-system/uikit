@@ -4,6 +4,7 @@ import React, { Fragment } from 'react';
 import { cn } from '../../utils/bem';
 import { IIcon, IconPropSize } from '../../icons/Icon/Icon';
 import { componentIsFunction } from '../../utils/componentIsFunction';
+import { Loader } from '../Loader/Loader';
 
 export type ButtonPropSize = 'xs' | 's' | 'm' | 'l';
 export type ButtonPropView = 'clear' | 'ghost' | 'primary' | 'secondary';
@@ -25,7 +26,8 @@ export type ButtonProps = {
   className?: string;
   tabIndex?: number;
   disabled?: boolean;
-  label?: string;
+  loading?: boolean;
+  label?: string | number;
   onClick?: React.EventHandler<React.MouseEvent>;
   iconLeft?: React.FC<IIcon>;
   iconRight?: React.FC<IIcon>;
@@ -33,7 +35,7 @@ export type ButtonProps = {
   onlyIcon?: boolean;
   iconSize?: IconPropSize;
   title?: string;
-  innerRef?: React.Ref<any>;
+  innerRef?: React.Ref<HTMLElement>;
 };
 
 export type IButton<T = {}> = ButtonProps &
@@ -57,6 +59,7 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
     className,
     onClick,
     disabled,
+    loading,
     tabIndex,
     as = 'button',
     onlyIcon,
@@ -72,7 +75,7 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
   const IconRight = iconRight;
   const withIcon = !!iconLeft || !!iconRight;
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!disabled && onClick) {
+    if (!disabled && !loading && onClick) {
       onClick(e);
     }
   };
@@ -101,6 +104,7 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
           width,
           form,
           disabled,
+          loading,
           withIcon,
           onlyIcon: !!IconOnly,
         },
@@ -109,6 +113,7 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
       tabIndex={tabIndex}
       title={_title}
       ref={innerRef}
+      {...(Component === 'button' ? { disabled: disabled || loading } : {})}
       {...(componentIsFunction(Component) && { innerRef })}
       {...otherProps}
     >
@@ -127,6 +132,7 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
         ) : (
           label
         ))}
+      {loading && <Loader className={cnButton('Loader')} size="s" />}
     </Component>
   );
 }
