@@ -1,0 +1,5 @@
+.RootTheme {
+  background: var(--color-bg-default);
+  padding: var(--space-xl);
+  min-height: 100px;
+}

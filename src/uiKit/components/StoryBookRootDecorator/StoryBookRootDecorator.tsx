@@ -1,8 +1,8 @@
 import './StoryBookRootDecorator.css';
 
-import React, { useMemo } from 'react';
+import React from 'react';
 import {
-  createTheme,
+  Theme,
   presetGpnDark,
   presetGpnDefault,
   presetGpnDisplay,
@@ -29,6 +29,13 @@ const cnStoryBookRootDecorator = cn('StoryBookRootDecorator');
 
 export const StoryBookRootDecorator: React.FC<StoryBookRootDecoratorProps> = (props) => {
   const { children, themeName, className } = props;
-  const Theme = useMemo(() => createTheme(getThemeByName(themeName)), [themeName]);
-  return <Theme className={cnStoryBookRootDecorator(null, { className })}>{children}</Theme>;
+
+  return (
+    <Theme
+      preset={getThemeByName(themeName)}
+      className={cnStoryBookRootDecorator(null, [className])}
+    >
+      {children}
+    </Theme>
+  );
 };

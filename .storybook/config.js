@@ -1,5 +1,4 @@
-import requireContext from 'require-context.macro';
-import { addParameters, configure, addDecorator } from '@storybook/react';
+import { addParameters, addDecorator } from '@storybook/react';
 import { withA11y } from '@storybook/addon-a11y';
 import { withThemes } from 'storybook-addon-themes';
 import { StoryBookRootDecorator } from '../src/uiKit/components/StoryBookRootDecorator/StoryBookRootDecorator';

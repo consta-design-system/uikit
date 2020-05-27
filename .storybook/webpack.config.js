@@ -1,7 +1,3 @@
-const webpack = require('webpack');
-// const createCompiler = require('@storybook/addon-docs/mdx-compiler-plugin');
-const getWhitepaperThemes = require('../src/themes/getWhitepaperThemes');
-
 module.exports = async ({ config }) => {
   // Remove the existing css rule
   config.module.rules = config.module.rules.filter((f) => f.test.toString() !== '/\\.css$/');
@@ -25,44 +21,23 @@ module.exports = async ({ config }) => {
     ],
   });
 
-  // config.module.rules.push({
-  //   test: /\.mdx$/,
-  //   use: [
-  //     {
-  //       loader: 'babel-loader',
-  //       options: {
-  //         plugins: ['@babel/plugin-transform-react-jsx'],
-  //       },
-  //     },
-  //     {
-  //       loader: '@mdx-js/loader',
-  //       options: {
-  //         compilers: [createCompiler({})],
-  //       },
-  //     },
-  //   ],
-  // });
-
-  // config.module.rules.push({
-  //   test: /\.svg$/,
-  //   use: [
-  //     {
-  //       loader: '@svgr/webpack',
-  //     },
-  //   ],
-  // });
-  //
-  // config.module.rules.push({
-  //   test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|cur|ani|pdf)(\?.*)?$/,
-  //   loader: 'file-loader',
-  //   query: { name: 'static/media/[name].[hash:8].[ext]' },
-  // });
-
-  config.plugins.push(
-    new webpack.DefinePlugin({
-      WHITEPAPER_THEMES: JSON.stringify(getWhitepaperThemes()),
-    })
-  );
+  config.module.rules.push({
+    test: /\.mdx$/,
+    use: [
+      {
+        loader: 'babel-loader',
+        options: {
+          plugins: ['@babel/plugin-transform-react-jsx'],
+        },
+      },
+      {
+        loader: '@mdx-js/loader',
+        options: {
+          // compilers: [createCompiler({})],
+        },
+      },
+    ],
+  });
 
   return config;
 };
