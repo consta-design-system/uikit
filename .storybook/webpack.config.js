@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+// const createCompiler = require('@storybook/addon-docs/mdx-compiler-plugin');
 const getWhitepaperThemes = require('../src/themes/getWhitepaperThemes');
 
 module.exports = async ({ config }) => {
@@ -23,6 +24,24 @@ module.exports = async ({ config }) => {
       },
     ],
   });
+
+  // config.module.rules.push({
+  //   test: /\.mdx$/,
+  //   use: [
+  //     {
+  //       loader: 'babel-loader',
+  //       options: {
+  //         plugins: ['@babel/plugin-transform-react-jsx'],
+  //       },
+  //     },
+  //     {
+  //       loader: '@mdx-js/loader',
+  //       options: {
+  //         compilers: [createCompiler({})],
+  //       },
+  //     },
+  //   ],
+  // });
 
   // config.module.rules.push({
   //   test: /\.svg$/,
