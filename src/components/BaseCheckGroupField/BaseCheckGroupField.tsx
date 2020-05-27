@@ -22,7 +22,7 @@ export type BaseCheckGroupFieldPropGetAdditionalPropsForItem<T, T2 = {}> = (
 ) => {};
 
 export type BaseCheckGroupItemProps<T> = {
-  multiply?: boolean;
+  multiple?: boolean;
   className?: string;
   onChange: BaseCheckGroupFieldItemPropOnChange<T>;
   value: T;
@@ -48,7 +48,7 @@ export type BaseCheckGroupFieldOnChangeArguments<T> = {
 };
 
 export type IBaseCheckGroupFieldProps<T> = {
-  multiply?: boolean;
+  multiple?: boolean;
   items?: T[];
   value?: BaseCheckGroupFieldPropValue<T>;
   id?: BaseCheckGroupFieldPropId;
@@ -75,7 +75,7 @@ export function BaseCheckGroupField<T, T2 = {}>(
     getItemKey = (item: T | any) => item.id,
     getItemLabel = (item: T | any) => item.label,
     getAdditionalPropsForItem,
-    multiply,
+    multiple,
     value = null,
     onChange,
     id,
@@ -94,7 +94,7 @@ export function BaseCheckGroupField<T, T2 = {}>(
   }
 
   const handleItemChange = ({ e, id: itemId, value: itemValue, checked: itemChecked }) => {
-    if (multiply) {
+    if (multiple) {
       const newValue = value ? value.filter((item) => getItemKey(item) !== itemId) : [];
       if (itemChecked) {
         newValue.push(itemValue);
@@ -119,7 +119,7 @@ export function BaseCheckGroupField<T, T2 = {}>(
               value={item}
               id={getItemKey(item)}
               checked={getChecked(item)}
-              multiply={multiply}
+              multiple={multiple}
               name={name}
             />
           ))

@@ -22,7 +22,7 @@ export type TabsProps<T> = {
 };
 export type TabsPropsWithIBaseCheckGroupField<T> = Omit<
   IBaseCheckGroupField<T, TabsProps<T>>,
-  'componentItem' | 'getAdditionalPropsForItem' | 'multiply'
+  'componentItem' | 'getAdditionalPropsForItem' | 'multiple'
 >;
 
 export type ITabs<T = {}> = TabsPropsWithIBaseCheckGroupField<T> &
