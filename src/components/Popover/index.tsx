@@ -3,7 +3,7 @@ import throttle from 'lodash/throttle';
 
 import bem from '../../utils/bem';
 import { getAnchor } from '../../utils/getAnchor';
-import { useTheme, cnTheme, getPrimaryColor } from '../Theme/Theme';
+import { useTheme, cnTheme } from '../Theme/Theme';
 import Portal from './Portal';
 import { getPositionInLayout, getScrollableParentNodes } from './utils/popover-utils';
 
@@ -128,7 +128,7 @@ export const Popover = ({
   return (
     <Portal>
       <div
-        className={cnTheme({ ...theme, color: getPrimaryColor(theme) }, [
+        className={cnTheme({ ...theme, color: theme.color.accent }, [
           b({ visible, direction }),
           className,
         ])}

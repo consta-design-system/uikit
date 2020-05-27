@@ -1,6 +1,7 @@
-import React, { useContext, createContext, useState } from 'react';
+import React, { useContext, createContext } from 'react';
 import { cn } from '../../utils/bem';
-
+import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
+import { presetGpnDefault } from './presets/presetGpnDefault';
 export { presetGpnDefault } from './presets/presetGpnDefault';
 export { presetGpnDark } from './presets/presetGpnDark';
 export { presetGpnDisplay } from './presets/presetGpnDisplay';
@@ -18,46 +19,58 @@ export type ThemePreset = {
   gap: string;
 };
 
+type Props = {
+  preset: ThemePreset;
+};
+
+export type ThemeProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
+
 export const cnTheme = cn('Theme');
 
-export const ThemeContext = createContext<{
-  theme?: ThemePreset;
-  setTheme?: React.Dispatch<React.SetStateAction<ThemePreset>>;
-}>({});
-
-export function createTheme(preset: ThemePreset) {
-  const Component: React.FC<React.HtmlHTMLAttributes<HTMLDivElement>> = (props) => {
-    const { className, children, ...otherProps } = props;
-    const [theme, setTheme] = useState(preset);
-    const mods = {
-      ...theme,
-      color: theme.color.primary,
-    };
-
-    return (
-      <ThemeContext.Provider value={{ theme, setTheme }}>
-        <div {...otherProps} className={cnTheme(mods, [className])}>
-          {children}
-        </div>
-      </ThemeContext.Provider>
-    );
+function generateThemeClassNames(preset: ThemePreset): ThemePreset {
+  return {
+    color: {
+      primary: cnTheme({ color: preset.color.primary }),
+      accent: cnTheme({ color: preset.color.accent }),
+      invert: cnTheme({ color: preset.color.invert }),
+    },
+    control: cnTheme({ control: preset.control }),
+    font: cnTheme({ font: preset.font }),
+    size: cnTheme({ size: preset.size }),
+    space: cnTheme({ space: preset.space }),
+    gap: cnTheme({ gap: preset.gap }),
   };
-  return Component;
 }
+
+const defaultContextValue = {
+  theme: presetGpnDefault,
+  themeClassNames: generateThemeClassNames(presetGpnDefault),
+};
+
+export const ThemeContext = createContext<{
+  theme: ThemePreset;
+  themeClassNames: ThemePreset;
+}>(defaultContextValue);
+
+export const Theme: React.FC<ThemeProps> = (props) => {
+  const { className, children, preset, ...otherProps } = props;
+
+  const mods = {
+    ...preset,
+    color: preset.color.primary,
+  };
+
+  const themeClassNames = generateThemeClassNames(preset);
+
+  return (
+    <ThemeContext.Provider value={{ theme: preset, themeClassNames }}>
+      <div {...otherProps} className={cnTheme(mods, [className])}>
+        {children}
+      </div>
+    </ThemeContext.Provider>
+  );
+};
 
 export function useTheme() {
   return useContext(ThemeContext);
 }
-
-function createThemeSelecor(selector: (theme: ThemePreset) => string, defaultValue: string) {
-  return function getter(theme: ThemePreset | undefined) {
-    if (theme) {
-      return selector(theme);
-    }
-    return defaultValue;
-  };
-}
-
-export const getInvertColor = createThemeSelecor((theme) => theme.color.invert, 'gpnDark');
-export const getAccentColor = createThemeSelecor((theme) => theme.color.accent, 'gpnDark');
-export const getPrimaryColor = createThemeSelecor((theme) => theme.color.primary, 'gpnDefault');

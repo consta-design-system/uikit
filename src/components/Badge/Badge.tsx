@@ -6,7 +6,7 @@ import { cn } from '../../utils/bem';
 import * as wp from '../../utils/whitepaper/whitepaper';
 import { IIcon } from '../../icons/Icon/Icon';
 import { componentIsFunction } from '../../utils/componentIsFunction';
-import { cnTheme, useTheme, getAccentColor } from '../Theme/Theme';
+import { useTheme } from '../Theme/Theme';
 
 export type BadgeProps = {
   size?: 's' | 'm' | 'l';
@@ -46,12 +46,12 @@ export function Badge<T>(props: IBadge<T>) {
   } = props;
 
   const Component = as;
-  const { theme } = useTheme();
+  const { themeClassNames } = useTheme();
 
   const _className =
     status != 'system' && view == 'filled'
-      ? classnames(className, cnTheme({ color: getAccentColor(theme) }))
-      : '';
+      ? classnames(className, themeClassNames.color.accent)
+      : className;
   const Icon = icon;
   const withIcon = !!icon;
 
