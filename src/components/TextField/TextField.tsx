@@ -30,7 +30,8 @@ export type TextFieldPropType =
   | 'datetime-local'
   | 'url'
   | 'month'
-  | 'week';
+  | 'week'
+  | 'password';
 export type TextFieldPropView = 'default' | 'clear';
 export type TextFieldPropForm =
   | 'default'
