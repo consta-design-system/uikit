@@ -138,7 +138,6 @@
     "react-textarea-autosize": "^7.1.2",
     "react-transition-group": "^4.4.1",
     "require-context.macro": "^1.0.4",
-    "storybook-addon-deps": "^2.0.1",
     "storybook-addon-figma-new": "^0.1.0",
     "storybook-addon-themes": "^5.3.1",
     "stylelint": "^10.1.0",

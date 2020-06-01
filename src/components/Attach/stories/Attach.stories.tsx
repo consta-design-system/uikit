@@ -1,9 +1,7 @@
 import './Attach.stories.css';
 
 import * as React from 'react';
-
-import { DocsContainer } from '@storybook/addon-docs/blocks';
-import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
+import { boolean, number, text } from '@storybook/addon-knobs';
 import { cn } from '../../../utils/bem';
 import { IconTrash } from '../../../icons/IconTrash/IconTrash';
 import { Attach } from '../Attach';
@@ -61,10 +59,8 @@ export function Playground() {
 export default {
   title: 'UI-KIT|/Attach',
   component: Playground,
-  decorators: [withKnobs],
   parameters: {
     docs: {
-      container: DocsContainer,
       page: mdx,
     },
   },
