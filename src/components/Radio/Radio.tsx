@@ -8,6 +8,7 @@ export type RadioPropSize = 'm' | 'l';
 export type RadioPropOnChangeArguments = {
   e: React.ChangeEvent<HTMLInputElement>;
   name: string;
+  value: string;
   checked: boolean;
 };
 
@@ -32,6 +33,7 @@ export type Props = {
   inputRef?: React.Ref<HTMLInputElement>;
   ariaLabel?: string;
   id?: string;
+  value?: string;
 };
 
 export type RadioProps = PropsWithHTMLAttributes<Props, HTMLLabelElement>;
@@ -42,6 +44,7 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>((props, ref)
   const {
     checked = false,
     name,
+    value = '',
     size = 'm',
     disabled,
     className,
@@ -60,7 +63,7 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>((props, ref)
   } = props;
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    if (onChange) onChange({ name, e, checked: !checked });
+    if (onChange) onChange({ value, name, e, checked: !checked });
   };
 
   return (
@@ -79,6 +82,7 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>((props, ref)
         step={step}
         tabIndex={tabIndex}
         id={id}
+        value={value}
         aria-label={ariaLabel}
         ref={inputRef}
       />
