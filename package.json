@@ -138,7 +138,7 @@
     "react-transition-group": "^4.4.1",
     "require-context.macro": "^1.0.4",
     "storybook-addon-figma-new": "^0.1.0",
-    "storybook-addon-themes": "^5.2.0",
+    "storybook-addon-themes": "^5.3.1",
     "stylelint": "^10.1.0",
     "stylelint-config-prettier": "^5.2.0",
     "stylelint-config-standard": "^18.3.0",

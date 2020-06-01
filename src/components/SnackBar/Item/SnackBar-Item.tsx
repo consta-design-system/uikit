@@ -16,7 +16,7 @@ export type SnackBarItemProps = {
   item: Item;
 };
 
-const defaultInitialTimerTime: number = 3000;
+const defaultInitialTimerTime = 3000;
 
 export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
   const { item } = props;

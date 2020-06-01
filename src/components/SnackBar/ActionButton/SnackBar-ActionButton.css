@@ -5,6 +5,6 @@
   &-ActionButton {
     margin-top: var(--space-xs);
     margin-right: var(--space-xs);
-    filter: drop-shadow(0px 0px 0px var(--color-bg-soft));
+    filter: drop-shadow(0 0 0 var(--color-bg-soft));
   }
 }

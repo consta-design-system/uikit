@@ -19,7 +19,7 @@ export const SnackBarTimer: React.FC<SnackBarTimerProps> = (props) => {
   const [running, setRunning] = useState<boolean>(false);
   const { onMount, onTimeIsOver, startTime: startTimeprop } = props;
   const startTime = startTimeprop * interval;
-  const { time, start, pause, isRunning, reset } = useTimer({
+  const { time, start, pause, isRunning } = useTimer({
     endTime: 0,
     startTime,
     timerType: 'DECREMENTAL',

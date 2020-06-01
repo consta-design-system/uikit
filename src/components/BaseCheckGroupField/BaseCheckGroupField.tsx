@@ -69,10 +69,13 @@ export type IBaseCheckGroupField<T, T2 = {}> = IBaseCheckGroupFieldProps<T> & {
 export function BaseCheckGroupField<T, T2 = {}>(
   props: IBaseCheckGroupField<T, T2>
 ): React.ReactElement | null {
+  //TODO: Убрать Any после того как сотавим конфиги
   const {
     items,
     componentItem,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     getItemKey = (item: T | any) => item.id,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     getItemLabel = (item: T | any) => item.label,
     getAdditionalPropsForItem,
     multiple,
@@ -86,7 +89,7 @@ export function BaseCheckGroupField<T, T2 = {}>(
   } = props;
   const ComponentItem = componentItem;
 
-  let valueByKey = {};
+  const valueByKey = {};
   if (value && value.length > 0) {
     for (const item of value) {
       valueByKey[getItemKey(item)] = value;
