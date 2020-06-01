@@ -5,11 +5,13 @@ import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
 export type RadioPropSize = 'm' | 'l';
-
-export type RadioPropOnChange = (object: {
+export type RadioPropOnChangeArguments = {
   e: React.ChangeEvent<HTMLInputElement>;
+  name: string;
   checked: boolean;
-}) => void;
+};
+
+export type RadioPropOnChange = (object: RadioPropOnChangeArguments) => void;
 
 export type Props = {
   checked: boolean | undefined;
@@ -18,8 +20,8 @@ export type Props = {
   intermediate?: boolean;
   className?: string;
   label?: string;
-  onChange: RadioPropOnChange;
-  name?: string;
+  onChange?: RadioPropOnChange;
+  name: string;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   autoFocus?: boolean;
@@ -28,6 +30,8 @@ export type Props = {
   step?: number | string;
   tabIndex?: number;
   inputRef?: React.Ref<HTMLInputElement>;
+  ariaLabel?: string;
+  id?: string;
 };
 
 export type RadioProps = PropsWithHTMLAttributes<Props, HTMLLabelElement>;
@@ -50,11 +54,13 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>((props, ref)
     step,
     tabIndex,
     inputRef,
+    id,
+    ariaLabel,
     ...otherProps
   } = props;
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    onChange({ e, checked: !checked });
+    onChange({ name, e, checked: !checked });
   };
 
   return (
@@ -72,6 +78,8 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>((props, ref)
         required={required}
         step={step}
         tabIndex={tabIndex}
+        id={id}
+        aria-label={ariaLabel}
         ref={inputRef}
       />
       {label && <span className={cnRadio('Label')}>{label}</span>}

@@ -13,5 +13,5 @@ const knobs = () => ({
 storiesOf('Radio', module)
   .addDecorator(withKnobs)
   .add('Радио кнопка', () => {
-    return <Radio {...knobs()} />;
+    return <Radio name="name" {...knobs()} />;
   });
