@@ -15311,7 +15311,7 @@ storybook-addon-figma-new@^0.1.0:
   resolved "https://registry.yarnpkg.com/storybook-addon-figma-new/-/storybook-addon-figma-new-0.1.0.tgz#071a91271e5b6f2c3e00855f81e06173670dd855"
   integrity sha512-S82CV8PFXxp22a8FdgembvRF58d3RTwtjunVo3faekxkcyxdO3iYyJlUaRrmqclH8Eqd7BON/74l2H5LSgRG5g==
 
-storybook-addon-themes@^5.2.0:
+storybook-addon-themes@^5.3.1:
   version "5.4.1"
   resolved "https://registry.yarnpkg.com/storybook-addon-themes/-/storybook-addon-themes-5.4.1.tgz#de61b7f243eb80bfd6699eadca351f669d43593e"
   integrity sha512-pSMiaXxe022Aq9pa2Xx97N0d49ihpgo6+dzlZOj9Vtz3ygoN5M8arnNSppp430lbhpOKfGSK3p8WPNMkfNBnWQ==

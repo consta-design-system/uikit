@@ -1,6 +1,8 @@
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 import { Attach } from '../Attach';
-import { AttachExampleLading } from './examples/AttachExampleLading/AttachExampleLading';
+import { AttachExampleLoading } from './examples/AttachExampleLoading/AttachExampleLoading';
+import { AttachExampleError } from './examples/AttachExampleError/AttachExampleError';
+import { AttachExampleEvents } from './examples/AttachExampleEvents/AttachExampleEvents';
 
 # Attach
 
@@ -58,7 +60,7 @@ const App = () => {
 />
 ```
 
-<AttachExampleLading />
+<AttachExampleLoading />
 
 ### Ошибка
 
@@ -72,7 +74,7 @@ const App = () => {
 />
 ```
 
-{{%story::desktop:ui-kit-examples-attach--error%}}
+<AttachExampleError />
 
 ### События
 
@@ -95,4 +97,4 @@ const App = () => {
 />
 ```
 
-{{%story::desktop:ui-kit-examples-attach--event%}}
+<AttachExampleEvents />
