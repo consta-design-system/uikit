@@ -60,7 +60,7 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>((props, ref)
   } = props;
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    onChange({ name, e, checked: !checked });
+    if (onChange) onChange({ name, e, checked: !checked });
   };
 
   return (
