@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import TextAreaAutoSize from 'react-textarea-autosize';
 import { cn } from '../../utils/bem';
 import { IIcon, IconPropSize } from '../../icons/Icon/Icon';
+import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
 export type TextFieldPropValue = string | null;
 export type TextFieldPropName = string;
@@ -16,21 +17,6 @@ export type TextFieldOnChangeArguments = {
   name?: TextFieldPropName;
   value: TextFieldPropValue;
 };
-export type TextFieldPropType =
-  | 'text'
-  | 'textarea'
-  | 'color'
-  | 'email'
-  | 'number'
-  | 'search'
-  | 'tel'
-  | 'date'
-  | 'time'
-  | 'datetime'
-  | 'datetime-local'
-  | 'url'
-  | 'month'
-  | 'week';
 export type TextFieldPropView = 'default' | 'clear';
 export type TextFieldPropForm =
   | 'default'
@@ -50,13 +36,13 @@ export type TextFieldPropState = 'alert' | 'success' | 'warning';
 export type TextFieldPropWidth = 'full' | 'default';
 export type TextFieldPropAutoComplete = 'on' | 'off';
 
-export type TextFieldProps = {
+type Props = {
   className?: string;
   value?: TextFieldPropValue;
   onChange?: TextFieldPropOnChange;
   id?: TextFieldPropId;
   name?: TextFieldPropName;
-  type?: TextFieldPropType;
+  type?: string;
   disabled?: boolean;
   rows?: number;
   cols?: number;
@@ -81,53 +67,52 @@ export type TextFieldProps = {
   required?: boolean;
   step?: number | string;
   tabIndex?: number;
-  inputRef?: React.Ref<any>;
-  innerRef?: React.Ref<HTMLDivElement>;
+  inputRef?: React.Ref<HTMLTextAreaElement | HTMLInputElement>;
+  ariaLabel?: string;
 };
 
-export type ITextField = TextFieldProps &
-  Omit<React.HTMLAttributes<HTMLDivElement>, keyof TextFieldProps>;
+export type TextFieldProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
 
 const cnTextField = cn('TextField');
 
-export const TextField: React.FC<ITextField> = ({
-  className,
-  type = 'text',
-  value,
-  onChange,
-  id,
-  name,
-  rows,
-  cols,
-  minRows,
-  maxRows,
-  inputRef,
-  innerRef,
-  maxLength,
-  disabled,
-  size = 'm',
-  view = 'default',
-  form = 'default',
-  state,
-  width,
-  onBlur,
-  onFocus,
-  autoFocus = false,
-  placeholder,
-  leftSide,
-  rightSide,
-  autoComplete,
-  max,
-  min,
-  readOnly,
-  required,
-  step,
-  tabIndex,
-  ...otherProps
-}) => {
+export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>((props, ref) => {
+  const {
+    className,
+    type = 'text',
+    value,
+    onChange,
+    id,
+    name,
+    rows,
+    cols,
+    minRows,
+    maxRows,
+    inputRef,
+    maxLength,
+    disabled,
+    size = 'm',
+    view = 'default',
+    form = 'default',
+    state,
+    width,
+    onBlur,
+    onFocus,
+    autoFocus = false,
+    placeholder,
+    leftSide,
+    rightSide,
+    autoComplete,
+    max,
+    min,
+    readOnly,
+    required,
+    step,
+    tabIndex,
+    ariaLabel,
+    ...otherProps
+  } = props;
   const [focus, setFocus] = useState<boolean>(autoFocus);
   const textarea = type === 'textarea';
-  const Input = textarea ? TextAreaAutoSize : 'input';
   const LeftIcon = leftSide;
   const RightIcon = rightSide;
   const leftSideIsString = typeof leftSide === 'string';
@@ -159,6 +144,25 @@ export const TextField: React.FC<ITextField> = ({
     onFocus && onFocus(e);
   };
 
+  const commonProps = {
+    className: cnTextField('Input'),
+    value: value || '',
+    onChange: handleChange,
+    maxLength,
+    disabled,
+    onBlur: handleBlur,
+    onFocus: handleFocus,
+    autoFocus,
+    placeholder,
+    autoComplete,
+    readOnly,
+    required,
+    tabIndex,
+    name,
+    id: id ? id.toString() : '',
+    'aria-label': ariaLabel,
+  };
+
   const textareaProps = {
     rows,
     cols,
@@ -167,9 +171,7 @@ export const TextField: React.FC<ITextField> = ({
     inputRef:
       inputRef === null
         ? undefined
-        : (inputRef as
-            | ((node: HTMLTextAreaElement) => void)
-            | React.RefObject<HTMLTextAreaElement>),
+        : (inputRef as (node: HTMLTextAreaElement) => void | React.RefObject<HTMLTextAreaElement>),
   };
 
   const inputProps = {
@@ -177,7 +179,7 @@ export const TextField: React.FC<ITextField> = ({
     max,
     min,
     step,
-    ref: inputRef,
+    ref: inputRef as React.Ref<HTMLInputElement>,
   };
 
   return (
@@ -196,7 +198,7 @@ export const TextField: React.FC<ITextField> = ({
         },
         [className]
       )}
-      ref={innerRef}
+      ref={ref}
       {...otherProps}
     >
       {LeftIcon && (
@@ -213,23 +215,11 @@ export const TextField: React.FC<ITextField> = ({
           )}
         </div>
       )}
-      <Input
-        className={cnTextField('Input')}
-        value={value || ''}
-        onChange={handleChange}
-        maxLength={maxLength}
-        disabled={disabled}
-        onBlur={handleBlur}
-        onFocus={handleFocus}
-        autoFocus={autoFocus}
-        placeholder={placeholder}
-        autoComplete={autoComplete}
-        readOnly={readOnly}
-        required={required}
-        tabIndex={tabIndex}
-        name={name}
-        {...(textarea ? textareaProps : inputProps)}
-      />
+      {textarea ? (
+        <TextAreaAutoSize {...commonProps} {...textareaProps} />
+      ) : (
+        <input {...commonProps} {...inputProps} />
+      )}
       {RightIcon && (
         <div
           className={cnTextField('Side', {
@@ -246,4 +236,4 @@ export const TextField: React.FC<ITextField> = ({
       )}
     </div>
   );
-};
+});

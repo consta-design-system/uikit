@@ -32,6 +32,7 @@ export type PopoverProps = {
   className?: string;
   children: PopoverRenderChildren | React.ReactNode;
   popoverWidth?: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   positionDependencies?: any[];
 };
 
