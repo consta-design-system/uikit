@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { boolean, text, withKnobs, number, select } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { IconPhoto } from '../../icons/IconPhoto/IconPhoto';
@@ -28,26 +28,7 @@ const knobs = () => ({
   size: select('size', ['xs', 's', 'm', 'l'], 'm'),
   view: select('view', ['default', 'clear'], 'default'),
   disabled: boolean('disabled', false),
-  type: select(
-    'type',
-    [
-      'text',
-      'textarea',
-      'color',
-      'email',
-      'number',
-      'search',
-      'tel',
-      'date',
-      'time',
-      'datetime',
-      'datetime-local',
-      'url',
-      'month',
-      'week',
-    ],
-    'text'
-  ),
+  type: select('type', ['text', 'textarea'], 'text'),
   maxLength: number('maxLength', 200),
   minRows: number('minRows', 1),
   maxRows: number('maxRows', 5),
