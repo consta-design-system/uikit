@@ -3,6 +3,7 @@ import throttle from 'lodash/throttle';
 
 import bem from '../../utils/bem';
 import { getAnchor } from '../../utils/getAnchor';
+import { useTheme, cnTheme } from '../Theme/Theme';
 import Portal from './Portal';
 import { getPositionInLayout, getScrollableParentNodes } from './utils/popover-utils';
 
@@ -31,6 +32,7 @@ export type PopoverProps = {
   className?: string;
   children: PopoverRenderChildren | React.ReactNode;
   popoverWidth?: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   positionDependencies?: any[];
 };
 
@@ -52,6 +54,7 @@ export const Popover = ({
   const [direction, setDirection] = useState(directions[0]);
   const contentRef = useRef(null);
   const scrollableParentNodes = useRef<(Element | Window)[]>();
+  const { theme } = useTheme();
 
   const doReposition = (directions: Directions[]) => {
     const { direction: calculatedDirection, left, top } = getPositionInLayout({
@@ -89,7 +92,7 @@ export const Popover = ({
     if (visible) {
       scrollableParentNodes.current = getScrollableParentNodes(getAnchor(anchor.current));
       if (scrollableParentNodes.current) {
-        scrollableParentNodes.current.forEach(parent => {
+        scrollableParentNodes.current.forEach((parent) => {
           parent.addEventListener('scroll', scrollChangeHandler, { passive: true });
         });
       }
@@ -98,7 +101,7 @@ export const Popover = ({
 
     return () => {
       if (scrollableParentNodes.current) {
-        scrollableParentNodes.current.forEach(parent => {
+        scrollableParentNodes.current.forEach((parent) => {
           parent.removeEventListener('scroll', scrollChangeHandler);
         });
       }
@@ -125,7 +128,13 @@ export const Popover = ({
 
   return (
     <Portal>
-      <div className={b({ visible, direction }, className)} style={style}>
+      <div
+        className={cnTheme({ ...theme, color: theme.color.accent }, [
+          b({ visible, direction }),
+          className,
+        ])}
+        style={style}
+      >
         <div className={b('children')} ref={contentRef}>
           {content}
         </div>

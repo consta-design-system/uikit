@@ -6,58 +6,79 @@
 
 ```ts
 // src/App.ts
-import '@gpn-design/uikit/__internal__/src/utils/whitepaper/whitepaper.css';
-import '@gpn-design/uikit/__internal__/src/components/Theme/Theme.css';
-import '@gpn-design/uikit/__internal__/src/components/Theme/_color/Theme_color_gpnDefault.css';
-import '@gpn-design/uikit/__internal__/src/components/Theme/_space/Theme_space_gpnDefault.css';
-import '@gpn-design/uikit/__internal__/src/components/Theme/_size/Theme_size_gpnDefault.css';
-import '@gpn-design/uikit/__internal__/src/components/Theme/_font/theme_font_gpnDefault.css';
-import '@gpn-design/uikit/__internal__/src/components/Theme/_control/Theme_control_gpnDefault.css';
-
 import React from 'react';
-import { cnTheme } from '@gpn-design/uikit/Theme';
+import { Theme, presetGpnDefault } from '@gpn-design/uikit/Theme';
+
+const App = () => {
+  return <Theme preset={presetGpnDefault}>your code</Theme>;
+};
+```
+
+### Вложенные темы
+
+```ts
+import React from 'react';
+import { Theme, presetGpnDefault, presetGpnDark } from '@gpn-design/uikit/Theme';
 
 const App = () => {
   return (
-    <div
-      className={cnTheme({
-        color: 'gpnDefault',
-        space: 'gpnDefault',
-        size: 'gpnDefault',
-        font: 'gpnDefault',
-        control: 'gpnDefault',
-      })}
-    >
-      // your code
-    </div>
+    <Theme preset={presetGpnDefault}>
+      your code
+      <Theme preset={presetGpnDark}>your code</Theme>
+    </Theme>
   );
 };
 ```
 
-### Переопределение темы конкретного DOM-узла:
+### Использование useTheme
+
+`useTheme` вернет `{ theme, themeClassNames }`
+
+`theme` - используемая тема
+`themeClassNames` - классы используемой темы
 
 ```ts
-import '@gpn-design/uikit/__internal__/src/components/Theme/_color/Theme_color_gpnDark.css';
-
-import React from 'react';
-import { cnTheme } from '@gpn-design/uikit/Theme';
-import { Component } from '@gpn-design/uikit/Component';
+import { useTheme } from '@gpn-design/uikit/Theme';
+import { Text } from '@gpn-design/uikit/Text';
 
 const App = () => {
-  return <div className={cnTheme({ color: 'gpnDefault' })}>your code</div>;
+  const { themeClassNames } = useTheme();
+  <Text className={themeClassNames.color.invert}></div>;
 };
 ```
 
-### Переопределение темы компонента
+### Переключение темы
 
 ```ts
-import '@gpn-design/uikit/__internal__/src/components/Theme/_color/Theme_color_gpnDark.css';
+import './RootTheme.css';
 
-import React from 'react';
-import { cnTheme } from '@gpn-design/uikit/Theme';
-import { Component } from '@gpn-design/uikit/Component';
+import React, { useState } from 'react';
+import { cn } from '@bem-react/classname';
+import { Theme, presetGpnDark, presetGpnDefault, ThemePreset } from '@gpn-design/uikit/Theme';
+import { Switch } from '@gpn-design/uikit/Switch';
 
-const App = () => {
-  return <Component className={cnTheme({ color: 'gpnDefault' })} />;
+type ThemeName = 'gpnDefault' | 'gpnDark';
+
+function getPreset(themeName: ThemeName): ThemePreset {
+  const obj = {
+    gpnDefault: presetGpnDefault,
+    gpnDark: presetGpnDark,
+  };
+  return obj[themeName] || presetGpnDefault;
+}
+
+const cnRootTheme = cn('RootTheme');
+
+export const RootTheme: React.FC = () => {
+  const [theme, setTheme] = useState<ThemeName>('gpnDefault');
+  const handleChange = ({ checked }) => setTheme(checked ? 'gpnDark' : 'gpnDefault');
+
+  return (
+    <Theme preset={getPreset(theme)} className={cnRootTheme()}>
+      <Switch label="Dark Mode" onChange={handleChange} checked={theme === 'gpnDark'} />
+    </Theme>
+  );
 };
 ```
+
+{{%story::ui-kit-examples-theme--example%}}

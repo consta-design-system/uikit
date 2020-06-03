@@ -91,30 +91,45 @@ function SnackBarStories({ withIcon, withActionButtons, withAutoClose, withClose
         <Button
           className={cnSnackBarStories('ButtonAdd')}
           iconLeft={IconAdd}
+          view="ghost"
+          size="s"
+          width="full"
           label="Выполненно"
           onClick={handleSuccessAdd}
         />
         <Button
           className={cnSnackBarStories('ButtonAdd')}
           iconLeft={IconAdd}
+          view="ghost"
+          size="s"
+          width="full"
           label="Ошибка"
           onClick={handleAlertAdd}
         />
         <Button
           className={cnSnackBarStories('ButtonAdd')}
           iconLeft={IconAdd}
+          view="ghost"
+          size="s"
+          width="full"
           label="Предупреждение"
           onClick={handleWarningAdd}
         />
         <Button
           className={cnSnackBarStories('ButtonAdd')}
           iconLeft={IconAdd}
+          view="ghost"
+          size="s"
+          width="full"
           label="Системное"
           onClick={handleSystemAdd}
         />
         <Button
           className={cnSnackBarStories('ButtonAdd')}
           iconLeft={IconAdd}
+          view="ghost"
+          size="s"
+          width="full"
           label="Нормальное"
           onClick={handleNormalAdd}
         />

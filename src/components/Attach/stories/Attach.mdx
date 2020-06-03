@@ -1,3 +1,7 @@
+import { AttachExampleLoading } from './examples/AttachExampleLoading/AttachExampleLoading';
+import { AttachExampleError } from './examples/AttachExampleError/AttachExampleError';
+import { AttachExampleEvents } from './examples/AttachExampleEvents/AttachExampleEvents';
+
 # Attach
 
 ## Пример использования
@@ -54,7 +58,7 @@ const App = () => {
 />
 ```
 
-{{%story::desktop:ui-kit-examples-attach--loading%}}
+<AttachExampleLoading />
 
 ### Ошибка
 
@@ -68,7 +72,7 @@ const App = () => {
 />
 ```
 
-{{%story::desktop:ui-kit-examples-attach--error%}}
+<AttachExampleError />
 
 ### События
 
@@ -91,4 +95,4 @@ const App = () => {
 />
 ```
 
-{{%story::desktop:ui-kit-examples-attach--event%}}
+<AttachExampleEvents />

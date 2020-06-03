@@ -48,6 +48,32 @@ export function useTimer(config?: Partial<Config>): Values {
     }
   };
 
+  const pause = () => {
+    pausedTimeRef.current = time;
+
+    cancelInterval();
+  };
+
+  const resetTime = () => {
+    setTime(startTime);
+  };
+
+  const reset = () => {
+    pausedTimeRef.current = null;
+
+    cancelInterval();
+    resetTime();
+  };
+
+  const stopTimerWhenTimeIsOver = () => {
+    cancelInterval();
+    setShouldResetTime(true);
+
+    if (typeof onTimeOver === 'function') {
+      onTimeOver();
+    }
+  };
+
   const createInterval = () => {
     setIsRunning(true);
 
@@ -68,23 +94,6 @@ export function useTimer(config?: Partial<Config>): Values {
     }, interval);
   };
 
-  const pause = () => {
-    pausedTimeRef.current = time;
-
-    cancelInterval();
-  };
-
-  const resetTime = () => {
-    setTime(startTime);
-  };
-
-  const reset = () => {
-    pausedTimeRef.current = null;
-
-    cancelInterval();
-    resetTime();
-  };
-
   const start = () => {
     if (intervalRef.current) {
       return;
@@ -96,15 +105,6 @@ export function useTimer(config?: Partial<Config>): Values {
     }
 
     createInterval();
-  };
-
-  const stopTimerWhenTimeIsOver = () => {
-    cancelInterval();
-    setShouldResetTime(true);
-
-    if (typeof onTimeOver === 'function') {
-      onTimeOver();
-    }
   };
 
   useEffect(() => cancelInterval, []);
