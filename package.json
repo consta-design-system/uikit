@@ -43,12 +43,6 @@
     "> 1%",
     "not ie 11"
   ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn run pre-commit",
-      "pre-push": "yarn run pre-push"
-    }
-  },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "eslint --fix",
