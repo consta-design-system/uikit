@@ -1,10 +1,13 @@
 import * as React from 'react';
-import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
-import { storiesOf } from '@storybook/react';
 import { withDocs } from '@storybook-addons/docs';
-import { StoryBookExample } from '../../uiKit/components/StoryBookExample/StoryBookExample';
+import { boolean, number, text, withKnobs } from '@storybook/addon-knobs';
+import { storiesOf } from '@storybook/react';
+
 import { IconTrash } from '../../icons/IconTrash/IconTrash';
+import { StoryBookExample } from '../../uiKit/components/StoryBookExample/StoryBookExample';
+
 import { Attach } from './Attach';
+import md from './Attach.md';
 
 function Stories({
   loading,
@@ -56,9 +59,9 @@ storiesOf('UI-KIT|/Attach', module)
   .addDecorator(
     withDocs({
       readme: {
-        content: require('./Attach.md')['default'],
+        content: md,
       },
-    })
+    }),
   )
   .add('playground', () => <Stories {...defaultKnobs()} />);
 

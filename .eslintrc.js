@@ -1,45 +1,104 @@
 module.exports = {
+  env: {
+    browser: true,
+    node: true,
+    es6: true,
+    jest: true,
+  },
+  extends: [
+    'airbnb',
+    'airbnb/hooks',
+    'plugin:import/typescript',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
+    'prettier/@typescript-eslint',
+    'prettier/react',
+  ],
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+  },
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaVersion: 2018,
-    sourceType: 'module',
+    createDefaultProgram: true,
     ecmaFeatures: {
       jsx: true,
     },
+    ecmaVersion: 2019,
+    sourceType: 'module',
+    project: './tsconfig.json',
   },
-  extends: [
-    'plugin:@typescript-eslint/recommended', // Uses the recommended rules from the @typescript-eslint/eslint-plugin
-    'prettier/@typescript-eslint', // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
-    'plugin:prettier/recommended', // Enables eslint-plugin-prettier and displays prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
-    'plugin:react/recommended', // Uses the recommended rules from @eslint-plugin-react
+  plugins: [
+    'react',
+    'import',
+    'jsx-a11y',
+    'react-hooks',
+    '@typescript-eslint',
+    'simple-import-sort',
   ],
-  plugins: ['@typescript-eslint', 'eslint-plugin-import'],
+  overrides: [
+    {
+      files: '*.js',
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off',
+        '@typescript-eslint/explicit-function-return-type': 'off',
+      },
+    },
+  ],
   rules: {
-    '@typescript-eslint/camelcase': ['error', { properties: 'never' }],
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/explicit-member-accessibility': 'off',
-    '@typescript-eslint/prefer-interface': 'off',
-    '@typescript-eslint/no-unused-vars': 'error',
-    '@typescript-eslint/interface-name-prefix': ['error', 'always'],
+    'quote-props': ['error', 'consistent-as-needed'],
     'react/prop-types': 'off',
-    'import/order': [
+    'react/destructuring-assignment': 'off',
+    'react/jsx-filename-extension': ['error', { extensions: ['.jsx', '.tsx'] }],
+    'react/jsx-props-no-spreading': 'off',
+    'react/state-in-constructor': 'off',
+    'react/static-property-placement': 'off',
+    'react/require-extension': 'off',
+    'react/jsx-wrap-multilines': [
       'error',
       {
-        groups: [['builtin', 'external'], ['parent'], ['sibling', 'index']],
+        declaration: 'parens-new-line',
+        assignment: 'parens-new-line',
+        return: 'parens-new-line',
+        arrow: 'parens-new-line',
+        condition: 'parens-new-line',
+        logical: 'parens-new-line',
+        prop: 'parens-new-line',
+      },
+    ],
+    'sort-imports': 'off',
+    'import/named': 'off',
+    'import/order': 'off',
+    'import/first': 'error',
+    'import/newline-after-import': 'error',
+    'import/no-duplicates': 'error',
+    'import/no-extraneous-dependencies': 'off',
+    'import/prefer-default-export': 'off',
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
+    'simple-import-sort/sort': [
+      'error',
+      {
+        // https://github.com/lydell/eslint-plugin-simple-import-sort/blob/master/examples/.eslintrc.js#L71
+        groups: [
+          [
+            '^(assert|buffer|child_process|cluster|console|constants|crypto|dgram|dns|domain|events|fs|http|https|module|net|os|path|punycode|querystring|readline|repl|stream|string_decoder|sys|timers|tls|tty|url|util|vm|zlib|freelist|v8|process|async_hooks|http2|perf_hooks)(/.*|$)',
+          ],
+          ['^react', '^@?\\w'],
+          ['^\\u0000'],
+          ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+          ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+          ['^.+\\.s?css$'],
+        ],
       },
     ],
   },
-  settings: {
-    react: {
-      version: 'detect', // Tells eslint-plugin-react to automatically detect the version of React to use
-    },
-  },
-  overrides: [
-    {
-      files: ['*.js'],
-      rules: {
-        '@typescript-eslint/no-var-requires': 'off',
-      },
-    },
-  ],
 };

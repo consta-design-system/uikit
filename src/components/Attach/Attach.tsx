@@ -1,12 +1,13 @@
-import './Attach.css';
-
 import React from 'react';
+
+import { IIcon } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
+import { componentIsFunction } from '../../utils/componentIsFunction';
+import { Button } from '../Button/Button';
 import { File } from '../File/File';
 import { Text } from '../Text/Text';
-import { Button } from '../Button/Button';
-import { IIcon } from '../../icons/Icon/Icon';
-import { componentIsFunction } from '../../utils/componentIsFunction';
+
+import './Attach.css';
 
 declare type AttachProps = {
   as?: React.ElementType;
@@ -27,8 +28,8 @@ declare type AttachProps = {
 };
 
 export type IAttachProps<T = {}> = AttachProps &
-  (Omit<React.HTMLAttributes<HTMLDivElement>, keyof (AttachProps & T)> &
-    Omit<T, keyof AttachProps>);
+  Omit<React.HTMLAttributes<HTMLDivElement>, keyof AttachProps & T> &
+  Omit<T, keyof AttachProps>;
 
 export const cnAttach = cn('Attach');
 
