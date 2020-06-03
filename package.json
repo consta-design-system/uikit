@@ -43,6 +43,12 @@
     "> 1%",
     "not ie 11"
   ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn run pre-commit",
+      "pre-push": "yarn run pre-push"
+    }
+  },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "eslint --fix",
@@ -102,6 +108,7 @@
     "@types/react": "^16.8.20",
     "@types/react-collapse": "^5.0.0",
     "@types/react-dom": "^16.8.4",
+    "@types/react-transition-group": "^4.4.0",
     "@types/storybook__react": "^4.0.2",
     "@typescript-eslint/eslint-plugin": "^2.29.0",
     "autoprefixer": "^9.7.4",
@@ -140,6 +147,7 @@
     "stylelint": "^10.1.0",
     "stylelint-config-prettier": "^5.2.0",
     "stylelint-config-standard": "^18.3.0",
+    "stylelint-order": "^4.1.0",
     "stylelint-prettier": "^1.1.1",
     "ts-essentials": "^3.0.0",
     "ts-jest": "^25.4.0",

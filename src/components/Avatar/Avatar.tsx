@@ -2,6 +2,7 @@ import './Avatar.css';
 
 import React, { useMemo } from 'react';
 import random from 'lodash/random';
+
 import { cn } from '../../utils/bem';
 import { componentIsFunction } from '../../utils/componentIsFunction';
 
@@ -28,7 +29,7 @@ const MAX_COLOR_INDEX = 17;
 
 export const getColorIndexForName = (
   name: string | undefined,
-  maxIndex: number | undefined = MAX_COLOR_INDEX
+  maxIndex: number | undefined = MAX_COLOR_INDEX,
 ) => {
   let index = 0;
 

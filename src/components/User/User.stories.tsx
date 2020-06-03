@@ -1,6 +1,7 @@
 import React from 'react';
-import { withKnobs, select, text, boolean } from '@storybook/addon-knobs';
+import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
+
 import { User } from './User';
 
 const defaultKnobs = () => ({
@@ -10,7 +11,7 @@ const defaultKnobs = () => ({
   status: select('status', ['available', 'remote', 'out'], undefined),
   avatarUrl: text(
     'avatarUrl',
-    `https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png`
+    `https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png`,
   ),
   name: text('Name', `Имя Фамилия`),
   info: text('Info', `Сегодня на Почтамской`),

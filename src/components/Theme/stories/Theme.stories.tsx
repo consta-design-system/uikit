@@ -3,7 +3,9 @@ import { withDocs } from '@storybook-addons/docs';
 import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 
-import { Theme, presetGpnDefault } from '../Theme';
+import { presetGpnDefault, Theme } from '../Theme';
+import md from '../Theme.md';
+
 import { RootTheme } from './examples/RootTheme';
 
 storiesOf('UI-KIT|/Theme', module)
@@ -11,9 +13,9 @@ storiesOf('UI-KIT|/Theme', module)
   .addDecorator(
     withDocs({
       readme: {
-        content: require('../Theme.md')['default'],
+        content: md,
       },
-    })
+    }),
   )
   .add('documentation', () => {
     return <Theme preset={presetGpnDefault} />;

@@ -9,6 +9,7 @@ module.exports = {
   ],
   webpackFinal: async (config) => {
     // Remove the existing css rule
+    // eslint-disable-next-line no-param-reassign
     config.module.rules = config.module.rules.filter((f) => f.test.toString() !== '/\\.css$/');
     // config.module.rules = config.module.rules.filter((f) => f.test.toString().indexOf('svg') === -1);
 

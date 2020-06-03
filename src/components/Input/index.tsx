@@ -1,7 +1,8 @@
-import React from 'react';
-import bem from '../../utils/bem';
-
 import './styles.css';
+
+import React from 'react';
+
+import bem from '../../utils/bem';
 
 const b = bem('input');
 
@@ -46,6 +47,7 @@ const Input: React.FC<InputProps> = ({
   ...rest
 }) => {
   return (
+    // eslint-disable-next-line react/void-dom-elements-no-children
     <input
       {...rest}
       ref={inputRef}

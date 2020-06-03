@@ -1,12 +1,13 @@
 import './User.css';
 
 import React from 'react';
+
+import { IconPropSize } from '../../icons/Icon/Icon';
+import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { cn } from '../../utils/bem';
+import { componentIsFunction } from '../../utils/componentIsFunction';
 import { Avatar } from '../Avatar/Avatar';
 import { Text, TextPropSize } from '../Text/Text';
-import { IconSelect } from '../../icons/IconSelect/IconSelect';
-import { IconPropSize } from '../../icons/Icon/Icon';
-import { componentIsFunction } from '../../utils/componentIsFunction';
 
 export type UserPropSize = 's' | 'm';
 export type UserPropView = 'clear' | 'ghost';

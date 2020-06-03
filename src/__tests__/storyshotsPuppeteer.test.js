@@ -1,4 +1,5 @@
 import path from 'path';
+
 import initStoryshots from '@storybook/addon-storyshots';
 import { imageSnapshot } from '@storybook/addon-storyshots-puppeteer';
 
@@ -13,7 +14,7 @@ const getMatchOptions = () => ({
 });
 const beforeScreenshot = (page, { context: { kind } }) => {
   if (componentsWithAnimation.includes(kind)) {
-    return new Promise(resolve =>
+    return new Promise((resolve) =>
       // Ждем пока анимация отработает
       setTimeout(() => {
         resolve();

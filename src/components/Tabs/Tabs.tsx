@@ -1,16 +1,18 @@
 import './Tabs.css';
 
-import React, { createRef, useEffect, useRef, useCallback, useMemo, useState } from 'react';
-import { useForkRef } from '../../utils/useForkRef';
-import { cn } from '../../utils/bem';
+import React, { createRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
 import { IIcon } from '../../icons/Icon/Icon';
+import { cn } from '../../utils/bem';
+import { useForkRef } from '../../utils/useForkRef';
 import {
   BaseCheckGroupField,
+  BaseCheckGroupFieldItemPropItemKey,
   BaseCheckGroupFieldPropGetAdditionalPropsForItem,
   IBaseCheckGroupField,
-  BaseCheckGroupFieldItemPropItemKey,
 } from '../BaseCheckGroupField/BaseCheckGroupField';
-import { TabsTab } from './Tab/TabsTab';
+
+import { TabsTab } from './Tab/Tabs-Tab';
 
 export type TabsPropSize = 's' | 'm';
 export type TabsPropView = 'bordered' | 'clear';
@@ -68,7 +70,12 @@ export function Tabs<T>(props: ITabs<T>) {
   const rootRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
 
-  function setStyleForLine(tabsWidth, tabWidth, tabRatio, tabOffsetLeft) {
+  function setStyleForLine(
+    tabsWidth: number,
+    tabWidth: number,
+    tabRatio: number,
+    tabOffsetLeft: number,
+  ) {
     if (lineRef.current) {
       const lineStyle = lineRef.current.style;
       lineStyle.setProperty('--tabsWidth', `${tabsWidth}px`);
@@ -101,7 +108,7 @@ export function Tabs<T>(props: ITabs<T>) {
   const onMount = useCallback(() => {
     updateLine();
     setMounted(true);
-  }, []);
+  }, [updateLine]);
 
   const getAdditionalPropsForItem: BaseCheckGroupFieldPropGetAdditionalPropsForItem<
     T,

@@ -2,8 +2,8 @@ import './Timer.css';
 
 import React from 'react';
 
-import { ProgressSpin } from '../ProgressSpin/ProgressSpin';
 import { cn } from '../../utils/bem';
+import { ProgressSpin } from '../ProgressSpin/ProgressSpin';
 
 export type TimerPropsSize = 'm' | 's';
 
@@ -18,7 +18,7 @@ export type TimerProps = {
 
 export const cnTimer = cn('Timer');
 
-export type ITimer = TimerProps & (Omit<React.HTMLAttributes<HTMLDivElement>, keyof TimerProps>);
+export type ITimer = TimerProps & Omit<React.HTMLAttributes<HTMLDivElement>, keyof TimerProps>;
 
 export function Timer(props: ITimer): React.ReactElement {
   const {

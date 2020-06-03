@@ -1,5 +1,6 @@
 import { BaseIconHoc } from '../BaseIconHoc/BaseIconHoc';
 import { Icon } from '../Icon/Icon';
+
 import IconColorFillSizeM from './IconColorFill_size_m';
 import IconColorFillSizeS from './IconColorFill_size_s';
 import IconColorFillSizeXs from './IconColorFill_size_xs';

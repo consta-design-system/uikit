@@ -1,6 +1,7 @@
 import './Switch.css';
 
 import React, { ChangeEventHandler } from 'react';
+
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 

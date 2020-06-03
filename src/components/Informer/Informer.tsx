@@ -2,10 +2,11 @@ import './Informer.css';
 import '../Theme/_color/Theme_color_gpnDefault.css';
 import '../Theme/_color/Theme_color_gpnDark.css';
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import { classnames } from '@bem-react/classnames';
-import { cn } from '../../utils/bem';
+
 import { IIcon } from '../../icons/Icon/Icon';
+import { cn } from '../../utils/bem';
 import { Text } from '../Text/Text';
 import { useTheme } from '../Theme/Theme';
 
@@ -29,14 +30,14 @@ export type IInformer = InformerProps &
 const cnInformer = cn('Informer');
 
 export const Informer: React.FC<IInformer> = (props) => {
-  const { className, view, status, icon, label, title, children, innerRef, ...otherProps } = props;
+  const { view, status, icon, label, title, children, innerRef, ...otherProps } = props;
   const Icon = icon;
   const withIcon = !!icon;
   const { themeClassNames } = useTheme();
-  const _className =
-    status != 'system' && view == 'filled'
-      ? classnames(className, themeClassNames.color.accent)
-      : className;
+  const className =
+    status !== 'system' && view === 'filled'
+      ? classnames(props.className, themeClassNames.color.accent)
+      : props.className;
 
   return (
     <div
@@ -47,7 +48,7 @@ export const Informer: React.FC<IInformer> = (props) => {
           status,
           withIcon,
         },
-        [_className]
+        [className],
       )}
       ref={innerRef}
     >
@@ -58,10 +59,10 @@ export const Informer: React.FC<IInformer> = (props) => {
           {label || children}
         </div>
       ) : (
-        <Fragment>
+        <>
           {title && <Text weight="bold">{title}</Text>}
           {label || children}
-        </Fragment>
+        </>
       )}
     </div>
   );

@@ -1,3 +1,5 @@
+import './Attach.css';
+
 import React from 'react';
 
 import { IIcon } from '../../icons/Icon/Icon';
@@ -6,8 +8,6 @@ import { componentIsFunction } from '../../utils/componentIsFunction';
 import { Button } from '../Button/Button';
 import { File } from '../File/File';
 import { Text } from '../Text/Text';
-
-import './Attach.css';
 
 declare type AttachProps = {
   as?: React.ElementType;

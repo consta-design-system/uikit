@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
-import { Button, IButton, cnButton } from './Button';
+import { Button, cnButton, IButton } from './Button';
 
 const testId = 'button';
 
@@ -90,7 +90,11 @@ describe('Компонент Button', () => {
       });
 
       it(`должен рендериться как функциональный компонент`, () => {
-        const Component = ({ children, innerRef, ...otherProps }) => (
+        const Component: React.FC<{ innerRef: React.Ref<HTMLElement> }> = ({
+          children,
+          innerRef,
+          ...otherProps
+        }) => (
           <span {...otherProps} ref={innerRef}>
             {children}
           </span>

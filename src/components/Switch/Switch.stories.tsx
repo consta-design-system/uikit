@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { withKnobs, text, select, boolean } from '@storybook/addon-knobs';
+import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
+
 import { Switch } from './Switch';
 
 const knobs = () => ({

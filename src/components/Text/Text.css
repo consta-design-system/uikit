@@ -2,17 +2,21 @@
   &_view_link {
     color: var(--color-typo-link);
   }
+
   &_view_link-minor {
     color: var(--color-typo-link-minor);
   }
+
   &_view_link:hover,
   &_view_link-minor:hover {
     color: var(--color-typo-link-hover);
   }
+
   &_font {
     &_primary {
       font-family: var(--font-primary);
     }
+
     &_mono {
       font-family: var(--font-mono);
     }

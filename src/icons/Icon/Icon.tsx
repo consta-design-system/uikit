@@ -1,5 +1,7 @@
 import './Icon.css';
+
 import React from 'react';
+
 import { cn } from '../../utils/bem';
 
 export type IconPropSize = 'xs' | 's' | 'm';
@@ -20,7 +22,7 @@ export type IconProps = {
   innerRef?: React.Ref<HTMLDivElement>;
 };
 
-export type IIcon = IconProps & (Omit<React.HTMLAttributes<HTMLDivElement>, keyof IconProps>);
+export type IIcon = IconProps & Omit<React.HTMLAttributes<HTMLDivElement>, keyof IconProps>;
 
 export const cnIcon = cn('Icon');
 

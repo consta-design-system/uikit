@@ -1,43 +1,42 @@
-/* stylelint-disable  no-descending-specificity  */
 .Radio {
   position: relative;
-  align-items: center;
   display: inline-flex;
+  align-items: center;
   font-family: var(--font-sans);
   cursor: pointer;
 
   &-Input {
     position: relative;
+    box-sizing: border-box;
     width: var(--box-size);
     height: var(--box-size);
     margin: 0;
-    box-sizing: border-box;
-    border-radius: 50%;
     border: var(--control-border-width) solid var(--color-control-bg-border-default);
+    border-radius: 50%;
+    cursor: pointer;
     transition: border-color 0.15s, background-color 0.15s;
     -webkit-appearance: none;
-    cursor: pointer;
 
     &::before {
       content: '';
       position: absolute;
       top: calc(50% - var(--box-size) / 2);
       left: calc(50% - var(--box-size) / 2);
+      box-sizing: border-box;
       width: var(--box-size);
       height: var(--box-size);
-      box-sizing: border-box;
-      border-radius: 50%;
       background-color: var(--color-control-bg-primary);
+      border-radius: 50%;
       opacity: 0;
-      transform: scale(0, 0);
       transition: opacity 0.15s, transform 0.15s;
+      transform: scale(0, 0);
     }
 
     &:focus,
     &:focus:hover {
+      outline: none;
       box-shadow: 0 0 0 2px var(--color-control-bg-focus);
       animation: radioFocusAnimation 0.5s ease-in;
-      outline: none;
     }
 
     &:focus:active,
@@ -81,14 +80,16 @@
 
   &_disabled {
     pointer-events: none;
+
     .Radio-Input:disabled {
-      border-color: transparent;
       background-color: var(--color-control-bg-disable);
+      border-color: transparent;
 
       &::before {
         background-color: var(--color-control-typo-disable);
       }
     }
+
     .Radio-Input:disabled ~ .radio-Label {
       color: var(--color-control-typo-disable);
     }
@@ -99,6 +100,7 @@
   from {
     box-shadow: 0 0 0 0 var(--color-control-bg-focus), 0 0 0 0 var(--color-control-bg-active);
   }
+
   to {
     box-shadow: 0 0 0 2px var(--color-control-bg-focus), 0 0 0 6px transparent;
   }

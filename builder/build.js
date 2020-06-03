@@ -1,5 +1,3 @@
-'use strict';
-
 const { join, resolve } = require('path');
 const { promisify } = require('util');
 const { exec } = require('child_process');
@@ -25,6 +23,7 @@ class GenerateCommand extends Command {
       }
     }
   }
+
   async run() {
     const hrstart = process.hrtime();
     const { flags } = this.parse(GenerateCommand);
@@ -54,7 +53,7 @@ class GenerateCommand extends Command {
     const esSrc = join(INTERNAL_PREFIX, 'src');
     const distEsSrc = join(distPath, esSrc);
 
-    const jsSrc = join(INTERNAL_PREFIX, srcPrefix + 'src');
+    const jsSrc = join(INTERNAL_PREFIX, `${srcPrefix}src`);
     const distSrc = join(distPath, jsSrc);
 
     const srcDir = join(distPath, INTERNAL_PREFIX);
@@ -84,21 +83,23 @@ class GenerateCommand extends Command {
       // TODO: separate commands
       await copyPackageJson(distPath);
       await Promise.all([
-        transformCSS(ignore, srcPath, [distSrc, distEsSrc], { namespace, naming, postcss }).then(
-          () => this.log(logSymbols.success, 'css copied & transformed')
-        ),
+        transformCSS(ignore, srcPath, [distSrc, distEsSrc], {
+          namespace,
+          naming,
+          postcss,
+        }).then(() => this.log(logSymbols.success, 'css copied & transformed')),
         copyAssets(ignore, srcPath, [distSrc, distEsSrc]).then(() =>
-          this.log(logSymbols.success, 'svg & png copied')
+          this.log(logSymbols.success, 'svg & png copied'),
         ),
       ]);
       await generateReExports(ignore, srcPath, [jsSrc, esSrc], distPath).then(() =>
-        this.log(logSymbols.success, 'components reExports generated!')
+        this.log(logSymbols.success, 'components reExports generated!'),
       );
       await generateReExports(ignore, srcPath, [jsSrc, esSrc], distPath, 'icons').then(() =>
-        this.log(logSymbols.success, 'icons reExports generated!')
+        this.log(logSymbols.success, 'icons reExports generated!'),
       );
       await generateReExports(ignore, srcPath, [jsSrc, esSrc], distPath, 'fileIcons').then(() =>
-        this.log(logSymbols.success, 'fileIcons reExports generated!')
+        this.log(logSymbols.success, 'fileIcons reExports generated!'),
       );
       await this.safeInvokeHook(afterBuild);
     } catch (err) {

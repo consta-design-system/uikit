@@ -1,7 +1,9 @@
+import './styles.css';
+
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+
 import { Text } from '../Text/Text';
-import './styles.css';
 
 storiesOf('ScrollExample', module).add('Пример скролла', () => (
   <div className="Container">

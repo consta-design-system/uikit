@@ -1,9 +1,10 @@
 import './TextField.css';
 
-import React, { useState } from 'react';
+import React, { FocusEvent, useState } from 'react';
 import TextAreaAutoSize from 'react-textarea-autosize';
+
+import { IconPropSize, IIcon } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
-import { IIcon, IconPropSize } from '../../icons/Icon/Icon';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
 export type TextFieldPropValue = string | null;
@@ -54,8 +55,8 @@ type Props = {
   form?: TextFieldPropForm;
   state?: TextFieldPropState;
   width?: TextFieldPropWidth;
-  onFocus?: React.FocusEventHandler<HTMLTextAreaElement | HTMLInputElement>;
-  onBlur?: React.FocusEventHandler<HTMLTextAreaElement | HTMLInputElement>;
+  onFocus?: React.FocusEventHandler;
+  onBlur?: React.FocusEventHandler;
   autoFocus?: boolean;
   placeholder?: string;
   leftSide?: string | React.FC<IIcon>;
@@ -130,28 +131,28 @@ export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>((props
   };
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (e) => {
-    const value = e.target.value;
-    !disabled && onChange && onChange({ e, id, name, value: value ? value : null });
+    const { value } = e.target;
+    !disabled && onChange && onChange({ e, id, name, value: value || null });
   };
 
-  const handleBlur = (e) => {
+  const handleBlur = (e: FocusEvent) => {
     setFocus(false);
     onBlur && onBlur(e);
   };
 
-  const handleFocus = (e) => {
+  const handleFocus = (e: FocusEvent) => {
     setFocus(true);
     onFocus && onFocus(e);
   };
 
   const commonProps = {
-    className: cnTextField('Input'),
-    value: value || '',
-    onChange: handleChange,
+    'className': cnTextField('Input'),
+    'value': value || '',
+    'onChange': handleChange,
     maxLength,
     disabled,
-    onBlur: handleBlur,
-    onFocus: handleFocus,
+    'onBlur': handleBlur,
+    'onFocus': handleFocus,
     autoFocus,
     placeholder,
     autoComplete,
@@ -159,7 +160,7 @@ export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>((props
     required,
     tabIndex,
     name,
-    id: id ? id.toString() : '',
+    'id': id ? id.toString() : '',
     'aria-label': ariaLabel,
   };
 
@@ -196,7 +197,7 @@ export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>((props
           focus,
           withValue: !!value,
         },
-        [className]
+        [className],
       )}
       ref={ref}
       {...otherProps}

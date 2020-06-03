@@ -1,12 +1,13 @@
-import React, { useMemo, useEffect, Fragment } from 'react';
-import { SelectOptionWithLevelT } from '..';
-import { parseFlatOptionValue, NEW_OPTION_VALUE, OptionsChildsT } from '../utils';
-import { Option, EmptyOption, NewOption } from '../Option';
-import bem from '../../../utils/bem';
-
 import './styles.css';
+
+import React, { useEffect, useMemo } from 'react';
+
 import { useCollapseContent } from '../../../hooks/useCollapseContent';
+import bem from '../../../utils/bem';
 import { Button } from '../../Button/Button';
+import { EmptyOption, NewOption, Option } from '../Option';
+import { NEW_OPTION_VALUE, OptionsChildsT, parseFlatOptionValue } from '../utils';
+import { SelectOptionWithLevelT } from '..';
 
 const b = bem('select-options-list');
 
@@ -41,11 +42,10 @@ type Props = {
   isHierarchical?: boolean;
   wpSize: 'xs' | 's' | 'm' | 'l';
 };
-const OptionsGroup: React.FC<
-  {
-    option: SelectOptionWithLevelT;
-  } & Omit<Props, 'isHierarchical'>
-> = ({
+const OptionsGroup: React.FC<{ option: SelectOptionWithLevelT } & Omit<
+  Props,
+  'isHierarchical'
+>> = ({
   parentChildRelations,
   option,
   selectedOption,
@@ -74,7 +74,7 @@ const OptionsGroup: React.FC<
 
   const availableChildOptions: SelectOptionWithLevelT[] = useMemo(
     () => childOptions.filter((o) => availableOptions.includes(o)),
-    [availableOptions]
+    [availableOptions, childOptions],
   );
 
   const {
@@ -83,7 +83,7 @@ const OptionsGroup: React.FC<
     isOpened: childOptionsIsOpened,
   } = useCollapseContent({
     children: (
-      <Fragment>
+      <>
         {availableChildOptions.map((childOption) => (
           <OptionsGroup
             key={`group:${childOption.value}`}
@@ -103,7 +103,7 @@ const OptionsGroup: React.FC<
             wpSize={wpSize}
           />
         ))}
-      </Fragment>
+      </>
     ),
     defaultOpen: isIntermediate || expandAll || level === 0,
   });
@@ -112,7 +112,7 @@ const OptionsGroup: React.FC<
     if (expandAll && !childOptionsIsOpened) {
       onCollapseClick();
     }
-  }, [expandAll]);
+  }, [childOptionsIsOpened, expandAll, onCollapseClick]);
 
   const toggleChildOptions = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -133,6 +133,7 @@ const OptionsGroup: React.FC<
         onSelect={handleOptionSelect}
         wpSize={wpSize}
       >
+        {/* eslint-disable-next-line no-nested-ternary */}
         {isCreatable && originalValue === NEW_OPTION_VALUE ? (
           <NewOption placeholder={newValueText}>{label}</NewOption>
         ) : formatLabel ? (
@@ -162,11 +163,11 @@ export const OptionsList: React.FC<Props> = (props) => {
   const renderHierachicalList = () => {
     const rootOptions = availableOptions.filter((o) => o.parentValue === null);
     return (
-      <Fragment>
+      <>
         {rootOptions.map((option) => (
           <OptionsGroup key={`group:${option.value}`} option={option} {...props} />
         ))}
-      </Fragment>
+      </>
     );
   };
 
@@ -183,7 +184,7 @@ export const OptionsList: React.FC<Props> = (props) => {
     } = props;
 
     return (
-      <Fragment>
+      <>
         {availableOptions.map((option) => {
           const isSelected = option.selectionState === 'selected';
           const isIntermediate = option.selectionState === 'part';
@@ -205,6 +206,7 @@ export const OptionsList: React.FC<Props> = (props) => {
               onSelect={handleOptionSelect}
               wpSize={wpSize}
             >
+              {/* eslint-disable-next-line no-nested-ternary */}
               {isCreatable && originalValue === NEW_OPTION_VALUE ? (
                 <NewOption placeholder={newValueText}>{option.label}</NewOption>
               ) : formatLabel ? (
@@ -215,15 +217,15 @@ export const OptionsList: React.FC<Props> = (props) => {
             </Option>
           );
         })}
-      </Fragment>
+      </>
     );
   };
 
   const options = (
-    <Fragment>
+    <>
       {!availableOptions.length && <EmptyOption>Нет подходящих вариантов</EmptyOption>}
       {props.isHierarchical ? renderHierachicalList() : renderFlatList()}
-    </Fragment>
+    </>
   );
 
   return options;

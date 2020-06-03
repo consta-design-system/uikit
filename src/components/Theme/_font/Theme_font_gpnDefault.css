@@ -2,6 +2,5 @@
   --font-primary: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen', 'Ubuntu',
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   --font-mono: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-
   font-family: var(--font-primary);
 }

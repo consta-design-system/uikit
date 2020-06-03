@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import { Avatar, IAvatar, cnAvatar, getInitialsForName, getColorIndexForName } from './Avatar';
+import { Avatar, cnAvatar, getColorIndexForName, getInitialsForName, IAvatar } from './Avatar';
 
 const testId = 'avatar';
 const maxColorIndex = 17;
@@ -56,7 +56,11 @@ describe('Компонент Avatar', () => {
       });
 
       it(`должен рендериться как функциональный компонент`, () => {
-        const Component = ({ children, innerRef, ...otherProps }) => (
+        const Component: React.FC<{ innerRef?: React.Ref<HTMLElement> }> = ({
+          children,
+          innerRef,
+          ...otherProps
+        }) => (
           <span {...otherProps} ref={innerRef}>
             {children}
           </span>
@@ -154,7 +158,7 @@ describe('Компонент Avatar', () => {
           'Ethan Jacob',
           'Benjamin Elijah Lucas',
         ];
-        const colorIndexes = names.reduce((acc, name) => {
+        const colorIndexes: { [value: string]: number } = names.reduce((acc, name) => {
           return { ...acc, [name]: getColorIndexForName(name, maxColorIndex) };
         }, {});
 

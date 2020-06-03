@@ -1,6 +1,7 @@
 import './ProgressSpin.css';
 
 import React, { useMemo } from 'react';
+
 import { cn } from '../../utils/bem';
 
 export type ProgressSpinPropSize = 'm' | 's';
@@ -12,7 +13,7 @@ export type ProgressSpinProps = {
   animation?: boolean;
 };
 export type IProgressSpin = ProgressSpinProps &
-  (Omit<React.HTMLAttributes<SVGElement>, keyof ProgressSpinProps>);
+  Omit<React.HTMLAttributes<SVGElement>, keyof ProgressSpinProps>;
 
 export const cnProgressSpin = cn('ProgressSpin');
 
@@ -37,7 +38,7 @@ export function ProgressSpin(props: IProgressSpin): React.ReactElement {
   const { size = 'm', progress = 0, animation, innerRef, className, ...otherProps } = props;
   const [sizeOfPixels, strokeWidth, radius, strokeDasharray] = useMemo(
     () => getSvgParamsBySize(size),
-    [size]
+    [size],
   );
 
   const strokeDashoffset = strokeDasharray - (strokeDasharray * progress) / 100;

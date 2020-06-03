@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
+import { storiesOf } from '@storybook/react';
 
-import { Select, MultiSelect, CreatableSelect } from './';
+import { CreatableSelect, MultiSelect, Select } from '.';
 
 type RenderProps<T> = {
   value?: T;
@@ -26,9 +26,7 @@ function ValueKeeper<T>({ render, onChange, onBlur }: ValueKeeperProps<T>) {
 
   const handleBlur = () => onBlur && onBlur();
 
-  return (
-    <React.Fragment>{render({ value, onChange: handleChange, onBlur: handleBlur })}</React.Fragment>
-  );
+  return <>{render({ value, onChange: handleChange, onBlur: handleBlur })}</>;
 }
 
 const BackgroundDecorator = (story: () => React.ReactNode) => (
@@ -113,7 +111,7 @@ storiesOf('Select', module)
             onClearValue={() => {
               onChange(undefined);
             }}
-            onNewOptionCreate={value => {
+            onNewOptionCreate={(value) => {
               action('onNewOptionCreate')(value);
             }}
             newValueText={newValueText}

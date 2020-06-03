@@ -1,25 +1,32 @@
 import './FullExample.css';
 
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
+
+import { IconChat } from '../../../../../icons/IconChat/IconChat';
+import { IconRing } from '../../../../../icons/IconRing/IconRing';
+import { cn } from '../../../../../utils/bem';
 import { Text } from '../../../../Text/Text';
-import { Header } from '../../../Header';
 import { HeaderButton } from '../../../Button/Header-Button';
+import { Header } from '../../../Header';
 import { HeaderLogin } from '../../../Login/Header-Login';
 import { HeaderLogo } from '../../../Logo/Header-Logo';
 import { HeaderMenu } from '../../../Menu/Header-Menu';
-import { HeaderSearchBar } from '../../../SearchBar/Header-SearchBar';
 import { HeaderModule } from '../../../Module/Header-Module';
-import { IconRing } from '../../../../../icons/IconRing/IconRing';
-import { IconChat } from '../../../../../icons/IconChat/IconChat';
-import { cn } from '../../../../../utils/bem';
+import {
+  HeaderSearchBar,
+  SearchBarPropOnChange,
+  SearchBarPropOnSearch,
+} from '../../../SearchBar/Header-SearchBar';
 
 const cnExample = cn('FullExample');
 
 export function FullExample() {
   const [value, setValue] = useState<string | null>(null);
   const [isLogged, setIsLogged] = useState<boolean>(false);
-  const handleChange = ({ value }) => setValue(value);
-  const handleSearch = ({ value }) => alert(`Произведен поиск, запрос - ${value} `);
+  const handleChange: SearchBarPropOnChange = ({ value }) => setValue(value);
+  // eslint-disable-next-line no-alert
+  const handleSearch: SearchBarPropOnSearch = ({ value }) =>
+    alert(`Произведен поиск, запрос - ${value} `);
   const handleLogin = () => setIsLogged(!isLogged);
 
   const menuItems = [
@@ -42,7 +49,7 @@ export function FullExample() {
     <Header
       className={cnExample()}
       leftSide={
-        <Fragment>
+        <>
           <HeaderModule>
             <HeaderLogo>
               <Text as="p" size="l" weight="bold">
@@ -62,10 +69,10 @@ export function FullExample() {
           <HeaderModule indent="l">
             <HeaderMenu items={menuItems} />
           </HeaderModule>
-        </Fragment>
+        </>
       }
       rightSide={
-        <Fragment>
+        <>
           <HeaderModule indent="s">
             <HeaderButton iconLeft={IconChat} />
           </HeaderModule>
@@ -83,7 +90,7 @@ export function FullExample() {
               className={cnExample('Login', { isLogged })}
             />
           </HeaderModule>
-        </Fragment>
+        </>
       }
     />
   );

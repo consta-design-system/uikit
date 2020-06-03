@@ -1,14 +1,16 @@
 import './ChoiceGroup.css';
 
 import React from 'react';
-import { cn } from '../../utils/bem';
+
 import { IIcon } from '../../icons/Icon/Icon';
+import { cn } from '../../utils/bem';
 import {
   BaseCheckGroupField,
-  IBaseCheckGroupField,
   BaseCheckGroupFieldPropGetAdditionalPropsForItem,
   BaseCheckGroupFieldPropGetItemLabel,
+  IBaseCheckGroupField,
 } from '../BaseCheckGroupField/BaseCheckGroupField';
+
 import { ChoiceGroupItem } from './Item/ChoiceGroup__item';
 
 export type ChoiceGroupPropSize = 'xs' | 's' | 'm' | 'l';

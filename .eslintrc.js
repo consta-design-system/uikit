@@ -54,18 +54,6 @@ module.exports = {
     'react/state-in-constructor': 'off',
     'react/static-property-placement': 'off',
     'react/require-extension': 'off',
-    'react/jsx-wrap-multilines': [
-      'error',
-      {
-        declaration: 'parens-new-line',
-        assignment: 'parens-new-line',
-        return: 'parens-new-line',
-        arrow: 'parens-new-line',
-        condition: 'parens-new-line',
-        logical: 'parens-new-line',
-        prop: 'parens-new-line',
-      },
-    ],
     'sort-imports': 'off',
     'import/named': 'off',
     'import/order': 'off',
@@ -89,6 +77,7 @@ module.exports = {
       {
         // https://github.com/lydell/eslint-plugin-simple-import-sort/blob/master/examples/.eslintrc.js#L71
         groups: [
+          ['^.+\\.s?css$'],
           [
             '^(assert|buffer|child_process|cluster|console|constants|crypto|dgram|dns|domain|events|fs|http|https|module|net|os|path|punycode|querystring|readline|repl|stream|string_decoder|sys|timers|tls|tty|url|util|vm|zlib|freelist|v8|process|async_hooks|http2|perf_hooks)(/.*|$)',
           ],
@@ -96,8 +85,33 @@ module.exports = {
           ['^\\u0000'],
           ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
           ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
-          ['^.+\\.s?css$'],
         ],
+      },
+    ],
+    'import/no-cycle': 'off',
+    'no-unused-vars': 'error',
+    'no-restricted-syntax': 'off',
+    'consistent-return': 'off',
+    'no-unused-expressions': 'off',
+    'react/no-array-index-key': 'off',
+    'no-shadow': 'off',
+    'no-plusplus': 'off',
+    'react-hooks/exhaustive-deps': 'off',
+    'default-case': 'off',
+    'jsx-a11y/label-has-associated-control': [
+      'error',
+      {
+        required: {
+          some: ['nesting', 'id'],
+        },
+      },
+    ],
+    'jsx-a11y/label-has-for': [
+      'error',
+      {
+        required: {
+          some: ['nesting', 'id'],
+        },
       },
     ],
   },

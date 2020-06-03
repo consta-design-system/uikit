@@ -1,11 +1,11 @@
 .User {
   display: inline-flex;
-  border-radius: 99em;
-  border: 0;
-  text-decoration: none;
-  text-align: left;
-  transition: background-color 0.25s ease;
   align-items: center;
+  border: 0;
+  border-radius: 99em;
+  text-align: left;
+  text-decoration: none;
+  transition: background-color 0.25s ease;
 
   &-Block {
     flex: 1;
@@ -16,23 +16,26 @@
   }
 
   &-AvatarWrapper {
-    padding: var(--space-2xs);
-    box-sizing: content-box;
-    border-radius: 50%;
-    margin-right: var(--indent);
     flex: none;
+    box-sizing: content-box;
+    margin-right: var(--indent);
+    padding: var(--space-2xs);
+    border-radius: 50%;
 
     &_status {
       &_available {
         box-shadow: inset 0 0 0 var(--space-3xs) var(--color-bg-success);
       }
+
       &_remote {
         box-shadow: inset 0 0 0 var(--space-3xs) var(--color-bg-warning);
       }
+
       &_out {
         box-shadow: inset 0 0 0 var(--space-3xs) var(--color-bg-alert);
       }
     }
+
     &:last-child {
       margin-right: 0;
     }
@@ -46,6 +49,7 @@
         background-color: var(--color-control-bg-clear-hover);
       }
     }
+
     &_ghost {
       background-color: var(--color-control-bg-ghost);
 
@@ -57,8 +61,8 @@
 
   &-Name,
   &-Info {
-    overflow: hidden;
     display: -webkit-box;
+    overflow: hidden;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
   }
@@ -66,6 +70,7 @@
   &-Name {
     max-width: 20ch;
   }
+
   &-Info {
     max-width: 28ch;
   }
@@ -76,17 +81,21 @@
       --indent: var(--space-xs);
       --icon-indent: var(--space-m);
     }
+
     &_m {
       --indent-r: var(--space-m);
       --indent: var(--space-s);
       --icon-indent: var(--space-l);
+
       .user__name {
         margin-bottom: var(--space-3xs);
       }
     }
+
     &_s:not(.user_with-arrow) {
       --indent-r: var(--space-m);
     }
+
     &_m:not(.user_with-arrow) {
       --indent-r: var(--space-l);
     }

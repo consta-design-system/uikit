@@ -1,3 +1,5 @@
+import './styles.css';
+
 import React, {
   memo,
   useCallback,
@@ -6,37 +8,35 @@ import React, {
   useMemo,
   useRef,
   useState,
-  Fragment,
 } from 'react';
 import orderBy from 'lodash/orderBy';
 
-import bem from '../../utils/bem';
 import { useClickOutside } from '../../hooks/useClickOutside';
 import { usePrevious } from '../../hooks/usePrevious';
-
-import Input, { InputStub } from '../Input';
-import { Button } from '../Button/Button';
-import { Popover, Directions } from '../Popover';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
+import bem from '../../utils/bem';
+import { Button } from '../Button/Button';
+import Input, { InputStub } from '../Input';
+import { Directions, Popover } from '../Popover';
+
+import { AutoResizeInput } from './AutoResizeInput';
+import { IconClose, MultiValueOption } from './MultiValueOption';
+import { OptionsList } from './OptionsList';
 import {
   checkValue,
+  createFlatOptionValue,
+  filterOptions as filterOptionsByLabel,
   fireCloseEvent,
+  getFlatOptionsList,
+  getOptionsRelations,
   getSelectedOptions,
+  NEW_OPTION_VALUE,
+  parseFlatOptionValue,
   scrollIntoOption,
   SELECT_CLOSE_EVENT,
   SelectCloseEventDetail,
-  filterOptions as filterOptionsByLabel,
-  createFlatOptionValue,
-  parseFlatOptionValue,
-  getFlatOptionsList,
-  NEW_OPTION_VALUE,
-  getOptionsRelations,
   toggleValue,
 } from './utils';
-import { AutoResizeInput } from './AutoResizeInput';
-import { MultiValueOption, IconClose } from './MultiValueOption';
-import { OptionsList } from './OptionsList';
-import './styles.css';
 
 export type SelectOptionT = {
   value: string;
@@ -69,7 +69,7 @@ type CommonProps = {
   formatLabel?: (option: SelectOptionWithLevelT) => React.ReactNode;
   filterOptions?: (
     options: SelectOptionWithLevelT[],
-    inputValue: string
+    inputValue: string,
   ) => SelectOptionWithLevelT[];
   onBlur?: (event?: React.FocusEvent<HTMLElement>) => void;
   onFocus?: (event?: React.FocusEvent<HTMLElement>) => void;
@@ -135,7 +135,7 @@ type BaseSelectProps = CommonProps &
 const b = bem('Select');
 
 const IconArrow = ({ className }: { className?: string }) => (
-  <IconSelect size={'s'} className={className} />
+  <IconSelect size="s" className={className} />
 );
 
 const SELECT_MENU_DIRECTIONS: Directions[] = ['bottom-center', 'top-center'];
@@ -172,12 +172,12 @@ const BaseSelect: React.FC<BaseSelectProps> = (props) => {
     return props.isHierarchical
       ? props.value && createFlatOptionValue(props.value)
       : props.value && createFlatOptionValue({ value: props.value, level: 0 });
-  }, [props.value]);
+  }, [props.isHierarchical, props.isMulti, props.value]);
 
   const allOptions: SelectOptionWithLevelT[] = useMemo(() => {
     const { list } = getFlatOptionsList(startOptions, leveledValue);
     return list;
-  }, [JSON.stringify(startOptions), leveledValue]);
+  }, [leveledValue, startOptions]);
 
   const options = useMemo(() => {
     if (!props.excludedValues || !props.excludedValues.length) {
@@ -196,17 +196,17 @@ const BaseSelect: React.FC<BaseSelectProps> = (props) => {
             !excludedLeveledValues.includes(o.value) ||
             (Array.isArray(leveledValue)
               ? leveledValue.includes(o.value)
-              : leveledValue === o.value)
+              : leveledValue === o.value),
         )
       : allOptions;
-  }, [JSON.stringify(props.excludedValues), allOptions]);
+  }, [allOptions, leveledValue, props.excludedValues, props.isHierarchical]);
 
   const prevOptions = usePrevious(options);
 
   const selectedOption = leveledValue ? getSelectedOptions(options, leveledValue) : null;
   const parentChildRelations = useMemo(() => getOptionsRelations(options, selectedOption), [
-    props.value,
     options,
+    selectedOption,
   ]);
   const rootRef = useRef<HTMLDivElement>(null);
   const updateScrollBuffer = useRef(false);
@@ -220,7 +220,7 @@ const BaseSelect: React.FC<BaseSelectProps> = (props) => {
   const inputRef = ref || controlRef;
 
   const [inputValue, setInputValue] = useState(
-    selectedOption && !Array.isArray(selectedOption) ? selectedOption.label : ''
+    selectedOption && !Array.isArray(selectedOption) ? selectedOption.label : '',
   );
   const [availableOptions, setAvailableOptions] = useState(options);
   const [focusedOption, setFocusedOption] = useState<string>();
@@ -237,7 +237,7 @@ const BaseSelect: React.FC<BaseSelectProps> = (props) => {
           view: window,
           bubbles: true,
           cancelable: true,
-        })
+        }),
       );
     }
   }, [rootRef]);
@@ -266,7 +266,7 @@ const BaseSelect: React.FC<BaseSelectProps> = (props) => {
 
     const addParentOptions = (
       optionsToFindParents: SelectOptionWithLevelT[],
-      foundParents: SelectOptionWithLevelT[] = optionsToFindParents
+      foundParents: SelectOptionWithLevelT[] = optionsToFindParents,
     ): SelectOptionWithLevelT[] => {
       if (!optionsToFindParents.length) {
         return [];
@@ -288,11 +288,11 @@ const BaseSelect: React.FC<BaseSelectProps> = (props) => {
     const filteredOptions = filterOptions(options, trimmedInput);
     const filteredValuesWithParents = addParentOptions(filteredOptions).map((o) => o.value);
     const filteredOptionsWithParents = options.filter((o) =>
-      filteredValuesWithParents.includes(o.value)
+      filteredValuesWithParents.includes(o.value),
     );
 
     const isIncludedExactLabel = filteredOptions.some(
-      (item) => item.label.toLowerCase() === trimmedInput.toLowerCase()
+      (item) => item.label.toLowerCase() === trimmedInput.toLowerCase(),
     );
 
     if (props.isCreatable && !isMulti && inputValue && !isIncludedExactLabel) {
@@ -365,7 +365,7 @@ const BaseSelect: React.FC<BaseSelectProps> = (props) => {
         }
       }
     },
-    [leveledValue, parentChildRelations]
+    [closeMenu, leveledValue, options, parentChildRelations, props, selectedOption],
   );
 
   const handleLabelClick = (e: React.MouseEvent) => {
@@ -452,7 +452,7 @@ const BaseSelect: React.FC<BaseSelectProps> = (props) => {
   const handleMouseOver = (e: React.MouseEvent) => {
     if (!blockMouseOverRef.current) {
       const target = e.target as HTMLElement;
-      const value = target.dataset.value;
+      const { value } = target.dataset;
 
       if (value) {
         setFocusedOption(value);
@@ -471,7 +471,7 @@ const BaseSelect: React.FC<BaseSelectProps> = (props) => {
 
       setSelectValue(value);
     },
-    [isMulti, updateValuesScrollBuffer, setSelectValue]
+    [isMulti, setSelectValue, propagateEvent],
   );
 
   const handleKeyDown = (e: KeyboardEvent) => {
@@ -516,7 +516,6 @@ const BaseSelect: React.FC<BaseSelectProps> = (props) => {
     // Мешаем каретке возвращаться в начало или конец при выборе стрелками
     if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
       e.preventDefault();
-      return;
     }
   };
 
@@ -547,8 +546,10 @@ const BaseSelect: React.FC<BaseSelectProps> = (props) => {
     } else if (!selectedOption || prevOptions !== options) {
       setInputValue('');
     }
-  }, [selectedOption, isMulti, options]);
+  }, [selectedOption, isMulti, options, inputValue, prevOptions]);
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // @ts-ignore
   useEffect(() => {
     const root = rootRef.current;
 
@@ -559,7 +560,16 @@ const BaseSelect: React.FC<BaseSelectProps> = (props) => {
         root.removeEventListener('keydown', handleKeyDown);
       };
     }
-  }, [showMenu, rootRef, focusedOption, availableOptions, selectedOption, isDisabled, isMulti]);
+  }, [
+    showMenu,
+    rootRef,
+    focusedOption,
+    availableOptions,
+    selectedOption,
+    isDisabled,
+    isMulti,
+    handleKeyDown,
+  ]);
 
   useEffect(() => {
     if (!showMenu && focusedOption) {
@@ -600,8 +610,10 @@ const BaseSelect: React.FC<BaseSelectProps> = (props) => {
     return () => {
       document.removeEventListener('scroll', handleScroll, true);
     };
-  }, [showMenu, menuRef, valuesRef]);
+  }, [showMenu, menuRef, valuesRef, handleScroll]);
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // @ts-ignore
   useEffect(() => {
     if (showMenu) {
       if (preserveInputValueBuffer.current) {
@@ -634,7 +646,7 @@ const BaseSelect: React.FC<BaseSelectProps> = (props) => {
     if (!showMenu && !isMulti) {
       setInputValue(selectedOption && !Array.isArray(selectedOption) ? selectedOption.label : '');
     }
-  }, [showMenu, isMulti]);
+  }, [showMenu, isMulti, handleEscape, handleCloseEvent, selectedOption, options]);
 
   useLayoutEffect(() => {
     if (autoFocus && inputRef.current) {
@@ -644,11 +656,11 @@ const BaseSelect: React.FC<BaseSelectProps> = (props) => {
     if (autoOpen) {
       setShowMenu(true);
     }
-  }, []);
+  }, [autoFocus, autoOpen, inputRef, setShowMenu]);
 
   const hasValue = checkValue(value);
 
-  //@typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const popupPositionDeps = ([availableOptions.length] as any[]).concat(isMulti ? [value] : []);
 
   return (
@@ -662,6 +674,7 @@ const BaseSelect: React.FC<BaseSelectProps> = (props) => {
       })}
       ref={rootRef}
     >
+      {/* eslint-disable-next-line jsx-a11y/label-has-for,jsx-a11y/mouse-events-have-key-events,jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
       <label
         className={b('label')}
         onClick={handleLabelClick}
@@ -729,13 +742,14 @@ const BaseSelect: React.FC<BaseSelectProps> = (props) => {
           />
         )}
 
+        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
         <div className={b('icon', { type: 'arrow' })} onClick={handleArrowClick}>
           <div className={b('icon-wrapper')}>
             <IconArrow className={b('arrow', { opened: showMenu && !isDisabled })} />
           </div>
         </div>
         {!isDisabled && hasValue && (
-          <Fragment>
+          <>
             <span className={b('delimiter')} />
             <Button
               size="xs"
@@ -746,7 +760,7 @@ const BaseSelect: React.FC<BaseSelectProps> = (props) => {
               onClick={handleDeleteClick}
               iconLeft={IconClose}
             />
-          </Fragment>
+          </>
         )}
         <Popover
           className={b('menu')}

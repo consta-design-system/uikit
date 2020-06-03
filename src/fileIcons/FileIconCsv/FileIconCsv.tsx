@@ -1,5 +1,6 @@
 import { BaseFileIconHoc } from '../BaseFileIconHoc/BaseFileIconHoc';
 import { FileIcon } from '../FileIcon/FileIcon';
+
 import FileIconCsvSizeM from './FileIconCsv_size_m';
 import FileIconCsvSizeS from './FileIconCsv_size_s';
 

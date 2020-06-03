@@ -1,5 +1,6 @@
 import { BaseIconHoc } from '../BaseIconHoc/BaseIconHoc';
 import { Icon } from '../Icon/Icon';
+
 import IconRingSizeM from './IconRing_size_m';
 import IconRingSizeS from './IconRing_size_s';
 import IconRingSizeXs from './IconRing_size_xs';

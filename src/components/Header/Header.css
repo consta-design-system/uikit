@@ -1,18 +1,17 @@
 .Header {
   --header-height: 60px;
-
   display: flex;
+  box-sizing: border-box;
   width: 100%;
   height: var(--header-height);
-  box-sizing: border-box;
   padding: 0 var(--space-xl);
   border-bottom: 1px solid var(--color-bg-border);
 
   &-LeftSide,
   &-RightSide {
     display: flex;
-    align-items: center;
     flex: 1 1 auto;
+    align-items: center;
   }
 
   &-RightSide {

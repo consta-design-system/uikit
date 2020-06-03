@@ -1,22 +1,31 @@
 import '../../Theme/_color/Theme_color_gpnDark.css';
 import './SnackBar-Item.css';
 
-import React, { useState, useEffect } from 'react';
-import { cnTheme } from '../../Theme/Theme';
+import React, { useEffect, useState } from 'react';
+
 import { IconClose } from '../../../icons/IconClose/IconClose';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
+import { cnTheme } from '../../Theme/Theme';
 import { SnackBarActionButton } from '../ActionButton/SnackBar-ActionButton';
-import { SnackBarTimer } from '../Timer/SnackBar-Timer';
-import { cnSnackBar, cnSnackBarItem } from '../SnackBar';
-import { Item } from '../SnackBar';
-import { SnackBarTimerPropOnMount } from '../Timer/SnackBar-Timer';
+import { cnSnackBar, cnSnackBarItem, Item } from '../SnackBar';
+import { SnackBarTimer, SnackBarTimerPropOnMount } from '../Timer/SnackBar-Timer';
 
 export type SnackBarItemProps = {
   item: Item;
 };
 
 const defaultInitialTimerTime = 3000;
+
+const getAutoCloseTime = (autoClose: boolean | number | undefined): number | false => {
+  if (autoClose) {
+    if (typeof autoClose === 'number') {
+      return autoClose;
+    }
+    return defaultInitialTimerTime;
+  }
+  return false;
+};
 
 export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
   const { item } = props;
@@ -31,11 +40,7 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
     setTimerFunctions(timerFunctions);
   const handleMouseEnter = () => setHover(true);
   const handleMouseLeave = () => setHover(false);
-  const autoCloseTime = autoClose
-    ? typeof autoClose === 'number'
-      ? autoClose
-      : defaultInitialTimerTime
-    : false;
+  const autoCloseTime = getAutoCloseTime(autoClose);
 
   useEffect(() => {
     if (!timeIsOver) {
@@ -45,7 +50,7 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
         timerFunctions && timerFunctions.start();
       }
     }
-  }, [hover]);
+  }, [hover, timeIsOver, timerFunctions]);
 
   const handleTimeIsOver = () => {
     setTimeIsOver(true);

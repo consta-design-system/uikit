@@ -1,10 +1,11 @@
 import React from 'react';
-import { withKnobs, select } from '@storybook/addon-knobs';
+import { select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
+
 import { IconAdd } from '../../IconAdd/IconAdd';
 import { IconAlert } from '../../IconAlert/IconAlert';
-import { IconAlignJustify } from '../../IconAlignJustify/IconAlignJustify';
 import { IconAlignCenter } from '../../IconAlignCenter/IconAlignCenter';
+import { IconAlignJustify } from '../../IconAlignJustify/IconAlignJustify';
 import { IconAlignLeft } from '../../IconAlignLeft/IconAlignLeft';
 import { IconAlignRight } from '../../IconAlignRight/IconAlignRight';
 import { IconArrowDown } from '../../IconArrowDown/IconArrowDown';
@@ -48,10 +49,10 @@ import { IconFilter } from '../../IconFilter/IconFilter';
 import { IconForward } from '../../IconForward/IconForward';
 import { IconFunnel } from '../../IconFunnel/IconFunnel';
 import { IconGas } from '../../IconGas/IconGas';
-import { IconItalic } from '../../IconItalic/IconItalic';
 import { IconHamburger } from '../../IconHamburger/IconHamburger';
-import { IconLeaf } from '../../IconLeaf/IconLeaf';
+import { IconItalic } from '../../IconItalic/IconItalic';
 import { IconKebab } from '../../IconKebab/IconKebab';
+import { IconLeaf } from '../../IconLeaf/IconLeaf';
 import { IconLink } from '../../IconLink/IconLink';
 import { IconList } from '../../IconList/IconList';
 import { IconListNumbered } from '../../IconListNumbered/IconListNumbered';
@@ -89,8 +90,8 @@ import { IconTop } from '../../IconTop/IconTop';
 import { IconTrash } from '../../IconTrash/IconTrash';
 import { IconType } from '../../IconType/IconType';
 import { IconUnderline } from '../../IconUnderline/IconUnderline';
-import { IconWorld } from '../../IconWorld/IconWorld';
 import { IconUser } from '../../IconUser/IconUser';
+import { IconWorld } from '../../IconWorld/IconWorld';
 
 import { IconsItem } from './Item/Icons-Item';
 
@@ -99,14 +100,14 @@ const defaultKnobs = () => ({
   view: select(
     'view',
     ['alert', 'brand', 'ghost', 'link', 'primary', 'secondary', 'success', 'warning'],
-    'primary'
+    'primary',
   ),
 });
 
 storiesOf('Icons', module)
   .addDecorator(withKnobs)
   .add('IconsNew', () => (
-    <div className={'tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full'}>
+    <div className="tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full">
       <IconsItem name="IconAdd" icon={IconAdd} {...defaultKnobs()} />
       <IconsItem name="IconAlert" icon={IconAlert} {...defaultKnobs()} />
       <IconsItem name="IconAlignJustify" icon={IconAlignJustify} {...defaultKnobs()} />
