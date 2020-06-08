@@ -1,10 +1,10 @@
 import React from 'react';
 import { withKnobs, select } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import { IconAdd } from '../../IconAdd/IconAdd';
+import { IconAlignCenter } from '../../IconAlignCenter/IconAlignCenter';
 import { IconAlert } from '../../IconAlert/IconAlert';
 import { IconAlignJustify } from '../../IconAlignJustify/IconAlignJustify';
-import { IconAlignCenter } from '../../IconAlignCenter/IconAlignCenter';
+import { IconAdd } from '../../IconAdd/IconAdd';
 import { IconAlignLeft } from '../../IconAlignLeft/IconAlignLeft';
 import { IconAlignRight } from '../../IconAlignRight/IconAlignRight';
 import { IconArrowDown } from '../../IconArrowDown/IconArrowDown';
@@ -48,13 +48,13 @@ import { IconFilter } from '../../IconFilter/IconFilter';
 import { IconForward } from '../../IconForward/IconForward';
 import { IconFunnel } from '../../IconFunnel/IconFunnel';
 import { IconGas } from '../../IconGas/IconGas';
-import { IconItalic } from '../../IconItalic/IconItalic';
 import { IconHamburger } from '../../IconHamburger/IconHamburger';
-import { IconLeaf } from '../../IconLeaf/IconLeaf';
 import { IconKebab } from '../../IconKebab/IconKebab';
+import { IconItalic } from '../../IconItalic/IconItalic';
+import { IconLeaf } from '../../IconLeaf/IconLeaf';
 import { IconLink } from '../../IconLink/IconLink';
-import { IconList } from '../../IconList/IconList';
 import { IconListNumbered } from '../../IconListNumbered/IconListNumbered';
+import { IconList } from '../../IconList/IconList';
 import { IconLock } from '../../IconLock/IconLock';
 import { IconMail } from '../../IconMail/IconMail';
 import { IconMeatball } from '../../IconMeatball/IconMeatball';
@@ -89,8 +89,8 @@ import { IconTop } from '../../IconTop/IconTop';
 import { IconTrash } from '../../IconTrash/IconTrash';
 import { IconType } from '../../IconType/IconType';
 import { IconUnderline } from '../../IconUnderline/IconUnderline';
-import { IconWorld } from '../../IconWorld/IconWorld';
 import { IconUser } from '../../IconUser/IconUser';
+import { IconWorld } from '../../IconWorld/IconWorld';
 
 import { IconsItem } from './Item/Icons-Item';
 
@@ -105,12 +105,12 @@ const defaultKnobs = () => ({
 
 storiesOf('Icons', module)
   .addDecorator(withKnobs)
-  .add('IconsNew', () => (
+  .add('Icons', () => (
     <div className={'tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full'}>
-      <IconsItem name="IconAdd" icon={IconAdd} {...defaultKnobs()} />
+      <IconsItem name="IconAlignCenter" icon={IconAlignCenter} {...defaultKnobs()} />
       <IconsItem name="IconAlert" icon={IconAlert} {...defaultKnobs()} />
       <IconsItem name="IconAlignJustify" icon={IconAlignJustify} {...defaultKnobs()} />
-      <IconsItem name="IconAlignCenter" icon={IconAlignCenter} {...defaultKnobs()} />
+      <IconsItem name="IconAdd" icon={IconAdd} {...defaultKnobs()} />
       <IconsItem name="IconAlignLeft" icon={IconAlignLeft} {...defaultKnobs()} />
       <IconsItem name="IconAlignRight" icon={IconAlignRight} {...defaultKnobs()} />
       <IconsItem name="IconArrowDown" icon={IconArrowDown} {...defaultKnobs()} />
@@ -154,13 +154,13 @@ storiesOf('Icons', module)
       <IconsItem name="IconForward" icon={IconForward} {...defaultKnobs()} />
       <IconsItem name="IconFunnel" icon={IconFunnel} {...defaultKnobs()} />
       <IconsItem name="IconGas" icon={IconGas} {...defaultKnobs()} />
-      <IconsItem name="IconItalic" icon={IconItalic} {...defaultKnobs()} />
       <IconsItem name="IconHamburger" icon={IconHamburger} {...defaultKnobs()} />
-      <IconsItem name="IconLeaf" icon={IconLeaf} {...defaultKnobs()} />
       <IconsItem name="IconKebab" icon={IconKebab} {...defaultKnobs()} />
+      <IconsItem name="IconItalic" icon={IconItalic} {...defaultKnobs()} />
+      <IconsItem name="IconLeaf" icon={IconLeaf} {...defaultKnobs()} />
       <IconsItem name="IconLink" icon={IconLink} {...defaultKnobs()} />
-      <IconsItem name="IconList" icon={IconList} {...defaultKnobs()} />
       <IconsItem name="IconListNumbered" icon={IconListNumbered} {...defaultKnobs()} />
+      <IconsItem name="IconList" icon={IconList} {...defaultKnobs()} />
       <IconsItem name="IconLock" icon={IconLock} {...defaultKnobs()} />
       <IconsItem name="IconMail" icon={IconMail} {...defaultKnobs()} />
       <IconsItem name="IconMeatball" icon={IconMeatball} {...defaultKnobs()} />
@@ -195,7 +195,7 @@ storiesOf('Icons', module)
       <IconsItem name="IconTrash" icon={IconTrash} {...defaultKnobs()} />
       <IconsItem name="IconType" icon={IconType} {...defaultKnobs()} />
       <IconsItem name="IconUnderline" icon={IconUnderline} {...defaultKnobs()} />
-      <IconsItem name="IconWorld" icon={IconWorld} {...defaultKnobs()} />
       <IconsItem name="IconUser" icon={IconUser} {...defaultKnobs()} />
+      <IconsItem name="IconWorld" icon={IconWorld} {...defaultKnobs()} />
     </div>
   ));
