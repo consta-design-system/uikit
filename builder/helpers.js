@@ -75,7 +75,7 @@ const createIconStories = async (svgComponents, src) => {
   });
 
   const jsCode = template.replace(/#imports#/g, imports).replace(/#items#/g, items);
-  const jsPatch = `${src}/icons/Icon/Icons.stories/Icons.stories.tsx`;
+  const jsPatch = `${src}/icons/Icon/stories/Icons.stories.tsx`;
   await ensureDir(dirname(jsPatch));
   await writeFile(jsPatch, jsCode);
 };
@@ -95,7 +95,7 @@ const createFileIconsStories = async (svgComponents, src) => {
   });
 
   const jsCode = template.replace(/#imports#/g, imports).replace(/#items#/g, items);
-  const jsPatch = `${src}/fileIcons/FileIcon/FileIcons.stories/FileIcons.stories.tsx`;
+  const jsPatch = `${src}/fileIcons/FileIcon/stories/FileIcons.stories.tsx`;
   await ensureDir(dirname(jsPatch));
   await writeFile(jsPatch, jsCode);
 };
@@ -137,8 +137,7 @@ const createComponent = async ({ componentName, pathOutdir, templatePath }) => {
 };
 
 const iconsTransformed = async (ignore, src) => {
-  const svgFiles = await fg([`${src}/icons/**/*.{svg}`], { ignore });
-
+  const svgFiles = await fg([`${src}/icons/**/*.svg`], { ignore });
   const test = /.\/src\/icons\/(.+)\/(.+)_size_(.+).svg/;
   const svgComponents = {};
 
@@ -185,7 +184,7 @@ const iconsTransformed = async (ignore, src) => {
 };
 
 const iconsFileTransformed = async (ignore, src) => {
-  const svgFiles = await fg([`${src}/fileIcons/**/*.{svg}`], { ignore });
+  const svgFiles = await fg([`${src}/fileIcons/**/*.svg`], { ignore });
 
   const test = /.\/src\/fileIcons\/(.+)\/(.+)_size_(.+).svg/;
   const svgComponents = {};
@@ -361,7 +360,7 @@ const generateReExports = (
             components.set(entity.block, new Map(platforms.map((p) => [p, new Map()])));
           }
           if (layerToPlatform[layer]) {
-            for (let platform of layerToPlatform[layer]) {
+            for (const platform of layerToPlatform[layer]) {
               // what we do with elements ?
               if (!entity.elem) {
                 components
@@ -375,13 +374,13 @@ const generateReExports = (
       });
 
     // Generate reExports for components
-    for (let [componentName, platforms] of components) {
+    for (const [componentName, platforms] of components) {
       const blockDir = join(distPath, componentName);
 
       await remove(blockDir); // how to clean ? we need to store blocks somewhere
       await ensureDir(blockDir);
 
-      for (let [platform, entities] of platforms) {
+      for (const [platform, entities] of platforms) {
         const platformDir = platform === 'common' ? blockDir : join(blockDir, platform);
 
         await ensureDir(platformDir);
@@ -396,10 +395,8 @@ const generateReExports = (
         const reExportsES = [];
         const reExportsJS = [];
 
-        // eslint-disable-next-line no-unused-vars
-        // eslint-disable @typescript-eslint/no-unused-vars
-        for (let [_, { filePath }] of entities) {
-          // console.log(a);
+        // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars,@typescript-eslint/no-unused-vars
+        for (const [_, { filePath }] of entities) {
           const exportESMTemplate = getESMExportTemplate({
             filePath: relative(
               join(platformDir, 'index'),

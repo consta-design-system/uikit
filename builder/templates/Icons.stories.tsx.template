@@ -15,7 +15,7 @@ const defaultKnobs = () => ({
 
 storiesOf('Icons', module)
   .addDecorator(withKnobs)
-  .add('IconsNew', () => (
+  .add('Icons', () => (
     <div className={'tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full'}>
      #items#
     </div>
