@@ -106,12 +106,12 @@ const defaultKnobs = () => ({
 
 storiesOf('Icons', module)
   .addDecorator(withKnobs)
-  .add('IconsNew', () => (
+  .add('Icons', () => (
     <div className="tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full">
-      <IconsItem name="IconAdd" icon={IconAdd} {...defaultKnobs()} />
+      <IconsItem name="IconAlignCenter" icon={IconAlignCenter} {...defaultKnobs()} />
       <IconsItem name="IconAlert" icon={IconAlert} {...defaultKnobs()} />
       <IconsItem name="IconAlignJustify" icon={IconAlignJustify} {...defaultKnobs()} />
-      <IconsItem name="IconAlignCenter" icon={IconAlignCenter} {...defaultKnobs()} />
+      <IconsItem name="IconAdd" icon={IconAdd} {...defaultKnobs()} />
       <IconsItem name="IconAlignLeft" icon={IconAlignLeft} {...defaultKnobs()} />
       <IconsItem name="IconAlignRight" icon={IconAlignRight} {...defaultKnobs()} />
       <IconsItem name="IconArrowDown" icon={IconArrowDown} {...defaultKnobs()} />

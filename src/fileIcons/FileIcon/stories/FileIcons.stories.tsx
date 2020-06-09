@@ -39,9 +39,9 @@ storiesOf('FileIcons', module)
       <IconsItem name="FileIconAvi" icon={FileIconAvi} {...defaultKnobs()} />
       <IconsItem name="FileIconCsv" icon={FileIconCsv} {...defaultKnobs()} />
       <IconsItem name="FileIconDoc" icon={FileIconDoc} {...defaultKnobs()} />
-      <IconsItem name="FileIconJpg" icon={FileIconJpg} {...defaultKnobs()} />
       <IconsItem name="FileIconExe" icon={FileIconExe} {...defaultKnobs()} />
       <IconsItem name="FileIconGif" icon={FileIconGif} {...defaultKnobs()} />
+      <IconsItem name="FileIconJpg" icon={FileIconJpg} {...defaultKnobs()} />
       <IconsItem name="FileIconLoading" icon={FileIconLoading} {...defaultKnobs()} />
       <IconsItem name="FileIconMov" icon={FileIconMov} {...defaultKnobs()} />
       <IconsItem name="FileIconMp3" icon={FileIconMp3} {...defaultKnobs()} />

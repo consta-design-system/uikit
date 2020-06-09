@@ -73,7 +73,7 @@ const createIconStories = async (svgComponents, src) => {
   });
 
   const jsCode = template.replace(/#imports#/g, imports).replace(/#items#/g, items);
-  const jsPatch = `${src}/icons/Icon/Icons.stories/Icons.stories.tsx`;
+  const jsPatch = `${src}/icons/Icon/stories/Icons.stories.tsx`;
   await ensureDir(dirname(jsPatch));
   await writeFile(jsPatch, jsCode);
 };
@@ -93,7 +93,7 @@ const createFileIconsStories = async (svgComponents, src) => {
   });
 
   const jsCode = template.replace(/#imports#/g, imports).replace(/#items#/g, items);
-  const jsPatch = `${src}/fileIcons/FileIcon/FileIcons.stories/FileIcons.stories.tsx`;
+  const jsPatch = `${src}/fileIcons/FileIcon/stories/FileIcons.stories.tsx`;
   await ensureDir(dirname(jsPatch));
   await writeFile(jsPatch, jsCode);
 };
@@ -135,8 +135,7 @@ const createComponent = async ({ componentName, pathOutdir, templatePath }) => {
 };
 
 const iconsTransformed = async (ignore, src) => {
-  const svgFiles = await fg([`${src}/icons/**/*.{svg}`], { ignore });
-
+  const svgFiles = await fg([`${src}/icons/**/*.svg`], { ignore });
   const test = /.\/src\/icons\/(.+)\/(.+)_size_(.+).svg/;
   const svgComponents = {};
 
@@ -183,7 +182,7 @@ const iconsTransformed = async (ignore, src) => {
 };
 
 const iconsFileTransformed = async (ignore, src) => {
-  const svgFiles = await fg([`${src}/fileIcons/**/*.{svg}`], { ignore });
+  const svgFiles = await fg([`${src}/fileIcons/**/*.svg`], { ignore });
 
   const test = /.\/src\/fileIcons\/(.+)\/(.+)_size_(.+).svg/;
   const svgComponents = {};
@@ -393,10 +392,8 @@ const generateReExports = (
         const reExportsES = [];
         const reExportsJS = [];
 
-        // eslint-disable-next-line no-unused-vars
-        // eslint-disable @typescript-eslint/no-unused-vars
+        // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars,@typescript-eslint/no-unused-vars
         for (const [_, { filePath }] of entities) {
-          // console.log(a);
           const exportESMTemplate = getESMExportTemplate({
             filePath: relative(
               join(platformDir, 'index'),
