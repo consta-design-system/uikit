@@ -1,6 +1,7 @@
 import './Header-Menu.css';
 
 import React from 'react';
+
 import { cnHeader } from '../Header';
 
 export type ItemT = {
@@ -13,7 +14,6 @@ export type ItemT = {
 
 export type MenuProps = {
   items: ItemT[];
-  className?;
 };
 
 export type IMenu = MenuProps & Omit<React.HTMLAttributes<Element>, keyof MenuProps>;

@@ -1,8 +1,9 @@
+import './styles.css';
+
 import React from 'react';
+
 import bem from '../../../utils/bem';
 import { Text } from '../../Text/Text';
-
-import './styles.css';
 
 const b = bem('color-preview');
 
@@ -28,10 +29,10 @@ const ColorPreview: React.FC<Props> = ({
         className={b(
           'circle',
           { opacity },
-          'pt-icon-plus__icon pt-icon-plus__icon_vertical-align_top pt-icon-plus__icon_indent-r_m decorator decorator_indent-b_l'
+          'pt-icon-plus__icon pt-icon-plus__icon_vertical-align_top pt-icon-plus__icon_indent-r_m decorator decorator_indent-b_l',
         )}
         style={!rgba ? { color: `var(${color})` } : { color: `rgba(var(${color}), 0.5)` }}
-      ></div>
+      />
       <div className="pt-icon-plus__block">
         <Text
           as="h3"

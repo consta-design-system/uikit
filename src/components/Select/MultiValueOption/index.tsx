@@ -1,8 +1,9 @@
+import './styles.css';
+
 import React, { memo } from 'react';
 
 import bem from '../../../utils/bem';
-import { SelectOptionT } from '../';
-import './styles.css';
+import { SelectOptionT } from '..';
 
 type Props = SelectOptionT & {
   onDelete: (value: string) => void;
@@ -12,7 +13,7 @@ type Props = SelectOptionT & {
 const b = bem('multi-value');
 
 export const IconClose = ({ className, size }: { className?: string; size?: 's' | 'xs' | 'm' }) =>
-  size == 's' ? (
+  size === 's' ? (
     <svg
       viewBox="0 0 12 12"
       fill="currentColor"
@@ -41,6 +42,7 @@ const MultiValueComponent: React.FC<Props> = ({ value, label, onDelete, wpSize =
   return (
     <div className={b({ size: wpSize })}>
       <div className={b('label')}>{label}</div>
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
       <div className={b('delete')} onClick={handleDeleteClick}>
         <IconClose className={b('icon')} size="xs" />
       </div>

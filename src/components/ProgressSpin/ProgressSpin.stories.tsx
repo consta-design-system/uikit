@@ -1,9 +1,12 @@
 import * as React from 'react';
-import { withKnobs, select, number, boolean } from '@storybook/addon-knobs';
 import { withDocs } from '@storybook-addons/docs';
+import { boolean, number, select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
+
 import { StoryBookExample } from '../../uiKit/components/StoryBookExample/StoryBookExample';
+
 import { ProgressSpin } from './ProgressSpin';
+import md from './ProgressSpin.md';
 
 function Stories({ size, progress, animation }) {
   return <ProgressSpin size={size} progress={progress} animation={animation} />;
@@ -20,9 +23,9 @@ storiesOf('UI-KIT|/ProgressSpin', module)
   .addDecorator(
     withDocs({
       readme: {
-        content: require('./ProgressSpin.md')['default'],
+        content: md,
       },
-    })
+    }),
   )
   .add('playground', () => <Stories {...defaultKnobs()} />);
 

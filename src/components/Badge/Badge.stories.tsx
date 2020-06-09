@@ -1,10 +1,13 @@
 import * as React from 'react';
-import { withKnobs, text, select, boolean } from '@storybook/addon-knobs';
 import { withDocs } from '@storybook-addons/docs';
+import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
+
 import { IconUser } from '../../icons/IconUser/IconUser';
 import { StoryBookExample } from '../../uiKit/components/StoryBookExample/StoryBookExample';
+
 import { Badge } from './Badge';
+import md from './Badge.md';
 
 function Stories({ label, size, view, status, form, minified, icon }) {
   const Icon = icon ? IconUser : null;
@@ -36,9 +39,9 @@ storiesOf('UI-KIT|/Badge', module)
   .addDecorator(
     withDocs({
       readme: {
-        content: require('./Badge.md')['default'],
+        content: md,
       },
-    })
+    }),
   )
   // .addDecorator(
   //   figmaDecorator({

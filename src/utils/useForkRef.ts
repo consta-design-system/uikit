@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { setRef } from './setRef';
 
 type Ref<T> = React.Ref<T> | undefined;
@@ -13,5 +14,5 @@ export function useForkRef<T>(refs: Ref<T>[]): React.Ref<T> {
         setRef(ref, refValue);
       }
     };
-  }, refs);
+  }, [refs]);
 }

@@ -1,8 +1,9 @@
 import './Header-SearchBar.css';
 
-import React from 'react';
-import { TextField, TextFieldPropValue, TextFieldPropOnChange } from '../../TextField/TextField';
+import React, { FormEventHandler } from 'react';
+
 import { IconSearch } from '../../../icons/IconSearch/IconSearch';
+import { TextField, TextFieldPropOnChange, TextFieldPropValue } from '../../TextField/TextField';
 import { cnHeader } from '../Header';
 
 export type SearchBarPropValue = TextFieldPropValue;
@@ -10,7 +11,7 @@ export type SearchBarPropOnChange = TextFieldPropOnChange;
 export type SearchBarPropOnSearch = (arg: SearchBarOnSearchArguments) => void;
 
 export type SearchBarOnSearchArguments = {
-  e: React.EventHandler<React.MouseEvent>;
+  e: React.FormEvent;
   value: SearchBarPropValue;
 };
 
@@ -31,9 +32,9 @@ export const HeaderSearchBar: React.FC<ISearchBar> = ({
   onSearch,
   onChange,
 }) => {
-  const handleSearch = (e) => {
+  const handleSearch: FormEventHandler = (e) => {
     e.preventDefault();
-    onSearch && onSearch({ e, value: value ? value : null });
+    onSearch && onSearch({ e, value: value || null });
   };
 
   return (

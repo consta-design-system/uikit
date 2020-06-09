@@ -1,5 +1,6 @@
-import { block, BemMods } from 'bem-cn';
 import { withNaming } from '@bem-react/classname';
+import { BemMods, block } from 'bem-cn';
+
 export const cn = withNaming({ e: '-', m: '_', v: '_' });
 
 // bem-cn в вызовах вида b('my-element') возвращает не строку, а объект с методом toString.
@@ -14,7 +15,7 @@ export default (blockName: string) => {
   return (
     elemNameOrBlockMods?: string | BemMods,
     elemModsOrMixins?: BemMods | string,
-    mixins?: string
+    mixins?: string,
   ): string => {
     if (elemNameOrBlockMods && elemModsOrMixins && mixins) {
       // b('my-element-name', {my: 'modifier'}, 'my other mixin classes')
@@ -27,12 +28,11 @@ export default (blockName: string) => {
       if (typeof elemNameOrBlockMods === 'string') {
         // b('my-element-name', {my: 'modifier'})
         return b(elemNameOrBlockMods, elemModsOrMixins).toString();
-      } else {
-        // b({my: 'modifier'}, 'my other mixin classes')
-        return b(elemNameOrBlockMods)
-          .mix(elemModsOrMixins)
-          .toString();
       }
+      // b({my: 'modifier'}, 'my other mixin classes')
+      return b(elemNameOrBlockMods)
+        .mix(elemModsOrMixins)
+        .toString();
     }
 
     if (elemNameOrBlockMods) {

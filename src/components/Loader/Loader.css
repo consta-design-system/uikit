@@ -1,11 +1,10 @@
 .Loader {
   --backgroundColor: var(--loaderBackgroundColor, var(--color-control-bg-primary));
-
   position: relative;
-  left: 50%;
   top: 50%;
-  height: calc(100% - var(--loader-size));
+  left: 50%;
   width: 100%;
+  height: calc(100% - var(--loader-size));
   transform: translate(-50%, -50%);
 
   &::before {
@@ -13,21 +12,22 @@
     position: absolute;
     top: calc(50% - (var(--loader-size) * 0.5));
     left: calc(50% - (var(--loader-size) * 2.5));
-    height: var(--loader-size);
     width: var(--loader-size);
-    border-radius: 50%;
+    height: var(--loader-size);
     background: var(--backgroundColor);
+    border-radius: 50%;
     animation: loader 1s ease infinite;
   }
+
   &::after {
     content: '';
     position: absolute;
     top: calc(50% - (var(--loader-size) * 0.5));
     left: calc(50% + (var(--loader-size) * 1.5));
-    height: var(--loader-size);
     width: var(--loader-size);
-    border-radius: 50%;
+    height: var(--loader-size);
     background: var(--backgroundColor);
+    border-radius: 50%;
     animation: loader 1s -0.36s ease infinite;
   }
 
@@ -35,10 +35,10 @@
     position: absolute;
     top: calc(50% - (var(--loader-size) * 0.5));
     left: calc(50% - (var(--loader-size) * 0.5));
-    height: var(--loader-size);
     width: var(--loader-size);
-    border-radius: 50%;
+    height: var(--loader-size);
     background: var(--backgroundColor);
+    border-radius: 50%;
     animation: loader 1s -0.18s ease infinite;
   }
 
@@ -46,6 +46,7 @@
     &_s {
       --loader-size: 4px;
     }
+
     &_m {
       --loader-size: 8px;
     }

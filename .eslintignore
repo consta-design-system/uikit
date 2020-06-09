@@ -1,3 +1,7 @@
 !/.storybook
 node_modules/*
-build
+build/*
+dist/*
+builder/*
+build.config.js
+

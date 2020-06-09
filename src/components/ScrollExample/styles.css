@@ -1,7 +1,7 @@
 .Container {
+  overflow: auto;
   width: 700px;
   height: 300px;
-  overflow: auto;
 
   & > .text {
     width: 110%;

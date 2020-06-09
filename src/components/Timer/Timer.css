@@ -1,15 +1,17 @@
 .Timer {
   position: relative;
   display: inline-block;
-  border-radius: 50%;
-  background-color: var(--color-control-bg-ghost);
+  overflow: hidden;
   width: var(--timer-size);
   height: var(--timer-size);
-  overflow: hidden;
+  background-color: var(--color-control-bg-ghost);
+  border-radius: 50%;
+
   &_size {
     &_s {
       --timer-size: 16px;
     }
+
     &_m {
       --timer-size: 24px;
     }
@@ -17,16 +19,15 @@
 
   &-Counter {
     width: 100%;
-    font-size: var(--size-text-xs);
-    line-height: var(--timer-size);
-    font-weight: bold;
     color: var(--color-control-typo-ghost);
+    font-size: var(--size-text-xs);
+    font-weight: bold;
+    line-height: var(--timer-size);
     text-align: center;
   }
 
   &-Progress.ProgressSpin {
     --animation-duration: 1s;
-
     position: absolute;
     top: 2px;
     left: 2px;

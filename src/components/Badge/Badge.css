@@ -1,35 +1,32 @@
 .Badge {
   position: relative;
   display: inline-block;
-  height: var(--badge-size);
   box-sizing: border-box;
+  height: var(--badge-size);
   font-size: var(--badge-text-size);
-  line-height: var(--badge-size);
   font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  line-height: var(--badge-size);
   white-space: nowrap;
   text-decoration: none;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 
   &_size {
     &_s {
       --badge-size: 20px;
       --badge-text-size: var(--size-text-2xs);
-
       padding: 0 var(--space-2xs);
     }
 
     &_m {
       --badge-size: 24px;
       --badge-text-size: var(--size-text-xs);
-
       padding: 0 var(--space-xs);
     }
 
     &_l {
       --badge-size: 32px;
       --badge-text-size: var(--size-text-s);
-
       padding: 0 var(--space-xs);
     }
   }
@@ -45,9 +42,11 @@
       &.Badge_size_s {
         padding: 0 var(--space-xs);
       }
+
       &.Badge_size_m {
         padding: 0 var(--space-s);
       }
+
       &.Badge_size_l {
         padding: 0 var(--space-m);
       }
@@ -60,21 +59,25 @@
       --badge-text-color: var(--color-typo-success);
       --badge-border-color: var(--color-bg-success);
     }
+
     &_error {
       --badge-bg-color: var(--color-bg-alert);
       --badge-text-color: var(--color-typo-alert);
       --badge-border-color: var(--color-bg-alert);
     }
+
     &_warning {
       --badge-bg-color: var(--color-bg-warning);
       --badge-text-color: var(--color-typo-warning);
       --badge-border-color: var(--color-bg-warning);
     }
+
     &_normal {
       --badge-bg-color: var(--color-bg-normal);
       --badge-text-color: var(--color-typo-normal);
       --badge-border-color: var(--color-bg-normal);
     }
+
     &_system {
       --badge-bg-color: var(--color-bg-system);
       --badge-border-color: var(--color-bg-system);
@@ -85,6 +88,7 @@
     &_filled {
       color: var(--color-typo-primary);
       background: var(--badge-bg-color);
+
       &.Badge_status {
         &_system {
           --badge-text-color: var(--color-typo-secondary);
@@ -95,6 +99,7 @@
     &_stroked {
       color: var(--badge-text-color);
       box-shadow: inset 0 0 0 1px var(--badge-border-color);
+
       &.Badge_status {
         &_system {
           --badge-text-color: var(--color-typo-system);
@@ -105,9 +110,8 @@
 
   &_minified {
     --badge-text-size: 0;
-
-    border-radius: 50%;
     background: transparent;
+    border-radius: 50%;
 
     &.Badge_size_s {
       width: 16px;
@@ -116,6 +120,7 @@
       border: 3px solid transparent;
       box-shadow: inset 0 0 0 10px var(--badge-bg-color);
     }
+
     &.Badge_size_m {
       width: 24px;
       height: 24px;
@@ -134,8 +139,8 @@
   }
 
   &-Icon {
+    --icon-color: var();
     font-size: 0;
     line-height: 1em;
-    --icon-color: var();
   }
 }

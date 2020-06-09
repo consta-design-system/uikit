@@ -1,14 +1,10 @@
 import './RootTheme.css';
 
 import React, { useState } from 'react';
-import {
-  Theme,
-  presetGpnDark,
-  presetGpnDefault,
-  ThemePreset,
-} from '../../../../components/Theme/Theme';
+
 import { cn } from '../../../../utils/bem';
-import { Switch } from '../../../Switch/Switch';
+import { Switch, SwitchProps } from '../../../Switch/Switch';
+import { presetGpnDark, presetGpnDefault, Theme, ThemePreset } from '../../Theme';
 
 type ThemeName = 'gpnDefault' | 'gpnDark';
 
@@ -24,7 +20,8 @@ const cnRootTheme = cn('RootTheme');
 
 export const RootTheme: React.FC = () => {
   const [theme, setTheme] = useState<ThemeName>('gpnDefault');
-  const handleChange = ({ checked }) => setTheme(checked ? 'gpnDark' : 'gpnDefault');
+  const handleChange: SwitchProps['onChange'] = ({ checked }) =>
+    setTheme(checked ? 'gpnDark' : 'gpnDefault');
 
   return (
     <Theme preset={getPreset(theme)} className={cnRootTheme()}>

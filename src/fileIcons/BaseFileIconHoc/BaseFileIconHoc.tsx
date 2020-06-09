@@ -1,5 +1,6 @@
 import React from 'react';
-import { IFileIcon, FileIconPropSize, cnIconFile } from '../FileIcon/FileIcon';
+
+import { cnIconFile, FileIconPropSize, IFileIcon } from '../FileIcon/FileIcon';
 
 export type SizeComponent = React.FC<React.SVGProps<SVGSVGElement>>;
 export type BaseIconHocArguments = {

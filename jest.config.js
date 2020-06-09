@@ -6,6 +6,7 @@ module.exports = {
   },
   coveragePathIgnorePatterns: ['/node_modules/', '/coverage/', '/types/'],
   testMatch: ['**/*.test.{ts,tsx}'],
+  modulePathIgnorePatterns: ['<rootDir>/dist/'],
   collectCoverageFrom: ['**/*.{ts,tsx}', '!**/*.stories.tsx'],
   setupFilesAfterEnv: ['./jest.setup.ts'],
 };

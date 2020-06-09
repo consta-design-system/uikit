@@ -1,8 +1,8 @@
 .Icon {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
+  justify-content: center;
+  align-items: center;
   width: var(--icon-size);
   height: var(--icon-size);
 
@@ -10,35 +10,45 @@
     &_xs {
       --icon-size: var(--graphics-size-xs);
     }
+
     &_s {
       --icon-size: var(--graphics-size-s);
     }
+
     &_m {
       --icon-size: var(--graphics-size-m);
     }
   }
+
   &_view {
     &_alert {
       color: var(--color-typo-alert);
     }
+
     &_brand {
       color: var(--color-typo-brand);
     }
+
     &_ghost {
       color: var(--color-typo-ghost);
     }
+
     &_link {
       color: var(--color-typo-link);
     }
+
     &_primary {
       color: var(--color-typo-primary);
     }
+
     &_secondary {
       color: var(--color-typo-secondary);
     }
+
     &_success {
       color: var(--color-typo-success);
     }
+
     &_warning {
       color: var(--color-typo-warning);
     }

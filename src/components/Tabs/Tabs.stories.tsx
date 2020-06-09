@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
-import { select, withKnobs, boolean } from '@storybook/addon-knobs';
+import { withDocs } from '@storybook-addons/docs';
+import { boolean, select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
+
 import { IIcon } from '../../icons/Icon/Icon';
+import { IconCamera } from '../../icons/IconCamera/IconCamera';
 import { IconPhoto } from '../../icons/IconPhoto/IconPhoto';
 import { IconRing } from '../../icons/IconRing/IconRing';
-import { IconCamera } from '../../icons/IconCamera/IconCamera';
-import { Tabs } from './Tabs';
-import { withDocs } from '@storybook-addons/docs';
 import { StoryBookExample } from '../../uiKit/components/StoryBookExample/StoryBookExample';
+
+import { Tabs } from './Tabs';
+import md from './Tabs.md';
 
 declare type Item = {
   name?: string;
-  icon?: IIcon;
+  icon?: React.FC<IIcon>;
 };
 
 const items = [
@@ -64,9 +67,9 @@ storiesOf('UI-KIT|/Tabs', module)
   .addDecorator(
     withDocs({
       readme: {
-        content: require('./Tabs.md')['default'],
+        content: md,
       },
-    })
+    }),
   )
   .add('playground', () => <Stories {...knobs()} />);
 

@@ -18,14 +18,13 @@
   --avatar-color-15: #00a352;
   --avatar-color-16: #1abc1a;
   --avatar-color-17: #6fb80a;
-
   overflow: hidden;
+  color: #fff;
   background: linear-gradient(rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0)),
     linear-gradient(var(--avatar-color), var(--avatar-color));
-  text-align: center;
   font-weight: 600;
+  text-align: center;
   letter-spacing: 0.1em;
-  color: #fff;
 
   &_size {
     &_s {
@@ -34,6 +33,7 @@
       font-size: 8px;
       line-height: 24px;
     }
+
     &_m {
       width: 32px;
       height: 32px;
@@ -46,9 +46,11 @@
     &_round {
       border-radius: 50%;
     }
+
     &_brick {
       border-radius: 0;
     }
+
     &_default {
       border-radius: var(--control-radius);
     }

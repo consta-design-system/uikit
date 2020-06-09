@@ -9,7 +9,7 @@ code {
 }
 
 .StoryBookRootDecorator {
-  background: var(--color-bg-default);
-  padding: var(--space-3xl);
   min-height: 100vh;
+  padding: var(--space-3xl);
+  background: var(--color-bg-default);
 }

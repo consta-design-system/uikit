@@ -1,7 +1,8 @@
-import React, { useLayoutEffect, useRef } from 'react';
-import bem from '../../../utils/bem';
-
 import './styles.css';
+
+import React, { useLayoutEffect, useRef } from 'react';
+
+import bem from '../../../utils/bem';
 
 const b = bem('autoresize-input');
 
@@ -11,11 +12,17 @@ type Props = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'placeholder'> & 
 };
 
 const copyStyles = (styles: CSSStyleDeclaration, node: HTMLElement) => {
+  // eslint-disable-next-line no-param-reassign
   node.style.fontSize = styles.fontSize;
+  // eslint-disable-next-line no-param-reassign
   node.style.fontFamily = styles.fontFamily;
+  // eslint-disable-next-line no-param-reassign
   node.style.fontWeight = styles.fontWeight;
+  // eslint-disable-next-line no-param-reassign
   node.style.fontStyle = styles.fontStyle;
+  // eslint-disable-next-line no-param-reassign
   node.style.letterSpacing = styles.letterSpacing;
+  // eslint-disable-next-line no-param-reassign
   node.style.textTransform = styles.textTransform;
 };
 
@@ -49,6 +56,7 @@ export const AutoResizeInput: React.FC<Props> = ({ inputRef, ...rest }) => {
     controlRef.current = node;
 
     if (inputRef) {
+      // eslint-disable-next-line no-param-reassign
       inputRef.current = node;
     }
   };

@@ -1,21 +1,23 @@
 import './WithoutSearchExample.css';
 
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
+
+import { IconChat } from '../../../../../icons/IconChat/IconChat';
+import { IconRing } from '../../../../../icons/IconRing/IconRing';
+import { cn } from '../../../../../utils/bem';
 import { Text } from '../../../../Text/Text';
-import { Header } from '../../../Header';
 import { HeaderButton } from '../../../Button/Header-Button';
+import { Header } from '../../../Header';
 import { HeaderLogin } from '../../../Login/Header-Login';
 import { HeaderLogo } from '../../../Logo/Header-Logo';
 import { HeaderMenu } from '../../../Menu/Header-Menu';
 import { HeaderModule } from '../../../Module/Header-Module';
-import { IconRing } from '../../../../../icons/IconRing/IconRing';
-import { IconChat } from '../../../../../icons/IconChat/IconChat';
-import { cn } from '../../../../../utils/bem';
 
 const cnExample = cn('WithoutSearchExample');
 
 export function WithoutSearchExample() {
   const [isLogged, setIsLogged] = useState<boolean>(false);
+
   const handleLogin = () => setIsLogged(!isLogged);
 
   const menuItems = [
@@ -30,6 +32,7 @@ export function WithoutSearchExample() {
     },
     {
       label: 'Какой-то пункт',
+      // eslint-disable-next-line no-alert
       onClick: () => alert('Какой-то пункт'),
     },
   ];
@@ -38,7 +41,7 @@ export function WithoutSearchExample() {
     <Header
       className={cnExample()}
       leftSide={
-        <Fragment>
+        <>
           <HeaderModule>
             <HeaderLogo>
               <Text as="p" size="l" weight="bold">
@@ -49,10 +52,10 @@ export function WithoutSearchExample() {
           <HeaderModule indent="l">
             <HeaderMenu items={menuItems} />
           </HeaderModule>
-        </Fragment>
+        </>
       }
       rightSide={
-        <Fragment>
+        <>
           <HeaderModule indent="s">
             <HeaderButton iconLeft={IconChat} />
           </HeaderModule>
@@ -70,7 +73,7 @@ export function WithoutSearchExample() {
               className={cnExample('Login', { isLogged })}
             />
           </HeaderModule>
-        </Fragment>
+        </>
       }
     />
   );
