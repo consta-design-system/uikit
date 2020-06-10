@@ -25,6 +25,14 @@
     &:focus {
       outline: none;
     }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+      border: none;
+      -webkit-box-shadow: 0 0 0 1000px transparent inset;
+      transition: background-color 5000s ease-in-out 0s;
+    }
   }
 
   &-Side {
@@ -91,6 +99,12 @@
 
       & .TextField-Input {
         color: var(--color-control-typo-disable);
+
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus {
+          -webkit-text-fill-color: var(--color-control-typo-disable);
+        }
       }
 
       & .TextField-Input::placeholder {
@@ -139,6 +153,12 @@
 
       &::placeholder {
         color: var(--color-control-typo-placeholder);
+      }
+
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover,
+      &:-webkit-autofill:focus {
+        -webkit-text-fill-color: var(--color-control-typo-default);
       }
     }
 
