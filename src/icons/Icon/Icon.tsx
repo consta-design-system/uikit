@@ -35,8 +35,8 @@ export const Icon: React.FC<IIcon> = ({
   ...otherProps
 }) => {
   return (
-    <div {...otherProps} className={cnIcon({ size, view }, [className])} ref={innerRef}>
+    <span {...otherProps} className={cnIcon({ size, view }, [className])} ref={innerRef}>
       {children}
-    </div>
+    </span>
   );
 };
