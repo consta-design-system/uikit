@@ -3,7 +3,7 @@ import { withDocs } from '@storybook-addons/docs';
 import { boolean, select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 
-import { IIcon } from '../../icons/Icon/Icon';
+import { IconProps } from '../../icons/Icon/Icon';
 import { IconCamera } from '../../icons/IconCamera/IconCamera';
 import { IconPhoto } from '../../icons/IconPhoto/IconPhoto';
 import { IconRing } from '../../icons/IconRing/IconRing';
@@ -12,9 +12,9 @@ import { StoryBookExample } from '../../uiKit/components/StoryBookExample/StoryB
 import { Tabs } from './Tabs';
 import md from './Tabs.md';
 
-declare type Item = {
+type Item = {
   name?: string;
-  icon?: React.FC<IIcon>;
+  icon?: React.FC<IconProps>;
 };
 
 const items = [
@@ -41,7 +41,7 @@ function Stories({ size, view, onlyIcon, withIcon }) {
   ]);
 
   return (
-    <Tabs<Item>
+    <Tabs
       items={items}
       value={value}
       getItemKey={(item) => item.name}
@@ -80,7 +80,7 @@ storiesOf('UI-KIT|/Examples/Tabs', module)
     const [value, setValue] = useState<Item[]>(['три']);
     return (
       <StoryBookExample>
-        <Tabs<Item>
+        <Tabs
           value={value}
           onChange={({ value }) => setValue(value)}
           items={items}
@@ -88,7 +88,7 @@ storiesOf('UI-KIT|/Examples/Tabs', module)
           getItemLabel={(item) => item}
           size="m"
         />
-        <Tabs<Item>
+        <Tabs
           value={value}
           onChange={({ value }) => setValue(value)}
           items={items}
@@ -105,7 +105,7 @@ storiesOf('UI-KIT|/Examples/Tabs', module)
     const [value, setValue] = useState<Item[]>(['три']);
     return (
       <StoryBookExample>
-        <Tabs<Item>
+        <Tabs
           value={value}
           onChange={({ value }) => setValue(value)}
           items={items}
@@ -113,7 +113,7 @@ storiesOf('UI-KIT|/Examples/Tabs', module)
           getItemLabel={(item) => item}
           view="bordered"
         />
-        <Tabs<Item>
+        <Tabs
           value={value}
           onChange={({ value }) => setValue(value)}
           items={items}
@@ -127,7 +127,7 @@ storiesOf('UI-KIT|/Examples/Tabs', module)
   .add('_icon', () => {
     type Item = {
       name?: string;
-      icon?: IIcon;
+      icon?: React.FC<IconProps>;
     };
     const items = [
       {
@@ -151,7 +151,7 @@ storiesOf('UI-KIT|/Examples/Tabs', module)
     ]);
     return (
       <StoryBookExample>
-        <Tabs<Item>
+        <Tabs
           value={value}
           onChange={({ value }) => setValue(value)}
           items={items}

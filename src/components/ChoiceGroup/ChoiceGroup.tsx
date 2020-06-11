@@ -2,13 +2,12 @@ import './ChoiceGroup.css';
 
 import React from 'react';
 
-import { IIcon } from '../../icons/Icon/Icon';
+import { IconProps } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import {
   BaseCheckGroupField,
-  BaseCheckGroupFieldPropGetAdditionalPropsForItem,
   BaseCheckGroupFieldPropGetItemLabel,
-  IBaseCheckGroupField,
+  BaseCheckGroupFieldProps,
 } from '../BaseCheckGroupField/BaseCheckGroupField';
 
 import { ChoiceGroupItem } from './Item/ChoiceGroup__item';
@@ -17,25 +16,25 @@ export type ChoiceGroupPropSize = 'xs' | 's' | 'm' | 'l';
 export type ChoiceGroupPropForm = 'default' | 'brick' | 'round';
 export type ChoiceGroupPropView = 'primary' | 'ghost' | 'secondary';
 
-export type ChoiceGroupProps<T> = {
+type Props<T> = {
   size?: ChoiceGroupPropSize;
   form?: ChoiceGroupPropForm;
   view?: ChoiceGroupPropView;
   onlyIcon?: boolean;
-  getItemIcon?: (item: T) => React.FC<IIcon> | undefined;
+  getItemIcon?: (item: T) => React.FC<IconProps> | undefined;
   getItemTitle?: BaseCheckGroupFieldPropGetItemLabel<T>;
 };
 
-export type IChoiceGroup<T> = Omit<
-  IBaseCheckGroupField<T, ChoiceGroupProps<T>>,
-  'componentItem' | 'getAdditionalPropsForItem'
->;
+export type ChoiceGroupProps<T> = Props<T> &
+  Omit<BaseCheckGroupFieldProps<T>, 'componentItem' | 'getAdditionalPropsForItem' | 'innerRef'>;
 
 export const cnChoiceGroup = cn('ChoiceGroup');
 
-export function ChoiceGroup<T>(props: IChoiceGroup<T>): React.ReactElement {
+export const ChoiceGroup: <T>(
+  props: ChoiceGroupProps<T> & React.RefAttributes<HTMLDivElement>,
+) => React.ReactElement | null = React.forwardRef((props, ref) => {
   const {
-    size = 'm',
+    size,
     form = 'default',
     className,
     view = 'primary',
@@ -45,26 +44,18 @@ export function ChoiceGroup<T>(props: IChoiceGroup<T>): React.ReactElement {
     ...otherProps
   } = props;
 
-  const getAdditionalPropsForItem: BaseCheckGroupFieldPropGetAdditionalPropsForItem<
-    T,
-    ChoiceGroupProps<T>
-  > = (item, index, { size, onlyIcon, getItemIcon, getItemTitle }) => ({
-    ...(getItemIcon ? { icon: getItemIcon(item) } : {}),
-    ...(getItemTitle ? { title: getItemTitle(item) } : {}),
-    size,
-    onlyIcon,
-  });
-
   return (
-    <BaseCheckGroupField<T, IChoiceGroup<T>>
+    <BaseCheckGroupField
+      {...otherProps}
       className={cnChoiceGroup({ size, form, view, onlyIcon }, [className])}
       componentItem={ChoiceGroupItem}
-      getAdditionalPropsForItem={getAdditionalPropsForItem}
-      size={size}
-      onlyIcon={onlyIcon}
-      getItemIcon={getItemIcon}
-      getItemTitle={getItemTitle}
-      {...otherProps}
+      getAdditionalPropsForItem={(item) => ({
+        ...(getItemIcon ? { icon: getItemIcon(item) } : {}),
+        ...(getItemTitle ? { title: getItemTitle(item) } : {}),
+        size,
+        onlyIcon,
+      })}
+      innerRef={ref}
     />
   );
-}
+});

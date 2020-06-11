@@ -15,7 +15,7 @@ export type SearchBarOnSearchArguments = {
   value: SearchBarPropValue;
 };
 
-type ISearchBar = {
+type SearchBarProps = {
   placeholder?: string;
   label?: string;
   className?: string;
@@ -24,7 +24,7 @@ type ISearchBar = {
   onChange?: SearchBarPropOnChange;
 };
 
-export const HeaderSearchBar: React.FC<ISearchBar> = ({
+export const HeaderSearchBar: React.FC<SearchBarProps> = ({
   placeholder,
   label,
   className,

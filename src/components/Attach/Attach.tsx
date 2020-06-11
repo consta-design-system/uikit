@@ -2,15 +2,17 @@ import './Attach.css';
 
 import React from 'react';
 
-import { IIcon } from '../../icons/Icon/Icon';
+import { IconProps } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
-import { componentIsFunction } from '../../utils/componentIsFunction';
+import {
+  ComponentWithAsAttributes,
+  PropsWithAsAttributes,
+} from '../../utils/types/PropsWithAsAttributes';
 import { Button } from '../Button/Button';
 import { File } from '../File/File';
 import { Text } from '../Text/Text';
 
-declare type AttachProps = {
-  as?: React.ElementType;
+type Props = {
   fileExtension?: string;
   loading?: boolean;
   fileName?: string;
@@ -18,93 +20,91 @@ declare type AttachProps = {
   loadingProgress?: number;
   errorText?: string;
   loadingText?: string;
-  onClick?: React.EventHandler<React.MouseEvent>;
   onButtonClick?: React.EventHandler<React.MouseEvent>;
-  buttonIcon?: React.FC<IIcon>;
+  buttonIcon?: React.FC<IconProps>;
   buttonTitle?: string;
-  className?: string;
   withAction?: boolean;
-  innerRef?: React.Ref<HTMLElement>;
+  className?: string;
 };
 
-export type IAttachProps<T = {}> = AttachProps &
-  Omit<React.HTMLAttributes<HTMLDivElement>, keyof AttachProps & T> &
-  Omit<T, keyof AttachProps>;
+export type AttachProps<As extends keyof JSX.IntrinsicElements> = PropsWithAsAttributes<Props, As>;
 
 export const cnAttach = cn('Attach');
 
-export function Attach(props: IAttachProps): React.ReactElement {
-  const {
-    className,
-    as = 'div',
-    fileExtension,
-    loading,
-    fileName,
-    buttonIcon,
-    onButtonClick,
-    errorText,
-    loadingText = 'Loading',
-    loadingProgress,
-    fileDescription,
-    onClick,
-    withAction: withActionProp,
-    buttonTitle,
-    innerRef,
-    ...otherProps
-  } = props;
-  const Component = as;
+export const Attach: ComponentWithAsAttributes<Props, HTMLElement> = React.forwardRef(
+  <As extends keyof JSX.IntrinsicElements>(
+    props: AttachProps<As>,
+    ref: React.Ref<HTMLElement>,
+  ): React.ReactElement | null => {
+    const {
+      className,
+      as = 'div',
+      fileExtension,
+      loading,
+      fileName,
+      buttonIcon,
+      onButtonClick,
+      errorText,
+      loadingText = 'Loading',
+      loadingProgress,
+      fileDescription,
+      onClick,
+      withAction: withActionProp,
+      buttonTitle,
+      ...otherProps
+    } = props;
+    const Tag = as as string;
+    const withAction = withActionProp || Boolean(onClick);
 
-  const withAction = withActionProp || Boolean(onClick);
-
-  return (
-    <Component
-      onClick={onClick}
-      className={cnAttach({ withAction }, [className])}
-      ref={innerRef}
-      {...(componentIsFunction(Component) && { innerRef })}
-      {...otherProps}
-    >
-      <File
-        className={cnAttach('File', { error: Boolean(errorText) })}
-        extension={fileExtension}
-        loading={loading}
-        loadingWithProgressSpin
-        loadingProgress={loadingProgress}
-        size="s"
-      />
-      <div className={cnAttach('Content')}>
-        {fileName && (
-          <Text className={cnAttach('FileName')} size="s" view="primary" lineHeight="xs">
-            {fileName}
-          </Text>
-        )}
-        {fileDescription && !loading && (
-          <Text className={cnAttach('FileDescription')} size="xs" lineHeight="xs" view="ghost">
-            {fileDescription}
-          </Text>
-        )}
-        {loadingText && loading && (
-          <Text className={cnAttach('LoadingText')} size="xs" lineHeight="xs" view="ghost">
-            {loadingProgress ? `${loadingText} ${loadingProgress}%` : `${loadingText}...`}
-          </Text>
-        )}
-        {errorText && (
-          <Text className={cnAttach('ErrorText')} size="xs" lineHeight="xs" view="alert">
-            {errorText}
-          </Text>
-        )}
-      </div>
-      {onButtonClick && (
-        <Button
-          className={cnAttach('Button')}
-          onlyIcon
-          iconLeft={buttonIcon}
-          onClick={onButtonClick}
-          title={buttonTitle}
-          size="xs"
-          view="clear"
+    return (
+      <Tag
+        {...otherProps}
+        onClick={onClick}
+        className={cnAttach({ withAction }, [className])}
+        ref={ref}
+      >
+        <File
+          className={cnAttach('File', { error: Boolean(errorText) })}
+          extension={fileExtension}
+          loading={loading}
+          loadingWithProgressSpin
+          loadingProgress={loadingProgress}
+          size="s"
         />
-      )}
-    </Component>
-  );
-}
+        <div className={cnAttach('Content')}>
+          {fileName && (
+            <Text className={cnAttach('FileName')} size="s" view="primary" lineHeight="xs">
+              {fileName}
+            </Text>
+          )}
+          {fileDescription && !loading && (
+            <Text className={cnAttach('FileDescription')} size="xs" lineHeight="xs" view="ghost">
+              {fileDescription}
+            </Text>
+          )}
+          {loadingText && loading && (
+            <Text className={cnAttach('LoadingText')} size="xs" lineHeight="xs" view="ghost">
+              {loadingProgress ? `${loadingText} ${loadingProgress}%` : `${loadingText}...`}
+            </Text>
+          )}
+          {errorText && (
+            <Text className={cnAttach('ErrorText')} size="xs" lineHeight="xs" view="alert">
+              {errorText}
+            </Text>
+          )}
+        </div>
+        {onButtonClick && (
+          <Button
+            className={cnAttach('Button')}
+            onlyIcon
+            iconLeft={buttonIcon}
+            onClick={onButtonClick}
+            title={buttonTitle}
+            size="xs"
+            view="clear"
+          />
+        )}
+      </Tag>
+    );
+  },
+);

@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import { Avatar, cnAvatar, getColorIndexForName, getInitialsForName, IAvatar } from './Avatar';
+import { Avatar, cnAvatar, getColorIndexForName, getInitialsForName } from './Avatar';
+
+type AvatarProps = React.ComponentProps<typeof Avatar>;
 
 const testId = 'avatar';
 const maxColorIndex = 17;
 
-const renderComponent = (props: IAvatar = {}) => {
+const renderComponent = (props: AvatarProps = {}) => {
   return render(<Avatar data-testid={testId} {...props} />);
 };
 
@@ -53,24 +55,6 @@ describe('Компонент Avatar', () => {
 
           expect(avatar.tagName).toEqual(el.toUpperCase());
         });
-      });
-
-      it(`должен рендериться как функциональный компонент`, () => {
-        const Component: React.FC<{ innerRef?: React.Ref<HTMLElement> }> = ({
-          children,
-          innerRef,
-          ...otherProps
-        }) => (
-          <span {...otherProps} ref={innerRef}>
-            {children}
-          </span>
-        );
-
-        renderComponent({ as: Component });
-
-        const avatar = screen.getByTestId(testId);
-
-        expect(avatar.tagName).toEqual('SPAN');
       });
     });
     describe('проверка url', () => {

@@ -18,18 +18,18 @@ const App = () => {
 
 <!-- props:start -->
 
-| Свойство   | Тип                                                     | По умолчанию | Описание                                                 |
-| ---------- | ------------------------------------------------------- | ------------ | -------------------------------------------------------- |
-| size?      | `'s' | 'm' | 'l'`                                       | `'m'`        | Размер                                                   |
-| view?      | `'filled' | 'stroked'`                                  | `'filled'`   | Вид                                                      |
-| status?    | `'success' | 'error' | 'warning' | 'normal' | 'system'` | `'normal'`   | Статус                                                   |
-| form?      | `'default' | 'round'`                                   | `'default'`  | Форма                                                    |
-| minified?  | `boolean`                                               | -            | Отвечает за отрисовку компонента в виде точки            |
-| icon?      | `React.FC<IIcon>;`                                      | -            | Добавляет иконку                                         |
-| label?     | `string`                                                | -            | Текст на бейдже                                          |
-| className? | `string`                                                | -            | Дополнительный класс (mix)                               |
-| innerRef?  | `React.Ref<any>`                                        | -            | Ссылка на корневой DOM элемент компонента                |
-| as?        | `React.ElementType;`                                    | `'div'`      | Корневой элемент, можно прокинуть компонент или html тэг |
+| Свойство   | Тип                                                     | По умолчанию | Описание                                      |
+| ---------- | ------------------------------------------------------- | ------------ | --------------------------------------------- |
+| size?      | `'s' | 'm' | 'l'`                                       | `'m'`        | Размер                                        |
+| view?      | `'filled' | 'stroked'`                                  | `'filled'`   | Вид                                           |
+| status?    | `'success' | 'error' | 'warning' | 'normal' | 'system'` | `'normal'`   | Статус                                        |
+| form?      | `'default' | 'round'`                                   | `'default'`  | Форма                                         |
+| minified?  | `boolean`                                               | -            | Отвечает за отрисовку компонента в виде точки |
+| icon?      | `React.FC<IconProps>;`                                  | -            | Добавляет иконку                              |
+| label?     | `string`                                                | -            | Текст на бейдже                               |
+| className? | `string`                                                | -            | Дополнительный класс (mix)                    |
+| ref?       | `React.Ref<HTMLElement>`                                | -            | Ссылка на корневой DOM элемент компонента     |
+| as?        | `keyof JSX.IntrinsicElements`                           | `'div'`      | Корневой элемент                              |
 
 <!-- props:end -->
 

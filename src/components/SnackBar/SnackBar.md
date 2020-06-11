@@ -21,10 +21,10 @@ function SnackBarExample() {
 
 <!-- props:start -->
 
-| Свойство   | Тип                                                                                                                                                                                                                                                                                                    | По умолчанию | Описание             |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ | -------------------- |
-| className? | `string`                                                                                                                                                                                                                                                                                               | -            | Дополнительный класс |
-| items      | `{ key: string | number; message?: string | number; status?: 'system' | 'success' | 'warning' | 'alert' | 'normal' ; autoClose?: boolean | number; icon?: React.FC<IIcon>; actions?: { label: string | number; onClick: React.EventHandler<React.MouseEvent>; }[];onClose?: (item: Item) => void; }[]` | -            | Массив элементов     |
+| Свойство   | Тип                                                                                                                                                                                                                                                                                                        | По умолчанию | Описание             |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | -------------------- |
+| className? | `string`                                                                                                                                                                                                                                                                                                   | -            | Дополнительный класс |
+| items      | `{ key: string | number; message?: string | number; status?: 'system' | 'success' | 'warning' | 'alert' | 'normal' ; autoClose?: boolean | number; icon?: React.FC<IconProps>; actions?: { label: string | number; onClick: React.EventHandler<React.MouseEvent>; }[];onClose?: (item: Item) => void; }[]` | -            | Массив элементов     |
 
 <!-- props:end -->
 
@@ -38,7 +38,7 @@ import './SnackBarStories.css';
 import * as React from 'react';
 import { cn } from '@bem-react/classname';
 import { Button } from '@gpn-design/uikit/Button';
-import { IIcon } from '@gpn-design/uikit/Icon';
+import { IconProps } from '@gpn-design/uikit/Icon';
 import { IconAdd } from '@gpn-design/uikit/IconAdd';
 import { IconThumbUp } from '@gpn-design/uikit/IconThumbUp';
 import { IconAlert } from '@gpn-design/uikit/IconAlert';
@@ -48,7 +48,7 @@ import { SnackBar, SnackBarItemStatus, Item } from '@gpn-design/uikit/SnackBar';
 
 function reducer(
   state: Item[],
-  action: { type: 'add' | 'remove'; item?: Item; key?: number | string }
+  action: { type: 'add' | 'remove'; item?: Item; key?: number | string },
 ) {
   switch (action.type) {
     case 'add':
@@ -58,8 +58,8 @@ function reducer(
   }
 }
 
-const getItemIconByStatus = (status: SnackBarItemStatus): React.FC<IIcon> | undefined => {
-  const mapIconByStatus: Record<SnackBarItemStatus, React.FC<IIcon>> = {
+const getItemIconByStatus = (status: SnackBarItemStatus): React.FC<IconProps> | undefined => {
+  const mapIconByStatus: Record<SnackBarItemStatus, React.FC<IconProps>> = {
     success: IconThumbUp,
     warning: IconAlert,
     alert: IconAlert,

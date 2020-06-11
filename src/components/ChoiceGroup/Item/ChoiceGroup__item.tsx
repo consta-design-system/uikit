@@ -1,19 +1,19 @@
 import React, { ChangeEvent, useState } from 'react';
 
-import { IconPropSize, IIcon } from '../../../icons/Icon/Icon';
+import { IconProps, IconPropSize } from '../../../icons/Icon/Icon';
 import { BaseCheckGroupItemProps } from '../../BaseCheckGroupField/BaseCheckGroupField';
 import { ChoiceGroupPropSize, cnChoiceGroup } from '../ChoiceGroup';
 
-export type ChoiceGroupItemProps = {
-  icon?: React.FC<IIcon>;
+type Props = {
+  icon?: React.FC<IconProps>;
   size?: ChoiceGroupPropSize;
   onlyIcon?: boolean;
   title?: string;
 };
 
-export type IChoiceGroupItem<T> = BaseCheckGroupItemProps<T> & ChoiceGroupItemProps;
+export type ChoiceGroupItemProps<T> = BaseCheckGroupItemProps<T> & Props;
 
-export function ChoiceGroupItem<T>(props: IChoiceGroupItem<T>): React.ReactElement {
+export function ChoiceGroupItem<T>(props: ChoiceGroupItemProps<T>): React.ReactElement {
   const {
     className,
     label,

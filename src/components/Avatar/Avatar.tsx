@@ -4,24 +4,22 @@ import React, { useMemo } from 'react';
 import random from 'lodash/random';
 
 import { cn } from '../../utils/bem';
-import { componentIsFunction } from '../../utils/componentIsFunction';
+import {
+  ComponentWithAsAttributes,
+  PropsWithAsAttributes,
+} from '../../utils/types/PropsWithAsAttributes';
 
 export type AvatarPropSize = 's' | 'm';
 export type AvatarPropForm = 'round' | 'brick' | 'default';
 
-declare type AvatarProps = {
+declare type Props = {
   url?: string;
   name?: string;
-  as?: React.ElementType;
-  className?: string;
   size?: AvatarPropSize;
   form?: AvatarPropForm;
-  innerRef?: React.Ref<HTMLElement>;
 };
 
-export type IAvatar<T = {}> = AvatarProps &
-  (Omit<React.HTMLAttributes<HTMLDivElement>, keyof (AvatarProps & T)> &
-    Omit<T, keyof AvatarProps>);
+export type AvatarProps<As extends keyof JSX.IntrinsicElements> = PropsWithAsAttributes<Props, As>;
 
 export const cnAvatar = cn('Avatar');
 
@@ -58,33 +56,27 @@ export const getInitialsForName = (name: string | undefined) => {
   return `${firstLetter.toUpperCase()}${secondLatter.toUpperCase()}`;
 };
 
-export function Avatar<T>(props: IAvatar<T>): React.ReactElement | null {
-  const {
-    as = 'div',
-    className,
-    size = 'm',
-    form = 'round',
-    url,
-    name,
-    innerRef,
-    ...otherProps
-  } = props;
-  const Component = as;
+export const Avatar: ComponentWithAsAttributes<Props, HTMLElement> = React.forwardRef(
+  <As extends keyof JSX.IntrinsicElements>(
+    props: AvatarProps<As>,
+    ref: React.Ref<HTMLElement>,
+  ): React.ReactElement | null => {
+    const { as = 'div', className, size = 'm', form = 'round', url, name, ...otherProps } = props;
+    const Tag = as as string;
+    const showImage = Boolean(url);
+    const initials = useMemo(() => getInitialsForName(name), [name]);
+    const colorIndex = useMemo(() => getColorIndexForName(name), [name]);
 
-  const showImage = Boolean(url);
-  const initials = useMemo(() => getInitialsForName(name), [name]);
-  const colorIndex = useMemo(() => getColorIndexForName(name), [name]);
-
-  return (
-    <Component
-      {...otherProps}
-      style={!showImage ? { '--avatar-color': `var(--avatar-color-${colorIndex})` } : {}}
-      className={cnAvatar({ size, form }, [className])}
-      {...(componentIsFunction(Component) && { innerRef })}
-      ref={innerRef}
-    >
-      {showImage && <img className={cnAvatar('Image')} src={url} alt={name} />}
-      {!showImage && initials}
-    </Component>
-  );
-}
+    return (
+      <Tag
+        {...otherProps}
+        style={!showImage ? { '--avatar-color': `var(--avatar-color-${colorIndex})` } : {}}
+        className={cnAvatar({ size, form }, [className])}
+        ref={ref}
+      >
+        {showImage && <img className={cnAvatar('Image')} src={url} alt={name} />}
+        {!showImage && initials}
+      </Tag>
+    );
+  },
+);

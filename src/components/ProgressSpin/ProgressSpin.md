@@ -24,7 +24,7 @@ const App = () => {
 | animation? | `boolean`                  | -            | Включает плавное изменение прогрессбара   |
 | progress?  | `number`                   | -            | Процент заполнения прогрессбара           |
 | className? | `string`                   | -            | Дополнительный класс                      |
-| innerRef?  | `React.Ref<SVGSVGElement>` | -            | Ссылка на корневой DOM элемент компонента |
+| ref?       | `React.Ref<SVGSVGElement>` | -            | Ссылка на корневой DOM элемент компонента |
 
 <!-- props:end -->
 

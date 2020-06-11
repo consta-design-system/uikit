@@ -2,23 +2,19 @@ import './Header-Logo.css';
 
 import React from 'react';
 
+import { PropsWithAsAttributes } from '../../../utils/types/PropsWithAsAttributes';
 import { cnHeader } from '../Header';
 
-type HeaderProps = {
-  className?: string;
-  children?: React.ReactNode;
-  as?: React.ElementType;
-};
+export type HeaderProps<As extends keyof JSX.IntrinsicElements> = PropsWithAsAttributes<{}, As>;
 
-export type IHeaderLogo<T> = HeaderProps &
-  (Omit<React.HTMLAttributes<Element>, keyof HeaderProps> | Omit<T, keyof HeaderProps>);
-
-export function HeaderLogo<T>(props: IHeaderLogo<T>): React.ReactElement | null {
+export function HeaderLogo<As extends keyof JSX.IntrinsicElements = 'div'>(
+  props: HeaderProps<As>,
+): React.ReactElement | null {
   const { children, as = 'div', className, ...otherProps } = props;
-  const Component = as;
+  const Tag = as as string;
   return (
-    <Component className={cnHeader('Logo', [className])} {...otherProps}>
+    <Tag className={cnHeader('Logo', [className])} {...otherProps}>
       {children}
-    </Component>
+    </Tag>
   );
 }

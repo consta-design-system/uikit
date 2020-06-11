@@ -5,7 +5,10 @@ import React from 'react';
 import { IconPropSize } from '../../icons/Icon/Icon';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { cn } from '../../utils/bem';
-import { componentIsFunction } from '../../utils/componentIsFunction';
+import {
+  ComponentWithAsAttributes,
+  PropsWithAsAttributes,
+} from '../../utils/types/PropsWithAsAttributes';
 import { Avatar } from '../Avatar/Avatar';
 import { Text, TextPropSize } from '../Text/Text';
 
@@ -14,11 +17,9 @@ export type UserPropView = 'clear' | 'ghost';
 export type UserPropWidth = 'default' | 'full';
 export type UserPropStatus = 'available' | 'remote' | 'out';
 
-declare type UserProps = {
+type Props = {
   avatarUrl?: string;
   name?: string;
-  as?: React.ElementType;
-  className?: string;
   size?: UserPropSize;
   view?: UserPropView;
   width?: UserPropWidth;
@@ -26,11 +27,9 @@ declare type UserProps = {
   onlyAvatar?: boolean;
   withArrow?: boolean;
   info?: string;
-  innerRef?: React.Ref<HTMLElement>;
 };
 
-export type IUser<T = {}> = UserProps &
-  (Omit<React.HTMLAttributes<HTMLDivElement>, keyof (UserProps & T)> & Omit<T, keyof UserProps>);
+export type UserProps<As extends keyof JSX.IntrinsicElements> = PropsWithAsAttributes<Props, As>;
 
 const cnUser = cn('User');
 
@@ -52,52 +51,60 @@ const getArrowSizeByUserSize = (userSize: UserPropSize): IconPropSize => {
   return sizeObj[userSize];
 };
 
-export function User<T>(props: IUser<T>): React.ReactElement | null {
-  const {
-    as = 'div',
-    className,
-    size = 'm',
-    avatarUrl,
-    name,
-    view = 'clear',
-    width,
-    onlyAvatar: propOnlyAvatar,
-    withArrow,
-    info,
-    status,
-    innerRef,
-    ...otherProps
-  } = props;
-  const Component = as;
-  const onlyAvatar = propOnlyAvatar || (!name && !info);
-  const infoSize = getInfoSizeByUserSize(size);
-  const arrowSize = getArrowSizeByUserSize(size);
+export const User: ComponentWithAsAttributes<Props, HTMLElement> = React.forwardRef(
+  <As extends keyof JSX.IntrinsicElements>(
+    props: UserProps<As>,
+    ref: React.Ref<HTMLElement>,
+  ): React.ReactElement | null => {
+    const {
+      as = 'div',
+      className,
+      size = 'm',
+      avatarUrl,
+      name,
+      view = 'clear',
+      width,
+      onlyAvatar: propOnlyAvatar,
+      withArrow,
+      info,
+      status,
+      ...otherProps
+    } = props;
+    const Tag = as as string;
+    const onlyAvatar = propOnlyAvatar || (!name && !info);
+    const infoSize = getInfoSizeByUserSize(size);
+    const arrowSize = getArrowSizeByUserSize(size);
 
-  return (
-    <Component
-      {...otherProps}
-      className={cnUser({ size, view, width, withArrow, minified: onlyAvatar }, [className])}
-      ref={innerRef}
-      {...(componentIsFunction(Component) && { innerRef })}
-    >
-      <div className={cnUser('AvatarWrapper', { status })}>
-        <Avatar className={cnUser('Avatar', { status })} size={size} url={avatarUrl} name={name} />
-      </div>
-      {!onlyAvatar && (name || info) && (
-        <div className={cnUser('Block')}>
-          {name && (
-            <Text className={cnUser('Name')} size={size} view="primary" lineHeight="2xs">
-              {name}
-            </Text>
-          )}
-          {info && (
-            <Text className={cnUser('Info')} size={infoSize} view="secondary" lineHeight="2xs">
-              {info}
-            </Text>
-          )}
+    return (
+      <Tag
+        {...otherProps}
+        className={cnUser({ size, view, width, withArrow, minified: onlyAvatar }, [className])}
+        ref={ref}
+      >
+        <div className={cnUser('AvatarWrapper', { status })}>
+          <Avatar
+            className={cnUser('Avatar', { status })}
+            size={size}
+            url={avatarUrl}
+            name={name}
+          />
         </div>
-      )}
-      {withArrow && <IconSelect className={cnUser('Arrow')} size={arrowSize} view="secondary" />}
-    </Component>
-  );
-}
+        {!onlyAvatar && (name || info) && (
+          <div className={cnUser('Block')}>
+            {name && (
+              <Text className={cnUser('Name')} size={size} view="primary" lineHeight="2xs">
+                {name}
+              </Text>
+            )}
+            {info && (
+              <Text className={cnUser('Info')} size={infoSize} view="secondary" lineHeight="2xs">
+                {info}
+              </Text>
+            )}
+          </div>
+        )}
+        {withArrow && <IconSelect className={cnUser('Arrow')} size={arrowSize} view="secondary" />}
+      </Tag>
+    );
+  },
+);

@@ -3,7 +3,10 @@ import './Text.css';
 import React from 'react';
 
 import { cn } from '../../utils/bem';
-import { componentIsFunction } from '../../utils/componentIsFunction';
+import {
+  ComponentWithAsAttributes,
+  PropsWithAsAttributes,
+} from '../../utils/types/PropsWithAsAttributes';
 import * as wp from '../../utils/whitepaper/whitepaper';
 
 export type TextPropAlign = 'left' | 'center' | 'right';
@@ -40,8 +43,7 @@ export type TextPropView =
 export type TextPropWeight = 'black' | 'bold' | 'light' | 'regular' | 'semibold' | 'thin';
 export type TextPropWidth = 'default';
 
-export type TextProps = {
-  as?: React.ElementType;
+type Props = {
   align?: TextPropAlign;
   decoration?: TextPropDecoration;
   display?: TextPropDisplay;
@@ -55,63 +57,65 @@ export type TextProps = {
   view?: TextPropView;
   weight?: TextPropWeight;
   width?: TextPropWidth;
-  className?: string;
   children?: React.ReactNode;
-  innerRef?: React.Ref<HTMLElement>;
 };
 
-export type IText<T = {}> = TextProps &
-  (Omit<React.HTMLAttributes<Element>, keyof (TextProps & T)> & Omit<T, keyof TextProps>);
+export type TextProps<As extends keyof JSX.IntrinsicElements> = PropsWithAsAttributes<Props, As>;
 
 export const cnText = cn('Text');
 
-export function Text<T>(props: IText<T>): React.ReactElement | null {
-  const {
-    as: Component = 'div',
-    align,
-    decoration,
-    display,
-    font,
-    lineHeight,
-    size = 'm',
-    spacing,
-    fontStyle,
-    transform,
-    type,
-    view = 'primary',
-    weight,
-    width,
-    className,
-    children,
-    innerRef,
-    ...otherProps
-  } = props;
+export const Text: ComponentWithAsAttributes<Props, HTMLElement> = React.forwardRef(
+  <As extends keyof JSX.IntrinsicElements>(
+    props: TextProps<As>,
+    ref: React.Ref<HTMLElement>,
+  ): React.ReactElement | null => {
+    const {
+      as = 'div',
+      align,
+      decoration,
+      display,
+      font,
+      lineHeight,
+      size = 'm',
+      spacing,
+      fontStyle,
+      transform,
+      type,
+      view = 'primary',
+      weight,
+      width,
+      className,
+      children,
+      ...otherProps
+    } = props;
 
-  return (
-    <Component
-      {...otherProps}
-      className={cnText(null, [
-        wp.text({
-          align,
-          decoration,
-          display,
-          font,
-          'line-height': lineHeight,
-          size,
-          spacing,
-          'style': fontStyle,
-          transform,
-          type,
-          view,
-          weight,
-          width,
-        }),
-        className,
-      ])}
-      ref={innerRef}
-      {...(componentIsFunction(Component) && { innerRef })}
-    >
-      {children}
-    </Component>
-  );
-}
+    const Tag = as as string;
+
+    return (
+      <Tag
+        {...otherProps}
+        className={cnText(null, [
+          wp.text({
+            align,
+            decoration,
+            display,
+            font,
+            'line-height': lineHeight,
+            size,
+            spacing,
+            'style': fontStyle,
+            transform,
+            type,
+            view,
+            weight,
+            width,
+          }),
+          className,
+        ])}
+        ref={ref}
+      >
+        {children}
+      </Tag>
+    );
+  },
+);

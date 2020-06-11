@@ -2,18 +2,26 @@ import './Header-Module.css';
 
 import React from 'react';
 
+import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import { cnHeader } from '../Header';
 
 export type HeaderModulePropIndent = 's' | 'm' | 'l';
 
-export type HeaderModuleProps = {
+type Props = {
   indent?: HeaderModulePropIndent;
-  as?: React.ElementType;
 };
 
-export type IHeaderModule = HeaderModuleProps &
-  Omit<React.HTMLAttributes<Element>, keyof HeaderModuleProps>;
+export type HeaderModuleProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
 
-export const HeaderModule: React.FC<IHeaderModule> = ({ className, children, indent }) => {
-  return <div className={cnHeader('Module', { indent }, [className])}>{children}</div>;
+export const HeaderModule: React.FC<HeaderModuleProps> = ({
+  className,
+  children,
+  indent,
+  ...otherProps
+}) => {
+  return (
+    <div {...otherProps} className={cnHeader('Module', { indent }, [className])}>
+      {children}
+    </div>
+  );
 };
