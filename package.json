@@ -36,7 +36,8 @@
     "pre-build": "node builder/preBuild.js --config=./build.config.js",
     "test": "jest",
     "test:watch": "jest --watch",
-    "coverage": "jest --all --coverage"
+    "coverage": "jest --all --coverage",
+    "commit": "git-cz"
   },
   "browserslist": [
     "last 2 version",
@@ -45,6 +46,7 @@
   ],
   "husky": {
     "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
       "pre-commit": "yarn run pre-commit",
       "pre-push": "yarn run pre-push"
     }
@@ -62,6 +64,14 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": "./commitizen.js"
+    }
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -114,7 +124,9 @@
     "autoprefixer": "^9.7.4",
     "babel-loader": "8.0.5",
     "bem-cn": "^3.0.1",
+    "commitizen": "^4.1.2",
     "concurrently": "^4.1.1",
+    "cz-customizable": "^6.2.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-prettier": "^5.0.0",
     "eslint-config-react-app": "^4.0.1",
