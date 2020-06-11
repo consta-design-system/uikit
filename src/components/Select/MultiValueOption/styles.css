@@ -1,23 +1,23 @@
 .multi-value {
   display: flex;
   align-items: center;
+  box-sizing: border-box;
   min-width: 0;
   max-width: 313px;
   margin: 2px;
-  box-sizing: border-box;
-  border-radius: 2px;
   background-color: var(--color-control-bg-ghost);
+  border-radius: 2px;
 
   &__label {
-    padding: 0 var(--space-2xs);
+    overflow: hidden;
     box-sizing: border-box;
-    border-radius: 2px;
+    padding: 0 var(--space-2xs);
     color: var(--color-control-typo-ghost);
+    border-radius: 2px;
     font-size: var(--size-text-s);
     line-height: var(--line-height-text-s);
-    overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   &_size_xs &__label,
@@ -35,16 +35,16 @@
   &__delete {
     display: flex;
     align-items: center;
-    height: 100%;
-    padding-left: var(--space-2xs);
-    padding-right: var(--space-2xs);
     box-sizing: border-box;
+    height: 100%;
+    padding-right: var(--space-2xs);
+    padding-left: var(--space-2xs);
+    color: var(--color-control-typo-ghost);
+    background-color: transparent;
     border: none;
     border-radius: 2px;
-    background-color: transparent;
-    color: var(--color-control-typo-ghost);
-    opacity: 0.4;
     outline: none;
+    opacity: 0.4;
     cursor: default;
 
     &:hover {
@@ -58,34 +58,30 @@
   }
 
   &_size_xs {
+    --icon-size: 9px;
     height: 16px;
     font-size: var(--size-text-xs);
     line-height: var(--line-height-text-s);
-
-    --icon-size: 9px;
   }
 
   &_size_s {
+    --icon-size: 9px;
     height: 20px;
     font-size: var(--size-text-xs);
     line-height: var(--line-height-text-s);
-
-    --icon-size: 9px;
   }
 
   &_size_m {
+    --icon-size: 11px;
     height: 24px;
     font-size: var(--size-text-s);
     line-height: var(--line-height-text-s);
-
-    --icon-size: 11px;
   }
 
   &_size_l {
+    --icon-size: 11px;
     height: 28px;
     font-size: var(--size-text-s);
     line-height: var(--line-height-text-s);
-
-    --icon-size: 11px;
   }
 }

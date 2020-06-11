@@ -4,24 +4,28 @@
   &-Loader {
     position: absolute;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     width: var(--loader-size);
     height: var(--loader-size);
     background-color: var(--color-control-bg-ghost);
     border-radius: 50%;
+
     &_spin {
       animation: File-Loader-Animate 1.2s linear infinite;
     }
+
     &_size {
       &_s {
         --loader-size: 16px;
       }
+
       &_m {
         --loader-size: 24px;
       }
     }
   }
+
   &-Progress {
     display: block;
   }
@@ -31,6 +35,7 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }

@@ -4,20 +4,22 @@
     width: 25vw;
     max-width: 260px;
   }
+
   &-SearchBarLabel {
     position: absolute;
-    padding: 0;
+    visibility: hidden;
+    overflow: hidden;
     width: 1px;
     height: 1px;
-    overflow: hidden;
+    padding: 0;
     border: 0;
-    visibility: hidden;
     opacity: 0;
     pointer-events: none;
   }
+
   &-SearchBarButton {
     position: absolute;
-    right: var(--space-2xs);
     top: var(--space-2xs);
+    right: var(--space-2xs);
   }
 }

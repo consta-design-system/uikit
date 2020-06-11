@@ -1,8 +1,7 @@
 import './File.css';
 
 import React from 'react';
-import { cn } from '../../utils/bem';
-import { ProgressSpin } from '../ProgressSpin/ProgressSpin';
+
 import { IFileIcon } from '../../fileIcons/FileIcon/FileIcon';
 import { FileIconAvi } from '../../fileIcons/FileIconAvi/FileIconAvi';
 import { FileIconBmp } from '../../fileIcons/FileIconBmp/FileIconBmp';
@@ -26,6 +25,8 @@ import { FileIconUndefined } from '../../fileIcons/FileIconUndefined/FileIconUnd
 import { FileIconWav } from '../../fileIcons/FileIconWav/FileIconWav';
 import { FileIconXls } from '../../fileIcons/FileIconXls/FileIconXls';
 import { FileIconZip } from '../../fileIcons/FileIconZip/FileIconZip';
+import { cn } from '../../utils/bem';
+import { ProgressSpin } from '../ProgressSpin/ProgressSpin';
 
 export type FileProps = {
   extension?: string;
@@ -34,7 +35,7 @@ export type FileProps = {
   loadingProgress?: number;
 };
 
-export type IFile = FileProps & (Omit<IFileIcon, keyof FileProps>);
+export type IFile = FileProps & Omit<IFileIcon, keyof FileProps>;
 
 export const cnFile = cn('File');
 
@@ -68,7 +69,7 @@ export function File(props: IFile) {
     );
   }
 
-  const extensionToSvg = {
+  const extensionToSvg: { [value: string]: React.FC<IFileIcon> } = {
     bmp: FileIconBmp,
     csv: FileIconCsv,
     avi: FileIconAvi,

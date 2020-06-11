@@ -1,9 +1,12 @@
 import React from 'react';
-import { withKnobs, select, number, boolean } from '@storybook/addon-knobs';
 import { withDocs } from '@storybook-addons/docs';
+import { boolean, number, select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
+
 import { StoryBookExample } from '../../uiKit/components/StoryBookExample/StoryBookExample';
+
 import { Timer } from './Timer';
+import md from './Timer.md';
 
 function Stories({ size, seconds, progress, animation }) {
   return <Timer size={size} seconds={seconds} progress={progress} animation={animation} />;
@@ -21,9 +24,9 @@ storiesOf('UI-KIT|/Timer', module)
   .addDecorator(
     withDocs({
       readme: {
-        content: require('./Timer.md')['default'],
+        content: md,
       },
-    })
+    }),
   )
   .add('playground', () => <Stories {...defaultKnobs()} />);
 

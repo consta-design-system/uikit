@@ -2,10 +2,11 @@ import './Badge.css';
 
 import React from 'react';
 import { classnames } from '@bem-react/classnames';
-import { cn } from '../../utils/bem';
-import * as wp from '../../utils/whitepaper/whitepaper';
+
 import { IIcon } from '../../icons/Icon/Icon';
+import { cn } from '../../utils/bem';
 import { componentIsFunction } from '../../utils/componentIsFunction';
+import * as wp from '../../utils/whitepaper/whitepaper';
 import { useTheme } from '../Theme/Theme';
 
 export type BadgeProps = {
@@ -38,7 +39,6 @@ export function Badge<T>(props: IBadge<T>) {
     form = 'default',
     icon,
     minified,
-    className,
     label,
     innerRef,
     as = 'div',
@@ -48,10 +48,10 @@ export function Badge<T>(props: IBadge<T>) {
   const Component = as;
   const { themeClassNames } = useTheme();
 
-  const _className =
-    status != 'system' && view == 'filled'
-      ? classnames(className, themeClassNames.color.accent)
-      : className;
+  const className =
+    status !== 'system' && view === 'filled'
+      ? classnames(props.className, themeClassNames.color.accent)
+      : props.className;
   const Icon = icon;
   const withIcon = !!icon;
 
@@ -59,7 +59,7 @@ export function Badge<T>(props: IBadge<T>) {
     return (
       <Component
         {...otherProps}
-        className={cnBadge({ size, status, minified }, [_className])}
+        className={cnBadge({ size, status, minified }, [className])}
         title={label}
         ref={innerRef}
         {...(componentIsFunction(Component) && { innerRef })}
@@ -70,7 +70,7 @@ export function Badge<T>(props: IBadge<T>) {
   return (
     <Component
       {...otherProps}
-      className={cnBadge({ size, view, status, form, withIcon }, [_className])}
+      className={cnBadge({ size, view, status, form, withIcon }, [className])}
       ref={innerRef}
       {...(componentIsFunction(Component) && { innerRef })}
     >

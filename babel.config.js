@@ -1,25 +1,13 @@
-/* eslint-disable global-require */
 module.exports = {
-  presets: [
+  presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
+  plugins: [
     [
-      require('@babel/preset-env'),
+      '@babel/plugin-transform-runtime',
       {
-        modules: false,
+        regenerator: true,
       },
     ],
-    require('@babel/preset-react'),
+    ['@babel/plugin-proposal-optional-chaining'],
+    ['@babel/plugin-proposal-nullish-coalescing-operator'],
   ],
-  plugins: [
-    [require('@babel/plugin-proposal-optional-chaining'), { loose: false }],
-    [require('@babel/plugin-proposal-pipeline-operator'), { proposal: 'minimal' }],
-    [require('@babel/plugin-proposal-nullish-coalescing-operator'), { loose: false }],
-    require('@babel/plugin-proposal-do-expressions'),
-    [require('@babel/plugin-proposal-decorators'), { legacy: true }],
-    [require('@babel/plugin-proposal-class-properties'), { loose: false }],
-  ],
-  env: {
-    test: {
-      presets: [require('@babel/preset-env'), require('@babel/preset-react')],
-    },
-  },
 };

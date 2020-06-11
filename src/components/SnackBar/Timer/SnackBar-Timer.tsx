@@ -1,6 +1,7 @@
 import './SnackBar-Timer.css';
 
 import React, { useEffect, useState } from 'react';
+
 import { useTimer } from '../../../utils/useTimer';
 import { Timer } from '../../Timer/Timer';
 import { cnSnackBar } from '../SnackBar';
@@ -29,7 +30,7 @@ export const SnackBarTimer: React.FC<SnackBarTimerProps> = (props) => {
   useEffect(() => {
     onMount({ start, pause });
     start();
-  }, []);
+  }, [onMount, pause, start]);
 
   useEffect(() => {
     setRunning(isRunning);

@@ -1,6 +1,7 @@
+import './styles.css';
+
 import React, { memo } from 'react';
 
-import './styles.css';
 import bem from '../../../utils/bem';
 import { Checkbox } from '../../Checkbox/Checkbox';
 
@@ -54,6 +55,7 @@ const OptionComponent: React.FC<Props> = (props) => {
   };
 
   return (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
     <div
       className={b({
         selected: isSelected,
@@ -72,6 +74,7 @@ const OptionComponent: React.FC<Props> = (props) => {
           className={b('check')}
           size={wpSize === 'l' ? 'l' : 'm'}
           checked={isSelected}
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
           onChange={() => {}}
           tabIndex={-1}
           intermediate={isIntermediate}

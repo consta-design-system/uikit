@@ -1,6 +1,7 @@
-import sortBy from 'lodash/sortBy';
 import flatMap from 'lodash/flatMap';
-import { SelectValueTypeT, SelectOptionT, SelectOptionWithLevelT, ObjectValueT } from '../index';
+import sortBy from 'lodash/sortBy';
+
+import { ObjectValueT, SelectOptionT, SelectOptionWithLevelT, SelectValueTypeT } from '../index';
 
 type NewOptionValueType = 'new';
 
@@ -27,7 +28,6 @@ export function scrollIntoOption(menuEl: HTMLElement, focusedEl: HTMLElement): v
 
   if (focusedRect.top - overScroll < menuRect.top) {
     scrollableContent.scrollTop = Math.max(focusedEl.offsetTop - overScroll, 0);
-    return;
   }
 }
 
@@ -38,13 +38,13 @@ export const getSelectedOptions = (options: SelectOptionWithLevelT[], value: str
 
   if (Array.isArray(value)) {
     return value.reduce<SelectOptionWithLevelT[]>((values, item) => {
-      const selected = options.find(option => valueForOption(option, item));
+      const selected = options.find((option) => valueForOption(option, item));
 
       return selected ? values.concat(selected) : values;
     }, []);
   }
 
-  return options.find(option => valueForOption(option, value)) || null;
+  return options.find((option) => valueForOption(option, value)) || null;
 };
 
 export const createFlatOptionValue = ({ value, level }: ObjectValueT) => `${level}/${value}`;
@@ -94,13 +94,14 @@ export const getFlatOptionsList = (
     ];
   }, []);
 
-  const selectedOptionsOnLevel = list.filter(o => ['selected'].includes(o.selectionState));
+  const selectedOptionsOnLevel = list.filter((o) => ['selected'].includes(o.selectionState));
 
   const partSelected =
     selectedOptionsOnLevel.length > 0 && selectedOptionsOnLevel.length < list.length;
   const allSelected =
     selectedOptionsOnLevel.length > 0 && selectedOptionsOnLevel.length === list.length;
 
+  // eslint-disable-next-line no-nested-ternary
   const selectionState = partSelected ? 'part' : allSelected ? 'selected' : 'none';
 
   return {
@@ -124,16 +125,16 @@ const isOptionSelected = (
   selectedOption: SelectOptionWithLevelT | SelectOptionWithLevelT[] | null,
 ) =>
   Array.isArray(selectedOption)
-    ? selectedOption.some(o => o.value === value)
+    ? selectedOption.some((o) => o.value === value)
     : Boolean(selectedOption && selectedOption.value === value);
 
 export const getOptionsRelations = (
   availableOptions: SelectOptionWithLevelT[],
   selectedOption: SelectOptionWithLevelT | SelectOptionWithLevelT[] | null,
 ): OptionsChildsT => {
-  return sortBy(availableOptions, o => o.level).reduce<OptionsChildsT>((res, option) => {
+  return sortBy(availableOptions, (o) => o.level).reduce<OptionsChildsT>((res, option) => {
     res[option.value] = res[option.value] || {
-      option: option,
+      option,
       childValues: [],
       childOptions: [],
       isSelected: isOptionSelected(option.value, selectedOption),
@@ -160,7 +161,7 @@ export const checkValue = (value?: SelectValueTypeT | SelectValueTypeT[]): boole
     return value.length > 0;
   }
 
-  return Boolean(value) || value == 'new';
+  return Boolean(value) || value === 'new';
 };
 
 export const toggleValue = ({
@@ -175,7 +176,7 @@ export const toggleValue = ({
   const getOptionByValue = (optionValue: string) =>
     optionsRelations[optionValue] && optionsRelations[optionValue].option;
 
-  const options = Object.values(optionsRelations).map(r => r.option);
+  const options = Object.values(optionsRelations).map((r) => r.option);
 
   const option = getOptionByValue(newValue);
 
@@ -186,7 +187,7 @@ export const toggleValue = ({
   const isSelectedNow = values.includes(option.value);
 
   if (isSelectedNow) {
-    return values.filter(v => v !== newValue);
+    return values.filter((v) => v !== newValue);
   }
 
   const selectedParent =
@@ -203,7 +204,7 @@ export const toggleValue = ({
     const parentOption = getOptionByValue(currentOption.parentValue);
 
     const nonSelectedOptionsWithSameParent = options.filter(
-      o =>
+      (o) =>
         o.value !== currentOption.value &&
         o.parentValue === currentOption.parentValue &&
         o.selectionState !== 'selected',
@@ -229,25 +230,25 @@ export const toggleValue = ({
   const childValues = getAllChildValues(option.value);
 
   if (parentForSelect) {
-    return values.filter(v => !valuesForUnselect.includes(v)).concat(parentForSelect.value);
+    return values.filter((v) => !valuesForUnselect.includes(v)).concat(parentForSelect.value);
   }
 
   if (selectedParent) {
     return values
-      .filter(v => v !== selectedParent.value)
+      .filter((v) => v !== selectedParent.value)
       .concat(
         options
           .filter(
-            o =>
+            (o) =>
               ![option.value, option.parentValue].includes(o.value) &&
               (o.level < option.level || o.parentValue === option.parentValue) &&
               o.selectedParentValue === selectedParent.value,
           )
-          .map(o => o.value),
+          .map((o) => o.value),
       );
   }
 
-  return values.filter(v => !childValues.includes(v)).concat(newValue);
+  return values.filter((v) => !childValues.includes(v)).concat(newValue);
 };
 
 export const SELECT_CLOSE_EVENT = 'selectclose';
@@ -272,5 +273,5 @@ export const filterOptions = (
 ): SelectOptionWithLevelT[] => {
   const input = inputValue.trim().toLowerCase();
 
-  return options.filter(item => filterOption(item, input));
+  return options.filter((item) => filterOption(item, input));
 };

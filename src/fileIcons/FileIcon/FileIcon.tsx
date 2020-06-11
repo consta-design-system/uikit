@@ -1,5 +1,7 @@
 import './FileIcon.css';
+
 import React from 'react';
+
 import { cn } from '../../utils/bem';
 
 export type FileIconPropSize = 's' | 'm';
@@ -11,7 +13,7 @@ export type FileIconProps = {
 };
 
 export type IFileIcon = FileIconProps &
-  (Omit<React.HTMLAttributes<HTMLDivElement>, keyof FileIconProps>);
+  Omit<React.HTMLAttributes<HTMLDivElement>, keyof FileIconProps>;
 
 export const cnIconFile = cn('FileIcon');
 

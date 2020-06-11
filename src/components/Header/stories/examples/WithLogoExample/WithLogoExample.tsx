@@ -1,24 +1,31 @@
 import './WithLogoExample.css';
 
-import React, { useState, Fragment } from 'react';
-import { Header } from '../../../Header';
+import React, { useState } from 'react';
+
+import { IconChat } from '../../../../../icons/IconChat/IconChat';
+import { IconRing } from '../../../../../icons/IconRing/IconRing';
+import { cn } from '../../../../../utils/bem';
 import { HeaderButton } from '../../../Button/Header-Button';
+import { Header } from '../../../Header';
 import { HeaderLogin } from '../../../Login/Header-Login';
 import { HeaderLogo } from '../../../Logo/Header-Logo';
 import { HeaderMenu } from '../../../Menu/Header-Menu';
-import { HeaderSearchBar } from '../../../SearchBar/Header-SearchBar';
 import { HeaderModule } from '../../../Module/Header-Module';
-import { IconRing } from '../../../../../icons/IconRing/IconRing';
-import { IconChat } from '../../../../../icons/IconChat/IconChat';
-import { cn } from '../../../../../utils/bem';
+import {
+  HeaderSearchBar,
+  SearchBarPropOnChange,
+  SearchBarPropOnSearch,
+} from '../../../SearchBar/Header-SearchBar';
 
 const cnExample = cn('WithLogoExample');
 
 export function WithLogoExample() {
   const [value, setValue] = useState<string | null>(null);
   const [isLogged, setIsLogged] = useState<boolean>(false);
-  const handleChange = ({ value }) => setValue(value);
-  const handleSearch = ({ value }) => alert(`Произведен поиск, запрос - ${value} `);
+  const handleChange: SearchBarPropOnChange = ({ value }) => setValue(value);
+  // eslint-disable-next-line no-alert
+  const handleSearch: SearchBarPropOnSearch = ({ value }) =>
+    alert(`Произведен поиск, запрос - ${value} `);
   const handleLogin = () => setIsLogged(!isLogged);
 
   const menuItems = [
@@ -41,7 +48,7 @@ export function WithLogoExample() {
     <Header
       className={cnExample()}
       leftSide={
-        <Fragment>
+        <>
           <HeaderModule>
             <HeaderLogo>
               <svg width="143" height="32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -79,10 +86,10 @@ export function WithLogoExample() {
           <HeaderModule indent="l">
             <HeaderMenu items={menuItems} />
           </HeaderModule>
-        </Fragment>
+        </>
       }
       rightSide={
-        <Fragment>
+        <>
           <HeaderModule indent="s">
             <HeaderButton iconLeft={IconChat} />
           </HeaderModule>
@@ -100,7 +107,7 @@ export function WithLogoExample() {
               className={cnExample('Login', { isLogged })}
             />
           </HeaderModule>
-        </Fragment>
+        </>
       }
     />
   );

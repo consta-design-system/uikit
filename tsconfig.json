@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "noImplicitAny": false,
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "noImplicitAny": true,
+    "lib": ["dom", "esnext", "ES2015"],
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -13,7 +13,15 @@
     "jsx": "react",
     "allowJs": true,
     "isolatedModules": true,
-    "importHelpers": true
+    "importHelpers": true,
+    "experimentalDecorators": false,
+    "emitDecoratorMetadata": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "pretty": true,
+    "removeComments": false
   },
   "include": ["./src/**/*"],
   "exclude": [

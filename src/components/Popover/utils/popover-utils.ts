@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Directions } from '../';
 import { getAnchor } from '../../../utils/getAnchor';
+import { Directions } from '..';
 
 type ViewportDimensions = {
   top: number;
@@ -163,6 +163,7 @@ export const getScrollableParentNodes = (element: Element | Text | null) => {
 
   let parent = element;
 
+  // eslint-disable-next-line no-cond-assign
   while ((parent = parent.parentNode as Element) && parent.nodeType === 1) {
     const style = window.getComputedStyle(parent);
 
@@ -182,6 +183,7 @@ export const getScrollableParentNodes = (element: Element | Text | null) => {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
   scrollableParents.push(window);
 
@@ -204,7 +206,7 @@ export const getPositionInLayout = ({
   const viewportDimensions = getViewportDimensions();
   const popupSize = getPopupDimensions(popup);
   const anchorDimensions = getAnchorDimensions(anchor);
-  const directionChunks = directions.map(direction => direction.split('-'));
+  const directionChunks = directions.map((direction) => direction.split('-'));
 
   let bestViewportFactor = 0;
   let bestDirection = directions[0];

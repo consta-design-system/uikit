@@ -14,7 +14,7 @@ export type CSSTransitionClassNames = {
 
 export function cnForCssTransition(
   cnFunction: ClassNameFormatter,
-  animateName = 'animate'
+  animateName = 'animate',
 ): CSSTransitionClassNames {
   return {
     appear: cnFunction({ [animateName]: 'appear' }),

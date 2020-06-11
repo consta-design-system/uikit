@@ -1,5 +1,6 @@
 import { BaseFileIconHoc } from '../BaseFileIconHoc/BaseFileIconHoc';
 import { FileIcon } from '../FileIcon/FileIcon';
+
 import FileIconWavSizeM from './FileIconWav_size_m';
 import FileIconWavSizeS from './FileIconWav_size_s';
 

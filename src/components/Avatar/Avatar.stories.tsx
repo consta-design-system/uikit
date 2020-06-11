@@ -1,7 +1,8 @@
 import React from 'react';
-import { withKnobs, text, select } from '@storybook/addon-knobs';
-import figmaDecorator from 'storybook-addon-figma-new';
+import { select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
+import figmaDecorator from 'storybook-addon-figma-new';
+
 import { Avatar } from './Avatar';
 
 const defaultKnobs = () => ({

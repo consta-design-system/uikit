@@ -1,7 +1,8 @@
 import React from 'react';
-import { cnHeader } from '../Header';
+
 import { Button } from '../../Button/Button';
 import { User, UserPropStatus } from '../../User/User';
+import { cnHeader } from '../Header';
 
 type Props = {
   isLogged?: boolean;

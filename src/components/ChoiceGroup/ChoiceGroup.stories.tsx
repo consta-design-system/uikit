@@ -1,12 +1,13 @@
-import React, { useState, Fragment } from 'react';
-import { select, boolean, withKnobs } from '@storybook/addon-knobs';
+import React, { useState } from 'react';
+import { boolean, select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import { ChoiceGroup } from '../ChoiceGroup/ChoiceGroup';
-import { IIcon } from '../../icons/Icon/Icon';
 
+import { IIcon } from '../../icons/Icon/Icon';
 import { IconCamera } from '../../icons/IconCamera/IconCamera';
 import { IconCopy } from '../../icons/IconCopy/IconCopy';
 import { IconFavorite } from '../../icons/IconFavorite/IconFavorite';
+
+import { ChoiceGroup } from './ChoiceGroup';
 
 declare type Item = {
   name: string;
@@ -68,7 +69,7 @@ storiesOf('ChoiceGroup', module)
     const [twoItemsValue, setTwoItemsValue] = useState<Item[] | null>(null);
 
     return (
-      <Fragment>
+      <>
         <form className="decorator decorator_indent-b_m">
           <ChoiceGroup<Item>
             {...knobs()}
@@ -84,7 +85,7 @@ storiesOf('ChoiceGroup', module)
         <form className="decorator decorator_indent-b_m">
           <ChoiceGroup<Item>
             {...knobs()}
-            onlyIcon={true}
+            onlyIcon
             items={onlyIconItems}
             value={onlyIconValue}
             getItemKey={(item) => item.name}
@@ -106,6 +107,6 @@ storiesOf('ChoiceGroup', module)
             name="ChoiceGroup"
           />
         </form>
-      </Fragment>
+      </>
     );
   });

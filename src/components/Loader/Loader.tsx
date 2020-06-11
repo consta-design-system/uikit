@@ -1,6 +1,8 @@
-import React from 'react';
-import { cn } from '../../utils/bem';
 import './Loader.css';
+
+import React from 'react';
+
+import { cn } from '../../utils/bem';
 
 export type LoaderPropSize = 's' | 'm';
 
@@ -10,7 +12,7 @@ export type LoaderProps = {
   innerRef?: React.Ref<HTMLDivElement>;
 };
 
-export type ILoader = LoaderProps & (Omit<React.HTMLAttributes<HTMLDivElement>, keyof LoaderProps>);
+export type ILoader = LoaderProps & Omit<React.HTMLAttributes<HTMLDivElement>, keyof LoaderProps>;
 
 export const cnLoader = cn('Loader');
 

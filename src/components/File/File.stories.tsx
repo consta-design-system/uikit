@@ -1,9 +1,12 @@
 import * as React from 'react';
-import { withKnobs, select, number, boolean, text } from '@storybook/addon-knobs';
-import { storiesOf } from '@storybook/react';
 import { withDocs } from '@storybook-addons/docs';
+import { boolean, number, select, text, withKnobs } from '@storybook/addon-knobs';
+import { storiesOf } from '@storybook/react';
+
 import { StoryBookExample } from '../../uiKit/components/StoryBookExample/StoryBookExample';
+
 import { File } from './File';
+import md from './File.md';
 
 function Stories(props) {
   return <File {...props} />;
@@ -22,9 +25,9 @@ storiesOf('UI-KIT|/File', module)
   .addDecorator(
     withDocs({
       readme: {
-        content: require('./File.md')['default'],
+        content: md,
       },
-    })
+    }),
   )
   .add('playground', () => <Stories {...defaultKnobs()} />);
 

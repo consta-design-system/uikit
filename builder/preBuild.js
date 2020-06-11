@@ -1,5 +1,3 @@
-'use strict';
-
 const { resolve } = require('path');
 const { Command, flags } = require('@oclif/command');
 const logSymbols = require('log-symbols');
@@ -18,6 +16,7 @@ class GenerateCommand extends Command {
       }
     }
   }
+
   async run() {
     const hrstart = process.hrtime();
     const { flags } = this.parse(GenerateCommand);
@@ -25,7 +24,9 @@ class GenerateCommand extends Command {
     let config = {};
 
     try {
+      /*eslint-disable */
       config = require(configPath);
+      /*eslint-enable */
     } catch (error) {
       this.error(`Can't load build config ${configPath}.`);
     }
@@ -35,10 +36,10 @@ class GenerateCommand extends Command {
     try {
       await Promise.all([
         iconsTransformed(ignore, srcPath).then(() =>
-          this.log(logSymbols.success, 'icons copied & transformed')
+          this.log(logSymbols.success, 'icons copied & transformed'),
         ),
         iconsFileTransformed(ignore, srcPath).then(() =>
-          this.log(logSymbols.success, 'fileIcons copied & transformed')
+          this.log(logSymbols.success, 'fileIcons copied & transformed'),
         ),
       ]);
       await this.safeInvokeHook(afterBuild);
@@ -60,9 +61,6 @@ GenerateCommand.flags = {
   }),
 };
 
-GenerateCommand.description = `Generate ts dist package
-...
-Write now works only with @yandex-lego/components
-`;
+GenerateCommand.description = 'Generate ts dist package...';
 
 GenerateCommand.run();

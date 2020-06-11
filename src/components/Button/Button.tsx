@@ -1,8 +1,9 @@
 import './Button.css';
 
-import React, { Fragment } from 'react';
+import React from 'react';
+
+import { IconPropSize, IIcon } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
-import { IIcon, IconPropSize } from '../../icons/Icon/Icon';
 import { componentIsFunction } from '../../utils/componentIsFunction';
 import { Loader } from '../Loader/Loader';
 
@@ -63,8 +64,6 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
     tabIndex,
     as = 'button',
     onlyIcon,
-    iconSize,
-    title,
     innerRef,
     ...otherProps
   } = props;
@@ -91,8 +90,8 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
     return sizeObj[buttonSize];
   };
 
-  const _iconSize = iconSize || getIconSizeByButtonSize(size);
-  const _title = title || (!!IconOnly && label) || undefined;
+  const iconSize = props.iconSize || getIconSizeByButtonSize(size);
+  const title = props.title || (!!IconOnly && label) || undefined;
 
   return (
     <Component
@@ -108,27 +107,27 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
           withIcon,
           onlyIcon: !!IconOnly,
         },
-        [className]
+        [className],
       )}
       tabIndex={tabIndex}
-      title={_title}
+      title={title}
       ref={innerRef}
       {...(Component === 'button' ? { disabled: disabled || loading } : {})}
       {...(componentIsFunction(Component) && { innerRef })}
       {...otherProps}
     >
-      {IconOnly && <IconOnly className={cnButton('Icon')} size={_iconSize} />}
+      {IconOnly && <IconOnly className={cnButton('Icon')} size={iconSize} />}
       {!IconOnly &&
         ((IconLeft || IconRight) && label ? (
-          <Fragment>
+          <>
             {IconLeft && (
-              <IconLeft className={cnButton('Icon', { position: 'left' })} size={_iconSize} />
+              <IconLeft className={cnButton('Icon', { position: 'left' })} size={iconSize} />
             )}
             <span className={cnButton('Label')}>{label}</span>
             {IconRight && (
-              <IconRight className={cnButton('Icon', { position: 'right' })} size={_iconSize} />
+              <IconRight className={cnButton('Icon', { position: 'right' })} size={iconSize} />
             )}
-          </Fragment>
+          </>
         ) : (
           label
         ))}

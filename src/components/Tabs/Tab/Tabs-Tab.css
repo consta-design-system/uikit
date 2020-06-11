@@ -5,18 +5,19 @@
     display: inline-flex;
     align-items: center;
     padding: var(--space-xs) 0;
+    color: var(--color-typo-secondary);
+    background-color: transparent;
     border: none;
     font-family: var(--font);
     font-size: var(--tab-font-size);
     line-height: var(--line-height-text-s);
-    color: var(--color-typo-secondary);
-    background-color: transparent;
     cursor: pointer;
     transition: color 0.2s;
 
     &:not(:last-child) {
       margin-right: var(--space-m);
     }
+
     &_active,
     &:hover {
       color: var(--color-typo-primary);
@@ -26,6 +27,7 @@
       &_s {
         --tab-font-size: var(--size-text-s);
       }
+
       &_m {
         --tab-font-size: var(--size-text-m);
       }
@@ -34,11 +36,11 @@
     &::before {
       content: '';
       position: absolute;
-      display: block;
-      left: -4px;
-      right: -4px;
       top: 0;
+      right: -4px;
+      left: -4px;
       bottom: 0;
+      display: block;
       border-radius: var(--control-radius);
     }
 
@@ -67,6 +69,7 @@
       &.Tabs-Tab_size_s {
         width: 20px;
       }
+
       &.Tabs-Tab_size_m {
         width: 24px;
       }
@@ -78,6 +81,7 @@
   from {
     box-shadow: 0 0 0 0 var(--color-control-bg-focus), 0 0 0 0 var(--color-control-bg-active);
   }
+
   to {
     box-shadow: 0 0 0 3px var(--color-control-bg-focus), 0 0 0 6px transparent;
   }

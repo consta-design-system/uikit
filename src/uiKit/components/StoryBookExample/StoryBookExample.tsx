@@ -1,7 +1,9 @@
 import './StoryBookExample.css';
-import { cn } from '../../../utils/bem';
 
 import React from 'react';
+
+import { cn } from '../../../utils/bem';
+
 export type StoryBookModsProps = {
   children: React.ReactNode;
 } & React.HTMLAttributes<HTMLDivElement>;

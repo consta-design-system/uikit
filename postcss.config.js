@@ -1,6 +1,6 @@
 module.exports = {
   plugins: {
-    autoprefixer: {},
+    'autoprefixer': {},
     'postcss-import': {},
     'postcss-simple-vars': {},
     'postcss-color-function': {},

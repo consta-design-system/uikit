@@ -1,13 +1,14 @@
 import React from 'react';
-import { withKnobs, select } from '@storybook/addon-knobs';
+import { select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import { FileIconBmp } from '../../FileIconBmp/FileIconBmp';
+
 import { FileIconAvi } from '../../FileIconAvi/FileIconAvi';
+import { FileIconBmp } from '../../FileIconBmp/FileIconBmp';
 import { FileIconCsv } from '../../FileIconCsv/FileIconCsv';
 import { FileIconDoc } from '../../FileIconDoc/FileIconDoc';
-import { FileIconJpg } from '../../FileIconJpg/FileIconJpg';
 import { FileIconExe } from '../../FileIconExe/FileIconExe';
 import { FileIconGif } from '../../FileIconGif/FileIconGif';
+import { FileIconJpg } from '../../FileIconJpg/FileIconJpg';
 import { FileIconLoading } from '../../FileIconLoading/FileIconLoading';
 import { FileIconMov } from '../../FileIconMov/FileIconMov';
 import { FileIconMp3 } from '../../FileIconMp3/FileIconMp3';
@@ -33,7 +34,7 @@ const defaultKnobs = () => ({
 storiesOf('FileIcons', module)
   .addDecorator(withKnobs)
   .add('FileIcons', () => (
-    <div className={'tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full'}>
+    <div className="tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full">
       <IconsItem name="FileIconBmp" icon={FileIconBmp} {...defaultKnobs()} />
       <IconsItem name="FileIconAvi" icon={FileIconAvi} {...defaultKnobs()} />
       <IconsItem name="FileIconCsv" icon={FileIconCsv} {...defaultKnobs()} />

@@ -1,13 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import './styles.css';
+
+import React, { useEffect, useRef, useState } from 'react';
 import throttle from 'lodash/throttle';
 
 import bem from '../../utils/bem';
 import { getAnchor } from '../../utils/getAnchor';
-import { useTheme, cnTheme } from '../Theme/Theme';
-import Portal from './Portal';
-import { getPositionInLayout, getScrollableParentNodes } from './utils/popover-utils';
+import { cnTheme, useTheme } from '../Theme/Theme';
 
-import './styles.css';
+import { getPositionInLayout, getScrollableParentNodes } from './utils/popover-utils';
+import Portal from './Portal';
 
 export type Directions =
   | 'top-center'
@@ -32,7 +33,6 @@ export type PopoverProps = {
   className?: string;
   children: PopoverRenderChildren | React.ReactNode;
   popoverWidth?: number;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   positionDependencies?: any[];
 };
 
@@ -47,7 +47,6 @@ export const Popover = ({
   className = '',
   offset = DEFAULT_OFFSET,
   popoverWidth,
-  positionDependencies = [],
 }: PopoverProps) => {
   const [position, setPosition] = useState({ left: 0, top: 0 });
   const [show, setShow] = useState(false);
@@ -107,7 +106,15 @@ export const Popover = ({
       }
       window.removeEventListener('resize', viewportResizeChangeHandler);
     };
-  }, [visible, anchor, show, directions, ...positionDependencies]);
+  }, [
+    visible,
+    anchor,
+    show,
+    directions,
+    doReposition,
+    viewportResizeChangeHandler,
+    scrollChangeHandler,
+  ]);
 
   if (!anchor || !anchor.current || !show || !visible) {
     return null;

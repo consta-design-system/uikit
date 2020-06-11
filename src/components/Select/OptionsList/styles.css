@@ -5,11 +5,11 @@
 
   &__collapse {
     position: absolute;
-    right: 12px;
     top: 8px;
-    border: none;
-    background-color: transparent;
+    right: 12px;
     color: var(--color-typo-primary);
+    background-color: transparent;
+    border: none;
     outline: none;
     cursor: pointer;
 

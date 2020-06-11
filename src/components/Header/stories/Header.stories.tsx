@@ -1,11 +1,13 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+
 import { Text } from '../../Text/Text';
+
 import { FullExample } from './examples/FullExample/FullExample';
-import { WithoutSearchExample } from './examples/WithoutSearchExample/WithoutSearchExample';
 import { MinifyLoginExample } from './examples/MinifyLoginExample/MinifyLoginExample';
-import { WithoutMenuExample } from './examples/WithoutMenuExample/WithoutMenuExample';
 import { WithLogoExample } from './examples/WithLogoExample/WithLogoExample';
+import { WithoutMenuExample } from './examples/WithoutMenuExample/WithoutMenuExample';
+import { WithoutSearchExample } from './examples/WithoutSearchExample/WithoutSearchExample';
 
 storiesOf('Header', module).add('Примеры', () => {
   return (

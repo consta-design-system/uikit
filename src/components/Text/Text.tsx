@@ -1,9 +1,10 @@
 import './Text.css';
 
 import React from 'react';
+
 import { cn } from '../../utils/bem';
-import * as wp from '../../utils/whitepaper/whitepaper';
 import { componentIsFunction } from '../../utils/componentIsFunction';
+import * as wp from '../../utils/whitepaper/whitepaper';
 
 export type TextPropAlign = 'left' | 'center' | 'right';
 export type TextPropDecoration = 'underline';
@@ -98,7 +99,7 @@ export function Text<T>(props: IText<T>): React.ReactElement | null {
           'line-height': lineHeight,
           size,
           spacing,
-          style: fontStyle,
+          'style': fontStyle,
           transform,
           type,
           view,
