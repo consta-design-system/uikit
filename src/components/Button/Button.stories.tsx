@@ -43,7 +43,6 @@ storiesOf('Button', module)
     <Button
       as="a"
       href="#"
-      type="button"
       onClick={action('click')}
       {...withIconLeftKnobs()}
       {...defaultKnobs()}

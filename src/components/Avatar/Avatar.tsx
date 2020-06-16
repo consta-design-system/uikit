@@ -4,22 +4,17 @@ import React, { useMemo } from 'react';
 import random from 'lodash/random';
 
 import { cn } from '../../utils/bem';
-import {
-  ComponentWithAsAttributes,
-  PropsWithAsAttributes,
-} from '../../utils/types/PropsWithAsAttributes';
+import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 
 export type AvatarPropSize = 's' | 'm';
 export type AvatarPropForm = 'round' | 'brick' | 'default';
 
-declare type Props = {
+type Props = {
   url?: string;
   name?: string;
   size?: AvatarPropSize;
   form?: AvatarPropForm;
 };
-
-export type AvatarProps<As extends keyof JSX.IntrinsicElements> = PropsWithAsAttributes<Props, As>;
 
 export const cnAvatar = cn('Avatar');
 
@@ -56,27 +51,22 @@ export const getInitialsForName = (name: string | undefined) => {
   return `${firstLetter.toUpperCase()}${secondLatter.toUpperCase()}`;
 };
 
-export const Avatar: ComponentWithAsAttributes<Props, HTMLElement> = React.forwardRef(
-  <As extends keyof JSX.IntrinsicElements>(
-    props: AvatarProps<As>,
-    ref: React.Ref<HTMLElement>,
-  ): React.ReactElement | null => {
-    const { as = 'div', className, size = 'm', form = 'round', url, name, ...otherProps } = props;
-    const Tag = as as string;
-    const showImage = Boolean(url);
-    const initials = useMemo(() => getInitialsForName(name), [name]);
-    const colorIndex = useMemo(() => getColorIndexForName(name), [name]);
+export const Avatar: ComponentWithAs<Props> = forwardRefWithAs<Props>((props, ref) => {
+  const { as = 'div', className, size = 'm', form = 'round', url, name, ...otherProps } = props;
+  const Tag = as as string;
+  const showImage = Boolean(url);
+  const initials = useMemo(() => getInitialsForName(name), [name]);
+  const colorIndex = useMemo(() => getColorIndexForName(name), [name]);
 
-    return (
-      <Tag
-        {...otherProps}
-        style={!showImage ? { '--avatar-color': `var(--avatar-color-${colorIndex})` } : {}}
-        className={cnAvatar({ size, form }, [className])}
-        ref={ref}
-      >
-        {showImage && <img className={cnAvatar('Image')} src={url} alt={name} />}
-        {!showImage && initials}
-      </Tag>
-    );
-  },
-);
+  return (
+    <Tag
+      {...otherProps}
+      style={!showImage ? { '--avatar-color': `var(--avatar-color-${colorIndex})` } : {}}
+      className={cnAvatar({ size, form }, [className])}
+      ref={ref}
+    >
+      {showImage && <img className={cnAvatar('Image')} src={url} alt={name} />}
+      {!showImage && initials}
+    </Tag>
+  );
+});
