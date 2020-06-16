@@ -28,8 +28,8 @@ export const cnIcon = cn('Icon');
 export const Icon = React.forwardRef<HTMLDivElement, IconProps>((props, ref) => {
   const { children, className, size = 'm', view, ...otherProps } = props;
   return (
-    <div {...otherProps} className={cnIcon({ size, view }, [className])} ref={ref}>
+    <span {...otherProps} className={cnIcon({ size, view }, [className])} ref={ref}>
       {children}
-    </div>
+    </span>
   );
 });
