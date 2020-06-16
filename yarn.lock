@@ -3293,6 +3293,45 @@
     semver "^7.3.2"
     tsutils "^3.17.1"
 
+"@vercel/build-utils@2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@vercel/build-utils/-/build-utils-2.4.0.tgz#c756a3804f072cc693ebe0bbcc1adcce61b9f15c"
+  integrity sha512-VRXMLBPDcpFUHQMgHdgYHBl9SRwqNFb43tgkMdTYaNml2HgqlLNvNuINKlqwB2/Q/tARIWcm4jmPKR0gu1CaEQ==
+
+"@vercel/go@1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@vercel/go/-/go-1.1.2.tgz#0b0067a56616e4c56eeac8a8b33a9bb64a79be71"
+  integrity sha512-1k7w6gY2Uj4DVqvvqm5VXZZeCqmzV5Fw3T3hjfgt13WVXPVwYfXf50ya4VvwpF9/IEvXpAhXLRcHD7ZTCMoXKA==
+
+"@vercel/next@2.6.6":
+  version "2.6.6"
+  resolved "https://registry.yarnpkg.com/@vercel/next/-/next-2.6.6.tgz#ec8a4fd8b8b058940010e491de2c41bb25fe1159"
+  integrity sha512-1Zx3PqDznaoCtFLd3DfDQ5nBkyr/8UbyUtrDR5aj7TXCi1BQ9jBzO9NGzpRmxZRNkVX4BFQTX2ESEBz8rKbLHw==
+
+"@vercel/node@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@vercel/node/-/node-1.7.0.tgz#f90412a05463edc29d34ab6a56abd02867181d66"
+  integrity sha512-UaG86cstaCEaNd8N1BAelysofzxi6Grhpg4Tq6UmYJuz7CqmRwsVhsqkK0u0dXFvH1uHjRUGSEwjndpKiAFfFg==
+  dependencies:
+    "@types/node" "*"
+    ts-node "8.9.1"
+    typescript "3.9.3"
+
+"@vercel/python@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@vercel/python/-/python-1.2.2.tgz#52e8e2a0d3a65153b8bd25a63db36b704aafde72"
+  integrity sha512-+rHfbjJaySdac59Oa11a7/nZzpXC98Kqw5tPh8DT1I5OG8YTfgJnwgfBoytZOAZZQBcggoJspnjAd+wGVCoVXw==
+
+"@vercel/ruby@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@vercel/ruby/-/ruby-1.2.2.tgz#0a6ef704d9eec7a88d3bf12f462cd52046b75361"
+  integrity sha512-5kKFNS84EvjHRI/umZqL31KdyvoWO05qbIeR3YHHJBCPSBIUlGimM0Wx7OsdAK+TMDzpWszBF/6bgk//KpmYbg==
+
+"@vercel/static-build@0.17.2":
+  version "0.17.2"
+  resolved "https://registry.yarnpkg.com/@vercel/static-build/-/static-build-0.17.2.tgz#fa9963e951cada1059918837e7ca223bd31f58d8"
+  integrity sha512-jK7WUvZIaYqJJffQ1z7Q2wSbAWJhAv8SluMyLfGMox5hBIso/QOPd2Tnh5xnMGbib6U/4noEG3ekHr81l3Yo3w==
+
 "@webassemblyjs/ast@1.8.5":
   version "1.8.5"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.8.5.tgz#51b1c5fe6576a34953bf4b253df9f0d490d9e359"
@@ -16315,6 +16354,17 @@ ts-map@^1.0.3:
   resolved "https://registry.yarnpkg.com/ts-map/-/ts-map-1.0.3.tgz#1c4d218dec813d2103b7e04e4bcf348e1471c1ff"
   integrity sha512-vDWbsl26LIcPGmDpoVzjEP6+hvHZkBkLW7JpvwbCv/5IYPJlsbzCVXY3wsCeAxAUeTclNOUZxnLdGh3VBD/J6w==
 
+ts-node@8.9.1:
+  version "8.9.1"
+  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-8.9.1.tgz#2f857f46c47e91dcd28a14e052482eb14cfd65a5"
+  integrity sha512-yrq6ODsxEFTLz0R3BX2myf0WBCSQh9A+py8PBo1dCzWIOcvisbyH6akNKqDHMgXePF2kir5mm5JXJTH3OUJYOQ==
+  dependencies:
+    arg "^4.1.0"
+    diff "^4.0.1"
+    make-error "^1.1.1"
+    source-map-support "^0.5.17"
+    yn "3.1.1"
+
 ts-node@^8.8.2:
   version "8.10.2"
   resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-8.10.2.tgz#eee03764633b1234ddd37f8db9ec10b75ec7fb8d"
@@ -16434,7 +16484,7 @@ typescript-estree@18.0.0:
     lodash.unescape "4.0.1"
     semver "5.5.0"
 
-typescript@^3.8.3:
+typescript@3.9.3, typescript@^3.8.3:
   version "3.9.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.3.tgz#d3ac8883a97c26139e42df5e93eeece33d610b8a"
   integrity sha512-D/wqnB2xzNFIcoBG9FG8cXRDjiqSTbG2wd8DMZeQyJlP1vfTkIxH4GKveWaEBYySKIg+USu+E+EDIR47SqnaMQ==
@@ -16858,6 +16908,19 @@ vendors@^1.0.0:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/vendors/-/vendors-1.0.4.tgz#e2b800a53e7a29b93506c3cf41100d16c4c4ad8e"
   integrity sha512-/juG65kTL4Cy2su4P8HjtkTxk6VmJDiOPBufWniqQ6wknac6jNiXS9vU+hO3wgusiyqWlzTbVHi0dyJqRONg3w==
+
+vercel@^19.1.0:
+  version "19.1.0"
+  resolved "https://registry.yarnpkg.com/vercel/-/vercel-19.1.0.tgz#63db7e1d6b5c994ff0a35c8ce69bf4fe33115029"
+  integrity sha512-DWb7MfysrkiWQAar85fjcLUmOj9N7WjH93mwZw1SX1wDiVLkvcm/5of+DYCOfmJkt2YJoNiglx2JpLW8EDsDSQ==
+  dependencies:
+    "@vercel/build-utils" "2.4.0"
+    "@vercel/go" "1.1.2"
+    "@vercel/next" "2.6.6"
+    "@vercel/node" "1.7.0"
+    "@vercel/python" "1.2.2"
+    "@vercel/ruby" "1.2.2"
+    "@vercel/static-build" "0.17.2"
 
 verror@1.10.0:
   version "1.10.0"

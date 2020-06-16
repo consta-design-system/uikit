@@ -108,10 +108,10 @@ storiesOf('Icons', module)
   .addDecorator(withKnobs)
   .add('Icons', () => (
     <div className="tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full">
+      <IconsItem name="IconAdd" icon={IconAdd} {...defaultKnobs()} />
       <IconsItem name="IconAlignCenter" icon={IconAlignCenter} {...defaultKnobs()} />
       <IconsItem name="IconAlert" icon={IconAlert} {...defaultKnobs()} />
       <IconsItem name="IconAlignJustify" icon={IconAlignJustify} {...defaultKnobs()} />
-      <IconsItem name="IconAdd" icon={IconAdd} {...defaultKnobs()} />
       <IconsItem name="IconAlignLeft" icon={IconAlignLeft} {...defaultKnobs()} />
       <IconsItem name="IconAlignRight" icon={IconAlignRight} {...defaultKnobs()} />
       <IconsItem name="IconArrowDown" icon={IconArrowDown} {...defaultKnobs()} />
@@ -155,13 +155,13 @@ storiesOf('Icons', module)
       <IconsItem name="IconForward" icon={IconForward} {...defaultKnobs()} />
       <IconsItem name="IconFunnel" icon={IconFunnel} {...defaultKnobs()} />
       <IconsItem name="IconGas" icon={IconGas} {...defaultKnobs()} />
-      <IconsItem name="IconItalic" icon={IconItalic} {...defaultKnobs()} />
       <IconsItem name="IconHamburger" icon={IconHamburger} {...defaultKnobs()} />
-      <IconsItem name="IconLeaf" icon={IconLeaf} {...defaultKnobs()} />
+      <IconsItem name="IconItalic" icon={IconItalic} {...defaultKnobs()} />
       <IconsItem name="IconKebab" icon={IconKebab} {...defaultKnobs()} />
+      <IconsItem name="IconLeaf" icon={IconLeaf} {...defaultKnobs()} />
       <IconsItem name="IconLink" icon={IconLink} {...defaultKnobs()} />
-      <IconsItem name="IconList" icon={IconList} {...defaultKnobs()} />
       <IconsItem name="IconListNumbered" icon={IconListNumbered} {...defaultKnobs()} />
+      <IconsItem name="IconList" icon={IconList} {...defaultKnobs()} />
       <IconsItem name="IconLock" icon={IconLock} {...defaultKnobs()} />
       <IconsItem name="IconMail" icon={IconMail} {...defaultKnobs()} />
       <IconsItem name="IconMeatball" icon={IconMeatball} {...defaultKnobs()} />
@@ -196,7 +196,7 @@ storiesOf('Icons', module)
       <IconsItem name="IconTrash" icon={IconTrash} {...defaultKnobs()} />
       <IconsItem name="IconType" icon={IconType} {...defaultKnobs()} />
       <IconsItem name="IconUnderline" icon={IconUnderline} {...defaultKnobs()} />
-      <IconsItem name="IconWorld" icon={IconWorld} {...defaultKnobs()} />
       <IconsItem name="IconUser" icon={IconUser} {...defaultKnobs()} />
+      <IconsItem name="IconWorld" icon={IconWorld} {...defaultKnobs()} />
     </div>
   ));
