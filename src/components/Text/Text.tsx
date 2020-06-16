@@ -3,10 +3,7 @@ import './Text.css';
 import React from 'react';
 
 import { cn } from '../../utils/bem';
-import {
-  ComponentWithAsAttributes,
-  PropsWithAsAttributes,
-} from '../../utils/types/PropsWithAsAttributes';
+import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import * as wp from '../../utils/whitepaper/whitepaper';
 
 export type TextPropAlign = 'left' | 'center' | 'right';
@@ -60,62 +57,55 @@ type Props = {
   children?: React.ReactNode;
 };
 
-export type TextProps<As extends keyof JSX.IntrinsicElements> = PropsWithAsAttributes<Props, As>;
-
 export const cnText = cn('Text');
 
-export const Text: ComponentWithAsAttributes<Props, HTMLElement> = React.forwardRef(
-  <As extends keyof JSX.IntrinsicElements>(
-    props: TextProps<As>,
-    ref: React.Ref<HTMLElement>,
-  ): React.ReactElement | null => {
-    const {
-      as = 'div',
-      align,
-      decoration,
-      display,
-      font,
-      lineHeight,
-      size = 'm',
-      spacing,
-      fontStyle,
-      transform,
-      type,
-      view = 'primary',
-      weight,
-      width,
-      className,
-      children,
-      ...otherProps
-    } = props;
+export const Text: ComponentWithAs<Props> = forwardRefWithAs<Props>((props, ref) => {
+  const {
+    as = 'div',
+    align,
+    decoration,
+    display,
+    font,
+    lineHeight,
+    size = 'm',
+    spacing,
+    fontStyle,
+    transform,
+    type,
+    view = 'primary',
+    weight,
+    width,
+    className,
+    children,
+    ...otherProps
+  } = props;
 
-    const Tag = as as string;
+  const Tag = as as string;
 
-    return (
-      <Tag
-        {...otherProps}
-        className={cnText(null, [
-          wp.text({
-            align,
-            decoration,
-            display,
-            font,
-            'line-height': lineHeight,
-            size,
-            spacing,
-            'style': fontStyle,
-            transform,
-            type,
-            view,
-            weight,
-            width,
-          }),
-          className,
-        ])}
-        ref={ref}
-      >
-        {children}
-      </Tag>
-    );
-  },
-);
+  return (
+    <Tag
+      {...otherProps}
+      className={cnText(null, [
+        wp.text({
+          align,
+          decoration,
+          display,
+          font,
+          'line-height': lineHeight,
+          size,
+          spacing,
+          'style': fontStyle,
+          transform,
+          type,
+          view,
+          weight,
+          width,
+        }),
+        className,
+      ])}
+      ref={ref}
+    >
+      {children}
+    </Tag>
+  );
+});

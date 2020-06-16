@@ -5,10 +5,7 @@ import { classnames } from '@bem-react/classnames';
 
 import { IconProps } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
-import {
-  ComponentWithAsAttributes,
-  PropsWithAsAttributes,
-} from '../../utils/types/PropsWithAsAttributes';
+import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import * as wp from '../../utils/whitepaper/whitepaper';
 import { useTheme } from '../Theme/Theme';
 
@@ -22,65 +19,58 @@ type Props = {
   label?: string;
 };
 
-export type BadgeProps<As extends keyof JSX.IntrinsicElements> = PropsWithAsAttributes<Props, As>;
-
 export const cnBadge = cn('Badge');
 
-export const Badge: ComponentWithAsAttributes<Props, HTMLElement> = React.forwardRef(
-  <As extends keyof JSX.IntrinsicElements>(
-    props: BadgeProps<As>,
-    ref: React.Ref<HTMLElement>,
-  ): React.ReactElement | null => {
-    const {
-      size = 'm',
-      view = 'filled',
-      status = 'normal',
-      form = 'default',
-      icon,
-      minified,
-      label,
-      as = 'div',
-      ...otherProps
-    } = props;
+export const Badge: ComponentWithAs<Props> = forwardRefWithAs<Props>((props, ref) => {
+  const {
+    size = 'm',
+    view = 'filled',
+    status = 'normal',
+    form = 'default',
+    icon,
+    minified,
+    label,
+    as = 'div',
+    ...otherProps
+  } = props;
 
-    const Tag = as as string;
-    const { themeClassNames } = useTheme();
+  const Tag = as as string;
+  const { themeClassNames } = useTheme();
 
-    const className =
-      status !== 'system' && view === 'filled'
-        ? classnames(props.className, themeClassNames.color.accent)
-        : props.className;
-    const Icon = icon;
-    const withIcon = !!icon;
+  const className =
+    status !== 'system' && view === 'filled'
+      ? classnames(props.className, themeClassNames.color.accent)
+      : props.className;
+  const Icon = icon;
+  const withIcon = !!icon;
 
-    if (minified) {
-      return (
-        <Tag
-          {...otherProps}
-          className={cnBadge({ size, status, minified }, [className])}
-          title={label}
-          ref={ref}
-        />
-      );
-    }
-
+  if (minified) {
     return (
       <Tag
         {...otherProps}
-        className={cnBadge({ size, view, status, form, withIcon }, [className])}
+        className={cnBadge({ size, status, minified }, [className])}
+        title={label}
         ref={ref}
-      >
-        {Icon ? (
-          <div className={wp.ptIconPlus({ 'vertical-align': 'center' })}>
-            <div className={cnBadge('Icon', [wp.ptIconPlus('icon', { 'indent-r': '2xs' })])}>
-              <Icon size="xs" />
-            </div>
-            <span className={wp.ptIconPlus('block')}>{label}</span>
-          </div>
-        ) : (
-          label
-        )}
-      </Tag>
+      />
     );
-  },
-);
+  }
+
+  return (
+    <Tag
+      {...otherProps}
+      className={cnBadge({ size, view, status, form, withIcon }, [className])}
+      ref={ref}
+    >
+      {Icon ? (
+        <div className={wp.ptIconPlus({ 'vertical-align': 'center' })}>
+          <div className={cnBadge('Icon', [wp.ptIconPlus('icon', { 'indent-r': '2xs' })])}>
+            <Icon size="xs" />
+          </div>
+          <span className={wp.ptIconPlus('block')}>{label}</span>
+        </div>
+      ) : (
+        label
+      )}
+    </Tag>
+  );
+});
