@@ -76,6 +76,7 @@ import { IconSelect } from '../../IconSelect/IconSelect';
 import { IconSelectOpen } from '../../IconSelectOpen/IconSelectOpen';
 import { IconSettings } from '../../IconSettings/IconSettings';
 import { IconShuffle } from '../../IconShuffle/IconShuffle';
+import { IconSmile } from '../../IconSmile/IconSmile';
 import { IconSortDown } from '../../IconSortDown/IconSortDown';
 import { IconSortDownCenter } from '../../IconSortDownCenter/IconSortDownCenter';
 import { IconSortUp } from '../../IconSortUp/IconSortUp';
@@ -164,8 +165,8 @@ storiesOf('Icons', module)
       <IconsItem name="IconListNumbered" icon={IconListNumbered} {...defaultKnobs()} />
       <IconsItem name="IconLock" icon={IconLock} {...defaultKnobs()} />
       <IconsItem name="IconMail" icon={IconMail} {...defaultKnobs()} />
-      <IconsItem name="IconOpenInNew" icon={IconOpenInNew} {...defaultKnobs()} />
       <IconsItem name="IconMeatball" icon={IconMeatball} {...defaultKnobs()} />
+      <IconsItem name="IconOpenInNew" icon={IconOpenInNew} {...defaultKnobs()} />
       <IconsItem name="IconPause" icon={IconPause} {...defaultKnobs()} />
       <IconsItem name="IconPhoto" icon={IconPhoto} {...defaultKnobs()} />
       <IconsItem name="IconPlay" icon={IconPlay} {...defaultKnobs()} />
@@ -182,6 +183,7 @@ storiesOf('Icons', module)
       <IconsItem name="IconSelectOpen" icon={IconSelectOpen} {...defaultKnobs()} />
       <IconsItem name="IconSettings" icon={IconSettings} {...defaultKnobs()} />
       <IconsItem name="IconShuffle" icon={IconShuffle} {...defaultKnobs()} />
+      <IconsItem name="IconSmile" icon={IconSmile} {...defaultKnobs()} />
       <IconsItem name="IconSortDown" icon={IconSortDown} {...defaultKnobs()} />
       <IconsItem name="IconSortDownCenter" icon={IconSortDownCenter} {...defaultKnobs()} />
       <IconsItem name="IconSortUp" icon={IconSortUp} {...defaultKnobs()} />
