@@ -2,8 +2,8 @@ import * as React from 'react';
 
 function IconCommentSizeXs(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 16 16" {...props}>
-      <path d="M14 11a1 1 0 01-.999 1H4.167L2 14V3.996A.997.997 0 013 3h10a1 1 0 011 1v7z" />
+    <svg viewBox="0 0 12 12" {...props}>
+      <path d="M11 8a1 1 0 01-1 1H3l-2 2V2a1 1 0 011-1h8a1 1 0 011 1v6z" />
     </svg>
   );
 }
