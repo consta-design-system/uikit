@@ -1,10 +1,10 @@
 import React, { CSSProperties } from 'react';
 
 export type BaseCheckGroupFieldItemPropOnChange<T> = (
-  args: BaseCheckGroupFieldItemOnChangeFunctionArguments<T>
+  args: BaseCheckGroupFieldItemOnChangeFunctionArguments<T>,
 ) => void;
 export type BaseCheckGroupFieldItemOnChangeFunctionArguments<T> = {
-  e: React.MouseEvent | React.ChangeEvent;
+  e: Event | React.ChangeEvent | React.MouseEvent;
   id: BaseCheckGroupFieldItemPropItemKey;
   value: T;
   checked: boolean;
@@ -13,12 +13,12 @@ export type BaseCheckGroupFieldItemPropItemKey = string | number;
 export type BaseCheckGroupFieldItemPropItemLabel = string;
 export type BaseCheckGroupFieldPropGetItemKey<T> = (item: T) => BaseCheckGroupFieldItemPropItemKey;
 export type BaseCheckGroupFieldPropGetItemLabel<T> = (
-  item: T
+  item: T,
 ) => BaseCheckGroupFieldItemPropItemLabel;
 export type BaseCheckGroupFieldPropGetAdditionalPropsForItem<T, T2 = {}> = (
   item: T,
   index: number,
-  props: IBaseCheckGroupField<T, T2>
+  props: IBaseCheckGroupField<T, T2>,
 ) => {};
 
 export type BaseCheckGroupItemProps<T> = {
@@ -37,11 +37,11 @@ export type BaseCheckGroupFieldPropName = string;
 export type BaseCheckGroupFieldPropId = string | number;
 export type BaseCheckGroupFieldPropValue<T> = T[] | null;
 export type BaseCheckGroupFieldPropOnChange<T> = (
-  args: BaseCheckGroupFieldOnChangeArguments<T>
+  args: BaseCheckGroupFieldOnChangeArguments<T>,
 ) => void;
 
 export type BaseCheckGroupFieldOnChangeArguments<T> = {
-  e: React.MouseEvent;
+  e: Event | React.ChangeEvent | React.MouseEvent;
   id?: BaseCheckGroupFieldPropId;
   name?: BaseCheckGroupFieldPropName;
   value: BaseCheckGroupFieldPropValue<T>;
@@ -54,7 +54,7 @@ export type IBaseCheckGroupFieldProps<T> = {
   id?: BaseCheckGroupFieldPropId;
   name?: BaseCheckGroupFieldPropName;
   onChange?: BaseCheckGroupFieldPropOnChange<T>;
-  getItemKey?: BaseCheckGroupFieldPropGetItemKey<T>;
+  getItemKey: BaseCheckGroupFieldPropGetItemKey<T>;
   getItemLabel?: BaseCheckGroupFieldPropGetItemLabel<T>;
   componentItem: React.FC<BaseCheckGroupItemProps<T>>;
   innerRef?: React.Ref<HTMLDivElement>;
@@ -67,16 +67,14 @@ export type IBaseCheckGroupField<T, T2 = {}> = IBaseCheckGroupFieldProps<T> & {
 } & Omit<T2, keyof IBaseCheckGroupFieldProps<T>>;
 
 export function BaseCheckGroupField<T, T2 = {}>(
-  props: IBaseCheckGroupField<T, T2>
+  props: IBaseCheckGroupField<T, T2>,
 ): React.ReactElement | null {
-  //TODO: Убрать Any после того как сотавим конфиги
+  // TODO: Убрать Any после того как сотавим конфиги
   const {
     items,
     componentItem,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    getItemKey = (item: T | any) => item.id,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    getItemLabel = (item: T | any) => item.label,
+    getItemKey,
+    getItemLabel,
     getAdditionalPropsForItem,
     multiple,
     value = null,
@@ -89,14 +87,19 @@ export function BaseCheckGroupField<T, T2 = {}>(
   } = props;
   const ComponentItem = componentItem;
 
-  const valueByKey = {};
+  const valueByKey: { [value: string]: T } = {};
   if (value && value.length > 0) {
     for (const item of value) {
-      valueByKey[getItemKey(item)] = value;
+      valueByKey[getItemKey(item)] = item;
     }
   }
 
-  const handleItemChange = ({ e, id: itemId, value: itemValue, checked: itemChecked }) => {
+  const handleItemChange: BaseCheckGroupFieldItemPropOnChange<T> = ({
+    e,
+    id: itemId,
+    value: itemValue,
+    checked: itemChecked,
+  }) => {
     if (multiple) {
       const newValue = value ? value.filter((item) => getItemKey(item) !== itemId) : [];
       if (itemChecked) {
@@ -108,7 +111,7 @@ export function BaseCheckGroupField<T, T2 = {}>(
     }
   };
 
-  const getChecked = (item) => !!valueByKey[getItemKey(item)];
+  const getChecked = (item: T) => !!valueByKey[getItemKey(item)];
 
   return (
     <div className={className} style={style} ref={innerRef}>
@@ -118,7 +121,7 @@ export function BaseCheckGroupField<T, T2 = {}>(
               {...(getAdditionalPropsForItem ? getAdditionalPropsForItem(item, index, props) : {})}
               onChange={handleItemChange}
               key={getItemKey(item)}
-              label={getItemLabel(item)}
+              label={getItemLabel && getItemLabel(item)}
               value={item}
               id={getItemKey(item)}
               checked={getChecked(item)}

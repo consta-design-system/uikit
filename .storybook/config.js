@@ -1,8 +1,9 @@
-import { addParameters, addDecorator } from '@storybook/react';
 import { withA11y } from '@storybook/addon-a11y';
-import { withThemes } from 'storybook-addon-themes';
-import { withKnobs } from '@storybook/addon-knobs';
 import { DocsContainer } from '@storybook/addon-docs/blocks';
+import { withKnobs } from '@storybook/addon-knobs';
+import { addDecorator, addParameters } from '@storybook/react';
+import { withThemes } from 'storybook-addon-themes';
+
 import { StoryBookRootDecorator } from '../src/uiKit/components/StoryBookRootDecorator/StoryBookRootDecorator';
 
 const themes = [

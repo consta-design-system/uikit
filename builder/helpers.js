@@ -1,5 +1,3 @@
-'use strict';
-
 const { normalize, dirname, join, relative, resolve } = require('path');
 const { readFile, writeFile, ensureDir, remove, readJSON, writeJSON } = require('fs-extra');
 const logSymbols = require('log-symbols');
@@ -120,7 +118,7 @@ const iconParse = async ({ componentName, path, pathOutdir, fileName }) => {
         ],
       },
     },
-    { componentName }
+    { componentName },
   );
   const jsPatch = `${pathOutdir}/${fileName}.tsx`;
   await ensureDir(dirname(jsPatch));
@@ -246,10 +244,10 @@ const copyAssets = async (ignore, src, distPaths) => {
 const platforms = ['common'];
 
 const layerToPlatform = {
-  common: ['common'],
-  desktop: ['desktop'],
-  deskpad: ['touch-pad', 'desktop'],
-  touch: ['touch-phone', 'touch-pad'],
+  'common': ['common'],
+  'desktop': ['desktop'],
+  'deskpad': ['touch-pad', 'desktop'],
+  'touch': ['touch-phone', 'touch-pad'],
   'touch-pad': ['touch-pad'],
   'touch-phone': ['touch-phone'],
 };
@@ -271,7 +269,6 @@ const getCJSExportTemplate = ({ filePath }) =>
 
 const indexEsTmpl = (blocks) => blocks.join('\n');
 
-// TODO: https://st.yandex-team.ru/ISL-6234
 const indexJsTmpl = (blocks) => `"use strict";
 exports.__esModule = true;
 var tslib_1 = require("tslib");
@@ -288,7 +285,7 @@ const updateGitignore = async (allKeys, gitignorePath) => {
     startOfBuildPaths = 0;
   }
   let endOfBuildPaths = gitignore.findIndex(
-    (el, index) => index > startOfBuildPaths && el.startsWith('#')
+    (el, index) => index > startOfBuildPaths && el.startsWith('#'),
   );
   if (endOfBuildPaths === -1) {
     endOfBuildPaths = gitignore.indexOf('', startOfBuildPaths + 1);
@@ -330,7 +327,7 @@ const generateReExports = (
   src,
   [distSrc, distEsSrc],
   distPath,
-  componentFolder = 'components'
+  componentFolder = 'components',
 ) =>
   fg([join(src, componentFolder, '**')], { ignore }).then(async (files) => {
     const packPath = join(distPath, 'package.json');
@@ -389,7 +386,7 @@ const generateReExports = (
           getPackageTemplate({
             name: `${pack.name}/${componentName}`,
             version: pack.version,
-          })
+          }),
         );
 
         const reExportsES = [];
@@ -400,13 +397,13 @@ const generateReExports = (
           const exportESMTemplate = getESMExportTemplate({
             filePath: relative(
               join(platformDir, 'index'),
-              join(blockDir, distEsSrc, filePath.replace(/\.tsx?$/, ''))
+              join(blockDir, distEsSrc, filePath.replace(/\.tsx?$/, '')),
             ),
           });
           const exportCJSTemplate = getCJSExportTemplate({
             filePath: relative(
               join(platformDir, 'index'),
-              join(blockDir, distSrc, filePath.replace(/\.tsx?$/, ''))
+              join(blockDir, distSrc, filePath.replace(/\.tsx?$/, '')),
             ),
           });
 
@@ -430,11 +427,11 @@ const generateReExports = (
             .replace(`src/${componentFolder}`, componentFolder);
           const cjsFilePath = relative(
             join(bundleDir, 'index'),
-            join(blockDir, distSrc, platformPath)
+            join(blockDir, distSrc, platformPath),
           );
           const esmFilePath = relative(
             join(bundleDir, 'index'),
-            join(blockDir, distEsSrc, platformPath)
+            join(blockDir, distEsSrc, platformPath),
           );
 
           const bundleCJS = [];
@@ -443,14 +440,14 @@ const generateReExports = (
           bundleCJS.push(
             getCJSExportTemplate({
               filePath: cjsFilePath,
-            })
+            }),
           );
           writeFile(join(bundleDir, 'index.js'), indexJsTmpl(bundleCJS));
 
           bundleESM.push(
             getESMExportTemplate({
               filePath: esmFilePath,
-            })
+            }),
           );
           writeFile(join(bundleDir, 'es.js'), indexEsTmpl(bundleESM));
 
@@ -461,7 +458,7 @@ const generateReExports = (
             getPackageTemplate({
               name: `${pack.name}/${componentName}`,
               version: pack.version,
-            })
+            }),
           );
         }
         writeFile(join(platformDir, 'index.js'), indexJsTmpl(reExportsJS));

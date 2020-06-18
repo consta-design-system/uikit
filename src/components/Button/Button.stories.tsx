@@ -1,8 +1,10 @@
 import * as React from 'react';
-import { withKnobs, text, select, boolean } from '@storybook/addon-knobs';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
+import { storiesOf } from '@storybook/react';
+
 import { IconUser } from '../../icons/IconUser/IconUser';
+
 import { Button } from './Button';
 
 const defaultKnobs = () => ({
@@ -12,7 +14,7 @@ const defaultKnobs = () => ({
   form: select(
     'form',
     ['default', 'brick', 'round', 'brickRound', 'roundBrick', 'brickDefault', 'defaultBrick'],
-    'default'
+    'default',
   ),
   disabled: boolean('disabled', false),
   loading: boolean('loading', false),

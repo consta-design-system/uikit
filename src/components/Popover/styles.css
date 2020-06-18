@@ -1,8 +1,8 @@
 .popover {
   position: absolute;
   z-index: 1001;
-  margin: -9999px 0 0 -9999px;
   visibility: hidden;
+  margin: -9999px 0 0 -9999px;
 
   &__children {
     position: relative;
@@ -11,7 +11,7 @@
   }
 
   &_visible {
-    margin: 0;
     visibility: visible;
+    margin: 0;
   }
 }

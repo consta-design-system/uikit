@@ -19,23 +19,23 @@
   }
 
   &_isMulti&_size_xs {
-    min-height: var(--control-height-xs);
     height: auto;
+    min-height: var(--control-height-xs);
   }
 
   &_isMulti&_size_s {
-    min-height: var(--control-height-s);
     height: auto;
+    min-height: var(--control-height-s);
   }
 
   &_isMulti&_size_m {
-    min-height: var(--control-height-m);
     height: auto;
+    min-height: var(--control-height-m);
   }
 
   &_isMulti&_size_l {
-    min-height: var(--control-height-l);
     height: auto;
+    min-height: var(--control-height-l);
   }
 
   &__label {
@@ -52,12 +52,12 @@
   }
 
   &__options {
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
     max-height: 290px;
     padding-top: var(--space-xs);
     padding-bottom: var(--space-xs);
-    box-sizing: border-box;
-    overflow-y: auto;
-    overflow-x: hidden;
     border: var(--control-border-width) solid var(--color-control-bg-border-default);
     border-radius: var(--control-radius);
     box-shadow: 0 2px 2px rgba(var(--color-nums-shadow), 0.04),
@@ -75,8 +75,8 @@
     &_multi {
       position: relative;
       display: flex;
-      min-height: var(--input-height);
       height: auto;
+      min-height: var(--input-height);
       padding-top: 3px;
       padding-bottom: 3px;
       cursor: text;
@@ -87,6 +87,7 @@
     padding-top: 2px;
     padding-bottom: 2px;
   }
+
   &_size_xs &__input_multi {
     padding-top: 0;
     padding-bottom: 0;
@@ -104,8 +105,8 @@
     align-items: center;
     height: 24px;
     padding: 0;
-    border: none;
     background: none;
+    border: none;
     outline: none;
     transform: translateY(-50%);
 
@@ -117,8 +118,8 @@
 
   &__icon-wrapper {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     padding: 0 var(--space-xs);
     color: var(--color-control-typo-default);
     opacity: 0.4;
@@ -133,8 +134,8 @@
     position: absolute;
     top: 50%;
     right: 32px;
-    height: 24px;
     width: 1px;
+    height: 24px;
     background-color: var(--color-control-bg-border-default);
     transform: translateY(-50%);
   }
@@ -159,12 +160,12 @@
     position: absolute;
     top: 0;
     display: flex;
+    overflow: hidden;
     align-items: center;
     height: 100%;
-    overflow: hidden;
     color: var(--color-control-typo-placeholder);
-    text-overflow: ellipsis;
     white-space: nowrap;
+    text-overflow: ellipsis;
     user-select: none;
     pointer-events: none;
   }
@@ -179,11 +180,11 @@
 
   &__values {
     display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    max-height: 98px;
     overflow-y: scroll;
+    align-items: center;
+    max-height: 98px;
     line-height: initial;
+    flex-wrap: wrap;
     scrollbar-width: none;
 
     &::-webkit-scrollbar {

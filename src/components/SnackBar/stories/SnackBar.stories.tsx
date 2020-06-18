@@ -1,18 +1,20 @@
 import './SnackBar.stories.css';
 
 import * as React from 'react';
-import { storiesOf } from '@storybook/react';
 import { withDocs } from '@storybook-addons/docs';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
-import { cn } from '../../../utils/bem';
-import { Button } from '../../Button/Button';
+import { storiesOf } from '@storybook/react';
+
 import { IIcon } from '../../../icons/Icon/Icon';
 import { IconAdd } from '../../../icons/IconAdd/IconAdd';
-import { IconThumbUp } from '../../../icons/IconThumbUp/IconThumbUp';
 import { IconAlert } from '../../../icons/IconAlert/IconAlert';
-import { IconRing } from '../../../icons/IconRing/IconRing';
 import { IconProcessing } from '../../../icons/IconProcessing/IconProcessing';
-import { SnackBar, SnackBarItemStatus, Item } from '../SnackBar';
+import { IconRing } from '../../../icons/IconRing/IconRing';
+import { IconThumbUp } from '../../../icons/IconThumbUp/IconThumbUp';
+import { cn } from '../../../utils/bem';
+import { Button } from '../../Button/Button';
+import { Item, SnackBar, SnackBarItemStatus } from '../SnackBar';
+import md from '../SnackBar.md';
 
 const knobs = () => ({
   withIcon: boolean('withIcon', false),
@@ -36,7 +38,7 @@ const cnSnackBarStories = cn('SnackBarStories');
 
 function reducer(
   state: Item[],
-  action: { type: 'add' | 'remove'; item?: Item; key?: number | string }
+  action: { type: 'add' | 'remove'; item?: Item; key?: number | string },
 ) {
   switch (action.type) {
     case 'add':
@@ -155,7 +157,7 @@ function SnackBarExample() {
 
 function reducerExample2(
   state: Item[],
-  action: { type: 'add' | 'remove'; item?: Item; key?: number | string }
+  action: { type: 'add' | 'remove'; item?: Item; key?: number | string },
 ) {
   switch (action.type) {
     case 'add':
@@ -231,9 +233,9 @@ storiesOf('UI-KIT|/SnackBar', module)
   .addDecorator(
     withDocs({
       readme: {
-        content: require('../SnackBar.md')['default'],
+        content: md,
       },
-    })
+    }),
   )
   .add('playground', () => <SnackBarStories {...knobs()} />);
 

@@ -1,8 +1,10 @@
-import React, { Fragment } from 'react';
-import { withKnobs, text, select } from '@storybook/addon-knobs';
-import { storiesOf } from '@storybook/react';
+import React from 'react';
 import { withDocs } from '@storybook-addons/docs';
+import { select, text, withKnobs } from '@storybook/addon-knobs';
+import { storiesOf } from '@storybook/react';
+
 import * as wp from '../../utils/whitepaper/whitepaper';
+
 import {
   Text,
   TextPropAlign,
@@ -12,18 +14,19 @@ import {
   TextPropView,
   TextPropWeight,
 } from './Text';
+import md from './Text.md';
 
 const defaultKnobs = () => ({
   as: select('as', ['p', 'div', 'a', 'span', 'h1', 'h2'], undefined),
   align: select('align', ['left', 'center', 'right'], undefined),
   decoration: select('decoration', ['underline'], undefined),
   display: select('display', ['block', 'inline-block', 'inline'], undefined),
-  font: select('font', ['mono', 'sans', 'serif'], 'serif'),
+  font: select('font', ['primary', 'mono'], 'primary'),
   lineHeight: select('lineHeight', ['2xs', 'xs', 's', 'm', 'l'], undefined),
   size: select(
     'size',
     ['2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'],
-    undefined
+    undefined,
   ),
   spacing: select('spacing', ['xs', 's', 'm', 'l'], undefined),
   fontStyle: select('fontStyle', ['italic'], undefined),
@@ -32,7 +35,7 @@ const defaultKnobs = () => ({
   view: select(
     'View',
     ['alert', 'brand', 'ghost', 'link', 'link-minor', 'primary', 'secondary', 'success', 'warning'],
-    'primary'
+    'primary',
   ),
   weight: select('weight', ['black', 'bold', 'light', 'regular', 'semibold', 'thin'], 'regular'),
 });
@@ -42,15 +45,15 @@ storiesOf('UI-KIT|/Text', module)
   .addDecorator(
     withDocs({
       readme: {
-        content: require('./Text.md')['default'],
+        content: md,
       },
-    })
+    }),
   )
   .add('Текст', () => (
     <Text<{ href: string }> href="#" {...defaultKnobs()}>
       {text(
         'Content',
-        'Чтобы человек захотел это прочитать, у него должна быть очень веская причина. Может быть, его заставили. Может быть, это модный автор, и все друзья уже прочитали. Может быть, где-то здесь в тексте решение его насущной проблемы. Или он просто устроился в кресле, чтобы познакомиться с классной книгой. В любом случае нужна веская причина. Сам по себе этот текст ничем не привлекает.'
+        'Чтобы человек захотел это прочитать, у него должна быть очень веская причина. Может быть, его заставили. Может быть, это модный автор, и все друзья уже прочитали. Может быть, где-то здесь в тексте решение его насущной проблемы. Или он просто устроился в кресле, чтобы познакомиться с классной книгой. В любом случае нужна веская причина. Сам по себе этот текст ничем не привлекает.',
       )}
     </Text>
   ));
@@ -59,7 +62,7 @@ storiesOf('UI-KIT|/Examples/Text', module)
   .add('_align', () => {
     const align: Array<TextPropAlign> = ['left', 'center', 'right'];
     return (
-      <div className={wp.tplGrid({ 'xs-columns': 3, col: 'gap_third', row: 'third' })}>
+      <div className={wp.tplGrid({ 'xs-columns': 3, 'col': 'gap_third', 'row': 'third' })}>
         {align.map((item, index) => (
           <div key={index} className={wp.tplGrid('fraction', { row: 'third' })}>
             <Text size="s" view="ghost" className={wp.decorator({ 'indent-b': 'xs' })}>
@@ -73,12 +76,12 @@ storiesOf('UI-KIT|/Examples/Text', module)
   })
   .add('_decoration', () => {
     return (
-      <Fragment>
+      <>
         <Text size="s" view="ghost" className={wp.decorator({ 'indent-b': 'xs' })}>
           text_decoration_underline
         </Text>
         <Text decoration="underline">Газпром Нефть</Text>
-      </Fragment>
+      </>
     );
   })
   .add('_lineheight', () => {
@@ -144,22 +147,22 @@ storiesOf('UI-KIT|/Examples/Text', module)
   })
   .add('_style', () => {
     return (
-      <Fragment>
+      <>
         <Text size="s" view="ghost" className={wp.decorator({ 'indent-b': 'm' })}>
           text_style_italic
         </Text>
         <Text fontStyle="italic">Газпром Нефть</Text>
-      </Fragment>
+      </>
     );
   })
   .add('_transform', () => {
     return (
-      <Fragment>
+      <>
         <Text size="s" view="ghost" className={wp.decorator({ 'indent-b': 'm' })}>
           text_transform_uppercase
         </Text>
         <Text transform="uppercase">Газпром Нефть</Text>
-      </Fragment>
+      </>
     );
   })
   .add('_view', () => {
@@ -208,7 +211,7 @@ storiesOf('UI-KIT|/Examples/Text', module)
   })
   .add('_headingandparagraph', () => {
     return (
-      <Fragment>
+      <>
         <Text
           as="div"
           align="left"
@@ -229,12 +232,12 @@ storiesOf('UI-KIT|/Examples/Text', module)
           микротему. Что же ещё можно сказать про абзацы? Мы видим, что обычно в абзацах несколько
           предложений. И в таком случае каждый абзац служит для выделения своей микротемы.
         </Text>
-      </Fragment>
+      </>
     );
   })
   .add('_labelanddata', () => {
     return (
-      <Fragment>
+      <>
         <div className={wp.decorator({ 'indent-b': 'm' })}>
           <Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary" type="p">
             ФИО
@@ -259,7 +262,7 @@ storiesOf('UI-KIT|/Examples/Text', module)
             Группа разведки и бурения
           </Text>
         </div>
-      </Fragment>
+      </>
     );
   })
   .add('_combinedweightandstyle', () => {

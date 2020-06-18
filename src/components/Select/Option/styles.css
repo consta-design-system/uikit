@@ -1,18 +1,18 @@
 .select-option {
   position: relative;
   display: flex;
+  overflow: hidden;
   align-items: center;
+  box-sizing: border-box;
   width: 100%;
   padding: var(--space-xs) var(--space-s);
-  box-sizing: border-box;
   color: var(--color-control-typo-default);
   font-size: var(--size-text-m);
   line-height: var(--line-height-text-s);
-  user-select: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  transition: color 0.2s;
-  overflow: hidden;
   cursor: pointer;
+  user-select: none;
+  transition: color 0.2s;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   &_selected {
     background-color: var(--color-control-bg-default-hover);
@@ -23,16 +23,16 @@
   }
 
   &_empty {
-    text-align: center;
     color: hsl(0, 0%, 60%);
+    text-align: center;
     pointer-events: none;
   }
 
   &_new:not(:only-child)::before {
     content: '';
     position: absolute;
-    bottom: 0;
     left: var(--space-s);
+    bottom: 0;
     width: calc(100% - (var(--space-s) * 2));
     height: 1px;
     background-color: var(--color-control-bg-border-default);
@@ -51,9 +51,10 @@
     .checkbox__box {
       border-color: var(--color-control-bg-border-default-hover);
     }
+
     .checkbox__input:checked + .checkbox__box {
-      border-color: var(--color-control-bg-primary-hover);
       background-color: var(--color-control-bg-primary-hover);
+      border-color: var(--color-control-bg-primary-hover);
     }
   }
 
@@ -104,12 +105,15 @@
     &_0 {
       padding-left: var(--space-xs);
     }
+
     &_1 {
       padding-left: calc(var(--space-xs) + var(--space-xl));
     }
+
     &_2 {
       padding-left: calc(var(--space-xs) + var(--space-xl) * 2);
     }
+
     &_3 {
       padding-left: calc(var(--space-xs) + var(--space-xl) * 3);
     }

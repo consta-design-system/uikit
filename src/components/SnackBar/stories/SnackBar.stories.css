@@ -1,34 +1,39 @@
 .SnackBarStories {
   display: flex;
   flex-direction: row;
-  margin-left: calc(-1 * var(--space-xs));
-  margin-right: calc(-1 * var(--space-xs));
   height: calc(100vh - var(--space-3xl));
+  margin-right: calc(-1 * var(--space-xs));
+  margin-left: calc(-1 * var(--space-xs));
+
   &_example {
     &_1 {
       min-height: 300px;
     }
+
     &_2 {
       min-height: 500px;
     }
   }
+
   &-SnackBar {
-    padding-left: var(--space-xs);
-    padding-right: var(--space-xs);
-    width: 400px;
-    flex: none;
     overflow: auto;
-  }
-  &-Buttons {
-    padding-left: var(--space-xs);
+    flex: none;
+    width: 400px;
     padding-right: var(--space-xs);
-    flex: 1;
-    max-width: 200px;
+    padding-left: var(--space-xs);
+  }
+
+  &-Buttons {
     display: flex;
     flex-direction: column;
-    align-items: end;
+    flex: 1;
     justify-content: flex-end;
+    align-items: end;
+    max-width: 200px;
+    padding-right: var(--space-xs);
+    padding-left: var(--space-xs);
   }
+
   &-ButtonAdd {
     margin-bottom: var(--space-xs);
   }

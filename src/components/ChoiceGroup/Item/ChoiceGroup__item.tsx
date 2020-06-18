@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { cnChoiceGroup, ChoiceGroupPropSize } from '../ChoiceGroup';
-import { BaseCheckGroupItemProps } from '../../BaseCheckGroupField/BaseCheckGroupField';
+import React, { ChangeEvent, useState } from 'react';
+
 import { IconPropSize, IIcon } from '../../../icons/Icon/Icon';
+import { BaseCheckGroupItemProps } from '../../BaseCheckGroupField/BaseCheckGroupField';
+import { ChoiceGroupPropSize, cnChoiceGroup } from '../ChoiceGroup';
 
 export type ChoiceGroupItemProps = {
   icon?: React.FC<IIcon>;
@@ -33,7 +34,7 @@ export function ChoiceGroupItem<T>(props: IChoiceGroupItem<T>): React.ReactEleme
 
   const handleBlur = () => setFocus(false);
   const handleFocus = () => setFocus(true);
-  const handleChange = (e) => onChange({ e, value, id, checked: !checked });
+  const handleChange = (e: ChangeEvent) => onChange({ e, value, id, checked: !checked });
 
   const getIconSizeChoiceGroupSize = (buttonSize: ChoiceGroupPropSize): IconPropSize => {
     const sizeObj: Record<ChoiceGroupPropSize, IconPropSize> = {

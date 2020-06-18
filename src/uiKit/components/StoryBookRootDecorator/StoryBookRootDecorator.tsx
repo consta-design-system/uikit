@@ -1,11 +1,12 @@
 import './StoryBookRootDecorator.css';
 
 import React from 'react';
+
 import {
-  Theme,
   presetGpnDark,
   presetGpnDefault,
   presetGpnDisplay,
+  Theme,
   ThemePreset,
 } from '../../../components/Theme/Theme';
 import { cn } from '../../../utils/bem';

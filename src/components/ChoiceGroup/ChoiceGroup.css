@@ -1,17 +1,15 @@
 .ChoiceGroup {
   position: relative;
   display: inline-flex;
-
-  /* max-width: 100%; */
   border: var(--control-border-width) solid var(--color-control-bg-border-default);
   border-radius: var(--choice-radius);
 
-  /* stylelint-disable */
   &_view {
     &_primary {
       --choice-bg-color: var(--color-control-bg-primary);
       --choice-text-color: var(--color-control-typo-primary);
     }
+
     &_ghost {
       --choice-bg-color: var(--color-control-bg-ghost);
       --choice-text-color: var(--color-control-typo-ghost);
@@ -19,13 +17,16 @@
       .ChoiceGroup-Label::after {
         border-radius: 0;
       }
+
       .ChoiceGroup-Label:first-child::after {
         border-radius: var(--choice-radius) 0 0 var(--choice-radius);
       }
+
       .ChoiceGroup-Label:last-child::after {
         border-radius: 0 var(--choice-radius) var(--choice-radius) 0;
       }
     }
+
     &_secondary {
       --choice-bg-color: var(--color-control-bg-secondary);
       --choice-text-color: var(--color-control-typo-secondary);
@@ -42,6 +43,7 @@
       --choice-font-size: var(--control-text-size-xs);
       --choice-space: var(--control-space-xs);
     }
+
     &_s {
       --choice-height: var(--control-height-s);
       --choice-font-size: var(--control-text-size-s);
@@ -71,17 +73,19 @@
     &_default {
       --choice-radius: var(--control-radius);
     }
+
     &_brick {
       --choice-radius: 0;
     }
+
     &_round {
       --choice-radius: 99em;
       --divider-width: 4px;
       --divider-height: 4px;
 
       .ChoiceGroup-Label {
-        padding-left: calc(var(--choice-space) * 1.2);
         padding-right: calc(var(--choice-space) * 1.2 + var(--control-border-width));
+        padding-left: calc(var(--choice-space) * 1.2);
 
         &::before {
           border-radius: 99em;
@@ -95,28 +99,28 @@
     z-index: 0;
     display: flex;
     align-items: center;
-    padding: 0 calc(var(--choice-space) + var(--control-border-width)) 0 var(--choice-space);
     box-sizing: border-box;
     height: var(--choice-height);
+    padding: 0 calc(var(--choice-space) + var(--control-border-width)) 0 var(--choice-space);
     color: var(--color-control-typo-default);
     font-size: var(--choice-font-size);
     font-weight: normal;
     line-height: calc(var(--choice-height) - var(--control-border-width) * 2);
+    white-space: nowrap;
     text-decoration: none;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    cursor: pointer;
     transition: background-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease,
       fill 0.15s ease;
-    cursor: pointer;
 
     &::after {
       content: '';
       position: absolute;
-      left: 0;
-      right: var(--control-border-width);
-      top: calc(-1 * var(--control-border-width));
-      bottom: calc(-1 * var(--control-border-width));
       z-index: -1;
+      top: calc(-1 * var(--control-border-width));
+      right: var(--control-border-width);
+      left: 0;
+      bottom: calc(-1 * var(--control-border-width));
       border-radius: var(--choice-radius);
     }
   }
@@ -128,12 +132,11 @@
   }
 
   /* Focus и Active */
-
   &-Label_focus::after,
   &-Label_focus:hover::after {
+    outline: none;
     box-shadow: 0 0 0 3px var(--color-control-bg-focus);
     animation: choiceGroupItemFocusAnimation 0.5s ease-in;
-    outline: none;
   }
 
   &-Label_focus:active::after,
@@ -142,10 +145,10 @@
   }
 
   /* Скругление углов */
-
   &-Label:first-child::after {
     left: calc(-1 * var(--control-border-width));
   }
+
   &-Label:last-child {
     padding-right: var(--choice-space);
 
@@ -155,13 +158,12 @@
   }
 
   /* Палочка */
-
   &-Label:not(:first-child)::before {
     content: '';
     position: absolute;
+    z-index: -1;
     top: 50%;
     left: calc(-1 * var(--control-border-width));
-    z-index: -1;
     width: var(--divider-width);
     height: var(--divider-height);
     transform: translateY(-50%);
@@ -196,18 +198,18 @@
   &_onlyIcon {
     .ChoiceGroup-Label {
       justify-content: center;
+      width: calc(var(--choice-height) + var(--control-border-width) * 2);
       padding: 0;
       padding-right: var(--control-border-width);
-      width: calc(var(--choice-height) + var(--control-border-width) * 2);
     }
   }
 }
-/* stylelint-enable */
 
 @keyframes choiceGroupItemFocusAnimation {
   from {
     box-shadow: 0 0 0 0 var(--color-control-bg-focus), 0 0 0 0 var(--color-control-bg-active);
   }
+
   to {
     box-shadow: 0 0 0 3px var(--color-control-bg-focus), 0 0 0 6px transparent;
   }

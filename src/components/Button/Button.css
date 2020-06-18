@@ -1,27 +1,26 @@
-/* stylelint-disable  no-descending-specificity  */
 .Button {
   position: relative;
   z-index: 1;
   display: inline-block;
-  flex-shrink: 0;
+  overflow: hidden;
+  box-sizing: border-box;
   max-width: 100%;
   height: var(--button-height);
   padding: 0 var(--button-space);
-  box-sizing: border-box;
+  background: transparent;
   border: none;
   border-radius: var(--control-radius);
-  background: transparent;
+  font-family: var(--font-primary);
   font-size: var(--button-font-size);
   font-weight: normal;
-  font-family: var(--font-primary);
   line-height: var(--button-height);
-  text-decoration: none;
-  overflow: hidden;
-  text-overflow: ellipsis;
   white-space: nowrap;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  cursor: pointer;
   transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease,
     color 0.15s ease, fill 0.15s ease;
-  cursor: pointer;
+  flex-shrink: 0;
   -webkit-appearance: none;
 
   &:hover {
@@ -30,9 +29,9 @@
 
   &:focus,
   &:focus:hover {
+    outline: none;
     box-shadow: 0 0 0 3px var(--color-control-bg-focus);
     animation: buttonFocusAnimation 0.5s ease-in;
-    outline: none;
   }
 
   &:focus:active,
@@ -46,9 +45,9 @@
     }
 
     &_round {
-      border-radius: 99rem;
-      padding-left: calc(var(--button-space) * 1.2);
       padding-right: calc(var(--button-space) * 1.2);
+      padding-left: calc(var(--button-space) * 1.2);
+      border-radius: 99rem;
     }
 
     &_brickDefault {
@@ -60,8 +59,8 @@
     }
 
     &_brickRound {
-      border-radius: 0 99rem 99rem 0;
       padding-right: calc(var(--button-space) * 1.2);
+      border-radius: 0 99rem 99rem 0;
     }
 
     &_roundBrick {
@@ -99,7 +98,6 @@
   &_view {
     &_clear {
       --color-hover: var(--color-control-typo-clear-hover);
-
       color: var(--color-control-typo-clear);
       background-color: var(--color-control-bg-clear);
 
@@ -110,7 +108,6 @@
 
     &_ghost {
       --color-hover: var(--color-control-typo-ghost-hover);
-
       color: var(--color-control-typo-ghost);
       background-color: var(--color-control-bg-ghost);
 
@@ -121,7 +118,6 @@
 
     &_primary {
       --color-hover: var(--color-control-typo-primary-hover);
-
       color: var(--color-control-typo-primary);
       background-color: var(--color-control-bg-primary);
 
@@ -132,25 +128,24 @@
 
     &_secondary {
       --color-hover: var(--color-control-typo-secondary-hover);
-
       color: var(--color-control-typo-secondary);
-      border: var(--control-border-width) solid var(--color-control-bg-border-secondary);
       background-color: var(--color-control-bg-secondary);
+      border: var(--control-border-width) solid var(--color-control-bg-border-secondary);
       line-height: calc(var(--button-height) - var(--control-border-width) * 2);
 
       &:hover {
-        border-color: var(--color-control-bg-border-secondary-hover);
         background-color: var(--color-control-bg-secondary-hover);
+        border-color: var(--color-control-bg-border-secondary-hover);
       }
     }
   }
 
   &_disabled,
   &_loading {
+    background-color: var(--color-control-bg-disable);
+    border-color: transparent;
     cursor: not-allowed;
     pointer-events: none;
-    border-color: transparent;
-    background-color: var(--color-control-bg-disable);
   }
 
   &_disabled {
@@ -177,7 +172,6 @@
 
   &_withIcon {
     --icon-indent: calc(var(--button-space) * 0.7);
-
     display: inline-flex;
     align-items: center;
   }
@@ -190,6 +184,7 @@
       &_left {
         margin-right: var(--icon-indent);
       }
+
       &_right {
         margin-left: var(--icon-indent);
       }
@@ -197,16 +192,15 @@
   }
 
   &-Label {
-    flex-grow: 1;
-    flex-shrink: 1;
     overflow: hidden;
     text-align: center;
     text-overflow: ellipsis;
+    flex-grow: 1;
+    flex-shrink: 1;
   }
 
   &_loading &-Loader {
     --loaderBackgroundColor: var(--color-control-typo-disable);
-
     position: absolute;
   }
 }
@@ -215,6 +209,7 @@
   from {
     box-shadow: 0 0 0 0 var(--color-control-bg-focus), 0 0 0 0 var(--color-control-bg-active);
   }
+
   to {
     box-shadow: 0 0 0 3px var(--color-control-bg-focus), 0 0 0 6px transparent;
   }

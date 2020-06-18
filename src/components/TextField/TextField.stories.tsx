@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { boolean, text, withKnobs, number, select } from '@storybook/addon-knobs';
+import { boolean, number, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
+
 import { IconPhoto } from '../../icons/IconPhoto/IconPhoto';
+
 import { TextField } from './TextField';
 
 const knobs = () => ({
@@ -22,7 +24,7 @@ const knobs = () => ({
       'clearBrick',
       'clearClear',
     ],
-    'default'
+    'default',
   ),
   state: select('state', ['', 'alert', 'success', 'warning'], ''),
   size: select('size', ['xs', 's', 'm', 'l'], 'm'),

@@ -21,9 +21,7 @@ function ValueKeeper<T>({ render, onChange, onBlur }: ValueKeeperProps<T>) {
 
   const handleBlur = () => onBlur && onBlur();
 
-  return (
-    <React.Fragment>{render({ value, onChange: handleChange, onBlur: handleBlur })}</React.Fragment>
-  );
+  return <>{render({ value, onChange: handleChange, onBlur: handleBlur })}</>;
 }
 
 export default ValueKeeper;

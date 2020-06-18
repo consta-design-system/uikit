@@ -3,11 +3,12 @@
   width: 100%;
 
   &::before {
-    width: 100%;
     position: absolute;
-    bottom: 0;
     left: 0;
+    bottom: 0;
+    width: 100%;
   }
+
   &_view {
     &_bordered::before {
       content: '';
@@ -15,10 +16,17 @@
       background-color: var(--color-bg-border);
     }
   }
+
   &-List {
     width: 100%;
   }
+
   &-RunningLine {
+    left: -1px;
+    width: 1px;
+    border-radius: 1px 0 0 0;
+    transform: translateX(var(--tabOffsetLeft, 0));
+
     &,
     &::before,
     &::after {
@@ -28,27 +36,13 @@
       background-color: var(--color-bg-brand);
       transform-origin: left center;
     }
-    &_mounted {
-      transition: opacity 0.2s, transform 0.25s;
-    }
-  }
-
-  &-RunningLine {
-    left: -1px;
-    width: 1px;
-    border-radius: 1px 0 0 0;
-    transform: translateX(var(--tabOffsetLeft, 0));
-
-    &_withOutValue {
-      opacity: 0;
-    }
 
     &::before {
       content: '';
       left: 1px;
       width: var(--tabsWidth);
-      transform: scaleX(var(--tabRatio, 0.0001));
       transition: transform 0.25s;
+      transform: scaleX(var(--tabRatio, 0.0001));
     }
 
     &::after {
@@ -56,13 +50,21 @@
       left: 1px;
       width: 1px;
       border-radius: 0 1px 0 0;
-      transform: translateX(var(--tabWidth));
       transition: transform 0.25s;
+      transform: translateX(var(--tabWidth));
+    }
+
+    &_mounted {
+      transition: opacity 0.2s, transform 0.25s;
+    }
+
+    &_withOutValue {
+      opacity: 0;
     }
   }
 
   &-WrapperRunningLine {
-    width: 100%;
     overflow: hidden;
+    width: 100%;
   }
 }

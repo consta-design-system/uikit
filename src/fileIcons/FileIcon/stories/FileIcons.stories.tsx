@@ -1,8 +1,9 @@
 import React from 'react';
-import { withKnobs, select } from '@storybook/addon-knobs';
+import { select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import { FileIconBmp } from '../../FileIconBmp/FileIconBmp';
+
 import { FileIconAvi } from '../../FileIconAvi/FileIconAvi';
+import { FileIconBmp } from '../../FileIconBmp/FileIconBmp';
 import { FileIconCsv } from '../../FileIconCsv/FileIconCsv';
 import { FileIconDoc } from '../../FileIconDoc/FileIconDoc';
 import { FileIconExe } from '../../FileIconExe/FileIconExe';
@@ -33,7 +34,7 @@ const defaultKnobs = () => ({
 storiesOf('FileIcons', module)
   .addDecorator(withKnobs)
   .add('FileIcons', () => (
-    <div className={'tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full'}>
+    <div className="tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full">
       <IconsItem name="FileIconBmp" icon={FileIconBmp} {...defaultKnobs()} />
       <IconsItem name="FileIconAvi" icon={FileIconAvi} {...defaultKnobs()} />
       <IconsItem name="FileIconCsv" icon={FileIconCsv} {...defaultKnobs()} />

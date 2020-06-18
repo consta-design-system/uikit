@@ -2,9 +2,11 @@ import './Attach.stories.css';
 
 import * as React from 'react';
 import { boolean, number, text } from '@storybook/addon-knobs';
-import { cn } from '../../../utils/bem';
+
 import { IconTrash } from '../../../icons/IconTrash/IconTrash';
+import { cn } from '../../../utils/bem';
 import { Attach } from '../Attach';
+
 import mdx from './Attach.mdx';
 
 const defaultKnobs = () => ({
