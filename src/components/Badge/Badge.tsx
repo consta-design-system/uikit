@@ -3,7 +3,7 @@ import './Badge.css';
 import React from 'react';
 import { classnames } from '@bem-react/classnames';
 
-import { IconProps } from '../../icons/Icon/Icon';
+import { IIcon } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import * as wp from '../../utils/whitepaper/whitepaper';
@@ -15,7 +15,7 @@ type Props = {
   status?: 'success' | 'error' | 'warning' | 'normal' | 'system';
   form?: 'default' | 'round';
   minified?: boolean;
-  icon?: React.FC<IconProps>;
+  icon?: React.FC<IIcon>;
   label?: string;
 };
 

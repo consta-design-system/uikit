@@ -3,7 +3,7 @@ import { withDocs } from '@storybook-addons/docs';
 import { boolean, select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 
-import { IconProps } from '../../icons/Icon/Icon';
+import { IIcon } from '../../icons/Icon/Icon';
 import { IconCamera } from '../../icons/IconCamera/IconCamera';
 import { IconPhoto } from '../../icons/IconPhoto/IconPhoto';
 import { IconRing } from '../../icons/IconRing/IconRing';
@@ -14,7 +14,7 @@ import md from './Tabs.md';
 
 type Item = {
   name?: string;
-  icon?: React.FC<IconProps>;
+  icon?: React.FC<IIcon>;
 };
 
 const items = [
@@ -127,7 +127,7 @@ storiesOf('UI-KIT|/Examples/Tabs', module)
   .add('_icon', () => {
     type Item = {
       name?: string;
-      icon?: React.FC<IconProps>;
+      icon?: React.FC<IIcon>;
     };
     const items = [
       {

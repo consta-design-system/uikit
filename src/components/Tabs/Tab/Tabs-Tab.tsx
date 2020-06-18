@@ -2,7 +2,7 @@ import './Tabs-Tab.css';
 
 import React from 'react';
 
-import { IconProps, IconPropSize } from '../../../icons/Icon/Icon';
+import { IconPropSize, IIcon } from '../../../icons/Icon/Icon';
 import { BaseCheckGroupItemProps } from '../../BaseCheckGroupField/BaseCheckGroupField';
 import { cnTabs, TabsPropSize } from '../Tabs';
 
@@ -10,7 +10,7 @@ type Props<T> = {
   size?: TabsPropSize;
   innerRef?: React.Ref<HTMLButtonElement>;
   onlyIcon?: boolean;
-  icon?: React.FC<IconProps>;
+  icon?: React.FC<IIcon>;
 };
 
 export type TabsTabProps<T> = BaseCheckGroupItemProps<T> & Props<T>;

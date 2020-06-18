@@ -2,7 +2,7 @@ import './Button.css';
 
 import React from 'react';
 
-import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
+import { IconPropSize, IIcon } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { Loader } from '../Loader/Loader';
@@ -29,12 +29,11 @@ type Props = {
   loading?: boolean;
   label?: string | number;
   onClick?: React.EventHandler<React.MouseEvent>;
-  iconLeft?: React.FC<IconProps>;
-  iconRight?: React.FC<IconProps>;
+  iconLeft?: React.FC<IIcon>;
+  iconRight?: React.FC<IIcon>;
   onlyIcon?: boolean;
   iconSize?: IconPropSize;
   title?: string;
-  innerRef?: React.Ref<HTMLElement>;
 };
 
 export const cnButton = cn('Button');

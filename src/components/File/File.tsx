@@ -2,7 +2,7 @@ import './File.css';
 
 import React from 'react';
 
-import { FileIconProps } from '../../fileIcons/FileIcon/FileIcon';
+import { IFileIcon } from '../../fileIcons/FileIcon/FileIcon';
 import { FileIconAvi } from '../../fileIcons/FileIconAvi/FileIconAvi';
 import { FileIconBmp } from '../../fileIcons/FileIconBmp/FileIconBmp';
 import { FileIconCsv } from '../../fileIcons/FileIconCsv/FileIconCsv';
@@ -28,18 +28,18 @@ import { FileIconZip } from '../../fileIcons/FileIconZip/FileIconZip';
 import { cn } from '../../utils/bem';
 import { ProgressSpin } from '../ProgressSpin/ProgressSpin';
 
-type Props = {
+export type FileProps = {
   extension?: string;
   loading?: boolean;
   loadingWithProgressSpin?: boolean;
   loadingProgress?: number;
 };
 
-export type FileProps = Props & Omit<FileIconProps, keyof Props>;
+export type IFile = FileProps & Omit<IFileIcon, keyof FileProps>;
 
 export const cnFile = cn('File');
 
-export const File: React.FC<FileProps> = (props) => {
+export function File(props: IFile) {
   const {
     extension,
     loading,
@@ -69,7 +69,7 @@ export const File: React.FC<FileProps> = (props) => {
     );
   }
 
-  const extensionToSvg: { [value: string]: React.FC<FileIconProps> } = {
+  const extensionToSvg: { [value: string]: React.FC<IFileIcon> } = {
     bmp: FileIconBmp,
     csv: FileIconCsv,
     avi: FileIconAvi,
@@ -97,7 +97,7 @@ export const File: React.FC<FileProps> = (props) => {
     xlsx: FileIconXls,
   };
 
-  function getIconByExtension(extension?: string): React.FC<FileIconProps> {
+  function getIconByExtension(extension?: string): React.FC<IFileIcon> {
     if (!extension) {
       return FileIconUndefined;
     }
@@ -107,4 +107,4 @@ export const File: React.FC<FileProps> = (props) => {
   const Icon = getIconByExtension(extension);
 
   return <Icon className={cnFile(null, [className])} size={size} {...otherProps} />;
-};
+}

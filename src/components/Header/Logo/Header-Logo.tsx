@@ -9,7 +9,7 @@ export type HeaderProps<As extends keyof JSX.IntrinsicElements> = PropsWithAsAtt
 
 export function HeaderLogo<As extends keyof JSX.IntrinsicElements = 'div'>(
   props: HeaderProps<As>,
-): React.ReactElement | null {
+): React.ReactElement {
   const { children, as = 'div', className, ...otherProps } = props;
   const Tag = as as string;
   return (

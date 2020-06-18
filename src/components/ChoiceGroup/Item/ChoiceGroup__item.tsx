@@ -1,11 +1,11 @@
 import React, { ChangeEvent, useState } from 'react';
 
-import { IconProps, IconPropSize } from '../../../icons/Icon/Icon';
+import { IconPropSize, IIcon } from '../../../icons/Icon/Icon';
 import { BaseCheckGroupItemProps } from '../../BaseCheckGroupField/BaseCheckGroupField';
 import { ChoiceGroupPropSize, cnChoiceGroup } from '../ChoiceGroup';
 
 type Props = {
-  icon?: React.FC<IconProps>;
+  icon?: React.FC<IIcon>;
   size?: ChoiceGroupPropSize;
   onlyIcon?: boolean;
   title?: string;

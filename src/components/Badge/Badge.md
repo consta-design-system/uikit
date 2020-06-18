@@ -25,7 +25,7 @@ const App = () => {
 | status?    | `'success' | 'error' | 'warning' | 'normal' | 'system'` | `'normal'`   | Статус                                        |
 | form?      | `'default' | 'round'`                                   | `'default'`  | Форма                                         |
 | minified?  | `boolean`                                               | -            | Отвечает за отрисовку компонента в виде точки |
-| icon?      | `React.FC<IconProps>;`                                  | -            | Добавляет иконку                              |
+| icon?      | `React.FC<IIcon>;`                                      | -            | Добавляет иконку                              |
 | label?     | `string`                                                | -            | Текст на бейдже                               |
 | className? | `string`                                                | -            | Дополнительный класс (mix)                    |
 | ref?       | `React.Ref<HTMLElement>`                                | -            | Ссылка на корневой DOM элемент компонента     |
@@ -98,7 +98,7 @@ const App = () => {
 - расширяем интерфейс нашего компонента нужными нам свойствами
 
 ```ts
-<Badge<{ href: string }> as="a" href="#" label="Лэйбл" />
+<Badge as="a" href="#" label="Лэйбл" />
 ```
 
 {{%story::ui-kit-examples-badge--as%}}
