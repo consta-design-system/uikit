@@ -1,21 +1,20 @@
 import React from 'react';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
+import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cn } from '../../../../../utils/bem';
+import * as wp from '../../../../../utils/whitepaper/whitepaper';
 import { TextField } from '../../../../TextField/TextField';
 import { Button } from '../../../Button';
 
-const cnDocs = cn('StoryBookRootDocsDecorator');
 const cnExample = cn('Example');
 
-export function ButtonExampleForm1() {
+export function ButtonExampleFormBasic() {
   return (
-    <div className={cnDocs('Section', ['decorator decorator_distribute_left'])}>
-      <div className={cnExample(null, ['decorator decorator_indent-r_s'])}>
+    <div className={cnDocsDecorator('Section', [wp.decorator({ distribute: 'left' })])}>
+      <div className={cnExample(null, [wp.decorator({ 'indent-r': 's' })])}>
         <Button label="Default" />
       </div>
-      <div className={cnExample(null, ['decorator decorator_indent-r_s'])}>
+      <div className={cnExample(null, [wp.decorator({ 'indent-r': 's' })])}>
         <Button form="brick" label="Brick" />
       </div>
       <div className={cnExample()}>
@@ -25,9 +24,9 @@ export function ButtonExampleForm1() {
   );
 }
 
-export function ButtonExampleForm2() {
+export function ButtonExampleFormHybrid() {
   return (
-    <div className={cnDocs('Section', ['decorator decorator_distribute_left'])}>
+    <div className={cnDocsDecorator('Section', [wp.decorator({ distribute: 'left' })])}>
       <div className={cnExample()}>
         <TextField placeholder="Электронная почта" form="roundClear" style={{ width: '260px' }} />
       </div>

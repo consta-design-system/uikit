@@ -5,7 +5,6 @@ import { boolean, select, text } from '@storybook/addon-knobs';
 import { IconSelect } from '../../../icons/IconSelect/IconSelect';
 import { IconUser } from '../../../icons/IconUser/IconUser';
 import { cn } from '../../../utils/bem';
-import { presetGpnDefault, Theme } from '../../Theme/Theme';
 import { Button } from '../Button';
 
 import mdx from './Button.mdx';
@@ -26,14 +25,6 @@ const defaultKnobs = () => ({
   iconRight: boolean('Icon Right', false),
   onlyIcon: boolean('Only Icon', false),
 });
-
-// const withIconLeftKnobs = () => ({
-//   iconLeft: IconUser,
-// });
-
-// const withIconRightKnobs = () => ({
-//   iconRight: IconSelect,
-// });
 
 const cnButtonStories = cn('ButtonStories');
 
@@ -68,10 +59,6 @@ export function Playground() {
       />
     </div>
   );
-}
-
-export function Docs() {
-  return <Theme preset={presetGpnDefault} />;
 }
 
 export default {

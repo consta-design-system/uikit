@@ -1,16 +1,19 @@
 import React from 'react';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
+import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cn } from '../../../../../utils/bem';
+import * as wp from '../../../../../utils/whitepaper/whitepaper';
 import { Button } from '../../../Button';
 
-const cnDocs = cn('StoryBookRootDocsDecorator');
 const cnExample = cn('Example');
 
-export function ButtonExampleSize1() {
+export function ButtonExampleSizeBasic() {
   return (
-    <div className={cnDocs('Section', ['tpl-grid tpl-grid_ratio_1-1-1-1 tpl-grid_col-gap_full'])}>
+    <div
+      className={cnDocsDecorator('Section', [
+        wp.tplGrid({ 'ratio': '1-1-1-1', 'col-gap': 'full' }),
+      ])}
+    >
       <div className={cnExample()}>
         <Button label="Размер L" size="l" />
       </div>
@@ -27,9 +30,9 @@ export function ButtonExampleSize1() {
   );
 }
 
-export function ButtonExampleSize2() {
+export function ButtonExampleSizeFull() {
   return (
-    <div className={cnDocs('Section')}>
+    <div className={cnDocsDecorator('Section')}>
       <div className={cnExample()}>
         <Button width="full" label="Отправить" />
       </div>

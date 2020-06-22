@@ -1,16 +1,17 @@
 import React from 'react';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
+import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cn } from '../../../../../utils/bem';
+import * as wp from '../../../../../utils/whitepaper/whitepaper';
 import { Button } from '../../../Button';
 
-const cnDocs = cn('StoryBookRootDocsDecorator');
 const cnExample = cn('Example');
 
-export function ButtonExampleName1() {
+export function ButtonExampleNameSemantics() {
   return (
-    <div className={cnDocs('Section', ['tpl-grid tpl-grid_ratio_1-1 tpl-grid_col-gap_full'])}>
+    <div
+      className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' })])}
+    >
       <div className={cnExample()}>
         <Button label="OK" />
         <p className={cnExample('Status', { view: 'wrong' })}>Неправильно</p>
@@ -25,9 +26,11 @@ export function ButtonExampleName1() {
   );
 }
 
-export function ButtonExampleName2() {
+export function ButtonExampleNameVerb() {
   return (
-    <div className={cnDocs('Section', ['tpl-grid tpl-grid_ratio_1-1 tpl-grid_col-gap_full'])}>
+    <div
+      className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' })])}
+    >
       <div className={cnExample()}>
         <Button label="Искать" />
         <p className={cnExample('Status', { view: 'wrong' })}>Неправильно</p>
@@ -40,9 +43,11 @@ export function ButtonExampleName2() {
   );
 }
 
-export function ButtonExampleName3() {
+export function ButtonExampleNameSingleLine() {
   return (
-    <div className={cnDocs('Section', ['tpl-grid tpl-grid_ratio_1-1 tpl-grid_col-gap_full'])}>
+    <div
+      className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' })])}
+    >
       <div className={cnExample()}>
         <Button
           label="Скачать файл презентации"
@@ -58,9 +63,11 @@ export function ButtonExampleName3() {
   );
 }
 
-export function ButtonExampleName4() {
+export function ButtonExampleNameOverflow() {
   return (
-    <div className={cnDocs('Section', ['tpl-grid tpl-grid_ratio_1-1 tpl-grid_col-gap_full'])}>
+    <div
+      className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' })])}
+    >
       <div className={cnExample()}>
         <Button label="Редактировать" style={{ width: '130px' }} />
         <p className={cnExample('Status', { view: 'wrong' })}>Неправильно</p>

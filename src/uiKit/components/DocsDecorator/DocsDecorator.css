@@ -1,4 +1,4 @@
-.StoryBookRootDocsDecorator {
+.DocsDecorator {
   --width-default: 700px;
 
   h1,
@@ -28,6 +28,20 @@
     border-bottom: none;
     font-size: var(--size-text-3xl);
     line-height: var(--line-height-text-s);
+
+    /* TODO: Ниже код для обсуждению о добавлении парамтеров сразу в заголовок */
+
+    /* code {
+      display: inline-block;
+      vertical-align: text-bottom;
+      padding: 0 var(--space-xs);
+      border: 1px solid var(--color-bg-stripe);
+      border-radius: 4px;
+      color: var(--color-typo-secondary);
+      background-color: var(--color-bg-ghost);
+      font-size: var(--size-text-2xl);
+      line-height: var(--line-height-text-s);
+    } */
   }
 
   h3 {

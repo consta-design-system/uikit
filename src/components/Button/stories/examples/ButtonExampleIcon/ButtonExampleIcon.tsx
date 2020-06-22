@@ -5,18 +5,17 @@ import { IconCalendar } from '../../../../../icons/IconCalendar/IconCalendar';
 import { IconFilter } from '../../../../../icons/IconFilter/IconFilter';
 import { IconForward } from '../../../../../icons/IconForward/IconForward';
 import { IconHamburger } from '../../../../../icons/IconHamburger/IconHamburger';
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
+import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cn } from '../../../../../utils/bem';
+import * as wp from '../../../../../utils/whitepaper/whitepaper';
 import { Button } from '../../../Button';
 
-const cnDocs = cn('StoryBookRootDocsDecorator');
 const cnExample = cn('Example');
 
-export function ButtonExampleIcon1() {
+export function ButtonExampleIconBasic() {
   return (
-    <div className={cnDocs('Section', ['decorator decorator_distribute_left'])}>
-      <div className={cnExample(null, ['decorator decorator_indent-r_s'])}>
+    <div className={cnDocsDecorator('Section', [wp.decorator({ distribute: 'left' })])}>
+      <div className={cnExample(null, [wp.decorator({ 'indent-r': 's' })])}>
         <Button label="Назад" iconLeft={IconBackward} />
       </div>
       <div className={cnExample()}>
@@ -26,13 +25,13 @@ export function ButtonExampleIcon1() {
   );
 }
 
-export function ButtonExampleIcon2() {
+export function ButtonExampleIconOnly() {
   return (
-    <div className={cnDocs('Section', ['decorator decorator_distribute_left'])}>
-      <div className={cnExample(null, ['decorator decorator_indent-r_xs'])}>
+    <div className={cnDocsDecorator('Section', [wp.decorator({ distribute: 'left' })])}>
+      <div className={cnExample(null, [wp.decorator({ 'indent-r': 's' })])}>
         <Button label="Назад" view="ghost" iconLeft={IconHamburger} onlyIcon />
       </div>
-      <div className={cnExample(null, ['decorator decorator_indent-r_xs'])}>
+      <div className={cnExample(null, [wp.decorator({ 'indent-r': 's' })])}>
         <Button label="Назад" view="ghost" iconLeft={IconCalendar} onlyIcon />
       </div>
       <div className={cnExample()}>

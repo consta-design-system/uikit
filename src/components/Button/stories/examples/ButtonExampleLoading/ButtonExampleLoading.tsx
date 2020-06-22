@@ -1,16 +1,15 @@
 import React from 'react';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
+import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cn } from '../../../../../utils/bem';
+import * as wp from '../../../../../utils/whitepaper/whitepaper';
 import { Button } from '../../../Button';
 
-const cnDocs = cn('StoryBookRootDocsDecorator');
 const cnExample = cn('Example');
 
-export function ButtonExampleLoading1() {
+export function ButtonExampleLoading() {
   return (
-    <div className={cnDocs('Section', ['decorator decorator_distribute_left'])}>
+    <div className={cnDocsDecorator('Section', [wp.decorator({ distribute: 'left' })])}>
       <div className={cnExample()}>
         <Button loading label="Загрузка" />
       </div>
