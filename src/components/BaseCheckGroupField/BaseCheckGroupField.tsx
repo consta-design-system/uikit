@@ -111,7 +111,8 @@ export function BaseCheckGroupField<T, T2 = {}>(
     }
   };
 
-  const getChecked = (item: T) => !!valueByKey[getItemKey(item)];
+  const getChecked = (item: T) =>
+    Object.prototype.hasOwnProperty.call(valueByKey, getItemKey(item));
 
   return (
     <div className={className} style={style} ref={innerRef}>
