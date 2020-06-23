@@ -18,25 +18,17 @@ export type IconPropView =
 export type IconProps = {
   view?: IconPropView;
   size?: IconPropSize;
-  className?: string;
-  innerRef?: React.Ref<HTMLDivElement>;
 };
 
-export type IIcon = IconProps & Omit<React.HTMLAttributes<HTMLDivElement>, keyof IconProps>;
+export type IIcon = IconProps & Omit<React.HTMLAttributes<HTMLSpanElement>, keyof IconProps>;
 
 export const cnIcon = cn('Icon');
 
-export const Icon: React.FC<IIcon> = ({
-  children,
-  className,
-  size = 'm',
-  view,
-  innerRef,
-  ...otherProps
-}) => {
+export const Icon = React.forwardRef<HTMLSpanElement, IIcon>((props, ref) => {
+  const { children, className, size = 'm', view, ...otherProps } = props;
   return (
-    <span {...otherProps} className={cnIcon({ size, view }, [className])} ref={innerRef}>
+    <span {...otherProps} className={cnIcon({ size, view }, [className])} ref={ref}>
       {children}
     </span>
   );
-};
+});

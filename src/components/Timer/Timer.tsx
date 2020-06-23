@@ -3,36 +3,27 @@ import './Timer.css';
 import React from 'react';
 
 import { cn } from '../../utils/bem';
+import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 import { ProgressSpin } from '../ProgressSpin/ProgressSpin';
 
 export type TimerPropsSize = 'm' | 's';
 
-export type TimerProps = {
+type Props = {
   size?: TimerPropsSize;
   seconds?: number;
   progress?: number;
   animation?: boolean;
-  innerRef?: React.Ref<HTMLDivElement>;
-  className?: string;
 };
+
+export type TimerProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
 
 export const cnTimer = cn('Timer');
 
-export type ITimer = TimerProps & Omit<React.HTMLAttributes<HTMLDivElement>, keyof TimerProps>;
-
-export function Timer(props: ITimer): React.ReactElement {
-  const {
-    seconds = 0,
-    progress = 0,
-    size = 'm',
-    innerRef,
-    className,
-    animation,
-    ...otherProps
-  } = props;
+export const Timer = React.forwardRef<HTMLDivElement, TimerProps>((props, ref) => {
+  const { seconds = 0, progress = 0, size = 'm', className, animation, ...otherProps } = props;
 
   return (
-    <div {...otherProps} className={cnTimer({ size }, [className])} ref={innerRef}>
+    <div {...otherProps} className={cnTimer({ size }, [className])} ref={ref}>
       <ProgressSpin
         className={cnTimer('Progress')}
         size={size}
@@ -42,4 +33,4 @@ export function Timer(props: ITimer): React.ReactElement {
       {size === 'm' && <div className={cnTimer('Counter')}>{seconds}</div>}
     </div>
   );
-}
+});

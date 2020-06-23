@@ -43,11 +43,6 @@ storiesOf('UI-KIT|/Badge', module)
       },
     }),
   )
-  // .addDecorator(
-  //   figmaDecorator({
-  //     url: 'https://www.figma.com/file/FLCwrJTceo6xB9VInayasa/UI-Kit%2FDefault?node-id=2222%3A5588',
-  //   })
-  // )
   .add('playground', () => <Stories {...defaultKnobs()} />);
 
 storiesOf('UI-KIT|/Examples/Badge', module)
@@ -85,6 +80,6 @@ storiesOf('UI-KIT|/Examples/Badge', module)
   ))
   .add('_as', () => (
     <StoryBookExample>
-      <Badge<{ href: string }> as="a" href="#" label="Badge" />
+      <Badge as="a" href="#" label="Badge" />
     </StoryBookExample>
   ));

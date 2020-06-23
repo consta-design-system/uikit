@@ -71,7 +71,7 @@ storiesOf('ChoiceGroup', module)
     return (
       <>
         <form className="decorator decorator_indent-b_m">
-          <ChoiceGroup<Item>
+          <ChoiceGroup
             {...knobs()}
             items={items}
             value={value}
@@ -83,7 +83,7 @@ storiesOf('ChoiceGroup', module)
           />
         </form>
         <form className="decorator decorator_indent-b_m">
-          <ChoiceGroup<Item>
+          <ChoiceGroup
             {...knobs()}
             onlyIcon
             items={onlyIconItems}
@@ -96,14 +96,13 @@ storiesOf('ChoiceGroup', module)
           />
         </form>
         <form className="decorator decorator_indent-b_m">
-          <ChoiceGroup<Item>
+          <ChoiceGroup
             {...knobs()}
             items={twoItems}
             value={twoItemsValue}
             getItemKey={(item) => item.name}
             getItemLabel={(item) => item.name}
             onChange={({ value }) => setTwoItemsValue(value)}
-            getItemIcon={(item) => item.icon}
             name="ChoiceGroup"
           />
         </form>

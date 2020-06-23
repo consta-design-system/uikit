@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { Button, cnButton, IButton } from './Button';
+import { Button, cnButton } from './Button';
+
+type ButtonProps = React.ComponentProps<typeof Button>;
 
 const testId = 'button';
 
-const renderComponent = (props: IButton = {}) => {
+const renderComponent = (props: ButtonProps = {}) => {
   const { label = 'Текст кнопки', ...rest } = props;
   return render(<Button data-testid={testId} label={label} {...rest} />);
 };
@@ -87,24 +89,6 @@ describe('Компонент Button', () => {
 
           expect(button.tagName).toEqual(el.toUpperCase());
         });
-      });
-
-      it(`должен рендериться как функциональный компонент`, () => {
-        const Component: React.FC<{ innerRef: React.Ref<HTMLElement> }> = ({
-          children,
-          innerRef,
-          ...otherProps
-        }) => (
-          <span {...otherProps} ref={innerRef}>
-            {children}
-          </span>
-        );
-
-        renderComponent({ as: Component });
-
-        const button = screen.getByTestId(testId);
-
-        expect(button.tagName).toEqual('SPAN');
       });
     });
 

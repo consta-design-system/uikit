@@ -4,7 +4,7 @@ import React from 'react';
 
 import { cn } from '../../utils/bem';
 
-export type IHeader = {
+export type HeaderProps = {
   leftSide?: React.ReactNode;
   rightSide?: React.ReactNode;
   className?: string;
@@ -12,7 +12,7 @@ export type IHeader = {
 
 export const cnHeader = cn('Header');
 
-export function Header(props: IHeader): React.ReactElement {
+export function Header(props: HeaderProps): React.ReactElement {
   const { leftSide, rightSide, className } = props;
   return (
     <header className={cnHeader(null, [className])}>
