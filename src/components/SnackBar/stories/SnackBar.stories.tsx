@@ -5,7 +5,7 @@ import { withDocs } from '@storybook-addons/docs';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 
-import { IIcon } from '../../../icons/Icon/Icon';
+import { IconProps } from '../../../icons/Icon/Icon';
 import { IconAdd } from '../../../icons/IconAdd/IconAdd';
 import { IconAlert } from '../../../icons/IconAlert/IconAlert';
 import { IconProcessing } from '../../../icons/IconProcessing/IconProcessing';
@@ -23,8 +23,8 @@ const knobs = () => ({
   withCloseButton: boolean('withCloseButton', true),
 });
 
-const getItemIconByStatus = (status: SnackBarItemStatus): React.FC<IIcon> | undefined => {
-  const mapIconByStatus: Record<SnackBarItemStatus, React.FC<IIcon>> = {
+const getItemIconByStatus = (status: SnackBarItemStatus): React.FC<IconProps> | undefined => {
+  const mapIconByStatus: Record<SnackBarItemStatus, React.FC<IconProps>> = {
     success: IconThumbUp,
     warning: IconAlert,
     alert: IconAlert,
