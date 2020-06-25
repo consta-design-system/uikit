@@ -39,7 +39,7 @@ export function App() {
 | size?         | `'s' | 'm'`                                                                                     | `'m'`                  | Размер                                                                      |
 | view?         | `'bordered' | 'clear'`                                                                          | `'bordered'`           | Вид                                                                         |
 | className?    | `string`                                                                                        | -                      | Дополнительный класс                                                        |
-| innerRef?     | `React.Ref<HTMLDivElement>`                                                                     | -                      | Ссылка на корневой DOM элемент компонента                                   |
+| ref?          | `React.Ref<HTMLDivElement>`                                                                     | -                      | Ссылка на корневой DOM элемент компонента                                   |
 | items?        | `T[]`                                                                                           | -                      | Массив элементов                                                            |
 | value?        | `T[] | null`                                                                                    | -                      | Выбранный элемент                                                           |
 | id?           | `string | number`                                                                               | -                      | Вспомогательное свойсво вернентся в onChange                                |
@@ -47,7 +47,7 @@ export function App() {
 | onChange?     | `(obj: {e: React.MouseEvent; id?: string | number; name?: string; value: T[] | null}) => void;` | -                      | событие с рабатывающее при выборе пользователем пункта                      |
 | getItemKey?   | `(item: T) => string | number`                                                                  | `(item) => item.id`    | Ожидается что результат функции возвращает уникальный ключ каждого из items |
 | getItemLabel? | `(item: T) => string`                                                                           | `(item) => item.label` | Результат функции будет использоваться в качестве текста в табе             |
-| getItemIcon?  | `(item: T) => React.FC<IIcon> | undefined`                                                      | -                      | Результат функции будет использоваться в качестве иконки в табе             |
+| getItemIcon?  | `(item: T) => React.FC<IconProps> | undefined`                                                  | -                      | Результат функции будет использоваться в качестве иконки в табе             |
 | onlyIcon?     | `boolean`                                                                                       | -                      | Показавать в табе только иконку                                             |
 
 и все из `React.HTMLAttributes<HTMLDivElement>`
@@ -144,7 +144,7 @@ import { IconCamera } from '@gpn-design/uikit/IconCamera';
 
 type Item = {
   name?: string;
-  icon?: IIcon;
+  icon?: React.FC<IconProps>;
 };
 
 const items = [

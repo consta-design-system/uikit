@@ -42,7 +42,6 @@ export const HeaderLogin: React.FC<Props> = ({
   ) : (
     <Button
       className={cnHeader('Login', [className])}
-      type="button"
       onClick={onClick}
       size="s"
       view="primary"

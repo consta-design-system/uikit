@@ -1,4 +1,6 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
+
+import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
 export type BaseCheckGroupFieldItemPropOnChange<T> = (
   args: BaseCheckGroupFieldItemOnChangeFunctionArguments<T>,
@@ -15,10 +17,10 @@ export type BaseCheckGroupFieldPropGetItemKey<T> = (item: T) => BaseCheckGroupFi
 export type BaseCheckGroupFieldPropGetItemLabel<T> = (
   item: T,
 ) => BaseCheckGroupFieldItemPropItemLabel;
-export type BaseCheckGroupFieldPropGetAdditionalPropsForItem<T, T2 = {}> = (
+export type BaseCheckGroupFieldPropGetAdditionalPropsForItem<T> = (
   item: T,
   index: number,
-  props: IBaseCheckGroupField<T, T2>,
+  props: BaseCheckGroupFieldProps<T>,
 ) => {};
 
 export type BaseCheckGroupItemProps<T> = {
@@ -47,7 +49,7 @@ export type BaseCheckGroupFieldOnChangeArguments<T> = {
   value: BaseCheckGroupFieldPropValue<T>;
 };
 
-export type IBaseCheckGroupFieldProps<T> = {
+type Props<T> = {
   multiple?: boolean;
   items?: T[];
   value?: BaseCheckGroupFieldPropValue<T>;
@@ -58,21 +60,17 @@ export type IBaseCheckGroupFieldProps<T> = {
   getItemLabel?: BaseCheckGroupFieldPropGetItemLabel<T>;
   componentItem: React.FC<BaseCheckGroupItemProps<T>>;
   innerRef?: React.Ref<HTMLDivElement>;
-  className?: string;
-  style?: CSSProperties;
+  getAdditionalPropsForItem?: BaseCheckGroupFieldPropGetAdditionalPropsForItem<T>;
 };
 
-export type IBaseCheckGroupField<T, T2 = {}> = IBaseCheckGroupFieldProps<T> & {
-  getAdditionalPropsForItem?: BaseCheckGroupFieldPropGetAdditionalPropsForItem<T, T2>;
-} & Omit<T2, keyof IBaseCheckGroupFieldProps<T>>;
+export type BaseCheckGroupFieldProps<T> = PropsWithHTMLAttributes<Props<T>, HTMLDivElement>;
 
-export function BaseCheckGroupField<T, T2 = {}>(
-  props: IBaseCheckGroupField<T, T2>,
+export function BaseCheckGroupField<T>(
+  props: BaseCheckGroupFieldProps<T>,
 ): React.ReactElement | null {
-  // TODO: Убрать Any после того как сотавим конфиги
   const {
     items,
-    componentItem,
+    componentItem: ComponentItem,
     getItemKey,
     getItemLabel,
     getAdditionalPropsForItem,
@@ -81,11 +79,9 @@ export function BaseCheckGroupField<T, T2 = {}>(
     onChange,
     id,
     name,
-    className,
-    style,
     innerRef,
+    ...otherProps
   } = props;
-  const ComponentItem = componentItem;
 
   const valueByKey: { [value: string]: T } = {};
   if (value && value.length > 0) {
@@ -111,10 +107,11 @@ export function BaseCheckGroupField<T, T2 = {}>(
     }
   };
 
-  const getChecked = (item: T) => !!valueByKey[getItemKey(item)];
+  const getChecked = (item: T) =>
+    Object.prototype.hasOwnProperty.call(valueByKey, getItemKey(item));
 
   return (
-    <div className={className} style={style} ref={innerRef}>
+    <div ref={innerRef} {...otherProps}>
       {items
         ? items.map((item, index) => (
             <ComponentItem
