@@ -4,7 +4,7 @@ import React from 'react';
 
 import { IconPropSize, IIcon } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
-import { componentIsFunction } from '../../utils/componentIsFunction';
+import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { Loader } from '../Loader/Loader';
 
 export type ButtonPropSize = 'xs' | 's' | 'm' | 'l';
@@ -19,12 +19,11 @@ export type ButtonPropForm =
   | 'brickDefault'
   | 'defaultBrick';
 
-export type ButtonProps = {
+type Props = {
   size?: ButtonPropSize;
   view?: ButtonPropView;
   width?: ButtonPropWidth;
   form?: ButtonPropForm;
-  className?: string;
   tabIndex?: number;
   disabled?: boolean;
   loading?: boolean;
@@ -32,23 +31,14 @@ export type ButtonProps = {
   onClick?: React.EventHandler<React.MouseEvent>;
   iconLeft?: React.FC<IIcon>;
   iconRight?: React.FC<IIcon>;
-  as?: React.ElementType;
   onlyIcon?: boolean;
   iconSize?: IconPropSize;
   title?: string;
-  innerRef?: React.Ref<HTMLElement>;
 };
-
-export type IButton<T = {}> = ButtonProps &
-  (Omit<React.ButtonHTMLAttributes<Element>, keyof (ButtonProps & T)> & Omit<T, keyof ButtonProps>);
-
-// При использовании "as" позаботьтесь об интерфейсе прокинутого елемента, по умолчанию он button
-// При вызове кнопки:
-// <Button<T>/>
 
 export const cnButton = cn('Button');
 
-export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
+export const Button: ComponentWithAs<Props, 'button'> = forwardRefWithAs<Props>((props, ref) => {
   const {
     size = 'm',
     view = 'primary',
@@ -64,16 +54,15 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
     tabIndex,
     as = 'button',
     onlyIcon,
-    innerRef,
     ...otherProps
   } = props;
 
-  const Component = as;
+  const Tag = as as string;
   const IconOnly = (!label || onlyIcon) && (iconLeft || iconRight);
   const IconLeft = iconLeft;
   const IconRight = iconRight;
   const withIcon = !!iconLeft || !!iconRight;
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     if (!disabled && !loading && onClick) {
       onClick(e);
     }
@@ -94,7 +83,8 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
   const title = props.title || (!!IconOnly && label) || undefined;
 
   return (
-    <Component
+    <Tag
+      {...otherProps}
       onClick={onClick ? handleClick : undefined}
       className={cnButton(
         {
@@ -111,10 +101,8 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
       )}
       tabIndex={tabIndex}
       title={title}
-      ref={innerRef}
-      {...(Component === 'button' ? { disabled: disabled || loading } : {})}
-      {...(componentIsFunction(Component) && { innerRef })}
-      {...otherProps}
+      ref={ref}
+      {...(Tag === 'button' ? { disabled: disabled || loading } : {})}
     >
       {IconOnly && <IconOnly className={cnButton('Icon')} size={iconSize} />}
       {!IconOnly &&
@@ -132,6 +120,6 @@ export function Button<T = {}>(props: IButton<T>): React.ReactElement | null {
           label
         ))}
       {loading && <Loader className={cnButton('Loader')} size="s" />}
-    </Component>
+    </Tag>
   );
-}
+});

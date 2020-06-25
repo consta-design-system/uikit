@@ -3,17 +3,16 @@ import './ProgressSpin.css';
 import React, { useMemo } from 'react';
 
 import { cn } from '../../utils/bem';
+import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
 export type ProgressSpinPropSize = 'm' | 's';
-export type ProgressSpinProps = {
+type Props = {
   size?: ProgressSpinPropSize;
-  innerRef?: React.Ref<SVGSVGElement>;
   className?: string;
   progress?: number;
   animation?: boolean;
 };
-export type IProgressSpin = ProgressSpinProps &
-  Omit<React.HTMLAttributes<SVGElement>, keyof ProgressSpinProps>;
+export type ProgressSpinProps = PropsWithHTMLAttributes<Props, SVGElement>;
 
 export const cnProgressSpin = cn('ProgressSpin');
 
@@ -34,8 +33,8 @@ function getSvgParamsBySize(size: ProgressSpinPropSize): [number, number, number
   return [sizeOfPixels, strokeWidth, radius, strokeDasharray];
 }
 
-export function ProgressSpin(props: IProgressSpin): React.ReactElement {
-  const { size = 'm', progress = 0, animation, innerRef, className, ...otherProps } = props;
+export const ProgressSpin = React.forwardRef<SVGSVGElement, ProgressSpinProps>((props, ref) => {
+  const { size = 'm', progress = 0, animation, className, ...otherProps } = props;
   const [sizeOfPixels, strokeWidth, radius, strokeDasharray] = useMemo(
     () => getSvgParamsBySize(size),
     [size],
@@ -45,12 +44,12 @@ export function ProgressSpin(props: IProgressSpin): React.ReactElement {
 
   return (
     <svg
+      {...otherProps}
       className={cnProgressSpin(null, [className])}
       width={sizeOfPixels}
       height={sizeOfPixels}
       viewBox={`0 0 ${sizeOfPixels} ${sizeOfPixels}`}
-      ref={innerRef}
-      {...otherProps}
+      ref={ref}
     >
       <circle
         className={cnProgressSpin('Circle', { animation: !!animation })}
@@ -64,4 +63,4 @@ export function ProgressSpin(props: IProgressSpin): React.ReactElement {
       />
     </svg>
   );
-}
+});

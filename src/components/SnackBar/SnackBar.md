@@ -48,7 +48,7 @@ import { SnackBar, SnackBarItemStatus, Item } from '@gpn-design/uikit/SnackBar';
 
 function reducer(
   state: Item[],
-  action: { type: 'add' | 'remove'; item?: Item; key?: number | string }
+  action: { type: 'add' | 'remove'; item?: Item; key?: number | string },
 ) {
   switch (action.type) {
     case 'add':

@@ -5,7 +5,7 @@ import React from 'react';
 import { IconPropSize } from '../../icons/Icon/Icon';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { cn } from '../../utils/bem';
-import { componentIsFunction } from '../../utils/componentIsFunction';
+import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { Avatar } from '../Avatar/Avatar';
 import { Text, TextPropSize } from '../Text/Text';
 
@@ -14,11 +14,9 @@ export type UserPropView = 'clear' | 'ghost';
 export type UserPropWidth = 'default' | 'full';
 export type UserPropStatus = 'available' | 'remote' | 'out';
 
-declare type UserProps = {
+type Props = {
   avatarUrl?: string;
   name?: string;
-  as?: React.ElementType;
-  className?: string;
   size?: UserPropSize;
   view?: UserPropView;
   width?: UserPropWidth;
@@ -26,11 +24,7 @@ declare type UserProps = {
   onlyAvatar?: boolean;
   withArrow?: boolean;
   info?: string;
-  innerRef?: React.Ref<HTMLElement>;
 };
-
-export type IUser<T = {}> = UserProps &
-  (Omit<React.HTMLAttributes<HTMLDivElement>, keyof (UserProps & T)> & Omit<T, keyof UserProps>);
 
 const cnUser = cn('User');
 
@@ -52,7 +46,7 @@ const getArrowSizeByUserSize = (userSize: UserPropSize): IconPropSize => {
   return sizeObj[userSize];
 };
 
-export function User<T>(props: IUser<T>): React.ReactElement | null {
+export const User: ComponentWithAs<Props> = forwardRefWithAs<Props>((props, ref) => {
   const {
     as = 'div',
     className,
@@ -65,20 +59,18 @@ export function User<T>(props: IUser<T>): React.ReactElement | null {
     withArrow,
     info,
     status,
-    innerRef,
     ...otherProps
   } = props;
-  const Component = as;
+  const Tag = as as string;
   const onlyAvatar = propOnlyAvatar || (!name && !info);
   const infoSize = getInfoSizeByUserSize(size);
   const arrowSize = getArrowSizeByUserSize(size);
 
   return (
-    <Component
+    <Tag
       {...otherProps}
       className={cnUser({ size, view, width, withArrow, minified: onlyAvatar }, [className])}
-      ref={innerRef}
-      {...(componentIsFunction(Component) && { innerRef })}
+      ref={ref}
     >
       <div className={cnUser('AvatarWrapper', { status })}>
         <Avatar className={cnUser('Avatar', { status })} size={size} url={avatarUrl} name={name} />
@@ -98,6 +90,6 @@ export function User<T>(props: IUser<T>): React.ReactElement | null {
         </div>
       )}
       {withArrow && <IconSelect className={cnUser('Arrow')} size={arrowSize} view="secondary" />}
-    </Component>
+    </Tag>
   );
-}
+});

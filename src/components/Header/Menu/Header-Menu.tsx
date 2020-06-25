@@ -2,6 +2,7 @@ import './Header-Menu.css';
 
 import React from 'react';
 
+import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import { cnHeader } from '../Header';
 
 export type ItemT = {
@@ -12,15 +13,15 @@ export type ItemT = {
   onClick?: React.EventHandler<React.MouseEvent>;
 };
 
-export type MenuProps = {
+type Props = {
   items: ItemT[];
 };
 
-export type IMenu = MenuProps & Omit<React.HTMLAttributes<Element>, keyof MenuProps>;
+export type MenuProps = PropsWithHTMLAttributes<Props, HTMLElement>;
 
-export const HeaderMenu: React.FC<IMenu> = ({ items, className }) => {
+export const HeaderMenu: React.FC<MenuProps> = ({ items, className, ...otherProps }) => {
   return (
-    <nav className={cnHeader('Menu', [className])}>
+    <nav {...otherProps} className={cnHeader('Menu', [className])}>
       <ul className={cnHeader('MenuList')}>
         {items.map(({ label, href, target, active, onClick }, index) => {
           const Component = href ? 'a' : 'div';

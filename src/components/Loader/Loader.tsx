@@ -3,23 +3,23 @@ import './Loader.css';
 import React from 'react';
 
 import { cn } from '../../utils/bem';
+import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
 export type LoaderPropSize = 's' | 'm';
 
-export type LoaderProps = {
-  className?: string;
+type Props = {
   size?: LoaderPropSize;
-  innerRef?: React.Ref<HTMLDivElement>;
 };
 
-export type ILoader = LoaderProps & Omit<React.HTMLAttributes<HTMLDivElement>, keyof LoaderProps>;
+export type LoaderProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
 
 export const cnLoader = cn('Loader');
 
-export const Loader: React.FC<ILoader> = ({ className, size = 'm', innerRef, ...otherProps }) => {
+export const Loader = React.forwardRef<HTMLDivElement, LoaderProps>((props, ref) => {
+  const { className, size = 'm', ...otherProps } = props;
   return (
-    <div {...otherProps} ref={innerRef} className={cnLoader({ size }, [className])}>
+    <div {...otherProps} ref={ref} className={cnLoader({ size }, [className])}>
       <div className={cnLoader('Dot')} />
     </div>
   );
-};
+});
