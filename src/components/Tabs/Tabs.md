@@ -49,6 +49,7 @@ export function App() {
 | getItemLabel? | `(item: T) => string`                                                                           | `(item) => item.label` | Результат функции будет использоваться в качестве текста в табе             |
 | getItemIcon?  | `(item: T) => React.FC<IconProps> | undefined`                                                  | -                      | Результат функции будет использоваться в качестве иконки в табе             |
 | onlyIcon?     | `boolean`                                                                                       | -                      | Показавать в табе только иконку                                             |
+| iconSize?     | `'xs' | 's' | 'm'`                                                                              | зависит от `size`      | Размер иконки в табе                                                        |
 
 и все из `React.HTMLAttributes<HTMLDivElement>`
 

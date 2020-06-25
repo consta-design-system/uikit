@@ -38,6 +38,20 @@ type Props = {
 
 export const cnButton = cn('Button');
 
+const getIconSizeByButtonSize = (buttonSize: ButtonPropSize, size?: IconPropSize): IconPropSize => {
+  if (size) {
+    return size;
+  }
+  const sizeObj: Record<ButtonPropSize, IconPropSize> = {
+    xs: 'xs',
+    s: 'xs',
+    m: 's',
+    l: 'm',
+  };
+
+  return sizeObj[buttonSize];
+};
+
 export const Button: ComponentWithAs<Props, 'button'> = forwardRefWithAs<Props>((props, ref) => {
   const {
     size = 'm',
@@ -54,6 +68,7 @@ export const Button: ComponentWithAs<Props, 'button'> = forwardRefWithAs<Props>(
     tabIndex,
     as = 'button',
     onlyIcon,
+    iconSize: iconSizeProp,
     ...otherProps
   } = props;
 
@@ -68,18 +83,7 @@ export const Button: ComponentWithAs<Props, 'button'> = forwardRefWithAs<Props>(
     }
   };
 
-  const getIconSizeByButtonSize = (buttonSize: ButtonPropSize): IconPropSize => {
-    const sizeObj: Record<ButtonPropSize, IconPropSize> = {
-      xs: 'xs',
-      s: 'xs',
-      m: 's',
-      l: 'm',
-    };
-
-    return sizeObj[buttonSize];
-  };
-
-  const iconSize = props.iconSize || getIconSizeByButtonSize(size);
+  const iconSize = getIconSizeByButtonSize(size, iconSizeProp);
   const title = props.title || (!!IconOnly && label) || undefined;
 
   return (

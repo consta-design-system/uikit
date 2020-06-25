@@ -11,11 +11,19 @@ type Props<T> = {
   innerRef?: React.Ref<HTMLButtonElement>;
   onlyIcon?: boolean;
   icon?: React.FC<IconProps>;
+  iconSize?: IconPropSize;
 };
 
 export type TabsTabProps<T> = BaseCheckGroupItemProps<T> & Props<T>;
 
-const getIconSizeByTabsSize = (buttonSize: TabsPropSize = 's'): IconPropSize => {
+const getIconSizeByTabsSize = (
+  buttonSize: TabsPropSize = 's',
+  size?: IconPropSize,
+): IconPropSize => {
+  if (size) {
+    return size;
+  }
+
   const sizeObj: Record<TabsPropSize, IconPropSize> = {
     s: 'xs',
     m: 's',
@@ -25,7 +33,18 @@ const getIconSizeByTabsSize = (buttonSize: TabsPropSize = 's'): IconPropSize => 
 };
 
 export function TabsTab<T>(props: TabsTabProps<T>): React.ReactElement {
-  const { label, onChange, size, checked, id, value, innerRef, onlyIcon, icon: Icon } = props;
+  const {
+    label,
+    onChange,
+    size,
+    checked,
+    id,
+    value,
+    innerRef,
+    onlyIcon,
+    icon: Icon,
+    iconSize,
+  } = props;
   const handleChange = (e: React.MouseEvent) => onChange({ e, value, checked: !checked, id });
 
   return (
@@ -36,7 +55,7 @@ export function TabsTab<T>(props: TabsTabProps<T>): React.ReactElement {
       role="tab"
       type="button"
     >
-      {Icon && <Icon className={cnTabs('Icon')} size={getIconSizeByTabsSize(size)} />}
+      {Icon && <Icon className={cnTabs('Icon')} size={getIconSizeByTabsSize(size, iconSize)} />}
       {!onlyIcon && label}
     </button>
   );
