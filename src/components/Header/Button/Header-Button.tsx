@@ -1,10 +1,11 @@
 import React from 'react';
 
-import { Button, IButton } from '../../Button/Button';
+import { Button } from '../../Button/Button';
 
-type IHeaderButton<T = {}> = Omit<IButton<T>, 'size' | 'view' | 'form' | 'onlyIcon' | 'label'>;
+type ButtonProps = React.ComponentProps<typeof Button>;
 
-export function HeaderButton<T = {}>(props: IHeaderButton<T>) {
-  const { ...otherProps } = props;
-  return <Button size="m" view="clear" form="round" onlyIcon {...otherProps} />;
-}
+type HeaderButtonProps = Omit<ButtonProps, 'size' | 'view' | 'form' | 'onlyIcon'>;
+
+export const HeaderButton: React.FC<HeaderButtonProps> = (props) => {
+  return <Button {...props} size="m" view="clear" form="round" onlyIcon />;
+};

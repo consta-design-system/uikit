@@ -40,10 +40,9 @@ storiesOf('Button', module)
     <Button onClick={action('click')} {...defaultKnobs()} {...withIconRightKnobs()} />
   ))
   .add('Как ссылка', () => (
-    <Button<{ href?: string; target?: string; autoFocus: number; title: number }>
+    <Button
       as="a"
-      href="dd"
-      autoFocus={123}
+      href="#"
       onClick={action('click')}
       {...withIconLeftKnobs()}
       {...defaultKnobs()}

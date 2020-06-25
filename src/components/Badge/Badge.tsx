@@ -3,35 +3,25 @@ import './Badge.css';
 import React from 'react';
 import { classnames } from '@bem-react/classnames';
 
-import { IIcon } from '../../icons/Icon/Icon';
+import { IconProps } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
-import { componentIsFunction } from '../../utils/componentIsFunction';
+import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import * as wp from '../../utils/whitepaper/whitepaper';
 import { useTheme } from '../Theme/Theme';
 
-export type BadgeProps = {
+type Props = {
   size?: 's' | 'm' | 'l';
   view?: 'filled' | 'stroked';
   status?: 'success' | 'error' | 'warning' | 'normal' | 'system';
   form?: 'default' | 'round';
   minified?: boolean;
-  icon?: React.FC<IIcon>;
-  innerRef?: React.Ref<HTMLElement>;
+  icon?: React.FC<IconProps>;
   label?: string;
-  className?: string;
-  as?: React.ElementType;
 };
-
-export type IBadge<T = {}> = BadgeProps &
-  (Omit<React.HTMLAttributes<Element>, keyof (BadgeProps & T)> & Omit<T, keyof BadgeProps>);
 
 export const cnBadge = cn('Badge');
 
-// При использовании "as" позаботьтесь об интерфейсе прокинутого компонента.
-// При вызове кнопки:
-// <Button<T>/>
-
-export function Badge<T>(props: IBadge<T>) {
+export const Badge: ComponentWithAs<Props> = forwardRefWithAs<Props>((props, ref) => {
   const {
     size = 'm',
     view = 'filled',
@@ -40,12 +30,11 @@ export function Badge<T>(props: IBadge<T>) {
     icon,
     minified,
     label,
-    innerRef,
     as = 'div',
     ...otherProps
   } = props;
 
-  const Component = as;
+  const Tag = as as string;
   const { themeClassNames } = useTheme();
 
   const className =
@@ -57,22 +46,20 @@ export function Badge<T>(props: IBadge<T>) {
 
   if (minified) {
     return (
-      <Component
+      <Tag
         {...otherProps}
         className={cnBadge({ size, status, minified }, [className])}
         title={label}
-        ref={innerRef}
-        {...(componentIsFunction(Component) && { innerRef })}
+        ref={ref}
       />
     );
   }
 
   return (
-    <Component
+    <Tag
       {...otherProps}
       className={cnBadge({ size, view, status, form, withIcon }, [className])}
-      ref={innerRef}
-      {...(componentIsFunction(Component) && { innerRef })}
+      ref={ref}
     >
       {Icon ? (
         <div className={wp.ptIconPlus({ 'vertical-align': 'center' })}>
@@ -84,6 +71,6 @@ export function Badge<T>(props: IBadge<T>) {
       ) : (
         label
       )}
-    </Component>
+    </Tag>
   );
-}
+});

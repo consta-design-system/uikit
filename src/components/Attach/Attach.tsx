@@ -2,15 +2,14 @@ import './Attach.css';
 
 import React from 'react';
 
-import { IIcon } from '../../icons/Icon/Icon';
+import { IconProps } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
-import { componentIsFunction } from '../../utils/componentIsFunction';
+import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { Button } from '../Button/Button';
 import { File } from '../File/File';
 import { Text } from '../Text/Text';
 
-declare type AttachProps = {
-  as?: React.ElementType;
+type Props = {
   fileExtension?: string;
   loading?: boolean;
   fileName?: string;
@@ -18,22 +17,16 @@ declare type AttachProps = {
   loadingProgress?: number;
   errorText?: string;
   loadingText?: string;
-  onClick?: React.EventHandler<React.MouseEvent>;
   onButtonClick?: React.EventHandler<React.MouseEvent>;
-  buttonIcon?: React.FC<IIcon>;
+  buttonIcon?: React.FC<IconProps>;
   buttonTitle?: string;
-  className?: string;
   withAction?: boolean;
-  innerRef?: React.Ref<HTMLElement>;
+  className?: string;
 };
-
-export type IAttachProps<T = {}> = AttachProps &
-  Omit<React.HTMLAttributes<HTMLDivElement>, keyof AttachProps & T> &
-  Omit<T, keyof AttachProps>;
 
 export const cnAttach = cn('Attach');
 
-export function Attach(props: IAttachProps): React.ReactElement {
+export const Attach: ComponentWithAs<Props> = forwardRefWithAs<Props>((props, ref) => {
   const {
     className,
     as = 'div',
@@ -49,20 +42,17 @@ export function Attach(props: IAttachProps): React.ReactElement {
     onClick,
     withAction: withActionProp,
     buttonTitle,
-    innerRef,
     ...otherProps
   } = props;
-  const Component = as;
-
+  const Tag = as as string;
   const withAction = withActionProp || Boolean(onClick);
 
   return (
-    <Component
+    <Tag
+      {...otherProps}
       onClick={onClick}
       className={cnAttach({ withAction }, [className])}
-      ref={innerRef}
-      {...(componentIsFunction(Component) && { innerRef })}
-      {...otherProps}
+      ref={ref}
     >
       <File
         className={cnAttach('File', { error: Boolean(errorText) })}
@@ -105,6 +95,6 @@ export function Attach(props: IAttachProps): React.ReactElement {
           view="clear"
         />
       )}
-    </Component>
+    </Tag>
   );
-}
+});

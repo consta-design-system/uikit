@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { cnIconFile, FileIconPropSize, IFileIcon } from '../FileIcon/FileIcon';
+import { cnIconFile, FileIconProps, FileIconPropSize } from '../FileIcon/FileIcon';
 
 export type SizeComponent = React.FC<React.SVGProps<SVGSVGElement>>;
 export type BaseIconHocArguments = {
@@ -10,8 +10,8 @@ export type BaseIconHocArguments = {
 };
 
 export function BaseFileIconHoc({ m, s, name }: BaseIconHocArguments) {
-  return function(IconComponent: React.FC<IFileIcon>) {
-    return function(props: IFileIcon) {
+  return function(IconComponent: React.FC<FileIconProps>) {
+    return function(props: FileIconProps) {
       function getSvgBySize(size: FileIconPropSize | undefined) {
         switch (size) {
           case 's':

@@ -3,7 +3,7 @@ import './Text.css';
 import React from 'react';
 
 import { cn } from '../../utils/bem';
-import { componentIsFunction } from '../../utils/componentIsFunction';
+import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import * as wp from '../../utils/whitepaper/whitepaper';
 
 export type TextPropAlign = 'left' | 'center' | 'right';
@@ -40,8 +40,7 @@ export type TextPropView =
 export type TextPropWeight = 'black' | 'bold' | 'light' | 'regular' | 'semibold' | 'thin';
 export type TextPropWidth = 'default';
 
-export type TextProps = {
-  as?: React.ElementType;
+type Props = {
   align?: TextPropAlign;
   decoration?: TextPropDecoration;
   display?: TextPropDisplay;
@@ -55,19 +54,14 @@ export type TextProps = {
   view?: TextPropView;
   weight?: TextPropWeight;
   width?: TextPropWidth;
-  className?: string;
   children?: React.ReactNode;
-  innerRef?: React.Ref<HTMLElement>;
 };
-
-export type IText<T = {}> = TextProps &
-  (Omit<React.HTMLAttributes<Element>, keyof (TextProps & T)> & Omit<T, keyof TextProps>);
 
 export const cnText = cn('Text');
 
-export function Text<T>(props: IText<T>): React.ReactElement | null {
+export const Text: ComponentWithAs<Props> = forwardRefWithAs<Props>((props, ref) => {
   const {
-    as: Component = 'div',
+    as = 'div',
     align,
     decoration,
     display,
@@ -83,12 +77,13 @@ export function Text<T>(props: IText<T>): React.ReactElement | null {
     width,
     className,
     children,
-    innerRef,
     ...otherProps
   } = props;
 
+  const Tag = as as string;
+
   return (
-    <Component
+    <Tag
       {...otherProps}
       className={cnText(null, [
         wp.text({
@@ -108,10 +103,9 @@ export function Text<T>(props: IText<T>): React.ReactElement | null {
         }),
         className,
       ])}
-      ref={innerRef}
-      {...(componentIsFunction(Component) && { innerRef })}
+      ref={ref}
     >
       {children}
-    </Component>
+    </Tag>
   );
-}
+});
