@@ -2,44 +2,39 @@ import './Tabs.css';
 
 import React, { createRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import { IIcon } from '../../icons/Icon/Icon';
+import { IconProps } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { useForkRef } from '../../utils/useForkRef';
 import {
   BaseCheckGroupField,
   BaseCheckGroupFieldItemPropItemKey,
-  BaseCheckGroupFieldPropGetAdditionalPropsForItem,
-  IBaseCheckGroupField,
+  BaseCheckGroupFieldProps,
 } from '../BaseCheckGroupField/BaseCheckGroupField';
 
 import { TabsTab } from './Tab/Tabs-Tab';
 
 export type TabsPropSize = 's' | 'm';
 export type TabsPropView = 'bordered' | 'clear';
-export type TabsProps<T> = {
+type Props<T> = {
   size?: TabsPropSize;
   onlyIcon?: boolean;
   view?: TabsPropView;
-  getItemIcon?: (item: T) => React.FC<IIcon> | undefined;
+  getItemIcon?: (item: T) => React.FC<IconProps> | undefined;
 };
-export type TabsPropsWithIBaseCheckGroupField<T> = Omit<
-  IBaseCheckGroupField<T, TabsProps<T>>,
-  'componentItem' | 'getAdditionalPropsForItem' | 'multiple'
->;
-
-export type ITabs<T = {}> = TabsPropsWithIBaseCheckGroupField<T> &
-  Omit<React.HTMLAttributes<HTMLDivElement>, keyof TabsPropsWithIBaseCheckGroupField<T>>;
+export type TabsProps<T> = Props<T> &
+  Omit<BaseCheckGroupFieldProps<T>, 'componentItem' | 'getAdditionalPropsForItem' | 'multiple'>;
 
 export const cnTabs = cn('Tabs');
 
-export function Tabs<T>(props: ITabs<T>) {
+export const Tabs: <T>(
+  props: TabsProps<T> & React.RefAttributes<HTMLDivElement>,
+) => React.ReactElement | null = React.forwardRef((props, ref) => {
   const {
     size = 'm',
     className,
     items,
     getItemKey,
     view = 'bordered',
-    innerRef,
     value,
     onlyIcon,
     getItemIcon,
@@ -110,42 +105,34 @@ export function Tabs<T>(props: ITabs<T>) {
     setMounted(true);
   }, [updateLine]);
 
-  const getAdditionalPropsForItem: BaseCheckGroupFieldPropGetAdditionalPropsForItem<
-    T,
-    TabsProps<T>
-  > = (item, index, { size, getItemKey, getItemIcon, onlyIcon }) => ({
-    ...(getItemIcon ? { icon: getItemIcon(item) } : {}),
-    size,
-    onlyIcon,
-    innerRef: getItemKey ? buttonRefs[getItemKey(item)] : null,
-  });
-
   const withOutValue = !(value && value.length > 0);
 
   return (
     <div
       className={cnTabs({ size, view }, [className])}
-      ref={useForkRef<HTMLDivElement>([innerRef, rootRef, onMount])}
+      ref={useForkRef<HTMLDivElement>([ref, rootRef, onMount])}
       {...otherProps}
     >
-      <BaseCheckGroupField<T, ITabs<T>>
+      <BaseCheckGroupField
         className={cnTabs('List')}
         componentItem={TabsTab}
-        size={size}
-        getAdditionalPropsForItem={getAdditionalPropsForItem}
+        getAdditionalPropsForItem={(item) => ({
+          ...(getItemIcon ? { icon: getItemIcon(item) } : {}),
+          size,
+          onlyIcon,
+          innerRef: getItemKey ? buttonRefs[getItemKey(item)] : null,
+        })}
         items={items}
         getItemKey={getItemKey}
         value={value}
-        onlyIcon={onlyIcon}
-        getItemIcon={getItemIcon}
-        getItemLabel={getItemLabel}
         id={id}
         name={name}
         onChange={onChange}
+        getItemLabel={getItemLabel}
       />
       <div className={cnTabs('WrapperRunningLine')}>
         <div className={cnTabs('RunningLine', { withOutValue, mounted })} ref={lineRef} />
       </div>
     </div>
   );
-}
+});

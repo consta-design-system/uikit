@@ -26,7 +26,7 @@ const App = () => {
 | loadingWithProgressSpin? | `boolean`                   | -            | Показать/скрыть индикатор прогресса загрузки |
 | loadingProgress?         | `number`                    | -            | Указывает прогресс индикации загрузки        |
 | className?               | `string`                    | -            | Дополнительный класс                         |
-| innerRef?                | `React.Ref<HTMLDivElement>` | -            | Ссылка на корневой DOM элемент компонента    |
+| ref?                     | `React.Ref<HTMLDivElement>` | -            | Ссылка на корневой DOM элемент компонента    |
 
 <!-- props:end -->
 

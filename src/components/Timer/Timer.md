@@ -25,7 +25,7 @@ const App = () => {
 | progress?  | `number`                    | `0`          | Процент заполнения прогрессбара           |
 | animation? | `boolean`                   | -            | Включает плавное изменение прогрессбара   |
 | className? | `string`                    | -            | Дополнительный класс                      |
-| innerRef?  | `React.Ref<HTMLDivElement>` | -            | Ссылка на корневой DOM элемент компонента |
+| ref?       | `React.Ref<HTMLDivElement>` | -            | Ссылка на корневой DOM элемент компонента |
 
 <!-- props:end -->
 

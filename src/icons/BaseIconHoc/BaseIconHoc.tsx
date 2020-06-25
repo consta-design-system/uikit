@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { cnIcon, IconPropSize, IIcon } from '../Icon/Icon';
+import { cnIcon, IconProps, IconPropSize } from '../Icon/Icon';
 
 export type SizeComponent = React.FC<React.SVGProps<SVGSVGElement>>;
 export type BaseIconHocArguments = {
@@ -11,8 +11,8 @@ export type BaseIconHocArguments = {
 };
 
 export function BaseIconHoc({ m, s, xs, name }: BaseIconHocArguments) {
-  return function(IconComponent: React.FC<IIcon>) {
-    return function(props: IIcon) {
+  return function(IconComponent: React.FC<IconProps>) {
+    return function(props: IconProps) {
       function getSvgBySize(size: IconPropSize | undefined) {
         switch (size) {
           case 'xs':

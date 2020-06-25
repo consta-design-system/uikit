@@ -3,7 +3,7 @@ import './TextField.css';
 import React, { FocusEvent, useState } from 'react';
 import TextAreaAutoSize from 'react-textarea-autosize';
 
-import { IconPropSize, IIcon } from '../../icons/Icon/Icon';
+import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
@@ -59,8 +59,8 @@ type Props = {
   onBlur?: React.FocusEventHandler;
   autoFocus?: boolean;
   placeholder?: string;
-  leftSide?: string | React.FC<IIcon>;
-  rightSide?: string | React.FC<IIcon>;
+  leftSide?: string | React.FC<IconProps>;
+  rightSide?: string | React.FC<IconProps>;
   autoComplete?: TextFieldPropAutoComplete;
   max?: number | string;
   min?: number | string;
