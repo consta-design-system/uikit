@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { IFileIcon } from '../../FileIcon';
+import { FileIconProps } from '../../FileIcon';
 
-export type IIconsItem = {
-  icon: React.FC<IFileIcon>;
+export type IconsItemProps = {
+  icon: React.FC<FileIconProps>;
   name: string;
-} & IFileIcon;
+} & FileIconProps;
 
-export const IconsItem: React.FC<IIconsItem> = ({ icon, name, size }) => {
+export const IconsItem: React.FC<IconsItemProps> = ({ icon, name, size }) => {
   const Icon = icon;
   return (
     <div className="tpl-grid__fraction text text_align_center">
