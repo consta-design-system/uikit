@@ -30,7 +30,7 @@ export const SnackBarTimer: React.FC<SnackBarTimerProps> = (props) => {
   useEffect(() => {
     onMount({ start, pause });
     start();
-  }, [onMount, pause, start]);
+  }, []);
 
   useEffect(() => {
     setRunning(isRunning);
