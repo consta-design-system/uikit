@@ -35,10 +35,10 @@ storiesOf('FileIcons', module)
   .addDecorator(withKnobs)
   .add('FileIcons', () => (
     <div className="tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full">
-      <IconsItem name="FileIconAvi" icon={FileIconAvi} {...defaultKnobs()} />
       <IconsItem name="FileIconBmp" icon={FileIconBmp} {...defaultKnobs()} />
-      <IconsItem name="FileIconCsv" icon={FileIconCsv} {...defaultKnobs()} />
+      <IconsItem name="FileIconAvi" icon={FileIconAvi} {...defaultKnobs()} />
       <IconsItem name="FileIconDoc" icon={FileIconDoc} {...defaultKnobs()} />
+      <IconsItem name="FileIconCsv" icon={FileIconCsv} {...defaultKnobs()} />
       <IconsItem name="FileIconExe" icon={FileIconExe} {...defaultKnobs()} />
       <IconsItem name="FileIconGif" icon={FileIconGif} {...defaultKnobs()} />
       <IconsItem name="FileIconJpg" icon={FileIconJpg} {...defaultKnobs()} />

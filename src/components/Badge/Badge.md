@@ -98,7 +98,7 @@ const App = () => {
 - расширяем интерфейс нашего компонента нужными нам свойствами
 
 ```ts
-<Badge<{ href: string }> as="a" href="#" label="Лэйбл" />
+<Badge as="a" href="#" label="Лэйбл" />
 ```
 
 {{%story::ui-kit-examples-badge--as%}}

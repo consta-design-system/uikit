@@ -14,6 +14,7 @@ import { IconArrowRight } from '../../IconArrowRight/IconArrowRight';
 import { IconArrowUp } from '../../IconArrowUp/IconArrowUp';
 import { IconAttach } from '../../IconAttach/IconAttach';
 import { IconBackward } from '../../IconBackward/IconBackward';
+import { IconBag } from '../../IconBag/IconBag';
 import { IconBarrier } from '../../IconBarrier/IconBarrier';
 import { IconBento } from '../../IconBento/IconBento';
 import { IconBold } from '../../IconBold/IconBold';
@@ -46,12 +47,14 @@ import { IconExpand } from '../../IconExpand/IconExpand';
 import { IconEye } from '../../IconEye/IconEye';
 import { IconFavorite } from '../../IconFavorite/IconFavorite';
 import { IconFilter } from '../../IconFilter/IconFilter';
+import { IconFolders } from '../../IconFolders/IconFolders';
 import { IconForward } from '../../IconForward/IconForward';
 import { IconFunnel } from '../../IconFunnel/IconFunnel';
 import { IconGas } from '../../IconGas/IconGas';
 import { IconHamburger } from '../../IconHamburger/IconHamburger';
 import { IconItalic } from '../../IconItalic/IconItalic';
 import { IconKebab } from '../../IconKebab/IconKebab';
+import { IconLayers } from '../../IconLayers/IconLayers';
 import { IconLeaf } from '../../IconLeaf/IconLeaf';
 import { IconLink } from '../../IconLink/IconLink';
 import { IconList } from '../../IconList/IconList';
@@ -68,6 +71,7 @@ import { IconQuestion } from '../../IconQuestion/IconQuestion';
 import { IconQuote } from '../../IconQuote/IconQuote';
 import { IconRecord } from '../../IconRecord/IconRecord';
 import { IconRemove } from '../../IconRemove/IconRemove';
+import { IconReply } from '../../IconReply/IconReply';
 import { IconRevert } from '../../IconRevert/IconRevert';
 import { IconRing } from '../../IconRing/IconRing';
 import { IconRouble } from '../../IconRouble/IconRouble';
@@ -81,6 +85,7 @@ import { IconSortDownCenter } from '../../IconSortDownCenter/IconSortDownCenter'
 import { IconSortUp } from '../../IconSortUp/IconSortUp';
 import { IconSortUpCenter } from '../../IconSortUpCenter/IconSortUpCenter';
 import { IconStop } from '../../IconStop/IconStop';
+import { IconStorage } from '../../IconStorage/IconStorage';
 import { IconStrikethrough } from '../../IconStrikethrough/IconStrikethrough';
 import { IconTable } from '../../IconTable/IconTable';
 import { IconTest } from '../../IconTest/IconTest';
@@ -91,6 +96,7 @@ import { IconTrash } from '../../IconTrash/IconTrash';
 import { IconType } from '../../IconType/IconType';
 import { IconUnderline } from '../../IconUnderline/IconUnderline';
 import { IconUser } from '../../IconUser/IconUser';
+import { IconWarning } from '../../IconWarning/IconWarning';
 import { IconWorld } from '../../IconWorld/IconWorld';
 
 import { IconsItem } from './Item/Icons-Item';
@@ -109,9 +115,9 @@ storiesOf('Icons', module)
   .add('Icons', () => (
     <div className="tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full">
       <IconsItem name="IconAdd" icon={IconAdd} {...defaultKnobs()} />
-      <IconsItem name="IconAlert" icon={IconAlert} {...defaultKnobs()} />
-      <IconsItem name="IconAlignCenter" icon={IconAlignCenter} {...defaultKnobs()} />
       <IconsItem name="IconAlignJustify" icon={IconAlignJustify} {...defaultKnobs()} />
+      <IconsItem name="IconAlignCenter" icon={IconAlignCenter} {...defaultKnobs()} />
+      <IconsItem name="IconAlert" icon={IconAlert} {...defaultKnobs()} />
       <IconsItem name="IconAlignLeft" icon={IconAlignLeft} {...defaultKnobs()} />
       <IconsItem name="IconAlignRight" icon={IconAlignRight} {...defaultKnobs()} />
       <IconsItem name="IconArrowDown" icon={IconArrowDown} {...defaultKnobs()} />
@@ -120,6 +126,7 @@ storiesOf('Icons', module)
       <IconsItem name="IconArrowUp" icon={IconArrowUp} {...defaultKnobs()} />
       <IconsItem name="IconAttach" icon={IconAttach} {...defaultKnobs()} />
       <IconsItem name="IconBackward" icon={IconBackward} {...defaultKnobs()} />
+      <IconsItem name="IconBag" icon={IconBag} {...defaultKnobs()} />
       <IconsItem name="IconBarrier" icon={IconBarrier} {...defaultKnobs()} />
       <IconsItem name="IconBento" icon={IconBento} {...defaultKnobs()} />
       <IconsItem name="IconBold" icon={IconBold} {...defaultKnobs()} />
@@ -152,11 +159,13 @@ storiesOf('Icons', module)
       <IconsItem name="IconEye" icon={IconEye} {...defaultKnobs()} />
       <IconsItem name="IconFavorite" icon={IconFavorite} {...defaultKnobs()} />
       <IconsItem name="IconFilter" icon={IconFilter} {...defaultKnobs()} />
+      <IconsItem name="IconFolders" icon={IconFolders} {...defaultKnobs()} />
       <IconsItem name="IconForward" icon={IconForward} {...defaultKnobs()} />
       <IconsItem name="IconFunnel" icon={IconFunnel} {...defaultKnobs()} />
-      <IconsItem name="IconGas" icon={IconGas} {...defaultKnobs()} />
       <IconsItem name="IconHamburger" icon={IconHamburger} {...defaultKnobs()} />
+      <IconsItem name="IconGas" icon={IconGas} {...defaultKnobs()} />
       <IconsItem name="IconItalic" icon={IconItalic} {...defaultKnobs()} />
+      <IconsItem name="IconLayers" icon={IconLayers} {...defaultKnobs()} />
       <IconsItem name="IconKebab" icon={IconKebab} {...defaultKnobs()} />
       <IconsItem name="IconLeaf" icon={IconLeaf} {...defaultKnobs()} />
       <IconsItem name="IconLink" icon={IconLink} {...defaultKnobs()} />
@@ -164,8 +173,8 @@ storiesOf('Icons', module)
       <IconsItem name="IconListNumbered" icon={IconListNumbered} {...defaultKnobs()} />
       <IconsItem name="IconLock" icon={IconLock} {...defaultKnobs()} />
       <IconsItem name="IconMail" icon={IconMail} {...defaultKnobs()} />
-      <IconsItem name="IconOpenInNew" icon={IconOpenInNew} {...defaultKnobs()} />
       <IconsItem name="IconMeatball" icon={IconMeatball} {...defaultKnobs()} />
+      <IconsItem name="IconOpenInNew" icon={IconOpenInNew} {...defaultKnobs()} />
       <IconsItem name="IconPause" icon={IconPause} {...defaultKnobs()} />
       <IconsItem name="IconPhoto" icon={IconPhoto} {...defaultKnobs()} />
       <IconsItem name="IconPlay" icon={IconPlay} {...defaultKnobs()} />
@@ -174,6 +183,7 @@ storiesOf('Icons', module)
       <IconsItem name="IconQuote" icon={IconQuote} {...defaultKnobs()} />
       <IconsItem name="IconRecord" icon={IconRecord} {...defaultKnobs()} />
       <IconsItem name="IconRemove" icon={IconRemove} {...defaultKnobs()} />
+      <IconsItem name="IconReply" icon={IconReply} {...defaultKnobs()} />
       <IconsItem name="IconRevert" icon={IconRevert} {...defaultKnobs()} />
       <IconsItem name="IconRing" icon={IconRing} {...defaultKnobs()} />
       <IconsItem name="IconRouble" icon={IconRouble} {...defaultKnobs()} />
@@ -187,6 +197,7 @@ storiesOf('Icons', module)
       <IconsItem name="IconSortUp" icon={IconSortUp} {...defaultKnobs()} />
       <IconsItem name="IconSortUpCenter" icon={IconSortUpCenter} {...defaultKnobs()} />
       <IconsItem name="IconStop" icon={IconStop} {...defaultKnobs()} />
+      <IconsItem name="IconStorage" icon={IconStorage} {...defaultKnobs()} />
       <IconsItem name="IconStrikethrough" icon={IconStrikethrough} {...defaultKnobs()} />
       <IconsItem name="IconTable" icon={IconTable} {...defaultKnobs()} />
       <IconsItem name="IconTest" icon={IconTest} {...defaultKnobs()} />
@@ -197,6 +208,7 @@ storiesOf('Icons', module)
       <IconsItem name="IconType" icon={IconType} {...defaultKnobs()} />
       <IconsItem name="IconUnderline" icon={IconUnderline} {...defaultKnobs()} />
       <IconsItem name="IconUser" icon={IconUser} {...defaultKnobs()} />
+      <IconsItem name="IconWarning" icon={IconWarning} {...defaultKnobs()} />
       <IconsItem name="IconWorld" icon={IconWorld} {...defaultKnobs()} />
     </div>
   ));

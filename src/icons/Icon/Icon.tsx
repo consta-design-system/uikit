@@ -16,16 +16,16 @@ export type IconPropView =
   | 'success'
   | 'warning';
 
-type Props = {
+export type Props = {
   view?: IconPropView;
   size?: IconPropSize;
 };
 
-export type IconProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
+export type IconProps = PropsWithHTMLAttributes<Props, HTMLSpanElement>;
 
 export const cnIcon = cn('Icon');
 
-export const Icon = React.forwardRef<HTMLDivElement, IconProps>((props, ref) => {
+export const Icon = React.forwardRef<HTMLSpanElement, IconProps>((props, ref) => {
   const { children, className, size = 'm', view, ...otherProps } = props;
   return (
     <span {...otherProps} className={cnIcon({ size, view }, [className])} ref={ref}>
