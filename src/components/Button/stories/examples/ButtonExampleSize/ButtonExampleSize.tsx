@@ -15,16 +15,16 @@ export function ButtonExampleSizeBasic() {
       ])}
     >
       <div className={cnExample()}>
-        <Button label="Размер L" size="l" />
-      </div>
-      <div className={cnExample()}>
-        <Button label="Размер M" size="m" />
+        <Button label="Размер XS" size="xs" />
       </div>
       <div className={cnExample()}>
         <Button label="Размер S" size="s" />
       </div>
       <div className={cnExample()}>
-        <Button label="Размер XS" size="xs" />
+        <Button label="Размер M" size="m" />
+      </div>
+      <div className={cnExample()}>
+        <Button label="Размер L" size="l" />
       </div>
     </div>
   );

@@ -51,7 +51,7 @@ export function ButtonExampleViewGhost() {
   return (
     <div className={cnDocsDecorator('Section', [wp.decorator({ distribute: 'left' })])}>
       <div className={cnExample(null, [wp.decorator({ 'indent-r': 's' })])}>
-        <Button view="ghost" label="Отмена" />
+        <Button view="ghost" label="Отменить" />
       </div>
       <div className={cnExample(null, [wp.decorator({ 'indent-r': 's' })])}>
         <Button view="ghost" label="Настройки" iconLeft={IconSettings} />
