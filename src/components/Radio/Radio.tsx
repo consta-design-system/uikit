@@ -29,6 +29,7 @@ export type Props = {
   step?: number | string;
   tabIndex?: number;
   inputRef?: React.Ref<HTMLInputElement>;
+  children?: never;
 };
 
 export type RadioProps = PropsWithHTMLAttributes<Props, HTMLLabelElement>;
