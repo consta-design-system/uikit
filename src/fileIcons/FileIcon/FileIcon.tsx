@@ -18,7 +18,7 @@ export const cnIconFile = cn('FileIcon');
 export const FileIcon = React.forwardRef<HTMLDivElement, FileIconProps>((props, ref) => {
   const { children, className, size = 'm', ...otherProps } = props;
   return (
-    <div {...otherProps} ref={ref} className={cnIconFile({ size }, [className])}>
+    <div {...otherProps} className={cnIconFile({ size }, [className])} ref={ref}>
       {children}
     </div>
   );

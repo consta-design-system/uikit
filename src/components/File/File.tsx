@@ -69,7 +69,7 @@ export const File: React.FC<FileProps> = (props) => {
     );
   }
 
-  const extensionToSvg: { [value: string]: React.FC<FileIconProps> } = {
+  const extensionToSvg: { [value: string]: React.FC<FileProps> } = {
     bmp: FileIconBmp,
     csv: FileIconCsv,
     avi: FileIconAvi,

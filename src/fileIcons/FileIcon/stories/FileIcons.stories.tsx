@@ -51,8 +51,8 @@ storiesOf('FileIcons', module)
       <IconsItem name="FileIconPtt" icon={FileIconPtt} {...defaultKnobs()} />
       <IconsItem name="FileIconRar" icon={FileIconRar} {...defaultKnobs()} />
       <IconsItem name="FileIconRtf" icon={FileIconRtf} {...defaultKnobs()} />
-      <IconsItem name="FileIconTiff" icon={FileIconTiff} {...defaultKnobs()} />
       <IconsItem name="FileIconTxt" icon={FileIconTxt} {...defaultKnobs()} />
+      <IconsItem name="FileIconTiff" icon={FileIconTiff} {...defaultKnobs()} />
       <IconsItem name="FileIconUndefined" icon={FileIconUndefined} {...defaultKnobs()} />
       <IconsItem name="FileIconWav" icon={FileIconWav} {...defaultKnobs()} />
       <IconsItem name="FileIconXls" icon={FileIconXls} {...defaultKnobs()} />

@@ -10,13 +10,13 @@ export type ComponentWithAs<Props, DefaultTag extends keyof JSX.IntrinsicElement
   props: PropsWithAsAttributes<Props, As> & React.RefAttributes<HTMLElement>,
 ) => React.ReactElement | null;
 
-type ForwardRefWidthAs<Props> = <As extends keyof JSX.IntrinsicElements>(
+type ForwardRefWithAs<Props> = <As extends keyof JSX.IntrinsicElements>(
   props: PropsWithAsAttributes<Props, As>,
   ref: React.Ref<HTMLElement>,
 ) => React.ReactElement | null;
 
 type As = keyof JSX.IntrinsicElements;
 
-export function forwardRefWithAs<Props>(render: ForwardRefWidthAs<Props>) {
+export function forwardRefWithAs<Props>(render: ForwardRefWithAs<Props>) {
   return React.forwardRef<HTMLElement, PropsWithAsAttributes<Props, As>>(render);
 }

@@ -5,7 +5,7 @@ import React from 'react';
 import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import { cnHeader } from '../Header';
 
-export type ItemT = {
+export type Item = {
   label?: string;
   href?: string;
   target?: string;
@@ -14,7 +14,7 @@ export type ItemT = {
 };
 
 type Props = {
-  items: ItemT[];
+  items: Item[];
 };
 
 export type MenuProps = PropsWithHTMLAttributes<Props, HTMLElement>;
