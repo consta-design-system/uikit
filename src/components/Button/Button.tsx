@@ -34,7 +34,6 @@ type Props = {
   onlyIcon?: boolean;
   iconSize?: IconPropSize;
   title?: string;
-  innerRef?: React.Ref<HTMLElement>;
 };
 
 export const cnButton = cn('Button');

@@ -8,7 +8,6 @@ import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttribut
 export type ProgressSpinPropSize = 'm' | 's';
 type Props = {
   size?: ProgressSpinPropSize;
-  innerRef?: React.Ref<SVGSVGElement>;
   className?: string;
   progress?: number;
   animation?: boolean;
