@@ -1,12 +1,12 @@
-import { BaseIconHoc } from '../BaseIconHoc/BaseIconHoc';
-import { Icon } from '../Icon/Icon';
+import { createIcon } from '../createIcon/createIcon';
+
 import #componentName#SizeM from './#componentName#_size_m';
 import #componentName#SizeS from './#componentName#_size_s';
 import #componentName#SizeXs from './#componentName#_size_xs';
 
-export const #componentName# = BaseIconHoc({
+export const #componentName# = createIcon({
   m: #componentName#SizeM,
   s: #componentName#SizeS,
   xs: #componentName#SizeXs,
   name: '#componentName#',
-})(Icon);
+});

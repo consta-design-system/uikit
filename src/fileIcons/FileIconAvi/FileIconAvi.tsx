@@ -1,11 +1,10 @@
-import { BaseFileIconHoc } from '../BaseFileIconHoc/BaseFileIconHoc';
-import { FileIcon } from '../FileIcon/FileIcon';
+import { createFileIcon } from '../createFileIcon/createFileIcon';
 
 import FileIconAviSizeM from './FileIconAvi_size_m';
 import FileIconAviSizeS from './FileIconAvi_size_s';
 
-export const FileIconAvi = BaseFileIconHoc({
+export const FileIconAvi = createFileIcon({
   m: FileIconAviSizeM,
   s: FileIconAviSizeS,
   name: 'FileIconAvi',
-})(FileIcon);
+});

@@ -97,7 +97,7 @@ export const File: React.FC<FileProps> = (props) => {
     xlsx: FileIconXls,
   };
 
-  function getIconByExtension(extension?: string): React.FC<FileProps> {
+  function getIconByExtension(extension?: string): React.FC<FileIconProps> {
     if (!extension) {
       return FileIconUndefined;
     }
