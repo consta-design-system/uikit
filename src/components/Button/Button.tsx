@@ -4,6 +4,7 @@ import React from 'react';
 
 import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
+import { getSizeByMap } from '../../utils/getSizeByMap';
 import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { Loader } from '../Loader/Loader';
 
@@ -38,18 +39,11 @@ type Props = {
 
 export const cnButton = cn('Button');
 
-const getIconSizeByButtonSize = (buttonSize: ButtonPropSize, size?: IconPropSize): IconPropSize => {
-  if (size) {
-    return size;
-  }
-  const sizeObj: Record<ButtonPropSize, IconPropSize> = {
-    xs: 'xs',
-    s: 'xs',
-    m: 's',
-    l: 'm',
-  };
-
-  return sizeObj[buttonSize];
+const sizeMap: Record<ButtonPropSize, IconPropSize> = {
+  xs: 'xs',
+  s: 'xs',
+  m: 's',
+  l: 'm',
 };
 
 export const Button: ComponentWithAs<Props, 'button'> = forwardRefWithAs<Props>((props, ref) => {
@@ -83,7 +77,7 @@ export const Button: ComponentWithAs<Props, 'button'> = forwardRefWithAs<Props>(
     }
   };
 
-  const iconSize = getIconSizeByButtonSize(size, iconSizeProp);
+  const iconSize = getSizeByMap(sizeMap, size, iconSizeProp);
   const title = props.title || (!!IconOnly && label) || undefined;
 
   return (

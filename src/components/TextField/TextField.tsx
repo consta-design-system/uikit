@@ -5,6 +5,7 @@ import TextAreaAutoSize from 'react-textarea-autosize';
 
 import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
+import { getSizeByMap } from '../../utils/getSizeByMap';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
 export type TextFieldPropValue = string | null;
@@ -77,22 +78,11 @@ export type TextFieldProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
 
 const cnTextField = cn('TextField');
 
-const getIconSizeByTextFieldSize = (
-  textFieldSize: TextFieldPropSize,
-  size?: IconPropSize,
-): IconPropSize => {
-  if (size) {
-    return size;
-  }
-
-  const sizeObj: Record<TextFieldPropSize, IconPropSize> = {
-    xs: 'xs',
-    s: 's',
-    m: 's',
-    l: 'm',
-  };
-
-  return sizeObj[textFieldSize];
+const sizeMap: Record<TextFieldPropSize, IconPropSize> = {
+  xs: 'xs',
+  s: 's',
+  m: 's',
+  l: 'm',
 };
 
 export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>((props, ref) => {
@@ -138,7 +128,7 @@ export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>((props
   const RightIcon = rightSide;
   const leftSideIsString = typeof leftSide === 'string';
   const rightSideIsString = typeof rightSide === 'string';
-  const iconSize = getIconSizeByTextFieldSize(size, iconSizeProp);
+  const iconSize = getSizeByMap(sizeMap, size, iconSizeProp);
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (e) => {
     const { value } = e.target;

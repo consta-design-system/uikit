@@ -3,6 +3,7 @@ import './Tabs-Tab.css';
 import React from 'react';
 
 import { IconProps, IconPropSize } from '../../../icons/Icon/Icon';
+import { getSizeByMap } from '../../../utils/getSizeByMap';
 import { BaseCheckGroupItemProps } from '../../BaseCheckGroupField/BaseCheckGroupField';
 import { cnTabs, TabsPropSize } from '../Tabs';
 
@@ -16,27 +17,16 @@ type Props<T> = {
 
 export type TabsTabProps<T> = BaseCheckGroupItemProps<T> & Props<T>;
 
-const getIconSizeByTabsSize = (
-  buttonSize: TabsPropSize = 's',
-  size?: IconPropSize,
-): IconPropSize => {
-  if (size) {
-    return size;
-  }
-
-  const sizeObj: Record<TabsPropSize, IconPropSize> = {
-    s: 'xs',
-    m: 's',
-  };
-
-  return sizeObj[buttonSize];
+const sizeMap: Record<TabsPropSize, IconPropSize> = {
+  s: 'xs',
+  m: 's',
 };
 
 export function TabsTab<T>(props: TabsTabProps<T>): React.ReactElement {
   const {
     label,
     onChange,
-    size,
+    size = 'm',
     checked,
     id,
     value,
@@ -55,7 +45,7 @@ export function TabsTab<T>(props: TabsTabProps<T>): React.ReactElement {
       role="tab"
       type="button"
     >
-      {Icon && <Icon className={cnTabs('Icon')} size={getIconSizeByTabsSize(size, iconSize)} />}
+      {Icon && <Icon className={cnTabs('Icon')} size={getSizeByMap(sizeMap, size, iconSize)} />}
       {!onlyIcon && label}
     </button>
   );

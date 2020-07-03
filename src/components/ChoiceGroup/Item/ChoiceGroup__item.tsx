@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 
 import { IconProps, IconPropSize } from '../../../icons/Icon/Icon';
+import { getSizeByMap } from '../../../utils/getSizeByMap';
 import { BaseCheckGroupItemProps } from '../../BaseCheckGroupField/BaseCheckGroupField';
 import { ChoiceGroupPropSize, cnChoiceGroup } from '../ChoiceGroup';
 
@@ -14,22 +15,11 @@ type Props = {
 
 export type ChoiceGroupItemProps<T> = BaseCheckGroupItemProps<T> & Props;
 
-const getIconSizeChoiceGroupSize = (
-  buttonSize: ChoiceGroupPropSize,
-  size?: IconPropSize,
-): IconPropSize => {
-  if (size) {
-    return size;
-  }
-
-  const sizeObj: Record<ChoiceGroupPropSize, IconPropSize> = {
-    xs: 'xs',
-    s: 'xs',
-    m: 's',
-    l: 'm',
-  };
-
-  return sizeObj[buttonSize];
+const sizeMap: Record<ChoiceGroupPropSize, IconPropSize> = {
+  xs: 'xs',
+  s: 'xs',
+  m: 's',
+  l: 'm',
 };
 
 export function ChoiceGroupItem<T>(props: ChoiceGroupItemProps<T>): React.ReactElement {
@@ -72,7 +62,7 @@ export function ChoiceGroupItem<T>(props: ChoiceGroupItemProps<T>): React.ReactE
         onChange={handleChange}
       />
       {Icon && (
-        <Icon className={cnChoiceGroup('Icon')} size={getIconSizeChoiceGroupSize(size, iconSize)} />
+        <Icon className={cnChoiceGroup('Icon')} size={getSizeByMap(sizeMap, size, iconSize)} />
       )}
       {!onlyIcon && label}
     </label>
