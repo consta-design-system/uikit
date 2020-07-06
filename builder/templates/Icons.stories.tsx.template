@@ -13,10 +13,16 @@ const defaultKnobs = () => ({
   ),
 });
 
+const icons = {
+  #icons#
+}
+
 storiesOf('Icons', module)
   .addDecorator(withKnobs)
   .add('Icons', () => (
     <div className={'tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full'}>
-     #items#
+      {Object.keys(icons).map(name => (
+        <IconsItem key={name} name={name} icon={icons[name]} {...defaultKnobs()} />
+      ))}
     </div>
   ));
