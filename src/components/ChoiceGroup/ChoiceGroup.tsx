@@ -23,6 +23,7 @@ type Props<T> = {
   onlyIcon?: boolean;
   getItemIcon?: (item: T) => React.FC<IconProps> | undefined;
   getItemTitle?: BaseCheckGroupFieldPropGetItemLabel<T>;
+  children?: never;
 };
 
 export type ChoiceGroupProps<T> = Props<T> &

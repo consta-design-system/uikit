@@ -13,6 +13,7 @@ type Props = {
   seconds?: number;
   progress?: number;
   animation?: boolean;
+  children?: never;
 };
 
 export type TimerProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;

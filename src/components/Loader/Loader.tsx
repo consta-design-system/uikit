@@ -9,6 +9,7 @@ export type LoaderPropSize = 's' | 'm';
 
 type Props = {
   size?: LoaderPropSize;
+  children?: never;
 };
 
 export type LoaderProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
