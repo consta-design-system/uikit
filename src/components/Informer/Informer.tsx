@@ -17,7 +17,6 @@ type Props = {
   status?: InformerPropStatus;
   icon?: React.FC<IconProps>;
   label?: React.ReactNode;
-  children?: React.ReactNode;
   title?: string;
 };
 

@@ -1,13 +1,12 @@
-import { BaseIconHoc } from '../BaseIconHoc/BaseIconHoc';
-import { Icon } from '../Icon/Icon';
+import { createIcon } from '../createIcon/createIcon';
 
 import IconDropSizeM from './IconDrop_size_m';
 import IconDropSizeS from './IconDrop_size_s';
 import IconDropSizeXs from './IconDrop_size_xs';
 
-export const IconDrop = BaseIconHoc({
+export const IconDrop = createIcon({
   m: IconDropSizeM,
   s: IconDropSizeS,
   xs: IconDropSizeXs,
   name: 'IconDrop',
-})(Icon);
+});

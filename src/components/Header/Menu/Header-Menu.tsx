@@ -11,6 +11,7 @@ export type Item = {
   target?: string;
   active?: boolean;
   onClick?: React.EventHandler<React.MouseEvent>;
+  children?: never;
 };
 
 type Props = {

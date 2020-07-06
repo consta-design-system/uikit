@@ -80,6 +80,7 @@ import { IconSelect } from '../../IconSelect/IconSelect';
 import { IconSelectOpen } from '../../IconSelectOpen/IconSelectOpen';
 import { IconSettings } from '../../IconSettings/IconSettings';
 import { IconShuffle } from '../../IconShuffle/IconShuffle';
+import { IconSmile } from '../../IconSmile/IconSmile';
 import { IconSortDown } from '../../IconSortDown/IconSortDown';
 import { IconSortDownCenter } from '../../IconSortDownCenter/IconSortDownCenter';
 import { IconSortUp } from '../../IconSortUp/IconSortUp';
@@ -114,11 +115,11 @@ storiesOf('Icons', module)
   .addDecorator(withKnobs)
   .add('Icons', () => (
     <div className="tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full">
-      <IconsItem name="IconAdd" icon={IconAdd} {...defaultKnobs()} />
       <IconsItem name="IconAlignJustify" icon={IconAlignJustify} {...defaultKnobs()} />
-      <IconsItem name="IconAlignCenter" icon={IconAlignCenter} {...defaultKnobs()} />
       <IconsItem name="IconAlert" icon={IconAlert} {...defaultKnobs()} />
+      <IconsItem name="IconAlignCenter" icon={IconAlignCenter} {...defaultKnobs()} />
       <IconsItem name="IconAlignLeft" icon={IconAlignLeft} {...defaultKnobs()} />
+      <IconsItem name="IconAdd" icon={IconAdd} {...defaultKnobs()} />
       <IconsItem name="IconAlignRight" icon={IconAlignRight} {...defaultKnobs()} />
       <IconsItem name="IconArrowDown" icon={IconArrowDown} {...defaultKnobs()} />
       <IconsItem name="IconArrowLeft" icon={IconArrowLeft} {...defaultKnobs()} />
@@ -162,15 +163,15 @@ storiesOf('Icons', module)
       <IconsItem name="IconFolders" icon={IconFolders} {...defaultKnobs()} />
       <IconsItem name="IconForward" icon={IconForward} {...defaultKnobs()} />
       <IconsItem name="IconFunnel" icon={IconFunnel} {...defaultKnobs()} />
-      <IconsItem name="IconHamburger" icon={IconHamburger} {...defaultKnobs()} />
       <IconsItem name="IconGas" icon={IconGas} {...defaultKnobs()} />
+      <IconsItem name="IconHamburger" icon={IconHamburger} {...defaultKnobs()} />
       <IconsItem name="IconItalic" icon={IconItalic} {...defaultKnobs()} />
-      <IconsItem name="IconLayers" icon={IconLayers} {...defaultKnobs()} />
       <IconsItem name="IconKebab" icon={IconKebab} {...defaultKnobs()} />
+      <IconsItem name="IconLayers" icon={IconLayers} {...defaultKnobs()} />
       <IconsItem name="IconLeaf" icon={IconLeaf} {...defaultKnobs()} />
       <IconsItem name="IconLink" icon={IconLink} {...defaultKnobs()} />
-      <IconsItem name="IconList" icon={IconList} {...defaultKnobs()} />
       <IconsItem name="IconListNumbered" icon={IconListNumbered} {...defaultKnobs()} />
+      <IconsItem name="IconList" icon={IconList} {...defaultKnobs()} />
       <IconsItem name="IconLock" icon={IconLock} {...defaultKnobs()} />
       <IconsItem name="IconMail" icon={IconMail} {...defaultKnobs()} />
       <IconsItem name="IconMeatball" icon={IconMeatball} {...defaultKnobs()} />
@@ -192,6 +193,7 @@ storiesOf('Icons', module)
       <IconsItem name="IconSelectOpen" icon={IconSelectOpen} {...defaultKnobs()} />
       <IconsItem name="IconSettings" icon={IconSettings} {...defaultKnobs()} />
       <IconsItem name="IconShuffle" icon={IconShuffle} {...defaultKnobs()} />
+      <IconsItem name="IconSmile" icon={IconSmile} {...defaultKnobs()} />
       <IconsItem name="IconSortDown" icon={IconSortDown} {...defaultKnobs()} />
       <IconsItem name="IconSortDownCenter" icon={IconSortDownCenter} {...defaultKnobs()} />
       <IconsItem name="IconSortUp" icon={IconSortUp} {...defaultKnobs()} />
@@ -199,8 +201,8 @@ storiesOf('Icons', module)
       <IconsItem name="IconStop" icon={IconStop} {...defaultKnobs()} />
       <IconsItem name="IconStorage" icon={IconStorage} {...defaultKnobs()} />
       <IconsItem name="IconStrikethrough" icon={IconStrikethrough} {...defaultKnobs()} />
-      <IconsItem name="IconTable" icon={IconTable} {...defaultKnobs()} />
       <IconsItem name="IconTest" icon={IconTest} {...defaultKnobs()} />
+      <IconsItem name="IconTable" icon={IconTable} {...defaultKnobs()} />
       <IconsItem name="IconThumbUp" icon={IconThumbUp} {...defaultKnobs()} />
       <IconsItem name="IconTie" icon={IconTie} {...defaultKnobs()} />
       <IconsItem name="IconTop" icon={IconTop} {...defaultKnobs()} />
