@@ -34,7 +34,7 @@ import { ButtonExampleLoading } from './examples/ButtonExampleLoading/ButtonExam
 Кнопка в фокусе визуально выделяется, чтобы человек понимал,
 что вот-вот нажмёт на неё и что-то произойдёт.
 
-[Текст на кнопке](#view) | [Типы кнопок](#type) | [Иконки](#icon) | [Размеры](#size) |[Форма](#form) |[События](#events)  | [Все свойства](#params) | [Примеры](#example)
+[Текст на кнопке](#view) | [Типы кнопок](#type) | [Иконки](#icon) | [Размеры](#size) | [Форма](#form) | [События](#events)  | [Все свойства](#params) | [Примеры](#example)
 
 
 
@@ -70,7 +70,6 @@ import { ButtonExampleLoading } from './examples/ButtonExampleLoading/ButtonExam
 
 <ButtonExampleNameAgreement />
 
-> Если не знаете, как лучше, постарайтесь найти подходящий глагол.
 
 #### Как можно точнее
 
@@ -90,6 +89,7 @@ import { ButtonExampleLoading } from './examples/ButtonExampleLoading/ButtonExam
 
 <ButtonExampleNameOverflow />
 
+<div id="type" style={{fontSize: 0}}>&nbsp;</div>
 
 ### Типы кнопок
 
@@ -140,6 +140,8 @@ import { ButtonExampleLoading } from './examples/ButtonExampleLoading/ButtonExam
 
 <ButtonExampleViewClear />
 
+<div id="disabled" style={{fontSize: 0}}>&nbsp;</div>
+
 #### `disabled`
 
 Это свойство блокирует кнопку — её невозможно нажать. Его можно применить к кнопке любого типа.
@@ -150,6 +152,8 @@ import { ButtonExampleLoading } from './examples/ButtonExampleLoading/ButtonExam
 
 <ButtonExampleViewDisabled />
 
+<div id="icon" style={{fontSize: 0}}>&nbsp;</div>
+
 ### Кнопка с иконкой
 
 Название кнопки можно дополнять иконкой. Она поможет быстрее найти нужную кнопку
@@ -158,7 +162,7 @@ import { ButtonExampleLoading } from './examples/ButtonExampleLoading/ButtonExam
 За иконку отвечают свойства `iconLeft` (ставит иконку слева от текста на кнопке)
 или `iconRight` (ставит иконку справа).
 
-Оба эти свойства ожидают компонент иконки из нашей [библиотеки иконок](?path=/docsx/icons--icons)
+Оба эти свойства ожидают компонент иконки из нашей [библиотеки иконок](?path=/docsx/icons--icons).
 
 
 <ButtonExampleIconBasic />
@@ -179,6 +183,7 @@ import { ButtonExampleLoading } from './examples/ButtonExampleLoading/ButtonExam
 > Убедитесь, что изображение на иконке знакомо пользователям и легко
 считывается, так, что все сразу понимают, что делает эта кнопка
 
+<div id="size" style={{fontSize: 0}}>&nbsp;</div>
 
 ### Размер
 
@@ -189,32 +194,49 @@ import { ButtonExampleLoading } from './examples/ButtonExampleLoading/ButtonExam
 
 <ButtonExampleSizeBasic />
 
+<div id="width" style={{fontSize: 0}}>&nbsp;</div>
+
 #### Кнопка в ширину блока
 
 Вы можете сделать ширину кнопки равной 100% от ширины родительского
 контейнера. Для этого используйте свойство `width` со значением `full`.
 
-Чтобы поменять ширину кнопки на обычную, используйте свойство `width` со значением
-`default`.
-
 <ButtonExampleSizeFull />
 
+Чтобы поменять ширину кнопки на обычную, используйте свойство `width` со значением
+`default` или просто не указывайте это свойство.
+
+<div id="icon_size" style={{fontSize: 0}}>&nbsp;</div>
 
 #### Размер иконки
 
 По умолчанию размер иконки зависит от размера кнопки.
 
-|   |   |   |   |   |
-| - | - | - | - | - |
-| Размер кнопки | L | M | S  | XS |
-| Размер иконки | M | S | XS | XS |
+
+<table>
+  <tr>
+    <td>Размер кнопки</td>
+    <td>L</td>
+    <td>M</td>
+    <td>S</td>
+    <td>XS</td>
+  </tr>
+  <tr>
+    <td>Размер иконки</td>
+    <td>M</td>
+    <td>S</td>
+    <td>XS</td>
+    <td>XS</td>
+  </tr>
+</table>
+
 
 Чтобы его поменять, используйте свойство `iconSize`, в котором можно указать любой размер иконки
 из списка допустимых: `m`, `s`, `xs`.
 
 
 
-
+<div id="form" style={{fontSize: 0}}>&nbsp;</div>
 
 ### Форма
 
@@ -244,7 +266,7 @@ import { ButtonExampleLoading } from './examples/ButtonExampleLoading/ButtonExam
 
 Для этого используйте свойство `loading`.
 
-<ButtonExampleLoading1 />
+<ButtonExampleLoading />
 
 
 <div id="params" style={{fontSize: 0}}>&nbsp;</div>
@@ -253,20 +275,20 @@ import { ButtonExampleLoading } from './examples/ButtonExampleLoading/ButtonExam
 
 | Свойство   | Тип или варианты значения                                                         | По умолчанию               | Описание  |
 | ---------- | --------------------------------------------------------------------------------- | -------------------------- | --------- |
-| `label`    | `string`                                                                          | —                          | Текст на кнопке |
-| `view`     | `'clear', 'primary', 'secondary', 'ghost'`                                        | `primary`                  | Внешний вид |
-| `disabled` | `boolean`                                                                         | `false`                    | Блокировка кнопки |
-| `size`     | `'xs', 's', 'm', 'l'`                                                             | `m`                        | Размер |
-| `width`    | `'full', 'default'`                                                               | `default`                  | Ширина |
-| `form`     | `'default', 'round', 'brick', 'brickRound', 'roundBrick', 'brickDefault', 'defaultBrick'` | `default`                  | Форма |
-| `iconLeft` | `React.FC<IIcon>`                                                                 | —                          | Иконка слева |
-| `iconRight`| `React.FC<IIcon>`                                                                 | —                          | Иконка справа |
-| `onlyIcon` | `boolean`                                                                         | `false`                    | Только иконка без текста |
-| `iconSize` | `'xs', 's', 'm'`                                                                  | Зависит от размера  кнопки | Размер иконки |
+| [`label`](#view)    | `string`                                                                          | —                          | Текст на кнопке |
+| [`view`](#view)     | `'clear', 'primary', 'secondary', 'ghost'`                                        | `primary`                  | Внешний вид |
+| [`disabled`](#disabled) | `boolean`                                                                         | `false`                    | Блокировка кнопки |
+| [`size`](#size)     | `'xs', 's', 'm', 'l'`                                                             | `m`                        | Размер |
+| [`width`](#width)    | `'full', 'default'`                                                               | `default`                  | Ширина |
+| [`form`](#form)     | `'default', 'round', 'brick', 'brickRound', 'roundBrick', 'brickDefault', 'defaultBrick'` | `default`                  | Форма |
+| [`iconLeft`](#icon) | `React.FC<IIcon>`                                                                 | —                          | Иконка слева |
+| [`iconRight`](#icon)| `React.FC<IIcon>`                                                                 | —                          | Иконка справа |
+| [`onlyIcon`](#icon) | `boolean`                                                                         | `false`                    | Только иконка без текста |
+| [`iconSize`](#icon_size) | `'xs', 's', 'm'`                                                                  | Зависит от размера  кнопки | Размер иконки |
 | `title`    | `string`                                                                          | —                          | HTML-атрибут `title` — всплывающая подсказка, появляется при наведении на кнопку |
 | `tabIndex` | `number`                                                                          | —                          | Порядковый номер при переходе между элементами интерфейса по клавише **tab** |
 | `as`       | `React.ElementType`                                                               | `button`                   | HTML-тег для кнопки |
-| `loading`  | `boolean`                                                                         | `false`                    | Отображает прелоадер вместо кнопки во время загрузки информации |
+| [`loading`](#events)  | `boolean`                                                                         | `false`                    | Отображает прелоадер вместо кнопки во время загрузки информации |
 | `onClick`  | `React.EventHandler<React.MouseEvent>`                                            | —                          | Действие по клику |
 | `innerRef` | `React.Ref<HTMLElement>`                                                          | —                          | Ссылка на корневой DOM-элемент |
 | `className` | `string`                                                                         | —                          | Дополнительные CSS-классы |
