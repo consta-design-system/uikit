@@ -1,9 +1,7 @@
 import './AttachExampleEvents.css';
 
 import React from 'react';
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
-import { Preview } from '@storybook/addon-docs/blocks';
+import { Preview } from '@storybook/addon-docs/dist/blocks';
 
 import { IconTrash } from '../../../../../icons/IconTrash/IconTrash';
 import { cn } from '../../../../../utils/bem';
