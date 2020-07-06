@@ -29,6 +29,7 @@ export type Item = {
 
 type Props = {
   items: Item[];
+  children?: never;
 };
 
 export type SnackBarProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
