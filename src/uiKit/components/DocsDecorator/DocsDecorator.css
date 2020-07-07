@@ -8,6 +8,8 @@
   p,
   blockquote,
   table,
+  ul,
+  ol,
   pre.sbdocs,
   &-Section {
     max-width: var(--width-default);
@@ -20,14 +22,12 @@
   h1 {
     margin-bottom: 0.4em;
     font-size: var(--size-text-4xl);
-    line-height: var(--line-height-text-xs);
   }
 
   h2 {
     padding-bottom: 0;
     border-bottom: none;
     font-size: var(--size-text-3xl);
-    line-height: var(--line-height-text-s);
 
     /* TODO: Ниже код для обсуждению о добавлении парамтеров сразу в заголовок */
 
@@ -46,31 +46,57 @@
 
   h3 {
     font-size: var(--size-text-2xl);
-    line-height: var(--line-height-text-s);
   }
 
   h4 {
     font-size: var(--size-text-l);
-    line-height: var(--line-height-text-s);
   }
 
   /* вынужденная мера для перебития дефолтных стилей :first-of-type */
   h2.sbdocs-h2,
   h3.sbdocs-h3,
   h4.sbdocs-h4 {
-    margin-top: 1.4em;
+    margin-top: 1.6em;
     margin-bottom: 0.4em;
+    line-height: var(--line-height-text-xs);
   }
 
-  h1 + h2,
-  h2 + h3,
-  h3 + h4 {
-    margin-top: 0;
+  h1.sbdocs-h1 a[aria-hidden='true'],
+  h2.sbdocs-h2 a[aria-hidden='true'],
+  h3.sbdocs-h3 a[aria-hidden='true'],
+  h4.sbdocs-h4 a[aria-hidden='true'] {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    display: flex;
+    float: none;
+    align-items: center;
+    margin-left: 0;
+    padding: var(--space-xs);
+    transform: translate(-100%, -50%);
+  }
+
+  h1 + h2.sbdocs-h2,
+  h2 + h3.sbdocs-h3,
+  h3 + h4.sbdocs-h4,
+  h1 + div + h2.sbdocs-h2,
+  h2 + div + h3.sbdocs-h3,
+  h3 + div + h4.sbdocs-h4 {
+    margin-top: 0.2em;
   }
 
   p {
-    margin-top: 1em;
+    margin-top: 0;
     margin-bottom: 1em;
+    font-size: var(--size-text-m);
+    line-height: var(--line-height-text-l);
+
+    a {
+      font-size: inherit;
+    }
+  }
+
+  a {
     font-size: var(--size-text-m);
     line-height: var(--line-height-text-l);
   }
@@ -121,8 +147,25 @@
     }
   }
 
+  ul {
+    box-sizing: border-box;
+    margin-top: 0;
+    margin-bottom: 1.6em;
+    padding-left: var(--space-l);
+  }
+
+  & &-Anchor {
+    visibility: hidden;
+    opacity: 0;
+    font-size: 0;
+  }
+
   .Example {
-    margin-bottom: 1.2em;
+    margin-bottom: 2em;
+
+    &-Caption {
+      line-height: var(--line-height-text-s);
+    }
 
     &-Status {
       margin-top: var(--space-l);
