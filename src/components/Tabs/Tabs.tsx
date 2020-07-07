@@ -2,7 +2,7 @@ import './Tabs.css';
 
 import React, { createRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import { IconProps } from '../../icons/Icon/Icon';
+import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { useForkRef } from '../../utils/useForkRef';
 import {
@@ -20,6 +20,7 @@ type Props<T> = {
   onlyIcon?: boolean;
   view?: TabsPropView;
   getItemIcon?: (item: T) => React.FC<IconProps> | undefined;
+  iconSize?: IconPropSize;
   children?: never;
 };
 export type TabsProps<T> = Props<T> &
@@ -43,6 +44,7 @@ export const Tabs: <T>(
     id,
     name,
     onChange,
+    iconSize,
     ...otherProps
   } = props;
   const [mounted, setMounted] = useState<boolean>(false);
@@ -122,6 +124,7 @@ export const Tabs: <T>(
           size,
           onlyIcon,
           innerRef: getItemKey ? buttonRefs[getItemKey(item)] : null,
+          iconSize,
         })}
         items={items}
         getItemKey={getItemKey}

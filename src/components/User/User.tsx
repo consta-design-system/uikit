@@ -5,6 +5,7 @@ import React from 'react';
 import { IconPropSize } from '../../icons/Icon/Icon';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { cn } from '../../utils/bem';
+import { getSizeByMap } from '../../utils/getSizeByMap';
 import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { Avatar } from '../Avatar/Avatar';
 import { Text, TextPropSize } from '../Text/Text';
@@ -29,22 +30,14 @@ type Props = {
 
 const cnUser = cn('User');
 
-const getInfoSizeByUserSize = (userSize: UserPropSize): TextPropSize => {
-  const sizeObj: Record<UserPropSize, TextPropSize> = {
-    s: '2xs',
-    m: 'xs',
-  };
-
-  return sizeObj[userSize];
+const infoSizeMap: Record<UserPropSize, TextPropSize> = {
+  s: '2xs',
+  m: 'xs',
 };
 
-const getArrowSizeByUserSize = (userSize: UserPropSize): IconPropSize => {
-  const sizeObj: Record<UserPropSize, IconPropSize> = {
-    s: 'xs',
-    m: 's',
-  };
-
-  return sizeObj[userSize];
+const arrowSizeMap: Record<UserPropSize, IconPropSize> = {
+  s: 'xs',
+  m: 's',
 };
 
 export const User: ComponentWithAs<Props> = forwardRefWithAs<Props>((props, ref) => {
@@ -64,8 +57,8 @@ export const User: ComponentWithAs<Props> = forwardRefWithAs<Props>((props, ref)
   } = props;
   const Tag = as as string;
   const onlyAvatar = propOnlyAvatar || (!name && !info);
-  const infoSize = getInfoSizeByUserSize(size);
-  const arrowSize = getArrowSizeByUserSize(size);
+  const infoSize = getSizeByMap(infoSizeMap, size);
+  const arrowSize = getSizeByMap(arrowSizeMap, size);
 
   return (
     <Tag

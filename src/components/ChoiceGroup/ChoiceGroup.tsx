@@ -2,7 +2,7 @@ import './ChoiceGroup.css';
 
 import React from 'react';
 
-import { IconProps } from '../../icons/Icon/Icon';
+import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import {
   BaseCheckGroupField,
@@ -23,6 +23,7 @@ type Props<T> = {
   onlyIcon?: boolean;
   getItemIcon?: (item: T) => React.FC<IconProps> | undefined;
   getItemTitle?: BaseCheckGroupFieldPropGetItemLabel<T>;
+  iconSize?: IconPropSize;
   children?: never;
 };
 
@@ -42,6 +43,7 @@ export const ChoiceGroup: <T>(
     getItemTitle,
     onlyIcon,
     getItemIcon,
+    iconSize,
     ...otherProps
   } = props;
 
@@ -53,6 +55,7 @@ export const ChoiceGroup: <T>(
       getAdditionalPropsForItem={(item) => ({
         ...(getItemIcon ? { icon: getItemIcon(item) } : {}),
         ...(getItemTitle ? { title: getItemTitle(item) } : {}),
+        iconSize,
         size,
         onlyIcon,
       })}

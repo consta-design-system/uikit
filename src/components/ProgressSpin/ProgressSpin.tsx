@@ -3,6 +3,7 @@ import './ProgressSpin.css';
 import React, { useMemo } from 'react';
 
 import { cn } from '../../utils/bem';
+import { getSizeByMap } from '../../utils/getSizeByMap';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
 export type ProgressSpinPropSize = 'm' | 's';
@@ -17,16 +18,13 @@ export type ProgressSpinProps = PropsWithHTMLAttributes<Props, SVGElement>;
 
 export const cnProgressSpin = cn('ProgressSpin');
 
-function getSizeOfPixel(size: ProgressSpinPropSize): number {
-  const sizeObj: Record<ProgressSpinPropSize, number> = {
-    s: 12,
-    m: 20,
-  };
-  return sizeObj[size];
-}
+const sizeMap: Record<ProgressSpinPropSize, number> = {
+  s: 12,
+  m: 20,
+};
 
 function getSvgParamsBySize(size: ProgressSpinPropSize): [number, number, number, number] {
-  const sizeOfPixels = getSizeOfPixel(size);
+  const sizeOfPixels = getSizeByMap(sizeMap, size);
   const strokeWidth = 2;
   const radius = (sizeOfPixels - strokeWidth) / 2;
   const strokeDasharray = radius * 2 * Math.PI;

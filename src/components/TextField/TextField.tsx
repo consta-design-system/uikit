@@ -5,6 +5,7 @@ import TextAreaAutoSize from 'react-textarea-autosize';
 
 import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
+import { getSizeByMap } from '../../utils/getSizeByMap';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
 export type TextFieldPropValue = string | null;
@@ -70,12 +71,20 @@ type Props = {
   tabIndex?: number;
   inputRef?: React.Ref<HTMLTextAreaElement | HTMLInputElement>;
   ariaLabel?: string;
+  iconSize?: IconPropSize;
   children?: never;
 };
 
 export type TextFieldProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
 
 const cnTextField = cn('TextField');
+
+const sizeMap: Record<TextFieldPropSize, IconPropSize> = {
+  xs: 'xs',
+  s: 's',
+  m: 's',
+  l: 'm',
+};
 
 export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>((props, ref) => {
   const {
@@ -111,6 +120,7 @@ export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>((props
     step,
     tabIndex,
     ariaLabel,
+    iconSize: iconSizeProp,
     ...otherProps
   } = props;
   const [focus, setFocus] = useState<boolean>(autoFocus);
@@ -119,17 +129,7 @@ export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>((props
   const RightIcon = rightSide;
   const leftSideIsString = typeof leftSide === 'string';
   const rightSideIsString = typeof rightSide === 'string';
-
-  const getIconSizeByTextFieldSize = (textFieldSize: TextFieldPropSize): IconPropSize => {
-    const sizeObj: Record<TextFieldPropSize, IconPropSize> = {
-      xs: 'xs',
-      s: 's',
-      m: 's',
-      l: 'm',
-    };
-
-    return sizeObj[textFieldSize];
-  };
+  const iconSize = getSizeByMap(sizeMap, size, iconSizeProp);
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (e) => {
     const { value } = e.target;
@@ -213,7 +213,7 @@ export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>((props
           {leftSideIsString ? (
             leftSide
           ) : (
-            <LeftIcon className={cnTextField('Icon')} size={getIconSizeByTextFieldSize(size)} />
+            <LeftIcon className={cnTextField('Icon')} size={iconSize} />
           )}
         </div>
       )}
@@ -232,7 +232,7 @@ export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>((props
           {rightSideIsString ? (
             rightSide
           ) : (
-            <RightIcon className={cnTextField('Icon')} size={getIconSizeByTextFieldSize(size)} />
+            <RightIcon className={cnTextField('Icon')} size={iconSize} />
           )}
         </div>
       )}

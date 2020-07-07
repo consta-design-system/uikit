@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 
 import { IconProps, IconPropSize } from '../../../icons/Icon/Icon';
+import { getSizeByMap } from '../../../utils/getSizeByMap';
 import { BaseCheckGroupItemProps } from '../../BaseCheckGroupField/BaseCheckGroupField';
 import { ChoiceGroupPropSize, cnChoiceGroup } from '../ChoiceGroup';
 
@@ -9,9 +10,17 @@ type Props = {
   size?: ChoiceGroupPropSize;
   onlyIcon?: boolean;
   title?: string;
+  iconSize?: IconPropSize;
 };
 
 export type ChoiceGroupItemProps<T> = BaseCheckGroupItemProps<T> & Props;
+
+const sizeMap: Record<ChoiceGroupPropSize, IconPropSize> = {
+  xs: 'xs',
+  s: 'xs',
+  m: 's',
+  l: 'm',
+};
 
 export function ChoiceGroupItem<T>(props: ChoiceGroupItemProps<T>): React.ReactElement {
   const {
@@ -27,6 +36,7 @@ export function ChoiceGroupItem<T>(props: ChoiceGroupItemProps<T>): React.ReactE
     onlyIcon,
     title: titleProp,
     name,
+    iconSize,
   } = props;
   const [focus, setFocus] = useState<boolean>(false);
   const stringValue = `${id}${name ? `-${name}` : ''}`;
@@ -35,17 +45,6 @@ export function ChoiceGroupItem<T>(props: ChoiceGroupItemProps<T>): React.ReactE
   const handleBlur = () => setFocus(false);
   const handleFocus = () => setFocus(true);
   const handleChange = (e: ChangeEvent) => onChange({ e, value, id, checked: !checked });
-
-  const getIconSizeChoiceGroupSize = (buttonSize: ChoiceGroupPropSize): IconPropSize => {
-    const sizeObj: Record<ChoiceGroupPropSize, IconPropSize> = {
-      xs: 'xs',
-      s: 'xs',
-      m: 's',
-      l: 'm',
-    };
-
-    return sizeObj[buttonSize];
-  };
 
   return (
     <label
@@ -62,7 +61,9 @@ export function ChoiceGroupItem<T>(props: ChoiceGroupItemProps<T>): React.ReactE
         value={stringValue}
         onChange={handleChange}
       />
-      {Icon && <Icon className={cnChoiceGroup('Icon')} size={getIconSizeChoiceGroupSize(size)} />}
+      {Icon && (
+        <Icon className={cnChoiceGroup('Icon')} size={getSizeByMap(sizeMap, size, iconSize)} />
+      )}
       {!onlyIcon && label}
     </label>
   );
