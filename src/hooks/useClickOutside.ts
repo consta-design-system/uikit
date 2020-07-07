@@ -5,8 +5,6 @@ export const useClickOutside = (): [boolean, Dispatch<SetStateAction<boolean>>] 
 
   const onClose = () => setOpened(false);
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-  // @ts-ignore
   useEffect(() => {
     if (isOpened) {
       window.addEventListener('click', onClose);
@@ -15,6 +13,7 @@ export const useClickOutside = (): [boolean, Dispatch<SetStateAction<boolean>>] 
         window.removeEventListener('click', onClose);
       };
     }
+    return undefined;
   }, [isOpened]);
 
   return [isOpened, setOpened];

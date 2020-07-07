@@ -21,6 +21,7 @@ type Props<T> = {
   view?: TabsPropView;
   getItemIcon?: (item: T) => React.FC<IconProps> | undefined;
   iconSize?: IconPropSize;
+  children?: never;
 };
 export type TabsProps<T> = Props<T> &
   Omit<BaseCheckGroupFieldProps<T>, 'componentItem' | 'getAdditionalPropsForItem' | 'multiple'>;

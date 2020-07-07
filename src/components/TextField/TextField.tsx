@@ -72,6 +72,7 @@ type Props = {
   inputRef?: React.Ref<HTMLTextAreaElement | HTMLInputElement>;
   ariaLabel?: string;
   iconSize?: IconPropSize;
+  children?: never;
 };
 
 export type TextFieldProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;

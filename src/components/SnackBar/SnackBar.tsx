@@ -25,10 +25,12 @@ export type Item = {
   icon?: React.FC<IconProps>;
   actions?: SnackBarPropItemAction[];
   onClose?: (item: Item) => void;
+  onAutoClose?: (item: Item) => void;
 };
 
 type Props = {
   items: Item[];
+  children?: never;
 };
 
 export type SnackBarProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
