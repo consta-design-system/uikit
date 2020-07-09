@@ -55,7 +55,7 @@ export const ThemeContext = createContext<{
   themeClassNames: ThemePreset;
 }>(defaultContextValue);
 
-export const Theme: React.FC<ThemeProps> = (props) => {
+export const Theme = React.forwardRef<HTMLDivElement, ThemeProps>((props, ref) => {
   const { className, children, preset, ...otherProps } = props;
 
   const mods = {
@@ -67,12 +67,12 @@ export const Theme: React.FC<ThemeProps> = (props) => {
 
   return (
     <ThemeContext.Provider value={{ theme: preset, themeClassNames }}>
-      <div {...otherProps} className={cnTheme(mods, [className])}>
+      <div {...otherProps} ref={ref} className={cnTheme(mods, [className])}>
         {children}
       </div>
     </ThemeContext.Provider>
   );
-};
+});
 
 export function useTheme() {
   return useContext(ThemeContext);
