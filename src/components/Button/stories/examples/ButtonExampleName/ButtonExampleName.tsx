@@ -41,8 +41,10 @@ export function ButtonExampleNameVerb() {
       className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' })])}
     >
       <div className={cnExample()}>
-        <Button label="Поиск" />
-        <Button label="Искать" />
+        <div className={wp.decorator({ distribute: 'left' })}>
+          <Button label="Поиск" className={wp.decorator({ 'indent-r': 's' })} />
+          <Button label="Искать" />
+        </div>
         <p className={cnExample('Status', { view: 'wrong' })}>Неправильно</p>
         <p className={cnExample('Caption')}>Предлагаем поискать, но результат не гарантируем.</p>
       </div>
@@ -87,22 +89,24 @@ export function ButtonExampleNameOverflow() {
         <p className={cnExample('Status', { view: 'wrong' })}>Неправильно</p>
       </div>
       <div className={cnExample()}>
-        <Button label="Редактировать" />{' '}
-        <Button label="Редактировать" iconRight={IconEdit} iconSize="xs" onlyIcon />
+        <div className={wp.decorator({ distribute: 'left' })}>
+          <Button label="Редактировать" className={wp.decorator({ 'indent-r': 's' })} />
+          <Button label="Редактировать" iconRight={IconEdit} iconSize="s" onlyIcon />
+        </div>
         <p className={cnExample('Status', { view: 'right' })}>Правильно</p>
       </div>
     </div>
   );
 }
 
-export function ButtonExampleNameNaviguation() {
+export function ButtonExampleNameNavigation() {
   return (
     <div className={cnDocsDecorator('Section', [wp.decorator({ distribute: 'left' })])}>
       <div className={cnExample(null, [wp.decorator({ 'indent-r': 's' })])}>
-        <Button label="Сюда" iconLeft={IconArrowLeft} />
+        <Button label="Назад" iconLeft={IconArrowLeft} />
       </div>
       <div className={cnExample(null, [wp.decorator({ 'indent-r': 's' })])}>
-        <Button label="Туда" iconRight={IconArrowRight} />
+        <Button label="Вперёд" iconRight={IconArrowRight} />
       </div>
     </div>
   );
@@ -116,10 +120,12 @@ export function ButtonExampleNameAgreement() {
       <div className={cnExample()}>
         <p className={cnExample('Caption')}>Мы используем куки! Без них всё совсем сломается :(</p>
         <Button label="Понятно" />
+        <p className={cnExample('Status', { view: 'right' })}>Правильно</p>
       </div>
       <div className={cnExample()}>
-        <p className={cnExample('Caption')}>Примите лиценизонное соглашение, ну пожааалуйста.</p>
+        <p className={cnExample('Caption')}>Примите лиценизонное соглашение, ну пожалуйста.</p>
         <Button label="Принимаю" />
+        <p className={cnExample('Status', { view: 'right' })}>Правильно</p>
       </div>
     </div>
   );
