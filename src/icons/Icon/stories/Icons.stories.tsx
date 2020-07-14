@@ -96,6 +96,7 @@ import { IconTop } from '../../IconTop/IconTop';
 import { IconTrash } from '../../IconTrash/IconTrash';
 import { IconType } from '../../IconType/IconType';
 import { IconUnderline } from '../../IconUnderline/IconUnderline';
+import { IconUnsort } from '../../IconUnsort/IconUnsort';
 import { IconUser } from '../../IconUser/IconUser';
 import { IconWarning } from '../../IconWarning/IconWarning';
 import { IconWorld } from '../../IconWorld/IconWorld';
@@ -114,9 +115,9 @@ const defaultKnobs = () => ({
 const icons = {
   IconAdd,
   IconAlert,
+  IconAlignJustify,
   IconAlignCenter,
   IconAlignLeft,
-  IconAlignJustify,
   IconAlignRight,
   IconArrowDown,
   IconArrowLeft,
@@ -129,8 +130,8 @@ const icons = {
   IconBento,
   IconBold,
   IconBookmarkFilled,
-  IconBookmarkStroked,
   IconCalendar,
+  IconBookmarkStroked,
   IconCamera,
   IconCancel,
   IconChat,
@@ -138,8 +139,8 @@ const icons = {
   IconClose,
   IconCollapse,
   IconColorFill,
-  IconColorText,
   IconColumns,
+  IconColorText,
   IconComment,
   IconConnection,
   IconCopy,
@@ -168,12 +169,12 @@ const icons = {
   IconLeaf,
   IconLink,
   IconList,
-  IconListNumbered,
   IconLock,
+  IconListNumbered,
   IconMail,
   IconMeatball,
-  IconOpenInNew,
   IconPause,
+  IconOpenInNew,
   IconPhoto,
   IconPlay,
   IconProcessing,
@@ -196,16 +197,17 @@ const icons = {
   IconSortUp,
   IconSortUpCenter,
   IconStop,
-  IconStorage,
   IconStrikethrough,
   IconTable,
+  IconStorage,
   IconTest,
   IconThumbUp,
-  IconTie,
   IconTop,
+  IconTie,
   IconTrash,
   IconType,
   IconUnderline,
+  IconUnsort,
   IconUser,
   IconWarning,
   IconWorld,
