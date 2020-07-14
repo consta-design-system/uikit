@@ -2,7 +2,7 @@ import './ChoiceGroup.css';
 
 import React from 'react';
 
-import { IIcon } from '../../icons/Icon/Icon';
+import { IconProps } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import {
   BaseCheckGroupField,
@@ -21,8 +21,9 @@ type Props<T> = {
   form?: ChoiceGroupPropForm;
   view?: ChoiceGroupPropView;
   onlyIcon?: boolean;
-  getItemIcon?: (item: T) => React.FC<IIcon> | undefined;
+  getItemIcon?: (item: T) => React.FC<IconProps> | undefined;
   getItemTitle?: BaseCheckGroupFieldPropGetItemLabel<T>;
+  children?: never;
 };
 
 export type ChoiceGroupProps<T> = Props<T> &

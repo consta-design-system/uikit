@@ -5,16 +5,17 @@ import React from 'react';
 import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import { cnHeader } from '../Header';
 
-export type ItemT = {
+export type Item = {
   label?: string;
   href?: string;
   target?: string;
   active?: boolean;
   onClick?: React.EventHandler<React.MouseEvent>;
+  children?: never;
 };
 
 type Props = {
-  items: ItemT[];
+  items: Item[];
 };
 
 export type MenuProps = PropsWithHTMLAttributes<Props, HTMLElement>;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { boolean, select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 
-import { IIcon } from '../../icons/Icon/Icon';
+import { IconProps } from '../../icons/Icon/Icon';
 import { IconCamera } from '../../icons/IconCamera/IconCamera';
 import { IconCopy } from '../../icons/IconCopy/IconCopy';
 import { IconFavorite } from '../../icons/IconFavorite/IconFavorite';
@@ -11,7 +11,7 @@ import { ChoiceGroup } from './ChoiceGroup';
 
 declare type Item = {
   name: string;
-  icon?: React.FC<IIcon>;
+  icon?: React.FC<IconProps>;
 };
 
 const items = [

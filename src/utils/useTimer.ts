@@ -29,8 +29,12 @@ const initialConfig: Config = {
   timerType: 'INCREMENTAL',
 };
 
+function getTimeIsOver(timerType: Timer, time: number, endTime: number | null): boolean {
+  return endTime !== null && (timerType === 'INCREMENTAL' ? time >= endTime : time <= endTime);
+}
+
 export function useTimer(config?: Partial<Config>): Values {
-  const { endTime, startTime, interval, onTimeOver, timerType } = {
+  const { endTime, startTime, interval, timerType, onTimeOver } = {
     ...initialConfig,
     ...config,
   };
@@ -45,6 +49,16 @@ export function useTimer(config?: Partial<Config>): Values {
       clearInterval(intervalRef.current);
       intervalRef.current = null;
       setIsRunning(false);
+    }
+  };
+
+  const timerOver = () => {
+    if (getTimeIsOver(timerType, time, endTime)) {
+      setShouldResetTime(true);
+      cancelInterval();
+      if (typeof onTimeOver === 'function') {
+        onTimeOver();
+      }
     }
   };
 
@@ -65,15 +79,6 @@ export function useTimer(config?: Partial<Config>): Values {
     resetTime();
   };
 
-  const stopTimerWhenTimeIsOver = () => {
-    cancelInterval();
-    setShouldResetTime(true);
-
-    if (typeof onTimeOver === 'function') {
-      onTimeOver();
-    }
-  };
-
   const createInterval = () => {
     setIsRunning(true);
 
@@ -81,13 +86,6 @@ export function useTimer(config?: Partial<Config>): Values {
       setTime((previousTime) => {
         const newTime =
           timerType === 'INCREMENTAL' ? previousTime + interval : previousTime - interval;
-
-        if (
-          endTime !== null &&
-          (timerType === 'INCREMENTAL' ? newTime >= endTime : newTime <= endTime)
-        ) {
-          stopTimerWhenTimeIsOver();
-        }
 
         return newTime;
       });
@@ -107,7 +105,8 @@ export function useTimer(config?: Partial<Config>): Values {
     createInterval();
   };
 
-  useEffect(() => cancelInterval, []);
+  useEffect(cancelInterval, []);
+  useEffect(timerOver, [timerType, time, endTime]);
 
   return { isRunning, pause, reset, start, time };
 }

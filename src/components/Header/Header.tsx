@@ -8,6 +8,7 @@ export type HeaderProps = {
   leftSide?: React.ReactNode;
   rightSide?: React.ReactNode;
   className?: string;
+  children?: never;
 };
 
 export const cnHeader = cn('Header');

@@ -2,7 +2,7 @@ import './Tabs.css';
 
 import React, { createRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import { IIcon } from '../../icons/Icon/Icon';
+import { IconProps } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { useForkRef } from '../../utils/useForkRef';
 import {
@@ -19,7 +19,8 @@ type Props<T> = {
   size?: TabsPropSize;
   onlyIcon?: boolean;
   view?: TabsPropView;
-  getItemIcon?: (item: T) => React.FC<IIcon> | undefined;
+  getItemIcon?: (item: T) => React.FC<IconProps> | undefined;
+  children?: never;
 };
 export type TabsProps<T> = Props<T> &
   Omit<BaseCheckGroupFieldProps<T>, 'componentItem' | 'getAdditionalPropsForItem' | 'multiple'>;

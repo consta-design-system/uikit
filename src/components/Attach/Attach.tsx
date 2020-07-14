@@ -2,7 +2,7 @@ import './Attach.css';
 
 import React from 'react';
 
-import { IIcon } from '../../icons/Icon/Icon';
+import { IconProps } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { Button } from '../Button/Button';
@@ -18,10 +18,11 @@ type Props = {
   errorText?: string;
   loadingText?: string;
   onButtonClick?: React.EventHandler<React.MouseEvent>;
-  buttonIcon?: React.FC<IIcon>;
+  buttonIcon?: React.FC<IconProps>;
   buttonTitle?: string;
   withAction?: boolean;
   className?: string;
+  children?: never;
 };
 
 export const cnAttach = cn('Attach');
