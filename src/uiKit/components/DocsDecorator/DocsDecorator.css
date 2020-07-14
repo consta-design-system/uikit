@@ -103,7 +103,7 @@
 
   blockquote {
     box-sizing: border-box;
-    margin-top: 1em;
+    margin-top: 0;
     margin-bottom: 1em;
     padding: 0.8em;
     background-color: var(--color-bg-secondary);
@@ -154,6 +154,12 @@
     padding-left: var(--space-l);
   }
 
+  pre.sbdocs > div {
+    margin-top: 0;
+    margin-bottom: 2.2em;
+    font-size: var(--size-text-m);
+  }
+
   & &-Anchor {
     visibility: hidden;
     opacity: 0;
@@ -161,7 +167,7 @@
   }
 
   .Example {
-    margin-bottom: 2em;
+    margin-bottom: 1.4em;
 
     &-Caption {
       line-height: var(--line-height-text-s);

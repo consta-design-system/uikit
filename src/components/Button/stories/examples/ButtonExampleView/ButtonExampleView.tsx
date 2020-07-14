@@ -1,5 +1,4 @@
 import React from 'react';
-import { Preview } from '@storybook/addon-docs/dist/blocks';
 
 import { IconAdd } from '../../../../../icons/IconAdd/IconAdd';
 import { IconBookmarkStroked } from '../../../../../icons/IconBookmarkStroked/IconBookmarkStroked';
@@ -12,27 +11,22 @@ import { IconSettings } from '../../../../../icons/IconSettings/IconSettings';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cn } from '../../../../../utils/bem';
 import * as wp from '../../../../../utils/whitepaper/whitepaper';
-import { presetGpnDefault, Theme } from '../../../../Theme/Theme';
 import { Button } from '../../../Button';
 
 const cnExample = cn('Example');
 
 export function ButtonExampleViewPrimary() {
   return (
-    <div className={cnDocsDecorator('Section')}>
-      <Preview>
-        <Theme preset={presetGpnDefault} className={wp.decorator({ distribute: 'left' })}>
-          <div className={cnExample(null, [wp.decorator({ 'indent-r': 's' })])}>
-            <Button label="Войти" />
-          </div>
-          <div className={cnExample(null, [wp.decorator({ 'indent-r': 's' })])}>
-            <Button label="Продолжить" iconRight={IconForward} />
-          </div>
-          <div className={cnExample()}>
-            <Button label="Добавить" iconRight={IconAdd} onlyIcon />
-          </div>
-        </Theme>
-      </Preview>
+    <div className={cnDocsDecorator('Section', [wp.decorator({ distribute: 'left' })])}>
+      <div className={cnExample(null, [wp.decorator({ 'indent-r': 's' })])}>
+        <Button label="Войти" />
+      </div>
+      <div className={cnExample(null, [wp.decorator({ 'indent-r': 's' })])}>
+        <Button label="Продолжить" iconRight={IconForward} />
+      </div>
+      <div className={cnExample()}>
+        <Button label="Добавить" iconRight={IconAdd} onlyIcon />
+      </div>
     </div>
   );
 }
