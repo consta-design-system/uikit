@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.4.1 (15/07/2020)
+
+docs(button): add new docs for button - @fooontic
+
+---
+
 ## v1.4.0 (15/07/2020)
 
 - [chore(prettier): svg formatting added (#238)](https://github.com/gpn-prototypes/ui-kit/commit/94acf37e93242e077fa26466dd6d7e9ee3a6ead3) - @gizeasy
