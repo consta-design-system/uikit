@@ -27,7 +27,7 @@
     "lint:js": "eslint --ext .js,.jsx,.tsx,.ts --fix .",
     "lint:css": "stylelint --fix src/**/*.css",
     "format": "prettier --write '**/*.{json,md}'",
-    "svgo": "svgo -f src/icons --config=src/config/svgo.config.json",
+    "format:svg": "prettier --write '**/*.svg' --parser html",
     "lint": "concurrently --raw 'yarn run lint:js' 'yarn run lint:css' 'yarn run format'",
     "pre-push": "yarn run tsc-dry-run",
     "pre-commit": "yarn run lint-staged",
@@ -62,6 +62,10 @@
     ],
     "*.{json,md}": [
       "prettier --write",
+      "git add"
+    ],
+    "*.svg": [
+      "prettier --write --parser html",
       "git add"
     ]
   },
