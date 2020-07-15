@@ -4,6 +4,7 @@ import React from 'react';
 
 import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
+import { getSizeByMap } from '../../utils/getSizeByMap';
 import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { Loader } from '../Loader/Loader';
 
@@ -39,6 +40,13 @@ type Props = {
 
 export const cnButton = cn('Button');
 
+const sizeMap: Record<ButtonPropSize, IconPropSize> = {
+  xs: 'xs',
+  s: 'xs',
+  m: 's',
+  l: 'm',
+};
+
 export const Button: ComponentWithAs<Props, 'button'> = forwardRefWithAs<Props>((props, ref) => {
   const {
     size = 'm',
@@ -55,6 +63,7 @@ export const Button: ComponentWithAs<Props, 'button'> = forwardRefWithAs<Props>(
     tabIndex,
     as = 'button',
     onlyIcon,
+    iconSize: iconSizeProp,
     ...otherProps
   } = props;
 
@@ -69,18 +78,7 @@ export const Button: ComponentWithAs<Props, 'button'> = forwardRefWithAs<Props>(
     }
   };
 
-  const getIconSizeByButtonSize = (buttonSize: ButtonPropSize): IconPropSize => {
-    const sizeObj: Record<ButtonPropSize, IconPropSize> = {
-      xs: 'xs',
-      s: 'xs',
-      m: 's',
-      l: 'm',
-    };
-
-    return sizeObj[buttonSize];
-  };
-
-  const iconSize = props.iconSize || getIconSizeByButtonSize(size);
+  const iconSize = getSizeByMap(sizeMap, size, iconSizeProp);
   const title = props.title || (!!IconOnly && label) || undefined;
 
   return (

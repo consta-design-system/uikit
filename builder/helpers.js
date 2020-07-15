@@ -58,21 +58,33 @@ const transformCSS = async (ignore, src, distPaths, options) => {
   });
 };
 
+function sortComponent(a, b) {
+  if (a.componentName > b.componentName) {
+    return 1;
+  }
+  if (a.componentName < b.componentName) {
+    return -1;
+  }
+  return 0;
+}
+
 const createIconStories = async (svgComponents, src) => {
   const templatePath = './builder/templates/Icons.stories.tsx.template';
   const template = await readFile(templatePath, 'utf8');
 
   let imports = '';
-  let items = '';
+  let icons = '';
 
-  Object.keys(svgComponents).forEach(async (componentName) => {
-    if (iconComponentIsValid(svgComponents[componentName])) {
-      imports += `import { ${componentName} } from '../../${componentName}/${componentName}';\n`;
-      items += `<IconsItem name="${componentName}" icon={${componentName}} {...defaultKnobs()} />\n`;
-    }
-  });
+  Object.keys(svgComponents)
+    .sort(sortComponent)
+    .forEach(async (componentName) => {
+      if (iconComponentIsValid(svgComponents[componentName])) {
+        imports += `import { ${componentName} } from '../../${componentName}/${componentName}';\n`;
+        icons += `${componentName},\n`;
+      }
+    });
 
-  const jsCode = template.replace(/#imports#/g, imports).replace(/#items#/g, items);
+  const jsCode = template.replace(/#imports#/g, imports).replace(/#icons#/g, icons);
   const jsPatch = `${src}/icons/Icon/stories/Icons.stories.tsx`;
   await ensureDir(dirname(jsPatch));
   await writeFile(jsPatch, jsCode);
@@ -83,16 +95,18 @@ const createFileIconsStories = async (svgComponents, src) => {
   const template = await readFile(templatePath, 'utf8');
 
   let imports = '';
-  let items = '';
+  let icons = '';
 
-  Object.keys(svgComponents).forEach(async (componentName) => {
-    if (iconFileComponentIsValid(svgComponents[componentName])) {
-      imports += `import { ${componentName} } from '../../${componentName}/${componentName}';\n`;
-      items += `<IconsItem name="${componentName}" icon={${componentName}} {...defaultKnobs()} />\n`;
-    }
-  });
+  Object.keys(svgComponents)
+    .sort(sortComponent)
+    .forEach(async (componentName) => {
+      if (iconFileComponentIsValid(svgComponents[componentName])) {
+        imports += `import { ${componentName} } from '../../${componentName}/${componentName}';\n`;
+        icons += `${componentName},\n`;
+      }
+    });
 
-  const jsCode = template.replace(/#imports#/g, imports).replace(/#items#/g, items);
+  const jsCode = template.replace(/#imports#/g, imports).replace(/#icons#/g, icons);
   const jsPatch = `${src}/fileIcons/FileIcon/stories/FileIcons.stories.tsx`;
   await ensureDir(dirname(jsPatch));
   await writeFile(jsPatch, jsCode);

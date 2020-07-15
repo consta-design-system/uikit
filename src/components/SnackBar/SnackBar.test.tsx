@@ -170,7 +170,7 @@ describe('Компонент SnackBar', () => {
       });
     });
     describe('проверка autoClose', () => {
-      it('срабатывает действие при autoClose = 1', () => {
+      it('срабатывает onClose при autoClose = 1', () => {
         const handleClick = jest.fn();
         const items: SnackBarProps['items'] = [
           {
@@ -193,7 +193,7 @@ describe('Компонент SnackBar', () => {
         expect(handleClick).toBeCalled();
         expect(handleClick).toHaveBeenCalledTimes(1);
       });
-      it('срабатывает действие при autoClose = true', () => {
+      it('срабатывает onClose при autoClose = true', () => {
         const handleClick = jest.fn();
         const items: SnackBarProps['items'] = [
           {
@@ -215,6 +215,32 @@ describe('Компонент SnackBar', () => {
 
         expect(handleClick).toBeCalled();
         expect(handleClick).toHaveBeenCalledTimes(1);
+      });
+      it('срабатывает onAutoClose', () => {
+        const handleClose = jest.fn();
+        const handleAutoClose = jest.fn();
+        const items: SnackBarProps['items'] = [
+          {
+            key: 1,
+            autoClose: true,
+            onClose: handleClose,
+            onAutoClose: handleAutoClose,
+          },
+        ];
+
+        jest.useFakeTimers();
+        act(() => {
+          renderComponent({ items });
+        });
+
+        expect(handleClose).not.toBeCalled();
+        act(() => {
+          jest.advanceTimersByTime(3000);
+        });
+
+        expect(handleClose).not.toBeCalled();
+        expect(handleAutoClose).toBeCalled();
+        expect(handleAutoClose).toHaveBeenCalledTimes(1);
       });
     });
   });

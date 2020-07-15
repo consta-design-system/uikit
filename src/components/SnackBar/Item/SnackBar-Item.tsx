@@ -29,7 +29,15 @@ const getAutoCloseTime = (autoClose: boolean | number | undefined): number | fal
 
 export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
   const { item } = props;
-  const { onClose, autoClose, icon: Icon, message, actions, status = 'normal' } = item;
+  const {
+    onClose,
+    autoClose,
+    icon: Icon,
+    message,
+    actions,
+    status = 'normal',
+    onAutoClose: onAutoCloseProp,
+  } = item;
   const [timerFunctions, setTimerFunctions] = useState<{
     start: () => void;
     pause: () => void;
@@ -41,6 +49,13 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
   const handleMouseEnter = () => setHover(true);
   const handleMouseLeave = () => setHover(false);
   const autoCloseTime = getAutoCloseTime(autoClose);
+  const onAutoClose = (item: Item) => {
+    if (onAutoCloseProp) {
+      onAutoCloseProp(item);
+    } else {
+      onClose && onClose(item);
+    }
+  };
 
   useEffect(() => {
     if (!timeIsOver) {
@@ -54,10 +69,10 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
 
   const handleTimeIsOver = () => {
     setTimeIsOver(true);
-    onClose && onClose(item);
+    onAutoClose(item);
   };
 
-  const handleClick = onClose ? () => onClose(item) : undefined;
+  const handleClose = onClose ? () => onClose(item) : undefined;
 
   return (
     <div
@@ -88,7 +103,7 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
           iconLeft={IconClose}
           form="round"
           size="xs"
-          onClick={handleClick}
+          onClick={handleClose}
         />
       )}
     </div>

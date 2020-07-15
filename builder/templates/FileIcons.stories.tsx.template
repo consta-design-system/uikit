@@ -8,11 +8,17 @@ const defaultKnobs = () => ({
   size: select('size', ['s', 'm'], 'm'),
 });
 
+const icons = {
+  #icons#
+}
+
 storiesOf('FileIcons', module)
   .addDecorator(withKnobs)
   .add('FileIcons', () => (
     <div className={'tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full'}>
-    #items#
+      {Object.keys(icons).map(name => (
+        <IconsItem key={name} name={name} icon={icons[name]} {...defaultKnobs()} />
+      ))}
     </div>
   ));
 

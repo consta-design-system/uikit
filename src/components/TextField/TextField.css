@@ -59,7 +59,7 @@
   }
 
   &-Icon {
-    fill: var(--color-control-typo-placeholder);
+    color: var(--color-control-typo-placeholder);
   }
 
   &_size {
@@ -118,7 +118,7 @@
 
       &.TextField .TextField-Icon,
       &.TextField_withValue .TextField-Icon {
-        fill: var(--color-control-typo-disable);
+        color: var(--color-control-typo-disable);
       }
     }
   }
@@ -212,7 +212,7 @@
 
       &.TextField .TextField-Icon,
       &.TextField_withValue .TextField-Icon {
-        fill: var(--color-control-typo-disable);
+        color: var(--color-control-typo-disable);
       }
     }
   }
@@ -298,7 +298,7 @@
     }
 
     & .TextField-Icon {
-      fill: var(--color-typo-secondary);
+      color: var(--color-typo-secondary);
     }
   }
 
