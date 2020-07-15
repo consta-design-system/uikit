@@ -1,17 +1,12 @@
 import './DocsDecorator.css';
 
 import React from 'react';
-// тайпскрипт ругался DocsContainer. Я не смог разобраться что ему нужно было
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
-import { DocsContainer } from '@storybook/addon-docs/blocks';
+import { DocsContainer } from '@storybook/addon-docs/dist/blocks';
 
 import { presetGpnDefault, Theme } from '../../../components/Theme/Theme';
 import { cn } from '../../../utils/bem';
 
-type DocsContainerProps = {
-  context: React.ComponentProps<typeof DocsContainer>;
-};
+type DocsContainerProps = React.ComponentProps<typeof DocsContainer>;
 
 export const cnDocsDecorator = cn('DocsDecorator');
 
