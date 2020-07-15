@@ -1,0 +1,198 @@
+.DocsDecorator {
+  --width-default: 700px;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  blockquote,
+  table,
+  ul,
+  ol,
+  pre.sbdocs,
+  &-Section {
+    max-width: var(--width-default);
+    margin-right: auto;
+    margin-left: auto;
+    color: var(--color-typo-primary);
+    font-family: var(--font-primary);
+  }
+
+  h1 {
+    margin-bottom: 0.4em;
+    font-size: var(--size-text-4xl);
+  }
+
+  h2 {
+    padding-bottom: 0;
+    border-bottom: none;
+    font-size: var(--size-text-3xl);
+
+    /* TODO: Ниже код для обсуждению о добавлении парамтеров сразу в заголовок */
+
+    /* code {
+      display: inline-block;
+      vertical-align: text-bottom;
+      padding: 0 var(--space-xs);
+      border: 1px solid var(--color-bg-stripe);
+      border-radius: 4px;
+      color: var(--color-typo-secondary);
+      background-color: var(--color-bg-ghost);
+      font-size: var(--size-text-2xl);
+      line-height: var(--line-height-text-s);
+    } */
+  }
+
+  h3 {
+    font-size: var(--size-text-2xl);
+  }
+
+  h4 {
+    font-size: var(--size-text-l);
+  }
+
+  /* вынужденная мера для перебития дефолтных стилей :first-of-type */
+  h2.sbdocs-h2,
+  h3.sbdocs-h3,
+  h4.sbdocs-h4 {
+    margin-top: 1.6em;
+    margin-bottom: 0.4em;
+    line-height: var(--line-height-text-xs);
+  }
+
+  h1.sbdocs-h1 a[aria-hidden='true'],
+  h2.sbdocs-h2 a[aria-hidden='true'],
+  h3.sbdocs-h3 a[aria-hidden='true'],
+  h4.sbdocs-h4 a[aria-hidden='true'] {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    display: flex;
+    float: none;
+    align-items: center;
+    margin-left: 0;
+    padding: var(--space-xs);
+    transform: translate(-100%, -50%);
+  }
+
+  h1 + h2.sbdocs-h2,
+  h2 + h3.sbdocs-h3,
+  h3 + h4.sbdocs-h4,
+  h1 + div + h2.sbdocs-h2,
+  h2 + div + h3.sbdocs-h3,
+  h3 + div + h4.sbdocs-h4 {
+    margin-top: 0.2em;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 1em;
+    font-size: var(--size-text-m);
+    line-height: var(--line-height-text-l);
+
+    a {
+      font-size: inherit;
+    }
+  }
+
+  a {
+    font-size: var(--size-text-m);
+    line-height: var(--line-height-text-l);
+  }
+
+  blockquote {
+    box-sizing: border-box;
+    margin-top: 0;
+    margin-bottom: 1em;
+    padding: 0.8em;
+    background-color: var(--color-bg-secondary);
+    border-left-color: var(--color-bg-ghost);
+    border-radius: 8px;
+    font-size: var(--size-text-m);
+  }
+
+  p code {
+    background-color: var(--color-bg-ghost);
+    border: 1px solid var(--color-bg-stripe);
+    font-size: var(--size-text-s);
+  }
+
+  table {
+    width: 100%;
+    font-size: var(--size-text-s);
+    line-height: var(--line-height-text-s);
+
+    tr {
+      border-top: 1px solid var(--color-bg-border);
+    }
+
+    tr th:empty {
+      padding: 0;
+      border: none;
+    }
+
+    tr th,
+    tr td {
+      padding: var(--space-xs) var(--space-s);
+    }
+
+    tr th:not(:last-child),
+    tr td:not(:last-child) {
+      border-right: 1px solid var(--color-bg-border);
+    }
+
+    code {
+      font-size: var(--size-text-xs);
+    }
+  }
+
+  ul {
+    box-sizing: border-box;
+    margin-top: 0;
+    margin-bottom: 1.6em;
+    padding-left: var(--space-l);
+  }
+
+  pre.sbdocs > div {
+    margin-top: 0;
+    margin-bottom: 2.2em;
+    font-size: var(--size-text-m);
+  }
+
+  & &-Anchor {
+    visibility: hidden;
+    opacity: 0;
+    font-size: 0;
+  }
+
+  .Example {
+    margin-bottom: 1.4em;
+
+    &-Caption {
+      line-height: var(--line-height-text-s);
+    }
+
+    &-Status {
+      margin-top: var(--space-l);
+      margin-bottom: 0.4em;
+      padding-top: var(--space-s);
+      color: var(--example-status-color);
+      border-top: 2px solid var(--example-status-color);
+
+      &_view {
+        &_wrong {
+          --example-status-color: var(--color-typo-alert);
+        }
+
+        &_right {
+          --example-status-color: var(--color-typo-success);
+        }
+      }
+
+      & + .Example-Caption {
+        margin-top: 0;
+      }
+    }
+  }
+}
