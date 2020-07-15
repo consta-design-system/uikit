@@ -113,7 +113,7 @@
     transition: background-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease,
       fill 0.15s ease;
 
-    &::after {
+    &::before {
       content: '';
       position: absolute;
       z-index: -1;
@@ -131,34 +131,21 @@
     appearance: none;
   }
 
-  /* Focus и Active */
-  &-Label_focus::after,
-  &-Label_focus:hover::after {
-    outline: none;
-    box-shadow: 0 0 0 3px var(--color-control-bg-focus);
-    animation: choiceGroupItemFocusAnimation 0.5s ease-in;
-  }
-
-  &-Label_focus:active::after,
-  &-Label_focus:active:hover::after {
-    animation-name: none !important;
-  }
-
   /* Скругление углов */
-  &-Label:first-child::after {
+  &-Label:first-child::before {
     left: calc(-1 * var(--control-border-width));
   }
 
   &-Label:last-child {
     padding-right: var(--choice-space);
 
-    &::after {
+    &::before {
       right: calc(-1 * var(--control-border-width));
     }
   }
 
   /* Палочка */
-  &-Label:not(:first-child)::before {
+  &-Label:not(:first-child)::after {
     content: '';
     position: absolute;
     z-index: -1;
@@ -174,7 +161,7 @@
       color: var(--color-control-typo-secondary-hover);
     }
 
-    &::before {
+    &::after {
       background-color: var(--color-control-bg-border-default);
     }
   }
@@ -182,11 +169,11 @@
   &-Label_checked {
     color: var(--choice-text-color);
 
-    &::after {
+    &::before {
       background-color: var(--choice-bg-color);
     }
 
-    & + .ChoiceGroup-Label::before {
+    & + .ChoiceGroup-Label::after {
       background-color: transparent;
     }
   }
@@ -202,15 +189,5 @@
       padding: 0;
       padding-right: var(--control-border-width);
     }
-  }
-}
-
-@keyframes choiceGroupItemFocusAnimation {
-  from {
-    box-shadow: 0 0 0 0 var(--color-control-bg-focus), 0 0 0 0 var(--color-control-bg-active);
-  }
-
-  to {
-    box-shadow: 0 0 0 3px var(--color-control-bg-focus), 0 0 0 6px transparent;
   }
 }
