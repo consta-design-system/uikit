@@ -1,6 +1,6 @@
 {
   "name": "@gpn-design/uikit",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "dependencies": {
     "tslib": "^1.11.1",
     "@bem-react/classname": "^1.5.8",
