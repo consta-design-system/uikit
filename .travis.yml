@@ -2,9 +2,9 @@ language: node_js
 node_js:
   - node
 script:
-  - yarn lint:js
-  - yarn lint:css
+  - yarn test
   - yarn run build
+before_deploy:
   - yarn run build:storybook
 deploy:
   provider: pages

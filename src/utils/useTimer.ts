@@ -38,7 +38,7 @@ export function useTimer(config?: Partial<Config>): Values {
     ...initialConfig,
     ...config,
   };
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<number | null>(null);
   const pausedTimeRef = useRef<number | null>(null);
   const [shouldResetTime, setShouldResetTime] = useState(false);
   const [time, setTime] = useState(startTime);
@@ -82,7 +82,7 @@ export function useTimer(config?: Partial<Config>): Values {
   const createInterval = () => {
     setIsRunning(true);
 
-    intervalRef.current = setInterval(() => {
+    intervalRef.current = window.setInterval(() => {
       setTime((previousTime) => {
         const newTime =
           timerType === 'INCREMENTAL' ? previousTime + interval : previousTime - interval;
