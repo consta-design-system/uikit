@@ -2,7 +2,7 @@ import './SnackBar-Timer.css';
 
 import React, { useEffect, useState } from 'react';
 
-import { useTimer } from '../../../utils/useTimer';
+import { useTimer } from '../../../hooks/useTimer/useTimer';
 import { Timer } from '../../Timer/Timer';
 import { cnSnackBar } from '../SnackBar';
 
