@@ -1,5 +1,7 @@
 import { RefObject, useEffect } from 'react';
 
+export type ClickOutsideHandler = (event: MouseEvent) => void;
+
 export function useClickOutside({
   isActive,
   ignoreClicksInsideRefs,
@@ -7,7 +9,7 @@ export function useClickOutside({
 }: {
   isActive: boolean;
   ignoreClicksInsideRefs: ReadonlyArray<RefObject<HTMLElement>>;
-  handler: (event: MouseEvent) => void;
+  handler: ClickOutsideHandler;
 }) {
   useEffect(() => {
     if (!isActive) {

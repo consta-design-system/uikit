@@ -1,7 +1,7 @@
 import React from 'react';
 import isFunction from 'lodash/isFunction';
 
-import { useClickOutside } from '../../hooks/useClickOutside/useClickOutside';
+import { ClickOutsideHandler, useClickOutside } from '../../hooks/useClickOutside/useClickOutside';
 import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
 import { PortalWithTheme } from '../PortalWithTheme/PortalWithTheme';
 import { useTheme } from '../Theme/Theme';
@@ -54,7 +54,7 @@ export type Props = {
   possibleDirections?: readonly Direction[];
   isInteractive?: boolean;
   children: React.ReactNode | ((direction: Direction) => React.ReactNode);
-  onClickOutside?: (event: MouseEvent) => void;
+  onClickOutside?: ClickOutsideHandler;
 } & PositioningProps;
 
 export const Popover: React.FC<Props> = (props) => {
