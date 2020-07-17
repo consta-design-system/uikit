@@ -33,10 +33,10 @@ const defaultKnobs = () => ({
 
 const icons = {
   FileIconAvi,
-  FileIconBmp,
   FileIconCsv,
-  FileIconDoc,
+  FileIconBmp,
   FileIconExe,
+  FileIconDoc,
   FileIconGif,
   FileIconJpg,
   FileIconLoading,
@@ -48,8 +48,8 @@ const icons = {
   FileIconPtt,
   FileIconRar,
   FileIconRtf,
-  FileIconTxt,
   FileIconTiff,
+  FileIconTxt,
   FileIconUndefined,
   FileIconWav,
   FileIconXls,
