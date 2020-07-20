@@ -1,0 +1,5 @@
+.FileField {
+  &-Input {
+    display: none;
+  }
+}
