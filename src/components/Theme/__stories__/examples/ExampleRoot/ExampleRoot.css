@@ -1,0 +1,7 @@
+.ThemeStories-- {
+  &ExampleRoot {
+    min-height: 100px;
+    padding: var(--space-xl);
+    background: var(--color-bg-default);
+  }
+}

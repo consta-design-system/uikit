@@ -1,4 +1,4 @@
-.DocsDecorator {
+.UiKit--DocsDecorator {
   --width-default: 700px;
 
   h1,
@@ -165,35 +165,5 @@
     visibility: hidden;
     opacity: 0;
     font-size: 0;
-  }
-
-  .Example {
-    margin-bottom: 1.4em;
-
-    &-Caption {
-      line-height: var(--line-height-text-s);
-    }
-
-    &-Status {
-      margin-top: var(--space-l);
-      margin-bottom: 0.4em;
-      padding-top: var(--space-s);
-      color: var(--example-status-color);
-      border-top: 2px solid var(--example-status-color);
-
-      &_view {
-        &_wrong {
-          --example-status-color: var(--color-typo-alert);
-        }
-
-        &_right {
-          --example-status-color: var(--color-typo-success);
-        }
-      }
-
-      & + .Example-Caption {
-        margin-top: 0;
-      }
-    }
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import { withKnobs, select } from '@storybook/addon-knobs';
-import { storiesOf } from '@storybook/react';
+import { select } from '@storybook/addon-knobs';
+import mdx from './Icon.mdx';
 #imports#
 import { IconsItem } from './Item/Icons-Item';
 
@@ -17,12 +17,23 @@ const icons = {
   #icons#
 }
 
-storiesOf('Icons', module)
-  .addDecorator(withKnobs)
-  .add('Icons', () => (
-    <div className={'tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full'}>
-      {Object.keys(icons).map(name => (
+export function Playground() {
+  return (
+    <div className="tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full">
+      {Object.keys(icons).map((name) => (
         <IconsItem key={name} name={name} icon={icons[name]} {...defaultKnobs()} />
       ))}
     </div>
-  ));
+  );
+}
+
+export default {
+  title: 'Components|/Icons',
+  component: Playground,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+};
+

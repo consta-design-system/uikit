@@ -85,13 +85,13 @@ const createIconStories = async (svgComponents, src) => {
     });
 
   const jsCode = template.replace(/#imports#/g, imports).replace(/#icons#/g, icons);
-  const jsPatch = `${src}/icons/Icon/stories/Icons.stories.tsx`;
+  const jsPatch = `${src}/icons/Icon/__stories__/Icons.stories.tsx`;
   await ensureDir(dirname(jsPatch));
   await writeFile(jsPatch, jsCode);
 };
 
 const createFileIconsStories = async (svgComponents, src) => {
-  const templatePath = './builder/templates/FileIcons.stories.tsx.template';
+  const templatePath = './builder/templates/FileIconsGallery.tsx.template';
   const template = await readFile(templatePath, 'utf8');
 
   let imports = '';
@@ -101,13 +101,13 @@ const createFileIconsStories = async (svgComponents, src) => {
     .sort(sortComponent)
     .forEach(async (componentName) => {
       if (iconFileComponentIsValid(svgComponents[componentName])) {
-        imports += `import { ${componentName} } from '../../${componentName}/${componentName}';\n`;
+        imports += `import { ${componentName} } from '../../../${componentName}/${componentName}';\n`;
         icons += `${componentName},\n`;
       }
     });
 
   const jsCode = template.replace(/#imports#/g, imports).replace(/#icons#/g, icons);
-  const jsPatch = `${src}/fileIcons/FileIcon/stories/FileIcons.stories.tsx`;
+  const jsPatch = `${src}/fileIcons/FileIcon/__stories__/FileIconsGallery/FileIconsGallery.tsx`;
   await ensureDir(dirname(jsPatch));
   await writeFile(jsPatch, jsCode);
 };

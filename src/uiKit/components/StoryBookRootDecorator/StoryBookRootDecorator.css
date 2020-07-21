@@ -8,7 +8,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-.StoryBookRootDecorator {
+.UiKit--StoryBookRootDecorator {
   min-height: 100vh;
   padding: var(--space-3xl);
   background: var(--color-bg-default);

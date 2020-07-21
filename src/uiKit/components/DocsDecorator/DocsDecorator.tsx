@@ -4,7 +4,7 @@ import React from 'react';
 import { DocsContainer } from '@storybook/addon-docs/dist/blocks';
 
 import { presetGpnDefault, Theme } from '../../../components/Theme/Theme';
-import { cn } from '../../../utils/bem';
+import { cn } from '../../cn';
 
 type DocsContainerProps = React.ComponentProps<typeof DocsContainer>;
 
