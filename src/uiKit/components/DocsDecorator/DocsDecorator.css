@@ -11,6 +11,7 @@
   ul,
   ol,
   pre.sbdocs,
+  .sbdocs-preview,
   &-Section {
     max-width: var(--width-default);
     margin-right: auto;

@@ -1,7 +1,6 @@
 import './Attach.stories.css';
 
 import * as React from 'react';
-import { DocsContainer } from '@storybook/addon-docs/blocks';
 import { boolean, number, text } from '@storybook/addon-knobs';
 
 import { IconTrash } from '../../../icons/IconTrash/IconTrash';
@@ -59,23 +58,12 @@ export function Playground() {
   );
 }
 
-type DocsContainerProps = React.ComponentProps<typeof DocsContainer>;
-
-const container: React.FC<DocsContainerProps> = ({ context, children }) => {
-  return (
-    <DocsContainer context={context}>
-      <div className="EEEEE">{children}</div>
-    </DocsContainer>
-  );
-};
-
 export default {
   title: 'UI-KIT|/Attach',
   component: Playground,
   parameters: {
     docs: {
       page: mdx,
-      container,
     },
   },
 };
