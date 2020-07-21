@@ -2,9 +2,9 @@ import './Tabs.css';
 
 import React, { createRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
+import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
-import { useForkRef } from '../../utils/useForkRef';
 import {
   BaseCheckGroupField,
   BaseCheckGroupFieldItemPropItemKey,

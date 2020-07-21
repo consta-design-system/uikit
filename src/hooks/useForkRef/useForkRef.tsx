@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { setRef } from './setRef';
+import { setRef } from '../../utils/setRef';
 
 type AtributesRef<T> = React.Ref<T> | undefined;
 type ResultRef<T> = React.RefCallback<T> | null;
