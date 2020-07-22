@@ -13,6 +13,7 @@ module.exports = {
     'src/components/ScrollExample/**',
     'src/components/ThemePreview/**',
     'src/components/ThemePreview/**',
+    'src/components/TagBase/**',
     'src/components/BaseCheckGroupField/**',
     'src/icons/BaseIconHoc/**',
     'src/fileIcons/BaseFileIconHoc/**',

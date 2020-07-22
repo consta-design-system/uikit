@@ -1,0 +1,280 @@
+import { Meta, Preview, Story } from '@storybook/addon-docs/dist/blocks';
+import { Button } from '../Button';
+import { 
+  ButtonExampleNameSemantics,
+  ButtonExampleNameVerb,
+  ButtonExampleNameNavigation,
+  ButtonExampleNameSingleLine,
+  ButtonExampleNameAgreement,
+  ButtonExampleNameOverflow
+} from './examples/ButtonExampleName/ButtonExampleName';
+import { 
+  ButtonExampleViewPrimary,
+  ButtonExampleViewSecondary,
+  ButtonExampleViewGhost,
+  ButtonExampleViewClear,
+  ButtonExampleViewDisabled
+} from './examples/ButtonExampleView/ButtonExampleView';
+import { ButtonExampleFormBasic, ButtonExampleFormHybrid } from './examples/ButtonExampleForm/ButtonExampleForm';
+import { ButtonExampleSizeBasic, ButtonExampleSizeFull } from './examples/ButtonExampleSize/ButtonExampleSize';
+import { ButtonExampleIconBasic, ButtonExampleIconOnly } from './examples/ButtonExampleIcon/ButtonExampleIcon';
+import { ButtonExampleLoading } from './examples/ButtonExampleLoading/ButtonExampleLoading';
+
+<Meta title='MDX/Button' component={Button} />
+
+# Button
+
+Кнопка. Используется, когда человеку нужно сделать выбор, подтвердить или совершить какое-то действие. Например, отправить сообщение, оплатить заказ, сохранить изменения, войти в акканут.
+
+Кнопка в фокусе визуально выделяется, чтобы человек понимал, что вот-вот нажмёт на неё и что-то произойдёт.
+
+- [Внешний вид](#внешний-вид)
+  - [Текст на кнопке](#текст-на-кнопке)
+  - [Типы кнопок](#типы-кнопок)
+  - [Размер](#размер)
+  - [Кнопка с иконкой](#кнопка-с-иконкой)
+  - [Форма](#форма)
+  - [Прелоадер](#прелоадер)
+- [Список свойств](#список-свойств)
+- [Пример использования](#пример)
+
+## Внешний вид
+
+### Текст на кнопке
+Текст на кнопке показывает, за какое действие она отвечает. Сделайте его однозначным,
+понятным и коротким. Пишите с заглавной буквы, точка не нужна. Не используйте Caps Lock.
+
+#### Главные — глаголы
+Почти всегда для текста на кнопке подходит инфинитив глагола совершенного вида
+(отвечает на вопрос «Что сделать?») Вот такой: **Сохранить**, **Купить**, **Отправить**.
+
+<ButtonExampleNameVerb />
+
+Иногда глаголы не подходят (но редко). Например, если кнопки нужны для навигации.
+
+<ButtonExampleNameNavigation />
+
+Или когда с помощью кнопки человек выражает согласие, отношение или подтверждает, что
+прочитал текст.
+
+<ButtonExampleNameAgreement />
+
+#### Как можно точнее
+
+Не используйте общие слова, когда кнопка отвечает за конкретное действие.  
+
+<ButtonExampleNameSemantics />
+
+#### Как можно короче
+
+Две строки — плохо.  Сделайте кнопку шире или поменяйте название.
+
+<ButtonExampleNameSingleLine />
+
+Многоточие вместо части названия — плохо. Если название не влезает на кнопку
+при маленьких разрешениях экрана, попробуйте сократить, подобрать другое или
+используйте только иконку.
+
+<ButtonExampleNameOverflow />
+
+### Типы кнопок
+
+Всего в дизайн-системе четыре типа кнопок: `primary`, `secondary`, `ghost` и `clear`. Этого обычно хватает, чтобы расставить
+акценты пользовательских действий на странице.
+
+За тип кнопки отвечает свойство [view](#props).
+
+#### `primary`
+
+Это основной тип кнопки (используется по умолчанию). Если на странице одна кнопка, используйте такую. Если несколько, оставьте кнопку `primary` для самого важного, «целевого» действия, на котором нужно сделать акцент. Постарайтесь использовать одну кнопку `primary` на странице или в блоке.
+
+<ButtonExampleViewPrimary />
+
+```ts
+<Button label="Войти" />
+<Button label="Продолжить" iconRight={IconForward} />
+<Button label="Добавить" iconRight={IconAdd} onlyIcon />
+```
+
+#### `secondary`
+
+Эта кнопка похожа на `primary`, но не так сильно выделяется. Используйте её, когда хотите сохранить важность действия, но не слишком привлекать к нему внимание.
+
+<ButtonExampleViewSecondary />
+
+```ts
+<Button label="Читать далее" view="secondary" />
+<Button label="Комментировать" view="secondary" iconLeft={IconChat} />
+<Button label="Редактировать" view="secondary" iconRight={IconEdit} onlyIcon />
+```
+
+#### `ghost`
+
+Это второстепенная или дополнительная кнопка. Часто используется в паре с основной кнопкой и обозначает альтернативное, не главное действие. Например, если есть основная кнопка **Подвтердить**, в паре с ней можно поставить кнопку `ghost` с текстом **Отменить**. Также может использоваться для не очень важных действий, к которым не хочется привлекать внимание.
+
+<ButtonExampleViewGhost />
+
+```ts
+<Button label="Отмена" view="ghost" />
+<Button label="Настройки" view="ghost" iconLeft={IconSettings} />
+<Button label="Фильтр" view="ghost" iconLeft={IconFunnel} onlyIcon />
+```
+
+#### `clear`
+
+Это полноценная кнопка с прозрачным фоном. Используйте её, когда внимание пользователя должно быть сосредоточено на более важных компонентах. Также эти кнопки удобно использовать в списке кнопок-иконок без текста или для обозначения самых незначительных действий.
+
+<ButtonExampleViewClear />
+
+```ts
+<Button label="Развернуть" view="clear" />
+<Button label="Скопировать" view="clear" iconLeft={IconCopy} />
+<Button label="Добавить в Избранное" view="clear" iconLeft={IconBookmarkStroked} onlyIcon />
+```
+
+#### `disabled`
+
+Это свойство блокирует кнопку — её невозможно нажать. Его можно применить к кнопке любого типа. Используйте `disabled` в тех случаях, когда пользователь не может нажать на кнопку из-за каких-то условий. Например, пока не напишет логин и пароль для входа в аккаунт или не заполнит все обязательные поля в форме.
+
+<ButtonExampleViewDisabled />
+
+```ts
+<Button label="Войти" disabled />
+<Button label="Продолжить" disabled iconRight={IconForward} />
+<Button label="Добавить" disabled iconRight={IconAdd} onlyIcon />
+```
+
+### Размер
+
+В дизайн-системе четыре размера кнопок: `xs`, `s`, `m` и `l`. За размер кнопок отвечает свойство `size`, оно определяет высоту кнопки. Ширина кнопки задается размером контента внутри нее и стандартными отступами.
+
+<ButtonExampleSizeBasic />
+
+```ts
+<Button label="Размер XS" size="xs" />
+<Button label="Размер S" size="s" />
+<Button label="Размер M" size="m" />
+<Button label="Размер L" size="l" />
+```
+
+#### Кнопка в ширину блока
+
+Вы можете сделать ширину кнопки равной 100% от ширины родительского
+контейнера. Для этого используйте свойство `width` со значением `full`.
+
+<ButtonExampleSizeFull />
+
+```ts
+<Button label="Отправить" width="full"/>
+```
+
+### Кнопка с иконкой
+
+Название кнопки можно дополнять иконкой. Она поможет быстрее найти нужную кнопку в ряду других и быстрее понять, что эта кнопка делает. За иконку отвечают свойства `iconLeft` (ставит иконку слева от текста на кнопке) или `iconRight` (ставит иконку справа). Оба эти свойства ожидают компонент иконки из нашей [библиотеки иконок](?path=/docsx/icons--icons).
+
+<ButtonExampleIconBasic />
+
+```ts
+<Button label="Назад" iconLeft={IconBackward} />
+<Button label="Вперёд" iconRight={IconForward} />
+```
+
+> В панели с большим количеством кнопок иконки будут создавать лишний визуальный шум. В этом случае оставьте иконки только у самых важных действий
+
+#### Только иконка
+
+Кнопка может состоять только из иконки. Такие кнопки экономят место и позволяют разместить рядом много похожих кнопок. Например, кнопки для выбора даты или фильтров. Для создания такой кнопки используйте свойство `onlyIcon` в паре с `iconLeft` или `iconRight`.
+
+<ButtonExampleIconOnly />
+
+```ts
+<Button label="Назад" view="ghost" iconLeft={IconHamburger} onlyIcon />
+<Button label="Назад" view="ghost" iconLeft={IconCalendar} onlyIcon />
+<Button label="Вперёд" view="ghost" iconRight={IconFilter} onlyIcon />
+```
+
+> Убедитесь, что изображение на иконке знакомо пользователям и легко считывается, так, что все сразу понимают, что делает эта кнопка
+
+#### Размер иконки
+
+По умолчанию размер иконки зависит от размера кнопки.
+
+|   |   |   |   |   |
+| - | - | - | - | - |
+| Размер кнопки | L | M | S  | XS |
+| Размер иконки | M | S | XS | XS |
+
+Чтобы его поменять, используйте свойство `iconSize`, в котором можно указать любой размер иконки из списка допустимых: `m`, `s`, `xs`.
+
+### Форма
+
+За форму кнопки отвечает свойство `form`. По умолчанию у кнопок скругленные края (значение `default`), а ещё кнопки могут быть квадратными `brick` и круглыми `round`.
+
+<ButtonExampleFormBasic />
+
+```ts
+<Button label="Default" />
+<Button label="Brick" form="brick" />
+<Button label="Round" form="round" />
+```
+
+#### Гибридные формы
+
+Для комбинации кнопки с [полем ввода](?path=/story/textfield--%D1%82%D0%B5%D0%BA%D1%81%D1%82%D0%BE%D0%B2%D0%BE%D0%B5-%D0%BF%D0%BE%D0%BB%D0%B5-%D0%B2%D0%B2%D0%BE%D0%B4%D0%B0) предусмотрены гибридные формы. У таких вариантов правая и левая грани могут отличаться.
+
+В этом примере свойство `form` у кнопки равно `brick-round`.
+
+<ButtonExampleFormHybrid />
+
+```ts
+<div style={{display: 'flex}} >
+  <TextField placeholder="Электронная почта" form="roundClear" style={{ width: '260px' }} />
+  <Button label="Подписаться" form="brickRound" />
+</div>
+```
+
+### Прелоадер
+
+Если после нажатия на кнопку пользователь ждет какого-то результата, в кнопке можно отобразить прелоадер. Для этого используйте свойство `loading`.
+
+<ButtonExampleLoading />
+
+```ts
+<Button label="Загрузка" loading />
+```
+
+## Список свойств
+
+| Свойство   | Тип или варианты значения                                                         | По умолчанию               | Описание  |
+| ---------- | --------------------------------------------------------------------------------- | -------------------------- | --------- |
+| [`label`](#view)    | `string`                                                                          | —                          | Текст на кнопке |
+| [`view`](#view)     | `'clear', 'primary', 'secondary', 'ghost'`                                        | `primary`                  | Внешний вид |
+| [`disabled`](#disabled) | `boolean`                                                                         | `false`                    | Блокировка кнопки |
+| [`size`](#size)     | `'xs', 's', 'm', 'l'`                                                             | `m`                        | Размер |
+| [`width`](#width)    | `'full', 'default'`                                                               | `default`                  | Ширина |
+| [`form`](#form)     | `'default', 'round', 'brick', 'brickRound', 'roundBrick', 'brickDefault', 'defaultBrick'` | `default`                  | Форма |
+| [`iconLeft`](#icon) | `React.FC<IIcon>`                                                                 | —                          | Иконка слева |
+| [`iconRight`](#icon)| `React.FC<IIcon>`                                                                 | —                          | Иконка справа |
+| [`onlyIcon`](#icon) | `boolean`                                                                         | `false`                    | Только иконка без текста |
+| [`iconSize`](#icon_size) | `'xs', 's', 'm'`                                                                  | Зависит от размера  кнопки | Размер иконки |
+| `title`    | `string`                                                                          | —                          | HTML-атрибут `title` — всплывающая подсказка, появляется при наведении на кнопку |
+| `tabIndex` | `number`                                                                          | —                          | Порядковый номер при переходе между элементами интерфейса по клавише **tab** |
+| `as`       | `React.ElementType`                                                               | `button`                   | HTML-тег для кнопки |
+| [`loading`](#events)  | `boolean`                                                                         | `false`                    | Отображает прелоадер вместо кнопки во время загрузки информации |
+| `onClick`  | `React.EventHandler<React.MouseEvent>`                                            | —                          | Действие по клику |
+| `innerRef` | `React.Ref<HTMLElement>`                                                          | —                          | Ссылка на корневой DOM-элемент |
+| `className` | `string`                                                                         | —                          | Дополнительные CSS-классы |
+
+
+
+## Пример использования
+
+```ts
+// src/App.tsx
+import React from 'react';
+import { Button } from '@gpn-design/uikit/Button';
+
+const App = () => {
+  return <Button label='Сохранить' />
+};
+```

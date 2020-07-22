@@ -1,8 +1,12 @@
+const remarkSlug = require('../node_modules/remark-slug');
+const remarkExternalLinks = require('../node_modules/remark-external-links');
+
 module.exports = {
   stories: ['../src/**/*.stories.(js|tsx)'],
   addons: [
     'storybook-addon-themes/register',
     '@storybook/addon-knobs/register',
+    '@storybook/addon-actions/register',
     '@storybook/addon-a11y/register',
     '@storybook/addon-docs/register',
     '@storybook-addons/docs/register',
@@ -37,14 +41,22 @@ module.exports = {
         {
           loader: 'babel-loader',
           options: {
-            plugins: ['@babel/plugin-transform-react-jsx'],
+            presets: ['@babel/preset-react'],
           },
         },
         {
           loader: '@mdx-js/loader',
-          options: {},
+          options: {
+            remarkPlugins: [remarkSlug, remarkExternalLinks],
+          },
         },
       ],
+    });
+    config.module.rules.push({
+      test: /(stories)\/(.*)\.tsx?$/,
+      loader: require.resolve('@storybook/source-loader'),
+      exclude: [/node_modules/],
+      enforce: 'pre',
     });
 
     return config;
