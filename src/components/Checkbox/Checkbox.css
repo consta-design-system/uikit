@@ -34,18 +34,6 @@
       transform: rotate(-50deg) scale(0, 1);
       transform-origin: 0 0;
     }
-
-    &:focus,
-    &:focus:hover {
-      outline: none;
-      box-shadow: 0 0 0 2px var(--color-control-bg-focus);
-      animation: checkboxFocusAnimation 0.5s ease-in;
-    }
-
-    &:focus:active,
-    &:focus:active:hover {
-      animation-name: none !important;
-    }
   }
 
   &-Label {
@@ -138,15 +126,5 @@
     .Checkbox-Input:disabled ~ .Checkbox-Label {
       color: var(--color-control-typo-disable);
     }
-  }
-}
-
-@keyframes checkboxFocusAnimation {
-  from {
-    box-shadow: 0 0 0 0 var(--color-control-bg-focus), 0 0 0 0 var(--color-control-bg-active);
-  }
-
-  to {
-    box-shadow: 0 0 0 2px var(--color-control-bg-focus), 0 0 0 6px transparent;
   }
 }

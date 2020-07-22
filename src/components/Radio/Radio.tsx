@@ -2,6 +2,7 @@ import './Radio.css';
 
 import React, { ChangeEventHandler } from 'react';
 
+import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
@@ -64,7 +65,7 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>((props, ref)
       <input
         type="radio"
         name={name}
-        className={cnRadio('Input')}
+        className={cnRadio('Input', [cnMixFocus()])}
         checked={checked}
         disabled={disabled}
         onChange={handleChange}

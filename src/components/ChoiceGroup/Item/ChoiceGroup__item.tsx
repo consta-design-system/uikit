@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 
 import { IconProps, IconPropSize } from '../../../icons/Icon/Icon';
+import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
 import { getSizeByMap } from '../../../utils/getSizeByMap';
 import { BaseCheckGroupItemProps } from '../../BaseCheckGroupField/BaseCheckGroupField';
 import { ChoiceGroupPropSize, cnChoiceGroup } from '../ChoiceGroup';
@@ -48,7 +49,10 @@ export function ChoiceGroupItem<T>(props: ChoiceGroupItemProps<T>): React.ReactE
 
   return (
     <label
-      className={cnChoiceGroup('Label', { size, multiple, focus, checked }, [className])}
+      className={cnChoiceGroup('Label', { size, multiple, focus, checked }, [
+        cnMixFocus({ before: true }),
+        className,
+      ])}
       title={title}
     >
       <input
