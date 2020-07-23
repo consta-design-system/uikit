@@ -31,18 +31,6 @@
       transition: opacity 0.15s, transform 0.15s;
       transform: scale(0, 0);
     }
-
-    &:focus,
-    &:focus:hover {
-      outline: none;
-      box-shadow: 0 0 0 2px var(--color-control-bg-focus);
-      animation: radioFocusAnimation 0.5s ease-in;
-    }
-
-    &:focus:active,
-    &:focus:active:hover {
-      animation-name: none !important;
-    }
   }
 
   &-Label {
@@ -93,15 +81,5 @@
     .Radio-Input:disabled ~ .radio-Label {
       color: var(--color-control-typo-disable);
     }
-  }
-}
-
-@keyframes radioFocusAnimation {
-  from {
-    box-shadow: 0 0 0 0 var(--color-control-bg-focus), 0 0 0 0 var(--color-control-bg-active);
-  }
-
-  to {
-    box-shadow: 0 0 0 2px var(--color-control-bg-focus), 0 0 0 6px transparent;
   }
 }

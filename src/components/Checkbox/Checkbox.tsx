@@ -2,6 +2,7 @@ import './Checkbox.css';
 
 import React, { ChangeEventHandler } from 'react';
 
+import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
@@ -68,7 +69,7 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>((props
       <input
         type="checkbox"
         name={name}
-        className={cnCheckbox('Input')}
+        className={cnCheckbox('Input', [cnMixFocus()])}
         checked={checked}
         disabled={disabled}
         onChange={handleChange}

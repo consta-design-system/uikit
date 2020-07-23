@@ -3,6 +3,7 @@ import './Tabs-Tab.css';
 import React from 'react';
 
 import { IconProps, IconPropSize } from '../../../icons/Icon/Icon';
+import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
 import { getSizeByMap } from '../../../utils/getSizeByMap';
 import { BaseCheckGroupItemProps } from '../../BaseCheckGroupField/BaseCheckGroupField';
 import { cnTabs, TabsPropSize } from '../Tabs';
@@ -39,7 +40,7 @@ export function TabsTab<T>(props: TabsTabProps<T>): React.ReactElement {
 
   return (
     <button
-      className={cnTabs('Tab', { size, active: checked, onlyIcon })}
+      className={cnTabs('Tab', { size, active: checked, onlyIcon }, [cnMixFocus({ before: true })])}
       onClick={handleChange}
       ref={innerRef}
       role="tab"

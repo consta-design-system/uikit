@@ -48,17 +48,6 @@
       outline: none;
     }
 
-    &:focus::before,
-    &:focus:hover::before {
-      box-shadow: 0 0 0 3px var(--color-control-bg-focus);
-      animation: Tabs-TabFocusAnimation 0.5s ease-in;
-    }
-
-    &:focus:active::before,
-    &:focus:active:hover::before {
-      animation-name: none !important;
-    }
-
     &:not(.Tabs-Tab_onlyIcon) .Tabs-Icon {
       margin-right: calc(var(--tab-indent) * 0.5);
     }
@@ -74,15 +63,5 @@
         width: 24px;
       }
     }
-  }
-}
-
-@keyframes Tabs-TabFocusAnimation {
-  from {
-    box-shadow: 0 0 0 0 var(--color-control-bg-focus), 0 0 0 0 var(--color-control-bg-active);
-  }
-
-  to {
-    box-shadow: 0 0 0 3px var(--color-control-bg-focus), 0 0 0 6px transparent;
   }
 }

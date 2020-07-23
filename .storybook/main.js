@@ -6,6 +6,7 @@ module.exports = {
   addons: [
     'storybook-addon-themes/register',
     '@storybook/addon-knobs/register',
+    '@storybook/addon-actions/register',
     '@storybook/addon-a11y/register',
     '@storybook/addon-docs/register',
     '@storybook-addons/docs/register',
@@ -40,7 +41,7 @@ module.exports = {
         {
           loader: 'babel-loader',
           options: {
-            plugins: ['@babel/plugin-transform-react-jsx'],
+            presets: ['@babel/preset-react'],
           },
         },
         {

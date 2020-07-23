@@ -2,6 +2,7 @@ import './Switch.css';
 
 import React, { ChangeEventHandler } from 'react';
 
+import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
@@ -63,7 +64,7 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>((props, re
       <input
         type="checkbox"
         name={name}
-        className={cnSwitch('Input')}
+        className={cnSwitch('Input', [cnMixFocus()])}
         checked={checked}
         disabled={disabled}
         onChange={handleChange}

@@ -1,0 +1,54 @@
+import { Preview } from '@storybook/addon-docs/dist/blocks';
+import { TooltipPositionedByAnchorStory, TooltipPositionedByCoordsStory } from './Tooltip.stories.tsx'
+
+# Tooltip
+
+Тултип — компонент для отображения всплывающего окна возле какого-то элемента или определённой точки на экране.
+
+## Тема тултипа
+
+Содержимое тултипа использует инвертированную тему: в светлой теме тултип будет тёмным, в тёмной — светлым.
+
+## Позиционирование тултипа
+
+Для позиционирования тултипа используется компонент [Popover](?path=/docs/ui-kit-popover--popover-positioned-by-coords-story) и его способы позиционирования:
+
+1. По якорю
+<Preview>
+  <TooltipPositionedByAnchorStory />
+</Preview>
+2. По координате
+<Preview>
+  <TooltipPositionedByCoordsStory />
+</Preview>
+
+## Список свойств
+
+| Свойство            | Тип или варианты значения                     | По умолчанию              | Описание  |
+| ------------------- | --------------------------------------------- | ------------------------- | --------- |
+| anchorRef           | `React.RefObject<HTMLElement>`                | -                         | см. [Popover](?path=/docs/ui-kit-popover--popover-positioned-by-coords-story#список-свойств) |
+| position            | `{ x: number; y: number }` &#124; `undefined` | -                         | см. [Popover](?path=/docs/ui-kit-popover--popover-positioned-by-coords-story#список-свойств) |
+| size                | ``'s', 'm', 'l'`                              | -                         | Размер, влияющий на максимальную ширину тултипа |
+| children            | `React.ReactNode`                             | -                         | Контент тултипа |
+| direction?          | `Direction`                                   | `'upCenter'`              | см. [Popover](?path=/docs/ui-kit-popover--popover-positioned-by-coords-story#список-свойств) |
+| possibleDirections? | `Direction[]`                                 | все возможные Direction   | см. [Popover](?path=/docs/ui-kit-popover--popover-positioned-by-coords-story#список-свойств) |
+| isInteractive?      | `boolean`                                     | `true`                    | см. [Popover](?path=/docs/ui-kit-popover--popover-positioned-by-coords-story#список-свойств) |
+| onClickOutside?     | `(event: MouseEvent) => void`                 | -                         | см. [Popover](?path=/docs/ui-kit-popover--popover-positioned-by-coords-story#список-свойств) |
+
+
+## Пример использования
+
+### Позиционирование по координате
+```ts
+<Tooltip size="s" position={{ x: 100, y: 200 }}>
+  Контент тултипа
+</Popover>
+```
+
+### Позиционирование по якорю
+```ts
+<Button label="Открыть тултип" type="button" ref={buttonRef} />
+<Tooltip size="s" anchorRef={buttonRef}>
+  Контент тултипа
+</Popover>
+```

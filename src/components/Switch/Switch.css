@@ -57,18 +57,6 @@
       transition: transform 0.15s, background-color 0.15s;
     }
 
-    &:focus,
-    &:focus:hover {
-      outline: none;
-      box-shadow: 0 0 0 2px var(--color-control-bg-focus);
-      animation: switchFocusAnimation 0.4s ease-in;
-    }
-
-    &:focus:active,
-    &:focus:active:hover {
-      animation-name: none !important;
-    }
-
     &:checked {
       --background-color: var(--color-control-bg-primary);
       --content-color: var(--color-control-typo-primary);
@@ -120,15 +108,5 @@
     .Switch-Input:disabled ~ .switch__label {
       color: var(--color-control-typo-disable);
     }
-  }
-}
-
-@keyframes switchFocusAnimation {
-  from {
-    box-shadow: 0 0 0 0 var(--color-control-bg-focus), 0 0 0 0 var(--color-control-bg-active);
-  }
-
-  to {
-    box-shadow: 0 0 0 2px var(--color-control-bg-focus), 0 0 0 6px transparent;
   }
 }

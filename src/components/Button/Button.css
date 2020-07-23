@@ -27,18 +27,6 @@
     color: var(--color-hover);
   }
 
-  &:focus,
-  &:focus:hover {
-    outline: none;
-    box-shadow: 0 0 0 3px var(--color-control-bg-focus);
-    animation: buttonFocusAnimation 0.5s ease-in;
-  }
-
-  &:focus:active,
-  &:focus:active:hover {
-    animation-name: none !important;
-  }
-
   &_form {
     &_brick {
       border-radius: 0;
@@ -202,15 +190,5 @@
   &_loading &-Loader {
     --loaderBackgroundColor: var(--color-control-typo-disable);
     position: absolute;
-  }
-}
-
-@keyframes buttonFocusAnimation {
-  from {
-    box-shadow: 0 0 0 0 var(--color-control-bg-focus), 0 0 0 0 var(--color-control-bg-active);
-  }
-
-  to {
-    box-shadow: 0 0 0 3px var(--color-control-bg-focus), 0 0 0 6px transparent;
   }
 }
