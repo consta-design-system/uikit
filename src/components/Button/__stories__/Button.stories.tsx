@@ -5,6 +5,7 @@ import { boolean, select, text } from '@storybook/addon-knobs';
 import { IconSelect } from '../../../icons/IconSelect/IconSelect';
 import { IconUser } from '../../../icons/IconUser/IconUser';
 import { cn } from '../../../utils/bem';
+import { createMetadata } from '../../../utils/storybook';
 import { Button } from '../Button';
 
 import mdx from './Button.mdx';
@@ -61,12 +62,11 @@ export function Playground() {
   );
 }
 
-export default {
+export default createMetadata({
   title: 'Components|/Button',
-  component: Playground,
   parameters: {
     docs: {
       page: mdx,
     },
   },
-};
+});

@@ -9,10 +9,11 @@ import { IconAlert } from '../../../icons/IconAlert/IconAlert';
 import { IconProcessing } from '../../../icons/IconProcessing/IconProcessing';
 import { IconRing } from '../../../icons/IconRing/IconRing';
 import { IconThumbUp } from '../../../icons/IconThumbUp/IconThumbUp';
+import { cn } from '../../../utils/bem';
+import { createMetadata } from '../../../utils/storybook';
 import { Button } from '../../Button/Button';
 import { Item, SnackBar, SnackBarItemStatus } from '../SnackBar';
 
-import { cn } from './cn';
 import mdx from './SnackBar.mdx';
 
 const defaultKnobs = () => ({
@@ -33,7 +34,7 @@ const getItemIconByStatus = (status: SnackBarItemStatus): React.FC<IconProps> | 
   return mapIconByStatus[status];
 };
 
-const cnStories = cn('Stories');
+const cnSnackBarStories = cn('SnackBarStories');
 
 function reducer(
   state: Item[],
@@ -88,10 +89,10 @@ export function Playground() {
   React.useEffect(() => handleNormalAdd(), []);
 
   return (
-    <div className={cnStories()}>
-      <div className={cnStories('Buttons')}>
+    <div className={cnSnackBarStories()}>
+      <div className={cnSnackBarStories('Buttons')}>
         <Button
-          className={cnStories('ButtonAdd')}
+          className={cnSnackBarStories('ButtonAdd')}
           iconLeft={IconAdd}
           view="ghost"
           size="s"
@@ -100,7 +101,7 @@ export function Playground() {
           onClick={handleSuccessAdd}
         />
         <Button
-          className={cnStories('ButtonAdd')}
+          className={cnSnackBarStories('ButtonAdd')}
           iconLeft={IconAdd}
           view="ghost"
           size="s"
@@ -109,7 +110,7 @@ export function Playground() {
           onClick={handleAlertAdd}
         />
         <Button
-          className={cnStories('ButtonAdd')}
+          className={cnSnackBarStories('ButtonAdd')}
           iconLeft={IconAdd}
           view="ghost"
           size="s"
@@ -118,7 +119,7 @@ export function Playground() {
           onClick={handleWarningAdd}
         />
         <Button
-          className={cnStories('ButtonAdd')}
+          className={cnSnackBarStories('ButtonAdd')}
           iconLeft={IconAdd}
           view="ghost"
           size="s"
@@ -127,7 +128,7 @@ export function Playground() {
           onClick={handleSystemAdd}
         />
         <Button
-          className={cnStories('ButtonAdd')}
+          className={cnSnackBarStories('ButtonAdd')}
           iconLeft={IconAdd}
           view="ghost"
           size="s"
@@ -136,17 +137,16 @@ export function Playground() {
           onClick={handleNormalAdd}
         />
       </div>
-      <SnackBar className={cnStories('SnackBar')} items={items} />
+      <SnackBar className={cnSnackBarStories('SnackBar')} items={items} />
     </div>
   );
 }
 
-export default {
+export default createMetadata({
   title: 'Components|/SnackBar',
-  component: Playground,
   parameters: {
     docs: {
       page: mdx,
     },
   },
-};
+});

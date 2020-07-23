@@ -5,6 +5,7 @@ import { IconProps } from '../../../icons/Icon/Icon';
 import { IconCamera } from '../../../icons/IconCamera/IconCamera';
 import { IconPhoto } from '../../../icons/IconPhoto/IconPhoto';
 import { IconRing } from '../../../icons/IconRing/IconRing';
+import { createMetadata } from '../../../utils/storybook';
 import { Tabs } from '../Tabs';
 
 import mdx from './Tabs.mdx';
@@ -61,12 +62,11 @@ export function Playground() {
   );
 }
 
-export default {
+export default createMetadata({
   title: 'Components|/Tabs',
-  component: Playground,
   parameters: {
     docs: {
       page: mdx,
     },
   },
-};
+});

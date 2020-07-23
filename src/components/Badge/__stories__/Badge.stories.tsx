@@ -2,6 +2,7 @@ import * as React from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { IconUser } from '../../../icons/IconUser/IconUser';
+import { createMetadata } from '../../../utils/storybook';
 import { Badge } from '../Badge';
 
 import mdx from './Badge.mdx';
@@ -20,24 +21,25 @@ export function Playground() {
   const { label, size, view, status, form, minified, icon } = defaultKnobs();
 
   return (
-    <Badge
-      label={label}
-      size={size}
-      view={view}
-      status={status}
-      form={form}
-      minified={minified}
-      icon={icon ? IconUser : null}
-    />
+    <div>
+      <Badge
+        label={label}
+        size={size}
+        view={view}
+        status={status}
+        form={form}
+        minified={minified}
+        icon={icon ? IconUser : null}
+      />
+    </div>
   );
 }
 
-export default {
+export default createMetadata({
   title: 'Components|/Badge',
-  component: Playground,
   parameters: {
     docs: {
       page: mdx,
     },
   },
-};
+});

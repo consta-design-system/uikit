@@ -1,6 +1,7 @@
 import React from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
+import { createMetadata } from '../../../utils/storybook';
 import { User } from '../User';
 
 import mdx from './User.mdx';
@@ -21,15 +22,18 @@ const defaultKnobs = () => ({
 });
 
 export function Playground() {
-  return <User {...defaultKnobs()} />;
+  return (
+    <div>
+      <User {...defaultKnobs()} />
+    </div>
+  );
 }
 
-export default {
+export default createMetadata({
   title: 'Components|/User',
-  component: Playground,
   parameters: {
     docs: {
       page: mdx,
     },
   },
-};
+});

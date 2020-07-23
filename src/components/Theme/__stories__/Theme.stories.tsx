@@ -1,18 +1,19 @@
 import React from 'react';
 
-import { ThemePreview } from './ThemePreview/ThemePreview';
+import { ThemePreview } from '../../../uiKit/components/ThemePreview/ThemePreview';
+import { createMetadata } from '../../../utils/storybook';
+
 import mdx from './Theme.mdx';
 
 export function Playground() {
   return <ThemePreview />;
 }
 
-export default {
+export default createMetadata({
   title: 'Components|/Theme',
-  component: Playground,
   parameters: {
     docs: {
       page: mdx,
     },
   },
-};
+});

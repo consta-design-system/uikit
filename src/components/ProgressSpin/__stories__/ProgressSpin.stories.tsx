@@ -2,6 +2,7 @@ import * as React from 'react';
 import { boolean, number, select } from '@storybook/addon-knobs';
 
 import { cn } from '../../../utils/bem';
+import { createMetadata } from '../../../utils/storybook';
 import { ProgressSpin } from '../ProgressSpin';
 
 import mdx from './ProgressSpin.mdx';
@@ -24,12 +25,11 @@ export function Playground() {
   );
 }
 
-export default {
+export default createMetadata({
   title: 'Components|/ProgressSpin',
-  component: Playground,
   parameters: {
     docs: {
       page: mdx,
     },
   },
-};
+});

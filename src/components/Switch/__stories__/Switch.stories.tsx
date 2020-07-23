@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
+import { createMetadata } from '../../../utils/storybook';
 import { Switch } from '../Switch';
 
 import mdx from './Switch.mdx';
@@ -33,12 +34,11 @@ export function Playground() {
   );
 }
 
-export default {
+export default createMetadata({
   title: 'Components|/Switch',
-  component: Playground,
   parameters: {
     docs: {
       page: mdx,
     },
   },
-};
+});

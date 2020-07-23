@@ -1,26 +1,33 @@
 import { Meta, Preview, Story } from '@storybook/addon-docs/dist/blocks';
-import { Button } from '../Button';
-import {
-  ExampleNameSemantics,
-  ExampleNameVerb,
-  ExampleNameNavigation,
-  ExampleNameSingleLine,
-  ExampleNameAgreement,
-  ExampleNameOverflow,
-} from './examples/ExampleName/ExampleName';
-import {
-  ExampleViewPrimary,
-  ExampleViewSecondary,
-  ExampleViewGhost,
-  ExampleViewClear,
-  ExampleViewDisabled,
-} from './examples/ExampleView/ExampleView';
-import { ExampleFormBasic, ExampleFormHybrid } from './examples/ExampleForm/ExampleForm';
-import { ExampleSizeBasic, ExampleSizeFull } from './examples/ExampleSize/ExampleSize';
-import { ExampleIconBasic, ExampleIconOnly } from './examples/ExampleIcon/ExampleIcon';
-import { ExampleLoading } from './examples/ExampleLoading/ExampleLoading';
 
-<Meta title="MDX/Button" component={Button} />
+import {
+  ButtonExampleNameSemantics,
+  ButtonExampleNameVerb,
+  ButtonExampleNameNavigation,
+  ButtonExampleNameSingleLine,
+  ButtonExampleNameAgreement,
+  ButtonExampleNameOverflow,
+} from './examples/ButtonExampleName/ButtonExampleName';
+import {
+  ButtonExampleViewPrimary,
+  ButtonExampleViewSecondary,
+  ButtonExampleViewGhost,
+  ButtonExampleViewClear,
+  ButtonExampleViewDisabled,
+} from './examples/ButtonExampleView/ButtonExampleView';
+import {
+  ButtonExampleFormBasic,
+  ButtonExampleFormHybrid,
+} from './examples/ButtonExampleForm/ButtonExampleForm';
+import {
+  ButtonExampleSizeBasic,
+  ButtonExampleSizeFull,
+} from './examples/ButtonExampleSize/ButtonExampleSize';
+import {
+  ButtonExampleIconBasic,
+  ButtonExampleIconOnly,
+} from './examples/ButtonExampleIcon/ButtonExampleIcon';
+import { ButtonExampleLoading } from './examples/ButtonExampleLoading/ButtonExampleLoading';
 
 # Button
 
@@ -50,34 +57,34 @@ import { ExampleLoading } from './examples/ExampleLoading/ExampleLoading';
 Почти всегда для текста на кнопке подходит инфинитив глагола совершенного вида
 (отвечает на вопрос «Что сделать?») Вот такой: **Сохранить**, **Купить**, **Отправить**.
 
-<ExampleNameVerb />
+<ButtonExampleNameVerb />
 
 Иногда глаголы не подходят (но редко). Например, если кнопки нужны для навигации.
 
-<ExampleNameNavigation />
+<ButtonExampleNameNavigation />
 
 Или когда с помощью кнопки человек выражает согласие, отношение или подтверждает, что
 прочитал текст.
 
-<ExampleNameAgreement />
+<ButtonExampleNameAgreement />
 
 #### Как можно точнее
 
 Не используйте общие слова, когда кнопка отвечает за конкретное действие.
 
-<ExampleNameSemantics />
+<ButtonExampleNameSemantics />
 
 #### Как можно короче
 
 Две строки — плохо. Сделайте кнопку шире или поменяйте название.
 
-<ExampleNameSingleLine />
+<ButtonExampleNameSingleLine />
 
 Многоточие вместо части названия — плохо. Если название не влезает на кнопку
 при маленьких разрешениях экрана, попробуйте сократить, подобрать другое или
 используйте только иконку.
 
-<ExampleNameOverflow />
+<ButtonExampleNameOverflow />
 
 ### Типы кнопок
 
@@ -90,7 +97,7 @@ import { ExampleLoading } from './examples/ExampleLoading/ExampleLoading';
 
 Это основной тип кнопки (используется по умолчанию). Если на странице одна кнопка, используйте такую. Если несколько, оставьте кнопку `primary` для самого важного, «целевого» действия, на котором нужно сделать акцент. Постарайтесь использовать одну кнопку `primary` на странице или в блоке.
 
-<ExampleViewPrimary />
+<ButtonExampleViewPrimary />
 
 ```ts
 <Button label="Войти" />
@@ -102,7 +109,7 @@ import { ExampleLoading } from './examples/ExampleLoading/ExampleLoading';
 
 Эта кнопка похожа на `primary`, но не так сильно выделяется. Используйте её, когда хотите сохранить важность действия, но не слишком привлекать к нему внимание.
 
-<ExampleViewSecondary />
+<ButtonExampleViewSecondary />
 
 ```ts
 <Button label="Читать далее" view="secondary" />
@@ -114,7 +121,7 @@ import { ExampleLoading } from './examples/ExampleLoading/ExampleLoading';
 
 Это второстепенная или дополнительная кнопка. Часто используется в паре с основной кнопкой и обозначает альтернативное, не главное действие. Например, если есть основная кнопка **Подвтердить**, в паре с ней можно поставить кнопку `ghost` с текстом **Отменить**. Также может использоваться для не очень важных действий, к которым не хочется привлекать внимание.
 
-<ExampleViewGhost />
+<ButtonExampleViewGhost />
 
 ```ts
 <Button label="Отмена" view="ghost" />
@@ -126,7 +133,7 @@ import { ExampleLoading } from './examples/ExampleLoading/ExampleLoading';
 
 Это полноценная кнопка с прозрачным фоном. Используйте её, когда внимание пользователя должно быть сосредоточено на более важных компонентах. Также эти кнопки удобно использовать в списке кнопок-иконок без текста или для обозначения самых незначительных действий.
 
-<ExampleViewClear />
+<ButtonExampleViewClear />
 
 ```ts
 <Button label="Развернуть" view="clear" />
@@ -138,7 +145,7 @@ import { ExampleLoading } from './examples/ExampleLoading/ExampleLoading';
 
 Это свойство блокирует кнопку — её невозможно нажать. Его можно применить к кнопке любого типа. Используйте `disabled` в тех случаях, когда пользователь не может нажать на кнопку из-за каких-то условий. Например, пока не напишет логин и пароль для входа в аккаунт или не заполнит все обязательные поля в форме.
 
-<ExampleViewDisabled />
+<ButtonExampleViewDisabled />
 
 ```ts
 <Button label="Войти" disabled />
@@ -150,7 +157,7 @@ import { ExampleLoading } from './examples/ExampleLoading/ExampleLoading';
 
 В дизайн-системе четыре размера кнопок: `xs`, `s`, `m` и `l`. За размер кнопок отвечает свойство `size`, оно определяет высоту кнопки. Ширина кнопки задается размером контента внутри нее и стандартными отступами.
 
-<ExampleSizeBasic />
+<ButtonExampleSizeBasic />
 
 ```ts
 <Button label="Размер XS" size="xs" />
@@ -164,7 +171,7 @@ import { ExampleLoading } from './examples/ExampleLoading/ExampleLoading';
 Вы можете сделать ширину кнопки равной 100% от ширины родительского
 контейнера. Для этого используйте свойство `width` со значением `full`.
 
-<ExampleSizeFull />
+<ButtonExampleSizeFull />
 
 ```ts
 <Button label="Отправить" width="full" />
@@ -174,7 +181,7 @@ import { ExampleLoading } from './examples/ExampleLoading/ExampleLoading';
 
 Название кнопки можно дополнять иконкой. Она поможет быстрее найти нужную кнопку в ряду других и быстрее понять, что эта кнопка делает. За иконку отвечают свойства `iconLeft` (ставит иконку слева от текста на кнопке) или `iconRight` (ставит иконку справа). Оба эти свойства ожидают компонент иконки из нашей [библиотеки иконок](?path=/docsx/icons--icons).
 
-<ExampleIconBasic />
+<ButtonExampleIconBasic />
 
 ```ts
 <Button label="Назад" iconLeft={IconBackward} />
@@ -187,7 +194,7 @@ import { ExampleLoading } from './examples/ExampleLoading/ExampleLoading';
 
 Кнопка может состоять только из иконки. Такие кнопки экономят место и позволяют разместить рядом много похожих кнопок. Например, кнопки для выбора даты или фильтров. Для создания такой кнопки используйте свойство `onlyIcon` в паре с `iconLeft` или `iconRight`.
 
-<ExampleIconOnly />
+<ButtonExampleIconOnly />
 
 ```ts
 <Button label="Назад" view="ghost" iconLeft={IconHamburger} onlyIcon />
@@ -212,7 +219,7 @@ import { ExampleLoading } from './examples/ExampleLoading/ExampleLoading';
 
 За форму кнопки отвечает свойство `form`. По умолчанию у кнопок скругленные края (значение `default`), а ещё кнопки могут быть квадратными `brick` и круглыми `round`.
 
-<ExampleFormBasic />
+<ButtonExampleFormBasic />
 
 ```ts
 <Button label="Default" />
@@ -226,7 +233,7 @@ import { ExampleLoading } from './examples/ExampleLoading/ExampleLoading';
 
 В этом примере свойство `form` у кнопки равно `brick-round`.
 
-<ExampleFormHybrid />
+<ButtonExampleFormHybrid />
 
 ```ts
 <div style={{display: 'flex}} >
@@ -239,7 +246,7 @@ import { ExampleLoading } from './examples/ExampleLoading/ExampleLoading';
 
 Если после нажатия на кнопку пользователь ждет какого-то результата, в кнопке можно отобразить прелоадер. Для этого используйте свойство `loading`.
 
-<ExampleLoading />
+<ButtonExampleLoading />
 
 ```ts
 <Button label="Загрузка" loading />

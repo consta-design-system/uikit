@@ -2,6 +2,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
+import { createMetadata } from '../../../utils/storybook';
 import { Radio } from '../Radio';
 
 import mdx from './Radio.mdx';
@@ -29,12 +30,11 @@ export function Playground() {
   );
 }
 
-export default {
+export default createMetadata({
   title: 'Components|/Radio',
-  component: Playground,
   parameters: {
     docs: {
       page: mdx,
     },
   },
-};
+});

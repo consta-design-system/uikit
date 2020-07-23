@@ -2,6 +2,7 @@ import * as React from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { IconLeaf } from '../../../icons/IconLeaf/IconLeaf';
+import { createMetadata } from '../../../utils/storybook';
 import { Informer } from '../Informer';
 
 import mdx from './Informer.mdx';
@@ -28,7 +29,7 @@ export function Playground() {
   );
 }
 
-export default {
+export default createMetadata({
   title: 'Components|/Informer',
   component: Playground,
   parameters: {
@@ -36,4 +37,4 @@ export default {
       page: mdx,
     },
   },
-};
+});

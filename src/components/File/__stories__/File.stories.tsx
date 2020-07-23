@@ -3,6 +3,7 @@ import { boolean, number, select, text } from '@storybook/addon-knobs';
 
 import { FileIconsGallery } from '../../../fileIcons/FileIcon/__stories__/FileIconsGallery/FileIconsGallery';
 import { cn } from '../../../utils/bem';
+import { createMetadata } from '../../../utils/storybook';
 import { File } from '../File';
 
 import mdx from './File.mdx';
@@ -35,7 +36,7 @@ export function Playground() {
 
 export const Gallery = FileIconsGallery;
 
-export default {
+export default createMetadata({
   title: 'Components|/File',
   component: Playground,
   parameters: {
@@ -43,4 +44,4 @@ export default {
       page: mdx,
     },
   },
-};
+});

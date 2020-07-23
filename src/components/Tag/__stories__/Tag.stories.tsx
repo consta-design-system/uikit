@@ -3,6 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { IconAttach } from '../../../icons/IconAttach/IconAttach';
+import { createMetadata } from '../../../utils/storybook';
 import { Tag } from '../Tag';
 
 import mdx from './Tag.mdx';
@@ -21,57 +22,55 @@ export function Playground() {
   const group = typeof groupProp === 'number' ? groupProp : undefined;
   const Icon = icon && IconAttach;
 
-  if (mode === 'check') {
-    return (
-      <Tag
-        mode="check"
-        label={label}
-        size={size}
-        checked={checked}
-        onChange={({ checked }) => setChecked(checked)}
-        group={group}
-        icon={Icon}
-      />
-    );
+  function getTag() {
+    switch (mode) {
+      case 'check':
+        return (
+          <Tag
+            mode={mode}
+            label={label}
+            size={size}
+            checked={checked}
+            onChange={({ checked }) => setChecked(checked)}
+            group={group}
+            icon={Icon}
+          />
+        );
+      case 'cancel':
+        return (
+          <Tag
+            mode={mode}
+            label={label}
+            size={size}
+            onCancel={action('onCancel')}
+            group={group}
+            icon={Icon}
+          />
+        );
+      case 'button':
+        return (
+          <Tag
+            mode={mode}
+            label={label}
+            size={size}
+            onClick={action('onClick')}
+            group={group}
+            icon={Icon}
+          />
+        );
+      case 'link':
+        return <Tag mode={mode} href="#" label={label} size={size} group={group} icon={Icon} />;
+    }
   }
 
-  if (mode === 'cancel') {
-    return (
-      <Tag
-        mode="cancel"
-        label={label}
-        size={size}
-        onCancel={action('onCancel')}
-        group={group}
-        icon={Icon}
-      />
-    );
-  }
-
-  if (mode === 'button') {
-    return (
-      <Tag
-        mode="button"
-        label={label}
-        size={size}
-        onClick={action('onClick')}
-        group={group}
-        icon={Icon}
-      />
-    );
-  }
-
-  if (mode === 'link') {
-    return <Tag mode="link" href="#" label={label} size={size} group={group} icon={Icon} />;
-  }
+  return <div>{getTag()}</div>;
 }
 
-export default {
+export default createMetadata({
   title: 'Components|/Tag',
-  component: Playground,
   parameters: {
     docs: {
       page: mdx,
     },
   },
-};
+});

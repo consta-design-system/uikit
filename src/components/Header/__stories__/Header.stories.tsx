@@ -1,12 +1,13 @@
 import React from 'react';
 
+import { createMetadata } from '../../../utils/storybook';
 import { Text } from '../../Text/Text';
 
-import { FullExample } from './examples/FullExample/FullExample';
-import { MinifyLoginExample } from './examples/MinifyLoginExample/MinifyLoginExample';
-import { WithLogoExample } from './examples/WithLogoExample/WithLogoExample';
-import { WithoutMenuExample } from './examples/WithoutMenuExample/WithoutMenuExample';
-import { WithoutSearchExample } from './examples/WithoutSearchExample/WithoutSearchExample';
+import { HeaderFullExample } from './examples/HeaderFullExample/HeaderFullExample';
+import { HeaderMinifyLoginExample } from './examples/HeaderMinifyLoginExample/HeaderMinifyLoginExample';
+import { HeaderWithLogoExample } from './examples/HeaderWithLogoExample/HeaderWithLogoExample';
+import { HeaderWithoutMenuExample } from './examples/HeaderWithoutMenuExample/HeaderWithoutMenuExample';
+import { HeaderWithoutSearchExample } from './examples/HeaderWithoutSearchExample/HeaderWithoutSearchExample';
 import mdx from './Header.mdx';
 
 export function Playground() {
@@ -15,33 +16,32 @@ export function Playground() {
       <Text size="3xl" lineHeight="l">
         Полный
       </Text>
-      <FullExample />
+      <HeaderFullExample />
       <Text size="3xl" lineHeight="l">
         Без поиска
       </Text>
-      <WithoutSearchExample />
+      <HeaderWithoutSearchExample />
       <Text size="3xl" lineHeight="l">
         С минилогином
       </Text>
-      <MinifyLoginExample />
+      <HeaderMinifyLoginExample />
       <Text size="3xl" lineHeight="l">
         Без меню
       </Text>
-      <WithoutMenuExample />
+      <HeaderWithoutMenuExample />
       <Text size="3xl" lineHeight="l">
         С уникальным лого
       </Text>
-      <WithLogoExample />
+      <HeaderWithLogoExample />
     </div>
   );
 }
 
-export default {
+export default createMetadata({
   title: 'Components|/Header',
-  component: Playground,
   parameters: {
     docs: {
       page: mdx,
     },
   },
-};
+});

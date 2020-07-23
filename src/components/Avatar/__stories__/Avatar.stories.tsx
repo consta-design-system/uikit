@@ -2,6 +2,7 @@ import * as React from 'react';
 import { select, text } from '@storybook/addon-knobs';
 
 import { cn } from '../../../utils/bem';
+import { createMetadata } from '../../../utils/storybook';
 import { Avatar } from '../Avatar';
 
 import mdx from './Avatar.mdx';
@@ -25,12 +26,11 @@ export function Playground() {
   );
 }
 
-export default {
+export default createMetadata({
   title: 'Components|/Avatar',
-  component: Playground,
   parameters: {
     docs: {
       page: mdx,
     },
   },
-};
+});

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { select, text } from '@storybook/addon-knobs';
 
+import { createMetadata } from '../../../utils/storybook';
 import { Text } from '../Text';
 
 import mdx from './Text.mdx';
@@ -72,12 +73,11 @@ export function Playground() {
   );
 }
 
-export default {
+export default createMetadata({
   title: 'Components|/Text',
-  component: Playground,
   parameters: {
     docs: {
       page: mdx,
     },
   },
-};
+});

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { select } from '@storybook/addon-knobs';
 
+import { createMetadata } from '../../../utils/storybook';
 import { Loader } from '../Loader';
 
 import mdx from './Loader.mdx';
@@ -15,12 +16,11 @@ export function Playground() {
   return <Loader size={size} />;
 }
 
-export default {
+export default createMetadata({
   title: 'Components|/Loader',
-  component: Playground,
   parameters: {
     docs: {
       page: mdx,
     },
   },
-};
+});

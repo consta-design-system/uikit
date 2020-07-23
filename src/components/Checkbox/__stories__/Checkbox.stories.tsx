@@ -2,6 +2,7 @@ import * as React from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { cn } from '../../../utils/bem';
+import { createMetadata } from '../../../utils/storybook';
 import { Checkbox } from '../Checkbox';
 
 import mdx from './Checkbox.mdx';
@@ -36,12 +37,11 @@ export function Playground() {
   );
 }
 
-export default {
+export default createMetadata({
   title: 'Components|/Checkbox',
-  component: Playground,
   parameters: {
     docs: {
       page: mdx,
     },
   },
-};
+});

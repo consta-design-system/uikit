@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { boolean, number, select, text } from '@storybook/addon-knobs';
 
 import { IconPhoto } from '../../../icons/IconPhoto/IconPhoto';
+import { createMetadata } from '../../../utils/storybook';
 import { TextField } from '../TextField';
 
 import mdx from './TextField.mdx';
@@ -80,32 +81,33 @@ export function Playground() {
   };
 
   return (
-    <TextField
-      value={value}
-      width={width}
-      form={form}
-      state={state || undefined}
-      size={size}
-      view={view}
-      type={type}
-      maxLength={maxLength}
-      minRows={minRows}
-      maxRows={maxRows}
-      placeholder={placeholder}
-      onChange={handleChange}
-      leftSide={leftSide}
-      rightSide={rightSide}
-      disabled={disabled}
-    />
+    <div>
+      <TextField
+        value={value}
+        width={width}
+        form={form}
+        state={state || undefined}
+        size={size}
+        view={view}
+        type={type}
+        maxLength={maxLength}
+        minRows={minRows}
+        maxRows={maxRows}
+        placeholder={placeholder}
+        onChange={handleChange}
+        leftSide={leftSide}
+        rightSide={rightSide}
+        disabled={disabled}
+      />
+    </div>
   );
 }
 
-export default {
+export default createMetadata({
   title: 'Components|/TextField',
-  component: Playground,
   parameters: {
     docs: {
       page: mdx,
     },
   },
-};
+});

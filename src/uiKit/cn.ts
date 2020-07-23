@@ -1,3 +1,3 @@
-import { withNaming } from '@bem-react/classname';
+import { withPrefix } from '../utils/bem';
 
-export const cn = withNaming({ n: 'UiKit--', e: '-', m: '_', v: '_' });
+export const cn = withPrefix('UiKit');

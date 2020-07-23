@@ -4,10 +4,11 @@ import * as React from 'react';
 import { boolean, number, text } from '@storybook/addon-knobs';
 
 import { IconTrash } from '../../../icons/IconTrash/IconTrash';
+import { cn } from '../../../utils/bem';
+import { createMetadata } from '../../../utils/storybook';
 import { Attach } from '../Attach';
 
 import mdx from './Attach.mdx';
-import { cn } from './cn';
 
 const defaultKnobs = () => ({
   fileName: text('fileName', 'Приложенный документ'),
@@ -20,7 +21,7 @@ const defaultKnobs = () => ({
   withButtonAction: boolean('withButtonAction', false),
 });
 
-const cnStories = cn('Stories');
+const cnAttachStories = cn('AttachStories');
 
 export function Playground() {
   const {
@@ -35,7 +36,7 @@ export function Playground() {
   } = defaultKnobs();
 
   return (
-    <div className={cnStories()}>
+    <div className={cnAttachStories()}>
       <Attach
         loading={loading}
         loadingText={loadingText}
@@ -58,12 +59,11 @@ export function Playground() {
   );
 }
 
-export default {
+export default createMetadata({
   title: 'Components|/Attach',
-  component: Playground,
   parameters: {
     docs: {
       page: mdx,
     },
   },
-};
+});
