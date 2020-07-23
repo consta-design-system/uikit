@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.5.0 (23/07/2020)
+
+- [feat(MixFocus): add MixFocus (#250)](https://github.com/gpn-prototypes/ui-kit/commit/82267bc5f8fbe7fb23fa32b827cc7d4c3c7f4d1b) - @gizeasy
+- [feat(Tooltip): add Tooltip component](https://github.com/gpn-prototypes/ui-kit/commit/d37c45a30e39f14a61408a49dacfa8ac4fe6c22c) - @nekitk
+- [feat(Popover): add Popover component](https://github.com/gpn-prototypes/ui-kit/commit/be4212c2f17df2661fa3d94e4815708a5a0ec0ed) - @nekitk
+- [feat(Tag): add component Tag (#243)](https://github.com/gpn-prototypes/ui-kit/commit/2ff54bed36e46a6752ee7b9a4b4a2155998e5179) - @gizeasy
+- [feat(Icons): add IconDisconnection and IconRestart (#260)](https://github.com/gpn-prototypes/ui-kit/commit/b3ecce80e675c9fe61051a6a320cbdc29845d7b7) - @fooontic
+- [chore(Travis): run unit tests (#249)](https://github.com/gpn-prototypes/ui-kit/commit/b79c6fe1cdd573eca4c935427271294095fcbd4e) - @nekitk
+- [refactor(components): removed unused components (#247)](https://github.com/gpn-prototypes/ui-kit/commit/ba6e9cfbec116be8b410a4fa9f37236bc234ec81) - @nekitk
+
+---
+
 ## v1.4.1 (15/07/2020)
 
 docs(button): add new docs for button - @fooontic
