@@ -1,7 +1,6 @@
 import './Avatar.css';
 
 import React, { useMemo } from 'react';
-import random from 'lodash/random';
 
 import { cn } from '../../utils/bem';
 import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
@@ -21,6 +20,10 @@ export const cnAvatar = cn('Avatar');
 
 const MAX_COLOR_INDEX = 17;
 
+function getRandomInt(max: number) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
 export const getColorIndexForName = (
   name: string | undefined,
   maxIndex: number | undefined = MAX_COLOR_INDEX,
@@ -34,7 +37,7 @@ export const getColorIndexForName = (
         .map((c) => c.charCodeAt(0))
         .reduce((acc, code) => acc + code, 0) % maxIndex;
   } else {
-    index = random(0, maxIndex);
+    index = getRandomInt(maxIndex);
   }
 
   return index;

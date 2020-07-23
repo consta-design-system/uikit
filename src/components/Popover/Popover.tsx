@@ -1,5 +1,4 @@
 import React from 'react';
-import isFunction from 'lodash/isFunction';
 
 import { ClickOutsideHandler, useClickOutside } from '../../hooks/useClickOutside/useClickOutside';
 import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
@@ -47,15 +46,21 @@ export type PositioningProps =
       position: Position;
     };
 
+type ChildrenRenderProp = (direction: Direction) => React.ReactNode;
+
 export type Props = {
   direction?: Direction;
   offset?: number;
   arrowOffset?: number;
   possibleDirections?: readonly Direction[];
   isInteractive?: boolean;
-  children: React.ReactNode | ((direction: Direction) => React.ReactNode);
+  children: React.ReactNode | ChildrenRenderProp;
   onClickOutside?: ClickOutsideHandler;
 } & PositioningProps;
+
+const isRenderProp = (
+  children: React.ReactNode | ChildrenRenderProp,
+): children is ChildrenRenderProp => typeof children === 'function';
 
 export const Popover: React.FC<Props> = (props) => {
   const {
@@ -138,7 +143,7 @@ export const Popover: React.FC<Props> = (props) => {
   // Главное не сбрасывать при изменении размеров поповера, т.к. именно оно может вызвать бесконечный перебор
   React.useLayoutEffect(resetBannedDirections, [props]);
 
-  const content = isFunction(children) ? children(direction) : children;
+  const content = isRenderProp(children) ? children(direction) : children;
 
   return (
     <PortalWithTheme
