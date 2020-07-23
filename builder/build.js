@@ -80,7 +80,6 @@ class GenerateCommand extends Command {
     this.log(logSymbols.success, 'ES-Modules compiled to commonJS');
 
     try {
-      // TODO: separate commands
       await copyPackageJson(distPath);
       await Promise.all([
         transformCSS(ignore, srcPath, [distSrc, distEsSrc], {
@@ -94,6 +93,12 @@ class GenerateCommand extends Command {
       ]);
       await generateReExports(ignore, srcPath, [jsSrc, esSrc], distPath).then(() =>
         this.log(logSymbols.success, 'components reExports generated!'),
+      );
+      await generateReExports(ignore, srcPath, [jsSrc, esSrc], distPath, 'mixs').then(() =>
+        this.log(logSymbols.success, 'mixs reExports generated!'),
+      );
+      await generateReExports(ignore, srcPath, [jsSrc, esSrc], distPath, 'hooks').then(() =>
+        this.log(logSymbols.success, 'hooks reExports generated!'),
       );
       await generateReExports(ignore, srcPath, [jsSrc, esSrc], distPath, 'icons').then(() =>
         this.log(logSymbols.success, 'icons reExports generated!'),

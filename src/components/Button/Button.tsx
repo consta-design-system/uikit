@@ -3,6 +3,7 @@ import './Button.css';
 import React from 'react';
 
 import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
+import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
 import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
@@ -96,7 +97,7 @@ export const Button: ComponentWithAs<Props, 'button'> = forwardRefWithAs<Props>(
           withIcon,
           onlyIcon: !!IconOnly,
         },
-        [className],
+        [cnMixFocus(), className],
       )}
       tabIndex={tabIndex}
       title={title}

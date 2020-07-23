@@ -9,6 +9,9 @@ code {
 }
 
 .UiKit--StoryBookRootDecorator {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
   min-height: 100vh;
   padding: var(--space-3xl);
   background: var(--color-bg-default);
