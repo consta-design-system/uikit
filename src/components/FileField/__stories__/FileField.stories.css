@@ -1,0 +1,5 @@
+.FileFieldStories--Stories {
+  &-FieldLabel {
+    margin-bottom: var(--space-xs);
+  }
+}
