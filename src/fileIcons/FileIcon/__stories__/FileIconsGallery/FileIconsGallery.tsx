@@ -32,27 +32,27 @@ const defaultKnobs = () => ({
 
 const icons = {
   FileIconAvi,
-  FileIconCsv,
   FileIconBmp,
+  FileIconCsv,
   FileIconDoc,
   FileIconExe,
-  FileIconJpg,
   FileIconGif,
+  FileIconJpg,
   FileIconLoading,
   FileIconMov,
   FileIconMp3,
   FileIconPdf,
   FileIconMp4,
   FileIconPng,
-  FileIconPtt,
   FileIconRar,
+  FileIconPtt,
   FileIconRtf,
   FileIconTiff,
   FileIconTxt,
-  FileIconUndefined,
   FileIconWav,
   FileIconXls,
   FileIconZip,
+  FileIconUndefined,
 } as const;
 
 type Names = keyof typeof icons;
