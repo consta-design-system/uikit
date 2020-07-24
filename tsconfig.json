@@ -26,11 +26,11 @@
   "include": ["./src/**/*"],
   "exclude": [
     "node_modules",
-    "./src/__tests__/*",
-    "./src/storybook-features/*",
     "./src/**/*.stories/**",
     "./src/**/*.stories.*",
-    "./src/themes/*",
-    "./src/uiKit/*"
+    "./src/**/*.test.*",
+    "./src/**/__tests__/**",
+    "./src/**/__stories__/**",
+    "./src/uiKit/**"
   ]
 }

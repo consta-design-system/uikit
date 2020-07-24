@@ -9,7 +9,7 @@ import {
   Theme,
   ThemePreset,
 } from '../../../components/Theme/Theme';
-import { cn } from '../../../utils/bem';
+import { cn } from '../../cn';
 
 type ThemeName = 'gpnDefault' | 'gpnDark' | 'gpnDisplay';
 type StoryBookRootDecoratorProps = {
