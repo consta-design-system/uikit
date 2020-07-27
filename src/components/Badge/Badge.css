@@ -4,7 +4,7 @@
   box-sizing: border-box;
   height: var(--badge-size);
   font-size: var(--badge-text-size);
-  font-weight: 500;
+  font-weight: 600;
   line-height: var(--badge-size);
   white-space: nowrap;
   text-decoration: none;
@@ -91,7 +91,7 @@
 
       &.Badge_status {
         &_system {
-          --badge-text-color: var(--color-typo-secondary);
+          color: var(--color-typo-secondary);
         }
       }
     }
