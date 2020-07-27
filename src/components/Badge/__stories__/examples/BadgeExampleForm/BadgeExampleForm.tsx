@@ -4,10 +4,9 @@ import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/D
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Badge } from '../../../Badge';
 
-export const BadgeExampleSize = () => (
+export const BadgeExampleForm = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
-    <Badge size="s" label="Badge s" />
-    <Badge size="m" label="Badge m" />
-    <Badge size="l" label="Badge l" />
+    <Badge form="default" label="Default badge" />
+    <Badge form="round" label="Round badge" />
   </StoryBookExample>
 );

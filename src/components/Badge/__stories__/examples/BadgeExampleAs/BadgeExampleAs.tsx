@@ -6,6 +6,6 @@ import { Badge } from '../../../Badge';
 
 export const BadgeExampleAs = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
-    <Badge as="a" href="#" label="Badge" />
+    <Badge as="a" href="#" label="Я ссылка, которая притворяется бейджиком" />
   </StoryBookExample>
 );

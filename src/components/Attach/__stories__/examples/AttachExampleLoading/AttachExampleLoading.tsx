@@ -13,7 +13,7 @@ export function AttachExampleLoading() {
     <div className={cnDocsDecorator('Section')}>
       <Attach
         className={cnAttachExampleLoading()}
-        fileName="Документация"
+        fileName="Инструкция по сборке марсохода"
         fileExtension="docx"
         fileDescription="1,5 Mб 21.02.2020, 14:12"
         loadingText="Загрузка"

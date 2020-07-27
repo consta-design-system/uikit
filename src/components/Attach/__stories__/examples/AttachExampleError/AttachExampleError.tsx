@@ -11,12 +11,22 @@ const cnAttachExampleError = cn('AttachExampleError');
 export function AttachExampleError() {
   return (
     <div className={cnDocsDecorator('Section')}>
-      <Attach
-        className={cnAttachExampleError()}
-        fileName="Документация"
-        fileExtension="docx"
-        errorText="Ошибка: Файл не возможно загрузить"
-      />
+      <div>
+        <Attach
+          className={cnAttachExampleError()}
+          fileName="Марсианский закат"
+          fileExtension="jpg"
+          errorText="Фотография не загрузилась"
+        />
+      </div>
+      <div>
+        <Attach
+          className={cnAttachExampleError()}
+          fileName="Марсианский закат"
+          fileExtension="jpg"
+          errorText="Файл слишком большой, максимум 100 ТБ"
+        />
+      </div>
     </div>
   );
 }

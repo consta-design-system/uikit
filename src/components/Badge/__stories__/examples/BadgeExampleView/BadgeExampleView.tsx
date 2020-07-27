@@ -6,7 +6,7 @@ import { Badge } from '../../../Badge';
 
 export const BadgeExampleView = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
-    <Badge view="filled" label="Badge" />
-    <Badge view="stroked" label="Badge" />
+    <Badge view="filled" label="Filled badge" />
+    <Badge view="stroked" label="Stroked badge" />
   </StoryBookExample>
 );

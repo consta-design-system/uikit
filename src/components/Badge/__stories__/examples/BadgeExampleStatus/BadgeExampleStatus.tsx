@@ -6,10 +6,10 @@ import { Badge } from '../../../Badge';
 
 export const BadgeExampleStatus = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
-    <Badge status="success" label="Badge" />
-    <Badge status="error" label="Badge" />
-    <Badge status="warning" label="Badge" />
-    <Badge status="normal" label="Badge" />
-    <Badge status="system" label="Badge" />
+    <Badge status="normal" label="Новый" />
+    <Badge status="success" label="Сойдёт" />
+    <Badge status="error" label="Отстой" />
+    <Badge status="warning" label="На проверке" />
+    <Badge status="system" label="Черновик" />
   </StoryBookExample>
 );

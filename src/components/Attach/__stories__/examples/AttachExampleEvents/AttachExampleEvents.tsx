@@ -14,7 +14,7 @@ export function AttachExampleEvents() {
     <div className={cnDocsDecorator('Section')}>
       <Attach
         className={cnAttachExampleEvents()}
-        fileName="Документация"
+        fileName="my_tale_about_mars_final_last_12"
         fileExtension="docx"
         fileDescription="1,5 Mб 21.02.2020, 14:12"
         loadingText="Загрузка"

@@ -6,6 +6,7 @@ import { Badge } from '../../../Badge';
 
 export const BadgeExampleMinified = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
-    <Badge minified label="Badge" />
+    <Badge minified status="error" label="Стойте" />
+    <Badge minified status="success" label="Идите" />
   </StoryBookExample>
 );
