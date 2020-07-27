@@ -8,7 +8,7 @@ import mdx from './Switch.mdx';
 
 const defaultKnobs = () => ({
   disabled: boolean('disabled', false),
-  size: select('size', ['m', 'l'], 'm'),
+  size: select('size', ['s', 'm', 'l'], 'm'),
   label: text('label', 'Move me, I beg you!'),
 });
 

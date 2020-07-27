@@ -6,8 +6,18 @@
   cursor: pointer;
 
   &_size {
+    &_s {
+      --box-width: 28px;
+      --box-height: 16px;
+      --switch-font-size: var(--control-text-size-s);
+      --offset: var(--space-xs);
+
+      .Switch-Input::before {
+        transform: translateX(-12px);
+      }
+    }
+
     &_m {
-      --switch-height: var(--control-height-m);
       --box-width: 36px;
       --box-height: 20px;
       --switch-font-size: var(--control-text-size-m);
@@ -19,7 +29,6 @@
     }
 
     &_l {
-      --switch-height: var(--control-height-m);
       --box-width: 44px;
       --box-height: 24px;
       --switch-font-size: var(--control-text-size-l);
