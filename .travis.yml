@@ -1,16 +1,6 @@
 language: node_js
 node_js:
-  - node
+  - 12
 script:
-  - yarn test
+  - yarn run test
   - yarn run build
-before_deploy:
-  - yarn run build:storybook
-deploy:
-  provider: pages
-  skip_cleanup: true
-  local_dir: build/storybook
-  github_token: $GITHUB_TOKEN
-  on:
-    branch: master
-    node_js: 'node'

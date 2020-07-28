@@ -6,7 +6,7 @@ import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
-export type SwitchPropSize = 'm' | 'l';
+export type SwitchPropSize = 's' | 'm' | 'l';
 
 export type SwitchPropOnChange = (object: {
   e: React.ChangeEvent<HTMLInputElement>;
