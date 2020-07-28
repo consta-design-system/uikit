@@ -1,6 +1,6 @@
 import './TextField.css';
 
-import React, { FocusEvent, useState } from 'react';
+import React, { useState } from 'react';
 import TextAreaAutoSize from 'react-textarea-autosize';
 
 import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
@@ -56,8 +56,8 @@ type Props = {
   form?: TextFieldPropForm;
   state?: TextFieldPropState;
   width?: TextFieldPropWidth;
-  onFocus?: React.FocusEventHandler;
-  onBlur?: React.FocusEventHandler;
+  onFocus?: React.FocusEventHandler<HTMLElement>;
+  onBlur?: React.FocusEventHandler<HTMLElement>;
   autoFocus?: boolean;
   placeholder?: string;
   leftSide?: string | React.FC<IconProps>;
@@ -136,12 +136,12 @@ export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>((props
     !disabled && onChange && onChange({ e, id, name, value: value || null });
   };
 
-  const handleBlur = (e: FocusEvent) => {
+  const handleBlur: Props['onBlur'] = (e) => {
     setFocus(false);
     onBlur && onBlur(e);
   };
 
-  const handleFocus = (e: FocusEvent) => {
+  const handleFocus: Props['onFocus'] = (e) => {
     setFocus(true);
     onFocus && onFocus(e);
   };
