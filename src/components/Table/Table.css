@@ -1,0 +1,167 @@
+.Table {
+  --table-z: 0;
+  --sticky-left-z: calc(var(--table-z) + 1);
+  --sticky-top-z: calc(var(--sticky-left-z) + 1);
+  --sticky-top-and-left-z: calc(var(--sticky-top-z) + 1);
+  --resizer-z: calc(var(--sticky-top-and-left-z) + 1);
+  --fast-transition: 0.15s ease-out;
+  --shadow-color: rgba(var(--color-nums-shadow), 0.2);
+  --table-border: 1px solid var(--color-bg-border);
+  --resizer-width: calc(0 * 1px);
+  position: relative;
+  z-index: var(--table-z);
+  display: grid;
+  overflow: auto;
+  max-width: 100%;
+  max-height: 100%;
+
+  &_size_s {
+    --cell-padding-vertical: var(--space-2xs);
+    --cell-padding-horizontal: var(--space-xs);
+  }
+
+  &_size_m {
+    --cell-padding-vertical: var(--space-xs);
+    --cell-padding-horizontal: var(--space-s);
+  }
+
+  &_size_l {
+    --cell-padding-vertical: var(--space-s);
+    --cell-padding-horizontal: var(--space-m);
+  }
+
+  &_isResizable {
+    --resizer-width: 5px;
+  }
+
+  &_withBorderBottom {
+    border-bottom: var(--table-border);
+  }
+
+  &-HeaderRow {
+    display: contents;
+  }
+
+  &-CellsRow {
+    display: contents;
+  }
+
+  &-RowWithoutCells {
+    position: sticky;
+    left: 0;
+    display: block;
+    max-width: var(--table-width);
+    background-color: var(--color-bg-default);
+
+    grid-column: 1 / -1;
+  }
+
+  &-HeaderCell {
+    &:not(:first-child)::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--color-bg-border);
+      opacity: 0;
+      transition: opacity var(--fast-transition);
+
+      .Table-HeaderRow:hover & {
+        opacity: 1;
+      }
+    }
+  }
+
+  &-ContentCell {
+    .Table_isZebraStriped .Table-CellsRow:nth-child(even) &:not(.Table-ContentCell_isActive) {
+      background-color: var(--color-bg-stripe);
+    }
+
+    &_isActive,
+    .Table-CellsRow:hover &,
+    .Table_isZebraStriped .Table-CellsRow:hover & {
+      background-color: var(--color-bg-ghost);
+    }
+
+    &_isDarkned {
+      opacity: 0.3;
+    }
+  }
+
+  &-EmptyCell {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    padding-top: var(--cell-padding-vertical);
+    padding-bottom: var(--cell-padding-vertical);
+    text-align: center;
+  }
+
+  &-Buttons {
+    --half-cell-padding-horizontal: calc(var(--cell-padding-horizontal) * 0.5);
+    position: absolute;
+    top: 50%;
+    right: calc(var(--half-cell-padding-horizontal) + var(--resizer-width));
+    display: flex;
+    transform: translateY(-50%);
+  }
+
+  &-Icon {
+    opacity: 0;
+    transition: opacity var(--fast-transition);
+
+    .Table-HeaderRow:hover & {
+      opacity: 0.4;
+    }
+
+    .Table-HeaderCell:hover & {
+      opacity: 1;
+    }
+
+    &_type_sort {
+      .Table-Buttons_isSortingActive & {
+        opacity: 1;
+      }
+    }
+
+    &_type_filter {
+      .Table-Buttons:hover:not(.Table-Buttons_isFilterOpened) &,
+      .Table-Buttons_isFilterActive & {
+        opacity: 1;
+      }
+    }
+  }
+
+  &-HeaderShadowWrapper {
+    position: sticky;
+    z-index: var(--sticky-top-and-left-z);
+    top: var(--table-header-height);
+    left: 0;
+
+    grid-column: 1 / -1;
+  }
+
+  &-HeaderShadow {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      height: var(--space-s);
+      background: linear-gradient(180deg, var(--shadow-color), transparent);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--fast-transition);
+      transform: translateY(100%);
+
+      .Table_showHorizontalCellShadow & {
+        opacity: 1;
+      }
+    }
+  }
+}
