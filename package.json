@@ -163,5 +163,5 @@
     "typescript": "^3.8.3",
     "typescript-eslint-parser": "^22.0.0"
   },
-  "homepage": "https://gpn-prototypes.github.io/ui-kit"
+  "homepage": "https://ui-kit.gpn.vercel.app"
 }
