@@ -164,7 +164,7 @@ export const WithCustomRowsPlaceholder = createStory(
 );
 
 export default createMetadata({
-  title: 'UI-KIT|/Table',
+  title: 'Components|/Table',
   parameters: {
     docs: {
       page: mdx,
