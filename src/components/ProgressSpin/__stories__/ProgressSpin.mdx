@@ -1,11 +1,58 @@
 import { ProgressSpinExampleProgress } from './examples/ProgressSpinExampleProgress/ProgressSpinExampleProgress';
 import { ProgressSpinExampleSize } from './examples/ProgressSpinExampleSize/ProgressSpinExampleSize';
+import { ProgressSpinExampleAnimation } from './examples/ProgressSpinExampleAnimation/ProgressSpinExampleAnimation';
 
 # ProgressSpin
 
+Это индикатор. Используйте его, чтобы показать течение процесса — например, загрузку
+страницы, отправку данных, формирование графика.
+
+- [Процент готовности](#процент-готовности)
+- [Размер](#размер)
+- [Свойства](#свойства)
+- [Пример использования](#пример-использования)
+
+## Процент готовности
+
+Если хотите показать, сколько ещё ждать, укажите в процентах, насколько процесс
+близок к завершению — с помощью свойства `progress`.
+
+Чтобы анимировать индикатор, добавьте `animation` (тогда он плавно прокрутится до величины,
+которую вы указали в `progress`).
+
+```ts
+<ProgressSpin progress={20} size="m" />
+<ProgressSpin progress={40} size="m" />
+<ProgressSpin progress={60} size="m" />
+<ProgressSpin animation progress={80} size="m" />
+```
+
+<ProgressSpinExampleProgress />
+
+## Размер
+
+За размер индикатора отвечает свойство `size`.
+
+```ts
+<ProgressSpin progress={70} size="m" />
+<ProgressSpin progress={70} size="s" />
+```
+
+<ProgressSpinExampleSize />
+
+
+## Свойства
+
+| Свойство   | Тип                        | По умолчанию | Описание                                  |
+| ---------- | -------------------------- | ------------ | ----------------------------------------- |
+| [`progress`](#процент-готовности) | `number`                   | -             | Выполненная часть процесса в процентах (определяет заполненную область индикатора)           |
+| [`animation`](#процент-готовности) | `boolean`                  | -            | Включает плавное изменение индикатора до величины, указанной в `progress`    |
+| [`size`](#размер)      | `'m', 's'`                 | `'m'`        | Размер                                    |
+| `className` | `string`                   | -            | Дополнительный класс                      |
+| `ref`       | `React.Ref<SVGSVGElement>` | -            | Ссылка на корневой DOM-элемент компонента |
+
 ## Пример использования
 
-Использование компонента:
 
 ```ts
 // src/App.ts
@@ -16,38 +63,3 @@ const App = () => {
   return <ProgressSpin progress={70} />;
 };
 ```
-
-## Свойства
-
-| Свойство   | Тип                        | По умолчанию | Описание                                  |
-| ---------- | -------------------------- | ------------ | ----------------------------------------- |
-| size?      | `'m', 's'`                 | `'m'`        | Размер                                    |
-| animation? | `boolean`                  | -            | Включает плавное изменение прогрессбара   |
-| progress?  | `number`                   | -            | Процент заполнения прогрессбара           |
-| className? | `string`                   | -            | Дополнительный класс                      |
-| ref?       | `React.Ref<SVGSVGElement>` | -            | Ссылка на корневой DOM элемент компонента |
-
-## Примеры
-
-### Размер
-
-Чтобы изменить размер, используйте модификатор `_size`.
-
-```ts
-<ProgressSpin progress={70} size="m" />
-<ProgressSpin progress={70} size="s" />
-```
-
-<ProgressSpinExampleSize />
-
-### Процент заполнения прогрессбара
-
-Чтобы изменить размер, используйте модификатор `_progress`.
-
-```ts
-<ProgressSpin progress={20} size="m" />
-<ProgressSpin progress={70} size="m" />
-<ProgressSpin progress={90} size="m" />
-```
-
-<ProgressSpinExampleProgress />
