@@ -14,25 +14,25 @@ export function AttachExampleList() {
       <div>
         <Attach
           className={cnAttachExampleList()}
-          fileName="Билеты на Марс"
-          fileExtension="pdf"
-          fileDescription="Не забудьте распечатать"
-        />
-      </div>
-      <div>
-        <Attach
-          className={cnAttachExampleList()}
-          fileName="Инструкция по сборке марсохода"
-          fileExtension="docx"
-          fileDescription="225 Mб 19.07.2020, 16:10"
-        />
-      </div>
-      <div>
-        <Attach
-          className={cnAttachExampleList()}
-          fileName="Наклейка на марсоход"
-          fileExtension="png"
+          fileName="Фотография"
+          fileExtension="jpg"
           fileDescription="1,5 Mб 19.07.2020, 16:11"
+        />
+      </div>
+      <div>
+        <Attach
+          className={cnAttachExampleList()}
+          fileName="Скан паспорта"
+          fileExtension="pdf"
+          fileDescription="1,5 Mб 19.07.2020, 16:12"
+        />
+      </div>
+      <div>
+        <Attach
+          className={cnAttachExampleList()}
+          fileName="Сопроводительное письмо"
+          fileExtension="docx"
+          fileDescription="225 Mб 19.07.2020, 17:15"
         />
       </div>
     </div>
