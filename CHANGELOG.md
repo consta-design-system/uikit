@@ -1,5 +1,20 @@
 # Changelog
 
+## v1.6.0 (29/07/2020)
+
+- [fix(Badge): replace system color in Display theme, fix text color (#280)](https://github.com/gpn-prototypes/ui-kit/commit/25a417747f81ed0a8c29cf6acde783d01e6728ec) - @fooontic
+- [fix(ThemeDocs): fix runtime error (#287)](https://github.com/gpn-prototypes/ui-kit/commit/1f00a8ad7dff73059bdb7cefbc0d0f63109fa954) - @gizeasy
+- [docs(StoryBook): change path FileField, export with createMetadata (#288)](https://github.com/gpn-prototypes/ui-kit/commit/6f7167dfafb47bfbe2494b62b219bbe9a5a69f74) - @gizeasy
+- [feat(Table): add Table component (#278)](https://github.com/gpn-prototypes/ui-kit/commit/7526a0413e880bd2844371b806ddae6d63b538f6) - @al-fyodorov
+- [chore(deps): removed unused dependencies (#275)](https://github.com/gpn-prototypes/ui-kit/commit/a3b924540a780887e058cf3b9b47032de9faab46) - @gizeasy
+- [fix(TextField): change type onFocus and onBlur (#270)](https://github.com/gpn-prototypes/ui-kit/commit/62aa87bd1fac4229126531a5d2b24a3a5bf22b2b) - @gizeasy
+- [docs(README.md): added a link to the stand (#274)](https://github.com/gpn-prototypes/ui-kit/commit/7a675a63f9deb6cc4b3df7d0247245ed3434710d) - @gizeasy
+- [feat(Switch): add S size (#281)](https://github.com/gpn-prototypes/ui-kit/commit/58e45a45a5eab790011dabf72f0c58dc943959f7) - @fooontic
+- [refactor(Story): restructuring stories (#269)](https://github.com/gpn-prototypes/ui-kit/commit/5b6ed226ea1bfe6f3f4e78e44271312373dba76f) - @gizeasy
+- [feat(FileField): add component FileField (#264)](https://github.com/gpn-prototypes/ui-kit/commit/58e8e1de928800d5f8df3866d1be03daa7dc1da3) - @gizeasy
+
+---
+
 ## v1.5.0 (23/07/2020)
 
 - [feat(MixFocus): add MixFocus (#250)](https://github.com/gpn-prototypes/ui-kit/commit/82267bc5f8fbe7fb23fa32b827cc7d4c3c7f4d1b) - @gizeasy
