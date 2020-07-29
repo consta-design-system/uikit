@@ -1,0 +1,145 @@
+.TableCell {
+  --buttons-wrapper-size: calc(0 * 1px);
+  z-index: var(--table-z);
+  box-sizing: border-box;
+  color: var(--color-typo-primary);
+  background-color: var(--color-bg-default);
+
+  &_withoutBorder {
+    border: none;
+  }
+
+  &_isHeader {
+    position: relative;
+    border-bottom: 1px solid var(--color-bg-border);
+    font-size: var(--size-text-xs);
+    font-weight: bold;
+    line-height: var(--line-height-text-s);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  &:not(&_isHeader) {
+    font-size: var(--size-text-s);
+    line-height: var(--line-height-text-s);
+  }
+
+  &_isResized {
+    word-break: break-all;
+
+    @supports (hyphens: auto) {
+      & {
+        word-break: initial;
+        hyphens: auto;
+      }
+    }
+  }
+
+  &_isClickable {
+    cursor: pointer;
+  }
+
+  &_isSortable,
+  &_isFilterable {
+    --buttons-wrapper-size: var(--space-xl);
+  }
+
+  &_isSortable&_isFilterable {
+    --buttons-wrapper-size: var(--space-4xl);
+  }
+
+  &_stickyOnTop,
+  &_stickyOnLeft {
+    position: sticky;
+  }
+
+  &_stickyOnTop&_isResizer,
+  &_stickyOnLeft&_isResizer {
+    z-index: calc(var(--sticky-top-and-left-z) + 1);
+  }
+
+  &_stickyOnTop {
+    z-index: var(--sticky-top-z);
+    top: 0;
+  }
+
+  &_stickyOnLeft {
+    z-index: var(--sticky-left-z);
+    left: 0;
+
+    &.TableCell_isHeader {
+      z-index: var(--sticky-top-and-left-z);
+    }
+  }
+
+  &_isBorderTop {
+    border-top: var(--table-border);
+  }
+
+  &_isBorderLeft {
+    border-left: var(--table-border);
+  }
+
+  &-Wrapper {
+    position: relative;
+    display: flex;
+    box-sizing: border-box;
+    height: 100%;
+    padding: var(--cell-padding-vertical) var(--cell-padding-horizontal);
+    padding-right: calc(
+      var(--cell-padding-horizontal) + var(--resizer-width) + var(--buttons-wrapper-size)
+    );
+
+    &_withoutPadding {
+      padding: 0;
+    }
+
+    &_verticalAlign_top {
+      align-items: flex-start;
+    }
+
+    &_verticalAlign_center {
+      align-items: center;
+    }
+
+    &_verticalAlign_bottom {
+      align-items: flex-end;
+    }
+
+    &_horizontalAlign_left {
+      justify-content: flex-start;
+    }
+
+    &_horizontalAlign_center {
+      justify-content: center;
+      text-align: center;
+    }
+
+    &_horizontalAlign_right {
+      justify-content: flex-end;
+      text-align: right;
+    }
+
+    .TableCell_stickyOnLeft &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: var(--space-s);
+      background: linear-gradient(90deg, var(--shadow-color), transparent);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--fast-transition);
+      transform: translateX(100%);
+    }
+
+    .TableCell_stickyOnLeft.TableCell_showVerticalShadow &::after {
+      opacity: 1;
+    }
+
+    .TableCell_isHeader:hover & {
+      background: var(--color-bg-stripe);
+    }
+  }
+}

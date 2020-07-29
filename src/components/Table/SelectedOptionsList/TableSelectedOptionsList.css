@@ -1,0 +1,28 @@
+.TableSelectedOptionsList {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding-right: var(--space-s);
+  border-bottom: var(--table-border);
+
+  &-Options {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    padding: 0 var(--cell-padding-horizontal);
+  }
+
+  &-Option {
+    margin: var(--space-2xs) 0;
+    margin-right: var(--space-2xs);
+  }
+
+  &-Button {
+    opacity: 0;
+    transition: opacity 0.15s ease-out;
+
+    .TableSelectedOptionsList:hover & {
+      opacity: 1;
+    }
+  }
+}

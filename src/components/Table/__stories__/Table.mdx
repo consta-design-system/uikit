@@ -1,0 +1,92 @@
+import { Preview } from '@storybook/addon-docs/dist/blocks';
+
+# Таблица
+
+Таблица — компонент для отображения данных, с возможностями сортировки и фильтрации контента.
+
+## Список свойств
+
+| Свойство              | Тип или варианты значения                                                                                                                                               | По умолчанию | Описание                                            |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------------------------------------------- |
+| columns               | `{ title: React.ReactNode; accessor: string; align?: 'left', 'center', 'right'; withoutPadding?: boolean; width?: number; sortable?: boolean; sortByField?: string }[]` | -            | Колонки таблицы                                     |
+| rows                  | `{ [key: string]: React.ReactNode; id: string }[]`                                                                                                                      | -            | Строки таблицы                                      |
+| filters?              | `{ id: string; name: string; field: string; filterer: (value: FieldValue) => boolean; }[]`                                                                              | -            | Список фильтров                                     |
+| size?                 | `'s', 'm', 'l'`                                                                                                                                                         | 'l'          | Размер таблицы                                      |
+| stickyHeader?         | `boolean`                                                                                                                                                               | false        | Зафиксированный заголовок                           |
+| stickyColumns?        | `number`                                                                                                                                                                | 0            | Количество зафиксированных колонок                  |
+| isResizable?          | `boolean`                                                                                                                                                               | false        | Возможность изменения размера колонок               |
+| activeRow?            | `{ id?: string; onChange: (id?: string) => void; }`                                                                                                                     | -            | Активная строка                                     |
+| verticalAlign?        | `'center', 'top', 'bottom'`                                                                                                                                             | `'top'`      | Вертикальное выравнивание                           |
+| isZebraStriped?       | `boolean`                                                                                                                                                               | false        | Окрашивание строк зеброй                            |
+| borderBetweenRows?    | `boolean`                                                                                                                                                               | false        | Отображение границ между строками                   |
+| borderBetweenColumns? | `boolean`                                                                                                                                                               | false        | Отображение границ между колонками                  |
+| emptyRowsPlaceholder? | `React.ReactNode`                                                                                                                                                       | -            | Компонент заглушка для отображения когда нет данных |
+| className?            | `string`                                                                                                                                                                | -            | Дополнительный класс                                |
+
+## Пример использования
+
+### Обычная таблица
+
+```ts
+import React from 'react';
+import { Table } from '@gpn-design/uikit/Table';
+
+const columns = [
+  {
+    title: '№',
+    accessor: 'id',
+    align: 'center',
+    width: 100,
+    sortable: true,
+  },
+  {
+    title: 'Имя',
+    accessor: 'name',
+    sortable: true,
+  },
+];
+
+const rows = [
+  {
+    id: '1',
+    name: 'Антон',
+  },
+  {
+    id: '2',
+    name: 'Василий',
+  },
+];
+
+const App = () => {
+  return <Table columns={columns} rows={rows} />;
+};
+```
+
+### Со своим текстом если нет данных
+
+```ts
+import React from 'react';
+import { Table } from '@gpn-design/uikit/Table';
+import { Text } from '@gpn-design/uikit/Text';
+
+const columns = [
+  {
+    title: '№',
+    accessor: 'id',
+    align: 'center',
+    width: 100,
+    sortable: true,
+  },
+  {
+    title: 'Имя',
+    accessor: 'name',
+    sortable: true,
+  },
+];
+
+const rows = [];
+
+const App = () => {
+  return <Table columns={columns} rows={rows} emptyRowsPlaceholder={<Text>Пусто</Text>} />;
+};
+```
