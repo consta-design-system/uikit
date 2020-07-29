@@ -2,6 +2,7 @@ import './FileField.stories.css';
 
 import React, { useState } from 'react';
 
+import { createMetadata } from '../../../utils/storybook';
 import { Button } from '../../Button/Button';
 import { FileField, FileFieldProps } from '../FileField';
 
@@ -24,22 +25,21 @@ export function Playground() {
   const handleDelete = () => setValue(null);
 
   return (
-    <>
+    <div>
       <FileField onChange={handleChange} value={value} multiple>
         {({ onClick }) => <Button label="Выбрать файлы" onClick={onClick} />}
       </FileField>
       {renderFiles(value)}
       {value && value?.length > 0 && <Button label="Удалить файлы" onClick={handleDelete} />}
-    </>
+    </div>
   );
 }
 
-export default {
-  title: 'UI-KIT|/FileField',
-  component: Playground,
+export default createMetadata({
+  title: 'Components|/FileField',
   parameters: {
     docs: {
       page: mdx,
     },
   },
-};
+});
