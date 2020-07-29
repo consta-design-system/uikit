@@ -1,6 +1,7 @@
 import React from 'react';
 import { boolean, number, select } from '@storybook/addon-knobs';
 
+import { createMetadata } from '../../../utils/storybook';
 import { Timer } from '../Timer';
 
 import mdx from './Timer.mdx';
@@ -18,12 +19,11 @@ export function Playground() {
   return <Timer seconds={seconds} progress={progress} animation={animation} size={size} />;
 }
 
-export default {
+export default createMetadata({
   title: 'Components|/Timer',
-  component: Playground,
   parameters: {
     docs: {
       page: mdx,
     },
   },
-};
+});

@@ -38,7 +38,6 @@ export const Gallery = FileIconsGallery;
 
 export default createMetadata({
   title: 'Components|/File',
-  component: Playground,
   parameters: {
     docs: {
       page: mdx,
