@@ -2,9 +2,9 @@ import * as React from 'react';
 
 function IconOpenInNewSizeXs(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 16 16" {...props}>
-      <path d="M11.586 3H8V1h7v7h-2V4.414L7.707 9.707 6.293 8.293 11.586 3z" />
-      <path d="M1 3h6v2H3v8h8V9h2v6H1V3z" />
+    <svg viewBox="0 0 12 12" {...props}>
+      <path d="M4.987 7.715l5.016-5.008V6h1V1H6v1h3.296L4.28 7.008l.707.707z" />
+      <path d="M5 3v1H2v6h6V7h1v4H1V3h4z" />
     </svg>
   );
 }
