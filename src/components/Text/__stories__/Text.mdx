@@ -21,7 +21,7 @@ import { TextExampleWeight } from './examples/TextExampleWeight/TextExampleWeigh
   - [Размер](#размер) `size`
   - [Гарнитура](#гарнитура) `font`
   - [Насыщенность](#насыщенность) `weight`
-  - [Начертание](#начертание) `fontStyle`
+  - [Наклон](#наклон) `fontStyle`
   - [Межбуквенный интервал](#межбуквенный-интервал) `spacing`
   - [Высота строки](#высота-строки) `lineHeight`
   - [Подчеркивание](#подчеркивание) `decoration`
@@ -111,9 +111,9 @@ import { TextExampleWeight } from './examples/TextExampleWeight/TextExampleWeigh
 
 <TextExampExampleWeighteView />
 
-### Начертание
+### Наклон
 
-`fontStyle` меняет начертание шрифта (можно выделить текст курсивом).
+`fontStyle` меняет наклон шрифта (можно выделить текст курсивом).
 
 ```ts
 <Text fontStyle="italic">Газпром нефть</Text>
@@ -328,10 +328,10 @@ import { TextExampleWeight } from './examples/TextExampleWeight/TextExampleWeigh
 | [`width`](#размеры-контейнера)     | `default`                                                                                                  | —                  | Ширина контейнера с текстом                                   |
 | [`type`](#стили-контейнера)       | `'blockquote', 'p', 'h3', 'h2', 'h1'`                                                                      | —                  | Стили контейнера (отсутпы и пр.)                      |
 | [`display`](#расположение)    | `'block', 'inline-block', 'inline'`                                                                        | —                  | Поведение контейнера с текстом в документе (блочный или строчный элемент) |
-| [`as`] (#тег-для-контейнера)        | `keyof JSX.IntrinsicElements`                                     | div                                    | HTML-элемент, в виде которого текст будет представлен в DOM             |
-| `className`  | `string`                                                                                                   | —                  | Дополнительные классы для блока с текстом                        |
+| [`as`](#тег-для-контейнера)        | `keyof JSX.IntrinsicElements`                                     | div                                    | HTML-тег, в виде которого этот компонент будет представлен в DOM             |
+| `className`  | `string`                                                                                                   | —                  | Дополнительный CSS-класс                        |
 | `children`   | `React.ReactNode`                                                                                          | —                  | Дочерние компоненты                                           |
-| `ref`       | `React.Ref<HTMLElement>`                                                                                   | —                  | Ссылка на корневой DOM-элемент компонента                     |
+| `ref`       | `React.Ref<HTMLElement>`                                                                                   | —                  | Ссылка на корневой DOM-элемент этого компонента                    |
 
 <!-- props:end -->
 
