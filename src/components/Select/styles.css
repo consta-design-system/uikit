@@ -1,0 +1,362 @@
+.Select {
+  position: relative;
+  display: inline-flex;
+
+  &_width_full {
+    width: 100%;
+  }
+
+  &-Delimiter {
+    width: 1px;
+    background-color: var(--color-control-bg-border-default);
+  }
+
+  &_size {
+    &_xs {
+      --input-height: var(--control-height-xs);
+      --input-font-size: var(--control-text-size-xs);
+      --input-space: calc(var(--control-space-xs) * 0.5);
+    }
+
+    &_s {
+      --input-height: var(--control-height-s);
+      --input-font-size: var(--control-text-size-s);
+      --input-space: calc(var(--control-space-s) * 0.5);
+    }
+
+    &_m {
+      --input-height: var(--control-height-m);
+      --input-font-size: var(--control-text-size-m);
+      --input-space: calc(var(--control-space-m) * 0.5);
+    }
+
+    &_l {
+      --input-height: var(--control-height-l);
+      --input-font-size: var(--control-text-size-l);
+      --input-space: calc(var(--control-space-l) * 0.5);
+    }
+  }
+
+  &-Control {
+    display: inline-flex;
+    box-sizing: border-box;
+    width: 100%;
+    height: var(--input-height);
+    padding: 0;
+    color: currentColor;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: var(--font-primary);
+    font-weight: normal;
+    line-height: calc(var(--input-height) - var(--control-border-width));
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &_form {
+    &_round .Select-Control {
+      padding-left: calc(var(--input-space) * 1.6);
+      border-radius: calc(var(--input-height) / 2);
+    }
+
+    &_brick .Select-Control {
+      border-radius: 0;
+    }
+
+    &_clear .Select-Control {
+      border-width: 0;
+      border-bottom-width: var(--control-border-width);
+      border-radius: 0;
+    }
+
+    &_defaultClear .Select-Control {
+      border-right-width: 0;
+      border-radius: var(--control-radius) 0 0 var(--control-radius);
+    }
+
+    &_clearDefault .Select-Control {
+      border-left-width: 0;
+      border-radius: 0 var(--control-radius) var(--control-radius) 0;
+    }
+
+    &_defaultBrick .Select-Control {
+      border-radius: var(--control-radius) 0 0 var(--control-radius);
+    }
+
+    &_brickDefault .Select-Control {
+      border-radius: 0 var(--control-radius) var(--control-radius) 0;
+    }
+
+    &_roundBrick .Select-Control {
+      padding-left: calc(var(--input-space) * 1.6);
+      border-radius: calc(var(--input-height) / 2) 0 0 calc(var(--input-height) / 2);
+    }
+
+    &_brickRound .Select-Control {
+      padding-right: calc(var(--input-space) * 1.6);
+      border-radius: 0 calc(var(--input-height) / 2) 99rem calc(var(--input-height) / 2);
+    }
+
+    &_brickClear .Select-Control {
+      border-right-width: 0;
+      border-radius: 0;
+    }
+
+    &_clearBrick .Select-Control {
+      border-left-width: 0;
+      border-radius: 0;
+    }
+
+    &_clearRound .Select-Control {
+      padding-right: calc(var(--input-space) * 1.6);
+      border-left-width: 0;
+      border-radius: 0 calc(var(--input-height) / 2) calc(var(--input-height) / 2) 0;
+    }
+
+    &_roundClear .Select-Control {
+      padding-left: calc(var(--input-space) * 1.6);
+      border-right-width: 0;
+      border-radius: calc(var(--input-height) / 2) 0 0 calc(var(--input-height) / 2);
+    }
+
+    &_clearClear .Select-Control {
+      border-width: 0;
+      border-top-width: var(--control-border-width);
+      border-bottom-width: var(--control-border-width);
+      border-radius: 0;
+    }
+  }
+
+  &_view_default .Select-Control {
+    padding: 0;
+    color: var(--color-control-typo-default);
+    background: var(--color-control-bg-default);
+    border: var(--control-border-width) solid var(--color-control-bg-border-default);
+    border-radius: var(--control-radius);
+
+    &:hover {
+      border-color: var(--color-control-bg-border-default-hover);
+    }
+  }
+
+  &_view_default.Select_focused .Select-Control {
+    z-index: 1;
+    border-color: var(--color-control-bg-border-focus);
+    outline: none;
+  }
+
+  &_view_default.Select_form_clear .Select-Control,
+  &_view_default.Select_form_clearClear .Select-Control {
+    box-shadow: var(--control-border-width) 0 var(--color-control-bg-border-focus),
+      calc(-1 * var(--control-border-width)) 0 var(--color-control-bg-border-focus);
+  }
+
+  &_view_default.Select_form_defaultClear .Select-Control,
+  &_view_default.Select_form_brickClear .Select-Control,
+  &_view_default.Select_form_roundClear .Select-Control {
+    box-shadow: var(--control-border-width) 0 var(--color-control-bg-border-focus);
+  }
+
+  &_view_default.Select_form_clearDefault .Select-Control,
+  &_view_default.Select_form_clearBrick .Select-Control,
+  &_view_default.Select_form_clearRound .Select-Control {
+    box-shadow: calc(-1 * var(--control-border-width)) 0 var(--color-control-bg-border-focus);
+  }
+
+  &_view_default.Select_disabled .Select-Control {
+    color: var(--color-control-typo-disable);
+    background: var(--color-control-bg-disable);
+    border-color: var(--color-control-bg-border-disable);
+    pointer-events: none;
+  }
+
+  &_view_clear .Select-Control,
+  &_view_clear .Select-Control:hover,
+  &_view_clear .Select-Control:focus {
+    padding: 0;
+    color: var(--color-control-typo-default);
+
+    &.Select_disabled {
+      pointer-events: none;
+
+      & .Select-Control {
+        color: var(--color-control-typo-disable);
+      }
+    }
+  }
+
+  &-Indicators {
+    display: flex;
+    height: 100%;
+  }
+
+  &-IndicatorsDropdown {
+    display: block;
+    width: var(--input-height);
+    margin: 0;
+    padding: 0;
+    color: var(--color-control-typo-disable);
+    background-color: transparent;
+    border: none;
+    text-align: center;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &_form_round &-IndicatorsDropdown {
+    border-radius: 0 calc(var(--input-height) / 2) calc(var(--input-height) / 2) 0;
+  }
+
+  &-ControlInner {
+    position: relative;
+    width: 100%;
+  }
+
+  &-ControlValueContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    font-size: var(--input-font-size);
+    line-height: var(--input-height);
+    text-align: left;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &_view_default .Select-ControlValueContainer {
+    padding: 0 0 0 var(--input-space);
+  }
+
+  &-Control[aria-expanded='true'] &-IndicatorsDropdown {
+    transform: rotate(180deg);
+  }
+
+  &-ControlValue,
+  &-ControlPlaceholder {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &-ControlPlaceholder {
+    color: var(--color-control-typo-placeholder);
+    font-size: var(--input-font-size);
+    text-align: left;
+  }
+
+  &-DropdownIndicatorIcon {
+    position: relative;
+    top: 1px;
+    fill: currentColor;
+  }
+
+  &-List {
+    overflow-y: auto;
+    width: 100%;
+    max-height: 200px;
+    margin: 0;
+    padding-left: 0;
+    font-size: var(--input-font-size);
+    line-height: 120%;
+
+    &_size {
+      &_xs {
+        --input-height: var(--control-height-xs);
+        --input-font-size: var(--control-text-size-xs);
+        --input-space: calc(var(--control-space-xs) * 0.5);
+      }
+
+      &_s {
+        --input-height: var(--control-height-s);
+        --input-font-size: var(--control-text-size-s);
+        --input-space: calc(var(--control-space-s) * 0.5);
+      }
+
+      &_m {
+        --input-height: var(--control-height-m);
+        --input-font-size: var(--control-text-size-m);
+        --input-space: calc(var(--control-space-m) * 0.5);
+      }
+
+      &_l {
+        --input-height: var(--control-height-l);
+        --input-font-size: var(--control-text-size-l);
+        --input-space: calc(var(--control-space-l) * 0.5);
+      }
+    }
+
+    &_size_xs,
+    &_size_s {
+      padding: var(--space-2xs) 0;
+    }
+
+    &_size_m,
+    &_size_l {
+      padding: var(--space-xs) 0;
+    }
+  }
+
+  &-ListItem {
+    position: relative;
+    padding-right: var(--input-space);
+    padding-left: var(--input-space);
+    color: var(--color-control-typo-default);
+    background-color: var(--color-control-bg-clear);
+    cursor: default;
+
+    &_hovered {
+      background-color: var(--color-control-bg-clear-hover);
+    }
+
+    &_active {
+      color: var(--color-control-typo-secondary);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 2px;
+      background-color: transparent;
+      transition: background-color 0.2s ease-in;
+    }
+
+    &_active::before {
+      background-color: var(--color-control-bg-primary);
+    }
+  }
+
+  &-List_size_xs &-ListItem,
+  &-List_size_s &-ListItem {
+    padding-top: var(--space-2xs);
+    padding-bottom: var(--space-2xs);
+  }
+
+  &-List_size_m &-ListItem {
+    padding-top: var(--space-xs);
+    padding-bottom: var(--space-xs);
+  }
+
+  &-List_size_l &-ListItem {
+    padding-top: var(--space-xs);
+    padding-bottom: var(--space-xs);
+  }
+}
