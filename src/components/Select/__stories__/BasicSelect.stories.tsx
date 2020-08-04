@@ -1,8 +1,10 @@
 import React from 'react';
-import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
-import { storiesOf } from '@storybook/react';
+import { boolean, select, text } from '@storybook/addon-knobs';
 
+import { createMetadata, createStory } from '../../../utils/storybook';
 import { BasicSelect } from '../BasicSelect/BasicSelect';
+
+import mdx from './BasicSelect.mdx';
 
 type SelectOption = {
   value: string;
@@ -42,7 +44,7 @@ const items = [
 ];
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const knobsContainer = () => ({
+const getKnobs = () => ({
   disabled: boolean('disabled', false),
   size: select('size', ['xs', 's', 'm', 'l'], 'm'),
   view: select('view', ['default', 'clear'], 'default'),
@@ -68,46 +70,46 @@ const knobsContainer = () => ({
   placeholder: text('placeholder', 'Placeholder'),
 });
 
-storiesOf('BasicSelect', module)
-  .addDecorator(withKnobs)
-  .add('по умолчанию', () => {
-    const getItemLabel = (option: SelectOption): string => option.label;
-    const getItemKey = (option: SelectOption): string => option.value;
-    const getItemValue = (option: SelectOption): string => option.value;
+// storiesOf('BasicSelect', module)
+//   .addDecorator(withKnobs)
+//   .add('по умолчанию', () => {})
+//   .add('с заданным значением', () => {});
 
-    return (
-      <>
-        <div style={{ width: '250px' }}>
-          <BasicSelect<SelectOption>
-            {...knobsContainer()}
-            id="example"
-            options={items}
-            getOptionLabel={getItemLabel}
-            getOptionKey={getItemKey}
-            getOptionValue={getItemValue}
-          />
-        </div>
-      </>
-    );
-  })
-  .add('с заданным значением', () => {
-    const getItemLabel = (option: SelectOption): string => option.label;
-    const getItemKey = (option: SelectOption): string => option.value;
-    const getItemValue = (option: SelectOption): string => option.value;
+const Default = (props: { value?: SelectOption }): JSX.Element => {
+  const getItemLabel = (option: SelectOption): string => option.label;
+  const getItemKey = (option: SelectOption): string => option.value;
+  const getItemValue = (option: SelectOption): string => option.value;
 
-    return (
-      <>
-        <div style={{ width: '250px' }}>
-          <BasicSelect<SelectOption>
-            {...knobsContainer()}
-            id="example"
-            value={{ label: 'Nihonium', value: 'Nihonium' }}
-            options={items}
-            getOptionLabel={getItemLabel}
-            getOptionKey={getItemKey}
-            getOptionValue={getItemValue}
-          />
-        </div>
-      </>
-    );
-  });
+  return (
+    <>
+      <div style={{ width: '250px' }}>
+        <BasicSelect<SelectOption>
+          {...getKnobs()}
+          id="example"
+          options={items}
+          value={props.value}
+          getOptionLabel={getItemLabel}
+          getOptionKey={getItemKey}
+          getOptionValue={getItemValue}
+        />
+      </div>
+    </>
+  );
+};
+
+export const DefaultStory = createStory(() => <Default />, {
+  name: 'по умолчанию',
+});
+
+export const WithValueStory = createStory(() => <Default value={items[4]} />, {
+  name: 'c заданным значением',
+});
+
+export default createMetadata({
+  title: 'Components|/BasicSelect',
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+});
