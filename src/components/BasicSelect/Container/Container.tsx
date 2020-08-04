@@ -5,7 +5,7 @@ import React from 'react';
 import { cnSelect } from '../cnSelect';
 import { PropForm, PropSize, PropView, PropWidth } from '../types';
 
-type Props = {
+export type ContainerProps = {
   className?: string;
   disabled?: boolean;
   form?: PropForm;
@@ -16,7 +16,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export const Container = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
+export const Container = React.forwardRef<HTMLDivElement, ContainerProps>((props, ref) => {
   const {
     size = 'm',
     width = 'default',
