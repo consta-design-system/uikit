@@ -23,8 +23,6 @@ BasicSelect — компонент, реализующий элемент упр
 | options        | `T[]`                                             | -            | Опции                                                                                                    |
 | onChange?      | `(value: string) => void`                         | -            | Обработчик события изменения значения компонента                                                         |
 | getOptionLabel | `(arg: T) => string`                              | -            | Функция для получения текста опции, он будет отображаться в поле для выбранного значения                 |
-| getOptionKey   | `(arg: T) => string`                              | -            | Функция для формирования `key` опции в списке опций выпадающего блока со списком                         |
-| getOptionValue | `(arg: T) => string`                              | -            | Функция для формирования значения опции, которое будет возвращаться в форму                              |
 | onBlur?        | `(event?: React.FocusEvent<HTMLElement>) => void` | -            | Обработчик события `blur`                                                                                |
 | onFocus?       | `(event?: React.FocusEvent<HTMLElement>) => void` | -            | Обработчик события `focus`                                                                               |
 
