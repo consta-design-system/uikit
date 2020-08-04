@@ -27,7 +27,6 @@ export type SimpleSelectProps<T> = {
   getOptionLabel(arg: T): string;
   getOptionKey(arg: T): string;
   getOptionValue(arg: T): string;
-  getOptionValue(arg: T): string | string[];
   onBlur?: (event?: React.FocusEvent<HTMLElement>) => void;
   onFocus?: (event?: React.FocusEvent<HTMLElement>) => void;
 };
@@ -141,7 +140,7 @@ export function BasicSelect<T>(props: SimpleSelectProps<T>): React.ReactElement 
               </span>
             ) : (
               <span className={cnSelect('ControlPlaceholder')} title="placeholder">
-                {placeholder}
+                {placeholder || ''}
               </span>
             )}
           </button>

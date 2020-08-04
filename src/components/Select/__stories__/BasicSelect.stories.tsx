@@ -70,7 +70,7 @@ const knobsContainer = () => ({
 
 storiesOf('BasicSelect', module)
   .addDecorator(withKnobs)
-  .add('BasicSelect', () => {
+  .add('по умолчанию', () => {
     const getItemLabel = (option: SelectOption): string => option.label;
     const getItemKey = (option: SelectOption): string => option.value;
     const getItemValue = (option: SelectOption): string => option.value;
@@ -81,6 +81,27 @@ storiesOf('BasicSelect', module)
           <BasicSelect<SelectOption>
             {...knobsContainer()}
             id="example"
+            options={items}
+            getOptionLabel={getItemLabel}
+            getOptionKey={getItemKey}
+            getOptionValue={getItemValue}
+          />
+        </div>
+      </>
+    );
+  })
+  .add('с заданным значением', () => {
+    const getItemLabel = (option: SelectOption): string => option.label;
+    const getItemKey = (option: SelectOption): string => option.value;
+    const getItemValue = (option: SelectOption): string => option.value;
+
+    return (
+      <>
+        <div style={{ width: '250px' }}>
+          <BasicSelect<SelectOption>
+            {...knobsContainer()}
+            id="example"
+            value={{ label: 'Nihonium', value: 'Nihonium' }}
             options={items}
             getOptionLabel={getItemLabel}
             getOptionKey={getItemKey}
