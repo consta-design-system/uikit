@@ -2,8 +2,8 @@ import './Container.css';
 
 import React from 'react';
 
-import { cnSelect } from '../../cnSelect';
-import { PropForm, PropSize, PropView, PropWidth } from '../../types';
+import { cnSelect } from '../cnSelect';
+import { PropForm, PropSize, PropView, PropWidth } from '../types';
 
 type Props = {
   className?: string;
@@ -37,5 +37,3 @@ export const Container = React.forwardRef<HTMLDivElement, Props>((props, ref) =>
     </div>
   );
 });
-
-Container.displayName = 'Container';

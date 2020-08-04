@@ -1,6 +1,9 @@
 import React, { CSSProperties } from 'react';
 
-import { KeyHandler, useClickOutsideRef, useKeys, usePrevious } from './utils';
+import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
+import { KeyHandler, useKeys } from '../../../hooks/useKeys/useKeys';
+
+import { usePrevious } from './utils';
 
 type State = {
   searchValue: string;
@@ -101,14 +104,7 @@ function useHoistedState(initialState: State): [State, (updater: Updater, action
 }
 
 export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
-  const {
-    options,
-    onChange,
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    scrollToIndex,
-    optionsRef,
-    disabled = false,
-  } = params;
+  const { options, onChange, scrollToIndex, optionsRef, disabled = false } = params;
   const value = params.value ?? [];
   const [{ searchValue, isOpen, highlightedIndex }, setState] = useHoistedState(initialState);
 
@@ -119,11 +115,10 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
     cb(e: React.FocusEvent): void;
     event: React.FocusEvent | null;
   }>();
-  const onChangeRef = React.useRef<OnChangeFunctionType>();
   const scrollToIndexRef = React.useRef<ScrollToIndexFunctionType>();
-
   scrollToIndexRef.current = scrollToIndex;
 
+  const onChangeRef = React.useRef<OnChangeFunctionType>();
   onChangeRef.current = onChange;
 
   const getSelectedOptionIndex = (): number => {
@@ -321,13 +316,13 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
 
   // When the user clicks outside of the options box
   // while open, we need to close the dropdown
-  useClickOutsideRef(
-    isOpen,
-    () => {
+  useClickOutside({
+    isActive: isOpen,
+    ignoreClicksInsideRefs: [optionsRef],
+    handler: () => {
       setOpen(false);
     },
-    optionsRef,
-  );
+  });
 
   React.useEffect(() => {
     if (disabled) {
@@ -363,7 +358,6 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
       const currentHighlightIndex = getSelectedOptionIndex();
       scrollToIndexRef.current && scrollToIndexRef.current(currentHighlightIndex);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, inputRef.current]);
 
   return {

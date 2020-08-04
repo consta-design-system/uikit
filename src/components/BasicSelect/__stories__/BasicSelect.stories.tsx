@@ -2,7 +2,7 @@ import React from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { createMetadata, createStory } from '../../../utils/storybook';
-import { BasicSelect } from '../BasicSelect/BasicSelect';
+import { BasicSelect } from '../BasicSelect';
 
 import mdx from './BasicSelect.mdx';
 
@@ -70,15 +70,8 @@ const getKnobs = () => ({
   placeholder: text('placeholder', 'Placeholder'),
 });
 
-// storiesOf('BasicSelect', module)
-//   .addDecorator(withKnobs)
-//   .add('по умолчанию', () => {})
-//   .add('с заданным значением', () => {});
-
 const Default = (props: { value?: SelectOption }): JSX.Element => {
   const getItemLabel = (option: SelectOption): string => option.label;
-  const getItemKey = (option: SelectOption): string => option.value;
-  const getItemValue = (option: SelectOption): string => option.value;
 
   return (
     <>
@@ -89,8 +82,6 @@ const Default = (props: { value?: SelectOption }): JSX.Element => {
           options={items}
           value={props.value}
           getOptionLabel={getItemLabel}
-          getOptionKey={getItemKey}
-          getOptionValue={getItemValue}
         />
       </div>
     </>

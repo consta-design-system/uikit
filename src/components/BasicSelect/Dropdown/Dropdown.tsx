@@ -2,7 +2,7 @@ import './Dropdown.css';
 
 import React from 'react';
 
-import { cnSelect } from '../../cnSelect';
+import { cnSelect } from '../cnSelect';
 
 type Props = {
   className?: string;
@@ -10,7 +10,6 @@ type Props = {
   children: React.ReactNode;
 };
 
-// eslint-disable-next-line react/display-name
 export const Dropdown = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
   const { className, children, ...restProps } = props;
 

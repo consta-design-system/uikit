@@ -1,15 +1,16 @@
-import '../styles.css';
+import './styles.css';
 
 import React, { useRef, useState } from 'react';
 
-import { IconSelect } from '../../../icons/IconSelect/IconSelect';
-import { Popover } from '../../Popover/Popover';
-import { cnSelect } from '../cnSelect';
-import { Container } from '../components/Container';
-import { Dropdown } from '../components/Dropdown';
-import { useSelect } from '../hooks/use-select';
-import { scrollIntoView } from '../hooks/utils';
-import { PropForm, PropSize, PropView, PropWidth } from '../types';
+import { IconSelect } from '../../icons/IconSelect/IconSelect';
+import { Popover } from '../Popover/Popover';
+
+import { useSelect } from './hooks/use-select';
+import { scrollIntoView } from './hooks/utils';
+import { cnSelect } from './cnSelect';
+import { Container } from './Container';
+import { Dropdown } from './Dropdown';
+import { PropForm, PropSize, PropView, PropWidth } from './types';
 
 export type SimpleSelectProps<T> = {
   options: T[];
@@ -23,10 +24,8 @@ export type SimpleSelectProps<T> = {
   width?: PropWidth;
   view?: PropView;
   ariaLabel?: string;
-  onChange?: (v: string) => void;
+  onChange?: (v: T) => void;
   getOptionLabel(arg: T): string;
-  getOptionKey(arg: T): string;
-  getOptionValue(arg: T): string;
   onBlur?: (event?: React.FocusEvent<HTMLElement>) => void;
   onFocus?: (event?: React.FocusEvent<HTMLElement>) => void;
 };
@@ -40,8 +39,6 @@ export function BasicSelect<T>(props: SimpleSelectProps<T>): React.ReactElement 
     onChange,
     value,
     getOptionLabel,
-    getOptionKey,
-    getOptionValue,
     disabled,
     ariaLabel,
     id,
@@ -52,15 +49,14 @@ export function BasicSelect<T>(props: SimpleSelectProps<T>): React.ReactElement 
   const [val, setValue] = useState<T | null | undefined>(value);
 
   const handlerChangeValue = (v: T): void => {
-    // istanbul ignore else path
     if (typeof onChange === 'function') {
-      onChange(getOptionValue(v));
+      onChange(v);
     }
     setValue(v);
   };
 
   const optionsRef = useRef<HTMLDivElement | null>(null);
-  const arrValue = val ? [val] : null;
+  const arrValue = typeof val !== 'undefined' && val !== null ? [val] : null;
 
   const scrollToIndex = (index: number): void => {
     if (!optionsRef.current) {
@@ -91,7 +87,6 @@ export function BasicSelect<T>(props: SimpleSelectProps<T>): React.ReactElement 
   });
 
   const handleInputFocus = (e: React.FocusEvent<HTMLElement>): void => {
-    // istanbul ignore else path
     if (!disabled) {
       if (!isFocused) {
         setIsFocused(true);
@@ -103,11 +98,9 @@ export function BasicSelect<T>(props: SimpleSelectProps<T>): React.ReactElement 
   };
 
   const handleInputBlur = (e: React.FocusEvent<HTMLElement>): void => {
-    // istanbul ignore else path
     if (isFocused) {
       setIsFocused(false);
 
-      // istanbul ignore else path
       if (typeof onBlur === 'function') {
         onBlur(e);
       }
@@ -151,7 +144,6 @@ export function BasicSelect<T>(props: SimpleSelectProps<T>): React.ReactElement 
             className={cnSelect('IndicatorsDropdown')}
             tabIndex={-1}
             onClick={handleToggleDropdown}
-            // ref={toggleRef}
           >
             <IconSelect size="xs" className={cnSelect('DropdownIndicatorIcon')} />
           </button>
@@ -161,6 +153,7 @@ export function BasicSelect<T>(props: SimpleSelectProps<T>): React.ReactElement 
         <Popover
           anchorRef={toggleRef}
           possibleDirections={['downLeft', 'upLeft', 'downRight', 'upRight']}
+          offset={1}
         >
           <Dropdown role="listbox" aria-activedescendant={`${id}-${highlightedIndex}`}>
             <div className={cnSelect('List', { size })} ref={optionsRef}>
@@ -168,7 +161,7 @@ export function BasicSelect<T>(props: SimpleSelectProps<T>): React.ReactElement 
                 <div
                   aria-selected={option === value}
                   role="option"
-                  key={getOptionKey(option)}
+                  key={getOptionLabel(option)}
                   id={`${id}-${index}`}
                   {...getOptionProps({
                     index,

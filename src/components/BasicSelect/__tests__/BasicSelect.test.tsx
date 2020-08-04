@@ -2,7 +2,7 @@ import * as React from 'react';
 import { fireEvent, render, RenderResult, screen } from '@testing-library/react';
 
 import ResizeObserver from '../__mocks__/ResizeObserver';
-import { BasicSelect, SimpleSelectProps } from '../BasicSelect/BasicSelect';
+import { BasicSelect, SimpleSelectProps } from '../BasicSelect';
 
 type SelectOption = {
   value: string;
@@ -27,22 +27,12 @@ const defaultProps = {
   value: null,
   onChange: jest.fn(),
   getOptionLabel: (option: SelectOption): string => option.label,
-  getOptionKey: (option: SelectOption): string => option.value,
-  getOptionValue: (option: SelectOption): string => option.value,
   placeholder: 'placeholder',
   ariaLabel: 'test-select',
 };
 
 const renderComponent = (props: SimpleSelectProps<SelectOption> = defaultProps): RenderResult => {
-  const {
-    options,
-    onChange,
-    value,
-    getOptionLabel,
-    getOptionKey,
-    getOptionValue,
-    ...restProps
-  } = props;
+  const { options, onChange, value, getOptionLabel, ...restProps } = props;
   return render(
     <>
       <div data-testid="block" />
@@ -50,9 +40,7 @@ const renderComponent = (props: SimpleSelectProps<SelectOption> = defaultProps):
         value={value}
         onChange={onChange}
         options={options}
-        getOptionKey={getOptionKey}
         getOptionLabel={getOptionLabel}
-        getOptionValue={getOptionValue}
         {...restProps}
       />
     </>,
@@ -97,10 +85,11 @@ describe('Компонент BasicSelect', () => {
 
     openSelect();
 
+    const block = select.getByTestId('block');
     const list = getList();
     expect(list).toBeInTheDocument();
 
-    fireEvent.click(select.getByTestId('block'));
+    fireEvent.mouseDown(block);
 
     expect(list).not.toBeInTheDocument();
   });
