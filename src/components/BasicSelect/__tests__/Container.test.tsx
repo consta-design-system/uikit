@@ -2,11 +2,11 @@ import * as React from 'react';
 import { render, RenderResult } from '@testing-library/react';
 
 import { Container } from '../Container';
+import { ContainerProps } from '../Container/Container';
 
-const renderComponent = (props): RenderResult => {
-  const { ...restProps } = props;
+const renderComponent = (props: Omit<ContainerProps, 'children'>): RenderResult => {
   return render(
-    <Container {...restProps}>
+    <Container {...props}>
       <div data-testid="content" />
     </Container>,
   );
