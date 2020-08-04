@@ -58,6 +58,24 @@
     }
   }
 
+  &_view_default .Select-Control {
+    padding: 0;
+    color: var(--color-control-typo-default);
+    background: var(--color-control-bg-default);
+    border: var(--control-border-width) solid var(--color-control-bg-border-default);
+    border-radius: var(--control-radius);
+
+    &:hover {
+      border-color: var(--color-control-bg-border-default-hover);
+    }
+  }
+
+  &_view_default.Select_focused .Select-Control {
+    z-index: 1;
+    border-color: var(--color-control-bg-border-focus);
+    outline: none;
+  }
+
   &_form {
     &_round .Select-Control {
       padding-left: calc(var(--input-space) * 1.6);
@@ -132,39 +150,21 @@
     }
   }
 
-  &_view_default .Select-Control {
-    padding: 0;
-    color: var(--color-control-typo-default);
-    background: var(--color-control-bg-default);
-    border: var(--control-border-width) solid var(--color-control-bg-border-default);
-    border-radius: var(--control-radius);
-
-    &:hover {
-      border-color: var(--color-control-bg-border-default-hover);
-    }
-  }
-
-  &_view_default.Select_focused .Select-Control {
-    z-index: 1;
-    border-color: var(--color-control-bg-border-focus);
-    outline: none;
-  }
-
-  &_view_default.Select_form_clear .Select-Control,
-  &_view_default.Select_form_clearClear .Select-Control {
+  &_view_default.Select_form_clear.Select_focused .Select-Control,
+  &_view_default.Select_form_clearClear.Select_focused .Select-Control {
     box-shadow: var(--control-border-width) 0 var(--color-control-bg-border-focus),
       calc(-1 * var(--control-border-width)) 0 var(--color-control-bg-border-focus);
   }
 
-  &_view_default.Select_form_defaultClear .Select-Control,
-  &_view_default.Select_form_brickClear .Select-Control,
-  &_view_default.Select_form_roundClear .Select-Control {
+  &_view_default.Select_form_defaultClear.Select_focused .Select-Control,
+  &_view_default.Select_form_brickClear.Select_focused .Select-Control,
+  &_view_default.Select_form_roundClear.Select_focused .Select-Control {
     box-shadow: var(--control-border-width) 0 var(--color-control-bg-border-focus);
   }
 
-  &_view_default.Select_form_clearDefault .Select-Control,
-  &_view_default.Select_form_clearBrick .Select-Control,
-  &_view_default.Select_form_clearRound .Select-Control {
+  &_view_default.Select_form_clearDefault.Select_focused .Select-Control,
+  &_view_default.Select_form_clearBrick.Select_focused .Select-Control,
+  &_view_default.Select_form_clearRound.Select_focused .Select-Control {
     box-shadow: calc(-1 * var(--control-border-width)) 0 var(--color-control-bg-border-focus);
   }
 
