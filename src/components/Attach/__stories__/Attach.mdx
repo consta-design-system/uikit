@@ -10,15 +10,14 @@ import { AttachExampleEvents } from './examples/AttachExampleEvents/AttachExampl
 import { AttachExampleDescription } from './examples/AttachExampleDescription/AttachExampleDescription';
 import { AttachExampleIcon } from './examples/AttachExampleIcon/AttachExampleIcon';
 import { AttachExampleName } from './examples/AttachExampleName/AttachExampleName';
+import { AttachExampleAs } from './examples/AttachExampleAs/AttachExampleAs';
 
 # Attach
 
-С помощью этого компонента можно показывать файлы, которые загрузил пользователь:
-показать процесс загрузки, уже загруженный файл, изменение загруженных файлов.
+Показывает загрузку файла или уже загруженные файлы.
 
-Например, чтобы загрузить в систему документы, прикрепить скриншот к форме обратной
-связи, загрузить фотографии.
-
+Можно использовать, когда пользователю нужно загрузить файл — фотографию, скриншот,
+документ или что-то другое. А потом посмотреть, какие документы он загрузил.
 
 - [Общее описание](#общее-описание)
 - [Свойства файла](#свойства-файла)
@@ -31,7 +30,8 @@ import { AttachExampleName } from './examples/AttachExampleName/AttachExampleNam
 - [Обработка событий](#обработка-событий)
   - [По клику на кнопку](#по-клику-на-кнопку)
   - [По клику на компонент](#по-клику-на-компонент)
-- [Список свойств](#список-свойств)
+- [Тег для компонента](#тег-для-компонента)
+- [Список свойств](#свойства)
 - [Пример использования](#пример)
 
 ## Общее описание
@@ -218,6 +218,13 @@ import { AttachExampleName } from './examples/AttachExampleName/AttachExampleNam
 />
 ```
 
+## Тег для компонента
+
+Свойство `as` отвечает за тег, в который `Attach` оборачивается в HTML-документе.
+По умолчанию это `div`. Вы можете поменять этот тег, чтобы добавить компоненту
+свойства другого элемента — например, сделайте его ссылкой.
+
+<AttachExampleAs />
 
 
 ## Свойства
@@ -237,14 +244,13 @@ import { AttachExampleName } from './examples/AttachExampleName/AttachExampleNam
 | [`onButtonClick`](#по-клику-на-кнопку) | `React.EventHandler<React.MouseEvent>;` | -             | Событие для клика по кнопке                      |
 | [`buttonIcon`](#по-клику-на-кнопку)   | `React.FC<IconProps>;`                  | -             | Иконка для кнопки                            |
 | [`buttonTitle`](#по-клику-на-кнопку)     | `string`                                | -             | Всплывающая подсказка для кнопки                                 |
-| `className`      | `string`                                | -             | Дополнительный класс                         |
-| `ref`            | `React.Ref<HTMLDivElement>`             | -             | Ссылка на корневой DOM-элемент компонента    |
+| [`as`](#тег-для-компонента)       | `keyof JSX.IntrinsicElements`    | `'div'`      | HTML-тег, в виде которого этот компонент будет представлен в DOM  |
+| `className`      | `string`                                | -             | Дополнительный CSS-класс                        |
+| `ref`            | `React.Ref<HTMLDivElement>`             | -             | Ссылка на корневой DOM-элемент этого компонента   |
 
 <!-- props:end -->
 
-## Пример использования
-
-Использование компонента:
+## Пример
 
 ```ts
 // src/App.ts
