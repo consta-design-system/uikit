@@ -1,7 +1,13 @@
+import { 
+  AttachExampleBasicsLoading,
+  AttachExampleBasicsError,
+  AttachExampleBasicsLoaded,
+  AttachExampleBasicsLink
+  } from './examples/AttachExampleBasics/AttachExampleBasics';
 import { AttachExampleLoading } from './examples/AttachExampleLoading/AttachExampleLoading';
 import { AttachExampleError } from './examples/AttachExampleError/AttachExampleError';
 import { AttachExampleEvents } from './examples/AttachExampleEvents/AttachExampleEvents';
-import { AttachExampleList } from './examples/AttachExampleList/AttachExampleList';
+import { AttachExampleDescription } from './examples/AttachExampleDescription/AttachExampleDescription';
 import { AttachExampleIcon } from './examples/AttachExampleIcon/AttachExampleIcon';
 import { AttachExampleName } from './examples/AttachExampleName/AttachExampleName';
 
@@ -14,6 +20,7 @@ import { AttachExampleName } from './examples/AttachExampleName/AttachExampleNam
 связи, загрузить фотографии.
 
 
+- [Общее описание](#общее-описание)
 - [Свойства файла](#свойства-файла)
   - [Иконка](#иконка)
   - [Название](#название)
@@ -27,39 +34,57 @@ import { AttachExampleName } from './examples/AttachExampleName/AttachExampleNam
 - [Список свойств](#список-свойств)
 - [Пример использования](#пример)
 
+## Общее описание
+
+Есть 4 основных вида компонента: 
+
+Файл загружается. В этот момент показывается лоадер загрузки и опциональное указание процента загрузки. В таком виде у компонента должна быть кнопка отмены с иконкой крестика.
+
+<AttachExampleBasicsLoading />
+
+Файл не загрузился по причине какой-то ошибки. Тут всё просто: красным цветом пишется ошибка и что нужно сделать. В этом виде тоже есть кнопка отмены.
+
+<AttachExampleBasicsError />
+
+Файл успешно загрузился. В этом виде уже точно известно разширение файла и показывается соответсвующая иконка, если есть. Дополнительно можно вывести мета-информацию о файле: размер, дату, автора или что-то ещё. Кнопка отмены подменяется на кнопку удаления с иконкой Корзины. 
+
+<AttachExampleBasicsLoaded />
+
+Просмотр файла. На первый взгляд внешне этот вид не отлчиается от предыдущего. Разница в том, что тут нет никаких кнопок, так как с самим файлом уже нельзя ничего сделать, кроме как открыть (скачать). В этом случае он выполняет роль ссылки или кнопки. 
+
+<AttachExampleBasicsLink />
+
 ## Свойства файла
 
 ### Иконка
 
-Иконка файла зависит от его расширения, за это отвечает свойство `fileExtension`.
-Если вы укажете расширение, которого нет в нашей галерее иконок, пользователь
-увидит иконку с вопросом. [Посмотреть иконки для файлов](?path=/story/components-file--gallery)
+Иконка файла зависит от его расширения, за это отвечает свойство `fileExtension`. Если вы укажете расширение, которого нет в нашей галерее иконок, пользователь увидит иконку с вопросом. [Посмотреть иконки для файлов](?path=/story/components-file--gallery)
 
-
+<AttachExampleIcon />
 
 ```ts
 <Attach
   fileName="Картинка в JPG"
   fileExtension="jpg"
 />
-```
-```ts
+
 <Attach
   fileName="Картинка в непонятном формате BZZ"
   fileExtension="bzz"
 />
 ```
-<AttachExampleIcon />
 
 Рядом с иконкой можно разместить информацию о файле.
 
 ### Название
 
-За название отвечает свойство `fileName`. Сюда можно подставить имя файла, но лучше
-придумать красивое название, которое будет понятно пользователям.
+За название отвечает свойство `fileName`. Сюда можно подставить имя файла, но лучше придумать красивое название, которое будет понятно пользователям.
 
-Например, если вы просите загрузить фотографию, скан паспорта и
-сопроводительное письмо, загруженные файлы можно так и назвать.
+Например, если вы просите загрузить фотографию, скан паспорта и сопроводительное письмо, загруженные файлы можно так и назвать.
+
+
+
+<AttachExampleName />
 
 ```ts
 <Attach
@@ -68,16 +93,14 @@ import { AttachExampleName } from './examples/AttachExampleName/AttachExampleNam
   fileExtension="jpg"
   fileDescription="1,5 Mб 19.07.2020, 16:11"
 />
-```
-``` ts
+
 <Attach
   className={cnAttachExampleList()}
   fileName="Скан паспорта"
   fileExtension="pdf"
   fileDescription="1,5 Mб 19.07.2020, 16:12"
 />
-```
-```ts
+
 <Attach
   className={cnAttachExampleList()}
   fileName="Сопроводительное письмо"
@@ -87,13 +110,13 @@ import { AttachExampleName } from './examples/AttachExampleName/AttachExampleNam
 ```
 
 
-<AttachExampleList />
-
 ### Описание
 
 За описание файла отвечает свойство `fileDescription`.  Мы предполагаем, что здесь удобно
 показывать размер файла и время загрузки, но вы можете использовать его для любой
 информации, которую считаете важной.
+
+<AttachExampleDescription />
 
 ```ts
 <Attach
@@ -102,9 +125,7 @@ import { AttachExampleName } from './examples/AttachExampleName/AttachExampleNam
   fileExtension="jpg"
   fileDescription="14 Мб 01.04.2020, 07:01"
 />
-```
 
-```ts
 <Attach
   className={cnAttachExampleName()}
   fileName="Файл с каким попало описанием"
@@ -113,8 +134,6 @@ import { AttachExampleName } from './examples/AttachExampleName/AttachExampleNam
 />
 ```
 
-
-<AttachExampleName />
 
 ## Загрузка файла
 
@@ -128,6 +147,8 @@ import { AttachExampleName } from './examples/AttachExampleName/AttachExampleNam
 
 `loadingProgress` позволяет показать прогресс загрузки файла в процентах.
 
+<AttachExampleLoading />
+
 ```ts
 <Attach
   fileName="Инструкция по сборке марсохода"
@@ -138,8 +159,6 @@ import { AttachExampleName } from './examples/AttachExampleName/AttachExampleNam
   loadingProgress={70}
 />
 ```
-
-<AttachExampleLoading />
 
 
 ### Ошибка при загрузке
@@ -181,6 +200,7 @@ import { AttachExampleName } from './examples/AttachExampleName/AttachExampleNam
 
 > Не забудьте про всплытие событий
 
+<AttachExampleEvents />
 
 ```ts
 <Attach
@@ -197,7 +217,6 @@ import { AttachExampleName } from './examples/AttachExampleName/AttachExampleNam
   }}
 />
 ```
-<AttachExampleEvents />
 
 
 

@@ -4,6 +4,7 @@ import React from 'react';
 
 import { IconTrash } from '../../../../../icons/IconTrash/IconTrash';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
+import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
 import { cn } from '../../../../../utils/bem';
 import { Attach } from '../../../Attach';
 
@@ -11,7 +12,7 @@ const cnAttachExampleEvents = cn('AttachExampleEvents');
 
 export function AttachExampleEvents() {
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <div className={cnDocsDecorator('Section', [cnDocsExample(null)])}>
       <Attach
         className={cnAttachExampleEvents()}
         fileName="my_tale_about_mars_final_last_12"

@@ -1,19 +1,20 @@
-import './AttachExampleList.css';
+import './AttachExampleDescription.css';
 
 import React from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
+import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
 import { cn } from '../../../../../utils/bem';
 import { Attach } from '../../../Attach';
 
-const cnAttachExampleList = cn('AttachExampleList');
+const cnAttachExampleDescription = cn('AttachExampleDescription');
 
-export function AttachExampleList() {
+export function AttachExampleDescription() {
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <div className={cnDocsDecorator('Section', [cnDocsExample(null)])}>
       <div>
         <Attach
-          className={cnAttachExampleList()}
+          className={cnAttachExampleDescription()}
           fileName="Фотография"
           fileExtension="jpg"
           fileDescription="1,5 Mб 19.07.2020, 16:11"
@@ -21,7 +22,7 @@ export function AttachExampleList() {
       </div>
       <div>
         <Attach
-          className={cnAttachExampleList()}
+          className={cnAttachExampleDescription()}
           fileName="Скан паспорта"
           fileExtension="pdf"
           fileDescription="1,5 Mб 19.07.2020, 16:12"
@@ -29,7 +30,7 @@ export function AttachExampleList() {
       </div>
       <div>
         <Attach
-          className={cnAttachExampleList()}
+          className={cnAttachExampleDescription()}
           fileName="Сопроводительное письмо"
           fileExtension="docx"
           fileDescription="225 Mб 19.07.2020, 17:15"

@@ -5,7 +5,7 @@
     line-height: var(--line-height-text-s);
   }
 
-  &-Status {
+  & &-Status {
     margin-top: var(--space-l);
     margin-bottom: 0.4em;
     padding-top: var(--space-s);
