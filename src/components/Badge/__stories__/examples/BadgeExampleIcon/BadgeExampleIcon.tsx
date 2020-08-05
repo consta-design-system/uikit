@@ -3,12 +3,23 @@ import React from 'react';
 import { IconCheck } from '../../../../../icons/IconCheck/IconCheck';
 import { IconClose } from '../../../../../icons/IconClose/IconClose';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
+import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
+import * as wp from '../../../../../utils/whitepaper/whitepaper';
 import { Badge } from '../../../Badge';
 
 export const BadgeExampleIcon = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
-    <Badge icon={IconCheck} status="success" label="Съедобно" />
-    <Badge icon={IconClose} status="error" label="Отрава" />
-  </StoryBookExample>
+  <div className={cnDocsDecorator('Section', [cnDocsExample(null)])}>
+    <Badge
+      icon={IconCheck}
+      status="success"
+      label="Съедобно"
+      className={wp.decorator({ 'indent-r': 'm' })}
+    />
+    <Badge
+      icon={IconClose}
+      status="error"
+      label="Отрава"
+      className={wp.decorator({ 'indent-r': 'm' })}
+    />
+  </div>
 );
