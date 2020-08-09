@@ -1,1 +1,43 @@
 # Radio
+
+Радиокнопка нужна, чтобы пользователь мог сделать выбор — один из нескольких
+вариантов.
+
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+## Свойства
+
+<!-- props:start -->
+
+| Свойство         | Тип                                     | По умолчанию  | Описание                                     |
+| ---------------- | --------------------------------------- | ------------- | -------------------------------------------- |
+| `label `         |  `string`                               |   -           | Текст рядом с радиокнопкой    |
+| `size`           | `'m', 'l'`                              | `'m'`         | Размер радиокнопки                               |
+| `checked`        | `boolean`                               | -             | Делает радиокнопку выбранной                 |
+| `intermediate`   | `boolean`                               | -             | Показывает радиокнопку  с неопределенным статусом        |
+| `disabled`       | `boolean`                               | -             | Делает радиокнопку неактивной                  |
+| `required`       | `boolean`                               | -             | Такую радиокнопку обязательно нужно выбрать       |
+| `readOnly`       | `boolean`                               | -             | Радиокнопка, которую нельзя поменять  |
+| `autoFocus`      | `boolean`                               | -             | Переносит фокус на эту кнопку  |
+| `tabIndex`       | `number`                                | -             | орядковый номер при переходе между элементами интерфейса по клавише **tab**  |
+| `step `          | `number | string`                       | -             |  |
+| `name    `       | `string`                                | -             | Имя элемента в DOM |
+| `onChange`       | `string`                               | -             | Действие при выборе радиокнопки  |
+| `onFocus`        | `React.FocusEventHandler<HTMLInputElement>`| -             | Действие по фокусу   |
+| `onBlur`         | `React.FocusEventHandler<HTMLInputElement>` | -             | Действие при потере фокуса   |
+| `inputRef`       | `React.FocusEventHandler<HTMLInputElement>`| -          | Ссылка на корневой DOM-элемент этого компонента |
+
+<!-- props:end -->
+
+## Пример
+
+```ts
+// src/App.ts
+import React from 'react';
+import { Radio } from '@gpn-design/uikit/Radio';
+
+const App = () => {
+  return <Radio label="I am radio" />;
+};
+```
