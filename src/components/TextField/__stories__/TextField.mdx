@@ -1,1 +1,62 @@
 # TextField
+
+Поле для ввода текста — одной или нескольких строк. Используется в формах.
+
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+## Свойства
+
+| Свойство   | Тип        | По умолчанию | Описание                                                                 |
+| ---------- | --------------------------------------| ------------ | --------------------------------------------- |
+| type | `'text', 'textarea'` | `'text'` | Тег для текстового поля? |
+| disabled | `boolean` | - | Делает поле неактивным |
+| `rows` | `number` | - | Количество строк |
+| `cols` | `number` | - | Количество колонок |
+| `minRows` | `number` | - | Минимум строк |
+| `maxRows` | `number` | - | Максимум строк |
+| `maxLength` | `number` | - | Максимальная ширина |
+| `size` | `'xs', 's', 'm', 'l' `| `'m'` | Высота поля  |
+| `view` | `'default', 'clear'` |  `'default'` | Внешний вид поля |
+| `form` | `'default', 'brick', 'round', 'clearRound', 'roundClear', 'clearDefault', 'defaultClear', 'defaultBrick', 'brickDefault', 'brickClear', 'clearBrick', 'clearClear'`, | `'default'` | Форма поля |
+| `state` | `'', 'alert', 'success', 'warning'` | `' '` | Тип поля |
+| `width` | `'full', 'default'` | `'default'` | Ширина поля |
+| `placeholder` | `string` | - | Подсказка внутри поля |
+| `leftSide` | `React.FC<IconProps>\string` | - | Иконка или текст слева, внутри поля |
+| `rightSide` | `React.FC<IconProps>\string` | - | Иконка или текст справа, внутри поля |
+| `iconSize`|  | - | Размер иконки |
+| `autoComplete`|  | - |  |
+| `max` | `number \ string;` | - |  |
+| `min` | `number \ string;` | - |  |
+| `value` | `string` | - | Предустановленный текст в поле |
+| `id` | `string`  | - | ID поля в DOM |
+| `name` | `string`  | - | Имя поля в DOM |
+| `readOnly` | `boolean` | - |  Только для чтения |
+| `required` | `boolean` | - |  Нужно заполнить  |
+| `step` | `number \ string` | - |  |
+| `tabIndex` | `number` | - | Порядковый номер при переходе между элементами интерфейса по клавише **tab** |
+| `ariaLabel`| `string` | - |  |
+| `autoFocus` | `boolean` | - | Перемещает фокус в поле |
+| `onFocus` | `React.FocusEventHandler<HTMLElement>` | - | Действие по фокусу |
+| `onBlur` | `React.FocusEventHandler<HTMLElement>` | - |  Действие при потере фокуса|
+| `onChange`  | `` | - | Действие при изменении текстового поля |
+| `className` | `string`  | -            | Дополнительный CSS-класс   |
+| `inputRef`       | `React.Ref<HTMLTextAreaElement | HTMLInputElement>>`  | -  | Ссылка на корневой DOM-элемент компонента                                |
+
+
+
+
+## Пример
+
+
+```ts
+// src/App.ts
+import React from 'react';
+import { TextField } from '@gpn-design/uikit/TextField';
+
+const handleClick = () => console.log('click');
+
+const App = () => {
+  return <TextField  />;
+};
+```
