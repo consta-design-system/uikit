@@ -1,0 +1,108 @@
+import { Preview } from '@storybook/addon-docs/dist/blocks';
+
+# MultiCombobox
+
+MultiCombobox — компонент реализующий элемент управления меню опций с выбором нескольких опции.
+
+Компоненту необходимо передать тип опции: `<MultiCombobox<T> {..props}/>`.
+
+## Cвойства компонента
+
+| Свойство            | Тип или варианты значения                                             | По умолчанию              | Описание  |
+| ------------------- | --------------------------------------------------------------------- | ------------------------- | --------- |
+| disabled?           | `boolean`                                                             | -                         | Активность компонента |
+| size?               | `s | m | l`                                                           | `m`                       | Размер компонента |
+| view?               | `default | clear`                                                     | `default`                 | Внешний вид компонента |
+| width?              | `full | default`                                                      | `default`                 | Cвойство определяет какую ширину будет занимать компонент. `default` ширина согласно содержимому |
+| ariaLabel?          | `string`                                                              | -                         | `aria` атрибут для метки |
+| placeholder?        | `string`                                                              | -                         | Placeholder — текст, который будет отображаться в качестве подсказки в поле значения, при его отсутствии |
+| className?          | `string`                                                              | -                         | Дополнительный класс |
+| value?              | `T | null`                                                            | -                         | Значение селекта, по умолчанию `null`. |
+| id                  | `string`                                                              | -                         | Идентификатор селекта |
+| options             | `T[]`                                                                 | -                         | Опции |
+| onChange?           | `(value: string) => void`                                             | -                         | Обработчик события изменения значения компонента |
+| getOptionLabel      | `(arg: T) => string`                                                  | -                         | Функция для получения текста опции, он будет отображаться в поле для выбранного значения |
+| getOptionKey        | `(arg: T) => string`                                                  | -                         | Функция для формирования `key` опции в списке опций выпадающего блока со списком |
+| getOptionValue      | `(arg: T) => string`                                                  | -                         | Функция для формирования значения опции, которое будет возвращаться в форму |
+| onBlur?             | `(event?: React.FocusEvent<HTMLElement>) => void`                     | -                         | Обработчик события `blur` |
+| onFocus?            | `(event?: React.FocusEvent<HTMLElement>) => void`                     | -                         | Обработчик события `focus` |
+
+
+## Пример использования
+
+```ts
+import React from 'react';
+import { Table } from '@gpn-design/uikit/MultiCombobox';
+
+type Option = {
+  label: string;
+  value: string;
+}
+
+const items = [
+  {label: 'Москва', value: 'moscow'},
+  {label: 'Санкт-Петербург', value: 'spb'},
+  {label: 'Томск', value: 'tomsk'},
+]
+
+const Example = () => {
+  const getItemLabel = (option: SelectOption): string => option.label;
+  const getItemKey = (option: SelectOption): string => option.value;
+  const getItemValue = (option: SelectOption): string => option.value;
+
+  return (
+    <>
+      <div style={{ width: '250px' }}>
+        <BasicSelect<Option>
+          id="city"
+          options={items}
+          getOptionLabel={getItemLabel}
+          getOptionKey={getItemKey}
+          getOptionValue={getItemValue}
+        />
+      </div>
+    </>
+  )
+};
+
+```
+
+## С заданным значением
+
+```ts
+import React from 'react';
+import { Table } from '@gpn-design/uikit/MultiCombobox';
+
+type Option = {
+  label: string;
+  value: string;
+}
+
+const items = [
+  {label: 'Москва', value: 'moscow'},
+  {label: 'Санкт-Петербург', value: 'spb'},
+  {label: 'Томск', value: 'tomsk'},
+]
+
+const Example = () => {
+  const getItemLabel = (option: SelectOption): string => option.label;
+  const getItemKey = (option: SelectOption): string => option.value;
+  const getItemValue = (option: SelectOption): string => option.value;
+
+  return (
+    <>
+      <div style={{ width: '250px' }}>
+        <MultiCombobox<Option>
+          id="city"
+          value={{label: 'Москва', value: 'moscow'}}
+          options={items}
+          getOptionLabel={getItemLabel}
+          getOptionKey={getItemKey}
+          getOptionValue={getItemValue}
+        />
+      </div>
+    </>
+  )
+};
+
+```
