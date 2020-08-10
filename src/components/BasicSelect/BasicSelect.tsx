@@ -2,7 +2,9 @@ import '../SelectComponents/Select.css';
 
 import React, { useRef, useState } from 'react';
 
+import { useSelect } from '../../hooks/useSelect/useSelect';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
+import { scrollIntoView } from '../../utils/scrollIntoView';
 import { Popover } from '../Popover/Popover';
 import { cnSelect } from '../SelectComponents/cnSelect';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';

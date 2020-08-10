@@ -1,9 +1,9 @@
 import React, { CSSProperties } from 'react';
 
-import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
-import { KeyHandler, useKeys } from '../../../hooks/useKeys/useKeys';
-
-import { usePrevious } from './utils';
+import { useClickOutside } from '../useClickOutside/useClickOutside';
+import { useDebounce } from '../useDebounce/useDebounce';
+import { KeyHandler, useKeys } from '../useKeys/useKeys';
+import { usePrevious } from '../usePrevious/usePrevious';
 
 type State = {
   searchValue: string;
@@ -28,6 +28,7 @@ type SetHandler<T> = (arg: SetHandlerArg<T>) => void;
 export type SelectProps<T> = {
   options: T[];
   value: T[] | null;
+  multi?: boolean;
   onChange: OnChangeFunctionType;
   optionsRef: React.MutableRefObject<HTMLDivElement | null>;
   scrollToIndex?: ScrollToIndexFunctionType;
@@ -104,9 +105,11 @@ function useHoistedState(initialState: State): [State, (updater: Updater, action
 }
 
 export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
-  const { options, onChange, scrollToIndex, optionsRef, disabled = false } = params;
+  const { options, onChange, scrollToIndex, optionsRef, disabled = false, multi = false } = params;
   const value = params.value ?? [];
   const [{ searchValue, isOpen, highlightedIndex }, setState] = useHoistedState(initialState);
+
+  const originalOptions = options;
 
   // Refs
 
@@ -146,6 +149,30 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
     [setState],
   );
 
+  const setResolvedSearch = useDebounce((value: string) => {
+    setState(
+      (old) => ({
+        ...old,
+        resolvedSearchValue: value,
+      }),
+      actions.setSearch,
+    );
+  }, 300);
+
+  const setSearch = React.useCallback(
+    (value) => {
+      setState(
+        (old) => ({
+          ...old,
+          searchValue: value,
+        }),
+        actions.setSearch,
+      );
+      setResolvedSearch(value);
+    },
+    [setState, setResolvedSearch],
+  );
+
   const prevIsOpen = usePrevious(isOpen);
 
   React.useLayoutEffect(() => {
@@ -179,9 +206,12 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
     (index) => {
       const option = options[index];
       if (option && onChangeRef.current) {
-        onChangeRef.current(option);
-
-        setOpen(false);
+        if (!multi) {
+          onChangeRef.current(option);
+          setOpen(false);
+        } else {
+          onChangeRef.current([...value, option]);
+        }
       }
     },
     [options, value, setOpen],
@@ -189,15 +219,30 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
 
   // Handlers
 
-  const handleValueFieldChange = (): void => {
+  const handleValueFieldChange = (e: React.SyntheticEvent): void => {
     !disabled && setOpen(true);
+
+    if (multi) {
+      const target = e.target as HTMLFormElement;
+      !disabled && setSearch(target.value);
+    }
   };
 
   const handleValueFieldClick = (): void => {
     !disabled && setOpen(!isOpen);
+    if (multi) {
+      setSearch('');
+    }
   };
 
   const handleValueFieldFocus = (): void => handleValueFieldClick();
+
+  const removeValue = React.useCallback(
+    (index) => {
+      onChangeRef.current && onChangeRef.current(value.filter((d, i) => i !== index));
+    },
+    [value],
+  );
 
   // Prop Getters
 
@@ -232,6 +277,13 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
     setOpen(false);
   };
 
+  const Backspace = (): void => {
+    if (!multi || searchValue) {
+      return;
+    }
+    removeValue(value.length - 1);
+  };
+
   const getKeyProps = useKeys({
     ArrowUp: ArrowUp(),
     ArrowDown: ArrowDown(),
@@ -242,6 +294,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
     Enter: Enter(),
     Escape,
     Tab,
+    Backspace,
   });
 
   const getToggleProps = ({
@@ -262,7 +315,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
         }
       },
       onChange: (e) => {
-        handleValueFieldChange();
+        handleValueFieldChange(e);
         if (typeof onChange === 'function') {
           onChange(e);
         }
