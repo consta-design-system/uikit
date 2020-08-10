@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.6.1 (10/08/2020)
+
+- [fix(Types): emotions affect types (#314)](https://github.com/gpn-prototypes/ui-kit/commit/e1dea8dc685fac2016597715af387bcb8978b147) - @gizeasy
+- [chore(deps): bump elliptic from 6.5.2 to 6.5.3 (#306)](https://github.com/gpn-prototypes/ui-kit/commit/3d5c426a26507a6678037d5d4e634b13bdae31df) - @dependabot[bot]
+- [fix(StoryBook): change path Table](https://github.com/gpn-prototypes/ui-kit/commit/6ce7ac972d2c3030545fb3096a64e80e93bcdb1e) - @gizeasy
+
+---
+
 ## v1.6.0 (29/07/2020)
 
 - [fix(Badge): replace system color in Display theme, fix text color (#280)](https://github.com/gpn-prototypes/ui-kit/commit/25a417747f81ed0a8c29cf6acde783d01e6728ec) - @fooontic

@@ -6,3 +6,9 @@ export type PropsWithHTMLAttributesAndRef<Props, HTMLElement> = PropsWithHTMLAtt
   HTMLElement
 > &
   React.RefAttributes<HTMLElement>;
+
+declare module 'react' {
+  interface DOMAttributes<T> {
+    css?: never;
+  }
+}
