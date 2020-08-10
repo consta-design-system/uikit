@@ -5,12 +5,21 @@ import React, { useRef, useState } from 'react';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { Popover } from '../Popover/Popover';
 
+import { Dropdown } from './Dropdown/Dropdown';
 import { useSelect } from './hooks/use-select';
 import { scrollIntoView } from './hooks/utils';
+import { SelectContainer } from './SelectContainer/SelectContainer';
 import { cnSelect } from './cnSelect';
-import { Container } from './Container';
-import { Dropdown } from './Dropdown';
-import { PropForm, PropSize, PropView, PropWidth } from './types';
+import {
+  DefaultPropForm,
+  DefaultPropSize,
+  DefaultPropView,
+  DefaultPropWidth,
+  PropForm,
+  PropSize,
+  PropView,
+  PropWidth,
+} from './types';
 
 export type SimpleSelectProps<T> = {
   options: T[];
@@ -26,8 +35,8 @@ export type SimpleSelectProps<T> = {
   ariaLabel?: string;
   onChange?: (v: T) => void;
   getOptionLabel(arg: T): string;
-  onBlur?: (event?: React.FocusEvent<HTMLElement>) => void;
-  onFocus?: (event?: React.FocusEvent<HTMLElement>) => void;
+  onBlur?: (event?: React.FocusEvent<HTMLButtonElement>) => void;
+  onFocus?: (event?: React.FocusEvent<HTMLButtonElement>) => void;
 };
 
 export function BasicSelect<T>(props: SimpleSelectProps<T>): React.ReactElement {
@@ -42,7 +51,10 @@ export function BasicSelect<T>(props: SimpleSelectProps<T>): React.ReactElement 
     disabled,
     ariaLabel,
     id,
-    size,
+    width = DefaultPropWidth,
+    form = DefaultPropForm,
+    view = DefaultPropView,
+    size = DefaultPropSize,
     ...restProps
   } = props;
   const [isFocused, setIsFocused] = useState(false);
@@ -86,7 +98,7 @@ export function BasicSelect<T>(props: SimpleSelectProps<T>): React.ReactElement 
     disabled,
   });
 
-  const handleInputFocus = (e: React.FocusEvent<HTMLElement>): void => {
+  const handleInputFocus = (e: React.FocusEvent<HTMLButtonElement>): void => {
     if (!disabled) {
       if (!isFocused) {
         setIsFocused(true);
@@ -97,7 +109,7 @@ export function BasicSelect<T>(props: SimpleSelectProps<T>): React.ReactElement 
     }
   };
 
-  const handleInputBlur = (e: React.FocusEvent<HTMLElement>): void => {
+  const handleInputBlur = (e: React.FocusEvent<HTMLButtonElement>): void => {
     if (isFocused) {
       setIsFocused(false);
 
@@ -115,7 +127,15 @@ export function BasicSelect<T>(props: SimpleSelectProps<T>): React.ReactElement 
   const toggleRef = useRef(null);
 
   return (
-    <Container focused={isFocused} disabled={disabled} size={size} {...restProps}>
+    <SelectContainer
+      focused={isFocused}
+      disabled={disabled}
+      size={size}
+      {...restProps}
+      view={view}
+      form={form}
+      width={width}
+    >
       <div className={cnSelect('Control')} aria-expanded={isOpen} aria-haspopup="listbox" id={id}>
         <div className={cnSelect('ControlInner')}>
           <button
@@ -178,6 +198,6 @@ export function BasicSelect<T>(props: SimpleSelectProps<T>): React.ReactElement 
           </Dropdown>
         </Popover>
       )}
-    </Container>
+    </SelectContainer>
   );
 }

@@ -3,6 +3,16 @@ import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { createMetadata, createStory } from '../../../utils/storybook';
 import { BasicSelect } from '../BasicSelect';
+import {
+  DefaultPropForm,
+  DefaultPropSize,
+  DefaultPropView,
+  DefaultPropWidth,
+  form,
+  sizes,
+  view,
+  width,
+} from '../types';
 
 import mdx from './BasicSelect.mdx';
 
@@ -46,27 +56,10 @@ const items = [
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const getKnobs = () => ({
   disabled: boolean('disabled', false),
-  size: select('size', ['xs', 's', 'm', 'l'], 'm'),
-  view: select('view', ['default', 'clear'], 'default'),
-  width: select('width', ['full', 'default'], 'default'),
-  form: select(
-    'form',
-    [
-      'default',
-      'brick',
-      'round',
-      'clearRound',
-      'roundClear',
-      'clearDefault',
-      'defaultClear',
-      'defaultBrick',
-      'brickDefault',
-      'brickClear',
-      'clearBrick',
-      'clearClear',
-    ],
-    'default',
-  ),
+  size: select('size', sizes, DefaultPropSize),
+  view: select('view', view, DefaultPropView),
+  width: select('width', width, DefaultPropWidth),
+  form: select('form', form, DefaultPropForm),
   placeholder: text('placeholder', 'Placeholder'),
 });
 
@@ -76,7 +69,7 @@ const Default = (props: { value?: SelectOption }): JSX.Element => {
   return (
     <>
       <div>
-        <BasicSelect<SelectOption>
+        <BasicSelect
           {...getKnobs()}
           id="example"
           options={items}
