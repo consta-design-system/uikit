@@ -75,7 +75,7 @@ const Default = (props: { value?: SelectOption }): JSX.Element => {
 
   return (
     <>
-      <div style={{ width: '250px' }}>
+      <div>
         <BasicSelect<SelectOption>
           {...getKnobs()}
           id="example"
