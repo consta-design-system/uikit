@@ -23,7 +23,6 @@ export type ChoiceGroupPropView = typeof choiceGroupViews[number];
 export const choiceGroupDefaultView: ChoiceGroupPropView = 'primary';
 
 export type ChoiceGroupPropGetLabel<ITEM> = (item: ITEM) => string | number;
-export type ChoiceGroupPropGetTitle<ITEM> = (item: ITEM) => string | number;
 export type ChoiceGroupPropGetIcon<ITEM> = (item: ITEM) => React.FC<IconProps> | undefined;
 
 type CommonProps<ITEM> = {
