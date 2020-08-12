@@ -1,4 +1,4 @@
-import './Dropdown.css';
+import './SelectDropdown.css';
 
 import React from 'react';
 
@@ -10,7 +10,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export const Dropdown = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
+export const SelectDropdown = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
   const { className, children, ...restProps } = props;
 
   return (

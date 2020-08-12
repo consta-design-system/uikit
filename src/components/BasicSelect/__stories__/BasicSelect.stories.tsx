@@ -2,7 +2,6 @@ import React from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { createMetadata, createStory } from '../../../utils/storybook';
-import { BasicSelect } from '../BasicSelect';
 import {
   DefaultPropForm,
   DefaultPropSize,
@@ -12,7 +11,8 @@ import {
   sizes,
   view,
   width,
-} from '../types';
+} from '../../SelectComponents/types';
+import { BasicSelect } from '../BasicSelect';
 
 import mdx from './BasicSelect.mdx';
 

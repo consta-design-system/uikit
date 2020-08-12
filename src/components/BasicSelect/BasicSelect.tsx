@@ -1,15 +1,12 @@
-import './styles.css';
+import '../SelectComponents/Select.css';
 
 import React, { useRef, useState } from 'react';
 
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { Popover } from '../Popover/Popover';
-
-import { Dropdown } from './Dropdown/Dropdown';
-import { useSelect } from './hooks/use-select';
-import { scrollIntoView } from './hooks/utils';
-import { SelectContainer } from './SelectContainer/SelectContainer';
-import { cnSelect } from './cnSelect';
+import { cnSelect } from '../SelectComponents/cnSelect';
+import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
+import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
 import {
   DefaultPropForm,
   DefaultPropSize,
@@ -19,9 +16,12 @@ import {
   PropSize,
   PropView,
   PropWidth,
-} from './types';
+} from '../SelectComponents/types';
 
-export type SimpleSelectProps<T> = {
+import { useSelect } from './hooks/use-select';
+import { scrollIntoView } from './hooks/utils';
+
+export interface SimpleSelectProps<T> {
   options: T[];
   id: string;
   value?: T | null;
@@ -37,9 +37,11 @@ export type SimpleSelectProps<T> = {
   getOptionLabel(arg: T): string;
   onBlur?: (event?: React.FocusEvent<HTMLButtonElement>) => void;
   onFocus?: (event?: React.FocusEvent<HTMLButtonElement>) => void;
-};
+}
 
-export function BasicSelect<T>(props: SimpleSelectProps<T>): React.ReactElement {
+type Select = <T>(props: SimpleSelectProps<T>) => React.ReactElement | null;
+
+export const BasicSelect: Select = (props) => {
   const {
     placeholder,
     onBlur,
@@ -58,10 +60,10 @@ export function BasicSelect<T>(props: SimpleSelectProps<T>): React.ReactElement 
     ...restProps
   } = props;
   const [isFocused, setIsFocused] = useState(false);
-  const [val, setValue] = useState<T | null | undefined>(value);
+  const [val, setValue] = useState(value);
 
-  const handlerChangeValue = (v: T): void => {
-    if (typeof onChange === 'function') {
+  const handlerChangeValue = (v: typeof value): void => {
+    if (typeof onChange === 'function' && v) {
       onChange(v);
     }
     setValue(v);
@@ -175,7 +177,7 @@ export function BasicSelect<T>(props: SimpleSelectProps<T>): React.ReactElement 
           possibleDirections={['downLeft', 'upLeft', 'downRight', 'upRight']}
           offset={1}
         >
-          <Dropdown role="listbox" aria-activedescendant={`${id}-${highlightedIndex}`}>
+          <SelectDropdown role="listbox" aria-activedescendant={`${id}-${highlightedIndex}`}>
             <div className={cnSelect('List', { size })} ref={optionsRef}>
               {visibleOptions.map((option, index: number) => (
                 <div
@@ -195,9 +197,9 @@ export function BasicSelect<T>(props: SimpleSelectProps<T>): React.ReactElement 
                 </div>
               ))}
             </div>
-          </Dropdown>
+          </SelectDropdown>
         </Popover>
       )}
     </SelectContainer>
   );
-}
+};
