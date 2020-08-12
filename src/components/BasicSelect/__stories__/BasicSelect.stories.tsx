@@ -13,16 +13,6 @@ import {
   width,
 } from '../../SelectComponents/types';
 import { BasicSelect } from '../BasicSelect';
-import {
-  DefaultPropForm,
-  DefaultPropSize,
-  DefaultPropView,
-  DefaultPropWidth,
-  form,
-  sizes,
-  view,
-  width,
-} from '../types';
 
 import mdx from './BasicSelect.mdx';
 
