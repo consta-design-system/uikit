@@ -33,6 +33,8 @@ export type SelectProps<T> = {
   optionsRef: React.MutableRefObject<HTMLDivElement | null>;
   scrollToIndex?: ScrollToIndexFunctionType;
   disabled?: boolean;
+  filterFn?(options: T[], searchValue: string): T[];
+  getOptionLabel?(option: T): string;
 };
 
 interface OptionProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -105,9 +107,20 @@ function useHoistedState(initialState: State): [State, (updater: Updater, action
 }
 
 export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
-  const { options, onChange, scrollToIndex, optionsRef, disabled = false, multi = false } = params;
+  const {
+    options,
+    onChange,
+    scrollToIndex,
+    optionsRef,
+    disabled = false,
+    multi = false,
+    getOptionLabel,
+  } = params;
   const value = params.value ?? [];
-  const [{ searchValue, isOpen, highlightedIndex }, setState] = useHoistedState(initialState);
+  const [
+    { searchValue, isOpen, highlightedIndex, resolvedSearchValue },
+    setState,
+  ] = useHoistedState(initialState);
 
   const originalOptions = options;
 
@@ -124,6 +137,24 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   const onChangeRef = React.useRef<OnChangeFunctionType>();
   onChangeRef.current = onChange;
 
+  const filterFnRef = React.useRef<(options: T[], searchValue: string) => T[]>();
+  filterFnRef.current = (options: T[], searchValue: string): T[] => {
+    if (getOptionLabel) {
+      return options
+        .filter((option: T) =>
+          getOptionLabel(option)
+            .toLowerCase()
+            .includes(searchValue.toLowerCase()),
+        )
+        .sort((a, _b) => {
+          return getOptionLabel(a)
+            .toLowerCase()
+            .indexOf(searchValue.toLowerCase());
+        });
+    }
+    return options;
+  };
+
   const getSelectedOptionIndex = (): number => {
     if (value) {
       const selectedOptionIndex = options.indexOf(value[0]);
@@ -133,6 +164,13 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
 
     return 0;
   };
+
+  const filteredOptions = React.useMemo(() => {
+    if (resolvedSearchValue && resolvedSearchValue !== '' && filterFnRef.current) {
+      return filterFnRef.current(options, resolvedSearchValue);
+    }
+    return originalOptions;
+  }, [options, resolvedSearchValue]);
 
   // Actions
 
@@ -206,11 +244,11 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
     (index) => {
       const option = options[index];
       if (option && onChangeRef.current) {
-        if (!multi) {
+        if (multi) {
+          onChangeRef.current([...value, option]);
+        } else {
           onChangeRef.current(option);
           setOpen(false);
-        } else {
-          onChangeRef.current([...value, option]);
         }
       }
     },
@@ -222,10 +260,8 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   const handleValueFieldChange = (e: React.SyntheticEvent): void => {
     !disabled && setOpen(true);
 
-    if (multi) {
-      const target = e.target as HTMLFormElement;
-      !disabled && setSearch(target.value);
-    }
+    const target = e.target as HTMLFormElement;
+    !disabled && setSearch(target.value);
   };
 
   const handleValueFieldClick = (): void => {
@@ -417,7 +453,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
     // State
     isOpen,
     highlightedIndex,
-    visibleOptions: options,
+    visibleOptions: filteredOptions,
     value,
     // Actions
     selectIndex,

@@ -1,4 +1,4 @@
-import '../SelectComponents/styles.css';
+import '../SelectComponents/Select.css';
 
 import React, { useRef, useState } from 'react';
 
@@ -8,15 +8,14 @@ import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { scrollIntoView } from '../../utils/scrollIntoView';
 import { Popover } from '../Popover/Popover';
 import { cnSelect } from '../SelectComponents/cnSelect';
-import { Container } from '../SelectComponents/Container/Container';
-import { Dropdown } from '../SelectComponents/Dropdown/Dropdown';
+import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
+import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
 import { PropForm, PropSize, PropView, PropWidth } from '../SelectComponents/types';
-import { Tag } from '../Tag/Tag';
 
-export type SimpleSelectProps<T> = {
+export interface ComboboxSelectProps<T> {
   options: T[];
   id: string;
-  value?: T[] | null;
+  value?: T | null;
   className?: string;
   placeholder?: string;
   disabled?: boolean;
@@ -25,13 +24,15 @@ export type SimpleSelectProps<T> = {
   width?: PropWidth;
   view?: PropView;
   ariaLabel?: string;
-  onChange?: (v: T[]) => void;
+  onChange?: (v: T) => void;
   getOptionLabel(arg: T): string;
   onBlur?: (event?: React.FocusEvent<HTMLElement>) => void;
   onFocus?: (event?: React.FocusEvent<HTMLElement>) => void;
-};
+}
 
-export function MultiCombobox<T>(props: SimpleSelectProps<T>): React.ReactElement {
+type ComboboxType = <T>(props: ComboboxSelectProps<T>) => React.ReactElement | null;
+
+export const Combobox: ComboboxType = (props) => {
   const {
     placeholder,
     onBlur,
@@ -47,23 +48,22 @@ export function MultiCombobox<T>(props: SimpleSelectProps<T>): React.ReactElemen
     ...restProps
   } = props;
   const [isFocused, setIsFocused] = useState(false);
-  const [val, setValue] = useState<T[] | null | undefined>(value);
-  const [inputData, setInputData] = useState<{ size: number; value: string | undefined }>({
-    size: 0,
+  const [val, setValue] = useState(value);
+  const [inputData, setInputData] = useState<{ value: string | undefined }>({
     value: '',
   });
   const toggleRef = useRef<HTMLInputElement>(null);
 
-  const handlerChangeValue = (v: T[]): void => {
-    if (typeof onChange === 'function') {
+  const handlerChangeValue = (v: typeof value): void => {
+    if (typeof onChange === 'function' && v) {
       onChange(v);
     }
     setValue(v);
-    setInputData({ ...inputData, value: toggleRef.current?.value });
+    setInputData({ value: toggleRef.current?.value });
   };
 
   const optionsRef = useRef<HTMLDivElement | null>(null);
-  const arrValue = typeof val !== 'undefined' && val !== null ? [...val] : null;
+  const arrValue = typeof val !== 'undefined' && val !== null ? [val] : null;
 
   const scrollToIndex = (index: number): void => {
     if (!optionsRef.current) {
@@ -86,12 +86,12 @@ export function MultiCombobox<T>(props: SimpleSelectProps<T>): React.ReactElemen
     setOpen,
   } = useSelect({
     options,
-    multi: true,
     value: arrValue,
     onChange: handlerChangeValue,
     optionsRef,
     scrollToIndex,
     disabled,
+    getOptionLabel,
   });
 
   const handleInputFocus = (e: React.FocusEvent<HTMLElement>): void => {
@@ -122,61 +122,49 @@ export function MultiCombobox<T>(props: SimpleSelectProps<T>): React.ReactElemen
 
   const handleClear = (): void => {
     setValue(null);
+    setInputData({ value: '' });
   };
 
   const handleInputChange = (): void => {
     const inputValue = toggleRef.current?.value ?? '';
-    setInputData({ value: inputValue, size: inputValue?.length });
+    setInputData({ value: inputValue });
   };
 
   const handleControlClick = (): void => {
     toggleRef.current?.focus();
   };
 
-  const handleRemove = (val): void => {
-    const newVal = arrValue?.filter((v) => JSON.stringify(v) !== JSON.stringify(val));
-    setValue(newVal);
-  };
-
-  const valueTags = arrValue?.map((val) => (
-    <Tag
-      size={size}
-      mode="cancel"
-      onCancel={(): void => handleRemove(val)}
-      key={getOptionLabel(val)}
-      label={getOptionLabel(val)}
-    />
-  ));
-
   const showPlaceholder =
-    (inputData?.size === 0 && !arrValue?.length) || (inputData?.size === 0 && arrValue === null);
+    (!arrValue?.length && inputData.value === '') || (arrValue === null && inputData.value === '');
 
-  console.log({ ...inputData, arrValue });
+  const showInput = !arrValue?.length || arrValue === null;
 
   return (
-    <Container focused={isFocused} disabled={disabled} size={size} {...restProps}>
+    <SelectContainer focused={isFocused} disabled={disabled} size={size} {...restProps}>
       <div
-        className={cnSelect('Control', { multi: true })}
+        className={cnSelect('Control', { hasInput: true })}
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         id={id}
       >
         <div className={cnSelect('ControlInner')} onClick={handleControlClick}>
           <div className={cnSelect('ControlValueContainer')}>
-            {arrValue && <span className={cnSelect('ControlValue')}>{valueTags}</span>}
+            {arrValue && (
+              <span className={cnSelect('ControlValue')}>{getOptionLabel(arrValue[0])}</span>
+            )}
             {showPlaceholder && <span className={cnSelect('Placeholder')}>{placeholder}</span>}
-            <input
-              {...getToggleProps()}
-              type="text"
-              onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
-              aria-label={ariaLabel}
-              ref={toggleRef}
-              onChange={handleInputChange}
-              size={inputData.size}
-              value={inputData.value}
-              className={cnSelect('Input', { size })}
-            />
+            {showInput && (
+              <input
+                {...getToggleProps({ onChange: handleInputChange })}
+                type="text"
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
+                aria-label={ariaLabel}
+                ref={toggleRef}
+                value={inputData.value}
+                className={cnSelect('Input', { size })}
+              />
+            )}
           </div>
         </div>
         <span className={cnSelect('Indicators')}>
@@ -202,7 +190,7 @@ export function MultiCombobox<T>(props: SimpleSelectProps<T>): React.ReactElemen
           possibleDirections={['downLeft', 'upLeft', 'downRight', 'upRight']}
           offset={1}
         >
-          <Dropdown role="listbox" aria-activedescendant={`${id}-${highlightedIndex}`}>
+          <SelectDropdown role="listbox" aria-activedescendant={`${id}-${highlightedIndex}`}>
             <div className={cnSelect('List', { size })} ref={optionsRef}>
               {visibleOptions.map((option, index: number) => {
                 return (
@@ -228,9 +216,9 @@ export function MultiCombobox<T>(props: SimpleSelectProps<T>): React.ReactElemen
                 );
               })}
             </div>
-          </Dropdown>
+          </SelectDropdown>
         </Popover>
       )}
-    </Container>
+    </SelectContainer>
   );
-}
+};

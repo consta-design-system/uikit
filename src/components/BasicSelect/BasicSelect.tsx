@@ -20,9 +20,6 @@ import {
   PropWidth,
 } from '../SelectComponents/types';
 
-import { useSelect } from './hooks/use-select';
-import { scrollIntoView } from './hooks/utils';
-
 export interface SimpleSelectProps<T> {
   options: T[];
   id: string;

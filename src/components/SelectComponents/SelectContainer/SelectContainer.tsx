@@ -3,7 +3,16 @@ import './SelectContainer.css';
 import React from 'react';
 
 import { cnSelect } from '../cnSelect';
-import { PropForm, PropSize, PropView, PropWidth } from '../types';
+import {
+  DefaultPropForm,
+  DefaultPropSize,
+  DefaultPropView,
+  DefaultPropWidth,
+  PropForm,
+  PropSize,
+  PropView,
+  PropWidth,
+} from '../types';
 
 export type SelectContainerProps = {
   className?: string;
@@ -19,10 +28,10 @@ export type SelectContainerProps = {
 export const SelectContainer = React.forwardRef<HTMLDivElement, SelectContainerProps>(
   (props, ref) => {
     const {
-      size = 'm',
-      width = 'default',
-      form = 'default',
-      view = 'default',
+      size = DefaultPropSize,
+      width = DefaultPropWidth,
+      form = DefaultPropForm,
+      view = DefaultPropView,
       className,
       disabled,
       children,
