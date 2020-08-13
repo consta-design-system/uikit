@@ -6,6 +6,8 @@
   padding: var(--space-2xs) var(--space-xs);
   background: var(--color-control-bg-clear);
   border-radius: var(--control-radius);
+  text-decoration: none;
+  transition: background 0.2s ease;
 
   &-File {
     flex: none;
@@ -20,6 +22,7 @@
   &-Button {
     flex: none;
     opacity: 0;
+    transition: opacity 0.2s ease;
   }
 
   &-Content {
@@ -34,9 +37,15 @@
   }
 
   &_withAction {
-    padding: var(--space-2xs) var(--space-2xs) var(--space-2xs) var(--space-xs);
     cursor: pointer;
-    transition: background 0.2s ease;
+
+    &:hover {
+      background: var(--color-control-bg-clear-hover);
+    }
+  }
+
+  &_withOnButtonAction {
+    padding: var(--space-2xs) var(--space-2xs) var(--space-2xs) var(--space-xs);
 
     &:hover {
       background: var(--color-control-bg-clear-hover);
