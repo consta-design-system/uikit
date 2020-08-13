@@ -50,14 +50,14 @@ type GetOptionPropsResult = {
   onMouseEnter(e: React.SyntheticEvent): void;
 } & JSX.IntrinsicElements['div'];
 
-type NativeButtonProps = JSX.IntrinsicElements['button'];
+type NativeInputProps = JSX.IntrinsicElements['input'];
 
-interface ToggleProps extends NativeButtonProps {
+interface ToggleProps extends NativeInputProps {
   refKey?: string;
-  ref?: React.MutableRefObject<HTMLButtonElement | null>;
+  ref?: React.MutableRefObject<HTMLInputElement | null>;
 }
 
-interface GetTogglePropsResult extends React.HTMLProps<HTMLButtonElement> {
+interface GetTogglePropsResult extends React.HTMLProps<HTMLInputElement> {
   disabled?: boolean;
 }
 
@@ -155,22 +155,22 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
     return options;
   };
 
+  const filteredOptions = React.useMemo(() => {
+    if (resolvedSearchValue && resolvedSearchValue !== '' && filterFnRef.current) {
+      return filterFnRef.current(options, resolvedSearchValue);
+    }
+    return originalOptions;
+  }, [originalOptions, resolvedSearchValue]);
+
   const getSelectedOptionIndex = (): number => {
     if (value) {
-      const selectedOptionIndex = options.indexOf(value[0]);
+      const selectedOptionIndex = filteredOptions.indexOf(value[0]);
 
       return selectedOptionIndex > 0 ? selectedOptionIndex : 0;
     }
 
     return 0;
   };
-
-  const filteredOptions = React.useMemo(() => {
-    if (resolvedSearchValue && resolvedSearchValue !== '' && filterFnRef.current) {
-      return filterFnRef.current(options, resolvedSearchValue);
-    }
-    return originalOptions;
-  }, [options, resolvedSearchValue]);
 
   // Actions
 
@@ -232,17 +232,17 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
                 ? indexForHighlight(old.highlightedIndex)
                 : indexForHighlight,
             ),
-            options.length - 1,
+            filteredOptions.length - 1,
           ),
         };
       }, actions.highlightIndex);
     },
-    [options, setState],
+    [filteredOptions, setState],
   );
 
   const selectIndex = React.useCallback(
     (index) => {
-      const option = options[index];
+      const option = filteredOptions[index];
       if (option && onChangeRef.current) {
         if (multi) {
           onChangeRef.current([...value, option]);
@@ -252,13 +252,13 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
         }
       }
     },
-    [options, value, setOpen],
+    [filteredOptions, value, setOpen],
   );
 
   // Handlers
 
   const handleValueFieldChange = (e: React.SyntheticEvent): void => {
-    !disabled && setOpen(true);
+    // !disabled && setOpen(true);
 
     const target = e.target as HTMLFormElement;
     !disabled && setSearch(target.value);
@@ -296,10 +296,10 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
 
   const Enter: KeyHandler = () => (_, e: React.KeyboardEvent): void => {
     if (isOpen) {
-      if (searchValue || options[highlightedIndex]) {
+      if (searchValue || filteredOptions[highlightedIndex]) {
         e.preventDefault();
       }
-      if (options[highlightedIndex]) {
+      if (filteredOptions[highlightedIndex]) {
         selectIndex(highlightedIndex);
       }
     }
@@ -344,7 +344,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   }: ToggleProps = {}): GetTogglePropsResult => {
     const sourceRef = ref;
     return getKeyProps({
-      [refKey]: (el: HTMLButtonElement) => {
+      [refKey]: (el: HTMLInputElement) => {
         inputRef.current = el;
         if (sourceRef) {
           sourceRef.current = el;

@@ -316,6 +316,24 @@
     font-family: inherit;
     font-size: inherit;
     line-height: calc(var(--input-height) - 2px);
+
+    &_hide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      opacity: 0;
+    }
+  }
+
+  &-FakeField {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    opacity: 0;
   }
 
   &-List {

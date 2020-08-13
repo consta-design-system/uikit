@@ -120,9 +120,11 @@ export const Combobox: ComboboxType = (props) => {
     setIsFocused(true);
   };
 
-  const handleClear = (): void => {
-    setValue(null);
+  const handleClear = (e): void => {
     setInputData({ value: '' });
+    setValue(null);
+    getToggleProps().onChange(e);
+    toggleRef.current?.focus();
   };
 
   const handleInputChange = (): void => {
@@ -137,7 +139,7 @@ export const Combobox: ComboboxType = (props) => {
   const showPlaceholder =
     (!arrValue?.length && inputData.value === '') || (arrValue === null && inputData.value === '');
 
-  const showInput = !arrValue?.length || arrValue === null;
+  const showInput = arrValue !== null && arrValue.length > 0;
 
   return (
     <SelectContainer focused={isFocused} disabled={disabled} size={size} {...restProps}>
@@ -153,18 +155,16 @@ export const Combobox: ComboboxType = (props) => {
               <span className={cnSelect('ControlValue')}>{getOptionLabel(arrValue[0])}</span>
             )}
             {showPlaceholder && <span className={cnSelect('Placeholder')}>{placeholder}</span>}
-            {showInput && (
-              <input
-                {...getToggleProps({ onChange: handleInputChange })}
-                type="text"
-                onFocus={handleInputFocus}
-                onBlur={handleInputBlur}
-                aria-label={ariaLabel}
-                ref={toggleRef}
-                value={inputData.value}
-                className={cnSelect('Input', { size })}
-              />
-            )}
+            <input
+              {...getToggleProps({ onChange: handleInputChange })}
+              type="text"
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+              aria-label={ariaLabel}
+              ref={toggleRef}
+              value={inputData.value}
+              className={cnSelect('Input', { size, hide: showInput })}
+            />
           </div>
         </div>
         <span className={cnSelect('Indicators')}>

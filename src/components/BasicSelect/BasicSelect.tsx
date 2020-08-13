@@ -34,8 +34,8 @@ export interface SimpleSelectProps<T> {
   ariaLabel?: string;
   onChange?: (v: T) => void;
   getOptionLabel(arg: T): string;
-  onBlur?: (event?: React.FocusEvent<HTMLButtonElement>) => void;
-  onFocus?: (event?: React.FocusEvent<HTMLButtonElement>) => void;
+  onBlur?: (event?: React.FocusEvent<HTMLInputElement>) => void;
+  onFocus?: (event?: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 type Select = <T>(props: SimpleSelectProps<T>) => React.ReactElement | null;
@@ -99,7 +99,7 @@ export const BasicSelect: Select = (props) => {
     disabled,
   });
 
-  const handleInputFocus = (e: React.FocusEvent<HTMLButtonElement>): void => {
+  const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>): void => {
     if (!disabled) {
       if (!isFocused) {
         setIsFocused(true);
@@ -110,7 +110,7 @@ export const BasicSelect: Select = (props) => {
     }
   };
 
-  const handleInputBlur = (e: React.FocusEvent<HTMLButtonElement>): void => {
+  const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>): void => {
     if (isFocused) {
       setIsFocused(false);
 
@@ -139,15 +139,17 @@ export const BasicSelect: Select = (props) => {
     >
       <div className={cnSelect('Control')} aria-expanded={isOpen} aria-haspopup="listbox" id={id}>
         <div className={cnSelect('ControlInner')}>
-          <button
-            {...getToggleProps()}
-            type="button"
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            className={cnSelect('ControlValueContainer')}
-            aria-label={ariaLabel}
-            ref={toggleRef}
-          >
+          <div className={cnSelect('ControlValueContainer')}>
+            <input
+              {...getToggleProps()}
+              type="button"
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+              aria-label={ariaLabel}
+              ref={toggleRef}
+              className={cnSelect('FakeField')}
+              readOnly
+            />
             {arrValue ? (
               <span className={cnSelect('ControlValue')} title={getOptionLabel(arrValue[0])}>
                 {getOptionLabel(arrValue[0])}
@@ -157,7 +159,7 @@ export const BasicSelect: Select = (props) => {
                 {placeholder || ''}
               </span>
             )}
-          </button>
+          </div>
         </div>
         <span className={cnSelect('Indicators')}>
           <button
