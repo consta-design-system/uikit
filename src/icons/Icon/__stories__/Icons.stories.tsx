@@ -123,10 +123,10 @@ const defaultKnobs = () => ({
 const icons = {
   IconAdd,
   IconAlert,
+  IconAlignCenter,
   IconAlignJustify,
   IconAlignLeft,
   IconAlignRight,
-  IconAlignCenter,
   IconArrowDown,
   IconArrowLeft,
   IconArrowRight,
@@ -144,9 +144,9 @@ const icons = {
   IconCancel,
   IconChat,
   IconCheck,
+  IconClose,
   IconCollapse,
   IconColorFill,
-  IconClose,
   IconColorText,
   IconColumns,
   IconComment,
@@ -222,11 +222,11 @@ const icons = {
   IconTop,
   IconTrash,
   IconType,
+  IconUnderline,
   IconUnsort,
   IconUser,
   IconWarning,
   IconWorld,
-  IconUnderline,
 };
 
 export function Playground() {
