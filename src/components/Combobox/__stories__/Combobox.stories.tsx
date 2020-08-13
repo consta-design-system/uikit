@@ -2,9 +2,9 @@ import React from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { createMetadata, createStory } from '../../../utils/storybook';
-import { MultiCombobox } from '../MultiCombobox';
+import { Combobox } from '../Combobox';
 
-import mdx from './MultiCombobox.mdx';
+import mdx from './Combobox.mdx';
 
 type SelectOption = {
   value: string;
@@ -75,8 +75,8 @@ const Default = (props: { value?: SelectOption }): JSX.Element => {
 
   return (
     <>
-      <div style={{ width: '250px' }}>
-        <MultiCombobox<SelectOption>
+      <div>
+        <Combobox<SelectOption>
           {...getKnobs()}
           id="example"
           options={items}
@@ -97,7 +97,7 @@ export const WithValueStory = createStory(() => <Default value={items[4]} />, {
 });
 
 export default createMetadata({
-  title: 'Components|/MultiCombobox',
+  title: 'Components|/Combobox',
   parameters: {
     docs: {
       page: mdx,

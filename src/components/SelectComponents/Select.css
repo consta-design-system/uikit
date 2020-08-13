@@ -56,11 +56,6 @@
     &:focus {
       outline: none;
     }
-
-    &_multi {
-      height: auto;
-      min-height: var(--input-height);
-    }
   }
 
   &_view_default .Select-Control {
@@ -233,7 +228,7 @@
     background-color: transparent;
     border: none;
     font-size: var(--input-font-size);
-    line-height: var(--input-height);
+    line-height: calc(var(--input-height) - 2px);
     text-align: left;
 
     &:focus {
@@ -285,7 +280,7 @@
     white-space: normal;
   }
 
-  &-Control_multi &-Placeholder {
+  &-Control_hasInput &-Placeholder {
     position: absolute;
     top: 0;
     background-color: transparent;
@@ -320,6 +315,7 @@
     border: none;
     font-family: inherit;
     font-size: inherit;
+    line-height: calc(var(--input-height) - 2px);
   }
 
   &-List {
