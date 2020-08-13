@@ -9,7 +9,6 @@ module.exports = {
     'src/**/*.stories/**',
     'src/**/*.stories.*',
     'src/components/ScrollExample/**',
-    'src/components/BaseCheckGroupField/**',
     'src/icons/createIcon/**',
     'src/fileIcons/createFileIcon/**',
     'src/uiKit/**',
