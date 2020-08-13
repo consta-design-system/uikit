@@ -65,10 +65,12 @@ import { IconList } from '../../IconList/IconList';
 import { IconListNumbered } from '../../IconListNumbered/IconListNumbered';
 import { IconLock } from '../../IconLock/IconLock';
 import { IconMail } from '../../IconMail/IconMail';
+import { IconMaxWidth } from '../../IconMaxWidth/IconMaxWidth';
 import { IconMeatball } from '../../IconMeatball/IconMeatball';
 import { IconMoon } from '../../IconMoon/IconMoon';
 import { IconOpenInNew } from '../../IconOpenInNew/IconOpenInNew';
 import { IconPause } from '../../IconPause/IconPause';
+import { IconPhone } from '../../IconPhone/IconPhone';
 import { IconPhoto } from '../../IconPhoto/IconPhoto';
 import { IconPlay } from '../../IconPlay/IconPlay';
 import { IconProcessing } from '../../IconProcessing/IconProcessing';
@@ -185,10 +187,12 @@ const icons = {
   IconListNumbered,
   IconLock,
   IconMail,
+  IconMaxWidth,
   IconMeatball,
   IconMoon,
   IconOpenInNew,
   IconPause,
+  IconPhone,
   IconPhoto,
   IconPlay,
   IconProcessing,
