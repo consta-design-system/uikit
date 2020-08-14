@@ -29,7 +29,6 @@ import { TextExampleWeight } from './examples/TextExampleWeight/TextExampleWeigh
   - [Выравнивание](#выравнивание) `align`
 - [Контейнер с текстом](#контейнер-с-текстом)
   - [Тег для контейнера](#тег-для-контейнера)  `as`
-  - [Стили контейнера](#стили-контейнера) `type`
   - [Размеры](#размеры) `width`
   - [Расположение](#расположение) `display`
 - [Блоки с текстом](#блоки-с-текстом)
@@ -67,6 +66,10 @@ import { TextExampleWeight } from './examples/TextExampleWeight/TextExampleWeigh
 
 `size` отвечает за размер текста.
 
+- По умолчанию в параграфах используется размер `m`.
+- Даже для самых неважных подсказок используйте размер `xs` или больше.
+- `2xs` — только для текста в [верхнем регистре](#регистр).
+
 ```ts
 <Text size="2xs">Нефть</Text>
 <Text size="xs">Нефть</Text>
@@ -88,10 +91,11 @@ import { TextExampleWeight } from './examples/TextExampleWeight/TextExampleWeigh
 `font` отвечает за гарнитуру шрифта.
 
 Вы можете выбрать гарнитуру, заданную в системе:
-- `primary` меняет шрифт на основной шрифт дизайн-системы
+- `primary` меняет шрифт на основной шрифт дизайн-системы,
 - `mono` — на шрифт, заданный как моноширный.
 
-Или поменять шрифт на любой, какой захочется.
+Это нужно, чтобы расставить дополнительные акценты: например, выделить что-то важное
+прямо в тексте.
 
 ### Насыщенность
 
@@ -209,14 +213,6 @@ import { TextExampleWeight } from './examples/TextExampleWeight/TextExampleWeigh
 переопределить с помощью свойства `as`.
 
 
-### Стили контейнера
-
-`type` отвечает за стиль контейнера. Варианты: `blockquote`, `p`, `h3`, `h2`, `h1`.
-
-> Когда вы задаёте `type`, тег, в который обернут текст, не меняется. Меняются
-только стили: отступы, размер шрифта и т.д. Поэтому у вас запросто может получиться
-текст с тегом `h1` (заданный с помощью свойства `as`), который будет выглядеть как `h3`.
-
 ### Размеры контейнера
 
 Высота контейнера определяется высотой текста. Ширину можно задать с помощью `width`.
@@ -262,19 +258,19 @@ import { TextExampleWeight } from './examples/TextExampleWeight/TextExampleWeigh
 Можно использовать в формах с данными.
 
 ```ts
-<Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary" type="p">
+<Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary">
   ФИО
 </Text>
 <Text as="div" align="left" font="serif" lineHeight="l" size="l" view="primary">
   Иванов Дмитрий Петрович
 </Text>
-<Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary" type="p">
+<Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary">
   Должность
 </Text>
 <Text as="div" align="left" font="serif" lineHeight="l" size="l" view="primary">
   Инженер по бурению
 </Text>
-<Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary" type="p">
+<Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary">
   Подразделение
 </Text>
 <Text as="div" align="left" font="serif" lineHeight="l" size="l" view="primary">
@@ -291,7 +287,7 @@ import { TextExampleWeight } from './examples/TextExampleWeight/TextExampleWeigh
 интерфейса, прямую речь.
 
 ```ts
-<Text as="div" align="left" font="sans" lineHeight="l" size="m" view="primary" type="p">
+<Text as="div" align="left" font="sans" lineHeight="l" size="m" view="primary">
   <Text as="span" fontStyle="italic">
     Примечание.&nbsp;
   </Text>
@@ -326,7 +322,6 @@ import { TextExampleWeight } from './examples/TextExampleWeight/TextExampleWeigh
 | [`align`](#выравнивание)      | `'left', 'center', 'right'`                                                                                | —                  | Выравнивание                                           |
 | [`size`](#размер)       | `'2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'`                                      | —                  | Размер текста                                                 |
 | [`width`](#размеры-контейнера)     | `default`                                                                                                  | —                  | Ширина контейнера с текстом                                   |
-| [`type`](#стили-контейнера)       | `'blockquote', 'p', 'h3', 'h2', 'h1'`                                                                      | —                  | Стили контейнера (отсутпы и пр.)                      |
 | [`display`](#расположение)    | `'block', 'inline-block', 'inline'`                                                                        | —                  | Поведение контейнера с текстом в документе (блочный или строчный элемент) |
 | [`as`](#тег-для-контейнера)        | `keyof JSX.IntrinsicElements`                                     | div                                    | HTML-тег, в виде которого этот компонент будет представлен в DOM             |
 | `className`  | `string`                                                                                                   | —                  | Дополнительный CSS-класс                        |
@@ -355,7 +350,6 @@ export function App() {
       lineHeight = '2xs'
       size = 'm'
       spacing = 'xs'
-      type = 'p'
       view = 'primary'
       weight = 'regular'
       width = 'default'
