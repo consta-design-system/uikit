@@ -28,9 +28,13 @@ export interface ComboboxSelectProps<T> {
   getOptionLabel(arg: T): string;
   onBlur?: (event?: React.FocusEvent<HTMLElement>) => void;
   onFocus?: (event?: React.FocusEvent<HTMLElement>) => void;
+  onCreate?(): void;
+  getGroupOptions?(group: T): void;
 }
 
 type ComboboxType = <T>(props: ComboboxSelectProps<T>) => React.ReactElement | null;
+
+type OptionType<TO> = Exclude<TO, { optionForCreate: boolean }>;
 
 export const Combobox: ComboboxType = (props) => {
   const {
@@ -45,6 +49,8 @@ export const Combobox: ComboboxType = (props) => {
     ariaLabel,
     id,
     size = 'm',
+    onCreate,
+    getGroupOptions,
     ...restProps
   } = props;
   const [isFocused, setIsFocused] = useState(false);
@@ -92,6 +98,7 @@ export const Combobox: ComboboxType = (props) => {
     scrollToIndex,
     disabled,
     getOptionLabel,
+    onCreate,
   });
 
   const handleInputFocus = (e: React.FocusEvent<HTMLElement>): void => {
@@ -120,14 +127,25 @@ export const Combobox: ComboboxType = (props) => {
     setIsFocused(true);
   };
 
-  const handleClear = (e): void => {
+  const handleClear = (e: React.FormEvent): void => {
     setInputData({ value: '' });
     setValue(null);
     getToggleProps().onChange(e);
     toggleRef.current?.focus();
   };
 
+  const handleClearButtonFocus = (): void => {
+    setIsFocused(true);
+  };
+
+  const handleClearButtonBlur = (): void => {
+    setIsFocused(false);
+  };
+
   const handleInputChange = (): void => {
+    if (!isOpen) {
+      setOpen(true);
+    }
     const inputValue = toggleRef.current?.value ?? '';
     setInputData({ value: inputValue });
   };
@@ -169,7 +187,13 @@ export const Combobox: ComboboxType = (props) => {
         </div>
         <span className={cnSelect('Indicators')}>
           {arrValue && (
-            <button type="button" onClick={handleClear} className={cnSelect('ClearIndicator')}>
+            <button
+              type="button"
+              onClick={handleClear}
+              className={cnSelect('ClearIndicator')}
+              onFocus={handleClearButtonFocus}
+              onBlur={handleClearButtonBlur}
+            >
               <IconClose size="xs" className={cnSelect('ClearIndicatorIcon')} />
             </button>
           )}
@@ -192,26 +216,65 @@ export const Combobox: ComboboxType = (props) => {
         >
           <SelectDropdown role="listbox" aria-activedescendant={`${id}-${highlightedIndex}`}>
             <div className={cnSelect('List', { size })} ref={optionsRef}>
+              {/* {typeof onCreate === 'function' && inputData.value !== '' && (
+                <div className={cnSelect('ListItem', { forCreate: true })}>
+                  <button
+                    type="button"
+                    className={cnSelect('CreateOption')}
+                    disabled={visibleOptions.some(
+                      (option) =>
+                        getOptionLabel(option).toLowerCase() === inputData.value?.toLowerCase(),
+                    )}
+                    onClick={onCreate}
+                  >
+                    + Добавить «<b>{inputData.value}</b>»
+                  </button>
+                </div>
+              )} */}
               {visibleOptions.map((option, index: number) => {
+                const isOptionForCreate = 'optionForCreate' in option;
+
+                const menuOption = isOptionForCreate
+                  ? (visibleOptions[index + 1] as OptionType<typeof option>)
+                  : (option as OptionType<typeof option>);
                 return (
                   <div
                     aria-selected={arrValue?.some(
                       (val) => JSON.stringify(val) === JSON.stringify(option),
                     )}
                     role="option"
-                    key={getOptionLabel(option)}
+                    key={isOptionForCreate ? inputData.value : getOptionLabel(menuOption)}
                     id={`${id}-${index}`}
                     {...getOptionProps({
                       index,
                       className: cnSelect('ListItem', {
-                        active: arrValue?.some((val) => {
-                          return JSON.stringify(val) === JSON.stringify(option);
-                        }),
+                        forCreate: isOptionForCreate,
+                        active:
+                          !isOptionForCreate &&
+                          arrValue?.some((val) => {
+                            return JSON.stringify(val) === JSON.stringify(menuOption);
+                          }),
                         hovered: index === highlightedIndex,
                       }),
                     })}
                   >
-                    {getOptionLabel(option)}
+                    {isOptionForCreate ? (
+                      <button
+                        type="button"
+                        className={cnSelect('CreateOption')}
+                        disabled={visibleOptions.some(
+                          (option, index) =>
+                            index !== 0 &&
+                            getOptionLabel(menuOption).toLowerCase() ===
+                              inputData.value?.toLowerCase(),
+                        )}
+                        onClick={onCreate}
+                      >
+                        + Добавить «<b>{inputData.value}</b>»
+                      </button>
+                    ) : (
+                      getOptionLabel(menuOption)
+                    )}
                   </div>
                 );
               })}

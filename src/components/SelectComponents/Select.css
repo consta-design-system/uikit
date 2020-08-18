@@ -263,14 +263,14 @@
   }
 
   &-ControlValue,
-  &-ControlPlaceholder {
+  &-Placeholder {
     display: block;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
 
-  &-ControlPlaceholder {
+  &-Placeholder {
     color: var(--color-control-typo-placeholder);
     font-size: var(--input-font-size);
     text-align: left;
@@ -426,6 +426,41 @@
   }
 
   &-List_size_l &-ListItem {
+    padding-top: var(--space-xs);
+    padding-bottom: var(--space-xs);
+  }
+
+  &-CreateOption {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid var(--color-bg-border);
+    font-family: inherit;
+    font-size: inherit;
+    text-align: left;
+  }
+
+  &-List_size_xs &-CreateOption,
+  &-List_size_s &-CreateOption {
+    margin-top: calc(-1 * var(--space-2xs));
+    margin-bottom: calc(-1 * var(--space-2xs));
+    padding-top: var(--space-2xs);
+    padding-bottom: var(--space-2xs);
+  }
+
+  &-List_size_m &-CreateOption {
+    margin-top: calc(-1 * var(--space-xs));
+    margin-bottom: calc(-1 * var(--space-xs));
+    padding-top: var(--space-xs);
+    padding-bottom: var(--space-xs);
+  }
+
+  &-List_size_l &-CreateOption {
+    margin-top: calc(-1 * var(--space-xs));
+    margin-bottom: calc(-1 * var(--space-xs));
     padding-top: var(--space-xs);
     padding-bottom: var(--space-xs);
   }

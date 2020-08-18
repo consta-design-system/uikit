@@ -35,6 +35,7 @@ export type SelectProps<T> = {
   disabled?: boolean;
   filterFn?(options: T[], searchValue: string): T[];
   getOptionLabel?(option: T): string;
+  onCreate?(): void;
 };
 
 interface OptionProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -65,7 +66,7 @@ type UseSelectResult<T> = {
   searchValue?: string;
   isOpen: boolean;
   highlightedIndex: number;
-  visibleOptions: T[];
+  visibleOptions: Array<T | { optionForCreate: boolean }>;
   value: T[] | null;
   // Actions
   selectIndex: SetHandler<T>;
@@ -115,6 +116,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
     disabled = false,
     multi = false,
     getOptionLabel,
+    onCreate,
   } = params;
   const value = params.value ?? [];
   const [
@@ -140,17 +142,22 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   const filterFnRef = React.useRef<(options: T[], searchValue: string) => T[]>();
   filterFnRef.current = (options: T[], searchValue: string): T[] => {
     if (getOptionLabel) {
-      return options
+      const tempOptions = options
         .filter((option: T) =>
           getOptionLabel(option)
             .toLowerCase()
             .includes(searchValue.toLowerCase()),
         )
-        .sort((a, _b) => {
+        .sort((a) => {
           return getOptionLabel(a)
             .toLowerCase()
             .indexOf(searchValue.toLowerCase());
         });
+
+      const optionForCreate =
+        typeof onCreate === 'function' ? (({ optionForCreate: true } as unknown) as T) : null;
+
+      return optionForCreate ? [optionForCreate, ...tempOptions] : tempOptions;
     }
     return options;
   };
@@ -216,7 +223,9 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   React.useLayoutEffect(() => {
     if (value !== null && !prevIsOpen && isOpen) {
       const currentHighlightIndex = getSelectedOptionIndex();
-      scrollToIndexRef.current && scrollToIndexRef.current(currentHighlightIndex);
+      if (filteredOptions.length > 0) {
+        scrollToIndexRef.current && scrollToIndexRef.current(currentHighlightIndex);
+      }
     }
   });
 
@@ -438,7 +447,9 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
 
   // When the highlightedIndex changes, scroll to that item
   React.useEffect(() => {
-    scrollToIndexRef.current && scrollToIndexRef.current(highlightedIndex);
+    if (filteredOptions.length > 0) {
+      scrollToIndexRef.current && scrollToIndexRef.current(highlightedIndex);
+    }
   }, [highlightedIndex]);
 
   React.useEffect(() => {
