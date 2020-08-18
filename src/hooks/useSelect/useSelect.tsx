@@ -35,7 +35,8 @@ export type SelectProps<T> = {
   disabled?: boolean;
   filterFn?(options: T[], searchValue: string): T[];
   getOptionLabel?(option: T): string;
-  onCreate?(): void;
+  onCreate?(s: string): void;
+  getGroupOptions?(group: T): T[];
 };
 
 interface OptionProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -116,6 +117,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
     disabled = false,
     multi = false,
     getOptionLabel,
+    getGroupOptions,
     onCreate,
   } = params;
   const value = params.value ?? [];
@@ -141,18 +143,41 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
 
   const filterFnRef = React.useRef<(options: T[], searchValue: string) => T[]>();
   filterFnRef.current = (options: T[], searchValue: string): T[] => {
-    if (getOptionLabel) {
-      const tempOptions = options
-        .filter((option: T) =>
-          getOptionLabel(option)
-            .toLowerCase()
-            .includes(searchValue.toLowerCase()),
-        )
-        .sort((a) => {
-          return getOptionLabel(a)
-            .toLowerCase()
-            .indexOf(searchValue.toLowerCase());
+    if (typeof getOptionLabel === 'function') {
+      let tempOptions: T[] = [];
+      if (typeof getGroupOptions === 'function') {
+        tempOptions = options.map((option) => {
+          const filteredOptions = getGroupOptions(option)
+            .filter((option: T) =>
+              getOptionLabel(option)
+                .toLowerCase()
+                .includes(searchValue.toLowerCase()),
+            )
+            .sort((a) => {
+              return getOptionLabel(a)
+                .toLowerCase()
+                .indexOf(searchValue.toLowerCase());
+            });
+
+          return {
+            ...option,
+            // /filteredOptions,
+          };
         });
+        // .filter((option) => option.filteredOptions && option.filteredOptions.length > 0);
+      } else {
+        tempOptions = options
+          .filter((option: T) =>
+            getOptionLabel(option)
+              .toLowerCase()
+              .includes(searchValue.toLowerCase()),
+          )
+          .sort((a) => {
+            return getOptionLabel(a)
+              .toLowerCase()
+              .indexOf(searchValue.toLowerCase());
+          });
+      }
 
       const optionForCreate =
         typeof onCreate === 'function' ? (({ optionForCreate: true } as unknown) as T) : null;
