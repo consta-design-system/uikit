@@ -336,6 +336,36 @@
     opacity: 0;
   }
 
+  &-GroupName {
+    margin-right: var(--input-space);
+    margin-left: var(--input-space);
+    color: var(--color-typo-secondary);
+    border-bottom: 1px solid var(--color-bg-border);
+    font-size: calc(var(--input-font-size) - 4px);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  &-List_size_xs &-GroupName {
+    font-size: calc(var(--input-font-size) - 2px);
+  }
+
+  &-List_size_xs &-GroupName,
+  &-List_size_s &-GroupName {
+    padding-top: var(--space-2xs);
+    padding-bottom: var(--space-2xs);
+  }
+
+  &-List_size_m &-GroupName {
+    padding-top: var(--space-xs);
+    padding-bottom: var(--space-xs);
+  }
+
+  &-List_size_l &-GroupName {
+    padding-top: var(--space-xs);
+    padding-bottom: var(--space-xs);
+  }
+
   &-List {
     overflow-y: auto;
     width: 100%;

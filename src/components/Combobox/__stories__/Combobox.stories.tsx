@@ -12,7 +12,7 @@ type SelectOption = {
   label: string;
 };
 
-const items = [
+const simpleItems = [
   { label: 'Neptunium', value: 'Neptunium' },
   { label: 'Plutonium', value: 'Plutonium' },
   { label: 'Americium', value: 'Americium' },
@@ -128,17 +128,19 @@ const getKnobs = () => ({
 
 const Default = (props: {
   value?: SelectOption;
-  options?: SelectOption[] | GroupOptions;
-  getItemLabel?(item): string;
-  getGroupOptions?(item): SelectOption[];
+  items?: SelectOption[] | GroupOptions;
+  getItemLabel?(item: SelectOption | Group): string;
+  getGroupOptions?(item: Group): SelectOption[];
 }): JSX.Element => {
   const getItemLabelDefault = (option: SelectOption): string => option.label;
-  const getItemGroupOptionsDefault = (group: Group): SelectOption[] => group.items;
-  const {
-    options = items,
-    getItemLabel = getItemLabelDefault,
-    getGroupOptions = getItemGroupOptionsDefault,
-  } = props;
+  const { items = simpleItems, getItemLabel = getItemLabelDefault, getGroupOptions } = props;
+
+  let options = items;
+
+  const handleCreate = (v: string): void => {
+    // options = [...options, (getGroupOptions ? {label: 'Пользовательская', items:[...options[options.length - 1].items, { label: v, value: v }])];
+    options = [{ label: v, value: v }, ...options];
+  };
 
   return (
     <>
@@ -150,20 +152,27 @@ const Default = (props: {
           value={props.value}
           getOptionLabel={getItemLabel}
           getGroupOptions={getGroupOptions}
-          onCreate={() => {}}
+          onCreate={handleCreate}
         />
       </div>
     </>
   );
 };
 
-export const WithValueStory = createStory(() => <Default value={items[4]} />, {
+export const DefaultStory = createStory(() => <Default />, {
+  name: 'по умолчанию',
+});
+
+export const WithValueStory = createStory(() => <Default value={simpleItems[4]} />, {
   name: 'c заданным значением',
 });
 
-export const WithGroupsStory = createStory(() => <Default options={groups} />, {
-  name: 'c группами опций',
-});
+export const WithGroupsStory = createStory(
+  () => <Default items={groups} getGroupOptions={(group: Group): SelectOption[] => group.items} />,
+  {
+    name: 'c группами опций',
+  },
+);
 
 export default createMetadata({
   title: 'Components|/Combobox',
