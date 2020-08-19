@@ -26,3 +26,5 @@ export const DefaultPropForm: PropForm = 'default';
 export const view = ['default', 'clear'] as const;
 export type PropView = typeof view[number];
 export const DefaultPropView: PropView = 'default';
+
+export type ClearedOptionType<TO> = Exclude<TO, { optionForCreate: boolean }>;

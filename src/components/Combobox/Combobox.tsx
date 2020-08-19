@@ -10,7 +10,13 @@ import { Popover } from '../Popover/Popover';
 import { cnSelect } from '../SelectComponents/cnSelect';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
-import { PropForm, PropSize, PropView, PropWidth } from '../SelectComponents/types';
+import {
+  ClearedOptionType,
+  PropForm,
+  PropSize,
+  PropView,
+  PropWidth,
+} from '../SelectComponents/types';
 
 export interface ComboboxSelectProps<T> {
   options: T[];
@@ -33,8 +39,6 @@ export interface ComboboxSelectProps<T> {
 }
 
 type ComboboxType = <T>(props: ComboboxSelectProps<T>) => React.ReactElement | null;
-
-type OptionType<TO> = Exclude<TO, { optionForCreate: boolean }>;
 
 export const Combobox: ComboboxType = (props) => {
   const {
@@ -246,14 +250,14 @@ export const Combobox: ComboboxType = (props) => {
               {visibleOptions.map((option, index: number) => {
                 const isOptionForCreate = 'optionForCreate' in option;
 
-                const currentOption = visibleOptions[index] as OptionType<typeof option> & {
+                const currentOption = visibleOptions[index] as ClearedOptionType<typeof option> & {
                   group: string;
                 };
-                const prevOption = visibleOptions[index - 1] as OptionType<typeof option> & {
+                const prevOption = visibleOptions[index - 1] as ClearedOptionType<typeof option> & {
                   group: string;
                 };
                 const menuOption = isOptionForCreate
-                  ? (visibleOptions[index + 1] as OptionType<typeof option> & {
+                  ? (visibleOptions[index + 1] as ClearedOptionType<typeof option> & {
                       group: string;
                     })
                   : currentOption;

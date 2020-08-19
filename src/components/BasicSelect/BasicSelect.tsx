@@ -180,23 +180,25 @@ export const BasicSelect: Select = (props) => {
         >
           <SelectDropdown role="listbox" aria-activedescendant={`${id}-${highlightedIndex}`}>
             <div className={cnSelect('List', { size })} ref={optionsRef}>
-              {visibleOptions.map((option, index: number) => (
-                <div
-                  aria-selected={option === value}
-                  role="option"
-                  key={getOptionLabel(option)}
-                  id={`${id}-${index}`}
-                  {...getOptionProps({
-                    index,
-                    className: cnSelect('ListItem', {
-                      active: option === value,
-                      hovered: index === highlightedIndex,
-                    }),
-                  })}
-                >
-                  {getOptionLabel(option)}
-                </div>
-              ))}
+              {visibleOptions.map((option, index: number) => {
+                return (
+                  <div
+                    aria-selected={option === value}
+                    role="option"
+                    key={getOptionLabel(option)}
+                    id={`${id}-${index}`}
+                    {...getOptionProps({
+                      index,
+                      className: cnSelect('ListItem', {
+                        active: option === value,
+                        hovered: index === highlightedIndex,
+                      }),
+                    })}
+                  >
+                    {getOptionLabel(option)}
+                  </div>
+                );
+              })}
             </div>
           </SelectDropdown>
         </Popover>

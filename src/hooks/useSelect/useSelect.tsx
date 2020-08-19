@@ -66,7 +66,7 @@ type UseSelectResult<T> = {
   searchValue?: string;
   isOpen: boolean;
   highlightedIndex: number;
-  visibleOptions: Array<T | { optionForCreate: boolean }>;
+  visibleOptions: T[];
   value: T[] | null;
   // Actions
   selectIndex: SetHandler<T>;
@@ -142,29 +142,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   const filterFnRef = React.useRef<(options: T[], searchValue: string) => T[]>();
   filterFnRef.current = (options: T[], searchValue: string): T[] => {
     if (typeof getOptionLabel === 'function') {
-      let tempOptions: T[] = [];
-      // if (typeof getGroupOptions === 'function') {
-      //   tempOptions = options.map((option) => {
-      //     const filteredOptions = getGroupOptions(option)
-      //       .filter((option: T) =>
-      //         getOptionLabel(option)
-      //           .toLowerCase()
-      //           .includes(searchValue.toLowerCase()),
-      //       )
-      //       .sort((a) => {
-      //         return getOptionLabel(a)
-      //           .toLowerCase()
-      //           .indexOf(searchValue.toLowerCase());
-      //       });
-
-      //     return {
-      //       ...option,
-      //       // /filteredOptions,
-      //     };
-      //   });
-      //   // .filter((option) => option.filteredOptions && option.filteredOptions.length > 0);
-      // } else {
-      tempOptions = options
+      const tempOptions = options
         .filter((option: T) =>
           getOptionLabel(option)
             .toLowerCase()
@@ -177,10 +155,11 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
         });
       // }
 
-      const optionForCreate =
-        typeof onCreate === 'function' ? (({ optionForCreate: true } as unknown) as T) : null;
+      const optionForCreate = ({ optionForCreate: true } as unknown) as T;
 
-      return optionForCreate ? [optionForCreate, ...tempOptions] : tempOptions;
+      return typeof onCreate === 'function' && optionForCreate
+        ? [optionForCreate, ...tempOptions]
+        : tempOptions;
     }
     return options;
   };
