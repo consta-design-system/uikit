@@ -1,6 +1,6 @@
 import '../SelectComponents/Select.css';
 
-import React, { useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 
 import { useSelect } from '../../hooks/useSelect/useSelect';
 import { IconClose } from '../../icons/IconClose/IconClose';
@@ -84,6 +84,18 @@ export const Combobox: ComboboxType = (props) => {
     scrollIntoView(elements[index], optionsRef.current);
   };
 
+  const flatOptions = useMemo(
+    () =>
+      options
+        .map((group) => {
+          const label = getOptionLabel(group);
+          const items = typeof getGroupOptions === 'function' ? getGroupOptions(group) : [];
+          return items.map((item) => ({ ...item, group: label }));
+        })
+        .flat(),
+    [options],
+  );
+
   const {
     visibleOptions,
     highlightedIndex,
@@ -92,7 +104,7 @@ export const Combobox: ComboboxType = (props) => {
     isOpen,
     setOpen,
   } = useSelect({
-    options,
+    options: hasGroup ? flatOptions : options,
     value: arrValue,
     onChange: handlerChangeValue,
     optionsRef,
@@ -100,7 +112,6 @@ export const Combobox: ComboboxType = (props) => {
     disabled,
     getOptionLabel,
     onCreate,
-    getGroupOptions,
   });
 
   const handleInputFocus = (e: React.FocusEvent<HTMLElement>): void => {
@@ -177,6 +188,7 @@ export const Combobox: ComboboxType = (props) => {
         aria-haspopup="listbox"
         id={id}
       >
+        {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus */}
         <div
           className={cnSelect('ControlInner')}
           onClick={handleControlClick}
@@ -238,21 +250,22 @@ export const Combobox: ComboboxType = (props) => {
                   ? (visibleOptions[index + 1] as OptionType<typeof option>)
                   : (option as OptionType<typeof option>);
 
+                const isFirstGroup =
+                  hasGroup && !isOptionForCreate && !visibleOptions[index - 1] && index === 0;
+
+                const shouldShowGroupName =
+                  isFirstGroup ||
+                  (hasGroup &&
+                    visibleOptions[index - 1] &&
+                    visibleOptions[index].group !== visibleOptions[index - 1].group);
+
                 return (
                   <>
-                    {/* {!isOptionForCreate && hasGroup && (
-                      <div key={getOptionLabel(menuOption)} className={cnSelect('GroupName')}>
-                        {getOptionLabel(menuOption)}
+                    {shouldShowGroupName && (
+                      <div key={index} className={cnSelect('GroupName')}>
+                        {menuOption.group}
                       </div>
-                    )} */}
-                    {/* {!isOptionForCreate &&
-                      hasGroup &&
-                      visibleOptions[index - 1] &&
-                      visibleOptions[index].group !== visibleOptions[index - 1].group && (
-                        <div key={option.group} className={cnSelect('GroupName')}>
-                          {option.group}
-                        </div>
-                      )} */}
+                    )}
                     <div
                       aria-selected={arrValue?.some(
                         (val) => JSON.stringify(val) === JSON.stringify(option),

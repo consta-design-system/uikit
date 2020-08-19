@@ -1,6 +1,5 @@
 import React from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
-import { useState } from '@storybook/addons';
 
 import { createMetadata, createStory } from '../../../utils/storybook';
 import { Combobox } from '../Combobox';
