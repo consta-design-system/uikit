@@ -246,18 +246,24 @@ export const Combobox: ComboboxType = (props) => {
               {visibleOptions.map((option, index: number) => {
                 const isOptionForCreate = 'optionForCreate' in option;
 
+                const currentOption = visibleOptions[index] as OptionType<typeof option> & {
+                  group: string;
+                };
+                const prevOption = visibleOptions[index - 1] as OptionType<typeof option> & {
+                  group: string;
+                };
                 const menuOption = isOptionForCreate
-                  ? (visibleOptions[index + 1] as OptionType<typeof option>)
-                  : (option as OptionType<typeof option>);
+                  ? (visibleOptions[index + 1] as OptionType<typeof option> & {
+                      group: string;
+                    })
+                  : currentOption;
 
                 const isFirstGroup =
                   hasGroup && !isOptionForCreate && !visibleOptions[index - 1] && index === 0;
 
                 const shouldShowGroupName =
                   isFirstGroup ||
-                  (hasGroup &&
-                    visibleOptions[index - 1] &&
-                    visibleOptions[index].group !== visibleOptions[index - 1].group);
+                  (hasGroup && prevOption && currentOption.group !== prevOption.group);
 
                 return (
                   <>

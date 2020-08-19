@@ -43,7 +43,7 @@ const simpleItems = [
   { label: 'Oganesson', value: 'Oganesson' },
 ];
 
-type Group = { name: string; items: SelectOption[] };
+type Group = { label: string; items: SelectOption[] };
 type GroupOptions = Group[];
 
 const groups = [
