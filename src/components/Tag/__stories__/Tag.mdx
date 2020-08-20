@@ -1,26 +1,125 @@
+import { TagExampleSize } from './examples/TagExampleSize/TagExampleSize';
+import { TagExampleMode } from './examples/TagExampleMode/TagExampleMode';
+import { TagExampleText } from './examples/TagExampleText/TagExampleText';
+import { TagExampleIcon } from './examples/TagExampleIcon/TagExampleIcon';
+import { TagExampleGroup } from './examples/TagExampleGroup/TagExampleGroup';
+
 # Tag
 
 Нужен для оформления тегов: маркеров, которые объединяют группы статей, фотографий,
-документов или других похожих объектов.
+документов или другие похожие объекты.
 
+- [Типы тегов](#типы-тегов)
+- [Текст](#текст)
+- [Иконка](#иконка)
+- [Размер](#размер)
+- [Группы тегов](#группы-тегов)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
 
+## Типы тегов
+
+За тип тега отвечает свойство `mode`.
+
+`button` делает из тега кнопку, такой тег можно нажимать.
+Это основной тип тега, он включен по умолчанию.
+
+`link` превращает тег в ссылку.
+
+`check` поддерживает два состояния: выбранное и невыбранное. Используйте этот тип,
+если хотите, чтобы пользователь мог отмечать некоторые теги. Чтобы отметить тег
+выбранным, добавьте свойство `checked`.
+
+`cancel` нужен, чтобы у пользователя была возможность удалить тег. Добавьте к такому тегу
+иконку `IconClose`.
+
+<TagExampleMode />
+
+```ts
+<Tag mode="button" label="Button" />
+<Tag mode="link" label="Link" />
+<Tag mode="check" label="Check" />
+<Tag mode="cancel" icon={IconClose} label="Cancel" />
+```
+
+## Текст
+
+Тег — это характеристика объекта. Поэтому в тексте обычно используются
+существительные и прилагательные в единственном числе.
+Например, в галерее изображений могут быть такие теги:
+
+<TagExampleText />
+
+```ts
+<Tag mode="button" label="Рисунок" />
+<Tag mode="button" label="Портрет" />
+<Tag mode="button" label="Фото" />
+<Tag mode="button" label="Полосатый" />
+<Tag mode="button" label="В клеточку" />
+```
+
+### Иконка
+
+Вы можете добавить к тегу иконку — любую из [библиотеки иконок](?path=/story/components-icons--playground).
+
+<TagExampleIcon />
+
+```ts
+<Tag mode="button" icon={IconMoon} label="Луна" />
+<Tag mode="buttin" icon={IconSun} label="Солнце" />
+```
+
+## Размер
+
+За размер тега отвечает свойство `size`. По умолчанию — `m`.
+
+<TagExampleSize />
+
+```ts
+<Tag size="xs" label="Размер XS" />
+<Tag size="s" label="Размер S" />
+<Tag size="m" label="Размер M" />
+<Tag size="l" label="Размер L" />
+```
+
+
+### Группы тегов
+
+Используйте группы, если вам нужно объединить теги по какому-то принципу.
+
+За группы отвечает свойство `group`. Все теги с одинаковой меткой группы будут
+помечены одним цветом.
+
+Вот такие группы тегов вполне могут появиться на каком-нибудь эзотерическом сайте:
+
+<TagExampleGroup />
+
+```ts
+<Tag label="Марс" group="1" />
+<Tag label="земля" group="2"/>
+<Tag label="Земля" group="1" />
+<Tag label="Венера" group="1" />
+<Tag label="вода" group="2" />
+<Tag label="огонь" group="2"/>
+<Tag label="Нептун" group="1" />
+<Tag label="Церера" group="1" />
+```
+
 ## Свойства
 
-| Свойство   | Тип        | По умолчанию | Описание                                                                 |
-| ---------- | --------------------------------------| ------------ | --------------------------------------------- |
-| `label`      | `string` | -            | Текст тега                                                                 |
-| `mode`       | `'check', 'button', 'cancel','link'` | `'button'`  |Тип тега     |
-| `checked`   | `boolean, never`  | -   | Отмечает тег выбранным. Доступно только при `mode` = `'check'` |
-| `size`     | `'xs' , 's' , 'm' , 'l'` | `'m'`        | Размер тега  |
-| `group`     | `1..9, '1'...'9'`  | -  | Метка группы                                                   |
-| `icon`      | `React.FC<IconProps>`    | -  | Иконка    |
-| `onClick`   | `React.MouseEventHandler, never` | - | Действие при клике по тегу. Доступно при `mode` = `'button'`, `'link'` |
-| `onCancel`  | `React.MouseEventHandler, never` | - | Действие при клике по крестику на теге. Доступно только при `mode` = `'cancel'`  |
-| `onChange`  | `({ e, checked }: { e?: React.MouseEvent; checked: boolean }) => void, never` | - | Действие при клике по тегу. Доступно только при `mode` = `'check'`            |
-| `className` | `string`  | -            | Дополнительный CSS-класс   |
-| `ref`       | `React.Ref<HTMLElement>`  | -  | Ссылка на корневой DOM-элемент компонента                                |
+| Свойство                | Тип и значения   | По умолчанию | Описание     |
+| ----------------------- | -----------------| ------------ | -------------|
+| [`label`](#текст)       | `string`         | -            | Текст тега   |
+| [`mode`](#типы-тегов)   | `'check', 'button', 'cancel','link'`| `'button'`|Тип тега     |
+| [`checked`](#типы-тегов)| `boolean, never` | -            | Отмечает тег выбранным. Доступно только при `mode` = `'check'` |
+| [`size`](#размер)       | `'xs' , 's' , 'm' , 'l'` | `'m'`| Размер тега  |
+| [`group`](#группы-тегов)| `1..9, '1'...'9'`| -            | Метка группы                                                   |
+| [`icon`](#иконка)   | `React.FC<IconProps>`| -            | Иконка    |
+| `onClick` | `React.MouseEventHandler, never`| - | Действие при клике по тегу. Доступно при `mode` = `'button'`, `'link'` |
+| `onCancel`| `React.MouseEventHandler, never`| - | Действие при клике по крестику на теге. Доступно только при `mode` = `'cancel'`  |
+| `onChange` | `({ e, checked }: { e?: React.MouseEvent; checked: boolean }) => void, never` | - | Действие при клике по тегу. Доступно только при `mode` = `'check'`|
+| `className`              | `string`  | -            | Дополнительный CSS-класс   |
+| `ref`                   | `React.Ref<HTMLElement>`  | -  | Ссылка на корневой DOM-элемент этого компонента |
 
 
 ## Пример
