@@ -4,6 +4,7 @@ import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/D
 import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import * as wp from '../../../../../utils/whitepaper/whitepaper';
+import { Button } from '../../../../Button/Button';
 import { Checkbox } from '../../../Checkbox';
 
 export function CheckboxExampleHead() {
@@ -115,7 +116,9 @@ export function CheckboxExampleGeneralization() {
         <div className={wp.decorator({ distribute: 'left' })}>
           <Checkbox label="Французских" />
         </div>
-        <p className={cnDocsExample('Caption')}>[ Пропустить этот шаг ]</p>
+        <div className={wp.decorator({ distribute: 'left' })}>
+          <Button label="Пропустить этот шаг" />
+        </div>
         <p className={cnDocsExample('Status', { view: 'right' })}>Правильно</p>
       </div>
     </div>
