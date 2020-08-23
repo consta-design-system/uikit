@@ -33,7 +33,7 @@ import { RadioExampleMore, RadioExampleOne, RadioExampleChecked } from './exampl
 ### Больше одного варианта
 
 Радиокнопки подходят, если у вас в списке несколько вариантов.
-Если вариант только один, возможно, кнопка пользователю не нужно делать выбор,
+Если вариант только один, возможно, пользователю не нужно делать выбор,
 а значит, и радиокнопка не нужна. Если нужно выбрать один из двух вариантов,
 используйте [переключатель](#?path=/docs/components-switch--playground).
 
@@ -42,11 +42,20 @@ import { RadioExampleMore, RadioExampleOne, RadioExampleChecked } from './exampl
 
 ### Хотя бы один выбранный
 
-Радиокнопки как правило обозначают выбор, без которого нельзя обойтись. Например,
-если пользователь не укажет, как доставить товар, вы не сможете придумать за него.
+Радиокнопки обычно предлагают сделать выбор, без которого нельзя обойтись. Например,
+если пользователь не укажет, как доставить товар, вы не сможете выбрать за него.
 Поэтому обязательно отметьте один пункт выбранным.
 
 <RadioExampleChecked />
+
+```ts
+<p>Как вас постричь</p>
+  <Radio label="Под бобра" checked />
+  <Radio label="В кружок" />
+  <Radio label="А ля рюс" />
+  <Radio label="С бакендардами" />
+  <Radio label="Только кончики" />
+```
 
 ## Состояния
 
@@ -56,6 +65,13 @@ import { RadioExampleMore, RadioExampleOne, RadioExampleChecked } from './exampl
 
 
 <RadioExampleStatus />
+
+```ts
+<Radio label="Radio" />
+<Radio label="Checked" checked />
+<Radio label="Disabled" disabled />
+<Radio label="Checked Disabled" checked disabled />
+```
 
 
 ##  Размер
@@ -75,21 +91,21 @@ import { RadioExampleMore, RadioExampleOne, RadioExampleChecked } from './exampl
 
 | Свойство         | Тип                                     | По умолчанию  | Описание                                     |
 | ---------------- | --------------------------------------- | ------------- | -------------------------------------------- |
-| [`label`](#название)|  `string`                            |   -           | Текст рядом с радиокнопкой    |
+| [`label`](#название)|  `string`                            |   —           | Текст рядом с радиокнопкой    |
 | [`size`](#размер)| `'m', 'l'`                              | `'m'`         | Размер радиокнопки                               |
-| [`checked`](#состояния)| `boolean`                         | -             | Делает радиокнопку выбранной                 |
-| `intermediate`   | `boolean`                               | -             | Показывает радиокнопку с неопределенным статусом |
-| [`disabled`](#состояния)| `boolean`                        | -             | Делает радиокнопку неактивной                  |
-| `required`       | `boolean`                               | -             | Такую радиокнопку обязательно нужно выбрать    |
-| `readOnly`       | `boolean`                               | -             | Радиокнопка, которую нельзя поменять  |
-| `autoFocus`      | `boolean`                               | -             | Переносит фокус на эту кнопку  |
-| `tabIndex`       | `number`                                | -             | Порядковый номер при переходе между элементами интерфейса по клавише **tab**  |
-| `step `          | `number | string`                       | -             |           |
-| `name    `       | `string`                                | -             | Имя элемента в DOM |
-| `onChange`       | `string`                               | -             | Действие при выборе радиокнопки  |
-| `onFocus`        | `React.FocusEventHandler<HTMLInputElement>`| -             | Действие по фокусу   |
-| `onBlur`         | `React.FocusEventHandler<HTMLInputElement>` | -             | Действие при потере фокуса   |
-| `inputRef`       | `React.FocusEventHandler<HTMLInputElement>`| -          | Ссылка на корневой DOM-элемент этого компонента |
+| [`checked`](#состояния)| `boolean`                         | —             | Делает радиокнопку выбранной                 |
+| `intermediate`   | `boolean`                               | —             | Показывает радиокнопку с неопределенным статусом |
+| [`disabled`](#состояния)| `boolean`                        | —             | Делает радиокнопку неактивной                  |
+| `required`       | `boolean`                               | —             | Такую радиокнопку обязательно нужно выбрать    |
+| `readOnly`       | `boolean`                               | —             | Радиокнопка, которую нельзя поменять  |
+| `autoFocus`      | `boolean`                               | —             | Переносит фокус на эту кнопку  |
+| `tabIndex`       | `number`                                | —             | Порядковый номер при переходе между элементами интерфейса по клавише **tab**  |
+| `step `          | `number | string`                       | —             |           |
+| `name    `       | `string`                                | —             | Имя элемента в DOM |
+| `onChange`       | `string`                               | —             | Действие при выборе радиокнопки  |
+| `onFocus`        | `React.FocusEventHandler<HTMLInputElement>`| —             | Действие по фокусу   |
+| `onBlur`         | `React.FocusEventHandler<HTMLInputElement>` | —             | Действие при потере фокуса   |
+| `inputRef`       | `React.FocusEventHandler<HTMLInputElement>`| —          | Ссылка на корневой DOM-элемент этого компонента |
 
 <!-- props:end -->
 
