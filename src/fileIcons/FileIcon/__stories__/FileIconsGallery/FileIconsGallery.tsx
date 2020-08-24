@@ -1,6 +1,5 @@
 import React from 'react';
 import { select } from '@storybook/addon-knobs';
-
 import { FileIconAvi } from '../../../FileIconAvi/FileIconAvi';
 import { FileIconBmp } from '../../../FileIconBmp/FileIconBmp';
 import { FileIconCsv } from '../../../FileIconCsv/FileIconCsv';
@@ -32,27 +31,28 @@ const defaultKnobs = () => ({
 
 const icons = {
   FileIconAvi,
-  FileIconBmp,
-  FileIconCsv,
-  FileIconDoc,
-  FileIconExe,
-  FileIconGif,
-  FileIconJpg,
-  FileIconLoading,
-  FileIconMov,
-  FileIconMp3,
-  FileIconMp4,
-  FileIconPdf,
-  FileIconPng,
-  FileIconPtt,
-  FileIconRar,
-  FileIconRtf,
-  FileIconTiff,
-  FileIconTxt,
-  FileIconUndefined,
-  FileIconWav,
-  FileIconXls,
-  FileIconZip,
+FileIconBmp,
+FileIconCsv,
+FileIconDoc,
+FileIconExe,
+FileIconGif,
+FileIconJpg,
+FileIconLoading,
+FileIconMov,
+FileIconMp3,
+FileIconMp4,
+FileIconPdf,
+FileIconPng,
+FileIconPtt,
+FileIconRar,
+FileIconRtf,
+FileIconTiff,
+FileIconTxt,
+FileIconUndefined,
+FileIconWav,
+FileIconXls,
+FileIconZip,
+
 } as const;
 
 type Names = keyof typeof icons;
@@ -61,12 +61,7 @@ export function FileIconsGallery() {
   return (
     <div className="tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full">
       {Object.keys(icons).map((name) => (
-        <FileIconsGalleryItem
-          key={name}
-          name={name}
-          icon={icons[name as Names]}
-          {...defaultKnobs()}
-        />
+        <FileIconsGalleryItem key={name} name={name} icon={icons[name as Names]} {...defaultKnobs()} />
       ))}
     </div>
   );
