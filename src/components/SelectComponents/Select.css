@@ -313,6 +313,7 @@
     color: inherit;
     background-color: transparent;
     border: none;
+    outline: none;
     font-family: inherit;
     font-size: inherit;
     line-height: calc(var(--input-height) - 2px);
@@ -465,6 +466,7 @@
     width: 100%;
     margin: 0;
     padding: 0;
+    color: var(--color-control-typo-default);
     background-color: transparent;
     border: none;
     border-bottom: 1px solid var(--color-bg-border);

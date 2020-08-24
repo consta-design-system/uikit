@@ -1,10 +1,10 @@
 import { Preview } from '@storybook/addon-docs/dist/blocks';
 
-# MultiCombobox
+# Combobox
 
-MultiCombobox — компонент реализующий элемент управления меню опций с выбором нескольких опции.
+Combobox — компонент реализующий элемент управления меню опций с полем для фильтрации.
 
-Компоненту необходимо передать тип опции: `<MultiCombobox<T> {..props}/>`.
+Компоненту необходимо передать тип опции: `<Combobox<T> {..props}/>`.
 
 ## Cвойства компонента
 
@@ -22,8 +22,6 @@ MultiCombobox — компонент реализующий элемент уп�
 | options             | `T[]`                                                                 | -                         | Опции |
 | onChange?           | `(value: string) => void`                                             | -                         | Обработчик события изменения значения компонента |
 | getOptionLabel      | `(arg: T) => string`                                                  | -                         | Функция для получения текста опции, он будет отображаться в поле для выбранного значения |
-| getOptionKey        | `(arg: T) => string`                                                  | -                         | Функция для формирования `key` опции в списке опций выпадающего блока со списком |
-| getOptionValue      | `(arg: T) => string`                                                  | -                         | Функция для формирования значения опции, которое будет возвращаться в форму |
 | onBlur?             | `(event?: React.FocusEvent<HTMLElement>) => void`                     | -                         | Обработчик события `blur` |
 | onFocus?            | `(event?: React.FocusEvent<HTMLElement>) => void`                     | -                         | Обработчик события `focus` |
 
@@ -32,7 +30,7 @@ MultiCombobox — компонент реализующий элемент уп�
 
 ```ts
 import React from 'react';
-import { Table } from '@gpn-design/uikit/MultiCombobox';
+import { Combobox } from '@gpn-design/uikit/Combobox';
 
 type Option = {
   label: string;
@@ -53,7 +51,7 @@ const Example = () => {
   return (
     <>
       <div style={{ width: '250px' }}>
-        <BasicSelect<Option>
+        <Combobox<Option>
           id="city"
           options={items}
           getOptionLabel={getItemLabel}
@@ -71,7 +69,7 @@ const Example = () => {
 
 ```ts
 import React from 'react';
-import { Table } from '@gpn-design/uikit/MultiCombobox';
+import { Combobox } from '@gpn-design/uikit/Combobox';
 
 type Option = {
   label: string;
@@ -92,13 +90,11 @@ const Example = () => {
   return (
     <>
       <div style={{ width: '250px' }}>
-        <MultiCombobox<Option>
+        <Combobox<Option>
           id="city"
           value={{label: 'Москва', value: 'moscow'}}
           options={items}
           getOptionLabel={getItemLabel}
-          getOptionKey={getItemKey}
-          getOptionValue={getItemValue}
         />
       </div>
     </>

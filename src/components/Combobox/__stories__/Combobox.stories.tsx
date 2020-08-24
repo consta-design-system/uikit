@@ -7,8 +7,8 @@ import { Combobox } from '../Combobox';
 import mdx from './Combobox.mdx';
 
 type SelectOption = {
-  value: string;
   label: string;
+  value: string;
 };
 
 const simpleItems = [
@@ -44,7 +44,6 @@ const simpleItems = [
 ];
 
 type Group = { label: string; items: SelectOption[] };
-type GroupOptions = Group[];
 
 const groups = [
   {
@@ -127,19 +126,16 @@ const getKnobs = () => ({
 
 const Default = (props: {
   value?: SelectOption;
-  items?: SelectOption[] | GroupOptions;
+  items?: SelectOption[] | Group[];
   getItemLabel?(item: SelectOption | Group): string;
-  getGroupOptions?(item: Group): SelectOption[];
+  getGroupOptions?(option: Group): SelectOption[];
 }): JSX.Element => {
   const getItemLabelDefault = (option: SelectOption): string => option.label;
   const { items = simpleItems, getItemLabel = getItemLabelDefault, getGroupOptions } = props;
 
-  let options = items;
+  const options = items;
 
-  const handleCreate = (v: string): void => {
-    // options = [...options, (getGroupOptions ? {label: 'Пользовательская', items:[...options[options.length - 1].items, { label: v, value: v }])];
-    options = [{ label: v, value: v }, ...options];
-  };
+  const handleCreate = (): void => {};
 
   return (
     <>

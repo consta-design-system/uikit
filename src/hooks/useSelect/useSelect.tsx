@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, useMemo } from 'react';
 
 import { useClickOutside } from '../useClickOutside/useClickOutside';
 import { useDebounce } from '../useDebounce/useDebounce';
@@ -25,7 +25,7 @@ type IndexForHighlight = number | ((oldIndex: number) => number);
 type SetHandlerArg<T> = boolean | number | T;
 type SetHandler<T> = (arg: SetHandlerArg<T>) => void;
 
-export type SelectProps<T> = {
+export interface SelectProps<T> {
   options: T[];
   value: T[] | null;
   multi?: boolean;
@@ -34,8 +34,15 @@ export type SelectProps<T> = {
   scrollToIndex?: ScrollToIndexFunctionType;
   disabled?: boolean;
   filterFn?(options: T[], searchValue: string): T[];
-  getOptionLabel?(option: T): string;
+  getOptionLabel(option: T): string;
   onCreate?(s: string): void;
+  getGroupOptions?(group: T): T[];
+}
+
+type Option<T> = {
+  label: string;
+  item: T;
+  group?: string;
 };
 
 interface OptionProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -66,7 +73,7 @@ type UseSelectResult<T> = {
   searchValue?: string;
   isOpen: boolean;
   highlightedIndex: number;
-  visibleOptions: T[];
+  visibleOptions: Option<T>[];
   value: T[] | null;
   // Actions
   selectIndex: SetHandler<T>;
@@ -117,6 +124,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
     multi = false,
     getOptionLabel,
     onCreate,
+    getGroupOptions,
   } = params;
   const value = params.value ?? [];
   const [
@@ -124,7 +132,22 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
     setState,
   ] = useHoistedState(initialState);
 
-  const originalOptions = options;
+  const originalOptions: Option<typeof options[0]>[] = useMemo(
+    () =>
+      typeof getGroupOptions === 'function'
+        ? options
+            .map((group) => {
+              const groupName = getOptionLabel(group);
+              const items = typeof getGroupOptions === 'function' ? getGroupOptions(group) : [];
+              return items.map((item) => ({ label: getOptionLabel(item), item, group: groupName }));
+            })
+            .flat()
+        : options.map((option) => ({
+            label: getOptionLabel(option),
+            item: option,
+          })),
+    [options],
+  );
 
   // Refs
 
@@ -139,29 +162,27 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   const onChangeRef = React.useRef<OnChangeFunctionType>();
   onChangeRef.current = onChange;
 
-  const filterFnRef = React.useRef<(options: T[], searchValue: string) => T[]>();
-  filterFnRef.current = (options: T[], searchValue: string): T[] => {
+  const filterFnRef = React.useRef<
+    (options: T[], searchValue: string) => Option<typeof options[0]>[]
+  >();
+  filterFnRef.current = (options: T[], searchValue: string): Option<typeof options[0]>[] => {
     if (typeof getOptionLabel === 'function') {
-      const tempOptions = options
-        .filter((option: T) =>
-          getOptionLabel(option)
-            .toLowerCase()
-            .includes(searchValue.toLowerCase()),
-        )
+      const tempOptions = originalOptions
+        .filter((option) => option.label.toLowerCase().includes(searchValue.toLowerCase()))
         .sort((a) => {
-          return getOptionLabel(a)
-            .toLowerCase()
-            .indexOf(searchValue.toLowerCase());
+          return a.label.toLowerCase().indexOf(searchValue.toLowerCase());
         });
       // }
 
-      const optionForCreate = ({ optionForCreate: true } as unknown) as T;
+      const optionForCreate = ({ label: searchValue, optionForCreate: true } as unknown) as Option<
+        typeof options[0]
+      >;
 
       return typeof onCreate === 'function' && optionForCreate
         ? [optionForCreate, ...tempOptions]
         : tempOptions;
     }
-    return options;
+    return originalOptions;
   };
 
   const filteredOptions = React.useMemo(() => {
@@ -173,7 +194,8 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
 
   const getSelectedOptionIndex = (): number => {
     if (value) {
-      const selectedOptionIndex = filteredOptions.indexOf(value[0]);
+      const valuesArray = filteredOptions.map((option) => option.item);
+      const selectedOptionIndex = valuesArray.indexOf(value[0]);
 
       return selectedOptionIndex > 0 ? selectedOptionIndex : 0;
     }

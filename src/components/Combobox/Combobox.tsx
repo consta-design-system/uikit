@@ -1,6 +1,6 @@
 import '../SelectComponents/Select.css';
 
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { useSelect } from '../../hooks/useSelect/useSelect';
 import { IconClose } from '../../icons/IconClose/IconClose';
@@ -10,13 +10,7 @@ import { Popover } from '../Popover/Popover';
 import { cnSelect } from '../SelectComponents/cnSelect';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
-import {
-  ClearedOptionType,
-  PropForm,
-  PropSize,
-  PropView,
-  PropWidth,
-} from '../SelectComponents/types';
+import { PropForm, PropSize, PropView, PropWidth } from '../SelectComponents/types';
 
 export interface ComboboxSelectProps<T> {
   options: T[];
@@ -30,7 +24,7 @@ export interface ComboboxSelectProps<T> {
   width?: PropWidth;
   view?: PropView;
   ariaLabel?: string;
-  onChange?: (v: T) => void;
+  onChange?: (v: T | null) => void;
   getOptionLabel(arg: T): string;
   onBlur?: (event?: React.FocusEvent<HTMLElement>) => void;
   onFocus?: (event?: React.FocusEvent<HTMLElement>) => void;
@@ -88,18 +82,6 @@ export const Combobox: ComboboxType = (props) => {
     scrollIntoView(elements[index], optionsRef.current);
   };
 
-  const flatOptions = useMemo(
-    () =>
-      options
-        .map((group) => {
-          const label = getOptionLabel(group);
-          const items = typeof getGroupOptions === 'function' ? getGroupOptions(group) : [];
-          return items.map((item) => ({ ...item, group: label }));
-        })
-        .flat(),
-    [options],
-  );
-
   const {
     visibleOptions,
     highlightedIndex,
@@ -108,7 +90,7 @@ export const Combobox: ComboboxType = (props) => {
     isOpen,
     setOpen,
   } = useSelect({
-    options: hasGroup ? flatOptions : options,
+    options,
     value: arrValue,
     onChange: handlerChangeValue,
     optionsRef,
@@ -116,6 +98,7 @@ export const Combobox: ComboboxType = (props) => {
     disabled,
     getOptionLabel,
     onCreate,
+    getGroupOptions,
   });
 
   const handleInputFocus = (e: React.FocusEvent<HTMLElement>): void => {
@@ -144,11 +127,10 @@ export const Combobox: ComboboxType = (props) => {
     setIsFocused(true);
   };
 
-  const handleClear = (e: React.FormEvent): void => {
+  const handleClear = (): void => {
     setInputData({ value: '' });
     setValue(null);
-    const a = getToggleProps();
-    typeof a.onChange === 'function' && a.onChange(e);
+    typeof onChange === 'function' && onChange(null);
     toggleRef.current?.focus();
   };
 
@@ -242,7 +224,7 @@ export const Combobox: ComboboxType = (props) => {
       {isOpen && (
         <Popover
           anchorRef={toggleRef}
-          possibleDirections={['downLeft', 'upLeft', 'downRight', 'upRight']}
+          possibleDirections={['downCenter', 'upLeft', 'downRight', 'upRight']}
           offset={1}
         >
           <SelectDropdown role="listbox" aria-activedescendant={`${id}-${highlightedIndex}`}>
@@ -250,17 +232,9 @@ export const Combobox: ComboboxType = (props) => {
               {visibleOptions.map((option, index: number) => {
                 const isOptionForCreate = 'optionForCreate' in option;
 
-                const currentOption = visibleOptions[index] as ClearedOptionType<typeof option> & {
-                  group: string;
-                };
-                const prevOption = visibleOptions[index - 1] as ClearedOptionType<typeof option> & {
-                  group: string;
-                };
-                const menuOption = isOptionForCreate
-                  ? (visibleOptions[index + 1] as ClearedOptionType<typeof option> & {
-                      group: string;
-                    })
-                  : currentOption;
+                const currentOption = visibleOptions[index];
+                const prevOption = visibleOptions[index - 1];
+                const menuOption = isOptionForCreate ? visibleOptions[index + 1] : currentOption;
 
                 const isFirstGroup =
                   hasGroup && !isOptionForCreate && !visibleOptions[index - 1] && index === 0;
@@ -272,7 +246,7 @@ export const Combobox: ComboboxType = (props) => {
                 return (
                   <>
                     {shouldShowGroupName && (
-                      <div key={index} className={cnSelect('GroupName')}>
+                      <div key={menuOption.group} className={cnSelect('GroupName')}>
                         {menuOption.group}
                       </div>
                     )}
@@ -281,7 +255,7 @@ export const Combobox: ComboboxType = (props) => {
                         (val) => JSON.stringify(val) === JSON.stringify(option),
                       )}
                       role="option"
-                      key={isOptionForCreate ? inputData.value : getOptionLabel(menuOption)}
+                      key={option.label}
                       id={`${id}-${index}`}
                       {...getOptionProps({
                         index,
@@ -303,15 +277,14 @@ export const Combobox: ComboboxType = (props) => {
                           disabled={visibleOptions.some(
                             (option, index) =>
                               index !== 0 &&
-                              getOptionLabel(menuOption).toLowerCase() ===
-                                inputData.value?.toLowerCase(),
+                              option.label.toLowerCase() === inputData.value?.toLowerCase(),
                           )}
                           onClick={handleCreate}
                         >
                           + Добавить «<b>{inputData.value}</b>»
                         </button>
                       ) : (
-                        getOptionLabel(menuOption)
+                        option.label
                       )}
                     </div>
                   </>

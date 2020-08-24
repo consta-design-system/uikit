@@ -97,6 +97,7 @@ export const BasicSelect: Select = (props) => {
     optionsRef,
     scrollToIndex,
     disabled,
+    getOptionLabel,
   });
 
   const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>): void => {
@@ -183,19 +184,19 @@ export const BasicSelect: Select = (props) => {
               {visibleOptions.map((option, index: number) => {
                 return (
                   <div
-                    aria-selected={option === value}
+                    aria-selected={option.item === value}
                     role="option"
-                    key={getOptionLabel(option)}
+                    key={option.label}
                     id={`${id}-${index}`}
                     {...getOptionProps({
                       index,
                       className: cnSelect('ListItem', {
-                        active: option === value,
+                        active: option.item === value,
                         hovered: index === highlightedIndex,
                       }),
                     })}
                   >
-                    {getOptionLabel(option)}
+                    {option.label}
                   </div>
                 );
               })}
