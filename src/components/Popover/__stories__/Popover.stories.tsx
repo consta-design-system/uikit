@@ -85,7 +85,7 @@ export const PopoverPositionedByAnchorStory = createStory(
     return (
       <>
         <div className={cnPopoverStories()}>
-          <Button label="Кликай сюда" type="button" onClick={handleClickOnAnchor} ref={anchorRef} />
+          <Button label="Нажми меня" type="button" onClick={handleClickOnAnchor} ref={anchorRef} />
         </div>
         {isPopoverVisible && (
           <Popover {...commonKnobs} anchorRef={anchorRef}>
@@ -114,7 +114,7 @@ export const PopoverBannedPositionsStory = createStory(
 
     return (
       <>
-        <Button label="Кликай сюда" type="button" onClick={handleClickOnAnchor} ref={anchorRef} />
+        <Button label="Нажми меня" type="button" onClick={handleClickOnAnchor} ref={anchorRef} />
         {isPopoverVisible && (
           <Popover
             anchorRef={anchorRef}
