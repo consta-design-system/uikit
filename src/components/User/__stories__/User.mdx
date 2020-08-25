@@ -64,14 +64,14 @@ import { UserExampleArrow } from './examples/UserExampleArrow/UserExampleArrow';
 <UserExampleStatus />
 
 ```ts
-  <User name="Камилла Флюдиндер" info="Онлайн" status="available" />
-  <User name="Камилла Флюдиндер" info="Из дома" status="remote" />
-  <User name="Камилла Флюдиндер" info="Недоступна" status="out" />
+<User name="Камилла Флюдиндер" info="Онлайн" status="available" />
+<User name="Камилла Флюдиндер" info="Из дома" status="remote" />
+<User name="Камилла Флюдиндер" info="Недоступна" status="out" />
 ```
 
 ## Обводка
 
-`view = "ghost"` добавит компоненту обводку.  
+`view = "ghost"` добавит компоненту обводку.
 Чтобы её убрать, укажите `view = "clear"` (по умолчанию).
 
 <UserExampleView />
@@ -94,6 +94,9 @@ import { UserExampleArrow } from './examples/UserExampleArrow/UserExampleArrow';
 
 Добавьте стрелочку `withArrow`, чтобы показать, что по клику на аватарку или весь блок
 можно посмотреть подробную информацию о человеке.
+
+Здесь можно показать дополнительное контекстное меню. Например, если блок находится в шапке,
+в нем могут быть пункты **Мой профиль**, **Настройки профиля**, **Выйти** (и другие).
 
 <UserExampleArrow />
 
