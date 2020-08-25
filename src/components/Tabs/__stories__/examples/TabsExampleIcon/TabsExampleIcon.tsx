@@ -39,6 +39,14 @@ export const TabsExampleIcon = () => {
         getLabel={(item) => item.name}
         getIcon={(item) => item.icon}
       />
+      <Tabs
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        items={items}
+        getLabel={(item) => item.name}
+        getIcon={(item) => item.icon}
+        onlyIcon
+      />
     </StoryBookExample>
   );
 };
