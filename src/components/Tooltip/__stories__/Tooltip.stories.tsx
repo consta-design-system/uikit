@@ -68,7 +68,7 @@ export const TooltipPositionedByAnchorStory = createStory(
     const anchor =
       anchorType === 'button' ? (
         <Button
-          label={text('Текст в кнопке', 'Кликай сюда')}
+          label={text('Текст на кнопке', 'Нажми меня')}
           type="button"
           onClick={handleClickOnAnchor}
           ref={anchorRef}
@@ -77,7 +77,7 @@ export const TooltipPositionedByAnchorStory = createStory(
         <Badge
           as="button"
           minified
-          size={select('Размер бэджа', ['s', 'm', 'l'], 's')}
+          size={select('Размер бейджика', ['s', 'm', 'l'], 's')}
           onClick={handleClickOnAnchor}
           ref={anchorRef}
         />
