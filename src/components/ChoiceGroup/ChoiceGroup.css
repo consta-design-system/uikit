@@ -31,7 +31,7 @@
       --choice-bg-color: var(--color-control-bg-secondary);
       --choice-text-color: var(--color-control-typo-secondary);
 
-      .ChoiceGroup-Label_checked::after {
+      .ChoiceGroup-Label_checked::before {
         box-shadow: inset 0 0 0 1px var(--color-control-bg-border-secondary);
       }
     }
