@@ -6,32 +6,25 @@ import { IconCamera } from '../../../icons/IconCamera/IconCamera';
 import { IconCopy } from '../../../icons/IconCopy/IconCopy';
 import { IconFavorite } from '../../../icons/IconFavorite/IconFavorite';
 import { cn } from '../../../utils/bem';
-import { ChoiceGroup } from '../ChoiceGroup';
+import { createMetadata } from '../../../utils/storybook';
+import {
+  ChoiceGroup,
+  choiceGroupDefaultForm,
+  choiceGroupDefaultSize,
+  choiceGroupDefaultView,
+  choiceGroupForms,
+  choiceGroupSizes,
+  choiceGroupViews,
+} from '../ChoiceGroup';
 
 import mdx from './ChoiceGroup.mdx';
 
 declare type Item = {
   name: string;
-  icon?: React.FC<IconProps>;
+  icon: React.FC<IconProps>;
 };
 
 const items = [
-  {
-    name: 'один',
-  },
-  {
-    name: 'два',
-  },
-  {
-    name: 'три',
-    icon: IconFavorite,
-  },
-  {
-    name: 'четыре',
-  },
-];
-
-const onlyIconItems = [
   {
     name: 'один',
     icon: IconCamera,
@@ -41,61 +34,74 @@ const onlyIconItems = [
     icon: IconCopy,
   },
   {
-    name: 'четыре',
+    name: 'три',
     icon: IconFavorite,
   },
 ];
 
 const defaultKnobs = () => ({
   multiple: boolean('multiple', false),
-  size: select('size', ['xs', 's', 'm', 'l'], 'm'),
-  view: select('view', ['primary', 'ghost', 'secondary'], 'primary'),
-  form: select('form', ['default', 'round', 'brick'], 'default'),
+  size: select('size', choiceGroupSizes, choiceGroupDefaultSize),
+  view: select('view', choiceGroupViews, choiceGroupDefaultView),
+  form: select('form', choiceGroupForms, choiceGroupDefaultForm),
+  withIcon: boolean('withIcon', false),
+  onlyIcon: boolean('onlyIcon', false),
 });
 
 const cnChoiceGroupStories = cn('ChoiceGroupStories');
 
 export function Playground() {
-  const [value, setValue] = useState<Item[] | null>(null);
-  const [onlyIconValue, setOnlyIconValue] = useState<Item[] | null>(null);
+  const [valueMultiple, setValueMultiple] = useState<Item[]>(null);
+  const [value, setValue] = useState<Item>(null);
+  const { multiple, size, view, form, withIcon, onlyIcon } = defaultKnobs();
+
+  const getIcon = withIcon ? (item: Item) => item.icon : undefined;
+  const getLabel = (item: Item) => item.name;
+  const onChangeMultiple = ({ value }: { value: Item[] | null }) => setValueMultiple(value);
+  const onChange = ({ value }: { value: Item | null }) => setValue(value);
 
   return (
     <div className={cnChoiceGroupStories()}>
-      <form className="decorator decorator_indent-b_m">
-        <ChoiceGroup
-          {...defaultKnobs()}
-          items={items}
-          value={value}
-          getItemKey={(item) => item.name}
-          getItemLabel={(item) => item.name}
-          onChange={({ value }) => setValue(value)}
-          getItemIcon={(item) => item.icon}
-          name="ChoiceGroup"
-        />
-      </form>
-      <form className="decorator decorator_indent-b_m">
-        <ChoiceGroup
-          {...defaultKnobs()}
-          onlyIcon
-          items={onlyIconItems}
-          value={onlyIconValue}
-          getItemKey={(item) => item.name}
-          getItemLabel={(item) => item.name}
-          onChange={({ value }) => setOnlyIconValue(value)}
-          getItemIcon={(item) => item.icon}
-          name="ChoiceGroup2"
-        />
+      <form>
+        {multiple ? (
+          <ChoiceGroup
+            items={items}
+            value={valueMultiple}
+            getLabel={getLabel}
+            onChange={onChangeMultiple}
+            name={cnChoiceGroupStories()}
+            multiple
+            size={size}
+            view={view}
+            form={form}
+            onlyIcon={onlyIcon}
+            getIcon={getIcon}
+          />
+        ) : (
+          <ChoiceGroup
+            items={items}
+            value={value}
+            getLabel={getLabel}
+            onChange={onChange}
+            name={cnChoiceGroupStories()}
+            multiple={false}
+            size={size}
+            view={view}
+            form={form}
+            onlyIcon={onlyIcon}
+            getIcon={getIcon}
+          />
+        )}
       </form>
     </div>
   );
 }
 
-export default {
+export default createMetadata({
   title: 'Components|/ChoiceGroup',
-  component: Playground,
   parameters: {
     docs: {
       page: mdx,
     },
   },
-};
+});

@@ -1,8 +1,8 @@
 export type PropsWithHTMLAttributes<Props, HTMLElement> = Props &
-  Omit<React.HTMLAttributes<HTMLElement>, keyof Props>;
+  Omit<React.HTMLAttributes<HTMLElement>, keyof Props | 'css'>;
 
-declare module 'react' {
-  interface DOMAttributes<T> {
-    css?: never;
-  }
-}
+export type PropsWithHTMLAttributesAndRef<Props, HTMLElement> = PropsWithHTMLAttributes<
+  Props,
+  HTMLElement
+> &
+  React.RefAttributes<HTMLElement>;

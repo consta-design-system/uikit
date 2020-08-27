@@ -41,18 +41,18 @@ const icons = {
   FileIconLoading,
   FileIconMov,
   FileIconMp3,
-  FileIconPdf,
   FileIconMp4,
+  FileIconPdf,
   FileIconPng,
-  FileIconRar,
   FileIconPtt,
+  FileIconRar,
   FileIconRtf,
   FileIconTiff,
   FileIconTxt,
+  FileIconUndefined,
   FileIconWav,
   FileIconXls,
   FileIconZip,
-  FileIconUndefined,
 } as const;
 
 type Names = keyof typeof icons;

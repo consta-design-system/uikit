@@ -2,69 +2,92 @@ import './Tabs.css';
 
 import React, { createRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
+import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
-import {
-  BaseCheckGroupField,
-  BaseCheckGroupFieldItemPropItemKey,
-  BaseCheckGroupFieldProps,
-} from '../BaseCheckGroupField/BaseCheckGroupField';
+import { getSizeByMap } from '../../utils/getSizeByMap';
+import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
-import { TabsTab } from './Tab/Tabs-Tab';
+import { TabsTab } from './TabsTab/TabsTab';
 
-export type TabsPropSize = 's' | 'm';
-export type TabsPropView = 'bordered' | 'clear';
-type Props<T> = {
-  size?: TabsPropSize;
-  onlyIcon?: boolean;
-  view?: TabsPropView;
-  getItemIcon?: (item: T) => React.FC<IconProps> | undefined;
-  iconSize?: IconPropSize;
-  children?: never;
-};
-export type TabsProps<T> = Props<T> &
-  Omit<BaseCheckGroupFieldProps<T>, 'componentItem' | 'getAdditionalPropsForItem' | 'multiple'>;
+export const tabsSizes = ['s', 'm'] as const;
+export type TabsPropSize = typeof tabsSizes[number];
+export const tabsDefaultSize: TabsPropSize = 'm';
+
+export const tabsViews = ['bordered', 'clear'] as const;
+export type TabsPropView = typeof tabsViews[number];
+export const tabsDefaultView: TabsPropView = 'bordered';
+
+export type TabsPropGetLabel<ITEM> = (item: ITEM) => string | number;
+export type TabsPropGetIcon<ITEM> = (item: ITEM) => React.FC<IconProps> | undefined;
+export type TabsPropOnChange<ITEM> = (props: {
+  e: React.MouseEvent<HTMLButtonElement>;
+  value: ITEM | null;
+}) => void;
+
+type Props<ITEM = any> = PropsWithHTMLAttributesAndRef<
+  {
+    size?: TabsPropSize;
+    onlyIcon?: boolean;
+    view?: TabsPropView;
+    iconSize?: IconPropSize;
+    items: ITEM[];
+    value?: ITEM | null;
+    getIcon?: TabsPropGetIcon<ITEM>;
+    getLabel: TabsPropGetLabel<ITEM>;
+    children?: never;
+    onChange: TabsPropOnChange<ITEM>;
+  },
+  HTMLDivElement
+>;
 
 export const cnTabs = cn('Tabs');
 
-export const Tabs: <T>(
-  props: TabsProps<T> & React.RefAttributes<HTMLDivElement>,
-) => React.ReactElement | null = React.forwardRef((props, ref) => {
+type Tabs = <ITEM>(props: Props<ITEM>) => React.ReactElement | null;
+
+const sizeMap: Record<TabsPropSize, IconPropSize> = {
+  s: 'xs',
+  m: 's',
+};
+
+export const Tabs: Tabs = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
   const {
-    size = 'm',
+    size = tabsDefaultSize,
     className,
     items,
-    getItemKey,
-    view = 'bordered',
+    view = tabsDefaultView,
     value,
     onlyIcon,
-    getItemIcon,
-    getItemLabel,
-    id,
-    name,
+    getIcon,
+    getLabel,
     onChange,
-    iconSize,
+    iconSize: iconSizeProp,
     ...otherProps
   } = props;
+
+  const { getOnChange, getChecked } = useChoiceGroup<
+    typeof items[number],
+    React.MouseEvent<HTMLButtonElement>
+  >({
+    value,
+    getKey: getLabel,
+    callBack: onChange,
+    multiple: false,
+  });
+
   const [mounted, setMounted] = useState<boolean>(false);
 
-  const constructItemRefs: () => Record<
-    BaseCheckGroupFieldItemPropItemKey,
-    React.RefObject<HTMLButtonElement>
-  > = () => {
-    const refs: Record<BaseCheckGroupFieldItemPropItemKey, React.RefObject<HTMLButtonElement>> = {};
-    if (items) {
-      for (const item of items) {
-        if (getItemKey) {
-          refs[getItemKey(item)] = createRef<HTMLButtonElement>();
-        }
-      }
+  const constructItemRefs: () => Record<string, React.RefObject<HTMLButtonElement>> = () => {
+    const refs: Record<string, React.RefObject<HTMLButtonElement>> = {};
+    for (const item of items) {
+      refs[getLabel(item)] = createRef<HTMLButtonElement>();
     }
     return refs;
   };
 
-  const buttonRefs = useMemo(constructItemRefs, [items, getItemKey]);
+  const buttonRefs = useMemo(constructItemRefs, [items, getLabel]);
+
   const rootRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
 
@@ -86,8 +109,8 @@ export const Tabs: <T>(
   const updateLine = () => {
     if (rootRef.current && lineRef.current && buttonRefs) {
       const rootWidth = rootRef.current.offsetWidth;
-      if (value && value.length > 0) {
-        const activeItemRef = getItemKey ? buttonRefs[getItemKey(value[0])] : undefined;
+      if (value) {
+        const activeItemRef = buttonRefs[getLabel(value)];
         if (activeItemRef && activeItemRef.current) {
           const itemWidth = activeItemRef.current.offsetWidth;
           const itemOffsetLeft = activeItemRef.current.offsetLeft;
@@ -108,7 +131,8 @@ export const Tabs: <T>(
     setMounted(true);
   }, [updateLine]);
 
-  const withOutValue = !(value && value.length > 0);
+  const withOutValue = !value;
+  const iconSize = getSizeByMap(sizeMap, size, iconSizeProp);
 
   return (
     <div
@@ -116,24 +140,21 @@ export const Tabs: <T>(
       ref={useForkRef<HTMLDivElement>([ref, rootRef, onMount])}
       {...otherProps}
     >
-      <BaseCheckGroupField
-        className={cnTabs('List')}
-        componentItem={TabsTab}
-        getAdditionalPropsForItem={(item) => ({
-          ...(getItemIcon ? { icon: getItemIcon(item) } : {}),
-          size,
-          onlyIcon,
-          innerRef: getItemKey ? buttonRefs[getItemKey(item)] : null,
-          iconSize,
-        })}
-        items={items}
-        getItemKey={getItemKey}
-        value={value}
-        id={id}
-        name={name}
-        onChange={onChange}
-        getItemLabel={getItemLabel}
-      />
+      <div className={cnTabs('List')}>
+        {items.map((item: unknown) => (
+          <TabsTab
+            className={cnTabs('Tab')}
+            ref={buttonRefs[getLabel(item)]}
+            key={getLabel(item)}
+            onChange={getOnChange(item)}
+            checked={getChecked(item)}
+            label={getLabel(item).toString()}
+            icon={getIcon && getIcon(item)}
+            iconSize={iconSize}
+            onlyIcon={onlyIcon}
+          />
+        ))}
+      </div>
       <div className={cnTabs('WrapperRunningLine')}>
         <div className={cnTabs('RunningLine', { withOutValue, mounted })} ref={lineRef} />
       </div>

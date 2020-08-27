@@ -6,7 +6,7 @@ function IconCalendarSizeXs(props: React.SVGProps<SVGSVGElement>) {
       <path
         fillRule="evenodd"
         clipRule="evenodd"
-        d="M2.5 0a.5.5 0 00-.5.5V2H1a1 1 0 00-1 1v7a1 1 0 001 1h10a1 1 0 001-1V3a1 1 0 00-1-1h-1V.5a.5.5 0 00-1 0V2H3V.5a.5.5 0 00-.5-.5zM11 4H1v6h10V4z"
+        d="M3.5 1a.5.5 0 00-.5.5V2H2a1 1 0 00-1 1v7a1 1 0 001 1h8a1 1 0 001-1V3a1 1 0 00-1-1H9v-.5a.5.5 0 00-1 0V2H4v-.5a.5.5 0 00-.5-.5zM10 4H2v6h8V4z"
       />
     </svg>
   );
