@@ -4,12 +4,13 @@ import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/D
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Timer } from '../../../Timer';
 
-export function TimerExampleSeconds() {
+export function TimerExampleProgress() {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <Timer size="m" seconds={3} progress={80} />
+      <Timer size="m" seconds={5} progress={20} />
+      <Timer size="m" seconds={5} progress={40} />
+      <Timer size="m" seconds={5} progress={60} />
       <Timer size="m" seconds={5} progress={80} />
-      <Timer size="m" seconds={7} progress={80} />
     </StoryBookExample>
   );
 }

@@ -1,5 +1,6 @@
 import { TimerExampleSize } from './examples/TimerExampleSize/TimerExampleSize';
 import { TimerExampleSeconds } from './examples/TimerExampleSeconds/TimerExampleSeconds';
+import { TimerExampleProgress } from './examples/TimerExampleProgress/TimerExampleProgress';
 
 # Timer
 
@@ -15,6 +16,9 @@ import { TimerExampleSeconds } from './examples/TimerExampleSeconds/TimerExample
 ## Секунды
 
 Вы можете поставить таймер на нужное количество секунд с помощью свойства `seconds`.
+
+Таймер предназначен для очень коротких промежутков времени, до 10 секунд, поэтому
+двузначные числа лучше не использовать.
 
 <TimerExampleSeconds />
 
@@ -33,6 +37,17 @@ import { TimerExampleSeconds } from './examples/TimerExampleSeconds/TimerExample
 ## Прогрессбар
 
 Вы можете указать процент заполнения прогрессбара в процентах в свойстве `progress`.
+
+<TimerExampleProgress />
+
+```ts
+<StoryBookExample className={cnDocsDecorator('Section')}>
+  <Timer size="m" seconds={5} progress={20} />
+  <Timer size="m" seconds={5} progress={40} />
+  <Timer size="m" seconds={5} progress={60} />
+  <Timer size="m" seconds={5} progress={80} />
+</StoryBookExample>
+```
 
 Включите анимацию с помощью `animation`.
 
