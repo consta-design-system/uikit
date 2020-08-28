@@ -1,1 +1,228 @@
+import { HeaderFullExample } from './examples/HeaderFullExample/HeaderFullExample';
+import { HeaderMinifyLoginExample } from './examples/HeaderMinifyLoginExample/HeaderMinifyLoginExample';
+import { HeaderWithLogoExample } from './examples/HeaderWithLogoExample/HeaderWithLogoExample';
+import { HeaderWithoutMenuExample } from './examples/HeaderWithoutMenuExample/HeaderWithoutMenuExample';
+import { HeaderWithoutSearchExample } from './examples/HeaderWithoutSearchExample/HeaderWithoutSearchExample';
+import { HeaderLoginExample, HeaderLoginExampleStatus, HeaderLoginExampleType } from './examples/HeaderLoginExample/HeaderLoginExample';
+import { HeaderMenuExample } from './examples/HeaderMenuExample/HeaderMenuExample';
+import { HeaderButtonExample } from './examples/HeaderButtonExample/HeaderButtonExample';
+
+
+
 # Header
+
+Этот компонент — заготовка для шапки проекта. Внутри — несколько независимых модулей,
+можно использовать только те, что вам нужны, или добавить свои.
+
+Одинаковая шапка в разных продуктах — большой плюс для пользователей. Человеку не нужно
+перестраиваться, чтобы найти самые важные вещи — главные разделы, личный кабинет или профиль,
+частые действия и тому подобное.
+
+- [Внешний вид и структура](#внешний-вид-и-структура)
+- [Модули](#модули)
+  - [HeaderLogin](#headerlogin)
+    - [Внешний вид](#внешний-вид)
+    - [Статус пользователя](#статус-пользователя)
+  - [HeaderMenu](#headermenu)
+  - [HeaderLogo](#headerlogo)
+  - [HeaderButton](#headerbutton)
+  - [HeaderSearchBar](#headersearchbar)
+- [Список свойств](#свойства)
+
+## Внешний вид и структура
+
+Header располагается в самом верху и занимает всю ширину экрана, независимо от ширины контентной области.
+С боков охраняется безопасными отступами размера `space-l`.
+
+Header состоит из левой и правой части — `leftSide` и `rightSide`. В левую часть складываются модули
+[HeaderLogo](#headerlogo), [HeaderMenu](#headermenu) и [HeaderSearchBar](#headersearchbar).
+В правую — [HederLogin](#headerlogin). [HeaderButton](#headerbutton) можно ставить в любую часть.
+
+<HeaderFullExample />
+
+[Посмотреть все свойства Header](#свойства-header)
+
+## Модули
+
+Header формируется из независимых модулей. Вы можете использовать все модули или только некоторые,
+можете добавить свои — но сначала [прочитайте, как это правильно сделать и оформить](?path=/docs/common-develop-contributors--page).
+
+Модуль пакуется в контейнер `HeaderModule`.
+
+Ширина всех модулей равна ширине контента, если об этом отдельно не сказано.
+
+У модулей есть отступы: в левой стороне все отступы **справа**, в правой стороне все отступы **слева**. У крайних модулей отступы обнуляются.
+
+Размер отступов:
+- 'L' — `--space-2xl`
+- 'M' — `--space-m`
+- 'S' — `--space-xs`
+
+Крупные модули (поиск, меню, логотип и пр.) рекомендуем отделять самым крупным отступом `L`, мелкие модули — `S` или `M`.
+
+[Посмотреть все свойства HeaderModule](свойства-headermodule)
+
+### HeaderLogin
+
+Используйте этот модуль, чтобы показать информацию о пользователе. Лучше всего располагать его последним в правой части шапки.
+
+<HeaderLoginExample />
+
+#### Внешний вид
+
+Внешний вид логина зависит от того, вошел пользователь в аккаунт или нет. Если вошел, вы можете
+показать полную версию или только аватарку со стрелочкой.
+
+`isLogged` означает, что пользователь авторизован.
+
+`isMinified` показывает только стрелочку.
+
+<HeaderLoginExampleType />
+
+#### Статус пользователя
+
+За статус отвечает свойство `personStatus`. Варианты: `available`, `remote`, `out`.
+
+<HeaderLoginExampleStatus />
+
+[Посмотреть все свойства HeaderLogin](свойства-headerlogin)
+
+### HeaderMenu
+
+Этот модуль используется для основной навигации по сервису, добавьте в него ссылки на главные разделы.
+
+Подчеркивающий элемент всегда по центру и не может быть больше 40 px.
+
+<HeaderMenuExample />
+
+[Посмотреть все свойства HeaderMenu](свойства-headermenu)
+
+### HeaderLogo
+
+В этом модуле можно разместить изображение, текст или что угодно.
+Например, логотип компании или текстовое название проекта.
+
+Вертикальное выравнивание всегда по центру.
+
+Лучше всего располагать HeaderLogo в самом левой части шапки.
+Левее него может быть только кнопка «бургера» (для меню в мобильной версии).
+
+<HeaderWithLogoExample  />
+
+Если используете текстовое название, проверьте, что оно не слишком длинное.
+Можно сократить или перенести на другую строку.
+
+[Посмотреть все свойства HeaderLogo](свойства-headerlogo)
+
+### HeaderButton
+
+Этот модуль нужен, чтобы добавить быстрый доступ к каким-то функциям или разделам,
+которые не вошли в меню. Если таких функций несколько, лучше объединять их в группы и ставить рядом.
+
+Модуль может располагаться как в левой, так и в правой части шапки.
+
+Между несколькими модулями HeaderButton используйте отступ `S`.
+
+В основе модуля — компонент [Button](?path=/docs/components-button--playground) в модификациях: `view_clear`, `size_m`, `only-icon`, `form_round` с [иконкой](?path=/story/components-icons--playground) размера `M`.
+
+<HeaderButtonExample />
+
+```ts
+<HeaderModule indent="s">
+  <HeaderButton iconLeft={IconDiamond} />
+</HeaderModule>
+<HeaderModule indent="s">
+  <HeaderButton iconLeft={IconChat} />
+</HeaderModule>
+<HeaderModule indent="s">
+  <HeaderButton iconLeft={IconRing} />
+</HeaderModule>
+```
+[Посмотреть все свойства HeaderButton](свойства-headerbutton)
+
+### HeaderSearchBar
+
+Этот модуль можно использовать для поиска внутри сервиса.
+
+Ширина модуля 25vw, максимальная ширина 260px.
+
+Вы можете поменять подсказку в свойстве `placeholder`. Иконка в поле не меняется.
+
+
+[Посмотреть все свойства HeaderSearchBar](свойства-headersearchbar)
+
+## Свойства
+
+### Свойства Header
+
+| Свойство   | Тип и значения | По умолчанию | Описание                                      |
+| ---------- | -------------- | ------------ | --------------------------------------------- |
+| `indent`   | `'s', 'm' , 'l'` | —          | Отступ                                        |
+| `className`| `string`       | —            | Дополнительный CSS-класс |
+
+
+### Свойства HeaderModule
+
+| Свойство   | Тип и значения | По умолчанию | Описание                                      |
+| ---------- | -------------- | ------------ | --------------------------------------------- |
+| `rightSide`| `string`       | —        | Левая часть, контейнер для модулей HeaderLogo, HeaderMenu и HeaderSearchBar |
+| `leftSide` | `string`       | —        | Правая часть, контейнер для модулей HeaderLogin и HeaderButton  |
+| `className`| `string`       | —        | Дополнительный CSS-класс |
+
+
+###  Свойства HeaderLogin
+
+| Свойство   | Тип и значения | По умолчанию | Описание                                      |
+| ---------- | -------------- | ------------ | --------------------------------------------- |
+| `isLogged` | `boolean` | —        | Залогинен или нет  |
+| `personName`| `string` | —        | Имя пользователя  |
+| `personInfo`| `string`| —  | Дополнительная информация о пользователе    |
+| `personStatus`|  |    | Статус пользователя  |
+| `personAvatarUrl ` | `string` | —  | Ссылка на аватарку   |
+| `isMinified`  | `boolean`         | —            | Показывает уменьшенную версию компонента |
+| `className` | `string`          | —            | Дополнительный CSS-класс |
+
+### Свойства HeaderMenu
+
+
+| Свойство   | Тип и значения | По умолчанию | Описание                                      |
+| ---------- | -------------- | ------------ | --------------------------------------------- |
+| `items` | `Item[]` | —      |   Массив с данными для пунктов меню  |
+
+
+#### Свойства для пункта меню (item)
+| Свойство   | Тип и значения | По умолчанию | Описание                                      |
+| ---------- | -------------- | ------------ | --------------------------------------------- |
+| `label` | `string` | —      | Название пункта меню  |
+| `href`| `string` | —        | Ссылка  |
+| `target`| `string`| —  | Окно, в котором будет открыта ссылка   |
+| `active`| `boolean`| —  | Подсветить этот пункт меню — делает его активным  |
+| `onClick`  | `React.EventHandler<React.MouseEvent>`| —            | Действие по клику на этот пункт меню |
+| `className` | `string`          | —            | Дополнительный CSS-класс |
+
+### Свойства HeaderLogo
+
+
+| Свойство   | Тип и значения | По умолчанию | Описание                                      |
+| ---------- | -------------- | ------------ | --------------------------------------------- |
+| `className` | `string`          | —            | Дополнительный CSS-класс |
+
+### Свойства HeaderButton
+
+
+| Свойство   | Тип и значения | По умолчанию | Описание                                      |
+| ---------- | -------------- | ------------ | --------------------------------------------- |
+| `iconLeft`| `React.FC<IIcon>`  | — | Иконка на кнопке        |
+| `className` | `string`          | —            | Дополнительный CSS-класс |
+
+### Свойства HeaderSearchBar
+
+
+| Свойство   | Тип и значения | По умолчанию | Описание                                      |
+| ---------- | -------------- | ------------ | --------------------------------------------- |
+| `label`    | `string` | — |   Метка поля   |
+| `placeholder`| `string` | — |  Подсказка внутри поля      |
+| `value`    | `string` | — |  Значение для обращения к элементу     |
+| `onSearch` |  | — |        | Действие в результате поиска
+| `onChange` |  | — |        | Действие при изменении поля
+| `className` | `string`          | —            | Дополнительный CSS-класс |
