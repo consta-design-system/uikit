@@ -17,7 +17,7 @@ export const ChoiceGroupExampleText = () => {
       className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' })])}
     >
       <div className={cnDocsExample()}>
-        <p className={cnDocsExample('Caption')}>Отбражение</p>
+        <p className={cnDocsExample('Caption')}>Отображение</p>
         <ChoiceGroup
           value={value}
           onChange={({ value }) => setValue(value)}
