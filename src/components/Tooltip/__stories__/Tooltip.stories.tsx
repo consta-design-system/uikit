@@ -62,7 +62,7 @@ export const TooltipPositionedByAnchorStory = createStory(
     const handleClickOnAnchor = () => {
       setIsTooltipVisible(!isTooltipVisible);
     };
-    const anchorType = optionsKnob('Тип якоря', { Кнопка: 'button', Бэдж: 'badge ' }, 'button', {
+    const anchorType = optionsKnob('Тип якоря', { Кнопка: 'button', Бейджик: 'badge ' }, 'button', {
       display: 'inline-radio',
     });
     const anchor =
