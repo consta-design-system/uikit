@@ -33,7 +33,7 @@ export const TextExampleLabelAndData = () => {
           view="secondary"
           type="p"
         >
-          Должность сотрудника
+          Должность
         </Text>
         <Text as="div" align="left" font="mono" lineHeight="l" size="l" view="primary">
           Инженер по бурению
