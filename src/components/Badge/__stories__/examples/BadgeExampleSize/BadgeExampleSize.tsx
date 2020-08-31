@@ -1,13 +1,14 @@
 import React from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
+import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
+import * as wp from '../../../../../utils/whitepaper/whitepaper';
 import { Badge } from '../../../Badge';
 
 export const BadgeExampleSize = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
-    <Badge size="s" label="Badge" />
-    <Badge size="m" label="Badge" />
-    <Badge size="l" label="Badge" />
-  </StoryBookExample>
+  <div className={cnDocsDecorator('Section', [cnDocsExample(null)])}>
+    <Badge size="s" label="Badge s" className={wp.decorator({ 'indent-r': 'm' })} />
+    <Badge size="m" label="Badge m" className={wp.decorator({ 'indent-r': 'm' })} />
+    <Badge size="l" label="Badge l" className={wp.decorator({ 'indent-r': 'm' })} />
+  </div>
 );

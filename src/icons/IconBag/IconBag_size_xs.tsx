@@ -2,8 +2,9 @@ import * as React from 'react';
 
 function IconBagSizeXs(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 12 12" fill="none" {...props}>
+    <svg viewBox="0 0 12 12" {...props}>
       <path
+        fillRule="evenodd"
         clipRule="evenodd"
         d="M3 2a1 1 0 011-1h4a1 1 0 011 1v1h2a1 1 0 011 1v.5L6.469 5.93c-.31.088-.628.088-.938 0L0 4.5V4a1 1 0 011-1h2V2zm1 1h4V2H4v1z"
       />

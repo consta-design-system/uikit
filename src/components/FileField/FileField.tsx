@@ -1,65 +1,54 @@
 import './FileField.css';
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 
+import { cnMixVisuallyHidden } from '../../mixs/MixVisuallyHidden/MixVisuallyHidden';
 import { cn } from '../../utils/bem';
-import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
+import { PropsWithJsxAttributes } from '../../utils/types/PropsWithJsxAttributes';
 
-type ComponentProps = {
-  onClick: React.MouseEventHandler<HTMLElement>;
-};
+type ComponentProps = { role: string; as: keyof JSX.IntrinsicElements };
 
-type Props = {
-  children: React.ComponentType<ComponentProps>;
-  onChange: (object: { e: React.ChangeEvent; value: FileList | null }) => void;
-  value: FileList | null;
-  multiple?: boolean;
-  type?: never;
-  tabIndex?: never;
-  className?: never;
-};
+type RenderFn = (props: ComponentProps) => React.ReactNode;
 
-export type FileFieldProps = PropsWithHTMLAttributes<Props, HTMLInputElement>;
+export type FileFieldProps = PropsWithJsxAttributes<
+  {
+    id: string;
+    onChange?: (e: DragEvent | React.ChangeEvent) => void;
+    children?: RenderFn | React.ReactNode;
+    inputRef?: React.Ref<HTMLInputElement>;
+  },
+  'input'
+>;
+
+function isRenderFn(fn: RenderFn | React.ReactNode): fn is RenderFn {
+  return (fn as RenderFn).call !== undefined;
+}
 
 export const cnFileField = cn('FileField');
-const cnFileFieldInput = cnFileField('Input');
 
 export const FileField: React.FC<FileFieldProps> = (props) => {
-  const { children: Component, value, onChange, ...otherProps } = props;
+  const {
+    className,
+    children,
+    id,
+    inputRef,
+    'aria-label': ariaLabel = 'File input',
+    ...inputProps
+  } = props;
 
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const handleClick = () => inputRef.current?.click();
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { files } = e.target;
-    onChange({ e, value: files?.length && files?.length > 0 ? files : null });
-  };
-
-  useEffect(() => {
-    if (inputRef.current) {
-      if (value) {
-        inputRef.current.files = value;
-      } else if (window.DataTransfer) {
-        const dataTransfer = new window.DataTransfer();
-        inputRef.current.files = dataTransfer.files;
-      } else {
-        inputRef.current.value = '';
-      }
-    }
-  }, [value]);
+  const content = isRenderFn(children) ? children({ role: 'button', as: 'span' }) : children;
 
   return (
-    <>
+    <label htmlFor={id} className={cnFileField(null, [className])}>
       <input
-        {...otherProps}
-        className={cnFileFieldInput}
-        ref={inputRef}
+        {...inputProps}
+        className={cnFileField('Input', [cnMixVisuallyHidden()])}
+        id={id}
         type="file"
-        onChange={handleChange}
-        tabIndex={-1}
+        aria-label={ariaLabel}
+        ref={inputRef}
       />
-      <Component onClick={handleClick} />
-    </>
+      {content}
+    </label>
   );
 };
