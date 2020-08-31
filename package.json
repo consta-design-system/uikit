@@ -1,6 +1,6 @@
 {
-  "name": "@gpn-design/uikit",
-  "version": "1.7.1",
+  "name": "@nedra-ui/uikit",
+  "version": "1.7.2",
   "dependencies": {
     "@bem-react/classname": "^1.5.8",
     "@bem-react/classnames": "^1.3.9",
@@ -154,5 +154,19 @@
     "typescript": "^3.8.3",
     "typescript-eslint-parser": "^22.0.0"
   },
-  "homepage": "https://ui-kit.gpn.vercel.app"
+  "homepage": "https://ui-kit.gpn.vercel.app",
+  "description": "## Установка пакета",
+  "main": ".eslintrc.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nedradigital/ui-kit.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nedradigital/ui-kit/issues"
+  }
 }
