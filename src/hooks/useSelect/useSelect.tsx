@@ -25,6 +25,24 @@ type IndexForHighlight = number | ((oldIndex: number) => number);
 type SetHandlerArg<T> = boolean | number | T;
 type SetHandler<T> = (arg: SetHandlerArg<T>) => void;
 
+// interface SingleOption<T = any> {
+//   label: string;
+//   value: string;
+//   item: T;
+// }
+
+// interface GroupOption<T> {
+//   label: string;
+//   options: SingleOption<T>[];
+// }
+// type Option<T = any> = SingleOption<T> | GroupOption<T>;
+
+type Option<T> = {
+  label: string;
+  item: T;
+  group?: string;
+};
+
 export interface SelectProps<T> {
   options: T[];
   value: T[] | null;
@@ -38,12 +56,6 @@ export interface SelectProps<T> {
   onCreate?(s: string): void;
   getGroupOptions?(group: T): T[];
 }
-
-type Option<T> = {
-  label: string;
-  item: T;
-  group?: string;
-};
 
 interface OptionProps extends React.HTMLAttributes<HTMLDivElement> {
   index: number;
@@ -174,9 +186,10 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
         });
       // }
 
-      const optionForCreate = ({ label: searchValue, optionForCreate: true } as unknown) as Option<
-        typeof options[0]
-      >;
+      const optionForCreate = ({
+        label: searchValue,
+        optionForCreate: true,
+      } as unknown) as Option<typeof options[0]>;
 
       return typeof onCreate === 'function' && optionForCreate
         ? [optionForCreate, ...tempOptions]
@@ -187,7 +200,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
 
   const filteredOptions = React.useMemo(() => {
     if (resolvedSearchValue && resolvedSearchValue !== '' && filterFnRef.current) {
-      return filterFnRef.current(options, resolvedSearchValue);
+      return filterFnRef.current(options, resolvedSearchValue.trim());
     }
     return originalOptions;
   }, [originalOptions, resolvedSearchValue]);
@@ -284,6 +297,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
           setOpen(false);
         }
       }
+      setResolvedSearch('');
     },
     [filteredOptions, value, setOpen],
   );
@@ -309,6 +323,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   const removeValue = React.useCallback(
     (index) => {
       onChangeRef.current && onChangeRef.current(value.filter((d, i) => i !== index));
+      setResolvedSearch('');
     },
     [value],
   );

@@ -11,6 +11,9 @@ type SelectOption = {
   value: string;
 };
 
+type Group = { label: string; items: SelectOption[] };
+type Option = SelectOption | Group;
+
 const simpleItems = [
   { label: 'Neptunium', value: 'Neptunium' },
   { label: 'Plutonium', value: 'Plutonium' },
@@ -42,8 +45,6 @@ const simpleItems = [
   { label: 'Tennessine', value: 'Tennessine' },
   { label: 'Oganesson', value: 'Oganesson' },
 ];
-
-type Group = { label: string; items: SelectOption[] };
 
 const groups = [
   {
@@ -126,16 +127,20 @@ const getKnobs = () => ({
 
 const Default = (props: {
   value?: SelectOption;
-  items?: SelectOption[] | Group[];
-  getItemLabel?(item: SelectOption | Group): string;
-  getGroupOptions?(option: Group): SelectOption[];
+  items?: Option[];
+  getItemLabel?(item: Option): string;
+  getGroupOptions?(option: Option): SelectOption[];
+  onCreate?(str: string): void;
 }): JSX.Element => {
-  const getItemLabelDefault = (option: SelectOption): string => option.label;
-  const { items = simpleItems, getItemLabel = getItemLabelDefault, getGroupOptions } = props;
+  const getItemLabelDefault = (option: Option): string => option.label;
+  const {
+    items = simpleItems,
+    getItemLabel = getItemLabelDefault,
+    getGroupOptions,
+    onCreate,
+  } = props;
 
   const options = items;
-
-  const handleCreate = (): void => {};
 
   return (
     <>
@@ -147,7 +152,7 @@ const Default = (props: {
           value={props.value}
           getOptionLabel={getItemLabel}
           getGroupOptions={getGroupOptions}
-          onCreate={handleCreate}
+          onCreate={onCreate}
         />
       </div>
     </>
@@ -160,6 +165,11 @@ export const DefaultStory = createStory(() => <Default />, {
 
 export const WithValueStory = createStory(() => <Default value={simpleItems[4]} />, {
   name: 'c заданным значением',
+});
+
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+export const WithCreateStory = createStory(() => <Default onCreate={(): void => {}} />, {
+  name: 'c cозданием новой опции',
 });
 
 export const WithGroupsStory = createStory(

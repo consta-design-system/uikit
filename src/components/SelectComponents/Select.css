@@ -294,7 +294,7 @@
 
   &-ClearIndicator {
     margin: 0;
-    padding: var(--space-xs);
+    padding: 0 var(--space-xs);
     color: var(--color-control-typo-clear);
     background-color: transparent;
     border: none;
