@@ -31,14 +31,14 @@ import { TagExampleGroup } from './examples/TagExampleGroup/TagExampleGroup';
 используйте `onChange`.
 
 `cancel` нужен, чтобы у пользователя была возможность удалить тег. Чтобы этот режим заработал,
- используйте `onCancel`.
+используйте `onCancel`.
 
 <TagExampleMode />
 
 ```ts
-<Tag mode="button" label="Button" />
-<Tag mode="link" label="Link" />
-<Tag mode="check" label="Check" />
+<Tag mode="button" onClick={action('onClick')} label="Button" />
+<Tag mode="link" label="Link" href="#" />
+<Tag mode="check" onChange={action('onChange')} label="Check" checked={false} />
 <Tag mode="cancel" onCancel={action('onCancel')} label="Cancel" />
 ```
 
@@ -51,11 +51,11 @@ import { TagExampleGroup } from './examples/TagExampleGroup/TagExampleGroup';
 <TagExampleText />
 
 ```ts
-<Tag mode="button" label="Рисунок" />
-<Tag mode="button" label="Портрет" />
-<Tag mode="button" label="Фото" />
-<Tag mode="button" label="Полосатый" />
-<Tag mode="button" label="В клеточку" />
+<Tag label="Рисунок" />
+<Tag label="Портрет" />
+<Tag label="Фото" />
+<Tag label="Полосатый" />
+<Tag label="В клеточку" />
 ```
 
 ### Иконка
@@ -65,8 +65,8 @@ import { TagExampleGroup } from './examples/TagExampleGroup/TagExampleGroup';
 <TagExampleIcon />
 
 ```ts
-<Tag mode="button" icon={IconMoon} label="Луна" />
-<Tag mode="button" icon={IconSun} label="Солнце" />
+<Tag icon={IconMoon} label="Луна" />
+<Tag icon={IconSun} label="Солнце" />
 ```
 
 ## Размер
@@ -82,7 +82,6 @@ import { TagExampleGroup } from './examples/TagExampleGroup/TagExampleGroup';
 <Tag size="l" label="Размер L" />
 ```
 
-
 ### Группы тегов
 
 Используйте группы, если вам нужно объединить теги по какому-то принципу.
@@ -94,26 +93,23 @@ import { TagExampleGroup } from './examples/TagExampleGroup/TagExampleGroup';
 
 <TagExampleGroup />
 
-
 ## Свойства
 
-| Свойство                | Тип и значения   | По умолчанию | Описание     |
-| ----------------------- | -----------------| ------------ | -------------|
-| [`label`](#текст)       | `string`         | -            | Текст тега   |
-| [`mode`](#режим-работы)   | `'check', 'button', 'cancel','link'`| `'button'`|Тип тега     |
-| [`checked`](#режим-работы)| `boolean, never` | -            | Отмечает тег выбранным. Доступно только при `mode` = `'check'` |
-| [`size`](#размер)       | `'xs' , 's' , 'm' , 'l'` | `'m'`| Размер тега  |
-| [`group`](#группы-тегов)| `1..9, '1'...'9'`| -            | Метка группы                                                   |
-| [`icon`](#иконка)   | `React.FC<IconProps>`| -            | Иконка    |
-| `onClick` | `React.MouseEventHandler, never`| - | Действие при клике по тегу. Доступно при `mode` = `'button'`, `'link'` |
-| [`onCancel`](#режим-работы)| `React.MouseEventHandler, never`| - | Действие при клике по крестику на теге. Доступно только при `mode` = `'cancel'`  |
-| [`onChange`](#режим-работы) | `({ e, checked }: { e?: React.MouseEvent; checked: boolean }) => void, never` | - | Действие при клике по тегу. Доступно только при `mode` = `'check'`|
-| `className`              | `string`  | -            | Дополнительный CSS-класс   |
-| `ref`                   | `React.Ref<HTMLElement>`  | -  | Ссылка на корневой DOM-элемент этого компонента |
-
+| Свойство                     | Тип и значения                                                                | По умолчанию | Описание                                                                        |
+| ---------------------------- | ----------------------------------------------------------------------------- | ------------ | ------------------------------------------------------------------------------- |
+| [`label?`](#текст)           | `string`                                                                      | -            | Текст тега                                                                      |
+| [`mode?`](#режим-работы)     | `'check', 'button', 'cancel','link'`                                          | `'button'`   | Тип тега                                                                        |
+| [`checked?`](#режим-работы)  | `boolean, never`                                                              | -            | Отмечает тег выбранным. Доступно только при `mode` = `'check'`                  |
+| [`size?`](#размер)           | `'xs' , 's' , 'm' , 'l'`                                                      | `'m'`        | Размер тега                                                                     |
+| [`group?`](#группы-тегов)    | `1..9, '1'...'9'`                                                             | -            | Метка группы                                                                    |
+| [`icon?`](#иконка)           | `React.FC<IconProps>`                                                         | -            | Иконка                                                                          |
+| `onClick?`                   | `React.MouseEventHandler, never`                                              | -            | Действие при клике по тегу. Доступно при `mode` = `'button'`, `'link'`          |
+| [`onCancel?`](#режим-работы) | `React.MouseEventHandler, never`                                              | -            | Действие при клике по крестику на теге. Доступно только при `mode` = `'cancel'` |
+| [`onChange?`](#режим-работы) | `({ e, checked }: { e?: React.MouseEvent; checked: boolean }) => void, never` | -            | Действие при клике по тегу. Доступно только при `mode` = `'check'`              |
+| `className?`                 | `string`                                                                      | -            | Дополнительный CSS-класс                                                        |
+| `ref?`                       | `React.Ref<HTMLElement>`                                                      | -            | Ссылка на корневой DOM-элемент этого компонента                                 |
 
 ## Пример
-
 
 ```ts
 // src/App.ts
