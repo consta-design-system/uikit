@@ -1,12 +1,6 @@
 {
-  "name": "@consta/uikit",
-  "version": "1.10.3",
-  "keywords": [
-    "ui-kit",
-    "design-system",
-    "consta",
-    "gazprom-neft-design-system"
-  ],
+  "name": "@nedra-ui/uikit",
+  "version": "1.7.2",
   "dependencies": {
     "@bem-react/classname": "^1.5.8",
     "@bem-react/classnames": "^1.3.9",
@@ -28,7 +22,6 @@
     "eject": "react-scripts eject",
     "start": "start-storybook -p 6006 -s public",
     "build:storybook": "build-storybook -s public -o build/storybook",
-    "build-storybook": "build-storybook",
     "tsc-dry-run": "tsc --noEmit",
     "lint:js": "eslint --ext .js,.jsx,.tsx,.ts --fix . --quiet",
     "lint:css": "stylelint --fix src/**/*.css",
@@ -123,7 +116,6 @@
     "@typescript-eslint/eslint-plugin": "^2.29.0",
     "autoprefixer": "^9.7.4",
     "babel-loader": "8.0.5",
-    "chromatic": "^5.2.0",
     "commitizen": "^4.1.2",
     "cz-customizable": "^6.2.0",
     "eslint-config-airbnb": "^18.1.0",
@@ -162,5 +154,19 @@
     "typescript": "^3.8.3",
     "typescript-eslint-parser": "^22.0.0"
   },
-  "homepage": "https://consta-uikit.vercel.app"
+  "homepage": "https://ui-kit.gpn.vercel.app",
+  "description": "## Установка пакета",
+  "main": ".eslintrc.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nedradigital/ui-kit.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nedradigital/ui-kit/issues"
+  }
 }
