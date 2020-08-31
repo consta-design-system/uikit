@@ -9,7 +9,7 @@ import { TagExampleGroup } from './examples/TagExampleGroup/TagExampleGroup';
 Нужен для оформления тегов: маркеров, которые объединяют группы статей, фотографий,
 документов или другие похожие объекты.
 
-- [Типы тегов](#типы-тегов)
+- [Режим работы](#режим-работы)
 - [Текст](#текст)
 - [Иконка](#иконка)
 - [Размер](#размер)
@@ -17,7 +17,7 @@ import { TagExampleGroup } from './examples/TagExampleGroup/TagExampleGroup';
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
 
-## Типы тегов
+## Режим работы
 
 За тип тега отвечает свойство `mode`.
 
@@ -27,11 +27,11 @@ import { TagExampleGroup } from './examples/TagExampleGroup/TagExampleGroup';
 `link` превращает тег в ссылку.
 
 `check` поддерживает два состояния: выбранное и невыбранное. Используйте этот тип,
-если хотите, чтобы пользователь мог отмечать некоторые теги. Чтобы отметить тег
-выбранным, добавьте свойство `checked`.
+если хотите, чтобы пользователь мог отмечать некоторые теги. Чтобы этот режим заработал,
+используйте `onChange`.
 
-`cancel` нужен, чтобы у пользователя была возможность удалить тег. Добавьте к такому тегу
-иконку `IconClose`.
+`cancel` нужен, чтобы у пользователя была возможность удалить тег. Чтобы этот режим заработал,
+ используйте `onCancel`.
 
 <TagExampleMode />
 
@@ -39,7 +39,7 @@ import { TagExampleGroup } from './examples/TagExampleGroup/TagExampleGroup';
 <Tag mode="button" label="Button" />
 <Tag mode="link" label="Link" />
 <Tag mode="check" label="Check" />
-<Tag mode="cancel" icon={IconClose} label="Cancel" />
+<Tag mode="cancel" onCancel={action('onCancel')} label="Cancel" />
 ```
 
 ## Текст
@@ -66,7 +66,7 @@ import { TagExampleGroup } from './examples/TagExampleGroup/TagExampleGroup';
 
 ```ts
 <Tag mode="button" icon={IconMoon} label="Луна" />
-<Tag mode="buttin" icon={IconSun} label="Солнце" />
+<Tag mode="button" icon={IconSun} label="Солнце" />
 ```
 
 ## Размер
@@ -94,30 +94,20 @@ import { TagExampleGroup } from './examples/TagExampleGroup/TagExampleGroup';
 
 <TagExampleGroup />
 
-```ts
-<Tag label="Марс" group="1" />
-<Tag label="земля" group="2"/>
-<Tag label="Земля" group="1" />
-<Tag label="Венера" group="1" />
-<Tag label="вода" group="2" />
-<Tag label="огонь" group="2"/>
-<Tag label="Нептун" group="1" />
-<Tag label="Церера" group="1" />
-```
 
 ## Свойства
 
 | Свойство                | Тип и значения   | По умолчанию | Описание     |
 | ----------------------- | -----------------| ------------ | -------------|
 | [`label`](#текст)       | `string`         | -            | Текст тега   |
-| [`mode`](#типы-тегов)   | `'check', 'button', 'cancel','link'`| `'button'`|Тип тега     |
-| [`checked`](#типы-тегов)| `boolean, never` | -            | Отмечает тег выбранным. Доступно только при `mode` = `'check'` |
+| [`mode`](#режим-работы)   | `'check', 'button', 'cancel','link'`| `'button'`|Тип тега     |
+| [`checked`](#режим-работы)| `boolean, never` | -            | Отмечает тег выбранным. Доступно только при `mode` = `'check'` |
 | [`size`](#размер)       | `'xs' , 's' , 'm' , 'l'` | `'m'`| Размер тега  |
 | [`group`](#группы-тегов)| `1..9, '1'...'9'`| -            | Метка группы                                                   |
 | [`icon`](#иконка)   | `React.FC<IconProps>`| -            | Иконка    |
 | `onClick` | `React.MouseEventHandler, never`| - | Действие при клике по тегу. Доступно при `mode` = `'button'`, `'link'` |
-| `onCancel`| `React.MouseEventHandler, never`| - | Действие при клике по крестику на теге. Доступно только при `mode` = `'cancel'`  |
-| `onChange` | `({ e, checked }: { e?: React.MouseEvent; checked: boolean }) => void, never` | - | Действие при клике по тегу. Доступно только при `mode` = `'check'`|
+| [`onCancel`](#режим-работы)| `React.MouseEventHandler, never`| - | Действие при клике по крестику на теге. Доступно только при `mode` = `'cancel'`  |
+| [`onChange`](#режим-работы) | `({ e, checked }: { e?: React.MouseEvent; checked: boolean }) => void, never` | - | Действие при клике по тегу. Доступно только при `mode` = `'check'`|
 | `className`              | `string`  | -            | Дополнительный CSS-класс   |
 | `ref`                   | `React.Ref<HTMLElement>`  | -  | Ссылка на корневой DOM-элемент этого компонента |
 

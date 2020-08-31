@@ -9,6 +9,6 @@ import { Tag } from '../../../Tag';
 export const TagExampleIcon = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
     <Tag mode="button" icon={IconMoon} label="Луна" />
-    <Tag mode="buttin" icon={IconSun} label="Солнце" />
+    <Tag mode="button" icon={IconSun} label="Солнце" />
   </StoryBookExample>
 );

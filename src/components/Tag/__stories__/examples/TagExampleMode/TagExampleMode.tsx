@@ -1,6 +1,6 @@
 import React from 'react';
+import { action } from '@storybook/addon-actions';
 
-import { IconClose } from '../../../../../icons/IconClose/IconClose';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Tag } from '../../../Tag';
@@ -10,6 +10,6 @@ export const TagExampleMode = () => (
     <Tag mode="button" label="Button" />
     <Tag mode="link" label="Link" />
     <Tag mode="check" label="Check" />
-    <Tag mode="cancel" icon={IconClose} label="Cancel" />
+    <Tag mode="cancel" onCancel={action('onCancel')} label="Cancel" />
   </StoryBookExample>
 );
