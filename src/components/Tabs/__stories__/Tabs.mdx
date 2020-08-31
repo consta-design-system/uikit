@@ -18,44 +18,41 @@ type Item = string;
 const items = ['один', 'два', 'три'];
 
 export function App() {
-  const [value, setValue] = useState<string[] | null | undefined>(['три']);
+  const [value, setValue] = useState<string | null>(items[0]);
   return (
-    <Tabs<Item>
+    <Tabs
       value={value}
       onChange={({ value }) => setValue(value)}
       items={items}
-      getItemKey={(item) => item}
-      getItemLabel={(item) => item}
+      getLabel={(item) => item}
     />
   );
 }
 ```
 
-Компоненту обязательно нужно расширить его интерфейс:
-`<Tabs<T>>` - T - интерфейс элемента массива items
-
 ## Свойства
 
-<!-- props:start -->
+```
+type Item = unknown;
+type OnChange = (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM | null }) => void;
 
-| Свойство      | Тип                                                                                           | По умолчанию                        | Описание                                                                    |
-| ------------- | --------------------------------------------------------------------------------------------- | ----------------------------------- | --------------------------------------------------------------------------- |
-| size?         | `'s', 'm'`                                                                                    | `'m'`                               | Размер                                                                      |
-| view?         | `'bordered', 'clear'`                                                                         | `'bordered'`                        | Вид                                                                         |
-| className?    | `string`                                                                                      | -                                   | Дополнительный класс                                                        |
-| ref?          | `React.Ref<HTMLDivElement>`                                                                   | -                                   | Ссылка на корневой DOM элемент компонента                                   |
-| items?        | `T[]`                                                                                         | -                                   | Массив элементов                                                            |
-| value?        | `T[], null`                                                                                   | -                                   | Выбранный элемент                                                           |
-| id?           | `string , number`                                                                             | -                                   | Вспомогательное свойсво вернентся в onChange                                |
-| name?         | `string`                                                                                      | -                                   | Вспомогательное свойсво вернентся в onChange                                |
-| onChange?     | `(obj: {e: React.MouseEvent; id?: string, number; name?: string; value: T[], null}) => void;` | -                                   | событие с рабатывающее при выборе пользователем пункта                      |
-| getItemKey?   | `(item: T) => string, number`                                                                 | `(item) => item.id`                 | Ожидается что результат функции возвращает уникальный ключ каждого из items |
-| getItemLabel? | `(item: T) => string`                                                                         | `(item) => item.label`              | Результат функции будет использоваться в качестве текста в табе             |
-| getItemIcon?  | `(item: T) => React.FC<IconProps>, undefined`                                                 | -                                   | Результат функции будет использоваться в качестве иконки в табе             |
-| onlyIcon?     | `boolean`                                                                                     | -                                   | Показавать в табе только иконку                                             |
-| iconSize?     | `'xs' , 's' , 'm'`                                                                            | если не указан то зависит от `size` | Размер иконки в табе                                                        |
 
-и все из `React.HTMLAttributes<HTMLDivElement>`
+```
+
+| Свойство   | Тип                                              | По умолчанию | Описание                                                                                                                                                                                     |
+| ---------- | ------------------------------------------------ | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| items      | `Item[]`                                         | -            | Элементы                                                                                                                                                                                     |
+| multiple   | `boolean`                                        | -            | Множественный выбор                                                                                                                                                                          |
+| value      | `Item`, `null`                                   | -            | Значение                                                                                                                                                                                     |
+| onChange   | `OnChange`                                       | -            | Событие сработает при выборе элемента                                                                                                                                                        |
+| name       | `string`                                         | -            | Имя поля                                                                                                                                                                                     |
+| getLabel   | `(item: Item) => string, number`                 | -            | Функция для формирования текста таба, или если `onlyIcon = true` будет использоваться в качестве всплывающей подсказки на элементе. Также используется в качестве уникального ключа элемента |
+| getIcon?   | `(item: Item) => React.FC<IconProps>, undefined` | -            | Функция для формирования иконки                                                                                                                                                              |
+| onlyIcon?  | `boolean`                                        | -            | Показывать только иконку                                                                                                                                                                     |
+| size?      | `'s', 'm'`                                       | `'m'`        | Размер                                                                                                                                                                                       |
+| view?      | `'bordered', 'clear'`                            | `'bordered'` | Вид                                                                                                                                                                                          |
+| className? | `string`                                         | -            | Дополнительный класс                                                                                                                                                                         |
+| ref?       | `React.Ref<HTMLDivElement>`                      | -            | Ссылка на корневой DOM элемент компонента                                                                                                                                                    |
 
 <!-- props:end -->
 
@@ -71,29 +68,29 @@ import { Tabs } from '@gpn-design/uikit/Tabs';
 
 type Item = string;
 
-const items = ['один', 'два', 'три'];
+const items: Item[] = ['один', 'два', 'три'];
 
-function App() {
-  const [value, setValue] = useState<Item[]>(['три']);
+export const TabsExampleSize = () => {
+  const [value, setValue] = useState<Item | null>(items[0]);
   return (
+    <>
       <Tabs
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getItemKey={(item) => item}
-        getItemLabel={(item) => item}
+        getLabel={(item) => item}
         size="m"
       />
       <Tabs
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getItemKey={(item) => item}
-        getItemLabel={(item) => item}
+        getLabel={(item) => item}
         size="s"
       />
+    </>
   );
-}
+};
 ```
 
 <TabsExampleSize />
@@ -103,35 +100,34 @@ function App() {
 Чтобы изменить вид, используйте свойства `_view`.
 
 ```ts
-
 import React, { useState } from 'react';
 import { Tabs } from '@gpn-design/uikit/Tabs';
 
 type Item = string;
 
-const items = ['один', 'два', 'три'];
+const items: Item[] = ['один', 'два', 'три'];
 
-function App() {
-  const [value, setValue] = useState<Item[]>(['три']);
+export const TabsExampleView = () => {
+  const [value, setValue] = useState<Item | null>(items[0]);
   return (
+    <>
       <Tabs
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getItemKey={(item) => item}
-        getItemLabel={(item) => item}
+        getLabel={(item) => item}
         view="bordered"
       />
       <Tabs
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getItemKey={(item) => item}
-        getItemLabel={(item) => item}
+        getLabel={(item) => item}
         view="clear"
       />
+    </>
   );
-}
+};
 ```
 
 <TabsExampleView />
@@ -148,7 +144,7 @@ import { IconRing } from '@gpn-design/uikit/IconRing';
 import { IconCamera } from '@gpn-design/uikit/IconCamera';
 
 type Item = {
-  name?: string;
+  name: string;
   icon?: React.FC<IconProps>;
 };
 
@@ -167,24 +163,18 @@ const items = [
   },
 ];
 
-function App() {
-  const [value, setValue] = useState<Item[]>([
-    {
-      name: 'Первый',
-      icon: IconPhoto,
-    },
-  ]);
+export const TabsExampleIcon = () => {
+  const [value, setValue] = useState<Item | null>(items[0]);
   return (
     <Tabs
       value={value}
       onChange={({ value }) => setValue(value)}
       items={items}
-      getItemKey={(item) => item.name}
-      getItemLabel={(item) => item.name}
-      getItemIcon={(item) => item.icon}
+      getLabel={(item) => item.name}
+      getIcon={(item) => item.icon}
     />
   );
-}
+};
 ```
 
 <TabsExampleIcon />

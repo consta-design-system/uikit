@@ -28,7 +28,7 @@ export const TextExampleView = () => {
             {`text*view*${item}`}
           </Text>
           <Text size="l" view={item}>
-            Газпром Нефть
+            Газпром нефть
           </Text>
         </div>
       ))}

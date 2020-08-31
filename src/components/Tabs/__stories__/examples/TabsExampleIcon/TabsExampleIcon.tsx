@@ -29,21 +29,15 @@ const items = [
 ];
 
 export const TabsExampleIcon = () => {
-  const [value, setValue] = useState<Item[] | null>([
-    {
-      name: 'Первый',
-      icon: IconPhoto,
-    },
-  ]);
+  const [value, setValue] = useState<Item | null>(items[0]);
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Tabs
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getItemKey={(item) => item.name}
-        getItemLabel={(item) => item.name}
-        getItemIcon={(item) => item.icon}
+        getLabel={(item) => item.name}
+        getIcon={(item) => item.icon}
       />
     </StoryBookExample>
   );

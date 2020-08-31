@@ -1,4 +1,5 @@
 import './DocsDecorator.css';
+import '../DocsExample/DocsExample.css';
 
 import React from 'react';
 import { DocsContainer } from '@storybook/addon-docs/dist/blocks';
