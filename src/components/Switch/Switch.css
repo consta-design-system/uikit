@@ -104,17 +104,18 @@
     pointer-events: none;
 
     .Switch-Input:not(:checked):disabled {
-      --background-color: var(--color-control-bg-border-disable);
+      --background-color: var(--color-control-typo-disable);
       --content-color: var(--color-control-typo-disable);
     }
 
     .Switch-Input:checked:disabled {
-      --background-color: var(--color-control-bg-border-disable);
+      --background-color: var(--color-control-bg-disable);
       --content-color: var(--color-control-typo-disable);
       background-color: var(--background-color);
+      border-color: transparent;
     }
 
-    .Switch-Input:disabled ~ .switch__label {
+    .Switch-Input:disabled ~ .Switch-Label {
       color: var(--color-control-typo-disable);
     }
   }
