@@ -75,7 +75,7 @@
   }
 
   &-ContentCell {
-    .Table_isZebraStriped .Table-CellsRow:nth-child(even) &:not(.Table-ContentCell_isActive) {
+    .Table_isZebraStriped .Table-CellsRow:nth-child(even):not(:hover) &:not(&_isActive) {
       background-color: var(--color-bg-stripe);
     }
 

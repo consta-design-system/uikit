@@ -1,8 +1,9 @@
 const remarkSlug = require('../node_modules/remark-slug');
 const remarkExternalLinks = require('../node_modules/remark-external-links');
+const createCompiler = require('@storybook/addon-docs/mdx-compiler-plugin');
 
 module.exports = {
-  stories: ['../src/**/*.stories.(js|tsx)'],
+  stories: ['../docs/*.mdx', '../docs/**/*.mdx', '../src/**/*.stories.(js|tsx)'],
   addons: [
     'storybook-addon-themes/register',
     '@storybook/addon-knobs/register',
@@ -35,7 +36,7 @@ module.exports = {
     });
 
     config.module.rules.push({
-      test: /\.mdx$/,
+      test: /src\/[a-zA-Z0-9/._-]*.mdx$/,
       use: [
         {
           loader: 'babel-loader',
@@ -51,6 +52,26 @@ module.exports = {
         },
       ],
     });
+
+    config.module.rules.push({
+      test: /docs\/[a-zA-Z0-9/._-]*.mdx$/,
+      use: [
+        {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react'],
+          },
+        },
+        {
+          loader: '@mdx-js/loader',
+          options: {
+            remarkPlugins: [remarkSlug, remarkExternalLinks],
+            compilers: [createCompiler({})],
+          },
+        },
+      ],
+    });
+
     config.module.rules.push({
       test: /(stories)\/(.*)\.tsx?$/,
       loader: require.resolve('@storybook/source-loader'),

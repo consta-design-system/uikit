@@ -1,5 +1,7 @@
 .FileField {
-  &-Input {
-    display: none;
-  }
+  position: relative;
+  display: inline-flex;
+  overflow: hidden;
+  max-width: 100%;
+  cursor: pointer;
 }

@@ -10,7 +10,7 @@ export const TextExampleDecoration = () => {
       <Text size="s" view="ghost" className={wp.decorator({ 'indent-b': 'xs' })}>
         text_decoration_underline
       </Text>
-      <Text decoration="underline">Газпром Нефть</Text>
+      <Text decoration="underline">Газпром нефть</Text>
     </div>
   );
 };

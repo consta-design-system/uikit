@@ -150,7 +150,7 @@ export const Table = <T extends TableRow>({
 
   React.useLayoutEffect(() => {
     const columnsElements = Object.values(columnsRefs.current).filter(isNotNil);
-    if (columnsElements.length === 0 || resizedColumnWidths.some(isNotNil)) {
+    if (columnsElements.length === 0 || (resizedColumnWidths.some(isNotNil) && !stickyColumns)) {
       return;
     }
 

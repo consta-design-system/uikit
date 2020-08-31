@@ -40,20 +40,14 @@ const items = [
 export function Playground() {
   const { size, view, withIcon, onlyIcon } = defaultKnobs();
 
-  const [value, setValue] = useState<Item[] | null>([
-    {
-      name: 'Первый',
-      icon: IconPhoto,
-    },
-  ]);
+  const [value, setValue] = useState<Item | null>(items[0]);
 
   return (
     <Tabs
       items={items}
       value={value}
-      getItemKey={(item) => item.name}
-      getItemLabel={(item) => item.name}
-      getItemIcon={withIcon ? (item) => item.icon : null}
+      getLabel={(item) => item.name}
+      getIcon={withIcon ? (item) => item.icon : null}
       onChange={({ value }) => setValue(value)}
       size={size}
       view={view}

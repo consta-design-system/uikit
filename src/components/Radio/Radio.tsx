@@ -17,7 +17,6 @@ export type Props = {
   checked: boolean | undefined;
   size?: RadioPropSize;
   disabled?: boolean;
-  intermediate?: boolean;
   className?: string;
   label?: string;
   onChange: RadioPropOnChange;

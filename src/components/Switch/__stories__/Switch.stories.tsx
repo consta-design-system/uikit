@@ -16,10 +16,7 @@ export function Playground() {
   const { disabled, size, label } = defaultKnobs();
   const [checked, setChecked] = useState<boolean>(false);
 
-  const handleChange = ({ checked }) => {
-    console.log(checked);
-    setChecked(checked);
-  };
+  const handleChange = ({ checked }) => setChecked(checked);
 
   return (
     <form>

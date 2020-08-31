@@ -78,7 +78,7 @@
       }
     }
 
-    .Radio-Input:disabled ~ .radio-Label {
+    .Radio-Input:disabled ~ .Radio-Label {
       color: var(--color-control-typo-disable);
     }
   }

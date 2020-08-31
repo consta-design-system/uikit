@@ -1,0 +1,44 @@
+.TabsTab {
+  --tab-indent: var(--space-m);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-xs) 0;
+  color: var(--color-typo-secondary);
+  background-color: transparent;
+  border: none;
+  font-family: var(--font);
+  font-size: var(--tab-font-size);
+  line-height: var(--line-height-text-s);
+  cursor: pointer;
+  transition: color 0.2s;
+
+  &_checked,
+  &:hover {
+    color: var(--color-typo-primary);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -4px;
+    left: -4px;
+    bottom: 0;
+    display: block;
+    border-radius: var(--control-radius);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:not(.TabsTab_onlyIcon) .TabsTab-Icon {
+    margin-right: calc(var(--tab-indent) * 0.5);
+  }
+
+  &_onlyIcon {
+    justify-content: center;
+    width: var(--only-icon-size);
+  }
+}
