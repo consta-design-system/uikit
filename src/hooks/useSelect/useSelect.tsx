@@ -49,6 +49,7 @@ export interface SelectProps<T> {
   multi?: boolean;
   onChange: OnChangeFunctionType;
   optionsRef: React.MutableRefObject<HTMLDivElement | null>;
+  controlRef: React.MutableRefObject<HTMLDivElement | null>;
   scrollToIndex?: ScrollToIndexFunctionType;
   disabled?: boolean;
   filterFn?(options: T[], searchValue: string): T[];
@@ -132,6 +133,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
     onChange,
     scrollToIndex,
     optionsRef,
+    controlRef,
     disabled = false,
     multi = false,
     getOptionLabel,
@@ -305,8 +307,6 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   // Handlers
 
   const handleValueFieldChange = (e: React.SyntheticEvent): void => {
-    // !disabled && setOpen(true);
-
     const target = e.target as HTMLFormElement;
     !disabled && setSearch(target.value);
   };
@@ -455,7 +455,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   // while open, we need to close the dropdown
   useClickOutside({
     isActive: isOpen,
-    ignoreClicksInsideRefs: [optionsRef],
+    ignoreClicksInsideRefs: [optionsRef, controlRef],
     handler: () => {
       setOpen(false);
     },

@@ -5,6 +5,7 @@ import React, { useRef, useState } from 'react';
 import { useSelect } from '../../hooks/useSelect/useSelect';
 import { IconClose } from '../../icons/IconClose/IconClose';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
+import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { scrollIntoView } from '../../utils/scrollIntoView';
 import { Popover } from '../Popover/Popover';
 import { cnSelect } from '../SelectComponents/cnSelect';
@@ -67,6 +68,7 @@ export const Combobox: ComboboxType = (props) => {
   };
 
   const optionsRef = useRef<HTMLDivElement | null>(null);
+  const controlRef = useRef<HTMLDivElement | null>(null);
   const arrValue = typeof val !== 'undefined' && val !== null ? [val] : null;
   const hasGroup = typeof getGroupOptions === 'function';
 
@@ -94,6 +96,7 @@ export const Combobox: ComboboxType = (props) => {
     value: arrValue,
     onChange: handlerChangeValue,
     optionsRef,
+    controlRef,
     scrollToIndex,
     disabled,
     getOptionLabel,
@@ -170,6 +173,7 @@ export const Combobox: ComboboxType = (props) => {
     <SelectContainer focused={isFocused} disabled={disabled} size={size} {...restProps}>
       <div
         className={cnSelect('Control', { hasInput: true })}
+        ref={controlRef}
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         id={id}
@@ -203,7 +207,7 @@ export const Combobox: ComboboxType = (props) => {
             <button
               type="button"
               onClick={handleClear}
-              className={cnSelect('ClearIndicator')}
+              className={cnSelect('ClearIndicator', [cnMixFocus()])}
               onFocus={handleClearButtonFocus}
               onBlur={handleClearButtonBlur}
             >

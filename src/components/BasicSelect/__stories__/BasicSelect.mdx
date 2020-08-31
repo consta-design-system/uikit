@@ -45,19 +45,11 @@ const items = [
 
 const Example = () => {
   const getItemLabel = (option: SelectOption): string => option.label;
-  const getItemKey = (option: SelectOption): string => option.value;
-  const getItemValue = (option: SelectOption): string => option.value;
 
   return (
     <>
       <div>
-        <BasicSelect
-          id="city"
-          options={items}
-          getOptionLabel={getItemLabel}
-          getOptionKey={getItemKey}
-          getOptionValue={getItemValue}
-        />
+        <BasicSelect id="city" options={items} getOptionLabel={getItemLabel} />
       </div>
     </>
   );
@@ -94,8 +86,6 @@ const Example = () => {
           value={{ label: 'Москва', value: 'moscow' }}
           options={items}
           getOptionLabel={getItemLabel}
-          getOptionKey={getItemKey}
-          getOptionValue={getItemValue}
         />
       </div>
     </>

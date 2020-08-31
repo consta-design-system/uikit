@@ -69,6 +69,7 @@ export const BasicSelect: Select = (props) => {
   };
 
   const optionsRef = useRef<HTMLDivElement | null>(null);
+  const controlRef = useRef<HTMLDivElement | null>(null);
   const arrValue = typeof val !== 'undefined' && val !== null ? [val] : null;
 
   const scrollToIndex = (index: number): void => {
@@ -95,6 +96,7 @@ export const BasicSelect: Select = (props) => {
     value: arrValue,
     onChange: handlerChangeValue,
     optionsRef,
+    controlRef,
     scrollToIndex,
     disabled,
     getOptionLabel,
@@ -138,7 +140,13 @@ export const BasicSelect: Select = (props) => {
       form={form}
       width={width}
     >
-      <div className={cnSelect('Control')} aria-expanded={isOpen} aria-haspopup="listbox" id={id}>
+      <div
+        className={cnSelect('Control')}
+        ref={controlRef}
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
+        id={id}
+      >
         <div className={cnSelect('ControlInner')}>
           <div className={cnSelect('ControlValueContainer')}>
             <input
@@ -156,7 +164,7 @@ export const BasicSelect: Select = (props) => {
                 {getOptionLabel(arrValue[0])}
               </span>
             ) : (
-              <span className={cnSelect('ControlPlaceholder')} title="placeholder">
+              <span className={cnSelect('Placeholder')} title="placeholder">
                 {placeholder || ''}
               </span>
             )}
