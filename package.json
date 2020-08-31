@@ -154,19 +154,5 @@
     "typescript": "^3.8.3",
     "typescript-eslint-parser": "^22.0.0"
   },
-  "homepage": "https://ui-kit.gpn.vercel.app",
-  "description": "## Установка пакета",
-  "main": ".eslintrc.js",
-  "directories": {
-    "doc": "docs"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nedradigital/ui-kit.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/nedradigital/ui-kit/issues"
-  }
+  "homepage": "https://ui-kit.gpn.vercel.app"
 }
