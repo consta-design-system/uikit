@@ -1,50 +1,65 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { TextField } from '../../../TextField';
 
-export const TextFieldExampleSize = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
-    <div>
-      <TextField size="xs" placeholder="Размер XS" />
-    </div>
-    <div>
-      <TextField size="s" placeholder="Размер S" />
-    </div>
-    <div>
-      <TextField size="m" placeholder="Размер M" />
-    </div>
-    <div>
-      <TextField size="l" placeholder="Размер L" />
-    </div>
-  </StoryBookExample>
-);
+export const TextFieldExampleSize = () => {
+  const [value, setValue] = useState(null);
+  const handleChange = ({ value }) => setValue(value);
 
-export const TextFieldExampleSizeWidth = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
-    <TextField width="full" placeholder="Страшно широкое поле" />
-  </StoryBookExample>
-);
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <div>
+        <TextField size="xs" placeholder="Размер XS" onChange={handleChange} value={value} />
+      </div>
+      <div>
+        <TextField size="s" placeholder="Размер S" onChange={handleChange} value={value} />
+      </div>
+      <div>
+        <TextField size="m" placeholder="Размер M" onChange={handleChange} value={value} />
+      </div>
+      <div>
+        <TextField size="l" placeholder="Размер L" onChange={handleChange} value={value} />
+      </div>
+    </StoryBookExample>
+  );
+};
 
-export const TextFieldExampleSizeRows = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
-    <TextField
-      type="textarea"
-      rows="13"
-      cols="25"
-      value="Я иду и пою обо всем хорошем и улыбку свою я дарю прхожим"
-    />
-  </StoryBookExample>
-);
+export const TextFieldExampleSizeWidth = () => {
+  const [value, setValue] = useState(null);
+  const handleChange = ({ value }) => setValue(value);
 
-export const TextFieldExampleSizeMinRows = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
-    <TextField
-      type="textarea"
-      minRows="13"
-      cols="25"
-      value="Я иду и пою обо всем хорошем и улыбку свою я дарю прхожим"
-    />
-  </StoryBookExample>
-);
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <TextField
+        width="full"
+        placeholder="Страшно широкое поле"
+        onChange={handleChange}
+        value={value}
+      />
+    </StoryBookExample>
+  );
+};
+
+export const TextFieldExampleSizeRows = () => {
+  const [value, setValue] = useState('Я иду и пою обо всем хорошем и улыбку свою я дарю прохожим');
+  const handleChange = ({ value }) => setValue(value);
+
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <TextField type="textarea" rows={13} cols={25} onChange={handleChange} value={value} />
+    </StoryBookExample>
+  );
+};
+
+export const TextFieldExampleSizeMinRows = () => {
+  const [value, setValue] = useState('Я иду и пою обо всем хорошем и улыбку свою я дарю прохожим');
+  const handleChange = ({ value }) => setValue(value);
+
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <TextField type="textarea" minRows={13} cols={25} onChange={handleChange} value={value} />
+    </StoryBookExample>
+  );
+};
