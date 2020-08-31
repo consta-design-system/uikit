@@ -5,9 +5,9 @@ import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsE
 import * as wp from '../../../../../utils/whitepaper/whitepaper';
 import { Badge } from '../../../Badge';
 
-export const BadgeExampleMinified = () => (
+export const BadgeExampleForm = () => (
   <div className={cnDocsDecorator('Section', [cnDocsExample(null)])}>
-    <Badge minified status="error" label="Стойте" className={wp.decorator({ 'indent-r': 'm' })} />
-    <Badge minified status="success" label="Идите" className={wp.decorator({ 'indent-r': 'm' })} />
+    <Badge form="default" label="Default badge" className={wp.decorator({ 'indent-r': 'm' })} />
+    <Badge form="round" label="Round badge" className={wp.decorator({ 'indent-r': 'm' })} />
   </div>
 );
