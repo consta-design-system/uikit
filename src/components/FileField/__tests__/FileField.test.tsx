@@ -7,10 +7,9 @@ import { cnFileField, FileField } from '../FileField';
 const testId = cnFileField();
 
 const renderComponent = () => {
-  const onChange = jest.fn();
   return render(
-    <FileField onChange={onChange} value={null}>
-      {({ onClick }) => <Button data-testid={testId} label="label" onClick={onClick} />}
+    <FileField id={testId}>
+      {(props) => <Button data-testid={testId} label="label" {...props} />}
     </FileField>,
   );
 };
@@ -26,6 +25,11 @@ describe('Компонент FileField', () => {
         renderComponent();
         const fileField = screen.getByTestId(testId);
         expect(fileField).toHaveClass(cnButton());
+      });
+      it(`прокинутый компонент имеет тег span`, () => {
+        renderComponent();
+        const fileField = screen.getByTestId(testId);
+        expect(fileField.tagName).toEqual('SPAN');
       });
     });
   });
