@@ -1,6 +1,10 @@
 import { SwitchExampleSize } from './examples/SwitchExampleSize/SwitchExampleSize';
 import { SwitchExampleStatus } from './examples/SwitchExampleStatus/SwitchExampleStatus';
-import { SwitchExampleNameEnable, SwitchExampleNameVerb, SwitchExampleNameNoVerb } from './examples/SwitchExampleName/SwitchExampleName';
+import {
+  SwitchExampleNameEnable,
+  SwitchExampleNameVerb,
+  SwitchExampleNameNoVerb,
+} from './examples/SwitchExampleName/SwitchExampleName';
 
 # Switch
 
@@ -26,8 +30,6 @@ import { SwitchExampleNameEnable, SwitchExampleNameVerb, SwitchExampleNameNoVerb
 [ChoiceGroup](?path=/docs/components-choicegroup--playground)
 из двух элементов.
 
-
-
 ### С глаголом
 
 Если в названии есть **глагол**, представьте, что это вопрос,
@@ -37,14 +39,14 @@ import { SwitchExampleNameEnable, SwitchExampleNameVerb, SwitchExampleNameNoVerb
 <SwitchExampleNameVerb />
 
 > Глагол **включить** лучше не использовать (даже если очень хочется). Потому что
-с этим глаголом сложно понять, что будет, если нажать на активный переключатель.
+> с этим глаголом сложно понять, что будет, если нажать на активный переключатель.
 
 <SwitchExampleNameEnable />
 
 ### Без глагола
 
 Если в названии глагола нет, подставьте вместо переключателя значения **включен** и **выключен**
-и попробуйте прочитать, что получилось. Если  фраза правильно описывает то,
+и попробуйте прочитать, что получилось. Если фраза правильно описывает то,
 что происходит в интерфейсе, значит, всё в порядке.
 
 <SwitchExampleNameNoVerb />
@@ -83,26 +85,23 @@ import { SwitchExampleNameEnable, SwitchExampleNameVerb, SwitchExampleNameNoVerb
 
 ## Свойства
 
-
-
 <!-- props:start -->
 
-| Свойство                | Тип и значения | По умолчанию  | Описание                                     |
-| ----------------------- | ---------------| ------------- | --------------------------------------|
-| [`label`](#название)    |  `string`      |   -           | Текст рядом с переключателем    |
-| [`size`](#размер)       | `'s', 'm', 'l'`| `'m'`         | Размер переключателя                     |
-| [`checked`](#состояния) | `boolean`      | -             | Ставит переключатель в положение **включен**|
-| [`disabled`](#состояния)| `boolean`      | -             | Делает переключатель неактивным          |
-| `required`       | `boolean`             | -             | Такой переключатель обязательно нужно выбрать|
-| `readOnly`       | `boolean`             | -             | Переключатель, который нельзя поменять  |
-| `autoFocus`      | `boolean`             | -             | Переносит фокус на этот переключатель |
-| `tabIndex`       | `number`              | -             | Порядковый номер при переходе между элементами интерфейса по клавише **tab** |
-| `step `          | `number \ string`     | -             |  |
-| `name    `       | `string`              | -             | Имя элемента в DOM |
-| `onChange`       | `string`              | -             | Действие при смене состояния переключателя  |
-| `onFocus`        | `React.FocusEventHandler<HTMLInputElement>`| - | Действие по фокусу   |
-| `onBlur`         | `React.FocusEventHandler<HTMLInputElement>`| - | Действие при потере фокуса   |
-| `inputRef`       | `React.FocusEventHandler<HTMLInputElement>`| - | Ссылка на корневой DOM-элемент этого компонента |
+| Свойство                  | Тип и значения                                                                  | По умолчанию | Описание                                                                     |
+| ------------------------- | ------------------------------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------- |
+| [`label?`](#название)     | `string`                                                                        | -            | Текст рядом с переключателем                                                 |
+| [`size?`](#размер)        | `'s', 'm', 'l'`                                                                 | `'m'`        | Размер переключателя                                                         |
+| [`checked`](#состояния)   | `boolean`, `undefined`                                                          | -            | Ставит переключатель в положение **включен**                                 |
+| [`disabled?`](#состояния) | `boolean`                                                                       | -            | Делает переключатель неактивным                                              |
+| `required?`               | `boolean`                                                                       | -            | Такой переключатель обязательно нужно выбрать                                |
+| `autoFocus?`              | `boolean`                                                                       | -            | Переносит фокус на этот переключатель                                        |
+| `tabIndex?`               | `number`                                                                        | -            | Порядковый номер при переходе между элементами интерфейса по клавише **tab** |  |
+| `name?`                   | `string`                                                                        | -            | Имя элемента в DOM                                                           |
+| `onChange`                | `(object: {e: React.ChangeEvent<HTMLInputElement>;checked: boolean;}) => void;` | -            | Действие при смене состояния переключателя                                   |
+| `onFocus?`                | `React.FocusEventHandler<HTMLInputElement>`                                     | -            | Действие по фокусу                                                           |
+| `onBlur?`                 | `React.FocusEventHandler<HTMLInputElement>`                                     | -            | Действие при потере фокуса                                                   |
+| `inputRef?`               | `React.Ref<HTMLInputElement>`                                                   | -            | Ссылка на DOM-элемент ипута                                                  |
+| `ref?`                    | `React.Ref<HTMLLabelElement>`                                                   | -            | Ссылка на корневой DOM-элемент этого компонента                              |
 
 <!-- props:end -->
 
