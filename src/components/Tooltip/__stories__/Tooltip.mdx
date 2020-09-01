@@ -1,5 +1,8 @@
 import { Preview } from '@storybook/addon-docs/dist/blocks';
-import { TooltipPositionedByAnchorStory, TooltipPositionedByCoordsStory } from './Tooltip.stories.tsx'
+import {
+  TooltipPositionedByAnchorStory,
+  TooltipPositionedByCoordsStory,
+} from './Tooltip.stories.tsx';
 
 # Tooltip
 
@@ -39,21 +42,21 @@ import { TooltipPositionedByAnchorStory, TooltipPositionedByCoordsStory } from '
 
 ## Свойства
 
-| Свойство            | Тип или варианты значения                     | По умолчанию              | Описание  |
-| ------------------- | --------------------------------------------- | ------------------------- | --------- |
-| `anchorRef`           | `React.RefObject<HTMLElement>`                | —                         | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
-| `position`            | `{ x: number; y: number }` &#124; `undefined` | —                         | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
-| `size`                | ``'s', 'm', 'l'`                              | —                         | Размер, влияющий на максимальную ширину тултипа |
-| `children`            | `React.ReactNode`                             | —                         | Контент тултипа |
-| `direction`          | `Direction`                                   | `'upCenter'`              | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
-| `possibleDirections` | `Direction[]`                                 | все возможные Direction   | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
-| `isInteractive`      | `boolean`                                     | `true`                    | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
-| `onClickOutside`     | `(event: MouseEvent) => void`                 | —                         | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
-
+| Свойство              | Тип или варианты значения                     | По умолчанию            | Описание                                                                          |
+| --------------------- | --------------------------------------------- | ----------------------- | --------------------------------------------------------------------------------- |
+| `anchorRef?`          | `React.RefObject<HTMLElement>`                | —                       | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
+| `position?`           | `{ x: number; y: number }` &#124; `undefined` | —                       | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
+| `size`                | `'s', 'm', 'l'`                               | —                       | Размер, влияющий на максимальную ширину тултипа                                   |
+| `children`            | `React.ReactNode`                             | —                       | Контент тултипа                                                                   |
+| `direction?`          | `Direction`                                   | `'upCenter'`            | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
+| `possibleDirections?` | `Direction[]`                                 | все возможные Direction | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
+| `isInteractive?`      | `boolean`                                     | `true`                  | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
+| `onClickOutside?`     | `(event: MouseEvent) => void`                 | —                       | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
 
 ## Примеры
 
 ### Позиционирование по координате
+
 ```ts
 <Tooltip size="s" position={{ x: 100, y: 200 }}>
   Контент тултипа
@@ -61,6 +64,7 @@ import { TooltipPositionedByAnchorStory, TooltipPositionedByCoordsStory } from '
 ```
 
 ### Позиционирование по якорю
+
 ```ts
 <Button label="Открыть тултип" type="button" ref={buttonRef} />
 <Tooltip size="s" anchorRef={buttonRef}>

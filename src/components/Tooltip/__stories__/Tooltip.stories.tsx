@@ -87,7 +87,7 @@ export const TooltipPositionedByAnchorStory = createStory(
 
     const commonKnobs = {
       ...getCommonKnobs(),
-      isInteractive: boolean('isInteractive', true),
+      isInteractive: boolean('isInteractive', false),
     };
 
     return (
