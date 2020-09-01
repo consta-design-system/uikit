@@ -19,6 +19,8 @@ export const ChoiceGroupExampleView = () => {
           items={items}
           getLabel={(item) => item}
           view="primary"
+          multiple={false}
+          name="ChoiceGroupExampleView"
         />
       </div>
       <div>
@@ -28,6 +30,8 @@ export const ChoiceGroupExampleView = () => {
           items={items}
           getLabel={(item) => item}
           view="ghost"
+          multiple={false}
+          name="ChoiceGroupExampleView"
         />
       </div>
       <div>
@@ -37,6 +41,8 @@ export const ChoiceGroupExampleView = () => {
           items={items}
           getLabel={(item) => item}
           view="secondary"
+          multiple={false}
+          name="ChoiceGroupExampleView"
         />
       </div>
     </StoryBookExample>

@@ -34,7 +34,7 @@ type CommonProps<ITEM> = {
   items: ITEM[];
   getLabel: ChoiceGroupPropGetLabel<ITEM>;
   getIcon?: ChoiceGroupPropGetIcon<ITEM>;
-  name: string;
+  name?: string;
   children?: never;
 };
 

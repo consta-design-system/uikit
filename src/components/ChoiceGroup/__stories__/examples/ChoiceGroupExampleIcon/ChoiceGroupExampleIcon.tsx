@@ -38,6 +38,8 @@ export const ChoiceGroupExampleIcon = () => {
         items={items}
         getLabel={(item) => item.name}
         getIcon={(item) => item.icon}
+        name="ChoiceGroupExampleIcon"
+        multiple={false}
       />
       <ChoiceGroup
         value={value}
@@ -46,6 +48,8 @@ export const ChoiceGroupExampleIcon = () => {
         getLabel={(item) => item.name}
         getIcon={(item) => item.icon}
         onlyIcon
+        name="ChoiceGroupExampleIcon"
+        multiple={false}
       />
     </StoryBookExample>
   );

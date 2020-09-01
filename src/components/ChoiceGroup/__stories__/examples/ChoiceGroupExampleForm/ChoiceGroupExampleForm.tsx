@@ -19,6 +19,8 @@ export const ChoiceGroupExampleForm = () => {
           items={items}
           getLabel={(item) => item}
           form="default"
+          name="ChoiceGroupExampleForm"
+          multiple={false}
         />
       </div>
       <div>
@@ -28,6 +30,8 @@ export const ChoiceGroupExampleForm = () => {
           items={items}
           getLabel={(item) => item}
           form="brick"
+          name="ChoiceGroupExampleForm"
+          multiple={false}
         />
       </div>
       <div>
@@ -37,6 +41,8 @@ export const ChoiceGroupExampleForm = () => {
           items={items}
           getLabel={(item) => item}
           form="round"
+          name="ChoiceGroupExampleForm"
+          multiple={false}
         />
       </div>
     </StoryBookExample>

@@ -18,13 +18,15 @@ export const ChoiceGroupExampleOne = () => {
         onChange={({ value }) => setValue(value)}
         items={items}
         getLabel={(item) => item}
+        multiple={false}
+        name="ChoiceGroupExampleOne"
       />
     </StoryBookExample>
   );
 };
 
 export const ChoiceGroupExampleMultiple = () => {
-  const [value, setValue] = useState<Item | null>(items[0]);
+  const [value, setValue] = useState<Item[] | null>([]);
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <p>Выберите несколько вариантов</p>
@@ -34,6 +36,7 @@ export const ChoiceGroupExampleMultiple = () => {
         items={items}
         getLabel={(item) => item}
         multiple
+        name="ChoiceGroupExampleMultiple"
       />
     </StoryBookExample>
   );
