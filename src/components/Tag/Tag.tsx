@@ -20,7 +20,7 @@ type CommonProps = {
 };
 
 type PropsWithModeButton = CommonProps & {
-  mode: 'button';
+  mode?: 'button';
   onClick: React.MouseEventHandler<HTMLButtonElement>;
   checked?: never;
   onChange?: never;

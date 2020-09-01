@@ -18,7 +18,7 @@ export const TextExampleLineheight = () => {
             {`text*line-height*${item}`}
           </Text>
           <Text lineHeight={item}>
-            «Газпром Нефть» ведет работу в крупнейших российских нефтегазовых регионах.
+            «Газпром нефть» ведет работу в крупнейших российских нефтегазовых регионах.
           </Text>
         </div>
       ))}
