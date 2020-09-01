@@ -1,8 +1,11 @@
-import { UserExampleAvatar, UserExampleAvatarName } from './examples/UserExampleAvatar/UserExampleAvatar';
+import {
+  UserExampleAvatar,
+  UserExampleAvatarName,
+} from './examples/UserExampleAvatar/UserExampleAvatar';
 import { UserExampleName } from './examples/UserExampleName/UserExampleName';
 import { UserExampleStatus } from './examples/UserExampleStatus/UserExampleStatus';
 import { UserExampleView } from './examples/UserExampleView/UserExampleView';
-import { UserExampleSize, UserExampleSizeWidth }from './examples/UserExampleSize/UserExampleSize';
+import { UserExampleSize, UserExampleSizeWidth } from './examples/UserExampleSize/UserExampleSize';
 import { UserExampleArrow } from './examples/UserExampleArrow/UserExampleArrow';
 
 # User
@@ -46,7 +49,7 @@ import { UserExampleArrow } from './examples/UserExampleArrow/UserExampleArrow';
 
 За имя человека отвечает `name`. Здесь может быть ник, логин, имя и фамилия.
 
-Вы можете добавить что-то важное в `info` —  например, должность, местонахождение
+Вы можете добавить что-то важное в `info` — например, должность, местонахождение
 или статус человека. Этот текст появится под именем.
 
 <UserExampleName />
@@ -55,7 +58,6 @@ import { UserExampleArrow } from './examples/UserExampleArrow/UserExampleArrow';
 <User avatarUrl="https://i.ibb.co/K2R8Lqb/Rectangle-1496.png" name="Гюзель Скважина" info="В отпуске" />
 <User avatarUrl="https://i.ibb.co/K2R8Lqb/Rectangle-1496.png" name="Люций" info="Эксперт"  onlyAvatar/>
 ```
-
 
 ## Статус
 
@@ -77,7 +79,7 @@ import { UserExampleArrow } from './examples/UserExampleArrow/UserExampleArrow';
 <UserExampleView />
 
 ```ts
-<User name="Бон Фишер" info="Старший эксперт"  view="ghost"/>
+<User name="Бон Фишер" info="Старший эксперт" view="ghost" />
 ```
 
 ## Размер
@@ -104,18 +106,18 @@ import { UserExampleArrow } from './examples/UserExampleArrow/UserExampleArrow';
 
 <!-- props:start -->
 
-| Свойство         | Тип и значения  | По умолчанию  | Описание                                     |
-| ---------------- | ----------------| ------------- | -------------------------------------------- |
-| [`avatarUrl`](#аватарка) | `string` | - | Ссылка на аватарку|
-| [`onlyAvatar`](#аватарка) | `boolean` | - | Показывать только аватарку, без имени |
-| [`name`](#тексты)| `string`| - | Имя человека (имя и фамилия) |
-| [`info`](#тексты) | `string` | `-`  | Дополнительная информация о человеке |
-| [`view`](#обводка) | `'ghost', 'clear'` | `'clear'`  | Внешний вид компонента |
-| [`withArrow`](#подробная-информация)| `boolean`  | - | Показывать стрелочку, чтобы раскрывать подробную информацию |
-| [`status`](#статус)| `'available', 'remote', 'out'`| -  | Статус пользователя |
-| [`size`](#размер) | `'s', 'm'`  |`'m'` | Размер |
-| [`width`](#размер) | `'full', 'default'` | `'default'` | Ширина блока |
-| `className` | `string` | -  | Дополнительный CSS-класс |
+| Свойство                              | Тип и значения                 | По умолчанию | Описание                                                    |
+| ------------------------------------- | ------------------------------ | ------------ | ----------------------------------------------------------- |
+| [`avatarUrl?`](#аватарка)             | `string`                       | -            | Ссылка на аватарку                                          |
+| [`onlyAvatar?`](#аватарка)            | `boolean`                      | -            | Показывать только аватарку, без имени                       |
+| [`name?`](#тексты)                    | `string`                       | -            | Имя человека (имя и фамилия)                                |
+| [`info?`](#тексты)                    | `string`                       | `-`          | Дополнительная информация о человеке                        |
+| [`view?`](#обводка)                   | `'ghost', 'clear'`             | `'clear'`    | Внешний вид компонента                                      |
+| [`withArrow?`](#подробная-информация) | `boolean`                      | -            | Показывать стрелочку, чтобы раскрывать подробную информацию |
+| [`status?`](#статус)                  | `'available', 'remote', 'out'` | -            | Статус пользователя                                         |
+| [`size?`](#размер)                    | `'s', 'm'`                     | `'m'`        | Размер                                                      |
+| [`width?`](#размер)                   | `'full', 'default'`            | `'default'`  | Ширина блока                                                |
+| `className?`                          | `string`                       | -            | Дополнительный CSS-класс                                    |
 
 <!-- props:end -->
 
@@ -127,6 +129,12 @@ import React from 'react';
 import { User } from '@gpn-design/uikit/User';
 
 const App = () => {
-  return <User avatarUrl="https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png" name="Винни-Пух" info="И все-все-все" />;
+  return (
+    <User
+      avatarUrl="https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png"
+      name="Винни-Пух"
+      info="И все-все-все"
+    />
+  );
 };
 ```
