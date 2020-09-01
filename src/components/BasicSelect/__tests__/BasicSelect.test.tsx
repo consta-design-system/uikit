@@ -99,13 +99,13 @@ describe('Компонент BasicSelect', () => {
 
     const buttons = select.baseElement.getElementsByTagName('button');
 
-    fireEvent.click(buttons[1]);
+    fireEvent.click(buttons[0]);
 
     const list = getList();
 
     expect(list).toBeInTheDocument();
 
-    fireEvent.click(buttons[1]);
+    fireEvent.click(buttons[0]);
     expect(list).not.toBeInTheDocument();
   });
 
