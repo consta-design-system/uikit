@@ -22,6 +22,7 @@ export const ChoiceGroupExampleSwitchPolar = () => {
         items={itemsPolar}
         getLabel={(item) => item}
         multiple={false}
+        name="ChoiceGroupExampleSwitchPolar"
       />
     </StoryBookExample>
   );
@@ -38,6 +39,7 @@ export const ChoiceGroupExampleSwitchLetters = () => {
         items={itemsLetters}
         getLabel={(item) => item}
         multiple={false}
+        name="ChoiceGroupExampleSwitchLetters"
       />
     </StoryBookExample>
   );
@@ -53,6 +55,7 @@ export const ChoiceGroupExampleSwitchPr = () => {
         items={itemsPr}
         getLabel={(item) => item}
         multiple={false}
+        name="ChoiceGroupExampleSwitchPr"
       />
     </StoryBookExample>
   );
@@ -68,6 +71,7 @@ export const ChoiceGroupExampleSwitchMode = () => {
         items={itemsMode}
         getLabel={(item) => item}
         multiple={false}
+        name="ChoiceGroupExampleSwitchMode"
       />
     </StoryBookExample>
   );
