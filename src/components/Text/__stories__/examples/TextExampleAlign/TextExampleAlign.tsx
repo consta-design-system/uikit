@@ -17,7 +17,7 @@ export const TextExampleAlign = () => {
           <Text size="s" view="ghost" align={item} className={wp.decorator({ 'indent-b': 'xs' })}>
             {`text_align_${item}`}
           </Text>
-          <Text align={item}>Газпром Нефть</Text>
+          <Text align={item}>Газпром нефть</Text>
         </div>
       ))}
     </div>
