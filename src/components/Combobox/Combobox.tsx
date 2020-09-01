@@ -7,28 +7,13 @@ import { IconClose } from '../../icons/IconClose/IconClose';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { scrollIntoView } from '../../utils/scrollIntoView';
+import { SimpleSelectProps } from '../BasicSelect/BasicSelect';
 import { Popover } from '../Popover/Popover';
 import { cnSelect } from '../SelectComponents/cnSelect';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
-import { PropForm, PropSize, PropView, PropWidth } from '../SelectComponents/types';
 
-export interface ComboboxSelectProps<T> {
-  options: T[];
-  id: string;
-  value?: T | null;
-  className?: string;
-  placeholder?: string;
-  disabled?: boolean;
-  form?: PropForm;
-  size?: PropSize;
-  width?: PropWidth;
-  view?: PropView;
-  ariaLabel?: string;
-  onChange?: (v: T | null) => void;
-  getOptionLabel(arg: T): string;
-  onBlur?: (event?: React.FocusEvent<HTMLElement>) => void;
-  onFocus?: (event?: React.FocusEvent<HTMLElement>) => void;
+export interface ComboboxSelectProps<T> extends SimpleSelectProps<T> {
   onCreate?(str: string): void;
   getGroupOptions?(group: T): T[];
 }
@@ -104,7 +89,7 @@ export const Combobox: ComboboxType = (props) => {
     getGroupOptions,
   });
 
-  const handleInputFocus = (e: React.FocusEvent<HTMLElement>): void => {
+  const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>): void => {
     if (!disabled) {
       if (!isFocused) {
         setIsFocused(true);
@@ -115,7 +100,7 @@ export const Combobox: ComboboxType = (props) => {
     }
   };
 
-  const handleInputBlur = (e: React.FocusEvent<HTMLElement>): void => {
+  const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>): void => {
     if (isFocused) {
       setIsFocused(false);
 

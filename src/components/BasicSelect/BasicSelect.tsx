@@ -32,7 +32,7 @@ export interface SimpleSelectProps<T> {
   width?: PropWidth;
   view?: PropView;
   ariaLabel?: string;
-  onChange?: (v: T) => void;
+  onChange?: (v: T | null) => void;
   getOptionLabel(arg: T): string;
   onBlur?: (event?: React.FocusEvent<HTMLInputElement>) => void;
   onFocus?: (event?: React.FocusEvent<HTMLInputElement>) => void;
