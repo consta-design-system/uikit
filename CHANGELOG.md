@@ -1,5 +1,35 @@
 # Changelog
 
+## v1.7.0 (14/08/2020)
+
+- [fix(Attach): fix onButtonClick (#340)](https://github.com/gpn-prototypes/ui-kit/commit/37a9824203481ebc1ef10b8efc65ab00313f33e5) - @gizeasy
+- [docs(file-structure): add docs file structure (#342)](https://github.com/gpn-prototypes/ui-kit/commit/a95c0ada92325af4506e82f1c46d505ba3ff29a1) - @gizeasy
+- [chore(CODEOWNERS): add @arhayka (#343)](https://github.com/gpn-prototypes/ui-kit/commit/8e47dd366c520de94f926eaccb17acbde7da8996) - @gizeasy
+- [docs(Button): fix link to example (#341)](https://github.com/gpn-prototypes/ui-kit/commit/ae6d848cc41a8281b2128050d03880f0d6796b3f) - @gizeasy
+- [fix(Docs): fix DocsExample styles (#339)](https://github.com/gpn-prototypes/ui-kit/commit/909bd028bcd56e3154e77a42e968a49a3893b6e6) - @gizeasy
+- [ docs(Progress Spin): edit docs for ProgressSpin (#295)](https://github.com/gpn-prototypes/ui-kit/commit/fd07ef13e0c8895442526b219ee24e53944e4ed5) - @arhayka
+- [feat(Icons): add new icons MaxWidth and Phone (#332)](https://github.com/gpn-prototypes/ui-kit/commit/7c26666b63afbe566854d1355d45a8444b886e81) - @fooontic
+- [fix(FileFiled): rewrote component (#338)](https://github.com/gpn-prototypes/ui-kit/commit/3fe73edd07294beb07b149202c99c729991125a3) - @gizeasy
+- [feat(BasicSelect): add BasicSelect (#308)](https://github.com/gpn-prototypes/ui-kit/commit/36b502b439775ff4450c8e868da70f7686595e0b) - @c1n1k
+- [feat(Icons): automatic fill removal and loyalty to size (#336)](https://github.com/gpn-prototypes/ui-kit/commit/3ff8f8adf7f7c1b7be06b8e6880d0000f01c6c3b) - @gizeasy
+- [docs(Common): added new documentation section to the storybook (#333)](https://github.com/gpn-prototypes/ui-kit/commit/2836ba77b8a1d75d76d9d549d98f8db481164298) - @gizeasy
+- [feat(Tabs): component update (#327)](https://github.com/gpn-prototypes/ui-kit/commit/5784ca51dababe4ba1f8a752cf1bc5105c0f42ab) - @gizeasy
+- [fix(Button): remove z-index (#334)](https://github.com/gpn-prototypes/ui-kit/commit/b1bc218acb2cf57c31a45f5fb861d896d55aa54e) - @gizeasy
+- [fix(Table): even row's background wasn't changing on hover (#304)](https://github.com/gpn-prototypes/ui-kit/commit/7a08bab64c42e5dc12f324be970a31f07a8d08b5) - @nekitk
+- [fix(Table): change condition for initial column widths (#310)](https://github.com/gpn-prototypes/ui-kit/commit/76730424cbc7396a1342c94c709a567177f21e5d) - @evless
+- [feat(Icons): add new icons (#302)](https://github.com/gpn-prototypes/ui-kit/commit/cfcb1a372aa51018e6d70b8339f87b2372fb5835) - @andekhtyar
+- [feat(ChoiceGroup): component update (#285)](https://github.com/gpn-prototypes/ui-kit/commit/420e1b29cfd910a43865fba4e5adde024c10c6ac) - @gizeasy
+
+---
+
+## v1.6.1 (10/08/2020)
+
+- [fix(Types): emotions affect types (#314)](https://github.com/gpn-prototypes/ui-kit/commit/e1dea8dc685fac2016597715af387bcb8978b147) - @gizeasy
+- [chore(deps): bump elliptic from 6.5.2 to 6.5.3 (#306)](https://github.com/gpn-prototypes/ui-kit/commit/3d5c426a26507a6678037d5d4e634b13bdae31df) - @dependabot[bot]
+- [fix(StoryBook): change path Table](https://github.com/gpn-prototypes/ui-kit/commit/6ce7ac972d2c3030545fb3096a64e80e93bcdb1e) - @gizeasy
+
+---
+
 ## v1.6.0 (29/07/2020)
 
 - [fix(Badge): replace system color in Display theme, fix text color (#280)](https://github.com/gpn-prototypes/ui-kit/commit/25a417747f81ed0a8c29cf6acde783d01e6728ec) - @fooontic

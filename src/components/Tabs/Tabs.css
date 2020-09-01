@@ -17,8 +17,26 @@
     }
   }
 
+  &_size {
+    &_s {
+      --only-icon-size: var(--space-l);
+      --tab-font-size: var(--size-text-s);
+    }
+
+    &_m {
+      --only-icon-size: var(--space-xl);
+      --tab-font-size: var(--size-text-m);
+    }
+  }
+
   &-List {
     width: 100%;
+  }
+
+  &-Tab {
+    &:not(:last-child) {
+      margin-right: var(--space-m);
+    }
   }
 
   &-RunningLine {
