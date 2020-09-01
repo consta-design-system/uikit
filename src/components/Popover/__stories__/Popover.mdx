@@ -1,5 +1,8 @@
 import { Preview } from '@storybook/addon-docs/dist/blocks';
-import { PopoverPositionedByAnchorStory, PopoverPositionedByCoordsStory } from './Popover.stories.tsx'
+import {
+  PopoverPositionedByAnchorStory,
+  PopoverPositionedByCoordsStory,
+} from './Popover.stories.tsx';
 
 # Popover
 
@@ -52,9 +55,7 @@ import { PopoverPositionedByAnchorStory, PopoverPositionedByCoordsStory } from '
 </Preview>
 
 ```ts
-<Popover position={{ x: 100, y: 200 }}>
-  Контент поповера
-</Popover>
+<Popover position={{ x: 100, y: 200 }}>Контент поповера</Popover>
 ```
 
 В этом случае вам нужно самостоятельно отслеживать ситуации, в которых следует
@@ -67,9 +68,9 @@ import { PopoverPositionedByAnchorStory, PopoverPositionedByCoordsStory } from '
 
 1. Если поповер может развернуться в положение, указанное в свойстве `direction`, то разворачивается в него.
 2. Если на экране недостаточно места, перебираются все направления, указанные в `possibleDirections`,
-и выбирается положение, при котором поповер поместится на экране.
+   и выбирается положение, при котором поповер поместится на экране.
 3. Если ни в одном положении поповер не помещается, то всё равно разворачивается
-в положение `direction`.
+   в положение `direction`.
 
 ## Отступы
 
@@ -80,19 +81,17 @@ import { PopoverPositionedByAnchorStory, PopoverPositionedByCoordsStory } from '
 
 ## Свойства
 
-
-
-| Свойство            | Тип или варианты значения                                             | По умолчанию              | Описание  |
-| ------------------- | --------------------------------------------------------------------- | ------------------------- | --------- |
-| [`anchorRef`](#по-элементу-якорю)| `React.RefObject<HTMLElement>`                                        | —                         | Элемент, относительно которого будет позиционироваться поповер (обязателен, если не указано `position`) |
-| [`position`](#по-координатам)            | `{ x: number; y: number }` &#124; `undefined`                         | —                         | Координаты точки, к которой прикрепляется поповер (обязательны, если не заполнено `anchorRef`) |
-| [`children`](#содержимое)            | `React.ReactNode` &#124; `(direction: Direction) => React.ReactNode`  | —                         | Контент поповера |
-| [`direction`](#направление-разворачивания)          | [`Direction`](#direction)                                                           | `'upCenter'`              | Основное направление для разворачивания поповера |
-| [`possibleDirections`](#направление-разворачивания) | [`Direction[]`](#direction)                                                         | Все возможные Direction   | Дополнительные направления, в которые может разворачиваться поповер |
-| [`offset`](#отступы)             | `number`                                                              | `0`                       | Отступ от якоря или позиции |
-| [`arrowOffset`](#отступы)       | `number`                                                              | —                         | Сдвиг в нецентральных позициях (используется для центровки стрелочки у тултипа) |
-| `isInteractive`     | `boolean`                                                             | `true`                    | Можно ли взаимодействовать с содержимым поповера |
-| `onClickOutside`    | `(event: MouseEvent) => void`                                         | —                         | Действие по клику за пределами поповера и его якоря (если есть) |
+| Свойство                                             | Тип или варианты значения                                            | По умолчанию            | Описание                                                                                                |
+| ---------------------------------------------------- | -------------------------------------------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------- |
+| [`anchorRef?`](#по-элементу-якорю)                   | `React.RefObject<HTMLElement>`                                       | —                       | Элемент, относительно которого будет позиционироваться поповер (обязателен, если не указано `position`) |
+| [`position?`](#по-координатам)                       | `{ x: number; y: number }` &#124; `undefined`                        | —                       | Координаты точки, к которой прикрепляется поповер (обязательны, если не заполнено `anchorRef`)          |
+| [`children`](#содержимое)                            | `React.ReactNode` &#124; `(direction: Direction) => React.ReactNode` | —                       | Контент поповера                                                                                        |
+| [`direction?`](#направление-разворачивания)          | [`Direction`](#direction)                                            | `'upCenter'`            | Основное направление для разворачивания поповера                                                        |
+| [`possibleDirections?`](#направление-разворачивания) | [`Direction[]`](#direction)                                          | Все возможные Direction | Дополнительные направления, в которые может разворачиваться поповер                                     |
+| [`offset?`](#отступы)                                | `number`                                                             | `0`                     | Отступ от якоря или позиции                                                                             |
+| [`arrowOffset?`](#отступы)                           | `number`                                                             | —                       | Сдвиг в нецентральных позициях (используется для центровки стрелочки у тултипа)                         |
+| `isInteractive?`                                     | `boolean`                                                            | `true`                  | Можно ли взаимодействовать с содержимым поповера                                                        |
+| `onClickOutside?`                                    | `(event: MouseEvent) => void`                                        | —                       | Действие по клику за пределами поповера и его якоря (если есть)                                         |
 
 ### Direction
 
@@ -106,6 +105,7 @@ import { PopoverPositionedByAnchorStory, PopoverPositionedByCoordsStory } from '
 ## Примеры
 
 ### Позиционирование по якорю
+
 ```ts
 <Button label="Открыть поповер" type="button" ref={buttonRef} />
 <Popover anchorRef={buttonRef}>
@@ -114,8 +114,7 @@ import { PopoverPositionedByAnchorStory, PopoverPositionedByCoordsStory } from '
 ```
 
 ### Позиционирование по координатам
+
 ```ts
-<Popover position={{ x: 100, y: 200 }}>
-  Контент поповера
-</Popover>
+<Popover position={{ x: 100, y: 200 }}>Контент поповера</Popover>
 ```
