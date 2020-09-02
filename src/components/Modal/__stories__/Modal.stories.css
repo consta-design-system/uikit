@@ -1,0 +1,15 @@
+.ModalStories {
+  &-title {
+    margin: var(--space-m);
+  }
+
+  &-body {
+    margin: var(--space-m);
+  }
+
+  &-action {
+    margin: var(--space-m);
+    display: flex;
+    justify-content: flex-end;
+  }
+}
