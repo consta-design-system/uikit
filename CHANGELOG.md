@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.7.1 (21/08/2020)
+
+- [fix(Switch and Radio): disabled styles (#353)](https://github.com/gpn-prototypes/ui-kit/commit/ae83d0812b259c8c2fab979cb6f46562fe251952) - @fooontic
+- [fix(Types): added remove "css" types from attributes](https://github.com/gpn-prototypes/ui-kit/commit/f3350b8503f568c3a810382fc11b880ddd68f8a8) - @evless
+
+---
+
 ## v1.7.0 (14/08/2020)
 
 - [fix(Attach): fix onButtonClick (#340)](https://github.com/gpn-prototypes/ui-kit/commit/37a9824203481ebc1ef10b8efc65ab00313f33e5) - @gizeasy
