@@ -1,5 +1,32 @@
 # Changelog
 
+## v1.8.0 (02/09/2020)
+
+- [chore(repository): moving to gazprom-neft/consta-uikit (#373)](https://github.com/gazprom-neft/consta-uikit/commit/b735c413d8b5af7db8ceda0fae819f33e2d42846) - @gizeasy
+- [docs(Tooltip): edit description and structure (#362)](https://github.com/gazprom-neft/consta-uikit/commit/d0c1e14c44ec87d3f9abf69ee74efd0b7646f214) - @arhayka
+- [docs(FileField): edit docs for FileField (#364)](https://github.com/gazprom-neft/consta-uikit/commit/37c9ca9f48ef7e4eaba4759be89396b50bead57e) - @arhayka
+- [docs(Common): add docs for Common (#365)](https://github.com/gazprom-neft/consta-uikit/commit/721623a2e20ff2fd5cde4f551b59a1623676dfaa) - @arhayka
+- [fix(ChoiceGroup): fix view secondary and round dividers (#367)](https://github.com/gazprom-neft/consta-uikit/commit/6ebb81a991a36985ef38fe070737f8164ab08ca8) - @fooontic
+- [docs(Popover): edit text and structure (#356)](https://github.com/gazprom-neft/consta-uikit/commit/50a7ef093be6751bfb47fdb9f766eeb5d9827e03) - @arhayka
+- [docs(ChoiceGroup): add docs and examples (#363)](https://github.com/gazprom-neft/consta-uikit/commit/a613182c947de984df8b01189c113c28eedf11b5) - @arhayka
+- [docs(Timer): edit description, add examples (#361)](https://github.com/gazprom-neft/consta-uikit/commit/ddfeb643102745a1fdc5042694a1717d2915283f) - @arhayka
+- [docs(Tabs): add description and examples (#359)](https://github.com/gazprom-neft/consta-uikit/commit/51fd57d8c61e80b833b0a74e93c38a7e6a917be7) - @arhayka
+- [docs(Checkbox): edit docs for Checkbox (#345)](https://github.com/gazprom-neft/consta-uikit/commit/67a1dc6c5f9862cb13eaa98ed490d9118260786f) - @arhayka
+- [docs(User): add docs for User (#326)](https://github.com/gazprom-neft/consta-uikit/commit/0c1cbb1ffe47bd87b7dc8238cc71b2d61bad7907) - @arhayka
+- [docs(TextField): add docs for TextField (#324)](https://github.com/gazprom-neft/consta-uikit/commit/d69cfa85ad05929142465f5fee581d1b72ee2970) - @arhayka
+- [docs(Tag): edit docs for Tag (#323)](https://github.com/gazprom-neft/consta-uikit/commit/2fbf3f74fcaf96536449e301f5abc6795245729a) - @arhayka
+- [ docs(Switch): add docs for Switch (#322)](https://github.com/gazprom-neft/consta-uikit/commit/45648776c428e02a0b0e216b1bcdeea528407fc5) - @arhayka
+- [docs(Radio): add docs for Radio (#321)](https://github.com/gazprom-neft/consta-uikit/commit/7032f37f439916f7157812e3f057b7cddd04a143) - @arhayka
+- [docs(Text): edit docs for Text (#300)](https://github.com/gazprom-neft/consta-uikit/commit/396ac4ae2a665557b9bc2104b8bcfefed889bf94) - @arhayka
+- [feat(Icons): add new icons (#370)](https://github.com/gazprom-neft/consta-uikit/commit/10f8d443de6ac527eb5cb4bbdcd7274311a0be61) - @gizeasy
+- [docs(Loader): add docs for Loader (#320)](https://github.com/gazprom-neft/consta-uikit/commit/b02f4a421f6badfc34ac41c4604430c65d64e860) - @arhayka
+- [docs(Informer): add docs for Informer (#319)](https://github.com/gazprom-neft/consta-uikit/commit/1d289a300265cfb2b7fdfb2bcc080d7216d52ac0) - @arhayka
+- [docs(Avatar): add docs for Avatar (#307)](https://github.com/gazprom-neft/consta-uikit/commit/bdb33df0dce71cac06eec75e7de10cca10cf7c57) - @arhayka
+- [docs(components): add docs for Badge and Attach (#279)](https://github.com/gazprom-neft/consta-uikit/commit/cdab002769764089f69baf75d456691fbeefd8b6) - @arhayka
+- [docs(File): add docs for File (#289)](https://github.com/gazprom-neft/consta-uikit/commit/c9977c8e2e1122bac7f8f35fa57529e10948070f) - @arhayka
+
+---
+
 ## v1.7.1 (21/08/2020)
 
 - [fix(Switch and Radio): disabled styles (#353)](https://github.com/gazprom-neft/consta-uikit/commit/ae83d0812b259c8c2fab979cb6f46562fe251952) - @fooontic
