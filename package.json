@@ -1,5 +1,5 @@
 {
-  "name": "@gpn-design/uikit",
+  "name": "@consta/uikit",
   "version": "1.7.1",
   "dependencies": {
     "@bem-react/classname": "^1.5.8",
@@ -154,5 +154,5 @@
     "typescript": "^3.8.3",
     "typescript-eslint-parser": "^22.0.0"
   },
-  "homepage": "https://ui-kit.gpn.vercel.app"
+  "homepage": "https://uikit.consta.vercel.app"
 }
