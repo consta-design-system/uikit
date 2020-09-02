@@ -1,0 +1,51 @@
+.Modal {
+  &-root {
+    position: absolute;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+
+    min-width: 400px;
+    max-width: 900px;
+    min-height: 200px;
+
+    background-color: var(--color-bg-default);
+    border-radius: var(--control-radius);
+    box-shadow: 0 9px 24px rgba(0, 0, 0, 0.05), 0 9px 24px rgba(0, 0, 0, 0.1);
+
+    transform: translate(-50%, -50%);
+  }
+
+  &-overlay {
+    position: fixed;
+    z-index: 99;
+    top: 0;
+
+    border: none;
+    padding: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background: rgba(0, 0, 0, 0.5);
+
+    animation: animatebg 0.3s;
+  }
+
+  &-closeButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0.4;
+  }
+
+  @keyframes animatebg {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+}
