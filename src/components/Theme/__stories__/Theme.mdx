@@ -9,7 +9,7 @@ import { ThemeExampleRoot } from './examples/ThemeExampleRoot/ThemeExampleRoot';
 ```ts
 // src/App.ts
 import React from 'react';
-import { Theme, presetGpnDefault } from '@gpn-design/uikit/Theme';
+import { Theme, presetGpnDefault } from '@consta/uikit/Theme';
 
 const App = () => {
   return <Theme preset={presetGpnDefault}>your code</Theme>;
@@ -20,7 +20,7 @@ const App = () => {
 
 ```ts
 import React from 'react';
-import { Theme, presetGpnDefault, presetGpnDark } from '@gpn-design/uikit/Theme';
+import { Theme, presetGpnDefault, presetGpnDark } from '@consta/uikit/Theme';
 
 const App = () => {
   return (
@@ -40,8 +40,8 @@ const App = () => {
 `themeClassNames` - классы используемой темы
 
 ```ts
-import { useTheme } from '@gpn-design/uikit/Theme';
-import { Text } from '@gpn-design/uikit/Text';
+import { useTheme } from '@consta/uikit/Theme';
+import { Text } from '@consta/uikit/Text';
 
 const App = () => {
   const { themeClassNames } = useTheme();
@@ -56,8 +56,8 @@ import './RootTheme.css';
 
 import React, { useState } from 'react';
 import { cn } from '@bem-react/classname';
-import { Theme, presetGpnDark, presetGpnDefault, ThemePreset } from '@gpn-design/uikit/Theme';
-import { Switch } from '@gpn-design/uikit/Switch';
+import { Theme, presetGpnDark, presetGpnDefault, ThemePreset } from '@consta/uikit/Theme';
+import { Switch } from '@consta/uikit/Switch';
 
 type ThemeName = 'gpnDefault' | 'gpnDark';
 
