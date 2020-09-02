@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.8.1 (02/09/2020)
+
+- [fix(docs): fixed docs and links (#376)](https://github.com/gazprom-neft/consta-uikit/commit/3e14c11559d7e61a9c332429fdecbd3b1b886eda) - @gizeasy
+
+---
+
 ## v1.8.0 (02/09/2020)
 
 - [chore(repository): moving to gazprom-neft/consta-uikit (#373)](https://github.com/gazprom-neft/consta-uikit/commit/b735c413d8b5af7db8ceda0fae819f33e2d42846) - @gizeasy
