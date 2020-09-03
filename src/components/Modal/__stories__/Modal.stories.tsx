@@ -15,12 +15,13 @@ const cnModalStories = cn('ModalStories');
 
 const defaultKnobs = () => ({
   hasCloseButton: boolean('hasCloseButton', true),
+  closeByClickOnOverlay: boolean('closeByClickOnOverlay', true),
 });
 
 export function Playground() {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
-  const { hasCloseButton } = defaultKnobs();
+  const { hasCloseButton, closeByClickOnOverlay } = defaultKnobs();
 
   return (
     <div className={cnModalStories()}>
@@ -35,6 +36,7 @@ export function Playground() {
         className="myClassName"
         isOpen={isModalOpen}
         hasCloseButton={hasCloseButton}
+        closeByClickOnOverlay={closeByClickOnOverlay}
         onClose={() => setIsModalOpen(false)}
       >
         <Text as="p" size="s" view="secondary" className={cnModalStories('title')}>
