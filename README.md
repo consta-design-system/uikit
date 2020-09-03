@@ -3,7 +3,7 @@
 ## Установка пакета
 
 ```
-yarn add @gpn-design/uikit
+yarn add @nedra-ui/uikit
 ```
 
 ## Применение
@@ -25,4 +25,4 @@ const App = () => (
 
 На стенде можно менять параметры и смотреть, как меняются компоненты. Документация — во вкладке у каждого компонента.
 
-[Вперед, к стенду](https://ui-kit.gpn.vercel.app/)
+[Вперед, к стенду](https://nedradigital.github.io/ui-kit)
