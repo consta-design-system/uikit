@@ -25,19 +25,7 @@ type IndexForHighlight = number | ((oldIndex: number) => number);
 type SetHandlerArg<T> = boolean | number | T;
 type SetHandler<T> = (arg: SetHandlerArg<T>) => void;
 
-// interface SingleOption<T = any> {
-//   label: string;
-//   value: string;
-//   item: T;
-// }
-
-// interface GroupOption<T> {
-//   label: string;
-//   options: SingleOption<T>[];
-// }
-// type Option<T = any> = SingleOption<T> | GroupOption<T>;
-
-type Option<T> = {
+export type Option<T> = {
   label: string;
   item: T;
   group?: string;
@@ -58,7 +46,7 @@ export interface SelectProps<T> {
   getGroupOptions?(group: T): T[];
 }
 
-interface OptionProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface OptionProps extends React.HTMLAttributes<HTMLDivElement> {
   index: number;
   style?: CSSProperties;
   className?: string;
@@ -66,7 +54,7 @@ interface OptionProps extends React.HTMLAttributes<HTMLDivElement> {
   onMouseEnter?(e: React.SyntheticEvent): void;
 }
 
-type GetOptionPropsResult = {
+export type GetOptionPropsResult = {
   onClick(e: React.SyntheticEvent): void;
   onMouseEnter(e: React.SyntheticEvent): void;
 } & JSX.IntrinsicElements['div'];

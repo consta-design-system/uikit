@@ -7,12 +7,9 @@ import { Combobox } from '../Combobox';
 import mdx from './Combobox.mdx';
 
 type SelectOption = {
-  label: string;
   value: string;
+  label: string;
 };
-
-type Group = { label: string; items: SelectOption[] };
-type Option = SelectOption | Group;
 
 const simpleItems = [
   { label: 'Neptunium', value: 'Neptunium' },
@@ -45,6 +42,9 @@ const simpleItems = [
   { label: 'Tennessine', value: 'Tennessine' },
   { label: 'Oganesson', value: 'Oganesson' },
 ];
+
+type Group = { name: string; items: SelectOption[] };
+type GroupOptions = Group[];
 
 const groups = [
   {
@@ -127,20 +127,19 @@ const getKnobs = () => ({
 
 const Default = (props: {
   value?: SelectOption;
-  items?: Option[];
-  getItemLabel?(item: Option): string;
-  getGroupOptions?(option: Option): SelectOption[];
-  onCreate?(str: string): void;
+  items?: SelectOption[] | GroupOptions;
+  getItemLabel?(item: SelectOption | Group): string;
+  getGroupOptions?(item: Group): SelectOption[];
 }): JSX.Element => {
-  const getItemLabelDefault = (option: Option): string => option.label;
-  const {
-    items = simpleItems,
-    getItemLabel = getItemLabelDefault,
-    getGroupOptions,
-    onCreate,
-  } = props;
+  const getItemLabelDefault = (option: SelectOption): string => option.label;
+  const { items = simpleItems, getItemLabel = getItemLabelDefault, getGroupOptions } = props;
 
-  const options = items;
+  let options = items;
+
+  const handleCreate = (v: string): void => {
+    // options = [...options, (getGroupOptions ? {label: 'Пользовательская', items:[...options[options.length - 1].items, { label: v, value: v }])];
+    options = [{ label: v, value: v }, ...options];
+  };
 
   return (
     <>
@@ -152,7 +151,7 @@ const Default = (props: {
           value={props.value}
           getOptionLabel={getItemLabel}
           getGroupOptions={getGroupOptions}
-          onCreate={onCreate}
+          onCreate={handleCreate}
         />
       </div>
     </>
@@ -165,11 +164,6 @@ export const DefaultStory = createStory(() => <Default />, {
 
 export const WithValueStory = createStory(() => <Default value={simpleItems[4]} />, {
   name: 'c заданным значением',
-});
-
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-export const WithCreateStory = createStory(() => <Default onCreate={(): void => {}} />, {
-  name: 'c cозданием новой опции',
 });
 
 export const WithGroupsStory = createStory(

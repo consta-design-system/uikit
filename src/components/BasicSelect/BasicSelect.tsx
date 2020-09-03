@@ -5,40 +5,23 @@ import React, { useRef, useState } from 'react';
 import { useSelect } from '../../hooks/useSelect/useSelect';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { scrollIntoView } from '../../utils/scrollIntoView';
-import { Popover } from '../Popover/Popover';
 import { cnSelect } from '../SelectComponents/cnSelect';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
 import {
+  CommonSelectProps,
   DefaultPropForm,
   DefaultPropSize,
   DefaultPropView,
   DefaultPropWidth,
-  PropForm,
-  PropSize,
-  PropView,
-  PropWidth,
 } from '../SelectComponents/types';
 
-export interface SimpleSelectProps<T> {
-  options: T[];
-  id: string;
-  value?: T | null;
-  className?: string;
-  placeholder?: string;
-  disabled?: boolean;
-  form?: PropForm;
-  size?: PropSize;
-  width?: PropWidth;
-  view?: PropView;
-  ariaLabel?: string;
-  onChange?: (v: T | null) => void;
-  getOptionLabel(arg: T): string;
-  onBlur?: (event?: React.FocusEvent<HTMLInputElement>) => void;
-  onFocus?: (event?: React.FocusEvent<HTMLInputElement>) => void;
-}
+export type SimpleSelectProps<ITEM> = CommonSelectProps<ITEM> & {
+  value?: ITEM | null;
+  onChange?: (v: ITEM | null) => void;
+};
 
-type Select = <T>(props: SimpleSelectProps<T>) => React.ReactElement | null;
+type Select = <ITEM>(props: SimpleSelectProps<ITEM>) => React.ReactElement | null;
 
 export const BasicSelect: Select = (props) => {
   const {
@@ -135,10 +118,10 @@ export const BasicSelect: Select = (props) => {
       focused={isFocused}
       disabled={disabled}
       size={size}
-      {...restProps}
       view={view}
       form={form}
       width={width}
+      {...restProps}
     >
       <div
         className={cnSelect('Control')}
@@ -182,35 +165,16 @@ export const BasicSelect: Select = (props) => {
         </span>
       </div>
       {isOpen && (
-        <Popover
-          anchorRef={toggleRef}
-          possibleDirections={['downLeft', 'upLeft', 'downRight', 'upRight']}
-          offset={1}
-        >
-          <SelectDropdown role="listbox" aria-activedescendant={`${id}-${highlightedIndex}`}>
-            <div className={cnSelect('List', { size })} ref={optionsRef}>
-              {visibleOptions.map((option, index: number) => {
-                return (
-                  <div
-                    aria-selected={option.item === value}
-                    role="option"
-                    key={option.label}
-                    id={`${id}-${index}`}
-                    {...getOptionProps({
-                      index,
-                      className: cnSelect('ListItem', {
-                        active: option.item === value,
-                        hovered: index === highlightedIndex,
-                      }),
-                    })}
-                  >
-                    {option.label}
-                  </div>
-                );
-              })}
-            </div>
-          </SelectDropdown>
-        </Popover>
+        <SelectDropdown
+          size={size}
+          controlRef={controlRef}
+          visibleOptions={visibleOptions}
+          highlightedIndex={highlightedIndex}
+          getOptionProps={getOptionProps}
+          optionsRef={optionsRef}
+          id={id}
+          selectedValues={arrValue}
+        />
       )}
     </SelectContainer>
   );

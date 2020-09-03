@@ -1,5 +1,3 @@
-import '../SelectComponents/Select.css';
-
 import React, { useRef, useState } from 'react';
 
 import { useSelect } from '../../hooks/useSelect/useSelect';
@@ -7,18 +5,26 @@ import { IconClose } from '../../icons/IconClose/IconClose';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { scrollIntoView } from '../../utils/scrollIntoView';
-import { SimpleSelectProps } from '../BasicSelect/BasicSelect';
-import { Popover } from '../Popover/Popover';
 import { cnSelect } from '../SelectComponents/cnSelect';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
+import {
+  CommonSelectProps,
+  DefaultPropForm,
+  DefaultPropSize,
+  DefaultPropView,
+  DefaultPropWidth,
+} from '../SelectComponents/types';
 
-export interface ComboboxSelectProps<T> extends SimpleSelectProps<T> {
+export type ComboboxSelectProps<ITEM> = CommonSelectProps<ITEM> & {
+  value?: ITEM | null;
+  onChange?: (v: ITEM | null) => void;
   onCreate?(str: string): void;
-  getGroupOptions?(group: T): T[];
-}
+  getGroupOptions?(group: ITEM): ITEM[];
+  labelForCreate?: string;
+};
 
-type ComboboxType = <T>(props: ComboboxSelectProps<T>) => React.ReactElement | null;
+type ComboboxType = <ITEM>(props: ComboboxSelectProps<ITEM>) => React.ReactElement | null;
 
 export const Combobox: ComboboxType = (props) => {
   const {
@@ -32,9 +38,13 @@ export const Combobox: ComboboxType = (props) => {
     disabled,
     ariaLabel,
     id,
-    size = 'm',
+    width = DefaultPropWidth,
+    form = DefaultPropForm,
+    view = DefaultPropView,
+    size = DefaultPropSize,
     onCreate,
     getGroupOptions,
+    labelForCreate = 'Добавить',
     ...restProps
   } = props;
   const [isFocused, setIsFocused] = useState(false);
@@ -155,7 +165,15 @@ export const Combobox: ComboboxType = (props) => {
   };
 
   return (
-    <SelectContainer focused={isFocused} disabled={disabled} size={size} {...restProps}>
+    <SelectContainer
+      focused={isFocused}
+      disabled={disabled}
+      size={size}
+      view={view}
+      form={form}
+      width={width}
+      {...restProps}
+    >
       <div
         className={cnSelect('Control', { hasInput: true })}
         ref={controlRef}
@@ -211,77 +229,20 @@ export const Combobox: ComboboxType = (props) => {
         </span>
       </div>
       {isOpen && (
-        <Popover
-          anchorRef={toggleRef}
-          possibleDirections={['downCenter', 'upLeft', 'downRight', 'upRight']}
-          offset={1}
-        >
-          <SelectDropdown role="listbox" aria-activedescendant={`${id}-${highlightedIndex}`}>
-            <div className={cnSelect('List', { size })} ref={optionsRef}>
-              {visibleOptions.map((option, index: number) => {
-                const isOptionForCreate = 'optionForCreate' in option;
-
-                const currentOption = visibleOptions[index];
-                const prevOption = visibleOptions[index - 1];
-                const menuOption = isOptionForCreate ? visibleOptions[index + 1] : currentOption;
-
-                const isFirstGroup =
-                  hasGroup && !isOptionForCreate && !visibleOptions[index - 1] && index === 0;
-
-                const shouldShowGroupName =
-                  isFirstGroup ||
-                  (hasGroup && prevOption && currentOption.group !== prevOption.group);
-
-                return (
-                  <>
-                    {shouldShowGroupName && (
-                      <div key={menuOption.group} className={cnSelect('GroupName')}>
-                        {menuOption.group}
-                      </div>
-                    )}
-                    <div
-                      aria-selected={arrValue?.some(
-                        (val) => JSON.stringify(val) === JSON.stringify(option),
-                      )}
-                      role="option"
-                      key={option.label}
-                      id={`${id}-${index}`}
-                      {...getOptionProps({
-                        index,
-                        className: cnSelect('ListItem', {
-                          forCreate: isOptionForCreate,
-                          active:
-                            !isOptionForCreate &&
-                            arrValue?.some((val) => {
-                              return JSON.stringify(val) === JSON.stringify(menuOption);
-                            }),
-                          hovered: index === highlightedIndex,
-                        }),
-                      })}
-                    >
-                      {isOptionForCreate ? (
-                        <button
-                          type="button"
-                          className={cnSelect('CreateOption')}
-                          disabled={visibleOptions.some(
-                            (option, index) =>
-                              index !== 0 &&
-                              option.label.toLowerCase() === inputData.value?.toLowerCase(),
-                          )}
-                          onClick={handleCreate}
-                        >
-                          + Добавить «<b>{inputData.value}</b>»
-                        </button>
-                      ) : (
-                        option.label
-                      )}
-                    </div>
-                  </>
-                );
-              })}
-            </div>
-          </SelectDropdown>
-        </Popover>
+        <SelectDropdown
+          size={size}
+          controlRef={controlRef}
+          visibleOptions={visibleOptions}
+          highlightedIndex={highlightedIndex}
+          getOptionProps={getOptionProps}
+          onCreate={handleCreate}
+          optionsRef={optionsRef}
+          valueForCreate={inputData.value}
+          id={id}
+          hasGroup={hasGroup}
+          selectedValues={arrValue}
+          labelForCreate={labelForCreate}
+        />
       )}
     </SelectContainer>
   );

@@ -12,7 +12,7 @@ const renderComponent = (props: Omit<SelectContainerProps, 'children'>): RenderR
 };
 
 describe('Компонент Container', () => {
-  it('должен рендериться без ошибок', () => {
+  it('должен рендерится без ошибок', () => {
     expect(renderComponent).not.toThrow();
   });
 
