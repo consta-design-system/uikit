@@ -3,7 +3,7 @@
 ## Установка пакета
 
 ```
-yarn add @consta/uikit
+yarn add @nedra-ui/uikit
 ```
 
 ## Применение
@@ -11,8 +11,8 @@ yarn add @consta/uikit
 Для использования компонентов на проекте следует подключить тему:
 
 ```tsx
-import { Theme, presetGpnDefault } from '@consta/uikit/Theme';
-import { Button } from '@consta/uikit/Button';
+import { Theme, presetGpnDefault } from '@gpn-design/uikit/Theme';
+import { Button } from '@gpn-design/uikit/Button';
 
 const App = () => (
   <Theme preset={presetGpnDefault}>
@@ -25,4 +25,4 @@ const App = () => (
 
 На стенде можно менять параметры и смотреть, как меняются компоненты. Документация — во вкладке у каждого компонента.
 
-[Вперед, к стенду](https://consta-uikit.vercel.app/)
+[Вперед, к стенду](https://nedradigital.github.io/ui-kit)
