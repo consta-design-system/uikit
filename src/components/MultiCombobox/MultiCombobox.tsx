@@ -1,5 +1,3 @@
-import '../SelectComponents/Select.css';
-
 import React, { useRef, useState } from 'react';
 
 import { useSelect } from '../../hooks/useSelect/useSelect';
@@ -7,21 +5,22 @@ import { IconClose } from '../../icons/IconClose/IconClose';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { scrollIntoView } from '../../utils/scrollIntoView';
-import { Popover } from '../Popover/Popover';
 import { cnSelect } from '../SelectComponents/cnSelect';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
-import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
 import { CommonSelectProps } from '../SelectComponents/types';
 import { Tag } from '../Tag/Tag';
 
-export interface MultiComboboxProps<T> extends CommonSelectProps<T> {
-  value?: T[] | null;
-  onChange?: (v: T[] | null) => void;
-  onCreate?(str: string): void;
-  getGroupOptions?(group: T): T[];
-}
+import { SelectDropdown } from './SelectDropdown';
 
-type MultiComboboxType = <T>(props: MultiComboboxProps<T>) => React.ReactElement | null;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type MultiComboboxProps<ITEM> = CommonSelectProps<ITEM> & {
+  value?: ITEM[] | null;
+  onChange?: (v: ITEM[] | null) => void;
+  onCreate?(str: string): void;
+  getGroupOptions?(group: ITEM): ITEM[];
+};
+
+type MultiComboboxType = <ITEM>(props: MultiComboboxProps<ITEM>) => React.ReactElement | null;
 
 export const MultiCombobox: MultiComboboxType = (props) => {
   const {
@@ -38,6 +37,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
     size = 'm',
     onCreate,
     getGroupOptions,
+    labelForCreate = 'Добавить',
     ...restProps
   } = props;
   const [isFocused, setIsFocused] = useState(false);
@@ -57,7 +57,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
 
   const optionsRef = useRef<HTMLDivElement | null>(null);
   const controlRef = useRef<HTMLDivElement | null>(null);
-  const arrValue = typeof val !== 'undefined' && val !== null ? [...val] : null;
+  const arrValue: typeof val | null = typeof val !== 'undefined' && val !== null ? [...val] : null;
   const hasGroup = typeof getGroupOptions === 'function';
 
   const scrollToIndex = (index: number): void => {
@@ -171,15 +171,18 @@ export const MultiCombobox: MultiComboboxType = (props) => {
 
   const valueTags = arrValue?.map((option) => {
     const label = getOptionLabel(option);
-    return (
-      <Tag
-        mode="cancel"
-        size={size}
-        label={label}
-        key={getOptionLabel(option)}
-        className={cnSelect('Tag')}
-        onCancel={(): void => handleRemoveValue(label)}
-      />
+    const handleCancel = (): void => handleRemoveValue(label);
+    const commonProps = {
+      size,
+      label,
+      key: getOptionLabel(option),
+      className: cnSelect('Tag'),
+    };
+    return disabled ? (
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      <Tag mode="button" {...commonProps} onClick={(): void => {}} />
+    ) : (
+      <Tag mode="cancel" {...commonProps} onCancel={handleCancel} />
     );
   });
 
@@ -259,77 +262,20 @@ export const MultiCombobox: MultiComboboxType = (props) => {
         </div>
       </div>
       {isOpen && (
-        <Popover
-          anchorRef={controlRef}
-          possibleDirections={['downCenter', 'upLeft', 'downRight', 'upRight']}
-          offset={1}
-        >
-          <SelectDropdown role="listbox" aria-activedescendant={`${id}-${highlightedIndex}`}>
-            <div className={cnSelect('List', { size })} ref={optionsRef}>
-              {visibleOptions.map((option, index: number) => {
-                const isOptionForCreate = 'optionForCreate' in option;
-
-                const currentOption = visibleOptions[index];
-                const prevOption = visibleOptions[index - 1];
-                const menuOption = isOptionForCreate ? visibleOptions[index + 1] : currentOption;
-
-                const isFirstGroup =
-                  hasGroup && !isOptionForCreate && !visibleOptions[index - 1] && index === 0;
-
-                const shouldShowGroupName =
-                  isFirstGroup ||
-                  (hasGroup && prevOption && currentOption.group !== prevOption.group);
-
-                return (
-                  <>
-                    {shouldShowGroupName && (
-                      <div key={menuOption.group} className={cnSelect('GroupName')}>
-                        {menuOption.group}
-                      </div>
-                    )}
-                    <div
-                      aria-selected={arrValue?.some(
-                        (val) => JSON.stringify(val) === JSON.stringify(option),
-                      )}
-                      role="option"
-                      key={option.label}
-                      id={`${id}-${index}`}
-                      {...getOptionProps({
-                        index,
-                        className: cnSelect('CheckItem', {
-                          forCreate: isOptionForCreate,
-                          active:
-                            !isOptionForCreate &&
-                            arrValue?.some((val) => {
-                              return JSON.stringify(val) === JSON.stringify(menuOption);
-                            }),
-                          hovered: index === highlightedIndex,
-                        }),
-                      })}
-                    >
-                      {isOptionForCreate ? (
-                        <button
-                          type="button"
-                          className={cnSelect('CreateOption')}
-                          disabled={visibleOptions.some(
-                            (option, index) =>
-                              index !== 0 &&
-                              option.label.toLowerCase() === inputData.value?.toLowerCase(),
-                          )}
-                          onClick={handleCreate}
-                        >
-                          + Добавить «<b>{inputData.value}</b>»
-                        </button>
-                      ) : (
-                        option.label
-                      )}
-                    </div>
-                  </>
-                );
-              })}
-            </div>
-          </SelectDropdown>
-        </Popover>
+        <SelectDropdown
+          size={size}
+          controlRef={controlRef}
+          visibleOptions={visibleOptions}
+          highlightedIndex={highlightedIndex}
+          getOptionProps={getOptionProps}
+          onCreate={handleCreate}
+          optionsRef={optionsRef}
+          valueForCreate={inputData.value}
+          id={id}
+          hasGroup={hasGroup}
+          selectedValues={arrValue}
+          labelForCreate={labelForCreate}
+        />
       )}
     </SelectContainer>
   );

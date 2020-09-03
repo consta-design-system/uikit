@@ -342,6 +342,7 @@
   &_multi &-Input {
     display: inline-flex;
     min-width: 10px;
+    margin-top: calc(var(--tag-space) - calc(var(--space-xs) / 2));
     line-height: 1;
   }
 
@@ -362,6 +363,10 @@
   &_size_xs &-Tag,
   &_size_x &-Tag {
     margin-top: calc(var(--space-xs) / 2);
+  }
+
+  &_disabled &-Tag {
+    opacity: 0.8;
   }
 
   &-GroupName {
@@ -591,6 +596,15 @@
     &_active::after {
       opacity: 1;
       transform: rotate(-50deg) scale(1, 1);
+    }
+
+    &_forCreate {
+      padding-left: var(--input-space);
+
+      &::before,
+      &::after {
+        display: none;
+      }
     }
   }
 
