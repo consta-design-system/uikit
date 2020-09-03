@@ -40,6 +40,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
     labelForCreate,
     multi = false,
   } = props;
+
   return (
     <Popover
       anchorRef={controlRef}
@@ -82,7 +83,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
                       active:
                         !isOptionForCreate &&
                         selectedValues?.some((val) => {
-                          return JSON.stringify(val) === JSON.stringify(menuOption.item);
+                          return JSON.stringify(val) === JSON.stringify(menuOption);
                         }),
                       hovered: index === highlightedIndex,
                     }),

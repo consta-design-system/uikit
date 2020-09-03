@@ -7,10 +7,9 @@ import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { scrollIntoView } from '../../utils/scrollIntoView';
 import { cnSelect } from '../SelectComponents/cnSelect';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
+import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
 import { CommonSelectProps } from '../SelectComponents/types';
 import { Tag } from '../Tag/Tag';
-
-import { SelectDropdown } from './SelectDropdown';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type MultiComboboxProps<ITEM> = CommonSelectProps<ITEM> & {
@@ -18,6 +17,7 @@ export type MultiComboboxProps<ITEM> = CommonSelectProps<ITEM> & {
   onChange?: (v: ITEM[] | null) => void;
   onCreate?(str: string): void;
   getGroupOptions?(group: ITEM): ITEM[];
+  labelForCreate?: string;
 };
 
 type MultiComboboxType = <ITEM>(props: MultiComboboxProps<ITEM>) => React.ReactElement | null;
@@ -275,6 +275,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
           hasGroup={hasGroup}
           selectedValues={arrValue}
           labelForCreate={labelForCreate}
+          multi
         />
       )}
     </SelectContainer>
