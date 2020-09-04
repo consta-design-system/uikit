@@ -1,3 +1,7 @@
+.myClassName {
+  width: 400px;
+}
+
 .ModalStories {
   &-title {
     margin: var(--space-m);
