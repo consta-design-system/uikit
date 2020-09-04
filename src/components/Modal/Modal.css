@@ -1,14 +1,13 @@
 .Modal {
   &-Root {
-    position: fixed;
     z-index: 100;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
+    overflow: auto;
 
     min-width: 400px;
-    max-width: 900px;
+    max-width: 90vw;
     min-height: 200px;
+    max-height: 90vh;
 
     background-color: var(--color-bg-default);
     border-radius: var(--control-radius);
@@ -21,6 +20,10 @@
     height: 100%;
     top: 0;
     left: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     border: none;
     padding: 0;
