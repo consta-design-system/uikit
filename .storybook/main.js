@@ -36,7 +36,7 @@ module.exports = {
     });
 
     config.module.rules.push({
-      test: /src\/[a-zA-Z0-9/._-]*.mdx$/,
+      test: /(\/|\\)src(\/|\\)[\w/\\.-]*\.mdx$/,
       use: [
         {
           loader: 'babel-loader',
@@ -54,7 +54,7 @@ module.exports = {
     });
 
     config.module.rules.push({
-      test: /docs\/[a-zA-Z0-9/._-]*.mdx$/,
+      test: /(\/|\\)docs(\/|\\)[\w/\\.-]*\.mdx$/,
       use: [
         {
           loader: 'babel-loader',
