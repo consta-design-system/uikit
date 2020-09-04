@@ -83,7 +83,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
                       active:
                         !isOptionForCreate &&
                         selectedValues?.some((val) => {
-                          return JSON.stringify(val) === JSON.stringify(menuOption);
+                          return JSON.stringify(val) === JSON.stringify(menuOption.item);
                         }),
                       hovered: index === highlightedIndex,
                     }),
