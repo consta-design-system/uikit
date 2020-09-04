@@ -43,20 +43,21 @@ export const Modal: React.FC<TModalProps> = (props) => {
 
   const modal = (
     <PortalWithTheme preset={theme} container={window.document.body}>
-      <div className={cnModal('Overlay')} />
-      <div className={cnModal('Root', [className])} ref={ref} {...rest}>
-        {hasCloseButton && (
-          <Button
-            className={cnModal('CloseButton')}
-            view="clear"
-            type="button"
-            onClick={onCloseModal}
-            onlyIcon
-            iconLeft={IconClose}
-            iconSize="s"
-          />
-        )}
-        {children}
+      <div className={cnModal('Overlay')}>
+        <div className={cnModal('Root', [className])} ref={ref} {...rest}>
+          {hasCloseButton && (
+            <Button
+              className={cnModal('CloseButton')}
+              view="clear"
+              type="button"
+              onClick={onCloseModal}
+              onlyIcon
+              iconLeft={IconClose}
+              iconSize="s"
+            />
+          )}
+          {children}
+        </div>
       </div>
     </PortalWithTheme>
   );
