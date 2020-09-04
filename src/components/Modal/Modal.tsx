@@ -26,7 +26,15 @@ export const Modal: React.FC<TModalProps> = (props) => {
   const { theme } = useTheme();
 
   React.useEffect(() => {
-    isOpen ? window.document.body.style.overflow = 'hidden' : window.document.body.style.overflow = 'auto';
+    if (isOpen) {
+      window.document.body.style.top = `-${window.scrollY}px`;
+      window.document.body.style.position = 'fixed';
+    } else {
+      const scrollY = window.document.body.style.top;
+      window.document.body.style.position = '';
+      window.document.body.style.top = '';
+      window.scrollTo(0, parseInt(scrollY || '0') * -1);
+    }
   }, [isOpen]);
 
   const onCloseModal = (e: React.MouseEvent): void => {
