@@ -12,8 +12,8 @@
   }
 
   &-action {
-    margin: var(--space-m);
     display: flex;
     justify-content: flex-end;
+    margin: var(--space-m);
   }
 }
