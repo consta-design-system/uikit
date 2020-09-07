@@ -11,7 +11,7 @@ import { Checkbox } from '../../Checkbox/Checkbox';
 import { Text } from '../../Text/Text';
 import { verticalAligns } from '../Cell/TableCell';
 import { Filters } from '../filtering';
-import { Props, sizes, Table, TableRow } from '../Table';
+import { Props, sizes, Table, TableRow, zebraStriped } from '../Table';
 
 import mdx from './Table.mdx';
 
@@ -24,7 +24,6 @@ const defaultProps = {
   borderBetweenColumns: false,
   borderBetweenRows: false,
   isResizable: false,
-  isZebraStriped: false,
   stickyColumns: 0,
   stickyHeader: false,
   verticalAlign: 'top',
@@ -48,7 +47,7 @@ const getKnobs = (replacedProps?: Partial<Props<TableRow>>): Props<TableRow> => 
     borderBetweenColumns: boolean('borderBetweenColumns', props.borderBetweenColumns),
     borderBetweenRows: boolean('borderBetweenRows', props.borderBetweenRows),
     isResizable: boolean('isResizable', props.isResizable),
-    isZebraStriped: boolean('isZebraStriped', props.isZebraStriped),
+    zebraStriped: select('zebraStriped', [undefined, ...zebraStriped], undefined),
     stickyColumns: number('stickyColumns', props.stickyColumns),
     stickyHeader: boolean('stickyHeader', props.stickyHeader),
     emptyRowsPlaceholder: text('emptyRowsPlaceholder', '') || undefined,

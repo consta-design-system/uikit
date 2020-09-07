@@ -33,6 +33,9 @@ const cnTable = cn('Table');
 export const sizes = ['s', 'm', 'l'] as const;
 type Size = typeof sizes[number];
 
+export const zebraStriped = ['odd', 'even'] as const;
+type ZebraStriped = typeof zebraStriped[number];
+
 type TableCSSCustomProperty = {
   '--table-width': string;
   '--table-header-height': string;
@@ -72,7 +75,7 @@ export type Props<T extends TableRow> = {
   isResizable?: boolean;
   activeRow?: ActiveRow;
   verticalAlign?: VerticalAlign;
-  isZebraStriped?: boolean;
+  zebraStriped?: ZebraStriped;
   borderBetweenRows?: boolean;
   borderBetweenColumns?: boolean;
   emptyRowsPlaceholder?: React.ReactNode;
@@ -103,7 +106,7 @@ export const Table = <T extends TableRow>({
   stickyColumns = 0,
   activeRow,
   verticalAlign = 'top',
-  isZebraStriped = false,
+  zebraStriped,
   borderBetweenRows = false,
   borderBetweenColumns = false,
   emptyRowsPlaceholder = defaultEmptyRowsPlaceholder,
@@ -290,7 +293,7 @@ export const Table = <T extends TableRow>({
         {
           size,
           isResizable,
-          isZebraStriped,
+          zebraStriped,
           withBorderBottom: !filteredData.length,
           showHorizontalCellShadow: showHorizontalCellShadow && stickyHeader,
         },
@@ -397,32 +400,35 @@ export const Table = <T extends TableRow>({
         </div>
       )}
       {filteredData.length > 0 ? (
-        filteredData.map((row, rowIdx) => (
-          <div key={row.id} className={cnTable('CellsRow')}>
-            {columnsWithMetaData.map((column, columnIdx) => (
-              <TableCell
-                type="content"
-                key={column.accessor}
-                style={{ left: getStickyLeftOffset(columnIdx) }}
-                wrapperClassName={cnTable('ContentCell', {
-                  isActive: activeRow ? activeRow.id === row.id : false,
-                  isDarkned: activeRow
-                    ? activeRow.id !== undefined && activeRow.id !== row.id
-                    : false,
-                })}
-                onClick={handleSelectRow(row.id)}
-                column={column}
-                verticalAlign={verticalAlign}
-                isClickable={!!isRowsClickable}
-                showVerticalShadow={showVerticalCellShadow}
-                isBorderTop={rowIdx > 0 && borderBetweenRows}
-                isBorderLeft={columnIdx > 0 && borderBetweenColumns}
-              >
-                {row[column.accessor]}
-              </TableCell>
-            ))}
-          </div>
-        ))
+        filteredData.map((row, rowIdx) => {
+          const nth = (rowIdx + 1) % 2 === 0 ? 'odd' : 'even';
+          return (
+            <div key={row.id} className={cnTable('CellsRow', { nth })}>
+              {columnsWithMetaData.map((column, columnIdx) => (
+                <TableCell
+                  type="content"
+                  key={column.accessor}
+                  style={{ left: getStickyLeftOffset(columnIdx) }}
+                  wrapperClassName={cnTable('ContentCell', {
+                    isActive: activeRow ? activeRow.id === row.id : false,
+                    isDarkned: activeRow
+                      ? activeRow.id !== undefined && activeRow.id !== row.id
+                      : false,
+                  })}
+                  onClick={handleSelectRow(row.id)}
+                  column={column}
+                  verticalAlign={verticalAlign}
+                  isClickable={!!isRowsClickable}
+                  showVerticalShadow={showVerticalCellShadow}
+                  isBorderTop={rowIdx > 0 && borderBetweenRows}
+                  isBorderLeft={columnIdx > 0 && borderBetweenColumns}
+                >
+                  {row[column.accessor]}
+                </TableCell>
+              ))}
+            </div>
+          );
+        })
       ) : (
         <div className={cnTable('RowWithoutCells')}>
           <div className={cnTable('EmptyCell')}>{emptyRowsPlaceholder}</div>
