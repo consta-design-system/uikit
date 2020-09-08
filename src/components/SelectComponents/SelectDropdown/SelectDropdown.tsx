@@ -14,7 +14,7 @@ type Props<ITEM> = {
   visibleOptions: Option<ITEM>[];
   highlightedIndex: number;
   getOptionProps(props: OptionProps): GetOptionPropsResult;
-  onCreate?(): void;
+  onCreate?(newLabel: string): void;
   valueForCreate?: string;
   hasGroup?: boolean;
   selectedValues: ITEM[] | null;
@@ -42,6 +42,13 @@ export const SelectDropdown: SelectDropdown = (props) => {
     multi = false,
     getOptionLabel,
   } = props;
+
+  const handleCreate = (): void => {
+    if (typeof onCreate === 'function' && valueForCreate) {
+      onCreate(valueForCreate);
+    }
+  };
+
   return (
     <Popover
       anchorRef={controlRef}
@@ -99,7 +106,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
                           index !== 0 &&
                           option.label.toLowerCase() === valueForCreate?.toLowerCase(),
                       )}
-                      onClick={onCreate}
+                      onClick={handleCreate}
                     >
                       + {labelForCreate} «<b>{valueForCreate}</b>»
                     </button>

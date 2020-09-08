@@ -76,6 +76,10 @@ export const Combobox: ComboboxType = (props) => {
       'div[role=option]',
     );
 
+    if (index > elements.length - 1 || index < 0) {
+      return;
+    }
+
     scrollIntoView(elements[index], optionsRef.current);
   };
 
