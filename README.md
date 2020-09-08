@@ -11,8 +11,8 @@ yarn add @nedra-ui/uikit
 Для использования компонентов на проекте следует подключить тему:
 
 ```tsx
-import { Theme, presetGpnDefault } from '@gpn-design/uikit/Theme';
-import { Button } from '@gpn-design/uikit/Button';
+import { Theme, presetGpnDefault } from '@nedra-ui/uikit/Theme';
+import { Button } from '@nedra-ui/uikit/Button';
 
 const App = () => (
   <Theme preset={presetGpnDefault}>
