@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import { cnTag, getParams, Tag } from '../Tag';
+import { getParams, Tag, tagPropMode } from '../Tag';
 
 type TagProps = React.ComponentProps<typeof Tag>;
 
-const testId = cnTag();
+const testId = 'Tag';
 
 const renderComponent = (props: TagProps) => {
   return render(<Tag data-testid={testId} {...props} />);
@@ -18,34 +18,7 @@ describe('Компонент Tag', () => {
 
   describe('проверка props', () => {
     const label = 'label';
-    describe('проверка mode', () => {
-      const modes = ['button', 'link', 'check', 'cancel'] as const;
 
-      const handleClick = jest.fn();
-
-      modes.forEach((mode) => {
-        it(`присваивает класс для mode=${mode}`, () => {
-          switch (mode) {
-            case 'check':
-              renderComponent({ label, mode, checked: true, onChange: handleClick });
-              break;
-            case 'button':
-              renderComponent({ label, mode, onClick: handleClick });
-              break;
-            case 'link':
-              renderComponent({ label, mode });
-              break;
-            case 'cancel':
-              renderComponent({ label, mode, onCancel: handleClick });
-              break;
-          }
-
-          const tag = screen.getByTestId(testId);
-
-          expect(tag).toHaveClass(cnTag({ mode }));
-        });
-      });
-    });
     describe('проверка className', () => {
       const className = 'className';
 
@@ -58,8 +31,8 @@ describe('Компонент Tag', () => {
       });
     });
   });
+
   describe('проверка getParams', () => {
-    const modes = ['button', 'link', 'check', 'cancel'] as const;
     const onClick = jest.fn();
     const onChange = undefined;
     const onCancel = jest.fn();
@@ -69,27 +42,35 @@ describe('Компонент Tag', () => {
       view: 'filled',
       onClick,
       as: 'button',
+      withAction: true,
     };
 
     const testModeLink = {
       view: 'filled',
       onClick,
       as: 'a',
+      withAction: true,
     };
 
     const testModeCheck = {
       view: checked ? 'filled' : 'stroked',
       onClick: undefined,
       as: 'button',
+      withAction: true,
     };
 
     const testModeCancel = {
       view: 'filled',
       onCancel,
-      as: 'div',
+      as: 'span',
     };
 
-    modes.forEach((mode) => {
+    const testModeInfo = {
+      view: 'filled',
+      as: 'span',
+    };
+
+    tagPropMode.forEach((mode) => {
       it(`возвращает верный обьект при mode=${mode}`, () => {
         const params = getParams(mode, checked, onClick, onChange, onCancel);
 
@@ -105,6 +86,9 @@ describe('Компонент Tag', () => {
             return;
           case 'cancel':
             expect(params).toEqual(testModeCancel);
+            return;
+          case 'info':
+            expect(params).toEqual(testModeInfo);
         }
       });
     });

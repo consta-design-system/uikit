@@ -8,36 +8,30 @@ import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
 import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 
-export type TagBasePropSize = 'xs' | 's' | 'm' | 'l';
-export type TagBasePropGroup =
-  | 1
-  | 2
-  | 3
-  | 4
-  | 5
-  | 6
-  | 7
-  | 8
-  | 9
-  | '1'
-  | '2'
-  | '3'
-  | '4'
-  | '5'
-  | '6'
-  | '7'
-  | '8'
-  | '9';
+export const tagBasePropSize = ['xs', 's', 'm', 'l'] as const;
+export const tagBasePropSizeDefault = tagBasePropSize[2];
+export type TagBasePropSize = typeof tagBasePropSize[number];
+
+export const tagBasePropGroupNumberValue = [1, 2, 3, 4, 5, 6, 7, 8, 9] as const;
+export const tagBasePropGroupStringValue = ['1', '2', '3', '4', '5', '6', '7', '8', '9'] as const;
+export const tagBasePropGroup = [...tagBasePropGroupNumberValue, ...tagBasePropGroupStringValue];
+
+export type TagBasePropGroup = typeof tagBasePropGroup[number];
+
+export const tagBasePropView = ['stroked', 'filled'] as const;
+export const tagBasePropViewDefault = tagBasePropView[0];
+export type TagBasePropView = typeof tagBasePropView[number];
 
 export type Props = {
   size?: TagBasePropSize;
   label: string;
   children?: never;
-  view?: 'stroked' | 'filled';
+  view?: TagBasePropView;
   group?: TagBasePropGroup;
   onCancel?: React.MouseEventHandler<HTMLButtonElement>;
   icon?: React.FC<IconProps>;
   iconSize?: IconPropSize;
+  withAction?: boolean;
 };
 
 export const cnTagBase = cn('TagBase');
@@ -51,15 +45,16 @@ const sizeMap: Record<TagBasePropSize, IconPropSize> = {
 
 export const TagBase: ComponentWithAs<Props> = forwardRefWithAs<Props>((props, ref) => {
   const {
-    size = 'm',
+    size = tagBasePropSizeDefault,
     as = 'div',
     label,
     className,
     group,
-    view = 'stroked',
+    view = tagBasePropViewDefault,
     onCancel,
     icon: Icon,
     iconSize,
+    withAction,
     ...otherProps
   } = props;
 
@@ -72,7 +67,17 @@ export const TagBase: ComponentWithAs<Props> = forwardRefWithAs<Props>((props, r
   return (
     <Tag
       {...otherProps}
-      className={cnTagBase({ size, view, withCancel, withIcon, group }, [className])}
+      className={cnTagBase(
+        {
+          size,
+          view,
+          withCancel,
+          withIcon,
+          group,
+          withAction,
+        },
+        [className],
+      )}
       ref={ref}
     >
       {withCancel || Icon ? (
