@@ -40,7 +40,6 @@ export const SelectDropdown: SelectDropdown = (props) => {
     labelForCreate,
     multi = false,
   } = props;
-
   return (
     <Popover
       anchorRef={controlRef}
