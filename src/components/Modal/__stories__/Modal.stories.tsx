@@ -43,7 +43,7 @@ export function Playground() {
           Заголовок модалки
         </Text>
         <Text as="p" size="m" view="primary" className={cnModalStories('body')}>
-          Описание в теле модалки. Здесь может находится какая-то информация. Lorem ipsum dolor sit
+          Описание в теле модалки. Здесь может находиться какая-то информация. Lorem ipsum dolor sit
           amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
         </Text>
         <div className={cnModalStories('action')}>
