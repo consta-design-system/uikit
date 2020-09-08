@@ -20,6 +20,7 @@ type Props<ITEM> = {
   selectedValues: ITEM[] | null;
   labelForCreate?: string;
   multi?: boolean;
+  getOptionLabel(option: ITEM): string;
 };
 
 type SelectDropdown = <ITEM>(props: Props<ITEM>) => React.ReactElement | null;
@@ -39,6 +40,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
     selectedValues,
     labelForCreate,
     multi = false,
+    getOptionLabel,
   } = props;
   return (
     <Popover
@@ -70,7 +72,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
                 )}
                 <div
                   aria-selected={selectedValues?.some(
-                    (val) => JSON.stringify(val) === JSON.stringify(option),
+                    (val) => getOptionLabel(val) === getOptionLabel(option.item),
                   )}
                   role="option"
                   key={option.label}
@@ -82,7 +84,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
                       active:
                         !isOptionForCreate &&
                         selectedValues?.some((val) => {
-                          return JSON.stringify(val) === JSON.stringify(menuOption.item);
+                          return getOptionLabel(val) === getOptionLabel(menuOption.item);
                         }),
                       hovered: index === highlightedIndex,
                     }),

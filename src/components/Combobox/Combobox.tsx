@@ -242,6 +242,7 @@ export const Combobox: ComboboxType = (props) => {
           hasGroup={hasGroup}
           selectedValues={arrValue}
           labelForCreate={labelForCreate}
+          getOptionLabel={getOptionLabel}
         />
       )}
     </SelectContainer>

@@ -276,6 +276,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
           selectedValues={arrValue}
           labelForCreate={labelForCreate}
           multi
+          getOptionLabel={getOptionLabel}
         />
       )}
     </SelectContainer>

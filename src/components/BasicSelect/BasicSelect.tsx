@@ -174,6 +174,7 @@ export const BasicSelect: Select = (props) => {
           optionsRef={optionsRef}
           id={id}
           selectedValues={arrValue}
+          getOptionLabel={getOptionLabel}
         />
       )}
     </SelectContainer>
