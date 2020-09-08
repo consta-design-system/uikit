@@ -1,9 +1,9 @@
-import '../SelectComponents/Select.css';
-
 import React, { useRef, useState } from 'react';
 
 import { useSelect } from '../../hooks/useSelect/useSelect';
+import { IconClose } from '../../icons/IconClose/IconClose';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
+import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { scrollIntoView } from '../../utils/scrollIntoView';
 import { cnSelect } from '../SelectComponents/cnSelect';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
@@ -16,14 +16,17 @@ import {
   DefaultPropWidth,
 } from '../SelectComponents/types';
 
-export type SimpleSelectProps<ITEM> = CommonSelectProps<ITEM> & {
+export type ComboboxSelectProps<ITEM> = CommonSelectProps<ITEM> & {
   value?: ITEM | null;
   onChange?: (v: ITEM | null) => void;
+  onCreate?(str: string): void;
+  getGroupOptions?(group: ITEM): ITEM[];
+  labelForCreate?: string;
 };
 
-type Select = <ITEM>(props: SimpleSelectProps<ITEM>) => React.ReactElement | null;
+type ComboboxType = <ITEM>(props: ComboboxSelectProps<ITEM>) => React.ReactElement | null;
 
-export const BasicSelect: Select = (props) => {
+export const Combobox: ComboboxType = (props) => {
   const {
     placeholder,
     onBlur,
@@ -39,21 +42,30 @@ export const BasicSelect: Select = (props) => {
     form = DefaultPropForm,
     view = DefaultPropView,
     size = DefaultPropSize,
+    onCreate,
+    getGroupOptions,
+    labelForCreate = 'Добавить',
     ...restProps
   } = props;
   const [isFocused, setIsFocused] = useState(false);
   const [val, setValue] = useState(value);
+  const [inputData, setInputData] = useState<{ value: string | undefined }>({
+    value: '',
+  });
+  const toggleRef = useRef<HTMLInputElement>(null);
 
   const handlerChangeValue = (v: typeof value): void => {
     if (typeof onChange === 'function' && v) {
       onChange(v);
     }
     setValue(v);
+    setInputData({ value: toggleRef.current?.value });
   };
 
   const optionsRef = useRef<HTMLDivElement | null>(null);
   const controlRef = useRef<HTMLDivElement | null>(null);
   const arrValue = typeof val !== 'undefined' && val !== null ? [val] : null;
+  const hasGroup = typeof getGroupOptions === 'function';
 
   const scrollToIndex = (index: number): void => {
     if (!optionsRef.current) {
@@ -83,6 +95,8 @@ export const BasicSelect: Select = (props) => {
     scrollToIndex,
     disabled,
     getOptionLabel,
+    onCreate,
+    getGroupOptions,
   });
 
   const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>): void => {
@@ -111,7 +125,44 @@ export const BasicSelect: Select = (props) => {
     setIsFocused(true);
   };
 
-  const toggleRef = useRef(null);
+  const handleClear = (): void => {
+    setInputData({ value: '' });
+    setValue(null);
+    typeof onChange === 'function' && onChange(null);
+    toggleRef.current?.focus();
+  };
+
+  const handleClearButtonFocus = (): void => {
+    setIsFocused(true);
+  };
+
+  const handleClearButtonBlur = (): void => {
+    setIsFocused(false);
+  };
+
+  const handleInputChange = (): void => {
+    if (!isOpen) {
+      setOpen(true);
+    }
+    const inputValue = toggleRef.current?.value ?? '';
+    setInputData({ value: inputValue });
+  };
+
+  const handleControlClick = (): void => {
+    toggleRef.current?.focus();
+  };
+
+  const showPlaceholder =
+    (!arrValue?.length && inputData.value === '') || (arrValue === null && inputData.value === '');
+
+  const showInput = arrValue !== null && arrValue.length > 0;
+
+  const handleCreate = (): void => {
+    if (typeof onCreate === 'function') {
+      const newValue = toggleRef.current?.value;
+      newValue && onCreate(newValue);
+    }
+  };
 
   return (
     <SelectContainer
@@ -124,36 +175,49 @@ export const BasicSelect: Select = (props) => {
       {...restProps}
     >
       <div
-        className={cnSelect('Control')}
+        className={cnSelect('Control', { hasInput: true })}
         ref={controlRef}
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         id={id}
       >
-        <div className={cnSelect('ControlInner')}>
+        {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus */}
+        <div
+          className={cnSelect('ControlInner')}
+          onClick={handleControlClick}
+          onKeyDown={handleControlClick}
+          role="button"
+        >
           <div className={cnSelect('ControlValueContainer')}>
+            {arrValue && (
+              <span className={cnSelect('ControlValue')}>{getOptionLabel(arrValue[0])}</span>
+            )}
+            {showPlaceholder && <span className={cnSelect('Placeholder')}>{placeholder}</span>}
             <input
-              {...getToggleProps()}
-              type="button"
+              {...getToggleProps({ onChange: handleInputChange })}
+              type="text"
               onFocus={handleInputFocus}
               onBlur={handleInputBlur}
               aria-label={ariaLabel}
               ref={toggleRef}
-              className={cnSelect('FakeField')}
-              readOnly
+              value={inputData.value}
+              className={cnSelect('Input', { size, hide: showInput })}
             />
-            {arrValue ? (
-              <span className={cnSelect('ControlValue')} title={getOptionLabel(arrValue[0])}>
-                {getOptionLabel(arrValue[0])}
-              </span>
-            ) : (
-              <span className={cnSelect('Placeholder')} title="placeholder">
-                {placeholder || ''}
-              </span>
-            )}
           </div>
         </div>
         <span className={cnSelect('Indicators')}>
+          {arrValue && (
+            <button
+              type="button"
+              onClick={handleClear}
+              className={cnSelect('ClearIndicator', [cnMixFocus()])}
+              onFocus={handleClearButtonFocus}
+              onBlur={handleClearButtonBlur}
+            >
+              <IconClose size="xs" className={cnSelect('ClearIndicatorIcon')} />
+            </button>
+          )}
+          <span className={cnSelect('Delimiter')} />
           <button
             type="button"
             className={cnSelect('IndicatorsDropdown')}
@@ -171,9 +235,13 @@ export const BasicSelect: Select = (props) => {
           visibleOptions={visibleOptions}
           highlightedIndex={highlightedIndex}
           getOptionProps={getOptionProps}
+          onCreate={handleCreate}
           optionsRef={optionsRef}
+          valueForCreate={inputData.value}
           id={id}
+          hasGroup={hasGroup}
           selectedValues={arrValue}
+          labelForCreate={labelForCreate}
         />
       )}
     </SelectContainer>
