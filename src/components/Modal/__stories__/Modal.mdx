@@ -1,0 +1,37 @@
+# Modal
+
+Modal - компонент контейнер с белым фоном для отображения содержимого на полупрозрачном фоне на всём экране.
+
+## Список свойств
+
+| Свойство               | Тип или варианты значения                                             | По умолчанию              |
+| ---------------------- | --------------------------------------------------------------------- | ------------------------- |
+| isOpen?                | `boolean`                                                             | -                         |
+| onClose                | `(e: React.MouseEvent) => void`                                       | -                         |
+| hasCloseButton?        | `boolean`                                                             | `true`                    |
+| closeByClickOnOverlay? | `boolean`                                                             | `true`                    |
+| className?             | `string`                                                              | -                         |
+| children?              | `React.ReactNode`                                                     | -                         |
+
+## Пример использования
+
+```ts
+<Modal className='myClassName' isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+  <Text as='p' size='s' view='secondary' className={cnModalStories('title')}>
+    Заголовок модалки
+  </Text>
+  <Text as='p' size='m' view='primary' className={cnModalStories('body')}>
+    Описание в теле модалки. Здесь может находится какая-то информация.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
+  </Text>
+  <div className={cnModalStories('action')}>
+    <Button
+      size="m"
+      view="primary"
+      label="Закрыть"
+      width='default'
+      onClick={() => setIsModalOpen(false)}
+    />
+  </div>
+</Modal>
+```

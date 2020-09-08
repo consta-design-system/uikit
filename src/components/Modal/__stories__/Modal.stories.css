@@ -1,0 +1,19 @@
+.myClassName {
+  width: 400px;
+}
+
+.ModalStories {
+  &-title {
+    margin: var(--space-m);
+  }
+
+  &-body {
+    margin: var(--space-m);
+  }
+
+  &-action {
+    display: flex;
+    justify-content: flex-end;
+    margin: var(--space-m);
+  }
+}
