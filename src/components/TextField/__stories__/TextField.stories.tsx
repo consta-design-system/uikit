@@ -5,6 +5,8 @@ import { IconPhoto } from '../../../icons/IconPhoto/IconPhoto';
 import { createMetadata } from '../../../utils/storybook';
 import { TextField } from '../TextField';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 import mdx from './TextField.mdx';
 
 const defaultKnobs = () => ({
@@ -64,19 +66,19 @@ export function Playground() {
   const leftSideSelect = {
     text: leftSideText,
     icon: IconPhoto,
-    false: null,
+    false: undefined,
   };
 
   const rightSideSelect = {
     text: rightSideText,
     icon: IconPhoto,
-    false: null,
+    false: undefined,
   };
 
   const leftSide = leftSideSelect[leftSideType];
   const rightSide = rightSideSelect[rightSideType];
 
-  const handleChange = ({ value }) => {
+  const handleChange = ({ value }: { value: string | null }) => {
     setValue(value);
   };
 

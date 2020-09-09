@@ -6,6 +6,8 @@ import { IconAttach } from '../../../icons/IconAttach/IconAttach';
 import { createMetadata } from '../../../utils/storybook';
 import { Tag } from '../Tag';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 import mdx from './Tag.mdx';
 
 const defaultKnobs = () => ({
@@ -20,7 +22,7 @@ export function Playground() {
   const { label, size, mode, group: groupProp, icon } = defaultKnobs();
   const [checked, setChecked] = useState<boolean>(false);
   const group = typeof groupProp === 'number' ? groupProp : undefined;
-  const Icon = icon && IconAttach;
+  const Icon = icon ? IconAttach : undefined;
 
   function getTag() {
     switch (mode) {

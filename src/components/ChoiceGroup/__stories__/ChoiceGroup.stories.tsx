@@ -17,6 +17,8 @@ import {
   choiceGroupViews,
 } from '../ChoiceGroup';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 import mdx from './ChoiceGroup.mdx';
 
 declare type Item = {
@@ -51,8 +53,8 @@ const defaultKnobs = () => ({
 const cnChoiceGroupStories = cn('ChoiceGroupStories');
 
 export function Playground() {
-  const [valueMultiple, setValueMultiple] = useState<Item[]>(null);
-  const [value, setValue] = useState<Item>(null);
+  const [valueMultiple, setValueMultiple] = useState<Item[] | null>(null);
+  const [value, setValue] = useState<Item | null>(null);
   const { multiple, size, view, form, withIcon, onlyIcon } = defaultKnobs();
 
   const getIcon = withIcon ? (item: Item) => item.icon : undefined;

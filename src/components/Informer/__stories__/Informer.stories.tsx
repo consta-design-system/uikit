@@ -5,6 +5,8 @@ import { IconLeaf } from '../../../icons/IconLeaf/IconLeaf';
 import { createMetadata } from '../../../utils/storybook';
 import { Informer } from '../Informer';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 import mdx from './Informer.mdx';
 
 const defaultKnobs = () => ({
@@ -24,7 +26,7 @@ export function Playground() {
       title={title}
       label={label}
       view={view}
-      icon={icon ? IconLeaf : null}
+      icon={icon ? IconLeaf : undefined}
     />
   );
 }

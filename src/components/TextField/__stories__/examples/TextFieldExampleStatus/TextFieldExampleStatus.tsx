@@ -5,8 +5,8 @@ import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExamp
 import { TextField } from '../../../TextField';
 
 export const TextFieldExampleStatus = () => {
-  const [value, setValue] = useState(null);
-  const handleChange = ({ value }) => setValue(value);
+  const [value, setValue] = useState<string | null>(null);
+  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
