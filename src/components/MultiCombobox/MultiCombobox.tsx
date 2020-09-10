@@ -171,7 +171,10 @@ export const MultiCombobox: MultiComboboxType = (props) => {
 
   const valueTags = arrValue?.map((option) => {
     const label = getOptionLabel(option);
-    const handleCancel = (): void => handleRemoveValue(label);
+    const handleCancel = (e: React.SyntheticEvent): void => {
+      e.stopPropagation();
+      handleRemoveValue(label);
+    };
     const commonProps = {
       size,
       label,
