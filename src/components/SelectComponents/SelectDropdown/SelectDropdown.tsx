@@ -52,7 +52,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
   return (
     <Popover
       anchorRef={controlRef}
-      possibleDirections={['downCenter', 'upLeft', 'downRight', 'upRight']}
+      possibleDirections={['downStartLeft', 'upStartLeft', 'downStartRight', 'upStartRight']}
       offset={1}
     >
       <SelectDropdownContainer role="listbox" aria-activedescendant={`${id}-${highlightedIndex}`}>
