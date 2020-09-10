@@ -3,7 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import { cnIcon } from '../../../icons/Icon/Icon';
 import { IconAttach } from '../../../icons/IconAttach/IconAttach';
-import { cnTagBase, TagBase } from '../TagBase';
+import { cnTagBase, TagBase, tagBasePropGroup, tagBasePropSize, tagBasePropView } from '../TagBase';
 
 type TagBaseProps = React.ComponentProps<typeof TagBase>;
 
@@ -26,9 +26,7 @@ describe('Компонент TagBase', () => {
       expect(tagBase.textContent).toEqual(label);
     });
     describe('проверка size', () => {
-      const sizes = ['xs', 's', 'm', 'l'] as const;
-
-      sizes.forEach((size) => {
+      tagBasePropSize.forEach((size) => {
         it(`присваивает класс для size=${size}`, () => {
           renderComponent({ label, size });
 
@@ -39,9 +37,7 @@ describe('Компонент TagBase', () => {
       });
     });
     describe('проверка group', () => {
-      const groups = [1, 2, 3, 4, 5, 6, 7, 8, 9] as const;
-
-      groups.forEach((group) => {
+      tagBasePropGroup.forEach((group) => {
         it(`присваивает класс для group=${group}`, () => {
           renderComponent({ label, group });
 
@@ -52,9 +48,7 @@ describe('Компонент TagBase', () => {
       });
     });
     describe('проверка view', () => {
-      const views = ['stroked', 'filled'] as const;
-
-      views.forEach((view) => {
+      tagBasePropView.forEach((view) => {
         it(`присваивает класс для view=${view}`, () => {
           renderComponent({ label, view });
 
@@ -62,6 +56,15 @@ describe('Компонент TagBase', () => {
 
           expect(tagBase).toHaveClass(cnTagBase({ view }));
         });
+      });
+    });
+    describe('проверка withAction', () => {
+      it(`присваивает класс для withAction`, () => {
+        renderComponent({ label, withAction: true });
+
+        const tagBase = screen.getByTestId(testId);
+
+        expect(tagBase).toHaveClass(cnTagBase({ withAction: true }));
       });
     });
     describe('проверка onCancel', () => {

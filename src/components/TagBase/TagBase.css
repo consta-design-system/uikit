@@ -17,7 +17,7 @@
   font-family: var(--font--primary);
   font-size: var(--tag-base-font-size);
   line-height: var(--tag-base-height);
-  cursor: pointer;
+  text-decoration: none;
   transition: box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
 
   &:focus,
@@ -25,24 +25,30 @@
     outline: none;
   }
 
-  &:hover {
-    --tag-base-typo-color: var(--color-control-typo-ghost-hover);
-  }
-
   &_view {
     &_stroked {
       --tag-base-border-color: var(--color-control-bg-border-default);
       --tag-base-bg-color: var(--color-bg-default);
+    }
 
+    &_filled {
+      --tag-base-border-color: transparent;
+      --tag-base-bg-color: var(--color-control-bg-ghost);
+    }
+  }
+
+  &_withAction {
+    cursor: pointer;
+  }
+
+  &_withAction&_view {
+    &_stroked {
       &:hover {
         --tag-base-border-color: var(--color-control-bg-border-default-hover);
       }
     }
 
     &_filled {
-      --tag-base-border-color: transparent;
-      --tag-base-bg-color: var(--color-control-bg-ghost);
-
       &:hover {
         --tag-base-bg-color: var(--color-control-bg-ghost-hover);
         --tag-base-border-color: transparent;

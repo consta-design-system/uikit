@@ -5,7 +5,7 @@ import React from 'react';
 import { IconClose } from '../../../icons/IconClose/IconClose';
 import { cn } from '../../../utils/bem';
 import { Button } from '../../Button/Button';
-import { TableSelectedOption } from '../SelectedOption/TableSelectedOption';
+import { Tag } from '../../Tag/Tag';
 
 const cnTableSelectedOptionsList = cn('TableSelectedOptionsList');
 
@@ -20,9 +20,14 @@ export const TableSelectedOptionsList: React.FC<Props> = ({ values, onRemove, on
     <div className={cnTableSelectedOptionsList(null)}>
       <div className={cnTableSelectedOptionsList('Options')}>
         {values.map((option) => (
-          <div className={cnTableSelectedOptionsList('Option')} key={option.id}>
-            <TableSelectedOption name={option.name} onRemove={(): void => onRemove(option.id)} />
-          </div>
+          <Tag
+            className={cnTableSelectedOptionsList('Option')}
+            key={option.id}
+            label={option.name}
+            size="xs"
+            mode="cancel"
+            onCancel={(): void => onRemove(option.id)}
+          />
         ))}
       </div>
       <Button
