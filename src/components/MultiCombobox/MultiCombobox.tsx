@@ -182,8 +182,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
       className: cnSelect('Tag'),
     };
     return disabled ? (
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      <Tag mode="button" {...commonProps} onClick={(): void => {}} />
+      <Tag mode="info" {...commonProps} />
     ) : (
       <Tag mode="cancel" {...commonProps} onCancel={handleCancel} />
     );
