@@ -12,7 +12,7 @@ import { Checkbox } from '../../../Checkbox';
 const emptyFunction = action('emptyFunction');
 
 export function CheckboxExampleHead() {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<number[] | null>(null);
   const { getOnChange, getChecked } = useChoiceGroup<number, React.ChangeEvent<HTMLInputElement>>({
     value,
     getKey: (item) => item,
@@ -62,7 +62,7 @@ export function CheckboxExampleHead() {
 }
 
 export const CheckboxExampleHead2 = () => {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<number[] | null>(null);
   const { getOnChange, getChecked } = useChoiceGroup<number, React.ChangeEvent<HTMLInputElement>>({
     value,
     getKey: (item) => item,
@@ -123,7 +123,7 @@ export function CheckboxExampleNegation() {
 }
 
 export function CheckboxExampleGeneralization() {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<number[] | null>(null);
   const { getOnChange, getChecked } = useChoiceGroup<number, React.ChangeEvent<HTMLInputElement>>({
     value,
     getKey: (item) => item,

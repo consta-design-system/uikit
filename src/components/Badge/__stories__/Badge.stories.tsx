@@ -5,6 +5,8 @@ import { IconUser } from '../../../icons/IconUser/IconUser';
 import { createMetadata } from '../../../utils/storybook';
 import { Badge } from '../Badge';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 import mdx from './Badge.mdx';
 
 const defaultKnobs = () => ({
@@ -29,7 +31,7 @@ export function Playground() {
         status={status}
         form={form}
         minified={minified}
-        icon={icon ? IconUser : null}
+        icon={icon ? IconUser : undefined}
       />
     </div>
   );

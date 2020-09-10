@@ -6,8 +6,8 @@ import { Button } from '../../../../Button/Button';
 import { TextField } from '../../../TextField';
 
 export const TextFieldExampleFormBasic = () => {
-  const [value, setValue] = useState(null);
-  const handleChange = ({ value }) => setValue(value);
+  const [value, setValue] = useState<string | null>(null);
+  const handleChange = ({ value }: { value: string | null }) => setValue(value);
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <TextField placeholder="Default" value={value} onChange={handleChange} />
@@ -18,8 +18,8 @@ export const TextFieldExampleFormBasic = () => {
 };
 
 export function TextFieldExampleFormHybrid() {
-  const [value, setValue] = useState(null);
-  const handleChange = ({ value }) => setValue(value);
+  const [value, setValue] = useState<string | null>(null);
+  const handleChange = ({ value }: { value: string | null }) => setValue(value);
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <div>

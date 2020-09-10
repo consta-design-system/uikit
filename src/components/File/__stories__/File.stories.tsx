@@ -6,6 +6,8 @@ import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import { File } from '../File';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 import mdx from './File.mdx';
 
 const defaultKnobs = () => ({

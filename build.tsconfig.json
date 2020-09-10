@@ -24,5 +24,15 @@
     "removeComments": false
   },
   "include": ["./src/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "./src/**/*.stories/**",
+    "./src/**/*.stories.*",
+    "./src/**/*.test.*",
+    "./src/**/__tests__/**",
+    "./src/**/__stories__/**",
+    "./src/**/__mocks__/**",
+    "./src/**/__mock__/**",
+    "./src/uiKit/**"
+  ]
 }

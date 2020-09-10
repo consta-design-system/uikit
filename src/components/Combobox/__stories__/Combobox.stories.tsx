@@ -4,12 +4,17 @@ import { boolean, select, text } from '@storybook/addon-knobs';
 import { createMetadata, createStory } from '../../../utils/storybook';
 import { Combobox } from '../Combobox';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 import mdx from './Combobox.mdx';
 
 type SelectOption = {
   value: string;
   label: string;
 };
+
+type Group = { label: string; items: SelectOption[] };
+type Option = SelectOption | Group;
 
 const simpleItems = [
   { label: 'Neptunium', value: 'Neptunium' },
@@ -42,9 +47,6 @@ const simpleItems = [
   { label: 'Tennessine', value: 'Tennessine' },
   { label: 'Oganesson', value: 'Oganesson' },
 ];
-
-type Group = { name: string; items: SelectOption[] };
-type GroupOptions = Group[];
 
 const groups = [
   {
@@ -127,11 +129,11 @@ const getKnobs = () => ({
 
 const Default = (props: {
   value?: SelectOption;
-  items?: SelectOption[] | GroupOptions;
-  getItemLabel?(item: SelectOption | Group): string;
-  getGroupOptions?(item: Group): SelectOption[];
+  items?: Option[];
+  getItemLabel?(item: Option): string;
+  getGroupOptions?(option: Option): SelectOption[];
 }): JSX.Element => {
-  const getItemLabelDefault = (option: SelectOption): string => option.label;
+  const getItemLabelDefault = (option: Option): string => option.label;
   const { items = simpleItems, getItemLabel = getItemLabelDefault, getGroupOptions } = props;
 
   let options = items;

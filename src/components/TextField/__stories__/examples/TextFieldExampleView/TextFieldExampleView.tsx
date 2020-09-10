@@ -5,8 +5,9 @@ import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExamp
 import { TextField } from '../../../TextField';
 
 export const TextFieldExampleView = () => {
-  const [value, setValue] = useState(null);
-  const handleChange = ({ value }) => setValue(value);
+  const [value, setValue] = useState<string | null>(null);
+  const handleChange = ({ value }: { value: string | null }) => setValue(value);
+
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <TextField
@@ -21,8 +22,9 @@ export const TextFieldExampleView = () => {
 };
 
 export const TextFieldExampleViewDisabled = () => {
-  const [value, setValue] = useState(null);
-  const handleChange = ({ value }) => setValue(value);
+  const [value, setValue] = useState<string | null>(null);
+  const handleChange = ({ value }: { value: string | null }) => setValue(value);
+
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <TextField placeholder="Самое обычное поле" disabled value={value} onChange={handleChange} />

@@ -5,6 +5,8 @@ import { createMetadata } from '../../../utils/storybook';
 import { Button } from '../../Button/Button';
 import { FileField } from '../FileField';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 import mdx from './FileField.mdx';
 
 export function Playground() {
