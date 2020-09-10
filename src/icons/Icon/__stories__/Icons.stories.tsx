@@ -121,6 +121,8 @@ import { IconWarning } from '../../IconWarning/IconWarning';
 import { IconWorld } from '../../IconWorld/IconWorld';
 
 import { IconsItem } from './Item/Icons-Item';
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 import mdx from './Icon.mdx';
 
 const defaultKnobs = () => ({
@@ -251,12 +253,16 @@ const icons = {
   IconVZD,
   IconWarning,
   IconWorld,
-};
+} as const;
+
+type Name = keyof typeof icons;
+
+const names = Object.keys(icons) as Name[];
 
 export function Playground() {
   return (
     <div className="tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full">
-      {Object.keys(icons).map((name) => (
+      {names.map((name) => (
         <IconsItem key={name} name={name} icon={icons[name]} {...defaultKnobs()} />
       ))}
     </div>
@@ -265,7 +271,6 @@ export function Playground() {
 
 export default {
   title: 'Components|/Icons',
-  component: Playground,
   parameters: {
     docs: {
       page: mdx,

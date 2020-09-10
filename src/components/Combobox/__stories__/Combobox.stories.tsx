@@ -4,6 +4,8 @@ import { boolean, select, text } from '@storybook/addon-knobs';
 import { createMetadata, createStory } from '../../../utils/storybook';
 import { Combobox } from '../Combobox';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 import mdx from './Combobox.mdx';
 
 type SelectOption = {

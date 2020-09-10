@@ -5,8 +5,8 @@ import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExamp
 import { TextField } from '../../../TextField';
 
 export const TextFieldExampleSize = () => {
-  const [value, setValue] = useState(null);
-  const handleChange = ({ value }) => setValue(value);
+  const [value, setValue] = useState<string | null>(null);
+  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
@@ -27,8 +27,8 @@ export const TextFieldExampleSize = () => {
 };
 
 export const TextFieldExampleSizeWidth = () => {
-  const [value, setValue] = useState(null);
-  const handleChange = ({ value }) => setValue(value);
+  const [value, setValue] = useState<string | null>(null);
+  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
@@ -43,8 +43,10 @@ export const TextFieldExampleSizeWidth = () => {
 };
 
 export const TextFieldExampleSizeRows = () => {
-  const [value, setValue] = useState('Я иду и пою обо всем хорошем и улыбку свою я дарю прохожим');
-  const handleChange = ({ value }) => setValue(value);
+  const [value, setValue] = useState<string | null>(
+    'Я иду и пою обо всем хорошем и улыбку свою я дарю прохожим',
+  );
+  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
@@ -54,8 +56,10 @@ export const TextFieldExampleSizeRows = () => {
 };
 
 export const TextFieldExampleSizeMinRows = () => {
-  const [value, setValue] = useState('Я иду и пою обо всем хорошем и улыбку свою я дарю прохожим');
-  const handleChange = ({ value }) => setValue(value);
+  const [value, setValue] = useState<string | null>(
+    'Я иду и пою обо всем хорошем и улыбку свою я дарю прохожим',
+  );
+  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>

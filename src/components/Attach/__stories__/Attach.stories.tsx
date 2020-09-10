@@ -8,6 +8,8 @@ import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import { Attach } from '../Attach';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 import mdx from './Attach.mdx';
 
 const defaultKnobs = () => ({

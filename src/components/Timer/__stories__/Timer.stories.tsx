@@ -4,6 +4,8 @@ import { boolean, number, select } from '@storybook/addon-knobs';
 import { createMetadata } from '../../../utils/storybook';
 import { Timer } from '../Timer';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 import mdx from './Timer.mdx';
 
 const defaultKnobs = () => ({
