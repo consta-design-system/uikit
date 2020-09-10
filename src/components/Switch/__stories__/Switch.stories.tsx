@@ -4,6 +4,8 @@ import { boolean, select, text } from '@storybook/addon-knobs';
 import { createMetadata } from '../../../utils/storybook';
 import { Switch } from '../Switch';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 import mdx from './Switch.mdx';
 
 const defaultKnobs = () => ({
@@ -16,7 +18,7 @@ export function Playground() {
   const { disabled, size, label } = defaultKnobs();
   const [checked, setChecked] = useState<boolean>(false);
 
-  const handleChange = ({ checked }) => setChecked(checked);
+  const handleChange = ({ checked }: { checked: boolean }) => setChecked(checked);
 
   return (
     <form>

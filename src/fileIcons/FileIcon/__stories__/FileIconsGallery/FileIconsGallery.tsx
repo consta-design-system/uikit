@@ -55,18 +55,15 @@ const icons = {
   FileIconZip,
 } as const;
 
-type Names = keyof typeof icons;
+type Name = keyof typeof icons;
+
+const names = Object.keys(icons) as Name[];
 
 export function FileIconsGallery() {
   return (
     <div className="tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full">
-      {Object.keys(icons).map((name) => (
-        <FileIconsGalleryItem
-          key={name}
-          name={name}
-          icon={icons[name as Names]}
-          {...defaultKnobs()}
-        />
+      {names.map((name) => (
+        <FileIconsGalleryItem key={name} name={name} icon={icons[name]} {...defaultKnobs()} />
       ))}
     </div>
   );

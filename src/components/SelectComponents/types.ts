@@ -26,3 +26,19 @@ export const DefaultPropForm: PropForm = 'default';
 export const view = ['default', 'clear'] as const;
 export type PropView = typeof view[number];
 export const DefaultPropView: PropView = 'default';
+
+export type CommonSelectProps<ITEM> = {
+  options: ITEM[];
+  id: string;
+  className?: string;
+  placeholder?: string;
+  disabled?: boolean;
+  form?: PropForm;
+  size?: PropSize;
+  width?: PropWidth;
+  view?: PropView;
+  ariaLabel?: string;
+  getOptionLabel(arg: ITEM): string;
+  onBlur?: (event?: React.FocusEvent<HTMLInputElement>) => void;
+  onFocus?: (event?: React.FocusEvent<HTMLInputElement>) => void;
+};

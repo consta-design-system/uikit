@@ -4,15 +4,22 @@ import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { IconAttach } from '../../../icons/IconAttach/IconAttach';
 import { createMetadata } from '../../../utils/storybook';
-import { Tag } from '../Tag';
+import {
+  tagBasePropGroupNumberValue,
+  tagBasePropSize,
+  tagBasePropSizeDefault,
+} from '../../TagBase/TagBase';
+import { Tag, tagPropMode, tagPropModeDefault } from '../Tag';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 import mdx from './Tag.mdx';
 
 const defaultKnobs = () => ({
   label: text('label', 'Label'),
-  size: select('size', ['xs', 's', 'm', 'l'], 'm'),
-  mode: select('mode', ['button', 'link', 'check', 'cancel'], 'button'),
-  group: select('group', ['', 1, 2, 3, 4, 5, 6, 7, 8, 9], ''),
+  size: select('size', tagBasePropSize, tagBasePropSizeDefault),
+  mode: select('mode', tagPropMode, tagPropModeDefault),
+  group: select('group', ['', ...tagBasePropGroupNumberValue], ''),
   icon: boolean('icon', false),
 });
 
@@ -20,7 +27,7 @@ export function Playground() {
   const { label, size, mode, group: groupProp, icon } = defaultKnobs();
   const [checked, setChecked] = useState<boolean>(false);
   const group = typeof groupProp === 'number' ? groupProp : undefined;
-  const Icon = icon && IconAttach;
+  const Icon = icon ? IconAttach : undefined;
 
   function getTag() {
     switch (mode) {
@@ -60,6 +67,8 @@ export function Playground() {
         );
       case 'link':
         return <Tag mode={mode} href="#" label={label} size={size} group={group} icon={Icon} />;
+      case 'info':
+        return <Tag mode={mode} label={label} size={size} group={group} icon={Icon} />;
     }
   }
 

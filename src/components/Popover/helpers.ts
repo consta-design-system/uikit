@@ -45,6 +45,12 @@ export const getPositionsByDirection = ({
     down: anchorCenter.y - arrowOffset,
   };
 
+  const xForStartLeftDirections = x;
+  const xForStartRightDirections = x - contentWidth + anchorWidth;
+
+  const yForStartUpDirections = y;
+  const yForStartDownDirections = y - contentHeight + anchorHeight;
+
   return {
     upLeft: getPosition(xForVerticalDirections.left, yForUpDirections),
     upCenter: getPosition(xForVerticalDirections.center, yForUpDirections),
@@ -61,6 +67,18 @@ export const getPositionsByDirection = ({
     leftUp: getPosition(xForLeftDirections, yForHorizontalDirections.up),
     leftCenter: getPosition(xForLeftDirections, yForHorizontalDirections.center),
     leftDown: getPosition(xForLeftDirections, yForHorizontalDirections.down),
+
+    downStartLeft: getPosition(xForStartLeftDirections, yForDownDirections),
+    downStartRight: getPosition(xForStartRightDirections, yForDownDirections),
+
+    upStartLeft: getPosition(xForStartLeftDirections, yForUpDirections),
+    upStartRight: getPosition(xForStartRightDirections, yForUpDirections),
+
+    leftStartUp: getPosition(xForLeftDirections, yForStartUpDirections),
+    leftStartDown: getPosition(xForLeftDirections, yForStartDownDirections),
+
+    rightStartUp: getPosition(xForRightDirections, yForStartUpDirections),
+    rightStartDown: getPosition(xForRightDirections, yForStartDownDirections),
   };
 };
 

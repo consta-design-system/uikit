@@ -228,7 +228,7 @@
     background-color: transparent;
     border: none;
     font-size: var(--input-font-size);
-    line-height: var(--input-height);
+    line-height: calc(var(--input-height) - 2px);
     text-align: left;
 
     &:focus {
@@ -246,28 +246,125 @@
     padding: 0 0 0 var(--input-space);
   }
 
+  &-Control_multi &-ControlValueContainer {
+    position: relative;
+    top: auto;
+    left: auto;
+    display: flex;
+    box-sizing: border-box;
+    padding-top: var(--space-xs);
+    padding-bottom: var(--space-xs);
+    line-height: 1;
+    flex-wrap: wrap;
+  }
+
   &-Control[aria-expanded='true'] &-IndicatorsDropdown {
     transform: rotate(180deg);
   }
 
   &-ControlValue,
-  &-ControlPlaceholder {
+  &-Placeholder {
     display: block;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
 
-  &-ControlPlaceholder {
+  &-Placeholder {
     color: var(--color-control-typo-placeholder);
     font-size: var(--input-font-size);
     text-align: left;
   }
 
+  &-Control_multi &-ControlValue {
+    white-space: normal;
+  }
+
+  &-Control_hasInput &-Placeholder {
+    position: absolute;
+    top: 0;
+    background-color: transparent;
+    line-height: calc(var(--input-height) - 2px);
+  }
+
   &-DropdownIndicatorIcon {
     position: relative;
     top: 1px;
-    fill: currentColor;
+  }
+
+  &-ClearIndicator {
+    margin: 0;
+    padding: 0 var(--space-xs);
+    color: var(--color-control-typo-clear);
+    background-color: transparent;
+    border: none;
+  }
+
+  &-ClearIndicatorIcon {
+    position: relative;
+    top: 1px;
+  }
+
+  &-Input {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    color: inherit;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: calc(var(--input-height) - 2px);
+
+    &_hide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      opacity: 0;
+    }
+  }
+
+  &-FakeField {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    opacity: 0;
+  }
+
+  &-GroupName {
+    margin-right: var(--input-space);
+    margin-left: var(--input-space);
+    color: var(--color-typo-secondary);
+    border-bottom: 1px solid var(--color-bg-border);
+    font-size: calc(var(--input-font-size) - 4px);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  &-List_size_xs &-GroupName {
+    font-size: calc(var(--input-font-size) - 2px);
+  }
+
+  &-List_size_xs &-GroupName,
+  &-List_size_s &-GroupName {
+    padding-top: var(--space-2xs);
+    padding-bottom: var(--space-2xs);
+  }
+
+  &-List_size_m &-GroupName {
+    padding-top: var(--space-xs);
+    padding-bottom: var(--space-xs);
+  }
+
+  &-List_size_l &-GroupName {
+    padding-top: var(--space-xs);
+    padding-bottom: var(--space-xs);
   }
 
   &-List {
@@ -360,6 +457,42 @@
   }
 
   &-List_size_l &-ListItem {
+    padding-top: var(--space-xs);
+    padding-bottom: var(--space-xs);
+  }
+
+  &-CreateOption {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    color: var(--color-control-typo-default);
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid var(--color-bg-border);
+    font-family: inherit;
+    font-size: inherit;
+    text-align: left;
+  }
+
+  &-List_size_xs &-CreateOption,
+  &-List_size_s &-CreateOption {
+    margin-top: calc(-1 * var(--space-2xs));
+    margin-bottom: calc(-1 * var(--space-2xs));
+    padding-top: var(--space-2xs);
+    padding-bottom: var(--space-2xs);
+  }
+
+  &-List_size_m &-CreateOption {
+    margin-top: calc(-1 * var(--space-xs));
+    margin-bottom: calc(-1 * var(--space-xs));
+    padding-top: var(--space-xs);
+    padding-bottom: var(--space-xs);
+  }
+
+  &-List_size_l &-CreateOption {
+    margin-top: calc(-1 * var(--space-xs));
+    margin-bottom: calc(-1 * var(--space-xs));
     padding-top: var(--space-xs);
     padding-bottom: var(--space-xs);
   }

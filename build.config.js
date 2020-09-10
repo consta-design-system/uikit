@@ -4,8 +4,6 @@ module.exports = {
   // для ts это правило описывается в tsconfig::exclude.
   ignore: [
     'src/internal/**',
-    'src/index.css',
-    'src/__tests__/**',
     'src/**/*.stories/**',
     'src/**/*.stories.*',
     'src/components/ScrollExample/**',
@@ -14,6 +12,8 @@ module.exports = {
     'src/uiKit/**',
     'src/**/__tests__/**',
     'src/**/__stories__/**',
+    'src/**/__mocks__/**',
+    'src/**/__mock__/**',
   ],
   tsconfig: 'tsconfig.json',
   postcssConfig: 'postcss.config.js',

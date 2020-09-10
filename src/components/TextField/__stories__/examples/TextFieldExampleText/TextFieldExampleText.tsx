@@ -6,8 +6,9 @@ import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExamp
 import { TextField } from '../../../TextField';
 
 export const TextFieldExampleTextPlaceholder = () => {
-  const [value, setValue] = useState(null);
-  const handleChange = ({ value }) => setValue(value);
+  const [value, setValue] = useState<string | null>(null);
+  const handleChange = ({ value }: { value: string | null }) => setValue(value);
+
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <TextField value={value} onChange={handleChange} placeholder="Здесь только цифры" />
@@ -16,8 +17,8 @@ export const TextFieldExampleTextPlaceholder = () => {
 };
 
 export const TextFieldExampleTextValue = () => {
-  const [value, setValue] = useState('стопиццот');
-  const handleChange = ({ value }) => setValue(value);
+  const [value, setValue] = useState<string | null>('стопиццот');
+  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
@@ -27,8 +28,8 @@ export const TextFieldExampleTextValue = () => {
 };
 
 export const TextFieldExampleTextLeft = () => {
-  const [value, setValue] = useState(null);
-  const handleChange = ({ value }) => setValue(value);
+  const [value, setValue] = useState<string | null>(null);
+  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
@@ -38,8 +39,8 @@ export const TextFieldExampleTextLeft = () => {
   );
 };
 export const TextFieldExampleTextRight = () => {
-  const [value, setValue] = useState(null);
-  const handleChange = ({ value }) => setValue(value);
+  const [value, setValue] = useState<string | null>(null);
+  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>

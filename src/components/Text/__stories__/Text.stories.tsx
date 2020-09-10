@@ -4,6 +4,8 @@ import { select, text } from '@storybook/addon-knobs';
 import { createMetadata } from '../../../utils/storybook';
 import { Text } from '../Text';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 import mdx from './Text.mdx';
 
 const defaultKnobs = () => ({
