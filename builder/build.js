@@ -5,7 +5,14 @@ const { Command, flags } = require('@oclif/command');
 const logSymbols = require('log-symbols');
 const { remove, ensureDir } = require('fs-extra');
 
-const { transformCSS, generateReExports, copyAssets, copyPackageJson } = require('./helpers');
+const {
+  transformCSS,
+  generateReExports,
+  copyAssets,
+  copyPackageJson,
+  copyReadme,
+  copyChangelog,
+} = require('./helpers');
 
 const execAsync = promisify(exec);
 const INTERNAL_PREFIX = '__internal__';
@@ -85,6 +92,8 @@ class GenerateCommand extends Command {
 
     try {
       await copyPackageJson(distPath);
+      await copyReadme(distPath);
+      await copyChangelog(distPath);
       await Promise.all([
         transformCSS(ignore, srcPath, [distSrc, distEsSrc], {
           namespace,
