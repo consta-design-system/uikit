@@ -36,16 +36,27 @@
     padding: 0;
     background: var(--color-bg-tone);
     border: none;
-    animation: animatebg 0.2s;
   }
 
-  @keyframes animatebg {
-    from {
-      opacity: 0;
-    }
+  &-Window,
+  &-Overlay {
+    &_animate {
+      &_appear,
+      &_enter,
+      &_appearActive,
+      &_enterActive {
+        transition: opacity 0.2s ease;
+      }
 
-    to {
-      opacity: 1;
+      &_appear,
+      &_enter {
+        opacity: 0;
+      }
+
+      &_appearActive,
+      &_enterActive {
+        opacity: 1;
+      }
     }
   }
 }
