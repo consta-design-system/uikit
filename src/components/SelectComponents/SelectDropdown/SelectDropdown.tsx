@@ -79,7 +79,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
                 )}
                 <div
                   aria-selected={selectedValues?.some(
-                    (val) => getOptionLabel(val) === getOptionLabel(option.item),
+                    (val) => getOptionLabel(val) === getOptionLabel(menuOption.item),
                   )}
                   role="option"
                   key={option.label}
