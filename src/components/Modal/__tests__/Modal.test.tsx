@@ -7,7 +7,6 @@ type TModalProps = React.ComponentProps<typeof Modal>;
 
 const testId = 'modal';
 const testChildrenId = 'modalChildren';
-const closeButtonAriaLabel = 'Кнопка закрытия';
 const overlayAriaLabel = 'Оверлэй';
 
 const renderComponent = (props: TModalProps) => {
@@ -45,39 +44,11 @@ describe('Компонент Modal', () => {
     });
   });
 
-  describe('проверка кнопки закрытия', () => {
-    it('должна рендериться по дефолту', () => {
-      renderComponent({ onClose });
-      const closeButton = screen.getByLabelText(closeButtonAriaLabel);
-      expect(closeButton).toBeInTheDocument();
-    });
-
-    it('не должна рендериться, передавая hasCloseButton={false}', () => {
-      renderComponent({ onClose, hasCloseButton: false });
-      const closeButton = screen.queryByLabelText(closeButtonAriaLabel);
-      expect(closeButton).not.toBeInTheDocument();
-    });
-
-    it('должна вызывать событие onClose по клику', () => {
-      renderComponent({ onClose, hasCloseButton: true });
-      const closeButton = screen.getByLabelText(closeButtonAriaLabel);
-      fireEvent.click(closeButton);
-      expect(onClose).toBeCalled();
-    });
-  });
-
   describe('проверка оверлэя', () => {
     it('должен рендериться по дефолту', () => {
       renderComponent({ onClose });
       const overlay = screen.getByLabelText(overlayAriaLabel);
       expect(overlay).toBeInTheDocument();
-    });
-
-    it('должен вызывать событие onClose по клику по дефолту', () => {
-      renderComponent({ onClose });
-      const overlay = screen.getByLabelText(overlayAriaLabel);
-      fireEvent.click(overlay);
-      expect(onClose).toBeCalled();
     });
 
     it('не должен вызывать событие onClose по клику, передавая closeByClickOnOverlay={false}', () => {

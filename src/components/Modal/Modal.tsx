@@ -3,19 +3,22 @@ import './Modal.css';
 import React from 'react';
 
 import { useClickOutside } from '../../hooks/useClickOutside/useClickOutside';
-import { IconClose } from '../../icons/IconClose/IconClose';
 import { cn } from '../../utils/bem';
-import { Button } from '../Button/Button';
 import { PortalWithTheme } from '../PortalWithTheme/PortalWithTheme';
 import { useTheme } from '../Theme/Theme';
 
+type TModalPropWidth = 'auto';
+type TModalPropPosition = 'center' | 'top';
 type TModalProps = {
   isOpen?: boolean;
   onClose: (e: React.MouseEvent) => void;
-  hasCloseButton?: boolean;
+  hasOverlay?: boolean;
   closeByClickOnOverlay?: boolean;
   className?: string;
+  width?: TModalPropWidth;
+  position?: TModalPropPosition;
   children?: React.ReactNode;
+  container?: HTMLDivElement | undefined;
 };
 
 const cnModal = cn('Modal');
@@ -24,10 +27,13 @@ export const Modal: React.FC<TModalProps> = (props) => {
   const {
     isOpen,
     onClose,
-    hasCloseButton = true,
+    hasOverlay = true,
     closeByClickOnOverlay = true,
     className,
+    width = 'auto',
+    position = 'center',
     children,
+    container = window.document.body,
     ...rest
   } = props;
   const ref = React.useRef<HTMLDivElement | null>(null);
@@ -46,23 +52,10 @@ export const Modal: React.FC<TModalProps> = (props) => {
   });
 
   const modal = (
-    <PortalWithTheme preset={theme} container={window.document.body}>
-      <div className={cnModal('Overlay')} aria-label="Оверлэй">
-        <div className={cnModal('Root', [className])} ref={ref} {...rest}>
-          {hasCloseButton && (
-            <Button
-              className={cnModal('CloseButton')}
-              aria-label="Кнопка закрытия"
-              view="clear"
-              type="button"
-              onClick={onCloseModal}
-              onlyIcon
-              iconLeft={IconClose}
-              iconSize="s"
-            />
-          )}
-          {children}
-        </div>
+    <PortalWithTheme preset={theme} container={container}>
+      {hasOverlay && <div className={cnModal('Overlay')} aria-label="Оверлэй" />}
+      <div className={cnModal('Window', { width, position }, [className])} ref={ref} {...rest}>
+        {children}
       </div>
     </PortalWithTheme>
   );

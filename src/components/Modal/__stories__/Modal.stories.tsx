@@ -1,7 +1,7 @@
 import './Modal.stories.css';
 
 import React from 'react';
-import { boolean } from '@storybook/addon-knobs';
+import { boolean, select } from '@storybook/addon-knobs';
 
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
@@ -14,14 +14,16 @@ import mdx from './Modal.mdx';
 const cnModalStories = cn('ModalStories');
 
 const defaultKnobs = () => ({
-  hasCloseButton: boolean('hasCloseButton', true),
+  hasOverlay: boolean('hasOverlay', true),
   closeByClickOnOverlay: boolean('closeByClickOnOverlay', true),
+  width: select('width', ['auto'], 'auto'),
+  position: select('position', ['center', 'top'], 'center'),
 });
 
 export function Playground() {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
-  const { hasCloseButton, closeByClickOnOverlay } = defaultKnobs();
+  const { hasOverlay, closeByClickOnOverlay, width, position } = defaultKnobs();
 
   return (
     <div className={cnModalStories()}>
@@ -35,8 +37,10 @@ export function Playground() {
       <Modal
         className="myClassName"
         isOpen={isModalOpen}
-        hasCloseButton={hasCloseButton}
+        hasOverlay={hasOverlay}
         closeByClickOnOverlay={closeByClickOnOverlay}
+        width={width}
+        position={position}
         onClose={() => setIsModalOpen(false)}
       >
         <Text as="p" size="s" view="secondary" className={cnModalStories('title')}>
