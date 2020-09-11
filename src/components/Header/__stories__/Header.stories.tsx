@@ -8,6 +8,8 @@ import { HeaderMinifyLoginExample } from './examples/HeaderMinifyLoginExample/He
 import { HeaderWithLogoExample } from './examples/HeaderWithLogoExample/HeaderWithLogoExample';
 import { HeaderWithoutMenuExample } from './examples/HeaderWithoutMenuExample/HeaderWithoutMenuExample';
 import { HeaderWithoutSearchExample } from './examples/HeaderWithoutSearchExample/HeaderWithoutSearchExample';
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 import mdx from './Header.mdx';
 
 export function Playground() {

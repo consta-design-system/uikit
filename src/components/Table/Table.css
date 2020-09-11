@@ -75,13 +75,16 @@
   }
 
   &-ContentCell {
-    .Table_isZebraStriped .Table-CellsRow:nth-child(even):not(:hover) &:not(&_isActive) {
+    .Table_zebraStriped_even .Table-CellsRow_nth_even:not(:hover) &:not(&_isActive) {
+      background-color: var(--color-bg-stripe);
+    }
+
+    .Table_zebraStriped_odd .Table-CellsRow_nth_odd:not(:hover) &:not(&_isActive) {
       background-color: var(--color-bg-stripe);
     }
 
     &_isActive,
-    .Table-CellsRow:hover &,
-    .Table_isZebraStriped .Table-CellsRow:hover & {
+    .Table-CellsRow:hover & {
       background-color: var(--color-bg-ghost);
     }
 

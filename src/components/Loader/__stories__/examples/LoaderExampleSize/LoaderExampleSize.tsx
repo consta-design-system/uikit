@@ -6,12 +6,12 @@ import { Loader } from '../../../Loader';
 
 export const LoaderExampleSizeM = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
-    <Loader size="m" label="Loader" />
+    <Loader size="m" />
   </StoryBookExample>
 );
 
 export const LoaderExampleSizeS = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
-    <Loader size="s" label="Loader" />
+    <Loader size="s" />
   </StoryBookExample>
 );

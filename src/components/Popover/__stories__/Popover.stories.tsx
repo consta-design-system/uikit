@@ -10,6 +10,8 @@ import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 import { directions, Popover, Position } from '../Popover';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 import mdx from './Popover.mdx';
 
 const cnPopoverStories = cn('PopoverStories');

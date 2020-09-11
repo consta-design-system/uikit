@@ -2,6 +2,7 @@
   position: relative;
   display: inline-flex;
   box-sizing: border-box;
+  max-width: 100%;
   min-height: var(--input-height);
   font-family: var(--font-primary);
   font-weight: normal;
@@ -12,7 +13,9 @@
   }
 
   &-Input {
+    flex: 1;
     width: 100%;
+    min-width: 80px;
     height: calc(var(--input-height) - (var(--control-border-width) * 2));
     padding: 0;
     color: currentColor;
@@ -37,16 +40,17 @@
 
   &-Side {
     display: flex;
+    overflow: hidden;
     align-items: center;
     height: calc(var(--input-height) - (var(--control-border-width) * 2));
 
     &_position {
       &_left {
-        padding-right: var(--input-space);
+        margin-right: var(--input-space);
       }
 
       &_right {
-        padding-left: var(--input-space);
+        margin-left: var(--input-space);
       }
     }
 

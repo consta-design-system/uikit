@@ -209,6 +209,7 @@ export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>((props
             position: 'left',
             type: leftSideIsString ? 'string' : 'icon',
           })}
+          title={typeof leftSide === 'string' ? leftSide : undefined}
         >
           {leftSideIsString ? (
             leftSide
@@ -228,6 +229,7 @@ export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>((props
             position: 'right',
             type: rightSideIsString ? 'string' : 'icon',
           })}
+          title={typeof rightSide === 'string' ? rightSide : undefined}
         >
           {rightSideIsString ? (
             rightSide

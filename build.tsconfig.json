@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "noImplicitAny": true,
+    "lib": ["dom", "esnext", "ES2015"],
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "jsx": "react",
+    "allowJs": true,
+    "isolatedModules": true,
+    "importHelpers": true,
+    "experimentalDecorators": false,
+    "emitDecoratorMetadata": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "pretty": true,
+    "removeComments": false
+  },
+  "include": ["./src/**/*"],
+  "exclude": [
+    "node_modules",
+    "./src/**/*.stories/**",
+    "./src/**/*.stories.*",
+    "./src/**/*.test.*",
+    "./src/**/__tests__/**",
+    "./src/**/__stories__/**",
+    "./src/**/__mocks__/**",
+    "./src/**/__mock__/**",
+    "./src/uiKit/**"
+  ]
+}

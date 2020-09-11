@@ -14,7 +14,7 @@ export { usePopoverReposition };
  * Стороны упорядочены по приоритету:
  * Используется первая сторона, в которую смог вписаться поповер.
  */
-export const directions = [
+export const directionsStartCenter = [
   'downCenter',
   'upCenter',
 
@@ -31,6 +31,22 @@ export const directions = [
   'rightCenter',
   'rightDown',
 ] as const;
+
+export const directionsStartEdge = [
+  'downStartLeft',
+  'upStartLeft',
+
+  'downStartRight',
+  'upStartRight',
+
+  'leftStartUp',
+  'leftStartDown',
+
+  'rightStartUp',
+  'rightStartDown',
+] as const;
+
+export const directions = [...directionsStartCenter, ...directionsStartEdge];
 
 export type Direction = typeof directions[number];
 

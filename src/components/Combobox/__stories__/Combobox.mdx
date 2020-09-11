@@ -1,0 +1,173 @@
+import { Preview } from '@storybook/addon-docs/dist/blocks';
+
+# Combobox
+
+Combobox — компонент, реализующий элемент управления меню опций с полем для фильтрации.
+
+## Cвойства компонента
+
+| Свойство         | Тип или варианты значения                              | По умолчанию | Описание                                                                                              |
+| ---------------- | ------------------------------------------------------ | ------------ | ----------------------------------------------------------------------------------------------------- |
+| disabled?        | `boolean`                                              | -            | Активность компонента                                                                                 |
+| size?            | `s , m , l`                                            | `m`          | Размер компонента                                                                                     |
+| view?            | `default , clear`                                      | `default`    | Внешний вид компонента                                                                                |
+| width?           | `full , default`                                       | `default`    | Cвойство определяет, какую ширину будет занимать компонент. `default` — ширина по размеру содержимого |
+| ariaLabel?       | `string`                                               | -            | `aria` атрибут для метки                                                                              |
+| placeholder?     | `string`                                               | -            | Placeholder — текст, который отобразится в качестве подсказки в пустом поле                           |
+| className?       | `string`                                               | -            | Дополнительный класс                                                                                  |
+| value?           | `T , null`                                             | -            | Значение селекта, по умолчанию `null`.                                                                |
+| id               | `string`                                               | -            | Идентификатор селекта                                                                                 |
+| options          | `T[]`                                                  | -            | Опции                                                                                                 |
+| onChange?        | `(value: string) => void`                              | -            | Обработчик события изменения значения компонента                                                      |
+| getOptionLabel   | `(arg: T) => string`                                   | -            | Функция для получения текста опции, который будет отображаться в поле для выбранного значения         |
+| onBlur?          | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -            | Обработчик события `blur`                                                                             |
+| onFocus?         | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -            | Обработчик события `focus`                                                                            |
+| onCreate?        | `(str: string) => void`                                | -            | Функция для создания новой опции                                                                      |
+| getGroupOptions? | `(group: T) => T[]`                                    | -            | Функция для получения опций из группы                                                                 |
+
+## Пример использования
+
+```ts
+import React from 'react';
+import { Combobox } from '@consta/uikit/Combobox';
+
+type Option = {
+  label: string;
+  value: string;
+};
+
+const items = [
+  { label: 'Москва', value: 'moscow' },
+  { label: 'Санкт-Петербург', value: 'spb' },
+  { label: 'Томск', value: 'tomsk' },
+];
+
+const Example = () => {
+  const getItemLabel = (option: SelectOption): string => option.label;
+
+  return <Combobox id="city" options={items} getOptionLabel={getItemLabel} />;
+};
+```
+
+## С заданным значением
+
+```ts
+import React from 'react';
+import { Combobox } from '@consta/uikit/Combobox';
+
+type Option = {
+  label: string;
+  value: string;
+};
+
+const items = [
+  { label: 'Москва', value: 'moscow' },
+  { label: 'Санкт-Петербург', value: 'spb' },
+  { label: 'Томск', value: 'tomsk' },
+];
+
+const Example = () => {
+  const getItemLabel = (option: SelectOption): string => option.label;
+
+  return (
+    <Combobox<Option>
+      id="city"
+      value={{ label: 'Москва', value: 'moscow' }}
+      options={items}
+      getOptionLabel={getItemLabel}
+    />
+  );
+};
+```
+
+## С созданием опции
+
+```ts
+import React from 'react';
+import { Combobox } from '@consta/uikit/Combobox';
+
+type Option = {
+  label: string;
+  value: string;
+};
+
+const items = [
+  { label: 'Москва', value: 'moscow' },
+  { label: 'Санкт-Петербург', value: 'spb' },
+  { label: 'Томск', value: 'tomsk' },
+];
+
+const Example = () => {
+  const getItemLabel = (option: SelectOption): string => option.label;
+
+  return (
+    <Combobox<Option>
+      id="city"
+      value={{ label: 'Москва', value: 'moscow' }}
+      options={items}
+      getOptionLabel={getItemLabel}
+      onCreate={(str: string) => console.log}
+    />
+  );
+};
+```
+
+## С выводом групп опций
+
+```ts
+import React from 'react';
+import { Combobox } from '@consta/uikit/Combobox';
+
+type SimpleOption = {
+  label: string;
+  value: string;
+};
+
+type Group = {
+  label: string;
+  options: SimpleOption[];
+};
+
+const items = [
+  {
+    label: 'Фрукты',
+    options: [
+      {
+        label: 'Абрикос',
+        value: 'а1'
+      },
+      {
+        label: 'Хурма',
+        value: 'a2'
+      }
+    ]
+  {
+    label: 'Деревья',
+    options: [
+      {
+        label: 'Берёза',
+        value: 'b1'
+      },
+      {
+        label: 'Ясень',
+        value: 'b2'
+      }
+    ]
+  }
+];
+
+const Example = () => {
+  const getItemLabel = (option: SelectOption): string => option.label;
+
+
+  return (
+    <Combobox
+      id="id"
+      options={items}
+      getOptionLabel={getItemLabel}
+      onCreate={(str: string) => console.log}
+      getGroupOptions={(group: Group): SimpleOption[] => group.options}
+    />
+  );
+};
+```

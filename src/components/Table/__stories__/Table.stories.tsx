@@ -11,8 +11,10 @@ import { Checkbox } from '../../Checkbox/Checkbox';
 import { Text } from '../../Text/Text';
 import { verticalAligns } from '../Cell/TableCell';
 import { Filters } from '../filtering';
-import { Props, sizes, Table, TableRow } from '../Table';
+import { Props, sizes, Table, TableRow, zebraStriped } from '../Table';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 import mdx from './Table.mdx';
 
 const cnTableStories = cn('TableStories');
@@ -24,10 +26,10 @@ const defaultProps = {
   borderBetweenColumns: false,
   borderBetweenRows: false,
   isResizable: false,
-  isZebraStriped: false,
   stickyColumns: 0,
   stickyHeader: false,
   verticalAlign: 'top',
+  zebraStriped: '',
 } as const;
 
 const getSizeKnob = () => select('size', sizes, 'l');
@@ -40,6 +42,8 @@ const getFiltersKnob = (filters?: Filters<TableRow>): Filters<TableRow> | undefi
 const getKnobs = (replacedProps?: Partial<Props<TableRow>>): Props<TableRow> => {
   const props = { ...defaultProps, ...replacedProps };
 
+  const zebraStripedProp = select('zebraStriped', ['', ...zebraStriped], props.zebraStriped);
+
   return {
     columns: object('columns', props.columns),
     rows: object('rows', props.rows),
@@ -48,7 +52,7 @@ const getKnobs = (replacedProps?: Partial<Props<TableRow>>): Props<TableRow> => 
     borderBetweenColumns: boolean('borderBetweenColumns', props.borderBetweenColumns),
     borderBetweenRows: boolean('borderBetweenRows', props.borderBetweenRows),
     isResizable: boolean('isResizable', props.isResizable),
-    isZebraStriped: boolean('isZebraStriped', props.isZebraStriped),
+    zebraStriped: zebraStripedProp === '' ? undefined : zebraStripedProp,
     stickyColumns: number('stickyColumns', props.stickyColumns),
     stickyHeader: boolean('stickyHeader', props.stickyHeader),
     emptyRowsPlaceholder: text('emptyRowsPlaceholder', '') || undefined,
