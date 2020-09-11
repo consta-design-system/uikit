@@ -145,7 +145,7 @@ const Default = (props: {
   const options = items;
 
   return (
-    <>
+    <div>
       <MultiCombobox
         {...getKnobs()}
         id="example"
@@ -155,7 +155,7 @@ const Default = (props: {
         getGroupOptions={getGroupOptions}
         onCreate={onCreate}
       />
-    </>
+    </div>
   );
 };
 

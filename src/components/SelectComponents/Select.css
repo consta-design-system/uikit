@@ -289,6 +289,11 @@
     color: var(--color-control-typo-placeholder);
     font-size: var(--input-font-size);
     text-align: left;
+
+    &_isHidden {
+      visibility: hidden;
+      opacity: 0;
+    }
   }
 
   &-Control_hasInput &-Placeholder {
@@ -309,6 +314,7 @@
     color: var(--color-control-typo-clear);
     background-color: transparent;
     border: none;
+    cursor: pointer;
   }
 
   &-ClearIndicatorIcon {
