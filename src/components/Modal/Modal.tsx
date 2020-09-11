@@ -24,10 +24,6 @@ type TModalProps = {
 };
 
 const cnModal = cn('Modal');
-const cnModalOverlay = cn('Modal', 'Overlay');
-const cnModalWindow = cn('Modal', 'Window');
-const cssTransitionCNOverlay = cnForCssTransition(cnModalOverlay);
-const cssTransitionCNWindow = cnForCssTransition(cnModalWindow);
 
 export const Modal: React.FC<TModalProps> = (props) => {
   const {
@@ -60,14 +56,16 @@ export const Modal: React.FC<TModalProps> = (props) => {
   const modal = (
     <PortalWithTheme preset={theme} container={container}>
       <TransitionGroup component={null} appear enter exit>
-        {hasOverlay && (
-          <CSSTransition classNames={cssTransitionCNOverlay} timeout={200}>
-            <div className={cnModalOverlay()} aria-label="Оверлэй" />
-          </CSSTransition>
-        )}
-        <CSSTransition classNames={cssTransitionCNWindow} timeout={200}>
-          <div className={cnModal('Window', { width, position }, [className])} ref={ref} {...rest}>
-            {children}
+        <CSSTransition classNames={cnForCssTransition(cnModal)} timeout={200}>
+          <div>
+            {hasOverlay && <div className={cnModal('Overlay')} aria-label="Оверлэй" />}
+            <div
+              className={cnModal('Window', { width, position }, [className])}
+              ref={ref}
+              {...rest}
+            >
+              {children}
+            </div>
           </div>
         </CSSTransition>
       </TransitionGroup>

@@ -38,25 +38,22 @@
     border: none;
   }
 
-  &-Window,
-  &-Overlay {
-    &_animate {
-      &_appear,
-      &_enter,
-      &_appearActive,
-      &_enterActive {
-        transition: opacity 0.2s ease;
-      }
+  &_animate {
+    &_appear,
+    &_enter,
+    &_appearActive,
+    &_enterActive {
+      transition: opacity 0.2s ease;
+    }
 
-      &_appear,
-      &_enter {
-        opacity: 0;
-      }
+    &_appear,
+    &_enter {
+      opacity: 0;
+    }
 
-      &_appearActive,
-      &_enterActive {
-        opacity: 1;
-      }
+    &_appearActive,
+    &_enterActive {
+      opacity: 1;
     }
   }
 }
