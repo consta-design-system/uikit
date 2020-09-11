@@ -41,8 +41,10 @@
   &_animate {
     &_appear,
     &_enter,
+    &_exit,
     &_appearActive,
-    &_enterActive {
+    &_enterActive,
+    &_exitActive {
       transition: opacity 0.2s ease;
     }
 
@@ -54,6 +56,14 @@
     &_appearActive,
     &_enterActive {
       opacity: 1;
+    }
+
+    &_exit {
+      opacity: 1;
+    }
+
+    &_exitActive {
+      opacity: 0;
     }
   }
 }

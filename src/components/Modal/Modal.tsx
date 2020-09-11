@@ -1,7 +1,7 @@
 import './Modal.css';
 
 import React from 'react';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 
 import { useClickOutside } from '../../hooks/useClickOutside/useClickOutside';
 import { cn } from '../../utils/bem';
@@ -53,24 +53,14 @@ export const Modal: React.FC<TModalProps> = (props) => {
     handler: (event: any) => onCloseModal(event),
   });
 
-  const modal = (
-    <PortalWithTheme preset={theme} container={container}>
-      <TransitionGroup component={null} appear enter exit>
-        <CSSTransition classNames={cnForCssTransition(cnModal)} timeout={200}>
-          <div>
-            {hasOverlay && <div className={cnModal('Overlay')} aria-label="Оверлэй" />}
-            <div
-              className={cnModal('Window', { width, position }, [className])}
-              ref={ref}
-              {...rest}
-            >
-              {children}
-            </div>
-          </div>
-        </CSSTransition>
-      </TransitionGroup>
-    </PortalWithTheme>
+  return (
+    <CSSTransition in={isOpen} unmountOnExit classNames={cnForCssTransition(cnModal)} timeout={200}>
+      <PortalWithTheme preset={theme} container={container}>
+        {hasOverlay && <div className={cnModal('Overlay')} aria-label="Оверлэй" />}
+        <div className={cnModal('Window', { width, position }, [className])} ref={ref} {...rest}>
+          {children}
+        </div>
+      </PortalWithTheme>
+    </CSSTransition>
   );
-
-  return isOpen ? modal : null;
 };
