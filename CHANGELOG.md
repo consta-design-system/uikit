@@ -1,5 +1,21 @@
 # Changelog
 
+## v1.9.0 (11/09/2020)
+
+- [fix(TextField): fix sides styles (#385)](https://github.com/gazprom-neft/consta-uikit/commit/76358842eefe9b8899f47368b67308c4c6bc95d6) - @gizeasy
+- [feat(Table): add modifier zebraStriped (#386)](https://github.com/gazprom-neft/consta-uikit/commit/7759597afe9eaa6b87ebc42df26a0ffb5b37d006) - @gizeasy
+- [docs(start): add docs start (#393)](https://github.com/gazprom-neft/consta-uikit/commit/fdb3e75dacac32817d22730b2e79fb4f5abdab76) - @gizeasy
+- [fix(whitepaper): whitepaper affected documentation styles, fixed text weight (#384)](https://github.com/gazprom-neft/consta-uikit/commit/353bfc003e78bfc63dec1270858c3e1fe550288b) - @gizeasy
+- [feat(Popover): add new positions (#379)](https://github.com/gazprom-neft/consta-uikit/commit/38844030471be4f4a090b77d9096b78239758368) - @gizeasy
+- [fix(ChoiceGroup): fix import in doc example (#388)](https://github.com/gazprom-neft/consta-uikit/commit/9b4c7eac438d8abae6ad33671e42e98b1cd698c9) - @kolebayev
+- [chore(build): update build configs (#392)](https://github.com/gazprom-neft/consta-uikit/commit/d6f686c21816574c53eff72374b52b957db110f9) - @gizeasy
+- [feat(Tag): add mode info (#391)](https://github.com/gazprom-neft/consta-uikit/commit/1207c9c7785f6c437015960412fbe1179eface25) - @gizeasy
+- [feat(Table): add Tag (#394)](https://github.com/gazprom-neft/consta-uikit/commit/23c05c422c7da4062ff8979ddd9645c6241f7e44) - @gizeasy
+- [feat(BasicSelect): add BasicSelect (#349)](https://github.com/gazprom-neft/consta-uikit/commit/69f18d3a36b2ecf78022b96bba5c3a233839e53b) - @c1n1k
+- [chore(Storybook configs): fix storybook build on windows (#382)](https://github.com/gazprom-neft/consta-uikit/commit/ac825604fdac9a40943a34bffc4d167f9399c8c7) - @gizeasy
+
+---
+
 ## v1.8.1 (02/09/2020)
 
 - [fix(docs): fixed docs and links (#376)](https://github.com/gazprom-neft/consta-uikit/commit/3e14c11559d7e61a9c332429fdecbd3b1b886eda) - @gizeasy
