@@ -219,6 +219,8 @@ export const MultiCombobox: MultiComboboxType = (props) => {
 
     const fakeElWidth = fakeEl.offsetWidth + 10;
 
+    document.body.removeChild(fakeEl);
+
     return fakeElWidth < placeholderWidth ? placeholderWidth : fakeElWidth;
   };
 
