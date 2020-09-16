@@ -20,21 +20,21 @@
       --input-height: var(--control-height-s);
       --input-font-size: var(--control-text-size-s);
       --input-space: calc(var(--control-space-s) * 0.5);
-      --tag-space: calc(var(--space-xs) / 2);
+      --tag-space: calc(var(--space-xs) / 2 - var(--control-border-width));
     }
 
     &_m {
       --input-height: var(--control-height-m);
       --input-font-size: var(--control-text-size-m);
       --input-space: calc(var(--control-space-m) * 0.5);
-      --tag-space: calc(var(--space-s) / 2);
+      --tag-space: calc(var(--space-s) / 2 - var(--control-border-width));
     }
 
     &_l {
       --input-height: var(--control-height-l);
       --input-font-size: var(--control-text-size-l);
       --input-space: calc(var(--control-space-l) * 0.5);
-      --tag-space: calc(var(--space-m) / 2);
+      --tag-space: calc(var(--space-m) / 2 - var(--control-border-width));
     }
   }
 
@@ -60,7 +60,6 @@
   }
 
   &_multi &-Control {
-    /* width: auto; */
     height: auto;
     min-height: var(--input-height);
   }
@@ -278,6 +277,10 @@
     white-space: normal;
   }
 
+  &_multi&_size_l &-ControlValue {
+    padding-top: calc(var(--tag-space) - var(--control-border-width));
+  }
+
   &-Placeholder {
     padding-right: var(--input-space);
     color: var(--color-control-typo-placeholder);
@@ -293,6 +296,7 @@
   &-Control_hasInput &-Placeholder {
     position: absolute;
     top: 0;
+    width: calc(100% - var(--input-space));
     background-color: transparent;
     line-height: calc(var(--input-height) - 2px);
   }
@@ -341,8 +345,14 @@
   &_multi &-Input {
     display: inline-flex;
     min-width: 10px;
-    margin-top: calc(var(--tag-space) - calc(var(--space-xs) / 2));
+    margin-top: calc(var(--control-border-width) + var(--tag-space) - calc(var(--space-xs) / 2));
     line-height: 1;
+  }
+
+  &_multi&_size_s &-Input {
+    margin-top: calc(
+      var(--control-border-width) * 3 + var(--tag-space) - calc(var(--space-xs) / 2)
+    );
   }
 
   &-FakeField {
@@ -360,8 +370,9 @@
   }
 
   &_size_xs &-Tag,
-  &_size_x &-Tag {
-    margin-top: calc(var(--space-xs) / 2);
+  &_size_s &-Tag {
+    margin-top: calc(var(--space-xs) / 2 - calc(var(--control-border-width) * 4));
+    margin-bottom: calc(var(--space-xs) / 2 - calc(var(--control-border-width) * 3));
   }
 
   &_disabled &-Tag {

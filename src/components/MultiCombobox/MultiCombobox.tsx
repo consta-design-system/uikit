@@ -196,7 +196,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
   });
 
   const getInputWidth = (): number => {
-    if (!toggleRef.current) {
+    if (!toggleRef.current || !controlRef.current) {
       return 0;
     }
 
@@ -212,7 +212,9 @@ export const MultiCombobox: MultiComboboxType = (props) => {
 
     document.body.removeChild(fakeEl);
 
-    return fakeElWidth;
+    const controlRefWidth = controlRef.current.offsetWidth - 50;
+
+    return fakeElWidth > controlRefWidth ? controlRefWidth : fakeElWidth;
   };
 
   const inputWidth = React.useMemo(() => getInputWidth(), [inputData.value, arrValue]);
