@@ -4,48 +4,23 @@ import { FileExampleSize } from './examples/FileExampleSize/FileExampleSize';
 
 # File
 
-## Пример использования
+Этот компонент формирует красивую иконку для файла. Можно использовать во всех случаях,
+когда нужно показать файл — один или в списке.
 
-Использование компонента:
+> Для файла, который загружает пользователь, есть специальный компонент —
+[Attach](?path=/story/components-attach--playground)
 
-```ts
-// src/App.ts
-import React from 'react';
-import { File } from '@gpn-design/uikit/File';
+- [Иконка](#иконка)
+- [Размер иконки](#размер-иконки)
+- [Индикаторы загрузки](#индикаторы-загрузки)
+- [Свойства](#свойства)
+- [Пример использования](#пример-использования)
 
-const App = () => {
-  return <File extension="doc" />;
-};
-```
+## Иконка
 
-## Свойства
-
-| Свойство                 | Тип                         | По умолчанию | Описание                                     |
-| ------------------------ | --------------------------- | ------------ | -------------------------------------------- |
-| size?                    | `'m', 's'`                  | `'m'`        | Размер                                       |
-| extension?               | `string`                    | -            | Расширение файла                             |
-| loading?                 | `boolean`                   | -            | Индикация загрузки                           |
-| loadingWithProgressSpin? | `boolean`                   | -            | Показать/скрыть индикатор прогресса загрузки |
-| loadingProgress?         | `number`                    | -            | Указывает прогресс индикации загрузки        |
-| className?               | `string`                    | -            | Дополнительный класс                         |
-| ref?                     | `React.Ref<HTMLDivElement>` | -            | Ссылка на корневой DOM элемент компонента    |
-
-## Примеры
-
-### Размер
-
-Чтобы изменить размер, используйте модификатор `_size`
-
-```ts
-<File size="m" />
-<File size="s" />
-```
-
-<FileExampleSize />
-
-### Расширение
-
-Указывая свойство `extension` компонент меняет иконку файла
+Укажите расширение файла — с помощью свойства `extension` — и пользователь увидит
+нужную иконку. Если расширения нет в нашей в нашей галерее иконок (во вкладке **Gallery**),
+на иконке будет знак вопроса.
 
 ```ts
 <File extension="doc" />
@@ -57,16 +32,58 @@ const App = () => {
 
 <FileExampleExtension />
 
-### Индикатор загрузки
+## Размер иконки
 
-Указывая свойство `loading` включаете индикацию загрузки, также можете управлять прогрессбаром загрузки через свойство `loadingProgress`
+За размер иконки отвечает свойство `size`.
 
 ```ts
+<File size="m" />
+<File size="s" />
+```
+
+<FileExampleSize />
+
+## Индикаторы загрузки
+
+Свойство `loading` показывает, что файл загружается.
+
+Если нужен индикатор загрузки, добавьте `loadingWithProgressSpin`.
+
+Процент загрузки можно указать с помощью `loadingProgress`.
+
+```ts
+<File loading />
+<File loading loadingWithProgressSpin />
 <File loading loadingWithProgressSpin loadingProgress={30} />
 <File loading loadingWithProgressSpin loadingProgress={60} />
 <File loading loadingWithProgressSpin loadingProgress={90} />
-<File loading loadingWithProgressSpin />
-<File loading />
 ```
 
 <FileExampleLoading />
+
+
+## Свойства
+
+| Свойство                | Тип                         | По умолчанию | Описание                                     |
+| ------------------------| --------------------------- | ------------ | -------------------------------------------- |
+| [`extension`](#иконка)  | `string`                    | -            | Иконка файла                                 |
+| [`size`](#размер-иконки)| `'m', 's'`                  | `'m'`        | Размер иконки                                |
+| [`loading`](#индикаторы-загрузки)| `boolean`          | -            | Показывает, что файл загружается             |
+| [`loadingWithProgressSpin`](#индикаторы-загрузки)|`boolean`| -       | Показывает индикатор прогресса загрузки      |
+| [`loadingProgress`](#индикаторы-загрузки)| `number`   | -            | Прогресс загрузки в процентах                |
+| `as`                    | keyof JSX.IntrinsicElements | -            | HTML-тег, в виде которого этот компонент будет представлен в DOM |
+| `className`             | `string`                    | -            | Дополнительный класс                         |
+| `ref`                   | `React.Ref<HTMLDivElement>` | -            | Ссылка на корневой DOM-элемент компонента    |
+
+
+## Пример использования
+
+```ts
+// src/App.ts
+import React from 'react';
+import { File } from '@consta/uikit/File';
+
+const App = () => {
+  return <File extension="doc" />;
+};
+```

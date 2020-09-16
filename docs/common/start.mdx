@@ -1,0 +1,26 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Common|Start" id="common-start" parameters={{ order: 200 }} />
+
+# Быстрый старт
+
+#### Установите пакет
+
+`yarn add @consta/uikit` или `npm install @consta/uikit`
+
+#### Подключите тему
+
+Тему обязательно нужно подключать в корне приложения, так, чтобы все компоненты `@consta/uikit` были вложены в компонент `Theme`.
+
+```tsx
+import { Theme, presetGpnDefault } from '@consta/uikit/Theme';
+import { Button } from '@consta/uikit/Button';
+
+const App = () => (
+  <Theme preset={presetGpnDefault}>
+    <Button label="Кнопка" />
+  </Theme>
+);
+```
+
+#### Всë!

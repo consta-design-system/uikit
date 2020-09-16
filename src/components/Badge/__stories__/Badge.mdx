@@ -4,104 +4,161 @@ import { BadgeExampleMinified } from './examples/BadgeExampleMinified/BadgeExamp
 import { BadgeExampleSize } from './examples/BadgeExampleSize/BadgeExampleSize';
 import { BadgeExampleStatus } from './examples/BadgeExampleStatus/BadgeExampleStatus';
 import { BadgeExampleView } from './examples/BadgeExampleView/BadgeExampleView';
+import { BadgeExampleForm } from './examples/BadgeExampleForm/BadgeExampleForm';
 
 # Badge
 
-## Пример использования
+Бейджик используют, чтобы показать статус процесса, который происходит с какой-то
+сущностью. Процесс может быть любым: согласование документа, заказ товаров в магазине,
+мойка машины, проверка компьютера на вирусы.
 
-Использование компонента:
+Бейджик помогает понять, что сейчас происходит и подсказывает, что делать дальше.
+
+- [Статус](#статус)
+  - [Бейджик с текстом](#бейджик-с-текстом)
+  - [Бейджик без текста](#бейджик-без-текста)
+- [Внешний вид](#внешний-вид)
+   - [Типы бейджиков](#типы-бейджиков)
+   - [Размер](#размер)
+   - [Форма](#форма)
+   - [Бейджик с иконкой](#бейджик-с-иконкой)
+- [Тег для бейджика](#тег-для-бейджика)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+## Статус
+
+Статус — основное свойство бейджика, его можно менять с помощью `status`.
+
+Какие бывают статусы:
+- `normal` — всё в порядке, так и должно быть (статус по умолчанию),
+- `success` — всё прошло успешно,
+- `error` — ничего не получилось, скорее всего, нужно начинать с начала,
+- `warning` — внимание, чтобы процесс прошел успешно, нужно что-то сделать,
+- `system` — системное сообщение.
+
+### Бейджик с текстом
+
+Текст на бейджике — это основной способ объяснить пользователю, что происходит.
+
+Представьте, что пользователь построил маршрут для марсохода и отправляет его на проверку.
+Какие у этого маршрута могут быть статусы?
+
+<BadgeExampleStatus />
 
 ```ts
-// src/App.ts
-import React from 'react';
-import { Badge } from '@gpn-design/uikit/Badge';
-
-const App = () => {
-  return <Badge label="badge" />;
-};
+<Badge status="normal" label="Новый" /> /* маршрут готов, отправьте на проверку */
+<Badge status="success" label="Cойдёт" /> /* всё получилось, запускайте марсоход  */
+<Badge status="error" label="Отстой" /> /* упс, постройте другой маршрут */
+<Badge status="warning" label="На проверке" /> /* подождите, маршрут проверяется */
+<Badge status="system" label="В работе" /> /* это нужно доделать */
 ```
+
+### Бейджик без текста
+
+Если статусы очевидны и хорошо определяются по цвету (или просто нет места), можно
+сделать бейджик маленьким и круглым, без надписи — с помощью свойства `minified`.
+
+Например, если вы строите пешеходный переход, достаточно двух статусов — `success` и `error`.
+
+<BadgeExampleMinified />
+
+```ts
+<Badge minified status="error" label="Стойте" />
+<Badge minified status="success" label="Идите" />
+```
+
+## Внешний вид
+### Типы бейджиков
+
+В дизайн-системе два типа беджиков, за них отвечает свойство `view`.
+
+`filled` — основной тип. Используйте его, если статус нужно сделать очень заметным.
+
+`stroked` — второстепенный, такой бейдж не будет так сильно бросаться в глаза.
+
+
+<BadgeExampleView />
+
+```ts
+<Badge view="filled" label="Filled badge" />
+<Badge view="stroked" label="Stroked badge" />
+```
+
+
+### Размер
+
+За размер бейджиков отвечает свойство `size`.
+
+<BadgeExampleSize />
+
+```ts
+<Badge size="s" label="Badge S" />
+<Badge size="m" label="Badge M" />
+<Badge size="l" label="Badge L" />
+```
+
+### Форма
+
+За форму бейджиков отвечает свойство `form`.
+
+<BadgeExampleForm/>
+
+```ts
+<Badge form="default" label="Default badge" />
+<Badge form="round" label="Round badge" />
+```
+
+### Бейджик с иконкой
+
+Слева от надписи на бейджике можно поставить иконку — любую из нашей [библиотеки
+иконок](?path=/story/components-icons--playground). За иконку отвечает свойство `icon`.
+
+<BadgeExampleIcon />
+
+```ts
+<Badge icon={IconCheck} status="success" label="Съедобно" />
+<Badge icon={IconClose} status="error" label="Отрава" />
+```
+
+## Тег для бейджика
+
+Свойство  `as` отвечает за тег, в который бейджик оборачивается в HTML-документе.
+По умолчанию это `div`. Вы можете поменять этот тег и заодно
+добавить бейджику свойства другого элемента. Например, чтобы поставить
+с бейджика ссылку, поменяйте тег на `a`.
+
+<BadgeExampleAs />
+
+```ts
+<Badge as="a" href="#" label="Я ссылка, которая притворяется бейджиком" />
+```
+
 
 ## Свойства
 
 | Свойство   | Тип                                                     | По умолчанию | Описание                                      |
 | ---------- | ------------------------------------------------------- | ------------ | --------------------------------------------- |
-| size?      | `'s' , 'm' , 'l'`                                       | `'m'`        | Размер                                        |
-| view?      | `'filled' , 'stroked'`                                  | `'filled'`   | Вид                                           |
-| status?    | `'success' , 'error' , 'warning' , 'normal' , 'system'` | `'normal'`   | Статус                                        |
-| form?      | `'default' , 'round'`                                   | `'default'`  | Форма                                         |
-| minified?  | `boolean`                                               | -            | Отвечает за отрисовку компонента в виде точки |
-| icon?      | `React.FC<IconProps>;`                                  | -            | Добавляет иконку                              |
-| label?     | `string`                                                | -            | Текст на бейдже                               |
-| className? | `string`                                                | -            | Дополнительный класс (mix)                    |
-| ref?       | `React.Ref<HTMLElement>`                                | -            | Ссылка на корневой DOM элемент компонента     |
-| as?        | `keyof JSX.IntrinsicElements`                           | `'div'`      | Корневой элемент                              |
+| [`size`](#размер)    | `'s' , 'm' , 'l'`                             | `'m'`        | Размер                                        |
+| [`view`](#типы-бейджиков)      | `'filled' , 'stroked'`              | `'filled'`   | Вид                                           |
+| [`status`](#статус)   | `'success' , 'error' , 'warning' , 'normal' , 'system'` | `'normal'`   | Статус                                        |
+| [`form`](#форма)    | `'default' , 'round'`                          | `'default'`  | Форма                                         |
+| [`minified`](#типы-бейджиков)  | `boolean`                           | -            | Отвечает за отрисовку бейджика без надписи, в виде точки |
+| [`icon`](#бейджик-с-иконкой)     | `React.FC<IconProps>;`            | -            | Добавляет иконку                              |
+| [`label`](#текст-на-бейджике)    | `string`                          | -            | Текст на бейджике                               |
+| [`as`](#тег-для-бейджика)       | `keyof JSX.IntrinsicElements`    | `'div'`      | HTML-тег, в виде которого этот компонент будет представлен в DOM  |
+| `className` | `string`                                               | -            | Дополнительный CSS-класс (mix)                    |
+| `ref`       | `React.Ref<HTMLElement>`                               | -            | Ссылка на корневой DOM-элемент компонента     |
 
-## Примеры
+## Пример
 
-### Размер бейджа
-
-Чтобы изменить размер бейджа, используйте модификатор `_size`.
 
 ```ts
-<Badge size="s" label="Badge" />
-<Badge size="m" label="Badge" />
-<Badge size="l" label="Badge" />
+// src/App.ts
+import React from 'react';
+import { Badge } from '@consta/uikit/Badge';
+
+const App = () => {
+  return <Badge label="badge" />;
+};
 ```
-
-<BadgeExampleSize />
-
-### Вид бейджа
-
-Чтобы изменить вид бейджа, используйте модификатор `_view`.
-
-```ts
-<Badge view="filled" label="Badge" />
-<Badge view="stroked" label="Badge" />
-```
-
-<BadgeExampleView />
-
-### Статус бейджа
-
-Чтобы изменить статус бейджа, используйте модификатор `_status`.
-
-```ts
-<Badge status="success" label="Badge" />
-<Badge status="error" label="Badge" />
-<Badge status="warning" label="Badge" />
-<Badge status="normal" label="Badge" />
-<Badge status="system" label="Badge" />
-```
-
-<BadgeExampleStatus />
-
-### Маленький бейдж
-
-Чтобы использолвать маленький бейдж, используйте модификатор `_minified`.
-
-```ts
-<Badge minified label="Badge" />
-```
-
-<BadgeExampleMinified />
-
-### Бейдж с иконкой
-
-Чтобы получить бейдж сиконкой, используйте модификатор `_icon`.
-
-```ts
-<Badge icon={IconUser} label="Badge" />
-```
-
-<BadgeExampleIcon />
-
-### Пример использования свойства "as"
-
-- указываем новый Тэг или компонент
-- расширяем интерфейс нашего компонента нужными нам свойствами
-
-```ts
-<Badge as="a" href="#" label="Лэйбл" />
-```
-
-<BadgeExampleAs />

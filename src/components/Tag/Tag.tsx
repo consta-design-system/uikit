@@ -1,14 +1,13 @@
-import './Tag.css';
-
 import React from 'react';
 
 import { IconProps } from '../../icons/Icon/Icon';
-import { cn } from '../../utils/bem';
 import { TagBase } from '../TagBase/TagBase';
 
 type TagBaseProps = React.ComponentProps<typeof TagBase>;
 
-type TagPropMode = 'check' | 'button' | 'cancel' | 'link';
+export const tagPropMode = ['button', 'check', 'cancel', 'link', 'info'] as const;
+export const tagPropModeDefault = tagPropMode[0];
+type TagPropMode = typeof tagPropMode[number];
 
 type CommonProps = {
   size?: TagBaseProps['size'];
@@ -20,7 +19,7 @@ type CommonProps = {
 };
 
 type PropsWithModeButton = CommonProps & {
-  mode: 'button';
+  mode?: 'button';
   onClick: React.MouseEventHandler<HTMLButtonElement>;
   checked?: never;
   onChange?: never;
@@ -50,14 +49,24 @@ type PropsWithModeCancel = CommonProps & {
   checked?: never;
 };
 
+type PropsWithModeInfo = CommonProps & {
+  mode: 'info';
+  onCancel?: never;
+  onClick?: never;
+  onChange?: never;
+  checked?: never;
+};
+
 type Props<ROLE extends TagPropMode = 'button'> = ROLE extends 'button'
   ? PropsWithModeButton & Omit<JSX.IntrinsicElements['button'], keyof PropsWithModeButton>
   : {} & ROLE extends 'check'
   ? PropsWithModeCheck & Omit<JSX.IntrinsicElements['button'], keyof PropsWithModeCheck>
   : {} & ROLE extends 'cancel'
-  ? PropsWithModeCancel & Omit<JSX.IntrinsicElements['div'], keyof PropsWithModeCancel>
+  ? PropsWithModeCancel & Omit<JSX.IntrinsicElements['span'], keyof PropsWithModeCancel>
   : {} & ROLE extends 'link'
   ? PropsWithModeLink & Omit<JSX.IntrinsicElements['a'], keyof PropsWithModeLink>
+  : {} & ROLE extends 'info'
+  ? PropsWithModeInfo & Omit<JSX.IntrinsicElements['span'], keyof PropsWithModeInfo>
   : {};
 
 type ForwardRefRender<ROLE extends TagPropMode> = (
@@ -73,8 +82,6 @@ type Component = <ROLE extends TagPropMode>(
   props: Props<ROLE> & React.RefAttributes<HTMLElement>,
 ) => React.ReactElement | null;
 
-export const cnTag = cn('Tag');
-
 export function getParams(
   mode: TagPropMode,
   checked?: PropsWithModeCheck['checked'],
@@ -85,6 +92,7 @@ export function getParams(
   view?: TagBaseProps['view'];
   onClick?: TagBaseProps['onClick'];
   onCancel?: TagBaseProps['onCancel'];
+  withAction?: TagBaseProps['withAction'];
   as: keyof JSX.IntrinsicElements;
 } {
   switch (mode) {
@@ -93,12 +101,14 @@ export function getParams(
         view: 'filled',
         onClick,
         as: 'button',
+        withAction: true,
       };
     case 'link':
       return {
         view: 'filled',
         onClick,
         as: 'a',
+        withAction: true,
       };
     case 'check':
       return {
@@ -108,20 +118,25 @@ export function getParams(
             ? (e: React.MouseEvent) => onChange({ e, checked: !checked })
             : undefined,
         as: 'button',
+        withAction: true,
       };
     case 'cancel':
       return {
         view: 'filled',
         onCancel,
-        as: 'div',
+        as: 'span',
+      };
+    case 'info':
+      return {
+        view: 'filled',
+        as: 'span',
       };
   }
 }
 
 export const Tag: Component = forwardRef((props, ref) => {
-  const { mode = 'button', className, onChange, checked, onCancel, onClick, ...otherProps } = props;
-
+  const { mode = tagPropModeDefault, onChange, checked, onCancel, onClick, ...otherProps } = props;
   const params = getParams(mode, checked, onClick, onChange, onCancel);
 
-  return <TagBase {...otherProps} {...params} ref={ref} className={cnTag({ mode }, [className])} />;
+  return <TagBase {...otherProps} {...params} ref={ref} />;
 });

@@ -1,13 +1,120 @@
-# Attach
+import { TagExampleSize } from './examples/TagExampleSize/TagExampleSize';
+import { TagExampleMode } from './examples/TagExampleMode/TagExampleMode';
+import { TagExampleText } from './examples/TagExampleText/TagExampleText';
+import { TagExampleIcon } from './examples/TagExampleIcon/TagExampleIcon';
+import { TagExampleGroup } from './examples/TagExampleGroup/TagExampleGroup';
 
-## Пример использования
+# Tag
 
-Использование компонента:
+Нужен для оформления тегов: маркеров, которые объединяют группы статей, фотографий,
+документов или другие похожие объекты.
+
+- [Режим работы](#режим-работы)
+- [Текст](#текст)
+- [Иконка](#иконка)
+- [Размер](#размер)
+- [Группы тегов](#группы-тегов)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+## Режим работы
+
+За тип тега отвечает свойство `mode`.
+
+`button` делает из тега кнопку, такой тег можно нажимать.
+Это основной тип тега, он включен по умолчанию.
+
+`link` превращает тег в ссылку.
+
+`check` поддерживает два состояния: выбранное и невыбранное. Используйте этот тип,
+если хотите, чтобы пользователь мог отмечать некоторые теги. Чтобы этот режим заработал,
+используйте `onChange`.
+
+`cancel` нужен, чтобы у пользователя была возможность удалить тег. Чтобы этот режим заработал,
+используйте `onCancel`.
+
+<TagExampleMode />
+
+```ts
+<Tag mode="button" onClick={action('onClick')} label="Button" />
+<Tag mode="link" label="Link" href="#" />
+<Tag mode="check" onChange={action('onChange')} label="Check" checked={false} />
+<Tag mode="cancel" onCancel={action('onCancel')} label="Cancel" />
+```
+
+## Текст
+
+Тег — это характеристика объекта. Поэтому в тексте обычно используются
+существительные и прилагательные в единственном числе.
+Например, в галерее изображений могут быть такие теги:
+
+<TagExampleText />
+
+```ts
+<Tag label="Рисунок" />
+<Tag label="Портрет" />
+<Tag label="Фото" />
+<Tag label="Полосатый" />
+<Tag label="В клеточку" />
+```
+
+### Иконка
+
+Вы можете добавить к тегу иконку — любую из [библиотеки иконок](?path=/story/components-icons--playground).
+
+<TagExampleIcon />
+
+```ts
+<Tag icon={IconMoon} label="Луна" />
+<Tag icon={IconSun} label="Солнце" />
+```
+
+## Размер
+
+За размер тега отвечает свойство `size`. По умолчанию — `m`.
+
+<TagExampleSize />
+
+```ts
+<Tag size="xs" label="Размер XS" />
+<Tag size="s" label="Размер S" />
+<Tag size="m" label="Размер M" />
+<Tag size="l" label="Размер L" />
+```
+
+### Группы тегов
+
+Используйте группы, если вам нужно объединить теги по какому-то принципу.
+
+За группы отвечает свойство `group`. Все теги с одинаковой меткой группы будут
+помечены одним цветом.
+
+Вот такие группы тегов вполне могут появиться на каком-нибудь эзотерическом сайте:
+
+<TagExampleGroup />
+
+## Свойства
+
+| Свойство                     | Тип и значения                                                                | По умолчанию | Описание                                                                        |
+| ---------------------------- | ----------------------------------------------------------------------------- | ------------ | ------------------------------------------------------------------------------- |
+| [`label?`](#текст)           | `string`                                                                      | -            | Текст тега                                                                      |
+| [`mode?`](#режим-работы)     | `'check', 'button', 'cancel','link'`                                          | `'button'`   | Тип тега                                                                        |
+| [`checked?`](#режим-работы)  | `boolean, never`                                                              | -            | Отмечает тег выбранным. Доступно только при `mode` = `'check'`                  |
+| [`size?`](#размер)           | `'xs' , 's' , 'm' , 'l'`                                                      | `'m'`        | Размер тега                                                                     |
+| [`group?`](#группы-тегов)    | `1..9, '1'...'9'`                                                             | -            | Метка группы                                                                    |
+| [`icon?`](#иконка)           | `React.FC<IconProps>`                                                         | -            | Иконка                                                                          |
+| `onClick?`                   | `React.MouseEventHandler, never`                                              | -            | Действие при клике по тегу. Доступно при `mode` = `'button'`, `'link'`          |
+| [`onCancel?`](#режим-работы) | `React.MouseEventHandler, never`                                              | -            | Действие при клике по крестику на теге. Доступно только при `mode` = `'cancel'` |
+| [`onChange?`](#режим-работы) | `({ e, checked }: { e?: React.MouseEvent; checked: boolean }) => void, never` | -            | Действие при клике по тегу. Доступно только при `mode` = `'check'`              |
+| `className?`                 | `string`                                                                      | -            | Дополнительный CSS-класс                                                        |
+| `ref?`                       | `React.Ref<HTMLElement>`                                                      | -            | Ссылка на корневой DOM-элемент этого компонента                                 |
+
+## Пример
 
 ```ts
 // src/App.ts
 import React from 'react';
-import { Tag } from '@gpn-design/uikit/Tag';
+import { Tag } from '@consta/uikit/Tag';
 
 const handleClick = () => console.log('click');
 
@@ -15,19 +122,3 @@ const App = () => {
   return <Tag mode="button" label="Label" onClick={handleClick} />;
 };
 ```
-
-## Свойства
-
-| Свойство   | Тип                                                                           | По умолчанию | Описание                                                                 |
-| ---------- | ----------------------------------------------------------------------------- | ------------ | ------------------------------------------------------------------------ |
-| label      | `string`                                                                      | -            | Текст на тэге                                                            |
-| mode       | `'check' , 'button' , 'cancel' ,'link'`                                       | `'button'`   | Режим                                                                    |
-| onClick?   | `React.MouseEventHandler, never`                                              | -            | Событие клика по тэгу. Доступно только при `mode` = `'button'`, `'link'` |
-| onCancel?  | `React.MouseEventHandler, never`                                              | -            | Событие клика по крестику. Доступно только при `mode` = `'cancel'`       |
-| onChange?  | `({ e, checked }: { e?: React.MouseEvent; checked: boolean }) => void, never` | -            | Событие клика по тэгу. Доступно только при `mode` = `'check'`            |
-| checked?   | `boolean, never`                                                              | -            | Пометка выбранного элемента. Доступно только при `mode` = `'check'`      |
-| size?      | `'xs' , 's' , 'm' , 'l'`                                                      | `'m'`        | Размер                                                                   |
-| group?     | `1..9, '1'...'9'`                                                             | -            | Метка группы                                                             |
-| icon?      | `React.FC<IconProps>`                                                         | -            | Иконка                                                                   |
-| className? | `string`                                                                      | -            | Дополнительный класс                                                     |
-| ref?       | `React.Ref<HTMLElement>`                                                      | -            | Ссылка на корневой DOM элемент компонента                                |

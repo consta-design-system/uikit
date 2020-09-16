@@ -35,8 +35,8 @@ import { ButtonExampleLoading } from './examples/ButtonExampleLoading/ButtonExam
 
 Кнопка в фокусе визуально выделяется, чтобы человек понимал, что вот-вот нажмёт на неё и что-то произойдёт.
 
+- [Текст на кнопке](#текст-на-кнопке)
 - [Внешний вид](#внешний-вид)
-  - [Текст на кнопке](#текст-на-кнопке)
   - [Типы кнопок](#типы-кнопок)
   - [Размер](#размер)
   - [Кнопка с иконкой](#кнопка-с-иконкой)
@@ -45,9 +45,8 @@ import { ButtonExampleLoading } from './examples/ButtonExampleLoading/ButtonExam
 - [Список свойств](#список-свойств)
 - [Пример использования](#пример-использования)
 
-## Внешний вид
 
-### Текст на кнопке
+## Текст на кнопке
 
 Текст на кнопке показывает, за какое действие она отвечает. Сделайте его однозначным,
 понятным и коротким. Пишите с заглавной буквы, точка не нужна. Не используйте Caps Lock.
@@ -85,6 +84,8 @@ import { ButtonExampleLoading } from './examples/ButtonExampleLoading/ButtonExam
 используйте только иконку.
 
 <ButtonExampleNameOverflow />
+
+## Внешний вид
 
 ### Типы кнопок
 
@@ -179,7 +180,7 @@ import { ButtonExampleLoading } from './examples/ButtonExampleLoading/ButtonExam
 
 ### Кнопка с иконкой
 
-Название кнопки можно дополнять иконкой. Она поможет быстрее найти нужную кнопку в ряду других и быстрее понять, что эта кнопка делает. За иконку отвечают свойства `iconLeft` (ставит иконку слева от текста на кнопке) или `iconRight` (ставит иконку справа). Оба эти свойства ожидают компонент иконки из нашей [библиотеки иконок](?path=/docsx/icons--icons).
+Название кнопки можно дополнять иконкой. Она поможет быстрее найти нужную кнопку в ряду других и быстрее понять, что эта кнопка делает. За иконку отвечают свойства `iconLeft` (ставит иконку слева от текста на кнопке) или `iconRight` (ставит иконку справа). Оба эти свойства ожидают компонент иконки из нашей [библиотеки иконок](?path=/story/components-icons--playground).
 
 <ButtonExampleIconBasic />
 
@@ -256,20 +257,20 @@ import { ButtonExampleLoading } from './examples/ButtonExampleLoading/ButtonExam
 
 | Свойство                 | Тип или варианты значения                                                                 | По умолчанию              | Описание                                                                         |
 | ------------------------ | ----------------------------------------------------------------------------------------- | ------------------------- | -------------------------------------------------------------------------------- |
-| [`label`](#view)         | `string`                                                                                  | —                         | Текст на кнопке                                                                  |
-| [`view`](#view)          | `'clear', 'primary', 'secondary', 'ghost'`                                                | `primary`                 | Внешний вид                                                                      |
+| [`label`](#текст-на-кнопке)         | `string`                                                                                  | —                         | Текст на кнопке                                                                  |
+| [`view`](#внешний-вид)          | `'clear', 'primary', 'secondary', 'ghost'`                                                | `primary`                 | Внешний вид                                                                      |
 | [`disabled`](#disabled)  | `boolean`                                                                                 | `false`                   | Блокировка кнопки                                                                |
-| [`size`](#size)          | `'xs', 's', 'm', 'l'`                                                                     | `m`                       | Размер                                                                           |
-| [`width`](#width)        | `'full', 'default'`                                                                       | `default`                 | Ширина                                                                           |
-| [`form`](#form)          | `'default', 'round', 'brick', 'brickRound', 'roundBrick', 'brickDefault', 'defaultBrick'` | `default`                 | Форма                                                                            |
-| [`iconLeft`](#icon)      | `React.FC<IIcon>`                                                                         | —                         | Иконка слева                                                                     |
-| [`iconRight`](#icon)     | `React.FC<IIcon>`                                                                         | —                         | Иконка справа                                                                    |
-| [`onlyIcon`](#icon)      | `boolean`                                                                                 | `false`                   | Только иконка без текста                                                         |
-| [`iconSize`](#icon_size) | `'xs', 's', 'm'`                                                                          | Зависит от размера кнопки | Размер иконки                                                                    |
+| [`size`](#размер)          | `'xs', 's', 'm', 'l'`                                                                     | `m`                       | Размер                                                                           |
+| [`width`](#размер)        | `'full', 'default'`                                                                       | `default`                 | Ширина                                                                           |
+| [`form`](#форма)          | `'default', 'round', 'brick', 'brickRound', 'roundBrick', 'brickDefault', 'defaultBrick'` | `default`                 | Форма                                                                            |
+| [`iconLeft`](#кнопка-с-иконкой)      | `React.FC<IIcon>`                                                                         | —                         | Иконка слева                                                                     |
+| [`iconRight`](#кнопка-с-иконкой)     | `React.FC<IIcon>`                                                                         | —                         | Иконка справа                                                                    |
+| [`onlyIcon`](#только-иконка)      | `boolean`                                                                                 | `false`                   | Только иконка без текста                                                         |
+| [`iconSize`](#размер-иконки) | `'xs', 's', 'm'`                                                                          | Зависит от размера кнопки | Размер иконки                                                                    |
 | `title`                  | `string`                                                                                  | —                         | HTML-атрибут `title` — всплывающая подсказка, появляется при наведении на кнопку |
 | `tabIndex`               | `number`                                                                                  | —                         | Порядковый номер при переходе между элементами интерфейса по клавише **tab**     |
 | `as`                     | `React.ElementType`                                                                       | `button`                  | HTML-тег для кнопки                                                              |
-| [`loading`](#events)     | `boolean`                                                                                 | `false`                   | Отображает прелоадер вместо кнопки во время загрузки информации                  |
+| [`loading`](#прелоадер)     | `boolean`                                                                                 | `false`                   | Отображает прелоадер вместо кнопки во время загрузки информации                  |
 | `onClick`                | `React.EventHandler<React.MouseEvent>`                                                    | —                         | Действие по клику                                                                |
 | `innerRef`               | `React.Ref<HTMLElement>`                                                                  | —                         | Ссылка на корневой DOM-элемент                                                   |
 | `className`              | `string`                                                                                  | —                         | Дополнительные CSS-классы                                                        |
@@ -278,7 +279,7 @@ import { ButtonExampleLoading } from './examples/ButtonExampleLoading/ButtonExam
 
 ```ts
 import React from 'react';
-import { Button } from '@gpn-design/uikit/Button';
+import { Button } from '@consta/uikit/Button';
 
 const App = () => {
   return <Button label="Сохранить" />;

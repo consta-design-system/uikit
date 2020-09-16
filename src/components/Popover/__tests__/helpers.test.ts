@@ -48,6 +48,15 @@ describe('getPositionsByDirection', () => {
       downLeft: { x: -100, y: 0 },
       downCenter: { x: -50, y: 0 },
       downRight: { x: 0, y: 0 },
+
+      downStartLeft: { x: 0, y: 0 },
+      upStartLeft: { x: 0, y: -50 },
+      downStartRight: { x: -100, y: 0 },
+      upStartRight: { x: -100, y: -50 },
+      leftStartUp: { x: -100, y: 0 },
+      leftStartDown: { x: -100, y: -50 },
+      rightStartUp: { x: 0, y: 0 },
+      rightStartDown: { x: 0, y: -50 },
     };
 
     expect(result).toEqual(expected);
@@ -74,6 +83,15 @@ describe('getPositionsByDirection', () => {
       downLeft: { x: -100, y: 5 },
       downCenter: { x: -50, y: 5 },
       downRight: { x: 0, y: 5 },
+
+      downStartLeft: { x: 0, y: 5 },
+      upStartLeft: { x: 0, y: -50 - 5 },
+      downStartRight: { x: -100, y: 5 },
+      upStartRight: { x: -100, y: -50 - 5 },
+      leftStartUp: { x: -100 - 5, y: 0 },
+      leftStartDown: { x: -100 - 5, y: -50 },
+      rightStartUp: { x: 5, y: 0 },
+      rightStartDown: { x: 5, y: -50 },
     };
 
     expect(result).toEqual(expected);
@@ -100,6 +118,15 @@ describe('getPositionsByDirection', () => {
       downLeft: { x: 300 + 10 - 100, y: 500 + 20 },
       downCenter: { x: 300 + 10 - 50, y: 500 + 20 },
       downRight: { x: 300 + 10, y: 500 + 20 },
+
+      downStartLeft: { x: 300, y: 500 + 20 },
+      upStartLeft: { x: 300, y: 500 - 50 },
+      downStartRight: { x: 200 + 20, y: 500 + 20 },
+      upStartRight: { x: 200 + 20, y: 500 - 50 },
+      leftStartUp: { x: 300 - 100, y: 500 },
+      leftStartDown: { x: 300 - 100, y: 500 - 50 + 20 },
+      rightStartUp: { x: 300 + 20, y: 500 },
+      rightStartDown: { x: 300 + 20, y: 500 - 50 + 20 },
     };
 
     expect(result).toEqual(expected);
@@ -126,6 +153,15 @@ describe('getPositionsByDirection', () => {
       downLeft: { x: 300 + 100 - 100, y: 500 + 200 },
       downCenter: { x: 300 + 100 - 50, y: 500 + 200 },
       downRight: { x: 300 + 100, y: 500 + 200 },
+
+      downStartLeft: { x: 300, y: 500 + 200 },
+      upStartLeft: { x: 300, y: 500 - 50 },
+      downStartRight: { x: 200 + 200, y: 500 + 200 },
+      upStartRight: { x: 200 + 200, y: 500 - 50 },
+      leftStartUp: { x: 300 - 100, y: 500 },
+      leftStartDown: { x: 300 - 100, y: 500 - 50 + 200 },
+      rightStartUp: { x: 300 + 200, y: 500 },
+      rightStartDown: { x: 300 + 200, y: 500 - 50 + 200 },
     };
 
     expect(result).toEqual(expected);
@@ -153,6 +189,15 @@ describe('getPositionsByDirection', () => {
       downLeft: { x: 300 + 10 - 100 + 8, y: 500 + 20 },
       downCenter: { x: 300 + 10 - 50, y: 500 + 20 },
       downRight: { x: 300 + 10 - 8, y: 500 + 20 },
+
+      downStartLeft: { x: 300, y: 500 + 20 },
+      upStartLeft: { x: 300, y: 500 - 50 },
+      downStartRight: { x: 200 + 20, y: 500 + 20 },
+      upStartRight: { x: 200 + 20, y: 500 - 50 },
+      leftStartUp: { x: 300 - 100, y: 500 },
+      leftStartDown: { x: 300 - 100, y: 500 - 50 + 20 },
+      rightStartUp: { x: 300 + 20, y: 500 },
+      rightStartDown: { x: 300 + 20, y: 500 - 50 + 20 },
     };
 
     expect(result).toEqual(expected);

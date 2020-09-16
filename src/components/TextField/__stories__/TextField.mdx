@@ -1,1 +1,265 @@
+import { TextFieldExampleStatus } from './examples/TextFieldExampleStatus/TextFieldExampleStatus';
+import {
+  TextFieldExampleTextPlaceholder,
+  TextFieldExampleTextValue,
+  TextFieldExampleTextLeft,
+  TextFieldExampleTextRight,
+} from './examples/TextFieldExampleText/TextFieldExampleText';
+
+import {
+  TextFieldExampleSize,
+  TextFieldExampleSizeWidth,
+  TextFieldExampleSizeRows,
+  TextFieldExampleSizeMinRows,
+} from './examples/TextFieldExampleSize/TextFieldExampleSize';
+
+import {
+  TextFieldExampleView,
+  TextFieldExampleViewDisabled,
+} from './examples/TextFieldExampleView/TextFieldExampleView';
+
+import {
+  TextFieldExampleFormBasic,
+  TextFieldExampleFormHybrid,
+} from './examples/TextFieldExampleForm/TextFieldExampleForm';
+
 # TextField
+
+Поле для ввода текста — из одной или нескольких строк. Используется в формах.
+
+- [Тег для поля](#тег-для-поля)
+- [Статус](#статус-поля)
+- [Содержимое](#содержимое-поля)
+  - [Подсказка](#подсказка)
+  - [Предустановленное значение](#предустановленное-значение)
+  - [Дополнительная информация](#дополнительная-информация)
+- [Внешний вид](#внешний-вид)
+  - [Вид](#внешний-вид)
+  - [Форма](#форма)
+- [Размеры](#размеры)
+  - [Размер шрифта, высота, отступы](#размер-поля)
+  - [Строки и колонки](#строки-и-колонки)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+## Тип поля
+
+Свойство `type` определяет тип поля, которым оно будет задаваться.
+
+- `text` — поле для ввода текста в одну строку, тег `<input type="text">`
+- `textarea` — текстовое поле из нескольких строк, тег `<textarea></textarea>`
+
+Здесь описаны два основных типа, но вы можете использовать любые `input type`,
+например, `<input type="number">`.
+
+## Статус поля
+
+С помощью статуса можно выделить поле: показать, где ошибка, или, наоборот,
+отметить правильно заполненные поля.
+
+За статус отвечает свойство `state`. Если оно не указано, поле будет обычным.
+
+<TextFieldExampleStatus />
+
+```ts
+<TextField state="success" placeholder="success" />
+<TextField state="alert" placeholder="error" />
+<TextField state="warning" placeholder="warning" />
+<TextField placeholder="TextField" />
+```
+
+## Содержимое поля
+
+### Подсказка
+
+Если в поле нужно вводить данные в определенном формате, добавьте подсказку.
+Это можно сделать с помощью свойства `placeholder`.
+
+<TextFieldExampleTextPlaceholder />
+
+```ts
+<TextField placeholder="Здесь только цифры" />
+```
+
+### Значение
+
+Указать значение можно в `value`.
+
+<TextFieldExampleTextValue />
+
+```ts
+const App = () => {
+  const [value, setValue] = useState('стопиццот');
+  const handleChange = ({ value }) => setValue(value);
+
+  return <TextField value={value} onChange={handleChange} />;
+};
+```
+
+### Дополнительная информация
+
+Вы можете добавить в поле дополнительную информацию — слева или справа.
+
+Это может быть текст:
+
+<TextFieldExampleTextLeft />
+
+```ts
+<TextField leftSide="куда" />
+<TextField leftSide="кому" />
+```
+
+Или иконка:
+
+<TextFieldExampleTextRight />
+
+```ts
+<TextField leftSide={IconDiamond} rightSide="карат" />
+```
+
+## Внешний вид
+
+Вы можете сделать поле незаметным: укажите `view = "clear"`. В этом случае
+поля с разными статусами и разной формы будут выглядет одинаково.
+
+<TextFieldExampleView />
+
+```ts
+<TextField view="default" placeholder="Самое обычное поле" />
+<TextField view="clear" placeholder="Незаметное поле" />
+```
+
+Если хотите заблокировать поле, добавьте `disabled`.
+
+<TextFieldExampleViewDisabled />
+
+```ts
+<TextField placeholder="Самое обычное поле" disabled />
+```
+
+### Форма
+
+За форму поля отвечает свойство `form.` По умолчанию у полей скругленные края,
+но еще их можно сделать круглыми и квадратными.
+
+<TextFieldExampleFormBasic />
+
+```ts
+<TextField placeholder="Default" />
+<TextField form="brick" placeholder="Brick" />
+<TextField form="round" placeholder="Round" />
+```
+
+Для комбинации поля с кнопкой используйте гибридные формы.
+У таких полей правая и левая грани могут отличаться.
+
+<TextFieldExampleFormHybrid />
+
+```ts
+<TextField placeholder="Электронная почта" form="roundClear" style={{ width: '260px' }} />
+<Button form="brickRound" label="Подписаться" />
+```
+
+## Размеры
+
+### Размер поля
+
+Свойство `size` отвечает за размер поля — вместе с ним меняется размер шрифта, отступы и высота поля.
+Если вам нужно оставить шрифт и отступы неизменными и сделать поле уже или шире,
+поменяйте количество строк.
+
+<TextFieldExampleSize />
+
+```ts
+<TextField size="xs" placeholder="Размер XS" />
+<TextField size="s" placeholder="Размер S" />
+<TextField size="m" placeholder="Размер M" />
+<TextField size="l" placeholder="Размер L" />
+```
+
+Можно растянуть поле на полную ширину с помощью `width="full"`.
+
+<TextFieldExampleSizeWidth />
+
+```ts
+<TextField width="full" placeholder="Страшно широкое поле" />
+```
+
+### Строки и колонки
+
+Чтобы добавить большой по объему текст (например, отзыв или комментарий),
+используйте `type="textarea"`. У этого типа поля можно задать высоту и ширину.
+
+Количество колонок (ширину) можно указать в свойстве `cols`,
+а количество строк (высоту) — в `rows`.
+
+<TextFieldExampleSizeRows />
+
+```ts
+<TextField
+  type="textarea"
+  rows="13"
+  cols="25"
+  value="Я иду и пою обо всем хорошем и улыбку свою я дарю прохожим"
+/>
+```
+
+Можно задать интервал для высоты (от `minRows` до `maxRows`) и ограничить ширину (`maxLength`).
+
+<TextFieldExampleSizeMinRows />
+
+```ts
+<TextField
+  type="textarea"
+  minRows="13"
+  cols="25"
+  value="Я иду и пою обо всем хорошем и улыбку свою я дарю прохожим"
+/>
+```
+
+## Свойства
+
+| Свойство                                   | Тип                                                                                                                                                                  | По умолчанию | Описание                                                                     |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------- |
+| [`type?`](#тег-для-поля)                   | `'text', 'textarea'`                                                                                                                                                 | `'text'`     | Тег для текстового поля в DOM                                                |
+| [`state?`](#статус-поля)                   | `'', 'alert', 'success', 'warning'`                                                                                                                                  | `' '`        | Тип поля                                                                     |
+| [`disabled?`](#внешний-вид)                | `boolean`                                                                                                                                                            | -            | Делает поле неактивным                                                       |
+| [`size?`](#размеры)                        | `'xs', 's', 'm', 'l'`                                                                                                                                                | `'m'`        | Размер шрифта, отступы и высота поля                                         |
+| [`width?`](#размеры)                       | `'full', 'default'`                                                                                                                                                  | `'default'`  | Ширина поля                                                                  |
+| [`rows?`](#строки-и-колонки)               | `number`                                                                                                                                                             | -            | Количество строк                                                             |
+| [`cols?`](#строки-и-колонки)               | `number`                                                                                                                                                             | -            | Количество колонок                                                           |
+| [`minRows?`](#строки-и-колонки)            | `number`                                                                                                                                                             | -            | Минимум строк                                                                |
+| [`maxRows?`](#строки-и-колонки)            | `number`                                                                                                                                                             | -            | Максимум строк                                                               |
+| [`maxLength?`](#строки-и-колонки)          | `number`                                                                                                                                                             | -            | Максимальная ширина                                                          |
+| [`view?`](#внешний-вид)                    | `'default', 'clear'`                                                                                                                                                 | `'default'`  | Вид поля                                                                     |
+| [`form?`](#форма)                          | `'default', 'brick', 'round', 'clearRound', 'roundClear', 'clearDefault', 'defaultClear', 'defaultBrick', 'brickDefault', 'brickClear', 'clearBrick', 'clearClear'`, | `'default'`  | Форма поля                                                                   |
+| [`leftSide?`](#дополнительная-информация)  | `React.FC<IconProps>\string`                                                                                                                                         | -            | Иконка или текст слева, внутри поля                                          |
+| [`rightSide?`](#дополнительная-информация) | `React.FC<IconProps>\string`                                                                                                                                         | -            | Иконка или текст справа, внутри поля                                         |
+| `value?`                                   | `string`, `null`                                                                                                                                                     | -            | Предустановленный текст в поле                                               |
+| `placeholder?`                             | `string`                                                                                                                                                             | -            | Подсказка внутри поля                                                        |
+| `id?`                                      | `string`                                                                                                                                                             | -            | ID поля в DOM                                                                |
+| `name?`                                    | `string`                                                                                                                                                             | -            | Имя поля в DOM                                                               |
+| `required?`                                | `boolean`                                                                                                                                                            | -            | Нужно заполнить                                                              |
+| `tabIndex?`                                | `number`                                                                                                                                                             | -            | Порядковый номер при переходе между элементами интерфейса по клавише **tab** |
+| `autoFocus?`                               | `boolean`                                                                                                                                                            | -            | Перемещает фокус в поле                                                      |
+| `onFocus?`                                 | `React.FocusEventHandler<HTMLElement>`                                                                                                                               | -            | Действие по фокусу                                                           |
+| `onBlur?`                                  | `React.FocusEventHandler<HTMLElement>`                                                                                                                               | -            | Действие при потере фокуса                                                   |
+| `onChange?`                                | `(args: e: React.ChangeEvent; id?: string, number; name?: string; value: string, null;) => void;`                                                                    | -            | Действие при изменении текстового поля                                       |
+| `className?`                               | `string`                                                                                                                                                             | -            | Дополнительный CSS-класс                                                     |
+| `inputRef?`                                | `React.Ref<HTMLElement>`                                                                                                                                             | -            | Ссылка на DOM-элемент поля ввода                                             |
+| `ref?`                                     | `React.Ref<HTMLDivElement>`                                                                                                                                          | -            | Ссылка на корневой DOM-элемент компонента                                    |
+
+## Пример
+
+```ts
+// src/App.ts
+import React, { useState } from 'react';
+import { TextField } from '@consta/uikit/TextField';
+
+const App = () => {
+  const [value, setValue] = useState(null);
+  const handleChange = ({ value }) => setValue(value);
+
+  return <TextField onChange={handleChange} value={value} />;
+};
+```

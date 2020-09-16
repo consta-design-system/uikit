@@ -1,1 +1,115 @@
+import { CheckboxExampleSize } from './examples/CheckboxExampleSize/CheckboxExampleSize';
+import { CheckboxExampleStatus } from './examples/CheckboxExampleStatus/CheckboxExampleStatus';
+import { CheckboxExampleHead } from './examples/CheckboxExampleName/CheckboxExampleName';
+import { CheckboxExampleHead2 } from './examples/CheckboxExampleName/CheckboxExampleName';
+import { CheckboxExampleNegation } from './examples/CheckboxExampleName/CheckboxExampleName';
+import { CheckboxExampleGeneralization } from './examples/CheckboxExampleName/CheckboxExampleName';
+
 # Checkbox
+
+Чекбокс — элемент с двумя состояниями: **выбран** и **не выбран**.
+
+С помощью чекбокса пользователь может сделать выбор — например, отметить
+элементы в списке.
+
+Используйте чекбокс, если хотите, чтобы пользователь сделал выбор, а потом подтвердил
+изменения. Например, отметил пункты в анкете и нажал **Отправить**.
+
+Если вам нужно переключить режим, выбрать тему оформления или сделать другое
+мгновенное изменение в интерфейсе, используйте [Switch](#?path=/docs/components-switch--playground).
+
+- [Название](#название)
+- [Состояния](#состояния)
+- [Размер](#размер)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+## Название
+
+Название — это надпись рядом с чекбоксом. Пишется с заглавной буквы, без точки.
+
+### Согласуйте с заголовком
+
+Это просто лучше читается. Сравните:
+
+<CheckboxExampleHead />
+
+Если не нравится, что пункты начинаются с предлогов, поменяйте заголовок.
+
+<CheckboxExampleHead2 />
+
+### Не используйте отрицания
+
+Чтобы не путать пользователя. Когда выбран чекбокс, рядом с которым написано **Не хочу**,
+приходится мысленно решать равенство:`не + не + хочу = хочу`.
+
+<CheckboxExampleNegation />
+
+### Не обобщайте
+
+Если хотите дать пользователю возможность отметить все элементы в списке
+или, наоборот, удалить все отметки, сделайте это другим способом.
+
+<CheckboxExampleGeneralization />
+
+## Состояния
+
+Обычный чекбокс — это поле, в котором можно отметить, что пункт выбран (поставить галочку).
+
+Вы можете сделать выбор за пользователя — поставить галочку заранее с помщью свойства `checked`.
+
+В сложном списке может появиться чекбокс с неопределенным статусом — и не выбранный, и не пустой.
+Например, если у чекбокса есть вложенные чекбоксы, и часть из них выбрана, а часть нет.
+Сделать такой можно с помощью свойства `intermediate`.
+
+Если не хотите, чтобы выбор можно было менять, добавьте свойство `disabled`.
+
+<CheckboxExampleStatus />
+
+```ts
+<Checkbox label="Checkbox" />
+<Checkbox checked label="Checked" />
+<Checkbox intermediate label="Intermediate" />
+<Checkbox disabled label="Disabled" />
+<Checkbox disabled checked label="Disabled Checked" />
+```
+
+## Размер
+
+За размер отвечает свойство `size`.
+
+<CheckboxExampleSize />
+
+```ts
+<Checkbox size="m" label="Размер M" />
+<Checkbox size="l" label="Размер L" />
+```
+
+## Свойства
+
+| Свойство                      | Тип                                         | По умолчанию | Описание                                                                     |
+| ----------------------------- | ------------------------------------------- | ------------ | ---------------------------------------------------------------------------- |
+| [`label?`](#название)         | `string`                                    | -            | Надпись рядом с чекбоксом                                                    |
+| [`size?`](#размер)            | `'m', 'l'`                                  | `'m'`        | Размер                                                                       |
+| [`checked`](#состояния)       | `boolean`                                   | -            | Отмечает, выбран чекбокс или нет (ставит галочку)                            |
+| [`disabled?`](#состояния)     | `boolean`                                   | -            | Блокирует чекбокс                                                            |
+| [`intermediate?`](#состояния) | `boolean`                                   | -            | Делает чекбокс неопределенным                                                |
+| `name?`                       | `string`                                    | -            | Имя `<input>` в DOM                                                          |
+| `onFocus?`                    | `React.FocusEventHandler<HTMLInputElement>` | -            | Событие фокуса                                                               |
+| `onBlur?`                     | `React.FocusEventHandler<HTMLInputElement>` | -            | Событие расфокусировки                                                       |
+| `tabIndex?`                   | `number`                                    | -            | Порядковый номер при переходе между элементами интерфейса по клавише **tab** |
+| `className?`                  | `string`                                    | -            | Дополнительный CSS-класс                                                     |
+| `inputRef?`                   | `React.Ref<HTMLInputElement>`               | -            | Ссылка на DOM-элемент `<input>`                                              |
+| `ref?`                        | `React.Ref<HTMLLabelElement>`               | -            | Ссылка на корневой DOM-элемент этого компонента                              |
+
+## Пример
+
+```ts
+// src/App.ts
+import React from 'react';
+import { Checkbox } from '@consta/uikit/Checkbox';
+
+const App = () => {
+  return <Checkbox label="Поставьте галочку" />;
+};
+```

@@ -14,7 +14,12 @@ import { createMetadata } from '../../../utils/storybook';
 import { Button } from '../../Button/Button';
 import { Item, SnackBar, SnackBarItemStatus } from '../SnackBar';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 import mdx from './SnackBar.mdx';
+
+type State = Item[];
+type Action = { type: 'add'; item: Item } | { type: 'remove'; key: number | string };
 
 const defaultKnobs = () => ({
   withIcon: boolean('withIcon', false),
@@ -36,10 +41,7 @@ const getItemIconByStatus = (status: SnackBarItemStatus): React.FC<IconProps> | 
 
 const cnSnackBarStories = cn('SnackBarStories');
 
-function reducer(
-  state: Item[],
-  action: { type: 'add' | 'remove'; item?: Item; key?: number | string },
-) {
+function reducer(state: State, action: Action) {
   switch (action.type) {
     case 'add':
       return [...state, action.item];

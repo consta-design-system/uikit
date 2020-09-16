@@ -4,67 +4,91 @@ import { TabsExampleView } from './examples/TabsExampleView/TabsExampleView';
 
 # Tabs
 
-## Пример использования
+Табы переключают вкладки на странице.
 
-Использование компонента:
+- [Текст](#текст-для-таба)
+- [Иконки](#иконки)
+- [Размер](#размер-табов)
+- [Внешний вид](#внешний-вид)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+## Текст для таба
+
+Хорошо, если текст будет коротким и лаконичным, а табы — примерно одинаковой длины.
+
+Текст для таба указывается в `Items` и формируется с помощью функции `getLabel`.
+
+## Иконки
+
+Чтобы показать иконку у таба, используйте `getItemIcon`.
+
+Добавьте `onlyIcon`, чтобы убрать текст и оставить только иконку (текст будет показываться по наведению).
+
+<TabsExampleIcon />
 
 ```ts
-// src/App.ts
 import React, { useState } from 'react';
-import { Tabs } from '@gpn-design/uikit/Tabs';
+import { Tabs } from '@consta/uikit/Tabs';
+import { IconPhoto } from '@consta/uikit/IconPhoto';
+import { IconRing } from '@consta/uikit/IconRing';
+import { IconCamera } from '@consta/uikit/IconCamera';
 
-type Item = string;
+type Item = {
+  name: string;
+  icon?: React.FC<IconProps>;
+};
 
-const items = ['один', 'два', 'три'];
+const items = [
+  {
+    name: 'Первый',
+    icon: IconPhoto,
+  },
+  {
+    name: 'Второй',
+    icon: IconRing,
+  },
+  {
+    name: 'Третий вариант',
+    icon: IconCamera,
+  },
+];
 
-export function App() {
-  const [value, setValue] = useState<string | null>(items[0]);
+export const TabsExampleIcon = () => {
+  const [value, setValue] = useState<Item | null>(items[0]);
   return (
-    <Tabs
-      value={value}
-      onChange={({ value }) => setValue(value)}
-      items={items}
-      getLabel={(item) => item}
-    />
+    <>
+      <Tabs
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        items={items}
+        getLabel={(item) => item.name}
+        getIcon={(item) => item.icon}
+      />
+      <Tabs
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        items={items}
+        getLabel={(item) => item.name}
+        getIcon={(item) => item.icon}
+        onlyIcon
+      />
+    </>
   );
-}
+};
 ```
 
-## Свойства
+## Размер табов
 
-```
-type Item = unknown;
-type OnChange = (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM | null }) => void;
+Свойство `size` меняет размер шрифта, отступы между элементами и другие связанные с ними параметры.
 
+Есть два размера — `s` и `m` (основной, включен по умолчанию).
 
-```
-
-| Свойство   | Тип                                              | По умолчанию | Описание                                                                                                                                                                                     |
-| ---------- | ------------------------------------------------ | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| items      | `Item[]`                                         | -            | Элементы                                                                                                                                                                                     |
-| multiple   | `boolean`                                        | -            | Множественный выбор                                                                                                                                                                          |
-| value      | `Item`, `null`                                   | -            | Значение                                                                                                                                                                                     |
-| onChange   | `OnChange`                                       | -            | Событие сработает при выборе элемента                                                                                                                                                        |
-| name       | `string`                                         | -            | Имя поля                                                                                                                                                                                     |
-| getLabel   | `(item: Item) => string, number`                 | -            | Функция для формирования текста таба, или если `onlyIcon = true` будет использоваться в качестве всплывающей подсказки на элементе. Также используется в качестве уникального ключа элемента |
-| getIcon?   | `(item: Item) => React.FC<IconProps>, undefined` | -            | Функция для формирования иконки                                                                                                                                                              |
-| onlyIcon?  | `boolean`                                        | -            | Показывать только иконку                                                                                                                                                                     |
-| size?      | `'s', 'm'`                                       | `'m'`        | Размер                                                                                                                                                                                       |
-| view?      | `'bordered', 'clear'`                            | `'bordered'` | Вид                                                                                                                                                                                          |
-| className? | `string`                                         | -            | Дополнительный класс                                                                                                                                                                         |
-| ref?       | `React.Ref<HTMLDivElement>`                      | -            | Ссылка на корневой DOM элемент компонента                                                                                                                                                    |
-
-<!-- props:end -->
-
-## Примеры
-
-### Размер табов
-
-Чтобы изменить размер, используйте модификатор `_size`.
+<TabsExampleSize />
 
 ```ts
 import React, { useState } from 'react';
-import { Tabs } from '@gpn-design/uikit/Tabs';
+import { Tabs } from '@consta/uikit/Tabs';
 
 type Item = string;
 
@@ -93,15 +117,18 @@ export const TabsExampleSize = () => {
 };
 ```
 
-<TabsExampleSize />
+## Внешний вид
 
-### Вид табов
+За внешний вид табов отвечает свойство `view`. Есть два варианта:
 
-Чтобы изменить вид, используйте свойства `_view`.
+- `bordered` — с рамкой (используется по умолчанию),
+- `clear` — без рамки.
+
+<TabsExampleView />
 
 ```ts
 import React, { useState } from 'react';
-import { Tabs } from '@gpn-design/uikit/Tabs';
+import { Tabs } from '@consta/uikit/Tabs';
 
 type Item = string;
 
@@ -130,51 +157,49 @@ export const TabsExampleView = () => {
 };
 ```
 
-<TabsExampleView />
+## Свойства
 
-### Иконки у табов
+```
+type Item = unknown;
+type OnChange = (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM | null }) => void;
+```
 
-Чтобы показать иконку у таба, используйте `getItemIcon`.
+| Свойство                      | Тип                                              | По умолчанию | Описание                                                                                 |
+| ----------------------------- | ------------------------------------------------ | ------------ | ---------------------------------------------------------------------------------------- |
+| `items`                       | `Item[]`                                         | -            | Массив элементов с данными для табов (текст, иконка)                                     |
+| `multiple`                    | `boolean`                                        | -            | Множественный выбор                                                                      |
+| `value`                       | `Item`, `null`                                   | -            | Значение                                                                                 |
+| [`getLabel`](#текст-для-таба) | `(item: Item) => string, number`                 | -            | Функция для формирования текста таба. Используется в качестве уникального ключа элемента |
+| [`getIcon?`](#иконки)         | `(item: Item) => React.FC<IconProps>, undefined` | -            | Функция для формирования иконки                                                          |
+| [`onlyIcon?`](#иконки)        | `boolean`                                        | -            | Показывать только иконку                                                                 |
+| [`size?`](#размер-табов)      | `'s', 'm'`                                       | `'m'`        | Размер компонента                                                                        |
+| [`view?`](#внешний-вид)       | `'bordered', 'clear'`                            | `'bordered'` | Внешний вид компонента (с рамкой или без)                                                |
+| `onChange`                    | `OnChange`                                       | -            | Действие при выборе элемента                                                             |
+| `className?`                  | `string`                                         | -            | Дополнительный CSS-класс                                                                 |
+| `ref?`                        | `React.Ref<HTMLDivElement>`                      | -            | Ссылка на корневой DOM-элемент этого компонента                                          |
+
+<!-- props:end -->
+
+## Пример
 
 ```ts
+// src/App.ts
 import React, { useState } from 'react';
-import { Tabs } from '@gpn-design/uikit/Tabs';
-import { IconPhoto } from '@gpn-design/uikit/IconPhoto';
-import { IconRing } from '@gpn-design/uikit/IconRing';
-import { IconCamera } from '@gpn-design/uikit/IconCamera';
+import { Tabs } from '@consta/uikit/Tabs';
 
-type Item = {
-  name: string;
-  icon?: React.FC<IconProps>;
-};
+type Item = string;
 
-const items = [
-  {
-    name: 'Первый',
-    icon: IconPhoto,
-  },
-  {
-    name: 'Второй',
-    icon: IconRing,
-  },
-  {
-    name: 'Третий вариант',
-    icon: IconCamera,
-  },
-];
+const items = ['один', 'два', 'три'];
 
-export const TabsExampleIcon = () => {
-  const [value, setValue] = useState<Item | null>(items[0]);
+export function App() {
+  const [value, setValue] = useState<string | null>(items[0]);
   return (
     <Tabs
       value={value}
       onChange={({ value }) => setValue(value)}
       items={items}
-      getLabel={(item) => item.name}
-      getIcon={(item) => item.icon}
+      getLabel={(item) => item}
     />
   );
-};
+}
 ```
-
-<TabsExampleIcon />

@@ -2,10 +2,10 @@ export type KeyHandler = () => (prop: {}, e: React.KeyboardEvent) => void;
 
 export type KeyProps = {
   onKeyDown?(e: React.KeyboardEvent): void;
-  onChange(e: React.SyntheticEvent<HTMLButtonElement>): void;
-  onFocus(e: React.FocusEvent<HTMLButtonElement>): void;
-  onClick(e: React.MouseEvent<HTMLButtonElement>): void;
-  onBlur(e: React.FocusEvent<HTMLButtonElement>): void;
+  onChange(e: React.ChangeEvent<HTMLInputElement>): void;
+  onFocus(e: React.FocusEvent<HTMLInputElement>): void;
+  onClick(e: React.MouseEvent<HTMLInputElement>): void;
+  onBlur(e: React.FocusEvent<HTMLInputElement>): void;
 };
 
 export type UserKeysProps = {

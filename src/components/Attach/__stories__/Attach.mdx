@@ -1,89 +1,214 @@
+import {
+  AttachExampleBasicsLoading,
+  AttachExampleBasicsError,
+  AttachExampleBasicsLoaded,
+  AttachExampleBasicsLink
+  } from './examples/AttachExampleBasics/AttachExampleBasics';
 import { AttachExampleLoading } from './examples/AttachExampleLoading/AttachExampleLoading';
 import { AttachExampleError } from './examples/AttachExampleError/AttachExampleError';
 import { AttachExampleEvents } from './examples/AttachExampleEvents/AttachExampleEvents';
+import { AttachExampleDescription } from './examples/AttachExampleDescription/AttachExampleDescription';
+import { AttachExampleIcon } from './examples/AttachExampleIcon/AttachExampleIcon';
+import { AttachExampleName } from './examples/AttachExampleName/AttachExampleName';
+import { AttachExampleAs } from './examples/AttachExampleAs/AttachExampleAs';
 
 # Attach
 
-## Пример использования
+Показывает загрузку файла или уже загруженные файлы.
 
-Использование компонента:
+Можно использовать, когда пользователю нужно загрузить файл — фотографию, скриншот,
+документ или что-то другое. А потом посмотреть, какие документы он загрузил.
 
-```ts
-// src/App.ts
-import React from 'react';
-import { Attach } from '@gpn-design/uikit/Attach';
+- [Как использовать](#как-использовать)
+- [Свойства файла](#свойства-файла)
+  - [Иконка](#иконка)
+  - [Название](#название)
+  - [Описание](#описание)
+- [Загрузка файла](#загрузка-файла)
+  - [Индикаторы загрузки](#индикаторы-загрузки)
+  - [Ошибка при загрузке](#ошибка-при-загрузке)
+- [Обработка событий](#обработка-событий)
+  - [По клику на кнопку](#по-клику-на-кнопку)
+  - [По клику на компонент](#по-клику-на-компонент)
+- [Тег для компонента](#тег-для-компонента)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
 
-const App = () => {
-  return <Attach fileName="Документация" extension="doc" />;
-};
-```
+## Как использовать
 
-## Свойства
+У компонента четыре основных состояния.
 
-<!-- props:start -->
+**Файл загружается**. Вместо иконки с расширением файла покажите [индикатор загрузки](#индикаторы-загрузки), если хотите — процент, на который файл загрузился. При наведении появляется кнопка для отмены загрузки с иконкой-крестиком (`IconClose`).
 
-| Свойство         | Тип                                     | По умолчанию  | Описание                                     |
-| ---------------- | --------------------------------------- | ------------- | -------------------------------------------- |
-| fileName?        | `string`                                | -             | Имя файла                                    |
-| fileDescription? | `string`                                | -             | Описание файла                               |
-| fileExtension?   | `string`                                | -             | Расширение файла                             |
-| loading?         | `boolean`                               | -             | Индикация загрузки                           |
-| loadingProgress? | `number`                                | -             | Указывает прогресс индикации загрузки        |
-| loadingText?     | `string`                                | `'Loading'`   | Указывает прогресс индикации загрузки        |
-| errorText?       | `string`                                | -             | Текст ошибки                                 |
-| withAction?      | `boolean`                               | `if(onClick)` | Модификатор добавляющий эфект наведения мыши |
-| onClick?         | `React.EventHandler<React.MouseEvent>;` | -             | Событие клика на корнивом элементе           |
-| onButtonClick?   | `React.EventHandler<React.MouseEvent>;` | -             | Событие клика на кнопке                      |
-| buttonIcon?      | `React.FC<IconProps>;`                  | -             | Иконка на кнопке                             |
-| buttonTitle?     | `string`                                | -             | title кнопки                                 |
-| className?       | `string`                                | -             | Дополнительный класс                         |
-| ref?             | `React.Ref<HTMLDivElement>`             | -             | Ссылка на корневой DOM элемент компонента    |
+<AttachExampleBasicsLoading />
 
-<!-- props:end -->
+**Файл не загрузился** по причине какой-то ошибки. Тут всё просто: красным цветом напишите [описание ошибки](#ошибка-при-загрузке) и что нужно сделать. В этом состоянии тоже есть кнопка для отмены загрузки.
 
-## Примеры
+<AttachExampleBasicsError />
 
-### Индикатор загрузки
+**Файл успешно загрузился**. В этом состоянии уже точно известно расширение файла — можно показать соответствующую иконку (если она есть). Дополнительно можно вывести метаинформацию о файле: размер, дату, автора или что-то ещё. При наведении появляется кнопка для удаления файла с иконкой корзины (`IconTrash`).
 
-Для индикации загрузки воспользуйтей свойствами `loading`, `loadingText` и `loadingProgress`
+<AttachExampleBasicsLoaded />
+
+**Просмотр файла**. На первый взгляд внешне это состояние не отличается от предыдущего. Разница в том, что тут нет никаких кнопок, так как с самим файлом уже нельзя ничего сделать. В этом случае компонент должен стать ссылкой или кнопкой, по которой открывается или скачивается файл.
+
+<AttachExampleBasicsLink />
+
+## Свойства файла
+
+### Иконка
+
+Иконка файла зависит от его расширения, за это отвечает свойство `fileExtension`. Если вы укажете расширение, которого нет в нашей галерее иконок, пользователь увидит иконку с вопросом.
+[Посмотреть иконки для файлов](?path=/story/components-file--gallery)
+
+<AttachExampleIcon />
 
 ```ts
 <Attach
-  fileName="Документация"
+  fileName="Картинка в JPG"
+  fileExtension="jpg"
+/>
+
+<Attach
+  fileName="Картинка в непонятном формате BZZ"
+  fileExtension="bzz"
+/>
+```
+
+Рядом с иконкой можно разместить информацию о файле.
+
+### Название
+
+За название отвечает свойство `fileName`. Сюда можно подставить имя файла, но лучше придумать красивое название, которое будет понятно пользователям.
+
+Например, если вы просите загрузить фотографию, скан паспорта и сопроводительное письмо, загруженные файлы можно так и назвать.
+
+
+
+<AttachExampleDescription />
+
+```ts
+<Attach
+  className={cnAttachExampleList()}
+  fileName="Фотография"
+  fileExtension="jpg"
+  fileDescription="1,5 Mб 19.07.2020, 16:11"
+/>
+
+<Attach
+  className={cnAttachExampleList()}
+  fileName="Скан паспорта"
+  fileExtension="pdf"
+  fileDescription="1,5 Mб 19.07.2020, 16:12"
+/>
+
+<Attach
+  className={cnAttachExampleList()}
+  fileName="Сопроводительное письмо"
   fileExtension="docx"
-  fileDescription="1,5 Mб 21.02.2020, 14:12"
-  loadingText="Загрузка"
+  fileDescription="225 Mб 19.07.2020, 17:15"
+/>
+```
+
+
+### Описание
+
+За описание файла отвечает свойство `fileDescription`.  Мы предполагаем, что здесь удобно
+показывать размер файла и время загрузки, но вы можете использовать его для любой
+информации, которую считаете важной.
+
+<AttachExampleName />
+
+
+```ts
+<Attach
+  className={cnAttachExampleName()}
+  fileName="Файл с нормальным описанием"
+  fileExtension="jpg"
+  fileDescription="14 Мб 01.04.2020, 07:01"
+/>
+
+<Attach
+  className={cnAttachExampleName()}
+  fileName="Файл с каким попало описанием"
+  fileExtension="bzz"
+  fileDescription="Крекс, пекс, фекс"
+/>
+```
+
+
+## Загрузка файла
+
+### Индикаторы загрузки
+
+Чтобы показать, что файл загружается, используйте свойство `loading`. Тогда вместо
+иконки файла пользователь увидит прелоадер.
+
+Свойство `loadingText` отвечает за текст, который можно показать во время загрузки
+файла. Значение по умолчанию — **Loading**.
+
+`loadingProgress` позволяет показать прогресс загрузки файла в процентах.
+
+<AttachExampleLoading />
+
+```ts
+<Attach
+  fileName="Инструкция по сборке марсохода"
+  fileExtension="docx"
+  fileDescription="25,5 Mб 19.07.2020, 21:12"
+  loadingText="Я ещё не загрузился, уже загружено"
   loading
   loadingProgress={70}
 />
 ```
 
-<AttachExampleLoading />
 
-### Ошибка
+### Ошибка при загрузке
 
-Для того чтобы показать ошибку воспользуйтей свойством `errorText`
+Если во время загрузки файла произошла ошибка, вы можете показать, что случилось,
+с помощью свойства `errorText`.
 
-```ts
-<Attach
-  fileName="Документация"
-  fileExtension="docx"
-  errorText="Ошибка: Файл не возможно загрузить"
-/>
-```
+Постарайтесь в тексте ошибки объяснить пользователю не только, что произошло, но ещё
+и почему так получилось и как это исправить.
 
 <AttachExampleError />
 
-### События
+```ts
+<Attach
+  fileName="Марсианский закат"
+  fileExtension="jpg"
+  errorText="Файл слишком большой, максимум 100 ТБ"
+/>
+```
 
-Чтобы обробатывать события используйте свойства `onClick` и `onButtonClick`
-Важно! не забывайте про всплытие событий
+## Обработка событий
+
+### По клику на кнопку
+
+Кнопка нужна, чтобы совершать с файлом дополнительные действия (например, удалить его).
+
+`buttonIcon` отвечает за иконку на кнопке, она появится при наведении на компонент.
+Иконку можно выбрать из [библиотеки иконок](?path=/story/components-icons--playground).
+
+`buttonTitle` — всплывающая подсказка, появится при наведении на кнопку.
+
+`onButtonClick` задаёт событие, которое обрабатывается при клике на кнопку.
+
+
+### По клику на компонент
+
+За обработку событий по клику на весь компонент отвечает свойство `onClick`.
+
+
+> Не забудьте про всплытие событий
+
+<AttachExampleEvents />
 
 ```ts
 <Attach
-  fileName="Документация"
+  fileName="my_tale_about_mars_variant_121_final"
   fileExtension="docx"
-  fileDescription="1,5 Mб 21.02.2020, 14:12"
+  fileDescription="1,5 Mб 21.02.2051, 14:12"
   loadingText="Загрузка"
   buttonIcon={IconTrash}
   buttonTitle="Удалить"
@@ -95,4 +220,46 @@ const App = () => {
 />
 ```
 
-<AttachExampleEvents />
+## Тег для компонента
+
+Свойство `as` отвечает за тег, в который `Attach` оборачивается в HTML-документе.
+По умолчанию это `div`. Вы можете поменять этот тег, чтобы добавить компоненту
+свойства другого элемента — например, сделайте его ссылкой.
+
+<AttachExampleAs />
+
+
+## Свойства
+
+<!-- props:start -->
+
+| Свойство         | Тип                                     | По умолчанию  | Описание                                     |
+| ---------------- | --------------------------------------- | ------------- | -------------------------------------------- |
+| [`fileName`](#название)        | `string`                                | -             | Название файла файла                                    |
+| [`fileDescription`](#описание) | `string`                                | -             | Описание файла файла                               |
+| [`fileExtension`](#иконка)  | `string`                                | -             | Расширение файла файла                             |
+| [`loading`](#загрузка-файла)        | `boolean`                               | -             | Прелоадер  загрузки                           |
+| [`loadingProgress`](#индикаторы-загрузки) | `number`                                | -             | Степень загрузки файла в процентах        |
+| [`loadingText`](#индикаторы-загрузки)    | `string`                                | `'Loading'`   | Текст, который видно во время загрузки       |
+| [`errorText`](#ошибка-при-загрузке)     | `string`                                | -             | Текст ошибки при загрузке файла                              |
+| [`onClick`](#по-клику-на-компонент)        | `React.EventHandler<React.MouseEvent>;` | -             | Событие для клика по всему компоненту          |
+| [`onButtonClick`](#по-клику-на-кнопку) | `React.EventHandler<React.MouseEvent>;` | -             | Событие для клика по кнопке                      |
+| [`buttonIcon`](#по-клику-на-кнопку)   | `React.FC<IconProps>;`                  | -             | Иконка для кнопки                            |
+| [`buttonTitle`](#по-клику-на-кнопку)     | `string`                                | -             | Всплывающая подсказка для кнопки                                 |
+| [`as`](#тег-для-компонента)       | `keyof JSX.IntrinsicElements`    | `'div'`      | HTML-тег, в виде которого этот компонент будет представлен в DOM  |
+| `className`      | `string`                                | -             | Дополнительный CSS-класс                        |
+| `ref`            | `React.Ref<HTMLDivElement>`             | -             | Ссылка на корневой DOM-элемент этого компонента   |
+
+<!-- props:end -->
+
+## Пример
+
+```ts
+// src/App.ts
+import React from 'react';
+import { Attach } from '@consta/uikit/Attach';
+
+const App = () => {
+  return <Attach fileName="Документация" extension="doc" />;
+};
+```

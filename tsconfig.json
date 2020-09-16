@@ -24,13 +24,5 @@
     "removeComments": false
   },
   "include": ["./src/**/*"],
-  "exclude": [
-    "node_modules",
-    "./src/**/*.stories/**",
-    "./src/**/*.stories.*",
-    "./src/**/*.test.*",
-    "./src/**/__tests__/**",
-    "./src/**/__stories__/**",
-    "./src/uiKit/**"
-  ]
+  "exclude": ["node_modules"]
 }

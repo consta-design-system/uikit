@@ -2,48 +2,76 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
 
 # BasicSelect
 
-BasicSelect — компонент реализующий элемент управления меню опций (нативного `<select>`).
+BasicSelect — компонент, реализующий элемент управления меню опций (нативного `<select>`).
 
+`<select>`
 Компоненту необходимо передать тип опции: `<BasicSelect<T> {..props}/>`.
 
 ## Cвойства компонента
 
-| Свойство            | Тип или варианты значения                                             | По умолчанию              | Описание  |
-| ------------------- | --------------------------------------------------------------------- | ------------------------- | --------- |
-| disabled?           | `boolean`                                                             | -                         | Активность компонента |
-| size?               | `s | m | l`                                                           | `m`                       | Размер компонента |
-| view?               | `default | clear`                                                     | `default`                 | Внешний вид компонента |
-| width?              | `full | default`                                                      | `default`                 | Cвойство определяет какую ширину будет занимать компонент. `default` ширина согласно содержимому |
-| ariaLabel?          | `string`                                                              | -                         | `aria` атрибут для метки |
-| placeholder?        | `string`                                                              | -                         | Placeholder — текст, который будет отображаться в качестве подсказки в поле значения, при его отсутствии |
-| className?          | `string`                                                              | -                         | Дополнительный класс |
-| value?              | `T | null`                                                            | -                         | Значение селекта, по умолчанию `null`. |
-| id                  | `string`                                                              | -                         | Идентификатор селекта |
-| options             | `T[]`                                                                 | -                         | Опции |
-| onChange?           | `(value: string) => void`                                             | -                         | Обработчик события изменения значения компонента |
-| getOptionLabel      | `(arg: T) => string`                                                  | -                         | Функция для получения текста опции, он будет отображаться в поле для выбранного значения |
-| getOptionKey        | `(arg: T) => string`                                                  | -                         | Функция для формирования `key` опции в списке опций выпадающего блока со списком |
-| getOptionValue      | `(arg: T) => string`                                                  | -                         | Функция для формирования значения опции, которое будет возвращаться в форму |
-| onBlur?             | `(event?: React.FocusEvent<HTMLElement>) => void`                     | -                         | Обработчик события `blur` |
-| onFocus?            | `(event?: React.FocusEvent<HTMLElement>) => void`                     | -                         | Обработчик события `focus` |
-
+| Свойство       | Тип или варианты значения                              | По умолчанию | Описание                                                                                              |
+| -------------- | ------------------------------------------------------ | ------------ | ----------------------------------------------------------------------------------------------------- |
+| disabled?      | `boolean`                                              | -            | Активность компонента                                                                                 |
+| size?          | `s , m , l`                                            | `m`          | Размер компонента                                                                                     |
+| view?          | `default , clear`                                      | `default`    | Внешний вид компонента                                                                                |
+| width?         | `full , default`                                       | `default`    | Cвойство определяет, какую ширину будет занимать компонент. `default` — ширина по размеру содержимого |
+| ariaLabel?     | `string`                                               | -            | `aria` атрибут для метки                                                                              |
+| placeholder?   | `string`                                               | -            | Placeholder — текст, который отобразится в качестве подсказки в пустом поле                           |
+| className?     | `string`                                               | -            | Дополнительный класс                                                                                  |
+| value?         | `T , null`                                             | -            | Значение селекта, по умолчанию `null`.                                                                |
+| id             | `string`                                               | -            | Идентификатор селекта                                                                                 |
+| options        | `T[]`                                                  | -            | Опции                                                                                                 |
+| onChange?      | `(value: string | null) => void`                       | -            | Обработчик события изменения значения компонента                                                      |
+| getOptionLabel | `(arg: T) => string`                                   | -            | Функция для получения текста опции, который будет отображаться в поле для выбранного значения         |
+| onBlur?        | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -            | Обработчик события `blur`                                                                             |
+| onFocus?       | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -            | Обработчик события `focus`                                                                            |
 
 ## Пример использования
 
 ```ts
 import React from 'react';
-import { Table } from '@gpn-design/uikit/BasicSelect';
+import { BasicSelect } from '@consta/uikit/BasicSelect';
 
 type Option = {
   label: string;
   value: string;
-}
+};
 
 const items = [
-  {label: 'Москва', value: 'moscow'},
-  {label: 'Санкт-Петербург', value: 'spb'},
-  {label: 'Томск', value: 'tomsk'},
-]
+  { label: 'Москва', value: 'moscow' },
+  { label: 'Санкт-Петербург', value: 'spb' },
+  { label: 'Томск', value: 'tomsk' },
+];
+
+const Example = () => {
+  const getItemLabel = (option: SelectOption): string => option.label;
+
+  return (
+    <>
+      <div>
+        <BasicSelect id="city" options={items} getOptionLabel={getItemLabel} />
+      </div>
+    </>
+  );
+};
+```
+
+## С заданным значением
+
+```ts
+import React from 'react';
+import { BasicSelect } from '@consta/uikit/BasicSelect';
+
+type Option = {
+  label: string;
+  value: string;
+};
+
+const items = [
+  { label: 'Москва', value: 'moscow' },
+  { label: 'Санкт-Петербург', value: 'spb' },
+  { label: 'Томск', value: 'tomsk' },
+];
 
 const Example = () => {
   const getItemLabel = (option: SelectOption): string => option.label;
@@ -53,56 +81,14 @@ const Example = () => {
   return (
     <>
       <div>
-        <BasicSelect
-          id="city"
-          options={items}
-          getOptionLabel={getItemLabel}
-          getOptionKey={getItemKey}
-          getOptionValue={getItemValue}
-        />
-      </div>
-    </>
-  )
-};
-
-```
-
-## С заданным значением
-
-```ts
-import React from 'react';
-import { Table } from '@gpn-design/uikit/BasicSelect';
-
-type Option = {
-  label: string;
-  value: string;
-}
-
-const items = [
-  {label: 'Москва', value: 'moscow'},
-  {label: 'Санкт-Петербург', value: 'spb'},
-  {label: 'Томск', value: 'tomsk'},
-]
-
-const Example = () => {
-  const getItemLabel = (option: SelectOption): string => option.label;
-  const getItemKey = (option: SelectOption): string => option.value;
-  const getItemValue = (option: SelectOption): string => option.value;
-
-  return (
-    <>
-      <div style={{ width: '250px' }}>
         <BasicSelect<Option>
           id="city"
-          value={{label: 'Москва', value: 'moscow'}}
+          value={{ label: 'Москва', value: 'moscow' }}
           options={items}
           getOptionLabel={getItemLabel}
-          getOptionKey={getItemKey}
-          getOptionValue={getItemValue}
         />
       </div>
     </>
-  )
+  );
 };
-
 ```

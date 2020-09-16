@@ -1,57 +1,86 @@
 import { TimerExampleSize } from './examples/TimerExampleSize/TimerExampleSize';
+import { TimerExampleSeconds } from './examples/TimerExampleSeconds/TimerExampleSeconds';
+import { TimerExampleProgress } from './examples/TimerExampleProgress/TimerExampleProgress';
 
 # Timer
 
-## Пример использования
+Таймер показывает, сколько осталось секунд до окончания какого-то процесса.
+Например, до окончания загрузки файла или до момента, когда закроется сообщение об ошибке.
 
-Использование компонента:
+- [Секунды](#секунды)
+- [Размер](#размер)
+- [Прогрессбар](#прогрессбар)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
 
-```ts
-// src/App.ts
-import React from 'react';
-import { Timer } from '@gpn-design/uikit/Timer';
+## Секунды
 
-const App = () => {
-  return <Timer seconds={5} progress={80} />;
-};
-```
+Вы можете поставить таймер на нужное количество секунд с помощью свойства `seconds`.
 
-## Свойства
+Таймер предназначен для очень коротких промежутков времени, до 10 секунд, поэтому
+двузначные числа лучше не использовать.
 
-<!-- props:start -->
+<TimerExampleSeconds />
 
-| Свойство   | Тип                         | По умолчанию | Описание                                  |
-| ---------- | --------------------------- | ------------ | ----------------------------------------- |
-| size?      | `'m' | 's'`                 | `'m'`        | Размер                                    |
-| seconds?   | `number`                    | `5`          | Секунды                                   |
-| progress?  | `number`                    | `0`          | Процент заполнения прогрессбара           |
-| animation? | `boolean`                   | -            | Включает плавное изменение прогрессбара   |
-| className? | `string`                    | -            | Дополнительный класс                      |
-| ref?       | `React.Ref<HTMLDivElement>` | -            | Ссылка на корневой DOM элемент компонента |
+## Размер
 
-<!-- props:end -->
+За размер таймера отвечает свойство `size`.
 
-## Примеры
-
-### Размер
-
-Чтобы изменить размер, используйте модификатор `_size`.
+<TimerExampleSize />
 
 ```ts
 <Timer size="m" seconds={5} progress={80} />
 <Timer size="s" seconds={5} progress={80} />
 ```
 
-<TimerExampleSize />
+## Прогрессбар
 
-### Изменить скорость анимации
+Вы можете указать процент заполнения прогрессбара в процентах в свойстве `progress`.
 
-по умолчанию скорость анимации равна 1сек, она указавается в переменной css
+<TimerExampleProgress />
 
-`--animation-duration: 1s;`
+```ts
+<StoryBookExample className={cnDocsDecorator('Section')}>
+  <Timer size="m" seconds={5} progress={20} />
+  <Timer size="m" seconds={5} progress={40} />
+  <Timer size="m" seconds={5} progress={60} />
+  <Timer size="m" seconds={5} progress={80} />
+</StoryBookExample>
+```
+
+Включите анимацию с помощью `animation`.
+
+Скорость анимации по умолчанию равна 1 секунде, ее можно поменять в CSS-переменной `--animation-duration`.
 
 ```css
 .MyBlock.Timer-Progress.ProgressSpin {
   --animation-duration: 5s;
 }
+```
+
+## Свойства
+
+<!-- props:start -->
+
+| Свойство                     | Тип                         | По умолчанию | Описание                                        |
+| ---------------------------- | --------------------------- | ------------ | ----------------------------------------------- |
+| [`size?`](#размер)           | `'m','s'`                   | `'m'`        | Размер                                          |
+| [`seconds?`](#секунды)       | `number`                    | `5`          | Секунды                                         |
+| [`progress?`](#прогрессбар)  | `number`                    | `0`          | Процент заполнения прогрессбара                 |
+| [`animation?`](#прогрессбар) | `boolean`                   | -            | Включает плавное изменение прогрессбара         |
+| `className?`                 | `string`                    | -            | Дополнительный CSS-класс                        |
+| `ref?`                       | `React.Ref<HTMLDivElement>` | -            | Ссылка на корневой DOM-элемент этого компонента |
+
+<!-- props:end -->
+
+## Пример
+
+```ts
+// src/App.ts
+import React from 'react';
+import { Timer } from '@consta/uikit/Timer';
+
+const App = () => {
+  return <Timer seconds={5} progress={80} />;
+};
 ```

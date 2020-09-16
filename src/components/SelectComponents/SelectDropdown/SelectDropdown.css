@@ -4,7 +4,7 @@
     width: 100%;
     min-width: 220px;
     margin: -1px 0 -1px;
-    background: var(--color-control-bg-clear);
+    background: var(--color-bg-default);
     border: var(--control-border-width) solid var(--color-control-bg-border-default);
     border-radius: var(--control-radius);
     outline: none;

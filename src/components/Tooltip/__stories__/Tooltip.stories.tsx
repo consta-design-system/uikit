@@ -12,6 +12,8 @@ import { directions, Position } from '../../Popover/Popover';
 import { Text } from '../../Text/Text';
 import { sizes, Tooltip } from '../Tooltip';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 import mdx from './Tooltip.mdx';
 
 const cnTooltipStories = cn('TooltipStories');
@@ -62,13 +64,13 @@ export const TooltipPositionedByAnchorStory = createStory(
     const handleClickOnAnchor = () => {
       setIsTooltipVisible(!isTooltipVisible);
     };
-    const anchorType = optionsKnob('Тип якоря', { Кнопка: 'button', Бэдж: 'badge ' }, 'button', {
+    const anchorType = optionsKnob('Тип якоря', { Кнопка: 'button', Бейджик: 'badge ' }, 'button', {
       display: 'inline-radio',
     });
     const anchor =
       anchorType === 'button' ? (
         <Button
-          label={text('Текст в кнопке', 'Кликай сюда')}
+          label={text('Текст на кнопке', 'Нажми меня')}
           type="button"
           onClick={handleClickOnAnchor}
           ref={anchorRef}
@@ -77,7 +79,7 @@ export const TooltipPositionedByAnchorStory = createStory(
         <Badge
           as="button"
           minified
-          size={select('Размер бэджа', ['s', 'm', 'l'], 's')}
+          size={select('Размер бейджика', ['s', 'm', 'l'], 's')}
           onClick={handleClickOnAnchor}
           ref={anchorRef}
         />
@@ -87,7 +89,7 @@ export const TooltipPositionedByAnchorStory = createStory(
 
     const commonKnobs = {
       ...getCommonKnobs(),
-      isInteractive: boolean('isInteractive', true),
+      isInteractive: boolean('isInteractive', false),
     };
 
     return (

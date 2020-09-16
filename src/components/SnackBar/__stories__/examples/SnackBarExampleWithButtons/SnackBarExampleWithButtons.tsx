@@ -13,6 +13,9 @@ import { cn } from '../../../../../utils/bem';
 import { Button } from '../../../../Button/Button';
 import { Item, SnackBar, SnackBarItemStatus } from '../../../SnackBar';
 
+type State = Item[];
+type Action = { type: 'add'; item: Item } | { type: 'remove'; key: number | string };
+
 const cnSnackBarExampleWithButtons = cn('SnackBarExampleWithButtons');
 
 const getItemIconByStatus = (status: SnackBarItemStatus): React.FC<IconProps> | undefined => {
@@ -26,10 +29,7 @@ const getItemIconByStatus = (status: SnackBarItemStatus): React.FC<IconProps> | 
   return mapIconByStatus[status];
 };
 
-function reducer(
-  state: Item[],
-  action: { type: 'add' | 'remove'; item: Item; key?: number | string },
-) {
+function reducer(state: State, action: Action) {
   switch (action.type) {
     case 'add':
       return [...state, action.item];
@@ -39,9 +39,7 @@ function reducer(
 }
 
 export function SnackBarExampleWithButtons() {
-  const [items, dispatchItems] = useReducer<
-    React.Reducer<Item[], { type: 'add' | 'remove'; item: Item; key?: number | string }>
-  >(reducer, []);
+  const [items, dispatchItems] = useReducer(reducer, []);
   const generateHandleAdd = (status: SnackBarItemStatus) => () => {
     const key = items.length + 1;
     const item: Item = {
@@ -49,7 +47,7 @@ export function SnackBarExampleWithButtons() {
       message: `Сообщение о каком-то событии - ${key}`,
       status,
       icon: getItemIconByStatus(status),
-      onClose: () => dispatchItems({ type: 'remove', item, key }),
+      onClose: () => dispatchItems({ type: 'remove', key }),
     };
     dispatchItems({ type: 'add', item });
   };

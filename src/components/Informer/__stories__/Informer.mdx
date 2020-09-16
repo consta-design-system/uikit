@@ -1,2 +1,127 @@
+import { InformerExampleView } from './examples/InformerExampleView/InformerExampleView';
+import { InformerExampleType } from './examples/InformerExampleType/InformerExampleType';
+import { InformerExampleIcon } from './examples/InformerExampleIcon/InformerExampleIcon';
+import { InformerExampleSuccess } from './examples/InformerExampleText/InformerExampleText';
+import { InformerExampleAlert } from './examples/InformerExampleText/InformerExampleText';
+
 # Informer
 
+Нужен, чтобы показывать пользователям сообщения. Например, об ошибке в заполненной форме
+или о том, что изменения сохранились.
+
+- [Тип сообщения](#тип-сообщения)
+- [Текст сообщения](#текст-сообщения)
+- [Внешний вид](#внешний-вид)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+## Тип сообщения
+
+За тип сообщения отвечает свойство `type`.
+
+<InformerExampleType />
+
+## Текст сообщения
+
+Текст состоит из двух частей:
+- заголовок задаётся свойством `title`,
+- основной текст — свойством `lable`.
+
+Вы можете написать сообщение без заголовка. А вот заголовок без текста лучше не использовать:
+читателю может показаться, что на него кричат.
+
+### Как писать сообщения
+
+Как можно короче — только самое важное. Всегда с прописной буквы. Если в сообщении одно предложение,
+в конце точка не нужна. Если предложений несколько или есть заголовок, можно поставить точку (но не обязательно).
+Главное делать одинаково: или везде ставить точки, или нигде не ставить.
+
+### Когда нужен заголовок
+
+Если есть важная информация, к которой нужно сразу привлечь внимание. А к ней — пояснения. Например, так:
+
+<InformerExampleSuccess />
+
+```ts
+<Informer
+  status="success"
+  view="filled"
+  title="Заявка отправлена"
+  label="Подождите до завтра: мы всё посчитаем и вам позвоним"
+/>
+```
+
+
+Или так:
+
+<InformerExampleAlert />
+
+```ts
+<Informer
+  status="alert"
+  view="filled"
+  title="Ничего не вышло"
+  label="Попробуйте выйти и зайти снова. Если не получается, нажмите красную кнопку три раза"
+/>
+```
+
+Если всё важное можно передать одним коротким предложением, лучше обойтись без заголовка.
+
+## Внешний вид
+
+### Тип информера
+
+За тип информера отвечает свойство `view`. В дизайн-системе есть информеры двух типов:
+с заливкой `filled` или без неё `bordered`.
+
+<InformerExampleView />
+
+```ts
+<Informer label="Ваше сообщение отправлено" view="filled" status="success"/>
+```
+
+```ts
+<Informer label="Всё заполнено" view="bordered" status="success"/>
+```
+
+### Иконка
+
+С помощью свойства `icon` можно добавить иконку — любую из [библиотеки иконок](?path=/story/components-icons--playground).
+
+Не стоит добавлять иконку в информер без заливки.
+
+<InformerExampleIcon />
+
+```ts
+<Informer
+  label="Сообщение отправлено"
+  view="filled"
+  status="success"
+  icon={IconThumbUp}
+/>
+```
+
+
+
+## Свойства
+
+| Свойство              | Тип или варианты значения| По умолчанию  |  Описание                  |
+| --------------------- | -----------------| --------------| -------------------------- |
+| [`status`](#тип-сообщения)              | `'system', 'alert', 'warning', 'success'`       | `'success'`             | Тип сообщения            |
+| [`title`](#текст-сообщения)              | `string`         | —             | Заголовок сообщения            |
+| [`lable`](#текст-сообщения)               | `string`         | —             | Текст сообщения            |
+| [`view`](#внешний-вид)               | `'filled', 'bordered'`     |    `'filled'`            | Тип информера (с заливкой или без)           |
+| [`icon`](#внешний-вид)               | `React.FC<IconProps>`         | —             | Иконка         |
+| `className`          | `string`         | —             | Дополнительный CSS-класс          |
+
+
+## Пример
+
+```ts
+import React from 'react';
+import { Informer } from '@consta/uikit/Informer';
+
+const App = () => {
+  return <Informer title="Всё хорошо" label="Уже сейчас всё хорошо, а будет ещё лучше" />;
+};
+```

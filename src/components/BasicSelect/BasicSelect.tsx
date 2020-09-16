@@ -2,44 +2,26 @@ import '../SelectComponents/Select.css';
 
 import React, { useRef, useState } from 'react';
 
+import { useSelect } from '../../hooks/useSelect/useSelect';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
-import { Popover } from '../Popover/Popover';
+import { scrollIntoView } from '../../utils/scrollIntoView';
 import { cnSelect } from '../SelectComponents/cnSelect';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
 import {
+  CommonSelectProps,
   DefaultPropForm,
   DefaultPropSize,
   DefaultPropView,
   DefaultPropWidth,
-  PropForm,
-  PropSize,
-  PropView,
-  PropWidth,
 } from '../SelectComponents/types';
 
-import { useSelect } from './hooks/use-select';
-import { scrollIntoView } from './hooks/utils';
+export type SimpleSelectProps<ITEM> = CommonSelectProps<ITEM> & {
+  value?: ITEM | null;
+  onChange?: (v: ITEM | null) => void;
+};
 
-export interface SimpleSelectProps<T> {
-  options: T[];
-  id: string;
-  value?: T | null;
-  className?: string;
-  placeholder?: string;
-  disabled?: boolean;
-  form?: PropForm;
-  size?: PropSize;
-  width?: PropWidth;
-  view?: PropView;
-  ariaLabel?: string;
-  onChange?: (v: T) => void;
-  getOptionLabel(arg: T): string;
-  onBlur?: (event?: React.FocusEvent<HTMLButtonElement>) => void;
-  onFocus?: (event?: React.FocusEvent<HTMLButtonElement>) => void;
-}
-
-type Select = <T>(props: SimpleSelectProps<T>) => React.ReactElement | null;
+type Select = <ITEM>(props: SimpleSelectProps<ITEM>) => React.ReactElement | null;
 
 export const BasicSelect: Select = (props) => {
   const {
@@ -70,6 +52,7 @@ export const BasicSelect: Select = (props) => {
   };
 
   const optionsRef = useRef<HTMLDivElement | null>(null);
+  const controlRef = useRef<HTMLDivElement | null>(null);
   const arrValue = typeof val !== 'undefined' && val !== null ? [val] : null;
 
   const scrollToIndex = (index: number): void => {
@@ -96,11 +79,13 @@ export const BasicSelect: Select = (props) => {
     value: arrValue,
     onChange: handlerChangeValue,
     optionsRef,
+    controlRef,
     scrollToIndex,
     disabled,
+    getOptionLabel,
   });
 
-  const handleInputFocus = (e: React.FocusEvent<HTMLButtonElement>): void => {
+  const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>): void => {
     if (!disabled) {
       if (!isFocused) {
         setIsFocused(true);
@@ -111,7 +96,7 @@ export const BasicSelect: Select = (props) => {
     }
   };
 
-  const handleInputBlur = (e: React.FocusEvent<HTMLButtonElement>): void => {
+  const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>): void => {
     if (isFocused) {
       setIsFocused(false);
 
@@ -133,32 +118,40 @@ export const BasicSelect: Select = (props) => {
       focused={isFocused}
       disabled={disabled}
       size={size}
-      {...restProps}
       view={view}
       form={form}
       width={width}
+      {...restProps}
     >
-      <div className={cnSelect('Control')} aria-expanded={isOpen} aria-haspopup="listbox" id={id}>
+      <div
+        className={cnSelect('Control')}
+        ref={controlRef}
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
+        id={id}
+      >
         <div className={cnSelect('ControlInner')}>
-          <button
-            {...getToggleProps()}
-            type="button"
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            className={cnSelect('ControlValueContainer')}
-            aria-label={ariaLabel}
-            ref={toggleRef}
-          >
+          <div className={cnSelect('ControlValueContainer')}>
+            <input
+              {...getToggleProps()}
+              type="button"
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+              aria-label={ariaLabel}
+              ref={toggleRef}
+              className={cnSelect('FakeField')}
+              readOnly
+            />
             {arrValue ? (
               <span className={cnSelect('ControlValue')} title={getOptionLabel(arrValue[0])}>
                 {getOptionLabel(arrValue[0])}
               </span>
             ) : (
-              <span className={cnSelect('ControlPlaceholder')} title="placeholder">
+              <span className={cnSelect('Placeholder')} title="placeholder">
                 {placeholder || ''}
               </span>
             )}
-          </button>
+          </div>
         </div>
         <span className={cnSelect('Indicators')}>
           <button
@@ -172,33 +165,16 @@ export const BasicSelect: Select = (props) => {
         </span>
       </div>
       {isOpen && (
-        <Popover
-          anchorRef={toggleRef}
-          possibleDirections={['downLeft', 'upLeft', 'downRight', 'upRight']}
-          offset={1}
-        >
-          <SelectDropdown role="listbox" aria-activedescendant={`${id}-${highlightedIndex}`}>
-            <div className={cnSelect('List', { size })} ref={optionsRef}>
-              {visibleOptions.map((option, index: number) => (
-                <div
-                  aria-selected={option === value}
-                  role="option"
-                  key={getOptionLabel(option)}
-                  id={`${id}-${index}`}
-                  {...getOptionProps({
-                    index,
-                    className: cnSelect('ListItem', {
-                      active: option === value,
-                      hovered: index === highlightedIndex,
-                    }),
-                  })}
-                >
-                  {getOptionLabel(option)}
-                </div>
-              ))}
-            </div>
-          </SelectDropdown>
-        </Popover>
+        <SelectDropdown
+          size={size}
+          controlRef={controlRef}
+          visibleOptions={visibleOptions}
+          highlightedIndex={highlightedIndex}
+          getOptionProps={getOptionProps}
+          optionsRef={optionsRef}
+          id={id}
+          selectedValues={arrValue}
+        />
       )}
     </SelectContainer>
   );

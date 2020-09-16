@@ -6,22 +6,48 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
 
 ## Список свойств
 
-| Свойство              | Тип или варианты значения                                                                                                                                               | По умолчанию | Описание                                            |
-| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------------------------------------------- |
-| columns               | `{ title: React.ReactNode; accessor: string; align?: 'left', 'center', 'right'; withoutPadding?: boolean; width?: number; sortable?: boolean; sortByField?: string }[]` | -            | Колонки таблицы                                     |
-| rows                  | `{ [key: string]: React.ReactNode; id: string }[]`                                                                                                                      | -            | Строки таблицы                                      |
-| filters?              | `{ id: string; name: string; field: string; filterer: (value: FieldValue) => boolean; }[]`                                                                              | -            | Список фильтров                                     |
-| size?                 | `'s', 'm', 'l'`                                                                                                                                                         | 'l'          | Размер таблицы                                      |
-| stickyHeader?         | `boolean`                                                                                                                                                               | false        | Зафиксированный заголовок                           |
-| stickyColumns?        | `number`                                                                                                                                                                | 0            | Количество зафиксированных колонок                  |
-| isResizable?          | `boolean`                                                                                                                                                               | false        | Возможность изменения размера колонок               |
-| activeRow?            | `{ id?: string; onChange: (id?: string) => void; }`                                                                                                                     | -            | Активная строка                                     |
-| verticalAlign?        | `'center', 'top', 'bottom'`                                                                                                                                             | `'top'`      | Вертикальное выравнивание                           |
-| isZebraStriped?       | `boolean`                                                                                                                                                               | false        | Окрашивание строк зеброй                            |
-| borderBetweenRows?    | `boolean`                                                                                                                                                               | false        | Отображение границ между строками                   |
-| borderBetweenColumns? | `boolean`                                                                                                                                                               | false        | Отображение границ между колонками                  |
-| emptyRowsPlaceholder? | `React.ReactNode`                                                                                                                                                       | -            | Компонент заглушка для отображения когда нет данных |
-| className?            | `string`                                                                                                                                                                | -            | Дополнительный класс                                |
+```ts
+type Column = {
+  title: React.ReactNode;
+  accessor: string;
+  align?: 'left';
+  center;
+  right;
+  withoutPadding?: boolean;
+  width?: number;
+  sortable?: boolean;
+  sortByField?: string;
+};
+
+type Row = {
+  [key: string]: React.ReactNode;
+  id: string;
+};
+
+type Rilter = {
+  id: string;
+  name: string;
+  field: string;
+  filterer: (value: FieldValue) => boolean;
+};
+```
+
+| Свойство              | Тип или варианты значения                           | По умолчанию | Описание                                           |
+| --------------------- | --------------------------------------------------- | ------------ | -------------------------------------------------- |
+| columns               | `Column[]`                                          | -            | Колонки таблицы                                    |
+| rows                  | `Row[]`                                             | -            | Строки таблицы                                     |
+| filters?              | `Rilter[]`                                          | -            | Список фильтров                                    |
+| size?                 | `'s', 'm', 'l'`                                     | 'l'          | Размер таблицы                                     |
+| stickyHeader?         | `boolean`                                           | false        | Зафиксированный заголовок                          |
+| stickyColumns?        | `number`                                            | 0            | Количество зафиксированных колонок                 |
+| isResizable?          | `boolean`                                           | false        | Возможность изменения размера колонок              |
+| activeRow?            | `{ id?: string; onChange: (id?: string) => void; }` | -            | Активная строка                                    |
+| verticalAlign?        | `'center', 'top', 'bottom'`                         | `'top'`      | Вертикальное выравнивание                          |
+| isZebraStriped?       | `boolean`                                           | false        | Окрашивание строк зеброй                           |
+| borderBetweenRows?    | `boolean`                                           | false        | Отображение границ между строками                  |
+| borderBetweenColumns? | `boolean`                                           | false        | Отображение границ между колонками                 |
+| emptyRowsPlaceholder? | `React.ReactNode`                                   | -            | Заглушка, отображается, когда в таблице нет данных |
+| className?            | `string`                                            | -            | Дополнительный класс                               |
 
 ## Пример использования
 
@@ -29,7 +55,7 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
 
 ```ts
 import React from 'react';
-import { Table } from '@gpn-design/uikit/Table';
+import { Table } from '@consta/uikit/Table';
 
 const columns = [
   {
@@ -62,12 +88,12 @@ const App = () => {
 };
 ```
 
-### Со своим текстом если нет данных
+### Со своим текстом, если нет данных
 
 ```ts
 import React from 'react';
-import { Table } from '@gpn-design/uikit/Table';
-import { Text } from '@gpn-design/uikit/Text';
+import { Table } from '@consta/uikit/Table';
+import { Text } from '@consta/uikit/Text';
 
 const columns = [
   {

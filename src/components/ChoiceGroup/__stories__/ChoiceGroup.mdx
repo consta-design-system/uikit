@@ -1,4 +1,98 @@
+import { ChoiceGroupExampleIcon } from './examples/ChoiceGroupExampleIcon/ChoiceGroupExampleIcon';
+import { ChoiceGroupExampleView } from './examples/ChoiceGroupExampleView/ChoiceGroupExampleView';
+import { ChoiceGroupExampleForm } from './examples/ChoiceGroupExampleForm/ChoiceGroupExampleForm';
+import { ChoiceGroupExampleSize } from './examples/ChoiceGroupExampleSize/ChoiceGroupExampleSize';
+import { ChoiceGroupExampleText } from './examples/ChoiceGroupExampleText/ChoiceGroupExampleText';
+import {
+  ChoiceGroupExampleOne,
+  ChoiceGroupExampleMultiple,
+} from './examples/ChoiceGroupExampleMultiple/ChoiceGroupExampleMultiple';
+
+import {
+  ChoiceGroupExampleSwitchPr,
+  ChoiceGroupExampleSwitchPolar,
+  ChoiceGroupExampleSwitchMode,
+  ChoiceGroupExampleSwitchLetters,
+} from './examples/ChoiceGroupExampleSwitch/ChoiceGroupExampleSwitch';
+
 # ChoiceGroup
+
+Группа кнопок нужна, чтобы выбрать из списка один или несколько вариантов.
+Совмещает возможности [Radio](?path=/docs/components-radio--playground) и
+[Checkbox](?path=/docs/components-checkbox--playground).
+
+Занимает больше места, зато по элементам проще попасть, чем по радиокнопкам
+или чекбоксам.
+
+> Не используйте ChoiceGroup для навигации верхнего уровня, например, в шапке сайта
+
+- [Один или несколько](#один-или-несколько)
+- [В качестве переключателя](#в-качестве-переключателя)
+- [Текст на кнопках](#текст-на-кнопках)
+- [Иконки](#иконки)
+- [Внешний вид](#внешний-вид)
+- [Форма кнопок](#форма-кнопок)
+- [Размер](#размер)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+## Один или несколько
+
+По умолчанию пользователь может выбрать только один вариант,
+как в [Radio](?path=/docs/components-radio--playground).
+
+<ChoiceGroupExampleOne />
+
+Можно добавить `multiple` — чтобы выбирать из нескольких вариантов,
+как в [Checkbox](?path=/docs/components-checkbox--playground).
+
+<ChoiceGroupExampleMultiple />
+
+## В качестве переключателя
+
+Группу из двух кнопок иногда стоит использовать вместо переключателя
+[Switch](?path=/docs/components-switch--playground) — если в интерфейсе есть место.
+
+<ChoiceGroupExampleSwitchPolar />
+<ChoiceGroupExampleSwitchLetters />
+<ChoiceGroupExampleSwitchPr />
+<ChoiceGroupExampleSwitchMode />
+
+## Текст на кнопках
+
+Текст для всех кнопок указывается в `items` и формируется с помощью функции `getLabel`.
+
+Согласуйте текст на кнопке с заголовком и между собой. Так просто лучше читается, а значит, проще понять смысл.
+
+<ChoiceGroupExampleText />
+
+## Иконки
+
+Чтобы показать иконку на кнопке, используйте `getItemIcon`.
+
+Добавьте `onlyIcon`, чтобы убрать текст и оставить только иконку (текст будет показываться по наведению).
+
+<ChoiceGroupExampleIcon />
+
+## Внешний вид
+
+За внешний вид компонента отвечает `view`. Варианты: `'primary', 'ghost', 'secondary'`.
+
+<ChoiceGroupExampleView />
+
+## Форма кнопок
+
+За форму кнопок в группе отвечает `form`. Варианты: `'default', 'brick', 'round'`.
+
+<ChoiceGroupExampleForm />
+
+## Размер
+
+За размер компонента отвечает свойство `size`. Варианты: `'xs', 's', 'm', 'l'`.
+
+<ChoiceGroupExampleSize />
+
+## Свойства
 
 ```
 type Item = unknown;
@@ -9,18 +103,42 @@ type OnChangeMultiple = (props: { e: React.ChangeEvent<HTMLInputElement>; value:
 
 ```
 
-| Свойство   | Тип                                              | По умолчанию | Описание                                                                                                                                                                                                                               |
-| ---------- | ------------------------------------------------ | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| items      | `Item[]`                                         | -            | Элементы                                                                                                                                                                                                                               |
-| multiple   | `boolean`                                        | -            | Множественный выбор                                                                                                                                                                                                                    |
-| value      | multiple ? `Item[]` : `Item` or `null`           | -            | Значение                                                                                                                                                                                                                               |
-| onChange   | multiple ? `onChangeMultiple` : `OnChange`       | -            | Событие сработает при выборе элемента                                                                                                                                                                                                  |
-| name       | `string`                                         | -            | Имя поля                                                                                                                                                                                                                               |
-| getLabel   | `(item: Item) => string, number`                 | -            | Функция, результат которого будет использоваться в качестве текста на элементе, или если `onlyIcon = true` будет использоваться в качестве всплывающей подсказки на элементе. Также используется в качестве уникального ключа элемента |
-| getIcon?   | `(item: Item) => React.FC<IconProps>, undefined` | -            | Функция, результат которого будет использоваться в качестве иконки на элементе                                                                                                                                                         |
-| onlyIcon?  | `boolean`                                        | -            | Показывать только иконку                                                                                                                                                                                                               |
-| size?      | `'xs', 's', 'm', 'l'`                            | `'m'`        | Размер                                                                                                                                                                                                                                 |
-| form?      | `'default', 'brick', 'round'`                    | `'default'`  | Форма                                                                                                                                                                                                                                  |
-| view?      | `'primary', 'ghost', 'secondary'`                | `'primary'`  | Вид                                                                                                                                                                                                                                    |
-| className? | `string`                                         | -            | Дополнительный класс                                                                                                                                                                                                                   |
-| ref?       | `React.Ref<HTMLDivElement>`                      | -            | Ссылка на корневой DOM элемент компонента                                                                                                                                                                                              |
+| Свойство                          | Тип                                              | По умолчанию | Описание                                                                                                                                               |
+| --------------------------------- | ------------------------------------------------ | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `items`                           | `Item[]`                                         | —            | Элементы                                                                                                                                               |
+| [`multiple`](#один-или-несколько) | `boolean`                                        | —            | Выбрать несколько вариантов                                                                                                                            |
+| `value`                           | multiple ? `Item[]` : `Item` or `null`           | —            | Значение                                                                                                                                               |
+| `onChange`                        | multiple ? `onChangeMultiple` : `OnChange`       | —            | Действие при выборе элемента                                                                                                                           |
+| `name`                            | `string`                                         | —            | Имя `<input>`, указывается для доступности                                                                                                             |
+| [`getLabel`](#текст-на-кнопках)   | `(item: Item) => string, number`                 | —            | Функция для формирования текста для кнопки или всплывающей подсказки (при `onlyIcon = true`). Также используется в качестве уникального ключа элемента |
+| [`getIcon`](#иконки)              | `(item: Item) => React.FC<IconProps>, undefined` | —            | Функция для формирования иконки                                                                                                                        |
+| [`onlyIcon?`](#иконки)            | `boolean`                                        | —            | Показывать только иконку                                                                                                                               |
+| [`size?`](#размер)                | `'xs', 's', 'm', 'l'`                            | `'m'`        | Размер                                                                                                                                                 |
+| [`form?`](#форма-кнопок)          | `'default', 'brick', 'round'`                    | `'default'`  | Форма                                                                                                                                                  |
+| [`view?`](#внешний-вид)           | `'primary', 'ghost', 'secondary'`                | `'primary'`  | Внешний вид                                                                                                                                            |
+| `className?`                      | `string`                                         | —            | Дополнительный CSS-класс                                                                                                                               |
+| `ref?`                            | `React.Ref<HTMLDivElement>`                      | -            | Ссылка на корневой DOM-элемент этого компонента                                                                                                        |
+
+## Пример
+
+```ts
+// src/App.ts
+import React, { useState } from 'react';
+import { ChoiceGroup } from '@consta/uikit/ChoiceGroup';
+
+type Item = string;
+
+const items = ['один', 'два', 'три'];
+
+export function App() {
+  const [value, setValue] = useState<string | null>(items[0]);
+  return (
+    <ChoiceGroup
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      items={items}
+      getLabel={(item) => item}
+    />
+  );
+}
+```
