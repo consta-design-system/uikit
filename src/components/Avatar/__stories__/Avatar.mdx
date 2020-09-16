@@ -10,8 +10,6 @@ import { AvatarExampleForm } from './examples/AvatarExampleForm/AvatarExampleFor
 А ещё — чтобы пользователь мог узнать сам себя. Например, проверить, что вошёл в
 аккаунт под нужным логином.
 
-
-
 - [Аватар](#аватар)
 - [Размер](#размер)
 - [Форма](#форма)
@@ -62,16 +60,16 @@ import { AvatarExampleForm } from './examples/AvatarExampleForm/AvatarExampleFor
 
 ## Свойства
 
-| Свойство                 | Тип                            | По умолчанию | Описание                                     |
-| ------------------------ | -------------------------------| ------------ | -------------------------------------------- |
-| [`url`](#аватар)         | `string`                       | -            | Ссылка на изображение (аватар пользователя)  |
-| [`name`](#аватар)        | `string`                       | -            | Имя пользователя                             |
-| [`size`](#размер)        | `'s' , 'm'`                    | 'm'          | Размер аватара                               |
-| [`form`](#форма)         | `'default' , 'round', 'brick'` | `'round'`    | Форма аватара                                |
-| `children`               | `React.ReactNode`              | -            | Дочерние компоненты                          |
-| `className`              | `string`                       | -            | Дополнительный CSS-класс                     |
-| `as`                     | `React.ElementType`            | -            | HTML-тег, в виде которого этот компонент будет представлен в DOM          |
-| `ref`                    | `React.Ref<HTMLDivElement>`    | -            | Ссылка на корневой DOM-элемент этого компонента                 |
+| Свойство          | Тип                            | По умолчанию | Описание                                                         |
+| ----------------- | ------------------------------ | ------------ | ---------------------------------------------------------------- |
+| [`url`](#аватар)  | `string`                       | -            | Ссылка на изображение (аватар пользователя)                      |
+| [`name`](#аватар) | `string`                       | -            | Имя пользователя                                                 |
+| [`size`](#размер) | `'s' , 'm'`                    | 'm'          | Размер аватара                                                   |
+| [`form`](#форма)  | `'default' , 'round', 'brick'` | `'round'`    | Форма аватара                                                    |
+| `children`        | `React.ReactNode`              | -            | Дочерние компоненты                                              |
+| `className`       | `string`                       | -            | Дополнительный CSS-класс                                         |
+| `as`              | `React.ElementType`            | -            | HTML-тег, в виде которого этот компонент будет представлен в DOM |
+| `ref`             | `React.Ref<HTMLDivElement>`    | -            | Ссылка на корневой DOM-элемент этого компонента                  |
 
 ## Пример
 
@@ -81,6 +79,8 @@ import React from 'react';
 import { Avatar } from '@consta/uikit/Avatar';
 
 const App = () => {
-  return <Avatar url="https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png" />;
+  return (
+    <Avatar url="https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png" />
+  );
 };
 ```

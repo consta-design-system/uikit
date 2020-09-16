@@ -3,17 +3,23 @@ import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { IconLeaf } from '../../../icons/IconLeaf/IconLeaf';
 import { createMetadata } from '../../../utils/storybook';
-import { Informer } from '../Informer';
+import {
+  Informer,
+  informerPropStatus,
+  informerPropStatusDefault,
+  informerPropView,
+  informerPropViewDefault,
+} from '../Informer';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import mdx from './Informer.mdx';
 
 const defaultKnobs = () => ({
-  status: select('status', ['system', 'alert', 'warning', 'success'], 'success'),
+  status: select('status', informerPropStatus, informerPropStatusDefault),
   title: text('title', 'Some title'),
   label: text('label', 'Hey there! I am Informer. Be ready to be informed :)'),
-  view: select('view', ['filled', 'bordered'], 'filled'),
+  view: select('view', informerPropView, informerPropViewDefault),
   icon: boolean('icon', false),
 });
 

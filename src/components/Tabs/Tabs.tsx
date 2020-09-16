@@ -11,13 +11,13 @@ import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAt
 
 import { TabsTab } from './TabsTab/TabsTab';
 
-export const tabsSizes = ['s', 'm'] as const;
+export const tabsSizes = ['m', 's'] as const;
 export type TabsPropSize = typeof tabsSizes[number];
-export const tabsDefaultSize: TabsPropSize = 'm';
+export const tabsDefaultSize: TabsPropSize = tabsSizes[0];
 
 export const tabsViews = ['bordered', 'clear'] as const;
 export type TabsPropView = typeof tabsViews[number];
-export const tabsDefaultView: TabsPropView = 'bordered';
+export const tabsDefaultView: TabsPropView = tabsViews[0];
 
 export type TabsPropGetLabel<ITEM> = (item: ITEM) => string | number;
 export type TabsPropGetIcon<ITEM> = (item: ITEM) => React.FC<IconProps> | undefined;

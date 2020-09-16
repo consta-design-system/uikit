@@ -8,8 +8,8 @@ import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
 import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 
-export const tagBasePropSize = ['xs', 's', 'm', 'l'] as const;
-export const tagBasePropSizeDefault = tagBasePropSize[2];
+export const tagBasePropSize = ['m', 'xs', 's', 'l'] as const;
+export const tagBasePropSizeDefault = tagBasePropSize[0];
 export type TagBasePropSize = typeof tagBasePropSize[number];
 
 export const tagBasePropGroupNumberValue = [1, 2, 3, 4, 5, 6, 7, 8, 9] as const;

@@ -10,10 +10,20 @@ import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAs
 import { Avatar } from '../Avatar/Avatar';
 import { Text, TextPropSize } from '../Text/Text';
 
-export type UserPropSize = 's' | 'm';
-export type UserPropView = 'clear' | 'ghost';
-export type UserPropWidth = 'default' | 'full';
-export type UserPropStatus = 'available' | 'remote' | 'out';
+export const userPropSize = ['m', 's'] as const;
+export type UserPropSize = typeof userPropSize[number];
+export const userPropSizeDefault: UserPropSize = userPropSize[0];
+
+export const userPropView = ['clear', 'ghost'] as const;
+export type UserPropView = typeof userPropView[number];
+export const userPropViewDefault: UserPropView = userPropView[0];
+
+export const userPropWidth = ['default', 'full'] as const;
+export type UserPropWidth = typeof userPropWidth[number];
+export const userPropWidthDefault: UserPropWidth = userPropWidth[0];
+
+export const userPropStatus = ['available', 'remote', 'out'] as const;
+export type UserPropStatus = typeof userPropStatus[number];
 
 type Props = {
   avatarUrl?: string;
@@ -44,11 +54,11 @@ export const User: ComponentWithAs<Props> = forwardRefWithAs<Props>((props, ref)
   const {
     as = 'div',
     className,
-    size = 'm',
+    size = userPropSizeDefault,
     avatarUrl,
     name,
-    view = 'clear',
-    width,
+    view = userPropViewDefault,
+    width = userPropWidthDefault,
     onlyAvatar: propOnlyAvatar,
     withArrow,
     info,

@@ -6,7 +6,9 @@ import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
-export type SwitchPropSize = 's' | 'm' | 'l';
+export const switchPropSize = ['m', 's', 'l'] as const;
+export type SwitchPropSize = typeof switchPropSize[number];
+export const switchPropSizeDefault: SwitchPropSize = switchPropSize[0];
 
 export type SwitchPropOnChange = (object: {
   e: React.ChangeEvent<HTMLInputElement>;
@@ -40,7 +42,7 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>((props, re
   const {
     checked = false,
     name,
-    size = 'm',
+    size = switchPropSizeDefault,
     disabled,
     className,
     label,
