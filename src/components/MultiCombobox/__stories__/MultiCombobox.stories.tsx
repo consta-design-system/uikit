@@ -2,6 +2,14 @@ import React from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { createMetadata, createStory } from '../../../utils/storybook';
+import {
+  DefaultPropForm,
+  DefaultPropSize,
+  DefaultPropView,
+  form,
+  sizes,
+  view,
+} from '../../SelectComponents/types';
 import { MultiCombobox } from '../MultiCombobox';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
@@ -103,27 +111,9 @@ const groups = [
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const getKnobs = () => ({
   disabled: boolean('disabled', false),
-  size: select('size', ['xs', 's', 'm', 'l'], 'm'),
-  view: select('view', ['default', 'clear'], 'default'),
-  width: select('width', ['full', 'default'], 'default'),
-  form: select(
-    'form',
-    [
-      'default',
-      'brick',
-      'round',
-      'clearRound',
-      'roundClear',
-      'clearDefault',
-      'defaultClear',
-      'defaultBrick',
-      'brickDefault',
-      'brickClear',
-      'clearBrick',
-      'clearClear',
-    ],
-    'default',
-  ),
+  size: select('size', sizes, DefaultPropSize),
+  view: select('view', view, DefaultPropView),
+  form: select('form', form, DefaultPropForm),
   placeholder: text('placeholder', 'Placeholder'),
 });
 

@@ -13,7 +13,6 @@ import {
   DefaultPropForm,
   DefaultPropSize,
   DefaultPropView,
-  DefaultPropWidth,
 } from '../SelectComponents/types';
 import { Tag } from '../Tag/Tag';
 
@@ -39,7 +38,6 @@ export const MultiCombobox: MultiComboboxType = (props) => {
     disabled,
     ariaLabel,
     id,
-    width = DefaultPropWidth,
     form = DefaultPropForm,
     view = DefaultPropView,
     size = DefaultPropSize,
@@ -53,6 +51,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
   const [inputData, setInputData] = useState<{ value: string | undefined }>({
     value: '',
   });
+
   const toggleRef = useRef<HTMLInputElement>(null);
 
   const handlerChangeValue = (v: typeof value): void => {
@@ -67,8 +66,6 @@ export const MultiCombobox: MultiComboboxType = (props) => {
   const controlRef = useRef<HTMLDivElement | null>(null);
   const arrValue: typeof val | null = typeof val !== 'undefined' && val !== null ? [...val] : null;
   const hasGroup = typeof getGroupOptions === 'function';
-
-  const placeholderRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToIndex = (index: number): void => {
     if (!optionsRef.current) {
@@ -203,12 +200,6 @@ export const MultiCombobox: MultiComboboxType = (props) => {
       return 0;
     }
 
-    let placeholderWidth = 0;
-
-    if ((!arrValue || arrValue.length < 1) && placeholderRef.current) {
-      placeholderWidth = placeholderRef.current?.offsetWidth;
-    }
-
     const fakeEl = document.createElement('div');
     fakeEl.style.cssText =
       'display:inline-block;height:0;overflow:hidden;position:absolute;top:0;visibility:hidden;white-space:nowrap;';
@@ -221,10 +212,10 @@ export const MultiCombobox: MultiComboboxType = (props) => {
 
     document.body.removeChild(fakeEl);
 
-    return fakeElWidth < placeholderWidth ? placeholderWidth : fakeElWidth;
+    return fakeElWidth;
   };
 
-  const inputWidth = getInputWidth();
+  const inputWidth = React.useMemo(() => getInputWidth(), [inputData.value, arrValue]);
 
   return (
     <SelectContainer
@@ -233,7 +224,6 @@ export const MultiCombobox: MultiComboboxType = (props) => {
       size={size}
       view={view}
       form={form}
-      width={width}
       multi
       {...restProps}
     >
@@ -253,10 +243,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
         >
           <div className={cnSelect('ControlValueContainer')}>
             <div className={cnSelect('ControlValue')}>
-              <div
-                className={cnSelect('Placeholder', { isHidden: !showPlaceholder })}
-                ref={placeholderRef}
-              >
+              <div className={cnSelect('Placeholder', { isHidden: !showPlaceholder })}>
                 {placeholder}
               </div>
               {valueTags}

@@ -13,7 +13,6 @@ import {
   DefaultPropForm,
   DefaultPropSize,
   DefaultPropView,
-  DefaultPropWidth,
 } from '../SelectComponents/types';
 
 export type ComboboxSelectProps<ITEM> = CommonSelectProps<ITEM> & {
@@ -38,7 +37,6 @@ export const Combobox: ComboboxType = (props) => {
     disabled,
     ariaLabel,
     id,
-    width = DefaultPropWidth,
     form = DefaultPropForm,
     view = DefaultPropView,
     size = DefaultPropSize,
@@ -175,7 +173,6 @@ export const Combobox: ComboboxType = (props) => {
       size={size}
       view={view}
       form={form}
-      width={width}
       {...restProps}
     >
       <div

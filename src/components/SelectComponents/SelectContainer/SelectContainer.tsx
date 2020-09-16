@@ -7,11 +7,9 @@ import {
   DefaultPropForm,
   DefaultPropSize,
   DefaultPropView,
-  DefaultPropWidth,
   PropForm,
   PropSize,
   PropView,
-  PropWidth,
 } from '../types';
 
 export type SelectContainerProps = {
@@ -19,7 +17,6 @@ export type SelectContainerProps = {
   disabled?: boolean;
   form?: PropForm;
   size?: PropSize;
-  width?: PropWidth;
   view?: PropView;
   focused?: boolean;
   children: React.ReactNode;
@@ -30,7 +27,6 @@ export const SelectContainer = React.forwardRef<HTMLDivElement, SelectContainerP
   (props, ref) => {
     const {
       size = DefaultPropSize,
-      width = DefaultPropWidth,
       form = DefaultPropForm,
       view = DefaultPropView,
       className,
@@ -42,7 +38,7 @@ export const SelectContainer = React.forwardRef<HTMLDivElement, SelectContainerP
 
     return (
       <div
-        className={cnSelect({ size, width, form, disabled, view, focused, multi }, [className])}
+        className={cnSelect({ size, form, disabled, view, focused, multi }, [className])}
         ref={ref}
       >
         {children}
