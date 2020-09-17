@@ -322,6 +322,7 @@
 
   &-Input {
     position: relative;
+    width: calc(100% - calc(var(--input-space) * 2));
     margin: 0;
     padding: 0;
     color: inherit;
@@ -571,7 +572,7 @@
       width: var(--box-size);
       height: var(--box-size);
       margin: 0;
-      background-color: transparent;
+      background: var(--color-bg-default);
       border: var(--control-border-width) solid var(--color-control-bg-border-default);
       border-radius: var(--control-radius);
       cursor: pointer;

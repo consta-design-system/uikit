@@ -180,6 +180,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
 
       const optionForCreate = ({
         label: searchValue,
+        item: { label: searchValue },
         optionForCreate: true,
       } as unknown) as Option<typeof options[0]>;
 
@@ -285,10 +286,10 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
         if (multi) {
           const newVal = value.some((v) => getOptionLabel(v) === option.label)
             ? value.filter((v) => getOptionLabel(v) !== option.label)
-            : [...value, option];
+            : [...value, option.item];
           onChangeRef.current(newVal);
         } else {
-          onChangeRef.current(option);
+          onChangeRef.current(option.item);
           setOpen(false);
         }
       }

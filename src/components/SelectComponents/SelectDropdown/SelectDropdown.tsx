@@ -78,9 +78,12 @@ export const SelectDropdown: SelectDropdown = (props) => {
                   </div>
                 )}
                 <div
-                  aria-selected={selectedValues?.some(
-                    (val) => getOptionLabel(val) === getOptionLabel(menuOption.item),
-                  )}
+                  aria-selected={
+                    !isOptionForCreate &&
+                    selectedValues?.some(
+                      (val) => getOptionLabel(val) === getOptionLabel(menuOption.item),
+                    )
+                  }
                   role="option"
                   key={option.label}
                   id={`${id}-${index}`}
