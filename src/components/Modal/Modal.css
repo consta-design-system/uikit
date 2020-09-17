@@ -1,12 +1,20 @@
 .Modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  padding: 60px;
+
   &-Window {
-    position: absolute;
     z-index: 100;
     overflow: auto;
     min-width: 400px;
-    max-width: 90vw;
+    max-width: 90%;
     min-height: 200px;
-    max-height: 90vh;
+    max-height: 90%;
     background-color: var(--color-bg-default);
     border-radius: var(--control-radius);
     box-shadow: 0 4px 12px rgba(var(--color-nums-shadow), 0.08),
@@ -14,15 +22,11 @@
 
     &_position {
       &_center {
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        align-self: safe center;
       }
 
       &_top {
-        top: 60px;
-        left: 50%;
-        transform: translateX(-50%);
+        align-self: safe flex-start;
       }
     }
   }

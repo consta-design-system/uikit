@@ -7,9 +7,10 @@ Modal - компонент контейнер с белым фоном для о
 | Свойство               | Тип или варианты значения                                             | По умолчанию              |
 | ---------------------- | --------------------------------------------------------------------- | ------------------------- |
 | isOpen?                | `boolean`                                                             | -                         |
-| onClose                | `(e: React.MouseEvent) => void`                                       | -                         |
+| onClose?               | `() => void`                                                          | -                         |
+| onOpen?                | `() => void`                                                          | -                         |
+| onOverlayClick?        | `(e: React.MouseEvent) => void`                                       | -                         |
 | hasOverlay?            | `boolean`                                                             | `true`                    |
-| closeByClickOnOverlay? | `boolean`                                                             | `true`                    |
 | className?             | `string`                                                              | -                         |
 | width?                 | `'auto'`                                                              | `auto`                    |
 | position?              | `'center', 'top'`                                                     | `center`                  |
@@ -19,7 +20,7 @@ Modal - компонент контейнер с белым фоном для о
 ## Пример использования
 
 ```ts
-<Modal className='myClassName' isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+<Modal className='myClassName' isOpen={isModalOpen} onOverlayClick={() => setIsModalOpen(false)}>
   <Text as='p' size='s' view='secondary' className={cnModalStories('title')}>
     Заголовок модалки
   </Text>

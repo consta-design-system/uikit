@@ -9,13 +9,14 @@ import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 import { Modal } from '../Modal';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 import mdx from './Modal.mdx';
 
 const cnModalStories = cn('ModalStories');
 
 const defaultKnobs = () => ({
   hasOverlay: boolean('hasOverlay', true),
-  closeByClickOnOverlay: boolean('closeByClickOnOverlay', true),
   width: select('width', ['auto'], 'auto'),
   position: select('position', ['center', 'top'], 'center'),
 });
@@ -23,7 +24,7 @@ const defaultKnobs = () => ({
 export function Playground() {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
-  const { hasOverlay, closeByClickOnOverlay, width, position } = defaultKnobs();
+  const { hasOverlay, width, position } = defaultKnobs();
 
   return (
     <div className={cnModalStories()}>
@@ -38,10 +39,11 @@ export function Playground() {
         className="myClassName"
         isOpen={isModalOpen}
         hasOverlay={hasOverlay}
-        closeByClickOnOverlay={closeByClickOnOverlay}
+        onOverlayClick={() => setIsModalOpen(false)}
         width={width}
         position={position}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => console.log('Коллбэк на закрытие')}
+        onOpen={() => console.log('Коллбэк на открытие')}
       >
         <Text as="p" size="s" view="secondary" className={cnModalStories('title')}>
           Заголовок модалки

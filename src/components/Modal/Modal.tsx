@@ -1,6 +1,6 @@
 import './Modal.css';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import { useClickOutside } from '../../hooks/useClickOutside/useClickOutside';
@@ -9,13 +9,20 @@ import { cnForCssTransition } from '../../utils/cnForCssTransition';
 import { PortalWithTheme } from '../PortalWithTheme/PortalWithTheme';
 import { useTheme } from '../Theme/Theme';
 
-type TModalPropWidth = 'auto';
-type TModalPropPosition = 'center' | 'top';
+const modalPropWidth = ['auto'] as const;
+type TModalPropWidth = typeof modalPropWidth[number];
+const modalPropWidthDefault: TModalPropWidth = modalPropWidth[0];
+
+const modalPropPosition = ['center', 'top'] as const;
+type TModalPropPosition = typeof modalPropPosition[number];
+const modalPropPositionDefault: TModalPropPosition = modalPropPosition[0];
+
 type TModalProps = {
   isOpen?: boolean;
-  onClose: (e: React.MouseEvent) => void;
+  onClose?: () => void;
+  onOpen?: () => void;
   hasOverlay?: boolean;
-  closeByClickOnOverlay?: boolean;
+  onOverlayClick?: (event: MouseEvent) => void;
   className?: string;
   width?: TModalPropWidth;
   position?: TModalPropPosition;
@@ -29,11 +36,12 @@ export const Modal: React.FC<TModalProps> = (props) => {
   const {
     isOpen,
     onClose,
+    onOpen,
     hasOverlay = true,
-    closeByClickOnOverlay = true,
+    onOverlayClick,
     className,
-    width = 'auto',
-    position = 'center',
+    width = modalPropWidthDefault,
+    position = modalPropPositionDefault,
     children,
     container = window.document.body,
     ...rest
@@ -41,17 +49,19 @@ export const Modal: React.FC<TModalProps> = (props) => {
   const ref = React.useRef<HTMLDivElement | null>(null);
   const { theme } = useTheme();
 
-  const onCloseModal = (e: React.MouseEvent): void => {
-    if (isOpen) {
-      onClose(e);
-    }
-  };
-
   useClickOutside({
-    isActive: closeByClickOnOverlay,
+    isActive: !!onOverlayClick,
     ignoreClicksInsideRefs: [ref],
-    handler: (event: any) => onCloseModal(event),
+    handler: (event: MouseEvent) => onOverlayClick?.(event),
   });
+
+  useEffect(() => {
+    if (isOpen) {
+      onOpen?.();
+    } else {
+      onClose?.();
+    }
+  }, [isOpen]);
 
   return (
     <CSSTransition in={isOpen} unmountOnExit classNames={cnForCssTransition(cnModal)} timeout={200}>
