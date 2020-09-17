@@ -1,0 +1,15 @@
+.DatePickerActionButtons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.DatePickerActionButtons-Quarters {
+  display: flex;
+  align-items: baseline;
+}
+
+.DatePickerActionButtons-Quarter {
+  & + & {
+    margin-left: var(--space-xs);
+  }
+}

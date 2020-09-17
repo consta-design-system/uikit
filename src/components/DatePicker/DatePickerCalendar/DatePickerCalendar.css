@@ -1,0 +1,258 @@
+.DatePickerCalendar {
+  --cell-size: 28px;
+  --cell-padding-left: var(--space-xs);
+  --cell-bg-side-offset: calc(var(--cell-padding-left) / 2);
+  --space-between-weeks: var(--space-xs);
+  --color-bg-selected-primary: var(--color-control-bg-primary);
+  --color-bg-selected-secondary: var(--color-control-bg-ghost);
+  --color-bg-hovered: var(--color-control-bg-primary-hover);
+  --color-text-selected: var(--color-control-typo-primary);
+  --color-text-hovered: var(--color-control-typo-primary-hover);
+  --day-bg-color: transparent;
+  --day-text-color: var(--color-control-typo-default);
+  --z-date: 0;
+  --z-date-bg: calc(var(--z-date) - 1);
+  --z-date-sub-bg: calc(var(--z-date-bg) - 1);
+  display: flex;
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-m);
+}
+
+.DatePickerCalendar-Title {
+  margin-bottom: var(--space-s);
+}
+
+.DatePickerCalendar-Month {
+  display: flex;
+  flex-direction: column;
+
+  & + & {
+    margin-left: var(--space-m);
+  }
+}
+
+.DatePickerCalendar-Weeks {
+  --max-weeks-in-month: 6;
+  min-height: calc(
+    (var(--cell-size) * var(--max-weeks-in-month)) +
+      (var(--space-between-weeks) * (var(--max-weeks-in-month) - 1))
+  );
+}
+
+.DatePickerCalendar-Row {
+  display: flex;
+
+  & + & {
+    margin-top: var(--space-between-weeks);
+  }
+
+  &_withDaynames + & {
+    margin-top: var(--space-s);
+  }
+}
+
+.DatePickerCalendar-Cell {
+  box-sizing: content-box;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  outline: none;
+  text-align: center;
+
+  &_weekDay {
+    height: 20px;
+  }
+
+  & + & {
+    padding-left: var(--cell-padding-left);
+  }
+
+  &_selectable .DatePickerCalendar-CellContent {
+    cursor: pointer;
+  }
+
+  &_disabled .DatePickerCalendar-CellContent {
+    --day-text-color: var(--color-control-typo-disable);
+    cursor: not-allowed;
+  }
+
+  &_today .DatePickerCalendar-CellContent::after {
+    --color-today: var(--color-bg-selected-primary);
+    content: '';
+    position: absolute;
+    z-index: var(--z-date-bg);
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    border: 1px solid var(--color-today);
+    border-radius: 50%;
+  }
+
+  &_today .DatePickerCalendar-CellContent:hover::after {
+    --color-today: var(--color-bg-hovered);
+  }
+
+  &_single .DatePickerCalendar-CellContent::before {
+    content: '';
+    position: absolute;
+    z-index: var(--z-date-sub-bg);
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: var(--day-bg-color);
+    border-radius: 50%;
+  }
+
+  &_single&_selected .DatePickerCalendar-CellContent {
+    --day-text-color: var(--color-text-selected);
+  }
+
+  &_single&_selected .DatePickerCalendar-CellContent::before {
+    --day-bg-color: var(--color-bg-selected-primary);
+  }
+
+  &_single:not(&_disabled) .DatePickerCalendar-CellContent:hover {
+    --day-text-color: var(--color-text-hovered);
+  }
+
+  &_single:not(&_disabled) .DatePickerCalendar-CellContent:hover::before {
+    --day-bg-color: var(--color-bg-hovered);
+  }
+
+  &_range .DatePickerCalendar-CellContent::before {
+    content: '';
+    position: absolute;
+    z-index: var(--z-date-sub-bg);
+    top: 0;
+    right: calc(var(--cell-bg-side-offset) * -1);
+    left: calc(var(--cell-bg-side-offset) * -1);
+    bottom: 0;
+    background-color: var(--day-bg-color);
+  }
+
+  &_range:first-child .DatePickerCalendar-CellContent::before {
+    left: 0;
+  }
+
+  &_range:last-child .DatePickerCalendar-CellContent::before {
+    right: 0;
+  }
+
+  &_range .DatePickerCalendar-CellContent::after {
+    content: '';
+    position: absolute;
+    z-index: var(--z-date-bg);
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: var(--day-bg-color);
+  }
+
+  &_range&_selected&_first:not(&_oneValue) .DatePickerCalendar-CellContent::before,
+  &_range&_selected&_last:not(&_oneValue) .DatePickerCalendar-CellContent::before {
+    --day-bg-color: var(--color-bg-selected-secondary);
+  }
+
+  &_range&_selected&_first:not(&_selectedBackwards) .DatePickerCalendar-CellContent::before {
+    left: 0;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+  }
+
+  &_range&_selected&_first&_selectedBackwards .DatePickerCalendar-CellContent::before,
+  &_range&_selected&_last .DatePickerCalendar-CellContent::before {
+    right: 0;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+  }
+
+  &_range&_selected&_first .DatePickerCalendar-CellContent,
+  &_range&_selected&_last .DatePickerCalendar-CellContent {
+    --day-text-color: var(--color-text-selected);
+  }
+
+  &_range&_selected&_first .DatePickerCalendar-CellContent::after,
+  &_range&_selected&_last .DatePickerCalendar-CellContent::after {
+    --day-bg-color: var(--color-bg-selected-primary);
+    border-radius: 50%;
+  }
+
+  &_range&_selected:not(&_first):not(&_last) .DatePickerCalendar-CellContent::before {
+    --day-bg-color: var(--color-bg-selected-secondary);
+  }
+
+  &_range&_selected&_oneValue .DatePickerCalendar-CellContent::before {
+    right: 0;
+    border-radius: 50%;
+  }
+
+  &_range&_isHighlighted .DatePickerCalendar-CellContent::before {
+    --day-bg-color: var(--color-bg-selected-secondary);
+  }
+
+  &_range&_isHighlighted&_first:not(&_selectedBackwards) .DatePickerCalendar-CellContent::before {
+    right: calc(var(--cell-bg-side-offset) * -1);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  &_range&_isHighlighted&_first:not(&_selectedBackwards).lastWeekDay
+    .DatePickerCalendar-CellContent::before {
+    right: 0;
+  }
+
+  &_range&_isHighlighted&_first&_selectedBackwards .DatePickerCalendar-CellContent::before {
+    right: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  &_range&_isHighlighted&_oneValue:not(&_first):not(&_selectedBackwards):hover
+    .DatePickerCalendar-CellContent::after {
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+  }
+
+  &_range&_isHighlighted&_oneValue:not(&_first)&_selectedBackwards:hover
+    .DatePickerCalendar-CellContent::after {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+  }
+
+  &_range&_isHighlighted:not(&_selectedBackwards):hover .DatePickerCalendar-CellContent::before {
+    right: 0;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+  }
+
+  &_range&_isHighlighted&_selectedBackwards:hover .DatePickerCalendar-CellContent::before {
+    left: 0;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+  }
+
+  &_range:not(&_disabled) .DatePickerCalendar-CellContent:hover {
+    --day-text-color: var(--color-text-hovered);
+  }
+
+  &_range:not(&_disabled) .DatePickerCalendar-CellContent:hover::after {
+    --day-bg-color: var(--color-bg-hovered);
+    border-radius: 50%;
+  }
+}
+
+.DatePickerCalendar-CellContent {
+  position: relative;
+  z-index: var(--z-date);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.DatePickerCalendar-CellContentText {
+  color: var(--day-text-color);
+}

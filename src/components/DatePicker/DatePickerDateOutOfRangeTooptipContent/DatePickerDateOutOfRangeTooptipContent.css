@@ -1,0 +1,12 @@
+.DatePickerDateOutOfRangeTooptipContent {
+  display: flex;
+}
+
+.DatePickerDateOutOfRangeTooptipContent-IconWarning {
+  position: relative;
+  top: calc(var(--line-height-text-m) / 2);
+
+  flex-shrink: 0;
+  margin-right: var(--space-xs);
+  transform: translateY(-50%);
+}

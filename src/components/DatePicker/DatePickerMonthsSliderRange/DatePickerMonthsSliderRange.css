@@ -1,0 +1,67 @@
+.DatePickerMonthsSliderRange-Timeline {
+  --height: var(--control-height-m);
+  --z-index: 1;
+
+  /* задается в js */
+  --tick-width: 1px;
+  --space-to-show-year: 4px;
+  display: flex;
+  overflow-x: hidden;
+  width: calc(var(--tick-width) * 13 + var(--space-to-show-year));
+  height: var(--height);
+  margin: 0 var(--space-xs);
+  background-color: var(--color-control-bg-ghost);
+  border-radius: var(--control-radius);
+}
+
+.DatePickerMonthsSliderRange-Selected {
+  position: absolute;
+  height: 100%;
+  background-color: rgba(0, 120, 210, 0.3);
+}
+
+.DatePickerMonthsSliderRange-Year {
+  position: relative;
+  display: flex;
+}
+
+.DatePickerMonthsSliderRange-YearName {
+  position: absolute;
+  left: 0;
+  bottom: var(--line-height-text-2xs);
+
+  &_active {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.DatePickerMonthsSliderRange-Ticks {
+  position: relative;
+  display: flex;
+  transition: transform 0.4s;
+}
+
+.DatePickerMonthsSliderRange-Tick {
+  z-index: calc(var(--z-index) + 1);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: var(--tick-width);
+  height: 100%;
+  cursor: pointer;
+}
+
+.DatePickerMonthsSliderRange-Selector {
+  position: absolute;
+  z-index: calc(var(--z-index) + 2);
+  width: calc(2 * var(--tick-width));
+  height: var(--height);
+  background-color: var(--color-control-bg-ghost);
+  border-radius: var(--control-radius);
+  cursor: grab;
+
+  &_dragging {
+    cursor: grabbing;
+  }
+}

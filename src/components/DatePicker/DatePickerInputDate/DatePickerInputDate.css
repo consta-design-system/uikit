@@ -1,0 +1,21 @@
+.DatePickerInputDate {
+  cursor: pointer;
+
+  & > input {
+    cursor: inherit;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button,
+    &::-webkit-clear-button,
+    &::-webkit-calendar-picker-indicator {
+      -webkit-appearance: none;
+      display: none;
+    }
+
+    &::-webkit-datetime-edit-day-field,
+    &::-webkit-datetime-edit-month-field,
+    &::-webkit-datetime-edit-year-field {
+      color: inherit;
+    }
+  }
+}
