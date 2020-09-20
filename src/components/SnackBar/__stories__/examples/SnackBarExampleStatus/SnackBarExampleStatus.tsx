@@ -1,3 +1,5 @@
+import './SnackBarExampleStatus.css';
+
 import React from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
