@@ -66,6 +66,7 @@ type ChildrenRenderProp = (direction: Direction) => React.ReactNode;
 
 export type Props = {
   direction?: Direction;
+  spareDirection?: Direction;
   offset?: number;
   arrowOffset?: number;
   possibleDirections?: readonly Direction[];
@@ -87,6 +88,7 @@ export const Popover: React.FC<Props> = (props) => {
     possibleDirections = directions,
     isInteractive = true,
     onClickOutside,
+    spareDirection = 'downStartLeft',
   } = props;
   const passedPosition = 'position' in props ? props.position : undefined;
   const anchorRef = 'anchorRef' in props ? props.anchorRef : undefined;
@@ -140,6 +142,7 @@ export const Popover: React.FC<Props> = (props) => {
       ? { x: anchorClientRect.left, y: anchorClientRect.top }
       : passedPosition,
     anchorSize,
+    spareDirection,
   });
 
   /**

@@ -24,6 +24,7 @@ const defaultParams: Parameters<typeof getComputedPositionAndDirection>[0] = {
   direction: 'leftCenter',
   offset: 0,
   position: undefined,
+  spareDirection: 'downStartLeft',
 };
 
 describe('getPositionsByDirection', () => {
@@ -323,7 +324,7 @@ describe('getComputedPositionAndDirection', () => {
       });
     });
 
-    it('если поповер никуда не помещается, то используем первоначальные настройки', () => {
+    it('если поповер никуда не помещается, то используем направление spareDirection', () => {
       expect(
         getComputedPositionAndDirection({
           ...defaultParams,
@@ -336,8 +337,8 @@ describe('getComputedPositionAndDirection', () => {
           contentSize: { width: 200, height: 300 },
         }),
       ).toEqual({
-        direction: 'downCenter',
-        position: { x: -50, y: 25 },
+        direction: 'downStartLeft',
+        position: { x: 50, y: 25 },
       });
     });
 
@@ -525,7 +526,7 @@ describe('getComputedPositionAndDirection', () => {
       });
     });
 
-    it('если поповер никуда не помещается, то используем первоначальные настройки', () => {
+    it('если поповер никуда не помещается, то используем направление spareDirection', () => {
       expect(
         getComputedPositionAndDirection({
           ...params,
@@ -541,8 +542,8 @@ describe('getComputedPositionAndDirection', () => {
           anchorSize: ANCHOR_SIZE,
         }),
       ).toEqual({
-        direction: 'upCenter',
-        position: { x: 0, y: -55 },
+        direction: 'downStartLeft',
+        position: { x: 0, y: 55 },
       });
     });
 
@@ -579,6 +580,7 @@ describe('getComputedPositionAndDirection', () => {
           offset: 0,
           possibleDirections: ['downCenter', 'downLeft', 'downRight'],
           bannedDirections: [],
+          spareDirection: 'downCenter',
         }),
       ).toEqual({
         direction: 'downCenter',
@@ -591,21 +593,22 @@ describe('getComputedPositionAndDirection', () => {
     it('если вычисленная сторона под запретом, то возвращаем следующую подходящую сторону', () => {
       expect(
         getComputedPositionAndDirection({
-          viewportSize: { width: 50, height: 500 },
+          viewportSize: { width: 500, height: 500 },
           contentSize: { width: 100, height: 50 },
           direction: 'upCenter',
           position: { x: 25, y: 500 },
           offset: 0,
           possibleDirections: directions,
-          bannedDirections: ['downCenter'],
+          bannedDirections: ['upRight'],
+          spareDirection: 'downStartLeft',
         }),
       ).toEqual({
-        direction: 'upCenter',
-        position: { x: -25, y: 450 },
+        direction: 'rightUp',
+        position: { x: 25, y: 450 },
       });
     });
 
-    it('если все стороны под запретом, то возвращаем дефолтную позицию', () => {
+    it('если все стороны под запретом, то возвращаем направление spareDirection', () => {
       expect(
         getComputedPositionAndDirection({
           viewportSize: { width: 50, height: 500 },
@@ -615,10 +618,11 @@ describe('getComputedPositionAndDirection', () => {
           offset: 0,
           possibleDirections: directions,
           bannedDirections: directions,
+          spareDirection: 'downStartLeft',
         }),
       ).toEqual({
-        direction: 'downCenter',
-        position: { x: -25, y: 500 },
+        direction: 'downStartLeft',
+        position: { x: 25, y: 500 },
       });
     });
   });
