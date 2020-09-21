@@ -1,6 +1,7 @@
 .Badge {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   box-sizing: border-box;
   height: var(--badge-size);
   font-size: var(--badge-text-size);
@@ -10,6 +11,7 @@
   text-decoration: none;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  flex-wrap: nowrap;
 
   &_size {
     &_s {
@@ -139,8 +141,9 @@
   }
 
   &-Icon {
-    --icon-color: var();
+    margin-right: var(--space-2xs);
     font-size: 0;
     line-height: 1em;
+    flex-shrink: 0;
   }
 }

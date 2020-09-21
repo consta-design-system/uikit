@@ -6,7 +6,6 @@ import { classnames } from '@bem-react/classnames';
 import { IconProps } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
-import * as wp from '../../utils/whitepaper/whitepaper';
 import { useTheme } from '../Theme/Theme';
 
 export const badgePropSize = ['m', 's', 'l'] as const;
@@ -79,12 +78,10 @@ export const Badge: ComponentWithAs<Props> = forwardRefWithAs<Props>((props, ref
       ref={ref}
     >
       {Icon ? (
-        <div className={wp.ptIconPlus({ 'vertical-align': 'center' })}>
-          <div className={cnBadge('Icon', [wp.ptIconPlus('icon', { 'indent-r': '2xs' })])}>
-            <Icon size="xs" />
-          </div>
-          <span className={wp.ptIconPlus('block')}>{label}</span>
-        </div>
+        <>
+          <Icon size="xs" className={cnBadge('Icon')} />
+          {label}
+        </>
       ) : (
         label
       )}
