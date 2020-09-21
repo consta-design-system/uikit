@@ -1,7 +1,3 @@
-.myClassName {
-  width: 400px;
-}
-
 .ModalStories {
   &-title {
     margin: var(--space-m);
@@ -15,5 +11,9 @@
     display: flex;
     justify-content: flex-end;
     margin: var(--space-m);
+  }
+
+  &-Modal {
+    width: 400px;
   }
 }

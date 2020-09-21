@@ -36,7 +36,7 @@ export function Playground() {
         onClick={() => setIsModalOpen(true)}
       />
       <Modal
-        className="myClassName"
+        className={cnModalStories('Modal')}
         isOpen={isModalOpen}
         hasOverlay={hasOverlay}
         onOverlayClick={() => setIsModalOpen(false)}

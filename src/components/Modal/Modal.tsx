@@ -10,29 +10,29 @@ import { PortalWithTheme } from '../PortalWithTheme/PortalWithTheme';
 import { useTheme } from '../Theme/Theme';
 
 const modalPropWidth = ['auto'] as const;
-type TModalPropWidth = typeof modalPropWidth[number];
-const modalPropWidthDefault: TModalPropWidth = modalPropWidth[0];
+type ModalPropWidth = typeof modalPropWidth[number];
+const modalPropWidthDefault: ModalPropWidth = modalPropWidth[0];
 
 const modalPropPosition = ['center', 'top'] as const;
-type TModalPropPosition = typeof modalPropPosition[number];
-const modalPropPositionDefault: TModalPropPosition = modalPropPosition[0];
+type ModalPropPosition = typeof modalPropPosition[number];
+const modalPropPositionDefault: ModalPropPosition = modalPropPosition[0];
 
-type TModalProps = {
+type ModalProps = {
   isOpen?: boolean;
   onClose?: () => void;
   onOpen?: () => void;
   hasOverlay?: boolean;
   onOverlayClick?: (event: MouseEvent) => void;
   className?: string;
-  width?: TModalPropWidth;
-  position?: TModalPropPosition;
+  width?: ModalPropWidth;
+  position?: ModalPropPosition;
   children?: React.ReactNode;
   container?: HTMLDivElement | undefined;
 };
 
 const cnModal = cn('Modal');
 
-export const Modal: React.FC<TModalProps> = (props) => {
+export const Modal: React.FC<ModalProps> = (props) => {
   const {
     isOpen,
     onClose,
