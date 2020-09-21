@@ -6,9 +6,9 @@ import { ThemeExampleRoot } from './examples/ThemeExampleRoot/ThemeExampleRoot';
 
 ### Использование в корневом компоненте:
 
-```ts
-// src/App.ts
+```tsx
 import React from 'react';
+
 import { Theme, presetGpnDefault } from '@consta/uikit/Theme';
 
 const App = () => {
@@ -18,7 +18,7 @@ const App = () => {
 
 ### Вложенные темы
 
-```ts
+```tsx
 import React from 'react';
 import { Theme, presetGpnDefault, presetGpnDark } from '@consta/uikit/Theme';
 
@@ -32,26 +32,9 @@ const App = () => {
 };
 ```
 
-### Использование useTheme
-
-`useTheme` вернет `{ theme, themeClassNames }`
-
-`theme` - используемая тема
-`themeClassNames` - классы используемой темы
-
-```ts
-import { useTheme } from '@consta/uikit/Theme';
-import { Text } from '@consta/uikit/Text';
-
-const App = () => {
-  const { themeClassNames } = useTheme();
-  <Text className={themeClassNames.color.invert}></div>;
-};
-```
-
 ### Переключение темы
 
-```ts
+```tsx
 import './RootTheme.css';
 
 import React, { useState } from 'react';
@@ -84,3 +67,119 @@ export const RootTheme: React.FC = () => {
 ```
 
 <ThemeExampleRoot />
+
+### Использование useTheme
+
+`useTheme` вернет `{ theme, themeClassNames }`
+
+`theme` - используемая тема
+`themeClassNames` - классы используемой темы
+
+Обычно использыется для того чтобы взять акцентную или инвертную цветовую схему.
+
+```tsx
+import { useTheme } from '@consta/uikit/Theme';
+import { Text } from '@consta/uikit/Text';
+
+const App = () => {
+  const { themeClassNames } = useTheme();
+  <Text className={themeClassNames.color.invert}></div>;
+};
+```
+
+### Структура темы
+
+```
+_color/									# Модификатор темы отвечающий за цвета
+	Theme_color_MyDark.css
+	Theme_color_MyDefault.css
+_control/								# Модификатор темы отвечающий за размеры эдементов управления/ввода
+	Theme_control_MyDefault.css
+_font/									# Модификатор темы отвечающий за шрифт
+	Theme_font_MyDefault.css
+_size/									# Модификатор темы отвечающий за размер текста и межстрочный интервал
+	Theme_size_MyDefault.css
+_space/									# Модификатор темы отвечающий за отступы
+	Theme_space_MyDefault.css
+Theme.css								# Модификатор стили темы
+```
+
+### Создание/Изменение темы
+
+Можете взять за основу [нашу тему](https://github.com/gazprom-neft/consta-uikit/tree/master/src/components/Theme),
+скопировать ее и создать в ней свои значения модификаторов.
+
+### Пресет
+
+Пресет темы - набор модификаторов темы применяемых к приложению
+
+#### структура пресета
+
+```json
+{
+  "color": {
+    "primary": "myDefault", // основная цветовая схема, указывается значение модификатора _color
+    "accent": "myDark", // акцентная цветовая схема, указывается значение модификатора _color
+    "invert": "myDark" // инвертная цветовая схема, указывается значение модификатора _color
+  },
+  "control": "myDefault", // указывается значение модификатора _control
+  "font": "myDefault", // указывается значение модификатора _font
+  "size": "myDefault", // указывается значение модификатора _size
+  "space": "myDefault" // указывается значение модификатора _space
+}
+```
+
+`primary` - основная цветовая схема, используется всем приложением
+
+`accent` - акцентная цветовая схема, используется на элментах приложения для выделения акцента на элементе,
+используется в компонентах [Badge](/?path=/docs/components-badge--playground),
+[Informer](/?path=/docs/components-informer--playground)
+
+`invert` - инвертная цветовая схема, используется на элементах когда нужно инвертировать цвет,
+используется в компоненте
+[Tooltip](/?path=/docs/components-tooltip--tooltip-positioned-by-anchor-story)
+
+#### Создание свого пресета темы
+
+Для того чтобы создать пресет темы необходимо,создать файл пресета,
+за основу можно взять [пересет из ui-kit](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/Theme/presets/presetGpnDark.ts)
+
+пример пресета myDefault:
+
+```tsx
+//тут импорт css файлов темы
+
+import { ThemePreset } from '@consta/uikit/Theme';
+
+export const myDefault: ThemePreset = {
+  color: {
+    primary: 'myDefault',
+    accent: 'myDark',
+    invert: 'myDark',
+  },
+  control: 'myDefault',
+  font: 'myDefault',
+  size: 'myDefault',
+  space: 'myDefault',
+};
+```
+
+пример пресета myDark:
+
+```tsx
+//тут импорт css файлов темы
+
+import { ThemePreset } from '@consta/uikit/Theme';
+
+export const myDark: ThemePreset = {
+  color: {
+    primary: 'myDark',
+    accent: 'myDark',
+    invert: 'myDefault',
+  },
+  control: 'myDefault',
+  font: 'myDefault',
+  size: 'myDefault',
+  space: 'myDefault',
+};
+```
