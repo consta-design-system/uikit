@@ -1,7 +1,14 @@
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import { Avatar, cnAvatar, getColorIndexForName, getInitialsForName } from '../Avatar';
+import {
+  Avatar,
+  avatarPropForm,
+  avatarPropSize,
+  cnAvatar,
+  getColorIndexForName,
+  getInitialsForName,
+} from '../Avatar';
 
 type AvatarProps = React.ComponentProps<typeof Avatar>;
 
@@ -19,9 +26,7 @@ describe('Компонент Avatar', () => {
 
   describe('проверка props', () => {
     describe('проверка form', () => {
-      const forms = ['round', 'brick', 'default'] as const;
-
-      forms.forEach((form) => {
+      avatarPropForm.forEach((form) => {
         it(`присваивает класс для form=${form}`, () => {
           renderComponent({ form });
 
@@ -32,9 +37,7 @@ describe('Компонент Avatar', () => {
       });
     });
     describe('проверка size', () => {
-      const sizes = ['s', 'm'] as const;
-
-      sizes.forEach((size) => {
+      avatarPropSize.forEach((size) => {
         it(`присваивает класс для size=${size}`, () => {
           renderComponent({ size });
 

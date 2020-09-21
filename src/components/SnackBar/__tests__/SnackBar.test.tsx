@@ -3,7 +3,7 @@ import { act, fireEvent, render, screen } from '@testing-library/react';
 
 import { cnIcon } from '../../../icons/Icon/Icon';
 import { IconAdd } from '../../../icons/IconAdd/IconAdd';
-import { cnSnackBar, SnackBar } from '../SnackBar';
+import { cnSnackBar, SnackBar, snackBarItemStatus } from '../SnackBar';
 
 type SnackBarProps = React.ComponentProps<typeof SnackBar>;
 
@@ -64,8 +64,7 @@ describe('Компонент SnackBar', () => {
       });
     });
     describe('проверка status', () => {
-      const statuses = ['system', 'success', 'warning', 'alert', 'normal'] as const;
-      statuses.forEach((status) => {
+      snackBarItemStatus.forEach((status) => {
         it(`присваивает класс для status=${status} `, () => {
           const items: SnackBarProps['items'] = [
             {

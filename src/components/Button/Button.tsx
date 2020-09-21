@@ -9,17 +9,29 @@ import { getSizeByMap } from '../../utils/getSizeByMap';
 import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { Loader } from '../Loader/Loader';
 
-export type ButtonPropSize = 'xs' | 's' | 'm' | 'l';
-export type ButtonPropView = 'clear' | 'ghost' | 'primary' | 'secondary';
-export type ButtonPropWidth = 'full' | 'default';
-export type ButtonPropForm =
-  | 'default'
-  | 'brick'
-  | 'round'
-  | 'brickRound'
-  | 'roundBrick'
-  | 'brickDefault'
-  | 'defaultBrick';
+export const buttonPropSize = ['m', 'xs', 's', 'l'] as const;
+export type ButtonPropSize = typeof buttonPropSize[number];
+export const buttonPropSizeDefault: ButtonPropSize = buttonPropSize[0];
+
+export const buttonPropView = ['primary', 'clear', 'ghost', 'secondary'] as const;
+export type ButtonPropView = typeof buttonPropView[number];
+export const buttonPropViewDefault: ButtonPropView = buttonPropView[0];
+
+export const buttonPropWidth = ['default', 'full'] as const;
+export type ButtonPropWidth = typeof buttonPropWidth[number];
+export const buttonPropWidthDefault: ButtonPropWidth = buttonPropWidth[0];
+
+export const buttonPropForm = [
+  'default',
+  'brick',
+  'round',
+  'brickRound',
+  'roundBrick',
+  'brickDefault',
+  'defaultBrick',
+] as const;
+export type ButtonPropForm = typeof buttonPropForm[number];
+export const buttonPropFormDefault: ButtonPropForm = buttonPropForm[0];
 
 type Props = {
   size?: ButtonPropSize;
@@ -50,10 +62,10 @@ const sizeMap: Record<ButtonPropSize, IconPropSize> = {
 
 export const Button: ComponentWithAs<Props, 'button'> = forwardRefWithAs<Props>((props, ref) => {
   const {
-    size = 'm',
-    view = 'primary',
-    width,
-    form = 'default',
+    size = buttonPropSizeDefault,
+    view = buttonPropViewDefault,
+    width = buttonPropWidthDefault,
+    form = buttonPropFormDefault,
     iconLeft,
     iconRight,
     label,

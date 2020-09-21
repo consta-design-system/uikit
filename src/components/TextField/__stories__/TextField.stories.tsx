@@ -3,35 +3,29 @@ import { boolean, number, select, text } from '@storybook/addon-knobs';
 
 import { IconPhoto } from '../../../icons/IconPhoto/IconPhoto';
 import { createMetadata } from '../../../utils/storybook';
-import { TextField } from '../TextField';
+import {
+  TextField,
+  textFieldPropForm,
+  textFieldPropFormDefault,
+  textFieldPropSize,
+  textFieldPropSizeDefault,
+  textFieldPropState,
+  textFieldPropView,
+  textFieldPropViewDefault,
+  textFieldPropWidth,
+  textFieldPropWidthDefault,
+} from '../TextField';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import mdx from './TextField.mdx';
 
 const defaultKnobs = () => ({
-  width: select('width', ['full', 'default'], 'default'),
-  form: select(
-    'form',
-    [
-      'default',
-      'brick',
-      'round',
-      'clearRound',
-      'roundClear',
-      'clearDefault',
-      'defaultClear',
-      'defaultBrick',
-      'brickDefault',
-      'brickClear',
-      'clearBrick',
-      'clearClear',
-    ],
-    'default',
-  ),
-  state: select('state', ['', 'alert', 'success', 'warning'], ''),
-  size: select('size', ['xs', 's', 'm', 'l'], 'm'),
-  view: select('view', ['default', 'clear'], 'default'),
+  width: select('width', textFieldPropWidth, textFieldPropWidthDefault),
+  form: select('form', textFieldPropForm, textFieldPropFormDefault),
+  state: select('state', ['', ...textFieldPropState], ''),
+  size: select('size', textFieldPropSize, textFieldPropSizeDefault),
+  view: select('view', textFieldPropView, textFieldPropViewDefault),
   disabled: boolean('disabled', false),
   type: select('type', ['text', 'textarea'], 'text'),
   maxLength: number('maxLength', 200),

@@ -6,7 +6,9 @@ import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
-export type RadioPropSize = 'm' | 'l';
+export const radioPropSize = ['m', 'l'] as const;
+export type RadioPropSize = typeof radioPropSize[number];
+export const radioPropSizeDefault: RadioPropSize = radioPropSize[0];
 
 export type RadioPropOnChange = (object: {
   e: React.ChangeEvent<HTMLInputElement>;
@@ -40,7 +42,7 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>((props, ref)
   const {
     checked = false,
     name,
-    size = 'm',
+    size = radioPropSizeDefault,
     disabled,
     className,
     label,

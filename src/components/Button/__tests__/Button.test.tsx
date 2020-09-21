@@ -1,7 +1,14 @@
 import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { Button, cnButton } from '../Button';
+import {
+  Button,
+  buttonPropForm,
+  buttonPropSize,
+  buttonPropView,
+  buttonPropWidth,
+  cnButton,
+} from '../Button';
 
 type ButtonProps = React.ComponentProps<typeof Button>;
 
@@ -19,8 +26,7 @@ describe('Компонент Button', () => {
 
   describe('проверка props', () => {
     describe('проверка size', () => {
-      const sizes = ['xs', 's', 'm', 'l'] as const;
-      sizes.forEach((size) => {
+      buttonPropSize.forEach((size) => {
         it(`присваивает класс для size=${size}`, () => {
           renderComponent({ size });
 
@@ -32,8 +38,7 @@ describe('Компонент Button', () => {
     });
 
     describe('проверка view', () => {
-      const views = ['clear', 'ghost', 'primary', 'secondary'] as const;
-      views.forEach((view) => {
+      buttonPropView.forEach((view) => {
         it(`присваивает класс для view=${view}`, () => {
           renderComponent({ view });
 
@@ -45,8 +50,7 @@ describe('Компонент Button', () => {
     });
 
     describe('проверка width', () => {
-      const widths = ['full', 'default'] as const;
-      widths.forEach((width) => {
+      buttonPropWidth.forEach((width) => {
         it(`присваивает класс для width=${width}`, () => {
           renderComponent({ width });
 
@@ -58,17 +62,7 @@ describe('Компонент Button', () => {
     });
 
     describe('проверка form', () => {
-      const forms = [
-        'default',
-        'brick',
-        'round',
-        'brickRound',
-        'roundBrick',
-        'brickDefault',
-        'defaultBrick',
-      ] as const;
-
-      forms.forEach((form) => {
+      buttonPropForm.forEach((form) => {
         it(`присваивает класс для form=${form}`, () => {
           renderComponent({ form });
 

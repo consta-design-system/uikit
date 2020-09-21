@@ -6,7 +6,10 @@ import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
-export type ProgressSpinPropSize = 'm' | 's';
+export const progressSpinPropSize = ['m', 's'] as const;
+export type ProgressSpinPropSize = typeof progressSpinPropSize[number];
+export const progressSpinPropSizeDefault: ProgressSpinPropSize = progressSpinPropSize[0];
+
 type Props = {
   size?: ProgressSpinPropSize;
   className?: string;
@@ -33,7 +36,13 @@ function getSvgParamsBySize(size: ProgressSpinPropSize): [number, number, number
 }
 
 export const ProgressSpin = React.forwardRef<SVGSVGElement, ProgressSpinProps>((props, ref) => {
-  const { size = 'm', progress = 0, animation, className, ...otherProps } = props;
+  const {
+    size = progressSpinPropSizeDefault,
+    progress = 0,
+    animation,
+    className,
+    ...otherProps
+  } = props;
   const [sizeOfPixels, strokeWidth, radius, strokeDasharray] = useMemo(
     () => getSvgParamsBySize(size),
     [size],

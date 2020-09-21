@@ -9,8 +9,13 @@ import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttribut
 import { Text } from '../Text/Text';
 import { useTheme } from '../Theme/Theme';
 
-export type InformerPropView = 'filled' | 'bordered';
-export type InformerPropStatus = 'system' | 'alert' | 'warning' | 'success';
+export const informerPropView = ['filled', 'bordered'] as const;
+export type InformerPropView = typeof informerPropView[number];
+export const informerPropViewDefault: InformerPropView = informerPropView[0];
+
+export const informerPropStatus = ['success', 'system', 'alert', 'alert', 'warning'] as const;
+export type InformerPropStatus = typeof informerPropStatus[number];
+export const informerPropStatusDefault: InformerPropStatus = informerPropStatus[0];
 
 type Props = {
   view?: InformerPropView;

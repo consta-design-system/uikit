@@ -6,7 +6,9 @@ import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
-export type CheckboxPropSize = 'm' | 'l';
+export const checkboxPropSize = ['m', 'l'] as const;
+export type CheckboxPropSize = typeof checkboxPropSize[number];
+export const checkboxPropSizeDefault: CheckboxPropSize = checkboxPropSize[0];
 
 export type CheckboxPropOnChange = (object: {
   e: React.ChangeEvent<HTMLInputElement>;
@@ -40,7 +42,7 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>((props
   const {
     checked = false,
     name,
-    size = 'm',
+    size = checkboxPropSizeDefault,
     disabled,
     intermediate = false,
     className,

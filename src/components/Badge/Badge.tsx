@@ -9,11 +9,27 @@ import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAs
 import * as wp from '../../utils/whitepaper/whitepaper';
 import { useTheme } from '../Theme/Theme';
 
+export const badgePropSize = ['m', 's', 'l'] as const;
+export type BadgePropSize = typeof badgePropSize[number];
+export const badgePropSizeDefault: BadgePropSize = badgePropSize[0];
+
+export const badgePropView = ['filled', 'stroked'] as const;
+export type BadgePropView = typeof badgePropView[number];
+export const badgePropViewDefault: BadgePropView = badgePropView[0];
+
+export const badgePropStatus = ['normal', 'success', 'error', 'warning', 'system'] as const;
+export type BadgePropStatus = typeof badgePropStatus[number];
+export const badgePropStatusDefault: BadgePropStatus = badgePropStatus[0];
+
+export const badgePropForm = ['default', 'round'] as const;
+export type BadgePropForm = typeof badgePropForm[number];
+export const badgePropFormDefault: BadgePropForm = badgePropForm[0];
+
 type Props = {
-  size?: 's' | 'm' | 'l';
-  view?: 'filled' | 'stroked';
-  status?: 'success' | 'error' | 'warning' | 'normal' | 'system';
-  form?: 'default' | 'round';
+  size?: BadgePropSize;
+  view?: BadgePropView;
+  status?: BadgePropStatus;
+  form?: BadgePropForm;
   minified?: boolean;
   icon?: React.FC<IconProps>;
   label?: string;
@@ -24,10 +40,10 @@ export const cnBadge = cn('Badge');
 
 export const Badge: ComponentWithAs<Props> = forwardRefWithAs<Props>((props, ref) => {
   const {
-    size = 'm',
-    view = 'filled',
-    status = 'normal',
-    form = 'default',
+    size = badgePropSizeDefault,
+    view = badgePropViewDefault,
+    status = badgePropStatusDefault,
+    form = badgePropFormDefault,
     icon,
     minified,
     label,

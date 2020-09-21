@@ -2,7 +2,23 @@ import * as React from 'react';
 import { select, text } from '@storybook/addon-knobs';
 
 import { createMetadata } from '../../../utils/storybook';
-import { Text } from '../Text';
+import {
+  Text,
+  textPropAlign,
+  textPropDecoration,
+  textPropDisplay,
+  textPropFont,
+  textPropFontStyle,
+  textPropHeight,
+  textPropSize,
+  textPropSizeDefault,
+  textPropSpacing,
+  textPropTransform,
+  textPropType,
+  textPropView,
+  textPropViewDefault,
+  textPropWeight,
+} from '../Text';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
@@ -10,26 +26,18 @@ import mdx from './Text.mdx';
 
 const defaultKnobs = () => ({
   as: select('as', ['p', 'div', 'a', 'span', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'], undefined),
-  align: select('align', ['left', 'center', 'right'], undefined),
-  decoration: select('decoration', ['underline'], undefined),
-  display: select('display', ['block', 'inline-block', 'inline'], undefined),
-  font: select('font', ['primary', 'mono'], 'primary'),
-  lineHeight: select('lineHeight', ['2xs', 'xs', 's', 'm', 'l'], undefined),
-  size: select(
-    'size',
-    ['2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'],
-    undefined,
-  ),
-  spacing: select('spacing', ['xs', 's', 'm', 'l'], undefined),
-  fontStyle: select('fontStyle', ['italic'], undefined),
-  transform: select('transform', ['uppercase'], undefined),
-  type: select('type', ['blockquote', 'p', 'h3', 'h2', 'h1'], undefined),
-  view: select(
-    'View',
-    ['alert', 'brand', 'ghost', 'link', 'link-minor', 'primary', 'secondary', 'success', 'warning'],
-    'primary',
-  ),
-  weight: select('weight', ['black', 'bold', 'light', 'regular', 'semibold', 'thin'], 'regular'),
+  align: select('align', ['', ...textPropAlign], ''),
+  decoration: select('decoration', ['', ...textPropDecoration], ''),
+  display: select('display', ['', ...textPropDisplay], ''),
+  font: select('font', textPropFont, 'primary'),
+  lineHeight: select('lineHeight', ['', ...textPropHeight], ''),
+  size: select('size', textPropSize, textPropSizeDefault),
+  spacing: select('spacing', ['', ...textPropSpacing], ''),
+  fontStyle: select('fontStyle', ['', ...textPropFontStyle], ''),
+  transform: select('transform', ['', ...textPropTransform], ''),
+  type: select('type', ['', ...textPropType], ''),
+  view: select('View', textPropView, textPropViewDefault),
+  weight: select('weight', ['', ...textPropWeight], ''),
   text: text(
     'Content',
     'Чтобы человек захотел это прочитать, у него должна быть очень веская причина. Может быть, его заставили. Может быть, это модный автор, и все друзья уже прочитали. Может быть, где-то здесь в тексте решение его насущной проблемы. Или он просто устроился в кресле, чтобы познакомиться с классной книгой. В любом случае нужна веская причина. Сам по себе этот текст ничем не привлекает.',
@@ -57,18 +65,18 @@ export function Playground() {
   return (
     <Text
       as={as}
-      align={align}
-      decoration={decoration}
-      display={display}
+      align={align || undefined}
+      decoration={decoration || undefined}
+      display={display || undefined}
       font={font}
-      lineHeight={lineHeight}
+      lineHeight={lineHeight || undefined}
       size={size}
-      spacing={spacing}
-      fontStyle={fontStyle}
-      transform={transform}
-      type={type}
-      view={view}
-      weight={weight}
+      spacing={spacing || undefined}
+      fontStyle={fontStyle || undefined}
+      transform={transform || undefined}
+      type={type || undefined}
+      view={view || undefined}
+      weight={weight || undefined}
     >
       {text}
     </Text>
