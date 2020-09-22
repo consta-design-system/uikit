@@ -1,0 +1,83 @@
+.Sidebar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+
+  &-Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    background: var(--color-bg-tone);
+    border: none;
+  }
+
+  &-Window {
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    max-width: 480px;
+    height: 100vh;
+    background-color: var(--color-bg-default);
+    box-shadow: 0 4px 12px rgba(var(--color-nums-shadow), 0.08),
+      0 9px 24px rgba(var(--color-nums-shadow), 0.16);
+
+    &_position {
+      &_right {
+        align-self: safe flex-end;
+        border-radius: var(--control-radius) 0 0 var(--control-radius);
+      }
+
+      &_left {
+        align-self: safe flex-start;
+        border-radius: 0 var(--control-radius) var(--control-radius) 0;
+      }
+    }
+  }
+
+  &-Content {
+    overflow: auto;
+    flex: 1;
+  }
+
+  &-Actions {
+    flex-shrink: 0;
+    border-top: 1px solid var(--color-bg-border);
+  }
+
+  &_animate {
+    &_appear,
+    &_enter,
+    &_exit,
+    &_appearActive,
+    &_enterActive,
+    &_exitActive {
+      transition: opacity 0.2s ease;
+    }
+
+    &_appear,
+    &_enter {
+      opacity: 0;
+    }
+
+    &_appearActive,
+    &_enterActive {
+      opacity: 1;
+    }
+
+    &_exit {
+      opacity: 1;
+    }
+
+    &_exitActive {
+      opacity: 0;
+    }
+  }
+}
