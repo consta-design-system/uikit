@@ -1,6 +1,6 @@
 {
   "name": "@nedra-ui/uikit",
-  "version": "1.8.4",
+  "version": "1.9.4",
   "dependencies": {
     "@bem-react/classname": "^1.5.8",
     "@bem-react/classnames": "^1.3.9",
