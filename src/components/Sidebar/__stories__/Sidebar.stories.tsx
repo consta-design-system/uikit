@@ -18,13 +18,14 @@ const cnSidebarStories = cn('SidebarStories');
 const defaultKnobs = () => ({
   hasOverlay: boolean('hasOverlay', true),
   width: select('width', ['auto'], 'auto'),
-  position: select('position', ['right', 'left'], 'right'),
+  height: select('height', ['auto'], 'auto'),
+  position: select('position', ['right', 'bottom', 'left', 'top'], 'right'),
 });
 
 export function Playground() {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
-  const { hasOverlay, width, position } = defaultKnobs();
+  const { hasOverlay, width, height, position } = defaultKnobs();
 
   return (
     <div className={cnSidebarStories()}>
@@ -43,6 +44,7 @@ export function Playground() {
         hasOverlay={hasOverlay}
         onOverlayClick={() => setIsSidebarOpen(false)}
         width={width}
+        height={height}
         position={position}
       >
         <Sidebar.Content className={cnSidebarStories('Content')}>

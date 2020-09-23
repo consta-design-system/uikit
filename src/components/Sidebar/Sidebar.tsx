@@ -11,13 +11,17 @@ import { useTheme } from '../Theme/Theme';
 
 type DivProps = JSX.IntrinsicElements['div'];
 
-const sidebarPropPosition = ['right', 'left'] as const;
+const sidebarPropPosition = ['right', 'bottom', 'left', 'top'] as const;
 type SidebarPropPosition = typeof sidebarPropPosition[number];
 const sidebarPropPositionDefault: SidebarPropPosition = sidebarPropPosition[0];
 
 const sidebarPropWidth = ['auto'] as const;
 type SidebarPropWidth = typeof sidebarPropWidth[number];
 const sidebarPropWidthDefault: SidebarPropWidth = sidebarPropWidth[0];
+
+const sidebarPropHeight = ['auto'] as const;
+type SidebarPropHeight = typeof sidebarPropHeight[number];
+const sidebarPropHeightDefault: SidebarPropHeight = sidebarPropHeight[0];
 
 type SidebarProps = {
   isOpen?: boolean;
@@ -27,6 +31,7 @@ type SidebarProps = {
   onOverlayClick?: (event: MouseEvent) => void;
   position?: SidebarPropPosition;
   width?: SidebarPropWidth;
+  height?: SidebarPropHeight;
   className?: string;
   children?: React.ReactNode;
   container?: HTMLDivElement | undefined;
@@ -70,6 +75,7 @@ export const Sidebar: SidebarComponent = (props) => {
     onOverlayClick,
     position = sidebarPropPositionDefault,
     width = sidebarPropWidthDefault,
+    height = sidebarPropHeightDefault,
     className,
     children,
     container = window.document.body,
@@ -96,12 +102,17 @@ export const Sidebar: SidebarComponent = (props) => {
     <CSSTransition
       in={isOpen}
       unmountOnExit
+      className={cnSidebar({ position })}
       classNames={cnForCssTransition(cnSidebar)}
       timeout={200}
     >
       <PortalWithTheme preset={theme} container={container}>
         {hasOverlay && <div className={cnSidebar('Overlay')} aria-label="Оверлэй" />}
-        <div className={cnSidebar('Window', { width, position }, [className])} ref={ref} {...rest}>
+        <div
+          className={cnSidebar('Window', { width, height, position }, [className])}
+          ref={ref}
+          {...rest}
+        >
           {children}
         </div>
       </PortalWithTheme>
