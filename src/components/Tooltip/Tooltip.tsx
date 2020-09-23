@@ -19,6 +19,7 @@ type Size = typeof sizes[number];
 type Props = {
   size: Size;
   direction?: Direction;
+  spareDirection?: Direction;
   possibleDirections?: readonly Direction[];
   isInteractive?: boolean;
   children: React.ReactNode;

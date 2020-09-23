@@ -18,6 +18,7 @@ const cnPopoverStories = cn('PopoverStories');
 
 const getCommonKnobs = () => ({
   direction: select('direction', directions, 'upCenter'),
+  spareDirection: select('spareDirection', directions, 'downStartLeft'),
   offset: number('offset', 5),
   arrowOffset: number('arrowOffset', 0),
   possibleDirections: object('possibleDirections', directions),
