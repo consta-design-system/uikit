@@ -1,4 +1,8 @@
 .Sidebar {
+  --width-min-horizontal: 300px;
+  --width-max-horizontal: 480px;
+  --height-min-vertical: 200px;
+  --height-max-vertical: 380px;
   position: absolute;
   top: 0;
   right: 0;
@@ -42,30 +46,30 @@
 
     &_position {
       &_right {
-        min-width: 300px;
-        max-width: 480px;
+        min-width: var(--width-min-horizontal);
+        max-width: var(--width-max-horizontal);
         height: 100vh;
         border-radius: var(--control-radius) 0 0 var(--control-radius);
       }
 
       &_bottom {
         width: 100vw;
-        min-height: 200px;
-        max-height: 380px;
+        min-height: var(--height-min-vertical);
+        max-height: var(--height-max-vertical);
         border-radius: var(--control-radius) var(--control-radius) 0 0;
       }
 
       &_left {
-        min-width: 300px;
-        max-width: 480px;
+        min-width: var(--width-min-horizontal);
+        max-width: var(--width-max-horizontal);
         height: 100vh;
         border-radius: 0 var(--control-radius) var(--control-radius) 0;
       }
 
       &_top {
         width: 100vw;
-        min-height: 200px;
-        max-height: 380px;
+        min-height: var(--height-min-vertical);
+        max-height: var(--height-max-vertical);
         border-radius: 0 0 var(--control-radius) var(--control-radius);
       }
     }
@@ -137,20 +141,11 @@
 
         &-Window {
           &_position {
+            &_right,
+            &_bottom,
+            &_left,
             &_right {
-              transform: translateX(0);
-            }
-
-            &_bottom {
-              transform: translateY(0);
-            }
-
-            &_left {
-              transform: translateX(0);
-            }
-
-            &_top {
-              transform: translateY(0);
+              transform: translate(0, 0);
             }
           }
         }
@@ -165,20 +160,11 @@
 
         &-Window {
           &_position {
+            &_right,
+            &_bottom,
+            &_left,
             &_right {
-              transform: translateX(0);
-            }
-
-            &_bottom {
-              transform: translateY(0);
-            }
-
-            &_left {
-              transform: translateX(0);
-            }
-
-            &_top {
-              transform: translateY(0);
+              transform: translate(0, 0);
             }
           }
         }

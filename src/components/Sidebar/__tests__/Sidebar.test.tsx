@@ -53,10 +53,10 @@ describe('Компонент Sidebar', () => {
         expect(overlay).toBeInTheDocument();
       });
 
-      it('вызывается onOverlayClick при клике по овелэю', () => {
+      it('вызывается onOverlayClick при клике по оверлэю', () => {
         render(getComponent({ hasOverlay: true, onOverlayClick }));
         const overlay = screen.getByLabelText(overlayAriaLabel);
-        fireEvent.mouseDown(overlay);
+        fireEvent.click(overlay);
         expect(onOverlayClick).toBeCalled();
       });
     });

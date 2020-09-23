@@ -3,7 +3,6 @@ import './Sidebar.css';
 import React, { useEffect } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
-import { useClickOutside } from '../../hooks/useClickOutside/useClickOutside';
 import { cn } from '../../utils/bem';
 import { cnForCssTransition } from '../../utils/cnForCssTransition';
 import { PortalWithTheme } from '../PortalWithTheme/PortalWithTheme';
@@ -28,7 +27,7 @@ type SidebarProps = {
   onClose?: () => void;
   onOpen?: () => void;
   hasOverlay?: boolean;
-  onOverlayClick?: (event: MouseEvent) => void;
+  onOverlayClick?: (event: React.MouseEvent) => void;
   position?: SidebarPropPosition;
   width?: SidebarPropWidth;
   height?: SidebarPropHeight;
@@ -81,14 +80,9 @@ export const Sidebar: SidebarComponent = (props) => {
     container = window.document.body,
     ...rest
   } = props;
-  const ref = React.useRef<HTMLDivElement | null>(null);
   const { theme } = useTheme();
 
-  useClickOutside({
-    isActive: !!onOverlayClick,
-    ignoreClicksInsideRefs: [ref],
-    handler: (event: MouseEvent) => onOverlayClick?.(event),
-  });
+  const handleOverlayClick = (event: React.MouseEvent): void => onOverlayClick?.(event);
 
   useEffect(() => {
     if (isOpen) {
@@ -107,12 +101,17 @@ export const Sidebar: SidebarComponent = (props) => {
       timeout={200}
     >
       <PortalWithTheme preset={theme} container={container}>
-        {hasOverlay && <div className={cnSidebar('Overlay')} aria-label="Оверлэй" />}
-        <div
-          className={cnSidebar('Window', { width, height, position }, [className])}
-          ref={ref}
-          {...rest}
-        >
+        {hasOverlay && (
+          // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+          <div
+            tabIndex={-1}
+            className={cnSidebar('Overlay')}
+            aria-label="Оверлэй"
+            onClick={handleOverlayClick}
+            role="button"
+          />
+        )}
+        <div className={cnSidebar('Window', { width, height, position }, [className])} {...rest}>
           {children}
         </div>
       </PortalWithTheme>
