@@ -2,7 +2,7 @@ import './File.css';
 
 import React from 'react';
 
-import { FileIconProps } from '../../fileIcons/FileIcon/FileIcon';
+import { FileIconProps, fileIconPropSizeDefault } from '../../fileIcons/FileIcon/FileIcon';
 import { FileIconAvi } from '../../fileIcons/FileIconAvi/FileIconAvi';
 import { FileIconBmp } from '../../fileIcons/FileIconBmp/FileIconBmp';
 import { FileIconCsv } from '../../fileIcons/FileIconCsv/FileIconCsv';
@@ -40,13 +40,48 @@ export type FileProps = Props & Omit<FileIconProps, keyof Props>;
 
 export const cnFile = cn('File');
 
+const mapExtensionToSvg: { [value: string]: React.FC<FileIconProps> } = {
+  bmp: FileIconBmp,
+  csv: FileIconCsv,
+  avi: FileIconAvi,
+  doc: FileIconDoc,
+  docx: FileIconDoc,
+  gif: FileIconGif,
+  exe: FileIconExe,
+  jpg: FileIconJpg,
+  jpeg: FileIconJpg,
+  mp3: FileIconMp3,
+  mov: FileIconMov,
+  mp4: FileIconMp4,
+  pdf: FileIconPdf,
+  ptt: FileIconPtt,
+  pttx: FileIconPtt,
+  png: FileIconPng,
+  rar: FileIconRar,
+  rtf: FileIconRtf,
+  tiff: FileIconTiff,
+  txt: FileIconTxt,
+  wav: FileIconWav,
+  zip: FileIconZip,
+  gz: FileIconZip,
+  xls: FileIconXls,
+  xlsx: FileIconXls,
+};
+
+function getIconByExtension(extension?: string): React.FC<FileIconProps> {
+  if (!extension) {
+    return FileIconUndefined;
+  }
+  return mapExtensionToSvg[extension.toLowerCase()] || FileIconUndefined;
+}
+
 export const File: React.FC<FileProps> = (props) => {
   const {
     extension,
     loading,
     loadingProgress,
     className,
-    size = 'm',
+    size = fileIconPropSizeDefault,
     loadingWithProgressSpin,
     ...otherProps
   } = props;
@@ -68,41 +103,6 @@ export const File: React.FC<FileProps> = (props) => {
         )}
       </FileIconLoading>
     );
-  }
-
-  const extensionToSvg: { [value: string]: React.FC<FileIconProps> } = {
-    bmp: FileIconBmp,
-    csv: FileIconCsv,
-    avi: FileIconAvi,
-    doc: FileIconDoc,
-    docx: FileIconDoc,
-    gif: FileIconGif,
-    exe: FileIconExe,
-    jpg: FileIconJpg,
-    jpeg: FileIconJpg,
-    mp3: FileIconMp3,
-    mov: FileIconMov,
-    mp4: FileIconMp4,
-    pdf: FileIconPdf,
-    ptt: FileIconPtt,
-    pttx: FileIconPtt,
-    png: FileIconPng,
-    rar: FileIconRar,
-    rtf: FileIconRtf,
-    tiff: FileIconTiff,
-    txt: FileIconTxt,
-    wav: FileIconWav,
-    zip: FileIconZip,
-    gz: FileIconZip,
-    xls: FileIconXls,
-    xlsx: FileIconXls,
-  };
-
-  function getIconByExtension(extension?: string): React.FC<FileIconProps> {
-    if (!extension) {
-      return FileIconUndefined;
-    }
-    return extensionToSvg[extension.toLowerCase()] || FileIconUndefined;
   }
 
   const Icon = getIconByExtension(extension);
