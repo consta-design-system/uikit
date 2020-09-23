@@ -14,18 +14,19 @@ import {
   DefaultPropSize,
   DefaultPropView,
 } from '../SelectComponents/types';
+import { Tag } from '../Tag/Tag';
 
-export type ComboboxSelectProps<ITEM> = CommonSelectProps<ITEM> & {
-  value?: ITEM | null;
-  onChange?: (v: ITEM | null) => void;
+export type MultiComboboxProps<ITEM> = CommonSelectProps<ITEM> & {
+  value?: ITEM[] | null;
+  onChange?: (v: ITEM[] | null) => void;
   onCreate?(str: string): void;
   getGroupOptions?(group: ITEM): ITEM[];
   labelForCreate?: string;
 };
 
-type ComboboxType = <ITEM>(props: ComboboxSelectProps<ITEM>) => React.ReactElement | null;
+type MultiComboboxType = <ITEM>(props: MultiComboboxProps<ITEM>) => React.ReactElement | null;
 
-export const Combobox: ComboboxType = (props) => {
+export const MultiCombobox: MultiComboboxType = (props) => {
   const {
     placeholder,
     onBlur,
@@ -50,6 +51,7 @@ export const Combobox: ComboboxType = (props) => {
   const [inputData, setInputData] = useState<{ value: string | undefined }>({
     value: '',
   });
+
   const toggleRef = useRef<HTMLInputElement>(null);
 
   const handlerChangeValue = (v: typeof value): void => {
@@ -62,7 +64,7 @@ export const Combobox: ComboboxType = (props) => {
 
   const optionsRef = useRef<HTMLDivElement | null>(null);
   const controlRef = useRef<HTMLDivElement | null>(null);
-  const arrValue = typeof val !== 'undefined' && val !== null ? [val] : null;
+  const arrValue: typeof val | null = typeof val !== 'undefined' && val !== null ? [...val] : null;
   const hasGroup = typeof getGroupOptions === 'function';
 
   const scrollToIndex = (index: number): void => {
@@ -74,11 +76,11 @@ export const Combobox: ComboboxType = (props) => {
       'div[role=option]',
     );
 
-    if (index > elements.length - 1 || index < 0) {
-      return;
-    }
-
     scrollIntoView(elements[index], optionsRef.current);
+  };
+
+  const onSelectOption = (): void => {
+    setInputData({ value: '' });
   };
 
   const {
@@ -99,6 +101,8 @@ export const Combobox: ComboboxType = (props) => {
     getOptionLabel,
     onCreate,
     getGroupOptions,
+    multi: true,
+    onSelectOption,
   });
 
   const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>): void => {
@@ -152,19 +156,68 @@ export const Combobox: ComboboxType = (props) => {
 
   const handleControlClick = (): void => {
     toggleRef.current?.focus();
+    if (!isFocused) {
+      setOpen(!isOpen);
+    }
   };
 
   const showPlaceholder =
     (!arrValue?.length && inputData.value === '') || (arrValue === null && inputData.value === '');
 
-  const showInput = arrValue !== null && arrValue.length > 0;
-
   const handleCreate = (): void => {
     if (typeof onCreate === 'function') {
-      const newValue = toggleRef.current?.value;
+      const newValue = toggleRef.current?.value.trim();
       newValue && onCreate(newValue);
     }
   };
+
+  const handleRemoveValue = (optionLabel: string): void => {
+    const newVal = arrValue?.filter((arrVal) => getOptionLabel(arrVal) !== optionLabel);
+    handlerChangeValue(newVal);
+  };
+
+  const valueTags = arrValue?.map((option) => {
+    const label = getOptionLabel(option);
+    const handleCancel = (e: React.SyntheticEvent): void => {
+      e.stopPropagation();
+      handleRemoveValue(label);
+    };
+    const commonProps = {
+      size,
+      label,
+      key: getOptionLabel(option),
+      className: cnSelect('Tag'),
+    };
+    return disabled ? (
+      <Tag mode="info" {...commonProps} />
+    ) : (
+      <Tag mode="cancel" {...commonProps} onCancel={handleCancel} />
+    );
+  });
+
+  const getInputWidth = (): number => {
+    if (!toggleRef.current || !controlRef.current) {
+      return 0;
+    }
+
+    const fakeEl = document.createElement('div');
+    fakeEl.style.cssText =
+      'display:inline-block;height:0;overflow:hidden;position:absolute;top:0;visibility:hidden;white-space:nowrap;';
+    document.body.appendChild(fakeEl);
+
+    const string = toggleRef.current.value;
+    fakeEl.innerHTML = string;
+
+    const fakeElWidth = fakeEl.offsetWidth + 10;
+
+    document.body.removeChild(fakeEl);
+
+    const controlRefWidth = controlRef.current.offsetWidth - 50;
+
+    return fakeElWidth > controlRefWidth ? controlRefWidth : fakeElWidth;
+  };
+
+  const inputWidth = React.useMemo(() => getInputWidth(), [inputData.value, arrValue]);
 
   return (
     <SelectContainer
@@ -173,6 +226,7 @@ export const Combobox: ComboboxType = (props) => {
       size={size}
       view={view}
       form={form}
+      multi
       {...restProps}
     >
       <div
@@ -190,24 +244,27 @@ export const Combobox: ComboboxType = (props) => {
           role="button"
         >
           <div className={cnSelect('ControlValueContainer')}>
-            {arrValue && (
-              <span className={cnSelect('ControlValue')}>{getOptionLabel(arrValue[0])}</span>
-            )}
-            {showPlaceholder && <span className={cnSelect('Placeholder')}>{placeholder}</span>}
-            <input
-              {...getToggleProps({ onChange: handleInputChange })}
-              type="text"
-              onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
-              aria-label={ariaLabel}
-              ref={toggleRef}
-              value={inputData.value}
-              className={cnSelect('Input', { size, hide: showInput })}
-            />
+            <div className={cnSelect('ControlValue')}>
+              <div className={cnSelect('Placeholder', { isHidden: !showPlaceholder })}>
+                {placeholder}
+              </div>
+              {valueTags}
+              <input
+                {...getToggleProps({ onChange: handleInputChange })}
+                type="text"
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
+                aria-label={ariaLabel}
+                ref={toggleRef}
+                value={inputData.value}
+                className={cnSelect('Input', { size })}
+                style={{ width: inputWidth }}
+              />
+            </div>
           </div>
         </div>
-        <span className={cnSelect('Indicators')}>
-          {arrValue && (
+        <div className={cnSelect('Indicators')}>
+          {arrValue && arrValue.length !== 0 && (
             <button
               type="button"
               onClick={handleClear}
@@ -218,7 +275,7 @@ export const Combobox: ComboboxType = (props) => {
               <IconClose size="xs" className={cnSelect('ClearIndicatorIcon')} />
             </button>
           )}
-          <span className={cnSelect('Delimiter')} />
+          <div className={cnSelect('Delimiter')} />
           <button
             type="button"
             className={cnSelect('IndicatorsDropdown')}
@@ -227,7 +284,7 @@ export const Combobox: ComboboxType = (props) => {
           >
             <IconSelect size="xs" className={cnSelect('DropdownIndicatorIcon')} />
           </button>
-        </span>
+        </div>
       </div>
       {isOpen && (
         <SelectDropdown
@@ -243,6 +300,7 @@ export const Combobox: ComboboxType = (props) => {
           hasGroup={hasGroup}
           selectedValues={arrValue}
           labelForCreate={labelForCreate}
+          multi
           getOptionLabel={getOptionLabel}
         />
       )}

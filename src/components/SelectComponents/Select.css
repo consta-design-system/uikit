@@ -1,10 +1,7 @@
 .Select {
   position: relative;
-  display: inline-flex;
-
-  &_width_full {
-    width: 100%;
-  }
+  display: flex;
+  width: 100%;
 
   &-Delimiter {
     width: 1px;
@@ -16,24 +13,28 @@
       --input-height: var(--control-height-xs);
       --input-font-size: var(--control-text-size-xs);
       --input-space: calc(var(--control-space-xs) * 0.5);
+      --tag-space: calc(var(--space-xs) / 2);
     }
 
     &_s {
       --input-height: var(--control-height-s);
       --input-font-size: var(--control-text-size-s);
       --input-space: calc(var(--control-space-s) * 0.5);
+      --tag-space: calc(var(--space-xs) / 2 - var(--control-border-width));
     }
 
     &_m {
       --input-height: var(--control-height-m);
       --input-font-size: var(--control-text-size-m);
       --input-space: calc(var(--control-space-m) * 0.5);
+      --tag-space: calc(var(--space-s) / 2 - var(--control-border-width));
     }
 
     &_l {
       --input-height: var(--control-height-l);
       --input-font-size: var(--control-text-size-l);
       --input-space: calc(var(--control-space-l) * 0.5);
+      --tag-space: calc(var(--space-m) / 2 - var(--control-border-width));
     }
   }
 
@@ -56,6 +57,11 @@
     &:focus {
       outline: none;
     }
+  }
+
+  &_multi &-Control {
+    height: auto;
+    min-height: var(--input-height);
   }
 
   &_view_default .Select-Control {
@@ -220,6 +226,9 @@
   }
 
   &-ControlValueContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     margin: 0;
@@ -236,26 +245,17 @@
     }
   }
 
-  &_width_full &-ControlValueContainer {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
   &_view_default .Select-ControlValueContainer {
     padding: 0 0 0 var(--input-space);
   }
 
-  &-Control_multi &-ControlValueContainer {
+  &_multi &-ControlValueContainer {
     position: relative;
-    top: auto;
-    left: auto;
     display: flex;
     box-sizing: border-box;
-    padding-top: var(--space-xs);
-    padding-bottom: var(--space-xs);
+    padding-top: 0;
+    padding-bottom: 0;
     line-height: 1;
-    flex-wrap: wrap;
   }
 
   &-Control[aria-expanded='true'] &-IndicatorsDropdown {
@@ -270,19 +270,33 @@
     text-overflow: ellipsis;
   }
 
+  &_multi &-ControlValue {
+    overflow: visible;
+    padding-top: var(--tag-space);
+    padding-bottom: calc(var(--tag-space) - calc(var(--space-xs) / 2));
+    white-space: normal;
+  }
+
+  &_multi&_size_l &-ControlValue {
+    padding-top: calc(var(--tag-space) - var(--control-border-width));
+  }
+
   &-Placeholder {
+    padding-right: var(--input-space);
     color: var(--color-control-typo-placeholder);
     font-size: var(--input-font-size);
     text-align: left;
-  }
 
-  &-Control_multi &-ControlValue {
-    white-space: normal;
+    &_isHidden {
+      visibility: hidden;
+      opacity: 0;
+    }
   }
 
   &-Control_hasInput &-Placeholder {
     position: absolute;
     top: 0;
+    width: calc(100% - var(--input-space));
     background-color: transparent;
     line-height: calc(var(--input-height) - 2px);
   }
@@ -298,6 +312,7 @@
     color: var(--color-control-typo-clear);
     background-color: transparent;
     border: none;
+    cursor: pointer;
   }
 
   &-ClearIndicatorIcon {
@@ -307,7 +322,7 @@
 
   &-Input {
     position: relative;
-    z-index: 1;
+    width: calc(100% - calc(var(--input-space) * 2));
     margin: 0;
     padding: 0;
     color: inherit;
@@ -328,6 +343,19 @@
     }
   }
 
+  &_multi &-Input {
+    display: inline-flex;
+    min-width: 10px;
+    margin-top: calc(var(--control-border-width) + var(--tag-space) - calc(var(--space-xs) / 2));
+    line-height: 1;
+  }
+
+  &_multi&_size_s &-Input {
+    margin-top: calc(
+      var(--control-border-width) * 3 + var(--tag-space) - calc(var(--space-xs) / 2)
+    );
+  }
+
   &-FakeField {
     position: absolute;
     top: 0;
@@ -335,6 +363,21 @@
     bottom: 0;
     width: 100%;
     opacity: 0;
+  }
+
+  &-Tag {
+    margin-right: calc(var(--space-xs) / 2);
+    margin-bottom: calc(var(--space-xs) / 2);
+  }
+
+  &_size_xs &-Tag,
+  &_size_s &-Tag {
+    margin-top: calc(var(--space-xs) / 2 - calc(var(--control-border-width) * 4));
+    margin-bottom: calc(var(--space-xs) / 2 - calc(var(--control-border-width) * 3));
+  }
+
+  &_disabled &-Tag {
+    opacity: 0.8;
   }
 
   &-GroupName {
@@ -381,24 +424,28 @@
         --input-height: var(--control-height-xs);
         --input-font-size: var(--control-text-size-xs);
         --input-space: calc(var(--control-space-xs) * 0.5);
+        --box-size: var(--control-box-size-m);
       }
 
       &_s {
         --input-height: var(--control-height-s);
         --input-font-size: var(--control-text-size-s);
         --input-space: calc(var(--control-space-s) * 0.5);
+        --box-size: var(--control-box-size-m);
       }
 
       &_m {
         --input-height: var(--control-height-m);
         --input-font-size: var(--control-text-size-m);
         --input-space: calc(var(--control-space-m) * 0.5);
+        --box-size: var(--control-box-size-l);
       }
 
       &_l {
         --input-height: var(--control-height-l);
         --input-font-size: var(--control-text-size-l);
         --input-space: calc(var(--control-space-l) * 0.5);
+        --box-size: var(--control-box-size-l);
       }
     }
 
@@ -446,17 +493,21 @@
   }
 
   &-List_size_xs &-ListItem,
-  &-List_size_s &-ListItem {
+  &-List_size_s &-ListItem,
+  &-List_size_xs &-CheckItem,
+  &-List_size_s &-CheckItem {
     padding-top: var(--space-2xs);
     padding-bottom: var(--space-2xs);
   }
 
-  &-List_size_m &-ListItem {
+  &-List_size_m &-ListItem,
+  &-List_size_m &-CheckItem {
     padding-top: var(--space-xs);
     padding-bottom: var(--space-xs);
   }
 
-  &-List_size_l &-ListItem {
+  &-List_size_l &-ListItem,
+  &-List_size_l &-CheckItem {
     padding-top: var(--space-xs);
     padding-bottom: var(--space-xs);
   }
@@ -495,5 +546,83 @@
     margin-bottom: calc(-1 * var(--space-xs));
     padding-top: var(--space-xs);
     padding-bottom: var(--space-xs);
+  }
+
+  &-CheckItem {
+    position: relative;
+    padding-right: var(--input-space);
+    padding-left: calc(var(--input-space) + var(--box-size) + var(--space-xs));
+    color: var(--color-control-typo-default);
+    background-color: var(--color-control-bg-clear);
+    cursor: default;
+
+    &_hovered {
+      background-color: var(--color-control-bg-clear-hover);
+    }
+
+    &_active {
+      color: var(--color-control-typo-secondary);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: var(--input-space);
+      box-sizing: border-box;
+      width: var(--box-size);
+      height: var(--box-size);
+      margin: 0;
+      background: var(--color-bg-default);
+      border: var(--control-border-width) solid var(--color-control-bg-border-default);
+      border-radius: var(--control-radius);
+      cursor: pointer;
+      transition: border-color 0.15s, background-color 0.15s;
+      flex-shrink: 0;
+      -webkit-appearance: none;
+    }
+
+    &_active::before {
+      background-color: var(--color-control-bg-primary);
+      border-color: var(--color-control-bg-primary);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      top: calc(var(--space-2xs) + var(--box-size) * 0.75);
+      left: calc(var(--input-space) + var(--box-size) * 0.175);
+      box-sizing: border-box;
+      width: calc(var(--box-size) * 0.6);
+      height: calc(var(--box-size) * 0.35);
+      background-color: var(--color-control-bg-affect);
+      border-left: 2px solid var(--color-control-typo-primary);
+      border-bottom: 2px solid var(--color-control-typo-primary);
+      opacity: 0;
+      transition: opacity 0.15s, transform 0.15s, background-color 0.08s;
+      transform: rotate(-50deg) scale(0, 1);
+      transform-origin: 0 0;
+    }
+
+    &_active::after {
+      opacity: 1;
+      transform: rotate(-50deg) scale(1, 1);
+    }
+
+    &_forCreate {
+      padding-left: var(--input-space);
+
+      &::before,
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  &-List_size_xs &-CheckItem,
+  &-List_size_s &-CheckItem {
+    &::after {
+      top: calc(var(--space-2xs) + var(--box-size) * 0.55);
+    }
   }
 }

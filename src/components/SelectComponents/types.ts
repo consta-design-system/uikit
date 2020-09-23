@@ -2,10 +2,6 @@ export const sizes = ['xs', 's', 'm', 'l'] as const;
 export type PropSize = typeof sizes[number];
 export const DefaultPropSize: PropSize = 'm';
 
-export const width = ['full', 'default'] as const;
-export type PropWidth = typeof width[number];
-export const DefaultPropWidth: PropWidth = 'default';
-
 export const form = [
   'default',
   'brick',
@@ -35,7 +31,6 @@ export type CommonSelectProps<ITEM> = {
   disabled?: boolean;
   form?: PropForm;
   size?: PropSize;
-  width?: PropWidth;
   view?: PropView;
   ariaLabel?: string;
   getOptionLabel(arg: ITEM): string;

@@ -10,11 +10,11 @@ import {
   sizes,
   view,
 } from '../../SelectComponents/types';
-import { Combobox } from '../Combobox';
+import { MultiCombobox } from '../MultiCombobox';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
-import mdx from './Combobox.mdx';
+import mdx from './MultiCombobox.mdx';
 
 type SelectOption = {
   label: string;
@@ -118,34 +118,34 @@ const getKnobs = () => ({
 });
 
 const Default = (props: {
-  value?: SelectOption;
+  value?: SelectOption[];
   items?: Option[];
   getItemLabel?(item: Option): string;
   getGroupOptions?(option: Option): SelectOption[];
+  onCreate?(str: string): void;
 }): JSX.Element => {
   const getItemLabelDefault = (option: Option): string => option.label;
-  const { items = simpleItems, getItemLabel = getItemLabelDefault, getGroupOptions } = props;
+  const {
+    items = simpleItems,
+    getItemLabel = getItemLabelDefault,
+    getGroupOptions,
+    onCreate,
+  } = props;
 
-  let options = items;
-
-  const handleCreate = (v: string): void => {
-    options = [{ label: v, value: v }, ...options];
-  };
+  const options = items;
 
   return (
-    <>
-      <div>
-        <Combobox
-          {...getKnobs()}
-          id="example"
-          options={options}
-          value={props.value}
-          getOptionLabel={getItemLabel}
-          getGroupOptions={getGroupOptions}
-          onCreate={handleCreate}
-        />
-      </div>
-    </>
+    <div>
+      <MultiCombobox
+        {...getKnobs()}
+        id="example"
+        options={options}
+        value={props.value}
+        getOptionLabel={getItemLabel}
+        getGroupOptions={getGroupOptions}
+        onCreate={onCreate}
+      />
+    </div>
   );
 };
 
@@ -153,8 +153,13 @@ export const DefaultStory = createStory(() => <Default />, {
   name: 'по умолчанию',
 });
 
-export const WithValueStory = createStory(() => <Default value={simpleItems[4]} />, {
+export const WithValueStory = createStory(() => <Default value={[simpleItems[4]]} />, {
   name: 'c заданным значением',
+});
+
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+export const WithCreateStory = createStory(() => <Default onCreate={(): void => {}} />, {
+  name: 'c cозданием новой опции',
 });
 
 export const WithGroupsStory = createStory(
@@ -165,7 +170,7 @@ export const WithGroupsStory = createStory(
 );
 
 export default createMetadata({
-  title: 'Components|/Combobox',
+  title: 'Components|/MultiCombobox',
   parameters: {
     docs: {
       page: mdx,

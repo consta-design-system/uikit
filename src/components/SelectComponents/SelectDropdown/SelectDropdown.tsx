@@ -14,12 +14,13 @@ type Props<ITEM> = {
   visibleOptions: Option<ITEM>[];
   highlightedIndex: number;
   getOptionProps(props: OptionProps): GetOptionPropsResult;
-  onCreate?(): void;
+  onCreate?(newLabel: string): void;
   valueForCreate?: string;
   hasGroup?: boolean;
   selectedValues: ITEM[] | null;
   labelForCreate?: string;
   multi?: boolean;
+  getOptionLabel(option: ITEM): string;
 };
 
 type SelectDropdown = <ITEM>(props: Props<ITEM>) => React.ReactElement | null;
@@ -39,11 +40,19 @@ export const SelectDropdown: SelectDropdown = (props) => {
     selectedValues,
     labelForCreate,
     multi = false,
+    getOptionLabel,
   } = props;
+
+  const handleCreate = (): void => {
+    if (typeof onCreate === 'function' && valueForCreate) {
+      onCreate(valueForCreate);
+    }
+  };
+
   return (
     <Popover
       anchorRef={controlRef}
-      possibleDirections={['downCenter', 'upLeft', 'downRight', 'upRight']}
+      possibleDirections={['downStartLeft', 'upStartLeft', 'downStartRight', 'upStartRight']}
       offset={1}
     >
       <SelectDropdownContainer role="listbox" aria-activedescendant={`${id}-${highlightedIndex}`}>
@@ -69,9 +78,12 @@ export const SelectDropdown: SelectDropdown = (props) => {
                   </div>
                 )}
                 <div
-                  aria-selected={selectedValues?.some(
-                    (val) => JSON.stringify(val) === JSON.stringify(option),
-                  )}
+                  aria-selected={
+                    !isOptionForCreate &&
+                    selectedValues?.some(
+                      (val) => getOptionLabel(val) === getOptionLabel(menuOption.item),
+                    )
+                  }
                   role="option"
                   key={option.label}
                   id={`${id}-${index}`}
@@ -82,7 +94,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
                       active:
                         !isOptionForCreate &&
                         selectedValues?.some((val) => {
-                          return JSON.stringify(val) === JSON.stringify(menuOption.item);
+                          return getOptionLabel(val) === getOptionLabel(menuOption.item);
                         }),
                       hovered: index === highlightedIndex,
                     }),
@@ -97,7 +109,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
                           index !== 0 &&
                           option.label.toLowerCase() === valueForCreate?.toLowerCase(),
                       )}
-                      onClick={onCreate}
+                      onClick={handleCreate}
                     >
                       + {labelForCreate} «<b>{valueForCreate}</b>»
                     </button>
