@@ -4,7 +4,7 @@ import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/D
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { BasicSelect } from '../../../BasicSelect';
 
-type Option = {
+type SelectOption = {
   label: string;
   value: string;
 };

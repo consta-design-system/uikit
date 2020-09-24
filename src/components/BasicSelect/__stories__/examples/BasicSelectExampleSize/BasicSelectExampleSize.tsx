@@ -4,7 +4,7 @@ import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/D
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { BasicSelect } from '../../../BasicSelect';
 
-type Option = {
+type SelectOption = {
   label: string;
   value: string;
 };
@@ -42,21 +42,6 @@ export const BasicSelectExampleSize = () => {
         getOptionLabel={getItemLabel}
         placeholder="Ваш выбор L"
         size="l"
-      />
-    </StoryBookExample>
-  );
-};
-
-export const BasicSelectExampleSizeWidth = () => {
-  const getItemLabel = (option: SelectOption): string => option.label;
-  return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <BasicSelect
-        id="city"
-        options={items}
-        getOptionLabel={getItemLabel}
-        placeholder="Ваш выбор"
-        width="full"
       />
     </StoryBookExample>
   );
