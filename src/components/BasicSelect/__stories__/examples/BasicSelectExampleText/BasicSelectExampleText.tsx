@@ -29,7 +29,6 @@ export const BasicSelectExampleText = () => {
         getOptionLabel={getItemLabel}
         placeholder="Выберите"
         size="s"
-        width="full"
       />
     </StoryBookExample>
   );
