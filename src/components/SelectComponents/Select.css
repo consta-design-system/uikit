@@ -368,6 +368,10 @@
   &-Tag {
     margin-right: calc(var(--space-xs) / 2);
     margin-bottom: calc(var(--space-xs) / 2);
+
+    .TagBase-Label {
+      word-break: break-word;
+    }
   }
 
   &_size_xs &-Tag,
@@ -623,6 +627,43 @@
   &-List_size_s &-CheckItem {
     &::after {
       top: calc(var(--space-2xs) + var(--box-size) * 0.55);
+    }
+  }
+
+  &-HelperInputFakeElement {
+    display: inline-block;
+
+    /* height: 0; */
+    overflow: hidden;
+
+    /* position: absolute; */
+    font-size: var(--input-font-size);
+
+    /* visibility: hidden; */
+
+    /* top: 0; */
+    white-space: nowrap;
+
+    /*
+    Внимание: --input-font-size дожен соывадать с --input-font-size в Select_size    
+    */
+
+    &_size {
+      &_xs {
+        --input-font-size: var(--control-text-size-xs);
+      }
+
+      &_s {
+        --input-font-size: var(--control-text-size-s);
+      }
+
+      &_m {
+        --input-font-size: var(--control-text-size-m);
+      }
+
+      &_l {
+        --input-font-size: var(--control-text-size-l);
+      }
     }
   }
 }
