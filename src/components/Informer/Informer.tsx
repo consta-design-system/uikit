@@ -27,7 +27,7 @@ type Props = {
 
 export type InformerProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
 
-const cnInformer = cn('Informer');
+export const cnInformer = cn('Informer');
 
 export const Informer = React.forwardRef<HTMLDivElement, InformerProps>((props, ref) => {
   const { view, status, icon, label, title, children, ...otherProps } = props;
