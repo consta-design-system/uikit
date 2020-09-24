@@ -144,7 +144,7 @@
             &_right,
             &_bottom,
             &_left,
-            &_right {
+            &_top {
               transform: translate(0, 0);
             }
           }
@@ -163,7 +163,7 @@
             &_right,
             &_bottom,
             &_left,
-            &_right {
+            &_top {
               transform: translate(0, 0);
             }
           }
