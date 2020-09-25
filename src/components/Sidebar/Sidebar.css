@@ -113,19 +113,19 @@
         &-Window {
           &_position {
             &_right {
-              transform: translateX(100%);
+              transform: translate3d(100%, 0, 0);
             }
 
             &_bottom {
-              transform: translateY(100%);
+              transform: translate3d(0, 100%, 0);
             }
 
             &_left {
-              transform: translateX(-100%);
+              transform: translate3d(-100%, 0, 0);
             }
 
             &_top {
-              transform: translateY(-100%);
+              transform: translate3d(0, -100%, 0);
             }
           }
         }
@@ -145,7 +145,7 @@
             &_bottom,
             &_left,
             &_top {
-              transform: translate(0, 0);
+              transform: translate3d(0, 0, 0);
             }
           }
         }
@@ -164,7 +164,7 @@
             &_bottom,
             &_left,
             &_top {
-              transform: translate(0, 0);
+              transform: translate3d(0, 0, 0);
             }
           }
         }
@@ -180,19 +180,19 @@
         &-Window {
           &_position {
             &_right {
-              transform: translateX(100%);
+              transform: translate3d(100%, 0, 0);
             }
 
             &_bottom {
-              transform: translateY(100%);
+              transform: translate3d(0, 100%, 0);
             }
 
             &_left {
-              transform: translateX(-100%);
+              transform: translate3d(-100%, 0, 0);
             }
 
             &_top {
-              transform: translateY(-100%);
+              transform: translate3d(0, -100%, 0);
             }
           }
         }
