@@ -10,7 +10,6 @@ import { SelectContainer } from '../SelectComponents/SelectContainer/SelectConta
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
 import { CommonSelectProps, DefaultPropForm, DefaultPropView } from '../SelectComponents/types';
 import { Tag } from '../Tag/Tag';
-import { useTheme } from '../Theme/Theme';
 
 export const multiComboboxPropSize = ['m', 's', 'l'] as const;
 export type MultiComboboxPropSize = typeof multiComboboxPropSize[number];
@@ -54,6 +53,8 @@ export const MultiCombobox: MultiComboboxType = (props) => {
   });
 
   const toggleRef = useRef<HTMLInputElement>(null);
+  const controlInnerRef = useRef<HTMLDivElement>(null);
+  const helperInputFakeElement = useRef<HTMLDivElement>(null);
 
   const handlerChangeValue = (v: typeof value): void => {
     if (typeof onChange === 'function' && v) {
@@ -196,39 +197,17 @@ export const MultiCombobox: MultiComboboxType = (props) => {
     );
   });
 
-  const { themeClassNames } = useTheme();
-  const controlInnerRef = useRef<HTMLDivElement>(null);
-
   const getInputStyle = (): {
     width: number;
   } => {
-    if (!toggleRef.current || !controlInnerRef.current) {
+    if (!controlInnerRef.current || !helperInputFakeElement.current) {
       return {
-        width: 10,
+        width: 0,
       };
     }
-
-    const fakeElement = document.createElement('div');
-
-    fakeElement.className = cnSelect('HelperInputFakeElement', { size }, [
-      themeClassNames.space,
-      themeClassNames.control,
-      themeClassNames.size,
-      themeClassNames.font,
-    ]);
-
-    document.body.appendChild(fakeElement);
-
-    const string = toggleRef.current.value;
-    fakeElement.innerHTML = string;
-
-    const fakeElWidth = fakeElement.offsetWidth + 10;
-
-    document.body.removeChild(fakeElement);
-
-    const maxWidth = controlInnerRef.current ? controlInnerRef.current.offsetWidth - 15 : undefined;
-
-    const width = fakeElWidth > (maxWidth || 0) ? maxWidth || 0 : fakeElWidth;
+    const fakeElWidth = helperInputFakeElement.current.offsetWidth + 20;
+    const maxWidth = controlInnerRef.current ? controlInnerRef.current.offsetWidth - 15 : 0;
+    const width = fakeElWidth > maxWidth ? maxWidth : fakeElWidth;
 
     return {
       width,
@@ -323,6 +302,9 @@ export const MultiCombobox: MultiComboboxType = (props) => {
           getOptionLabel={getOptionLabel}
         />
       )}
+      <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
+        {inputData.value}
+      </div>
     </SelectContainer>
   );
 };
