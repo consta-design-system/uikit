@@ -47,58 +47,47 @@
 
   &_size {
     &_2xs {
-      font-size: var(--size-text-2xs, var(--size-text-2xs));
-      line-height: var(--line-height-text-m, var(--line-height-text-2xs));
+      font-size: var(--size-text-2xs);
     }
 
     &_xs {
-      font-size: var(--size-text-xs, var(--size-text-xs));
-      line-height: var(--line-height-text-m, var(--line-height-text-xs));
+      font-size: var(--size-text-xs);
     }
 
     &_s {
-      font-size: var(--size-text-s, var(--size-text-s));
-      line-height: var(--line-height-text-m, var(--line-height-text-s));
+      font-size: var(--size-text-s);
     }
 
     &_m {
-      font-size: var(--size-text-m, var(--size-text-m));
-      line-height: var(--line-height-text-m, var(--line-height-text-m));
+      font-size: var(--size-text-m);
     }
 
     &_l {
-      font-size: var(--size-text-l, var(--size-text-l));
-      line-height: var(--line-height-text-m, var(--line-height-text-l));
+      font-size: var(--size-text-l);
     }
 
     &_xl {
-      font-size: var(--size-text-xl, var(--size-text-xl));
-      line-height: var(--line-height-text-m, var(--line-height-typo-xl));
+      font-size: var(--size-text-xl);
     }
 
     &_2xl {
-      font-size: var(--size-text-2xl, var(--size-text-2xl));
-      line-height: var(--line-height-text-m, var(--line-height-typo-2xl));
+      font-size: var(--size-text-2xl);
     }
 
     &_3xl {
-      font-size: var(--size-text-3xl, var(--size-text-3xl));
-      line-height: var(--line-height-text-m, var(--line-height-typo-3xl));
+      font-size: var(--size-text-3xl);
     }
 
     &_4xl {
-      font-size: var(--size-text-4xl, var(--size-text-4xl));
-      line-height: var(--line-height-text-m, var(--line-height-typo-4xl));
+      font-size: var(--size-text-4xl);
     }
 
     &_5xl {
-      font-size: var(--size-text-5xl, var(--size-text-5xl));
-      line-height: var(--line-height-text-m, var(--line-height-typo-5xl));
+      font-size: var(--size-text-5xl);
     }
 
     &_6xl {
-      font-size: var(--size-text-6xl, var(--size-text-6xl));
-      line-height: var(--line-height-text-m, var(--line-height-typo-6xl));
+      font-size: var(--size-text-6xl);
     }
   }
 
