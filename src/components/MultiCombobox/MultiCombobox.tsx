@@ -8,13 +8,12 @@ import { scrollIntoView } from '../../utils/scrollIntoView';
 import { cnSelect } from '../SelectComponents/cnSelect';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
-import {
-  CommonSelectProps,
-  DefaultPropForm,
-  DefaultPropSize,
-  DefaultPropView,
-} from '../SelectComponents/types';
+import { CommonSelectProps, DefaultPropForm, DefaultPropView } from '../SelectComponents/types';
 import { Tag } from '../Tag/Tag';
+
+export const multiComboboxPropSize = ['m', 's', 'l'] as const;
+export type MultiComboboxPropSize = typeof multiComboboxPropSize[number];
+export const multiComboboxPropSizeDefault = multiComboboxPropSize[0];
 
 export type MultiComboboxProps<ITEM> = CommonSelectProps<ITEM> & {
   value?: ITEM[] | null;
@@ -22,6 +21,7 @@ export type MultiComboboxProps<ITEM> = CommonSelectProps<ITEM> & {
   onCreate?(str: string): void;
   getGroupOptions?(group: ITEM): ITEM[];
   labelForCreate?: string;
+  size?: MultiComboboxPropSize;
 };
 
 type MultiComboboxType = <ITEM>(props: MultiComboboxProps<ITEM>) => React.ReactElement | null;
@@ -40,7 +40,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
     id,
     form = DefaultPropForm,
     view = DefaultPropView,
-    size = DefaultPropSize,
+    size = multiComboboxPropSizeDefault,
     onCreate,
     getGroupOptions,
     labelForCreate = 'Добавить',
@@ -53,6 +53,8 @@ export const MultiCombobox: MultiComboboxType = (props) => {
   });
 
   const toggleRef = useRef<HTMLInputElement>(null);
+  const controlInnerRef = useRef<HTMLDivElement>(null);
+  const helperInputFakeElement = useRef<HTMLDivElement>(null);
 
   const handlerChangeValue = (v: typeof value): void => {
     if (typeof onChange === 'function' && v) {
@@ -195,29 +197,24 @@ export const MultiCombobox: MultiComboboxType = (props) => {
     );
   });
 
-  const getInputWidth = (): number => {
-    if (!toggleRef.current || !controlRef.current) {
-      return 0;
+  const getInputStyle = (): {
+    width: number;
+  } => {
+    if (!controlInnerRef.current || !helperInputFakeElement.current) {
+      return {
+        width: 0,
+      };
     }
+    const fakeElWidth = helperInputFakeElement.current.offsetWidth + 20;
+    const maxWidth = controlInnerRef.current ? controlInnerRef.current.offsetWidth - 15 : 0;
+    const width = fakeElWidth > maxWidth ? maxWidth : fakeElWidth;
 
-    const fakeEl = document.createElement('div');
-    fakeEl.style.cssText =
-      'display:inline-block;height:0;overflow:hidden;position:absolute;top:0;visibility:hidden;white-space:nowrap;';
-    document.body.appendChild(fakeEl);
-
-    const string = toggleRef.current.value;
-    fakeEl.innerHTML = string;
-
-    const fakeElWidth = fakeEl.offsetWidth + 10;
-
-    document.body.removeChild(fakeEl);
-
-    const controlRefWidth = controlRef.current.offsetWidth - 50;
-
-    return fakeElWidth > controlRefWidth ? controlRefWidth : fakeElWidth;
+    return {
+      width,
+    };
   };
 
-  const inputWidth = React.useMemo(() => getInputWidth(), [inputData.value, arrValue]);
+  const inputStyle = React.useMemo(() => getInputStyle(), [inputData.value, arrValue]);
 
   return (
     <SelectContainer
@@ -242,6 +239,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
           onClick={handleControlClick}
           onKeyDown={handleControlClick}
           role="button"
+          ref={controlInnerRef}
         >
           <div className={cnSelect('ControlValueContainer')}>
             <div className={cnSelect('ControlValue')}>
@@ -258,7 +256,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
                 ref={toggleRef}
                 value={inputData.value}
                 className={cnSelect('Input', { size })}
-                style={{ width: inputWidth }}
+                style={inputStyle}
               />
             </div>
           </div>
@@ -304,6 +302,9 @@ export const MultiCombobox: MultiComboboxType = (props) => {
           getOptionLabel={getOptionLabel}
         />
       )}
+      <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
+        {inputData.value}
+      </div>
     </SelectContainer>
   );
 };

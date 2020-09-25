@@ -52,6 +52,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
   return (
     <Popover
       anchorRef={controlRef}
+      direction="downStartLeft"
       possibleDirections={['downStartLeft', 'upStartLeft', 'downStartRight', 'upStartRight']}
       offset={1}
     >
