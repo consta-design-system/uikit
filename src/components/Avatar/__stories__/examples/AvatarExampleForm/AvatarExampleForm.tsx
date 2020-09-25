@@ -2,7 +2,7 @@ import React from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import * as wp from '../../../../../utils/whitepaper/whitepaper';
+import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Avatar } from '../../../Avatar';
 
 export const AvatarExampleForm = () => (

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Text } from '../../../components/Text/Text';
-import * as wp from '../../../utils/whitepaper/whitepaper';
+import * as wp from '../../whitepaper/whitepaper';
 import { ColorPreview } from '../ColorPreview/ColorPreview';
 
 export const ThemePreview: React.FC = () => {

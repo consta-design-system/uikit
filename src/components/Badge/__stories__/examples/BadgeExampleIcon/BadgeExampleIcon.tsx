@@ -4,7 +4,7 @@ import { IconCheck } from '../../../../../icons/IconCheck/IconCheck';
 import { IconClose } from '../../../../../icons/IconClose/IconClose';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
-import * as wp from '../../../../../utils/whitepaper/whitepaper';
+import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Badge } from '../../../Badge';
 
 export const BadgeExampleIcon = () => (

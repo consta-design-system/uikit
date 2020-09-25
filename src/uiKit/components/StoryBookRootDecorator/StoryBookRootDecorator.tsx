@@ -1,4 +1,5 @@
 import './StoryBookRootDecorator.css';
+import '../../whitepaper/whitepaper.css';
 
 import React from 'react';
 
@@ -34,7 +35,7 @@ export const StoryBookRootDecorator: React.FC<StoryBookRootDecoratorProps> = (pr
   return (
     <Theme
       preset={getThemeByName(themeName)}
-      className={cnStoryBookRootDecorator(null, [className])}
+      className={cnStoryBookRootDecorator(null, ['theme_gap_medium', className])}
     >
       {children}
     </Theme>

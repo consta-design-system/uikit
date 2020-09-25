@@ -3,8 +3,8 @@ import './ColorPreview.css';
 import React from 'react';
 
 import { Text } from '../../../components/Text/Text';
-import * as wp from '../../../utils/whitepaper/whitepaper';
 import { cn } from '../../cn';
+import * as wp from '../../whitepaper/whitepaper';
 
 const cnColorPreview = cn('ColorPreview');
 
