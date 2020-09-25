@@ -38,7 +38,7 @@ type Props = {
   children?: never;
 };
 
-const cnUser = cn('User');
+export const cnUser = cn('User');
 
 const infoSizeMap: Record<UserPropSize, TextPropSize> = {
   s: '2xs',
