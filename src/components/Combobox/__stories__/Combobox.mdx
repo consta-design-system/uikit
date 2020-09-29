@@ -1,10 +1,11 @@
 import { Preview } from '@storybook/addon-docs/dist/blocks';
 
-import { ComboboxExampleText} from './examples/ComboboxExampleText/ComboboxExampleText';
+import { ComboboxExampleText } from './examples/ComboboxExampleText/ComboboxExampleText';
 import { ComboboxExampleSize } from './examples/ComboboxExampleSize/ComboboxExampleSize';
 import { ComboboxExampleView } from './examples/ComboboxExampleView/ComboboxExampleView';
-import { ComboboxExampleForm} from './examples/ComboboxExampleForm/ComboboxExampleForm';
-
+import { ComboboxExampleForm } from './examples/ComboboxExampleForm/ComboboxExampleForm';
+import { ComboboxExampleCreate } from './examples/ComboboxExampleCreate/ComboboxExampleCreate';
+import { ComboboxExampleGroup } from './examples/ComboboxExampleGroup/ComboboxExampleGroup';
 
 # Combobox
 
@@ -12,6 +13,7 @@ import { ComboboxExampleForm} from './examples/ComboboxExampleForm/ComboboxExamp
 но возможностей больше.
 
 Что может пользователь:
+
 - выбрать один вариант из списка,
 - написать в поле несколько символов — компонент покажет все варианты, в которых есть эти символы,
 - добавить вариант, которого нет в списке.
@@ -19,7 +21,6 @@ import { ComboboxExampleForm} from './examples/ComboboxExampleForm/ComboboxExamp
 Используйте Combobox, если вариантов много — пять или больше. Если вариантов меньше,
 подойдет [Radio](?path=/docs/components-radio--playground)
 или [ChoiceGroup](?path=/docs/components-choicegroup--playground).
-
 
 - [Варианты](#варианты)
   - [Свой вариант](#свой-вариант)
@@ -88,12 +89,10 @@ const Example = () => {
 };
 ```
 
-
 ### Группы вариантов
 
 Если вариантов много, их можно разбить на группы.
 Получить варианты из групп можно с помощью функции `getGroupOptions`.
-
 
 ```ts
 import React from 'react';
@@ -110,30 +109,32 @@ type Group = {
 };
 
 const items = [
-    { label: 'Чистые цвета',
-      options: [
-        { label: 'Синий', value: 'а1' },
-        { label: 'Зеленый', value: 'a2' },
-        { label: 'Красный', value: 'a3' },
-      ]
-    },
-    { label: 'Смешанные',
-      options: [
-        { label: 'Черно-белый', value: 'b1' },
-        { label: 'Серо-бурый', value: 'b2' },
-      ]
-    },
-    { label: 'Паттерны',
-      options: [
-        { label: 'В горошек', value: 'c1' },
-        { label: 'В полосочку', value: 'c2' },
-      ]
-    },
-  ];
+  {
+    label: 'Чистые цвета',
+    options: [
+      { label: 'Синий', value: 'а1' },
+      { label: 'Зеленый', value: 'a2' },
+      { label: 'Красный', value: 'a3' },
+    ],
+  },
+  {
+    label: 'Смешанные',
+    options: [
+      { label: 'Черно-белый', value: 'b1' },
+      { label: 'Серо-бурый', value: 'b2' },
+    ],
+  },
+  {
+    label: 'Паттерны',
+    options: [
+      { label: 'В горошек', value: 'c1' },
+      { label: 'В полосочку', value: 'c2' },
+    ],
+  },
+];
 
 const Example = () => {
   const getItemLabel = (option: SelectOption): string => option.label;
-
 
   return (
     <Combobox
@@ -155,11 +156,9 @@ const Example = () => {
 
 <ComboboxExampleView />
 
-
-
 ## Размер
 
-За размер компонента отвечает свойство `size`. Варианты:  `s` , `m` , `l` , по умолчанию `m`.
+За размер компонента отвечает свойство `size`. Варианты: `s` , `m` , `l` , по умолчанию `m`.
 
 Компонент занимает всю ширину родительского блока.
 
@@ -171,31 +170,26 @@ const Example = () => {
 
 <ComboboxExampleForm />
 
-
-
-
 ## Cвойства
 
-Свойство       | Тип или варианты значения                              | По умолчанию | Описание                                                                                              |
-| -------------- | ------------------------------------------------------ | ------------ | ----------------------------------------------------------------------------------------------------- |
-| [`view?`](#внешний-вид)         | `default , clear`                                      | `default`    | Внешний вид компонента                                                                                |
-| [`form?`](#форма)	            | 'default', 'brick', 'round'                       | `default`    | Форма поля компонента                                                                        |
-| [`disabled?`](#внешний-вид)     | `boolean`                                              | -            | Делает компонент недоступным                                                                                 |
-| [`size?`](#размер)          | `'s' , 'm' , 'l'`                                            | `'m'`          | Размер компонента                                                                                     |
-| [`placeholder?`](#варианты)   | `string`                                               | -            | Подсказка, отображается, когда вариант не выбран                           |
-| [`options`](#варианты)        | `T[]`                                                  | -            | Варианты, которые можно выбрать                                                                                                 |
-| [`getOptionLabel`](#варианты) | `(arg: T) => string`                                   | -            | Функция для получения текста варианта, который будет отображаться в поле для выбранного значения         |
-| `value?`         | `T , null`                                             | `null`            | Значение селекта                                                            |
-| `ariaLabel?`     | `string`                                               | -            | `aria` атрибут для метки                                                                              |
-| `id`             | `string`                                               | -            | Идентификатор селекта в DOM                                                                                |
-| `onChange?`      | `(value: string | null) => void`                       | -            | Обработчик события изменения значения компонента                                                      |
-| `onBlur?`        | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -            | Обработчик события `blur`                                                                             |
-| `onFocus?`       | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -            | Обработчик события `focus`                                                                            |
-| `className?`     | `string`                                               | -            | Дополнительный CSS-класс   
-| [`onCreate?`](#свой-вариант)        | `(str: string) => void`                                | -            | Функция для добавления своего варианта значения             |                                                  |
-| [`getGroupOptions?`](#группы-вариантов) | `(group: T) => T[]`                                    | -            | Функция для получения вариантов из группы                                                        |            
-
-
+| Свойство                                | Тип или варианты значения                              | По умолчанию | Описание                                                                                         |
+| --------------------------------------- | ------------------------------------------------------ | ------------ | ------------------------------------------------------------------------------------------------ |
+| [`view?`](#внешний-вид)                 | `default , clear`                                      | `default`    | Внешний вид компонента                                                                           |
+| [`form?`](#форма)                       | 'default', 'brick', 'round'                            | `default`    | Форма поля компонента                                                                            |
+| [`disabled?`](#внешний-вид)             | `boolean`                                              | -            | Делает компонент недоступным                                                                     |
+| [`size?`](#размер)                      | `'s' , 'm' , 'l'`                                      | `'m'`        | Размер компонента                                                                                |
+| [`placeholder?`](#варианты)             | `string`                                               | -            | Подсказка, отображается, когда вариант не выбран                                                 |
+| [`options`](#варианты)                  | `T[]`                                                  | -            | Варианты, которые можно выбрать                                                                  |
+| [`getOptionLabel`](#варианты)           | `(arg: T) => string`                                   | -            | Функция для получения текста варианта, который будет отображаться в поле для выбранного значения |
+| `value?`                                | `T , null`                                             | `null`       | Значение селекта                                                                                 |
+| `ariaLabel?`                            | `string`                                               | -            | `aria` атрибут для метки                                                                         |
+| `id`                                    | `string`                                               | -            | Идентификатор селекта в DOM                                                                      |
+| `onChange?`                             | `(value: string | null) => void`                       | -            | Обработчик события изменения значения компонента                                                 |
+| `onBlur?`                               | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -            | Обработчик события `blur`                                                                        |
+| `onFocus?`                              | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -            | Обработчик события `focus`                                                                       |
+| `className?`                            | `string`                                               | -            | Дополнительный CSS-класс                                                                         |
+| [`onCreate?`](#свой-вариант)            | `(str: string) => void`                                | -            | Функция для добавления своего варианта значения                                                  |
+| [`getGroupOptions?`](#группы-вариантов) | `(group: T) => T[]`                                    | -            | Функция для получения вариантов из группы                                                        |
 
 ## Примеры
 
@@ -253,3 +247,6 @@ const Example = () => {
   );
 };
 ```
+
+<ComboboxExampleCreate />
+<ComboboxExampleGroup />
