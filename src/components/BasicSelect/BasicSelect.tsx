@@ -42,6 +42,10 @@ export const BasicSelect: Select = (props) => {
   const [isFocused, setIsFocused] = useState(false);
   const [val, setValue] = useState(value);
 
+  React.useEffect(() => {
+    setValue(value);
+  }, [value]);
+
   const handlerChangeValue = (v: typeof value): void => {
     if (typeof onChange === 'function' && v) {
       onChange(v);
