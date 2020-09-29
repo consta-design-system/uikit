@@ -52,6 +52,10 @@ export const Combobox: ComboboxType = (props) => {
   });
   const toggleRef = useRef<HTMLInputElement>(null);
 
+  React.useEffect(() => {
+    setValue(value);
+  }, [value]);
+
   const handlerChangeValue = (v: typeof value): void => {
     if (typeof onChange === 'function' && v) {
       onChange(v);

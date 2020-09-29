@@ -52,6 +52,10 @@ export const MultiCombobox: MultiComboboxType = (props) => {
     value: '',
   });
 
+  React.useEffect(() => {
+    setValue(value);
+  }, [value]);
+
   const toggleRef = useRef<HTMLInputElement>(null);
   const controlInnerRef = useRef<HTMLDivElement>(null);
   const helperInputFakeElement = useRef<HTMLDivElement>(null);
