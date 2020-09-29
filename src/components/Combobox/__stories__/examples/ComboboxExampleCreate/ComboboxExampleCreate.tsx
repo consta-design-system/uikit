@@ -25,7 +25,7 @@ const handleCreate = (v: string): void => {
 };
 
 export const ComboboxExampleCreate = () => {
-  const getItemLabel = (option: SimpleOption): string => option.label;
+  const getItemLabel = (option: Option): string => option.label;
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Combobox

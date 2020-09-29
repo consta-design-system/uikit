@@ -40,7 +40,7 @@ const items = [
 ];
 
 export const ComboboxExampleGroup = () => {
-  const getItemLabel = (option: SelectOption): string => option.label;
+  const getItemLabel = (option: Option): string => option.label;
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Combobox
