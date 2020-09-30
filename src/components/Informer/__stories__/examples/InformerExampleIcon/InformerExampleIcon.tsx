@@ -4,7 +4,7 @@ import { IconThumbUp } from '../../../../../icons/IconThumbUp/IconThumbUp';
 import { IconTie } from '../../../../../icons/IconTie/IconTie';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
-import * as wp from '../../../../../utils/whitepaper/whitepaper';
+import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Informer } from '../../../Informer';
 
 export function InformerExampleIcon() {

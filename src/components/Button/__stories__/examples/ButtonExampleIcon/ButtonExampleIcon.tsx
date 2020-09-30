@@ -7,7 +7,7 @@ import { IconForward } from '../../../../../icons/IconForward/IconForward';
 import { IconHamburger } from '../../../../../icons/IconHamburger/IconHamburger';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
-import * as wp from '../../../../../utils/whitepaper/whitepaper';
+import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Button } from '../../../Button';
 
 export function ButtonExampleIconBasic() {

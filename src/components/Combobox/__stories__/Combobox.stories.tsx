@@ -2,6 +2,14 @@ import React from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { createMetadata, createStory } from '../../../utils/storybook';
+import {
+  DefaultPropForm,
+  DefaultPropSize,
+  DefaultPropView,
+  form,
+  sizes,
+  view,
+} from '../../SelectComponents/types';
 import { Combobox } from '../Combobox';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
@@ -9,8 +17,8 @@ import { Combobox } from '../Combobox';
 import mdx from './Combobox.mdx';
 
 type SelectOption = {
-  value: string;
   label: string;
+  value: string;
 };
 
 type Group = { label: string; items: SelectOption[] };
@@ -103,27 +111,9 @@ const groups = [
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const getKnobs = () => ({
   disabled: boolean('disabled', false),
-  size: select('size', ['xs', 's', 'm', 'l'], 'm'),
-  view: select('view', ['default', 'clear'], 'default'),
-  width: select('width', ['full', 'default'], 'default'),
-  form: select(
-    'form',
-    [
-      'default',
-      'brick',
-      'round',
-      'clearRound',
-      'roundClear',
-      'clearDefault',
-      'defaultClear',
-      'defaultBrick',
-      'brickDefault',
-      'brickClear',
-      'clearBrick',
-      'clearClear',
-    ],
-    'default',
-  ),
+  size: select('size', sizes, DefaultPropSize),
+  view: select('view', view, DefaultPropView),
+  form: select('form', form, DefaultPropForm),
   placeholder: text('placeholder', 'Placeholder'),
 });
 
@@ -139,7 +129,6 @@ const Default = (props: {
   let options = items;
 
   const handleCreate = (v: string): void => {
-    // options = [...options, (getGroupOptions ? {label: 'Пользовательская', items:[...options[options.length - 1].items, { label: v, value: v }])];
     options = [{ label: v, value: v }, ...options];
   };
 

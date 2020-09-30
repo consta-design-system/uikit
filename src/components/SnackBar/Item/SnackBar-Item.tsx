@@ -8,7 +8,7 @@ import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 import { cnTheme } from '../../Theme/Theme';
 import { SnackBarActionButton } from '../ActionButton/SnackBar-ActionButton';
-import { cnSnackBar, cnSnackBarItem, Item } from '../SnackBar';
+import { cnSnackBar, cnSnackBarItem, Item, snackBarItemStatusDefault } from '../SnackBar';
 import { SnackBarTimer, SnackBarTimerPropOnMount } from '../Timer/SnackBar-Timer';
 
 export type SnackBarItemProps = {
@@ -35,7 +35,7 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
     icon: Icon,
     message,
     actions,
-    status = 'normal',
+    status = snackBarItemStatusDefault,
     onAutoClose: onAutoCloseProp,
   } = item;
   const [timerFunctions, setTimerFunctions] = useState<{

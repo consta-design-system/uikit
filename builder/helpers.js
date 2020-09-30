@@ -1,5 +1,13 @@
 const { normalize, dirname, join, relative, resolve } = require('path');
-const { readFile, writeFile, ensureDir, remove, readJSON, writeJSON } = require('fs-extra');
+const {
+  readFile,
+  writeFile,
+  ensureDir,
+  remove,
+  readJSON,
+  writeJSON,
+  copyFile,
+} = require('fs-extra');
 const logSymbols = require('log-symbols');
 const fg = require('fast-glob');
 const postcss = require('postcss');
@@ -34,6 +42,14 @@ const copyPackageJson = async (distPaths) => {
   const outPaths = `${distPaths}/package.json`;
   await ensureDir(dirname(outPaths));
   await writeJSON(outPaths, pack, { spaces: 2 });
+};
+
+const copyReadme = async (distPaths) => {
+  await copyFile('README.md', `${distPaths}/README.md`);
+};
+
+const copyChangelog = async (distPaths) => {
+  await copyFile('CHANGELOG.md', `${distPaths}/CHANGELOG.md`);
 };
 
 const transformCSS = async (ignore, src, distPaths, options) => {
@@ -565,4 +581,6 @@ module.exports = {
   iconsTransformed,
   copyPackageJson,
   iconsFileTransformed,
+  copyReadme,
+  copyChangelog,
 };

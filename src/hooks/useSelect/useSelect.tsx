@@ -44,6 +44,7 @@ export interface SelectProps<T> {
   getOptionLabel(option: T): string;
   onCreate?(s: string): void;
   getGroupOptions?(group: T): T[];
+  onSelectOption?(): void;
 }
 
 export interface OptionProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -127,6 +128,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
     getOptionLabel,
     onCreate,
     getGroupOptions,
+    onSelectOption,
   } = params;
   const value = params.value ?? [];
   const [
@@ -178,6 +180,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
 
       const optionForCreate = ({
         label: searchValue,
+        item: { label: searchValue },
         optionForCreate: true,
       } as unknown) as Option<typeof options[0]>;
 
@@ -281,13 +284,20 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
       const option = filteredOptions[index];
       if (option && onChangeRef.current) {
         if (multi) {
-          onChangeRef.current([...value, option]);
+          const newVal = value.some((v) => getOptionLabel(v) === option.label)
+            ? value.filter((v) => getOptionLabel(v) !== option.label)
+            : [...value, option.item];
+          onChangeRef.current(newVal);
         } else {
-          onChangeRef.current(option);
+          onChangeRef.current(option.item);
           setOpen(false);
         }
       }
+      if (typeof onSelectOption === 'function') {
+        onSelectOption();
+      }
       setResolvedSearch('');
+      setSearch('');
     },
     [filteredOptions, value, setOpen],
   );
@@ -311,7 +321,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   const removeValue = React.useCallback(
     (index) => {
       onChangeRef.current && onChangeRef.current(value.filter((d, i) => i !== index));
-      setResolvedSearch('');
+      setSearch('');
     },
     [value],
   );
@@ -424,6 +434,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
       ...rest,
       onClick: (e: React.SyntheticEvent): void => {
         selectIndex(index);
+
         if (typeof onClick === 'function') {
           onClick(e);
         }

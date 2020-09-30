@@ -11,7 +11,11 @@ import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttribut
 export type TextFieldPropValue = string | null;
 export type TextFieldPropName = string;
 export type TextFieldPropId = string | number;
-export type TextFieldPropSize = 'xs' | 's' | 'm' | 'l';
+
+export const textFieldPropSize = ['m', 'xs', 's', 'l'] as const;
+export type TextFieldPropSize = typeof textFieldPropSize[number];
+export const textFieldPropSizeDefault: TextFieldPropSize = textFieldPropSize[0];
+
 export type TextFieldPropOnChange = (args: TextFieldOnChangeArguments) => void;
 export type TextFieldOnChangeArguments = {
   e: React.ChangeEvent;
@@ -19,23 +23,36 @@ export type TextFieldOnChangeArguments = {
   name?: TextFieldPropName;
   value: TextFieldPropValue;
 };
-export type TextFieldPropView = 'default' | 'clear';
-export type TextFieldPropForm =
-  | 'default'
-  | 'brick'
-  | 'round'
-  | 'clear'
-  | 'clearRound'
-  | 'roundClear'
-  | 'clearDefault'
-  | 'defaultClear'
-  | 'defaultBrick'
-  | 'brickDefault'
-  | 'brickClear'
-  | 'clearBrick'
-  | 'clearClear';
-export type TextFieldPropState = 'alert' | 'success' | 'warning';
-export type TextFieldPropWidth = 'full' | 'default';
+
+export const textFieldPropView = ['default', 'clear'] as const;
+export type TextFieldPropView = typeof textFieldPropView[number];
+export const textFieldPropViewDefault: TextFieldPropView = textFieldPropView[0];
+
+export const textFieldPropForm = [
+  'default',
+  'brick',
+  'round',
+  'clear',
+  'clearRound',
+  'roundClear',
+  'clearDefault',
+  'defaultClear',
+  'defaultBrick',
+  'brickDefault',
+  'brickClear',
+  'clearBrick',
+  'clearClear',
+] as const;
+export type TextFieldPropForm = typeof textFieldPropForm[number];
+export const textFieldPropFormDefault: TextFieldPropForm = textFieldPropForm[0];
+
+export const textFieldPropState = ['alert', 'success', 'warning'] as const;
+export type TextFieldPropState = typeof textFieldPropState[number];
+
+export const textFieldPropWidth = ['default', 'full'] as const;
+export type TextFieldPropWidth = typeof textFieldPropWidth[number];
+export const textFieldPropWidthDefault: TextFieldPropWidth = textFieldPropWidth[0];
+
 export type TextFieldPropAutoComplete = 'on' | 'off';
 
 type Props = {
@@ -77,7 +94,7 @@ type Props = {
 
 export type TextFieldProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
 
-const cnTextField = cn('TextField');
+export const cnTextField = cn('TextField');
 
 const sizeMap: Record<TextFieldPropSize, IconPropSize> = {
   xs: 'xs',
@@ -101,11 +118,11 @@ export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>((props
     inputRef,
     maxLength,
     disabled,
-    size = 'm',
-    view = 'default',
-    form = 'default',
+    size = textFieldPropSizeDefault,
+    view = textFieldPropViewDefault,
+    form = textFieldPropFormDefault,
     state,
-    width,
+    width = textFieldPropWidthDefault,
     onBlur,
     onFocus,
     autoFocus = false,

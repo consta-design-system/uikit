@@ -1,5 +1,5 @@
 import './DocsDecorator.css';
-import '../DocsExample/DocsExample.css';
+import '../../whitepaper/whitepaper.css';
 
 import React from 'react';
 import { DocsContainer } from '@storybook/addon-docs/dist/blocks';
@@ -16,7 +16,7 @@ export const DocsDecorator: React.FC<DocsContainerProps> = (props) => {
 
   return (
     <DocsContainer context={context}>
-      <Theme preset={presetGpnDefault} className={cnDocsDecorator()}>
+      <Theme preset={presetGpnDefault} className={cnDocsDecorator(null, ['theme_gap_medium'])}>
         {children}
       </Theme>
     </DocsContainer>

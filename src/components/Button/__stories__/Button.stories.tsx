@@ -6,21 +6,27 @@ import { IconSelect } from '../../../icons/IconSelect/IconSelect';
 import { IconUser } from '../../../icons/IconUser/IconUser';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
-import { Button } from '../Button';
+import {
+  Button,
+  buttonPropForm,
+  buttonPropFormDefault,
+  buttonPropSize,
+  buttonPropSizeDefault,
+  buttonPropView,
+  buttonPropViewDefault,
+  buttonPropWidth,
+  buttonPropWidthDefault,
+} from '../Button';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import mdx from './Button.mdx';
 
 const defaultKnobs = () => ({
-  width: select('Width', ['full', 'default'], 'default'),
-  size: select('Size', ['xs', 's', 'm', 'l'], 'm'),
-  view: select('View', ['clear', 'primary', 'secondary', 'ghost'], 'primary'),
-  form: select(
-    'Form',
-    ['default', 'brick', 'round', 'brickRound', 'roundBrick', 'brickDefault', 'defaultBrick'],
-    'default',
-  ),
+  width: select('Width', buttonPropWidth, buttonPropWidthDefault),
+  size: select('Size', buttonPropSize, buttonPropSizeDefault),
+  view: select('View', buttonPropView, buttonPropViewDefault),
+  form: select('Form', buttonPropForm, buttonPropFormDefault),
   disabled: boolean('Disabled', false),
   loading: boolean('Loading', false),
   label: text('Content', 'I am button'),

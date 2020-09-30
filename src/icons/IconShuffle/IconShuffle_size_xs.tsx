@@ -3,9 +3,8 @@ import * as React from 'react';
 function IconShuffleSizeXs(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 12 12" {...props}>
-      <path d="M.92 2.58l1.5-1.5 3 2.8-1.5 1.5-3-2.8z" />
-      <path d="M11 5V1H7l1.235 1.3-2.196 2.05L4.485 5.8.735 9.3l1.5 1.5 3.804-3.55L7.592 5.8l2.143-2L11 5z" />
-      <path d="M11 11V7L9.832 8.244 8 6.5 6.52 8.02l1.813 1.724L7 11h4z" />
+      <path d="M7.5 1H11v3.5L9.604 3.104 1.707 11 1 10.293l7.896-7.897L7.5 1z" />
+      <path d="M1.707 1l3.586 3.586-.707.707L1 1.707 1.707 1zm7.896 7.896L7.414 6.707l-.707.707 2.19 2.19L7.5 11H11V7.5L9.603 8.896z" />
     </svg>
   );
 }

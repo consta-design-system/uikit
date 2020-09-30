@@ -6,11 +6,9 @@ import {
   DefaultPropForm,
   DefaultPropSize,
   DefaultPropView,
-  DefaultPropWidth,
   form,
   sizes,
   view,
-  width,
 } from '../../SelectComponents/types';
 import { BasicSelect } from '../BasicSelect';
 
@@ -60,7 +58,6 @@ const getKnobs = () => ({
   disabled: boolean('disabled', false),
   size: select('size', sizes, DefaultPropSize),
   view: select('view', view, DefaultPropView),
-  width: select('width', width, DefaultPropWidth),
   form: select('form', form, DefaultPropForm),
   placeholder: text('placeholder', 'Placeholder'),
 });

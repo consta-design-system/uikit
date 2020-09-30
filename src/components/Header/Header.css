@@ -6,6 +6,7 @@
   height: var(--header-height);
   padding: 0 var(--space-xl);
   border-bottom: 1px solid var(--color-bg-border);
+  background-color: var(--color-bg-default);
 
   &-LeftSide,
   &-RightSide {

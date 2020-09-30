@@ -13,7 +13,6 @@ import {
   DefaultPropForm,
   DefaultPropSize,
   DefaultPropView,
-  DefaultPropWidth,
 } from '../SelectComponents/types';
 
 export type SimpleSelectProps<ITEM> = CommonSelectProps<ITEM> & {
@@ -35,7 +34,6 @@ export const BasicSelect: Select = (props) => {
     disabled,
     ariaLabel,
     id,
-    width = DefaultPropWidth,
     form = DefaultPropForm,
     view = DefaultPropView,
     size = DefaultPropSize,
@@ -120,7 +118,6 @@ export const BasicSelect: Select = (props) => {
       size={size}
       view={view}
       form={form}
-      width={width}
       {...restProps}
     >
       <div
@@ -174,6 +171,7 @@ export const BasicSelect: Select = (props) => {
           optionsRef={optionsRef}
           id={id}
           selectedValues={arrValue}
+          getOptionLabel={getOptionLabel}
         />
       )}
     </SelectContainer>

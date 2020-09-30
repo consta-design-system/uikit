@@ -1,0 +1,41 @@
+# Modal
+
+Modal - компонент контейнер с белым фоном для отображения содержимого на полупрозрачном фоне на всём экране.
+
+## Список свойств
+
+| Свойство               | Тип или варианты значения                                             | По умолчанию              |
+| ---------------------- | --------------------------------------------------------------------- | ------------------------- |
+| isOpen?                | `boolean`                                                             | -                         |
+| onClose?               | `() => void`                                                          | -                         |
+| onOpen?                | `() => void`                                                          | -                         |
+| onOverlayClick?        | `(e: React.MouseEvent) => void`                                       | -                         |
+| hasOverlay?            | `boolean`                                                             | `true`                    |
+| className?             | `string`                                                              | -                         |
+| width?                 | `'auto'`                                                              | `auto`                    |
+| position?              | `'center', 'top'`                                                     | `center`                  |
+| children?              | `React.ReactNode`                                                     | -                         |
+| container?             | `HTMLDivElement, undefined`                                           | `window.document.body`    |
+
+## Пример использования
+
+```ts
+<Modal className='myClassName' isOpen={isModalOpen} onOverlayClick={() => setIsModalOpen(false)}>
+  <Text as='p' size='s' view='secondary' className={cnModalStories('title')}>
+    Заголовок модалки
+  </Text>
+  <Text as='p' size='m' view='primary' className={cnModalStories('body')}>
+    Описание в теле модалки. Здесь может находиться какая-то информация.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
+  </Text>
+  <div className={cnModalStories('action')}>
+    <Button
+      size="m"
+      view="primary"
+      label="Закрыть"
+      width='default'
+      onClick={() => setIsModalOpen(false)}
+    />
+  </div>
+</Modal>
+```

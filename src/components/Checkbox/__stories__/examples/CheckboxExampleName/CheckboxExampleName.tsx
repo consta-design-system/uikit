@@ -5,7 +5,7 @@ import { useChoiceGroup } from '../../../../../hooks/useChoiceGroup/useChoiceGro
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import * as wp from '../../../../../utils/whitepaper/whitepaper';
+import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Button } from '../../../../Button/Button';
 import { Checkbox } from '../../../Checkbox';
 

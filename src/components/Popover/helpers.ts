@@ -1,4 +1,4 @@
-import { Direction, directions, Position } from './Popover';
+import { Direction, Position } from './Popover';
 
 type Size = Pick<ClientRect, 'width' | 'height'>;
 
@@ -91,6 +91,7 @@ type ComputedPositionAndDirectionParams = {
   offset: number;
   arrowOffset?: number;
   direction: Direction;
+  spareDirection: Direction;
   possibleDirections: readonly Direction[];
   bannedDirections: readonly Direction[];
 };
@@ -105,6 +106,7 @@ export const getComputedPositionAndDirection = ({
   direction: initialDirection,
   possibleDirections,
   bannedDirections,
+  spareDirection,
 }: ComputedPositionAndDirectionParams): {
   direction: Direction;
   position: Position;
@@ -122,9 +124,8 @@ export const getComputedPositionAndDirection = ({
   });
 
   const direction =
-    [...directions]
-      .sort((dir) => (dir === initialDirection ? -1 : 0))
-      .filter((dir) => possibleDirections.includes(dir) && !bannedDirections.includes(dir))
+    [initialDirection, ...possibleDirections]
+      .filter((dir) => !bannedDirections.includes(dir))
       .find((dir) => {
         const pos = positionsByDirection[dir];
         const { width, height } = contentSize;
@@ -136,7 +137,7 @@ export const getComputedPositionAndDirection = ({
         const isFittingRight = pos.x + width <= viewportSize.width;
 
         return isFittingUp && isFittingDown && isFittingLeft && isFittingRight;
-      }) || initialDirection;
+      }) || spareDirection;
 
   return {
     direction,

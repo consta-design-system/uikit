@@ -15,7 +15,9 @@ export type SnackBarPropItemAction = {
   onClick: React.EventHandler<React.MouseEvent>;
 };
 
-export type SnackBarItemStatus = 'system' | 'success' | 'warning' | 'alert' | 'normal';
+export const snackBarItemStatus = ['normal', 'system', 'success', 'warning', 'alert'] as const;
+export type SnackBarItemStatus = typeof snackBarItemStatus[number];
+export const snackBarItemStatusDefault: SnackBarItemStatus = snackBarItemStatus[0];
 
 export type Item = {
   key: string | number;

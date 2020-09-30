@@ -5,8 +5,13 @@ import React, { useMemo } from 'react';
 import { cn } from '../../utils/bem';
 import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 
-export type AvatarPropSize = 's' | 'm';
-export type AvatarPropForm = 'round' | 'brick' | 'default';
+export const avatarPropSize = ['m', 's'] as const;
+export type AvatarPropSize = typeof avatarPropSize[number];
+export const avatarPropSizeDefault: AvatarPropSize = avatarPropSize[0];
+
+export const avatarPropForm = ['round', 'brick', 'default'] as const;
+export type AvatarPropForm = typeof avatarPropForm[number];
+export const avatarPropFormDefault: AvatarPropForm = avatarPropForm[0];
 
 type Props = {
   url?: string;
@@ -56,7 +61,15 @@ export const getInitialsForName = (name: string | undefined) => {
 };
 
 export const Avatar: ComponentWithAs<Props> = forwardRefWithAs<Props>((props, ref) => {
-  const { as = 'div', className, size = 'm', form = 'round', url, name, ...otherProps } = props;
+  const {
+    as = 'div',
+    className,
+    size = avatarPropSizeDefault,
+    form = avatarPropFormDefault,
+    url,
+    name,
+    ...otherProps
+  } = props;
   const Tag = as as string;
   const showImage = Boolean(url);
   const initials = useMemo(() => getInitialsForName(name), [name]);
