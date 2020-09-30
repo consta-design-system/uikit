@@ -56,6 +56,8 @@ import { ComboboxExampleGroup } from './examples/ComboboxExampleGroup/ComboboxEx
 
 Напечатайте любое слово в этом поле и нажмите **Добавить**.
 
+<ComboboxExampleCreate />
+
 ```ts
 import React from 'react';
 import { Combobox } from '@consta/uikit/Combobox';
@@ -93,6 +95,8 @@ const Example = () => {
 
 Если вариантов много, их можно разбить на группы.
 Получить варианты из групп можно с помощью функции `getGroupOptions`.
+
+<ComboboxExampleGroup />
 
 ```ts
 import React from 'react';
@@ -247,6 +251,3 @@ const Example = () => {
   );
 };
 ```
-
-<ComboboxExampleCreate />
-<ComboboxExampleGroup />
