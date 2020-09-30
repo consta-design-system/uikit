@@ -96,7 +96,7 @@ describe('Компонент Button', () => {
       });
     });
     describe('проверка onChange', () => {
-      it(`в callback поподает ожидаемое value`, () => {
+      it(`в callback попадает ожидаемое value`, () => {
         const handleChange = jest.fn();
         const value = 'value';
 
