@@ -107,10 +107,9 @@ describe('Компонент Button', () => {
         fireEvent.focus(input);
         fireEvent.change(input, { target: { value } });
 
-        const { value: callbackValue } = handleChange.mock.calls[0][0];
-
+        expect(handleChange).toHaveBeenCalled();
         expect(handleChange).toHaveBeenCalledTimes(1);
-        expect(callbackValue).toEqual(value);
+        expect(handleChange).toHaveBeenCalledWith(expect.objectContaining({ value }));
       });
     });
     describe('проверка className', () => {
