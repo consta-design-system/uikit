@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import * as wp from '../../../../../utils/whitepaper/whitepaper';
+import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Text, TextPropWeight } from '../../../Text';
 
 export const TextExampleWeight = () => {

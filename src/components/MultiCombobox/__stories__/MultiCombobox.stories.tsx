@@ -2,15 +2,12 @@ import React from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { createMetadata, createStory } from '../../../utils/storybook';
+import { DefaultPropForm, DefaultPropView, form, view } from '../../SelectComponents/types';
 import {
-  DefaultPropForm,
-  DefaultPropSize,
-  DefaultPropView,
-  form,
-  sizes,
-  view,
-} from '../../SelectComponents/types';
-import { MultiCombobox } from '../MultiCombobox';
+  MultiCombobox,
+  multiComboboxPropSize,
+  multiComboboxPropSizeDefault,
+} from '../MultiCombobox';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
@@ -111,7 +108,7 @@ const groups = [
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const getKnobs = () => ({
   disabled: boolean('disabled', false),
-  size: select('size', sizes, DefaultPropSize),
+  size: select('size', multiComboboxPropSize, multiComboboxPropSizeDefault),
   view: select('view', view, DefaultPropView),
   form: select('form', form, DefaultPropForm),
   placeholder: text('placeholder', 'Placeholder'),

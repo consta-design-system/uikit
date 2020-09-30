@@ -4,22 +4,21 @@ import React from 'react';
 
 import { cn } from '../../utils/bem';
 import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
-import * as wp from '../../utils/whitepaper/whitepaper';
 
 export const textPropAlign = ['left', 'center', 'right'] as const;
 export type TextPropAlign = typeof textPropAlign[number];
 
-export const textPropDisplay = ['block', 'inline-block', 'inline'] as const;
+export const textPropDisplay = ['block', 'inlineBlock', 'inline'] as const;
 export type TextPropDisplay = typeof textPropDisplay[number];
 
 export const textPropFont = ['primary', 'mono'] as const;
 export type TextPropFont = typeof textPropFont[number];
 
-export const textPropDecoration = ['underline', 'mono'] as const;
+export const textPropDecoration = ['underline'] as const;
 export type TextPropDecoration = typeof textPropDecoration[number];
 
-export const textPropHeight = ['2xs', 'xs', 's', 'm', 'l'] as const;
-export type TextPropLineHeight = typeof textPropHeight[number];
+export const textPropLineHeight = ['2xs', 'xs', 's', 'm', 'l'] as const;
+export type TextPropLineHeight = typeof textPropLineHeight[number];
 
 export const textPropSize = [
   'm',
@@ -49,7 +48,7 @@ export const textPropView = [
   'brand',
   'ghost',
   'link',
-  'link-minor',
+  'linkMinor',
   'primary',
   'secondary',
   'success',
@@ -114,24 +113,24 @@ export const Text: ComponentWithAs<Props> = forwardRefWithAs<Props>((props, ref)
   return (
     <Tag
       {...otherProps}
-      className={cnText(null, [
-        wp.text({
+      className={cnText(
+        {
           align,
           decoration,
           display,
           font,
-          'line-height': lineHeight,
+          lineHeight,
           size,
           spacing,
-          'style': fontStyle,
+          fontStyle,
           transform,
           type,
           view,
           weight,
           width,
-        }),
-        className,
-      ])}
+        },
+        [className],
+      )}
       ref={ref}
     >
       {children}

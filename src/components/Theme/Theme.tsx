@@ -19,7 +19,6 @@ export type ThemePreset = {
   font: string;
   size: string;
   space: string;
-  gap: string;
 };
 
 type Props = {
@@ -41,7 +40,6 @@ function generateThemeClassNames(preset: ThemePreset): ThemePreset {
     font: cnTheme({ font: preset.font }),
     size: cnTheme({ size: preset.size }),
     space: cnTheme({ space: preset.space }),
-    gap: cnTheme({ gap: preset.gap }),
   };
 }
 

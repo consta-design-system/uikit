@@ -1,5 +1,21 @@
 # Changelog
 
+## v1.10.0 (25/09/2020)
+
+- [refactor(whitePaper): remove whitePaper (#435)](https://github.com/gazprom-neft/consta-uikit/commit/f611c390cb685da24c45950ee2e956c4c1441127) - @gizeasy
+- [feat(Sidebar): added Sidebar component (#449)](https://github.com/gazprom-neft/consta-uikit/commit/1f46095a5cd701385e6665587202482121275b25) - @karpovfv-nedra
+- [fix(MultiCombobox): several bugs fixed (#454)](https://github.com/gazprom-neft/consta-uikit/commit/deca91934edd5a7b1e5525635b8fcab3fee9d243) - @gizeasy
+- [test(Loader): add tests (#445)](https://github.com/gazprom-neft/consta-uikit/commit/6d2c32eba581e6d7ff4bc0e5a9e2d1eae68530a0) - @gizeasy
+- [feat(Icon): add new icons (#455)](https://github.com/gazprom-neft/consta-uikit/commit/675f3d7f38b2210d326ea0e24fd4fb01424cc736) - @fooontic
+- [test(Informer): add test (#443)](https://github.com/gazprom-neft/consta-uikit/commit/b206ff8903a603b3ab3fbfe0b3650a3319be0f5f) - @gizeasy
+- [feat(BasicSelect): add BasicSelect (#380)](https://github.com/gazprom-neft/consta-uikit/commit/81e8e261f700bd1c7f8cd7177dbadbfe90abdd29) - @c1n1k
+- [feat(Popover): added spareDirection (#432)](https://github.com/gazprom-neft/consta-uikit/commit/351397e9176a0ddd705d0e5ebe1762fcd2d09f15) - @gizeasy
+- [feat(Modal): added Modal component, stories, docs (#390)](https://github.com/gazprom-neft/consta-uikit/commit/a3b08bc57119e05879022e90ec0d91fe4dc8c02b) - @karpovfv-nedra
+- [refactor(types): enumeration in types as arrays (#398)](https://github.com/gazprom-neft/consta-uikit/commit/68afbc151e715e0a88ad10897621d23b61c5d9cd) - @gizeasy
+- [chore(CODEOWNERS): add @c1n1k (#401)](https://github.com/gazprom-neft/consta-uikit/commit/9ffedf9017f6ff21e4fd1316152a12fbf6577314) - @gizeasy
+
+---
+
 ## v1.9.0 (11/09/2020)
 
 - [fix(TextField): fix sides styles (#385)](https://github.com/gazprom-neft/consta-uikit/commit/76358842eefe9b8899f47368b67308c4c6bc95d6) - @gizeasy
