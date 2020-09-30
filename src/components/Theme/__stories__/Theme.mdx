@@ -2,13 +2,144 @@ import { ThemeExampleRoot } from './examples/ThemeExampleRoot/ThemeExampleRoot';
 
 # Theme
 
-## Примеры
+Тема — это набор правил в CSS, который определяет, как выглядит проект, построенный с помощью дизайн-системы.
 
-### Использование в корневом компоненте:
+Что определяет тема:
 
-```ts
-// src/App.ts
+- цвета (цвет фона, элементов, рамок, статусов, текста, скроллбара),
+- набор шрифтов,
+- размеры элементов,
+- отступы и расстояния между элементами и блоками.
+
+Вы можете использовать несколько тем в одном проекте: «дневную» и «ночную»,
+для слабовидящих, для дальтоников, для фанатов Энди Уорхола и еще какие угодно.
+
+> Чтобы тема заработала, стили для всех элементов нужно задавать с помощью переменных,
+> описанных в этой теме. Если вы пропишете стили без переменных, они не поменяются вместе с темой.
+
+- [Как устроена тема](#как-устроена-тема)
+  - [Структура темы](#структура-темы)
+  - [Создать свою тему](#создать-свою-тему)
+- [Пресеты](#пресеты)
+  - [Структура пресета](#структура-пресета)
+  - [Создать свой пресет](#создать-новый-пресет)
+- [Как управлять темами](#как-управлять-темами)
+  - [Подключить тему](#подключить-тему)
+  - [Использовать тему для части проекта](#использовать-тему-для-части-проекта)
+  - [Переключать темы](#переключать-темы)
+  - [Узнать, какая тема используется](#узнать-какая-тема-используется)
+
+## Как устроена тема
+
+### Структура темы
+
+Тема состоит из набора модификаторов, каждый отвечает за свою область.
+
+```
+_color/									# Цвета
+	Theme_color_MyDark.css
+	Theme_color_MyDefault.css
+_control/								# Размеры элементов
+	Theme_control_MyDefault.css
+_font/									# Шрифты
+	Theme_font_MyDefault.css
+_size/									# Размер текста и междустрочный интервал
+	Theme_size_MyDefault.css
+_space/									# Отступы
+	Theme_space_MyDefault.css
+Theme.css								# Стили темы
+```
+
+### Создать свою тему
+
+Возьмите за основу [нашу тему](https://github.com/gazprom-neft/consta-uikit/tree/master/src/components/Theme),
+скопируйте и добавьте свои значения для модификаторов.
+
+## Пресеты
+
+Пресет темы — это набор модификаторов, которые можно применять ко всему проекту или к отдельным элементам.
+
+### Структура пресета
+
+```json
+{
+  "color": {
+    "primary": "myDefault", // основная цветовая схема, указывается значение модификатора _color
+    "accent": "myDark", // акцентная цветовая схема, указывается значение модификатора _color
+    "invert": "myDark" // инвертная цветовая схема, указывается значение модификатора _color
+  },
+  "control": "myDefault", // указывается значение модификатора _control
+  "font": "myDefault", // указывается значение модификатора _font
+  "size": "myDefault", // указывается значение модификатора _size
+  "space": "myDefault" // указывается значение модификатора _space
+}
+```
+
+В пресетах нашей темы есть три цветовых схемы:
+
+- `primary` — основная цветовая схема, используется во всем проекте.
+- `accent` — акцентная цветовая схема, используется для того, чтобы выделить элемент,
+  сделать его заметным. Используется в компонентах, отвечающих за
+  сообщения и статусы процессов, например в [Informer](/?path=/docs/components-informer--playground)
+  и [Badge](/?path=/docs/components-badge--playground).
+- `invert` — инвертированная цветовая схема. Используется в компонентах, которые должны
+  отличаться от окружения. Например, в
+  [Tooltip](/?path=/docs/components-tooltip--tooltip-positioned-by-anchor-story).
+
+### Создать новый пресет
+
+1. Создайте файл пресета, за основу можно взять любой [пересет из ui-kit](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/Theme/presets/presetGpnDark.ts)
+2. Опишите, какие модификаторы использовать в этом пресете.
+
+### Пример пресета myDefault
+
+```tsx
+// Импортируйте CSS-файлы темы
+
+import { ThemePreset } from '@consta/uikit/Theme';
+
+export const myDefault: ThemePreset = {
+  color: {
+    primary: 'myDefault',
+    accent: 'myDark',
+    invert: 'myDark',
+  },
+  control: 'myDefault',
+  font: 'myDefault',
+  size: 'myDefault',
+  space: 'myDefault',
+};
+```
+
+#### Пример пресета myDark
+
+```tsx
+// Импортируйте CSS-файлы темы
+
+import { ThemePreset } from '@consta/uikit/Theme';
+
+export const myDark: ThemePreset = {
+  color: {
+    primary: 'myDark',
+    accent: 'myDark',
+    invert: 'myDefault',
+  },
+  control: 'myDefault',
+  font: 'myDefault',
+  size: 'myDefault',
+  space: 'myDefault',
+};
+```
+
+## Как управлять темами
+
+### Подключить тему
+
+Чтобы подключить тему ко всему проекту, используйте ее в корневом компоненте.
+
+```tsx
 import React from 'react';
+
 import { Theme, presetGpnDefault } from '@consta/uikit/Theme';
 
 const App = () => {
@@ -16,9 +147,13 @@ const App = () => {
 };
 ```
 
-### Вложенные темы
+### Использовать тему для части проекта
 
-```ts
+Вы можете вкладывать тему одну в другую если хотите, чтобы часть проекта выглядела иначе.
+
+> Если вы переключите основную тему, вложенная тема не поменется
+
+```tsx
 import React from 'react';
 import { Theme, presetGpnDefault, presetGpnDark } from '@consta/uikit/Theme';
 
@@ -32,26 +167,9 @@ const App = () => {
 };
 ```
 
-### Использование useTheme
+### Переключать темы
 
-`useTheme` вернет `{ theme, themeClassNames }`
-
-`theme` - используемая тема
-`themeClassNames` - классы используемой темы
-
-```ts
-import { useTheme } from '@consta/uikit/Theme';
-import { Text } from '@consta/uikit/Text';
-
-const App = () => {
-  const { themeClassNames } = useTheme();
-  <Text className={themeClassNames.color.invert}></div>;
-};
-```
-
-### Переключение темы
-
-```ts
+```tsx
 import './RootTheme.css';
 
 import React, { useState } from 'react';
@@ -84,3 +202,24 @@ export const RootTheme: React.FC = () => {
 ```
 
 <ThemeExampleRoot />
+
+### Узнать, какая тема используется
+
+Чтобы узнать текущую тему, в которой находится компонент, используйте `useTheme`.
+
+`useTheme` вернет `{ theme, themeClassNames }`
+
+- `theme` — подключенная тема
+- `themeClassNames` - CSS-классы этой темы
+
+С помощью `useTheme` удобно переключать цветовую схему на акцентную или инвертную.
+
+```tsx
+import { useTheme } from '@consta/uikit/Theme';
+import { Text } from '@consta/uikit/Text';
+
+const App = () => {
+  const { themeClassNames } = useTheme();
+  <Text className={themeClassNames.color.invert}>Текст в инвертном цвете</Text>;
+};
+```

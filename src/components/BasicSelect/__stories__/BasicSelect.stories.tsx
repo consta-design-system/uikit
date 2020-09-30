@@ -66,17 +66,15 @@ const Default = (props: { value?: SelectOption }): JSX.Element => {
   const getItemLabel = (option: SelectOption): string => option.label;
 
   return (
-    <>
-      <div>
-        <BasicSelect
-          {...getKnobs()}
-          id="example"
-          options={items}
-          value={props.value}
-          getOptionLabel={getItemLabel}
-        />
-      </div>
-    </>
+    <div>
+      <BasicSelect
+        {...getKnobs()}
+        id="example"
+        options={items}
+        value={props.value}
+        getOptionLabel={getItemLabel}
+      />
+    </div>
   );
 };
 

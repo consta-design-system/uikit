@@ -23,11 +23,12 @@ import { FileIconUndefined } from '../../../FileIconUndefined/FileIconUndefined'
 import { FileIconWav } from '../../../FileIconWav/FileIconWav';
 import { FileIconXls } from '../../../FileIconXls/FileIconXls';
 import { FileIconZip } from '../../../FileIconZip/FileIconZip';
+import { fileIconPropSize, fileIconPropSizeDefault } from '../../FileIcon';
 
 import { FileIconsGalleryItem } from './Item/FileIconsGallery-Item';
 
 const defaultKnobs = () => ({
-  size: select('size', ['s', 'm'], 'm'),
+  size: select('size', fileIconPropSize, fileIconPropSizeDefault),
 });
 
 const icons = {

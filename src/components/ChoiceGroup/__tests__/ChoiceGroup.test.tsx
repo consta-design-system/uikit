@@ -37,16 +37,17 @@ const items: Item[] = [
 ];
 
 const additionalClass = 'additionalClass';
-
-const handleChange = jest.fn();
+const defaultValue = items[0];
 
 const renderComponent = (props: {
   size?: ChoiceGroupProps['size'];
   view?: ChoiceGroupProps['view'];
   form?: ChoiceGroupProps['form'];
   onlyIcon?: ChoiceGroupProps['onlyIcon'];
+  onChange?: (props: { e: React.ChangeEvent<HTMLInputElement>; value: Item | null }) => void;
 }) => {
-  const value = items[0];
+  const value = defaultValue;
+  const handleChange = jest.fn();
 
   return render(
     <>
@@ -55,7 +56,36 @@ const renderComponent = (props: {
         items={items}
         value={value}
         multiple={false}
-        onChange={handleChange}
+        onChange={props.onChange || handleChange}
+        getLabel={(item) => `Name-${item.name}`}
+        getIcon={(item) => item.icon}
+        name={testId}
+        className={additionalClass}
+        data-testid={testId}
+      />
+    </>,
+  );
+};
+
+const renderComponentMultiple = (props: {
+  size?: ChoiceGroupProps['size'];
+  view?: ChoiceGroupProps['view'];
+  form?: ChoiceGroupProps['form'];
+  onlyIcon?: ChoiceGroupProps['onlyIcon'];
+  onChange?: (props: { e: React.ChangeEvent<HTMLInputElement>; value: Item[] | null }) => void;
+  value?: Item[];
+}) => {
+  const value = props.value || [defaultValue];
+  const handleChange = jest.fn();
+
+  return render(
+    <>
+      <ChoiceGroup
+        {...props}
+        items={items}
+        value={value}
+        multiple
+        onChange={props.onChange || handleChange}
         getLabel={(item) => `Name-${item.name}`}
         getIcon={(item) => item.icon}
         name={testId}
@@ -88,7 +118,7 @@ function getIcon(index = 0) {
 
 describe('Компонент ChoiceGroup', () => {
   it('должен рендериться без ошибок', () => {
-    expect(renderComponent).not.toThrow();
+    expect(() => renderComponent({})).not.toThrow();
   });
   describe('проверка props', () => {
     describe('проверка items', () => {
@@ -101,56 +131,48 @@ describe('Компонент ChoiceGroup', () => {
     describe('проверка value', () => {
       it(`выбранному элементу присвоился модификатор "_checked"`, () => {
         renderComponent({});
-        const item = getItem();
-        expect(item).toHaveClass(cnChoiceGroup('Label', { checked: true }));
+        expect(getItem()).toHaveClass(cnChoiceGroup('Label', { checked: true }));
       });
     });
     describe('проверка getLabel', () => {
       it(`label у элемента верный`, () => {
         renderComponent({});
-        const item = getItem();
-        expect(item.textContent).toEqual(`Name-${items[0].name}`);
+        expect(getItem().textContent).toEqual(`Name-${items[0].name}`);
       });
     });
     describe('проверка getIcon', () => {
       it(`иконка отображается`, () => {
         renderComponent({});
-        const icon = getIcon();
-        expect(icon).toHaveClass('IconCamera');
+        expect(getIcon()).toHaveClass('IconCamera');
       });
     });
     describe('проверка onlyIcon', () => {
       it(`текст не отображается`, () => {
         renderComponent({ onlyIcon: true });
-        const item = getItem();
-        expect(item.textContent).toEqual('');
+        expect(getItem().textContent).toEqual('');
       });
       it(`присваивает класс`, () => {
         renderComponent({ onlyIcon: true });
-        const choiceGroup = screen.getByTestId(testId);
-        expect(choiceGroup).toHaveClass(cnChoiceGroup({ onlyIcon: true }));
+        expect(getRender()).toHaveClass(cnChoiceGroup({ onlyIcon: true }));
       });
     });
     describe('проверка name', () => {
       it(`name у элемента верный`, () => {
         renderComponent({});
-        const input = getInput();
-        expect(input.name).toEqual(testId);
+        expect(getInput().name).toEqual(testId);
       });
     });
     describe('проверка className', () => {
       it(`присвоился дополнительный класс`, () => {
         renderComponent({});
-        const choiceGroup = getRender();
-        expect(choiceGroup).toHaveClass(additionalClass);
+        expect(getRender()).toHaveClass(additionalClass);
       });
     });
     describe('проверка form', () => {
       choiceGroupForms.forEach((form) => {
         it(`присваивает класс для form=${form}`, () => {
           renderComponent({ form });
-          const choiceGroup = getRender();
-          expect(choiceGroup).toHaveClass(cnChoiceGroup({ form }));
+          expect(getRender()).toHaveClass(cnChoiceGroup({ form }));
         });
       });
     });
@@ -158,8 +180,7 @@ describe('Компонент ChoiceGroup', () => {
       choiceGroupSizes.forEach((size) => {
         it(`присваивает класс для size=${size}`, () => {
           renderComponent({ size });
-          const choiceGroup = getRender();
-          expect(choiceGroup).toHaveClass(cnChoiceGroup({ size }));
+          expect(getRender()).toHaveClass(cnChoiceGroup({ size }));
         });
       });
     });
@@ -167,16 +188,85 @@ describe('Компонент ChoiceGroup', () => {
       choiceGroupViews.forEach((view) => {
         it(`присваивает класс для size=${view}`, () => {
           renderComponent({ view });
-          const choiceGroup = getRender();
-          expect(choiceGroup).toHaveClass(cnChoiceGroup({ view }));
+          expect(getRender()).toHaveClass(cnChoiceGroup({ view }));
         });
       });
     });
-    describe('проверка onChange', () => {
-      renderComponent({});
-      const item = getItem(1);
-      fireEvent.click(item);
-      expect(handleChange).toHaveBeenCalledTimes(1);
+    describe('проверка onChange при multiple=false', () => {
+      it(`клик по невыбраному элементу, должен вызвать callback c ожидаемыми параметрами`, () => {
+        const handleChange = jest.fn();
+        const elementIndex = 1;
+
+        renderComponent({ onChange: handleChange });
+
+        const item = getItem(elementIndex);
+        fireEvent.click(item);
+
+        expect(handleChange).toHaveBeenCalled();
+        expect(handleChange).toHaveBeenCalledTimes(1);
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({ value: items[elementIndex] }),
+        );
+      });
+      it('клик по выбраному элементу, не должен вызвать callback', () => {
+        const handleChange = jest.fn();
+
+        renderComponent({ onChange: handleChange });
+
+        const item = getItem(0);
+
+        fireEvent.click(item);
+
+        expect(handleChange).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('проверка onChange при multiple=true', () => {
+      it(`клик по невыбраному элементу, должен вызвать callback c ожидаемыми параметрами`, () => {
+        const handleChange = jest.fn();
+        const elementIndex = 1;
+
+        renderComponentMultiple({ onChange: handleChange });
+
+        const item = getItem(elementIndex);
+
+        fireEvent.click(item);
+
+        expect(handleChange).toHaveBeenCalled();
+        expect(handleChange).toHaveBeenCalledTimes(1);
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({ value: [defaultValue, items[elementIndex]] }),
+        );
+      });
+      it(`клик по выбраному элементу (всего выбран 1 элемент), должен вызвать callback c ожидаемыми параметрами`, () => {
+        const handleChange = jest.fn();
+
+        renderComponentMultiple({ onChange: handleChange });
+
+        const item = getItem(0);
+
+        fireEvent.click(item);
+
+        expect(handleChange).toHaveBeenCalled();
+        expect(handleChange).toHaveBeenCalledTimes(1);
+        expect(handleChange).toHaveBeenCalledWith(expect.objectContaining({ value: null }));
+      });
+      it(`клик по выбраному элементу (всего выбрано 2 элемента), должен вызвать callback c ожидаемыми параметрами`, () => {
+        const handleChange = jest.fn();
+        const elementIndex = 1;
+
+        renderComponentMultiple({ onChange: handleChange, value: [defaultValue, items[1]] });
+
+        const item = getItem(elementIndex);
+
+        fireEvent.click(item);
+
+        expect(handleChange).toHaveBeenCalled();
+        expect(handleChange).toHaveBeenCalledTimes(1);
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({ value: [defaultValue] }),
+        );
+      });
     });
   });
   it(`на элементах есть миксин ${cnMixFocus()}`, () => {
