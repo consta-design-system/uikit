@@ -3,6 +3,7 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
 import { BasicSelectExampleText} from './examples/BasicSelectExampleText/BasicSelectExampleText';
 import { BasicSelectExampleSize } from './examples/BasicSelectExampleSize/BasicSelectExampleSize';
 import { BasicSelectExampleView } from './examples/BasicSelectExampleView/BasicSelectExampleView';
+import { BasicSelectExampleForm} from './examples/BasicSelectExampleForm/BasicSelectExampleForm';
 
 # BasicSelect
 
@@ -15,6 +16,7 @@ import { BasicSelectExampleView } from './examples/BasicSelectExampleView/BasicS
 
 - [Варианты](#варианты)
 - [Размер](#размер)
+- [Форма](#форма)
 - [Внешний вид](#внешний-вид)
 - [Список свойств](#свойства)
 - [Пример использования](#примеры)
@@ -45,6 +47,12 @@ import { BasicSelectExampleView } from './examples/BasicSelectExampleView/BasicS
 
 <BasicSelectExampleSize />
 
+## Форма
+
+За форму селекта отвечает свойство `form`. Варианты: `default`, `brick`, `round`, по умолчанию `default`.
+
+<BasicSelectExampleForm />
+
 
 
 ## Внешний вид
@@ -56,6 +64,7 @@ import { BasicSelectExampleView } from './examples/BasicSelectExampleView/BasicS
 <BasicSelectExampleView />
 
 
+
 ## Cвойства
 
 
@@ -64,6 +73,7 @@ import { BasicSelectExampleView } from './examples/BasicSelectExampleView/BasicS
 | [`view?`](#внешний-вид)         | `default , clear`                                      | `default`    | Внешний вид компонента                                                                                |
 | [`disabled?`](#внешний-вид)     | `boolean`                                              | -            | Делает компонент недоступным                                                                                 |
 | [`size?`](#размер)          | `'s' , 'm' , 'l'`                                            | `'m'`          | Размер компонента                                                                                     |
+| [`form?`](#форма)          | `default`, `brick`, `round`                                          | `default`          | Размер компонента                                                                                     |
 | [`placeholder?`](#варианты)   | `string`                                               | -            | Подсказка, отображается, когда вариант не выбран                           |
 | [`options`](#варианты)        | `T[]`                                                  | -            | Варианты, которые можно выбрать                                                                                                 |
 | [`getOptionLabel`](#варианты) | `(arg: T) => string`                                   | -            | Функция для получения текста варианта, который будет отображаться в поле для выбранного значения         |
