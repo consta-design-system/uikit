@@ -25,14 +25,7 @@
   }
 
   &_isResized {
-    word-break: break-all;
-
-    @supports (hyphens: auto) {
-      & {
-        word-break: initial;
-        hyphens: auto;
-      }
-    }
+    overflow-wrap: break-word;
   }
 
   &_isClickable {
