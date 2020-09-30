@@ -94,7 +94,7 @@ type Props = {
 
 export type TextFieldProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
 
-const cnTextField = cn('TextField');
+export const cnTextField = cn('TextField');
 
 const sizeMap: Record<TextFieldPropSize, IconPropSize> = {
   xs: 'xs',
