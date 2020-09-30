@@ -2,6 +2,7 @@ import * as React from 'react';
 import { boolean, number, select, text } from '@storybook/addon-knobs';
 
 import { FileIconsGallery } from '../../../fileIcons/FileIcon/__stories__/FileIconsGallery/FileIconsGallery';
+import { fileIconPropSize, fileIconPropSizeDefault } from '../../../fileIcons/FileIcon/FileIcon';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import { File } from '../File';
@@ -11,7 +12,7 @@ import { File } from '../File';
 import mdx from './File.mdx';
 
 const defaultKnobs = () => ({
-  size: select('size', ['s', 'm'], 'm'),
+  size: select('size', fileIconPropSize, fileIconPropSizeDefault),
   extension: text('extension', 'doc'),
   loading: boolean('loading', false),
   loadingWithProgressSpin: boolean('loadingWithProgressSpin', false),
