@@ -1,34 +1,87 @@
 import { Preview } from '@storybook/addon-docs/dist/blocks';
 
+import { BasicSelectExampleText } from './examples/BasicSelectExampleText/BasicSelectExampleText';
+import { BasicSelectExampleSize } from './examples/BasicSelectExampleSize/BasicSelectExampleSize';
+import { BasicSelectExampleView } from './examples/BasicSelectExampleView/BasicSelectExampleView';
+import { BasicSelectExampleForm } from './examples/BasicSelectExampleForm/BasicSelectExampleForm';
+
 # BasicSelect
 
-BasicSelect — компонент, реализующий элемент управления меню опций (нативного `<select>`).
+Выпадающий список. Позволяет выбрать один из нескольких вариантов.
 
-Компоненту необходимо передать тип опции: `<BasicSelect<T> {..props}/>`.
+Используйте BasicSelect, если вариантов много — пять или больше. Если вариантов меньше,
+используйте [Radio](?path=/docs/components-radio--playground)
+или [ChoiceGroup](?path=/docs/components-choicegroup--playground).
 
-## Cвойства компонента
+- [Варианты](#варианты)
+- [Размер](#размер)
+- [Форма](#форма)
+- [Внешний вид](#внешний-вид)
+- [Список свойств](#свойства)
+- [Пример использования](#примеры)
 
-| Свойство       | Тип или варианты значения                              | По умолчанию | Описание                                                                                      |
-| -------------- | ------------------------------------------------------ | ------------ | --------------------------------------------------------------------------------------------- |
-| disabled?      | `boolean`                                              | -            | Активность компонента                                                                         |
-| size?          | `s , m , l`                                            | `m`          | Размер компонента                                                                             |
-| view?          | `default , clear`                                      | `default`    | Внешний вид компонента                                                                        |
-| ariaLabel?     | `string`                                               | -            | `aria` атрибут для метки                                                                      |
-| placeholder?   | `string`                                               | -            | Placeholder — текст, который отобразится в качестве подсказки в пустом поле                   |
-| className?     | `string`                                               | -            | Дополнительный класс                                                                          |
-| value?         | `T , null`                                             | -            | Значение селекта, по умолчанию `null`.                                                        |
-| id             | `string`                                               | -            | Идентификатор селекта                                                                         |
-| options        | `T[]`                                                  | -            | Опции                                                                                         |
-| onChange?      | `(value: string | null) => void`                       | -            | Обработчик события изменения значения компонента                                              |
-| getOptionLabel | `(arg: T) => string`                                   | -            | Функция для получения текста опции, который будет отображаться в поле для выбранного значения |
-| onBlur?        | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -            | Обработчик события `blur`                                                                     |
-| onFocus?       | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -            | Обработчик события `focus`                                                                    |
+## Варианты
 
-По умолчанию компонент всегда занимает всё доступное пространство в блоке.
+Варианты значений для выпадающего списка передаются в объекте `options`. Запишите их
+с заглавной буквы.
 
-## Пример использования
+Для работы компоненту нужно передать тип опции: `<BasicSelect<T> {..props}/>`.
+Отобразить текст для конкретного варианта можно с помощью функции `getOptionLabel`.
 
-```ts
+Подсказка, которая видна, когда ни один вариант не выбран, задается в свойстве `placeholder`.
+Сформулируйте подсказку так, чтобы стало понятно, что по клику на поле раскроется список вариантов,
+один из которых нужно выбрать.
+
+Если не знаете, что написать в подсказке, используйте универсальное **Выберите**.
+
+<BasicSelectExampleText />
+
+## Размер
+
+За размер компонента отвечает свойство `size`. Варианты: `s` , `m` , `l` , по умолчанию `m`.
+
+Компонент занимает всю ширину родительского блока.
+
+<BasicSelectExampleSize />
+
+## Форма
+
+За форму селекта отвечает свойство `form`. Варианты: `default`, `brick`, `round`, по умолчанию `default`.
+
+<BasicSelectExampleForm />
+
+## Внешний вид
+
+За вид компонента отвечает свойство `view`. Варианты: `default , clear`, по умолчанию `default`.
+
+Если хотите сделать компонент неактивным, используйте `disabled`.
+
+<BasicSelectExampleView />
+
+## Cвойства
+
+| Свойство                      | Тип или варианты значения                              | По умолчанию | Описание                                                                                         |
+| ----------------------------- | ------------------------------------------------------ | ------------ | ------------------------------------------------------------------------------------------------ |
+| [`view?`](#внешний-вид)       | `default , clear`                                      | `default`    | Внешний вид компонента                                                                           |
+| [`disabled?`](#внешний-вид)   | `boolean`                                              | -            | Делает компонент недоступным                                                                     |
+| [`size?`](#размер)            | `'s' , 'm' , 'l'`                                      | `'m'`        | Размер компонента                                                                                |
+| [`form?`](#форма)             | `default`, `brick`, `round`                            | `default`    | Размер компонента                                                                                |
+| [`placeholder?`](#варианты)   | `string`                                               | -            | Подсказка, отображается, когда вариант не выбран                                                 |
+| [`options`](#варианты)        | `T[]`                                                  | -            | Варианты, которые можно выбрать                                                                  |
+| [`getOptionLabel`](#варианты) | `(arg: T) => string`                                   | -            | Функция для получения текста варианта, который будет отображаться в поле для выбранного значения |
+| `value?`                      | `T , null`                                             | `null`       | Значение селекта                                                                                 |
+| `ariaLabel?`                  | `string`                                               | -            | `aria` атрибут для метки                                                                         |
+| `id`                          | `string`                                               | -            | Идентификатор селекта в DOM                                                                      |
+| `onChange?`                   | `(value: string | null) => void`                       | -            | Обработчик события изменения значения компонента                                                 |
+| `onBlur?`                     | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -            | Обработчик события `blur`                                                                        |
+| `onFocus?`                    | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -            | Обработчик события `focus`                                                                       |
+| `className?`                  | `string`                                               | -            | Дополнительный CSS-класс                                                                         |
+
+## Примеры
+
+## Вариант не выбран
+
+```tsx
 import React from 'react';
 import { BasicSelect } from '@consta/uikit/BasicSelect';
 
@@ -46,19 +99,13 @@ const items = [
 const Example = () => {
   const getItemLabel = (option: SelectOption): string => option.label;
 
-  return (
-    <>
-      <div>
-        <BasicSelect id="city" options={items} getOptionLabel={getItemLabel} />
-      </div>
-    </>
-  );
+  return <BasicSelect id="city" options={items} getOptionLabel={getItemLabel} />;
 };
 ```
 
-## С заданным значением
+## Вариант выбран
 
-```ts
+```tsx
 import React from 'react';
 import { BasicSelect } from '@consta/uikit/BasicSelect';
 
@@ -79,16 +126,12 @@ const Example = () => {
   const getItemValue = (option: SelectOption): string => option.value;
 
   return (
-    <>
-      <div>
-        <BasicSelect<Option>
-          id="city"
-          value={{ label: 'Москва', value: 'moscow' }}
-          options={items}
-          getOptionLabel={getItemLabel}
-        />
-      </div>
-    </>
+    <BasicSelect
+      id="city"
+      value={{ label: 'Москва', value: 'moscow' }}
+      options={items}
+      getOptionLabel={getItemLabel}
+    />
   );
 };
 ```
