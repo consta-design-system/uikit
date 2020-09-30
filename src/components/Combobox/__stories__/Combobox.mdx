@@ -38,7 +38,6 @@ import { ComboboxExampleGroup } from './examples/ComboboxExampleGroup/ComboboxEx
 Варианты значений для выпадающего списка передаются в объекте `options`. Запишите их
 с заглавной буквы.
 
-Для работы компоненту нужно передать тип опции: `<Combobox<T> {..props}/>`.
 Отобразить текст для конкретного варианта можно с помощью функции `getOptionLabel`.
 
 Подсказка, которая видна, когда ни один вариант не выбран, задается в свойстве `placeholder`.
@@ -199,7 +198,7 @@ const Example = () => {
 
 ### Вариант не выбран
 
-```ts
+```tsx
 import React from 'react';
 import { Combobox } from '@consta/uikit/Combobox';
 
@@ -223,7 +222,7 @@ const Example = () => {
 
 ### Вариант выбран
 
-```ts
+```tsx
 import React from 'react';
 import { Combobox } from '@consta/uikit/Combobox';
 
@@ -242,7 +241,7 @@ const Example = () => {
   const getItemLabel = (option: SelectOption): string => option.label;
 
   return (
-    <Combobox<Option>
+    <Combobox
       id="city"
       value={{ label: 'Москва', value: 'moscow' }}
       options={items}
