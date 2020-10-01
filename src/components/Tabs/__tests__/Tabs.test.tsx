@@ -4,10 +4,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { IconProps } from '../../../icons/Icon/Icon';
 import { IconCamera } from '../../../icons/IconCamera/IconCamera';
 import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
-import { cnTabs, Tabs, tabsSizes, tabsViews } from '../Tabs';
-import { cnTabsTab } from '../TabsTab/TabsTab';
-
-type TabsProps = React.ComponentProps<typeof Tabs>;
+import { cnTabs, cnTabsTab, Tabs, TabsProps as Props, tabsSizes, tabsViews } from '../Tabs';
 
 const testId = cnTabs();
 
@@ -15,6 +12,8 @@ type Item = {
   name: string;
   icon: React.FC<IconProps>;
 };
+
+type TabsProps = Props<Item>;
 
 const items: Item[] = [
   {
@@ -39,22 +38,22 @@ const renderComponent = (props: {
   size?: TabsProps['size'];
   view?: TabsProps['view'];
   onlyIcon?: TabsProps['onlyIcon'];
+  renderItem?: TabsProps['renderItem'];
+  onChange?: TabsProps['onChange'];
 }) => {
   const value = items[0];
 
   return render(
-    <>
-      <Tabs
-        {...props}
-        items={items}
-        value={value}
-        onChange={handleChange}
-        getLabel={(item) => `Name-${item.name}`}
-        getIcon={(item) => item.icon}
-        className={additionalClass}
-        data-testid={testId}
-      />
-    </>,
+    <Tabs
+      {...props}
+      items={items}
+      value={value}
+      onChange={props.onChange || handleChange}
+      getLabel={(item) => `Name-${item.name}`}
+      getIcon={(item) => item.icon}
+      className={additionalClass}
+      data-testid={testId}
+    />,
   );
 };
 
@@ -76,7 +75,7 @@ function getIcon(index = 0) {
 
 describe('Компонент Tabs', () => {
   it('должен рендериться без ошибок', () => {
-    expect(renderComponent).not.toThrow();
+    expect(() => renderComponent({})).not.toThrow();
   });
   describe('проверка props', () => {
     describe('проверка items', () => {
@@ -145,10 +144,39 @@ describe('Компонент Tabs', () => {
       });
     });
     describe('проверка onChange', () => {
-      renderComponent({});
-      const item = getItem(1);
-      fireEvent.click(item);
-      expect(handleChange).toHaveBeenCalledTimes(1);
+      it(`клик по невыбраному элементу, должен вызвать callback c ожидаемыми параметрами`, () => {
+        const handleChange = jest.fn();
+        const elementIndex = 1;
+
+        renderComponent({ onChange: handleChange });
+
+        const item = getItem(elementIndex);
+        fireEvent.click(item);
+
+        expect(handleChange).toHaveBeenCalled();
+        expect(handleChange).toHaveBeenCalledTimes(1);
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({ value: items[elementIndex] }),
+        );
+      });
+      it('клик по выбраному элементу, не должен вызвать callback', () => {
+        const handleChange = jest.fn();
+
+        renderComponent({ onChange: handleChange });
+
+        const item = getItem(0);
+
+        fireEvent.click(item);
+
+        expect(handleChange).not.toHaveBeenCalled();
+      });
+    });
+    describe('проверка renderItem', () => {
+      it(`рендер элемента производится прокинутой функцией`, () => {
+        const renderText = 'customRenderItem';
+        renderComponent({ renderItem: ({ key }) => <div key={key}>{renderText}</div> });
+        expect(getRender().textContent).toEqual(`${renderText}${renderText}${renderText}`);
+      });
     });
   });
   it(`на элементах есть миксин ${cnMixFocus()}`, () => {
