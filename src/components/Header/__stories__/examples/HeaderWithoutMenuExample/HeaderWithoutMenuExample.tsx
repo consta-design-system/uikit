@@ -6,16 +6,16 @@ import { IconChat } from '../../../../../icons/IconChat/IconChat';
 import { IconRing } from '../../../../../icons/IconRing/IconRing';
 import { cn } from '../../../../../utils/bem';
 import { Text } from '../../../../Text/Text';
-import { HeaderButton } from '../../../Button/Header-Button';
+import { HeaderButton } from '../../../Button/HeaderButton';
 import { Header } from '../../../Header';
-import { HeaderLogin } from '../../../Login/Header-Login';
-import { HeaderLogo } from '../../../Logo/Header-Logo';
-import { HeaderModule } from '../../../Module/Header-Module';
+import { HeaderLogin } from '../../../Login/HeaderLogin';
+import { HeaderLogo } from '../../../Logo/HeaderLogo';
+import { HeaderModule } from '../../../Module/HeaderModule';
 import {
   HeaderSearchBar,
   SearchBarPropOnChange,
   SearchBarPropOnSearch,
-} from '../../../SearchBar/Header-SearchBar';
+} from '../../../SearchBar/HeaderSearchBar';
 
 const cnExample = cn('HeaderWithoutMenuExample');
 

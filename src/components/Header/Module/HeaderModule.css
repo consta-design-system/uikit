@@ -1,0 +1,17 @@
+.HeaderModule {
+  margin-left: var(--module-indent);
+
+  &_indent {
+    &_s {
+      --module-indent: var(--space-xs);
+    }
+
+    &_m {
+      --module-indent: var(--space-m);
+    }
+
+    &_l {
+      --module-indent: var(--space-2xl);
+    }
+  }
+}
