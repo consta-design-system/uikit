@@ -210,6 +210,7 @@
     background-color: transparent;
     border: none;
     text-align: center;
+    cursor: pointer;
 
     &:focus {
       outline: none;
@@ -470,7 +471,7 @@
     padding-left: var(--input-space);
     color: var(--color-control-typo-default);
     background-color: var(--color-control-bg-clear);
-    cursor: default;
+    cursor: pointer;
 
     &_hovered {
       background-color: var(--color-control-bg-clear-hover);
@@ -558,7 +559,7 @@
     padding-left: calc(var(--input-space) + var(--box-size) + var(--space-xs));
     color: var(--color-control-typo-default);
     background-color: var(--color-control-bg-clear);
-    cursor: default;
+    cursor: pointer;
 
     &_hovered {
       background-color: var(--color-control-bg-clear-hover);
