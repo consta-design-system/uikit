@@ -401,7 +401,7 @@ export const Table = <T extends TableRow>({
       )}
       {filteredData.length > 0 ? (
         filteredData.map((row, rowIdx) => {
-          const nth = (rowIdx + 1) % 2 === 0 ? 'odd' : 'even';
+          const nth = (rowIdx + 1) % 2 === 0 ? 'even' : 'odd';
           return (
             <div key={row.id} className={cnTable('CellsRow', { nth })}>
               {columnsWithMetaData.map((column, columnIdx) => (
