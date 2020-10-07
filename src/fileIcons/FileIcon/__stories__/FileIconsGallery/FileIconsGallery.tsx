@@ -1,6 +1,6 @@
 import React from 'react';
 import { select } from '@storybook/addon-knobs';
-
+import { fileIconPropSize, fileIconPropSizeDefault } from '../../FileIcon';
 import { FileIconAvi } from '../../../FileIconAvi/FileIconAvi';
 import { FileIconBmp } from '../../../FileIconBmp/FileIconBmp';
 import { FileIconCsv } from '../../../FileIconCsv/FileIconCsv';
@@ -23,7 +23,6 @@ import { FileIconUndefined } from '../../../FileIconUndefined/FileIconUndefined'
 import { FileIconWav } from '../../../FileIconWav/FileIconWav';
 import { FileIconXls } from '../../../FileIconXls/FileIconXls';
 import { FileIconZip } from '../../../FileIconZip/FileIconZip';
-import { fileIconPropSize, fileIconPropSizeDefault } from '../../FileIcon';
 
 import { FileIconsGalleryItem } from './Item/FileIconsGallery-Item';
 
@@ -33,27 +32,28 @@ const defaultKnobs = () => ({
 
 const icons = {
   FileIconAvi,
-  FileIconBmp,
-  FileIconCsv,
-  FileIconDoc,
-  FileIconExe,
-  FileIconGif,
-  FileIconJpg,
-  FileIconLoading,
-  FileIconMov,
-  FileIconMp3,
-  FileIconMp4,
-  FileIconPdf,
-  FileIconPng,
-  FileIconPtt,
-  FileIconRar,
-  FileIconRtf,
-  FileIconTiff,
-  FileIconTxt,
-  FileIconUndefined,
-  FileIconWav,
-  FileIconXls,
-  FileIconZip,
+FileIconBmp,
+FileIconCsv,
+FileIconDoc,
+FileIconExe,
+FileIconGif,
+FileIconJpg,
+FileIconLoading,
+FileIconMov,
+FileIconMp3,
+FileIconMp4,
+FileIconPdf,
+FileIconPng,
+FileIconPtt,
+FileIconRar,
+FileIconRtf,
+FileIconTiff,
+FileIconTxt,
+FileIconUndefined,
+FileIconWav,
+FileIconXls,
+FileIconZip,
+
 } as const;
 
 type Name = keyof typeof icons;

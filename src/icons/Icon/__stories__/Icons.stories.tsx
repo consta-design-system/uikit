@@ -1,6 +1,5 @@
 import React from 'react';
 import { select } from '@storybook/addon-knobs';
-
 import { IconAdd } from '../../IconAdd/IconAdd';
 import { IconAlert } from '../../IconAlert/IconAlert';
 import { IconAlignBlocksLeft } from '../../IconAlignBlocksLeft/IconAlignBlocksLeft';
@@ -74,20 +73,20 @@ import { IconLink } from '../../IconLink/IconLink';
 import { IconList } from '../../IconList/IconList';
 import { IconListNumbered } from '../../IconListNumbered/IconListNumbered';
 import { IconLock } from '../../IconLock/IconLock';
-import { IconMail } from '../../IconMail/IconMail';
-import { IconMaxHeight } from '../../IconMaxHeight/IconMaxHeight';
-import { IconMaxWidth } from '../../IconMaxWidth/IconMaxWidth';
 import { IconMBU } from '../../IconMBU/IconMBU';
-import { IconMeatball } from '../../IconMeatball/IconMeatball';
 import { IconMGRP } from '../../IconMGRP/IconMGRP';
 import { IconMLSP } from '../../IconMLSP/IconMLSP';
 import { IconMMP } from '../../IconMMP/IconMMP';
+import { IconMail } from '../../IconMail/IconMail';
+import { IconMaxHeight } from '../../IconMaxHeight/IconMaxHeight';
+import { IconMaxWidth } from '../../IconMaxWidth/IconMaxWidth';
+import { IconMeatball } from '../../IconMeatball/IconMeatball';
 import { IconMolecules } from '../../IconMolecules/IconMolecules';
 import { IconMoon } from '../../IconMoon/IconMoon';
 import { IconNodeEnd } from '../../IconNodeEnd/IconNodeEnd';
-import { IconNodes } from '../../IconNodes/IconNodes';
 import { IconNodeStart } from '../../IconNodeStart/IconNodeStart';
 import { IconNodeStep } from '../../IconNodeStep/IconNodeStep';
+import { IconNodes } from '../../IconNodes/IconNodes';
 import { IconOpenInNew } from '../../IconOpenInNew/IconOpenInNew';
 import { IconPause } from '../../IconPause/IconPause';
 import { IconPhone } from '../../IconPhone/IconPhone';
@@ -97,6 +96,8 @@ import { IconPressure } from '../../IconPressure/IconPressure';
 import { IconProcessing } from '../../IconProcessing/IconProcessing';
 import { IconQuestion } from '../../IconQuestion/IconQuestion';
 import { IconQuote } from '../../IconQuote/IconQuote';
+import { IconRUO } from '../../IconRUO/IconRUO';
+import { IconRUS } from '../../IconRUS/IconRUS';
 import { IconRecord } from '../../IconRecord/IconRecord';
 import { IconRemove } from '../../IconRemove/IconRemove';
 import { IconReply } from '../../IconReply/IconReply';
@@ -105,8 +106,6 @@ import { IconRestart } from '../../IconRestart/IconRestart';
 import { IconRevert } from '../../IconRevert/IconRevert';
 import { IconRing } from '../../IconRing/IconRing';
 import { IconRouble } from '../../IconRouble/IconRouble';
-import { IconRUO } from '../../IconRUO/IconRUO';
-import { IconRUS } from '../../IconRUS/IconRUS';
 import { IconScreen } from '../../IconScreen/IconScreen';
 import { IconSearch } from '../../IconSearch/IconSearch';
 import { IconSelect } from '../../IconSelect/IconSelect';
@@ -135,7 +134,9 @@ import { IconUnsort } from '../../IconUnsort/IconUnsort';
 import { IconUser } from '../../IconUser/IconUser';
 import { IconVZD } from '../../IconVZD/IconVZD';
 import { IconWarning } from '../../IconWarning/IconWarning';
+import { IconWatch } from '../../IconWatch/IconWatch';
 import { IconWorld } from '../../IconWorld/IconWorld';
+
 
 import { IconsItem } from './Item/Icons-Item';
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
@@ -147,146 +148,148 @@ const defaultKnobs = () => ({
   view: select(
     'view',
     ['alert', 'brand', 'ghost', 'link', 'primary', 'secondary', 'success', 'warning'],
-    'primary',
+    'primary'
   ),
 });
 
 const icons = {
   IconAdd,
-  IconAlert,
-  IconAlignBlocksLeft,
-  IconAlignBlocksRight,
-  IconAlignCenter,
-  IconAlignJustify,
-  IconAlignLeft,
-  IconAlignRight,
-  IconArrowDown,
-  IconArrowLeft,
-  IconArrowRight,
-  IconArrowUp,
-  IconArtBrush,
-  IconAttach,
-  IconBackward,
-  IconBag,
-  IconBarrier,
-  IconBento,
-  IconBold,
-  IconBookmarkFilled,
-  IconBookmarkStroked,
-  IconCalendar,
-  IconCamera,
-  IconCancel,
-  IconChat,
-  IconCheck,
-  IconClose,
-  IconCollapse,
-  IconColorFill,
-  IconColorText,
-  IconColumns,
-  IconComment,
-  IconConnection,
-  IconCopy,
-  IconCrown,
-  IconCursorMouse,
-  IconDiamond,
-  IconDisconnection,
-  IconDocAdd,
-  IconDocBlank,
-  IconDocDelete,
-  IconDocFilled,
-  IconDown,
-  IconDownload,
-  IconDrag,
-  IconDrillingRig,
-  IconDrop,
-  IconEdit,
-  IconExit,
-  IconExpand,
-  IconEye,
-  IconEyeClose,
-  IconFavorite,
-  IconFilter,
-  IconFlagFilled,
-  IconFlagStroked,
-  IconFolders,
-  IconForward,
-  IconFunnel,
-  IconGas,
-  IconGrouping,
-  IconHamburger,
-  IconHand,
-  IconHealth,
-  IconIntroduction,
-  IconItalic,
-  IconKebab,
-  IconLayers,
-  IconLeaf,
-  IconLink,
-  IconList,
-  IconListNumbered,
-  IconLock,
-  IconMBU,
-  IconMGRP,
-  IconMLSP,
-  IconMMP,
-  IconMail,
-  IconMaxHeight,
-  IconMaxWidth,
-  IconMeatball,
-  IconMolecules,
-  IconMoon,
-  IconNodeEnd,
-  IconNodeStart,
-  IconNodeStep,
-  IconNodes,
-  IconOpenInNew,
-  IconPause,
-  IconPhone,
-  IconPhoto,
-  IconPlay,
-  IconPressure,
-  IconProcessing,
-  IconQuestion,
-  IconQuote,
-  IconRUO,
-  IconRUS,
-  IconRecord,
-  IconRemove,
-  IconReply,
-  IconResize,
-  IconRestart,
-  IconRevert,
-  IconRing,
-  IconRouble,
-  IconScreen,
-  IconSearch,
-  IconSelect,
-  IconSelectOpen,
-  IconSettings,
-  IconShuffle,
-  IconSmile,
-  IconSortDown,
-  IconSortDownCenter,
-  IconSortUp,
-  IconSortUpCenter,
-  IconStop,
-  IconStorage,
-  IconStrikethrough,
-  IconSun,
-  IconTable,
-  IconTarget,
-  IconTest,
-  IconThumbUp,
-  IconTie,
-  IconTop,
-  IconTrash,
-  IconType,
-  IconUnderline,
-  IconUnsort,
-  IconUser,
-  IconVZD,
-  IconWarning,
-  IconWorld,
+IconAlert,
+IconAlignBlocksLeft,
+IconAlignBlocksRight,
+IconAlignCenter,
+IconAlignJustify,
+IconAlignLeft,
+IconAlignRight,
+IconArrowDown,
+IconArrowLeft,
+IconArrowRight,
+IconArrowUp,
+IconArtBrush,
+IconAttach,
+IconBackward,
+IconBag,
+IconBarrier,
+IconBento,
+IconBold,
+IconBookmarkFilled,
+IconBookmarkStroked,
+IconCalendar,
+IconCamera,
+IconCancel,
+IconChat,
+IconCheck,
+IconClose,
+IconCollapse,
+IconColorFill,
+IconColorText,
+IconColumns,
+IconComment,
+IconConnection,
+IconCopy,
+IconCrown,
+IconCursorMouse,
+IconDiamond,
+IconDisconnection,
+IconDocAdd,
+IconDocBlank,
+IconDocDelete,
+IconDocFilled,
+IconDown,
+IconDownload,
+IconDrag,
+IconDrillingRig,
+IconDrop,
+IconEdit,
+IconExit,
+IconExpand,
+IconEye,
+IconEyeClose,
+IconFavorite,
+IconFilter,
+IconFlagFilled,
+IconFlagStroked,
+IconFolders,
+IconForward,
+IconFunnel,
+IconGas,
+IconGrouping,
+IconHamburger,
+IconHand,
+IconHealth,
+IconIntroduction,
+IconItalic,
+IconKebab,
+IconLayers,
+IconLeaf,
+IconLink,
+IconList,
+IconListNumbered,
+IconLock,
+IconMBU,
+IconMGRP,
+IconMLSP,
+IconMMP,
+IconMail,
+IconMaxHeight,
+IconMaxWidth,
+IconMeatball,
+IconMolecules,
+IconMoon,
+IconNodeEnd,
+IconNodeStart,
+IconNodeStep,
+IconNodes,
+IconOpenInNew,
+IconPause,
+IconPhone,
+IconPhoto,
+IconPlay,
+IconPressure,
+IconProcessing,
+IconQuestion,
+IconQuote,
+IconRUO,
+IconRUS,
+IconRecord,
+IconRemove,
+IconReply,
+IconResize,
+IconRestart,
+IconRevert,
+IconRing,
+IconRouble,
+IconScreen,
+IconSearch,
+IconSelect,
+IconSelectOpen,
+IconSettings,
+IconShuffle,
+IconSmile,
+IconSortDown,
+IconSortDownCenter,
+IconSortUp,
+IconSortUpCenter,
+IconStop,
+IconStorage,
+IconStrikethrough,
+IconSun,
+IconTable,
+IconTarget,
+IconTest,
+IconThumbUp,
+IconTie,
+IconTop,
+IconTrash,
+IconType,
+IconUnderline,
+IconUnsort,
+IconUser,
+IconVZD,
+IconWarning,
+IconWatch,
+IconWorld,
+
 } as const;
 
 type Name = keyof typeof icons;
@@ -311,3 +314,4 @@ export default {
     },
   },
 };
+
