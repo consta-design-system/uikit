@@ -29,7 +29,7 @@ export type ThemeProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
 
 export const cnTheme = cn('Theme');
 
-function generateThemeClassNames(preset: ThemePreset): ThemePreset {
+export function generateThemeClassNames(preset: ThemePreset): ThemePreset {
   return {
     color: {
       primary: cnTheme({ color: preset.color.primary }),
