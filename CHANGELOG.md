@@ -1,5 +1,15 @@
 # Changelog
 
+## v1.10.2 (08/10/2020)
+
+- [test(PortalWithTheme): added tests (#489)](https://github.com/gazprom-neft/consta-uikit/commit/dcdba60b6b651addeb5d27cffe78d802dc1c6e89) - @gizeasy
+- [test(ProgressSpin): added tests (#492)](https://github.com/gazprom-neft/consta-uikit/commit/5356eebd011705869dbcf7e4fa42780b7e2bc4cf) - @gizeasy
+- [test(Radio): added tests (#493)](https://github.com/gazprom-neft/consta-uikit/commit/d0dc1893d13d663c249d4ae2dd07a43abd61fd47) - @gizeasy
+- [fix(Table): fixed zebraStriped (#494)](https://github.com/gazprom-neft/consta-uikit/commit/ab9b90262f9b09055c2470416942625adbd9eada) - @gizeasy
+- [feat(selects): added cursor: pounter for list items (#479)](https://github.com/gazprom-neft/consta-uikit/commit/a4b20f8426d6257c83983a9b04a195c7ed390865) - @gizeasy
+
+---
+
 ## v1.10.1 (30/09/2020)
 
 - [test(ChoiceGroup): added new tests (#464)](https://github.com/gazprom-neft/consta-uikit/commit/021d7d8537bf93956b42ebe4a641f672caec74f0) - @gizeasy
