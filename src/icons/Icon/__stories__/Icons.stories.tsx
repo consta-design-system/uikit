@@ -135,6 +135,7 @@ import { IconUnsort } from '../../IconUnsort/IconUnsort';
 import { IconUser } from '../../IconUser/IconUser';
 import { IconVZD } from '../../IconVZD/IconVZD';
 import { IconWarning } from '../../IconWarning/IconWarning';
+import { IconWatch } from '../../IconWatch/IconWatch';
 import { IconWorld } from '../../IconWorld/IconWorld';
 
 import { IconsItem } from './Item/Icons-Item';
@@ -286,6 +287,7 @@ const icons = {
   IconUser,
   IconVZD,
   IconWarning,
+  IconWatch,
   IconWorld,
 } as const;
 
