@@ -75,15 +75,20 @@ const items = [
   { label: 'В полосочку', value: 'stripe' },
 ];
 
-const Example = () => {
-  const getItemLabel = (option: SelectOption): string => option.label;
+export const Example = () => {
+  const [options, setOptions] = useState<SelectOption[]>(items);
 
+  const handleCreate = (label: string): void => {
+    setOptions([{ label, value: label }, ...items]);
+  };
+
+  const getItemLabel = (option: SelectOption): string => option.label;
   return (
     <Combobox
       id="color"
-      options={items}
+      options={options}
       getOptionLabel={getItemLabel}
-      onCreate={(str: string) => console.log}
+      onCreate={handleCreate}
       placeholder="Выберите цвет"
     />
   );
