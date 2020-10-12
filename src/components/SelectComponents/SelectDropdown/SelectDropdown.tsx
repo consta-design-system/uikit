@@ -72,7 +72,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
               isFirstGroup || (hasGroup && prevOption && currentOption.group !== prevOption.group);
 
             return (
-              <React.Fragment key={option.label}>
+              <React.Fragment key={cnSelect('Option', { label: option.label, isOptionForCreate })}>
                 {shouldShowGroupName && (
                   <div key={menuOption.group} className={cnSelect('GroupName')}>
                     {menuOption.group}
@@ -86,7 +86,6 @@ export const SelectDropdown: SelectDropdown = (props) => {
                     )
                   }
                   role="option"
-                  key={option.label}
                   id={`${id}-${index}`}
                   {...getOptionProps({
                     index,
