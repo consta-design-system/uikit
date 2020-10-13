@@ -26,7 +26,7 @@
     color: var(--color-hover);
   }
 
-  &_form {
+  /* &_form {
     &_brick {
       border-radius: 0;
     }
@@ -54,7 +54,7 @@
       padding-left: calc(var(--button-space) * 1.2);
       border-radius: 99rem 0 0 99rem;
     }
-  }
+  } */
 
   &_size {
     &_xs {
