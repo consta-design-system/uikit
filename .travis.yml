@@ -1,6 +1,8 @@
 language: node_js
 node_js:
   - 12
+env:
+  CHROMATIC_TOKEN: ${{ secrets.CHROMATIC_TOKEN }}
 script:
   - yarn run test
-  - yarn run build
+  - npx chromatic --project-token "$CHROMATIC_TOKEN"
