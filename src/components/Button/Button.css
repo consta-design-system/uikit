@@ -26,6 +26,113 @@
     color: var(--color-hover);
   }
 
+  &_form {
+    &_brick {
+      border-radius: 0;
+    }
+
+    &_round {
+      padding-right: calc(var(--button-space) * 1.2);
+      padding-left: calc(var(--button-space) * 1.2);
+      border-radius: 99rem;
+    }
+
+    &_brickDefault {
+      border-radius: 0 var(--control-radius) var(--control-radius) 0;
+    }
+
+    &_defaultBrick {
+      border-radius: var(--control-radius) 0 0 var(--control-radius);
+    }
+
+    &_brickRound {
+      padding-right: calc(var(--button-space) * 1.2);
+      border-radius: 0 99rem 99rem 0;
+    }
+
+    &_roundBrick {
+      padding-left: calc(var(--button-space) * 1.2);
+      border-radius: 99rem 0 0 99rem;
+    }
+  }
+
+  &_size {
+    &_xs {
+      --button-height: var(--control-height-xs);
+      --button-font-size: var(--control-text-size-xs);
+      --button-space: var(--control-space-xs);
+    }
+
+    &_s {
+      --button-height: var(--control-height-s);
+      --button-font-size: var(--control-text-size-s);
+      --button-space: var(--control-space-s);
+    }
+
+    &_m {
+      --button-height: var(--control-height-m);
+      --button-font-size: var(--control-text-size-m);
+      --button-space: var(--control-space-m);
+    }
+
+    &_l {
+      --button-height: var(--control-height-l);
+      --button-font-size: var(--control-text-size-l);
+      --button-space: var(--control-space-l);
+    }
+  }
+
+  &_disabled,
+  &_loading {
+    background-color: var(--color-control-bg-disable);
+    border-color: transparent;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &_disabled {
+    color: var(--color-control-typo-disable);
+  }
+
+  &_loading {
+    color: transparent;
+  }
+
+  &_width {
+    &_full {
+      width: 100%;
+    }
+  }
+
+  &_onlyIcon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--button-height);
+    padding: 0;
+  }
+
+  &_withIcon {
+    --icon-indent: calc(var(--button-space) * 0.7);
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &-Icon {
+    display: block;
+    flex-shrink: 0;
+
+    &_position {
+      &_left {
+        margin-right: var(--icon-indent);
+      }
+
+      &_right {
+        margin-left: var(--icon-indent);
+      }
+    }
+  }
+
   &-Label {
     overflow: hidden;
     text-align: center;

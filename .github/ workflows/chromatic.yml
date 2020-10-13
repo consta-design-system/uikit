@@ -1,7 +1,0 @@
-- uses: actions/checkout@v2
-  with:
-    fetch-depth: 0 # Required to retrieve git history
-- uses: chromaui/action@v1
-  with:
-    token: ${{ secrets.GITHUB_TOKEN }}
-    projectToken: ${{ secrets.CHROMATIC_TOKEN }}
