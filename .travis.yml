@@ -2,5 +2,4 @@ language: node_js
 node_js:
   - 12
 script:
-  - yarn run test
-  - npx chromatic --project-token ${{ secrets.CHROMATIC_TOKEN }}
+  - npx chromatic --project-token=${{ secrets.CHROMATIC_TOKEN }}
