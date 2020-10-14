@@ -13,7 +13,7 @@ export const buttonPropSize = ['m', 'xs', 's', 'l'] as const;
 export type ButtonPropSize = typeof buttonPropSize[number];
 export const buttonPropSizeDefault: ButtonPropSize = buttonPropSize[0];
 
-export const buttonPropView = ['primary', 'clear', 'ghost', 'secondary'] as const;
+export const buttonPropView = ['secondary', 'primary', 'clear', 'ghost'] as const;
 export type ButtonPropView = typeof buttonPropView[number];
 export const buttonPropViewDefault: ButtonPropView = buttonPropView[0];
 
