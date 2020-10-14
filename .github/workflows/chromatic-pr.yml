@@ -34,8 +34,6 @@ jobs:
         run: yarn --frozen-lockfile
 
       - name: chromatic pull request publish
-        uses: chromaui/action@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          projectToken: ${{ secrets.CHROMATIC_TOKEN }}
-          patchBuild: ${{ github.head_ref }}...${{ github.base_ref }}
+        run: |
+          git checkout ${{ github.head_ref }}
+          npx chromatic --project-token=${{ secrets.CHROMATIC_TOKEN }} --patch-build=${{ github.head_ref }}...${{ github.base_ref }}
