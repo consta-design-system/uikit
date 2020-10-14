@@ -16,6 +16,8 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v1
         with:
           node-version: 12
@@ -29,13 +31,7 @@ jobs:
       - name: Установка зависимостей
         run: yarn --frozen-lockfile
 
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
       - uses: chromaui/action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: ${{ secrets.CHROMATIC_TOKEN }}
-        env:
-          CHROMATIC_STORYBOOK_VERSION: react@5.3.19
