@@ -34,4 +34,6 @@ jobs:
         run: yarn --frozen-lockfile
 
       - name: chromatic pull request publish
-        run: npx chromatic --project-token=${{ secrets.CHROMATIC_TOKEN }} --patch-build=${{ github.head_ref }}...${{ github.base_ref }}
+        run: |
+          git status
+          npx chromatic --project-token=${{ secrets.CHROMATIC_TOKEN }} --patch-build=${{ github.head_ref }}...${{ github.base_ref }}
