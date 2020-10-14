@@ -38,5 +38,4 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_TOKEN }}
 
       - name: chromatic pull request publish
-        uses: chromaui/action@v1
         run: npx chromatic --project-token=${{ secrets.CHROMATIC_TOKEN }} --patch-build=${{ github.base_ref }}...${{ github.head_ref }}
