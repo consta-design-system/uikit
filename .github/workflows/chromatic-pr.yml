@@ -35,5 +35,4 @@ jobs:
 
       - name: chromatic pull request publish
         run: |
-          git checkout ${{ github.head_ref }}
-          npx chromatic --project-token=${{ secrets.CHROMATIC_TOKEN }} --patch-build=${{ github.head_ref }}...${{ github.base_ref }}
+          npx chromatic --project-token=${{ secrets.CHROMATIC_TOKEN }} --patch-build=${{ github.head_ref }}...origin/${{ github.base_ref }}
