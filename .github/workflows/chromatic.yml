@@ -19,24 +19,28 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
+
       - name: Установка yarn
         id: yarn-setup
-          run: |
+        run: |
             yarn policies set-version 1.19.1
             echo "::set-output name=cache_dir::$(yarn cache dir)"
+
       - name: Настройка кэширования зависимостей
         uses: actions/cache@v2
           with:
             path: ${{ steps.yarn-setup.outputs.cache_dir }}
-              key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-              restore-keys: |
+            key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+            restore-keys: |
                 ${{ runner.os }}-yarn-
       - name: Установка зависимостей
         run: yarn --frozen-lockfile
+
       - name: CHROMATIC
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+          
       - name: CHROMATIC 2
         uses: chromaui/action@v1
         with:
