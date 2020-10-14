@@ -29,13 +29,11 @@ jobs:
       - name: Установка зависимостей
         run: yarn --frozen-lockfile
 
-      - name: CHROMATIC
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 0
 
-      - name: CHROMATIC 2
-        uses: chromaui/action@v1
+      - uses: chromaui/action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: ${{ secrets.CHROMATIC_TOKEN }}
