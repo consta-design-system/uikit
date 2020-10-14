@@ -1,11 +1,11 @@
-name: chromatic-pr
+name: chromatic
 
 on:
   pull_request:
     branches: [dev]
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,6 +32,12 @@ jobs:
 
       - name: Установка зависимостей
         run: yarn --frozen-lockfile
+
+      - name: chromatic publish
+        uses: chromaui/action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_TOKEN }}
 
       - name: chromatic pull request publish
         run: |
