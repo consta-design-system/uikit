@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CHROMATIC
+name: chromatic
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -31,7 +31,12 @@ jobs:
       - name: Установка зависимостей
         run: yarn --frozen-lockfile
 
-      - uses: chromaui/action@v1
+      - name: chromatic branch publish
+        uses: chromaui/action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: ${{ secrets.CHROMATIC_TOKEN }}
+
+      - name: chromatic pull request publish
+        uses: chromaui/action@v1
+        run: npx chromatic --project-token=${{ secrets.CHROMATIC_TOKEN }} --patch-build=${{ github.base_ref }}...${{ github.head_ref }}
