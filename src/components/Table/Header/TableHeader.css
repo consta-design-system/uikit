@@ -1,0 +1,115 @@
+.TableHeader {
+  &-Row {
+    display: contents;
+  }
+
+  &-Cell {
+    &_level {
+      &_high {
+        .TableCell-Wrapper {
+          display: flex;
+          justify-content: center;
+        }
+
+        &.TableCell_isHeader {
+          border-bottom: none;
+        }
+
+        &:hover {
+          .TableCell-Wrapper {
+            background: unset;
+          }
+        }
+      }
+
+      &_low {
+        font-size: var(--size-text-2xs);
+      }
+    }
+
+    &:not(.TableHeader-Cell_isFirstColumn)::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--color-bg-border);
+      opacity: 0;
+      transition: opacity var(--fast-transition);
+
+      .TableHeader-Row:hover &,
+      .TableHeader-Row_withVerticalBorder & {
+        opacity: 1;
+      }
+    }
+  }
+
+  &-Buttons {
+    --half-cell-padding-horizontal: calc(var(--cell-padding-horizontal) * 0.5);
+    position: absolute;
+    top: 50%;
+    right: calc(var(--half-cell-padding-horizontal) + var(--resizer-width));
+    display: flex;
+    transform: translateY(-50%);
+  }
+
+  &-Icon {
+    opacity: 0;
+    transition: opacity var(--fast-transition);
+
+    .TableHeader-Row:hover & {
+      opacity: 0.4;
+    }
+
+    .TableHeader-Cell:hover & {
+      opacity: 1;
+    }
+
+    &_type_sort {
+      .TableHeader-Buttons_isSortingActive & {
+        opacity: 1;
+      }
+    }
+
+    &_type_filter {
+      .TableHeader-Buttons:hover:not(.TableHeader-Buttons_isFilterOpened) &,
+      .TableHeader-Buttons_isFilterActive & {
+        opacity: 1;
+      }
+    }
+  }
+
+  &-ShadowWrapper {
+    position: sticky;
+    z-index: var(--sticky-top-and-left-z);
+    top: var(--table-header-height);
+    left: 0;
+
+    grid-column: 1 / -1;
+  }
+
+  &-Shadow {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      height: var(--space-s);
+      background: linear-gradient(180deg, var(--shadow-color), transparent);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--fast-transition);
+      transform: translateY(100%);
+    }
+
+    &_show {
+      &::before {
+        opacity: 1;
+      }
+    }
+  }
+}

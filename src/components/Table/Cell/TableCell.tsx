@@ -9,7 +9,8 @@ const cnTableCell = cn('TableCell');
 
 export const verticalAligns = ['top', 'center', 'bottom'] as const;
 export type VerticalAlign = typeof verticalAligns[number];
-export type HorizontalAlign = 'left' | 'center' | 'right';
+export const horizontalAligns = ['left', 'center', 'right'] as const;
+export type HorizontalAlign = typeof horizontalAligns[number];
 
 type Props = {
   column: TableColumn<TableRow> & {
@@ -27,6 +28,7 @@ type Props = {
   | {
       type: 'header';
       isSticky?: boolean;
+      isResized?: boolean;
     }
   | {
       type: 'content';
@@ -55,7 +57,7 @@ const getCellClasses = (props: Props): string => {
     {
       showVerticalShadow,
       isSticky: column.isSticky,
-      isResized: column.isResized,
+      isResized: props.type === 'header' ? props.isResized : column.isResized,
       isSortable: column.sortable,
       isHeader: props.type === 'header',
       isResizer: props.type === 'resizer',

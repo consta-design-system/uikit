@@ -38,10 +38,6 @@
     border-bottom: var(--table-border);
   }
 
-  &-HeaderRow {
-    display: contents;
-  }
-
   &-CellsRow {
     display: contents;
   }
@@ -54,24 +50,6 @@
     background-color: var(--color-bg-default);
 
     grid-column: 1 / -1;
-  }
-
-  &-HeaderCell {
-    &:not(:first-child)::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      width: 1px;
-      background: var(--color-bg-border);
-      opacity: 0;
-      transition: opacity var(--fast-transition);
-
-      .Table-HeaderRow:hover & {
-        opacity: 1;
-      }
-    }
   }
 
   &-ContentCell {
@@ -100,71 +78,5 @@
     padding-top: var(--cell-padding-vertical);
     padding-bottom: var(--cell-padding-vertical);
     text-align: center;
-  }
-
-  &-Buttons {
-    --half-cell-padding-horizontal: calc(var(--cell-padding-horizontal) * 0.5);
-    position: absolute;
-    top: 50%;
-    right: calc(var(--half-cell-padding-horizontal) + var(--resizer-width));
-    display: flex;
-    transform: translateY(-50%);
-  }
-
-  &-Icon {
-    opacity: 0;
-    transition: opacity var(--fast-transition);
-
-    .Table-HeaderRow:hover & {
-      opacity: 0.4;
-    }
-
-    .Table-HeaderCell:hover & {
-      opacity: 1;
-    }
-
-    &_type_sort {
-      .Table-Buttons_isSortingActive & {
-        opacity: 1;
-      }
-    }
-
-    &_type_filter {
-      .Table-Buttons:hover:not(.Table-Buttons_isFilterOpened) &,
-      .Table-Buttons_isFilterActive & {
-        opacity: 1;
-      }
-    }
-  }
-
-  &-HeaderShadowWrapper {
-    position: sticky;
-    z-index: var(--sticky-top-and-left-z);
-    top: var(--table-header-height);
-    left: 0;
-
-    grid-column: 1 / -1;
-  }
-
-  &-HeaderShadow {
-    position: relative;
-
-    &::before {
-      content: '';
-      position: absolute;
-      right: 0;
-      left: 0;
-      bottom: 0;
-      height: var(--space-s);
-      background: linear-gradient(180deg, var(--shadow-color), transparent);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity var(--fast-transition);
-      transform: translateY(100%);
-
-      .Table_showHorizontalCellShadow & {
-        opacity: 1;
-      }
-    }
   }
 }

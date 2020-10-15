@@ -8,6 +8,7 @@ const cnTableResizer = cn('TableResizer');
 
 type Props = {
   height: number;
+  top: number;
   isVisible?: boolean;
   onResize: (delta: number) => void;
   onDoubleClick: () => void;
@@ -55,7 +56,7 @@ export class TableResizer extends React.Component<Props, { isDragging: boolean }
           isVisible: this.props.isVisible,
         })}
         aria-hidden
-        style={{ height: this.props.height }}
+        style={{ height: this.props.height, top: this.props.top }}
         onMouseDown={this.onMouseDown}
         onDoubleClick={this.props.onDoubleClick}
       />
