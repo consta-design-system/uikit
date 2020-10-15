@@ -80,6 +80,7 @@ export type Props<T extends TableRow> = {
   borderBetweenColumns?: boolean;
   emptyRowsPlaceholder?: React.ReactNode;
   className?: string;
+  onRowHover?: ({ id, event }: { id: string | undefined; event: React.MouseEvent }) => void;
 };
 
 export type SortingState<T extends TableRow> = {
@@ -111,6 +112,7 @@ export const Table = <T extends TableRow>({
   borderBetweenColumns = false,
   emptyRowsPlaceholder = defaultEmptyRowsPlaceholder,
   className,
+  onRowHover,
 }: Props<T>): React.ReactElement => {
   const [resizedColumnWidths, setResizedColumnWidths] = React.useState<ColumnWidth[]>(
     columns.map((column) => column.width),
@@ -403,7 +405,12 @@ export const Table = <T extends TableRow>({
         filteredData.map((row, rowIdx) => {
           const nth = (rowIdx + 1) % 2 === 0 ? 'even' : 'odd';
           return (
-            <div key={row.id} className={cnTable('CellsRow', { nth })}>
+            <div
+              key={row.id}
+              className={cnTable('CellsRow', { nth })}
+              onMouseEnter={(event) => onRowHover && onRowHover({ id: row.id, event })}
+              onMouseLeave={(event) => onRowHover && onRowHover({ id: undefined, event })}
+            >
               {columnsWithMetaData.map((column, columnIdx) => (
                 <TableCell
                   type="content"
