@@ -29,6 +29,8 @@
 
   &_view {
     &_bordered {
+      background-color: var(--color-bg-default);
+
       border-left: var(--space-xs) solid var(--informer-status-color);
 
       /* DOTO: Надо вынести */
