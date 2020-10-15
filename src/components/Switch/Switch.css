@@ -1,7 +1,6 @@
 .Switch {
   position: relative;
   display: inline-flex;
-  align-items: center;
   font-family: var(--font-primary);
   cursor: pointer;
 
@@ -52,6 +51,7 @@
     cursor: pointer;
     transition: background-color 0.15s, border-color 0.15s;
     -webkit-appearance: none;
+    flex-shrink: 0;
 
     &::before {
       content: '';
@@ -117,6 +117,20 @@
 
     .Switch-Input:disabled ~ .Switch-Label {
       color: var(--color-control-typo-disable);
+    }
+  }
+
+  &_align {
+    &_center {
+      align-items: center;
+    }
+
+    &_top {
+      align-items: top;
+
+      .Switch-Input {
+        margin-top: 1px;
+      }
     }
   }
 }

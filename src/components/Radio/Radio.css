@@ -1,7 +1,6 @@
 .Radio {
   position: relative;
   display: inline-flex;
-  align-items: center;
   font-family: var(--font-sans);
   cursor: pointer;
 
@@ -16,6 +15,7 @@
     cursor: pointer;
     transition: border-color 0.15s, background-color 0.15s;
     -webkit-appearance: none;
+    flex-shrink: 0;
 
     &::before {
       content: '';
@@ -80,6 +80,20 @@
 
     .Radio-Input:disabled ~ .Radio-Label {
       color: var(--color-control-typo-disable);
+    }
+  }
+
+  &_align {
+    &_center {
+      align-items: center;
+    }
+
+    &_top {
+      align-items: top;
+
+      .Radio-Input {
+        margin-top: var(--space-3xs);
+      }
     }
   }
 }

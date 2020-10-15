@@ -1,7 +1,6 @@
 .Checkbox {
   position: relative;
   display: inline-flex;
-  align-items: center;
   font-family: var(--font-sans);
   cursor: pointer;
 
@@ -125,6 +124,20 @@
 
     .Checkbox-Input:disabled ~ .Checkbox-Label {
       color: var(--color-control-typo-disable);
+    }
+  }
+
+  &_align {
+    &_center {
+      align-items: center;
+    }
+
+    &_top {
+      align-items: top;
+
+      .Checkbox-Input {
+        margin-top: var(--space-3xs);
+      }
     }
   }
 }

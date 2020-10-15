@@ -10,6 +10,10 @@ export const radioPropSize = ['m', 'l'] as const;
 export type RadioPropSize = typeof radioPropSize[number];
 export const radioPropSizeDefault: RadioPropSize = radioPropSize[0];
 
+export const radioPropAlign = ['center', 'top'] as const;
+export type RadioPropAlign = typeof radioPropAlign[number];
+export const radioPropAlignDefault: RadioPropAlign = radioPropAlign[0];
+
 export type RadioPropOnChange = (object: {
   e: React.ChangeEvent<HTMLInputElement>;
   checked: boolean;
@@ -18,6 +22,7 @@ export type RadioPropOnChange = (object: {
 export type Props = {
   checked: boolean | undefined;
   size?: RadioPropSize;
+  align?: RadioPropAlign;
   disabled?: boolean;
   className?: string;
   label?: string;
@@ -43,6 +48,7 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>((props, ref)
     checked = false,
     name,
     size = radioPropSizeDefault,
+    align = radioPropAlignDefault,
     disabled,
     className,
     label,
@@ -62,7 +68,7 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>((props, ref)
   };
 
   return (
-    <label {...otherProps} className={cnRadio({ size, disabled }, [className])} ref={ref}>
+    <label {...otherProps} className={cnRadio({ size, disabled, align }, [className])} ref={ref}>
       <input
         type="radio"
         name={name}
