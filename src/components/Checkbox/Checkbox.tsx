@@ -10,6 +10,10 @@ export const checkboxPropSize = ['m', 'l'] as const;
 export type CheckboxPropSize = typeof checkboxPropSize[number];
 export const checkboxPropSizeDefault: CheckboxPropSize = checkboxPropSize[0];
 
+export const checkboxPropAlign = ['center', 'top'] as const;
+export type CheckboxPropAlign = typeof checkboxPropAlign[number];
+export const checkboxPropAlignDefault: CheckboxPropAlign = checkboxPropAlign[0];
+
 export type CheckboxPropOnChange = (object: {
   e: React.ChangeEvent<HTMLInputElement>;
   checked: boolean;
@@ -18,6 +22,7 @@ export type CheckboxPropOnChange = (object: {
 type Props = {
   checked: boolean | undefined;
   size?: CheckboxPropSize;
+  align?: CheckboxPropAlign;
   disabled?: boolean;
   intermediate?: boolean;
   label?: string;
@@ -43,6 +48,7 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>((props
     checked = false,
     name,
     size = checkboxPropSizeDefault,
+    align = checkboxPropAlignDefault,
     disabled,
     intermediate = false,
     className,
@@ -65,7 +71,7 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>((props
   return (
     <label
       {...otherProps}
-      className={cnCheckbox({ size, disabled, intermediate }, [className])}
+      className={cnCheckbox({ size, disabled, intermediate, align }, [className])}
       ref={ref}
     >
       <input

@@ -4,6 +4,7 @@ import { CheckboxExampleHead } from './examples/CheckboxExampleName/CheckboxExam
 import { CheckboxExampleHead2 } from './examples/CheckboxExampleName/CheckboxExampleName';
 import { CheckboxExampleNegation } from './examples/CheckboxExampleName/CheckboxExampleName';
 import { CheckboxExampleGeneralization } from './examples/CheckboxExampleName/CheckboxExampleName';
+import { CheckboxExampleAlign } from './examples/CheckboxExampleAlign/CheckboxExampleAlign';
 
 # Checkbox
 
@@ -21,6 +22,7 @@ import { CheckboxExampleGeneralization } from './examples/CheckboxExampleName/Ch
 - [Название](#название)
 - [Состояния](#состояния)
 - [Размер](#размер)
+- [Выравнивание](#выравнивание)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
 
@@ -66,7 +68,7 @@ import { CheckboxExampleGeneralization } from './examples/CheckboxExampleName/Ch
 
 <CheckboxExampleStatus />
 
-```ts
+```tsx
 <Checkbox label="Checkbox" />
 <Checkbox checked label="Checked" />
 <Checkbox intermediate label="Intermediate" />
@@ -80,9 +82,26 @@ import { CheckboxExampleGeneralization } from './examples/CheckboxExampleName/Ch
 
 <CheckboxExampleSize />
 
-```ts
+```tsx
 <Checkbox size="m" label="Размер M" />
 <Checkbox size="l" label="Размер L" />
+```
+
+## Выравнивание
+
+За выравнивание отвечает свойство `align`.
+
+<CheckboxExampleAlign />
+
+```tsx
+<Checkbox
+  align="center"
+  label="Длинный текст чекбокса с выравниванием по центру, записанный в несколько строк"
+/>
+<Checkbox
+  align="top"
+  label="Длинный текст чекбокса с выравниванием по верху, записанный в несколько строк"
+/>
 ```
 
 ## Свойства
@@ -91,6 +110,7 @@ import { CheckboxExampleGeneralization } from './examples/CheckboxExampleName/Ch
 | ----------------------------- | ------------------------------------------- | ------------ | ---------------------------------------------------------------------------- |
 | [`label?`](#название)         | `string`                                    | -            | Надпись рядом с чекбоксом                                                    |
 | [`size?`](#размер)            | `'m', 'l'`                                  | `'m'`        | Размер                                                                       |
+| [`align?`](#выравнивание)     | `'center', 'top'`                           | `'center'`   | Выравнивание                                                                 |
 | [`checked`](#состояния)       | `boolean`                                   | -            | Отмечает, выбран чекбокс или нет (ставит галочку)                            |
 | [`disabled?`](#состояния)     | `boolean`                                   | -            | Блокирует чекбокс                                                            |
 | [`intermediate?`](#состояния) | `boolean`                                   | -            | Делает чекбокс неопределенным                                                |
