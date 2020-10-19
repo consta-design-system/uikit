@@ -1,5 +1,24 @@
 # Changelog
 
+## v1.10.3 (19/10/2020)
+
+- [chore(CODEOWNERS): Update (#530)](https://github.com/gazprom-neft/consta-uikit/commit/e6af7331a489771dd8a90da64a5af445f9729c2c) - @nekitk
+- [feat(Selects): dropdown width equal anchor width (#486)](https://github.com/gazprom-neft/consta-uikit/commit/6ce34ff75151c5f385ce3aff1453b845bb6b4738) - @gizeasy
+- [feat(Checkbox, Radio, Switch): added alignment modifier (#522)](https://github.com/gazprom-neft/consta-uikit/commit/2839ab8f1c56e4e16a451f8d27a896124f1f1f11) - @gizeasy
+- [fix(informer) added background for view=bordered (#514)](https://github.com/gazprom-neft/consta-uikit/commit/456c8ab1869b2f76f904d55f7badaaf8a28e0ea9) - @kolebayev
+- [feat(Icons): add IconWatch (#503)](https://github.com/gazprom-neft/consta-uikit/commit/533c55cee23175d570794c1ae318b1f7ca144318) - @Shupirlik
+- [chore(chromatic): added chromatic (#510)](https://github.com/gazprom-neft/consta-uikit/commit/f0297bcb0e4b3135f02d54a00fca6762fe1e5fd3) - @gizeasy
+- [test(Checkbox): added tests (#482)](https://github.com/gazprom-neft/consta-uikit/commit/e566757c8a1ba09fdb6cb6088b19246ac729ece7) - @gizeasy
+- [test(Theme): added tests (#487)](https://github.com/gazprom-neft/consta-uikit/commit/4cd30cd77bfa04bdd5538a21d20bc1450c276179) - @gizeasy
+- [docs(Combobox): fixed onCreate story (#501)](https://github.com/gazprom-neft/consta-uikit/commit/5226621fcae9167a145034d66eeb5cd98eddc13d) - @gizeasy
+- [fix(Combobox): fixed non-uniqueness of keys in dropdown (#502)](https://github.com/gazprom-neft/consta-uikit/commit/48ed8475346efcca6ff4853b9b4bf073f7ea6289) - @gizeasy
+- [feat(Icons): add IconTrash-xs (#504)](https://github.com/gazprom-neft/consta-uikit/commit/5d0058bc4b1c8905e0e9362890bc5a2203a5f5bf) - @Shupirlik
+- [test(Timer): added tests (#505)](https://github.com/gazprom-neft/consta-uikit/commit/22d1fae0eec0a19f6f1b4b939eaaa7ff325bc0e1) - @gizeasy
+- [test(Text): added tests (#507)](https://github.com/gazprom-neft/consta-uikit/commit/bbe29b4b469e687ac42a68bbda452e65c33164cb) - @gizeasy
+- [test(Switch): added tests (#508)](https://github.com/gazprom-neft/consta-uikit/commit/938ad3e6854f84d9adea5b02327415b89b86bf84) - @gizeasy
+
+---
+
 ## v1.10.2 (08/10/2020)
 
 - [test(PortalWithTheme): added tests (#489)](https://github.com/gazprom-neft/consta-uikit/commit/dcdba60b6b651addeb5d27cffe78d802dc1c6e89) - @gizeasy
