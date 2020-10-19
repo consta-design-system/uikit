@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { fireEvent, render, RenderResult, screen } from '@testing-library/react';
 
-import ResizeObserver from '../__mocks__/ResizeObserver';
+import ResizeObserver from '../../../../__mocks__/ResizeObserver';
 import { BasicSelect, SimpleSelectProps } from '../BasicSelect';
 
 type SelectOption = {

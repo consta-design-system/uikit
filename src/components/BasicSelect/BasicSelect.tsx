@@ -15,10 +15,13 @@ import {
   DefaultPropView,
 } from '../SelectComponents/types';
 
-export type SimpleSelectProps<ITEM> = CommonSelectProps<ITEM> & {
-  value?: ITEM | null;
-  onChange?: (v: ITEM | null) => void;
-};
+type SelectContainerProps = React.ComponentProps<typeof SelectContainer>;
+
+export type SimpleSelectProps<ITEM> = CommonSelectProps<ITEM> &
+  Omit<SelectContainerProps, 'value' | 'onChange'> & {
+    value?: ITEM | null;
+    onChange?: (v: ITEM | null) => void;
+  };
 
 type Select = <ITEM>(props: SimpleSelectProps<ITEM>) => React.ReactElement | null;
 
