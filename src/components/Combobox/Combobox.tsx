@@ -18,7 +18,7 @@ import {
 type SelectContainerProps = React.ComponentProps<typeof SelectContainer>;
 
 export type ComboboxSelectProps<ITEM> = CommonSelectProps<ITEM> &
-  Omit<SelectContainerProps, 'value' | 'onChange'> & {
+  Omit<SelectContainerProps, 'value' | 'onChange' | 'children'> & {
     value?: ITEM | null;
     onChange?: (v: ITEM | null) => void;
     onCreate?(str: string): void;
