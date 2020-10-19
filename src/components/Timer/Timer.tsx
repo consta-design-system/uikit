@@ -3,22 +3,20 @@ import './Timer.css';
 import React from 'react';
 
 import { cn } from '../../utils/bem';
-import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
+import { PropsWithJsxAttributes } from '../../utils/types/PropsWithJsxAttributes';
 import { ProgressSpin } from '../ProgressSpin/ProgressSpin';
 
 export const timerPropsSize = ['m', 's'] as const;
 export type TimerPropsSize = typeof timerPropsSize[number];
 export const timerPropsSizeDefault: TimerPropsSize = timerPropsSize[0];
 
-type Props = {
+export type TimerProps = PropsWithJsxAttributes<{
   size?: TimerPropsSize;
   seconds?: number;
   progress?: number;
   animation?: boolean;
   children?: never;
-};
-
-export type TimerProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
+}>;
 
 export const cnTimer = cn('Timer');
 

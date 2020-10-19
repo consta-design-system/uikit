@@ -1,5 +1,6 @@
 import { SwitchExampleSize } from './examples/SwitchExampleSize/SwitchExampleSize';
 import { SwitchExampleStatus } from './examples/SwitchExampleStatus/SwitchExampleStatus';
+import { SwitchExampleAlign } from './examples/SwitchExampleAlign/SwitchExampleAlign';
 import {
   SwitchExampleNameEnable,
   SwitchExampleNameVerb,
@@ -14,6 +15,7 @@ import {
 - [Название](#название)
 - [Состояния](#состояния)
 - [Размер](#размер)
+- [Выравнивание](#выравнивание)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
 
@@ -51,7 +53,7 @@ import {
 
 <SwitchExampleNameNoVerb />
 
-```ts
+```tsx
   <Switch label="Тестовый режим" checked/>
   <Switch label="Темная тема" />
   <Switch label="Автоматическая трансформация" />
@@ -65,7 +67,7 @@ import {
 
 <SwitchExampleStatus />
 
-```ts
+```tsx
 <Switch label="Switch"/>
 <Switch label="Checked" checked/>
 <Switch label="Disabled" disabled />
@@ -77,10 +79,27 @@ import {
 
 <SwitchExampleSize />
 
-```ts
+```tsx
 <Switch size="s" label="Размер S" checked/>
 <Switch size="m" label="Размер М" />
 <Switch size="l" label="Размер L" />
+```
+
+## Выравнивание
+
+За выравнивание отвечает свойство `align`.
+
+<SwitchExampleAlign />
+
+```tsx
+<Switch
+  align="center"
+  label="Длинный текст переключателя с выравниванием по центру, записанный в несколько строк"
+/>
+<Switch
+  align="top"
+  label="Длинный текст переключателя с выравниванием по верху, записанный в несколько строк"
+/>
 ```
 
 ## Свойства
@@ -91,6 +110,7 @@ import {
 | ------------------------- | ------------------------------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------- |
 | [`label?`](#название)     | `string`                                                                        | -            | Текст рядом с переключателем                                                 |
 | [`size?`](#размер)        | `'s', 'm', 'l'`                                                                 | `'m'`        | Размер переключателя                                                         |
+| [`align?`](#выравнивание) | `'center', 'top'`                                                               | `'center'`   | Выравнивание                                                                 |
 | [`checked`](#состояния)   | `boolean`, `undefined`                                                          | -            | Ставит переключатель в положение **включен**                                 |
 | [`disabled?`](#состояния) | `boolean`                                                                       | -            | Делает переключатель неактивным                                              |
 | `required?`               | `boolean`                                                                       | -            | Такой переключатель обязательно нужно выбрать                                |

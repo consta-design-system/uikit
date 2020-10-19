@@ -83,6 +83,7 @@ export const PopoverPositionedByAnchorStory = createStory(
     const commonKnobs = {
       ...getCommonKnobs(),
       isInteractive: boolean('isInteractive', true),
+      equalAnchorWidth: boolean('equalAnchorWidth', false),
     };
 
     return (

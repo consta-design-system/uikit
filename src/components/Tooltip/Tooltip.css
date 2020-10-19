@@ -26,7 +26,7 @@
   &-Content {
     position: relative; /* чтобы отображаться над фоном */
     box-sizing: border-box;
-    width: max-content;
+    width: 100%;
     padding: var(--space-xs);
 
     &_size_s {

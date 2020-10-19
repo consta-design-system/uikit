@@ -2,6 +2,7 @@ import React from 'react';
 
 import { ClickOutsideHandler, useClickOutside } from '../../hooks/useClickOutside/useClickOutside';
 import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
+import { PropsWithJsxAttributes } from '../../utils/types/PropsWithJsxAttributes';
 import { PortalWithTheme } from '../PortalWithTheme/PortalWithTheme';
 import { useTheme } from '../Theme/Theme';
 
@@ -55,25 +56,29 @@ export type Position = { x: number; y: number } | undefined;
 export type PositioningProps =
   | {
       anchorRef: React.RefObject<HTMLElement>;
+      equalAnchorWidth?: boolean;
       position?: never;
     }
   | {
       anchorRef?: never;
+      equalAnchorWidth?: never;
       position: Position;
     };
 
 type ChildrenRenderProp = (direction: Direction) => React.ReactNode;
 
-export type Props = {
-  direction?: Direction;
-  spareDirection?: Direction;
-  offset?: number;
-  arrowOffset?: number;
-  possibleDirections?: readonly Direction[];
-  isInteractive?: boolean;
-  children: React.ReactNode | ChildrenRenderProp;
-  onClickOutside?: ClickOutsideHandler;
-} & PositioningProps;
+export type Props = PropsWithJsxAttributes<
+  {
+    direction?: Direction;
+    spareDirection?: Direction;
+    offset?: number;
+    arrowOffset?: number;
+    possibleDirections?: readonly Direction[];
+    isInteractive?: boolean;
+    children: React.ReactNode | ChildrenRenderProp;
+    onClickOutside?: ClickOutsideHandler;
+  } & PositioningProps
+>;
 
 const isRenderProp = (
   children: React.ReactNode | ChildrenRenderProp,
@@ -89,9 +94,13 @@ export const Popover: React.FC<Props> = (props) => {
     isInteractive = true,
     onClickOutside,
     spareDirection = 'downStartLeft',
+    style,
+    position: passedPosition,
+    anchorRef,
+    equalAnchorWidth,
+    ...otherProps
   } = props;
-  const passedPosition = 'position' in props ? props.position : undefined;
-  const anchorRef = 'anchorRef' in props ? props.anchorRef : undefined;
+
   const ref = React.useRef<HTMLDivElement>(null);
   const { theme } = useTheme();
   const [anchorClientRect, setAnchorClientRect] = React.useState<DOMRect | undefined>();
@@ -166,10 +175,13 @@ export const Popover: React.FC<Props> = (props) => {
 
   return (
     <PortalWithTheme
+      {...otherProps}
       preset={theme}
       container={window.document.body}
       ref={ref}
       style={{
+        ...style,
+        ...(equalAnchorWidth && { width: anchorSize.width }),
         pointerEvents: isInteractive ? undefined : 'none',
         position: 'absolute',
         top: (position?.y || 0) + window.scrollY,

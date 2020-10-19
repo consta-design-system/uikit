@@ -1,5 +1,6 @@
 import { RadioExampleSize } from './examples/RadioExampleSize/RadioExampleSize';
 import { RadioExampleStatus } from './examples/RadioExampleStatus/RadioExampleStatus';
+import { RadioExampleAlign } from './examples/RadioExampleAlign/RadioExampleAlign';
 import {
   RadioExampleMore,
   RadioExampleOne,
@@ -15,6 +16,7 @@ import {
 - [Как использовать](#как-использовать)
 - [Состояния](#состояния)
 - [Размер](#размер)
+- [Выравнивание](#выравнивание)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
 
@@ -51,13 +53,13 @@ import {
 
 <RadioExampleChecked />
 
-```ts
+```tsx
 <p>Как вас постричь</p>
-  <Radio label="Под бобра" checked />
-  <Radio label="В кружок" />
-  <Radio label="А ля рюс" />
-  <Radio label="С бакендардами" />
-  <Radio label="Только кончики" />
+<Radio label="Под бобра" checked />
+<Radio label="В кружок" />
+<Radio label="А ля рюс" />
+<Radio label="С бакендардами" />
+<Radio label="Только кончики" />
 ```
 
 ## Состояния
@@ -68,7 +70,7 @@ import {
 
 <RadioExampleStatus />
 
-```ts
+```tsx
 <Radio label="Radio" />
 <Radio label="Checked" checked />
 <Radio label="Disabled" disabled />
@@ -81,9 +83,26 @@ import {
 
 <RadioExampleSize />
 
-```ts
+```tsx
 <Radio size="m" label="Размер M" />
 <Radio size="l" label="Размер L" />
+```
+
+## Выравнивание
+
+За выравнивание отвечает свойство `align`.
+
+<RadioExampleAlign />
+
+```tsx
+<Radio
+  align="center"
+  label="Длинный текст радиокнопки с выравниванием по центру, записанный в несколько строк"
+/>
+<Radio
+  align="top"
+  label="Длинный текст радиокнопки с выравниванием по верху, записанный в несколько строк"
+/>
 ```
 
 ## Свойства
@@ -94,6 +113,7 @@ import {
 | ------------------------- | -------------------------------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------- |
 | [`label?`](#название)     | `string`                                                                         | —            | Текст рядом с радиокнопкой                                                   |
 | [`size?`](#размер)        | `'m', 'l'`                                                                       | `'m'`        | Размер радиокнопки                                                           |
+| [`align?`](#выравнивание) | `'center', 'top'`                                                                | `'center'`   | Выравнивание                                                                 |
 | [`checked`](#состояния)   | `boolean, undefined`                                                             | —            | Делает радиокнопку выбранной                                                 |
 | [`disabled?`](#состояния) | `boolean`                                                                        | —            | Делает радиокнопку неактивной                                                |
 | `required?`               | `boolean`                                                                        | —            | Такую радиокнопку обязательно нужно выбрать                                  |
