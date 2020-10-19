@@ -24,10 +24,11 @@ type Props = {
   isInteractive?: boolean;
   children: React.ReactNode;
   onClickOutside?: ClickOutsideHandler;
+  className?: string;
 } & PositioningProps;
 
 export const Tooltip = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
-  const { children, size, ...rest } = props;
+  const { children, size, className, ...rest } = props;
   const { themeClassNames } = useTheme();
 
   return (
@@ -35,7 +36,7 @@ export const Tooltip = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
       {(direction) => (
         <div
           ref={ref}
-          className={cnTooltip(null, [themeClassNames.color.invert])}
+          className={cnTooltip(null, [themeClassNames.color.invert, className])}
           style={{
             ['--tooltip-arrow-size' as string]: `${ARROW_SIZE}px`,
             ['--tooltip-arrow-offset' as string]: `${ARROW_OFFSET}px`,
