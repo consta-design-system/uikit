@@ -136,6 +136,7 @@ import { IconUser } from '../../IconUser/IconUser';
 import { IconVZD } from '../../IconVZD/IconVZD';
 import { IconWarning } from '../../IconWarning/IconWarning';
 import { IconWatch } from '../../IconWatch/IconWatch';
+import { IconWideScreen } from '../../IconWideScreen/IconWideScreen';
 import { IconWorld } from '../../IconWorld/IconWorld';
 
 import { IconsItem } from './Item/Icons-Item';
@@ -288,6 +289,7 @@ const icons = {
   IconVZD,
   IconWarning,
   IconWatch,
+  IconWideScreen,
   IconWorld,
 } as const;
 
