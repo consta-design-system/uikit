@@ -1,0 +1,15 @@
+.Dialog {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-2xl);
+
+  &-controls {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+
+    & > *:not(:last-child) {
+      margin-right: var(--space-xl);
+    }
+  }
+}

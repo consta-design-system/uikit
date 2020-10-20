@@ -17,7 +17,9 @@ const modalPropPosition = ['center', 'top'] as const;
 type ModalPropPosition = typeof modalPropPosition[number];
 const modalPropPositionDefault: ModalPropPosition = modalPropPosition[0];
 
-type ModalProps = {
+export const MODAL_TIMEOUT = 200;
+
+export type ModalProps = {
   isOpen?: boolean;
   onClose?: () => void;
   onOpen?: () => void;
@@ -69,7 +71,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
       unmountOnExit
       appear
       classNames={cnForCssTransition(cnModal)}
-      timeout={200}
+      timeout={MODAL_TIMEOUT}
     >
       <PortalWithTheme preset={theme} container={container}>
         {hasOverlay && <div className={cnModal('Overlay')} aria-label="Оверлэй" />}

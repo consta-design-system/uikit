@@ -1,0 +1,13 @@
+.DialogStories {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  &-content {
+    margin: 0;
+  }
+
+  & > * {
+    margin-bottom: 10px;
+  }
+}

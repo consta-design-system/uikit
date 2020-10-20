@@ -1,0 +1,100 @@
+# Dialog
+
+Dialog - диалоговое окно, наследуется от компонента Modal.
+
+## Список свойств Modal
+
+| Свойство               | Тип или варианты значения                                             | По умолчанию              |
+| ---------------------- | --------------------------------------------------------------------- | ------------------------- |
+| isOpen?                | `boolean`                                                             | -                         |
+| onClose?               | `() => void`                                                          | -                         |
+| onOpen?                | `() => void`                                                          | -                         |
+| onOverlayClick?        | `(e: React.MouseEvent) => void`                                       | -                         |
+| hasOverlay?            | `boolean`                                                             | `true`                    |
+| className?             | `string`                                                              | -                         |
+| width?                 | `'auto'`                                                              | `auto`                    |
+| position?              | `'center', 'top'`                                                     | `center`                  |
+| children?              | `React.ReactNode`                                                     | -                         |
+| container?             | `HTMLDivElement, undefined`                                           | `window.document.body`    |
+
+## Список свойст Dialog
+
+| Свойство               | Тип или варианты значения                                             | По умолчанию              |
+| ---------------------- | --------------------------------------------------------------------- | ------------------------- |
+| content?               | `React.ReactNode`                                                     | -                         |
+| onSubmit?              | `() => void`                                                          | -                         |
+| submitButtonProps?     | `Partial<ButtonProps>`                                                | -                         |
+| onCancel?              | `() => void`                                                          | -                         |
+| cancelButtonProps?     | `Partial<ButtonProps>`                                                | -                         |
+| close                  | `() => void`                                                          | -                         |
+| focusBtn?              | `'submit', 'cancel'`                                                  | 'submit'                  |
+
+## Пример использования
+### Из функции
+```ts
+Dialog.confirm({
+      content: (
+        <Text type="h1" size="xl" as="h1">
+          Нажми на кнопку
+        </Text>
+      ),
+      submitButtonProps: { label: 'ОК' },
+      cancelButtonProps: { label: 'Отмена' },
+      onSubmit: () => alert('ты нажал кнопку "Ок"'),
+      onCancel: () => alert('ты нажал кнопку "Отмена"'),
+    });
+```
+
+### Промисификация
+```ts
+ new Promise((res, rej) =>
+       Dialog.confirm({
+         content: (
+           <Text type="h1" size="xl" as="h1">
+             Нажми на кнопку
+           </Text>
+         ),
+         submitButtonProps: { label: 'ОК' },
+         cancelButtonProps: { label: 'Отмена' },
+         onSubmit: res,
+         onCancel: rej,
+       }),
+     )
+       .then(() => alert('ты нажал кнопку "Ок"'))
+       .catch(() => alert('ты нажал кнопку "Отмена"'));
+```
+
+### Как компонент
+```ts
+export function Playground() {
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const close = () => setIsModalOpen(false);
+  const onSubmit = () => alert('ты нажал кнопку "Ок"');
+  const onCancel = () => alert('ты нажал кнопку "Отмена"');
+
+  return (
+    <div>
+      <Button
+        size="m"
+        view="primary"
+        label="компонент Dialog"
+        width="default"
+        onClick={() => setIsModalOpen(true)}
+      />
+      <Dialog
+        isOpen={isModalOpen}
+        content={
+          <Text type="h1" size="xl" as="h1">
+            Нажми на кнопку
+          </Text>
+        }
+        submitButtonProps={{ label: 'ОК' }}
+        cancelButtonProps={{ label: 'Отмена' }}
+        onSubmit={onSubmit}
+        onCancel={onCancel}
+        close={close}
+      />
+    </div>
+  );
+}
+```

@@ -20,10 +20,7 @@ module.exports = {
     config.module.rules.push({
       test: /\.css$/,
       use: [
-        {
-          loader: 'style-loader',
-          options: { sourceMap: true },
-        },
+        'style-loader',
         {
           loader: 'css-loader',
           options: { sourceMap: true },
