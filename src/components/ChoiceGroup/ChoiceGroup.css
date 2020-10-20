@@ -1,8 +1,8 @@
 .ChoiceGroup {
   position: relative;
   display: inline-flex;
-  border: var(--control-border-width) solid var(--color-control-bg-border-default);
   border-radius: var(--choice-radius);
+  box-shadow: inset 0 0 0 var(--control-border-width) var(--color-control-bg-border-default);
 
   &_view {
     &_primary {
@@ -13,25 +13,13 @@
     &_ghost {
       --choice-bg-color: var(--color-control-bg-ghost);
       --choice-text-color: var(--color-control-typo-ghost);
-
-      .ChoiceGroup-Label::after {
-        border-radius: 0;
-      }
-
-      .ChoiceGroup-Label:first-child::after {
-        border-radius: var(--choice-radius) 0 0 var(--choice-radius);
-      }
-
-      .ChoiceGroup-Label:last-child::after {
-        border-radius: 0 var(--choice-radius) var(--choice-radius) 0;
-      }
     }
 
     &_secondary {
       --choice-bg-color: var(--color-control-bg-secondary);
       --choice-text-color: var(--color-control-typo-secondary);
 
-      .ChoiceGroup-Label_checked::before {
+      .ChoiceGroup-Label_checked {
         box-shadow: inset 0 0 0 1px var(--color-control-bg-border-secondary);
       }
     }
@@ -101,8 +89,9 @@
     align-items: center;
     box-sizing: border-box;
     height: var(--choice-height);
-    padding: 0 calc(var(--choice-space) + var(--control-border-width)) 0 var(--choice-space);
+    padding: 0 var(--choice-space) 0 var(--choice-space);
     color: var(--color-control-typo-default);
+    border-radius: var(--choice-radius);
     font-size: var(--choice-font-size);
     font-weight: normal;
     line-height: calc(var(--choice-height) - var(--control-border-width) * 2);
@@ -112,17 +101,6 @@
     cursor: pointer;
     transition: background-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease,
       fill 0.15s ease;
-
-    &::before {
-      content: '';
-      position: absolute;
-      z-index: -1;
-      top: calc(-1 * var(--control-border-width));
-      right: var(--control-border-width);
-      left: 0;
-      bottom: calc(-1 * var(--control-border-width));
-      border-radius: var(--choice-radius);
-    }
   }
 
   &-Input {
@@ -131,17 +109,12 @@
     appearance: none;
   }
 
-  /* Скругление углов */
-  &-Label:first-child::before {
-    left: calc(-1 * var(--control-border-width));
-  }
-
   &-Label:last-child {
     padding-right: var(--choice-space);
+  }
 
-    &::before {
-      right: calc(-1 * var(--control-border-width));
-    }
+  &-Label:not(:last-child) {
+    margin-right: var(--control-border-width);
   }
 
   /* Палочка */
@@ -168,10 +141,7 @@
 
   &-Label_checked {
     color: var(--choice-text-color);
-
-    &::before {
-      background-color: var(--choice-bg-color);
-    }
+    background-color: var(--choice-bg-color);
 
     & + .ChoiceGroup-Label::after {
       background-color: transparent;
