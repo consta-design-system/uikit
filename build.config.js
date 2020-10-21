@@ -7,7 +7,6 @@ module.exports = {
     'src/**/*.stories/**',
     'src/**/*.stories.*',
     'src/components/ScrollExample/**',
-    'src/icons/createIcon/**',
     'src/fileIcons/createFileIcon/**',
     'src/uiKit/**',
     'src/**/__tests__/**',
