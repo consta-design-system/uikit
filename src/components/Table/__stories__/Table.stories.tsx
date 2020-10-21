@@ -4,14 +4,16 @@ import React from 'react';
 import { boolean, number, object, select, text } from '@storybook/addon-knobs';
 
 import { tableData, tableWithBagdeData } from '../__mock__/data.mock';
+import { IconCopy } from '../../../icons/IconCopy/IconCopy';
 import { updateAt } from '../../../utils/array';
 import { cn } from '../../../utils/bem';
 import { createMetadata, createStory } from '../../../utils/storybook';
+import { Button } from '../../Button/Button';
 import { Checkbox } from '../../Checkbox/Checkbox';
 import { Text } from '../../Text/Text';
 import { verticalAligns } from '../Cell/TableCell';
 import { Filters } from '../filtering';
-import { Props, sizes, Table, TableRow, zebraStriped } from '../Table';
+import { Props, sizes, Table, TableColumn, TableRow, zebraStriped } from '../Table';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
@@ -150,6 +152,41 @@ const WithCheckboxHeaderContent = (): JSX.Element => {
   );
 };
 
+const WithOnRowHoverContent = (): JSX.Element => {
+  const [hoveredRow, setHoveredRow] = React.useState<string | undefined>(undefined);
+  const rows: Array<TableRow> = tableData.rows.map((row) => ({
+    ...row,
+    button: (
+      <Button
+        view="ghost"
+        size="xs"
+        iconLeft={IconCopy}
+        onlyIcon
+        style={{ visibility: hoveredRow === row.id ? 'initial' : 'hidden' }}
+      />
+    ),
+  }));
+
+  const columns: Array<TableColumn<TableRow>> = [
+    {
+      title: 'Появится кнопка при наведении',
+      accessor: 'button',
+      align: 'center',
+      width: 120,
+    },
+    ...tableData.columns,
+  ];
+
+  return (
+    <Table
+      {...getKnobs()}
+      columns={columns}
+      rows={rows}
+      onRowHover={({ id }) => setHoveredRow(id)}
+    />
+  );
+};
+
 export const WithCheckboxHeader = createStory(() => <WithCheckboxHeaderContent />, {
   name: 'с Checkbox в шапке',
 });
@@ -166,6 +203,10 @@ export const WithCustomRowsPlaceholder = createStory(
     name: 'со своим текстом если данных нет',
   },
 );
+
+export const WithOnRowHover = createStory(() => <WithOnRowHoverContent />, {
+  name: 'с наведением на строку',
+});
 
 export default createMetadata({
   title: 'Components|/Table',
