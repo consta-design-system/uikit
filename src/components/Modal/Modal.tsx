@@ -64,7 +64,13 @@ export const Modal: React.FC<ModalProps> = (props) => {
   }, [isOpen]);
 
   return (
-    <CSSTransition in={isOpen} unmountOnExit classNames={cnForCssTransition(cnModal)} timeout={200}>
+    <CSSTransition
+      in={isOpen}
+      unmountOnExit
+      appear
+      classNames={cnForCssTransition(cnModal)}
+      timeout={200}
+    >
       <PortalWithTheme preset={theme} container={container}>
         {hasOverlay && <div className={cnModal('Overlay')} aria-label="Оверлэй" />}
         <div className={cnModal('Window', { width, position }, [className])} ref={ref} {...rest}>
