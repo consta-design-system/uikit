@@ -1,1 +1,93 @@
 # Icon
+
+## Свойства
+
+| Свойство     | Тип                                                                               | По умолчанию | Описание                                  |
+| ------------ | --------------------------------------------------------------------------------- | ------------ | ----------------------------------------- |
+| `size?`      | `'xs', 's', 'm'`                                                                  | `'m'`        | Размер                                    |
+| `view?`      | `'alert', 'brand', 'ghost', 'link', 'primary', 'secondary', 'success', 'warning'` | -            | Вид                                       |
+| `className?` | `string`                                                                          | -            | Дополнительный CSS-класс                  |
+| `ref?`       | `React.Ref<HTMLSpanElement>`                                                      | -            | Ссылка на корневой DOM-элемент компонента |
+
+## Создание своих иконок
+
+Компоненты **CONSTA** принимать иконки определенного типа, чтобы ваши иконки совпадали этому типу,
+воспользуйтесть функцией `createIcon`.
+
+```tsx
+import { createIcon } from '@consta/uikit/createIcon';
+
+import IconAddSizeM from './IconAdd_size_m';
+import IconAddSizeS from './IconAdd_size_s';
+import IconAddSizeXs from './IconAdd_size_xs';
+
+export const IconAdd = createIcon({
+  m: IconAddSizeM,
+  s: IconAddSizeS,
+  xs: IconAddSizeXs,
+  name: 'IconAdd',
+});
+```
+
+Требование к SVG:
+
+- Должны отсутствовать атрибуты: `fill`, `width`, `height`,
+
+#### Если есть только один размер иконки
+
+Ни чего страшного в том если у вас нет разных иконок под каждый размер,
+просто укажите одну иконку во всех размерах
+
+```tsx
+import { createIcon } from '@consta/uikit/createIcon';
+
+import IconAddSizeM from './IconAdd_size_m';
+
+export const IconAdd = createIcon({
+  m: IconAddSizeM,
+  s: IconAddSizeM,
+  xs: IconAddSizeM,
+  name: 'IconAdd',
+});
+```
+
+#### Если иконки автоматически собираются из SVG в Компоненты
+
+Если у вас уже настроенна сборка так что из собираются из SVG в Компоненты,
+вы можете добавить в конфигурацию `createIcon`, к примеру webpack с сборкой иконок через SVGR:
+
+```jsx
+{
+    test: /\.svg$/,
+    use: [
+        {
+            loader: '@svgr/webpack',
+            options: {
+                template: (
+                    { template },
+                    opts,
+                    { imports, componentName, props, jsx, exports },
+                ) => {
+                    return template.ast`
+                        ${imports}
+                        import { createIcon } from '@consta/uikit/createIcon';
+
+                        const SvgComponent = (${props}) => {
+                          return ${jsx};
+                        };
+
+                        const ${componentName} = createIcon({
+                          m: SvgComponent,
+                          s: SvgComponent,
+                          xs: SvgComponent,
+                          name: '${componentName}',
+                        });
+
+                        export default ${componentName};
+                  `;
+                },
+            },
+        },
+    ],
+},
+```
