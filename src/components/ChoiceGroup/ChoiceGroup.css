@@ -90,6 +90,7 @@
     overflow: hidden;
     justify-content: center;
     align-items: center;
+    flex-grow: 1;
     box-sizing: border-box;
     height: var(--choice-height);
     padding: 0 var(--choice-space) 0 var(--choice-space);
@@ -102,8 +103,6 @@
     cursor: pointer;
     transition: background-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease,
       fill 0.15s ease;
-    flex-grow: 1;
-    flex-shrink: 1;
   }
 
   &-Input {
