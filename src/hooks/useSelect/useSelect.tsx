@@ -10,6 +10,7 @@ type State = {
   resolvedSearchValue: string;
   isOpen: boolean;
   highlightedIndex: number;
+  scrollToHighlighted: boolean;
 };
 
 type Action = string;
@@ -82,7 +83,7 @@ type UseSelectResult<T> = {
   removeValue?: SetHandler<T>;
   setOpen(isOpen: boolean): void;
   setSearch?(value: string): void;
-  highlightIndex(index: IndexForHighlight): void;
+  highlightIndex(index: IndexForHighlight, scrollToHighlighted: boolean): void;
   // Prop Getters
   getToggleProps(props?: ToggleProps): GetTogglePropsResult;
   getOptionProps(props: OptionProps): GetOptionPropsResult;
@@ -99,6 +100,7 @@ const initialState = {
   resolvedSearchValue: '',
   isOpen: false,
   highlightedIndex: 0,
+  scrollToHighlighted: false,
 };
 
 function useHoistedState(initialState: State): [State, (updater: Updater, action: Action) => void] {
@@ -132,7 +134,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   } = params;
   const value = params.value ?? [];
   const [
-    { searchValue, isOpen, highlightedIndex, resolvedSearchValue },
+    { searchValue, isOpen, highlightedIndex, resolvedSearchValue, scrollToHighlighted },
     setState,
   ] = useHoistedState(initialState);
 
@@ -260,7 +262,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   });
 
   const highlightIndex = React.useCallback(
-    (indexForHighlight: IndexForHighlight) => {
+    (indexForHighlight: IndexForHighlight, scrollToHighlighted) => {
       setState((old) => {
         return {
           ...old,
@@ -273,6 +275,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
             ),
             filteredOptions.length - 1,
           ),
+          scrollToHighlighted,
         };
       }, actions.highlightIndex);
     },
@@ -331,13 +334,13 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   const ArrowUp: KeyHandler = () => (_, e: React.SyntheticEvent): void => {
     e.preventDefault();
     !disabled && setOpen(true);
-    highlightIndex((old) => old - 1);
+    highlightIndex((old) => old - 1, true);
   };
 
   const ArrowDown: KeyHandler = () => (_, e: React.SyntheticEvent): void => {
     e.preventDefault();
     !disabled && setOpen(true);
-    highlightIndex((old) => old + 1);
+    highlightIndex((old) => old + 1, true);
   };
 
   const Enter: KeyHandler = () => (_, e: React.KeyboardEvent): void => {
@@ -434,13 +437,12 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
       ...rest,
       onClick: (e: React.SyntheticEvent): void => {
         selectIndex(index);
-
         if (typeof onClick === 'function') {
           onClick(e);
         }
       },
       onMouseEnter: (e: React.SyntheticEvent): void => {
-        highlightIndex(index);
+        highlightIndex(index, false);
         if (typeof onMouseEnter === 'function') {
           onMouseEnter(e);
         }
@@ -469,13 +471,13 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   // When searching, activate the first option
   React.useEffect(() => {
     const currentHighlightIndex = getSelectedOptionIndex();
-    highlightIndex(currentHighlightIndex);
+    highlightIndex(currentHighlightIndex, true);
   }, [highlightIndex]);
 
   // When we open and close the options, set the highlightedIndex to 0
   React.useEffect(() => {
     const currentHighlightIndex = getSelectedOptionIndex();
-    highlightIndex(currentHighlightIndex);
+    highlightIndex(currentHighlightIndex, true);
 
     if (!isOpen && onBlurRef.current && onBlurRef.current.event) {
       onBlurRef.current.cb(onBlurRef.current.event);
@@ -485,7 +487,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
 
   // When the highlightedIndex changes, scroll to that item
   React.useEffect(() => {
-    if (filteredOptions.length > 0) {
+    if (filteredOptions.length > 0 && scrollToHighlighted) {
       scrollToIndexRef.current && scrollToIndexRef.current(highlightedIndex);
     }
   }, [highlightedIndex]);
