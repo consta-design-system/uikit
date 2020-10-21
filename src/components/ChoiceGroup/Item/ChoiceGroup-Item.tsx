@@ -38,7 +38,7 @@ export const ChoiceGroupItem: React.FC<Props> = (props) => {
         name={name}
       />
       {Icon && <Icon className={cnChoiceGroup('Icon')} size={iconSize} />}
-      {!onlyIcon && label}
+      {!onlyIcon && <span className={cnChoiceGroup('Text')}>{label}</span>}
     </label>
   );
 };

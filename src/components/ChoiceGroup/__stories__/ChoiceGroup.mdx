@@ -3,6 +3,7 @@ import { ChoiceGroupExampleView } from './examples/ChoiceGroupExampleView/Choice
 import { ChoiceGroupExampleForm } from './examples/ChoiceGroupExampleForm/ChoiceGroupExampleForm';
 import { ChoiceGroupExampleSize } from './examples/ChoiceGroupExampleSize/ChoiceGroupExampleSize';
 import { ChoiceGroupExampleText } from './examples/ChoiceGroupExampleText/ChoiceGroupExampleText';
+import { ChoiceGroupExampleWidth } from './examples/ChoiceGroupExampleWidth/ChoiceGroupExampleWidth';
 import {
   ChoiceGroupExampleOne,
   ChoiceGroupExampleMultiple,
@@ -23,6 +24,8 @@ import {
 
 Занимает больше места, зато по элементам проще попасть, чем по радиокнопкам
 или чекбоксам.
+
+Не рекомендуется использовать в одной группе **больше шести** кнопок.
 
 > Не используйте ChoiceGroup для навигации верхнего уровня, например, в шапке сайта
 
@@ -91,6 +94,12 @@ import {
 За размер компонента отвечает свойство `size`. Варианты: `'xs', 's', 'm', 'l'`.
 
 <ChoiceGroupExampleSize />
+
+### Группа кнопок в ширину блока
+
+Используется для поддержания области формы или отделения наследуемых частей формы от основных.
+
+<ChoiceGroupExampleWidth />
 
 ## Свойства
 

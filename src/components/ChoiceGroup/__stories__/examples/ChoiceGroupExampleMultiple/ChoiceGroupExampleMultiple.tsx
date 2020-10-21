@@ -6,7 +6,7 @@ import { ChoiceGroup } from '../../../ChoiceGroup';
 
 type Item = string;
 
-const items: Item[] = ['один', 'два', 'три', 'четыре', 'пять', 'шесть', 'семь'];
+const items: Item[] = ['один', 'два', 'три', 'четыре', 'пять', 'шесть'];
 
 export const ChoiceGroupExampleOne = () => {
   const [value, setValue] = useState<Item | null>(items[0]);

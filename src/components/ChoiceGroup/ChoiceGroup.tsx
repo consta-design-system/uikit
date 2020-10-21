@@ -22,6 +22,10 @@ export const choiceGroupViews = ['primary', 'ghost', 'secondary'] as const;
 export type ChoiceGroupPropView = typeof choiceGroupViews[number];
 export const choiceGroupDefaultView: ChoiceGroupPropView = 'primary';
 
+export const choiceGroupWidth = ['default', 'full'] as const;
+export type СhoiceGroupPropWidth = typeof choiceGroupWidth[number];
+export const choiceGroupWidthDefault: СhoiceGroupPropWidth = choiceGroupWidth[0];
+
 export type ChoiceGroupPropGetLabel<ITEM> = (item: ITEM) => string | number;
 export type ChoiceGroupPropGetIcon<ITEM> = (item: ITEM) => React.FC<IconProps> | undefined;
 
@@ -29,6 +33,7 @@ type CommonProps<ITEM> = {
   size?: ChoiceGroupPropSize;
   form?: ChoiceGroupPropForm;
   view?: ChoiceGroupPropView;
+  width?: СhoiceGroupPropWidth;
   onlyIcon?: boolean;
   iconSize?: IconPropSize;
   items: ITEM[];
@@ -71,6 +76,7 @@ export const ChoiceGroup: ChoiceGroup = React.forwardRef<HTMLDivElement, Props>(
     size = choiceGroupDefaultSize,
     form = choiceGroupDefaultForm,
     view = choiceGroupDefaultView,
+    width = choiceGroupWidthDefault,
     onlyIcon,
     iconSize: iconSizeProp,
     value,
@@ -100,7 +106,7 @@ export const ChoiceGroup: ChoiceGroup = React.forwardRef<HTMLDivElement, Props>(
     <div
       {...otherProps}
       ref={ref}
-      className={cnChoiceGroup({ size, form, view, onlyIcon }, [className])}
+      className={cnChoiceGroup({ size, form, view, width, onlyIcon }, [className])}
     >
       {items.map((item: unknown) => (
         <ChoiceGroupItem
