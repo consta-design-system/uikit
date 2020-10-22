@@ -15,6 +15,8 @@ import {
   choiceGroupForms,
   choiceGroupSizes,
   choiceGroupViews,
+  choiceGroupWidth,
+  choiceGroupWidthDefault,
 } from '../ChoiceGroup';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
@@ -43,6 +45,7 @@ const items = [
 
 const defaultKnobs = () => ({
   multiple: boolean('multiple', false),
+  width: select('width', choiceGroupWidth, choiceGroupWidthDefault),
   size: select('size', choiceGroupSizes, choiceGroupDefaultSize),
   view: select('view', choiceGroupViews, choiceGroupDefaultView),
   form: select('form', choiceGroupForms, choiceGroupDefaultForm),
@@ -55,7 +58,7 @@ const cnChoiceGroupStories = cn('ChoiceGroupStories');
 export function Playground() {
   const [valueMultiple, setValueMultiple] = useState<Item[] | null>(null);
   const [value, setValue] = useState<Item | null>(null);
-  const { multiple, size, view, form, withIcon, onlyIcon } = defaultKnobs();
+  const { multiple, size, view, width, form, withIcon, onlyIcon } = defaultKnobs();
 
   const getIcon = withIcon ? (item: Item) => item.icon : undefined;
   const getLabel = (item: Item) => item.name;
@@ -75,6 +78,7 @@ export function Playground() {
             multiple
             size={size}
             view={view}
+            width={width}
             form={form}
             onlyIcon={onlyIcon}
             getIcon={getIcon}
@@ -89,6 +93,7 @@ export function Playground() {
             multiple={false}
             size={size}
             view={view}
+            width={width}
             form={form}
             onlyIcon={onlyIcon}
             getIcon={getIcon}
