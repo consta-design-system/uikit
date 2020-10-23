@@ -1,10 +1,14 @@
-import { COLUMNS, TRANSFORMED_COLUMNS } from '../__mock__/data.mock';
+import React from 'react';
+import { act, renderHook } from '@testing-library/react-hooks';
+
+import { COLUMNS, generateData, TRANSFORMED_COLUMNS } from '../__mock__/data.mock';
 import {
   getColumnLeftOffset,
   getColumnsSize,
   getMaxLevel,
   getNewSorting,
   transformColumns,
+  useLazyLoadData,
 } from '../helpers';
 import { TableColumn, TableRow } from '../Table';
 
@@ -99,5 +103,30 @@ describe('transformColumns', () => {
     );
 
     expect(result).toEqual(TRANSFORMED_COLUMNS);
+  });
+});
+
+describe('useLazyLoadData', () => {
+  const data = generateData(500, 5);
+  const { result } = renderHook(() => useLazyLoadData(210, window, true));
+
+  it('отрезает часть массива видимых строк от исходного массива', () => {
+    let slicedRows: TableRow[] = [];
+
+    act(() => {
+      slicedRows = result.current.getSlicedRows(data.rows);
+    });
+
+    expect(slicedRows).toEqual(data.rows.slice(0, 210));
+  });
+
+  it('проставляет рефы необходимым ячейкам', () => {
+    let cellRef: React.RefObject<HTMLDivElement> | undefined | null = null;
+
+    act(() => {
+      cellRef = result.current.setBoundaryRef(0, 140);
+    });
+
+    expect(cellRef).not.toEqual(null);
   });
 });
