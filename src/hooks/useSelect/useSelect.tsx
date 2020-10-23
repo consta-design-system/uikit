@@ -173,12 +173,15 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   >();
   filterFnRef.current = (options: T[], searchValue: string): Option<typeof options[0]>[] => {
     if (typeof getOptionLabel === 'function') {
+      const searchValueLowerCase = searchValue.toLowerCase();
+
       const tempOptions = originalOptions
-        .filter((option) => option.label.toLowerCase().includes(searchValue.toLowerCase()))
-        .sort((a) => {
-          return a.label.toLowerCase().indexOf(searchValue.toLowerCase());
-        });
-      // }
+        .filter((option) => option.label.toLowerCase().includes(searchValueLowerCase))
+        .sort((a) => a.label.toLowerCase().indexOf(searchValueLowerCase));
+
+      const matchWithValueSearch = Boolean(
+        originalOptions.find((option) => option.label.toLowerCase() === searchValueLowerCase),
+      );
 
       const optionForCreate = ({
         label: searchValue,
@@ -186,7 +189,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
         optionForCreate: true,
       } as unknown) as Option<typeof options[0]>;
 
-      return typeof onCreate === 'function' && optionForCreate
+      return typeof onCreate === 'function' && !matchWithValueSearch
         ? [optionForCreate, ...tempOptions]
         : tempOptions;
     }

@@ -9,4 +9,8 @@
   outline: none;
   box-shadow: 0 2px 2px rgba(var(--color-nums-shadow), 0.04),
     0 4px 16px rgba(var(--color-nums-shadow), 0.18);
+
+  &-LabelForNotFound {
+    padding: 0 var(--space-xs);
+  }
 }

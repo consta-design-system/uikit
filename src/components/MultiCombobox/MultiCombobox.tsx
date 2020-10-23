@@ -21,6 +21,7 @@ export type MultiComboboxProps<ITEM> = CommonSelectProps<ITEM> & {
   onCreate?(str: string): void;
   getGroupOptions?(group: ITEM): ITEM[];
   labelForCreate?: string;
+  labelForNotFound?: string;
   size?: MultiComboboxPropSize;
 };
 
@@ -44,6 +45,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
     onCreate,
     getGroupOptions,
     labelForCreate = 'Добавить',
+    labelForNotFound = 'Не найдено',
     ...restProps
   } = props;
   const [isFocused, setIsFocused] = useState(false);
@@ -297,11 +299,12 @@ export const MultiCombobox: MultiComboboxType = (props) => {
           getOptionProps={getOptionProps}
           onCreate={handleCreate}
           optionsRef={optionsRef}
-          valueForCreate={inputData.value}
+          inputValue={inputData.value}
           id={id}
           hasGroup={hasGroup}
           selectedValues={arrValue}
           labelForCreate={labelForCreate}
+          labelForNotFound={labelForNotFound}
           multi
           getOptionLabel={getOptionLabel}
         />
