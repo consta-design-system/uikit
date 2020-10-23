@@ -677,6 +677,30 @@ export const TRANSFORMED_COLUMNS = [
   ],
 ];
 
+export const generateData = (rowsCount: number, columnsCount: number) => {
+  const rows = [];
+  const columns = [];
+
+  for (let i = 1; i <= columnsCount; i++) {
+    columns.push({
+      title: `заголовок ${i}`,
+      accessor: `column${i}`,
+    });
+  }
+
+  for (let i = 1; i <= rowsCount; i++) {
+    const row: { id: string; [key: string]: string } = { id: `${i}` };
+
+    for (let j = 1; j <= columnsCount; j++) {
+      row[`column${j}`] = `строка_${i} столбец_${j}`;
+    }
+
+    rows.push(row);
+  }
+
+  return { rows, columns };
+};
+
 export const SORTED_2_TIMES_ROWS = [
   {
     id: 'row3',

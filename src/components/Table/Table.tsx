@@ -113,6 +113,7 @@ export type Props<T extends TableRow> = {
   className?: string;
   onRowHover?: onRowHover;
   lazyLoad?: LazyLoad;
+  lazyLoad?: LazyLoad;
 };
 
 export type SortingState<T extends TableRow> = {
@@ -365,6 +366,16 @@ export const Table = <T extends TableRow>({
     !filters || !isSelectedFiltersPresent(selectedFilters)
       ? sortedTableData
       : filterTableData({ data: sortedTableData, filters, selectedFilters });
+
+  const { maxVisibleRows = 210, scrollableEl = tableRef.current } = lazyLoad || {};
+
+  const { getSlicedRows, setBoundaryRef } = useLazyLoadData(
+    maxVisibleRows,
+    scrollableEl,
+    !!lazyLoad,
+  );
+
+  const rowsData = getSlicedRows(filteredData);
 
   const { maxVisibleRows = 210, scrollableEl = tableRef.current } = lazyLoad || {};
 
