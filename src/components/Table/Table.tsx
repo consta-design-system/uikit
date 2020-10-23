@@ -9,11 +9,10 @@ import { IconUnsort } from '../../icons/IconUnsort/IconUnsort';
 import { sortBy, updateAt } from '../../utils/array';
 import { cn } from '../../utils/bem';
 import { isNotNil } from '../../utils/type-guards';
-import { Button } from '../Button/Button';
 import { Text } from '../Text/Text';
 
 import { HorizontalAlign, TableCell, VerticalAlign } from './Cell/TableCell';
-import { TableFilterTooltip } from './FilterTooltip/TableFilterTooltip';
+import { TableHeader } from './Header/TableHeader';
 import { TableResizer } from './Resizer/TableResizer';
 import { TableSelectedOptionsList } from './SelectedOptionsList/TableSelectedOptionsList';
 import {
@@ -21,12 +20,18 @@ import {
   FieldSelectedValues,
   Filters,
   filterTableData,
-  getOptionsForFilters,
   getSelectedFiltersList,
   isSelectedFiltersPresent,
   useSelectedFilters,
 } from './filtering';
-import { getColumnLeftOffset, getColumnsSize, getNewSorting } from './helpers';
+import {
+  getColumnLeftOffset,
+  getColumnsSize,
+  getNewSorting,
+  Header,
+  Position,
+  useHeaderData,
+} from './helpers';
 
 const cnTable = cn('Table');
 
@@ -38,7 +43,6 @@ type ZebraStriped = typeof zebraStriped[number];
 
 type TableCSSCustomProperty = {
   '--table-width': string;
-  '--table-header-height': string;
 };
 
 type ActiveRow = {
@@ -63,7 +67,21 @@ export type TableColumn<T extends TableRow> = {
   align?: HorizontalAlign;
   withoutPadding?: boolean;
   width?: ColumnWidth;
-} & ({ sortable?: false } | { sortable: true; sortByField?: RowField<T> });
+} & ({ sortable?: false } | { sortable: true; sortByField?: RowField<T> }) & {
+    columns?: Array<TableColumn<T>>;
+    position?: Position;
+  };
+
+export type ColumnMetaData = {
+  filterable: boolean;
+  isSortingActive: boolean;
+  isFilterActive: boolean;
+  isResized: boolean;
+  isSticky: boolean;
+  showResizer: boolean;
+  columnWidth: number;
+  columnLeftOffset: number;
+};
 
 export type Props<T extends TableRow> = {
   columns: Array<TableColumn<T>>;
@@ -114,8 +132,20 @@ export const Table = <T extends TableRow>({
   className,
   onRowHover,
 }: Props<T>): React.ReactElement => {
+  const {
+    headers,
+    flattenedHeaders,
+    lowHeaders,
+    headerRowsRefs,
+    headerRowsHeights,
+    resizerTopOffsets,
+  } = useHeaderData(columns);
+  const stickyColumnsGrid =
+    headers[0][stickyColumns - 1]?.position.gridIndex +
+    (headers[0][stickyColumns - 1]?.position.colSpan || 1);
+
   const [resizedColumnWidths, setResizedColumnWidths] = React.useState<ColumnWidth[]>(
-    columns.map((column) => column.width),
+    lowHeaders.map((column: TableColumn<T>) => column.width),
   );
   const [initialColumnWidths, setInitialColumnWidths] = React.useState<number[]>([]);
   const [sorting, setSorting] = React.useState<SortingState<T>>(null);
@@ -123,7 +153,6 @@ export const Table = <T extends TableRow>({
   const [tableScroll, setTableScroll] = React.useState({ top: 0, left: 0 });
   const tableRef = React.useRef<HTMLDivElement>(null);
   const columnsRefs = React.useRef<Record<number, HTMLDivElement | null>>({});
-  const firstHeaderColumnRef = React.useRef<HTMLDivElement>(null);
   const {
     selectedFilters,
     updateSelectedFilters,
@@ -139,12 +168,7 @@ export const Table = <T extends TableRow>({
   useComponentSize(tableRef);
   const tableHeight = tableRef.current?.clientHeight || 0;
   const tableWidth = tableRef.current?.clientWidth || 0;
-  /*
-    Так как настройки сетки адаптируют высоту всех ячеек строки по высоте
-    самой большой ячейки, то для расчета высоты заголовка достаточно получить
-    высоту первой ячейки.
-  */
-  const { height: tableHeaderHeight } = useComponentSize(firstHeaderColumnRef);
+
   const showVerticalCellShadow = tableScroll.left > 0;
   const showHorizontalCellShadow = tableScroll.top > 0;
   const isRowsClickable = activeRow && activeRow.onChange;
@@ -159,7 +183,11 @@ export const Table = <T extends TableRow>({
       return;
     }
 
-    setInitialColumnWidths(columnsElements.map((el) => el.getBoundingClientRect().width));
+    setInitialColumnWidths(
+      columnsElements.map((el) => {
+        return el.getBoundingClientRect().width;
+      }),
+    );
   }, [tableWidth]);
 
   const isSortedByColumn = (column: TableColumn<T>): boolean =>
@@ -194,8 +222,11 @@ export const Table = <T extends TableRow>({
     }
   };
 
-  const getStickyLeftOffset = (columnIndex: number): number | undefined => {
-    if (columnIndex >= stickyColumns) {
+  const getStickyLeftOffset = (
+    columnIndex: number,
+    topHeaderGridIndex: number,
+  ): number | undefined => {
+    if (topHeaderGridIndex >= stickyColumns) {
       return;
     }
 
@@ -247,34 +278,41 @@ export const Table = <T extends TableRow>({
     initialColumnWidths,
   });
 
-  const columnsWithMetaData = columns.map((column, columnIndex) => {
-    const resizedColumnWidth = resizedColumnWidths[columnIndex];
-    const initialColumnWidth = initialColumnWidths[columnIndex];
-    const columnWidth = resizedColumnWidth || initialColumnWidth;
-    const columnLeftOffset = getColumnLeftOffset({
-      columnIndex,
-      resizedColumnWidths,
-      initialColumnWidths,
-    });
-    const isResized = !!columnWidth && columnWidth !== initialColumnWidth;
-    const isSticky = stickyColumns > columnIndex;
-    const showResizer =
-      stickyColumns > columnIndex ||
-      stickyColumnsWidth + tableScroll.left < columnLeftOffset + columnWidth;
-    const isFilterActive = (selectedFilters[column.accessor] || []).length > 0;
+  const columnsWithMetaData = (columns: Array<Header<T>>) => {
+    return columns.map((column: Header<T>) => {
+      const columnIndex = column.position.gridIndex;
+      const resizedColumnWidth = resizedColumnWidths[columnIndex];
+      const initialColumnWidth = initialColumnWidths[columnIndex];
+      const columnWidth = resizedColumnWidth || initialColumnWidth;
+      const columnLeftOffset = getColumnLeftOffset({
+        columnIndex,
+        resizedColumnWidths,
+        initialColumnWidths,
+      });
+      const isResized = !!columnWidth && columnWidth !== initialColumnWidth;
+      const isSticky = stickyColumns > column.position!.topHeaderGridIndex;
+      const showResizer =
+        stickyColumns > columnIndex ||
+        stickyColumnsWidth + tableScroll.left < columnLeftOffset + columnWidth;
+      const isFilterActive = (selectedFilters[column.accessor] || []).length > 0;
 
-    return {
-      ...column,
-      filterable: filters && fieldFiltersPresent(filters, column.accessor),
-      isSortingActive: isSortedByColumn(column),
-      isFilterActive,
-      isResized,
-      isSticky,
-      showResizer,
-      columnWidth,
-      columnLeftOffset,
-    };
-  });
+      return {
+        ...column,
+        filterable: Boolean(filters && fieldFiltersPresent(filters, column.accessor)),
+        isSortingActive: isSortedByColumn(column),
+        isFilterActive,
+        isResized,
+        isSticky,
+        showResizer,
+        columnWidth,
+        columnLeftOffset,
+      };
+    });
+  };
+
+  const headersWithMetaData: Array<Header<T> & ColumnMetaData> = columnsWithMetaData(
+    flattenedHeaders,
+  );
 
   const tableData = sorting ? sortBy(rows, sorting.by, sorting.order) : rows;
   const filteredData =
@@ -285,7 +323,6 @@ export const Table = <T extends TableRow>({
   const tableStyle: React.CSSProperties & TableCSSCustomProperty = {
     'gridTemplateColumns': getColumnsSize(resizedColumnWidths),
     '--table-width': `${tableWidth}px`,
-    '--table-header-height': `${tableHeaderHeight}px`,
   };
 
   return (
@@ -297,7 +334,6 @@ export const Table = <T extends TableRow>({
           isResizable,
           zebraStriped,
           withBorderBottom: !filteredData.length,
-          showHorizontalCellShadow: showHorizontalCellShadow && stickyHeader,
         },
         [className],
       )}
@@ -315,87 +351,56 @@ export const Table = <T extends TableRow>({
         scrollHeight не подходило, так как в таком случае Resizer растягивал
         таблицу по высоте, поэтому от этого способа отказались.
       */}
-      {columnsWithMetaData.map((column, columnIdx) => (
-        <TableCell
-          type="resizer"
-          key={columnIdx}
-          ref={(ref: HTMLDivElement | null): void => {
-            columnsRefs.current[columnIdx] = ref;
-          }}
-          style={{
-            left: getStickyLeftOffset(columnIdx),
-          }}
-          column={column}
-          showVerticalShadow={showVerticalCellShadow}
-        >
-          {isResizable && (
-            <TableResizer
-              height={tableHeight}
-              isVisible={column.showResizer}
-              onResize={(delta): void => handleColumnResize(columnIdx, delta)}
-              onDoubleClick={(): void =>
-                updateColumnWidth(columnIdx, initialColumnWidths[columnIdx])
-              }
-            />
-          )}
-        </TableCell>
-      ))}
-      <div className={cnTable('HeaderRow')}>
-        {columnsWithMetaData.map((column, columnIdx) => (
+      {columnsWithMetaData(lowHeaders).map(
+        (column: TableColumn<T> & { showResizer: boolean }, columnIdx: number) => (
           <TableCell
-            type="header"
-            key={column.accessor}
-            ref={columnIdx === 0 ? firstHeaderColumnRef : undefined}
-            style={{ left: getStickyLeftOffset(columnIdx) }}
-            isSticky={stickyHeader}
+            type="resizer"
+            key={columnIdx}
+            ref={(ref: HTMLDivElement | null): void => {
+              columnsRefs.current[columnIdx] = ref;
+            }}
+            style={{
+              left: getStickyLeftOffset(columnIdx, columnIdx),
+            }}
             column={column}
-            className={cnTable('HeaderCell')}
             showVerticalShadow={showVerticalCellShadow}
           >
-            {column.title}
-            <div
-              className={cnTable('Buttons', {
-                isSortingActive: column.isSortingActive,
-                isFilterActive: column.isFilterActive,
-              })}
-            >
-              {column.sortable && (
-                <Button
-                  size="xs"
-                  iconSize="s"
-                  view="clear"
-                  onlyIcon
-                  onClick={(): void => handleSortClick(column)}
-                  iconLeft={getSortIcon(column)}
-                  className={cnTable('Icon', { type: 'sort' })}
-                />
-              )}
-              {filters && column.filterable && (
-                <TableFilterTooltip
-                  field={column.accessor}
-                  isOpened={visibleFilter === column.accessor}
-                  options={getOptionsForFilters(filters, column.accessor)}
-                  values={selectedFilters[column.accessor] || []}
-                  onChange={handleTooltipSave}
-                  onToggle={handleFilterTogglerClick(column.accessor)}
-                  className={cnTable('Icon', { type: 'filter' })}
-                />
-              )}
-            </div>
+            {isResizable && (
+              <TableResizer
+                height={tableHeight - resizerTopOffsets[columnIdx]}
+                top={resizerTopOffsets[columnIdx]}
+                isVisible={column.showResizer}
+                onResize={(delta): void => handleColumnResize(columnIdx, delta)}
+                onDoubleClick={(): void =>
+                  updateColumnWidth(columnIdx, initialColumnWidths[columnIdx])
+                }
+              />
+            )}
           </TableCell>
-        ))}
-      </div>
-      {/*
-        Рендерим тень заголовка отдельно чтобы избежать возможных наложений
-        теней для ячеек заголовка и ячеек прикрепленных слева.
-      */}
-      <div className={cnTable('HeaderShadowWrapper')}>
-        <div className={cnTable('HeaderShadow')} />
-      </div>
+        ),
+      )}
+      <TableHeader
+        isStickyHeader={stickyHeader}
+        headersWithMetaData={headersWithMetaData}
+        headerRowsHeights={headerRowsHeights}
+        headerRowsRefs={headerRowsRefs}
+        getStickyLeftOffset={getStickyLeftOffset}
+        stickyColumnsGrid={stickyColumnsGrid}
+        showVerticalCellShadow={showVerticalCellShadow}
+        getSortIcon={getSortIcon}
+        handleSortClick={handleSortClick}
+        handleFilterTogglerClick={handleFilterTogglerClick}
+        handleTooltipSave={handleTooltipSave}
+        filters={filters}
+        visibleFilter={visibleFilter}
+        selectedFilters={selectedFilters}
+        showHorizontalCellShadow={showHorizontalCellShadow}
+        borderBetweenColumns={borderBetweenColumns}
+      />
       {filters && isSelectedFiltersPresent(selectedFilters) && (
         <div className={cnTable('RowWithoutCells')}>
           <TableSelectedOptionsList
-            values={getSelectedFiltersList({ filters, selectedFilters, columns })}
+            values={getSelectedFiltersList({ filters, selectedFilters, columns: lowHeaders })}
             onRemove={removeSelectedFilter(filters)}
             onReset={resetSelectedFilters}
           />
@@ -411,28 +416,36 @@ export const Table = <T extends TableRow>({
               onMouseEnter={(event) => onRowHover && onRowHover({ id: row.id, event })}
               onMouseLeave={(event) => onRowHover && onRowHover({ id: undefined, event })}
             >
-              {columnsWithMetaData.map((column, columnIdx) => (
-                <TableCell
-                  type="content"
-                  key={column.accessor}
-                  style={{ left: getStickyLeftOffset(columnIdx) }}
-                  wrapperClassName={cnTable('ContentCell', {
-                    isActive: activeRow ? activeRow.id === row.id : false,
-                    isDarkned: activeRow
-                      ? activeRow.id !== undefined && activeRow.id !== row.id
-                      : false,
-                  })}
-                  onClick={handleSelectRow(row.id)}
-                  column={column}
-                  verticalAlign={verticalAlign}
-                  isClickable={!!isRowsClickable}
-                  showVerticalShadow={showVerticalCellShadow}
-                  isBorderTop={rowIdx > 0 && borderBetweenRows}
-                  isBorderLeft={columnIdx > 0 && borderBetweenColumns}
-                >
-                  {row[column.accessor]}
-                </TableCell>
-              ))}
+              {columnsWithMetaData(lowHeaders).map((column: TableColumn<T>, columnIdx: number) => {
+                return (
+                  <TableCell
+                    type="content"
+                    key={column.accessor}
+                    style={{
+                      left: getStickyLeftOffset(columnIdx, column.position!.topHeaderGridIndex),
+                    }}
+                    wrapperClassName={cnTable('ContentCell', {
+                      isActive: activeRow ? activeRow.id === row.id : false,
+                      isDarkned: activeRow
+                        ? activeRow.id !== undefined && activeRow.id !== row.id
+                        : false,
+                    })}
+                    onClick={handleSelectRow(row.id)}
+                    column={column}
+                    verticalAlign={verticalAlign}
+                    isClickable={!!isRowsClickable}
+                    showVerticalShadow={
+                      showVerticalCellShadow &&
+                      column?.position!.gridIndex + (column?.position!.colSpan || 1) ===
+                        stickyColumnsGrid
+                    }
+                    isBorderTop={rowIdx > 0 && borderBetweenRows}
+                    isBorderLeft={columnIdx > 0 && borderBetweenColumns}
+                  >
+                    {row[column.accessor]}
+                  </TableCell>
+                );
+              })}
             </div>
           );
         })

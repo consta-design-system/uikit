@@ -1,4 +1,30 @@
-import { ColumnWidth, RowField, SortingState, TableRow } from './Table';
+import React from 'react';
+
+import { isNotNil } from '../../utils/type-guards';
+
+import { ColumnWidth, RowField, SortingState, TableColumn, TableRow } from './Table';
+
+export type Position = {
+  colSpan?: number;
+  rowSpan?: number;
+  level: number;
+  gridIndex: number;
+  topHeaderGridIndex: number;
+  smallTextSize?: boolean;
+  height?: number;
+};
+
+export type Header<T extends TableRow> = TableColumn<T> & { position: Position };
+
+export type HeaderData<T extends TableRow> = {
+  headers: Array<Header<T>>[];
+  flattenedHeaders: Array<Header<T>>;
+  lowHeaders: Array<Header<T>>;
+  headerRowsRefs: React.MutableRefObject<Record<number, HTMLDivElement | null>>;
+  headerRowsHeights: Array<number>;
+  headerColumnsHeights: Array<number>;
+  resizerTopOffsets: Array<number>;
+};
 
 export const getColumnsSize = (sizes: ColumnWidth[]): string => {
   return sizes.map((s) => (s ? `${s}px` : 'minmax(min-content, 1fr)')).join(' ');
@@ -39,4 +65,155 @@ export const getNewSorting = <T extends TableRow>(
   }
 
   return null;
+};
+
+export const getMaxLevel = <T extends TableRow>(columns: Array<TableColumn<T>>) => {
+  let count = 0;
+
+  const traverse = (cols: Array<TableColumn<T>>, level = 1) => {
+    if (level > count) count = level;
+    cols.forEach((item: TableColumn<T>) => {
+      if (item.columns) {
+        traverse(item.columns, level + 1);
+      }
+    });
+  };
+
+  traverse(columns);
+
+  return count;
+};
+
+const getLastChildrenCount = <T extends TableRow>(columns: Array<TableColumn<T>>) => {
+  let count = 0;
+
+  const traverse = (cols: Array<TableColumn<T>>) => {
+    cols.forEach((item: TableColumn<T>) => {
+      if (item.columns) {
+        traverse(item.columns);
+      } else {
+        count++;
+      }
+    });
+  };
+
+  traverse(columns);
+
+  return count;
+};
+
+export const transformColumns = <T extends TableRow>(
+  columns: Array<TableColumn<T>>,
+  maxLevel: number,
+): Array<TableColumn<T> & { position: Position }>[] => {
+  const stack = [{ columns, index: 0 }];
+  const headersArr: Array<TableColumn<T> & { position: Position }>[] = [];
+
+  while (stack.length) {
+    const level = stack.length - 1;
+    const node = stack[level];
+    const item: TableColumn<T> = node.columns[node.index];
+
+    if (item) {
+      if (!headersArr[level]) headersArr[level] = [];
+      const topHeaderGridIndex = stack[0].index;
+      const prevItem = headersArr[level][headersArr[level].length - 1];
+      const gridIndex = prevItem
+        ? prevItem.position.gridIndex + (prevItem.position.colSpan || 1)
+        : 0;
+
+      const handledItem: TableColumn<T> & { position: Position } = {
+        ...item,
+        position: {
+          topHeaderGridIndex,
+          gridIndex,
+          level,
+        },
+      };
+
+      if (!handledItem.columns) {
+        handledItem.position.rowSpan = maxLevel - level;
+        headersArr[level].push(handledItem);
+        node.index++;
+      } else {
+        handledItem.position.colSpan = getLastChildrenCount(handledItem.columns);
+        headersArr[level].push(handledItem);
+        stack.push({ columns: handledItem.columns, index: 0 });
+      }
+    } else {
+      stack.pop();
+      if (stack[stack.length - 1]) stack[stack.length - 1].index++;
+    }
+  }
+
+  return headersArr;
+};
+
+/**
+ * Возвращает данные, необходимые для построения хидера таблицы
+ *
+ * @param columns - массив колонок
+ *
+ * @return {
+ *   {Array<Header<T>>[]} headers: двумерный массив заголовков, выстроенный по вертикали;
+ *   {Array<Header<T>>} flattenedHeaders: плоский массив заголовков;
+ *   {Array<Header<T>>} lowHeaders: самые нижние заголовки (по ним строятся колонки);
+ *   {Record<number, HTMLDivElement | null>} headerRowsRefs: содержит рефы на заголовки;
+ *   {Array<number>} headerRowsHeights: массив высот строк заголовков;
+ *   {Array<number>} headerColumnsHeights: массив высот колонок заголовков;
+ *   {Array<number>} resizerTopOffsets: массив отступов для компонентов Resizer;
+ * }
+ */
+export const useHeaderData = <T extends TableRow>(
+  columns: Array<TableColumn<T>>,
+): HeaderData<T> => {
+  const headerRowsRefs = React.useRef<Record<number, HTMLDivElement | null>>({});
+  const headers = transformColumns(columns, getMaxLevel(columns));
+  const headerColumnsHeights: Array<number> = Object.values(headerRowsRefs.current)
+    .filter(isNotNil)
+    .map((ref) => ref.getBoundingClientRect().height);
+  const flattenedHeaders = headers.flat().map((column, index) => ({
+    ...column,
+    position: {
+      ...column.position,
+      smallTextSize: headers.length > 1 && column.position.level === headers.length - 1,
+      height: headerColumnsHeights[index] || 0,
+    },
+  }));
+  const headerRowsHeights = headers.map((arr, index) => {
+    return Math.min.apply(
+      null,
+      flattenedHeaders
+        .filter((col: TableColumn<T> & { position: Position }) => col.position.level === index)
+        .map((item) => item.position.height),
+    );
+  });
+  const lowHeaders = flattenedHeaders
+    .filter(({ position: { colSpan } }: TableColumn<T> & { position: Position }) => !colSpan)
+    .sort((a, b) => {
+      if (a.position.topHeaderGridIndex !== b.position.topHeaderGridIndex) {
+        return a.position.topHeaderGridIndex > b.position.topHeaderGridIndex ? 1 : -1;
+      }
+      return a.position.gridIndex > b.position.gridIndex ? 1 : -1;
+    });
+
+  const resizerTopOffsets = lowHeaders.map(
+    (header: TableColumn<T> & { position: Position }, index: number) => {
+      const headerHeight = headerRowsHeights.reduce((a: number, b: number) => a + b, 0);
+      if ((header.position.rowSpan || 0) >= (lowHeaders[index + 1]?.position.rowSpan || 0)) {
+        return headerHeight - (header.position.height || 0);
+      }
+      return headerHeight - lowHeaders[index + 1]?.position.height || 0;
+    },
+  );
+
+  return {
+    headers,
+    flattenedHeaders,
+    lowHeaders,
+    headerRowsRefs,
+    headerRowsHeights,
+    headerColumnsHeights,
+    resizerTopOffsets,
+  };
 };

@@ -275,6 +275,157 @@ export const tableData: TableProps<typeof rows[number]> = {
   filters,
 };
 
+export const tableWithMultiLevelHeadersData = {
+  columns: [
+    {
+      title: 'Месторождение',
+      columns: [
+        {
+          title: 'Вес общий',
+          columns: [
+            {
+              title: 'Вес, г.',
+              accessor: 'weightG',
+              align: 'center',
+            },
+            {
+              title: 'Вес, кг.',
+              accessor: 'weightKg',
+              align: 'center',
+            },
+          ],
+        },
+        {
+          title: 'Год',
+          accessor: 'year',
+          align: 'center',
+        },
+        {
+          title: 'Распределение',
+          accessor: 'distribution',
+          align: 'left',
+        },
+      ],
+    },
+    {
+      title: 'Отправка',
+      accessor: 'dispatch',
+      align: 'left',
+    },
+    {
+      title: 'Приход',
+      accessor: 'arrival',
+      align: 'left',
+    },
+    {
+      title: 'Ответственный',
+      columns: [
+        {
+          title: 'Смена 1',
+          accessor: 'responsible1',
+          align: 'left',
+        },
+        {
+          title: 'Смена 2',
+          accessor: 'responsible2',
+          align: 'left',
+          sortable: true,
+        },
+      ],
+    },
+  ],
+  rows: [
+    {
+      id: 'row1',
+      weightG: '1.398',
+      weightKg: '~ 0',
+      year: 2007,
+      distribution: 'Отсутствует',
+      dispatch: '12.09.2020',
+      arrival: '18.09.2020',
+      responsible1: 'Иванов И.И.',
+      responsible2: 'Сидоров И.И.',
+    },
+    {
+      id: 'row2',
+      weightG: '2.398',
+      weightKg: '~ 0',
+      year: 2017,
+      distribution: 'В процессе',
+      dispatch: '1.09.2020',
+      arrival: '8.09.2020',
+      responsible1: 'Иванов П.П.',
+      responsible2: 'Петров П.П.',
+    },
+    {
+      id: 'row3',
+      weightG: '3.398',
+      weightKg: 'до 1',
+      year: 2020,
+      distribution: 'В процессе',
+      dispatch: '11.09.2020',
+      arrival: '28.10.2020',
+      responsible1: 'Сидоров С.С.',
+      responsible2: 'Иванов С.С.',
+    },
+    {
+      id: 'row4',
+      weightG: '4.398',
+      weightKg: 'до 10',
+      year: 2010,
+      distribution: 'Есть',
+      dispatch: '9.09.2020',
+      arrival: '13.09.2020',
+      responsible1: 'Петров И.И.',
+      responsible2: 'Иванов И.И.',
+    },
+    {
+      id: 'row5',
+      weightG: '1.398',
+      weightKg: '~ 0',
+      year: 2007,
+      distribution: 'Отсутствует',
+      dispatch: '12.09.2020',
+      arrival: '18.09.2020',
+      responsible1: 'Иванов И.И.',
+      responsible2: 'Сидоров И.И.',
+    },
+    {
+      id: 'row6',
+      weightG: '2.398',
+      weightKg: '~ 0',
+      year: 2017,
+      distribution: 'В процессе',
+      dispatch: '1.09.2020',
+      arrival: '8.09.2020',
+      responsible1: 'Иванов П.П.',
+      responsible2: 'Петров П.П.',
+    },
+    {
+      id: 'row7',
+      weightG: '3.398',
+      weightKg: 'до 1',
+      year: 2020,
+      distribution: 'В процессе',
+      dispatch: '11.09.2020',
+      arrival: '28.10.2020',
+      responsible1: 'Сидоров С.С.',
+      responsible2: 'Иванов С.С.',
+    },
+    {
+      id: 'row8',
+      weightG: '4.398',
+      weightKg: 'до 10',
+      year: 2010,
+      distribution: 'Есть',
+      dispatch: '9.09.2020',
+      arrival: '13.09.2020',
+      responsible1: 'Петров И.И.',
+      responsible2: 'Иванов И.И.',
+    },
+  ],
+};
+
 const badgeParams: React.ComponentProps<typeof Badge> = {
   view: 'filled',
   minified: true,
@@ -375,3 +526,151 @@ export const tableWithBagdeData: TableProps<typeof tableWithTrafficLightDataRows
     },
   ],
 };
+
+export const COLUMNS = [
+  {
+    title: 'Месторождение',
+    columns: [
+      {
+        title: 'Вес общий',
+        columns: [
+          {
+            title: 'Вес, г.',
+            accessor: 'weightG',
+            align: 'center',
+          },
+          {
+            title: 'Вес, кг.',
+            accessor: 'weightKg',
+            align: 'center',
+          },
+        ],
+      },
+      {
+        title: 'Год',
+        accessor: 'year',
+        align: 'center',
+      },
+      {
+        title: 'Распределение',
+        accessor: 'distribution',
+        align: 'left',
+      },
+    ],
+  },
+  {
+    title: 'Отправка',
+    accessor: 'dispatch',
+    align: 'left',
+  },
+  {
+    title: 'Приход',
+    accessor: 'arrival',
+    align: 'left',
+  },
+  {
+    title: 'Ответственный',
+    columns: [
+      {
+        title: 'Смена 1',
+        accessor: 'responsible1',
+        align: 'left',
+      },
+      {
+        title: 'Смена 2',
+        accessor: 'responsible2',
+        align: 'left',
+        sortable: true,
+      },
+    ],
+  },
+];
+
+export const TRANSFORMED_COLUMNS = [
+  [
+    {
+      title: 'Месторождение',
+      columns: [
+        {
+          title: 'Вес общий',
+          columns: [
+            { title: 'Вес, г.', accessor: 'weightG', align: 'center' },
+            { title: 'Вес, кг.', accessor: 'weightKg', align: 'center' },
+          ],
+        },
+        { title: 'Год', accessor: 'year', align: 'center' },
+        { title: 'Распределение', accessor: 'distribution', align: 'left' },
+      ],
+      position: { colSpan: 4, topHeaderGridIndex: 0, gridIndex: 0, level: 0 },
+    },
+    {
+      title: 'Отправка',
+      accessor: 'dispatch',
+      align: 'left',
+      position: { topHeaderGridIndex: 1, gridIndex: 4, rowSpan: 3, level: 0 },
+    },
+    {
+      title: 'Приход',
+      accessor: 'arrival',
+      align: 'left',
+      position: { topHeaderGridIndex: 2, gridIndex: 5, rowSpan: 3, level: 0 },
+    },
+    {
+      title: 'Ответственный',
+      columns: [
+        { title: 'Смена 1', accessor: 'responsible1', align: 'left' },
+        { title: 'Смена 2', accessor: 'responsible2', align: 'left', sortable: true },
+      ],
+      position: { colSpan: 2, topHeaderGridIndex: 3, gridIndex: 6, level: 0 },
+    },
+  ],
+  [
+    {
+      title: 'Вес общий',
+      columns: [
+        { title: 'Вес, г.', accessor: 'weightG', align: 'center' },
+        { title: 'Вес, кг.', accessor: 'weightKg', align: 'center' },
+      ],
+      position: { colSpan: 2, topHeaderGridIndex: 0, gridIndex: 0, level: 1 },
+    },
+    {
+      title: 'Год',
+      accessor: 'year',
+      align: 'center',
+      position: { topHeaderGridIndex: 0, gridIndex: 2, rowSpan: 2, level: 1 },
+    },
+    {
+      title: 'Распределение',
+      accessor: 'distribution',
+      align: 'left',
+      position: { topHeaderGridIndex: 0, gridIndex: 3, rowSpan: 2, level: 1 },
+    },
+    {
+      title: 'Смена 1',
+      accessor: 'responsible1',
+      align: 'left',
+      position: { topHeaderGridIndex: 3, gridIndex: 4, rowSpan: 2, level: 1 },
+    },
+    {
+      title: 'Смена 2',
+      accessor: 'responsible2',
+      align: 'left',
+      sortable: true,
+      position: { topHeaderGridIndex: 3, gridIndex: 5, rowSpan: 2, level: 1 },
+    },
+  ],
+  [
+    {
+      title: 'Вес, г.',
+      accessor: 'weightG',
+      align: 'center',
+      position: { topHeaderGridIndex: 0, gridIndex: 0, rowSpan: 1, level: 2 },
+    },
+    {
+      title: 'Вес, кг.',
+      accessor: 'weightKg',
+      align: 'center',
+      position: { topHeaderGridIndex: 0, gridIndex: 1, rowSpan: 1, level: 2 },
+    },
+  ],
+];

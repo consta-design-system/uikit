@@ -1,4 +1,12 @@
-import { getColumnLeftOffset, getColumnsSize, getNewSorting } from '../helpers';
+import { COLUMNS, TRANSFORMED_COLUMNS } from '../__mock__/data.mock';
+import {
+  getColumnLeftOffset,
+  getColumnsSize,
+  getMaxLevel,
+  getNewSorting,
+  transformColumns,
+} from '../helpers';
+import { TableColumn, TableRow } from '../Table';
 
 describe('getColumnsSize', () => {
   it('получение размера колонок', () => {
@@ -80,5 +88,16 @@ describe('getNewSorting', () => {
     const result = getNewSorting({ by: 'field', order: 'desc' }, 'field');
 
     expect(result).toEqual(null);
+  });
+});
+
+describe('transformColumns', () => {
+  it('преобразует исходный массив с любым уровнем вложенности в массив массивов 2 уровня', () => {
+    const result = transformColumns(
+      COLUMNS as Array<TableColumn<TableRow>>,
+      getMaxLevel(COLUMNS as Array<TableColumn<TableRow>>),
+    );
+
+    expect(result).toEqual(TRANSFORMED_COLUMNS);
   });
 });

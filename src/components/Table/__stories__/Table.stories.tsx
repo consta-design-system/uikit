@@ -3,7 +3,11 @@ import './Table.stories.css';
 import React from 'react';
 import { boolean, number, object, select, text } from '@storybook/addon-knobs';
 
-import { tableData, tableWithBagdeData } from '../__mock__/data.mock';
+import {
+  tableData,
+  tableWithBagdeData,
+  tableWithMultiLevelHeadersData,
+} from '../__mock__/data.mock';
 import { IconCopy } from '../../../icons/IconCopy/IconCopy';
 import { updateAt } from '../../../utils/array';
 import { cn } from '../../../utils/bem';
@@ -65,6 +69,13 @@ const getKnobs = (replacedProps?: Partial<Props<TableRow>>): Props<TableRow> => 
 export const Interactive = createStory(() => <Table {...getKnobs()} />, {
   name: 'обычная',
 });
+
+export const WithMultiLevelHeaders = createStory(
+  () => <Table {...getKnobs(tableWithMultiLevelHeadersData as Partial<Props<TableRow>>)} />,
+  {
+    name: 'с многоуровневым заголовком',
+  },
+);
 
 const WithActiveRowContent = (): JSX.Element => {
   const [activeRow, setActiveRow] = React.useState<string>();

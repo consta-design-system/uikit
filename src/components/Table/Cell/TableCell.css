@@ -25,7 +25,7 @@
   }
 
   &_isResized {
-    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   &_isClickable {
