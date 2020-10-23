@@ -4,6 +4,7 @@ import React from 'react';
 import { boolean, number, object, select, text } from '@storybook/addon-knobs';
 
 import {
+  generateData,
   tableData,
   tableWithBagdeData,
   tableWithMultiLevelHeadersData,
@@ -212,6 +213,21 @@ export const WithCustomRowsPlaceholder = createStory(
   ),
   {
     name: 'со своим текстом если данных нет',
+  },
+);
+
+export const WithBigData = createStory(
+  () => {
+    const { rows, columns } = generateData(5000, 5);
+    return (
+      <Table
+        {...getKnobs({ rows, columns })}
+        lazyLoad={{ maxVisibleRows: 210, scrollableEl: window }}
+      />
+    );
+  },
+  {
+    name: 'с большим количеством строк',
   },
 );
 

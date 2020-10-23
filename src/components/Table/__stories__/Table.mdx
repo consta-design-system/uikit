@@ -24,7 +24,7 @@ type Row = {
   id: string;
 };
 
-type Rilter = {
+type Filter = {
   id: string;
   name: string;
   field: string;
@@ -32,22 +32,23 @@ type Rilter = {
 };
 ```
 
-| Свойство              | Тип или варианты значения                           | По умолчанию | Описание                                           |
-| --------------------- | --------------------------------------------------- | ------------ | -------------------------------------------------- |
-| columns               | `Column[]`                                          | -            | Колонки таблицы                                    |
-| rows                  | `Row[]`                                             | -            | Строки таблицы                                     |
-| filters?              | `Rilter[]`                                          | -            | Список фильтров                                    |
-| size?                 | `'s', 'm', 'l'`                                     | 'l'          | Размер таблицы                                     |
-| stickyHeader?         | `boolean`                                           | false        | Зафиксированный заголовок                          |
-| stickyColumns?        | `number`                                            | 0            | Количество зафиксированных колонок                 |
-| isResizable?          | `boolean`                                           | false        | Возможность изменения размера колонок              |
-| activeRow?            | `{ id?: string; onChange: (id?: string) => void; }` | -            | Активная строка                                    |
-| verticalAlign?        | `'center', 'top', 'bottom'`                         | `'top'`      | Вертикальное выравнивание                          |
-| isZebraStriped?       | `boolean`                                           | false        | Окрашивание строк зеброй                           |
-| borderBetweenRows?    | `boolean`                                           | false        | Отображение границ между строками                  |
-| borderBetweenColumns? | `boolean`                                           | false        | Отображение границ между колонками                 |
-| emptyRowsPlaceholder? | `React.ReactNode`                                   | -            | Заглушка, отображается, когда в таблице нет данных |
-| className?            | `string`                                            | -            | Дополнительный класс                               |
+| Свойство              | Тип или варианты значения                                             | По умолчанию   | Описание                                           |
+| --------------------- | --------------------------------------------------------------------- | -------------- | -------------------------------------------------- |
+| columns               | `Column[]`                                                            | -              | Колонки таблицы                                    |
+| rows                  | `Row[]`                                                               | -              | Строки таблицы                                     |
+| filters?              | `Filter[]`                                                            | -              | Список фильтров                                    |
+| size?                 | `'s', 'm', 'l'`                                                       | 'l'            | Размер таблицы                                     |
+| stickyHeader?         | `boolean`                                                             | false          | Зафиксированный заголовок                          |
+| stickyColumns?        | `number`                                                              | 0              | Количество зафиксированных колонок                 |
+| isResizable?          | `boolean`                                                             | false          | Возможность изменения размера колонок              |
+| activeRow?            | `{ id?: string; onChange: (id?: string) => void; }`                   | -              | Активная строка                                    |
+| verticalAlign?        | `'center', 'top', 'bottom'`                                           | `'top'`        | Вертикальное выравнивание                          |
+| isZebraStriped?       | `boolean`                                                             | false          | Окрашивание строк зеброй                           |
+| borderBetweenRows?    | `boolean`                                                             | false          | Отображение границ между строками                  |
+| borderBetweenColumns? | `boolean`                                                             | false          | Отображение границ между колонками                 |
+| emptyRowsPlaceholder? | `React.ReactNode`                                                     | -              | Заглушка, отображается, когда в таблице нет данных |
+| className?            | `string`                                                              | -              | Дополнительный класс                               |
+| lazyLoad?             | `{ maxVisibleRows?: number; scrollableEl?: HTMLDivElement / Window; }`| `210, tableRef`| Строки для отображения + элемент с onScroll listener|
 
 ## Пример использования
 
@@ -114,5 +115,21 @@ const rows = [];
 
 const App = () => {
   return <Table columns={columns} rows={rows} emptyRowsPlaceholder={<Text>Пусто</Text>} />;
+};
+```
+
+### Таблица для большого количества строк
+
+По умолчанию scrollableEl - сама таблица. Для корректной работы не забыть указать её высоту, чтобы scroll listener отрабатывал правильно.
+
+```ts
+import React from 'react';
+import { Table } from '@consta/uikit/Table';
+
+const columns = [ ... ];
+const rows = [ ... ];
+
+const App = () => {
+  return <Table columns={columns} rows={rows} lazyLoad={{ maxVisibleRows: 300, scrollableEl: window }}/>;
 };
 ```

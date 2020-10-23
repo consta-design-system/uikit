@@ -217,3 +217,72 @@ export const useHeaderData = <T extends TableRow>(
     resizerTopOffsets,
   };
 };
+
+/**
+ * Возвращает 2 функции, необходимые для отображения большого количества строк в таблице
+ *
+ * @param maxVisibleRows - максимальное количество отображаемых строк в один момент времени
+ * @param scrollableEl - элемент, на который вешается scroll listener
+ * @param enabled - флаг включения данной функциональность
+ *
+ * @return {
+ *   getSlicedRows: функция, обрезающая исходный массив данных
+ *   setBoundaryRef: функция, проставляющая рефы необходимым ячейкам для вычисления границ отображения строк
+ * }
+ */
+export const useLazyLoadData = (
+  maxVisibleRows: number,
+  scrollableEl: HTMLDivElement | Window | null,
+  enabled: boolean,
+) => {
+  const [visibleStartIndex, setVisibleStartIndex] = React.useState<number>(0);
+  const cellsRefStart = React.useRef<HTMLDivElement>(null);
+  const cellsRefEnd = React.useRef<HTMLDivElement>(null);
+  const additionalRowsCount = Math.floor(maxVisibleRows / 3);
+
+  React.useEffect(() => {
+    if (!enabled) return;
+    let elHeight = 0;
+    if (scrollableEl && 'offsetHeight' in scrollableEl) {
+      elHeight = scrollableEl.offsetHeight;
+    } else if (scrollableEl && 'outerHeight' in scrollableEl) {
+      elHeight = scrollableEl.outerHeight;
+    }
+    const onScrollListener = () => {
+      if (cellsRefEnd.current && elHeight / 2 > cellsRefEnd.current.getBoundingClientRect().top) {
+        setVisibleStartIndex((prevIndex) => prevIndex + additionalRowsCount);
+      } else if (
+        cellsRefStart.current &&
+        cellsRefStart.current.getBoundingClientRect().top > elHeight / 2
+      ) {
+        setVisibleStartIndex((prevIndex) =>
+          prevIndex - additionalRowsCount < 0 ? 0 : prevIndex - additionalRowsCount,
+        );
+      }
+    };
+
+    scrollableEl?.addEventListener('scroll', onScrollListener);
+
+    return () => scrollableEl?.removeEventListener('scroll', onScrollListener);
+  }, [visibleStartIndex, scrollableEl]);
+
+  const setBoundaryRef = (columnIdx: number, rowIdx: number) => {
+    if (enabled && columnIdx === 0 && rowIdx === additionalRowsCount && visibleStartIndex > 0) {
+      return cellsRefStart;
+    }
+    if (enabled && columnIdx === 0 && rowIdx === maxVisibleRows - additionalRowsCount) {
+      return cellsRefEnd;
+    }
+    return undefined;
+  };
+
+  const getSlicedRows = (rows: TableRow[]) =>
+    !enabled || rows.length < maxVisibleRows
+      ? rows
+      : rows.slice(visibleStartIndex, visibleStartIndex + maxVisibleRows);
+
+  return {
+    getSlicedRows,
+    setBoundaryRef,
+  };
+};
