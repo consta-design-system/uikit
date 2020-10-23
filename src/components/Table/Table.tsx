@@ -31,6 +31,7 @@ import {
   Header,
   Position,
   useHeaderData,
+  useLazyLoadData,
 } from './helpers';
 
 const cnTable = cn('Table');
@@ -44,6 +45,13 @@ type ZebraStriped = typeof zebraStriped[number];
 type TableCSSCustomProperty = {
   '--table-width': string;
 };
+
+export type LazyLoad =
+  | {
+      maxVisibleRows?: number;
+      scrollableEl?: HTMLDivElement | Window;
+    }
+  | undefined;
 
 type ActiveRow = {
   id: string | undefined;
@@ -99,6 +107,7 @@ export type Props<T extends TableRow> = {
   emptyRowsPlaceholder?: React.ReactNode;
   className?: string;
   onRowHover?: ({ id, event }: { id: string | undefined; event: React.MouseEvent }) => void;
+  lazyLoad?: LazyLoad;
 };
 
 export type SortingState<T extends TableRow> = {
@@ -131,6 +140,7 @@ export const Table = <T extends TableRow>({
   emptyRowsPlaceholder = defaultEmptyRowsPlaceholder,
   className,
   onRowHover,
+  lazyLoad,
 }: Props<T>): React.ReactElement => {
   const {
     headers,
@@ -320,6 +330,16 @@ export const Table = <T extends TableRow>({
       ? tableData
       : filterTableData({ data: tableData, filters, selectedFilters });
 
+  const { maxVisibleRows = 210, scrollableEl = tableRef.current } = lazyLoad || {};
+
+  const { getSlicedRows, setBoundaryRef } = useLazyLoadData(
+    maxVisibleRows,
+    scrollableEl,
+    !!lazyLoad,
+  );
+
+  const rowsData = getSlicedRows(filteredData);
+
   const tableStyle: React.CSSProperties & TableCSSCustomProperty = {
     'gridTemplateColumns': getColumnsSize(resizedColumnWidths),
     '--table-width': `${tableWidth}px`,
@@ -406,8 +426,8 @@ export const Table = <T extends TableRow>({
           />
         </div>
       )}
-      {filteredData.length > 0 ? (
-        filteredData.map((row, rowIdx) => {
+      {rowsData.length > 0 ? (
+        rowsData.map((row, rowIdx) => {
           const nth = (rowIdx + 1) % 2 === 0 ? 'even' : 'odd';
           return (
             <div
@@ -421,6 +441,7 @@ export const Table = <T extends TableRow>({
                   <TableCell
                     type="content"
                     key={column.accessor}
+                    ref={setBoundaryRef(columnIdx, rowIdx)}
                     style={{
                       left: getStickyLeftOffset(columnIdx, column.position!.topHeaderGridIndex),
                     }}
