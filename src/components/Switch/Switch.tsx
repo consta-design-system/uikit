@@ -10,6 +10,10 @@ export const switchPropSize = ['m', 's', 'l'] as const;
 export type SwitchPropSize = typeof switchPropSize[number];
 export const switchPropSizeDefault: SwitchPropSize = switchPropSize[0];
 
+export const switchPropView = ['primary', 'ghost'] as const;
+export type SwitchPropView = typeof switchPropView[number];
+export const switchPropViewDefault: SwitchPropView = switchPropView[0];
+
 export const switchPropAlign = ['center', 'top'] as const;
 export type SwitchPropAlign = typeof switchPropAlign[number];
 export const switchPropAlignDefault: SwitchPropAlign = switchPropAlign[0];
@@ -22,6 +26,7 @@ export type SwitchPropOnChange = (object: {
 type Props = {
   checked: boolean | undefined;
   size?: SwitchPropSize;
+  view?: SwitchPropView;
   align?: SwitchPropAlign;
   disabled?: boolean;
   className?: string;
@@ -48,6 +53,7 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>((props, re
     checked = false,
     name,
     size = switchPropSizeDefault,
+    view = switchPropViewDefault,
     align = switchPropAlignDefault,
     disabled,
     className,
@@ -68,7 +74,11 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>((props, re
   };
 
   return (
-    <label {...otherProps} className={cnSwitch({ size, disabled, align }, [className])} ref={ref}>
+    <label
+      {...otherProps}
+      className={cnSwitch({ size, view, disabled, align }, [className])}
+      ref={ref}
+    >
       <input
         type="checkbox"
         name={name}
