@@ -10,7 +10,7 @@
     width: var(--box-size);
     height: var(--box-size);
     margin: 0;
-    border: var(--control-border-width) solid var(--color-control-bg-border-default);
+    border: var(--control-border-width) solid;
     border-radius: 50%;
     cursor: pointer;
     transition: border-color 0.15s, background-color 0.15s;
@@ -25,10 +25,9 @@
       box-sizing: border-box;
       width: var(--box-size);
       height: var(--box-size);
-      background-color: var(--color-control-bg-primary);
       border-radius: 50%;
       opacity: 0;
-      transition: opacity 0.15s, transform 0.15s;
+      transition: background-color 0.15s, opacity 0.15s, transform 0.15s;
       transform: scale(0, 0);
     }
   }
@@ -37,10 +36,6 @@
     margin-left: var(--offset);
     color: var(--color-control-typo-default);
     font-size: var(--radio-font-size);
-  }
-
-  &:hover &-Input {
-    border-color: var(--color-control-bg-border-default-hover);
   }
 
   &_size {
@@ -57,9 +52,71 @@
     }
   }
 
-  &-Input:checked {
-    border-color: var(--color-control-bg-primary);
+  &_view {
+    &_primary {
+      &:hover .Radio-Input {
+        border-color: var(--color-control-bg-border-default-hover);
+      }
 
+      .Radio-Input {
+        border-color: var(--color-control-bg-border-default);
+
+        &::before {
+          background-color: var(--color-control-bg-primary);
+        }
+      }
+
+      .Radio-Input:checked {
+        border-color: var(--color-control-bg-primary);
+
+        &::before {
+          background-color: var(--color-control-bg-primary);
+        }
+      }
+
+      &:hover .Radio-Input:checked {
+        border-color: var(--color-control-bg-primary-hover);
+
+        &::before {
+          background-color: var(--color-control-bg-primary-hover);
+        }
+      }
+    }
+
+    &_ghost {
+      &:hover .Radio-Input {
+        border-color: var(--color-control-bg-border-default-hover);
+      }
+
+      .Radio-Input {
+        border-color: var(--color-control-bg-border-default);
+
+        &::before {
+          background-color: var(--color-control-bg-primary);
+        }
+      }
+
+      .Radio-Input:checked {
+        background-color: var(--color-control-bg-ghost);
+        border-color: var(--color-control-bg-border-default);
+
+        &::before {
+          background-color: var(--color-control-typo-ghost);
+        }
+      }
+
+      &:hover .Radio-Input:checked {
+        background-color: var(--color-control-bg-ghost-hover);
+        border-color: var(--color-control-bg-border-default);
+
+        &::before {
+          background-color: var(--color-control-typo-ghost-hover);
+        }
+      }
+    }
+  }
+
+  &-Input:checked {
     &::before {
       opacity: 1;
       transform: scale(0.4, 0.4);
