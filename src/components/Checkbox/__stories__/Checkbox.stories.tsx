@@ -9,6 +9,8 @@ import {
   checkboxPropAlignDefault,
   checkboxPropSize,
   checkboxPropSizeDefault,
+  checkboxPropView,
+  checkboxPropViewDefault,
 } from '../Checkbox';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
@@ -19,6 +21,7 @@ const defaultKnobs = () => ({
   disabled: boolean('disabled', false),
   intermediate: boolean('intermediate', false),
   size: select('size', checkboxPropSize, checkboxPropSizeDefault),
+  view: select('view', checkboxPropView, checkboxPropViewDefault),
   align: select('align', checkboxPropAlign, checkboxPropAlignDefault),
   label: text('label', 'Check me, baby!'),
 });
@@ -26,7 +29,7 @@ const defaultKnobs = () => ({
 const cnCheckboxStories = cn('CheckboxStories');
 
 export function Playground() {
-  const { disabled, intermediate, size, align, label } = defaultKnobs();
+  const { disabled, intermediate, size, view, align, label } = defaultKnobs();
 
   const [checked, setChecked] = React.useState<boolean>(false);
 
@@ -38,6 +41,7 @@ export function Playground() {
         disabled={disabled}
         intermediate={intermediate}
         size={size}
+        view={view}
         label={label}
         onChange={handleChange}
         checked={checked}

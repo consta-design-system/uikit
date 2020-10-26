@@ -26,8 +26,8 @@
       width: calc(var(--box-size) * 0.6);
       height: calc(var(--box-size) * 0.35);
       background-color: var(--color-control-bg-affect);
-      border-left: 2px solid var(--color-control-typo-primary);
-      border-bottom: 2px solid var(--color-control-typo-primary);
+      border-left: 2px solid var(--checkbox-checked-check);
+      border-bottom: 2px solid var(--checkbox-checked-check);
       opacity: 0;
       transition: opacity 0.15s, transform 0.15s, background-color 0.08s;
       transform: rotate(-50deg) scale(0, 1);
@@ -69,9 +69,27 @@
     }
   }
 
+  &_view {
+    &_primary {
+      --checkbox-checked-border: var(--color-control-bg-primary);
+      --checkbox-checked-background: var(--color-control-bg-primary);
+      --checkbox-checked-check: var(--color-control-typo-primary);
+      --checkbox-checked-border-hover: var(--color-control-bg-primary-hover);
+      --checkbox-checked-background-hover: var(--color-control-bg-primary-hover);
+    }
+
+    &_ghost {
+      --checkbox-checked-border: var(--color-control-bg-border-default);
+      --checkbox-checked-background: var(--color-control-bg-ghost);
+      --checkbox-checked-check: var(--color-control-typo-ghost);
+      --checkbox-checked-border-hover: var(--color-control-bg-border-default);
+      --checkbox-checked-background-hover: var(--color-control-bg-ghost-hover);
+    }
+  }
+
   &-Input:checked {
-    background-color: var(--color-control-bg-primary);
-    border-color: var(--color-control-bg-primary);
+    background-color: var(--checkbox-checked-background);
+    border-color: var(--checkbox-checked-border);
 
     &::before {
       opacity: 1;
@@ -83,8 +101,8 @@
     border-color: var(--color-control-bg-border-default-hover);
 
     &:checked {
-      background-color: var(--color-control-bg-primary-hover);
-      border-color: var(--color-control-bg-primary-hover);
+      background-color: var(--checkbox-checked-background-hover);
+      border-color: var(--checkbox-checked-border-hover);
     }
   }
 
