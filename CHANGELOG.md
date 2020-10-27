@@ -1,5 +1,22 @@
 # Changelog
 
+## v1.10.4 (27/10/2020)
+
+- [feat(Table): added multilevel headers (#484)](https://github.com/gazprom-neft/consta-uikit/commit/d37f516575a52c23b2c2895a127a7df45e8a488e) - @karpovfv-nedra
+- [test(Attach): added tests (#481)](https://github.com/gazprom-neft/consta-uikit/commit/f14462f22f8997c74716c7768452f654fb963297) - @gizeasy
+- [feat(Choicegroup): added width_full (#550)](https://github.com/gazprom-neft/consta-uikit/commit/c0a061cde43659364b2e88757807fc556d7e4604) - @Miocene
+- [chore(chromatic): added config for gitHub actions (#517)](https://github.com/gazprom-neft/consta-uikit/commit/02d2249ef3a2a355259f31da9b866ec215f62467) - @gizeasy
+- [fix(Tooltip): added className (#535)](https://github.com/gazprom-neft/consta-uikit/commit/514e7eee27eb61aea8a51141ec8fcaf9ea70fc56) - @gizeasy
+- [fix(Selects): fixed scroll on hover in dropdown (#543)](https://github.com/gazprom-neft/consta-uikit/commit/35bdda7bd691b4699b6f994a8b3618e4fe9960dc) - @gizeasy
+- [feat(createIcon): provided a function for export (#548)](https://github.com/gazprom-neft/consta-uikit/commit/881b5ae66e25451e49d41b9d29b80ddf3ff17c22) - @gizeasy
+- [fix(Modal): added appear prop to CSSTransition (#534)](https://github.com/gazprom-neft/consta-uikit/commit/11b30450f57498cb69c97a7bf64273e3aeb6a881) - @karpovfv-nedra
+- [feat(Table): added onRowHover props (#524)](https://github.com/gazprom-neft/consta-uikit/commit/88b62d3a4008b7dffe349fab6fa9a0c876ae6d1b) - @evless
+- [feat(iconwidescreen): added icons (#542)](https://github.com/gazprom-neft/consta-uikit/commit/d8dc744f9cda18922071c8e56de632fa83cf7e9c) - @andekhtyar
+- [fix(Choicegroup): fix control height and dividers border-radius (#541)](https://github.com/gazprom-neft/consta-uikit/commit/1fec09caf988cc14f99a2b9e2e0f23f403faf713) - @Miocene
+- [docs(Units): add units section to docs (#397)](https://github.com/gazprom-neft/consta-uikit/commit/fe10a9c8d3cd2f2467141a69e243164a68cfe5f1) - @kolebayev
+
+---
+
 ## v1.10.3 (19/10/2020)
 
 - [chore(CODEOWNERS): Update (#530)](https://github.com/gazprom-neft/consta-uikit/commit/e6af7331a489771dd8a90da64a5af445f9729c2c) - @nekitk
