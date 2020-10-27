@@ -21,6 +21,7 @@ export type ComboboxSelectProps<ITEM> = CommonSelectProps<ITEM> & {
   onCreate?(str: string): void;
   getGroupOptions?(group: ITEM): ITEM[];
   labelForCreate?: string;
+  labelForNotFound?: string;
 };
 
 type ComboboxType = <ITEM>(props: ComboboxSelectProps<ITEM>) => React.ReactElement | null;
@@ -43,6 +44,7 @@ export const Combobox: ComboboxType = (props) => {
     onCreate,
     getGroupOptions,
     labelForCreate = 'Добавить',
+    labelForNotFound = 'Не найдено',
     ...restProps
   } = props;
   const [isFocused, setIsFocused] = useState(false);
@@ -242,12 +244,13 @@ export const Combobox: ComboboxType = (props) => {
           getOptionProps={getOptionProps}
           onCreate={handleCreate}
           optionsRef={optionsRef}
-          valueForCreate={inputData.value}
+          inputValue={inputData.value}
           id={id}
           hasGroup={hasGroup}
           selectedValues={arrValue}
-          labelForCreate={labelForCreate}
           getOptionLabel={getOptionLabel}
+          labelForCreate={labelForCreate}
+          labelForNotFound={labelForNotFound}
         />
       )}
     </SelectContainer>

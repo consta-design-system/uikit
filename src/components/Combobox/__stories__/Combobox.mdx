@@ -195,6 +195,8 @@ const Example = () => {
 | `onChange?`                             | `(value: string | null) => void`                       | -            | Обработчик события изменения значения компонента                                                 |
 | `onBlur?`                               | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -            | Обработчик события `blur`                                                                        |
 | `onFocus?`                              | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -            | Обработчик события `focus`                                                                       |
+| `labelForCreate?`                       | `string`                                               | -            | Текст при создании элемента                                                                      |
+| `labelForNotFound?`                     | `string`                                               | -            | Текст при отсуствии элементов при поиске                                                         |
 | `className?`                            | `string`                                               | -            | Дополнительный CSS-класс                                                                         |
 | [`onCreate?`](#свой-вариант)            | `(str: string) => void`                                | -            | Функция для добавления своего варианта значения                                                  |
 | [`getGroupOptions?`](#группы-вариантов) | `(group: T) => T[]`                                    | -            | Функция для получения вариантов из группы                                                        |
