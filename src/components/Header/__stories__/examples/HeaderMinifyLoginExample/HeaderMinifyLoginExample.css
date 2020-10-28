@@ -4,7 +4,7 @@
   &-Login {
     cursor: pointer;
 
-    &_isLogged {
+    &_authorized {
       padding: 0;
 
       &:focus {

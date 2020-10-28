@@ -1,10 +1,13 @@
-import './Header-SearchBar.css';
+import './HeaderSearchBar.css';
 
 import React, { FormEventHandler } from 'react';
 
 import { IconSearch } from '../../../icons/IconSearch/IconSearch';
+import { cn } from '../../../utils/bem';
+import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
 import { TextField, TextFieldPropOnChange, TextFieldPropValue } from '../../TextField/TextField';
-import { cnHeader } from '../Header';
+
+export const cnHeaderSearchBar = cn('HeaderSearchBar');
 
 export type SearchBarPropValue = TextFieldPropValue;
 export type SearchBarPropOnChange = TextFieldPropOnChange;
@@ -15,15 +18,17 @@ export type SearchBarOnSearchArguments = {
   value: SearchBarPropValue;
 };
 
-type SearchBarProps = {
-  placeholder?: string;
-  label?: string;
-  className?: string;
-  value?: SearchBarPropValue;
-  onSearch?: SearchBarPropOnSearch;
-  onChange?: SearchBarPropOnChange;
-  children?: never;
-};
+type SearchBarProps = PropsWithJsxAttributes<
+  {
+    placeholder?: string;
+    label?: string;
+    value?: SearchBarPropValue;
+    onSearch?: SearchBarPropOnSearch;
+    onChange?: SearchBarPropOnChange;
+    children?: never;
+  },
+  'form'
+>;
 
 export const HeaderSearchBar: React.FC<SearchBarProps> = ({
   placeholder,
@@ -32,6 +37,7 @@ export const HeaderSearchBar: React.FC<SearchBarProps> = ({
   value,
   onSearch,
   onChange,
+  ...otherProps
 }) => {
   const handleSearch: FormEventHandler = (e) => {
     e.preventDefault();
@@ -39,15 +45,15 @@ export const HeaderSearchBar: React.FC<SearchBarProps> = ({
   };
 
   return (
-    <form onSubmit={handleSearch} className={cnHeader('SearchBar', [className])}>
+    <form {...otherProps} onSubmit={handleSearch} className={cnHeaderSearchBar(null, [className])}>
       {label && (
-        <label className={cnHeader('SearchBarLabel')} htmlFor={cnHeader('SearchBarInput')}>
+        <label className={cnHeaderSearchBar('Label')} htmlFor={cnHeaderSearchBar('Label')}>
           {label}
         </label>
       )}
       <TextField
-        className={cnHeader('SearchBarInput')}
-        name={cnHeader('SearchBarInput')}
+        className={cnHeaderSearchBar('Input')}
+        name={cnHeaderSearchBar('Input')}
         placeholder={placeholder}
         size="m"
         width="full"

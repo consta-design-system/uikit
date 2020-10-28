@@ -1,11 +1,9 @@
-.Header {
-  &-SearchBar {
-    position: relative;
-    width: 25vw;
-    max-width: 260px;
-  }
+.HeaderSearchBar {
+  position: relative;
+  width: 25vw;
+  max-width: 260px;
 
-  &-SearchBarLabel {
+  &-Label {
     position: absolute;
     visibility: hidden;
     overflow: hidden;
@@ -17,7 +15,7 @@
     pointer-events: none;
   }
 
-  &-SearchBarButton {
+  &-Button {
     position: absolute;
     top: var(--space-2xs);
     right: var(--space-2xs);
