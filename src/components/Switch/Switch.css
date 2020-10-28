@@ -39,6 +39,60 @@
     }
   }
 
+  &_view {
+    &_primary {
+      &:hover .Switch-Input:not(:checked) {
+        --border-color: var(--color-control-bg-border-default-hover);
+        --background-color: transparent;
+        --content-color: var(--color-control-bg-border-default-hover);
+      }
+
+      .Switch-Input:not(:checked) {
+        --border-color: var(--color-control-bg-border-default);
+        --background-color: transparent;
+        --content-color: var(--color-control-bg-border-default);
+      }
+
+      &:hover .Switch-Input:checked {
+        --border-color: var(--color-control-bg-primary-hover);
+        --background-color: var(--color-control-bg-primary-hover);
+        --content-color: var(--color-control-typo-primary-hover);
+      }
+
+      .Switch-Input:checked {
+        --border-color: var(--color-control-bg-primary);
+        --background-color: var(--color-control-bg-primary);
+        --content-color: var(--color-control-typo-primary);
+      }
+    }
+
+    &_ghost {
+      &:hover .Switch-Input:not(:checked) {
+        --border-color: var(--color-control-bg-border-default-hover);
+        --background-color: transparent;
+        --content-color: var(--color-control-bg-border-default-hover);
+      }
+
+      .Switch-Input:not(:checked) {
+        --border-color: var(--color-control-bg-border-default);
+        --background-color: transparent;
+        --content-color: var(--color-control-bg-border-default);
+      }
+
+      &:hover .Switch-Input:checked {
+        --border-color: var(--color-control-bg-border-default-hover);
+        --background-color: var(--color-control-bg-ghost-hover);
+        --content-color: var(--color-control-typo-ghost-hover);
+      }
+
+      .Switch-Input:checked {
+        --border-color: var(--color-control-bg-border-default);
+        --background-color: var(--color-control-bg-ghost);
+        --content-color: var(--color-control-typo-ghost);
+      }
+    }
+  }
+
   &-Input {
     position: relative;
     display: inline-block;
@@ -46,7 +100,8 @@
     width: var(--box-width);
     height: var(--box-height);
     margin: 0;
-    border: var(--control-border-width) solid var(--background-color);
+    background-color: var(--background-color);
+    border: var(--control-border-width) solid var(--border-color);
     border-radius: 99rem;
     cursor: pointer;
     transition: background-color 0.15s, border-color 0.15s;
@@ -67,18 +122,11 @@
     }
 
     &:checked {
-      --background-color: var(--color-control-bg-primary);
-      --content-color: var(--color-control-typo-primary);
       background-color: var(--background-color);
 
       &::before {
         transform: translateX(0);
       }
-    }
-
-    &:not(:checked) {
-      --background-color: var(--color-control-bg-border-default);
-      --content-color: var(--color-control-bg-border-default);
     }
   }
 
@@ -88,27 +136,17 @@
     font-size: var(--switch-font-size);
   }
 
-  &:hover {
-    .Switch-Input:not(:checked) {
-      --background-color: var(--color-control-bg-border-default-hover);
-      --content-color: var(--color-control-bg-border-default-hover);
-    }
-
-    .Switch-Input:checked {
-      --background-color: var(--color-control-bg-primary-hover);
-      --content-color: var(--color-control-typo-primary-hover);
-    }
-  }
-
   &_disabled {
     pointer-events: none;
 
     .Switch-Input:not(:checked):disabled {
-      --background-color: var(--color-control-typo-disable);
+      --border-color: var(--color-control-typo-disable);
+      --background-color: transparent;
       --content-color: var(--color-control-typo-disable);
     }
 
     .Switch-Input:checked:disabled {
+      --border-color: transparent;
       --background-color: var(--color-control-bg-disable);
       --content-color: var(--color-control-typo-disable);
       background-color: var(--background-color);

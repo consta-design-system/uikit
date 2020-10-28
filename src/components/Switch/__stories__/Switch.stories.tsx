@@ -8,6 +8,8 @@ import {
   switchPropAlignDefault,
   switchPropSize,
   switchPropSizeDefault,
+  switchPropView,
+  switchPropViewDefault,
 } from '../Switch';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
@@ -17,12 +19,13 @@ import mdx from './Switch.mdx';
 const defaultKnobs = () => ({
   disabled: boolean('disabled', false),
   size: select('size', switchPropSize, switchPropSizeDefault),
+  view: select('view', switchPropView, switchPropViewDefault),
   align: select('align', switchPropAlign, switchPropAlignDefault),
   label: text('label', 'Move me, I beg you!'),
 });
 
 export function Playground() {
-  const { disabled, size, label, align } = defaultKnobs();
+  const { disabled, size, view, label, align } = defaultKnobs();
   const [checked, setChecked] = useState<boolean>(false);
 
   const handleChange = ({ checked }: { checked: boolean }) => setChecked(checked);
@@ -33,6 +36,7 @@ export function Playground() {
         checked={checked}
         disabled={disabled}
         size={size}
+        view={view}
         label={label}
         align={align}
         onChange={handleChange}
