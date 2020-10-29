@@ -2,6 +2,7 @@ import './SelectContainer.css';
 
 import React from 'react';
 
+import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import { cnSelect } from '../cnSelect';
 import {
   DefaultPropForm,
@@ -12,16 +13,17 @@ import {
   PropView,
 } from '../types';
 
-export type SelectContainerProps = {
-  className?: string;
-  disabled?: boolean;
-  form?: PropForm;
-  size?: PropSize;
-  view?: PropView;
-  focused?: boolean;
-  children: React.ReactNode;
-  multi?: boolean;
-};
+export type SelectContainerProps = PropsWithHTMLAttributes<
+  {
+    disabled?: boolean;
+    form?: PropForm;
+    size?: PropSize;
+    view?: PropView;
+    focused?: boolean;
+    multi?: boolean;
+  },
+  HTMLDivElement
+>;
 
 export const SelectContainer = React.forwardRef<HTMLDivElement, SelectContainerProps>(
   (props, ref) => {
@@ -34,10 +36,12 @@ export const SelectContainer = React.forwardRef<HTMLDivElement, SelectContainerP
       children,
       focused,
       multi,
+      ...otherProps
     } = props;
 
     return (
       <div
+        {...otherProps}
         className={cnSelect({ size, form, disabled, view, focused, multi }, [className])}
         ref={ref}
       >

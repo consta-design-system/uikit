@@ -15,14 +15,17 @@ import {
   DefaultPropView,
 } from '../SelectComponents/types';
 
-export type ComboboxSelectProps<ITEM> = CommonSelectProps<ITEM> & {
-  value?: ITEM | null;
-  onChange?: (v: ITEM | null) => void;
-  onCreate?(str: string): void;
-  getGroupOptions?(group: ITEM): ITEM[];
-  labelForCreate?: string;
-  labelForNotFound?: string;
-};
+type SelectContainerProps = React.ComponentProps<typeof SelectContainer>;
+
+export type ComboboxSelectProps<ITEM> = CommonSelectProps<ITEM> &
+  Omit<SelectContainerProps, 'value' | 'onChange'> & {
+    value?: ITEM | null;
+    onChange?: (v: ITEM | null) => void;
+    onCreate?(str: string): void;
+    getGroupOptions?(group: ITEM): ITEM[];
+    labelForCreate?: string;
+    labelForNotFound?: string;
+  };
 
 type ComboboxType = <ITEM>(props: ComboboxSelectProps<ITEM>) => React.ReactElement | null;
 
