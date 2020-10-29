@@ -1,28 +1,28 @@
 import React, { useState } from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { simpleItems } from '../__mocks__/data.mock';
 import ResizeObserver from '../../../../__mocks__/ResizeObserver';
+import { simpleItems } from '../../Combobox/__mocks__/data.mock';
 import { cnSelect } from '../../SelectComponents/cnSelect';
-import { Combobox } from '../Combobox';
+import { MultiCombobox } from '../MultiCombobox';
 
 jest.mock('resize-observer-polyfill', () => {
   return ResizeObserver;
 });
 
-const testId = 'Combobox';
+const testId = 'MultiCombobox';
 
 type Item = { label: string; value: string };
 
 const renderComponent = (props: {
-  value?: Item;
+  value?: Item[];
   className?: string;
   placeholder?: string;
-  onChange?: (value: Item | null) => void;
+  onChange?: (value: Item[] | null) => void;
 }) => {
   return render(
     <div data-testid="outside">
-      <Combobox
+      <MultiCombobox
         {...props}
         id={testId}
         data-testid={testId}
@@ -33,11 +33,11 @@ const renderComponent = (props: {
   );
 };
 
-const ValueTest = ({ indexElementAfterClick = 0, indexElementBeforeClick = 3 }) => {
-  const [value, setValue] = useState(simpleItems[indexElementAfterClick]);
+const ValueTest = ({ indexElementAfterClick = [0], indexElementBeforeClick = [1] }) => {
+  const [value, setValue] = useState(indexElementAfterClick.map((index) => simpleItems[index]));
   return (
     <div>
-      <Combobox
+      <MultiCombobox
         data-testid={testId}
         id={testId}
         options={simpleItems}
@@ -46,7 +46,7 @@ const ValueTest = ({ indexElementAfterClick = 0, indexElementBeforeClick = 3 }) 
       />
       <button
         data-testid="changerValue"
-        onClick={() => setValue(simpleItems[indexElementBeforeClick])}
+        onClick={() => setValue(indexElementBeforeClick.map((index) => simpleItems[index]))}
         type="button"
       >
         change
@@ -56,8 +56,8 @@ const ValueTest = ({ indexElementAfterClick = 0, indexElementBeforeClick = 3 }) 
 };
 
 const renderValueTest = (props: {
-  indexElementAfterClick: number;
-  indexElementBeforeClick: number;
+  indexElementAfterClick: number[];
+  indexElementBeforeClick: number[];
 }) => {
   return render(<ValueTest {...props} />);
 };
@@ -79,15 +79,23 @@ function getOptionsList() {
 }
 
 function getOptions() {
-  return getOptionsList().querySelectorAll(`.${cnSelect('ListItem')}`);
+  return getOptionsList().querySelectorAll(`.${cnSelect('CheckItem')}`);
 }
 
 function getOption(index = 1) {
-  return getOptionsList().querySelectorAll(`.${cnSelect('ListItem')}`)[index];
+  return getOptions()[index];
 }
 
-function getCheckedOption() {
-  return getOptionsList().querySelector('.Select-ListItem_active');
+function getCheckedOptions() {
+  return getOptionsList().querySelectorAll('.Select-CheckItem_active');
+}
+
+function getCheckedOptionsText() {
+  let text = '';
+  getCheckedOptions().forEach((element) => {
+    text += element.textContent;
+  });
+  return text;
 }
 
 function getInput() {
@@ -172,41 +180,59 @@ describe('Компонент Combobox', () => {
     });
   });
   describe('проверка value', () => {
-    const elementIndex = 3;
-    const value = simpleItems[elementIndex];
+    const elementIndex = [2, 3];
+    const value = elementIndex.map((item) => simpleItems[item]);
     it(`отображается в инпуте`, () => {
       renderComponent({ value });
-      expect(getControlValue()).toHaveTextContent(simpleItems[elementIndex].label);
+      expect(getControlValue()).toHaveTextContent(
+        elementIndex.map((item) => simpleItems[item].label).join(''),
+      );
     });
     it(`подсвечивается в списке опций`, () => {
       renderComponent({ value });
       indicatorsDropdownClick();
-      expect(getCheckedOption()).toHaveTextContent(simpleItems[elementIndex].label);
+
+      expect(getCheckedOptionsText()).toEqual(
+        elementIndex.map((item) => simpleItems[item].label).join(''),
+      );
     });
     it(`изменение value вне компонента`, () => {
-      const indexElementAfterClick = 1;
-      const indexElementBeforeClick = 4;
+      const indexElementAfterClick = [1];
+      const indexElementBeforeClick = [4];
       renderValueTest({ indexElementAfterClick, indexElementBeforeClick });
       fireEvent.click(getChangerValue());
 
       indicatorsDropdownClick();
 
-      expect(getCheckedOption()).toHaveTextContent(simpleItems[indexElementBeforeClick].label);
+      expect(getCheckedOptionsText()).toEqual(
+        indexElementBeforeClick.map((item) => simpleItems[item].label).join(''),
+      );
     });
   });
   describe('проверка onChange', () => {
     it(`клик по элементу, должен вызвать callback c ожидаемыми параметрами`, () => {
       const handleChange = jest.fn();
-      const elementIndex = 1;
 
       renderComponent({ onChange: handleChange });
       inputClick();
 
-      fireEvent.click(getOption(elementIndex));
+      fireEvent.click(getOption(1));
 
       expect(handleChange).toHaveBeenCalled();
       expect(handleChange).toHaveBeenCalledTimes(1);
-      expect(handleChange).toHaveBeenCalledWith(expect.objectContaining(simpleItems[elementIndex]));
+      expect(handleChange).toHaveBeenCalledWith(expect.objectContaining([simpleItems[1]]));
+
+      fireEvent.click(getOption(2));
+
+      expect(handleChange).toHaveBeenCalled();
+      expect(handleChange).toHaveBeenCalledWith(
+        expect.objectContaining([simpleItems[1], simpleItems[2]]),
+      );
+
+      fireEvent.click(getOption(1));
+
+      expect(handleChange).toHaveBeenCalled();
+      expect(handleChange).toHaveBeenCalledWith(expect.objectContaining([simpleItems[2]]));
     });
   });
 });
