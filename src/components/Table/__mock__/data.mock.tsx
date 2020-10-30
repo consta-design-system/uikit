@@ -677,6 +677,59 @@ export const TRANSFORMED_COLUMNS = [
   ],
 ];
 
+export const SORTED_2_TIMES_ROWS = [
+  {
+    id: 'row3',
+    field: 'Красноленинская группа',
+    year: 1985,
+    type: 'Комбинированное',
+    estimatedReserves: 8766,
+    remainingReserves: 3374,
+    production: 256,
+    total: 434,
+  },
+  {
+    id: 'row2',
+    field: 'Уренгойское газонефтеконденсат­ное',
+    year: 2001,
+    type: 'Конденсатное',
+    estimatedReserves: 7540,
+    remainingReserves: 7540,
+    production: 363,
+    total: 88,
+  },
+  {
+    id: 'row4',
+    field: 'Великое',
+    year: 1989,
+    type: 'Конденсатное',
+    estimatedReserves: 1697,
+    remainingReserves: 4818,
+    production: 250,
+    total: 236,
+  },
+  {
+    id: 'row5',
+    field: 'Русское газонефтяное',
+    year: 1997,
+    type: 'Нефтяное',
+    estimatedReserves: 5169,
+    remainingReserves: 3712,
+    production: 292,
+    total: 417,
+  },
+  {
+    id: 'row1',
+    field: 'Приобское',
+    year: 1982,
+    type: 'Нефтяное',
+    estimatedReserves: 5000,
+    remainingReserves: 1700,
+    production: 33,
+    total: 313,
+  },
+];
+
 export const generateData = (rowsCount: number, columnsCount: number) => {
   const rows = [];
   const columns = [];

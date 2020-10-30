@@ -10,12 +10,15 @@ import {
   tableWithMergedCellsData,
   tableWithMultiLevelHeadersData,
 } from '../__mock__/data.mock';
+import { IconCheck } from '../../../icons/IconCheck/IconCheck';
 import { IconCopy } from '../../../icons/IconCopy/IconCopy';
 import { updateAt } from '../../../utils/array';
 import { cn } from '../../../utils/bem';
 import { createMetadata, createStory } from '../../../utils/storybook';
+import { Badge } from '../../Badge/Badge';
 import { Button } from '../../Button/Button';
 import { Checkbox } from '../../Checkbox/Checkbox';
+import { OrderedOption, smartSort, SmartSortingWindow } from '../../SmartSorting/SmartSorting';
 import { Text } from '../../Text/Text';
 import { verticalAligns } from '../Cell/TableCell';
 import { Filters, SortByProps } from '../filtering';
@@ -304,6 +307,61 @@ export const WithMergedCells = createStory(
   ),
   {
     name: 'с объединёнными ячейками',
+  },
+);
+
+export const WithSmartSorting = createStory(
+  () => {
+    const [isSmartSortingWindowOpen, setIsSmartSortingWindowOpen] = React.useState(false);
+    const [orderedOptions, setOrderedOptions] = React.useState<Array<OrderedOption>>([]);
+
+    const options = tableData.columns.map((column) => ({
+      optionLabel: column.title as string,
+      optionValue: column.accessor as string,
+    }));
+
+    const sorters = orderedOptions.map((option) =>
+      option.orderValue === 'asc' ? option.optionValue : `-${option.optionValue}`,
+    );
+
+    const columns =
+      orderedOptions.length > 0
+        ? tableData.columns.map((column) => ({
+            ...column,
+            sortable: false,
+          }))
+        : tableData.columns;
+
+    const rows = [...tableData.rows].sort(smartSort(sorters));
+
+    return (
+      <div className={cnTableStories({ flexColumn: true })}>
+        <Button
+          size="m"
+          view="ghost"
+          label="Умная сортировка"
+          width="default"
+          iconLeft={orderedOptions.length ? IconCheck : undefined}
+          className={cnTableStories('ButtonSorting', { withBadge: orderedOptions.length > 0 })}
+          onClick={() => setIsSmartSortingWindowOpen(true)}
+        />
+        {orderedOptions.length > 0 && (
+          <Badge size="s" label={`${orderedOptions.length}`} status="system" form="round" />
+        )}
+        <SmartSortingWindow
+          isOpen={isSmartSortingWindowOpen}
+          options={options}
+          initialValues={orderedOptions}
+          onUpdate={setOrderedOptions}
+          onClose={() => setIsSmartSortingWindowOpen(false)}
+          className={cnTableStories('MySmartSortingWindow')}
+        />
+        <Table rows={rows} columns={columns} />
+      </div>
+    );
+  },
+  {
+    name: 'с умной сортировкой',
   },
 );
 
