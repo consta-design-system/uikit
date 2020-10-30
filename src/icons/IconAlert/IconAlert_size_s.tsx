@@ -2,7 +2,7 @@ import * as React from 'react';
 
 function IconAlertSizeS(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 16 16" {...props}>
+    <svg {...props}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"
