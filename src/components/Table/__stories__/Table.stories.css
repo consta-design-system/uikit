@@ -3,4 +3,24 @@
     width: 600px;
     height: 300px;
   }
+
+  &_flexColumn {
+    display: flex;
+    flex-direction: column;
+
+    .Badge {
+      position: absolute;
+      top: calc(var(--space-3xl) + var(--control-height-m) / 2 - 10px);
+      right: calc(var(--space-3xl) + 20px);
+    }
+  }
+
+  &-ButtonSorting {
+    align-self: flex-end;
+    margin-bottom: var(--space-s);
+
+    &_withBadge {
+      padding-right: var(--space-4xl);
+    }
+  }
 }
