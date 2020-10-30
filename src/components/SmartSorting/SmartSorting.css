@@ -1,0 +1,65 @@
+.SmartSorting {
+  position: relative;
+  z-index: auto;
+  display: flex;
+  flex-direction: column;
+  width: 660px;
+  height: 440px;
+  padding: var(--space-m);
+
+  &-Title {
+    margin-bottom: var(--space-m);
+  }
+
+  &-Body {
+    overflow: auto;
+    flex: 1;
+  }
+
+  &-Labels,
+  &-OptionRow {
+    display: flex;
+    margin-bottom: var(--space-xs);
+  }
+
+  &-Option {
+    &_value {
+      flex-basis: 60%;
+      margin-right: var(--space-m);
+    }
+
+    &_withRemove {
+      display: flex;
+      flex-basis: 40%;
+      flex-shrink: 0;
+    }
+  }
+
+  &-Label {
+    flex-basis: 40%;
+
+    &:first-child {
+      flex-basis: 60%;
+    }
+  }
+
+  &-Actions {
+    align-self: flex-end;
+    margin-top: var(--space-xs);
+
+    button:not(:first-child) {
+      margin-left: var(--space-s);
+    }
+  }
+
+  button {
+    outline: none;
+    box-shadow: none !important;
+  }
+
+  &-ButtonClose {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
