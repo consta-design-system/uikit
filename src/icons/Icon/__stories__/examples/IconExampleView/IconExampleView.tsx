@@ -42,7 +42,7 @@ export const IconExampleViewSecondary = () => (
 
 export const IconExampleViewWarning = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
-    <IconBag view="// WARNING: " />
+    <IconBag view="warning" />
   </StoryBookExample>
 );
 
