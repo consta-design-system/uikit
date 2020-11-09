@@ -1,5 +1,5 @@
 .SelectDropdown {
-  z-index: 100;
+  z-index: 9999;
   box-sizing: border-box;
   width: 100%;
   min-width: 220px;
