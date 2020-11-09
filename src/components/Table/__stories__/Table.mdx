@@ -136,10 +136,49 @@ const App = () => {
 
 ### Таблица с окном множественной сортировки
 
+#### SmartSorting
+
+```ts
+const orders = ['asc', 'desc'] as const;
+type Order = typeof orders[number];
+
+type Option = {
+  optionLabel: string;
+  optionValue: string;
+};
+
+type OrderOption = {
+  orderLabel: string;
+  orderValue: Order;
+};
+
+type OrderedOption = Option & OrderOption;
+
+const orderParametersDefault: Array<OrderOption> = [
+  { orderLabel: 'По возрастанию', orderValue: 'asc' },
+  { orderLabel: 'По убыванию', orderValue: 'desc' },
+];
+```
+
+| Свойство              | Тип или варианты значения           | По умолчанию            | Описание                                           |
+| --------------------- | ------------------------------------| ----------------------- | -------------------------------------------------- |
+| isOpen                | `boolean`                           | -                       | Флаг открытого окна                                |
+| options               | `Option[]`                          | -                       | Список сортируемых полей                           |
+| value                 | `OrderedOption[]`                   | -                       | Список уже отсортированных полей                   |
+| onChange              | `(o: Array<OrderedOption>) => void` | -                       | Изменение сортировки в окне                        |
+| onClose               | `() => void`                        | -                       | Закрытие окна                                      |
+| title?                | `string`                            | 'Умная сортировка'      | Заголовок окна сортировки                          |
+| sortLabel?            | `string`                            | 'Сортировать по'        | Заголовок полей для сортировки                     |
+| sortParametersLabel?  | `string`                            | 'Порядок'               | Заголовок параметра сортировки                     |
+| orderParameters?      | `OrderOption[]`                     | `orderParametersDefault`| Список параметров сортировки                       |
+| className?            | `string`                            | -                       | Дополнительный класс                               |
+
+#### Пример использования
+
 ```ts
 import React from 'react';
 import { Table } from '@consta/uikit/Table';
-import { OrderedOption, SmartSortingWindow, smartSorter } from '@consta/uikit/SmartSorting';
+import { OrderedOption, smartSort, SmartSorting } from '@consta/uikit/SmartSorting';
 
 const [isSmartSortingWindowOpen, setIsSmartSortingWindowOpen] = React.useState(false);
 const [orderedOptions, setOrderedOptions] = React.useState<Array<OrderedOption>>([]);
@@ -174,11 +213,11 @@ const App = () => (
     {orderedOptions.length > 0 && (
       <Badge size="s" label={`${orderedOptions.length}`} status="system" form="round" />
     )}
-    <SmartSortingWindow
+    <SmartSorting
       isOpen={isSmartSortingWindowOpen}
       options={options}
-      initialValues={orderedOptions}
-      onUpdate={setOrderedOptions}
+      value={orderedOptions}
+      onChange={setOrderedOptions}
       onClose={() => setIsSmartSortingWindowOpen(false)}
       className={cnTableStories('MySmartSortingWindow')}
     />

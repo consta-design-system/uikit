@@ -11,7 +11,7 @@ import { Button } from '../Button/Button';
 import { Modal } from '../Modal/Modal';
 import { Text } from '../Text/Text';
 
-const cnSmartSortingWindow = cn('SmartSortingWindow');
+const cnSmartSorting = cn('SmartSorting');
 
 export const orders = ['asc', 'desc'] as const;
 type Order = typeof orders[number];
@@ -28,16 +28,20 @@ type OrderOption = {
 
 export type OrderedOption = Option & OrderOption;
 
-type SmartSortingWindowProps = {
+type SmartSortingProps = {
   isOpen: boolean;
   options: Array<Option>;
-  initialValues: Array<OrderedOption>;
-  onUpdate: (o: Array<OrderedOption>) => void;
+  value: Array<OrderedOption>;
+  onChange: (o: Array<OrderedOption>) => void;
   onClose: () => void;
+  title?: string;
+  sortLabel?: string;
+  sortParametersLabel?: string;
+  orderParameters?: Array<OrderOption>;
   className?: string;
 };
 
-const orderOptions = [
+const orderParametersDefault: Array<OrderOption> = [
   { orderLabel: 'По возрастанию', orderValue: 'asc' },
   { orderLabel: 'По убыванию', orderValue: 'desc' },
 ];
@@ -47,9 +51,11 @@ export const smartSort = (fields: Array<string>) => {
   const unsignedSorters = fields.map((o: string, i: number) => {
     if (o[0] === '-') {
       dir[i] = -1;
+
       return o.substring(1);
     }
     dir[i] = 1;
+
     return o;
   });
 
@@ -64,15 +70,23 @@ export const smartSort = (fields: Array<string>) => {
   };
 };
 
-export const SmartSortingWindow: React.FC<SmartSortingWindowProps> = ({
+export const SmartSorting: React.FC<SmartSortingProps> = ({
   isOpen,
   options,
-  initialValues,
-  onUpdate,
+  value,
+  onChange,
   onClose,
+  title = 'Умная сортировка',
+  sortLabel = 'Сортировать по',
+  sortParametersLabel = 'Порядок',
+  orderParameters = orderParametersDefault,
   className,
 }) => {
-  const [sortedOptions, setSortedOptions] = React.useState<OrderedOption[]>(initialValues);
+  const [sortedOptions, setSortedOptions] = React.useState<OrderedOption[]>([]);
+
+  React.useEffect(() => {
+    setSortedOptions(value);
+  }, [value]);
 
   const availableOptions = options.filter(
     (option) => !sortedOptions.some((opt) => option.optionValue === opt.optionValue),
@@ -109,43 +123,43 @@ export const SmartSortingWindow: React.FC<SmartSortingWindowProps> = ({
   };
 
   const handleCancel = () => {
-    setSortedOptions(initialValues);
+    setSortedOptions(value);
     onClose();
   };
 
   const handleApply = () => {
-    onUpdate(sortedOptions);
+    onChange(sortedOptions);
     onClose();
   };
 
   return (
-    <Modal isOpen={isOpen} className={cnSmartSortingWindow(null, [className])} hasOverlay={false}>
+    <Modal isOpen={isOpen} className={cnSmartSorting(null, [className])} hasOverlay={false}>
       <Button
         size="m"
         view="clear"
         onlyIcon
         iconLeft={IconClose}
         width="default"
-        className={cnSmartSortingWindow('ButtonClose')}
+        className={cnSmartSorting('ButtonClose')}
         onClick={handleCancel}
       />
-      <Text as="div" size="l" view="primary" className={cnSmartSortingWindow('Title')}>
-        Умная сортировка
+      <Text as="div" size="l" view="primary" className={cnSmartSorting('Title')}>
+        {title}
       </Text>
-      <div className={cnSmartSortingWindow('Body')}>
-        <div className={cnSmartSortingWindow('Labels')}>
-          <Text as="div" size="s" view="secondary" className={cnSmartSortingWindow('Label')}>
-            Сортировать по
+      <div className={cnSmartSorting('Body')}>
+        <div className={cnSmartSorting('Labels')}>
+          <Text as="div" size="s" view="secondary" className={cnSmartSorting('Label')}>
+            {sortLabel}
           </Text>
-          <Text as="div" size="s" view="secondary" className={cnSmartSortingWindow('Label')}>
-            Порядок
+          <Text as="div" size="s" view="secondary" className={cnSmartSorting('Label')}>
+            {sortParametersLabel}
           </Text>
         </div>
         {sortedOptions.map((option, index) => (
-          <div key={index + option.optionLabel} className={cnSmartSortingWindow('OptionRow')}>
-            <div className={cnSmartSortingWindow('Option', { value: true })}>
+          <div key={index + option.optionLabel} className={cnSmartSorting('OptionRow')}>
+            <div className={cnSmartSorting('Option', { value: true })}>
               <BasicSelect
-                className={cnSmartSortingWindow('Select')}
+                className={cnSmartSorting('Select')}
                 placeholder="Сортировать по"
                 options={availableOptions}
                 value={option}
@@ -154,11 +168,11 @@ export const SmartSortingWindow: React.FC<SmartSortingWindowProps> = ({
                 onChange={(value) => handleOptionChange(option, value as Option, index)}
               />
             </div>
-            <div className={cnSmartSortingWindow('Option', { withRemove: true })}>
+            <div className={cnSmartSorting('Option', { withRemove: true })}>
               <BasicSelect
-                className={cnSmartSortingWindow('Select')}
+                className={cnSmartSorting('Select')}
                 placeholder="Порядок"
-                options={orderOptions}
+                options={orderParameters}
                 value={option}
                 id={`option_${index}_order`}
                 getOptionLabel={(option) => option.orderLabel}
@@ -170,7 +184,7 @@ export const SmartSortingWindow: React.FC<SmartSortingWindowProps> = ({
                 onlyIcon
                 iconLeft={IconTrash}
                 width="default"
-                className={cnSmartSortingWindow('ButtonRemove')}
+                className={cnSmartSorting('ButtonRemove')}
                 onClick={() => handleRemove(index)}
               />
             </div>
@@ -183,12 +197,12 @@ export const SmartSortingWindow: React.FC<SmartSortingWindowProps> = ({
             label="Добавить уровень"
             iconLeft={IconAdd}
             width="full"
-            className={cnSmartSortingWindow('ButtonAdd')}
+            className={cnSmartSorting('ButtonAdd')}
             onClick={handleAdd}
           />
         )}
       </div>
-      <div className={cnSmartSortingWindow('Actions')}>
+      <div className={cnSmartSorting('Actions')}>
         <Button size="m" view="ghost" label="Отмена" width="default" onClick={handleCancel} />
         <Button size="m" view="primary" label="Применить" width="default" onClick={handleApply} />
       </div>

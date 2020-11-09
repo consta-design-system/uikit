@@ -17,7 +17,7 @@ import { createMetadata, createStory } from '../../../utils/storybook';
 import { Badge } from '../../Badge/Badge';
 import { Button } from '../../Button/Button';
 import { Checkbox } from '../../Checkbox/Checkbox';
-import { OrderedOption, smartSort, SmartSortingWindow } from '../../SmartSorting/SmartSorting';
+import { OrderedOption, smartSort, SmartSorting } from '../../SmartSorting/SmartSorting';
 import { Text } from '../../Text/Text';
 import { verticalAligns } from '../Cell/TableCell';
 import { Filters } from '../filtering';
@@ -276,11 +276,11 @@ export const WithSmartSorting = createStory(
         {orderedOptions.length > 0 && (
           <Badge size="s" label={`${orderedOptions.length}`} status="system" form="round" />
         )}
-        <SmartSortingWindow
+        <SmartSorting
           isOpen={isSmartSortingWindowOpen}
           options={options}
-          initialValues={orderedOptions}
-          onUpdate={setOrderedOptions}
+          value={orderedOptions}
+          onChange={setOrderedOptions}
           onClose={() => setIsSmartSortingWindowOpen(false)}
           className={cnTableStories('MySmartSortingWindow')}
         />
