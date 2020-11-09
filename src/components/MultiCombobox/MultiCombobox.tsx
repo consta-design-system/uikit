@@ -6,6 +6,7 @@ import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { scrollIntoView } from '../../utils/scrollIntoView';
 import { cnSelect } from '../SelectComponents/cnSelect';
+import { getSelectDropdownForm } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
 import { CommonSelectProps, DefaultPropForm, DefaultPropView } from '../SelectComponents/types';
@@ -310,6 +311,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
           labelForNotFound={labelForNotFound}
           multi
           getOptionLabel={getOptionLabel}
+          form={getSelectDropdownForm(form)}
         />
       )}
       <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
