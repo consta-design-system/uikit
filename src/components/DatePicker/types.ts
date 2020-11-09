@@ -24,9 +24,9 @@ export type OnChangeProps<V> = {
 export type DateControlType<V> = {
   value?: V;
   onChange: (value?: V) => void;
-  isInvalid: boolean;
+  isInvalid?: boolean;
   tooltipContent?: React.ReactNode;
-  isCalendarOpened: boolean;
+  isCalendarOpened?: boolean;
 } & StyleProps;
 
 export type RenderControl<V> = (props: DateControlType<V>) => React.ReactNode;
@@ -39,7 +39,6 @@ export type BaseControlProps<T> = {
 
 export type BaseRenderControlsProps = MinMaxDate &
   Pick<StyleProps, 'size'> & {
-    tooltipNode: React.ReactNode;
     isTooltipVisible: boolean;
   };
 
@@ -56,5 +55,4 @@ export type RenderSliderProps<T> = {
 };
 export type RenderSliderType<T> = (props: RenderSliderProps<T>) => React.ReactNode;
 export type MakeDateOutOfRangeText = (minDate: string, maxDate: string) => string;
-export type BaseDatePickerProps = MinMaxDate &
-  StyleProps & { makeDateOutOfRangeTooltipText?: MakeDateOutOfRangeText };
+export type BaseDatePickerProps = MinMaxDate & StyleProps;

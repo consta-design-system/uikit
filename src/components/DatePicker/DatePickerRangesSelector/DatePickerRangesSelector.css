@@ -1,14 +1,14 @@
-.DatePickerActionButtons {
+.DatePickerRangesSelector {
   display: flex;
   justify-content: space-between;
 }
 
-.DatePickerActionButtons-Quarters {
+.DatePickerRangesSelector-Ranges {
   display: flex;
   align-items: baseline;
 }
 
-.DatePickerActionButtons-Quarter {
+.DatePickerRangesSelector-Range {
   & + & {
     margin-left: var(--space-xs);
   }

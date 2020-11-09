@@ -1,7 +1,18 @@
 import { Ref, RefObject, useEffect, useRef } from 'react';
-import { format, isWithinInterval } from 'date-fns';
+import {
+  addQuarters,
+  differenceInQuarters,
+  endOfDay,
+  endOfQuarter,
+  endOfYear,
+  format,
+  isWithinInterval,
+  startOfDay,
+  startOfYear,
+} from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 
+import { range } from '../../utils/array';
 import { isDefined } from '../../utils/type-guards';
 
 import { isDateFromInputIsFullyEntered } from './DatePickerInputDate/helpers';
@@ -108,6 +119,31 @@ export const useCombinedRefs = <T>(...refs: Ref<T>[]): RefObject<T> => {
   return targetRef;
 };
 
-export function noop(): void {
-  // do nothing.
-}
+export const makeQuartersRanges = ({
+  date,
+  minDate,
+  maxDate,
+}: {
+  date: Date;
+} & MinMaxDate): Array<{ range: DateRange; title: string }> => {
+  const currentYear = date.getFullYear();
+  const startDate = startOfYear(date);
+  const endDate = endOfYear(date);
+  const quarterAmount = differenceInQuarters(endDate, startDate) + 1;
+
+  return range(quarterAmount).map((index) => {
+    const start = startOfDay(addQuarters(startDate, index));
+    const end = endOfDay(endOfQuarter(start));
+    let dateRange: DateRange;
+
+    if (start > maxDate || end < minDate) {
+      dateRange = [];
+    } else {
+      dateRange = [start > minDate ? start : minDate, end < maxDate ? end : maxDate];
+    }
+    return {
+      range: dateRange,
+      title: `${index + 1} кв. ${currentYear}`,
+    };
+  });
+};

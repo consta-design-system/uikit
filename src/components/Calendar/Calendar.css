@@ -1,4 +1,4 @@
-.DatePickerCalendar {
+.Calendar {
   --cell-size: 28px;
   --cell-padding-left: var(--space-xs);
   --cell-bg-side-offset: calc(var(--cell-padding-left) / 2);
@@ -18,11 +18,11 @@
   padding-bottom: var(--space-m);
 }
 
-.DatePickerCalendar-Title {
+.Calendar-Title {
   margin-bottom: var(--space-s);
 }
 
-.DatePickerCalendar-Month {
+.Calendar-Month {
   display: flex;
   flex-direction: column;
 
@@ -31,7 +31,7 @@
   }
 }
 
-.DatePickerCalendar-Weeks {
+.Calendar-Weeks {
   --max-weeks-in-month: 6;
   min-height: calc(
     (var(--cell-size) * var(--max-weeks-in-month)) +
@@ -39,7 +39,7 @@
   );
 }
 
-.DatePickerCalendar-Row {
+.Calendar-Row {
   display: flex;
 
   & + & {
@@ -51,7 +51,7 @@
   }
 }
 
-.DatePickerCalendar-Cell {
+.Calendar-Cell {
   box-sizing: content-box;
   width: var(--cell-size);
   height: var(--cell-size);
@@ -66,16 +66,16 @@
     padding-left: var(--cell-padding-left);
   }
 
-  &_selectable .DatePickerCalendar-CellContent {
+  &_selectable .Calendar-CellContent {
     cursor: pointer;
   }
 
-  &_disabled .DatePickerCalendar-CellContent {
+  &_disabled .Calendar-CellContent {
     --day-text-color: var(--color-control-typo-disable);
     cursor: not-allowed;
   }
 
-  &_today .DatePickerCalendar-CellContent::after {
+  &_today .Calendar-CellContent::after {
     --color-today: var(--color-bg-selected-primary);
     content: '';
     position: absolute;
@@ -88,11 +88,11 @@
     border-radius: 50%;
   }
 
-  &_today .DatePickerCalendar-CellContent:hover::after {
+  &_today .Calendar-CellContent:hover::after {
     --color-today: var(--color-bg-hovered);
   }
 
-  &_single .DatePickerCalendar-CellContent::before {
+  &_single .Calendar-CellContent::before {
     content: '';
     position: absolute;
     z-index: var(--z-date-sub-bg);
@@ -104,23 +104,23 @@
     border-radius: 50%;
   }
 
-  &_single&_selected .DatePickerCalendar-CellContent {
+  &_single&_selected .Calendar-CellContent {
     --day-text-color: var(--color-text-selected);
   }
 
-  &_single&_selected .DatePickerCalendar-CellContent::before {
+  &_single&_selected .Calendar-CellContent::before {
     --day-bg-color: var(--color-bg-selected-primary);
   }
 
-  &_single:not(&_disabled) .DatePickerCalendar-CellContent:hover {
+  &_single:not(&_disabled) .Calendar-CellContent:hover {
     --day-text-color: var(--color-text-hovered);
   }
 
-  &_single:not(&_disabled) .DatePickerCalendar-CellContent:hover::before {
+  &_single:not(&_disabled) .Calendar-CellContent:hover::before {
     --day-bg-color: var(--color-bg-hovered);
   }
 
-  &_range .DatePickerCalendar-CellContent::before {
+  &_range .Calendar-CellContent::before {
     content: '';
     position: absolute;
     z-index: var(--z-date-sub-bg);
@@ -131,15 +131,15 @@
     background-color: var(--day-bg-color);
   }
 
-  &_range:first-child .DatePickerCalendar-CellContent::before {
+  &_range:first-child .Calendar-CellContent::before {
     left: 0;
   }
 
-  &_range:last-child .DatePickerCalendar-CellContent::before {
+  &_range:last-child .Calendar-CellContent::before {
     right: 0;
   }
 
-  &_range .DatePickerCalendar-CellContent::after {
+  &_range .Calendar-CellContent::after {
     content: '';
     position: absolute;
     z-index: var(--z-date-bg);
@@ -150,100 +150,99 @@
     background-color: var(--day-bg-color);
   }
 
-  &_range&_selected&_first:not(&_oneValue) .DatePickerCalendar-CellContent::before,
-  &_range&_selected&_last:not(&_oneValue) .DatePickerCalendar-CellContent::before {
+  &_range&_selected&_first:not(&_oneValue) .Calendar-CellContent::before,
+  &_range&_selected&_last:not(&_oneValue) .Calendar-CellContent::before {
     --day-bg-color: var(--color-bg-selected-secondary);
   }
 
-  &_range&_selected&_first:not(&_selectedBackwards) .DatePickerCalendar-CellContent::before {
+  &_range&_selected&_first:not(&_selectedBackwards) .Calendar-CellContent::before {
     left: 0;
     border-top-left-radius: 50%;
     border-bottom-left-radius: 50%;
   }
 
-  &_range&_selected&_first&_selectedBackwards .DatePickerCalendar-CellContent::before,
-  &_range&_selected&_last .DatePickerCalendar-CellContent::before {
+  &_range&_selected&_first&_selectedBackwards .Calendar-CellContent::before,
+  &_range&_selected&_last .Calendar-CellContent::before {
     right: 0;
     border-top-right-radius: 50%;
     border-bottom-right-radius: 50%;
   }
 
-  &_range&_selected&_first .DatePickerCalendar-CellContent,
-  &_range&_selected&_last .DatePickerCalendar-CellContent {
+  &_range&_selected&_first .Calendar-CellContent,
+  &_range&_selected&_last .Calendar-CellContent {
     --day-text-color: var(--color-text-selected);
   }
 
-  &_range&_selected&_first .DatePickerCalendar-CellContent::after,
-  &_range&_selected&_last .DatePickerCalendar-CellContent::after {
+  &_range&_selected&_first .Calendar-CellContent::after,
+  &_range&_selected&_last .Calendar-CellContent::after {
     --day-bg-color: var(--color-bg-selected-primary);
     border-radius: 50%;
   }
 
-  &_range&_selected:not(&_first):not(&_last) .DatePickerCalendar-CellContent::before {
+  &_range&_selected:not(&_first):not(&_last) .Calendar-CellContent::before {
     --day-bg-color: var(--color-bg-selected-secondary);
   }
 
-  &_range&_selected&_oneValue .DatePickerCalendar-CellContent::before {
+  &_range&_selected&_oneValue .Calendar-CellContent::before {
     right: 0;
     border-radius: 50%;
   }
 
-  &_range&_isHighlighted .DatePickerCalendar-CellContent::before {
+  &_range&_isHighlighted .Calendar-CellContent::before {
     --day-bg-color: var(--color-bg-selected-secondary);
   }
 
-  &_range&_isHighlighted&_first:not(&_selectedBackwards) .DatePickerCalendar-CellContent::before {
+  &_range&_isHighlighted&_first:not(&_selectedBackwards) .Calendar-CellContent::before {
     right: calc(var(--cell-bg-side-offset) * -1);
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
 
-  &_range&_isHighlighted&_first:not(&_selectedBackwards).lastWeekDay
-    .DatePickerCalendar-CellContent::before {
+  &_range&_isHighlighted&_first:not(&_selectedBackwards).lastWeekDay .Calendar-CellContent::before {
     right: 0;
   }
 
-  &_range&_isHighlighted&_first&_selectedBackwards .DatePickerCalendar-CellContent::before {
+  &_range&_isHighlighted&_first&_selectedBackwards .Calendar-CellContent::before {
     right: 0;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
 
   &_range&_isHighlighted&_oneValue:not(&_first):not(&_selectedBackwards):hover
-    .DatePickerCalendar-CellContent::after {
+    .Calendar-CellContent::after {
     border-top-right-radius: 50%;
     border-bottom-right-radius: 50%;
   }
 
   &_range&_isHighlighted&_oneValue:not(&_first)&_selectedBackwards:hover
-    .DatePickerCalendar-CellContent::after {
+    .Calendar-CellContent::after {
     border-top-left-radius: 50%;
     border-bottom-left-radius: 50%;
   }
 
-  &_range&_isHighlighted:not(&_selectedBackwards):hover .DatePickerCalendar-CellContent::before {
+  &_range&_isHighlighted:not(&_selectedBackwards):hover .Calendar-CellContent::before {
     right: 0;
     border-top-right-radius: 50%;
     border-bottom-right-radius: 50%;
   }
 
-  &_range&_isHighlighted&_selectedBackwards:hover .DatePickerCalendar-CellContent::before {
+  &_range&_isHighlighted&_selectedBackwards:hover .Calendar-CellContent::before {
     left: 0;
     border-top-left-radius: 50%;
     border-bottom-left-radius: 50%;
   }
 
-  &_range:not(&_disabled) .DatePickerCalendar-CellContent:hover {
+  &_range:not(&_disabled) .Calendar-CellContent:hover {
     --day-text-color: var(--color-text-hovered);
   }
 
-  &_range:not(&_disabled) .DatePickerCalendar-CellContent:hover::after {
+  &_range:not(&_disabled) .Calendar-CellContent:hover::after {
     --day-bg-color: var(--color-bg-hovered);
     border-radius: 50%;
   }
 }
 
-.DatePickerCalendar-CellContent {
+.Calendar-CellContent {
   position: relative;
   z-index: var(--z-date);
   display: flex;
@@ -253,6 +252,6 @@
   height: 100%;
 }
 
-.DatePickerCalendar-CellContentText {
+.Calendar-CellContentText {
   color: var(--day-text-color);
 }

@@ -1,4 +1,4 @@
-import './DatePickerCalendar.css';
+import './Calendar.css';
 
 import React from 'react';
 import {
@@ -16,12 +16,12 @@ import {
   startOfWeek,
 } from 'date-fns';
 
-import { chunk, range } from '../../../utils/array';
-import { cn } from '../../../utils/bem';
-import { isDefined, isNotNil } from '../../../utils/type-guards';
-import { Text } from '../../Text/Text';
-import { getMonthTitle, isDateRange, isOnlyOneDateInRange } from '../helpers';
-import { DateRange, MinMaxDate } from '../types';
+import { chunk, range } from '../../utils/array';
+import { cn } from '../../utils/bem';
+import { getMonthTitle, isDateRange, isOnlyOneDateInRange } from '../../utils/date';
+import { isDefined, isNotNil } from '../../utils/type-guards';
+import { DateRange, MinMaxDate } from '../../utils/types/Date';
+import { Text } from '../Text/Text';
 
 type OnSelectValueProps<T> = {
   onSelect: (value: T) => void;
@@ -38,7 +38,7 @@ type RangeProps = {
 
 type Props = MinMaxDate & { currentVisibleDate: Date } & (SingleProps | RangeProps);
 
-const cnDatePickerCalendar = cn('DatePickerCalendar');
+const cnCalendar = cn('Calendar');
 
 const dateComparer = (a?: Date, b?: Date): number => (a?.getTime() ?? 0) - (b?.getTime() ?? 0);
 
@@ -131,7 +131,7 @@ const getMonthWeeks = (date: Date): (Date | undefined)[][] => {
   return chunk(days, 7);
 };
 
-export const DatePickerCalendar: React.FC<Props> = (props) => {
+export const Calendar: React.FC<Props> = (props) => {
   const { value, currentVisibleDate, minDate, maxDate } = props;
   const [hoveredDate, setHoveredDate] = React.useState<Date>();
 
@@ -178,8 +178,8 @@ export const DatePickerCalendar: React.FC<Props> = (props) => {
   const renderDay = (date: Date | undefined, dayIdx: number): React.ReactElement | undefined => {
     if (!date) {
       return (
-        <div key={dayIdx} className={cnDatePickerCalendar('Cell')}>
-          <div className={cnDatePickerCalendar('CellContent')} />
+        <div key={dayIdx} className={cnCalendar('Cell')}>
+          <div className={cnCalendar('CellContent')} />
         </div>
       );
     }
@@ -200,7 +200,7 @@ export const DatePickerCalendar: React.FC<Props> = (props) => {
         key={dayIdx}
         role="button"
         tabIndex={0}
-        className={cnDatePickerCalendar('Cell', {
+        className={cnCalendar('Cell', {
           today: isDateToday,
           disabled: isDisabled,
           selectable: !isDisabled,
@@ -219,8 +219,8 @@ export const DatePickerCalendar: React.FC<Props> = (props) => {
         onClick={() => handleSelectDate(date)}
         onKeyDown={() => handleSelectDate(date)}
       >
-        <div className={cnDatePickerCalendar('CellContent')}>
-          <Text as="span" size="s" className={cnDatePickerCalendar('CellContentText')}>
+        <div className={cnCalendar('CellContent')}>
+          <Text as="span" size="s" className={cnCalendar('CellContentText')}>
             {date.getDate()}
           </Text>
         </div>
@@ -229,8 +229,8 @@ export const DatePickerCalendar: React.FC<Props> = (props) => {
   };
 
   const weekHeader = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'].map((dayName, idx) => (
-    <div key={idx} className={cnDatePickerCalendar('Cell', { weekDay: true })}>
-      <div className={cnDatePickerCalendar('CellContent')}>
+    <div key={idx} className={cnCalendar('Cell', { weekDay: true })}>
+      <div className={cnCalendar('CellContent')}>
         <Text as="span" size="2xs" transform="uppercase" view="ghost" spacing="xs">
           {dayName}
         </Text>
@@ -239,13 +239,13 @@ export const DatePickerCalendar: React.FC<Props> = (props) => {
   ));
 
   return (
-    <div className={cnDatePickerCalendar()}>
+    <div className={cnCalendar()}>
       {range(monthsAmount).map((idx) => {
         const month = addMonths(currentVisibleDate, idx);
         const weeks = getMonthWeeks(month);
 
         return (
-          <div key={idx} className={cnDatePickerCalendar('Month')}>
+          <div key={idx} className={cnCalendar('Month')}>
             {isDateRange(value) && (
               <Text
                 as="div"
@@ -254,15 +254,15 @@ export const DatePickerCalendar: React.FC<Props> = (props) => {
                 transform="uppercase"
                 view="primary"
                 spacing="xs"
-                className={cnDatePickerCalendar('Title')}
+                className={cnCalendar('Title')}
               >
                 {getMonthTitle(month)}
               </Text>
             )}
-            <div className={cnDatePickerCalendar('Row', { withDaynames: true })}>{weekHeader}</div>
-            <div className={cnDatePickerCalendar('Weeks')}>
+            <div className={cnCalendar('Row', { withDaynames: true })}>{weekHeader}</div>
+            <div className={cnCalendar('Weeks')}>
               {weeks.map((week, weekIdx) => (
-                <div key={weekIdx} className={cnDatePickerCalendar('Row')}>
+                <div key={weekIdx} className={cnCalendar('Row')}>
                   {week.map(renderDay)}
                 </div>
               ))}

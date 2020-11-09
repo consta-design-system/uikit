@@ -49,6 +49,7 @@
   align-items: flex-end;
   width: var(--tick-width);
   height: 100%;
+  outline: none;
   cursor: pointer;
 }
 

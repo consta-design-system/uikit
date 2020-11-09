@@ -7,7 +7,9 @@ import {
   isDateIsInvalid,
   isDateRange,
   isOnlyOneDateInRange,
+  makeQuartersRanges,
 } from '../helpers';
+import { DateRange } from '../types';
 
 describe('isDateRange', () => {
   it('не опознает используемое значение как интервал, если оно не передано', () => {
@@ -346,5 +348,74 @@ describe('isFullyEnteredDate', () => {
     const result = isDateFullyEntered([new Date('2020-01-01'), new Date('2020-01-01')]);
 
     expect(result).toBe(true);
+  });
+});
+
+describe('makeQuartersRanges', () => {
+  const START_OF_DAY = [0, 0, 0, 0] as const;
+  const END_OF_DAY = [23, 59, 59, 999] as const;
+
+  const QUARTERS_START_AND_END: DateRange[] = [
+    [new Date(2019, 0, 1, ...START_OF_DAY), new Date(2019, 2, 31, ...END_OF_DAY)],
+    [new Date(2019, 3, 1, ...START_OF_DAY), new Date(2019, 5, 30, ...END_OF_DAY)],
+    [new Date(2019, 6, 1, ...START_OF_DAY), new Date(2019, 8, 30, ...END_OF_DAY)],
+    [new Date(2019, 9, 1, ...START_OF_DAY), new Date(2019, 11, 31, ...END_OF_DAY)],
+  ];
+  const date = new Date(2019, 0, 1);
+
+  it('возвращает полные кварталы для всего года', () => {
+    const quarters = makeQuartersRanges({
+      date,
+      minDate: new Date(2019, 0, 1, ...START_OF_DAY),
+      maxDate: new Date(2019, 11, 31, ...END_OF_DAY),
+    });
+
+    expect(quarters).toEqual([
+      { title: '1 кв. 2019', range: QUARTERS_START_AND_END[0] },
+      { title: '2 кв. 2019', range: QUARTERS_START_AND_END[1] },
+      { title: '3 кв. 2019', range: QUARTERS_START_AND_END[2] },
+      { title: '4 кв. 2019', range: QUARTERS_START_AND_END[3] },
+    ]);
+  });
+
+  it('возвращает неполные кварталы если они частично выходят за минимальную или максимальную даты', () => {
+    const quarters = makeQuartersRanges({
+      date,
+      minDate: new Date(2019, 2, 1, ...START_OF_DAY),
+      maxDate: new Date(2019, 11, 1, ...END_OF_DAY),
+    });
+    expect(quarters).toEqual([
+      {
+        title: '1 кв. 2019',
+        range: [new Date(2019, 2, 1, ...START_OF_DAY), new Date(2019, 2, 31, ...END_OF_DAY)],
+      },
+      { title: '2 кв. 2019', range: QUARTERS_START_AND_END[1] },
+      { title: '3 кв. 2019', range: QUARTERS_START_AND_END[2] },
+      {
+        title: '4 кв. 2019',
+        range: [new Date(2019, 9, 1, ...START_OF_DAY), new Date(2019, 11, 1, ...END_OF_DAY)],
+      },
+    ]);
+  });
+
+  it('возвращает пустые массивы для кварталов которые полностью выходят за минимальную или максимальную даты', () => {
+    const quarters = makeQuartersRanges({
+      date,
+      minDate: new Date(2019, 3, 1, ...START_OF_DAY),
+      maxDate: new Date(2019, 8, 30, ...END_OF_DAY),
+    });
+
+    expect(quarters).toEqual([
+      {
+        title: '1 кв. 2019',
+        range: [],
+      },
+      { title: '2 кв. 2019', range: QUARTERS_START_AND_END[1] },
+      { title: '3 кв. 2019', range: QUARTERS_START_AND_END[2] },
+      {
+        title: '4 кв. 2019',
+        range: [],
+      },
+    ]);
   });
 });

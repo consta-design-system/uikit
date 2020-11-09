@@ -1,6 +1,8 @@
 .DatePicker {
   display: inline-flex;
   align-items: baseline;
+  width: fit-content;
+  outline: none;
 }
 
 .DatePicker-Tooltip {

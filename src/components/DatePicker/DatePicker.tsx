@@ -9,27 +9,27 @@ import { endOfDay, startOfDay } from 'date-fns';
 
 import { cn } from '../../utils/bem';
 import { componentToRenderFn } from '../../utils/componentToRenderFn';
+import { Calendar } from '../Calendar/Calendar';
 import { Popover } from '../Popover/Popover';
 import { useTheme } from '../Theme/Theme';
 
-import { DatePickerActionButtons } from './DatePickerActionButtons/DatePickerActionButtons';
-import { DatePickerCalendar } from './DatePickerCalendar/DatePickerCalendar';
-import { DatePickerDateOutOfRangeTooptipContent } from './DatePickerDateOutOfRangeTooptipContent/DatePickerDateOutOfRangeTooptipContent';
 import { DatePickerInputDate } from './DatePickerInputDate/DatePickerInputDate';
 import { DatePickerMonthsSliderRange } from './DatePickerMonthsSliderRange/DatePickerMonthsSliderRange';
 import { DatePickerMonthsSliderSingle } from './DatePickerMonthsSliderSingle/DatePickerMonthsSliderSingle';
 import { DatePickerRangeControl } from './DatePickerRangeControl/DatePickerRangeControl';
+import { DatePickerRangesSelector } from './DatePickerRangesSelector/DatePickerRangesSelector';
 import {
   getCurrentVisibleDate,
   isDateFullyEntered,
   isDateIsInvalid,
-  noop,
+  makeQuartersRanges,
   useCombinedRefs,
 } from './helpers';
 import {
   BaseControlProps,
   BaseDatePickerProps,
   DateRange,
+  MinMaxDate,
   RenderControlsType,
   RenderSliderProps,
   RenderSliderType,
@@ -59,7 +59,6 @@ const renderSingleControls: RenderControlsType<Date> = ({
   minDate,
   maxDate,
   size,
-  tooltipNode,
   onChange,
   isTooltipVisible,
   renderControls = defaultRenderSingleControl,
@@ -69,7 +68,6 @@ const renderSingleControls: RenderControlsType<Date> = ({
   return renderControls({
     size,
     isInvalid,
-    tooltipContent: isInvalid && !isTooltipVisible && tooltipNode,
     isCalendarOpened: isTooltipVisible,
     value,
     onChange,
@@ -81,7 +79,6 @@ const renderRangeControls: RenderControlsType<DateRange> = ({
   minDate,
   maxDate,
   size,
-  tooltipNode,
   onChange,
   isTooltipVisible,
   renderControls = defaultRenderRangeControls,
@@ -91,7 +88,6 @@ const renderRangeControls: RenderControlsType<DateRange> = ({
   return renderControls({
     size,
     isInvalid,
-    tooltipContent: isInvalid && !isTooltipVisible && tooltipNode,
     isCalendarOpened: isTooltipVisible,
     value,
     onChange,
@@ -110,6 +106,9 @@ type SingleProps = {
 
 type RangeProps = {
   type: 'date-range';
+  makePreparedRanges?: (
+    options: { date: Date } & MinMaxDate,
+  ) => Array<{ range: DateRange; title: string }>;
 } & BaseControlProps<DateRange>;
 
 type Props = BaseDatePickerProps & (SingleProps | RangeProps);
@@ -144,7 +143,7 @@ export const DatePicker = forwardRef<HTMLDivElement, Props>((props, ref) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value, props.minDate, props.maxDate, isTooltipVisible]);
 
-  let handleSelectQuarter;
+  let dateRangesSelector = null;
   let dateControls;
   let slider;
   let datePicker;
@@ -162,33 +161,34 @@ export const DatePicker = forwardRef<HTMLDivElement, Props>((props, ref) => {
     isTooltipVisible,
     minDate,
     maxDate,
-    tooltipNode: (
-      <DatePickerDateOutOfRangeTooptipContent
-        minDate={minDate}
-        maxDate={maxDate}
-        makeText={props.makeDateOutOfRangeTooltipText}
-      />
-    ),
   };
   if (props.type === 'date-range') {
-    handleSelectQuarter = (val: DateRange): void => {
-      setCurrentVisibleDate(
-        getCurrentVisibleDate({ value: [val[0], undefined], minDate, maxDate }),
-      );
+    dateRangesSelector = (
+      <DatePickerRangesSelector
+        {...baseCommonProps}
+        onSelect={(val: DateRange): void => {
+          setCurrentVisibleDate(
+            getCurrentVisibleDate({ value: [val[0], undefined], minDate, maxDate }),
+          );
 
-      return props.onChange(val);
-    };
+          return props.onChange(val);
+        }}
+        makeRanges={props.makePreparedRanges || makeQuartersRanges}
+      />
+    );
+
     dateControls = renderRangeControls({
       ...propsForControls,
       value: props.value,
       onChange: props.onChange,
+      renderControls: props.renderControls,
     });
     slider = renderMonthRangeSlider({
       ...monthsPanelCommonProps,
       value: props.value,
     });
     datePicker = (
-      <DatePickerCalendar
+      <Calendar
         {...baseCommonProps}
         type={props.type}
         value={props.value}
@@ -200,13 +200,14 @@ export const DatePicker = forwardRef<HTMLDivElement, Props>((props, ref) => {
       ...propsForControls,
       value: props.value,
       onChange: props.onChange,
+      renderControls: props.renderControls,
     });
     slider = renderMonthSingleSlider({
       ...monthsPanelCommonProps,
       value: props.value,
     });
     datePicker = (
-      <DatePickerCalendar
+      <Calendar
         {...baseCommonProps}
         type={props.type}
         value={props.value}
@@ -235,15 +236,10 @@ export const DatePicker = forwardRef<HTMLDivElement, Props>((props, ref) => {
           possibleDirections={POSSIBLE_DIRECTIONS}
           onClickOutside={handleApplyDate}
         >
-          <div className={classnames(themeClassNames.color.invert, cnDatePicker('Tooltip'))}>
+          <div className={classnames(themeClassNames.color.primary, cnDatePicker('Tooltip'))}>
             {slider}
             {datePicker}
-            <DatePickerActionButtons
-              {...baseCommonProps}
-              showQuartersSelector={Boolean(handleSelectQuarter)}
-              onApply={handleApplyDate}
-              onSelect={handleSelectQuarter || noop}
-            />
+            {dateRangesSelector}
           </div>
         </Popover>
       )}
