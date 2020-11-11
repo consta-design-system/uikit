@@ -1,5 +1,21 @@
 # Changelog
 
+## v1.10.5 (11/11/2020)
+
+- [feat(Tabs): added renderItem (#477)](https://github.com/gazprom-neft/consta-uikit/commit/dad329a3f3f7ffac84e5a8e93d26bbdd221ac0e4) - @gizeasy
+- [fix colors according to Figma (#565)](https://github.com/gazprom-neft/consta-uikit/commit/c551921ed2588285ba3fd863b7a086cf192df93c) - @fooontic
+- [fix(SelectDropdown): added z-index for dropdown list (#579)](https://github.com/gazprom-neft/consta-uikit/commit/1e0f7fd7d4dc536c1b09e0e1d37933084d512bfb) - @karpovfv-nedra
+- [test(MultiCombobox): added tests (#539)](https://github.com/gazprom-neft/consta-uikit/commit/4dd3279cb4052ada3c71e28280a465a00a33819b) - @gizeasy
+- [test(Combobox): added tests (#536)](https://github.com/gazprom-neft/consta-uikit/commit/14646cc52345f6a3840b8b3fafe66ae5884f25a1) - @gizeasy
+- [test(Header): added tests (#483)](https://github.com/gazprom-neft/consta-uikit/commit/2ebc448460c4a89e5de8cd22a7a5ae3e674cac94) - @gizeasy
+- [feat(Checkbox): added view ghost (#557)](https://github.com/gazprom-neft/consta-uikit/commit/8baa663adb8c756eed276a496861021fc13cca83) - @Miocene
+- [feat(Radio): added view ghost (#559)](https://github.com/gazprom-neft/consta-uikit/commit/332a75934e296f1c3292412b75df591ddb65309d) - @Miocene
+- [feat(Switch): added view ghost (#561)](https://github.com/gazprom-neft/consta-uikit/commit/a062a4f91a98f9cb3a8b5ce03ae89174c7d21d73) - @Miocene
+- [feat(Combobox, MultiCombobox): added message if no items are found in the list (#554)](https://github.com/gazprom-neft/consta-uikit/commit/c10ad2a7b824fdfb297c0e8b91ccb85a85b74c03) - @gizeasy
+- [feat(Table): added possibility to render large rows count (#555)](https://github.com/gazprom-neft/consta-uikit/commit/3b6ce214d120aeddc10cd4558872989836604dcf) - @karpovfv-nedra
+
+---
+
 ## v1.10.4 (27/10/2020)
 
 - [feat(Table): added multilevel headers (#484)](https://github.com/gazprom-neft/consta-uikit/commit/d37f516575a52c23b2c2895a127a7df45e8a488e) - @karpovfv-nedra
