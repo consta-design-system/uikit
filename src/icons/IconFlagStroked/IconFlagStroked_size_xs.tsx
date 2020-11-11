@@ -2,7 +2,7 @@ import * as React from 'react';
 
 function IconFlagStrokedSizeXs(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 12 12" {...props}>
+    <svg {...props}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"

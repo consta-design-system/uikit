@@ -2,7 +2,7 @@ import * as React from 'react';
 
 function IconGroupingSizeXs(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 12 12" {...props}>
+    <svg {...props}>
       <path d="M2 3.5a.5.5 0 01.5-.5h7a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-7a.5.5 0 01-.5-.5v-2zm0 4a.5.5 0 01.5-.5h7a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-7a.5.5 0 01-.5-.5v-1z" />
       <path
         fillRule="evenodd"
