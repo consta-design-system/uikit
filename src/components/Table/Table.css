@@ -66,8 +66,16 @@
       background-color: var(--color-bg-ghost);
     }
 
+    .Table-CellsRow_withMergedCells:hover & {
+      background-color: unset;
+    }
+
     &_isDarkned {
       opacity: 0.3;
+    }
+
+    &_isMerged {
+      align-items: center;
     }
   }
 

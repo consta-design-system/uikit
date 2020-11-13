@@ -7,6 +7,7 @@ import {
   generateData,
   tableData,
   tableWithBagdeData,
+  tableWithMergedCellsData,
   tableWithMultiLevelHeadersData,
 } from '../__mock__/data.mock';
 import { IconCheck } from '../../../icons/IconCheck/IconCheck';
@@ -290,6 +291,13 @@ export const WithSmartSorting = createStory(
   },
   {
     name: 'с умной сортировкой',
+  },
+);
+
+export const WithMergedCells = createStory(
+  () => <Table {...getKnobs(tableWithMergedCellsData as Partial<Props<TableRow>>)} />,
+  {
+    name: 'с объединёнными ячейками',
   },
 );
 
