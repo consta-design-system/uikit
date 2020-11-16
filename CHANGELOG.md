@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.10.6 (16/11/2020)
+
+- [docs(Icon): add docs (#552)](https://github.com/gazprom-neft/consta-uikit/commit/3fe9a935b6104f3c76c3128e7c5db6e685f284bf) - @gizeasy
+- [feat(Icons): update according to Figma (#578)](https://github.com/gazprom-neft/consta-uikit/commit/42f1dfc2a13229338aadb4b8844d457e0d7c5b07) - @Miocene
+
+---
+
 ## v1.10.5 (11/11/2020)
 
 - [feat(Tabs): added renderItem (#477)](https://github.com/gazprom-neft/consta-uikit/commit/dad329a3f3f7ffac84e5a8e93d26bbdd221ac0e4) - @gizeasy
