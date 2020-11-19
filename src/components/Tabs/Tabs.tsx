@@ -9,7 +9,7 @@ import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
-import { TabsTab } from './TabsTab/TabsTab';
+import { cnTabsTab, TabsTab } from './Tab/TabsTab';
 
 export const tabsSizes = ['m', 's'] as const;
 export type TabsPropSize = typeof tabsSizes[number];
@@ -21,12 +21,32 @@ export const tabsDefaultView: TabsPropView = tabsViews[0];
 
 export type TabsPropGetLabel<ITEM> = (item: ITEM) => string | number;
 export type TabsPropGetIcon<ITEM> = (item: ITEM) => React.FC<IconProps> | undefined;
-export type TabsPropOnChange<ITEM> = (props: {
-  e: React.MouseEvent<HTMLButtonElement>;
+export type TabsPropOnChange<ITEM, ITEM_ELEMENT> = (props: {
+  e: React.MouseEvent<ITEM_ELEMENT>;
   value: ITEM | null;
 }) => void;
 
-type Props<ITEM = any> = PropsWithHTMLAttributesAndRef<
+type RenderItemProps<ITEM, ELEMENT extends HTMLElement> = {
+  item: ITEM;
+  ref: React.RefObject<ELEMENT>;
+  key: string | number;
+  onChange: React.MouseEventHandler<ELEMENT>;
+  checked: boolean;
+  label: string;
+  icon?: React.FC<IconProps>;
+  iconSize: IconPropSize;
+  onlyIcon?: boolean;
+  className: string;
+};
+
+type RenderItem<ITEM, ELEMENT extends HTMLElement> = (
+  props: RenderItemProps<ITEM, ELEMENT>,
+) => React.ReactElement | null;
+
+export type TabsProps<
+  ITEM,
+  ITEM_ELEMENT extends HTMLElement = HTMLButtonElement
+> = PropsWithHTMLAttributesAndRef<
   {
     size?: TabsPropSize;
     onlyIcon?: boolean;
@@ -37,127 +57,151 @@ type Props<ITEM = any> = PropsWithHTMLAttributesAndRef<
     getIcon?: TabsPropGetIcon<ITEM>;
     getLabel: TabsPropGetLabel<ITEM>;
     children?: never;
-    onChange: TabsPropOnChange<ITEM>;
+    onChange: TabsPropOnChange<ITEM, ITEM_ELEMENT>;
+    renderItem?: RenderItem<ITEM, ITEM_ELEMENT>;
   },
   HTMLDivElement
 >;
 
-export const cnTabs = cn('Tabs');
+type Tabs = <ITEM, ITEMELEMENT extends HTMLElement = HTMLButtonElement>(
+  props: TabsProps<ITEM, ITEMELEMENT>,
+  ref: React.Ref<HTMLDivElement>,
+) => React.ReactElement | null;
 
-type Tabs = <ITEM>(props: Props<ITEM>) => React.ReactElement | null;
+export const cnTabs = cn('Tabs');
 
 const sizeMap: Record<TabsPropSize, IconPropSize> = {
   s: 'xs',
   m: 's',
 };
 
-export const Tabs: Tabs = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
-  const {
-    size = tabsDefaultSize,
-    className,
-    items,
-    view = tabsDefaultView,
-    value,
-    onlyIcon,
-    getIcon,
-    getLabel,
-    onChange,
-    iconSize: iconSizeProp,
-    ...otherProps
-  } = props;
-
-  const { getOnChange, getChecked } = useChoiceGroup<
-    typeof items[number],
-    React.MouseEvent<HTMLButtonElement>
-  >({
-    value,
-    getKey: getLabel,
-    callBack: onChange,
-    multiple: false,
-  });
-
-  const [mounted, setMounted] = useState<boolean>(false);
-
-  const constructItemRefs: () => Record<string, React.RefObject<HTMLButtonElement>> = () => {
-    const refs: Record<string, React.RefObject<HTMLButtonElement>> = {};
-    for (const item of items) {
-      refs[getLabel(item)] = createRef<HTMLButtonElement>();
-    }
-    return refs;
-  };
-
-  const buttonRefs = useMemo(constructItemRefs, [items, getLabel]);
-
-  const rootRef = useRef<HTMLDivElement>(null);
-  const lineRef = useRef<HTMLDivElement>(null);
-
-  function setStyleForLine(
-    tabsWidth: number,
-    tabWidth: number,
-    tabRatio: number,
-    tabOffsetLeft: number,
-  ) {
-    if (lineRef.current) {
-      const lineStyle = lineRef.current.style;
-      lineStyle.setProperty('--tabsWidth', `${tabsWidth}px`);
-      lineStyle.setProperty('--tabWidth', `${tabWidth}px`);
-      lineStyle.setProperty('--tabRatio', `${tabRatio}`);
-      lineStyle.setProperty('--tabOffsetLeft', `${tabOffsetLeft}px`);
-    }
+function setStyleForLine(
+  lineRef: React.RefObject<HTMLDivElement>,
+  tabsWidth: number,
+  tabWidth: number,
+  tabRatio: number,
+  tabOffsetLeft: number,
+) {
+  if (lineRef.current) {
+    const lineStyle = lineRef.current.style;
+    lineStyle.setProperty('--tabsWidth', `${tabsWidth}px`);
+    lineStyle.setProperty('--tabWidth', `${tabWidth}px`);
+    lineStyle.setProperty('--tabRatio', `${tabRatio}`);
+    lineStyle.setProperty('--tabOffsetLeft', `${tabOffsetLeft}px`);
   }
+}
 
-  const updateLine = () => {
-    if (rootRef.current && lineRef.current && buttonRefs) {
-      const rootWidth = rootRef.current.offsetWidth;
-      if (value) {
-        const activeItemRef = buttonRefs[getLabel(value)];
-        if (activeItemRef && activeItemRef.current) {
-          const itemWidth = activeItemRef.current.offsetWidth;
-          const itemOffsetLeft = activeItemRef.current.offsetLeft;
-          setStyleForLine(rootWidth, itemWidth, itemWidth / rootWidth, itemOffsetLeft);
-        }
-      } else {
-        setStyleForLine(rootWidth, 1, 0.00001, 1);
-      }
-    }
-  };
-
-  useEffect(() => {
-    updateLine();
-  });
-
-  const onMount = useCallback(() => {
-    updateLine();
-    setMounted(true);
-  }, [updateLine]);
-
-  const withOutValue = !value;
-  const iconSize = getSizeByMap(sizeMap, size, iconSizeProp);
-
+function renderItemDefault<ITEM, ITEMELEMENT extends HTMLElement>(
+  props: RenderItemProps<ITEM, ITEMELEMENT>,
+): React.ReactElement {
+  const { ref, onChange, ...otherProps } = props;
   return (
-    <div
-      className={cnTabs({ size, view }, [className])}
-      ref={useForkRef<HTMLDivElement>([ref, rootRef, onMount])}
+    <TabsTab
       {...otherProps}
-    >
-      <div className={cnTabs('List')}>
-        {items.map((item: unknown) => (
-          <TabsTab
-            className={cnTabs('Tab')}
-            ref={buttonRefs[getLabel(item)]}
-            key={getLabel(item)}
-            onChange={getOnChange(item)}
-            checked={getChecked(item)}
-            label={getLabel(item).toString()}
-            icon={getIcon && getIcon(item)}
-            iconSize={iconSize}
-            onlyIcon={onlyIcon}
-          />
-        ))}
-      </div>
-      <div className={cnTabs('WrapperRunningLine')}>
-        <div className={cnTabs('RunningLine', { withOutValue, mounted })} ref={lineRef} />
-      </div>
-    </div>
+      ref={(ref as unknown) as React.RefObject<HTMLButtonElement>}
+      onChange={(onChange as unknown) as React.MouseEventHandler<HTMLButtonElement>}
+    />
   );
-});
+}
+
+export const Tabs = React.forwardRef(
+  <ITEM, ITEMELEMENT extends HTMLElement = HTMLButtonElement>(
+    props: TabsProps<ITEM, ITEMELEMENT>,
+    ref: React.Ref<HTMLDivElement>,
+  ) => {
+    const {
+      size = tabsDefaultSize,
+      className,
+      items,
+      view = tabsDefaultView,
+      value,
+      onlyIcon,
+      getIcon,
+      getLabel,
+      onChange,
+      iconSize: iconSizeProp,
+      renderItem = renderItemDefault,
+      ...otherProps
+    } = props;
+
+    const { getOnChange, getChecked } = useChoiceGroup({
+      value: value || null,
+      getKey: getLabel,
+      callBack: onChange,
+      multiple: false,
+    });
+
+    const [mounted, setMounted] = useState<boolean>(false);
+
+    const constructItemRefs: () => Record<string, React.RefObject<ITEMELEMENT>> = () => {
+      const refs: Record<string, React.RefObject<ITEMELEMENT>> = {};
+      for (const item of items) {
+        refs[getLabel(item)] = createRef<ITEMELEMENT>();
+      }
+      return refs;
+    };
+
+    const buttonRefs = useMemo(constructItemRefs, [items, getLabel]);
+
+    const rootRef = useRef<HTMLDivElement>(null);
+    const lineRef = useRef<HTMLDivElement>(null);
+
+    const updateLine = () => {
+      if (rootRef.current && lineRef.current && buttonRefs) {
+        const rootWidth = rootRef.current.offsetWidth;
+        if (value) {
+          const activeItemRef = buttonRefs[getLabel(value)];
+          if (activeItemRef && activeItemRef.current) {
+            const itemWidth = activeItemRef.current.offsetWidth;
+            const itemOffsetLeft = activeItemRef.current.offsetLeft;
+            setStyleForLine(lineRef, rootWidth, itemWidth, itemWidth / rootWidth, itemOffsetLeft);
+          }
+        } else {
+          setStyleForLine(lineRef, rootWidth, 1, 0.00001, 1);
+        }
+      }
+    };
+
+    useEffect(() => {
+      updateLine();
+    });
+
+    const onMount = useCallback(() => {
+      updateLine();
+      setMounted(true);
+    }, [updateLine]);
+
+    const withOutValue = !value;
+    const iconSize = getSizeByMap(sizeMap, size, iconSizeProp);
+
+    return (
+      <div
+        className={cnTabs({ size, view }, [className])}
+        ref={useForkRef<HTMLDivElement>([ref, rootRef, onMount])}
+        {...otherProps}
+      >
+        <div className={cnTabs('List')}>
+          {items.map((item) => {
+            return renderItem({
+              item,
+              ref: buttonRefs[getLabel(item)],
+              key: getLabel(item),
+              onChange: getOnChange(item),
+              checked: getChecked(item),
+              label: getLabel(item).toString(),
+              icon: getIcon && getIcon(item),
+              iconSize,
+              onlyIcon,
+              className: cnTabs('Tab'),
+            });
+          })}
+        </div>
+        <div className={cnTabs('WrapperRunningLine')}>
+          <div className={cnTabs('RunningLine', { withOutValue, mounted })} ref={lineRef} />
+        </div>
+      </div>
+    );
+  },
+) as Tabs;
+
+export { TabsTab, cnTabsTab };

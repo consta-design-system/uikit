@@ -1,6 +1,4 @@
 <svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-  <path
-    d="M4.98739 7.71476L10.0034 2.7071V6H11.0034V1L6 1V2L9.29627 2L4.28028 7.00766L4.98739 7.71476Z"
-  />
-  <path d="M5 3V4H2V10H8V7H9V11H1V3H5Z" />
+  <path d="M4.987 7.715l5.016-5.008V6h1V1H6v1h3.296L4.28 7.008l.707.707z" />
+  <path d="M5 3v1H2v6h6V7h1v4H1V3h4z" />
 </svg>
