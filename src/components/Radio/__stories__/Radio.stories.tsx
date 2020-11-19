@@ -1,5 +1,4 @@
 import React from 'react';
-import { action } from '@storybook/addon-actions';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { createMetadata } from '../../../utils/storybook';
@@ -23,11 +22,16 @@ const defaultKnobs = () => ({
   view: select('view', radioPropView, radioPropViewDefault),
   align: select('align', radioPropAlign, radioPropAlignDefault),
   label: text('label', 'I am radio'),
-  checked: boolean('checked', false),
 });
 
 export function Playground() {
-  const { disabled, size, view, label, align, checked } = defaultKnobs();
+  const { disabled, size, view, label, align } = defaultKnobs();
+
+  const [checked, setChecked] = React.useState<boolean>(false);
+
+  const handleChange = ({ checked }: { checked: boolean }): void => {
+    setChecked(checked);
+  };
 
   return (
     <form>
@@ -38,7 +42,7 @@ export function Playground() {
         view={view}
         label={label}
         align={align}
-        onChange={action('onChange')}
+        onChange={handleChange}
       />
     </form>
   );
