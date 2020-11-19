@@ -2,7 +2,7 @@ import * as React from 'react';
 
 function IconTargetSizeXs(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg {...props}>
+    <svg viewBox="0 0 12 12" {...props}>
       <path d="M6 8a2 2 0 100-4 2 2 0 000 4z" />
       <path
         fillRule="evenodd"

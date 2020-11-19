@@ -2,7 +2,7 @@ import * as React from 'react';
 
 function IconQuestionSizeXs(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg {...props}>
+    <svg viewBox="0 0 12 12" {...props}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"

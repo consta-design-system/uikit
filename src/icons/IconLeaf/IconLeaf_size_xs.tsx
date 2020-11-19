@@ -2,7 +2,7 @@ import * as React from 'react';
 
 function IconLeafSizeXs(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg {...props}>
+    <svg viewBox="0 0 12 12" {...props}>
       <g clipPath="url(#SvgIconLeaf_size_xs__clip0)">
         <path
           fillRule="evenodd"

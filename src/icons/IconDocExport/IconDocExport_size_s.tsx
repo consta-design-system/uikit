@@ -2,7 +2,7 @@ import * as React from 'react';
 
 function IconDocExportSizeS(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg {...props}>
+    <svg viewBox="0 0 16 16" {...props}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"
