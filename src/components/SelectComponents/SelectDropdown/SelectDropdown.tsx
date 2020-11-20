@@ -74,6 +74,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
       className={cnSelectDropdown({ form, size }, [className])}
       aria-activedescendant={`${id}-${highlightedIndex}`}
       equalAnchorWidth
+      isInteractive
     >
       <div className={cnSelect('List', { size, form })} ref={dropdownRef}>
         {visibleOptions.length > 0 ? (
