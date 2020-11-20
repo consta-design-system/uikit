@@ -156,6 +156,7 @@ export const Combobox: ComboboxType = (props) => {
     if (!isOpen) {
       setOpen(true);
     }
+    setValue(null);
     const inputValue = toggleRef.current?.value ?? '';
     setInputData({ value: inputValue });
   };
