@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { createMetadata, createStory } from '../../../utils/storybook';
@@ -62,8 +62,14 @@ const getKnobs = () => ({
   placeholder: text('placeholder', 'Placeholder'),
 });
 
-const Default = (props: { value?: SelectOption }): JSX.Element => {
+const Default = (props: {
+  value?: SelectOption;
+  onChange?(item: SelectOption | null): void;
+}): JSX.Element => {
   const getItemLabel = (option: SelectOption): string => option.label;
+  const [value, setValue] = useState<SelectOption | null | undefined>(props.value);
+
+  const { onChange = setValue } = props;
 
   return (
     <div>
@@ -71,7 +77,8 @@ const Default = (props: { value?: SelectOption }): JSX.Element => {
         {...getKnobs()}
         id="example"
         options={items}
-        value={props.value}
+        value={value}
+        onChange={onChange}
         getOptionLabel={getItemLabel}
       />
     </div>

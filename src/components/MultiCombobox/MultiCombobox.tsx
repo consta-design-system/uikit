@@ -21,7 +21,7 @@ export const multiComboboxPropSizeDefault = multiComboboxPropSize[0];
 export type MultiComboboxProps<ITEM> = CommonSelectProps<ITEM> &
   Omit<SelectContainerProps, 'value' | 'onChange'> & {
     value?: ITEM[] | null;
-    onChange?: (v: ITEM[] | null) => void;
+    onChange?(v: ITEM[] | undefined | null): void;
     onCreate?(str: string): void;
     getGroupOptions?(group: ITEM): ITEM[];
     labelForCreate?: string;
@@ -32,6 +32,7 @@ export type MultiComboboxProps<ITEM> = CommonSelectProps<ITEM> &
 type MultiComboboxType = <ITEM>(props: MultiComboboxProps<ITEM>) => React.ReactElement | null;
 
 export const MultiCombobox: MultiComboboxType = (props) => {
+  const defaultOptionsRef = useRef<HTMLDivElement | null>(null);
   const {
     placeholder,
     onBlur,
@@ -50,17 +51,14 @@ export const MultiCombobox: MultiComboboxType = (props) => {
     getGroupOptions,
     labelForCreate = 'Добавить',
     labelForNotFound = 'Не найдено',
+    classNameDropdown,
+    optionsRef = defaultOptionsRef,
     ...restProps
   } = props;
   const [isFocused, setIsFocused] = useState(false);
-  const [val, setValue] = useState(value);
   const [inputData, setInputData] = useState<{ value: string | undefined }>({
     value: '',
   });
-
-  React.useEffect(() => {
-    setValue(value);
-  }, [value]);
 
   const toggleRef = useRef<HTMLInputElement>(null);
   const controlInnerRef = useRef<HTMLDivElement>(null);
@@ -70,13 +68,12 @@ export const MultiCombobox: MultiComboboxType = (props) => {
     if (typeof onChange === 'function' && v) {
       onChange(v);
     }
-    setValue(v);
     setInputData({ value: toggleRef.current?.value });
   };
 
-  const optionsRef = useRef<HTMLDivElement | null>(null);
   const controlRef = useRef<HTMLDivElement | null>(null);
-  const arrValue: typeof val | null = typeof val !== 'undefined' && val !== null ? [...val] : null;
+  const arrValue: typeof value | null =
+    typeof value !== 'undefined' && value !== null ? [...value] : null;
   const hasGroup = typeof getGroupOptions === 'function';
 
   const scrollToIndex = (index: number): void => {
@@ -145,7 +142,6 @@ export const MultiCombobox: MultiComboboxType = (props) => {
 
   const handleClear = (): void => {
     setInputData({ value: '' });
-    setValue(null);
     typeof onChange === 'function' && onChange(null);
     toggleRef.current?.focus();
   };
@@ -312,6 +308,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
           multi
           getOptionLabel={getOptionLabel}
           form={getSelectDropdownForm(form)}
+          className={classNameDropdown}
         />
       )}
       <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>

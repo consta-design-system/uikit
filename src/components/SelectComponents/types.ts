@@ -1,3 +1,5 @@
+import { RefObject } from 'react';
+
 export const sizes = ['xs', 's', 'm', 'l'] as const;
 export type PropSize = typeof sizes[number];
 export const DefaultPropSize: PropSize = 'm';
@@ -32,4 +34,6 @@ export type CommonSelectProps<ITEM> = {
   onBlur?: (event?: React.FocusEvent<HTMLInputElement>) => void;
   onFocus?: (event?: React.FocusEvent<HTMLInputElement>) => void;
   children?: never;
+  classNameDropdown?: string;
+  optionsRef?: RefObject<HTMLDivElement>;
 };
