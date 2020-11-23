@@ -1,0 +1,52 @@
+.ThemeExampleColors {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-l);
+  background-color: var(--color-bg-secondary);
+
+  &-Card {
+    width: 100%;
+    box-sizing: border-box;
+    padding: var(--space-l);
+    border-radius: var(--control-radius);
+    background-color: var(--color-bg-default);
+  }
+
+  &-Text {
+    height: var(--space-xs);
+    border-radius: var(--control-radius);
+    background-color: var(--color-typo-secondary);
+
+    &:not(:last-child) {
+      margin-bottom: var(--space-xs);
+    }
+
+    &:last-child {
+      width: 70%;
+    }
+  }
+
+  &-Content {
+    margin-bottom: var(--space-m);
+  }
+
+  &-Controls {
+    display: flex;
+  }
+
+  &-Button {
+    width: 40%;
+    height: var(--control-height-xs);
+    border-radius: var(--control-radius);
+
+    &:first-child {
+      margin-right: var(--space-s);
+      background-color: var(--color-control-bg-primary);
+    }
+
+    &:last-child {
+      background-color: var(--color-control-bg-ghost);
+    }
+  }
+}
