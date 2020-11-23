@@ -6,6 +6,7 @@ import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { scrollIntoView } from '../../utils/scrollIntoView';
 import { cnSelect } from '../SelectComponents/cnSelect';
+import { getSelectDropdownForm } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
 import {
@@ -254,6 +255,7 @@ export const Combobox: ComboboxType = (props) => {
           getOptionLabel={getOptionLabel}
           labelForCreate={labelForCreate}
           labelForNotFound={labelForNotFound}
+          form={getSelectDropdownForm(form)}
         />
       )}
     </SelectContainer>

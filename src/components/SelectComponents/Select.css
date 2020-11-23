@@ -463,6 +463,15 @@
     &_size_l {
       padding: var(--space-xs) 0;
     }
+
+    &_form {
+      &_round {
+        & .Select-ListItem {
+          padding-right: calc(var(--input-space) * 1.6 + var(--input-space));
+          padding-left: calc(var(--input-space) * 1.6 + var(--input-space));
+        }
+      }
+    }
   }
 
   &-ListItem {
