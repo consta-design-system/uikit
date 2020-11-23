@@ -2,7 +2,7 @@ import * as React from 'react';
 
 function IconCalculatorSizeM(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg {...props}>
+    <svg viewBox="0 0 24 24" {...props}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"
