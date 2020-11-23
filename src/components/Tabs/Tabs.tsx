@@ -23,7 +23,7 @@ export type TabsPropGetLabel<ITEM> = (item: ITEM) => string | number;
 export type TabsPropGetIcon<ITEM> = (item: ITEM) => React.FC<IconProps> | undefined;
 export type TabsPropOnChange<ITEM, ITEM_ELEMENT> = (props: {
   e: React.MouseEvent<ITEM_ELEMENT>;
-  value: ITEM | null;
+  value: ITEM;
 }) => void;
 
 type RenderItemProps<ITEM, ELEMENT extends HTMLElement> = {
