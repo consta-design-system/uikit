@@ -1,0 +1,111 @@
+# RadioGroup
+
+Группа радиокнопок, объединённых одним `name`. Пользователь может выбрать один вариант из списка.
+
+- [Направление](#направление)
+- [Состояние](#состояние)
+- [Размер](#размер)
+- [Внешний вид](#внешний-вид)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+## Направление
+
+Группа радиокнопок может располагаться как по вертикали, так и по горизонтали. За направление отвечает свойство `direction`.
+
+```tsx
+<RadioGroup
+  direction="column"
+/>
+<RadioGroup
+  direction="row"
+/>
+```
+
+## Состояние
+
+`disabled` не дает пользователю сделать выбор.
+
+```tsx
+<RadioGroup disabled />
+```
+
+## Размер
+
+За размер отвечает свойство `size`.
+
+```tsx
+<RadioGroup size="m" />
+<RadioGroup size="l" />
+```
+
+## Внешний вид
+
+Всего в дизайн-системе два вида групп радиокнопок: `primary` и `ghost`. За это отвечает свойство `view`.
+
+```tsx
+<RadioGroup view="primary" />
+<RadioGroup view="ghost" />
+```
+
+## Свойства
+
+```
+type OnChange = (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM | null }) => void;
+```
+
+<!-- props:start -->
+
+| Свойство                     | Тип                               | По умолчанию | Описание                                                                                                  |
+| ---------------------------- | --------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------- |
+| `value`                      | `Item` or `null`                  | —            | Значение                                                                                                  |
+| `items`                      | `Item[]`                          | —            | Элементы                                                                                                  |
+| `getLabel`                   | `(item: Item) => string, number`  | —            | Функция для формирования текста для радиокнопки. Также используется в качестве уникального ключа элемента |
+| `onChange`                   | `OnChange`                        | —            | Действие при выборе элемента                                                                              |
+| `name`                       | `string`                          | —            | Имя `<input>`, указывается для доступности                                                                |
+| [`direction?`](#направление) | `'column', 'row'`                 | `'column'`   | Направление радиокнопок                                                                                   |
+| [`disabled?`](#состояние)    | `boolean`                         | `false`      | Делает группу радиокнопок неактивной                                                                      |
+| [`size?`](#размер)           | `'m', 'l'`                        | `'m'`        | Размер группы радиокнопок                                                                                 |
+| [`view?`](#внешний-вид)      | `'primary', 'ghost'`              | `'primary'`  | Внешний вид                                                                                               |
+| `className?`                 | `string`                          | —            | Дополнительные CSS-классы                                                                                 |
+
+<!-- props:end -->
+
+## Пример
+
+```ts
+// src/App.ts
+import React from 'react';
+import { RadioGroup } from '@consta/uikit/RadioGroup';
+
+type Item = {
+  name: string;
+}
+
+const items = [
+  {
+    name: 'один',
+  },
+  {
+    name: 'два',
+  },
+  {
+    name: 'три',
+  },
+];
+
+const App = () => {
+  const [value, setValue] = React.useState<Item | null>(null);
+  const onChange = ({ value }: { value: Item | null }) => setValue(value);
+
+  return (
+    <RadioGroup
+      value={value}
+      items={items}
+      getLabel={item => item.name}
+      onChange={onChange}
+      name='items'
+    />
+  );
+};
+```
