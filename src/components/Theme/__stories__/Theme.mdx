@@ -66,7 +66,7 @@ Display же не используется для сервисов, за ко
 только для высчитывания остальных цветов. Такие цвета описываются postcss переменными, 
 а не custom properties.
 
-```ts
+```css
 $color-base-base: #002033; /* Базовый цвет содержимого, от которого выстраиваются цвета текста, иконок, ... */
 $color-base-essential: #fff; /* Базовый цвет поверхностей */
 $color-base-project: #0071b2; /* Проектный цвет, от которого выстраивают акцентные состояния */
@@ -92,7 +92,7 @@ $color-base-critical: #33000f;
 отображаться по-разному. Но самый популярный шрифт наших пользователей — Segoe UI, поэтому 
 мы ориентируемся на него.
 
-```ts
+```css
 --font-primary: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen', 'Ubuntu',
                 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 --font-mono: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
@@ -108,7 +108,7 @@ $color-base-critical: #33000f;
 
 > Любой размер текста можно использовать с любым межстрочным расстоянием, а не только `xs` с `xs`.
 
-```ts
+```css
 /* Размер текста */
 --size-text-2xs: 10px;
 --size-text-xs: 12px;
@@ -137,7 +137,7 @@ $color-base-critical: #33000f;
 Для отступов используется модуль 4px. Исключение составляет отступ в 2px — 
 он нужен для компенсации графических элементов.
 
-```ts
+```css
 --space-3xs: 2px;
 --space-2xs: 4px;
 --space-xs: 8px;
@@ -157,7 +157,7 @@ $color-base-critical: #33000f;
 Дополнительная модификатор темы для контроля за «контролами». Этим файлом 
 определяются переменные для внешнего вида контролов кроме цветов.
 
-```ts
+```css
 --control-radius: 4px; /* Основной радиус скругления контроллов */
 --control-border-width: 1px; /* Основная толщина контроллов */
 --control-height-l: var(--space-4xl);
