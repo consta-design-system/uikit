@@ -27,6 +27,7 @@ export type SimpleSelectProps<ITEM> = CommonSelectProps<ITEM> &
 type Select = <ITEM>(props: SimpleSelectProps<ITEM>) => React.ReactElement | null;
 
 export const BasicSelect: Select = (props) => {
+  const defaultOptionsRef = useRef<HTMLDivElement | null>(null);
   const {
     placeholder,
     onBlur,
@@ -38,6 +39,7 @@ export const BasicSelect: Select = (props) => {
     disabled,
     ariaLabel,
     id,
+    optionsRef = defaultOptionsRef,
     form = DefaultPropForm,
     view = DefaultPropView,
     size = DefaultPropSize,
@@ -57,7 +59,6 @@ export const BasicSelect: Select = (props) => {
     setValue(v);
   };
 
-  const optionsRef = useRef<HTMLDivElement | null>(null);
   const controlRef = useRef<HTMLDivElement | null>(null);
   const arrValue = typeof val !== 'undefined' && val !== null ? [val] : null;
 

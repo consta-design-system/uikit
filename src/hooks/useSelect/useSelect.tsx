@@ -456,7 +456,6 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
     return {
       ...rest,
       onClick: (e: React.SyntheticEvent): void => {
-        e.preventDefault();
         selectIndex(index);
         if (typeof onClick === 'function') {
           onClick(e);

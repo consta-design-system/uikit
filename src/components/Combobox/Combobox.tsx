@@ -31,6 +31,7 @@ export type ComboboxSelectProps<ITEM> = CommonSelectProps<ITEM> &
 type ComboboxType = <ITEM>(props: ComboboxSelectProps<ITEM>) => React.ReactElement | null;
 
 export const Combobox: ComboboxType = (props) => {
+  const defaultOptionsRef = useRef<HTMLDivElement | null>(null);
   const {
     placeholder,
     onBlur,
@@ -50,6 +51,7 @@ export const Combobox: ComboboxType = (props) => {
     getGroupOptions,
     labelForCreate = 'Добавить',
     labelForNotFound = 'Не найдено',
+    optionsRef = defaultOptionsRef,
     ...restProps
   } = props;
   const [isFocused, setIsFocused] = useState(false);
@@ -71,7 +73,6 @@ export const Combobox: ComboboxType = (props) => {
     setInputData({ value: toggleRef.current?.value });
   };
 
-  const optionsRef = useRef<HTMLDivElement | null>(null);
   const controlRef = useRef<HTMLDivElement | null>(null);
   const arrValue = typeof val !== 'undefined' && val !== null ? [val] : null;
   const hasGroup = typeof getGroupOptions === 'function';

@@ -1,12 +1,12 @@
 import './Modal.stories.css';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { boolean, select } from '@storybook/addon-knobs';
 
 import { cn } from '../../../utils/bem';
-import { createMetadata } from '../../../utils/storybook';
-import { BasicSelect } from '../../BasicSelect';
+import { createMetadata, createStory } from '../../../utils/storybook';
 import { Button } from '../../Button/Button';
+import { Combobox } from '../../Combobox/Combobox';
 import { Text } from '../../Text/Text';
 import { Modal } from '../Modal';
 
@@ -64,6 +64,7 @@ export function Playground() {
   const getItemLabel = (option: SelectOption): string => option.label;
 
   const { hasOverlay, width, position } = defaultKnobs();
+  const optionsRef = useRef<HTMLDivElement | null>(null);
 
   return (
     <div className={cnModalStories()}>
@@ -81,6 +82,7 @@ export function Playground() {
         onOverlayClick={() => setIsModalOpen(false)}
         width={width}
         position={position}
+        refsForExcludeClick={[optionsRef]}
         onClose={() => console.log('Коллбэк на закрытие')}
         onOpen={() => console.log('Коллбэк на открытие')}
       >
@@ -91,7 +93,12 @@ export function Playground() {
           Описание в теле модалки. Здесь может находиться какая-то информация. Lorem ipsum dolor sit
           amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
         </Text>
-        <BasicSelect id="example" options={items} getOptionLabel={getItemLabel} />
+        <Combobox
+          id="example"
+          options={items}
+          getOptionLabel={getItemLabel}
+          optionsRef={optionsRef}
+        />
         <div className={cnModalStories('action')}>
           <Button
             size="m"
@@ -105,6 +112,63 @@ export function Playground() {
     </div>
   );
 }
+
+export const WithCreateStory = createStory(
+  () => {
+    const [isModalOpen, setIsModalOpen] = React.useState(false);
+    const getItemLabel = (option: SelectOption): string => option.label;
+
+    const { hasOverlay, width, position } = defaultKnobs();
+    const optionsRef = useRef<HTMLDivElement | null>(null);
+
+    return (
+      <div className={cnModalStories()}>
+        <Button
+          size="m"
+          view="primary"
+          label="Открыть модальное окно"
+          width="default"
+          onClick={() => setIsModalOpen(true)}
+        />
+        <Modal
+          className={cnModalStories('Modal')}
+          isOpen={isModalOpen}
+          hasOverlay={hasOverlay}
+          onOverlayClick={() => setIsModalOpen(false)}
+          width={width}
+          position={position}
+          refsForExcludeClick={[optionsRef]}
+          onClose={() => console.log('Коллбэк на закрытие')}
+          onOpen={() => console.log('Коллбэк на открытие')}
+        >
+          <Text as="p" size="s" view="secondary" className={cnModalStories('title')}>
+            Заголовок модалки
+          </Text>
+          <div style={{ padding: 20 }}>
+            <Combobox
+              id="example"
+              options={items}
+              getOptionLabel={getItemLabel}
+              optionsRef={optionsRef}
+            />
+          </div>
+          <div className={cnModalStories('action')}>
+            <Button
+              size="m"
+              view="primary"
+              label="Закрыть"
+              width="default"
+              onClick={() => setIsModalOpen(false)}
+            />
+          </div>
+        </Modal>
+      </div>
+    );
+  },
+  {
+    name: 'c combobox',
+  },
+);
 
 export default createMetadata({
   title: 'Components|/Modal',

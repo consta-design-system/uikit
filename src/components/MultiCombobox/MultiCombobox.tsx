@@ -32,6 +32,7 @@ export type MultiComboboxProps<ITEM> = CommonSelectProps<ITEM> &
 type MultiComboboxType = <ITEM>(props: MultiComboboxProps<ITEM>) => React.ReactElement | null;
 
 export const MultiCombobox: MultiComboboxType = (props) => {
+  const defaultOptionsRef = useRef<HTMLDivElement | null>(null);
   const {
     placeholder,
     onBlur,
@@ -51,6 +52,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
     labelForCreate = 'Добавить',
     labelForNotFound = 'Не найдено',
     classNameDropdown,
+    optionsRef = defaultOptionsRef,
     ...restProps
   } = props;
   const [isFocused, setIsFocused] = useState(false);
@@ -75,7 +77,6 @@ export const MultiCombobox: MultiComboboxType = (props) => {
     setInputData({ value: toggleRef.current?.value });
   };
 
-  const optionsRef = useRef<HTMLDivElement | null>(null);
   const controlRef = useRef<HTMLDivElement | null>(null);
   const arrValue: typeof val | null = typeof val !== 'undefined' && val !== null ? [...val] : null;
   const hasGroup = typeof getGroupOptions === 'function';
