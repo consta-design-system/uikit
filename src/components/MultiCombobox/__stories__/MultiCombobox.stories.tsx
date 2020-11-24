@@ -32,11 +32,12 @@ const getKnobs = () => ({
 });
 
 const Default = (props: {
-  value?: SelectOption[];
+  value?: Option[] | null;
   items?: Option[];
   getItemLabel?(item: Option): string;
   getGroupOptions?(option: Option): SelectOption[];
   onCreate?(str: string): void;
+  onChange?(item: Option[] | null): void;
 }): JSX.Element => {
   const getItemLabelDefault = (option: Option): string => option.label;
   const {
@@ -44,6 +45,7 @@ const Default = (props: {
     getItemLabel = getItemLabelDefault,
     getGroupOptions,
     onCreate,
+    onChange,
   } = props;
 
   const options = items;
@@ -58,6 +60,7 @@ const Default = (props: {
         getOptionLabel={getItemLabel}
         getGroupOptions={getGroupOptions}
         onCreate={onCreate}
+        onChange={onChange}
       />
     </div>
   );
@@ -74,13 +77,15 @@ export const WithValueStory = createStory(() => <Default value={[simpleItems[4]]
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 export const WithCreateStory = createStory(
   () => {
-    const [opions, setOptions] = useState(simpleItems);
+    const [options, setOptions] = useState(simpleItems);
+    const [value, setValue] = useState<Option[] | undefined | null>();
 
     const handleCreate = (label: string): void => {
-      setOptions([{ label, value: label }, ...opions]);
+      setValue([...(value || []), { label, value: label }]);
+      setOptions([{ label, value: label }, ...options]);
     };
 
-    return <Default items={opions} onCreate={handleCreate} />;
+    return <Default items={options} onCreate={handleCreate} value={value} onChange={setValue} />;
   },
   {
     name: 'c cозданием новой опции',

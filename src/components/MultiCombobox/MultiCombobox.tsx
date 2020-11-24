@@ -21,7 +21,7 @@ export const multiComboboxPropSizeDefault = multiComboboxPropSize[0];
 export type MultiComboboxProps<ITEM> = CommonSelectProps<ITEM> &
   Omit<SelectContainerProps, 'value' | 'onChange'> & {
     value?: ITEM[] | null;
-    onChange?: (v: ITEM[] | null) => void;
+    onChange?(v: ITEM[] | undefined | null): void;
     onCreate?(str: string): void;
     getGroupOptions?(group: ITEM): ITEM[];
     labelForCreate?: string;
@@ -50,6 +50,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
     getGroupOptions,
     labelForCreate = 'Добавить',
     labelForNotFound = 'Не найдено',
+    classNameDropdown,
     ...restProps
   } = props;
   const [isFocused, setIsFocused] = useState(false);
@@ -145,8 +146,8 @@ export const MultiCombobox: MultiComboboxType = (props) => {
 
   const handleClear = (): void => {
     setInputData({ value: '' });
-    setValue(null);
-    typeof onChange === 'function' && onChange(null);
+    setValue(undefined);
+    typeof onChange === 'function' && onChange(undefined);
     toggleRef.current?.focus();
   };
 
@@ -312,6 +313,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
           multi
           getOptionLabel={getOptionLabel}
           form={getSelectDropdownForm(form)}
+          className={classNameDropdown}
         />
       )}
       <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>

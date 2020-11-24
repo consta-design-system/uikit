@@ -32,4 +32,5 @@ export type CommonSelectProps<ITEM> = {
   onBlur?: (event?: React.FocusEvent<HTMLInputElement>) => void;
   onFocus?: (event?: React.FocusEvent<HTMLInputElement>) => void;
   children?: never;
+  classNameDropdown?: string;
 };

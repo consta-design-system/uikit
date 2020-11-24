@@ -20,8 +20,8 @@ type SelectContainerProps = React.ComponentProps<typeof SelectContainer>;
 
 export type ComboboxSelectProps<ITEM> = CommonSelectProps<ITEM> &
   Omit<SelectContainerProps, 'value' | 'onChange' | 'children'> & {
-    value?: ITEM | null;
-    onChange?: (v: ITEM | null) => void;
+    value?: ITEM | null | undefined;
+    onChange?(v: ITEM | null): void;
     onCreate?(str: string): void;
     getGroupOptions?(group: ITEM): ITEM[];
     labelForCreate?: string;
@@ -45,6 +45,7 @@ export const Combobox: ComboboxType = (props) => {
     form = DefaultPropForm,
     view = DefaultPropView,
     size = DefaultPropSize,
+    classNameDropdown,
     onCreate,
     getGroupOptions,
     labelForCreate = 'Добавить',
@@ -172,7 +173,7 @@ export const Combobox: ComboboxType = (props) => {
 
   const handleCreate = (): void => {
     if (typeof onCreate === 'function') {
-      const newValue = toggleRef.current?.value;
+      const newValue = toggleRef.current?.value.trim();
       newValue && onCreate(newValue);
     }
   };
@@ -257,6 +258,7 @@ export const Combobox: ComboboxType = (props) => {
           labelForCreate={labelForCreate}
           labelForNotFound={labelForNotFound}
           form={getSelectDropdownForm(form)}
+          className={classNameDropdown}
         />
       )}
     </SelectContainer>
