@@ -98,7 +98,7 @@ export const WithCreateStory = createStory(
       setOptions([newVal, ...options]);
     };
 
-    return <Default items={options} onCreate={handleCreate} value={value} />;
+    return <Default items={options} onCreate={handleCreate} value={value} onChange={setValue} />;
   },
   {
     name: 'c cозданием новой опции',
