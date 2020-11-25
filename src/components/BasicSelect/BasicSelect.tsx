@@ -39,7 +39,7 @@ export const BasicSelect: Select = (props) => {
     disabled,
     ariaLabel,
     id,
-    optionsRef = defaultOptionsRef,
+    dropdownRef = defaultOptionsRef,
     form = DefaultPropForm,
     view = DefaultPropView,
     size = DefaultPropSize,
@@ -57,15 +57,15 @@ export const BasicSelect: Select = (props) => {
   const arrValue = typeof value !== 'undefined' && value !== null ? [value] : null;
 
   const scrollToIndex = (index: number): void => {
-    if (!optionsRef.current) {
+    if (!dropdownRef.current) {
       return;
     }
 
-    const elements: NodeListOf<HTMLDivElement> = optionsRef.current.querySelectorAll(
+    const elements: NodeListOf<HTMLDivElement> = dropdownRef.current.querySelectorAll(
       'div[role=option]',
     );
 
-    scrollIntoView(elements[index], optionsRef.current);
+    scrollIntoView(elements[index], dropdownRef.current);
   };
 
   const {
@@ -79,7 +79,7 @@ export const BasicSelect: Select = (props) => {
     options,
     value: arrValue,
     onChange: handlerChangeValue,
-    optionsRef,
+    optionsRef: dropdownRef,
     controlRef,
     scrollToIndex,
     disabled,
@@ -171,7 +171,7 @@ export const BasicSelect: Select = (props) => {
           visibleOptions={visibleOptions}
           highlightedIndex={highlightedIndex}
           getOptionProps={getOptionProps}
-          optionsRef={optionsRef}
+          dropdownRef={dropdownRef}
           id={id}
           selectedValues={arrValue}
           getOptionLabel={getOptionLabel}

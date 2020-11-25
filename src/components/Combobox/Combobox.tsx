@@ -51,7 +51,7 @@ export const Combobox: ComboboxType = (props) => {
     getGroupOptions,
     labelForCreate = 'Добавить',
     labelForNotFound = 'Не найдено',
-    optionsRef = defaultOptionsRef,
+    dropdownRef = defaultOptionsRef,
     ...restProps
   } = props;
   const [isFocused, setIsFocused] = useState(false);
@@ -72,11 +72,11 @@ export const Combobox: ComboboxType = (props) => {
   const hasGroup = typeof getGroupOptions === 'function';
 
   const scrollToIndex = (index: number): void => {
-    if (!optionsRef.current) {
+    if (!dropdownRef.current) {
       return;
     }
 
-    const elements: NodeListOf<HTMLDivElement> = optionsRef.current.querySelectorAll(
+    const elements: NodeListOf<HTMLDivElement> = dropdownRef.current.querySelectorAll(
       'div[role=option]',
     );
 
@@ -84,7 +84,7 @@ export const Combobox: ComboboxType = (props) => {
       return;
     }
 
-    scrollIntoView(elements[index], optionsRef.current);
+    scrollIntoView(elements[index], dropdownRef.current);
   };
 
   const {
@@ -98,7 +98,7 @@ export const Combobox: ComboboxType = (props) => {
     options,
     value: arrValue,
     onChange: handlerChangeValue,
-    optionsRef,
+    optionsRef: dropdownRef,
     controlRef,
     scrollToIndex,
     disabled,
@@ -243,7 +243,7 @@ export const Combobox: ComboboxType = (props) => {
           highlightedIndex={highlightedIndex}
           getOptionProps={getOptionProps}
           onCreate={handleCreate}
-          optionsRef={optionsRef}
+          dropdownRef={dropdownRef}
           inputValue={inputData.value}
           id={id}
           hasGroup={hasGroup}

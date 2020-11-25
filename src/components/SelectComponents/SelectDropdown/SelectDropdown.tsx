@@ -18,7 +18,7 @@ type Props<ITEM> = PropsWithJsxAttributes<{
   size: PropSize;
   id: string;
   controlRef: React.MutableRefObject<HTMLDivElement | null>;
-  optionsRef: React.MutableRefObject<HTMLDivElement | null>;
+  dropdownRef: React.MutableRefObject<HTMLDivElement | null>;
   visibleOptions: Option<ITEM>[];
   highlightedIndex: number;
   getOptionProps(props: OptionProps): GetOptionPropsResult;
@@ -45,7 +45,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
     size,
     getOptionProps,
     inputValue,
-    optionsRef,
+    dropdownRef,
     id,
     hasGroup = false,
     onCreate,
@@ -74,9 +74,8 @@ export const SelectDropdown: SelectDropdown = (props) => {
       className={cnSelectDropdown({ form, size }, [className])}
       aria-activedescendant={`${id}-${highlightedIndex}`}
       equalAnchorWidth
-      isInteractive
     >
-      <div className={cnSelect('List', { size, form })} ref={optionsRef}>
+      <div className={cnSelect('List', { size, form })} ref={dropdownRef}>
         {visibleOptions.length > 0 ? (
           visibleOptions.map((option, index: number) => {
             const isOptionForCreate = 'optionForCreate' in option;

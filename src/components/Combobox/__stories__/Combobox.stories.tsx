@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { groups, simpleItems } from '../__mocks__/data.mock';
@@ -52,7 +52,7 @@ const Default = (props: {
     onChange = setValue,
   } = props;
 
-  const val = useMemo(() => (value !== undefined ? value : props.value), [props.value, value]);
+  const val = value !== undefined ? value : props.value;
 
   return (
     <div>

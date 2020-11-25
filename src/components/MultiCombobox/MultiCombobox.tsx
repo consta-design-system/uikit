@@ -21,7 +21,7 @@ export const multiComboboxPropSizeDefault = multiComboboxPropSize[0];
 export type MultiComboboxProps<ITEM> = CommonSelectProps<ITEM> &
   Omit<SelectContainerProps, 'value' | 'onChange'> & {
     value?: ITEM[] | null;
-    onChange?(v: ITEM[] | undefined | null): void;
+    onChange?(v: ITEM[] | null): void;
     onCreate?(str: string): void;
     getGroupOptions?(group: ITEM): ITEM[];
     labelForCreate?: string;
@@ -52,7 +52,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
     labelForCreate = 'Добавить',
     labelForNotFound = 'Не найдено',
     classNameDropdown,
-    optionsRef = defaultOptionsRef,
+    dropdownRef = defaultOptionsRef,
     ...restProps
   } = props;
   const [isFocused, setIsFocused] = useState(false);
@@ -77,15 +77,15 @@ export const MultiCombobox: MultiComboboxType = (props) => {
   const hasGroup = typeof getGroupOptions === 'function';
 
   const scrollToIndex = (index: number): void => {
-    if (!optionsRef.current) {
+    if (!dropdownRef.current) {
       return;
     }
 
-    const elements: NodeListOf<HTMLDivElement> = optionsRef.current.querySelectorAll(
+    const elements: NodeListOf<HTMLDivElement> = dropdownRef.current.querySelectorAll(
       'div[role=option]',
     );
 
-    scrollIntoView(elements[index], optionsRef.current);
+    scrollIntoView(elements[index], dropdownRef.current);
   };
 
   const onSelectOption = (): void => {
@@ -103,7 +103,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
     options,
     value: arrValue,
     onChange: handlerChangeValue,
-    optionsRef,
+    optionsRef: dropdownRef,
     controlRef,
     scrollToIndex,
     disabled,
@@ -298,7 +298,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
           highlightedIndex={highlightedIndex}
           getOptionProps={getOptionProps}
           onCreate={handleCreate}
-          optionsRef={optionsRef}
+          dropdownRef={dropdownRef}
           inputValue={inputData.value}
           id={id}
           hasGroup={hasGroup}

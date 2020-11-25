@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { createMetadata, createStory } from '../../../utils/storybook';
@@ -50,7 +50,7 @@ const Default = (props: {
   } = props;
 
   const options = items;
-  const val = useMemo(() => (value !== undefined ? value : props.value), [props.value, value]);
+  const val = value !== undefined ? value : props.value;
 
   return (
     <div>

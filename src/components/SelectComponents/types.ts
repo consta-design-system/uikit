@@ -35,5 +35,5 @@ export type CommonSelectProps<ITEM> = {
   onFocus?: (event?: React.FocusEvent<HTMLInputElement>) => void;
   children?: never;
   classNameDropdown?: string;
-  optionsRef?: RefObject<HTMLDivElement>;
+  dropdownRef?: RefObject<HTMLDivElement>;
 };
