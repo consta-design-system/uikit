@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { createMetadata, createStory } from '../../../utils/storybook';
@@ -40,15 +40,17 @@ const Default = (props: {
   onChange?(item: Option[] | null): void;
 }): JSX.Element => {
   const getItemLabelDefault = (option: Option): string => option.label;
+  const [value, setValue] = useState<Option[] | null | undefined>();
   const {
     items = simpleItems,
     getItemLabel = getItemLabelDefault,
     getGroupOptions,
     onCreate,
-    onChange,
+    onChange = setValue,
   } = props;
 
   const options = items;
+  const val = useMemo(() => (value !== undefined ? value : props.value), [props.value, value]);
 
   return (
     <div>
@@ -56,7 +58,7 @@ const Default = (props: {
         {...getKnobs()}
         id="example"
         options={options}
-        value={props.value}
+        value={val}
         getOptionLabel={getItemLabel}
         getGroupOptions={getGroupOptions}
         onCreate={onCreate}

@@ -55,26 +55,20 @@ export const Combobox: ComboboxType = (props) => {
     ...restProps
   } = props;
   const [isFocused, setIsFocused] = useState(false);
-  const [val, setValue] = useState(value);
   const [inputData, setInputData] = useState<{ value: string | undefined }>({
     value: '',
   });
   const toggleRef = useRef<HTMLInputElement>(null);
 
-  React.useEffect(() => {
-    setValue(value);
-  }, [value]);
-
   const handlerChangeValue = (v: typeof value): void => {
     if (typeof onChange === 'function' && v) {
       onChange(v);
     }
-    setValue(v);
     setInputData({ value: toggleRef.current?.value });
   };
 
   const controlRef = useRef<HTMLDivElement | null>(null);
-  const arrValue = typeof val !== 'undefined' && val !== null ? [val] : null;
+  const arrValue = typeof value !== 'undefined' && value !== null ? [value] : null;
   const hasGroup = typeof getGroupOptions === 'function';
 
   const scrollToIndex = (index: number): void => {
@@ -141,7 +135,6 @@ export const Combobox: ComboboxType = (props) => {
 
   const handleClear = (): void => {
     setInputData({ value: '' });
-    setValue(null);
     typeof onChange === 'function' && onChange(null);
     toggleRef.current?.focus();
   };
@@ -158,7 +151,7 @@ export const Combobox: ComboboxType = (props) => {
     if (!isOpen) {
       setOpen(true);
     }
-    setValue(null);
+    typeof onChange === 'function' && onChange(null);
     const inputValue = toggleRef.current?.value ?? '';
     setInputData({ value: inputValue });
   };

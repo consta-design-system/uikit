@@ -1,6 +1,6 @@
 import './Modal.stories.css';
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { boolean, select } from '@storybook/addon-knobs';
 
 import { cn } from '../../../utils/bem';
@@ -15,9 +15,12 @@ import { Modal } from '../Modal';
 import mdx from './Modal.mdx';
 
 type SelectOption = {
-  value: string;
   label: string;
+  value: string;
 };
+
+type Group = { label: string; items: SelectOption[] };
+export type Option = SelectOption | Group;
 
 const cnModalStories = cn('ModalStories');
 
@@ -59,12 +62,12 @@ const items = [
   { label: 'Oganesson', value: 'Oganesson' },
 ];
 
-export function Playground() {
+export function Playground(props: {
+  children: React.ReactNode;
+  optionsRef: React.RefObject<HTMLElement>[];
+}): JSX.Element {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const getItemLabel = (option: SelectOption): string => option.label;
-
   const { hasOverlay, width, position } = defaultKnobs();
-  const optionsRef = useRef<HTMLDivElement | null>(null);
 
   return (
     <div className={cnModalStories()}>
@@ -82,23 +85,21 @@ export function Playground() {
         onOverlayClick={() => setIsModalOpen(false)}
         width={width}
         position={position}
-        refsForExcludeClick={[optionsRef]}
+        refsForExcludeClick={[...props.optionsRef]}
         onClose={() => console.log('Коллбэк на закрытие')}
         onOpen={() => console.log('Коллбэк на открытие')}
       >
-        <Text as="p" size="s" view="secondary" className={cnModalStories('title')}>
-          Заголовок модалки
-        </Text>
-        <Text as="p" size="m" view="primary" className={cnModalStories('body')}>
-          Описание в теле модалки. Здесь может находиться какая-то информация. Lorem ipsum dolor sit
-          amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-        </Text>
-        <Combobox
-          id="example"
-          options={items}
-          getOptionLabel={getItemLabel}
-          optionsRef={optionsRef}
-        />
+        {props.children || (
+          <>
+            <Text as="p" size="s" view="secondary" className={cnModalStories('title')}>
+              Заголовок модалки
+            </Text>
+            <Text as="p" size="m" view="primary" className={cnModalStories('body')}>
+              Описание в теле модалки. Здесь может находиться какая-то информация. Lorem ipsum dolor
+              sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+            </Text>
+          </>
+        )}
         <div className={cnModalStories('action')}>
           <Button
             size="m"
@@ -115,54 +116,26 @@ export function Playground() {
 
 export const WithCreateStory = createStory(
   () => {
-    const [isModalOpen, setIsModalOpen] = React.useState(false);
     const getItemLabel = (option: SelectOption): string => option.label;
-
-    const { hasOverlay, width, position } = defaultKnobs();
     const optionsRef = useRef<HTMLDivElement | null>(null);
+    const [value, setValue] = useState<Option | null | undefined>();
 
     return (
-      <div className={cnModalStories()}>
-        <Button
-          size="m"
-          view="primary"
-          label="Открыть модальное окно"
-          width="default"
-          onClick={() => setIsModalOpen(true)}
-        />
-        <Modal
-          className={cnModalStories('Modal')}
-          isOpen={isModalOpen}
-          hasOverlay={hasOverlay}
-          onOverlayClick={() => setIsModalOpen(false)}
-          width={width}
-          position={position}
-          refsForExcludeClick={[optionsRef]}
-          onClose={() => console.log('Коллбэк на закрытие')}
-          onOpen={() => console.log('Коллбэк на открытие')}
-        >
-          <Text as="p" size="s" view="secondary" className={cnModalStories('title')}>
-            Заголовок модалки
-          </Text>
-          <div style={{ padding: 20 }}>
-            <Combobox
-              id="example"
-              options={items}
-              getOptionLabel={getItemLabel}
-              optionsRef={optionsRef}
-            />
-          </div>
-          <div className={cnModalStories('action')}>
-            <Button
-              size="m"
-              view="primary"
-              label="Закрыть"
-              width="default"
-              onClick={() => setIsModalOpen(false)}
-            />
-          </div>
-        </Modal>
-      </div>
+      <Playground optionsRef={[optionsRef]}>
+        <Text as="p" size="s" view="secondary" className={cnModalStories('title')}>
+          Заголовок модалки
+        </Text>
+        <div style={{ padding: 20 }}>
+          <Combobox
+            id="example"
+            options={items}
+            value={value}
+            onChange={setValue}
+            getOptionLabel={getItemLabel}
+            optionsRef={optionsRef}
+          />
+        </div>
+      </Playground>
     );
   },
   {

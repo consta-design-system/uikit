@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { groups, simpleItems } from '../__mocks__/data.mock';
@@ -23,7 +23,7 @@ type SelectOption = {
 };
 
 type Group = { label: string; items: SelectOption[] };
-type Option = SelectOption | Group;
+export type Option = SelectOption | Group;
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const getKnobs = () => ({
@@ -43,13 +43,16 @@ const Default = (props: {
   onChange?(item: Option | null): void;
 }): JSX.Element => {
   const getItemLabelDefault = (option: SelectOption): string => option.label;
+  const [value, setValue] = useState<Option | null | undefined>();
   const {
     items = simpleItems,
     getItemLabel = getItemLabelDefault,
     getGroupOptions,
     onCreate,
-    onChange,
+    onChange = setValue,
   } = props;
+
+  const val = useMemo(() => (value !== undefined ? value : props.value), [props.value, value]);
 
   return (
     <div>
@@ -57,7 +60,7 @@ const Default = (props: {
         {...getKnobs()}
         id="example"
         options={items}
-        value={props.value}
+        value={val}
         getOptionLabel={getItemLabel}
         getGroupOptions={getGroupOptions}
         onCreate={onCreate}
@@ -74,7 +77,11 @@ export const WithValueStory = createStory(() => <Default value={simpleItems[4]} 
 });
 
 export const WithGroupsStory = createStory(
-  () => <Default items={groups} getGroupOptions={(group: Group): SelectOption[] => group.items} />,
+  () => {
+    return (
+      <Default items={groups} getGroupOptions={(group: Group): SelectOption[] => group.items} />
+    );
+  },
   {
     name: 'c группами опций',
   },
@@ -87,11 +94,11 @@ export const WithCreateStory = createStory(
 
     const handleCreate = (label: string): void => {
       const newVal: SelectOption = { label, value: label };
-      setOptions([{ label, value: label }, ...options]);
       setValue(newVal);
+      setOptions([newVal, ...options]);
     };
 
-    return <Default items={options} onCreate={handleCreate} value={value} onChange={setValue} />;
+    return <Default items={options} onCreate={handleCreate} value={value} />;
   },
   {
     name: 'c cозданием новой опции',

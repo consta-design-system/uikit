@@ -56,14 +56,9 @@ export const MultiCombobox: MultiComboboxType = (props) => {
     ...restProps
   } = props;
   const [isFocused, setIsFocused] = useState(false);
-  const [val, setValue] = useState(value);
   const [inputData, setInputData] = useState<{ value: string | undefined }>({
     value: '',
   });
-
-  React.useEffect(() => {
-    setValue(value);
-  }, [value]);
 
   const toggleRef = useRef<HTMLInputElement>(null);
   const controlInnerRef = useRef<HTMLDivElement>(null);
@@ -73,12 +68,12 @@ export const MultiCombobox: MultiComboboxType = (props) => {
     if (typeof onChange === 'function' && v) {
       onChange(v);
     }
-    setValue(v);
     setInputData({ value: toggleRef.current?.value });
   };
 
   const controlRef = useRef<HTMLDivElement | null>(null);
-  const arrValue: typeof val | null = typeof val !== 'undefined' && val !== null ? [...val] : null;
+  const arrValue: typeof value | null =
+    typeof value !== 'undefined' && value !== null ? [...value] : null;
   const hasGroup = typeof getGroupOptions === 'function';
 
   const scrollToIndex = (index: number): void => {
@@ -147,8 +142,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
 
   const handleClear = (): void => {
     setInputData({ value: '' });
-    setValue(undefined);
-    typeof onChange === 'function' && onChange(undefined);
+    typeof onChange === 'function' && onChange(null);
     toggleRef.current?.focus();
   };
 
