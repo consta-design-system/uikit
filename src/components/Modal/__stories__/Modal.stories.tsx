@@ -85,7 +85,7 @@ export function Playground(props: {
         onOverlayClick={() => setIsModalOpen(false)}
         width={width}
         position={position}
-        refsForExcludeClick={[...props.optionsRef]}
+        refsForExcludeClick={[...(props.optionsRef || [])]}
         onClose={() => console.log('Коллбэк на закрытие')}
         onOpen={() => console.log('Коллбэк на открытие')}
       >
