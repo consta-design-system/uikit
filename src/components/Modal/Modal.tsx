@@ -28,7 +28,7 @@ type ModalProps = {
   position?: ModalPropPosition;
   children?: React.ReactNode;
   container?: HTMLDivElement | undefined;
-  refsForExcludeClick?: React.RefObject<HTMLElement>[];
+  refsForExcludeClickOutside?: React.RefObject<HTMLElement>[];
 };
 
 const cnModal = cn('Modal');
@@ -45,7 +45,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
     position = modalPropPositionDefault,
     children,
     container = window.document.body,
-    refsForExcludeClick,
+    refsForExcludeClickOutside,
     ...rest
   } = props;
   const ref = React.useRef<HTMLDivElement | null>(null);
@@ -53,7 +53,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
 
   useClickOutside({
     isActive: !!onOverlayClick,
-    ignoreClicksInsideRefs: [ref, ...(refsForExcludeClick || [])],
+    ignoreClicksInsideRefs: [ref, ...(refsForExcludeClickOutside || [])],
     handler: (event: MouseEvent) => onOverlayClick?.(event),
   });
 

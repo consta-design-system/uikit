@@ -65,7 +65,7 @@ const items = [
 
 export function Playground(props: {
   children: React.ReactNode;
-  optionsRef: React.RefObject<HTMLElement>[];
+  dropdownRef: React.RefObject<HTMLElement>[];
 }): JSX.Element {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const { hasOverlay, width, position } = defaultKnobs();
@@ -86,7 +86,7 @@ export function Playground(props: {
         onOverlayClick={(): void => setIsModalOpen(false)}
         width={width}
         position={position}
-        refsForExcludeClick={[...(props.optionsRef || [])]}
+        refsForExcludeClickOutside={[...(props.dropdownRef || [])]}
         // eslint-disable-next-line no-console
         onClose={(): void => console.log('Коллбэк на закрытие')}
         // eslint-disable-next-line no-console
@@ -120,11 +120,11 @@ export function Playground(props: {
 export const WithCreateStory = createStory(
   () => {
     const getItemLabel = (option: SelectOption): string => option.label;
-    const optionsRef = useRef<HTMLDivElement | null>(null);
+    const dropdownRef = useRef<HTMLDivElement | null>(null);
     const [value, setValue] = useState<Option | null | undefined>();
 
     return (
-      <Playground optionsRef={[optionsRef]}>
+      <Playground dropdownRef={[dropdownRef]}>
         <Text as="p" size="s" view="secondary" className={cnModalStories('title')}>
           Заголовок модалки
         </Text>
@@ -135,7 +135,7 @@ export const WithCreateStory = createStory(
             value={value}
             onChange={setValue}
             getOptionLabel={getItemLabel}
-            optionsRef={optionsRef}
+            dropdownRef={dropdownRef}
           />
         </div>
       </Playground>
