@@ -43,19 +43,29 @@ type CommonProps<ITEM> = {
   children?: never;
 };
 
+type OnChangeMultiple<ITEM> = (props: {
+  e: React.ChangeEvent<HTMLInputElement>;
+  value: ITEM[] | null;
+}) => void;
+
+type OnChangeWithoutMultiple<ITEM> = (props: {
+  e: React.ChangeEvent<HTMLInputElement>;
+  value: ITEM;
+}) => void;
+
 type PropsWithMultiple<ITEM> = {
   value?: ITEM[] | null;
   multiple: true;
-  onChange: (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM[] | null }) => void;
+  onChange: OnChangeMultiple<ITEM>;
 };
 
 type PropsWithoutMultiple<ITEM> = {
   value?: ITEM | null;
   multiple: false;
-  onChange: (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM }) => void;
+  onChange: OnChangeWithoutMultiple<ITEM>;
 };
 
-type Props<ITEM = any> = PropsWithHTMLAttributesAndRef<
+type Props<ITEM> = PropsWithHTMLAttributesAndRef<
   CommonProps<ITEM> & (PropsWithMultiple<ITEM> | PropsWithoutMultiple<ITEM>),
   HTMLDivElement
 >;
@@ -71,7 +81,7 @@ const sizeMap: Record<ChoiceGroupPropSize, IconPropSize> = {
 
 export const cnChoiceGroup = cn('ChoiceGroup');
 
-export const ChoiceGroup: ChoiceGroup = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
+export const ChoiceGroup: ChoiceGroup = React.forwardRef((props, ref) => {
   const {
     size = choiceGroupDefaultSize,
     form = choiceGroupDefaultForm,
@@ -79,7 +89,7 @@ export const ChoiceGroup: ChoiceGroup = React.forwardRef<HTMLDivElement, Props>(
     width = choiceGroupWidthDefault,
     onlyIcon,
     iconSize: iconSizeProp,
-    value,
+    value = null,
     multiple = false,
     items,
     getLabel,
@@ -90,14 +100,15 @@ export const ChoiceGroup: ChoiceGroup = React.forwardRef<HTMLDivElement, Props>(
     ...otherProps
   } = props;
 
-  const { getOnChange, getChecked } = useChoiceGroup<
-    typeof items[number],
-    React.ChangeEvent<HTMLInputElement>
-  >({
-    value,
+  type Item = typeof items[number];
+
+  const { getOnChange, getChecked } = useChoiceGroup<Item, React.ChangeEvent<HTMLInputElement>>({
+    value: value as Item,
     getKey: getLabel,
-    callBack: onChange,
-    multiple,
+    callBack: onChange as OnChangeWithoutMultiple<Item>,
+    multiple: multiple as false,
+    // привел к типам из-за того что
+    // TS не понимает что PropsWithMultiple и PropsWithoutMultiple не могут прийти одновременно
   });
 
   const iconSize = getSizeByMap(sizeMap, size, iconSizeProp);
@@ -108,7 +119,7 @@ export const ChoiceGroup: ChoiceGroup = React.forwardRef<HTMLDivElement, Props>(
       ref={ref}
       className={cnChoiceGroup({ size, form, view, width, onlyIcon }, [className])}
     >
-      {items.map((item: unknown) => (
+      {items.map((item) => (
         <ChoiceGroupItem
           key={getLabel(item)}
           onChange={getOnChange(item)}
