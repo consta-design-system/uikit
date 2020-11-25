@@ -52,7 +52,7 @@ type PropsWithMultiple<ITEM> = {
 type PropsWithoutMultiple<ITEM> = {
   value?: ITEM | null;
   multiple: false;
-  onChange: (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM | null }) => void;
+  onChange: (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM }) => void;
 };
 
 type Props<ITEM = any> = PropsWithHTMLAttributesAndRef<

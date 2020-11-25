@@ -62,8 +62,6 @@ export function Playground() {
 
   const getIcon = withIcon ? (item: Item) => item.icon : undefined;
   const getLabel = (item: Item) => item.name;
-  const onChangeMultiple = ({ value }: { value: Item[] | null }) => setValueMultiple(value);
-  const onChange = ({ value }: { value: Item | null }) => setValue(value);
 
   return (
     <div className={cnChoiceGroupStories()}>
@@ -73,7 +71,7 @@ export function Playground() {
             items={items}
             value={valueMultiple}
             getLabel={getLabel}
-            onChange={onChangeMultiple}
+            onChange={({ value }) => setValueMultiple(value)}
             name={cnChoiceGroupStories()}
             multiple
             size={size}
@@ -88,7 +86,7 @@ export function Playground() {
             items={items}
             value={value}
             getLabel={getLabel}
-            onChange={onChange}
+            onChange={({ value }) => setValue(value)}
             name={cnChoiceGroupStories()}
             multiple={false}
             size={size}

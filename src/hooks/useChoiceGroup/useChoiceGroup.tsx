@@ -11,7 +11,7 @@ type Values<ITEM, EVENT> = {
 
 type CallbackWithMultiple<ITEM, EVENT> = (props: { e: EVENT; value: ITEM[] | null }) => void;
 
-type CallbackWithoutMultiple<ITEM, EVENT> = (props: { e: EVENT; value: ITEM | null }) => void;
+type CallbackWithoutMultiple<ITEM, EVENT> = (props: { e: EVENT; value: ITEM }) => void;
 
 type PropsWithMultiple<ITEM, EVENT> = {
   multiple: true;
