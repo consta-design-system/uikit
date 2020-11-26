@@ -46,7 +46,7 @@ export const Combobox: ComboboxType = (props) => {
     form = DefaultPropForm,
     view = DefaultPropView,
     size = DefaultPropSize,
-    classNameDropdown,
+    dropdownClassName,
     onCreate,
     getGroupOptions,
     labelForCreate = 'Добавить',
@@ -252,7 +252,7 @@ export const Combobox: ComboboxType = (props) => {
           labelForCreate={labelForCreate}
           labelForNotFound={labelForNotFound}
           form={getSelectDropdownForm(form)}
-          className={classNameDropdown}
+          className={dropdownClassName}
         />
       )}
     </SelectContainer>

@@ -43,6 +43,7 @@ export const BasicSelect: Select = (props) => {
     form = DefaultPropForm,
     view = DefaultPropView,
     size = DefaultPropSize,
+    dropdownClassName,
     ...restProps
   } = props;
   const [isFocused, setIsFocused] = useState(false);
@@ -176,6 +177,7 @@ export const BasicSelect: Select = (props) => {
           selectedValues={arrValue}
           getOptionLabel={getOptionLabel}
           form={getSelectDropdownForm(form)}
+          className={dropdownClassName}
         />
       )}
     </SelectContainer>

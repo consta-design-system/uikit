@@ -51,7 +51,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
     getGroupOptions,
     labelForCreate = 'Добавить',
     labelForNotFound = 'Не найдено',
-    classNameDropdown,
+    dropdownClassName,
     dropdownRef = defaultOptionsRef,
     ...restProps
   } = props;
@@ -308,7 +308,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
           multi
           getOptionLabel={getOptionLabel}
           form={getSelectDropdownForm(form)}
-          className={classNameDropdown}
+          className={dropdownClassName}
         />
       )}
       <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
