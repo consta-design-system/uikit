@@ -15,15 +15,15 @@ import mdx from './Modal.mdx';
 
 const cnModalStories = cn('ModalStories');
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const defaultKnobs = () => ({
   hasOverlay: boolean('hasOverlay', true),
   width: select('width', ['auto'], 'auto'),
   position: select('position', ['center', 'top'], 'center'),
 });
 
-export function Playground() {
+export function Playground(): JSX.Element {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
-
   const { hasOverlay, width, position } = defaultKnobs();
 
   return (
@@ -33,17 +33,19 @@ export function Playground() {
         view="primary"
         label="Открыть модальное окно"
         width="default"
-        onClick={() => setIsModalOpen(true)}
+        onClick={(): void => setIsModalOpen(true)}
       />
       <Modal
         className={cnModalStories('Modal')}
         isOpen={isModalOpen}
         hasOverlay={hasOverlay}
-        onOverlayClick={() => setIsModalOpen(false)}
+        onOverlayClick={(): void => setIsModalOpen(false)}
         width={width}
         position={position}
-        onClose={() => console.log('Коллбэк на закрытие')}
-        onOpen={() => console.log('Коллбэк на открытие')}
+        // eslint-disable-next-line no-console
+        onClose={(): void => console.log('Коллбэк на закрытие')}
+        // eslint-disable-next-line no-console
+        onOpen={(): void => console.log('Коллбэк на открытие')}
       >
         <Text as="p" size="s" view="secondary" className={cnModalStories('title')}>
           Заголовок модалки
@@ -58,7 +60,7 @@ export function Playground() {
             view="primary"
             label="Закрыть"
             width="default"
-            onClick={() => setIsModalOpen(false)}
+            onClick={(): void => setIsModalOpen(false)}
           />
         </div>
       </Modal>

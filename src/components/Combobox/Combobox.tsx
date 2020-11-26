@@ -20,8 +20,8 @@ type SelectContainerProps = React.ComponentProps<typeof SelectContainer>;
 
 export type ComboboxSelectProps<ITEM> = CommonSelectProps<ITEM> &
   Omit<SelectContainerProps, 'value' | 'onChange' | 'children'> & {
-    value?: ITEM | null;
-    onChange?: (v: ITEM | null) => void;
+    value?: ITEM | null | undefined;
+    onChange?(v: ITEM | null): void;
     onCreate?(str: string): void;
     getGroupOptions?(group: ITEM): ITEM[];
     labelForCreate?: string;
@@ -31,6 +31,7 @@ export type ComboboxSelectProps<ITEM> = CommonSelectProps<ITEM> &
 type ComboboxType = <ITEM>(props: ComboboxSelectProps<ITEM>) => React.ReactElement | null;
 
 export const Combobox: ComboboxType = (props) => {
+  const defaultOptionsRef = useRef<HTMLDivElement | null>(null);
   const {
     placeholder,
     onBlur,
@@ -45,42 +46,37 @@ export const Combobox: ComboboxType = (props) => {
     form = DefaultPropForm,
     view = DefaultPropView,
     size = DefaultPropSize,
+    dropdownClassName,
     onCreate,
     getGroupOptions,
     labelForCreate = 'Добавить',
     labelForNotFound = 'Не найдено',
+    dropdownRef = defaultOptionsRef,
     ...restProps
   } = props;
   const [isFocused, setIsFocused] = useState(false);
-  const [val, setValue] = useState(value);
   const [inputData, setInputData] = useState<{ value: string | undefined }>({
     value: '',
   });
   const toggleRef = useRef<HTMLInputElement>(null);
 
-  React.useEffect(() => {
-    setValue(value);
-  }, [value]);
-
   const handlerChangeValue = (v: typeof value): void => {
     if (typeof onChange === 'function' && v) {
       onChange(v);
     }
-    setValue(v);
     setInputData({ value: toggleRef.current?.value });
   };
 
-  const optionsRef = useRef<HTMLDivElement | null>(null);
   const controlRef = useRef<HTMLDivElement | null>(null);
-  const arrValue = typeof val !== 'undefined' && val !== null ? [val] : null;
+  const arrValue = typeof value !== 'undefined' && value !== null ? [value] : null;
   const hasGroup = typeof getGroupOptions === 'function';
 
   const scrollToIndex = (index: number): void => {
-    if (!optionsRef.current) {
+    if (!dropdownRef.current) {
       return;
     }
 
-    const elements: NodeListOf<HTMLDivElement> = optionsRef.current.querySelectorAll(
+    const elements: NodeListOf<HTMLDivElement> = dropdownRef.current.querySelectorAll(
       'div[role=option]',
     );
 
@@ -88,7 +84,7 @@ export const Combobox: ComboboxType = (props) => {
       return;
     }
 
-    scrollIntoView(elements[index], optionsRef.current);
+    scrollIntoView(elements[index], dropdownRef.current);
   };
 
   const {
@@ -102,7 +98,7 @@ export const Combobox: ComboboxType = (props) => {
     options,
     value: arrValue,
     onChange: handlerChangeValue,
-    optionsRef,
+    optionsRef: dropdownRef,
     controlRef,
     scrollToIndex,
     disabled,
@@ -139,7 +135,6 @@ export const Combobox: ComboboxType = (props) => {
 
   const handleClear = (): void => {
     setInputData({ value: '' });
-    setValue(null);
     typeof onChange === 'function' && onChange(null);
     toggleRef.current?.focus();
   };
@@ -156,6 +151,7 @@ export const Combobox: ComboboxType = (props) => {
     if (!isOpen) {
       setOpen(true);
     }
+    typeof onChange === 'function' && onChange(null);
     const inputValue = toggleRef.current?.value ?? '';
     setInputData({ value: inputValue });
   };
@@ -171,7 +167,7 @@ export const Combobox: ComboboxType = (props) => {
 
   const handleCreate = (): void => {
     if (typeof onCreate === 'function') {
-      const newValue = toggleRef.current?.value;
+      const newValue = toggleRef.current?.value.trim();
       newValue && onCreate(newValue);
     }
   };
@@ -247,7 +243,7 @@ export const Combobox: ComboboxType = (props) => {
           highlightedIndex={highlightedIndex}
           getOptionProps={getOptionProps}
           onCreate={handleCreate}
-          optionsRef={optionsRef}
+          dropdownRef={dropdownRef}
           inputValue={inputData.value}
           id={id}
           hasGroup={hasGroup}
@@ -256,6 +252,7 @@ export const Combobox: ComboboxType = (props) => {
           labelForCreate={labelForCreate}
           labelForNotFound={labelForNotFound}
           form={getSelectDropdownForm(form)}
+          className={dropdownClassName}
         />
       )}
     </SelectContainer>

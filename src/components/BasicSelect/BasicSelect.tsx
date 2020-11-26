@@ -27,6 +27,7 @@ export type SimpleSelectProps<ITEM> = CommonSelectProps<ITEM> &
 type Select = <ITEM>(props: SimpleSelectProps<ITEM>) => React.ReactElement | null;
 
 export const BasicSelect: Select = (props) => {
+  const defaultOptionsRef = useRef<HTMLDivElement | null>(null);
   const {
     placeholder,
     onBlur,
@@ -38,39 +39,34 @@ export const BasicSelect: Select = (props) => {
     disabled,
     ariaLabel,
     id,
+    dropdownRef = defaultOptionsRef,
     form = DefaultPropForm,
     view = DefaultPropView,
     size = DefaultPropSize,
+    dropdownClassName,
     ...restProps
   } = props;
   const [isFocused, setIsFocused] = useState(false);
-  const [val, setValue] = useState(value);
-
-  React.useEffect(() => {
-    setValue(value);
-  }, [value]);
 
   const handlerChangeValue = (v: typeof value): void => {
     if (typeof onChange === 'function' && v) {
       onChange(v);
     }
-    setValue(v);
   };
 
-  const optionsRef = useRef<HTMLDivElement | null>(null);
   const controlRef = useRef<HTMLDivElement | null>(null);
-  const arrValue = typeof val !== 'undefined' && val !== null ? [val] : null;
+  const arrValue = typeof value !== 'undefined' && value !== null ? [value] : null;
 
   const scrollToIndex = (index: number): void => {
-    if (!optionsRef.current) {
+    if (!dropdownRef.current) {
       return;
     }
 
-    const elements: NodeListOf<HTMLDivElement> = optionsRef.current.querySelectorAll(
+    const elements: NodeListOf<HTMLDivElement> = dropdownRef.current.querySelectorAll(
       'div[role=option]',
     );
 
-    scrollIntoView(elements[index], optionsRef.current);
+    scrollIntoView(elements[index], dropdownRef.current);
   };
 
   const {
@@ -84,7 +80,7 @@ export const BasicSelect: Select = (props) => {
     options,
     value: arrValue,
     onChange: handlerChangeValue,
-    optionsRef,
+    optionsRef: dropdownRef,
     controlRef,
     scrollToIndex,
     disabled,
@@ -176,11 +172,12 @@ export const BasicSelect: Select = (props) => {
           visibleOptions={visibleOptions}
           highlightedIndex={highlightedIndex}
           getOptionProps={getOptionProps}
-          optionsRef={optionsRef}
+          dropdownRef={dropdownRef}
           id={id}
           selectedValues={arrValue}
           getOptionLabel={getOptionLabel}
           form={getSelectDropdownForm(form)}
+          className={dropdownClassName}
         />
       )}
     </SelectContainer>

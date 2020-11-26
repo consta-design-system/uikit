@@ -10,7 +10,7 @@ export function useClickOutside({
   isActive: boolean;
   ignoreClicksInsideRefs: ReadonlyArray<RefObject<HTMLElement>>;
   handler: ClickOutsideHandler;
-}) {
+}): void {
   useEffect(() => {
     if (!isActive) {
       return;

@@ -23,7 +23,7 @@ type SelectOption = {
 };
 
 type Group = { label: string; items: SelectOption[] };
-type Option = SelectOption | Group;
+export type Option = SelectOption | Group;
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const getKnobs = () => ({
@@ -35,19 +35,24 @@ const getKnobs = () => ({
 });
 
 const Default = (props: {
-  value?: SelectOption;
+  value?: Option | null;
   items?: Option[];
   getItemLabel?(item: Option): string;
   getGroupOptions?(option: Option): SelectOption[];
   onCreate?(str: string): void;
+  onChange?(item: Option | null): void;
 }): JSX.Element => {
   const getItemLabelDefault = (option: SelectOption): string => option.label;
+  const [value, setValue] = useState<Option | null | undefined>();
   const {
     items = simpleItems,
     getItemLabel = getItemLabelDefault,
     getGroupOptions,
     onCreate,
+    onChange = setValue,
   } = props;
+
+  const val = value !== undefined ? value : props.value;
 
   return (
     <div>
@@ -55,10 +60,11 @@ const Default = (props: {
         {...getKnobs()}
         id="example"
         options={items}
-        value={props.value}
+        value={val}
         getOptionLabel={getItemLabel}
         getGroupOptions={getGroupOptions}
         onCreate={onCreate}
+        onChange={onChange}
       />
     </div>
   );
@@ -71,7 +77,11 @@ export const WithValueStory = createStory(() => <Default value={simpleItems[4]} 
 });
 
 export const WithGroupsStory = createStory(
-  () => <Default items={groups} getGroupOptions={(group: Group): SelectOption[] => group.items} />,
+  () => {
+    return (
+      <Default items={groups} getGroupOptions={(group: Group): SelectOption[] => group.items} />
+    );
+  },
   {
     name: 'c группами опций',
   },
@@ -79,13 +89,16 @@ export const WithGroupsStory = createStory(
 
 export const WithCreateStory = createStory(
   () => {
-    const [opions, setOptions] = useState(simpleItems);
+    const [options, setOptions] = useState(simpleItems);
+    const [value, setValue] = useState<Option | null | undefined>();
 
     const handleCreate = (label: string): void => {
-      setOptions([{ label, value: label }, ...opions]);
+      const newVal: SelectOption = { label, value: label };
+      setValue(newVal);
+      setOptions([newVal, ...options]);
     };
 
-    return <Default items={opions} onCreate={handleCreate} />;
+    return <Default items={options} onCreate={handleCreate} value={value} onChange={setValue} />;
   },
   {
     name: 'c cозданием новой опции',

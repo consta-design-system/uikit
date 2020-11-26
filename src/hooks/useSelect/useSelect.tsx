@@ -20,6 +20,7 @@ type Updater = (state: State) => State;
 
 type ScrollToIndexFunctionType = (optionIndex: number) => void;
 type OnChangeFunctionType = Function;
+type OnCreateFunctionType = Function;
 
 type IndexForHighlight = number | ((oldIndex: number) => number);
 
@@ -30,6 +31,7 @@ export type Option<T> = {
   label: string;
   item: T;
   group?: string;
+  optionForCreate?: boolean;
 };
 
 export interface SelectProps<T> {
@@ -168,6 +170,9 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   const onChangeRef = React.useRef<OnChangeFunctionType>();
   onChangeRef.current = onChange;
 
+  const onCreateRef = React.useRef<OnCreateFunctionType>();
+  onCreateRef.current = onCreate;
+
   const filterFnRef = React.useRef<
     (options: T[], searchValue: string) => Option<typeof options[0]>[]
   >();
@@ -293,9 +298,21 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
           const newVal = value.some((v) => getOptionLabel(v) === option.label)
             ? value.filter((v) => getOptionLabel(v) !== option.label)
             : [...value, option.item];
-          onChangeRef.current(newVal);
+
+          if (!option.optionForCreate) {
+            onChangeRef.current(newVal);
+          } else if (typeof onCreateRef.current === 'function') {
+            const newValue = option.label;
+            newValue && onCreateRef.current(newValue);
+          }
         } else {
-          onChangeRef.current(option.item);
+          if (!option.optionForCreate) {
+            onChangeRef.current(option.item);
+          } else if (typeof onCreateRef.current === 'function') {
+            const newValue = option.label;
+            newValue && onCreateRef.current(newValue);
+          }
+
           setOpen(false);
         }
       }
