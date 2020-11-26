@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.10.7 (26/11/2020)
+
+- [docs(Table): edit text and structure (#357)](https://github.com/gazprom-neft/consta-uikit/commit/b5599f08b03acd907eecf749993ae28eafb55a8f) - @arhayka
+- [docs(SnackBar): add description and examples (#358)](https://github.com/gazprom-neft/consta-uikit/commit/11103714290d5561bcc89f3e5d61a166fe015ce3) - @arhayka
+- [fix(useChoiceGroup): fix type callBack function (#614)](https://github.com/gazprom-neft/consta-uikit/commit/6dc4332c4dd6777bf4101084bba2b5f19c3242ca) - @gizeasy
+- [feat(Selects): added form modifier for dropdown (#592)](https://github.com/gazprom-neft/consta-uikit/commit/243d36d20f104007d917a4f0a4e4b6977c2cf7c2) - @gizeasy
+- [feat(Icons): added IconSmile (#609)](https://github.com/gazprom-neft/consta-uikit/commit/e0b0b86b8e53e76766fcc50407c591f006a446b0) - @andekhtyar
+- [docs(Theme): update documentation (#607)](https://github.com/gazprom-neft/consta-uikit/commit/afde47adb68ad2c8c72b4a425dfedf6c6b378af1) - @Miocene
+- [feat(new iconInfo): added the new icon (#611)](https://github.com/gazprom-neft/consta-uikit/commit/61ed54f7db1a0f68e9095ce331686b7274f3bd35) - @andekhtyar
+
+---
+
 ## v1.10.6 (16/11/2020)
 
 - [docs(Icon): add docs (#552)](https://github.com/gazprom-neft/consta-uikit/commit/3fe9a935b6104f3c76c3128e7c5db6e685f284bf) - @gizeasy
