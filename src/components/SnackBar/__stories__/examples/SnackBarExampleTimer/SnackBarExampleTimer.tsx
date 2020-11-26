@@ -13,18 +13,21 @@ import { Item, SnackBar, SnackBarItemStatus } from '../../../SnackBar';
 
 const cnSnackBarExampleTimer = cn('SnackBarExampleTimer');
 
-const getItemIconByStatus = (status: SnackBarItemStatus): React.FC<IconProps> | undefined => {
-  const mapIconByStatus: Record<SnackBarItemStatus, React.FC<IconProps>> = {
-    alert: IconAlert,
-    normal: IconRing,
-  };
-  return mapIconByStatus[status];
+const mapIconByStatus: Record<SnackBarItemStatus, React.FC<IconProps> | undefined> = {
+  alert: IconAlert,
+  normal: IconRing,
+  system: undefined,
+  success: undefined,
+  warning: undefined,
 };
+
+const getItemIconByStatus = (status: SnackBarItemStatus): React.FC<IconProps> | undefined =>
+  mapIconByStatus[status];
 
 function reducer(
   state: Item[],
   action: { type: 'add' | 'remove'; item: Item; key?: number | string },
-) {
+): Item[] {
   switch (action.type) {
     case 'add':
       return [...state, action.item];
@@ -33,7 +36,7 @@ function reducer(
   }
 }
 
-export function SnackBarExampleTimer() {
+export const SnackBarExampleTimer: React.FC = () => {
   const [items, dispatchItems] = useReducer<
     React.Reducer<Item[], { type: 'add' | 'remove'; item: Item; key?: number | string }>
   >(reducer, []);
@@ -74,4 +77,4 @@ export function SnackBarExampleTimer() {
       <SnackBar className={cnSnackBarExampleTimer('SnackBar')} items={items} />
     </div>
   );
-}
+};
