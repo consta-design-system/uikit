@@ -6,6 +6,7 @@ import { useSelect } from '../../hooks/useSelect/useSelect';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { scrollIntoView } from '../../utils/scrollIntoView';
 import { cnSelect } from '../SelectComponents/cnSelect';
+import { getSelectDropdownForm } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
 import {
@@ -179,6 +180,7 @@ export const BasicSelect: Select = (props) => {
           id={id}
           selectedValues={arrValue}
           getOptionLabel={getOptionLabel}
+          form={getSelectDropdownForm(form)}
         />
       )}
     </SelectContainer>

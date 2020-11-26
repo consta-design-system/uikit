@@ -74,6 +74,7 @@ import { IconHamburger } from '../../IconHamburger/IconHamburger';
 import { IconHand } from '../../IconHand/IconHand';
 import { IconHealth } from '../../IconHealth/IconHealth';
 import { IconInComparison } from '../../IconInComparison/IconInComparison';
+import { IconInfo } from '../../IconInfo/IconInfo';
 import { IconIntroduction } from '../../IconIntroduction/IconIntroduction';
 import { IconIpad } from '../../IconIpad/IconIpad';
 import { IconItalic } from '../../IconItalic/IconItalic';
@@ -251,6 +252,7 @@ const icons = {
   IconHand,
   IconHealth,
   IconInComparison,
+  IconInfo,
   IconIntroduction,
   IconIpad,
   IconItalic,

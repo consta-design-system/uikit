@@ -10,7 +10,9 @@ import { Text } from '../../Text/Text';
 import { cnSelect } from '../cnSelect';
 import { PropSize } from '../types';
 
-const cnSelectDropdown = cn('SelectDropdown');
+export const selectDropdownform = ['default', 'brick', 'round'] as const;
+export type SelectDropdownPropForm = typeof selectDropdownform[number];
+export const defaultSelectDropdownPropForm = selectDropdownform[0];
 
 type Props<ITEM> = PropsWithJsxAttributes<{
   size: PropSize;
@@ -28,9 +30,12 @@ type Props<ITEM> = PropsWithJsxAttributes<{
   labelForNotFound?: string;
   multi?: boolean;
   getOptionLabel(option: ITEM): string;
+  form?: SelectDropdownPropForm;
 }>;
 
 type SelectDropdown = <ITEM>(props: Props<ITEM>) => React.ReactElement | null;
+
+const cnSelectDropdown = cn('SelectDropdown');
 
 export const SelectDropdown: SelectDropdown = (props) => {
   const {
@@ -50,6 +55,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
     getOptionLabel,
     className,
     labelForNotFound,
+    form = defaultSelectDropdownPropForm,
   } = props;
 
   const handleCreate = (): void => {
@@ -65,11 +71,11 @@ export const SelectDropdown: SelectDropdown = (props) => {
       possibleDirections={['downStartLeft', 'upStartLeft', 'downStartRight', 'upStartRight']}
       offset={1}
       role="listbox"
-      className={cnSelectDropdown(null, [className])}
+      className={cnSelectDropdown({ form, size }, [className])}
       aria-activedescendant={`${id}-${highlightedIndex}`}
       equalAnchorWidth
     >
-      <div className={cnSelect('List', { size })} ref={optionsRef}>
+      <div className={cnSelect('List', { size, form })} ref={optionsRef}>
         {visibleOptions.length > 0 ? (
           visibleOptions.map((option, index: number) => {
             const isOptionForCreate = 'optionForCreate' in option;
