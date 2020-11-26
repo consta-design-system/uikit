@@ -1,5 +1,5 @@
 import React from 'react';
 
-export function componentToRenderFn<T>(comp: React.FC<T>) {
+export function componentToRenderFn<T>(comp: React.ComponentType<T>) {
   return (props: T): React.ReactNode => React.createElement(comp, props);
 }

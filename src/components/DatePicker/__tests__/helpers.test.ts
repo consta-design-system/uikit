@@ -365,7 +365,7 @@ describe('makeQuartersRanges', () => {
 
   it('возвращает полные кварталы для всего года', () => {
     const quarters = makeQuartersRanges({
-      date,
+      visibleDate: date,
       minDate: new Date(2019, 0, 1, ...START_OF_DAY),
       maxDate: new Date(2019, 11, 31, ...END_OF_DAY),
     });
@@ -380,7 +380,7 @@ describe('makeQuartersRanges', () => {
 
   it('возвращает неполные кварталы если они частично выходят за минимальную или максимальную даты', () => {
     const quarters = makeQuartersRanges({
-      date,
+      visibleDate: date,
       minDate: new Date(2019, 2, 1, ...START_OF_DAY),
       maxDate: new Date(2019, 11, 1, ...END_OF_DAY),
     });
@@ -400,7 +400,7 @@ describe('makeQuartersRanges', () => {
 
   it('возвращает пустые массивы для кварталов которые полностью выходят за минимальную или максимальную даты', () => {
     const quarters = makeQuartersRanges({
-      date,
+      visibleDate: date,
       minDate: new Date(2019, 3, 1, ...START_OF_DAY),
       maxDate: new Date(2019, 8, 30, ...END_OF_DAY),
     });

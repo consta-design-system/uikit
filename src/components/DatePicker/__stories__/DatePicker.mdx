@@ -1,0 +1,75 @@
+import { Preview } from '@storybook/addon-docs/dist/blocks';
+
+# DatePicker
+
+DatePicker — компонент, позволяющий выбрать дату или диапазон дат.
+
+## Список свойств
+
+| Свойство              | Тип или варианты значения                                                                                                                                                                                                               | По умолчанию             | Описание                                                               |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ | ---------------------------------------------------------------------- |
+| type                  | `'date', 'date-range'`                                                                                                                                                                                                                  | -                        | Тип                                                                    |
+| minDate               | `Date`                                                                                                                                                                                                                                  | -                        | Минимальная дата                                                       |
+| maxDate               | `Date`                                                                                                                                                                                                                                  | -                        | Максимальная дата                                                      |
+| size?                 | `'s', 'm', 'l'`                                                                                                                                                                                                                         | 'm'                      | Размер                                                                 |
+| value?                | `Date, [Date?, Date?]`                                                                                                                                                                                                                  | -                        | Выбранная дата или диапазон дат                                        |
+| onChange?             | `(date?: Date, [Date?, Date?]) => void`                                                                                                                                                                                                 | -                        | Обработчик события изменения значения даты или диапазона дат           |
+| renderControls?       | `{ value?: Date [Date?, Date?]; onChange: (value?: Date, [Date?, Date?]) => void; isInvalid?: boolean; tooltipContent?: React.ReactNode; isCalendarOpened?: boolean;,  size?: 's', 'm', 'l'; className?: string; } => React.ReactNode` | -                        | Функция рендера кастомных контролов                                    |
+| makePreparedRanges?   | `( options: { date: Date; minDate: Date; maxDate: Date } ) => Array<{ range: [Date?, Date?]; title: string }>`                                                                                                                          | -                        | Функция создания предопределенных диапазонов дат, доступных для выбора |
+| className?            | `string`                                                                                                                                                                                                                                | -                        | Дополнительный класс                                                   |
+
+## Пример использования
+
+### Выбор даты
+
+```ts
+import React from 'react';
+import { DatePicker } from '@gpn-design/uikit/DatePicker';
+
+const minDate = new Date()
+minDate.setFullYear(minDate.getFullYear() - 1)
+
+const maxDate = new Date()
+maxDate.setFullYear(minDate.getFullYear() + 1)
+
+const App = () => {
+  const [value, setValue] = React.useState(new Date())
+
+  return (
+    <DatePicker
+      type="date"
+      minDate={minDate}
+      maxDate={maxDate}
+      value={value}
+      onChange={setValue}
+    />
+  )
+};
+```
+
+### Выбор диапазона дат
+
+```ts
+import React from 'react';
+import { DatePicker } from '@gpn-design/uikit/DatePicker';
+
+const minDate = new Date()
+minDate.setFullYear(minDate.getFullYear() - 1)
+
+const maxDate = new Date()
+maxDate.setFullYear(minDate.getFullYear() + 1)
+
+const App = () => {
+  const [value, setValue] = React.useState([undefined, undefined])
+
+  return (
+    <DatePicker
+      type="date-range"
+      minDate={minDate}
+      maxDate={maxDate}
+      value={value}
+      onChange={setValue}
+    />
+  )
+};
+```

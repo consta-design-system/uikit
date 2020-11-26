@@ -1,0 +1,72 @@
+import { Preview } from '@storybook/addon-docs/dist/blocks';
+
+# Calendar
+
+## Список свойств
+
+| Свойство              | Тип или варианты значения               | По умолчанию    | Описание                                                     |
+| --------------------- | ----------------------------------------| --------------- | ------------------------------------------------------------ |
+| type                  | `'date', 'date-range'`                  | -               | Тип                                                          |
+| minDate               | `Date`                                  | -               | Минимальная дата                                             |
+| maxDate               | `Date`                                  | -               | Максимальная дата                                            |
+| currentVisibleDate    | `Date`                                  | -               | Текущая видимая дата                                         |
+| value?                | `Date, [Date?, Date?]`                  | -               | Выбранная дата или диапазон дат                              |
+| onChange              | `(date?: Date, [Date?, Date?]) => void` | -               | Обработчик события изменения значения даты или диапазона дат |
+
+## Пример использования
+
+### Выбор даты
+
+```ts
+import React from 'react';
+import { Calendar } from '@gpn-design/uikit/Calendar';
+
+const minDate = new Date()
+minDate.setFullYear(minDate.getFullYear() - 1)
+
+const maxDate = new Date()
+maxDate.setFullYear(minDate.getFullYear() + 1)
+
+const App = () => {
+  const [value, setValue] = React.useState(new Date())
+
+  return (
+    <Calendar
+      type="date"
+      minDate={minDate}
+      maxDate={maxDate}
+      value={value}
+      currentVisibleDate={value}
+      onChange={setValue}
+    />
+  )
+};
+```
+
+### Выбор диапазона дат
+
+```ts
+import React from 'react';
+import { Calendar } from '@gpn-design/uikit/Calendar';
+
+const minDate = new Date()
+minDate.setFullYear(minDate.getFullYear() - 1)
+
+const maxDate = new Date()
+maxDate.setFullYear(minDate.getFullYear() + 1)
+
+const App = () => {
+  const [value, setValue] = React.useState([undefined, undefined])
+
+  return (
+    <Calendar
+      type="date-range"
+      minDate={minDate}
+      maxDate={maxDate}
+      value={value}
+      currentVisibleDate={value}
+      onChange={setValue}
+    />
+  )
+};
+```

@@ -6,6 +6,10 @@ import { createMetadata, createStory } from '../../../utils/storybook';
 import { DateRange } from '../../../utils/types/Date';
 import { Calendar } from '../Calendar';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
+import mdx from './Calendar.mdx';
+
 const defaultProps = () =>
   ({
     minDate: new Date(knobsDate('minDate', subYears(new Date(), 1))),
@@ -16,13 +20,13 @@ const defaultProps = () =>
 const CalendarSingleStoryContent = () => {
   const [date, setDate] = React.useState<Date | undefined>();
 
-  return <Calendar type="date" value={date} onSelect={setDate} {...defaultProps()} />;
+  return <Calendar type="date" value={date} onChange={setDate} {...defaultProps()} />;
 };
 
 const CalendarRangeStoryContent = () => {
-  const [date, setDate] = React.useState<DateRange | undefined>();
+  const [date, setDate] = React.useState<DateRange | undefined>([undefined, undefined]);
 
-  return <Calendar type="date-range" value={date} onSelect={setDate} {...defaultProps()} />;
+  return <Calendar type="date-range" value={date} onChange={setDate} {...defaultProps()} />;
 };
 
 export const CalendarSingleStory = createStory(() => <CalendarSingleStoryContent />, {
@@ -35,4 +39,9 @@ export const CalendarRangeStory = createStory(() => <CalendarRangeStoryContent /
 
 export default createMetadata({
   title: 'Components|/Calendar',
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 });

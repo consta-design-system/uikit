@@ -39,7 +39,7 @@ export type BaseControlProps<T> = {
 
 export type BaseRenderControlsProps = MinMaxDate &
   Pick<StyleProps, 'size'> & {
-    isTooltipVisible: boolean;
+    isCalendarOpened: boolean;
   };
 
 export type RenderControlsType<T> = (

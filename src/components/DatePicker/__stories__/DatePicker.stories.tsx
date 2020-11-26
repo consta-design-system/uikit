@@ -7,6 +7,10 @@ import { DatePicker } from '../DatePicker';
 import { getDateMidnightFromString, getInputValue } from '../DatePickerInputDate/helpers';
 import { DateRange, MinMaxDate, sizes } from '../types';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
+import mdx from './DatePicker.mdx';
+
 const setInputValue = (value?: string): Date | undefined => {
   if (!value) {
     return undefined;
@@ -33,7 +37,7 @@ const DakePickerSingleStoryContent = () => {
 export const DakePickerSingleStory = createStory(() => <DakePickerSingleStoryContent />, {
   name: 'Выбор даты',
 });
-const datePatten = '[0-9]{4}-[0-9]{2}-[0-9]{2}';
+const datePattern = '[0-9]{4}-[0-9]{2}-[0-9]{2}';
 
 const DatePickerThirdPartyInputStoryContent = () => {
   const [date, setDate] = React.useState<Date | undefined>(new Date(2019, 3, 1));
@@ -50,7 +54,7 @@ const DatePickerThirdPartyInputStoryContent = () => {
         return (
           <input
             type="text"
-            pattern={datePatten}
+            pattern={datePattern}
             value={formattedValue || undefined}
             onChange={(event) => {
               onChange(setInputValue(event.target.value));
@@ -93,7 +97,7 @@ const DatePickerRangeThirdPartyInputStoryContent = () => {
           <>
             <input
               type="text"
-              pattern={datePatten}
+              pattern={datePattern}
               value={formattedRange[0] || undefined}
               onChange={(event) => {
                 onChange([setInputValue(event.target.value), (value && value[1]) || undefined]);
@@ -102,7 +106,7 @@ const DatePickerRangeThirdPartyInputStoryContent = () => {
             />
             <input
               type="text"
-              pattern={datePatten}
+              pattern={datePattern}
               value={formattedRange[1] || undefined}
               onChange={(event) => {
                 onChange([(value && value[0]) || undefined, setInputValue(event.target.value)]);
@@ -126,13 +130,13 @@ export const DatePickerRangeThirdPartyInputStory = createStory(
 const DatePickerRangeCustomRangesStoryContent = () => {
   const [range, setRange] = React.useState<DateRange | undefined>([undefined, undefined]);
   const makePreparedRanges = ({
-    date,
+    visibleDate,
   }: {
-    date: Date;
+    visibleDate: Date;
   } & MinMaxDate): Array<{ range: DateRange; title: string }> => {
-    const currentYear = date.getFullYear();
-    const startDate = startOfYear(date);
-    const endDate = endOfYear(date);
+    const currentYear = visibleDate.getFullYear();
+    const startDate = startOfYear(visibleDate);
+    const endDate = endOfYear(visibleDate);
     const middleDate = add(startDate, { months: 6 });
     return [
       { title: `1 пол. ${currentYear}`, range: [startDate, middleDate] },
@@ -160,4 +164,9 @@ export const DatePickerRangeCustomRangesStory = createStory(
 
 export default createMetadata({
   title: 'Components|/DatePicker',
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 });

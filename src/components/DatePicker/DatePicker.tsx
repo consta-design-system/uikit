@@ -60,7 +60,7 @@ const renderSingleControls: RenderControlsType<Date> = ({
   maxDate,
   size,
   onChange,
-  isTooltipVisible,
+  isCalendarOpened,
   renderControls = defaultRenderSingleControl,
 }) => {
   const isInvalid = isDateIsInvalid({ date: value, minDate, maxDate });
@@ -68,7 +68,7 @@ const renderSingleControls: RenderControlsType<Date> = ({
   return renderControls({
     size,
     isInvalid,
-    isCalendarOpened: isTooltipVisible,
+    isCalendarOpened,
     value,
     onChange,
   });
@@ -80,7 +80,7 @@ const renderRangeControls: RenderControlsType<DateRange> = ({
   maxDate,
   size,
   onChange,
-  isTooltipVisible,
+  isCalendarOpened,
   renderControls = defaultRenderRangeControls,
 }) => {
   const isInvalid = !!value && value.some((date) => isDateIsInvalid({ date, minDate, maxDate }));
@@ -88,7 +88,7 @@ const renderRangeControls: RenderControlsType<DateRange> = ({
   return renderControls({
     size,
     isInvalid,
-    isCalendarOpened: isTooltipVisible,
+    isCalendarOpened,
     value,
     onChange,
   });
@@ -107,7 +107,7 @@ type SingleProps = {
 type RangeProps = {
   type: 'date-range';
   makePreparedRanges?: (
-    options: { date: Date } & MinMaxDate,
+    options: { visibleDate: Date } & MinMaxDate,
   ) => Array<{ range: DateRange; title: string }>;
 } & BaseControlProps<DateRange>;
 
@@ -120,13 +120,13 @@ export const DatePicker = forwardRef<HTMLDivElement, Props>((props, ref) => {
 
   const controlsRef = useRef<HTMLDivElement>(null);
   const combinedRef = useCombinedRefs(ref, controlsRef);
-  const [isTooltipVisible, setIsTooltipVisible] = useState(false);
+  const [isCalendarOpened, setIsCalendarOpened] = useState(false);
   const [currentVisibleDate, setCurrentVisibleDate] = useState<Date>(
     getCurrentVisibleDate({ value, minDate, maxDate }),
   );
   const { themeClassNames } = useTheme();
   const handleApplyDate = () => {
-    setIsTooltipVisible(false);
+    setIsCalendarOpened(false);
   };
 
   useLayoutEffect(() => {
@@ -141,7 +141,7 @@ export const DatePicker = forwardRef<HTMLDivElement, Props>((props, ref) => {
     }
     // отключаем проверку, чтобы избежать неявных эффектов, вызванных изменением всех props
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value, props.minDate, props.maxDate, isTooltipVisible]);
+  }, [value, props.minDate, props.maxDate, isCalendarOpened]);
 
   let dateRangesSelector = null;
   let dateControls;
@@ -158,7 +158,7 @@ export const DatePicker = forwardRef<HTMLDivElement, Props>((props, ref) => {
   };
   const propsForControls = {
     size: props.size,
-    isTooltipVisible,
+    isCalendarOpened,
     minDate,
     maxDate,
   };
@@ -166,7 +166,7 @@ export const DatePicker = forwardRef<HTMLDivElement, Props>((props, ref) => {
     dateRangesSelector = (
       <DatePickerRangesSelector
         {...baseCommonProps}
-        onSelect={(val: DateRange): void => {
+        onChange={(val: DateRange): void => {
           setCurrentVisibleDate(
             getCurrentVisibleDate({ value: [val[0], undefined], minDate, maxDate }),
           );
@@ -192,7 +192,7 @@ export const DatePicker = forwardRef<HTMLDivElement, Props>((props, ref) => {
         {...baseCommonProps}
         type={props.type}
         value={props.value}
-        onSelect={props.onChange}
+        onChange={props.onChange}
       />
     );
   } else {
@@ -211,7 +211,7 @@ export const DatePicker = forwardRef<HTMLDivElement, Props>((props, ref) => {
         {...baseCommonProps}
         type={props.type}
         value={props.value}
-        onSelect={props.onChange}
+        onChange={props.onChange}
       />
     );
   }
@@ -223,12 +223,12 @@ export const DatePicker = forwardRef<HTMLDivElement, Props>((props, ref) => {
         role="button"
         tabIndex={0}
         ref={combinedRef}
-        onClick={() => setIsTooltipVisible(!isTooltipVisible)}
-        onKeyDown={() => setIsTooltipVisible(!isTooltipVisible)}
+        onClick={() => setIsCalendarOpened(!isCalendarOpened)}
+        onKeyDown={() => setIsCalendarOpened(!isCalendarOpened)}
       >
         {dateControls}
       </div>
-      {isTooltipVisible && (
+      {isCalendarOpened && (
         <Popover
           anchorRef={combinedRef}
           offset={4}

@@ -8,8 +8,10 @@ import { DateRange, MinMaxDate } from '../types';
 
 export type Props = {
   currentVisibleDate: Date;
-  onSelect: (value: DateRange) => void;
-  makeRanges: (options: { date: Date } & MinMaxDate) => Array<{ range: DateRange; title: string }>;
+  onChange: (value: DateRange) => void;
+  makeRanges: (
+    options: { visibleDate: Date } & MinMaxDate,
+  ) => Array<{ range: DateRange; title: string }>;
 } & MinMaxDate;
 
 const cnDatePickerRangesSelector = cn('DatePickerRangesSelector');
@@ -18,10 +20,10 @@ export const DatePickerRangesSelector: React.FC<Props> = ({
   currentVisibleDate,
   minDate,
   maxDate,
-  onSelect,
+  onChange,
   makeRanges,
 }) => {
-  const ranges = makeRanges({ date: currentVisibleDate, minDate, maxDate });
+  const ranges = makeRanges({ visibleDate: currentVisibleDate, minDate, maxDate });
 
   return (
     <div className={cnDatePickerRangesSelector()}>
@@ -34,7 +36,7 @@ export const DatePickerRangesSelector: React.FC<Props> = ({
             size="xs"
             view="ghost"
             disabled={!dateRange.range.length}
-            onClick={(): void => onSelect(dateRange.range)}
+            onClick={(): void => onChange(dateRange.range)}
           />
         ))}
       </div>

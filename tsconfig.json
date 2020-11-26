@@ -18,7 +18,6 @@
     "experimentalDecorators": false,
     "emitDecoratorMetadata": false,
     "noFallthroughCasesInSwitch": true,
-    "downlevelIteration": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,

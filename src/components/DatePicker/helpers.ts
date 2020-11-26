@@ -120,15 +120,15 @@ export const useCombinedRefs = <T>(...refs: Ref<T>[]): RefObject<T> => {
 };
 
 export const makeQuartersRanges = ({
-  date,
+  visibleDate,
   minDate,
   maxDate,
 }: {
-  date: Date;
+  visibleDate: Date;
 } & MinMaxDate): Array<{ range: DateRange; title: string }> => {
-  const currentYear = date.getFullYear();
-  const startDate = startOfYear(date);
-  const endDate = endOfYear(date);
+  const currentYear = visibleDate.getFullYear();
+  const startDate = startOfYear(visibleDate);
+  const endDate = endOfYear(visibleDate);
   const quarterAmount = differenceInQuarters(endDate, startDate) + 1;
 
   return range(quarterAmount).map((index) => {
