@@ -8,13 +8,14 @@ import { SnackBar } from '../../../SnackBar';
 
 const cnSnackBarExampleSimple = cn('SnackBarExampleSimple');
 
+const items = [
+  {
+    key: 1,
+    message: 'Сообщение',
+  },
+];
+
 export const SnackBarExampleSimple = () => {
-  const items = [
-    {
-      key: 1,
-      message: 'Сообщение',
-    },
-  ];
   return (
     <div className={cnSnackBarExampleSimple('', [cnDocsDecorator('Section')])}>
       <SnackBar className={cnSnackBarExampleSimple('SnackBar')} items={items} />

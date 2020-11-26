@@ -6,17 +6,17 @@
   background-color: var(--color-bg-secondary);
 
   &-Card {
-    width: 100%;
     box-sizing: border-box;
+    width: 100%;
     padding: var(--space-l);
-    border-radius: var(--control-radius);
     background-color: var(--color-bg-default);
+    border-radius: var(--control-radius);
   }
 
   &-Text {
     height: var(--space-xs);
-    border-radius: var(--control-radius);
     background-color: var(--color-typo-secondary);
+    border-radius: var(--control-radius);
 
     &:not(:last-child) {
       margin-bottom: var(--space-xs);

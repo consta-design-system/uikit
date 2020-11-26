@@ -1,11 +1,70 @@
 import { SnackBarExampleSimple } from './examples/SnackBarExampleSimple/SnackBarExampleSimple';
+import { SnackBarExampleStatus } from './examples/SnackBarExampleStatus/SnackBarExampleStatus';
+import { SnackBarExampleIcon } from './examples/SnackBarExampleIcon/SnackBarExampleIcon';
 import { SnackBarExampleWithButtons } from './examples/SnackBarExampleWithButtons/SnackBarExampleWithButtons';
+import { SnackBarExampleTimer } from './examples/SnackBarExampleTimer/SnackBarExampleTimer';
+import { SnackBarExampleButtons } from './examples/SnackBarExampleButtons/SnackBarExampleButtons';
 
 # SnackBar
 
+Используется для мгновенных уведомлений.
+
+Снекбар (в отличие от [информера](?path=/docs/components-informer--playground))
+всегда перекрывает основное содержимое, выносится в отдельный слой интерфейса
+и сопровождается анимацией. На него будет направлено всё внимание пользователя.
+
+Используйте информер в контексте, снекбар — вне контекста.
+
+- [Текст сообщения](#текст-сообщения)
+- [Статус](#статус)
+- [Иконка](#иконка)
+- [Кнопки](#кнопки)
+- [Таймер](#таймер)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+## Текст сообщения
+
+За текст сообщения отвечает `message`.
+
+Пишите коротко и лаконично. С заглавной, точка не нужна.
+
+## Статус
+
+От статуса зависит цвет фона под текстом (задается в свойстве `status`).
+
+<SnackBarExampleStatus />
+
+## Иконка
+
+Добавьте любую из [библиотеки иконок](?path=/story/components-icons--playground) с помощью свойства `icon`.
+
+<SnackBarExampleIcon />
+
+## Кнопки
+
+Добавьте кнопки, если хотите, чтобы пользователь мог отреагировать на событие.
+Например, отменить его или куда-то перейти.
+
+<SnackBarExampleButtons />
+
+## Таймер
+
+Используйте таймер, если сообщений о событиях слишком много и они не очень важные.
+Тогда сообщение будет держаться на экране некоторое время, а потом исчезнет.
+
+Таймер нужен, чтобы дать пользователю возможность поменять решение. Например,
+если пользователь что-то удалил, можно вывести внизу снекбар с таймером и кнопкой
+**Не удалять**. Если пользователь, нажмет на кнопку. Если нет, сообщение само закроется
+по таймеру.
+
+Таймер можно добавить с помощью `autoClose`.
+
+<SnackBarExampleTimer />
+
 ## Свойства
 
-```ts
+```tsx
 type Item = {
   key: string;
   number;
@@ -55,7 +114,7 @@ function SnackBarExample() {
 
 ## Пример с кнопками
 
-```ts
+```tsx
 import './SnackBarStories.css';
 
 import * as React from 'react';

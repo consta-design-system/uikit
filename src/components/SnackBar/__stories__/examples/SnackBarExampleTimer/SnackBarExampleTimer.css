@@ -1,0 +1,28 @@
+.SnackBarExampleTimer {
+  display: flex;
+  flex-direction: row;
+  height: 200px;
+
+  &-SnackBar {
+    overflow: auto;
+    flex: none;
+    width: 400px;
+    padding-right: var(--space-xs);
+    padding-left: var(--space-xs);
+  }
+
+  &-Buttons {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: flex-end;
+    align-items: end;
+    max-width: 300px;
+    padding-right: var(--space-xs);
+    padding-left: var(--space-xs);
+  }
+
+  &-ButtonAdd {
+    margin-bottom: var(--space-xs);
+  }
+}
