@@ -1,0 +1,84 @@
+.Pagination {
+  display: flex;
+
+  &-Pages {
+    display: flex;
+  }
+
+  &-Item,
+  &-ItemLeft {
+    margin-right: var(--space-3xs);
+    padding: unset;
+  }
+
+  &-More {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: var(--space-3xs);
+  }
+
+  &-Input {
+    max-width: var(--space-6xl);
+    margin-right: var(--space-xs);
+  }
+
+  &-Total {
+    display: flex;
+    align-items: center;
+    margin-right: var(--space-3xs);
+  }
+
+  &-ItemLeft,
+  &-ItemRight {
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+
+    &_show {
+      .Pagination:hover & {
+        z-index: unset;
+        opacity: 1;
+      }
+    }
+  }
+
+  &_size {
+    &_xs {
+      .Pagination-Item,
+      .Pagination-More {
+        width: var(--control-height-xs);
+      }
+    }
+
+    &_s {
+      .Pagination-Item,
+      .Pagination-More {
+        width: var(--control-height-s);
+      }
+    }
+
+    &_m {
+      .Pagination-Item,
+      .Pagination-More {
+        width: var(--control-height-m);
+      }
+    }
+
+    &_l {
+      .Pagination-Item,
+      .Pagination-More {
+        width: var(--control-height-l);
+      }
+    }
+  }
+
+  &:hover {
+    &-ItemLeft,
+    &-ItemRight {
+      &_show {
+        opacity: 1;
+      }
+    }
+  }
+}
