@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 
 import { simpleItems } from '../__mocks__/data.mock';
 import ResizeObserver from '../../../../__mocks__/ResizeObserver';
 import { cnSelect } from '../../SelectComponents/cnSelect';
+import { cnSelectItem } from '../../SelectComponents/SelectItem/SelectItem';
 import { Combobox } from '../Combobox';
 
 jest.mock('resize-observer-polyfill', () => {
@@ -11,6 +12,7 @@ jest.mock('resize-observer-polyfill', () => {
 });
 
 const testId = 'Combobox';
+const animationDuration = 200;
 
 type Item = { label: string; value: string };
 
@@ -79,15 +81,15 @@ function getOptionsList() {
 }
 
 function getOptions() {
-  return getOptionsList().querySelectorAll(`.${cnSelect('ListItem')}`);
+  return getOptionsList().querySelectorAll(`.${cnSelectItem()}`);
 }
 
 function getOption(index = 1) {
-  return getOptionsList().querySelectorAll(`.${cnSelect('ListItem')}`)[index];
+  return getOptions()[index];
 }
 
 function getCheckedOption() {
-  return getOptionsList().querySelector('.Select-ListItem_active');
+  return getOptionsList().querySelector('.SelectItem_active');
 }
 
 function getInput() {
@@ -116,6 +118,12 @@ function indicatorsDropdownClick() {
 
 function outsideClick() {
   fireEvent.mouseDown(getOutside());
+}
+
+function animateDelay() {
+  act(() => {
+    jest.advanceTimersByTime(animationDuration);
+  });
 }
 
 describe('Компонент Combobox', () => {
@@ -150,17 +158,27 @@ describe('Компонент Combobox', () => {
       expect(getOptionsList()).toBeInTheDocument();
     });
     it(`выпадающий список закрывается по клику на стрелку`, () => {
-      renderComponent({});
+      jest.useFakeTimers();
+      act(() => {
+        renderComponent({});
+      });
       indicatorsDropdownClick();
+      animateDelay();
       const optionsList = getOptionsList();
       indicatorsDropdownClick();
+      animateDelay();
       expect(optionsList).not.toBeInTheDocument();
     });
     it(`выпадающий список закрывается по клику вне элемента`, () => {
-      renderComponent({});
+      jest.useFakeTimers();
+      act(() => {
+        renderComponent({});
+      });
       indicatorsDropdownClick();
+      animateDelay();
       const optionsList = getOptionsList();
       outsideClick();
+      animateDelay();
       expect(optionsList).not.toBeInTheDocument();
     });
   });
