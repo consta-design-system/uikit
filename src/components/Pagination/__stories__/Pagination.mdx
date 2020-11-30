@@ -1,0 +1,87 @@
+# Pagination
+
+Компонент Pagination позволяет пользователю выбрать конкретную страницу из диапазона страниц.
+
+- [Форма](#форма)
+- [Размер](#размер)
+- [Тип](#тип)
+- [Состояние](#состояние)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+## Форма
+
+Форма `form` у элементов пагинации может быть трёх видов: круглые, квадратные, со скруглёнными краями.
+
+```tsx
+<Pagination form="default" />
+<Pagination form="round" />
+<Pagination form="brick" />
+```
+
+## Размер
+
+За размер отвечает свойство `size`.
+
+```tsx
+<Pagination size="xs" />
+<Pagination size="s" />
+<Pagination size="m" />
+<Pagination size="l" />
+```
+
+
+## Тип
+
+Компонент может быть как набором кнопок со страницами, так и полем для ввода чисел для перехода на конкретную страницу. За это отвечает свойство `type`.
+
+```tsx
+<Pagination type="default" />
+<Pagination type="input" />
+```
+
+## Состояние
+
+`disabled` не дает пользователю взаимодействовать.
+
+```tsx
+<Pagination disabled />
+```
+
+## Свойства
+
+<!-- props:start -->
+
+| Свойство                     | Тип                                  | По умолчанию | Описание                                                                                                  |
+| ---------------------------- | ------------------------------------ | ------------ | --------------------------- |
+| `currentPage`                | `number`                             | —            | Номер текущей страницы      |
+| `totalPages`                 | `number`                             | —            | Количество всех страниц     |
+| `onChangePage`               | `(pageNumber: number) => void, null` | —            | Функция для смены страницы  |
+| [`form?`](#форма)            | `'default', 'round', 'brick'`        | `'default'`  | Форма элементов пагинации   |
+| [`size?`](#размер)           | `'xs', 's', 'm', 'l'`                | `'m'`        | Размер элементов пагинации  |
+| [`type?`](#тип)              | `'default', 'input'`                 | `'default'`  | Тип элементов пагинации     |
+| [`disabled?`](#состояние)    | `boolean`                            | `false`      | Делает пагинацию неактивной |
+| `className?`                 | `string`                             | —            | Дополнительные CSS-классы   |
+
+<!-- props:end -->
+
+## Пример
+
+```ts
+// src/App.ts
+import React from 'react';
+import { Pagination } from '@consta/uikit/Pagination';
+
+const App = () => {
+  const [currentPage, setCurrentPage] = React.useState<number>(0);
+  const totalPages = 10;
+
+  return (
+    <Pagination
+      currentPage={currentPage}
+      onChangePage={number => setCurrentPage(number)}
+      totalPages={totalPages}
+    />
+  );
+};
+```
