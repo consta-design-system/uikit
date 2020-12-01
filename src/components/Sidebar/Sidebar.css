@@ -3,7 +3,7 @@
   --width-max-horizontal: 480px;
   --height-min-vertical: 200px;
   --height-max-vertical: 380px;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   left: 0;
