@@ -1,4 +1,4 @@
-import { ModalExampleText } from './examples/ModalExample/ModalExample';
+import { ModalExample } from './examples/ModalExample/ModalExample';
 
 # Modal
 
@@ -16,8 +16,7 @@ import { ModalExampleText } from './examples/ModalExample/ModalExample';
 
 Всё, что вы показать в модальном окне, поместите в контейнер `<Modal></Modal>`.
 
-<ModalExampleText />
-
+<ModalExample />
 
 ## Размер
 
@@ -37,38 +36,59 @@ import { ModalExampleText } from './examples/ModalExample/ModalExample';
 
 ## Свойства
 
-| Свойство               | Тип или варианты значения      | По умолчанию              | Описание |
-| ---------------------- | ------------------------------ | ------------------------- | ------------------------- |
-| [`width?`](#размер)                 | `'auto'`                       | `auto`                    |  Ширина модального окна |
-| [`position?`](#расположение)              | `'center'`, `'top'`            | `center`                  | Расположение модального окна|
-| [`hasOverlay?`](#подложка)             | `boolean`                      | `true`                    | Добавляет подложку вокруг окна — поверх содержимого страницы |
-| [`onOverlayClick?`](#подложка)         | `(e: React.MouseEvent) => void`| -                         | Действие по нажатию на подложку —  область за пределами окна |
-| `isOpen?`                | `boolean`                      | -                         | Открывает и закрывает окно|
-| `onClose?`               | `() => void`                   | -                         | Действие при закрытии окна|
-| `onOpen?`                | `() => void`                   | -                         | Действие при открытии окна|
-| `children?`              | `React.ReactNode`              | -                         | Дочерние элементы |
-| `container?`             | `HTMLDivElement, undefined`    | `window.document.body`    | Родителький контейнер для модального окна|
-| `className?`             | `string`                       | -                         | Дополнительный CSS-класс компонента |
+| Свойство                       | Тип или варианты значения       | По умолчанию           | Описание                                                     |
+| ------------------------------ | ------------------------------- | ---------------------- | ------------------------------------------------------------ |
+| [`width?`](#размер)            | `'auto'`                        | `auto`                 | Ширина модального окна                                       |
+| [`position?`](#расположение)   | `'center'`, `'top'`             | `center`               | Расположение модального окна                                 |
+| [`hasOverlay?`](#подложка)     | `boolean`                       | `true`                 | Добавляет подложку вокруг окна — поверх содержимого страницы |
+| [`onOverlayClick?`](#подложка) | `(e: React.MouseEvent) => void` | -                      | Действие по нажатию на подложку —  область за пределами окна |
+| `isOpen?`                      | `boolean`                       | -                      | Открывает и закрывает окно                                   |
+| `onClose?`                     | `() => void`                    | -                      | Действие при закрытии окна                                   |
+| `onOpen?`                      | `() => void`                    | -                      | Действие при открытии окна                                   |
+| `children?`                    | `React.ReactNode`               | -                      | Дочерние элементы                                            |
+| `container?`                   | `HTMLDivElement, undefined`     | `window.document.body` | Родителький контейнер для модального окна                    |
+| `className?`                   | `string`                        | -                      | Дополнительный CSS-класс компонента                          |
 
 ## Пример
 
-```ts
-<Modal className='myClassName' isOpen={isModalOpen} onOverlayClick={() => setIsModalOpen(false)}>
-  <Text as='p' size='s' view='secondary' className={cnModalStories('title')}>
-    Заголовок модалки
-  </Text>
-  <Text as='p' size='m' view='primary' className={cnModalStories('body')}>
-    Описание в теле модалки. Здесь может находиться какая-то информация.
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
-  </Text>
-  <div className={cnModalStories('action')}>
-    <Button
-      size="m"
-      view="primary"
-      label="Закрыть"
-      width='default'
-      onClick={() => setIsModalOpen(false)}
-    />
-  </div>
-</Modal>
+```tsx
+export function ModalExample() {
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+  return (
+    <div>
+      <Button
+        size="m"
+        view="primary"
+        label="Открыть модальное окно"
+        onClick={(): void => setIsModalOpen(true)}
+      />
+      <Modal
+        className={cnModalExample('Modal')}
+        isOpen={isModalOpen}
+        hasOverlay
+        onOverlayClick={(): void => setIsModalOpen(false)}
+      >
+        <Text as="p" size="s" view="secondary" className={cnModalExample('Title')}>
+          Заголовок модалки
+        </Text>
+        <Text as="p" size="m" view="primary" className={cnModalExample('Body')}>
+          Описание в теле модалки. Здесь может находиться какая-то информация. Lorem ipsum dolor sit
+          amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+        </Text>
+        <div className={cnModalExample('Action')}>
+          <Button
+            size="m"
+            view="primary"
+            label="Закрыть"
+            width="default"
+            onClick={(): void => setIsModalOpen(false)}
+          />
+        </div>
+      </Modal>
+    </div>
+  );
+}
 ```
+
+<ModalExample />
