@@ -7,6 +7,32 @@
   --tooltip-arrow-offset: 0;
   position: relative;
 
+  &_status {
+    &_alert {
+      --tooltip-bg-color: var(--color-bg-alert);
+    }
+
+    &_warning {
+      --tooltip-bg-color: var(--color-bg-warning);
+    }
+
+    &_success {
+      --tooltip-bg-color: var(--color-bg-success);
+    }
+
+    &_normal {
+      --tooltip-bg-color: var(--color-bg-normal);
+    }
+  }
+
+  &[class*='status'] {
+    --tooltip-bg-opacity: 1;
+
+    & .Tooltip-Content {
+      text-shadow: 0 0 2px rgba(var(--color-nums-shadow), 0.16);
+    }
+  }
+
   /* Фон отдельным элементом, чтобы можно было добавить ему opacity */
   &-Background {
     position: absolute;

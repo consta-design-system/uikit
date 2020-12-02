@@ -1,6 +1,7 @@
 import './Tooltip.css';
 
 import React from 'react';
+import { classnames } from '@bem-react/classnames';
 
 import { ClickOutsideHandler } from '../../hooks/useClickOutside/useClickOutside';
 import { cn } from '../../utils/bem';
@@ -16,8 +17,12 @@ export const sizes = ['s', 'm', 'l'] as const;
 
 type Size = typeof sizes[number];
 
+export const tooltipPropStatus = ['normal', 'alert', 'success', 'warning'] as const;
+export type TooltipPropStatus = typeof tooltipPropStatus[number];
+
 type Props = {
   size: Size;
+  status?: TooltipPropStatus;
   direction?: Direction;
   spareDirection?: Direction;
   possibleDirections?: readonly Direction[];
@@ -28,15 +33,19 @@ type Props = {
 } & PositioningProps;
 
 export const Tooltip = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
-  const { children, size, className, ...rest } = props;
+  const { children, size, status, ...rest } = props;
   const { themeClassNames } = useTheme();
+
+  const className = status
+    ? classnames(props.className, themeClassNames.color.accent)
+    : classnames(props.className, themeClassNames.color.invert);
 
   return (
     <Popover arrowOffset={ARROW_OFFSET + ARROW_SIZE} offset={ARROW_SIZE + 4} {...rest}>
       {(direction) => (
         <div
           ref={ref}
-          className={cnTooltip(null, [themeClassNames.color.invert, className])}
+          className={cnTooltip({ status }, [className])}
           style={{
             ['--tooltip-arrow-size' as string]: `${ARROW_SIZE}px`,
             ['--tooltip-arrow-offset' as string]: `${ARROW_OFFSET}px`,

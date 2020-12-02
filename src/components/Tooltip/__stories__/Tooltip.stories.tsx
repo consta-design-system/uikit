@@ -10,7 +10,7 @@ import { Badge } from '../../Badge/Badge';
 import { Button } from '../../Button/Button';
 import { directions, Position } from '../../Popover/Popover';
 import { Text } from '../../Text/Text';
-import { sizes, Tooltip } from '../Tooltip';
+import { sizes, Tooltip, tooltipPropStatus } from '../Tooltip';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
@@ -20,6 +20,7 @@ const cnTooltipStories = cn('TooltipStories');
 
 const getCommonKnobs = () => ({
   size: select('size', sizes, 's'),
+  status: select('status', ['', ...tooltipPropStatus], ''),
   direction: select('direction', directions, 'upCenter'),
   spareDirection: select('spareDirection', directions, 'downStartLeft'),
   possibleDirections: object('possibleDirections', directions),
