@@ -11,6 +11,13 @@ export type Filters<T extends TableRow> = Array<{
   filterer: (value: any) => boolean;
 }>;
 
+export type SortByProps<T extends TableRow> = {
+  sortingBy: keyof T;
+  sortOrder: 'asc' | 'desc';
+};
+
+export type onSortBy<T extends TableRow> = (props: SortByProps<T> | null) => void;
+
 export type FieldSelectedValues = string[];
 
 export type SelectedFilters = { [field: string]: FieldSelectedValues | undefined };

@@ -6,6 +6,7 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
 
 - [Структура](#структура)
   - [Колонки](#колонки)
+  - [Сортировка](#сортировка)
   - [Строки](#строки)
   - [Фильтры](#фильтры)
   - [Заглушка](#заглушка)
@@ -60,6 +61,10 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
   },
 ];
 ```
+
+### Сортировка
+Стандартное поведение сортирует только строки. Через параметр `onSortBy` можно получить имя столбца и порядок сортировки,
+самостоятельно отсортировать данные и передать в `rows` [см примеры](#сортировка-по-времени-через-onsortby)
 
 ### Строки
 
@@ -211,6 +216,7 @@ type LazyLoad = { maxVisibleRows?: number; scrollableEl?: HTMLDivElement / Windo
 | [`borderBetweenColumns`](#границы)            | `boolean`                                           | false                                             | Отображение границ между колонками                 |
 | [`emptyRowsPlaceholder`](#заглушка)           | `React.ReactNode`                                   | -                                                 | Заглушка, показывается, когда в таблице нет данных |
 | [`onRowHover`](#выделить-строки)              | `OnRowHover`                                        | -                                                 | Функция которая сработает при наведении на строку  |
+| [`onSortBy`](#сортировка)                     | `onSortBy`                                          | sortByDefault                                     | Функция срабатывает при нажатии на иконку сортировки|
 | `className`                                   | `string`                                            | -                                                 | Дополнительный CSS-класс                           |
 | lazyLoad?                                     | `LazyLoad`                                          | `{ maxVisibleRows: 210; scrollableEl: tableRef }` | Включает виртуальную прокрутку в таблице           |
 
@@ -297,3 +303,70 @@ const App = () => {
   return <Table columns={columns} rows={rows} />;
 };
 ```
+
+
+### Сортировка по времени через onSortBy
+
+```tsx
+import React, {useState} from 'react';
+import { Table, SortByProps } from '@consta/uikit/Table';
+
+const data = [
+  {
+    id: 1,
+    date: new Date('Thu Dec 03 2020 14:23:13 GMT+0300 (Moscow Standard Time)')
+  },
+  {
+    id: 2,
+    date: new Date('Thu Dec 03 2020 14:04:13 GMT+0300 (Moscow Standard Time)')
+  },
+  {
+    id: 3,
+    date: new Date('Thu Dec 03 2020 14:55:13 GMT+0300 (Moscow Standard Time)')
+  },
+  {
+    id: 4,
+    date: new Date('Thu Dec 03 2020 14:12:13 GMT+0300 (Moscow Standard Time)')
+  },
+]
+
+const columns = [
+  {
+    title: `Id`,
+    accessor: `id`,
+    sortable: true,
+  },
+  {
+    title: `Дата`,
+    accessor: `date`,
+    sortable: true,
+  }
+]
+
+const App = () => {
+    const [sortSetting, setSortSetting] = useState<SortByProps<any> | null>(null)
+
+    const rows = data.sort((a, b) => {
+        if (sortSetting?.sortingBy === 'date') {
+          const [firstDate, secondDate] = sortSetting.sortOrder === 'asc' ? [a.date, b.date] : [b.date, a.date]
+          return firstDate.valueOf() - secondDate.valueOf()
+        }
+        return 0
+      })
+      .map((item) => ({
+      id: item.id.valueOf(),
+      date: item.date.toString(),
+    }))
+
+    return (
+      <Table
+        rows={rows}
+        columns={columns}
+        onSortBy={setSortSetting}
+      />
+    );
+};
+```
+
+
+

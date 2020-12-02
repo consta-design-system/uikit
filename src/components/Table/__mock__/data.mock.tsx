@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Badge } from '../../Badge/Badge';
-import { Props as TableProps, TableFilters as Filters } from '../Table';
+import { Props as TableProps, TableFilters as Filters, TableRow } from '../Table';
 
 export const rows = [
   {
@@ -432,7 +432,7 @@ const badgeParams: React.ComponentProps<typeof Badge> = {
   size: 'm',
 };
 
-const tableWithTrafficLightDataRows = [
+const tableWithTrafficLightDataRows: TableRow[] = [
   {
     id: 'row1',
     field: 'Северный бур',

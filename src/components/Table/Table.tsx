@@ -6,7 +6,7 @@ import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize'
 import { IconSortDown } from '../../icons/IconSortDown/IconSortDown';
 import { IconSortUp } from '../../icons/IconSortUp/IconSortUp';
 import { IconUnsort } from '../../icons/IconUnsort/IconUnsort';
-import { sortBy, updateAt } from '../../utils/array';
+import { sortBy as sortByDefault, updateAt } from '../../utils/array';
 import { cn } from '../../utils/bem';
 import { isNotNil } from '../../utils/type-guards';
 import { Text } from '../Text/Text';
@@ -22,6 +22,7 @@ import {
   filterTableData,
   getSelectedFiltersList,
   isSelectedFiltersPresent,
+  onSortBy,
   useSelectedFilters,
 } from './filtering';
 import {
@@ -97,6 +98,7 @@ export type Props<T extends TableRow> = {
   columns: Array<TableColumn<T>>;
   rows: T[];
   filters?: Filters<T>;
+  onSortBy?: onSortBy<T>;
   size?: Size;
   stickyHeader?: boolean;
   stickyColumns?: number;
@@ -119,6 +121,22 @@ export type SortingState<T extends TableRow> = {
 
 const getColumnSortByField = <T extends TableRow>(column: TableColumn<T>): RowField<T> =>
   (column.sortable && column.sortByField) || column.accessor;
+
+const sortingData = <T extends TableRow>(
+  rows: T[],
+  sorting: SortingState<T>,
+  onSortBy?: onSortBy<T>,
+) => {
+  if (onSortBy) {
+    return rows;
+  }
+
+  if (!sorting) {
+    return rows;
+  }
+
+  return sortByDefault(rows, sorting.by, sorting.order);
+};
 
 const defaultEmptyRowsPlaceholder = (
   <Text as="span" view="primary" size="s" lineHeight="s">
@@ -143,6 +161,7 @@ export const Table = <T extends TableRow>({
   className,
   onRowHover,
   lazyLoad,
+  onSortBy,
 }: Props<T>): React.ReactElement => {
   const {
     headers,
@@ -213,7 +232,15 @@ export const Table = <T extends TableRow>({
   };
 
   const handleSortClick = (column: TableColumn<T>): void => {
-    setSorting(getNewSorting(sorting, getColumnSortByField(column)));
+    const newSorting = getNewSorting(sorting, getColumnSortByField(column));
+    const sortProps = newSorting
+      ? {
+          sortingBy: newSorting.by,
+          sortOrder: newSorting.order,
+        }
+      : null;
+    onSortBy && onSortBy(sortProps);
+    setSorting(newSorting);
   };
 
   const handleFilterTogglerClick = (id: string) => (): void => {
@@ -326,11 +353,11 @@ export const Table = <T extends TableRow>({
     flattenedHeaders,
   );
 
-  const tableData = sorting ? sortBy(rows, sorting.by, sorting.order) : rows;
+  const sortedTableData = sortingData(rows, sorting, onSortBy);
   const filteredData =
     !filters || !isSelectedFiltersPresent(selectedFilters)
-      ? tableData
-      : filterTableData({ data: tableData, filters, selectedFilters });
+      ? sortedTableData
+      : filterTableData({ data: sortedTableData, filters, selectedFilters });
 
   const { maxVisibleRows = 210, scrollableEl = tableRef.current } = lazyLoad || {};
 
