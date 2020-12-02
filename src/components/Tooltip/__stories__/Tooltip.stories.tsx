@@ -20,7 +20,6 @@ const cnTooltipStories = cn('TooltipStories');
 
 const getCommonKnobs = () => ({
   size: select('size', sizes, 's'),
-  // status: select('status', ['', ...tooltipPropStatus], ''),
   direction: select('direction', directions, 'upCenter'),
   spareDirection: select('spareDirection', directions, 'downStartLeft'),
   possibleDirections: object('possibleDirections', directions),
