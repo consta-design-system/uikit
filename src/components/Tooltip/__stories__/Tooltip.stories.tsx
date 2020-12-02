@@ -20,7 +20,7 @@ const cnTooltipStories = cn('TooltipStories');
 
 const getCommonKnobs = () => ({
   size: select('size', sizes, 's'),
-  status: select('status', ['', ...tooltipPropStatus], ''),
+  // status: select('status', ['', ...tooltipPropStatus], ''),
   direction: select('direction', directions, 'upCenter'),
   spareDirection: select('spareDirection', directions, 'downStartLeft'),
   possibleDirections: object('possibleDirections', directions),
@@ -46,6 +46,7 @@ const TooltipPositionedByCoordsStoryContent = () => {
       </div>
       <Tooltip
         {...getCommonKnobs()}
+        status={select('status', ['', ...tooltipPropStatus], '') || undefined}
         isInteractive={boolean('isInteractive', false)}
         position={position}
       />
@@ -91,6 +92,7 @@ export const TooltipPositionedByAnchorStory = createStory(
 
     const commonKnobs = {
       ...getCommonKnobs(),
+      status: select('status', ['', ...tooltipPropStatus], '') || undefined,
       isInteractive: boolean('isInteractive', false),
       equalAnchorWidth: boolean('equalAnchorWidth', false),
     };
