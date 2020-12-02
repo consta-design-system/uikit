@@ -68,12 +68,17 @@ const getKnobs = (replacedProps?: Partial<Props<TableRow>>): Props<TableRow> => 
   };
 };
 
-export const Interactive = createStory(() => <Table {...getKnobs()} />, {
+export const Interactive = createStory(() => <Table {...getKnobs()} testId="Story" />, {
   name: 'обычная',
 });
 
 export const WithMultiLevelHeaders = createStory(
-  () => <Table {...getKnobs(tableWithMultiLevelHeadersData as Partial<Props<TableRow>>)} />,
+  () => (
+    <Table
+      {...getKnobs(tableWithMultiLevelHeadersData as Partial<Props<TableRow>>)}
+      testId="Story"
+    />
+  ),
   {
     name: 'с многоуровневым заголовком',
   },
