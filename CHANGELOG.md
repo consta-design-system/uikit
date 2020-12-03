@@ -2,8 +2,8 @@
 
 ## v1.10.8 (26/11/2020)
 
-- [feat(Modal): added refsForExcludeClickOutside (#625)](https://github.com/gazprom-neft/consta-uikit/commit/35f83e65be396cf2b38dc0dc3181d5291169968a) - @c1n1k
-- [ fix(selects): Many fixs (#620)](https://github.com/gazprom-neft/consta-uikit/commit/beb0fe6b0b4860900f1eb29a776ac56b8c7542e4) - @c1n1k
+- [feat(Modal): added refsForExcludeClickOutside (#625)](https://github.com/gazprom-neft/consta-uikit/commit/35f83e65be396cf2b38dc0dc3181d5291169968a) - [@c1n1k](https://github.com/c1n1k)
+- [ fix(selects): Many fixs (#620)](https://github.com/gazprom-neft/consta-uikit/commit/beb0fe6b0b4860900f1eb29a776ac56b8c7542e4) - [@c1n1k](https://github.com/c1n1k)
 
 ---
 
