@@ -37,6 +37,7 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
     actions,
     status = snackBarItemStatusDefault,
     onAutoClose: onAutoCloseProp,
+    key,
   } = item;
   const [timerFunctions, setTimerFunctions] = useState<{
     start: () => void;
@@ -79,6 +80,7 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
       className={cnSnackBarItem({ status }, [cnTheme({ color: 'gpnDark' })])}
       onMouseEnter={autoCloseTime ? handleMouseEnter : undefined}
       onMouseLeave={autoCloseTime ? handleMouseLeave : undefined}
+      data-testid={key}
     >
       {autoCloseTime && (
         <SnackBarTimer
@@ -90,11 +92,15 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
       {!autoCloseTime && Icon && <Icon className={cnSnackBar('Icon')} size="m" />}
       <div className={cnSnackBar('Content')}>
         {message && (
-          <Text className={cnSnackBar('Message')} lineHeight="s">
+          <Text
+            className={cnSnackBar('Message')}
+            lineHeight="s"
+            data-testid={`${key}:text:message`}
+          >
             {message}
           </Text>
         )}
-        {actions && <SnackBarActionButton actions={actions} />}
+        {actions && <SnackBarActionButton actions={actions} testId={key} />}
       </div>
       {onClose && (
         <Button
@@ -104,6 +110,7 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
           form="round"
           size="xs"
           onClick={handleClose}
+          data-testid={`${key}:button:close`}
         />
       )}
     </div>

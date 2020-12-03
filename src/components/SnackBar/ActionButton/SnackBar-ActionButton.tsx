@@ -7,10 +7,11 @@ import { cnSnackBar, SnackBarPropItemAction } from '../SnackBar';
 
 export type SnackBarActionButtonProps = {
   actions: SnackBarPropItemAction[];
+  testId?: string | number;
 };
 
 export const SnackBarActionButton: React.FC<SnackBarActionButtonProps> = (props) => {
-  const { actions } = props;
+  const { actions, testId } = props;
 
   if (actions.length < 1) {
     return null;
@@ -26,6 +27,7 @@ export const SnackBarActionButton: React.FC<SnackBarActionButtonProps> = (props)
           view="ghost"
           label={item.label}
           onClick={item.onClick}
+          data-testid={testId && `${testId}:button:action[${i}]`}
         />
       ))}
     </div>
