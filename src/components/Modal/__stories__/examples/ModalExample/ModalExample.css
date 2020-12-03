@@ -1,3 +1,7 @@
+.Button {
+  margin-bottom: var(--space-m);
+}
+
 .ModalExample {
   &-Title {
     margin: var(--space-m);

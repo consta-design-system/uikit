@@ -1,4 +1,4 @@
-import { ModalExample } from './examples/ModalExample/ModalExample';
+import { ModalExample, ModalExampleTop, ModalExampleCenter, ModalExampleNoOverlay } from './examples/ModalExample/ModalExample';
 
 # Modal
 
@@ -6,7 +6,6 @@ import { ModalExample } from './examples/ModalExample/ModalExample';
 Там может быть просто текст или что угодно: таблица, форма, изображение.
 
 - [Содержимое](#содержимое)
-- [Размер](#размер)
 - [Расположение](#расположение)
 - [Подложка](#подложка)
 - [Список свойств](#свойства)
@@ -14,18 +13,20 @@ import { ModalExample } from './examples/ModalExample/ModalExample';
 
 ## Содержимое
 
-Всё, что вы показать в модальном окне, поместите в контейнер `<Modal></Modal>`.
+Всё, что вы хотите показать в модальном окне, поместите в контейнер `<Modal></Modal>`.
 
 <ModalExample />
 
-## Размер
-
-Вы можете указать ширину модального окна в свойстве `width`.
 
 ## Расположение
 
 За расположение модального окна отвечает свойство `position`. Варианты: `'center'`, `'top'`,
 по умолчанию — `'center'`.
+
+
+<ModalExampleTop />
+
+<ModalExampleCenter />
 
 ## Подложка
 
@@ -34,11 +35,12 @@ import { ModalExample } from './examples/ModalExample/ModalExample';
 
 Чтобы убрать подложку, добавьте `hasOverlay=false`.
 
+<ModalExampleNoOverlay />
+
 ## Свойства
 
 | Свойство                       | Тип или варианты значения       | По умолчанию           | Описание                                                     |
 | ------------------------------ | ------------------------------- | ---------------------- | ------------------------------------------------------------ |
-| [`width?`](#размер)            | `'auto'`                        | `auto`                 | Ширина модального окна                                       |
 | [`position?`](#расположение)   | `'center'`, `'top'`             | `center`               | Расположение модального окна                                 |
 | [`hasOverlay?`](#подложка)     | `boolean`                       | `true`                 | Добавляет подложку вокруг окна — поверх содержимого страницы |
 | [`onOverlayClick?`](#подложка) | `(e: React.MouseEvent) => void` | -                      | Действие по нажатию на подложку —  область за пределами окна |
@@ -90,5 +92,3 @@ export function ModalExample() {
   );
 }
 ```
-
-<ModalExample />
