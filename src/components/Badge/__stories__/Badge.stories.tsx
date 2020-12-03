@@ -48,7 +48,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Components|/Badge',
+  title: 'Компоненты|/Badge',
   parameters: {
     docs: {
       page: mdx,

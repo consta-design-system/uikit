@@ -40,7 +40,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Components|/Header',
+  title: 'Компоненты|/Header',
   parameters: {
     docs: {
       page: mdx,

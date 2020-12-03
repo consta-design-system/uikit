@@ -152,7 +152,7 @@ export const PopoverBannedPositionsStory = createStory(
 );
 
 export default createMetadata({
-  title: 'Components|/Popover',
+  title: 'Компоненты|/Popover',
   excludeStories:
     process.env.NODE_ENV === 'development'
       ? undefined

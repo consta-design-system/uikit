@@ -20,7 +20,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Components|/FileField',
+  title: 'Компоненты|/FileField',
   parameters: {
     docs: {
       page: mdx,

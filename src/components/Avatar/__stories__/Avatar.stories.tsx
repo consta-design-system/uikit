@@ -35,7 +35,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Components|/Avatar',
+  title: 'Компоненты|/Avatar',
   parameters: {
     docs: {
       page: mdx,

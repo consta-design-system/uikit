@@ -62,7 +62,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Components|/User',
+  title: 'Компоненты|/User',
   parameters: {
     docs: {
       page: mdx,

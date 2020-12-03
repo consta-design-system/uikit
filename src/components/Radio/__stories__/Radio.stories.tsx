@@ -45,7 +45,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Components|/Radio',
+  title: 'Компоненты|/Radio',
   parameters: {
     docs: {
       page: mdx,

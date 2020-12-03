@@ -106,7 +106,7 @@ export const WithCreateStory = createStory(
 );
 
 export default createMetadata({
-  title: 'Components|/Combobox',
+  title: 'Компоненты|/Combobox',
   parameters: {
     docs: {
       page: mdx,

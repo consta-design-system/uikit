@@ -236,7 +236,7 @@ export const WithOnRowHover = createStory(() => <WithOnRowHoverContent />, {
 });
 
 export default createMetadata({
-  title: 'Components|/Table',
+  title: 'Компоненты|/Table',
   parameters: {
     docs: {
       page: mdx,
