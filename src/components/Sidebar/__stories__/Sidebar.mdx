@@ -1,4 +1,11 @@
-import { SidebarExample } from './examples/SidebarExample/SidebarExample';
+import {
+  SidebarExample,
+  SidebarExampleLeft,
+  SidebarExampleRight,
+  SidebarExampleTop,
+  SidebarExampleBottom,
+  SidebarExampleNoOverlay
+} from './examples/SidebarExample/SidebarExample';
 
 # Sidebar
 
@@ -9,53 +16,54 @@ import { SidebarExample } from './examples/SidebarExample/SidebarExample';
 
 - [Содержимое](#содержимое)
 - [Расположение](#расположение)
-- [Размер](#размер)
 - [Подложка](#подложка)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
 
 ## Содержимое
 
-Всё, что вы хотите показать внутри сайдбара, поместите в контейнер `<Sidebar></Sidebar>`.
+Всё, что вы хотите показать внутри окна, поместите в контейнер `<Sidebar></Sidebar>`.
+
+<SidebarExample />
 
 ## Расположение
 
-За расположение сайдбара отвечает свойство `position`. Варианты: `'right'`, `'bottom'`, `'left'`, `'top'`.
+За расположение компонента отвечает свойство `position`. Варианты: `'right'`, `'bottom'`, `'left'`, `'top'`.
 По умолчанию — `'right'`.
 
-Если укажете `'right'` или `'left'`, сайдбар растянется на всю высоту экрана.
+Если укажете `'right'` или `'left'`, компонент растянется на всю высоту экрана.
 
 Если укажете `'top'` или `'bottom'` — на всю его ширину.
 
-## Размер
-
-Вы можете указать ширину сайдбара в свойстве `width`, а высоту — в свойстве `height`.
-Доступно только одно значение — `'auto'`.
+<SidebarExampleLeft />
+<SidebarExampleRight />
+<SidebarExampleTop />
+<SidebarExampleBottom />
 
 ## Подложка
 
-За подложку вокруг открытого сайдбара отвечает свойство `hasOverlay`. По умолчанию
+За подложку вокруг открытого окна отвечает свойство `hasOverlay`. По умолчанию
 окно открывается с подложкой: она полупрозрачная и закрывает всю страницу.
 
 Чтобы убрать подложку, добавьте `hasOverlay=false`.
 
-## Список свойств
+<SidebarExampleNoOverlay />
+
+## Свойства
 
 | Свойство                       | Тип или варианты значения          | По умолчанию           |                                                              |
 | ------------------------------ | ---------------------------------- | ---------------------- | ------------------------------------------------------------ |
 | [`position?`](#расположение)   | `'right', 'bottom', 'left', 'top'` | `right`                | Расположение сайдбара                                        |
-| [`width?`](#размер)            | `'auto'`                           | `auto`                 | Ширина сайдбара                                              |
-| [`height?`](#размер)           | `'auto'`                           | `auto`                 | Высота сайдбара                                              |
-| `isOpen?`                      | `boolean`                          | -                      | Показывает и убирает сайдбар                                 |
+| `isOpen?`                      | `boolean`                          | -                      | Показывает и убирает всплывающее окно                                 |
 | `onClose?`                     | `() => void`                       | -                      | Действие при закрытии окна                                   |
 | `onOpen?`                      | `() => void`                       | -                      | Действие при открытии окна                                   |
-| [`hasOverlay?`](#подложка)     | `boolean`                          | -                      | Добавляет подложку вокруг сайдбара, поверх основной страницы |
+| [`hasOverlay?`](#подложка)     | `boolean`                          | -                      | Добавляет подложку вокруг окна, поверх основной страницы |
 | [`onOverlayClick?`](#подложка) | `(e: React.MouseEvent) => void`    | -                      | Действие по клику на подложку                                |
 | `className?`                   | `string`                           | -                      | Дополнительный CSS-класс для компонента                      |
 | `children?`                    | `React.ReactNode`                  | -                      | Дочерние элементы                                            |
 | `container?`                   | `HTMLDivElement, undefined`        | `window.document.body` | Родительский контейнер                                       |
 
-## Пример использования
+## Пример
 
 ```tsx
 export const SidebarExample = () => {
@@ -115,7 +123,7 @@ export const SidebarExample = () => {
           <Button
             size="m"
             view="clear"
-            label="Ок"
+            label="Понятно"
             width="default"
             onClick={() => setIsSidebarOpen(false)}
           />
@@ -132,5 +140,3 @@ export const SidebarExample = () => {
   );
 };
 ```
-
-<SidebarExample />

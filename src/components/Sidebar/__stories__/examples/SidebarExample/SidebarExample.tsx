@@ -67,7 +67,268 @@ export const SidebarExample = () => {
           <Button
             size="m"
             view="clear"
-            label="Ок"
+            label="Понятно"
+            width="default"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+          <Button
+            size="m"
+            view="ghost"
+            label="Закрыть"
+            width="default"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        </Sidebar.Actions>
+      </Sidebar>
+    </div>
+  );
+};
+
+export const SidebarExampleLeft = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
+  return (
+    <div className={cnDocsDecorator('Section')}>
+      <Button
+        size="m"
+        view="primary"
+        label="position=left"
+        width="default"
+        onClick={() => setIsSidebarOpen(true)}
+      />
+      <Sidebar
+        className={cnSidebarExample('Sidebar')}
+        isOpen={isSidebarOpen}
+        onOverlayClick={() => setIsSidebarOpen(false)}
+        position="left"
+      >
+        <Sidebar.Content className={cnSidebarExample('Content')}>
+          <Text
+            as="p"
+            size="l"
+            view="primary"
+            weight="semibold"
+            className={cnSidebarExample('Title')}
+          >
+            Заголовок
+          </Text>
+          <Text as="p" size="m" view="secondary" className={cnSidebarExample('Body')}>
+            Ой! Меня прижало к левому краю страницы. Помогите!
+          </Text>
+        </Sidebar.Content>
+        <Sidebar.Actions className={cnSidebarExample('Actions')}>
+          <Button
+            size="m"
+            view="clear"
+            label="Нет уж"
+            width="default"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+          <Button
+            size="m"
+            view="ghost"
+            label="Закрыть"
+            width="default"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        </Sidebar.Actions>
+      </Sidebar>
+    </div>
+  );
+};
+
+export const SidebarExampleRight = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
+  return (
+    <div className={cnDocsDecorator('Section')}>
+      <Button
+        size="m"
+        view="primary"
+        label="position=right"
+        width="default"
+        onClick={() => setIsSidebarOpen(true)}
+      />
+      <Sidebar
+        className={cnSidebarExample('Sidebar')}
+        isOpen={isSidebarOpen}
+        onOverlayClick={() => setIsSidebarOpen(false)}
+        position="right"
+      >
+        <Sidebar.Content className={cnSidebarExample('Content')}>
+          <Text
+            as="p"
+            size="l"
+            view="primary"
+            weight="semibold"
+            className={cnSidebarExample('Title')}
+          >
+            Заголовок
+          </Text>
+          <Text as="p" size="m" view="secondary" className={cnSidebarExample('Body')}>
+            Ой! Меня прижало к правому краю страницы. Помогите!
+          </Text>
+        </Sidebar.Content>
+        <Sidebar.Actions className={cnSidebarExample('Actions')}>
+          <Button
+            size="m"
+            view="clear"
+            label="Нет уж"
+            width="default"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+          <Button
+            size="m"
+            view="ghost"
+            label="Закрыть"
+            width="default"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        </Sidebar.Actions>
+      </Sidebar>
+    </div>
+  );
+};
+
+export const SidebarExampleTop = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
+  return (
+    <div className={cnDocsDecorator('Section')}>
+      <Button
+        size="m"
+        view="primary"
+        label="position=top"
+        width="default"
+        onClick={() => setIsSidebarOpen(true)}
+      />
+      <Sidebar
+        className={cnSidebarExample('Sidebar')}
+        isOpen={isSidebarOpen}
+        onOverlayClick={() => setIsSidebarOpen(false)}
+        position="top"
+      >
+        <Sidebar.Content className={cnSidebarExample('Content')}>
+          <Text
+            as="p"
+            size="l"
+            view="primary"
+            weight="semibold"
+            className={cnSidebarExample('Title')}
+          >
+            Заголовок
+          </Text>
+          <Text as="p" size="m" view="secondary" className={cnSidebarExample('Body')}>
+            Ой! Меня прижало к верху страницы. Помогите!
+          </Text>
+        </Sidebar.Content>
+        <Sidebar.Actions className={cnSidebarExample('Actions')}>
+          <Button
+            size="m"
+            view="clear"
+            label="Нет уж"
+            width="default"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+          <Button
+            size="m"
+            view="ghost"
+            label="Закрыть"
+            width="default"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        </Sidebar.Actions>
+      </Sidebar>
+    </div>
+  );
+};
+
+export const SidebarExampleBottom = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
+  return (
+    <div className={cnDocsDecorator('Section')}>
+      <Button
+        size="m"
+        view="primary"
+        label="position=bottom"
+        width="default"
+        onClick={() => setIsSidebarOpen(true)}
+      />
+      <Sidebar
+        className={cnSidebarExample('Sidebar')}
+        isOpen={isSidebarOpen}
+        onOverlayClick={() => setIsSidebarOpen(false)}
+        position="right"
+      >
+        <Sidebar.Content className={cnSidebarExample('Content')}>
+          <Text
+            as="p"
+            size="l"
+            view="primary"
+            weight="semibold"
+            className={cnSidebarExample('Title')}
+          >
+            Заголовок
+          </Text>
+          <Text as="p" size="m" view="secondary" className={cnSidebarExample('Body')}>
+            Ой! Меня прижало к низу страницы. Помогите!
+          </Text>
+        </Sidebar.Content>
+        <Sidebar.Actions className={cnSidebarExample('Actions')}>
+          <Button
+            size="m"
+            view="clear"
+            label="Нет уж"
+            width="default"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+          <Button
+            size="m"
+            view="ghost"
+            label="Закрыть"
+            width="default"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        </Sidebar.Actions>
+      </Sidebar>
+    </div>
+  );
+};
+
+export const SidebarExampleNoOverlay = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
+  return (
+    <div className={cnDocsDecorator('Section')}>
+      <Button
+        size="m"
+        view="primary"
+        label="Без подложки"
+        width="default"
+        onClick={() => setIsSidebarOpen(true)}
+      />
+      <Sidebar
+        className={cnSidebarExample('Sidebar')}
+        isOpen={isSidebarOpen}
+        onOverlayClick={() => setIsSidebarOpen(false)}
+        position="right"
+        hasOverlay={false}
+      >
+        <Sidebar.Content className={cnSidebarExample('Content')}>
+          <Text
+            as="p"
+            size="l"
+            view="primary"
+            weight="semibold"
+            className={cnSidebarExample('Title')}
+          >
+            Заголовок
+          </Text>
+          <Text as="p" size="m" view="secondary" className={cnSidebarExample('Body')}>
+            Ой! У меня чего-то не хватает. Нажмите на кнопочку, пожалуйста :)
+          </Text>
+        </Sidebar.Content>
+        <Sidebar.Actions className={cnSidebarExample('Actions')}>
+          <Button
+            size="m"
+            view="clear"
+            label="Ладно"
             width="default"
             onClick={() => setIsSidebarOpen(false)}
           />

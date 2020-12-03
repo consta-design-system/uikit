@@ -1,3 +1,7 @@
+.Button {
+  margin-bottom: var(--space-m);
+}
+
 .SidebarExample {
   &-Sidebar {
     z-index: 9999;
