@@ -1,0 +1,12 @@
+name: chromatic
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  send:
+    uses: satak/webrequest-action@master
+    with:
+      url: ${{ secrets.TELEGRAM_SERVER_URL }}
+      method: GET
