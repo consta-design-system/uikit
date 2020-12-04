@@ -141,7 +141,7 @@ export function ModalExampleNoOverlay() {
       <Modal
         className={cnModalExample('Modal')}
         isOpen={isModalOpen}
-        hasOverlay
+        hasOverlay={false}
         onOverlayClick={(): void => setIsModalOpen(false)}
       >
         <Text as="p" size="s" view="secondary" className={cnModalExample('Title')}>
