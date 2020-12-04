@@ -358,7 +358,7 @@ export function Playground() {
 }
 
 export default {
-  title: 'Components|/Icons',
+  title: 'Компоненты|/Icons',
   parameters: {
     docs: {
       page: mdx,

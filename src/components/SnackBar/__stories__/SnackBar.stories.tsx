@@ -145,7 +145,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Components|/SnackBar',
+  title: 'Компоненты|/SnackBar',
   parameters: {
     docs: {
       page: mdx,

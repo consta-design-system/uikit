@@ -40,7 +40,7 @@ export function Playground() {
 export const Gallery = FileIconsGallery;
 
 export default createMetadata({
-  title: 'Components|/File',
+  title: 'Компоненты|/File',
   parameters: {
     docs: {
       page: mdx,

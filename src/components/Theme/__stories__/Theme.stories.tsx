@@ -12,7 +12,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Components|/Theme',
+  title: 'Компоненты|/Theme',
   parameters: {
     docs: {
       page: mdx,

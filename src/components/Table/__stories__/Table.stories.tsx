@@ -252,7 +252,7 @@ export const WithMergedCells = createStory(
 );
 
 export default createMetadata({
-  title: 'Components|/Table',
+  title: 'Компоненты|/Table',
   parameters: {
     docs: {
       page: mdx,

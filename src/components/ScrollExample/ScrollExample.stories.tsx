@@ -65,6 +65,6 @@ export function Playground() {
 // TODO: пока убрали, в дальнейшем когда будет выделенно место под такие строи опубликуем.
 
 // export default {
-//   title: 'Components|/Radio',
+//   title: 'Компоненты|/Radio',
 //   component: Playground,
 // };

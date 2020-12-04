@@ -94,7 +94,7 @@ export const WithValueStory = createStory(() => <Default value={items[4]} />, {
 });
 
 export default createMetadata({
-  title: 'Components|/BasicSelect',
+  title: 'Компоненты|/BasicSelect',
   parameters: {
     docs: {
       page: mdx,

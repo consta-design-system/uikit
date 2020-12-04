@@ -46,7 +46,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Components|/Switch',
+  title: 'Компоненты|/Switch',
   parameters: {
     docs: {
       page: mdx,

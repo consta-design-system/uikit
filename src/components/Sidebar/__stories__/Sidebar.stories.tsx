@@ -106,7 +106,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Components|/Sidebar',
+  title: 'Компоненты|/Sidebar',
   parameters: {
     docs: {
       page: mdx,
