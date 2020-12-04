@@ -10,6 +10,7 @@ import {
 
 - [Тема](#тема-тултипа)
 - [Размер](#размер)
+- [Статус](#статус)
 - [Позиционирование](#позиционирование-тултипа)
   - [По якорю](#по-элементу-якорю)
   - [По координатам](#по-координатам)
@@ -22,7 +23,11 @@ import {
 
 ## Размер
 
-За размер тултипа отвечает свойство size. Варианты: `s`, `m`, `l`.
+За размер тултипа отвечает свойство `size`. Варианты: `s`, `m`, `l`. В зависимости от выбранного размера изменятеся максимальная ширина тултипа. 
+
+## Статус
+
+Иногда может быть полезно дополнительно выделить статус сообщения в Тултипе, например для сообщения об ошибки в валидации. Сделать это можно с помощью свойства `status` со значениями: `normal`, `success`, `warning` и `alert`. 
 
 ## Позиционирование тултипа
 
@@ -47,6 +52,7 @@ import {
 | `anchorRef?`          | `React.RefObject<HTMLElement>`                | —                       | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
 | `position?`           | `{ x: number; y: number }` &#124; `undefined` | —                       | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
 | `size`                | `'s', 'm', 'l'`                               | —                       | Размер, влияющий на максимальную ширину тултипа                                   |
+| `status`              | `'normal', 'success', 'warning', 'alert'`     | —                       | Статус, влияющий на цвет тултипа                                   |
 | `children`            | `React.ReactNode`                             | —                       | Контент тултипа                                                                   |
 | `direction?`          | `Direction`                                   | `'upCenter'`            | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
 | `possibleDirections?` | `Direction[]`                                 | все возможные Direction | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
