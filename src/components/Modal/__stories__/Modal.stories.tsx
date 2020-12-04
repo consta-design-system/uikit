@@ -94,16 +94,16 @@ export function Playground(props: {
       >
         {props.children || (
           <>
-            <Text as="p" size="s" view="secondary" className={cnModalStories('title')}>
+            <Text as="p" size="s" view="secondary" className={cnModalStories('Title')}>
               Заголовок модалки
             </Text>
-            <Text as="p" size="m" view="primary" className={cnModalStories('body')}>
+            <Text as="p" size="m" view="primary" className={cnModalStories('Body')}>
               Описание в теле модалки. Здесь может находиться какая-то информация. Lorem ipsum dolor
               sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
             </Text>
           </>
         )}
-        <div className={cnModalStories('action')}>
+        <div className={cnModalStories('Action')}>
           <Button
             size="m"
             view="primary"

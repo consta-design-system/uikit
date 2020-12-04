@@ -1,41 +1,94 @@
+import { ModalExample, ModalExampleTop, ModalExampleCenter, ModalExampleNoOverlay } from './examples/ModalExample/ModalExample';
+
 # Modal
 
-Modal - компонент контейнер с белым фоном для отображения содержимого на полупрозрачном фоне на всём экране.
+Всплывающее окно. Контейнер, в котором можно показать любое содержимое поверх основного экрана.
+Там может быть просто текст или что угодно: таблица, форма, изображение.
 
-## Список свойств
+- [Содержимое](#содержимое)
+- [Расположение](#расположение)
+- [Подложка](#подложка)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
 
-| Свойство               | Тип или варианты значения                                             | По умолчанию              |
-| ---------------------- | --------------------------------------------------------------------- | ------------------------- |
-| isOpen?                | `boolean`                                                             | -                         |
-| onClose?               | `() => void`                                                          | -                         |
-| onOpen?                | `() => void`                                                          | -                         |
-| onOverlayClick?        | `(e: React.MouseEvent) => void`                                       | -                         |
-| hasOverlay?            | `boolean`                                                             | `true`                    |
-| className?             | `string`                                                              | -                         |
-| width?                 | `'auto'`                                                              | `auto`                    |
-| position?              | `'center', 'top'`                                                     | `center`                  |
-| children?              | `React.ReactNode`                                                     | -                         |
-| container?             | `HTMLDivElement, undefined`                                           | `window.document.body`    |
+## Содержимое
 
-## Пример использования
+Всё, что вы хотите показать в модальном окне, поместите в контейнер `<Modal></Modal>`.
 
-```ts
-<Modal className='myClassName' isOpen={isModalOpen} onOverlayClick={() => setIsModalOpen(false)}>
-  <Text as='p' size='s' view='secondary' className={cnModalStories('title')}>
-    Заголовок модалки
-  </Text>
-  <Text as='p' size='m' view='primary' className={cnModalStories('body')}>
-    Описание в теле модалки. Здесь может находиться какая-то информация.
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
-  </Text>
-  <div className={cnModalStories('action')}>
-    <Button
-      size="m"
-      view="primary"
-      label="Закрыть"
-      width='default'
-      onClick={() => setIsModalOpen(false)}
-    />
-  </div>
-</Modal>
+<ModalExample />
+
+
+## Расположение
+
+За расположение модального окна отвечает свойство `position`. Варианты: `'center'`, `'top'`,
+по умолчанию — `'center'`.
+
+
+<ModalExampleTop />
+
+<ModalExampleCenter />
+
+## Подложка
+
+За подложку вокруг открытого модального окна отвечает свойство `hasOverlay`. По умолчанию
+окно открывается с подложкой: она полупрозрачная и закрывает всю страницу.
+
+Чтобы убрать подложку, добавьте `hasOverlay=false`.
+
+<ModalExampleNoOverlay />
+
+## Свойства
+
+| Свойство                       | Тип или варианты значения       | По умолчанию           | Описание                                                     |
+| ------------------------------ | ------------------------------- | ---------------------- | ------------------------------------------------------------ |
+| [`position?`](#расположение)   | `'center'`, `'top'`             | `center`               | Расположение модального окна                                 |
+| [`hasOverlay?`](#подложка)     | `boolean`                       | `true`                 | Добавляет подложку вокруг окна — поверх содержимого страницы |
+| [`onOverlayClick?`](#подложка) | `(e: React.MouseEvent) => void` | -                      | Действие по нажатию на подложку —  область за пределами окна |
+| `isOpen?`                      | `boolean`                       | -                      | Открывает и закрывает окно                                   |
+| `onClose?`                     | `() => void`                    | -                      | Действие при закрытии окна                                   |
+| `onOpen?`                      | `() => void`                    | -                      | Действие при открытии окна                                   |
+| `children?`                    | `React.ReactNode`               | -                      | Дочерние элементы                                            |
+| `container?`                   | `HTMLDivElement, undefined`     | `window.document.body` | Родителький контейнер для модального окна                    |
+| `className?`                   | `string`                        | -                      | Дополнительный CSS-класс компонента                          |
+
+## Пример
+
+```tsx
+export function ModalExample() {
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+  return (
+    <div>
+      <Button
+        size="m"
+        view="primary"
+        label="Открыть модальное окно"
+        onClick={(): void => setIsModalOpen(true)}
+      />
+      <Modal
+        className={cnModalExample('Modal')}
+        isOpen={isModalOpen}
+        hasOverlay
+        onOverlayClick={(): void => setIsModalOpen(false)}
+      >
+        <Text as="p" size="s" view="secondary" className={cnModalExample('Title')}>
+          Заголовок модалки
+        </Text>
+        <Text as="p" size="m" view="primary" className={cnModalExample('Body')}>
+          Описание в теле модалки. Здесь может находиться какая-то информация. Lorem ipsum dolor sit
+          amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+        </Text>
+        <div className={cnModalExample('Action')}>
+          <Button
+            size="m"
+            view="primary"
+            label="Закрыть"
+            width="default"
+            onClick={(): void => setIsModalOpen(false)}
+          />
+        </div>
+      </Modal>
+    </div>
+  );
+}
 ```
