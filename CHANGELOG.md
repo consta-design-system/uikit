@@ -1,5 +1,20 @@
 # Changelog
 
+## v1.10.9 (04/12/2020)
+
+- [docs(howToGo): added new section (#655)](https://github.com/gazprom-neft/consta-uikit/commit/aaae9cdb94d54eb6e353bb27a2646385c84f5cdf) - [@gizeasy](https://github.com/gizeasy)
+- [fix(ChoiceGroup): types, mixFocus (#618)](https://github.com/gazprom-neft/consta-uikit/commit/753d6b2d76f583f475d8a8ea96b532d9b5e36fff) - [@gizeasy](https://github.com/gizeasy)
+- [feat(RadioGroup): added RadioGroup component (#612)](https://github.com/gazprom-neft/consta-uikit/commit/0a2390920ca79323c985b70245f11eb3e8953aea) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
+- [feat(Table): set columns widths after 1st render for disabling autoresize in filtering and lazyload cases (#616)](https://github.com/gazprom-neft/consta-uikit/commit/516404e2f017125c136d9bfdcd84f74f1c9d1e34) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
+- [feat(Tooltip): added statuses (#644)](https://github.com/gazprom-neft/consta-uikit/commit/b1cafa5fc5930ad87f477a09bdb2813bc19180a1) - [@fooontic](https://github.com/fooontic)
+- [feat(table): added sortBy (#647)](https://github.com/gazprom-neft/consta-uikit/commit/0cba9aedfc4081a6e3551359226491a2dbc56771) - [@Kamys](https://github.com/Kamys)
+- [Modal(fix): padding to space #526 (#649)](https://github.com/gazprom-neft/consta-uikit/commit/f3341c453a2b0fb4126b20059723d3f5dd02dddf) - [@fooontic](https://github.com/fooontic)
+- [docs(Modal): add docs for Modal (#640)](https://github.com/gazprom-neft/consta-uikit/commit/3f94b557f62fbbcee887628c5886055454715898) - [@arhayka](https://github.com/arhayka)
+- [docs(Sidebar): add docs for Sidebar (#641)](https://github.com/gazprom-neft/consta-uikit/commit/20484d691d6fd708bc063c27215cfdac2fb54779) - [@arhayka](https://github.com/arhayka)
+- [chore(telegram): added telegram bot integration (#653)](https://github.com/gazprom-neft/consta-uikit/commit/f29c1d98a5a05a7b208dd2cf84c82a6806b5fb0a) - [@gizeasy](https://github.com/gizeasy)
+
+---
+
 ## v1.10.8 (26/11/2020)
 
 - [feat(Modal): added refsForExcludeClickOutside (#625)](https://github.com/gazprom-neft/consta-uikit/commit/35f83e65be396cf2b38dc0dc3181d5291169968a) - [@c1n1k](https://github.com/c1n1k)
