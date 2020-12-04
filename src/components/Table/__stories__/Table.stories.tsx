@@ -1,6 +1,6 @@
 import './Table.stories.css';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { boolean, number, object, select, text } from '@storybook/addon-knobs';
 
 import {
@@ -17,7 +17,7 @@ import { Button } from '../../Button/Button';
 import { Checkbox } from '../../Checkbox/Checkbox';
 import { Text } from '../../Text/Text';
 import { verticalAligns } from '../Cell/TableCell';
-import { Filters } from '../filtering';
+import { Filters, SortByProps } from '../filtering';
 import { Props, sizes, Table, TableColumn, TableRow, zebraStriped } from '../Table';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
@@ -228,6 +228,62 @@ export const WithBigData = createStory(
   },
   {
     name: 'с большим количеством строк',
+  },
+);
+
+export const SortByData = createStory(
+  () => {
+    const [sortSetting, setSortSetting] = useState<SortByProps<any> | null>(null);
+    const data = [
+      {
+        id: 1,
+        date: new Date('Thu Dec 03 2020 14:23:13 GMT+0300 (Moscow Standard Time)'),
+      },
+      {
+        id: 2,
+        date: new Date('Thu Dec 03 2020 14:04:13 GMT+0300 (Moscow Standard Time)'),
+      },
+      {
+        id: 3,
+        date: new Date('Thu Dec 03 2020 14:55:13 GMT+0300 (Moscow Standard Time)'),
+      },
+      {
+        id: 4,
+        date: new Date('Thu Dec 03 2020 14:12:13 GMT+0300 (Moscow Standard Time)'),
+      },
+    ];
+
+    const rows = data
+      .sort((a, b) => {
+        if (sortSetting?.sortingBy === 'date') {
+          const [firstDate, secondDate] =
+            sortSetting.sortOrder === 'asc' ? [a.date, b.date] : [b.date, a.date];
+          return firstDate.valueOf() - secondDate.valueOf();
+        }
+        return 0;
+      })
+      .map((item) => ({
+        id: item.id.valueOf(),
+        date: item.date.toString(),
+      }));
+
+    const columns = [
+      {
+        title: `Id`,
+        accessor: `id`,
+        sortable: true,
+      },
+      {
+        title: `Дата`,
+        accessor: `date`,
+        sortable: true,
+      },
+    ];
+
+    return <Table rows={rows} columns={columns} onSortBy={setSortSetting} />;
+  },
+  {
+    name: 'сортировка по времени',
   },
 );
 
