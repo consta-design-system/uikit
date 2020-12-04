@@ -59,7 +59,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Components|/Tabs',
+  title: 'Компоненты|/Tabs',
   parameters: {
     docs: {
       page: mdx,

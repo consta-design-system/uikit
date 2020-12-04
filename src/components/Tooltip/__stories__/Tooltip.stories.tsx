@@ -10,7 +10,7 @@ import { Badge } from '../../Badge/Badge';
 import { Button } from '../../Button/Button';
 import { directions, Position } from '../../Popover/Popover';
 import { Text } from '../../Text/Text';
-import { sizes, Tooltip } from '../Tooltip';
+import { sizes, Tooltip, tooltipPropStatus } from '../Tooltip';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
@@ -45,6 +45,7 @@ const TooltipPositionedByCoordsStoryContent = () => {
       </div>
       <Tooltip
         {...getCommonKnobs()}
+        status={select('status', ['', ...tooltipPropStatus], '') || undefined}
         isInteractive={boolean('isInteractive', false)}
         position={position}
       />
@@ -90,6 +91,7 @@ export const TooltipPositionedByAnchorStory = createStory(
 
     const commonKnobs = {
       ...getCommonKnobs(),
+      status: select('status', ['', ...tooltipPropStatus], '') || undefined,
       isInteractive: boolean('isInteractive', false),
       equalAnchorWidth: boolean('equalAnchorWidth', false),
     };
@@ -105,7 +107,7 @@ export const TooltipPositionedByAnchorStory = createStory(
 );
 
 export default createMetadata({
-  title: 'Components|/Tooltip',
+  title: 'Компоненты|/Tooltip',
   parameters: {
     docs: {
       page: mdx,

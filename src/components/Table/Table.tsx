@@ -78,6 +78,7 @@ export type TableColumn<T extends TableRow> = {
   align?: HorizontalAlign;
   withoutPadding?: boolean;
   width?: ColumnWidth;
+  mergeCells?: boolean;
 } & ({ sortable?: false } | { sortable: true; sortByField?: RowField<T> }) & {
     columns?: Array<TableColumn<T>>;
     position?: Position;
@@ -214,11 +215,17 @@ export const Table = <T extends TableRow>({
       return;
     }
 
-    setInitialColumnWidths(
-      columnsElements.map((el) => {
-        return el.getBoundingClientRect().width;
-      }),
-    );
+    const columnsElementsWidths = columnsElements.map((el) => el.getBoundingClientRect().width);
+
+    setInitialColumnWidths(columnsElementsWidths);
+
+    // Проверяем, что таблица отрисовалась корректно, и устанавливаем значения ширин колонок после 1го рендера
+    if (
+      columnsElements[0].getBoundingClientRect().left !==
+      columnsElements[columnsElements.length - 1].getBoundingClientRect().left
+    ) {
+      setResizedColumnWidths(columnsElementsWidths);
+    }
   }, [tableWidth]);
 
   const isSortedByColumn = (column: TableColumn<T>): boolean =>
@@ -374,6 +381,47 @@ export const Table = <T extends TableRow>({
     '--table-width': `${tableWidth}px`,
   };
 
+  const hasMergedCells: boolean = columnsWithMetaData(lowHeaders).some(
+    (header) => header.mergeCells,
+  );
+
+  const getTableCellProps = (
+    row: TableRow,
+    rowIdx: number,
+    column: TableColumn<TableRow>,
+    columnIdx: number,
+  ) => {
+    let rowSpan = 1;
+    if (
+      (rowsData[rowIdx - 1] && rowsData[rowIdx - 1][column.accessor] !== row[column.accessor]) ||
+      rowIdx === 0 ||
+      !column.mergeCells
+    ) {
+      for (let i = rowIdx; i < rowsData.length; i++) {
+        if (rowsData[i + 1] && rowsData[i + 1][column.accessor] === row[column.accessor]) {
+          rowSpan++;
+        } else {
+          break;
+        }
+      }
+
+      const style: { 'left': number | undefined; '--row-span': string | null } = {
+        'left': getStickyLeftOffset(columnIdx, column.position!.topHeaderGridIndex),
+        '--row-span': column.mergeCells ? `span ${rowSpan}` : null,
+      };
+
+      return {
+        show: true,
+        style,
+        rowSpan,
+      };
+    }
+    return {
+      show: false,
+      rowSpan,
+    };
+  };
+
   return (
     <div
       ref={tableRef}
@@ -381,7 +429,7 @@ export const Table = <T extends TableRow>({
         {
           size,
           isResizable,
-          zebraStriped,
+          zebraStriped: !hasMergedCells && zebraStriped,
           withBorderBottom: !filteredData.length,
         },
         [className],
@@ -461,40 +509,47 @@ export const Table = <T extends TableRow>({
           return (
             <div
               key={row.id}
-              className={cnTable('CellsRow', { nth })}
+              className={cnTable('CellsRow', {
+                nth,
+                withMergedCells: hasMergedCells,
+              })}
               onMouseEnter={(e) => onRowHover && onRowHover({ id: row.id, e })}
               onMouseLeave={(e) => onRowHover && onRowHover({ id: undefined, e })}
             >
               {columnsWithMetaData(lowHeaders).map((column: TableColumn<T>, columnIdx: number) => {
-                return (
-                  <TableCell
-                    type="content"
-                    key={column.accessor}
-                    ref={setBoundaryRef(columnIdx, rowIdx)}
-                    style={{
-                      left: getStickyLeftOffset(columnIdx, column.position!.topHeaderGridIndex),
-                    }}
-                    wrapperClassName={cnTable('ContentCell', {
-                      isActive: activeRow ? activeRow.id === row.id : false,
-                      isDarkned: activeRow
-                        ? activeRow.id !== undefined && activeRow.id !== row.id
-                        : false,
-                    })}
-                    onClick={handleSelectRow(row.id)}
-                    column={column}
-                    verticalAlign={verticalAlign}
-                    isClickable={!!isRowsClickable}
-                    showVerticalShadow={
-                      showVerticalCellShadow &&
-                      column?.position!.gridIndex + (column?.position!.colSpan || 1) ===
-                        stickyColumnsGrid
-                    }
-                    isBorderTop={rowIdx > 0 && borderBetweenRows}
-                    isBorderLeft={columnIdx > 0 && borderBetweenColumns}
-                  >
-                    {row[column.accessor]}
-                  </TableCell>
-                );
+                const { show, style, rowSpan } = getTableCellProps(row, rowIdx, column, columnIdx);
+
+                if (show) {
+                  return (
+                    <TableCell
+                      type="content"
+                      key={column.accessor}
+                      ref={setBoundaryRef(columnIdx, rowIdx)}
+                      style={style}
+                      wrapperClassName={cnTable('ContentCell', {
+                        isActive: activeRow ? activeRow.id === row.id : false,
+                        isDarkned: activeRow
+                          ? activeRow.id !== undefined && activeRow.id !== row.id
+                          : false,
+                        isMerged: column.mergeCells && rowSpan > 1,
+                      })}
+                      onClick={handleSelectRow(row.id)}
+                      column={column}
+                      verticalAlign={verticalAlign}
+                      isClickable={!!isRowsClickable}
+                      showVerticalShadow={
+                        showVerticalCellShadow &&
+                        column?.position!.gridIndex + (column?.position!.colSpan || 1) ===
+                          stickyColumnsGrid
+                      }
+                      isBorderTop={rowIdx > 0 && borderBetweenRows}
+                      isBorderLeft={columnIdx > 0 && borderBetweenColumns}
+                    >
+                      {row[column.accessor]}
+                    </TableCell>
+                  );
+                }
+                return null;
               })}
             </div>
           );

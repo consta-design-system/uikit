@@ -100,7 +100,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Components|/TextField',
+  title: 'Компоненты|/TextField',
   parameters: {
     docs: {
       page: mdx,

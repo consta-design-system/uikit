@@ -84,7 +84,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Components|/Text',
+  title: 'Компоненты|/Text',
   parameters: {
     docs: {
       page: mdx,

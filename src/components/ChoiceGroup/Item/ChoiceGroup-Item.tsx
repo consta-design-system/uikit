@@ -24,7 +24,7 @@ export const ChoiceGroupItem: React.FC<Props> = (props) => {
 
   return (
     <label
-      className={cnChoiceGroup('Label', { focus, checked }, [cnMixFocus({ before: true })])}
+      className={cnChoiceGroup('Label', { focus, checked }, [cnMixFocus()])}
       title={onlyIcon ? label : undefined}
     >
       <input

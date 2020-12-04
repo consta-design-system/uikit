@@ -4,6 +4,7 @@
   box-sizing: border-box;
   color: var(--color-typo-primary);
   background-color: var(--color-bg-default);
+  grid-row-end: var(--row-span);
 
   &_withoutBorder {
     border: none;

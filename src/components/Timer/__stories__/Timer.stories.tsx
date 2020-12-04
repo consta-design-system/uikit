@@ -22,7 +22,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Components|/Timer',
+  title: 'Компоненты|/Timer',
   parameters: {
     docs: {
       page: mdx,

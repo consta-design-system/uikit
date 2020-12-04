@@ -272,6 +272,6 @@ describe('Компонент ChoiceGroup', () => {
   it(`на элементах есть миксин ${cnMixFocus()}`, () => {
     renderComponent({});
     const item = getItem();
-    expect(item).toHaveClass(cnMixFocus({ before: true }));
+    expect(item).toHaveClass(cnMixFocus());
   });
 });
