@@ -1,0 +1,8 @@
+import { createResponsesImage } from '../createResponsesImage/createResponsesImage';
+
+import component from './#componentName#Svg';
+
+export const #componentName# = createResponsesImage({
+  name: '#componentName#',
+  component,
+});

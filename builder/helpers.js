@@ -132,7 +132,7 @@ const svgFillRegexp = /(fill|FILL)=\"[a-zA-Z0-9#_.-]*\"/gm;
 
 const svgCleanFill = (svg) => svg.replace(svgFillRegexp, '');
 
-const iconParse = async ({ componentName, path, pathOutdir, fileName, cleanFill }) => {
+const svgParse = async ({ componentName, path, pathOutdir, fileName, cleanFill, svgo = true }) => {
   let svg = await readFile(path, 'utf8');
 
   if (cleanFill) {
@@ -145,7 +145,7 @@ const iconParse = async ({ componentName, path, pathOutdir, fileName, cleanFill 
       plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx', '@svgr/plugin-prettier'],
       typescript: true,
       dimensions: false,
-      svgo: true,
+      svgo,
       svgoConfig: {
         plugins: [
           {
@@ -233,7 +233,7 @@ const iconsTransformed = async (ignore, src) => {
 
     if (iconComponentIsValid(sizes)) {
       if (sizes.xs) {
-        await iconParse({
+        await svgParse({
           componentName: `${componentName}SizeXs`,
           fileName: `${componentName}_size_xs`,
           path: sizes.xs,
@@ -242,7 +242,7 @@ const iconsTransformed = async (ignore, src) => {
         });
       }
       if (sizes.s) {
-        await iconParse({
+        await svgParse({
           componentName: `${componentName}SizeS`,
           fileName: `${componentName}_size_s`,
           path: sizes.s,
@@ -251,7 +251,7 @@ const iconsTransformed = async (ignore, src) => {
         });
       }
       if (sizes.m) {
-        await iconParse({
+        await svgParse({
           componentName: `${componentName}SizeM`,
           fileName: `${componentName}_size_m`,
           path: sizes.m,
@@ -290,13 +290,13 @@ const iconsFileTransformed = async (ignore, src) => {
 
   Object.keys(svgComponents).forEach(async (componentName) => {
     if (iconFileComponentIsValid(svgComponents[componentName])) {
-      await iconParse({
+      await svgParse({
         componentName: `${componentName}SizeS`,
         fileName: `${componentName}_size_s`,
         path: svgComponents[componentName].s,
         pathOutdir: `./src/fileIcons/${componentName}/`,
       });
-      await iconParse({
+      await svgParse({
         componentName: `${componentName}SizeM`,
         fileName: `${componentName}_size_m`,
         path: svgComponents[componentName].m,
@@ -310,6 +310,41 @@ const iconsFileTransformed = async (ignore, src) => {
     }
   });
   await createFileIconsStories(svgComponents, src);
+};
+
+const responsesImagesTransformed = async (ignore, src) => {
+  const svgFiles = await fg([`${src}/responsesImages/**/*.svg`], { ignore });
+  const test = /.\/src\/responsesImages\/(.+)\/ResponsesImage(.+).svg/;
+  const svgComponents = {};
+
+  svgFiles.forEach((fileName) => {
+    if (test.test(fileName)) {
+      const [file, componentName, svgName] = test.exec(fileName);
+      if (componentName === 'ResponsesImage' + svgName) {
+        if (!svgComponents[componentName]) {
+          svgComponents[componentName] = {};
+        }
+        svgComponents[componentName] = file;
+      }
+    }
+  });
+
+  Object.keys(svgComponents).forEach(async (componentName) => {
+    await svgParse({
+      componentName: `${componentName}`,
+      fileName: `${componentName}Svg`,
+      path: svgComponents[componentName],
+      pathOutdir: `./src/responsesImages/${componentName}/`,
+      svgo: false,
+      cleanFill: true,
+    });
+    await createComponent({
+      componentName,
+      pathOutdir: `./src/responsesImages/${componentName}/`,
+      templatePath: './builder/templates/ResponsesImage.tsx.template',
+    });
+  });
+  // await createFileIconsStories(svgComponents, src);
 };
 
 const copyAssets = async (ignore, src, distPaths) => {
@@ -565,9 +600,6 @@ const generateReExports = (
 
     await writeJSON(packPath, pack, { spaces: 2 });
 
-    // eslint-disable-next-line no-console
-    console.log(logSymbols.success, 'Update', packPath);
-
     const gitignorePath = join(distPath, '.gitignore');
     await updateGitignore(newKeys, gitignorePath);
     // eslint-disable-next-line no-console
@@ -581,6 +613,7 @@ module.exports = {
   iconsTransformed,
   copyPackageJson,
   iconsFileTransformed,
+  responsesImagesTransformed,
   copyReadme,
   copyChangelog,
 };
