@@ -6,7 +6,7 @@
   bottom: 0;
   display: flex;
   justify-content: center;
-  padding: 60px;
+  padding: var(--space-5xl);
 
   &-Window {
     z-index: 100;
