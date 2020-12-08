@@ -113,6 +113,9 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
 ];
 ```
 
+### Колбэк на применение фильтра
+Если вам нужно повесить обработчик на событие изменения фильтров в таблице (например для загрузки данных, к которым применен фильтр), вы можете сделать это с помощью свойства `onFiltersUpdated`.
+
 ### Заглушка
 
 Вы можете добавить заглушку, которую увидят пользователи, если в таблице нет данных.
@@ -219,6 +222,7 @@ type LazyLoad = { maxVisibleRows?: number; scrollableEl?: HTMLDivElement / Windo
 | [`onSortBy`](#сортировка)                     | `onSortBy`                                          | sortByDefault                                     | Функция срабатывает при нажатии на иконку сортировки|
 | `className`                                   | `string`                                            | -                                                 | Дополнительный CSS-класс                           |
 | lazyLoad?                                     | `LazyLoad`                                          | `{ maxVisibleRows: 210; scrollableEl: tableRef }` | Включает виртуальную прокрутку в таблице           |
+| [`onFiltersUpdated`](#колбэк-на-применение-фильтра)| `(filters: { field: string[] }) => void`       | -                                                 | Колбэк на изменение фильтров                       |
 
 ## Примеры
 
