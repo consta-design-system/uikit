@@ -1,0 +1,28 @@
+.ContextMenuGroupHeader {
+  --top-space: 0;
+  --bottom-spase: 0;
+  margin: 0 var(--space-s);
+  padding: var(--top-space) 0 var(--bottom-spase) 0;
+  border-bottom: solid var(--control-border-width) var(--color-control-bg-border-default);
+
+  &_size {
+    &_s {
+      --top-space: var(--space-xs);
+      --bottom-spase: var(--space-2xs);
+    }
+
+    &_m {
+      --top-space: var(--space-s);
+      --bottom-spase: var(--space-xs);
+    }
+
+    &_l {
+      --top-space: var(--space-s);
+      --bottom-spase: var(--space-s);
+    }
+  }
+
+  &_first {
+    padding: calc(var(--top-space) - var(--space-xs)) 0 var(--bottom-spase) 0;
+  }
+}

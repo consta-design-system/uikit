@@ -1,0 +1,17 @@
+.ContextMenuDivider {
+  --vertical-space: 0;
+  height: var(--control-border-width);
+  margin: var(--vertical-space) var(--space-s);
+  background: var(--color-control-bg-border-default);
+
+  &_size {
+    &_l {
+      --vertical-space: var(--space-xs);
+    }
+
+    &_m,
+    &_s {
+      --vertical-space: var(--space-2xs);
+    }
+  }
+}

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { ClickOutsideHandler, useClickOutside } from '../../hooks/useClickOutside/useClickOutside';
 import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
+import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { PropsWithJsxAttributes } from '../../utils/types/PropsWithJsxAttributes';
 import { PortalWithTheme } from '../PortalWithTheme/PortalWithTheme';
 import { useTheme } from '../Theme/Theme';
@@ -77,6 +78,7 @@ export type Props = PropsWithJsxAttributes<
     isInteractive?: boolean;
     children: React.ReactNode | ChildrenRenderProp;
     onClickOutside?: ClickOutsideHandler;
+    onSetDirection?: (direction: Direction) => void;
   } & PositioningProps
 >;
 
@@ -84,7 +86,7 @@ const isRenderProp = (
   children: React.ReactNode | ChildrenRenderProp,
 ): children is ChildrenRenderProp => typeof children === 'function';
 
-export const Popover: React.FC<Props> = (props) => {
+export const Popover = React.forwardRef<HTMLDivElement, Props>((props, componentRef) => {
   const {
     children,
     direction: passedDirection = 'upCenter',
@@ -98,6 +100,7 @@ export const Popover: React.FC<Props> = (props) => {
     position: passedPosition,
     anchorRef,
     equalAnchorWidth,
+    onSetDirection,
     ...otherProps
   } = props;
 
@@ -154,6 +157,8 @@ export const Popover: React.FC<Props> = (props) => {
     spareDirection,
   });
 
+  useEffect(() => onSetDirection && onSetDirection(direction), [direction]);
+
   /**
    * Может возникнуть ситуация, когда перерасчет поповера всегда будет выдавать 2 направления
    * и бесконечно зацикливать себя. Для избежания таких кейсов мы запоминаем стороны,
@@ -178,7 +183,7 @@ export const Popover: React.FC<Props> = (props) => {
       {...otherProps}
       preset={theme}
       container={window.document.body}
-      ref={ref}
+      ref={useForkRef<HTMLDivElement>([ref, componentRef])}
       style={{
         ...style,
         ...(equalAnchorWidth && { width: anchorSize.width }),
@@ -192,4 +197,4 @@ export const Popover: React.FC<Props> = (props) => {
       {content}
     </PortalWithTheme>
   );
-};
+});
