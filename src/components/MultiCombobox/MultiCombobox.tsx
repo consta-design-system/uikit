@@ -149,9 +149,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
   const handleClear = (): void => {
     setInputData({ value: '' });
     typeof onChange === 'function' && onChange(null);
-    toggleRef.current?.focus();
-    setIsFocused(true);
-    setOpen(true);
+    setIsFocused(false);
   };
 
   const handleClearButtonFocus = (): void => {
