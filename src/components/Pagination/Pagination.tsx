@@ -5,6 +5,7 @@ import React from 'react';
 import { IconArrowLeft } from '../../icons/IconArrowLeft/IconArrowLeft';
 import { IconArrowRight } from '../../icons/IconArrowRight/IconArrowRight';
 import { cn } from '../../utils/bem';
+import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { Button } from '../Button/Button';
 import { Text } from '../Text/Text';
 import { TextField, TextFieldOnChangeArguments } from '../TextField/TextField';
@@ -19,33 +20,68 @@ export const paginationSizes = ['xs', 's', 'm', 'l'] as const;
 export type PaginationPropSize = typeof paginationSizes[number];
 export const paginationDefaultSize: PaginationPropSize = 'm';
 
-export const paginationTypes = ['default', 'input'] as const;
+export const paginationTypes = ['default', 'minified'] as const;
 export type PaginationPropType = typeof paginationTypes[number];
 export const paginationDefaultType: PaginationPropType = 'default';
 
+export const paginationPositions = ['left', 'center', 'right'] as const;
+export type PaginationPropPosition = typeof paginationPositions[number];
+export const paginationDefaultPosition: PaginationPropPosition = 'center';
+
+const getDefaultLabel = (totalPages: number): string => `из ${totalPages}`;
+
 export const cnPagination = cn('Pagination');
+
+type HotKey = {
+  label: string;
+  values: string[];
+};
+
+export type HotKeys = {
+  nextPage: HotKey;
+  prevPage: HotKey;
+};
 
 type Props = {
   currentPage: number;
   totalPages: number;
-  onChangePage: (pageNumber: number) => void | null;
+  onChange: (pageNumber: number) => void;
+  getLabel?: (totalPages: number) => string;
   form?: PaginationPropForm;
   size?: PaginationPropSize;
   type?: PaginationPropType;
+  position?: PaginationPropPosition;
+  hotkeys?: HotKeys;
+  containerEventListener?: HTMLElement | Window;
   disabled?: boolean;
   className?: string;
 };
 
-type Pagination = (props: Props) => React.ReactElement | null;
+type Pagination = (
+  props: PropsWithHTMLAttributesAndRef<Props, HTMLDivElement>,
+) => React.ReactElement | null;
 
-export const Pagination: Pagination = (props) => {
+export const Pagination: Pagination = React.forwardRef((props, ref) => {
   const {
     currentPage = 0,
     totalPages = 0,
-    onChangePage = null,
+    onChange,
+    getLabel = getDefaultLabel(totalPages),
     form = paginationDefaultForm,
     size = paginationDefaultSize,
     type = paginationDefaultType,
+    position = paginationDefaultPosition,
+    hotkeys = {
+      nextPage: {
+        label: 'Alt →',
+        values: ['Alt', 'ArrowRight'],
+      },
+      prevPage: {
+        label: '← Alt',
+        values: ['Alt', 'ArrowLeft'],
+      },
+    },
+    containerEventListener = window,
     disabled = false,
     className,
     ...otherProps
@@ -56,13 +92,17 @@ export const Pagination: Pagination = (props) => {
     currPage,
     totalPages,
   );
+  const [keys, setKeys] = React.useState<string[]>([]);
+
+  const changePage = (page: number | null) => {
+    if (page && page !== currPage && onChange) {
+      onChange(page - 1);
+    }
+  };
 
   const handleClick = (page: number | null) => (e: React.MouseEvent) => {
     e.preventDefault();
-
-    if (page && page !== currPage && onChangePage) {
-      onChangePage(page - 1);
-    }
+    changePage(page);
   };
 
   const handleChange = (args: TextFieldOnChangeArguments) => {
@@ -71,31 +111,81 @@ export const Pagination: Pagination = (props) => {
 
     if (pageNumber > totalPages || Number.isNaN(pageNumber)) return;
 
-    if (onChangePage) {
-      onChangePage(pageNumber - 1);
+    if (onChange) {
+      onChange(pageNumber - 1);
     }
   };
 
+  const keyUpListener: EventListener = (event) => {
+    const { key } = event as KeyboardEvent;
+
+    setKeys((prevState) => prevState.filter((hotKey) => hotKey !== key));
+  };
+
+  const keyDownListener: EventListener = (event) => {
+    const { key } = event as KeyboardEvent;
+
+    if (hotkeys.nextPage.values.includes(key) || hotkeys.prevPage.values.includes(key)) {
+      const newKeys = [...keys, key];
+      if (hotkeys.nextPage.values.every((hotKey) => newKeys.includes(hotKey))) {
+        changePage(nextPage);
+      } else if (hotkeys.prevPage.values.every((hotKey) => newKeys.includes(hotKey))) {
+        changePage(prevPage);
+      }
+      setKeys(newKeys);
+    }
+  };
+
+  React.useEffect(() => {
+    containerEventListener.addEventListener('keydown', keyDownListener);
+    containerEventListener.addEventListener('keyup', keyUpListener);
+    return () => {
+      containerEventListener.removeEventListener('keydown', keyDownListener);
+      containerEventListener.removeEventListener('keyup', keyUpListener);
+    };
+  });
+
+  const itemWidth = `var(--control-height-${size})`;
+
   return (
     (!isEmpty && (
-      <nav className={cnPagination({ form, size }, [className])} {...otherProps}>
-        <Button
-          className={cnPagination('ItemLeft', { show: currPage > 1 })}
-          onlyIcon
-          iconLeft={IconArrowLeft}
-          view="clear"
-          form={form}
-          size={size}
-          disabled={disabled}
-          onClick={handleClick(prevPage)}
-        />
+      <nav
+        className={cnPagination({ form, size, position }, [className])}
+        ref={ref}
+        {...otherProps}
+      >
+        {(currPage > 1 || type !== paginationDefaultType) && (
+          <div className={cnPagination('PrevPage')}>
+            <Button
+              className={cnPagination('ItemLeft', {
+                minified: type !== paginationDefaultType,
+                show: currPage > 1,
+              })}
+              onlyIcon={type !== paginationDefaultType}
+              label={type === paginationDefaultType ? 'Назад' : ''}
+              iconLeft={IconArrowLeft}
+              view="ghost"
+              form={form}
+              size={size}
+              disabled={disabled}
+              onClick={handleClick(prevPage)}
+            />
+            {type === paginationDefaultType && (
+              <Text className={cnPagination('TooltipLeft')} size={size} view="ghost">
+                {hotkeys.prevPage.label}
+              </Text>
+            )}
+          </div>
+        )}
         {type === paginationDefaultType ? (
           <div className={cnPagination('Pages')}>
             {isStartDots && (
               <Button
-                className={cnPagination('Item')}
+                className={cnPagination('Item', { isActive: currPage === 1 })}
+                style={{ width: itemWidth }}
                 label="1"
-                view={currPage === 1 ? 'primary' : 'clear'}
+                title="1"
+                view="ghost"
                 form={form}
                 size={size}
                 disabled={disabled}
@@ -107,6 +197,7 @@ export const Pagination: Pagination = (props) => {
                 size={size}
                 view={disabled ? 'ghost' : 'linkMinor'}
                 className={cnPagination('More')}
+                style={{ width: itemWidth }}
               >
                 ...
               </Text>
@@ -114,9 +205,11 @@ export const Pagination: Pagination = (props) => {
             {pages.map((page) => (
               <Button
                 key={page}
-                className={cnPagination('Item')}
+                className={cnPagination('Item', { isActive: currPage === page })}
+                style={{ width: itemWidth }}
                 label={page}
-                view={currPage === page ? 'primary' : 'clear'}
+                title={`${page}`}
+                view="ghost"
                 form={form}
                 size={size}
                 disabled={disabled}
@@ -128,15 +221,18 @@ export const Pagination: Pagination = (props) => {
                 size={size}
                 view={disabled ? 'ghost' : 'linkMinor'}
                 className={cnPagination('More')}
+                style={{ width: itemWidth }}
               >
                 ...
               </Text>
             )}
             {isEndDots && (
               <Button
-                className={cnPagination('Item')}
+                className={cnPagination('Item', { isActive: currPage === totalPages })}
+                style={{ width: itemWidth }}
                 label={totalPages}
-                view={currPage === totalPages ? 'primary' : 'clear'}
+                title={`${totalPages}`}
+                view="ghost"
                 form={form}
                 size={size}
                 disabled={disabled}
@@ -159,22 +255,35 @@ export const Pagination: Pagination = (props) => {
               view={disabled ? 'ghost' : 'linkMinor'}
               className={cnPagination('Total')}
             >
-              из {totalPages}
+              {getLabel}
             </Text>
           </div>
         )}
-        <Button
-          className={cnPagination('ItemRight', { show: currPage < totalPages })}
-          onlyIcon
-          iconRight={IconArrowRight}
-          view="clear"
-          form={form}
-          size={size}
-          disabled={disabled}
-          onClick={handleClick(nextPage)}
-        />
+        {(currPage < totalPages || type !== paginationDefaultType) && (
+          <div className={cnPagination('NextPage')}>
+            <Button
+              className={cnPagination('ItemRight', {
+                minified: type !== paginationDefaultType,
+                show: currPage < totalPages,
+              })}
+              onlyIcon={type !== paginationDefaultType}
+              label={type === paginationDefaultType ? 'Вперёд' : ''}
+              iconRight={IconArrowRight}
+              view="ghost"
+              form={form}
+              size={size}
+              disabled={disabled}
+              onClick={handleClick(nextPage)}
+            />
+            {type === paginationDefaultType && (
+              <Text className={cnPagination('TooltipRight')} size={size} view="ghost">
+                {hotkeys.nextPage.label}
+              </Text>
+            )}
+          </div>
+        )}
       </nav>
     )) ||
     null
   );
-};
+});

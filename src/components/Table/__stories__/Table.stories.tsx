@@ -239,6 +239,21 @@ export const WithOnRowHover = createStory(() => <WithOnRowHoverContent />, {
   name: 'с наведением на строку',
 });
 
+export const WithMergedCells = createStory(
+  () => (
+    <Table
+      {...getKnobs({
+        ...(tableWithMergedCellsData as Partial<Props<TableRow>>),
+        borderBetweenColumns: true,
+        borderBetweenRows: true,
+      })}
+    />
+  ),
+  {
+    name: 'с объединёнными ячейками',
+  },
+);
+
 export const WithSmartSorting = createStory(
   () => {
     const [isSmartSortingWindowOpen, setIsSmartSortingWindowOpen] = React.useState(false);
@@ -294,15 +309,8 @@ export const WithSmartSorting = createStory(
   },
 );
 
-export const WithMergedCells = createStory(
-  () => <Table {...getKnobs(tableWithMergedCellsData as Partial<Props<TableRow>>)} />,
-  {
-    name: 'с объединёнными ячейками',
-  },
-);
-
 export default createMetadata({
-  title: 'Components|/Table',
+  title: 'Компоненты|/Table',
   parameters: {
     docs: {
       page: mdx,

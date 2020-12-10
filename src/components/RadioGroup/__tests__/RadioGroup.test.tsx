@@ -1,13 +1,14 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
-import { RadioGroup } from '../RadioGroup';
+import { cnRadioGroup, RadioGroup } from '../RadioGroup';
 
 type RadioGroupProps = React.ComponentProps<typeof RadioGroup>;
 type Item = {
   name: string;
+  disabled?: boolean;
 };
-type OnChange = (props: { e: React.ChangeEvent<HTMLInputElement>; value: Item | null }) => void;
+type OnChange = (props: { e: React.ChangeEvent<HTMLInputElement>; value: Item }) => void;
 
 const testId = 'RadioGroup';
 
@@ -20,6 +21,7 @@ const items: Item[] = [
   },
   {
     name: 'три',
+    disabled: true,
   },
 ];
 
@@ -37,6 +39,7 @@ const renderComponent = (props: {
     <RadioGroup
       items={items}
       getLabel={(item) => `${item.name}`}
+      getDisabled={(item) => item.disabled}
       onChange={props.onChange || handleChange}
       name={testId}
       className={additionalClass}
@@ -47,7 +50,7 @@ const renderComponent = (props: {
 
 const getRender = () => screen.getByTestId(testId);
 
-const getItems = () => getRender().querySelectorAll('.Radio');
+const getItems = () => getRender().querySelectorAll(`.${cnRadioGroup('Item')}`);
 
 const getItemInput = () => getRender().querySelectorAll('.Radio-Input')[0] as HTMLInputElement;
 
@@ -83,6 +86,33 @@ describe('Компонент RadioGroup', () => {
       it(`присвоился дополнительный класс`, () => {
         renderComponent({});
         expect(getRender()).toHaveClass(additionalClass);
+      });
+    });
+
+    describe('проверка onChange', () => {
+      it(`клик по элементу должен вызвать callback`, () => {
+        const handleChange = jest.fn();
+
+        renderComponent({ onChange: handleChange });
+
+        const item = getItems()[0];
+        fireEvent.click(item);
+
+        expect(handleChange).toHaveBeenCalledTimes(1);
+        expect(handleChange).toHaveBeenCalledWith(expect.objectContaining({ value: items[0] }));
+      });
+    });
+
+    describe('проверка getDisabled', () => {
+      it(`клик по disabled элементу не должен вызывать handleChange`, () => {
+        const handleChange = jest.fn();
+
+        renderComponent({ onChange: handleChange });
+
+        const item = getItems()[2];
+        fireEvent.click(item);
+
+        expect(handleChange).toHaveBeenCalledTimes(0);
       });
     });
   });

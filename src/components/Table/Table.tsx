@@ -58,6 +58,8 @@ type ActiveRow = {
   onChange: (id: string | undefined) => void;
 };
 
+type onRowHover = ({ id, e }: { id: string | undefined; e: React.MouseEvent }) => void;
+
 export type TableRow = {
   [key: string]: React.ReactNode;
   id: string;
@@ -107,7 +109,7 @@ export type Props<T extends TableRow> = {
   borderBetweenColumns?: boolean;
   emptyRowsPlaceholder?: React.ReactNode;
   className?: string;
-  onRowHover?: ({ id, event }: { id: string | undefined; event: React.MouseEvent }) => void;
+  onRowHover?: onRowHover;
   lazyLoad?: LazyLoad;
 };
 
@@ -198,6 +200,7 @@ export const Table = <T extends TableRow>({
 
     setInitialColumnWidths(columnsElementsWidths);
 
+    // Проверяем, что таблица отрисовалась корректно, и устанавливаем значения ширин колонок после 1го рендера
     if (
       columnsElements[0].getBoundingClientRect().left !==
       columnsElements[columnsElements.length - 1].getBoundingClientRect().left
@@ -361,12 +364,12 @@ export const Table = <T extends TableRow>({
     column: TableColumn<TableRow>,
     columnIdx: number,
   ) => {
+    let rowSpan = 1;
     if (
       (rowsData[rowIdx - 1] && rowsData[rowIdx - 1][column.accessor] !== row[column.accessor]) ||
       rowIdx === 0 ||
       !column.mergeCells
     ) {
-      let rowSpan = 1;
       for (let i = rowIdx; i < rowsData.length; i++) {
         if (rowsData[i + 1] && rowsData[i + 1][column.accessor] === row[column.accessor]) {
           rowSpan++;
@@ -375,11 +378,10 @@ export const Table = <T extends TableRow>({
         }
       }
 
-      const style: { left: number | undefined; gridRowEnd?: string } = {
-        left: getStickyLeftOffset(columnIdx, column.position!.topHeaderGridIndex),
+      const style: { 'left': number | undefined; '--row-span': string | null } = {
+        'left': getStickyLeftOffset(columnIdx, column.position!.topHeaderGridIndex),
+        '--row-span': column.mergeCells ? `span ${rowSpan}` : null,
       };
-
-      if (column.mergeCells) style.gridRowEnd = `span ${rowSpan}`;
 
       return {
         show: true,
@@ -389,7 +391,7 @@ export const Table = <T extends TableRow>({
     }
     return {
       show: false,
-      rowSpan: 1,
+      rowSpan,
     };
   };
 
@@ -484,8 +486,8 @@ export const Table = <T extends TableRow>({
                 nth,
                 withMergedCells: hasMergedCells,
               })}
-              onMouseEnter={(event) => onRowHover && onRowHover({ id: row.id, event })}
-              onMouseLeave={(event) => onRowHover && onRowHover({ id: undefined, event })}
+              onMouseEnter={(e) => onRowHover && onRowHover({ id: row.id, e })}
+              onMouseLeave={(e) => onRowHover && onRowHover({ id: undefined, e })}
             >
               {columnsWithMetaData(lowHeaders).map((column: TableColumn<T>, columnIdx: number) => {
                 const { show, style, rowSpan } = getTableCellProps(row, rowIdx, column, columnIdx);
