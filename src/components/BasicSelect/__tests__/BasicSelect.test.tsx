@@ -1,13 +1,18 @@
 import * as React from 'react';
-import { fireEvent, render, RenderResult, screen } from '@testing-library/react';
+import { act, fireEvent, render, RenderResult, screen } from '@testing-library/react';
 
 import ResizeObserver from '../../../../__mocks__/ResizeObserver';
+import { cnSelect } from '../../SelectComponents/cnSelect';
+import { cnSelectItem } from '../../SelectComponents/SelectItem/SelectItem';
 import { BasicSelect, SimpleSelectProps } from '../BasicSelect';
 
 type SelectOption = {
   value: string;
   label: string;
 };
+
+const animationDuration = 200;
+const testId = 'BasicSelect';
 
 jest.mock('resize-observer-polyfill', () => {
   return ResizeObserver;
@@ -35,24 +40,54 @@ const renderComponent = (props: SimpleSelectProps<SelectOption> = defaultProps):
   const { options, onChange, value, getOptionLabel, ...restProps } = props;
   return render(
     <>
-      <div data-testid="block" />
+      <div data-testid="outside" />
       <BasicSelect
         value={value}
         onChange={onChange}
         options={options}
         getOptionLabel={getOptionLabel}
+        data-testid={testId}
         {...restProps}
       />
     </>,
   );
 };
 
-const getMenuButton = (): HTMLElement => screen.getByLabelText('test-select');
-const getList = (): HTMLElement => screen.getByRole('listbox');
-
-const openSelect = (): void => {
-  fireEvent.click(getMenuButton());
-};
+function getOptionsList() {
+  return screen.getByRole('listbox');
+}
+function getRender() {
+  return screen.getByTestId(testId);
+}
+function getIndicatorsDropdown() {
+  return getRender().querySelector(`.${cnSelect('IndicatorsDropdown')}`) as HTMLElement;
+}
+function getOutside() {
+  return screen.getByTestId('outside');
+}
+function indicatorsDropdownClick() {
+  fireEvent.click(getIndicatorsDropdown());
+}
+function getInput() {
+  return getRender().querySelector(`.${cnSelect('FakeField')}`) as HTMLElement;
+}
+function getOptions() {
+  return getOptionsList().querySelectorAll(`.${cnSelectItem()}`);
+}
+function getOption(index = 1) {
+  return getOptions()[index];
+}
+function inputClick() {
+  fireEvent.click(getInput());
+}
+function outsideClick() {
+  fireEvent.mouseDown(getOutside());
+}
+function animateDelay() {
+  act(() => {
+    jest.advanceTimersByTime(animationDuration);
+  });
+}
 
 describe('Компонент BasicSelect', () => {
   it('должен рендерится без ошибок', () => {
@@ -68,87 +103,85 @@ describe('Компонент BasicSelect', () => {
   });
 
   it('открывается и закрывается по клику', () => {
-    renderComponent();
+    jest.useFakeTimers();
+    act(() => {
+      renderComponent();
+    });
 
-    openSelect();
+    inputClick();
 
-    const list = getList();
-    expect(list).toBeInTheDocument();
+    animateDelay();
 
-    openSelect();
+    const optionsList = getOptionsList();
 
-    expect(list).not.toBeInTheDocument();
+    expect(optionsList).toBeInTheDocument();
+    inputClick();
+    animateDelay();
+
+    expect(optionsList).not.toBeInTheDocument();
   });
 
   it('открывается и закрывается по клику за пределами селекта', () => {
-    const select = renderComponent();
+    jest.useFakeTimers();
+    act(() => {
+      renderComponent();
+    });
 
-    openSelect();
+    inputClick();
+    animateDelay();
 
-    const block = select.getByTestId('block');
-    const list = getList();
-    expect(list).toBeInTheDocument();
+    const optionsList = getOptionsList();
 
-    fireEvent.mouseDown(block);
-
-    expect(list).not.toBeInTheDocument();
+    expect(optionsList).toBeInTheDocument();
+    outsideClick();
+    animateDelay();
+    expect(optionsList).not.toBeInTheDocument();
   });
 
   it('открывается и закрывается по клику на индикатор', () => {
-    const select = renderComponent();
+    jest.useFakeTimers();
+    act(() => {
+      renderComponent();
+    });
 
-    const buttons = select.baseElement.getElementsByTagName('button');
+    indicatorsDropdownClick();
+    animateDelay();
 
-    fireEvent.click(buttons[0]);
+    const optionsList = getOptionsList();
 
-    const list = getList();
-
-    expect(list).toBeInTheDocument();
-
-    fireEvent.click(buttons[0]);
-    expect(list).not.toBeInTheDocument();
+    expect(optionsList).toBeInTheDocument();
+    indicatorsDropdownClick();
+    animateDelay();
+    expect(optionsList).not.toBeInTheDocument();
   });
 
   it('отрисовываются опции', () => {
-    const select = renderComponent();
+    jest.useFakeTimers();
+    act(() => {
+      renderComponent();
+    });
 
-    openSelect();
-
-    const list = getList();
-    expect(list).toBeInTheDocument();
-
-    const options = select.getAllByRole('option');
-    expect(options.length).toEqual(5);
+    inputClick();
+    animateDelay();
+    expect(getOptions().length).toEqual(items.length);
   });
 
-  it.skip('выбирается опция', () => {
-    const select = renderComponent();
+  it('проверка onChange', () => {
+    jest.useFakeTimers();
+    const handleChange = jest.fn();
+    const elementIndex = 1;
+    act(() => {
+      renderComponent({ ...defaultProps, onChange: handleChange });
+    });
 
-    expect(select.getByText('placeholder')).toBeInTheDocument();
+    inputClick();
+    animateDelay();
 
-    openSelect();
+    fireEvent.click(getOption(elementIndex));
 
-    const options = select.getAllByRole('option');
-    const list = getList();
-
-    expect(list).toBeInTheDocument();
-
-    fireEvent.click(options[3]);
-
-    expect(select.getByText('Curium')).toBeInTheDocument();
-    expect(select).not.toContain('placeholder');
-  });
-
-  it('вызывается onChange', () => {
-    const handlerChange = jest.fn();
-    const select = renderComponent({ ...defaultProps, onChange: handlerChange });
-
-    openSelect();
-
-    const options = select.getAllByRole('option');
-    fireEvent.click(options[3]);
-
-    expect(handlerChange).toBeCalledTimes(1);
+    expect(handleChange).toHaveBeenCalled();
+    expect(handleChange).toHaveBeenCalledTimes(1);
+    expect(handleChange).toHaveBeenCalledWith(expect.objectContaining(items[elementIndex]));
   });
 
   it('вызывается onFocus', () => {
@@ -157,7 +190,7 @@ describe('Компонент BasicSelect', () => {
 
     expect(handlerFocus).toBeCalledTimes(0);
 
-    getMenuButton().focus();
+    getInput().focus();
 
     expect(handlerFocus).toBeCalledTimes(1);
   });
@@ -166,11 +199,11 @@ describe('Компонент BasicSelect', () => {
     const handlerBlur = jest.fn();
     renderComponent({ ...defaultProps, onBlur: handlerBlur });
 
-    getMenuButton().focus();
+    getInput().focus();
 
     expect(handlerBlur).toBeCalledTimes(0);
 
-    getMenuButton().blur();
+    getInput().blur();
 
     expect(handlerBlur).toBeCalledTimes(1);
   });
