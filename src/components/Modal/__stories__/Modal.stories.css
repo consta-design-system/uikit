@@ -1,13 +1,13 @@
 .ModalStories {
-  &-title {
+  &-Title {
     margin: var(--space-m);
   }
 
-  &-body {
+  &-Body {
     margin: var(--space-m);
   }
 
-  &-action {
+  &-Action {
     display: flex;
     justify-content: flex-end;
     margin: var(--space-m);
