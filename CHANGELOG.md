@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.10.10 (11/12/2020)
+
+- [fix(MultiCombobox): fixed click on valueTag (#672)](https://github.com/gazprom-neft/consta-uikit/commit/002cfe68883b8768c568afaaa6114176bb12b8d7) - [@gizeasy](https://github.com/gizeasy)
+- [chore(CODEOWNERS): added codeowners](https://github.com/gazprom-neft/consta-uikit/commit/f1cd3916b19dbeaefe42ab63eece9695585e30df) - [@gizeasy](https://github.com/gizeasy)
+- [fix(forwardRefWithAs): fixed returned type (#568)](https://github.com/gazprom-neft/consta-uikit/commit/9b42b8fa8d7650fd9dd8a16f996daecaf2f2f470) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Pagination): added Pagination component (#643)](https://github.com/gazprom-neft/consta-uikit/commit/86139be35d43b270285371581bc64b9b2abe10df) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
+- [fix(RadioGroup): fixed name story](https://github.com/gazprom-neft/consta-uikit/commit/bd061b0b24b9c19cb74219e1c71a98dce255658f) - [@gizeasy](https://github.com/gizeasy)
+- [refactor(Selects): refactor BasicSelect, Combobox, MultiCombobox (#642)](https://github.com/gazprom-neft/consta-uikit/commit/3a9785ab00fba067bb8051e35033c5dd0041aa3c) - [@gizeasy](https://github.com/gizeasy)
+- [fix(CODEOWNERS): remove al-fyodorov (#659)](https://github.com/gazprom-neft/consta-uikit/commit/a0b9d05b8daffa8323fe394266c61965739b9dc6) - [@al-fyodorov](https://github.com/al-fyodorov)
+
+---
+
 ## v1.10.9 (04/12/2020)
 
 - [docs(howToGo): added new section (#655)](https://github.com/gazprom-neft/consta-uikit/commit/aaae9cdb94d54eb6e353bb27a2646385c84f5cdf) - [@gizeasy](https://github.com/gizeasy)
