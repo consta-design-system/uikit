@@ -269,7 +269,6 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    pointer-events: none;
   }
 
   &_multi &-ControlValue {
@@ -288,6 +287,7 @@
     color: var(--color-control-typo-placeholder);
     font-size: var(--input-font-size);
     text-align: left;
+    pointer-events: none;
 
     &_isHidden {
       visibility: hidden;
