@@ -6,7 +6,7 @@ import { IconPropSize } from '../../icons/Icon/Icon';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
-import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
+import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { Avatar } from '../Avatar/Avatar';
 import { Text, TextPropSize } from '../Text/Text';
 
@@ -50,7 +50,7 @@ const arrowSizeMap: Record<UserPropSize, IconPropSize> = {
   m: 's',
 };
 
-export const User: ComponentWithAs<Props> = forwardRefWithAs<Props>((props, ref) => {
+export const User = forwardRefWithAs<Props>((props, ref) => {
   const {
     as = 'div',
     className,

@@ -6,7 +6,7 @@ import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { IconClose } from '../../icons/IconClose/IconClose';
 import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
-import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
+import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 
 export const tagBasePropSize = ['m', 'xs', 's', 'l'] as const;
 export const tagBasePropSizeDefault = tagBasePropSize[0];
@@ -43,7 +43,7 @@ const sizeMap: Record<TagBasePropSize, IconPropSize> = {
   l: 's',
 };
 
-export const TagBase: ComponentWithAs<Props> = forwardRefWithAs<Props>((props, ref) => {
+export const TagBase = forwardRefWithAs<Props>((props, ref) => {
   const {
     size = tagBasePropSizeDefault,
     as = 'div',
