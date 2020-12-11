@@ -66,7 +66,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Components|/RadioGroup',
+  title: 'Компоненты|/RadioGroup',
   parameters: {
     docs: {
       page: mdx,

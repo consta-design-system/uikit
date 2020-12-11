@@ -129,16 +129,21 @@ export const Combobox: ComboboxType = (props) => {
   };
 
   const handleToggleDropdown = (): void => {
-    setOpen(!isOpen);
-    setIsFocused(true);
+    if (isOpen) {
+      setOpen(false);
+      setIsFocused(false);
+    } else {
+      setOpen(true);
+      setIsFocused(true);
+      toggleRef.current?.focus();
+    }
   };
 
   const handleClear = (): void => {
     setInputData({ value: '' });
     typeof onChange === 'function' && onChange(null);
-    toggleRef.current?.focus();
+    setIsFocused(false);
   };
-
   const handleClearButtonFocus = (): void => {
     setIsFocused(true);
   };
@@ -235,26 +240,26 @@ export const Combobox: ComboboxType = (props) => {
           </button>
         </span>
       </div>
-      {isOpen && (
-        <SelectDropdown
-          size={size}
-          controlRef={controlRef}
-          visibleOptions={visibleOptions}
-          highlightedIndex={highlightedIndex}
-          getOptionProps={getOptionProps}
-          onCreate={handleCreate}
-          dropdownRef={dropdownRef}
-          inputValue={inputData.value}
-          id={id}
-          hasGroup={hasGroup}
-          selectedValues={arrValue}
-          getOptionLabel={getOptionLabel}
-          labelForCreate={labelForCreate}
-          labelForNotFound={labelForNotFound}
-          form={getSelectDropdownForm(form)}
-          className={dropdownClassName}
-        />
-      )}
+
+      <SelectDropdown
+        isOpen={isOpen}
+        size={size}
+        controlRef={controlRef}
+        visibleOptions={visibleOptions}
+        highlightedIndex={highlightedIndex}
+        getOptionProps={getOptionProps}
+        onCreate={handleCreate}
+        dropdownRef={dropdownRef}
+        inputValue={inputData.value}
+        id={id}
+        hasGroup={hasGroup}
+        selectedValues={arrValue}
+        getOptionLabel={getOptionLabel}
+        labelForCreate={labelForCreate}
+        labelForNotFound={labelForNotFound}
+        form={getSelectDropdownForm(form)}
+        className={dropdownClassName}
+      />
     </SelectContainer>
   );
 };

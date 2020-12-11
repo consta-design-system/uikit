@@ -5,7 +5,7 @@ import { classnames } from '@bem-react/classnames';
 
 import { IconProps } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
-import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
+import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { useTheme } from '../Theme/Theme';
 
 export const badgePropSize = ['m', 's', 'l'] as const;
@@ -37,7 +37,7 @@ type Props = {
 
 export const cnBadge = cn('Badge');
 
-export const Badge: ComponentWithAs<Props> = forwardRefWithAs<Props>((props, ref) => {
+export const Badge = forwardRefWithAs<Props>((props, ref) => {
   const {
     size = badgePropSizeDefault,
     view = badgePropViewDefault,

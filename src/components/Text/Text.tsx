@@ -3,7 +3,7 @@ import './Text.css';
 import React from 'react';
 
 import { cn } from '../../utils/bem';
-import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
+import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 
 export const textPropAlign = ['left', 'center', 'right'] as const;
 export type TextPropAlign = typeof textPropAlign[number];
@@ -87,7 +87,7 @@ type Props = {
 
 export const cnText = cn('Text');
 
-export const Text: ComponentWithAs<Props> = forwardRefWithAs<Props>((props, ref) => {
+export const Text = forwardRefWithAs<Props>((props, ref) => {
   const {
     as = 'div',
     align,

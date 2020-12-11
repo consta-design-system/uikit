@@ -9,8 +9,8 @@ import { cnSelect } from '../SelectComponents/cnSelect';
 import { getSelectDropdownForm } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
+import { SelectValueTag } from '../SelectComponents/SelectValueTag/SelectValueTag';
 import { CommonSelectProps, DefaultPropForm, DefaultPropView } from '../SelectComponents/types';
-import { Tag } from '../Tag/Tag';
 
 type SelectContainerProps = React.ComponentProps<typeof SelectContainer>;
 
@@ -55,6 +55,10 @@ export const MultiCombobox: MultiComboboxType = (props) => {
     dropdownRef = defaultOptionsRef,
     ...restProps
   } = props;
+
+  type Items = typeof value;
+  type Item = Exclude<Items, null | undefined>[number];
+
   const [isFocused, setIsFocused] = useState(false);
   const [inputData, setInputData] = useState<{ value: string | undefined }>({
     value: '',
@@ -64,7 +68,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
   const controlInnerRef = useRef<HTMLDivElement>(null);
   const helperInputFakeElement = useRef<HTMLDivElement>(null);
 
-  const handlerChangeValue = (v: typeof value): void => {
+  const handlerChangeValue = (v: Items): void => {
     if (typeof onChange === 'function' && v) {
       onChange(v);
     }
@@ -72,8 +76,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
   };
 
   const controlRef = useRef<HTMLDivElement | null>(null);
-  const arrValue: typeof value | null =
-    typeof value !== 'undefined' && value !== null ? [...value] : null;
+  const arrValue: Items = typeof value !== 'undefined' && value !== null ? [...value] : null;
   const hasGroup = typeof getGroupOptions === 'function';
 
   const scrollToIndex = (index: number): void => {
@@ -136,14 +139,20 @@ export const MultiCombobox: MultiComboboxType = (props) => {
   };
 
   const handleToggleDropdown = (): void => {
-    setOpen(!isOpen);
-    setIsFocused(true);
+    if (isOpen) {
+      setOpen(false);
+      setIsFocused(false);
+    } else {
+      setOpen(true);
+      setIsFocused(true);
+      toggleRef.current?.focus();
+    }
   };
 
   const handleClear = (): void => {
     setInputData({ value: '' });
     typeof onChange === 'function' && onChange(null);
-    toggleRef.current?.focus();
+    setIsFocused(false);
   };
 
   const handleClearButtonFocus = (): void => {
@@ -179,29 +188,10 @@ export const MultiCombobox: MultiComboboxType = (props) => {
     }
   };
 
-  const handleRemoveValue = (optionLabel: string): void => {
-    const newVal = arrValue?.filter((arrVal) => getOptionLabel(arrVal) !== optionLabel);
+  const handleRemoveValue = (option: Item): void => {
+    const newVal = arrValue?.filter((arrVal) => getOptionLabel(arrVal) !== getOptionLabel(option));
     handlerChangeValue(newVal);
   };
-
-  const valueTags = arrValue?.map((option) => {
-    const label = getOptionLabel(option);
-    const handleCancel = (e: React.SyntheticEvent): void => {
-      e.stopPropagation();
-      handleRemoveValue(label);
-    };
-    const commonProps = {
-      size,
-      label,
-      key: getOptionLabel(option),
-      className: cnSelect('Tag'),
-    };
-    return disabled ? (
-      <Tag mode="info" {...commonProps} />
-    ) : (
-      <Tag mode="cancel" {...commonProps} onCancel={handleCancel} />
-    );
-  });
 
   const getInputStyle = (): {
     width: number;
@@ -249,10 +239,22 @@ export const MultiCombobox: MultiComboboxType = (props) => {
         >
           <div className={cnSelect('ControlValueContainer')}>
             <div className={cnSelect('ControlValue')}>
-              <div className={cnSelect('Placeholder', { isHidden: !showPlaceholder })}>
-                {placeholder}
-              </div>
-              {valueTags}
+              {arrValue?.map((option) => {
+                const label = getOptionLabel(option);
+                const handleRemove = (e: React.SyntheticEvent): void => {
+                  e.stopPropagation();
+                  handleRemoveValue(option);
+                };
+                return (
+                  <SelectValueTag
+                    label={label}
+                    key={label}
+                    size={size}
+                    disabled={Boolean(disabled)}
+                    handleRemove={handleRemove}
+                  />
+                );
+              })}
               <input
                 {...getToggleProps({ onChange: handleInputChange })}
                 type="text"
@@ -264,6 +266,9 @@ export const MultiCombobox: MultiComboboxType = (props) => {
                 className={cnSelect('Input', { size })}
                 style={inputStyle}
               />
+              <div className={cnSelect('Placeholder', { isHidden: !showPlaceholder })}>
+                {placeholder}
+              </div>
             </div>
           </div>
         </div>
@@ -290,27 +295,26 @@ export const MultiCombobox: MultiComboboxType = (props) => {
           </button>
         </div>
       </div>
-      {isOpen && (
-        <SelectDropdown
-          size={size}
-          controlRef={controlRef}
-          visibleOptions={visibleOptions}
-          highlightedIndex={highlightedIndex}
-          getOptionProps={getOptionProps}
-          onCreate={handleCreate}
-          dropdownRef={dropdownRef}
-          inputValue={inputData.value}
-          id={id}
-          hasGroup={hasGroup}
-          selectedValues={arrValue}
-          labelForCreate={labelForCreate}
-          labelForNotFound={labelForNotFound}
-          multi
-          getOptionLabel={getOptionLabel}
-          form={getSelectDropdownForm(form)}
-          className={dropdownClassName}
-        />
-      )}
+      <SelectDropdown
+        isOpen={isOpen}
+        size={size}
+        controlRef={controlRef}
+        visibleOptions={visibleOptions}
+        highlightedIndex={highlightedIndex}
+        getOptionProps={getOptionProps}
+        onCreate={handleCreate}
+        dropdownRef={dropdownRef}
+        inputValue={inputData.value}
+        id={id}
+        hasGroup={hasGroup}
+        selectedValues={arrValue}
+        labelForCreate={labelForCreate}
+        labelForNotFound={labelForNotFound}
+        multi
+        getOptionLabel={getOptionLabel}
+        form={getSelectDropdownForm(form)}
+        className={dropdownClassName}
+      />
       <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
         {inputData.value}
       </div>
