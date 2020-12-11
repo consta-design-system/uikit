@@ -55,6 +55,10 @@ export const MultiCombobox: MultiComboboxType = (props) => {
     dropdownRef = defaultOptionsRef,
     ...restProps
   } = props;
+
+  type Items = typeof value;
+  type Item = Exclude<Items, null | undefined>[number];
+
   const [isFocused, setIsFocused] = useState(false);
   const [inputData, setInputData] = useState<{ value: string | undefined }>({
     value: '',
@@ -64,7 +68,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
   const controlInnerRef = useRef<HTMLDivElement>(null);
   const helperInputFakeElement = useRef<HTMLDivElement>(null);
 
-  const handlerChangeValue = (v: typeof value): void => {
+  const handlerChangeValue = (v: Items): void => {
     if (typeof onChange === 'function' && v) {
       onChange(v);
     }
@@ -72,8 +76,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
   };
 
   const controlRef = useRef<HTMLDivElement | null>(null);
-  const arrValue: typeof value | null =
-    typeof value !== 'undefined' && value !== null ? [...value] : null;
+  const arrValue: Items = typeof value !== 'undefined' && value !== null ? [...value] : null;
   const hasGroup = typeof getGroupOptions === 'function';
 
   const scrollToIndex = (index: number): void => {
@@ -185,8 +188,8 @@ export const MultiCombobox: MultiComboboxType = (props) => {
     }
   };
 
-  const handleRemoveValue = (optionLabel: string): void => {
-    const newVal = arrValue?.filter((arrVal) => getOptionLabel(arrVal) !== optionLabel);
+  const handleRemoveValue = (option: Item): void => {
+    const newVal = arrValue?.filter((arrVal) => getOptionLabel(arrVal) !== getOptionLabel(option));
     handlerChangeValue(newVal);
   };
 
@@ -240,7 +243,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
                 const label = getOptionLabel(option);
                 const handleRemove = (e: React.SyntheticEvent): void => {
                   e.stopPropagation();
-                  handleRemoveValue(label);
+                  handleRemoveValue(option);
                 };
                 return (
                   <SelectValueTag
