@@ -4,7 +4,6 @@ import React from 'react';
 
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
 import { cn } from '../../utils/bem';
-import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { Radio } from '../Radio/Radio';
 
 export const cnRadioGroup = cn('RadioGroup');
@@ -21,12 +20,11 @@ export const radioGroupViews = ['primary', 'ghost'] as const;
 export type RadioGroupPropView = typeof radioGroupViews[number];
 export const radioGroupDefaultView: RadioGroupPropView = radioGroupViews[0];
 
-type CommonProps<ITEM> = {
+type Props<ITEM> = {
   value?: ITEM | null;
   items: ITEM[];
   getLabel: (item: ITEM) => string;
-  getDisabled?: (item: ITEM) => boolean | undefined;
-  onChange: (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM }) => void;
+  onChange: (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM | null }) => void;
   name: string;
   direction?: RadioGroupDirection;
   size?: RadioGroupPropSize;
@@ -35,16 +33,13 @@ type CommonProps<ITEM> = {
   className?: string;
 };
 
-type Props<ITEM> = PropsWithHTMLAttributesAndRef<CommonProps<ITEM>, HTMLDivElement>;
-
 type RadioGroup = <ITEM>(props: Props<ITEM>) => React.ReactElement | null;
 
-export const RadioGroup: RadioGroup = React.forwardRef((props, ref) => {
+export const RadioGroup: RadioGroup = (props: Props<any>) => {
   const {
     value = null,
     items,
     getLabel,
-    getDisabled,
     onChange,
     name,
     direction = radioGroupDefaultDirection,
@@ -66,7 +61,7 @@ export const RadioGroup: RadioGroup = React.forwardRef((props, ref) => {
   });
 
   return (
-    <div {...otherProps} ref={ref} className={cnRadioGroup({ direction, size, view }, [className])}>
+    <div {...otherProps} className={cnRadioGroup({ direction, size, view }, [className])}>
       {items.map((item) => (
         <Radio
           key={getLabel(item)}
@@ -74,12 +69,11 @@ export const RadioGroup: RadioGroup = React.forwardRef((props, ref) => {
           size={size}
           view={view}
           name={name}
-          disabled={disabled || (!!getDisabled && getDisabled(item))}
+          disabled={disabled}
           checked={getChecked(item)}
           onChange={({ e }) => getOnChange(item)(e)}
-          className={cnRadioGroup('Item')}
         />
       ))}
     </div>
   );
-});
+};

@@ -21,15 +21,24 @@ const cnRadioGroupStories = cn('RadioGroupStories');
 
 type Item = {
   name: string;
-  disabled?: boolean;
 };
 
-const items: Item[] = [
-  { name: 'один' },
-  { name: 'два' },
-  { name: 'три' },
-  { name: 'четыре' },
-  { name: 'пять disabled', disabled: true },
+const items = [
+  {
+    name: 'один',
+  },
+  {
+    name: 'два',
+  },
+  {
+    name: 'три',
+  },
+  {
+    name: 'четыре',
+  },
+  {
+    name: 'пять',
+  },
 ];
 
 const defaultKnobs = () => ({
@@ -43,7 +52,7 @@ export function Playground() {
   const [value, setValue] = React.useState<Item | null>(null);
   const { direction, size, view, disabled } = defaultKnobs();
 
-  const onChange = ({ value }: { value: Item }) => setValue(value);
+  const onChange = ({ value }: { value: Item | null }) => setValue(value);
 
   return (
     <div className={cnRadioGroupStories()}>
@@ -52,7 +61,6 @@ export function Playground() {
           value={value}
           items={items}
           getLabel={(item) => item.name}
-          getDisabled={(item) => item.disabled}
           onChange={onChange}
           name={cnRadioGroupStories()}
           direction={direction}
@@ -66,7 +74,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/RadioGroup',
+  title: 'Components|/RadioGroup',
   parameters: {
     docs: {
       page: mdx,

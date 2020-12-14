@@ -1,6 +1,6 @@
 import './Table.stories.css';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { boolean, number, object, select, text } from '@storybook/addon-knobs';
 
 import {
@@ -18,10 +18,10 @@ import { createMetadata, createStory } from '../../../utils/storybook';
 import { Badge } from '../../Badge/Badge';
 import { Button } from '../../Button/Button';
 import { Checkbox } from '../../Checkbox/Checkbox';
-import { OrderedOption, smartSort, SmartSortingWindow } from '../../SmartSorting/SmartSorting';
+import { OrderedOption, smartSort, SmartSorting } from '../../SmartSorting/SmartSorting';
 import { Text } from '../../Text/Text';
 import { verticalAligns } from '../Cell/TableCell';
-import { Filters, SortByProps } from '../filtering';
+import { Filters } from '../filtering';
 import { Props, sizes, Table, TableColumn, TableRow, zebraStriped } from '../Table';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
@@ -235,80 +235,9 @@ export const WithBigData = createStory(
   },
 );
 
-export const SortByData = createStory(
-  () => {
-    const [sortSetting, setSortSetting] = useState<SortByProps<any> | null>(null);
-    const data = [
-      {
-        id: 1,
-        date: new Date('Thu Dec 03 2020 14:23:13 GMT+0300 (Moscow Standard Time)'),
-      },
-      {
-        id: 2,
-        date: new Date('Thu Dec 03 2020 14:04:13 GMT+0300 (Moscow Standard Time)'),
-      },
-      {
-        id: 3,
-        date: new Date('Thu Dec 03 2020 14:55:13 GMT+0300 (Moscow Standard Time)'),
-      },
-      {
-        id: 4,
-        date: new Date('Thu Dec 03 2020 14:12:13 GMT+0300 (Moscow Standard Time)'),
-      },
-    ];
-
-    const rows = data
-      .sort((a, b) => {
-        if (sortSetting?.sortingBy === 'date') {
-          const [firstDate, secondDate] =
-            sortSetting.sortOrder === 'asc' ? [a.date, b.date] : [b.date, a.date];
-          return firstDate.valueOf() - secondDate.valueOf();
-        }
-        return 0;
-      })
-      .map((item) => ({
-        id: item.id.valueOf(),
-        date: item.date.toString(),
-      }));
-
-    const columns = [
-      {
-        title: `Id`,
-        accessor: `id`,
-        sortable: true,
-      },
-      {
-        title: `Дата`,
-        accessor: `date`,
-        sortable: true,
-      },
-    ];
-
-    return <Table rows={rows} columns={columns} onSortBy={setSortSetting} />;
-  },
-  {
-    name: 'сортировка по времени',
-  },
-);
-
 export const WithOnRowHover = createStory(() => <WithOnRowHoverContent />, {
   name: 'с наведением на строку',
 });
-
-export const WithMergedCells = createStory(
-  () => (
-    <Table
-      {...getKnobs({
-        ...(tableWithMergedCellsData as Partial<Props<TableRow>>),
-        borderBetweenColumns: true,
-        borderBetweenRows: true,
-      })}
-    />
-  ),
-  {
-    name: 'с объединёнными ячейками',
-  },
-);
 
 export const WithSmartSorting = createStory(
   () => {
@@ -348,11 +277,11 @@ export const WithSmartSorting = createStory(
         {orderedOptions.length > 0 && (
           <Badge size="s" label={`${orderedOptions.length}`} status="system" form="round" />
         )}
-        <SmartSortingWindow
+        <SmartSorting
           isOpen={isSmartSortingWindowOpen}
           options={options}
-          initialValues={orderedOptions}
-          onUpdate={setOrderedOptions}
+          value={orderedOptions}
+          onChange={setOrderedOptions}
           onClose={() => setIsSmartSortingWindowOpen(false)}
           className={cnTableStories('MySmartSortingWindow')}
         />
@@ -365,8 +294,15 @@ export const WithSmartSorting = createStory(
   },
 );
 
+export const WithMergedCells = createStory(
+  () => <Table {...getKnobs(tableWithMergedCellsData as Partial<Props<TableRow>>)} />,
+  {
+    name: 'с объединёнными ячейками',
+  },
+);
+
 export default createMetadata({
-  title: 'Компоненты|/Table',
+  title: 'Components|/Table',
   parameters: {
     docs: {
       page: mdx,

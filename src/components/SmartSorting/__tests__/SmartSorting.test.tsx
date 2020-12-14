@@ -2,16 +2,16 @@ import * as React from 'react';
 import { render } from '@testing-library/react';
 
 import { SORTED_2_TIMES_ROWS, tableData } from '../../Table/__mock__/data.mock';
-import { smartSort, SmartSortingWindow } from '../SmartSorting';
+import { smartSort, SmartSorting } from '../SmartSorting';
 
-type SmartSortingWindowProps = React.ComponentProps<typeof SmartSortingWindow>;
+type SmartSortingWindowProps = React.ComponentProps<typeof SmartSorting>;
 
 const options = tableData.columns.map((column) => ({
   optionLabel: column.title as string,
   optionValue: column.accessor as string,
 }));
 
-const getComponent = (props: SmartSortingWindowProps) => <SmartSortingWindow {...props} />;
+const getComponent = (props: SmartSortingWindowProps) => <SmartSorting {...props} />;
 
 describe('Компонент SmartSorting', () => {
   it('должен рендериться без ошибок', () => {
@@ -19,9 +19,9 @@ describe('Компонент SmartSorting', () => {
       getComponent({
         isOpen: true,
         options,
-        initialValues: [],
+        value: [],
         onClose: jest.fn(),
-        onUpdate: jest.fn(),
+        onChange: jest.fn(),
       }),
     );
   });

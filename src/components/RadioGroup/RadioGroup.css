@@ -5,7 +5,7 @@
     &_column {
       flex-direction: column;
 
-      .RadioGroup-Item:not(:last-child) {
+      .Radio:not(:last-child) {
         margin-bottom: var(--offset);
       }
     }
@@ -13,7 +13,7 @@
     &_row {
       flex-direction: row;
 
-      .RadioGroup-Item:not(:last-child) {
+      .Radio:not(:last-child) {
         margin-right: var(--offset);
       }
     }

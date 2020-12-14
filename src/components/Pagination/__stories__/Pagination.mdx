@@ -5,7 +5,6 @@
 - [Форма](#форма)
 - [Размер](#размер)
 - [Тип](#тип)
-- [Позиция](#позиция)
 - [Состояние](#состояние)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
@@ -38,17 +37,7 @@
 
 ```tsx
 <Pagination type="default" />
-<Pagination type="minified" />
-```
-
-## Позиция
-
-Компонент может выравниваться по горизонтали: слева, по центру, справа.
-
-```tsx
-<Pagination position="left" />
-<Pagination position="center" />
-<Pagination position="right" />
+<Pagination type="input" />
 ```
 
 ## Состояние
@@ -61,53 +50,20 @@
 
 ## Свойства
 
-```
-type HotKey = {
-  label: string;
-  values: string[];
-};
-
-type HotKeys = {
-  nextPage: HotKey;
-  prevPage: HotKey;
-};
-```
-
 <!-- props:start -->
 
-| Свойство                     | Тип                               | По умолчанию          | Описание                                              |
-| ---------------------------- | ----------------------------------| --------------------- | ----------------------------------------------------- |
-| `currentPage`                | `number`                          | —                     | Номер текущей страницы                                |
-| `totalPages`                 | `number`                          | —                     | Количество всех страниц                               |
-| `onChange`                   | `(pageNumber: number) => void`    | —                     | Функция для смены страницы                            |
-| `getLabel?`                  | `(totalPages: number) => string`  | `из ${totalPages}`    | Функция для получения лэйбла из количества страниц    |
-| [`form?`](#форма)            | `'default', 'round', 'brick'`     | `'default'`           | Форма элементов пагинации                             |
-| [`size?`](#размер)           | `'xs', 's', 'm', 'l'`             | `'m'`                 | Размер элементов пагинации                            |
-| [`type?`](#тип)              | `'default', 'minified'`           | `'default'`           | Тип элементов пагинации                               |
-| [`position?`](#позиция)      | `'left', 'center', 'right'`       | `'center'`            | Выравнивание по горизонтали                           |
-| `hotkeys?`                   | `HotKeys`                         | [`hotkeys`](#хоткеи)  | Горячие клавиши для переключения страниц              |
-| `containerEventListener?`    | `HTMLElement, Window`             | `window`              | Элемент, на который вешается слушатель нажатия клавиш |
-| [`disabled?`](#состояние)    | `boolean`                         | `false`               | Делает пагинацию неактивной                           |
-| `className?`                 | `string`                          | —                     | Дополнительные CSS-классы                             |
-
-Список значений горячих клавиш можно найти [здесь](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values).
+| Свойство                     | Тип                                  | По умолчанию | Описание                                                                                                  |
+| ---------------------------- | ------------------------------------ | ------------ | --------------------------- |
+| `currentPage`                | `number`                             | —            | Номер текущей страницы      |
+| `totalPages`                 | `number`                             | —            | Количество всех страниц     |
+| `onChangePage`               | `(pageNumber: number) => void, null` | —            | Функция для смены страницы  |
+| [`form?`](#форма)            | `'default', 'round', 'brick'`        | `'default'`  | Форма элементов пагинации   |
+| [`size?`](#размер)           | `'xs', 's', 'm', 'l'`                | `'m'`        | Размер элементов пагинации  |
+| [`type?`](#тип)              | `'default', 'input'`                 | `'default'`  | Тип элементов пагинации     |
+| [`disabled?`](#состояние)    | `boolean`                            | `false`      | Делает пагинацию неактивной |
+| `className?`                 | `string`                             | —            | Дополнительные CSS-классы   |
 
 <!-- props:end -->
-
-### Хоткеи
-
-```ts
-hotkeys = {
-  nextPage: {
-    label: 'Alt →',
-    values: ['Alt', 'ArrowRight'],
-  },
-  prevPage: {
-    label: '← Alt',
-    values: ['Alt', 'ArrowLeft'],
-  },
-};
-```
 
 ## Пример
 
@@ -120,27 +76,11 @@ const App = () => {
   const [currentPage, setCurrentPage] = React.useState<number>(0);
   const totalPages = 10;
 
-  const hotKeys = {
-      prevPage: {
-        label: '← Shift',
-        values: ['Shift', 'ArrowLeft'],
-      },
-      nextPage: {
-        label: 'Shift →',
-        values: ['Shift', 'ArrowRight'],
-      },
-    };
-
-  const handleChange = ({ pageNumber }: { pageNumber: number }): void => {
-    setCurrentPage(pageNumber);
-  };
-
   return (
     <Pagination
       currentPage={currentPage}
-      onChange={handleChange}
+      onChangePage={number => setCurrentPage(number)}
       totalPages={totalPages}
-      hotKeys={hotKeys}
     />
   );
 };

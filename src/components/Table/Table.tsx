@@ -6,7 +6,7 @@ import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize'
 import { IconSortDown } from '../../icons/IconSortDown/IconSortDown';
 import { IconSortUp } from '../../icons/IconSortUp/IconSortUp';
 import { IconUnsort } from '../../icons/IconUnsort/IconUnsort';
-import { sortBy as sortByDefault, updateAt } from '../../utils/array';
+import { sortBy, updateAt } from '../../utils/array';
 import { cn } from '../../utils/bem';
 import { isNotNil } from '../../utils/type-guards';
 import { Text } from '../Text/Text';
@@ -22,7 +22,6 @@ import {
   filterTableData,
   getSelectedFiltersList,
   isSelectedFiltersPresent,
-  onSortBy,
   useSelectedFilters,
 } from './filtering';
 import {
@@ -58,8 +57,6 @@ type ActiveRow = {
   id: string | undefined;
   onChange: (id: string | undefined) => void;
 };
-
-type onRowHover = ({ id, e }: { id: string | undefined; e: React.MouseEvent }) => void;
 
 export type TableRow = {
   [key: string]: React.ReactNode;
@@ -99,7 +96,6 @@ export type Props<T extends TableRow> = {
   columns: Array<TableColumn<T>>;
   rows: T[];
   filters?: Filters<T>;
-  onSortBy?: onSortBy<T>;
   size?: Size;
   stickyHeader?: boolean;
   stickyColumns?: number;
@@ -111,7 +107,7 @@ export type Props<T extends TableRow> = {
   borderBetweenColumns?: boolean;
   emptyRowsPlaceholder?: React.ReactNode;
   className?: string;
-  onRowHover?: onRowHover;
+  onRowHover?: ({ id, event }: { id: string | undefined; event: React.MouseEvent }) => void;
   lazyLoad?: LazyLoad;
 };
 
@@ -122,22 +118,6 @@ export type SortingState<T extends TableRow> = {
 
 const getColumnSortByField = <T extends TableRow>(column: TableColumn<T>): RowField<T> =>
   (column.sortable && column.sortByField) || column.accessor;
-
-const sortingData = <T extends TableRow>(
-  rows: T[],
-  sorting: SortingState<T>,
-  onSortBy?: onSortBy<T>,
-) => {
-  if (onSortBy) {
-    return rows;
-  }
-
-  if (!sorting) {
-    return rows;
-  }
-
-  return sortByDefault(rows, sorting.by, sorting.order);
-};
 
 const defaultEmptyRowsPlaceholder = (
   <Text as="span" view="primary" size="s" lineHeight="s">
@@ -162,7 +142,6 @@ export const Table = <T extends TableRow>({
   className,
   onRowHover,
   lazyLoad,
-  onSortBy,
 }: Props<T>): React.ReactElement => {
   const {
     headers,
@@ -219,7 +198,6 @@ export const Table = <T extends TableRow>({
 
     setInitialColumnWidths(columnsElementsWidths);
 
-    // Проверяем, что таблица отрисовалась корректно, и устанавливаем значения ширин колонок после 1го рендера
     if (
       columnsElements[0].getBoundingClientRect().left !==
       columnsElements[columnsElements.length - 1].getBoundingClientRect().left
@@ -239,15 +217,7 @@ export const Table = <T extends TableRow>({
   };
 
   const handleSortClick = (column: TableColumn<T>): void => {
-    const newSorting = getNewSorting(sorting, getColumnSortByField(column));
-    const sortProps = newSorting
-      ? {
-          sortingBy: newSorting.by,
-          sortOrder: newSorting.order,
-        }
-      : null;
-    onSortBy && onSortBy(sortProps);
-    setSorting(newSorting);
+    setSorting(getNewSorting(sorting, getColumnSortByField(column)));
   };
 
   const handleFilterTogglerClick = (id: string) => (): void => {
@@ -360,11 +330,11 @@ export const Table = <T extends TableRow>({
     flattenedHeaders,
   );
 
-  const sortedTableData = sortingData(rows, sorting, onSortBy);
+  const tableData = sorting ? sortBy(rows, sorting.by, sorting.order) : rows;
   const filteredData =
     !filters || !isSelectedFiltersPresent(selectedFilters)
-      ? sortedTableData
-      : filterTableData({ data: sortedTableData, filters, selectedFilters });
+      ? tableData
+      : filterTableData({ data: tableData, filters, selectedFilters });
 
   const { maxVisibleRows = 210, scrollableEl = tableRef.current } = lazyLoad || {};
 
@@ -391,12 +361,12 @@ export const Table = <T extends TableRow>({
     column: TableColumn<TableRow>,
     columnIdx: number,
   ) => {
-    let rowSpan = 1;
     if (
       (rowsData[rowIdx - 1] && rowsData[rowIdx - 1][column.accessor] !== row[column.accessor]) ||
       rowIdx === 0 ||
       !column.mergeCells
     ) {
+      let rowSpan = 1;
       for (let i = rowIdx; i < rowsData.length; i++) {
         if (rowsData[i + 1] && rowsData[i + 1][column.accessor] === row[column.accessor]) {
           rowSpan++;
@@ -405,10 +375,11 @@ export const Table = <T extends TableRow>({
         }
       }
 
-      const style: { 'left': number | undefined; '--row-span': string | null } = {
-        'left': getStickyLeftOffset(columnIdx, column.position!.topHeaderGridIndex),
-        '--row-span': column.mergeCells ? `span ${rowSpan}` : null,
+      const style: { left: number | undefined; gridRowEnd?: string } = {
+        left: getStickyLeftOffset(columnIdx, column.position!.topHeaderGridIndex),
       };
+
+      if (column.mergeCells) style.gridRowEnd = `span ${rowSpan}`;
 
       return {
         show: true,
@@ -418,7 +389,7 @@ export const Table = <T extends TableRow>({
     }
     return {
       show: false,
-      rowSpan,
+      rowSpan: 1,
     };
   };
 
@@ -513,8 +484,8 @@ export const Table = <T extends TableRow>({
                 nth,
                 withMergedCells: hasMergedCells,
               })}
-              onMouseEnter={(e) => onRowHover && onRowHover({ id: row.id, e })}
-              onMouseLeave={(e) => onRowHover && onRowHover({ id: undefined, e })}
+              onMouseEnter={(event) => onRowHover && onRowHover({ id: row.id, event })}
+              onMouseLeave={(event) => onRowHover && onRowHover({ id: undefined, event })}
             >
               {columnsWithMetaData(lowHeaders).map((column: TableColumn<T>, columnIdx: number) => {
                 const { show, style, rowSpan } = getTableCellProps(row, rowIdx, column, columnIdx);

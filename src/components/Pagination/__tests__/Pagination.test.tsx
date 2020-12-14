@@ -21,7 +21,7 @@ const renderComponent = (props: {
   return render(
     <Pagination
       data-testid={testId}
-      onChange={onChangePage}
+      onChangePage={onChangePage}
       className={additionalClass}
       {...props}
     />,
