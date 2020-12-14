@@ -365,13 +365,6 @@ export const WithSmartSorting = createStory(
   },
 );
 
-export const WithMergedCells = createStory(
-  () => <Table {...getKnobs(tableWithMergedCellsData as Partial<Props<TableRow>>)} />,
-  {
-    name: 'с объединёнными ячейками',
-  },
-);
-
 export default createMetadata({
   title: 'Компоненты|/Table',
   parameters: {
