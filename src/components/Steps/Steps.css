@@ -1,0 +1,9 @@
+.Steps {
+  display: flex;
+
+  &-Item {
+    &:not(:last-child) {
+      margin-right: var(--space-xs);
+    }
+  }
+}
