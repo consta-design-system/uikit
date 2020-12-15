@@ -1,0 +1,61 @@
+.Breadcrumbs {
+  color: var(--color-typo-secondary);
+
+  &_size {
+    &_xs {
+      font-size: var(--control-text-size-xs);
+
+      .Breadcrumbs-Delimiter {
+        margin: 0 var(--space-xs);
+      }
+    }
+
+    &_s {
+      font-size: var(--control-text-size-s);
+    }
+
+    &_m {
+      font-size: var(--control-text-size-m);
+    }
+
+    &_l {
+      font-size: var(--control-text-size-l);
+    }
+  }
+
+  &-Link {
+    color: var(--color-typo-secondary);
+    text-decoration: none;
+
+    &_active {
+      color: var(--color-typo-link);
+      pointer-events: none;
+    }
+
+    &:hover {
+      color: var(--color-typo-link-hover);
+    }
+  }
+
+  &-Icon {
+    margin-right: var(--space-xs);
+
+    &_onlyIcon {
+      margin-right: 0;
+    }
+  }
+
+  &-Delimiter {
+    margin: 0 var(--space-s);
+  }
+
+  &-Icon,
+  &-Delimiter {
+    position: relative;
+    top: 2px;
+
+    &_size_m {
+      top: 5px;
+    }
+  }
+}
