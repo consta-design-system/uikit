@@ -1,0 +1,70 @@
+# Breadcrumbs
+
+Breadcrumbs - компонент для отображения пути к текущей странице
+
+## Список свойств
+
+| Свойство              | Тип или варианты значения                                             | По умолчанию   | Описание                                           |
+| --------------------- | --------------------------------------------------------------------- | -------------- | -------------------------------------------------- |
+| pages                 | `Page[]`                                                              | -              | Список страниц                                     |
+| getLabel              | `(item: Item) => string, React.ReactNode`                             | -              | Функция для получения лэйбла                       |
+| getLink               | `(item: Item) => string`                                              | -              | Функция для получения ссылки                       |
+| getIcon?              | `(item: Item) => React.FC<IconProps>, undefined`                      | -              | Функция для получения иконки                       |
+| getIsActive?          | `(item: Item) => boolean`                                             | -              | Функция для получения флага текущей страницы       |
+| size?                 | `'xs', s', 'm', 'l'`                                                  | 'm'            | Размер хлебных крошек                              |
+| maxCount?             | `number`                                                              | -              | Максимальное количество отображаемых элементов     |
+| onClick`              | `(page: Page, e: React.MouseEvent) => void`                           | -              | Хэндлер, который отработает по клику на брэкрамб   |
+| onlyIconRoot?         | `boolean`                                                             | false          | Показывать только иконку первого брэдкрамба        |
+| className?            | `string`                                                              | -              | Дополнительный класс                               |
+
+## Пример использования
+
+```ts
+
+// src/App.ts
+import React from 'react';
+import { Breadcrumbs } from '@consta/uikit/Breadcrumbs';
+
+const App = () => {
+
+  const pages = {
+  {
+      icon: IconUser,
+      label: 'Home',
+      link: 'https://url.com',
+    },
+    {
+      label: 'Page1',
+      link: 'https://url.com/page-1',
+    },
+    {
+      label: 'Page2',
+      link: 'https://url.com/page-2',
+    },
+    {
+      label: 'Page3',
+      link: 'https://url.com/page-3',
+    },
+  }
+
+  return (
+    <Breadcrumbs
+       className="myClassName"
+       pages={pages}
+       size={'m'}
+       maxCount={3}
+       onlyIconRoot={true}
+       getLabel={(page) => page.label}
+       getIsActive={(page) => !!page.isActive}
+       getLink={(page) => page.label}
+       getIcon={(page) => page.icon}
+       onClick={(page, e) => {
+          e.preventDefault();
+          console.log(page.link, e);
+       }}
+     />
+  );
+};
+
+
+```
