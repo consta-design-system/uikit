@@ -36,6 +36,7 @@ type Props<T extends TableRow> = {
   selectedFilters: SelectedFilters;
   showHorizontalCellShadow: boolean;
   borderBetweenColumns: boolean;
+  testId?: string;
 };
 
 export const TableHeader = <T extends TableRow>({
@@ -55,6 +56,7 @@ export const TableHeader = <T extends TableRow>({
   selectedFilters,
   showHorizontalCellShadow,
   borderBetweenColumns,
+  testId,
 }: Props<T>): React.ReactElement => {
   const tableHeaderHeight = headerRowsHeights.reduce((a: number, b: number) => a + b, 0);
   const tableHeaderStyle: React.CSSProperties & TableCSSCustomProperty = {
@@ -82,9 +84,13 @@ export const TableHeader = <T extends TableRow>({
     build(column);
     return headers.some((header) => header.isResized);
   };
+
   return (
     <>
-      <div className={cnTableHeader('Row', { withVerticalBorder: borderBetweenColumns })}>
+      <div
+        className={cnTableHeader('Row', { withVerticalBorder: borderBetweenColumns })}
+        data-testid={testId && `${testId}:table:row.head`}
+      >
         {headersWithMetaData.map((column: Header<T> & ColumnMetaData, columnIdx: number) => {
           const style: React.CSSProperties = {};
           if (column.position!.colSpan) {
@@ -128,6 +134,7 @@ export const TableHeader = <T extends TableRow>({
                 showVerticalCellShadow &&
                 column?.position!.gridIndex + (column?.position!.colSpan || 1) === stickyColumnsGrid
               }
+              testId={testId && column.accessor && `${testId}:cell:${column.accessor}`}
             >
               {column.title}
               <div
@@ -145,6 +152,7 @@ export const TableHeader = <T extends TableRow>({
                     onClick={(): void => handleSortClick(column)}
                     iconLeft={getSortIcon(column)}
                     className={cnTableHeader('Icon', { type: 'sort' })}
+                    data-testid={testId && `${testId}:button:column.sort`}
                   />
                 )}
                 {filters && column.filterable && (
@@ -156,6 +164,7 @@ export const TableHeader = <T extends TableRow>({
                     onChange={handleTooltipSave}
                     onToggle={handleFilterTogglerClick(column.accessor)}
                     className={cnTableHeader('Icon', { type: 'filter' })}
+                    testId={testId}
                   />
                 )}
               </div>

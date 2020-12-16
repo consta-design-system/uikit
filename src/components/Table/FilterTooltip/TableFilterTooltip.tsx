@@ -23,6 +23,7 @@ type Props = {
   onChange: (field: string, values: Values) => void;
   onToggle: () => void;
   className?: string;
+  testId?: string;
 };
 
 export const TableFilterTooltip: React.FC<Props> = ({
@@ -33,6 +34,7 @@ export const TableFilterTooltip: React.FC<Props> = ({
   className,
   onChange,
   onToggle,
+  testId,
 }) => {
   const buttonRef = React.useRef<HTMLButtonElement>(null);
 
@@ -47,6 +49,7 @@ export const TableFilterTooltip: React.FC<Props> = ({
         onClick={onToggle}
         className={cnTableFilterTooltip('Button', { isOpened }, [className])}
         iconLeft={IconFunnel}
+        data-testid={testId && `${testId}:button:filter.show`}
       />
       {isOpened && buttonRef.current && (
         <Popover
@@ -57,7 +60,10 @@ export const TableFilterTooltip: React.FC<Props> = ({
           arrowOffset={12}
           onClickOutside={onToggle}
         >
-          <div className={cnTableFilterTooltip('Content')}>
+          <div
+            className={cnTableFilterTooltip('Content')}
+            data-testid={testId && `${testId}:popover:filter`}
+          >
             <Text as="div" size="xs" view="primary" className={cnTableFilterTooltip('Title')}>
               Фильтровать по условию
             </Text>
@@ -71,13 +77,15 @@ export const TableFilterTooltip: React.FC<Props> = ({
                   Array.from(e.target.selectedOptions).map((option) => option.value),
                 );
               }}
+              data-testid={testId && `${testId}:field:filter`}
             >
-              {options.map((option) => (
+              {options.map((option, index) => (
                 <option
                   key={option.value}
                   className={cnTableFilterTooltip('Option')}
                   value={option.value}
                   title={option.label}
+                  data-testid={testId && `${testId}:field:filter.option[${index}]`}
                 >
                   {option.label}
                 </option>
