@@ -17,18 +17,18 @@
   &-Link {
     position: relative;
     display: inline-block;
-    color: var(--color-typo-primary);
+    color: var(--color-typo-secondary);
     line-height: var(--header-height);
     text-decoration: none;
     cursor: pointer;
     transition: color 0.2s;
 
     &:hover {
-      color: var(--color-typo-link-hover);
+      color: var(--color-typo-primary);
     }
 
     &_active {
-      color: var(--color-typo-link);
+      color: var(--color-typo-primary);
       pointer-events: none;
 
       &::before {
