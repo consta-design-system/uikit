@@ -29,6 +29,7 @@ export function Playground() {
 
 export default createMetadata({
   title: 'Компоненты|/ProgressSpin',
+  id: 'components/ProgressSpin',
   parameters: {
     docs: {
       page: mdx,

@@ -104,6 +104,7 @@ export function Playground() {
 
 export default createMetadata({
   title: 'Компоненты|/ChoiceGroup',
+  id: 'components/ChoiceGroup',
   parameters: {
     docs: {
       page: mdx,

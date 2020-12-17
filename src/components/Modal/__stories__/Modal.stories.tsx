@@ -148,6 +148,7 @@ export const WithCreateStory = createStory(
 
 export default createMetadata({
   title: 'Компоненты|/Modal',
+  id: 'components/Modal',
   parameters: {
     docs: {
       page: mdx,

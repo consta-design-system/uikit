@@ -63,6 +63,7 @@ export function Playground() {
 
 export default createMetadata({
   title: 'Компоненты|/Attach',
+  id: 'components/Attach',
   parameters: {
     docs: {
       page: mdx,

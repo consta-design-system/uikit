@@ -105,6 +105,7 @@ export function Playground() {
 
 export default createMetadata({
   title: 'Компоненты|/Steps',
+  id: 'components/Steps',
   parameters: {
     docs: {
       page: mdx,

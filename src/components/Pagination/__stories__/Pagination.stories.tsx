@@ -71,6 +71,7 @@ export function Playground() {
 
 export default createMetadata({
   title: 'Компоненты|/Pagination',
+  id: 'components/Pagination',
   parameters: {
     docs: {
       page: mdx,

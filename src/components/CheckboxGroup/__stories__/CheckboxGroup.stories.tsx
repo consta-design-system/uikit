@@ -65,6 +65,7 @@ export function Playground() {
 
 export default createMetadata({
   title: 'Компоненты|/CheckboxGroup',
+  id: 'components/CheckboxGroup',
   parameters: {
     docs: {
       page: mdx,
