@@ -1,5 +1,6 @@
 .Breadcrumbs {
   display: flex;
+  margin: 0;
   padding: 0;
   list-style: none;
   color: var(--color-typo-secondary);
@@ -24,12 +25,24 @@
 
     &_l {
       font-size: var(--control-text-size-l);
+
+      .Breadcrumbs-Delimiter {
+        margin: 0 var(--space-m);
+      }
     }
   }
 
+  &-Item {
+    display: flex;
+    align-items: center;
+  }
+
   &-Link {
+    display: flex;
+    align-items: center;
     color: var(--color-typo-secondary);
     text-decoration: none;
+    transition: color 0.2s;
 
     &_active {
       color: var(--color-typo-link);
@@ -43,23 +56,14 @@
 
   &-Icon {
     margin-right: var(--space-xs);
-
-    &_onlyIcon {
-      margin-right: 0;
-    }
   }
 
   &-Delimiter {
     margin: 0 var(--space-s);
+    color: var(--color-typo-ghost);
   }
 
-  &-Icon,
-  &-Delimiter {
-    position: relative;
-    top: 2px;
-
-    &_size_m {
-      top: 5px;
-    }
+  &-More {
+    color: var(--color-control-typo-clear);
   }
 }

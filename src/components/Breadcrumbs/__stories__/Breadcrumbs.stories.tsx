@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { boolean, number, select } from '@storybook/addon-knobs';
+import { boolean, select } from '@storybook/addon-knobs';
 
 import { IconProps } from '../../../icons/Icon/Icon';
-import { IconUser } from '../../../icons/IconUser/IconUser';
+import { IconSettings } from '../../../icons/IconSettings/IconSettings';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import { breadcrumbPropSize, breadcrumbPropSizeDefault, Breadcrumbs } from '../Breadcrumbs';
@@ -13,7 +13,6 @@ import mdx from './Breadcrumbs.mdx';
 
 const defaultKnobs = () => ({
   size: select('Size', breadcrumbPropSize, breadcrumbPropSizeDefault),
-  maxCount: number('MaxCount', 3),
   onlyIconRoot: boolean('Only Icon Root', false),
 });
 
@@ -26,7 +25,7 @@ type Page = {
 
 const pages: Page[] = [
   {
-    icon: IconUser,
+    icon: IconSettings,
     label: 'Page1',
     link: 'https://url.com/page-1',
   },
@@ -60,14 +59,13 @@ const pages: Page[] = [
 const cnBreadcrumbsStories = cn('BreadcrumbsStories');
 
 export function Playground() {
-  const { size, maxCount, onlyIconRoot } = defaultKnobs();
+  const { size, onlyIconRoot } = defaultKnobs();
 
   return (
     <div className={cnBreadcrumbsStories()}>
       <Breadcrumbs
         pages={pages}
         size={size}
-        maxCount={maxCount}
         onlyIconRoot={onlyIconRoot}
         getLabel={(page) => page.label}
         getIsActive={(page) => !!page.isActive}
@@ -84,6 +82,7 @@ export function Playground() {
 
 export default createMetadata({
   title: 'Компоненты|/Breadcrumbs',
+  id: 'components/Breadcrumbs',
   parameters: {
     docs: {
       page: mdx,
