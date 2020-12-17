@@ -27,7 +27,7 @@ export type HeaderData<T extends TableRow> = {
 };
 
 export const getColumnsSize = (sizes: ColumnWidth[]): string => {
-  return sizes.map((s) => (s ? `${s}px` : 'minmax(min-content, 1fr)')).join(' ');
+  return sizes.map((s) => (s ? `${s}px` : `minmax(min-content, ${100 / sizes.length}%)`)).join(' ');
 };
 
 export const getColumnLeftOffset = ({
