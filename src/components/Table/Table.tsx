@@ -23,6 +23,7 @@ import {
   getSelectedFiltersList,
   isSelectedFiltersPresent,
   onSortBy,
+  SelectedFilters,
   useSelectedFilters,
 } from './filtering';
 import {
@@ -113,6 +114,7 @@ export type Props<T extends TableRow> = {
   className?: string;
   onRowHover?: onRowHover;
   lazyLoad?: LazyLoad;
+  onFiltersUpdated?: (filters: SelectedFilters) => void;
   testId?: string;
 };
 
@@ -164,6 +166,7 @@ export const Table = <T extends TableRow>({
   onRowHover,
   lazyLoad,
   onSortBy,
+  onFiltersUpdated,
   testId,
 }: Props<T>): React.ReactElement => {
   const {
@@ -192,7 +195,7 @@ export const Table = <T extends TableRow>({
     updateSelectedFilters,
     removeOneSelectedFilter,
     removeAllSelectedFilters,
-  } = useSelectedFilters(filters);
+  } = useSelectedFilters(filters, onFiltersUpdated);
   /*
     Подписываемся на изменения размеров таблицы, но не используем значения из
     хука так как нам нужна ширина и высота таблицы без размера скролла. Этот хук

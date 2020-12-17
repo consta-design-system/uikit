@@ -152,6 +152,7 @@ export const filterTableData = <T extends TableRow>({
 /* istanbul ignore next */
 export const useSelectedFilters = <T extends TableRow>(
   filters?: Filters<T>,
+  onFiltersUpdated?: (filters: SelectedFilters) => void,
 ): {
   selectedFilters: SelectedFilters;
   updateSelectedFilters: (field: string, tooltipSelectedFilters: FieldSelectedValues) => void;
@@ -166,10 +167,13 @@ export const useSelectedFilters = <T extends TableRow>(
     field: string,
     tooltipSelectedFilters: FieldSelectedValues,
   ): void => {
-    setSelectedFilters({
+    const newSelectedFilters = {
       ...selectedFilters,
       [field]: [...tooltipSelectedFilters],
-    });
+    };
+
+    setSelectedFilters(newSelectedFilters);
+    onFiltersUpdated && onFiltersUpdated(newSelectedFilters);
   };
 
   const removeOneSelectedFilter = (availableFilters: Filters<T>, filter: string): void => {
