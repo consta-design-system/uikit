@@ -20,6 +20,7 @@ export function Playground() {
 
 export default createMetadata({
   title: 'Компоненты|/Loader',
+  id: 'components/Loader',
   parameters: {
     docs: {
       page: mdx,

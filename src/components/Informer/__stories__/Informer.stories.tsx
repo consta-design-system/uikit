@@ -39,6 +39,7 @@ export function Playground() {
 
 export default createMetadata({
   title: 'Компоненты|/Informer',
+  id: 'components/Informer',
   parameters: {
     docs: {
       page: mdx,

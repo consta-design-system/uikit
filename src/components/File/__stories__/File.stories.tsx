@@ -41,6 +41,7 @@ export const Gallery = FileIconsGallery;
 
 export default createMetadata({
   title: 'Компоненты|/File',
+  id: 'components/File',
   parameters: {
     docs: {
       page: mdx,
