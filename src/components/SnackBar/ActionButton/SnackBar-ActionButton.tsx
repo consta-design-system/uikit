@@ -7,7 +7,7 @@ import { cnSnackBar, SnackBarPropItemAction } from '../SnackBar';
 
 export type SnackBarActionButtonProps = {
   actions: SnackBarPropItemAction[];
-  testId?: string | number;
+  testId?: string;
 };
 
 export const SnackBarActionButton: React.FC<SnackBarActionButtonProps> = (props) => {

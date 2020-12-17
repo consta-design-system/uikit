@@ -21,6 +21,7 @@ import mdx from './SnackBar.mdx';
 type State = Item[];
 type Action = { type: 'add'; item: Item } | { type: 'remove'; key: number | string };
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const defaultKnobs = () => ({
   withIcon: boolean('withIcon', false),
   withActionButtons: boolean('withActionButtons', false),
@@ -41,7 +42,7 @@ const getItemIconByStatus = (status: SnackBarItemStatus): React.FC<IconProps> | 
 
 const cnSnackBarStories = cn('SnackBarStories');
 
-function reducer(state: State, action: Action) {
+function reducer(state: State, action: Action): Item[] {
   switch (action.type) {
     case 'add':
       return [...state, action.item];
@@ -50,14 +51,15 @@ function reducer(state: State, action: Action) {
   }
 }
 
-export function Playground() {
+export function Playground(): JSX.Element {
   const { withIcon, withActionButtons, withAutoClose, withCloseButton } = defaultKnobs();
   const [items, dispatchItems] = React.useReducer(reducer, []);
-  const generateHandleAdd = (status: SnackBarItemStatus) => () => {
+  const generateHandleAdd = (status: SnackBarItemStatus) => (): void => {
     const key = items.length + 1;
     const item: Item = {
       key,
       message: `Сообщение о каком-то событии - ${key}`,
+      testId: 'testID',
       status,
       ...(withAutoClose && { autoClose: 5 }),
       ...(withIcon && { icon: getItemIconByStatus(status) }),
@@ -65,19 +67,21 @@ export function Playground() {
         actions: [
           {
             label: 'Согласен',
-            onClick: () => {
+            onClick: (): void => {
+              // eslint-disable-next-line no-console
               console.log('Согласен');
             },
           },
           {
             label: 'Не согласен',
-            onClick: () => {
+            onClick: (): void => {
+              // eslint-disable-next-line no-console
               console.log('Не согласен');
             },
           },
         ],
       }),
-      ...(withCloseButton && { onClose: () => dispatchItems({ type: 'remove', key }) }),
+      ...(withCloseButton && { onClose: (): void => dispatchItems({ type: 'remove', key }) }),
     };
     dispatchItems({ type: 'add', item });
   };

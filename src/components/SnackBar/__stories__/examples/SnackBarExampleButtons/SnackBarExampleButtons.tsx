@@ -13,16 +13,19 @@ const items: Item[] = [
     key: 1,
     message: 'С этим сообщением нельзя не согласиться',
     status: 'normal',
+    testId: 'testID',
     actions: [
       {
         label: 'Согласен',
-        onClick: () => {
+        onClick: (): void => {
+          // eslint-disable-next-line no-console
           console.log('Согласен');
         },
       },
       {
         label: 'Не согласен',
-        onClick: () => {
+        onClick: (): void => {
+          // eslint-disable-next-line no-console
           console.log('Не согласен');
         },
       },

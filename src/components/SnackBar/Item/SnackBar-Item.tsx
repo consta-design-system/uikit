@@ -37,7 +37,7 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
     actions,
     status = snackBarItemStatusDefault,
     onAutoClose: onAutoCloseProp,
-    key,
+    testId,
   } = item;
   const [timerFunctions, setTimerFunctions] = useState<{
     start: () => void;
@@ -47,10 +47,10 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
   const [timeIsOver, setTimeIsOver] = useState<boolean>(false);
   const handleMountTimer: SnackBarTimerPropOnMount = (timerFunctions) =>
     setTimerFunctions(timerFunctions);
-  const handleMouseEnter = () => setHover(true);
-  const handleMouseLeave = () => setHover(false);
+  const handleMouseEnter = (): void => setHover(true);
+  const handleMouseLeave = (): void => setHover(false);
   const autoCloseTime = getAutoCloseTime(autoClose);
-  const onAutoClose = (item: Item) => {
+  const onAutoClose = (item: Item): void => {
     if (onAutoCloseProp) {
       onAutoCloseProp(item);
     } else {
@@ -68,19 +68,19 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
     }
   }, [hover, timeIsOver, timerFunctions]);
 
-  const handleTimeIsOver = () => {
+  const handleTimeIsOver = (): void => {
     setTimeIsOver(true);
     onAutoClose(item);
   };
 
-  const handleClose = onClose ? () => onClose(item) : undefined;
+  const handleClose = onClose ? (): void => onClose(item) : undefined;
 
   return (
     <div
       className={cnSnackBarItem({ status }, [cnTheme({ color: 'gpnDark' })])}
       onMouseEnter={autoCloseTime ? handleMouseEnter : undefined}
       onMouseLeave={autoCloseTime ? handleMouseLeave : undefined}
-      data-testid={key}
+      data-testid={testId}
     >
       {autoCloseTime && (
         <SnackBarTimer
@@ -95,12 +95,12 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
           <Text
             className={cnSnackBar('Message')}
             lineHeight="s"
-            data-testid={`${key}:text:message`}
+            data-testid={testId && `${testId}:text:message`}
           >
             {message}
           </Text>
         )}
-        {actions && <SnackBarActionButton actions={actions} testId={key} />}
+        {actions && <SnackBarActionButton actions={actions} testId={testId} />}
       </div>
       {onClose && (
         <Button
@@ -110,7 +110,7 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
           form="round"
           size="xs"
           onClick={handleClose}
-          data-testid={`${key}:button:close`}
+          data-testid={testId && `${testId}:button:close`}
         />
       )}
     </div>

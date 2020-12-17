@@ -28,6 +28,7 @@ export type Item = {
   actions?: SnackBarPropItemAction[];
   onClose?: (item: Item) => void;
   onAutoClose?: (item: Item) => void;
+  testId?: string;
 };
 
 type Props = {
@@ -49,7 +50,12 @@ export const SnackBar: React.FC<SnackBarProps> = (props) => {
     <TransitionGroup {...otherProps} className={cnSnackBar(null, [className])} appear enter exit>
       {items.map((item) => {
         return (
-          <CSSTransition classNames={cssTransitionClassNames} key={item.key} timeout={200}>
+          <CSSTransition
+            classNames={cssTransitionClassNames}
+            key={item.key}
+            data-testid={item.testId}
+            timeout={200}
+          >
             <SnackBarItem item={item} />
           </CSSTransition>
         );
