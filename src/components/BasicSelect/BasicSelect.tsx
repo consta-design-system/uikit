@@ -46,6 +46,7 @@ export const BasicSelect: Select = (props) => {
     dropdownClassName,
     ...restProps
   } = props;
+  const toggleRef = useRef<HTMLInputElement>(null);
   const [isFocused, setIsFocused] = useState(false);
 
   const handlerChangeValue = (v: typeof value): void => {
@@ -109,11 +110,15 @@ export const BasicSelect: Select = (props) => {
   };
 
   const handleToggleDropdown = (): void => {
-    setOpen(!isOpen);
-    setIsFocused(true);
+    if (isOpen) {
+      setOpen(false);
+      setIsFocused(false);
+    } else {
+      setOpen(true);
+      setIsFocused(true);
+      toggleRef.current?.focus();
+    }
   };
-
-  const toggleRef = useRef(null);
 
   return (
     <SelectContainer
@@ -165,21 +170,20 @@ export const BasicSelect: Select = (props) => {
           </button>
         </span>
       </div>
-      {isOpen && (
-        <SelectDropdown
-          size={size}
-          controlRef={controlRef}
-          visibleOptions={visibleOptions}
-          highlightedIndex={highlightedIndex}
-          getOptionProps={getOptionProps}
-          dropdownRef={dropdownRef}
-          id={id}
-          selectedValues={arrValue}
-          getOptionLabel={getOptionLabel}
-          form={getSelectDropdownForm(form)}
-          className={dropdownClassName}
-        />
-      )}
+      <SelectDropdown
+        isOpen={isOpen}
+        size={size}
+        controlRef={controlRef}
+        visibleOptions={visibleOptions}
+        highlightedIndex={highlightedIndex}
+        getOptionProps={getOptionProps}
+        dropdownRef={dropdownRef}
+        id={id}
+        selectedValues={arrValue}
+        getOptionLabel={getOptionLabel}
+        form={getSelectDropdownForm(form)}
+        className={dropdownClassName}
+      />
     </SelectContainer>
   );
 };

@@ -3,7 +3,7 @@ import './Avatar.css';
 import React, { useMemo } from 'react';
 
 import { cn } from '../../utils/bem';
-import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
+import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 
 export const avatarPropSize = ['m', 's'] as const;
 export type AvatarPropSize = typeof avatarPropSize[number];
@@ -60,7 +60,7 @@ export const getInitialsForName = (name: string | undefined) => {
   return `${firstLetter.toUpperCase()}${secondLatter.toUpperCase()}`;
 };
 
-export const Avatar: ComponentWithAs<Props> = forwardRefWithAs<Props>((props, ref) => {
+export const Avatar = forwardRefWithAs<Props>((props, ref) => {
   const {
     as = 'div',
     className,

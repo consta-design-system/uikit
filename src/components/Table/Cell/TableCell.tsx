@@ -24,6 +24,7 @@ type Props = {
   wrapperClassName?: string;
   children: React.ReactNode;
   showVerticalShadow?: boolean;
+  testId?: string;
 } & (
   | {
       type: 'header';
@@ -88,7 +89,7 @@ const getWrapperClasses = (props: Props): string => {
 };
 
 export const TableCell = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
-  const { style, onClick, children } = props;
+  const { style, onClick, children, testId } = props;
 
   const propsWithRole = onClick
     ? {
@@ -100,7 +101,13 @@ export const TableCell = React.forwardRef<HTMLDivElement, Props>((props, ref) =>
       };
 
   return (
-    <div {...propsWithRole} ref={ref} className={getCellClasses(props)} style={style}>
+    <div
+      {...propsWithRole}
+      ref={ref}
+      className={getCellClasses(props)}
+      style={style}
+      data-testid={testId}
+    >
       <div className={getWrapperClasses(props)}>{children}</div>
     </div>
   );

@@ -6,7 +6,7 @@ import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
-import { ComponentWithAs, forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
+import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { Loader } from '../Loader/Loader';
 
 export const buttonPropSize = ['m', 'xs', 's', 'l'] as const;
@@ -60,7 +60,7 @@ const sizeMap: Record<ButtonPropSize, IconPropSize> = {
   l: 'm',
 };
 
-export const Button: ComponentWithAs<Props, 'button'> = forwardRefWithAs<Props>((props, ref) => {
+export const Button = forwardRefWithAs<Props, 'button'>((props, ref) => {
   const {
     size = buttonPropSizeDefault,
     view = buttonPropViewDefault,
