@@ -14,13 +14,12 @@ import {
 // @ts-ignore
 import mdx from './MultiCombobox.mdx';
 
-type SelectOption = {
+type Option = {
   label: string;
   value: string;
 };
 
-type Group = { label: string; items: SelectOption[] };
-type Option = SelectOption | Group;
+type Group = { label: string; items: Option[] };
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const getKnobs = () => ({
@@ -31,14 +30,23 @@ const getKnobs = () => ({
   placeholder: text('placeholder', 'Placeholder'),
 });
 
-const Default = (props: {
-  value?: Option[] | null;
-  items?: Option[];
-  getItemLabel?(item: Option): string;
-  getGroupOptions?(option: Option): SelectOption[];
-  onCreate?(str: string): void;
-  onChange?(item: Option[] | null): void;
-}): JSX.Element => {
+const Default = (
+  props: {
+    value?: Option[] | null;
+    getItemLabel?: (item: Option) => string;
+    onCreate?(str: string): void;
+    onChange?(item: Option[] | null): void;
+  } & (
+    | {
+        items?: Group[];
+        getGroupOptions?: (group: Group) => Option[];
+      }
+    | {
+        getGroupOptions?: never;
+        items?: Option[];
+      }
+  ),
+): JSX.Element => {
   const getItemLabelDefault = (option: Option): string => option.label;
   const [value, setValue] = useState<Option[] | null | undefined>();
   const {
@@ -57,20 +65,16 @@ const Default = (props: {
       <MultiCombobox
         {...getKnobs()}
         id="example"
-        options={options}
+        options={options as Option[]}
         value={val}
         getOptionLabel={getItemLabel}
-        getGroupOptions={getGroupOptions}
+        getGroupOptions={getGroupOptions as never}
         onCreate={onCreate}
         onChange={onChange}
       />
     </div>
   );
 };
-
-export const DefaultStory = createStory(() => <Default />, {
-  name: 'по умолчанию',
-});
 
 export const WithValueStory = createStory(() => <Default value={[simpleItems[4]]} />, {
   name: 'c заданным значением',
@@ -95,7 +99,7 @@ export const WithCreateStory = createStory(
 );
 
 export const WithGroupsStory = createStory(
-  () => <Default items={groups} getGroupOptions={(group: Group): SelectOption[] => group.items} />,
+  () => <Default items={groups} getGroupOptions={(group) => group.items} />,
   {
     name: 'c группами опций',
   },
