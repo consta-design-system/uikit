@@ -1,5 +1,18 @@
 # Changelog
 
+## v1.10.11 (18/12/2020)
+
+- [feat(Responses): add new components (#656)](https://github.com/gazprom-neft/consta-uikit/commit/f1798bca4d5302e99a0bb26e722413ff730bb1c1) - [@Miocene](https://github.com/Miocene)
+- [fix(Pagination): fix pagination (#712)](https://github.com/gazprom-neft/consta-uikit/commit/4421aeed0d2860d5c9eef0725479b46dbc2aa6fa) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
+- [feat(Table): add callback on filters updated (#658)](https://github.com/gazprom-neft/consta-uikit/commit/c21af435d0583536aae9f57a1d0ebd34538c1878) - [@ISlukin](https://github.com/ISlukin)
+- [feat(storyBook): added id for stories (#710)](https://github.com/gazprom-neft/consta-uikit/commit/63545635796bc8c0a455bc2fea57c4c9322a3f81) - [@gizeasy](https://github.com/gizeasy)
+- [feat(CheckboxGroup): added CheckboxGroup component (#703)](https://github.com/gazprom-neft/consta-uikit/commit/6cfb58da2a1555c4f60b03f36c50ca25bffe7c93) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
+- [feat(Steps): added Steps component (#676)](https://github.com/gazprom-neft/consta-uikit/commit/2ac509ee1d967875820d956b01b67fd3bbf8094e) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
+- [fix(Header): fix menu colors (#705)](https://github.com/gazprom-neft/consta-uikit/commit/f309ce9542580f1604e3d4093e3e27c04c03aae9) - [@Miocene](https://github.com/Miocene)
+- [fix(docs): update line-height for Headings (#679)](https://github.com/gazprom-neft/consta-uikit/commit/1ccea2a8222c8abb6960934d4c6b8355f75bace0) - [@fooontic](https://github.com/fooontic)
+
+---
+
 ## v1.10.10 (11/12/2020)
 
 - [fix(MultiCombobox): fixed click on valueTag (#672)](https://github.com/gazprom-neft/consta-uikit/commit/002cfe68883b8768c568afaaa6114176bb12b8d7) - [@gizeasy](https://github.com/gizeasy)
