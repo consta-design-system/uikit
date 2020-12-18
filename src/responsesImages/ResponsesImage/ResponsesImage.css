@@ -1,0 +1,6 @@
+.ResponsesImage {
+  &-Svg {
+    fill: var(--color-typo-primary);
+    color: var(--color-typo-primary);
+  }
+}
