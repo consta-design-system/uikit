@@ -23,12 +23,14 @@
   h1 {
     margin-bottom: 0.4em;
     font-size: var(--size-text-4xl);
+    line-height: var(--line-height-text-xs);
   }
 
   h2 {
     padding-bottom: 0;
     border-bottom: none;
     font-size: var(--size-text-3xl);
+    line-height: var(--line-height-text-xs);
 
     /* TODO: Ниже код для обсуждению о добавлении парамтеров сразу в заголовок */
 
@@ -47,6 +49,7 @@
 
   h3 {
     font-size: var(--size-text-2xl);
+    line-height: var(--line-height-text-s);
   }
 
   h4 {

@@ -30,11 +30,11 @@ const defaultKnobs = () => ({
   size: select('size', paginationSizes, paginationDefaultSize),
   type: select('type', paginationTypes, paginationDefaultType),
   position: select('position', paginationPositions, paginationDefaultPosition),
-  disabled: boolean('disabled', false),
+  minified: boolean('minified', false),
 });
 
 export function Playground() {
-  const { pages, form, size, type, position, disabled } = defaultKnobs();
+  const { pages, form, size, type, position, minified } = defaultKnobs();
   const [currentPage, setCurrentPage] = React.useState<number>(0);
 
   const hotKeys: HotKeys = {
@@ -62,7 +62,7 @@ export function Playground() {
         size={size}
         type={type}
         position={position}
-        disabled={disabled}
+        minified={minified}
         hotkeys={hotKeys}
       />
     </div>
@@ -71,6 +71,7 @@ export function Playground() {
 
 export default createMetadata({
   title: 'Компоненты|/Pagination',
+  id: 'components/Pagination',
   parameters: {
     docs: {
       page: mdx,

@@ -1,0 +1,57 @@
+.Responses {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  &_size {
+    &_m {
+      --title-size: var(--size-text-xl);
+      --description-size: var(--size-text-s);
+      --image-width: 300px;
+    }
+
+    &_l {
+      --title-size: var(--size-text-2xl);
+      --description-size: var(--size-text-m);
+      --image-width: 420px;
+    }
+  }
+
+  &-Title {
+    max-width: 350px;
+    margin-top: var(--space-xl);
+    margin-bottom: 0;
+    color: var(--color-typo-primary);
+    font-size: var(--title-size);
+    font-weight: 600;
+    line-height: var(--line-height-text-xs);
+    text-align: center;
+  }
+
+  &-Description {
+    max-width: 350px;
+    margin-top: var(--space-xs);
+    margin-bottom: 0;
+    color: var(--color-typo-ghost);
+    font-size: var(--description-size);
+    line-height: var(--line-height-text-xs);
+    text-align: center;
+  }
+
+  .Responses-Image {
+    width: 100%;
+    max-width: var(--image-width);
+  }
+
+  &-ButtonsWrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-2xl);
+  }
+
+  &-Button:not(:last-child) {
+    margin-right: var(--space-xs);
+  }
+}

@@ -68,17 +68,12 @@ const getKnobs = (replacedProps?: Partial<Props<TableRow>>): Props<TableRow> => 
   };
 };
 
-export const Interactive = createStory(() => <Table {...getKnobs()} testId="Story" />, {
+export const Interactive = createStory(() => <Table {...getKnobs()} />, {
   name: 'обычная',
 });
 
 export const WithMultiLevelHeaders = createStory(
-  () => (
-    <Table
-      {...getKnobs(tableWithMultiLevelHeadersData as Partial<Props<TableRow>>)}
-      testId="Story"
-    />
-  ),
+  () => <Table {...getKnobs(tableWithMultiLevelHeadersData as Partial<Props<TableRow>>)} />,
   {
     name: 'с многоуровневым заголовком',
   },
@@ -314,6 +309,7 @@ export const WithMergedCells = createStory(
 
 export default createMetadata({
   title: 'Компоненты|/Table',
+  id: 'components/Table',
   parameters: {
     docs: {
       page: mdx,

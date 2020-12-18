@@ -72,6 +72,7 @@ export function Playground() {
 
 export default createMetadata({
   title: 'Компоненты|/Button',
+  id: 'components/Button',
   parameters: {
     docs: {
       page: mdx,

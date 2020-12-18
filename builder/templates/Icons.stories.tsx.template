@@ -1,5 +1,7 @@
 import React from 'react';
 import { select } from '@storybook/addon-knobs';
+
+import { createMetadata } from '../../../utils/storybook';
 #imports#
 
 import { IconsItem } from './Item/Icons-Item';
@@ -34,12 +36,12 @@ export function Playground() {
   );
 }
 
-export default {
+export default createMetadata({
   title: 'Компоненты|/Icons',
+  id: 'components/Icons',
   parameters: {
     docs: {
       page: mdx,
     },
   },
-};
-
+});

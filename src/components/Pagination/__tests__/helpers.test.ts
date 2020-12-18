@@ -5,8 +5,8 @@ const DEFAULT_INFO = {
   prevPage: -1,
   nextPage: 1,
   isStartDots: false,
-  isEndDots: true,
-  pages: [1, 2, 3, 4, 5, 6, 7],
+  isEndDots: false,
+  pages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 };
 
 describe('getPaginationInfo', () => {
@@ -16,7 +16,7 @@ describe('getPaginationInfo', () => {
 
   it('возвращает корректные данные если страница поменялась', () => {
     const { pages } = getPaginationInfo(6, 11);
-    const expectedPages = [4, 5, 6, 7, 8];
+    const expectedPages = [4, 5, 6, 7, 8, 9, 10, 11];
     expect(pages).toEqual(expectedPages);
   });
 });
