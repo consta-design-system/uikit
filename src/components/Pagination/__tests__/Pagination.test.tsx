@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import { Pagination } from '../Pagination';
+import { cnPagination, Pagination } from '../Pagination';
 
 type PaginationProps = React.ComponentProps<typeof Pagination>;
 
@@ -29,7 +29,7 @@ const renderComponent = (props: {
 };
 
 const getRender = () => screen.getByTestId(testId);
-const getPages = () => getRender().querySelectorAll('.Pagination-Item');
+const getPages = () => getRender().querySelectorAll(`.${cnPagination('Item')}`);
 
 describe('Компонент Pagination', () => {
   it('должен рендериться без ошибок', () => {
@@ -46,16 +46,16 @@ describe('Компонент Pagination', () => {
       });
 
       it('единожды скрывает часть страниц за многоточием', () => {
-        const pages = 8;
-        renderComponent({ currentPage, totalPages: 10 });
+        const pages = 9;
+        renderComponent({ currentPage, totalPages: 11 });
         const itemsRender = getPages();
         expect(itemsRender.length).toEqual(pages);
       });
 
       it('дважды скрывает часть страниц за многоточием', () => {
-        const pages = 7;
+        const pages = 8;
         const currPage = 5;
-        renderComponent({ currentPage: currPage, totalPages: 11 });
+        renderComponent({ currentPage: currPage, totalPages: 12 });
         const itemsRender = getPages();
         expect(itemsRender.length).toEqual(pages);
       });

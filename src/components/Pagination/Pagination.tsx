@@ -2,8 +2,8 @@ import './Pagination.css';
 
 import React from 'react';
 
-import { IconArrowLeft } from '../../icons/IconArrowLeft/IconArrowLeft';
-import { IconArrowRight } from '../../icons/IconArrowRight/IconArrowRight';
+import { IconBackward } from '../../icons/IconBackward/IconBackward';
+import { IconForward } from '../../icons/IconForward/IconForward';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { Button } from '../Button/Button';
@@ -20,7 +20,7 @@ export const paginationSizes = ['xs', 's', 'm', 'l'] as const;
 export type PaginationPropSize = typeof paginationSizes[number];
 export const paginationDefaultSize: PaginationPropSize = 'm';
 
-export const paginationTypes = ['default', 'minified'] as const;
+export const paginationTypes = ['default', 'input'] as const;
 export type PaginationPropType = typeof paginationTypes[number];
 export const paginationDefaultType: PaginationPropType = 'default';
 
@@ -51,9 +51,9 @@ type Props = {
   size?: PaginationPropSize;
   type?: PaginationPropType;
   position?: PaginationPropPosition;
+  minified?: boolean;
   hotkeys?: HotKeys;
   containerEventListener?: HTMLElement | Window;
-  disabled?: boolean;
   className?: string;
 };
 
@@ -71,6 +71,7 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
     size = paginationDefaultSize,
     type = paginationDefaultType,
     position = paginationDefaultPosition,
+    minified = false,
     hotkeys = {
       nextPage: {
         label: 'Alt →',
@@ -82,7 +83,6 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
       },
     },
     containerEventListener = window,
-    disabled = false,
     className,
     ...otherProps
   } = props;
@@ -150,28 +150,29 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
   return (
     (!isEmpty && (
       <nav
-        className={cnPagination({ form, size, position }, [className])}
+        className={cnPagination(
+          { form, size, position: minified ? paginationDefaultPosition : position },
+          [className],
+        )}
         ref={ref}
         {...otherProps}
       >
-        {(currPage > 1 || type !== paginationDefaultType) && (
+        {(currPage > 1 || minified) && (
           <div className={cnPagination('PrevPage')}>
             <Button
               className={cnPagination('ItemLeft', {
-                minified: type !== paginationDefaultType,
+                minified,
                 show: currPage > 1,
               })}
-              onlyIcon={type !== paginationDefaultType}
-              label={type === paginationDefaultType ? 'Назад' : ''}
-              iconLeft={IconArrowLeft}
+              label="Назад"
+              iconLeft={IconBackward}
               view="ghost"
               form={form}
               size={size}
-              disabled={disabled}
               onClick={handleClick(prevPage)}
             />
-            {type === paginationDefaultType && (
-              <Text className={cnPagination('TooltipLeft')} size={size} view="ghost">
+            {!minified && (
+              <Text className={cnPagination('TipLeft')} size="xs" view="ghost">
                 {hotkeys.prevPage.label}
               </Text>
             )}
@@ -188,14 +189,13 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
                 view="ghost"
                 form={form}
                 size={size}
-                disabled={disabled}
                 onClick={handleClick(1)}
               />
             )}
             {isStartDots && (
               <Text
                 size={size}
-                view={disabled ? 'ghost' : 'linkMinor'}
+                view="linkMinor"
                 className={cnPagination('More')}
                 style={{ width: itemWidth }}
               >
@@ -212,14 +212,13 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
                 view="ghost"
                 form={form}
                 size={size}
-                disabled={disabled}
                 onClick={handleClick(page)}
               />
             ))}
             {isEndDots && (
               <Text
                 size={size}
-                view={disabled ? 'ghost' : 'linkMinor'}
+                view="linkMinor"
                 className={cnPagination('More')}
                 style={{ width: itemWidth }}
               >
@@ -235,7 +234,6 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
                 view="ghost"
                 form={form}
                 size={size}
-                disabled={disabled}
                 onClick={handleClick(totalPages)}
               />
             )}
@@ -248,35 +246,28 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
               size={size}
               value={currPage.toString()}
               onChange={handleChange}
-              disabled={disabled}
             />
-            <Text
-              size={size}
-              view={disabled ? 'ghost' : 'linkMinor'}
-              className={cnPagination('Total')}
-            >
+            <Text size={size} view="linkMinor" className={cnPagination('Total')}>
               {getLabel}
             </Text>
           </div>
         )}
-        {(currPage < totalPages || type !== paginationDefaultType) && (
+        {(currPage < totalPages || minified) && (
           <div className={cnPagination('NextPage')}>
             <Button
               className={cnPagination('ItemRight', {
-                minified: type !== paginationDefaultType,
+                minified,
                 show: currPage < totalPages,
               })}
-              onlyIcon={type !== paginationDefaultType}
-              label={type === paginationDefaultType ? 'Вперёд' : ''}
-              iconRight={IconArrowRight}
+              label="Вперёд"
+              iconRight={IconForward}
               view="ghost"
               form={form}
               size={size}
-              disabled={disabled}
               onClick={handleClick(nextPage)}
             />
-            {type === paginationDefaultType && (
-              <Text className={cnPagination('TooltipRight')} size={size} view="ghost">
+            {!minified && (
+              <Text className={cnPagination('TipRight')} size="xs" view="ghost">
                 {hotkeys.nextPage.label}
               </Text>
             )}

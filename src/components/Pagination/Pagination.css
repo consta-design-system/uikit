@@ -18,19 +18,19 @@
 
   &_size {
     &_xs {
-      --tooltip-space: var(--control-space-xs);
+      --tip-space: var(--control-space-xs);
     }
 
     &_s {
-      --tooltip-space: var(--control-space-s);
+      --tip-space: var(--control-space-s);
     }
 
     &_m {
-      --tooltip-space: var(--control-space-m);
+      --tip-space: var(--control-space-m);
     }
 
     &_l {
-      --tooltip-space: var(--control-space-l);
+      --tip-space: var(--control-space-l);
     }
   }
 
@@ -43,14 +43,14 @@
     position: relative;
   }
 
-  &-TooltipRight {
+  &-TipRight {
     position: absolute;
-    left: var(--tooltip-space);
+    left: calc(var(--tip-space) + var(--space-xs));
   }
 
-  &-TooltipLeft {
+  &-TipLeft {
     position: absolute;
-    right: var(--tooltip-space);
+    right: calc(var(--tip-space) + var(--space-xs));
   }
 
   &-Item,
@@ -65,13 +65,20 @@
     }
   }
 
-  &-Item,
   &-ItemLeft {
-    margin-right: var(--space-3xs);
+    margin-right: var(--space-xs);
+  }
+
+  &-ItemRight {
+    margin-left: var(--space-xs);
   }
 
   &-Item {
     padding: unset;
+
+    &:not(:last-child) {
+      margin-right: var(--space-3xs);
+    }
   }
 
   &-More {
@@ -89,7 +96,6 @@
   &-Total {
     display: flex;
     align-items: center;
-    margin-right: var(--space-3xs);
     color: var(--color-control-typo-ghost);
   }
 
@@ -98,7 +104,7 @@
     &_minified {
       z-index: -1;
       opacity: 0;
-      transition: opacity 0.2s ease;
+      transition: opacity 0.2s;
     }
 
     &_show {
