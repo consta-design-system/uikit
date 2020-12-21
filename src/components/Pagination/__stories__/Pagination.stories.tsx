@@ -29,13 +29,15 @@ const defaultKnobs = () => ({
   form: select('form', paginationForms, paginationDefaultForm),
   size: select('size', paginationSizes, paginationDefaultSize),
   type: select('type', paginationTypes, paginationDefaultType),
-  position: select('position', paginationPositions, paginationDefaultPosition),
-  minified: boolean('minified', false),
 });
 
 export function Playground() {
-  const { pages, form, size, type, position, minified } = defaultKnobs();
   const [currentPage, setCurrentPage] = React.useState<number>(0);
+  const { pages, form, size, type } = defaultKnobs();
+  const minifiedProp = boolean('minified', false);
+  const positionProp = minifiedProp
+    ? undefined
+    : select('position', paginationPositions, paginationDefaultPosition);
 
   const hotKeys: HotKeys = {
     prevPage: {
@@ -61,8 +63,8 @@ export function Playground() {
         form={form}
         size={size}
         type={type}
-        position={position}
-        minified={minified}
+        position={positionProp as never}
+        minified={minifiedProp}
         hotkeys={hotKeys}
       />
     </div>

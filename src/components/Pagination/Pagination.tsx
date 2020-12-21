@@ -50,12 +50,19 @@ type Props = {
   form?: PaginationPropForm;
   size?: PaginationPropSize;
   type?: PaginationPropType;
-  position?: PaginationPropPosition;
-  minified?: boolean;
   hotkeys?: HotKeys;
   containerEventListener?: HTMLElement | Window;
   className?: string;
-};
+} & (
+  | {
+      minified?: true;
+      position?: never;
+    }
+  | {
+      minified?: false;
+      position?: PaginationPropPosition;
+    }
+);
 
 type Pagination = (
   props: PropsWithHTMLAttributesAndRef<Props, HTMLDivElement>,
