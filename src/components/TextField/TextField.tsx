@@ -30,16 +30,17 @@ export const textFieldPropViewDefault: TextFieldPropView = textFieldPropView[0];
 
 export const textFieldPropForm = [
   'default',
-  'brick',
-  'round',
-  'clear',
-  'clearRound',
-  'roundClear',
-  'clearDefault',
   'defaultClear',
   'defaultBrick',
+  'brick',
   'brickDefault',
   'brickClear',
+  'brickRound',
+  'round',
+  'roundClear',
+  'roundBrick',
+  'clearRound',
+  'clearDefault',
   'clearBrick',
   'clearClear',
 ] as const;
