@@ -49,11 +49,13 @@ export const getColumnLeftOffset = ({
 export const getNewSorting = <T extends TableRow>(
   currentSorting: SortingState<T>,
   newField: RowField<T>,
+  sortFn?: (a: T[keyof T], b: T[keyof T]) => number,
 ): SortingState<T> => {
   if (!currentSorting || currentSorting.by !== newField) {
     return {
       by: newField,
       order: 'asc',
+      sortFn,
     };
   }
 
@@ -61,6 +63,7 @@ export const getNewSorting = <T extends TableRow>(
     return {
       by: newField,
       order: 'desc',
+      sortFn,
     };
   }
 

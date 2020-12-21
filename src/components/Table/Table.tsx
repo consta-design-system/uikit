@@ -78,6 +78,8 @@ export type TableColumn<T extends TableRow> = {
   withoutPadding?: boolean;
   width?: ColumnWidth;
   mergeCells?: boolean;
+  renderCells?: (rowField: any) => React.ReactNode;
+  sortFn?: (a: any, b: any) => number;
 } & ({ sortable?: false } | { sortable: true; sortByField?: RowField<T> }) & {
     columns?: Array<TableColumn<T>>;
     position?: Position;
@@ -116,6 +118,7 @@ export type Props<T extends TableRow> = {
 export type SortingState<T extends TableRow> = {
   by: RowField<T>;
   order: 'asc' | 'desc';
+  sortFn?: (a: T[keyof T], b: T[keyof T]) => number;
 } | null;
 
 const getColumnSortByField = <T extends TableRow>(column: TableColumn<T>): RowField<T> =>
@@ -220,7 +223,7 @@ export const Table = <T extends TableRow>({
   };
 
   const handleSortClick = (column: TableColumn<T>): void => {
-    setSorting(getNewSorting(sorting, getColumnSortByField(column)));
+    setSorting(getNewSorting(sorting, getColumnSortByField(column), column.sortFn));
   };
 
   const handleFilterTogglerClick = (id: string) => (): void => {
@@ -333,7 +336,7 @@ export const Table = <T extends TableRow>({
     flattenedHeaders,
   );
 
-  const tableData = sorting ? sortBy(rows, sorting.by, sorting.order) : rows;
+  const tableData = sorting ? sortBy(rows, sorting.by, sorting.order, sorting.sortFn) : rows;
   const filteredData =
     !filters || !isSelectedFiltersPresent(selectedFilters)
       ? tableData
@@ -358,10 +361,14 @@ export const Table = <T extends TableRow>({
     (header) => header.mergeCells,
   );
 
+  const renderCell = (column: TableColumn<T>, row: TableRow): React.ReactNode => {
+    return column.renderCells ? column.renderCells(row[column.accessor]) : row[column.accessor];
+  };
+
   const getTableCellProps = (
     row: TableRow,
     rowIdx: number,
-    column: TableColumn<TableRow>,
+    column: TableColumn<T>,
     columnIdx: number,
   ) => {
     let rowSpan = 1;
@@ -518,7 +525,7 @@ export const Table = <T extends TableRow>({
                       isBorderTop={rowIdx > 0 && borderBetweenRows}
                       isBorderLeft={columnIdx > 0 && borderBetweenColumns}
                     >
-                      {row[column.accessor]}
+                      {renderCell(column, row)}
                     </TableCell>
                   );
                 }

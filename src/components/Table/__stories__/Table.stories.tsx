@@ -6,6 +6,7 @@ import { boolean, number, object, select, text } from '@storybook/addon-knobs';
 import {
   generateData,
   tableData,
+  tableDataWithRenderFn,
   tableWithBagdeData,
   tableWithMergedCellsData,
   tableWithMultiLevelHeadersData,
@@ -73,6 +74,10 @@ const getKnobs = (replacedProps?: Partial<Props<TableRow>>): Props<TableRow> => 
 
 export const Interactive = createStory(() => <Table {...getKnobs()} />, {
   name: 'обычная',
+});
+
+export const CustomRows = createStory(() => <Table {...getKnobs(tableDataWithRenderFn)} />, {
+  name: 'с рендер функцией столбцов',
 });
 
 export const WithMultiLevelHeaders = createStory(
