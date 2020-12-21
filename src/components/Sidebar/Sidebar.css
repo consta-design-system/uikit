@@ -50,28 +50,24 @@
         min-width: var(--width-min-horizontal);
         max-width: var(--width-max-horizontal);
         height: 100vh;
-        border-radius: var(--control-radius) 0 0 var(--control-radius);
       }
 
       &_bottom {
         width: 100vw;
         min-height: var(--height-min-vertical);
         max-height: var(--height-max-vertical);
-        border-radius: var(--control-radius) var(--control-radius) 0 0;
       }
 
       &_left {
         min-width: var(--width-min-horizontal);
         max-width: var(--width-max-horizontal);
         height: 100vh;
-        border-radius: 0 var(--control-radius) var(--control-radius) 0;
       }
 
       &_top {
         width: 100vw;
         min-height: var(--height-min-vertical);
         max-height: var(--height-max-vertical);
-        border-radius: 0 0 var(--control-radius) var(--control-radius);
       }
     }
   }
