@@ -18,20 +18,30 @@ export const multiComboboxPropSize = ['m', 's', 'l'] as const;
 export type MultiComboboxPropSize = typeof multiComboboxPropSize[number];
 export const multiComboboxPropSizeDefault = multiComboboxPropSize[0];
 
-export type MultiComboboxProps<ITEM> = CommonSelectProps<ITEM> &
+export type MultiComboboxProps<ITEM, GROUP> = Omit<CommonSelectProps<ITEM>, 'options'> &
   Omit<SelectContainerProps, 'value' | 'onChange'> & {
-    value?: ITEM[] | null;
-    onChange?(v: ITEM[] | null): void;
-    onCreate?(str: string): void;
-    getGroupOptions?(group: ITEM): ITEM[];
+    onChange?: (v: ITEM[] | null) => void;
+    onCreate?: (str: string) => void;
     labelForCreate?: string;
     labelForNotFound?: string;
+    value?: ITEM[] | null;
     size?: MultiComboboxPropSize;
-  };
+  } & (
+    | {
+        options: ITEM[];
+        getGroupOptions: never;
+      }
+    | {
+        options: GROUP[];
+        getGroupOptions?: (group: GROUP) => ITEM[];
+      }
+  );
 
-type MultiComboboxType = <ITEM>(props: MultiComboboxProps<ITEM>) => React.ReactElement | null;
+type MultiCombobox = <ITEM, GROUP>(
+  props: MultiComboboxProps<ITEM, GROUP>,
+) => React.ReactElement | null;
 
-export const MultiCombobox: MultiComboboxType = (props) => {
+export const MultiCombobox: MultiCombobox = (props) => {
   const defaultOptionsRef = useRef<HTMLDivElement | null>(null);
   const {
     placeholder,
@@ -102,8 +112,9 @@ export const MultiCombobox: MultiComboboxType = (props) => {
     getOptionProps,
     isOpen,
     setOpen,
+    // пирвел к типам в дальнейшем надо будет нормально типизировать useSelect
   } = useSelect({
-    options,
+    options: options as Item[],
     value: arrValue,
     onChange: handlerChangeValue,
     optionsRef: dropdownRef,
@@ -112,7 +123,7 @@ export const MultiCombobox: MultiComboboxType = (props) => {
     disabled,
     getOptionLabel,
     onCreate,
-    getGroupOptions,
+    getGroupOptions: getGroupOptions as undefined,
     multi: true,
     onSelectOption,
   });
