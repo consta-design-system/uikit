@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
@@ -40,17 +40,17 @@ const items: Group[] = [
 ];
 
 export const MultiComboboxExampleGroup = () => {
-  // const [value, setValue] = useState<Option[] | null>(null);
+  const [value, setValue] = useState<Option[] | null>(null);
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <MultiCombobox
         id="id"
         options={items}
         getOptionLabel={(option) => option.label}
-        // getGroupOptions={(group) => group.options}
+        getGroupOptions={(group) => group.options}
         placeholder="Выберите цвет"
-        // onChange={setValue}
-        // value={value}
+        onChange={setValue}
+        value={value}
       />
     </StoryBookExample>
   );
