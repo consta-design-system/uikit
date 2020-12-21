@@ -1,120 +1,114 @@
 import { Preview } from '@storybook/addon-docs/dist/blocks';
 
+import {
+  MultiComboboxExampleText,
+  MultiComboboxExampleSize,
+  MultiComboboxExampleForm,
+  MultiComboboxExampleView,
+} from './examples/MultiComboboxExample/MultiComboboxExample';
+
+import { MultiComboboxExampleCreate } from './examples/MultiComboboxExampleCreate/MultiComboboxExampleCreate';
+import { MultiComboboxExampleGroup } from './examples/MultiComboboxExampleGroup/MultiComboboxExampleGroup';
+
 # MultiCombobox
 
-MultiCombobox — компонент, реализующий элемент управления меню опций с полем для фильтрации.
+Выпадающий список. Очень похож на [Combobox](?path=/docs/components-combobox--default-story),
+но позволяет выбрать несколько вариантов (в Combobox можно выбрать только один).
 
-## Cвойства компонента
+Что может пользователь:
 
-| Свойство           | Тип или варианты значения                         | По умолчанию | Описание                                                                                      |
-| ------------------ | ------------------------------------------------- | ------------ | --------------------------------------------------------------------------------------------- |
-| disabled?          | `boolean`                                         | -            | Активность компонента                                                                         |
-| size?              | `s , m , l`                                       | `m`          | Размер компонента                                                                             |
-| view?              | `default , clear`                                 | `default`    | Внешний вид компонента                                                                        |
-| ariaLabel?         | `string`                                          | -            | `aria` атрибут для метки                                                                      |
-| placeholder?       | `string`                                          | -            | Placeholder — текст, который отобразится в качестве подсказки в пустом поле                   |
-| className?         | `string`                                          | -            | Дополнительный CSS-класс                                                                      |
-| dropdownClassName? | `string`                                          | -            | Дополнительный CSS-класс для выпадающего блока                                                |
-| value?             | `T[] , null`                                      | -            | Значение селекта, по умолчанию `null`.                                                        |
-| id                 | `string`                                          | -            | Идентификатор селекта                                                                         |
-| options            | `T[]`                                             | -            | Опции                                                                                         |
-| onChange?          | `(value: T[]|null) => void`                       | -            | Обработчик события изменения значения компонента                                              |
-| getOptionLabel     | `(arg: T) => string`                              | -            | Функция для получения текста опции, который будет отображаться в поле для выбранного значения |
-| onBlur?            | `(event?: React.FocusEvent<HTMLElement>) => void` | -            | Обработчик события `blur`                                                                     |
-| onFocus?           | `(event?: React.FocusEvent<HTMLElement>) => void` | -            | Обработчик события `focus`                                                                    |
-| onCreate?          | `(str: string) => void`                           | -            | Функция для создания новой опции                                                              |
-| getGroupOptions?   | `(group: T) => T[]`                               | -            | Функция для получения опций из группы                                                         |
+- выбрать **несколько вариантов** из списка,
+- написать в поле несколько символов — компонент покажет все варианты, в которых есть эти символы,
+- добавить вариант, которого нет в списке.
 
-По умолчанию компонент всегда занимает всё доступное пространство в блоке.
+Используйте MultiCombobox, если вариантов много и нужен поиск по значениям. Если вариантов меньше,
+подойдет [Checkbox](?path=/docs/components-checkbox--playground)
+или [ChoiceGroup](?path=/docs/components-choicegroup--playground).
 
-## Пример использования
+- [Варианты](#варианты)
+  - [Свой вариант](#свой-вариант)
+  - [Группы вариантов](#группы-вариантов)
+- [Размер](#размер)
+- [Внешний вид](#внешний-вид)
+- [Форма](#форма)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+  - [Вариант не выбран](#вариант-не-выбран)
+  - [Вариант выбран](#вариант-выбран)
 
-```ts
+## Варианты
+
+Варианты значений для выпадающего списка передаются в объекте `options`. Напишите их
+с заглавной буквы.
+
+Отобразить текст для конкретного варианта можно с помощью функции `getOptionLabel`.
+
+Подсказка, которая видна, когда ни один вариант не выбран, задается в свойстве `placeholder`.
+Сформулируйте подсказку так, чтобы стало понятно, что по клику на поле раскроется список вариантов,
+один из которых нужно выбрать. Если не знаете, что писать, напишите **Выберите**.
+
+<MultiComboboxExampleText />
+
+### Свой вариант
+
+Если в списке нет нужного варианта, пользователь может написать и отправить свой.
+Чтобы добавить эту возможность, используйте обработчик `onCreate`.
+
+Напечатайте любое слово в этом поле и нажмите **Добавить**.
+
+<MultiComboboxExampleCreate />
+
+```tsx
 import React from 'react';
 import { MultiCombobox } from '@consta/uikit/MultiCombobox';
 
-type Option = {
+type SelectOption = {
   label: string;
   value: string;
 };
 
-const items = [
-  { label: 'Москва', value: 'moscow' },
-  { label: 'Санкт-Петербург', value: 'spb' },
-  { label: 'Томск', value: 'tomsk' },
+const items: SelectOption[] = [
+  { label: 'Синий', value: 'blue' },
+  { label: 'Белый', value: 'white' },
+  { label: 'Красный', value: 'red' },
+  { label: 'Черный', value: 'black' },
+  { label: 'Зеленый', value: 'green' },
+  { label: 'В полосочку', value: 'stripe' },
 ];
 
-const Example = () => {
-  const getItemLabel = (option: SelectOption): string => option.label;
+export const MultiComboboxExampleCreate = () => {
+  const [options, setOptions] = useState<SelectOption[]>(items);
+  const [value, setValue] = useState<SelectOption[] | null>(null);
 
-  return <MultiCombobox id="city" options={items} getOptionLabel={getItemLabel} />;
-};
-```
+  const handleCreate = (label: string): void => {
+    const newItem = { label, value: label };
+    setOptions([newItem, ...options]);
+    const newValue = value ? [...value, newItem] : [newItem];
+    setValue(newValue);
+  };
 
-## С заданным значением
-
-```ts
-import React from 'react';
-import { MultiCombobox } from '@consta/uikit/MultiCombobox';
-
-type Option = {
-  label: string;
-  value: string;
-};
-
-const items = [
-  { label: 'Москва', value: 'moscow' },
-  { label: 'Санкт-Петербург', value: 'spb' },
-  { label: 'Томск', value: 'tomsk' },
-];
-
-const Example = () => {
   const getItemLabel = (option: SelectOption): string => option.label;
 
   return (
-    <MultiCombobox<Option>
-      id="city"
-      value={{ label: 'Москва', value: 'moscow' }}
-      options={items}
+    <MultiCombobox
+      id="color"
+      options={options}
       getOptionLabel={getItemLabel}
+      onCreate={handleCreate}
+      placeholder="Выберите цвет"
+      onChange={setValue}
+      value={value}
     />
   );
 };
 ```
 
-## С созданием опции
+### Группы вариантов
 
-```ts
-import React from 'react';
-import { MultiCombobox } from '@consta/uikit/MultiCombobox';
+Если вариантов много, их можно разбить на группы.
+Получить варианты из групп можно с помощью функции `getGroupOptions`.
 
-type Option = {
-  label: string;
-  value: string;
-};
-
-const items = [
-  { label: 'Москва', value: 'moscow' },
-  { label: 'Санкт-Петербург', value: 'spb' },
-  { label: 'Томск', value: 'tomsk' },
-];
-
-const Example = () => {
-  const getItemLabel = (option: SelectOption): string => option.label;
-
-  return (
-    <MultiCombobox<Option>
-      id="city"
-      value={{ label: 'Москва', value: 'moscow' }}
-      options={items}
-      getOptionLabel={getItemLabel}
-      onCreate={(str: string) => console.log}
-    />
-  );
-};
-```
-
-## С выводом групп опций
+<MultiComboboxExampleGroup /> -->
 
 ```ts
 import React from 'react';
@@ -132,35 +126,31 @@ type Group = {
 
 const items = [
   {
-    label: 'Фрукты',
+    label: 'Чистые цвета',
     options: [
-      {
-        label: 'Абрикос',
-        value: 'а1'
-      },
-      {
-        label: 'Хурма',
-        value: 'a2'
-      }
-    ]
+      { label: 'Синий', value: 'а1' },
+      { label: 'Зеленый', value: 'a2' },
+      { label: 'Красный', value: 'a3' },
+    ],
+  },
   {
-    label: 'Деревья',
+    label: 'Смешанные',
     options: [
-      {
-        label: 'Берёза',
-        value: 'b1'
-      },
-      {
-        label: 'Ясень',
-        value: 'b2'
-      }
-    ]
-  }
+      { label: 'Черно-белый', value: 'b1' },
+      { label: 'Серо-бурый', value: 'b2' },
+    ],
+  },
+  {
+    label: 'Паттерны',
+    options: [
+      { label: 'В горошек', value: 'c1' },
+      { label: 'В полосочку', value: 'c2' },
+    ],
+  },
 ];
 
 const Example = () => {
-  const getItemLabel = (option: SelectOption): string => option.label;
-
+  const getItemLabel = (option: SimpleOption): string => option.label;
 
   return (
     <MultiCombobox
@@ -169,6 +159,109 @@ const Example = () => {
       getOptionLabel={getItemLabel}
       onCreate={(str: string) => console.log}
       getGroupOptions={(group: Group): SimpleOption[] => group.options}
+    />
+  );
+};
+```
+
+## Внешний вид
+
+За вид компонента отвечает свойство `view`. Варианты: `default`, `clear`, по умолчанию `default`.
+
+Если хотите сделать компонент неактивным, используйте `disabled`.
+
+<MultiComboboxExampleView />
+
+## Размер
+
+За размер компонента отвечает свойство `size`. Варианты: `s` , `m` , `l` , по умолчанию `m`.
+
+Компонент занимает всю ширину родительского блока.
+
+<MultiComboboxExampleSize />
+
+## Форма
+
+За форму компонента отвечает свойство `form`. Варианты: `default`, `brick`, `round`.
+
+<MultiComboboxExampleForm />
+
+## Свойства
+
+| Свойство                                | Тип или варианты значения                              | По умолчанию | Описание                                                                                         |
+| --------------------------------------- | ------------------------------------------------------ | ------------ | ------------------------------------------------------------------------------------------------ |
+| [`view?`](#внешний-вид)                 | `default , clear`                                      | `default`    | Внешний вид компонента                                                                           |
+| [`form?`](#форма)                       | 'default', 'brick', 'round'                            | `default`    | Форма поля компонента                                                                            |
+| [`disabled?`](#внешний-вид)             | `boolean`                                              | -            | Делает компонент недоступным                                                                     |
+| [`size?`](#размер)                      | `'s' , 'm' , 'l'`                                      | `'m'`        | Размер компонента                                                                                |
+| [`placeholder?`](#варианты)             | `string`                                               | -            | Подсказка, отображается, когда вариант не выбран                                                 |
+| [`options`](#варианты)                  | `T[]`                                                  | -            | Варианты, которые можно выбрать                                                                  |
+| [`getOptionLabel`](#варианты)           | `(arg: T) => string`                                   | -            | Функция для получения текста варианта, который будет отображаться в поле для выбранного значения |
+| `value?`                                | `T , null`                                             | `null`       | Значение селекта                                                                                 |
+| `ariaLabel?`                            | `string`                                               | -            | `aria` атрибут для метки                                                                         |
+| `id`                                    | `string`                                               | -            | Идентификатор селекта в DOM                                                                      |
+| `onChange?`                             | `(value: string | null) => void`                       | -            | Обработчик события по изменению значения компонента                                              |
+| `onBlur?`                               | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -            | Обработчик события `blur`                                                                        |
+| `onFocus?`                              | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -            | Обработчик события `focus`                                                                       |
+| `labelForCreate?`                       | `string`                                               | -            | Текст при создании элемента                                                                      |
+| `labelForNotFound?`                     | `string`                                               | -            | Текст при отсуствии элементов при поиске                                                         |
+| `className?`                            | `string`                                               | -            | Дополнительный CSS-класс                                                                         |
+| dropdownClassName?                      | `string`                                               | -            | Дополнительный CSS-класс для выпадающего блока                                                   |
+| [`onCreate?`](#свой-вариант)            | `(str: string) => void`                                | -            | Функция для добавления своего варианта значения                                                  |
+| [`getGroupOptions?`](#группы-вариантов) | `(group: T) => T[]`                                    | -            | Функция для получения вариантов из группы                                                        |
+
+## Примеры
+
+### Вариант не выбран
+
+```ts
+import React from 'react';
+import { MultiCombobox } from '@consta/uikit/MultiCombobox';
+
+type SelectOption = {
+  label: string;
+  value: string;
+};
+
+const items = [
+  { label: 'Москва', value: 'moscow' },
+  { label: 'Санкт-Петербург', value: 'spb' },
+  { label: 'Томск', value: 'tomsk' },
+];
+
+const Example = () => {
+  const getItemLabel = (option: SelectOption): string => option.label;
+
+  return <MultiCombobox id="city" options={items} getOptionLabel={getItemLabel} />;
+};
+```
+
+### Вариант выбран
+
+```ts
+import React from 'react';
+import { MultiCombobox } from '@consta/uikit/MultiCombobox';
+
+type Option = {
+  label: string;
+  value: string;
+};
+
+const items = [
+  { label: 'Москва', value: 'moscow' },
+  { label: 'Санкт-Петербург', value: 'spb' },
+  { label: 'Томск', value: 'tomsk' },
+];
+
+const Example = () => {
+  const getItemLabel = (option: SelectOption): string => option.label;
+
+  return (
+    <MultiCombobox<Option>
+      id="city"
+      value={{ label: 'Москва', value: 'moscow' }}
+      options={items}
+      getOptionLabel={getItemLabel}
     />
   );
 };
