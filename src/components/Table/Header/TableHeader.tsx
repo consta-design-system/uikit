@@ -126,7 +126,8 @@ export const TableHeader = <T extends TableRow>({
               })}
               showVerticalShadow={
                 showVerticalCellShadow &&
-                column?.position!.gridIndex + (column?.position!.colSpan || 1) === stickyColumnsGrid
+                column?.position!.gridIndex! + (column?.position!.colSpan || 1) ===
+                  stickyColumnsGrid
               }
             >
               {column.title}
@@ -149,12 +150,12 @@ export const TableHeader = <T extends TableRow>({
                 )}
                 {filters && column.filterable && (
                   <TableFilterTooltip
-                    field={column.accessor}
+                    field={column.accessor!}
                     isOpened={visibleFilter === column.accessor}
-                    options={getOptionsForFilters(filters, column.accessor)}
-                    values={selectedFilters[column.accessor] || []}
+                    options={getOptionsForFilters(filters, column.accessor!)}
+                    values={selectedFilters[column.accessor!] || []}
                     onChange={handleTooltipSave}
-                    onToggle={handleFilterTogglerClick(column.accessor)}
+                    onToggle={handleFilterTogglerClick(column.accessor!)}
                     className={cnTableHeader('Icon', { type: 'filter' })}
                   />
                 )}

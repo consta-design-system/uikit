@@ -1,6 +1,6 @@
 import './TableCell.css';
 
-import React from 'react';
+import React, { Ref } from 'react';
 
 import { cn } from '../../../utils/bem';
 import { TableColumn, TableRow } from '../Table';
@@ -12,8 +12,8 @@ export type VerticalAlign = typeof verticalAligns[number];
 export const horizontalAligns = ['left', 'center', 'right'] as const;
 export type HorizontalAlign = typeof horizontalAligns[number];
 
-type Props = {
-  column: TableColumn<TableRow> & {
+type Props<T extends TableRow> = {
+  column: TableColumn<T> & {
     isSticky?: boolean;
     isResized?: boolean;
     filterable?: boolean;
@@ -42,7 +42,7 @@ type Props = {
     }
 );
 
-const getVerticalAlign = (props: Props): string | undefined => {
+const getVerticalAlign = <T extends TableRow>(props: Props<T>): string | undefined => {
   if (props.type === 'header') {
     return 'center';
   }
@@ -50,7 +50,7 @@ const getVerticalAlign = (props: Props): string | undefined => {
   return 'verticalAlign' in props ? props.verticalAlign : undefined;
 };
 
-const getCellClasses = (props: Props): string => {
+const getCellClasses = <T extends TableRow>(props: Props<T>): string => {
   const { column, showVerticalShadow, className } = props;
 
   return cnTableCell(
@@ -73,7 +73,7 @@ const getCellClasses = (props: Props): string => {
   );
 };
 
-const getWrapperClasses = (props: Props): string => {
+const getWrapperClasses = <T extends TableRow>(props: Props<T>): string => {
   const { column, wrapperClassName } = props;
 
   return cnTableCell(
@@ -87,21 +87,23 @@ const getWrapperClasses = (props: Props): string => {
   );
 };
 
-export const TableCell = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
-  const { style, onClick, children } = props;
+export const TableCell = React.forwardRef(
+  <T extends TableRow>(props: React.PropsWithChildren<Props<T>>, ref: Ref<HTMLDivElement>) => {
+    const { style, onClick, children } = props;
 
-  const propsWithRole = onClick
-    ? {
-        role: 'button',
-        onClick,
-      }
-    : {
-        role: 'cell',
-      };
+    const propsWithRole = onClick
+      ? {
+          role: 'button',
+          onClick,
+        }
+      : {
+          role: 'cell',
+        };
 
-  return (
-    <div {...propsWithRole} ref={ref} className={getCellClasses(props)} style={style}>
-      <div className={getWrapperClasses(props)}>{children}</div>
-    </div>
-  );
-});
+    return (
+      <div {...propsWithRole} ref={ref} className={getCellClasses(props)} style={style}>
+        <div className={getWrapperClasses(props)}>{children}</div>
+      </div>
+    );
+  },
+) as <T extends TableRow>(p: Props<T> & { ref?: Ref<HTMLDivElement> }) => React.ReactElement;

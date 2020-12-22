@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Badge } from '../../Badge/Badge';
-import { Props as TableProps, TableFilters as Filters, TableRow } from '../Table';
+import { Props, TableFilters as Filters } from '../Table';
 
 export const rows = [
   {
@@ -60,174 +60,174 @@ export const filters: Filters<typeof rows[number]> = [
   {
     id: 'olderThan2018',
     name: 'Старше 2018 года',
-    filterer: (value: number | string) => Number(value) > 2018,
+    filterer: (value) => value > 2018,
     field: 'year',
   },
   {
     id: 'olderThan2000',
     name: 'Старше 2000 года',
-    filterer: (value: number | string) => Number(value) > 2000,
+    filterer: (value) => value > 2000,
     field: 'year',
   },
   {
     id: 'inRangeOf90s',
     name: 'Датируемые 90-ми годами',
-    filterer: (value: number | string) => Number(value) >= 1990 && Number(value) <= 1999,
+    filterer: (value) => value >= 1990 && value <= 1999,
     field: 'year',
   },
   {
     id: 'equalOrOlder80s',
     name: 'Датируемые 80-ми годами и старше',
-    filterer: (value: number | string) => Number(value) <= 1989,
+    filterer: (value) => value <= 1989,
     field: 'year',
   },
   {
     id: 'oil',
     name: 'Нефтяное',
-    filterer: (value: string) => value === 'Нефтяное',
+    filterer: (value) => value === 'Нефтяное',
     field: 'type',
   },
   {
     id: 'condensated',
     name: 'Конденсатное',
-    filterer: (value: string) => value === 'Конденсатное',
+    filterer: (value) => value === 'Конденсатное',
     field: 'type',
   },
   {
     id: 'combined',
     name: 'Комбинированное',
-    filterer: (value: string) => value === 'Комбинированное',
+    filterer: (value) => value === 'Комбинированное',
     field: 'type',
   },
   {
     id: 'priobskoye',
     name: 'Приобское',
-    filterer: (value: string) => value === 'Приобское',
+    filterer: (value) => value === 'Приобское',
     field: 'field',
   },
   {
     id: 'urengoyskoye',
     name: 'Уренгойское газонефтеконденсат­ное',
-    filterer: (value: string) => value === 'Уренгойское газонефтеконденсат­ное',
+    filterer: (value) => value === 'Уренгойское газонефтеконденсат­ное',
     field: 'field',
   },
   {
     id: 'krasnoleninskaya',
     name: 'Красноленинская группа',
-    filterer: (value: string) => value === 'Красноленинская группа',
+    filterer: (value) => value === 'Красноленинская группа',
     field: 'field',
   },
   {
     id: 'velikoye',
     name: 'Великое',
-    filterer: (value: string) => value === 'Великое',
+    filterer: (value) => value === 'Великое',
     field: 'field',
   },
   {
     id: 'rusGasoil',
     name: 'Русское газонефтяное',
-    filterer: (value: string) => value === 'Русское газонефтяное',
+    filterer: (value) => value === 'Русское газонефтяное',
     field: 'field',
   },
   {
     id: 'estimatedReservesLessThan1000',
     name: 'Меньше 1000',
-    filterer: (value: number | string) => Number(value) < 1000,
+    filterer: (value) => value < 1000,
     field: 'estimatedReserves',
   },
   {
     id: 'estimatedReservesFrom1000To5000',
     name: 'От 1000 (вкл.) до 5000 (не вкл.)',
-    filterer: (value: number | string) => Number(value) >= 1000 && Number(value) < 5000,
+    filterer: (value) => value >= 1000 && value < 5000,
     field: 'estimatedReserves',
   },
   {
     id: 'estimatedReservesFrom5000To8000',
     name: 'От 5000 (вкл.) до 8000 (не вкл.)',
-    filterer: (value: number | string) => Number(value) >= 5000 && Number(value) < 8000,
+    filterer: (value) => value >= 5000 && value < 8000,
     field: 'estimatedReserves',
   },
   {
     id: 'estimatedReserves8000AndMore',
     name: '8000 и более',
-    filterer: (value: number | string) => Number(value) >= 8000,
+    filterer: (value) => value >= 8000,
     field: 'estimatedReserves',
   },
   {
     id: 'remainingReservesLessThan1000',
     name: 'Меньше 1000',
-    filterer: (value: number | string) => Number(value) < 1000,
+    filterer: (value) => value < 1000,
     field: 'remainingReserves',
   },
   {
     id: 'remainingReservesFrom1000To5000',
     name: 'От 1000 (вкл.) до 5000 (не вкл)',
-    filterer: (value: number | string) => Number(value) >= 1000 && Number(value) < 5000,
+    filterer: (value) => value >= 1000 && value < 5000,
     field: 'remainingReserves',
   },
   {
     id: 'remainingReservesFrom5000To8000',
     name: 'От 5000 (вкл.) до 8000 (не вкл)',
-    filterer: (value: number | string) => Number(value) >= 5000 && Number(value) < 8000,
+    filterer: (value) => value >= 5000 && value < 8000,
     field: 'remainingReserves',
   },
   {
     id: 'remainingReserves8000AndMore',
     name: '8000 и более',
-    filterer: (value: number | string) => Number(value) >= 8000,
+    filterer: (value) => value >= 8000,
     field: 'remainingReserves',
   },
   {
     id: 'productionLessThan100',
     name: 'Меньше 100',
-    filterer: (value: number | string) => Number(value) < 100,
+    filterer: (value) => value < 100,
     field: 'production',
   },
   {
     id: 'productionFrom100To200',
     name: 'От 100 (вкл.) до 200 (не вкл.)',
-    filterer: (value: number | string) => Number(value) >= 100 && Number(value) < 200,
+    filterer: (value) => value >= 100 && value < 200,
     field: 'production',
   },
   {
     id: 'productionFrom200To300',
     name: 'От 200 (вкл.) до 300 (не вкл.)',
-    filterer: (value: number | string) => Number(value) >= 200 && Number(value) < 300,
+    filterer: (value) => value >= 200 && value < 300,
     field: 'production',
   },
   {
     id: 'productionMoreThan300',
     name: '300 и более',
-    filterer: (value: number | string) => Number(value) >= 300,
+    filterer: (value) => value >= 300,
     field: 'production',
   },
   {
     id: 'totalLessThan100',
     name: 'Меньше 100',
-    filterer: (value: number | string) => Number(value) < 100,
+    filterer: (value) => value < 100,
     field: 'total',
   },
   {
     id: 'totalFrom100To200',
     name: 'От 100 (вкл.) до 200 (не вкл.)',
-    filterer: (value: number | string) => Number(value) >= 100 && Number(value) < 200,
+    filterer: (value) => value >= 100 && value < 200,
     field: 'total',
   },
   {
     id: 'totalFrom200To300',
     name: 'От 200 (вкл.) до 300 (не вкл.)',
-    filterer: (value: number | string) => Number(value) >= 200 && Number(value) < 300,
+    filterer: (value) => value >= 200 && value < 300,
     field: 'total',
   },
   {
     id: 'totalMoreThan300',
     name: '300 и более',
-    filterer: (value: number | string) => Number(value) >= 300,
+    filterer: (value) => value >= 300,
     field: 'total',
   },
 ];
 
-export const tableData: TableProps<typeof rows[number]> = {
+export const tableData: Props<typeof rows[number]> = {
   columns: [
     {
       title: 'Месторождение',
@@ -366,7 +366,7 @@ const rowsForMultiLevelHeadersData = [
   },
 ];
 
-export const tableWithMultiLevelHeadersData = {
+export const tableWithMultiLevelHeadersData: Props<typeof rowsForMultiLevelHeadersData[number]> = {
   columns: [
     {
       title: 'Месторождение',
@@ -434,7 +434,7 @@ const badgeParams: React.ComponentProps<typeof Badge> = {
   size: 'm',
 };
 
-const tableWithTrafficLightDataRows: TableRow[] = [
+const tableWithTrafficLightDataRows = [
   {
     id: 'row1',
     field: 'Северный бур',
@@ -465,7 +465,7 @@ const tableWithTrafficLightDataRows: TableRow[] = [
   },
 ];
 
-export const tableWithBagdeData: TableProps<typeof tableWithTrafficLightDataRows[number]> = {
+export const tableWithBagdeData: Props<typeof tableWithTrafficLightDataRows[number]> = {
   columns: [
     {
       title: 'Локация',
@@ -492,38 +492,38 @@ export const tableWithBagdeData: TableProps<typeof tableWithTrafficLightDataRows
     {
       id: 'fieldNorthDrill',
       name: 'Северный бур',
-      filterer: (value: string) => value === 'Северный бур',
+      filterer: (value) => value === 'Северный бур',
       field: 'field',
     },
     {
       id: 'fieldSouthWell',
       name: 'Южное месторождение',
-      filterer: (value: string) => value === 'Южное месторождение',
+      filterer: (value) => value === 'Южное месторождение',
       field: 'field',
     },
     {
       id: 'fieldWestCrack',
       name: 'Западный разлом',
-      filterer: (value: string) => value === 'Западный разлом',
+      filterer: (value) => value === 'Западный разлом',
       field: 'field',
     },
 
     {
       id: 'sumLess10',
       name: 'Менее 10',
-      filterer: (value: number | string) => Number(value) < 10,
+      filterer: (value) => value < 10,
       field: 'sum',
     },
     {
       id: 'sumFrom10To20',
       name: 'От 10 (вкл.) до 20 (не вкл.)',
-      filterer: (value: number | string) => Number(value) >= 10 && Number(value) < 20,
+      filterer: (value) => value >= 10 && value < 20,
       field: 'sum',
     },
     {
       id: 'sum20AndMore',
       name: '20 и более',
-      filterer: (value: number | string) => Number(value) >= 20,
+      filterer: (value) => value >= 20,
       field: 'sum',
     },
   ],
@@ -867,7 +867,7 @@ const rowsWithObjectFields = [
   },
 ];
 
-export const tableDataWithRenderFn: TableProps<typeof rowsWithObjectFields[number]> = {
+export const tableDataWithRenderFn: Props<typeof rowsWithObjectFields[number]> = {
   columns: [
     {
       title: 'Месторождение',
@@ -880,9 +880,9 @@ export const tableDataWithRenderFn: TableProps<typeof rowsWithObjectFields[numbe
       accessor: 'year',
       align: 'center',
       sortable: true,
-      sortFn: (a, b): number => (a.value < b.value ? -1 : 1),
-      renderCells: (data): React.ReactNode => {
-        return <h2>{data.value}</h2>;
+      sortFn: (a, b): number => a.value - b.value,
+      renderCell: (row): React.ReactNode => {
+        return <h2>{row.year.value}</h2>;
       },
     },
     {
@@ -920,49 +920,49 @@ export const tableDataWithRenderFn: TableProps<typeof rowsWithObjectFields[numbe
     {
       id: 'olderThan2018',
       name: 'Старше 2018 года',
-      filterer: (data) => Number(data.value) > 2018,
+      filterer: (data) => data.value > 2018,
       field: 'year',
     },
     {
       id: 'olderThan2000',
       name: 'Старше 2000 года',
-      filterer: (data) => Number(data.value) > 2000,
+      filterer: (data) => data.value > 2000,
       field: 'year',
     },
     {
       id: 'inRangeOf90s',
       name: 'Датируемые 90-ми годами',
-      filterer: (data) => Number(data.value) >= 1990 && Number(data.value) <= 1999,
+      filterer: (data) => data.value >= 1990 && data.value <= 1999,
       field: 'year',
     },
     {
       id: 'equalOrOlder80s',
       name: 'Датируемые 80-ми годами и старше',
-      filterer: (data) => Number(data.value) <= 1989,
+      filterer: (data) => data.value <= 1989,
       field: 'year',
     },
     {
       id: 'remainingReservesLessThan1000',
       name: 'Меньше 1000',
-      filterer: (value: number | string) => Number(value) < 1000,
+      filterer: (value) => value < 1000,
       field: 'remainingReserves',
     },
     {
       id: 'remainingReservesFrom1000To5000',
       name: 'От 1000 (вкл.) до 5000 (не вкл)',
-      filterer: (value: number | string) => Number(value) >= 1000 && Number(value) < 5000,
+      filterer: (value) => value >= 1000 && value < 5000,
       field: 'remainingReserves',
     },
     {
       id: 'remainingReservesFrom5000To8000',
       name: 'От 5000 (вкл.) до 8000 (не вкл)',
-      filterer: (value: number | string) => Number(value) >= 5000 && Number(value) < 8000,
+      filterer: (value) => value >= 5000 && value < 8000,
       field: 'remainingReserves',
     },
     {
       id: 'remainingReserves8000AndMore',
       name: '8000 и более',
-      filterer: (value: number | string) => Number(value) >= 8000,
+      filterer: (value) => value >= 8000,
       field: 'remainingReserves',
     },
   ],

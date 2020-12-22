@@ -62,16 +62,22 @@ describe('getColumnLeftOffset', () => {
   });
 });
 
-describe('getNewSorting', () => {
+type TestRow = {
+  id: string;
+  field: string;
+  anotherField: string;
+};
+
+describe('getNewSorting', <T extends TestRow>() => {
   it('устанавливает сортировку по полю, если не было сортировки', () => {
-    expect(getNewSorting(null, 'field')).toEqual({
+    expect(getNewSorting<T>(null, 'field')).toEqual({
       by: 'field',
       order: 'asc',
     });
   });
 
   it('устанавливает сортировку по полю, если было отсортировано по другому полю', () => {
-    const result = getNewSorting({ by: 'anotherField', order: 'asc' }, 'field');
+    const result = getNewSorting<T>({ by: 'anotherField', order: 'asc' }, 'field');
 
     expect(result).toEqual({
       by: 'field',
@@ -80,7 +86,7 @@ describe('getNewSorting', () => {
   });
 
   it('устанавливает сортировку по убыванию, если было отсортировано по возрастанию', () => {
-    const result = getNewSorting({ by: 'field', order: 'asc' }, 'field');
+    const result = getNewSorting<T>({ by: 'field', order: 'asc' }, 'field');
 
     expect(result).toEqual({
       by: 'field',
@@ -89,7 +95,7 @@ describe('getNewSorting', () => {
   });
 
   it('убирает сортировку, если было отсортировано по убыванию', () => {
-    const result = getNewSorting({ by: 'field', order: 'desc' }, 'field');
+    const result = getNewSorting<T>({ by: 'field', order: 'desc' }, 'field');
 
     expect(result).toEqual(null);
   });
