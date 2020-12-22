@@ -41,7 +41,7 @@ const cnTable = cn('Table');
 export const sizes = ['s', 'm', 'l'] as const;
 type Size = typeof sizes[number];
 
-export const zebraStriped = ['odd', 'even'] as const;
+export const zebraStriped = ['odd', 'even', 'chess-odd', 'chess-even'] as const;
 type ZebraStriped = typeof zebraStriped[number];
 
 type TableCSSCustomProperty = {

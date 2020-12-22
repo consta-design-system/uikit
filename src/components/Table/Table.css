@@ -61,6 +61,34 @@
       background-color: var(--color-bg-stripe);
     }
 
+    .Table_zebraStriped_chess-even
+      .Table-CellsRow_nth_even:not(:hover)
+      .TableCell:nth-child(odd)
+      &:not(&_isActive) {
+      background-color: var(--color-bg-stripe);
+    }
+
+    .Table_zebraStriped_chess-even
+      .Table-CellsRow_nth_odd:not(:hover)
+      .TableCell:nth-child(even)
+      &:not(&_isActive) {
+      background-color: var(--color-bg-stripe);
+    }
+
+    .Table_zebraStriped_chess-odd
+      .Table-CellsRow_nth_odd:not(:hover)
+      .TableCell:nth-child(odd)
+      &:not(&_isActive) {
+      background-color: var(--color-bg-stripe);
+    }
+
+    .Table_zebraStriped_chess-odd
+      .Table-CellsRow_nth_even:not(:hover)
+      .TableCell:nth-child(even)
+      &:not(&_isActive) {
+      background-color: var(--color-bg-stripe);
+    }
+
     &_isActive,
     .Table-CellsRow:hover & {
       background-color: var(--color-bg-ghost);
