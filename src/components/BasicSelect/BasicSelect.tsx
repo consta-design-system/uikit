@@ -100,6 +100,11 @@ export const BasicSelect: Select = (props) => {
   };
 
   const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>): void => {
+    if (isOpen) {
+      toggleRef.current?.focus();
+      return;
+    }
+
     if (isFocused) {
       setIsFocused(false);
 

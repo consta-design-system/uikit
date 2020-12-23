@@ -140,6 +140,11 @@ export const MultiCombobox: MultiCombobox = (props) => {
   };
 
   const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>): void => {
+    if (isOpen) {
+      toggleRef.current?.focus();
+      return;
+    }
+
     if (isFocused) {
       setIsFocused(false);
 
