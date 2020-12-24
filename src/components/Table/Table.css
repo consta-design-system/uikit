@@ -52,6 +52,10 @@
     grid-column: 1 / -1;
   }
 
+  .Table-CellsRow:hover .Table-AdditionalRow {
+    background-color: var(--color-bg-ghost);
+  }
+
   &-ContentCell {
     .Table_zebraStriped_even .Table-CellsRow_nth_even:not(:hover) &:not(&_isActive) {
       background-color: var(--color-bg-stripe);

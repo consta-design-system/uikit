@@ -115,6 +115,8 @@ export type Props<T extends TableRow> = {
   onRowHover?: onRowHover;
   lazyLoad?: LazyLoad;
   onFiltersUpdated?: (filters: SelectedFilters) => void;
+  renderAdditionalRowCells?: (row: TableRow, className: string) => React.ReactNode;
+  getSortingIcon?: (isSorted: boolean, isDesc: boolean) => React.ReactNode;
 };
 
 export type SortingState<T extends TableRow> = {
@@ -166,6 +168,8 @@ export const Table = <T extends TableRow>({
   lazyLoad,
   onSortBy,
   onFiltersUpdated,
+  renderAdditionalRowCells,
+  getSortingIcon,
 }: Props<T>): React.ReactElement => {
   const {
     headers,
@@ -235,6 +239,9 @@ export const Table = <T extends TableRow>({
     getColumnSortByField(column) === sorting?.by;
 
   const getSortIcon = (column: TableColumn<T>) => {
+    if (getSortingIcon) {
+      return getSortingIcon(isSortedByColumn(column), sorting?.order === 'desc');
+    }
     return (
       (isSortedByColumn(column) && (sorting?.order === 'desc' ? IconSortDown : IconSortUp)) ||
       IconUnsort
@@ -554,6 +561,7 @@ export const Table = <T extends TableRow>({
                 }
                 return null;
               })}
+              {renderAdditionalRowCells && renderAdditionalRowCells(row, cnTable('AdditionalRow'))}
             </div>
           );
         })

@@ -307,6 +307,30 @@ export const WithMergedCells = createStory(
   },
 );
 
+export const WithAditionalRows = createStory(
+  () => (
+    <Table
+      {...getKnobs()}
+      renderAdditionalRowCells={(_, className) => {
+        return (
+          <div
+            className={className}
+            style={{
+              gridColumnStart: 1,
+              gridColumnEnd: 8,
+            }}
+          >
+            test
+          </div>
+        );
+      }}
+    />
+  ),
+  {
+    name: 'с дополнительными строками',
+  },
+);
+
 export default createMetadata({
   title: 'Компоненты|/Table',
   id: 'components/Table',
