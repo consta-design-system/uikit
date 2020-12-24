@@ -44,6 +44,7 @@ export const BasicSelect: Select = (props) => {
     view = DefaultPropView,
     size = DefaultPropSize,
     dropdownClassName,
+    name,
     ...restProps
   } = props;
   const toggleRef = useRef<HTMLInputElement>(null);
@@ -146,6 +147,7 @@ export const BasicSelect: Select = (props) => {
             <input
               {...getToggleProps()}
               type="button"
+              name={name}
               onFocus={handleInputFocus}
               onBlur={handleInputBlur}
               aria-label={ariaLabel}

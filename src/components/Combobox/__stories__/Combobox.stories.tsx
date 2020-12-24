@@ -59,6 +59,7 @@ const Default = (props: {
       <Combobox
         {...getKnobs()}
         id="example"
+        name="item"
         options={items}
         value={val}
         getOptionLabel={getItemLabel}
