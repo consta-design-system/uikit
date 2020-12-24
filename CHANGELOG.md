@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.10.12 (24/12/2020)
+
+- [feat(ContextMenu): added component (#715)](https://github.com/gazprom-neft/consta-uikit/commit/8bb83e1e98cd5d1a500a2e578cbf3dad66b50876) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Breadcrumbs): added Breadcrumbs (#677)](https://github.com/gazprom-neft/consta-uikit/commit/6440250be77ecdba6b6049ece1ea6f9d6ada6b7c) - [@dmitriykorsakovnedra](https://github.com/dmitriykorsakovnedra)
+- [feat(Pagination): fixed prop types (#720)](https://github.com/gazprom-neft/consta-uikit/commit/ba527a92dd7dcd58c3104526e6a9f6773a8ad98e) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
+- [docs(Sidebar): fix sidebar example bottom (#730)](https://github.com/gazprom-neft/consta-uikit/commit/11adb18230019c365e287f4152c01843fc30cdfc) - [@arhayka](https://github.com/arhayka)
+- [fix(SideBar): remove extra border-radius (#723)](https://github.com/gazprom-neft/consta-uikit/commit/16b05716a4a7512bd96787644083b2f4a97cc346) - [@fooontic](https://github.com/fooontic)
+- [ docs(MultiCombobox): add docs for MultiCombobox (#639)](https://github.com/gazprom-neft/consta-uikit/commit/3ddbe119d62795ac8820c199aa584ee0c8e450c3) - [@arhayka](https://github.com/arhayka)
+- [fix(MultiCombobox): fixed getGroupOptions types (#717)](https://github.com/gazprom-neft/consta-uikit/commit/e43de5b859401718c58bb17686a320cf1cecfb78) - [@gizeasy](https://github.com/gizeasy)
+
+---
+
 ## v1.10.11 (18/12/2020)
 
 - [feat(Responses): add new components (#656)](https://github.com/gazprom-neft/consta-uikit/commit/f1798bca4d5302e99a0bb26e722413ff730bb1c1) - [@Miocene](https://github.com/Miocene)
