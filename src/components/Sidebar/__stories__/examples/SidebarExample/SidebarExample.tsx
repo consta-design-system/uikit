@@ -255,7 +255,7 @@ export const SidebarExampleBottom = () => {
         className={cnSidebarExample('Sidebar')}
         isOpen={isSidebarOpen}
         onOverlayClick={() => setIsSidebarOpen(false)}
-        position="right"
+        position="bottom"
       >
         <Sidebar.Content className={cnSidebarExample('Content')}>
           <Text
