@@ -116,7 +116,7 @@ export type Props<T extends TableRow> = {
   lazyLoad?: LazyLoad;
   onFiltersUpdated?: (filters: SelectedFilters) => void;
   renderAdditionalRowCells?: (row: TableRow, className: string) => React.ReactNode;
-  getSortingIcon?: (isSorted: boolean, isDesc: boolean) => React.ReactNode;
+  getSortingIcon?: (isSorted: boolean, isDesc: boolean) => React.FC;
 };
 
 export type SortingState<T extends TableRow> = {
