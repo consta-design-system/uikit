@@ -40,6 +40,7 @@ const defaultProps = {
   zebraStriped: '',
 } as const;
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const getSizeKnob = () => select('size', sizes, 'l');
 const getFiltersKnob = (filters?: Filters<TableRow>): Filters<TableRow> | undefined => {
   const isFilterable = boolean('filterable', true);
@@ -82,7 +83,11 @@ export const WithMultiLevelHeaders = createStory(
 const WithActiveRowContent = (): JSX.Element => {
   const [activeRow, setActiveRow] = React.useState<string>();
 
-  return <Table {...getKnobs()} activeRow={{ id: activeRow, onChange: setActiveRow }} />;
+  const handleClickRow = ({ id }: { id?: string }): void => {
+    setActiveRow(id);
+  };
+
+  return <Table {...getKnobs()} activeRow={{ id: activeRow, onChange: handleClickRow }} />;
 };
 
 export const WithActiveRow = createStory(() => <WithActiveRowContent />, {
@@ -195,7 +200,7 @@ const WithOnRowHoverContent = (): JSX.Element => {
       {...getKnobs()}
       columns={columns}
       rows={rows}
-      onRowHover={({ id }) => setHoveredRow(id)}
+      onRowHover={({ id }): void => setHoveredRow(id)}
     />
   );
 };
@@ -234,6 +239,7 @@ export const WithBigData = createStory(
 
 export const SortByData = createStory(
   () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [sortSetting, setSortSetting] = useState<SortByProps<any> | null>(null);
     const data = [
       {

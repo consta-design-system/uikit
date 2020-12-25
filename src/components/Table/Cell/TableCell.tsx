@@ -18,7 +18,7 @@ type Props = {
     isResized?: boolean;
     filterable?: boolean;
   };
-  onClick?: () => void;
+  onClick?: (e: React.SyntheticEvent) => void;
   style?: React.CSSProperties;
   className?: string;
   wrapperClassName?: string;

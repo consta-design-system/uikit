@@ -57,7 +57,7 @@ export type LazyLoad =
 
 type ActiveRow = {
   id: string | undefined;
-  onChange: (id: string | undefined) => void;
+  onChange: ({ id, e }: { id: string | undefined; e?: React.SyntheticEvent }) => void;
 };
 
 type onRowHover = ({ id, e }: { id: string | undefined; e: React.MouseEvent }) => void;
@@ -297,14 +297,18 @@ export const Table = <T extends TableRow>({
     });
   };
 
-  const handleSelectRow = (id: string): (() => void) | undefined => {
+  const handleSelectRow = ({
+    id,
+    e,
+  }: {
+    id: string;
+    e: React.SyntheticEvent;
+  }): void | undefined => {
     if (!activeRow || !activeRow.onChange) {
       return;
     }
 
-    return (): void => {
-      activeRow.onChange(activeRow.id === id ? undefined : id);
-    };
+    activeRow.onChange({ id: activeRow.id === id ? undefined : id, e });
   };
 
   const handleColumnResize = (idx: number, delta: number): void => {
@@ -536,7 +540,9 @@ export const Table = <T extends TableRow>({
                           : false,
                         isMerged: column.mergeCells && rowSpan > 1,
                       })}
-                      onClick={handleSelectRow(row.id)}
+                      onClick={(e: React.SyntheticEvent): void =>
+                        handleSelectRow({ id: row.id, e })
+                      }
                       column={column}
                       verticalAlign={verticalAlign}
                       isClickable={!!isRowsClickable}
