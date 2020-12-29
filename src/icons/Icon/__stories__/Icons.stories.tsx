@@ -53,6 +53,7 @@ import { IconDocFilled } from '../../IconDocFilled/IconDocFilled';
 import { IconDown } from '../../IconDown/IconDown';
 import { IconDownload } from '../../IconDownload/IconDownload';
 import { IconDrag } from '../../IconDrag/IconDrag';
+import { IconDraggable } from '../../IconDraggable/IconDraggable';
 import { IconDrillingRig } from '../../IconDrillingRig/IconDrillingRig';
 import { IconDrop } from '../../IconDrop/IconDrop';
 import { IconEdit } from '../../IconEdit/IconEdit';
@@ -83,10 +84,12 @@ import { IconKebab } from '../../IconKebab/IconKebab';
 import { IconLaptop } from '../../IconLaptop/IconLaptop';
 import { IconLayers } from '../../IconLayers/IconLayers';
 import { IconLeaf } from '../../IconLeaf/IconLeaf';
+import { IconLightningBolt } from '../../IconLightningBolt/IconLightningBolt';
 import { IconLink } from '../../IconLink/IconLink';
 import { IconList } from '../../IconList/IconList';
 import { IconListNumbered } from '../../IconListNumbered/IconListNumbered';
 import { IconLock } from '../../IconLock/IconLock';
+import { IconLogicalElement } from '../../IconLogicalElement/IconLogicalElement';
 import { IconMail } from '../../IconMail/IconMail';
 import { IconMap } from '../../IconMap/IconMap';
 import { IconMaxHeight } from '../../IconMaxHeight/IconMaxHeight';
@@ -155,8 +158,10 @@ import { IconTop } from '../../IconTop/IconTop';
 import { IconTrash } from '../../IconTrash/IconTrash';
 import { IconType } from '../../IconType/IconType';
 import { IconUnderline } from '../../IconUnderline/IconUnderline';
+import { IconUnlock } from '../../IconUnlock/IconUnlock';
 import { IconUnsort } from '../../IconUnsort/IconUnsort';
 import { IconUnsortCenter } from '../../IconUnsortCenter/IconUnsortCenter';
+import { IconUpload } from '../../IconUpload/IconUpload';
 import { IconUser } from '../../IconUser/IconUser';
 import { IconVideo } from '../../IconVideo/IconVideo';
 import { IconVZD } from '../../IconVZD/IconVZD';
@@ -231,6 +236,7 @@ const icons = {
   IconDown,
   IconDownload,
   IconDrag,
+  IconDraggable,
   IconDrillingRig,
   IconDrop,
   IconEdit,
@@ -261,10 +267,12 @@ const icons = {
   IconLaptop,
   IconLayers,
   IconLeaf,
+  IconLightningBolt,
   IconLink,
   IconList,
   IconListNumbered,
   IconLock,
+  IconLogicalElement,
   IconMBU,
   IconMGRP,
   IconMLSP,
@@ -333,8 +341,10 @@ const icons = {
   IconTrash,
   IconType,
   IconUnderline,
+  IconUnlock,
   IconUnsort,
   IconUnsortCenter,
+  IconUpload,
   IconUser,
   IconVZD,
   IconVideo,

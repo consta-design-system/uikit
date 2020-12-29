@@ -64,7 +64,6 @@ export const ProgressSpin = React.forwardRef<SVGSVGElement, ProgressSpinProps>((
         cx={sizeOfPixels / 2}
         cy={sizeOfPixels / 2}
         r={radius}
-        fill="none"
         strokeWidth={strokeWidth}
         strokeDasharray={strokeDasharray}
         strokeDashoffset={strokeDashoffset}
