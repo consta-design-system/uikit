@@ -7,6 +7,7 @@ import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
+import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 
 export type TextFieldPropValue = string | null;
 export type TextFieldPropName = string;
@@ -140,7 +141,7 @@ export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>((props
     ariaLabel,
     iconSize: iconSizeProp,
     ...otherProps
-  } = props;
+  } = usePropsHandler(cnTextField(), props);
   const [focus, setFocus] = useState<boolean>(autoFocus);
   const textarea = type === 'textarea';
   const LeftIcon = leftSide;

@@ -5,6 +5,7 @@ import React, { ChangeEventHandler } from 'react';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
+import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 
 export const checkboxPropSize = ['m', 'l'] as const;
 export type CheckboxPropSize = typeof checkboxPropSize[number];
@@ -68,7 +69,7 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>((props
     tabIndex,
     inputRef,
     ...otherProps
-  } = props;
+  } = usePropsHandler(cnCheckbox(), props);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     onChange({ e, checked: !checked });

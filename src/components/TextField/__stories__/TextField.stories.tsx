@@ -4,6 +4,10 @@ import { boolean, number, select, text } from '@storybook/addon-knobs';
 import { IconPhoto } from '../../../icons/IconPhoto/IconPhoto';
 import { createMetadata } from '../../../utils/storybook';
 import {
+  eventInterceptorMap,
+  EventInterceptorProvider,
+} from '../../EventInterceptor/EventInterceptor';
+import {
   TextField,
   textFieldPropForm,
   textFieldPropFormDefault,
@@ -77,25 +81,27 @@ export function Playground() {
   };
 
   return (
-    <div>
-      <TextField
-        value={value}
-        width={width}
-        form={form}
-        state={state || undefined}
-        size={size}
-        view={view}
-        type={type}
-        maxLength={maxLength}
-        minRows={minRows}
-        maxRows={maxRows}
-        placeholder={placeholder}
-        onChange={handleChange}
-        leftSide={leftSide}
-        rightSide={rightSide}
-        disabled={disabled}
-      />
-    </div>
+    <EventInterceptorProvider eventHandler={console.log} map={eventInterceptorMap}>
+      <div>
+        <TextField
+          value={value}
+          width={width}
+          form={form}
+          state={state || undefined}
+          size={size}
+          view={view}
+          type={type}
+          maxLength={maxLength}
+          minRows={minRows}
+          maxRows={maxRows}
+          placeholder={placeholder}
+          onChange={handleChange}
+          leftSide={leftSide}
+          rightSide={rightSide}
+          disabled={disabled}
+        />
+      </div>
+    </EventInterceptorProvider>
   );
 }
 
