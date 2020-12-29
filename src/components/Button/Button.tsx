@@ -7,6 +7,7 @@ import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
+import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { Loader } from '../Loader/Loader';
 
 export const buttonPropSize = ['m', 'xs', 's', 'l'] as const;
@@ -33,7 +34,7 @@ export const buttonPropForm = [
 export type ButtonPropForm = typeof buttonPropForm[number];
 export const buttonPropFormDefault: ButtonPropForm = buttonPropForm[0];
 
-type Props = {
+export type Props = {
   size?: ButtonPropSize;
   view?: ButtonPropView;
   width?: ButtonPropWidth;
@@ -78,7 +79,7 @@ export const Button = forwardRefWithAs<Props, 'button'>((props, ref) => {
     onlyIcon,
     iconSize: iconSizeProp,
     ...otherProps
-  } = props;
+  } = usePropsHandler(cnButton(), props);
 
   const Tag = as as string;
   const IconOnly = (!label || onlyIcon) && (iconLeft || iconRight);
