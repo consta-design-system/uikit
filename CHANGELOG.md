@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.10.13 (30/12/2020)
+
+- [feat(withTooltip): added HOC withTooltip (#564)](https://github.com/gazprom-neft/consta-uikit/commit/7385f3149abd8e87c45d27d2b1361958f4aca6a6) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Icons): add new pack (#736)](https://github.com/gazprom-neft/consta-uikit/commit/6887bd8fc85947c1f2654c99a7c0a820ac3fc767) - [@fooontic](https://github.com/fooontic)
+- [fix(Table): fix table grid columns (#708)](https://github.com/gazprom-neft/consta-uikit/commit/2a7281fc9550ab266f34f989ffd7ba49111eddd2) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
+
+---
+
 ## v1.10.12 (24/12/2020)
 
 - [feat(ContextMenu): added component (#715)](https://github.com/gazprom-neft/consta-uikit/commit/8bb83e1e98cd5d1a500a2e578cbf3dad66b50876) - [@gizeasy](https://github.com/gizeasy)
