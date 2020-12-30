@@ -1,0 +1,109 @@
+import { WithTooltipExampleProps } from './examples/WithTooltipExampleProps/WithTooltipExampleProps';
+import { WithTooltipExampleText } from './examples/WithTooltipExampleText/WithTooltipExampleText';
+import { WithTooltipExampleMode } from './examples/WithTooltipExampleMode/WithTooltipExampleMode';
+
+# withTooltip
+
+**withTooltip** - служит для добавления `Tooltip` для любого компонента, который совпадает интерфейсу:
+
+```ts
+onClick?: (() => void) | React.EventHandler<React.MouseEvent>;
+onMouseEnter?: (() => void) | React.MouseEventHandler;
+onMouseLeave?: (() => void) | React.MouseEventHandler;
+```
+
+Напирмер к тексту:
+
+```tsx
+import { withTooltip } from '@consta/uikit/withTooltip';
+import { Text } from '@consta/uikit/Text';
+
+const TextWithTooltip = withTooltip({ content: 'Тултип' })(Text);
+
+export const WithTooltipExampleText = () => {
+  return (
+    <div className={cnDocsDecorator('Section')}>
+      <TextWithTooltip size="l" as="a" href="#" view="brand" decoration="underline">
+        На мне появится тултип
+      </TextWithTooltip>
+    </div>
+  );
+};
+```
+
+<WithTooltipExampleText />
+
+### Способы задать свойства
+
+возможно задавать свойства тултипа как в хоке так и в компоненте который вернул хок,
+свойства заданные в компоненте будут главнее.
+
+```tsx
+import { withTooltip } from '@consta/uikit/withTooltip';
+import { Button } from '@consta/uikit/Button';
+
+const ButtonWithTooltip = withTooltip({ content: 'Тултип сверху' })(Button);
+
+export const WithTooltipExampleProps = () => {
+  return (
+    <>
+      <ButtonWithTooltip label="Кнопка" />
+      <ButtonWithTooltip
+        label="Кнопка"
+        tooltipProps={{ content: 'Тултип снизу', direction: 'downCenter' }}
+      />
+    </>
+  );
+};
+```
+
+<WithTooltipExampleProps />
+
+### Режим работы
+
+Свойство `mode` отвечает за режим работы хока,
+
+`mouseover` - тултип будет появлятся по наведению на компонент
+
+`click` - тултип будет появлятся по клику на элемент
+
+```tsx
+import { withTooltip } from '@consta/uikit/withTooltip';
+import { Button } from '@consta/uikit/Button';
+
+const ButtonWithTooltipModeMouseover = withTooltip({
+  content: 'Тултип по наведению',
+  mode: 'mouseover',
+})(Button);
+
+const ButtonWithTooltipModeClick = withTooltip({ content: 'Тултип по клику', mode: 'click' })(
+  Button,
+);
+
+export const WithTooltipExampleProps = () => {
+  return (
+    <>
+      <ButtonWithTooltipModeMouseover label="Кнопка" />
+      <ButtonWithTooltipModeClick label="Кнопка" />
+    </>
+  );
+};
+```
+
+<WithTooltipExampleMode />
+
+## Свойства
+
+| Свойство              | Тип или варианты значения | По умолчанию      | Описание                                                                                                                                 |
+| --------------------- | ------------------------- | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `size`                | `'s', 'm', 'l'`           | '`m`'             | Размер, влияющий на максимальную ширину тултипа                                                                                          |
+| `content`             | `React.ReactNode`         | —                 | Контент тултипа                                                                                                                          |
+| `mode`                | `'mouseover', 'click`     | `'mouseover'`     | Режим работы                                                                                                                             |
+| `closeOnClickOutside` | `boolean`                 | `true`            | Скрытие поповера по клику вне компонента и поповера. Работает только при `mode = click`                                                  |
+| `appearTimeout`       | `number`                  | `400`             | Количество милисекунд требующихся для удержания курсора на компоненте, для появления тултипа. Работает только при `mode = mouseover`     |
+| `exitTimeout`         | `number`                  | `200`             | Количество милисекунд требующихся для удержания курсора вне компонента, для исчезновения тултипа. Работает только при `mode = mouseover` |
+| `direction?`          | `Direction`               | `'upCenter'`      | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                        |
+| `possibleDirections?` | `Direction[]`             | `Direction`       | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                        |
+| `spareDirection?`     | `Direction`               | `'downStartLeft'` | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                        |
+| `isInteractive?`      | `boolean`                 | `true`            | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                        |
+| `equalAnchorWidth?`   | `boolean`                 | `fasle`           | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                        |

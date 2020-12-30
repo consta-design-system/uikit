@@ -113,6 +113,9 @@ class GenerateCommand extends Command {
       await generateReExports(ignore, srcPath, [jsSrc, esSrc], distPath, 'hooks').then(() =>
         this.log(logSymbols.success, 'hooks reExports generated!'),
       );
+      await generateReExports(ignore, srcPath, [jsSrc, esSrc], distPath, 'hocs').then(() =>
+        this.log(logSymbols.success, 'НОСs reExports generated!'),
+      );
       await generateReExports(ignore, srcPath, [jsSrc, esSrc], distPath, 'icons').then(() =>
         this.log(logSymbols.success, 'icons reExports generated!'),
       );
