@@ -65,6 +65,8 @@ type onRowHover = ({ id, e }: { id: string | undefined; e: React.MouseEvent }) =
 export type TableRow = {
   [key: string]: React.ReactNode;
   id: string;
+  children?: TableRow[];
+  level?: number;
 };
 
 export type TableFilters<T extends TableRow> = Filters<T>;
@@ -80,6 +82,7 @@ export type TableColumn<T extends TableRow> = {
   withoutPadding?: boolean;
   width?: ColumnWidth;
   mergeCells?: boolean;
+  expander?: boolean;
 } & ({ sortable?: false } | { sortable: true; sortByField?: RowField<T> }) & {
     columns?: Array<TableColumn<T>>;
     position?: Position;
@@ -191,6 +194,7 @@ export const Table = <T extends TableRow>({
   const [initialColumnWidths, setInitialColumnWidths] = React.useState<number[]>([]);
   const [sorting, setSorting] = React.useState<SortingState<T>>(null);
   const [visibleFilter, setVisibleFilter] = React.useState<string | null>(null);
+  const [expandedRowsSet, setExpandedRowsSet] = React.useState<Set<string>>(new Set());
   const [tableScroll, setTableScroll] = React.useState({ top: 0, left: 0 });
   const tableRef = React.useRef<HTMLDivElement>(null);
   const columnsRefs = React.useRef<Record<number, HTMLDivElement | null>>({});
@@ -313,6 +317,17 @@ export const Table = <T extends TableRow>({
     };
   };
 
+  const handleExpandRow = (id: string): (() => void) | undefined => {
+    return (): void => {
+      if (expandedRowsSet.has(id)) {
+        expandedRowsSet.delete(id);
+      } else {
+        expandedRowsSet.add(id);
+      }
+      setExpandedRowsSet(new Set(expandedRowsSet));
+    };
+  };
+
   const handleColumnResize = (idx: number, delta: number): void => {
     const columnMinWidth = Math.min(150, initialColumnWidths[idx]);
     const prevColumnWidth = resizedColumnWidths[idx] || initialColumnWidths[idx];
@@ -369,19 +384,20 @@ export const Table = <T extends TableRow>({
     flattenedHeaders,
   );
 
-  const sortedTableData = sortingData(rows, sorting, onSortBy);
-  const filteredData =
-    !filters || !isSelectedFiltersPresent(selectedFilters)
-      ? sortedTableData
-      : filterTableData({ data: sortedTableData, filters, selectedFilters });
-
   const { maxVisibleRows = 210, scrollableEl = tableRef.current } = lazyLoad || {};
 
-  const { getSlicedRows, setBoundaryRef } = useLazyLoadData(
+  const { getExpandedRows, getSlicedRows, setBoundaryRef } = useLazyLoadData(
     maxVisibleRows,
     scrollableEl,
     !!lazyLoad,
   );
+
+  const expandedRows = getExpandedRows(rows, expandedRowsSet);
+  const sortedTableData = sortingData(expandedRows, sorting, onSortBy);
+  const filteredData =
+    !filters || !isSelectedFiltersPresent(selectedFilters)
+      ? sortedTableData
+      : filterTableData({ data: sortedTableData, filters, selectedFilters });
 
   const rowsData = getSlicedRows(filteredData);
 
@@ -543,6 +559,7 @@ export const Table = <T extends TableRow>({
                         isMerged: column.mergeCells && rowSpan > 1,
                       })}
                       onClick={handleSelectRow(row.id)}
+                      onToggleExpand={handleExpandRow(row.id)}
                       column={column}
                       verticalAlign={verticalAlign}
                       isClickable={!!isRowsClickable}
@@ -553,6 +570,9 @@ export const Table = <T extends TableRow>({
                       }
                       isBorderTop={rowIdx > 0 && borderBetweenRows}
                       isBorderLeft={columnIdx > 0 && borderBetweenColumns}
+                      isExpanded={expandedRowsSet.has(row.id)}
+                      hasChildren={!!row.children?.length}
+                      level={row.level}
                     >
                       {row[column.accessor]}
                     </TableCell>

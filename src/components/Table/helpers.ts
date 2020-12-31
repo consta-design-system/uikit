@@ -276,12 +276,28 @@ export const useLazyLoadData = (
     return undefined;
   };
 
+  const getExpandedRows = <T extends TableRow>(rows: T[], expandedRows: Set<string>): T[] => {
+    const getRowSubTree = <T extends TableRow>(row: T, level = 0): T[] => {
+      return [
+        row,
+        ...((
+          (expandedRows.has(row.id) &&
+            row.children?.map((_) => getRowSubTree({ ..._, level: level + 1 }, level + 1))) ||
+          []
+        ).flat() as T[]),
+      ];
+    };
+
+    return rows.map((_) => getRowSubTree(_, 0)).flat();
+  };
+
   const getSlicedRows = (rows: TableRow[]) =>
     !enabled || rows.length < maxVisibleRows
       ? rows
       : rows.slice(visibleStartIndex, visibleStartIndex + maxVisibleRows);
 
   return {
+    getExpandedRows,
     getSlicedRows,
     setBoundaryRef,
   };

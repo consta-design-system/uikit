@@ -2,7 +2,10 @@ import './TableCell.css';
 
 import React from 'react';
 
+import { IconAdd } from '../../../icons/IconAdd/IconAdd';
+import { IconRemove } from '../../../icons/IconRemove/IconRemove';
 import { cn } from '../../../utils/bem';
+import { Button } from '../../Button/Button';
 import { TableColumn, TableRow } from '../Table';
 
 const cnTableCell = cn('TableCell');
@@ -24,6 +27,10 @@ type Props = {
   wrapperClassName?: string;
   children: React.ReactNode;
   showVerticalShadow?: boolean;
+  onToggleExpand?: () => void;
+  isExpanded?: boolean;
+  hasChildren?: boolean;
+  level?: number;
 } & (
   | {
       type: 'header';
@@ -88,7 +95,17 @@ const getWrapperClasses = (props: Props): string => {
 };
 
 export const TableCell = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
-  const { style, onClick, children } = props;
+  const {
+    style,
+    onClick,
+    children,
+    column,
+    type,
+    onToggleExpand,
+    isExpanded,
+    hasChildren,
+    level = 0,
+  } = props;
 
   const propsWithRole = onClick
     ? {
@@ -101,7 +118,26 @@ export const TableCell = React.forwardRef<HTMLDivElement, Props>((props, ref) =>
 
   return (
     <div {...propsWithRole} ref={ref} className={getCellClasses(props)} style={style}>
-      <div className={getWrapperClasses(props)}>{children}</div>
+      <div className={getWrapperClasses(props)}>
+        {column.expander && type === 'content' && (
+          <span style={{ marginLeft: 40 * level }}>
+            {hasChildren ? (
+              <Button
+                onClick={onToggleExpand}
+                label={isExpanded ? 'Свернуть узел' : 'Развернуть узел'}
+                size="xs"
+                view="ghost"
+                iconLeft={isExpanded ? IconRemove : IconAdd}
+                onlyIcon
+                className="decorator_indent-r_m"
+              />
+            ) : (
+              <span className="decorator_indent-r_3xl" />
+            )}
+          </span>
+        )}
+        {children}
+      </div>
     </div>
   );
 });
