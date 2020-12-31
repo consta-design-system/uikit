@@ -43,6 +43,8 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
 
 `sortable` — позволяет сортировать таблицу по этой колонке.
 
+`expander` — указывает что данная колонка используется для разворачивания вложенных строк.
+
 В этой таблице будет две колонки — номер и имя.
 
 ```ts
@@ -87,6 +89,33 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
   {
     id: '2',
     name: 'Василий',
+  },
+];
+```
+
+Строки могут быть разворачиваемыми, за вложенные строки отвечает свойство `children`
+
+Это используется для вывода иерархических данных в таблице:
+
+```ts
+[
+  {
+    id: '1',
+    name: 'Уровень 1',
+  },
+  {
+    id: '2',
+    name: 'Уровень 2',
+    children: [
+      {
+        id: '2.1',
+        name: 'Подуровень 2.1',
+      },
+      {
+        id: '2.2',
+        name: 'Подуровень 2.2',
+      }
+    ],
   },
 ];
 ```
@@ -184,11 +213,13 @@ type Column = {
   width?: number;
   sortable?: boolean;
   sortByField?: string;
+  expander?: boolean;
 };
 
 type Row = {
   [key: string]: React.ReactNode;
   id: string;
+  children?: Row[];
 };
 
 type Filter = {

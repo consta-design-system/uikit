@@ -428,6 +428,107 @@ export const tableWithMultiLevelHeadersData = {
   rows: rowsForMultiLevelHeadersData,
 };
 
+const expandableRowsData = [
+  {
+    id: 'row1',
+    name: 'Данные за 2020',
+    source: '–',
+    updated: '21.08.2020',
+    children: [
+      {
+        id: 'row1.1',
+        name: 'Данные за декабрь 2020',
+        source: '–',
+        updated: '18.11.2020',
+      },
+      {
+        id: 'row1.2',
+        name: 'Данные за ноябрь 2020',
+        source: '–',
+        updated: '18.11.2020',
+      },
+    ],
+  },
+  {
+    id: 'row2',
+    name: 'Данные за 2019',
+    source: 'из Excel',
+    updated: '18.11.2019',
+    children: [
+      {
+        id: 'row2.1',
+        name: 'Данные за декабрь 2019',
+        source: 'из Excel',
+        updated: '18.12.2019',
+      },
+      {
+        id: 'row2.2',
+        name: 'Данные за ноябрь 2019',
+        source: 'из Excel',
+        updated: '21.11.2019',
+        children: [
+          {
+            id: 'row2.2.1',
+            name: 'Данные за 15 ноября 2019',
+            source: 'из Excel',
+            updated: '15.11.2019',
+          },
+          {
+            id: 'row2.2.2',
+            name: 'Данные за 21 ноября 2019',
+            source: 'из Excel',
+            updated: '21.11.2019',
+            children: [
+              {
+                id: 'row2.2.2.1',
+                name: 'Данные за 02:00 15 ноября 2019',
+                source: 'из Excel',
+                updated: '17.11.2019',
+              },
+              {
+                id: 'row2.2.2.2',
+                name: 'Данные за 14:00 15 ноября 2019',
+                source: 'из Excel',
+                updated: '21.11.2019',
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'row3',
+    name: 'Данные за 2018',
+    source: 'из Excel',
+    updated: '30.09.2018',
+  },
+];
+
+export const tableWithExpandableRowsData = {
+  columns: [
+    {
+      title: 'Название',
+      accessor: 'name',
+      align: 'left',
+      width: 300,
+      expander: true,
+    },
+    {
+      title: 'Источник',
+      accessor: 'source',
+      align: 'left',
+    },
+    {
+      title: 'Дата изменения',
+      accessor: 'updated',
+      align: 'left',
+    },
+  ],
+  rows: expandableRowsData,
+  borderBetweenRows: true,
+};
+
 const badgeParams: React.ComponentProps<typeof Badge> = {
   view: 'filled',
   minified: true,

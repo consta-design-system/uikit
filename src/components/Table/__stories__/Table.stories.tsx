@@ -7,6 +7,7 @@ import {
   generateData,
   tableData,
   tableWithBagdeData,
+  tableWithExpandableRowsData,
   tableWithMergedCellsData,
   tableWithMultiLevelHeadersData,
 } from '../__mock__/data.mock';
@@ -71,6 +72,13 @@ const getKnobs = (replacedProps?: Partial<Props<TableRow>>): Props<TableRow> => 
 export const Interactive = createStory(() => <Table {...getKnobs()} />, {
   name: 'обычная',
 });
+
+export const WithExpandableRows = createStory(
+  () => <Table {...getKnobs(tableWithExpandableRowsData as Partial<Props<TableRow>>)} />,
+  {
+    name: 'с разворачиваемыми строками',
+  },
+);
 
 export const WithMultiLevelHeaders = createStory(
   () => <Table {...getKnobs(tableWithMultiLevelHeadersData as Partial<Props<TableRow>>)} />,
