@@ -1,4 +1,9 @@
-import { ModalExample, ModalExampleTop, ModalExampleCenter, ModalExampleNoOverlay } from './examples/ModalExample/ModalExample';
+import {
+  ModalExample,
+  ModalExampleTop,
+  ModalExampleCenter,
+  ModalExampleNoOverlay,
+} from './examples/ModalExample/ModalExample';
 
 # Modal
 
@@ -17,15 +22,12 @@ import { ModalExample, ModalExampleTop, ModalExampleCenter, ModalExampleNoOverla
 
 <ModalExample />
 
-
 ## Расположение
 
 За расположение модального окна отвечает свойство `position`. Варианты: `'center'`, `'top'`,
 по умолчанию — `'center'`.
 
-
 <ModalExampleTop />
-
 <ModalExampleCenter />
 
 ## Подложка
@@ -49,7 +51,8 @@ import { ModalExample, ModalExampleTop, ModalExampleCenter, ModalExampleNoOverla
 | `onOpen?`                      | `() => void`                    | -                      | Действие при открытии окна                                   |
 | `children?`                    | `React.ReactNode`               | -                      | Дочерние элементы                                            |
 | `container?`                   | `HTMLDivElement, undefined`     | `window.document.body` | Родителький контейнер для модального окна                    |
-| `className?`                   | `string`                        | -                      | Дополнительный CSS-класс компонента                          |
+| `className?`                   | `string`                        | -                      | Дополнительный CSS-класс модального окна                     |
+| `rootClassName?`               | `string`                        | -                      | Дополнительный CSS-класс корневого DOM елемента              |
 
 ## Пример
 
