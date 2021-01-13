@@ -65,6 +65,7 @@ const Default = (
       <MultiCombobox
         {...getKnobs()}
         id="example"
+        name="item"
         options={options as Option[]}
         value={val}
         getOptionLabel={getItemLabel}
