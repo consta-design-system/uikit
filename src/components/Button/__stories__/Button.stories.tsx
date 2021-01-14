@@ -6,6 +6,7 @@ import { IconSelect } from '../../../icons/IconSelect/IconSelect';
 import { IconUser } from '../../../icons/IconUser/IconUser';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
+import { EventInterceptorProvider } from '../../EventInterceptor/EventInterceptor';
 import {
   Button,
   buttonPropForm,
@@ -52,21 +53,23 @@ export function Playground() {
   } = defaultKnobs();
 
   return (
-    <div className={cnButtonStories()}>
-      <Button
-        width={width}
-        size={size}
-        view={view}
-        form={form}
-        disabled={disabled}
-        loading={loading}
-        label={label}
-        onlyIcon={onlyIcon}
-        onClick={action('click')}
-        iconLeft={iconLeft ? IconUser : undefined}
-        iconRight={iconRight ? IconSelect : undefined}
-      />
-    </div>
+    <EventInterceptorProvider eventHandler={console.log}>
+      <div className={cnButtonStories()}>
+        <Button
+          width={width}
+          size={size}
+          view={view}
+          form={form}
+          disabled={disabled}
+          loading={loading}
+          label={label}
+          onlyIcon={onlyIcon}
+          onClick={action('click')}
+          iconLeft={iconLeft ? IconUser : undefined}
+          iconRight={iconRight ? IconSelect : undefined}
+        />
+      </div>
+    </EventInterceptorProvider>
   );
 }
 
