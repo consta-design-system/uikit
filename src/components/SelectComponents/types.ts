@@ -36,4 +36,5 @@ export type CommonSelectProps<ITEM> = {
   children?: never;
   dropdownClassName?: string;
   dropdownRef?: RefObject<HTMLDivElement>;
+  name?: string;
 };

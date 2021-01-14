@@ -76,6 +76,7 @@ const Default = (props: {
       <BasicSelect
         {...getKnobs()}
         id="example"
+        name="item"
         options={items}
         value={value}
         onChange={onChange}

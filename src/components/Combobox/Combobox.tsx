@@ -52,6 +52,7 @@ export const Combobox: ComboboxType = (props) => {
     labelForCreate = 'Добавить',
     labelForNotFound = 'Не найдено',
     dropdownRef = defaultOptionsRef,
+    name,
     ...restProps
   } = props;
   const [isFocused, setIsFocused] = useState(false);
@@ -119,6 +120,11 @@ export const Combobox: ComboboxType = (props) => {
   };
 
   const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>): void => {
+    if (isOpen) {
+      toggleRef.current?.focus();
+      return;
+    }
+
     if (isFocused) {
       setIsFocused(false);
 
@@ -208,6 +214,7 @@ export const Combobox: ComboboxType = (props) => {
             <input
               {...getToggleProps({ onChange: handleInputChange })}
               type="text"
+              name={name}
               onFocus={handleInputFocus}
               onBlur={handleInputBlur}
               aria-label={ariaLabel}

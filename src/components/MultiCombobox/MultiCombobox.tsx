@@ -63,6 +63,7 @@ export const MultiCombobox: MultiCombobox = (props) => {
     labelForNotFound = 'Не найдено',
     dropdownClassName,
     dropdownRef = defaultOptionsRef,
+    name,
     ...restProps
   } = props;
 
@@ -112,7 +113,7 @@ export const MultiCombobox: MultiCombobox = (props) => {
     getOptionProps,
     isOpen,
     setOpen,
-    // пирвел к типам в дальнейшем надо будет нормально типизировать useSelect
+    // привел к типам в дальнейшем надо будет нормально типизировать useSelect
   } = useSelect({
     options: options as Item[],
     value: arrValue,
@@ -140,6 +141,11 @@ export const MultiCombobox: MultiCombobox = (props) => {
   };
 
   const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>): void => {
+    if (isOpen) {
+      toggleRef.current?.focus();
+      return;
+    }
+
     if (isFocused) {
       setIsFocused(false);
 
@@ -269,6 +275,7 @@ export const MultiCombobox: MultiCombobox = (props) => {
               <input
                 {...getToggleProps({ onChange: handleInputChange })}
                 type="text"
+                name={name}
                 onFocus={handleInputFocus}
                 onBlur={handleInputBlur}
                 aria-label={ariaLabel}
