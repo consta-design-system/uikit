@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.11.0 (14/01/2021)
+
+- [feat(Modal): added rootClassName prop (#746)](https://github.com/gazprom-neft/consta-uikit/commit/f3585403e029f7de6b84cfa27904c5381011b171) - [@gizeasy](https://github.com/gizeasy)
+- [feat(EventInterceptor): added EventInterceptor context (#739)](https://github.com/gazprom-neft/consta-uikit/commit/b6098de25e0c18db1be637d0e6bd751e409cec37) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
+- [fix(TextField): add missing forms (#724)](https://github.com/gazprom-neft/consta-uikit/commit/1727974d2bc1ec023fc47faf3f8aa884e91598a7) - [@fooontic](https://github.com/fooontic)
+- [feat(Table): add event to arguments for activeRow (BREAKING CHANGES) (#733)](https://github.com/gazprom-neft/consta-uikit/commit/762ccabde2d937920408b03973f7492142d01212) - [@c1n1k](https://github.com/c1n1k)
+- [fix(Table): parent width related child headers (#707)](https://github.com/gazprom-neft/consta-uikit/commit/149df47c67dad8794d32cb3eccac551bc9b2d1a4) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
+- [fix(BasicSelect): fixed blur (#728)](https://github.com/gazprom-neft/consta-uikit/commit/2d734352f034d81543c2d63a9671f044e324f3b9) - [@c1n1k](https://github.com/c1n1k)
+
+---
+
 ## v1.10.13 (30/12/2020)
 
 - [feat(withTooltip): added HOC withTooltip (#564)](https://github.com/gazprom-neft/consta-uikit/commit/7385f3149abd8e87c45d27d2b1361958f4aca6a6) - [@gizeasy](https://github.com/gizeasy)
