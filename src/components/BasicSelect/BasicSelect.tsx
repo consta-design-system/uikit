@@ -5,6 +5,7 @@ import React, { useRef, useState } from 'react';
 import { useSelect } from '../../hooks/useSelect/useSelect';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { scrollIntoView } from '../../utils/scrollIntoView';
+import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { cnSelect } from '../SelectComponents/cnSelect';
 import { getSelectDropdownForm } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
@@ -46,7 +47,7 @@ export const BasicSelect: Select = (props) => {
     dropdownClassName,
     name,
     ...restProps
-  } = props;
+  } = usePropsHandler(cnSelect(), props);
   const toggleRef = useRef<HTMLInputElement>(null);
   const [isFocused, setIsFocused] = useState(false);
 

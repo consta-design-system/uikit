@@ -6,7 +6,10 @@ import { IconSelect } from '../../../icons/IconSelect/IconSelect';
 import { IconUser } from '../../../icons/IconUser/IconUser';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
-import { EventInterceptorProvider } from '../../EventInterceptor/EventInterceptor';
+import {
+  eventInterceptorMap,
+  EventInterceptorProvider,
+} from '../../EventInterceptor/EventInterceptor';
 import {
   Button,
   buttonPropForm,
@@ -53,7 +56,7 @@ export function Playground() {
   } = defaultKnobs();
 
   return (
-    <EventInterceptorProvider eventHandler={console.log}>
+    <EventInterceptorProvider eventHandler={console.log} map={eventInterceptorMap}>
       <div className={cnButtonStories()}>
         <Button
           width={width}

@@ -12,6 +12,10 @@ import { IconThumbUp } from '../../../icons/IconThumbUp/IconThumbUp';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import { Button } from '../../Button/Button';
+import {
+  eventInterceptorMap,
+  EventInterceptorProvider,
+} from '../../EventInterceptor/EventInterceptor';
 import { Item, SnackBar, SnackBarItemStatus } from '../SnackBar';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
@@ -91,56 +95,58 @@ export function Playground() {
   React.useEffect(() => handleNormalAdd(), []);
 
   return (
-    <div className={cnSnackBarStories()}>
-      <div className={cnSnackBarStories('Buttons')}>
-        <Button
-          className={cnSnackBarStories('ButtonAdd')}
-          iconLeft={IconAdd}
-          view="ghost"
-          size="s"
-          width="full"
-          label="Выполненно"
-          onClick={handleSuccessAdd}
-        />
-        <Button
-          className={cnSnackBarStories('ButtonAdd')}
-          iconLeft={IconAdd}
-          view="ghost"
-          size="s"
-          width="full"
-          label="Ошибка"
-          onClick={handleAlertAdd}
-        />
-        <Button
-          className={cnSnackBarStories('ButtonAdd')}
-          iconLeft={IconAdd}
-          view="ghost"
-          size="s"
-          width="full"
-          label="Предупреждение"
-          onClick={handleWarningAdd}
-        />
-        <Button
-          className={cnSnackBarStories('ButtonAdd')}
-          iconLeft={IconAdd}
-          view="ghost"
-          size="s"
-          width="full"
-          label="Системное"
-          onClick={handleSystemAdd}
-        />
-        <Button
-          className={cnSnackBarStories('ButtonAdd')}
-          iconLeft={IconAdd}
-          view="ghost"
-          size="s"
-          width="full"
-          label="Нормальное"
-          onClick={handleNormalAdd}
-        />
+    <EventInterceptorProvider eventHandler={console.log} map={eventInterceptorMap}>
+      <div className={cnSnackBarStories()}>
+        <div className={cnSnackBarStories('Buttons')}>
+          <Button
+            className={cnSnackBarStories('ButtonAdd')}
+            iconLeft={IconAdd}
+            view="ghost"
+            size="s"
+            width="full"
+            label="Выполненно"
+            onClick={handleSuccessAdd}
+          />
+          <Button
+            className={cnSnackBarStories('ButtonAdd')}
+            iconLeft={IconAdd}
+            view="ghost"
+            size="s"
+            width="full"
+            label="Ошибка"
+            onClick={handleAlertAdd}
+          />
+          <Button
+            className={cnSnackBarStories('ButtonAdd')}
+            iconLeft={IconAdd}
+            view="ghost"
+            size="s"
+            width="full"
+            label="Предупреждение"
+            onClick={handleWarningAdd}
+          />
+          <Button
+            className={cnSnackBarStories('ButtonAdd')}
+            iconLeft={IconAdd}
+            view="ghost"
+            size="s"
+            width="full"
+            label="Системное"
+            onClick={handleSystemAdd}
+          />
+          <Button
+            className={cnSnackBarStories('ButtonAdd')}
+            iconLeft={IconAdd}
+            view="ghost"
+            size="s"
+            width="full"
+            label="Нормальное"
+            onClick={handleNormalAdd}
+          />
+        </div>
+        <SnackBar className={cnSnackBarStories('SnackBar')} items={items} />
       </div>
-      <SnackBar className={cnSnackBarStories('SnackBar')} items={items} />
-    </div>
+    </EventInterceptorProvider>
   );
 }
 

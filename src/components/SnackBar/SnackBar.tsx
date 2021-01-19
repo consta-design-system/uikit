@@ -7,6 +7,7 @@ import { IconProps } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { cnForCssTransition } from '../../utils/cnForCssTransition';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
+import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 
 import { SnackBarItem } from './Item/SnackBar-Item';
 
@@ -43,7 +44,7 @@ export const cnSnackBarItem = cn('SnackBar', 'Item');
 const cssTransitionClassNames = cnForCssTransition(cnSnackBarItem);
 
 export const SnackBar: React.FC<SnackBarProps> = (props) => {
-  const { items, className, ...otherProps } = props;
+  const { items, className, ...otherProps } = usePropsHandler(cnSnackBar(), props);
 
   return (
     <TransitionGroup {...otherProps} className={cnSnackBar(null, [className])} appear enter exit>

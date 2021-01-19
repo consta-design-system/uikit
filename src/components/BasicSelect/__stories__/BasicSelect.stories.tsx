@@ -3,6 +3,10 @@ import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { createMetadata, createStory } from '../../../utils/storybook';
 import {
+  eventInterceptorMap,
+  EventInterceptorProvider,
+} from '../../EventInterceptor/EventInterceptor';
+import {
   DefaultPropForm,
   DefaultPropSize,
   DefaultPropView,
@@ -72,17 +76,19 @@ const Default = (props: {
   const { onChange = setValue } = props;
 
   return (
-    <div>
-      <BasicSelect
-        {...getKnobs()}
-        id="example"
-        name="item"
-        options={items}
-        value={value}
-        onChange={onChange}
-        getOptionLabel={getItemLabel}
-      />
-    </div>
+    <EventInterceptorProvider eventHandler={console.log} map={eventInterceptorMap}>
+      <div>
+        <BasicSelect
+          {...getKnobs()}
+          id="example"
+          name="item"
+          options={items}
+          value={value}
+          onChange={onChange}
+          getOptionLabel={getItemLabel}
+        />
+      </div>
+    </EventInterceptorProvider>
   );
 };
 

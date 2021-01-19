@@ -1,13 +1,11 @@
 import React from 'react';
 
-import { EventInterceptorPropMap, map as mapDefault } from './eventInterceptorMap';
-
 const eventInterceptorPropComponent = [
   'Button',
   'TextField',
   'Checkbox',
   'SnackBar',
-  'BasicSelect',
+  'Select',
 ] as const;
 export type EventInterceptorPropComponent = typeof eventInterceptorPropComponent[number];
 
@@ -21,6 +19,11 @@ export type EventInterceptorProps = {
 
 export type EventInterceptorHandler = ((props: EventInterceptorProps) => void) | undefined;
 
+export type EventHandler = <T>(props: T, handler: EventInterceptorHandler) => T;
+export type EventInterceptorPropMap = {
+  [key: string]: EventHandler;
+};
+
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const EventInterceptorContext = React.createContext<
   { eventHandler: EventInterceptorHandler; map: EventInterceptorPropMap } | undefined
@@ -29,11 +32,11 @@ const EventInterceptorContext = React.createContext<
 const EventInterceptorProvider = ({
   children,
   eventHandler,
-  map = mapDefault,
+  map,
 }: {
   children: React.ReactNode;
   eventHandler: EventInterceptorHandler;
-  map?: EventInterceptorPropMap;
+  map: EventInterceptorPropMap;
 }) => {
   return (
     <EventInterceptorContext.Provider value={{ eventHandler, map }}>
@@ -43,3 +46,4 @@ const EventInterceptorProvider = ({
 };
 
 export { EventInterceptorContext, EventInterceptorProvider };
+export * from './eventInterceptorMap';

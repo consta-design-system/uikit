@@ -4,6 +4,10 @@ import { boolean, select, text } from '@storybook/addon-knobs';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import {
+  eventInterceptorMap,
+  EventInterceptorProvider,
+} from '../../EventInterceptor/EventInterceptor';
+import {
   Checkbox,
   checkboxPropAlign,
   checkboxPropAlignDefault,
@@ -36,18 +40,20 @@ export function Playground() {
   const handleChange = ({ checked }: { checked: boolean }) => setChecked(checked);
 
   return (
-    <div className={cnCheckboxStories()}>
-      <Checkbox
-        disabled={disabled}
-        intermediate={intermediate}
-        size={size}
-        view={view}
-        label={label}
-        onChange={handleChange}
-        checked={checked}
-        align={align}
-      />
-    </div>
+    <EventInterceptorProvider eventHandler={console.log} map={eventInterceptorMap}>
+      <div className={cnCheckboxStories()}>
+        <Checkbox
+          disabled={disabled}
+          intermediate={intermediate}
+          size={size}
+          view={view}
+          label={label}
+          onChange={handleChange}
+          checked={checked}
+          align={align}
+        />
+      </div>
+    </EventInterceptorProvider>
   );
 }
 
