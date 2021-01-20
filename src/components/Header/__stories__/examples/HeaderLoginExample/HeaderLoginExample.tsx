@@ -4,11 +4,9 @@ import React, { useState } from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
+import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { cn } from '../../../../../utils/bem';
-import * as wp from '../../../../../utils/whitepaper/whitepaper';
-import { Header } from '../../../Header';
-import { HeaderLogin } from '../../../Login/Header-Login';
-import { HeaderModule } from '../../../Module/Header-Module';
+import { Header, HeaderLogin, HeaderModule } from '../../../Header';
 
 const cnExample = cn('HeaderLoginExample');
 

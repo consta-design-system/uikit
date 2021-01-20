@@ -12,4 +12,15 @@
       }
     }
   }
+
+  & .HeaderMenu {
+    &-Link {
+      line-height: var(--header-height);
+    }
+
+    &-List {
+      margin-bottom: 0;
+      padding-left: 0;
+    }
+  }
 }
