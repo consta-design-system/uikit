@@ -6,17 +6,16 @@ import { IconChat } from '../../../../../icons/IconChat/IconChat';
 import { IconRing } from '../../../../../icons/IconRing/IconRing';
 import { cn } from '../../../../../utils/bem';
 import { Text } from '../../../../Text/Text';
-import { HeaderButton } from '../../../Button/HeaderButton';
-import { Header } from '../../../Header';
-import { HeaderLogin } from '../../../Login/HeaderLogin';
-import { HeaderLogo } from '../../../Logo/HeaderLogo';
-import { HeaderMenu } from '../../../Menu/HeaderMenu';
-import { HeaderModule } from '../../../Module/HeaderModule';
 import {
+  Header,
+  HeaderButton,
+  HeaderLogin,
+  HeaderLogo,
+  HeaderMenu,
+  HeaderModule,
   HeaderSearchBar,
-  SearchBarPropOnChange,
-  SearchBarPropOnSearch,
-} from '../../../SearchBar/HeaderSearchBar';
+} from '../../../Header';
+import { SearchBarPropOnChange, SearchBarPropOnSearch } from '../../../SearchBar/HeaderSearchBar';
 
 const cnExample = cn('HeaderMinifyLoginExample');
 
