@@ -3,6 +3,7 @@
   color: var(--color-control-typo-ghost);
   stroke: currentColor;
   transform: rotate(-90deg);
+  fill: none;
 
   &-Circle {
     &_animation {

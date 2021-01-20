@@ -58,7 +58,6 @@ export const ProgressSpin = React.forwardRef<SVGSVGElement, ProgressSpinProps>((
       height={sizeOfPixels}
       viewBox={`0 0 ${sizeOfPixels} ${sizeOfPixels}`}
       ref={ref}
-      fill="none"
     >
       <circle
         className={cnProgressSpin('Circle', { animation: !!animation })}
