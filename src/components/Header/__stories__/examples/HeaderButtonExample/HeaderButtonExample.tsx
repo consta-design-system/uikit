@@ -6,9 +6,7 @@ import { IconChat } from '../../../../../icons/IconChat/IconChat';
 import { IconDiamond } from '../../../../../icons/IconDiamond/IconDiamond';
 import { IconRing } from '../../../../../icons/IconRing/IconRing';
 import { cn } from '../../../../../utils/bem';
-import { HeaderButton } from '../../../Button/Header-Button';
-import { Header } from '../../../Header';
-import { HeaderModule } from '../../../Module/Header-Module';
+import { Header, HeaderButton, HeaderModule } from '../../../Header';
 
 const cnExample = cn('HeaderButtonExample');
 
