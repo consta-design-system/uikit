@@ -2,7 +2,7 @@ import { PropsWithAsAttributes } from '../../../utils/types/PropsWithAsAttribute
 import { cnButton, Props } from '../../Button/Button';
 import { EventInterceptorHandler, EventInterceptorPropComponent } from '../EventInterceptor';
 
-type ButtonProps<As extends keyof JSX.IntrinsicElements = 'button'> = PropsWithAsAttributes<
+export type ButtonProps<As extends keyof JSX.IntrinsicElements = 'button'> = PropsWithAsAttributes<
   Props,
   As
 >;
