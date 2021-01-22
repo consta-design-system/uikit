@@ -106,6 +106,7 @@ const sizeMap: Record<TextFieldPropSize, IconPropSize> = {
 };
 
 export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>((props, ref) => {
+  const textFieldRef = ref || React.useRef<HTMLDivElement>(null);
   const {
     className,
     type = 'text',
@@ -141,7 +142,7 @@ export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>((props
     ariaLabel,
     iconSize: iconSizeProp,
     ...otherProps
-  } = usePropsHandler(cnTextField(), props);
+  } = usePropsHandler(cnTextField(), props, textFieldRef as React.RefObject<HTMLDivElement>);
   const [focus, setFocus] = useState<boolean>(autoFocus);
   const textarea = type === 'textarea';
   const LeftIcon = leftSide;
@@ -219,7 +220,7 @@ export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>((props
         },
         [className],
       )}
-      ref={ref}
+      ref={textFieldRef}
       {...otherProps}
     >
       {LeftIcon && (

@@ -7,6 +7,7 @@ import { EventInterceptorHandler, EventInterceptorPropComponent } from '../Event
 export const useBasicSelectEventsHandler = (
   props: SimpleSelectProps<unknown>,
   handler: EventInterceptorHandler,
+  controlRef: React.RefObject<HTMLDivElement | null>,
 ) => {
   const newProps = { ...props };
 
@@ -20,7 +21,7 @@ export const useBasicSelectEventsHandler = (
           label: newProps.getOptionLabel(newProps.value),
           value: newProps.value,
           pageURL: window.location.href,
-          DOMRef: document.getElementsByClassName(cnSelect())[0],
+          DOMRef: controlRef.current,
         },
       };
       handler!(value);

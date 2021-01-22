@@ -2,9 +2,9 @@ import React from 'react';
 
 import { EventInterceptorContext } from './EventInterceptor';
 
-type PropsHandler = <T>(componentName: string, props: T) => T;
+type PropsHandler = <T>(componentName: string, props: T, ref?: React.RefObject<HTMLElement>) => T;
 
-export const usePropsHandler: PropsHandler = (componentName, props) => {
+export const usePropsHandler: PropsHandler = (componentName, props, ref) => {
   const context = React.useContext(EventInterceptorContext);
 
   if (!context) {
@@ -18,5 +18,5 @@ export const usePropsHandler: PropsHandler = (componentName, props) => {
     return props;
   }
 
-  return propsHandler(props, eventHandler);
+  return propsHandler(props, eventHandler, ref);
 };

@@ -6,6 +6,7 @@ import { EventInterceptorHandler, EventInterceptorPropComponent } from '../Event
 export const useTextFieldEventsHandler = (
   props: TextFieldProps,
   handler: EventInterceptorHandler,
+  textFieldRef: React.RefObject<HTMLDivElement>,
 ) => {
   const [inputChanged, setInputChanged] = React.useState<boolean>(false);
   const newProps = { ...props };
@@ -27,7 +28,7 @@ export const useTextFieldEventsHandler = (
       options: {
         placeholder: newProps.placeholder,
         pageURL: window.location.href,
-        DOMRef: document.getElementsByClassName(cnTextField())[0],
+        DOMRef: textFieldRef.current,
         value: newProps.value,
       },
     };

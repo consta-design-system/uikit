@@ -29,6 +29,7 @@ type Select = <ITEM>(props: SimpleSelectProps<ITEM>) => React.ReactElement | nul
 
 export const BasicSelect: Select = (props) => {
   const defaultOptionsRef = useRef<HTMLDivElement | null>(null);
+  const controlRef = useRef<HTMLDivElement | null>(null);
   const {
     placeholder,
     onBlur,
@@ -47,7 +48,7 @@ export const BasicSelect: Select = (props) => {
     dropdownClassName,
     name,
     ...restProps
-  } = usePropsHandler(cnSelect(), props);
+  } = usePropsHandler(cnSelect(), props, controlRef);
   const toggleRef = useRef<HTMLInputElement>(null);
   const [isFocused, setIsFocused] = useState(false);
 
@@ -57,7 +58,6 @@ export const BasicSelect: Select = (props) => {
     }
   };
 
-  const controlRef = useRef<HTMLDivElement | null>(null);
   const arrValue = typeof value !== 'undefined' && value !== null ? [value] : null;
 
   const scrollToIndex = (index: number): void => {

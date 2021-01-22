@@ -13,7 +13,7 @@ export const useSnackBarEventsHandler = (
     if (newProps.items.length) {
       const value = {
         component: cnSnackBar() as EventInterceptorPropComponent,
-        event: 'appear',
+        event: 'change',
         options: {
           pageURL: window.location.href,
           DOMRef: document.getElementsByClassName(cnSnackBar())[0],

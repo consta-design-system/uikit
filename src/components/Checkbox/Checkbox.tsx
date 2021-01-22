@@ -50,6 +50,7 @@ export type CheckboxProps = PropsWithHTMLAttributes<Props, HTMLLabelElement>;
 export const cnCheckbox = cn('Checkbox');
 
 export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>((props, ref) => {
+  const checkboxRef = ref || React.useRef<HTMLLabelElement>(null);
   const {
     checked = false,
     name,
@@ -69,7 +70,7 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>((props
     tabIndex,
     inputRef,
     ...otherProps
-  } = usePropsHandler(cnCheckbox(), props);
+  } = usePropsHandler(cnCheckbox(), props, checkboxRef as React.RefObject<HTMLLabelElement>);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     onChange({ e, checked: !checked });
@@ -79,7 +80,7 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>((props
     <label
       {...otherProps}
       className={cnCheckbox({ size, view, disabled, intermediate, align }, [className])}
-      ref={ref}
+      ref={checkboxRef}
     >
       <input
         type="checkbox"
