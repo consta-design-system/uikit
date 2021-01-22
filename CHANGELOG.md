@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.11.2 (22/01/2021)
+
+- [fix(EventInterceptor): fixed event handlers (#754)](https://github.com/gazprom-neft/consta-uikit/commit/b8de5f97311d6a2e6d6246a54012541c04dbafca) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
+- [docs(Header): add docs for Header](https://github.com/gazprom-neft/consta-uikit/commit/75ef513999664d556d211763e145876df1f55e0e) - [@gizeasy](https://github.com/gizeasy)
+- [fix(ProgressSpin): fixed fill(#753)](https://github.com/gazprom-neft/consta-uikit/commit/160fc94ce5db1d95e509b58cee85112940e5f2d9) - [@gizeasy](https://github.com/gizeasy)
+
+---
+
 ## v1.11.1 (19/01/2021)
 
 - [feat(EventInterceptor): added textfield, checkbox, snackbar, select components (#749)](https://github.com/gazprom-neft/consta-uikit/commit/9ed6f341c1475704619db78936a772348a3c2599) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
