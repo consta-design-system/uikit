@@ -12,9 +12,9 @@ export const WithTooltipExampleProps = () => {
     <div
       className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' })])}
     >
-      <ButtonWithTooltip label="Кнопка" />
+      <ButtonWithTooltip label="Кнопка без свойств" />
       <ButtonWithTooltip
-        label="Кнопка"
+        label="Свойство описано в кнопке"
         tooltipProps={{ content: 'Тултип снизу', direction: 'downCenter' }}
       />
     </div>
