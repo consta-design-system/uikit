@@ -8,35 +8,23 @@
 
   &_size {
     &_xs {
+      --delimiter-space: var(--space-xs);
       font-size: var(--control-text-size-xs);
-
-      .Breadcrumbs-Delimiter {
-        margin: 0 var(--space-xs);
-      }
     }
 
     &_s {
+      --delimiter-space: var(--space-s);
       font-size: var(--control-text-size-s);
-
-      .Breadcrumbs-Delimiter {
-        margin: 0 var(--space-s);
-      }
     }
 
     &_m {
+      --delimiter-space: var(--space-m);
       font-size: var(--control-text-size-m);
-
-      .Breadcrumbs-Delimiter {
-        margin: 0 var(--space-m);
-      }
     }
 
     &_l {
+      --delimiter-space: var(--space-l);
       font-size: var(--control-text-size-l);
-
-      .Breadcrumbs-Delimiter {
-        margin: 0 var(--space-l);
-      }
     }
   }
 
@@ -67,6 +55,7 @@
   }
 
   &-Delimiter {
+    margin: 0 var(--delimiter-space);
     color: var(--color-typo-ghost);
   }
 
