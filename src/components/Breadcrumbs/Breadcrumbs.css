@@ -17,17 +17,25 @@
 
     &_s {
       font-size: var(--control-text-size-s);
+
+      .Breadcrumbs-Delimiter {
+        margin: 0 var(--space-s);
+      }
     }
 
     &_m {
       font-size: var(--control-text-size-m);
+
+      .Breadcrumbs-Delimiter {
+        margin: 0 var(--space-m);
+      }
     }
 
     &_l {
       font-size: var(--control-text-size-l);
 
       .Breadcrumbs-Delimiter {
-        margin: 0 var(--space-m);
+        margin: 0 var(--space-l);
       }
     }
   }
@@ -45,7 +53,7 @@
     transition: color 0.2s;
 
     &_active {
-      color: var(--color-typo-link);
+      color: var(--color-typo-primary);
       pointer-events: none;
     }
 
@@ -59,7 +67,6 @@
   }
 
   &-Delimiter {
-    margin: 0 var(--space-s);
     color: var(--color-typo-ghost);
   }
 

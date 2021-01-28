@@ -39,19 +39,19 @@ const pages: Page[] = [
   },
   {
     label: 'Page4',
-    link: 'https://url.com/page-3',
-  },
-  {
-    label: 'Page5',
     link: 'https://url.com/page-4',
   },
   {
-    label: 'Page6',
+    label: 'Page5',
     link: 'https://url.com/page-5',
   },
   {
-    label: 'Page7',
+    label: 'Page6',
     link: 'https://url.com/page-6',
+  },
+  {
+    label: 'Page7',
+    link: 'https://url.com/page-7',
     isActive: true,
   },
 ];
