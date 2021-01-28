@@ -4,7 +4,7 @@ import {
   SidebarExampleRight,
   SidebarExampleTop,
   SidebarExampleBottom,
-  SidebarExampleNoOverlay
+  SidebarExampleNoOverlay,
 } from './examples/SidebarExample/SidebarExample';
 
 # Sidebar
@@ -51,17 +51,17 @@ import {
 
 ## Свойства
 
-| Свойство                       | Тип или варианты значения          | По умолчанию           |                                                              |
-| ------------------------------ | ---------------------------------- | ---------------------- | ------------------------------------------------------------ |
-| [`position?`](#расположение)   | `'right', 'bottom', 'left', 'top'` | `right`                | Расположение сайдбара                                        |
-| `isOpen?`                      | `boolean`                          | -                      | Показывает и убирает всплывающее окно                                 |
-| `onClose?`                     | `() => void`                       | -                      | Действие при закрытии окна                                   |
-| `onOpen?`                      | `() => void`                       | -                      | Действие при открытии окна                                   |
-| [`hasOverlay?`](#подложка)     | `boolean`                          | -                      | Добавляет подложку вокруг окна, поверх основной страницы |
-| [`onOverlayClick?`](#подложка) | `(e: React.MouseEvent) => void`    | -                      | Действие по клику на подложку                                |
-| `className?`                   | `string`                           | -                      | Дополнительный CSS-класс для компонента                      |
-| `children?`                    | `React.ReactNode`                  | -                      | Дочерние элементы                                            |
-| `container?`                   | `HTMLDivElement, undefined`        | `window.document.body` | Родительский контейнер                                       |
+| Свойство                     | Тип или варианты значения          | По умолчанию           |                                                          |
+| ---------------------------- | ---------------------------------- | ---------------------- | -------------------------------------------------------- |
+| [`position?`](#расположение) | `'right', 'bottom', 'left', 'top'` | `right`                | Расположение сайдбара                                    |
+| `isOpen?`                    | `boolean`                          | -                      | Показывает и убирает всплывающее окно                    |
+| `onClose?`                   | `() => void`                       | -                      | Действие при закрытии окна                               |
+| `onOpen?`                    | `() => void`                       | -                      | Действие при открытии окна                               |
+| [`hasOverlay?`](#подложка)   | `boolean`                          | -                      | Добавляет подложку вокруг окна, поверх основной страницы |
+| `onClickOutside?`            | `(e: MouseEvent) => void`          | -                      | Действие по нажатию за пределами окна                    |
+| `className?`                 | `string`                           | -                      | Дополнительный CSS-класс для компонента                  |
+| `children?`                  | `React.ReactNode`                  | -                      | Дочерние элементы                                        |
+| `container?`                 | `HTMLDivElement, undefined`        | `window.document.body` | Родительский контейнер                                   |
 
 ## Пример
 
