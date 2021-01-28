@@ -7,7 +7,7 @@ type TModalProps = React.ComponentProps<typeof Modal>;
 
 const testId = 'modal';
 const testChildrenId = 'modalChildren';
-const overlayAriaLabel = 'Оверлэй';
+const overlayAriaLabel = 'Overlay';
 
 const getComponent = (props: TModalProps) => {
   return (
@@ -44,7 +44,7 @@ describe('Компонент Modal', () => {
   });
 
   describe('проверка оверлэя', () => {
-    const onOverlayClick = jest.fn();
+    const onClickOutside = jest.fn();
 
     it('должен рендериться по дефолту', () => {
       render(getComponent({ onClose }));
@@ -52,11 +52,11 @@ describe('Компонент Modal', () => {
       expect(overlay).toBeInTheDocument();
     });
 
-    it('должен вызваться onOverlayClick по клику на оверлэй', () => {
-      render(getComponent({ hasOverlay: true, onOverlayClick }));
+    it('должен вызваться onClickOutside по клику на оверлэй', () => {
+      render(getComponent({ hasOverlay: true, onClickOutside }));
       const overlay = screen.getByLabelText(overlayAriaLabel);
       fireEvent.mouseDown(overlay);
-      expect(onOverlayClick).toHaveBeenCalledTimes(1);
+      expect(onClickOutside).toHaveBeenCalledTimes(1);
     });
   });
 

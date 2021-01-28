@@ -1,11 +1,12 @@
 import './Sidebar.css';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
+import { useClickOutside } from '../../hooks/useClickOutside/useClickOutside';
 import { cn } from '../../utils/bem';
 import { cnForCssTransition } from '../../utils/cnForCssTransition';
-import { PortalWithTheme } from '../PortalWithTheme/PortalWithTheme';
+import { PortalWithTheme, usePortalContext } from '../PortalWithTheme/PortalWithTheme';
 import { useTheme } from '../Theme/Theme';
 
 type DivProps = JSX.IntrinsicElements['div'];
@@ -27,7 +28,8 @@ type SidebarProps = {
   onClose?: () => void;
   onOpen?: () => void;
   hasOverlay?: boolean;
-  onOverlayClick?: (event: React.MouseEvent) => void;
+  onOverlayClick?: (event: MouseEvent) => void;
+  onClickOutside?: (event: MouseEvent) => void;
   position?: SidebarPropPosition;
   width?: SidebarPropWidth;
   height?: SidebarPropHeight;
@@ -60,6 +62,21 @@ const SidebarActions: React.FC<SidebarActionsProps> = ({ className, children, ..
   </div>
 );
 
+const ContextConsumer: React.FC<{
+  onClickOutside?: (event: MouseEvent) => void;
+  ignoreClicksInsideRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
+}> = ({ onClickOutside, children, ignoreClicksInsideRefs }) => {
+  const { refs } = usePortalContext();
+
+  useClickOutside({
+    isActive: !!onClickOutside,
+    ignoreClicksInsideRefs: [...(ignoreClicksInsideRefs || []), ...(refs || [])],
+    handler: (event: MouseEvent) => onClickOutside?.(event),
+  });
+
+  return <>{children}</>;
+};
+
 interface SidebarComponent extends React.FC<SidebarProps>, DivProps {
   Content: typeof SidebarContent;
   Actions: typeof SidebarActions;
@@ -72,6 +89,7 @@ export const Sidebar: SidebarComponent = (props) => {
     onOpen,
     hasOverlay = true,
     onOverlayClick,
+    onClickOutside,
     position = sidebarPropPositionDefault,
     width = sidebarPropWidthDefault,
     height = sidebarPropHeightDefault,
@@ -80,9 +98,9 @@ export const Sidebar: SidebarComponent = (props) => {
     container = window.document.body,
     ...rest
   } = props;
-  const { theme } = useTheme();
 
-  const handleOverlayClick = (event: React.MouseEvent): void => onOverlayClick?.(event);
+  const ref = useRef<HTMLDivElement | null>(null);
+  const { theme } = useTheme();
 
   useEffect(() => {
     if (isOpen) {
@@ -101,18 +119,18 @@ export const Sidebar: SidebarComponent = (props) => {
       timeout={200}
     >
       <PortalWithTheme preset={theme} container={container}>
-        {hasOverlay && (
-          // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-          <div
-            tabIndex={-1}
-            className={cnSidebar('Overlay')}
-            aria-label="Оверлэй"
-            onClick={handleOverlayClick}
-            role="button"
-          />
-        )}
-        <div className={cnSidebar('Window', { width, height, position }, [className])} {...rest}>
-          {children}
+        {hasOverlay && <div className={cnSidebar('Overlay')} aria-label="Overlay" />}
+        <div
+          className={cnSidebar('Window', { width, height, position }, [className])}
+          ref={ref}
+          {...rest}
+        >
+          <ContextConsumer
+            onClickOutside={onClickOutside || onOverlayClick}
+            ignoreClicksInsideRefs={[ref]}
+          >
+            {children}
+          </ContextConsumer>
         </div>
       </PortalWithTheme>
     </CSSTransition>

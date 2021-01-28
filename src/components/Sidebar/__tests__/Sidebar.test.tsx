@@ -8,7 +8,7 @@ type SidebarProps = React.ComponentProps<typeof Sidebar>;
 const testId = 'sidebar';
 const testContentId = 'sidebarContent';
 const testActionsId = 'sidebarActions';
-const overlayAriaLabel = 'Оверлэй';
+const overlayAriaLabel = 'Overlay';
 
 const getComponent = (props: SidebarProps) => {
   return (
@@ -45,7 +45,7 @@ describe('Компонент Sidebar', () => {
     });
 
     describe('проверка оверлэя', () => {
-      const onOverlayClick = jest.fn();
+      const onClickOutside = jest.fn();
 
       it('должен рендериться по дефолту', () => {
         render(getComponent({ onClose }));
@@ -53,11 +53,11 @@ describe('Компонент Sidebar', () => {
         expect(overlay).toBeInTheDocument();
       });
 
-      it('вызывается onOverlayClick при клике по оверлэю', () => {
-        render(getComponent({ hasOverlay: true, onOverlayClick }));
+      it('вызывается onClickOutside при клике по оверлэю', () => {
+        render(getComponent({ hasOverlay: true, onClickOutside }));
         const overlay = screen.getByLabelText(overlayAriaLabel);
-        fireEvent.click(overlay);
-        expect(onOverlayClick).toBeCalled();
+        fireEvent.mouseDown(overlay);
+        expect(onClickOutside).toHaveBeenCalledTimes(1);
       });
     });
 
