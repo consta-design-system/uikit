@@ -31,7 +31,7 @@ export type Props = {
   disabled?: boolean;
   className?: string;
   label?: string;
-  onChange: RadioPropOnChange;
+  onChange?: RadioPropOnChange;
   name?: string;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
@@ -70,7 +70,9 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>((props, ref)
   } = props;
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    onChange({ e, checked: !checked });
+    if (onChange) {
+      onChange({ e, checked: !checked });
+    }
   };
 
   return (

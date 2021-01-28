@@ -32,7 +32,7 @@ type Props = {
   disabled?: boolean;
   intermediate?: boolean;
   label?: string;
-  onChange: CheckboxPropOnChange;
+  onChange?: CheckboxPropOnChange;
   name?: string;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
@@ -73,7 +73,9 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>((props
   } = usePropsHandler(cnCheckbox(), props, checkboxRef as React.RefObject<HTMLLabelElement>);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    onChange({ e, checked: !checked });
+    if (onChange) {
+      onChange({ e, checked: !checked });
+    }
   };
 
   return (
