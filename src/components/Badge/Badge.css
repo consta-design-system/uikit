@@ -15,19 +15,19 @@
 
   &_size {
     &_s {
-      --badge-size: 20px;
+      --badge-size: var(--control-box-size-l);
       --badge-text-size: var(--size-text-2xs);
       padding: 0 var(--space-2xs);
     }
 
     &_m {
-      --badge-size: 24px;
+      --badge-size: calc(var(--control-box-size-l) * 1.2);
       --badge-text-size: var(--size-text-xs);
       padding: 0 var(--space-xs);
     }
 
     &_l {
-      --badge-size: 32px;
+      --badge-size: calc(var(--control-box-size-l) * 1.6);
       --badge-text-size: var(--size-text-s);
       padding: 0 var(--space-xs);
     }
