@@ -63,7 +63,7 @@
       .Checkbox-Input {
         &::before {
           top: 9px;
-          left: 2px;
+          left: 3px;
         }
       }
     }
@@ -110,11 +110,11 @@
   &_intermediate:hover {
     .Checkbox-Input,
     .Checkbox-Input:checked {
-      background-color: var(--color-control-bg-primary);
-      border-color: var(--color-control-bg-primary);
+      background-color: var(--checkbox-checked-background);
+      border-color: var(--checkbox-checked-border);
 
       &::before {
-        background-color: var(--color-control-typo-primary);
+        background-color: var(--checkbox-checked-check);
         opacity: 1;
         transition: opacity 0.15s, transform 0.15s, background-color 0.08s 0.04s;
         transform: rotate(0) scale(1, 0.35) translate(0, -50%);
