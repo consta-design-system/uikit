@@ -21,13 +21,13 @@
     }
 
     &_m {
-      --badge-size: calc(var(--control-box-size-l) * 1.2);
+      --badge-size: var(--control-height-xs);
       --badge-text-size: var(--size-text-xs);
       padding: 0 var(--space-xs);
     }
 
     &_l {
-      --badge-size: calc(var(--control-box-size-l) * 1.6);
+      --badge-size: var(--control-height-s);
       --badge-text-size: var(--size-text-s);
       padding: 0 var(--space-xs);
     }
