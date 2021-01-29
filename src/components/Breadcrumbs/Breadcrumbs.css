@@ -8,27 +8,23 @@
 
   &_size {
     &_xs {
+      --delimiter-space: var(--space-xs);
       font-size: var(--control-text-size-xs);
-
-      .Breadcrumbs-Delimiter {
-        margin: 0 var(--space-xs);
-      }
     }
 
     &_s {
+      --delimiter-space: var(--space-s);
       font-size: var(--control-text-size-s);
     }
 
     &_m {
+      --delimiter-space: var(--space-m);
       font-size: var(--control-text-size-m);
     }
 
     &_l {
+      --delimiter-space: var(--space-l);
       font-size: var(--control-text-size-l);
-
-      .Breadcrumbs-Delimiter {
-        margin: 0 var(--space-m);
-      }
     }
   }
 
@@ -45,7 +41,7 @@
     transition: color 0.2s;
 
     &_active {
-      color: var(--color-typo-link);
+      color: var(--color-typo-primary);
       pointer-events: none;
     }
 
@@ -59,7 +55,7 @@
   }
 
   &-Delimiter {
-    margin: 0 var(--space-s);
+    margin: 0 var(--delimiter-space);
     color: var(--color-typo-ghost);
   }
 
