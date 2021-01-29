@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.11.3 (29/01/2021)
+
+- [fix(Modal): remove story with combobox (#799)](https://github.com/gazprom-neft/consta-uikit/commit/6aa71b99744c1e1e25fa38f18def8fe8b112177f) - [@azhadanov](https://github.com/azhadanov)
+- [docs(storybook): add custom colors and Consta Kit logo to Storybook (#800)](https://github.com/gazprom-neft/consta-uikit/commit/2b87ce7ea1c91e4713e26c20e8dbf4556f599d81) - [@kolebayev](https://github.com/kolebayev)
+- [fix(Switch): onChange made an optional prop in Switch, Radio, Checkbox, updated docs for these compo (#787)](https://github.com/gazprom-neft/consta-uikit/commit/b8b8bcf0f40cdf74f1522a1c3e0220eb8d31a5b0) - [@azhadanov](https://github.com/azhadanov)
+- [fix(Breadcrumbs): fixed indents and font color (#784)](https://github.com/gazprom-neft/consta-uikit/commit/2fab268800d764cf4a568f80256d33e1ce7cbfff) - [@azhadanov](https://github.com/azhadanov)
+- [fix(components): fix css variable name and add letter spacing (#767)](https://github.com/gazprom-neft/consta-uikit/commit/e593bc021d2167fb1160ff604c23c620bbbd57b2) - [@kolebayev](https://github.com/kolebayev)
+- [fix(PortalWithTheme): fixed outside click in components based on PortalWithTheme (#781)](https://github.com/gazprom-neft/consta-uikit/commit/b0910a6d20a726352426a932b94c6d3f4ce7b4de) - [@gizeasy](https://github.com/gizeasy)
+- [chore(CODEOWNERS): added @azhadanov (#783)](https://github.com/gazprom-neft/consta-uikit/commit/ba60d7d0120c5bb16986dc6a62a45306506b6495) - [@gizeasy](https://github.com/gizeasy)
+
+---
+
 ## v1.11.2 (22/01/2021)
 
 - [fix(EventInterceptor): fixed event handlers (#754)](https://github.com/gazprom-neft/consta-uikit/commit/b8de5f97311d6a2e6d6246a54012541c04dbafca) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
@@ -359,18 +371,3 @@ docs(button): add new docs for button - @fooontic
 - Добавлены новые иконки Bag, Folders, Layers, Reply, Storage, Warning #184 #203
 - Bсправлен баг в BaseCheckGroupField #188
 - Переименовали типы #211
-
----
-
-## alpha (23/12/2019)
-
-Добавлены компоненты:
-— Button
-— Checkbox
-— ChoiceGroup
-— Header
-— Input
-— Loader
-— Radio
-— Select
-— Switch
