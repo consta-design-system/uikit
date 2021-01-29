@@ -49,8 +49,8 @@
 
       .Checkbox-Input {
         &::before {
-          top: 7px;
-          left: 2px;
+          top: 0.55em;
+          left: 0.15em;
         }
       }
     }
@@ -62,8 +62,8 @@
 
       .Checkbox-Input {
         &::before {
-          top: 9px;
-          left: 3px;
+          top: 0.7em;
+          left: 0.2em;
         }
       }
     }
