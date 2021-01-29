@@ -1,12 +1,11 @@
 import './Modal.stories.css';
 
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import { boolean, select } from '@storybook/addon-knobs';
 
 import { cn } from '../../../utils/bem';
-import { createMetadata, createStory } from '../../../utils/storybook';
+import { createMetadata } from '../../../utils/storybook';
 import { Button } from '../../Button/Button';
-import { Combobox } from '../../Combobox/Combobox';
 import { Text } from '../../Text/Text';
 import { Modal } from '../Modal';
 
@@ -30,38 +29,6 @@ const defaultKnobs = () => ({
   width: select('width', ['auto'], 'auto'),
   position: select('position', ['center', 'top'], 'center'),
 });
-
-const items = [
-  { label: 'Neptunium', value: 'Neptunium' },
-  { label: 'Plutonium', value: 'Plutonium' },
-  { label: 'Americium', value: 'Americium' },
-  { label: 'Curium', value: 'Curium' },
-  { label: 'Berkelium', value: 'Berkelium' },
-  {
-    label: 'Californium Berkelium Curium Plutonium',
-    value: 'Californium Berkelium Curium Plutonium',
-  },
-  { label: 'Einsteinium', value: 'Einsteinium' },
-  { label: 'Fermium', value: 'Fermium' },
-  { label: 'Mendelevium', value: 'Mendelevium' },
-  { label: 'Nobelium', value: 'Nobelium' },
-  { label: 'Lawrencium', value: 'Lawrencium' },
-  { label: 'Rutherfordium', value: 'Rutherfordium' },
-  { label: 'Dubnium', value: 'Dubnium' },
-  { label: 'Seaborgium', value: 'Seaborgium' },
-  { label: 'Bohrium', value: 'Bohrium' },
-  { label: 'Hassium', value: 'Hassium' },
-  { label: 'Meitnerium', value: 'Meitnerium' },
-  { label: 'Darmstadtium', value: 'Darmstadtium' },
-  { label: 'Roentgenium', value: 'Roentgenium' },
-  { label: 'Copernicium', value: 'Copernicium' },
-  { label: 'Nihonium', value: 'Nihonium' },
-  { label: 'Flerovium', value: 'Flerovium' },
-  { label: 'Moscovium', value: 'Moscovium' },
-  { label: 'Livermorium', value: 'Livermorium' },
-  { label: 'Tennessine', value: 'Tennessine' },
-  { label: 'Oganesson', value: 'Oganesson' },
-];
 
 export function Playground(props: {
   children: React.ReactNode;
@@ -116,35 +83,6 @@ export function Playground(props: {
     </div>
   );
 }
-
-export const WithCreateStory = createStory(
-  () => {
-    const getItemLabel = (option: SelectOption): string => option.label;
-    const dropdownRef = useRef<HTMLDivElement | null>(null);
-    const [value, setValue] = useState<Option | null | undefined>();
-
-    return (
-      <Playground dropdownRef={[dropdownRef]}>
-        <Text as="p" size="s" view="secondary" className={cnModalStories('title')}>
-          Заголовок модалки
-        </Text>
-        <div style={{ padding: 20 }}>
-          <Combobox
-            id="example"
-            options={items}
-            value={value}
-            onChange={setValue}
-            getOptionLabel={getItemLabel}
-            dropdownRef={dropdownRef}
-          />
-        </div>
-      </Playground>
-    );
-  },
-  {
-    name: 'c combobox',
-  },
-);
 
 export default createMetadata({
   title: 'Компоненты|/Modal',
