@@ -31,7 +31,7 @@ type Props = {
   disabled?: boolean;
   className?: string;
   label?: string;
-  onChange: SwitchPropOnChange;
+  onChange?: SwitchPropOnChange;
   name?: string;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
@@ -70,7 +70,9 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>((props, re
   } = props;
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    onChange({ e, checked: !checked });
+    if (onChange) {
+      onChange({ e, checked: !checked });
+    }
   };
 
   return (

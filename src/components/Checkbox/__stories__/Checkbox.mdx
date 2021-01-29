@@ -124,6 +124,7 @@ import { CheckboxExampleView } from './examples/CheckboxExampleView/CheckboxExam
 | [`disabled?`](#состояния)     | `boolean`                                   | -            | Блокирует чекбокс                                                            |
 | [`intermediate?`](#состояния) | `boolean`                                   | -            | Делает чекбокс неопределенным                                                |
 | `name?`                       | `string`                                    | -            | Имя `<input>` в DOM                                                          |
+| `onChange?`                   | `(object: {e: React.ChangeEvent<HTMLInputElement>; checked: boolean;}) => void;` | -            | Действие при смене состояния чекбокса                                              |
 | `onFocus?`                    | `React.FocusEventHandler<HTMLInputElement>` | -            | Событие фокуса                                                               |
 | `onBlur?`                     | `React.FocusEventHandler<HTMLInputElement>` | -            | Событие расфокусировки                                                       |
 | `tabIndex?`                   | `number`                                    | -            | Порядковый номер при переходе между элементами интерфейса по клавише **tab** |
