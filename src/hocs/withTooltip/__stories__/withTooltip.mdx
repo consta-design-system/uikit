@@ -19,7 +19,7 @@ import { WithTooltipExampleSize } from './examples/WithTooltipExampleSize/WithTo
 ## Что это такое
 
 C помощью `withTooltip` можно добавить `Tooltip` к любому компоненту,
-который умеет обрабатывать события из списка ниже так, как здесь описано:
+который умеет обрабатывать события из списка ниже:
 
 ```ts
 onClick?: (() => void) | React.EventHandler<React.MouseEvent>;
@@ -54,7 +54,9 @@ export const WithTooltipExampleText = () => {
 
 Свойства тултипа можно задать двумя способами:
 - в самом HOC,
-- в компоненте, который возвращает HOC (они главнее).
+- в компоненте, который возвращает HOC.
+
+Свойства, заданные в компоненте, будут главнее.
 
 ```tsx
 import { withTooltip } from '@consta/uikit/withTooltip';
@@ -124,7 +126,7 @@ export const WithTooltipExampleProps = () => {
 
 ### Другие свойства
 
-Остальные свойства тултипа — например, направление разворачивания, задаются так же, как у компонента [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story).                                                   
+Остальные свойства тултипа — например, направление разворачивания, задаются так же, как у компонента [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story).
 
 
 ## Свойства
