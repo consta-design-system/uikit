@@ -7,7 +7,12 @@ import { ContextMenuExampleSizeS, ContextMenuExampleSizeL, ContextMenuExampleSiz
 
 # ContextMenu
 
-Контекстное меню можно добавить на страницу — в любую область, в которой нужна дополнительная навигация.
+Контекстное меню используется, когда нужно показать дополнительные действия,
+которые можно совершить с объектами интерфейса — например, возможность перейти
+к разделам страницы.
+
+Чаще всего контекстное меню вызывается правой кнопкой мыши по клику на иконку «кебаб»
+или другую иконку или кнопку, подходящую по смыслу.
 
 - [Пункты меню](#пункты-меню)
   - [Сделать активным](#сделать-пункт-меню-активным)
@@ -18,7 +23,6 @@ import { ContextMenuExampleSizeS, ContextMenuExampleSizeL, ContextMenuExampleSiz
 - [Второй уровень меню](#второй-уровень-меню)
 - [Закрыть по клику за пределами](#закрыть-меню-по-клику-по-внешней-области)
 - [Список свойств](#свойства)
-- [Пример использования](#пример)
 
 ## Пункты меню
 
@@ -263,13 +267,13 @@ const items: Item[] = [
         name: 'Пункт 1-3',
         menu: [
           {
-  name: 'Пункт 1-3-1',
+            name: 'Пункт 1-3-1',
           },
           {
-  name: 'Пункт 1-3-2',
+            name: 'Пункт 1-3-2',
           },
           {
-  name: 'Пункт 1-3-3',
+            name: 'Пункт 1-3-3',
           },
         ],
       },
@@ -349,10 +353,31 @@ export const ContextMenuExampleOutsideClick = () => {
 ```tsx
 type Item = unknown;
 
-
+type Direction =
+  | 'downCenter'
+  | 'upCenter'
+  | 'downRight'
+  | 'downLeft'
+  | 'upRight'
+  | 'upLeft'
+  | 'leftUp'
+  | 'leftCenter'
+  | 'leftDown'
+  | 'rightUp'
+  | 'rightCenter'
+  | 'rightDown'
+  | 'downStartLeft'
+  | 'upStartLeft'
+  | 'downStartRight'
+  | 'upStartRight'
+  | 'leftStartUp'’
+  | 'leftStartDown'
+  | 'rightStartUp'
+  | 'rightStartDown';
 
 type SubMenuDirection = 'rightStartUp' | 'rightStartDown' | 'leftStartUp' | 'leftStartDown';
 ```
+
 
 | Свойство  | Тип  | По умолчанию   | Описание   |
 | ---------- | ----| -------------- | ---------- |
@@ -377,43 +402,3 @@ type SubMenuDirection = 'rightStartUp' | 'rightStartDown' | 'leftStartUp' | 'lef
 | [`getRightSideBar?`](#добавить-дополнительные-элементы)  | `(item: ITEM) => React.ReactNode, null`     | —    | Результат функции будет использоваться как рендер справа от названия пункта меню    |
 | [`onClickOutside?`](#закрытие-контекстного-меню-по-клику-вне-меню) | `(event: MouseEvent) => void;`      | —    | Действие по клику вне меню или вне элемента, привязанного к `anchorRef`       |
 | `className?`          | `string` | —    | Дополнительный CSS-класс для каждого уровня меню |
-
-### Direction
-
-```tsx
-
-type Direction =
-  | 'downCenter'
-  | 'upCenter'
-  | 'downRight'
-  | 'downLeft'
-  | 'upRight'
-  | 'upLeft'
-  | 'leftUp'
-  | 'leftCenter'
-  | 'leftDown'
-  | 'rightUp'
-  | 'rightCenter'
-  | 'rightDown'
-  | 'downStartLeft'
-  | 'upStartLeft'
-  | 'downStartRight'
-  | 'upStartRight'
-  | 'leftStartUp'’
-  | 'leftStartDown'
-  | 'rightStartUp'
-  | 'rightStartDown';
-
-```
-
-### SubMenuDirection
-
-```tsx
-
-type SubMenuDirection =
-   | 'rightStartUp'
-   | 'rightStartDown'
-   | 'leftStartUp'
-   | 'leftStartDown';
-
-```
