@@ -109,6 +109,7 @@
     position: absolute;
     -webkit-appearance: none;
     appearance: none;
+    opacity: 0;
   }
 
   &-Label:last-child {
