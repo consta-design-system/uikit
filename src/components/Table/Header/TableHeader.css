@@ -48,10 +48,10 @@
   &-Buttons {
     --half-cell-padding-horizontal: calc(var(--cell-padding-horizontal) * 0.5);
     position: absolute;
-    top: 50%;
+    bottom: var(--cell-padding-vertical);
     right: calc(var(--half-cell-padding-horizontal) + var(--resizer-width));
     display: flex;
-    transform: translateY(-50%);
+    transform: translateY(calc((var(--control-height-xs) - var(--graphics-size-s)) / 2));
   }
 
   &-Icon {

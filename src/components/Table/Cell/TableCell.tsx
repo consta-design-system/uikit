@@ -44,7 +44,7 @@ type Props = {
 
 const getVerticalAlign = (props: Props): string | undefined => {
   if (props.type === 'header') {
-    return 'center';
+    return 'bottom';
   }
 
   return 'verticalAlign' in props ? props.verticalAlign : undefined;
