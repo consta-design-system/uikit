@@ -27,6 +27,13 @@
   letter-spacing: 0.1em;
 
   &_size {
+    &_xs {
+      width: 20px;
+      height: 20px;
+      font-size: 6px;
+      line-height: 20px;
+    }
+
     &_s {
       width: 24px;
       height: 24px;
