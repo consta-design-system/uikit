@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { isDefined } from '../../utils/type-guards';
 
+import { CustomSavedFilters } from './customFiltering';
 import { RowField, TableColumn, TableRow } from './Table';
 
 export type Filters<T extends TableRow> = Array<{
@@ -100,14 +101,20 @@ export const getSelectedFiltersList = <T extends TableRow>({
   }, []);
 };
 
+/**
+ *
+ * Фильтрация данных как по старым фильтрам, так и по новым кастомным
+ */
 export const filterTableData = <T extends TableRow>({
   data,
   filters,
   selectedFilters,
+  savedCustomFilters,
 }: {
   data: T[];
   filters: Filters<T>;
   selectedFilters: SelectedFilters;
+  savedCustomFilters: CustomSavedFilters<T>;
 }): T[] => {
   const mutableFilteredData = [];
 
@@ -117,6 +124,24 @@ export const filterTableData = <T extends TableRow>({
 
     for (const columnName of columnNames) {
       const columnFilters = selectedFilters[columnName];
+      const columnCustomFilter = savedCustomFilters[columnName];
+
+      if (
+        columnCustomFilter &&
+        columnCustomFilter.isActive &&
+        !columnCustomFilter.externalFiltration
+      ) {
+        let cellIsValid = false;
+        const cellContent = row[columnName];
+
+        if (columnCustomFilter.filterer(cellContent, columnCustomFilter.value)) {
+          cellIsValid = true;
+        }
+
+        if (!cellIsValid) {
+          rowIsValid = false;
+        }
+      }
 
       if (columnFilters && columnFilters.length) {
         let cellIsValid = false;

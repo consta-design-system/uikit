@@ -12,9 +12,17 @@ import { isNotNil } from '../../utils/type-guards';
 import { Text } from '../Text/Text';
 
 import { HorizontalAlign, TableCell, VerticalAlign } from './Cell/TableCell';
+import { TableFiltersResult } from './FiltersResult/TableFiltersResult';
 import { TableHeader } from './Header/TableHeader';
 import { TableResizer } from './Resizer/TableResizer';
 import { TableSelectedOptionsList } from './SelectedOptionsList/TableSelectedOptionsList';
+import {
+  CustomFilters,
+  CustomSavedFilters,
+  fieldCustomFilterPresent,
+  isSomeCustomFilterActive,
+  useCustomFilters,
+} from './customFiltering';
 import {
   fieldFiltersPresent,
   FieldSelectedValues,
@@ -115,6 +123,10 @@ export type Props<T extends TableRow> = {
   onRowHover?: onRowHover;
   lazyLoad?: LazyLoad;
   onFiltersUpdated?: (filters: SelectedFilters) => void;
+  customFilters?: CustomFilters<T>;
+  onCustomFiltersUpdate?: (filters: CustomSavedFilters<T>) => void;
+  numberOfRows?: number;
+  getResultText?: (count: number, total: number) => string;
 };
 
 export type SortingState<T extends TableRow> = {
@@ -166,6 +178,10 @@ export const Table = <T extends TableRow>({
   lazyLoad,
   onSortBy,
   onFiltersUpdated,
+  customFilters,
+  onCustomFiltersUpdate,
+  numberOfRows = rows.length,
+  getResultText,
 }: Props<T>): React.ReactElement => {
   const {
     headers,
@@ -200,6 +216,12 @@ export const Table = <T extends TableRow>({
     removeOneSelectedFilter,
     removeAllSelectedFilters,
   } = useSelectedFilters(filters, onFiltersUpdated);
+
+  const { savedCustomFilters, updateCustomFilterValue, resetCustomFilters } = useCustomFilters(
+    customFilters,
+    onCustomFiltersUpdate,
+  );
+
   /*
     Подписываемся на изменения размеров таблицы, но не используем значения из
     хука так как нам нужна ширина и высота таблицы без размера скролла. Этот хук
@@ -357,7 +379,10 @@ export const Table = <T extends TableRow>({
 
       return {
         ...column,
-        filterable: Boolean(filters && fieldFiltersPresent(filters, column.accessor)),
+        filterable: Boolean(
+          (filters && fieldFiltersPresent(filters, column.accessor)) ||
+            fieldCustomFilterPresent(savedCustomFilters, column.accessor),
+        ),
         isSortingActive: isSortedByColumn(column),
         isFilterActive,
         isResized,
@@ -375,9 +400,15 @@ export const Table = <T extends TableRow>({
 
   const sortedTableData = sortingData(rows, sorting, onSortBy);
   const filteredData =
-    !filters || !isSelectedFiltersPresent(selectedFilters)
-      ? sortedTableData
-      : filterTableData({ data: sortedTableData, filters, selectedFilters });
+    (filters && isSelectedFiltersPresent(selectedFilters)) ||
+    (savedCustomFilters && isSomeCustomFilterActive(savedCustomFilters))
+      ? filterTableData({
+          data: sortedTableData,
+          filters: filters || [],
+          selectedFilters,
+          savedCustomFilters,
+        })
+      : sortedTableData;
 
   const { maxVisibleRows = 210, scrollableEl = tableRef.current } = lazyLoad || {};
 
@@ -506,6 +537,8 @@ export const Table = <T extends TableRow>({
         selectedFilters={selectedFilters}
         showHorizontalCellShadow={showHorizontalCellShadow}
         borderBetweenColumns={borderBetweenColumns}
+        savedCustomFilters={savedCustomFilters}
+        customFiltersConfirmHandler={updateCustomFilterValue}
       />
       {filters && isSelectedFiltersPresent(selectedFilters) && (
         <div className={cnTable('RowWithoutCells')}>
@@ -513,6 +546,16 @@ export const Table = <T extends TableRow>({
             values={getSelectedFiltersList({ filters, selectedFilters, columns: lowHeaders })}
             onRemove={removeSelectedFilter(filters)}
             onReset={resetSelectedFilters}
+          />
+        </div>
+      )}
+      {savedCustomFilters && isSomeCustomFilterActive(savedCustomFilters) && (
+        <div className={cnTable('RowWithoutCells')}>
+          <TableFiltersResult
+            rows={filteredData}
+            numberOfRows={numberOfRows}
+            onReset={resetCustomFilters}
+            getResultText={getResultText}
           />
         </div>
       )}

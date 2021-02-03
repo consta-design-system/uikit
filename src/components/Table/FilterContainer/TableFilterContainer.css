@@ -1,0 +1,30 @@
+.TableFilterContainer {
+  &-Content {
+    width: 400px;
+    max-width: 400px;
+    max-height: 440px;
+    padding: var(--space-m);
+    background-color: var(--color-bg-secondary);
+    border-radius: var(--control-radius);
+    box-shadow: 0 24px 32px rgba(var(--color-nums-shadow), 0.04),
+      0 16px 24px rgba(var(--color-nums-shadow), 0.04),
+      0 4px 8px rgba(var(--color-nums-shadow), 0.04), 0 0 1px rgba(var(--color-nums-shadow), 0.04);
+  }
+
+  &-Buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--space-m);
+
+    & > .Button {
+      flex-basis: 50%;
+      flex-shrink: 1;
+      margin-right: var(--space-s);
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

@@ -5,6 +5,7 @@ import { boolean, number, object, select, text } from '@storybook/addon-knobs';
 
 import {
   generateData,
+  rangeFilterer,
   tableData,
   tableWithBagdeData,
   tableWithMergedCellsData,
@@ -18,8 +19,11 @@ import { Button } from '../../Button/Button';
 import { Checkbox } from '../../Checkbox/Checkbox';
 import { Text } from '../../Text/Text';
 import { verticalAligns } from '../Cell/TableCell';
+import { TableChoiceGroupFilter } from '../ChoiceGroupFilter/TableChoiceGroupFilter';
 import { Filters, SortByProps } from '../filtering';
+import { TableNumberFilter } from '../NumberFilter/TableNumberFilter';
 import { Props, sizes, Table, TableColumn, TableRow, zebraStriped } from '../Table';
+import { TableTextFilter } from '../TextFilter/TableTextFilter';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
@@ -310,6 +314,102 @@ export const WithMergedCells = createStory(
   ),
   {
     name: 'с объединёнными ячейками',
+  },
+);
+
+export const withCustomFilters = createStory(
+  () => {
+    const [filteredRows, setFilteredRows] = React.useState(tableData.rows);
+    const [loading, setLoading] = React.useState(false);
+    const [filtersValues, setFiltersValues] = React.useState<{ [key: string]: any }>({});
+
+    React.useEffect(() => {
+      setLoading(true);
+
+      setTimeout(() => {
+        const newRows = tableData.rows.filter(({ type }) => {
+          if (filtersValues.type?.value === 'oil') {
+            return type === 'Нефть';
+          }
+
+          return true;
+        });
+
+        setFilteredRows(newRows);
+
+        setLoading(false);
+      }, 1000);
+    }, [tableData.rows, filtersValues.type]);
+
+    return (
+      <div className={cnTableStories()}>
+        {!loading ? (
+          <Table
+            {...getKnobs({ filters: undefined })}
+            rows={filteredRows}
+            onCustomFiltersUpdate={(filters) => {
+              setFiltersValues(
+                Object.keys(filters).reduce<{ [key: string]: any }>((obj, key) => {
+                  return { ...obj, [key]: filters[key]?.value };
+                }, {}),
+              );
+            }}
+            numberOfRows={tableData.rows.length}
+            customFilters={{
+              field: {
+                filterComponent: TableTextFilter,
+                filterComponentProps: {
+                  withSearch: true,
+                  items: [
+                    { name: 'Северное', value: 'Северное' },
+                    { name: 'Южное', value: 'Южное' },
+                    {
+                      name: 'Западное',
+                      value: 'Западное',
+                    },
+                    { name: 'Восточное', value: 'Восточное' },
+                    { name: 'Центральное', value: 'Центральное' },
+                  ],
+                },
+                filterer: (cellValue, filterValues: Array<{ value: string; name: string }>) => {
+                  return filterValues.some(
+                    (filterValue) => filterValue && filterValue.value === cellValue,
+                  );
+                },
+                initialValue: filtersValues.field,
+              },
+
+              year: {
+                filterComponent: TableNumberFilter,
+                filterer: rangeFilterer,
+                initialValue: filtersValues.year,
+              },
+
+              type: {
+                filterComponent: TableChoiceGroupFilter,
+                filterer: (cellValue, filterValue: { name: string; value: string }) => {
+                  if (filterValue.value === 'oil') {
+                    return cellValue === 'Нефть';
+                  }
+
+                  return false;
+                },
+                filterComponentProps: {
+                  items: [{ name: 'Нефть', value: 'oil' }],
+                },
+                initialValue: filtersValues.type,
+                externalFiltration: true,
+              },
+            }}
+          />
+        ) : (
+          <div>Фильтрую где-то на сервере...</div>
+        )}
+      </div>
+    );
+  },
+  {
+    name: 'с кастомными фильтрами',
   },
 );
 

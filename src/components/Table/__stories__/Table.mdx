@@ -9,6 +9,7 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
   - [Сортировка](#сортировка)
   - [Строки](#строки)
   - [Фильтры](#фильтры)
+  - [Кастомные фильтры](#кастомные-фильтры)
   - [Заглушка](#заглушка)
 - [Внешний вид](#внешний-вид)
   - [Размер](#размер)
@@ -101,7 +102,7 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
 
 `field` - поле к которому применять фильтрацию
 
-`filterer` - функция фильрации
+`filterer` - функция фильтрации
 
 ```tsx
 [
@@ -117,6 +118,102 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
 ### Колбэк на применение фильтра
 
 Если вам нужно повесить обработчик на событие изменения фильтров в таблице (например для загрузки данных, к которым применен фильтр), вы можете сделать это с помощью свойства `onFiltersUpdated`.
+
+### Кастомные фильтры
+
+Кастомные фильтры добавляются с помощью свойства `customFilters`.
+
+`filterer` - функция фильтрации
+
+`filterComponent` - кастомный компонент фильтра
+
+`filterComponentProps` - пропсы для кастомного компонента
+
+`initialValue` - предустановленное значение фильтра
+
+`externalFiltration` - происходит ли фильтрация вне таблицы. Если равен `true`, то фильтр внутри таблицы применён не будет
+
+```tsx
+{
+  age: {
+    filterComponent: TableNumberFilter,
+    initialValue: {min: 18, max: 100}
+    filterer: (cellValue, filterValue) => {
+      const minValue = isDefined(filterValue.min) ? filterValue.min : -Infinity;
+      const maxValue = isDefined(filterValue.max) ? filterValue.max : Infinity;
+
+      return Number(cellValue) <= Number(maxValue) && Number(cellValue) >= Number(minValue);
+    }
+  },
+  name: {
+    filterComponent: TableTextFilter,
+    filterComponentProps: {
+      withSearch: true,
+      items: [
+          {name: 'Антон', 'value': 'Антон'},
+          {name: 'Василиса', 'value': 'Василиса'},
+          {name: 'Дмитрий', 'value': 'Дмитрий'}
+        ]
+    },
+    filterer: (cellValue, filterValues: Array<{name: string, value: string}>) => {
+      return filterValues.some(
+        (filterValue) => filterValue && filterValue.value === cellValue);
+    }
+  }
+  title: {
+    filterComponent: TableChoiceGroupFilter,
+    filterComponentProps: {
+      items: [
+          {name: 'Бурильщики', 'value': 'drillers'},
+          {name: 'Геологоразведчики', 'value': 'scouts'},
+        ]
+    },
+    filterer: (cellValue, filterValue: {name: string, value: string}) => {
+      if (filterValue.value === 'drillers') {
+        return cellValue === 'Бурильщик'
+      }
+
+      if (filterValue.value === 'scouts') {
+        return cellValue === 'Геологоразведчик'
+      }
+
+      return false;
+    }
+  }
+};
+```
+
+Событие изменения значений кастомных фильтров можно обработать с помощью колбэка в свойстве `onCustomFiltersUpdate`
+
+#### Реализация компонента кастомного фильтра
+
+Кастомный компонент фильтра получает следующие пропсы:
+
+| Свойство               | Тип                                                               | Описание                                                                          |
+| ---------------------- | ----------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| onConfirm              | (filter: { value: CustomFilterValue; isActive: boolean }) => void | Функция для сохранения обновленного значения фильтра и статуса активности фильтра |
+| savedCustomFilterValue | CustomFilterValue                                                 | Значение сохраненного значения фильтра                                            |
+| onCancel               | () => void                                                        | Функция для закрытия окна фильтра без его применения                              |
+
+Имеется ряд предустановленных кастомных компонентов фильтров:
+
+| Компонент              | Дополнительные пропсы                                               | Описание                           |
+| ---------------------- | ------------------------------------------------------------------- | ---------------------------------- |
+| TableNumberFilter      | -                                                                   | Фильтрация по значениям "от-до"    |
+| TableChoiceGroupFilter | { items: {name: string, value: any} }                               | Фильтрация по одному из значенений |
+| TableTextFilter        | { items: Array<{ name: string, value: any }>; withSearch: boolean } | Фильтрация по нескольким значениям |
+
+В качестве основы для кастомного компонента рекомендуется использовать компонент `TableFilterContainer`, представляющий из себя блок с кнопками подтверждения и сброса фильтра.
+Он принимает в себя следующие пропсы:
+
+| Свойство           | Тип        | Описание                                   |
+| ------------------ | ---------- | ------------------------------------------ |
+| onReset            | () => void | Обработчик нажатия на кнопку подтверждения |
+| onConfirm          | () => void | Обработчик нажатия на кнопку отмены        |
+| title              | string     | Заголовок окна                             |
+| confirmButtonLabel | string     | Текст на кнопке подтверждения              |
+| resetButtonLabel   | string     | Текст на кнопку сброса                     |
+| children           | ReactNode  | Вложенные элементы                         |
 
 ### Заглушка
 
@@ -203,28 +300,60 @@ type OnRowHover = ({ id, e }: { id: string | undefined; e: React.MouseEvent }) =
 type LazyLoad = { maxVisibleRows?: number; scrollableEl?: HTMLDivElement / Window; }
 // maxVisibleRows - количество строк
 // scrollableEl - элемент с onScroll listener
+
+type CustomFilterComponentProps = {
+  onConfirm: (value: { value: CustomFilterValue; isActive: boolean }) => void;
+  onCancel: () => void;
+  savedCustomFilterValue: CustomFilterValue;
+} & Record<string, unknown>;
+
+type CustomFilter = {
+  filterer: (value: any, filterValue: CustomFilterValue) => boolean;
+  filterComponent: React.FC<CustomFilterComponentProps>;
+  filterComponentProps?: Omit<CustomFilterComponentProps, 'onConfirm' | 'savedCustomFilterValue'>;
+  initialValue?: CustomFilterValue;
+  externalFiltration?: boolean;
+};
+
+type CustomFilters<T extends TableRow> = { [key in RowField<T>]?: CustomFilter }
+
+type CustomSavedFilter = CustomFilter & {
+  value: CustomFilterValue;
+  isActive: boolean;
+};
+
+type CustomSavedFilters<T extends TableRow> = {
+  [field in RowField<T>]?: CustomSavedFilter;
+};
+
+
 ```
 
-| Свойство                                            | Тип или варианты значения                                                       | По умолчанию                                      | Описание                                             |
-| --------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------- | ---------------------------------------------------- |
-| [`columns`](#колонки)                               | `Column[]`                                                                      | -                                                 | Колонки в таблице                                    |
-| [rows](#строки)                                     | `Row[]`                                                                         | -                                                 | Строки в таблице                                     |
-| [`filters`](#фильтры)                               | `Filter[]`                                                                      | -                                                 | Список фильтров                                      |
-| [`size`](#размер)                                   | `'s', 'm', 'l'`                                                                 | 'l'                                               | Размер таблицы                                       |
-| [`stickyHeader`](#закрепить-заголовок)              | `boolean`                                                                       | false                                             | Зафиксированный заголовок                            |
-| [`stickyColumns`](#закрепить-колонки)               | `number`                                                                        | 0                                                 | Количество зафиксированных колонок                   |
-| [`isResizable`](#менять-ширину-колонок)             | `boolean`                                                                       | false                                             | Возможность изменения размера колонок                |
-| [`activeRow`](#выделить-строки)                     | `{ id?: string; onChange: ({id?: string, e?: React.SyntheticEvent}) => void; }` | -                                                 | Активная строка                                      |
-| [`verticalAlign`](#выравнивание-по-вертикали)       | `'center', 'top', 'bottom'`                                                     | `'top'`                                           | Выравнивание по вертикали                            |
-| [`zebraStriped`](#выделить-строки)                  | `'odd', 'even'`                                                                 | false                                             | Окрашивание строк через одну                         |
-| [`borderBetweenRows`](#границы)                     | `boolean`                                                                       | false                                             | Отображение границ между строками                    |
-| [`borderBetweenColumns`](#границы)                  | `boolean`                                                                       | false                                             | Отображение границ между колонками                   |
-| [`emptyRowsPlaceholder`](#заглушка)                 | `React.ReactNode`                                                               | -                                                 | Заглушка, показывается, когда в таблице нет данных   |
-| [`onRowHover`](#выделить-строки)                    | `OnRowHover`                                                                    | -                                                 | Функция которая сработает при наведении на строку    |
-| [`onSortBy`](#сортировка)                           | `onSortBy`                                                                      | sortByDefault                                     | Функция срабатывает при нажатии на иконку сортировки |
-| `className`                                         | `string`                                                                        | -                                                 | Дополнительный CSS-класс                             |
-| lazyLoad?                                           | `LazyLoad`                                                                      | `{ maxVisibleRows: 210; scrollableEl: tableRef }` | Включает виртуальную прокрутку в таблице             |
-| [`onFiltersUpdated`](#колбэк-на-применение-фильтра) | `(filters: { field: string[] }) => void`                                        | -                                                 | Колбэк на изменение фильтров                         |
+| Свойство                                            | Тип или варианты значения                           | По умолчанию                                                                    | Описание                                                                                                                                                |
+| --------------------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`columns`](#колонки)                               | `Column[]`                                          | -                                                                               | Колонки в таблице                                                                                                                                       |
+| [rows](#строки)                                     | `Row[]`                                             | -                                                                               | Строки в таблице                                                                                                                                        |
+| [`filters`](#фильтры)                               | `Filter[]`                                          | -                                                                               | Список фильтров                                                                                                                                         |
+| [`size`](#размер)                                   | `'s', 'm', 'l'`                                     | 'l'                                                                             | Размер таблицы                                                                                                                                          |
+| [`stickyHeader`](#закрепить-заголовок)              | `boolean`                                           | false                                                                           | Зафиксированный заголовок                                                                                                                               |
+| [`stickyColumns`](#закрепить-колонки)               | `number`                                            | 0                                                                               | Количество зафиксированных колонок                                                                                                                      |
+| [`isResizable`](#менять-ширину-колонок)             | `boolean`                                           | false                                                                           | Возможность изменения размера колонок                                                                                                                   |
+| [`activeRow`](#выделить-строки)                     | `{ id?: string; onChange: (id?: string) => void; }` | -                                                                               | Активная строка                                                                                                                                         |
+| [`verticalAlign`](#выравнивание-по-вертикали)       | `'center', 'top', 'bottom'`                         | `'top'`                                                                         | Выравнивание по вертикали                                                                                                                               |
+| [`zebraStriped`](#выделить-строки)                  | `'odd', 'even'`                                     | false                                                                           | Окрашивание строк через одну                                                                                                                            |
+| [`borderBetweenRows`](#границы)                     | `boolean`                                           | false                                                                           | Отображение границ между строками                                                                                                                       |
+| [`borderBetweenColumns`](#границы)                  | `boolean`                                           | false                                                                           | Отображение границ между колонками                                                                                                                      |
+| [`emptyRowsPlaceholder`](#заглушка)                 | `React.ReactNode`                                   | -                                                                               | Заглушка, показывается, когда в таблице нет данных                                                                                                      |
+| [`onRowHover`](#выделить-строки)                    | `OnRowHover`                                        | -                                                                               | Функция которая сработает при наведении на строку                                                                                                       |
+| [`onSortBy`](#сортировка)                           | `onSortBy`                                          | sortByDefault                                                                   | Функция срабатывает при нажатии на иконку сортировки                                                                                                    |
+| `className`                                         | `string`                                            | -                                                                               | Дополнительный CSS-класс                                                                                                                                |
+| lazyLoad?                                           | `LazyLoad`                                          | `{ maxVisibleRows: 210; scrollableEl: tableRef }`                               | Включает виртуальную прокрутку в таблице                                                                                                                |
+| [`onFiltersUpdated`](#колбэк-на-применение-фильтра) | `(filters: { field: string[] }) => void`            | -                                                                               | Колбэк на изменение фильтров                                                                                                                            |
+| [`customFilters`](#кастомные-фильтры)               | `CustomFilters`                                     | -                                                                               | Кастомные фильтры                                                                                                                                       |
+| `onCustomFiltersUpdate`                             | `(customFilters: CustomSavedFilters<T>) => void`    | -                                                                               | Колбэк на изменение кастомных фильтров                                                                                                                  |
+| `numberOfRows`                                      | `numberOfRows`                                      | rows.length                                                                     | Общее количество строк. Используется при передаче в таблицу массива строк, отфильтрованных на сервере. Если не задано, то равняется длинне массива rows |
+| `getResultText`                                     | `(count: number, total: number) => string`          | `` (count: number, total: number) => `Найдено ${count} из ${total} значений` `` | Функция для генерации текста с результатами фильтрации                                                                                                  |
+| ;`                                                  |
 
 ## Примеры
 

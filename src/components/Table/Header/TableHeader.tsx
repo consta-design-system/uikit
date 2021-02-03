@@ -5,10 +5,12 @@ import React from 'react';
 import { cn } from '../../../utils/bem';
 import { Button } from '../../Button/Button';
 import { TableCell } from '../Cell/TableCell';
+import { CustomFilterValue, CustomSavedFilters } from '../customFiltering';
 import { FieldSelectedValues, Filters, getOptionsForFilters, SelectedFilters } from '../filtering';
+import { TableFilterPopover } from '../FilterPopover/TableFilterPopover';
 import { TableFilterTooltip } from '../FilterTooltip/TableFilterTooltip';
 import { Header } from '../helpers';
-import { ColumnMetaData, TableColumn, TableRow } from '../Table';
+import { ColumnMetaData, RowField, TableColumn, TableRow } from '../Table';
 
 const cnTableHeader = cn('TableHeader');
 
@@ -34,6 +36,11 @@ type Props<T extends TableRow> = {
   filters: Filters<T> | undefined;
   visibleFilter: string | null;
   selectedFilters: SelectedFilters;
+  savedCustomFilters: CustomSavedFilters<T>;
+  customFiltersConfirmHandler: (
+    field: RowField<T>,
+    filterValue: { value: CustomFilterValue; isActive: boolean },
+  ) => CustomSavedFilters<T>;
   showHorizontalCellShadow: boolean;
   borderBetweenColumns: boolean;
 };
@@ -55,6 +62,8 @@ export const TableHeader = <T extends TableRow>({
   selectedFilters,
   showHorizontalCellShadow,
   borderBetweenColumns,
+  savedCustomFilters,
+  customFiltersConfirmHandler,
 }: Props<T>): React.ReactElement => {
   const tableHeaderHeight = headerRowsHeights.reduce((a: number, b: number) => a + b, 0);
   const tableHeaderStyle: React.CSSProperties & TableCSSCustomProperty = {
@@ -82,6 +91,58 @@ export const TableHeader = <T extends TableRow>({
     build(column);
     return headers.some((header) => header.isResized);
   };
+
+  const getFilterPopover = (column: Header<T> & ColumnMetaData): React.ReactNode => {
+    const isOpen = visibleFilter === column.accessor;
+
+    if (column.filterable && savedCustomFilters && savedCustomFilters[column.accessor]) {
+      const FilterComponent = savedCustomFilters[column.accessor]?.filterComponent;
+      const filterComponentProps = savedCustomFilters[column.accessor]?.filterComponentProps ?? {};
+
+      const onToggle = handleFilterTogglerClick(column.accessor);
+
+      const handleCustomFilterSave = (filterValue: {
+        value: CustomFilterValue;
+        isActive: boolean;
+      }): CustomSavedFilters<T> => {
+        const savedFilters = customFiltersConfirmHandler(column.accessor, filterValue);
+        onToggle();
+
+        return savedFilters;
+      };
+
+      if (FilterComponent) {
+        return (
+          <TableFilterPopover
+            isActive={Boolean(savedCustomFilters[column.accessor]?.isActive)}
+            isOpened={isOpen}
+            className={cnTableHeader('Icon', { type: 'filter' })}
+            onToggle={onToggle}
+          >
+            <FilterComponent
+              {...filterComponentProps}
+              onConfirm={handleCustomFilterSave}
+              savedCustomFilterValue={savedCustomFilters[column.accessor]?.value}
+              onCancel={onToggle}
+            />
+          </TableFilterPopover>
+        );
+      }
+    }
+
+    return filters && column.filterable ? (
+      <TableFilterTooltip
+        field={column.accessor}
+        isOpened={visibleFilter === column.accessor}
+        options={getOptionsForFilters(filters, column.accessor)}
+        values={selectedFilters[column.accessor] || []}
+        onChange={handleTooltipSave}
+        onToggle={handleFilterTogglerClick(column.accessor)}
+        className={cnTableHeader('Icon', { type: 'filter' })}
+      />
+    ) : null;
+  };
+
   return (
     <>
       <div className={cnTableHeader('Row', { withVerticalBorder: borderBetweenColumns })}>
@@ -147,17 +208,7 @@ export const TableHeader = <T extends TableRow>({
                     className={cnTableHeader('Icon', { type: 'sort' })}
                   />
                 )}
-                {filters && column.filterable && (
-                  <TableFilterTooltip
-                    field={column.accessor}
-                    isOpened={visibleFilter === column.accessor}
-                    options={getOptionsForFilters(filters, column.accessor)}
-                    values={selectedFilters[column.accessor] || []}
-                    onChange={handleTooltipSave}
-                    onToggle={handleFilterTogglerClick(column.accessor)}
-                    className={cnTableHeader('Icon', { type: 'filter' })}
-                  />
-                )}
+                {getFilterPopover(column)}
               </div>
             </TableCell>
           );
