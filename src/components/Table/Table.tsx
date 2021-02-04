@@ -66,7 +66,6 @@ type ActiveRow = {
 type onRowHover = ({ id, e }: { id: string | undefined; e: React.MouseEvent }) => void;
 
 export type TableRow = {
-  [key: string]: React.ReactNode;
   id: string;
 };
 
@@ -76,31 +75,37 @@ export type RowField<T extends TableRow> = Exclude<keyof T, symbol | number>;
 
 export type ColumnWidth = number | undefined;
 
+export type ValueOf<T> = T[keyof T];
+
+type ColumnBase<T extends TableRow> = ValueOf<
+  {
+    [K in keyof T]: {
+      accessor: K extends string ? K : never;
+      sortable?: boolean;
+      sortByField?: keyof T;
+      sortFn?(a: T[K], b: T[K]): number;
+      renderCell?: (row: T) => React.ReactNode;
+    };
+  }
+>;
+type SingleColumnAddition<T extends TableRow> = ColumnBase<T> & { columns?: never };
+type GroupColumnAddition<T extends TableRow> = {
+  columns: TableColumn<T>[];
+} & {
+  [K in keyof ColumnBase<T>]?: never;
+};
+
 export type TableColumn<T extends TableRow> = {
   title: React.ReactNode;
-  accessor: RowField<T>;
   align?: HorizontalAlign;
   withoutPadding?: boolean;
   width?: ColumnWidth;
   mergeCells?: boolean;
-} & ({ sortable?: false } | { sortable: true; sortByField?: RowField<T> }) & {
-    columns?: Array<TableColumn<T>>;
-    position?: Position;
-  };
-
-export type ColumnMetaData = {
-  filterable: boolean;
-  isSortingActive: boolean;
-  isFilterActive: boolean;
-  isResized: boolean;
-  isSticky: boolean;
-  showResizer: boolean;
-  columnWidth: number;
-  columnLeftOffset: number;
-};
+  position?: Position;
+} & (GroupColumnAddition<T> | SingleColumnAddition<T>);
 
 export type Props<T extends TableRow> = {
-  columns: Array<TableColumn<T>>;
+  columns: TableColumn<T>[];
   rows: T[];
   filters?: Filters<T>;
   onSortBy?: onSortBy<T>;
@@ -121,13 +126,25 @@ export type Props<T extends TableRow> = {
   onFiltersUpdated?: (filters: SelectedFilters) => void;
 };
 
+export type ColumnMetaData = {
+  filterable: boolean;
+  isSortingActive: boolean;
+  isFilterActive: boolean;
+  isResized: boolean;
+  isSticky: boolean;
+  showResizer: boolean;
+  columnWidth: number;
+  columnLeftOffset: number;
+};
+
 export type SortingState<T extends TableRow> = {
-  by: RowField<T>;
+  by: keyof T;
   order: 'asc' | 'desc';
+  sortFn?: (a: T[keyof T], b: T[keyof T]) => number;
 } | null;
 
-const getColumnSortByField = <T extends TableRow>(column: TableColumn<T>): RowField<T> =>
-  (column.sortable && column.sortByField) || column.accessor;
+const getColumnSortByField = <T extends TableRow>(column: TableColumn<T>): keyof T =>
+  (column.sortable && column.sortByField) || column.accessor!;
 
 const sortingData = <T extends TableRow>(
   rows: T[],
@@ -142,7 +159,7 @@ const sortingData = <T extends TableRow>(
     return rows;
   }
 
-  return sortByDefault(rows, sorting.by, sorting.order);
+  return sortByDefault(rows, sorting.by, sorting.order, sorting.sortFn);
 };
 
 const defaultEmptyRowsPlaceholder = (
@@ -181,7 +198,7 @@ export const Table = <T extends TableRow>({
     resizerTopOffsets,
   } = useHeaderData(columns);
   const stickyColumnsGrid =
-    headers[0][stickyColumns - 1]?.position.gridIndex +
+    headers[0][stickyColumns - 1]?.position.gridIndex! +
     (headers[0][stickyColumns - 1]?.position.colSpan || 1);
 
   const getColumnsWidth = () => lowHeaders.map((column: TableColumn<T>) => column.width);
@@ -254,7 +271,12 @@ export const Table = <T extends TableRow>({
   };
 
   const handleSortClick = (column: TableColumn<T>): void => {
-    const newSorting = getNewSorting(sorting, getColumnSortByField(column));
+    const newSorting = getNewSorting(
+      sorting,
+      getColumnSortByField(column),
+      (column.sortable && column?.sortFn) || undefined,
+    );
+
     const sortProps = newSorting
       ? {
           sortingBy: newSorting.by,
@@ -363,11 +385,11 @@ export const Table = <T extends TableRow>({
       const showResizer =
         stickyColumns > columnIndex ||
         stickyColumnsWidth + tableScroll.left < columnLeftOffset + columnWidth;
-      const isFilterActive = (selectedFilters[column.accessor]?.selected || []).length > 0;
+      const isFilterActive = (selectedFilters[column.accessor!]?.selected || []).length > 0;
 
       return {
         ...column,
-        filterable: Boolean(filters && fieldFiltersPresent(filters, column.accessor)),
+        filterable: Boolean(filters && fieldFiltersPresent(filters, column.accessor!)),
         isSortingActive: isSortedByColumn(column),
         isFilterActive,
         isResized,
@@ -412,20 +434,19 @@ export const Table = <T extends TableRow>({
     (header) => header.mergeCells,
   );
 
-  const getTableCellProps = (
-    row: TableRow,
-    rowIdx: number,
-    column: TableColumn<TableRow>,
-    columnIdx: number,
-  ) => {
+  const renderCell = (column: TableColumn<T>, row: T): React.ReactNode => {
+    return column.renderCell ? column.renderCell(row) : row[column.accessor!];
+  };
+
+  const getTableCellProps = (row: T, rowIdx: number, column: TableColumn<T>, columnIdx: number) => {
     let rowSpan = 1;
     if (
-      (rowsData[rowIdx - 1] && rowsData[rowIdx - 1][column.accessor] !== row[column.accessor]) ||
+      (rowsData[rowIdx - 1] && rowsData[rowIdx - 1][column.accessor!] !== row[column.accessor!]) ||
       rowIdx === 0 ||
       !column.mergeCells
     ) {
       for (let i = rowIdx; i < rowsData.length; i++) {
-        if (rowsData[i + 1] && rowsData[i + 1][column.accessor] === row[column.accessor]) {
+        if (rowsData[i + 1] && rowsData[i + 1][column.accessor!] === row[column.accessor!]) {
           rowSpan++;
         } else {
           break;
@@ -569,13 +590,13 @@ export const Table = <T extends TableRow>({
                       isClickable={!!isRowsClickable}
                       showVerticalShadow={
                         showVerticalCellShadow &&
-                        column?.position!.gridIndex + (column?.position!.colSpan || 1) ===
+                        column?.position!.gridIndex! + (column?.position!.colSpan || 1) ===
                           stickyColumnsGrid
                       }
                       isBorderTop={rowIdx > 0 && borderBetweenRows}
                       isBorderLeft={columnIdx > 0 && borderBetweenColumns}
                     >
-                      {row[column.accessor]}
+                      {renderCell(column, row)}
                     </TableCell>
                   );
                 }
