@@ -1,0 +1,15 @@
+.CalendarViewSlider {
+  &-CalendarsWrapper {
+    display: flex;
+  }
+
+  &-Calendar {
+    &:not(:last-child) {
+      margin-right: var(--space-m);
+    }
+  }
+
+  &-Slider {
+    margin-bottom: var(--space-l);
+  }
+}
