@@ -3,12 +3,30 @@ import { ContextMenuExampleSubMenu } from './examples/ContextMenuExampleSubMenu/
 import { ContextMenuExampleOutsideClick } from './examples/ContextMenuExampleOutsideClick/ContextMenuExampleOutsideClick';
 import { ContextMenuExampleSide } from './examples/ContextMenuExampleSide/ContextMenuExampleSide';
 import { ContextMenuExampleGroups } from './examples/ContextMenuExampleGroups/ContextMenuExampleGroups';
+import { ContextMenuExampleSizeS, ContextMenuExampleSizeL, ContextMenuExampleSizeM } from './examples/ContextMenuExampleSize/ContextMenuExampleSize';
 
 # ContextMenu
 
-## Простой пример меню
+Контекстное меню используется, когда нужно показать дополнительные действия,
+которые можно совершить с объектами интерфейса — например, возможность перейти
+к разделам страницы.
 
-Для добавления пунктов меню импользуйте свойство `items`
+Чаще всего контекстное меню вызывается правой кнопкой мыши по клику на иконку «кебаб»
+или другую иконку или кнопку, подходящую по смыслу.
+
+- [Пункты меню](#пункты-меню)
+  - [Сделать активным](#сделать-пункт-меню-активным)
+  - [Заблокировать](#заблокировать-пункт-меню)
+  - [Добавить дополнительные элементы](#добавить-дополнительные-элементы)
+  - [Группы пунктов](#группы-пунктов-меню)
+- [Размер меню](#размер-меню)
+- [Второй уровень меню](#второй-уровень-меню)
+- [Закрыть по клику за пределами](#закрыть-меню-по-клику-по-внешней-области)
+- [Список свойств](#свойства)
+
+## Пункты меню
+
+Перечислите названия пунктов меню в массиве `items`. За название пункта меню отвечает функция `getLabel`.
 
 ```tsx
 const items: string[] = ['Пункт 1', 'Пункт 2', 'Пункт 3'];
@@ -30,119 +48,27 @@ export const ContextMenuExampleSimple = () => {
 
 <ContextMenuExampleSimple />
 
-## Подменю
+Сюда можно добавить идентификаторы пунктов, идентификаторы групп, пункты меню второго уровня
+и другие дополнительные данные, которые вам могут понадобиться.
 
-Для добавления подпунктов подменю используйте свойство компонента `getSubItems`
+### Сделать пункт меню активным
 
-Вы можете назначить первоночальную позицию раскрытия подменю используя свойство компонента `subMenuDirection`
+Чтобы подсветить активный пункт меню, используйте `getAccent`.
 
-```tsx
-type Item = {
-  name: string;
-  menu?: Item[];
-};
+### Заблокировать пункт меню
 
-const items: Item[] = [
-  {
-    name: 'Пункт 1',
-    menu: [
-      {
-        name: 'Пункт 1-1',
-      },
-      {
-        name: 'Пункт 1-2',
-      },
-      {
-        name: 'Пункт 1-3',
-        menu: [
-          {
-            name: 'Пункт 1-3-1',
-          },
-          {
-            name: 'Пункт 1-3-2',
-          },
-          {
-            name: 'Пункт 1-3-3',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    name: 'Пункт 2',
-  },
-  {
-    name: 'Пункт 3',
-  },
-];
+Чтобы заблокировать пункт меню, используйте `getDisabled`.
 
-const cnContextMenuExampleSubMenu = cn('ContextMenuExampleSubMenu');
+### Добавить дополнительные элементы
 
-export const ContextMenuExampleSubMenu = () => {
-  const ref1 = useRef(null);
-  const ref2 = useRef(null);
-  return (
-    <StoryBookExample className={cnDocsDecorator('Section', [cnContextMenuExampleSubMenu()])}>
-      <Button iconLeft={IconAdd} ref={ref1} />
-      <ContextMenu
-        items={items}
-        getLabel={(item) => item.name}
-        anchorRef={ref1}
-        direction="downStartRight"
-        subMenuDirection="leftStartUp"
-        getSubItems={(item) => item.menu}
-      />
-      <Button iconLeft={IconAdd} ref={ref2} />
-      <ContextMenu
-        items={items}
-        getLabel={(item) => item.name}
-        anchorRef={ref2}
-        direction="downStartLeft"
-        subMenuDirection="rightStartUp"
-        getSubItems={(item) => item.menu}
-      />
-    </StoryBookExample>
-  );
-};
-```
+К каждому пункту в меню можно добавить дополнительные элементы — 
+например, иконку, переключатель, чекбокс или что-то ещё.
 
-<ContextMenuExampleSubMenu />
+Чтобы добавить что-то слева от названия пункта меню, используйте `getLeftSideBar`.
+Справа — `getRightSideBar`.
 
-## Закрытие контекстного меню по клику вне меню
-
-Для закрытия меню по клику вне меню используйте `onClickOutside`
-
-```tsx
-const items: string[] = ['Пункт 1', 'Пункт 2', 'Пункт 3'];
-
-export const ContextMenuExampleOutsideClick = () => {
-  const ref = useRef(null);
-  const [isOpen, setIsOpen] = useState<boolean>(true);
-  return (
-    <>
-      <Button iconLeft={IconAdd} ref={ref} onClick={() => setIsOpen(!isOpen)} />
-      {isOpen && (
-        <ContextMenu
-          items={items}
-          getLabel={(item) => item}
-          anchorRef={ref}
-          direction="downStartLeft"
-          onClickOutside={() => setIsOpen(false)}
-        />
-      )}
-    </>
-  );
-};
-```
-
-<ContextMenuExampleOutsideClick />
-
-## Добавление элементов в пункт меню
-
-Вы можете добавлять свои элементы в пункт меню слева или справа имени.
-
-Используте свойства `getLeftSideBar` и `getRightSideBar`, в них можно передавать как 1 элемент так и массив,
-при передачи массива отступы между элементами проставяться автоматически
+Внутри можно передать один элемент или массив элементов. Отступы между ними
+проставятся автоматически.
 
 ```tsx
 type Item = {
@@ -228,16 +154,14 @@ export const ContextMenuExampleSide = () => {
 
 <ContextMenuExampleSide />
 
-## Групировка пунктов меню
 
-Для группировки меню используйте свойство `getGroupId`,
-результат функции должен вернуть уникальный id группы
+### Группы пунктов
 
-Елси есть необходимость использовать заголовки к группам используйте свойство `getGroupLabel`,
-результат функции будет использоваться как заголовок
+`getGroupId` делит пункты меню на группы (результат функции должен вернуть уникальный идентификатор группы).
 
-если если необходимость в сортировке групп используйте `sortGroup`,
-укажите функцию сортировки на вход которой придут id групп
+Добавить группам заголовки можно с помощью `getGroupLabel` (результат функции будет использоваться как заголовок).
+
+Чтобы отсортировать группы, используйте `sortGroup`. Задайте правила сортировки для идентификаторов групп.
 
 ```tsx
 export const groups = [
@@ -305,6 +229,125 @@ export const ContextMenuExampleGroups = () => {
 
 <ContextMenuExampleGroups />
 
+
+## Размер меню
+
+За размер компонента отвечает свойство `size`. Варианты:  `'s'`, `'m'`, `'l'`.
+
+<ContextMenuExampleSizeS />
+
+<ContextMenuExampleSizeM />
+
+<ContextMenuExampleSizeL />
+
+## Второй уровень меню
+
+Чтобы добавить второй уровень меню, используйте `getSubItems`. Уровней меню может быть сколько угодно
+(хотя не стоит делать их слишком много).
+
+С помощью `subMenuDirection` можно определить, в какую сторону разворачивается меню второго (и любого другого) уровня.
+
+```tsx
+type Item = {
+  name: string;
+  menu?: Item[];
+};
+
+const items: Item[] = [
+  {
+    name: 'Пункт 1',
+    menu: [
+      {
+        name: 'Пункт 1-1',
+      },
+      {
+        name: 'Пункт 1-2',
+      },
+      {
+        name: 'Пункт 1-3',
+        menu: [
+          {
+            name: 'Пункт 1-3-1',
+          },
+          {
+            name: 'Пункт 1-3-2',
+          },
+          {
+            name: 'Пункт 1-3-3',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: 'Пункт 2',
+  },
+  {
+    name: 'Пункт 3',
+  },
+];
+
+const cnContextMenuExampleSubMenu = cn('ContextMenuExampleSubMenu');
+
+export const ContextMenuExampleSubMenu = () => {
+  const ref1 = useRef(null);
+  const ref2 = useRef(null);
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section', [cnContextMenuExampleSubMenu()])}>
+      <Button iconLeft={IconAdd} ref={ref1} />
+      <ContextMenu
+        items={items}
+        getLabel={(item) => item.name}
+        anchorRef={ref1}
+        direction="downStartRight"
+        subMenuDirection="leftStartUp"
+        getSubItems={(item) => item.menu}
+      />
+      <Button iconLeft={IconAdd} ref={ref2} />
+      <ContextMenu
+        items={items}
+        getLabel={(item) => item.name}
+        anchorRef={ref2}
+        direction="downStartLeft"
+        subMenuDirection="rightStartUp"
+        getSubItems={(item) => item.menu}
+      />
+    </StoryBookExample>
+  );
+};
+```
+
+<ContextMenuExampleSubMenu />
+
+## Закрыть меню по клику по внешней области
+
+Чтобы меню можно было закрыть по клику за его пределами, добавьте `onClickOutside`.
+
+```tsx
+const items: string[] = ['Пункт 1', 'Пункт 2', 'Пункт 3'];
+
+export const ContextMenuExampleOutsideClick = () => {
+  const ref = useRef(null);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
+  return (
+    <>
+      <Button iconLeft={IconAdd} ref={ref} onClick={() => setIsOpen(!isOpen)} />
+      {isOpen && (
+        <ContextMenu
+          items={items}
+          getLabel={(item) => item}
+          anchorRef={ref}
+          direction="downStartLeft"
+          onClickOutside={() => setIsOpen(false)}
+        />
+      )}
+    </>
+  );
+};
+```
+
+<ContextMenuExampleOutsideClick />
+
 ## Свойства
 
 ```tsx
@@ -335,26 +378,27 @@ type Direction =
 type SubMenuDirection = 'rightStartUp' | 'rightStartDown' | 'leftStartUp' | 'leftStartDown';
 ```
 
-| Свойство                                                           | Тип                                                                    | По умолчанию   | Описание                                                                                                                                                            |
-| ------------------------------------------------------------------ | ---------------------------------------------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`items`](#простой-пример-меню)                                    | `Item[]`                                                               | —              | Элементы меню                                                                                                                                                       |
-| `anchorRef`                                                        | `React.RefObject<HTMLElement>`                                         | —              | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                                                   |
-| `position`                                                         | `{ x: number; y: number }, undefined`                                  | —              | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                                                   |
-| `direction?`                                                       | `Direction`                                                            | —              | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                                                   |
-| `possibleDirections?`                                              | `Direction`                                                            | —              | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                                                   |
-| `offset?`                                                          | `number`                                                               | —              | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                                                   |
-| [`subMenuDirection?`](#подменю)                                    | `SubMenuDirection`                                                     | 'rightStartUp' | Позиция в которую будет изначально разворачиваться подменю                                                                                                          |
-| `size?`                                                            | `'m', 's', 'l'`                                                        | —              | Размер контекстного меню                                                                                                                                            |
-| `getKey?`                                                          | `(item: ITEM) => string, number;`                                      | —              | Результат функции будет использоваться в качестве уникатльного ключа элемента меню                                                                                  |
-| `getLabel`                                                         | `(item: ITEM) => string, number;`                                      | —              | Результат функции будет использоваться в качестве названия пункта меню. Если не указано свойство `getKey`, то используется в качестве уникального ключа пункта меню |
-| [`getGroupId?`](#групировка-пунктов-меню)                          | `(item: ITEM) => string, number, undefined;`                           | —              | Результат функции будет использоваться в качестве ключа по которому будут групироваться пункты меню                                                                 |
-| [`getGroupLabel?`](#групировка-пунктов-меню)                       | `(id: string, number, undefined) => string, number, undefined;`        | —              | Результат функции будет использоваться как заголовок группы                                                                                                         |
-| `sortGroup?`                                                       | `(a: string, number; b: string, number) => number;`                    | —              | Функция сортировки групп                                                                                                                                            |
-| [`getSubItems?`](#подменю)                                         | `(item: ITEM) => ITEM[], undefined;`                                   | —              | Результат функции будет использоваться в качестве элементов подменю пункта меню                                                                                     |
-| `getAccent?`                                                       | `(item: ITEM) => 'alert', 'warning', 'success', undefined;`            | —              | Результат функции будет использоваться как акцентный цвет пункта меню                                                                                               |
-| `getOnClick?`                                                      | `(item: ITEM) => React.EventHandler<React.MouseEvent<HTMLDivElement>>` | —              | Результат функции будет использоваться в качестве события клика пункта меню                                                                                         |
-| `getDisabled?`                                                     | `(item: ITEM) => boolean`                                              | —              | Результат функции будет использоваться в качестве модификатора `disabled` пункта меню, при `false` события пункта меню будут отключены                              |
-| [`getLeftSideBar?`](#добавлени-эелементов-в-пункт-меню)            | `(item: ITEM) => React.ReactNode, null`                                | —              | Результат функции будет использоваться как рендер слева от названия пункта меню                                                                                     |
-| [`getRightSideBar?`](#добавлени-эелементов-в-пункт-меню)           | `(item: ITEM) => React.ReactNode, null`                                | —              | Результат функции будет использоваться как рендер справа от названия пункта меню                                                                                    |
-| [`onClickOutside?`](#закрытие-контекстного-меню-по-клику-вне-меню) | `(event: MouseEvent) => void;`                                         | —              | Событие клика вне меню и привязанного элемента к `anchorRef`                                                                                                        |
-| `className?`                                                       | `string`                                                               | —              | Дополнительный CSS-класс для каждого уровня меню                                                                                                                    |
+
+| Свойство  | Тип  | По умолчанию   | Описание   |
+| ---------- | ----| -------------- | ---------- |
+| [`items`](#пункты-меню) | `Item[]` | —    | Элементы меню |
+| `anchorRef`           | `React.RefObject<HTMLElement>`      | —    | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)   |
+| `position`  | `{ x: number; y: number }, undefined`       | —    | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)   |
+| `direction?`          | [`Direction`](direction)     | —    | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)   |
+| `possibleDirections?` | [`Direction`](direction)     | —    | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)   |
+| `offset?`   | `number` | —    | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)   |
+| [`subMenuDirection?`](#второй-уровень-меню) | [`SubMenuDirection`](submenudirection)        | 'rightStartUp' | Позиция, в которую будет изначально разворачиваться меню второго уровня         |
+| [`size?`](#размер-меню)     | `'m', 's', 'l'`           | —    | Размер контекстного меню    |
+| `getKey?`   | `(item: ITEM) => string, number;`   | —    | Результат функции используется в качестве уникального ключа для пункта меню  |
+| [`getLabel`](#пункты-меню)  | `(item: ITEM) => string, number;`   | —    | Результат функции используется в качестве названия пункта меню. Если не указано свойство `getKey`, то используется в качестве уникального ключа пункта меню |
+| [`getGroupId?`](#групировка-пунктов-меню)      | `(item: ITEM) => string, number, undefined;`       | —    | Результат функции используется в качестве ключа, по которому группируются пункты меню   |
+| [`getGroupLabel?`](#группы-пунктов)   | `(id: string, number, undefined) => string, number, undefined;`        | —    | Результат функции используется как заголовок группы        |
+| [`sortGroup?`](#группы-пунктов)          | `(a: string, number; b: string, number) => number;`          | —    | Функция сортировки групп        |
+| [`getSubItems?`](#второй-уровень-меню)      | `(item: ITEM) => ITEM[], undefined;`        | —    | Результат функции используется как заголовок пункта меню второго уровня    |
+| `getAccent?`          | `(item: ITEM) => 'alert', 'warning', 'success', undefined;`  | —    | Результат функции используется как акцентный цвет пункта меню     |
+| `getOnClick?`         | `(item: ITEM) => React.EventHandler<React.MouseEvent<HTMLDivElement>>` | —    | Действие по клику на пункт меню         |
+| `getDisabled?`        | `(item: ITEM) => boolean` | —    | Функция, которая блокирует  пункт меню.  При значении `false` события пункта меню отключаются   |
+| [`getLeftSideBar?`](#добавить-дополнительные-элементы)  | `(item: ITEM) => React.ReactNode, null`     | —    | Результат функции будет использоваться как рендер слева от названия пункта меню     |
+| [`getRightSideBar?`](#добавить-дополнительные-элементы)  | `(item: ITEM) => React.ReactNode, null`     | —    | Результат функции будет использоваться как рендер справа от названия пункта меню    |
+| [`onClickOutside?`](#закрытие-контекстного-меню-по-клику-вне-меню) | `(event: MouseEvent) => void;`      | —    | Действие по клику вне меню или вне элемента, привязанного к `anchorRef`       |
+| `className?`          | `string` | —    | Дополнительный CSS-класс для каждого уровня меню |
