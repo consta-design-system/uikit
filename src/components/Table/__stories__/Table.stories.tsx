@@ -19,8 +19,15 @@ import { Checkbox } from '../../Checkbox/Checkbox';
 import { Text } from '../../Text/Text';
 import { verticalAligns } from '../Cell/TableCell';
 import { Filters, SortByProps } from '../filtering';
-import { headerVerticalAligns } from '../Header/TableHeader';
-import { Props, sizes, Table, TableColumn, TableRow, zebraStriped } from '../Table';
+import {
+  headerVerticalAligns,
+  Props,
+  sizes,
+  Table,
+  TableColumn,
+  TableRow,
+  zebraStriped,
+} from '../Table';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore

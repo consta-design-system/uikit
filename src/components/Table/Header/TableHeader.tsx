@@ -8,7 +8,7 @@ import { TableCell } from '../Cell/TableCell';
 import { FieldSelectedValues, Filters, getOptionsForFilters, SelectedFilters } from '../filtering';
 import { TableFilterTooltip } from '../FilterTooltip/TableFilterTooltip';
 import { Header } from '../helpers';
-import { ColumnMetaData, TableColumn, TableRow } from '../Table';
+import { ColumnMetaData, HeaderVerticalAlign, TableColumn, TableRow } from '../Table';
 
 const cnTableHeader = cn('TableHeader');
 
@@ -18,9 +18,6 @@ type TableCSSCustomProperty = {
 
 export const levelTypes = ['high', 'low', 'default'] as const;
 export type LevelType = typeof levelTypes[number];
-
-export const headerVerticalAligns = ['center', 'bottom'] as const;
-type HeaderVerticalAlign = typeof headerVerticalAligns[number];
 
 type Props<T extends TableRow> = {
   isStickyHeader: boolean;

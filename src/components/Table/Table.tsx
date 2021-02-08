@@ -44,8 +44,8 @@ type Size = typeof sizes[number];
 export const zebraStriped = ['odd', 'even'] as const;
 type ZebraStriped = typeof zebraStriped[number];
 
-const headerVerticalAligns = ['center', 'bottom'] as const;
-type HeaderVerticalAlign = typeof headerVerticalAligns[number];
+export const headerVerticalAligns = ['center', 'bottom'] as const;
+export type HeaderVerticalAlign = typeof headerVerticalAligns[number];
 
 type TableCSSCustomProperty = {
   '--table-width': string;
