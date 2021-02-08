@@ -19,6 +19,9 @@ type TableCSSCustomProperty = {
 export const levelTypes = ['high', 'low', 'default'] as const;
 export type LevelType = typeof levelTypes[number];
 
+export const headerVerticalAligns = ['center', 'bottom'] as const;
+type HeaderVerticalAlign = typeof headerVerticalAligns[number];
+
 type Props<T extends TableRow> = {
   isStickyHeader: boolean;
   headersWithMetaData: Array<Header<T> & ColumnMetaData>;
@@ -27,6 +30,7 @@ type Props<T extends TableRow> = {
   getStickyLeftOffset: (columnIndex: number, topHeaderGridIndex: number) => number | undefined;
   stickyColumnsGrid: number;
   showVerticalCellShadow: boolean;
+  headerVerticalAlign: HeaderVerticalAlign;
   getSortIcon: (column: Header<T>) => React.FC;
   handleSortClick: (column: TableColumn<T>) => void;
   handleFilterTogglerClick: (id: string) => () => void;
@@ -46,6 +50,7 @@ export const TableHeader = <T extends TableRow>({
   getStickyLeftOffset,
   stickyColumnsGrid,
   showVerticalCellShadow,
+  headerVerticalAlign,
   getSortIcon,
   handleSortClick,
   handleFilterTogglerClick,
@@ -116,6 +121,7 @@ export const TableHeader = <T extends TableRow>({
               isSticky={isStickyHeader}
               isResized={isColumnResized(column)}
               column={column}
+              verticalAlign={headerVerticalAlign}
               className={cnTableHeader('Cell', {
                 isFirstColumn: column.position!.gridIndex === 0,
                 isFirstRow: column.position!.level === 0,
@@ -134,6 +140,7 @@ export const TableHeader = <T extends TableRow>({
                 className={cnTableHeader('Buttons', {
                   isSortingActive: column.isSortingActive,
                   isFilterActive: column.isFilterActive,
+                  verticalAlign: headerVerticalAlign,
                 })}
               >
                 {column.sortable && (

@@ -24,6 +24,7 @@ type Props = {
   wrapperClassName?: string;
   children: React.ReactNode;
   showVerticalShadow?: boolean;
+  verticalAlign?: VerticalAlign;
 } & (
   | {
       type: 'header';
@@ -33,7 +34,6 @@ type Props = {
   | {
       type: 'content';
       isClickable?: boolean;
-      verticalAlign: VerticalAlign;
       isBorderTop?: boolean;
       isBorderLeft?: boolean;
     }
@@ -41,14 +41,6 @@ type Props = {
       type: 'resizer';
     }
 );
-
-const getVerticalAlign = (props: Props): string | undefined => {
-  if (props.type === 'header') {
-    return 'bottom';
-  }
-
-  return 'verticalAlign' in props ? props.verticalAlign : undefined;
-};
 
 const getCellClasses = (props: Props): string => {
   const { column, showVerticalShadow, className } = props;
@@ -80,7 +72,7 @@ const getWrapperClasses = (props: Props): string => {
     'Wrapper',
     {
       withoutPadding: column.withoutPadding || props.type === 'resizer',
-      verticalAlign: getVerticalAlign(props),
+      verticalAlign: props.verticalAlign,
       horizontalAlign: column.align,
     },
     [wrapperClassName],
