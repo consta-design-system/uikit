@@ -19,7 +19,15 @@ import { Checkbox } from '../../Checkbox/Checkbox';
 import { Text } from '../../Text/Text';
 import { verticalAligns } from '../Cell/TableCell';
 import { Filters, SortByProps } from '../filtering';
-import { Props, sizes, Table, TableColumn, TableRow, zebraStriped } from '../Table';
+import {
+  headerVerticalAligns,
+  Props,
+  sizes,
+  Table,
+  TableColumn,
+  TableRow,
+  zebraStriped,
+} from '../Table';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
@@ -38,6 +46,7 @@ const defaultProps = {
   stickyHeader: false,
   verticalAlign: 'top',
   zebraStriped: '',
+  headerVerticalAlign: 'center',
 } as const;
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -66,6 +75,11 @@ const getKnobs = (replacedProps?: Partial<Props<TableRow>>): Props<TableRow> => 
     stickyHeader: boolean('stickyHeader', props.stickyHeader),
     emptyRowsPlaceholder: text('emptyRowsPlaceholder', '') || undefined,
     verticalAlign: select('verticalAlign', verticalAligns, props.verticalAlign),
+    headerVerticalAlign: select(
+      'headerVerticalAlign',
+      headerVerticalAligns,
+      props.headerVerticalAlign,
+    ),
   };
 };
 

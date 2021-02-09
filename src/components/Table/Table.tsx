@@ -44,6 +44,9 @@ type Size = typeof sizes[number];
 export const zebraStriped = ['odd', 'even'] as const;
 type ZebraStriped = typeof zebraStriped[number];
 
+export const headerVerticalAligns = ['center', 'bottom'] as const;
+export type HeaderVerticalAlign = typeof headerVerticalAligns[number];
+
 type TableCSSCustomProperty = {
   '--table-width': string;
 };
@@ -107,6 +110,7 @@ export type Props<T extends TableRow> = {
   isResizable?: boolean;
   activeRow?: ActiveRow;
   verticalAlign?: VerticalAlign;
+  headerVerticalAlign?: HeaderVerticalAlign;
   zebraStriped?: ZebraStriped;
   borderBetweenRows?: boolean;
   borderBetweenColumns?: boolean;
@@ -157,6 +161,7 @@ export const Table = <T extends TableRow>({
   stickyColumns = 0,
   activeRow,
   verticalAlign = 'top',
+  headerVerticalAlign = 'center',
   zebraStriped,
   borderBetweenRows = false,
   borderBetweenColumns = false,
@@ -497,6 +502,7 @@ export const Table = <T extends TableRow>({
         getStickyLeftOffset={getStickyLeftOffset}
         stickyColumnsGrid={stickyColumnsGrid}
         showVerticalCellShadow={showVerticalCellShadow}
+        headerVerticalAlign={headerVerticalAlign}
         getSortIcon={getSortIcon}
         handleSortClick={handleSortClick}
         handleFilterTogglerClick={handleFilterTogglerClick}
