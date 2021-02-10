@@ -1,14 +1,13 @@
 import './Tooltip.css';
 
 import React, { useState } from 'react';
-import { classnames } from '@bem-react/classnames';
 
 import { ClickOutsideHandler } from '../../hooks/useClickOutside/useClickOutside';
 import { cn } from '../../utils/bem';
 import { PropsWithJsxAttributes } from '../../utils/types/PropsWithJsxAttributes';
 import { Direction, Popover, PositioningProps } from '../Popover/Popover';
 import { Text } from '../Text/Text';
-import { useTheme } from '../Theme/Theme';
+import { generateThemeClassNames, ThemeContext, useTheme } from '../Theme/Theme';
 
 const ARROW_SIZE = 6;
 const ARROW_OFFSET = 8;
@@ -49,18 +48,34 @@ export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>((props, re
   const {
     children,
     size = tooltipPropSizesDefault,
-    className: propsClassName,
+    className,
     status,
     onSetDirection: onSetDirectionProp,
     style,
     ...rest
   } = props;
-  const { themeClassNames } = useTheme();
+  const { theme } = useTheme();
   const [direction, setDirection] = useState<Direction | undefined>(undefined);
 
-  const className = status
-    ? classnames(propsClassName, themeClassNames.color.accent)
-    : classnames(propsClassName, themeClassNames.color.invert);
+  const tooltipTheme = status
+    ? {
+        ...theme,
+        color: {
+          primary: theme.color.accent,
+          accent: theme.color.accent,
+          invert: theme.color.primary,
+        },
+      }
+    : {
+        ...theme,
+        color: {
+          primary: theme.color.invert,
+          accent: theme.color.accent,
+          invert: theme.color.primary,
+        },
+      };
+
+  const tooltipThemeClassNames = generateThemeClassNames(tooltipTheme);
 
   const onSetDirection = (direction: Direction) => {
     onSetDirectionProp && onSetDirectionProp(direction);
@@ -68,22 +83,24 @@ export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>((props, re
   };
 
   return (
-    <Popover
-      {...rest}
-      arrowOffset={ARROW_OFFSET + ARROW_SIZE}
-      offset={ARROW_SIZE + 4}
-      onSetDirection={onSetDirection}
-      ref={ref}
-      className={cnTooltip({ status }, [className])}
-      style={{
-        ['--tooltip-arrow-size' as string]: `${ARROW_SIZE}px`,
-        ['--tooltip-arrow-offset' as string]: `${ARROW_OFFSET}px`,
-        ...style,
-      }}
-    >
-      <div className={cnTooltip('Background')} />
-      <div className={cnTooltip('Arrow', { direction })} />
-      <div className={cnTooltip('Content', { size })}>{renderChildren(children)}</div>
-    </Popover>
+    <ThemeContext.Provider value={{ theme: tooltipTheme, themeClassNames: tooltipThemeClassNames }}>
+      <Popover
+        {...rest}
+        arrowOffset={ARROW_OFFSET + ARROW_SIZE}
+        offset={ARROW_SIZE + 4}
+        onSetDirection={onSetDirection}
+        ref={ref}
+        className={cnTooltip({ status }, [className])}
+        style={{
+          ['--tooltip-arrow-size' as string]: `${ARROW_SIZE}px`,
+          ['--tooltip-arrow-offset' as string]: `${ARROW_OFFSET}px`,
+          ...style,
+        }}
+      >
+        <div className={cnTooltip('Background')} />
+        <div className={cnTooltip('Arrow', { direction })} />
+        <div className={cnTooltip('Content', { size })}>{renderChildren(children)}</div>
+      </Popover>
+    </ThemeContext.Provider>
   );
 });
