@@ -5,5 +5,5 @@ export const Responses503 = createResponses({
   name: 'Responses503',
   image: ResponsesImage503,
   title: 'Технические работы',
-  description: 'Скорее всего, мы уже решаем проблему. Попробуйте зайти позже',
+  description: 'Скорее всего, мы уже решаем проблему. Попробуйте зайти позже.',
 });
