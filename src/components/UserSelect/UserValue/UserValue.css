@@ -1,178 +1,60 @@
 .UserValue {
-  --tag-base-typo-color: var(--color-control-typo-ghost);
-  position: relative;
-  display: inline-flex;
-  overflow: hidden;
-  height: var(--tag-base-height);
-  padding-top: 0;
-  padding-right: var(--tag-base-spaсe);
-  padding-left: var(--tag-base-spaсe);
-  padding-bottom: 0;
-  color: var(--tag-base-typo-color);
-  background: var(--tag-base-bg-color);
-  border: none;
-  border-radius: var(--control-radius);
-  box-shadow: inset 0 0 0 1px var(--tag-base-border-color);
-  font-family: var(--font--primary);
-  font-size: var(--tag-base-font-size);
-  line-height: var(--tag-base-height);
-  text-decoration: none;
-  transition: box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
+  margin-right: calc(var(--space-xs) / 2);
+  margin-bottom: calc(var(--space-xs) / 2);
 
-  &:focus,
-  &:focus:hover {
-    outline: none;
-  }
-
-  &_view {
-    &_stroked {
-      --tag-base-border-color: var(--color-control-bg-border-default);
-      --tag-base-bg-color: var(--color-bg-default);
-    }
-
-    &_filled {
-      --tag-base-border-color: transparent;
-      --tag-base-bg-color: var(--color-control-bg-ghost);
-    }
-  }
-
-  &_withAction {
-    cursor: pointer;
-  }
-
-  &_withAction&_view {
-    &_stroked {
-      &:hover {
-        --tag-base-border-color: var(--color-control-bg-border-default-hover);
-      }
-    }
-
-    &_filled {
-      &:hover {
-        --tag-base-bg-color: var(--color-control-bg-ghost-hover);
-        --tag-base-border-color: transparent;
-      }
-    }
+  .TagBase-Label {
+    word-break: break-word;
   }
 
   &_size {
-    &_xs {
-      --tag-base-height: var(--space-l);
-      --tag-base-spaсe: var(--space-2xs);
-      --tag-base-font-size: var(--size-text-xs);
-    }
-
+    &_xs,
     &_s {
-      --tag-base-height: var(--space-xl);
-      --tag-base-spaсe: var(--space-xs);
-      --tag-base-font-size: var(--size-text-xs);
-      --user-tag-base-space: calc(var(--space-xs) - var(--space-3xs)) var(--space-2xs)
-        calc(var(--space-xs) - var(--space-3xs)) calc(var(--space-xs) - var(--space-3xs));
-    }
-
-    &_m {
-      --tag-base-height: calc(var(--space-2xl) - var(--space-2xs));
-      --tag-base-spaсe: var(--space-xs);
-      --tag-base-font-size: var(--size-text-s);
-      --user-tag-font-size: var(--size-text-2xs);
-      --user-tag-base-space: var(--space-2xs) var(--space-xs) var(--space-2xs) var(--space-s);
-    }
-
-    &_l {
-      --tag-base-height: var(--space-2xl);
-      --tag-base-spaсe: var(--space-s);
-      --tag-base-font-size: var(--size-text-m);
-      --user-tag-font-size: var(--size-text-xs);
-      --user-tag-base-space: calc(var(--space-xs) - var(--space-3xs)) var(--space-xs)
-        calc(var(--space-xs) - var(--space-3xs)) var(--space-s);
+      margin-top: calc(var(--space-xs) / 2 - calc(var(--control-border-width) * 4));
+      margin-bottom: calc(var(--space-xs) / 2 - calc(var(--control-border-width) * 3));
     }
   }
 
-  &_withCancel {
-    --icon-close-opacity: 0.4;
-    padding-right: 0;
+  &_disabled {
+    opacity: 0.8;
   }
 
-  &_withUser {
-    --tag-base-border-color: revert;
-    --tag-base-height: revert;
-    --icon-close-opacity: 0.8;
-    margin-right: var(--space-xs);
-    margin-bottom: calc(var(--space-s) / 4);
-    padding-left: 0;
-  }
-
-  &_withIcon {
-    padding-left: 0;
-  }
-
-  &[class*='UserValue_group'] {
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 2px;
-      height: 100%;
-      background: var(--tag-base-group-color);
-    }
-  }
-
-  &_group {
-    &_1 {
-      --tag-base-group-color: #e92064;
+  &_animate {
+    &_appear,
+    &_appearActive,
+    &_appearDone,
+    &_enter,
+    &_enterActive,
+    &_enterDone,
+    &_exit,
+    &_exitActive,
+    &_exitDone {
+      transition: 0.2s ease;
+      transition-property: opacity, transform;
     }
 
-    &_2 {
-      --tag-base-group-color: #b92eff;
+    &_appear,
+    &_enter,
+    &_enterActive,
+    &_appearActive {
+      opacity: 0;
+      transform: translateY(var(--transition-spase));
     }
 
-    &_3 {
-      --tag-base-group-color: #1160ff;
-    }
-
-    &_4 {
-      --tag-base-group-color: #0fafff;
-    }
-
-    &_5 {
-      --tag-base-group-color: #02e2ff;
-    }
-
-    &_6 {
-      --tag-base-group-color: #0c6;
-    }
-
-    &_7 {
-      --tag-base-group-color: #b4d50b;
-    }
-
-    &_8 {
-      --tag-base-group-color: #f5b800;
-    }
-
-    &_9 {
-      --tag-base-group-color: #f56600;
-    }
-  }
-
-  &-CancelButton {
-    display: inline-flex;
-    align-items: center;
-    height: var(--tag-base-height);
-    margin-left: var(--icon-indent);
-    color: var(--color-control-typo-ghost);
-    background: transparent;
-    border: none;
-    outline: none;
-    opacity: var(--icon-close-opacity);
-    cursor: pointer;
-    transition: opacity 0.15s ease;
-
-    &:hover {
-      background: transparent;
-      outline: none;
+    &_appearDone,
+    &_enterDone {
       opacity: 1;
+      transform: translateY(0);
+    }
+
+    &_exit {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    &_exitActive,
+    &_exitDone {
+      opacity: 0;
+      transform: translateY(var(--transition-spase));
     }
   }
 }

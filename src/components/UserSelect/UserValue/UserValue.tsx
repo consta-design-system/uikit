@@ -8,6 +8,10 @@ import { cn } from '../../../utils/bem';
 import { getSizeByMap } from '../../../utils/getSizeByMap';
 import { TagBasePropSize, tagBasePropSizeDefault } from '../../TagBase/TagBase';
 import { User } from '../../User/User';
+// import { cn } from '../../../utils/bem';
+import { getSizeByMap } from '../../../utils/getSizeByMap';
+import { Avatar } from '../../Avatar/Avatar';
+import { cnTagBase, TagBasePropSize, tagBasePropSizeDefault } from '../../TagBase/TagBase';
 
 type UserValueProps = {
   label: string;
@@ -28,6 +32,13 @@ const sizeMap: Record<TagBasePropSize, IconPropSize> = {
   l: 's',
 };
 
+const avatarSizeMap: Record<TagBasePropSize, IconPropSize> = {
+  xs: 'xs',
+  s: 'xs',
+  m: 's',
+  l: 'm',
+};
+
 export const UserValue: React.FC<UserValueProps> = (props) => {
   const {
     size = tagBasePropSizeDefault,
@@ -41,6 +52,7 @@ export const UserValue: React.FC<UserValueProps> = (props) => {
 
   const withCancel = typeof onCancel === 'function';
   const IconCloseSize = getSizeByMap(sizeMap, size);
+  const AvatarSize = getSizeByMap(avatarSizeMap, size);
   const view = disabled ? 'filled' : 'stroked';
 
   const withUser = true;
@@ -57,6 +69,10 @@ export const UserValue: React.FC<UserValueProps> = (props) => {
     <div
       {...otherProps}
       className={cnUserValue({
+  return (
+    <div
+      {...otherProps}
+      className={cnTagBase({
         size,
         view,
         withCancel,
@@ -71,6 +87,20 @@ export const UserValue: React.FC<UserValueProps> = (props) => {
         view="ghost"
         iconRight={IconRight}
       />
+      <>
+        <span className={cnTagBase('IconWrapper')}>
+          <Avatar size={AvatarSize} url={url} name={label} />
+        </span>
+        <div className={cnTagBase('UserLabelsWrapper')}>
+          <div className={cnTagBase('UserLabel')}>{label}</div>
+          {subLabel && size !== 's' && <div className={cnTagBase('SubUserLabel')}>{subLabel}</div>}
+        </div>
+        {withCancel && !disabled && (
+          <button className={cnTagBase('CancelButton')} type="button" onClick={onCancel}>
+            <IconClose className={cnTagBase('CancelIcon')} size={IconCloseSize} />
+          </button>
+        )}
+      </>
     </div>
   );
 };

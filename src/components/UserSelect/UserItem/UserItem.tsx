@@ -14,6 +14,8 @@ export type UserItemProps = PropsWithHTMLAttributes<
   {
     label: string;
     item: any;
+    subLabel?: string;
+    url?: string;
     active: boolean;
     hovered: boolean;
     multi: boolean;
@@ -26,9 +28,18 @@ export type UserItemProps = PropsWithHTMLAttributes<
 export const cnUserItem = cn('UserItem');
 
 export const UserItem: React.FC<UserItemProps> = (props) => {
-  const { className, label, item, active, hovered, multi, size, indent, ...otherProps } = props;
-  const { subLabel } = item;
-  const { url } = item;
+  const {
+    className,
+    label,
+    subLabel,
+    url,
+    active,
+    hovered,
+    multi,
+    size,
+    indent,
+    ...otherProps
+  } = props;
 
   return (
     <div
@@ -40,11 +51,17 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
       <div className={cnUserItem('AvatarBlock')}>
         <Avatar url={url} name={label} />
         {active && <IconCheck className={cnUserItem('CheckIcon')} />}
+        {active && (
+          <div className={cnUserItem('AvatarCheckIcon')}>
+            <IconCheck className={cnUserItem('CheckIcon')} />
+          </div>
+        )}
       </div>
       {!subLabel ? (
         label
       ) : (
         <div className={cnUserItem('AdditionalInfo')}>
+        <div className={cnUserItem('SubUserInfo')}>
           <div>{label}</div>
           <div className={cnUserItem('SubUserLabel')}>{subLabel}</div>
         </div>

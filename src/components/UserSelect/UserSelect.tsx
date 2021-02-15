@@ -39,15 +39,15 @@ export type UserSelectProps<ITEM, GROUP> = {
   view?: PropView;
   multi?: boolean;
 } & (
-  | {
-      options: ITEM[];
-      getGroupOptions: never;
-    }
-  | {
-      options: GROUP[];
-      getGroupOptions?: (group: GROUP) => ITEM[];
-    }
-);
+    | {
+        options: ITEM[];
+        getGroupOptions: never;
+      }
+    | {
+        options: GROUP[];
+        getGroupOptions?: (group: GROUP) => ITEM[];
+      }
+  );
 
 type UserSelect = <ITEM, GROUP>(props: UserSelectProps<ITEM, GROUP>) => React.ReactElement | null;
 
@@ -136,6 +136,8 @@ export const UserSelect: UserSelect = (props) => {
     scrollToIndex,
     disabled,
     getOptionLabel,
+    getUserAdditionalInfo,
+    getUserUrl,
     getGroupOptions: getGroupOptions as undefined,
     multi: true,
     onSelectOption,
