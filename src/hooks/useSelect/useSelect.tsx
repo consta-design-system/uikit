@@ -29,6 +29,8 @@ type SetHandler<T> = (arg: SetHandlerArg<T>) => void;
 
 export type Option<T> = {
   label: string;
+  subLabel?: string;
+  url?: string;
   item: T;
   group?: string;
   optionForCreate?: boolean;
@@ -45,6 +47,8 @@ export interface SelectProps<T> {
   disabled?: boolean;
   filterFn?(options: T[], searchValue: string): T[];
   getOptionLabel(option: T): string;
+  getOptionSubLabel?(option: T): string;
+  getOptionUrl?(option: T): string;
   onCreate?(s: string): void;
   getGroupOptions?(group: T): T[];
   onSelectOption?(): void;
@@ -130,6 +134,8 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
     disabled = false,
     multi = false,
     getOptionLabel,
+    getOptionSubLabel,
+    getOptionUrl,
     onCreate,
     getGroupOptions,
     onSelectOption,
@@ -147,11 +153,19 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
             .map((group) => {
               const groupName = getOptionLabel(group);
               const items = typeof getGroupOptions === 'function' ? getGroupOptions(group) : [];
-              return items.map((item) => ({ label: getOptionLabel(item), item, group: groupName }));
+              return items.map((item) => ({
+                label: getOptionLabel(item),
+                subLabel: getOptionSubLabel && getOptionSubLabel(item),
+                url: getOptionUrl && getOptionUrl(item),
+                item,
+                group: groupName,
+              }));
             })
             .flat()
         : options.map((option) => ({
             label: getOptionLabel(option),
+            subLabel: getOptionSubLabel && getOptionSubLabel(option),
+            url: getOptionUrl && getOptionUrl(option),
             item: option,
           })),
     [options],
@@ -181,7 +195,15 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
       const searchValueLowerCase = searchValue.toLowerCase();
 
       const tempOptions = originalOptions
-        .filter((option) => option.label.toLowerCase().includes(searchValueLowerCase))
+        .filter((option) => {
+          if (option.subLabel) {
+            return (
+              option.label.toLowerCase().includes(searchValueLowerCase) ||
+              option.subLabel.toLowerCase().includes(searchValueLowerCase)
+            );
+          }
+          return option.label.toLowerCase().includes(searchValueLowerCase);
+        })
         .sort((a) => a.label.toLowerCase().indexOf(searchValueLowerCase));
 
       const matchWithValueSearch = Boolean(

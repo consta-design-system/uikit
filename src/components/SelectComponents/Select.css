@@ -278,8 +278,19 @@
     white-space: normal;
   }
 
+  &_multi &-ControlValue_isUserSelect {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: calc(var(--space-s) / 4);
+    padding-bottom: 0;
+  }
+
   &_multi&_size_l &-ControlValue {
     padding-top: calc(var(--tag-space) - var(--control-border-width));
+  }
+
+  &_multi&_size_l &-ControlValue_isUserSelect {
+    padding-top: calc(var(--space-s) / 4);
   }
 
   &-Placeholder {
