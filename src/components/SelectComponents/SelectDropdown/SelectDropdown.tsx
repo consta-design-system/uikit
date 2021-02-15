@@ -37,6 +37,7 @@ type Props<ITEM> = PropsWithJsxAttributes<{
   getOptionKey(option: ITEM): string | number;
   form?: SelectDropdownPropForm;
   isOpen: boolean;
+  isUserSelect?: boolean;
 }>;
 
 type SelectDropdown = <ITEM>(props: Props<ITEM>) => React.ReactElement | null;
@@ -64,6 +65,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
     labelForNotFound,
     form = defaultSelectDropdownPropForm,
     isOpen,
+    isUserSelect = false,
   } = props;
 
   return (
@@ -124,11 +126,14 @@ export const SelectDropdown: SelectDropdown = (props) => {
                     <SelectItem
                       size={size}
                       label={getOptionLabel(option)}
+                      subLabel={option.subLabel}
+                      url={option.url}
                       id={`${id}-${index}`}
                       active={active}
                       hovered={index === highlightedIndex}
                       multi={multi}
                       indent={indent}
+                      isUserSelect={isUserSelect}
                       {...getOptionProps({ index })}
                     />
                   )}

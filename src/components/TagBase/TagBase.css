@@ -67,23 +67,43 @@
       --tag-base-height: var(--space-xl);
       --tag-base-spaсe: var(--space-xs);
       --tag-base-font-size: var(--size-text-xs);
+      --user-tag-base-space: calc(var(--space-xs) - var(--space-3xs)) var(--space-2xs)
+        calc(var(--space-xs) - var(--space-3xs)) calc(var(--space-xs) - var(--space-3xs));
     }
 
     &_m {
       --tag-base-height: calc(var(--space-2xl) - var(--space-2xs));
       --tag-base-spaсe: var(--space-xs);
       --tag-base-font-size: var(--size-text-s);
+      --user-tag-font-size: var(--size-text-2xs);
+      --user-tag-base-space: var(--space-2xs) var(--space-xs) var(--space-2xs) var(--space-s);
     }
 
     &_l {
       --tag-base-height: var(--space-2xl);
       --tag-base-spaсe: var(--space-s);
       --tag-base-font-size: var(--size-text-m);
+      --user-tag-font-size: var(--size-text-xs);
+      --user-tag-base-space: calc(var(--space-xs) - var(--space-3xs)) var(--space-xs)
+        calc(var(--space-xs) - var(--space-3xs)) var(--space-s);
     }
   }
 
   &_withCancel {
     padding-right: 0;
+
+    --icon-close-opacity: 0.4;
+    --icon-close-space: 0 var(--tag-base-half-space) 0 var(--tag-base-half-space);
+  }
+
+  &_withUser {
+    margin-bottom: calc(var(--space-s) / 4);
+    padding-left: 0;
+
+    --tag-base-height: revert;
+    --icon-close-opacity: 0.8;
+    --icon-close-space: 0 var(--tag-base-spaсe) 0 0;
+    border-radius: 99px;
   }
 
   &_withIcon {
@@ -144,12 +164,12 @@
     display: inline-flex;
     align-items: center;
     height: var(--tag-base-height);
-    padding: 0 var(--tag-base-half-space) 0 var(--tag-base-half-space);
+    padding: var(--icon-close-space);
     color: var(--color-control-typo-ghost);
     background: transparent;
     border: none;
     outline: none;
-    opacity: 0.4;
+    opacity: var(--icon-close-opacity);
     cursor: pointer;
     transition: opacity 0.15s ease;
 
@@ -165,10 +185,25 @@
     line-height: var(--tag-base-height);
   }
 
+  &-UserLabel {
+    height: revert;
+    color: var(--color-typo-primary);
+  }
+
+  &-SubUserLabel {
+    height: revert;
+    color: var(--color-typo-secondary);
+    font-size: var(--user-tag-font-size);
+  }
+
   &-IconWrapper {
     display: inline-flex;
     align-items: center;
     height: var(--tag-base-height);
     padding: 0 var(--tag-base-half-space) 0 var(--tag-base-half-space);
+  }
+
+  &-UserLabelsWrapper {
+    padding: var(--user-tag-base-space);
   }
 }

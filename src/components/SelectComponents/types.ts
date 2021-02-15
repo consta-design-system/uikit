@@ -32,6 +32,8 @@ export type CommonSelectProps<ITEM> = {
   ariaLabel?: string;
   getOptionLabel(arg: ITEM): string;
   getOptionKey?(arg: ITEM): string | number;
+  getOptionUrl?(arg: ITEM): string;
+  getOptionSubLabel?(arg: ITEM): string;
   onBlur?: (event?: React.FocusEvent<HTMLInputElement>) => void;
   onFocus?: (event?: React.FocusEvent<HTMLInputElement>) => void;
   children?: never;
