@@ -9,6 +9,7 @@ import { cnSelect } from '../SelectComponents/cnSelect';
 import { getSelectDropdownForm } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
+import { SelectItem, SelectItemProps } from '../SelectComponents/SelectItem/SelectItem';
 import { SelectValueTag } from '../SelectComponents/SelectValueTag/SelectValueTag';
 import { CommonSelectProps, DefaultPropForm, DefaultPropView } from '../SelectComponents/types';
 
@@ -229,6 +230,10 @@ export const MultiCombobox: MultiCombobox = (props) => {
 
   const inputStyle = React.useMemo(() => getInputStyle(), [inputData.value, arrValue]);
 
+  const getSelectItem = (props: SelectItemProps) => {
+    return <SelectItem {...props} />;
+  };
+
   return (
     <SelectContainer
       focused={isFocused}
@@ -332,6 +337,7 @@ export const MultiCombobox: MultiCombobox = (props) => {
         getOptionLabel={getOptionLabel}
         form={getSelectDropdownForm(form)}
         className={dropdownClassName}
+        renderItem={getSelectItem}
       />
       <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
         {inputData.value}

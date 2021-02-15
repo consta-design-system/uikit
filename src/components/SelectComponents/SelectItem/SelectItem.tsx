@@ -8,7 +8,7 @@ import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttri
 import { Checkbox, CheckboxPropSize } from '../../Checkbox/Checkbox';
 import { PropSize } from '../types';
 
-type SelectItemProps = PropsWithHTMLAttributes<
+export type SelectItemProps = PropsWithHTMLAttributes<
   {
     label: string;
     active: boolean;
