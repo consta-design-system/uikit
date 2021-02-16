@@ -1,0 +1,10 @@
+.ThemeToggler {
+  min-height: 100px;
+  padding: var(--space-xl);
+  background: var(--color-bg-default);
+
+  &-Icon {
+    color: var(--color-control-typo-clear);
+    cursor: pointer;
+  }
+}
