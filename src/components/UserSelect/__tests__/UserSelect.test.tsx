@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 
+import { simpleItems } from '../__mocks__/data.mock';
 import ResizeObserver from '../../../../__mocks__/ResizeObserver';
-import { simpleItems } from '../../Combobox/__mocks__/data.mock';
+import { getInitialsForName } from '../../Avatar/Avatar';
 import { cnSelect } from '../../SelectComponents/cnSelect';
 import { cnSelectItem } from '../../SelectComponents/SelectItem/SelectItem';
 import { UserSelect } from '../UserSelect';
@@ -11,10 +12,10 @@ jest.mock('resize-observer-polyfill', () => {
   return ResizeObserver;
 });
 
-const testId = 'MultiCombobox';
+const testId = 'UserSelect';
 const animationDuration = 200;
 
-type Item = { label: string; value: string };
+type Item = { label: string; value: string; subLabel?: string; url?: string };
 
 const renderComponent = (props: {
   value?: Item[];
@@ -32,6 +33,7 @@ const renderComponent = (props: {
         value={props.value}
         onChange={props.onChange}
         getOptionLabel={(item) => item.label}
+        multi
       />
     </div>,
   );
@@ -208,7 +210,9 @@ describe('Компонент UserSelect', () => {
     it(`отображается в инпуте`, () => {
       renderComponent({ value });
       expect(getControlValue()).toHaveTextContent(
-        elementIndex.map((item) => simpleItems[item].label).join(''),
+        elementIndex
+          .map((item) => `${getInitialsForName(simpleItems[item].label)}${simpleItems[item].label}`)
+          .join(''),
       );
     });
     it(`подсвечивается в списке опций`, () => {
@@ -216,7 +220,9 @@ describe('Компонент UserSelect', () => {
       indicatorsDropdownClick();
 
       expect(getCheckedOptionsText()).toEqual(
-        elementIndex.map((item) => simpleItems[item].label).join(''),
+        elementIndex
+          .map((item) => `${getInitialsForName(simpleItems[item].label)}${simpleItems[item].label}`)
+          .join(''),
       );
     });
     it(`изменение value вне компонента`, () => {
@@ -228,7 +234,9 @@ describe('Компонент UserSelect', () => {
       indicatorsDropdownClick();
 
       expect(getCheckedOptionsText()).toEqual(
-        indexElementBeforeClick.map((item) => simpleItems[item].label).join(''),
+        indexElementBeforeClick
+          .map((item) => `${getInitialsForName(simpleItems[item].label)}${simpleItems[item].label}`)
+          .join(''),
       );
     });
   });
