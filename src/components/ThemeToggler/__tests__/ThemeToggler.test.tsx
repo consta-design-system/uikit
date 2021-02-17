@@ -13,6 +13,7 @@ const renderComponent = (props: {
   themes?: Theme[];
   value?: ThemePreset;
   className?: string;
+  contextMenuClassName?: string;
   setValue?: (arg: ThemePreset) => void;
 }) => {
   return render(
@@ -21,7 +22,8 @@ const renderComponent = (props: {
         {...props}
         data-testid={testId}
         className={props.className}
-        themes={props.themes || exampleThemesTwo}
+        contextMenuClassName={props.contextMenuClassName}
+        themes={props.themes || exampleThemesThree}
         getThemeLabel={(theme) => theme.label}
         getThemeValue={(theme) => theme.theme}
         getThemeIcon={(theme) => theme.icon}
@@ -35,21 +37,6 @@ const renderComponent = (props: {
 function getRender() {
   return screen.getByTestId(testId);
 }
-
-// const ValueTest = (props: { themes: Theme[] }) => {
-//   const [value, setValue] = useState(props.themes[0].theme);
-//   return (
-//     <ThemeToggler
-//       data-testid={testId}
-//       themes={props.themes}
-//       getThemeLabel={(theme) => theme.label}
-//       getThemeValue={(theme) => theme.theme}
-//       getThemeIcon={(theme) => theme.icon}
-//       value={value}
-//       setValue={setValue}
-//     />,
-//   );
-// };
 
 describe('Компонент ThemeToggler', () => {
   it('должен рендериться без ошибок c двумя темами', () => {

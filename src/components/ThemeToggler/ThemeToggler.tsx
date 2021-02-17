@@ -140,10 +140,8 @@ export const ThemeToggler = (props: Props) => {
   };
 
   return (
-    <Theme preset={value} className={cnThemeToggler()}>
-      <div {...otherProps} className={className}>
-        {getTogglerBody()}
-      </div>
-    </Theme>
+    <div {...otherProps} className={className}>
+      {getTogglerBody()}
+    </div>
   );
 };
