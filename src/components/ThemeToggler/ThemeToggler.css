@@ -7,4 +7,20 @@
     color: var(--color-control-typo-clear);
     cursor: pointer;
   }
+
+  &-PreviewIcon {
+    padding: 8px;
+    color: var(--color-control-typo-clear);
+    background-color: var(--color-control-bg-ghost);
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--color-control-bg-ghost-hover);
+    }
+  }
+
+  &-ContextMenu {
+    margin-top: 4px;
+  }
 }
