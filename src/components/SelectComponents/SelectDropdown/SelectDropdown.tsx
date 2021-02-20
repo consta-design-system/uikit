@@ -37,6 +37,7 @@ type Props<ITEM> = PropsWithJsxAttributes<{
   form?: SelectDropdownPropForm;
   isOpen: boolean;
   isUserSelect?: boolean;
+  renderItem?: HTMLDivElement;
 }>;
 
 type SelectDropdown = <ITEM>(props: Props<ITEM>) => React.ReactElement | null;
@@ -64,7 +65,10 @@ export const SelectDropdown: SelectDropdown = (props) => {
     form = defaultSelectDropdownPropForm,
     isOpen,
     isUserSelect = false,
+    renderItem,
   } = props;
+
+  console.log(renderItem);
 
   return (
     <CSSTransition

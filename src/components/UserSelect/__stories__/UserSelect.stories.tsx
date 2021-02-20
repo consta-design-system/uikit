@@ -45,13 +45,13 @@ const Default = (
       }
   ),
 ): JSX.Element => {
-  const getItemLabelDefault = (option: Option): string => option.label;
-  const getItemSubLabelDefault = (option: Option): string => option.subLabel || '';
+  const getItemNameDefault = (option: Option): string => option.label;
+  const getItemAdditionalInfoDefault = (option: Option): string => option.subLabel || '';
   const getItemUrlDefault = (option: Option): string => option.url || '';
   const [value, setValue] = useState<Option[] | null | undefined>();
   const {
     items = simpleItems,
-    getItemLabel = getItemLabelDefault,
+    getItemLabel = getItemNameDefault,
     getGroupOptions,
     onChange = setValue,
   } = props;
@@ -68,8 +68,8 @@ const Default = (
         options={options as Option[]}
         value={val}
         getOptionLabel={getItemLabel}
-        getOptionSubLabel={getItemSubLabelDefault}
-        getOptionUrl={getItemUrlDefault}
+        getUserAdditionalInfo={getItemAdditionalInfoDefault}
+        getUserUrl={getItemUrlDefault}
         getGroupOptions={getGroupOptions as never}
         onChange={onChange}
       />

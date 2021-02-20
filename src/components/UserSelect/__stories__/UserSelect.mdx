@@ -41,8 +41,8 @@ import { UserSelectExample, UserSelectExampleMulti } from './examples/UserSelect
 | [`placeholder?`](#варианты)             | `string`                                               | -            | Подсказка, отображается, когда вариант не выбран                                                                           |
 | [`options`](#варианты)                  | `T[]`                                                  | -            | Варианты, которые можно выбрать                                                                                            |
 | [`getOptionLabel`](#варианты)           | `(arg: T) => string`                                   | -            | Функция для получения текста варианта, который будет отображаться в поле для выбранного значения                           |
-| [`getOptionSubLabel?`](#варианты)       | `(arg: T) => string`                                   | -            | Функция для получения текста варианта, который будет отображаться в поле дополнительной информации для выбранного значения |
-| [`getOptionUrl?`](#варианты)            | `(arg: T) => string`                                   | -            | Функция для получения url изображения, которое будет отображаться в аватаре пользователя                                   |
+| [`getUserAdditionalInfo?`](#варианты)   | `(arg: T) => string`                                   | -            | Функция для получения текста варианта, который будет отображаться в поле дополнительной информации для выбранного значения |
+| [`getUserUrl?`](#варианты)              | `(arg: T) => string`                                   | -            | Функция для получения url изображения, которое будет отображаться в аватаре пользователя                                   |
 | `value?`                                | `T , null`                                             | `null`       | Значение селекта                                                                                                           |
 | `ariaLabel?`                            | `string`                                               | -            | `aria` атрибут для метки                                                                                                   |
 | `id`                                    | `string`                                               | -            | Идентификатор селекта в DOM                                                                                                |
@@ -100,8 +100,8 @@ const Example = () => {
       id="employees"
       options={items}
       getOptionLabel={getItemLabel}
-      getOptionSubLabel={getItemSubLabel}
-      getOptionUrl={getItemUrl}
+      getUserAdditionalInfo={getItemSubLabel}
+      getUserUrl={getItemUrl}
     />
   );
 };
@@ -152,8 +152,8 @@ const Example = () => {
       value={items[0]}
       options={items}
       getOptionLabel={getItemLabel}
-      getOptionSubLabel={getItemSubLabel}
-      getOptionUrl={getItemUrl}
+      getUserAdditionalInfo={getItemSubLabel}
+      getUserUrl={getItemUrl}
     />
   );
 };
