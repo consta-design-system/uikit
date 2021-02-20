@@ -11,6 +11,7 @@ import { SelectContainer } from '../SelectComponents/SelectContainer/SelectConta
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
 import { CommonSelectProps, DefaultPropForm, DefaultPropView } from '../SelectComponents/types';
 
+import { UserItem, UserItemProps } from './UserItem/UserItem';
 import { UserValue } from './UserValue/UserValue';
 
 type SelectContainerProps = React.ComponentProps<typeof SelectContainer>;
@@ -221,8 +222,8 @@ export const UserSelect: UserSelect = (props) => {
     };
   };
 
-  const getUserItem = () => {
-    return <div>1</div>;
+  const getUserItem = (props: UserItemProps) => {
+    return <UserItem {...props} />;
   };
 
   const inputStyle = React.useMemo(() => getInputStyle(), [inputData.value, arrValue]);
@@ -317,7 +318,6 @@ export const UserSelect: UserSelect = (props) => {
         </div>
       </div>
       <SelectDropdown
-        isUserSelect
         isOpen={isOpen}
         size={size}
         controlRef={controlRef}

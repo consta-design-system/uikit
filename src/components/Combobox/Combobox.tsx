@@ -9,6 +9,7 @@ import { cnSelect } from '../SelectComponents/cnSelect';
 import { getSelectDropdownForm } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
+import { SelectItem, SelectItemProps } from '../SelectComponents/SelectItem/SelectItem';
 import {
   CommonSelectProps,
   DefaultPropForm,
@@ -186,6 +187,10 @@ export const Combobox: ComboboxType = (props) => {
     }
   };
 
+  const getSelectItem = (props: SelectItemProps) => {
+    return <SelectItem {...props} />;
+  };
+
   return (
     <SelectContainer
       focused={isFocused}
@@ -270,6 +275,7 @@ export const Combobox: ComboboxType = (props) => {
         labelForNotFound={labelForNotFound}
         form={getSelectDropdownForm(form)}
         className={dropdownClassName}
+        renderItem={getSelectItem}
       />
     </SelectContainer>
   );
