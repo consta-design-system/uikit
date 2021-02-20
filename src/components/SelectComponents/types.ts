@@ -34,6 +34,8 @@ export type CommonSelectProps<ITEM> = {
   getOptionKey?(arg: ITEM): string | number;
   getOptionUrl?(arg: ITEM): string;
   getOptionSubLabel?(arg: ITEM): string;
+  getUserUrl?(arg: ITEM): string;
+  getUserAdditionalInfo?(arg: ITEM): string;
   onBlur?: (event?: React.FocusEvent<HTMLInputElement>) => void;
   onFocus?: (event?: React.FocusEvent<HTMLInputElement>) => void;
   children?: never;

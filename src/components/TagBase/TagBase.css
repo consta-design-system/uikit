@@ -90,19 +90,20 @@
   }
 
   &_withCancel {
-    padding-right: 0;
-
     --icon-close-opacity: 0.4;
     --icon-close-space: 0 var(--tag-base-half-space) 0 var(--tag-base-half-space);
+    padding-right: 0;
   }
 
   &_withUser {
-    margin-bottom: calc(var(--space-s) / 4);
-    padding-left: 0;
-
+    --tag-base-border-color: revert;
     --tag-base-height: revert;
     --icon-close-opacity: 0.8;
     --icon-close-space: 0 var(--tag-base-spaсe) 0 0;
+    margin-right: var(--space-xs);
+    margin-bottom: calc(var(--space-s) / 4);
+    padding-left: 0;
+    background-color: var(--color-control-bg-ghost);
     border-radius: 99px;
   }
 

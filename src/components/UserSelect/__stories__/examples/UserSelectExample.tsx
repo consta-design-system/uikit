@@ -44,8 +44,8 @@ export const UserSelectExample = () => {
         id="employees"
         options={items}
         getOptionLabel={getItemLabel}
-        getOptionSubLabel={getItemSubLabel}
-        getOptionUrl={getItemUrl}
+        getUserAdditionalInfo={getItemSubLabel}
+        getUserUrl={getItemUrl}
         placeholder="Выберите сотрудника"
         size="m"
         onChange={setValue}
@@ -67,8 +67,8 @@ export const UserSelectExampleMulti = () => {
         id="employees"
         options={items}
         getOptionLabel={getItemLabel}
-        getOptionSubLabel={getItemSubLabel}
-        getOptionUrl={getItemUrl}
+        getUserAdditionalInfo={getItemSubLabel}
+        getUserUrl={getItemUrl}
         placeholder="Выберите сотрудника"
         size="m"
         onChange={setValue}

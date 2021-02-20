@@ -48,6 +48,9 @@ export interface SelectProps<T> {
   getOptionKey(option: T): string | number;
   getOptionSubLabel?(option: T): string;
   getOptionUrl?(option: T): string;
+  getOptionLabel(option: T): string;
+  getUserAdditionalInfo?(option: T): string;
+  getUserUrl?(option: T): string;
   onCreate?(s: string): void;
   getGroupOptions?(group: T): T[];
   onSelectOption?(): void;
@@ -136,6 +139,8 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
     getOptionKey,
     getOptionSubLabel,
     getOptionUrl,
+    getUserAdditionalInfo,
+    getUserUrl,
     onCreate,
     getGroupOptions,
     onSelectOption,
@@ -156,8 +161,8 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
               return items.map((item) => ({ ...item, group: groupName }));
               return items.map((item) => ({
                 label: getOptionLabel(item),
-                subLabel: getOptionSubLabel && getOptionSubLabel(item),
-                url: getOptionUrl && getOptionUrl(item),
+                subLabel: getUserAdditionalInfo && getUserAdditionalInfo(item),
+                url: getUserUrl && getUserUrl(item),
                 item,
                 group: groupName,
               }));
@@ -166,8 +171,8 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
         : options,
         : options.map((option) => ({
             label: getOptionLabel(option),
-            subLabel: getOptionSubLabel && getOptionSubLabel(option),
-            url: getOptionUrl && getOptionUrl(option),
+            subLabel: getUserAdditionalInfo && getUserAdditionalInfo(option),
+            url: getUserUrl && getUserUrl(option),
             item: option,
           })),
     [options],

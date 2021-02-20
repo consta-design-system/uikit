@@ -9,8 +9,9 @@ import { cnSelect } from '../SelectComponents/cnSelect';
 import { getSelectDropdownForm } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
-import { SelectValueTag } from '../SelectComponents/SelectValueTag/SelectValueTag';
 import { CommonSelectProps, DefaultPropForm, DefaultPropView } from '../SelectComponents/types';
+
+import { UserValue } from './UserValue/UserValue';
 
 type SelectContainerProps = React.ComponentProps<typeof SelectContainer>;
 
@@ -47,8 +48,8 @@ export const UserSelect: UserSelect = (props) => {
     onChange,
     value,
     getOptionLabel,
-    getOptionSubLabel,
-    getOptionUrl,
+    getUserAdditionalInfo,
+    getUserUrl,
     disabled,
     ariaLabel,
     id,
@@ -122,8 +123,8 @@ export const UserSelect: UserSelect = (props) => {
     scrollToIndex,
     disabled,
     getOptionLabel,
-    getOptionSubLabel,
-    getOptionUrl,
+    getUserAdditionalInfo,
+    getUserUrl,
     getGroupOptions: getGroupOptions as undefined,
     multi: true,
     onSelectOption,
@@ -220,6 +221,10 @@ export const UserSelect: UserSelect = (props) => {
     };
   };
 
+  const getUserItem = () => {
+    return <div>1</div>;
+  };
+
   const inputStyle = React.useMemo(() => getInputStyle(), [inputData.value, arrValue]);
 
   return (
@@ -251,23 +256,22 @@ export const UserSelect: UserSelect = (props) => {
             <div className={cnSelect('ControlValue', { isUserSelect: true })}>
               {arrValue?.map((option) => {
                 const label = getOptionLabel(option);
-                const subLabel = getOptionSubLabel ? getOptionSubLabel(option) : '';
-                const url = getOptionUrl ? getOptionUrl(option) : '';
+                const subLabel = getUserAdditionalInfo ? getUserAdditionalInfo(option) : '';
+                const url = getUserUrl ? getUserUrl(option) : '';
                 const handleRemove = (e: React.SyntheticEvent): void => {
                   e.stopPropagation();
                   handleRemoveValue(option);
                 };
 
                 return (
-                  <SelectValueTag
-                    isUserSelect
+                  <UserValue
                     url={url}
                     label={label}
                     subLabel={subLabel}
                     key={label}
                     size={size}
                     disabled={Boolean(disabled)}
-                    handleRemove={handleRemove}
+                    onCancel={handleRemove}
                   />
                 );
               })}
@@ -290,7 +294,7 @@ export const UserSelect: UserSelect = (props) => {
           </div>
         </div>
         <div className={cnSelect('Indicators')}>
-          {arrValue && arrValue.length !== 0 && (
+          {arrValue && arrValue.length !== 0 && !disabled && (
             <button
               type="button"
               onClick={handleClear}
@@ -330,6 +334,7 @@ export const UserSelect: UserSelect = (props) => {
         getOptionLabel={getOptionLabel}
         form={getSelectDropdownForm(form)}
         className={dropdownClassName}
+        renderItem={getUserItem}
       />
       <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
         {inputData.value}
