@@ -9,9 +9,10 @@ import { cnForCssTransition } from '../../../utils/cnForCssTransition';
 import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
 import { Popover } from '../../Popover/Popover';
 import { Text } from '../../Text/Text';
+import { UserItemProps } from '../../UserSelect/UserItem/UserItem';
 import { SelectCreateButton } from '../SelectCreateButton/SelectCreateButton';
 import { SelectGroupLabel } from '../SelectGroupLabel/SelectGroupLabel';
-import { SelectItem } from '../SelectItem/SelectItem';
+import { SelectItemProps } from '../SelectItem/SelectItem';
 import { PropSize } from '../types';
 
 export const selectDropdownform = ['default', 'brick', 'round'] as const;
@@ -36,8 +37,7 @@ type Props<ITEM> = PropsWithJsxAttributes<{
   getOptionLabel(option: ITEM): string;
   form?: SelectDropdownPropForm;
   isOpen: boolean;
-  isUserSelect?: boolean;
-  renderItem?: () => JSX.Element;
+  renderItem: (props: UserItemProps | SelectItemProps) => JSX.Element;
 }>;
 
 type SelectDropdown = <ITEM>(props: Props<ITEM>) => React.ReactElement | null;
@@ -64,11 +64,8 @@ export const SelectDropdown: SelectDropdown = (props) => {
     labelForNotFound,
     form = defaultSelectDropdownPropForm,
     isOpen,
-    isUserSelect = false,
     renderItem,
   } = props;
-
-  console.log(renderItem);
 
   return (
     <CSSTransition
@@ -127,19 +124,18 @@ export const SelectDropdown: SelectDropdown = (props) => {
                       {...getOptionProps({ index })}
                     />
                   ) : (
-                    <SelectItem
-                      size={size}
-                      label={option.label}
-                      subLabel={option.subLabel}
-                      url={option.url}
-                      id={`${id}-${index}`}
-                      active={active}
-                      hovered={index === highlightedIndex}
-                      multi={multi}
-                      indent={indent}
-                      isUserSelect={isUserSelect}
-                      {...getOptionProps({ index })}
-                    />
+                    renderItem({
+                      size,
+                      label: option.label,
+                      subLabel: option.subLabel,
+                      url: option.url,
+                      id: `${id}-${index}`,
+                      active,
+                      hovered: index === highlightedIndex,
+                      multi,
+                      indent,
+                      ...getOptionProps({ index }),
+                    })
                   )}
                 </React.Fragment>
               );

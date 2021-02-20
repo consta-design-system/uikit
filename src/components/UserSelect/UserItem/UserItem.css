@@ -1,4 +1,4 @@
-.SelectItem {
+.UserItem {
   position: relative;
   padding: var(--vertical-space) var(--horizontal-space);
   color: var(--color-control-typo-default);
@@ -17,18 +17,24 @@
       --horizontal-space: calc(var(--control-space-s) * 0.5);
       --vertical-space: calc(var(--control-space-s) * 0.25);
       --font-size: var(--control-text-size-s);
+      --sub-info-space: var(--space-xs);
+      --sub-label-font-size: var(--size-text-2xs);
     }
 
     &_m {
       --horizontal-space: calc(var(--control-space-m) * 0.5);
       --vertical-space: calc(var(--control-space-s) * 0.5);
       --font-size: var(--control-text-size-m);
+      --sub-info-space: var(--space-s);
+      --sub-label-font-size: var(--size-text-xs);
     }
 
     &_l {
       --horizontal-space: calc(var(--control-space-l) * 0.5);
       --vertical-space: calc(var(--control-space-s) * 0.5);
       --font-size: var(--control-text-size-l);
+      --sub-info-space: var(--space-s);
+      --sub-label-font-size: var(--size-text-s);
     }
   }
 
@@ -66,7 +72,35 @@
     background-color: var(--color-control-bg-primary);
   }
 
-  &-Checkbox {
-    margin-right: var(--space-xs);
+  &-AvatarBlock {
+    position: relative;
+  }
+
+  &-AvatarCheckIcon {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: var(--graphics-size-xs);
+    height: var(--graphics-size-xs);
+    background-color: var(--color-control-bg-primary);
+    border: 1px solid var(--color-control-bg-default);
+    border-radius: 50%;
+  }
+
+  &-CheckIcon {
+    --icon-size: calc(var(--graphics-size-xs) - 4px);
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    color: var(--color-control-bg-default);
+  }
+
+  &-SubUserInfo {
+    padding-left: var(--sub-info-space);
+  }
+
+  &-SubUserLabel {
+    font-size: var(--sub-label-font-size);
+    opacity: 0.7;
   }
 }

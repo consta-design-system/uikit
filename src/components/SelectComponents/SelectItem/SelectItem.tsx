@@ -2,23 +2,18 @@ import './SelectItem.css';
 
 import React from 'react';
 
-import { IconCheck } from '../../../icons/IconCheck/IconCheck';
 import { cn } from '../../../utils/bem';
 import { getSizeByMap } from '../../../utils/getSizeByMap';
 import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
-import { Avatar } from '../../Avatar/Avatar';
 import { Checkbox, CheckboxPropSize } from '../../Checkbox/Checkbox';
 import { PropSize } from '../types';
 
-type SelectItemProps = PropsWithHTMLAttributes<
+export type SelectItemProps = PropsWithHTMLAttributes<
   {
     label: string;
-    subLabel?: string;
-    url?: string;
     active: boolean;
     hovered: boolean;
     multi: boolean;
-    isUserSelect?: boolean;
     size: PropSize;
     indent: 'normal' | 'increased';
   },
@@ -39,19 +34,7 @@ const sizeCheckboxMap: Record<PropSize, CheckboxPropSize> = {
 };
 
 export const SelectItem: React.FC<SelectItemProps> = (props) => {
-  const {
-    className,
-    label,
-    subLabel,
-    url,
-    active,
-    hovered,
-    multi,
-    isUserSelect = false,
-    size,
-    indent,
-    ...otherProps
-  } = props;
+  const { className, label, active, hovered, multi, size, indent, ...otherProps } = props;
 
   return (
     <div
@@ -60,7 +43,7 @@ export const SelectItem: React.FC<SelectItemProps> = (props) => {
       aria-selected={active}
       role="option"
     >
-      {multi && !isUserSelect && (
+      {multi && (
         <Checkbox
           className={cnSelectItem('Checkbox')}
           checked={active}
@@ -68,24 +51,7 @@ export const SelectItem: React.FC<SelectItemProps> = (props) => {
           size={getSizeByMap(sizeCheckboxMap, size)}
         />
       )}
-      {isUserSelect && (
-        <div className={cnSelectItem('AvatarBlock')}>
-          <Avatar url={url} name={label} />
-          {active && (
-            <div className={cnSelectItem('AvatarCheckIcon')}>
-              <IconCheck className={cnSelectItem('CheckIcon')} />
-            </div>
-          )}
-        </div>
-      )}
-      {!isUserSelect || !subLabel ? (
-        label
-      ) : (
-        <div className={cnSelectItem('SubUserInfo')}>
-          <div>{label}</div>
-          <div className={cnSelectItem('SubUserLabel')}>{subLabel}</div>
-        </div>
-      )}
+      {label}
     </div>
   );
 };
