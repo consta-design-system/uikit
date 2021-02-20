@@ -6,7 +6,6 @@ import { IconPropSize } from '../../../icons/Icon/Icon';
 import { IconClose } from '../../../icons/IconClose/IconClose';
 // import { cn } from '../../../utils/bem';
 import { getSizeByMap } from '../../../utils/getSizeByMap';
-import { forwardRefWithAs } from '../../../utils/types/PropsWithAsAttributes';
 import { Avatar } from '../../Avatar/Avatar';
 import { cnTagBase, TagBasePropSize, tagBasePropSizeDefault } from '../../TagBase/TagBase';
 
@@ -36,12 +35,11 @@ const avatarSizeMap: Record<TagBasePropSize, IconPropSize> = {
   l: 'm',
 };
 
-export const UserValue = forwardRefWithAs<UserValueProps>((props, ref) => {
+export const UserValue: React.FC<UserValueProps> = (props) => {
   const {
     size = tagBasePropSizeDefault,
     label,
     subLabel,
-    className,
     disabled,
     onCancel,
     url,
@@ -58,16 +56,12 @@ export const UserValue = forwardRefWithAs<UserValueProps>((props, ref) => {
   return (
     <div
       {...otherProps}
-      className={cnTagBase(
-        {
-          size,
-          view,
-          withCancel,
-          withUser,
-        },
-        [className],
-      )}
-      ref={ref}
+      className={cnTagBase({
+        size,
+        view,
+        withCancel,
+        withUser,
+      })}
     >
       <>
         <span className={cnTagBase('IconWrapper')}>
@@ -85,4 +79,4 @@ export const UserValue = forwardRefWithAs<UserValueProps>((props, ref) => {
       </>
     </div>
   );
-});
+};

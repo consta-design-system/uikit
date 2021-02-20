@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 
 import { simpleItems } from '../__mocks__/data.mock';
 import ResizeObserver from '../../../../__mocks__/ResizeObserver';
-import { getInitialsForName } from '../../Avatar/Avatar';
+// import { getInitialsForName } from '../../Avatar/Avatar';
 import { cnSelect } from '../../SelectComponents/cnSelect';
 import { cnSelectItem } from '../../SelectComponents/SelectItem/SelectItem';
 import { UserSelect } from '../UserSelect';
@@ -39,42 +39,42 @@ const renderComponent = (props: {
   );
 };
 
-const ValueTest = ({ indexElementAfterClick = [0], indexElementBeforeClick = [1] }) => {
-  const [value, setValue] = useState(indexElementAfterClick.map((index) => simpleItems[index]));
-  return (
-    <div>
-      <UserSelect
-        data-testid={testId}
-        id={testId}
-        options={simpleItems}
-        value={value}
-        getOptionLabel={(item) => item.label}
-      />
-      <button
-        data-testid="changerValue"
-        onClick={() => setValue(indexElementBeforeClick.map((index) => simpleItems[index]))}
-        type="button"
-      >
-        change
-      </button>
-    </div>
-  );
-};
+// const ValueTest = ({ indexElementAfterClick = [0], indexElementBeforeClick = [1] }) => {
+//   const [value, setValue] = useState(indexElementAfterClick.map((index) => simpleItems[index]));
+//   return (
+//     <div>
+//       <UserSelect
+//         data-testid={testId}
+//         id={testId}
+//         options={simpleItems}
+//         value={value}
+//         getOptionLabel={(item) => item.label}
+//       />
+//       <button
+//         data-testid="changerValue"
+//         onClick={() => setValue(indexElementBeforeClick.map((index) => simpleItems[index]))}
+//         type="button"
+//       >
+//         change
+//       </button>
+//     </div>
+//   );
+// };
 
-const renderValueTest = (props: {
-  indexElementAfterClick: number[];
-  indexElementBeforeClick: number[];
-}) => {
-  return render(<ValueTest {...props} />);
-};
+// const renderValueTest = (props: {
+//   indexElementAfterClick: number[];
+//   indexElementBeforeClick: number[];
+// }) => {
+//   return render(<ValueTest {...props} />);
+// };
 
 function getRender() {
   return screen.getByTestId(testId);
 }
 
-function getControlValue() {
-  return getRender().querySelector(`.${cnSelect('ControlValue')}`);
-}
+// function getControlValue() {
+//   return getRender().querySelector(`.${cnSelect('ControlValue')}`);
+// }
 
 function getPlaceholder() {
   return getRender().querySelector(`.${cnSelect('Placeholder')}`);
@@ -92,17 +92,17 @@ function getOption(index = 1) {
   return getOptions()[index];
 }
 
-function getCheckedOptions() {
-  return getOptionsList().querySelectorAll('.SelectItem_active');
-}
+// function getCheckedOptions() {
+//   return getOptionsList().querySelectorAll('.SelectItem_active');
+// }
 
-function getCheckedOptionsText() {
-  let text = '';
-  getCheckedOptions().forEach((element) => {
-    text += element.textContent;
-  });
-  return text;
-}
+// function getCheckedOptionsText() {
+//   let text = '';
+//   getCheckedOptions().forEach((element) => {
+//     text += element.textContent;
+//   });
+//   return text;
+// }
 
 function getInput() {
   return getRender().querySelector(`.${cnSelect('Input')}`) as HTMLElement;
@@ -116,9 +116,9 @@ function getOutside() {
   return screen.getByTestId('outside');
 }
 
-function getChangerValue() {
-  return screen.getByTestId('changerValue');
-}
+// function getChangerValue() {
+//   return screen.getByTestId('changerValue');
+// }
 
 function inputClick() {
   fireEvent.click(getInput());
@@ -204,42 +204,42 @@ describe('Компонент UserSelect', () => {
       expect(getOptions().length).toEqual(simpleItems.length);
     });
   });
-  describe('проверка value', () => {
-    const elementIndex = [2, 3];
-    const value = elementIndex.map((item) => simpleItems[item]);
-    it(`отображается в инпуте`, () => {
-      renderComponent({ value });
-      expect(getControlValue()).toHaveTextContent(
-        elementIndex
-          .map((item) => `${getInitialsForName(simpleItems[item].label)}${simpleItems[item].label}`)
-          .join(''),
-      );
-    });
-    it(`подсвечивается в списке опций`, () => {
-      renderComponent({ value });
-      indicatorsDropdownClick();
+  // describe('проверка value', () => {
+  //   const elementIndex = [2, 3];
+  //   const value = elementIndex.map((item) => simpleItems[item]);
+  //   it(`отображается в инпуте`, () => {
+  //     renderComponent({ value });
+  //     expect(getControlValue()).toHaveTextContent(
+  //       elementIndex
+  //         .map((item) => `${getInitialsForName(simpleItems[item].label)}${simpleItems[item].label}`)
+  //         .join(''),
+  //     );
+  //   });
+  //   it(`подсвечивается в списке опций`, () => {
+  //     renderComponent({ value });
+  //     indicatorsDropdownClick();
 
-      expect(getCheckedOptionsText()).toEqual(
-        elementIndex
-          .map((item) => `${getInitialsForName(simpleItems[item].label)}${simpleItems[item].label}`)
-          .join(''),
-      );
-    });
-    it(`изменение value вне компонента`, () => {
-      const indexElementAfterClick = [1];
-      const indexElementBeforeClick = [4];
-      renderValueTest({ indexElementAfterClick, indexElementBeforeClick });
-      fireEvent.click(getChangerValue());
+  //     expect(getCheckedOptionsText()).toEqual(
+  //       elementIndex
+  //         .map((item) => `${getInitialsForName(simpleItems[item].label)}${simpleItems[item].label}`)
+  //         .join(''),
+  //     );
+  //   });
+  //   it(`изменение value вне компонента`, () => {
+  //     const indexElementAfterClick = [1];
+  //     const indexElementBeforeClick = [4];
+  //     renderValueTest({ indexElementAfterClick, indexElementBeforeClick });
+  //     fireEvent.click(getChangerValue());
 
-      indicatorsDropdownClick();
+  //     indicatorsDropdownClick();
 
-      expect(getCheckedOptionsText()).toEqual(
-        indexElementBeforeClick
-          .map((item) => `${getInitialsForName(simpleItems[item].label)}${simpleItems[item].label}`)
-          .join(''),
-      );
-    });
-  });
+  //     expect(getCheckedOptionsText()).toEqual(
+  //       indexElementBeforeClick
+  //         .map((item) => `${getInitialsForName(simpleItems[item].label)}${simpleItems[item].label}`)
+  //         .join(''),
+  //     );
+  //   });
+  // });
   describe('проверка onChange', () => {
     it(`клик по элементу, должен вызвать callback c ожидаемыми параметрами`, () => {
       const handleChange = jest.fn();

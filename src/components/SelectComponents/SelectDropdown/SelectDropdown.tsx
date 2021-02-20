@@ -37,7 +37,7 @@ type Props<ITEM> = PropsWithJsxAttributes<{
   form?: SelectDropdownPropForm;
   isOpen: boolean;
   isUserSelect?: boolean;
-  renderItem?: HTMLDivElement;
+  renderItem?: () => JSX.Element;
 }>;
 
 type SelectDropdown = <ITEM>(props: Props<ITEM>) => React.ReactElement | null;
