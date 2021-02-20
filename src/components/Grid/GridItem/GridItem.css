@@ -1,0 +1,197 @@
+@define-mixin breakpoint {
+  &col {
+    &_1 {
+      --col-end: 1;
+    }
+
+    &_2 {
+      --col-end: 2;
+    }
+
+    &_3 {
+      --col-end: 3;
+    }
+
+    &_4 {
+      --col-end: 4;
+    }
+
+    &_5 {
+      --col-end: 5;
+    }
+
+    &_6 {
+      --col-end: 6;
+    }
+
+    &_7 {
+      --col-end: 7;
+    }
+
+    &_8 {
+      --col-end: 8;
+    }
+
+    &_9 {
+      --col-end: 9;
+    }
+
+    &_10 {
+      --col-end: 10;
+    }
+
+    &_11 {
+      --col-end: 11;
+    }
+
+    &_12 {
+      --col-end: 12;
+    }
+  }
+
+  &colStart {
+    &_1 {
+      --col-start: 1 / span;
+    }
+
+    &_2 {
+      --col-start: 2 / span;
+    }
+
+    &_3 {
+      --col-start: 3 / span;
+    }
+
+    &_4 {
+      --col-start: 4 / span;
+    }
+
+    &_5 {
+      --col-start: 5 / span;
+    }
+
+    &_6 {
+      --col-start: 6 / span;
+    }
+
+    &_7 {
+      --col-start: 7 / span;
+    }
+
+    &_8 {
+      --col-start: 8 / span;
+    }
+
+    &_9 {
+      --col-start: 9 / span;
+    }
+
+    &_10 {
+      --col-start: 10 / span;
+    }
+
+    &_11 {
+      --col-start: 11 / span;
+    }
+
+    &_12 {
+      --col-start: 12 / span;
+    }
+  }
+
+  &row {
+    &_1 {
+      --row-end: 1;
+    }
+
+    &_2 {
+      --row-end: 2;
+    }
+
+    &_3 {
+      --row-end: 3;
+    }
+
+    &_4 {
+      --row-end: 4;
+    }
+  }
+
+  &rowStart {
+    &_1 {
+      --row-start: 1 / span;
+    }
+
+    &_2 {
+      --row-start: 2 / span;
+    }
+
+    &_3 {
+      --row-start: 3 / span;
+    }
+
+    &_4 {
+      --row-start: 4 / span;
+    }
+  }
+
+  &order {
+    &_-1 {
+      order: -1;
+    }
+
+    &_0 {
+      order: 0;
+    }
+
+    &_1 {
+      order: 1;
+    }
+  }
+}
+
+.GridItem {
+  min-width: 0;
+  grid-column: var(--col-start, span) var(--col-end, 1);
+  grid-row: var(--row-start, span) var(--row-end, 1);
+
+  &_ {
+    @mixin breakpoint;
+  }
+
+  @media screen and (min-width: 360px) {
+    &_xs\: {
+      @mixin breakpoint;
+    }
+  }
+
+  @media screen and (min-width: 640px) {
+    &_s\: {
+      @mixin breakpoint;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    &_m\: {
+      @mixin breakpoint;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    &_l\: {
+      @mixin breakpoint;
+    }
+  }
+
+  @media screen and (min-width: 1440px) {
+    &_xl\: {
+      @mixin breakpoint;
+    }
+  }
+
+  @media screen and (min-width: 1920px) {
+    &_2xl\: {
+      @mixin breakpoint;
+    }
+  }
+}
