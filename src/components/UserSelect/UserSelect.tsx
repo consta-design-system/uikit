@@ -9,24 +9,31 @@ import { cnSelect } from '../SelectComponents/cnSelect';
 import { getSelectDropdownForm } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
-import { CommonSelectProps, DefaultPropForm, DefaultPropView } from '../SelectComponents/types';
+import {
+  CommonSelectProps,
+  DefaultPropForm,
+  DefaultPropView,
+  PropForm,
+  PropView,
+} from '../SelectComponents/types';
 
 import { UserItem, UserItemProps } from './UserItem/UserItem';
 import { UserValue } from './UserValue/UserValue';
-
-type SelectContainerProps = React.ComponentProps<typeof SelectContainer>;
 
 export const userSelectPropSize = ['m', 's', 'l'] as const;
 export type UserSelectPropSize = typeof userSelectPropSize[number];
 export const userSelectPropSizeDefault = userSelectPropSize[0];
 
-export type UserSelectProps<ITEM, GROUP> = Omit<CommonSelectProps<ITEM>, 'options'> &
-  Omit<SelectContainerProps, 'value' | 'onChange'> & {
-    onChange?: (v: ITEM[] | null) => void;
-    labelForNotFound?: string;
-    value?: ITEM[] | null;
-    size?: UserSelectPropSize;
-  } & (
+export type UserSelectProps<ITEM, GROUP> = Omit<CommonSelectProps<ITEM>, 'options'> & {
+  onChange?: (v: ITEM[] | null) => void;
+  labelForNotFound?: string;
+  value?: ITEM[] | null;
+  size?: UserSelectPropSize;
+  disabled?: boolean;
+  form?: PropForm;
+  view?: PropView;
+  multi?: boolean;
+} & (
     | {
         options: ITEM[];
         getGroupOptions: never;
