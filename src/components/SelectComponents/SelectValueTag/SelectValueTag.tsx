@@ -11,8 +11,6 @@ type SelectValueTagProps = {
   size: 's' | 'm' | 'l';
   disabled: boolean;
   children?: never;
-  url?: string;
-  subLabel?: string;
 };
 
 const cnSelectValueTag = cn('SelectValueTag');
