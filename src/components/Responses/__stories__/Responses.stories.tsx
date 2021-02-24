@@ -19,7 +19,7 @@ import { responsesPropSize, responsesPropSizeDefault } from '../Responses';
 // @ts-ignore
 import mdx from './Responses.mdx';
 
-const componetns = {
+const components = {
   Responses403,
   Responses404,
   Responses500,
@@ -32,10 +32,10 @@ const componetns = {
   ResponsesSuccess,
 } as const;
 
-const componetnsNames = Object.keys(componetns) as Array<keyof typeof componetns>;
+const componentsNames = Object.keys(components) as Array<keyof typeof components>;
 
 const defaultKnobs = () => ({
-  component: select('Component', componetnsNames, componetnsNames[0]),
+  component: select('Component', componentsNames, componentsNames[0]),
   size: select('Size', responsesPropSize, responsesPropSizeDefault),
   title: text('Title', ''),
   description: text('Description', ''),
@@ -45,7 +45,7 @@ const defaultKnobs = () => ({
 export function Playground() {
   const { size, title, description, component: componentName, actions } = defaultKnobs();
 
-  const Component = componetns[componentName];
+  const Component = components[componentName];
 
   return (
     <Component
