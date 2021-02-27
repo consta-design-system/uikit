@@ -82,8 +82,6 @@ export const ContextMenuLevel: ContextMenuLevelType = React.forwardRef(
       ...otherProps
     } = props;
 
-    console.log(isOpen);
-
     const [hovered, setHovered] = useState<boolean>(false);
 
     const groups = getGroups(items, getGroupId, sortGroup);

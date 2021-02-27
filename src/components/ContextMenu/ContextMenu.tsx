@@ -96,9 +96,7 @@ export const ContextMenu: ContextMenuType = (props) => {
   useClickOutside({
     isActive: !!onClickOutside,
     ignoreClicksInsideRefs: [...levelsRefs, anchorRef || { current: null }],
-    handler: (e) => {
-      return onClickOutside && onClickOutside(e);
-    },
+    handler: (e) => onClickOutside && onClickOutside(e),
   });
 
   useEffect(() => {
