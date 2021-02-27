@@ -19,16 +19,15 @@ export const ContextMenuExampleOutsideClick = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section', [cnContextMenuExampleOutsideClick()])}>
       <Button iconLeft={IconAdd} ref={ref} onClick={() => setIsOpen(!isOpen)} />
-      {isOpen && (
-        <ContextMenu
-          items={items}
-          getLabel={(item) => item}
-          anchorRef={ref}
-          direction="downStartLeft"
-          onClickOutside={() => setIsOpen(false)}
-          possibleDirections={['upStartLeft', 'downStartLeft']}
-        />
-      )}
+      <ContextMenu
+        isOpen={isOpen}
+        items={items}
+        getLabel={(item) => item}
+        anchorRef={ref}
+        direction="downStartLeft"
+        onClickOutside={() => setIsOpen(false)}
+        possibleDirections={['upStartLeft', 'downStartLeft']}
+      />
     </StoryBookExample>
   );
 };

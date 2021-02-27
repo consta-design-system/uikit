@@ -19,6 +19,7 @@ export const ContextMenuExampleSizeS = () => {
     <StoryBookExample className={cnDocsDecorator('Section', [cnContextMenuExampleSize()])}>
       <Button iconLeft={IconAdd} ref={ref} label="Меню размера S" />
       <ContextMenu
+        isOpen
         items={items}
         getLabel={(item) => item}
         anchorRef={ref}
@@ -35,6 +36,7 @@ export const ContextMenuExampleSizeM = () => {
     <StoryBookExample className={cnDocsDecorator('Section', [cnContextMenuExampleSize()])}>
       <Button iconLeft={IconAdd} ref={ref} label="Меню размера M" />
       <ContextMenu
+        isOpen
         items={items}
         getLabel={(item) => item}
         anchorRef={ref}
@@ -51,6 +53,7 @@ export const ContextMenuExampleSizeL = () => {
     <StoryBookExample className={cnDocsDecorator('Section', [cnContextMenuExampleSize()])}>
       <Button iconLeft={IconAdd} ref={ref} label="Меню размера L" />
       <ContextMenu
+        isOpen
         items={items}
         getLabel={(item) => item}
         anchorRef={ref}

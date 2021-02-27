@@ -15,6 +15,7 @@ import {
 
 export const ContextMenu: ContextMenuType = (props) => {
   const {
+    isOpen,
     items,
     anchorRef,
     position,
@@ -95,7 +96,9 @@ export const ContextMenu: ContextMenuType = (props) => {
   useClickOutside({
     isActive: !!onClickOutside,
     ignoreClicksInsideRefs: [...levelsRefs, anchorRef || { current: null }],
-    handler: (e) => onClickOutside && onClickOutside(e),
+    handler: (e) => {
+      return onClickOutside && onClickOutside(e);
+    },
   });
 
   useEffect(() => {
@@ -142,6 +145,7 @@ export const ContextMenu: ContextMenuType = (props) => {
         return (
           <ContextMenuLevel
             {...otherProps}
+            isOpen={isOpen}
             key={index}
             items={level.items}
             level={index}

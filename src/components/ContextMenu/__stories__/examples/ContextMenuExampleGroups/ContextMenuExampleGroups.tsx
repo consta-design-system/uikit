@@ -58,6 +58,7 @@ export const ContextMenuExampleGroups = () => {
     <StoryBookExample className={cnDocsDecorator('Section', [cnContextMenuExampleGroups()])}>
       <Button iconLeft={IconAdd} ref={ref} />
       <ContextMenu
+        isOpen
         items={items}
         getLabel={(item) => item.name}
         getGroupId={(item) => item.group}

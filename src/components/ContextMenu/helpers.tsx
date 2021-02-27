@@ -52,6 +52,7 @@ type PositioningProps =
 export type ContextMenuProps<ITEM> = PropsWithHTMLAttributesAndRef<
   {
     items: ITEM[];
+    isOpen: boolean;
     getLabel: ContextMenuPropGetLabel<ITEM>;
     getLeftSideBar?: ContextMenuPropGetSide<ITEM>;
     getRightSideBar?: ContextMenuPropGetSide<ITEM>;
@@ -93,7 +94,7 @@ type ContextMenuLevelProps<ITEM> = Omit<
     hoveredParenLevel: number;
     setHoveredParenLevel: (level: number) => void;
   },
-  'subMenuDirection' | 'getKey' | 'onClickOutside' | 'offset' | 'isOpen'
+  'subMenuDirection' | 'getKey' | 'onClickOutside'
 >;
 
 export type ContextMenuItemProps<ITEM> = PropsWithHTMLAttributes<

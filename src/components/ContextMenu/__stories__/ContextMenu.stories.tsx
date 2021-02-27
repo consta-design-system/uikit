@@ -132,22 +132,21 @@ export function Playground() {
   return (
     <div className={cnChoiceGroupStories()}>
       <Button label="Открой контекстное меню" ref={ref} onClick={() => setIsOpen(!isOpen)} />
-      {isOpen && (
-        <ContextMenu
-          items={items}
-          getLabel={(item) => item.name}
-          getGroupId={getGroupId}
-          getGroupLabel={getGroupLabel}
-          anchorRef={ref}
-          getSubItems={getSubItems}
-          size={size}
-          getRightSideBar={getRightSideBar}
-          getLeftSideBar={getLeftSideBar}
-          getDisabled={getDisabled}
-          sortGroup={sortGroup}
-          onClickOutside={() => setIsOpen(false)}
-        />
-      )}
+      <ContextMenu
+        isOpen={isOpen}
+        items={items}
+        getLabel={(item) => item.name}
+        getGroupId={getGroupId}
+        getGroupLabel={getGroupLabel}
+        anchorRef={ref}
+        getSubItems={getSubItems}
+        size={size}
+        getRightSideBar={getRightSideBar}
+        getLeftSideBar={getLeftSideBar}
+        getDisabled={getDisabled}
+        sortGroup={sortGroup}
+        onClickOutside={() => setIsOpen(false)}
+      />
     </div>
   );
 }
