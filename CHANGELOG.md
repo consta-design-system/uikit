@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.11.5 (24/02/2021)
+
+- [docs(Responces): add docs and examples (#839)](https://github.com/gazprom-neft/consta-uikit/commit/82f36fbc17f853e742c288a6a13f4038d1e131d4) - [@arhayka](https://github.com/arhayka)
+- [docs(Pagination): edit docs, add examples (#833)](https://github.com/gazprom-neft/consta-uikit/commit/b213ef1373e4f5e51ec5a16efad8e0f3660d3d52) - [@arhayka](https://github.com/arhayka)
+- [fix(File): fixed loader color (#807)](https://github.com/gazprom-neft/consta-uikit/commit/23eaabd4c3d1f6e079e7f85b0479be0f67d4b91f) - [@azhadanov](https://github.com/azhadanov)
+
+---
+
 ## v1.11.4 (10/02/2021)
 
 - [fix(Checkbox): fixed centering and colors for intermediate (#786)](https://github.com/gazprom-neft/consta-uikit/commit/635b17eec094a7e0ba6acbb7cb27c4626f409ef5) - [@azhadanov](https://github.com/azhadanov)
@@ -367,14 +375,3 @@ docs(button): add new docs for button - @fooontic
 - [feat(SbackBar): add onAutoClose](https://github.com/gazprom-neft/consta-uikit/commit/e59ccd6e82ffbda8ee59077b96c782d2896654f5) - @gizeasy
 - [fix(IconBag): fix color](https://github.com/gazprom-neft/consta-uikit/commit/a4663dd9f103ae0ddd4df9918711d45e978613c0) - @gizeasy
 - [fix(ts-ignore): removed ts-ignore](https://github.com/gazprom-neft/consta-uikit/commit/05171bd666a831495222d26858bb750d5e8b20fb) - @gizeasy
-
----
-
-## v1.3.0 (06/07/2020)
-
-- [1.3.0](https://github.com/gazprom-neft/consta-uikit/commit/287d4b71f0a3db6bfa1b85294680c583fdcb36be) - @gizeasy
-- [feat(IconSmile): add IconSmile](https://github.com/gazprom-neft/consta-uikit/commit/b6113cf598cff409ecbf525b9940ba44762a5726) - @gizeasy
-- [feat(IconComment): add xs size](https://github.com/gazprom-neft/consta-uikit/commit/5239b4c3530d3662704a827175546cb5139af3c4) - @gizeasy
-- [feat(components): children ban in components](https://github.com/gazprom-neft/consta-uikit/commit/ce94abb158a3cefc8303f0c85a3f65f9b766ab9a) - @gizeasy
-- [refactor(icons): change iconHoc -> createIcon](https://github.com/gazprom-neft/consta-uikit/commit/56a650cd3f91fc4c06e4d6a7386d161ebcd5529a) - @gizeasy
-- [refactor(icons): re-generate icons](https://github.com/gazprom-neft/consta-uikit/commit/d5be2773977be10fcc4d6e457fc54cc188308367) - @gizeasy
