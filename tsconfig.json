@@ -3,6 +3,7 @@
     "declaration": true,
     "noImplicitAny": true,
     "lib": ["dom", "esnext", "ES2015"],
+    "target": "ES2017",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -21,7 +22,8 @@
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "pretty": true,
-    "removeComments": false
+    "removeComments": false,
+    "downlevelIteration": true
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules"]

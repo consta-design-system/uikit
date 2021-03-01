@@ -3,7 +3,6 @@
   width: 100%;
   grid-template-columns: repeat(var(--cols, 1), minmax(0, 1fr));
 
-  /* stylelint-disable */
   &_cols {
     &_1 {
       --cols: 1;
@@ -1599,5 +1598,4 @@
       }
     }
   }
-  /* stylelint-enable */
 }
