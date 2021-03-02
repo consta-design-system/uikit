@@ -6,7 +6,7 @@ import { select } from '@storybook/addon-knobs';
 import { exampleThemesThree, exampleThemesTwo, Theme as ThemeType } from '../__mocks__/mock.data';
 import { IconProps } from '../../../icons/Icon/Icon';
 import { cn } from '../../../utils/bem';
-import { createMetadata, createStory } from '../../../utils/storybook';
+import { createMetadata } from '../../../utils/storybook';
 import { Theme, ThemePreset } from '../../Theme/Theme';
 import { ThemeToggler, themeTogglerPropSize, themeTogglerPropSizeDefault } from '../ThemeToggler';
 
@@ -18,37 +18,31 @@ const cnThemeTogglerStories = cn('ThemeToggler');
 
 const defaultKnobs = () => ({
   size: select('size', themeTogglerPropSize, themeTogglerPropSizeDefault),
+  themes: select('number of themes', ['two', 'three'], 'two'),
 });
 
-const Default = (props: { themes: ThemeType[] }) => {
-  const [value, setValue] = useState<ThemePreset>(props.themes[0].theme);
-  const { size } = defaultKnobs();
+export function Playground() {
+  const { size, themes } = defaultKnobs();
+  const themeArray = themes === 'two' ? exampleThemesTwo : exampleThemesThree;
+  const [value, setValue] = useState<ThemeType>(themeArray[0]);
   const getThemeLabelDefault = (theme: ThemeType): string => theme.label;
   const getThemeValueDefault = (theme: ThemeType): ThemePreset => theme.theme;
   const getThemeIconDefault = (theme: ThemeType): FC<IconProps> => theme.icon;
 
   return (
-    <Theme preset={value} className={cnThemeTogglerStories()}>
+    <Theme preset={value.theme} className={cnThemeTogglerStories()}>
       <ThemeToggler
         size={size}
-        themes={props.themes}
+        themes={themeArray}
         value={value}
-        setValue={setValue}
+        setValue={({ value }) => setValue(value)}
         getThemeLabel={getThemeLabelDefault}
         getThemeValue={getThemeValueDefault}
         getThemeIcon={getThemeIconDefault}
       />
     </Theme>
   );
-};
-
-export const WithValueStory = createStory(() => <Default themes={exampleThemesTwo} />, {
-  name: 'Две темы',
-});
-
-export const WithThreeValueStory = createStory(() => <Default themes={exampleThemesThree} />, {
-  name: 'Три темы',
-});
+}
 
 export default createMetadata({
   title: 'Компоненты|/ThemeToggler',

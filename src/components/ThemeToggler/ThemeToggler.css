@@ -7,7 +7,6 @@
   &-PreviewIcon {
     padding: 8px;
     color: var(--color-control-typo-clear);
-    background-color: var(--color-control-bg-ghost);
     border-radius: 4px;
     cursor: pointer;
 

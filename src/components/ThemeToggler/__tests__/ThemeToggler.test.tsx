@@ -2,7 +2,6 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 
 import { exampleThemesThree, exampleThemesTwo, Theme } from '../__mocks__/mock.data';
-import { ThemePreset } from '../../Theme/Theme';
 import { cnThemeToggler, ThemeToggler } from '../ThemeToggler';
 
 const testId = cnThemeToggler();
@@ -11,10 +10,10 @@ const defaultSetValue = jest.fn();
 
 const renderComponent = (props: {
   themes?: Theme[];
-  value?: ThemePreset;
+  value?: Theme;
   className?: string;
   contextMenuClassName?: string;
-  setValue?: (arg: ThemePreset) => void;
+  setValue?: (arg: Theme) => void;
 }) => {
   return render(
     <div data-testid="outside">
@@ -27,8 +26,8 @@ const renderComponent = (props: {
         getThemeLabel={(theme) => theme.label}
         getThemeValue={(theme) => theme.theme}
         getThemeIcon={(theme) => theme.icon}
-        value={props.value || (props.themes && props.themes[0].theme) || exampleThemesTwo[0].theme}
-        setValue={props.setValue || defaultSetValue}
+        value={props.value || (props.themes && props.themes[0]) || exampleThemesTwo[0]}
+        setValue={defaultSetValue}
       />
     </div>,
   );
