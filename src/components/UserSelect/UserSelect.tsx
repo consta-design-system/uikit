@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { RefObject, useRef, useState } from 'react';
 
 import { useSelect } from '../../hooks/useSelect/useSelect';
 import { IconClose } from '../../icons/IconClose/IconClose';
@@ -9,13 +9,7 @@ import { cnSelect } from '../SelectComponents/cnSelect';
 import { getSelectDropdownForm } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
-import {
-  CommonSelectProps,
-  DefaultPropForm,
-  DefaultPropView,
-  PropForm,
-  PropView,
-} from '../SelectComponents/types';
+import { DefaultPropForm, DefaultPropView, PropForm, PropView } from '../SelectComponents/types';
 
 import { UserItem, UserItemProps } from './UserItem/UserItem';
 import { UserValue } from './UserValue/UserValue';
@@ -24,8 +18,19 @@ export const userSelectPropSize = ['m', 's', 'l'] as const;
 export type UserSelectPropSize = typeof userSelectPropSize[number];
 export const userSelectPropSizeDefault = userSelectPropSize[0];
 
-export type UserSelectProps<ITEM, GROUP> = Omit<CommonSelectProps<ITEM>, 'options'> & {
+export type UserSelectProps<ITEM, GROUP> = {
+  placeholder?: string;
+  onBlur?: (event?: React.FocusEvent<HTMLInputElement>) => void;
+  onFocus?: (event?: React.FocusEvent<HTMLInputElement>) => void;
   onChange?: (v: ITEM[] | null) => void;
+  getOptionLabel(arg: ITEM): string;
+  getUserUrl?(arg: ITEM): string;
+  getUserAdditionalInfo?(arg: ITEM): string;
+  ariaLabel?: string;
+  id: string;
+  dropdownClassName?: string;
+  dropdownRef?: RefObject<HTMLDivElement>;
+  name?: string;
   labelForNotFound?: string;
   value?: ITEM[] | null;
   size?: UserSelectPropSize;
@@ -34,15 +39,15 @@ export type UserSelectProps<ITEM, GROUP> = Omit<CommonSelectProps<ITEM>, 'option
   view?: PropView;
   multi?: boolean;
 } & (
-    | {
-        options: ITEM[];
-        getGroupOptions: never;
-      }
-    | {
-        options: GROUP[];
-        getGroupOptions?: (group: GROUP) => ITEM[];
-      }
-  );
+  | {
+      options: ITEM[];
+      getGroupOptions: never;
+    }
+  | {
+      options: GROUP[];
+      getGroupOptions?: (group: GROUP) => ITEM[];
+    }
+);
 
 type UserSelect = <ITEM, GROUP>(props: UserSelectProps<ITEM, GROUP>) => React.ReactElement | null;
 
@@ -85,11 +90,11 @@ export const UserSelect: UserSelect = (props) => {
   const controlInnerRef = useRef<HTMLDivElement>(null);
   const helperInputFakeElement = useRef<HTMLDivElement>(null);
 
-  const handlerChangeValue = (v: Items): void => {
-    if (multi && typeof onChange === 'function' && v) {
-      onChange(v);
-    } else if (typeof onChange === 'function' && v) {
-      onChange(v.length > 0 ? [v[v?.length - 1]] : []);
+  const handlerChangeValue = (values: Items): void => {
+    if (multi && typeof onChange === 'function' && values) {
+      onChange(values);
+    } else if (typeof onChange === 'function' && values) {
+      onChange(values.length > 0 ? [values[values?.length - 1]] : []);
     }
     setInputData({ value: toggleRef.current?.value });
   };
@@ -131,8 +136,6 @@ export const UserSelect: UserSelect = (props) => {
     scrollToIndex,
     disabled,
     getOptionLabel,
-    getUserAdditionalInfo,
-    getUserUrl,
     getGroupOptions: getGroupOptions as undefined,
     multi: true,
     onSelectOption,
@@ -229,7 +232,7 @@ export const UserSelect: UserSelect = (props) => {
     };
   };
 
-  const getUserItem = (props: UserItemProps) => {
+  const renderItem = (props: UserItemProps) => {
     return <UserItem {...props} />;
   };
 
@@ -341,7 +344,7 @@ export const UserSelect: UserSelect = (props) => {
         getOptionLabel={getOptionLabel}
         form={getSelectDropdownForm(form)}
         className={dropdownClassName}
-        renderItem={getUserItem}
+        renderItem={renderItem}
       />
       <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
         {inputData.value}

@@ -76,10 +76,11 @@
     position: relative;
   }
 
-  &-AvatarCheckIcon {
+  &-CheckIcon {
     position: absolute;
-    bottom: -2px;
-    right: -2px;
+    top: 22px;
+    left: 22px;
+    color: var(--color-control-bg-default);
     width: var(--graphics-size-xs);
     height: var(--graphics-size-xs);
     background-color: var(--color-control-bg-primary);
@@ -87,15 +88,7 @@
     border-radius: 50%;
   }
 
-  &-CheckIcon {
-    --icon-size: calc(var(--graphics-size-xs) - 4px);
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    color: var(--color-control-bg-default);
-  }
-
-  &-SubUserInfo {
+  &-AdditionalInfo {
     padding-left: var(--sub-info-space);
   }
 

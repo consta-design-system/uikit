@@ -128,7 +128,7 @@ export const BasicSelect: Select = (props) => {
     }
   };
 
-  const getSelectItem = (props: SelectItemProps) => {
+  const renderItem = (props: SelectItemProps) => {
     return <SelectItem {...props} />;
   };
 
@@ -196,7 +196,7 @@ export const BasicSelect: Select = (props) => {
         getOptionLabel={getOptionLabel}
         form={getSelectDropdownForm(form)}
         className={dropdownClassName}
-        renderItem={getSelectItem}
+        renderItem={renderItem}
       />
     </SelectContainer>
   );

@@ -230,7 +230,7 @@ export const MultiCombobox: MultiCombobox = (props) => {
 
   const inputStyle = React.useMemo(() => getInputStyle(), [inputData.value, arrValue]);
 
-  const getSelectItem = (props: SelectItemProps) => {
+  const renderItem = (props: SelectItemProps) => {
     return <SelectItem {...props} />;
   };
 
@@ -337,7 +337,7 @@ export const MultiCombobox: MultiCombobox = (props) => {
         getOptionLabel={getOptionLabel}
         form={getSelectDropdownForm(form)}
         className={dropdownClassName}
-        renderItem={getSelectItem}
+        renderItem={renderItem}
       />
       <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
         {inputData.value}
