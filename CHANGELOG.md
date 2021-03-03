@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.11.6 (03/03/2021)
+
+- [docs(components): fix some links (#884)](https://github.com/gazprom-neft/consta-uikit/commit/5bb19e3be64943f8b50c9c3f1fb083ab03ac61c1) - [@azhadanov](https://github.com/azhadanov)
+- [docs(Theme): add doc for creating custom preset (#856)](https://github.com/gazprom-neft/consta-uikit/commit/2c921381f4ce0a35fe07a09ccf4c104fa296ba5c) - [@kolebayev](https://github.com/kolebayev)
+
+---
+
 ## v1.11.5 (24/02/2021)
 
 - [docs(Responces): add docs and examples (#839)](https://github.com/gazprom-neft/consta-uikit/commit/82f36fbc17f853e742c288a6a13f4038d1e131d4) - [@arhayka](https://github.com/arhayka)
@@ -359,19 +366,3 @@
 ## v1.4.1 (15/07/2020)
 
 docs(button): add new docs for button - @fooontic
-
----
-
-## v1.4.0 (15/07/2020)
-
-- [chore(prettier): svg formatting added (#238)](https://github.com/gazprom-neft/consta-uikit/commit/94acf37e93242e077fa26466dd6d7e9ee3a6ead3) - @gizeasy
-- [fix(iconAlignRight): replace wrong svg](https://github.com/gazprom-neft/consta-uikit/commit/d1847af18bb549b26f648252299eeda035df282e) - @fooontic
-- [feat(icons): add new icons IconUnsort](https://github.com/gazprom-neft/consta-uikit/commit/3850f96fb3ff3ebb09cdede46b440b026c35f003) - @fooontic
-- [feat(Theme): add ref](https://github.com/gazprom-neft/consta-uikit/commit/468fbf14e72b380d71c02f3ad96abf32fb07d493) - @gizeasy
-- [feat(components): add prop iconSize in ChoiceGroup, Tabs, TextField](https://github.com/gazprom-neft/consta-uikit/commit/424d4473802965ca81a7f199d40bbe1a27df20f3) - @gizeasy
-- [chore(tslib): update -> 13.0.0](https://github.com/gazprom-neft/consta-uikit/commit/49076e34253833ac0ffde80e58caad7159279413) - @gizeasy
-- [fix(TextField): fix color icons](https://github.com/gazprom-neft/consta-uikit/commit/c58e6cf37c01a007b7f3f58f286b48fd7dff8883) - @gizeasy
-- [refactor(Icons): sort icons in storyBook](https://github.com/gazprom-neft/consta-uikit/commit/edce93906e6fbbfb409aac5af1cd2bcf32201db9) - @gizeasy
-- [feat(SbackBar): add onAutoClose](https://github.com/gazprom-neft/consta-uikit/commit/e59ccd6e82ffbda8ee59077b96c782d2896654f5) - @gizeasy
-- [fix(IconBag): fix color](https://github.com/gazprom-neft/consta-uikit/commit/a4663dd9f103ae0ddd4df9918711d45e978613c0) - @gizeasy
-- [fix(ts-ignore): removed ts-ignore](https://github.com/gazprom-neft/consta-uikit/commit/05171bd666a831495222d26858bb750d5e8b20fb) - @gizeasy
