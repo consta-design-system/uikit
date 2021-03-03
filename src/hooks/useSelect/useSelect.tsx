@@ -159,20 +159,12 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
               const groupName = getOptionLabel(group);
               const items = typeof getGroupOptions === 'function' ? getGroupOptions(group) : [];
               return items.map((item) => ({ ...item, group: groupName }));
-              return items.map((item) => ({
-                label: getOptionLabel(item),
-                subLabel: getUserAdditionalInfo && getUserAdditionalInfo(item),
-                url: getUserUrl && getUserUrl(item),
-                item,
-                group: groupName,
-              }));
+              return items.map((item) => ({ label: getOptionLabel(item), item, group: groupName }));
             })
             .flat()
         : options,
         : options.map((option) => ({
             label: getOptionLabel(option),
-            subLabel: getUserAdditionalInfo && getUserAdditionalInfo(option),
-            url: getUserUrl && getUserUrl(option),
             item: option,
           })),
     [options],
@@ -213,10 +205,13 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
             .indexOf(searchValueLowerCase),
         );
         .filter((option) => {
-          if (option.subLabel) {
+          if ('subLabel' in option.item) {
+            const subLabel = Object.entries(option.item).filter(
+              (item) => item[0] === 'subLabel',
+            )[0][1];
             return (
               option.label.toLowerCase().includes(searchValueLowerCase) ||
-              option.subLabel.toLowerCase().includes(searchValueLowerCase)
+              subLabel.toLowerCase().includes(searchValueLowerCase)
             );
           }
           return option.label.toLowerCase().includes(searchValueLowerCase);

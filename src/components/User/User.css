@@ -76,13 +76,13 @@
   }
 
   &_size {
-    &_s {
+    &_m {
       --indent-r: var(--space-s);
       --indent: var(--space-xs);
       --icon-indent: var(--space-m);
     }
 
-    &_m {
+    &_l {
       --indent-r: var(--space-m);
       --indent: var(--space-s);
       --icon-indent: var(--space-l);
@@ -92,11 +92,11 @@
       }
     }
 
-    &_s:not(.user_with-arrow) {
+    &_m:not(.user_with-arrow) {
       --indent-r: var(--space-m);
     }
 
-    &_m:not(.user_with-arrow) {
+    &_l:not(.user_with-arrow) {
       --indent-r: var(--space-l);
     }
   }

@@ -187,7 +187,7 @@ export const Combobox: ComboboxType = (props) => {
     }
   };
 
-  const getSelectItem = (props: SelectItemProps) => {
+  const renderItem = (props: SelectItemProps) => {
     return <SelectItem {...props} />;
   };
 
@@ -275,7 +275,7 @@ export const Combobox: ComboboxType = (props) => {
         labelForNotFound={labelForNotFound}
         form={getSelectDropdownForm(form)}
         className={dropdownClassName}
-        renderItem={getSelectItem}
+        renderItem={renderItem}
       />
     </SelectContainer>
   );

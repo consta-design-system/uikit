@@ -140,8 +140,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
                     renderItem({
                       size,
                       label: option.label,
-                      subLabel: option.subLabel,
-                      url: option.url,
+                      item: option.item,
                       id: `${id}-${index}`,
                       active,
                       hovered: index === highlightedIndex,
