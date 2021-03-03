@@ -11,6 +11,7 @@ import { PropSize } from '../types';
 export type SelectItemProps = PropsWithHTMLAttributes<
   {
     label: string;
+    item: any;
     active: boolean;
     hovered: boolean;
     multi: boolean;
