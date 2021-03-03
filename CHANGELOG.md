@@ -1,5 +1,30 @@
 # Changelog
 
+## v1.11.5 (24/02/2021)
+
+- [docs(Responces): add docs and examples (#839)](https://github.com/gazprom-neft/consta-uikit/commit/82f36fbc17f853e742c288a6a13f4038d1e131d4) - [@arhayka](https://github.com/arhayka)
+- [docs(Pagination): edit docs, add examples (#833)](https://github.com/gazprom-neft/consta-uikit/commit/b213ef1373e4f5e51ec5a16efad8e0f3660d3d52) - [@arhayka](https://github.com/arhayka)
+- [fix(File): fixed loader color (#807)](https://github.com/gazprom-neft/consta-uikit/commit/23eaabd4c3d1f6e079e7f85b0479be0f67d4b91f) - [@azhadanov](https://github.com/azhadanov)
+
+---
+
+## v1.11.4 (10/02/2021)
+
+- [fix(Checkbox): fixed centering and colors for intermediate (#786)](https://github.com/gazprom-neft/consta-uikit/commit/635b17eec094a7e0ba6acbb7cb27c4626f409ef5) - [@azhadanov](https://github.com/azhadanov)
+- [fix(Tooltip): fixed theme (#832)](https://github.com/gazprom-neft/consta-uikit/commit/f21c6e03de00d97e429540ecd5197548c8fe114d) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Table): table header's vertical align center → bottom (#809)](https://github.com/gazprom-neft/consta-uikit/commit/98455c7727af1bbbdef0ad0fd00fe7287e0db775) - [@schurf-des](https://github.com/schurf-des)
+- [docs(breadcrumbs): add docs for Breadcrumbs (#764)](https://github.com/gazprom-neft/consta-uikit/commit/58b0172ae283a52c5c42e94363ed65b09039f2de) - [@arhayka](https://github.com/arhayka)
+- [docs(ContextMenu): edit docs (#801)](https://github.com/gazprom-neft/consta-uikit/commit/9efde4d96512026d822e7f021b600479b6d3885e) - [@arhayka](https://github.com/arhayka)
+- [fix(ChoiceGroup): fixed input style on IOS (#805)](https://github.com/gazprom-neft/consta-uikit/commit/c86ab5f1926e2733f79e1d865432c88ebfa21558) - [@gizeasy](https://github.com/gizeasy)
+- [feat(SwitchGroup): add SwitchGroup component, story and tests (#806)](https://github.com/gazprom-neft/consta-uikit/commit/22b2aefe05453c694c336a2b2ff3dcf1f67c4c30) - [@azhadanov](https://github.com/azhadanov)
+- [feat(Avatar): add XS-size (#815)](https://github.com/gazprom-neft/consta-uikit/commit/cb95c9e05f4b13a94327ccaf225a3aaba82707c7) - [@azhadanov](https://github.com/azhadanov)
+- [feat(Storybook): update favicon (#828)](https://github.com/gazprom-neft/consta-uikit/commit/97fa49989c86498ed9438bad6f5e30d1c30ddfbe) - [@fooontic](https://github.com/fooontic)
+- [docs(Table): mock data changed (#810)](https://github.com/gazprom-neft/consta-uikit/commit/ebd07d52a4b9e79c772537b0e9ca10eca681bff5) - [@schurf-des](https://github.com/schurf-des)
+- [docs(withTooltip): edit docs and examples (#788)](https://github.com/gazprom-neft/consta-uikit/commit/8d88a401811991456ccc8e7d88afded12198f0b6) - [@arhayka](https://github.com/arhayka)
+- [fix(Badge): fixed height (#785)](https://github.com/gazprom-neft/consta-uikit/commit/93fd9d17af053108762888591f5454597fd74b53) - [@azhadanov](https://github.com/azhadanov)
+
+---
+
 ## v1.11.3 (29/01/2021)
 
 - [fix(Modal): remove story with combobox (#799)](https://github.com/gazprom-neft/consta-uikit/commit/6aa71b99744c1e1e25fa38f18def8fe8b112177f) - [@azhadanov](https://github.com/azhadanov)
@@ -350,24 +375,3 @@ docs(button): add new docs for button - @fooontic
 - [feat(SbackBar): add onAutoClose](https://github.com/gazprom-neft/consta-uikit/commit/e59ccd6e82ffbda8ee59077b96c782d2896654f5) - @gizeasy
 - [fix(IconBag): fix color](https://github.com/gazprom-neft/consta-uikit/commit/a4663dd9f103ae0ddd4df9918711d45e978613c0) - @gizeasy
 - [fix(ts-ignore): removed ts-ignore](https://github.com/gazprom-neft/consta-uikit/commit/05171bd666a831495222d26858bb750d5e8b20fb) - @gizeasy
-
----
-
-## v1.3.0 (06/07/2020)
-
-- [1.3.0](https://github.com/gazprom-neft/consta-uikit/commit/287d4b71f0a3db6bfa1b85294680c583fdcb36be) - @gizeasy
-- [feat(IconSmile): add IconSmile](https://github.com/gazprom-neft/consta-uikit/commit/b6113cf598cff409ecbf525b9940ba44762a5726) - @gizeasy
-- [feat(IconComment): add xs size](https://github.com/gazprom-neft/consta-uikit/commit/5239b4c3530d3662704a827175546cb5139af3c4) - @gizeasy
-- [feat(components): children ban in components](https://github.com/gazprom-neft/consta-uikit/commit/ce94abb158a3cefc8303f0c85a3f65f9b766ab9a) - @gizeasy
-- [refactor(icons): change iconHoc -> createIcon](https://github.com/gazprom-neft/consta-uikit/commit/56a650cd3f91fc4c06e4d6a7386d161ebcd5529a) - @gizeasy
-- [refactor(icons): re-generate icons](https://github.com/gazprom-neft/consta-uikit/commit/d5be2773977be10fcc4d6e457fc54cc188308367) - @gizeasy
-
----
-
-## v1.2.0 (25/06/2020)
-
-- В компонентах innerRef изменили на ref #142
-- При использовании пропса `as` теперь нет необходимости расширять тип компонента #108
-- Добавлены новые иконки Bag, Folders, Layers, Reply, Storage, Warning #184 #203
-- Bсправлен баг в BaseCheckGroupField #188
-- Переименовали типы #211
