@@ -1,5 +1,4 @@
-.ThemeToggler {
-  min-height: 100px;
+.ThemeTogglerStories {
   padding: var(--space-xl);
   background: var(--color-bg-default);
 }

@@ -1,12 +1,13 @@
 import './ThemeToggler.stories.css';
 
 import React, { FC, useState } from 'react';
-import { select } from '@storybook/addon-knobs';
+import { select, object } from '@storybook/addon-knobs';
 
 import { exampleThemesThree, exampleThemesTwo, Theme as ThemeType } from '../__mocks__/mock.data';
 import { IconProps } from '../../../icons/Icon/Icon';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
+import { directions } from '../../Popover/Popover';
 import { Theme, ThemePreset } from '../../Theme/Theme';
 import { ThemeToggler, themeTogglerPropSize, themeTogglerPropSizeDefault } from '../ThemeToggler';
 
@@ -14,15 +15,17 @@ import { ThemeToggler, themeTogglerPropSize, themeTogglerPropSizeDefault } from 
 // @ts-ignore
 import mdx from './ThemeToggler.mdx';
 
-const cnThemeTogglerStories = cn('ThemeToggler');
+const cnThemeTogglerStories = cn('ThemeTogglerStories');
 
 const defaultKnobs = () => ({
   size: select('size', themeTogglerPropSize, themeTogglerPropSizeDefault),
   themes: select('number of themes', ['two', 'three'], 'two'),
+  direction: select('direction', directions, 'downStartLeft'),
+  possibleDirections: object('possibleDirections', directions),
 });
 
 export function Playground() {
-  const { size, themes } = defaultKnobs();
+  const { size, themes, direction, possibleDirections } = defaultKnobs();
   const themeArray = themes === 'two' ? exampleThemesTwo : exampleThemesThree;
   const [value, setValue] = useState<ThemeType>(themeArray[0]);
   const getThemeLabelDefault = (theme: ThemeType): string => theme.label;
@@ -33,12 +36,14 @@ export function Playground() {
     <Theme preset={value.theme} className={cnThemeTogglerStories()}>
       <ThemeToggler
         size={size}
-        themes={themeArray}
+        items={themeArray}
         value={value}
-        setValue={({ value }) => setValue(value)}
-        getThemeLabel={getThemeLabelDefault}
-        getThemeValue={getThemeValueDefault}
-        getThemeIcon={getThemeIconDefault}
+        onChange={({ value }) => setValue(value)}
+        getItemLabel={getThemeLabelDefault}
+        getItemValue={getThemeValueDefault}
+        getItemIcon={getThemeIconDefault}
+        direction={direction}
+        possibleDirections={possibleDirections}
       />
     </Theme>
   );

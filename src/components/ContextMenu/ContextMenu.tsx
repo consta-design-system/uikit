@@ -142,6 +142,7 @@ export const ContextMenu: ContextMenuType = (props) => {
         return (
           <ContextMenuLevel
             {...otherProps}
+            offset={offset}
             key={index}
             items={level.items}
             level={index}

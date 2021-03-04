@@ -1,151 +1,146 @@
-import './ThemeToggler.css';
-
-import React, { useRef, useState } from 'react';
-import { cn } from '@bem-react/classname';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
 import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { IconCheck } from '../../icons/IconCheck/IconCheck';
 import { getSizeByMap } from '../../utils/getSizeByMap';
+import { setRef } from '../../utils/setRef';
+import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { Button } from '../Button/Button';
 import { ContextMenu } from '../ContextMenu/ContextMenu';
+import { Direction } from '../Popover/Popover';
 import { ThemePreset } from '../Theme/Theme';
 
-export const themeTogglerPropSize = ['m', 's', 'xs', 'l'] as const;
+export const themeTogglerPropSize = ['l', 'm', 's', 'xs'] as const;
 export type ThemeTogglerPropSize = typeof themeTogglerPropSize[number];
 export const themeTogglerPropSizeDefault: ThemeTogglerPropSize = themeTogglerPropSize[0];
 
-export type ThemePropSetValue<ITEM, ITEM_ELEMENT> = (props: {
-  e: React.MouseEvent<ITEM_ELEMENT>;
-  value: ITEM;
-}) => void;
+export type ThemePropSetValue<ITEM> = (props: { e: React.MouseEvent; value: ITEM }) => void;
+export type ThemePropGetKey<ITEM> = (item: ITEM) => string | number;
 export type ThemePropGetLabel<ITEM> = (item: ITEM) => string;
 export type ThemePropGetValue<ITEM> = (item: ITEM) => ThemePreset;
 export type ThemePropGetIcon<ITEM> = (item: ITEM) => React.FC<IconProps>;
 
-type Props<ITEM, ITEM_ELEMENT extends HTMLElement = HTMLButtonElement> = {
+type Props<ITEM> = {
   size?: ThemeTogglerPropSize;
   className?: string;
-  contextMenuClassName?: string;
-  themes: ITEM[];
+  items: ITEM[];
   value: ITEM;
-  setValue: ThemePropSetValue<ITEM, ITEM_ELEMENT>;
-  getThemeLabel: ThemePropGetLabel<ITEM>;
-  getThemeValue: ThemePropGetValue<ITEM>;
-  getThemeIcon: ThemePropGetIcon<ITEM>;
+  onChange: ThemePropSetValue<ITEM>;
+  getItemKey?: ThemePropGetKey<ITEM>;
+  getItemLabel: ThemePropGetLabel<ITEM>;
+  getItemValue: ThemePropGetValue<ITEM>;
+  getItemIcon: ThemePropGetIcon<ITEM>;
+  direction?: Direction;
+  possibleDirections?: readonly Direction[];
+  children?: never;
 };
 
-type ThemeToggler = <ITEM>(props: Props<ITEM>) => React.ReactElement | null;
+type ThemeToggler = <ITEM>(
+  props: PropsWithHTMLAttributesAndRef<Props<ITEM>, HTMLButtonElement>,
+) => React.ReactElement | null;
 
-export const cnThemeToggler = cn('ThemeToggler');
+const sizeMap: Record<ThemeTogglerPropSize, IconPropSize> = {
+  l: 'm',
+  m: 's',
+  s: 's',
+  xs: 'xs',
+};
 
-export const ThemeToggler: ThemeToggler = (props) => {
+export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef) => {
   const ref = useRef<HTMLButtonElement>(null);
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    if (componentRef) {
+      setRef(componentRef, ref.current);
+    }
+  });
+
   const {
     size = themeTogglerPropSizeDefault,
-    className,
-    contextMenuClassName,
-    themes,
+    items,
     value,
-    setValue,
-    getThemeLabel,
-    getThemeValue,
-    getThemeIcon,
+    onChange,
+    getItemKey,
+    getItemLabel,
+    getItemValue,
+    getItemIcon,
+    direction,
+    possibleDirections,
     ...otherProps
   } = props;
 
   const { getOnChange, getChecked } = useChoiceGroup({
     value,
-    getKey: getThemeLabel,
-    callBack: setValue,
+    getKey: getItemKey || getItemLabel,
+    callBack: onChange,
     multiple: false,
   });
 
-  const sizeMap: Record<ThemeTogglerPropSize, IconPropSize> = {
-    l: 'm',
-    m: 's',
-    s: 's',
-    xs: 'xs',
-  };
-
   const iconSize = getSizeByMap(sizeMap, size);
 
-  const getTogglerBody = () => {
-    if (themes.length === 2) {
-      const IconOne = getThemeIcon(themes[0]);
-      const IconTwo = getThemeIcon(themes[1]);
+  if (items.length === 2) {
+    const IconOne = getItemIcon(items[0]);
+    const IconTwo = getItemIcon(items[1]);
+    const isFirstThemeSelected = getItemValue(value) === getItemValue(items[0]);
 
-      return (
-        <div className={cnThemeToggler()}>
-          {getThemeValue(value) === getThemeValue(themes[0]) ? (
-            <IconOne
-              onClick={getOnChange(themes[1])}
-              className={cnThemeToggler('Icon')}
-              size={iconSize}
-            />
-          ) : (
-            <IconTwo
-              onClick={getOnChange(themes[0])}
-              className={cnThemeToggler('Icon')}
-              size={iconSize}
-            />
-          )}
-        </div>
-      );
-    }
-    if (themes.length > 2) {
-      const PreviewIcon = themes
-        .filter((theme) => getChecked(theme))
-        .map((theme) => {
-          const Icon = getThemeIcon(theme);
-          return Icon;
-        })[0];
-      const renderIcons = (item: any) => {
-        const Icon = getThemeIcon(item);
-        return <Icon size={iconSize} />;
-      };
-      const renderChecks = (item: any) => {
-        return getChecked(item) && <IconCheck size={iconSize} />;
-      };
-      const emptyFn = () => '';
+    return (
+      <Button
+        {...otherProps}
+        ref={ref}
+        onlyIcon
+        iconLeft={isFirstThemeSelected ? IconOne : IconTwo}
+        view="clear"
+        onClick={getOnChange(items[isFirstThemeSelected ? 1 : 0])}
+        size={iconSize}
+      />
+    );
+  }
 
-      return (
-        <div className={cnThemeToggler()}>
-          <Button
-            className={cnThemeToggler('PreviewIcon')}
-            ref={ref}
-            onlyIcon
-            iconLeft={PreviewIcon}
-            view="clear"
-            onClick={() => setIsOpen(!isOpen)}
-            size={iconSize}
+  if (items.length > 2) {
+    const PreviewIcon = items
+      .filter((theme) => getChecked(theme))
+      .map((theme) => {
+        const Icon = getItemIcon(theme);
+        return Icon;
+      })[0];
+    const renderIcons = (item: any) => {
+      const Icon = getItemIcon(item);
+      return <Icon size={iconSize} />;
+    };
+    const renderChecks = (item: any) => {
+      return getChecked(item) && <IconCheck size={iconSize} />;
+    };
+
+    return (
+      <>
+        <Button
+          {...otherProps}
+          ref={ref}
+          onlyIcon
+          iconLeft={PreviewIcon}
+          view="clear"
+          onClick={() => setIsOpen(!isOpen)}
+          size={iconSize}
+        />
+        {isOpen && (
+          <ContextMenu
+            offset={8}
+            items={items}
+            getLabel={getItemLabel}
+            anchorRef={ref}
+            direction={direction}
+            possibleDirections={possibleDirections}
+            getLeftSideBar={renderIcons}
+            getRightSideBar={renderChecks}
+            onClickOutside={() => setIsOpen(false)}
+            getOnClick={(item) => (e) => getOnChange(item)(e as never)}
           />
-          {isOpen && (
-            <ContextMenu
-              className={cnThemeToggler('ContextMenu', [contextMenuClassName])}
-              offset={-14}
-              items={themes}
-              getLabel={getThemeLabel || emptyFn}
-              anchorRef={ref}
-              direction="downStartLeft"
-              getLeftSideBar={renderIcons}
-              getRightSideBar={renderChecks}
-              onClickOutside={() => setIsOpen(false)}
-              getOnClick={(item) => (e) => getOnChange(item)(e as never)}
-            />
-          )}
-        </div>
-      );
-    }
+        )}
+      </>
+    );
+  }
 
-    return <div>Необходимо передать как минимум 2 темы</div>;
-  };
-
-  return (
-    <div {...otherProps} className={className}>
-      {getTogglerBody()}
-    </div>
-  );
-};
+  return <div>Необходимо передать как минимум 2 темы</div>;
+});
