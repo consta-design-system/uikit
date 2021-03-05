@@ -146,6 +146,7 @@ export function Playground() {
           getDisabled={getDisabled}
           sortGroup={sortGroup}
           onClickOutside={() => setIsOpen(false)}
+          offset={8}
         />
       )}
     </div>

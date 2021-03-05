@@ -21,24 +21,25 @@ export type ThemePropGetLabel<ITEM> = (item: ITEM) => string;
 export type ThemePropGetValue<ITEM> = (item: ITEM) => ThemePreset;
 export type ThemePropGetIcon<ITEM> = (item: ITEM) => React.FC<IconProps>;
 
-type Props<ITEM> = {
-  size?: ThemeTogglerPropSize;
-  className?: string;
-  items: ITEM[];
-  value: ITEM;
-  onChange: ThemePropSetValue<ITEM>;
-  getItemKey?: ThemePropGetKey<ITEM>;
-  getItemLabel: ThemePropGetLabel<ITEM>;
-  getItemValue: ThemePropGetValue<ITEM>;
-  getItemIcon: ThemePropGetIcon<ITEM>;
-  direction?: Direction;
-  possibleDirections?: readonly Direction[];
-  children?: never;
-};
+type Props<ITEM> = PropsWithHTMLAttributesAndRef<
+  {
+    size?: ThemeTogglerPropSize;
+    className?: string;
+    items: ITEM[];
+    value: ITEM;
+    onChange: ThemePropSetValue<ITEM>;
+    getItemKey?: ThemePropGetKey<ITEM>;
+    getItemLabel: ThemePropGetLabel<ITEM>;
+    getItemValue: ThemePropGetValue<ITEM>;
+    getItemIcon: ThemePropGetIcon<ITEM>;
+    direction?: Direction;
+    possibleDirections?: readonly Direction[];
+    children?: never;
+  },
+  HTMLButtonElement
+>;
 
-type ThemeToggler = <ITEM>(
-  props: PropsWithHTMLAttributesAndRef<Props<ITEM>, HTMLButtonElement>,
-) => React.ReactElement | null;
+type ThemeToggler = <ITEM>(props: Props<ITEM>) => React.ReactElement | null;
 
 const sizeMap: Record<ThemeTogglerPropSize, IconPropSize> = {
   l: 'm',
@@ -99,17 +100,19 @@ export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef)
   }
 
   if (items.length > 2) {
+    type Item = typeof items[number];
+
     const PreviewIcon = items
       .filter((theme) => getChecked(theme))
       .map((theme) => {
         const Icon = getItemIcon(theme);
         return Icon;
       })[0];
-    const renderIcons = (item: any) => {
+    const renderIcons = (item: Item) => {
       const Icon = getItemIcon(item);
       return <Icon size={iconSize} />;
     };
-    const renderChecks = (item: any) => {
+    const renderChecks = (item: Item) => {
       return getChecked(item) && <IconCheck size={iconSize} />;
     };
 
@@ -135,7 +138,7 @@ export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef)
             getLeftSideBar={renderIcons}
             getRightSideBar={renderChecks}
             onClickOutside={() => setIsOpen(false)}
-            getOnClick={(item) => (e) => getOnChange(item)(e as never)}
+            getOnClick={getOnChange}
           />
         )}
       </>
