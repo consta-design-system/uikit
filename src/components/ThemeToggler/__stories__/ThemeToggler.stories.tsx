@@ -1,7 +1,7 @@
 import './ThemeToggler.stories.css';
 
 import React, { FC, useState } from 'react';
-import { select, object } from '@storybook/addon-knobs';
+import { object, select } from '@storybook/addon-knobs';
 
 import { exampleThemesThree, exampleThemesTwo, Theme as ThemeType } from '../__mocks__/mock.data';
 import { IconProps } from '../../../icons/Icon/Icon';
