@@ -8,6 +8,7 @@ import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { Avatar } from '../Avatar/Avatar';
+import { Button } from '../Button/Button';
 import { TagBasePropSize } from '../TagBase/TagBase';
 import { Text, TextPropSize } from '../Text/Text';
 
@@ -40,10 +41,12 @@ type Props = {
   | {
       withArrow?: true;
       iconRight?: never;
+      onIconClick?: never;
     }
   | {
       withArrow?: false;
       iconRight?: React.FC<IconProps>;
+      onIconClick?: (e: React.SyntheticEvent) => void;
     }
 );
 
@@ -80,6 +83,7 @@ export const User = forwardRefWithAs<Props>((props, ref) => {
     onlyAvatar: propOnlyAvatar,
     withArrow,
     iconRight,
+    onIconClick,
     info,
     status,
     ...otherProps
@@ -120,7 +124,15 @@ export const User = forwardRefWithAs<Props>((props, ref) => {
         </div>
       )}
       {withArrow && <IconSelect className={cnUser('Arrow')} size={arrowSize} view="secondary" />}
-      {IconRight && <IconRight />}
+      {IconRight && (
+        <Button
+          className={cnUser('Icon')}
+          onClick={onIconClick}
+          iconRight={IconRight}
+          onlyIcon
+          view="clear"
+        />
+      )}
     </Tag>
   );
 });

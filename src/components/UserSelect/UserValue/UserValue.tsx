@@ -2,11 +2,9 @@ import './UserValue.css';
 
 import React from 'react';
 
-import { IconPropSize } from '../../../icons/Icon/Icon';
 import { IconClose } from '../../../icons/IconClose/IconClose';
 import { cn } from '../../../utils/bem';
-import { getSizeByMap } from '../../../utils/getSizeByMap';
-import { TagBasePropSize, tagBasePropSizeDefault } from '../../TagBase/TagBase';
+import { tagBasePropSizeDefault } from '../../TagBase/TagBase';
 import { User } from '../../User/User';
 
 type UserValueProps = {
@@ -21,13 +19,6 @@ type UserValueProps = {
 
 const cnUserValue = cn('UserValue');
 
-const sizeMap: Record<TagBasePropSize, IconPropSize> = {
-  xs: 'xs',
-  s: 'xs',
-  m: 's',
-  l: 's',
-};
-
 export const UserValue: React.FC<UserValueProps> = (props) => {
   const {
     size = tagBasePropSizeDefault,
@@ -40,18 +31,9 @@ export const UserValue: React.FC<UserValueProps> = (props) => {
   } = props;
 
   const withCancel = typeof onCancel === 'function';
-  const IconCloseSize = getSizeByMap(sizeMap, size);
   const view = disabled ? 'filled' : 'stroked';
 
   const withUser = true;
-
-  const IconRight = () => {
-    return (
-      <button className={cnUserValue('CancelButton')} type="button" onClick={onCancel}>
-        <IconClose className={cnUserValue('CancelIcon')} size={IconCloseSize} />
-      </button>
-    );
-  };
 
   return (
     <div
@@ -69,7 +51,8 @@ export const UserValue: React.FC<UserValueProps> = (props) => {
         info={subLabel}
         size={size}
         view="ghost"
-        iconRight={IconRight}
+        iconRight={IconClose}
+        onIconClick={onCancel}
       />
     </div>
   );
