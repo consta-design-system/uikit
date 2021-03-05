@@ -310,6 +310,7 @@
         (var(--input-height) - (var(--control-border-width) * 2) - var(--line-height-text-m)) / 2
       );
       line-height: var(--line-height-text-m);
+      min-width: 0;
     }
   }
 }
