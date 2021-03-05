@@ -2,12 +2,12 @@ export const simpleItems = [
   {
     label: 'Andrey Andreev',
     subLabel: 'andrey@gmail.com',
-    url: 'https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png',
+    url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
   },
   {
     label: 'Ivan Ivanov',
     subLabel: 'ivan@gmail.com',
-    url: 'https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png',
+    url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
   },
   {
     label: 'Igor Igorov',
@@ -16,12 +16,12 @@ export const simpleItems = [
   {
     label: 'Boris Borisov',
     subLabel: 'boris@mail.com',
-    url: 'https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png',
+    url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
   },
   {
     label: 'Kirill Kirillov',
     subLabel: 'kirill@yandex.ru',
-    url: 'https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png',
+    url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
   },
   {
     label: 'Timur Timurov',
@@ -36,12 +36,12 @@ export const groups = [
       {
         label: 'Andrey Andreev',
         subLabel: 'andrey@gmail.com',
-        url: 'https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png',
+        url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
       },
       {
         label: 'Ivan Ivanov',
         subLabel: 'ivan@gmail.com',
-        url: 'https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png',
+        url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
       },
       {
         label: 'Igor Igorov',
@@ -55,7 +55,7 @@ export const groups = [
       {
         label: 'Kirill Kirillov',
         subLabel: 'kirill@yandex.ru',
-        url: 'https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png',
+        url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
       },
       {
         label: 'Timur Timurov',
@@ -69,7 +69,7 @@ export const groups = [
       {
         label: 'Boris Borisov',
         subLabel: 'boris@mail.com',
-        url: 'https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png',
+        url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
       },
       {
         label: 'Ilya Ilyev',

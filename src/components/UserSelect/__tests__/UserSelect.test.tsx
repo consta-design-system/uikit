@@ -205,7 +205,7 @@ describe('Компонент UserSelect', () => {
     });
   });
   describe('проверка value', () => {
-    const elementIndex = [2, 3];
+    const elementIndex = [3, 4];
     const value = elementIndex.map((item) => simpleItems[item]);
     it(`отображается в инпуте`, () => {
       renderComponent({ value });
@@ -221,7 +221,7 @@ describe('Компонент UserSelect', () => {
 
       expect(getCheckedOptionsText()).toEqual(
         elementIndex
-          .map((item) => `${getInitialsForName(simpleItems[item].label)}${simpleItems[item].label}`)
+          .map((item) => `${simpleItems[item].label}${simpleItems[item].subLabel}`)
           .join(''),
       );
     });
@@ -235,7 +235,7 @@ describe('Компонент UserSelect', () => {
 
       expect(getCheckedOptionsText()).toEqual(
         indexElementBeforeClick
-          .map((item) => `${getInitialsForName(simpleItems[item].label)}${simpleItems[item].label}`)
+          .map((item) => `${simpleItems[item].label}${simpleItems[item].subLabel}`)
           .join(''),
       );
     });
@@ -254,12 +254,6 @@ describe('Компонент UserSelect', () => {
       expect(handleChange).toHaveBeenCalledWith(expect.objectContaining([simpleItems[1]]));
 
       fireEvent.click(getOption(2));
-
-      // expect(handleChange).toHaveBeenCalled();
-      // expect(handleChange).toHaveBeenCalledWith(
-      //   expect.objectContaining([simpleItems[1], simpleItems[2]]),
-      // );
-
       fireEvent.click(getOption(1));
 
       expect(handleChange).toHaveBeenCalled();
