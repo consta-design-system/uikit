@@ -1,12 +1,16 @@
+import { ExampleStepsValue } from './examples/ExampleStepsValue/ExampleStepsValue';
+import { ExampleStepsDisabled } from './examples/ExampleStepsDisabled/ExampleStepsDisabled';
+import { ExampleStepsCompleted } from './examples/ExampleStepsCompleted/ExampleStepsCompleted';
+import { ExampleStepsSkipped } from './examples/ExampleStepsSkipped/ExampleStepsSkipped';
+import { ExampleStepsContent } from './examples/ExampleStepsContent/ExampleStepsContent';
+import { ExampleStepsSize } from './examples/ExampleStepsSize/ExampleStepsSize';
+
 # Steps
 
 Этот компонент позволяет показывать контент пользователю в нужной последовательности — во вкладках.
 И, если нужно, показать, какие шаги он прошел, какие пропустил и сколько осталось.
 
 Это удобно, если пользователю нужно заполнить длинную форму, например, пройти тестирование.
-
-
-
 
 - [Шаги](#шаги)
   - [Активный шаг](#активный-шаг)
@@ -16,7 +20,6 @@
 - [Содержимое](#содержимое)
 - [Размер](#размер)
 - [Список свойств](#свойства)
-- [Пример использования](#пример)
 
 ## Шаги
 
@@ -28,7 +31,15 @@
 
 Это шаг, в котором находится пользователь, за него отвечает свойство `value`
 
-<нужен пример с активным шагом>
+```tsx
+type Item = string;
+
+const items: Item[] = ['Главное', 'Важное', 'Необязательное'];
+
+<Steps items={items} value={items[1]} getLabel={(item) => item} />;
+```
+
+<ExampleStepsValue />
 
 ### Недоступные шаги
 
@@ -36,8 +47,35 @@
 
 Такие шаги выделены цветом. Их можно получить с помощью функции `getDisabled`.
 
-<нужен пример с недоступным шагом>
+```tsx
+type Item = {
+  label: string;
+  disabled?: boolean;
+};
 
+const items: Item[] = [
+  {
+    label: 'Главное',
+  },
+  {
+    label: 'Важное',
+    disabled: true,
+  },
+  {
+    label: 'Необязательное',
+  },
+];
+
+<Steps
+  items={items}
+  getLabel={(item) => item.label}
+  getDisabled={(item) => item.disabled || false}
+  value={items[2]}
+  onChange={emptyFunction}
+/>;
+```
+
+<ExampleStepsDisabled />
 
 ### Пройденные шаги
 
@@ -46,8 +84,35 @@
 
 Такие шаги выделены цветом и иконкой `IconCheck`. Их можно получить с помощью функции `getCompleted`.
 
-<нужен пример с пройденным шагом>
+```tsx
+type Item = {
+  label: string;
+  completed?: boolean;
+};
 
+const items: Item[] = [
+  {
+    label: 'Главное',
+    completed: true,
+  },
+  {
+    label: 'Важное',
+  },
+  {
+    label: 'Необязательное',
+  },
+];
+
+<Steps
+  items={items}
+  getLabel={(item) => item.label}
+  getCompleted={(item) => item.completed || false}
+  value={items[1]}
+  onChange={emptyFunction}
+/>;
+```
+
+<ExampleStepsCompleted />
 
 ### Пропущенные шаги
 
@@ -56,7 +121,35 @@
 
 Такие шаги выделены цветом. Их можно получить с помощью функции `getSkipped`.
 
-<нужен пример с пропущенным шагом>
+```tsx
+type Item = {
+  label: string;
+  completed?: boolean;
+};
+
+const items: Item[] = [
+  {
+    label: 'Главное',
+    skipped: true,
+  },
+  {
+    label: 'Важное',
+  },
+  {
+    label: 'Необязательное',
+  },
+];
+
+<Steps
+  items={items}
+  getLabel={(item) => item.label}
+  getSkipped={(item) => item.skipped || false}
+  value={items[1]}
+  onChange={emptyFunction}
+/>;
+```
+
+<ExampleStepsSkipped />
 
 ## Содержимое
 
@@ -64,17 +157,50 @@
 Можно добавить дополнительные кнопки для переключения между шагами — например, **Вперед** и **Назад**.
 По умолчанию таких кнопок в шагах нет.
 
-<нужен пример шагов с контентом>
+```tsx
+export const Items: string[] = ['Главное', 'Важное', 'Необязательное'];
+
+const getContent = (index: number) => `Контент на шаге №${index + 1}`;
+const getLabel = (item: string) => item;
+
+export const ExampleStepsContent = () => {
+  const [activeStep, setActiveStep] = useState<string>(items[0]);
+
+  const activeStepIndex = items.findIndex((item) => item === activeStep);
+
+  const handleNext = () => setActiveStep(items[activeStepIndex + 1]);
+  const handlePrev = () => setActiveStep(items[activeStepIndex - 1]);
+  const onChange = ({ value }: { value: string }) => setActiveStep(value);
+
+  return (
+    <>
+      <Steps items={items} getLabel={getLabel} value={activeStep} onChange={onChange} />
+      <div>{getContent(activeStepIndex)}</div>
+      <Button label="Предыдущий" onClick={handlePrev} disabled={activeStepIndex === 0} />
+      <Button
+        label="Следующий"
+        onClick={handleNext}
+        disabled={activeStepIndex === items.length - 1}
+      />
+    </>
+  );
+};
+```
+
+<ExampleStepsContent />
 
 ## Размер
 
 За размер отвечает свойство `size`.
 
 ```tsx
-<Steps size="m" />
-<Steps size="l" />
+export const Items: string[] = ['Главное', 'Важное', 'Необязательное'];
+
+<Steps size="m" items={items} getLabel={(item) => item} value={items[1]} />;
+<Steps size="l" items={items} getLabel={(item) => item} value={items[1]} />;
 ```
 
+<ExampleStepsSize />
 
 ## Свойства
 
@@ -82,144 +208,14 @@
 type OnChange = (props: { e: React.MouseEvent; value: ITEM | null }) => void;
 ```
 
-<!-- props:start -->
-
-| Свойство                     | Тип                        | По умолчанию | Описание                                                                                    |
-| ---------------------------- | -------------------------- | ------------ | ------------------------------------------------------------------------------------------- |
-| [`value`](#активный-шаг)                      | `Item`                     | —            | Номер шага                                                                                    |
-| [`items`](#шаги)                       | `Item[]`                   | —            | Массив с шагами                                                                             |
-| [`getLabel`](#шаги)                    | `(item: Item) => string`   | —            | Получает название для шага. Также используется в качестве уникального ключа элемента |
-| [`getDisabled?`](#недоступные-шаги)                | `(item: Item) => boolean`  | —            | Получает недоступные шаги                                             |
-| [`getCompleted?`](#пройденные-шаги)               | `(item: Item) => boolean`  | —            | Получает завершенные шаги                                               |
-| [`getSkipped?`](#пропущенные-шаги)                 | `(item: Item) => boolean`  | —            | Получает пропущенные шаги
-| `onChange`                    | `OnChange`                 | —            | Меняет шаги
-| [`size?`](#размер)           | `'m', 'l'`                 | `'m'`        | Размер элементов компонента                                                                   |
-| `className?`                 | `string`                   | —            | Дополнительные CSS-классы для компонента                                                                |
-
-<!-- props:end -->
-
-## Пример
-
-```ts
-// src/App.ts
-import React from 'react';
-import { Steps } from '@consta/uikit/Steps';
-import { Text } from '@consta/uikit/Text';
-import { BasicSelect } from '@consta/uikit/BasicSelect';
-import { Button } from '@consta/uikit/Button';
-
-const App = () => {
-  type Item = {
-    label: string;
-  };
-
-  const items: Item[] = [
-    {
-      label: 'Главное',
-    },
-    {
-      label: 'Важное',
-    },
-    {
-      label: 'Необязательное',
-    },
-  ];
-
-  const getStepContent = (stepNumber: number) => {
-    switch (stepNumber) {
-      case 0:
-        return (
-          <>
-            <Text view='primary'>Содержимое первого шага</Text>
-            <BasicSelect className={cnStepsStories('Select')} id='select' placeholder='Список' options={['1', 'вторая опция', '3', 'e']} getOptionLabel={o => o} />
-          </>
-        );
-      case 1:
-        return (
-          <>
-            <Text view='primary'>Содержимое второго шага</Text>
-          </>
-        );
-      case 2:
-        return <Text view='brand'>Содержимое шага № 3</Text>;
-      default:
-        return `unknown ${stepNumber} step`;
-    }
-  };
-
-  const [activeStep, setActiveStep] = React.useState<number>(0);
-  const [skippedSteps, setSkippedSteps] = React.useState<Set<number>>(new Set());
-  const [completedSteps, setCompletedSteps] = React.useState<Set<number>>(new Set());
-
-  const getStepIndex = (step: Item | null): number => items.findIndex((item) => step && item.label === step.label);
-
-  const getSkipped = (step: Item): boolean => skippedSteps.has(getStepIndex(step));
-  const getCompleted = (step: Item): boolean => completedSteps.has(getStepIndex(step));
-  const getDisabled = (step: Item): boolean =>
-    getStepIndex(step) >= 2 && skippedSteps.size === 0 && completedSteps.size === 0;
-  const handleNext = () => {
-    if (activeStep < items.length - 1) {
-      const newCompleted = new Set(completedSteps);
-      newCompleted.add(activeStep);
-      setCompletedSteps(newCompleted);
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    }
-  };
-  const handlePrev = () => {
-    if (activeStep > 0) {
-      if (completedSteps.has(activeStep)) {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
-      } else {
-        const newSkipped = new Set(skippedSteps);
-        newSkipped.add(activeStep);
-        setSkippedSteps(newSkipped);
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
-      }
-    }
-  };
-  const handleReset = () => {
-    setSkippedSteps(new Set());
-    setCompletedSteps(new Set());
-    setActiveStep(0);
-  };
-  const handleChange = ({ value }: { value: Item | null }) => {
-    if (completedSteps.has(activeStep)) {
-      setActiveStep(getStepIndex(value));
-    } else {
-      const newSkipped = new Set(skippedSteps);
-      newSkipped.add(activeStep);
-      setSkippedSteps(newSkipped);
-      setActiveStep(getStepIndex(value));
-    }
-  };
-
-  const handleSkip = () => {
-    const newSkipped = new Set(skippedSteps);
-    newSkipped.add(activeStep);
-    setSkippedSteps(newSkipped);
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  return (
-    <div className={cnStepsStories()}>
-      <Steps
-        items={items}
-        getLabel={(item) => item.label}
-        value={items[activeStep]}
-        onChange={handleChange}
-        getCompleted={getCompleted}
-        getSkipped={getSkipped}
-        getDisabled={getDisabled}
-      />
-      <div className={cnStepsStories('Content')}>{getStepContent(activeStep)}</div>
-      <div className={cnStepsStories('Actions')}>
-        <Button onClick={handlePrev} label="Назад" iconLeft={IconBackward} view='ghost' disabled={activeStep === 0} />
-        <div>
-          {(skippedSteps.size > 0 || completedSteps.size > 0) && <Button className={cnStepsStories('ResetButton')} onClick={handleReset} label="Отменить" view='ghost' />}
-          {activeStep === 1 ? <Button onClick={handleSkip} label="Заполнить позже" /> : <Button onClick={handleNext} label="Дальше" iconRight={IconForward} />}
-        </div>
-      </div>
-    </div>
-  );
-};
-```
+| Свойство                            | Тип                       | По умолчанию | Описание                                                                             |
+| ----------------------------------- | ------------------------- | ------------ | ------------------------------------------------------------------------------------ |
+| [`value`](#активный-шаг)            | `Item`                    | —            | Номер шага                                                                           |
+| [`items`](#шаги)                    | `Item[]`                  | —            | Массив с шагами                                                                      |
+| [`getLabel`](#шаги)                 | `(item: Item) => string`  | —            | Получает название для шага. Также используется в качестве уникального ключа элемента |
+| [`getDisabled?`](#недоступные-шаги) | `(item: Item) => boolean` | —            | Получает недоступные шаги                                                            |
+| [`getCompleted?`](#пройденные-шаги) | `(item: Item) => boolean` | —            | Получает завершенные шаги                                                            |
+| [`getSkipped?`](#пропущенные-шаги)  | `(item: Item) => boolean` | —            | Получает пропущенные шаги                                                            |
+| `onChange`                          | `OnChange`                | —            | Меняет шаги                                                                          |
+| [`size?`](#размер)                  | `'m', 'l'`                | `'m'`        | Размер элементов компонента                                                          |
+| `className?`                        | `string`                  | —            | Дополнительные CSS-классы для компонента                                             |
