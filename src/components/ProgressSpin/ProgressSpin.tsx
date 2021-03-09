@@ -48,12 +48,13 @@ export const ProgressSpin = React.forwardRef<SVGSVGElement, ProgressSpinProps>((
     [size],
   );
 
-  const strokeDashoffset = strokeDasharray - (strokeDasharray * progress) / 100;
+  const animatedProgress = progress || 50;
+  const strokeDashoffset = strokeDasharray - (strokeDasharray * animatedProgress) / 100;
 
   return (
     <svg
       {...otherProps}
-      className={cnProgressSpin(null, [className])}
+      className={cnProgressSpin({ spin: !progress }, [className])}
       width={sizeOfPixels}
       height={sizeOfPixels}
       viewBox={`0 0 ${sizeOfPixels} ${sizeOfPixels}`}

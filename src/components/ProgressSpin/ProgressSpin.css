@@ -5,6 +5,10 @@
   transform: rotate(-90deg);
   fill: none;
 
+  &_spin {
+    animation: File-Loader-Animate 1.2s linear infinite;
+  }
+
   &-Circle {
     &_animation {
       transition: var(--animation-duration) linear;

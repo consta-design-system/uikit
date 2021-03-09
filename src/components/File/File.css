@@ -11,10 +11,6 @@
     background-color: var(--color-control-bg-ghost);
     border-radius: 50%;
 
-    &_spin {
-      animation: File-Loader-Animate 1.2s linear infinite;
-    }
-
     &_size {
       &_s {
         --loader-size: 16px;
