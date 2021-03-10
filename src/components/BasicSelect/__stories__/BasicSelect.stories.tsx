@@ -16,8 +16,6 @@ import {
 } from '../../SelectComponents/types';
 import { BasicSelect } from '../BasicSelect';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import mdx from './BasicSelect.mdx';
 
 type SelectOption = {

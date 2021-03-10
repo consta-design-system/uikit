@@ -11,8 +11,6 @@ import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 import { Steps, stepsDefaultSize, stepsSizes } from '../Steps';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import mdx from './Steps.mdx';
 
 const cnStepsStories = cn('StepsStories');

@@ -13,8 +13,6 @@ import {
   checkboxGroupViews,
 } from '../CheckboxGroup';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import mdx from './CheckboxGroup.mdx';
 
 const cnCheckboxGroupStories = cn('CheckboxGroupStories');

@@ -22,8 +22,6 @@ import {
   buttonPropWidthDefault,
 } from '../Button';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import mdx from './Button.mdx';
 
 const defaultKnobs = () => ({

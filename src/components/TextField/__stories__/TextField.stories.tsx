@@ -20,8 +20,6 @@ import {
   textFieldPropWidthDefault,
 } from '../TextField';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import mdx from './TextField.mdx';
 
 const defaultKnobs = () => ({

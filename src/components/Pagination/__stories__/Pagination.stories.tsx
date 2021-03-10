@@ -18,8 +18,6 @@ import {
   paginationTypes,
 } from '../Pagination';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import mdx from './Pagination.mdx';
 
 const cnPaginationStories = cn('PaginationStories');
