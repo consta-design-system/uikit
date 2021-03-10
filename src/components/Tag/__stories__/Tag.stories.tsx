@@ -11,8 +11,6 @@ import {
 } from '../../TagBase/TagBase';
 import { Tag, tagPropMode, tagPropModeDefault } from '../Tag';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import mdx from './Tag.mdx';
 
 const defaultKnobs = () => ({

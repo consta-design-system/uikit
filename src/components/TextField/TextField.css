@@ -303,6 +303,7 @@
     & .TextField-Input {
       resize: none;
       display: block;
+      min-width: 0;
       padding-top: calc(
         (var(--input-height) - (var(--control-border-width) * 2) - var(--line-height-text-m)) / 2
       );

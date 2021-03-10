@@ -13,8 +13,6 @@ import {
   switchGroupViews,
 } from '../SwitchGroup';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import mdx from './SwitchGroup.mdx';
 
 const cnSwitchGroupStories = cn('SwitchGroupStories');

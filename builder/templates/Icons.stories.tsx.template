@@ -5,8 +5,7 @@ import { createMetadata } from '../../../utils/storybook';
 #imports#
 
 import { IconsItem } from './Item/Icons-Item';
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
+
 import mdx from './Icon.mdx';
 
 const defaultKnobs = () => ({

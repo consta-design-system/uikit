@@ -4,8 +4,6 @@ import { select } from '@storybook/addon-knobs';
 import { createMetadata } from '../../../utils/storybook';
 import { Loader, loaderPropSize, loaderPropSizeDefault } from '../Loader';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import mdx from './Loader.mdx';
 
 const defaultKnobs = () => ({

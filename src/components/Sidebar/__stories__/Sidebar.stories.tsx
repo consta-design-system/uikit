@@ -9,8 +9,6 @@ import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 import { Sidebar } from '../Sidebar';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import mdx from './Sidebar.mdx';
 
 const cnSidebarStories = cn('SidebarStories');
