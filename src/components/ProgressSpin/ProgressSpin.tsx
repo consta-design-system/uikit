@@ -13,7 +13,7 @@ export const progressSpinPropSizeDefault: ProgressSpinPropSize = progressSpinPro
 type Props = {
   size?: ProgressSpinPropSize;
   className?: string;
-  progress?: number;
+  progress?: number | undefined;
   animation?: boolean;
   children?: never;
 };
@@ -38,7 +38,7 @@ function getSvgParamsBySize(size: ProgressSpinPropSize): [number, number, number
 export const ProgressSpin = React.forwardRef<SVGSVGElement, ProgressSpinProps>((props, ref) => {
   const {
     size = progressSpinPropSizeDefault,
-    progress = 0,
+    progress,
     animation,
     className,
     ...otherProps
@@ -48,7 +48,7 @@ export const ProgressSpin = React.forwardRef<SVGSVGElement, ProgressSpinProps>((
     [size],
   );
 
-  const animatedProgress = progress || 50;
+  const animatedProgress = typeof progress === 'number' ? progress : 50;
   const strokeDashoffset = strokeDasharray - (strokeDasharray * animatedProgress) / 100;
 
   return (

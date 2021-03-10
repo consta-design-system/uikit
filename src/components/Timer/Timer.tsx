@@ -13,7 +13,7 @@ export const timerPropsSizeDefault: TimerPropsSize = timerPropsSize[0];
 export type TimerProps = PropsWithJsxAttributes<{
   size?: TimerPropsSize;
   seconds?: number;
-  progress?: number;
+  progress?: number | undefined;
   animation?: boolean;
   children?: never;
 }>;
