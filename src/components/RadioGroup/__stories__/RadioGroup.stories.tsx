@@ -13,8 +13,6 @@ import {
   radioGroupViews,
 } from '../RadioGroup';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import mdx from './RadioGroup.mdx';
 
 const cnRadioGroupStories = cn('RadioGroupStories');

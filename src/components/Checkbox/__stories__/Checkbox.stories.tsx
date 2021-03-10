@@ -17,8 +17,6 @@ import {
   checkboxPropViewDefault,
 } from '../Checkbox';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import mdx from './Checkbox.mdx';
 
 const defaultKnobs = () => ({

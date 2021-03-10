@@ -15,8 +15,6 @@ import { ResponsesNothingFound } from '../../ResponsesNothingFound/ResponsesNoth
 import { ResponsesSuccess } from '../../ResponsesSuccess/ResponsesSuccess';
 import { responsesPropSize, responsesPropSizeDefault } from '../Responses';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import mdx from './Responses.mdx';
 
 const components = {
