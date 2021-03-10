@@ -8,6 +8,7 @@ import { setRef } from '../../utils/setRef';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { Button } from '../Button/Button';
 import { ContextMenu } from '../ContextMenu/ContextMenu';
+import { ContextMenuPropSize } from '../ContextMenu/helpers';
 import { Direction } from '../Popover/Popover';
 import { ThemePreset } from '../Theme/Theme';
 
@@ -41,11 +42,18 @@ type Props<ITEM> = PropsWithHTMLAttributesAndRef<
 
 type ThemeToggler = <ITEM>(props: Props<ITEM>) => React.ReactElement | null;
 
-const sizeMap: Record<ThemeTogglerPropSize, IconPropSize> = {
+const iconSizeMap: Record<ThemeTogglerPropSize, IconPropSize> = {
   l: 'm',
   m: 's',
   s: 's',
   xs: 'xs',
+};
+
+const contextMenuSizeMap: Record<ThemeTogglerPropSize, ContextMenuPropSize> = {
+  l: 'l',
+  m: 'm',
+  s: 's',
+  xs: 's',
 };
 
 export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef) => {
@@ -79,7 +87,7 @@ export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef)
     multiple: false,
   });
 
-  const iconSize = getSizeByMap(sizeMap, size);
+  const iconSize = getSizeByMap(iconSizeMap, size);
 
   if (items.length === 2) {
     const IconOne = getItemIcon(items[0]);
@@ -94,13 +102,16 @@ export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef)
         iconLeft={isFirstThemeSelected ? IconOne : IconTwo}
         view="clear"
         onClick={getOnChange(items[isFirstThemeSelected ? 1 : 0])}
-        size={iconSize}
+        // size={size}
+        iconSize={iconSize}
       />
     );
   }
 
   if (items.length > 2) {
     type Item = typeof items[number];
+
+    const contextMenuSize = getSizeByMap(contextMenuSizeMap, size);
 
     const PreviewIcon = items
       .filter((theme) => getChecked(theme))
@@ -125,7 +136,8 @@ export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef)
           iconLeft={PreviewIcon}
           view="clear"
           onClick={() => setIsOpen(!isOpen)}
-          size={iconSize}
+          // size={size}
+          iconSize={iconSize}
         />
         {isOpen && (
           <ContextMenu
@@ -139,6 +151,7 @@ export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef)
             getRightSideBar={renderChecks}
             onClickOutside={() => setIsOpen(false)}
             getOnClick={getOnChange}
+            size={contextMenuSize}
           />
         )}
       </>
