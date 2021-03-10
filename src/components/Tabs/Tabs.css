@@ -43,6 +43,7 @@
     left: -1px;
     width: 1px;
     border-radius: 1px 0 0 0;
+    transition: opacity 0.2s, transform 0.25s;
     transform: translateX(var(--tabOffsetLeft, 0));
 
     &,
@@ -70,10 +71,6 @@
       border-radius: 0 1px 0 0;
       transition: transform 0.25s;
       transform: translateX(var(--tabWidth));
-    }
-
-    &_mounted {
-      transition: opacity 0.2s, transform 0.25s;
     }
 
     &_withOutValue {
