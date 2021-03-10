@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.11.7 (10/03/2021)
+
+- [refactor(Tabs): removed casting to types and more fix (#958)](https://github.com/gazprom-neft/consta-uikit/commit/82949196c2ecdfd51242257e8f15cf4d9e535119) - [@gizeasy](https://github.com/gizeasy)
+- [chore(react-app-env): add mdx types (#974)](https://github.com/gazprom-neft/consta-uikit/commit/d35bafef3f78b877b6670b71666c5af681784e83) - [@azhadanov](https://github.com/azhadanov)
+- [fix(TextField): fix cols and rows props (#957)](https://github.com/gazprom-neft/consta-uikit/commit/a6d1704eb791910319615dee3a9298aa78654231) - [@azhadanov](https://github.com/azhadanov)
+- [fix(MultiCombobox): fix clear value function (#959)](https://github.com/gazprom-neft/consta-uikit/commit/64e428c16b1100c262c2db011f66fd7bc935d259) - [@azhadanov](https://github.com/azhadanov)
+- [chore(Prettier): add commit-formatting for mdx files (#970)](https://github.com/gazprom-neft/consta-uikit/commit/cb013105d6304c849cc6154b1bf4cc1b5d99acd6) - [@azhadanov](https://github.com/azhadanov)
+- [chore(deps): bump elliptic from 6.5.3 to 6.5.4 (#969)](https://github.com/gazprom-neft/consta-uikit/commit/a54a7c4d38f09e5ef319be01fd35f010fb35403d) - [@dependabot[bot]](https://github.com/dependabot[bot])
+- [chore(CODEOWNERS): update (#960)](https://github.com/gazprom-neft/consta-uikit/commit/4af8e14ff9735804d2b3e67f8eae207086eadf2e) - [@gizeasy](https://github.com/gizeasy)
+
+---
+
 ## v1.11.6 (03/03/2021)
 
 - [docs(components): fix some links (#884)](https://github.com/gazprom-neft/consta-uikit/commit/5bb19e3be64943f8b50c9c3f1fb083ab03ac61c1) - [@azhadanov](https://github.com/azhadanov)
@@ -360,9 +372,3 @@
 - [feat(Icons): add IconDisconnection and IconRestart (#260)](https://github.com/gazprom-neft/consta-uikit/commit/b3ecce80e675c9fe61051a6a320cbdc29845d7b7) - @fooontic
 - [chore(Travis): run unit tests (#249)](https://github.com/gazprom-neft/consta-uikit/commit/b79c6fe1cdd573eca4c935427271294095fcbd4e) - @nekitk
 - [refactor(components): removed unused components (#247)](https://github.com/gazprom-neft/consta-uikit/commit/ba6e9cfbec116be8b410a4fa9f37236bc234ec81) - @nekitk
-
----
-
-## v1.4.1 (15/07/2020)
-
-docs(button): add new docs for button - @fooontic
