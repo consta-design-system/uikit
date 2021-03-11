@@ -10,8 +10,6 @@ import {
   multiComboboxPropSizeDefault,
 } from '../MultiCombobox';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import mdx from './MultiCombobox.mdx';
 
 type Option = {

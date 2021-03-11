@@ -12,8 +12,6 @@ import {
   switchPropViewDefault,
 } from '../Switch';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import mdx from './Switch.mdx';
 
 const defaultKnobs = () => ({

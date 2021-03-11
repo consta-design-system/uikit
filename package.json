@@ -1,6 +1,6 @@
 {
   "name": "@consta/uikit",
-  "version": "1.11.4",
+  "version": "1.11.7",
   "keywords": [
     "ui-kit",
     "design-system",
@@ -63,7 +63,7 @@
       "stylelint --fix",
       "git add"
     ],
-    "*.{json,md}": [
+    "*.{json,md,mdx}": [
       "prettier --write",
       "git add"
     ],
