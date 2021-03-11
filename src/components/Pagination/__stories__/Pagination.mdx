@@ -1,10 +1,11 @@
-import { PaginationExample,
+import {
+  PaginationExample,
   PaginationExampleForm,
   PaginationExampleSize,
   PaginationExampleType,
   PaginationExamplePosition,
-  PaginationExampleMinified
-   } from './examples/PaginationExample/PaginationExample';
+  PaginationExampleMinified,
+} from './examples/PaginationExample/PaginationExample';
 
 # Pagination
 
@@ -27,7 +28,6 @@ import { PaginationExample,
 с помощью `currentPage`.
 
 <PaginationExample />
-
 
 ## Форма
 
@@ -58,7 +58,6 @@ import { PaginationExample,
 <Pagination size="m" />
 <Pagination size="l" />
 ```
-
 
 ## Тип
 
@@ -105,6 +104,7 @@ import { PaginationExample,
 Вы можете установить клавиши, с которыми пользователи смогут переключать страницы. Обычно для этого используют **Control** со стрелками.
 
 За горячие клавиши отвечает свойство `hotkeys`. Внутри:
+
 - `nextPage` — описание клавиш для перелистывания страниц «вперёд»,
 - `prevPage` — для перелистывания «назад»,
 - `label` — подсказка, которую увидят пользователи,
@@ -127,7 +127,6 @@ hotkeys = {
 
 ## Свойства
 
-
 ```
 type HotKey = {
   label: string;
@@ -142,24 +141,22 @@ type HotKeys = {
 
 <!-- props:start -->
 
-| Свойство                     | Тип                               | По умолчанию          | Описание                                                             |
-| ---------------------------- | ----------------------------------| --------------------- | -------------------------------------------------------------------- |
-| [`currentPage`](#страницы)                | `number`                          | —                     | Номер текущей страницы                                               |
-| [`totalPages`](#страницы)                 | `number`                          | —                     | Количество страниц                                              |
-| `onChange`                   | `(pageNumber: number) => void`    | —                     | Функция для смены страницы                                           |
-| `getLabel?`                  | `(totalPages: number) => string`  | `из ${totalPages}`    | Функция для получения номера страницы из количества страниц                   |
-| [`form?`](#форма)            | `'default', 'round', 'brick'`     | `'default'`           | Форма элементов компонента                                            |
-| [`size?`](#размер)           | `'xs', 's', 'm', 'l'`             | `'m'`                 | Размер элементов компонента                                           |
-| [`type?`](#тип)              | `'default', 'input'`              | `'default'`           | Тип компонента (кнопки или поле ввода)                      |
-| [`position?`](#выравнивание)      | `'left', 'center', 'right'`       | `'center'`        | Выравнивание по горизонтали                                          |
-| [`hotkeys?`](#горячие-клавиши)                   | `HotKeys`                         | [`hotkeys`](#горячие-клавиши)  | Горячие клавиши для переключения страниц                             |
-| `containerEventListener?`    | `HTMLElement, Window`             | `window`              | Элемент, к которому прикрепляется обработчик нажатия клавиш                |
-| [`minified?`](#состояние)    | `boolean`                         | `false`               | Скрывает кнопки, располагает компонент по центру |
-| `className?`                 | `string`                          | —                     | Дополнительные CSS-классы                                            |
-
+| Свойство                       | Тип                              | По умолчанию                  | Описание                                                    |
+| ------------------------------ | -------------------------------- | ----------------------------- | ----------------------------------------------------------- |
+| [`currentPage`](#страницы)     | `number`                         | —                             | Номер текущей страницы                                      |
+| [`totalPages`](#страницы)      | `number`                         | —                             | Количество страниц                                          |
+| `onChange`                     | `(pageNumber: number) => void`   | —                             | Функция для смены страницы                                  |
+| `getLabel?`                    | `(totalPages: number) => string` | `из ${totalPages}`            | Функция для получения номера страницы из количества страниц |
+| [`form?`](#форма)              | `'default', 'round', 'brick'`    | `'default'`                   | Форма элементов компонента                                  |
+| [`size?`](#размер)             | `'xs', 's', 'm', 'l'`            | `'m'`                         | Размер элементов компонента                                 |
+| [`type?`](#тип)                | `'default', 'input'`             | `'default'`                   | Тип компонента (кнопки или поле ввода)                      |
+| [`position?`](#выравнивание)   | `'left', 'center', 'right'`      | `'center'`                    | Выравнивание по горизонтали                                 |
+| [`hotkeys?`](#горячие-клавиши) | `HotKeys`                        | [`hotkeys`](#горячие-клавиши) | Горячие клавиши для переключения страниц                    |
+| `containerEventListener?`      | `HTMLElement, Window`            | `window`                      | Элемент, к которому прикрепляется обработчик нажатия клавиш |
+| [`minified?`](#состояние)      | `boolean`                        | `false`                       | Скрывает кнопки, располагает компонент по центру            |
+| `className?`                   | `string`                         | —                             | Дополнительные CSS-классы                                   |
 
 <!-- props:end -->
-
 
 ## Пример
 
@@ -173,15 +170,15 @@ const App = () => {
   const totalPages = 10;
 
   const hotKeys = {
-      prevPage: {
-        label: '← Shift',
-        values: ['Shift', 'ArrowLeft'],
-      },
-      nextPage: {
-        label: 'Shift →',
-        values: ['Shift', 'ArrowRight'],
-      },
-    };
+    prevPage: {
+      label: '← Shift',
+      values: ['Shift', 'ArrowLeft'],
+    },
+    nextPage: {
+      label: 'Shift →',
+      values: ['Shift', 'ArrowRight'],
+    },
+  };
 
   const handleChange = ({ pageNumber }: { pageNumber: number }): void => {
     setCurrentPage(pageNumber);

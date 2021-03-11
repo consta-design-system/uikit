@@ -3,7 +3,11 @@ import { ContextMenuExampleSubMenu } from './examples/ContextMenuExampleSubMenu/
 import { ContextMenuExampleOutsideClick } from './examples/ContextMenuExampleOutsideClick/ContextMenuExampleOutsideClick';
 import { ContextMenuExampleSide } from './examples/ContextMenuExampleSide/ContextMenuExampleSide';
 import { ContextMenuExampleGroups } from './examples/ContextMenuExampleGroups/ContextMenuExampleGroups';
-import { ContextMenuExampleSizeS, ContextMenuExampleSizeL, ContextMenuExampleSizeM } from './examples/ContextMenuExampleSize/ContextMenuExampleSize';
+import {
+  ContextMenuExampleSizeS,
+  ContextMenuExampleSizeL,
+  ContextMenuExampleSizeM,
+} from './examples/ContextMenuExampleSize/ContextMenuExampleSize';
 
 # ContextMenu
 
@@ -154,7 +158,6 @@ export const ContextMenuExampleSide = () => {
 
 <ContextMenuExampleSide />
 
-
 ### Группы пунктов
 
 `getGroupId` делит пункты меню на группы (результат функции должен вернуть уникальный идентификатор группы).
@@ -229,15 +232,12 @@ export const ContextMenuExampleGroups = () => {
 
 <ContextMenuExampleGroups />
 
-
 ## Размер меню
 
-За размер компонента отвечает свойство `size`. Варианты:  `'s'`, `'m'`, `'l'`.
+За размер компонента отвечает свойство `size`. Варианты: `'s'`, `'m'`, `'l'`.
 
 <ContextMenuExampleSizeS />
-
 <ContextMenuExampleSizeM />
-
 <ContextMenuExampleSizeL />
 
 ## Второй уровень меню
@@ -378,27 +378,26 @@ type Direction =
 type SubMenuDirection = 'rightStartUp' | 'rightStartDown' | 'leftStartUp' | 'leftStartDown';
 ```
 
-
-| Свойство  | Тип  | По умолчанию   | Описание   |
-| ---------- | ----| -------------- | ---------- |
-| [`items`](#пункты-меню) | `Item[]` | —    | Элементы меню |
-| `anchorRef`           | `React.RefObject<HTMLElement>`      | —    | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)   |
-| `position`  | `{ x: number; y: number }, undefined`       | —    | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)   |
-| `direction?`          | [`Direction`](direction)     | —    | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)   |
-| `possibleDirections?` | [`Direction`](direction)     | —    | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)   |
-| `offset?`   | `number` | —    | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)   |
-| [`subMenuDirection?`](#второй-уровень-меню) | [`SubMenuDirection`](submenudirection)        | 'rightStartUp' | Позиция, в которую будет изначально разворачиваться меню второго уровня         |
-| [`size?`](#размер-меню)     | `'m', 's', 'l'`           | —    | Размер контекстного меню    |
-| `getKey?`   | `(item: ITEM) => string, number;`   | —    | Результат функции используется в качестве уникального ключа для пункта меню  |
-| [`getLabel`](#пункты-меню)  | `(item: ITEM) => string, number;`   | —    | Результат функции используется в качестве названия пункта меню. Если не указано свойство `getKey`, то используется в качестве уникального ключа пункта меню |
-| [`getGroupId?`](#групировка-пунктов-меню)      | `(item: ITEM) => string, number, undefined;`       | —    | Результат функции используется в качестве ключа, по которому группируются пункты меню   |
-| [`getGroupLabel?`](#группы-пунктов)   | `(id: string, number, undefined) => string, number, undefined;`        | —    | Результат функции используется как заголовок группы        |
-| [`sortGroup?`](#группы-пунктов)          | `(a: string, number; b: string, number) => number;`          | —    | Функция сортировки групп        |
-| [`getSubItems?`](#второй-уровень-меню)      | `(item: ITEM) => ITEM[], undefined;`        | —    | Результат функции используется как заголовок пункта меню второго уровня    |
-| `getAccent?`          | `(item: ITEM) => 'alert', 'warning', 'success', undefined;`  | —    | Результат функции используется как акцентный цвет пункта меню     |
-| `getOnClick?`         | `(item: ITEM) => React.EventHandler<React.MouseEvent<HTMLDivElement>>` | —    | Действие по клику на пункт меню         |
-| `getDisabled?`        | `(item: ITEM) => boolean` | —    | Функция, которая блокирует  пункт меню.  При значении `false` события пункта меню отключаются   |
-| [`getLeftSideBar?`](#добавить-дополнительные-элементы)  | `(item: ITEM) => React.ReactNode, null`     | —    | Результат функции будет использоваться как рендер слева от названия пункта меню     |
-| [`getRightSideBar?`](#добавить-дополнительные-элементы)  | `(item: ITEM) => React.ReactNode, null`     | —    | Результат функции будет использоваться как рендер справа от названия пункта меню    |
-| [`onClickOutside?`](#закрытие-контекстного-меню-по-клику-вне-меню) | `(event: MouseEvent) => void;`      | —    | Действие по клику вне меню или вне элемента, привязанного к `anchorRef`       |
-| `className?`          | `string` | —    | Дополнительный CSS-класс для каждого уровня меню |
+| Свойство                                                           | Тип                                                                    | По умолчанию   | Описание                                                                                                                                                    |
+| ------------------------------------------------------------------ | ---------------------------------------------------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`items`](#пункты-меню)                                            | `Item[]`                                                               | —              | Элементы меню                                                                                                                                               |
+| `anchorRef`                                                        | `React.RefObject<HTMLElement>`                                         | —              | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                                           |
+| `position`                                                         | `{ x: number; y: number }, undefined`                                  | —              | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                                           |
+| `direction?`                                                       | [`Direction`](direction)                                               | —              | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                                           |
+| `possibleDirections?`                                              | [`Direction`](direction)                                               | —              | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                                           |
+| `offset?`                                                          | `number`                                                               | —              | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                                           |
+| [`subMenuDirection?`](#второй-уровень-меню)                        | [`SubMenuDirection`](submenudirection)                                 | 'rightStartUp' | Позиция, в которую будет изначально разворачиваться меню второго уровня                                                                                     |
+| [`size?`](#размер-меню)                                            | `'m', 's', 'l'`                                                        | —              | Размер контекстного меню                                                                                                                                    |
+| `getKey?`                                                          | `(item: ITEM) => string, number;`                                      | —              | Результат функции используется в качестве уникального ключа для пункта меню                                                                                 |
+| [`getLabel`](#пункты-меню)                                         | `(item: ITEM) => string, number;`                                      | —              | Результат функции используется в качестве названия пункта меню. Если не указано свойство `getKey`, то используется в качестве уникального ключа пункта меню |
+| [`getGroupId?`](#групировка-пунктов-меню)                          | `(item: ITEM) => string, number, undefined;`                           | —              | Результат функции используется в качестве ключа, по которому группируются пункты меню                                                                       |
+| [`getGroupLabel?`](#группы-пунктов)                                | `(id: string, number, undefined) => string, number, undefined;`        | —              | Результат функции используется как заголовок группы                                                                                                         |
+| [`sortGroup?`](#группы-пунктов)                                    | `(a: string, number; b: string, number) => number;`                    | —              | Функция сортировки групп                                                                                                                                    |
+| [`getSubItems?`](#второй-уровень-меню)                             | `(item: ITEM) => ITEM[], undefined;`                                   | —              | Результат функции используется как заголовок пункта меню второго уровня                                                                                     |
+| `getAccent?`                                                       | `(item: ITEM) => 'alert', 'warning', 'success', undefined;`            | —              | Результат функции используется как акцентный цвет пункта меню                                                                                               |
+| `getOnClick?`                                                      | `(item: ITEM) => React.EventHandler<React.MouseEvent<HTMLDivElement>>` | —              | Действие по клику на пункт меню                                                                                                                             |
+| `getDisabled?`                                                     | `(item: ITEM) => boolean`                                              | —              | Функция, которая блокирует пункт меню. При значении `false` события пункта меню отключаются                                                                 |
+| [`getLeftSideBar?`](#добавить-дополнительные-элементы)             | `(item: ITEM) => React.ReactNode, null`                                | —              | Результат функции будет использоваться как рендер слева от названия пункта меню                                                                             |
+| [`getRightSideBar?`](#добавить-дополнительные-элементы)            | `(item: ITEM) => React.ReactNode, null`                                | —              | Результат функции будет использоваться как рендер справа от названия пункта меню                                                                            |
+| [`onClickOutside?`](#закрытие-контекстного-меню-по-клику-вне-меню) | `(event: MouseEvent) => void;`                                         | —              | Действие по клику вне меню или вне элемента, привязанного к `anchorRef`                                                                                     |
+| `className?`                                                       | `string`                                                               | —              | Дополнительный CSS-класс для каждого уровня меню                                                                                                            |

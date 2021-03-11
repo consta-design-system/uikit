@@ -21,7 +21,8 @@
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "pretty": true,
-    "removeComments": false
+    "removeComments": false,
+    "downlevelIteration": true
   },
   "include": ["./src/**/*"],
   "exclude": [
