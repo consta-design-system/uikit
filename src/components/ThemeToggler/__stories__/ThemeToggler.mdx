@@ -30,7 +30,6 @@ import {
 | [`setValue`](#состояния)     | `(arg: ThemePreset) => void;`  | -              | Функция для изменения темы                                                                                                                              |
 | `getItemKey?`                | `(arg: T) => string OR number` | `getItemLabel` | Функция для получения ключа, уникального для каждой переданной темы. Если опустить это свойство, то вместо этой функции будет использована getItemLabel |
 | `getItemLabel`               | `(arg: T) => string`           | -              | Функция для получения названия темы, который будет отображаться в контекстом меню (отображается только в варианте с тремя темами)                       |
-| `getItemValue`               | `(arg: T) => ThemePreset`      | -              | Функция для получения темы в формате ThemePreset                                                                                                        |
 | `getItemIcon`                | `(arg: T) => FC<IconProps>`    | -              | Функция для получения иконки темы в формате компонента                                                                                                  |
 
 <!-- props:end -->
@@ -59,7 +58,6 @@ const themes = [
 
 const Examle = () => {
   const [value, setValue] = useState(themes[0].theme);
-  const getThemeValueDefault = (theme) => theme.theme;
   const getThemeIconDefault = (theme) => theme.icon;
 
   return (
@@ -68,7 +66,6 @@ const Examle = () => {
       themes={themes}
       value={value}
       setValue={setValue}
-      getItemValue={getThemeValueDefault}
       getItemIcon={getThemeIconDefault}
     />
   );

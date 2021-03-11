@@ -22,7 +22,6 @@ const renderComponent = (props: {
         className={props.className}
         items={props.items || exampleThemesThree}
         getItemLabel={(theme) => theme.label}
-        getItemValue={(theme) => theme.theme}
         getItemIcon={(theme) => theme.icon}
         value={props.value || (props.items && props.items[0]) || exampleThemesTwo[0]}
         onChange={defaultSetValue}

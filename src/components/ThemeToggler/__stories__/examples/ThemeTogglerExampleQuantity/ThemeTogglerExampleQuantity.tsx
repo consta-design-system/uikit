@@ -10,7 +10,7 @@ import {
 import { IconProps } from '../../../../../icons/Icon/Icon';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cn } from '../../../../../utils/bem';
-import { Theme, ThemePreset } from '../../../../Theme/Theme';
+import { Theme } from '../../../../Theme/Theme';
 import { ThemeToggler } from '../../../ThemeToggler';
 
 const cnThemeTogglerExample = cn('ThemeTogglerExample');
@@ -18,7 +18,6 @@ const cnThemeTogglerExample = cn('ThemeTogglerExample');
 export const ThemeTogglerExampleQuantityTwo = () => {
   const [value, setValue] = useState<ThemeType>(exampleThemesTwo[0]);
   const getThemeLabelDefault = (theme: ThemeType): string => theme.label;
-  const getThemeValueDefault = (theme: ThemeType): ThemePreset => theme.theme;
   const getThemeIconDefault = (theme: ThemeType): FC<IconProps> => theme.icon;
 
   return (
@@ -29,7 +28,6 @@ export const ThemeTogglerExampleQuantityTwo = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         getItemLabel={getThemeLabelDefault}
-        getItemValue={getThemeValueDefault}
         getItemIcon={getThemeIconDefault}
         direction="downStartLeft"
       />
@@ -40,7 +38,6 @@ export const ThemeTogglerExampleQuantityTwo = () => {
 export const ThemeTogglerExampleQuantityThree = () => {
   const [value, setValue] = useState<ThemeType>(exampleThemesThree[0]);
   const getThemeLabelDefault = (theme: ThemeType): string => theme.label;
-  const getThemeValueDefault = (theme: ThemeType): ThemePreset => theme.theme;
   const getThemeIconDefault = (theme: ThemeType): FC<IconProps> => theme.icon;
 
   return (
@@ -51,7 +48,6 @@ export const ThemeTogglerExampleQuantityThree = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         getItemLabel={getThemeLabelDefault}
-        getItemValue={getThemeValueDefault}
         getItemIcon={getThemeIconDefault}
         direction="downStartLeft"
       />

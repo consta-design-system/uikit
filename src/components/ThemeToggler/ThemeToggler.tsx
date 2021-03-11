@@ -10,7 +10,6 @@ import { Button } from '../Button/Button';
 import { ContextMenu } from '../ContextMenu/ContextMenu';
 import { ContextMenuPropSize } from '../ContextMenu/helpers';
 import { Direction } from '../Popover/Popover';
-import { ThemePreset } from '../Theme/Theme';
 
 export const themeTogglerPropSize = ['l', 'm', 's', 'xs'] as const;
 export type ThemeTogglerPropSize = typeof themeTogglerPropSize[number];
@@ -19,7 +18,6 @@ export const themeTogglerPropSizeDefault: ThemeTogglerPropSize = themeTogglerPro
 export type ThemePropSetValue<ITEM> = (props: { e: React.MouseEvent; value: ITEM }) => void;
 export type ThemePropGetKey<ITEM> = (item: ITEM) => string | number;
 export type ThemePropGetLabel<ITEM> = (item: ITEM) => string;
-export type ThemePropGetValue<ITEM> = (item: ITEM) => ThemePreset;
 export type ThemePropGetIcon<ITEM> = (item: ITEM) => React.FC<IconProps>;
 
 type Props<ITEM> = PropsWithHTMLAttributesAndRef<
@@ -31,7 +29,6 @@ type Props<ITEM> = PropsWithHTMLAttributesAndRef<
     onChange: ThemePropSetValue<ITEM>;
     getItemKey?: ThemePropGetKey<ITEM>;
     getItemLabel: ThemePropGetLabel<ITEM>;
-    getItemValue: ThemePropGetValue<ITEM>;
     getItemIcon: ThemePropGetIcon<ITEM>;
     direction?: Direction;
     possibleDirections?: readonly Direction[];
@@ -57,6 +54,19 @@ const contextMenuSizeMap: Record<ThemeTogglerPropSize, ContextMenuPropSize> = {
 };
 
 export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef) => {
+  const {
+    size = themeTogglerPropSizeDefault,
+    items,
+    value,
+    onChange,
+    getItemKey,
+    getItemLabel,
+    getItemIcon,
+    direction,
+    possibleDirections,
+    ...otherProps
+  } = props;
+
   const ref = useRef<HTMLButtonElement>(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -65,20 +75,6 @@ export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef)
       setRef(componentRef, ref.current);
     }
   });
-
-  const {
-    size = themeTogglerPropSizeDefault,
-    items,
-    value,
-    onChange,
-    getItemKey,
-    getItemLabel,
-    getItemValue,
-    getItemIcon,
-    direction,
-    possibleDirections,
-    ...otherProps
-  } = props;
 
   const { getOnChange, getChecked } = useChoiceGroup({
     value,
@@ -92,7 +88,7 @@ export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef)
   if (items.length === 2) {
     const IconOne = getItemIcon(items[0]);
     const IconTwo = getItemIcon(items[1]);
-    const isFirstThemeSelected = getItemValue(value) === getItemValue(items[0]);
+    const isFirstThemeSelected = getChecked(items[0]);
 
     return (
       <Button
@@ -102,7 +98,6 @@ export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef)
         iconLeft={isFirstThemeSelected ? IconOne : IconTwo}
         view="clear"
         onClick={getOnChange(items[isFirstThemeSelected ? 1 : 0])}
-        // size={size}
         iconSize={iconSize}
       />
     );
@@ -112,13 +107,8 @@ export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef)
     type Item = typeof items[number];
 
     const contextMenuSize = getSizeByMap(contextMenuSizeMap, size);
+    const PreviewIcon = getItemIcon(items.find((theme) => getChecked(theme))!);
 
-    const PreviewIcon = items
-      .filter((theme) => getChecked(theme))
-      .map((theme) => {
-        const Icon = getItemIcon(theme);
-        return Icon;
-      })[0];
     const renderIcons = (item: Item) => {
       const Icon = getItemIcon(item);
       return <Icon size={iconSize} />;
@@ -136,7 +126,6 @@ export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef)
           iconLeft={PreviewIcon}
           view="clear"
           onClick={() => setIsOpen(!isOpen)}
-          // size={size}
           iconSize={iconSize}
         />
         {isOpen && (
