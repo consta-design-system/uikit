@@ -61,6 +61,13 @@ const sizeMap: Record<ButtonPropSize, IconPropSize> = {
   l: 'm',
 };
 
+const sizeMapOnlyIcon: Record<ButtonPropSize, IconPropSize> = {
+  xs: 'xs',
+  s: 's',
+  m: 'm',
+  l: 'm',
+};
+
 export const Button = forwardRefWithAs<Props, 'button'>((props, ref) => {
   const {
     size = buttonPropSizeDefault,
@@ -86,14 +93,16 @@ export const Button = forwardRefWithAs<Props, 'button'>((props, ref) => {
   const IconLeft = iconLeft;
   const IconRight = iconRight;
   const withIcon = !!iconLeft || !!iconRight;
+  const title = props.title || (!!IconOnly && label) || undefined;
+  const iconSize = IconOnly
+    ? getSizeByMap(sizeMapOnlyIcon, size, iconSizeProp)
+    : getSizeByMap(sizeMap, size, iconSizeProp);
+
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     if (!disabled && !loading && onClick) {
       onClick(e);
     }
   };
-
-  const iconSize = getSizeByMap(sizeMap, size, iconSizeProp);
-  const title = props.title || (!!IconOnly && label) || undefined;
 
   return (
     <Tag
