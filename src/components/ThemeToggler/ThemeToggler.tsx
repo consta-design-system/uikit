@@ -98,7 +98,7 @@ export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef)
         iconLeft={isFirstThemeSelected ? IconOne : IconTwo}
         view="clear"
         onClick={getOnChange(items[isFirstThemeSelected ? 1 : 0])}
-        iconSize={iconSize}
+        size={size}
       />
     );
   }
@@ -126,7 +126,7 @@ export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef)
           iconLeft={PreviewIcon}
           view="clear"
           onClick={() => setIsOpen(!isOpen)}
-          iconSize={iconSize}
+          size={size}
         />
         {isOpen && (
           <ContextMenu
