@@ -1,0 +1,189 @@
+.Collapse {
+  color: var(--color-control-typo-default);
+
+  &-Label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+    cursor: pointer;
+    transition: background 0.32s;
+
+    &_withHoverEffect {
+      &:hover {
+        background: var(--color-control-bg-clear-hover);
+      }
+    }
+
+    &_withDivider {
+      border-bottom: 1px solid var(--color-bg-border);
+    }
+
+    .Collapse-Icon {
+      margin-right: var(--icon-space);
+      transition: transform 0.32s;
+
+      &_isOpen {
+        transform: rotate(180deg);
+      }
+
+      &_hasCloseIcon {
+        transform: none;
+      }
+    }
+
+    .Collapse-rightSide {
+      margin-left: var(--icon-space);
+    }
+
+    &_iconPositionRight {
+      flex-direction: row-reverse;
+
+      .Collapse-Icon {
+        margin-right: 0;
+        margin-left: var(--icon-space);
+      }
+    }
+
+    &_horizontalPadding {
+      &_3xs {
+        padding: var(--label-space) var(--space-3xs);
+      }
+
+      &_2xs {
+        padding: var(--label-space) var(--space-2xs);
+      }
+
+      &_xs {
+        padding: var(--label-space) var(--space-xs);
+      }
+
+      &_s {
+        padding: var(--label-space) var(--space-s);
+      }
+
+      &_m {
+        padding: var(--label-space) var(--space-m);
+      }
+
+      &_l {
+        padding: var(--label-space) var(--space-l);
+      }
+
+      &_xl {
+        padding: var(--label-space) var(--space-xl);
+      }
+
+      &_2xl {
+        padding: var(--label-space) var(--space-2xl);
+      }
+
+      &_3xl {
+        padding: var(--label-space) var(--space-3xl);
+      }
+
+      &_4xl {
+        padding: var(--label-space) var(--space-4xl);
+      }
+
+      &_5xl {
+        padding: var(--label-space) var(--space-5xl);
+      }
+
+      &_6xl {
+        padding: var(--label-space) var(--space-6xl);
+      }
+    }
+  }
+
+  &-Children {
+    overflow: hidden;
+    transition: max-height 0.32s;
+
+    & > *:last-child {
+      margin-bottom: var(--space-5xl);
+    }
+  }
+
+  &-CollapseIcon {
+    flex-shrink: 0;
+    margin-left: var(--space-s);
+    transition: transform 0.32s, color 0.32s;
+  }
+
+  &_size {
+    &_2xs {
+      --label-space: var(--space-2xs);
+      --icon-space: var(--space-xs);
+      --children-width: 277px;
+      --children-up-space: var(--space-2xs);
+      --children-bottom-space: var(--space-xs);
+      font-size: calc(var(--control-text-size-xs) - 2px);
+    }
+
+    &_xs {
+      --label-space: var(--space-2xs);
+      --icon-space: var(--space-xs);
+      --children-width: 394px;
+      --children-up-space: var(--space-2xs);
+      --children-bottom-space: var(--space-xs);
+      font-size: var(--control-text-size-xs);
+    }
+
+    &_s {
+      --label-space: var(--space-xs);
+      --icon-space: var(--space-xs);
+      --children-width: 407px;
+      --children-up-space: var(--space-xs);
+      --children-bottom-space: var(--space-m);
+      font-size: var(--control-text-size-s);
+    }
+
+    &_m {
+      --label-space: var(--space-s);
+      --icon-space: var(--space-s);
+      --children-width: 539px;
+      --children-up-space: var(--space-s);
+      --children-bottom-space: var(--space-xl);
+      font-size: var(--control-text-size-m);
+    }
+
+    &_l {
+      --label-space: var(--space-s);
+      --icon-space: var(--space-s);
+      --children-width: 539px;
+      --children-up-space: var(--space-s);
+      --children-bottom-space: var(--space-xl);
+      font-size: var(--control-text-size-l);
+    }
+  }
+
+  &_state {
+    &_collapsed {
+      .Collapse-Children {
+        width: var(--children-width);
+        max-height: 0;
+        padding-top: var(--children-up-space);
+      }
+    }
+
+    &_expanded {
+      .Collapse-Children {
+        width: var(--children-width);
+        max-height: 200vh;
+        padding: var(--children-up-space) 0 var(--children-bottom-space);
+        transition-timing-function: cubic-bezier(0.7, 0, 0.5, 1);
+      }
+
+      .Collapse-CollapseIcon {
+        transform: scale(1.4) rotate(45deg);
+      }
+    }
+  }
+
+  &_view {
+    &_secondary {
+      color: var(--color-typo-secondary);
+    }
+  }
+}
