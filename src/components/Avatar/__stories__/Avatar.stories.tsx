@@ -11,8 +11,6 @@ import {
   avatarPropSizeDefault,
 } from '../Avatar';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import mdx from './Avatar.mdx';
 
 const defaultKnobs = () => ({

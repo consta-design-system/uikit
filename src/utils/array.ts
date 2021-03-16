@@ -7,3 +7,5 @@ export const updateAt = <T>(array: T[], index: number, newItem: T): T[] => {
     ? array
     : [...array.slice(0, index), newItem, ...array.slice(index + 1, array.length)];
 };
+
+export const range = (n: number): number[] => [...Array(n).keys()];

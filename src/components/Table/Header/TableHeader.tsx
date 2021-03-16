@@ -8,7 +8,7 @@ import { TableCell } from '../Cell/TableCell';
 import { FieldSelectedValues, Filters, getOptionsForFilters, SelectedFilters } from '../filtering';
 import { TableFilterTooltip } from '../FilterTooltip/TableFilterTooltip';
 import { Header } from '../helpers';
-import { ColumnMetaData, TableColumn, TableRow } from '../Table';
+import { ColumnMetaData, HeaderVerticalAlign, TableColumn, TableRow } from '../Table';
 
 const cnTableHeader = cn('TableHeader');
 
@@ -27,6 +27,7 @@ type Props<T extends TableRow> = {
   getStickyLeftOffset: (columnIndex: number, topHeaderGridIndex: number) => number | undefined;
   stickyColumnsGrid: number;
   showVerticalCellShadow: boolean;
+  headerVerticalAlign: HeaderVerticalAlign;
   getSortIcon: (column: Header<T>) => React.FC;
   handleSortClick: (column: TableColumn<T>) => void;
   handleFilterTogglerClick: (id: string) => () => void;
@@ -50,6 +51,7 @@ export const TableHeader = <T extends TableRow>({
   getStickyLeftOffset,
   stickyColumnsGrid,
   showVerticalCellShadow,
+  headerVerticalAlign,
   getSortIcon,
   handleSortClick,
   handleFilterTogglerClick,
@@ -155,6 +157,7 @@ export const TableHeader = <T extends TableRow>({
               isSticky={isStickyHeader}
               isResized={isColumnResized(column)}
               column={column}
+              verticalAlign={headerVerticalAlign}
               className={cnTableHeader('Cell', {
                 isFirstColumn: column.position!.gridIndex === 0,
                 isFirstRow: column.position!.level === 0,
@@ -173,6 +176,7 @@ export const TableHeader = <T extends TableRow>({
                 className={cnTableHeader('Buttons', {
                   isSortingActive: column.isSortingActive,
                   isFilterActive: column.isFilterActive,
+                  verticalAlign: headerVerticalAlign,
                 })}
               >
                 {column.sortable && (

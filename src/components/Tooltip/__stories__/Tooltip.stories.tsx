@@ -12,8 +12,6 @@ import { directions, Position } from '../../Popover/Popover';
 import { Text } from '../../Text/Text';
 import { Tooltip, tooltipPropSizes, tooltipPropSizesDefault, tooltipPropStatus } from '../Tooltip';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import mdx from './Tooltip.mdx';
 
 const cnTooltipStories = cn('TooltipStories');

@@ -125,9 +125,7 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
     name: 'Месторождение: ',
     field: 'field',
     filterer: (cellValue, filterValues: Array<{ value: string; name: string }>) => {
-      return filterValues.some(
-        (filterValue) => filterValue && filterValue.value === cellValue,
-      );
+      return filterValues.some((filterValue) => filterValue && filterValue.value === cellValue);
     },
     component: {
       name: TableTextFilter,
@@ -136,12 +134,12 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
         items: [
           { name: 'Северное', value: 'Северное' },
           { name: 'Южное', value: 'Южное' },
-          { name: 'Западное', value: 'Западное',},
+          { name: 'Западное', value: 'Западное' },
           { name: 'Восточное', value: 'Восточное' },
           { name: 'Центральное', value: 'Центральное' },
         ],
       },
-    }
+    },
   },
   {
     id: 'years',
@@ -149,8 +147,8 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
     filterer: rangeFilterer,
     field: 'year',
     component: {
-      name: TableNumberFilter
-    }
+      name: TableNumberFilter,
+    },
   },
   {
     id: 'reserves',
@@ -168,20 +166,20 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
       props: {
         items: [{ name: '> 5k', value: 5000 }],
       },
-    }
+    },
   },
-]
+];
 ```
 
 #### Реализация компонента кастомного фильтра
 
 Кастомный компонент фильтра получает следующие пропсы:
 
-| Свойство               | Тип                   | Описание                                                 |
-| ---------------------- | --------------------- | -------------------------------------------------------- |
-| onConfirm              | (value: any) => void  | Функция для сохранения обновленного значения фильтра     |
-| onCancel               | () => void            | Функция для закрытия окна фильтра без его применения     |
-| filterValue            | any                   | Значение сохраненного значения фильтра                   |
+| Свойство    | Тип                  | Описание                                             |
+| ----------- | -------------------- | ---------------------------------------------------- |
+| onConfirm   | (value: any) => void | Функция для сохранения обновленного значения фильтра |
+| onCancel    | () => void           | Функция для закрытия окна фильтра без его применения |
+| filterValue | any                  | Значение сохраненного значения фильтра               |
 
 Ряд предустановленных кастомных компонентов фильтров из примера выше:
 
@@ -260,6 +258,8 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
 У этого свойства три значения: `'center', 'top', 'bottom'`. По умолчанию содержимое ячеек
 выравнивается по верхнему краю.
 
+Отдельно настраивается выравниваются для заголовков — `verticalHeaderAlign`.
+
 ## Свойства
 
 ```ts
@@ -305,26 +305,27 @@ type LazyLoad = { maxVisibleRows?: number; scrollableEl?: HTMLDivElement / Windo
 // scrollableEl - элемент с onScroll listener
 ```
 
-| Свойство                                            | Тип или варианты значения                           | По умолчанию                                                                    | Описание                                                                                                                                                |
-| --------------------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`columns`](#колонки)                               | `Column[]`                                          | -                                                                               | Колонки в таблице                                                                                                                                       |
-| [`rows`](#строки)                                   | `Row[]`                                             | -                                                                               | Строки в таблице                                                                                                                                        |
-| [`filters`](#фильтры)                               | `Filter[]`                                          | -                                                                               | Список фильтров                                                                                                                                         |
-| [`size`](#размер)                                   | `'s', 'm', 'l'`                                     | 'l'                                                                             | Размер таблицы                                                                                                                                          |
-| [`stickyHeader`](#закрепить-заголовок)              | `boolean`                                           | false                                                                           | Зафиксированный заголовок                                                                                                                               |
-| [`stickyColumns`](#закрепить-колонки)               | `number`                                            | 0                                                                               | Количество зафиксированных колонок                                                                                                                      |
-| [`isResizable`](#менять-ширину-колонок)             | `boolean`                                           | false                                                                           | Возможность изменения размера колонок                                                                                                                   |
-| [`activeRow`](#выделить-строки)                     | `{ id?: string; onChange: (id?: string) => void; }` | -                                                                               | Активная строка                                                                                                                                         |
-| [`verticalAlign`](#выравнивание-по-вертикали)       | `'center', 'top', 'bottom'`                         | `'top'`                                                                         | Выравнивание по вертикали                                                                                                                               |
-| [`zebraStriped`](#выделить-строки)                  | `'odd', 'even'`                                     | false                                                                           | Окрашивание строк через одну                                                                                                                            |
-| [`borderBetweenRows`](#границы)                     | `boolean`                                           | false                                                                           | Отображение границ между строками                                                                                                                       |
-| [`borderBetweenColumns`](#границы)                  | `boolean`                                           | false                                                                           | Отображение границ между колонками                                                                                                                      |
-| [`emptyRowsPlaceholder`](#заглушка)                 | `React.ReactNode`                                   | -                                                                               | Заглушка, показывается, когда в таблице нет данных                                                                                                      |
-| [`onRowHover`](#выделить-строки)                    | `OnRowHover`                                        | -                                                                               | Функция которая сработает при наведении на строку                                                                                                       |
-| [`onSortBy`](#сортировка)                           | `onSortBy`                                          | sortByDefault                                                                   | Функция срабатывает при нажатии на иконку сортировки                                                                                                    |
-| `className`                                         | `string`                                            | -                                                                               | Дополнительный CSS-класс                                                                                                                                |
-| `lazyLoad?`                                         | `LazyLoad`                                          | `{ maxVisibleRows: 210; scrollableEl: tableRef }`                               | Включает виртуальную прокрутку в таблице                                                                                                                |
-| [`onFiltersUpdated`](#колбэк-на-применение-фильтра) | `(filters: { field: string[] }) => void`            | -                                                                               | Колбэк на изменение фильтров                                                                                                                            |
+| Свойство                                            | Тип или варианты значения                           | По умолчанию                                      | Описание                                             |
+| --------------------------------------------------- | --------------------------------------------------- | ------------------------------------------------- | ---------------------------------------------------- |
+| [`columns`](#колонки)                               | `Column[]`                                          | -                                                 | Колонки в таблице                                    |
+| [`rows`](#строки)                                   | `Row[]`                                             | -                                                 | Строки в таблице                                     |
+| [`filters`](#фильтры)                               | `Filter[]`                                          | -                                                 | Список фильтров                                      |
+| [`size`](#размер)                                   | `'s', 'm', 'l'`                                     | 'l'                                               | Размер таблицы                                       |
+| [`stickyHeader`](#закрепить-заголовок)              | `boolean`                                           | false                                             | Зафиксированный заголовок                            |
+| [`stickyColumns`](#закрепить-колонки)               | `number`                                            | 0                                                 | Количество зафиксированных колонок                   |
+| [`isResizable`](#менять-ширину-колонок)             | `boolean`                                           | false                                             | Возможность изменения размера колонок                |
+| [`activeRow`](#выделить-строки)                     | `{ id?: string; onChange: (id?: string) => void; }` | -                                                 | Активная строка                                      |
+| [`verticalAlign`](#выравнивание-по-вертикали)       | `'center', 'top', 'bottom'`                         | `'top'`                                           | Выравнивание по вертикали                            |
+| [`verticalHeaderAlign`](#выравнивание-по-вертикали) | `'center'`, `'bottom'`                              | `center`                                          | Выравнивание заголовков по вертикали                 |
+| [`zebraStriped`](#выделить-строки)                  | `'odd', 'even'`                                     | false                                             | Окрашивание строк через одну                         |
+| [`borderBetweenRows`](#границы)                     | `boolean`                                           | false                                             | Отображение границ между строками                    |
+| [`borderBetweenColumns`](#границы)                  | `boolean`                                           | false                                             | Отображение границ между колонками                   |
+| [`emptyRowsPlaceholder`](#заглушка)                 | `React.ReactNode`                                   | -                                                 | Заглушка, показывается, когда в таблице нет данных   |
+| [`onRowHover`](#выделить-строки)                    | `OnRowHover`                                        | -                                                 | Функция которая сработает при наведении на строку    |
+| [`onSortBy`](#сортировка)                           | `onSortBy`                                          | sortByDefault                                     | Функция срабатывает при нажатии на иконку сортировки |
+| `className`                                         | `string`                                            | -                                                 | Дополнительный CSS-класс                             |
+| `lazyLoad?`                                         | `LazyLoad`                                          | `{ maxVisibleRows: 210; scrollableEl: tableRef }` | Включает виртуальную прокрутку в таблице             |
+| [`onFiltersUpdated`](#колбэк-на-применение-фильтра) | `(filters: { field: string[] }) => void`            | -                                                 | Колбэк на изменение фильтров                         |
 
 ## Примеры
 

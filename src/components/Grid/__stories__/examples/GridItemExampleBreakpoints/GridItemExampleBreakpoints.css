@@ -1,0 +1,18 @@
+.GridItemExampleBreakpoints {
+  &-Item {
+    --bg-color: var(--color-bg-secondary);
+    --text-color: var(--color-typo-primary);
+    color: var(--text-color);
+    background: var(--bg-color);
+
+    &_color {
+      &_green {
+        --bg-color: #36acaa;
+      }
+
+      &_blue {
+        --bg-color: rgb(87, 188, 255);
+      }
+    }
+  }
+}

@@ -8,8 +8,6 @@ import { IconRing } from '../../../icons/IconRing/IconRing';
 import { createMetadata } from '../../../utils/storybook';
 import { Tabs } from '../Tabs';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import mdx from './Tabs.mdx';
 
 const defaultKnobs = () => ({

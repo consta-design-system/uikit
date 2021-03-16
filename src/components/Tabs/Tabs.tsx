@@ -1,6 +1,6 @@
 import './Tabs.css';
 
-import React, { createRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { createRef, useEffect, useMemo, useRef } from 'react';
 
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
@@ -104,104 +104,92 @@ function renderItemDefault<ITEM, ITEMELEMENT extends HTMLElement>(
   );
 }
 
-export const Tabs = React.forwardRef(
-  <ITEM, ITEMELEMENT extends HTMLElement = HTMLButtonElement>(
-    props: TabsProps<ITEM, ITEMELEMENT>,
-    ref: React.Ref<HTMLDivElement>,
-  ) => {
-    const {
-      size = tabsDefaultSize,
-      className,
-      items,
-      view = tabsDefaultView,
-      value,
-      onlyIcon,
-      getIcon,
-      getLabel,
-      onChange,
-      iconSize: iconSizeProp,
-      renderItem = renderItemDefault,
-      ...otherProps
-    } = props;
+export const Tabs: Tabs = React.forwardRef((props, ref) => {
+  const {
+    size = tabsDefaultSize,
+    className,
+    items,
+    view = tabsDefaultView,
+    value,
+    onlyIcon,
+    getIcon,
+    getLabel,
+    onChange,
+    iconSize: iconSizeProp,
+    renderItem = renderItemDefault,
+    ...otherProps
+  } = props;
 
-    const { getOnChange, getChecked } = useChoiceGroup({
-      value: value || null,
-      getKey: getLabel,
-      callBack: onChange,
-      multiple: false,
-    });
+  type ItemElement = Exclude<Parameters<typeof renderItem>[number]['ref']['current'], null>;
 
-    const [mounted, setMounted] = useState<boolean>(false);
+  const { getOnChange, getChecked } = useChoiceGroup({
+    value: value || null,
+    getKey: getLabel,
+    callBack: onChange,
+    multiple: false,
+  });
 
-    const constructItemRefs: () => Record<string, React.RefObject<ITEMELEMENT>> = () => {
-      const refs: Record<string, React.RefObject<ITEMELEMENT>> = {};
-      for (const item of items) {
-        refs[getLabel(item)] = createRef<ITEMELEMENT>();
-      }
-      return refs;
-    };
+  const constructItemRefs: () => Record<string, React.RefObject<ItemElement>> = () => {
+    const refs: Record<string, React.RefObject<ItemElement>> = {};
+    for (const item of items) {
+      refs[getLabel(item)] = createRef<ItemElement>();
+    }
+    return refs;
+  };
 
-    const buttonRefs = useMemo(constructItemRefs, [items, getLabel]);
+  const buttonRefs = useMemo(constructItemRefs, [items, getLabel]);
 
-    const rootRef = useRef<HTMLDivElement>(null);
-    const lineRef = useRef<HTMLDivElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
 
-    const updateLine = () => {
-      if (rootRef.current && lineRef.current && buttonRefs) {
-        const rootWidth = rootRef.current.offsetWidth;
-        if (value) {
-          const activeItemRef = buttonRefs[getLabel(value)];
-          if (activeItemRef && activeItemRef.current) {
-            const itemWidth = activeItemRef.current.offsetWidth;
-            const itemOffsetLeft = activeItemRef.current.offsetLeft;
-            setStyleForLine(lineRef, rootWidth, itemWidth, itemWidth / rootWidth, itemOffsetLeft);
-          }
-        } else {
-          setStyleForLine(lineRef, rootWidth, 1, 0.00001, 1);
+  const updateLine = () => {
+    if (rootRef.current && lineRef.current && buttonRefs) {
+      const rootWidth = rootRef.current.offsetWidth;
+      if (value) {
+        const activeItemRef = buttonRefs[getLabel(value)];
+        if (activeItemRef && activeItemRef.current) {
+          const itemWidth = activeItemRef.current.offsetWidth;
+          const itemOffsetLeft = activeItemRef.current.offsetLeft;
+          setStyleForLine(lineRef, rootWidth, itemWidth, itemWidth / rootWidth, itemOffsetLeft);
         }
+      } else {
+        setStyleForLine(lineRef, rootWidth, 1, 0.00001, 1);
       }
-    };
+    }
+  };
 
-    useEffect(() => {
-      updateLine();
-    });
+  useEffect(() => updateLine());
 
-    const onMount = useCallback(() => {
-      updateLine();
-      setMounted(true);
-    }, [updateLine]);
+  const withOutValue = !value;
+  const iconSize = getSizeByMap(sizeMap, size, iconSizeProp);
 
-    const withOutValue = !value;
-    const iconSize = getSizeByMap(sizeMap, size, iconSizeProp);
-
-    return (
-      <div
-        className={cnTabs({ size, view }, [className])}
-        ref={useForkRef<HTMLDivElement>([ref, rootRef, onMount])}
-        {...otherProps}
-      >
-        <div className={cnTabs('List')}>
-          {items.map((item) => {
-            return renderItem({
-              item,
-              ref: buttonRefs[getLabel(item)],
-              key: getLabel(item),
-              onChange: getOnChange(item),
-              checked: getChecked(item),
-              label: getLabel(item).toString(),
-              icon: getIcon && getIcon(item),
-              iconSize,
-              onlyIcon,
-              className: cnTabs('Tab'),
-            });
-          })}
-        </div>
-        <div className={cnTabs('WrapperRunningLine')}>
-          <div className={cnTabs('RunningLine', { withOutValue, mounted })} ref={lineRef} />
-        </div>
+  return (
+    <div
+      className={cnTabs({ size, view }, [className])}
+      ref={useForkRef<HTMLDivElement>([ref, rootRef])}
+      {...otherProps}
+    >
+      <div className={cnTabs('List')}>
+        {items.map((item) =>
+          renderItem({
+            item,
+            ref: buttonRefs[getLabel(item)],
+            key: getLabel(item),
+            onChange: getOnChange(item),
+            checked: getChecked(item),
+            label: getLabel(item).toString(),
+            icon: getIcon && getIcon(item),
+            iconSize,
+            onlyIcon,
+            className: cnTabs('Tab'),
+          }),
+        )}
       </div>
-    );
-  },
-) as Tabs;
+      <div className={cnTabs('WrapperRunningLine')}>
+        <div className={cnTabs('RunningLine', { withOutValue })} ref={lineRef} />
+      </div>
+    </div>
+  );
+});
 
 export { TabsTab, cnTabsTab };
