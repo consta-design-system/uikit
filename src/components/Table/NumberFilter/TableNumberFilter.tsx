@@ -3,25 +3,19 @@ import './TableNumberFilter.css';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { cn } from '../../../utils/bem';
-import { isNotNil } from '../../../utils/type-guards';
 import { TextField } from '../../TextField/TextField';
-import { CustomFilterComponentProps } from '../customFiltering';
 import { TableFilterContainer } from '../FilterContainer/TableFilterContainer';
+import { FilterComponentProps } from '../filtering';
 
 const cnNumberFilter = cn('TableNumberFilter');
 
-type Props = CustomFilterComponentProps & {
+type Props = FilterComponentProps & {
   title?: string;
 };
 
-export const TableNumberFilter: React.FC<Props> = ({
-  onConfirm,
-  savedCustomFilterValue,
-  title,
-  onCancel,
-}) => {
-  const [minValue, setMinValue] = useState<string | undefined | null>(savedCustomFilterValue?.min);
-  const [maxValue, setMaxValue] = useState<string | undefined | null>(savedCustomFilterValue?.max);
+export const TableNumberFilter: React.FC<Props> = ({ onConfirm, filterValue, title, onCancel }) => {
+  const [minValue, setMinValue] = useState<string | undefined | null>(filterValue?.min);
+  const [maxValue, setMaxValue] = useState<string | undefined | null>(filterValue?.max);
 
   const textFieldRef = useRef<HTMLInputElement>(null);
 
@@ -35,11 +29,8 @@ export const TableNumberFilter: React.FC<Props> = ({
 
   const confirmHandler = () => {
     onConfirm({
-      value: {
-        min: minValue,
-        max: maxValue,
-      },
-      isActive: isNotNil(minValue) || isNotNil(maxValue),
+      min: minValue,
+      max: maxValue,
     });
   };
 
@@ -47,6 +38,7 @@ export const TableNumberFilter: React.FC<Props> = ({
     <TableFilterContainer title={title} onCancel={onCancel} onConfirm={confirmHandler}>
       <div className={cnNumberFilter('Inputs')}>
         <TextField
+          id="от"
           leftSide="от"
           value={minValue}
           onChange={(e) => setMinValue(e.value)}
@@ -56,6 +48,7 @@ export const TableNumberFilter: React.FC<Props> = ({
         />
         <TextField
           leftSide="до"
+          id="до"
           value={maxValue}
           onChange={(e) => setMaxValue(e.value)}
           form="clearDefault"

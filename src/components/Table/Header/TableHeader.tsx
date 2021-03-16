@@ -5,12 +5,10 @@ import React from 'react';
 import { cn } from '../../../utils/bem';
 import { Button } from '../../Button/Button';
 import { TableCell } from '../Cell/TableCell';
-import { CustomFilterValue, CustomSavedFilters } from '../customFiltering';
 import { FieldSelectedValues, Filters, getOptionsForFilters, SelectedFilters } from '../filtering';
-import { TableFilterPopover } from '../FilterPopover/TableFilterPopover';
 import { TableFilterTooltip } from '../FilterTooltip/TableFilterTooltip';
 import { Header } from '../helpers';
-import { ColumnMetaData, RowField, TableColumn, TableRow } from '../Table';
+import { ColumnMetaData, TableColumn, TableRow } from '../Table';
 
 const cnTableHeader = cn('TableHeader');
 
@@ -32,15 +30,14 @@ type Props<T extends TableRow> = {
   getSortIcon: (column: Header<T>) => React.FC;
   handleSortClick: (column: TableColumn<T>) => void;
   handleFilterTogglerClick: (id: string) => () => void;
-  handleTooltipSave: (field: string, tooltipSelectedFilters: FieldSelectedValues) => void;
+  handleTooltipSave: (
+    field: string,
+    tooltipSelectedFilters: FieldSelectedValues,
+    value?: any,
+  ) => void;
   filters: Filters<T> | undefined;
   visibleFilter: string | null;
   selectedFilters: SelectedFilters;
-  savedCustomFilters: CustomSavedFilters<T>;
-  customFiltersConfirmHandler: (
-    field: RowField<T>,
-    filterValue: { value: CustomFilterValue; isActive: boolean },
-  ) => CustomSavedFilters<T>;
   showHorizontalCellShadow: boolean;
   borderBetweenColumns: boolean;
 };
@@ -62,8 +59,6 @@ export const TableHeader = <T extends TableRow>({
   selectedFilters,
   showHorizontalCellShadow,
   borderBetweenColumns,
-  savedCustomFilters,
-  customFiltersConfirmHandler,
 }: Props<T>): React.ReactElement => {
   const tableHeaderHeight = headerRowsHeights.reduce((a: number, b: number) => a + b, 0);
   const tableHeaderStyle: React.CSSProperties & TableCSSCustomProperty = {
@@ -93,53 +88,36 @@ export const TableHeader = <T extends TableRow>({
   };
 
   const getFilterPopover = (column: Header<T> & ColumnMetaData): React.ReactNode => {
-    const isOpen = visibleFilter === column.accessor;
-
-    if (column.filterable && savedCustomFilters && savedCustomFilters[column.accessor]) {
-      const FilterComponent = savedCustomFilters[column.accessor]?.filterComponent;
-      const filterComponentProps = savedCustomFilters[column.accessor]?.filterComponentProps ?? {};
-
-      const onToggle = handleFilterTogglerClick(column.accessor);
-
-      const handleCustomFilterSave = (filterValue: {
-        value: CustomFilterValue;
-        isActive: boolean;
-      }): CustomSavedFilters<T> => {
-        const savedFilters = customFiltersConfirmHandler(column.accessor, filterValue);
-        onToggle();
-
-        return savedFilters;
-      };
-
-      if (FilterComponent) {
-        return (
-          <TableFilterPopover
-            isActive={Boolean(savedCustomFilters[column.accessor]?.isActive)}
-            isOpened={isOpen}
-            className={cnTableHeader('Icon', { type: 'filter' })}
-            onToggle={onToggle}
-          >
-            <FilterComponent
-              {...filterComponentProps}
-              onConfirm={handleCustomFilterSave}
-              savedCustomFilterValue={savedCustomFilters[column.accessor]?.value}
-              onCancel={onToggle}
-            />
-          </TableFilterPopover>
-        );
-      }
-    }
+    const FilterComponent = filters?.find((filter) => filter.field === column.accessor)?.component
+      ?.name;
+    const filterComponentProps =
+      filters?.find((filter) => filter.field === column.accessor)?.component?.props ?? {};
+    const onToggle = handleFilterTogglerClick(column.accessor);
+    const filterId = filters?.find(({ field }) => field === column.accessor)?.id;
+    const handleFilterSave = (filterValue: any) => {
+      handleTooltipSave(column.accessor, [filterId] as FieldSelectedValues, filterValue);
+      onToggle();
+    };
 
     return filters && column.filterable ? (
       <TableFilterTooltip
         field={column.accessor}
         isOpened={visibleFilter === column.accessor}
         options={getOptionsForFilters(filters, column.accessor)}
-        values={selectedFilters[column.accessor] || []}
+        values={selectedFilters[column.accessor].selected || []}
         onChange={handleTooltipSave}
         onToggle={handleFilterTogglerClick(column.accessor)}
         className={cnTableHeader('Icon', { type: 'filter' })}
-      />
+      >
+        {FilterComponent && (
+          <FilterComponent
+            {...filterComponentProps}
+            onConfirm={handleFilterSave}
+            filterValue={selectedFilters[column.accessor]?.value}
+            onCancel={handleFilterTogglerClick(column.accessor)}
+          />
+        )}
+      </TableFilterTooltip>
     ) : null;
   };
 

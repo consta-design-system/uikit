@@ -8,8 +8,8 @@ import { Button } from '../../Button/Button';
 import { CheckboxGroup } from '../../CheckboxGroup/CheckboxGroup';
 import { Text } from '../../Text/Text';
 import { TextField } from '../../TextField/TextField';
-import { CustomFilterComponentProps } from '../customFiltering';
 import { TableFilterContainer } from '../FilterContainer/TableFilterContainer';
+import { FilterComponentProps } from '../filtering';
 
 const cnTextFilter = cn('TableTextFilter');
 
@@ -18,7 +18,7 @@ type Item = {
   value: string;
 };
 
-type Props = CustomFilterComponentProps & {
+type Props = FilterComponentProps & {
   items?: Item[];
   withSearch?: boolean;
   title?: string;
@@ -30,21 +30,16 @@ export const TableTextFilter: React.FC<Props> = ({
   withSearch = false,
   onConfirm,
   onCancel,
-  savedCustomFilterValue,
+  filterValue,
   title,
   emptySearchText = 'Ничего не найдено :(',
 }) => {
   const [searchValue, setSearchValue] = useState<string | null>(null);
-  const [checkboxGroupValue, setCheckboxGroupValue] = useState<Item[] | null>(
-    savedCustomFilterValue || items,
-  );
+  const [checkboxGroupValue, setCheckboxGroupValue] = useState<Item[] | null>(filterValue || items);
 
   const confirmHandler = () => {
     setSearchValue(null);
-    onConfirm({
-      value: checkboxGroupValue === null ? [] : checkboxGroupValue,
-      isActive: Boolean(!checkboxGroupValue || checkboxGroupValue.length !== items.length),
-    });
+    onConfirm(checkboxGroupValue === null ? [] : checkboxGroupValue);
   };
 
   const resetHandler = () => {

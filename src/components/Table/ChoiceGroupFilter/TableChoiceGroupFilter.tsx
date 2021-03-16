@@ -4,8 +4,8 @@ import React, { useMemo, useState } from 'react';
 
 import { cn } from '../../../utils/bem';
 import { ChoiceGroup } from '../../ChoiceGroup/ChoiceGroup';
-import { CustomFilterComponentProps } from '../customFiltering';
 import { TableFilterContainer } from '../FilterContainer/TableFilterContainer';
+import { FilterComponentProps } from '../filtering';
 
 type Item = {
   name: string;
@@ -14,7 +14,7 @@ type Item = {
 
 const defaultValue: Item = { name: 'Все', value: undefined };
 
-type Props = CustomFilterComponentProps & {
+type Props = FilterComponentProps & {
   items?: Item[];
   title?: string;
 };
@@ -22,15 +22,15 @@ type Props = CustomFilterComponentProps & {
 export const TableChoiceGroupFilter: React.FC<Props> = ({
   onConfirm,
   items = [],
-  savedCustomFilterValue,
+  filterValue,
   title,
   onCancel,
 }) => {
   const cnChoiceGroupFilter = cn('TableChoiceGroupFilter');
-  const [value, setValue] = useState<Item | null>(savedCustomFilterValue || null);
+  const [value, setValue] = useState<Item | null>(filterValue || defaultValue);
 
   const confirmHandler = () => {
-    onConfirm({ value: value?.value ? value : undefined, isActive: Boolean(value?.value) });
+    onConfirm(value);
   };
 
   const choiceGroupItems = useMemo(() => [defaultValue, ...items], [items]);

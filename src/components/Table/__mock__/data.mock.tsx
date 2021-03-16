@@ -2,7 +2,10 @@ import React from 'react';
 
 import { isNotNil } from '../../../utils/type-guards';
 import { Badge } from '../../Badge/Badge';
+import { TableChoiceGroupFilter } from '../ChoiceGroupFilter/TableChoiceGroupFilter';
+import { TableNumberFilter } from '../NumberFilter/TableNumberFilter';
 import { Props as TableProps, TableFilters as Filters, TableRow } from '../Table';
+import { TableTextFilter } from '../TextFilter/TableTextFilter';
 
 export const rangeFilterer = (
   value: number | string,
@@ -12,11 +15,11 @@ export const rangeFilterer = (
   const maxDefined = isNotNil(filterValue.max);
 
   if (minDefined && !maxDefined) {
-    return Number(value) === Number(filterValue.min);
+    return Number(value) >= Number(filterValue.min);
   }
 
   if (!minDefined && maxDefined) {
-    return Number(value) === Number(filterValue.max);
+    return Number(value) <= Number(filterValue.max);
   }
 
   if (!(minDefined || maxDefined)) {
@@ -247,6 +250,75 @@ export const filters: Filters<typeof rows[number]> = [
     name: '300 и более',
     filterer: (value: number | string) => Number(value) >= 300,
     field: 'total',
+  },
+];
+
+export const customFilters: Filters<typeof rows[number]> = [
+  {
+    id: 'field',
+    name: 'Месторождение: ',
+    field: 'field',
+    filterer: (cellValue, filterValues: Array<{ value: string; name: string }>) => {
+      return filterValues.some((filterValue) => filterValue && filterValue.value === cellValue);
+    },
+    component: {
+      name: TableTextFilter,
+      props: {
+        withSearch: true,
+        items: [
+          { name: 'Северное', value: 'Северное' },
+          { name: 'Южное', value: 'Южное' },
+          { name: 'Западное', value: 'Западное' },
+          { name: 'Восточное', value: 'Восточное' },
+          { name: 'Центральное', value: 'Центральное' },
+        ],
+      },
+    },
+  },
+  {
+    id: 'years',
+    name: 'Диапазон лет: ',
+    filterer: rangeFilterer,
+    field: 'year',
+    component: {
+      name: TableNumberFilter,
+    },
+  },
+  {
+    id: 'oil',
+    name: 'Нефть',
+    filterer: (value: string) => value === 'Нефть',
+    field: 'type',
+  },
+  {
+    id: 'condensated',
+    name: 'Конденсат',
+    filterer: (value: string) => value === 'Конденсат',
+    field: 'type',
+  },
+  {
+    id: 'combined',
+    name: 'Комбинированное',
+    filterer: (value: string) => value === 'Комбинированное',
+    field: 'type',
+  },
+  {
+    id: 'reserves',
+    name: 'Запасы: ',
+    field: 'estimatedReserves',
+    filterer: (cellValue, filterValue: { name: string; value: number }) => {
+      if (!isNotNil(filterValue.value)) {
+        return true;
+      }
+
+      return cellValue > filterValue.value;
+    },
+    component: {
+      name: TableChoiceGroupFilter,
+      props: {
+        items: [{ name: '> 5k', value: 5000 }],
+      },
+    },
   },
 ];
 

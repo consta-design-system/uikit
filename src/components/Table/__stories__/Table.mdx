@@ -9,7 +9,6 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
   - [Сортировка](#сортировка)
   - [Строки](#строки)
   - [Фильтры](#фильтры)
-  - [Кастомные фильтры](#кастомные-фильтры)
   - [Заглушка](#заглушка)
 - [Внешний вид](#внешний-вид)
   - [Размер](#размер)
@@ -115,87 +114,76 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
 ];
 ```
 
-### Колбэк на применение фильтра
+Если вы хотите использовать другие, отличные от стандартного, компоненты для фильтрации, можно добавить фильтрам следующие поля:
 
-Если вам нужно повесить обработчик на событие изменения фильтров в таблице (например для загрузки данных, к которым применен фильтр), вы можете сделать это с помощью свойства `onFiltersUpdated`.
-
-### Кастомные фильтры
-
-Кастомные фильтры добавляются с помощью свойства `customFilters`.
-
-`filterer` - функция фильтрации
-
-`filterComponent` - кастомный компонент фильтра
-
-`filterComponentProps` - пропсы для кастомного компонента
-
-`initialValue` - предустановленное значение фильтра
-
-`externalFiltration` - происходит ли фильтрация вне таблицы. Если равен `true`, то фильтр внутри таблицы применён не будет
+`component` - объект, описывающий компонент. На данный момент есть 3 предустановленных компонента:
 
 ```tsx
-{
-  age: {
-    filterComponent: TableNumberFilter,
-    initialValue: {min: 18, max: 100}
-    filterer: (cellValue, filterValue) => {
-      const minValue = isDefined(filterValue.min) ? filterValue.min : -Infinity;
-      const maxValue = isDefined(filterValue.max) ? filterValue.max : Infinity;
-
-      return Number(cellValue) <= Number(maxValue) && Number(cellValue) >= Number(minValue);
+[
+  {
+    id: 'field',
+    name: 'Месторождение: ',
+    field: 'field',
+    filterer: (cellValue, filterValues: Array<{ value: string; name: string }>) => {
+      return filterValues.some(
+        (filterValue) => filterValue && filterValue.value === cellValue,
+      );
+    },
+    component: {
+      name: TableTextFilter,
+      props: {
+        withSearch: true,
+        items: [
+          { name: 'Северное', value: 'Северное' },
+          { name: 'Южное', value: 'Южное' },
+          { name: 'Западное', value: 'Западное',},
+          { name: 'Восточное', value: 'Восточное' },
+          { name: 'Центральное', value: 'Центральное' },
+        ],
+      },
     }
   },
-  name: {
-    filterComponent: TableTextFilter,
-    filterComponentProps: {
-      withSearch: true,
-      items: [
-          {name: 'Антон', 'value': 'Антон'},
-          {name: 'Василиса', 'value': 'Василиса'},
-          {name: 'Дмитрий', 'value': 'Дмитрий'}
-        ]
-    },
-    filterer: (cellValue, filterValues: Array<{name: string, value: string}>) => {
-      return filterValues.some(
-        (filterValue) => filterValue && filterValue.value === cellValue);
+  {
+    id: 'years',
+    name: 'Диапазон лет: ',
+    filterer: rangeFilterer,
+    field: 'year',
+    component: {
+      name: TableNumberFilter
     }
-  }
-  title: {
-    filterComponent: TableChoiceGroupFilter,
-    filterComponentProps: {
-      items: [
-          {name: 'Бурильщики', 'value': 'drillers'},
-          {name: 'Геологоразведчики', 'value': 'scouts'},
-        ]
-    },
-    filterer: (cellValue, filterValue: {name: string, value: string}) => {
-      if (filterValue.value === 'drillers') {
-        return cellValue === 'Бурильщик'
+  },
+  {
+    id: 'reserves',
+    name: 'Запасы: ',
+    field: 'reserves',
+    filterer: (cellValue, filterValue: { name: string; value: number }) => {
+      if (!isNotNil(filterValue.value)) {
+        return true;
       }
 
-      if (filterValue.value === 'scouts') {
-        return cellValue === 'Геологоразведчик'
-      }
-
-      return false;
+      return cellValue > filterValue.value;
+    },
+    component: {
+      name: TableChoiceGroupFilter,
+      props: {
+        items: [{ name: '> 5k', value: 5000 }],
+      },
     }
-  }
-};
+  },
+]
 ```
-
-Событие изменения значений кастомных фильтров можно обработать с помощью колбэка в свойстве `onCustomFiltersUpdate`
 
 #### Реализация компонента кастомного фильтра
 
 Кастомный компонент фильтра получает следующие пропсы:
 
-| Свойство               | Тип                                                               | Описание                                                                          |
-| ---------------------- | ----------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| onConfirm              | (filter: { value: CustomFilterValue; isActive: boolean }) => void | Функция для сохранения обновленного значения фильтра и статуса активности фильтра |
-| savedCustomFilterValue | CustomFilterValue                                                 | Значение сохраненного значения фильтра                                            |
-| onCancel               | () => void                                                        | Функция для закрытия окна фильтра без его применения                              |
+| Свойство               | Тип                   | Описание                                                 |
+| ---------------------- | --------------------- | -------------------------------------------------------- |
+| onConfirm              | (value: any) => void  | Функция для сохранения обновленного значения фильтра     |
+| onCancel               | () => void            | Функция для закрытия окна фильтра без его применения     |
+| filterValue            | any                   | Значение сохраненного значения фильтра                   |
 
-Имеется ряд предустановленных кастомных компонентов фильтров:
+Ряд предустановленных кастомных компонентов фильтров из примера выше:
 
 | Компонент              | Дополнительные пропсы                                               | Описание                           |
 | ---------------------- | ------------------------------------------------------------------- | ---------------------------------- |
@@ -208,12 +196,16 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
 
 | Свойство           | Тип        | Описание                                   |
 | ------------------ | ---------- | ------------------------------------------ |
-| onReset            | () => void | Обработчик нажатия на кнопку подтверждения |
+| onCancel           | () => void | Обработчик нажатия на кнопку подтверждения |
 | onConfirm          | () => void | Обработчик нажатия на кнопку отмены        |
 | title              | string     | Заголовок окна                             |
 | confirmButtonLabel | string     | Текст на кнопке подтверждения              |
-| resetButtonLabel   | string     | Текст на кнопку сброса                     |
+| cancelButtonLabel  | string     | Текст на кнопку сброса                     |
 | children           | ReactNode  | Вложенные элементы                         |
+
+### Колбэк на применение фильтра
+
+Если вам нужно повесить обработчик на событие изменения фильтров в таблице (например для загрузки данных, к которым применен фильтр), вы можете сделать это с помощью свойства `onFiltersUpdated`.
 
 ### Заглушка
 
@@ -288,51 +280,35 @@ type Row = {
   id: string;
 };
 
+type FilterComponentProps = {
+  onConfirm: (value: any) => void;
+  onCancel: () => void;
+  filterValue?: any
+} & Record<string, unknown>;
+
 type Filter = {
   id: string;
   name: string;
   field: string;
-  filterer: (value: FieldValue) => boolean;
-};
+  filterer: (value: any, filterValue?: any) => boolean;
+} & ({ component?: never } | {
+  component: {
+    name: React.FC<FilterComponentProps>;
+    props?: Omit<FilterComponentProps, 'onConfirm' | 'filterValue'>;
+  }
+});
 
 type OnRowHover = ({ id, e }: { id: string | undefined; e: React.MouseEvent }) => void;
 
 type LazyLoad = { maxVisibleRows?: number; scrollableEl?: HTMLDivElement / Window; }
 // maxVisibleRows - количество строк
 // scrollableEl - элемент с onScroll listener
-
-type CustomFilterComponentProps = {
-  onConfirm: (value: { value: CustomFilterValue; isActive: boolean }) => void;
-  onCancel: () => void;
-  savedCustomFilterValue: CustomFilterValue;
-} & Record<string, unknown>;
-
-type CustomFilter = {
-  filterer: (value: any, filterValue: CustomFilterValue) => boolean;
-  filterComponent: React.FC<CustomFilterComponentProps>;
-  filterComponentProps?: Omit<CustomFilterComponentProps, 'onConfirm' | 'savedCustomFilterValue'>;
-  initialValue?: CustomFilterValue;
-  externalFiltration?: boolean;
-};
-
-type CustomFilters<T extends TableRow> = { [key in RowField<T>]?: CustomFilter }
-
-type CustomSavedFilter = CustomFilter & {
-  value: CustomFilterValue;
-  isActive: boolean;
-};
-
-type CustomSavedFilters<T extends TableRow> = {
-  [field in RowField<T>]?: CustomSavedFilter;
-};
-
-
 ```
 
 | Свойство                                            | Тип или варианты значения                           | По умолчанию                                                                    | Описание                                                                                                                                                |
 | --------------------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`columns`](#колонки)                               | `Column[]`                                          | -                                                                               | Колонки в таблице                                                                                                                                       |
-| [rows](#строки)                                     | `Row[]`                                             | -                                                                               | Строки в таблице                                                                                                                                        |
+| [`rows`](#строки)                                   | `Row[]`                                             | -                                                                               | Строки в таблице                                                                                                                                        |
 | [`filters`](#фильтры)                               | `Filter[]`                                          | -                                                                               | Список фильтров                                                                                                                                         |
 | [`size`](#размер)                                   | `'s', 'm', 'l'`                                     | 'l'                                                                             | Размер таблицы                                                                                                                                          |
 | [`stickyHeader`](#закрепить-заголовок)              | `boolean`                                           | false                                                                           | Зафиксированный заголовок                                                                                                                               |
@@ -347,13 +323,8 @@ type CustomSavedFilters<T extends TableRow> = {
 | [`onRowHover`](#выделить-строки)                    | `OnRowHover`                                        | -                                                                               | Функция которая сработает при наведении на строку                                                                                                       |
 | [`onSortBy`](#сортировка)                           | `onSortBy`                                          | sortByDefault                                                                   | Функция срабатывает при нажатии на иконку сортировки                                                                                                    |
 | `className`                                         | `string`                                            | -                                                                               | Дополнительный CSS-класс                                                                                                                                |
-| lazyLoad?                                           | `LazyLoad`                                          | `{ maxVisibleRows: 210; scrollableEl: tableRef }`                               | Включает виртуальную прокрутку в таблице                                                                                                                |
+| `lazyLoad?`                                         | `LazyLoad`                                          | `{ maxVisibleRows: 210; scrollableEl: tableRef }`                               | Включает виртуальную прокрутку в таблице                                                                                                                |
 | [`onFiltersUpdated`](#колбэк-на-применение-фильтра) | `(filters: { field: string[] }) => void`            | -                                                                               | Колбэк на изменение фильтров                                                                                                                            |
-| [`customFilters`](#кастомные-фильтры)               | `CustomFilters`                                     | -                                                                               | Кастомные фильтры                                                                                                                                       |
-| `onCustomFiltersUpdate`                             | `(customFilters: CustomSavedFilters<T>) => void`    | -                                                                               | Колбэк на изменение кастомных фильтров                                                                                                                  |
-| `numberOfRows`                                      | `numberOfRows`                                      | rows.length                                                                     | Общее количество строк. Используется при передаче в таблицу массива строк, отфильтрованных на сервере. Если не задано, то равняется длинне массива rows |
-| `getResultText`                                     | `(count: number, total: number) => string`          | `` (count: number, total: number) => `Найдено ${count} из ${total} значений` `` | Функция для генерации текста с результатами фильтрации                                                                                                  |
-| ;`                                                  |
 
 ## Примеры
 

@@ -1,4 +1,3 @@
-import { fieldCustomFilterPresent, isSomeCustomFilterActive } from '../customFiltering';
 import {
   fieldFiltersPresent,
   filterTableData,
@@ -7,8 +6,6 @@ import {
   getSelectedFiltersList,
   isSelectedFiltersPresent,
 } from '../filtering';
-import { TableNumberFilter } from '../NumberFilter/TableNumberFilter';
-import { TableTextFilter } from '../TextFilter/TableTextFilter';
 
 const COUNT_FILTERS = [
   {
@@ -101,7 +98,6 @@ describe('filterTableData', () => {
         data: DATA,
         filters: FILTERS,
         selectedFilters: {},
-        savedCustomFilters: {},
       }),
     ).toEqual(DATA);
   });
@@ -112,9 +108,10 @@ describe('filterTableData', () => {
         data: DATA,
         filters: FILTERS,
         selectedFilters: {
-          count: ['countEqual0'],
+          count: {
+            selected: ['countEqual0'],
+          },
         },
-        savedCustomFilters: {},
       }),
     ).toEqual([]);
   });
@@ -125,9 +122,10 @@ describe('filterTableData', () => {
         data: DATA,
         filters: FILTERS,
         selectedFilters: {
-          count: ['countLess100'],
+          count: {
+            selected: ['countLess100'],
+          },
         },
-        savedCustomFilters: {},
       }),
     ).toEqual([DATA[2]]);
   });
@@ -138,9 +136,10 @@ describe('filterTableData', () => {
         data: DATA,
         filters: FILTERS,
         selectedFilters: {
-          count: ['countLess100', 'countMore100'],
+          count: {
+            selected: ['countLess100', 'countMore100'],
+          },
         },
-        savedCustomFilters: {},
       }),
     ).toEqual([DATA[0], DATA[2]]);
   });
@@ -151,10 +150,13 @@ describe('filterTableData', () => {
         data: DATA,
         filters: FILTERS,
         selectedFilters: {
-          count: ['countEqual100'],
-          price: ['priceMore100'],
+          count: {
+            selected: ['countEqual100'],
+          },
+          price: {
+            selected: ['priceMore100'],
+          },
         },
-        savedCustomFilters: {},
       }),
     ).toEqual([DATA[1]]);
   });
@@ -165,9 +167,10 @@ describe('filterTableData', () => {
         data: DATA,
         filters: FILTERS,
         selectedFilters: {
-          count: ['UNDEFINED'],
+          count: {
+            selected: ['UNDEFINED'],
+          },
         },
-        savedCustomFilters: {},
       }),
     ).toEqual([]);
   });
@@ -242,7 +245,9 @@ describe('getSelectedFiltersList', () => {
       getSelectedFiltersList({
         filters: FILTERS,
         selectedFilters: {
-          count: ['countLess100'],
+          count: {
+            selected: ['countLess100'],
+          },
         },
         columns: COLUMNS,
       }),
@@ -259,8 +264,12 @@ describe('getSelectedFiltersList', () => {
       getSelectedFiltersList({
         filters: FILTERS,
         selectedFilters: {
-          count: ['countLess100'],
-          price: ['priceLess100'],
+          count: {
+            selected: ['countLess100'],
+          },
+          price: {
+            selected: ['priceLess100'],
+          },
         },
         columns: COLUMNS,
       }),
@@ -281,7 +290,9 @@ describe('getSelectedFiltersList', () => {
       getSelectedFiltersList({
         filters: FILTERS,
         selectedFilters: {
-          count: ['UNDEFINED'],
+          count: {
+            selected: ['UNDEFINED'],
+          },
         },
         columns: COLUMNS,
       }),
@@ -293,8 +304,12 @@ describe('isSelectedFiltersPresent', () => {
   it('возвращает false если не выбран ни один фильтр', () => {
     expect(
       isSelectedFiltersPresent({
-        count: [],
-        price: [],
+        count: {
+          selected: [],
+        },
+        price: {
+          selected: [],
+        },
       }),
     ).toEqual(false);
   });
@@ -302,8 +317,12 @@ describe('isSelectedFiltersPresent', () => {
   it('возвращает true если выбран фильтр для одного из полей', () => {
     expect(
       isSelectedFiltersPresent({
-        count: ['countLess100'],
-        price: [],
+        count: {
+          selected: ['countLess100'],
+        },
+        price: {
+          selected: [],
+        },
       }),
     ).toEqual(true);
   });
@@ -311,81 +330,13 @@ describe('isSelectedFiltersPresent', () => {
   it('возвращает true если выбраны фильтры для всех полей', () => {
     expect(
       isSelectedFiltersPresent({
-        count: ['countLess100'],
-        price: ['priceEqual100'],
+        count: {
+          selected: ['countLess100'],
+        },
+        price: {
+          selected: ['priceEqual100'],
+        },
       }),
     ).toEqual(true);
-  });
-});
-
-describe('fieldCustomFilterPresent', () => {
-  it('возвращает false, если фильтра нет', () => {
-    expect(
-      fieldCustomFilterPresent(
-        {
-          year: {
-            filterer: jest.fn(),
-            filterComponent: TableNumberFilter,
-          },
-        },
-        'name',
-      ),
-    ).toBe(false);
-  });
-
-  it('возвращает true, если фильтр есть', () => {
-    expect(
-      fieldCustomFilterPresent(
-        {
-          year: {
-            filterer: jest.fn(),
-            filterComponent: TableNumberFilter,
-          },
-          name: {
-            filterer: jest.fn(),
-            filterComponent: TableTextFilter,
-            filterComponentProps: {
-              items: [
-                { name: 'Андрей', value: 'andrey' },
-                { name: 'Анна', value: 'anna' },
-              ],
-            },
-          },
-        },
-        'name',
-      ),
-    ).toBe(true);
-  });
-
-  it('возвращает false, если фильтров нет', () => {
-    expect(fieldCustomFilterPresent({}, 'name')).toBe(false);
-  });
-});
-
-describe('isSomeCustomFilterActive', () => {
-  it('возвращает true, если есть активный фильтр', () => {
-    expect(
-      isSomeCustomFilterActive({
-        year: {
-          filterer: jest.fn(),
-          filterComponent: TableNumberFilter,
-          isActive: true,
-          value: { min: 18, max: 100 },
-        },
-      }),
-    ).toBe(true);
-  });
-
-  it('возвращает false, если нет активных фильтров', () => {
-    expect(
-      isSomeCustomFilterActive({
-        year: {
-          filterer: jest.fn(),
-          filterComponent: TableNumberFilter,
-          isActive: false,
-          value: { min: 18, max: 100 },
-        },
-      }),
-    ).toBe(false);
   });
 });
