@@ -13,7 +13,7 @@ export const progressSpinPropSizeDefault: ProgressSpinPropSize = progressSpinPro
 type Props = {
   size?: ProgressSpinPropSize;
   className?: string;
-  progress?: number | undefined;
+  progress?: number;
   animation?: boolean;
   children?: never;
 };
@@ -54,7 +54,7 @@ export const ProgressSpin = React.forwardRef<SVGSVGElement, ProgressSpinProps>((
   return (
     <svg
       {...otherProps}
-      className={cnProgressSpin({ spin: !progress }, [className])}
+      className={cnProgressSpin({ spin: !progress && progress !== 0 }, [className])}
       width={sizeOfPixels}
       height={sizeOfPixels}
       viewBox={`0 0 ${sizeOfPixels} ${sizeOfPixels}`}
