@@ -171,8 +171,6 @@ import { IconWideScreen } from '../../IconWideScreen/IconWideScreen';
 import { IconWorld } from '../../IconWorld/IconWorld';
 
 import { IconsItem } from './Item/Icons-Item';
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import mdx from './Icon.mdx';
 
 const defaultKnobs = () => ({

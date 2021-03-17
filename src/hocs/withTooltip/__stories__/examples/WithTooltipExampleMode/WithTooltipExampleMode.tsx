@@ -19,8 +19,8 @@ export const WithTooltipExampleMode = () => {
     <div
       className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' })])}
     >
-      <ButtonWithTooltipModeMouseover label="Кнопка" />
-      <ButtonWithTooltipModeClick label="Кнопка" />
+      <ButtonWithTooltipModeMouseover label="Наведите на меня мышку" />
+      <ButtonWithTooltipModeClick label="Нажмите меня" />
     </div>
   );
 };

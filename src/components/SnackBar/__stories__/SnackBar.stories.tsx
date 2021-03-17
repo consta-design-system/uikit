@@ -18,8 +18,6 @@ import {
 } from '../../EventInterceptor/EventInterceptor';
 import { Item, SnackBar, SnackBarItemStatus } from '../SnackBar';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import mdx from './SnackBar.mdx';
 
 type State = Item[];

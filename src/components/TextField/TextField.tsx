@@ -188,8 +188,8 @@ export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>((props
   const textareaProps = {
     rows,
     cols,
-    minRows,
-    maxRows,
+    minRows: minRows || rows,
+    maxRows: maxRows || rows,
     inputRef:
       inputRef === null
         ? undefined

@@ -13,8 +13,6 @@ import {
 } from '../../SelectComponents/types';
 import { Combobox } from '../Combobox';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import mdx from './Combobox.mdx';
 
 type SelectOption = {

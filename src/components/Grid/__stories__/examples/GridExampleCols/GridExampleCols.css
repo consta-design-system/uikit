@@ -1,0 +1,8 @@
+.GridExampleCols {
+  &-Item {
+    --bg-color: var(--color-bg-secondary);
+    --text-color: var(--color-typo-primary);
+    color: var(--text-color);
+    background: var(--bg-color);
+  }
+}

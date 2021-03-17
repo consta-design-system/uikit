@@ -12,8 +12,6 @@ import {
   radioPropViewDefault,
 } from '../Radio';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import mdx from './Radio.mdx';
 
 const defaultKnobs = () => ({

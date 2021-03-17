@@ -1,8 +1,8 @@
-/* Базовые цвета от которых выстраивается вся политра */
+/* Базовые цвета, от которых выстраивается вся палитра */
 $color-base-base: #fff; /* Базовый цвет содержимого, от которого выстраиваются цвета текста, иконок, ... */
 $color-base-essential: #22272b; /* Базовый цвет поверхностей */
 $color-base-project: #0071b2; /* Проектный цвет, от которого выстраивают акцентные состояния */
-$color-base-phantom: #f6fbfd; /* Тонирующий цвет, от которого выстраиватся бордеры, паранджа, ... */
+$color-base-phantom: #f6fbfd; /* Тонирующий цвет, от которого выстраиватся бордеры, оверлей под модальными окнами, ... */
 $color-base-path: #0078d2; /* Цвет ссылок и контролов, от которого выстраиваются все их состояния */
 $color-base-system: #4b5963; /* Цвет системнный */
 
@@ -19,10 +19,13 @@ $color-base-critical: #33000f;
   // Цвета фонов /////////////// */
   --color-bg-default: color($color-base-essential a(100%)); /* Цвет дефолта */
   --color-bg-secondary: color($color-base-essential l(-5)); /* Дополнительный цвет фона */
-  --color-bg-brand: color($color-base-project a(100%)); /* Цвет фона брендированый */
+  --color-bg-brand: color($color-base-project a(100%)); /* Цвет фона брендированный */
   --color-bg-link: color($color-base-path a(100%)); /* Цвет фона ссылки */
   --color-bg-border: color($color-base-phantom a(20%) l(+10)); /* Цвет границ */
-  --color-bg-stripe: color($color-base-phantom a(6%)); /* Цвет зебры */
+  --color-bg-stripe: color(
+    $color-base-phantom a(6%)
+  ); /* Цвет зебры (например, при окрашивании фона строк таблицы через одну) */
+
   --color-bg-ghost: color($color-base-phantom a(10%)); /* Цвет затенения */
   --color-bg-tone: color($color-base-phantom l(-92%) a(85%)); /* Цвет паранджи */
   --color-bg-soft: color($color-base-essential l(+100%) a(90%)); /* Цвет молока */

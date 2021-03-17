@@ -205,6 +205,7 @@ const App = () => {
 ```
 
 Можно задать интервал для высоты (от `minRows` до `maxRows`) и ограничить ширину (`maxLength`).
+Если передать `rows` и при этом не передавать `minRows`, `maxRows`, то последние будут равны `rows`.
 
 <TextFieldExampleSizeMinRows />
 
@@ -228,8 +229,8 @@ const App = () => {
 | [`width?`](#размеры)                       | `'full', 'default'`                                                                                                                                                  | `'default'`  | Ширина поля                                                                  |
 | [`rows?`](#строки-и-колонки)               | `number`                                                                                                                                                             | -            | Количество строк                                                             |
 | [`cols?`](#строки-и-колонки)               | `number`                                                                                                                                                             | -            | Количество колонок                                                           |
-| [`minRows?`](#строки-и-колонки)            | `number`                                                                                                                                                             | -            | Минимум строк                                                                |
-| [`maxRows?`](#строки-и-колонки)            | `number`                                                                                                                                                             | -            | Максимум строк                                                               |
+| [`minRows?`](#строки-и-колонки)            | `number`                                                                                                                                                             | -            | Минимум видимых строк                                                        |
+| [`maxRows?`](#строки-и-колонки)            | `number`                                                                                                                                                             | -            | Максимум видимых строк                                                       |
 | [`maxLength?`](#строки-и-колонки)          | `number`                                                                                                                                                             | -            | Максимальная ширина                                                          |
 | [`view?`](#внешний-вид)                    | `'default', 'clear'`                                                                                                                                                 | `'default'`  | Вид поля                                                                     |
 | [`form?`](#форма)                          | `'default', 'brick', 'round', 'clearRound', 'roundClear', 'clearDefault', 'defaultClear', 'defaultBrick', 'brickDefault', 'brickClear', 'clearBrick', 'clearClear'`, | `'default'`  | Форма поля                                                                   |

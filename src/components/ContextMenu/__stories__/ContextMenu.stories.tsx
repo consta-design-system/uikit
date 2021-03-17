@@ -19,8 +19,6 @@ import {
   contextMenuSizes,
 } from '../helpers';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import mdx from './ContextMenu.mdx';
 
 const defaultKnobs = () => ({

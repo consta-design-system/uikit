@@ -171,6 +171,7 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
 У этого свойства три значения: `'center', 'top', 'bottom'`. По умолчанию содержимое ячеек
 выравнивается по верхнему краю.
 
+Отдельно настраивается выравниваются для заголовков — `verticalHeaderAlign`.
 ## Свойства
 
 ```ts
@@ -216,6 +217,7 @@ type LazyLoad = { maxVisibleRows?: number; scrollableEl?: HTMLDivElement / Windo
 | [`isResizable`](#менять-ширину-колонок)             | `boolean`                                                                       | false                                             | Возможность изменения размера колонок                |
 | [`activeRow`](#выделить-строки)                     | `{ id?: string; onChange: ({id?: string, e?: React.SyntheticEvent}) => void; }` | -                                                 | Активная строка                                      |
 | [`verticalAlign`](#выравнивание-по-вертикали)       | `'center', 'top', 'bottom'`                                                     | `'top'`                                           | Выравнивание по вертикали                            |
+| [`verticalHeaderAlign`](#выравнивание-по-вертикали) | `'center'`, `'bottom'`                                                              | `center`                                          | Выравнивание заголовков по вертикали                 |
 | [`zebraStriped`](#выделить-строки)                  | `'odd', 'even'`                                                                 | false                                             | Окрашивание строк через одну                         |
 | [`borderBetweenRows`](#границы)                     | `boolean`                                                                       | false                                             | Отображение границ между строками                    |
 | [`borderBetweenColumns`](#границы)                  | `boolean`                                                                       | false                                             | Отображение границ между колонками                   |

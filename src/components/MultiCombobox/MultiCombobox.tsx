@@ -20,7 +20,7 @@ export const multiComboboxPropSizeDefault = multiComboboxPropSize[0];
 
 export type MultiComboboxProps<ITEM, GROUP> = Omit<CommonSelectProps<ITEM>, 'options'> &
   Omit<SelectContainerProps, 'value' | 'onChange'> & {
-    onChange?: (v: ITEM[] | null) => void;
+    onChange?: (values: ITEM[] | null) => void;
     onCreate?: (str: string) => void;
     labelForCreate?: string;
     labelForNotFound?: string;
@@ -79,9 +79,9 @@ export const MultiCombobox: MultiCombobox = (props) => {
   const controlInnerRef = useRef<HTMLDivElement>(null);
   const helperInputFakeElement = useRef<HTMLDivElement>(null);
 
-  const handlerChangeValue = (v: Items): void => {
-    if (typeof onChange === 'function' && v) {
-      onChange(v);
+  const handlerChangeValue = (values: Items): void => {
+    if (typeof onChange === 'function' && values) {
+      onChange(values.length === 0 ? null : values);
     }
     setInputData({ value: toggleRef.current?.value });
   };

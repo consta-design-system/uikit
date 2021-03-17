@@ -18,6 +18,7 @@ module.exports = {
   postcssConfig: 'postcss.config.js',
   distPath: './dist',
   postcss: [
+    require('postcss-mixins')({}),
     require('postcss-simple-vars')({ silent: true }),
     require('postcss-color-function')({}),
     require('autoprefixer')({}),
