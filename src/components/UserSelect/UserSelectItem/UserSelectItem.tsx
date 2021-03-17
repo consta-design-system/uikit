@@ -19,6 +19,7 @@ export type UserSelectItemProps = PropsWithHTMLAttributes<
     active: boolean;
     hovered: boolean;
     size: PropSize;
+    multi: boolean;
     indent: 'normal' | 'increased';
   },
   HTMLDivElement
