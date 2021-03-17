@@ -26,6 +26,10 @@ const sizeMap: Record<ProgressSpinPropSize, number> = {
   m: 20,
 };
 
+const isNumber = (value: unknown): value is number => {
+  return typeof value === 'number';
+};
+
 function getSvgParamsBySize(size: ProgressSpinPropSize): [number, number, number, number] {
   const sizeOfPixels = getSizeByMap(sizeMap, size);
   const strokeWidth = 2;
@@ -48,13 +52,15 @@ export const ProgressSpin = React.forwardRef<SVGSVGElement, ProgressSpinProps>((
     [size],
   );
 
-  const animatedProgress = typeof progress === 'number' ? progress : 50;
+  const animatedProgress = isNumber(progress) ? progress : 50;
   const strokeDashoffset = strokeDasharray - (strokeDasharray * animatedProgress) / 100;
+
+  console.log(progress);
 
   return (
     <svg
       {...otherProps}
-      className={cnProgressSpin({ spin: !progress && progress !== 0 }, [className])}
+      className={cnProgressSpin({ spin: !isNumber(progress) }, [className])}
       width={sizeOfPixels}
       height={sizeOfPixels}
       viewBox={`0 0 ${sizeOfPixels} ${sizeOfPixels}`}
