@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.11.8 (17/03/2021)
+
+- [chore(bem-cn): removed package from dependencies](https://github.com/gazprom-neft/consta-uikit/commit/3347b6c02d4fd94de96672ce9a6c075293f065b6) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Button): added new sizes for modifier \_onlyIcon (#982)](https://github.com/gazprom-neft/consta-uikit/commit/0016c6cdd7a5bedf5c6ba255b183c7786c3abc7f) - [@gizeasy](https://github.com/gizeasy)
+- [docs(Step): edit docs for Steps (#924)](https://github.com/gazprom-neft/consta-uikit/commit/a0deff43d5630d7a0027abdb9524d84999c60676) - [@arhayka](https://github.com/arhayka)
+- [feat(hooks): added the ability to get the sizes of SVG elements in useComponentSize (#980)](https://github.com/gazprom-neft/consta-uikit/commit/de5b294b86347790d6a36ec0b5ea226d7e313ce2) - [@al-fyodorov](https://github.com/al-fyodorov)
+- [docs(general): add remark about IE and old Edge version (#961)](https://github.com/gazprom-neft/consta-uikit/commit/3b4691e768e9b0a519a2539ec10940d975eb62eb) - [@arhayka](https://github.com/arhayka)
+- [chore(postcss): added postcss-mixin](https://github.com/gazprom-neft/consta-uikit/commit/c27a6c25c38d0a53ec33661316522ae5c76faed9) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Grid): added component](https://github.com/gazprom-neft/consta-uikit/commit/97391f3983565b68ad2d76e4dd44d18b618943e9) - [@fooontic](https://github.com/fooontic)
+
+---
+
 ## v1.11.7 (10/03/2021)
 
 - [refactor(Tabs): removed casting to types and more fix (#958)](https://github.com/gazprom-neft/consta-uikit/commit/82949196c2ecdfd51242257e8f15cf4d9e535119) - [@gizeasy](https://github.com/gizeasy)
@@ -360,15 +372,3 @@
 - [feat(Switch): add S size (#281)](https://github.com/gazprom-neft/consta-uikit/commit/58e45a45a5eab790011dabf72f0c58dc943959f7) - @fooontic
 - [refactor(Story): restructuring stories (#269)](https://github.com/gazprom-neft/consta-uikit/commit/5b6ed226ea1bfe6f3f4e78e44271312373dba76f) - @gizeasy
 - [feat(FileField): add component FileField (#264)](https://github.com/gazprom-neft/consta-uikit/commit/58e8e1de928800d5f8df3866d1be03daa7dc1da3) - @gizeasy
-
----
-
-## v1.5.0 (23/07/2020)
-
-- [feat(MixFocus): add MixFocus (#250)](https://github.com/gazprom-neft/consta-uikit/commit/82267bc5f8fbe7fb23fa32b827cc7d4c3c7f4d1b) - @gizeasy
-- [feat(Tooltip): add Tooltip component](https://github.com/gazprom-neft/consta-uikit/commit/d37c45a30e39f14a61408a49dacfa8ac4fe6c22c) - @nekitk
-- [feat(Popover): add Popover component](https://github.com/gazprom-neft/consta-uikit/commit/be4212c2f17df2661fa3d94e4815708a5a0ec0ed) - @nekitk
-- [feat(Tag): add component Tag (#243)](https://github.com/gazprom-neft/consta-uikit/commit/2ff54bed36e46a6752ee7b9a4b4a2155998e5179) - @gizeasy
-- [feat(Icons): add IconDisconnection and IconRestart (#260)](https://github.com/gazprom-neft/consta-uikit/commit/b3ecce80e675c9fe61051a6a320cbdc29845d7b7) - @fooontic
-- [chore(Travis): run unit tests (#249)](https://github.com/gazprom-neft/consta-uikit/commit/b79c6fe1cdd573eca4c935427271294095fcbd4e) - @nekitk
-- [refactor(components): removed unused components (#247)](https://github.com/gazprom-neft/consta-uikit/commit/ba6e9cfbec116be8b410a4fa9f37236bc234ec81) - @nekitk
