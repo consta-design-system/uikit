@@ -51,6 +51,7 @@ export interface SelectProps<T> {
   getOptionLabel(option: T): string;
   getUserAdditionalInfo?(option: T): string;
   getUserUrl?(option: T): string;
+  searchFunction?(option: T, searchValue: string): boolean;
   onCreate?(s: string): void;
   getGroupOptions?(group: T): T[];
   onSelectOption?(): void;
@@ -141,6 +142,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
     getOptionUrl,
     getUserAdditionalInfo,
     getUserUrl,
+    searchFunction,
     onCreate,
     getGroupOptions,
     onSelectOption,
@@ -212,20 +214,12 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
             .toLowerCase()
             .indexOf(searchValueLowerCase),
         );
-        .filter((option) => {
-          if ('subLabel' in option.item) {
-            const subLabel = Object.entries(option.item).filter(
-              (item) => item[0] === 'subLabel',
-            )[0][1];
-            return (
-              option.label.toLowerCase().includes(searchValueLowerCase) ||
-              subLabel.toLowerCase().includes(searchValueLowerCase)
-            );
-          }
-          return option.label.toLowerCase().includes(searchValueLowerCase);
-        })
+        .filter((option) =>
+          searchFunction
+            ? searchFunction(option.item, searchValueLowerCase)
+            : option.label.toLowerCase().includes(searchValueLowerCase),
+        )
         .sort((a) => a.label.toLowerCase().indexOf(searchValueLowerCase));
-
       const matchWithValueSearch = Boolean(
         originalOptions.find(
           (option) => getOptionLabel(option).toLowerCase() === searchValueLowerCase,

@@ -11,8 +11,8 @@ import { SelectContainer } from '../SelectComponents/SelectContainer/SelectConta
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
 import { DefaultPropForm, DefaultPropView, PropForm, PropView } from '../SelectComponents/types';
 
-import { UserItem, UserItemProps } from './UserItem/UserItem';
-import { UserValue } from './UserValue/UserValue';
+import { UserSelectItem, UserSelectItemProps } from './UserSelectItem/UserSelectItem';
+import { UserSelectValue } from './UserSelectValue/UserSelectValue';
 
 export const userSelectPropSize = ['m', 's', 'l'] as const;
 export type UserSelectPropSize = typeof userSelectPropSize[number];
@@ -119,6 +119,16 @@ export const UserSelect: UserSelect = (props) => {
     setInputData({ value: '' });
   };
 
+  const searchFunction = (item: Item, searchValueLowerCase: string): boolean => {
+    const hasLabel = Object.entries(item).find((item) => item[0] === 'label');
+    const hasSubLabel = Object.entries(item).find((item) => item[0] === 'subLabel');
+    const label = hasLabel ? hasLabel[1].toLowerCase().includes(searchValueLowerCase) : false;
+    const subLabel = hasSubLabel
+      ? hasSubLabel[1].toLowerCase().includes(searchValueLowerCase)
+      : false;
+    return label || subLabel;
+  };
+
   const {
     visibleOptions,
     highlightedIndex,
@@ -138,6 +148,7 @@ export const UserSelect: UserSelect = (props) => {
     getOptionLabel,
     getUserAdditionalInfo,
     getUserUrl,
+    searchFunction,
     getGroupOptions: getGroupOptions as undefined,
     multi: true,
     onSelectOption,
@@ -234,8 +245,8 @@ export const UserSelect: UserSelect = (props) => {
     };
   };
 
-  const renderItem = (props: UserItemProps) => {
-    return <UserItem {...props} />;
+  const renderItem = (props: UserSelectItemProps) => {
+    return <UserSelectItem {...props} />;
   };
 
   const inputStyle = React.useMemo(() => getInputStyle(), [inputData.value, arrValue]);
@@ -277,7 +288,7 @@ export const UserSelect: UserSelect = (props) => {
                 };
 
                 return (
-                  <UserValue
+                  <UserSelectValue
                     url={url}
                     label={label}
                     subLabel={subLabel}

@@ -1,4 +1,4 @@
-import './UserItem.css';
+import './UserSelectItem.css';
 
 import React from 'react';
 
@@ -10,7 +10,7 @@ import { Avatar } from '../../Avatar/Avatar';
 const sizes = ['xs', 's', 'm', 'l'] as const;
 type PropSize = typeof sizes[number];
 
-export type UserItemProps = PropsWithHTMLAttributes<
+export type UserSelectItemProps = PropsWithHTMLAttributes<
   {
     label: string;
     item: any;
@@ -18,24 +18,20 @@ export type UserItemProps = PropsWithHTMLAttributes<
     url?: string;
     active: boolean;
     hovered: boolean;
-    multi: boolean;
     size: PropSize;
     indent: 'normal' | 'increased';
   },
   HTMLDivElement
 >;
 
-export const cnUserItem = cn('UserItem');
+export const cnUserItem = cn('UserSelectItem');
 
-export const UserItem: React.FC<UserItemProps> = (props) => {
+export const UserSelectItem: React.FC<UserSelectItemProps> = (props) => {
   const {
     className,
     label,
     subLabel,
-    url,
-    active,
-    hovered,
-    multi,
+    url, active, hovered,
     size,
     indent,
     ...otherProps
@@ -44,7 +40,7 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
   return (
     <div
       {...otherProps}
-      className={cnUserItem({ active, hovered, multi, size, indent }, [className])}
+      className={cnUserItem({ active, hovered, size, indent }, [className])}
       aria-selected={active}
       role="option"
     >
@@ -58,7 +54,7 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
         )}
       </div>
       {!subLabel ? (
-        label
+        <div className={cnUserItem('AdditionalInfo')}>{label}</div>
       ) : (
         <div className={cnUserItem('AdditionalInfo')}>
         <div className={cnUserItem('SubUserInfo')}>

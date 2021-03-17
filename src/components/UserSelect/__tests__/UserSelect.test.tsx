@@ -5,8 +5,8 @@ import { simpleItems } from '../__mocks__/data.mock';
 import ResizeObserver from '../../../../__mocks__/ResizeObserver';
 import { getInitialsForName } from '../../Avatar/Avatar';
 import { cnSelect } from '../../SelectComponents/cnSelect';
-import { cnUserItem } from '../UserItem/UserItem';
 import { UserSelect } from '../UserSelect';
+import { cnUserItem } from '../UserSelectItem/UserSelectItem';
 
 jest.mock('resize-observer-polyfill', () => {
   return ResizeObserver;
@@ -93,7 +93,7 @@ function getOption(index = 1) {
 }
 
 function getCheckedOptions() {
-  return getOptionsList().querySelectorAll('.UserItem_active');
+  return getOptionsList().querySelectorAll('.UserSelectItem_active');
 }
 
 function getCheckedOptionsText() {
