@@ -5,18 +5,22 @@ type ComponentSize = {
   height: number;
 };
 
-const getElementSize = (el: HTMLElement | null): ComponentSize =>
-  el
-    ? {
-        width: el.offsetWidth,
-        height: el.offsetHeight,
-      }
-    : {
-        width: 0,
-        height: 0,
-      };
+const getElementSize = (el: HTMLElement | SVGGraphicsElement | null): ComponentSize => {
+  if (!el) {
+    return { width: 0, height: 0 };
+  }
 
-export function useComponentSize<T extends HTMLElement>(ref: React.RefObject<T>): ComponentSize {
+  const { width, height } = el.getBoundingClientRect();
+
+  return {
+    width: Math.floor(width),
+    height: Math.floor(height),
+  };
+};
+
+export function useComponentSize<T extends HTMLElement | SVGGraphicsElement>(
+  ref: React.RefObject<T>,
+): ComponentSize {
   const [componentSize, setComponentSize] = useState<ComponentSize>(
     getElementSize(ref && ref.current),
   );
