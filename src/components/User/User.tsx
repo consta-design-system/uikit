@@ -39,12 +39,12 @@ type Props = {
   children?: never;
 } & (
   | {
-      withArrow?: true;
+      withArrow?: boolean;
       iconRight?: never;
       onIconClick?: never;
     }
   | {
-      withArrow?: false;
+      withArrow?: never;
       iconRight?: React.FC<IconProps>;
       onIconClick?: (e: React.SyntheticEvent) => void;
     }
@@ -53,15 +53,15 @@ type Props = {
 export const cnUser = cn('User');
 
 const infoSizeMap: Record<UserPropSize, TextPropSize> = {
+  s: '2xs',
   m: '2xs',
   l: 'xs',
-  s: '2xs',
 };
 
-const arrowSizeMap: Record<UserPropSize, IconPropSize> = {
+const iconSizeMap: Record<UserPropSize, IconPropSize> = {
+  s: 'xs',
   m: 'xs',
   l: 's',
-  s: 'xs',
 };
 
 const avatarSizeMap: Record<TagBasePropSize, IconPropSize> = {
@@ -91,7 +91,7 @@ export const User = forwardRefWithAs<Props>((props, ref) => {
   const Tag = as as string;
   const onlyAvatar = propOnlyAvatar || (!name && !info);
   const infoSize = getSizeByMap(infoSizeMap, size);
-  const arrowSize = getSizeByMap(arrowSizeMap, size);
+  const iconSize = getSizeByMap(iconSizeMap, size);
   const avatarSize = getSizeByMap(avatarSizeMap, size);
   const IconRight = iconRight;
 
@@ -123,7 +123,7 @@ export const User = forwardRefWithAs<Props>((props, ref) => {
           )}
         </div>
       )}
-      {withArrow && <IconSelect className={cnUser('Arrow')} size={arrowSize} view="secondary" />}
+      {withArrow && <IconSelect className={cnUser('Arrow')} size={iconSize} view="secondary" />}
       {IconRight && (
         <Button
           className={cnUser('Icon')}
@@ -131,6 +131,8 @@ export const User = forwardRefWithAs<Props>((props, ref) => {
           iconRight={IconRight}
           onlyIcon
           view="clear"
+          size="s"
+          iconSize={iconSize}
         />
       )}
     </Tag>

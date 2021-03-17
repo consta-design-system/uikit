@@ -9,7 +9,7 @@ import { cnForCssTransition } from '../../../utils/cnForCssTransition';
 import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
 import { Popover } from '../../Popover/Popover';
 import { Text } from '../../Text/Text';
-import { UserItemProps } from '../../UserSelect/UserItem/UserItem';
+import { UserSelectItemProps } from '../../UserSelect/UserSelectItem/UserSelectItem';
 import { SelectCreateButton } from '../SelectCreateButton/SelectCreateButton';
 import { SelectGroupLabel } from '../SelectGroupLabel/SelectGroupLabel';
 import { SelectItemProps } from '../SelectItem/SelectItem';
@@ -37,7 +37,7 @@ type Props<ITEM> = PropsWithJsxAttributes<{
   getOptionLabel(option: ITEM): string;
   form?: SelectDropdownPropForm;
   isOpen: boolean;
-  renderItem: (props: UserItemProps | SelectItemProps) => JSX.Element;
+  renderItem: (props: UserSelectItemProps | SelectItemProps) => JSX.Element;
 }>;
 
 type SelectDropdown = <ITEM>(props: Props<ITEM>) => React.ReactElement | null;

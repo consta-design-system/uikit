@@ -1,4 +1,6 @@
-.UserItem {
+.UserSelectItem {
+  display: flex;
+  align-items: center;
   position: relative;
   padding: var(--vertical-space) var(--horizontal-space);
   color: var(--color-control-typo-default);
@@ -7,12 +9,6 @@
   cursor: pointer;
 
   &_size {
-    &_xs {
-      --horizontal-space: calc(var(--control-space-xs) * 0.5);
-      --vertical-space: calc(var(--control-space-s) * 0.25);
-      --font-size: var(--control-text-size-xs);
-    }
-
     &_s {
       --horizontal-space: calc(var(--control-space-s) * 0.5);
       --vertical-space: calc(var(--control-space-s) * 0.25);
@@ -44,11 +40,6 @@
 
   &_active {
     color: var(--color-control-typo-secondary);
-  }
-
-  &_multi {
-    display: flex;
-    align-items: center;
   }
 
   &_indent {
