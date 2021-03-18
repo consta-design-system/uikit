@@ -4,6 +4,7 @@ import React, { useMemo } from 'react';
 
 import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
+import { isNumber } from '../../utils/type-guards';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
 export const progressSpinPropSize = ['m', 's'] as const;
@@ -24,10 +25,6 @@ export const cnProgressSpin = cn('ProgressSpin');
 const sizeMap: Record<ProgressSpinPropSize, number> = {
   s: 12,
   m: 20,
-};
-
-const isNumber = (value: unknown): value is number => {
-  return typeof value === 'number';
 };
 
 function getSvgParamsBySize(size: ProgressSpinPropSize): [number, number, number, number] {
