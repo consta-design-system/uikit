@@ -20,7 +20,7 @@ export type ThemePropGetKey<ITEM> = (item: ITEM) => string | number;
 export type ThemePropGetLabel<ITEM> = (item: ITEM) => string;
 export type ThemePropGetIcon<ITEM> = (item: ITEM) => React.FC<IconProps>;
 
-type Props<ITEM> = PropsWithHTMLAttributesAndRef<
+export type Props<ITEM> = PropsWithHTMLAttributesAndRef<
   {
     size?: ThemeTogglerPropSize;
     className?: string;
@@ -85,67 +85,63 @@ export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef)
 
   const iconSize = getSizeByMap(iconSizeMap, size);
 
-  if (items.length === 2) {
+  const getIcon = () => {
+    if (items.length > 2) {
+      const Icon = getItemIcon(items.find((theme) => getChecked(theme))!);
+      return Icon;
+    }
+
     const IconOne = getItemIcon(items[0]);
     const IconTwo = getItemIcon(items[1]);
     const isFirstThemeSelected = getChecked(items[0]);
 
-    return (
+    return isFirstThemeSelected ? IconOne : IconTwo;
+  };
+
+  const getOnClickFunction = () => {
+    const isFirstThemeSelected = getChecked(items[0]);
+    return getOnChange(items[isFirstThemeSelected ? 1 : 0]);
+  };
+
+  type Item = typeof items[number];
+
+  const contextMenuSize = getSizeByMap(contextMenuSizeMap, size);
+
+  const renderIcons = (item: Item) => {
+    const Icon = getItemIcon(item);
+    return <Icon size={iconSize} />;
+  };
+
+  const renderChecks = (item: Item) => {
+    return getChecked(item) && <IconCheck size={iconSize} />;
+  };
+
+  return (
+    <>
       <Button
         {...otherProps}
         ref={ref}
+        iconLeft={getIcon()}
+        onClick={items.length > 2 ? () => setIsOpen(!isOpen) : getOnClickFunction()}
         onlyIcon
-        iconLeft={isFirstThemeSelected ? IconOne : IconTwo}
-        view="clear"
-        onClick={getOnChange(items[isFirstThemeSelected ? 1 : 0])}
         size={size}
+        view="clear"
       />
-    );
-  }
-
-  if (items.length > 2) {
-    type Item = typeof items[number];
-
-    const contextMenuSize = getSizeByMap(contextMenuSizeMap, size);
-    const PreviewIcon = getItemIcon(items.find((theme) => getChecked(theme))!);
-
-    const renderIcons = (item: Item) => {
-      const Icon = getItemIcon(item);
-      return <Icon size={iconSize} />;
-    };
-    const renderChecks = (item: Item) => {
-      return getChecked(item) && <IconCheck size={iconSize} />;
-    };
-
-    return (
-      <>
-        <Button
-          {...otherProps}
-          ref={ref}
-          onlyIcon
-          iconLeft={PreviewIcon}
-          view="clear"
-          onClick={() => setIsOpen(!isOpen)}
-          size={size}
+      {isOpen && (
+        <ContextMenu
+          offset={8}
+          items={items}
+          getLabel={getItemLabel}
+          anchorRef={ref}
+          direction={direction}
+          possibleDirections={possibleDirections}
+          getLeftSideBar={renderIcons}
+          getRightSideBar={renderChecks}
+          onClickOutside={() => setIsOpen(false)}
+          getOnClick={getOnChange}
+          size={contextMenuSize}
         />
-        {isOpen && (
-          <ContextMenu
-            offset={8}
-            items={items}
-            getLabel={getItemLabel}
-            anchorRef={ref}
-            direction={direction}
-            possibleDirections={possibleDirections}
-            getLeftSideBar={renderIcons}
-            getRightSideBar={renderChecks}
-            onClickOutside={() => setIsOpen(false)}
-            getOnClick={getOnChange}
-            size={contextMenuSize}
-          />
-        )}
-      </>
-    );
-  }
-
-  return <div>Необходимо передать как минимум 2 темы</div>;
+      )}
+    </>
+  );
 });

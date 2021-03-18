@@ -1,19 +1,18 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import { exampleThemesThree, exampleThemesTwo, Theme } from '../__mocks__/mock.data';
-import { ThemeToggler } from '../ThemeToggler';
+import { exampleThemesThree, exampleThemesTwo } from '../__mocks__/data.mock';
+import { Props, ThemeToggler } from '../ThemeToggler';
+
+type Item = typeof exampleThemesTwo[number];
+
+type ThemeTogglerProps = Props<Item>;
 
 const defaultSetValue = jest.fn();
 
 const testId = 'ThemeToggler';
 
-const renderComponent = (props: {
-  items?: Theme[];
-  value?: Theme;
-  className?: string;
-  onChange?: (arg: Theme) => void;
-}) => {
+const renderComponent = (props: Partial<ThemeTogglerProps>) => {
   return render(
     <div data-testid="outside">
       <ThemeToggler
@@ -40,6 +39,9 @@ describe('Компонент ThemeToggler', () => {
   });
   it('должен рендериться без ошибок c тремя темами', () => {
     expect(() => renderComponent({ items: exampleThemesThree })).not.toThrow();
+  });
+  it('должен рендериться c ошибкой c одной темой', () => {
+    expect(() => renderComponent({ items: [exampleThemesThree[0]] })).toThrow();
   });
   describe('проверка className', () => {
     it(`Дополнительный className присваевается`, () => {
