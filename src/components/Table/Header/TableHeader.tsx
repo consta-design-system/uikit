@@ -90,18 +90,22 @@ export const TableHeader = <T extends TableRow>({
   };
 
   const getFilterPopover = (column: Header<T> & ColumnMetaData): React.ReactNode => {
-    const FilterComponent = filters?.find((filter) => filter.field === column.accessor)?.component
-      ?.name;
-    const filterComponentProps =
-      filters?.find((filter) => filter.field === column.accessor)?.component?.props ?? {};
+    if (!filters) {
+      return null;
+    }
+    const curFilter = filters.find(({ field }) => field === column.accessor);
+    const FilterComponent = curFilter?.component?.name;
+    const filterComponentProps = curFilter?.component?.props ?? {};
     const onToggle = handleFilterTogglerClick(column.accessor);
-    const filterId = filters?.find(({ field }) => field === column.accessor)?.id;
+    const filterId = curFilter?.id;
     const handleFilterSave = (filterValue: any) => {
-      handleTooltipSave(column.accessor, [filterId] as FieldSelectedValues, filterValue);
+      if (filterId) {
+        handleTooltipSave(column.accessor, [filterId], filterValue);
+      }
       onToggle();
     };
 
-    return filters && column.filterable ? (
+    return column.filterable ? (
       <TableFilterTooltip
         field={column.accessor}
         isOpened={visibleFilter === column.accessor}

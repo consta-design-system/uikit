@@ -102,7 +102,7 @@ export const getSelectedFiltersList = <T extends TableRow>({
     const currentFieldFilters = selectedFilters[cur.accessor] || [];
     let orderedFilters: SelectedFiltersList = [];
 
-    if (currentFieldFilters.selected?.length) {
+    if (currentFieldFilters.selected && currentFieldFilters.selected.length > 0) {
       orderedFilters = currentFieldFilters
         .selected!.map((filter) => {
           const option = filters.find(({ id: filterId }) => filterId === filter);
@@ -118,7 +118,7 @@ export const getSelectedFiltersList = <T extends TableRow>({
         .filter(isDefined);
     }
 
-    return currentFieldFilters.selected?.length ? [...acc, ...orderedFilters] : acc;
+    return orderedFilters.length > 0 ? [...acc, ...orderedFilters] : acc;
   }, []);
 };
 
@@ -226,7 +226,7 @@ export const useSelectedFilters = <T extends TableRow>(
     if (filterToDelete) {
       updateSelectedFilters(
         filterToDelete.field,
-        (selectedFilters[filterToDelete.field] || []).selected!.filter((f) => f !== filter),
+        (selectedFilters[filterToDelete.field] || {}).selected?.filter((f) => f !== filter),
       );
     }
   };

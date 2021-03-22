@@ -16,7 +16,18 @@ type Props = {
   onReset: () => void;
 };
 
-const getTagLabel = (name: string, value?: any): string => {
+type OptionValue = {
+  min?: string;
+  max?: string;
+} & Array<{
+  name: string;
+  value: string | number;
+}> & {
+    name: string;
+    value: string | number;
+  };
+
+const getTagLabel = (name: string, value?: OptionValue): string => {
   if (!isNotNil(value)) {
     return name;
   }

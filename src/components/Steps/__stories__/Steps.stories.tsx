@@ -3,6 +3,7 @@ import './Steps.stories.css';
 import React from 'react';
 import { select } from '@storybook/addon-knobs';
 
+import { SimpleItem, simpleItems } from '../__mocks__/mock.data';
 import { IconBackward } from '../../../icons/IconBackward/IconBackward';
 import { IconForward } from '../../../icons/IconForward/IconForward';
 import { cn } from '../../../utils/bem';
@@ -18,22 +19,6 @@ const cnStepsStories = cn('StepsStories');
 const defaultKnobs = () => ({
   size: select('size', stepsSizes, stepsDefaultSize),
 });
-
-type Item = {
-  label: string;
-};
-
-const items: Item[] = [
-  {
-    label: 'Главное',
-  },
-  {
-    label: 'Важное',
-  },
-  {
-    label: 'Необязательное',
-  },
-];
 
 const getStepContent = (stepNumber: number) => {
   switch (stepNumber) {
@@ -55,8 +40,8 @@ export function Playground() {
 
   const { size } = defaultKnobs();
 
-  const getStepIndex = (step: Item | null): number =>
-    items.findIndex((item) => step && item.label === step.label);
+  const getStepIndex = (step: SimpleItem | null): number =>
+    simpleItems.findIndex((item) => step && item === step);
   const handleNext = () => {
     setCompletedSteps([...completedSteps, activeStep]);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -65,7 +50,7 @@ export function Playground() {
     setSkippedSteps([...skippedSteps, activeStep]);
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-  const handleChange = ({ value }: { value: Item | null }) => {
+  const handleChange = ({ value }: { value: SimpleItem | null }) => {
     setSkippedSteps([...skippedSteps, activeStep]);
     setActiveStep(getStepIndex(value));
   };
@@ -73,9 +58,9 @@ export function Playground() {
   return (
     <div className={cnStepsStories()}>
       <Steps
-        items={items}
-        getLabel={(item) => item.label}
-        value={items[activeStep]}
+        items={simpleItems}
+        getLabel={(item) => item}
+        value={simpleItems[activeStep]}
         onChange={handleChange}
         getCompleted={(item) => completedSteps.includes(getStepIndex(item))}
         getSkipped={(item) => skippedSteps.includes(getStepIndex(item))}
@@ -94,7 +79,7 @@ export function Playground() {
           onClick={handleNext}
           label="Дальше"
           iconRight={IconForward}
-          disabled={activeStep === items.length - 1}
+          disabled={activeStep === simpleItems.length - 1}
         />
       </div>
     </div>

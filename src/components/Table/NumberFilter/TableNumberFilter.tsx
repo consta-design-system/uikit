@@ -20,6 +20,7 @@ export const TableNumberFilter: React.FC<Props> = ({ onConfirm, filterValue, tit
   const textFieldRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    // setTimeout нужен для корректного выставления автофокуса
     setTimeout(() => {
       if (textFieldRef.current) {
         textFieldRef.current.focus();

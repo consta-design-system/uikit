@@ -1,6 +1,6 @@
 {
   "name": "@consta/uikit",
-  "version": "1.11.7",
+  "version": "1.11.8",
   "keywords": [
     "ui-kit",
     "design-system",
@@ -10,7 +10,6 @@
   "dependencies": {
     "@bem-react/classname": "^1.5.8",
     "@bem-react/classnames": "^1.3.9",
-    "bem-cn": "^3.0.1",
     "compute-scroll-into-view": "^1.0.14",
     "react-textarea-autosize": "^7.1.2",
     "react-transition-group": "^4.4.1",
