@@ -7,6 +7,7 @@ import { IconArrowDown } from '../../icons/IconArrowDown/IconArrowDown';
 import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
+import { Text } from '../Text/Text';
 
 export const collapsePropSize = ['l', 'm', 's', 'xs', '2xs'] as const;
 export type CollapsePropSize = typeof collapsePropSize[number];
@@ -110,27 +111,26 @@ export const Collapse: Collapse = (props) => {
   };
 
   return (
-    <span
-      {...otherProps}
-      className={cnCollapse({ size, view, state: !isOpen ? 'collapsed' : 'expanded' }, [className])}
-    >
+    <span {...otherProps} className={cnCollapse({ size, view, isOpen }, [className])}>
       {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus */}
       <div
         className={cnCollapse('Label', {
           withHoverEffect,
           withDivider,
           horizontalPadding,
-          iconPositionRight: iconPosition === 'right',
+          iconPosition: iconPosition === 'right' ? 'right' : 'left',
         })}
         role="button"
         onKeyDown={() => onClick}
         onClick={onClick}
       >
         {getIcon()}
-        {label}
+        <Text view={view} size={size}>
+          {label}
+        </Text>
         {iconPosition === 'left' && <div className={cnCollapse('rightSide')}>{rightSide}</div>}
       </div>
-      <div className={cnCollapse('Children')}>{children}</div>
+      <div className={cnCollapse('Body')}>{children}</div>
     </span>
   );
 };

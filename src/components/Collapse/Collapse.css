@@ -1,5 +1,45 @@
 .Collapse {
-  color: var(--color-control-typo-default);
+  &_size {
+    &_2xs {
+      --vertical-space: var(--space-2xs);
+      --elements-offset: var(--space-xs);
+      --body-width: 277px;
+      --body-offset-up: var(--space-2xs);
+      --body-offset-bottom: var(--space-xs);
+    }
+
+    &_xs {
+      --vertical-space: var(--space-2xs);
+      --elements-offset: var(--space-xs);
+      --body-width: 394px;
+      --body-offset-up: var(--space-2xs);
+      --body-offset-bottom: var(--space-xs);
+    }
+
+    &_s {
+      --vertical-space: var(--space-xs);
+      --elements-offset: var(--space-xs);
+      --body-width: 407px;
+      --body-offset-up: var(--space-xs);
+      --body-offset-bottom: var(--space-m);
+    }
+
+    &_m {
+      --vertical-space: var(--space-s);
+      --elements-offset: var(--space-s);
+      --body-width: 539px;
+      --body-offset-up: var(--space-s);
+      --body-offset-bottom: var(--space-xl);
+    }
+
+    &_l {
+      --vertical-space: var(--space-s);
+      --elements-offset: var(--space-s);
+      --body-width: 539px;
+      --body-offset-up: var(--space-s);
+      --body-offset-bottom: var(--space-xl);
+    }
+  }
 
   &-Label {
     display: flex;
@@ -7,7 +47,8 @@
     align-items: center;
     width: fit-content;
     cursor: pointer;
-    transition: background 0.32s;
+    transition: background 0.3s;
+    padding: var(--vertical-space) var(--horizontal-space);
 
     &_withHoverEffect {
       &:hover {
@@ -20,8 +61,8 @@
     }
 
     .Collapse-Icon {
-      margin-right: var(--icon-space);
-      transition: transform 0.32s;
+      margin-right: var(--elements-offset);
+      transition: transform 0.3s;
 
       &_isOpen {
         transform: rotate(180deg);
@@ -32,152 +73,103 @@
       }
     }
 
-    .Collapse-rightSide {
-      margin-left: var(--icon-space);
-    }
+    &_iconPosition {
+      &_right {
+        flex-direction: row-reverse;
 
-    &_iconPositionRight {
-      flex-direction: row-reverse;
-
-      .Collapse-Icon {
-        margin-right: 0;
-        margin-left: var(--icon-space);
+        .Collapse-Icon {
+          margin-right: 0;
+          margin-left: var(--elements-offset);
+        }
       }
     }
 
     &_horizontalPadding {
       &_3xs {
-        padding: var(--label-space) var(--space-3xs);
+        --horizontal-space: var(--space-3xs);
       }
 
       &_2xs {
-        padding: var(--label-space) var(--space-2xs);
+        --horizontal-space: var(--space-2xs);
       }
 
       &_xs {
-        padding: var(--label-space) var(--space-xs);
+        --horizontal-space: var(--space-xs);
       }
 
       &_s {
-        padding: var(--label-space) var(--space-s);
+        --horizontal-space: var(--space-s);
       }
 
       &_m {
-        padding: var(--label-space) var(--space-m);
+        --horizontal-space: var(--space-m);
       }
 
       &_l {
-        padding: var(--label-space) var(--space-l);
+        --horizontal-space: var(--space-l);
       }
 
       &_xl {
-        padding: var(--label-space) var(--space-xl);
+        --horizontal-space: var(--space-xl);
       }
 
       &_2xl {
-        padding: var(--label-space) var(--space-2xl);
+        --horizontal-space: var(--space-2xl);
       }
 
       &_3xl {
-        padding: var(--label-space) var(--space-3xl);
+        --horizontal-space: var(--space-3xl);
       }
 
       &_4xl {
-        padding: var(--label-space) var(--space-4xl);
+        --horizontal-space: var(--space-4xl);
       }
 
       &_5xl {
-        padding: var(--label-space) var(--space-5xl);
+        --horizontal-space: var(--space-5xl);
       }
 
       &_6xl {
-        padding: var(--label-space) var(--space-6xl);
+        --horizontal-space: var(--space-6xl);
       }
     }
   }
 
-  &-Children {
+  &-Body {
     overflow: hidden;
-    transition: max-height 0.32s;
+    transition: max-height 0.3s;
+  }
 
-    & > *:last-child {
-      margin-bottom: var(--space-5xl);
+  .Collapse-rightSide {
+    :nth-child(n) {
+      margin-left: var(--elements-offset);
     }
   }
 
   &-CollapseIcon {
     flex-shrink: 0;
     margin-left: var(--space-s);
-    transition: transform 0.32s, color 0.32s;
+    transition: transform 0.3s, color 0.3s;
   }
 
-  &_size {
-    &_2xs {
-      --label-space: var(--space-2xs);
-      --icon-space: var(--space-xs);
-      --children-width: 277px;
-      --children-up-space: var(--space-2xs);
-      --children-bottom-space: var(--space-xs);
-      font-size: calc(var(--control-text-size-xs) - 2px);
+  &_isOpen {
+    .Collapse-Body {
+      width: var(--body-width);
+      max-height: 200vh;
+      padding: var(--body-offset-up) 0 var(--body-offset-bottom);
+      transition-timing-function: cubic-bezier(0.7, 0, 0.5, 1);
     }
 
-    &_xs {
-      --label-space: var(--space-2xs);
-      --icon-space: var(--space-xs);
-      --children-width: 394px;
-      --children-up-space: var(--space-2xs);
-      --children-bottom-space: var(--space-xs);
-      font-size: var(--control-text-size-xs);
-    }
-
-    &_s {
-      --label-space: var(--space-xs);
-      --icon-space: var(--space-xs);
-      --children-width: 407px;
-      --children-up-space: var(--space-xs);
-      --children-bottom-space: var(--space-m);
-      font-size: var(--control-text-size-s);
-    }
-
-    &_m {
-      --label-space: var(--space-s);
-      --icon-space: var(--space-s);
-      --children-width: 539px;
-      --children-up-space: var(--space-s);
-      --children-bottom-space: var(--space-xl);
-      font-size: var(--control-text-size-m);
-    }
-
-    &_l {
-      --label-space: var(--space-s);
-      --icon-space: var(--space-s);
-      --children-width: 539px;
-      --children-up-space: var(--space-s);
-      --children-bottom-space: var(--space-xl);
-      font-size: var(--control-text-size-l);
+    .Collapse-CollapseIcon {
+      transform: scale(1.4) rotate(45deg);
     }
   }
 
-  &_state {
-    &_collapsed {
-      .Collapse-Children {
-        width: var(--children-width);
-        max-height: 0;
-        padding-top: var(--children-up-space);
-      }
-    }
-
-    &_expanded {
-      .Collapse-Children {
-        width: var(--children-width);
-        max-height: 200vh;
-        padding: var(--children-up-space) 0 var(--children-bottom-space);
-        transition-timing-function: cubic-bezier(0.7, 0, 0.5, 1);
-      }
-
-      .Collapse-CollapseIcon {
-        transform: scale(1.4) rotate(45deg);
-      }
+  &:not(&_isOpen) {
+    .Collapse-Body {
+      width: var(--body-width);
+      max-height: 0;
+      padding-top: var(--body-offset-up);
     }
   }
 
