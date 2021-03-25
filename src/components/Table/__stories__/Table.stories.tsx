@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { boolean, number, object, select, text } from '@storybook/addon-knobs';
 
 import {
+  customFilters,
   generateData,
   tableData,
   tableWithBagdeData,
@@ -322,6 +323,19 @@ export const WithMergedCells = createStory(
   ),
   {
     name: 'с объединёнными ячейками',
+  },
+);
+
+export const withCustomFilters = createStory(
+  () => {
+    return (
+      <div className={cnTableStories()}>
+        <Table {...getKnobs({ filters: customFilters })} />
+      </div>
+    );
+  },
+  {
+    name: 'с кастомными фильтрами',
   },
 );
 

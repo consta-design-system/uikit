@@ -205,6 +205,7 @@ export const Table = <T extends TableRow>({
     removeOneSelectedFilter,
     removeAllSelectedFilters,
   } = useSelectedFilters(filters, onFiltersUpdated);
+
   /*
     Подписываемся на изменения размеров таблицы, но не используем значения из
     хука так как нам нужна ширина и высота таблицы без размера скролла. Этот хук
@@ -268,8 +269,12 @@ export const Table = <T extends TableRow>({
     setVisibleFilter(visibleFilter === id ? null : id);
   };
 
-  const handleTooltipSave = (field: string, tooltipSelectedFilters: FieldSelectedValues): void => {
-    updateSelectedFilters(field, tooltipSelectedFilters);
+  const handleTooltipSave = (
+    field: string,
+    tooltipSelectedFilters: FieldSelectedValues,
+    value?: any,
+  ): void => {
+    updateSelectedFilters(field, tooltipSelectedFilters, value);
   };
 
   const removeSelectedFilter = (tableFilters: Filters<T>) => (filter: string): void => {
@@ -358,7 +363,7 @@ export const Table = <T extends TableRow>({
       const showResizer =
         stickyColumns > columnIndex ||
         stickyColumnsWidth + tableScroll.left < columnLeftOffset + columnWidth;
-      const isFilterActive = (selectedFilters[column.accessor] || []).length > 0;
+      const isFilterActive = (selectedFilters[column.accessor]?.selected || []).length > 0;
 
       return {
         ...column,
@@ -380,9 +385,13 @@ export const Table = <T extends TableRow>({
 
   const sortedTableData = sortingData(rows, sorting, onSortBy);
   const filteredData =
-    !filters || !isSelectedFiltersPresent(selectedFilters)
-      ? sortedTableData
-      : filterTableData({ data: sortedTableData, filters, selectedFilters });
+    filters && isSelectedFiltersPresent(selectedFilters)
+      ? filterTableData({
+          data: sortedTableData,
+          filters: filters || [],
+          selectedFilters,
+        })
+      : sortedTableData;
 
   const { maxVisibleRows = 210, scrollableEl = tableRef.current } = lazyLoad || {};
 

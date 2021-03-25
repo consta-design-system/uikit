@@ -108,7 +108,9 @@ describe('filterTableData', () => {
         data: DATA,
         filters: FILTERS,
         selectedFilters: {
-          count: ['countEqual0'],
+          count: {
+            selected: ['countEqual0'],
+          },
         },
       }),
     ).toEqual([]);
@@ -120,7 +122,9 @@ describe('filterTableData', () => {
         data: DATA,
         filters: FILTERS,
         selectedFilters: {
-          count: ['countLess100'],
+          count: {
+            selected: ['countLess100'],
+          },
         },
       }),
     ).toEqual([DATA[2]]);
@@ -132,7 +136,9 @@ describe('filterTableData', () => {
         data: DATA,
         filters: FILTERS,
         selectedFilters: {
-          count: ['countLess100', 'countMore100'],
+          count: {
+            selected: ['countLess100', 'countMore100'],
+          },
         },
       }),
     ).toEqual([DATA[0], DATA[2]]);
@@ -144,8 +150,12 @@ describe('filterTableData', () => {
         data: DATA,
         filters: FILTERS,
         selectedFilters: {
-          count: ['countEqual100'],
-          price: ['priceMore100'],
+          count: {
+            selected: ['countEqual100'],
+          },
+          price: {
+            selected: ['priceMore100'],
+          },
         },
       }),
     ).toEqual([DATA[1]]);
@@ -157,7 +167,9 @@ describe('filterTableData', () => {
         data: DATA,
         filters: FILTERS,
         selectedFilters: {
-          count: ['UNDEFINED'],
+          count: {
+            selected: ['UNDEFINED'],
+          },
         },
       }),
     ).toEqual([]);
@@ -206,8 +218,12 @@ describe('getSelectedFiltersInitialState', () => {
 
   it('возвращает начальное состояние для каждого типа фильтра', () => {
     expect(getSelectedFiltersInitialState(FILTERS)).toEqual({
-      count: [],
-      price: [],
+      count: {
+        selected: []
+      },
+      price: {
+        selected: []
+      },
     });
   });
 });
@@ -233,7 +249,9 @@ describe('getSelectedFiltersList', () => {
       getSelectedFiltersList({
         filters: FILTERS,
         selectedFilters: {
-          count: ['countLess100'],
+          count: {
+            selected: ['countLess100'],
+          },
         },
         columns: COLUMNS,
       }),
@@ -250,8 +268,12 @@ describe('getSelectedFiltersList', () => {
       getSelectedFiltersList({
         filters: FILTERS,
         selectedFilters: {
-          count: ['countLess100'],
-          price: ['priceLess100'],
+          count: {
+            selected: ['countLess100'],
+          },
+          price: {
+            selected: ['priceLess100'],
+          },
         },
         columns: COLUMNS,
       }),
@@ -272,7 +294,9 @@ describe('getSelectedFiltersList', () => {
       getSelectedFiltersList({
         filters: FILTERS,
         selectedFilters: {
-          count: ['UNDEFINED'],
+          count: {
+            selected: ['UNDEFINED'],
+          },
         },
         columns: COLUMNS,
       }),
@@ -284,8 +308,12 @@ describe('isSelectedFiltersPresent', () => {
   it('возвращает false если не выбран ни один фильтр', () => {
     expect(
       isSelectedFiltersPresent({
-        count: [],
-        price: [],
+        count: {
+          selected: [],
+        },
+        price: {
+          selected: [],
+        },
       }),
     ).toEqual(false);
   });
@@ -293,8 +321,12 @@ describe('isSelectedFiltersPresent', () => {
   it('возвращает true если выбран фильтр для одного из полей', () => {
     expect(
       isSelectedFiltersPresent({
-        count: ['countLess100'],
-        price: [],
+        count: {
+          selected: ['countLess100'],
+        },
+        price: {
+          selected: [],
+        },
       }),
     ).toEqual(true);
   });
@@ -302,8 +334,12 @@ describe('isSelectedFiltersPresent', () => {
   it('возвращает true если выбраны фильтры для всех полей', () => {
     expect(
       isSelectedFiltersPresent({
-        count: ['countLess100'],
-        price: ['priceEqual100'],
+        count: {
+          selected: ['countLess100'],
+        },
+        price: {
+          selected: ['priceEqual100'],
+        },
       }),
     ).toEqual(true);
   });

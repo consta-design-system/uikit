@@ -1,0 +1,9 @@
+.TableNumberFilter {
+  &-Inputs {
+    display: flex;
+
+    & > .TextField {
+      flex-basis: 50%;
+    }
+  }
+}
