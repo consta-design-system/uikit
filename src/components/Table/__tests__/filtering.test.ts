@@ -218,8 +218,12 @@ describe('getSelectedFiltersInitialState', () => {
 
   it('возвращает начальное состояние для каждого типа фильтра', () => {
     expect(getSelectedFiltersInitialState(FILTERS)).toEqual({
-      count: [],
-      price: [],
+      count: {
+        selected: []
+      },
+      price: {
+        selected: []
+      },
     });
   });
 });
