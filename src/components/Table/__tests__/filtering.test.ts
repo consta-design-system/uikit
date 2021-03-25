@@ -219,10 +219,10 @@ describe('getSelectedFiltersInitialState', () => {
   it('возвращает начальное состояние для каждого типа фильтра', () => {
     expect(getSelectedFiltersInitialState(FILTERS)).toEqual({
       count: {
-        selected: []
+        selected: [],
       },
       price: {
-        selected: []
+        selected: [],
       },
     });
   });
