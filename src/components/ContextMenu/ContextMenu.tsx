@@ -15,6 +15,7 @@ import {
 
 export const ContextMenu: ContextMenuType = (props) => {
   const {
+    isOpen,
     items,
     anchorRef,
     position,
@@ -134,7 +135,7 @@ export const ContextMenu: ContextMenuType = (props) => {
     return () => clearTimers();
   }, [props.items, getSubItems, getKey]);
 
-  return (
+  return isOpen ? (
     <>
       {levels.map((level, index) => {
         const onSetDirection = index > 0 ? setSubMenuDirection : undefined;
@@ -142,6 +143,7 @@ export const ContextMenu: ContextMenuType = (props) => {
         return (
           <ContextMenuLevel
             {...otherProps}
+            isOpen={isOpen}
             key={index}
             items={level.items}
             level={index}
@@ -163,5 +165,5 @@ export const ContextMenu: ContextMenuType = (props) => {
         );
       })}
     </>
-  );
+  ) : null;
 };

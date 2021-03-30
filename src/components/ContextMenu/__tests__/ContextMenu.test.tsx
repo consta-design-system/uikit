@@ -22,6 +22,7 @@ const renderComponent = (props: ContextMenuProps<Item> | {}) => {
     <>
       <ContextMenu
         {...props}
+        isOpen
         anchorRef={undefined}
         position={{ x: 0, y: 0 }}
         items={items}

@@ -81,6 +81,7 @@ export const ContextMenuExampleSide = () => {
     <StoryBookExample className={cnDocsDecorator('Section', [cnContextMenuExampleSide()])}>
       <Button iconLeft={IconAdd} ref={ref} />
       <ContextMenu
+        isOpen
         items={items}
         getLabel={getLabel}
         anchorRef={ref}

@@ -1,8 +1,10 @@
 import './ContextMenuLevel.css';
 
 import React, { createRef, useEffect, useMemo, useState } from 'react';
+import { CSSTransition } from 'react-transition-group';
 
 import { cn } from '../../../utils/bem';
+import { cnForCssTransition } from '../../../utils/cnForCssTransition';
 import { Popover } from '../../Popover/Popover';
 import { ContextMenuDivider } from '../ContextMenuDivider/ContextMenuDivider';
 import { ContextMenuGroupHeader } from '../ContextMenuGroupHeader/ContextMenuGroupHeader';
@@ -15,6 +17,7 @@ import {
 } from '../helpers';
 
 export const cnContextMenuLevel = cn('ContextMenuLevel');
+const cnContextMenuLevelCssTransition = cnForCssTransition(cnContextMenuLevel);
 
 function renderHeader(
   groupLabel: string | number | undefined,
@@ -68,6 +71,7 @@ export const ContextMenuLevel: ContextMenuLevelType = React.forwardRef(
       getGroupLabel,
 
       // props относящиеся к поповеру
+      isOpen,
       direction,
       possibleDirections,
       offset,
@@ -112,70 +116,79 @@ export const ContextMenuLevel: ContextMenuLevelType = React.forwardRef(
     }, [hovered, hoveredParenLevel]);
 
     return (
-      <Popover
-        {...otherProps}
-        anchorRef={anchorRef}
-        className={cnContextMenuLevel({ firstLevel: level === 0, direction }, [className])}
-        possibleDirections={possibleDirections}
-        spareDirection={spareDirection}
-        direction={direction}
-        offset={offset}
-        onSetDirection={onSetDirection}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        ref={ref}
+      <CSSTransition
+        in={isOpen}
+        unmountOnExit
+        appear
+        classNames={cnContextMenuLevelCssTransition}
+        timeout={200}
       >
-        {groups.map((group, groupIndex) => {
-          const groupId = group.id;
-          const groupLabel =
-            typeof getGroupLabel === 'function' ? getGroupLabel(groupId) : undefined;
-          return (
-            <div className={cnContextMenuLevel('Group')} key={groupId}>
-              {renderHeader(groupLabel, groupIndex === 0, groups.length, size)}
-              {group.items.map((item, index) => {
-                const itemIndex = getItemIndex(group.id, index);
-                const ref = itemsRefs[itemIndex];
-                const disabled = typeof getDisabled === 'function' ? getDisabled(item) : false;
-                const label = getLabel(item);
-                const leftSide =
-                  typeof getLeftSideBar === 'function' ? getLeftSideBar(item) : undefined;
-                const rightSide =
-                  typeof getRightSideBar === 'function' ? getRightSideBar(item) : undefined;
-                const subItems = typeof getSubItems === 'function' ? getSubItems(item) : undefined;
-                const onClick =
-                  !disabled && typeof getOnClick === 'function' ? getOnClick(item) : undefined;
-                const onMouseEnter =
-                  subItems && !disabled
-                    ? () => {
-                        addLevel(level + 1, subItems, ref, itemIndex);
-                        setHoveredParenLevel(level + 1);
-                      }
-                    : () => {
-                        setHoveredParenLevel(level);
-                      };
-                const accent = typeof getAccent === 'function' ? getAccent(item) : undefined;
+        <Popover
+          {...otherProps}
+          anchorRef={anchorRef}
+          className={cnContextMenuLevel({ firstLevel: level === 0, direction }, [className])}
+          possibleDirections={possibleDirections}
+          spareDirection={spareDirection}
+          direction={direction}
+          offset={offset}
+          onSetDirection={onSetDirection}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          ref={ref}
+        >
+          {groups.map((group, groupIndex) => {
+            const groupId = group.id;
+            const groupLabel =
+              typeof getGroupLabel === 'function' ? getGroupLabel(groupId) : undefined;
+            return (
+              <div className={cnContextMenuLevel('Group')} key={groupId}>
+                {renderHeader(groupLabel, groupIndex === 0, groups.length, size)}
+                {group.items.map((item, index) => {
+                  const itemIndex = getItemIndex(group.id, index);
+                  const ref = itemsRefs[itemIndex];
+                  const disabled = typeof getDisabled === 'function' ? getDisabled(item) : false;
+                  const label = getLabel(item);
+                  const leftSide =
+                    typeof getLeftSideBar === 'function' ? getLeftSideBar(item) : undefined;
+                  const rightSide =
+                    typeof getRightSideBar === 'function' ? getRightSideBar(item) : undefined;
+                  const subItems =
+                    typeof getSubItems === 'function' ? getSubItems(item) : undefined;
+                  const onClick =
+                    !disabled && typeof getOnClick === 'function' ? getOnClick(item) : undefined;
+                  const onMouseEnter =
+                    subItems && !disabled
+                      ? () => {
+                          addLevel(level + 1, subItems, ref, itemIndex);
+                          setHoveredParenLevel(level + 1);
+                        }
+                      : () => {
+                          setHoveredParenLevel(level);
+                        };
+                  const accent = typeof getAccent === 'function' ? getAccent(item) : undefined;
 
-                return (
-                  <ContextMenuItem
-                    ref={ref}
-                    label={label}
-                    leftSide={leftSide}
-                    rightSide={rightSide}
-                    size={size}
-                    key={itemIndex}
-                    onMouseEnter={onMouseEnter}
-                    onClick={onClick}
-                    active={activeItem === itemIndex}
-                    withSubMenu={Boolean(subItems)}
-                    accent={accent}
-                    disabled={disabled}
-                  />
-                );
-              })}
-            </div>
-          );
-        })}
-      </Popover>
+                  return (
+                    <ContextMenuItem
+                      ref={ref}
+                      label={label}
+                      leftSide={leftSide}
+                      rightSide={rightSide}
+                      size={size}
+                      key={itemIndex}
+                      onMouseEnter={onMouseEnter}
+                      onClick={onClick}
+                      active={activeItem === itemIndex}
+                      withSubMenu={Boolean(subItems)}
+                      accent={accent}
+                      disabled={disabled}
+                    />
+                  );
+                })}
+              </div>
+            );
+          })}
+        </Popover>
+      </CSSTransition>
     );
   },
 );

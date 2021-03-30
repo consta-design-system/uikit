@@ -41,6 +41,7 @@ export const ContextMenuExampleSimple = () => {
     <>
       <Button iconLeft={IconAdd} ref={ref} />
       <ContextMenu
+        isOpen
         items={items}
         getLabel={(item) => item}
         anchorRef={ref}
@@ -143,6 +144,7 @@ export const ContextMenuExampleSide = () => {
     <>
       <Button iconLeft={IconAdd} ref={ref} />
       <ContextMenu
+        isOpen
         items={items}
         getLabel={getLabel}
         anchorRef={ref}
@@ -216,6 +218,7 @@ export const ContextMenuExampleGroups = () => {
     <StoryBookExample className={cnDocsDecorator('Section', [cnContextMenuExampleGroups()])}>
       <Button iconLeft={IconAdd} ref={ref} />
       <ContextMenu
+        isOpen
         items={items}
         getLabel={(item) => item.name}
         getGroupId={(item) => item.group}
@@ -296,6 +299,7 @@ export const ContextMenuExampleSubMenu = () => {
     <StoryBookExample className={cnDocsDecorator('Section', [cnContextMenuExampleSubMenu()])}>
       <Button iconLeft={IconAdd} ref={ref1} />
       <ContextMenu
+        isOpen
         items={items}
         getLabel={(item) => item.name}
         anchorRef={ref1}
@@ -305,6 +309,7 @@ export const ContextMenuExampleSubMenu = () => {
       />
       <Button iconLeft={IconAdd} ref={ref2} />
       <ContextMenu
+        isOpen
         items={items}
         getLabel={(item) => item.name}
         anchorRef={ref2}
@@ -332,15 +337,14 @@ export const ContextMenuExampleOutsideClick = () => {
   return (
     <>
       <Button iconLeft={IconAdd} ref={ref} onClick={() => setIsOpen(!isOpen)} />
-      {isOpen && (
-        <ContextMenu
-          items={items}
-          getLabel={(item) => item}
-          anchorRef={ref}
-          direction="downStartLeft"
-          onClickOutside={() => setIsOpen(false)}
-        />
-      )}
+      <ContextMenu
+        isOpen
+        items={items}
+        getLabel={(item) => item}
+        anchorRef={ref}
+        direction="downStartLeft"
+        onClickOutside={() => setIsOpen(false)}
+      />
     </>
   );
 };
