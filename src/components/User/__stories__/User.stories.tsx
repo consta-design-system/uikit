@@ -20,10 +20,7 @@ const defaultKnobs = () => ({
   width: select('width', userPropWidth, userPropWidthDefault),
   size: select('size', userPropSize, userPropSizeDefault),
   status: select('status', ['', ...userPropStatus], ''),
-  avatarUrl: text(
-    'avatarUrl',
-    `https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png`,
-  ),
+  avatarUrl: text('avatarUrl', ``),
   name: text('Name', `Имя Фамилия`),
   info: text('Info', `Сегодня на Почтамской`),
   withArrow: boolean('withArrow', false),
@@ -65,6 +62,10 @@ export default createMetadata({
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=58%3A39679',
     },
   },
 });
