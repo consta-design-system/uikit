@@ -23,7 +23,6 @@ const GetThemeTogglerExampleQuantity = (items: ThemeType[]): JSX.Element => {
   return (
     <Theme preset={value.theme} className={cnThemeTogglerExample('', [cnDocsDecorator('Section')])}>
       <ThemeToggler
-        size="l"
         items={items}
         value={value}
         onChange={({ value }) => setValue(value)}
