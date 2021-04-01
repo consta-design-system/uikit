@@ -38,7 +38,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Header',
+  title: 'Компоненты|/Служебные/Header',
   id: 'components/Header',
   parameters: {
     docs: {

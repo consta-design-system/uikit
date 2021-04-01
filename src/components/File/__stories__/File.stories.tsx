@@ -38,7 +38,7 @@ export function Playground() {
 export const Gallery = FileIconsGallery;
 
 export default createMetadata({
-  title: 'Компоненты|/File',
+  title: 'Компоненты|/Графика/File',
   id: 'components/File',
   parameters: {
     docs: {

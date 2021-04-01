@@ -70,7 +70,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Pagination',
+  title: 'Компоненты|/Навигация/Pagination',
   id: 'components/Pagination',
   parameters: {
     docs: {

@@ -83,7 +83,7 @@ export function Playground(props: {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Modal',
+  title: 'Компоненты|/Наложение/Modal',
   id: 'components/Modal',
   parameters: {
     docs: {

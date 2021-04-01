@@ -105,7 +105,7 @@ export const WithGroupsStory = createStory(
 );
 
 export default createMetadata({
-  title: 'Компоненты|/MultiCombobox',
+  title: 'Компоненты|/Базовые/MultiCombobox',
   id: 'components/MultiCombobox',
   parameters: {
     docs: {

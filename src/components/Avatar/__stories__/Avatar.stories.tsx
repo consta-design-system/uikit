@@ -33,7 +33,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Avatar',
+  title: 'Компоненты|/Графика/Avatar',
   id: 'components/Avatar',
   parameters: {
     docs: {

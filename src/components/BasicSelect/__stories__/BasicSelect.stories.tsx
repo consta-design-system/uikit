@@ -99,7 +99,7 @@ export const WithValueStory = createStory(() => <Default value={items[4]} />, {
 });
 
 export default createMetadata({
-  title: 'Компоненты|/BasicSelect',
+  title: 'Компоненты|/Базовые/BasicSelect',
   id: 'components/BasicSelect',
   parameters: {
     docs: {

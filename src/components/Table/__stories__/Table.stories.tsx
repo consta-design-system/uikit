@@ -340,7 +340,7 @@ export const withCustomFilters = createStory(
 );
 
 export default createMetadata({
-  title: 'Компоненты|/Table',
+  title: 'Компоненты|/Отображение данных/Table',
   id: 'components/Table',
   parameters: {
     docs: {

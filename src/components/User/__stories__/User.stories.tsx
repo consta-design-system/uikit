@@ -60,7 +60,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/User',
+  title: 'Компоненты|/Отображение данных/User',
   id: 'components/User',
   parameters: {
     docs: {
