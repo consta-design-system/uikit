@@ -85,6 +85,7 @@ import { IconLaptop } from '../../IconLaptop/IconLaptop';
 import { IconLayers } from '../../IconLayers/IconLayers';
 import { IconLeaf } from '../../IconLeaf/IconLeaf';
 import { IconLightningBolt } from '../../IconLightningBolt/IconLightningBolt';
+import { IconLineAndBarChart } from '../../IconLineAndBarChart/IconLineAndBarChart';
 import { IconLink } from '../../IconLink/IconLink';
 import { IconList } from '../../IconList/IconList';
 import { IconListNumbered } from '../../IconListNumbered/IconListNumbered';
@@ -350,6 +351,7 @@ const icons = {
   IconWatch,
   IconWideScreen,
   IconWorld,
+  IconLineAndBarChart,
 } as const;
 
 type Name = keyof typeof icons;
