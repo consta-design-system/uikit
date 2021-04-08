@@ -1,9 +1,16 @@
 import { FileFieldExampleRenderProp } from './examples/FileFieldExampleRenderProp/FileFieldExampleRenderProp';
-import { FileFieldExampleWithoutRenderProp } from './examples/FileFieldExampleWithoutRenderProp/FileFieldExampleWithoutRenderProp';
+import {
+  FileFieldExampleWithoutRenderProp,
+  FileFieldExampleWithoutRenderPropIcon,
+} from './examples/FileFieldExampleWithoutRenderProp/FileFieldExampleWithoutRenderProp';
 
 # FileField
 
-Компонент для выбора файлов. Пользователь может выбрать файлы на своем компьютере, чтобы куда-то загрузить или отправить.
+Компонент для выбора файлов. С его помощью пользователь может выбрать файлы на своем компьютере, чтобы куда-то загрузить или отправить.
+
+Это компонент-обёртка: сам по себе он не существует, его можно использовать вместе с любым другим компонентом.
+
+Добавьте кнопку, иконку, текст, изображение или другой компонент в контейнер `<FileField></FileField>`. Нажмите на этот компонент — откроется выбор файлов.
 
 - [Пример с renderProp](#пример-с-renderprop)
 - [Пример без renderProp](#пример-без-renderprop)
@@ -11,6 +18,8 @@ import { FileFieldExampleWithoutRenderProp } from './examples/FileFieldExampleWi
 - [Пример использования](#пример)
 
 ## Пример с renderProp
+
+Нажмите на кнопку, чтобы открыть выбор файлов.
 
 <FileFieldExampleRenderProp />
 
@@ -26,17 +35,23 @@ const App = () => {
 
 ## Пример без renderProp
 
+Нажмите на текст `Нажми меня` или на иконку `+`, чтобы открыть выбор файлов.
+
 <FileFieldExampleWithoutRenderProp />
+<FileFieldExampleWithoutRenderPropIcon />
 
 ```ts
 import React from 'react';
 import { FileField, FileFieldProps } from '@consta/uikit/FileField';
-import { Button } from '@consta/uikit/Button';
+import { Text } from '@consta/uikit/Text';
 
 const App = () => {
   return (
-    <FileField>
-      <Text>Нажми на меня</Text>
+    <FileField id="FileFieldWithText">
+      <Text>Нажми меня</Text>
+    </FileField>
+    <FileField id="FileFieldWithIcon">
+      <IconAdd view="alert" />
     </FileField>
   );
 };
@@ -44,12 +59,11 @@ const App = () => {
 
 ## Свойства
 
-| Свойство    | Тип                                          | По умолчанию | Описание                        |
-| ----------- | -------------------------------------------- | ------------ | ------------------------------- |
-| `id`        | `string`                                     | -            | Идентификатор                   |
-| `onChange?` | `(e: DragEvent, React.ChangeEvent) => void;` | -            | Действие при выборе файла       |
-| `inputRef?` | `React.Ref<HTMLInputElement>;`               | -            | Ссылка на DOM елемент `<input>` |
-|             | и все атрибуты input                         |              |                                 |
+| Свойство    | Тип                                         | По умолчанию | Описание                                           |
+| ----------- | ------------------------------------------- | ------------ | -------------------------------------------------- |
+| `id`        | `string`                                    | -            | Идентификатор компонента                           |
+| `onChange?` | `(e: DragEvent, React.ChangeEvent) => void` | -            | Действие при выборе файла                          |
+| `inputRef?` | `React.Ref<HTMLInputElement>`               | -            | Ссылка на DOM-элемент `<input>` и все его атрибуты |
 
 ## Пример
 
