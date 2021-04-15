@@ -52,8 +52,6 @@ export const ProgressSpin = React.forwardRef<SVGSVGElement, ProgressSpinProps>((
   const animatedProgress = isNumber(progress) ? progress : 50;
   const strokeDashoffset = strokeDasharray - (strokeDasharray * animatedProgress) / 100;
 
-  console.log(progress);
-
   return (
     <svg
       {...otherProps}
@@ -64,7 +62,7 @@ export const ProgressSpin = React.forwardRef<SVGSVGElement, ProgressSpinProps>((
       ref={ref}
     >
       <circle
-        className={cnProgressSpin('Circle', { animation: !!animation })}
+        className={cnProgressSpin('Circle', { animation })}
         cx={sizeOfPixels / 2}
         cy={sizeOfPixels / 2}
         r={radius}
