@@ -40,9 +40,6 @@ describe('Компонент ThemeToggler', () => {
   it('должен рендериться без ошибок c тремя темами', () => {
     expect(() => renderComponent({ items: exampleThemesThree })).not.toThrow();
   });
-  it('должен рендериться c ошибкой c одной темой', () => {
-    expect(() => renderComponent({ items: [exampleThemesThree[0]] })).toThrow();
-  });
   describe('проверка className', () => {
     it(`Дополнительный className присваевается`, () => {
       const className = 'className';

@@ -108,6 +108,10 @@ export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef)
     return getChecked(item) && <IconCheck size={iconSize} />;
   };
 
+  if (items.length <= 1) {
+    return null;
+  }
+
   return (
     <>
       <Button
