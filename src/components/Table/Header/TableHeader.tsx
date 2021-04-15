@@ -90,7 +90,7 @@ export const TableHeader = <T extends TableRow>({
   };
 
   const getFilterPopover = (column: Header<T> & ColumnMetaData): React.ReactNode => {
-    if (!filters) {
+    if (!filters || !column.accessor) {
       return null;
     }
     const curFilter = filters.find(({ field }) => field === column.accessor);
@@ -100,7 +100,7 @@ export const TableHeader = <T extends TableRow>({
     const filterId = curFilter?.id;
     const handleFilterSave = (filterValue: any) => {
       if (filterId) {
-        handleTooltipSave(column.accessor, [filterId], filterValue);
+        handleTooltipSave(column.accessor!, [filterId], filterValue);
       }
       onToggle();
     };
@@ -172,7 +172,8 @@ export const TableHeader = <T extends TableRow>({
               })}
               showVerticalShadow={
                 showVerticalCellShadow &&
-                column?.position!.gridIndex + (column?.position!.colSpan || 1) === stickyColumnsGrid
+                column?.position!.gridIndex! + (column?.position!.colSpan || 1) ===
+                  stickyColumnsGrid
               }
             >
               {column.title}
