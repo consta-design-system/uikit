@@ -53,7 +53,9 @@ const TooltipPositionedByCoordsStoryContent = () => {
 
 export const TooltipPositionedByCoordsStory = createStory(
   () => <TooltipPositionedByCoordsStoryContent />,
-  { name: 'с позиционированием по координатам' },
+  {
+    name: 'с позиционированием по координатам',
+  },
 );
 
 export const TooltipPositionedByAnchorStory = createStory(
@@ -101,7 +103,9 @@ export const TooltipPositionedByAnchorStory = createStory(
       </>
     );
   },
-  { name: 'с позиционированием по якорю' },
+  {
+    name: 'с позиционированием по якорю',
+  },
 );
 
 export default createMetadata({
@@ -110,6 +114,10 @@ export default createMetadata({
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=58%3A17463',
     },
   },
 });

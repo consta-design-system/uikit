@@ -14,7 +14,7 @@ import {
 import mdx from './Avatar.mdx';
 
 const defaultKnobs = () => ({
-  url: text('url', 'https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png'),
+  url: text('url', ''),
   name: text('name', 'Вадим Матвеев'),
   size: select('size', avatarPropSize, avatarPropSizeDefault),
   form: select('form', avatarPropForm, avatarPropFormDefault),
@@ -38,6 +38,10 @@ export default createMetadata({
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=56%3A30966',
     },
   },
 });

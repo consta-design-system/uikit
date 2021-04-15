@@ -69,11 +69,7 @@ const Default = (props: {
   );
 };
 
-export const DefaultStory = createStory(() => <Default />);
-
-export const WithValueStory = createStory(() => <Default value={simpleItems[4]} />, {
-  name: 'c заданным значением',
-});
+export const Playground = createStory(() => <Default />);
 
 export const WithGroupsStory = createStory(
   () => {
@@ -110,6 +106,10 @@ export default createMetadata({
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=11065%3A140493',
     },
   },
 });
