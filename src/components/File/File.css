@@ -11,10 +11,6 @@
     background-color: var(--color-control-bg-ghost);
     border-radius: 50%;
 
-    &_spin {
-      animation: File-Loader-Animate 1.2s linear infinite;
-    }
-
     &_size {
       &_s {
         --loader-size: 16px;
@@ -29,15 +25,5 @@
   &-Progress {
     display: block;
     color: #575b5e;
-  }
-}
-
-@keyframes File-Loader-Animate {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
   }
 }

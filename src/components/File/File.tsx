@@ -87,16 +87,14 @@ export const File: React.FC<FileProps> = (props) => {
   } = props;
 
   if (loading) {
-    const spin = !loadingProgress;
-
     return (
       <FileIconLoading className={cnFile(null, [className])} size={size} {...otherProps}>
         {loadingWithProgressSpin && (
-          <div className={cnFile('Loader', { spin, size })}>
+          <div className={cnFile('Loader', { size })}>
             <ProgressSpin
               className={cnFile('Progress')}
               size={size}
-              progress={spin ? 50 : loadingProgress}
+              progress={loadingProgress}
               animation
             />
           </div>
