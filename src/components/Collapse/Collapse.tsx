@@ -9,15 +9,22 @@ import { getSizeByMap } from '../../utils/getSizeByMap';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { Text } from '../Text/Text';
 
-export const collapsePropSize = ['l', 'm', 's', 'xs', '2xs'] as const;
+import {
+  CollapseIcon,
+  CollapseIconPropDirection,
+  collapseIconPropDirection,
+} from './CollapseIcon/CollapseIcon';
+
+export const collapsePropSize = ['m', 'l', 's', 'xs', '2xs'] as const;
 export type CollapsePropSize = typeof collapsePropSize[number];
-export const collapsePropSizeDefault: CollapsePropSize = collapsePropSize[0];
+export const collapsePropSizeDefault = collapsePropSize[0];
 
 export const collapsePropView = ['primary', 'secondary'] as const;
 export type CollapsePropView = typeof collapsePropView[number];
-export const collapsePropViewDefault: CollapsePropView = collapsePropView[0];
+export const collapsePropViewDefault = collapsePropView[0];
 
-export const collapsePropPadding = [
+export const collapsePropHorizontalSpace = [
+  '3xs',
   '6xl',
   '5xl',
   '4xl',
@@ -29,41 +36,57 @@ export const collapsePropPadding = [
   's',
   'xs',
   '2xs',
-  '3xs',
 ] as const;
-export type CollapsePropPadding = typeof collapsePropPadding[number];
-export const collapsePropPaddingDefault: CollapsePropPadding = collapsePropPadding[11];
+export type CollapsePropHorizontalSpace = typeof collapsePropHorizontalSpace[number];
 
-type Props = PropsWithHTMLAttributesAndRef<
+export const collapsePropIconPosition = ['left', 'right'] as const;
+export type CollapsePropIconPosition = typeof collapsePropIconPosition[number];
+export const collapsePropIconPositionDefault = collapsePropIconPosition[0];
+
+export const collapsePropDirectionIcon = collapseIconPropDirection;
+export const collapsePropDirectionIconDefault = collapsePropDirectionIcon[0];
+export const collapsePropCloseDirectionIconDefault = collapsePropDirectionIcon[2];
+
+type CollapseProps = PropsWithHTMLAttributesAndRef<
   {
     size?: CollapsePropSize;
     icon?: React.FC<IconProps>;
     view?: CollapsePropView;
-    closeIcon?: React.FC<IconProps>;
-    withDivider?: boolean;
+    divider?: boolean;
     label: string;
-    children: React.ReactNode;
-    horizontalPadding?: CollapsePropPadding;
-    withHoverEffect?: boolean;
+    horizontalSpace?: CollapsePropHorizontalSpace;
+    hoverEffect?: boolean;
     isOpen?: boolean;
   } & (
     | {
-        iconPosition?: 'left';
-        rightSide?: React.ReactNode | React.ReactNode[];
+        closeIcon?: React.FC<IconProps>;
+        directionIcon?: never;
+        closeDirectionIcon?: never;
       }
     | {
-        iconPosition?: 'right';
-        rightSide?: never;
+        closeIcon?: never;
+        directionIcon?: CollapseIconPropDirection;
+        closeDirectionIcon?: CollapseIconPropDirection;
       }
-  ),
-  HTMLElement
+  ) &
+    (
+      | {
+          iconPosition?: 'left';
+          rightSide?: React.ReactNode;
+        }
+      | {
+          iconPosition?: 'right';
+          rightSide?: never;
+        }
+    ),
+  HTMLDivElement
 >;
 
-type Collapse = (props: Props) => React.ReactElement | null;
+type Collapse = (props: CollapseProps) => React.ReactElement | null;
 
 export const cnCollapse = cn('Collapse');
 
-const sizeMap: Record<CollapsePropSize, IconPropSize> = {
+export const sizeIconMap: Record<CollapsePropSize, IconPropSize> = {
   '2xs': 'xs',
   'xs': 'xs',
   's': 'xs',
@@ -71,66 +94,68 @@ const sizeMap: Record<CollapsePropSize, IconPropSize> = {
   'l': 's',
 };
 
-export const Collapse: Collapse = (props) => {
+function renderSide(side: React.ReactNode): React.ReactNode {
+  const sides = side ? [...(Array.isArray(side) ? side : [side])] : [];
+
+  return sides.map((item, index) => (
+    <div className={cnCollapse('Side')} key={index}>
+      {item}
+    </div>
+  ));
+}
+
+export const Collapse: Collapse = React.forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   const {
     label,
-    size = 'm',
-    view = 'primary',
+    size = collapsePropSizeDefault,
+    view = collapsePropViewDefault,
     className,
     isOpen,
     children,
-    withHoverEffect,
-    withDivider,
-    icon,
+    hoverEffect,
+    divider,
+    icon = IconArrowDown,
     closeIcon,
     rightSide,
-    horizontalPadding = '3xs',
-    iconPosition = 'left',
-    onClick,
+    horizontalSpace,
+    iconPosition = collapsePropIconPositionDefault,
+    directionIcon = collapsePropDirectionIconDefault,
+    closeDirectionIcon = collapsePropCloseDirectionIconDefault,
+    style,
     ...otherProps
   } = props;
 
-  const getIcon = () => {
-    const iconSize = getSizeByMap(sizeMap, size);
-    if (!closeIcon || !isOpen) {
-      const Icon = icon;
-      return Icon ? (
-        <Icon
-          className={cnCollapse('Icon', { isOpen, hasCloseIcon: !!closeIcon })}
-          size={iconSize}
-        />
-      ) : (
-        <IconArrowDown
-          className={cnCollapse('Icon', { isOpen, hasCloseIcon: !!closeIcon })}
-          size={iconSize}
-        />
-      );
-    }
-    const CloseIcon = closeIcon;
-    return <CloseIcon className={cnCollapse('Icon')} size={iconSize} />;
-  };
-
   return (
-    <span {...otherProps} className={cnCollapse({ size, view, isOpen }, [className])}>
-      {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus */}
+    <div
+      ref={ref}
+      className={cnCollapse({ size, view, horizontalSpace }, [className])}
+      style={style}
+    >
       <div
         className={cnCollapse('Label', {
-          withHoverEffect,
-          withDivider,
-          horizontalPadding,
-          iconPosition: iconPosition === 'right' ? 'right' : 'left',
+          hoverEffect,
+          divider,
+          iconPosition,
         })}
-        role="button"
-        onKeyDown={() => onClick}
-        onClick={onClick}
+        {...otherProps}
       >
-        {getIcon()}
-        <Text view={view} size={size}>
+        <CollapseIcon
+          className={cnCollapse('Icon', { position: iconPosition })}
+          size={getSizeByMap(sizeIconMap, size)}
+          icon={icon}
+          closeIcon={closeIcon}
+          isOpen={isOpen}
+          direction={directionIcon}
+          closeDirection={closeDirectionIcon}
+        />
+        <Text className={cnCollapse('LabelText')} view={view} size={size}>
           {label}
         </Text>
-        {iconPosition === 'left' && <div className={cnCollapse('rightSide')}>{rightSide}</div>}
+        {iconPosition === 'left' && renderSide(rightSide)}
       </div>
-      <div className={cnCollapse('Body')}>{children}</div>
-    </span>
+      <div className={cnCollapse('Body', { isOpen })}>
+        <div className={cnCollapse('Content')}>{children}</div>
+      </div>
+    </div>
   );
-};
+});

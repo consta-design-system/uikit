@@ -1,5 +1,15 @@
 import { CollapseExampleView } from './examples/CollapseExampleView/CollapseExampleView';
 import { CollapseExampleSize } from './examples/CollapseExampleSize/CollapseExampleSize';
+import { CollapseExampleIconPosition } from './examples/CollapseExampleIconPosition/CollapseExampleIconPosition';
+import { CollapseExampleIconDivider } from './examples/CollapseExampleIconDivider/CollapseExampleIconDivider';
+import {
+  CollapseExampleIconRightSideBadge,
+  CollapseExampleIconRightSideButton,
+} from './examples/CollapseExampleIconRightSide/CollapseExampleIconRightSide';
+import {
+  CollapseExampleIconCustomIconDirection,
+  CollapseExampleIconCustomIcon,
+} from './examples/CollapseExampleIconCustomIcon/CollapseExampleIconCustomIcon';
 
 # Collapse
 
@@ -11,24 +21,44 @@ import { CollapseExampleSize } from './examples/CollapseExampleSize/CollapseExam
 
 <CollapseExampleSize />
 
+## Позиция иконки
+
+<CollapseExampleIconPosition />
+
+## Divider
+
+<CollapseExampleIconDivider />
+
+## CustomIcon
+
+<CollapseExampleIconCustomIconDirection />
+<CollapseExampleIconCustomIcon />
+
+## RightSide
+
+<CollapseExampleIconRightSideBadge />
+<CollapseExampleIconRightSideButton />
+
 ## Свойства
 
-| Свойство             | Тип                                                                          | По умолчанию    | Описание                                                                    |
-| -------------------- | ---------------------------------------------------------------------------- | --------------- | --------------------------------------------------------------------------- |
-| `label`              | `string`                                                                     | -               | Заголовок коллапса                                                          |
-| `size?`              | `'l', 'm', 's', 'xs', '2xs'`                                                 | `'m'`           | Размер                                                                      |
-| `view?`              | `'primary', 'secondary'`                                                     | `'primary'`     | Внешний вид                                                                 |
-| `withHoverEffect?`   | `boolean`                                                                    | -               | Добавляет эффект при ховере коллапса                                        |
-| `withDivider?`       | `boolean`                                                                    | -               | Добавляет разделитель между заголовком коллапса и содержимым                |
-| `horizontalPadding?` | `'6xl', '5xl', '4xl', '3xl', '2xl', 'xl', 'l', 'm', 's', 'xs', '2xs', '3xs'` | `'3xs'`         | Горизонтальные отступы в заголовке коллапса                                 |
-| `children`           | `React.ReactNode`                                                            | -               | Содержимое коллапса                                                         |
-| `icon?`              | `React.FC<IconProps>`                                                        | Стрелочка вниз  | Иконка в закрытом состоянии коллапса                                        |
-| `closeIcon?`         | `React.FC<IconProps>`                                                        | Стрелочка вверх | Иконка в открытом состоянии коллапса                                        |
-| `iconPosition?`      | `'left', 'right'`                                                            | `'left'`        | Расположение иконки                                                         |
-| `rightSide?`         | `React.ReactNode OR React.ReactNode[]`                                       | -               | Дополнительный контент, который можно поместить рядом с заголовком коллапса |
-| `isOpen?`            | `boolean`                                                                    | -               | Состояние коллапса (открыт/закрыт)                                          |
-| `onClick?`           | `() => void`                                                                 | -               | Действие при клике на коллапс                                               |
-| `className?`         | `string`                                                                     | -               | Дополнительный CSS-класс                                                    |
+| Свойство              | Тип                                                                          | По умолчанию          | Описание                                                                    |
+| --------------------- | ---------------------------------------------------------------------------- | --------------------- | --------------------------------------------------------------------------- |
+| `label`               | `string`                                                                     | -                     | Заголовок коллапса                                                          |
+| `size?`               | `'l', 'm', 's', 'xs', '2xs'`                                                 | `'m'`                 | Размер                                                                      |
+| `view?`               | `'primary', 'secondary'`                                                     | `'primary'`           | Внешний вид                                                                 |
+| `hoverEffect?`        | `boolean`                                                                    | -                     | Добавляет эффект при ховере коллапса                                        |
+| `divider?`            | `boolean`                                                                    | -                     | Добавляет разделитель между заголовком коллапса и содержимым                |
+| `horizontalSpace?`    | `'6xl', '5xl', '4xl', '3xl', '2xl', 'xl', 'l', 'm', 's', 'xs', '2xs', '3xs'` | -                     | Горизонтальные отступы в заголовке коллапса                                 |
+| `children`            | `React.ReactNode`                                                            | -                     | Содержимое коллапса                                                         |
+| `icon?`               | `React.FC<IconProps>`                                                        | `React.FC<IconProps>` | Иконка в закрытом состоянии                                                 |
+| `closeIcon?`          | `React.FC<IconProps>`                                                        | -                     | Иконка в открытом состоянии                                                 |
+| `iconPosition?`       | `'left', 'right'`                                                            | `'left'`              | Расположение иконки                                                         |
+| `directionIcon?`      | `'up','right','down','left','upRight','downRight','upLeft','downLeft',`      | `'up'`                | Направление иконки в закрытом состоянии                                     |
+| `closeDirectionIcon?` | `'up','right','down','left','upRight','downRight','upLeft','downLeft',`      | `'up'`                | Направление иконки в открытом состоянии                                     |
+| `rightSide?`          | `React.ReactNode`                                                            | -                     | Дополнительный контент, который можно поместить рядом с заголовком коллапса |
+| `isOpen?`             | `boolean`                                                                    | -                     | Состояние коллапса (открыт/закрыт)                                          |
+| `onClick?`            | `React.EventHandler<React.MouseEvent>`                                       | -                     | Действие при клике на коллапс                                               |
+| `className?`          | `string`                                                                     | -                     | Дополнительный CSS-класс                                                    |
 
 ## Пример
 

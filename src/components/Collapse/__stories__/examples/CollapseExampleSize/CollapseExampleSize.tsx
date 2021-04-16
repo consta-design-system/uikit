@@ -1,13 +1,8 @@
-import './CollapseExampleSize.css';
-
 import React, { useState } from 'react';
-import { cn } from '@bem-react/classname';
 
+import { content } from '../../../__mocks__/mock.data';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Collapse } from '../../../Collapse';
-
-const cnExample = cn('CollapseExampleSize');
 
 export const CollapseExampleSize = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -17,14 +12,14 @@ export const CollapseExampleSize = () => {
   const [isOpenFive, setOpenFive] = useState<boolean>(false);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section', [cnExample()])}>
+    <div className={cnDocsDecorator('Section')}>
       <Collapse
         label="Самый большой коллапс"
         size="l"
         isOpen={isOpen}
         onClick={() => setOpen(!isOpen)}
       >
-        Это я!
+        {content}
       </Collapse>
       <Collapse
         label="Большой коллапс"
@@ -32,7 +27,7 @@ export const CollapseExampleSize = () => {
         isOpen={isOpenTwo}
         onClick={() => setOpenTwo(!isOpenTwo)}
       >
-        Это я!
+        {content}
       </Collapse>
       <Collapse
         label="Средний коллапс"
@@ -40,7 +35,7 @@ export const CollapseExampleSize = () => {
         isOpen={isOpenThree}
         onClick={() => setOpenThree(!isOpenThree)}
       >
-        Это я!
+        {content}
       </Collapse>
       <Collapse
         label="Маленький коллапс"
@@ -48,7 +43,7 @@ export const CollapseExampleSize = () => {
         isOpen={isOpenFour}
         onClick={() => setOpenFour(!isOpenFour)}
       >
-        Это я!
+        {content}
       </Collapse>
       <Collapse
         label="Самый маленький коллапс"
@@ -56,8 +51,8 @@ export const CollapseExampleSize = () => {
         isOpen={isOpenFive}
         onClick={() => setOpenFive(!isOpenFive)}
       >
-        Это я!
+        {content}
       </Collapse>
-    </StoryBookExample>
+    </div>
   );
 };

@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
-import { IconArrowLeft } from '../../../icons/IconArrowLeft/IconArrowLeft';
-import { IconArrowRight } from '../../../icons/IconArrowRight/IconArrowRight';
+import { IconAdd } from '../../../icons/IconAdd/IconAdd';
+import { IconRemove } from '../../../icons/IconRemove/IconRemove';
+import { IconSun } from '../../../icons/IconSun/IconSun';
+import { getSizeByMap } from '../../../utils/getSizeByMap';
 import { createMetadata } from '../../../utils/storybook';
 import { Badge } from '../../Badge/Badge';
 import {
   Collapse,
-  collapsePropPadding,
-  collapsePropPaddingDefault,
+  collapsePropCloseDirectionIconDefault,
+  collapsePropDirectionIcon,
+  collapsePropDirectionIconDefault,
+  collapsePropHorizontalSpace,
   collapsePropSize,
   collapsePropSizeDefault,
   collapsePropView,
   collapsePropViewDefault,
+  sizeIconMap,
 } from '../Collapse';
 
 import mdx from './Collapse.mdx';
@@ -20,65 +25,74 @@ import mdx from './Collapse.mdx';
 const defaultKnobs = () => ({
   size: select('size', collapsePropSize, collapsePropSizeDefault),
   label: text('label', 'Заголовок'),
+  children: text(
+    'children',
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+  ),
   iconPosition: select('iconPosition', ['left', 'right'], 'left'),
-  withHoverEffect: boolean('withHoverEffect', false),
-  withCustomIcon: boolean('withCustomIcon', false),
+  hoverEffect: boolean('hoverEffect', false),
   view: select('view', collapsePropView, collapsePropViewDefault),
-  withDivider: boolean('withDivider', false),
-  horizontalPadding: select('horizontalPadding', collapsePropPadding, collapsePropPaddingDefault),
+  divider: boolean('divider', false),
+  horizontalSpace: select(
+    'horizontalSpace',
+    collapsePropHorizontalSpace,
+    collapsePropHorizontalSpace[0],
+  ),
   rightSide: boolean('rightSide', false),
+  directionIcon: select(
+    'directionIcon',
+    collapsePropDirectionIcon,
+    collapsePropDirectionIconDefault,
+  ),
+  closeDirectionIcon: select(
+    'closeDirectionIcon',
+    collapsePropDirectionIcon,
+    collapsePropCloseDirectionIconDefault,
+  ),
+  withCustomIcon: boolean('withCustomIcon', false),
 });
 
 export function Playground() {
   const {
     size,
     label,
-    withHoverEffect,
+    hoverEffect,
     iconPosition,
     withCustomIcon,
     view,
-    withDivider,
-    horizontalPadding,
+    divider,
+    horizontalSpace,
     rightSide,
+    directionIcon,
+    closeDirectionIcon,
+    children,
   } = defaultKnobs();
   const [isOpen, setOpen] = useState<boolean>(false);
-  const defaultChildren =
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
-  const defaultRightSide = <Badge label="Статус" />;
+  const defaultRightSide: React.ReactNode = [
+    <Badge label="Статус" size="s" />,
+    <IconSun size={getSizeByMap(sizeIconMap, size)} />,
+  ];
 
-  return iconPosition === 'left' ? (
+  return (
     <Collapse
       size={size}
       label={label}
       isOpen={isOpen}
       onClick={() => setOpen(!isOpen)}
-      withHoverEffect={withHoverEffect}
-      iconPosition={iconPosition}
-      icon={withCustomIcon ? IconArrowRight : undefined}
-      closeIcon={withCustomIcon ? IconArrowLeft : undefined}
+      hoverEffect={hoverEffect}
+      iconPosition={iconPosition as 'left'}
+      icon={withCustomIcon ? IconRemove : undefined}
+      closeIcon={(withCustomIcon ? IconAdd : undefined) as undefined}
       view={view}
-      withDivider={withDivider}
-      horizontalPadding={horizontalPadding}
+      divider={divider}
+      horizontalSpace={horizontalSpace}
       rightSide={rightSide ? defaultRightSide : undefined}
+      directionIcon={directionIcon}
+      closeDirectionIcon={closeDirectionIcon}
+      style={{ maxWidth: 300 }}
     >
-      {defaultChildren}
-    </Collapse>
-  ) : (
-    <Collapse
-      size={size}
-      label={label}
-      isOpen={isOpen}
-      onClick={() => setOpen(!isOpen)}
-      withHoverEffect={withHoverEffect}
-      iconPosition={iconPosition}
-      icon={withCustomIcon ? IconArrowRight : undefined}
-      closeIcon={withCustomIcon ? IconArrowLeft : undefined}
-      view={view}
-      withDivider={withDivider}
-      horizontalPadding={horizontalPadding}
-    >
-      {defaultChildren}
+      {children}
     </Collapse>
   );
 }

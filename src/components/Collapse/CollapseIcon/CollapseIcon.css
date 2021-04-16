@@ -1,0 +1,118 @@
+.CollapseIcon {
+  transition: transform 0.3s;
+  transition-timing-function: cubic-bezier(0.7, 0, 0.5, 1);
+  transform: var(--direction-transform);
+
+  &_direction {
+    &_up {
+      --direction-transform: rotate(0deg);
+    }
+
+    &_right {
+      --direction-transform: rotate(90deg);
+    }
+
+    &_down {
+      --direction-transform: rotate(180deg);
+    }
+
+    &_left {
+      --direction-transform: rotate(270deg);
+    }
+
+    &_upRight {
+      --direction-transform: rotate(45deg);
+    }
+
+    &_downRight {
+      --direction-transform: rotate(135deg);
+    }
+
+    &_downLeft {
+      --direction-transform: rotate(225deg);
+    }
+
+    &_upLeft {
+      --direction-transform: rotate(315deg);
+    }
+  }
+
+  &_closeDirection {
+    &_up {
+      --close-direction-transform: rotate(0deg);
+    }
+
+    &_right {
+      --close-direction-transform: rotate(90deg);
+    }
+
+    &_down {
+      --close-direction-transform: rotate(180deg);
+    }
+
+    &_left {
+      --close-direction-transform: rotate(270deg);
+    }
+
+    &_upRight {
+      --close-direction-transform: rotate(45deg);
+    }
+
+    &_downRight {
+      --close-direction-transform: rotate(135deg);
+    }
+
+    &_downLeft {
+      --close-direction-transform: rotate(225deg);
+    }
+
+    &_upLeft {
+      --close-direction-transform: rotate(315deg);
+    }
+  }
+
+  &_isOpen {
+    transform: var(--close-direction-transform);
+  }
+
+  &_withCloseIcon {
+    position: absolute;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  &_animate {
+    &_enter {
+      opacity: 0;
+      transform: scale(0.1);
+    }
+
+    &_enterActive {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    &_enterDone {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    &_exit {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    &_exitActive {
+      opacity: 0;
+      transform: scale(0.1);
+    }
+
+    &_exitDone {
+      opacity: 0;
+      transform: scale(0.1);
+    }
+  }
+
+  &-Wrapper {
+    position: relative;
+  }
+}
