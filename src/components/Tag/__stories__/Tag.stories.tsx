@@ -74,7 +74,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Tag',
+  title: 'Компоненты|/Отображение данных/Tag',
   id: 'components/Tag',
   parameters: {
     docs: {

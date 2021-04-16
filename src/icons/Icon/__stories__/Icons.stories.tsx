@@ -367,7 +367,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Icons',
+  title: 'Компоненты|/Графика/Icons',
   id: 'components/Icons',
   parameters: {
     docs: {

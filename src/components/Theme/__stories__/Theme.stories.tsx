@@ -10,7 +10,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Theme',
+  title: 'Компоненты|/Служебные/Theme',
   id: 'components/Theme',
   parameters: {
     docs: {

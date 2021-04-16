@@ -85,7 +85,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Grid',
+  title: 'Компоненты|/Служебные/Grid',
   id: 'components/Grid',
   parameters: {
     docs: {

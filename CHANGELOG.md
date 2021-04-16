@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.11.9 (25/03/2021)
+
+- [feat(Table): add custom filters (#804)](https://github.com/gazprom-neft/consta-uikit/commit/e6c956776758a8990b51d194f32c374758dff879) - [@vasilevx](https://github.com/vasilevx)
+
+---
+
 ## v1.11.8 (17/03/2021)
 
 - [chore(bem-cn): removed package from dependencies](https://github.com/gazprom-neft/consta-uikit/commit/3347b6c02d4fd94de96672ce9a6c075293f065b6) - [@gizeasy](https://github.com/gizeasy)
@@ -357,18 +363,3 @@
 - [fix(Types): emotions affect types (#314)](https://github.com/gazprom-neft/consta-uikit/commit/e1dea8dc685fac2016597715af387bcb8978b147) - @gizeasy
 - [chore(deps): bump elliptic from 6.5.2 to 6.5.3 (#306)](https://github.com/gazprom-neft/consta-uikit/commit/3d5c426a26507a6678037d5d4e634b13bdae31df) - @dependabot[bot]
 - [fix(StoryBook): change path Table](https://github.com/gazprom-neft/consta-uikit/commit/6ce7ac972d2c3030545fb3096a64e80e93bcdb1e) - @gizeasy
-
----
-
-## v1.6.0 (29/07/2020)
-
-- [fix(Badge): replace system color in Display theme, fix text color (#280)](https://github.com/gazprom-neft/consta-uikit/commit/25a417747f81ed0a8c29cf6acde783d01e6728ec) - @fooontic
-- [fix(ThemeDocs): fix runtime error (#287)](https://github.com/gazprom-neft/consta-uikit/commit/1f00a8ad7dff73059bdb7cefbc0d0f63109fa954) - @gizeasy
-- [docs(StoryBook): change path FileField, export with createMetadata (#288)](https://github.com/gazprom-neft/consta-uikit/commit/6f7167dfafb47bfbe2494b62b219bbe9a5a69f74) - @gizeasy
-- [feat(Table): add Table component (#278)](https://github.com/gazprom-neft/consta-uikit/commit/7526a0413e880bd2844371b806ddae6d63b538f6) - @al-fyodorov
-- [chore(deps): removed unused dependencies (#275)](https://github.com/gazprom-neft/consta-uikit/commit/a3b924540a780887e058cf3b9b47032de9faab46) - @gizeasy
-- [fix(TextField): change type onFocus and onBlur (#270)](https://github.com/gazprom-neft/consta-uikit/commit/62aa87bd1fac4229126531a5d2b24a3a5bf22b2b) - @gizeasy
-- [docs(README.md): added a link to the stand (#274)](https://github.com/gazprom-neft/consta-uikit/commit/7a675a63f9deb6cc4b3df7d0247245ed3434710d) - @gizeasy
-- [feat(Switch): add S size (#281)](https://github.com/gazprom-neft/consta-uikit/commit/58e45a45a5eab790011dabf72f0c58dc943959f7) - @fooontic
-- [refactor(Story): restructuring stories (#269)](https://github.com/gazprom-neft/consta-uikit/commit/5b6ed226ea1bfe6f3f4e78e44271312373dba76f) - @gizeasy
-- [feat(FileField): add component FileField (#264)](https://github.com/gazprom-neft/consta-uikit/commit/58e8e1de928800d5f8df3866d1be03daa7dc1da3) - @gizeasy

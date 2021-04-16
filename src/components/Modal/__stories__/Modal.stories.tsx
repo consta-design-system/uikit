@@ -80,7 +80,7 @@ export function Playground(): JSX.Element {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Modal',
+  title: 'Компоненты|/Наложение/Modal',
   id: 'components/Modal',
   parameters: {
     docs: {

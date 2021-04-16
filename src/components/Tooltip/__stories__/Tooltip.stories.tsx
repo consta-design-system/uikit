@@ -109,7 +109,7 @@ export const TooltipPositionedByAnchorStory = createStory(
 );
 
 export default createMetadata({
-  title: 'Компоненты|/Tooltip',
+  title: 'Компоненты|/Отображение данных/Tooltip',
   id: 'components/Tooltip',
   parameters: {
     docs: {

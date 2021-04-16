@@ -56,7 +56,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Responses',
+  title: 'Компоненты|/Обратная связь/Responses',
   id: 'components/Responses',
   parameters: {
     docs: {

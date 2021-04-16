@@ -57,7 +57,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Tabs',
+  title: 'Компоненты|/Навигация/Tabs',
   id: 'components/Tabs',
   parameters: {
     docs: {

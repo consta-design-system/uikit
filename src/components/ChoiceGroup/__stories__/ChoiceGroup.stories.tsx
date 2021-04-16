@@ -101,7 +101,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/ChoiceGroup',
+  title: 'Компоненты|/Базовые/ChoiceGroup',
   id: 'components/ChoiceGroup',
   parameters: {
     docs: {

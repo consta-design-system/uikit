@@ -87,7 +87,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Steps',
+  title: 'Компоненты|/Навигация/Steps',
   id: 'components/Steps',
   parameters: {
     docs: {

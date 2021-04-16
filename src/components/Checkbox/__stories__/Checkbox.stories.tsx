@@ -56,7 +56,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Checkbox',
+  title: 'Компоненты|/Базовые/Checkbox',
   id: 'components/Checkbox',
   parameters: {
     docs: {

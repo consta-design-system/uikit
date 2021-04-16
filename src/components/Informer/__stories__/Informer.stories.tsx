@@ -36,7 +36,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Informer',
+  title: 'Компоненты|/Обратная связь/Informer',
   id: 'components/Informer',
   parameters: {
     docs: {

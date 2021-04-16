@@ -17,7 +17,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Loader',
+  title: 'Компоненты|/Обратная связь/Loader',
   id: 'components/Loader',
   parameters: {
     docs: {

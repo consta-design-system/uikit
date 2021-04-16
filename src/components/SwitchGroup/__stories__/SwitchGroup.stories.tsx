@@ -62,7 +62,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/SwitchGroup',
+  title: 'Компоненты|/Базовые/SwitchGroup',
   id: 'components/SwitchGroup',
   parameters: {
     docs: {

@@ -91,7 +91,7 @@ export function Playground(props: {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/BasicSelect',
+  title: 'Компоненты|/Базовые/BasicSelect',
   id: 'components/BasicSelect',
   parameters: {
     docs: {
