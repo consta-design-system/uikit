@@ -21,14 +21,8 @@ import { HeaderButtonExample } from './examples/HeaderButtonExample/HeaderButton
 частые действия и тому подобное.
 
 - [Внешний вид и структура](#внешний-вид-и-структура)
-- [Модули](#модули)
-  - [HeaderLogin](#headerlogin)
-    - [Внешний вид](#внешний-вид)
-    - [Статус пользователя](#статус-пользователя)
-  - [HeaderMenu](#headermenu)
-  - [HeaderLogo](#headerlogo)
-  - [HeaderButton](#headerbutton)
-  - [HeaderSearchBar](#headersearchbar)
+  - [Модули](#модули)
+  - [Левая и правая часть](#левая-и-правая-часть)
 - [Логотип](#логотип)
 - [Поиск](#поиск)
 - [Меню](#меню)
@@ -82,9 +76,9 @@ Header состоит из левой и правой части — `leftSide` 
 
 Размер отступов:
 
-- 'l' — `--space-2xl`
-- 'm' — `--space-m`
-- 's' — `--space-xs`
+- `'l'` — `--space-2xl`
+- `'m'` — `--space-m`
+- `'s'` — `--space-xs`
 
 Крупные модули (поиск, меню, логотип) лучше отделять самым крупным отступом `l`, мелкие модули — `s` или `m`.
 
@@ -96,16 +90,16 @@ Header состоит из левой и правой части — `leftSide` 
 <Header
   leftSide={
     <>
-      <HeaderModule>// здесь логотип</HeaderModule>
-      <HeaderModule>// здесь поиск</HeaderModule>
-      <HeaderModule>// здесь меню</HeaderModule>
+      <HeaderModule>/* здесь логотип */</HeaderModule>
+      <HeaderModule>/* здесь поиск */</HeaderModule>
+      <HeaderModule>/* здесь меню */</HeaderModule>
     </>
   }
   rightSide={
     <>
-      <HeaderModule>// кнопочка раз</HeaderModule>
-      <HeaderModule>// кнопочка два</HeaderModule>
-      <HeaderModule>// логин</HeaderModule>
+      <HeaderModule>/* кнопочка раз */</HeaderModule>
+      <HeaderModule>/* кнопочка два */</HeaderModule>
+      <HeaderModule>/* логин */</HeaderModule>
     </>
   }
 />
