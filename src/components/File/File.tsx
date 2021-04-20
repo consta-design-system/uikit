@@ -10,6 +10,7 @@ import { FileIconDoc } from '../../fileIcons/FileIconDoc/FileIconDoc';
 import { FileIconExe } from '../../fileIcons/FileIconExe/FileIconExe';
 import { FileIconGif } from '../../fileIcons/FileIconGif/FileIconGif';
 import { FileIconJpg } from '../../fileIcons/FileIconJpg/FileIconJpg';
+import { FileIconJson } from '../../fileIcons/FileIconJson/FileIconJson';
 import { FileIconLoading } from '../../fileIcons/FileIconLoading/FileIconLoading';
 import { FileIconMov } from '../../fileIcons/FileIconMov/FileIconMov';
 import { FileIconMp3 } from '../../fileIcons/FileIconMp3/FileIconMp3';
@@ -66,6 +67,7 @@ const mapExtensionToSvg: { [value: string]: React.FC<FileIconProps> } = {
   gz: FileIconZip,
   xls: FileIconXls,
   xlsx: FileIconXls,
+  json: FileIconJson,
 };
 
 function getIconByExtension(extension?: string): React.FC<FileIconProps> {
