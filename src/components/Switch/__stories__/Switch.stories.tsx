@@ -44,11 +44,15 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Switch',
+  title: 'Компоненты|/Базовые/Switch',
   id: 'components/Switch',
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=58%3A2269',
     },
   },
 });

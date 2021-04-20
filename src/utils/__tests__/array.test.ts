@@ -14,6 +14,53 @@ describe('sortBy', () => {
     ]);
   });
 
+  it('сортирует функцией сортировки', () => {
+    const arr = [
+      {
+        date: {
+          day: 10,
+          year: 2020,
+        },
+      },
+      {
+        date: {
+          day: 66,
+          year: 2020,
+        },
+      },
+      {
+        date: {
+          day: 1,
+          year: 2020,
+        },
+      },
+    ];
+
+    type DateType = typeof arr[number]['date'];
+    const sortFn = (a: DateType, b: DateType): number => a.day - b.day;
+
+    expect(sortBy(arr, 'date', 'asc', sortFn)).toEqual([
+      {
+        date: {
+          day: 1,
+          year: 2020,
+        },
+      },
+      {
+        date: {
+          day: 10,
+          year: 2020,
+        },
+      },
+      {
+        date: {
+          day: 66,
+          year: 2020,
+        },
+      },
+    ]);
+  });
+
   it('сортирует по числовому параметру в убывающем порядке', () => {
     const arr = [{ a: 2 }, { a: 200 }, { a: 1 }, { a: 100 }, { a: 10 }, { a: 20 }];
 

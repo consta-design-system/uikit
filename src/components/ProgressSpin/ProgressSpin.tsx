@@ -4,6 +4,7 @@ import React, { useMemo } from 'react';
 
 import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
+import { isNumber } from '../../utils/type-guards';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
 export const progressSpinPropSize = ['m', 's'] as const;
@@ -38,7 +39,7 @@ function getSvgParamsBySize(size: ProgressSpinPropSize): [number, number, number
 export const ProgressSpin = React.forwardRef<SVGSVGElement, ProgressSpinProps>((props, ref) => {
   const {
     size = progressSpinPropSizeDefault,
-    progress = 0,
+    progress,
     animation,
     className,
     ...otherProps
@@ -48,19 +49,20 @@ export const ProgressSpin = React.forwardRef<SVGSVGElement, ProgressSpinProps>((
     [size],
   );
 
-  const strokeDashoffset = strokeDasharray - (strokeDasharray * progress) / 100;
+  const animatedProgress = isNumber(progress) ? progress : 50;
+  const strokeDashoffset = strokeDasharray - (strokeDasharray * animatedProgress) / 100;
 
   return (
     <svg
       {...otherProps}
-      className={cnProgressSpin(null, [className])}
+      className={cnProgressSpin({ spin: !isNumber(progress) }, [className])}
       width={sizeOfPixels}
       height={sizeOfPixels}
       viewBox={`0 0 ${sizeOfPixels} ${sizeOfPixels}`}
       ref={ref}
     >
       <circle
-        className={cnProgressSpin('Circle', { animation: !!animation })}
+        className={cnProgressSpin('Circle', { animation })}
         cx={sizeOfPixels / 2}
         cy={sizeOfPixels / 2}
         r={radius}

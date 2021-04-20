@@ -56,11 +56,15 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Responses',
+  title: 'Компоненты|/Обратная связь/Responses',
   id: 'components/Responses',
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=6263%3A116157',
     },
   },
 });

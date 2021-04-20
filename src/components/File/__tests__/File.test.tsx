@@ -63,16 +63,6 @@ describe('Компонент File', () => {
 
         expect(getLoader()).toHaveClass(cnFile('Loader'));
       });
-      it(`при loadingProgress=undefined ProgressSpin должен крутитьтся`, () => {
-        renderComponent({ loading: true, loadingWithProgressSpin: true });
-
-        expect(getLoader()).toHaveClass(cnFile('Loader', { spin: true }));
-      });
-      it(`при указанном loadingProgress ProgressSpin не должен крутитьтся`, () => {
-        renderComponent({ loading: true, loadingWithProgressSpin: true, loadingProgress: 1 });
-
-        expect(getLoader()).not.toHaveClass(cnFile('Loader', { spin: true }));
-      });
     });
   });
 });

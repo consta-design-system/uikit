@@ -104,11 +104,15 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/TextField',
+  title: 'Компоненты|/Базовые/TextField',
   id: 'components/TextField',
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=5164%3A84922',
     },
   },
 });

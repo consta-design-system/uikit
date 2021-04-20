@@ -93,7 +93,7 @@ type ContextMenuLevelProps<ITEM> = Omit<
     hoveredParenLevel: number;
     setHoveredParenLevel: (level: number) => void;
   },
-  'subMenuDirection' | 'getKey' | 'onClickOutside' | 'offset' | 'isOpen'
+  'subMenuDirection' | 'getKey' | 'onClickOutside' | 'isOpen'
 >;
 
 export type ContextMenuItemProps<ITEM> = PropsWithHTMLAttributes<
