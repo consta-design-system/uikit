@@ -44,5 +44,9 @@ export default createMetadata({
     docs: {
       page: mdx,
     },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/SLc0YGhuDotve6MTCBHlGxDU/Consta-Graphics?node-id=718%3A31',
+    },
   },
 });

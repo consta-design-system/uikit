@@ -27,6 +27,7 @@
   &.FileIconUndefined,
   &.FileIconExe,
   &.FileIconRar,
+  &.FileIconJson,
   &.FileIconZip {
     color: #c3cad1;
   }
