@@ -23,6 +23,7 @@ import { IconBag } from '../../IconBag/IconBag';
 import { IconBarrier } from '../../IconBarrier/IconBarrier';
 import { IconBento } from '../../IconBento/IconBento';
 import { IconBold } from '../../IconBold/IconBold';
+import { IconBook } from '../../IconBook/IconBook';
 import { IconBookmarkFilled } from '../../IconBookmarkFilled/IconBookmarkFilled';
 import { IconBookmarkStroked } from '../../IconBookmarkStroked/IconBookmarkStroked';
 import { IconCalculator } from '../../IconCalculator/IconCalculator';
@@ -42,6 +43,7 @@ import { IconConnection } from '../../IconConnection/IconConnection';
 import { IconCopy } from '../../IconCopy/IconCopy';
 import { IconCrown } from '../../IconCrown/IconCrown';
 import { IconCursorMouse } from '../../IconCursorMouse/IconCursorMouse';
+import { IconDataNull } from '../../IconDataNull/IconDataNull';
 import { IconDiamond } from '../../IconDiamond/IconDiamond';
 import { IconDinosaur } from '../../IconDinosaur/IconDinosaur';
 import { IconDisconnection } from '../../IconDisconnection/IconDisconnection';
@@ -205,6 +207,7 @@ const icons = {
   IconBarrier,
   IconBento,
   IconBold,
+  IconBook,
   IconBookmarkFilled,
   IconBookmarkStroked,
   IconCalculator,
@@ -224,6 +227,7 @@ const icons = {
   IconCopy,
   IconCrown,
   IconCursorMouse,
+  IconDataNull,
   IconDiamond,
   IconDinosaur,
   IconDisconnection,
@@ -267,6 +271,7 @@ const icons = {
   IconLayers,
   IconLeaf,
   IconLightningBolt,
+  IconLineAndBarChart,
   IconLink,
   IconList,
   IconListNumbered,
@@ -351,7 +356,6 @@ const icons = {
   IconWatch,
   IconWideScreen,
   IconWorld,
-  IconLineAndBarChart,
 } as const;
 
 type Name = keyof typeof icons;
@@ -374,6 +378,10 @@ export default createMetadata({
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/SLc0YGhuDotve6MTCBHlGxDU/Consta-Graphics?node-id=0%3A1',
     },
   },
 });
