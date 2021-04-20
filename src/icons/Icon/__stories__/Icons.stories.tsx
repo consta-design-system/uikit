@@ -42,6 +42,7 @@ import { IconConnection } from '../../IconConnection/IconConnection';
 import { IconCopy } from '../../IconCopy/IconCopy';
 import { IconCrown } from '../../IconCrown/IconCrown';
 import { IconCursorMouse } from '../../IconCursorMouse/IconCursorMouse';
+import { IconDataNull } from '../../IconDataNull/IconDataNull';
 import { IconDiamond } from '../../IconDiamond/IconDiamond';
 import { IconDinosaur } from '../../IconDinosaur/IconDinosaur';
 import { IconDisconnection } from '../../IconDisconnection/IconDisconnection';
@@ -224,6 +225,7 @@ const icons = {
   IconCopy,
   IconCrown,
   IconCursorMouse,
+  IconDataNull,
   IconDiamond,
   IconDinosaur,
   IconDisconnection,
