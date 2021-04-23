@@ -64,7 +64,6 @@ export function HeaderWithoutMenuExample() {
               personName="Вадим Матвеев"
               personInfo="В другом офисе"
               personStatus="available"
-              personAvatarUrl="https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png"
               onClick={handleLogin}
               className={cnExample('Login', { isLogged })}
             />
