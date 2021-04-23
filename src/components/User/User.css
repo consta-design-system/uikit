@@ -15,14 +15,10 @@
     flex: none;
   }
 
-  &-Icon {
+  &-IconRight {
     --indent-r: var(--space-xs);
     --button-height: var(--control-height-xs);
     margin-left: var(--space-2xs);
-
-    &:hover {
-      background-color: transparent;
-    }
   }
 
   &-AvatarWrapper {
@@ -109,14 +105,6 @@
       .user__name {
         margin-bottom: var(--space-3xs);
       }
-    }
-
-    &_m:not(.user_with-arrow) {
-      --indent-r: var(--space-m);
-    }
-
-    &_l:not(.user_with-arrow) {
-      --indent-r: var(--space-l);
     }
   }
 

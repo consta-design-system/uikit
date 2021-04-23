@@ -8,13 +8,13 @@ import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttri
 import { Checkbox, CheckboxPropSize } from '../../Checkbox/Checkbox';
 import { PropSize } from '../types';
 
-export type SelectItemProps = PropsWithHTMLAttributes<
+export type SelectItemProps<ITEM> = PropsWithHTMLAttributes<
   {
     label: string;
-    item: any;
+    item: ITEM;
     active: boolean;
     hovered: boolean;
-    multi: boolean;
+    multiple: boolean;
     size: PropSize;
     indent: 'normal' | 'increased';
   },
@@ -33,18 +33,19 @@ const sizeCheckboxMap: Record<PropSize, CheckboxPropSize> = {
   m: 'l',
   l: 'l',
 };
+type SelectItem = <ITEM>(props: SelectItemProps<ITEM>) => React.ReactElement | null;
 
-export const SelectItem: React.FC<SelectItemProps> = (props) => {
-  const { className, label, active, hovered, multi, size, indent, ...otherProps } = props;
+export const SelectItem: SelectItem = (props) => {
+  const { className, label, active, hovered, multiple, size, indent, ...otherProps } = props;
 
   return (
     <div
       {...otherProps}
-      className={cnSelectItem({ active, hovered, multi, size, indent }, [className])}
+      className={cnSelectItem({ active, hovered, multiple, size, indent }, [className])}
       aria-selected={active}
       role="option"
     >
-      {multi && (
+      {multiple && (
         <Checkbox
           className={cnSelectItem('Checkbox')}
           checked={active}

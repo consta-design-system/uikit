@@ -8,10 +8,10 @@ import { scrollIntoView } from '../../utils/scrollIntoView';
 import { cnSelect } from '../SelectComponents/cnSelect';
 import { getSelectDropdownForm } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
-import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
+import { RenderItemProps, SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
 import { DefaultPropForm, DefaultPropView, PropForm, PropView } from '../SelectComponents/types';
 
-import { UserSelectItem, UserSelectItemProps } from './UserSelectItem/UserSelectItem';
+import { UserSelectItem } from './UserSelectItem/UserSelectItem';
 import { UserSelectValue } from './UserSelectValue/UserSelectValue';
 
 export const userSelectPropSize = ['m', 's', 'l'] as const;
@@ -24,8 +24,10 @@ export type UserSelectProps<ITEM, GROUP> = {
   onFocus?: (event?: React.FocusEvent<HTMLInputElement>) => void;
   onChange?: (v: ITEM[] | null) => void;
   getOptionLabel(arg: ITEM): string;
-  getUserUrl?(arg: ITEM): string;
-  getUserAdditionalInfo?(arg: ITEM): string;
+  getOptionKey?(arg: ITEM): string | number;
+  getOptionAvatarUrl?(arg: ITEM): string;
+  getOptionAdditionalInfo?(arg: ITEM): string;
+  searchFunction?(item: ITEM, searchValue: string): boolean;
   ariaLabel?: string;
   id: string;
   dropdownClassName?: string;
@@ -37,22 +39,23 @@ export type UserSelectProps<ITEM, GROUP> = {
   disabled?: boolean;
   form?: PropForm;
   view?: PropView;
-  multi?: boolean;
+  multiple?: boolean;
 } & (
-    | {
-        options: ITEM[];
-        getGroupOptions: never;
-      }
-    | {
-        options: GROUP[];
-        getGroupOptions?: (group: GROUP) => ITEM[];
-      }
-  );
+  | {
+      options: ITEM[];
+      getGroupOptions: never;
+    }
+  | {
+      options: GROUP[];
+      getGroupOptions?: (group: GROUP) => ITEM[];
+    }
+);
 
 type UserSelect = <ITEM, GROUP>(props: UserSelectProps<ITEM, GROUP>) => React.ReactElement | null;
 
 export const UserSelect: UserSelect = (props) => {
   const defaultOptionsRef = useRef<HTMLDivElement | null>(null);
+  const getOptionKeyDefault = props.getOptionLabel;
   const {
     placeholder,
     onBlur,
@@ -61,8 +64,10 @@ export const UserSelect: UserSelect = (props) => {
     onChange,
     value,
     getOptionLabel,
-    getUserAdditionalInfo,
-    getUserUrl,
+    getOptionKey = getOptionKeyDefault,
+    getOptionAdditionalInfo,
+    getOptionAvatarUrl,
+    searchFunction,
     disabled,
     ariaLabel,
     id,
@@ -74,7 +79,7 @@ export const UserSelect: UserSelect = (props) => {
     dropdownClassName,
     dropdownRef = defaultOptionsRef,
     name,
-    multi,
+    multiple = false,
     ...restProps
   } = props;
 
@@ -91,10 +96,8 @@ export const UserSelect: UserSelect = (props) => {
   const helperInputFakeElement = useRef<HTMLDivElement>(null);
 
   const handlerChangeValue = (values: Items): void => {
-    if (multi && typeof onChange === 'function' && values) {
+    if (typeof onChange === 'function' && values) {
       onChange(values);
-    } else if (typeof onChange === 'function' && values) {
-      onChange(values.length > 0 ? [values[values?.length - 1]] : []);
     }
     setInputData({ value: toggleRef.current?.value });
   };
@@ -119,15 +122,20 @@ export const UserSelect: UserSelect = (props) => {
     setInputData({ value: '' });
   };
 
-  const searchFunction = (item: Item, searchValueLowerCase: string): boolean => {
-    const hasLabel = Object.entries(item).find((item) => item[0] === 'label');
-    const hasSubLabel = Object.entries(item).find((item) => item[0] === 'subLabel');
-    const label = hasLabel ? hasLabel[1].toLowerCase().includes(searchValueLowerCase) : false;
-    const subLabel = hasSubLabel
-      ? hasSubLabel[1].toLowerCase().includes(searchValueLowerCase)
+  const searchFunctionDefault = (item: Item, searchValue: string): boolean => {
+    const searchValueLowerCase = searchValue.toLowerCase();
+    const label = getOptionLabel(item)
+      .toLowerCase()
+      .includes(searchValueLowerCase);
+    const additionalInfo = getOptionAdditionalInfo
+      ? getOptionAdditionalInfo(item)
+          .toLowerCase()
+          .includes(searchValueLowerCase)
       : false;
-    return label || subLabel;
+    return label || additionalInfo;
   };
+
+  const searchFn = searchFunction || searchFunctionDefault;
 
   const {
     visibleOptions,
@@ -136,7 +144,6 @@ export const UserSelect: UserSelect = (props) => {
     getOptionProps,
     isOpen,
     setOpen,
-    // привел к типам в дальнейшем надо будет нормально типизировать useSelect
   } = useSelect({
     options: options as Item[],
     value: arrValue,
@@ -146,11 +153,10 @@ export const UserSelect: UserSelect = (props) => {
     scrollToIndex,
     disabled,
     getOptionLabel,
-    getUserAdditionalInfo,
-    getUserUrl,
-    searchFunction,
+    getOptionKey,
+    searchFunction: searchFn,
     getGroupOptions: getGroupOptions as undefined,
-    multi: true,
+    multiple,
     onSelectOption,
   });
 
@@ -245,8 +251,25 @@ export const UserSelect: UserSelect = (props) => {
     };
   };
 
-  const renderItem = (props: UserSelectItemProps) => {
-    return <UserSelectItem {...props} />;
+  const renderItemDefault = (props: RenderItemProps<Item>) => {
+    const { item, id: itemId, active, hovered, ...restProps } = props;
+    const label = getOptionLabel(item);
+    const subLabel = getOptionAdditionalInfo ? getOptionAdditionalInfo(item) : '';
+    const url = getOptionAvatarUrl ? getOptionAvatarUrl(item) : '';
+    const indent = form === 'round' ? 'increased' : 'normal';
+    return (
+      <UserSelectItem
+        id={itemId}
+        label={label}
+        subLabel={subLabel}
+        url={url}
+        active={active}
+        hovered={hovered}
+        size={size}
+        indent={indent}
+        {...restProps}
+      />
+    );
   };
 
   const inputStyle = React.useMemo(() => getInputStyle(), [inputData.value, arrValue]);
@@ -258,7 +281,7 @@ export const UserSelect: UserSelect = (props) => {
       size={size}
       view={view}
       form={form}
-      multi
+      multiple
       {...restProps}
     >
       <div
@@ -280,8 +303,8 @@ export const UserSelect: UserSelect = (props) => {
             <div className={cnSelect('ControlValue', { isUserSelect: true })}>
               {arrValue?.map((option) => {
                 const label = getOptionLabel(option);
-                const subLabel = getUserAdditionalInfo ? getUserAdditionalInfo(option) : '';
-                const url = getUserUrl ? getUserUrl(option) : '';
+                const subLabel = getOptionAdditionalInfo ? getOptionAdditionalInfo(option) : '';
+                const url = getOptionAvatarUrl ? getOptionAvatarUrl(option) : '';
                 const handleRemove = (e: React.SyntheticEvent): void => {
                   e.stopPropagation();
                   handleRemoveValue(option);
@@ -353,11 +376,10 @@ export const UserSelect: UserSelect = (props) => {
         hasGroup={hasGroup}
         selectedValues={arrValue}
         labelForNotFound={labelForNotFound}
-        multi
-        getOptionLabel={getOptionLabel}
+        getOptionKey={getOptionKey}
         form={getSelectDropdownForm(form)}
         className={dropdownClassName}
-        renderItem={renderItem}
+        renderItem={renderItemDefault}
       />
       <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
         {inputData.value}

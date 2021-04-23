@@ -8,8 +8,8 @@ import { scrollIntoView } from '../../utils/scrollIntoView';
 import { cnSelect } from '../SelectComponents/cnSelect';
 import { getSelectDropdownForm } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
-import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
-import { SelectItem, SelectItemProps } from '../SelectComponents/SelectItem/SelectItem';
+import { RenderItemProps, SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
+import { SelectItem } from '../SelectComponents/SelectItem/SelectItem';
 import {
   CommonSelectProps,
   DefaultPropForm,
@@ -64,6 +64,8 @@ export const Combobox: ComboboxType = (props) => {
   });
   const toggleRef = useRef<HTMLInputElement>(null);
 
+  type Item = Exclude<typeof value, null | undefined>;
+
   const handlerChangeValue = (v: typeof value): void => {
     if (typeof onChange === 'function' && v) {
       onChange(v);
@@ -91,6 +93,14 @@ export const Combobox: ComboboxType = (props) => {
     scrollIntoView(elements[index], dropdownRef.current);
   };
 
+  const searchFunctionDefault = (item: typeof value, searchValue: string): boolean => {
+    const searchValueLowerCase = searchValue.toLowerCase();
+
+    return getOptionLabel(item as Item)
+      .toLowerCase()
+      .includes(searchValueLowerCase);
+  };
+
   const {
     visibleOptions,
     highlightedIndex,
@@ -108,6 +118,7 @@ export const Combobox: ComboboxType = (props) => {
     disabled,
     getOptionLabel,
     getOptionKey,
+    searchFunction: searchFunctionDefault,
     onCreate,
     getGroupOptions,
   });
@@ -187,8 +198,26 @@ export const Combobox: ComboboxType = (props) => {
     }
   };
 
-  const renderItem = (props: SelectItemProps) => {
-    return <SelectItem {...props} />;
+  const renderItemDefault = (props: RenderItemProps<typeof value>) => {
+    const { item, id: itemId, active, hovered, ...restProps } = props;
+    if (!item) {
+      return null;
+    }
+    const label = getOptionLabel(item);
+    const indent = form === 'round' ? 'increased' : 'normal';
+    return (
+      <SelectItem
+        id={itemId}
+        label={label}
+        item={item}
+        active={active}
+        hovered={hovered}
+        multiple={false}
+        size={size}
+        indent={indent}
+        {...restProps}
+      />
+    );
   };
 
   return (
@@ -269,13 +298,12 @@ export const Combobox: ComboboxType = (props) => {
         id={id}
         hasGroup={hasGroup}
         selectedValues={arrValue}
-        getOptionLabel={getOptionLabel}
         getOptionKey={getOptionKey}
         labelForCreate={labelForCreate}
         labelForNotFound={labelForNotFound}
         form={getSelectDropdownForm(form)}
         className={dropdownClassName}
-        renderItem={renderItem}
+        renderItem={renderItemDefault}
       />
     </SelectContainer>
   );

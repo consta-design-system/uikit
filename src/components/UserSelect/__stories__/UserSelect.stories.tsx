@@ -6,15 +6,14 @@ import { createMetadata, createStory } from '../../../utils/storybook';
 import { DefaultPropForm, DefaultPropView, form, view } from '../../SelectComponents/types';
 import { UserSelect, userSelectPropSize, userSelectPropSizeDefault } from '../UserSelect';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
-import mdx from './UserSelect.mdx';
+import mdx from './UserSelect.docs.mdx';
 
 type Option = {
   label: string;
   subLabel?: string;
   value?: string;
   url?: string;
+  id: number;
 };
 
 type Group = { label: string; items: Option[] };
@@ -22,7 +21,7 @@ type Group = { label: string; items: Option[] };
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const getKnobs = () => ({
   disabled: boolean('disabled', false),
-  multi: boolean('multi', true),
+  multiple: boolean('multiple', false),
   size: select('size', userSelectPropSize, userSelectPropSizeDefault),
   view: select('view', view, DefaultPropView),
   form: select('form', form, DefaultPropForm),
@@ -46,6 +45,7 @@ const Default = (
   ),
 ): JSX.Element => {
   const getItemNameDefault = (option: Option): string => option.label;
+  const getItemKeyDefault = (option: Option): number => option.id;
   const getItemAdditionalInfoDefault = (option: Option): string => option.subLabel || '';
   const getItemUrlDefault = (option: Option): string => option.url || '';
   const [value, setValue] = useState<Option[] | null | undefined>();
@@ -57,7 +57,16 @@ const Default = (
   } = props;
 
   const options = items;
-  const val = value !== undefined ? value : props.value;
+  let val: Option[] | null | undefined = [];
+  if (value) {
+    if (Array.isArray(value)) {
+      val = value;
+    } else {
+      val.push(value);
+    }
+  } else {
+    val = props.value;
+  }
 
   return (
     <div>
@@ -68,18 +77,15 @@ const Default = (
         options={options as Option[]}
         value={val}
         getOptionLabel={getItemLabel}
-        getUserAdditionalInfo={getItemAdditionalInfoDefault}
-        getUserUrl={getItemUrlDefault}
+        getOptionKey={getItemKeyDefault}
+        getOptionAdditionalInfo={getItemAdditionalInfoDefault}
+        getOptionAvatarUrl={getItemUrlDefault}
         getGroupOptions={getGroupOptions as never}
         onChange={onChange}
       />
     </div>
   );
 };
-
-export const WithValueStory = createStory(() => <Default value={[simpleItems[4]]} />, {
-  name: 'c заданным значением',
-});
 
 export const WithGroupsStory = createStory(
   () => <Default items={groups} getGroupOptions={(group) => group.items} />,
@@ -89,11 +95,15 @@ export const WithGroupsStory = createStory(
 );
 
 export default createMetadata({
-  title: 'Компоненты|/UserSelect',
+  title: 'Компоненты|/Базовые/UserSelect',
   id: 'components/UserSelect',
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=367%3A5636',
     },
   },
 });

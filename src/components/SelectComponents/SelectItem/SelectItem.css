@@ -40,7 +40,7 @@
     color: var(--color-control-typo-secondary);
   }
 
-  &_multi {
+  &_multiple {
     display: flex;
     align-items: center;
   }
@@ -51,7 +51,7 @@
     }
   }
 
-  &:not(&_multi)::before {
+  &:not(&_multiple)::before {
     content: '';
     position: absolute;
     top: 0;
@@ -62,7 +62,7 @@
     transition: background-color 0.2s ease-in;
   }
 
-  &:not(&_multi)&_active::before {
+  &:not(&_multiple)&_active::before {
     background-color: var(--color-control-bg-primary);
   }
 

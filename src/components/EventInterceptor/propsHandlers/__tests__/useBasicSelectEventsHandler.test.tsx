@@ -2,8 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { act, renderHook } from '@testing-library/react-hooks';
 
-import { BasicSelect } from '../../../BasicSelect';
-import { SimpleSelectProps } from '../../../BasicSelect/BasicSelect';
+import { BasicSelect, SimpleSelectProps } from '../../../BasicSelect/BasicSelect';
 import { eventInterceptorMap, EventInterceptorProvider } from '../../EventInterceptor';
 import { useBasicSelectEventsHandler } from '../useBasicSelectEventsHandler';
 

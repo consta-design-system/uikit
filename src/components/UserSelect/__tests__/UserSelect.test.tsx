@@ -33,7 +33,7 @@ const renderComponent = (props: {
         value={props.value}
         onChange={props.onChange}
         getOptionLabel={(item) => item.label}
-        multi
+        multiple
       />
     </div>,
   );
@@ -99,7 +99,9 @@ function getCheckedOptions() {
 function getCheckedOptionsText() {
   let text = '';
   getCheckedOptions().forEach((element) => {
-    text += element.textContent;
+    element.querySelectorAll('.UserSelectItem-AdditionalInfo').forEach((el) => {
+      text += el.textContent;
+    });
   });
   return text;
 }
@@ -220,9 +222,7 @@ describe('Компонент UserSelect', () => {
       indicatorsDropdownClick();
 
       expect(getCheckedOptionsText()).toEqual(
-        elementIndex
-          .map((item) => `${simpleItems[item].label}${simpleItems[item].subLabel}`)
-          .join(''),
+        elementIndex.map((item) => `${simpleItems[item].label}`).join(''),
       );
     });
     it(`изменение value вне компонента`, () => {
@@ -234,9 +234,7 @@ describe('Компонент UserSelect', () => {
       indicatorsDropdownClick();
 
       expect(getCheckedOptionsText()).toEqual(
-        indexElementBeforeClick
-          .map((item) => `${simpleItems[item].label}${simpleItems[item].subLabel}`)
-          .join(''),
+        indexElementBeforeClick.map((item) => `${simpleItems[item].label}`).join(''),
       );
     });
   });

@@ -3,14 +3,4 @@
     margin-right: var(--space-xs);
     margin-bottom: calc(var(--space-s) / 4);
   }
-
-  &_disabled {
-    .User-Block {
-      padding-right: calc(var(--icon-indent) - var(--space-2xs));
-    }
-
-    .Button {
-      display: none;
-    }
-  }
 }

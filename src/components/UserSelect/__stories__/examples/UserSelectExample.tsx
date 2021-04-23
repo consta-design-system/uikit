@@ -44,12 +44,13 @@ export const UserSelectExample = () => {
         id="employees"
         options={items}
         getOptionLabel={getItemLabel}
-        getUserAdditionalInfo={getItemSubLabel}
-        getUserUrl={getItemUrl}
+        getOptionAdditionalInfo={getItemSubLabel}
+        getOptionAvatarUrl={getItemUrl}
         placeholder="Выберите сотрудника"
         size="m"
         onChange={setValue}
         value={value}
+        multiple={false}
       />
     </StoryBookExample>
   );
@@ -67,13 +68,13 @@ export const UserSelectExampleMulti = () => {
         id="employees"
         options={items}
         getOptionLabel={getItemLabel}
-        getUserAdditionalInfo={getItemSubLabel}
-        getUserUrl={getItemUrl}
+        getOptionAdditionalInfo={getItemSubLabel}
+        getOptionAvatarUrl={getItemUrl}
         placeholder="Выберите сотрудника"
         size="m"
         onChange={setValue}
         value={value}
-        multi
+        multiple
       />
     </StoryBookExample>
   );

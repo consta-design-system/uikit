@@ -26,14 +26,14 @@ export const UserSelectValue: React.FC<UserValueProps> = (props) => {
 
   return (
     <User
+      className={cnUserValue({ withCancel })}
       avatarUrl={url}
       name={label}
       info={subLabel}
       size={size}
       view="ghost"
-      iconRight={IconClose}
-      onIconClick={onCancel}
-      className={cnUserValue({ withCancel, disabled })}
+      iconRight={!disabled ? IconClose : undefined}
+      onIconRightClick={!disabled ? onCancel : undefined}
     />
   );
 };

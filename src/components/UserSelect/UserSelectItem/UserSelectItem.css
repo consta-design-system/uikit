@@ -1,7 +1,7 @@
 .UserSelectItem {
+  position: relative;
   display: flex;
   align-items: center;
-  position: relative;
   padding: var(--vertical-space) var(--horizontal-space);
   color: var(--color-control-typo-default);
   background-color: var(--color-control-bg-clear);
@@ -34,6 +34,46 @@
     }
   }
 
+  &_animate {
+    &_appear,
+    &_appearActive,
+    &_appearDone,
+    &_enter,
+    &_enterActive,
+    &_enterDone,
+    &_exit,
+    &_exitActive,
+    &_exitDone {
+      transition: 0.2s ease;
+      transition-property: opacity, transform;
+    }
+
+    &_appear,
+    &_enter {
+      opacity: 0;
+      transform: scale(0.25);
+    }
+
+    &_enterActive,
+    &_appearActive,
+    &_appearDone,
+    &_enterDone {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    &_exit {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    &_exitActive,
+    &_exitDone {
+      opacity: 0;
+      transform: scale(0.25);
+    }
+  }
+
   &_hovered {
     background-color: var(--color-control-bg-clear-hover);
   }
@@ -48,7 +88,7 @@
     }
   }
 
-  &:not(&_multi)::before {
+  &:not(&_multiple)::before {
     content: '';
     position: absolute;
     top: 0;
@@ -59,7 +99,7 @@
     transition: background-color 0.2s ease-in;
   }
 
-  &:not(&_multi)&_active::before {
+  &:not(&_multiple)&_active::before {
     background-color: var(--color-control-bg-primary);
   }
 
@@ -71,9 +111,10 @@
     position: absolute;
     top: 22px;
     left: 22px;
-    color: var(--color-control-bg-default);
     width: var(--graphics-size-xs);
     height: var(--graphics-size-xs);
+    padding: 0;
+    color: var(--color-control-bg-default);
     background-color: var(--color-control-bg-primary);
     border: 1px solid var(--color-control-bg-default);
     border-radius: 50%;
@@ -84,7 +125,7 @@
   }
 
   &-SubUserLabel {
-    font-size: var(--sub-label-font-size);
     opacity: 0.7;
+    font-size: var(--sub-label-font-size);
   }
 }

@@ -28,8 +28,6 @@ type SetHandlerArg<T> = boolean | number | T;
 type SetHandler<T> = (arg: SetHandlerArg<T>) => void;
 
 export type Option<T> = T & {
-  subLabel?: string;
-  url?: string;
   group?: string;
   optionForCreate?: boolean;
 };
@@ -37,7 +35,7 @@ export type Option<T> = T & {
 export interface SelectProps<T> {
   options: T[];
   value: T[] | null;
-  multi?: boolean;
+  multiple?: boolean;
   onChange: OnChangeFunctionType;
   optionsRef: React.MutableRefObject<HTMLDivElement | null>;
   controlRef: React.MutableRefObject<HTMLDivElement | null>;
@@ -46,12 +44,7 @@ export interface SelectProps<T> {
   filterFn?(options: T[], searchValue: string): T[];
   getOptionLabel(option: T): string;
   getOptionKey(option: T): string | number;
-  getOptionSubLabel?(option: T): string;
-  getOptionUrl?(option: T): string;
-  getOptionLabel(option: T): string;
-  getUserAdditionalInfo?(option: T): string;
-  getUserUrl?(option: T): string;
-  searchFunction?(option: T, searchValue: string): boolean;
+  searchFunction(option: T, searchValue: string): boolean;
   onCreate?(s: string): void;
   getGroupOptions?(group: T): T[];
   onSelectOption?(): void;
@@ -135,13 +128,9 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
     optionsRef,
     controlRef,
     disabled = false,
-    multi = false,
+    multiple = false,
     getOptionLabel,
     getOptionKey,
-    getOptionSubLabel,
-    getOptionUrl,
-    getUserAdditionalInfo,
-    getUserUrl,
     searchFunction,
     onCreate,
     getGroupOptions,
@@ -161,22 +150,9 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
               const groupName = getOptionLabel(group);
               const items = typeof getGroupOptions === 'function' ? getGroupOptions(group) : [];
               return items.map((item) => ({ ...item, group: groupName }));
-              return items.map((item) => ({
-                label: getOptionLabel(item),
-                subLabel: getUserAdditionalInfo && getUserAdditionalInfo(item),
-                url: getUserUrl && getUserUrl(item),
-                item,
-                group: groupName,
-              }));
             })
             .flat()
         : options,
-        : options.map((option) => ({
-            label: getOptionLabel(option),
-            subLabel: getUserAdditionalInfo && getUserAdditionalInfo(option),
-            url: getUserUrl && getUserUrl(option),
-            item: option,
-          })),
     [options],
   );
 
@@ -204,22 +180,12 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
       const searchValueLowerCase = searchValue.toLowerCase();
 
       const tempOptions = originalOptions
-        .filter((option) =>
-          getOptionLabel(option)
-            .toLowerCase()
-            .includes(searchValueLowerCase),
-        )
+        .filter((option) => searchFunction(option, searchValue))
         .sort((a) =>
           getOptionLabel(a)
             .toLowerCase()
             .indexOf(searchValueLowerCase),
         );
-        .filter((option) =>
-          searchFunction
-            ? searchFunction(option.item, searchValueLowerCase)
-            : option.label.toLowerCase().includes(searchValueLowerCase),
-        )
-        .sort((a) => a.label.toLowerCase().indexOf(searchValueLowerCase));
       const matchWithValueSearch = Boolean(
         originalOptions.find(
           (option) => getOptionLabel(option).toLowerCase() === searchValueLowerCase,
@@ -332,7 +298,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
     (index) => {
       const option = filteredOptions[index];
       if (option && onChangeRef.current) {
-        if (multi) {
+        if (multiple) {
           const newVal = value.some((v) => getOptionKey(v) === getOptionKey(option))
             ? value.filter((v) => getOptionKey(v) !== getOptionKey(option))
             : [...value, option];
@@ -372,7 +338,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
 
   const handleValueFieldClick = (): void => {
     !disabled && setOpen(!isOpen);
-    if (multi) {
+    if (multiple) {
       setSearch('');
     }
   };
@@ -421,7 +387,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   };
 
   const Backspace = (): void => {
-    if (!multi || searchValue) {
+    if (!multiple || searchValue) {
       return;
     }
     removeValue(value.length - 1);
