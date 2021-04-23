@@ -16,7 +16,7 @@ yarn add @consta/uikit
 
 ```tsx
 import { Theme, presetGpnDefault } from '@consta/uikit/Theme';
-import { Button } from '@consta/uikit/Buton';
+import { Button } from '@consta/uikit/Button';
 
 const App = () => (
   <Theme preset={presetGpnDefault}>
