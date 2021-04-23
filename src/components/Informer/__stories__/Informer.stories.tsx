@@ -36,11 +36,15 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Informer',
+  title: 'Компоненты|/Обратная связь/Informer',
   id: 'components/Informer',
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=58%3A29120',
     },
   },
 });

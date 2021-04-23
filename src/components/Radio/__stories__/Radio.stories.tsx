@@ -47,11 +47,15 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Radio',
+  title: 'Компоненты|/Базовые/Radio',
   id: 'components/Radio',
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=57%3A1655',
     },
   },
 });

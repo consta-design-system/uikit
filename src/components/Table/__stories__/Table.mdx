@@ -273,10 +273,12 @@ type Column = {
   width?: number;
   sortable?: boolean;
   sortByField?: string;
+  sortFn?: (a: FieldValue, b: FieldValue) => number;
+  renderCell?: (row: Row) => React.ReactNode;
 };
 
 type Row = {
-  [key: string]: React.ReactNode;
+  [key: string]: FieldValue;
   id: string;
 };
 
@@ -347,6 +349,40 @@ const columns = [
     title: 'Имя',
     accessor: 'name',
     sortable: true,
+  },
+];
+
+const rows = [
+  {
+    id: '1',
+    name: 'Антон',
+  },
+  {
+    id: '2',
+    name: 'Василий',
+  },
+];
+
+const App = () => {
+  return <Table columns={columns} rows={rows} />;
+};
+```
+
+### Рендер ячеек
+
+```ts
+import React from 'react';
+import { Table } from '@consta/uikit/Table';
+
+const columns = [
+  {
+    title: '№',
+    accessor: 'id',
+  },
+  {
+    title: 'Имя',
+    accessor: 'name',
+    renderCell: (row) => <h1>{row.name}</h1>,
   },
 ];
 

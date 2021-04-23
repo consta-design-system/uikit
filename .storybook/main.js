@@ -10,6 +10,7 @@ module.exports = {
     '@storybook/addon-actions/register',
     '@storybook/addon-a11y/register',
     '@storybook/addon-docs/register',
+    'storybook-addon-designs',
   ],
   webpackFinal: async (config) => {
     // Remove the existing css rule

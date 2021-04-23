@@ -20,11 +20,15 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Timer',
+  title: 'Компоненты|/Обратная связь/Timer',
   id: 'components/Timer',
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=5867%3A11',
     },
   },
 });

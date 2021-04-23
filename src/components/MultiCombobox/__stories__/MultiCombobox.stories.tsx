@@ -105,11 +105,15 @@ export const WithGroupsStory = createStory(
 );
 
 export default createMetadata({
-  title: 'Компоненты|/MultiCombobox',
+  title: 'Компоненты|/Базовые/MultiCombobox',
   id: 'components/MultiCombobox',
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=367%3A0',
     },
   },
 });

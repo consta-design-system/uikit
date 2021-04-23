@@ -18,7 +18,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/FileField',
+  title: 'Компоненты|/Базовые/FileField',
   id: 'components/FileField',
   parameters: {
     docs: {

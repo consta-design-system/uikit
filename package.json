@@ -1,6 +1,6 @@
 {
   "name": "@consta/uikit",
-  "version": "1.11.8",
+  "version": "1.11.10",
   "keywords": [
     "ui-kit",
     "design-system",
@@ -152,6 +152,7 @@
     "react-test-renderer": "^17.0.1",
     "remark-external-links": "^6.1.0",
     "remark-slug": "^6.0.0",
+    "storybook-addon-designs": "^6.0.0-alpha.3",
     "storybook-addon-themes": "^5.3.1",
     "stylelint": "^10.1.0",
     "stylelint-config-prettier": "^5.2.0",

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { isNotNil } from '../../utils/type-guards';
 
-import { ColumnWidth, RowField, SortingState, TableColumn, TableRow } from './Table';
+import { ColumnWidth, SortingState, TableColumn, TableRow } from './Table';
 
 export type Position = {
   colSpan?: number;
@@ -48,12 +48,14 @@ export const getColumnLeftOffset = ({
 
 export const getNewSorting = <T extends TableRow>(
   currentSorting: SortingState<T>,
-  newField: RowField<T>,
+  newField: keyof T,
+  sortFn?: (a: T[keyof T], b: T[keyof T]) => number,
 ): SortingState<T> => {
   if (!currentSorting || currentSorting.by !== newField) {
     return {
       by: newField,
       order: 'asc',
+      sortFn,
     };
   }
 
@@ -61,6 +63,7 @@ export const getNewSorting = <T extends TableRow>(
     return {
       by: newField,
       order: 'desc',
+      sortFn,
     };
   }
 
@@ -203,7 +206,7 @@ export const useHeaderData = <T extends TableRow>(
       if ((header.position.rowSpan || 0) >= (lowHeaders[index + 1]?.position.rowSpan || 0)) {
         return headerHeight - (header.position.height || 0);
       }
-      return headerHeight - lowHeaders[index + 1]?.position.height || 0;
+      return headerHeight - lowHeaders[index + 1]?.position.height! || 0;
     },
   );
 
@@ -276,7 +279,7 @@ export const useLazyLoadData = (
     return undefined;
   };
 
-  const getSlicedRows = (rows: TableRow[]) =>
+  const getSlicedRows = <T extends TableRow>(rows: T[]) =>
     !enabled || rows.length < maxVisibleRows
       ? rows
       : rows.slice(visibleStartIndex, visibleStartIndex + maxVisibleRows);

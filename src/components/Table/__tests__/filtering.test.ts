@@ -1,13 +1,35 @@
 import {
   fieldFiltersPresent,
+  Filters,
   filterTableData,
   getOptionsForFilters,
   getSelectedFiltersInitialState,
   getSelectedFiltersList,
   isSelectedFiltersPresent,
 } from '../filtering';
+import { TableColumn } from '../Table';
 
-const COUNT_FILTERS = [
+const DATA = [
+  {
+    id: 'row1',
+    count: 150,
+    price: 50,
+  },
+  {
+    id: 'row2',
+    count: 100,
+    price: 150,
+  },
+  {
+    id: 'row3',
+    count: 50,
+    price: 100,
+  },
+];
+
+type Row = typeof DATA[number];
+
+const COUNT_FILTERS: Filters<Row> = [
   {
     id: 'countLess100',
     name: 'Количество меньше 100',
@@ -38,9 +60,9 @@ const COUNT_FILTERS = [
     field: 'count',
     filterer: (value: number) => value === undefined,
   },
-] as const;
+];
 
-const PRICE_FILTERS = [
+const PRICE_FILTERS: Filters<Row> = [
   {
     id: 'priceLess100',
     name: 'Цена меньше 100',
@@ -59,27 +81,9 @@ const PRICE_FILTERS = [
     field: 'price',
     filterer: (value: number) => value > 100,
   },
-] as const;
+];
 
 const FILTERS = [...COUNT_FILTERS, ...PRICE_FILTERS];
-
-const DATA = [
-  {
-    id: 'row1',
-    count: 150,
-    price: 50,
-  },
-  {
-    id: 'row2',
-    count: 100,
-    price: 150,
-  },
-  {
-    id: 'row3',
-    count: 50,
-    price: 100,
-  },
-];
 
 describe('fieldFiltersPresent', () => {
   it('возвращает false если фильтр с таким полем не существует', () => {
@@ -219,17 +223,17 @@ describe('getSelectedFiltersInitialState', () => {
   it('возвращает начальное состояние для каждого типа фильтра', () => {
     expect(getSelectedFiltersInitialState(FILTERS)).toEqual({
       count: {
-        selected: []
+        selected: [],
       },
       price: {
-        selected: []
+        selected: [],
       },
     });
   });
 });
 
 describe('getSelectedFiltersList', () => {
-  const COLUMNS = [
+  const COLUMNS: TableColumn<Row>[] = [
     { title: 'Количество', accessor: 'count' },
     { title: 'Цена', accessor: 'price' },
   ];

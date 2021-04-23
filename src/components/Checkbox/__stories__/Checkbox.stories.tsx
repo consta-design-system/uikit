@@ -56,11 +56,15 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Checkbox',
+  title: 'Компоненты|/Базовые/Checkbox',
   id: 'components/Checkbox',
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=56%3A37365',
     },
   },
 });

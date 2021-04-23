@@ -60,11 +60,15 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Attach',
+  title: 'Компоненты|/Базовые/Attach',
   id: 'components/Attach',
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=58%3A16411',
     },
   },
 });

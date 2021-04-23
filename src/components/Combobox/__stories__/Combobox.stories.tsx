@@ -69,11 +69,7 @@ const Default = (props: {
   );
 };
 
-export const DefaultStory = createStory(() => <Default />);
-
-export const WithValueStory = createStory(() => <Default value={simpleItems[4]} />, {
-  name: 'c заданным значением',
-});
+export const Playground = createStory(() => <Default />);
 
 export const WithGroupsStory = createStory(
   () => {
@@ -105,11 +101,15 @@ export const WithCreateStory = createStory(
 );
 
 export default createMetadata({
-  title: 'Компоненты|/Combobox',
+  title: 'Компоненты|/Базовые/Combobox',
   id: 'components/Combobox',
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=11065%3A140493',
     },
   },
 });

@@ -144,6 +144,7 @@ export function Playground() {
           getDisabled={getDisabled}
           sortGroup={sortGroup}
           onClickOutside={() => setIsOpen(false)}
+          offset={8}
         />
       )}
     </div>
@@ -151,11 +152,15 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/ContextMenu',
+  title: 'Компоненты|/Базовые/ContextMenu',
   id: 'components|/ContextMenu',
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=4894%3A74617',
     },
   },
 });

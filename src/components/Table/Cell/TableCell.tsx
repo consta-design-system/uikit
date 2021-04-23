@@ -12,8 +12,8 @@ export type VerticalAlign = typeof verticalAligns[number];
 export const horizontalAligns = ['left', 'center', 'right'] as const;
 export type HorizontalAlign = typeof horizontalAligns[number];
 
-type Props = {
-  column: TableColumn<TableRow> & {
+type Props<T extends TableRow> = {
+  column: TableColumn<T> & {
     isSticky?: boolean;
     isResized?: boolean;
     filterable?: boolean;
@@ -40,9 +40,12 @@ type Props = {
   | {
       type: 'resizer';
     }
-);
+) &
+  React.RefAttributes<HTMLDivElement>;
 
-const getCellClasses = (props: Props): string => {
+type TableCell = <T extends TableRow>(props: Props<T>) => React.ReactElement | null;
+
+const getCellClasses = <T extends TableRow>(props: Props<T>): string => {
   const { column, showVerticalShadow, className } = props;
 
   return cnTableCell(
@@ -65,7 +68,7 @@ const getCellClasses = (props: Props): string => {
   );
 };
 
-const getWrapperClasses = (props: Props): string => {
+const getWrapperClasses = <T extends TableRow>(props: Props<T>): string => {
   const { column, wrapperClassName } = props;
 
   return cnTableCell(
@@ -79,7 +82,7 @@ const getWrapperClasses = (props: Props): string => {
   );
 };
 
-export const TableCell = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
+export const TableCell: TableCell = React.forwardRef((props, ref) => {
   const { style, onClick, children } = props;
 
   const propsWithRole = onClick

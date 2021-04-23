@@ -7,6 +7,7 @@ import {
   customFilters,
   generateData,
   tableData,
+  tableDataWithRenderFn,
   tableWithBagdeData,
   tableWithMergedCellsData,
   tableWithMultiLevelHeadersData,
@@ -34,7 +35,7 @@ import mdx from './Table.mdx';
 
 const cnTableStories = cn('TableStories');
 
-const defaultProps = {
+const defaultProps: Props<typeof tableData.rows[number]> = {
   columns: tableData.columns,
   rows: tableData.rows,
   filters: tableData.filters,
@@ -44,20 +45,20 @@ const defaultProps = {
   stickyColumns: 0,
   stickyHeader: false,
   verticalAlign: 'top',
-  zebraStriped: '',
+  zebraStriped: undefined,
   headerVerticalAlign: 'center',
-} as const;
+};
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const getSizeKnob = () => select('size', sizes, 'l');
-const getFiltersKnob = (filters?: Filters<TableRow>): Filters<TableRow> | undefined => {
+const getFiltersKnob = <T extends TableRow>(filters?: Filters<T>): Filters<T> | undefined => {
   const isFilterable = boolean('filterable', true);
 
   return isFilterable ? filters : undefined;
 };
 
-const getKnobs = (replacedProps?: Partial<Props<TableRow>>): Props<TableRow> => {
-  const props = { ...defaultProps, ...replacedProps };
+const getKnobs = <T extends TableRow>(replacedProps?: Partial<Props<T>>): Props<T> => {
+  const props = { ...defaultProps, ...replacedProps } as Props<T>;
 
   const zebraStripedProp = select('zebraStriped', ['', ...zebraStriped], props.zebraStriped);
 
@@ -66,12 +67,12 @@ const getKnobs = (replacedProps?: Partial<Props<TableRow>>): Props<TableRow> => 
     rows: object('rows', props.rows),
     filters: getFiltersKnob(props.filters),
     size: getSizeKnob(),
-    borderBetweenColumns: boolean('borderBetweenColumns', props.borderBetweenColumns),
-    borderBetweenRows: boolean('borderBetweenRows', props.borderBetweenRows),
-    isResizable: boolean('isResizable', props.isResizable),
+    borderBetweenColumns: boolean('borderBetweenColumns', props.borderBetweenColumns!),
+    borderBetweenRows: boolean('borderBetweenRows', props.borderBetweenRows!),
+    isResizable: boolean('isResizable', props.isResizable!),
     zebraStriped: zebraStripedProp === '' ? undefined : zebraStripedProp,
-    stickyColumns: number('stickyColumns', props.stickyColumns),
-    stickyHeader: boolean('stickyHeader', props.stickyHeader),
+    stickyColumns: number('stickyColumns', props.stickyColumns!),
+    stickyHeader: boolean('stickyHeader', props.stickyHeader!),
     emptyRowsPlaceholder: text('emptyRowsPlaceholder', '') || undefined,
     verticalAlign: select('verticalAlign', verticalAligns, props.verticalAlign),
     headerVerticalAlign: select(
@@ -86,8 +87,12 @@ export const Interactive = createStory(() => <Table {...getKnobs()} />, {
   name: 'обычная',
 });
 
+export const CustomRows = createStory(() => <Table {...getKnobs(tableDataWithRenderFn)} />, {
+  name: 'рендер ячеек',
+});
+
 export const WithMultiLevelHeaders = createStory(
-  () => <Table {...getKnobs(tableWithMultiLevelHeadersData as Partial<Props<TableRow>>)} />,
+  () => <Table {...getKnobs(tableWithMultiLevelHeadersData)} />,
   {
     name: 'с многоуровневым заголовком',
   },
@@ -183,9 +188,9 @@ const WithCheckboxHeaderContent = (): JSX.Element => {
   );
 };
 
-const WithOnRowHoverContent = (): JSX.Element => {
+const WithOnRowHoverContent = <T extends TableRow>(): JSX.Element => {
   const [hoveredRow, setHoveredRow] = React.useState<string | undefined>(undefined);
-  const rows: Array<TableRow> = tableData.rows.map((row) => ({
+  const rows = tableData.rows.map((row) => ({
     ...row,
     button: (
       <Button
@@ -198,7 +203,7 @@ const WithOnRowHoverContent = (): JSX.Element => {
     ),
   }));
 
-  const columns: Array<TableColumn<TableRow>> = [
+  const columns: Array<TableColumn<typeof rows[number]>> = [
     {
       title: 'Появится кнопка при наведении',
       accessor: 'button',
@@ -210,7 +215,7 @@ const WithOnRowHoverContent = (): JSX.Element => {
 
   return (
     <Table
-      {...getKnobs()}
+      {...getKnobs<typeof rows[number]>()}
       columns={columns}
       rows={rows}
       onRowHover={({ id }): void => setHoveredRow(id)}
@@ -340,11 +345,15 @@ export const withCustomFilters = createStory(
 );
 
 export default createMetadata({
-  title: 'Компоненты|/Table',
+  title: 'Компоненты|/Отображение данных/Table',
   id: 'components/Table',
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=1871%3A36244',
     },
   },
 });

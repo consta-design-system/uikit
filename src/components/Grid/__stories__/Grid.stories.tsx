@@ -85,11 +85,15 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Grid',
+  title: 'Компоненты|/Служебные/Grid',
   id: 'components/Grid',
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=14188%3A0',
     },
   },
 });

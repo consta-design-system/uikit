@@ -1,5 +1,30 @@
 # Changelog
 
+## v1.11.10 (20/04/2021)
+
+- [chore(github): Update issue templates (#1041)](https://github.com/gazprom-neft/consta-uikit/commit/bd71b9bbace0730438d3bc51033b307360006410) - [@kolebayev](https://github.com/kolebayev)
+- [feat(useThemeVars): added hook useThemeVars (#1042)](https://github.com/gazprom-neft/consta-uikit/commit/6c6f133781bd48c7e4ac7ed3fcb6a1eeb8c850be) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Icon): add new icons (#1058)](https://github.com/gazprom-neft/consta-uikit/commit/cc5c1fea76683f08b31c2557baff2823f15a4f8b) - [@kolebayev](https://github.com/kolebayev)
+- [feat(FileIcon): refactor file-icons, add JSON file icon (#1057)](https://github.com/gazprom-neft/consta-uikit/commit/a16c746df1016a9e1a43ddd7bf481d13e9000b35) - [@kolebayev](https://github.com/kolebayev)
+- [fix(storybook): add to group in sidebar (#1060)](https://github.com/gazprom-neft/consta-uikit/commit/123352a264670675fc81b4cb8c3a98a07840469e) - [@kolebayev](https://github.com/kolebayev)
+- [feat(icons): add IconLineAndBarChart (#1026)](https://github.com/gazprom-neft/consta-uikit/commit/b93a33f3d1c9354356e68181f48b0853e7a6fc6f) - [@kolebayev](https://github.com/kolebayev)
+- [fix(storybook): component groups (#1025)](https://github.com/gazprom-neft/consta-uikit/commit/211d6238fc167378a42ee679fb81cfa95dd98900) - [@kolebayev](https://github.com/kolebayev)
+- [docs(common): add docs about issues (#1023)](https://github.com/gazprom-neft/consta-uikit/commit/9a5041f2078d887fc76474ae7081b186ab429c15) - [@arhayka](https://github.com/arhayka)
+- [feat(Table): add column render fn (#824)](https://github.com/gazprom-neft/consta-uikit/commit/59bfc9a39ddc06c9dc08358389790dd7f8609cb7) - [@vasilevx](https://github.com/vasilevx)
+- [chore(deps): bump y18n from 3.2.1 to 3.2.2 (#1013)](https://github.com/gazprom-neft/consta-uikit/commit/639818524e8dea91b26aad2dc6c66fef637519b9) - [@dependabot[bot]](https://github.com/dependabot[bot])
+- [chore(CODEOWNERS): update CODEOWNERS (#1043)](https://github.com/gazprom-neft/consta-uikit/commit/cd0f9b72f3d5882699f7a34226c8571972106f5c) - [@gizeasy](https://github.com/gizeasy)
+- [feat(ProgressSpin): add default spinning (#971)](https://github.com/gazprom-neft/consta-uikit/commit/2a7bdc550e9525d373df28c543a5a747d25703ed) - [@azhadanov](https://github.com/azhadanov)
+- [Feat/themetoggler development (#879)](https://github.com/gazprom-neft/consta-uikit/commit/7698d605af18033d8e0468cfe7c98f370807b084) - [@azhadanov](https://github.com/azhadanov)
+- [chore(Storybook): add Figma integration (#1014)](https://github.com/gazprom-neft/consta-uikit/commit/fc455406a8c9d7f9584425f8226ae3118483e57f) - [@azhadanov](https://github.com/azhadanov)
+
+---
+
+## v1.11.9 (25/03/2021)
+
+- [feat(Table): add custom filters (#804)](https://github.com/gazprom-neft/consta-uikit/commit/e6c956776758a8990b51d194f32c374758dff879) - [@vasilevx](https://github.com/vasilevx)
+
+---
+
 ## v1.11.8 (17/03/2021)
 
 - [chore(bem-cn): removed package from dependencies](https://github.com/gazprom-neft/consta-uikit/commit/3347b6c02d4fd94de96672ce9a6c075293f065b6) - [@gizeasy](https://github.com/gizeasy)
@@ -349,26 +374,3 @@
 - [fix(Table): change condition for initial column widths (#310)](https://github.com/gazprom-neft/consta-uikit/commit/76730424cbc7396a1342c94c709a567177f21e5d) - @evless
 - [feat(Icons): add new icons (#302)](https://github.com/gazprom-neft/consta-uikit/commit/cfcb1a372aa51018e6d70b8339f87b2372fb5835) - @andekhtyar
 - [feat(ChoiceGroup): component update (#285)](https://github.com/gazprom-neft/consta-uikit/commit/420e1b29cfd910a43865fba4e5adde024c10c6ac) - @gizeasy
-
----
-
-## v1.6.1 (10/08/2020)
-
-- [fix(Types): emotions affect types (#314)](https://github.com/gazprom-neft/consta-uikit/commit/e1dea8dc685fac2016597715af387bcb8978b147) - @gizeasy
-- [chore(deps): bump elliptic from 6.5.2 to 6.5.3 (#306)](https://github.com/gazprom-neft/consta-uikit/commit/3d5c426a26507a6678037d5d4e634b13bdae31df) - @dependabot[bot]
-- [fix(StoryBook): change path Table](https://github.com/gazprom-neft/consta-uikit/commit/6ce7ac972d2c3030545fb3096a64e80e93bcdb1e) - @gizeasy
-
----
-
-## v1.6.0 (29/07/2020)
-
-- [fix(Badge): replace system color in Display theme, fix text color (#280)](https://github.com/gazprom-neft/consta-uikit/commit/25a417747f81ed0a8c29cf6acde783d01e6728ec) - @fooontic
-- [fix(ThemeDocs): fix runtime error (#287)](https://github.com/gazprom-neft/consta-uikit/commit/1f00a8ad7dff73059bdb7cefbc0d0f63109fa954) - @gizeasy
-- [docs(StoryBook): change path FileField, export with createMetadata (#288)](https://github.com/gazprom-neft/consta-uikit/commit/6f7167dfafb47bfbe2494b62b219bbe9a5a69f74) - @gizeasy
-- [feat(Table): add Table component (#278)](https://github.com/gazprom-neft/consta-uikit/commit/7526a0413e880bd2844371b806ddae6d63b538f6) - @al-fyodorov
-- [chore(deps): removed unused dependencies (#275)](https://github.com/gazprom-neft/consta-uikit/commit/a3b924540a780887e058cf3b9b47032de9faab46) - @gizeasy
-- [fix(TextField): change type onFocus and onBlur (#270)](https://github.com/gazprom-neft/consta-uikit/commit/62aa87bd1fac4229126531a5d2b24a3a5bf22b2b) - @gizeasy
-- [docs(README.md): added a link to the stand (#274)](https://github.com/gazprom-neft/consta-uikit/commit/7a675a63f9deb6cc4b3df7d0247245ed3434710d) - @gizeasy
-- [feat(Switch): add S size (#281)](https://github.com/gazprom-neft/consta-uikit/commit/58e45a45a5eab790011dabf72f0c58dc943959f7) - @fooontic
-- [refactor(Story): restructuring stories (#269)](https://github.com/gazprom-neft/consta-uikit/commit/5b6ed226ea1bfe6f3f4e78e44271312373dba76f) - @gizeasy
-- [feat(FileField): add component FileField (#264)](https://github.com/gazprom-neft/consta-uikit/commit/58e8e1de928800d5f8df3866d1be03daa7dc1da3) - @gizeasy

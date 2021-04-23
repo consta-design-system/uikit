@@ -36,11 +36,15 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Icons',
+  title: 'Компоненты|/Графика/Icons',
   id: 'components/Icons',
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/SLc0YGhuDotve6MTCBHlGxDU/Consta-Graphics?node-id=0%3A1',
     },
   },
 });
