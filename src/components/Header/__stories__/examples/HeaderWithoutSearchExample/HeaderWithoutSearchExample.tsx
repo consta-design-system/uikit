@@ -33,9 +33,9 @@ export function HeaderWithoutSearchExample() {
       href: '#tasks',
     },
     {
-      label: 'Какой-то пункт',
+      label: 'Еще',
       // eslint-disable-next-line no-alert
-      onClick: () => alert('Какой-то пункт'),
+      onClick: () => alert('Еще'),
     },
   ];
 
@@ -70,7 +70,6 @@ export function HeaderWithoutSearchExample() {
               personName="Вадим Матвеев"
               personInfo="В другом офисе"
               personStatus="available"
-              personAvatarUrl="https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png"
               onClick={handleLogin}
               className={cnExample('Login', { isLogged })}
             />

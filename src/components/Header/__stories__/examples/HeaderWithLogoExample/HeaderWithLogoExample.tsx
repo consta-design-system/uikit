@@ -38,8 +38,8 @@ export function HeaderWithLogoExample() {
       href: '#tasks',
     },
     {
-      label: 'Какой-то пункт',
-      onClick: () => alert('Какой-то пункт'),
+      label: 'Еще',
+      onClick: () => alert('Еще'),
     },
   ];
 
@@ -101,7 +101,6 @@ export function HeaderWithLogoExample() {
               personName="Вадим Матвеев"
               personInfo="В другом офисе"
               personStatus="available"
-              personAvatarUrl="https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png"
               onClick={handleLogin}
               className={cnExample('Login', { isLogged })}
             />

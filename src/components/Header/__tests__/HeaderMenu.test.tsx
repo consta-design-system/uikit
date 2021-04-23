@@ -19,7 +19,7 @@ const defaultItems: HeaderMenuProps['items'] = [
     href: '#tasks',
   },
   {
-    label: 'Какой-то пункт',
+    label: 'Еще',
   },
 ];
 
@@ -79,7 +79,7 @@ describe('Компонент HeaderMenu', () => {
         renderComponent({
           items: [
             {
-              label: 'Какой-то пункт',
+              label: 'Еще',
               onClick: handleClick,
             },
           ],
