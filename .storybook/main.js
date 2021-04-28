@@ -80,6 +80,18 @@ module.exports = {
       enforce: 'pre',
     });
 
+    config.module.rules.push({
+      test: /(\/|\\)docs(\/|\\)[\w/\\.-]*\.tsx?$/,
+      use: [
+        {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react'],
+          },
+        },
+      ],
+    });
+
     return config;
   },
 };
