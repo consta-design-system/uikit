@@ -7,6 +7,7 @@ const testId = cnCollapse();
 
 const defaultChildren = 'Default children';
 const defaultLabel = 'Default label';
+const additionalClass = 'additionalClass';
 
 const renderComponent = ({
   label = defaultLabel,
@@ -15,7 +16,13 @@ const renderComponent = ({
   ...props
 }) => {
   return render(
-    <Collapse {...props} data-testid={testId} isOpen={isOpen} label={label}>
+    <Collapse
+      {...props}
+      className={additionalClass}
+      data-testid={testId}
+      isOpen={isOpen}
+      label={label}
+    >
       {children}
     </Collapse>,
   );
@@ -25,8 +32,8 @@ function getRender() {
   return screen.getByTestId(testId);
 }
 
-function getLabel() {
-  return getRender().querySelector(`.${cnCollapse('Label')}`);
+function getLabelText() {
+  return getRender().querySelector(`.${cnCollapse('LabelText')}`);
 }
 
 describe('Компонент Collapse', () => {
@@ -34,21 +41,13 @@ describe('Компонент Collapse', () => {
     expect(() => renderComponent({})).not.toThrow();
   });
   describe('проверка props', () => {
-    describe('проверка className', () => {
-      it(`Дополнительный className присваевается`, () => {
-        const className = 'className';
-
-        renderComponent({ className });
-        expect(getRender()).toHaveClass(className);
-      });
-    });
     describe('проверка label', () => {
       it(`label отображается`, () => {
         const label = 'fileName';
 
         renderComponent({ label });
 
-        const labelElement = getLabel() as HTMLDivElement;
+        const labelElement = getLabelText() as HTMLDivElement;
 
         expect(labelElement.textContent).toEqual(label);
       });
@@ -59,7 +58,7 @@ describe('Компонент Collapse', () => {
 
         renderComponent({ onClick: handleClick });
 
-        const element = getLabel() as HTMLButtonElement;
+        const element = getLabelText() as HTMLDivElement;
 
         fireEvent.click(element);
         expect(handleClick).toHaveBeenCalled();
