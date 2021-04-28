@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.11.12 (28/04/2021)
+
+- [chore(storybook): edit configs](https://github.com/gazprom-neft/consta-uikit/commit/b08ba8a274b70fdb7989160d46d81261fcf3a184) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Collapse): create component, story, doc (#988)](https://github.com/gazprom-neft/consta-uikit/commit/8ee65c35fbe94a7a3926df1fd4ba5c926c7050be) - [@azhadanov](https://github.com/azhadanov)
+
+---
+
 ## v1.11.11 (23/04/2021)
 
 - [docs(readme): general info added (#1070)](https://github.com/gazprom-neft/consta-uikit/commit/e0b89ffdfdc9313941b556f211f0520e6e973e43) - [@schurf-des](https://github.com/schurf-des)
@@ -355,10 +362,3 @@
 - [docs(Avatar): add docs for Avatar (#307)](https://github.com/gazprom-neft/consta-uikit/commit/bdb33df0dce71cac06eec75e7de10cca10cf7c57) - @arhayka
 - [docs(components): add docs for Badge and Attach (#279)](https://github.com/gazprom-neft/consta-uikit/commit/cdab002769764089f69baf75d456691fbeefd8b6) - @arhayka
 - [docs(File): add docs for File (#289)](https://github.com/gazprom-neft/consta-uikit/commit/c9977c8e2e1122bac7f8f35fa57529e10948070f) - @arhayka
-
----
-
-## v1.7.1 (21/08/2020)
-
-- [fix(Switch and Radio): disabled styles (#353)](https://github.com/gazprom-neft/consta-uikit/commit/ae83d0812b259c8c2fab979cb6f46562fe251952) - @fooontic
-- [fix(Types): added remove "css" types from attributes](https://github.com/gazprom-neft/consta-uikit/commit/f3350b8503f568c3a810382fc11b880ddd68f8a8) - @evless
