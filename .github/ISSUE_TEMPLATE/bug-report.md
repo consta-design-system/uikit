@@ -3,7 +3,7 @@ name: Bug report
 about: Шаблон оформления баг репорта
 title: 'название компонента/landing/storybook/doc: Что нужно сделать'
 labels: bug
-assignees: ''
+assignees: kolebayev
 
 ---
 
