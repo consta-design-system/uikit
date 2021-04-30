@@ -98,7 +98,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Collapse',
+  title: 'Компоненты|/Отображение данных/Collapse',
   id: 'components/Collapse',
   parameters: {
     docs: {
