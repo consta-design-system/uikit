@@ -1,9 +1,9 @@
 ---
 name: Bug report
 about: Шаблон оформления баг репорта
-title: 'название компонента/landing/storybook/doc : Что нужно сделать'
+title: 'название компонента/landing/storybook/doc: Что нужно сделать'
 labels: bug
-assignees: ''
+assignees: kolebayev
 ---Полные [правила оформления issue](https://consta-uikit.vercel.app/?path=/docs/common-develop-issues--page)
 
 **Описание бага**
@@ -19,7 +19,7 @@ assignees: ''
 **Ожидаемое поведение** (опционально)  
 Опишите ожидаемое поведение
 
-> Если баг в коде, то необходимо заполнить поля ниже
+> Если баг в коде, необходимо заполнить поля ниже ↧
 
 **Версия Consta Kit**
 Укажите версию
