@@ -18,6 +18,23 @@ export type Vars = {
   readonly space: readonly string[];
 };
 
+export type ThemeVars<T extends Vars = typeof defaultVars> = {
+  color: {
+    primary: { [key in T['color']['primary'][number]]: string };
+    accent: { [key in T['color']['accent'][number]]: string };
+    invert: { [key in T['color']['invert'][number]]: string };
+  };
+  control: { [key in T['control'][number]]: string };
+  font: { [key in T['font'][number]]: string };
+  size: { [key in T['size'][number]]: string };
+  space: { [key in T['space'][number]]: string };
+};
+
+type UseThemeVarsOptions<T> = {
+  vars?: T;
+  deps?: [];
+};
+
 const getVars = <T extends string>(
   cssVars: readonly T[],
   element: HTMLDivElement,
@@ -40,29 +57,12 @@ const addElement = (mods: {}): HTMLDivElement => {
   return element;
 };
 
-type UseThemeVarsOptions<T> = {
-  vars?: T;
-  deps?: [];
-};
-
 export const useThemeVars = <T extends Vars = typeof defaultVars>(
   options?: UseThemeVarsOptions<T>,
 ) => {
   const variables = options?.vars || defaultVars;
 
   const { theme } = useTheme();
-
-  type ThemeVars = {
-    color: {
-      primary: { [key in T['color']['primary'][number]]: string };
-      accent: { [key in T['color']['accent'][number]]: string };
-      invert: { [key in T['color']['invert'][number]]: string };
-    };
-    control: { [key in T['control'][number]]: string };
-    font: { [key in T['font'][number]]: string };
-    size: { [key in T['size'][number]]: string };
-    space: { [key in T['space'][number]]: string };
-  };
 
   return useMemo(() => {
     const elementPrimary = addElement({
@@ -72,7 +72,7 @@ export const useThemeVars = <T extends Vars = typeof defaultVars>(
     const elementAccent = addElement({ color: theme.color.accent });
     const elementInvert = addElement({ color: theme.color.invert });
 
-    const themeVars: ThemeVars = {
+    const themeVars: ThemeVars<T> = {
       color: {
         primary: getVars<T['color']['primary'][number]>(variables.color.primary, elementPrimary),
         accent: getVars<T['color']['accent'][number]>(variables.color.accent, elementAccent),
