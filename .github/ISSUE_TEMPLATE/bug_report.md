@@ -2,9 +2,11 @@
 name: Bug report
 about: Шаблон оформления баг репорта
 title: 'название компонента/landing/storybook/doc: Что нужно сделать'
-labels: bug
-assignees: kolebayev
----Полные [правила оформления issue](https://consta-uikit.vercel.app/?path=/docs/common-develop-issues--page)
+labels: 'bug'
+assignees: 'kolebayev'
+---
+
+> Полные [правила оформления issue](https://consta-uikit.vercel.app/?path=/docs/common-develop-issues--page)
 
 **Описание бага**
 Мы будем рады:
