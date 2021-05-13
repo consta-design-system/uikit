@@ -17,7 +17,7 @@ import {
   getMonthTitle,
 } from '../helpers';
 
-const cnCalendarViewSlider = cn('CalendarViewSlider');
+export const cnCalendarViewSlider = cn('CalendarViewSlider');
 
 export const CalendarViewSlider: CalendarViewComponent = React.forwardRef((props, ref) => {
   const {

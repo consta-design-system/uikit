@@ -10,7 +10,7 @@ import { CalendarCell, CalendarCellProps } from '../CalendarСell/CalendarСell'
 
 type DayOfMount = Omit<CalendarDayProps & CalendarCellProps, 'ref'>;
 
-type CalendarMountProps = PropsWithJsxAttributes<
+export type CalendarMountProps = PropsWithJsxAttributes<
   {
     children?: never;
     daysOfWeek: string[];
@@ -19,7 +19,7 @@ type CalendarMountProps = PropsWithJsxAttributes<
   'div'
 >;
 
-const cnCalendarMount = cn('CalendarMount');
+export const cnCalendarMount = cn('CalendarMount');
 
 export const CalendarMount: React.FC<CalendarMountProps> = (props) => {
   const { className, daysOfWeek, daysOfMount, ...otherProps } = props;

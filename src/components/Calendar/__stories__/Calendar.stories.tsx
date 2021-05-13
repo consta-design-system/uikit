@@ -64,7 +64,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Calendar',
+  title: 'Компоненты/Базовые/Calendar',
   id: 'components/Calendar',
   parameters: {
     docs: {

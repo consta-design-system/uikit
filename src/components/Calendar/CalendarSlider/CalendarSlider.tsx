@@ -21,7 +21,7 @@ import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttri
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 
-type CalendarMountLabelProps = PropsWithHTMLAttributes<
+export type CalendarSliderProps = PropsWithHTMLAttributes<
   {
     currentVisibleDate: Date;
     onChange: (date: Date) => void;
@@ -32,7 +32,7 @@ type CalendarMountLabelProps = PropsWithHTMLAttributes<
   HTMLDivElement
 >;
 
-const cnCalendarSlider = cn('CalendarSlider');
+export const cnCalendarSlider = cn('CalendarSlider');
 
 const isCurrentVisibleYear = (currentDate: Date, mount: Date) =>
   getYear(currentDate) === getYear(mount);
@@ -114,7 +114,7 @@ const getSliderData = (date: Date, value: Date | DateRange | undefined, locale: 
   }));
 };
 
-export const CalendarSlider: React.FC<CalendarMountLabelProps> = (props) => {
+export const CalendarSlider: React.FC<CalendarSliderProps> = (props) => {
   const {
     currentVisibleDate,
     className,

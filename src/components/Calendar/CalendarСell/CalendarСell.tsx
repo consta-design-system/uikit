@@ -15,7 +15,7 @@ export type CalendarCellProps = PropsWithJsxAttributes<
   'div'
 >;
 
-const cnCalendarCell = cn('CalendarСell');
+export const cnCalendarCell = cn('CalendarСell');
 
 export const CalendarCell: React.FC<CalendarCellProps> = (props) => {
   const { range, children, className, ...otherProps } = props;

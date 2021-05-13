@@ -20,7 +20,7 @@ export type CalendarDayProps = PropsWithJsxAttributes<
   'div'
 >;
 
-const cnCalendarDay = cn('CalendarDay');
+export const cnCalendarDay = cn('CalendarDay');
 
 export const CalendarDay = React.forwardRef<HTMLDivElement, CalendarDayProps>((props, ref) => {
   const { number, today, selected, event, disabled, ...otherProps } = props;

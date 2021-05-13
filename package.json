@@ -41,7 +41,8 @@
     "pre-build": "node builder/preBuild.js --config=./build.config.js",
     "test": "yarn lint && yarn tsc-dry-run && yarn unit",
     "unit": "jest",
-    "unit:watch": "jest --watch"
+    "unit:watch": "jest --watch",
+    "unit:clear": "jest --clearCache"
   },
   "browserslist": [
     "last 2 version",

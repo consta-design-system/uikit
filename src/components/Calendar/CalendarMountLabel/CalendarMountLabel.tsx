@@ -6,7 +6,7 @@ import { cn } from '../../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import { Text } from '../../Text/Text';
 
-type CalendarMountLabelProps = PropsWithHTMLAttributes<
+export type CalendarMountLabelProps = PropsWithHTMLAttributes<
   {
     label: string;
     children?: never;
@@ -14,7 +14,7 @@ type CalendarMountLabelProps = PropsWithHTMLAttributes<
   HTMLDivElement
 >;
 
-const cnCalendarMountLabel = cn('CalendarMountLabel');
+export const cnCalendarMountLabel = cn('CalendarMountLabel');
 
 export const CalendarMountLabel: React.FC<CalendarMountLabelProps> = (props) => {
   const { label, className, ...otherProps } = props;

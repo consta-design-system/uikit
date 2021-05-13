@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   addDays,
   differenceInDays,
@@ -202,7 +203,9 @@ export const getDaysOfMount = (props: {
     if (date.getMonth() === currentMonth) {
       return {
         number,
-        onClick: handleDayClick ? (e) => handleDayClick({ e, value: date }) : undefined,
+        onClick: handleDayClick
+          ? (e: React.MouseEvent<HTMLDivElement>) => handleDayClick({ e, value: date })
+          : undefined,
         selected: isSelected({ date, value }),
         range: Array.isArray(value) && isDateInRange(date, value),
         event: events && hasEvent(date, events),
@@ -244,7 +247,7 @@ export const getHandleSelectDate: getHandleSelectDate = ({
     handleSelectDate = ({ value: date, e }) => {
       // Привел к типам так как TS не понимает что при указанном `type`
       // календаря всегда будет падать определенный тип `value`
-      const onChange = onChangeProp as CalendarPropOnChange<'date-range'>;
+      const onChange = onChangeProp as CalendarPropOnChange<'date-range'> | undefined;
       const value = (valueProp || []) as CalendarPropValue<'date-range'>;
 
       if (minDate && maxDate) {
@@ -253,7 +256,7 @@ export const getHandleSelectDate: getHandleSelectDate = ({
         }
       }
 
-      if (!isOnlyOneDateInRange(value)) {
+      if (!isOnlyOneDateInRange(value) && typeof onChange === 'function') {
         return onChange({ e, value: [date, undefined] });
       }
 
@@ -263,25 +266,30 @@ export const getHandleSelectDate: getHandleSelectDate = ({
         if (startDate.getTime() === date.getTime()) {
           return;
         }
-        return onChange({ e, value: startDate > date ? [date, startDate] : [startDate, date] });
+        if (typeof onChange === 'function') {
+          return onChange({ e, value: startDate > date ? [date, startDate] : [startDate, date] });
+        }
       }
 
       if (isDefined(endDate)) {
         if (endDate.getTime() === date.getTime()) {
           return;
         }
-        return onChange({ e, value: endDate > date ? [date, endDate] : [endDate, date] });
+        if (typeof onChange === 'function') {
+          return onChange({ e, value: endDate > date ? [date, endDate] : [endDate, date] });
+        }
       }
     };
   } else {
-    const onChange = onChangeProp as CalendarPropOnChange<'date'>;
+    const onChange = onChangeProp as CalendarPropOnChange<'date'> | undefined;
 
     handleSelectDate = (props) => {
       if (!isWithInIntervalMinMaxDade(props.value, minDate, maxDate)) {
         return;
       }
-
-      return onChange(props);
+      if (typeof onChange === 'function') {
+        return onChange(props);
+      }
     };
   }
 

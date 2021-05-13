@@ -8,7 +8,7 @@ import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttribu
 import { Button } from '../../Button/Button';
 import { CalendarMountLabel } from '../CalendarMountLabel/CalendarMountLabel';
 
-type CalendarMountTogglerProps = PropsWithJsxAttributes<
+export type CalendarMountTogglerProps = PropsWithJsxAttributes<
   {
     prevOnClick?: React.EventHandler<React.MouseEvent<HTMLDivElement>>;
     nextOnClick?: React.EventHandler<React.MouseEvent<HTMLDivElement>>;
@@ -18,7 +18,7 @@ type CalendarMountTogglerProps = PropsWithJsxAttributes<
   'div'
 >;
 
-const cnCalendarMountToggler = cn('CalendarMountToggler');
+export const cnCalendarMountToggler = cn('CalendarMountToggler');
 
 export const CalendarMountToggler: React.FC<CalendarMountTogglerProps> = (props) => {
   const { label, className, prevOnClick, nextOnClick, ...otherProps } = props;

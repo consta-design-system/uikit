@@ -14,7 +14,7 @@ import {
   getMouthLabelWithYear,
 } from '../helpers';
 
-const cnCalendarViewOneMount = cn('CalendarViewOneMount');
+export const cnCalendarViewOneMount = cn('CalendarViewOneMount');
 
 export const CalendarViewOneMount: CalendarViewComponent = React.forwardRef((props, ref) => {
   const {
