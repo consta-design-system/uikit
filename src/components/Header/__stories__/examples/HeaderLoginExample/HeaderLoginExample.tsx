@@ -25,7 +25,6 @@ export function HeaderLoginExample() {
               personName="Михаил Зерно"
               personInfo="В другом офисе"
               personStatus="available"
-              personAvatarUrl="https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png"
               onClick={handleLogin}
               className={cnExample('Login', { isLogged })}
             />
@@ -43,25 +42,14 @@ export function HeaderLoginExampleType() {
     >
       <div className={cnDocsExample()}>
         <p className={cnDocsExample('Caption')}>Полная версия</p>
-        <HeaderLogin
-          isLogged
-          personName="Михаил Зерно"
-          personInfo="В другом офисе"
-          personAvatarUrl="https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png"
-        />
+        <HeaderLogin isLogged personName="Михаил Зерно" personInfo="В другом офисе" />
         <p className={cnDocsExample('Caption')}>
           Пользователь авторизован. Есть аватарка, имя и фамилия.
         </p>
       </div>
       <div className={cnDocsExample()}>
         <p className={cnDocsExample('Caption')}>Краткая версия</p>
-        <HeaderLogin
-          isLogged
-          personName="Михаил Зерно"
-          personInfo="В другом офисе"
-          personAvatarUrl="https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png"
-          isMinified
-        />
+        <HeaderLogin isLogged personName="Михаил Зерно" personInfo="В другом офисе" isMinified />
         <p className={cnDocsExample('Caption')}>
           Пользователь авторизован. Есть только аватарка и стрелочка.
         </p>
@@ -72,7 +60,6 @@ export function HeaderLoginExampleType() {
           personName="Михаил Зерно"
           personInfo="В другом офисе"
           personStatus="available"
-          personAvatarUrl="https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png"
         />
         <p className={cnDocsExample('Caption')}>Предлагаем пользователю войти в аккаунт.</p>
       </div>
@@ -89,13 +76,7 @@ export function HeaderLoginExampleStatus() {
     >
       <div className={cnDocsExample()}>
         <p className={cnDocsExample('Caption')}>Без статуса</p>
-        <HeaderLogin
-          isLogged
-          personName="Михаил Зерно"
-          personInfo="В другом офисе"
-          personAvatarUrl="https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png"
-          isMinified
-        />
+        <HeaderLogin isLogged personName="Михаил Зерно" personInfo="В другом офисе" isMinified />
         <p className={cnDocsExample('Caption')}>Нет статуса</p>
       </div>
       <div className={cnDocsExample()}>
@@ -105,7 +86,6 @@ export function HeaderLoginExampleStatus() {
           personName="Михаил Зерно"
           personInfo="В другом офисе"
           personStatus="available"
-          personAvatarUrl="https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png"
           isMinified
         />
         <p className={cnDocsExample('Caption')}>Онлайн / На месте</p>
@@ -117,7 +97,6 @@ export function HeaderLoginExampleStatus() {
           personName="Михаил Зерно"
           personInfo="В другом офисе"
           personStatus="remote"
-          personAvatarUrl="https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png"
           isMinified
         />
         <p className={cnDocsExample('Caption')}>Занят / Работает удаленно</p>
@@ -129,7 +108,6 @@ export function HeaderLoginExampleStatus() {
           personName="Михаил Зерно"
           personInfo="В другом офисе"
           personStatus="out"
-          personAvatarUrl="https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png"
           isMinified
         />
         <p className={cnDocsExample('Caption')}>Офлайн / Нет на месте</p>

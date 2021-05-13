@@ -70,11 +70,15 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Pagination',
+  title: 'Компоненты|/Навигация/Pagination',
   id: 'components/Pagination',
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=4861%3A74397',
     },
   },
 });

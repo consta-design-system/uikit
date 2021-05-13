@@ -10,6 +10,7 @@ import { FileIconDoc } from '../../fileIcons/FileIconDoc/FileIconDoc';
 import { FileIconExe } from '../../fileIcons/FileIconExe/FileIconExe';
 import { FileIconGif } from '../../fileIcons/FileIconGif/FileIconGif';
 import { FileIconJpg } from '../../fileIcons/FileIconJpg/FileIconJpg';
+import { FileIconJson } from '../../fileIcons/FileIconJson/FileIconJson';
 import { FileIconLoading } from '../../fileIcons/FileIconLoading/FileIconLoading';
 import { FileIconMov } from '../../fileIcons/FileIconMov/FileIconMov';
 import { FileIconMp3 } from '../../fileIcons/FileIconMp3/FileIconMp3';
@@ -66,6 +67,7 @@ const mapExtensionToSvg: { [value: string]: React.FC<FileIconProps> } = {
   gz: FileIconZip,
   xls: FileIconXls,
   xlsx: FileIconXls,
+  json: FileIconJson,
 };
 
 function getIconByExtension(extension?: string): React.FC<FileIconProps> {
@@ -87,16 +89,14 @@ export const File: React.FC<FileProps> = (props) => {
   } = props;
 
   if (loading) {
-    const spin = !loadingProgress;
-
     return (
       <FileIconLoading className={cnFile(null, [className])} size={size} {...otherProps}>
         {loadingWithProgressSpin && (
-          <div className={cnFile('Loader', { spin, size })}>
+          <div className={cnFile('Loader', { size })}>
             <ProgressSpin
               className={cnFile('Progress')}
               size={size}
-              progress={spin ? 50 : loadingProgress}
+              progress={loadingProgress}
               animation
             />
           </div>

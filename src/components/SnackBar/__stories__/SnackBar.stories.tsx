@@ -149,11 +149,15 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/SnackBar',
+  title: 'Компоненты|/Обратная связь/SnackBar',
   id: 'components/SnackBar',
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=58%3A11236',
     },
   },
 });

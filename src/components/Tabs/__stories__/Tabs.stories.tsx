@@ -57,11 +57,15 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Tabs',
+  title: 'Компоненты|/Навигация/Tabs',
   id: 'components/Tabs',
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=12745%3A116509',
     },
   },
 });

@@ -10,6 +10,7 @@ module.exports = {
     '@storybook/addon-actions/register',
     '@storybook/addon-a11y/register',
     '@storybook/addon-docs/register',
+    'storybook-addon-designs',
   ],
   webpackFinal: async (config) => {
     // Remove the existing css rule
@@ -77,6 +78,18 @@ module.exports = {
       loader: require.resolve('@storybook/source-loader'),
       exclude: [/node_modules/],
       enforce: 'pre',
+    });
+
+    config.module.rules.push({
+      test: /(\/|\\)docs(\/|\\)[\w/\\.-]*\.tsx?$/,
+      use: [
+        {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react'],
+          },
+        },
+      ],
     });
 
     return config;

@@ -21,6 +21,10 @@ type StoryMetadata = {
     docs?: {
       page: (props: any) => JSX.Element;
     };
+    design?: {
+      type: string;
+      url: string;
+    };
   };
 };
 

@@ -1,13 +1,35 @@
 import {
   fieldFiltersPresent,
+  Filters,
   filterTableData,
   getOptionsForFilters,
   getSelectedFiltersInitialState,
   getSelectedFiltersList,
   isSelectedFiltersPresent,
 } from '../filtering';
+import { TableColumn } from '../Table';
 
-const COUNT_FILTERS = [
+const DATA = [
+  {
+    id: 'row1',
+    count: 150,
+    price: 50,
+  },
+  {
+    id: 'row2',
+    count: 100,
+    price: 150,
+  },
+  {
+    id: 'row3',
+    count: 50,
+    price: 100,
+  },
+];
+
+type Row = typeof DATA[number];
+
+const COUNT_FILTERS: Filters<Row> = [
   {
     id: 'countLess100',
     name: 'Количество меньше 100',
@@ -38,9 +60,9 @@ const COUNT_FILTERS = [
     field: 'count',
     filterer: (value: number) => value === undefined,
   },
-] as const;
+];
 
-const PRICE_FILTERS = [
+const PRICE_FILTERS: Filters<Row> = [
   {
     id: 'priceLess100',
     name: 'Цена меньше 100',
@@ -59,27 +81,9 @@ const PRICE_FILTERS = [
     field: 'price',
     filterer: (value: number) => value > 100,
   },
-] as const;
+];
 
 const FILTERS = [...COUNT_FILTERS, ...PRICE_FILTERS];
-
-const DATA = [
-  {
-    id: 'row1',
-    count: 150,
-    price: 50,
-  },
-  {
-    id: 'row2',
-    count: 100,
-    price: 150,
-  },
-  {
-    id: 'row3',
-    count: 50,
-    price: 100,
-  },
-];
 
 describe('fieldFiltersPresent', () => {
   it('возвращает false если фильтр с таким полем не существует', () => {
@@ -108,7 +112,9 @@ describe('filterTableData', () => {
         data: DATA,
         filters: FILTERS,
         selectedFilters: {
-          count: ['countEqual0'],
+          count: {
+            selected: ['countEqual0'],
+          },
         },
       }),
     ).toEqual([]);
@@ -120,7 +126,9 @@ describe('filterTableData', () => {
         data: DATA,
         filters: FILTERS,
         selectedFilters: {
-          count: ['countLess100'],
+          count: {
+            selected: ['countLess100'],
+          },
         },
       }),
     ).toEqual([DATA[2]]);
@@ -132,7 +140,9 @@ describe('filterTableData', () => {
         data: DATA,
         filters: FILTERS,
         selectedFilters: {
-          count: ['countLess100', 'countMore100'],
+          count: {
+            selected: ['countLess100', 'countMore100'],
+          },
         },
       }),
     ).toEqual([DATA[0], DATA[2]]);
@@ -144,8 +154,12 @@ describe('filterTableData', () => {
         data: DATA,
         filters: FILTERS,
         selectedFilters: {
-          count: ['countEqual100'],
-          price: ['priceMore100'],
+          count: {
+            selected: ['countEqual100'],
+          },
+          price: {
+            selected: ['priceMore100'],
+          },
         },
       }),
     ).toEqual([DATA[1]]);
@@ -157,7 +171,9 @@ describe('filterTableData', () => {
         data: DATA,
         filters: FILTERS,
         selectedFilters: {
-          count: ['UNDEFINED'],
+          count: {
+            selected: ['UNDEFINED'],
+          },
         },
       }),
     ).toEqual([]);
@@ -206,14 +222,18 @@ describe('getSelectedFiltersInitialState', () => {
 
   it('возвращает начальное состояние для каждого типа фильтра', () => {
     expect(getSelectedFiltersInitialState(FILTERS)).toEqual({
-      count: [],
-      price: [],
+      count: {
+        selected: [],
+      },
+      price: {
+        selected: [],
+      },
     });
   });
 });
 
 describe('getSelectedFiltersList', () => {
-  const COLUMNS = [
+  const COLUMNS: TableColumn<Row>[] = [
     { title: 'Количество', accessor: 'count' },
     { title: 'Цена', accessor: 'price' },
   ];
@@ -233,7 +253,9 @@ describe('getSelectedFiltersList', () => {
       getSelectedFiltersList({
         filters: FILTERS,
         selectedFilters: {
-          count: ['countLess100'],
+          count: {
+            selected: ['countLess100'],
+          },
         },
         columns: COLUMNS,
       }),
@@ -250,8 +272,12 @@ describe('getSelectedFiltersList', () => {
       getSelectedFiltersList({
         filters: FILTERS,
         selectedFilters: {
-          count: ['countLess100'],
-          price: ['priceLess100'],
+          count: {
+            selected: ['countLess100'],
+          },
+          price: {
+            selected: ['priceLess100'],
+          },
         },
         columns: COLUMNS,
       }),
@@ -272,7 +298,9 @@ describe('getSelectedFiltersList', () => {
       getSelectedFiltersList({
         filters: FILTERS,
         selectedFilters: {
-          count: ['UNDEFINED'],
+          count: {
+            selected: ['UNDEFINED'],
+          },
         },
         columns: COLUMNS,
       }),
@@ -284,8 +312,12 @@ describe('isSelectedFiltersPresent', () => {
   it('возвращает false если не выбран ни один фильтр', () => {
     expect(
       isSelectedFiltersPresent({
-        count: [],
-        price: [],
+        count: {
+          selected: [],
+        },
+        price: {
+          selected: [],
+        },
       }),
     ).toEqual(false);
   });
@@ -293,8 +325,12 @@ describe('isSelectedFiltersPresent', () => {
   it('возвращает true если выбран фильтр для одного из полей', () => {
     expect(
       isSelectedFiltersPresent({
-        count: ['countLess100'],
-        price: [],
+        count: {
+          selected: ['countLess100'],
+        },
+        price: {
+          selected: [],
+        },
       }),
     ).toEqual(true);
   });
@@ -302,8 +338,12 @@ describe('isSelectedFiltersPresent', () => {
   it('возвращает true если выбраны фильтры для всех полей', () => {
     expect(
       isSelectedFiltersPresent({
-        count: ['countLess100'],
-        price: ['priceEqual100'],
+        count: {
+          selected: ['countLess100'],
+        },
+        price: {
+          selected: ['priceEqual100'],
+        },
       }),
     ).toEqual(true);
   });

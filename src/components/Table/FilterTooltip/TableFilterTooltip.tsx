@@ -31,6 +31,7 @@ export const TableFilterTooltip: React.FC<Props> = ({
   options,
   values,
   className,
+  children,
   onChange,
   onToggle,
 }) => {
@@ -57,33 +58,35 @@ export const TableFilterTooltip: React.FC<Props> = ({
           arrowOffset={12}
           onClickOutside={onToggle}
         >
-          <div className={cnTableFilterTooltip('Content')}>
-            <Text as="div" size="xs" view="primary" className={cnTableFilterTooltip('Title')}>
-              Фильтровать по условию
-            </Text>
-            <select
-              className={cnTableFilterTooltip('Select')}
-              value={[...values]}
-              multiple
-              onChange={(e): void => {
-                onChange(
-                  field,
-                  Array.from(e.target.selectedOptions).map((option) => option.value),
-                );
-              }}
-            >
-              {options.map((option) => (
-                <option
-                  key={option.value}
-                  className={cnTableFilterTooltip('Option')}
-                  value={option.value}
-                  title={option.label}
-                >
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </div>
+          {children || (
+            <div className={cnTableFilterTooltip('Content')}>
+              <Text as="div" size="xs" view="primary" className={cnTableFilterTooltip('Title')}>
+                Фильтровать по условию
+              </Text>
+              <select
+                className={cnTableFilterTooltip('Select')}
+                value={[...values]}
+                multiple
+                onChange={(e): void => {
+                  onChange(
+                    field,
+                    Array.from(e.target.selectedOptions).map((option) => option.value),
+                  );
+                }}
+              >
+                {options.map((option) => (
+                  <option
+                    key={option.value}
+                    className={cnTableFilterTooltip('Option')}
+                    value={option.value}
+                    title={option.label}
+                  >
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
         </Popover>
       )}
     </>

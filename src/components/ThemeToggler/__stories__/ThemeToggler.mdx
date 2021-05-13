@@ -1,0 +1,105 @@
+import {
+  ThemeTogglerExampleQuantityTwo,
+  ThemeTogglerExampleQuantityThree,
+} from './examples/ThemeTogglerExampleQuantity/ThemeTogglerExampleQuantity';
+
+import { ThemeTogglerExampleSize } from './examples/ThemeTogglerExampleSize/ThemeTogglerExampleSize';
+
+# ThemeToggler
+
+Переключатель, с помощью которого можно выбрать тему — из двух или большего количества вариантов.
+
+- [Темы](#темы)
+- [Контекстное меню](#контекстное-меню)
+- [Размер](#размер)
+- [Свойства](#свойства)
+- [Пример использования](#пример-использования)
+
+## Темы
+
+Темы, из которых можно сделать выбор, описываются в массиве `items`.
+
+```
+const items = ['Default', 'Dark'];
+```
+
+Тема, которая сейчас выбрана, содержится в `value`.
+
+Иконку темы можно получить с помощью функции `getItemIcon`— на неё нужно нажать, чтобы переключить тему.
+
+Название темы можно получить с помощью функции `getItemLabel`. Его видно только в [контекстном меню](#контекстное-меню).
+
+У каждой темы может быть уникальный идентификатор. Его можно получить с помощью функции `getItemKey?`.
+Если идентификатор не указан, вместо него используется `getItemLabel`.
+
+Если выбрать можно только из двух тем, тема меняется по нажатию на иконку.
+
+<ThemeTogglerExampleQuantityTwo />
+
+## Контекстное меню
+
+Если тем больше двух, по нажатию на иконку появляется контекстное меню, а уже в нём можно сделать выбор.
+
+<ThemeTogglerExampleQuantityThree />
+
+Контекстное меню работает на основе [поповера](?path=/docs/components-popover--popover-positioned-by-coords-story).
+Вы можете управлять направлениями, в котором оно разворачивается.
+
+`direction?` — направление, в котором разворачивается контекстное меню.
+
+`possibleDirections?` — список направлений, в которых его в принципе можно развернуть.
+
+Подробнее — в [описании поповера](?path=/docs/components-popover--popover-positioned-by-coords-story), в разделе «Направления разворачивания».
+
+## Размер
+
+Поменять размер переключателя можно с помощью свойства `size`. Варианты: `'xs'`, `'s'`, `'m'`, `'l'`, по умолчанию `'m'`.
+
+Меняется размер всего компонента: и переключателя, и контекстного меню.
+
+<ThemeTogglerExampleSize />
+
+## Свойства
+
+<!-- props:start -->
+
+| Свойство                                   | Тип и значения                 | По умолчанию   | Описание                                                                                                                                                  |
+| ------------------------------------------ | ------------------------------ | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`size?`](#размер-переключателя)           | `'xs'`, `'s'`, `'m'`, `'l'`    | `'m'`          | Размер переключателя                                                                                                                                      |
+| [`items`](#темы)                           | `T[]`                          | -              | Массив тем для выбора                                                                                                                                     |
+| [`value`](#темы)                           | `T`                            | -              | Текущая тема                                                                                                                                              |
+| `onChange`                                 | `(arg: T) => void`             | -              | Функция для изменения                                                                                                                                     |
+| [`getItemKey?`](#темы)                     | `(arg: T) => string OR number` | `getItemLabel` | Функция для получения ключа, уникального для каждой переданной темы. Если опустить это свойство, то вместо этой функции будет использована `getItemLabel` |
+| [`getItemLabel`](#темы)                    | `(arg: T) => string`           | -              | Функция для получения названия темы                                                                                                                       |
+| [`getItemIcon`](#темы)                     | `(arg: T) => FC<IconProps>`    | -              | Функция для получения иконки темы в формате компонента                                                                                                    |
+| [`direction?`](#контекстное-меню)          | `Direction`                    | —              | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) (только если тем больше двух)                                           |
+| [`possibleDirections?`](#контекстное-меню) | `Direction[]`                  | —              | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) (только если тем больше двух)                                           |
+| `className?`                               | `string`                       | -              | Дополнительный CSS-класс для контейнера (если тем всего две) или для кнопки (если тем больше двух)                                                        |
+
+<!-- props:end -->
+
+## Пример
+
+```ts
+import React, { useState } from 'react';
+import { ThemeToggler } from '@consta/uikit/ThemeToggler';
+import { IconSun } from '@consta/uikit/IconSun';
+import { IconMoon } from '@consta/uikit/IconMoon';
+
+const items = ['Default', 'Dark'];
+
+const Examle = () => {
+  const [value, setValue] = useState(themes[0]);
+
+  return (
+    <ThemeToggler
+      size="m"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      getItemIcon={(theme) => (theme === 'Default' ? IconSun : IconMoon)}
+      getItemLabel={(theme) => theme}
+    />
+  );
+};
+```

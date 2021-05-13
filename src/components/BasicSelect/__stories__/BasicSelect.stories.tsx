@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
-import { createMetadata, createStory } from '../../../utils/storybook';
+import { createMetadata } from '../../../utils/storybook';
 import {
   eventInterceptorMap,
   EventInterceptorProvider,
@@ -64,10 +64,10 @@ const getKnobs = () => ({
   placeholder: text('placeholder', 'Placeholder'),
 });
 
-const Default = (props: {
+export function Playground(props: {
   value?: SelectOption;
   onChange?(item: SelectOption | null): void;
-}): JSX.Element => {
+}): JSX.Element {
   const getItemLabel = (option: SelectOption): string => option.label;
   const [value, setValue] = useState<SelectOption | null | undefined>(props.value);
 
@@ -88,22 +88,18 @@ const Default = (props: {
       </div>
     </EventInterceptorProvider>
   );
-};
-
-export const DefaultStory = createStory(() => <Default />, {
-  name: 'по умолчанию',
-});
-
-export const WithValueStory = createStory(() => <Default value={items[4]} />, {
-  name: 'c заданным значением',
-});
+}
 
 export default createMetadata({
-  title: 'Компоненты|/BasicSelect',
+  title: 'Компоненты|/Базовые/BasicSelect',
   id: 'components/BasicSelect',
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=9701%3A190445',
     },
   },
 });

@@ -4,12 +4,12 @@ import {
   BreadcrumbsExampleIconRoot,
   BreadcrumbsExampleMax,
   BreadcrumbsExample,
-  BreadcrumbsExampleActive
-  } from './examples/BreadcrumbsExample/BreadcrumbsExample';
+  BreadcrumbsExampleActive,
+} from './examples/BreadcrumbsExample/BreadcrumbsExample';
 
 # Breadcrumbs
 
-Этот хлебные крошки — компонент, который используется, чтобы показать путь к текущей странице. 
+Этот хлебные крошки — компонент, который используется, чтобы показать путь к текущей странице.
 
 - [Содержимое](#содержимое)
   - [Страницы](#страницы)
@@ -46,7 +46,7 @@ import {
     link: 'https://url.com/page-3',
     isActive: true,
   },
-]
+];
 ```
 
 ### Страницы
@@ -79,33 +79,29 @@ import {
 
 <BreadcrumbsExampleSize />
 
-
-
 ## Свойства
 
-| Свойство              | Тип или варианты значения                                             | По умолчанию   | Описание                                           |
-| --------------------- | --------------------------------------------------------------------- | -------------- | -------------------------------------------------- |
-| [`pages`](#содержимое)                | `Page[]`                                                              | -              | Массив со списком страниц                                    |
-| [`getLabel`](#страницы)               | `(item: Item) => string, React.ReactNode`                             | -              | Функция для получения названия страницы                       |
-| [`getLink`](#страницы)                | `(item: Item) => string`                                              | -              | Функция для получения ссылки на страницу                       |
-| [`getIcon?`](#иконки)               | `(item: Item) => React.FC<IconProps>, undefined`                      | -              | Функция для получения иконки                       |
-| [`onlyIconRoot?`](#иконки)          | `boolean`                                                             | false          | Показывать иконку вместо названия первой страницы в крошках        |
-| [`getIsActive?`](#страницы)           | `(item: Item) => boolean`                                             | -              | Функция для получения текущей страницы       |
-| [`size?`](#размер)                  | `'xs', s', 'm', 'l'`                                                  | 'm'            | Размер хлебных крошек                              |
-| [`maxCount?`](#страницы)              | `number`                                                              | -              | Максимальное количество элементов в хлебных крошках    |
-| `onClick`               | `(page: Page, e: React.MouseEvent) => void`                           | -              | Обработчик клика по хлебным крошкам    |
-| `className?`            | `string`                                                              | -              | Дополнительный CSS-класс                               |
+| Свойство                    | Тип или варианты значения                        | По умолчанию | Описание                                                    |
+| --------------------------- | ------------------------------------------------ | ------------ | ----------------------------------------------------------- |
+| [`pages`](#содержимое)      | `Page[]`                                         | -            | Массив со списком страниц                                   |
+| [`getLabel`](#страницы)     | `(item: Item) => string, React.ReactNode`        | -            | Функция для получения названия страницы                     |
+| [`getLink`](#страницы)      | `(item: Item) => string`                         | -            | Функция для получения ссылки на страницу                    |
+| [`getIcon?`](#иконки)       | `(item: Item) => React.FC<IconProps>, undefined` | -            | Функция для получения иконки                                |
+| [`onlyIconRoot?`](#иконки)  | `boolean`                                        | false        | Показывать иконку вместо названия первой страницы в крошках |
+| [`getIsActive?`](#страницы) | `(item: Item) => boolean`                        | -            | Функция для получения текущей страницы                      |
+| [`size?`](#размер)          | `'xs', s', 'm', 'l'`                             | 'm'          | Размер хлебных крошек                                       |
+| [`maxCount?`](#страницы)    | `number`                                         | -            | Максимальное количество элементов в хлебных крошках         |
+| `onClick`                   | `(page: Page, e: React.MouseEvent) => void`      | -            | Обработчик клика по хлебным крошкам                         |
+| `className?`                | `string`                                         | -            | Дополнительный CSS-класс                                    |
 
 ## Пример
 
 ```ts
-
 // src/App.ts
 import React from 'react';
 import { Breadcrumbs } from '@consta/uikit/Breadcrumbs';
 
 const App = () => {
-
   const pages = [
     {
       icon: IconHand,
@@ -129,22 +125,20 @@ const App = () => {
 
   return (
     <Breadcrumbs
-       className="myClassName"
-       pages={pages}
-       size={'m'}
-       maxCount={3}
-       onlyIconRoot={true}
-       getLabel={(page) => page.label}
-       getIsActive={(page) => !!page.isActive}
-       getLink={(page) => page.label}
-       getIcon={(page) => page.icon}
-       onClick={(page, e) => {
-          e.preventDefault();
-          console.log(page.link, e);
-       }}
-     />
+      className="myClassName"
+      pages={pages}
+      size={'m'}
+      maxCount={3}
+      onlyIconRoot={true}
+      getLabel={(page) => page.label}
+      getIsActive={(page) => !!page.isActive}
+      getLink={(page) => page.link}
+      getIcon={(page) => page.icon}
+      onClick={(page, e) => {
+        e.preventDefault();
+        console.log(page.link, e);
+      }}
+    />
   );
 };
-
-
 ```

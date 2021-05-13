@@ -82,7 +82,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Text',
+  title: 'Компоненты|/Базовые/Text',
   id: 'components/Text',
   parameters: {
     docs: {

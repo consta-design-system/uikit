@@ -14,7 +14,7 @@ export const stepsDefaultSize: StepsPropSize = stepsSizes[0];
 
 export type StepsPropGetLabel<ITEM> = (item: ITEM) => string;
 export type StepsPropGetCommon<ITEM> = (item: ITEM) => boolean;
-export type StepsPropOnChange<ITEM> = (props: { e: React.MouseEvent; value: ITEM | null }) => void;
+export type StepsPropOnChange<ITEM> = (props: { e: React.MouseEvent; value: ITEM }) => void;
 
 type Props<ITEM> = {
   size?: StepsPropSize;

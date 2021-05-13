@@ -104,11 +104,15 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Sidebar',
+  title: 'Компоненты|/Наложение/Sidebar',
   id: 'components/Sidebar',
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=5694%3A0',
     },
   },
 });

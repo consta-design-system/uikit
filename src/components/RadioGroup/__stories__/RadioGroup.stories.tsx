@@ -64,7 +64,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/RadioGroup',
+  title: 'Компоненты|/Базовые/RadioGroup',
   id: 'components/RadioGroup',
   parameters: {
     docs: {

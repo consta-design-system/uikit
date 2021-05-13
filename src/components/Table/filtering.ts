@@ -1,15 +1,33 @@
-import { useState } from 'react';
+import React from 'react';
 
 import { isDefined } from '../../utils/type-guards';
 
-import { RowField, TableColumn, TableRow } from './Table';
+import { TableColumn, TableRow, ValueOf } from './Table';
 
-export type Filters<T extends TableRow> = Array<{
-  id: string;
-  name: string;
-  field: RowField<T>;
-  filterer: (value: any) => boolean;
-}>;
+export type FilterComponentProps = {
+  onConfirm: (value: any) => void;
+  onCancel: () => void;
+  filterValue?: any;
+} & Record<string, unknown>;
+
+export type Filters<T extends TableRow> = ValueOf<
+  {
+    [K in keyof T]: {
+      id: string;
+      name: string;
+      field: K extends string ? K : never;
+      filterer(value: any, filterValue?: any): boolean;
+    } & (
+      | { component?: never }
+      | {
+          component: {
+            name: React.FC<FilterComponentProps>;
+            props?: Omit<FilterComponentProps, 'onConfirm' | 'filterValue'>;
+          };
+        }
+    );
+  }
+>[];
 
 export type SortByProps<T extends TableRow> = {
   sortingBy: keyof T;
@@ -20,7 +38,12 @@ export type onSortBy<T extends TableRow> = (props: SortByProps<T> | null) => voi
 
 export type FieldSelectedValues = string[];
 
-export type SelectedFilters = { [field: string]: FieldSelectedValues | undefined };
+type SelectedFilter = {
+  selected: FieldSelectedValues;
+  value?: any;
+};
+
+export type SelectedFilters = { [field: string]: SelectedFilter };
 
 type SelectedFiltersList = Array<{
   id: string;
@@ -29,7 +52,7 @@ type SelectedFiltersList = Array<{
 
 export const getOptionsForFilters = <T extends TableRow>(
   filters: Filters<T>,
-  field: RowField<T>,
+  field: string,
 ): { value: string; label: string }[] => {
   return filters
     .filter(({ field: filterField }) => filterField === field)
@@ -47,7 +70,9 @@ export const getSelectedFiltersInitialState = <T extends TableRow>(
     if (!fieldAcc[fieldCur.field]) {
       return {
         ...fieldAcc,
-        [fieldCur.field]: [],
+        [fieldCur.field]: {
+          selected: [],
+        },
       };
     }
 
@@ -57,15 +82,13 @@ export const getSelectedFiltersInitialState = <T extends TableRow>(
 
 export const fieldFiltersPresent = <T extends TableRow>(
   tableFilters: Filters<T>,
-  field: RowField<T>,
+  field: string,
 ): boolean => {
   return tableFilters.some(({ field: filterField }) => filterField === field);
 };
 
 export const isSelectedFiltersPresent = (selectedFilters: SelectedFilters): boolean => {
-  return Object.values(selectedFilters).some(
-    (filterGroup) => filterGroup && filterGroup.length > 0,
-  );
+  return Object.values(selectedFilters).some((filterGroup) => filterGroup?.selected!.length > 0);
 };
 
 export const getSelectedFiltersList = <T extends TableRow>({
@@ -78,25 +101,26 @@ export const getSelectedFiltersList = <T extends TableRow>({
   columns: Array<TableColumn<T>>;
 }): SelectedFiltersList => {
   return columns.reduce<SelectedFiltersList>((acc, cur) => {
-    const currentFieldFilters = selectedFilters[cur.accessor] || [];
+    const currentFieldFilters = selectedFilters[cur.accessor!] || [];
     let orderedFilters: SelectedFiltersList = [];
 
-    if (currentFieldFilters.length) {
+    if (currentFieldFilters.selected && currentFieldFilters.selected.length > 0) {
       orderedFilters = currentFieldFilters
-        .map((filter) => {
+        .selected!.map((filter) => {
           const option = filters.find(({ id: filterId }) => filterId === filter);
 
           return option
             ? {
                 id: option.id,
                 name: option.name,
+                value: currentFieldFilters.value,
               }
             : undefined;
         })
         .filter(isDefined);
     }
 
-    return currentFieldFilters.length ? [...acc, ...orderedFilters] : acc;
+    return orderedFilters.length > 0 ? [...acc, ...orderedFilters] : acc;
   }, []);
 };
 
@@ -118,16 +142,30 @@ export const filterTableData = <T extends TableRow>({
     for (const columnName of columnNames) {
       const columnFilters = selectedFilters[columnName];
 
-      if (columnFilters && columnFilters.length) {
+      if (columnFilters && columnFilters.selected!.length) {
         let cellIsValid = false;
+        const cellContent = row[columnName as keyof T];
 
-        for (const filterId of columnFilters) {
+        if (columnFilters.value) {
+          const [filterId] = columnFilters.selected;
           const filter = filters.find(({ id }) => id === filterId);
-          const cellContent = row[columnName];
 
-          if (filter && filter.filterer(cellContent)) {
+          if (filter!.filterer(cellContent, columnFilters.value)) {
             cellIsValid = true;
-            break;
+          }
+        } else {
+          for (const filterId of columnFilters.selected!) {
+            const filter = filters.find(({ id }) => id === filterId);
+
+            if (columnFilters.value === null) {
+              cellIsValid = true;
+              break;
+            }
+
+            if (filter && filter.filterer(cellContent)) {
+              cellIsValid = true;
+              break;
+            }
           }
         }
 
@@ -155,21 +193,29 @@ export const useSelectedFilters = <T extends TableRow>(
   onFiltersUpdated?: (filters: SelectedFilters) => void,
 ): {
   selectedFilters: SelectedFilters;
-  updateSelectedFilters: (field: string, tooltipSelectedFilters: FieldSelectedValues) => void;
+  updateSelectedFilters: (
+    field: string,
+    tooltipSelectedFilters: FieldSelectedValues,
+    value?: any,
+  ) => void;
   removeOneSelectedFilter: (availableFilters: Filters<T>, filter: string) => void;
   removeAllSelectedFilters: (availableFilters: Filters<T>) => void;
 } => {
-  const [selectedFilters, setSelectedFilters] = useState<SelectedFilters>(
+  const [selectedFilters, setSelectedFilters] = React.useState<SelectedFilters>(
     getSelectedFiltersInitialState(filters),
   );
 
   const updateSelectedFilters = (
     field: string,
     tooltipSelectedFilters: FieldSelectedValues,
+    value?: any,
   ): void => {
     const newSelectedFilters = {
       ...selectedFilters,
-      [field]: [...tooltipSelectedFilters],
+      [field]: {
+        selected: [...tooltipSelectedFilters],
+        value,
+      },
     };
 
     setSelectedFilters(newSelectedFilters);
@@ -182,7 +228,7 @@ export const useSelectedFilters = <T extends TableRow>(
     if (filterToDelete) {
       updateSelectedFilters(
         filterToDelete.field,
-        (selectedFilters[filterToDelete.field] || []).filter((f) => f !== filter),
+        (selectedFilters[filterToDelete.field] || {}).selected?.filter((f) => f !== filter),
       );
     }
   };

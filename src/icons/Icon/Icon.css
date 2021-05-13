@@ -5,6 +5,7 @@
   align-items: center;
   width: var(--icon-size);
   height: var(--icon-size);
+  line-height: 0;
 
   &_size {
     &_xs {

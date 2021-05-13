@@ -1,0 +1,41 @@
+.TableTextFilter {
+  &-Searchbar {
+    margin-bottom: var(--space-l);
+  }
+
+  &-AllCheckbox {
+    margin-bottom: var(--space-xs);
+    margin-left: calc(var(--control-border-width) + var(--space-s));
+  }
+
+  &-Checkboxes {
+    overflow-y: auto;
+    max-height: 240px;
+    padding: var(--space-s);
+    background-color: var(--color-control-bg-default);
+    border: var(--control-border-width) solid var(--color-control-bg-border-default);
+    border-radius: var(--control-radius);
+  }
+
+  &-Controls {
+    display: flex;
+    margin-bottom: var(--space-s);
+
+    .Button {
+      height: auto;
+      margin-right: var(--space-3xl);
+      padding: 0;
+      color: var(--color-typo-link);
+      background-color: transparent;
+      line-height: var(--line-height-text-xs);
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &_disabled {
+        color: var(--color-control-typo-disable);
+      }
+    }
+  }
+}

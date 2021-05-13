@@ -76,6 +76,7 @@
 
     &_type_sort {
       .TableHeader-Buttons_isSortingActive & {
+        color: var(--color-control-typo-secondary);
         opacity: 1;
       }
     }
@@ -84,6 +85,10 @@
       .TableHeader-Buttons:hover:not(.TableHeader-Buttons_isFilterOpened) &,
       .TableHeader-Buttons_isFilterActive & {
         opacity: 1;
+      }
+
+      .TableHeader-Buttons_isFilterActive & {
+        color: var(--color-control-typo-secondary);
       }
     }
   }

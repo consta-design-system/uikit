@@ -38,11 +38,15 @@ export function Playground() {
 export const Gallery = FileIconsGallery;
 
 export default createMetadata({
-  title: 'Компоненты|/File',
+  title: 'Компоненты|/Графика/File',
   id: 'components/File',
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/SLc0YGhuDotve6MTCBHlGxDU/Consta-Graphics?node-id=718%3A31',
     },
   },
 });

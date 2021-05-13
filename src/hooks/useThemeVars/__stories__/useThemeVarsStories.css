@@ -1,0 +1,9 @@
+.useThemeVars {
+  &-Title {
+    margin-bottom: var(--space-m);
+  }
+
+  &-Section {
+    margin-bottom: var(--space-l);
+  }
+}

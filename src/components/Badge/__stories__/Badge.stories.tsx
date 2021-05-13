@@ -46,11 +46,15 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Badge',
+  title: 'Компоненты|/Отображение данных/Badge',
   id: 'components/Badge',
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=40%3A119',
     },
   },
 });

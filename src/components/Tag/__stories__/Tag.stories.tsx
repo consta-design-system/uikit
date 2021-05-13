@@ -74,11 +74,15 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Tag',
+  title: 'Компоненты|/Отображение данных/Tag',
   id: 'components/Tag',
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=11148%3A145952',
     },
   },
 });
