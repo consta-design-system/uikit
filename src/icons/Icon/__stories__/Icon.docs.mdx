@@ -6,8 +6,8 @@ import {
   IconExampleViewPrimary,
   IconExampleViewSuccess,
   IconExampleViewWarning,
-  IconExampleViewSecondary
-  } from './examples/IconExampleView/IconExampleView';
+  IconExampleViewSecondary,
+} from './examples/IconExampleView/IconExampleView';
 import { IconExampleSize } from './examples/IconExampleSize/IconExampleSize';
 
 # Icon
@@ -17,15 +17,14 @@ import { IconExampleSize } from './examples/IconExampleSize/IconExampleSize';
 В интерфейсах большинство понятий — абстракции, поэтому объяснить их одними иконками бывает сложно.
 
 Если иконка часто встречается и за ней закрепилось определенное значение, можно оставить ее без подписи.
-Например, гамбургер ```☰``` — иконка, по которой открывается меню.
-Или крестик ```x``` — иконка, по которой закрывается окно.
+Например, гамбургер `☰` — иконка, по которой открывается меню.
+Или крестик `x` — иконка, по которой закрывается окно.
 
 В остальных случаях лучше пояснить иконку текстом (добавить подсказку или заголовок).
 
 Если вы используете иконку без поддержки текста, нужно особенно внимательно следить за метафорой,
 которую вы в нее вкладываете. Пользователю должно быть с одного взгляда ясно, что значит иконка
 и какое действие за ней скрыто.
-
 
 - [Внешний вид](#внешний-вид)
 - [Размер](#размер)
@@ -37,11 +36,11 @@ import { IconExampleSize } from './examples/IconExampleSize/IconExampleSize';
 
 За вид иконки отвечает свойство `view`.
 
-| `'alert'` | `'brand'`| `'ghost'` | `'link'` | `'primary'` | `'secondary'` | `'success'` | `'warning'` |
-| --------- | ---------| ----------| -------- | -------- |  -------- |  -------- |  -------- |
-| <IconExampleViewAlert />| <IconExampleViewBrand /> | <IconExampleViewGhost /> | <IconExampleViewLink /> | <IconExampleViewPrimary /> | <IconExampleViewSecondary /> | <IconExampleViewSuccess /> | <IconExampleViewWarning /> |
+| `'alert'`                | `'brand'`                | `'ghost'`                | `'link'`                | `'primary'`                | `'secondary'`                | `'success'`                | `'warning'`                |
+| ------------------------ | ------------------------ | ------------------------ | ----------------------- | -------------------------- | ---------------------------- | -------------------------- | -------------------------- |
+| <IconExampleViewAlert /> | <IconExampleViewBrand /> | <IconExampleViewGhost /> | <IconExampleViewLink /> | <IconExampleViewPrimary /> | <IconExampleViewSecondary /> | <IconExampleViewSuccess /> | <IconExampleViewWarning /> |
 
- ## Размер
+## Размер
 
 За размер иконки отвечает свойство `size`. Варианты: `'xs'`, `'s'`, `'m'`.
 
@@ -49,30 +48,25 @@ import { IconExampleSize } from './examples/IconExampleSize/IconExampleSize';
 
 ## Свойства
 
-| Свойство     | Тип                                                                               | По умолчанию | Описание                                  |
-| ------------ | --------------------------------------------------------------------------------- | ------------ | ----------------------------------------- |
-| [`size?` ](#размер)     | `'xs'`, `'s'`, `'m'`                                                                  | `'m'`        | Размер                                    |
-| [`view?`](#внешний-вид)      | `'alert'`, `'brand'`, `'ghost'`, `'link'`, `'primary'`, `'secondary'`, `'success'`, `'warning'` | -            | Вид иконки                                       |
-| `className?` | `string`                                                                          | -            | Дополнительный CSS-класс                  |
-| `ref?`       | `React.Ref<HTMLSpanElement>`                                                      | -            | Ссылка на корневой DOM-элемент компонента |
+| Свойство                | Тип                                                                                             | По умолчанию | Описание                                  |
+| ----------------------- | ----------------------------------------------------------------------------------------------- | ------------ | ----------------------------------------- |
+| [`size?` ](#размер)     | `'xs'`, `'s'`, `'m'`                                                                            | `'m'`        | Размер                                    |
+| [`view?`](#внешний-вид) | `'alert'`, `'brand'`, `'ghost'`, `'link'`, `'primary'`, `'secondary'`, `'success'`, `'warning'` | -            | Вид иконки                                |
+| `className?`            | `string`                                                                                        | -            | Дополнительный CSS-класс                  |
+| `ref?`                  | `React.Ref<HTMLSpanElement>`                                                                    | -            | Ссылка на корневой DOM-элемент компонента |
 
 ## Примеры
 
 ### Иконка в кнопке
 
 ```tsx
-import { IconCancel } from '@consta/uikit/IconCancel'
+import { IconCancel } from '@consta/uikit/IconCancel';
 
 const buttonWithIcon = () => {
-  return (
-    <Button
-      label="Закрыть"
-      iconLeft={IconCancel}
-      onlyIcon
-    />
-  )}
+  return <Button label="Закрыть" iconLeft={IconCancel} onlyIcon />;
+};
 
-export default buttonWithIcon
+export default buttonWithIcon;
 ```
 
 ## Создание своих иконок

@@ -7,7 +7,7 @@ import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import { File } from '../File';
 
-import mdx from './File.mdx';
+import mdx from './File.docs.mdx';
 
 const defaultKnobs = () => ({
   size: select('size', fileIconPropSize, fileIconPropSizeDefault),

@@ -11,7 +11,7 @@ import {
 } from '../../TagBase/TagBase';
 import { Tag, tagPropMode, tagPropModeDefault } from '../Tag';
 
-import mdx from './Tag.mdx';
+import mdx from './Tag.docs.mdx';
 
 const defaultKnobs = () => ({
   label: text('label', 'Label'),

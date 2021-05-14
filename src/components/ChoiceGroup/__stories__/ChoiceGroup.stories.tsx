@@ -19,7 +19,7 @@ import {
   choiceGroupWidthDefault,
 } from '../ChoiceGroup';
 
-import mdx from './ChoiceGroup.mdx';
+import mdx from './ChoiceGroup.docs.mdx';
 
 declare type Item = {
   name: string;

@@ -9,7 +9,7 @@ import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 import { Sidebar } from '../Sidebar';
 
-import mdx from './Sidebar.mdx';
+import mdx from './Sidebar.docs.mdx';
 
 const cnSidebarStories = cn('SidebarStories');
 
