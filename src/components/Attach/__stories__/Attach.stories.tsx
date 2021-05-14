@@ -8,7 +8,7 @@ import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import { Attach } from '../Attach';
 
-import mdx from './Attach.mdx';
+import mdx from './Attach.docs.mdx';
 
 const defaultKnobs = () => ({
   fileName: text('fileName', 'Приложенный документ'),

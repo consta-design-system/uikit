@@ -18,7 +18,7 @@ import {
   paginationTypes,
 } from '../Pagination';
 
-import mdx from './Pagination.mdx';
+import mdx from './Pagination.docs.mdx';
 
 const cnPaginationStories = cn('PaginationStories');
 

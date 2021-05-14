@@ -13,7 +13,7 @@ import {
   userPropWidthDefault,
 } from '../User';
 
-import mdx from './User.mdx';
+import mdx from './User.docs.mdx';
 
 const defaultKnobs = () => ({
   view: select('view', userPropView, userPropViewDefault),

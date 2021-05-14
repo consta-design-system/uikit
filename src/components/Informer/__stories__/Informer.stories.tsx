@@ -11,7 +11,7 @@ import {
   informerPropViewDefault,
 } from '../Informer';
 
-import mdx from './Informer.mdx';
+import mdx from './Informer.docs.mdx';
 
 const defaultKnobs = () => ({
   status: select('status', informerPropStatus, informerPropStatusDefault),

@@ -20,7 +20,7 @@ import {
   textPropWeight,
 } from '../Text';
 
-import mdx from './Text.mdx';
+import mdx from './Text.docs.mdx';
 
 const defaultKnobs = () => ({
   as: select('as', ['p', 'div', 'a', 'span', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'], undefined),

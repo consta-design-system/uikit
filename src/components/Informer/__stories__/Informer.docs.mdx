@@ -24,6 +24,7 @@ import { InformerExampleAlert } from './examples/InformerExampleText/InformerExa
 ## Текст сообщения
 
 Текст состоит из двух частей:
+
 - заголовок задаётся свойством `title`,
 - основной текст — свойством `lable`.
 
@@ -51,7 +52,6 @@ import { InformerExampleAlert } from './examples/InformerExampleText/InformerExa
 />
 ```
 
-
 Или так:
 
 <InformerExampleAlert />
@@ -77,11 +77,11 @@ import { InformerExampleAlert } from './examples/InformerExampleText/InformerExa
 <InformerExampleView />
 
 ```ts
-<Informer label="Ваше сообщение отправлено" view="filled" status="success"/>
+<Informer label="Ваше сообщение отправлено" view="filled" status="success" />
 ```
 
 ```ts
-<Informer label="Всё заполнено" view="bordered" status="success"/>
+<Informer label="Всё заполнено" view="bordered" status="success" />
 ```
 
 ### Иконка
@@ -93,27 +93,19 @@ import { InformerExampleAlert } from './examples/InformerExampleText/InformerExa
 <InformerExampleIcon />
 
 ```ts
-<Informer
-  label="Сообщение отправлено"
-  view="filled"
-  status="success"
-  icon={IconThumbUp}
-/>
+<Informer label="Сообщение отправлено" view="filled" status="success" icon={IconThumbUp} />
 ```
-
-
 
 ## Свойства
 
-| Свойство              | Тип или варианты значения| По умолчанию  |  Описание                  |
-| --------------------- | -----------------| --------------| -------------------------- |
-| [`status`](#тип-сообщения)              | `'system', 'alert', 'warning', 'success'`       | `'success'`             | Тип сообщения            |
-| [`title`](#текст-сообщения)              | `string`         | —             | Заголовок сообщения            |
-| [`lable`](#текст-сообщения)               | `string`         | —             | Текст сообщения            |
-| [`view`](#внешний-вид)               | `'filled', 'bordered'`     |    `'filled'`            | Тип информера (с заливкой или без)           |
-| [`icon`](#внешний-вид)               | `React.FC<IconProps>`         | —             | Иконка         |
-| `className`          | `string`         | —             | Дополнительный CSS-класс          |
-
+| Свойство                    | Тип или варианты значения                 | По умолчанию | Описание                           |
+| --------------------------- | ----------------------------------------- | ------------ | ---------------------------------- |
+| [`status`](#тип-сообщения)  | `'system', 'alert', 'warning', 'success'` | `'success'`  | Тип сообщения                      |
+| [`title`](#текст-сообщения) | `string`                                  | —            | Заголовок сообщения                |
+| [`lable`](#текст-сообщения) | `string`                                  | —            | Текст сообщения                    |
+| [`view`](#внешний-вид)      | `'filled', 'bordered'`                    | `'filled'`   | Тип информера (с заливкой или без) |
+| [`icon`](#внешний-вид)      | `React.FC<IconProps>`                     | —            | Иконка                             |
+| `className`                 | `string`                                  | —            | Дополнительный CSS-класс           |
 
 ## Пример
 

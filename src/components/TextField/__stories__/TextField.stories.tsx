@@ -20,7 +20,7 @@ import {
   textFieldPropWidthDefault,
 } from '../TextField';
 
-import mdx from './TextField.mdx';
+import mdx from './TextField.docs.mdx';
 
 const defaultKnobs = () => ({
   width: select('width', textFieldPropWidth, textFieldPropWidthDefault),

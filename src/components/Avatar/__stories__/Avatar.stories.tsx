@@ -11,7 +11,7 @@ import {
   avatarPropSizeDefault,
 } from '../Avatar';
 
-import mdx from './Avatar.mdx';
+import mdx from './Avatar.docs.mdx';
 
 const defaultKnobs = () => ({
   url: text('url', ''),

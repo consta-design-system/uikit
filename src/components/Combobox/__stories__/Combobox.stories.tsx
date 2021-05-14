@@ -13,7 +13,7 @@ import {
 } from '../../SelectComponents/types';
 import { Combobox } from '../Combobox';
 
-import mdx from './Combobox.mdx';
+import mdx from './Combobox.docs.mdx';
 
 type SelectOption = {
   label: string;

@@ -16,7 +16,7 @@ import {
 } from '../../SelectComponents/types';
 import { BasicSelect } from '../BasicSelect';
 
-import mdx from './BasicSelect.mdx';
+import mdx from './BasicSelect.docs.mdx';
 
 type SelectOption = {
   value: string;

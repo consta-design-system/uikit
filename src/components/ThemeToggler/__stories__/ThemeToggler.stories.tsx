@@ -11,7 +11,7 @@ import { directions } from '../../Popover/Popover';
 import { Theme } from '../../Theme/Theme';
 import { ThemeToggler, themeTogglerPropSize, themeTogglerPropSizeDefault } from '../ThemeToggler';
 
-import mdx from './ThemeToggler.mdx';
+import mdx from './ThemeToggler.docs.mdx';
 
 const cnThemeTogglerStories = cn('ThemeTogglerStories');
 
