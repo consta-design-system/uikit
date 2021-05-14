@@ -10,7 +10,7 @@ import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import { withTooltip, withTooltipPropMode, withTooltipPropModeDefault } from '../withTooltip';
 
-import mdx from './withTooltip.mdx';
+import mdx from './withTooltip.docs.mdx';
 
 const defaultKnobs = () => ({
   content: text('content', 'Контент тултипа на кнопке'),

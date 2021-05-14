@@ -19,7 +19,7 @@ import {
   contextMenuSizes,
 } from '../helpers';
 
-import mdx from './ContextMenu.mdx';
+import mdx from './ContextMenu.docs.mdx';
 
 const defaultKnobs = () => ({
   size: select('size', contextMenuSizes, contextMenuDefaultSize),

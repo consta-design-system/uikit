@@ -5,7 +5,7 @@ import { createMetadata } from '../../../utils/storybook';
 import { Button } from '../../Button/Button';
 import { FileField } from '../FileField';
 
-import mdx from './FileField.mdx';
+import mdx from './FileField.docs.mdx';
 
 export function Playground() {
   return (

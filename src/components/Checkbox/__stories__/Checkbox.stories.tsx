@@ -17,7 +17,7 @@ import {
   checkboxPropViewDefault,
 } from '../Checkbox';
 
-import mdx from './Checkbox.mdx';
+import mdx from './Checkbox.docs.mdx';
 
 const defaultKnobs = () => ({
   disabled: boolean('disabled', false),

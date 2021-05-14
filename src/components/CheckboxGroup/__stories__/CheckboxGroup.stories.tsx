@@ -13,7 +13,7 @@ import {
   checkboxGroupViews,
 } from '../CheckboxGroup';
 
-import mdx from './CheckboxGroup.mdx';
+import mdx from './CheckboxGroup.docs.mdx';
 
 const cnCheckboxGroupStories = cn('CheckboxGroupStories');
 

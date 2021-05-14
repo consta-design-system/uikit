@@ -7,7 +7,7 @@ import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import { useThemeVars } from '../useThemeVars';
 
-import mdx from './useThemeVars.mdx';
+import mdx from './useThemeVars.docs.mdx';
 
 const cnUseThemeVars = cn('useThemeVars');
 
@@ -46,8 +46,8 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Hooks|/useThemeVars',
-  id: 'Hooks|/useThemeVars',
+  title: 'Hooks/useThemeVars',
+  id: 'Hooks/useThemeVars',
   parameters: {
     docs: {
       page: mdx,

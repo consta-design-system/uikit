@@ -7,7 +7,7 @@ import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import { breadcrumbPropSize, breadcrumbPropSizeDefault, Breadcrumbs } from '../Breadcrumbs';
 
-import mdx from './Breadcrumbs.mdx';
+import mdx from './Breadcrumbs.docs.mdx';
 
 const defaultKnobs = () => ({
   size: select('Size', breadcrumbPropSize, breadcrumbPropSizeDefault),

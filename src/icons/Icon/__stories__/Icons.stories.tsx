@@ -174,7 +174,7 @@ import { IconWideScreen } from '../../IconWideScreen/IconWideScreen';
 import { IconWorld } from '../../IconWorld/IconWorld';
 
 import { IconsItem } from './Item/Icons-Item';
-import mdx from './Icon.mdx';
+import mdx from './Icon.docs.mdx';
 
 const defaultKnobs = () => ({
   size: select('size', ['xs', 's', 'm'], 'm'),

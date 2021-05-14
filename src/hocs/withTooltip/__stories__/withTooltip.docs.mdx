@@ -15,7 +15,6 @@ import { WithTooltipExampleSize } from './examples/WithTooltipExampleSize/WithTo
   - [Другие свойства](#другие-свойства)
 - [Список свойств](#список-свойств)
 
-
 ## Что это такое
 
 C помощью `withTooltip` можно добавить `Tooltip` к любому компоненту,
@@ -53,6 +52,7 @@ export const WithTooltipExampleText = () => {
 ### Как задать свойства
 
 Свойства тултипа можно задать двумя способами:
+
 - в самом HOC,
 - в компоненте, который возвращает HOC.
 
@@ -109,6 +109,7 @@ export const WithTooltipExampleProps = () => {
   );
 };
 ```
+
 <WithTooltipExampleMode />
 
 ## Свойства тултипа
@@ -123,24 +124,22 @@ export const WithTooltipExampleProps = () => {
 
 <WithTooltipExampleSize />
 
-
 ### Другие свойства
 
 Остальные свойства тултипа — например, направление разворачивания, задаются так же, как у компонента [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story).
 
-
 ## Свойства
 
-| Свойство              | Тип или варианты значения | По умолчанию      | Описание                                                                                                                                 |
-| --------------------- | ------------------------- | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| [`size`](#ширина)                | `'s', 'm', 'l'`           | '`m`'             | Максимальная ширина тултипа                                                                                          |
-| [`content`](#содержимое)             | `React.ReactNode`         | —                 | Контент тултипа                                                                                                                          |
-| [`mode`](#режим-работы)                | `'mouseover', 'click`     | `'mouseover'`     | Режим работы                                                                                                                             |
-| `closeOnClickOutside` | `boolean`                 | `true`            | Скрывает тултип по клику за пределами компонента и тултипа. Работает только при `mode = click`                                                  |
-| `appearTimeout`       | `number`                  | `400`             | Сколько миллисекунд нужно держать курсор на компоненте, чтобы появился тултип. Работает только при `mode = mouseover`     |
-| `exitTimeout`         | `number`                  | `200`             | Сколько миллисекунд нужно держать курсор на компоненте, чтобы тултип исчез. Работает только при `mode = mouseover` |
-| `direction?`          | `Direction`               | `'upCenter'`      | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                        |
-| `possibleDirections?` | `Direction[]`             | `Direction`       | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                        |
-| `spareDirection?`     | `Direction`               | `'downStartLeft'` | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                        |
-| `isInteractive?`      | `boolean`                 | `true`            | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                        |
-| `equalAnchorWidth?`   | `boolean`                 | `fasle`           | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                        |
+| Свойство                 | Тип или варианты значения | По умолчанию      | Описание                                                                                                              |
+| ------------------------ | ------------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------- |
+| [`size`](#ширина)        | `'s', 'm', 'l'`           | '`m`'             | Максимальная ширина тултипа                                                                                           |
+| [`content`](#содержимое) | `React.ReactNode`         | —                 | Контент тултипа                                                                                                       |
+| [`mode`](#режим-работы)  | `'mouseover', 'click`     | `'mouseover'`     | Режим работы                                                                                                          |
+| `closeOnClickOutside`    | `boolean`                 | `true`            | Скрывает тултип по клику за пределами компонента и тултипа. Работает только при `mode = click`                        |
+| `appearTimeout`          | `number`                  | `400`             | Сколько миллисекунд нужно держать курсор на компоненте, чтобы появился тултип. Работает только при `mode = mouseover` |
+| `exitTimeout`            | `number`                  | `200`             | Сколько миллисекунд нужно держать курсор на компоненте, чтобы тултип исчез. Работает только при `mode = mouseover`    |
+| `direction?`             | `Direction`               | `'upCenter'`      | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                     |
+| `possibleDirections?`    | `Direction[]`             | `Direction`       | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                     |
+| `spareDirection?`        | `Direction`               | `'downStartLeft'` | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                     |
+| `isInteractive?`         | `boolean`                 | `true`            | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                     |
+| `equalAnchorWidth?`      | `boolean`                 | `fasle`           | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                     |

@@ -5,7 +5,7 @@ import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import { ProgressSpin, progressSpinPropSize, progressSpinPropSizeDefault } from '../ProgressSpin';
 
-import mdx from './ProgressSpin.mdx';
+import mdx from './ProgressSpin.docs.mdx';
 
 const defaultKnobs = () => ({
   progress: number('progress', 50),

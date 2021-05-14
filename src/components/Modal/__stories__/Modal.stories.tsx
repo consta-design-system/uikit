@@ -9,7 +9,7 @@ import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 import { Modal } from '../Modal';
 
-import mdx from './Modal.mdx';
+import mdx from './Modal.docs.mdx';
 
 type SelectOption = {
   label: string;
