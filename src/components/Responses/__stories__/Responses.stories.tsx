@@ -15,7 +15,7 @@ import { ResponsesNothingFound } from '../../ResponsesNothingFound/ResponsesNoth
 import { ResponsesSuccess } from '../../ResponsesSuccess/ResponsesSuccess';
 import { responsesPropSize, responsesPropSizeDefault } from '../Responses';
 
-import mdx from './Responses.mdx';
+import mdx from './Responses.docs.mdx';
 
 const components = {
   Responses403,

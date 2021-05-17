@@ -2,7 +2,6 @@
   padding: var(--space-s) var(--space-m);
   color: var(--color-typo-primary);
   border-radius: var(--control-radius);
-  font-size: var(--size-text-m);
 
   &_withIcon {
     display: flex;

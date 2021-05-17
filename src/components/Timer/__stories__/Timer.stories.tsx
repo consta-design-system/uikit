@@ -4,7 +4,7 @@ import { boolean, number, select } from '@storybook/addon-knobs';
 import { createMetadata } from '../../../utils/storybook';
 import { Timer } from '../Timer';
 
-import mdx from './Timer.mdx';
+import mdx from './Timer.docs.mdx';
 
 const defaultKnobs = () => ({
   seconds: number('seconds', 5),

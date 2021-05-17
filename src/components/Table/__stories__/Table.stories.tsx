@@ -31,7 +31,7 @@ import {
   zebraStriped,
 } from '../Table';
 
-import mdx from './Table.mdx';
+import mdx from './Table.docs.mdx';
 
 const cnTableStories = cn('TableStories');
 

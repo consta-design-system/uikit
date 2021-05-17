@@ -17,12 +17,17 @@ export const informerPropStatus = ['success', 'system', 'alert', 'alert', 'warni
 export type InformerPropStatus = typeof informerPropStatus[number];
 export const informerPropStatusDefault: InformerPropStatus = informerPropStatus[0];
 
+export const informerPropSize = ['m', 's'] as const;
+export type InformerPropSize = typeof informerPropSize[number];
+export const informerPropSiseDefault: InformerPropSize = informerPropSize[0];
+
 type Props = {
   view?: InformerPropView;
   status?: InformerPropStatus;
   icon?: React.FC<IconProps>;
   label?: React.ReactNode;
   title?: string;
+  size?: InformerPropSize;
 };
 
 export type InformerProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
@@ -30,7 +35,16 @@ export type InformerProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
 export const cnInformer = cn('Informer');
 
 export const Informer = React.forwardRef<HTMLDivElement, InformerProps>((props, ref) => {
-  const { view, status, icon, label, title, children, ...otherProps } = props;
+  const {
+    view = informerPropViewDefault,
+    status = informerPropStatusDefault,
+    size = informerPropSiseDefault,
+    icon,
+    label,
+    title,
+    children,
+    ...otherProps
+  } = props;
   const Icon = icon;
   const withIcon = !!icon;
   const { themeClassNames } = useTheme();
@@ -53,17 +67,20 @@ export const Informer = React.forwardRef<HTMLDivElement, InformerProps>((props, 
       ref={ref}
     >
       {Icon && <Icon className={cnInformer('Icon')} size="s" />}
-      {Icon ? (
-        <div className={cnInformer('Content')}>
-          {title && <Text weight="bold">{title}</Text>}
-          {label || children}
-        </div>
-      ) : (
-        <>
-          {title && <Text weight="bold">{title}</Text>}
-          {label || children}
-        </>
-      )}
+      <div className={cnInformer('Content')}>
+        {title && (
+          <Text className={cnInformer('Title')} weight="bold" size={size}>
+            {title}
+          </Text>
+        )}
+        {label ? (
+          <Text className={cnInformer('Label')} size={size}>
+            {label}
+          </Text>
+        ) : (
+          children
+        )}
+      </div>
     </div>
   );
 });

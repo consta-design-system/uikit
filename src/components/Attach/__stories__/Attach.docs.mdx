@@ -2,8 +2,8 @@ import {
   AttachExampleBasicsLoading,
   AttachExampleBasicsError,
   AttachExampleBasicsLoaded,
-  AttachExampleBasicsLink
-  } from './examples/AttachExampleBasics/AttachExampleBasics';
+  AttachExampleBasicsLink,
+} from './examples/AttachExampleBasics/AttachExampleBasics';
 import { AttachExampleLoading } from './examples/AttachExampleLoading/AttachExampleLoading';
 import { AttachExampleError } from './examples/AttachExampleError/AttachExampleError';
 import { AttachExampleEvents } from './examples/AttachExampleEvents/AttachExampleEvents';
@@ -83,8 +83,6 @@ import { AttachExampleAs } from './examples/AttachExampleAs/AttachExampleAs';
 
 Например, если вы просите загрузить фотографию, скан паспорта и сопроводительное письмо, загруженные файлы можно так и назвать.
 
-
-
 <AttachExampleDescription />
 
 ```ts
@@ -110,15 +108,13 @@ import { AttachExampleAs } from './examples/AttachExampleAs/AttachExampleAs';
 />
 ```
 
-
 ### Описание
 
-За описание файла отвечает свойство `fileDescription`.  Мы предполагаем, что здесь удобно
+За описание файла отвечает свойство `fileDescription`. Мы предполагаем, что здесь удобно
 показывать размер файла и время загрузки, но вы можете использовать его для любой
 информации, которую считаете важной.
 
 <AttachExampleName />
-
 
 ```ts
 <Attach
@@ -135,7 +131,6 @@ import { AttachExampleAs } from './examples/AttachExampleAs/AttachExampleAs';
   fileDescription="Крекс, пекс, фекс"
 />
 ```
-
 
 ## Загрузка файла
 
@@ -161,7 +156,6 @@ import { AttachExampleAs } from './examples/AttachExampleAs/AttachExampleAs';
   loadingProgress={70}
 />
 ```
-
 
 ### Ошибка при загрузке
 
@@ -194,11 +188,9 @@ import { AttachExampleAs } from './examples/AttachExampleAs/AttachExampleAs';
 
 `onButtonClick` задаёт событие, которое обрабатывается при клике на кнопку.
 
-
 ### По клику на компонент
 
 За обработку событий по клику на весь компонент отвечает свойство `onClick`.
-
 
 > Не забудьте про всплытие событий
 
@@ -228,27 +220,26 @@ import { AttachExampleAs } from './examples/AttachExampleAs/AttachExampleAs';
 
 <AttachExampleAs />
 
-
 ## Свойства
 
 <!-- props:start -->
 
-| Свойство         | Тип                                     | По умолчанию  | Описание                                     |
-| ---------------- | --------------------------------------- | ------------- | -------------------------------------------- |
-| [`fileName`](#название)        | `string`                                | -             | Название файла файла                                    |
-| [`fileDescription`](#описание) | `string`                                | -             | Описание файла файла                               |
-| [`fileExtension`](#иконка)  | `string`                                | -             | Расширение файла файла                             |
-| [`loading`](#загрузка-файла)        | `boolean`                               | -             | Прелоадер  загрузки                           |
-| [`loadingProgress`](#индикаторы-загрузки) | `number`                                | -             | Степень загрузки файла в процентах        |
-| [`loadingText`](#индикаторы-загрузки)    | `string`                                | `'Loading'`   | Текст, который видно во время загрузки       |
-| [`errorText`](#ошибка-при-загрузке)     | `string`                                | -             | Текст ошибки при загрузке файла                              |
-| [`onClick`](#по-клику-на-компонент)        | `React.EventHandler<React.MouseEvent>;` | -             | Событие для клика по всему компоненту          |
-| [`onButtonClick`](#по-клику-на-кнопку) | `React.EventHandler<React.MouseEvent>;` | -             | Событие для клика по кнопке                      |
-| [`buttonIcon`](#по-клику-на-кнопку)   | `React.FC<IconProps>;`                  | -             | Иконка для кнопки                            |
-| [`buttonTitle`](#по-клику-на-кнопку)     | `string`                                | -             | Всплывающая подсказка для кнопки                                 |
-| [`as`](#тег-для-компонента)       | `keyof JSX.IntrinsicElements`    | `'div'`      | HTML-тег, в виде которого этот компонент будет представлен в DOM  |
-| `className`      | `string`                                | -             | Дополнительный CSS-класс                        |
-| `ref`            | `React.Ref<HTMLDivElement>`             | -             | Ссылка на корневой DOM-элемент этого компонента   |
+| Свойство                                  | Тип                                     | По умолчанию | Описание                                                         |
+| ----------------------------------------- | --------------------------------------- | ------------ | ---------------------------------------------------------------- |
+| [`fileName`](#название)                   | `string`                                | -            | Название файла файла                                             |
+| [`fileDescription`](#описание)            | `string`                                | -            | Описание файла файла                                             |
+| [`fileExtension`](#иконка)                | `string`                                | -            | Расширение файла файла                                           |
+| [`loading`](#загрузка-файла)              | `boolean`                               | -            | Прелоадер загрузки                                               |
+| [`loadingProgress`](#индикаторы-загрузки) | `number`                                | -            | Степень загрузки файла в процентах                               |
+| [`loadingText`](#индикаторы-загрузки)     | `string`                                | `'Loading'`  | Текст, который видно во время загрузки                           |
+| [`errorText`](#ошибка-при-загрузке)       | `string`                                | -            | Текст ошибки при загрузке файла                                  |
+| [`onClick`](#по-клику-на-компонент)       | `React.EventHandler<React.MouseEvent>;` | -            | Событие для клика по всему компоненту                            |
+| [`onButtonClick`](#по-клику-на-кнопку)    | `React.EventHandler<React.MouseEvent>;` | -            | Событие для клика по кнопке                                      |
+| [`buttonIcon`](#по-клику-на-кнопку)       | `React.FC<IconProps>;`                  | -            | Иконка для кнопки                                                |
+| [`buttonTitle`](#по-клику-на-кнопку)      | `string`                                | -            | Всплывающая подсказка для кнопки                                 |
+| [`as`](#тег-для-компонента)               | `keyof JSX.IntrinsicElements`           | `'div'`      | HTML-тег, в виде которого этот компонент будет представлен в DOM |
+| `className`                               | `string`                                | -            | Дополнительный CSS-класс                                         |
+| `ref`                                     | `React.Ref<HTMLDivElement>`             | -            | Ссылка на корневой DOM-элемент этого компонента                  |
 
 <!-- props:end -->
 

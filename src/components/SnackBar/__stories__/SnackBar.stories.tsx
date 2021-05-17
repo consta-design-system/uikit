@@ -18,7 +18,7 @@ import {
 } from '../../EventInterceptor/EventInterceptor';
 import { Item, SnackBar, SnackBarItemStatus } from '../SnackBar';
 
-import mdx from './SnackBar.mdx';
+import mdx from './SnackBar.docs.mdx';
 
 type State = Item[];
 type Action = { type: 'add'; item: Item } | { type: 'remove'; key: number | string };

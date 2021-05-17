@@ -20,7 +20,7 @@ import {
   sizeIconMap,
 } from '../Collapse';
 
-import mdx from './Collapse.mdx';
+import mdx from './Collapse.docs.mdx';
 
 const defaultKnobs = () => ({
   size: select('size', collapsePropSize, collapsePropSizeDefault),

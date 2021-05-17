@@ -12,7 +12,7 @@ import {
   radioPropViewDefault,
 } from '../Radio';
 
-import mdx from './Radio.mdx';
+import mdx from './Radio.docs.mdx';
 
 const defaultKnobs = () => ({
   disabled: boolean('disabled', false),

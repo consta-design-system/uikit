@@ -12,7 +12,7 @@ import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 import { Steps, stepsDefaultSize, stepsSizes } from '../Steps';
 
-import mdx from './Steps.mdx';
+import mdx from './Steps.docs.mdx';
 
 const cnStepsStories = cn('StepsStories');
 

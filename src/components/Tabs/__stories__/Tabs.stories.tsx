@@ -8,7 +8,7 @@ import { IconRing } from '../../../icons/IconRing/IconRing';
 import { createMetadata } from '../../../utils/storybook';
 import { Tabs } from '../Tabs';
 
-import mdx from './Tabs.mdx';
+import mdx from './Tabs.docs.mdx';
 
 const defaultKnobs = () => ({
   size: select('size', ['s', 'm'], 'm'),

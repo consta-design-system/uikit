@@ -12,7 +12,7 @@ import {
   switchPropViewDefault,
 } from '../Switch';
 
-import mdx from './Switch.mdx';
+import mdx from './Switch.docs.mdx';
 
 const defaultKnobs = () => ({
   disabled: boolean('disabled', false),

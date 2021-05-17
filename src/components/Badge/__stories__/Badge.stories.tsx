@@ -15,7 +15,7 @@ import {
   badgePropViewDefault,
 } from '../Badge';
 
-import mdx from './Badge.mdx';
+import mdx from './Badge.docs.mdx';
 
 const defaultKnobs = () => ({
   label: text('label', 'Statusing along'),

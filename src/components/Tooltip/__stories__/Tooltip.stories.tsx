@@ -12,7 +12,7 @@ import { directions, Position } from '../../Popover/Popover';
 import { Text } from '../../Text/Text';
 import { Tooltip, tooltipPropSizes, tooltipPropSizesDefault, tooltipPropStatus } from '../Tooltip';
 
-import mdx from './Tooltip.mdx';
+import mdx from './Tooltip.docs.mdx';
 
 const cnTooltipStories = cn('TooltipStories');
 

@@ -22,7 +22,7 @@ import {
   buttonPropWidthDefault,
 } from '../Button';
 
-import mdx from './Button.mdx';
+import mdx from './Button.docs.mdx';
 
 const defaultKnobs = () => ({
   width: select('Width', buttonPropWidth, buttonPropWidthDefault),
