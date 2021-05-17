@@ -17,7 +17,7 @@ import {
   calendarPropViewDefault,
 } from '../helpers';
 
-import mdx from './Calendar.mdx';
+import mdx from './Calendar.docs.mdx';
 
 const localeProp = ['ru', 'en-US', 'zh-CN', 'es'] as const;
 type LocaleProp = typeof localeProp[number];
@@ -69,6 +69,10 @@ export default createMetadata({
   parameters: {
     docs: {
       page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=58%3A33602',
     },
   },
 });

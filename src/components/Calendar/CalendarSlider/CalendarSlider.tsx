@@ -124,7 +124,7 @@ export const CalendarSlider: React.FC<CalendarSliderProps> = (props) => {
     ...otherProps
   } = props;
 
-  const currentMountRef = useRef<HTMLDivElement>(null);
+  const currentMountRef = useRef<HTMLButtonElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const handlePrev = () => onChange(addYears(currentVisibleDate, -1));
@@ -178,17 +178,16 @@ export const CalendarSlider: React.FC<CalendarSliderProps> = (props) => {
               }
             >
               {year.mounths.map((mounth, index) => (
-                <div
+                <button
                   className={cnCalendarSlider('Mounth')}
                   key={index}
-                  // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-                  tabIndex={0}
+                  // tabIndex={0}
                   onClick={() => onChange(mounth.date)}
                   onKeyDown={() => onChange(addMonths(mounth.date, 1))}
                   ref={
                     isCurrentVisibleMount(currentVisibleDate, mounth.date) ? currentMountRef : null
                   }
-                  role="button"
+                  type="button"
                 >
                   <Text
                     className={cnCalendarSlider('MounthLabel')}
@@ -198,7 +197,7 @@ export const CalendarSlider: React.FC<CalendarSliderProps> = (props) => {
                   >
                     {mounth.label}
                   </Text>
-                </div>
+                </button>
               ))}
             </div>
           ))}

@@ -17,7 +17,7 @@ import eachDayOfInterval from 'date-fns/eachDayOfInterval';
 
 import { range } from '../../utils/array';
 import { isDateRange, isOnlyOneDateInRange } from '../../utils/date';
-import { isDefined, isNotNil } from '../../utils/type-guards';
+import { isDefined } from '../../utils/type-guards';
 import { DateRange } from '../../utils/types/Date';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
@@ -221,7 +221,7 @@ export const getDaysOfMount = (props: {
   });
 };
 
-type getHandleSelectDateProps<TYPE extends CalendarPropType> = {
+type GetHandleSelectDateProps<TYPE extends CalendarPropType> = {
   type: TYPE;
   value?: CalendarPropValue<TYPE>;
   onChange?: CalendarPropOnChange<TYPE>;
@@ -231,43 +231,48 @@ type getHandleSelectDateProps<TYPE extends CalendarPropType> = {
 
 type HandleSelectDate = (props: { value: Date; e: React.MouseEvent<HTMLDivElement> }) => void;
 
-type getHandleSelectDate = <TYPE extends CalendarPropType>(
-  props: getHandleSelectDateProps<TYPE>,
-) => HandleSelectDate;
+const isDateRangeParams = (
+  params: GetHandleSelectDateProps<CalendarPropType>,
+): params is GetHandleSelectDateProps<'date-range'> => {
+  return params.type === calendarPropType[1];
+};
 
-export const getHandleSelectDate: getHandleSelectDate = ({
-  type,
-  value: valueProp,
-  minDate,
-  maxDate,
-  onChange: onChangeProp,
-}) => {
-  let handleSelectDate: HandleSelectDate;
-  if (type === 'date-range') {
-    handleSelectDate = ({ value: date, e }) => {
-      // Привел к типам так как TS не понимает что при указанном `type`
-      // календаря всегда будет падать определенный тип `value`
-      const onChange = onChangeProp as CalendarPropOnChange<'date-range'> | undefined;
-      const value = (valueProp || []) as CalendarPropValue<'date-range'>;
+const isNotDateRangeParams = (
+  params: GetHandleSelectDateProps<CalendarPropType>,
+): params is GetHandleSelectDateProps<'date'> => {
+  return params.type === calendarPropType[0];
+};
 
-      if (minDate && maxDate) {
-        if (!isWithinInterval(date, { start: minDate, end: maxDate }) || !isNotNil(value)) {
-          return;
-        }
+export function getHandleSelectDate<TYPE extends CalendarPropType>(
+  params: GetHandleSelectDateProps<TYPE>,
+): HandleSelectDate {
+  if (isDateRangeParams(params)) {
+    const currentValue: DateRange = params.value || [undefined, undefined];
+
+    return ({ value: date, e }) => {
+      if (
+        params.minDate &&
+        params.maxDate &&
+        !isWithinInterval(date, { start: params.minDate, end: params.maxDate })
+      ) {
+        return;
       }
 
-      if (!isOnlyOneDateInRange(value) && typeof onChange === 'function') {
-        return onChange({ e, value: [date, undefined] });
+      if (!isOnlyOneDateInRange(currentValue) && typeof params.onChange === 'function') {
+        return params.onChange({ e, value: [date, undefined] });
       }
 
-      const [startDate, endDate] = value;
+      const [startDate, endDate] = currentValue;
 
       if (isDefined(startDate)) {
         if (startDate.getTime() === date.getTime()) {
           return;
         }
-        if (typeof onChange === 'function') {
-          return onChange({ e, value: startDate > date ? [date, startDate] : [startDate, date] });
+        if (typeof params.onChange === 'function') {
+          return params.onChange({
+            e,
+            value: startDate > date ? [date, startDate] : [startDate, date],
+          });
         }
       }
 
@@ -275,26 +280,26 @@ export const getHandleSelectDate: getHandleSelectDate = ({
         if (endDate.getTime() === date.getTime()) {
           return;
         }
-        if (typeof onChange === 'function') {
-          return onChange({ e, value: endDate > date ? [date, endDate] : [endDate, date] });
+        if (typeof params.onChange === 'function') {
+          return params.onChange({ e, value: endDate > date ? [date, endDate] : [endDate, date] });
         }
-      }
-    };
-  } else {
-    const onChange = onChangeProp as CalendarPropOnChange<'date'> | undefined;
-
-    handleSelectDate = (props) => {
-      if (!isWithInIntervalMinMaxDade(props.value, minDate, maxDate)) {
-        return;
-      }
-      if (typeof onChange === 'function') {
-        return onChange(props);
       }
     };
   }
 
-  return handleSelectDate;
-};
+  if (isNotDateRangeParams(params)) {
+    return (props) => {
+      if (!isWithInIntervalMinMaxDade(props.value, params.minDate, params.maxDate)) {
+        return;
+      }
+      if (typeof params.onChange === 'function') {
+        return params.onChange(props);
+      }
+    };
+  }
+
+  return () => undefined;
+}
 
 export const getMonthTitle = (date: Date, locale: Locale): string => {
   return format(date, 'LLLL', { locale });

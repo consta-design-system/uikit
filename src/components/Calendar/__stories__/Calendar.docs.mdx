@@ -21,11 +21,11 @@ export type CalendarPropOnChange<TYPE extends CalendarPropType> = (props: {
 | Свойство              | Тип или варианты значения           | По умолчанию | Описание                                                    |
 | --------------------- | ----------------------------------- | ------------ | ----------------------------------------------------------- |
 | `view?`               | `'oneMount', 'twoMounts', 'slider'` | `'oneMount'` | Вид календаря                                               |
-| `type?`               | `CalendarPropType`                  | `'date'`     | тип календаря                                               |
+| `type?`               | `CalendarPropType`                  | `'date'`     | Тип календаря                                               |
 | `value?`              | `CalendarPropValue`                 | -            | Выбранная дата или диапазон дат                             |
-| `onChange?`           | `CalendarPropOnChange`              | -            | Выбранная дата или диапазон дат                             |
-| `minDate?`            | `Date`                              | -            | ограничение выбора дат                                      |
-| `maxDate?`            | `Date`                              | -            | ограничение выбора дат                                      |
+| `onChange?`           | `CalendarPropOnChange`              | -            | Обработчик событий выбора даты или диапазона дат            |
+| `minDate?`            | `Date`                              | -            | Ограничение выбора дат по меньшей дате                      |
+| `maxDate?`            | `Date`                              | -            | Ограничение выбора дат по высшей дате                       |
 | `events?`             | `Date[]`                            | -            | События                                                     |
 | `locale?`             | `Locale`                            | `ruLocale`   | Локализация                                                 |
 | `currentVisibleDate?` | `Date`                              | `new Date()` | Дата которая будет отображена при первом рендере компонента |

@@ -91,6 +91,8 @@
     width: var(--mount-width);
     height: 100%;
     margin-bottom: var(--space-3xs);
+    background: transparent;
+    border: none;
     outline: transparent;
     cursor: pointer;
   }
