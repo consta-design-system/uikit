@@ -1,0 +1,15 @@
+# useClickOutside
+
+<Meta title="Hooks|useClickOutside" id="useClickOutside" />
+
+| Свойство                 | Тип                                     | По умолчанию | Описание                                                                                                                      |
+| ------------------------ | --------------------------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| `isActive`               | `boolean`                               | -            | включение работы хука                                                                                                         |
+| `ignoreClicksInsideRefs` | `ReadonlyArray<RefObject<HTMLElement>>` | -            | ссылки на элементы по которым `handler` не будет вызыватся, обычно это ссылка на элемент по вне корторого должен сработат хук |
+| `handler`                | `(event: MouseEvent) => void;`          | -            | функция которая сработает при клике вне элемента                                                                              |
+
+# Примеры
+
+Пимеры можете посмотрет в компонентах
+[Modal](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/Modal/Modal.tsx) и
+[ContextMenu](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/ContextMenu/ContextMenu.tsx)
