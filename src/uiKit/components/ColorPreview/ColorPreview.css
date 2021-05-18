@@ -1,3 +1,10 @@
+.SnackBar {
+  position: fixed;
+  z-index: 9999;
+  right: var(--space-m);
+  bottom: 0;
+}
+
 .UiKit--ColorPreview {
   &-Circle {
     position: relative;
@@ -54,6 +61,24 @@
       border-radius: 0 99em 99em 0;
       transform: rotate(45deg);
       transform-origin: left center;
+    }
+  }
+
+  &-ColorCode {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    border-radius: var(--control-radius);
+    cursor: pointer;
+
+    & > .Icon {
+      margin-right: var(--space-xs);
+      color: var(--color-typo-secondary);
+    }
+
+    &:hover {
+      color: var(--color-typo-primary);
+      background-color: var(--color-bg-stripe);
     }
   }
 }

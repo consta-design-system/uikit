@@ -1,8 +1,11 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import './ColorPreview.css';
 
 import React from 'react';
 
 import { Text } from '../../../components/Text/Text';
+import { IconCopy } from '../../../icons/IconCopy/IconCopy';
 import { cn } from '../../cn';
 import * as wp from '../../whitepaper/whitepaper';
 
@@ -10,6 +13,8 @@ const cnColorPreview = cn('ColorPreview');
 
 type Props = {
   color: string;
+  value: string;
+  clickHandler: () => void;
   opacity?: boolean;
   description?: string;
   rgba?: boolean;
@@ -19,6 +24,8 @@ type Props = {
 
 export const ColorPreview: React.FC<Props> = ({
   color,
+  value,
+  clickHandler,
   opacity,
   description,
   className,
@@ -40,15 +47,33 @@ export const ColorPreview: React.FC<Props> = ({
           size="m"
           font="mono"
           view="primary"
-          className={cnColorPreview('Name', [wp.decorator({ 'indent-b': 'xs' })])}
+          className={cnColorPreview('Name', [
+            wp.decorator({ 'indent-b': '2xs', 'indent-l': '2xs' }),
+          ])}
         >
           {color}
         </Text>
+        <div
+          className={cnColorPreview('ColorCode', [
+            wp.decorator({ 'indent-t': 'none', 'space-h': '2xs' }),
+          ])}
+          onClick={() => {
+            navigator.clipboard.writeText(value);
+            clickHandler();
+          }}
+        >
+          <IconCopy size="xs" />
+          <Text size="s" font="mono">
+            {value}
+          </Text>
+        </div>
         <Text
           as="p"
           size="s"
           view="primary"
-          className={cnColorPreview('Description', [wp.decorator({ 'indent-t': 'none' })])}
+          className={cnColorPreview('Description', [
+            wp.decorator({ 'indent-t': 'none', 'indent-l': '2xs' }),
+          ])}
         >
           {description}
         </Text>
