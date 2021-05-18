@@ -21,38 +21,40 @@ import mdx from './BasicSelect.docs.mdx';
 type SelectOption = {
   value: string;
   label: string;
+  id: number;
 };
 
 const items = [
-  { label: 'Neptunium', value: 'Neptunium' },
-  { label: 'Plutonium', value: 'Plutonium' },
-  { label: 'Americium', value: 'Americium' },
-  { label: 'Curium', value: 'Curium' },
-  { label: 'Berkelium', value: 'Berkelium' },
+  { label: 'Neptunium', value: 'Neptunium', id: 1 },
+  { label: 'Plutonium', value: 'Plutonium', id: 2 },
+  { label: 'Americium', value: 'Americium', id: 3 },
+  { label: 'Curium', value: 'Curium', id: 4 },
+  { label: 'Berkelium', value: 'Berkelium', id: 5 },
   {
     label: 'Californium Berkelium Curium Plutonium',
     value: 'Californium Berkelium Curium Plutonium',
+    id: 6,
   },
-  { label: 'Einsteinium', value: 'Einsteinium' },
-  { label: 'Fermium', value: 'Fermium' },
-  { label: 'Mendelevium', value: 'Mendelevium' },
-  { label: 'Nobelium', value: 'Nobelium' },
-  { label: 'Lawrencium', value: 'Lawrencium' },
-  { label: 'Rutherfordium', value: 'Rutherfordium' },
-  { label: 'Dubnium', value: 'Dubnium' },
-  { label: 'Seaborgium', value: 'Seaborgium' },
-  { label: 'Bohrium', value: 'Bohrium' },
-  { label: 'Hassium', value: 'Hassium' },
-  { label: 'Meitnerium', value: 'Meitnerium' },
-  { label: 'Darmstadtium', value: 'Darmstadtium' },
-  { label: 'Roentgenium', value: 'Roentgenium' },
-  { label: 'Copernicium', value: 'Copernicium' },
-  { label: 'Nihonium', value: 'Nihonium' },
-  { label: 'Flerovium', value: 'Flerovium' },
-  { label: 'Moscovium', value: 'Moscovium' },
-  { label: 'Livermorium', value: 'Livermorium' },
-  { label: 'Tennessine', value: 'Tennessine' },
-  { label: 'Oganesson', value: 'Oganesson' },
+  { label: 'Einsteinium', value: 'Einsteinium', id: 7 },
+  { label: 'Fermium', value: 'Fermium', id: 8 },
+  { label: 'Mendelevium', value: 'Mendelevium', id: 9 },
+  { label: 'Nobelium', value: 'Nobelium', id: 10 },
+  { label: 'Lawrencium', value: 'Lawrencium', id: 11 },
+  { label: 'Rutherfordium', value: 'Rutherfordium', id: 12 },
+  { label: 'Dubnium', value: 'Dubnium', id: 13 },
+  { label: 'Seaborgium', value: 'Seaborgium', id: 14 },
+  { label: 'Bohrium', value: 'Bohrium', id: 15 },
+  { label: 'Hassium', value: 'Hassium', id: 16 },
+  { label: 'Meitnerium', value: 'Meitnerium', id: 17 },
+  { label: 'Darmstadtium', value: 'Darmstadtium', id: 18 },
+  { label: 'Roentgenium', value: 'Roentgenium', id: 19 },
+  { label: 'Copernicium', value: 'Copernicium', id: 20 },
+  { label: 'Nihonium', value: 'Nihonium', id: 21 },
+  { label: 'Flerovium', value: 'Flerovium', id: 22 },
+  { label: 'Moscovium', value: 'Moscovium', id: 23 },
+  { label: 'Livermorium', value: 'Livermorium', id: 24 },
+  { label: 'Tennessine', value: 'Tennessine', id: 25 },
+  { label: 'Oganesson', value: 'Oganesson', id: 26 },
 ];
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -69,6 +71,7 @@ export function Playground(props: {
   onChange?(item: SelectOption | null): void;
 }): JSX.Element {
   const getItemLabel = (option: SelectOption): string => option.label;
+  const getItemKey = (option: SelectOption): number => option.id;
   const [value, setValue] = useState<SelectOption | null | undefined>(props.value);
 
   const { onChange = setValue } = props;
@@ -84,6 +87,7 @@ export function Playground(props: {
           value={value}
           onChange={onChange}
           getOptionLabel={getItemLabel}
+          getOptionKey={getItemKey}
         />
       </div>
     </EventInterceptorProvider>

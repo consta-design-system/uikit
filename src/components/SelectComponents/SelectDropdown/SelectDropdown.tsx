@@ -34,6 +34,7 @@ type Props<ITEM> = PropsWithJsxAttributes<{
   labelForNotFound?: string;
   multi?: boolean;
   getOptionLabel(option: ITEM): string;
+  getOptionKey(option: ITEM): string | number;
   form?: SelectDropdownPropForm;
   isOpen: boolean;
 }>;
@@ -58,6 +59,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
     labelForCreate,
     multi = false,
     getOptionLabel,
+    getOptionKey,
     className,
     labelForNotFound,
     form = defaultSelectDropdownPropForm,
@@ -97,15 +99,13 @@ export const SelectDropdown: SelectDropdown = (props) => {
               const active = Boolean(
                 !isOptionForCreate &&
                   selectedValues?.some((val) => {
-                    return getOptionLabel(val) === getOptionLabel(menuOption.item);
+                    return getOptionKey(val) === getOptionKey(menuOption);
                   }),
               );
               const indent = form === 'round' ? 'increased' : 'normal';
 
               return (
-                <React.Fragment
-                  key={cnSelectDropdown('Option', { label: option.label, isOptionForCreate })}
-                >
+                <React.Fragment key={String(getOptionKey(option))}>
                   {shouldShowGroupName && (
                     <SelectGroupLabel label={menuOption.group} size={size} indent={indent} />
                   )}
@@ -123,7 +123,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
                   ) : (
                     <SelectItem
                       size={size}
-                      label={option.label}
+                      label={getOptionLabel(option)}
                       id={`${id}-${index}`}
                       active={active}
                       hovered={index === highlightedIndex}

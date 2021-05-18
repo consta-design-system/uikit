@@ -15,6 +15,7 @@ import mdx from './MultiCombobox.docs.mdx';
 type Option = {
   label: string;
   value: string;
+  id: number;
 };
 
 type Group = { label: string; items: Option[] };
@@ -67,6 +68,7 @@ const Default = (
         options={options as Option[]}
         value={val}
         getOptionLabel={getItemLabel}
+        getOptionKey={(option: Option): number => option.id}
         getGroupOptions={getGroupOptions as never}
         onCreate={onCreate}
         onChange={onChange}
@@ -86,8 +88,8 @@ export const WithCreateStory = createStory(
     const [value, setValue] = useState<Option[] | undefined | null>();
 
     const handleCreate = (label: string): void => {
-      setValue([...(value || []), { label, value: label }]);
-      setOptions([{ label, value: label }, ...options]);
+      setValue([...(value || []), { label, value: label, id: options.length + 1 }]);
+      setOptions([{ label, value: label, id: options.length + 1 }, ...options]);
     };
 
     return <Default items={options} onCreate={handleCreate} value={value} onChange={setValue} />;
