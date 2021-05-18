@@ -140,73 +140,72 @@ export const ThemePreview: React.FC = () => {
     {
       color: '--color-typo-primary',
       value: primaryColors['--color-typo-primary'],
-      description: 'Базовый (основной) цвет фона',
+      description: 'Основной текст',
     },
     {
       color: '--color-typo-secondary',
       value: primaryColors['--color-typo-secondary'],
-      description: 'Дополнительный (второстепенный) цвет фона',
+      description: 'Второстепенный текст',
     },
     {
       color: '--color-typo-brand',
       value: primaryColors['--color-typo-brand'],
-      description: 'Цвет фона для брендовых блоков',
+      description: 'Брендовый текст',
     },
     {
       color: '--color-typo-ghost',
       value: primaryColors['--color-typo-ghost'],
-      description: 'Цвет фона для ссылочных или CTA блоков',
+      description: 'Третьестепенный текст',
     },
     {
       color: '--color-typo-link',
       value: primaryColors['--color-typo-link'],
-      description:
-        'Полупрозрачный цвет для дополнительного выделения или разделения блоков или секций. Обычно используется поверх основных фонов (default или secondary)',
+      description: 'Ссылка',
     },
     {
       color: '--color-typo-link-hover',
       value: primaryColors['--color-typo-link-hover'],
-      description: 'Цвет для едва заметного разделения, например чтобы разделить строки в таблицах',
+      description: 'При наведении на ссылку',
     },
     {
       color: '--color-typo-link-minor',
       value: primaryColors['--color-typo-link-minor'],
-      description: 'Цвет большинства бордеров и тонких разделителей',
+      description: 'Второстепенная ссылка',
     },
     {
       color: '--color-typo-system',
       value: primaryColors['--color-typo-system'],
-      description: 'Цвет для фона системных сообщений, состояний, уведомлений, и прочего',
+      description: 'Для системных сообщений, состояний, уведомлений',
     },
     {
       color: '--color-typo-normal',
       value: primaryColors['--color-typo-normal'],
-      description: 'Цвет фона для блоков, сообщающих об нормальном (нейтральном) состоянии системы',
+      description: 'Текст, сообщающий о нормальном (нейтральном) состоянии системы',
     },
     {
       color: '--color-typo-success',
       value: primaryColors['--color-typo-success'],
-      description: 'Цвет фона для блоков, сообщающих об успешном действии/статусе',
+      description: 'Текст об успехе',
     },
     {
       color: '--color-typo-caution',
       value: primaryColors['--color-typo-caution'],
-      description: 'Цвет фона для блоков, сообщающих об осторожном действии/статусе',
+      description: 'Осторожный текст',
     },
     {
       color: '--color-typo-warning',
       value: primaryColors['--color-typo-warning'],
-      description: 'Цвет фона для блоков, сообщающих об предупреждающем действии/статусе',
+      description: 'Предупреждающий текст',
     },
     {
       color: '--color-typo-alert',
       value: primaryColors['--color-typo-alert'],
-      description: 'Цвет фона для блоков, сообщающих об опасном (ошибочном) действии/статусе',
+      description: 'Текст об ошибке',
     },
     {
       color: '--color-typo-critical',
       value: primaryColors['--color-typo-critical'],
-      description: 'Цвет фона для блоков, сообщающих об критичном действии/статусе',
+      description: 'Сообщения критического характера',
     },
   ];
 
