@@ -63,6 +63,8 @@ export type CalendarViewComponent = <TYPE extends CalendarPropType>(
   props: Omit<CalendarProps<TYPE>, 'view'>,
 ) => React.ReactElement | null;
 
+const isEqualDate = (date1: Date, date2: Date): boolean => date1.getTime() === date2.getTime();
+
 export const dateComparer = (a?: Date, b?: Date): number =>
   (a?.getTime() ?? 0) - (b?.getTime() ?? 0);
 
@@ -116,10 +118,10 @@ const isSelected = ({ date, value }: { date: Date; value?: Date | DateRange }): 
   }
 
   if (Array.isArray(value)) {
-    return !!value.find((item) => (item ? date.getTime() === item.getTime() : false));
+    return !!value.find((item) => (item ? isEqualDate(date, item) : false));
   }
 
-  return date.getTime() === value.getTime();
+  return isEqualDate(date, value);
 };
 
 const isDateInRange = (date: Date, range: DateRange): CalendarCellPropRange => {
@@ -146,9 +148,9 @@ const isDateInRange = (date: Date, range: DateRange): CalendarCellPropRange => {
 };
 
 const hasEvent = (date: Date, events: Date[]): boolean =>
-  !!events.find((eventDate) => startOfDay(eventDate).getTime() === date.getTime());
+  !!events.find((eventDate) => isEqualDate(startOfDay(eventDate), date));
 
-const isToday = (date: Date): boolean => startOfDay(new Date()).getTime() === date.getTime();
+const isToday = (date: Date): boolean => isEqualDate(startOfDay(new Date()), date);
 
 const isWithInIntervalMinMaxDade = (date: Date, minDate?: Date, maxDate?: Date): boolean => {
   const minDateTime = minDate?.getTime();
@@ -264,25 +266,22 @@ export function getHandleSelectDate<TYPE extends CalendarPropType>(
 
       const [startDate, endDate] = currentValue;
 
-      if (isDefined(startDate)) {
-        if (startDate.getTime() === date.getTime()) {
-          return;
-        }
-        if (typeof params.onChange === 'function') {
-          return params.onChange({
-            e,
-            value: startDate > date ? [date, startDate] : [startDate, date],
-          });
-        }
+      if (
+        (isDefined(startDate) && isEqualDate(startDate, date)) ||
+        (isDefined(endDate) && isEqualDate(endDate, date))
+      ) {
+        return;
       }
 
-      if (isDefined(endDate)) {
-        if (endDate.getTime() === date.getTime()) {
-          return;
-        }
-        if (typeof params.onChange === 'function') {
-          return params.onChange({ e, value: endDate > date ? [date, endDate] : [endDate, date] });
-        }
+      if (isDefined(startDate) && typeof params.onChange === 'function') {
+        return params.onChange({
+          e,
+          value: startDate > date ? [date, startDate] : [startDate, date],
+        });
+      }
+
+      if (isDefined(endDate) && typeof params.onChange === 'function') {
+        return params.onChange({ e, value: endDate > date ? [date, endDate] : [endDate, date] });
       }
     };
   }

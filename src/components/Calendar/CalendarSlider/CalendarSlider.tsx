@@ -181,7 +181,6 @@ export const CalendarSlider: React.FC<CalendarSliderProps> = (props) => {
                 <button
                   className={cnCalendarSlider('Mounth')}
                   key={index}
-                  // tabIndex={0}
                   onClick={() => onChange(mounth.date)}
                   onKeyDown={() => onChange(addMonths(mounth.date, 1))}
                   ref={
