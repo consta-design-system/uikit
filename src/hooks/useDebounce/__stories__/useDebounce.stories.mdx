@@ -1,0 +1,45 @@
+import { UseDebounceExample } from './examples/UseDebounceExample/UseDebounceExample';
+
+<Meta title="Hooks|useDebounce" id="useDebounce" />
+
+# useDebounce
+
+```tsx
+type UseDebounce = <T extends (...args: any) => void>(
+  fn: T,
+  time: number,
+) => (...args: Parameters<T>) => void;
+```
+
+Когда мы вызываем несколько раз подряд функцию обернутую `useDebounce`,
+это гарантирует, что все остальные вызовы будут игнорироваться в течение задоного времени.
+
+| Параметры | Тип        | По умолчанию | Описание             |
+| --------- | ---------- | ------------ | -------------------- |
+| `fn`      | `Function` | -            | Функция              |
+| `time?`   | `number`   | 0            | Время в милисекундах |
+
+## Пример
+
+```tsx
+export const UseDebounceExample = () => {
+  const [value, setValue] = useState<string | null>(null);
+  const [searchValue, setSearchValue] = useState<string | null>(null);
+  const debounceSetSearchValue = useDebounce(setSearchValue, 300);
+
+  useEffect(() => debounceSetSearchValue(value), [value]);
+
+  return (
+      <TextField
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        placeholder="Поиск"
+      />
+      <Text>
+        Резултаты поиска по: <b>{searchValue}</b>
+      </Text>
+  );
+};
+```
+
+<UseDebounceExample />

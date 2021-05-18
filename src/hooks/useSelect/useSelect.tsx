@@ -245,7 +245,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   }, 300);
 
   const setSearch = React.useCallback(
-    (value) => {
+    (value: string) => {
       setState(
         (old) => ({
           ...old,

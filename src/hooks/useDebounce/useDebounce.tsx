@@ -1,25 +1,32 @@
-import React from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
-export const useDebounce = (fn: Function, time = 0) => {
-  const ref = React.useRef<ReturnType<typeof setTimeout> | null>(null);
-  const fnRef = React.useRef<Function>();
+type UseDebounce = <T extends (...args: any) => void>(
+  fn: T,
+  time: number,
+) => (...args: Parameters<T>) => void;
+
+export const useDebounce: UseDebounce = (fn, time) => {
+  type Fn = typeof fn;
+
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const fnRef = useRef<Fn>();
 
   fnRef.current = fn;
 
-  React.useEffect(() => {
+  useEffect(() => {
     return (): void => {
-      ref.current && clearTimeout(ref.current);
+      timeoutRef.current && clearTimeout(timeoutRef.current);
     };
   }, [time]);
 
-  return React.useCallback(
-    (...args) => {
-      if (ref.current) {
-        clearTimeout(ref.current);
+  return useCallback(
+    (...args: Parameters<Fn>) => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
       }
 
-      ref.current = setTimeout(() => {
-        ref.current = null;
+      timeoutRef.current = setTimeout(() => {
+        timeoutRef.current = null;
         if (typeof fnRef.current === 'function') {
           fnRef.current(...args);
         }
