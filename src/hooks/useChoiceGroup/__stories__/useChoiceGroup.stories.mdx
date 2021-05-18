@@ -1,0 +1,45 @@
+<Meta title="Hooks|useChoiceGroup" id="useChoiceGroup" />
+
+# useChoiceGroup
+
+Хук для использования в компонентах где нужен выбор из несколких значений,
+такие как [ChoiceGroup](/?path=/docs/components-choicegroup--playgrounds),
+[CheckboxGroup](/?path=/docs/components-checkboxgroup--playground)
+
+```tsx
+
+type UseChoiceGroupValues<ITEM, EVENT> = {
+  getOnChange: (item: ITEM) => (e: EVENT) => void;
+  getChecked:  (item: ITEM) => boolean;;
+};
+
+type UseChoiceGroupProps<ITEM, EVENT> = {
+    getKey: (item: ITEM) => string | number;
+} & (
+  | {
+      multiple: false;
+      value: ITEM[] | null;
+      callBack: (props: { e: EVENT; value: ITEM[] | null }) => void;
+    }
+  | {
+      multiple: false;
+      value: ITEM | null;
+      callBack: (props: { e: EVENT; value: ITEM }) => void;
+    }
+);
+
+
+
+useChoiceGroup<ITEM, EVENT>(props: UseChoiceGroupProps<ITEM, EVENT>): UseChoiceGroupValues<ITEM, EVENT>
+```
+
+| Свойство   | Тип и значения                                                                                    | По умолчанию | Описание                                             |
+| ---------- | ------------------------------------------------------------------------------------------------- | ------------ | ---------------------------------------------------- |
+| `getKey`   | `(item: ITEM) => string, number;`                                                                 | -            | функция получения уникального ключа элемента массива |
+| `multiple` | `boolean`                                                                                         | -            | признак множественного `value`                       |
+| `value`    | `ITEM, ITEM[], null;`                                                                             | -            | текущее значение                                     |
+| `callBack` | `(props: { e: EVENT; value: ITEM[], null }) => void, (props: { e: EVENT; value: ITEM }) => void;` | -            | callBack который должен будет отработат              |
+
+## Пример
+
+Пример можете посмотреть в компоненете [CheckboxGroup](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/CheckboxGroup/CheckboxGroup.tsx)
