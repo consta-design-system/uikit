@@ -1,11 +1,16 @@
+import './ThemePreview.css';
+
 import React, { useState } from 'react';
 
 import { Item, SnackBar } from '../../../components/SnackBar/SnackBar';
 import { Text } from '../../../components/Text/Text';
 import { defaultVars } from '../../../hooks/useThemeVars/helpers';
 import { useThemeVars } from '../../../hooks/useThemeVars/useThemeVars';
+import { cn } from '../../cn';
 import * as wp from '../../whitepaper/whitepaper';
 import { ColorPreview } from '../ColorPreview/ColorPreview';
+
+const cnCopySnackbar = cn('CopySnackbar');
 
 const varsMap = {
   color: {
@@ -387,7 +392,7 @@ export const ThemePreview: React.FC = () => {
 
   return (
     <div className={wp.layout()}>
-      <SnackBar items={copiedItems} />
+      <SnackBar className={cnCopySnackbar()} items={copiedItems} />
       <div className={wp.layout('content')}>
         <div className={wp.layout('container', { size: 'm' })}>
           <section>
