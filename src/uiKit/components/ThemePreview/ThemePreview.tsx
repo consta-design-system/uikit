@@ -22,7 +22,7 @@ import {
   typoColors,
 } from './helpers';
 
-const cnCopySnackbar = cn('CopySnackbar');
+const cnThemePreview = cn('ThemePreview');
 
 const varsMap = {
   color: {
@@ -65,7 +65,7 @@ export const ThemePreview: React.FC = () => {
 
   return (
     <div className={wp.layout()}>
-      <SnackBar className={cnCopySnackbar()} items={copiedItems} />
+      <SnackBar className={cnThemePreview('Snackbar')} items={copiedItems} />
       <div className={wp.layout('content')}>
         <div className={wp.layout('container', { size: 'm' })}>
           <section>
