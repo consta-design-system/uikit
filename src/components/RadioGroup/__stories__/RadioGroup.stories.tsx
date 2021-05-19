@@ -13,7 +13,7 @@ import {
   radioGroupViews,
 } from '../RadioGroup';
 
-import mdx from './RadioGroup.mdx';
+import mdx from './RadioGroup.docs.mdx';
 
 const cnRadioGroupStories = cn('RadioGroupStories');
 

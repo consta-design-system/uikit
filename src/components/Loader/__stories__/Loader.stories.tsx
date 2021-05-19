@@ -4,7 +4,7 @@ import { select } from '@storybook/addon-knobs';
 import { createMetadata } from '../../../utils/storybook';
 import { Loader, loaderPropSize, loaderPropSizeDefault } from '../Loader';
 
-import mdx from './Loader.mdx';
+import mdx from './Loader.docs.mdx';
 
 const defaultKnobs = () => ({
   size: select('size', loaderPropSize, loaderPropSizeDefault),

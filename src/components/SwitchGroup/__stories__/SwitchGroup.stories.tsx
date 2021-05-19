@@ -13,7 +13,7 @@ import {
   switchGroupViews,
 } from '../SwitchGroup';
 
-import mdx from './SwitchGroup.mdx';
+import mdx from './SwitchGroup.docs.mdx';
 
 const cnSwitchGroupStories = cn('SwitchGroupStories');
 

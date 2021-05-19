@@ -10,7 +10,7 @@ import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 import { directions, Popover, Position } from '../Popover';
 
-import mdx from './Popover.mdx';
+import mdx from './Popover.docs.mdx';
 
 const cnPopoverStories = cn('PopoverStories');
 

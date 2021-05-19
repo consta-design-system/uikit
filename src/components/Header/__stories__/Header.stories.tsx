@@ -8,7 +8,7 @@ import { HeaderMinifyLoginExample } from './examples/HeaderMinifyLoginExample/He
 import { HeaderWithLogoExample } from './examples/HeaderWithLogoExample/HeaderWithLogoExample';
 import { HeaderWithoutMenuExample } from './examples/HeaderWithoutMenuExample/HeaderWithoutMenuExample';
 import { HeaderWithoutSearchExample } from './examples/HeaderWithoutSearchExample/HeaderWithoutSearchExample';
-import mdx from './Header.mdx';
+import mdx from './Header.docs.mdx';
 
 export function Playground() {
   return (

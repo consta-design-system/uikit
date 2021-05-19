@@ -1,5 +1,26 @@
 # Changelog
 
+## v1.11.13 (12/05/2021)
+
+- [docs(theme): add shadows info (#1121)](https://github.com/gazprom-neft/consta-uikit/commit/ac985e2e5fdd26c84850ce9072ad0e44e68cc87f) - [@kolebayev](https://github.com/kolebayev)
+- [chore(chromatic): remove (#1118)](https://github.com/gazprom-neft/consta-uikit/commit/09afcee88f2b0050f6f4ac9a83f1d24967d61bcf) - [@gizeasy](https://github.com/gizeasy)
+- [feat(useThemeVars): export types (#1117)](https://github.com/gazprom-neft/consta-uikit/commit/0e5284d03fa81c91838a6dccf947b40c986a6c37) - [@gizeasy](https://github.com/gizeasy)
+- [chore(deps-dev): bump postcss from 7.0.31 to 8.2.10 (#1114)](https://github.com/gazprom-neft/consta-uikit/commit/deac73bfde551ff7397792bc804857c5d264fe51) - [@dependabot](https://github.com/dependabot)
+- [chore(deps): bump hosted-git-info from 2.8.8 to 2.8.9 (#1108)](https://github.com/gazprom-neft/consta-uikit/commit/9ed3fc7c8d339e9a1e7a20d62b66fdbd3b21666b) - [@dependabot](https://github.com/dependabot)
+- [chore(deps): bump url-parse from 1.4.7 to 1.5.1 (#1107)](https://github.com/gazprom-neft/consta-uikit/commit/f5f19d580227886a7a178c5daade518f3856b925) - [@dependabot](https://github.com/dependabot)
+- [chore(deps): bump ssri from 6.0.1 to 6.0.2 (#1097)](https://github.com/gazprom-neft/consta-uikit/commit/4615b96f062a54bd2cdfcfced2c6c00c544db1e8) - [@dependabot](https://github.com/dependabot)
+- [chore(github): Update issue templates (#1098)](https://github.com/gazprom-neft/consta-uikit/commit/7ad000ac89c7c2bb18bac685806b6cf60b62bbf6) - [@kolebayev](https://github.com/kolebayev)
+- [fix(collapse): fix grouping in storybook sidebar(#1100)](https://github.com/gazprom-neft/consta-uikit/commit/61bd2b2588261f9f5b36ac3280023b1e94ccbeb6) - [@kolebayev](https://github.com/kolebayev)
+
+---
+
+## v1.11.12 (28/04/2021)
+
+- [chore(storybook): edit configs](https://github.com/gazprom-neft/consta-uikit/commit/b08ba8a274b70fdb7989160d46d81261fcf3a184) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Collapse): create component, story, doc (#988)](https://github.com/gazprom-neft/consta-uikit/commit/8ee65c35fbe94a7a3926df1fd4ba5c926c7050be) - [@azhadanov](https://github.com/azhadanov)
+
+---
+
 ## v1.11.11 (23/04/2021)
 
 - [docs(readme): general info added (#1070)](https://github.com/gazprom-neft/consta-uikit/commit/e0b89ffdfdc9313941b556f211f0520e6e973e43) - [@schurf-des](https://github.com/schurf-des)
@@ -328,37 +349,3 @@
 ## v1.8.1 (02/09/2020)
 
 - [fix(docs): fixed docs and links (#376)](https://github.com/gazprom-neft/consta-uikit/commit/3e14c11559d7e61a9c332429fdecbd3b1b886eda) - @gizeasy
-
----
-
-## v1.8.0 (02/09/2020)
-
-- [chore(repository): moving to gazprom-neft/consta-uikit (#373)](https://github.com/gazprom-neft/consta-uikit/commit/b735c413d8b5af7db8ceda0fae819f33e2d42846) - @gizeasy
-- [docs(Tooltip): edit description and structure (#362)](https://github.com/gazprom-neft/consta-uikit/commit/d0c1e14c44ec87d3f9abf69ee74efd0b7646f214) - @arhayka
-- [docs(FileField): edit docs for FileField (#364)](https://github.com/gazprom-neft/consta-uikit/commit/37c9ca9f48ef7e4eaba4759be89396b50bead57e) - @arhayka
-- [docs(Common): add docs for Common (#365)](https://github.com/gazprom-neft/consta-uikit/commit/721623a2e20ff2fd5cde4f551b59a1623676dfaa) - @arhayka
-- [fix(ChoiceGroup): fix view secondary and round dividers (#367)](https://github.com/gazprom-neft/consta-uikit/commit/6ebb81a991a36985ef38fe070737f8164ab08ca8) - @fooontic
-- [docs(Popover): edit text and structure (#356)](https://github.com/gazprom-neft/consta-uikit/commit/50a7ef093be6751bfb47fdb9f766eeb5d9827e03) - @arhayka
-- [docs(ChoiceGroup): add docs and examples (#363)](https://github.com/gazprom-neft/consta-uikit/commit/a613182c947de984df8b01189c113c28eedf11b5) - @arhayka
-- [docs(Timer): edit description, add examples (#361)](https://github.com/gazprom-neft/consta-uikit/commit/ddfeb643102745a1fdc5042694a1717d2915283f) - @arhayka
-- [docs(Tabs): add description and examples (#359)](https://github.com/gazprom-neft/consta-uikit/commit/51fd57d8c61e80b833b0a74e93c38a7e6a917be7) - @arhayka
-- [docs(Checkbox): edit docs for Checkbox (#345)](https://github.com/gazprom-neft/consta-uikit/commit/67a1dc6c5f9862cb13eaa98ed490d9118260786f) - @arhayka
-- [docs(User): add docs for User (#326)](https://github.com/gazprom-neft/consta-uikit/commit/0c1cbb1ffe47bd87b7dc8238cc71b2d61bad7907) - @arhayka
-- [docs(TextField): add docs for TextField (#324)](https://github.com/gazprom-neft/consta-uikit/commit/d69cfa85ad05929142465f5fee581d1b72ee2970) - @arhayka
-- [docs(Tag): edit docs for Tag (#323)](https://github.com/gazprom-neft/consta-uikit/commit/2fbf3f74fcaf96536449e301f5abc6795245729a) - @arhayka
-- [ docs(Switch): add docs for Switch (#322)](https://github.com/gazprom-neft/consta-uikit/commit/45648776c428e02a0b0e216b1bcdeea528407fc5) - @arhayka
-- [docs(Radio): add docs for Radio (#321)](https://github.com/gazprom-neft/consta-uikit/commit/7032f37f439916f7157812e3f057b7cddd04a143) - @arhayka
-- [docs(Text): edit docs for Text (#300)](https://github.com/gazprom-neft/consta-uikit/commit/396ac4ae2a665557b9bc2104b8bcfefed889bf94) - @arhayka
-- [feat(Icons): add new icons (#370)](https://github.com/gazprom-neft/consta-uikit/commit/10f8d443de6ac527eb5cb4bbdcd7274311a0be61) - @gizeasy
-- [docs(Loader): add docs for Loader (#320)](https://github.com/gazprom-neft/consta-uikit/commit/b02f4a421f6badfc34ac41c4604430c65d64e860) - @arhayka
-- [docs(Informer): add docs for Informer (#319)](https://github.com/gazprom-neft/consta-uikit/commit/1d289a300265cfb2b7fdfb2bcc080d7216d52ac0) - @arhayka
-- [docs(Avatar): add docs for Avatar (#307)](https://github.com/gazprom-neft/consta-uikit/commit/bdb33df0dce71cac06eec75e7de10cca10cf7c57) - @arhayka
-- [docs(components): add docs for Badge and Attach (#279)](https://github.com/gazprom-neft/consta-uikit/commit/cdab002769764089f69baf75d456691fbeefd8b6) - @arhayka
-- [docs(File): add docs for File (#289)](https://github.com/gazprom-neft/consta-uikit/commit/c9977c8e2e1122bac7f8f35fa57529e10948070f) - @arhayka
-
----
-
-## v1.7.1 (21/08/2020)
-
-- [fix(Switch and Radio): disabled styles (#353)](https://github.com/gazprom-neft/consta-uikit/commit/ae83d0812b259c8c2fab979cb6f46562fe251952) - @fooontic
-- [fix(Types): added remove "css" types from attributes](https://github.com/gazprom-neft/consta-uikit/commit/f3350b8503f568c3a810382fc11b880ddd68f8a8) - @evless

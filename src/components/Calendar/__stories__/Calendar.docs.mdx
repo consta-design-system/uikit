@@ -1,0 +1,33 @@
+# Calendar
+
+## Список свойств
+
+```tsx
+import { Locale } from 'date-fns';
+import ruLocale from 'date-fns/locale/ru';
+
+export type CalendarPropType = 'date' | 'date-range';
+
+export type CalendarPropValue<TYPE extends CalendarPropType> = TYPE extends 'date'
+  ? Date
+  : [Date?, Date?];
+
+export type CalendarPropOnChange<TYPE extends CalendarPropType> = (props: {
+  value: CalendarPropValue<TYPE>;
+  e: React.MouseEvent<HTMLDivElement>;
+}) => void;
+```
+
+| Свойство              | Тип или варианты значения           | По умолчанию | Описание                                                    |
+| --------------------- | ----------------------------------- | ------------ | ----------------------------------------------------------- |
+| `view?`               | `'oneMount', 'twoMounts', 'slider'` | `'oneMount'` | Вид календаря                                               |
+| `type?`               | `CalendarPropType`                  | `'date'`     | Тип календаря                                               |
+| `value?`              | `CalendarPropValue`                 | -            | Выбранная дата или диапазон дат                             |
+| `onChange?`           | `CalendarPropOnChange`              | -            | Обработчик событий выбора даты или диапазона дат            |
+| `minDate?`            | `Date`                              | -            | Ограничение выбора дат по меньшей дате                      |
+| `maxDate?`            | `Date`                              | -            | Ограничение выбора дат по высшей дате                       |
+| `events?`             | `Date[]`                            | -            | События                                                     |
+| `locale?`             | `Locale`                            | `ruLocale`   | Локализация                                                 |
+| `currentVisibleDate?` | `Date`                              | `new Date()` | Дата которая будет отображена при первом рендере компонента |
+| `ref?`                | `React.Ref<HTMLDivElement>`         | —            | Ссылка на корневой DOM-элемент                              |
+| `className?`          | `string`                            | —            | Дополнительные CSS-классы                                   |

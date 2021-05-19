@@ -10,7 +10,7 @@ import {
   multiComboboxPropSizeDefault,
 } from '../MultiCombobox';
 
-import mdx from './MultiCombobox.mdx';
+import mdx from './MultiCombobox.docs.mdx';
 
 type Option = {
   label: string;

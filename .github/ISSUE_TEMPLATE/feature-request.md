@@ -1,10 +1,12 @@
 ---
 name: Feature request
 about: Запрос фичи или улучшения
-title: 'название компонента/landing/storybook/doc : Что нужно сделать'
-labels: feature
+title: 'название компонента/landing/storybook/doc: Что нужно сделать'
+labels: ''
 assignees: ''
----Полные [правила оформления issue](https://consta-uikit.vercel.app/?path=/docs/common-develop-issues--page)
+---
+
+> Полные [правила оформления issue](https://consta-uikit.vercel.app/?path=/docs/common-develop-issues--page)
 
 **Описание фичи или улучшения**
 Мы будем рады:

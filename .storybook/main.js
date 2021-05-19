@@ -3,7 +3,7 @@ const remarkExternalLinks = require('../node_modules/remark-external-links');
 const createCompiler = require('@storybook/addon-docs/mdx-compiler-plugin');
 
 module.exports = {
-  stories: ['../docs/*.mdx', '../docs/**/*.mdx', '../src/**/*.stories.(js|tsx)'],
+  stories: ['../**/*.stories.(js|tsx|mdx)'],
   addons: [
     'storybook-addon-themes/register',
     '@storybook/addon-knobs/register',
@@ -37,7 +37,7 @@ module.exports = {
     });
 
     config.module.rules.push({
-      test: /(\/|\\)src(\/|\\)[\w/\\.-]*\.mdx$/,
+      test: /\.docs\.mdx$/,
       use: [
         {
           loader: 'babel-loader',
@@ -55,7 +55,7 @@ module.exports = {
     });
 
     config.module.rules.push({
-      test: /(\/|\\)docs(\/|\\)[\w/\\.-]*\.mdx$/,
+      test: /\.stories\.mdx$/,
       use: [
         {
           loader: 'babel-loader',
@@ -78,6 +78,18 @@ module.exports = {
       loader: require.resolve('@storybook/source-loader'),
       exclude: [/node_modules/],
       enforce: 'pre',
+    });
+
+    config.module.rules.push({
+      test: /(\/|\\)docs(\/|\\)[\w/\\.-]*\.tsx?$/,
+      use: [
+        {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react'],
+          },
+        },
+      ],
     });
 
     return config;
