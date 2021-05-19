@@ -2,13 +2,17 @@ import { RefObject, useEffect } from 'react';
 
 export type ClickOutsideHandler = (event: MouseEvent) => void;
 
-type Props = {
+type UseClickOutsideProps = {
   isActive: boolean;
   ignoreClicksInsideRefs: ReadonlyArray<RefObject<HTMLElement>>;
   handler: ClickOutsideHandler;
 };
 
-export function useClickOutside({ isActive, ignoreClicksInsideRefs, handler }: Props): void {
+export function useClickOutside({
+  isActive,
+  ignoreClicksInsideRefs,
+  handler,
+}: UseClickOutsideProps): void {
   useEffect(() => {
     if (!isActive) {
       return;
