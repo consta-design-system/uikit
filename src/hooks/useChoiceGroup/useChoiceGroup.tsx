@@ -4,7 +4,7 @@ type GetOnChange<ITEM, EVENT> = (item: ITEM) => (e: EVENT) => void;
 
 type GetChecked<ITEM> = (item: ITEM) => boolean;
 
-type Values<ITEM, EVENT> = {
+type UseChoiceGroupValues<ITEM, EVENT> = {
   getOnChange: GetOnChange<ITEM, EVENT>;
   getChecked: GetChecked<ITEM>;
 };
@@ -29,10 +29,22 @@ type CommonProps<ITEM> = {
   getKey: GetKey<ITEM>;
 };
 
-type Props<ITEM, EVENT> = CommonProps<ITEM> &
+type UseChoiceGroupProps<ITEM, EVENT> = CommonProps<ITEM> &
   (PropsWithMultiple<ITEM, EVENT> | PropsWithoutMultiple<ITEM, EVENT>);
 
 type FormatedItems<ITEM> = { [value: string]: ITEM };
+
+function isMultiple<ITEM, EVENT>(
+  params: UseChoiceGroupProps<ITEM, EVENT>,
+): params is CommonProps<ITEM> & PropsWithMultiple<ITEM, EVENT> {
+  return params.multiple;
+}
+
+function isNotMultiple<ITEM, EVENT>(
+  params: UseChoiceGroupProps<ITEM, EVENT>,
+): params is CommonProps<ITEM> & PropsWithoutMultiple<ITEM, EVENT> {
+  return !params.multiple;
+}
 
 function formatValue<ITEM>(
   valueProp: ITEM | ITEM[] | null,
@@ -52,38 +64,33 @@ function formatValue<ITEM>(
   return valueByKey;
 }
 
-export function useChoiceGroup<ITEM, EVENT>({
-  value: valueProp,
-  getKey,
-  callBack: callBackProp,
-  multiple,
-}: Props<ITEM, EVENT>): Values<ITEM, EVENT> {
-  const formatedValue = formatValue(valueProp, getKey, multiple);
+export function useChoiceGroup<ITEM, EVENT>(
+  props: UseChoiceGroupProps<ITEM, EVENT>,
+): UseChoiceGroupValues<ITEM, EVENT> {
+  const formatedValue = formatValue(props.value, props.getKey, props.multiple);
 
   const getChecked: GetChecked<ITEM> = (item) =>
-    Object.prototype.hasOwnProperty.call(formatedValue, getKey(item));
+    Object.prototype.hasOwnProperty.call(formatedValue, props.getKey(item));
 
-  const getOnChange: GetOnChange<ITEM, EVENT> = (item) => (e) => {
-    const checked = getChecked(item);
-    const key = getKey(item);
-
-    if (multiple) {
+  const getOnChange: GetOnChange<ITEM, EVENT> = (selectedItem) => (e) => {
+    if (isMultiple(props)) {
       let newValue: ITEM[] | null;
-      if (checked) {
-        const value = valueProp ? (valueProp as ITEM[]) : [];
-        newValue = value.filter((item) => getKey(item) !== key);
+
+      if (getChecked(selectedItem)) {
+        const value = props.value || [];
+        newValue = value.filter((item) => props.getKey(item) !== props.getKey(selectedItem));
         if (newValue.length === 0) {
           newValue = null;
         }
       } else {
-        newValue = valueProp ? [...(valueProp as ITEM[])] : [];
-        newValue.push(item);
+        newValue = props.value ? [...props.value] : [];
+        newValue.push(selectedItem);
       }
-      const callBack = callBackProp as CallbackWithMultiple<ITEM, EVENT>;
-      callBack({ e, value: newValue });
-    } else {
-      const callBack = callBackProp as CallbackWithoutMultiple<ITEM, EVENT>;
-      callBack({ e, value: item });
+      props.callBack({ e, value: newValue });
+    }
+
+    if (isNotMultiple(props)) {
+      props.callBack({ e, value: selectedItem });
     }
   };
 
