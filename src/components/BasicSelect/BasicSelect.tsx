@@ -30,6 +30,7 @@ type Select = <ITEM>(props: SimpleSelectProps<ITEM>) => React.ReactElement | nul
 export const BasicSelect: Select = (props) => {
   const defaultOptionsRef = useRef<HTMLDivElement | null>(null);
   const controlRef = useRef<HTMLDivElement | null>(null);
+  const getOptionKeyDefault = props.getOptionLabel;
   const {
     placeholder,
     onBlur,
@@ -38,6 +39,7 @@ export const BasicSelect: Select = (props) => {
     onChange,
     value,
     getOptionLabel,
+    getOptionKey = getOptionKeyDefault,
     disabled,
     ariaLabel,
     id,
@@ -88,6 +90,7 @@ export const BasicSelect: Select = (props) => {
     scrollToIndex,
     disabled,
     getOptionLabel,
+    getOptionKey,
   });
 
   const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>): void => {
@@ -189,6 +192,7 @@ export const BasicSelect: Select = (props) => {
         id={id}
         selectedValues={arrValue}
         getOptionLabel={getOptionLabel}
+        getOptionKey={getOptionKey}
         form={getSelectDropdownForm(form)}
         className={dropdownClassName}
       />

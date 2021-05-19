@@ -43,6 +43,7 @@ type MultiCombobox = <ITEM, GROUP>(
 
 export const MultiCombobox: MultiCombobox = (props) => {
   const defaultOptionsRef = useRef<HTMLDivElement | null>(null);
+  const getOptionKeyDefault = props.getOptionLabel;
   const {
     placeholder,
     onBlur,
@@ -51,6 +52,7 @@ export const MultiCombobox: MultiCombobox = (props) => {
     onChange,
     value,
     getOptionLabel,
+    getOptionKey = getOptionKeyDefault,
     disabled,
     ariaLabel,
     id,
@@ -123,6 +125,7 @@ export const MultiCombobox: MultiCombobox = (props) => {
     scrollToIndex,
     disabled,
     getOptionLabel,
+    getOptionKey,
     onCreate,
     getGroupOptions: getGroupOptions as undefined,
     multi: true,
@@ -206,7 +209,7 @@ export const MultiCombobox: MultiCombobox = (props) => {
   };
 
   const handleRemoveValue = (option: Item): void => {
-    const newVal = arrValue?.filter((arrVal) => getOptionLabel(arrVal) !== getOptionLabel(option));
+    const newVal = arrValue?.filter((arrVal) => getOptionKey(arrVal) !== getOptionKey(option));
     handlerChangeValue(newVal);
   };
 
@@ -265,7 +268,7 @@ export const MultiCombobox: MultiCombobox = (props) => {
                 return (
                   <SelectValueTag
                     label={label}
-                    key={label}
+                    key={getOptionKey(option)}
                     size={size}
                     disabled={Boolean(disabled)}
                     handleRemove={handleRemove}
@@ -330,6 +333,7 @@ export const MultiCombobox: MultiCombobox = (props) => {
         labelForNotFound={labelForNotFound}
         multi
         getOptionLabel={getOptionLabel}
+        getOptionKey={getOptionKey}
         form={getSelectDropdownForm(form)}
         className={dropdownClassName}
       />

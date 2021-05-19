@@ -18,6 +18,7 @@ import mdx from './Combobox.docs.mdx';
 type SelectOption = {
   label: string;
   value: string;
+  id: number;
 };
 
 type Group = { label: string; items: SelectOption[] };
@@ -61,6 +62,7 @@ const Default = (props: {
         options={items}
         value={val}
         getOptionLabel={getItemLabel}
+        getOptionKey={(option: SelectOption): number => option.id}
         getGroupOptions={getGroupOptions}
         onCreate={onCreate}
         onChange={onChange}
@@ -88,7 +90,7 @@ export const WithCreateStory = createStory(
     const [value, setValue] = useState<Option | null | undefined>();
 
     const handleCreate = (label: string): void => {
-      const newVal: SelectOption = { label, value: label };
+      const newVal: SelectOption = { label, value: label, id: options.length + 1 };
       setValue(newVal);
       setOptions([newVal, ...options]);
     };

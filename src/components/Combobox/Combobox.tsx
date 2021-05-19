@@ -32,6 +32,7 @@ type ComboboxType = <ITEM>(props: ComboboxSelectProps<ITEM>) => React.ReactEleme
 
 export const Combobox: ComboboxType = (props) => {
   const defaultOptionsRef = useRef<HTMLDivElement | null>(null);
+  const getOptionKeyDefault = props.getOptionLabel;
   const {
     placeholder,
     onBlur,
@@ -40,6 +41,7 @@ export const Combobox: ComboboxType = (props) => {
     onChange,
     value,
     getOptionLabel,
+    getOptionKey = getOptionKeyDefault,
     disabled,
     ariaLabel,
     id,
@@ -104,6 +106,7 @@ export const Combobox: ComboboxType = (props) => {
     scrollToIndex,
     disabled,
     getOptionLabel,
+    getOptionKey,
     onCreate,
     getGroupOptions,
   });
@@ -262,6 +265,7 @@ export const Combobox: ComboboxType = (props) => {
         hasGroup={hasGroup}
         selectedValues={arrValue}
         getOptionLabel={getOptionLabel}
+        getOptionKey={getOptionKey}
         labelForCreate={labelForCreate}
         labelForNotFound={labelForNotFound}
         form={getSelectDropdownForm(form)}

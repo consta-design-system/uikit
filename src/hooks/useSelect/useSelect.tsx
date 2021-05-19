@@ -27,9 +27,7 @@ type IndexForHighlight = number | ((oldIndex: number) => number);
 type SetHandlerArg<T> = boolean | number | T;
 type SetHandler<T> = (arg: SetHandlerArg<T>) => void;
 
-export type Option<T> = {
-  label: string;
-  item: T;
+export type Option<T> = T & {
   group?: string;
   optionForCreate?: boolean;
 };
@@ -45,6 +43,7 @@ export interface SelectProps<T> {
   disabled?: boolean;
   filterFn?(options: T[], searchValue: string): T[];
   getOptionLabel(option: T): string;
+  getOptionKey(option: T): string | number;
   onCreate?(s: string): void;
   getGroupOptions?(group: T): T[];
   onSelectOption?(): void;
@@ -130,6 +129,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
     disabled = false,
     multi = false,
     getOptionLabel,
+    getOptionKey,
     onCreate,
     getGroupOptions,
     onSelectOption,
@@ -147,13 +147,10 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
             .map((group) => {
               const groupName = getOptionLabel(group);
               const items = typeof getGroupOptions === 'function' ? getGroupOptions(group) : [];
-              return items.map((item) => ({ label: getOptionLabel(item), item, group: groupName }));
+              return items.map((item) => ({ ...item, group: groupName }));
             })
             .flat()
-        : options.map((option) => ({
-            label: getOptionLabel(option),
-            item: option,
-          })),
+        : options,
     [options],
   );
 
@@ -181,11 +178,21 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
       const searchValueLowerCase = searchValue.toLowerCase();
 
       const tempOptions = originalOptions
-        .filter((option) => option.label.toLowerCase().includes(searchValueLowerCase))
-        .sort((a) => a.label.toLowerCase().indexOf(searchValueLowerCase));
+        .filter((option) =>
+          getOptionLabel(option)
+            .toLowerCase()
+            .includes(searchValueLowerCase),
+        )
+        .sort((a) =>
+          getOptionLabel(a)
+            .toLowerCase()
+            .indexOf(searchValueLowerCase),
+        );
 
       const matchWithValueSearch = Boolean(
-        originalOptions.find((option) => option.label.toLowerCase() === searchValueLowerCase),
+        originalOptions.find(
+          (option) => getOptionLabel(option).toLowerCase() === searchValueLowerCase,
+        ),
       );
 
       const optionForCreate = ({
@@ -210,7 +217,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
 
   const getSelectedOptionIndex = (): number => {
     if (value) {
-      const valuesArray = filteredOptions.map((option) => option.item);
+      const valuesArray = [...filteredOptions];
       const selectedOptionIndex = valuesArray.indexOf(value[0]);
 
       return selectedOptionIndex > 0 ? selectedOptionIndex : 0;
@@ -295,21 +302,21 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
       const option = filteredOptions[index];
       if (option && onChangeRef.current) {
         if (multi) {
-          const newVal = value.some((v) => getOptionLabel(v) === option.label)
-            ? value.filter((v) => getOptionLabel(v) !== option.label)
-            : [...value, option.item];
+          const newVal = value.some((v) => getOptionKey(v) === getOptionKey(option))
+            ? value.filter((v) => getOptionKey(v) !== getOptionKey(option))
+            : [...value, option];
 
           if (!option.optionForCreate) {
             onChangeRef.current(newVal);
           } else if (typeof onCreateRef.current === 'function') {
-            const newValue = option.label;
+            const newValue = getOptionLabel(option);
             newValue && onCreateRef.current(newValue);
           }
         } else {
           if (!option.optionForCreate) {
-            onChangeRef.current(option.item);
+            onChangeRef.current(option);
           } else if (typeof onCreateRef.current === 'function') {
-            const newValue = option.label;
+            const newValue = getOptionLabel(option);
             newValue && onCreateRef.current(newValue);
           }
 
