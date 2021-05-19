@@ -11,6 +11,7 @@
     "@bem-react/classname": "^1.5.8",
     "@bem-react/classnames": "^1.3.9",
     "compute-scroll-into-view": "^1.0.14",
+    "date-fns": "^2.17.0",
     "react-textarea-autosize": "^7.1.2",
     "react-transition-group": "^4.4.1",
     "tslib": "^2.1.0"
@@ -39,7 +40,8 @@
     "pre-build": "node builder/preBuild.js --config=./build.config.js",
     "test": "yarn lint && yarn tsc-dry-run && yarn unit",
     "unit": "jest",
-    "unit:watch": "jest --watch"
+    "unit:watch": "jest --watch",
+    "unit:clear": "jest --clearCache"
   },
   "browserslist": [
     "last 2 version",

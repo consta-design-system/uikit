@@ -17,3 +17,26 @@ export const updateAt = <T>(array: T[], index: number, newItem: T): T[] => {
 };
 
 export const range = (n: number): number[] => [...Array(n).keys()];
+
+export const chunk = <T>(array: T[], size: number): T[][] => {
+  let index = 0;
+  let resIndex = 0;
+
+  const result: T[][] = [];
+
+  while (index < array.length) {
+    result[resIndex++] = array.slice(index, (index += size));
+  }
+
+  return result;
+};
+
+export const groupBy = <T, K extends keyof any>(array: T[], iteratee: (elem: T) => K) =>
+  array.reduce((result, value) => {
+    const key = iteratee(value);
+
+    return {
+      ...result,
+      [key]: result[key] ? [...result[key], value] : [value],
+    };
+  }, {} as Record<K, T[]>);

@@ -1,4 +1,4 @@
-export function getSizeByMap<COMPONENT_SIZE extends string | number, SIZE extends string | number>(
+export function getSizeByMap<COMPONENT_SIZE extends string | number, SIZE>(
   map: Record<COMPONENT_SIZE, SIZE>,
   componentSize: COMPONENT_SIZE,
   size?: SIZE,
