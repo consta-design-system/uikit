@@ -1,0 +1,8 @@
+.UiKit--ThemePreview {
+  &-Snackbar {
+    position: fixed;
+    z-index: 9999;
+    right: var(--space-m);
+    bottom: 0;
+  }
+}

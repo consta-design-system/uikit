@@ -56,4 +56,22 @@
       transform-origin: left center;
     }
   }
+
+  &-ColorCode {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    border-radius: var(--control-radius);
+    cursor: pointer;
+
+    & > .Icon {
+      margin-right: var(--space-xs);
+      color: var(--color-typo-secondary);
+    }
+
+    &:hover {
+      color: var(--color-typo-primary);
+      background-color: var(--color-bg-stripe);
+    }
+  }
 }

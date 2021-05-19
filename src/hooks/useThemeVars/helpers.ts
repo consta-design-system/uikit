@@ -47,7 +47,7 @@ const cssColorVars = [
   '--color-control-typo-primary-hover',
   '--color-control-bg-secondary',
   '--color-control-bg-border-secondary',
-  '--color-control-bg-border-secondary-hover:',
+  '--color-control-bg-border-secondary-hover',
   '--color-control-typo-secondary',
   '--color-control-typo-secondary-hover',
   '--color-control-bg-ghost',
