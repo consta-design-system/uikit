@@ -2,6 +2,24 @@
 
 # useForkRef
 
+Хук используется для указания одного DOM-элемента к несколким ссылкам.
+
+```tsx
+type UseForkRef = <T>(refs: (React.Ref<T> | undefined)[]) => React.RefCallback<T> | null;
+```
+
 | Параметры | Тип            | По умолчанию | Описание      |
 | --------- | -------------- | ------------ | ------------- |
 | `refs`    | `React.Ref<T>` | -            | Массив ссылок |
+
+## Пример
+
+```tsx
+const Example = () => {
+  const ref1 = React.useRef<HTMLDivElement>(null);
+  const ref2 = React.useRef<HTMLDivElement>(null);
+  const ref3 = React.useRef<HTMLDivElement>(null);
+
+  return <div ref={useForkRef([ref1, ref2, ref3])}>Example</div>;
+};
+```
