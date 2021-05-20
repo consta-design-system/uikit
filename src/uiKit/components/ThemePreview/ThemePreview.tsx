@@ -1,6 +1,6 @@
 import './ThemePreview.css';
 
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 
 import { Item, SnackBar } from '../../../components/SnackBar/SnackBar';
 import { Text } from '../../../components/Text/Text';
@@ -36,31 +36,39 @@ const varsMap = {
   space: [],
 } as const;
 
-export const ThemePreview: React.FC = () => {
-  const [copiedItems, setCopiedItems] = useState<Item[]>([]);
+type Action = { type: 'add'; item: Item } | { type: 'remove'; key: number | string };
 
-  const clickHandlerCallback = () => {
-    setCopiedItems([
-      ...copiedItems,
-      {
-        key: copiedItems.length + 1,
+function reducer(state: Item[], action: Action) {
+  switch (action.type) {
+    case 'add':
+      return [...state, action.item];
+    case 'remove':
+      return state.filter((item) => item.key !== action.key);
+  }
+}
+
+export const ThemePreview: React.FC = () => {
+  const [copiedItems, dispatchCopiedItems] = useReducer(reducer, []);
+
+  const clickHandlerCallback = (item: { color: string }) => () => {
+    dispatchCopiedItems({
+      type: 'add',
+      item: {
+        key: `${item.color}-${copiedItems.length + 1}`,
         message: 'Значение скопировано в буфер обмена',
         status: 'system',
         autoClose: 3,
-        onAutoClose: () => {
-          setCopiedItems(
-            copiedItems.length === 1
-              ? []
-              : [...copiedItems.filter((item) => copiedItems.length + 1 !== item.key)],
-          );
+        onClose: (item) => {
+          dispatchCopiedItems({ type: 'remove', key: item.key });
         },
       },
-    ]);
+    });
   };
 
   const vars = useThemeVars({
     vars: varsMap,
   });
+
   const primaryColors = vars.color.primary;
 
   return (
@@ -88,7 +96,7 @@ export const ThemePreview: React.FC = () => {
                     color={item.color}
                     description={item.description}
                     key={index}
-                    clickHandler={clickHandlerCallback}
+                    clickHandler={clickHandlerCallback(item)}
                   />
                 );
               })}
@@ -116,7 +124,7 @@ export const ThemePreview: React.FC = () => {
                     color={item.color}
                     description={item.description}
                     key={index}
-                    clickHandler={clickHandlerCallback}
+                    clickHandler={clickHandlerCallback(item)}
                   />
                 );
               })}
@@ -143,7 +151,7 @@ export const ThemePreview: React.FC = () => {
                     color={item.color}
                     description={item.description}
                     key={index}
-                    clickHandler={clickHandlerCallback}
+                    clickHandler={clickHandlerCallback(item)}
                   />
                 );
               })}
@@ -178,7 +186,7 @@ export const ThemePreview: React.FC = () => {
                         color={item.color}
                         description={item.description}
                         key={index}
-                        clickHandler={clickHandlerCallback}
+                        clickHandler={clickHandlerCallback(item)}
                       />
                     );
                   })}
@@ -200,7 +208,7 @@ export const ThemePreview: React.FC = () => {
                         color={item.color}
                         description={item.description}
                         key={index}
-                        clickHandler={clickHandlerCallback}
+                        clickHandler={clickHandlerCallback(item)}
                       />
                     );
                   })}
@@ -222,7 +230,7 @@ export const ThemePreview: React.FC = () => {
                         color={item.color}
                         description={item.description}
                         key={index}
-                        clickHandler={clickHandlerCallback}
+                        clickHandler={clickHandlerCallback(item)}
                       />
                     );
                   })}
@@ -244,7 +252,7 @@ export const ThemePreview: React.FC = () => {
                         color={item.color}
                         description={item.description}
                         key={index}
-                        clickHandler={clickHandlerCallback}
+                        clickHandler={clickHandlerCallback(item)}
                       />
                     );
                   })}
@@ -266,7 +274,7 @@ export const ThemePreview: React.FC = () => {
                         color={item.color}
                         description={item.description}
                         key={index}
-                        clickHandler={clickHandlerCallback}
+                        clickHandler={clickHandlerCallback(item)}
                       />
                     );
                   })}
@@ -288,7 +296,7 @@ export const ThemePreview: React.FC = () => {
                         color={item.color}
                         description={item.description}
                         key={index}
-                        clickHandler={clickHandlerCallback}
+                        clickHandler={clickHandlerCallback(item)}
                       />
                     );
                   })}
