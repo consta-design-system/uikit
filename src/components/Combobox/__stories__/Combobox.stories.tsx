@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { groups, simpleItems } from '../__mocks__/data.mock';
@@ -43,6 +43,7 @@ const Default = (props: {
 }): JSX.Element => {
   const getItemLabelDefault = (option: SelectOption): string => option.label;
   const [value, setValue] = useState<Option | null | undefined>();
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const {
     items = simpleItems,
     getItemLabel = getItemLabelDefault,
@@ -66,6 +67,7 @@ const Default = (props: {
         getGroupOptions={getGroupOptions}
         onCreate={onCreate}
         onChange={onChange}
+        inputRef={inputRef}
       />
     </div>
   );
