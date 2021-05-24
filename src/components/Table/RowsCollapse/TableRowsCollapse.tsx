@@ -8,23 +8,30 @@ import { cn } from '../../../utils/bem';
 
 export type Props = {
   level: number;
-  isTableExpanded?: boolean;
+  isExpandedByDefault?: boolean;
   toggleCollapse?: (e: React.SyntheticEvent) => void;
   isExpanded?: boolean;
-  isExpander?: boolean;
+  withCollapseButton?: boolean;
 };
 
 export const cnTableRowsCollapse = cn('TableRowsCollapse');
 
 export const TableRowsCollapse: React.FC<Props> = (props) => {
-  const { level, children, isExpanded, toggleCollapse, isExpander, isTableExpanded } = props;
+  const {
+    level,
+    children,
+    isExpanded,
+    toggleCollapse,
+    withCollapseButton,
+    isExpandedByDefault,
+  } = props;
 
   const paddingLeft =
-    level === 0 ? '' : `calc((calc(var(--cell-padding-horizontal) + var(--space-s)) * ${level})`;
+    level !== 0 ? `calc((calc(var(--cell-padding-horizontal) + var(--space-s)) * ${level})` : '';
 
   return (
     <div style={{ paddingLeft }} className={cnTableRowsCollapse(null)}>
-      {!isTableExpanded && isExpander && (
+      {!isExpandedByDefault && withCollapseButton && (
         // eslint-disable-next-line jsx-a11y/interactive-supports-focus
         <span
           className={cnTableRowsCollapse('button')}
@@ -36,7 +43,9 @@ export const TableRowsCollapse: React.FC<Props> = (props) => {
         </span>
       )}
       <div
-        className={cnTableRowsCollapse('cellContainer', { withExpanderPadding: !isTableExpanded })}
+        className={cnTableRowsCollapse('cellContainer', {
+          withExpanderPadding: !isExpandedByDefault,
+        })}
       >
         {children}
       </div>

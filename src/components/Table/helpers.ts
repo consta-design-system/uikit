@@ -329,37 +329,3 @@ export const transformRows = <T extends TableRow>(
   }
   return rowsArr;
 };
-
-export const traversalRows = <T extends TableRow>(rows: T[], callBack: (rows: T[]) => T[]): T[] => {
-  const copyRowsArr: T[] = [];
-  const stack = [{ rows: callBack([...rows]), index: 0 }];
-
-  while (stack.length) {
-    const level = stack.length - 1;
-    const node = stack[level];
-    const item: T = node.rows[node.index];
-
-    if (item) {
-      const handledItem = {
-        ...item,
-        rows: item.rows && callBack([...item.rows] as T[]),
-      };
-
-      if (level === 0) {
-        copyRowsArr.push(handledItem);
-      }
-
-      if (handledItem.rows?.length) {
-        stack.push({ rows: handledItem.rows as T[], index: 0 });
-      } else {
-        node.index++;
-      }
-    } else {
-      stack.pop();
-      if (stack[stack.length - 1]) {
-        stack[stack.length - 1].index++;
-      }
-    }
-  }
-  return copyRowsArr;
-};

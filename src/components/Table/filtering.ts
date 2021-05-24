@@ -136,6 +136,10 @@ export const filterTableData = <T extends TableRow>({
   const mutableFilteredData = [];
 
   for (const row of data) {
+    if (row.rows?.length) {
+      row.rows = filterTableData({ data: row.rows as T[], filters, selectedFilters });
+    }
+
     const columnNames = Object.keys(row);
     let rowIsValid = true;
 
@@ -185,13 +189,6 @@ export const filterTableData = <T extends TableRow>({
   }
 
   return mutableFilteredData;
-};
-
-export const filterTreeRows = <T extends TableRow>(
-  filters: Filters<T>,
-  selectedFilters: SelectedFilters,
-) => (rows: T[]) => {
-  return filterTableData({ data: rows, filters, selectedFilters });
 };
 
 /* istanbul ignore next */

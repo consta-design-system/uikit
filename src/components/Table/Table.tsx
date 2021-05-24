@@ -24,7 +24,6 @@ import {
   FieldSelectedValues,
   Filters,
   filterTableData,
-  filterTreeRows,
   getSelectedFiltersList,
   isSelectedFiltersPresent,
   onSortBy,
@@ -38,7 +37,6 @@ import {
   Header,
   Position,
   transformRows,
-  traversalRows,
   useHeaderData,
   useLazyLoadData,
 } from './helpers';
@@ -98,7 +96,6 @@ type ColumnBase<T extends TableRow> = ValueOf<
       sortByField?: keyof T;
       sortFn?(a: T[K], b: T[K]): number;
       renderCell?: (row: T) => React.ReactNode;
-      expander?: boolean;
     };
   }
 >;
@@ -138,7 +135,7 @@ export type Props<T extends TableRow> = {
   onRowHover?: onRowHover;
   lazyLoad?: LazyLoad;
   onFiltersUpdated?: (filters: SelectedFilters) => void;
-  expanded?: boolean;
+  isExpandedRowsByDefault?: boolean;
   treeStriped?: boolean;
 };
 
@@ -166,7 +163,7 @@ const sortingData = <T extends TableRow>(
   rows: T[],
   sorting: SortingState<T>,
   onSortBy?: onSortBy<T>,
-) => {
+): T[] => {
   if (onSortBy) {
     return rows;
   }
@@ -174,14 +171,15 @@ const sortingData = <T extends TableRow>(
   if (!sorting) {
     return rows;
   }
+  const sorredRows = sortByDefault(rows, sorting.by, sorting.order, sorting.sortFn);
 
-  return sortByDefault(rows, sorting.by, sorting.order, sorting.sortFn);
-};
+  if (sorredRows.some((row) => row.rows?.length)) {
+    return sorredRows.map((row) => {
+      return row.rows ? { ...row, rows: sortingData(row.rows as T[], sorting, onSortBy) } : row;
+    });
+  }
 
-const sortingTreeRows = <T extends TableRow>(sorting: SortingState<T>, onSortBy?: onSortBy<T>) => (
-  rows: T[],
-) => {
-  return sortingData(rows, sorting, onSortBy);
+  return sorredRows;
 };
 
 const defaultEmptyRowsPlaceholder = (
@@ -210,7 +208,7 @@ export const Table = <T extends TableRow>({
   lazyLoad,
   onSortBy,
   onFiltersUpdated,
-  expanded = false,
+  isExpandedRowsByDefault = false,
   treeStriped,
 }: Props<T>): React.ReactElement => {
   const {
@@ -430,33 +428,19 @@ export const Table = <T extends TableRow>({
     flattenedHeaders,
   );
 
-  const getExpanderIndex = () => {
-    const expanderIndex = lowHeaders.findIndex((column) => column.expander);
-    return expanderIndex === -1 ? 0 : expanderIndex;
-  };
-
   const hasNestedRows = useMemo(() => rows.some((row) => Boolean(row.rows?.length)), [rows]);
-  const expanderIndex = getExpanderIndex();
 
-  const filterData = (data: T[]): T[] => {
-    if (filters && isSelectedFiltersPresent(selectedFilters)) {
-      return hasNestedRows
-        ? traversalRows(data, filterTreeRows(filters || [], selectedFilters))
-        : filterTableData({
-            data,
-            filters: filters || [],
-            selectedFilters,
-          });
-    }
+  const sortedTableData = sortingData(rows, sorting, onSortBy);
 
-    return data;
-  };
+  const filteredData =
+    filters && isSelectedFiltersPresent(selectedFilters)
+      ? filterTableData({
+          data: sortedTableData,
+          filters: filters || [],
+          selectedFilters,
+        })
+      : sortedTableData;
 
-  const sortedTableData = hasNestedRows
-    ? traversalRows(rows, sortingTreeRows(sorting, onSortBy))
-    : sortingData(rows, sorting, onSortBy);
-
-  const filteredData = filterData(sortedTableData);
   const { maxVisibleRows = 210, scrollableEl = tableRef.current } = lazyLoad || {};
 
   const { getSlicedRows, setBoundaryRef } = useLazyLoadData(
@@ -465,9 +449,7 @@ export const Table = <T extends TableRow>({
     !!lazyLoad,
   );
 
-  const flatRowsData = hasNestedRows
-    ? transformRows(filteredData, expandedRowIds, expanded)
-    : filteredData;
+  const flatRowsData = transformRows(filteredData, expandedRowIds, isExpandedRowsByDefault);
   const rowsData = getSlicedRows(flatRowsData);
 
   const tableStyle: React.CSSProperties & TableCSSCustomProperty = {
@@ -493,14 +475,14 @@ export const Table = <T extends TableRow>({
     row: TableTreeRow<T>,
     columnIdx: number,
   ): TableRowsCollapseProps => {
-    const isExpander = Boolean(row.rows?.length) && columnIdx === expanderIndex;
+    const withCollapseButton = Boolean(row.rows?.length) && columnIdx === 0;
 
     const baseProps = {
       level: row.level,
-      isTableExpanded: expanded,
+      isExpandedByDefault: isExpandedRowsByDefault,
     };
 
-    if (!isExpander || expanded) {
+    if (!withCollapseButton || isExpandedRowsByDefault) {
       return baseProps;
     }
 
@@ -509,7 +491,7 @@ export const Table = <T extends TableRow>({
 
     return {
       ...baseProps,
-      isExpander,
+      withCollapseButton,
       isExpanded,
       toggleCollapse,
     };
@@ -518,7 +500,7 @@ export const Table = <T extends TableRow>({
   const renderCell = (column: TableColumn<T>, row: T, columnIdx: number): React.ReactNode => {
     const cellContent = column.renderCell ? column.renderCell(row) : row[column.accessor!];
 
-    if (!hasNestedRows || columnIdx !== expanderIndex) {
+    if (!hasNestedRows || columnIdx !== 0) {
       return cellContent;
     }
 
