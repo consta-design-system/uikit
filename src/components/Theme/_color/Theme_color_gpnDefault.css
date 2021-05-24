@@ -26,6 +26,12 @@ $color-base-critical: #33000f;
     $color-base-phantom l(-11) a(5%)
   ); /* Цвет зебры (например, при окрашивании фона строк таблицы через одну) */
 
+  /* Цвета для окрашивания разворачивающихся строк таблицы */
+  --color-bg-nested-level-1: color($color-base-phantom l(-11) a(5%));
+  --color-bg-nested-level-2: color($color-base-phantom l(-11) a(10%));
+  --color-bg-nested-level-3: color($color-base-phantom l(-11) a(15%));
+  --color-bg-nested-level-4: color($color-base-phantom l(-11) a(20%));
+  --color-bg-nested-level-5: color($color-base-phantom l(-11) a(25%));
   --color-bg-ghost: color($color-base-phantom l(-11) a(8%)); /* Цвет затенения */
   --color-bg-tone: color($color-base-phantom l(-11) a(85%)); /* Цвет паранджи */
   --color-bg-soft: color($color-base-essential a(90%)); /* Цвет молока */

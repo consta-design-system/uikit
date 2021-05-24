@@ -1,0 +1,17 @@
+.TableRowsCollapse {
+  position: relative;
+
+  &-button {
+    width: var(--graphics-size-s);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  &-cellContainer_withExpanderPadding {
+    padding-left: calc(var(--cell-padding-horizontal) + var(--graphics-size-s));
+  }
+}

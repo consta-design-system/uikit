@@ -187,6 +187,13 @@ export const filterTableData = <T extends TableRow>({
   return mutableFilteredData;
 };
 
+export const filterTreeRows = <T extends TableRow>(
+  filters: Filters<T>,
+  selectedFilters: SelectedFilters,
+) => (rows: T[]) => {
+  return filterTableData({ data: rows, filters, selectedFilters });
+};
+
 /* istanbul ignore next */
 export const useSelectedFilters = <T extends TableRow>(
   filters?: Filters<T>,
