@@ -33,7 +33,7 @@ const localeMap: Record<LocaleProp, Locale> = {
 const defaultKnobs = () => ({
   type: select('type', calendarPropType, calendarPropTypeDefault),
   view: select('view', calendarPropView, calendarPropViewDefault),
-  withEvents: boolean('withEvets', false),
+  withEvents: boolean('withEvents', false),
   minDate: date('minDate', startOfYear(new Date())),
   maxDate: date('maxDate', endOfYear(new Date())),
   locale: select('locale', localeProp, localeDefault),

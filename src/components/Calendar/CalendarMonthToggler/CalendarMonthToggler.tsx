@@ -1,4 +1,4 @@
-import './CalendarMountToggler.css';
+import './CalendarMonthToggler.css';
 
 import React from 'react';
 
@@ -6,9 +6,9 @@ import { IconForward } from '../../../icons/IconForward/IconForward';
 import { cn } from '../../../utils/bem';
 import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
 import { Button } from '../../Button/Button';
-import { CalendarMountLabel } from '../CalendarMountLabel/CalendarMountLabel';
+import { CalendarMonthLabel } from '../CalendarMonthLabel/CalendarMonthLabel';
 
-export type CalendarMountTogglerProps = PropsWithJsxAttributes<
+export type CalendarMonthTogglerProps = PropsWithJsxAttributes<
   {
     prevOnClick?: React.EventHandler<React.MouseEvent<HTMLDivElement>>;
     nextOnClick?: React.EventHandler<React.MouseEvent<HTMLDivElement>>;
@@ -18,22 +18,22 @@ export type CalendarMountTogglerProps = PropsWithJsxAttributes<
   'div'
 >;
 
-export const cnCalendarMountToggler = cn('CalendarMountToggler');
+export const cnCalendarMonthToggler = cn('CalendarMonthToggler');
 
-export const CalendarMountToggler: React.FC<CalendarMountTogglerProps> = (props) => {
+export const CalendarMonthToggler: React.FC<CalendarMonthTogglerProps> = (props) => {
   const { label, className, prevOnClick, nextOnClick, ...otherProps } = props;
 
   return (
     <div
       {...otherProps}
-      className={cnCalendarMountToggler(
+      className={cnCalendarMonthToggler(
         { withPrevButton: Boolean(prevOnClick), withNextButton: Boolean(nextOnClick) },
         [className],
       )}
     >
       {prevOnClick && (
         <Button
-          className={cnCalendarMountToggler('Button', { direction: 'prev' })}
+          className={cnCalendarMonthToggler('Button', { direction: 'prev' })}
           onClick={prevOnClick}
           iconLeft={IconForward}
           size="s"
@@ -41,10 +41,10 @@ export const CalendarMountToggler: React.FC<CalendarMountTogglerProps> = (props)
           iconSize="s"
         />
       )}
-      <CalendarMountLabel className={cnCalendarMountToggler('Label')} label={label} />
+      <CalendarMonthLabel className={cnCalendarMonthToggler('Label')} label={label} />
       {nextOnClick && (
         <Button
-          className={cnCalendarMountToggler('Button', { direction: 'next' })}
+          className={cnCalendarMonthToggler('Button', { direction: 'next' })}
           onClick={nextOnClick}
           iconLeft={IconForward}
           size="s"

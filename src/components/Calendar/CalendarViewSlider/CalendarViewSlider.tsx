@@ -5,13 +5,13 @@ import { addMonths } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 
 import { cn } from '../../../utils/bem';
-import { CalendarMount } from '../CalendarMount/CalendarMount';
-import { CalendarMountLabel } from '../CalendarMountLabel/CalendarMountLabel';
+import { CalendarMonth } from '../CalendarMonth/CalendarMonth';
+import { CalendarMonthLabel } from '../CalendarMonthLabel/CalendarMonthLabel';
 import { CalendarSlider } from '../CalendarSlider/CalendarSlider';
 import {
   calendarPropTypeDefault,
   CalendarViewComponent,
-  getDaysOfMount,
+  getDaysOfMonth,
   getDaysOfWeek,
   getHandleSelectDate,
   getMonthTitle,
@@ -35,7 +35,7 @@ export const CalendarViewSlider: CalendarViewComponent = React.forwardRef((props
 
   const [currentVisibleDate, setCurrentVisibleDate] = useState(currentVisibleDateProp);
   const handleSelectDate = getHandleSelectDate({ type, minDate, maxDate, value, onChange });
-  const daysOfMount = getDaysOfMount({
+  const daysOfMonth = getDaysOfMonth({
     date: currentVisibleDate,
     handleDayClick: handleSelectDate,
     value,
@@ -44,7 +44,7 @@ export const CalendarViewSlider: CalendarViewComponent = React.forwardRef((props
     maxDate,
     locale,
   });
-  const nextDaysOfMount = getDaysOfMount({
+  const nextDaysOfMonth = getDaysOfMonth({
     date: addMonths(currentVisibleDate, 1),
     handleDayClick: handleSelectDate,
     value,
@@ -53,8 +53,8 @@ export const CalendarViewSlider: CalendarViewComponent = React.forwardRef((props
     maxDate,
     locale,
   });
-  const mountLabel = getMonthTitle(currentVisibleDate, locale);
-  const nextMountLabel = getMonthTitle(addMonths(currentVisibleDate, 1), locale);
+  const monthLabel = getMonthTitle(currentVisibleDate, locale);
+  const nextMonthLabel = getMonthTitle(addMonths(currentVisibleDate, 1), locale);
   const daysOfWeek = getDaysOfWeek(locale);
 
   return (
@@ -68,12 +68,12 @@ export const CalendarViewSlider: CalendarViewComponent = React.forwardRef((props
       />
       <div className={cnCalendarViewSlider('CalendarsWrapper')}>
         <div className={cnCalendarViewSlider('Calendar')}>
-          <CalendarMountLabel label={mountLabel} />
-          <CalendarMount daysOfWeek={daysOfWeek} daysOfMount={daysOfMount} />
+          <CalendarMonthLabel label={monthLabel} />
+          <CalendarMonth daysOfWeek={daysOfWeek} daysOfMonth={daysOfMonth} />
         </div>
         <div className={cnCalendarViewSlider('Calendar')}>
-          <CalendarMountLabel label={nextMountLabel} />
-          <CalendarMount daysOfWeek={daysOfWeek} daysOfMount={nextDaysOfMount} />
+          <CalendarMonthLabel label={nextMonthLabel} />
+          <CalendarMonth daysOfWeek={daysOfWeek} daysOfMonth={nextDaysOfMonth} />
         </div>
       </div>
     </div>

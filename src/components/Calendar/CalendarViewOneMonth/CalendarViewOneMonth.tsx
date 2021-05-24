@@ -3,20 +3,20 @@ import { addMonths } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 
 import { cn } from '../../../utils/bem';
-import { CalendarMount } from '../CalendarMount/CalendarMount';
-import { CalendarMountToggler } from '../CalendarMountToggler/CalendarMountToggler';
+import { CalendarMonth } from '../CalendarMonth/CalendarMonth';
+import { CalendarMonthToggler } from '../CalendarMonthToggler/CalendarMonthToggler';
 import {
   calendarPropTypeDefault,
   CalendarViewComponent,
-  getDaysOfMount,
+  getDaysOfMonth,
   getDaysOfWeek,
   getHandleSelectDate,
   getMouthLabelWithYear,
 } from '../helpers';
 
-export const cnCalendarViewOneMount = cn('CalendarViewOneMount');
+export const cnCalendarViewOneMonth = cn('CalendarViewOneMonth');
 
-export const CalendarViewOneMount: CalendarViewComponent = React.forwardRef((props, ref) => {
+export const CalendarViewOneMonth: CalendarViewComponent = React.forwardRef((props, ref) => {
   const {
     className,
     type = calendarPropTypeDefault,
@@ -31,7 +31,7 @@ export const CalendarViewOneMount: CalendarViewComponent = React.forwardRef((pro
   } = props;
   const [currentVisibleDate, setCurrentVisibleDate] = useState(currentVisibleDateProp);
   const handleSelectDate = getHandleSelectDate({ type, minDate, maxDate, value, onChange });
-  const daysOfMount = getDaysOfMount({
+  const daysOfMonth = getDaysOfMonth({
     date: currentVisibleDate,
     handleDayClick: handleSelectDate,
     value,
@@ -41,19 +41,19 @@ export const CalendarViewOneMount: CalendarViewComponent = React.forwardRef((pro
     locale,
   });
 
-  const mountLabel = getMouthLabelWithYear(currentVisibleDate, locale);
+  const monthLabel = getMouthLabelWithYear(currentVisibleDate, locale);
   const daysOfWeek = getDaysOfWeek(locale);
-  const nextMountHandle = () => setCurrentVisibleDate(addMonths(currentVisibleDate, 1));
-  const prevMountHandle = () => setCurrentVisibleDate(addMonths(currentVisibleDate, -1));
+  const nextMonthHandle = () => setCurrentVisibleDate(addMonths(currentVisibleDate, 1));
+  const prevMonthHandle = () => setCurrentVisibleDate(addMonths(currentVisibleDate, -1));
 
   return (
-    <div {...otherProps} ref={ref} className={cnCalendarViewOneMount({}, [className])}>
-      <CalendarMountToggler
-        prevOnClick={prevMountHandle}
-        nextOnClick={nextMountHandle}
-        label={mountLabel}
+    <div {...otherProps} ref={ref} className={cnCalendarViewOneMonth({}, [className])}>
+      <CalendarMonthToggler
+        prevOnClick={prevMonthHandle}
+        nextOnClick={nextMonthHandle}
+        label={monthLabel}
       />
-      <CalendarMount daysOfWeek={daysOfWeek} daysOfMount={daysOfMount} />
+      <CalendarMonth daysOfWeek={daysOfWeek} daysOfMonth={daysOfMonth} />
     </div>
   );
 });
