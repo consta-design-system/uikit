@@ -3,7 +3,7 @@ import './ComponentsGrid.css';
 import React from 'react';
 
 // import { Text } from '../../../../src/components/Text/Text';
-import { cn } from '../../../../src/utils/bem';
+import { cn } from '../../../../../src/utils/bem';
 
 const cnComponentsGrid = cn('ComponentsGrid');
 
