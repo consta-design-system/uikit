@@ -34,6 +34,7 @@ const varsMap = {
   font: [],
   size: [],
   space: [],
+  shadow: [],
 } as const;
 
 type Action = { type: 'add'; item: Item } | { type: 'remove'; key: number | string };

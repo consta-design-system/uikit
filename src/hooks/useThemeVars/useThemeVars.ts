@@ -16,6 +16,7 @@ export type Vars = {
   readonly font: readonly string[];
   readonly size: readonly string[];
   readonly space: readonly string[];
+  readonly shadow: readonly string[];
 };
 
 export type ThemeVars<T extends Vars = typeof defaultVars> = {
@@ -28,6 +29,7 @@ export type ThemeVars<T extends Vars = typeof defaultVars> = {
   font: { [key in T['font'][number]]: string };
   size: { [key in T['size'][number]]: string };
   space: { [key in T['space'][number]]: string };
+  shadow: { [key in T['shadow'][number]]: string };
 };
 
 type UseThemeVarsOptions<T> = {
@@ -82,6 +84,7 @@ export const useThemeVars = <T extends Vars = typeof defaultVars>(
       font: getVars<T['font'][number]>(variables.font, elementPrimary),
       size: getVars<T['size'][number]>(variables.size, elementPrimary),
       space: getVars<T['space'][number]>(variables.space, elementPrimary),
+      shadow: getVars<T['shadow'][number]>(variables.shadow, elementPrimary),
     };
 
     document.body.removeChild(elementPrimary);
@@ -97,6 +100,7 @@ export const useThemeVars = <T extends Vars = typeof defaultVars>(
     theme.font,
     theme.size,
     theme.space,
+    theme.shadow,
     ...(options?.deps ? options.deps : []),
   ]);
 };
