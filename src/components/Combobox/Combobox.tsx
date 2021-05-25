@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 
+import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { useSelect } from '../../hooks/useSelect/useSelect';
 import { IconClose } from '../../icons/IconClose/IconClose';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
@@ -26,6 +27,7 @@ export type ComboboxSelectProps<ITEM> = CommonSelectProps<ITEM> &
     getGroupOptions?(group: ITEM): ITEM[];
     labelForCreate?: string;
     labelForNotFound?: string;
+    inputRef?: React.RefObject<HTMLInputElement | null>;
   };
 
 type ComboboxType = <ITEM>(props: ComboboxSelectProps<ITEM>) => React.ReactElement | null;
@@ -55,6 +57,7 @@ export const Combobox: ComboboxType = (props) => {
     labelForNotFound = 'Не найдено',
     dropdownRef = defaultOptionsRef,
     name,
+    inputRef,
     ...restProps
   } = props;
   const [isFocused, setIsFocused] = useState(false);
@@ -221,7 +224,7 @@ export const Combobox: ComboboxType = (props) => {
               onFocus={handleInputFocus}
               onBlur={handleInputBlur}
               aria-label={ariaLabel}
-              ref={toggleRef}
+              ref={useForkRef([toggleRef, inputRef])}
               value={inputData.value}
               className={cnSelect('Input', { size, hide: showInput })}
             />
