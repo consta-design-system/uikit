@@ -1,0 +1,6 @@
+.Theme_shadow_gpnDefault {
+  /* Тени */
+  --shadow-group: 0 2px 2px rgba(0, 32, 51, 0.02), 0 2px 8px rgba(0, 32, 51, 0.16);
+  --shadow-layer: 0 4px 4px rgba(0, 32, 51, 0.04), 0 8px 24px rgba(0, 32, 51, 0.12);
+  --shadow-modal: 0 8px 8px rgba(0, 32, 51, 0.04), 0 12px 28px rgba(0, 32, 51, 0.12);
+}

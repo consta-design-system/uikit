@@ -47,6 +47,8 @@ _size/									# Размер текста и междустрочный инт�
 	Theme_size_MyDefault.css
 _space/									# Отступы
 	Theme_space_MyDefault.css
+_shadow/									# Тени
+	Theme_shadow_MyDefault.css
 Theme.css								# Стили темы
 ```
 
@@ -179,8 +181,13 @@ $color-base-critical: #33000f;
 
 ### Тени
 
-Переменные на тени для разработчиков в процессе.  
 В дизайне тени можно посмотреть в [Figma Community](https://www.figma.com/community/file/855572288089401017?preview=fullscreen), вкладка Default Shadows.
+
+```css
+--shadow-group: 0 2px 2px rgba(0, 32, 51, 0.02), 0 2px 8px rgba(0, 32, 51, 0.16);
+--shadow-layer: 0 4px 4px rgba(0, 32, 51, 0.04), 0 8px 24px rgba(0, 32, 51, 0.12);
+--shadow-modal: 0 8px 8px rgba(0, 32, 51, 0.04), 0 12px 28px rgba(0, 32, 51, 0.12);
+```
 
 ### Как создать свою тему
 
@@ -221,6 +228,7 @@ $color-base-critical: #33000f;
   "font": "myDefault", // указывается значение модификатора _font
   "size": "myDefault", // указывается значение модификатора _size
   "space": "myDefault" // указывается значение модификатора _space
+  "shadow": "myDefault" // указывается значение модификатора _shadow
 }
 ```
 
@@ -246,6 +254,7 @@ export const myDefault: ThemePreset = {
   font: 'myDefault',
   size: 'myDefault',
   space: 'myDefault',
+  shadow: 'myDefault',
 };
 ```
 
@@ -266,6 +275,7 @@ export const myDark: ThemePreset = {
   font: 'myDefault',
   size: 'myDefault',
   space: 'myDefault',
+  shadow: 'myDefault',
 };
 ```
 

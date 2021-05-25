@@ -40,6 +40,9 @@ const varsMap = {
    space: [
        ...
    ];
+   shadow: [
+       ...
+   ];
 } as const;
 
 const vars = useThemeVars({vars: varsMap});
@@ -72,6 +75,7 @@ export type Vars = {
   readonly font: readonly string[];
   readonly size: readonly string[];
   readonly space: readonly string[];
+  readonly shadow: readonly string[];
 };
 ```
 

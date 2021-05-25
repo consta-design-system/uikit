@@ -17,8 +17,7 @@
     max-height: 90%;
     background-color: var(--color-bg-default);
     border-radius: var(--control-radius);
-    box-shadow: 0 4px 12px rgba(var(--color-nums-shadow), 0.08),
-      0 9px 24px rgba(var(--color-nums-shadow), 0.16);
+    box-shadow: var(--shadow-modal);
 
     &_position {
       &_center {

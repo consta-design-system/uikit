@@ -30,6 +30,8 @@ pathToPresets/
     _Theme_size_myThemeDefault.css
   _space/
     _Theme_space_myThemeDefault.css
+  _shadow/
+    _Theme_shadow_myThemeDefault.css
   myPresetDefault.js
 ```
 
@@ -49,7 +51,7 @@ pathToPresets/
 
 ## Тема на контролы `_control`
 
-Здесь описаны размеры контролов, внутренние отступы и размеры текста внутри контролов.  
+Здесь описаны размеры контролов, внутренние отступы и размеры текста внутри контролов.
 Все значения наследуются из темы на отступы `_space`, о ней ниже.
 
 ## Тема на шрифт `_font`
@@ -70,6 +72,10 @@ pathToPresets/
 
 Содержит сетку отступов.
 
+## Тема на тени `_shadow`
+
+Содержит сетку теней.
+
 ## Создание файла пресета
 
 В самом файле пресета `myPresetDefault.js` необходимо прописать импорты всех новых CSS-файлов. И экспортировать
@@ -82,6 +88,7 @@ import './_control/Theme_control_myThemeDefault.css';
 import './_font/Theme_font_myThemeDefault.css';
 import './_size/Theme_size_myThemeDefault.css';
 import './_space/Theme_space_myThemeDefault.css';
+import './_shadow/Theme_shadow_myThemeDefault.css';
 
 export const myNewPreset = {
   color: {
@@ -93,6 +100,7 @@ export const myNewPreset = {
   font: 'myThemeDefault',
   size: 'myThemeDefault',
   space: 'myThemeDefault',
+  shadow: 'myThemeDefault',
 };
 ```
 
