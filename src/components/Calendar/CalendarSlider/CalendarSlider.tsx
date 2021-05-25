@@ -34,11 +34,11 @@ export type CalendarSliderProps = PropsWithHTMLAttributes<
 
 export const cnCalendarSlider = cn('CalendarSlider');
 
-const isCurrentVisibleYear = (currentDate: Date, mount: Date) =>
-  getYear(currentDate) === getYear(mount);
+const isCurrentVisibleYear = (currentDate: Date, month: Date) =>
+  getYear(currentDate) === getYear(month);
 
-const isCurrentVisibleMount = (currentDate: Date, mount: Date) =>
-  isCurrentVisibleYear(currentDate, mount) && getMonth(currentDate) === getMonth(mount);
+const isCurrentVisibleMonth = (currentDate: Date, month: Date) =>
+  isCurrentVisibleYear(currentDate, month) && getMonth(currentDate) === getMonth(month);
 
 const getValueRange = (yearDate: Date, value?: Date | DateRange) => {
   if (!Array.isArray(value)) {
@@ -87,11 +87,11 @@ const getValueRange = (yearDate: Date, value?: Date | DateRange) => {
 };
 
 const getMonthsData = (date: Date, locale: Locale) =>
-  range(12).map((mount) => {
-    const mountDate = addMonths(date, mount);
+  range(12).map((month) => {
+    const monthDate = addMonths(date, month);
     return {
-      date: mountDate,
-      label: format(mountDate, 'MMM', { locale }),
+      date: monthDate,
+      label: format(monthDate, 'MMM', { locale }),
     };
   });
 
@@ -108,7 +108,7 @@ const getSliderData = (date: Date, value: Date | DateRange | undefined, locale: 
   ].map((date, index) => ({
     label: format(date, 'yyyy', { locale }),
     date,
-    mounths: getMonthsData(date, locale),
+    months: getMonthsData(date, locale),
     positon: `${index}`,
     valueRange: getValueRange(date, value),
   }));
@@ -124,17 +124,17 @@ export const CalendarSlider: React.FC<CalendarSliderProps> = (props) => {
     ...otherProps
   } = props;
 
-  const currentMountRef = useRef<HTMLButtonElement>(null);
+  const currentMonthRef = useRef<HTMLButtonElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const handlePrev = () => onChange(addYears(currentVisibleDate, -1));
   const handleNext = () => onChange(addYears(currentVisibleDate, 1));
 
   useEffect(() => {
-    if (currentMountRef.current && sliderRef.current) {
+    if (currentMonthRef.current && sliderRef.current) {
       sliderRef.current.style.setProperty(
         '--selector-offset',
-        `${currentMountRef.current.offsetLeft}px`,
+        `${currentMonthRef.current.offsetLeft}px`,
       );
     }
   }, [currentVisibleDate]);
@@ -177,24 +177,24 @@ export const CalendarSlider: React.FC<CalendarSliderProps> = (props) => {
                 }
               }
             >
-              {year.mounths.map((mounth, index) => (
+              {year.months.map((month, index) => (
                 <button
-                  className={cnCalendarSlider('Mounth')}
+                  className={cnCalendarSlider('Month')}
                   key={index}
-                  onClick={() => onChange(mounth.date)}
-                  onKeyDown={() => onChange(addMonths(mounth.date, 1))}
+                  onClick={() => onChange(month.date)}
+                  onKeyDown={() => onChange(addMonths(month.date, 1))}
                   ref={
-                    isCurrentVisibleMount(currentVisibleDate, mounth.date) ? currentMountRef : null
+                    isCurrentVisibleMonth(currentVisibleDate, month.date) ? currentMonthRef : null
                   }
                   type="button"
                 >
                   <Text
-                    className={cnCalendarSlider('MounthLabel')}
+                    className={cnCalendarSlider('MonthLabel')}
                     size="2xs"
                     view="ghost"
                     align="center"
                   >
-                    {mounth.label}
+                    {month.label}
                   </Text>
                 </button>
               ))}

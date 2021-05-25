@@ -5,9 +5,9 @@ import React from 'react';
 import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
 
-import { CalendarViewOneMount } from './CalendarViewOneMount/CalendarViewOneMount';
+import { CalendarViewOneMonth } from './CalendarViewOneMonth/CalendarViewOneMonth';
 import { CalendarViewSlider } from './CalendarViewSlider/CalendarViewSlider';
-import { CalendarViewTwoMount } from './CalendarViewTwoMount/CalendarViewTwoMount';
+import { CalendarViewTwoMonths } from './CalendarViewTwoMonths/CalendarViewTwoMonths';
 import {
   CalendarComponent,
   CalendarPropView,
@@ -18,8 +18,8 @@ import {
 export const cnCalendar = cn('Calendar');
 
 const viewMap: Record<CalendarPropView, CalendarViewComponent> = {
-  oneMount: CalendarViewOneMount,
-  twoMounts: CalendarViewTwoMount,
+  oneMonth: CalendarViewOneMonth,
+  twoMonths: CalendarViewTwoMonths,
   slider: CalendarViewSlider,
 };
 
@@ -33,10 +33,10 @@ export const Calendar: CalendarComponent = React.forwardRef((props, ref) => {
 
 export * from './CalendarСell/CalendarСell';
 export * from './CalendarDay/CalendarDay';
-export * from './CalendarMount/CalendarMount';
-export * from './CalendarMountLabel/CalendarMountLabel';
-export * from './CalendarMountToggler/CalendarMountToggler';
+export * from './CalendarMonth/CalendarMonth';
+export * from './CalendarMonthLabel/CalendarMonthLabel';
+export * from './CalendarMonthToggler/CalendarMonthToggler';
 export * from './CalendarSlider/CalendarSlider';
-export * from './CalendarViewOneMount/CalendarViewOneMount';
+export * from './CalendarViewOneMonth/CalendarViewOneMonth';
 export * from './CalendarViewSlider/CalendarViewSlider';
-export * from './CalendarViewTwoMount/CalendarViewTwoMount';
+export * from './CalendarViewTwoMonths/CalendarViewTwoMonths';

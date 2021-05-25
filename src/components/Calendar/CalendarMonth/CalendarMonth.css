@@ -1,4 +1,4 @@
-.CalendarMount {
+.CalendarMonth {
   display: grid;
   grid-template-columns: repeat(
     7,

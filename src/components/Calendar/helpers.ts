@@ -23,7 +23,7 @@ import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAt
 
 import { CalendarCellPropRange } from './CalendarСell/CalendarСell';
 
-export const calendarPropView = ['oneMount', 'twoMounts', 'slider'] as const;
+export const calendarPropView = ['oneMonth', 'twoMonths', 'slider'] as const;
 export type CalendarPropView = typeof calendarPropView[number];
 export const calendarPropViewDefault: CalendarPropView = calendarPropView[0];
 
@@ -175,7 +175,7 @@ const isWithInIntervalMinMaxDade = (date: Date, minDate?: Date, maxDate?: Date):
   return true;
 };
 
-export const getDaysOfMount = (props: {
+export const getDaysOfMonth = (props: {
   date: Date;
   locale: Locale;
   handleDayClick?: HandleSelectDate;
