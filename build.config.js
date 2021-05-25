@@ -22,7 +22,6 @@ module.exports = {
     require('postcss-simple-vars')({ silent: true }),
     require('postcss-color-function')({}),
     require('autoprefixer')({}),
-    require('postcss-calc')({}),
     require('postcss-nested')({}),
   ],
 };
