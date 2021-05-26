@@ -119,7 +119,9 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
 `component` - объект, описывающий компонент. На данный момент есть 3 предустановленных компонента:
 
 ```tsx
-[
+import { TableTextFilter, TableNumberFilter, TableChoiceGroupFilter } from '@consta/uikit/Table';
+
+const filters = [
   {
     id: 'field',
     name: 'Месторождение: ',
@@ -190,6 +192,11 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
 | TableTextFilter        | { items: Array<{ name: string, value: any }>; withSearch: boolean } | Фильтрация по нескольким значениям |
 
 В качестве основы для кастомного компонента рекомендуется использовать компонент `TableFilterContainer`, представляющий из себя блок с кнопками подтверждения и сброса фильтра.
+
+```tsx
+import { TableFilterContainer } from '@consta/uikit/Table';
+```
+
 Он принимает в себя следующие пропсы:
 
 | Свойство           | Тип        | Описание                                   |

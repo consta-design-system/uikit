@@ -38,6 +38,8 @@ import {
 
 export { TableTextFilter } from './TextFilter/TableTextFilter';
 export { TableFilterContainer } from './FilterContainer/TableFilterContainer';
+export { TableNumberFilter } from './NumberFilter/TableNumberFilter';
+export { TableChoiceGroupFilter } from './ChoiceGroupFilter/TableChoiceGroupFilter';
 
 const cnTable = cn('Table');
 
