@@ -136,7 +136,6 @@ export type Props<T extends TableRow> = {
   lazyLoad?: LazyLoad;
   onFiltersUpdated?: (filters: SelectedFilters) => void;
   isExpandedRowsByDefault?: boolean;
-  treeStriped?: boolean;
 };
 
 export type ColumnMetaData = {
@@ -209,7 +208,6 @@ export const Table = <T extends TableRow>({
   onSortBy,
   onFiltersUpdated,
   isExpandedRowsByDefault = false,
-  treeStriped,
 }: Props<T>): React.ReactElement => {
   const {
     headers,
@@ -529,22 +527,12 @@ export const Table = <T extends TableRow>({
         }
       }
 
-      let backgroundColor = '';
-
-      if (!hasMergedCells && hasNestedRows && treeStriped) {
-        const level = row.level > 5 ? 5 : row.level;
-
-        backgroundColor = level === 0 ? '' : `var(--color-bg-nested-level-${level})`;
-      }
-
       const style: {
         'left': number | undefined;
         '--row-span': string | null;
-        'backgroundColor': string;
       } = {
         'left': getStickyLeftOffset(columnIdx, column.position!.topHeaderGridIndex),
         '--row-span': column.mergeCells ? `span ${rowSpan}` : null,
-        backgroundColor,
       };
 
       return {

@@ -93,7 +93,7 @@ export const CustomRows = createStory(() => <Table {...getKnobs(tableDataWithRen
 });
 
 export const WithCollapcingRows = createStory(
-  () => <Table {...getKnobs(tableWithExpandableRowsData)} treeStriped />,
+  () => <Table {...getKnobs(tableWithExpandableRowsData)} />,
   {
     name: 'с разворачиванием строк',
   },
