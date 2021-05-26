@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { addMonths } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 
@@ -12,6 +12,7 @@ import {
   getDaysOfWeek,
   getHandleSelectDate,
   getMouthLabelWithYear,
+  useCurrentVisibleDate,
 } from '../helpers';
 
 export const cnCalendarViewOneMonth = cn('CalendarViewOneMonth');
@@ -24,12 +25,19 @@ export const CalendarViewOneMonth: CalendarViewComponent = React.forwardRef((pro
     maxDate,
     value,
     onChange,
-    currentVisibleDate: currentVisibleDateProp = new Date(),
+    currentVisibleDate: currentVisibleDateProp,
     events,
     locale = ruLocale,
     ...otherProps
   } = props;
-  const [currentVisibleDate, setCurrentVisibleDate] = useState(currentVisibleDateProp);
+
+  const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate({
+    currentVisibleDate: currentVisibleDateProp,
+    maxDate,
+    minDate,
+    value,
+  });
+
   const handleSelectDate = getHandleSelectDate({ type, minDate, maxDate, value, onChange });
   const daysOfMonth = getDaysOfMonth({
     date: currentVisibleDate,

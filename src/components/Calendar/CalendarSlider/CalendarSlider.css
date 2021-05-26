@@ -41,7 +41,7 @@
       }
 
       &_2 {
-        transform: translateX(calc(var(--year-width) - 0));
+        transform: translateX(calc(var(--year-width)));
       }
 
       &_3 {

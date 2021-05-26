@@ -1,6 +1,6 @@
 import './CalendarViewSlider.css';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { addMonths } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 
@@ -15,6 +15,7 @@ import {
   getDaysOfWeek,
   getHandleSelectDate,
   getMonthTitle,
+  useCurrentVisibleDate,
 } from '../helpers';
 
 export const cnCalendarViewSlider = cn('CalendarViewSlider');
@@ -33,7 +34,13 @@ export const CalendarViewSlider: CalendarViewComponent = React.forwardRef((props
     ...otherProps
   } = props;
 
-  const [currentVisibleDate, setCurrentVisibleDate] = useState(currentVisibleDateProp);
+  const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate({
+    currentVisibleDate: currentVisibleDateProp,
+    maxDate,
+    minDate,
+    value,
+  });
+
   const handleSelectDate = getHandleSelectDate({ type, minDate, maxDate, value, onChange });
   const daysOfMonth = getDaysOfMonth({
     date: currentVisibleDate,

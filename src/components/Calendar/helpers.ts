@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   addDays,
   differenceInDays,
@@ -65,14 +65,14 @@ export type CalendarViewComponent = <TYPE extends CalendarPropType>(
 
 const isEqualDate = (date1: Date, date2: Date): boolean => date1.getTime() === date2.getTime();
 
+const isEqualDay = (date1: Date, date2: Date): boolean =>
+  isEqualDate(startOfDay(date1), startOfDay(date2));
+
 export const dateComparer = (a?: Date, b?: Date): number =>
   (a?.getTime() ?? 0) - (b?.getTime() ?? 0);
 
-export const getStartAndEndDate = (date1: Date, date2: Date): { start: Date; end: Date } => {
-  const [start, end] = [date1, date2].sort(dateComparer);
-
-  return { start, end };
-};
+export const getStartAndEndDate = (date1: Date, date2: Date): Date[] =>
+  [date1, date2].sort(dateComparer);
 
 export const isDateSelected = ({ date, value }: { date: Date; value?: Date }): boolean => {
   return value ? isSameDay(value, date) : false;
@@ -87,7 +87,7 @@ export const isValueSelected = ({
 }): boolean => {
   if (isDateRange(value)) {
     if (value[0] && value[1]) {
-      const { start, end } = getStartAndEndDate(value[0], value[1]);
+      const [start, end] = getStartAndEndDate(value[0], value[1]);
       return isWithinInterval(date, { start, end });
     }
 
@@ -118,10 +118,10 @@ const isSelected = ({ date, value }: { date: Date; value?: Date | DateRange }): 
   }
 
   if (Array.isArray(value)) {
-    return !!value.find((item) => (item ? isEqualDate(date, item) : false));
+    return !!value.find((item) => (item ? isEqualDay(date, item) : false));
   }
 
-  return isEqualDate(date, value);
+  return isEqualDay(date, value);
 };
 
 const isDateInRange = (date: Date, range: DateRange): CalendarCellPropRange => {
@@ -148,9 +148,9 @@ const isDateInRange = (date: Date, range: DateRange): CalendarCellPropRange => {
 };
 
 const hasEvent = (date: Date, events: Date[]): boolean =>
-  !!events.find((eventDate) => isEqualDate(startOfDay(eventDate), date));
+  !!events.find((eventDate) => isEqualDay(eventDate, date));
 
-const isToday = (date: Date): boolean => isEqualDate(startOfDay(new Date()), date);
+const isToday = (date: Date): boolean => isEqualDay(new Date(), date);
 
 const isWithInIntervalMinMaxDade = (date: Date, minDate?: Date, maxDate?: Date): boolean => {
   const minDateTime = minDate?.getTime();
@@ -267,8 +267,8 @@ export function getHandleSelectDate<TYPE extends CalendarPropType>(
       const [startDate, endDate] = currentValue;
 
       if (
-        (isDefined(startDate) && isEqualDate(startDate, date)) ||
-        (isDefined(endDate) && isEqualDate(endDate, date))
+        (isDefined(startDate) && isEqualDay(startDate, date)) ||
+        (isDefined(endDate) && isEqualDay(endDate, date))
       ) {
         return;
       }
@@ -314,4 +314,68 @@ export const getDaysOfWeek = (locale: Locale): string[] => {
     start: startOfWeek(now, { locale }),
     end: endOfWeek(now, { locale }),
   }).map((date) => format(date, 'EEEEEE', { locale }));
+};
+
+type GetCurrentVisibleDateProps = {
+  currentVisibleDate: Date | undefined;
+  minDate: Date | undefined;
+  maxDate: Date | undefined;
+  value: Date | DateRange | undefined;
+};
+
+const getCurrentVisibleDate = ({
+  currentVisibleDate,
+  minDate,
+  maxDate,
+  value,
+}: GetCurrentVisibleDateProps): Date => {
+  const currentDate = new Date();
+  if (currentVisibleDate) {
+    return currentVisibleDate;
+  }
+  if (Array.isArray(value) && value[0]) {
+    return value[0];
+  }
+  if (Array.isArray(value) && value[1]) {
+    return value[1];
+  }
+  if (value && !Array.isArray(value)) {
+    return value;
+  }
+
+  if (minDate && maxDate && !isDateInRange(currentDate, [minDate, maxDate])) {
+    return minDate;
+  }
+  if (minDate && !maxDate) {
+    const minDateTime = minDate.getTime();
+    const currentDateTime = currentDate.getTime();
+    if (currentDateTime < minDateTime) {
+      return minDate;
+    }
+  }
+  if (!minDate && maxDate) {
+    const maxDateTime = maxDate.getTime();
+    const currentDateTime = currentDate.getTime();
+    if (currentDateTime > maxDateTime) {
+      return maxDate;
+    }
+  }
+
+  return currentDate;
+};
+
+export const useCurrentVisibleDate = (props: GetCurrentVisibleDateProps) => {
+  const currentVisibleDate = useMemo(() => {
+    return startOfMonth(getCurrentVisibleDate(props));
+  }, [
+    props.currentVisibleDate?.getTime() || 0,
+    props.minDate?.getTime() || 0,
+    props.maxDate?.getTime() || 0,
+  ]);
+
+  const state = useState(currentVisibleDate);
+
+  useEffect(() => state[1](currentVisibleDate), [currentVisibleDate.getTime()]);
+
+  return state;
 };
