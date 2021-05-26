@@ -1,5 +1,20 @@
 # Changelog
 
+## v1.12.0 (26/05/2021)
+
+- [feat(Calendar): added useCurrentVisibleDate (#1223)](https://github.com/gazprom-neft/consta-uikit/commit/6285a52d31f3b82e1016296cfd50cfadc5da5e24) - [@gizeasy](https://github.com/gizeasy)
+- [feat(UserSelect): create UserSelect component and story/docs (#1127)](https://github.com/gazprom-neft/consta-uikit/commit/38b606bd6a57895741af7c7fac5d8db469eea333) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
+- [fix(Table): reexport filter components and TableFilterContainer(#1208)](https://github.com/gazprom-neft/consta-uikit/commit/30cb3eb49badde39f1a57bcd5ecbd99ddbcfcb5e) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Theme): added shadow variables (#1204)](https://github.com/gazprom-neft/consta-uikit/commit/0434cd1f5c76cfb081b441a6e02a680745f5d669) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
+- [feat(ThemeToggler): added tests (#1202)](https://github.com/gazprom-neft/consta-uikit/commit/1e1f0f447b4572a620932d0c008a859c6e7d6d68) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
+- [feat(Combobox): added inputRef prop (#1193)](https://github.com/gazprom-neft/consta-uikit/commit/e8a67bb704c2501833b112cfc19742e9ff301046) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
+- [chore(postCss): remove postcss-calc (#1200)](https://github.com/gazprom-neft/consta-uikit/commit/191e3e8dc8c5760163bbd21f09eaaab00c24fe2a) - [@gizeasy](https://github.com/gizeasy)
+- [refactor(Calendar): rename api props and internal variables (#1198)](https://github.com/gazprom-neft/consta-uikit/commit/a5c1bf596037d398a989c982c3a4d54a4d007dd1) - [@gizeasy](https://github.com/gizeasy)
+- [fix(ThemePreview): fixed state (#1187)](https://github.com/gazprom-neft/consta-uikit/commit/a9c8aaaf3057705f1c7cb9d9995bdec52c1724c2) - [@gizeasy](https://github.com/gizeasy)
+- [docs(common): add docs about validation (#1080)](https://github.com/gazprom-neft/consta-uikit/commit/6096886eb43437048860607b44edf72fce60e62a) - [@arhayka](https://github.com/arhayka)
+
+---
+
 ## v1.11.14 (19/05/2021)
 
 - [docs(useForkRef): add docs (#1181)](https://github.com/gazprom-neft/consta-uikit/commit/c9f6337d2b731ab8d9c25204e35dd5c805026b1f) - [@gizeasy](https://github.com/gizeasy)
@@ -343,19 +358,3 @@
 - [feat(Modal): added Modal component, stories, docs (#390)](https://github.com/gazprom-neft/consta-uikit/commit/a3b08bc57119e05879022e90ec0d91fe4dc8c02b) - @karpovfv-nedra
 - [refactor(types): enumeration in types as arrays (#398)](https://github.com/gazprom-neft/consta-uikit/commit/68afbc151e715e0a88ad10897621d23b61c5d9cd) - @gizeasy
 - [chore(CODEOWNERS): add @c1n1k (#401)](https://github.com/gazprom-neft/consta-uikit/commit/9ffedf9017f6ff21e4fd1316152a12fbf6577314) - @gizeasy
-
----
-
-## v1.9.0 (11/09/2020)
-
-- [fix(TextField): fix sides styles (#385)](https://github.com/gazprom-neft/consta-uikit/commit/76358842eefe9b8899f47368b67308c4c6bc95d6) - @gizeasy
-- [feat(Table): add modifier zebraStriped (#386)](https://github.com/gazprom-neft/consta-uikit/commit/7759597afe9eaa6b87ebc42df26a0ffb5b37d006) - @gizeasy
-- [docs(start): add docs start (#393)](https://github.com/gazprom-neft/consta-uikit/commit/fdb3e75dacac32817d22730b2e79fb4f5abdab76) - @gizeasy
-- [fix(whitepaper): whitepaper affected documentation styles, fixed text weight (#384)](https://github.com/gazprom-neft/consta-uikit/commit/353bfc003e78bfc63dec1270858c3e1fe550288b) - @gizeasy
-- [feat(Popover): add new positions (#379)](https://github.com/gazprom-neft/consta-uikit/commit/38844030471be4f4a090b77d9096b78239758368) - @gizeasy
-- [fix(ChoiceGroup): fix import in doc example (#388)](https://github.com/gazprom-neft/consta-uikit/commit/9b4c7eac438d8abae6ad33671e42e98b1cd698c9) - @kolebayev
-- [chore(build): update build configs (#392)](https://github.com/gazprom-neft/consta-uikit/commit/d6f686c21816574c53eff72374b52b957db110f9) - @gizeasy
-- [feat(Tag): add mode info (#391)](https://github.com/gazprom-neft/consta-uikit/commit/1207c9c7785f6c437015960412fbe1179eface25) - @gizeasy
-- [feat(Table): add Tag (#394)](https://github.com/gazprom-neft/consta-uikit/commit/23c05c422c7da4062ff8979ddd9645c6241f7e44) - @gizeasy
-- [feat(BasicSelect): add BasicSelect (#349)](https://github.com/gazprom-neft/consta-uikit/commit/69f18d3a36b2ecf78022b96bba5c3a233839e53b) - @c1n1k
-- [chore(Storybook configs): fix storybook build on windows (#382)](https://github.com/gazprom-neft/consta-uikit/commit/ac825604fdac9a40943a34bffc4d167f9399c8c7) - @gizeasy
