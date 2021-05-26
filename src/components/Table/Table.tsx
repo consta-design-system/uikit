@@ -36,6 +36,11 @@ import {
   useLazyLoadData,
 } from './helpers';
 
+export { TableTextFilter } from './TextFilter/TableTextFilter';
+export { TableFilterContainer } from './FilterContainer/TableFilterContainer';
+export { TableNumberFilter } from './NumberFilter/TableNumberFilter';
+export { TableChoiceGroupFilter } from './ChoiceGroupFilter/TableChoiceGroupFilter';
+
 const cnTable = cn('Table');
 
 export const sizes = ['s', 'm', 'l'] as const;

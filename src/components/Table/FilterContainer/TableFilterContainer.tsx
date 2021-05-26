@@ -8,7 +8,7 @@ import { Text } from '../../Text/Text';
 
 const cnTableFilterContainer = cn('TableFilterContainer');
 
-export type Props = {
+export type TableFilterContainerProps = {
   onCancel: () => void;
   onConfirm: () => void;
   title?: string;
@@ -16,7 +16,7 @@ export type Props = {
   cancelButtonLabel?: string;
 };
 
-export const TableFilterContainer: React.FC<Props> = ({
+export const TableFilterContainer: React.FC<TableFilterContainerProps> = ({
   onConfirm,
   title,
   confirmButtonLabel = 'Применить',
