@@ -26,11 +26,12 @@ export const TableRowsCollapse: React.FC<Props> = (props) => {
     isExpandedByDefault,
   } = props;
 
-  const paddingLeft =
-    level !== 0 ? `calc((calc(var(--cell-padding-horizontal) + var(--space-s)) * ${level})` : '';
+  const style: React.CSSProperties & {
+    '--nesting-level': number;
+  } = { '--nesting-level': level };
 
   return (
-    <div style={{ paddingLeft }} className={cnTableRowsCollapse(null)}>
+    <div style={style} className={cnTableRowsCollapse()}>
       {!isExpandedByDefault && withCollapseButton && (
         // eslint-disable-next-line jsx-a11y/interactive-supports-focus
         <span
