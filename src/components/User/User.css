@@ -15,11 +15,17 @@
     flex: none;
   }
 
+  &-IconRight {
+    --indent-r: var(--space-xs);
+    --button-height: var(--control-height-xs);
+    margin-left: var(--space-2xs);
+  }
+
   &-AvatarWrapper {
     flex: none;
     box-sizing: content-box;
     margin-right: var(--indent);
-    padding: var(--space-2xs);
+    padding: var(--avatar-space);
     border-radius: 50%;
 
     &_status {
@@ -77,12 +83,21 @@
 
   &_size {
     &_s {
+      --avatar-space: var(--space-3xs);
+      --indent-r: var(--space-xs);
+      --indent: var(--space-xs);
+      --icon-indent: var(--space-s);
+    }
+
+    &_m {
+      --avatar-space: var(--space-2xs);
       --indent-r: var(--space-s);
       --indent: var(--space-xs);
       --icon-indent: var(--space-m);
     }
 
-    &_m {
+    &_l {
+      --avatar-space: var(--space-2xs);
       --indent-r: var(--space-m);
       --indent: var(--space-s);
       --icon-indent: var(--space-l);
@@ -90,14 +105,6 @@
       .user__name {
         margin-bottom: var(--space-3xs);
       }
-    }
-
-    &_s:not(.user_with-arrow) {
-      --indent-r: var(--space-m);
-    }
-
-    &_m:not(.user_with-arrow) {
-      --indent-r: var(--space-l);
     }
   }
 

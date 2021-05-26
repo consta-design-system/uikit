@@ -16,7 +16,7 @@ function getRender() {
 }
 
 function getAvatar() {
-  return getRender().querySelector(`.${cnUser('Avatar')}`);
+  return getRender().querySelector(`.${cnUser('AvatarWrapper')}`);
 }
 
 function getName() {
@@ -50,7 +50,7 @@ describe('Компонент Avatar', () => {
         it(`присваивает класс для status=${status}`, () => {
           renderComponent({ status });
 
-          expect(getAvatar()).toHaveClass(cnUser('Avatar', { status }));
+          expect(getAvatar()).toHaveClass(cnUser('AvatarWrapper', { status }));
         });
       });
     });

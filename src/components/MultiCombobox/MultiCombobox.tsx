@@ -8,7 +8,8 @@ import { scrollIntoView } from '../../utils/scrollIntoView';
 import { cnSelect } from '../SelectComponents/cnSelect';
 import { getSelectDropdownForm } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
-import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
+import { RenderItemProps, SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
+import { SelectItem } from '../SelectComponents/SelectItem/SelectItem';
 import { SelectValueTag } from '../SelectComponents/SelectValueTag/SelectValueTag';
 import { CommonSelectProps, DefaultPropForm, DefaultPropView } from '../SelectComponents/types';
 
@@ -108,6 +109,14 @@ export const MultiCombobox: MultiCombobox = (props) => {
     setInputData({ value: '' });
   };
 
+  const searchFunctionDefault = (item: Item, searchValue: string): boolean => {
+    const searchValueLowerCase = searchValue.toLowerCase();
+
+    return getOptionLabel(item)
+      .toLowerCase()
+      .includes(searchValueLowerCase);
+  };
+
   const {
     visibleOptions,
     highlightedIndex,
@@ -128,8 +137,9 @@ export const MultiCombobox: MultiCombobox = (props) => {
     getOptionKey,
     onCreate,
     getGroupOptions: getGroupOptions as undefined,
-    multi: true,
+    multiple: true,
     onSelectOption,
+    searchFunction: searchFunctionDefault,
   });
 
   const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>): void => {
@@ -232,6 +242,25 @@ export const MultiCombobox: MultiCombobox = (props) => {
 
   const inputStyle = React.useMemo(() => getInputStyle(), [inputData.value, arrValue]);
 
+  const renderItemDefault = (props: RenderItemProps<Item>) => {
+    const { item, id: itemId, active, hovered, ...restProps } = props;
+    const label = getOptionLabel(item);
+    const indent = form === 'round' ? 'increased' : 'normal';
+    return (
+      <SelectItem
+        id={itemId}
+        label={label}
+        item={item}
+        active={active}
+        hovered={hovered}
+        multiple
+        size={size}
+        indent={indent}
+        {...restProps}
+      />
+    );
+  };
+
   return (
     <SelectContainer
       focused={isFocused}
@@ -239,7 +268,7 @@ export const MultiCombobox: MultiCombobox = (props) => {
       size={size}
       view={view}
       form={form}
-      multi
+      multiple
       {...restProps}
     >
       <div
@@ -331,11 +360,10 @@ export const MultiCombobox: MultiCombobox = (props) => {
         selectedValues={arrValue}
         labelForCreate={labelForCreate}
         labelForNotFound={labelForNotFound}
-        multi
-        getOptionLabel={getOptionLabel}
         getOptionKey={getOptionKey}
         form={getSelectDropdownForm(form)}
         className={dropdownClassName}
+        renderItem={renderItemDefault}
       />
       <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
         {inputData.value}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
+import { IconCrown } from '../../../icons/IconCrown/IconCrown';
 import { createMetadata } from '../../../utils/storybook';
 import {
   User,
@@ -25,6 +26,7 @@ const defaultKnobs = () => ({
   info: text('Info', `Сегодня на Почтамской`),
   withArrow: boolean('withArrow', false),
   onlyAvatar: boolean('onlyAvatar', false),
+  withIconRight: boolean('withIconRight', false),
 });
 
 export function Playground() {
@@ -38,7 +40,9 @@ export function Playground() {
     info,
     withArrow,
     onlyAvatar,
+    withIconRight,
   } = defaultKnobs();
+  const iconRight = !withArrow ? IconCrown : undefined;
   return (
     <div>
       <User
@@ -51,6 +55,7 @@ export function Playground() {
         info={info}
         withArrow={withArrow}
         onlyAvatar={onlyAvatar}
+        iconRight={(withIconRight ? iconRight : undefined) as never}
       />
     </div>
   );

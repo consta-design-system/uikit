@@ -20,7 +20,7 @@ export type SelectContainerProps = PropsWithHTMLAttributes<
     size?: PropSize;
     view?: PropView;
     focused?: boolean;
-    multi?: boolean;
+    multiple?: boolean;
   },
   HTMLDivElement
 >;
@@ -35,14 +35,14 @@ export const SelectContainer = React.forwardRef<HTMLDivElement, SelectContainerP
       disabled,
       children,
       focused,
-      multi,
+      multiple,
       ...otherProps
     } = props;
 
     return (
       <div
         {...otherProps}
-        className={cnSelect({ size, form, disabled, view, focused, multi }, [className])}
+        className={cnSelect({ size, form, disabled, view, focused, multiple }, [className])}
         ref={ref}
       >
         {children}

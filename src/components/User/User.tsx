@@ -2,15 +2,17 @@ import './User.css';
 
 import React from 'react';
 
-import { IconPropSize } from '../../icons/Icon/Icon';
+import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { Avatar } from '../Avatar/Avatar';
+import { Button } from '../Button/Button';
+import { TagBasePropSize } from '../TagBase/TagBase';
 import { Text, TextPropSize } from '../Text/Text';
 
-export const userPropSize = ['m', 's'] as const;
+export const userPropSize = ['m', 's', 'l'] as const;
 export type UserPropSize = typeof userPropSize[number];
 export const userPropSizeDefault: UserPropSize = userPropSize[0];
 
@@ -33,21 +35,40 @@ type Props = {
   width?: UserPropWidth;
   status?: UserPropStatus;
   onlyAvatar?: boolean;
-  withArrow?: boolean;
   info?: string;
   children?: never;
-};
+} & (
+  | {
+      withArrow?: boolean;
+      iconRight?: never;
+      onIconRightClick?: never;
+    }
+  | {
+      withArrow?: never;
+      iconRight?: React.FC<IconProps>;
+      onIconRightClick?: (e: React.SyntheticEvent) => void;
+    }
+);
 
 export const cnUser = cn('User');
 
 const infoSizeMap: Record<UserPropSize, TextPropSize> = {
   s: '2xs',
-  m: 'xs',
+  m: '2xs',
+  l: 'xs',
 };
 
-const arrowSizeMap: Record<UserPropSize, IconPropSize> = {
+const iconRightSizeMap: Record<UserPropSize, IconPropSize> = {
+  s: 'xs',
+  m: 'xs',
+  l: 's',
+};
+
+const avatarSizeMap: Record<TagBasePropSize, IconPropSize> = {
+  xs: 'xs',
   s: 'xs',
   m: 's',
+  l: 'm',
 };
 
 export const User = forwardRefWithAs<Props>((props, ref) => {
@@ -61,6 +82,8 @@ export const User = forwardRefWithAs<Props>((props, ref) => {
     width = userPropWidthDefault,
     onlyAvatar: propOnlyAvatar,
     withArrow,
+    iconRight,
+    onIconRightClick,
     info,
     status,
     ...otherProps
@@ -68,7 +91,9 @@ export const User = forwardRefWithAs<Props>((props, ref) => {
   const Tag = as as string;
   const onlyAvatar = propOnlyAvatar || (!name && !info);
   const infoSize = getSizeByMap(infoSizeMap, size);
-  const arrowSize = getSizeByMap(arrowSizeMap, size);
+  const iconRightSize = getSizeByMap(iconRightSizeMap, size);
+  const avatarSize = getSizeByMap(avatarSizeMap, size);
+  const IconRight = iconRight;
 
   return (
     <Tag
@@ -77,7 +102,7 @@ export const User = forwardRefWithAs<Props>((props, ref) => {
       ref={ref}
     >
       <div className={cnUser('AvatarWrapper', { status })}>
-        <Avatar className={cnUser('Avatar', { status })} size={size} url={avatarUrl} name={name} />
+        <Avatar size={avatarSize} url={avatarUrl} name={name} />
       </div>
       {!onlyAvatar && (name || info) && (
         <div className={cnUser('Block')}>
@@ -86,14 +111,27 @@ export const User = forwardRefWithAs<Props>((props, ref) => {
               {name}
             </Text>
           )}
-          {info && (
+          {info && size !== 's' && (
             <Text className={cnUser('Info')} size={infoSize} view="secondary" lineHeight="2xs">
               {info}
             </Text>
           )}
         </div>
       )}
-      {withArrow && <IconSelect className={cnUser('Arrow')} size={arrowSize} view="secondary" />}
+      {withArrow && (
+        <IconSelect className={cnUser('Arrow')} size={iconRightSize} view="secondary" />
+      )}
+      {IconRight && (
+        <Button
+          className={cnUser('IconRight')}
+          onClick={onIconRightClick}
+          iconRight={IconRight}
+          onlyIcon
+          view="clear"
+          size="s"
+          iconSize={iconRightSize}
+        />
+      )}
     </Tag>
   );
 });

@@ -6,17 +6,27 @@ import { CSSTransition } from 'react-transition-group';
 import { GetOptionPropsResult, Option, OptionProps } from '../../../hooks/useSelect/useSelect';
 import { cn } from '../../../utils/bem';
 import { cnForCssTransition } from '../../../utils/cnForCssTransition';
+import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
 import { Popover } from '../../Popover/Popover';
 import { Text } from '../../Text/Text';
 import { SelectCreateButton } from '../SelectCreateButton/SelectCreateButton';
 import { SelectGroupLabel } from '../SelectGroupLabel/SelectGroupLabel';
-import { SelectItem } from '../SelectItem/SelectItem';
 import { PropSize } from '../types';
 
 export const selectDropdownform = ['default', 'brick', 'round'] as const;
 export type SelectDropdownPropForm = typeof selectDropdownform[number];
 export const defaultSelectDropdownPropForm = selectDropdownform[0];
+
+export type RenderItemProps<ITEM> = PropsWithHTMLAttributes<
+  {
+    item: ITEM;
+    id: string;
+    active: boolean;
+    hovered: boolean;
+  },
+  HTMLDivElement
+>;
 
 type Props<ITEM> = PropsWithJsxAttributes<{
   size: PropSize;
@@ -32,11 +42,10 @@ type Props<ITEM> = PropsWithJsxAttributes<{
   selectedValues: ITEM[] | null;
   labelForCreate?: string;
   labelForNotFound?: string;
-  multi?: boolean;
-  getOptionLabel(option: ITEM): string;
   getOptionKey(option: ITEM): string | number;
   form?: SelectDropdownPropForm;
   isOpen: boolean;
+  renderItem: (props: RenderItemProps<ITEM>) => JSX.Element | null;
 }>;
 
 type SelectDropdown = <ITEM>(props: Props<ITEM>) => React.ReactElement | null;
@@ -57,13 +66,12 @@ export const SelectDropdown: SelectDropdown = (props) => {
     hasGroup = false,
     selectedValues,
     labelForCreate,
-    multi = false,
-    getOptionLabel,
     getOptionKey,
     className,
     labelForNotFound,
     form = defaultSelectDropdownPropForm,
     isOpen,
+    renderItem,
   } = props;
 
   return (
@@ -121,16 +129,13 @@ export const SelectDropdown: SelectDropdown = (props) => {
                       {...getOptionProps({ index })}
                     />
                   ) : (
-                    <SelectItem
-                      size={size}
-                      label={getOptionLabel(option)}
-                      id={`${id}-${index}`}
-                      active={active}
-                      hovered={index === highlightedIndex}
-                      multi={multi}
-                      indent={indent}
-                      {...getOptionProps({ index })}
-                    />
+                    renderItem({
+                      item: option,
+                      id: `${id}-${index}`,
+                      active,
+                      hovered: index === highlightedIndex,
+                      ...getOptionProps({ index }),
+                    })
                   )}
                 </React.Fragment>
               );

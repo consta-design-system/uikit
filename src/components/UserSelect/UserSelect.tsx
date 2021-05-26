@@ -1,6 +1,5 @@
-import React, { useRef, useState } from 'react';
+import React, { RefObject, useRef, useState } from 'react';
 
-import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { useSelect } from '../../hooks/useSelect/useSelect';
 import { IconClose } from '../../icons/IconClose/IconClose';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
@@ -10,30 +9,51 @@ import { cnSelect } from '../SelectComponents/cnSelect';
 import { getSelectDropdownForm } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { RenderItemProps, SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
-import { SelectItem } from '../SelectComponents/SelectItem/SelectItem';
-import {
-  CommonSelectProps,
-  DefaultPropForm,
-  DefaultPropSize,
-  DefaultPropView,
-} from '../SelectComponents/types';
+import { DefaultPropForm, DefaultPropView, PropForm, PropView } from '../SelectComponents/types';
 
-type SelectContainerProps = React.ComponentProps<typeof SelectContainer>;
+import { UserSelectItem } from './UserSelectItem/UserSelectItem';
+import { UserSelectValue } from './UserSelectValue/UserSelectValue';
 
-export type ComboboxSelectProps<ITEM> = CommonSelectProps<ITEM> &
-  Omit<SelectContainerProps, 'value' | 'onChange' | 'children'> & {
-    value?: ITEM | null | undefined;
-    onChange?(v: ITEM | null): void;
-    onCreate?(str: string): void;
-    getGroupOptions?(group: ITEM): ITEM[];
-    labelForCreate?: string;
-    labelForNotFound?: string;
-    inputRef?: React.RefObject<HTMLInputElement | null>;
-  };
+export const userSelectPropSize = ['m', 's', 'l'] as const;
+export type UserSelectPropSize = typeof userSelectPropSize[number];
+export const userSelectPropSizeDefault = userSelectPropSize[0];
 
-type ComboboxType = <ITEM>(props: ComboboxSelectProps<ITEM>) => React.ReactElement | null;
+export type UserSelectProps<ITEM, GROUP> = {
+  placeholder?: string;
+  onBlur?: (event?: React.FocusEvent<HTMLInputElement>) => void;
+  onFocus?: (event?: React.FocusEvent<HTMLInputElement>) => void;
+  onChange?: (v: ITEM[] | null) => void;
+  getOptionLabel(arg: ITEM): string;
+  getOptionKey?(arg: ITEM): string | number;
+  getOptionAvatarUrl?(arg: ITEM): string;
+  getOptionAdditionalInfo?(arg: ITEM): string;
+  searchFunction?(item: ITEM, searchValue: string): boolean;
+  ariaLabel?: string;
+  id: string;
+  dropdownClassName?: string;
+  dropdownRef?: RefObject<HTMLDivElement>;
+  name?: string;
+  labelForNotFound?: string;
+  value?: ITEM[] | null;
+  size?: UserSelectPropSize;
+  disabled?: boolean;
+  form?: PropForm;
+  view?: PropView;
+  multiple?: boolean;
+} & (
+  | {
+      options: ITEM[];
+      getGroupOptions: never;
+    }
+  | {
+      options: GROUP[];
+      getGroupOptions?: (group: GROUP) => ITEM[];
+    }
+);
 
-export const Combobox: ComboboxType = (props) => {
+type UserSelect = <ITEM, GROUP>(props: UserSelectProps<ITEM, GROUP>) => React.ReactElement | null;
+
+export const UserSelect: UserSelect = (props) => {
   const defaultOptionsRef = useRef<HTMLDivElement | null>(null);
   const getOptionKeyDefault = props.getOptionLabel;
   const {
@@ -45,39 +65,45 @@ export const Combobox: ComboboxType = (props) => {
     value,
     getOptionLabel,
     getOptionKey = getOptionKeyDefault,
+    getOptionAdditionalInfo,
+    getOptionAvatarUrl,
+    searchFunction,
     disabled,
     ariaLabel,
     id,
     form = DefaultPropForm,
     view = DefaultPropView,
-    size = DefaultPropSize,
-    dropdownClassName,
-    onCreate,
+    size = userSelectPropSizeDefault,
     getGroupOptions,
-    labelForCreate = 'Добавить',
     labelForNotFound = 'Не найдено',
+    dropdownClassName,
     dropdownRef = defaultOptionsRef,
     name,
-    inputRef,
+    multiple = false,
     ...restProps
   } = props;
+
+  type Items = typeof value;
+  type Item = Exclude<Items, null | undefined>[number];
+
   const [isFocused, setIsFocused] = useState(false);
   const [inputData, setInputData] = useState<{ value: string | undefined }>({
     value: '',
   });
+
   const toggleRef = useRef<HTMLInputElement>(null);
+  const controlInnerRef = useRef<HTMLDivElement>(null);
+  const helperInputFakeElement = useRef<HTMLDivElement>(null);
 
-  type Item = Exclude<typeof value, null | undefined>;
-
-  const handlerChangeValue = (v: typeof value): void => {
-    if (typeof onChange === 'function' && v) {
-      onChange(v);
+  const handlerChangeValue = (values: Items): void => {
+    if (typeof onChange === 'function' && values) {
+      onChange(values);
     }
     setInputData({ value: toggleRef.current?.value });
   };
 
   const controlRef = useRef<HTMLDivElement | null>(null);
-  const arrValue = typeof value !== 'undefined' && value !== null ? [value] : null;
+  const arrValue: Items = typeof value !== 'undefined' && value !== null ? [...value] : null;
   const hasGroup = typeof getGroupOptions === 'function';
 
   const scrollToIndex = (index: number): void => {
@@ -89,20 +115,27 @@ export const Combobox: ComboboxType = (props) => {
       'div[role=option]',
     );
 
-    if (index > elements.length - 1 || index < 0) {
-      return;
-    }
-
     scrollIntoView(elements[index], dropdownRef.current);
   };
 
-  const searchFunctionDefault = (item: typeof value, searchValue: string): boolean => {
-    const searchValueLowerCase = searchValue.toLowerCase();
+  const onSelectOption = (): void => {
+    setInputData({ value: '' });
+  };
 
-    return getOptionLabel(item as Item)
+  const searchFunctionDefault = (item: Item, searchValue: string): boolean => {
+    const searchValueLowerCase = searchValue.toLowerCase();
+    const label = getOptionLabel(item)
       .toLowerCase()
       .includes(searchValueLowerCase);
+    const additionalInfo = getOptionAdditionalInfo
+      ? getOptionAdditionalInfo(item)
+          .toLowerCase()
+          .includes(searchValueLowerCase)
+      : false;
+    return label || additionalInfo;
   };
+
+  const searchFn = searchFunction || searchFunctionDefault;
 
   const {
     visibleOptions,
@@ -112,7 +145,7 @@ export const Combobox: ComboboxType = (props) => {
     isOpen,
     setOpen,
   } = useSelect({
-    options,
+    options: options as Item[],
     value: arrValue,
     onChange: handlerChangeValue,
     optionsRef: dropdownRef,
@@ -121,9 +154,10 @@ export const Combobox: ComboboxType = (props) => {
     disabled,
     getOptionLabel,
     getOptionKey,
-    searchFunction: searchFunctionDefault,
-    onCreate,
-    getGroupOptions,
+    searchFunction: searchFn,
+    getGroupOptions: getGroupOptions as undefined,
+    multiple,
+    onSelectOption,
   });
 
   const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>): void => {
@@ -168,6 +202,7 @@ export const Combobox: ComboboxType = (props) => {
     typeof onChange === 'function' && onChange(null);
     setIsFocused(false);
   };
+
   const handleClearButtonFocus = (): void => {
     setIsFocused(true);
   };
@@ -180,48 +215,64 @@ export const Combobox: ComboboxType = (props) => {
     if (!isOpen) {
       setOpen(true);
     }
-    typeof onChange === 'function' && onChange(null);
     const inputValue = toggleRef.current?.value ?? '';
     setInputData({ value: inputValue });
   };
 
   const handleControlClick = (): void => {
     toggleRef.current?.focus();
+    if (!isFocused) {
+      setOpen(!isOpen);
+    }
   };
 
   const showPlaceholder =
     (!arrValue?.length && inputData.value === '') || (arrValue === null && inputData.value === '');
 
-  const showInput = arrValue !== null && arrValue.length > 0;
-
-  const handleCreate = (): void => {
-    if (typeof onCreate === 'function') {
-      const newValue = toggleRef.current?.value.trim();
-      newValue && onCreate(newValue);
-    }
+  const handleRemoveValue = (option: Item): void => {
+    const newVal = arrValue?.filter((arrVal) => getOptionLabel(arrVal) !== getOptionLabel(option));
+    handlerChangeValue(newVal);
   };
 
-  const renderItemDefault = (props: RenderItemProps<typeof value>) => {
-    const { item, id: itemId, active, hovered, ...restProps } = props;
-    if (!item) {
-      return null;
+  const getInputStyle = (): {
+    width: number;
+  } => {
+    if (!controlInnerRef.current || !helperInputFakeElement.current) {
+      return {
+        width: 0,
+      };
     }
+    const fakeElWidth = helperInputFakeElement.current.offsetWidth + 20;
+    const maxWidth = controlInnerRef.current ? controlInnerRef.current.offsetWidth - 15 : 0;
+    const width = fakeElWidth > maxWidth ? maxWidth : fakeElWidth;
+
+    return {
+      width,
+    };
+  };
+
+  const renderItemDefault = (props: RenderItemProps<Item>) => {
+    const { item, id: itemId, active, hovered, ...restProps } = props;
     const label = getOptionLabel(item);
+    const subLabel = getOptionAdditionalInfo ? getOptionAdditionalInfo(item) : '';
+    const url = getOptionAvatarUrl ? getOptionAvatarUrl(item) : '';
     const indent = form === 'round' ? 'increased' : 'normal';
     return (
-      <SelectItem
+      <UserSelectItem
         id={itemId}
         label={label}
-        item={item}
+        subLabel={subLabel}
+        url={url}
         active={active}
         hovered={hovered}
-        multiple={false}
         size={size}
         indent={indent}
         {...restProps}
       />
     );
   };
+
+  const inputStyle = React.useMemo(() => getInputStyle(), [inputData.value, arrValue]);
 
   return (
     <SelectContainer
@@ -230,6 +281,7 @@ export const Combobox: ComboboxType = (props) => {
       size={size}
       view={view}
       form={form}
+      multiple
       {...restProps}
     >
       <div
@@ -245,27 +297,51 @@ export const Combobox: ComboboxType = (props) => {
           onClick={handleControlClick}
           onKeyDown={handleControlClick}
           role="button"
+          ref={controlInnerRef}
         >
           <div className={cnSelect('ControlValueContainer')}>
-            {arrValue && (
-              <span className={cnSelect('ControlValue')}>{getOptionLabel(arrValue[0])}</span>
-            )}
-            {showPlaceholder && <span className={cnSelect('Placeholder')}>{placeholder}</span>}
-            <input
-              {...getToggleProps({ onChange: handleInputChange })}
-              type="text"
-              name={name}
-              onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
-              aria-label={ariaLabel}
-              ref={useForkRef([toggleRef, inputRef])}
-              value={inputData.value}
-              className={cnSelect('Input', { size, hide: showInput })}
-            />
+            <div className={cnSelect('ControlValue', { isUserSelect: true })}>
+              {arrValue?.map((option) => {
+                const label = getOptionLabel(option);
+                const subLabel = getOptionAdditionalInfo ? getOptionAdditionalInfo(option) : '';
+                const url = getOptionAvatarUrl ? getOptionAvatarUrl(option) : '';
+                const handleRemove = (e: React.SyntheticEvent): void => {
+                  e.stopPropagation();
+                  handleRemoveValue(option);
+                };
+
+                return (
+                  <UserSelectValue
+                    url={url}
+                    label={label}
+                    subLabel={subLabel}
+                    key={label}
+                    size={size}
+                    disabled={Boolean(disabled)}
+                    onCancel={handleRemove}
+                  />
+                );
+              })}
+              <input
+                {...getToggleProps({ onChange: handleInputChange })}
+                type="text"
+                name={name}
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
+                aria-label={ariaLabel}
+                ref={toggleRef}
+                value={inputData.value}
+                className={cnSelect('Input', { size })}
+                style={inputStyle}
+              />
+              <div className={cnSelect('Placeholder', { isHidden: !showPlaceholder })}>
+                {placeholder}
+              </div>
+            </div>
           </div>
         </div>
-        <span className={cnSelect('Indicators')}>
-          {arrValue && (
+        <div className={cnSelect('Indicators')}>
+          {arrValue && arrValue.length !== 0 && !disabled && (
             <button
               type="button"
               onClick={handleClear}
@@ -276,7 +352,7 @@ export const Combobox: ComboboxType = (props) => {
               <IconClose size="xs" className={cnSelect('ClearIndicatorIcon')} />
             </button>
           )}
-          <span className={cnSelect('Delimiter')} />
+          <div className={cnSelect('Delimiter')} />
           <button
             type="button"
             className={cnSelect('IndicatorsDropdown')}
@@ -285,9 +361,8 @@ export const Combobox: ComboboxType = (props) => {
           >
             <IconSelect size="xs" className={cnSelect('DropdownIndicatorIcon')} />
           </button>
-        </span>
+        </div>
       </div>
-
       <SelectDropdown
         isOpen={isOpen}
         size={size}
@@ -295,19 +370,20 @@ export const Combobox: ComboboxType = (props) => {
         visibleOptions={visibleOptions}
         highlightedIndex={highlightedIndex}
         getOptionProps={getOptionProps}
-        onCreate={handleCreate}
         dropdownRef={dropdownRef}
         inputValue={inputData.value}
         id={id}
         hasGroup={hasGroup}
         selectedValues={arrValue}
-        getOptionKey={getOptionKey}
-        labelForCreate={labelForCreate}
         labelForNotFound={labelForNotFound}
+        getOptionKey={getOptionKey}
         form={getSelectDropdownForm(form)}
         className={dropdownClassName}
         renderItem={renderItemDefault}
       />
+      <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
+        {inputData.value}
+      </div>
     </SelectContainer>
   );
 };
