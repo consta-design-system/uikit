@@ -18,14 +18,14 @@ type Item = {
   value: string;
 };
 
-type Props = FilterComponentProps & {
+type TableTextFilterProps = FilterComponentProps & {
   items?: Item[];
   withSearch?: boolean;
   title?: string;
   emptySearchText?: string;
 };
 
-export const TableTextFilter: React.FC<Props> = ({
+export const TableTextFilter: React.FC<TableTextFilterProps> = ({
   items = [],
   withSearch = false,
   onConfirm,

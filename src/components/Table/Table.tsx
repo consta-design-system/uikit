@@ -36,6 +36,9 @@ import {
   useLazyLoadData,
 } from './helpers';
 
+export { TableTextFilter } from './TextFilter/TableTextFilter';
+export { TableFilterContainer } from './FilterContainer/TableFilterContainer';
+
 const cnTable = cn('Table');
 
 export const sizes = ['s', 'm', 'l'] as const;
