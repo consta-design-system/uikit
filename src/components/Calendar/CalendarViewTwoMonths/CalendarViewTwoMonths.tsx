@@ -1,6 +1,6 @@
 import './CalendarViewTwoMonths.css';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { addMonths } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 
@@ -14,6 +14,7 @@ import {
   getDaysOfWeek,
   getHandleSelectDate,
   getMouthLabelWithYear,
+  useCurrentVisibleDate,
 } from '../helpers';
 
 export const cnCalendarViewTwoMonths = cn('CalendarViewTwoMonths');
@@ -31,7 +32,13 @@ export const CalendarViewTwoMonths: CalendarViewComponent = React.forwardRef((pr
     locale = ruLocale,
     ...otherProps
   } = props;
-  const [currentVisibleDate, setCurrentVisibleDate] = useState(currentVisibleDateProp);
+
+  const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate({
+    currentVisibleDate: currentVisibleDateProp,
+    maxDate,
+    minDate,
+    value,
+  });
 
   const handleSelectDate = getHandleSelectDate({ type, minDate, maxDate, value, onChange });
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { boolean, date, select } from '@storybook/addon-knobs';
-import { addDays, endOfYear, Locale, startOfWeek, startOfYear } from 'date-fns';
+import { addDays, addMonths, endOfYear, Locale, startOfWeek, startOfYear } from 'date-fns';
 import enUSLocale from 'date-fns/locale/en-US';
 import esLocale from 'date-fns/locale/es';
 import ruLocale from 'date-fns/locale/ru';
@@ -49,17 +49,25 @@ export function Playground() {
     ? [startOfWeek(currentDay, { locale: ruLocale }), currentDay, addDays(currentDay, 2)]
     : undefined;
 
+  const [startDate, setStartDate] = useState<Date>(currentDay);
+
   return (
-    <Calendar
-      type={type}
-      value={value}
-      view={view}
-      onChange={({ value }) => setValue(value)}
-      minDate={new Date(minDate)}
-      maxDate={new Date(maxDate)}
-      events={events}
-      locale={getSizeByMap(localeMap, locale)}
-    />
+    <>
+      <button type="button" onClick={() => setStartDate(addMonths(startDate, 1))}>
+        ddd
+      </button>
+      <Calendar
+        type={type}
+        value={value}
+        view={view}
+        onChange={({ value }) => setValue(value)}
+        minDate={new Date(minDate)}
+        maxDate={new Date(maxDate)}
+        events={events}
+        locale={getSizeByMap(localeMap, locale)}
+        // currentVisibleDate={startDate}
+      />
+    </>
   );
 }
 
