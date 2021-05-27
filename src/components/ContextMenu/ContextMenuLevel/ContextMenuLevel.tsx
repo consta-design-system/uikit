@@ -3,16 +3,12 @@ import './ContextMenuLevel.css';
 import React, { createRef, useEffect, useMemo, useState } from 'react';
 
 import { cn } from '../../../utils/bem';
+import { getGroups } from '../../../utils/getGroups';
 import { Popover } from '../../Popover/Popover';
 import { ContextMenuDivider } from '../ContextMenuDivider/ContextMenuDivider';
 import { ContextMenuGroupHeader } from '../ContextMenuGroupHeader/ContextMenuGroupHeader';
 import { ContextMenuItem } from '../ContextMenuItem/ContextMenuItem';
-import {
-  contextMenuDefaultSize,
-  ContextMenuLevelType,
-  ContextMenuPropSize,
-  getGroups,
-} from '../helpers';
+import { contextMenuDefaultSize, ContextMenuLevelType, ContextMenuPropSize } from '../helpers';
 
 export const cnContextMenuLevel = cn('ContextMenuLevel');
 
@@ -80,7 +76,13 @@ export const ContextMenuLevel: ContextMenuLevelType = React.forwardRef(
 
     const [hovered, setHovered] = useState<boolean>(false);
 
-    const groups = getGroups(items, getGroupId, sortGroup);
+    const groups = getGroups(
+      items,
+      getGroupId,
+      undefined,
+      undefined,
+      sortGroup && ((a, b) => sortGroup(a.key, b.key)),
+    );
 
     const getItemIndex = (groupId: number | string, itemIndex: number) => `${groupId}-${itemIndex}`;
 
@@ -89,7 +91,7 @@ export const ContextMenuLevel: ContextMenuLevelType = React.forwardRef(
 
       for (const group of groups) {
         for (let i = 0; i < items.length; i++) {
-          refs[getItemIndex(group.id, i)] = createRef<HTMLDivElement>();
+          refs[getItemIndex(group.key, i)] = createRef<HTMLDivElement>();
         }
       }
       return refs;
@@ -126,14 +128,13 @@ export const ContextMenuLevel: ContextMenuLevelType = React.forwardRef(
         ref={ref}
       >
         {groups.map((group, groupIndex) => {
-          const groupId = group.id;
           const groupLabel =
-            typeof getGroupLabel === 'function' ? getGroupLabel(groupId) : undefined;
+            typeof getGroupLabel === 'function' ? getGroupLabel(group.key) : undefined;
           return (
-            <div className={cnContextMenuLevel('Group')} key={groupId}>
+            <div className={cnContextMenuLevel('Group')} key={group.key}>
               {renderHeader(groupLabel, groupIndex === 0, groups.length, size)}
               {group.items.map((item, index) => {
-                const itemIndex = getItemIndex(group.id, index);
+                const itemIndex = getItemIndex(group.key, index);
                 const ref = itemsRefs[itemIndex];
                 const disabled = typeof getDisabled === 'function' ? getDisabled(item) : false;
                 const label = getLabel(item);

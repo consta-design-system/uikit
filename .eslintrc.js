@@ -56,6 +56,7 @@ module.exports = {
     'react/static-property-placement': 'off',
     'react/require-extension': 'off',
     'sort-imports': 'off',
+    'import/export': 'off',
     'import/named': 'off',
     'import/order': 'off',
     'import/first': 'error',

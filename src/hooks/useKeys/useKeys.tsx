@@ -1,11 +1,11 @@
-export type KeyHandler = () => (prop: {}, e: React.KeyboardEvent) => void;
+export type KeyHandler = (prop: Record<string, unknown>, e: React.KeyboardEvent) => void;
 
 export type KeyProps = {
-  onKeyDown?(e: React.KeyboardEvent): void;
-  onChange(e: React.ChangeEvent<HTMLInputElement>): void;
-  onFocus(e: React.FocusEvent<HTMLInputElement>): void;
-  onClick(e: React.MouseEvent<HTMLInputElement>): void;
-  onBlur(e: React.FocusEvent<HTMLInputElement>): void;
+  onKeyDown?: (e: React.KeyboardEvent) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 };
 
 export type UserKeysProps = {
@@ -16,7 +16,7 @@ export type UserKeysProps = {
 };
 
 export const useKeys = (userKeys: UserKeysProps) => {
-  return ({ onKeyDown, ...rest }: KeyProps): KeyProps => {
+  return (rest?: KeyProps): KeyProps => {
     return {
       ...rest,
       onKeyDown: (e: React.KeyboardEvent): void => {
@@ -33,8 +33,8 @@ export const useKeys = (userKeys: UserKeysProps) => {
             e,
           );
         }
-        if (typeof onKeyDown === 'function') {
-          onKeyDown(e);
+        if (typeof rest?.onKeyDown === 'function') {
+          rest.onKeyDown(e);
         }
       },
     };

@@ -39,7 +39,7 @@ export const SelectCreateButton: React.FC<SelectCreateButtonProps> = (props) => 
       aria-selected={active}
       role="option"
     >
-      + {labelForCreate} «<b>{inputValue}</b>»
+      {labelForCreate} «<b>{inputValue}</b>»
     </div>
   );
 };
