@@ -8,7 +8,7 @@
   background: var(--color-bg-default);
   border: var(--control-border-width) solid var(--color-control-bg-border-default);
   border-radius: var(--control-radius);
-  box-shadow: 0 2px 2px rgba(0, 32, 51, 0.04), 0 4px 16px rgba(0, 32, 51, 0.18);
+  box-shadow: var(--shadow-layer);
   transform: var(--transform-direction) var(--transform-animate);
 
   &:not(&_firstLevel)&_direction {
