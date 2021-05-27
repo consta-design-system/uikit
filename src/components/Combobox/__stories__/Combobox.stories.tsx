@@ -1,119 +1,165 @@
-import React, { useRef, useState } from 'react';
+import './ComboboxStories.css';
+
+import React, { useState } from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
-import { groups, simpleItems } from '../__mocks__/data.mock';
+import { groups, Item, items, myData, MyGroup, myGroup, MyItem } from '../__mocks__/data.mock';
+import { cn } from '../../../utils/bem';
 import { createMetadata, createStory } from '../../../utils/storybook';
 import {
-  DefaultPropForm,
-  DefaultPropSize,
-  DefaultPropView,
-  form,
-  sizes,
-  view,
+  defaultPropForm,
+  defaultPropSize,
+  defaultPropView,
+  propForm,
+  propView,
 } from '../../SelectComponents/types';
 import { Combobox } from '../Combobox';
 
-import mdx from './Combobox.docs.mdx';
+const cnComboboxStories = cn('ComboboxStories');
 
-type SelectOption = {
-  label: string;
-  value: string;
-  id: number;
-};
+// import mdx from './Select.docs.mdx';
 
-type Group = { label: string; items: SelectOption[] };
-export type Option = SelectOption | Group;
-
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const getKnobs = () => ({
   disabled: boolean('disabled', false),
-  size: select('size', sizes, DefaultPropSize),
-  view: select('view', view, DefaultPropView),
-  form: select('form', form, DefaultPropForm),
+  size: select('size', ['m', 's', 'l'], defaultPropSize),
+  view: select('view', propView, defaultPropView),
+  form: select('form', propForm, defaultPropForm),
   placeholder: text('placeholder', 'Placeholder'),
+  withGroups: boolean('withGroups', false),
 });
 
-const Default = (props: {
-  value?: Option | null;
-  items?: Option[];
-  getItemLabel?(item: Option): string;
-  getGroupOptions?(option: Option): SelectOption[];
-  onCreate?(str: string): void;
-  onChange?(item: Option | null): void;
-}): JSX.Element => {
-  const getItemLabelDefault = (option: SelectOption): string => option.label;
-  const [value, setValue] = useState<Option | null | undefined>();
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  const {
-    items = simpleItems,
-    getItemLabel = getItemLabelDefault,
-    getGroupOptions,
-    onCreate,
-    onChange = setValue,
-  } = props;
+export function Playground(): JSX.Element {
+  const { size, disabled, view, form, placeholder, withGroups } = getKnobs();
+  const [value, setValue] = useState<Item | null>(null);
+  const [valueMultiple, setValueMultiple] = useState<Item[] | null>(null);
+  const multiple = boolean('multiple', false);
 
-  const val = value !== undefined ? value : props.value;
-
-  return (
-    <div>
-      <Combobox
-        {...getKnobs()}
-        id="example"
-        name="item"
-        options={items}
-        value={val}
-        getOptionLabel={getItemLabel}
-        getOptionKey={(option: SelectOption): number => option.id}
-        getGroupOptions={getGroupOptions}
-        onCreate={onCreate}
-        onChange={onChange}
-        inputRef={inputRef}
-      />
-    </div>
-  );
-};
-
-export const Playground = createStory(() => <Default />);
-
-export const WithGroupsStory = createStory(
-  () => {
+  if (multiple) {
     return (
-      <Default items={groups} getGroupOptions={(group: Group): SelectOption[] => group.items} />
+      <Combobox
+        key="multiple"
+        size={size}
+        disabled={disabled}
+        view={view}
+        form={form}
+        placeholder={placeholder}
+        items={items}
+        value={valueMultiple}
+        onChange={({ value }) => setValueMultiple(value)}
+        groups={withGroups ? groups : []}
+        multiple
+      />
+    );
+  }
+  return (
+    <Combobox
+      key="not-multiple"
+      size={size}
+      disabled={disabled}
+      view={view}
+      form={form}
+      placeholder={placeholder}
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      groups={withGroups ? groups : []}
+      multiple={false}
+    />
+  );
+}
+
+const getItemGroup = (item: MyItem) => item.group;
+const getItemName = (item: MyItem) => item.name;
+const getItemDisabled = () => false;
+const getGroup = (group: MyGroup) => group;
+
+export const WithRender = createStory(
+  () => {
+    const { size, disabled, view, form, placeholder, withGroups } = getKnobs();
+    const [value, setValue] = useState<MyItem | null>();
+
+    return (
+      <Combobox
+        size={size}
+        disabled={disabled}
+        view={view}
+        form={form}
+        placeholder={placeholder}
+        items={myData}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        groups={withGroups ? myGroup : []}
+        renderItem={({ item, active, hovered, onClick, onMouseEnter }) => (
+          <div
+            className={cnComboboxStories('MyItem', { active, hovered })}
+            role="option"
+            tabIndex={0}
+            aria-selected={active}
+            aria-hidden="true"
+            onMouseEnter={onMouseEnter}
+            onClick={onClick}
+          >
+            {item.name}
+          </div>
+        )}
+        renderValue={({ item }) => (
+          <div>
+            <span role="img" aria-label="Panda">
+              🐼
+            </span>{' '}
+            - {item.name}
+          </div>
+        )}
+        getItemDisabled={getItemDisabled}
+        getItemKey={getItemName}
+        getItemLabel={getItemName}
+        getItemGroupKey={getItemGroup}
+        getGroupKey={getGroup}
+        getGroupLabel={getGroup}
+      />
     );
   },
   {
-    name: 'c группами опций',
+    name: 'со своим списком и заначением',
   },
 );
 
-export const WithCreateStory = createStory(
+export const WithCreate = createStory(
   () => {
-    const [options, setOptions] = useState(simpleItems);
-    const [value, setValue] = useState<Option | null | undefined>();
-
-    const handleCreate = (label: string): void => {
-      const newVal: SelectOption = { label, value: label, id: options.length + 1 };
-      setValue(newVal);
-      setOptions([newVal, ...options]);
-    };
-
-    return <Default items={options} onCreate={handleCreate} value={value} onChange={setValue} />;
+    const { size, disabled, view, form, placeholder, withGroups } = getKnobs();
+    const [value, setValue] = useState<Item | null>();
+    const [list, setList] = useState<Item[]>(items);
+    return (
+      <Combobox
+        key="not-multiple"
+        size={size}
+        disabled={disabled}
+        view={view}
+        form={form}
+        placeholder={placeholder}
+        items={list}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        groups={withGroups ? groups : []}
+        onCreate={({ label }) => setList([{ label, id: `${label}_${list.length + 1}` }, ...list])}
+      />
+    );
   },
   {
-    name: 'c cозданием новой опции',
+    name: 'с созданием новой опции',
   },
 );
 
 export default createMetadata({
   title: 'Компоненты|/Базовые/Combobox',
   id: 'components/Combobox',
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=11065%3A140493',
-    },
-  },
+  // parameters: {
+  //   docs: {
+  //     page: mdx,
+  //   },
+  //   design: {
+  //     type: 'figma',
+  //     url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=9701%3A190445',
+  //   },
+  // },
 });

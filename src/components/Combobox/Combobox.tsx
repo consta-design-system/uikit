@@ -1,225 +1,195 @@
-import React, { useRef, useState } from 'react';
+import '../SelectComponents/Select.css';
+
+import React, { useRef } from 'react';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { useSelect } from '../../hooks/useSelect/useSelect';
 import { IconClose } from '../../icons/IconClose/IconClose';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
-import { scrollIntoView } from '../../utils/scrollIntoView';
 import { cnSelect } from '../SelectComponents/cnSelect';
-import { getSelectDropdownForm } from '../SelectComponents/helpers';
-import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
-import { RenderItemProps, SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
-import { SelectItem } from '../SelectComponents/SelectItem/SelectItem';
 import {
-  CommonSelectProps,
-  DefaultPropForm,
-  DefaultPropSize,
-  DefaultPropView,
-} from '../SelectComponents/types';
+  defaultlabelForCreate,
+  defaultlabelForNotFound,
+  getInputWidth,
+  getSelectDropdownForm,
+} from '../SelectComponents/helpers';
+import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
+import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
+import { SelectItem } from '../SelectComponents/SelectItem/SelectItem';
+import { SelectValueTag } from '../SelectComponents/SelectValueTag/SelectValueTag';
+import { defaultPropForm, defaultPropSize, defaultPropView } from '../SelectComponents/types';
 
-type SelectContainerProps = React.ComponentProps<typeof SelectContainer>;
+import {
+  ComboboxProps,
+  defaultGetGroupKey,
+  defaultGetGroupLabel,
+  defaultgetItemDisabled,
+  defaultGetItemGroupKey,
+  defaultGetItemKey,
+  defaultGetItemLabel,
+  DefaultGroup,
+  DefaultItem,
+  isMultipleParams,
+  isNotMultipleParams,
+  PropRenderItem,
+  PropRenderValue,
+} from './helpers';
 
-export type ComboboxSelectProps<ITEM> = CommonSelectProps<ITEM> &
-  Omit<SelectContainerProps, 'value' | 'onChange' | 'children'> & {
-    value?: ITEM | null | undefined;
-    onChange?(v: ITEM | null): void;
-    onCreate?(str: string): void;
-    getGroupOptions?(group: ITEM): ITEM[];
-    labelForCreate?: string;
-    labelForNotFound?: string;
-    inputRef?: React.RefObject<HTMLInputElement | null>;
-  };
+export function Combobox<
+  ITEM = DefaultItem,
+  GROUP = DefaultGroup,
+  MULTIPLE extends boolean = false
+>(props: ComboboxProps<ITEM, GROUP, MULTIPLE>) {
+  const defaultDropdownRef = useRef<HTMLDivElement | null>(null);
+  const controlInnerRef = useRef<HTMLDivElement>(null);
+  const helperInputFakeElement = useRef<HTMLDivElement>(null);
+  const controlRef = useRef<HTMLDivElement | null>(null);
 
-type ComboboxType = <ITEM>(props: ComboboxSelectProps<ITEM>) => React.ReactElement | null;
-
-export const Combobox: ComboboxType = (props) => {
-  const defaultOptionsRef = useRef<HTMLDivElement | null>(null);
-  const getOptionKeyDefault = props.getOptionLabel;
   const {
     placeholder,
     onBlur,
     onFocus,
-    options,
+    items,
     onChange,
     value,
-    getOptionLabel,
-    getOptionKey = getOptionKeyDefault,
+    getItemLabel = defaultGetItemLabel,
+    getItemKey = defaultGetItemKey,
     disabled,
     ariaLabel,
     id,
-    form = DefaultPropForm,
-    view = DefaultPropView,
-    size = DefaultPropSize,
+    dropdownRef = defaultDropdownRef,
+    form = defaultPropForm,
+    view = defaultPropView,
+    size = defaultPropSize,
     dropdownClassName,
-    onCreate,
-    getGroupOptions,
-    labelForCreate = 'Добавить',
-    labelForNotFound = 'Не найдено',
-    dropdownRef = defaultOptionsRef,
     name,
-    inputRef,
+    groups = [],
+    getGroupKey = defaultGetGroupKey,
+    getGroupLabel = defaultGetGroupLabel,
+    getItemGroupKey = defaultGetItemGroupKey,
+    getItemDisabled = defaultgetItemDisabled,
+    renderItem,
+    renderValue: renderValueProp,
+    onCreate,
+    inputRef: inputRefProp,
+    labelForNotFound = defaultlabelForNotFound,
+    labelForCreate = defaultlabelForCreate,
+    searchFunction,
+    multiple = false,
     ...restProps
   } = props;
-  const [isFocused, setIsFocused] = useState(false);
-  const [inputData, setInputData] = useState<{ value: string | undefined }>({
-    value: '',
-  });
-  const toggleRef = useRef<HTMLInputElement>(null);
-
-  type Item = Exclude<typeof value, null | undefined>;
-
-  const handlerChangeValue = (v: typeof value): void => {
-    if (typeof onChange === 'function' && v) {
-      onChange(v);
-    }
-    setInputData({ value: toggleRef.current?.value });
-  };
-
-  const controlRef = useRef<HTMLDivElement | null>(null);
-  const arrValue = typeof value !== 'undefined' && value !== null ? [value] : null;
-  const hasGroup = typeof getGroupOptions === 'function';
-
-  const scrollToIndex = (index: number): void => {
-    if (!dropdownRef.current) {
-      return;
-    }
-
-    const elements: NodeListOf<HTMLDivElement> = dropdownRef.current.querySelectorAll(
-      'div[role=option]',
-    );
-
-    if (index > elements.length - 1 || index < 0) {
-      return;
-    }
-
-    scrollIntoView(elements[index], dropdownRef.current);
-  };
-
-  const searchFunctionDefault = (item: typeof value, searchValue: string): boolean => {
-    const searchValueLowerCase = searchValue.toLowerCase();
-
-    return getOptionLabel(item as Item)
-      .toLowerCase()
-      .includes(searchValueLowerCase);
-  };
 
   const {
-    visibleOptions,
-    highlightedIndex,
-    getToggleProps,
+    getKeyProps,
     getOptionProps,
     isOpen,
-    setOpen,
+    visibleItems,
+    isFocused,
+    handleInputFocus,
+    handleInputBlur,
+    handleToggleDropdown,
+    inputRef,
+    handleInputClick,
+    handleInputChange,
+    searchValue,
+    clearValue,
+    getHandleRemoveValue,
   } = useSelect({
-    options,
-    value: arrValue,
-    onChange: handlerChangeValue,
-    optionsRef: dropdownRef,
+    items,
+    groups,
+    value,
+    onChange,
+    dropdownRef,
     controlRef,
-    scrollToIndex,
     disabled,
-    getOptionLabel,
-    getOptionKey,
-    searchFunction: searchFunctionDefault,
+    getItemLabel,
+    getItemKey,
+    getGroupKey,
+    getItemGroupKey,
+    getItemDisabled,
+    multiple,
+    onBlur,
+    onFocus,
     onCreate,
-    getGroupOptions,
+    searchFunction,
   });
 
-  const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>): void => {
-    if (!disabled) {
-      if (!isFocused) {
-        setIsFocused(true);
-      }
-      if (typeof onFocus === 'function') {
-        onFocus(e);
-      }
-    }
-  };
+  const dropdownForm = getSelectDropdownForm(form);
 
-  const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>): void => {
-    if (isOpen) {
-      toggleRef.current?.focus();
-      return;
-    }
+  const renderItemDefault: PropRenderItem<ITEM> = (props) => {
+    const { item, active, hovered, onClick, onMouseEnter } = props;
 
-    if (isFocused) {
-      setIsFocused(false);
-
-      if (typeof onBlur === 'function') {
-        onBlur(e);
-      }
-    }
-  };
-
-  const handleToggleDropdown = (): void => {
-    if (isOpen) {
-      setOpen(false);
-      setIsFocused(false);
-    } else {
-      setOpen(true);
-      setIsFocused(true);
-      toggleRef.current?.focus();
-    }
-  };
-
-  const handleClear = (): void => {
-    setInputData({ value: '' });
-    typeof onChange === 'function' && onChange(null);
-    setIsFocused(false);
-  };
-  const handleClearButtonFocus = (): void => {
-    setIsFocused(true);
-  };
-
-  const handleClearButtonBlur = (): void => {
-    setIsFocused(false);
-  };
-
-  const handleInputChange = (): void => {
-    if (!isOpen) {
-      setOpen(true);
-    }
-    typeof onChange === 'function' && onChange(null);
-    const inputValue = toggleRef.current?.value ?? '';
-    setInputData({ value: inputValue });
-  };
-
-  const handleControlClick = (): void => {
-    toggleRef.current?.focus();
-  };
-
-  const showPlaceholder =
-    (!arrValue?.length && inputData.value === '') || (arrValue === null && inputData.value === '');
-
-  const showInput = arrValue !== null && arrValue.length > 0;
-
-  const handleCreate = (): void => {
-    if (typeof onCreate === 'function') {
-      const newValue = toggleRef.current?.value.trim();
-      newValue && onCreate(newValue);
-    }
-  };
-
-  const renderItemDefault = (props: RenderItemProps<typeof value>) => {
-    const { item, id: itemId, active, hovered, ...restProps } = props;
-    if (!item) {
-      return null;
-    }
-    const label = getOptionLabel(item);
-    const indent = form === 'round' ? 'increased' : 'normal';
     return (
       <SelectItem
-        id={itemId}
-        label={label}
-        item={item}
+        label={getItemLabel(item)}
         active={active}
         hovered={hovered}
-        multiple={false}
+        multiple={multiple}
         size={size}
-        indent={indent}
-        {...restProps}
+        indent={dropdownForm === 'round' ? 'increased' : 'normal'}
+        onClick={onClick}
+        onMouseEnter={onMouseEnter}
+        disabled={getItemDisabled(item)}
       />
+    );
+  };
+
+  const renderValueDefaultMultiple: PropRenderValue<ITEM> = ({ item, handleRemove }) => {
+    return (
+      <SelectValueTag
+        label={getItemLabel(item)}
+        key={getItemKey(item)}
+        size={size}
+        handleRemove={disabled ? undefined : handleRemove}
+      />
+    );
+  };
+
+  const renderValueDefaultNotMultiple: PropRenderValue<ITEM> = (props) => {
+    const valueLable = getItemLabel(props.item);
+
+    return (
+      <span className={cnSelect('ControlValue')} title={valueLable}>
+        {valueLable}
+      </span>
+    );
+  };
+
+  const renderValue =
+    renderValueProp || (multiple ? renderValueDefaultMultiple : renderValueDefaultNotMultiple);
+
+  const inputRefForRender = useForkRef([inputRef, inputRefProp]);
+
+  const renderControlValue = () => {
+    const width = multiple ? getInputWidth(controlInnerRef, helperInputFakeElement) : undefined;
+    return (
+      <>
+        {isMultipleParams(props) &&
+          Array.isArray(props.value) &&
+          props.value.map((item) =>
+            renderValue({ item, handleRemove: getHandleRemoveValue(item) }),
+          )}
+        {isNotMultipleParams(props) && props.value && renderValue({ item: props.value })}
+        {(!value || (Array.isArray(value) && value.length === 0)) && !searchValue && placeholder && (
+          <span className={cnSelect('Placeholder')} title="placeholder">
+            {placeholder}
+          </span>
+        )}
+        <input
+          {...getKeyProps()}
+          type="text"
+          name={name}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
+          aria-label={ariaLabel}
+          onChange={handleInputChange}
+          ref={inputRefForRender}
+          className={cnSelect('Input', { size, hide: !multiple && !!value, multiple })}
+          value={searchValue}
+          style={{ width }}
+        />
+      </>
     );
   };
 
@@ -230,6 +200,7 @@ export const Combobox: ComboboxType = (props) => {
       size={size}
       view={view}
       form={form}
+      multiple={multiple}
       {...restProps}
     >
       <div
@@ -239,39 +210,27 @@ export const Combobox: ComboboxType = (props) => {
         aria-haspopup="listbox"
         id={id}
       >
-        {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus */}
         <div
           className={cnSelect('ControlInner')}
-          onClick={handleControlClick}
-          onKeyDown={handleControlClick}
+          onClick={handleInputClick}
           role="button"
+          ref={controlInnerRef}
+          aria-hidden="true"
         >
           <div className={cnSelect('ControlValueContainer')}>
-            {arrValue && (
-              <span className={cnSelect('ControlValue')}>{getOptionLabel(arrValue[0])}</span>
+            {multiple ? (
+              <div className={cnSelect('ControlValue')}>{renderControlValue()}</div>
+            ) : (
+              renderControlValue()
             )}
-            {showPlaceholder && <span className={cnSelect('Placeholder')}>{placeholder}</span>}
-            <input
-              {...getToggleProps({ onChange: handleInputChange })}
-              type="text"
-              name={name}
-              onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
-              aria-label={ariaLabel}
-              ref={useForkRef([toggleRef, inputRef])}
-              value={inputData.value}
-              className={cnSelect('Input', { size, hide: showInput })}
-            />
           </div>
         </div>
         <span className={cnSelect('Indicators')}>
-          {arrValue && (
+          {value && (
             <button
               type="button"
-              onClick={handleClear}
+              onClick={clearValue}
               className={cnSelect('ClearIndicator', [cnMixFocus()])}
-              onFocus={handleClearButtonFocus}
-              onBlur={handleClearButtonBlur}
             >
               <IconClose size="xs" className={cnSelect('ClearIndicatorIcon')} />
             </button>
@@ -287,27 +246,23 @@ export const Combobox: ComboboxType = (props) => {
           </button>
         </span>
       </div>
-
       <SelectDropdown
         isOpen={isOpen}
         size={size}
         controlRef={controlRef}
-        visibleOptions={visibleOptions}
-        highlightedIndex={highlightedIndex}
         getOptionProps={getOptionProps}
-        onCreate={handleCreate}
         dropdownRef={dropdownRef}
-        inputValue={inputData.value}
-        id={id}
-        hasGroup={hasGroup}
-        selectedValues={arrValue}
-        getOptionKey={getOptionKey}
-        labelForCreate={labelForCreate}
-        labelForNotFound={labelForNotFound}
-        form={getSelectDropdownForm(form)}
+        form={dropdownForm}
         className={dropdownClassName}
-        renderItem={renderItemDefault}
+        renderItem={renderItem || renderItemDefault}
+        getGroupLabel={getGroupLabel}
+        visibleItems={visibleItems}
+        labelForNotFound={labelForNotFound}
+        labelForCreate={labelForCreate}
       />
+      <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
+        {searchValue}
+      </div>
     </SelectContainer>
   );
-};
+}

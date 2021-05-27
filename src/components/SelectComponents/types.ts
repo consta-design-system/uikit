@@ -1,10 +1,10 @@
 import { RefObject } from 'react';
 
-export const sizes = ['xs', 's', 'm', 'l'] as const;
-export type PropSize = typeof sizes[number];
-export const DefaultPropSize: PropSize = 'm';
+export const propSize = ['m', 'xs', 's', 'l'] as const;
+export type PropSize = typeof propSize[number];
+export const defaultPropSize = propSize[0];
 
-export const form = [
+export const propForm = [
   'default',
   'brick',
   'round',
@@ -18,12 +18,12 @@ export const form = [
   'clearBrick',
   'clearClear',
 ] as const;
-export type PropForm = typeof form[number];
-export const DefaultPropForm: PropForm = 'default';
+export type PropForm = typeof propForm[number];
+export const defaultPropForm = propForm[0];
 
-export const view = ['default', 'clear'] as const;
-export type PropView = typeof view[number];
-export const DefaultPropView: PropView = 'default';
+export const propView = ['default', 'clear'] as const;
+export type PropView = typeof propView[number];
+export const defaultPropView = propView[0];
 
 export type CommonSelectProps<ITEM> = {
   options: ITEM[];
@@ -38,4 +38,12 @@ export type CommonSelectProps<ITEM> = {
   dropdownClassName?: string;
   dropdownRef?: RefObject<HTMLDivElement>;
   name?: string;
+};
+
+export type RenderItemProps<ITEM> = {
+  item: ITEM;
+  active: boolean;
+  hovered: boolean;
+  onClick: (e: React.SyntheticEvent) => void;
+  onMouseEnter: (e: React.SyntheticEvent) => void;
 };

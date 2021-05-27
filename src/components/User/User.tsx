@@ -8,8 +8,7 @@ import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { Avatar } from '../Avatar/Avatar';
-import { Button } from '../Button/Button';
-import { TagBasePropSize } from '../TagBase/TagBase';
+import { Button, ButtonPropSize } from '../Button/Button';
 import { Text, TextPropSize } from '../Text/Text';
 
 export const userPropSize = ['m', 's', 'l'] as const;
@@ -58,17 +57,22 @@ const infoSizeMap: Record<UserPropSize, TextPropSize> = {
   l: 'xs',
 };
 
-const iconRightSizeMap: Record<UserPropSize, IconPropSize> = {
+const iconSizeMap: Record<UserPropSize, IconPropSize> = {
   s: 'xs',
   m: 'xs',
   l: 's',
 };
 
-const avatarSizeMap: Record<TagBasePropSize, IconPropSize> = {
-  xs: 'xs',
+const avatarSizeMap: Record<UserPropSize, IconPropSize> = {
   s: 'xs',
   m: 's',
   l: 'm',
+};
+
+const buttonSizeMap: Record<UserPropSize, ButtonPropSize> = {
+  s: 'xs',
+  m: 'xs',
+  l: 's',
 };
 
 export const User = forwardRefWithAs<Props>((props, ref) => {
@@ -90,9 +94,6 @@ export const User = forwardRefWithAs<Props>((props, ref) => {
   } = props;
   const Tag = as as string;
   const onlyAvatar = propOnlyAvatar || (!name && !info);
-  const infoSize = getSizeByMap(infoSizeMap, size);
-  const iconRightSize = getSizeByMap(iconRightSizeMap, size);
-  const avatarSize = getSizeByMap(avatarSizeMap, size);
   const IconRight = iconRight;
 
   return (
@@ -102,7 +103,7 @@ export const User = forwardRefWithAs<Props>((props, ref) => {
       ref={ref}
     >
       <div className={cnUser('AvatarWrapper', { status })}>
-        <Avatar size={avatarSize} url={avatarUrl} name={name} />
+        <Avatar size={getSizeByMap(avatarSizeMap, size)} url={avatarUrl} name={name} />
       </div>
       {!onlyAvatar && (name || info) && (
         <div className={cnUser('Block')}>
@@ -112,24 +113,40 @@ export const User = forwardRefWithAs<Props>((props, ref) => {
             </Text>
           )}
           {info && size !== 's' && (
-            <Text className={cnUser('Info')} size={infoSize} view="secondary" lineHeight="2xs">
+            <Text
+              className={cnUser('Info')}
+              size={getSizeByMap(infoSizeMap, size)}
+              view="secondary"
+              lineHeight="2xs"
+            >
               {info}
             </Text>
           )}
         </div>
       )}
       {withArrow && (
-        <IconSelect className={cnUser('Arrow')} size={iconRightSize} view="secondary" />
+        <IconSelect
+          className={cnUser('Icon')}
+          size={getSizeByMap(iconSizeMap, size)}
+          view="secondary"
+        />
       )}
-      {IconRight && (
+      {IconRight && !onIconRightClick && (
+        <IconRight
+          className={cnUser('Icon')}
+          size={getSizeByMap(iconSizeMap, size)}
+          view="secondary"
+        />
+      )}
+      {IconRight && onIconRightClick && (
         <Button
-          className={cnUser('IconRight')}
+          className={cnUser('IconRightButton')}
           onClick={onIconRightClick}
           iconRight={IconRight}
           onlyIcon
           view="clear"
-          size="s"
-          iconSize={iconRightSize}
+          size={getSizeByMap(buttonSizeMap, size)}
+          form="round"
         />
       )}
     </Tag>

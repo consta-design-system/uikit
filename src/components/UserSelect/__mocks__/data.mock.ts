@@ -1,92 +1,127 @@
-export const simpleItems = [
+import avatar from './static/13190808.jpeg';
+
+export type Item = {
+  label: string;
+  subLabel?: string;
+  avatarUrl?: string;
+  id: string | number;
+  groupId?: string | number;
+  disabled?: boolean;
+};
+
+export type Group = {
+  label: string;
+  id: string | number;
+};
+
+export const items: Item[] = [
   {
-    label: 'Andrey Andreev',
+    label: 'Андрей Андреев',
     subLabel: 'andrey@gmail.com',
-    url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
+
     id: 1,
+    groupId: 1,
   },
   {
-    label: 'Ivan Ivanov',
+    label: 'Иван Иванов',
     subLabel: 'ivan@gmail.com',
-    url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
     id: 2,
+    groupId: 2,
   },
   {
-    label: 'Igor Igorov',
+    label: 'Егор Егоров',
     subLabel: 'igor@icloud.com',
+    avatarUrl: avatar,
     id: 3,
+    groupId: 1,
   },
   {
-    label: 'Boris Borisov',
+    label: 'Борис Борисов',
     subLabel: 'boris@mail.com',
-    url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
     id: 4,
+    groupId: 3,
   },
   {
-    label: 'Kirill Kirillov',
+    label: 'Кирилл Кириллов',
     subLabel: 'kirill@yandex.ru',
-    url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
     id: 5,
+    groupId: 1,
   },
   {
-    label: 'Timur Timurov',
+    label: 'Тимур Тумуров',
     subLabel: 'timur@gmail.com',
     id: 6,
+    groupId: 2,
   },
 ];
 
-export const groups = [
+export const groups: Group[] = [
   {
-    label: 'First',
-    items: [
-      {
-        label: 'Andrey Andreev',
-        url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
-        id: 1,
-      },
-      {
-        label: 'Ivan Ivanov',
-        subLabel: 'ivan@gmail.com',
-        url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
-        id: 2,
-      },
-      {
-        label: 'Igor Igorov',
-        subLabel: 'igor@icloud.com',
-        id: 3,
-      },
-    ],
+    id: 1,
+    label: 'Первая группа',
   },
   {
-    label: 'Second',
-    items: [
-      {
-        label: 'Kirill Kirillov',
-        subLabel: 'kirill@yandex.ru',
-        url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
-        id: 4,
-      },
-      {
-        label: 'Timur Timurov',
-        subLabel: 'timur@gmail.com',
-        id: 5,
-      },
-    ],
+    id: 2,
+    label: 'Вторая группа',
   },
   {
-    label: 'Third',
-    items: [
-      {
-        label: 'Boris Borisov',
-        subLabel: 'boris@mail.com',
-        url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
-        id: 6,
-      },
-      {
-        label: 'Ilya Ilyev',
-        subLabel: 'ilya@icloud.com',
-        id: 7,
-      },
-    ],
+    id: 3,
+    label: 'Третья группа',
+  },
+];
+
+export type MyGroup = string;
+
+export const myGroup: MyGroup[] = ['Первая группа', 'Вторая группа', 'Третья группа'];
+
+export type MyItem = {
+  name: string;
+  email?: string;
+  avatarUrl?: string;
+  group?: string | number;
+  disabled?: boolean;
+  position?: string;
+};
+
+export const myItems: MyItem[] = [
+  {
+    name: 'Андрей Андреев',
+    email: 'andrey@gmail.com',
+    avatarUrl: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
+    group: myGroup[0],
+    position: 'Дизайнер',
+  },
+  {
+    name: 'Иван Иванов',
+    email: 'ivan@gmail.com',
+    avatarUrl: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
+    group: myGroup[0],
+    position: 'Дизайнер',
+  },
+  {
+    name: 'Игор Игоров',
+    email: 'igor@icloud.com',
+    group: myGroup[1],
+    position: 'Аналитик',
+  },
+  {
+    name: 'Борис Борисов',
+    email: 'boris@mail.com',
+    avatarUrl: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
+    group: myGroup[2],
+    position: 'Программист',
+  },
+  {
+    name: 'Кирилл Кириллов',
+    email: 'kirill@yandex.ru',
+    avatarUrl: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
+    group: myGroup[2],
+    position: 'Менеджер',
+  },
+  {
+    name: 'Тимур Тумуров',
+    email: 'timur@gmail.com',
+    group: myGroup[1],
+    position: 'Директор',
   },
 ];
