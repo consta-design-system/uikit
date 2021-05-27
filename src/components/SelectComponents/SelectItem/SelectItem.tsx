@@ -8,24 +8,20 @@ import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttri
 import { Checkbox, CheckboxPropSize } from '../../Checkbox/Checkbox';
 import { PropSize } from '../types';
 
-export type SelectItemProps<ITEM> = PropsWithHTMLAttributes<
+export type SelectItemProps = PropsWithHTMLAttributes<
   {
     label: string;
-    item: ITEM;
     active: boolean;
     hovered: boolean;
     multiple: boolean;
     size: PropSize;
     indent: 'normal' | 'increased';
+    disabled: boolean | undefined;
   },
   HTMLDivElement
 >;
 
 export const cnSelectItem = cn('SelectItem');
-
-// в дальнейшем уберем обязательность onChange у Checkbox
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-const emptyFunction = () => {};
 
 const sizeCheckboxMap: Record<PropSize, CheckboxPropSize> = {
   xs: 'm',
@@ -33,23 +29,32 @@ const sizeCheckboxMap: Record<PropSize, CheckboxPropSize> = {
   m: 'l',
   l: 'l',
 };
-type SelectItem = <ITEM>(props: SelectItemProps<ITEM>) => React.ReactElement | null;
 
-export const SelectItem: SelectItem = (props) => {
-  const { className, label, active, hovered, multiple, size, indent, ...otherProps } = props;
+export const SelectItem: React.FC<SelectItemProps> = (props) => {
+  const {
+    className,
+    label,
+    active,
+    hovered,
+    multiple,
+    size,
+    indent,
+    disabled,
+    ...otherProps
+  } = props;
 
   return (
     <div
       {...otherProps}
-      className={cnSelectItem({ active, hovered, multiple, size, indent }, [className])}
+      className={cnSelectItem({ active, hovered, multiple, size, indent, disabled }, [className])}
       aria-selected={active}
+      aria-disabled={disabled}
       role="option"
     >
       {multiple && (
         <Checkbox
           className={cnSelectItem('Checkbox')}
           checked={active}
-          onChange={emptyFunction}
           size={getSizeByMap(sizeCheckboxMap, size)}
         />
       )}

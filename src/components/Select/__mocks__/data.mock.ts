@@ -15,7 +15,6 @@ export const items: Item[] = [
     label: 'Neptunium',
     groupId: 1,
     id: 1,
-    disabled: true,
   },
   {
     label: 'Plutonium',
@@ -26,6 +25,7 @@ export const items: Item[] = [
     label: 'Americium',
     groupId: 1,
     id: 3,
+    disabled: true,
   },
   {
     label: 'Curium',

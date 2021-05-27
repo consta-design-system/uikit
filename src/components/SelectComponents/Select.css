@@ -13,7 +13,6 @@
       --input-height: var(--control-height-xs);
       --input-font-size: var(--control-text-size-xs);
       --input-space: calc(var(--control-space-xs) * 0.5);
-      --tag-space: calc(var(--space-xs) / 2);
     }
 
     &_s {
@@ -236,6 +235,7 @@
     right: 0;
     left: 0;
     bottom: 0;
+    min-height: calc(var(--input-height) - 2px);
     margin: 0;
     padding: 0;
     color: inherit;
@@ -277,23 +277,13 @@
 
   &_multiple &-ControlValue {
     overflow: visible;
-    padding-top: var(--tag-space);
-    padding-bottom: calc(var(--tag-space) - calc(var(--space-xs) / 2));
+    padding-top: calc(var(--tag-space) - var(--control-border-width));
     white-space: normal;
   }
 
   &_multiple &-ControlValue_isUserSelect {
     display: flex;
     flex-wrap: wrap;
-    padding-top: calc(var(--space-s) / 4);
-    padding-bottom: 0;
-  }
-
-  &_multiple&_size_l &-ControlValue {
-    padding-top: calc(var(--tag-space) - var(--control-border-width));
-  }
-
-  &_multiple&_size_l &-ControlValue_isUserSelect {
     padding-top: calc(var(--space-s) / 4);
   }
 
@@ -358,19 +348,15 @@
       width: 100%;
       opacity: 0;
     }
-  }
 
-  &_multiple &-Input {
-    display: inline-flex;
-    min-width: 10px;
-    margin-top: calc(var(--control-border-width) + var(--tag-space) - calc(var(--space-xs) / 2));
-    line-height: 1;
-  }
-
-  &_multiple&_size_s &-Input {
-    margin-top: calc(
-      var(--control-border-width) * 3 + var(--tag-space) - calc(var(--space-xs) / 2)
-    );
+    &_multiple {
+      display: inline-flex;
+      min-width: 10px;
+      height: calc(var(--input-height) - (var(--control-border-width) * 2));
+      margin-top: calc(var(--tag-space) * -1);
+      line-height: 1;
+      line-height: calc(var(--input-height) - (var(--control-border-width) * 2));
+    }
   }
 
   &-FakeField {

@@ -7,26 +7,30 @@ import { Tag } from '../../Tag/Tag';
 
 type SelectValueTagProps = {
   label: string;
-  handleRemove: (e: React.SyntheticEvent) => void;
+  handleRemove?: (e: React.SyntheticEvent) => void;
   size: 's' | 'm' | 'l';
-  disabled: boolean;
   children?: never;
 };
 
 const cnSelectValueTag = cn('SelectValueTag');
 
 export const SelectValueTag: React.FC<SelectValueTagProps> = (props) => {
-  const { handleRemove, disabled, size, ...otherProps } = props;
+  const { handleRemove, size, label } = props;
 
-  return disabled ? (
-    <Tag {...otherProps} className={cnSelectValueTag({ size, disabled })} size={size} mode="info" />
-  ) : (
+  return handleRemove ? (
     <Tag
-      {...otherProps}
       className={cnSelectValueTag({ size })}
+      label={label}
       mode="cancel"
       onCancel={handleRemove}
       size={size}
+    />
+  ) : (
+    <Tag
+      className={cnSelectValueTag({ size, disabled: true })}
+      label={label}
+      size={size}
+      mode="info"
     />
   );
 };

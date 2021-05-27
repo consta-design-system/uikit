@@ -1,54 +1,50 @@
 import './SelectDropdown.css';
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
-import { GetOptionPropsResult, Option, OptionProps } from '../../../hooks/useSelect/useSelect';
+import {
+  GetOptionPropsResult,
+  isOptionForCreate,
+  OptionForCreate,
+  OptionProps,
+} from '../../../hooks/useSelect/useSelect';
 import { cn } from '../../../utils/bem';
 import { cnForCssTransition } from '../../../utils/cnForCssTransition';
-import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
 import { Popover } from '../../Popover/Popover';
 import { Text } from '../../Text/Text';
 import { SelectCreateButton } from '../SelectCreateButton/SelectCreateButton';
 import { SelectGroupLabel } from '../SelectGroupLabel/SelectGroupLabel';
-import { PropSize } from '../types';
+import { PropSize, RenderItemProps } from '../types';
 
 export const selectDropdownform = ['default', 'brick', 'round'] as const;
 export type SelectDropdownPropForm = typeof selectDropdownform[number];
 export const defaultSelectDropdownPropForm = selectDropdownform[0];
 
-export type RenderItemProps<ITEM> = PropsWithHTMLAttributes<
-  {
-    item: ITEM;
-    id: string;
-    active: boolean;
-    hovered: boolean;
-  },
-  HTMLDivElement
->;
-
-type Props<ITEM> = PropsWithJsxAttributes<{
+type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   size: PropSize;
-  id: string;
   controlRef: React.MutableRefObject<HTMLDivElement | null>;
   dropdownRef: React.MutableRefObject<HTMLDivElement | null>;
-  visibleOptions: Option<ITEM>[];
-  highlightedIndex: number;
-  getOptionProps(props: OptionProps): GetOptionPropsResult;
-  onCreate?(newLabel: string): void;
-  inputValue?: string;
-  hasGroup?: boolean;
-  selectedValues: ITEM[] | null;
+  getOptionProps(props: OptionProps<ITEM>): GetOptionPropsResult;
   labelForCreate?: string;
   labelForNotFound?: string;
-  getOptionKey(option: ITEM): string | number;
-  form?: SelectDropdownPropForm;
+  form: SelectDropdownPropForm;
   isOpen: boolean;
   renderItem: (props: RenderItemProps<ITEM>) => JSX.Element | null;
+  visibleItems: (
+    | OptionForCreate
+    | {
+        items: ITEM[];
+        key: string | number;
+        group?: GROUP;
+        groupIndex: number;
+      }
+  )[];
+  getGroupLabel?: (group: GROUP) => string;
 }>;
 
-type SelectDropdown = <ITEM>(props: Props<ITEM>) => React.ReactElement | null;
+type SelectDropdown = <ITEM, GROUP>(props: Props<ITEM, GROUP>) => React.ReactElement | null;
 
 const cnSelectDropdown = cn('SelectDropdown');
 const cnSelectDropdownCssTransition = cnForCssTransition(cnSelectDropdown);
@@ -56,23 +52,22 @@ const cnSelectDropdownCssTransition = cnForCssTransition(cnSelectDropdown);
 export const SelectDropdown: SelectDropdown = (props) => {
   const {
     controlRef,
-    visibleOptions,
-    highlightedIndex,
     size,
     getOptionProps,
-    inputValue,
     dropdownRef,
-    id,
-    hasGroup = false,
-    selectedValues,
     labelForCreate,
-    getOptionKey,
     className,
     labelForNotFound,
-    form = defaultSelectDropdownPropForm,
+    form,
     isOpen,
     renderItem,
+    visibleItems,
+    getGroupLabel,
   } = props;
+
+  let index = -1;
+
+  const indent = form === 'round' ? 'increased' : 'normal';
 
   return (
     <CSSTransition
@@ -89,58 +84,47 @@ export const SelectDropdown: SelectDropdown = (props) => {
         offset={1}
         role="listbox"
         className={cnSelectDropdown({ form, size }, [className])}
-        aria-activedescendant={`${id}-${highlightedIndex}`}
         equalAnchorWidth
       >
         <div className={cnSelectDropdown('List', { size, form })} ref={dropdownRef}>
-          {visibleOptions.length > 0 ? (
-            visibleOptions.map((option, index: number) => {
-              const isOptionForCreate = 'optionForCreate' in option;
-              const currentOption = visibleOptions[index];
-              const prevOption = visibleOptions[index - 1];
-              const menuOption = isOptionForCreate ? visibleOptions[index + 1] : currentOption;
-              const isFirstGroup =
-                hasGroup && !isOptionForCreate && !visibleOptions[index - 1] && index === 0;
-              const shouldShowGroupName =
-                isFirstGroup ||
-                (hasGroup && prevOption && currentOption.group !== prevOption.group);
-              const active = Boolean(
-                !isOptionForCreate &&
-                  selectedValues?.some((val) => {
-                    return getOptionKey(val) === getOptionKey(menuOption);
-                  }),
-              );
-              const indent = form === 'round' ? 'increased' : 'normal';
-
+          {visibleItems.map((group) => {
+            if (isOptionForCreate(group)) {
+              index++;
               return (
-                <React.Fragment key={String(getOptionKey(option))}>
-                  {shouldShowGroupName && (
-                    <SelectGroupLabel label={menuOption.group} size={size} indent={indent} />
-                  )}
-                  {isOptionForCreate ? (
-                    <SelectCreateButton
-                      size={size}
-                      labelForCreate={labelForCreate}
-                      inputValue={inputValue}
-                      id={`${id}-${index}`}
-                      active={active}
-                      hovered={index === highlightedIndex}
-                      indent={indent}
-                      {...getOptionProps({ index })}
-                    />
-                  ) : (
-                    renderItem({
-                      item: option,
-                      id: `${id}-${index}`,
-                      active,
-                      hovered: index === highlightedIndex,
-                      ...getOptionProps({ index }),
-                    })
-                  )}
-                </React.Fragment>
+                <SelectCreateButton
+                  size={size}
+                  labelForCreate={labelForCreate}
+                  inputValue={group.label}
+                  indent={indent}
+                  {...getOptionProps({ index, item: group })}
+                />
               );
-            })
-          ) : (
+            }
+            return (
+              <Fragment key={group.key}>
+                {group.group && getGroupLabel && (
+                  <SelectGroupLabel
+                    label={getGroupLabel(group.group)}
+                    size={size}
+                    indent={indent}
+                  />
+                )}
+                {group.items.map((item, i) => {
+                  index++;
+
+                  return (
+                    <Fragment key={`${group.key}-${i}`}>
+                      {renderItem({
+                        item,
+                        ...getOptionProps({ index, item }),
+                      })}
+                    </Fragment>
+                  );
+                })}
+              </Fragment>
+            );
+          })}
+          {visibleItems.length === 0 && (
             <Text className={cnSelectDropdown('LabelForNotFound')}>{labelForNotFound}</Text>
           )}
         </div>

@@ -73,10 +73,10 @@ export function HeaderFullExample() {
       rightSide={
         <>
           <HeaderModule indent="s">
-            <HeaderButton iconLeft={IconChat} />
+            <HeaderButton iconLeft={IconRing} />
           </HeaderModule>
           <HeaderModule indent="s">
-            <HeaderButton iconLeft={IconRing} />
+            <HeaderButton iconLeft={IconChat} />
           </HeaderModule>
           <HeaderModule indent="s">
             <HeaderLogin
