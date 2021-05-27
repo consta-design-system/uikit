@@ -1,8 +1,7 @@
-import { Group, groups, Item, items } from '../__mocks__/getGroups.mock';
+import { TestItem, testItems } from '../__mocks__/mock.data';
 import { defaultGroupKey, getGroups } from '../getGroups';
 
-const getItemGroupKey = (item: Item) => item.group;
-const getGroupKey = (group: Group) => group.id;
+const getGroupId = (item: TestItem) => item.group;
 
 const sortGroup = (a: number | string, b: number | string) => {
   if (a > b) {
@@ -16,12 +15,12 @@ const sortGroup = (a: number | string, b: number | string) => {
 
 describe('helper getGroups', () => {
   it('групировка без getGroupId', () => {
-    const result = getGroups(items, undefined, undefined, undefined, undefined);
+    const result = getGroups(testItems, undefined, undefined, undefined, undefined);
 
     const expected: typeof result = [
       {
         key: defaultGroupKey,
-        items,
+        items: testItems,
         groupIndex: -1,
       },
     ];
@@ -29,8 +28,8 @@ describe('helper getGroups', () => {
     expect(result).toEqual(expected);
   });
 
-  it('групировка без массива групп', () => {
-    const result = getGroups(items, getItemGroupKey, undefined, undefined, undefined);
+  it('групировка с getGroupId', () => {
+    const result = getGroups(testItems, getGroupId, undefined, undefined, undefined);
 
     const expected: typeof result = [
       {
@@ -53,11 +52,12 @@ describe('helper getGroups', () => {
         groupIndex: -1,
       },
     ];
+
     expect(result).toEqual(expected);
   });
 
-  it('групировка без массива групп и с сортировкой', () => {
-    const result = getGroups(items, getItemGroupKey, undefined, undefined, (a, b) =>
+  it('групировка с сортировкой', () => {
+    const result = getGroups(testItems, getGroupId, undefined, undefined, (a, b) =>
       sortGroup(a.key, b.key),
     );
 
@@ -80,106 +80,6 @@ describe('helper getGroups', () => {
         ],
         group: undefined,
         groupIndex: -1,
-      },
-    ];
-
-    expect(result).toEqual(expected);
-  });
-
-  it('групировка c массивом групп', () => {
-    const result = getGroups(items, getItemGroupKey, groups, getGroupKey, undefined);
-
-    const expected: typeof result = [
-      {
-        key: 1,
-        items: [
-          {
-            name: 'Глаз',
-            group: 1,
-          },
-          {
-            name: 'Две галочки',
-            group: 1,
-          },
-        ],
-        groupIndex: 0,
-        group: {
-          id: 1,
-          label: 'Первая группа',
-        },
-      },
-      {
-        key: 2,
-        items: [
-          {
-            name: 'Скрепка',
-            group: 2,
-          },
-          {
-            name: 'Чемодан',
-            group: 2,
-          },
-          {
-            name: 'Солнце',
-            group: 2,
-          },
-        ],
-        groupIndex: 1,
-        group: {
-          id: 2,
-          label: 'Вторая группа',
-        },
-      },
-    ];
-
-    expect(result).toEqual(expected);
-  });
-
-  it('групировка c массивом групп и с сортировкой', () => {
-    const result = getGroups(items, getItemGroupKey, groups, getGroupKey, (a, b) =>
-      sortGroup(a.group?.label || 0, b.group?.label || 0),
-    );
-
-    const expected: typeof result = [
-      {
-        key: 2,
-        items: [
-          {
-            name: 'Скрепка',
-            group: 2,
-          },
-          {
-            name: 'Чемодан',
-            group: 2,
-          },
-          {
-            name: 'Солнце',
-            group: 2,
-          },
-        ],
-        groupIndex: 1,
-        group: {
-          id: 2,
-          label: 'Вторая группа',
-        },
-      },
-      {
-        key: 1,
-        items: [
-          {
-            name: 'Глаз',
-            group: 1,
-          },
-          {
-            name: 'Две галочки',
-            group: 1,
-          },
-        ],
-        groupIndex: 0,
-        group: {
-          id: 1,
-          label: 'Первая группа',
-        },
       },
     ];
 
