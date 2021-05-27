@@ -53,7 +53,6 @@ describe('helper getGroups', () => {
         groupIndex: -1,
       },
     ];
-
     expect(result).toEqual(expected);
   });
 
