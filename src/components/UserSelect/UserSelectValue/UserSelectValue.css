@@ -1,6 +1,15 @@
 .UserSelectValue {
-  &_withCancel {
+  margin-bottom: calc(var(--space-s) / 4);
+
+  &_multiple {
     margin-right: var(--space-xs);
-    margin-bottom: calc(var(--space-s) / 4);
+  }
+
+  &:not(&_multiple) {
+    &.User {
+      &:hover {
+        background-color: var(--color-control-bg-clear);
+      }
+    }
   }
 }

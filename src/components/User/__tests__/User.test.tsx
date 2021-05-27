@@ -28,7 +28,7 @@ function getInfo() {
 }
 
 function getArrow() {
-  return getRender().querySelector(`.${cnUser('Arrow')}`);
+  return getRender().querySelector(`.${cnUser('Icon')}`);
 }
 
 describe('Компонент Avatar', () => {

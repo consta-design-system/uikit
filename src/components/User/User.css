@@ -11,13 +11,14 @@
     flex: 1;
   }
 
-  &-Arrow {
+  &-Icon {
     flex: none;
   }
 
-  &-IconRight {
+  &-IconRightButton {
     --indent-r: var(--space-xs);
-    --button-height: var(--control-height-xs);
+
+    /* --button-height: var(--control-height-xs); */
     margin-left: var(--space-2xs);
   }
 
@@ -101,10 +102,6 @@
       --indent-r: var(--space-m);
       --indent: var(--space-s);
       --icon-indent: var(--space-l);
-
-      .user__name {
-        margin-bottom: var(--space-3xs);
-      }
     }
   }
 
@@ -117,7 +114,7 @@
     }
   }
 
-  &:not(.User_minified) &-Arrow {
+  &:not(.User_minified) &-Icon {
     margin-left: var(--icon-indent);
   }
 

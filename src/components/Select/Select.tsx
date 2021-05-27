@@ -4,40 +4,29 @@ import React, { useRef } from 'react';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { useSelect } from '../../hooks/useSelect/useSelect';
-import { IconClose } from '../../icons/IconClose/IconClose';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
-import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
+import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { cnSelect } from '../SelectComponents/cnSelect';
-import {
-  defaultlabelForCreate,
-  defaultlabelForNotFound,
-  getSelectDropdownForm,
-  useSetInputWidth,
-} from '../SelectComponents/helpers';
+import { getSelectDropdownForm } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
 import { SelectItem } from '../SelectComponents/SelectItem/SelectItem';
-import { SelectValueTag } from '../SelectComponents/SelectValueTag/SelectValueTag';
 import { defaultPropForm, defaultPropSize, defaultPropView } from '../SelectComponents/types';
 
 import {
-  ComboboxComponentType,
   defaultGetGroupKey,
   defaultGetGroupLabel,
   defaultgetItemDisabled,
   defaultGetItemGroupKey,
   defaultGetItemKey,
   defaultGetItemLabel,
-  isMultipleParams,
-  isNotMultipleParams,
   PropRenderItem,
   PropRenderValue,
+  SelectComponentType,
 } from './helpers';
 
-export const Combobox: ComboboxComponentType = (props) => {
+export const Select: SelectComponentType = (props) => {
   const defaultDropdownRef = useRef<HTMLDivElement | null>(null);
-  const controlInnerRef = useRef<HTMLDivElement>(null);
-  const helperInputFakeElement = useRef<HTMLDivElement>(null);
   const controlRef = useRef<HTMLDivElement | null>(null);
 
   const {
@@ -65,16 +54,17 @@ export const Combobox: ComboboxComponentType = (props) => {
     getItemDisabled = defaultgetItemDisabled,
     renderItem,
     renderValue: renderValueProp,
-    onCreate,
     inputRef: inputRefProp,
-    labelForNotFound = defaultlabelForNotFound,
-    labelForCreate = defaultlabelForCreate,
-    searchFunction,
-    multiple = false,
+
     ...restProps
-  } = props;
+  } = usePropsHandler(
+    'Select',
+    { ...props, getItemLabel: props.getItemLabel || defaultGetItemLabel },
+    controlRef,
+  );
 
   type Item = typeof items[number];
+  type Group = typeof groups[number];
 
   const {
     getKeyProps,
@@ -87,11 +77,7 @@ export const Combobox: ComboboxComponentType = (props) => {
     handleToggleDropdown,
     inputRef,
     handleInputClick,
-    handleInputChange,
-    searchValue,
-    clearValue,
-    getHandleRemoveValue,
-  } = useSelect({
+  } = useSelect<Item, Group, false>({
     items,
     groups,
     value,
@@ -104,11 +90,9 @@ export const Combobox: ComboboxComponentType = (props) => {
     getGroupKey,
     getItemGroupKey,
     getItemDisabled,
-    multiple,
+    multiple: false,
     onBlur,
     onFocus,
-    onCreate,
-    searchFunction,
   });
 
   const dropdownForm = getSelectDropdownForm(form);
@@ -121,7 +105,7 @@ export const Combobox: ComboboxComponentType = (props) => {
         label={getItemLabel(item)}
         active={active}
         hovered={hovered}
-        multiple={multiple}
+        multiple={false}
         size={size}
         indent={dropdownForm === 'round' ? 'increased' : 'normal'}
         onClick={onClick}
@@ -131,63 +115,17 @@ export const Combobox: ComboboxComponentType = (props) => {
     );
   };
 
-  const renderValueDefaultMultiple: PropRenderValue<Item> = ({ item, handleRemove }) => {
-    return (
-      <SelectValueTag
-        label={getItemLabel(item)}
-        key={getItemKey(item)}
-        size={size}
-        handleRemove={disabled ? undefined : handleRemove}
-      />
-    );
-  };
-
-  const renderValueDefaultNotMultiple: PropRenderValue<Item> = (props) => {
-    const valueLable = getItemLabel(props.item);
+  const renderValueDefault: PropRenderValue<Item> = (props) => {
+    const label = getItemLabel(props.item);
 
     return (
-      <span className={cnSelect('ControlValue')} title={valueLable}>
-        {valueLable}
+      <span className={cnSelect('ControlValue')} title={label}>
+        {label}
       </span>
     );
   };
 
-  useSetInputWidth(controlInnerRef, helperInputFakeElement, inputRef, searchValue, value, multiple);
-
-  const renderValue =
-    renderValueProp || (multiple ? renderValueDefaultMultiple : renderValueDefaultNotMultiple);
-
-  const inputRefForRender = useForkRef([inputRef, inputRefProp]);
-
-  const renderControlValue = () => {
-    return (
-      <>
-        {isMultipleParams(props) &&
-          Array.isArray(props.value) &&
-          props.value.map((item) =>
-            renderValue({ item, handleRemove: getHandleRemoveValue(item) }),
-          )}
-        {isNotMultipleParams(props) && props.value && renderValue({ item: props.value })}
-        {(!value || (Array.isArray(value) && value.length === 0)) && !searchValue && placeholder && (
-          <span className={cnSelect('Placeholder')} title="placeholder">
-            {placeholder}
-          </span>
-        )}
-        <input
-          {...getKeyProps()}
-          type="text"
-          name={name}
-          onFocus={handleInputFocus}
-          onBlur={handleInputBlur}
-          aria-label={ariaLabel}
-          onChange={handleInputChange}
-          ref={inputRefForRender}
-          className={cnSelect('Input', { size, hide: !multiple && !!value, multiple })}
-          value={searchValue}
-        />
-      </>
-    );
-  };
+  const renderValue = renderValueProp || renderValueDefault;
 
   return (
     <SelectContainer
@@ -196,39 +134,38 @@ export const Combobox: ComboboxComponentType = (props) => {
       size={size}
       view={view}
       form={form}
-      multiple={multiple}
       {...restProps}
     >
       <div
-        className={cnSelect('Control', { hasInput: true })}
+        className={cnSelect('Control')}
         ref={controlRef}
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         id={id}
       >
-        <div
-          className={cnSelect('ControlInner')}
-          onClick={handleInputClick}
-          role="button"
-          ref={controlInnerRef}
-          aria-hidden="true"
-        >
+        <div className={cnSelect('ControlInner')}>
           <div className={cnSelect('ControlValueContainer')}>
-            {multiple && <div className={cnSelect('ControlValue')}>{renderControlValue()}</div>}
-            {!multiple && renderControlValue()}
+            <input
+              {...getKeyProps()}
+              type="button"
+              name={name}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+              aria-label={ariaLabel}
+              onClick={handleInputClick}
+              ref={useForkRef([inputRef, inputRefProp])}
+              className={cnSelect('FakeField')}
+              readOnly
+            />
+            {value && renderValue({ item: value })}
+            {!value && placeholder && (
+              <span className={cnSelect('Placeholder')} title="placeholder">
+                {placeholder}
+              </span>
+            )}
           </div>
         </div>
         <span className={cnSelect('Indicators')}>
-          {value && (
-            <button
-              type="button"
-              onClick={clearValue}
-              className={cnSelect('ClearIndicator', [cnMixFocus()])}
-            >
-              <IconClose size="xs" className={cnSelect('ClearIndicatorIcon')} />
-            </button>
-          )}
-          <span className={cnSelect('Delimiter')} />
           <button
             type="button"
             className={cnSelect('IndicatorsDropdown')}
@@ -250,12 +187,7 @@ export const Combobox: ComboboxComponentType = (props) => {
         renderItem={renderItem || renderItemDefault}
         getGroupLabel={getGroupLabel}
         visibleItems={visibleItems}
-        labelForNotFound={labelForNotFound}
-        labelForCreate={labelForCreate}
       />
-      <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
-        {searchValue}
-      </div>
     </SelectContainer>
   );
 };

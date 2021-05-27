@@ -83,7 +83,7 @@ const PRICE_FILTERS: Filters<Row> = [
   },
 ];
 
-const FILTERS = [...COUNT_FILTERS, ...PRICE_FILTERS];
+const FILTERS: Filters<Row> = [...COUNT_FILTERS, ...PRICE_FILTERS];
 
 describe('fieldFiltersPresent', () => {
   it('возвращает false если фильтр с таким полем не существует', () => {

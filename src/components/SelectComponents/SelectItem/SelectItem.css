@@ -1,7 +1,8 @@
 .SelectItem {
+  --text-color: var(--color-control-typo-default);
   position: relative;
   padding: var(--vertical-space) var(--horizontal-space);
-  color: var(--color-control-typo-default);
+  color: var(--text-color);
   background-color: var(--color-control-bg-clear);
   font-size: var(--font-size);
   cursor: pointer;
@@ -37,7 +38,11 @@
   }
 
   &_active {
-    color: var(--color-control-typo-secondary);
+    --text-color: var(--color-control-typo-secondary);
+  }
+
+  &_disable {
+    --text-color: var(--color-control-typo-disable);
   }
 
   &_multiple {
@@ -63,7 +68,7 @@
   }
 
   &:not(&_multiple)&_active::before {
-    background-color: var(--color-control-bg-primary);
+    background-color: var(--text-color);
   }
 
   &-Checkbox {
