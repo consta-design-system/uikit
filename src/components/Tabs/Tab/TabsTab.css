@@ -22,8 +22,8 @@
     content: '';
     position: absolute;
     top: 0;
-    right: calc(var(--space-2xs) * -1);
-    left: calc(var(--space-2xs) * -1);
+    right: calc(-1 * var(--space-2xs));
+    left: calc(-1 * var(--space-2xs));
     bottom: 0;
     display: block;
     border-radius: var(--control-radius);
