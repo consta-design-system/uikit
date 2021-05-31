@@ -5,6 +5,7 @@ import React from 'react';
 import { IconArrowDown } from '../../../icons/IconArrowDown/IconArrowDown';
 import { IconArrowUp } from '../../../icons/IconArrowUp/IconArrowUp';
 import { cn } from '../../../utils/bem';
+import { Button } from '../../Button/Button';
 
 export type Props = {
   level: number;
@@ -31,17 +32,23 @@ export const TableRowsCollapse: React.FC<Props> = (props) => {
   } = { '--nesting-level': level };
 
   return (
-    <div style={style} className={cnTableRowsCollapse()}>
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+    <div
+      style={style}
+      className={cnTableRowsCollapse()}
+      onClick={toggleCollapse}
+      onKeyDown={toggleCollapse}
+    >
       {!isExpandedByDefault && withCollapseButton && (
-        // eslint-disable-next-line jsx-a11y/interactive-supports-focus
-        <span
-          className={cnTableRowsCollapse('button')}
-          role="button"
-          onClick={toggleCollapse}
-          onKeyDown={toggleCollapse}
-        >
-          {isExpanded ? <IconArrowDown size="s" /> : <IconArrowUp size="s" />}
-        </span>
+        <div className={cnTableRowsCollapse('buttonContainer')}>
+          <Button
+            iconLeft={isExpanded ? IconArrowUp : IconArrowDown}
+            iconSize="s"
+            size="xs"
+            onlyIcon
+            view="clear"
+          />
+        </div>
       )}
       <div
         className={cnTableRowsCollapse('cellContainer', {
