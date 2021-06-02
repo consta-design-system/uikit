@@ -1,36 +1,31 @@
-import React, { useState } from 'react';
-import { boolean, select, text } from '@storybook/addon-knobs';
+import React from 'react';
+import { boolean, select } from '@storybook/addon-knobs';
 
+import { Item, items } from '../__mocks__/mock.data';
 import { IconAdd } from '../../../icons/IconAdd/IconAdd';
 import { IconRemove } from '../../../icons/IconRemove/IconRemove';
-import { IconSun } from '../../../icons/IconSun/IconSun';
-import { getSizeByMap } from '../../../utils/getSizeByMap';
 import { createMetadata } from '../../../utils/storybook';
 import { Badge } from '../../Badge/Badge';
 import {
-  Collapse,
   collapsePropCloseDirectionIconDefault,
   collapsePropDirectionIcon,
   collapsePropDirectionIconDefault,
   collapsePropHorizontalSpace,
+  collapsePropIconPosition,
+  collapsePropIconPositionDefault,
   collapsePropSize,
   collapsePropSizeDefault,
   collapsePropView,
   collapsePropViewDefault,
-  sizeIconMap,
-} from '../Collapse';
+} from '../../Collapse/Collapse';
+import { CollapseGroup } from '../CollapseGroup';
 
-import mdx from './Collapse.docs.mdx';
+import mdx from './CollapseGroup.docs.mdx';
 
 const defaultKnobs = () => ({
   size: select('size', collapsePropSize, collapsePropSizeDefault),
-  label: text('label', 'Заголовок'),
-  children: text(
-    'children',
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-  ),
-  iconPosition: select('iconPosition', ['left', 'right'], 'left'),
   hoverEffect: boolean('hoverEffect', false),
+  isAccordion: boolean('isAccordion', false),
   view: select('view', collapsePropView, collapsePropViewDefault),
   divider: boolean('divider', false),
   horizontalSpace: select(
@@ -38,7 +33,6 @@ const defaultKnobs = () => ({
     collapsePropHorizontalSpace,
     collapsePropHorizontalSpace[0],
   ),
-  rightSide: boolean('rightSide', false),
   directionIcon: select(
     'directionIcon',
     collapsePropDirectionIcon,
@@ -49,46 +43,48 @@ const defaultKnobs = () => ({
     collapsePropDirectionIcon,
     collapsePropCloseDirectionIconDefault,
   ),
+  iconPosition: select('iconPosition', collapsePropIconPosition, collapsePropIconPositionDefault),
+  rightSide: boolean('rightSide', false),
   withCustomIcon: boolean('withCustomIcon', false),
 });
 
 export function Playground() {
   const {
     size,
-    label,
     hoverEffect,
-    iconPosition,
-    withCustomIcon,
     view,
     divider,
     horizontalSpace,
-    rightSide,
     directionIcon,
     closeDirectionIcon,
-    children,
+    isAccordion,
+    rightSide,
+    iconPosition,
+    withCustomIcon,
   } = defaultKnobs();
-  const [isOpen, setOpen] = useState<boolean>(false);
 
-  const defaultRightSide: React.ReactNode = [
-    <Badge label="Статус" size="s" />,
-    <IconSun size={getSizeByMap(sizeIconMap, size)} />,
-  ];
+  const getItemRightSide = (item: Item) => {
+    if (rightSide) {
+      return <Badge size="s" status={item.status} label={item.status} />;
+    }
+
+    return undefined;
+  };
 
   return (
-    <Collapse
+    <CollapseGroup
+      style={{ maxWidth: 300 }}
+      items={items}
+      isAccordion={isAccordion}
       size={size}
-      label={label}
-      isOpen={isOpen}
-      onClick={() => setOpen(!isOpen)}
       hoverEffect={hoverEffect}
       view={view}
       divider={divider}
       horizontalSpace={horizontalSpace}
-      style={{ maxWidth: 300 }}
       {...(iconPosition === 'left'
         ? {
             iconPosition,
-            rightSide: rightSide ? defaultRightSide : undefined,
+            getItemRightSide,
           }
         : { iconPosition })}
       {...(withCustomIcon
@@ -100,15 +96,13 @@ export function Playground() {
             directionIcon,
             closeDirectionIcon,
           })}
-    >
-      {children}
-    </Collapse>
+    />
   );
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Отображение данных/Collapse',
-  id: 'components/Collapse',
+  title: 'Компоненты|/Отображение данных/CollapseGroup',
+  id: 'components/CollapseGroup',
   parameters: {
     docs: {
       page: mdx,

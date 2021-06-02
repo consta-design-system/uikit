@@ -37,7 +37,7 @@ export const generateBreakpointsCn = (
       return classnames(previous, generateBreakpointCn(cn, current, breakpoint));
     }
     return '';
-  });
+  }, '');
 };
 /**
  *
