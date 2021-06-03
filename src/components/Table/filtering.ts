@@ -136,11 +136,13 @@ export const filterTableData = <T extends TableRow>({
   const mutableFilteredData = [];
 
   for (const row of data) {
-    if (row.rows?.length) {
-      row.rows = filterTableData({ data: row.rows as T[], filters, selectedFilters });
+    const copiedRow = { ...row };
+
+    if (copiedRow.rows?.length) {
+      copiedRow.rows = filterTableData({ data: copiedRow.rows as T[], filters, selectedFilters });
     }
 
-    const columnNames = Object.keys(row);
+    const columnNames = Object.keys(copiedRow);
     let rowIsValid = true;
 
     for (const columnName of columnNames) {
@@ -148,7 +150,7 @@ export const filterTableData = <T extends TableRow>({
 
       if (columnFilters && columnFilters.selected!.length) {
         let cellIsValid = false;
-        const cellContent = row[columnName as keyof T];
+        const cellContent = copiedRow[columnName as keyof T];
 
         if (columnFilters.value) {
           const [filterId] = columnFilters.selected;
@@ -184,7 +186,7 @@ export const filterTableData = <T extends TableRow>({
     }
 
     if (rowIsValid) {
-      mutableFilteredData.push(row);
+      mutableFilteredData.push(copiedRow);
     }
   }
 
