@@ -1,0 +1,66 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { InstructionPictures } from './components/InstructionPictures/InstructionPictures';
+
+<Meta title="Документация|Создание новых иконок" id="new-icons" parameters={{ order: 306 }} />
+
+# Новые иконки
+
+## Правила отрисовки
+
+Иконки существуют в трех размерах: **m 24×24**, **s 16×16** и **xs 12×12**.  
+В самом маленьким размере **толщина линии** 1px, а в двух других — 2px.
+
+<InstructionPictures name="1-icons-grid" />
+
+Для создания мягких форм используются скругления углов в **1px, 2px**.
+
+<InstructionPictures name="2-icons-grid" />
+
+В самих иконках используются приближенные к правильным геометрическим фигурам формы.
+
+<InstructionPictures name="3-icons-grid" />
+
+Готовая иконка должна быть одним шейпом с заливкой.
+
+<InstructionPictures name="4-figma-union" />
+
+Координаты точек фигур иконки должны быть выровнены по пиксельной сетке.
+
+<InstructionPictures name="5-icons-grid" />
+
+## Правила работы с библиотекой
+
+Обязательно нужно отрисовывать иконку сразу в трех размерах. Иначе кому-то потом придется это делать за тебя — а это такое себе удовольствие.
+Иконки, которые ждут изменений красятся в `warning` цвет, а новые не добавленные в либу — `alert`.
+
+<InstructionPictures name="6-examples" />
+
+## Добавление в библиотеку figma
+
+**Нарисовал иконки — добавь в библиотеку.** Это правило касается как библиотеки в Figma, так и библиотки в коде.
+
+<InstructionPictures name="7-figma" />
+
+## Добавление в библиотеку в коде
+
+1. Склонировать [репозиторий](https://github.com/gazprom-neft/consta-uikit)
+
+<InstructionPictures name="8-github" />
+
+2. Экспортировать иконки в формате **svg**
+
+<InstructionPictures name="9-figma" />
+
+3. Сложить полученные **svg** в папку с названием иконки
+
+<InstructionPictures name="10-finder" />
+
+4. В консоли запусти команду `yarn pre-build` в корне проекта. Сгенерируются все нужные файлы, которые можно будет уже закомминить.
+
+5. В консоли запусти команду `git commit` в корне проекта. Ответь на все вопросы, которые тебя спросят в консоли.
+
+6. Создай pull request
+
+<InstructionPictures name="11-github" />
+
+7. В первом селекте выбери **dev** ветку, во втором свою. И заполни все поля, которые можешь
