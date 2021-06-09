@@ -9,6 +9,7 @@ import {
   tableData,
   tableDataWithRenderFn,
   tableWithBagdeData,
+  tableWithExpandableRowsData,
   tableWithMergedCellsData,
   tableWithMultiLevelHeadersData,
 } from '../__mock__/data.mock';
@@ -90,6 +91,13 @@ export const Interactive = createStory(() => <Table {...getKnobs()} />, {
 export const CustomRows = createStory(() => <Table {...getKnobs(tableDataWithRenderFn)} />, {
   name: 'рендер ячеек',
 });
+
+export const WithCollapcingRows = createStory(
+  () => <Table {...getKnobs(tableWithExpandableRowsData)} />,
+  {
+    name: 'с разворачиванием строк',
+  },
+);
 
 export const WithMultiLevelHeaders = createStory(
   () => <Table {...getKnobs(tableWithMultiLevelHeadersData)} />,

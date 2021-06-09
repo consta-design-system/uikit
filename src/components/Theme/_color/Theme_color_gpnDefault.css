@@ -51,7 +51,7 @@ $color-base-critical: #33000f;
   ); /* Цвет текста осторожности */
 
   --color-typo-warning: color(
-    $color-base-warning h(-4) h(-2) l(-2)
+    $color-base-warning h(-4) s(-2) l(-2)
   ); /* Цвет текста предупреждения */
 
   --color-typo-alert: color($color-base-alert s(+3) l(-7)); /* Цвет текста ошибки */

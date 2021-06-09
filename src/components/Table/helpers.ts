@@ -2,7 +2,7 @@ import React from 'react';
 
 import { isNotNil } from '../../utils/type-guards';
 
-import { ColumnWidth, SortingState, TableColumn, TableRow } from './Table';
+import { ColumnWidth, SortingState, TableColumn, TableRow, TableTreeRow } from './Table';
 
 export type Position = {
   colSpan?: number;
@@ -288,4 +288,44 @@ export const useLazyLoadData = (
     getSlicedRows,
     setBoundaryRef,
   };
+};
+
+export const transformRows = <T extends TableRow>(
+  rows: T[],
+  expandedRowIds: string[],
+  isTableExpanded?: boolean,
+): TableTreeRow<T>[] => {
+  const stack = [{ rows, index: 0 }];
+  const rowsArr: TableTreeRow<T>[] = [];
+
+  while (stack.length) {
+    const level = stack.length - 1;
+    const node = stack[level];
+    const item: T = node.rows[node.index];
+
+    if (item) {
+      const handledItem: TableTreeRow<T> = {
+        ...item,
+        level,
+        rows: item.rows && [...item.rows],
+      };
+
+      const needGoDeeper =
+        Boolean(handledItem.rows) && (isTableExpanded || expandedRowIds.includes(handledItem.id));
+
+      if (needGoDeeper) {
+        stack.push({ rows: handledItem.rows as T[], index: 0 });
+      } else {
+        node.index++;
+      }
+
+      rowsArr.push(handledItem);
+    } else {
+      stack.pop();
+      if (stack[stack.length - 1]) {
+        stack[stack.length - 1].index++;
+      }
+    }
+  }
+  return rowsArr;
 };

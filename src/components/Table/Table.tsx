@@ -1,6 +1,6 @@
 import './Table.css';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
 import { IconSortDown } from '../../icons/IconSortDown/IconSortDown';
@@ -14,6 +14,10 @@ import { Text } from '../Text/Text';
 import { HorizontalAlign, TableCell, VerticalAlign } from './Cell/TableCell';
 import { TableHeader } from './Header/TableHeader';
 import { TableResizer } from './Resizer/TableResizer';
+import {
+  Props as TableRowsCollapseProps,
+  TableRowsCollapse,
+} from './RowsCollapse/TableRowsCollapse';
 import { TableSelectedOptionsList } from './SelectedOptionsList/TableSelectedOptionsList';
 import {
   fieldFiltersPresent,
@@ -32,6 +36,7 @@ import {
   getNewSorting,
   Header,
   Position,
+  transformRows,
   useHeaderData,
   useLazyLoadData,
 } from './helpers';
@@ -72,7 +77,13 @@ type onRowHover = ({ id, e }: { id: string | undefined; e: React.MouseEvent }) =
 
 export type TableRow = {
   id: string;
+  rows?: TableRow[];
 };
+
+export type TableTreeRow<T extends TableRow> = {
+  level: number;
+  parentId?: string;
+} & T;
 
 export type TableFilters<T extends TableRow> = Filters<T>;
 
@@ -129,6 +140,7 @@ export type Props<T extends TableRow> = {
   onRowHover?: onRowHover;
   lazyLoad?: LazyLoad;
   onFiltersUpdated?: (filters: SelectedFilters) => void;
+  isExpandedRowsByDefault?: boolean;
 };
 
 export type ColumnMetaData = {
@@ -155,7 +167,7 @@ const sortingData = <T extends TableRow>(
   rows: T[],
   sorting: SortingState<T>,
   onSortBy?: onSortBy<T>,
-) => {
+): T[] => {
   if (onSortBy) {
     return rows;
   }
@@ -163,8 +175,15 @@ const sortingData = <T extends TableRow>(
   if (!sorting) {
     return rows;
   }
+  const sorredRows = sortByDefault(rows, sorting.by, sorting.order, sorting.sortFn);
 
-  return sortByDefault(rows, sorting.by, sorting.order, sorting.sortFn);
+  if (sorredRows.some((row) => row.rows?.length)) {
+    return sorredRows.map((row) => {
+      return row.rows ? { ...row, rows: sortingData(row.rows as T[], sorting, onSortBy) } : row;
+    });
+  }
+
+  return sorredRows;
 };
 
 const defaultEmptyRowsPlaceholder = (
@@ -193,6 +212,7 @@ export const Table = <T extends TableRow>({
   lazyLoad,
   onSortBy,
   onFiltersUpdated,
+  isExpandedRowsByDefault = false,
 }: Props<T>): React.ReactElement => {
   const {
     headers,
@@ -227,6 +247,7 @@ export const Table = <T extends TableRow>({
     removeOneSelectedFilter,
     removeAllSelectedFilters,
   } = useSelectedFilters(filters, onFiltersUpdated);
+  const [expandedRowIds, setExpandedRowIds] = React.useState<string[]>([]);
 
   /*
     Подписываемся на изменения размеров таблицы, но не используем значения из
@@ -410,7 +431,10 @@ export const Table = <T extends TableRow>({
     flattenedHeaders,
   );
 
+  const hasNestedRows = useMemo(() => rows.some((row) => Boolean(row.rows?.length)), [rows]);
+
   const sortedTableData = sortingData(rows, sorting, onSortBy);
+
   const filteredData =
     filters && isSelectedFiltersPresent(selectedFilters)
       ? filterTableData({
@@ -428,7 +452,8 @@ export const Table = <T extends TableRow>({
     !!lazyLoad,
   );
 
-  const rowsData = getSlicedRows(filteredData);
+  const flatRowsData = transformRows(filteredData, expandedRowIds, isExpandedRowsByDefault);
+  const rowsData = getSlicedRows(flatRowsData);
 
   const tableStyle: React.CSSProperties & TableCSSCustomProperty = {
     'gridTemplateColumns': getColumnsSize(resizedColumnWidths),
@@ -439,11 +464,60 @@ export const Table = <T extends TableRow>({
     (header) => header.mergeCells,
   );
 
-  const renderCell = (column: TableColumn<T>, row: T): React.ReactNode => {
-    return column.renderCell ? column.renderCell(row) : row[column.accessor!];
+  const handleExpandRow = (id: string): (() => void) => {
+    return (): void => {
+      if (expandedRowIds.includes(id)) {
+        setExpandedRowIds((prevState) => prevState.filter((rowId) => rowId !== id));
+        return;
+      }
+      setExpandedRowIds((prevState) => [...prevState, id]);
+    };
   };
 
-  const getTableCellProps = (row: T, rowIdx: number, column: TableColumn<T>, columnIdx: number) => {
+  const getCollapseRollProps = (
+    row: TableTreeRow<T>,
+    columnIdx: number,
+  ): TableRowsCollapseProps => {
+    const withCollapseButton = Boolean(row.rows?.length) && columnIdx === 0;
+
+    const baseProps = {
+      level: row.level,
+      isExpandedByDefault: isExpandedRowsByDefault,
+    };
+
+    if (!withCollapseButton || isExpandedRowsByDefault) {
+      return baseProps;
+    }
+
+    const isExpanded = expandedRowIds.includes(row.id);
+    const toggleCollapse = handleExpandRow(row.id);
+
+    return {
+      ...baseProps,
+      withCollapseButton,
+      isExpanded,
+      toggleCollapse,
+    };
+  };
+
+  const renderCell = (column: TableColumn<T>, row: T, columnIdx: number): React.ReactNode => {
+    const cellContent = column.renderCell ? column.renderCell(row) : row[column.accessor!];
+
+    if (!hasNestedRows || columnIdx !== 0) {
+      return cellContent;
+    }
+
+    const collapseRollProps = getCollapseRollProps(row as TableTreeRow<T>, columnIdx);
+
+    return <TableRowsCollapse {...collapseRollProps}>{cellContent}</TableRowsCollapse>;
+  };
+
+  const getTableCellProps = (
+    row: TableTreeRow<T>,
+    rowIdx: number,
+    column: TableColumn<T>,
+    columnIdx: number,
+  ) => {
     let rowSpan = 1;
     if (
       (rowsData[rowIdx - 1] && rowsData[rowIdx - 1][column.accessor!] !== row[column.accessor!]) ||
@@ -458,7 +532,10 @@ export const Table = <T extends TableRow>({
         }
       }
 
-      const style: { 'left': number | undefined; '--row-span': string | null } = {
+      const style: {
+        'left': number | undefined;
+        '--row-span': string | null;
+      } = {
         'left': getStickyLeftOffset(columnIdx, column.position!.topHeaderGridIndex),
         '--row-span': column.mergeCells ? `span ${rowSpan}` : null,
       };
@@ -571,7 +648,12 @@ export const Table = <T extends TableRow>({
               onMouseLeave={(e) => onRowHover && onRowHover({ id: undefined, e })}
             >
               {columnsWithMetaData(lowHeaders).map((column: TableColumn<T>, columnIdx: number) => {
-                const { show, style, rowSpan } = getTableCellProps(row, rowIdx, column, columnIdx);
+                const { show, style, rowSpan } = getTableCellProps(
+                  row as TableTreeRow<T>,
+                  rowIdx,
+                  column,
+                  columnIdx,
+                );
 
                 if (show) {
                   return (
@@ -601,7 +683,7 @@ export const Table = <T extends TableRow>({
                       isBorderTop={rowIdx > 0 && borderBetweenRows}
                       isBorderLeft={columnIdx > 0 && borderBetweenColumns}
                     >
-                      {renderCell(column, row)}
+                      {renderCell(column, row, columnIdx)}
                     </TableCell>
                   );
                 }
