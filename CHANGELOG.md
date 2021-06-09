@@ -1,5 +1,18 @@
 # Changelog
 
+## v1.12.3 (09/06/2021)
+
+- [docs(useThemeVars): edit docs (#1251)](https://github.com/gazprom-neft/consta-uikit/commit/7981b101e88ccd96533f866143d4fbfbeaabfbc8) - [@arhayka](https://github.com/arhayka)
+- [docs(useForkRef): edit docs (#1250)](https://github.com/gazprom-neft/consta-uikit/commit/172d5a71b93ddc30ac88f0357f1d589c81fcb8e1) - [@arhayka](https://github.com/arhayka)
+- [docs(UseDebounce): edit docs (#1249)](https://github.com/gazprom-neft/consta-uikit/commit/6d66b465ce51e2effcee2ea238f510f5f693f0b2) - [@arhayka](https://github.com/arhayka)
+- [docs(useClickOutside): edit docs (#1248)](https://github.com/gazprom-neft/consta-uikit/commit/356d70f3d67b6b59ac1100af741362767189168e) - [@arhayka](https://github.com/arhayka)
+- [docs(useChoiceGroup): edit docs (#1247)](https://github.com/gazprom-neft/consta-uikit/commit/716c416bf357d983173f65b8e82df613e5f2e36f) - [@arhayka](https://github.com/arhayka)
+- [feat(Table): add the ability to collapse table rows (#1199)](https://github.com/gazprom-neft/consta-uikit/commit/5639d8239eb1c67b47e98300b1af6a9b4403603c) - [@DmitriyKaurov](https://github.com/DmitriyKaurov)
+- [fix(Theme): fix color calculation parameter (#1254)](https://github.com/gazprom-neft/consta-uikit/commit/0fa0abaabd40e7a5b7e0f428ed6a343cee36a5bc) - [@kolebayev](https://github.com/kolebayev)
+- [docs(icons): add docs for new icons (#1252)](https://github.com/gazprom-neft/consta-uikit/commit/8a7f4a7f84439e5fd018d9f95ce7d3ad185b58a9) - [@kolebayev](https://github.com/kolebayev)
+
+---
+
 ## v1.12.2 (02/06/2021)
 
 - [fix(Table): fixed tests](https://github.com/gazprom-neft/consta-uikit/commit/8e5a4608810e13c340d26caf2516cce3a5f60fd9) - [@gizeasy](https://github.com/gizeasy)
@@ -329,13 +342,3 @@
 - [test(Timer): added tests (#505)](https://github.com/gazprom-neft/consta-uikit/commit/22d1fae0eec0a19f6f1b4b939eaaa7ff325bc0e1) - @gizeasy
 - [test(Text): added tests (#507)](https://github.com/gazprom-neft/consta-uikit/commit/bbe29b4b469e687ac42a68bbda452e65c33164cb) - @gizeasy
 - [test(Switch): added tests (#508)](https://github.com/gazprom-neft/consta-uikit/commit/938ad3e6854f84d9adea5b02327415b89b86bf84) - @gizeasy
-
----
-
-## v1.10.2 (08/10/2020)
-
-- [test(PortalWithTheme): added tests (#489)](https://github.com/gazprom-neft/consta-uikit/commit/dcdba60b6b651addeb5d27cffe78d802dc1c6e89) - @gizeasy
-- [test(ProgressSpin): added tests (#492)](https://github.com/gazprom-neft/consta-uikit/commit/5356eebd011705869dbcf7e4fa42780b7e2bc4cf) - @gizeasy
-- [test(Radio): added tests (#493)](https://github.com/gazprom-neft/consta-uikit/commit/d0dc1893d13d663c249d4ae2dd07a43abd61fd47) - @gizeasy
-- [fix(Table): fixed zebraStriped (#494)](https://github.com/gazprom-neft/consta-uikit/commit/ab9b90262f9b09055c2470416942625adbd9eada) - @gizeasy
-- [feat(selects): added cursor: pounter for list items (#479)](https://github.com/gazprom-neft/consta-uikit/commit/a4b20f8426d6257c83983a9b04a195c7ed390865) - @gizeasy
