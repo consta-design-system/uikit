@@ -2,9 +2,12 @@
 
 # useChoiceGroup
 
-Хук для использования в компонентах где нужен выбор из несколких значений,
-такие как [ChoiceGroup](/?path=/docs/components-choicegroup--playgrounds),
-[CheckboxGroup](/?path=/docs/components-checkboxgroup--playground)
+Этот хук может понадобиться в компонентах, где пользователи могут выбрать несколько значений из списка.
+Например, [ChoiceGroup](/?path=/docs/components-choicegroup--playgrounds)
+или [CheckboxGroup](/?path=/docs/components-checkboxgroup--playground).
+
+Хук `useChoiceGroup` занимается всей логикой выбора: вы можете использовать его,
+чтобы не обрабатывать эту логику самостоятельно.
 
 ```tsx
 
@@ -29,17 +32,18 @@ type UseChoiceGroupProps<ITEM, EVENT> = {
 );
 
 
-
 useChoiceGroup<ITEM, EVENT>(props: UseChoiceGroupProps<ITEM, EVENT>): UseChoiceGroupValues<ITEM, EVENT>
 ```
 
-| Свойство   | Тип и значения                                                                                    | По умолчанию | Описание                                             |
-| ---------- | ------------------------------------------------------------------------------------------------- | ------------ | ---------------------------------------------------- |
-| `getKey`   | `(item: ITEM) => string, number;`                                                                 | -            | функция получения уникального ключа элемента массива |
-| `multiple` | `boolean`                                                                                         | -            | признак множественного `value`                       |
-| `value`    | `ITEM, ITEM[], null;`                                                                             | -            | текущее значение                                     |
-| `callBack` | `(props: { e: EVENT; value: ITEM[], null }) => void, (props: { e: EVENT; value: ITEM }) => void;` | -            | callBack который должен будет отработат              |
+## Свойства
+
+| Свойство   | Тип и значения                                                                                    | По умолчанию | Описание                                                 |
+| ---------- | ------------------------------------------------------------------------------------------------- | ------------ | -------------------------------------------------------- |
+| `getKey`   | `(item: ITEM) => string, number;`                                                                 | -            | Функция для получения уникального ключа элемента массива |
+| `multiple` | `boolean`                                                                                         | -            | Показывает, что `value` может быть несколько             |
+| `value`    | `ITEM, ITEM[], null;`                                                                             | -            | Текущее значение                                         |
+| `callBack` | `(props: { e: EVENT; value: ITEM[], null }) => void, (props: { e: EVENT; value: ITEM }) => void;` | -            | Обработчик, который нужно вызывать                       |
 
 ## Пример
 
-Пример можете посмотреть в компоненете [CheckboxGroup](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/CheckboxGroup/CheckboxGroup.tsx)
+Пример использования хука `useChoiceGroup` можно посмотреть в компоненете [CheckboxGroup](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/CheckboxGroup/CheckboxGroup.tsx)
