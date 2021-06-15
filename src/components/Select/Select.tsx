@@ -191,3 +191,18 @@ export const Select: SelectComponentType = (props) => {
     </SelectContainer>
   );
 };
+
+// eslint-disable-next-line prettier/prettier
+export type {
+  SelectProps,
+  SelectComponentType
+} from './helpers';
+
+export {
+  defaultGetGroupKey,
+  defaultGetGroupLabel,
+  defaultgetItemDisabled,
+  defaultGetItemGroupKey,
+  defaultGetItemKey,
+  defaultGetItemLabel
+} from './helpers';

@@ -1,50 +1,40 @@
 import * as React from 'react';
 import { act, fireEvent, render, RenderResult, screen } from '@testing-library/react';
 
+import { groups, items } from '../__mocks__/data.mock';
 import ResizeObserver from '../../../../__mocks__/ResizeObserver';
+import { cn } from '../../../utils/bem';
 import { cnSelect } from '../../SelectComponents/cnSelect';
+import { cnSelectGroupLabel } from '../../SelectComponents/SelectGroupLabel/SelectGroupLabel';
 import { cnSelectItem } from '../../SelectComponents/SelectItem/SelectItem';
-import { Select, SimpleSelectProps } from '../Select';
-
-type SelectOption = {
-  value: string;
-  label: string;
-};
+import { defaultGetItemLabel, Select, SelectProps } from '../Select';
 
 const animationDuration = 200;
 const testId = 'Select';
+const cnRenderValue = cn('RenderValue');
+const cnRenderItem = cn('RenderItem');
 
 jest.mock('resize-observer-polyfill', () => {
   return ResizeObserver;
 });
 
-const items = [
-  { label: 'Neptunium', value: 'Neptunium' },
-  { label: 'Plutonium', value: 'Plutonium' },
-  { label: 'Americium', value: 'Americium' },
-  { label: 'Curium', value: 'Curium' },
-  { label: 'Berkelium', value: 'Berkelium' },
-];
-
-const defaultProps = {
-  id: 'sample',
-  options: items,
+const defaultProps: SelectProps = {
+  items,
+  groups,
   value: null,
   onChange: jest.fn(),
-  getItemLabel: (option: SelectOption): string => option.label,
-  placeholder: 'placeholder',
   ariaLabel: 'test-select',
 };
 
-const renderComponent = (props: SimpleSelectProps<SelectOption> = defaultProps): RenderResult => {
-  const { options, onChange, value, getItemLabel, ...restProps } = props;
+const renderComponent = (props: SelectProps = defaultProps): RenderResult => {
+  const { items, onChange, value, getItemLabel, ...restProps } = props;
   return render(
     <>
       <div data-testid="outside" />
       <Select
         value={value}
         onChange={onChange}
-        options={options}
+        items={items}
         getItemLabel={getItemLabel}
         data-testid={testId}
         {...restProps}
@@ -53,17 +43,23 @@ const renderComponent = (props: SimpleSelectProps<SelectOption> = defaultProps):
   );
 };
 
-function getOptionsList() {
-  return screen.getByRole('listbox');
-}
 function getRender() {
   return screen.getByTestId(testId);
 }
-function getIndicatorsDropdown() {
-  return getRender().querySelector(`.${cnSelect('IndicatorsDropdown')}`) as HTMLElement;
-}
 function getOutside() {
   return screen.getByTestId('outside');
+}
+function getItemsList() {
+  return screen.getByRole('listbox');
+}
+function getControlValue() {
+  return getRender().querySelector(`.${cnSelect('ControlValue')}`) as HTMLDivElement;
+}
+function getRenderValue() {
+  return getRender().querySelector(`.${cnRenderValue()}`) as HTMLDivElement;
+}
+function getIndicatorsDropdown() {
+  return getRender().querySelector(`.${cnSelect('IndicatorsDropdown')}`) as HTMLElement;
 }
 function indicatorsDropdownClick() {
   fireEvent.click(getIndicatorsDropdown());
@@ -71,11 +67,17 @@ function indicatorsDropdownClick() {
 function getInput() {
   return getRender().querySelector(`.${cnSelect('FakeField')}`) as HTMLElement;
 }
-function getOptions() {
-  return getOptionsList().querySelectorAll(`.${cnSelectItem()}`);
+function getItems() {
+  return getItemsList().querySelectorAll(`.${cnSelectItem()}`);
 }
-function getOption(index = 1) {
-  return getOptions()[index];
+function getRenderItems() {
+  return getItemsList().querySelectorAll(`.${cnRenderItem()}`);
+}
+function getGroups() {
+  return getItemsList().querySelectorAll(`.${cnSelectGroupLabel()}`);
+}
+function getItem(index = 1) {
+  return getItems()[index];
 }
 function inputClick() {
   fireEvent.click(getInput());
@@ -94,12 +96,30 @@ describe('Компонент Select', () => {
     expect(renderComponent).not.toThrow();
   });
 
+  it(`Дополнительный className присваевается`, () => {
+    const className = 'className';
+
+    renderComponent({ ...defaultProps, className });
+    expect(getRender()).toHaveClass(className);
+  });
+
   it('рендерится с установленным значением', () => {
-    const select = renderComponent({
-      ...defaultProps,
-      value: { label: 'Тестовая опция', value: 'test' },
+    jest.useFakeTimers();
+    const index = 0;
+    const value = items[index];
+    act(() => {
+      renderComponent({
+        ...defaultProps,
+        value,
+      });
     });
-    expect(select.getByText('Тестовая опция')).toBeInTheDocument();
+
+    expect(getControlValue().textContent).toEqual(defaultGetItemLabel(value));
+
+    inputClick();
+    animateDelay();
+
+    expect(getItem(index)).toHaveClass(cnSelectItem({ active: true }));
   });
 
   it('открывается и закрывается по клику', () => {
@@ -112,7 +132,7 @@ describe('Компонент Select', () => {
 
     animateDelay();
 
-    const optionsList = getOptionsList();
+    const optionsList = getItemsList();
 
     expect(optionsList).toBeInTheDocument();
     inputClick();
@@ -130,7 +150,7 @@ describe('Компонент Select', () => {
     inputClick();
     animateDelay();
 
-    const optionsList = getOptionsList();
+    const optionsList = getItemsList();
 
     expect(optionsList).toBeInTheDocument();
     outsideClick();
@@ -147,7 +167,7 @@ describe('Компонент Select', () => {
     indicatorsDropdownClick();
     animateDelay();
 
-    const optionsList = getOptionsList();
+    const optionsList = getItemsList();
 
     expect(optionsList).toBeInTheDocument();
     indicatorsDropdownClick();
@@ -163,7 +183,18 @@ describe('Компонент Select', () => {
 
     inputClick();
     animateDelay();
-    expect(getOptions().length).toEqual(items.length);
+    expect(getItems().length).toEqual(items.length);
+  });
+
+  it('отрисовываются группы', () => {
+    jest.useFakeTimers();
+    act(() => {
+      renderComponent();
+    });
+
+    inputClick();
+    animateDelay();
+    expect(getGroups().length).toEqual(groups.length);
   });
 
   it('проверка onChange', () => {
@@ -177,11 +208,13 @@ describe('Компонент Select', () => {
     inputClick();
     animateDelay();
 
-    fireEvent.click(getOption(elementIndex));
+    fireEvent.click(getItem(elementIndex));
 
     expect(handleChange).toHaveBeenCalled();
     expect(handleChange).toHaveBeenCalledTimes(1);
-    expect(handleChange).toHaveBeenCalledWith(expect.objectContaining(items[elementIndex]));
+    expect(handleChange).toHaveBeenCalledWith(
+      expect.objectContaining({ value: items[elementIndex] }),
+    );
   });
 
   it('вызывается onFocus', () => {
@@ -206,5 +239,41 @@ describe('Компонент Select', () => {
     getInput().blur();
 
     expect(handlerBlur).toBeCalledTimes(1);
+  });
+
+  it('renderValue отрабатывает верно', () => {
+    const value = items[0];
+    renderComponent({
+      ...defaultProps,
+      value,
+      renderValue: ({ item }) => <div className={cnRenderValue()}>{defaultGetItemLabel(item)}</div>,
+    });
+
+    expect(getRenderValue().textContent).toEqual(defaultGetItemLabel(value));
+  });
+
+  it('renderItem отрабатывает верно', () => {
+    jest.useFakeTimers();
+    act(() => {
+      renderComponent({
+        ...defaultProps,
+        renderItem: ({ item }) => (
+          <div
+            className={cnRenderItem()}
+            role="option"
+            tabIndex={0}
+            aria-selected={false}
+            aria-hidden="true"
+          >
+            {defaultGetItemLabel(item)}
+          </div>
+        ),
+      });
+    });
+
+    inputClick();
+    animateDelay();
+
+    expect(getRenderItems().length).toEqual(items.length);
   });
 });

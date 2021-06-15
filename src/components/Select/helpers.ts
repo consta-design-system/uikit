@@ -80,9 +80,9 @@ export type SelectProps<ITEM = DefaultItem, GROUP = DefaultGroup> = PropsWithHTM
             getGroupKey: PropGetGroupKey<GROUP>;
           }))
     | {
-        groups: never;
-        getGroupLabel: never;
-        getGroupKey: never;
+        groups?: never;
+        getGroupLabel?: never;
+        getGroupKey?: never;
       }
   );
 

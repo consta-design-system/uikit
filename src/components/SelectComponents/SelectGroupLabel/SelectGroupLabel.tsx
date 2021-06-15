@@ -15,7 +15,7 @@ type SelectGroupLabelProps = PropsWithHTMLAttributes<
   HTMLDivElement
 >;
 
-const cnSelectGroupLabel = cn('SelectGroupLabel');
+export const cnSelectGroupLabel = cn('SelectGroupLabel');
 
 export const SelectGroupLabel: React.FC<SelectGroupLabelProps> = (props) => {
   const { className, label, size, indent, ...otherProps } = props;
