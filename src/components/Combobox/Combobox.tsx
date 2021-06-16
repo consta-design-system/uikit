@@ -126,7 +126,7 @@ export const Combobox: ComboboxComponentType = (props) => {
         indent={dropdownForm === 'round' ? 'increased' : 'normal'}
         onClick={onClick}
         onMouseEnter={onMouseEnter}
-        disable={getItemDisabled(item)}
+        disabled={getItemDisabled(item)}
       />
     );
   };
