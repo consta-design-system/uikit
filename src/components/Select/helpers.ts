@@ -27,6 +27,7 @@ type PropGetItemGroupKey<ITEM> = (item: ITEM) => string | number | undefined;
 type PropgetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
 type PropGetGroupKey<GROUP> = (group: GROUP) => string | number;
 type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
+type PropOnChange<ITEM> = (props: { value: ITEM | null; e: React.SyntheticEvent }) => void;
 export type PropRenderItem<ITEM> = (props: RenderItemProps<ITEM>) => React.ReactElement | null;
 export type PropRenderValue<ITEM> = (props: RenderValueProps<ITEM>) => React.ReactElement | null;
 
@@ -37,7 +38,6 @@ export type SelectProps<ITEM = DefaultItem, GROUP = DefaultGroup> = PropsWithHTM
     size?: PropSize;
     view?: PropView;
     focused?: boolean;
-    multiple?: boolean;
     placeholder?: string;
     ariaLabel?: string;
     dropdownClassName?: string;
@@ -45,7 +45,7 @@ export type SelectProps<ITEM = DefaultItem, GROUP = DefaultGroup> = PropsWithHTM
     name?: string;
     items: ITEM[];
     value?: PropValue<ITEM>;
-    onChange: (props: { value: ITEM | null; e: React.SyntheticEvent }) => void;
+    onChange: PropOnChange<ITEM>;
     renderItem?: PropRenderItem<ITEM>;
     renderValue?: PropRenderValue<ITEM>;
     onFocus?: React.FocusEventHandler<HTMLInputElement>;

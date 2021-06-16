@@ -44,6 +44,6 @@ export type RenderItemProps<ITEM> = {
   item: ITEM;
   active: boolean;
   hovered: boolean;
-  onClick: (e: React.SyntheticEvent) => void;
-  onMouseEnter: (e: React.SyntheticEvent) => void;
+  onClick: React.ReactEventHandler;
+  onMouseEnter: React.ReactEventHandler;
 };

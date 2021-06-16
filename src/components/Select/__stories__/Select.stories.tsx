@@ -20,9 +20,9 @@ import {
 } from '../../SelectComponents/types';
 import { Select } from '../Select';
 
-const cnSelectStories = cn('SelectStories');
+import mdx from './Select.docs.mdx';
 
-// import mdx from './Select.docs.mdx';
+const cnSelectStories = cn('SelectStories');
 
 const getKnobs = () => ({
   disabled: boolean('disabled', false),
@@ -109,13 +109,13 @@ export const WithRender = createStory(
 export default createMetadata({
   title: 'Компоненты|/Базовые/Select',
   id: 'components/Select',
-  // parameters: {
-  //   docs: {
-  //     page: mdx,
-  //   },
-  //   design: {
-  //     type: 'figma',
-  //     url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=9701%3A190445',
-  //   },
-  // },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=9701%3A190445',
+    },
+  },
 });

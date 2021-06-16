@@ -1,9 +1,9 @@
-import { Preview } from '@storybook/addon-docs/dist/blocks';
-
-import { SelectExampleText } from './examples/SelectExampleText/SelectExampleText';
+import { SelectExampleItems } from './examples/SelectExampleItems/SelectExampleItems';
+import { SelectExamplePlaceholder } from './examples/SelectExamplePlaceholder/SelectExamplePlaceholder';
 import { SelectExampleSize } from './examples/SelectExampleSize/SelectExampleSize';
-import { SelectExampleView } from './examples/SelectExampleView/SelectExampleView';
 import { SelectExampleForm } from './examples/SelectExampleForm/SelectExampleForm';
+import { SelectExampleView } from './examples/SelectExampleView/SelectExampleView';
+import { SelectExampleRenderItem } from './examples/SelectExampleRenderItem/SelectExampleRenderItem';
 
 # Select
 
@@ -22,12 +22,55 @@ import { SelectExampleForm } from './examples/SelectExampleForm/SelectExampleFor
 
 ## Варианты
 
-Варианты значений для выпадающего списка передаются в объекте `options`. Запишите их
-с заглавной буквы.
+Варианты для выпадающего списка передаются в своство `items`.
+Название элементов должно быть с заглавной буквы.
 
-Для работы компоненту нужно передать тип опции: `<Select<T> {..props}/>`.
-Отобразить текст для конкретного варианта можно с помощью функции `getOptionLabel`.
-Для корректного отображения одинаковых вариантов лучше указать уникальный ключ с помощью `getOptionKey`.
+По умолчанию тип своства `items` равен [DefaultItem](#defaultitem)
+
+## Значение
+
+Значение задается в свойстве `value`
+
+По умолчанию тип своства `value` равен [DefaultItem](#defaultitem)
+
+## CallBack onChange
+
+Чтобы взаимодействовать с выбором занчения используйте свойство `onChange`,
+он сработает при выборе элемента или при очистке поля ввода,
+и вернет его значение которое задавали в `items`.
+Так же вернет событие выбора, ввод заначения возможен как по клику мыши так
+и по клавеше `Enter` на клавиатуре. Ознакомиться с типом можно [тут](#proponchange)
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function SelectExampleItems() {
+  const [value, setValue] = useState<Item | null>();
+  return <Select items={items} value={value} onChange={({ value }) => setValue(value)} />;
+}
+```
+
+<SelectExampleItems />
+
+## Подсказка
 
 Подсказка, которая видна, когда ни один вариант не выбран, задается в свойстве `placeholder`.
 Сформулируйте подсказку так, чтобы стало понятно, что по клику на поле раскроется список вариантов,
@@ -35,19 +78,129 @@ import { SelectExampleForm } from './examples/SelectExampleForm/SelectExampleFor
 
 Если не знаете, что написать в подсказке, используйте универсальное **Выберите**.
 
-<SelectExampleText />
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function SelectExamplePlaceholder() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <div className={cnDocsDecorator('Section')}>
+      <Select
+        placeholder="Выберите значение"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+    </div>
+  );
+}
+```
+
+<SelectExamplePlaceholder />
 
 ## Размер
 
-За размер компонента отвечает свойство `size`. Варианты: `s` , `m` , `l` , по умолчанию `m`.
+За размер компонента отвечает свойство `size`. Варианты: `xs`, `s` , `m` , `l` , по умолчанию `m`.
 
 Компонент занимает всю ширину родительского блока.
 
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function SelectExampleSize() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <>
+      <Select
+        placeholder="Выберите значение"
+        size="xs"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+    </>
+  );
+}
+```
+
 <SelectExampleSize />
 
-## Форма
+## Формма
 
-За форму селекта отвечает свойство `form`. Варианты: `default`, `brick`, `round`, по умолчанию `default`.
+За форму селекта отвечает свойство `form`.Варианты:
+`default`, `brick`, `round`, `clearRound`, `roundClear`, `clearDefault`, `defaultClear`, `defaultBrick`, `brickDefault`, `brickClear`, `clearBrick`, `clearClear`
+по умолчанию `default`.
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function SelectExampleForm() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      placeholder="Выберите значение"
+      form="round"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
+  );
+}
+```
 
 <SelectExampleForm />
 
@@ -55,11 +208,133 @@ import { SelectExampleForm } from './examples/SelectExampleForm/SelectExampleFor
 
 За вид компонента отвечает свойство `view`. Варианты: `default , clear`, по умолчанию `default`.
 
-Если хотите сделать компонент неактивным, используйте `disabled`.
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function SelectExampleView() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      placeholder="Выберите значение"
+      view="clear"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
+  );
+}
+```
 
 <SelectExampleView />
 
+## Свое представление элемента списка
+
+Для того чтобы сделать свое представление элементов списка воспользуйтесь свойством `renderItem`.
+Свойство принимает [функцию рендера](https://reactjs.org/docs/render-props.html).
+Ознакомиться с типом можно [тут](#proprenderitem)
+
+**Важно**: корневой DOM элемент, должен иметь свойство `role="option"`
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+const cnSelectExampleRenderItem = cn('SelectExampleRenderItem');
+
+export function SelectExampleRenderItem() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      placeholder="Выберите значение"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      renderItem={({ item, active, hovered, onClick, onMouseEnter }) => (
+        <div
+          className={cnSelectExampleRenderItem('Item', { active, hovered })}
+          role="option"
+          aria-selected={active}
+          onMouseEnter={onMouseEnter}
+          onClick={onClick}
+        >
+          {item.label}
+        </div>
+      )}
+    />
+  );
+}
+```
+
+<SelectExampleRenderItem />
+
 ## Cвойства
+
+#### DefaultItem
+
+```tsx
+type DefaultItem = {
+  label: string;
+  id: string | number;
+  groupId?: string | number;
+  disabled?: boolean;
+};
+```
+
+#### PropOnChange
+
+```tsx
+type PropOnChange<ITEM = DefaultItem> = (props: {
+  value: ITEM | null;
+  e: React.SyntheticEvent;
+}) => void;
+```
+
+#### PropRenderItem
+
+```tsx
+type PropRenderItem<ITEM = DefaultItem> = (props: {
+  item: ITEM;
+  active: boolean;
+  hovered: boolean;
+  onClick: React.ReactEventHandler;
+  onMouseEnter: React.ReactEventHandler;
+}) => React.ReactElement | null;
+```
 
 | Свойство                      | Тип или варианты значения                              | По умолчанию   | Описание                                                                                         |
 | ----------------------------- | ------------------------------------------------------ | -------------- | ------------------------------------------------------------------------------------------------ |
