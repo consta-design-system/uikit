@@ -3,6 +3,7 @@ import { InformerExampleType } from './examples/InformerExampleType/InformerExam
 import { InformerExampleIcon } from './examples/InformerExampleIcon/InformerExampleIcon';
 import { InformerExampleSuccess } from './examples/InformerExampleText/InformerExampleText';
 import { InformerExampleAlert } from './examples/InformerExampleText/InformerExampleText';
+import { InformerExampleSize } from './examples/InformerExampleSize/InformerExampleSize';
 
 # Informer
 
@@ -11,7 +12,12 @@ import { InformerExampleAlert } from './examples/InformerExampleText/InformerExa
 
 - [Тип сообщения](#тип-сообщения)
 - [Текст сообщения](#текст-сообщения)
+  - [Как писать сообщения](#как-писать-сообщения)
+  - [Когда нужен заголовок](#когда-нужен-заголовок)
 - [Внешний вид](#внешний-вид)
+  - [Тип информера](#тип-информера)
+  - [Иконка](#иконка)
+  - [Размер](#размер)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
 
@@ -96,19 +102,25 @@ import { InformerExampleAlert } from './examples/InformerExampleText/InformerExa
 <Informer label="Сообщение отправлено" view="filled" status="success" icon={IconThumbUp} />
 ```
 
+### Размер
+
+За размер сообщения отвечает свойство `size`. Варианты: `m`, `s`, по умолчанию — `m`.
+
+<InformerExampleSize />
+
 ## Свойства
 
-| Свойство                     | Тип или варианты значения                 | По умолчанию | Описание                           |
-| ---------------------------- | ----------------------------------------- | ------------ | ---------------------------------- |
-| [`status?`](#тип-сообщения)  | `'system', 'alert', 'warning', 'success'` | `'success'`  | Тип сообщения                      |
-| [`title?`](#текст-сообщения) | `string`                                  | —            | Заголовок сообщения                |
-| [`lable?`](#текст-сообщения) | `string`                                  | —            | Текст сообщения                    |
-| `children?`                  | `React.ReactNode`                         | —            | Текст сообщения                    |
-| [`view?`](#внешний-вид)      | `'filled', 'bordered'`                    | `'filled'`   | Тип информера (с заливкой или без) |
-| [`icon?`](#внешний-вид)      | `React.FC<IconProps>`                     | —            | Иконка                             |
-| `size?`                      | `'m', 's'`                                | m            | Размер                             |
-| `ref?`                       | `React.Ref<HTMLDivElement>`               | -            | Ссылка на DOM-элемент компонента   |
-| `className`                  | `string`                                  | —            | Дополнительный CSS-класс           |
+| Свойство                     | Тип или варианты значения                       | По умолчанию | Описание                           |
+| ---------------------------- | ----------------------------------------------- | ------------ | ---------------------------------- |
+| [`status?`](#тип-сообщения)  | `'system'`, `'alert'`, `'warning'`, '`success'` | `'success'`  | Тип сообщения                      |
+| [`title?`](#текст-сообщения) | `string`                                        | —            | Заголовок сообщения                |
+| [`lable?`](#текст-сообщения) | `string`                                        | —            | Текст сообщения                    |
+| `children?`                  | `React.ReactNode`                               | —            | Текст сообщения                    |
+| [`view?`](#внешний-вид)      | `'filled'`, `'bordered'`                        | `'filled'`   | Тип информера (с заливкой или без) |
+| [`icon?`](#внешний-вид)      | `React.FC<IconProps>`                           | —            | Иконка                             |
+| `size?`                      | `'m'`, `'s'`                                    | `'m'`        | Размер                             |
+| `ref?`                       | `React.Ref<HTMLDivElement>`                     | —            | Ссылка на DOM-элемент компонента   |
+| `className`                  | `string`                                        | —            | Дополнительный CSS-класс           |
 
 ## Пример
 
