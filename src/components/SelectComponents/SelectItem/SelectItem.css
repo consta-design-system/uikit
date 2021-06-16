@@ -41,7 +41,7 @@
     --text-color: var(--color-control-typo-secondary);
   }
 
-  &_disable {
+  &_disabled {
     --text-color: var(--color-control-typo-disable);
   }
 

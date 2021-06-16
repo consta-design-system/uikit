@@ -110,7 +110,7 @@ export const Select: SelectComponentType = (props) => {
         indent={dropdownForm === 'round' ? 'increased' : 'normal'}
         onClick={onClick}
         onMouseEnter={onMouseEnter}
-        disable={getItemDisabled(item)}
+        disabled={getItemDisabled(item)}
       />
     );
   };
