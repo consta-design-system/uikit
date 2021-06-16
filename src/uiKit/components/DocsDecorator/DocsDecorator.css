@@ -18,6 +18,12 @@
     margin-left: auto;
     color: var(--color-typo-primary);
     font-family: var(--font-primary);
+
+    &_indent {
+      &_bottom {
+        margin-bottom: var(--space-2xl);
+      }
+    }
   }
 
   h1 {

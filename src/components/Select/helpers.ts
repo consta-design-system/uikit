@@ -37,7 +37,6 @@ export type SelectProps<ITEM = DefaultItem, GROUP = DefaultGroup> = PropsWithHTM
     form?: PropForm;
     size?: PropSize;
     view?: PropView;
-    focused?: boolean;
     placeholder?: string;
     ariaLabel?: string;
     dropdownClassName?: string;
