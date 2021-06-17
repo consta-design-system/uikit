@@ -4,16 +4,16 @@ import { content } from '../../../__mocks__/mock.data';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Collapse } from '../../../Collapse';
 
-export const CollapseExampleIconDivider = () => {
+export const CollapseExampleHover = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
 
   return (
     <div className={cnDocsDecorator('Section')}>
       <Collapse
-        label="Здесь есть разделитель"
+        label="Здесь есть подсветка"
         isOpen={isOpen}
         onClick={() => setOpen(!isOpen)}
-        divider
+        hoverEffect
       >
         {content}
       </Collapse>

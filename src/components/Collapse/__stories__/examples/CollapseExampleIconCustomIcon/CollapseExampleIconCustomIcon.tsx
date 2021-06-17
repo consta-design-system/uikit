@@ -12,7 +12,7 @@ export const CollapseExampleIconCustomIconDirection = () => {
   return (
     <div className={cnDocsDecorator('Section')}>
       <Collapse
-        label="Direction"
+        label="Здесь у иконки меняется направление"
         isOpen={isOpen}
         onClick={() => setOpen(!isOpen)}
         icon={IconAdd}
@@ -31,7 +31,7 @@ export const CollapseExampleIconCustomIcon = () => {
   return (
     <div className={cnDocsDecorator('Section')}>
       <Collapse
-        label="CustomIcon"
+        label="Здесь меняется иконка"
         isOpen={isOpen}
         onClick={() => setOpen(!isOpen)}
         icon={IconAdd}
