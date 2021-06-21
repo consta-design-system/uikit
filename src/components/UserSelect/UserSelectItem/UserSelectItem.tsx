@@ -12,14 +12,14 @@ import { Avatar } from '../../Avatar/Avatar';
 type UserSelectItemProps = PropsWithHTMLAttributes<
   {
     label: string;
-    subLabel?: string;
-    avatarUrl?: string;
     active: boolean;
     hovered: boolean;
-    disable?: boolean;
-    multiple?: boolean;
     size: 's' | 'm' | 'l';
     indent: 'normal' | 'increased';
+    subLabel?: string;
+    avatarUrl?: string;
+    disable?: boolean;
+    multiple?: boolean;
   },
   HTMLDivElement
 >;

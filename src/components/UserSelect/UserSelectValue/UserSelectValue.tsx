@@ -8,9 +8,9 @@ import { User } from '../../User/User';
 
 type UserValueProps = {
   label: string;
+  size: 's' | 'm' | 'l';
   subLabel?: string;
   avatarUrl?: string;
-  size: 's' | 'm' | 'l';
   handleRemove?: (e: React.SyntheticEvent) => void;
   multiple?: boolean;
   disabled?: boolean;

@@ -17,8 +17,6 @@ import { Combobox } from '../Combobox';
 
 const cnComboboxStories = cn('ComboboxStories');
 
-// import mdx from './Select.docs.mdx';
-
 const getKnobs = () => ({
   disabled: boolean('disabled', false),
   size: select('size', ['m', 's', 'l'], defaultPropSize),
@@ -68,12 +66,18 @@ export function Playground(): JSX.Element {
   );
 }
 
+const getItemGroup = (item: MyItem) => item.group;
+const getItemName = (item: MyItem) => item.name;
+const getItemDisabled = () => false;
+const getGroup = (group: MyGroup) => group;
+
 export const WithRender = createStory(
   () => {
     const { size, disabled, view, form, placeholder, withGroups } = getKnobs();
     const [value, setValue] = useState<MyItem | null>();
+
     return (
-      <Combobox<MyItem, MyGroup, false>
+      <Combobox
         size={size}
         disabled={disabled}
         view={view}
@@ -104,12 +108,12 @@ export const WithRender = createStory(
             - {item.name}
           </div>
         )}
-        getGroupKey={(group) => group}
-        getGroupLabel={(group) => group}
-        getItemDisabled={() => false}
-        getItemGroupKey={(item) => item.group}
-        getItemKey={(item) => item.name}
-        getItemLabel={(item) => item.name}
+        getItemDisabled={getItemDisabled}
+        getItemKey={getItemName}
+        getItemLabel={getItemName}
+        getItemGroupKey={getItemGroup}
+        getGroupKey={getGroup}
+        getGroupLabel={getGroup}
       />
     );
   },
@@ -147,13 +151,4 @@ export const WithCreate = createStory(
 export default createMetadata({
   title: 'Компоненты|/Базовые/Combobox',
   id: 'components/Combobox',
-  // parameters: {
-  //   docs: {
-  //     page: mdx,
-  //   },
-  //   design: {
-  //     type: 'figma',
-  //     url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=9701%3A190445',
-  //   },
-  // },
 });

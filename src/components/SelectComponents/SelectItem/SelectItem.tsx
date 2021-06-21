@@ -16,7 +16,7 @@ export type SelectItemProps = PropsWithHTMLAttributes<
     multiple: boolean;
     size: PropSize;
     indent: 'normal' | 'increased';
-    disable: boolean | undefined;
+    disabled: boolean | undefined;
   },
   HTMLDivElement
 >;
@@ -39,15 +39,16 @@ export const SelectItem: React.FC<SelectItemProps> = (props) => {
     multiple,
     size,
     indent,
-    disable,
+    disabled,
     ...otherProps
   } = props;
 
   return (
     <div
       {...otherProps}
-      className={cnSelectItem({ active, hovered, multiple, size, indent, disable }, [className])}
+      className={cnSelectItem({ active, hovered, multiple, size, indent, disabled }, [className])}
       aria-selected={active}
+      aria-disabled={disabled}
       role="option"
     >
       {multiple && (

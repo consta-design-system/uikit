@@ -11,8 +11,8 @@ import { cnSelect } from '../SelectComponents/cnSelect';
 import {
   defaultlabelForCreate,
   defaultlabelForNotFound,
+  getInputWidth,
   getSelectDropdownForm,
-  useSetInputWidth,
 } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
@@ -21,20 +21,26 @@ import { SelectValueTag } from '../SelectComponents/SelectValueTag/SelectValueTa
 import { defaultPropForm, defaultPropSize, defaultPropView } from '../SelectComponents/types';
 
 import {
-  ComboboxComponentType,
+  ComboboxProps,
   defaultGetGroupKey,
   defaultGetGroupLabel,
   defaultgetItemDisabled,
   defaultGetItemGroupKey,
   defaultGetItemKey,
   defaultGetItemLabel,
+  DefaultGroup,
+  DefaultItem,
   isMultipleParams,
   isNotMultipleParams,
   PropRenderItem,
   PropRenderValue,
 } from './helpers';
 
-export const Combobox: ComboboxComponentType = (props) => {
+export function Combobox<
+  ITEM = DefaultItem,
+  GROUP = DefaultGroup,
+  MULTIPLE extends boolean = false
+>(props: ComboboxProps<ITEM, GROUP, MULTIPLE>) {
   const defaultDropdownRef = useRef<HTMLDivElement | null>(null);
   const controlInnerRef = useRef<HTMLDivElement>(null);
   const helperInputFakeElement = useRef<HTMLDivElement>(null);
@@ -74,8 +80,6 @@ export const Combobox: ComboboxComponentType = (props) => {
     ...restProps
   } = props;
 
-  type Item = typeof items[number];
-
   const {
     getKeyProps,
     getOptionProps,
@@ -113,7 +117,7 @@ export const Combobox: ComboboxComponentType = (props) => {
 
   const dropdownForm = getSelectDropdownForm(form);
 
-  const renderItemDefault: PropRenderItem<Item> = (props) => {
+  const renderItemDefault: PropRenderItem<ITEM> = (props) => {
     const { item, active, hovered, onClick, onMouseEnter } = props;
 
     return (
@@ -126,12 +130,12 @@ export const Combobox: ComboboxComponentType = (props) => {
         indent={dropdownForm === 'round' ? 'increased' : 'normal'}
         onClick={onClick}
         onMouseEnter={onMouseEnter}
-        disable={getItemDisabled(item)}
+        disabled={getItemDisabled(item)}
       />
     );
   };
 
-  const renderValueDefaultMultiple: PropRenderValue<Item> = ({ item, handleRemove }) => {
+  const renderValueDefaultMultiple: PropRenderValue<ITEM> = ({ item, handleRemove }) => {
     return (
       <SelectValueTag
         label={getItemLabel(item)}
@@ -142,7 +146,7 @@ export const Combobox: ComboboxComponentType = (props) => {
     );
   };
 
-  const renderValueDefaultNotMultiple: PropRenderValue<Item> = (props) => {
+  const renderValueDefaultNotMultiple: PropRenderValue<ITEM> = (props) => {
     const valueLable = getItemLabel(props.item);
 
     return (
@@ -152,14 +156,13 @@ export const Combobox: ComboboxComponentType = (props) => {
     );
   };
 
-  useSetInputWidth(controlInnerRef, helperInputFakeElement, inputRef, searchValue, value, multiple);
-
   const renderValue =
     renderValueProp || (multiple ? renderValueDefaultMultiple : renderValueDefaultNotMultiple);
 
   const inputRefForRender = useForkRef([inputRef, inputRefProp]);
 
   const renderControlValue = () => {
+    const width = multiple ? getInputWidth(controlInnerRef, helperInputFakeElement) : undefined;
     return (
       <>
         {isMultipleParams(props) &&
@@ -184,6 +187,7 @@ export const Combobox: ComboboxComponentType = (props) => {
           ref={inputRefForRender}
           className={cnSelect('Input', { size, hide: !multiple && !!value, multiple })}
           value={searchValue}
+          style={{ width }}
         />
       </>
     );
@@ -214,8 +218,11 @@ export const Combobox: ComboboxComponentType = (props) => {
           aria-hidden="true"
         >
           <div className={cnSelect('ControlValueContainer')}>
-            {multiple && <div className={cnSelect('ControlValue')}>{renderControlValue()}</div>}
-            {!multiple && renderControlValue()}
+            {multiple ? (
+              <div className={cnSelect('ControlValue')}>{renderControlValue()}</div>
+            ) : (
+              renderControlValue()
+            )}
           </div>
         </div>
         <span className={cnSelect('Indicators')}>
@@ -258,4 +265,4 @@ export const Combobox: ComboboxComponentType = (props) => {
       </div>
     </SelectContainer>
   );
-};
+}

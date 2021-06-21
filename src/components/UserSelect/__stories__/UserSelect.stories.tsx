@@ -86,13 +86,20 @@ const searchFunction = (item: MyItem, searchValue: string): boolean => {
   return item.position?.toLocaleLowerCase().indexOf(searchValue.toLocaleLowerCase()) !== -1;
 };
 
+const getItemGroup = (item: MyItem) => item.group;
+const getItemName = (item: MyItem) => item.name;
+const getItemAvatarUrl = (item: MyItem) => item.avatarUrl;
+const getItemAvatarEmail = (item: MyItem) => item.avatarUrl;
+const getItemDisabled = () => false;
+const getGroup = (group: MyGroup) => group;
+
 export const WithRender = createStory(
   () => {
     const { size, disabled, view, form, placeholder, withGroups } = getKnobs();
     const [value, setValue] = useState<MyItem | null>();
 
     return (
-      <UserSelect<MyItem, MyGroup, false>
+      <UserSelect
         size={size}
         disabled={disabled}
         view={view}
@@ -129,14 +136,14 @@ export const WithRender = createStory(
             - {item.name}
           </div>
         )}
-        getGroupKey={(group) => group}
-        getGroupLabel={(group) => group}
-        getItemDisabled={() => false}
-        getItemGroupKey={(item) => item.group}
-        getItemKey={(item) => item.name}
-        getItemLabel={(item) => item.name}
-        getItemAvatarUrl={(item) => item.avatarUrl}
-        getItemSubLabel={(item) => item.email}
+        getGroupKey={getGroup}
+        getGroupLabel={getGroup}
+        getItemDisabled={getItemDisabled}
+        getItemGroupKey={getItemGroup}
+        getItemKey={getItemName}
+        getItemLabel={getItemName}
+        getItemAvatarUrl={getItemAvatarUrl}
+        getItemSubLabel={getItemAvatarEmail}
         searchFunction={searchFunction}
       />
     );
@@ -175,13 +182,4 @@ export const WithCreate = createStory(
 export default createMetadata({
   title: 'Компоненты|/Базовые/UserSelect',
   id: 'components/UserSelect',
-  // parameters: {
-  //   docs: {
-  //     page: mdx,
-  //   },
-  //   design: {
-  //     type: 'figma',
-  //     url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=9701%3A190445',
-  //   },
-  // },
 });

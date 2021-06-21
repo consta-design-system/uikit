@@ -32,6 +32,8 @@ export type PropRenderValue<ITEM> = (props: RenderValueProps<ITEM>) => React.Rea
 
 export type SelectProps<ITEM = DefaultItem, GROUP = DefaultGroup> = PropsWithHTMLAttributesAndRef<
   {
+    items: ITEM[];
+    onChange: (props: { value: ITEM | null; e: React.SyntheticEvent }) => void;
     disabled?: boolean;
     form?: PropForm;
     size?: PropSize;
@@ -43,14 +45,13 @@ export type SelectProps<ITEM = DefaultItem, GROUP = DefaultGroup> = PropsWithHTM
     dropdownClassName?: string;
     dropdownRef?: React.RefObject<HTMLDivElement>;
     name?: string;
-    items: ITEM[];
     value?: PropValue<ITEM>;
-    onChange: (props: { value: ITEM | null; e: React.SyntheticEvent }) => void;
     renderItem?: PropRenderItem<ITEM>;
     renderValue?: PropRenderValue<ITEM>;
     onFocus?: React.FocusEventHandler<HTMLInputElement>;
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
     inputRef?: React.RefObject<HTMLInputElement>;
+    groups: GROUP[];
   },
   HTMLDivElement
 > &
@@ -67,28 +68,15 @@ export type SelectProps<ITEM = DefaultItem, GROUP = DefaultGroup> = PropsWithHTM
         getItemGroupKey: PropGetItemGroupKey<ITEM>;
         getItemDisabled: PropgetItemDisabled<ITEM>;
       }) &
-  (
-    | ({
-        groups: GROUP[];
-      } & (GROUP extends DefaultGroup
-        ? {
-            getGroupLabel?: PropGetGroupLabel<GROUP>;
-            getGroupKey?: PropGetGroupKey<GROUP>;
-          }
-        : {
-            getGroupLabel: PropGetGroupLabel<GROUP>;
-            getGroupKey: PropGetGroupKey<GROUP>;
-          }))
-    | {
-        groups?: never;
-        getGroupLabel?: never;
-        getGroupKey?: never;
+  (GROUP extends DefaultGroup
+    ? {
+        getGroupLabel?: PropGetGroupLabel<GROUP>;
+        getGroupKey?: PropGetGroupKey<GROUP>;
       }
-  );
-
-export type SelectComponentType = <ITEM = DefaultItem, GROUP = DefaultGroup>(
-  props: SelectProps<ITEM, GROUP>,
-) => React.ReactElement | null;
+    : {
+        getGroupLabel: PropGetGroupLabel<GROUP>;
+        getGroupKey: PropGetGroupKey<GROUP>;
+      });
 
 export const defaultGetItemKey: PropGetItemKey<DefaultItem> = (item) => item.id;
 export const defaultGetItemLabel: PropGetItemLabel<DefaultItem> = (item) => item.label;
