@@ -11,8 +11,8 @@ import { cnSelect } from '../SelectComponents/cnSelect';
 import {
   defaultlabelForCreate,
   defaultlabelForNotFound,
+  getInputWidth,
   getSelectDropdownForm,
-  useSetInputWidth,
 } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
@@ -29,14 +29,20 @@ import {
   defaultGetItemKey,
   defaultGetItemLabel,
   defaultGetItemSubLabel,
+  DefaultGroup,
+  DefaultItem,
   isMultipleParams,
   isNotMultipleParams,
   PropRenderItem,
   PropRenderValue,
-  UserSelectComponentType,
+  UserSelectProps,
 } from './helpers';
 
-export const UserSelect: UserSelectComponentType = (props) => {
+export function UserSelect<
+  ITEM = DefaultItem,
+  GROUP = DefaultGroup,
+  MULTIPLE extends boolean = false
+>(props: UserSelectProps<ITEM, GROUP, MULTIPLE>) {
   const defaultDropdownRef = useRef<HTMLDivElement | null>(null);
   const controlInnerRef = useRef<HTMLDivElement>(null);
   const helperInputFakeElement = useRef<HTMLDivElement>(null);
@@ -78,9 +84,7 @@ export const UserSelect: UserSelectComponentType = (props) => {
     ...restProps
   } = props;
 
-  type Item = typeof items[number];
-
-  const searchFunctionDefault = (item: Item, searchValue: string): boolean => {
+  const searchFunctionDefault = (item: ITEM, searchValue: string): boolean => {
     const searchOfLabel =
       getItemLabel(item)
         .toLocaleLowerCase()
@@ -136,7 +140,7 @@ export const UserSelect: UserSelectComponentType = (props) => {
 
   const dropdownForm = getSelectDropdownForm(form);
 
-  const renderItemDefault: PropRenderItem<Item> = (props) => {
+  const renderItemDefault: PropRenderItem<ITEM> = (props) => {
     const { item, active, hovered, onClick, onMouseEnter } = props;
 
     return (
@@ -156,7 +160,7 @@ export const UserSelect: UserSelectComponentType = (props) => {
     );
   };
 
-  const renderValueDefault: PropRenderValue<Item> = ({ item, handleRemove }) => {
+  const renderValueDefault: PropRenderValue<ITEM> = ({ item, handleRemove }) => {
     return (
       <UserSelectValue
         label={getItemLabel(item)}
@@ -171,13 +175,12 @@ export const UserSelect: UserSelectComponentType = (props) => {
     );
   };
 
-  useSetInputWidth(controlInnerRef, helperInputFakeElement, inputRef, searchValue, value, multiple);
-
   const renderValue = renderValueProp || renderValueDefault;
 
   const inputRefForRender = useForkRef([inputRef, inputRefProp]);
 
   const renderControlValue = () => {
+    const width = multiple ? getInputWidth(controlInnerRef, helperInputFakeElement) : undefined;
     return (
       <>
         {isMultipleParams(props) &&
@@ -200,8 +203,14 @@ export const UserSelect: UserSelectComponentType = (props) => {
           aria-label={ariaLabel}
           onChange={handleInputChange}
           ref={inputRefForRender}
-          className={cnSelect('Input', { size, hide: !multiple && !!value, multiple })}
+          className={cnSelect('Input', {
+            size,
+            hide: !multiple && !!value,
+            multiple,
+            isUserSelect: true,
+          })}
           value={searchValue}
+          style={{ width }}
         />
       </>
     );
@@ -280,4 +289,4 @@ export const UserSelect: UserSelectComponentType = (props) => {
       </div>
     </SelectContainer>
   );
-};
+}

@@ -7,9 +7,9 @@ import { Tag } from '../../Tag/Tag';
 
 type SelectValueTagProps = {
   label: string;
-  handleRemove?: (e: React.SyntheticEvent) => void;
   size: 's' | 'm' | 'l';
   children?: never;
+  handleRemove?: (e: React.SyntheticEvent) => void;
 };
 
 const cnSelectValueTag = cn('SelectValueTag');

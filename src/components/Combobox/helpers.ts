@@ -3,14 +3,14 @@ import React from 'react';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { PropForm, PropSize, PropView, RenderItemProps } from '../SelectComponents/types';
 
-type DefaultItem = {
+export type DefaultItem = {
   label: string;
   id: string | number;
   groupId?: string | number;
   disabled?: boolean;
 };
 
-type DefaultGroup = {
+export type DefaultGroup = {
   label: string;
   id: string | number;
 };
@@ -21,7 +21,7 @@ type RenderValueProps<ITEM> = {
 };
 
 type PropGetItemLabel<ITEM> = (item: ITEM) => string;
-type PropGetItemKey<ITEM> = (item: ITEM) => string | number;
+type PropGetItemKey<ITEM = DefaultItem> = (item: ITEM) => string | number;
 type PropGetItemGroupKey<ITEM> = (item: ITEM) => string | number | undefined;
 type PropgetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
 type PropGetGroupKey<GROUP> = (group: GROUP) => string | number;
@@ -39,8 +39,14 @@ type PropValue<ITEM, MULTIPLE extends boolean> =
 export type PropRenderItem<ITEM> = (props: RenderItemProps<ITEM>) => React.ReactElement | null;
 export type PropRenderValue<ITEM> = (props: RenderValueProps<ITEM>) => React.ReactElement | null;
 
-export type ComboboxProps<ITEM, GROUP, MULTIPLE extends boolean> = PropsWithHTMLAttributesAndRef<
+export type ComboboxProps<
+  ITEM = DefaultItem,
+  GROUP = DefaultGroup,
+  MULTIPLE extends boolean = false
+> = PropsWithHTMLAttributesAndRef<
   {
+    items: ITEM[];
+    onChange: PropOnChange<ITEM, MULTIPLE>;
     disabled?: boolean;
     form?: PropForm;
     size?: Exclude<PropSize, 'xs'>;
@@ -50,7 +56,6 @@ export type ComboboxProps<ITEM, GROUP, MULTIPLE extends boolean> = PropsWithHTML
     dropdownClassName?: string;
     dropdownRef?: React.RefObject<HTMLDivElement>;
     name?: string;
-    items: ITEM[];
     renderItem?: PropRenderItem<ITEM>;
     renderValue?: PropRenderValue<ITEM>;
     onFocus?: React.FocusEventHandler<HTMLInputElement>;
@@ -62,7 +67,7 @@ export type ComboboxProps<ITEM, GROUP, MULTIPLE extends boolean> = PropsWithHTML
     searchFunction?: PropSearchFunction<ITEM>;
     multiple?: MULTIPLE;
     value?: PropValue<ITEM, MULTIPLE>;
-    onChange: PropOnChange<ITEM, MULTIPLE>;
+    groups?: GROUP[];
   },
   HTMLDivElement
 > &
@@ -79,32 +84,15 @@ export type ComboboxProps<ITEM, GROUP, MULTIPLE extends boolean> = PropsWithHTML
         getItemGroupKey: PropGetItemGroupKey<ITEM>;
         getItemDisabled: PropgetItemDisabled<ITEM>;
       }) &
-  (
-    | ({
-        groups: GROUP[];
-      } & (GROUP extends DefaultGroup
-        ? {
-            getGroupLabel?: PropGetGroupLabel<GROUP>;
-            getGroupKey?: PropGetGroupKey<GROUP>;
-          }
-        : {
-            getGroupLabel: PropGetGroupLabel<GROUP>;
-            getGroupKey: PropGetGroupKey<GROUP>;
-          }))
-    | {
-        groups: never;
-        getGroupLabel: never;
-        getGroupKey: never;
+  (GROUP extends DefaultGroup
+    ? {
+        getGroupLabel?: PropGetGroupLabel<GROUP>;
+        getGroupKey?: PropGetGroupKey<GROUP>;
       }
-  );
-
-export type ComboboxComponentType = <
-  ITEM = DefaultItem,
-  GROUP = DefaultGroup,
-  MULTIPLE extends boolean = false
->(
-  props: ComboboxProps<ITEM, GROUP, MULTIPLE>,
-) => React.ReactElement | null;
+    : {
+        getGroupLabel: PropGetGroupLabel<GROUP>;
+        getGroupKey: PropGetGroupKey<GROUP>;
+      });
 
 export const defaultGetItemKey: PropGetItemKey<DefaultItem> = (item) => item.id;
 export const defaultGetItemLabel: PropGetItemLabel<DefaultItem> = (item) => item.label;

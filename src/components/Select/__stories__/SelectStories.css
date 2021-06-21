@@ -5,18 +5,6 @@
     padding: var(--space-xs) var(--space-l);
     color: var(--text-color);
 
-    &_hovered {
-      background-color: var(--color-control-bg-clear-hover);
-    }
-
-    &_active {
-      --text-color: var(--color-control-typo-secondary);
-    }
-
-    &_disabled {
-      --text-color: var(--color-control-typo-disable);
-    }
-
     &::before {
       content: '';
       position: absolute;
@@ -27,6 +15,18 @@
       background-color: var(--color-control-typo-disable);
       border-radius: 50%;
       transition: background-color 0.2s ease-in;
+    }
+
+    &_hovered {
+      background-color: var(--color-control-bg-clear-hover);
+    }
+
+    &_active {
+      --text-color: var(--color-control-typo-secondary);
+    }
+
+    &_disabled {
+      --text-color: var(--color-control-typo-disable);
     }
 
     &_active::before {

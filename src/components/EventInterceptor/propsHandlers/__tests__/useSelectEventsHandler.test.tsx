@@ -17,10 +17,6 @@ const items = [
   { label: 'Plutonium', id: 2 },
   { label: 'Americium', id: 3 },
 ];
-// const defaultProps = {
-//   items,
-//   onChange: jest.fn(),
-// };
 const eventHandler = jest.fn();
 const basicSelectRef = React.createRef<HTMLDivElement>();
 
@@ -38,18 +34,6 @@ describe('useBasicSelectEventsHandler', () => {
       basicSelectRef,
     ),
   );
-
-  // TODO: когда буду писать тесты разберусь с этим
-
-  // it('возвращает пропсы в том же виде, что и получил', () => {
-  //   let props = {};
-
-  //   act(() => {
-  //     props = result.current;
-  //   });
-
-  //   expect({ ...defaultProps }).toMatchObject({ ...props });
-  // });
 
   it('при изменении опции вызывается eventHandler', () => {
     const { rerender } = render(

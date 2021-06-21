@@ -56,12 +56,17 @@ export function Playground(): JSX.Element {
   );
 }
 
+const getGroup = (group: MyGroup) => group;
+const getItemDisabled = () => false;
+const getItemGroup = (item: MyItem) => item.group;
+const getItemName = (item: MyItem) => item.name;
+
 export const WithRender = createStory(
   () => {
     const { size, disabled, view, form, placeholder, withGroups } = getKnobs();
     const [value, setValue] = useState<MyItem | null | undefined>();
     return (
-      <Select<MyItem, MyGroup>
+      <Select
         size={size}
         disabled={disabled}
         view={view}
@@ -92,12 +97,12 @@ export const WithRender = createStory(
             - {item.name}
           </div>
         )}
-        getGroupKey={(group) => group}
-        getGroupLabel={(group) => group}
-        getItemDisabled={() => false}
-        getItemGroupKey={(item) => item.group}
-        getItemKey={(item) => item.name}
-        getItemLabel={(item) => item.name}
+        getGroupKey={getGroup}
+        getGroupLabel={getGroup}
+        getItemDisabled={getItemDisabled}
+        getItemGroupKey={getItemGroup}
+        getItemKey={getItemName}
+        getItemLabel={getItemName}
       />
     );
   },
@@ -109,13 +114,4 @@ export const WithRender = createStory(
 export default createMetadata({
   title: 'Компоненты|/Базовые/Select',
   id: 'components/Select',
-  // parameters: {
-  //   docs: {
-  //     page: mdx,
-  //   },
-  //   design: {
-  //     type: 'figma',
-  //     url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=9701%3A190445',
-  //   },
-  // },
 });
