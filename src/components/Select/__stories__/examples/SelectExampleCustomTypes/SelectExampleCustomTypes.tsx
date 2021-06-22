@@ -3,19 +3,22 @@ import React, { useState } from 'react';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Select } from '../../../Select';
 
+const getItem = (item: string) => item;
+const getUndefined = () => undefined;
+
 export function SelectExampleCustomTypes() {
   const [value, setValue] = useState<string | null>();
   return (
     <div className={cnDocsDecorator('Section', { indent: 'bottom' })}>
-      <Select<string>
+      <Select
         placeholder="Выберите значение"
         items={['Первый', 'Второй', 'Третий']}
         value={value}
         onChange={({ value }) => setValue(value)}
-        getItemKey={(item: string) => item}
-        getItemLabel={(item: string) => item}
-        getItemGroupKey={() => undefined}
-        getItemDisabled={() => undefined}
+        getItemKey={getItem}
+        getItemLabel={getItem}
+        getItemGroupKey={getUndefined}
+        getItemDisabled={getUndefined}
       />
     </div>
   );
@@ -43,22 +46,26 @@ export const items: Item[] = [
 
 export const groups: string[] = ['Первая группа', 'Вторая группа', 'Третья группа'];
 
+const getItemName = (item: Item) => item.name;
+const getItemGroup = (item: Item) => item.group;
+const getGroup = (group: string) => group;
+
 export function SelectExampleCustomTypesWithGroups() {
   const [value, setValue] = useState<Item | null>();
   return (
     <div className={cnDocsDecorator('Section')}>
-      <Select<Item, string>
+      <Select
         placeholder="Выберите значение"
         items={items}
         groups={groups}
         value={value}
         onChange={({ value }) => setValue(value)}
-        getItemKey={(item) => item.name}
-        getItemLabel={(item) => item.name}
-        getItemGroupKey={(item) => item.group}
-        getItemDisabled={() => undefined}
-        getGroupKey={(group) => group}
-        getGroupLabel={(group) => group}
+        getItemKey={getItemName}
+        getItemLabel={getItemName}
+        getItemGroupKey={getItemGroup}
+        getItemDisabled={getUndefined}
+        getGroupKey={getGroup}
+        getGroupLabel={getGroup}
       />
     </div>
   );

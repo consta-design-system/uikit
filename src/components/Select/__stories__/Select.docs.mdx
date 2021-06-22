@@ -542,19 +542,24 @@ export function SelectExampleRenderValue() {
 для того чтобы компонент понимал откуда брать данные
 
 ```tsx
+const getItem = (item: string) => item;
+const getUndefined = () => undefined;
+
 export function SelectExampleCustomTypes() {
   const [value, setValue] = useState<string | null>();
   return (
-    <Select<string>
-      placeholder="Выберите значение"
-      items={['Первый', 'Второй', 'Третий']}
-      value={value}
-      onChange={({ value }) => setValue(value)}
-      getItemKey={(item: string) => item}
-      getItemLabel={(item: string) => item}
-      getItemGroupKey={() => undefined}
-      getItemDisabled={() => undefined}
-    />
+    <div className={cnDocsDecorator('Section', { indent: 'bottom' })}>
+      <Select
+        placeholder="Выберите значение"
+        items={['Первый', 'Второй', 'Третий']}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        getItemKey={getItem}
+        getItemLabel={getItem}
+        getItemGroupKey={getUndefined}
+        getItemDisabled={getUndefined}
+      />
+    </div>
   );
 }
 ```
@@ -582,22 +587,28 @@ export const items: Item[] = [
 
 export const groups: string[] = ['Первая группа', 'Вторая группа', 'Третья группа'];
 
+const getItemName = (item: Item) => item.name;
+const getItemGroup = (item: Item) => item.group;
+const getGroup = (group: string) => group;
+
 export function SelectExampleCustomTypesWithGroups() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Select<Item, string>
-      placeholder="Выберите значение"
-      items={items}
-      groups={groups}
-      value={value}
-      onChange={({ value }) => setValue(value)}
-      getItemKey={(item) => item.name}
-      getItemLabel={(item) => item.name}
-      getItemGroupKey={(item) => item.group}
-      getItemDisabled={() => undefined}
-      getGroupKey={(group) => group}
-      getGroupLabel={(group) => group}
-    />
+    <div className={cnDocsDecorator('Section')}>
+      <Select
+        placeholder="Выберите значение"
+        items={items}
+        groups={groups}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        getItemKey={getItemName}
+        getItemLabel={getItemName}
+        getItemGroupKey={getItemGroup}
+        getItemDisabled={getUndefined}
+        getGroupKey={getGroup}
+        getGroupLabel={getGroup}
+      />
+    </div>
   );
 }
 ```
