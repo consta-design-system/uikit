@@ -56,12 +56,17 @@ export function Playground(): JSX.Element {
   );
 }
 
+const getGroup = (group: MyGroup) => group;
+const getItemDisabled = () => false;
+const getItemGroup = (item: MyItem) => item.group;
+const getItemName = (item: MyItem) => item.name;
+
 export const WithRender = createStory(
   () => {
     const { size, disabled, view, form, placeholder, withGroups } = getKnobs();
     const [value, setValue] = useState<MyItem | null | undefined>();
     return (
-      <Select<MyItem, MyGroup>
+      <Select
         size={size}
         disabled={disabled}
         view={view}
@@ -92,12 +97,12 @@ export const WithRender = createStory(
             - {item.name}
           </div>
         )}
-        getGroupKey={(group) => group}
-        getGroupLabel={(group) => group}
-        getItemDisabled={() => false}
-        getItemGroupKey={(item) => item.group}
-        getItemKey={(item) => item.name}
-        getItemLabel={(item) => item.name}
+        getGroupKey={getGroup}
+        getGroupLabel={getGroup}
+        getItemDisabled={getItemDisabled}
+        getItemGroupKey={getItemGroup}
+        getItemKey={getItemName}
+        getItemLabel={getItemName}
       />
     );
   },

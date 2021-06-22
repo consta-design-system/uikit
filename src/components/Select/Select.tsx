@@ -20,12 +20,14 @@ import {
   defaultGetItemGroupKey,
   defaultGetItemKey,
   defaultGetItemLabel,
+  DefaultGroup,
+  DefaultItem,
   PropRenderItem,
   PropRenderValue,
-  SelectComponentType,
+  SelectProps,
 } from './helpers';
 
-export const Select: SelectComponentType = (props) => {
+export function Select<ITEM = DefaultItem, GROUP = DefaultGroup>(props: SelectProps<ITEM, GROUP>) {
   const defaultDropdownRef = useRef<HTMLDivElement | null>(null);
   const controlRef = useRef<HTMLDivElement | null>(null);
 
@@ -63,9 +65,6 @@ export const Select: SelectComponentType = (props) => {
     controlRef,
   );
 
-  type Item = typeof items[number];
-  type Group = typeof groups[number];
-
   const {
     getKeyProps,
     getOptionProps,
@@ -77,7 +76,7 @@ export const Select: SelectComponentType = (props) => {
     handleToggleDropdown,
     inputRef,
     handleInputClick,
-  } = useSelect<Item, Group, false>({
+  } = useSelect<ITEM, GROUP, false>({
     items,
     groups,
     value,
@@ -97,7 +96,7 @@ export const Select: SelectComponentType = (props) => {
 
   const dropdownForm = getSelectDropdownForm(form);
 
-  const renderItemDefault: PropRenderItem<Item> = (props) => {
+  const renderItemDefault: PropRenderItem<ITEM> = (props) => {
     const { item, active, hovered, onClick, onMouseEnter } = props;
 
     return (
@@ -115,7 +114,7 @@ export const Select: SelectComponentType = (props) => {
     );
   };
 
-  const renderValueDefault: PropRenderValue<Item> = (props) => {
+  const renderValueDefault: PropRenderValue<ITEM> = (props) => {
     const label = getItemLabel(props.item);
 
     return (
@@ -195,7 +194,6 @@ export const Select: SelectComponentType = (props) => {
 // eslint-disable-next-line prettier/prettier
 export type {
   SelectProps,
-  SelectComponentType
 } from './helpers';
 
 export {

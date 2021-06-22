@@ -3,7 +3,7 @@ import React from 'react';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { PropForm, PropSize, PropView, RenderItemProps } from '../SelectComponents/types';
 
-type DefaultItem = {
+export type DefaultItem = {
   label: string;
   subLabel?: string;
   avatarUrl?: string;
@@ -12,7 +12,7 @@ type DefaultItem = {
   disabled?: boolean;
 };
 
-type DefaultGroup = {
+export type DefaultGroup = {
   label: string;
   id: string | number;
 };
@@ -67,6 +67,7 @@ export type UserSelectProps<ITEM, GROUP, MULTIPLE extends boolean> = PropsWithHT
     multiple?: MULTIPLE;
     value?: PropValue<ITEM, MULTIPLE>;
     onChange: PropOnChange<ITEM, MULTIPLE>;
+    groups?: GROUP[];
   },
   HTMLDivElement
 > &
@@ -87,32 +88,15 @@ export type UserSelectProps<ITEM, GROUP, MULTIPLE extends boolean> = PropsWithHT
         getItemGroupKey: PropGetItemGroupKey<ITEM>;
         getItemDisabled: PropgetItemDisabled<ITEM>;
       }) &
-  (
-    | ({
-        groups: GROUP[];
-      } & (GROUP extends DefaultGroup
-        ? {
-            getGroupLabel?: PropGetGroupLabel<GROUP>;
-            getGroupKey?: PropGetGroupKey<GROUP>;
-          }
-        : {
-            getGroupLabel: PropGetGroupLabel<GROUP>;
-            getGroupKey: PropGetGroupKey<GROUP>;
-          }))
-    | {
-        groups: never;
-        getGroupLabel: never;
-        getGroupKey: never;
+  (GROUP extends DefaultGroup
+    ? {
+        getGroupLabel?: PropGetGroupLabel<GROUP>;
+        getGroupKey?: PropGetGroupKey<GROUP>;
       }
-  );
-
-export type UserSelectComponentType = <
-  ITEM = DefaultItem,
-  GROUP = DefaultGroup,
-  MULTIPLE extends boolean = false
->(
-  props: UserSelectProps<ITEM, GROUP, MULTIPLE>,
-) => React.ReactElement | null;
+    : {
+        getGroupLabel: PropGetGroupLabel<GROUP>;
+        getGroupKey: PropGetGroupKey<GROUP>;
+      });
 
 export const defaultGetItemKey: PropGetItemKey<DefaultItem> = (item) => item.id;
 export const defaultGetItemLabel: PropGetItemLabel<DefaultItem> = (item) => item.label;

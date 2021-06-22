@@ -17,8 +17,6 @@
 
   &-IconRightButton {
     --indent-r: var(--space-xs);
-
-    /* --button-height: var(--control-height-xs); */
     margin-left: var(--space-2xs);
   }
 

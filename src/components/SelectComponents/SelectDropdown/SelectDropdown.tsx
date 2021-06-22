@@ -27,8 +27,6 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   controlRef: React.MutableRefObject<HTMLDivElement | null>;
   dropdownRef: React.MutableRefObject<HTMLDivElement | null>;
   getOptionProps(props: OptionProps<ITEM>): GetOptionPropsResult;
-  labelForCreate?: string;
-  labelForNotFound?: string;
   form: SelectDropdownPropForm;
   isOpen: boolean;
   renderItem: (props: RenderItemProps<ITEM>) => JSX.Element | null;
@@ -42,6 +40,8 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
       }
   )[];
   getGroupLabel?: (group: GROUP) => string;
+  labelForCreate?: string;
+  labelForNotFound?: string;
 }>;
 
 type SelectDropdown = <ITEM, GROUP>(props: Props<ITEM, GROUP>) => React.ReactElement | null;

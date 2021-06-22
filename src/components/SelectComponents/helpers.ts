@@ -1,5 +1,3 @@
-import { useLayoutEffect } from 'react';
-
 import { selectDropdownform, SelectDropdownPropForm } from './SelectDropdown/SelectDropdown';
 import { PropForm } from './types';
 
@@ -25,35 +23,15 @@ export function getSelectDropdownForm(form: PropForm): SelectDropdownPropForm {
 export const defaultlabelForNotFound = 'Не найдено';
 export const defaultlabelForCreate = '+';
 
-const getInputWidth = (
+export const getInputWidth = (
   controlInnerRef: React.RefObject<HTMLDivElement>,
   helperInputFakeElement: React.RefObject<HTMLDivElement>,
-) => {
+): number => {
   if (!controlInnerRef.current || !helperInputFakeElement.current) {
-    return {
-      width: 0,
-    };
+    return 20;
   }
   const fakeElWidth = helperInputFakeElement.current.offsetWidth + 20;
   const maxWidth = controlInnerRef.current ? controlInnerRef.current.offsetWidth - 15 : 2;
   const width = fakeElWidth > maxWidth ? maxWidth : fakeElWidth;
   return width;
-};
-
-export const useSetInputWidth = (
-  controlInnerRef: React.RefObject<HTMLDivElement>,
-  helperInputFakeElement: React.RefObject<HTMLDivElement>,
-  inputRef: React.RefObject<HTMLDivElement>,
-  searchValue: string,
-  value: unknown,
-  multiple: boolean | undefined,
-) => {
-  useLayoutEffect(() => {
-    if (inputRef.current && multiple) {
-      inputRef.current.style.setProperty(
-        'width',
-        `${getInputWidth(controlInnerRef, helperInputFakeElement)}px`,
-      );
-    }
-  }, [searchValue, value, multiple]);
 };
