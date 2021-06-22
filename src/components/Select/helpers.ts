@@ -51,7 +51,7 @@ export type SelectProps<ITEM = DefaultItem, GROUP = DefaultGroup> = PropsWithHTM
     onFocus?: React.FocusEventHandler<HTMLInputElement>;
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
     inputRef?: React.RefObject<HTMLInputElement>;
-    groups: GROUP[];
+    groups?: GROUP[];
   },
   HTMLDivElement
 > &
@@ -61,26 +61,26 @@ export type SelectProps<ITEM = DefaultItem, GROUP = DefaultGroup> = PropsWithHTM
         getItemKey?: PropGetItemKey<ITEM>;
         getItemGroupKey?: PropGetItemGroupKey<ITEM>;
         getItemDisabled?: PropgetItemDisabled<ITEM>;
+        customItemType?: never;
       }
     : {
         getItemLabel: PropGetItemLabel<ITEM>;
         getItemKey: PropGetItemKey<ITEM>;
         getItemGroupKey: PropGetItemGroupKey<ITEM>;
         getItemDisabled: PropgetItemDisabled<ITEM>;
+        customItemType: true;
       }) &
   (GROUP extends DefaultGroup
     ? {
         getGroupLabel?: PropGetGroupLabel<GROUP>;
         getGroupKey?: PropGetGroupKey<GROUP>;
+        customGroupType?: never;
       }
     : {
         getGroupLabel: PropGetGroupLabel<GROUP>;
         getGroupKey: PropGetGroupKey<GROUP>;
+        customGroupType: true;
       });
-
-export type SelectComponentType = <ITEM = DefaultItem, GROUP = DefaultGroup>(
-  props: SelectProps<ITEM, GROUP>,
-) => React.ReactElement | null;
 
 export const defaultGetItemKey: PropGetItemKey<DefaultItem> = (item) => item.id;
 export const defaultGetItemLabel: PropGetItemLabel<DefaultItem> = (item) => item.label;

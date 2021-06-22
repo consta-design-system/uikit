@@ -79,6 +79,7 @@ export type UserSelectProps<ITEM, GROUP, MULTIPLE extends boolean> = PropsWithHT
         getItemKey?: PropGetItemKey<ITEM>;
         getItemGroupKey?: PropGetItemGroupKey<ITEM>;
         getItemDisabled?: PropgetItemDisabled<ITEM>;
+        customItemType?: never;
       }
     : {
         getItemLabel: PropGetItemLabel<ITEM>;
@@ -87,15 +88,18 @@ export type UserSelectProps<ITEM, GROUP, MULTIPLE extends boolean> = PropsWithHT
         getItemKey: PropGetItemKey<ITEM>;
         getItemGroupKey: PropGetItemGroupKey<ITEM>;
         getItemDisabled: PropgetItemDisabled<ITEM>;
+        customItemType: true;
       }) &
   (GROUP extends DefaultGroup
     ? {
         getGroupLabel?: PropGetGroupLabel<GROUP>;
         getGroupKey?: PropGetGroupKey<GROUP>;
+        customGroupType?: never;
       }
     : {
         getGroupLabel: PropGetGroupLabel<GROUP>;
         getGroupKey: PropGetGroupKey<GROUP>;
+        customGroupType: true;
       });
 
 export const defaultGetItemKey: PropGetItemKey<DefaultItem> = (item) => item.id;
