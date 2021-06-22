@@ -3,7 +3,7 @@ import './ComboboxStories.css';
 import React, { useState } from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
-import { groups, Item, items, myData, MyGroup, myGroup, MyItem } from '../__mocks__/data.mock';
+import { groups, Item, items, myData, myGroup, MyItem } from '../__mocks__/data.mock';
 import { cn } from '../../../utils/bem';
 import { createMetadata, createStory } from '../../../utils/storybook';
 import {
@@ -66,11 +66,6 @@ export function Playground(): JSX.Element {
   );
 }
 
-const getItemGroup = (item: MyItem) => item.group;
-const getItemName = (item: MyItem) => item.name;
-const getItemDisabled = () => false;
-const getGroup = (group: MyGroup) => group;
-
 export const WithRender = createStory(
   () => {
     const { size, disabled, view, form, placeholder, withGroups } = getKnobs();
@@ -108,12 +103,14 @@ export const WithRender = createStory(
             - {item.name}
           </div>
         )}
-        getItemDisabled={getItemDisabled}
-        getItemKey={getItemName}
-        getItemLabel={getItemName}
-        getItemGroupKey={getItemGroup}
-        getGroupKey={getGroup}
-        getGroupLabel={getGroup}
+        customGroupType
+        getGroupKey={(group) => group}
+        getGroupLabel={(group) => group}
+        customItemType
+        getItemDisabled={() => undefined}
+        getItemGroupKey={(item) => item.group}
+        getItemKey={(item) => item.name}
+        getItemLabel={(item) => item.name}
       />
     );
   },

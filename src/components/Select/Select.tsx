@@ -57,7 +57,6 @@ export function Select<ITEM = DefaultItem, GROUP = DefaultGroup>(props: SelectPr
     renderItem,
     renderValue: renderValueProp,
     inputRef: inputRefProp,
-
     ...restProps
   } = usePropsHandler(
     'Select',
