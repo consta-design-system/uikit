@@ -17,6 +17,10 @@
       --text-color: var(--color-control-typo-disable);
     }
 
+    &_active::before {
+      background-color: var(--text-color);
+    }
+
     &::before {
       content: '';
       position: absolute;
@@ -27,10 +31,6 @@
       background-color: transparent;
       border-radius: 0 2px 2px 0;
       transition: background-color 0.2s ease-in;
-    }
-
-    &_active::before {
-      background-color: var(--text-color);
     }
   }
 

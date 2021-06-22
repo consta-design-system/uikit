@@ -3,7 +3,7 @@ import './UserSelectStories.css';
 import React, { useState } from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
-import { groups, Item, items, MyGroup, myGroup, MyItem, myItems } from '../__mocks__/data.mock';
+import { groups, Item, items, myGroup, MyItem, myItems } from '../__mocks__/data.mock';
 import { cn } from '../../../utils/bem';
 import { createMetadata, createStory } from '../../../utils/storybook';
 import {
@@ -15,7 +15,6 @@ import {
 } from '../../SelectComponents/types';
 import { Text } from '../../Text/Text';
 import { UserSelect } from '../UserSelect';
-// import mdx from './Select.docs.mdx';
 
 const getKnobs = () => ({
   disabled: boolean('disabled', false),
@@ -86,13 +85,6 @@ const searchFunction = (item: MyItem, searchValue: string): boolean => {
   return item.position?.toLocaleLowerCase().indexOf(searchValue.toLocaleLowerCase()) !== -1;
 };
 
-const getItemGroup = (item: MyItem) => item.group;
-const getItemName = (item: MyItem) => item.name;
-const getItemAvatarUrl = (item: MyItem) => item.avatarUrl;
-const getItemAvatarEmail = (item: MyItem) => item.avatarUrl;
-const getItemDisabled = () => false;
-const getGroup = (group: MyGroup) => group;
-
 export const WithRender = createStory(
   () => {
     const { size, disabled, view, form, placeholder, withGroups } = getKnobs();
@@ -136,14 +128,16 @@ export const WithRender = createStory(
             - {item.name}
           </div>
         )}
-        getGroupKey={getGroup}
-        getGroupLabel={getGroup}
-        getItemDisabled={getItemDisabled}
-        getItemGroupKey={getItemGroup}
-        getItemKey={getItemName}
-        getItemLabel={getItemName}
-        getItemAvatarUrl={getItemAvatarUrl}
-        getItemSubLabel={getItemAvatarEmail}
+        customGroupType
+        getGroupKey={(group) => group}
+        getGroupLabel={(group) => group}
+        customItemType
+        getItemDisabled={() => false}
+        getItemGroupKey={(item) => item.group}
+        getItemKey={(item) => item.name}
+        getItemLabel={(item) => item.name}
+        getItemAvatarUrl={(item) => item.avatarUrl}
+        getItemSubLabel={(item) => item.email}
         searchFunction={searchFunction}
       />
     );
