@@ -180,3 +180,17 @@ export function Select<ITEM = DefaultItem, GROUP = DefaultGroup>(props: SelectPr
     </SelectContainer>
   );
 }
+
+// eslint-disable-next-line prettier/prettier
+export type {
+  SelectProps,
+} from './helpers';
+
+export {
+  defaultGetGroupKey,
+  defaultGetGroupLabel,
+  defaultgetItemDisabled,
+  defaultGetItemGroupKey,
+  defaultGetItemKey,
+  defaultGetItemLabel
+} from './helpers';
