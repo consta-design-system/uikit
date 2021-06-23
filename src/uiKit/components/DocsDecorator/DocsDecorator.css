@@ -1,5 +1,7 @@
 .UiKit--DocsDecorator {
   --width-default: 700px;
+  width: var(--width-default);
+  margin: 0 auto;
 
   h1,
   h2,

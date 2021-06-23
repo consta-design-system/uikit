@@ -1,5 +1,5 @@
-import React from 'react';
+import { createImageComponent } from '../../../../../src/uiKit/components/Image/Image';
 
-import SlaPicture from './images/sla-scheme.png';
+import slaPicture from './images/sla-scheme.png';
 
-export const SlaPictures = () => <img src={SlaPicture} alt="" />;
+export const SlaScheme = createImageComponent(slaPicture);
