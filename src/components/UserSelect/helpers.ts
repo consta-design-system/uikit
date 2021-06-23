@@ -44,7 +44,11 @@ type PropValue<ITEM, MULTIPLE extends boolean> =
 export type PropRenderItem<ITEM> = (props: RenderItemProps<ITEM>) => React.ReactElement | null;
 export type PropRenderValue<ITEM> = (props: RenderValueProps<ITEM>) => React.ReactElement | null;
 
-export type UserSelectProps<ITEM, GROUP, MULTIPLE extends boolean> = PropsWithHTMLAttributesAndRef<
+export type UserSelectProps<
+  ITEM = DefaultItem,
+  GROUP = DefaultGroup,
+  MULTIPLE extends boolean = false
+> = PropsWithHTMLAttributesAndRef<
   {
     disabled?: boolean;
     form?: PropForm;

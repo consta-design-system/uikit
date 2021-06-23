@@ -6,21 +6,21 @@ import ResizeObserver from '../../../../__mocks__/ResizeObserver';
 import { cn } from '../../../utils/bem';
 import { cnSelect } from '../../SelectComponents/cnSelect';
 import { cnSelectGroupLabel } from '../../SelectComponents/SelectGroupLabel/SelectGroupLabel';
-import { cnSelectItem } from '../../SelectComponents/SelectItem/SelectItem';
-import { cnSelectValueTag } from '../../SelectComponents/SelectValueTag/SelectValueTag';
-import { Combobox, ComboboxProps, defaultGetItemLabel } from '../Combobox';
 import { DefaultGroup, DefaultItem } from '../helpers';
+import { defaultGetItemLabel, UserSelect, UserSelectProps } from '../UserSelect';
+import { cnUserSelectItem } from '../UserSelectItem/UserSelectItem';
+import { cnUserSelectValue } from '../UserSelectValue/UserSelectValue';
 
 jest.mock('resize-observer-polyfill', () => {
   return ResizeObserver;
 });
 
 const animationDuration = 200;
-const testId = 'Combobox';
+const testId = 'UserSelect';
 const cnRenderValue = cn('RenderValue');
 const cnRenderItem = cn('RenderItem');
 
-const defaultProps: ComboboxProps = {
+const defaultProps: UserSelectProps = {
   items,
   value: null,
   onChange: jest.fn(),
@@ -31,11 +31,11 @@ function renderComponent<
   ITEM = DefaultItem,
   GROUP = DefaultGroup,
   MULTIPLE extends boolean = false
->(props: ComboboxProps<ITEM, GROUP, MULTIPLE>): RenderResult {
+>(props: UserSelectProps<ITEM, GROUP, MULTIPLE>): RenderResult {
   return render(
     <>
       <div data-testid="outside" />
-      <Combobox<ITEM, GROUP, MULTIPLE> data-testid={testId} {...props} />
+      <UserSelect<ITEM, GROUP, MULTIPLE> data-testid={testId} {...props} />
     </>,
   );
 }
@@ -49,11 +49,11 @@ function getOutside() {
 function getItemsList() {
   return screen.getByRole('listbox');
 }
-function getControlValue() {
-  return getRender().querySelector(`.${cnSelect('ControlValue')}`) as HTMLDivElement;
+function getUserSelectValue() {
+  return getRender().querySelector(`.${cnUserSelectValue()}`) as HTMLDivElement;
 }
 function getSelectValues() {
-  return getRender().querySelectorAll(`.${cnSelectValueTag()}`);
+  return getRender().querySelectorAll(`.${cnUserSelectValue()}`);
 }
 function getSelectValue(index = 0) {
   return getSelectValues()[index];
@@ -71,7 +71,7 @@ function getInput() {
   return getRender().querySelector(`.${cnSelect('Input')}`) as HTMLElement;
 }
 function getItems() {
-  return getItemsList().querySelectorAll(`.${cnSelectItem()}`);
+  return getItemsList().querySelectorAll(`.${cnUserSelectItem()}`);
 }
 function getRenderItems() {
   return getItemsList().querySelectorAll(`.${cnRenderItem()}`);
@@ -94,7 +94,7 @@ function animateDelay() {
   });
 }
 
-describe('Компонент Combobox', () => {
+describe('Компонент UserSelect', () => {
   it('должен рендерится без ошибок', () => {
     expect(() => renderComponent(defaultProps)).not.toThrow();
   });
@@ -117,12 +117,12 @@ describe('Компонент Combobox', () => {
       });
     });
 
-    expect(getControlValue().textContent).toEqual(defaultGetItemLabel(value));
+    expect(getUserSelectValue().textContent).toContain(defaultGetItemLabel(value));
 
     inputClick();
     animateDelay();
 
-    expect(getItem(index)).toHaveClass(cnSelectItem({ active: true }));
+    expect(getItem(index)).toHaveClass(cnUserSelectItem({ active: true }));
   });
 
   it('рендерится с установленным значением при multiple = true', () => {
@@ -139,16 +139,16 @@ describe('Компонент Combobox', () => {
     });
 
     expect(getSelectValues().length).toEqual(value.length);
-    expect(getSelectValue(0).textContent).toEqual(defaultGetItemLabel(value[0]));
-    expect(getSelectValue(1).textContent).toEqual(defaultGetItemLabel(value[1]));
-    expect(getSelectValue(2).textContent).toEqual(defaultGetItemLabel(value[2]));
+    expect(getSelectValue(0).textContent).toContain(defaultGetItemLabel(value[0]));
+    expect(getSelectValue(1).textContent).toContain(defaultGetItemLabel(value[1]));
+    expect(getSelectValue(2).textContent).toContain(defaultGetItemLabel(value[2]));
 
     inputClick();
     animateDelay();
 
-    expect(getItem(indexes[0])).toHaveClass(cnSelectItem({ active: true }));
-    expect(getItem(indexes[1])).toHaveClass(cnSelectItem({ active: true }));
-    expect(getItem(indexes[2])).toHaveClass(cnSelectItem({ active: true }));
+    expect(getItem(indexes[0])).toHaveClass(cnUserSelectItem({ active: true }));
+    expect(getItem(indexes[1])).toHaveClass(cnUserSelectItem({ active: true }));
+    expect(getItem(indexes[2])).toHaveClass(cnUserSelectItem({ active: true }));
   });
 
   it('открывается и закрывается по клику', () => {

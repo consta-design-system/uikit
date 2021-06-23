@@ -166,7 +166,7 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   const visibleItems = useMemo(() => {
     const resultGroups = getGroups(
       filteredOptions,
-      getItemGroupKey,
+      groups?.length ? getItemGroupKey : undefined,
       groups,
       getGroupKey,
       sortGroups,

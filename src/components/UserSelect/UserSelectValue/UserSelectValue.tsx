@@ -17,7 +17,7 @@ type UserValueProps = {
   children?: never;
 };
 
-const cnUserSelectValue = cn('UserSelectValue');
+export const cnUserSelectValue = cn('UserSelectValue');
 
 export const UserSelectValue: React.FC<UserValueProps> = (props) => {
   const { size, label, subLabel, disabled, handleRemove, avatarUrl, multiple } = props;

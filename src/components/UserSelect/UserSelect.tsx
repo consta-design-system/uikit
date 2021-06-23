@@ -284,3 +284,19 @@ export function UserSelect<
     </SelectContainer>
   );
 }
+
+// eslint-disable-next-line prettier/prettier
+export type {
+  UserSelectProps,
+} from './helpers';
+
+export {
+  defaultGetGroupKey,
+  defaultGetGroupLabel,
+  defaultGetItemDisabled,
+  defaultGetItemGroupKey,
+  defaultGetItemKey,
+  defaultGetItemLabel,
+  defaultGetItemAvatarUrl,
+  defaultGetItemSubLabel,
+} from './helpers';

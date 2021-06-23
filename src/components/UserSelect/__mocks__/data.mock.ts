@@ -1,5 +1,3 @@
-import avatar from './static/13190808.jpeg';
-
 export type Item = {
   label: string;
   subLabel?: string;
@@ -18,7 +16,6 @@ export const items: Item[] = [
   {
     label: 'Андрей Андреев',
     subLabel: 'andrey@gmail.com',
-
     id: 1,
     groupId: 1,
   },
@@ -31,7 +28,7 @@ export const items: Item[] = [
   {
     label: 'Егор Егоров',
     subLabel: 'igor@icloud.com',
-    avatarUrl: avatar,
+    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
     id: 3,
     groupId: 1,
   },

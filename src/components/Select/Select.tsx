@@ -189,7 +189,7 @@ export type {
 export {
   defaultGetGroupKey,
   defaultGetGroupLabel,
-  defaultgetItemDisabled,
+  defaultGetItemDisabled,
   defaultGetItemGroupKey,
   defaultGetItemKey,
   defaultGetItemLabel

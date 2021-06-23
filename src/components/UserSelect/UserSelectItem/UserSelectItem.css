@@ -52,46 +52,6 @@
     }
   }
 
-  &_animate {
-    &_appear,
-    &_appearActive,
-    &_appearDone,
-    &_enter,
-    &_enterActive,
-    &_enterDone,
-    &_exit,
-    &_exitActive,
-    &_exitDone {
-      transition: 0.2s ease;
-      transition-property: opacity, transform;
-    }
-
-    &_appear,
-    &_enter {
-      opacity: 0;
-      transform: scale(0.25);
-    }
-
-    &_enterActive,
-    &_appearActive,
-    &_appearDone,
-    &_enterDone {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    &_exit {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    &_exitActive,
-    &_exitDone {
-      opacity: 0;
-      transform: scale(0.25);
-    }
-  }
-
   &-AvatarContainer {
     position: relative;
   }
@@ -107,6 +67,46 @@
     background-color: var(--color-control-bg-primary);
     border: 1px solid var(--color-control-bg-default);
     border-radius: 50%;
+
+    &_animate {
+      &_appear,
+      &_appearActive,
+      &_appearDone,
+      &_enter,
+      &_enterActive,
+      &_enterDone,
+      &_exit,
+      &_exitActive,
+      &_exitDone {
+        transition: 0.2s ease;
+        transition-property: opacity, transform;
+      }
+
+      &_appear,
+      &_enter {
+        opacity: 0;
+        transform: scale(0.25);
+      }
+
+      &_enterActive,
+      &_appearActive,
+      &_appearDone,
+      &_enterDone {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      &_exit {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      &_exitActive,
+      &_exitDone {
+        opacity: 0;
+        transform: scale(0.25);
+      }
+    }
   }
 
   &-Info {
