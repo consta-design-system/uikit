@@ -14,7 +14,7 @@ export const CollapseExampleIconRightSideBadge = () => {
   return (
     <div className={cnDocsDecorator('Section')}>
       <Collapse
-        label="Divider"
+        label="Здесь справа что-то есть"
         isOpen={isOpen}
         onClick={() => setOpen(!isOpen)}
         rightSide={[
@@ -34,7 +34,7 @@ export const CollapseExampleIconRightSideButton = () => {
   return (
     <div className={cnDocsDecorator('Section')}>
       <Collapse
-        label="Divider"
+        label="А здесь вообще справа настройки"
         isOpen={isOpen}
         onClick={() => setOpen(!isOpen)}
         rightSide={

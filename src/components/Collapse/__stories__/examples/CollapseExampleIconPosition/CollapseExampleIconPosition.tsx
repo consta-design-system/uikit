@@ -11,11 +11,16 @@ export const CollapseExampleIconPosition = () => {
   return (
     <div className={cnDocsDecorator('Section')}>
       <div style={{ maxWidth: 300 }}>
-        <Collapse label="Left" isOpen={isOpen} onClick={() => setOpen(!isOpen)} iconPosition="left">
+        <Collapse
+          label="Иконка слева"
+          isOpen={isOpen}
+          onClick={() => setOpen(!isOpen)}
+          iconPosition="left"
+        >
           {content}
         </Collapse>
         <Collapse
-          label="Right"
+          label="Иконка справа"
           isOpen={isOpenTwo}
           onClick={() => setOpenTwo(!isOpenTwo)}
           iconPosition="right"
