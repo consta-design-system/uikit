@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.12.4 (23/06/2021)
+
+- [docs(sla): add sla (#1302)](https://github.com/gazprom-neft/consta-uikit/commit/09477d001b5b392d568ae61cb6e72a1159c5dfd9) - [@kolebayev](https://github.com/kolebayev)
+- [docs(Informer): add size description in documentation (#1287)](https://github.com/gazprom-neft/consta-uikit/commit/b508853dbc8deea503b7b019c4a3f0823c7a90fd) - [@arhayka](https://github.com/arhayka)
+- [docs(Text): remove width description (#1288)](https://github.com/gazprom-neft/consta-uikit/commit/6bb5a935c97d6dd051c8ea08fa59e703134c39b1) - [@arhayka](https://github.com/arhayka)
+- [docs(Collapse): add docs (#1291)](https://github.com/gazprom-neft/consta-uikit/commit/cc673f53eb1b352ee586a8dffa8c01b2ca63acac) - [@arhayka](https://github.com/arhayka)
+
+---
+
 ## v1.12.3 (09/06/2021)
 
 - [docs(useThemeVars): edit docs (#1251)](https://github.com/gazprom-neft/consta-uikit/commit/7981b101e88ccd96533f866143d4fbfbeaabfbc8) - [@arhayka](https://github.com/arhayka)
@@ -323,22 +332,3 @@
 - [feat(iconwidescreen): added icons (#542)](https://github.com/gazprom-neft/consta-uikit/commit/d8dc744f9cda18922071c8e56de632fa83cf7e9c) - @andekhtyar
 - [fix(Choicegroup): fix control height and dividers border-radius (#541)](https://github.com/gazprom-neft/consta-uikit/commit/1fec09caf988cc14f99a2b9e2e0f23f403faf713) - @Miocene
 - [docs(Units): add units section to docs (#397)](https://github.com/gazprom-neft/consta-uikit/commit/fe10a9c8d3cd2f2467141a69e243164a68cfe5f1) - @kolebayev
-
----
-
-## v1.10.3 (19/10/2020)
-
-- [chore(CODEOWNERS): Update (#530)](https://github.com/gazprom-neft/consta-uikit/commit/e6af7331a489771dd8a90da64a5af445f9729c2c) - @nekitk
-- [feat(Selects): dropdown width equal anchor width (#486)](https://github.com/gazprom-neft/consta-uikit/commit/6ce34ff75151c5f385ce3aff1453b845bb6b4738) - @gizeasy
-- [feat(Checkbox, Radio, Switch): added alignment modifier (#522)](https://github.com/gazprom-neft/consta-uikit/commit/2839ab8f1c56e4e16a451f8d27a896124f1f1f11) - @gizeasy
-- [fix(informer) added background for view=bordered (#514)](https://github.com/gazprom-neft/consta-uikit/commit/456c8ab1869b2f76f904d55f7badaaf8a28e0ea9) - @kolebayev
-- [feat(Icons): add IconWatch (#503)](https://github.com/gazprom-neft/consta-uikit/commit/533c55cee23175d570794c1ae318b1f7ca144318) - @Shupirlik
-- [chore(chromatic): added chromatic (#510)](https://github.com/gazprom-neft/consta-uikit/commit/f0297bcb0e4b3135f02d54a00fca6762fe1e5fd3) - @gizeasy
-- [test(Checkbox): added tests (#482)](https://github.com/gazprom-neft/consta-uikit/commit/e566757c8a1ba09fdb6cb6088b19246ac729ece7) - @gizeasy
-- [test(Theme): added tests (#487)](https://github.com/gazprom-neft/consta-uikit/commit/4cd30cd77bfa04bdd5538a21d20bc1450c276179) - @gizeasy
-- [docs(Combobox): fixed onCreate story (#501)](https://github.com/gazprom-neft/consta-uikit/commit/5226621fcae9167a145034d66eeb5cd98eddc13d) - @gizeasy
-- [fix(Combobox): fixed non-uniqueness of keys in dropdown (#502)](https://github.com/gazprom-neft/consta-uikit/commit/48ed8475346efcca6ff4853b9b4bf073f7ea6289) - @gizeasy
-- [feat(Icons): add IconTrash-xs (#504)](https://github.com/gazprom-neft/consta-uikit/commit/5d0058bc4b1c8905e0e9362890bc5a2203a5f5bf) - @Shupirlik
-- [test(Timer): added tests (#505)](https://github.com/gazprom-neft/consta-uikit/commit/22d1fae0eec0a19f6f1b4b939eaaa7ff325bc0e1) - @gizeasy
-- [test(Text): added tests (#507)](https://github.com/gazprom-neft/consta-uikit/commit/bbe29b4b469e687ac42a68bbda452e65c33164cb) - @gizeasy
-- [test(Switch): added tests (#508)](https://github.com/gazprom-neft/consta-uikit/commit/938ad3e6854f84d9adea5b02327415b89b86bf84) - @gizeasy
