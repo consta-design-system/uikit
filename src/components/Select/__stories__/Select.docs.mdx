@@ -55,7 +55,7 @@ import {
 он сработает при выборе элемента или при очистке поля ввода,
 и вернет его значение которое задавали в `items`.
 Так же вернет событие выбора, ввод заначения возможен как по клику мыши так
-и по клавеше `Enter` на клавиатуре.
+и по клавише `Enter` на клавиатуре.
 
 ```tsx
 type Item = {
@@ -118,14 +118,12 @@ const items: Item[] = [
 export function SelectExamplePlaceholder() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <div className={cnDocsDecorator('Section')}>
-      <Select
-        placeholder="Выберите значение"
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-      />
-    </div>
+    <Select
+      placeholder="Выберите значение"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
   );
 }
 ```
@@ -162,15 +160,13 @@ const items: Item[] = [
 export function SelectExampleSize() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <>
-      <Select
-        placeholder="Выберите значение"
-        size="xs"
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-      />
-    </>
+    <Select
+      placeholder="Выберите значение"
+      size="xs"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
   );
 }
 ```
@@ -411,15 +407,13 @@ const items: Item[] = [
 export function SelectExampleGroups() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <div className={cnDocsDecorator('Section')}>
-      <Select
-        placeholder="Выберите значение"
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        groups={groups}
-      />
-    </div>
+    <Select
+      placeholder="Выберите значение"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      groups={groups}
+    />
   );
 }
 ```
@@ -560,16 +554,14 @@ const defaultGetGroupLabel = (group) => group.label;
 export function SelectExampleCustomTypes() {
   const [value, setValue] = useState<string | null>();
   return (
-    <div className={cnDocsDecorator('Section', { indent: 'bottom' })}>
-      <Select
-        placeholder="Выберите значение"
-        items={['Первый', 'Второй', 'Третий']}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        getItemKey={(item) => item}
-        getItemLabel={(item) => item}
-      />
-    </div>
+    <Select
+      placeholder="Выберите значение"
+      items={['Первый', 'Второй', 'Третий']}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      getItemKey={(item) => item}
+      getItemLabel={(item) => item}
+    />
   );
 }
 ```
@@ -602,20 +594,18 @@ export const groups: string[] = ['Первая группа', 'Вторая гр
 export function SelectExampleCustomTypesWithGroups() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <div className={cnDocsDecorator('Section')}>
-      <Select
-        placeholder="Выберите значение"
-        items={items}
-        groups={groups}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        getItemKey={(item) => item.name}
-        getItemLabel={(item) => item.name}
-        getItemGroupKey={(item) => item.group}
-        getGroupKey={(group) => group}
-        getGroupLabel={(group) => group}
-      />
-    </div>
+    <Select
+      placeholder="Выберите значение"
+      items={items}
+      groups={groups}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      getItemKey={(item) => item.name}
+      getItemLabel={(item) => item.name}
+      getItemGroupKey={(item) => item.group}
+      getGroupKey={(group) => group}
+      getGroupLabel={(group) => group}
+    />
   );
 }
 ```
@@ -655,33 +645,33 @@ type PropRenderValue<ITEM> = (props: { item: ITEM }) => React.ReactElement | nul
 type PropGetItemLabel<ITEM> = (item: ITEM) => string;
 type PropGetItemKey<ITEM> = (item: ITEM) => string | number;
 type PropGetItemGroupKey<ITEM> = (item: ITEM) => string | number | undefined;
-type PropgetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
+type PropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
 type PropGetGroupKey<GROUP> = (group: GROUP) => string | number;
 type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 ```
 
-| Свойство                                                  | Тип или варианты значения                              | По умолчанию | Описание                                                               |
-| --------------------------------------------------------- | ------------------------------------------------------ | ------------ | ---------------------------------------------------------------------- |
-| [`view?`](#внешний-вид)                                   | `default` , `clear`                                    | `default`    | Внешний вид компонента                                                 |
-| [`disabled?`](#отключение-поля-ввода)                     | `boolean`                                              | -            | Делает компонент недоступным                                           |
-| [`size?`](#размер)                                        | `'xs'`, `'s'` , `'m'` , `'l'`                          | `'m'`        | Размер компонента                                                      |
-| [`form?`](#форма)                                         | `default`, `brick`, `round`                            | `default`    | Форма компонента                                                       |
-| [`placeholder?`](#подсказка)                              | `string`                                               | -            | Подсказка, отображается, когда вариант не выбран                       |
-| [`items`](#варианты)                                      | `ITEM[]`                                               | -            | Варианты                                                               |
-| [`value?`](#значение)                                     | `ITEM`, `null`                                         | -            | Значение селекта                                                       |
-| [`onChange?`](#onchange)                                  | `PropOnChange<ITEM>`                                   | -            | Обработчик события изменения значения компонента                       |
-| [`groups?`](#группировка-списка)                          | `GROUP[]`                                              | -            | Группы                                                                 |
-| [`renderItem?`](#свое-представление-элемента-списка)      | `PropRenderItem<ITEM>`                                 | -            | Рендер функция элемента списка                                         |
-| [`renderValue?`](#свое-представление-выбранного-значения) | `PropRenderValue<ITEM>`                                | -            | Рендер функция элемента значения                                       |
-| [`getItemLabel?`](#свои-тип-данных-items-и-groups)        | `PropGetItemLabel<ITEM>`                               | -            | Функция для определения названия элемента                              |
-| [`getItemKey?`](#свои-тип-данных-items-и-groups)          | `PropGetItemKey<ITEM>`                                 | -            | Функция для определения уникального ключа элемента                     |
-| [`getItemGroupKey?`](#свои-тип-данных-items-и-groups)     | `PropGetItemGroupKey<ITEM>`                            | -            | Функция для определения ключа группы, к которой будет привязан элемент |
-| [`getItemDisabled?`](#свои-тип-данных-items-и-groups)     | `PropgetItemDisabled<ITEM>`                            | -            | Функция для определения состояния `disabled`                           |
-| [`getGroupLabel?`](#свои-тип-данных-items-и-groups)       | `PropGetGroupKey<GROUP>`                               | -            | Функция для определения названия группы                                |
-| [`getGroupKey?`](#свои-тип-данных-items-и-groups)         | `PropGetGroupLabel<GROUP>`                             | -            | Функция для определения уникального ключа группы                       |
-| `onBlur?`                                                 | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -            | Обработчик события `blur`                                              |
-| `onFocus?`                                                | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -            | Обработчик события `focus`                                             |
-| `ariaLabel?`                                              | `string`                                               | -            | `aria` атрибут для поля ввода                                          |
-| `name?`                                                   | `string`                                               | -            | Имя поля ввода                                                         |
-| `className?`                                              | `string`                                               | -            | Дополнительный CSS-класс                                               |
-| `dropdownClassName?`                                      | `string`                                               | -            | Дополнительный CSS-класс для выпадающего блока                         |
+| Свойство                                                  | Тип или варианты значения                              | По умолчанию              | Описание                                                               |
+| --------------------------------------------------------- | ------------------------------------------------------ | ------------------------- | ---------------------------------------------------------------------- |
+| [`view?`](#внешний-вид)                                   | `default` , `clear`                                    | `default`                 | Внешний вид компонента                                                 |
+| [`disabled?`](#отключение-поля-ввода)                     | `boolean`                                              | -                         | Делает компонент недоступным                                           |
+| [`size?`](#размер)                                        | `'xs'`, `'s'` , `'m'` , `'l'`                          | `'m'`                     | Размер компонента                                                      |
+| [`form?`](#форма)                                         | `default`, `brick`, `round`                            | `default`                 | Форма компонента                                                       |
+| [`placeholder?`](#подсказка)                              | `string`                                               | -                         | Подсказка, отображается, когда вариант не выбран                       |
+| [`items`](#варианты)                                      | `ITEM[]`                                               | -                         | Варианты                                                               |
+| [`value?`](#значение)                                     | `ITEM`, `null`                                         | -                         | Значение селекта                                                       |
+| [`onChange?`](#onchange)                                  | `PropOnChange<ITEM>`                                   | -                         | Обработчик события изменения значения компонента                       |
+| [`groups?`](#группировка-списка)                          | `GROUP[]`                                              | -                         | Группы                                                                 |
+| [`renderItem?`](#свое-представление-элемента-списка)      | `PropRenderItem<ITEM>`                                 | рендер по умолчанию       | Рендер функция элемента списка                                         |
+| [`renderValue?`](#свое-представление-выбранного-значения) | `PropRenderValue<ITEM>`                                | рендер по умолчанию       | Рендер функция элемента значения                                       |
+| [`getItemLabel?`](#свои-тип-данных-items-и-groups)        | `PropGetItemLabel<ITEM>`                               | `(item) => item.label`    | Функция для определения названия элемента                              |
+| [`getItemKey?`](#свои-тип-данных-items-и-groups)          | `PropGetItemKey<ITEM>`                                 | `(item) => item.id`       | Функция для определения уникального ключа элемента                     |
+| [`getItemGroupKey?`](#свои-тип-данных-items-и-groups)     | `PropGetItemGroupKey<ITEM>`                            | `(item) => item.groupId`  | Функция для определения ключа группы, к которой будет привязан элемент |
+| [`getItemDisabled?`](#свои-тип-данных-items-и-groups)     | `PropGetItemDisabled<ITEM>`                            | `(item) => item.disabled` | Функция для определения состояния `disabled`                           |
+| [`getGroupLabel?`](#свои-тип-данных-items-и-groups)       | `PropGetGroupKey<GROUP>`                               | `(group) => group.id`     | Функция для определения названия группы                                |
+| [`getGroupKey?`](#свои-тип-данных-items-и-groups)         | `PropGetGroupLabel<GROUP>`                             | `(group) => group.label`  | Функция для определения уникального ключа группы                       |
+| `onBlur?`                                                 | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                         | Обработчик события `blur`                                              |
+| `onFocus?`                                                | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                         | Обработчик события `focus`                                             |
+| `ariaLabel?`                                              | `string`                                               | -                         | `aria` атрибут для поля ввода                                          |
+| `name?`                                                   | `string`                                               | -                         | Имя поля ввода                                                         |
+| `className?`                                              | `string`                                               | -                         | Дополнительный CSS-класс                                               |
+| `dropdownClassName?`                                      | `string`                                               | -                         | Дополнительный CSS-класс для выпадающего блока                         |

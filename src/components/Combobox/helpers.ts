@@ -21,7 +21,7 @@ type RenderValueProps<ITEM> = {
 };
 
 export type PropGetItemLabel<ITEM> = (item: ITEM) => string;
-export type PropGetItemKey<ITEM = DefaultItem> = (item: ITEM) => string | number;
+export type PropGetItemKey<ITEM> = (item: ITEM) => string | number;
 export type PropGetItemGroupKey<ITEM> = (item: ITEM) => string | number | undefined;
 export type PropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
 export type PropGetGroupKey<GROUP> = (group: GROUP) => string | number;

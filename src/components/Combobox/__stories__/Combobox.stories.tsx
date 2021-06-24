@@ -15,6 +15,8 @@ import {
 } from '../../SelectComponents/types';
 import { Combobox } from '../Combobox';
 
+import mdx from './Combobox.docs.mdx';
+
 const cnComboboxStories = cn('ComboboxStories');
 
 const getKnobs = () => ({
@@ -144,4 +146,13 @@ export const WithCreate = createStory(
 export default createMetadata({
   title: 'Компоненты|/Базовые/Combobox',
   id: 'components/Combobox',
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=11065%3A140493',
+    },
+  },
 });
