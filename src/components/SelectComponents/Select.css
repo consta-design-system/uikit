@@ -358,7 +358,7 @@
       line-height: calc(var(--input-height) - (var(--control-border-width) * 2));
     }
 
-    &_isUserSelect {
+    &_multiple.Select-Input_isUserSelect {
       margin-top: calc(var(--space-s) / 4 * -1);
     }
   }

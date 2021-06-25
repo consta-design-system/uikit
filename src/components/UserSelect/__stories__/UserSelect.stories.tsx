@@ -16,6 +16,8 @@ import {
 import { Text } from '../../Text/Text';
 import { UserSelect } from '../UserSelect';
 
+import mdx from './UserSelect.docs.mdx';
+
 const getKnobs = () => ({
   disabled: boolean('disabled', false),
   size: select('size', ['m', 's', 'l'], defaultPropSize),
@@ -173,4 +175,13 @@ export const WithCreate = createStory(
 export default createMetadata({
   title: 'Компоненты|/Базовые/UserSelect',
   id: 'components/UserSelect',
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=367%3A5636',
+    },
+  },
 });

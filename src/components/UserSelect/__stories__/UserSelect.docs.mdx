@@ -1,21 +1,21 @@
-import { ComboboxExampleItems } from './examples/ComboboxExampleItems/ComboboxExampleItems';
-import { ComboboxExamplePlaceholder } from './examples/ComboboxExamplePlaceholder/ComboboxExamplePlaceholder';
-import { ComboboxExampleSize } from './examples/ComboboxExampleSize/ComboboxExampleSize';
-import { ComboboxExampleForm } from './examples/ComboboxExampleForm/ComboboxExampleForm';
-import { ComboboxExampleDisabled } from './examples/ComboboxExampleDisabled/ComboboxExampleDisabled';
-import { ComboboxExampleDisabledItem } from './examples/ComboboxExampleDisabledItem/ComboboxExampleDisabledItem';
-import { ComboboxExampleGroups } from './examples/ComboboxExampleGroups/ComboboxExampleGroups';
-import { ComboboxExampleRenderItem } from './examples/ComboboxExampleRenderItem/ComboboxExampleRenderItem';
-import { ComboboxExampleRenderValue } from './examples/ComboboxExampleRenderValue/ComboboxExampleRenderValue';
-import { ComboboxExampleView } from './examples/ComboboxExampleView/ComboboxExampleView';
-import { ComboboxExampleCreate } from './examples/ComboboxExampleCreate/ComboboxExampleCreate';
-import { ComboboxExampleMultiple } from './examples/ComboboxExampleMultiple/ComboboxExampleMultiple';
+import { UserSelectExampleItems } from './examples/UserSelectExampleItems/UserSelectExampleItems';
+import { UserSelectExamplePlaceholder } from './examples/UserSelectExamplePlaceholder/UserSelectExamplePlaceholder';
+import { UserSelectExampleSize } from './examples/UserSelectExampleSize/UserSelectExampleSize';
+import { UserSelectExampleForm } from './examples/UserSelectExampleForm/UserSelectExampleForm';
+import { UserSelectExampleDisabled } from './examples/UserSelectExampleDisabled/UserSelectExampleDisabled';
+import { UserSelectExampleDisabledItem } from './examples/UserSelectExampleDisabledItem/UserSelectExampleDisabledItem';
+import { UserSelectExampleGroups } from './examples/UserSelectExampleGroups/UserSelectExampleGroups';
+import { UserSelectExampleRenderItem } from './examples/UserSelectExampleRenderItem/UserSelectExampleRenderItem';
+import { UserSelectExampleRenderValue } from './examples/UserSelectExampleRenderValue/UserSelectExampleRenderValue';
+import { UserSelectExampleView } from './examples/UserSelectExampleView/UserSelectExampleView';
+import { UserSelectExampleCreate } from './examples/UserSelectExampleCreate/UserSelectExampleCreate';
+import { UserSelectExampleMultiple } from './examples/UserSelectExampleMultiple/UserSelectExampleMultiple';
 import {
-  ComboboxExampleCustomTypes,
-  ComboboxExampleCustomTypesWithGroups,
-} from './examples/ComboboxExampleCustomTypes/ComboboxExampleCustomTypes';
+  UserSelectExampleCustomTypes,
+  UserSelectExampleCustomTypesWithGroups,
+} from './examples/UserSelectExampleCustomTypes/UserSelectExampleCustomTypes';
 
-# Combobox
+# UserSelect
 
 Выпадающий список. Позволяет выбрать один из нескольких вариантов.
 Этот компонент похож на [Select](?path=/docs/components-select--playground),
@@ -25,7 +25,7 @@ import {
 - выбрать один или несколько вариантов из списка,
 - написать в поле несколько символов — компонент покажет все варианты, в которых есть эти символы,
 - добавить вариант, которого нет в списке.
-  Используйте Combobox, если вариантов много — пять или больше. Если вариантов меньше,
+  Используйте UserSelect, если вариантов много — пять или больше. Если вариантов меньше,
   подойдет [Radio](?path=/docs/components-radio--playground)
   или [ChoiceGroup](?path=/docs/components-choicegroup--playground).
 
@@ -71,31 +71,37 @@ import {
 ```tsx
 type Item = {
   label: string;
-  id: number;
+  subLabel?: string;
+  avatarUrl?: string;
+  id: string | number;
 };
 
 const items: Item[] = [
   {
-    label: 'Первый',
+    label: 'Андрей Андреев',
+    subLabel: 'andrey@gmail.com',
     id: 1,
   },
   {
-    label: 'Второй',
+    label: 'Иван Иванов',
+    subLabel: 'ivan@gmail.com',
     id: 2,
   },
   {
-    label: 'Третий',
+    label: 'Егор Егоров',
+    subLabel: 'igor@icloud.com',
+    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
     id: 3,
   },
 ];
 
-export function ComboboxExampleItems() {
+export function UserSelectExampleItems() {
   const [value, setValue] = useState<Item | null>();
-  return <Combobox items={items} value={value} onChange={({ value }) => setValue(value)} />;
+  return <UserSelect items={items} value={value} onChange={({ value }) => setValue(value)} />;
 }
 ```
 
-<ComboboxExampleItems />
+<UserSelectExampleItems />
 
 ## Подсказка
 
@@ -108,28 +114,34 @@ export function ComboboxExampleItems() {
 ```tsx
 type Item = {
   label: string;
-  id: number;
+  subLabel?: string;
+  avatarUrl?: string;
+  id: string | number;
 };
 
 const items: Item[] = [
   {
-    label: 'Первый',
+    label: 'Андрей Андреев',
+    subLabel: 'andrey@gmail.com',
     id: 1,
   },
   {
-    label: 'Второй',
+    label: 'Иван Иванов',
+    subLabel: 'ivan@gmail.com',
     id: 2,
   },
   {
-    label: 'Третий',
+    label: 'Егор Егоров',
+    subLabel: 'igor@icloud.com',
+    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
     id: 3,
   },
 ];
 
-export function ComboboxExamplePlaceholder() {
+export function UserSelectExamplePlaceholder() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Combobox
+    <UserSelect
       placeholder="Выберите значение"
       items={items}
       value={value}
@@ -139,7 +151,7 @@ export function ComboboxExamplePlaceholder() {
 }
 ```
 
-<ComboboxExamplePlaceholder />
+<UserSelectExamplePlaceholder />
 
 ## Множественный выбор
 
@@ -151,29 +163,35 @@ export function ComboboxExamplePlaceholder() {
 ```tsx
 type Item = {
   label: string;
-  id: number;
+  subLabel?: string;
+  avatarUrl?: string;
+  id: string | number;
 };
 
 const items: Item[] = [
   {
-    label: 'Первый',
+    label: 'Андрей Андреев',
+    subLabel: 'andrey@gmail.com',
     id: 1,
   },
   {
-    label: 'Второй',
+    label: 'Иван Иванов',
+    subLabel: 'ivan@gmail.com',
     id: 2,
   },
   {
-    label: 'Третий',
+    label: 'Егор Егоров',
+    subLabel: 'igor@icloud.com',
+    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
     id: 3,
   },
 ];
 
-export function ComboboxExampleMultiple() {
+export function UserSelectExampleMultiple() {
   const [value, setValue] = useState<Item[] | null>();
   return (
     <div className={cnDocsDecorator('Section')}>
-      <Combobox
+      <UserSelect
         placeholder="Выберите значение"
         items={items}
         value={value}
@@ -185,7 +203,7 @@ export function ComboboxExampleMultiple() {
 }
 ```
 
-<ComboboxExampleMultiple />
+<UserSelectExampleMultiple />
 
 ## Размер
 
@@ -196,28 +214,34 @@ export function ComboboxExampleMultiple() {
 ```tsx
 type Item = {
   label: string;
-  id: number;
+  subLabel?: string;
+  avatarUrl?: string;
+  id: string | number;
 };
 
 const items: Item[] = [
   {
-    label: 'Первый',
+    label: 'Андрей Андреев',
+    subLabel: 'andrey@gmail.com',
     id: 1,
   },
   {
-    label: 'Второй',
+    label: 'Иван Иванов',
+    subLabel: 'ivan@gmail.com',
     id: 2,
   },
   {
-    label: 'Третий',
+    label: 'Егор Егоров',
+    subLabel: 'igor@icloud.com',
+    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
     id: 3,
   },
 ];
 
-export function ComboboxExampleSize() {
+export function UserSelectExampleSize() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Combobox
+    <UserSelect
       placeholder="Выберите значение"
       size="s"
       items={items}
@@ -228,7 +252,7 @@ export function ComboboxExampleSize() {
 }
 ```
 
-<ComboboxExampleSize />
+<UserSelectExampleSize />
 
 ## Форма
 
@@ -239,28 +263,34 @@ export function ComboboxExampleSize() {
 ```tsx
 type Item = {
   label: string;
-  id: number;
+  subLabel?: string;
+  avatarUrl?: string;
+  id: string | number;
 };
 
 const items: Item[] = [
   {
-    label: 'Первый',
+    label: 'Андрей Андреев',
+    subLabel: 'andrey@gmail.com',
     id: 1,
   },
   {
-    label: 'Второй',
+    label: 'Иван Иванов',
+    subLabel: 'ivan@gmail.com',
     id: 2,
   },
   {
-    label: 'Третий',
+    label: 'Егор Егоров',
+    subLabel: 'igor@icloud.com',
+    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
     id: 3,
   },
 ];
 
-export function ComboboxExampleForm() {
+export function UserSelectExampleForm() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Combobox
+    <UserSelect
       placeholder="Выберите значение"
       form="round"
       items={items}
@@ -271,7 +301,7 @@ export function ComboboxExampleForm() {
 }
 ```
 
-<ComboboxExampleForm />
+<UserSelectExampleForm />
 
 ## Внешний вид
 
@@ -280,28 +310,34 @@ export function ComboboxExampleForm() {
 ```tsx
 type Item = {
   label: string;
-  id: number;
+  subLabel?: string;
+  avatarUrl?: string;
+  id: string | number;
 };
 
 const items: Item[] = [
   {
-    label: 'Первый',
+    label: 'Андрей Андреев',
+    subLabel: 'andrey@gmail.com',
     id: 1,
   },
   {
-    label: 'Второй',
+    label: 'Иван Иванов',
+    subLabel: 'ivan@gmail.com',
     id: 2,
   },
   {
-    label: 'Третий',
+    label: 'Егор Егоров',
+    subLabel: 'igor@icloud.com',
+    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
     id: 3,
   },
 ];
 
-export function ComboboxExampleView() {
+export function UserSelectExampleView() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Combobox
+    <UserSelect
       placeholder="Выберите значение"
       view="clear"
       items={items}
@@ -312,7 +348,7 @@ export function ComboboxExampleView() {
 }
 ```
 
-<ComboboxExampleView />
+<UserSelectExampleView />
 
 ## Отключение поля ввода
 
@@ -321,28 +357,34 @@ export function ComboboxExampleView() {
 ```tsx
 type Item = {
   label: string;
-  id: number;
+  subLabel?: string;
+  avatarUrl?: string;
+  id: string | number;
 };
 
 const items: Item[] = [
   {
-    label: 'Первый',
+    label: 'Андрей Андреев',
+    subLabel: 'andrey@gmail.com',
     id: 1,
   },
   {
-    label: 'Второй',
+    label: 'Иван Иванов',
+    subLabel: 'ivan@gmail.com',
     id: 2,
   },
   {
-    label: 'Третий',
+    label: 'Егор Егоров',
+    subLabel: 'igor@icloud.com',
+    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
     id: 3,
   },
 ];
 
-export function ComboboxExampleDisabled() {
+export function UserSelectExampleDisabled() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Combobox
+    <UserSelect
       placeholder="Выберите значение"
       items={items}
       value={value}
@@ -353,7 +395,7 @@ export function ComboboxExampleDisabled() {
 }
 ```
 
-<ComboboxExampleDisabled />
+<UserSelectExampleDisabled />
 
 ## Отключение элементов списка
 
@@ -363,32 +405,38 @@ export function ComboboxExampleDisabled() {
 ```tsx
 type Item = {
   label: string;
-  id: number;
+  subLabel?: string;
+  avatarUrl?: string;
+  id: string | number;
   disabled: boolean;
 };
 
 const items: Item[] = [
   {
-    label: 'Первый',
+    label: 'Андрей Андреев',
+    subLabel: 'andrey@gmail.com',
     id: 1,
     disabled: true,
   },
   {
-    label: 'Второй',
+    label: 'Иван Иванов',
+    subLabel: 'ivan@gmail.com',
     id: 2,
     disabled: false,
   },
   {
-    label: 'Третий',
+    label: 'Егор Егоров',
+    subLabel: 'igor@icloud.com',
+    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
     id: 3,
     disabled: true,
   },
 ];
 
-export function ComboboxExampleDisabledItem() {
+export function UserSelectExampleDisabledItem() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Combobox
+    <UserSelect
       placeholder="Выберите значение"
       items={items}
       value={value}
@@ -398,7 +446,7 @@ export function ComboboxExampleDisabledItem() {
 }
 ```
 
-<ComboboxExampleDisabledItem />
+<UserSelectExampleDisabledItem />
 
 ## Группировка списка
 
@@ -409,7 +457,9 @@ export function ComboboxExampleDisabledItem() {
 ```tsx
 type Item = {
   label: string;
-  id: number;
+  subLabel?: string;
+  avatarUrl?: string;
+  id: string | number;
   groupId: number;
 };
 
@@ -427,44 +477,34 @@ const groups: Group[] = [
     id: 2,
     label: 'Вторая группа',
   },
-  {
-    id: 3,
-    label: 'Третья группа',
-  },
 ];
 
 const items: Item[] = [
   {
-    label: 'Первый',
+    label: 'Андрей Андреев',
+    subLabel: 'andrey@gmail.com',
     id: 1,
     groupId: 1,
   },
   {
-    label: 'Второй',
+    label: 'Иван Иванов',
+    subLabel: 'ivan@gmail.com',
     id: 2,
     groupId: 2,
   },
   {
-    label: 'Третий',
-    id: 3,
-    groupId: 1,
-  },
-  {
-    label: 'Четвертый',
-    id: 3,
-    groupId: 3,
-  },
-  {
-    label: 'Пятый',
+    label: 'Егор Егоров',
+    subLabel: 'igor@icloud.com',
+    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
     id: 3,
     groupId: 2,
   },
 ];
 
-export function ComboboxExampleGroups() {
+export function UserSelectExampleGroups() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Combobox
+    <UserSelect
       placeholder="Выберите значение"
       items={items}
       value={value}
@@ -475,7 +515,7 @@ export function ComboboxExampleGroups() {
 }
 ```
 
-<ComboboxExampleGroups />
+<UserSelectExampleGroups />
 
 ## Создание элементов
 
@@ -505,11 +545,11 @@ const items: Item[] = [
   },
 ];
 
-export function ComboboxExampleCreate() {
+export function UserSelectExampleCreate() {
   const [value, setValue] = useState<Item | null>();
   const [list, setList] = useState<Item[]>(items);
   return (
-    <Combobox
+    <UserSelect
       placeholder="Выберите значение"
       items={list}
       value={value}
@@ -520,11 +560,11 @@ export function ComboboxExampleCreate() {
 }
 ```
 
-<ComboboxExampleCreate />
+<UserSelectExampleCreate />
 
 ## Поиск
 
-В `Combobox` имеется возможность поиска элемента, по умолчанию поиск идет по `label` элемента.
+В `UserSelect` имеется возможность поиска элемента, по умолчанию поиск идет по `label` элемента.
 Вы можете использовать свою функцию поиска в свойстве `searchFunction`.
 Это может быть полезно когда, используете свое предстволение элементов списка,
 где выводится помимо `label` элемента еще какието данные по которым тоже необходим поиск.
@@ -539,44 +579,46 @@ export function ComboboxExampleCreate() {
 ### Пример с своим представлением элемента списка и своей функцией поиска
 
 ```tsx
-const cnComboboxExampleRenderItem = cn('ComboboxExampleRenderItem');
+const cnUserSelectExampleRenderItem = cn('UserSelectExampleRenderItem');
 
 type Item = {
   label: string;
-  id: number;
-  status?: 'repairs' | 'serviceable';
+  subLabel?: string;
+  avatarUrl?: string;
+  id: string | number;
+  status: 'remotely' | 'inOffice';
 };
 
 const items: Item[] = [
   {
-    label: 'Принтер',
+    label: 'Андрей Андреев',
+    subLabel: 'andrey@gmail.com',
     id: 1,
-    status: 'repairs',
+    status: 'remotely',
   },
   {
-    label: 'Монитор',
+    label: 'Иван Иванов',
+    subLabel: 'ivan@gmail.com',
     id: 2,
-    status: 'serviceable',
+    status: 'remotely',
   },
   {
-    label: 'Ноутбук',
+    label: 'Егор Егоров',
+    subLabel: 'igor@icloud.com',
+    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
     id: 3,
-    status: 'serviceable',
-  },
-  {
-    label: 'Стол',
-    id: 4,
+    status: 'inOffice',
   },
 ];
 
 const mapLabel = {
-  repairs: 'На ремонте',
-  serviceable: 'Исправен',
+  remotely: 'Удаленно',
+  inOffice: 'В офисе',
 } as const;
 
 const mapStatus = {
-  repairs: 'error',
-  serviceable: 'success',
+  remotely: 'normal',
+  inOffice: 'success',
 } as const;
 
 export const searchCompare = (searchValue: string, compare?: string): boolean => {
@@ -594,44 +636,50 @@ const searchFunction = (item: Item, searchValue: string): boolean => {
     return searchOfLabel;
   }
 
+  const searchOfSubLabel = searchCompare(searchValue, item.subLabel);
+
+  if (searchOfSubLabel) {
+    return searchOfSubLabel;
+  }
+
   return searchCompare(searchValue, item.status && mapLabel[item.status]);
 };
 
-export function ComboboxExampleRenderItem() {
+export function UserSelectExampleRenderItem() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Combobox
-      placeholder="Выберите значение"
-      items={items}
-      value={value}
-      onChange={({ value }) => setValue(value)}
-      searchFunction={searchFunction}
-      renderItem={({ item, active, hovered, onClick, onMouseEnter }) => (
-        <div
-          className={cnComboboxExampleRenderItem('Item', { active, hovered })}
-          role="option"
-          aria-selected={active}
-          onMouseEnter={onMouseEnter}
-          onClick={onClick}
-        >
-          {item.label}
-          {item.status && (
-            <Badge
-              className={cnComboboxExampleRenderItem('Badge')}
-              as="span"
-              size="s"
-              label={mapLabel[item.status]}
-              status={mapStatus[item.status]}
+    <div className={cnDocsDecorator('Section')}>
+      <UserSelect
+        placeholder="Выберите значение"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        searchFunction={searchFunction}
+        renderItem={({ item, active, hovered, onClick, onMouseEnter }) => (
+          <div
+            className={cnUserSelectExampleRenderItem('Item', { active, hovered })}
+            role="option"
+            aria-selected={active}
+            aria-hidden
+            onMouseEnter={onMouseEnter}
+            onClick={onClick}
+          >
+            <User
+              className={cnUserSelectExampleRenderItem('User')}
+              name={item.label}
+              avatarUrl={item.avatarUrl}
+              info={item.subLabel}
             />
-          )}
-        </div>
-      )}
-    />
+            <Badge status={mapStatus[item.status]} label={mapLabel[item.status]} size="s" />
+          </div>
+        )}
+      />
+    </div>
   );
 }
 ```
 
-<ComboboxExampleRenderItem />
+<UserSelectExampleRenderItem />
 
 ## Свое представление выбранного значения
 
@@ -639,48 +687,75 @@ export function ComboboxExampleRenderItem() {
 Свойство принимает [функцию рендера](https://reactjs.org/docs/render-props.html).
 
 ```tsx
+const cnUserSelectExampleRenderValue = cn('UserSelectExampleRenderValue');
+
 type Item = {
   label: string;
-  id: number;
+  subLabel?: string;
+  avatarUrl?: string;
+  id: string | number;
+  status: 'remotely' | 'inOffice';
 };
 
 const items: Item[] = [
   {
-    label: 'Первый',
+    label: 'Андрей Андреев',
+    subLabel: 'andrey@gmail.com',
     id: 1,
+    status: 'remotely',
   },
   {
-    label: 'Второй',
+    label: 'Иван Иванов',
+    subLabel: 'ivan@gmail.com',
     id: 2,
+    status: 'remotely',
   },
   {
-    label: 'Третий',
+    label: 'Егор Егоров',
+    subLabel: 'igor@icloud.com',
+    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
     id: 3,
+    status: 'inOffice',
   },
 ];
 
-export function ComboboxExampleRenderValue() {
+const mapLabel = {
+  remotely: 'Удаленно',
+  inOffice: 'В офисе',
+} as const;
+
+const mapStatus = {
+  remotely: 'normal',
+  inOffice: 'success',
+} as const;
+
+export function UserSelectExampleRenderValue() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Combobox
-      placeholder="Выберите значение"
-      items={items}
-      value={value}
-      onChange={({ value }) => setValue(value)}
-      renderValue={({ item }) => (
-        <div>
-          <span role="img" aria-label="Panda">
-            🐼
-          </span>{' '}
-          - {item.label}
-        </div>
-      )}
-    />
+    <div className={cnDocsDecorator('Section')}>
+      <UserSelect
+        placeholder="Выберите значение"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        renderValue={({ item }) => (
+          <div className={cnUserSelectExampleRenderValue('Item')}>
+            <User
+              className={cnUserSelectExampleRenderValue('User')}
+              name={item.label}
+              avatarUrl={item.avatarUrl}
+              info={item.subLabel}
+            />
+            <Badge status={mapStatus[item.status]} label={mapLabel[item.status]} size="s" />
+          </div>
+        )}
+      />
+    </div>
   );
 }
 ```
 
-<ComboboxExampleRenderValue />
+<UserSelectExampleRenderValue />
 
 ## Свои тип данных items и groups
 
@@ -688,29 +763,32 @@ export function ComboboxExampleRenderValue() {
 
 Если ваш тип данных отличен от [DefaultItem](#свойства) и [DefaultGroup](#свойства),
 необходимо использовать свойства:
-`getItemLabel`, `getItemKey`, `getItemGroupKey`, `getItemDisabled`, `getGroupLabel`, `getGroupKey`,
+`getItemLabel`, `getItemKey`, `getItemGroupKey`, `getItemDisabled`,
+`getItemSubLabel`, `getItemAvatarUrl`, `getGroupLabel`, `getGroupKey`,
 для того чтобы компонент понимал откуда брать данные.
 
 ### Геттеры по умолчанию
 
 ```ts
-const defaultGetItemKey = (item) => item.id;
-const defaultGetItemLabel = (item) => item.label;
-const defaultGetItemGroupKey = (item) => item.groupId;
-const defaultGetItemDisabled = (item) => item.disabled;
-const defaultGetGroupKey = (group) => group.id;
-const defaultGetGroupLabel = (group) => group.label;
+export const defaultGetItemKey = (item) => item.id;
+export const defaultGetItemLabel = (item) => item.label;
+export const defaultGetItemSubLabel = (item) => item.subLabel;
+export const defaultGetItemAvatarUrl = (item) => item.avatarUrl;
+export const defaultGetItemGroupKey = (item) => item.groupId;
+export const defaultGetItemDisabled = (item) => item.disabled;
+export const defaultGetGroupKey = (group) => group.id;
+export const defaultGetGroupLabel = (group) => group.label;
 ```
 
 ### Пример с кастомным Item
 
 ```tsx
-export function ComboboxExampleCustomTypes() {
+export function UserSelectExampleCustomTypes() {
   const [value, setValue] = useState<string | null>();
   return (
-    <Combobox
+    <UserSelect
       placeholder="Выберите значение"
-      items={['Первый', 'Второй', 'Третий']}
+      items={['Андрей Андреев', 'Егор Егоров', 'Михаил Михалков']}
       value={value}
       onChange={({ value }) => setValue(value)}
       getItemKey={(item) => item}
@@ -720,51 +798,48 @@ export function ComboboxExampleCustomTypes() {
 }
 ```
 
-<ComboboxExampleCustomTypes />
+<UserSelectExampleCustomTypes />
 
 ### Пример с кастомным Item и Group
 
 ```tsx
-export type Item = {
-  name: string;
+const groups = ['Отдел разработкки', 'Отдел закупок'];
+
+type Item = {
+  firstName: string;
+  lastName: string;
   group: string;
 };
 
-export const items: Item[] = [
-  { name: 'Первый', group: 'Первая группа' },
-  { name: 'Второй', group: 'Третья группа' },
-  { name: 'Третий', group: 'Вторая группа' },
-  { name: 'Четвертый', group: 'Первая группа' },
-  { name: 'Пятый', group: 'Первая группа' },
-  { name: 'Шестой', group: 'Третья группа' },
-  { name: 'Седьмой', group: 'Первая группа' },
-  { name: 'Восьмой', group: 'Вторая группа' },
-  { name: 'Девятый', group: 'Третья группа' },
-  { name: 'Десятый', group: 'Вторая группа' },
+const items: Item[] = [
+  { firstName: 'Андрей', lastName: 'Андреев', group: 'Отдел разработкки' },
+  { firstName: 'Егор', lastName: 'Егоров', group: 'Отдел разработкки' },
+  { firstName: 'Михаил', lastName: 'Михайлов', group: 'Отдел закупок' },
 ];
 
-export const groups: string[] = ['Первая группа', 'Вторая группа', 'Третья группа'];
-
-export function ComboboxExampleCustomTypesWithGroups() {
+export function UserSelectExampleCustomTypesWithGroups() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Combobox
-      placeholder="Выберите значение"
-      items={items}
-      groups={groups}
-      value={value}
-      onChange={({ value }) => setValue(value)}
-      getItemKey={(item) => item.name}
-      getItemLabel={(item) => item.name}
-      getItemGroupKey={(item) => item.group}
-      getGroupKey={(group) => group}
-      getGroupLabel={(group) => group}
-    />
+    <div className={cnDocsDecorator('Section')}>
+      <UserSelect
+        placeholder="Выберите значение"
+        items={items}
+        groups={groups}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        getItemKey={(item) => `${item.firstName} ${item.lastName}`}
+        getItemLabel={(item) => `${item.firstName} ${item.lastName}`}
+        getItemSubLabel={(item) => item.group}
+        getItemGroupKey={(item) => item.group}
+        getGroupKey={(group) => group}
+        getGroupLabel={(group) => group}
+      />
+    </div>
   );
 }
 ```
 
-<ComboboxExampleCustomTypesWithGroups />
+<UserSelectExampleCustomTypesWithGroups />
 
 ## Свойства
 
@@ -803,12 +878,14 @@ type PropRenderValue<ITEM> = (props: { item: ITEM }) => React.ReactElement | nul
 
 type PropSearchFunction<ITEM> = (item: ITEM, searchValue: string) => boolean;
 
-type PropGetItemLabel<ITEM> = (item: ITEM) => string;
-type PropGetItemKey<ITEM> = (item: ITEM) => string | number;
-type PropGetItemGroupKey<ITEM> = (item: ITEM) => string | number | undefined;
-type PropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
-type PropGetGroupKey<GROUP> = (group: GROUP) => string | number;
-type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
+export type PropGetItemLabel<ITEM> = (item: ITEM) => string;
+export type PropGetItemSubLabel<ITEM> = (item: ITEM) => string | undefined;
+export type PropGetItemAvatarUrl<ITEM> = (item: ITEM) => string | undefined;
+export type PropGetItemKey<ITEM> = (item: ITEM) => string | number;
+export type PropGetItemGroupKey<ITEM> = (item: ITEM) => string | number | undefined;
+export type PropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
+export type PropGetGroupKey<GROUP> = (group: GROUP) => string | number;
+export type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 ```
 
 | Свойство                                                  | Тип или варианты значения                              | По умолчанию                                                  | Описание                                                               |
@@ -828,6 +905,8 @@ type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | [`renderValue?`](#свое-представление-выбранного-значения) | `PropRenderValue<ITEM>`                                | рендер по умолчанию                                           | Рендер функция элемента значения                                       |
 | [`getItemLabel?`](#свои-тип-данных-items-и-groups)        | `PropGetItemLabel<ITEM>`                               | `(item) => item.label`                                        | Функция для определения названия элемента                              |
 | [`getItemKey?`](#свои-тип-данных-items-и-groups)          | `PropGetItemKey<ITEM>`                                 | `(item) => item.id`                                           | Функция для определения уникального ключа элемента                     |
+| [`getItemSubLabel?`](#свои-тип-данных-items-и-groups)     | `PropGetItemSubLabel<ITEM>`                            | `(item) => item.subLabel`                                     | Функция для определения подписи элемента                               |
+| [`getItemAvatarUrl?`](#свои-тип-данных-items-и-groups)    | `PropGetItemAvatarUrl<ITEM>`                           | `(item) => item.avatarUrl`                                    | Функция для определения аватарки элемента                              |
 | [`getItemGroupKey?`](#свои-тип-данных-items-и-groups)     | `PropGetItemGroupKey<ITEM>`                            | `(item) => item.groupId`                                      | Функция для определения ключа группы, к которой будет привязан элемент |
 | [`getItemDisabled?`](#свои-тип-данных-items-и-groups)     | `PropGetItemDisabled<ITEM>`                            | `(item) => item.disabled`                                     | Функция для определения состояния `disabled`                           |
 | [`getGroupLabel?`](#свои-тип-данных-items-и-groups)       | `PropGetGroupKey<GROUP>`                               | `(group) => group.id`                                         | Функция для определения названия группы                                |
