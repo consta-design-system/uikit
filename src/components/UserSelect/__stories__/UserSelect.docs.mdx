@@ -1,24 +1,45 @@
 import { Preview } from '@storybook/addon-docs/dist/blocks';
 
-import { UserSelectExample, UserSelectExampleMulti } from './examples/UserSelectExample';
+import {
+  UserSelectExample,
+  UserSelectExampleMulti,
+  UserSelectExampleDefault,
+  UserSelectExampleDisabled,
+  UserSelectExampleClear,
+  UserSelectExampleSize,
+  UserSelectExampleForm,
+} from './examples/UserSelectExample';
 
 # UserSelect
 
-Выпадающий список пользователей. Очень похож на [Combobox](?path=/docs/components-combobox--default-story) и [MultiCombobox](?path=/docs/components-multicombobox--with-value-story),
-но предназначен для выборва пользователей, у которых (в отличии от Combobox и MultiCombobox) присутствуют дополнительные поля - аватар и информация.
+Выпадающий список пользователей, позволяет выбирать пользователей из списка.
 
-Что может пользователь:
+Как его использовать:
 
-- выбрать либо **один**, либо **несколько вариантов** из списка,
-- написать в поле несколько символов — компонент покажет все варианты, в которых есть эти символы.
+- выбрать одного или несколько пользователей из списка,
+- написать в поле несколько символов — компонент покажет всех пользователей, в именах которых есть эти символы.
+
+Этот компонент ведёт себя как [Combobox](?path=/docs/components-combobox--default-story) и [MultiCombobox](?path=/docs/components-multicombobox--with-value-story), но содержит информацию о пользователях: например, имя и аватарку, как в компоненте [User](?path=/docs/components-user--playground).
+
+- [Варианты](#варианты)
+  - [Несколько вариантов](#несколько-вариантов)
+  - [Группы вариантов](#группы-вариантов)
+- [Размер](#размер)
+- [Внешний вид](#внешний-вид)
+- [Форма](#форма)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+  - [Вариант не выбран](#вариант-не-выбран)
+  - [Вариант выбран](#вариант-выбран)
 
 ## Варианты
 
-Варианты значений для выпадающего списка передаются в объекте `options`. Напишите их
-с заглавной буквы.
+Варианты для выпадающего списка с пользователями передаются в объекте `options`. Что можно вывести:
 
-Отобразить текст для конкретного варианта можно с помощью функции `getOptionLabel`.
-Для корректного отображения одинаковых вариантов лучше указать уникальный ключ с помощью `getOptionKey`.
+- текст (например, имя и фамилия) — отображается с помощью функции `getOptionLabel`,
+- ссылка на аватарку — `getOptionAvatarUrl`,
+- уникальный ключ — `getOptionKey`,
+- дополнительная информация (почта, телефон, доступность, что-то ещё) — `getOptionAdditionalInfo`.
 
 Подсказка, которая видна, когда ни один вариант не выбран, задается в свойстве `placeholder`.
 Сформулируйте подсказку так, чтобы стало понятно, что по клику на поле раскроется список вариантов,
@@ -26,36 +47,158 @@ import { UserSelectExample, UserSelectExampleMulti } from './examples/UserSelect
 
 <UserSelectExample />
 
-## Выбрать несколько вариантов
+```tsx
+const items = [
+  {
+    label: 'Андрей Андреев',
+    value: 'AA',
+    subLabel: 'andrey@mail.com',
+    url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
+  },
+  {
+    label: 'Иван Иванов',
+    value: 'II',
+    subLabel: 'ivan@mail.com',
+    url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
+  },
+  {
+    label: 'Тимур Тимуров',
+    value: 'TT',
+    subLabel: 'timur@mail.com',
+    url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
+  },
+];
+
+const Example = () => {
+  const getItemLabel = (option: SelectOption): string => option.label;
+  const getItemSubLabel = (option: SelectOption): string => option.subLabel;
+  const getItemUrl = (option: SelectOption): string => option.url;
+
+  return (
+    <UserSelect
+      id="employees"
+      options={items}
+      getOptionLabel={getItemLabel}
+      getOptionAdditionalInfo={getItemSubLabel}
+      getOptionAvatarUrl={getItemUrl}
+      playground="Выберите сотрудника"
+    />
+  );
+};
+```
+
+### Несколько вариантов
+
+По умолчанию из списка можно выбрать только одного пользователя. Чтобы выбрать нескольких, добавьте
+`multiple`.
 
 <UserSelectExampleMulti />
 
+```tsx
+<UserSelect
+  id="employees"
+  options={items}
+  getOptionLabel={getItemLabel}
+  getOptionAdditionalInfo={getItemSubLabel}
+  getOptionAvatarUrl={getItemUrl}
+  placeholder="Выберите одного или нескольких сотрудников"
+  multiple
+/>
+```
+
+### Группы вариантов
+
+Если пользователей много, их можно разбить на группы. Получить пользователей из групп можно с помощью функции `getGroupOptions`.
+
+## Внешний вид
+
+За внешний вид компонента отвечает свойство `view`. Варианты: `default`, `clear`.
+
+<UserSelectExampleDefault />
+<UserSelectExampleClear />
+
+```tsx
+<UserSelect
+  id="employees"
+  options={items}
+  getOptionLabel={getItemLabel}
+  getOptionAdditionalInfo={getItemSubLabel}
+  getOptionAvatarUrl={getItemUrl}
+  placeholder="Выбор сотрудников `default`"
+  view="default"
+/>
+<UserSelect
+  id="employees"
+  options={items}
+  getOptionLabel={getItemLabel}
+  getOptionAdditionalInfo={getItemSubLabel}
+  getOptionAvatarUrl={getItemUrl}
+  placeholder="Выбор сотрудников `clear`"
+  view="default"
+/>
+```
+
+Чтобы сделать список неактивным, добавьте `disabled`.
+
+<UserSelectExampleDisabled />
+
+```tsx
+<UserSelect
+  id="employees"
+  options={items}
+  getOptionLabel={getItemLabel}
+  getOptionAdditionalInfo={getItemSubLabel}
+  getOptionAvatarUrl={getItemUrl}
+  placeholder="Неактивный выбор сотрудников"
+  disabled
+/>
+```
+
+## Форма
+
+За форму компонента отвечает свойство `form`. Основные формы: `'default'`, `'brick'`,`'round'`. По умолчанию
+`'default'`.
+
+<UserSelectExampleForm />
+
+Гибридные формы — `'clearRound'`, `'roundClear'`, `'clearDefault'`, `'defaultClear'`, `'defaultBrick'`, `'brickDefault'`, `'brickClear'`, `'clearBrick'`, `'clearClear'`. Удобно использовать для сочетания с другими контролами или элементами.
+
+## Размер
+
+За размер списка отвечает свойство `size`. Варианты: `'s'` , `'m'` , `'l'`. По умолчанию `'m'`.
+
+<UserSelectExampleSize />
+
+## Поиск
+
+Вы можете изменить текст, который видит пользователь, если при поиске по списку ничего не нашлось. За это отвечает `labelForNotFound`.
+
 ## Свойства
 
-| Свойство                                | Тип или варианты значения                              | По умолчанию   | Описание                                                                                                                   |
-| --------------------------------------- | ------------------------------------------------------ | -------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `multiple?`                             | `boolean`                                              | `false`        | Возможность выбрать несколько варинтов                                                                                     |
-| [`view?`](#внешний-вид)                 | `default , clear`                                      | `default`      | Внешний вид компонента                                                                                                     |
-| [`form?`](#форма)                       | 'default', 'brick', 'round'                            | `default`      | Форма поля компонента                                                                                                      |
-| [`disabled?`](#внешний-вид)             | `boolean`                                              | -              | Делает компонент недоступным                                                                                               |
-| [`size?`](#размер)                      | `'s' , 'm' , 'l'`                                      | `'m'`          | Размер компонента                                                                                                          |
-| [`placeholder?`](#варианты)             | `string`                                               | -              | Подсказка, отображается, когда вариант не выбран                                                                           |
-| [`options`](#варианты)                  | `T[]`                                                  | -              | Варианты, которые можно выбрать                                                                                            |
-| [`getOptionLabel`](#варианты)           | `(arg: T) => string`                                   | -              | Функция для получения текста варианта, который будет отображаться в поле для выбранного значения                           |
-| [`getOptionKey?`](#варианты)            | `(arg: T) => string | number`                          | getOptionLabel | Функция для получения уникального ключа элемента списка                                                                    |
-| [`getOptionAdditionalInfo?`](#варианты) | `(arg: T) => string`                                   | -              | Функция для получения текста варианта, который будет отображаться в поле дополнительной информации для выбранного значения |
-| [`getOptionAvatarUrl?`](#варианты)      | `(arg: T) => string`                                   | -              | Функция для получения url изображения, которое будет отображаться в аватаре пользователя                                   |
-| `searchFunction?`                       | `(item: T, searchValue: string) => boolean`            | -              | Функция для поиска среди пользователей                                                                                     |
-| `value?`                                | `T , null`                                             | `null`         | Значение селекта                                                                                                           |
-| `ariaLabel?`                            | `string`                                               | -              | `aria` атрибут для метки                                                                                                   |
-| `id`                                    | `string`                                               | -              | Идентификатор селекта в DOM                                                                                                |
-| `onChange?`                             | `(value: string | null) => void`                       | -              | Обработчик события по изменению значения компонента                                                                        |
-| `onBlur?`                               | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -              | Обработчик события `blur`                                                                                                  |
-| `onFocus?`                              | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -              | Обработчик события `focus`                                                                                                 |
-| `labelForNotFound?`                     | `string`                                               | -              | Текст при отсуствии элементов при поиске                                                                                   |
-| `className?`                            | `string`                                               | -              | Дополнительный CSS-класс                                                                                                   |
-| dropdownClassName?                      | `string`                                               | -              | Дополнительный CSS-класс для выпадающего блока                                                                             |
-| [`getGroupOptions?`](#группы-вариантов) | `(group: T) => T[]`                                    | -              | Функция для получения вариантов из группы                                                                                  |
+| Свойство                                | Тип или варианты значения                                                                                                                                                                 | По умолчанию | Описание                                                                                                                   |
+| --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| [`multiple?`](#группы-вариантов)        | `boolean`                                                                                                                                                                                 | `false`      | Возможность выбрать несколько вариантов                                                                                    |
+| [`view?`](#внешний-вид)                 | `default , clear`                                                                                                                                                                         | `default`    | Внешний вид компонента                                                                                                     |
+| [`form?`](#форма)                       | `'default'`, `'brick'`, `'round'`, `'clearRound'`, `'roundClear'`, `'clearDefault'`, `'defaultClear'`, `'defaultBrick'`, `'brickDefault'`, `'brickClear'`, `'clearBrick'`, `'clearClear'` | `default`    | Форма поля компонента                                                                                                      |
+| [`disabled?`](#внешний-вид)             | `boolean`                                                                                                                                                                                 | -            | Делает компонент недоступным                                                                                               |
+| [`size?`](#размер)                      | `'s' , 'm' , 'l'`                                                                                                                                                                         | `'m'`        | Размер компонента                                                                                                          |
+| [`placeholder?`](#варианты)             | `string`                                                                                                                                                                                  | -            | Подсказка, отображается, когда вариант не выбран                                                                           |
+| [`options`](#варианты)                  | `T[]`                                                                                                                                                                                     | -            | Варианты, которые можно выбрать                                                                                            |
+| [`getOptionLabel`](#варианты)           | `(arg: T) => string`                                                                                                                                                                      | -            | Функция для получения текста варианта, который будет отображаться в поле для выбранного значения                           |
+| [`getOptionKey?`](#варианты)            | `(arg: T) => string`                                                                                                                                                                      | `number`     | `getOptionLabel`                                                                                                           | Функция для получения уникального ключа элемента списка |
+| [`getOptionAdditionalInfo?`](#варианты) | `(arg: T) => string`                                                                                                                                                                      | -            | Функция для получения текста варианта, который будет отображаться в поле дополнительной информации для выбранного значения |
+| [`getOptionAvatarUrl?`](#варианты)      | `(arg: T) => string`                                                                                                                                                                      | -            | Функция для получения url изображения, которое будет отображаться в аватаре пользователя                                   |
+| `searchFunction?`                       | `(item: T, searchValue: string) => boolean`                                                                                                                                               | -            | Функция для поиска среди пользователей                                                                                     |
+| [`value?`](#варианты)                   | `T , null`                                                                                                                                                                                | `null`       | Значение селекта                                                                                                           |
+| `ariaLabel?`                            | `string`                                                                                                                                                                                  | -            | `aria` атрибут для метки                                                                                                   |
+| `id`                                    | `string`                                                                                                                                                                                  | -            | Идентификатор селекта в DOM                                                                                                |
+| `onChange?`                             | `(value: string | null) => void`                                                                                                                                                          | -            | Обработчик события по изменению значения компонента                                                                        |
+| `onBlur?`                               | `(event?: React.FocusEvent<HTMLInputElement>) => void`                                                                                                                                    | -            | Обработчик события `blur`                                                                                                  |
+| `onFocus?`                              | `(event?: React.FocusEvent<HTMLInputElement>) => void`                                                                                                                                    | -            | Обработчик события `focus`                                                                                                 |
+| [`labelForNotFound?`](#поиск)           | `string`                                                                                                                                                                                  | -            | Текст при отсуствии элементов при поиске                                                                                   |
+| `className?`                            | `string`                                                                                                                                                                                  | -            | Дополнительный CSS-класс                                                                                                   |
+| dropdownClassName?                      | `string`                                                                                                                                                                                  | -            | Дополнительный CSS-класс для выпадающего блока                                                                             |
+| [`getGroupOptions?`](#группы-вариантов) | `(group: T) => T[]`                                                                                                                                                                       | -            | Функция для получения вариантов из группы                                                                                  |
 
 ## Примеры
 

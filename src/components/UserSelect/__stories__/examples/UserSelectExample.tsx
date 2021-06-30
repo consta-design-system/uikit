@@ -39,7 +39,6 @@ export const UserSelectExample = () => {
   const getItemUrl = (option: Option): string => option.url;
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <p>Выбор сотрудника</p>
       <UserSelect
         id="employees"
         options={items}
@@ -63,18 +62,177 @@ export const UserSelectExampleMulti = () => {
   const getItemUrl = (option: Option): string => option.url;
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <p>Выбор сотрудников</p>
       <UserSelect
-        id="employees"
+        id="employeesMulti"
         options={items}
         getOptionLabel={getItemLabel}
         getOptionAdditionalInfo={getItemSubLabel}
         getOptionAvatarUrl={getItemUrl}
-        placeholder="Выберите сотрудника"
+        placeholder="Выберите одного или нескольких сотрудников"
         size="m"
         onChange={setValue}
         value={value}
         multiple
+      />
+    </StoryBookExample>
+  );
+};
+
+export const UserSelectExampleDefault = () => {
+  const [value, setValue] = useState<Option[] | null>(null);
+  const getItemLabel = (option: Option): string => option.label;
+  const getItemSubLabel = (option: Option): string => option.subLabel;
+  const getItemUrl = (option: Option): string => option.url;
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <UserSelect
+        id="employeesDefault"
+        options={items}
+        getOptionLabel={getItemLabel}
+        getOptionAdditionalInfo={getItemSubLabel}
+        getOptionAvatarUrl={getItemUrl}
+        placeholder="Выбор сотрудников `default`"
+        size="m"
+        view="default"
+        onChange={setValue}
+        value={value}
+      />
+    </StoryBookExample>
+  );
+};
+
+export const UserSelectExampleClear = () => {
+  const [value, setValue] = useState<Option[] | null>(null);
+  const getItemLabel = (option: Option): string => option.label;
+  const getItemSubLabel = (option: Option): string => option.subLabel;
+  const getItemUrl = (option: Option): string => option.url;
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <UserSelect
+        id="employeesDefault"
+        options={items}
+        getOptionLabel={getItemLabel}
+        getOptionAdditionalInfo={getItemSubLabel}
+        getOptionAvatarUrl={getItemUrl}
+        placeholder="Выбор сотрудников `clear`"
+        size="m"
+        view="clear"
+        onChange={setValue}
+        value={value}
+      />
+    </StoryBookExample>
+  );
+};
+
+export const UserSelectExampleDisabled = () => {
+  const [value, setValue] = useState<Option[] | null>(null);
+  const getItemLabel = (option: Option): string => option.label;
+  const getItemSubLabel = (option: Option): string => option.subLabel;
+  const getItemUrl = (option: Option): string => option.url;
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <UserSelect
+        id="employeesDefault"
+        options={items}
+        getOptionLabel={getItemLabel}
+        getOptionAdditionalInfo={getItemSubLabel}
+        getOptionAvatarUrl={getItemUrl}
+        placeholder="Неактивный выбор сотрудников"
+        size="m"
+        onChange={setValue}
+        value={value}
+        disabled
+      />
+    </StoryBookExample>
+  );
+};
+
+export const UserSelectExampleSize = () => {
+  const [value, setValue] = useState<Option[] | null>(null);
+  const getItemLabel = (option: Option): string => option.label;
+  const getItemSubLabel = (option: Option): string => option.subLabel;
+  const getItemUrl = (option: Option): string => option.url;
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <UserSelect
+        id="employeesS"
+        options={items}
+        getOptionLabel={getItemLabel}
+        getOptionAdditionalInfo={getItemSubLabel}
+        getOptionAvatarUrl={getItemUrl}
+        placeholder="Выбор сотрудников 's'"
+        size="s"
+        onChange={setValue}
+        value={value}
+      />
+      <UserSelect
+        id="employeesM"
+        options={items}
+        getOptionLabel={getItemLabel}
+        getOptionAdditionalInfo={getItemSubLabel}
+        getOptionAvatarUrl={getItemUrl}
+        placeholder="Выбор сотрудников 'm'"
+        size="s"
+        onChange={setValue}
+        value={value}
+      />
+      <UserSelect
+        id="employeesL"
+        options={items}
+        getOptionLabel={getItemLabel}
+        getOptionAdditionalInfo={getItemSubLabel}
+        getOptionAvatarUrl={getItemUrl}
+        placeholder="Выбор сотрудников 'l'"
+        size="l"
+        onChange={setValue}
+        value={value}
+      />
+    </StoryBookExample>
+  );
+};
+
+export const UserSelectExampleForm = () => {
+  const [value, setValue] = useState<Option[] | null>(null);
+  const getItemLabel = (option: Option): string => option.label;
+  const getItemSubLabel = (option: Option): string => option.subLabel;
+  const getItemUrl = (option: Option): string => option.url;
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <UserSelect
+        id="employeesS"
+        options={items}
+        getOptionLabel={getItemLabel}
+        getOptionAdditionalInfo={getItemSubLabel}
+        getOptionAvatarUrl={getItemUrl}
+        placeholder="Выбор сотрудников 'default'"
+        size="m"
+        onChange={setValue}
+        value={value}
+        form="default"
+      />
+      <UserSelect
+        id="employeesM"
+        options={items}
+        getOptionLabel={getItemLabel}
+        getOptionAdditionalInfo={getItemSubLabel}
+        getOptionAvatarUrl={getItemUrl}
+        placeholder="Выбор сотрудников 'brick'"
+        size="m"
+        onChange={setValue}
+        value={value}
+        form="brick"
+      />
+      <UserSelect
+        id="employeesL"
+        options={items}
+        getOptionLabel={getItemLabel}
+        getOptionAdditionalInfo={getItemSubLabel}
+        getOptionAvatarUrl={getItemUrl}
+        placeholder="Выбор сотрудников 'round'"
+        size="m"
+        onChange={setValue}
+        value={value}
+        form="round"
       />
     </StoryBookExample>
   );
