@@ -9,7 +9,7 @@ const emptyFunction = () => action('emptyFunction');
 
 export const RadioExampleSize = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
-    <Radio size="m" label="Размер M" onChange={emptyFunction} checked={undefined} />
-    <Radio size="l" label="Размер L" onChange={emptyFunction} checked={undefined} />
+    <Radio size="m" label="Размер m" onChange={emptyFunction} checked={undefined} />
+    <Radio size="l" label="Размер l" onChange={emptyFunction} checked={undefined} />
   </StoryBookExample>
 );

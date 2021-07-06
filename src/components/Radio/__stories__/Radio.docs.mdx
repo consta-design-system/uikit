@@ -2,19 +2,16 @@ import { RadioExampleSize } from './examples/RadioExampleSize/RadioExampleSize';
 import { RadioExampleStatus } from './examples/RadioExampleStatus/RadioExampleStatus';
 import { RadioExampleAlign } from './examples/RadioExampleAlign/RadioExampleAlign';
 import { RadioExampleView } from './examples/RadioExampleView/RadioExampleView';
-import {
-  RadioExampleMore,
-  RadioExampleOne,
-  RadioExampleChecked,
-} from './examples/RadioExampleUse/RadioExampleUse';
+import { RadioExampleOne } from './examples/RadioExampleUse/RadioExampleUse';
 
 # Radio
 
-Радиокнопка нужна, чтобы пользователь мог сделать выбор — только один из нескольких
-вариантов.
+Радиокнопки нужны, чтобы пользователь мог сделать выбор — только один из нескольких
+вариантов. Этот компонет — один элемент из списка, одна радиокнопка.
+
+> Если вам нужен список из нескольких радиокнопок, используйте [RadioGroup](?path=/docs/components-radiogroup--playground). Чтобы использовать `Radio`, придётся самостоятельно написать обработку выбора из группы.
 
 - [Название](#название)
-- [Как использовать](#как-использовать)
 - [Состояния](#состояния)
 - [Размер](#размер)
 - [Внешний вид](#внешний-вид)
@@ -24,51 +21,19 @@ import {
 
 ## Название
 
-Пишется с заглавной буквы, точка не нужна.
-
-## Как использовать
-
-### Только один на выбор
-
-Список должен быть таким, чтобы пользователь мог выбрать только один вариант.
-Это может быть способ доставки заказа, форма пирога, модель телефона.
-
-Если вы понимаете, что в вашем списке можно выбрать несколько вариантов,
-радиокнопки не подойдут. Используйте [Checkbox](?path=/docs/components-checkbox--playground).
+За название радиокнопки отвечает свойсвто `label`. Лучше его писать с заглавной буквы, точка не нужна.
 
 <RadioExampleOne />
 
-### Больше одного варианта
-
-Радиокнопки подходят, если у вас в списке несколько вариантов.
-Если вариант только один, возможно, пользователю не нужно делать выбор,
-а значит, и радиокнопка не нужна. Если нужно выбрать один из двух вариантов,
-используйте [переключатель](?path=/docs/components-switch--playground).
-
-<RadioExampleMore />
-
-### Хотя бы один выбранный
-
-Радиокнопки обычно предлагают сделать выбор, без которого нельзя обойтись. Например,
-если пользователь не укажет, как доставить товар, вы не сможете выбрать за него.
-Поэтому обязательно отметьте один пункт выбранным.
-
-<RadioExampleChecked />
-
 ```tsx
-<p>Как вас постричь</p>
-<Radio label="Под бобра" checked />
-<Radio label="В кружок" />
-<Radio label="А ля рюс" />
-<Radio label="С бакендардами" />
-<Radio label="Только кончики" />
+<Radio label="Это радиокнопка" checked />
 ```
 
 ## Состояния
 
-`checked` отмечает радиокнопку выбранной.
+Чтобы сделать радиокнопку выбранной, добавьте `checked`.
 
-`disabled` не дает пользователю сделать выбор.
+Чтобы не дать пользователю сделать выбор, добавьте `disabled`.
 
 <RadioExampleStatus />
 
@@ -81,35 +46,41 @@ import {
 
 ## Размер
 
-За размер отвечает свойство `size`.
+За размер отвечает свойство `size`. Варианты: `'m'`, `'l'`, по умолчанию `'m'`.
 
 <RadioExampleSize />
 
 ```tsx
-<Radio size="m" label="Размер M" />
-<Radio size="l" label="Размер L" />
+<Radio size="m" label="Размер m" />
+<Radio size="l" label="Размер l" />
 ```
 
 ## Внешний вид
 
-Всего в дизайн-системе два типа радио: `primary` и `ghost`. За это отвечает свойство `view`.
+За внешний вид радиокнопки отвечает свойство `view`. Варианты:
+
+- `primary` — акцентная радиокнопка (по умолчанию),
+- `ghost` — второстепенная радиокнопка.
 
 <RadioExampleView />
 
 ## Выравнивание
 
-За выравнивание отвечает свойство `align`.
+За выравнивание названия по вертикали по отношению к радиокнопке отвечает свойство `align`. Варианты:
+
+- `center` — радиокнопка выровнена по центру контейнера с текстом,
+- `top` — радиокнопка выровнена по верхнему краю контейнера с текстом.
 
 <RadioExampleAlign />
 
 ```tsx
 <Radio
   align="center"
-  label="Длинный текст радиокнопки с выравниванием по центру, записанный в несколько строк"
+  label="Длинный текст для радиокнопки с выравниванием по центру, тут несколько строк"
 />
 <Radio
   align="top"
-  label="Длинный текст радиокнопки с выравниванием по верху, записанный в несколько строк"
+  label="Длинный текст для радиокнопки с выравниванием по верху, тут несколько строк"
 />
 ```
 
@@ -128,11 +99,11 @@ import {
 | `required?`               | `boolean`                                                                        | —            | Такую радиокнопку обязательно нужно выбрать                                  |
 | `autoFocus?`              | `boolean`                                                                        | —            | Переносит фокус на эту кнопку                                                |
 | `tabIndex?`               | `number`                                                                         | —            | Порядковый номер при переходе между элементами интерфейса по клавише **tab** |
-| `name?`                   | `string`                                                                         | —            | Имя инпута в DOM                                                             |
+| `name?`                   | `string`                                                                         | —            | Имя для `<input>` в DOM                                                      |
 | `onChange?`               | `(object: {e: React.ChangeEvent<HTMLInputElement>; checked: boolean;}) => void;` | —            | Действие при выборе радиокнопки                                              |
 | `onFocus?`                | `React.FocusEventHandler<HTMLInputElement>`                                      | —            | Действие по фокусу                                                           |
 | `onBlur?`                 | `React.FocusEventHandler<HTMLInputElement>`                                      | —            | Действие при потере фокуса                                                   |
-| `inputRef?`               | `React.FocusEventHandler<HTMLInputElement>`                                      | —            | Ссылка на DOM-элемент инпута                                                 |
+| `inputRef?`               | `React.FocusEventHandler<HTMLInputElement>`                                      | —            | Ссылка на DOM-элемент `<input>`                                              |
 | `ref?`                    | `React.FocusEventHandler<HTMLLabelElement>`                                      | —            | Ссылка на корневой DOM-элемент этого компонента                              |
 | `className?`              | `string`                                                                         | —            | Дополнительные CSS-классы                                                    |
 
@@ -146,6 +117,6 @@ import React from 'react';
 import { Radio } from '@consta/uikit/Radio';
 
 const App = () => {
-  return <Radio label="I am radio" />;
+  return <Radio label="Это радиокнопка" />;
 };
 ```
