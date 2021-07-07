@@ -27,7 +27,7 @@ type CommonProps<ITEM> = {
   getLabel: (item: ITEM) => string;
   getDisabled?: (item: ITEM) => boolean | undefined;
   onChange: (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM }) => void;
-  name: string;
+  name?: string;
   direction?: RadioGroupDirection;
   size?: RadioGroupPropSize;
   view?: RadioGroupPropView;
