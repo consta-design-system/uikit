@@ -15,13 +15,13 @@ export const CheckboxExampleAlign = () => (
     <Checkbox
       align="center"
       checked
-      label="Длинный текст чекбокса с выравниванием по центру, записанный в несколько строк"
+      label="Длинный текст для чекбокса с выравниванием по центру, здесь несколько строк"
       onChange={emptyFunction}
     />
     <Checkbox
       align="top"
       checked
-      label="Длинный текст чекбокса с выравниванием по верху, записанный в несколько строк"
+      label="Длинный текст для чекбокса с выравниванием по верху, здесь несколько строк"
       onChange={emptyFunction}
     />
   </StoryBookExample>
