@@ -27,7 +27,7 @@ type CommonProps<ITEM> = {
   getLabel: (item: ITEM) => string;
   getDisabled?: (item: ITEM) => boolean | undefined;
   onChange: (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM[] | null }) => void;
-  name: string;
+  name?: string;
   direction?: CheckboxGroupDirection;
   size?: CheckboxGroupPropSize;
   view?: CheckboxGroupPropView;
