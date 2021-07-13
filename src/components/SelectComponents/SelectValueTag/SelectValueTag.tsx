@@ -12,7 +12,7 @@ type SelectValueTagProps = {
   handleRemove?: (e: React.SyntheticEvent) => void;
 };
 
-const cnSelectValueTag = cn('SelectValueTag');
+export const cnSelectValueTag = cn('SelectValueTag');
 
 export const SelectValueTag: React.FC<SelectValueTagProps> = (props) => {
   const { handleRemove, size, label } = props;

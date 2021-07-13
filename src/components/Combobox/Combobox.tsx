@@ -261,3 +261,17 @@ export function Combobox<
     </SelectContainer>
   );
 }
+
+// eslint-disable-next-line prettier/prettier
+export type {
+  ComboboxProps,
+} from './helpers';
+
+export {
+  defaultGetGroupKey,
+  defaultGetGroupLabel,
+  defaultGetItemDisabled,
+  defaultGetItemGroupKey,
+  defaultGetItemKey,
+  defaultGetItemLabel
+} from './helpers';
