@@ -5,8 +5,6 @@ import {
 } from '../../utils/types/PropsWithHTMLAttributes';
 import { Direction, Position } from '../Popover/Popover';
 
-export const defaultGroupId = 'context-menu-no-group';
-
 export const contextMenuSizes = ['m', 's', 'l'] as const;
 export type ContextMenuPropSize = typeof contextMenuSizes[number];
 export const contextMenuDefaultSize: ContextMenuPropSize = contextMenuSizes[0];
@@ -128,34 +126,3 @@ export type ContextMenuLevelType = <ITEM>(
   props: ContextMenuLevelProps<ITEM>,
   ref: React.Ref<HTMLElement>,
 ) => React.ReactElement | null;
-
-type Group<ITEM> = { items: ITEM[]; id: string | number };
-type getGroupsResult<ITEM> = Group<ITEM>[];
-
-export function getGroups<ITEM>(
-  items: ITEM[],
-  getGroupId?: ContextMenuPropGetGroupId<ITEM>,
-  sortGroup?: ContextMenuPropSortGroup,
-): getGroupsResult<ITEM> {
-  if (typeof getGroupId === 'function') {
-    const groups: getGroupsResult<ITEM> = [];
-    for (const item of items) {
-      const id = getGroupId(item) || defaultGroupId;
-      const index = groups.findIndex((group) => group.id === id);
-
-      if (index >= 0) {
-        groups[index].items.push(item);
-      } else {
-        const group: Group<ITEM> = { id, items: [item] };
-        groups.push(group);
-      }
-    }
-
-    if (typeof sortGroup === 'function') {
-      groups.sort((a, b) => sortGroup(a.id, b.id));
-    }
-
-    return groups;
-  }
-  return [{ items, id: defaultGroupId }];
-}

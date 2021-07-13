@@ -9,18 +9,17 @@ import { cnForCssTransition } from '../../../utils/cnForCssTransition';
 import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import { Avatar } from '../../Avatar/Avatar';
 
-const sizes = ['xs', 's', 'm', 'l'] as const;
-type PropSize = typeof sizes[number];
-
 type UserSelectItemProps = PropsWithHTMLAttributes<
   {
     label: string;
-    subLabel?: string;
-    url?: string;
     active: boolean;
     hovered: boolean;
-    size: PropSize;
+    size: 's' | 'm' | 'l';
     indent: 'normal' | 'increased';
+    subLabel?: string;
+    avatarUrl?: string;
+    disable?: boolean;
+    multiple?: boolean;
   },
   HTMLDivElement
 >;
@@ -29,7 +28,19 @@ export const cnUserItem = cn('UserSelectItem');
 export const cnUserItemCssTransition = cnForCssTransition(cnUserItem);
 
 export const UserSelectItem: React.FC<UserSelectItemProps> = (props) => {
-  const { className, label, subLabel, url, active, hovered, size, indent, ...otherProps } = props;
+  const {
+    className,
+    label,
+    subLabel,
+    avatarUrl,
+    active,
+    hovered,
+    size,
+    indent,
+    disable,
+    multiple,
+    ...otherProps
+  } = props;
 
   return (
     <div
@@ -38,24 +49,27 @@ export const UserSelectItem: React.FC<UserSelectItemProps> = (props) => {
       aria-selected={active}
       role="option"
     >
-      <div className={cnUserItem('AvatarBlock')}>
-        <Avatar url={url} name={label} />
-        <CSSTransition
-          in={active}
-          unmountOnExit
-          appear
-          classNames={cnUserItemCssTransition}
-          timeout={200}
-        >
-          <IconCheck className={cnUserItem('CheckIcon')} />
-        </CSSTransition>
+      <div className={cnUserItem('AvatarContainer')}>
+        <Avatar className={cnUserItem('Avatar', { disable })} url={avatarUrl} name={label} />
+        {multiple && (
+          <CSSTransition
+            in={active}
+            unmountOnExit
+            appear
+            classNames={cnUserItemCssTransition}
+            timeout={200}
+          >
+            <IconCheck className={cnUserItem('CheckIcon')} />
+          </CSSTransition>
+        )}
+        {!multiple && active && <IconCheck className={cnUserItem('CheckIcon')} />}
       </div>
       {!subLabel ? (
-        <div className={cnUserItem('AdditionalInfo')}>{label}</div>
+        <div className={cnUserItem('Info')}>{label}</div>
       ) : (
-        <div className={cnUserItem('AdditionalInfo')}>
+        <div className={cnUserItem('Info')}>
           <div>{label}</div>
-          <div className={cnUserItem('SubUserLabel')}>{subLabel}</div>
+          <div className={cnUserItem('SubLabel')}>{subLabel}</div>
         </div>
       )}
     </div>
