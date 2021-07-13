@@ -27,6 +27,7 @@ import {
   isNotMultipleParams,
   PropRenderItem,
   PropRenderValue,
+  searchCompare,
   UserSelectProps,
   withDefaultGetters,
 } from './helpers';
@@ -78,22 +79,13 @@ export function UserSelect<
   } = withDefaultGetters(props);
 
   const searchFunctionDefault = (item: ITEM, searchValue: string): boolean => {
-    const searchOfLabel =
-      getItemLabel(item)
-        .toLocaleLowerCase()
-        .indexOf(searchValue.toLocaleLowerCase()) !== -1;
+    const searchOfLabel = searchCompare(searchValue, getItemLabel(item));
 
     if (searchOfLabel) {
       return searchOfLabel;
     }
 
-    const subLabel = getItemSubLabel(item);
-
-    if (!subLabel) {
-      return false;
-    }
-
-    return subLabel.toLocaleLowerCase().indexOf(searchValue.toLocaleLowerCase()) !== -1;
+    return searchCompare(searchValue, getItemSubLabel(item));
   };
 
   const {
