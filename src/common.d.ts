@@ -1,4 +1,3 @@
-/* eslint-disable import/export */
 declare module '*.docs.mdx' {
   const MDXComponent: (props: any) => JSX.Element;
 
