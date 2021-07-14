@@ -47,6 +47,7 @@ module.exports = {
   rules: {
     'func-names': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
     'quote-props': ['error', 'consistent-as-needed'],
     'react/prop-types': 'off',
     'react/destructuring-assignment': 'off',
