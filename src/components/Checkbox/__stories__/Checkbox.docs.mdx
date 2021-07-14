@@ -1,9 +1,6 @@
 import { CheckboxExampleSize } from './examples/CheckboxExampleSize/CheckboxExampleSize';
 import { CheckboxExampleStatus } from './examples/CheckboxExampleStatus/CheckboxExampleStatus';
-import { CheckboxExampleHead } from './examples/CheckboxExampleName/CheckboxExampleName';
-import { CheckboxExampleHead2 } from './examples/CheckboxExampleName/CheckboxExampleName';
-import { CheckboxExampleNegation } from './examples/CheckboxExampleName/CheckboxExampleName';
-import { CheckboxExampleGeneralization } from './examples/CheckboxExampleName/CheckboxExampleName';
+import { CheckboxExampleName } from './examples/CheckboxExampleName/CheckboxExampleName';
 import { CheckboxExampleAlign } from './examples/CheckboxExampleAlign/CheckboxExampleAlign';
 import { CheckboxExampleView } from './examples/CheckboxExampleView/CheckboxExampleView';
 
@@ -11,13 +8,12 @@ import { CheckboxExampleView } from './examples/CheckboxExampleView/CheckboxExam
 
 Чекбокс — элемент с двумя состояниями: **выбран** и **не выбран**.
 
-С помощью чекбокса пользователь может сделать выбор — например, отметить
-элементы в списке.
-
 Используйте чекбокс, если хотите, чтобы пользователь сделал выбор, а потом подтвердил
-изменения. Например, отметил пункты в анкете и нажал **Отправить**.
+изменения. Например, согласился с обработкой персональны данных и нажал **Отправить**.
 
-Если вам нужно переключить режим, выбрать тему оформления или сделать другое
+Этот компонент подходит, если вам нужен один чекбокс. Если нужно выбрать несколько элементов из списка, используйте [CheckboxGroup](?path=/docs/components-checkboxgroup--playground).
+
+Если нужно переключить режим, выбрать тему оформления или сделать другое
 мгновенное изменение в интерфейсе, используйте [Switch](?path=/docs/components-switch--playground).
 
 - [Название](#название)
@@ -30,31 +26,13 @@ import { CheckboxExampleView } from './examples/CheckboxExampleView/CheckboxExam
 
 ## Название
 
-Название — это надпись рядом с чекбоксом. Пишется с заглавной буквы, без точки.
+Название — это надпись рядом с чекбоксом, за него отвечает свойство `label`. Пишется с заглавной буквы, без точки.
 
-### Согласуйте с заголовком
+<CheckboxExampleName />
 
-Это просто лучше читается. Сравните:
-
-<CheckboxExampleHead />
-
-Если не нравится, что пункты начинаются с предлогов, поменяйте заголовок.
-
-<CheckboxExampleHead2 />
-
-### Не используйте отрицания
-
-Чтобы не путать пользователя. Когда выбран чекбокс, рядом с которым написано **Не хочу**,
-приходится мысленно решать равенство:`не + не + хочу = хочу`.
-
-<CheckboxExampleNegation />
-
-### Не обобщайте
-
-Если хотите дать пользователю возможность отметить все элементы в списке
-или, наоборот, удалить все отметки, сделайте это другим способом.
-
-<CheckboxExampleGeneralization />
+```tsx
+<Checkbox label="Это чекбокс" />
+```
 
 ## Состояния
 
@@ -80,35 +58,46 @@ import { CheckboxExampleView } from './examples/CheckboxExampleView/CheckboxExam
 
 ## Размер
 
-За размер отвечает свойство `size`.
+За размер отвечает свойство `size`. Варианты: `'m'`, `'l'`, по умолчанию `'m'`.
 
 <CheckboxExampleSize />
 
 ```tsx
-<Checkbox size="m" label="Размер M" />
-<Checkbox size="l" label="Размер L" />
+<Checkbox size="m" label="Размер m" />
+<Checkbox size="l" label="Размер l" />
 ```
 
 ## Внешний вид
 
-Всего в дизайн-системе два типа чекбоксов: `primary` и `ghost`. За это отвечает свойство `view`.
+За внешний вид чекбокса отвечает свойство `view`. Варианты:
+
+- `primary` — акцентный чекбокс (по умолчанию),
+- `ghost` — второстепенный чекбокс.
 
 <CheckboxExampleView />
 
+```tsx
+<Checkbox view="primary" checked label="Акцентный чекбокс" />
+<Checkbox view="ghost" checked label="Второстепенный чекбокс" />
+```
+
 ## Выравнивание
 
-За выравнивание отвечает свойство `align`.
+За выравнивание названия по вертикали по отношению к чекбоксу отвечает свойство `align`. Варианты:
+
+- `center` — чекбокс выровнен по центру контейнера с текстом,
+- `top` — чекбокс выровнен по верхнему краю контейнера с текстом.
 
 <CheckboxExampleAlign />
 
 ```tsx
 <Checkbox
   align="center"
-  label="Длинный текст чекбокса с выравниванием по центру, записанный в несколько строк"
+  label="Длинный текст для чекбокса с выравниванием по центру, здесь несколько строк"
 />
 <Checkbox
   align="top"
-  label="Длинный текст чекбокса с выравниванием по верху, записанный в несколько строк"
+  label="Длинный текст для чекбокса с выравниванием по верху, здесь несколько строк"
 />
 ```
 
@@ -140,6 +129,6 @@ import React from 'react';
 import { Checkbox } from '@consta/uikit/Checkbox';
 
 const App = () => {
-  return <Checkbox label="Поставьте галочку" />;
+  return <Checkbox label="Отметьте меня" />;
 };
 ```

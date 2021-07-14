@@ -25,7 +25,7 @@ const defaultKnobs = () => ({
   size: select('size', checkboxPropSize, checkboxPropSizeDefault),
   view: select('view', checkboxPropView, checkboxPropViewDefault),
   align: select('align', checkboxPropAlign, checkboxPropAlignDefault),
-  label: text('label', 'Check me, baby!'),
+  label: text('label', 'Отметьте меня'),
 });
 
 const cnCheckboxStories = cn('CheckboxStories');
