@@ -19,7 +19,7 @@ const defaultKnobs = () => ({
   size: select('size', radioPropSize, radioPropSizeDefault),
   view: select('view', radioPropView, radioPropViewDefault),
   align: select('align', radioPropAlign, radioPropAlignDefault),
-  label: text('label', 'I am radio'),
+  label: text('label', 'Это радиокнопка'),
 });
 
 export function Playground() {

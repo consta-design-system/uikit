@@ -15,13 +15,13 @@ export const RadioExampleAlign = () => (
     <Radio
       align="center"
       checked
-      label="Длинный текст радиокнопки с выравниванием по центру, записанный в несколько строк"
+      label="Длинный текст для радиокнопки с выравниванием по центру, тут несколько строк"
       onChange={emptyFunction}
     />
     <Radio
       align="top"
       checked
-      label="Длинный текст радиокнопки с выравниванием по верху, записанный в несколько строк"
+      label="Длинный текст для радиокнопки с выравниванием по верху, тут несколько строк"
       onChange={emptyFunction}
     />
   </StoryBookExample>
