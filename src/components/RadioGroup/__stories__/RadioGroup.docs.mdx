@@ -1,90 +1,76 @@
+import { RadioGroupExampleSize } from './examples/RadioGroupExampleSize/RadioGroupExampleSize';
+import {
+  RadioGroupExampleMore,
+  RadioGroupExampleChecked,
+  RadioGroupExampleOne,
+} from './examples/RadioGroupExampleUse/RadioGroupExampleUse';
+import {
+  RadioGroupExampleDisabled,
+  RadioGroupExampleDisabledItem,
+} from './examples/RadioGroupExampleDisabled/RadioGroupExampleDisabled';
+import {
+  RadioGroupExampleAlign,
+  RadioGroupExampleRow,
+  RadioGroupExampleColumn,
+} from './examples/RadioGroupExampleAlign/RadioGroupExampleAlign';
+import { RadioGroupExampleView } from './examples/RadioGroupExampleView/RadioGroupExampleView';
+
 # RadioGroup
 
-Группа радиокнопок, объединённых одним `name`. Пользователь может выбрать один вариант из списка.
+Группа радиокнопок с одним `name`. Пользователь может выбрать один вариант из списка.
 
-- [Направление](#направление)
-- [Состояние](#состояние)
+- [Содержимое](#содержимое)
+  - [Название радиокнопки](#название-радиокнопки)
+  - [Неактивная радиокнопка](#неактивная-радиокнопка)
+- [Как использовать](#как-использовать)
+- [Расположение радиокнопок](#расположение)
+- [Неактивная группа радиокнопок](#неактивная-группа-кнопок)
 - [Размер](#размер)
 - [Внешний вид](#внешний-вид)
 - [Список свойств](#свойства)
-- [Пример использования](#пример)
 
-## Направление
+## Содержимое
 
-Группа радиокнопок может располагаться как по вертикали, так и по горизонтали. За направление отвечает свойство `direction`.
+Информация об элементах группы — отдельных радиокнопках — описывается в массиве `items`. В нём можно описать название радиокнопки и её неактивность. Например, вот так:
+
+```
+const items = [
+  {
+    name: 'Один',
+  },
+  {
+    name: 'Два',
+  },
+  {
+    name: 'Три',
+  },
+  {
+    name: 'Четыре',
+  },
+  {
+    name: 'Пять — неактивная',
+    disabled: true,
+  },
+];
+```
+
+### Название радиокнопки
+
+Надпись рядом с радиокнопкой можно получить с помощью функции `getLabel`. Лучше писать название с заглавной буквы, точка не нужна.
+
+### Неактивная радиокнопка
+
+Одну или несколько радиокнопок можно сделать неактивными — если вы не хотите, чтобы их выбирали. За неактивность отвечает функция `getDisabled`.
+
+<RadioGroupExampleDisabledItem />
 
 ```tsx
-<RadioGroup
-  direction="column"
-/>
-<RadioGroup
-  direction="row"
-/>
-```
-
-## Состояние
-
-`disabled` не дает пользователю сделать выбор.
-
-```tsx
-<RadioGroup disabled />
-```
-
-## Размер
-
-За размер отвечает свойство `size`.
-
-```tsx
-<RadioGroup size="m" />
-<RadioGroup size="l" />
-```
-
-## Внешний вид
-
-Всего в дизайн-системе два вида групп радиокнопок: `primary` и `ghost`. За это отвечает свойство `view`.
-
-```tsx
-<RadioGroup view="primary" />
-<RadioGroup view="ghost" />
-```
-
-## Свойства
-
-```
-type OnChange = (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM }) => void;
-```
-
-<!-- props:start -->
-
-| Свойство                     | Тип                       | По умолчанию | Описание                                                                                                  |
-| ---------------------------- | ------------------------- | ------------ | --------------------------------------------------------------------------------------------------------- |
-| `value`                      | `Item`                    | —            | Значение                                                                                                  |
-| `items`                      | `Item[]`                  | —            | Элементы                                                                                                  |
-| `getLabel`                   | `(item: Item) => string`  | —            | Функция для формирования текста для радиокнопки. Также используется в качестве уникального ключа элемента |
-| `getDisabled?`               | `(item: Item) => boolean` | —            | Функция для определения disabled состояния радиокнопки                                                    |
-| `onChange`                   | `OnChange`                | —            | Действие при выборе элемента                                                                              |
-| `name`                       | `string`                  | —            | Имя `<input>`, указывается для доступности                                                                |
-| [`direction?`](#направление) | `'column', 'row'`         | `'column'`   | Направление радиокнопок                                                                                   |
-| [`disabled?`](#состояние)    | `boolean`                 | `false`      | Делает группу радиокнопок неактивной                                                                      |
-| [`size?`](#размер)           | `'m', 'l'`                | `'m'`        | Размер группы радиокнопок                                                                                 |
-| [`view?`](#внешний-вид)      | `'primary', 'ghost'`      | `'primary'`  | Внешний вид                                                                                               |
-| `className?`                 | `string`                  | —            | Дополнительные CSS-классы                                                                                 |
-
-<!-- props:end -->
-
-## Пример
-
-```ts
-// src/App.ts
-import React from 'react';
-import { RadioGroup } from '@consta/uikit/RadioGroup';
-
 type Item = {
   name: string;
   disabled?: boolean;
 };
 
-const items = [
+const items: Item[] = [
   {
     name: 'один',
   },
@@ -98,14 +84,13 @@ const items = [
     name: 'четыре',
   },
   {
-    name: 'пять disabled',
+    name: 'пять',
     disabled: true,
   },
 ];
 
-const App = () => {
-  const [value, setValue] = React.useState<Item | null>(null);
-  const onChange = ({ value }: { value: Item }) => setValue(value);
+function RadioGroupExampleDisabledItem() {
+  const [value, setValue] = React.useState<Item | null>(items[0]);
 
   return (
     <RadioGroup
@@ -113,9 +98,220 @@ const App = () => {
       items={items}
       getLabel={(item) => item.name}
       getDisabled={(item) => item.disabled}
-      onChange={onChange}
-      name="items"
+      onChange={({ value }) => setValue(value)}
     />
   );
-};
+}
 ```
+
+## Как использовать
+
+### Только один на выбор
+
+Список должен быть таким, чтобы пользователь мог выбрать только один вариант.
+Это может быть способ доставки заказа, форма пирога, модель телефона.
+
+Если вы понимаете, что в вашем списке можно выбрать несколько вариантов,
+радиокнопки не подойдут. Используйте [Checkbox](?path=/docs/components-checkbox--playground).
+
+<RadioGroupExampleOne />
+
+### Больше одного варианта
+
+Радиокнопки подходят, если у вас в списке несколько вариантов.
+Если вариант только один, возможно, пользователю не нужно делать выбор,
+а значит, и радиокнопка не нужна. Если нужно выбрать один из двух вариантов,
+используйте [переключатель](?path=/docs/components-switch--playground).
+
+<RadioGroupExampleMore />
+
+### Хотя бы один выбранный
+
+Радиокнопки обычно предлагают сделать выбор, без которого нельзя обойтись. Например,
+если пользователь не укажет, как доставить товар, вы не сможете выбрать за него.
+Поэтому обязательно отметьте один пункт выбранным.
+
+<RadioGroupExampleChecked />
+
+```tsx
+const itemsChecked = ['Под бобра', 'В кружок', 'А ля рюс', 'С бакенбардами', 'Только кончики'];
+
+function RadioGroupExampleChecked() {
+  const [value, setValue] = React.useState<string | null>(itemsChecked[0]);
+
+  return (
+    <>
+      <p className={cnDocsExample('Caption')}>
+        <b>Как вас постричь</b>
+      </p>
+      <RadioGroup
+        value={value}
+        items={itemsChecked}
+        getLabel={(item) => item}
+        onChange={({ value }) => setValue(value)}
+      />
+    </>
+  );
+}
+```
+
+## Расположение
+
+Группа радиокнопок может располагаться как по вертикали, так и по горизонтали. За направление отвечает свойство `direction`. Варианты:
+
+- `column` — по вертикали (работает по умолчанию),
+- `row` — по горизонтали.
+
+<RadioGroupExampleColumn />
+
+```tsx
+const simpleItems = ['один', 'два', 'три', 'четыре', 'пять'];
+
+function RadioGroupExampleColumn() {
+  const [value, setValue] = React.useState<string | null>(simpleItems[0]);
+
+  return (
+    <RadioGroup
+      value={value}
+      items={simpleItems}
+      getLabel={(item) => item}
+      onChange={({ value }) => setValue(value)}
+      direction="column"
+    />
+  );
+}
+```
+
+<RadioGroupExampleRow />
+
+```tsx
+const simpleItems = ['один', 'два', 'три', 'четыре', 'пять'];
+
+function RadioGroupExampleRow() {
+  const [value, setValue] = React.useState<string | null>(simpleItems[0]);
+
+  return (
+    <RadioGroup
+      value={value}
+      items={simpleItems}
+      getLabel={(item) => item}
+      onChange={({ value }) => setValue(value)}
+      direction="row"
+    />
+  );
+}
+```
+
+## Неактивная группа кнопок
+
+Чтобы сделать группу радиокнопок неактивной, добавьте `disabled`.
+
+<RadioGroupExampleDisabled />
+
+```tsx
+const simpleItems = ['один', 'два', 'три', 'четыре', 'пять'];
+
+function RadioGroupExampleDisabled() {
+  const [value, setValue] = React.useState<string | null>(simpleItems[0]);
+
+  return (
+    <RadioGroup
+      value={value}
+      items={simpleItems}
+      getLabel={(item) => item}
+      onChange={({ value }) => setValue(value)}
+      disabled
+    />
+  );
+}
+```
+
+## Размер
+
+За размер отвечает свойство `size`. Варианты: `'m'`, `'l'`, по умолчанию: `'m'`.
+
+<RadioGroupExampleSize />
+
+```tsx
+const simpleItems = ['один', 'два', 'три', 'четыре', 'пять'];
+
+function RadioGroupExampleSize() {
+  const [value, setValue] = React.useState<string | null>(simpleItems[0]);
+
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <RadioGroup
+        value={value}
+        items={simpleItems}
+        getLabel={(item) => item}
+        onChange={({ value }) => setValue(value)}
+        direction="row"
+        size="m"
+      />
+      <RadioGroup
+        value={value}
+        items={simpleItems}
+        getLabel={(item) => item}
+        onChange={({ value }) => setValue(value)}
+        direction="row"
+        size="l"
+      />
+    </StoryBookExample>
+  );
+}
+```
+
+## Внешний вид
+
+Всего в дизайн-системе два вида групп радиокнопок: `primary` и `ghost`. За это отвечает свойство `view`.
+
+<RadioGroupExampleView />
+
+```tsx
+const simpleItems = ['один', 'два', 'три', 'четыре', 'пять'];
+
+function RadioGroupExampleView() {
+  const [value, setValue] = React.useState<string | null>(simpleItems[0]);
+
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <RadioGroup
+        value={value}
+        items={simpleItems}
+        getLabel={(item) => item}
+        onChange={({ value }) => setValue(value)}
+        direction="row"
+        view="primary"
+      />
+      <RadioGroup
+        value={value}
+        items={simpleItems}
+        getLabel={(item) => item}
+        onChange={({ value }) => setValue(value)}
+        direction="row"
+        view="ghost"
+      />
+    </StoryBookExample>
+  );
+}
+```
+
+## Свойства
+
+```
+type OnChange = (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM }) => void;
+```
+
+| Свойство                                  | Тип                       | По умолчанию | Описание                                                                                                  |
+| ----------------------------------------- | ------------------------- | ------------ | --------------------------------------------------------------------------------------------------------- |
+| `value`                                   | `Item`                    | —            | Значение                                                                                                  |
+| [`items`](#содержимое)                    | `Item[]`                  | —            | Радиокнопки                                                                                               |
+| [`getLabel`](#название-радиокнопки)       | `(item: Item) => string`  | —            | Функция для формирования текста для радиокнопки. Также используется в качестве уникального ключа элемента |
+| [`getDisabled?`](#неактивная-радиокнопка) | `(item: Item) => boolean` | —            | Функция для определения неактивного состояния радиокнопки                                                 |
+| `onChange`                                | `OnChange`                | —            | Действие при выборе элемента                                                                              |
+| `name`                                    | `string`                  | —            | Имя `<input>`, указывается для доступности                                                                |
+| [`direction?`](#расположение)             | `'column', 'row'`         | `'column'`   | Направление радиокнопок                                                                                   |
+| [`disabled?`](#неактивная-группа-кнопок)  | `boolean`                 | `false`      | Делает группу радиокнопок неактивной                                                                      |
+| [`size?`](#размер)                        | `'m'`, `'l'`              | `'m'`        | Размер группы радиокнопок                                                                                 |
+| [`view?`](#внешний-вид)                   | `'primary', 'ghost'`      | `'primary'`  | Внешний вид                                                                                               |
+| `className?`                              | `string`                  | —            | Дополнительные CSS-классы                                                                                 |

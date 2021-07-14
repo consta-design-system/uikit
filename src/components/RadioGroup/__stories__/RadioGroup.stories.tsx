@@ -1,6 +1,7 @@
 import React from 'react';
 import { boolean, select } from '@storybook/addon-knobs';
 
+import { Item, items } from '../__mocks__/data.mock';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import {
@@ -17,29 +18,17 @@ import mdx from './RadioGroup.docs.mdx';
 
 const cnRadioGroupStories = cn('RadioGroupStories');
 
-type Item = {
-  name: string;
-  disabled?: boolean;
-};
-
-const items: Item[] = [
-  { name: 'один' },
-  { name: 'два' },
-  { name: 'три' },
-  { name: 'четыре' },
-  { name: 'пять disabled', disabled: true },
-];
-
 const defaultKnobs = () => ({
   direction: select('direction', radioGroupDirections, radioGroupDefaultDirection),
   size: select('size', radioGroupSizes, radioGroupDefaultSize),
   view: select('view', radioGroupViews, radioGroupDefaultView),
   disabled: boolean('disabled', false),
+  disabledItem: boolean('disabledItem', false),
 });
 
 export function Playground() {
   const [value, setValue] = React.useState<Item | null>(null);
-  const { direction, size, view, disabled } = defaultKnobs();
+  const { direction, size, view, disabled, disabledItem } = defaultKnobs();
 
   const onChange = ({ value }: { value: Item }) => setValue(value);
 
@@ -50,7 +39,7 @@ export function Playground() {
           value={value}
           items={items}
           getLabel={(item) => item.name}
-          getDisabled={(item) => item.disabled}
+          getDisabled={disabledItem ? (item) => item.disabled : undefined}
           onChange={onChange}
           name={cnRadioGroupStories()}
           direction={direction}
