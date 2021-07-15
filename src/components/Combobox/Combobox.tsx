@@ -1,6 +1,6 @@
 import '../SelectComponents/Select.css';
 
-import React, { useRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { useSelect } from '../../hooks/useSelect/useSelect';
@@ -21,6 +21,7 @@ import { SelectValueTag } from '../SelectComponents/SelectValueTag/SelectValueTa
 import { defaultPropForm, defaultPropSize, defaultPropView } from '../SelectComponents/types';
 
 import {
+  ComboboxComponent,
   ComboboxProps,
   DefaultGroup,
   DefaultItem,
@@ -31,11 +32,10 @@ import {
   withDefaultGetters,
 } from './helpers';
 
-export function Combobox<
-  ITEM = DefaultItem,
-  GROUP = DefaultGroup,
-  MULTIPLE extends boolean = false
->(props: ComboboxProps<ITEM, GROUP, MULTIPLE>) {
+function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE extends boolean = false>(
+  props: ComboboxProps<ITEM, GROUP, MULTIPLE>,
+  ref: React.Ref<HTMLDivElement>,
+) {
   const defaultDropdownRef = useRef<HTMLDivElement | null>(null);
   const controlInnerRef = useRef<HTMLDivElement>(null);
   const helperInputFakeElement = useRef<HTMLDivElement>(null);
@@ -196,6 +196,7 @@ export function Combobox<
       view={view}
       form={form}
       multiple={multiple}
+      ref={ref}
       {...restProps}
     >
       <div
@@ -262,16 +263,6 @@ export function Combobox<
   );
 }
 
-// eslint-disable-next-line prettier/prettier
-export type {
-  ComboboxProps,
-} from './helpers';
+export const Combobox = forwardRef(ComboboxRender) as ComboboxComponent;
 
-export {
-  defaultGetGroupKey,
-  defaultGetGroupLabel,
-  defaultGetItemDisabled,
-  defaultGetItemGroupKey,
-  defaultGetItemKey,
-  defaultGetItemLabel
-} from './helpers';
+export * from './helpers';

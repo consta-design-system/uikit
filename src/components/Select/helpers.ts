@@ -68,6 +68,10 @@ export type SelectProps<ITEM = DefaultItem, GROUP = DefaultGroup> = PropsWithHTM
     : { getGroupLabel: PropGetGroupLabel<GROUP> }) &
   (GROUP extends { id: DefaultGroup['id'] } ? {} : { getGroupKey: PropGetGroupKey<GROUP> });
 
+export type SelectComponent = <ITEM = DefaultItem, GROUP = DefaultGroup>(
+  props: SelectProps<ITEM, GROUP>,
+) => React.ReactElement | null;
+
 export const defaultGetItemKey: PropGetItemKey<DefaultItem> = (item) => item.id;
 export const defaultGetItemLabel: PropGetItemLabel<DefaultItem> = (item) => item.label;
 export const defaultGetItemGroupKey: PropGetItemGroupKey<DefaultItem> = (item) => item.groupId;

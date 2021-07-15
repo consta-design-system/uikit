@@ -1,6 +1,6 @@
 import '../SelectComponents/Select.css';
 
-import React, { useRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { useSelect } from '../../hooks/useSelect/useSelect';
@@ -28,15 +28,16 @@ import {
   PropRenderItem,
   PropRenderValue,
   searchCompare,
+  UserSelectComponent,
   UserSelectProps,
   withDefaultGetters,
 } from './helpers';
 
-export function UserSelect<
+function UserSelectRender<
   ITEM = DefaultItem,
   GROUP = DefaultGroup,
   MULTIPLE extends boolean = false
->(props: UserSelectProps<ITEM, GROUP, MULTIPLE>) {
+>(props: UserSelectProps<ITEM, GROUP, MULTIPLE>, ref: React.Ref<HTMLDivElement>) {
   const defaultDropdownRef = useRef<HTMLDivElement | null>(null);
   const controlInnerRef = useRef<HTMLDivElement>(null);
   const helperInputFakeElement = useRef<HTMLDivElement>(null);
@@ -209,6 +210,7 @@ export function UserSelect<
       view={view}
       form={form}
       multiple
+      ref={ref}
       {...restProps}
     >
       <div
@@ -277,18 +279,6 @@ export function UserSelect<
   );
 }
 
-// eslint-disable-next-line prettier/prettier
-export type {
-  UserSelectProps,
-} from './helpers';
+export const UserSelect = forwardRef(UserSelectRender) as UserSelectComponent;
 
-export {
-  defaultGetGroupKey,
-  defaultGetGroupLabel,
-  defaultGetItemDisabled,
-  defaultGetItemGroupKey,
-  defaultGetItemKey,
-  defaultGetItemLabel,
-  defaultGetItemAvatarUrl,
-  defaultGetItemSubLabel,
-} from './helpers';
+export * from './helpers';
