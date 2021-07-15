@@ -4,7 +4,7 @@ import { ClickOutsideHandler, useClickOutside } from '../../hooks/useClickOutsid
 import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { PropsWithJsxAttributes } from '../../utils/types/PropsWithJsxAttributes';
-import { PortalWithTheme } from '../PortalWithTheme/PortalWithTheme';
+import { PortalWithTheme, usePortalContext } from '../PortalWithTheme/PortalWithTheme';
 import { useTheme } from '../Theme/Theme';
 
 import { getComputedPositionAndDirection } from './helpers';
@@ -86,6 +86,26 @@ const isRenderProp = (
   children: React.ReactNode | ChildrenRenderProp,
 ): children is ChildrenRenderProp => typeof children === 'function';
 
+/**
+ * Подписчик на PortalWithThemeProvider
+ * получает рефы всех вложенных порталов в модалку
+ * для дальнейшего исключения их из useClickOutside
+ */
+const ContextConsumer: React.FC<{
+  onClickOutside?: (event: MouseEvent) => void;
+  ignoreClicksInsideRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
+}> = ({ onClickOutside, children, ignoreClicksInsideRefs }) => {
+  const { refs } = usePortalContext();
+
+  useClickOutside({
+    isActive: !!onClickOutside,
+    ignoreClicksInsideRefs: [...(ignoreClicksInsideRefs || []), ...(refs || [])],
+    handler: (event: MouseEvent) => onClickOutside?.(event),
+  });
+
+  return <>{children}</>;
+};
+
 export const Popover = React.forwardRef<HTMLDivElement, Props>((props, componentRef) => {
   const {
     children,
@@ -130,12 +150,6 @@ export const Popover = React.forwardRef<HTMLDivElement, Props>((props, component
       resetBannedDirections();
       updateAnchorClientRect();
     },
-  });
-
-  useClickOutside({
-    isActive: !!onClickOutside,
-    ignoreClicksInsideRefs: [ref, anchorRef || { current: null }],
-    handler: (event) => onClickOutside && onClickOutside(event),
   });
 
   const { position, direction } = getComputedPositionAndDirection({
@@ -194,7 +208,12 @@ export const Popover = React.forwardRef<HTMLDivElement, Props>((props, component
         visibility: position ? undefined : 'hidden',
       }}
     >
-      {content}
+      <ContextConsumer
+        onClickOutside={onClickOutside}
+        ignoreClicksInsideRefs={[ref, anchorRef || { current: null }]}
+      >
+        {content}
+      </ContextConsumer>
     </PortalWithTheme>
   );
 });
