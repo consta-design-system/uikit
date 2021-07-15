@@ -27,7 +27,12 @@ export function SelectExampleItems() {
   const [value, setValue] = useState<Item | null>();
   return (
     <div className={cnDocsDecorator('Section')}>
-      <Select items={items} value={value} onChange={({ value }) => setValue(value)} />
+      <Select
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        placeholder="Выберите значение"
+      />
     </div>
   );
 }

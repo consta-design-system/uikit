@@ -28,8 +28,29 @@ export function SelectExampleSize() {
   return (
     <div className={cnDocsDecorator('Section')}>
       <Select
-        placeholder="Выберите значение"
+        placeholder="Размер xs"
         size="xs"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <Select
+        placeholder="Размер s"
+        size="s"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <Select
+        placeholder="Размер m"
+        size="m"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <Select
+        placeholder="Размер l"
+        size="l"
         items={items}
         value={value}
         onChange={({ value }) => setValue(value)}

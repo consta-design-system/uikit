@@ -28,7 +28,14 @@ export function SelectExampleView() {
   return (
     <div className={cnDocsDecorator('Section')}>
       <Select
-        placeholder="Выберите значение"
+        placeholder="Вид default"
+        view="default"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <Select
+        placeholder="Вид clear"
         view="clear"
         items={items}
         value={value}
