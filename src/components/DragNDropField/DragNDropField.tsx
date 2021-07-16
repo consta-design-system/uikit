@@ -6,23 +6,28 @@ import { DropzoneOptions, useDropzone } from 'react-dropzone';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { cn } from '../../utils/bem';
 
+import { DragNDropFieldContent } from './DragNDropFieldContent/DragNDropFieldContent';
 import { DragNDropFieldTooltip } from './DragNDropFieldTooltip/DragNDropFieldTooltip';
 import { getErrorsList } from './helpers';
-
-type ChildrenRenderProp = (props: { openFileDialog: () => void }) => React.ReactNode;
 
 export type DragNDropFieldProps = {
   accept?: string | string[];
   maxSize?: number;
   multiple?: boolean;
   onDropFiles: (files: File[]) => void;
-  children: React.ReactNode | ChildrenRenderProp;
+  children?: React.ReactNode | DragNDropFieldChildrenRenderProp;
 };
+
+export type DragNDropFieldChildrenRenderProp = (
+  props: {
+    openFileDialog: () => void;
+  } & Pick<DragNDropFieldProps, 'accept' | 'maxSize' | 'multiple'>,
+) => React.ReactNode;
 
 const cnDragNDropField = cn('DragNDropField');
 
 export const DragNDropField = React.forwardRef<HTMLDivElement, DragNDropFieldProps>(
-  ({ accept, maxSize, multiple = false, onDropFiles, children }, ref) => {
+  ({ accept, maxSize, multiple = false, onDropFiles, children = DragNDropFieldContent }, ref) => {
     const handleDrop: DropzoneOptions['onDrop'] = React.useCallback(
       (acceptedFiles) => acceptedFiles.length > 0 && onDropFiles(acceptedFiles),
       [onDropFiles],
@@ -35,8 +40,8 @@ export const DragNDropField = React.forwardRef<HTMLDivElement, DragNDropFieldPro
       rootRef,
       open,
     } = useDropzone({
-      accept,
-      maxSize,
+      accept: accept?.length ? accept : undefined,
+      maxSize: maxSize || undefined,
       onDrop: handleDrop,
       multiple,
     });
@@ -53,7 +58,9 @@ export const DragNDropField = React.forwardRef<HTMLDivElement, DragNDropFieldPro
       onClick: handleRootClick,
     });
 
-    const content = isRenderProp(children) ? children({ openFileDialog: open }) : children;
+    const content = isRenderProp(children)
+      ? children({ accept, maxSize, multiple, openFileDialog: open })
+      : children;
     const errors = React.useMemo(() => getErrorsList(fileRejections), [fileRejections]);
 
     return (
@@ -69,5 +76,5 @@ export const DragNDropField = React.forwardRef<HTMLDivElement, DragNDropFieldPro
 );
 
 const isRenderProp = (
-  children: React.ReactNode | ChildrenRenderProp,
-): children is ChildrenRenderProp => typeof children === 'function';
+  children: React.ReactNode | DragNDropFieldChildrenRenderProp,
+): children is DragNDropFieldChildrenRenderProp => typeof children === 'function';
