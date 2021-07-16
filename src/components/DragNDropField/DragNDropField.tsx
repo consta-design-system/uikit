@@ -8,7 +8,7 @@ import { cn } from '../../utils/bem';
 
 import { DragNDropFieldContent } from './DragNDropFieldContent/DragNDropFieldContent';
 import { DragNDropFieldTooltip } from './DragNDropFieldTooltip/DragNDropFieldTooltip';
-import { getErrorsList } from './helpers';
+import { getErrorsList } from './getErrorsList';
 
 export type DragNDropFieldProps = {
   accept?: string | string[];
