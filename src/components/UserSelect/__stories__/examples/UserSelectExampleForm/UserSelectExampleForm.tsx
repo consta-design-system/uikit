@@ -34,7 +34,7 @@ export function UserSelectExampleForm() {
   return (
     <div className={cnDocsDecorator('Section')}>
       <UserSelect
-        placeholder="Выберите значение"
+        placeholder="Форма round"
         form="round"
         items={items}
         value={value}

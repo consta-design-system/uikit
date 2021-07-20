@@ -8,7 +8,7 @@ export function UserSelectExampleCustomTypes() {
   return (
     <div className={cnDocsDecorator('Section', { indent: 'bottom' })}>
       <UserSelect
-        placeholder="Выберите значение"
+        placeholder="Выберите пользователя"
         items={['Андрей Андреев', 'Егор Егоров', 'Михаил Михайлов']}
         value={value}
         onChange={({ value }) => setValue(value)}
@@ -21,7 +21,7 @@ export function UserSelectExampleCustomTypes() {
 
 // Example 2
 
-const groups = ['Отдел разработкки', 'Отдел закупок'];
+const groups = ['Цирк', 'Центр полётов'];
 
 type Item = {
   firstName: string;
@@ -30,9 +30,9 @@ type Item = {
 };
 
 const items: Item[] = [
-  { firstName: 'Андрей', lastName: 'Андреев', group: 'Отдел разработкки' },
-  { firstName: 'Егор', lastName: 'Егоров', group: 'Отдел разработкки' },
-  { firstName: 'Михаил', lastName: 'Михайлов', group: 'Отдел закупок' },
+  { firstName: 'Андрей', lastName: 'Андреев', group: 'Цирк' },
+  { firstName: 'Егор', lastName: 'Егоров', group: 'Цирк' },
+  { firstName: 'Михаил', lastName: 'Михайлов', group: 'Центр полётов' },
 ];
 
 export function UserSelectExampleCustomTypesWithGroups() {
@@ -40,7 +40,7 @@ export function UserSelectExampleCustomTypesWithGroups() {
   return (
     <div className={cnDocsDecorator('Section')}>
       <UserSelect
-        placeholder="Выберите значение"
+        placeholder="Выберите пользователя"
         items={items}
         groups={groups}
         value={value}

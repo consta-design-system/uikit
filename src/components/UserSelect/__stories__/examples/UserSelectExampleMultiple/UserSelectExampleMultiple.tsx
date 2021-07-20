@@ -34,7 +34,7 @@ export function UserSelectExampleMultiple() {
   return (
     <div className={cnDocsDecorator('Section')}>
       <UserSelect
-        placeholder="Выберите значение"
+        placeholder="Выберите одного или несколько"
         items={items}
         value={value}
         onChange={({ value }) => setValue(value)}

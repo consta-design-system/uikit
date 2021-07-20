@@ -34,8 +34,22 @@ export function UserSelectExampleSize() {
   return (
     <div className={cnDocsDecorator('Section')}>
       <UserSelect
-        placeholder="Выберите значение"
+        placeholder="Размер s"
         size="s"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <UserSelect
+        placeholder="Размер m"
+        size="m"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <UserSelect
+        placeholder="Размер l"
+        size="l"
         items={items}
         value={value}
         onChange={({ value }) => setValue(value)}

@@ -34,7 +34,7 @@ export function UserSelectExamplePlaceholder() {
   return (
     <div className={cnDocsDecorator('Section')}>
       <UserSelect
-        placeholder="Выберите значение"
+        placeholder="Это подсказка"
         items={items}
         value={value}
         onChange={({ value }) => setValue(value)}
