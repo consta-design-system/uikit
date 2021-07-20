@@ -1,0 +1,40 @@
+.SelectGroupLabelDeprecated {
+  padding: var(--vertical-space) var(--horizontal-space);
+  color: var(--color-typo-secondary);
+  border-bottom: 1px solid var(--color-bg-border);
+  font-size: var(--font-size);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+
+  &_size {
+    &_xs {
+      --horizontal-space: calc(var(--control-space-xs) * 0.5);
+      --vertical-space: calc(var(--control-space-s) * 0.25);
+      --font-size: calc(var(--control-text-size-xs) - 2px);
+    }
+
+    &_s {
+      --horizontal-space: calc(var(--control-space-s) * 0.5);
+      --vertical-space: calc(var(--control-space-s) * 0.25);
+      --font-size: calc(var(--control-text-size-s) - 4px);
+    }
+
+    &_m {
+      --horizontal-space: calc(var(--control-space-m) * 0.5);
+      --vertical-space: calc(var(--control-space-s) * 0.5);
+      --font-size: calc(var(--control-text-size-m) - 4px);
+    }
+
+    &_l {
+      --horizontal-space: calc(var(--control-space-l) * 0.5);
+      --vertical-space: calc(var(--control-space-s) * 0.5);
+      --font-size: calc(var(--control-text-size-l) - 4px);
+    }
+  }
+
+  &_indent {
+    &_increased {
+      padding-left: calc(var(--horizontal-space) * 2.6);
+    }
+  }
+}
