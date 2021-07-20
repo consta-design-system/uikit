@@ -84,6 +84,14 @@ export type ComboboxProps<
     : { getGroupLabel: PropGetGroupLabel<GROUP> }) &
   (GROUP extends { id: DefaultGroup['id'] } ? {} : { getGroupKey: PropGetGroupKey<GROUP> });
 
+export type ComboboxComponent = <
+  ITEM = DefaultItem,
+  GROUP = DefaultGroup,
+  MULTIPLE extends boolean = false
+>(
+  props: ComboboxProps<ITEM, GROUP, MULTIPLE>,
+) => React.ReactElement | null;
+
 export const defaultGetItemKey: PropGetItemKey<DefaultItem> = (item) => item.id;
 export const defaultGetItemLabel: PropGetItemLabel<DefaultItem> = (item) => item.label;
 export const defaultGetItemGroupKey: PropGetItemGroupKey<DefaultItem> = (item) => item.groupId;

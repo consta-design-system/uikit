@@ -1,6 +1,6 @@
 import '../SelectComponents/Select.css';
 
-import React, { useRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { useSelect } from '../../hooks/useSelect/useSelect';
@@ -18,11 +18,15 @@ import {
   DefaultItem,
   PropRenderItem,
   PropRenderValue,
+  SelectComponent,
   SelectProps,
   withDefaultGetters,
 } from './helpers';
 
-export function Select<ITEM = DefaultItem, GROUP = DefaultGroup>(props: SelectProps<ITEM, GROUP>) {
+function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
+  props: SelectProps<ITEM, GROUP>,
+  ref: React.Ref<HTMLDivElement>,
+) {
   const defaultDropdownRef = useRef<HTMLDivElement | null>(null);
   const controlRef = useRef<HTMLDivElement | null>(null);
 
@@ -123,6 +127,7 @@ export function Select<ITEM = DefaultItem, GROUP = DefaultGroup>(props: SelectPr
       size={size}
       view={view}
       form={form}
+      ref={ref}
       {...restProps}
     >
       <div
@@ -181,16 +186,6 @@ export function Select<ITEM = DefaultItem, GROUP = DefaultGroup>(props: SelectPr
   );
 }
 
-// eslint-disable-next-line prettier/prettier
-export type {
-  SelectProps,
-} from './helpers';
+export const Select = forwardRef(SelectRender) as SelectComponent;
 
-export {
-  defaultGetGroupKey,
-  defaultGetGroupLabel,
-  defaultGetItemDisabled,
-  defaultGetItemGroupKey,
-  defaultGetItemKey,
-  defaultGetItemLabel
-} from './helpers';
+export * from './helpers';

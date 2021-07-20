@@ -91,6 +91,14 @@ export type UserSelectProps<
     : { getGroupLabel: PropGetGroupLabel<GROUP> }) &
   (GROUP extends { id: DefaultGroup['id'] } ? {} : { getGroupKey: PropGetGroupKey<GROUP> });
 
+export type UserSelectComponent = <
+  ITEM = DefaultItem,
+  GROUP = DefaultGroup,
+  MULTIPLE extends boolean = false
+>(
+  props: UserSelectProps<ITEM, GROUP, MULTIPLE>,
+) => React.ReactElement | null;
+
 export const defaultGetItemKey: PropGetItemKey<DefaultItem> = (item) => item.id;
 export const defaultGetItemLabel: PropGetItemLabel<DefaultItem> = (item) => item.label;
 export const defaultGetItemSubLabel: PropGetItemSubLabel<DefaultItem> = (item) => item.subLabel;
