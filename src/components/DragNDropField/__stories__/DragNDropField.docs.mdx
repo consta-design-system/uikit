@@ -1,0 +1,66 @@
+import { DragNDropFieldExampleAccept } from './examples/DragNDropFieldExampleAccept/DragNDropFieldExampleAccept';
+import { DragNDropFieldExampleChildren } from './examples/DragNDropFieldExampleChildren/DragNDropFieldExampleChildren';
+import { DragNDropFieldExampleMaxSize } from './examples/DragNDropFieldExampleMaxSize/DragNDropFieldExampleMaxSize';
+import { DragNDropFieldExampleMultiple } from './examples/DragNDropFieldExampleMultiple/DragNDropFieldExampleMultiple';
+import { DragNDropFieldExampleOnDropFiles } from './examples/DragNDropFieldExampleOnDropFiles/DragNDropFieldExampleOnDropFiles';
+
+# DragNDropField
+
+- [`multiple`](#multiple)
+- [`accept`](#accept)
+- [`maxSize`](#maxsize)
+- [`children`](#children)
+- [`onDropFiles`](#ondropfiles)
+- [Свойства](#свойства)
+
+## `multiple`
+
+<DragNDropFieldExampleMultiple />
+
+## `accept`
+
+<DragNDropFieldExampleAccept />
+
+## `maxSize`
+
+<DragNDropFieldExampleMaxSize />
+
+## `children`
+
+<DragNDropFieldExampleChildren />
+
+## `onDropFiles`
+
+```tsx
+export function MyComponent() {
+  const [files, setFiles] = React.useState<File[]>([]);
+  return (
+    <>
+      <DragNDropField multiple onDropFiles={setFiles}>
+        <Text>Перетяните файлы сюда</Text>
+      </DragNDropField>
+      {files.map((file) => (
+        <Attach
+          key={file.name}
+          fileName={file.name}
+          fileExtension={file.name.match(/\.(?!.*\.)(\w*)/)?.[1]}
+          fileDescription={file.type}
+        />
+      ))}
+    </>
+  );
+}
+```
+
+<DragNDropFieldExampleOnDropFiles />
+
+## Свойства
+
+| Свойство                      | Тип                                                                                   | По умолчанию | Описание                                                                                                                                 |
+| ----------------------------- | ------------------------------------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| [`multiple?`](#multiple)      | `boolean`                                                                             | `false`      | Можно ли выбирать сразу несколько файлов (см. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#attr-multiple)) |
+| [`accept?`](#accept)          | `string` &#124; `string[]`                                                            | -            | Список разрешённых типов файлов (см. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#attr-accept))            |
+| [`maxSize?`](#maxsize)        | `number`                                                                              | -            | Максимальный размер файла в байтах                                                                                                       |
+| [`onDropFiles`](#ondropfiles) | `(files: File[]) => void`                                                             | -            | Обработчик события выбора файлов                                                                                                         |
+| [`children`](#children)       | `React.ReactNode` &#124; `(props: { openFileDialog: () => void }) => React.ReactNode` | -            | Дочерние элементы                                                                                                                        |
+| `ref?`                        | `React.Ref<HTMLDivElement>`                                                           | -            | Ссылка на корневой DOM-элемент компонента                                                                                                |

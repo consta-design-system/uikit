@@ -1,0 +1,23 @@
+.DragNDropField {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  min-height: 160px;
+  padding: var(--space-l);
+  background: var(--color-control-bg-clear);
+  border: 2px dashed var(--color-control-bg-border-default);
+  border-radius: var(--control-radius);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--color-control-bg-clear-hover);
+    border-color: var(--color-control-bg-border-default-hover);
+  }
+
+  &_active {
+    border-color: var(--color-control-bg-border-focus);
+  }
+}
