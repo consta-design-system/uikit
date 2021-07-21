@@ -33,7 +33,12 @@ export function UserSelectExampleItems() {
   const [value, setValue] = useState<Item | null>();
   return (
     <div className={cnDocsDecorator('Section')}>
-      <UserSelect items={items} value={value} onChange={({ value }) => setValue(value)} />
+      <UserSelect
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        placeholder="Выберите пользователя"
+      />
     </div>
   );
 }

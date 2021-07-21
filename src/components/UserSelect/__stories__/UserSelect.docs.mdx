@@ -17,56 +17,57 @@ import {
 
 # UserSelect
 
-Выпадающий список. Позволяет выбрать один из нескольких вариантов.
-Этот компонент похож на [Select](?path=/docs/components-select--playground),
-но возможностей больше.
-Что может пользователь:
+Выпадающий список пользователей, позволяет выбирать пользователей из списка.
 
-- выбрать один или несколько вариантов из списка,
-- написать в поле несколько символов — компонент покажет все варианты, в которых есть эти символы,
-- добавить вариант, которого нет в списке.
-  Используйте UserSelect, если вариантов много — пять или больше. Если вариантов меньше,
-  подойдет [Radio](?path=/docs/components-radio--playground)
-  или [ChoiceGroup](?path=/docs/components-choicegroup--playground).
+Как его использовать:
 
-* [Варианты](#варианты)
-* [Значение](#значение)
-* [onChange](#onchange)
-* [Подсказка](#подсказка)
-* [Множественный выбор](#множественный-выбор)
-* [Размер](#размер)
-* [Форма](#форма)
-* [Внешний вид](#внешний-вид)
-* [Отключение поля ввода](#отключение-поля-ввода)
-* [Отключение элементов списка](#отключение-элементов-списка)
-* [Группировка списка](#группировка-списка)
-* [Создание элементов](#cоздание-элементов)
-* [Поиск](#поиск)
-* [Свое представление элемента списка](#свое-представление-элемента-списка)
-* [Свое представление выбранного значения](#свое-представление-выбранного-значения)
-* [Свои тип данных items и groups](#свои-тип-данных-items-и-groups)
-* [Список свойств](#свойства)
+- выбрать одного или несколько пользователей из списка,
+- написать в поле несколько символов — компонент покажет всех пользователей, в именах которых есть эти символы.
 
-## Варианты
+Этот компонент похож на [Select](?path=/story/components-select--playground) и [Combobox](?path=/story/components-combobox--playground), но содержит информацию о пользователях: например, имя и аватарку, как в компоненте [User](?path=/docs/components-user--playground).
 
-Варианты для выпадающего списка передаются в своство `items`.
-Название элементов должно быть с заглавной буквы.
+- [Содержимое](#содержимое)
+  - [Варианты](#варианты)
+  - [Выбранное значение](#выбранное-значение)
+  - [Подсказка](#подсказка)
+  - [Неактивный вариант](#неактивный-элемент-списка)
+  - [Несколько вариантов](#несколько-вариантов)
+  - [Группы вариантов](#группы-вариантов)
+- [Размер](#размер)
+- [Форма](#форма)
+- [Внешний вид](#внешний-вид)
+- [Неактивный выпадающий список](#неактивный-выпадающий-список)
+- [Поиск](#поиск)
+- [Создание новых пользователей](#создание-новых-пользователей)
+- [Кастомизация](#кастомизация)
+  - [Кастомный элемент списка](#кастомный-элемент-списка)
+  - [Кастомное выбранное значение](#кастомное-выбранное-значение)
+  - [Кастомные типы данных для групп и вариантов](#кастомные-типы-данных-для-групп-и-вариантов)
+- [Список свойств](#свойства)
 
-По умолчанию тип элемента массива `items` равен [DefaultItem](#свойства)
+## Содержимое
 
-## Значение
+### Варианты
 
-Значение задается в свойстве `value`
+Варианты для выпадающего списка с пользователями передаются в свойстве `items`. Тип элементов массива `items` по умолчанию равен [DefaultItem](#свойства). Что внутри:
 
-По умолчанию тип своства или эдемент массива `value` равен [DefaultItem](#свойства)
+- `label` — текст (например, имя и фамилия),
+- `avatarUrl` — ссылка на аватарку,
+- `subLabel` — дополнительная информация (почта, телефон, доступность, что-то ещё),
+- `id` — уникальный ключ.
 
-## onChange
+Вы можете сделать [кастомный тип данных для элементов списка](#кастомный-элемент-списка) и использовать его.
 
-Чтобы взаимодействовать с выбором занчения используйте свойство `onChange`,
-он сработает при выборе элемента или при очистке поля ввода,
-и вернет его значение которое задавали в `items`.
-Так же вернет событие выбора, ввод заначения возможен как по клику мыши так
-и по клавише `Enter` на клавиатуре.
+### Выбранное значение
+
+Выбранное значение задаётся в свойстве `value`. Тип свойства или элемент массива `value` по умолчанию равен [DefaultItem](#свойства).
+
+Чтобы получить значение, которое пользователь выбрал из списка, используйте `onChange`. Этот обработчик срабатывает при выборе варианта или при очистке поля ввода
+и возвращает значение из массива `items` и событие выбора.
+
+Выбор варианта срабатывает по клику мыши или по нажатию `Enter` на клавиатуре.
+
+<UserSelectExampleItems />
 
 ```tsx
 type Item = {
@@ -101,15 +102,14 @@ export function UserSelectExampleItems() {
 }
 ```
 
-<UserSelectExampleItems />
-
-## Подсказка
+### Подсказка
 
 Подсказка, которая видна, когда ни один вариант не выбран, задается в свойстве `placeholder`.
-Сформулируйте подсказку так, чтобы стало понятно, что по клику на поле раскроется список вариантов,
-один из которых нужно выбрать.
+Сформулируйте подсказку так, чтобы стало понятно, что по клику на поле раскроется список вариантов, один из которых нужно выбрать.
 
-Если не знаете, что написать в подсказке, используйте универсальное **Выберите**.
+Если не знаете, что писать, напишите **Выберите**.
+
+<UserSelectExamplePlaceholder />
 
 ```tsx
 type Item = {
@@ -142,7 +142,7 @@ export function UserSelectExamplePlaceholder() {
   const [value, setValue] = useState<Item | null>();
   return (
     <UserSelect
-      placeholder="Выберите значение"
+      placeholder="Это подсказка"
       items={items}
       value={value}
       onChange={({ value }) => setValue(value)}
@@ -151,256 +151,11 @@ export function UserSelectExamplePlaceholder() {
 }
 ```
 
-<UserSelectExamplePlaceholder />
+### Неактивный элемент списка
 
-## Множественный выбор
+Чтобы сделать вариант в списке неактивным, добавьте к элементу массива `items` свойство `disabled: true`. Если используете [кастомный тип `items`](#кастомные-типы-данных-для-групп-и-вариантов), можете добавить своё свойство.
 
-Для использования мнодественного выбора воспользуйтесь свойством `multiple`.
-Варианты: `true` , `false` , по умолчанию `false`.
-При значении `true`, `value` должен быть массивом,
-и в `onChange` будет передаваться массив выбранных элементов
-
-```tsx
-type Item = {
-  label: string;
-  subLabel?: string;
-  avatarUrl?: string;
-  id: string | number;
-};
-
-const items: Item[] = [
-  {
-    label: 'Андрей Андреев',
-    subLabel: 'andrey@gmail.com',
-    id: 1,
-  },
-  {
-    label: 'Иван Иванов',
-    subLabel: 'ivan@gmail.com',
-    id: 2,
-  },
-  {
-    label: 'Егор Егоров',
-    subLabel: 'igor@icloud.com',
-    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
-    id: 3,
-  },
-];
-
-export function UserSelectExampleMultiple() {
-  const [value, setValue] = useState<Item[] | null>();
-  return (
-    <div className={cnDocsDecorator('Section')}>
-      <UserSelect
-        placeholder="Выберите значение"
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        multiple
-      />
-    </div>
-  );
-}
-```
-
-<UserSelectExampleMultiple />
-
-## Размер
-
-За размер компонента отвечает свойство `size`. Варианты: `s` , `m` , `l` , по умолчанию `m`.
-
-Компонент занимает всю ширину родительского блока.
-
-```tsx
-type Item = {
-  label: string;
-  subLabel?: string;
-  avatarUrl?: string;
-  id: string | number;
-};
-
-const items: Item[] = [
-  {
-    label: 'Андрей Андреев',
-    subLabel: 'andrey@gmail.com',
-    id: 1,
-  },
-  {
-    label: 'Иван Иванов',
-    subLabel: 'ivan@gmail.com',
-    id: 2,
-  },
-  {
-    label: 'Егор Егоров',
-    subLabel: 'igor@icloud.com',
-    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
-    id: 3,
-  },
-];
-
-export function UserSelectExampleSize() {
-  const [value, setValue] = useState<Item | null>();
-  return (
-    <UserSelect
-      placeholder="Выберите значение"
-      size="s"
-      items={items}
-      value={value}
-      onChange={({ value }) => setValue(value)}
-    />
-  );
-}
-```
-
-<UserSelectExampleSize />
-
-## Форма
-
-За форму селекта отвечает свойство `form`.Варианты:
-`default`, `brick`, `round`, `clearRound`, `roundClear`, `clearDefault`, `defaultClear`, `defaultBrick`, `brickDefault`, `brickClear`, `clearBrick`, `clearClear`
-по умолчанию `default`.
-
-```tsx
-type Item = {
-  label: string;
-  subLabel?: string;
-  avatarUrl?: string;
-  id: string | number;
-};
-
-const items: Item[] = [
-  {
-    label: 'Андрей Андреев',
-    subLabel: 'andrey@gmail.com',
-    id: 1,
-  },
-  {
-    label: 'Иван Иванов',
-    subLabel: 'ivan@gmail.com',
-    id: 2,
-  },
-  {
-    label: 'Егор Егоров',
-    subLabel: 'igor@icloud.com',
-    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
-    id: 3,
-  },
-];
-
-export function UserSelectExampleForm() {
-  const [value, setValue] = useState<Item | null>();
-  return (
-    <UserSelect
-      placeholder="Выберите значение"
-      form="round"
-      items={items}
-      value={value}
-      onChange={({ value }) => setValue(value)}
-    />
-  );
-}
-```
-
-<UserSelectExampleForm />
-
-## Внешний вид
-
-За вид компонента отвечает свойство `view`. Варианты: `default , clear`, по умолчанию `default`.
-
-```tsx
-type Item = {
-  label: string;
-  subLabel?: string;
-  avatarUrl?: string;
-  id: string | number;
-};
-
-const items: Item[] = [
-  {
-    label: 'Андрей Андреев',
-    subLabel: 'andrey@gmail.com',
-    id: 1,
-  },
-  {
-    label: 'Иван Иванов',
-    subLabel: 'ivan@gmail.com',
-    id: 2,
-  },
-  {
-    label: 'Егор Егоров',
-    subLabel: 'igor@icloud.com',
-    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
-    id: 3,
-  },
-];
-
-export function UserSelectExampleView() {
-  const [value, setValue] = useState<Item | null>();
-  return (
-    <UserSelect
-      placeholder="Выберите значение"
-      view="clear"
-      items={items}
-      value={value}
-      onChange={({ value }) => setValue(value)}
-    />
-  );
-}
-```
-
-<UserSelectExampleView />
-
-## Отключение поля ввода
-
-Для отключения поля ввода воспользуйтесь свойством `disabled`.
-
-```tsx
-type Item = {
-  label: string;
-  subLabel?: string;
-  avatarUrl?: string;
-  id: string | number;
-};
-
-const items: Item[] = [
-  {
-    label: 'Андрей Андреев',
-    subLabel: 'andrey@gmail.com',
-    id: 1,
-  },
-  {
-    label: 'Иван Иванов',
-    subLabel: 'ivan@gmail.com',
-    id: 2,
-  },
-  {
-    label: 'Егор Егоров',
-    subLabel: 'igor@icloud.com',
-    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
-    id: 3,
-  },
-];
-
-export function UserSelectExampleDisabled() {
-  const [value, setValue] = useState<Item | null>();
-  return (
-    <UserSelect
-      placeholder="Выберите значение"
-      items={items}
-      value={value}
-      onChange={({ value }) => setValue(value)}
-      disabled
-    />
-  );
-}
-```
-
-<UserSelectExampleDisabled />
-
-## Отключение элементов списка
-
-Для того чтобы отключить элемент списка укажите в элементе массива `items` свойство `disabled`,
-либо свое свойство если вы используете свой тип `items`
+<UserSelectExampleDisabledItem />
 
 ```tsx
 type Item = {
@@ -437,7 +192,7 @@ export function UserSelectExampleDisabledItem() {
   const [value, setValue] = useState<Item | null>();
   return (
     <UserSelect
-      placeholder="Выберите значение"
+      placeholder="Выберите пользователя"
       items={items}
       value={value}
       onChange={({ value }) => setValue(value)}
@@ -446,13 +201,65 @@ export function UserSelectExampleDisabledItem() {
 }
 ```
 
-<UserSelectExampleDisabledItem />
+### Несколько вариантов
 
-## Группировка списка
+По умолчанию из списка можно выбрать только одного пользователя. Чтобы выбрать нескольких, добавьте `multiple`.
 
-Для того чтобы сгруппировать элементы списка, вам необходимо передать массив групп в свойсто `groups`.
+> В этом случае `value` становится массивом, а в `onChange` передаётся массив выбранных элементов.
 
-По умолчанию тип элемента массива `groups` равен [DefaultGroup](#свойства)
+<UserSelectExampleMultiple />
+
+```tsx
+type Item = {
+  label: string;
+  subLabel?: string;
+  avatarUrl?: string;
+  id: string | number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Андрей Андреев',
+    subLabel: 'andrey@gmail.com',
+    id: 1,
+  },
+  {
+    label: 'Иван Иванов',
+    subLabel: 'ivan@gmail.com',
+    id: 2,
+  },
+  {
+    label: 'Егор Егоров',
+    subLabel: 'igor@icloud.com',
+    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
+    id: 3,
+  },
+];
+
+export function UserSelectExampleMultiple() {
+  const [value, setValue] = useState<Item[] | null>();
+  return (
+    <div className={cnDocsDecorator('Section')}>
+      <UserSelect
+        placeholder="Выберите одного или несколько"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        multiple
+      />
+    </div>
+  );
+}
+```
+
+### Группы вариантов
+
+Чтобы разбить элементы списка на группы, передайте массив групп в свойстве `groups`. Тип элемента массива `groups` по умолчанию равен [DefaultGroup](#свойства)). Что внутри:
+
+- `label` — название группы (в нём не нужна точка),
+- `id` — уникальный ключ.
+
+<UserSelectExampleGroups />
 
 ```tsx
 type Item = {
@@ -505,7 +312,7 @@ export function UserSelectExampleGroups() {
   const [value, setValue] = useState<Item | null>();
   return (
     <UserSelect
-      placeholder="Выберите значение"
+      placeholder="Выберите пользователя"
       items={items}
       value={value}
       onChange={({ value }) => setValue(value)}
@@ -515,14 +322,222 @@ export function UserSelectExampleGroups() {
 }
 ```
 
-<UserSelectExampleGroups />
+## Размер
 
-## Создание элементов
+За размер компонента отвечает свойство `size`. Варианты: `s`, `m`, `l`, по умолчанию `m`.
 
-Имеется возможность создавать эелементы, для этого используйте свойство `onCreate`.
-Если свойство будет заполненно, и в результатах поиска не будет желамой опции,
-то появится кнопка для создания элемента.
-В функцию на вход придет `label` создоваемого элемента.
+Компонент занимает всю ширину родительского блока.
+
+<UserSelectExampleSize />
+
+```tsx
+type Item = {
+  label: string;
+  subLabel?: string;
+  avatarUrl?: string;
+  id: string | number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Андрей Андреев',
+    subLabel: 'andrey@gmail.com',
+    id: 1,
+  },
+  {
+    label: 'Иван Иванов',
+    subLabel: 'ivan@gmail.com',
+    id: 2,
+  },
+  {
+    label: 'Егор Егоров',
+    subLabel: 'igor@icloud.com',
+    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
+    id: 3,
+  },
+];
+
+export function UserSelectExampleSize() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+  <UserSelect
+    placeholder="Размер s"
+    size="s"
+    items={items}
+    value={value}
+    onChange={({ value }) => setValue(value)}
+  />
+  <UserSelect
+    placeholder="Размер m"
+    size="m"
+    items={items}
+    value={value}
+    onChange={({ value }) => setValue(value)}
+  />
+  <UserSelect
+    placeholder="Размер l"
+    size="l"
+    items={items}
+    value={value}
+    onChange={({ value }) => setValue(value)}
+  />
+  );
+}
+```
+
+## Форма
+
+За форму компонента отвечает свойство `form`. Варианты:
+`default`, `brick`, `round`, `clearRound`, `roundClear`, `clearDefault`, `defaultClear`, `defaultBrick`, `brickDefault`, `brickClear`, `clearBrick`, `clearClear`. По умолчанию `default`.
+
+<UserSelectExampleForm />
+
+```tsx
+type Item = {
+  label: string;
+  subLabel?: string;
+  avatarUrl?: string;
+  id: string | number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Андрей Андреев',
+    subLabel: 'andrey@gmail.com',
+    id: 1,
+  },
+  {
+    label: 'Иван Иванов',
+    subLabel: 'ivan@gmail.com',
+    id: 2,
+  },
+  {
+    label: 'Егор Егоров',
+    subLabel: 'igor@icloud.com',
+    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
+    id: 3,
+  },
+];
+
+export function UserSelectExampleForm() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <UserSelect
+      placeholder="Форма round"
+      form="round"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
+  );
+}
+```
+
+## Внешний вид
+
+За вид компонента отвечает свойство `view`. Варианты: `default`, `clear`, по умолчанию `default`.
+
+<UserSelectExampleView />
+
+```tsx
+type Item = {
+  label: string;
+  subLabel?: string;
+  avatarUrl?: string;
+  id: string | number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Андрей Андреев',
+    subLabel: 'andrey@gmail.com',
+    id: 1,
+  },
+  {
+    label: 'Иван Иванов',
+    subLabel: 'ivan@gmail.com',
+    id: 2,
+  },
+  {
+    label: 'Егор Егоров',
+    subLabel: 'igor@icloud.com',
+    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
+    id: 3,
+  },
+];
+
+export function UserSelectExampleView() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <UserSelect
+      placeholder="Выберите пользователя"
+      view="clear"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
+  );
+}
+```
+
+## Неактивный выпадающий список
+
+Чтобы сделать список неактивным, добавьте `disabled`.
+
+<UserSelectExampleDisabled />
+
+```tsx
+type Item = {
+  label: string;
+  subLabel?: string;
+  avatarUrl?: string;
+  id: string | number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Андрей Андреев',
+    subLabel: 'andrey@gmail.com',
+    id: 1,
+  },
+  {
+    label: 'Иван Иванов',
+    subLabel: 'ivan@gmail.com',
+    id: 2,
+  },
+  {
+    label: 'Егор Егоров',
+    subLabel: 'igor@icloud.com',
+    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
+    id: 3,
+  },
+];
+
+export function UserSelectExampleDisabled() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <UserSelect
+      placeholder="Выберите пользователя"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      disabled
+    />
+  );
+}
+```
+
+## Поиск
+
+Если в поле что-то напечатать, компонент найдёт всех пользователей, в имени которых есть напечатанные символы.
+
+По умолчанию компонент ищет по `label` элемента. Вы можете поменять параметры поиска с помощью `searchFunction`. Например, если в селекте есть [кастомные элементы](#кастомный-элемент-списка) и нужно искать пользователей не только по `label`, но и по другим данным.
+
+## Создание новых пользователей
+
+Если при поиске в поле никого не нашлось, можно показать в селекте кнопку для создания нового значения. Пользователь сможет добавить значение в список, а потом выбрать его. В функцию на вход придёт `label` созданного элемента.
+
+<UserSelectExampleCreate />
 
 ```tsx
 type Item = {
@@ -550,7 +565,7 @@ export function UserSelectExampleCreate() {
   const [list, setList] = useState<Item[]>(items);
   return (
     <UserSelect
-      placeholder="Выберите значение"
+      placeholder="Выберите пользователя"
       items={list}
       value={value}
       onChange={({ value }) => setValue(value)}
@@ -560,23 +575,18 @@ export function UserSelectExampleCreate() {
 }
 ```
 
-<UserSelectExampleCreate />
+## Кастомизация
 
-## Поиск
+### Кастомный элемент списка
 
-В `UserSelect` имеется возможность поиска элемента, по умолчанию поиск идет по `label` элемента.
-Вы можете использовать свою функцию поиска в свойстве `searchFunction`.
-Это может быть полезно когда, используете свое предстволение элементов списка,
-где выводится помимо `label` элемента еще какието данные по которым тоже необходим поиск.
-
-## Свое представление элемента списка
-
-Для того чтобы сделать свое представление элементов списка, воспользуйтесь свойством `renderItem`.
+Сделать кастомное представление для элементов списка можно с помощью свойства `renderItem`.
 Свойство принимает [функцию рендера](https://reactjs.org/docs/render-props.html).
 
-**Важно**: корневой DOM элемент, должен иметь свойство `role="option"`
+> У корневого DOM-элемента должно быть свойство `role="option"`.
 
-### Пример с своим представлением элемента списка и своей функцией поиска
+<UserSelectExampleRenderItem />
+
+#### Пример с кастомными элементами и своей функцией для поиска
 
 ```tsx
 const cnUserSelectExampleRenderItem = cn('UserSelectExampleRenderItem');
@@ -650,7 +660,7 @@ export function UserSelectExampleRenderItem() {
   return (
     <div className={cnDocsDecorator('Section')}>
       <UserSelect
-        placeholder="Выберите значение"
+        placeholder="Выберите пользователя"
         items={items}
         value={value}
         onChange={({ value }) => setValue(value)}
@@ -679,12 +689,12 @@ export function UserSelectExampleRenderItem() {
 }
 ```
 
-<UserSelectExampleRenderItem />
+### Кастомное выбранное значение
 
-## Свое представление выбранного значения
-
-Для того чтобы сделать свое представление выбранного значения, воспользуйтесь свойством `renderValue`.
+Сделать кастомное представление для выбранного значения можно с помощью свойства `renderValue`.
 Свойство принимает [функцию рендера](https://reactjs.org/docs/render-props.html).
+
+<UserSelectExampleRenderValue />
 
 ```tsx
 const cnUserSelectExampleRenderValue = cn('UserSelectExampleRenderValue');
@@ -734,7 +744,7 @@ export function UserSelectExampleRenderValue() {
   return (
     <div className={cnDocsDecorator('Section')}>
       <UserSelect
-        placeholder="Выберите значение"
+        placeholder="Выберите пользователя"
         items={items}
         value={value}
         onChange={({ value }) => setValue(value)}
@@ -755,17 +765,16 @@ export function UserSelectExampleRenderValue() {
 }
 ```
 
-<UserSelectExampleRenderValue />
+### Кастомные типы данных для групп и вариантов
 
-## Свои тип данных items и groups
+Вы можете использовать кастомные типы данных для элементов списка (`items`) и групп (`groups`) — они могут отличаться от [DefaultItem](#свойства) и [DefaultGroup](#свойства).
 
-Вы можете использовать отличные от [DefaultItem](#свойства) и [DefaultGroup](#свойства) типы данных.
-
-Если ваш тип данных отличен от [DefaultItem](#свойства) и [DefaultGroup](#свойства),
-необходимо использовать свойства:
+В этом случае нужно использовать геттеры
 `getItemLabel`, `getItemKey`, `getItemGroupKey`, `getItemDisabled`,
 `getItemSubLabel`, `getItemAvatarUrl`, `getGroupLabel`, `getGroupKey`,
-для того чтобы компонент понимал откуда брать данные.
+чтобы компонент понимал, откуда брать данные.
+
+> Если геттеры не указаны, используются геттеры по умолчанию, которые могут не подойти к вашим типам данных.
 
 ### Геттеры по умолчанию
 
@@ -780,14 +789,16 @@ export const defaultGetGroupKey = (group) => group.id;
 export const defaultGetGroupLabel = (group) => group.label;
 ```
 
-### Пример с кастомным Item
+#### Пример с кастомным Item
+
+<UserSelectExampleCustomTypes />
 
 ```tsx
 export function UserSelectExampleCustomTypes() {
   const [value, setValue] = useState<string | null>();
   return (
     <UserSelect
-      placeholder="Выберите значение"
+      placeholder="Выберите пользователя"
       items={['Андрей Андреев', 'Егор Егоров', 'Михаил Михалков']}
       value={value}
       onChange={({ value }) => setValue(value)}
@@ -798,9 +809,9 @@ export function UserSelectExampleCustomTypes() {
 }
 ```
 
-<UserSelectExampleCustomTypes />
+#### Пример с кастомными Item и Group
 
-### Пример с кастомным Item и Group
+<UserSelectExampleCustomTypesWithGroups />
 
 ```tsx
 const groups = ['Отдел разработкки', 'Отдел закупок'];
@@ -822,7 +833,7 @@ export function UserSelectExampleCustomTypesWithGroups() {
   return (
     <div className={cnDocsDecorator('Section')}>
       <UserSelect
-        placeholder="Выберите значение"
+        placeholder="Выберите пользователя"
         items={items}
         groups={groups}
         value={value}
@@ -838,8 +849,6 @@ export function UserSelectExampleCustomTypesWithGroups() {
   );
 }
 ```
-
-<UserSelectExampleCustomTypesWithGroups />
 
 ## Свойства
 
@@ -888,32 +897,32 @@ export type PropGetGroupKey<GROUP> = (group: GROUP) => string | number;
 export type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 ```
 
-| Свойство                                                  | Тип или варианты значения                              | По умолчанию                                                  | Описание                                                               |
-| --------------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| [`view?`](#внешний-вид)                                   | `default` , `clear`                                    | `default`                                                     | Внешний вид компонента                                                 |
-| [`disabled?`](#отключение-поля-ввода)                     | `boolean`                                              | -                                                             | Делает компонент недоступным                                           |
-| [`size?`](#размер)                                        | `'xs'`, `'s'` , `'m'` , `'l'`                          | `'m'`                                                         | Размер компонента                                                      |
-| [`form?`](#форма)                                         | `default`, `brick`, `round`                            | `default`                                                     | Форма компонента                                                       |
-| [`placeholder?`](#подсказка)                              | `string`                                               | -                                                             | Подсказка, отображается, когда вариант не выбран                       |
-| [`items`](#варианты)                                      | `ITEM[]`                                               | -                                                             | Варианты                                                               |
-| [`value?`](#значение)                                     | `PropValue<ITEM,MULTIPLE>`                             | -                                                             | Значение селекта                                                       |
-| [`onChange?`](#onchange)                                  | `PropOnChange<ITEM,MULTIPLE>`                          | -                                                             | Обработчик события изменения значения компонента                       |
-| [`multiple?`](#множественный-выбор)                       | `boolean`                                              | `fasle`                                                       | Указатель множественного выбора                                        |
-| [`groups?`](#группировка-списка)                          | `GROUP[]`                                              | -                                                             | Группы                                                                 |
-| [`searchFunction?`](#поиск)                               | `PropSearchFunction<ITEM>`                             | поиск по `label` элементов, `label` получен из `getItemLabel` | Функция поиска                                                         |
-| [`renderItem?`](#свое-представление-элемента-списка)      | `PropRenderItem<ITEM>`                                 | рендер по умолчанию                                           | Рендер функция элемента списка                                         |
-| [`renderValue?`](#свое-представление-выбранного-значения) | `PropRenderValue<ITEM>`                                | рендер по умолчанию                                           | Рендер функция элемента значения                                       |
-| [`getItemLabel?`](#свои-тип-данных-items-и-groups)        | `PropGetItemLabel<ITEM>`                               | `(item) => item.label`                                        | Функция для определения названия элемента                              |
-| [`getItemKey?`](#свои-тип-данных-items-и-groups)          | `PropGetItemKey<ITEM>`                                 | `(item) => item.id`                                           | Функция для определения уникального ключа элемента                     |
-| [`getItemSubLabel?`](#свои-тип-данных-items-и-groups)     | `PropGetItemSubLabel<ITEM>`                            | `(item) => item.subLabel`                                     | Функция для определения подписи элемента                               |
-| [`getItemAvatarUrl?`](#свои-тип-данных-items-и-groups)    | `PropGetItemAvatarUrl<ITEM>`                           | `(item) => item.avatarUrl`                                    | Функция для определения аватарки элемента                              |
-| [`getItemGroupKey?`](#свои-тип-данных-items-и-groups)     | `PropGetItemGroupKey<ITEM>`                            | `(item) => item.groupId`                                      | Функция для определения ключа группы, к которой будет привязан элемент |
-| [`getItemDisabled?`](#свои-тип-данных-items-и-groups)     | `PropGetItemDisabled<ITEM>`                            | `(item) => item.disabled`                                     | Функция для определения состояния `disabled`                           |
-| [`getGroupLabel?`](#свои-тип-данных-items-и-groups)       | `PropGetGroupKey<GROUP>`                               | `(group) => group.id`                                         | Функция для определения названия группы                                |
-| [`getGroupKey?`](#свои-тип-данных-items-и-groups)         | `PropGetGroupLabel<GROUP>`                             | `(group) => group.label`                                      | Функция для определения уникального ключа группы                       |
-| `onBlur?`                                                 | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                                                             | Обработчик события `blur`                                              |
-| `onFocus?`                                                | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                                                             | Обработчик события `focus`                                             |
-| `ariaLabel?`                                              | `string`                                               | -                                                             | `aria` атрибут для поля ввода                                          |
-| `name?`                                                   | `string`                                               | -                                                             | Имя поля ввода                                                         |
-| `className?`                                              | `string`                                               | -                                                             | Дополнительный CSS-класс                                               |
-| `dropdownClassName?`                                      | `string`                                               | -                                                             | Дополнительный CSS-класс для выпадающего блока                         |
+| Свойство                                                            | Тип или варианты значения                              | По умолчанию                                                  | Описание                                                               |
+| ------------------------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| [`view?`](#внешний-вид)                                             | `default` , `clear`                                    | `default`                                                     | Внешний вид компонента                                                 |
+| [`disabled?`](#неактивный-выпадающий-список)                        | `boolean`                                              | -                                                             | Делает компонент неактивным                                            |
+| [`size?`](#размер)                                                  | `'xs'`, `'s'` , `'m'` , `'l'`                          | `'m'`                                                         | Размер компонента                                                      |
+| [`form?`](#форма)                                                   | `default`, `brick`, `round`                            | `default`                                                     | Форма компонента                                                       |
+| [`placeholder?`](#подсказка)                                        | `string`                                               | -                                                             | Подсказка, отображается, когда вариант не выбран                       |
+| [`items`](#варианты)                                                | `ITEM[]`                                               | -                                                             | Варианты                                                               |
+| [`value?`](#выбранное-значение)                                     | `PropValue<ITEM,MULTIPLE>`                             | -                                                             | Выбранное значение                                                     |
+| [`onChange?`](#выбранное-значение)                                  | `PropOnChange<ITEM,MULTIPLE>`                          | -                                                             | Обработчик события изменения значения компонента                       |
+| [`multiple?`](#несколько-вариантов)                                 | `boolean`                                              | `fasle`                                                       | Показывает, что можно выбрать несколько вариантов                      |
+| [`groups?`](#группы-вариантов)                                      | `GROUP[]`                                              | -                                                             | Группы                                                                 |
+| [`searchFunction?`](#поиск)                                         | `PropSearchFunction<ITEM>`                             | поиск по `label` элементов, `label` получен из `getItemLabel` | Функция поиска                                                         |
+| [`renderItem?`](#кастомный-элемент-списка)                          | `PropRenderItem<ITEM>`                                 | рендер по умолчанию                                           | Рендер-функция для элемента списка                                     |
+| [`renderValue?`](#кастомное-выбранное-значение)                     | `PropRenderValue<ITEM>`                                | рендер по умолчанию                                           | Рендер-функция для элемента выбранного значения                        |
+| [`getItemLabel?`](#кастомные-типы-данных-для-групп-и-вариантов)     | `PropGetItemLabel<ITEM>`                               | `(item) => item.label`                                        | Функция для определения названия элемента                              |
+| [`getItemKey?`](#кастомные-типы-данных-для-групп-и-вариантов)       | `PropGetItemKey<ITEM>`                                 | `(item) => item.id`                                           | Функция для определения уникального ключа элемента                     |
+| [`getItemSubLabel?`](#кастомные-типы-данных-для-групп-и-вариантов)  | `PropGetItemSubLabel<ITEM>`                            | `(item) => item.subLabel`                                     | Функция для определения подписи элемента                               |
+| [`getItemAvatarUrl?`](#кастомные-типы-данных-для-групп-и-вариантов) | `PropGetItemAvatarUrl<ITEM>`                           | `(item) => item.avatarUrl`                                    | Функция для определения аватарки элемента                              |
+| [`getItemGroupKey?`](#кастомные-типы-данных-для-групп-и-вариантов)  | `PropGetItemGroupKey<ITEM>`                            | `(item) => item.groupId`                                      | Функция для определения ключа группы, к которой будет привязан элемент |
+| [`getItemDisabled?`](#кастомные-типы-данных-для-групп-и-вариантов)  | `PropGetItemDisabled<ITEM>`                            | `(item) => item.disabled`                                     | Функция для определения состояния `disabled`                           |
+| [`getGroupLabel?`](#кастомные-типы-данных-для-групп-и-вариантов)    | `PropGetGroupKey<GROUP>`                               | `(group) => group.id`                                         | Функция для определения названия группы                                |
+| [`getGroupKey?`](#кастомные-типы-данных-для-групп-и-вариантов)      | `PropGetGroupLabel<GROUP>`                             | `(group) => group.label`                                      | Функция для определения уникального ключа группы                       |
+| `onBlur?`                                                           | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                                                             | Обработчик события `blur`                                              |
+| `onFocus?`                                                          | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                                                             | Обработчик события `focus`                                             |
+| `ariaLabel?`                                                        | `string`                                               | -                                                             | `aria` атрибут для поля ввода                                          |
+| `name?`                                                             | `string`                                               | -                                                             | Имя поля ввода                                                         |
+| `className?`                                                        | `string`                                               | -                                                             | Дополнительный CSS-класс                                               |
+| `dropdownClassName?`                                                | `string`                                               | -                                                             | Дополнительный CSS-класс для выпадающего блока                         |

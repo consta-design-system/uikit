@@ -34,7 +34,7 @@ export function UserSelectExampleView() {
   return (
     <div className={cnDocsDecorator('Section')}>
       <UserSelect
-        placeholder="Выберите значение"
+        placeholder="Выберите пользователя"
         view="clear"
         items={items}
         value={value}
