@@ -22,7 +22,7 @@
   color: #fff;
   background: linear-gradient(rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0)),
     linear-gradient(var(--avatar-color), var(--avatar-color));
-  font-weight: 600;
+  font-weight: var(--font-weight-text-semibold);
   text-align: center;
   letter-spacing: 0.1em;
 

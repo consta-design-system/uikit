@@ -18,4 +18,12 @@
   --line-height-text-s: 1.4em;
   --line-height-text-m: 1.5em;
   --line-height-text-l: 1.6em;
+
+  /* Ширина шрифта */
+  --font-weight-text-thin: 100;
+  --font-weight-text-light: 300;
+  --font-weight-text-regular: normal;
+  --font-weight-text-semibold: 600;
+  --font-weight-text-bold: bold;
+  --font-weight-text-black: 900;
 }

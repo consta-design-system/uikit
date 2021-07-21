@@ -5,7 +5,7 @@
   box-sizing: border-box;
   height: var(--badge-size);
   font-size: var(--badge-text-size);
-  font-weight: 600;
+  font-weight: var(--font-weight-text-semibold);
   line-height: var(--badge-size);
   white-space: nowrap;
   text-decoration: none;

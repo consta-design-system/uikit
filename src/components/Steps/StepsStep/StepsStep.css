@@ -71,7 +71,7 @@
   }
 
   &_active {
-    font-weight: 600;
+    font-weight: var(--font-weight-text-semibold);
 
     &::after {
       opacity: 1;

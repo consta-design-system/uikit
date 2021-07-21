@@ -5,7 +5,7 @@
   max-width: 100%;
   min-height: var(--input-height);
   font-family: var(--font-primary);
-  font-weight: normal;
+  font-weight: var(--font-weight-text-regular);
   transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
 
   &_width_full {

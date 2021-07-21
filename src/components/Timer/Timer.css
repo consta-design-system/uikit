@@ -21,7 +21,7 @@
     width: 100%;
     color: var(--color-control-typo-ghost);
     font-size: var(--size-text-xs);
-    font-weight: bold;
+    font-weight: var(--font-weight-text-bold);
     line-height: var(--timer-size);
     text-align: center;
   }
