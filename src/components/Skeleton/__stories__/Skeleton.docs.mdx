@@ -1,0 +1,109 @@
+import { SkeletonBrick, SkeletonCircle, SkeletonText } from '../Skeleton';
+import { SkeletonExampleAvatar } from './examples/SkeletonExampleAvatar/SkeletonExampleAvatar';
+import { SkeletonExampleImageAndText } from './examples/SkeletonExampleImageAndText';
+import { StoryBookExample } from '../../../uiKit/components/StoryBookExample/StoryBookExample';
+
+# Skeleton
+
+- [SkeletonBrick](#skeletonbrick)
+  - [Свойства SkeletonBrick](#свойства-skeletonbrick)
+- [SkeletonCircle](#skeletoncircle)
+  - [Свойства SkeletonCircle](#свойства-skeletoncircle)
+- [SkeletonText](#skeletontext)
+  - [Свойства SkeletonText](#свойства-skeletontext)
+- [Композиция](#композиция)
+
+## SkeletonBrick
+
+<StoryBookExample>
+  <SkeletonBrick height={200} />
+</StoryBookExample>
+
+```tsx
+<SkeletonBrick height={200} />
+```
+
+### Свойства SkeletonBrick
+
+| Свойство     | Тип                       | По умолчанию | Описание                 |
+| ------------ | ------------------------- | ------------ | ------------------------ |
+| `className?` | `string`                  | -            | Дополнительный CSS-класс |
+| `width?`     | `CSSProperties['width']`  | `'100%'`     | Ширина блока             |
+| `height`     | `CSSProperties['height']` | -            | Высота блока             |
+
+## SkeletonCircle
+
+<StoryBookExample>
+  <SkeletonCircle size={60} />
+</StoryBookExample>
+
+```tsx
+<SkeletonCircle size={60} />
+```
+
+### Свойства SkeletonCircle
+
+| Свойство     | Тип                                                | По умолчанию | Описание                 |
+| ------------ | -------------------------------------------------- | ------------ | ------------------------ |
+| `className?` | `string`                                           | -            | Дополнительный CSS-класс |
+| `size`       | `CSSProperties['width'] & CSSProperties['height']` | -            | Диаметр круга            |
+
+## SkeletonText
+
+<StoryBookExample>
+  <SkeletonText rows={4} />
+</StoryBookExample>
+
+```tsx
+<SkeletonText rows={4} />
+```
+
+### Свойства SkeletonText
+
+| Свойство      | Тип                                                                   | По умолчанию | Описание                 |
+| ------------- | --------------------------------------------------------------------- | ------------ | ------------------------ |
+| `className?`  | `string`                                                              | -            | Дополнительный CSS-класс |
+| `rows`        | `number`                                                              | -            | Количество строк         |
+| `fontSize`?   | `'2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'` | `'m'`        | Размер текста            |
+| `lineHeight`? | `'2xs', 'xs', 's', 'm', 'l'`                                          | `'m'`        | Высота строки            |
+
+## Композиция
+
+Композировать блоки, чтобы они визуально напоминали ваш компонент, можно несколькими способами:
+
+1. По возможности старайтесь использовать те же классы, что и для лэйаута обычного компонента. Это позволит избежать дублирования и сделает вид компонента и его скелетона максимально похожими.
+   <SkeletonExampleAvatar />
+
+```tsx
+<div className="main">
+  <SkeletonCircle className="avatar" size={32} />
+  <SkeletonText className="text" rows={2} fontSize="xs" lineHeight="s" />
+</div>
+```
+
+```css
+.main {
+  display: flex;
+  width: 150px;
+}
+
+.avatar {
+  flex-shrink: 0;
+}
+
+.text {
+  margin-left: var(--space-s);
+}
+```
+
+2. Если используете компоненты для лэйаута (например, Grid), то кладите внутрь скелетоны, а после загрузки меняйте их на реальные компоненты.
+   <SkeletonExampleImageAndText />
+
+```tsx
+<Grid gap="m" style={{ width: 200 }}>
+  <SkeletonBrick height={200} />
+  <SkeletonText rows={4} />
+</Grid>
+```
+
+3. Если реиспользовать классы или компоненты лэйаута не удаётся, можно написать отдельные стили для обёртки скелетона.

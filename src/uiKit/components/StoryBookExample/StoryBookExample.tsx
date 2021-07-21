@@ -17,7 +17,7 @@ export const StoryBookExample: React.FC<StoryBookModsProps> = (props) => {
     }
     return React.cloneElement(children, {
       ...children.props,
-      className: cnStoryBookExample('Children'),
+      className: cnStoryBookExample('Children', [children.props.className]),
       key,
     });
   }

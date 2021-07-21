@@ -19,6 +19,7 @@ export type TextPropDecoration = typeof textPropDecoration[number];
 
 export const textPropLineHeight = ['2xs', 'xs', 's', 'm', 'l'] as const;
 export type TextPropLineHeight = typeof textPropLineHeight[number];
+export const textPropLineHeightDefault: TextPropLineHeight = 'm';
 
 export const textPropSize = [
   'm',
@@ -94,7 +95,7 @@ export const Text = forwardRefWithAs<Props>((props, ref) => {
     decoration,
     display,
     font,
-    lineHeight,
+    lineHeight = textPropLineHeightDefault,
     size = textPropSizeDefault,
     spacing,
     fontStyle,
