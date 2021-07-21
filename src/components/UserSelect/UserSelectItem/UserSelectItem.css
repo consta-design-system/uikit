@@ -35,7 +35,7 @@
   }
 
   &_disable {
-    color: var(--color-control-typo-disabled);
+    color: var(--color-control-typo-disable);
   }
 
   &_hovered {
@@ -116,5 +116,9 @@
   &-SubLabel {
     opacity: 0.7;
     font-size: var(--sub-label-font-size);
+
+    &_disable {
+      opacity: 1;
+    }
   }
 }
