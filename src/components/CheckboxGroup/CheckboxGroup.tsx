@@ -55,10 +55,7 @@ export const CheckboxGroup: CheckboxGroup = React.forwardRef((props, ref) => {
     ...otherProps
   } = props;
 
-  const { getOnChange, getChecked } = useChoiceGroup<
-    typeof items[number],
-    React.ChangeEvent<HTMLInputElement>
-  >({
+  const { getOnChange, getChecked } = useChoiceGroup({
     value,
     getKey: getLabel,
     callBack: onChange,
