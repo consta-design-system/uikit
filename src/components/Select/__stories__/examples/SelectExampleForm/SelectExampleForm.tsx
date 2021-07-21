@@ -28,8 +28,15 @@ export function SelectExampleForm() {
   return (
     <div className={cnDocsDecorator('Section')}>
       <Select
-        placeholder="Выберите значение"
+        placeholder="Форма round"
         form="round"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <Select
+        placeholder="Форма brickDefault"
+        form="brickDefault"
         items={items}
         value={value}
         onChange={({ value }) => setValue(value)}

@@ -47,12 +47,12 @@ const items: Item[] = [
   },
   {
     label: 'Четвертый',
-    id: 3,
+    id: 4,
     groupId: 3,
   },
   {
     label: 'Пятый',
-    id: 3,
+    id: 5,
     groupId: 2,
   },
 ];

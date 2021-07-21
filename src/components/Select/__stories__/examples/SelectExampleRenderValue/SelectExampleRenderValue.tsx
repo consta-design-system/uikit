@@ -37,7 +37,7 @@ export function SelectExampleRenderValue() {
             <span role="img" aria-label="Panda">
               🐼
             </span>{' '}
-            - {item.label}
+            — {item.label}
           </div>
         )}
       />
