@@ -1,6 +1,4 @@
 .Text {
-  line-height: var(--line-height-text-m);
-
   &_font {
     &_primary {
       font-family: var(--font-primary);

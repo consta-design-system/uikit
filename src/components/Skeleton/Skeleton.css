@@ -1,0 +1,33 @@
+.Skeleton {
+  --loader-width: 100px;
+  background-color: var(--color-bg-system);
+  background-image: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--color-bg-stripe) calc(0.2 * var(--loader-width)),
+    var(--color-bg-ghost) calc(0.6 * var(--loader-width)),
+    transparent var(--loader-width)
+  );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  animation: Skeleton-Animation 2.5s linear infinite;
+
+  @media (max-width: 1280px) {
+    animation-duration: 2s;
+  }
+
+  @media (max-width: 720px) {
+    animation-duration: 1.5s;
+  }
+}
+
+@keyframes Skeleton-Animation {
+  0% {
+    background-position: calc(-1 * var(--loader-width)) 0%;
+  }
+
+  75%,
+  100% {
+    background-position: 100vw 0%;
+  }
+}

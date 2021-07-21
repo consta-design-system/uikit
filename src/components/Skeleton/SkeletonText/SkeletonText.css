@@ -1,0 +1,8 @@
+.SkeletonText {
+  width: 100%;
+
+  &-Row {
+    display: flex;
+    align-items: center;
+  }
+}
