@@ -1,0 +1,112 @@
+.SelectDropdownDeprecated {
+  --transition-spase: var(--space-2xs);
+  z-index: 9999;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 220px;
+  margin: -1px 0 -1px;
+  background: var(--color-bg-default);
+  border: var(--control-border-width) solid var(--color-control-bg-border-default);
+  outline: none;
+  opacity: 0;
+  box-shadow: var(--shadow-layer);
+  font-size: var(--font-size);
+  transform: translateY(var(--transition-spase));
+
+  &_size {
+    &_xs {
+      --input-height: var(--control-height-xs);
+      --font-size: var(--control-text-size-xs);
+      --input-space: calc(var(--control-space-xs) * 0.5);
+      --list-spase: var(--space-2xs);
+    }
+
+    &_s {
+      --input-height: var(--control-height-s);
+      --font-size: var(--control-text-size-s);
+      --input-space: calc(var(--control-space-s) * 0.5);
+      --list-spase: var(--space-2xs);
+    }
+
+    &_m {
+      --input-height: var(--control-height-m);
+      --font-size: var(--control-text-size-m);
+      --input-space: calc(var(--control-space-m) * 0.5);
+      --list-spase: var(--space-xs);
+    }
+
+    &_l {
+      --input-height: var(--control-height-l);
+      --font-size: var(--control-text-size-l);
+      --input-space: calc(var(--control-space-l) * 0.5);
+      --list-spase: var(--space-xs);
+    }
+  }
+
+  &_form {
+    &_default {
+      border-radius: var(--control-radius);
+    }
+
+    &_brick {
+      border-radius: 0;
+    }
+
+    &_round {
+      border-radius: calc(var(--input-height) * 0.5);
+    }
+  }
+
+  &_animate {
+    &_appear,
+    &_appearActive,
+    &_appearDone,
+    &_enter,
+    &_enterActive,
+    &_enterDone,
+    &_exit,
+    &_exitActive,
+    &_exitDone {
+      transition: 0.2s ease;
+      transition-property: opacity, transform;
+    }
+
+    &_appear,
+    &_enter {
+      opacity: 0;
+      transform: translateY(var(--transition-spase));
+    }
+
+    &_enterActive,
+    &_appearActive,
+    &_appearDone,
+    &_enterDone {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    &_exit {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    &_exitActive,
+    &_exitDone {
+      opacity: 0;
+      transform: translateY(var(--transition-spase));
+    }
+  }
+
+  &-LabelForNotFound {
+    padding: 0 var(--space-xs);
+  }
+
+  &-List {
+    overflow-y: auto;
+    width: 100%;
+    max-height: 200px;
+    padding: var(--list-spase) 0;
+    line-height: 120%;
+  }
+}

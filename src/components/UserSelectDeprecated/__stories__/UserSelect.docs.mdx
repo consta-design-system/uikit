@@ -1,0 +1,163 @@
+import { Preview } from '@storybook/addon-docs/dist/blocks';
+
+import { UserSelectExample, UserSelectExampleMulti } from './examples/UserSelectExample';
+
+# UserSelect (Deprecated)
+
+Выпадающий список пользователей. Очень похож на [Combobox](?path=/docs/components-combobox--default-story) и [MultiCombobox](?path=/docs/components-multicombobox--with-value-story),
+но предназначен для выборва пользователей, у которых (в отличии от Combobox и MultiCombobox) присутствуют дополнительные поля - аватар и информация.
+
+Что может пользователь:
+
+- выбрать либо **один**, либо **несколько вариантов** из списка,
+- написать в поле несколько символов — компонент покажет все варианты, в которых есть эти символы.
+
+## Варианты
+
+Варианты значений для выпадающего списка передаются в объекте `options`. Напишите их
+с заглавной буквы.
+
+Отобразить текст для конкретного варианта можно с помощью функции `getOptionLabel`.
+Для корректного отображения одинаковых вариантов лучше указать уникальный ключ с помощью `getOptionKey`.
+
+Подсказка, которая видна, когда ни один вариант не выбран, задается в свойстве `placeholder`.
+Сформулируйте подсказку так, чтобы стало понятно, что по клику на поле раскроется список вариантов,
+один из которых нужно выбрать. Если не знаете, что писать, напишите **Выберите**.
+
+<UserSelectExample />
+
+## Выбрать несколько вариантов
+
+<UserSelectExampleMulti />
+
+## Свойства
+
+| Свойство                                | Тип или варианты значения                              | По умолчанию   | Описание                                                                                                                   |
+| --------------------------------------- | ------------------------------------------------------ | -------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `multiple?`                             | `boolean`                                              | `false`        | Возможность выбрать несколько варинтов                                                                                     |
+| [`view?`](#внешний-вид)                 | `default , clear`                                      | `default`      | Внешний вид компонента                                                                                                     |
+| [`form?`](#форма)                       | 'default', 'brick', 'round'                            | `default`      | Форма поля компонента                                                                                                      |
+| [`disabled?`](#внешний-вид)             | `boolean`                                              | -              | Делает компонент недоступным                                                                                               |
+| [`size?`](#размер)                      | `'s' , 'm' , 'l'`                                      | `'m'`          | Размер компонента                                                                                                          |
+| [`placeholder?`](#варианты)             | `string`                                               | -              | Подсказка, отображается, когда вариант не выбран                                                                           |
+| [`options`](#варианты)                  | `T[]`                                                  | -              | Варианты, которые можно выбрать                                                                                            |
+| [`getOptionLabel`](#варианты)           | `(arg: T) => string`                                   | -              | Функция для получения текста варианта, который будет отображаться в поле для выбранного значения                           |
+| [`getOptionKey?`](#варианты)            | `(arg: T) => string | number`                          | getOptionLabel | Функция для получения уникального ключа элемента списка                                                                    |
+| [`getOptionAdditionalInfo?`](#варианты) | `(arg: T) => string`                                   | -              | Функция для получения текста варианта, который будет отображаться в поле дополнительной информации для выбранного значения |
+| [`getOptionAvatarUrl?`](#варианты)      | `(arg: T) => string`                                   | -              | Функция для получения url изображения, которое будет отображаться в аватаре пользователя                                   |
+| `searchFunction?`                       | `(item: T, searchValue: string) => boolean`            | -              | Функция для поиска среди пользователей                                                                                     |
+| `value?`                                | `T , null`                                             | `null`         | Значение селекта                                                                                                           |
+| `ariaLabel?`                            | `string`                                               | -              | `aria` атрибут для метки                                                                                                   |
+| `id`                                    | `string`                                               | -              | Идентификатор селекта в DOM                                                                                                |
+| `onChange?`                             | `(value: string | null) => void`                       | -              | Обработчик события по изменению значения компонента                                                                        |
+| `onBlur?`                               | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -              | Обработчик события `blur`                                                                                                  |
+| `onFocus?`                              | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -              | Обработчик события `focus`                                                                                                 |
+| `labelForNotFound?`                     | `string`                                               | -              | Текст при отсуствии элементов при поиске                                                                                   |
+| `className?`                            | `string`                                               | -              | Дополнительный CSS-класс                                                                                                   |
+| dropdownClassName?                      | `string`                                               | -              | Дополнительный CSS-класс для выпадающего блока                                                                             |
+| [`getGroupOptions?`](#группы-вариантов) | `(group: T) => T[]`                                    | -              | Функция для получения вариантов из группы                                                                                  |
+
+## Примеры
+
+### Вариант не выбран
+
+```ts
+import React from 'react';
+import { UserSelect } from '@consta/uikit/UserSelect';
+
+type SelectOption = {
+  label: string;
+  subLabel: string;
+  value: string;
+  url: string;
+};
+
+const items = [
+  {
+    label: 'Андрей Андреев',
+    value: 'AA',
+    subLabel: 'andrey@mail.com',
+    url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
+  },
+  {
+    label: 'Иван Иванов',
+    value: 'II',
+    subLabel: 'ivan@mail.com',
+    url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
+  },
+  {
+    label: 'Тимур Тимуров',
+    value: 'TT',
+    subLabel: 'timur@mail.com',
+    url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
+  },
+];
+
+const Example = () => {
+  const getItemLabel = (option: SelectOption): string => option.label;
+  const getItemSubLabel = (option: SelectOption): string => option.subLabel;
+  const getItemUrl = (option: SelectOption): string => option.url;
+
+  return (
+    <UserSelect
+      id="employees"
+      options={items}
+      getOptionLabel={getItemLabel}
+      getOptionAdditionalInfo={getItemSubLabel}
+      getOptionAvatarUrl={getItemUrl}
+    />
+  );
+};
+```
+
+### Вариант выбран
+
+```ts
+import React from 'react';
+import { UserSelect } from '@consta/uikit/UserSelectDeprecated';
+
+type SelectOption = {
+  label: string;
+  subLabel: string;
+  value: string;
+  url: string;
+};
+
+const items = [
+  {
+    label: 'Андрей Андреев',
+    value: 'AA',
+    subLabel: 'andrey@mail.com',
+    url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
+  },
+  {
+    label: 'Иван Иванов',
+    value: 'II',
+    subLabel: 'ivan@mail.com',
+    url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
+  },
+  {
+    label: 'Тимур Тимуров',
+    value: 'TT',
+    subLabel: 'timur@mail.com',
+    url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
+  },
+];
+
+const Example = () => {
+  const getItemLabel = (option: SelectOption): string => option.label;
+  const getItemSubLabel = (option: SelectOption): string => option.subLabel;
+  const getItemUrl = (option: SelectOption): string => option.url;
+
+  return (
+    <UserSelect
+      id="employees"
+      value={items[0]}
+      options={items}
+      getOptionLabel={getItemLabel}
+      getOptionAdditionalInfo={getItemSubLabel}
+      getOptionAvatarUrl={getItemUrl}
+    />
+  );
+};
+```

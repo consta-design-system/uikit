@@ -1,0 +1,131 @@
+.UserSelectItemDeprecated {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: var(--vertical-space) var(--horizontal-space);
+  color: var(--color-control-typo-default);
+  background-color: var(--color-control-bg-clear);
+  font-size: var(--font-size);
+  cursor: pointer;
+
+  &_size {
+    &_s {
+      --horizontal-space: calc(var(--control-space-s) * 0.5);
+      --vertical-space: calc(var(--control-space-s) * 0.25);
+      --font-size: var(--control-text-size-s);
+      --sub-info-space: var(--space-xs);
+      --sub-label-font-size: var(--size-text-2xs);
+    }
+
+    &_m {
+      --horizontal-space: calc(var(--control-space-m) * 0.5);
+      --vertical-space: calc(var(--control-space-s) * 0.5);
+      --font-size: var(--control-text-size-m);
+      --sub-info-space: var(--space-s);
+      --sub-label-font-size: var(--size-text-xs);
+    }
+
+    &_l {
+      --horizontal-space: calc(var(--control-space-l) * 0.5);
+      --vertical-space: calc(var(--control-space-s) * 0.5);
+      --font-size: var(--control-text-size-l);
+      --sub-info-space: var(--space-s);
+      --sub-label-font-size: var(--size-text-s);
+    }
+  }
+
+  &_animate {
+    &_appear,
+    &_appearActive,
+    &_appearDone,
+    &_enter,
+    &_enterActive,
+    &_enterDone,
+    &_exit,
+    &_exitActive,
+    &_exitDone {
+      transition: 0.2s ease;
+      transition-property: opacity, transform;
+    }
+
+    &_appear,
+    &_enter {
+      opacity: 0;
+      transform: scale(0.25);
+    }
+
+    &_enterActive,
+    &_appearActive,
+    &_appearDone,
+    &_enterDone {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    &_exit {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    &_exitActive,
+    &_exitDone {
+      opacity: 0;
+      transform: scale(0.25);
+    }
+  }
+
+  &_hovered {
+    background-color: var(--color-control-bg-clear-hover);
+  }
+
+  &_active {
+    color: var(--color-control-typo-secondary);
+  }
+
+  &_indent {
+    &_increased {
+      padding-left: calc(var(--horizontal-space) * 2.6);
+    }
+  }
+
+  &:not(&_multiple)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: transparent;
+    transition: background-color 0.2s ease-in;
+  }
+
+  &:not(&_multiple)&_active::before {
+    background-color: var(--color-control-bg-primary);
+  }
+
+  &-AvatarBlock {
+    position: relative;
+  }
+
+  &-CheckIcon {
+    position: absolute;
+    top: 22px;
+    left: 22px;
+    width: var(--graphics-size-xs);
+    height: var(--graphics-size-xs);
+    padding: 0;
+    color: var(--color-control-bg-default);
+    background-color: var(--color-control-bg-primary);
+    border: 1px solid var(--color-control-bg-default);
+    border-radius: 50%;
+  }
+
+  &-AdditionalInfo {
+    padding-left: var(--sub-info-space);
+  }
+
+  &-SubUserLabel {
+    opacity: 0.7;
+    font-size: var(--sub-label-font-size);
+  }
+}
