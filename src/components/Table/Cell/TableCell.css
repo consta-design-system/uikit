@@ -14,7 +14,7 @@
     position: relative;
     border-bottom: 1px solid var(--color-bg-border);
     font-size: var(--size-text-xs);
-    font-weight: bold;
+    font-weight: var(--font-weight-text-bold);
     line-height: var(--line-height-text-s);
     letter-spacing: 0.05em;
     text-transform: uppercase;

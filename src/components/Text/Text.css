@@ -219,27 +219,27 @@
 
   &_weight {
     &_thin {
-      font-weight: 100;
+      font-weight: var(--font-weight-text-thin);
     }
 
     &_light {
-      font-weight: 300;
+      font-weight: var(--font-weight-text-light);
     }
 
     &_regular {
-      font-weight: normal;
+      font-weight: var(--font-weight-text-regular);
     }
 
     &_semibold {
-      font-weight: 600;
+      font-weight: var(--font-weight-text-semibold);
     }
 
     &_bold {
-      font-weight: bold;
+      font-weight: var(--font-weight-text-bold);
     }
 
     &_black {
-      font-weight: 900;
+      font-weight: var(--font-weight-text-black);
     }
   }
 

@@ -97,7 +97,7 @@
     color: var(--color-control-typo-default);
     border-radius: var(--choice-radius);
     font-size: var(--choice-font-size);
-    font-weight: normal;
+    font-weight: var(--font-weight-text-regular);
     line-height: calc(var(--choice-height) - var(--control-border-width) * 2);
     text-decoration: none;
     cursor: pointer;

@@ -11,7 +11,7 @@
   border-radius: var(--control-radius);
   font-family: var(--font-primary);
   font-size: var(--button-font-size);
-  font-weight: normal;
+  font-weight: var(--font-weight-text-regular);
   line-height: var(--button-height);
   white-space: nowrap;
   text-decoration: none;
