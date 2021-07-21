@@ -46,12 +46,12 @@ export const UserSelectItem: React.FC<UserSelectItemProps> = (props) => {
   return (
     <div
       {...otherProps}
-      className={cnUserSelectItem({ active, hovered, size, indent }, [className])}
+      className={cnUserSelectItem({ active, hovered, size, indent, disable }, [className])}
       aria-selected={active}
       role="option"
     >
       <div className={cnUserSelectItem('AvatarContainer')}>
-        <Avatar className={cnUserSelectItem('Avatar', { disable })} url={avatarUrl} name={label} />
+        <Avatar className={cnUserSelectItem('Avatar')} url={avatarUrl} name={label} />
         {multiple && (
           <CSSTransition
             in={active}
@@ -69,7 +69,7 @@ export const UserSelectItem: React.FC<UserSelectItemProps> = (props) => {
       ) : (
         <div className={cnUserSelectItem('Info')}>
           <div>{label}</div>
-          <div className={cnUserSelectItem('SubLabel')}>{subLabel}</div>
+          <div className={cnUserSelectItem('SubLabel', { disable })}>{subLabel}</div>
         </div>
       )}
     </div>
