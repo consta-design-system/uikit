@@ -1,0 +1,164 @@
+import { CollapseGroupExampleIsAccordion } from './examples/CollapseGroupExampleIsAccordion/CollapseGroupExampleIsAccordion';
+import { CollapseGroupExampleOwnType } from './examples/CollapseGroupExampleOwnType/CollapseGroupExampleOwnType';
+import { CollapseGroupExampleControl } from './examples/CollapseGroupExampleControl/CollapseGroupExampleControl';
+
+# CollapseGroup
+
+## Элементы
+
+Элементы можете передать в свойстве `items` их тип по умолчанию [DefaultItem](#свойства),
+если же ваш тип отличается, то воспользуйтесь свойствами `getItemLabel`, `getItemContent`, `getItemRightSide`
+для указания места, откуда взять данные компоненту.
+
+### Пример с собственным типом
+
+```tsx
+type OwnItem = {
+  title: string;
+  text: string;
+  status: 'normal' | 'success' | 'error' | 'warning' | 'system';
+};
+
+const ownItems: OwnItem[] = [
+  {
+    title: 'Один',
+    text:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur esse explicabo harum illum molestias mollitia pariatur quasi quia tempora vel!',
+    status: 'error',
+  },
+  {
+    title: 'Два',
+    text:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur esse explicabo harum illum molestias mollitia pariatur quasi quia tempora vel!',
+    status: 'success',
+  },
+  {
+    title: 'Три',
+    text:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur esse explicabo harum illum molestias mollitia pariatur quasi quia tempora vel!',
+    status: 'system',
+  },
+];
+
+const getItemLabel = (item: OwnItem) => item.title;
+const getItemContent = (item: OwnItem) => item.text;
+const getItemRightSide = (item: OwnItem) => (
+  <Badge size="s" status={item.status} label={item.status} />
+);
+
+const CollapseGroupExampleOwnType = () => {
+  return (
+    <div className={cnDocsDecorator('Section')}>
+      <CollapseGroup
+        items={ownItems}
+        getItemLabel={getItemLabel}
+        getItemContent={getItemContent}
+        getItemRightSide={getItemRightSide}
+      />
+    </div>
+  );
+};
+```
+
+<CollapseGroupExampleOwnType />
+
+## isAccordion
+
+При открытии следующего закрывается предыдущий
+
+<CollapseGroupExampleIsAccordion />
+
+```tsx
+type Item = {
+  label: string;
+  content: React.ReactNode;
+};
+
+const items: Item[] = [
+  ..//
+];
+
+const CollapseGroupExampleIsAccordion = () => {
+  return <CollapseGroup items={items} isAccordion />;
+};
+```
+
+## Подконторольный компонент
+
+По умолчанию компонент работает с собственным состоянием и не трбует указания `onOpen` и `opened`.
+
+`onOpen` - срабатывает при клике на коллапс
+
+`opened` - индексы открытых элементов `number[]`, в случае если `isAccordion = true` - индекс `number`
+
+Если есть необходимость заставить компонент слушаться вашей бизнесс логики воспользуйтесь этими свойствами.
+
+<CollapseGroupExampleControl />
+
+```tsx
+type Item = {
+  label: string;
+  content: React.ReactNode;
+};
+
+const items: Item[] = [
+  ..//
+];
+
+const defaultOpened = items.map((_, index) => index);
+
+const CollapseGroupExampleControl = () => {
+  const [opened, setOpened] = useState<number[] | null>(defaultOpened);
+
+  return <CollapseGroup items={items} opened={opened} onOpen={({ value }) => setOpened(value)} />;
+};
+```
+
+## Свойства
+
+```ts
+type DefaultItem = {
+  label: string;
+  content: React.ReactNode;
+  rightSide?: React.ReactNode | React.ReactNode[];
+};
+
+type GetItemLabel<ITEM> = (item: ITEM) => string;
+
+type GetItemContent<ITEM> = (item: ITEM) => React.ReactNode;
+
+type GetItemRightSide<ITEM> = (item: ITEM) => React.ReactNode | React.ReactNode[] | undefined;
+
+type OnOpen<IS_ACCORDION> = (params: {
+  e: React.MouseEvent<HTMLDivElement, MouseEvent>;
+  value: (IS_ACCORDION extends true ? number : number[]) | null;
+}) => void;
+
+type Opened<IS_ACCORDION> = (IS_ACCORDION extends true ? number : number[]) | null | undefined;
+
+const defaultGetItemLabel: CollapseGroupPropGetItemLabel<DefaultItem> = (item) => item.label;
+const defaultGetItemContent: CollapseGroupPropGetItemContent<DefaultItem> = (item) => item.content;
+const defaultGetItemRightSide: CollapseGroupPropGetItemContent<DefaultItem> = (item) =>
+  item.rightSide;
+```
+
+| Свойство              | Тип                                                                           | По умолчанию              | Описание                                                                                                                 |
+| --------------------- | ----------------------------------------------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `isAccordion`         | `boolean`                                                                     | -                         | Добавляет поведение классического аккордеона                                                                             |
+| `items`               | `Item[]`                                                                      | -                         | Элементы                                                                                                                 |
+| `getItemLabel`        | `GetItemLabel<ITEM>`                                                          | `defaultGetItemLabel`     | Функция для формирования текста для лейбла                                                                               |
+| `getItemContent`      | `GetItemContent<ITEM>`                                                        | `defaultGetItemContent`   | Функция для получения контента коллапса                                                                                  |
+| `getItemRightSide`    | `GetItemRightSide<ITEM>`                                                      | `defaultGetItemRightSide` | Функция для получения дополнительный контента, который помещается рядом с заголовком коллапса                            |
+| `size?`               | `'l', 'm', 's', 'xs', '2xs'`                                                  | `'m'`                     | Размер см. [Collapse](?path=/docs/components-collapse--playground)                                                       |
+| `view?`               | `'primary', 'secondary'`                                                      | `'primary'`               | Внешний вид см. [Collapse](?path=/docs/components-collapse--playground)                                                  |
+| `hoverEffect?`        | `boolean`                                                                     | -                         | Добавляет эффект при ховере коллапса см. [Collapse](?path=/docs/components-collapse--playground)                         |
+| `divider?`            | `boolean`                                                                     | -                         | Добавляет разделитель между заголовком коллапса и содержимым см. [Collapse](?path=/docs/components-collapse--playground) |
+| `horizontalSpace?`    | `'6xl', '5xl', '4xl', '3xl', '2xl', 'xl', 'l', 'm', 's', 'xs', '2xs', '3xs'`  | -                         | Горизонтальные отступы в заголовке коллапса см. [Collapse](?path=/docs/components-collapse--playground)                  |
+| `icon?`               | `React.FC<IconProps>`                                                         | `React.FC<IconProps>`     | Иконка в закрытом состоянии см. [Collapse](?path=/docs/components-collapse--playground)                                  |
+| `closeIcon?`          | `React.FC<IconProps>`                                                         | -                         | Иконка в открытом состоянии см. [Collapse](?path=/docs/components-collapse--playground)                                  |
+| `iconPosition?`       | `'left', 'right'`                                                             | `'left'`                  | Расположение иконки см. [Collapse](?path=/docs/components-collapse--playground)                                          |
+| `directionIcon?`      | `'up', 'right', 'down', 'left', 'upRight', 'downRight', 'upLeft', 'downLeft'` | `'up'`                    | Направление иконки в закрытом состоянии см. [Collapse](?path=/docs/components-collapse--playground)                      |
+| `closeDirectionIcon?` | `'up', 'right', 'down', 'left', 'upRight', 'downRight', 'upLeft', 'downLeft'` | `'down'`                  | Направление иконки в открытом состоянии см. [Collapse](?path=/docs/components-collapse--playground)                      |
+| `onOpen?`             | `OnOpen<IS_ACCORDION>`                                                        | -                         | Функция обратного вызова которая сработает при клике на коллапс                                                          |
+| `opened?`             | `Opened<IS_ACCORDION>`                                                        | -                         | Индексы открытых коллапсов                                                                                               |
+| `className?`          | `string`                                                                      | -                         | Дополнительный CSS-класс                                                                                                 |
