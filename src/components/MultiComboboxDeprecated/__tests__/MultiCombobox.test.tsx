@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 
-import ResizeObserver from '../../../../__mocks__/ResizeObserver';
 import { simpleItems } from '../../ComboboxDeprecated/__mocks__/data.mock';
 import { cnSelect } from '../../SelectComponentsDeprecated/cnSelect';
 import { cnSelectItem } from '../../SelectComponentsDeprecated/SelectItem/SelectItem';
 import { MultiCombobox } from '../MultiCombobox';
-
-jest.mock('resize-observer-polyfill', () => {
-  return ResizeObserver;
-});
 
 const testId = 'MultiCombobox';
 const animationDuration = 200;

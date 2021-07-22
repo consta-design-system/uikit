@@ -117,14 +117,10 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
     () => new Array(items.length).fill(null).map(() => createRef<ItemElement>()),
     [items],
   );
-  const getTabDimensions = React.useCallback(
-    (el: ItemElement | null) => ({
-      size: el?.offsetWidth ?? 0,
-      offset: el?.offsetLeft ?? 0,
-    }),
-    [],
-  );
-  const tabsDimensions = useResizeObserved(tabRefs, getTabDimensions);
+  const tabsDimensions = useResizeObserved(tabRefs, (el) => ({
+    size: el?.offsetWidth ?? 0,
+    offset: el?.offsetLeft ?? 0,
+  }));
   const activeTabIdx = (value && items.indexOf(value)) ?? -1;
   const activeTabDimensions = tabsDimensions[activeTabIdx];
 
@@ -148,7 +144,7 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
           }),
         )}
       </div>
-      {activeTabDimensions?.size && (
+      {activeTabDimensions?.size > 0 && (
         <div
           className={cnTabs('RunningLine')}
           style={{

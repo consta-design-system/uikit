@@ -2,17 +2,12 @@ import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 
 import { exampleItems as items, groups, Item } from '../__mocks__/mock.data';
-import ResizeObserver from '../../../../__mocks__/ResizeObserver';
 import { cnText } from '../../Text/Text';
 import { ContextMenu } from '../ContextMenu';
 import { cnContextMenuGroupHeader } from '../ContextMenuGroupHeader/ContextMenuGroupHeader';
 import { cnContextMenuItem } from '../ContextMenuItem/ContextMenuItem';
 import { cnContextMenuLevel } from '../ContextMenuLevel/ContextMenuLevel';
 import { ContextMenuProps } from '../helpers';
-
-jest.mock('resize-observer-polyfill', () => {
-  return ResizeObserver;
-});
 
 const testId = 'ContextMenu';
 const additionalClass = 'additionalClass';

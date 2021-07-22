@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 
-import ResizeObserver from '../../../../__mocks__/ResizeObserver';
 import { Button } from '../../../components/Button/Button';
 import {
   appearTimeoutDefault,
@@ -9,10 +8,6 @@ import {
   TooltipProps,
   withTooltip,
 } from '../withTooltip';
-
-jest.mock('resize-observer-polyfill', () => {
-  return ResizeObserver;
-});
 
 const testId = 'withTooltip';
 const tooltipRole = 'Tooltip';
