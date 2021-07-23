@@ -1,9 +1,9 @@
 import './Tabs.css';
 
-import React, { createRef, useEffect, useMemo, useRef } from 'react';
+import React, { createRef, useMemo } from 'react';
 
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
-import { useForkRef } from '../../hooks/useForkRef/useForkRef';
+import { useResizeObserved } from '../../hooks/useResizeObserved/useResizeObserved';
 import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
@@ -75,22 +75,6 @@ const sizeMap: Record<TabsPropSize, IconPropSize> = {
   m: 's',
 };
 
-function setStyleForLine(
-  lineRef: React.RefObject<HTMLDivElement>,
-  tabsWidth: number,
-  tabWidth: number,
-  tabRatio: number,
-  tabOffsetLeft: number,
-) {
-  if (lineRef.current) {
-    const lineStyle = lineRef.current.style;
-    lineStyle.setProperty('--tabsWidth', `${tabsWidth}px`);
-    lineStyle.setProperty('--tabWidth', `${tabWidth}px`);
-    lineStyle.setProperty('--tabRatio', `${tabRatio}`);
-    lineStyle.setProperty('--tabOffsetLeft', `${tabOffsetLeft}px`);
-  }
-}
-
 function renderItemDefault<ITEM, ITEMELEMENT extends HTMLElement>(
   props: RenderItemProps<ITEM, ITEMELEMENT>,
 ): React.ReactElement {
@@ -129,51 +113,26 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
     multiple: false,
   });
 
-  const constructItemRefs: () => Record<string, React.RefObject<ItemElement>> = () => {
-    const refs: Record<string, React.RefObject<ItemElement>> = {};
-    for (const item of items) {
-      refs[getLabel(item)] = createRef<ItemElement>();
-    }
-    return refs;
-  };
+  const tabRefs = useMemo(
+    () => new Array(items.length).fill(null).map(() => createRef<ItemElement>()),
+    [items],
+  );
+  const tabsDimensions = useResizeObserved(tabRefs, (el) => ({
+    size: el?.offsetWidth ?? 0,
+    offset: el?.offsetLeft ?? 0,
+  }));
+  const activeTabIdx = (value && items.indexOf(value)) ?? -1;
+  const activeTabDimensions = tabsDimensions[activeTabIdx];
 
-  const buttonRefs = useMemo(constructItemRefs, [items, getLabel]);
-
-  const rootRef = useRef<HTMLDivElement>(null);
-  const lineRef = useRef<HTMLDivElement>(null);
-
-  const updateLine = () => {
-    if (rootRef.current && lineRef.current && buttonRefs) {
-      const rootWidth = rootRef.current.offsetWidth;
-      if (value) {
-        const activeItemRef = buttonRefs[getLabel(value)];
-        if (activeItemRef && activeItemRef.current) {
-          const itemWidth = activeItemRef.current.offsetWidth;
-          const itemOffsetLeft = activeItemRef.current.offsetLeft;
-          setStyleForLine(lineRef, rootWidth, itemWidth, itemWidth / rootWidth, itemOffsetLeft);
-        }
-      } else {
-        setStyleForLine(lineRef, rootWidth, 1, 0.00001, 1);
-      }
-    }
-  };
-
-  useEffect(() => updateLine());
-
-  const withOutValue = !value;
   const iconSize = getSizeByMap(sizeMap, size, iconSizeProp);
 
   return (
-    <div
-      className={cnTabs({ size, view }, [className])}
-      ref={useForkRef<HTMLDivElement>([ref, rootRef])}
-      {...otherProps}
-    >
+    <div className={cnTabs({ size, view }, [className])} ref={ref} {...otherProps}>
       <div className={cnTabs('List')}>
-        {items.map((item) =>
+        {items.map((item, idx) =>
           renderItem({
             item,
-            ref: buttonRefs[getLabel(item)],
+            ref: tabRefs[idx],
             key: getLabel(item),
             onChange: getOnChange(item),
             checked: getChecked(item),
@@ -185,9 +144,15 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
           }),
         )}
       </div>
-      <div className={cnTabs('WrapperRunningLine')}>
-        <div className={cnTabs('RunningLine', { withOutValue })} ref={lineRef} />
-      </div>
+      {activeTabDimensions?.size > 0 && (
+        <div
+          className={cnTabs('RunningLine')}
+          style={{
+            ['--tabSize' as string]: `${activeTabDimensions.size}px`,
+            ['--tabOffset' as string]: `${activeTabDimensions.offset}px`,
+          }}
+        />
+      )}
     </div>
   );
 });

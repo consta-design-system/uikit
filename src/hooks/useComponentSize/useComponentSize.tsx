@@ -1,4 +1,6 @@
-import { useCallback, useLayoutEffect, useState } from 'react';
+import { useMemo } from 'react';
+
+import { useResizeObserved } from '../useResizeObserved/useResizeObserved';
 
 type ComponentSize = {
   width: number;
@@ -18,34 +20,10 @@ const getElementSize = (el: HTMLElement | SVGGraphicsElement | null): ComponentS
   };
 };
 
-export function useComponentSize<T extends HTMLElement | SVGGraphicsElement>(
-  ref: React.RefObject<T>,
+export function useComponentSize(
+  ref: React.RefObject<HTMLElement | SVGGraphicsElement>,
 ): ComponentSize {
-  const [componentSize, setComponentSize] = useState<ComponentSize>(
-    getElementSize(ref && ref.current),
-  );
-
-  const handleResize = useCallback(() => {
-    if (ref.current) {
-      setComponentSize(getElementSize(ref.current));
-    }
-  }, [ref]);
-
-  useLayoutEffect(() => {
-    if (!ref.current) {
-      return;
-    }
-
-    handleResize();
-
-    const resizeObserver = new ResizeObserver(handleResize);
-
-    resizeObserver.observe(ref.current);
-
-    return () => {
-      resizeObserver.disconnect();
-    };
-  }, [ref, handleResize]);
-
+  const refs = useMemo(() => [ref], [ref]);
+  const [componentSize] = useResizeObserved(refs, getElementSize);
   return componentSize;
 }

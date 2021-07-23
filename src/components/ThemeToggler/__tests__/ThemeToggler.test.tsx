@@ -2,7 +2,6 @@ import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 
 import { exampleThemesThree, exampleThemesTwo } from '../__mocks__/data.mock';
-import ResizeObserver from '../../../../__mocks__/ResizeObserver';
 import { cnContextMenuItem } from '../../ContextMenu/ContextMenuItem/ContextMenuItem';
 import { Props, ThemeToggler } from '../ThemeToggler';
 
@@ -12,10 +11,6 @@ type ThemeTogglerProps = Props<Item>;
 
 const defaultSetValue = jest.fn();
 const testId = 'ThemeToggler';
-
-jest.mock('resize-observer-polyfill', () => {
-  return ResizeObserver;
-});
 
 const renderComponent = (props: Partial<ThemeTogglerProps>) => {
   return render(

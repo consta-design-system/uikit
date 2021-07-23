@@ -2,15 +2,10 @@ import React, { useState } from 'react';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 
 import { simpleItems } from '../__mocks__/data.mock';
-import ResizeObserver from '../../../../__mocks__/ResizeObserver';
 import { getInitialsForName } from '../../Avatar/Avatar';
 import { cnSelect } from '../../SelectComponentsDeprecated/cnSelect';
 import { UserSelect } from '../UserSelect';
 import { cnUserItem } from '../UserSelectItem/UserSelectItem';
-
-jest.mock('resize-observer-polyfill', () => {
-  return ResizeObserver;
-});
 
 const testId = 'UserSelect';
 const animationDuration = 200;

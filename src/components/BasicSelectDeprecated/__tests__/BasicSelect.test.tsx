@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { act, fireEvent, render, RenderResult, screen } from '@testing-library/react';
 
-import ResizeObserver from '../../../../__mocks__/ResizeObserver';
 import { cnSelect } from '../../SelectComponentsDeprecated/cnSelect';
 import { cnSelectItem } from '../../SelectComponentsDeprecated/SelectItem/SelectItem';
 import { BasicSelect, SimpleSelectProps } from '../BasicSelect';
@@ -13,10 +12,6 @@ type SelectOption = {
 
 const animationDuration = 200;
 const testId = 'BasicSelect';
-
-jest.mock('resize-observer-polyfill', () => {
-  return ResizeObserver;
-});
 
 const items = [
   { label: 'Neptunium', value: 'Neptunium' },

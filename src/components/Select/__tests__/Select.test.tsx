@@ -2,7 +2,6 @@ import * as React from 'react';
 import { act, fireEvent, render, RenderResult, screen } from '@testing-library/react';
 
 import { groups, items } from '../__mocks__/data.mock';
-import ResizeObserver from '../../../../__mocks__/ResizeObserver';
 import { cn } from '../../../utils/bem';
 import { cnSelect } from '../../SelectComponents/cnSelect';
 import { cnSelectGroupLabel } from '../../SelectComponents/SelectGroupLabel/SelectGroupLabel';
@@ -13,10 +12,6 @@ const animationDuration = 200;
 const testId = 'Select';
 const cnRenderValue = cn('RenderValue');
 const cnRenderItem = cn('RenderItem');
-
-jest.mock('resize-observer-polyfill', () => {
-  return ResizeObserver;
-});
 
 const defaultProps: SelectProps = {
   items,

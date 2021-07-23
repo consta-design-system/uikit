@@ -1,12 +1,7 @@
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import ResizeObserver from '../../../../__mocks__/ResizeObserver';
 import { Props, Table } from '../Table';
-
-jest.mock('resize-observer-polyfill', () => {
-  return ResizeObserver;
-});
 
 const rows = [
   {
