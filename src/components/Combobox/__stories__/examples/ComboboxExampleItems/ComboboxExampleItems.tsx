@@ -27,7 +27,12 @@ export function ComboboxExampleItems() {
   const [value, setValue] = useState<Item | null>();
   return (
     <div className={cnDocsDecorator('Section')}>
-      <Combobox items={items} value={value} onChange={({ value }) => setValue(value)} />
+      <Combobox
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        placeholder="Выберите что-нибудь хорошее"
+      />
     </div>
   );
 }

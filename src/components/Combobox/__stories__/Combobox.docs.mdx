@@ -18,55 +18,62 @@ import {
 # Combobox
 
 Выпадающий список. Позволяет выбрать один из нескольких вариантов.
-Этот компонент похож на [Select](?path=/docs/components-select--playground),
+Этот компонент выглядит как [Select](?path=/docs/components-select--playground),
 но возможностей больше.
+
+<ComboboxExampleItems />
+
 Что может пользователь:
 
 - выбрать один или несколько вариантов из списка,
 - написать в поле несколько символов — компонент покажет все варианты, в которых есть эти символы,
 - добавить вариант, которого нет в списке.
-  Используйте Combobox, если вариантов много — пять или больше. Если вариантов меньше,
-  подойдет [Radio](?path=/docs/components-radio--playground)
-  или [ChoiceGroup](?path=/docs/components-choicegroup--playground).
 
-* [Варианты](#варианты)
-* [Значение](#значение)
-* [onChange](#onchange)
-* [Подсказка](#подсказка)
-* [Множественный выбор](#множественный-выбор)
-* [Размер](#размер)
-* [Форма](#форма)
-* [Внешний вид](#внешний-вид)
-* [Отключение поля ввода](#отключение-поля-ввода)
-* [Отключение элементов списка](#отключение-элементов-списка)
-* [Группировка списка](#группировка-списка)
-* [Создание элементов](#cоздание-элементов)
-* [Поиск](#поиск)
-* [Свое представление элемента списка](#свое-представление-элемента-списка)
-* [Свое представление выбранного значения](#свое-представление-выбранного-значения)
-* [Свои тип данных items и groups](#свои-тип-данных-items-и-groups)
-* [Список свойств](#свойства)
+Используйте Combobox, если вариантов много — пять или больше. Если вариантов меньше,
+подойдет [Radio](?path=/docs/components-radio--playground)
+или [ChoiceGroup](?path=/docs/components-choicegroup--playground).
 
-## Варианты
+- [Содержимое](#содержимое-списка)
+  - [Варианты](#варианты)
+  - [Выбранное значение](#выбранное-значение)
+  - [Подсказка](#подсказка)
+  - [Неактивный вариант](#неактивный-элемент-списка)
+  - [Несколько вариантов](#несколько-вариантов)
+  - [Группы вариантов](#группы-вариантов)
+- [Размер](#размер)
+- [Форма](#форма)
+- [Внешний вид](#внешний-вид)
+- [Неактивный выпадающий список](#неактивный-выпадающий-список)
+- [Создание новых вариантов](#создание-новых-вариантов)
+- [Кастомизация](#кастомизация)
+  - [Кастомный элемент списка](#кастомный-элемент-списка)
+  - [Кастомное выбранное значение](#кастомное-выбранное-значение)
+  - [Кастомные типы данных для групп и вариантов](#кастомные-типы-данных-для-групп-и-вариантов)
+- [Список свойств](#свойства)
 
-Варианты для выпадающего списка передаются в своство `items`.
-Название элементов должно быть с заглавной буквы.
+## Содержимое
 
-По умолчанию тип элемента массива `items` равен [DefaultItem](#свойства)
+### Варианты
 
-## Значение
+Элементы выпадающего списка можно описать в массиве `items`. Тип свойства `items` по умолчанию равен [DefaultItem](#свойства). Что внутри:
 
-Значение задается в свойстве `value`
+- `label` — название элемента списка, лучше писать с заглавной буквы, точка не нужна,
+- `id` — уникальный ключ элемента,
+- `groupId` — идентификатор [группы](#группы-вариантов), в которую входит этот элемент (если список разбит на группы),
+- `disabled` — отмечает [неактивные элементы](#неактивный-элемент-списка).
 
-По умолчанию тип своства или эдемент массива `value` равен [DefaultItem](#свойства)
+Вы можете сделать [кастомный тип данных для элементов списка](#кастомный-элемент-списка) и использовать его.
 
-## onChange
+### Выбранное значение
 
-Чтобы взаимодействовать с выбором занчения используйте свойство `onChange`,
-он сработает при выборе элемента или при очистке поля ввода,
-и вернет его значение которое задавали в `items`.
-Так же вернет событие выбора, ввод заначения возможен как по клику мыши так
-и по клавише `Enter` на клавиатуре.
+Выбранное значение задаётся в свойстве `value`. Тип свойства `value` по умолчанию равен [DefaultItem](#свойства).
+
+Чтобы получить значение, которое пользователь выбрал из списка, используйте `onChange`. Этот обработчик срабатывает при выборе варианта или при очистке поля ввода
+и возвращает значение из массива `items` и событие выбора.
+
+Выбор варианта срабатывает по клику мыши или по нажатию `Enter` на клавиатуре.
+
+<ComboboxExampleItems />
 
 ```tsx
 type Item = {
@@ -95,15 +102,14 @@ export function ComboboxExampleItems() {
 }
 ```
 
-<ComboboxExampleItems />
+### Подсказка
 
-## Подсказка
-
-Подсказка, которая видна, когда ни один вариант не выбран, задается в свойстве `placeholder`.
-Сформулируйте подсказку так, чтобы стало понятно, что по клику на поле раскроется список вариантов,
-один из которых нужно выбрать.
+Подсказка, которая видна, когда ни один вариант не выбран, задаётся в свойстве `placeholder`.
+Сформулируйте подсказку так, чтобы стало понятно, что по клику на поле раскроется список вариантов, один из которых нужно выбрать.
 
 Если не знаете, что написать в подсказке, используйте универсальное **Выберите**.
+
+<ComboboxExamplePlaceholder />
 
 ```tsx
 type Item = {
@@ -139,226 +145,11 @@ export function ComboboxExamplePlaceholder() {
 }
 ```
 
-<ComboboxExamplePlaceholder />
+### Неактивный элемент списка
 
-## Множественный выбор
+Чтобы сделать вариант в списке неактивным, добавьте к элементу массива `items` свойство `disabled: true`. Если используете [кастомный тип `items`](#кастомные-типы-данных-для-групп-и-вариантов), можете добавить своё свойство.
 
-Для использования мнодественного выбора воспользуйтесь свойством `multiple`.
-Варианты: `true` , `false` , по умолчанию `false`.
-При значении `true`, `value` должен быть массивом,
-и в `onChange` будет передаваться массив выбранных элементов
-
-```tsx
-type Item = {
-  label: string;
-  id: number;
-};
-
-const items: Item[] = [
-  {
-    label: 'Первый',
-    id: 1,
-  },
-  {
-    label: 'Второй',
-    id: 2,
-  },
-  {
-    label: 'Третий',
-    id: 3,
-  },
-];
-
-export function ComboboxExampleMultiple() {
-  const [value, setValue] = useState<Item[] | null>();
-  return (
-    <div className={cnDocsDecorator('Section')}>
-      <Combobox
-        placeholder="Выберите значение"
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        multiple
-      />
-    </div>
-  );
-}
-```
-
-<ComboboxExampleMultiple />
-
-## Размер
-
-За размер компонента отвечает свойство `size`. Варианты: `s` , `m` , `l` , по умолчанию `m`.
-
-Компонент занимает всю ширину родительского блока.
-
-```tsx
-type Item = {
-  label: string;
-  id: number;
-};
-
-const items: Item[] = [
-  {
-    label: 'Первый',
-    id: 1,
-  },
-  {
-    label: 'Второй',
-    id: 2,
-  },
-  {
-    label: 'Третий',
-    id: 3,
-  },
-];
-
-export function ComboboxExampleSize() {
-  const [value, setValue] = useState<Item | null>();
-  return (
-    <Combobox
-      placeholder="Выберите значение"
-      size="s"
-      items={items}
-      value={value}
-      onChange={({ value }) => setValue(value)}
-    />
-  );
-}
-```
-
-<ComboboxExampleSize />
-
-## Форма
-
-За форму селекта отвечает свойство `form`.Варианты:
-`default`, `brick`, `round`, `clearRound`, `roundClear`, `clearDefault`, `defaultClear`, `defaultBrick`, `brickDefault`, `brickClear`, `clearBrick`, `clearClear`
-по умолчанию `default`.
-
-```tsx
-type Item = {
-  label: string;
-  id: number;
-};
-
-const items: Item[] = [
-  {
-    label: 'Первый',
-    id: 1,
-  },
-  {
-    label: 'Второй',
-    id: 2,
-  },
-  {
-    label: 'Третий',
-    id: 3,
-  },
-];
-
-export function ComboboxExampleForm() {
-  const [value, setValue] = useState<Item | null>();
-  return (
-    <Combobox
-      placeholder="Выберите значение"
-      form="round"
-      items={items}
-      value={value}
-      onChange={({ value }) => setValue(value)}
-    />
-  );
-}
-```
-
-<ComboboxExampleForm />
-
-## Внешний вид
-
-За вид компонента отвечает свойство `view`. Варианты: `default , clear`, по умолчанию `default`.
-
-```tsx
-type Item = {
-  label: string;
-  id: number;
-};
-
-const items: Item[] = [
-  {
-    label: 'Первый',
-    id: 1,
-  },
-  {
-    label: 'Второй',
-    id: 2,
-  },
-  {
-    label: 'Третий',
-    id: 3,
-  },
-];
-
-export function ComboboxExampleView() {
-  const [value, setValue] = useState<Item | null>();
-  return (
-    <Combobox
-      placeholder="Выберите значение"
-      view="clear"
-      items={items}
-      value={value}
-      onChange={({ value }) => setValue(value)}
-    />
-  );
-}
-```
-
-<ComboboxExampleView />
-
-## Отключение поля ввода
-
-Для отключения поля ввода воспользуйтесь свойством `disabled`.
-
-```tsx
-type Item = {
-  label: string;
-  id: number;
-};
-
-const items: Item[] = [
-  {
-    label: 'Первый',
-    id: 1,
-  },
-  {
-    label: 'Второй',
-    id: 2,
-  },
-  {
-    label: 'Третий',
-    id: 3,
-  },
-];
-
-export function ComboboxExampleDisabled() {
-  const [value, setValue] = useState<Item | null>();
-  return (
-    <Combobox
-      placeholder="Выберите значение"
-      items={items}
-      value={value}
-      onChange={({ value }) => setValue(value)}
-      disabled
-    />
-  );
-}
-```
-
-<ComboboxExampleDisabled />
-
-## Отключение элементов списка
-
-Для того чтобы отключить элемент списка укажите в элементе массива `items` свойство `disabled`,
-либо свое свойство если вы используете свой тип `items`
+<ComboboxExampleDisabledItem />
 
 ```tsx
 type Item = {
@@ -398,13 +189,59 @@ export function ComboboxExampleDisabledItem() {
 }
 ```
 
-<ComboboxExampleDisabledItem />
+### Несколько вариантов
 
-## Группировка списка
+По умолчанию из списка можно выбрать только одного пользователя. Чтобы выбрать нескольких, добавьте `multiple`.
 
-Для того чтобы сгруппировать элементы списка, вам необходимо передать массив групп в свойсто `groups`.
+> В этом случае `value` становится массивом, а в `onChange` передаётся массив выбранных элементов.
 
-По умолчанию тип элемента массива `groups` равен [DefaultGroup](#свойства)
+<ComboboxExampleMultiple />
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function ComboboxExampleMultiple() {
+  const [value, setValue] = useState<Item[] | null>();
+  return (
+    <div className={cnDocsDecorator('Section')}>
+      <Combobox
+        placeholder="Выберите значение"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        multiple
+      />
+    </div>
+  );
+}
+```
+
+### Группы вариантов
+
+Чтобы разбить элементы списка на группы, передайте массив групп в свойство `groups`. Тип свойства `groups` по умолчанию равен [DefaultGroup](#свойства). Что внутри:
+
+- `label` — название группы,
+- `id` — уникальный ключ.
+
+<ComboboxExampleGroups />
 
 ```tsx
 type Item = {
@@ -451,12 +288,12 @@ const items: Item[] = [
   },
   {
     label: 'Четвертый',
-    id: 3,
+    id: 4,
     groupId: 3,
   },
   {
     label: 'Пятый',
-    id: 3,
+    id: 5,
     groupId: 2,
   },
 ];
@@ -475,14 +312,184 @@ export function ComboboxExampleGroups() {
 }
 ```
 
-<ComboboxExampleGroups />
+## Размер
+
+За размер компонента отвечает свойство `size`. Варианты: `s` , `m` , `l` , по умолчанию `m`.
+
+Компонент занимает всю ширину родительского блока.
+
+<ComboboxExampleSize />
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function ComboboxExampleSize() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Combobox
+      placeholder="Выберите значение"
+      size="s"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
+  );
+}
+```
+
+## Форма
+
+За форму селекта отвечает свойство `form`. Варианты:
+`default`, `brick`, `round`, `clearRound`, `roundClear`, `clearDefault`, `defaultClear`, `defaultBrick`, `brickDefault`, `brickClear`, `clearBrick`, `clearClear`. По умолчанию `default`.
+
+<ComboboxExampleForm />
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function ComboboxExampleForm() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Combobox
+      placeholder="Выберите значение"
+      form="round"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
+  );
+}
+```
+
+## Внешний вид
+
+За вид компонента отвечает свойство `view`. Варианты: `default`, `clear`, по умолчанию `default`.
+
+<ComboboxExampleView />
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function ComboboxExampleView() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Combobox
+      placeholder="Выберите значение"
+      view="clear"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
+  );
+}
+```
+
+## Неактивный выпадающий список
+
+Чтобы сделать весь комбобокс неактивным, добавьте `disabled`.
+
+<ComboboxExampleDisabled />
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function ComboboxExampleDisabled() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Combobox
+      placeholder="Выберите значение"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      disabled
+    />
+  );
+}
+```
+
+## Поиск
+
+Если в поле что-то напечатать, компонент найдёт всех варианты, в названии которых есть напечатанные символы.
+
+По умолчанию компонент ищет по `label` элемента. Вы можете поменять параметры поиска с помощью `searchFunction`. Например, если в комбобоксе есть [кастомные элементы](#кастомный-элемент-списка) и нужно искать пользователей не только по `label`, но и по другим данным.
 
 ## Создание элементов
 
-Имеется возможность создавать эелементы, для этого используйте свойство `onCreate`.
-Если свойство будет заполненно, и в результатах поиска не будет желамой опции,
-то появится кнопка для создания элемента.
-В функцию на вход придет `label` создоваемого элемента.
+Если при поиске в поле никого не нашлось, можно показать в комбобоксе кнопку для создания нового значения. Пользователь сможет добавить значение в список, а потом выбрать его. В функцию на вход придёт `label` созданного элемента.
+
+<ComboboxExampleCreate />
 
 ```tsx
 type Item = {
@@ -520,23 +527,16 @@ export function ComboboxExampleCreate() {
 }
 ```
 
-<ComboboxExampleCreate />
+## Кастомизация
 
-## Поиск
-
-В `Combobox` имеется возможность поиска элемента, по умолчанию поиск идет по `label` элемента.
-Вы можете использовать свою функцию поиска в свойстве `searchFunction`.
-Это может быть полезно когда, используете свое предстволение элементов списка,
-где выводится помимо `label` элемента еще какието данные по которым тоже необходим поиск.
-
-## Свое представление элемента списка
+### Кастомный элемент списка
 
 Для того чтобы сделать свое представление элементов списка, воспользуйтесь свойством `renderItem`.
 Свойство принимает [функцию рендера](https://reactjs.org/docs/render-props.html).
 
 **Важно**: корневой DOM элемент, должен иметь свойство `role="option"`
 
-### Пример с своим представлением элемента списка и своей функцией поиска
+#### Пример с своим представлением элемента списка и своей функцией поиска
 
 ```tsx
 const cnComboboxExampleRenderItem = cn('ComboboxExampleRenderItem');
@@ -633,9 +633,9 @@ export function ComboboxExampleRenderItem() {
 
 <ComboboxExampleRenderItem />
 
-## Свое представление выбранного значения
+### Кастомное выбранное значение
 
-Для того чтобы сделать свое представление выбранного значения, воспользуйтесь свойством `renderValue`.
+Для того чтобы сделать Кастомное выбранное значение, воспользуйтесь свойством `renderValue`.
 Свойство принимает [функцию рендера](https://reactjs.org/docs/render-props.html).
 
 ```tsx
@@ -682,7 +682,7 @@ export function ComboboxExampleRenderValue() {
 
 <ComboboxExampleRenderValue />
 
-## Свои тип данных items и groups
+### Кастомные типы данных для групп и вариантов
 
 Вы можете использовать отличные от [DefaultItem](#свойства) и [DefaultGroup](#свойства) типы данных.
 
@@ -691,7 +691,7 @@ export function ComboboxExampleRenderValue() {
 `getItemLabel`, `getItemKey`, `getItemGroupKey`, `getItemDisabled`, `getGroupLabel`, `getGroupKey`,
 для того чтобы компонент понимал откуда брать данные.
 
-### Геттеры по умолчанию
+#### Геттеры по умолчанию
 
 ```ts
 const defaultGetItemKey = (item) => item.id;
@@ -702,7 +702,7 @@ const defaultGetGroupKey = (group) => group.id;
 const defaultGetGroupLabel = (group) => group.label;
 ```
 
-### Пример с кастомным Item
+#### Пример с кастомным Item
 
 ```tsx
 export function ComboboxExampleCustomTypes() {
@@ -722,7 +722,7 @@ export function ComboboxExampleCustomTypes() {
 
 <ComboboxExampleCustomTypes />
 
-### Пример с кастомным Item и Group
+#### Пример с кастомным Item и Group
 
 ```tsx
 export type Item = {
