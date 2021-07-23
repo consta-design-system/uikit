@@ -18,6 +18,7 @@
     color: var(--color-typo-primary);
   }
 
+  /* Увеличиваем область клика и фокуса */
   &::before {
     content: '';
     position: absolute;
@@ -33,7 +34,11 @@
     outline: none;
   }
 
-  &:not(.TabsTab_onlyIcon) .TabsTab-Icon {
+  &-Icon {
+    flex-shrink: 0;
+  }
+
+  &:not(&_onlyIcon) &-Icon {
     margin-right: calc(var(--tab-indent) * 0.5);
   }
 

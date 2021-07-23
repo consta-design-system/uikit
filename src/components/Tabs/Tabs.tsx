@@ -10,6 +10,7 @@ import { getSizeByMap } from '../../utils/getSizeByMap';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
 import { cnTabsTab, TabsTab } from './Tab/TabsTab';
+import { getTabsDirection } from './helpers';
 
 export const tabsSizes = ['m', 's'] as const;
 export type TabsPropSize = typeof tabsSizes[number];
@@ -18,6 +19,10 @@ export const tabsDefaultSize: TabsPropSize = tabsSizes[0];
 export const tabsViews = ['bordered', 'clear'] as const;
 export type TabsPropView = typeof tabsViews[number];
 export const tabsDefaultView: TabsPropView = tabsViews[0];
+
+export const tabsLinePositions = ['bottom', 'top', 'left', 'right'] as const;
+export type TabsPropLinePosition = typeof tabsLinePositions[number];
+export const tabsDefaultLinePosition: TabsPropLinePosition = 'bottom';
 
 export type TabsPropGetLabel<ITEM> = (item: ITEM) => string | number;
 export type TabsPropGetIcon<ITEM> = (item: ITEM) => React.FC<IconProps> | undefined;
@@ -54,6 +59,7 @@ export type TabsProps<
     iconSize?: IconPropSize;
     items: ITEM[];
     value?: ITEM | null;
+    linePosition?: TabsPropLinePosition;
     getIcon?: TabsPropGetIcon<ITEM>;
     getLabel: TabsPropGetLabel<ITEM>;
     children?: never;
@@ -95,6 +101,7 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
     items,
     view = tabsDefaultView,
     value,
+    linePosition = tabsDefaultLinePosition,
     onlyIcon,
     getIcon,
     getLabel,
@@ -117,9 +124,11 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
     () => new Array(items.length).fill(null).map(() => createRef<ItemElement>()),
     [items],
   );
+  const tabsDirection = getTabsDirection(linePosition);
+  const isVertical = tabsDirection === 'vertical';
   const tabsDimensions = useResizeObserved(tabRefs, (el) => ({
-    size: el?.offsetWidth ?? 0,
-    offset: el?.offsetLeft ?? 0,
+    size: el?.[isVertical ? 'offsetHeight' : 'offsetWidth'] ?? 0,
+    offset: el?.[isVertical ? 'offsetTop' : 'offsetLeft'] ?? 0,
   }));
   const activeTabIdx = (value && items.indexOf(value)) ?? -1;
   const activeTabDimensions = tabsDimensions[activeTabIdx];
@@ -127,7 +136,11 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
   const iconSize = getSizeByMap(sizeMap, size, iconSizeProp);
 
   return (
-    <div className={cnTabs({ size, view }, [className])} ref={ref} {...otherProps}>
+    <div
+      className={cnTabs({ size, view, direction: tabsDirection }, [className])}
+      ref={ref}
+      {...otherProps}
+    >
       <div className={cnTabs('List')}>
         {items.map((item, idx) =>
           renderItem({
@@ -144,9 +157,12 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
           }),
         )}
       </div>
+      {view === 'bordered' && (
+        <div className={cnTabs('Line', { type: 'border', position: linePosition })} />
+      )}
       {activeTabDimensions?.size > 0 && (
         <div
-          className={cnTabs('RunningLine')}
+          className={cnTabs('Line', { type: 'running', position: linePosition })}
           style={{
             ['--tabSize' as string]: `${activeTabDimensions.size}px`,
             ['--tabOffset' as string]: `${activeTabDimensions.offset}px`,

@@ -2,6 +2,7 @@ import { TabsExampleIcon } from './examples/TabsExampleIcon/TabsExampleIcon';
 import { TabsExampleSize } from './examples/TabsExampleSize/TabsExampleSize';
 import { TabsExampleView } from './examples/TabsExampleView/TabsExampleView';
 import { TabsExampleRenderItem } from './examples/TabsExampleRenderItem/TabsExampleRenderItem';
+import { TabsExampleLinePosition } from './examples/TabsExampleLinePosition/TabsExampleLinePosition';
 
 # Tabs
 
@@ -11,6 +12,7 @@ import { TabsExampleRenderItem } from './examples/TabsExampleRenderItem/TabsExam
 - [Иконки](#иконки)
 - [Размер](#размер-табов)
 - [Внешний вид](#внешний-вид)
+- [`linePosition`](#lineposition)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
 
@@ -158,6 +160,10 @@ export const TabsExampleView = () => {
 };
 ```
 
+## `linePosition`
+
+<TabsExampleLinePosition />
+
 ## Кастоматизация элемента
 
 Для кастоматизации элемента, воспользуйтесь свойством `renderItem`.
@@ -233,6 +239,7 @@ className: string;
 | [`onlyIcon?`](#иконки)                    | `boolean`                                        | -            | Показывать только иконку                                                                 |
 | [`size?`](#размер-табов)                  | `'s', 'm'`                                       | `'m'`        | Размер компонента                                                                        |
 | [`view?`](#внешний-вид)                   | `'bordered', 'clear'`                            | `'bordered'` | Внешний вид компонента (с рамкой или без)                                                |
+| [`linePosition?`](#lineposition)          | `'bottom', 'top', 'left', 'right'`               | `'bottom'`   | Положение линии подчёркивания табов                                                      |
 | `onChange`                                | `OnChange`                                       | -            | Действие при выборе элемента                                                             |
 | `className?`                              | `string`                                         | -            | Дополнительный CSS-класс                                                                 |
 | [`renderItem?`](#кастоматизация-элемента) | `RenderItem`                                     | -            | Функция рендера элемента                                                                 |
