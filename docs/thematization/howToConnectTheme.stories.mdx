@@ -1,0 +1,111 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta
+  title="Тематизация|Как подключить тему"
+  id="thematization-how-to-connect-theme"
+  parameters={{ order: 410 }}
+/>
+
+# Как подключить тему
+
+Тема — это основа. Без неё ничего не заработает.
+
+- [Как подключить тему и пресет](#как-подключить-тему-и-пресет)
+- [Как использовать тему для отдельного блока](#как-использовать-тему-для-отдельного-блока)
+- [Как переключать темы](#как-переключать-темы)
+- [Как узнать, какая тема используется](#как-узнать-какая-тема-используется)
+
+## Как подключить тему и пресет
+
+Обязательно подключите тему и пресет в корневом компоненте — так, чтобы все компоненты @consta/uikit были вложены в компонент Theme.
+
+```tsx
+import React from 'react';
+
+import { Theme, presetGpnDefault } from '@consta/uikit/Theme';
+
+const App = () => {
+  return <Theme preset={presetGpnDefault}>your code</Theme>;
+};
+```
+
+## Как использовать тему для отдельного блока
+
+Вы можете вкладывать тему одну в другую, чтобы отдельные блоки выглядели иначе.
+
+> Если вы переключите основную тему, вложенная тема не поменется
+
+```tsx
+import React from 'react';
+import { Theme, presetGpnDefault, presetGpnDark } from '@consta/uikit/Theme';
+
+const App = () => {
+  return (
+    <Theme preset={presetGpnDefault}>
+      your code
+      <Theme preset={presetGpnDark}>your code</Theme>
+    </Theme>
+  );
+};
+```
+
+## Как переключать темы
+
+В большинстве проектов пользователи работают с сервисом в разное время суток и в разных обстоятельствах.
+Поэтому желательно давать пользователю самому решать какой из тем он хочет пользоваться в данный момент —
+темной или светлой. Для этого в интерфейсе должен быть доступен переключатель тем.
+
+```tsx
+import './RootTheme.css';
+
+import React, { useState } from 'react';
+import { cn } from '@bem-react/classname';
+import { Theme, presetGpnDark, presetGpnDefault, ThemePreset } from '@consta/uikit/Theme';
+import { Switch } from '@consta/uikit/Switch';
+
+type ThemeName = 'gpnDefault' | 'gpnDark';
+
+function getPreset(themeName: ThemeName): ThemePreset {
+  const obj = {
+    gpnDefault: presetGpnDefault,
+    gpnDark: presetGpnDark,
+  };
+  return obj[themeName] || presetGpnDefault;
+}
+
+const cnRootTheme = cn('RootTheme');
+
+export const RootTheme: React.FC = () => {
+  const [theme, setTheme] = useState<ThemeName>('gpnDefault');
+  const handleChange = ({ checked }) => setTheme(checked ? 'gpnDark' : 'gpnDefault');
+
+  return (
+    <Theme preset={getPreset(theme)} className={cnRootTheme()}>
+      <Switch label="Dark Mode" onChange={handleChange} checked={theme === 'gpnDark'} />
+    </Theme>
+  );
+};
+```
+
+<ThemeExampleRoot />
+
+## Как узнать, какая тема используется
+
+Чтобы узнать текущую тему, в которой находится компонент, используйте `useTheme`.
+
+`useTheme` вернет `{ theme, themeClassNames }`
+
+- `theme` — подключенная тема
+- `themeClassNames` - CSS-классы этой темы
+
+С помощью `useTheme` удобно переключать цветовую схему на акцентную или инвертную.
+
+```tsx
+import { useTheme } from '@consta/uikit/Theme';
+import { Text } from '@consta/uikit/Text';
+
+const App = () => {
+  const { themeClassNames } = useTheme();
+  <Text className={themeClassNames.color.invert}>Текст в инвертном цвете</Text>;
+};
+```
