@@ -1,0 +1,130 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta
+  title="Тематизация|Как создать свой пресет"
+  id="thematization-how-to-create-preset"
+  parameters={{ order: 420 }}
+/>
+
+# Как создать свой пресет
+
+> Сначала прочитайте всё [о темах](https://consta-uikit.vercel.app/?path=/docs/components-theme--playground)
+
+- [Шаг 1. Создайте директорию для новых пресетов](#шаг-1-создайте-директорию-для-новых-пресетов)
+- [Шаг 2. Создайте CSS-файлы и настройте переменные](#шаг-2-создайте-css-файлы-и-настройте-переменные)
+- [Шаг 3. Создайте файл пресета](#шаг-3-создайте-файл-пресета)
+
+## Шаг 1. Создайте директорию для новых пресетов
+
+При работе с Consta в качестве установленной зависимости,
+в вашем проекте необходимо создать директорию для новых пресетов.
+
+Директория для пресетов должна содержать следующий набор папок и файлов
+(такой же, как в компоненте Theme):
+
+```
+pathToPresets/
+  _color/
+    _Theme_color_myThemeDark.css
+    _Theme_color_myThemeDefault.css
+    _Theme_color_myThemeDisplay.css
+  _control/
+    _Theme_control_myThemeDefault.css
+  _font/
+    _Theme_font_myThemeDefault.css
+  _size/
+    _Theme_size_myThemeDefault.css
+  _space/
+    _Theme_space_myThemeDefault.css
+  _shadow/
+    _Theme_shadow_myThemeDefault.css
+  myPresetDefault.js
+```
+
+## Шаг 2. Создайте CSS-файлы и настройте переменные
+
+Создание нового пресета подразумевает ручную настройку переменных CSS (также их принято называть _дизайн токенами_), составляющих темы.
+
+> Все переменные имеют семантические имена, так их проще контролировать и применять.
+
+### Тема на цвет `_color`
+
+Цветовая тема: набор переменных, которые применяются к разным частям компонентов Consta. Значения применяемых переменных получаются путем наследования значений от базовых `base` цветовых переменных.
+
+Первым делом необходимо определиться с базовыми переменными и записать их в CSS-файл на цвет в папке `_color`.
+
+Значения переменных внутри CSS-класса рассчитываются с помощью [postcss-color-function](https://github.com/postcss/postcss-color-function)
+и [postcss-simple-vars](https://github.com/postcss/postcss-simple-vars). **Но цвета можно подобрать и вручную.**
+
+Всегда желательно создавать минимум две темы: `default` — светлая и `dark` — темная, потому что некоторые
+компоненты используют инверсные цвета (например [Tooltip](https://consta-uikit.vercel.app/?path=/docs/components-tooltip--tooltip-positioned-by-anchor-story)).
+
+### Тема на контролы `_control`
+
+Здесь описаны размеры контролов, внутренние отступы и размеры текста внутри контролов.
+Все значения наследуются из темы на отступы `_space`, о ней ниже.
+
+### Тема на шрифт `_font`
+
+Здесь подключаются все начертания/насыщенности/жирности шрифта. Убедитесь, что в шрифте есть насыщенность, которую вы используете.
+Браузер имитирует насыщенность, которой нет в наборе, но неизвестно, как это будет выглядеть.
+
+> Ознакомьтесь [со списком значений weight по умолчанию](https://consta-uikit.vercel.app/?path=/docs/components-text--playground#%D0%BD%D0%B0%D1%81%D1%8B%D1%89%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D1%8C) для компонента Text.
+
+Обратите внимание, что для каждого уникального шрифта в проекте необходимо использовать свою тему `font`.
+
+### Тема на размеры шрифта `_size`
+
+Содержит сетку размеров шрифта и межстрочных интервалов. Значения используются в компоненте Text и всех текстовых
+элементах компонентов.
+
+### Тема на отступы `_space`
+
+Содержит сетку отступов.
+
+### Тема на тени `_shadow`
+
+Содержит сетку теней.
+
+### Шаг 3. Создайте файл пресета
+
+В самом файле пресета `myPresetDefault.js` необходимо прописать импорты всех новых CSS-файлов. И экспортировать
+объект со значениями ключей, которые совпадают с постфиксами из названия CSS-файлов.
+
+```js
+import './_color/Theme_color_myThemeDefault.css';
+import './_color/Theme_color_myThemeDark.css';
+import './_control/Theme_control_myThemeDefault.css';
+import './_font/Theme_font_myThemeDefault.css';
+import './_size/Theme_size_myThemeDefault.css';
+import './_space/Theme_space_myThemeDefault.css';
+import './_shadow/Theme_shadow_myThemeDefault.css';
+
+export const myNewPreset = {
+  color: {
+    primary: 'myThemeDefault',
+    accent: 'myThemeDark',
+    invert: 'myThemeDark',
+  },
+  control: 'myThemeDefault',
+  font: 'myThemeDefault',
+  size: 'myThemeDefault',
+  space: 'myThemeDefault',
+  shadow: 'myThemeDefault',
+};
+```
+
+Для проверки значений нужно подключить пресет в провайдер темы.
+
+```ts
+import React from 'react';
+
+import { Theme } from '@consta/uikit/Theme';
+import { myNewPreset } from 'pathToPresets/myPresetDefault';
+
+const App = () => {
+  return <Theme preset={myNewPreset}>your app code</Theme>;
+};
+
+export default App;
+```
