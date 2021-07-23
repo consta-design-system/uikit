@@ -9,7 +9,7 @@ import {
   form,
   view,
 } from '../../SelectComponentsDeprecated/types';
-import { UserSelect, userSelectPropSize, userSelectPropSizeDefault } from '../UserSelect';
+import { UserSelect, userSelectPropSize, userSelectPropSizeDefault } from '../UserSelectDeprecated';
 
 import mdx from './UserSelect.docs.mdx';
 

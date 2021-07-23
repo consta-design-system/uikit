@@ -4,7 +4,7 @@ import { act, fireEvent, render, screen } from '@testing-library/react';
 import { simpleItems } from '../__mocks__/data.mock';
 import { cnSelect } from '../../SelectComponentsDeprecated/cnSelect';
 import { cnSelectItem } from '../../SelectComponentsDeprecated/SelectItem/SelectItem';
-import { Combobox } from '../Combobox';
+import { Combobox } from '../ComboboxDeprecated';
 
 const testId = 'Combobox';
 const animationDuration = 200;

@@ -4,7 +4,7 @@ import { act, fireEvent, render, screen } from '@testing-library/react';
 import { simpleItems } from '../__mocks__/data.mock';
 import { getInitialsForName } from '../../Avatar/Avatar';
 import { cnSelect } from '../../SelectComponentsDeprecated/cnSelect';
-import { UserSelect } from '../UserSelect';
+import { UserSelect } from '../UserSelectDeprecated';
 import { cnUserItem } from '../UserSelectItem/UserSelectItem';
 
 const testId = 'UserSelect';

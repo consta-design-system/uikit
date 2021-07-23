@@ -14,7 +14,7 @@ import {
   sizes,
   view,
 } from '../../SelectComponentsDeprecated/types';
-import { BasicSelect } from '../BasicSelect';
+import { BasicSelect } from '../BasicSelectDeprecated';
 
 import mdx from './BasicSelect.docs.mdx';
 

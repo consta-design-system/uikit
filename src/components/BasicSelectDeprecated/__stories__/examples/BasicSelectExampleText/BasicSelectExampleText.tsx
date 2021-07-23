@@ -2,7 +2,7 @@ import React from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { BasicSelect } from '../../../BasicSelect';
+import { BasicSelect } from '../../../BasicSelectDeprecated';
 
 type SelectOption = {
   label: string;

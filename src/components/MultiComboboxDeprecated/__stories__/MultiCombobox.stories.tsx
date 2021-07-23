@@ -13,7 +13,7 @@ import {
   MultiCombobox,
   multiComboboxPropSize,
   multiComboboxPropSizeDefault,
-} from '../MultiCombobox';
+} from '../MultiComboboxDeprecated';
 
 import mdx from './MultiCombobox.docs.mdx';
 

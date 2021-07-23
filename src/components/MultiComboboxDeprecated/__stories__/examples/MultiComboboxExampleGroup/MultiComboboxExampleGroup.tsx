@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { MultiCombobox } from '../../../MultiCombobox';
+import { MultiCombobox } from '../../../MultiComboboxDeprecated';
 
 type Option = {
   label: string;

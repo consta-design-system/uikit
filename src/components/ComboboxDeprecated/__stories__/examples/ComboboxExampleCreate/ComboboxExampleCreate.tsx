@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { Combobox } from '../../../Combobox';
+import { Combobox } from '../../../ComboboxDeprecated';
 
 type SelectOption = {
   label: string;

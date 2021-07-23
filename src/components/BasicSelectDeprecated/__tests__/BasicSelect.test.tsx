@@ -3,7 +3,7 @@ import { act, fireEvent, render, RenderResult, screen } from '@testing-library/r
 
 import { cnSelect } from '../../SelectComponentsDeprecated/cnSelect';
 import { cnSelectItem } from '../../SelectComponentsDeprecated/SelectItem/SelectItem';
-import { BasicSelect, SimpleSelectProps } from '../BasicSelect';
+import { BasicSelect, SimpleSelectProps } from '../BasicSelectDeprecated';
 
 type SelectOption = {
   value: string;

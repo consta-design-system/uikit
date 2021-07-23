@@ -11,7 +11,7 @@ import {
   sizes,
   view,
 } from '../../SelectComponentsDeprecated/types';
-import { Combobox } from '../Combobox';
+import { Combobox } from '../ComboboxDeprecated';
 
 import mdx from './Combobox.docs.mdx';
 
