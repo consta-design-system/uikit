@@ -6,13 +6,22 @@ import { IconCamera } from '../../../icons/IconCamera/IconCamera';
 import { IconPhoto } from '../../../icons/IconPhoto/IconPhoto';
 import { IconRing } from '../../../icons/IconRing/IconRing';
 import { createMetadata } from '../../../utils/storybook';
-import { Tabs } from '../Tabs';
+import {
+  Tabs,
+  tabsDefaultLinePosition,
+  tabsDefaultSize,
+  tabsDefaultView,
+  tabsLinePositions,
+  tabsSizes,
+  tabsViews,
+} from '../Tabs';
 
 import mdx from './Tabs.docs.mdx';
 
 const defaultKnobs = () => ({
-  size: select('size', ['s', 'm'], 'm'),
-  view: select('view', ['bordered', 'clear'], 'bordered'),
+  size: select('size', tabsSizes, tabsDefaultSize),
+  view: select('view', tabsViews, tabsDefaultView),
+  position: select('linePosition', tabsLinePositions, tabsDefaultLinePosition),
   withIcon: boolean('withIcon', false),
   onlyIcon: boolean('onlyIcon', false),
 });
@@ -38,7 +47,7 @@ const items = [
 ];
 
 export function Playground() {
-  const { size, view, withIcon, onlyIcon } = defaultKnobs();
+  const { size, view, position, withIcon, onlyIcon } = defaultKnobs();
 
   const [value, setValue] = useState<Item | null>(items[0]);
 
@@ -51,6 +60,7 @@ export function Playground() {
       onChange={({ value }) => setValue(value)}
       size={size}
       view={view}
+      linePosition={position}
       onlyIcon={onlyIcon}
     />
   );
