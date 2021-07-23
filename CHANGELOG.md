@@ -1,6 +1,37 @@
 # Changelog
 
+## v2.1.0 (21/07/2021)
+
+- [feat(Theme): add font-weight variables (#1360)](https://github.com/gazprom-neft/consta-uikit/commit/3bd47d55270aac7eafb5c77220a907f49c29fc19) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Skeleton): added new component (#1354)](https://github.com/gazprom-neft/consta-uikit/commit/040c9be1c5b6b400e092bcf6a6cf60b905242c7f) - [@nekitk](https://github.com/nekitk)
+- [refactor(Components): refactor types in RadioGroup, SwitchGroup, CheckboxGroup](https://github.com/gazprom-neft/consta-uikit/commit/5248652d1836c13b79e57efcfaf9c22ae7c2677b) - [@gizeasy](https://github.com/gizeasy)
+- [docs(UserSelect): edit docs and examples (#1349)](https://github.com/gazprom-neft/consta-uikit/commit/437c2a12e45e4986395e16bc9e258b84c1bd4762) - [@arhayka](https://github.com/arhayka)
+- [feat(SelectDeprecated): returned the old components (#1350)](https://github.com/gazprom-neft/consta-uikit/commit/6eb72fce6e913b075a96977051f7c55212844cee) - [@gizeasy](https://github.com/gizeasy)
+- [docs(Select): edit docs (#1347)](https://github.com/gazprom-neft/consta-uikit/commit/a48a65d76b12325c8d8d31af1e3a9c41fbcf9dd7) - [@arhayka](https://github.com/arhayka)
+- [fix(UserSelect): fixed disable state of item (#1353)](https://github.com/gazprom-neft/consta-uikit/commit/35d25f9ffa2da0ecc67a6ca5b618e17a1237f515) - [@gizeasy](https://github.com/gizeasy)
+- [docs(common): add all components description (#1344)](https://github.com/gazprom-neft/consta-uikit/commit/0dabcd1775fc7fcc5a3f3558ceac4b646b004f83) - [@arhayka](https://github.com/arhayka)
+- [fix(Table): fixed filter portals (#1342)](https://github.com/gazprom-neft/consta-uikit/commit/a4510f8d802ff1f6ff37bc751bd2d5ab08672bdc) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Select): added ref (#1341)](https://github.com/gazprom-neft/consta-uikit/commit/00d1abd1a8ba64441741ee6b5bd8deedd5f42cb7) - [@gizeasy](https://github.com/gizeasy)
+- [feat(DragNDropField): more informative error messages (#1345)](https://github.com/gazprom-neft/consta-uikit/commit/0b4e8f0dbfcf1f7c3512eb911f2ff5c107931889) - [@nekitk](https://github.com/nekitk)
+- [feat(DragNDropField): added new component and examples (#1329)](https://github.com/gazprom-neft/consta-uikit/commit/a3bdf53a03a9322bb21b8b2f0dbb3cd7feaa9938) - [@nekitk](https://github.com/nekitk)
+
+---
+
 ## v2.0.0 (14/07/2021)
+
+---
+
+Встречайте новую версию!
+
+В ней мы переработали `BasicSelect`, `Combobox`, `MultiCombobox`, `UserSelect`, теперь кода стало меньше, а возможностей больше.
+
+- `BasicSelect` переработали и переименовали в `Select`
+- `Combobox`, `MultiCombobox` объединили в один компонент `Combobox`
+- `UserSelect` переработали
+
+_Обращаем внимание_: _версии компонентов обратно не совместимы._
+
+---
 
 - [docs(Checkbox): edit docs (#1320)](https://github.com/gazprom-neft/consta-uikit/commit/c465ecc1ed79b53b74aeb79577e61ce2690b4f44) - [@arhayka](https://github.com/arhayka)
 - [docs(Calendar): add docs & examples (#1311)](https://github.com/gazprom-neft/consta-uikit/commit/151de5620be588d8061b8e3379493fe689e7fb08) - [@arhayka](https://github.com/arhayka)
@@ -314,19 +345,3 @@
 
 - [docs(Icon): add docs (#552)](https://github.com/gazprom-neft/consta-uikit/commit/3fe9a935b6104f3c76c3128e7c5db6e685f284bf) - @gizeasy
 - [feat(Icons): update according to Figma (#578)](https://github.com/gazprom-neft/consta-uikit/commit/42f1dfc2a13229338aadb4b8844d457e0d7c5b07) - @Miocene
-
----
-
-## v1.10.5 (11/11/2020)
-
-- [feat(Tabs): added renderItem (#477)](https://github.com/gazprom-neft/consta-uikit/commit/dad329a3f3f7ffac84e5a8e93d26bbdd221ac0e4) - @gizeasy
-- [fix colors according to Figma (#565)](https://github.com/gazprom-neft/consta-uikit/commit/c551921ed2588285ba3fd863b7a086cf192df93c) - @fooontic
-- [fix(SelectDropdown): added z-index for dropdown list (#579)](https://github.com/gazprom-neft/consta-uikit/commit/1e0f7fd7d4dc536c1b09e0e1d37933084d512bfb) - @karpovfv-nedra
-- [test(MultiCombobox): added tests (#539)](https://github.com/gazprom-neft/consta-uikit/commit/4dd3279cb4052ada3c71e28280a465a00a33819b) - @gizeasy
-- [test(Combobox): added tests (#536)](https://github.com/gazprom-neft/consta-uikit/commit/14646cc52345f6a3840b8b3fafe66ae5884f25a1) - @gizeasy
-- [test(Header): added tests (#483)](https://github.com/gazprom-neft/consta-uikit/commit/2ebc448460c4a89e5de8cd22a7a5ae3e674cac94) - @gizeasy
-- [feat(Checkbox): added view ghost (#557)](https://github.com/gazprom-neft/consta-uikit/commit/8baa663adb8c756eed276a496861021fc13cca83) - @Miocene
-- [feat(Radio): added view ghost (#559)](https://github.com/gazprom-neft/consta-uikit/commit/332a75934e296f1c3292412b75df591ddb65309d) - @Miocene
-- [feat(Switch): added view ghost (#561)](https://github.com/gazprom-neft/consta-uikit/commit/a062a4f91a98f9cb3a8b5ce03ae89174c7d21d73) - @Miocene
-- [feat(Combobox, MultiCombobox): added message if no items are found in the list (#554)](https://github.com/gazprom-neft/consta-uikit/commit/c10ad2a7b824fdfb297c0e8b91ccb85a85b74c03) - @gizeasy
-- [feat(Table): added possibility to render large rows count (#555)](https://github.com/gazprom-neft/consta-uikit/commit/3b6ce214d120aeddc10cd4558872989836604dcf) - @karpovfv-nedra
