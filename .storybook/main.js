@@ -5,10 +5,10 @@ const createCompiler = require('@storybook/addon-docs/mdx-compiler-plugin');
 module.exports = {
   stories: ['../**/*.stories.(js|tsx|mdx)'],
   addons: [
-    'storybook-addon-themes/register',
-    '@storybook/addon-knobs/register',
-    '@storybook/addon-actions/register',
-    '@storybook/addon-a11y/register',
+    '@storybook/addon-knobs',
+    'storybook-addon-themes',
+    '@storybook/addon-actions',
+    '@storybook/addon-a11y',
     '@storybook/addon-docs/register',
     'storybook-addon-designs',
   ],
