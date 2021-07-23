@@ -1,6 +1,25 @@
 # Changelog
 
+## v2.2.0 (23/07/2021)
+
+- [docs(Storybook): add thematization chapter (#1372)](https://github.com/gazprom-neft/consta-uikit/commit/55120c57be5a660ba7cdb04fe4cae35fc57c4ecc) - [@gizeasy](https://github.com/gizeasy)
+- [fix(DepricatedComponents): fix export](https://github.com/gazprom-neft/consta-uikit/commit/332b44f130d374add0e95bc6e849c7e161cebe7f) - [@gizeasy](https://github.com/gizeasy)
+- [chore(Storybook): edit addons structure](https://github.com/gazprom-neft/consta-uikit/commit/c09c89cf55b7dca2b16aa8c2e5d2c76ffce40937) - [@gizeasy](https://github.com/gizeasy)
+- [refactor(Tabs): used ResizeObserver to detect tab width changes (#1366)](https://github.com/gazprom-neft/consta-uikit/commit/edbb7284bed8f1b4256613b1ad8f4af04ff21afe) - [@nekitk](https://github.com/nekitk)
+- [feat(CollapseGroup): added CollapseGroup (#1306)](https://github.com/gazprom-neft/consta-uikit/commit/1aeee779f511b7ead84942070d8085357eef65fe) - [@Bright-Burn](https://github.com/Bright-Burn)
+- [docs(Selects): added information about ref (#1364)](https://github.com/gazprom-neft/consta-uikit/commit/b6bda3ed36c12f2b23778fb1d8b929e0c5274a4e) - [@gizeasy](https://github.com/gizeasy)
+
+---
+
 ## v2.1.0 (21/07/2021)
+
+**Важное из обновления:**
+
+- У нас появился компонент `Skeleton` для составления экранов загрузки
+- Добавили компонент `DragNDropField` — файловое поле ввода с возможностью перетаскивания файлов курсором мыши
+- А ещё мы временно вернули старые селекты (`BasicSelect`,`Combobox`,`MultiCombobox`,`UserSelect`) под флагом `Deprecated` для более плавного перехода на новые
+
+---
 
 - [feat(Theme): add font-weight variables (#1360)](https://github.com/gazprom-neft/consta-uikit/commit/3bd47d55270aac7eafb5c77220a907f49c29fc19) - [@gizeasy](https://github.com/gizeasy)
 - [feat(Skeleton): added new component (#1354)](https://github.com/gazprom-neft/consta-uikit/commit/040c9be1c5b6b400e092bcf6a6cf60b905242c7f) - [@nekitk](https://github.com/nekitk)
@@ -338,10 +357,3 @@ _Обращаем внимание_: _версии компонентов обр
 - [feat(Icons): added IconSmile (#609)](https://github.com/gazprom-neft/consta-uikit/commit/e0b0b86b8e53e76766fcc50407c591f006a446b0) - @andekhtyar
 - [docs(Theme): update documentation (#607)](https://github.com/gazprom-neft/consta-uikit/commit/afde47adb68ad2c8c72b4a425dfedf6c6b378af1) - @Miocene
 - [feat(new iconInfo): added the new icon (#611)](https://github.com/gazprom-neft/consta-uikit/commit/61ed54f7db1a0f68e9095ce331686b7274f3bd35) - @andekhtyar
-
----
-
-## v1.10.6 (16/11/2020)
-
-- [docs(Icon): add docs (#552)](https://github.com/gazprom-neft/consta-uikit/commit/3fe9a935b6104f3c76c3128e7c5db6e685f284bf) - @gizeasy
-- [feat(Icons): update according to Figma (#578)](https://github.com/gazprom-neft/consta-uikit/commit/42f1dfc2a13229338aadb4b8844d457e0d7c5b07) - @Miocene
