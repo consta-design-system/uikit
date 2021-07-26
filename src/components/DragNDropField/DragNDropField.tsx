@@ -5,6 +5,7 @@ import { DropzoneOptions, useDropzone } from 'react-dropzone';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { cn } from '../../utils/bem';
+import { Text } from '../Text/Text';
 
 import { DragNDropFieldContent } from './DragNDropFieldContent/DragNDropFieldContent';
 import { DragNDropFieldTooltip } from './DragNDropFieldTooltip/DragNDropFieldTooltip';
@@ -67,7 +68,13 @@ export const DragNDropField = React.forwardRef<HTMLDivElement, DragNDropFieldPro
       <>
         <div {...rootProps} ref={useForkRef([ref, rootRef])}>
           <input {...getInputProps()} />
-          {content}
+          {isDragActive ? (
+            <Text view="secondary" size="s" align="center">
+              Перетащите файлы сюда
+            </Text>
+          ) : (
+            content
+          )}
         </div>
         <DragNDropFieldTooltip anchorRef={rootRef} errors={errors} />
       </>

@@ -18,6 +18,7 @@
   }
 
   &_active {
+    background: var(--color-control-bg-clear-hover);
     border-color: var(--color-control-bg-border-focus);
   }
 }
