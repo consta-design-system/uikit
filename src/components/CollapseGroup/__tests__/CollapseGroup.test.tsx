@@ -37,9 +37,7 @@ const getItemLabel = (item: Item) => item.name;
 const getItemContent = (item: Item) => item.text;
 const getItemRightSide = () => defaultRightSide;
 
-function renderComponent<ITEM, IS_ACCORDION extends boolean = false>(
-  props: CollapseGroupProps<ITEM, IS_ACCORDION>,
-) {
+function renderComponent<ITEM>(props: CollapseGroupProps<ITEM>) {
   return render(<CollapseGroup data-testid={testId} {...props} />);
 }
 

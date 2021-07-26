@@ -75,7 +75,13 @@ export function Playground() {
     <CollapseGroup
       style={{ maxWidth: 300 }}
       items={items}
-      isAccordion={isAccordion}
+      {...(isAccordion
+        ? {
+            isAccordion: true,
+          }
+        : {
+            isAccordion: false,
+          })}
       size={size}
       hoverEffect={hoverEffect}
       view={view}

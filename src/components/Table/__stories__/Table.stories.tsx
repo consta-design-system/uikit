@@ -343,7 +343,7 @@ export const withCustomFilters = createStory(
   () => {
     return (
       <div className={cnTableStories()}>
-        <Table {...getKnobs({ filters: customFilters })} />
+        <Table {...getKnobs<typeof tableData.rows[number]>({ filters: customFilters })} />
       </div>
     );
   },

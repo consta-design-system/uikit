@@ -2,35 +2,33 @@ import { useEffect, useState } from 'react';
 
 import { useChoiceGroupIndexed } from '../../hooks/useChoiceGroupIndexed/useChoiceGroupIndexed';
 
-import { CollapseGroupPropOnOpen, CollapseGroupPropOpened, CollapseGroupProps } from './helpers';
+import { CollapseGroupProps } from './helpers';
 
-type ChoiceGroupIndexedParams = {
-  value: CollapseGroupPropOpened<boolean>;
-  multiple: boolean;
-  callBack: CollapseGroupPropOnOpen<boolean>;
-};
-
-export const useChoice = <ITEM, IS_ACCORDION extends boolean>(
-  props: CollapseGroupProps<ITEM, IS_ACCORDION>,
-) => {
-  const [openedKeys, setOpenedKeys] = useState<typeof props.opened>(props.opened);
-
-  const callBack: CollapseGroupPropOnOpen<Exclude<typeof props.isAccordion, undefined>> = (
-    params,
-  ) => {
-    setOpenedKeys(params.value);
-    props.onOpen?.(params);
-  };
-
-  const choiceGroupIndexedParams: ChoiceGroupIndexedParams = {
-    value: openedKeys,
-    multiple: !props.isAccordion,
-    callBack,
-  };
+export const useChoice = <ITEM>(props: CollapseGroupProps<ITEM>) => {
+  const [openedKeys, setOpenedKeys] = useState(props.opened);
 
   useEffect(() => {
     setOpenedKeys(props.opened);
   }, [props.opened]);
 
-  return useChoiceGroupIndexed(choiceGroupIndexedParams);
+  return useChoiceGroupIndexed(
+    props.isAccordion
+      ? {
+          value: (openedKeys as typeof props.opened) ?? null,
+          multiple: false,
+          callBack: (params) => {
+            setOpenedKeys(params.value);
+            props.onOpen?.(params);
+          },
+          isNullableValue: true,
+        }
+      : {
+          value: (openedKeys as typeof props.opened) ?? [],
+          multiple: true,
+          callBack: (params) => {
+            setOpenedKeys(params.value);
+            props.onOpen?.(params);
+          },
+        },
+  );
 };
