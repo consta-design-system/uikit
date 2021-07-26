@@ -136,7 +136,7 @@ export function ComboboxExamplePlaceholder() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
-      placeholder="Выберите значение"
+      placeholder="Выберите вариант"
       items={items}
       value={value}
       onChange={({ value }) => setValue(value)}
@@ -180,7 +180,7 @@ export function ComboboxExampleDisabledItem() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
-      placeholder="Выберите значение"
+      placeholder="Выберите вариант"
       items={items}
       value={value}
       onChange={({ value }) => setValue(value)}
@@ -223,7 +223,7 @@ export function ComboboxExampleMultiple() {
   return (
     <div className={cnDocsDecorator('Section')}>
       <Combobox
-        placeholder="Выберите значение"
+        placeholder="Выберите вариант"
         items={items}
         value={value}
         onChange={({ value }) => setValue(value)}
@@ -302,7 +302,7 @@ export function ComboboxExampleGroups() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
-      placeholder="Выберите значение"
+      placeholder="Выберите вариант"
       items={items}
       value={value}
       onChange={({ value }) => setValue(value)}
@@ -345,7 +345,7 @@ export function ComboboxExampleSize() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
-      placeholder="Выберите значение"
+      placeholder="Выберите вариант"
       size="s"
       items={items}
       value={value}
@@ -387,7 +387,7 @@ export function ComboboxExampleForm() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
-      placeholder="Выберите значение"
+      placeholder="Выберите вариант"
       form="round"
       items={items}
       value={value}
@@ -428,7 +428,7 @@ export function ComboboxExampleView() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
-      placeholder="Выберите значение"
+      placeholder="Выберите вариант"
       view="clear"
       items={items}
       value={value}
@@ -469,7 +469,7 @@ export function ComboboxExampleDisabled() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
-      placeholder="Выберите значение"
+      placeholder="Выберите вариант"
       items={items}
       value={value}
       onChange={({ value }) => setValue(value)}
@@ -483,11 +483,11 @@ export function ComboboxExampleDisabled() {
 
 Если в поле что-то напечатать, компонент найдёт всех варианты, в названии которых есть напечатанные символы.
 
-По умолчанию компонент ищет по `label` элемента. Вы можете поменять параметры поиска с помощью `searchFunction`. Например, если в комбобоксе есть [кастомные элементы](#кастомный-элемент-списка) и нужно искать пользователей не только по `label`, но и по другим данным.
+По умолчанию компонент ищет по `label` элемента. Вы можете поменять параметры поиска с помощью `searchFunction`. Например, если в комбобоксе есть [кастомные элементы](#кастомный-элемент-списка) и нужно искать варианты не только по `label`, но и по другим данным.
 
-## Создание элементов
+## Создание новых вариантов
 
-Если при поиске в поле никого не нашлось, можно показать в комбобоксе кнопку для создания нового значения. Пользователь сможет добавить значение в список, а потом выбрать его. В функцию на вход придёт `label` созданного элемента.
+Если при поиске в поле ничего не нашлось, можно показать в комбобоксе кнопку для создания нового значения. Пользователь сможет добавить значение в список, а потом выбрать его. В функцию на вход придёт `label` созданного элемента.
 
 <ComboboxExampleCreate />
 
@@ -517,7 +517,7 @@ export function ComboboxExampleCreate() {
   const [list, setList] = useState<Item[]>(items);
   return (
     <Combobox
-      placeholder="Выберите значение"
+      placeholder="Выберите вариант"
       items={list}
       value={value}
       onChange={({ value }) => setValue(value)}
@@ -534,9 +534,11 @@ export function ComboboxExampleCreate() {
 Для того чтобы сделать свое представление элементов списка, воспользуйтесь свойством `renderItem`.
 Свойство принимает [функцию рендера](https://reactjs.org/docs/render-props.html).
 
-**Важно**: корневой DOM элемент, должен иметь свойство `role="option"`
+> У корневого DOM-элемента должно быть свойство role="option".
 
-#### Пример с своим представлением элемента списка и своей функцией поиска
+#### Пример с кастомным элементом списка и своей функцией поиска
+
+<ComboboxExampleRenderItem />
 
 ```tsx
 const cnComboboxExampleRenderItem = cn('ComboboxExampleRenderItem');
@@ -601,7 +603,7 @@ export function ComboboxExampleRenderItem() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
-      placeholder="Выберите значение"
+      placeholder="Выберите вариант"
       items={items}
       value={value}
       onChange={({ value }) => setValue(value)}
@@ -631,12 +633,12 @@ export function ComboboxExampleRenderItem() {
 }
 ```
 
-<ComboboxExampleRenderItem />
-
 ### Кастомное выбранное значение
 
 Для того чтобы сделать Кастомное выбранное значение, воспользуйтесь свойством `renderValue`.
 Свойство принимает [функцию рендера](https://reactjs.org/docs/render-props.html).
+
+<ComboboxExampleRenderValue />
 
 ```tsx
 type Item = {
@@ -663,7 +665,7 @@ export function ComboboxExampleRenderValue() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
-      placeholder="Выберите значение"
+      placeholder="Выберите вариант"
       items={items}
       value={value}
       onChange={({ value }) => setValue(value)}
@@ -672,15 +674,13 @@ export function ComboboxExampleRenderValue() {
           <span role="img" aria-label="Panda">
             🐼
           </span>{' '}
-          - {item.label}
+          — {item.label}
         </div>
       )}
     />
   );
 }
 ```
-
-<ComboboxExampleRenderValue />
 
 ### Кастомные типы данных для групп и вариантов
 
@@ -704,12 +704,14 @@ const defaultGetGroupLabel = (group) => group.label;
 
 #### Пример с кастомным Item
 
+<ComboboxExampleCustomTypes />
+
 ```tsx
 export function ComboboxExampleCustomTypes() {
   const [value, setValue] = useState<string | null>();
   return (
     <Combobox
-      placeholder="Выберите значение"
+      placeholder="Выберите вариант"
       items={['Первый', 'Второй', 'Третий']}
       value={value}
       onChange={({ value }) => setValue(value)}
@@ -720,9 +722,9 @@ export function ComboboxExampleCustomTypes() {
 }
 ```
 
-<ComboboxExampleCustomTypes />
-
 #### Пример с кастомным Item и Group
+
+<ComboboxExampleCustomTypesWithGroups />
 
 ```tsx
 export type Item = {
@@ -749,7 +751,7 @@ export function ComboboxExampleCustomTypesWithGroups() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
-      placeholder="Выберите значение"
+      placeholder="Выберите вариант"
       items={items}
       groups={groups}
       value={value}
@@ -763,8 +765,6 @@ export function ComboboxExampleCustomTypesWithGroups() {
   );
 }
 ```
-
-<ComboboxExampleCustomTypesWithGroups />
 
 ## Свойства
 
