@@ -1,86 +1,40 @@
 .Tabs {
   position: relative;
+  display: flex;
   width: 100%;
 
-  &_size {
-    &_s {
-      --only-icon-size: var(--space-l);
-      --tab-font-size: var(--size-text-s);
-    }
-
-    &_m {
-      --only-icon-size: var(--space-xl);
-      --tab-font-size: var(--size-text-m);
-    }
+  &_direction_horizontal {
+    align-items: center;
   }
 
-  &-List {
-    display: flex;
-    width: 100%;
-  }
-
-  &_direction_vertical &-List {
+  &_direction_vertical {
     flex-direction: column;
   }
 
-  &_direction_horizontal &-Tab {
-    &:not(:last-child) {
-      margin-right: var(--space-m);
-    }
-  }
+  &-Tab {
+    flex-shrink: 0;
 
-  &_direction_vertical &-Tab {
-    margin: 0 var(--space-s);
-    text-align: left;
-  }
+    &_hidden {
+      position: absolute;
 
-  &-Line {
-    position: absolute;
-
-    &_type_border {
-      --line-thickness: 1px;
-      --line-length: 100%;
-      background-color: var(--color-bg-border);
+      /* Чтобы из-за скрытых элементов не появлялся скролл экрана */
+      left: -100vw;
+      visibility: hidden;
     }
 
-    &_type_running {
-      --line-thickness: 2px;
-      --line-length: var(--tabSize);
-      --line-offset: var(--tabOffset);
-      background-color: var(--color-bg-brand);
-      transition: transform 0.25s, width 0.25s, height 0.25s;
+    &_direction_horizontal {
+      &:not(:last-child) {
+        margin-right: var(--space-m);
+      }
     }
 
-    &_position_bottom,
-    &_position_top {
-      left: 0;
-      width: var(--line-length);
-      height: var(--line-thickness);
-      transform: translateX(var(--line-offset, 0));
-    }
+    &_direction_vertical {
+      margin: 0 var(--space-s);
+      text-align: left;
 
-    &_position_bottom {
-      bottom: 0;
-    }
-
-    &_position_top {
-      top: 0;
-    }
-
-    &_position_left,
-    &_position_right {
-      top: 0;
-      width: var(--line-thickness);
-      height: var(--line-length);
-      transform: translateY(var(--line-offset, 0));
-    }
-
-    &_position_left {
-      left: 0;
-    }
-
-    &_position_right {
-      right: 0;
+      & > * {
+        width: 100%;
+      }
     }
   }
 }
