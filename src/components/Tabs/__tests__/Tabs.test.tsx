@@ -174,7 +174,7 @@ describe('Компонент Tabs', () => {
     describe('проверка renderItem', () => {
       it(`рендер элемента производится прокинутой функцией`, () => {
         const renderText = 'customRenderItem';
-        renderComponent({ renderItem: ({ key }) => <div key={key}>{renderText}</div> });
+        renderComponent({ renderItem: () => <>{renderText}</> });
         expect(getRender().textContent).toEqual(`${renderText}${renderText}${renderText}`);
       });
     });

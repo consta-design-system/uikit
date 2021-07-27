@@ -18,16 +18,10 @@ export const TabsExampleRenderItem = () => {
         items={items}
         getLabel={(item) => item}
         size="m"
-        renderItem={({ className, ref, label, onChange, key }) => (
-          <button
-            key={key}
-            type="button"
-            onClick={onChange}
-            ref={ref}
-            className={cnTabsTab(null, [className])}
-          >
+        renderItem={({ label, checked, onChange }) => (
+          <button type="button" onClick={onChange} className={cnTabsTab({ checked })}>
             <span style={{ marginRight: 4 }} role="img" aria-label="img">
-              🤘
+              {checked ? '🤘' : '✋'}
             </span>
             {label}
           </button>

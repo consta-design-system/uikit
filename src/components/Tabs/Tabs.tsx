@@ -3,14 +3,17 @@ import './Tabs.css';
 import React, { createRef, useMemo } from 'react';
 
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
+import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { useResizeObserved } from '../../hooks/useResizeObserved/useResizeObserved';
 import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
-import { getSizeByMap } from '../../utils/getSizeByMap';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
+import { TabsLine } from './Line/TabsLine';
+import { TabsMoreItems } from './MoreItems/TabsMoreItems';
 import { cnTabsTab, TabsTab } from './Tab/TabsTab';
 import { getTabsDirection } from './helpers';
+import { useFittingItems } from './useFittingItems';
 
 export const tabsSizes = ['m', 's'] as const;
 export type TabsPropSize = typeof tabsSizes[number];
@@ -33,15 +36,13 @@ export type TabsPropOnChange<ITEM, ITEM_ELEMENT> = (props: {
 
 type RenderItemProps<ITEM, ELEMENT extends HTMLElement> = {
   item: ITEM;
-  ref: React.RefObject<ELEMENT>;
-  key: string | number;
   onChange: React.MouseEventHandler<ELEMENT>;
   checked: boolean;
   label: string;
   icon?: React.FC<IconProps>;
-  iconSize: IconPropSize;
+  size: TabsPropSize;
+  iconSize?: IconPropSize;
   onlyIcon?: boolean;
-  className: string;
 };
 
 type RenderItem<ITEM, ELEMENT extends HTMLElement> = (
@@ -76,23 +77,22 @@ type Tabs = <ITEM, ITEMELEMENT extends HTMLElement = HTMLButtonElement>(
 
 export const cnTabs = cn('Tabs');
 
-const sizeMap: Record<TabsPropSize, IconPropSize> = {
-  s: 'xs',
-  m: 's',
-};
-
 function renderItemDefault<ITEM, ITEMELEMENT extends HTMLElement>(
   props: RenderItemProps<ITEM, ITEMELEMENT>,
 ): React.ReactElement {
-  const { ref, onChange, ...otherProps } = props;
+  const { onChange, ...otherProps } = props;
   return (
     <TabsTab
       {...otherProps}
-      ref={(ref as unknown) as React.RefObject<HTMLButtonElement>}
       onChange={(onChange as unknown) as React.MouseEventHandler<HTMLButtonElement>}
     />
   );
 }
+
+export type TabDimensions = {
+  size: number;
+  gap: number;
+};
 
 export const Tabs: Tabs = React.forwardRef((props, ref) => {
   const {
@@ -106,12 +106,10 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
     getIcon,
     getLabel,
     onChange,
-    iconSize: iconSizeProp,
-    renderItem = renderItemDefault,
+    iconSize,
+    renderItem: renderItemProp = renderItemDefault,
     ...otherProps
   } = props;
-
-  type ItemElement = Exclude<Parameters<typeof renderItem>[number]['ref']['current'], null>;
 
   const { getOnChange, getChecked } = useChoiceGroup({
     value: value || null,
@@ -121,52 +119,83 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
   });
 
   const tabRefs = useMemo(
-    () => new Array(items.length).fill(null).map(() => createRef<ItemElement>()),
+    () => new Array(items.length).fill(null).map(() => createRef<HTMLDivElement>()),
     [items],
   );
   const tabsDirection = getTabsDirection(linePosition);
   const isVertical = tabsDirection === 'vertical';
-  const tabsDimensions = useResizeObserved(tabRefs, (el) => ({
-    size: el?.[isVertical ? 'offsetHeight' : 'offsetWidth'] ?? 0,
-    offset: el?.[isVertical ? 'offsetTop' : 'offsetLeft'] ?? 0,
-  }));
-  const activeTabIdx = (value && items.indexOf(value)) ?? -1;
-  const activeTabDimensions = tabsDimensions[activeTabIdx];
+  const tabsDimensions = useResizeObserved(
+    tabRefs,
+    (el): TabDimensions => ({
+      size: el?.[isVertical ? 'offsetHeight' : 'offsetWidth'] ?? 0,
+      gap: el ? parseInt(getComputedStyle(el)[isVertical ? 'marginBottom' : 'marginRight'], 10) : 0,
+    }),
+  );
+  const maxTabHeight: number = React.useMemo(() => {
+    return Math.max(...tabRefs.map((tabRef) => tabRef.current?.offsetHeight ?? 0));
+  }, [tabsDimensions]);
 
-  const iconSize = getSizeByMap(sizeMap, size, iconSizeProp);
+  const activeTabIdx = (value && items.indexOf(value)) ?? -1;
+
+  const rootRef = React.useRef(null);
+  const moreItemsRef = React.useRef(null);
+  const { isItemHidden } = useFittingItems({
+    isVertical,
+    tabsDimensions,
+    containerRef: rootRef,
+    moreItemsRef,
+  });
+  const hiddenItems = items.filter((_item, idx) => isItemHidden(idx));
+
+  const renderItem = (item: typeof items[number], onClick?: () => void) =>
+    renderItemProp({
+      item,
+      onChange: (...args) => {
+        onClick?.();
+        getOnChange(item)(...args);
+      },
+      checked: getChecked(item),
+      label: getLabel(item).toString(),
+      icon: getIcon && getIcon(item),
+      onlyIcon,
+      size,
+      iconSize,
+    });
 
   return (
     <div
-      className={cnTabs({ size, view, direction: tabsDirection }, [className])}
-      ref={ref}
+      className={cnTabs({ view, direction: tabsDirection }, [className])}
+      ref={useForkRef([ref, rootRef])}
       {...otherProps}
     >
-      <div className={cnTabs('List')}>
-        {items.map((item, idx) =>
-          renderItem({
-            item,
-            ref: tabRefs[idx],
-            key: getLabel(item),
-            onChange: getOnChange(item),
-            checked: getChecked(item),
-            label: getLabel(item).toString(),
-            icon: getIcon && getIcon(item),
-            iconSize,
-            onlyIcon,
-            className: cnTabs('Tab'),
-          }),
-        )}
-      </div>
-      {view === 'bordered' && (
-        <div className={cnTabs('Line', { type: 'border', position: linePosition })} />
-      )}
-      {activeTabDimensions?.size > 0 && (
+      {items.map((item, idx) => (
         <div
-          className={cnTabs('Line', { type: 'running', position: linePosition })}
-          style={{
-            ['--tabSize' as string]: `${activeTabDimensions.size}px`,
-            ['--tabOffset' as string]: `${activeTabDimensions.offset}px`,
-          }}
+          ref={tabRefs[idx]}
+          key={getLabel(item)}
+          className={cnTabs('Tab', { hidden: isItemHidden(idx), direction: tabsDirection })}
+        >
+          {renderItem(item)}
+        </div>
+      ))}
+      <div
+        className={cnTabs('Tab', { hidden: hiddenItems.length === 0, direction: tabsDirection })}
+      >
+        <TabsMoreItems
+          items={hiddenItems}
+          renderItem={renderItem}
+          getLabel={getLabel}
+          getChecked={getChecked}
+          height={maxTabHeight}
+          ref={moreItemsRef}
+        />
+      </div>
+      {view === 'bordered' && <TabsLine type="border" linePosition={linePosition} />}
+      {!isItemHidden(activeTabIdx) && (
+        <TabsLine
+          type="running"
+          linePosition={linePosition}
+          tabsDimensions={tabsDimensions}
+          activeTabIdx={activeTabIdx}
         />
       )}
     </div>

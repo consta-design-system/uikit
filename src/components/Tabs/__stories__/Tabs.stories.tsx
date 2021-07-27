@@ -3,6 +3,7 @@ import { boolean, select } from '@storybook/addon-knobs';
 
 import { IconProps } from '../../../icons/Icon/Icon';
 import { IconCamera } from '../../../icons/IconCamera/IconCamera';
+import { IconPhone } from '../../../icons/IconPhone/IconPhone';
 import { IconPhoto } from '../../../icons/IconPhoto/IconPhoto';
 import { IconRing } from '../../../icons/IconRing/IconRing';
 import { createMetadata } from '../../../utils/storybook';
@@ -43,6 +44,10 @@ const items = [
   {
     name: 'Третий вариант',
     icon: IconCamera,
+  },
+  {
+    name: 'Четвёртый вариант',
+    icon: IconPhone,
   },
 ];
 
