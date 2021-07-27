@@ -3,6 +3,7 @@ import { TabsExampleSize } from './examples/TabsExampleSize/TabsExampleSize';
 import { TabsExampleView } from './examples/TabsExampleView/TabsExampleView';
 import { TabsExampleRenderItem } from './examples/TabsExampleRenderItem/TabsExampleRenderItem';
 import { TabsExampleLinePosition } from './examples/TabsExampleLinePosition/TabsExampleLinePosition';
+import { TabsExampleAdaptive } from './examples/TabsExampleAdaptive/TabsExampleAdaptive';
 
 # Tabs
 
@@ -13,6 +14,7 @@ import { TabsExampleLinePosition } from './examples/TabsExampleLinePosition/Tabs
 - [Размер](#размер-табов)
 - [Внешний вид](#внешний-вид)
 - [`linePosition`](#lineposition)
+- [Адаптивность](#адаптивность)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
 
@@ -185,16 +187,10 @@ export const TabsExampleRenderItem = () => {
       items={items}
       getLabel={(item) => item}
       size="m"
-      renderItem={({ className, ref, label, onChange, key }) => (
-        <button
-          key={key}
-          type="button"
-          onClick={onChange}
-          ref={ref}
-          className={cnTabsTab(null, [className])}
-        >
+      renderItem={({ label, checked, onChange }) => (
+        <button type="button" onClick={onChange} className={cnTabsTab({ checked })}>
           <span style={{ marginRight: 4 }} role="img" aria-label="img">
-            🤘
+            {checked ? '🤘' : '✋'}
           </span>
           {label}
         </button>
@@ -206,27 +202,28 @@ export const TabsExampleRenderItem = () => {
 
 <TabsExampleRenderItem />
 
+## Адаптивность
+
+Табы подстраиваются под доступную им ширину — невместившиеся табы перемещаются в выпадающий список.
+
+<TabsExampleAdaptive />
+
 ## Свойства
 
-```
-
+```ts
 type Item = unknown;
 
 type OnChange = (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM | null }) => void;
 
 type RenderItem<ITEM, ELEMENT> = (props: {
-item: ITEM;
-ref: React.RefObject<ELEMENT>;
-key: string | number;
-onChange: React.MouseEventHandler<ELEMENT>;
-checked: boolean;
-label: string;
-icon?: React.FC<IconProps>;
-iconSize: IconPropSize;
-onlyIcon?: boolean;
-className: string;
+  item: ITEM;
+  onChange: React.MouseEventHandler<ELEMENT>;
+  checked: boolean;
+  label: string;
+  icon?: React.FC<IconProps>;
+  iconSize: IconPropSize;
+  onlyIcon?: boolean;
 }) => React.ReactElement | null;
-
 ```
 
 | Свойство                                  | Тип                                              | По умолчанию | Описание                                                                                 |
