@@ -6,12 +6,12 @@ import { formatFileSize } from './formatFileSize';
 
 const ERROR_FORMATTERS: Record<FileError['code'], (file: File) => string> = {
   'file-invalid-type': ({ type }) =>
-    ['неправильный формат файла', type && `(${type})`].filter(isNotNil).join(' '),
+    ['формат файла не подходит', type && `(${type})`].filter(isNotNil).join(' '),
   'file-too-large': ({ size }) => `файл слишком большой (${formatFileSize(size)})`,
   'file-too-small': ({ size }) => `файл слишком маленький (${formatFileSize(size)})`,
 };
 
-const GENERAL_ERROR = 'не удалось добавить файл';
+const GENERAL_ERROR = 'не получилось добавить файл';
 
 export const getErrorsList = (fileRejections: FileRejection[]): string[] => {
   const errorsList: string[] = [];

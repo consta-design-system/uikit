@@ -5,21 +5,27 @@ import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExamp
 import { Text } from '../../../../Text/Text';
 import { DragNDropField } from '../../../DragNDropField';
 
-export const DragNDropFieldExampleAccept = () => (
+export const DragNDropFieldExampleAcceptDoc = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
     <div>
-      <DragNDropField accept="image/*" onDropFiles={(files) => console.log(files)}>
-        <Text>Сюда можно перетаскивать только картинки</Text>
+      <DragNDropField accept={['.doc', '.docx']} onDropFiles={(files) => console.log(files)}>
+        <Text>Сюда можно перетаскивать только DOC и DOCX</Text>
         <Text view="ghost" font="mono">
-          image/*
+          .doc, .docx
         </Text>
       </DragNDropField>
     </div>
+  </StoryBookExample>
+);
+
+export const DragNDropFieldExampleAcceptImage = () => (
+  <StoryBookExample className={cnDocsDecorator('Section')}>
     <div>
-      <DragNDropField accept={['.doc', '.docx']} onDropFiles={(files) => console.log(files)}>
-        <Text>Сюда можно перетаскивать только doc-файлы</Text>
+      <DragNDropField accept="image/*" onDropFiles={(files) => console.log(files)}>
+        <Text>Сюда можно перетаскивать только картинки,</Text>
+        <Text>зато любые (ну почти)</Text>
         <Text view="ghost" font="mono">
-          .doc, .docx
+          image/*
         </Text>
       </DragNDropField>
     </div>

@@ -9,7 +9,8 @@ export const DragNDropFieldExampleMaxSize = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
     <div>
       <DragNDropField maxSize={1 * 1024 * 1024} onDropFiles={(files) => console.log(files)}>
-        <Text>Сюда можно перетаскивать не более 1 Мб</Text>
+        <Text>Сюда можно перетаскивать файлы</Text>
+        <Text>размером 1 Мб или меньше</Text>
       </DragNDropField>
     </div>
   </StoryBookExample>

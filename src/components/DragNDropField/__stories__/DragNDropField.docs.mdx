@@ -1,35 +1,151 @@
-import { DragNDropFieldExampleAccept } from './examples/DragNDropFieldExampleAccept/DragNDropFieldExampleAccept';
-import { DragNDropFieldExampleChildren } from './examples/DragNDropFieldExampleChildren/DragNDropFieldExampleChildren';
+import {
+  DragNDropFieldExampleAcceptImage,
+  DragNDropFieldExampleAcceptDoc,
+} from './examples/DragNDropFieldExampleAccept/DragNDropFieldExampleAccept';
+import {
+  DragNDropFieldExampleChildren,
+  DragNDropFieldExampleRenderProps,
+  DragNDropFieldExampleEmpty,
+} from './examples/DragNDropFieldExampleChildren/DragNDropFieldExampleChildren';
 import { DragNDropFieldExampleMaxSize } from './examples/DragNDropFieldExampleMaxSize/DragNDropFieldExampleMaxSize';
-import { DragNDropFieldExampleMultiple } from './examples/DragNDropFieldExampleMultiple/DragNDropFieldExampleMultiple';
+import {
+  DragNDropFieldExampleMultiple,
+  DragNDropFieldExampleSingle,
+} from './examples/DragNDropFieldExampleMultiple/DragNDropFieldExampleMultiple';
 import { DragNDropFieldExampleOnDropFiles } from './examples/DragNDropFieldExampleOnDropFiles/DragNDropFieldExampleOnDropFiles';
 
 # DragNDropField
 
-- [`multiple`](#multiple)
-- [`accept`](#accept)
-- [`maxSize`](#maxsize)
-- [`children`](#children)
-- [`onDropFiles`](#ondropfiles)
+Компонент для выбора и загрузки файлов. Пользователь может перетащить в него файлы или загрузить по кнопке.
+
+Похож на [FileField](#/?path=/docs/components-filefield--playground), но возможностей больше:
+
+- это самостоятельный компонент (FileField обязательно нужно использовать с другим компонентом),
+- в него можно перетаскивать файлы,
+- можно ограничить типы и размер файлов, есть обработка ошибок.
+
+<DragNDropFieldExampleEmpty />
+
+- [Содержимое](#содержимое)
+- [Один или несколько](#один-или-несколько)
+- [Типы файлов](#типы-файлов)
+- [Размер файла](#размер-файла)
+- [Обработка загрузки файлов](#обработка-загрузки-файлов)
+- [Обработка ошибок](#обработка-ошибок)
 - [Свойства](#свойства)
 
-## `multiple`
+## Содержимое
 
-<DragNDropFieldExampleMultiple />
-
-## `accept`
-
-<DragNDropFieldExampleAccept />
-
-## `maxSize`
-
-<DragNDropFieldExampleMaxSize />
-
-## `children`
+`DragNDropField` — компонент-контейнер. Всё, что вы добавите в него,
+пользователь увидит внутри рамки для загрузки файлов.
 
 <DragNDropFieldExampleChildren />
 
-## `onDropFiles`
+```tsx
+<DragNDropField>
+  <Text>Здесь просто текст</Text>
+</DragNDropField>
+```
+
+<DragNDropFieldExampleRenderProps />
+
+```tsx
+<DragNDropField>
+  {({ openFileDialog }) => (
+    <>
+      <Text>Пример с Render Props, открывает окно для выбора файла из дочернего блока</Text>
+      <br />
+      <Button onClick={openFileDialog} label="Выбрать файл" />
+    </>
+  )}
+</DragNDropField>
+```
+
+Если ничего не добавите, в рамке будет такой текст и кнопка:
+
+<DragNDropFieldExampleEmpty />
+
+## Один или несколько
+
+По умолчанию можно загрузить один файл. Чтобы загрузить несколько, добавьте `multiple`.
+
+<DragNDropFieldExampleSingle />
+
+```tsx
+<DragNDropField multiple={false}>
+  <Text>Сюда можно перетащить только один файл</Text>
+</DragNDropField>
+```
+
+Если пользователь попробует перетащить несколько файлов, компонент покажет ошибку.
+
+<DragNDropFieldExampleMultiple />
+
+```tsx
+<DragNDropField multiple>
+  <Text>Сюда можно перетащить много файлов за раз</Text>
+</DragNDropField>
+```
+
+## Типы файлов
+
+Вы можете ограничить типы файлов, за это отвечает свойство `accept`.
+
+Как обозначить формат:
+
+- указать расширение файла с точкой в начале, например, `.jpg`,
+- MIME-тип без расширения, например `application/xml`,
+- `image/*` — чтобы загружать только изображения,
+- `audio/*` — только аудиофайлы,
+- `video/*` — только видеофайлы.
+
+[Подробнее об обозначениях файлов](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers)
+
+<DragNDropFieldExampleAcceptImage />
+
+```tsx
+<DragNDropField accept="image/*" onDropFiles={(files) => console.log(files)}>
+  <Text>Сюда можно перетаскивать только картинки, зато любые (ну почти)</Text>
+  <Text view="ghost" font="mono">
+    image/*
+  </Text>
+</DragNDropField>
+```
+
+<DragNDropFieldExampleAcceptDoc />
+
+```tsx
+<DragNDropField accept={['.doc', '.docx']}>
+  <Text>Сюда можно перетаскивать только DOC и DOCX</Text>
+  <Text view="ghost" font="mono">
+    .doc, .docx
+  </Text>
+</DragNDropField>
+```
+
+Если пользователь попробует загрузить файл другого типа, компонент покажет ошибку.
+
+## Размер файла
+
+Вы можете ограничить размер файла, за это отвечает `maxSize`. Укажите размер в байтах.
+
+<DragNDropFieldExampleMaxSize />
+
+```tsx
+<DragNDropField maxSize={1 * 1024 * 1024}>
+  <Text>Сюда можно перетаскивать файлы размером 1 Мб или меньше</Text>
+</DragNDropField>
+```
+
+Если пользователь попробует загрузить файл большего размера, компонент покажет ошибку.
+
+## Обработка загрузки файлов
+
+Обработать загруженные файлы можно с помощью `onDropFiles`.
+
+Например, показать название и иконку.
+
+<DragNDropFieldExampleOnDropFiles />
 
 ```tsx
 export function MyComponent() {
@@ -52,15 +168,21 @@ export function MyComponent() {
 }
 ```
 
-<DragNDropFieldExampleOnDropFiles />
+## Обработка ошибок
+
+Если файлы, которые загружает пользователь, не подходят под ваши ограничения, компонент покажет ошибку:
+
+- предупредит, что [файл слишком большой](#размер-файла),
+- подскажет, что [тип файла не подходит](#типы-файлов),
+- или что [можно загрузить только один файл](#один-или-несколько).
 
 ## Свойства
 
-| Свойство                      | Тип                                                                                   | По умолчанию | Описание                                                                                                                                 |
-| ----------------------------- | ------------------------------------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| [`multiple?`](#multiple)      | `boolean`                                                                             | `false`      | Можно ли выбирать сразу несколько файлов (см. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#attr-multiple)) |
-| [`accept?`](#accept)          | `string` &#124; `string[]`                                                            | -            | Список разрешённых типов файлов (см. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#attr-accept))            |
-| [`maxSize?`](#maxsize)        | `number`                                                                              | -            | Максимальный размер файла в байтах                                                                                                       |
-| [`onDropFiles`](#ondropfiles) | `(files: File[]) => void`                                                             | -            | Обработчик события выбора файлов                                                                                                         |
-| [`children`](#children)       | `React.ReactNode` &#124; `(props: { openFileDialog: () => void }) => React.ReactNode` | -            | Дочерние элементы                                                                                                                        |
-| `ref?`                        | `React.Ref<HTMLDivElement>`                                                           | -            | Ссылка на корневой DOM-элемент компонента                                                                                                |
+| Свойство                                    | Тип                                                                                   | По умолчанию | Описание                                                                                                                                      |
+| ------------------------------------------- | ------------------------------------------------------------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`multiple?`](#один-или-несколько)          | `boolean`                                                                             | `false`      | Можно ли выбирать сразу несколько файлов (см. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#attr-multiple))      |
+| [`accept?`](#типы-файлов)                   | `string` &#124; `string[]`                                                            | -            | Список разрешённых типов файлов (см. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers)) |
+| [`maxSize?`](#размер-файла)                 | `number`                                                                              | -            | Максимальный размер файла в байтах                                                                                                            |
+| [`onDropFiles`](#обработка-загрузки-файлов) | `(files: File[]) => void`                                                             | -            | Обработчик события выбора файлов                                                                                                              |
+| [`children?`](#содержимое)                  | `React.ReactNode` &#124; `(props: { openFileDialog: () => void }) => React.ReactNode` | -            | Дочерние элементы                                                                                                                             |
+| `ref?`                                      | `React.Ref<HTMLDivElement>`                                                           | -            | Ссылка на корневой DOM-элемент компонента                                                                                                     |
