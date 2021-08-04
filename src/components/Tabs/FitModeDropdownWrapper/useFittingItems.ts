@@ -1,17 +1,13 @@
 import React from 'react';
 
-import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
-
-import { getTabsWidth } from './helpers';
-import { TabDimensions } from './Tabs';
+import { useComponentSize } from '../../../hooks/useComponentSize/useComponentSize';
+import { getTabsWidth, TabDimensions } from '../helpers';
 
 export const useFittingItems = ({
-  isVertical,
   tabsDimensions,
   containerRef,
   moreItemsRef,
 }: {
-  isVertical: boolean;
   tabsDimensions: TabDimensions[];
   containerRef: React.RefObject<HTMLElement>;
   moreItemsRef: React.RefObject<HTMLElement>;
@@ -24,14 +20,12 @@ export const useFittingItems = ({
 
   const fittingItemsCount = React.useMemo(
     () =>
-      isVertical
-        ? tabsDimensions.length
-        : getFittingItemsCount({
-            tabsDimensions,
-            totalWidth: containerWidth,
-            moreItemsWidth,
-          }),
-    [tabsDimensions, containerWidth, moreItemsWidth, isVertical],
+      getFittingItemsCount({
+        tabsDimensions,
+        totalWidth: containerWidth,
+        moreItemsWidth,
+      }),
+    [tabsDimensions, containerWidth, moreItemsWidth],
   );
 
   return {

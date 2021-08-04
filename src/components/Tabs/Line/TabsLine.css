@@ -3,14 +3,11 @@
 
   &_type_border {
     --line-thickness: 1px;
-    --line-length: 100%;
     background-color: var(--color-bg-border);
   }
 
   &_type_running {
     --line-thickness: 2px;
-    --line-length: var(--tabSize);
-    --line-offset: var(--tabOffset);
     background-color: var(--color-bg-brand);
     transition: transform 0.25s, width 0.25s, height 0.25s;
   }
@@ -20,7 +17,7 @@
     left: 0;
     width: var(--line-length);
     height: var(--line-thickness);
-    transform: translateX(var(--line-offset, 0));
+    transform: translateX(var(--line-offset));
   }
 
   &_position_bottom {
@@ -36,7 +33,7 @@
     top: 0;
     width: var(--line-thickness);
     height: var(--line-length);
-    transform: translateY(var(--line-offset, 0));
+    transform: translateY(var(--line-offset));
   }
 
   &_position_left {
