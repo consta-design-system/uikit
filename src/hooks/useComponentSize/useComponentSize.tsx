@@ -23,7 +23,11 @@ const getElementSize = (el: HTMLElement | SVGGraphicsElement | null): ComponentS
 export function useComponentSize(
   ref: React.RefObject<HTMLElement | SVGGraphicsElement>,
 ): ComponentSize {
-  const refs = useMemo(() => [ref], [ref]);
+  const refs = useMemo(
+    () => [ref],
+    // Если реф начал указывать на другой элемент, нужно обновить подписки
+    [ref.current],
+  );
   const [componentSize] = useResizeObserved(refs, getElementSize);
   return componentSize;
 }

@@ -3,40 +3,42 @@ import './TabsLine.css';
 import React from 'react';
 
 import { cn } from '../../../utils/bem';
-import { getTabsWidth } from '../helpers';
-import { TabDimensions, TabsPropLinePosition } from '../Tabs';
+import { getTabsWidth, TabDimensions } from '../helpers';
+import { TabsPropLinePosition } from '../Tabs';
 
 const cnTabsLine = cn('TabsLine');
 
-type Props =
-  | {
-      type: 'border';
-      linePosition: TabsPropLinePosition;
-    }
-  | {
-      type: 'running';
-      linePosition: TabsPropLinePosition;
-      tabsDimensions: TabDimensions[];
-      activeTabIdx: number;
-    };
+export const TabsBorderLine: React.FC<{
+  linePosition: TabsPropLinePosition;
+}> = ({ linePosition }) => {
+  return <TabsLine type="border" linePosition={linePosition} size="100%" />;
+};
 
-export const TabsLine: React.FC<Props> = ({ linePosition, ...restProps }) => {
-  if (restProps.type === 'border') {
-    return <div className={cnTabsLine({ type: 'border', position: linePosition })} />;
-  }
-
-  const { tabsDimensions, activeTabIdx } = restProps;
-  const size = tabsDimensions[activeTabIdx]?.size ?? 0;
+export const TabsRunningLine: React.FC<{
+  linePosition: TabsPropLinePosition;
+  activeTabIdx: number;
+  tabsDimensions: TabDimensions[];
+}> = ({ linePosition, activeTabIdx, tabsDimensions }) => {
   const previousTabsDimensions = tabsDimensions.slice(0, activeTabIdx);
+  const size = tabsDimensions[activeTabIdx]?.size ?? 0;
   const offset = getTabsWidth(previousTabsDimensions);
 
-  return size > 0 ? (
-    <div
-      className={cnTabsLine({ type: 'running', position: linePosition })}
-      style={{
-        ['--tabSize' as string]: `${size}px`,
-        ['--tabOffset' as string]: `${offset}px`,
-      }}
-    />
-  ) : null;
+  return <TabsLine type="running" linePosition={linePosition} size={size} offset={offset} />;
 };
+
+const TabsLine: React.FC<{
+  type: 'border' | 'running';
+  linePosition: TabsPropLinePosition;
+  size: number | string;
+  offset?: number | string;
+}> = ({ type, linePosition, size, offset = '0px' }) => (
+  <div
+    className={cnTabsLine({ type, position: linePosition })}
+    style={{
+      ['--line-length' as string]: formatCSSValue(size),
+      ['--line-offset' as string]: formatCSSValue(offset),
+    }}
+  />
+);
+
+const formatCSSValue = (n: number | string) => (typeof n === 'number' ? `${n}px` : n);
