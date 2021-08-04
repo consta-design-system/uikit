@@ -9,9 +9,11 @@ import { IconRing } from '../../../icons/IconRing/IconRing';
 import { createMetadata } from '../../../utils/storybook';
 import {
   Tabs,
+  tabsDefaultFitMode,
   tabsDefaultLinePosition,
   tabsDefaultSize,
   tabsDefaultView,
+  tabsFitModes,
   tabsLinePositions,
   tabsSizes,
   tabsViews,
@@ -22,7 +24,7 @@ import mdx from './Tabs.docs.mdx';
 const defaultKnobs = () => ({
   size: select('size', tabsSizes, tabsDefaultSize),
   view: select('view', tabsViews, tabsDefaultView),
-  position: select('linePosition', tabsLinePositions, tabsDefaultLinePosition),
+  linePosition: select('linePosition', tabsLinePositions, tabsDefaultLinePosition),
   withIcon: boolean('withIcon', false),
   onlyIcon: boolean('onlyIcon', false),
 });
@@ -52,7 +54,7 @@ const items = [
 ];
 
 export function Playground() {
-  const { size, view, position, withIcon, onlyIcon } = defaultKnobs();
+  const { size, view, linePosition, withIcon, onlyIcon } = defaultKnobs();
 
   const [value, setValue] = useState<Item | null>(items[0]);
 
@@ -65,7 +67,14 @@ export function Playground() {
       onChange={({ value }) => setValue(value)}
       size={size}
       view={view}
-      linePosition={position}
+      {...(linePosition === 'bottom' || linePosition === 'top'
+        ? {
+            linePosition,
+            fitMode: select('fitMode', tabsFitModes, tabsDefaultFitMode),
+          }
+        : {
+            linePosition,
+          })}
       onlyIcon={onlyIcon}
     />
   );

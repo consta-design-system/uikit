@@ -3,17 +3,22 @@ import './Tabs.css';
 import React, { createRef, useMemo } from 'react';
 
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
-import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { useResizeObserved } from '../../hooks/useResizeObserved/useResizeObserved';
 import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
-import { TabsLine } from './Line/TabsLine';
-import { TabsMoreItems } from './MoreItems/TabsMoreItems';
+import { TabsFitModeDropdownWrapper } from './FitModeDropdownWrapper/TabsFitModeDropdownWrapper';
+import { TabsFitModeScrollWrapper } from './FitModeScrollWrapper/TabsFitModeScrollWrapper';
+import { TabsBorderLine, TabsRunningLine } from './Line/TabsLine';
 import { cnTabsTab, TabsTab } from './Tab/TabsTab';
-import { getTabsDirection } from './helpers';
-import { useFittingItems } from './useFittingItems';
+import {
+  getTabsDirection,
+  RenderItemsListProp,
+  TabDimensions,
+  TabsDirection,
+  TabsFitModeWrapperProps,
+} from './helpers';
 
 export const tabsSizes = ['m', 's'] as const;
 export type TabsPropSize = typeof tabsSizes[number];
@@ -26,6 +31,10 @@ export const tabsDefaultView: TabsPropView = tabsViews[0];
 export const tabsLinePositions = ['bottom', 'top', 'left', 'right'] as const;
 export type TabsPropLinePosition = typeof tabsLinePositions[number];
 export const tabsDefaultLinePosition: TabsPropLinePosition = 'bottom';
+
+export const tabsFitModes = ['scroll', 'dropdown'] as const;
+export type TabsPropFitMode = typeof tabsFitModes[number];
+export const tabsDefaultFitMode: TabsPropFitMode = 'dropdown';
 
 export type TabsPropGetLabel<ITEM> = (item: ITEM) => string | number;
 export type TabsPropGetIcon<ITEM> = (item: ITEM) => React.FC<IconProps> | undefined;
@@ -60,13 +69,21 @@ export type TabsProps<
     iconSize?: IconPropSize;
     items: ITEM[];
     value?: ITEM | null;
-    linePosition?: TabsPropLinePosition;
     getIcon?: TabsPropGetIcon<ITEM>;
     getLabel: TabsPropGetLabel<ITEM>;
     children?: never;
     onChange: TabsPropOnChange<ITEM, ITEM_ELEMENT>;
     renderItem?: RenderItem<ITEM, ITEM_ELEMENT>;
-  },
+  } & (
+    | {
+        linePosition?: Extract<TabsPropLinePosition, 'bottom' | 'top'>;
+        fitMode?: 'dropdown' | 'scroll';
+      }
+    | {
+        linePosition: Extract<TabsPropLinePosition, 'left' | 'right'>;
+        fitMode?: never;
+      }
+  ),
   HTMLDivElement
 >;
 
@@ -89,11 +106,6 @@ function renderItemDefault<ITEM, ITEMELEMENT extends HTMLElement>(
   );
 }
 
-export type TabDimensions = {
-  size: number;
-  gap: number;
-};
-
 export const Tabs: Tabs = React.forwardRef((props, ref) => {
   const {
     size = tabsDefaultSize,
@@ -102,6 +114,7 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
     view = tabsDefaultView,
     value,
     linePosition = tabsDefaultLinePosition,
+    fitMode = tabsDefaultFitMode,
     onlyIcon,
     getIcon,
     getLabel,
@@ -120,7 +133,7 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
 
   const tabRefs = useMemo(
     () => new Array(items.length).fill(null).map(() => createRef<HTMLDivElement>()),
-    [items],
+    [items, fitMode],
   );
   const tabsDirection = getTabsDirection(linePosition);
   const isVertical = tabsDirection === 'vertical';
@@ -131,21 +144,8 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
       gap: el ? parseInt(getComputedStyle(el)[isVertical ? 'marginBottom' : 'marginRight'], 10) : 0,
     }),
   );
-  const maxTabHeight: number = React.useMemo(() => {
-    return Math.max(...tabRefs.map((tabRef) => tabRef.current?.offsetHeight ?? 0));
-  }, [tabsDimensions]);
 
   const activeTabIdx = (value && items.indexOf(value)) ?? -1;
-
-  const rootRef = React.useRef(null);
-  const moreItemsRef = React.useRef(null);
-  const { isItemHidden } = useFittingItems({
-    isVertical,
-    tabsDimensions,
-    containerRef: rootRef,
-    moreItemsRef,
-  });
-  const hiddenItems = items.filter((_item, idx) => isItemHidden(idx));
 
   const renderItem = (item: typeof items[number], onClick?: () => void) =>
     renderItemProp({
@@ -162,37 +162,19 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
       iconSize,
     });
 
-  return (
-    <div
-      className={cnTabs({ view, direction: tabsDirection }, [className])}
-      ref={useForkRef([ref, rootRef])}
-      {...otherProps}
-    >
+  const renderItemsList: RenderItemsListProp = ({ withRunningLine = true, getTabClassName }) => (
+    <div className={cnTabs('List', { direction: tabsDirection })}>
       {items.map((item, idx) => (
         <div
           ref={tabRefs[idx]}
           key={getLabel(item)}
-          className={cnTabs('Tab', { hidden: isItemHidden(idx), direction: tabsDirection })}
+          className={cnTabs('Tab', { direction: tabsDirection }, [getTabClassName?.(idx)])}
         >
           {renderItem(item)}
         </div>
       ))}
-      <div
-        className={cnTabs('Tab', { hidden: hiddenItems.length === 0, direction: tabsDirection })}
-      >
-        <TabsMoreItems
-          items={hiddenItems}
-          renderItem={renderItem}
-          getLabel={getLabel}
-          getChecked={getChecked}
-          height={maxTabHeight}
-          ref={moreItemsRef}
-        />
-      </div>
-      {view === 'bordered' && <TabsLine type="border" linePosition={linePosition} />}
-      {!isItemHidden(activeTabIdx) && (
-        <TabsLine
-          type="running"
+      {withRunningLine && (
+        <TabsRunningLine
           linePosition={linePosition}
           tabsDimensions={tabsDimensions}
           activeTabIdx={activeTabIdx}
@@ -200,6 +182,39 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
       )}
     </div>
   );
+
+  const Wrapper = getTabsWrapper(tabsDirection, fitMode);
+
+  return (
+    <div
+      className={cnTabs({ size, view, direction: tabsDirection }, [className])}
+      ref={ref}
+      {...otherProps}
+    >
+      <Wrapper
+        tabRefs={tabRefs}
+        tabsDimensions={tabsDimensions}
+        renderItem={renderItem}
+        renderItemsList={renderItemsList}
+        getLabel={getLabel}
+        getChecked={getChecked}
+        items={items}
+      />
+      {view === 'bordered' && <TabsBorderLine linePosition={linePosition} />}
+    </div>
+  );
 });
+
+const getTabsWrapper = (tabsDirection: TabsDirection, fitMode: TabsPropFitMode) => {
+  if (tabsDirection === 'vertical') {
+    return OnlyListWrapper;
+  }
+
+  return fitMode === 'scroll' ? TabsFitModeScrollWrapper : TabsFitModeDropdownWrapper;
+};
+
+const OnlyListWrapper = <ITEM,>({
+  renderItemsList,
+}: TabsFitModeWrapperProps<ITEM>): React.ReactElement | null => <>{renderItemsList({})}</>;
 
 export { TabsTab, cnTabsTab };

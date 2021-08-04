@@ -1,31 +1,25 @@
 .Tabs {
   position: relative;
-  display: flex;
-  width: 100%;
 
-  &_direction_horizontal {
-    align-items: center;
-  }
+  &-List {
+    position: relative;
+    display: flex;
 
-  &_direction_vertical {
-    flex-direction: column;
+    &_direction_horizontal {
+      align-items: center;
+      white-space: nowrap;
+    }
+
+    &_direction_vertical {
+      flex-direction: column;
+    }
   }
 
   &-Tab {
     flex-shrink: 0;
 
-    &_hidden {
-      position: absolute;
-
-      /* Чтобы из-за скрытых элементов не появлялся скролл экрана */
-      left: -100vw;
-      visibility: hidden;
-    }
-
     &_direction_horizontal {
-      &:not(:last-child) {
-        margin-right: var(--space-m);
-      }
+      margin-right: var(--space-m);
     }
 
     &_direction_vertical {
