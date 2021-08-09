@@ -8,6 +8,7 @@ type ChoiceGroupIndexedParams = {
   value: CollapseGroupPropOpened<boolean>;
   multiple: boolean;
   callBack: CollapseGroupPropOnOpen<boolean>;
+  isNullableValue: true;
 };
 
 export const useChoice = <ITEM, IS_ACCORDION extends boolean>(
@@ -26,6 +27,7 @@ export const useChoice = <ITEM, IS_ACCORDION extends boolean>(
     value: openedKeys,
     multiple: !props.isAccordion,
     callBack,
+    isNullableValue: true,
   };
 
   useEffect(() => {
