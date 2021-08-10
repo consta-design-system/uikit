@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
+import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Combobox } from '../../../Combobox';
 
 type Item = {
@@ -26,14 +27,28 @@ const items: Item[] = [
 export function ComboboxExampleSize() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <StoryBookExample className={cnDocsDecorator('Section')}>
       <Combobox
-        placeholder="Выберите значение"
+        placeholder="Размер s"
         size="s"
         items={items}
         value={value}
         onChange={({ value }) => setValue(value)}
       />
-    </div>
+      <Combobox
+        placeholder="Размер m"
+        size="m"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <Combobox
+        placeholder="Размер l"
+        size="l"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+    </StoryBookExample>
   );
 }
