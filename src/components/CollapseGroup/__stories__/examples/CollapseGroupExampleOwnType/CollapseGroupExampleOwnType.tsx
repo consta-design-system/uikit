@@ -2,6 +2,7 @@ import React from 'react';
 
 import { OwnItem, ownItems } from '../../../__mocks__/mock.data';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
+import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Badge } from '../../../../Badge/Badge';
 import { CollapseGroup } from '../../../CollapseGroup';
 
@@ -13,13 +14,13 @@ const getItemRightSide = (item: OwnItem) => (
 
 export const CollapseGroupExampleOwnType = () => {
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <StoryBookExample className={cnDocsDecorator('Section')}>
       <CollapseGroup
         items={ownItems}
         getItemLabel={getItemLabel}
         getItemContent={getItemContent}
         getItemRightSide={getItemRightSide}
       />
-    </div>
+    </StoryBookExample>
   );
 };
