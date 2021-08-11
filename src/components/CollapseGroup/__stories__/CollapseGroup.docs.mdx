@@ -1,16 +1,82 @@
+import {
+  CollapseGroupExampleSimple,
+  CollapseGroupExampleSimple2,
+} from './examples/CollapseGroupExampleSimple/CollapseGroupExampleSimple';
 import { CollapseGroupExampleIsAccordion } from './examples/CollapseGroupExampleIsAccordion/CollapseGroupExampleIsAccordion';
 import { CollapseGroupExampleOwnType } from './examples/CollapseGroupExampleOwnType/CollapseGroupExampleOwnType';
 import { CollapseGroupExampleControl } from './examples/CollapseGroupExampleControl/CollapseGroupExampleControl';
 
 # CollapseGroup
 
-## Элементы
+Группа коллапсов — несколько блоков, которые раскрываются по нажатию на заголовок. Подходит, если нужно показать много информации и помочь быстро найти нужное. Например, сделать блок с вопросами и ответами.
 
-Элементы можете передать в свойстве `items` их тип по умолчанию [DefaultItem](#свойства),
-если же ваш тип отличается, то воспользуйтесь свойствами `getItemLabel`, `getItemContent`, `getItemRightSide`
-для указания места, откуда взять данные компоненту.
+Если вам нужен только один раскрывающийся блок, используйте [Collapse](/?path=/docs/components-collapse--playground).
 
-### Пример с собственным типом
+<CollapseGroupExampleSimple />
+
+- [Содержимое](#заголовок)
+  - [Блоки с информацией](#блоки-с-информацией)
+  - [Свойства блока](#свойства-блока)
+  - [Кастомный тип данных](#кастомный-тип-данных)
+- [Поведение](#поведение)
+  - [Обычный режим](#обычный-режим)
+  - [Режим аккордеона](#режим-аккордеона)
+  - [Кастомное поведение](#кастомное-поведение)
+- [Список свойств](#свойства)
+
+## Содержимое
+
+### Блоки с информацией
+
+Содержимое раскрывающихся блоков можно описать в массиве `items`. Тип свойства `items` по умолчанию [DefaultItem](#свойства). Что внутри:
+
+- `label` — заголовок раскрывающегося блока, лучше писать с заглавной буквы, точка не нужна,
+- `content` — содержимое блока, появляется при нажатии на заголовок, здесь может быть что угодно,
+- `rightSide` — дополнительный элемент справа от заголовка.
+
+Вы можете создать [кастомный тип данных](#кастомный-тип-данных) для содержимого коллапса и использовать его.
+
+<CollapseGroupExampleSimple2 />
+
+```tsx
+const items: Item[] = [
+  {
+    label: 'Пункт раз',
+    content: 'Содержимое блока раз',
+    rightSide: 'Я справа',
+  },
+  {
+    label: 'Пункт два',
+    content: 'Содержимое блока два',
+    rightSide: 'Я тоже справа',
+  },
+  {
+    label: 'Пункт три',
+    content: 'Содержимое блока три',
+    rightSide: 'И я :)',
+  },
+];
+
+const CollapseGroupExample = () => {
+  return <CollapseGroup items={items} />;
+};
+```
+
+### Свойства блока
+
+Блок внутри группы коллапсов ведёт себя так же, как обычный [Collapse](/?path=/docs/components-collapse--playground). Вы можете подсветить заголовок по наведению, добавить разделитель, поменять отступы, вывести дополнительный элемент справа от заголовка, поменять иконку, её расположение и направление.
+
+[Подбробнее про Collapse](/?path=/docs/components-collapse--playground)
+
+### Кастомный тип данных
+
+Вы можете создать кастомный тип данных для содержимого коллапса (`items`) — не такой, как в [DefaultItem](#свойства).
+
+В этом случае нужно использовать геттеры `getItemLabel`, `getItemContent`, `getItemRightSide`, чтобы компонент понимал, откуда брать данные.
+
+#### Пример коллапса с кастомным типом данных
+
+<CollapseGroupExampleOwnType />
 
 ```tsx
 type OwnItem = {
@@ -21,21 +87,20 @@ type OwnItem = {
 
 const ownItems: OwnItem[] = [
   {
-    title: 'Один',
+    title: 'Во-первых',
     text:
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur esse explicabo harum illum molestias mollitia pariatur quasi quia tempora vel!',
+      'Здесь ошибка. Кажется, с этим пунктом что-то не так: например, пользователь неправильно заполнил форму или не ответил на какой-то вопрос.',
     status: 'error',
   },
   {
-    title: 'Два',
-    text:
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur esse explicabo harum illum molestias mollitia pariatur quasi quia tempora vel!',
+    title: 'Во-вторых',
+    text: 'Здесь всё в порядке. Скорее всего, здесь всё сделано и можно больше не открывать.',
     status: 'success',
   },
   {
-    title: 'Три',
+    title: 'В-третьих',
     text:
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur esse explicabo harum illum molestias mollitia pariatur quasi quia tempora vel!',
+      'Это не пройдено. Нужно открыть и посмотреть, что здесь нужно прочитать, посмотреть или заполнить.',
     status: 'system',
   },
 ];
@@ -46,25 +111,29 @@ const getItemRightSide = (item: OwnItem) => (
   <Badge size="s" status={item.status} label={item.status} />
 );
 
-const CollapseGroupExampleOwnType = () => {
+const CollapseGroupExample = () => {
   return (
-    <div className={cnDocsDecorator('Section')}>
-      <CollapseGroup
-        items={ownItems}
-        getItemLabel={getItemLabel}
-        getItemContent={getItemContent}
-        getItemRightSide={getItemRightSide}
-      />
-    </div>
+    <CollapseGroup
+      items={ownItems}
+      getItemLabel={getItemLabel}
+      getItemContent={getItemContent}
+      getItemRightSide={getItemRightSide}
+    />
   );
 };
 ```
 
-<CollapseGroupExampleOwnType />
+## Поведение
 
-## isAccordion
+### Обычный режим
 
-При открытии следующего закрывается предыдущий
+По умолчанию компонент работает так: при клике на заголовок блок раскрывается, если блок уже открыт — наоборот, закрывается.
+
+### Режим аккордеона
+
+В этом режиме коллапс работает как аккордеон: если вы открываете какой-то блок, блок, который был открыт до этого, закрывается. Открытым может быть только один блок.
+
+Чтобы включить этот режим, добавьте `isAccordion`.
 
 <CollapseGroupExampleIsAccordion />
 
@@ -83,15 +152,15 @@ const CollapseGroupExampleIsAccordion = () => {
 };
 ```
 
-## Подконторольный компонент
+### Кастомное поведение
 
-По умолчанию компонент работает с собственным состоянием и не трбует указания `onOpen` и `opened`.
+Если вы хотите, чтобы компонент работал по-другому, используйте обработчик `onOpen` — он срабатывает при клике на коллапс.
 
-`onOpen` - срабатывает при клике на коллапс
+Индексы открытых блоков содержит свойство `opened`. В обычном режиме это массив `number[]`, в [режиме аккордеона](#режим-аккордеона) — `number`.
 
-`opened` - индексы открытых элементов `number[]`, в случае если `isAccordion = true` - индекс `number`
+#### Пример коллапса с кастомным поведением
 
-Если есть необходимость заставить компонент слушаться вашей бизнесс логики воспользуйтесь этими свойствами.
+Вот коллапс, у которого все блоки сразу открыты.
 
 <CollapseGroupExampleControl />
 
@@ -142,23 +211,23 @@ const defaultGetItemRightSide: CollapseGroupPropGetItemContent<DefaultItem> = (i
   item.rightSide;
 ```
 
-| Свойство              | Тип                                                                           | По умолчанию              | Описание                                                                                                                 |
-| --------------------- | ----------------------------------------------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `isAccordion`         | `boolean`                                                                     | -                         | Добавляет поведение классического аккордеона                                                                             |
-| `items`               | `Item[]`                                                                      | -                         | Элементы                                                                                                                 |
-| `getItemLabel`        | `GetItemLabel<ITEM>`                                                          | `defaultGetItemLabel`     | Функция для формирования текста для лейбла                                                                               |
-| `getItemContent`      | `GetItemContent<ITEM>`                                                        | `defaultGetItemContent`   | Функция для получения контента коллапса                                                                                  |
-| `getItemRightSide`    | `GetItemRightSide<ITEM>`                                                      | `defaultGetItemRightSide` | Функция для получения дополнительный контента, который помещается рядом с заголовком коллапса                            |
-| `size?`               | `'l', 'm', 's', 'xs', '2xs'`                                                  | `'m'`                     | Размер см. [Collapse](?path=/docs/components-collapse--playground)                                                       |
-| `view?`               | `'primary', 'secondary'`                                                      | `'primary'`               | Внешний вид см. [Collapse](?path=/docs/components-collapse--playground)                                                  |
-| `hoverEffect?`        | `boolean`                                                                     | -                         | Добавляет эффект при ховере коллапса см. [Collapse](?path=/docs/components-collapse--playground)                         |
-| `divider?`            | `boolean`                                                                     | -                         | Добавляет разделитель между заголовком коллапса и содержимым см. [Collapse](?path=/docs/components-collapse--playground) |
-| `horizontalSpace?`    | `'6xl', '5xl', '4xl', '3xl', '2xl', 'xl', 'l', 'm', 's', 'xs', '2xs', '3xs'`  | -                         | Горизонтальные отступы в заголовке коллапса см. [Collapse](?path=/docs/components-collapse--playground)                  |
-| `icon?`               | `React.FC<IconProps>`                                                         | `React.FC<IconProps>`     | Иконка в закрытом состоянии см. [Collapse](?path=/docs/components-collapse--playground)                                  |
-| `closeIcon?`          | `React.FC<IconProps>`                                                         | -                         | Иконка в открытом состоянии см. [Collapse](?path=/docs/components-collapse--playground)                                  |
-| `iconPosition?`       | `'left', 'right'`                                                             | `'left'`                  | Расположение иконки см. [Collapse](?path=/docs/components-collapse--playground)                                          |
-| `directionIcon?`      | `'up', 'right', 'down', 'left', 'upRight', 'downRight', 'upLeft', 'downLeft'` | `'up'`                    | Направление иконки в закрытом состоянии см. [Collapse](?path=/docs/components-collapse--playground)                      |
-| `closeDirectionIcon?` | `'up', 'right', 'down', 'left', 'upRight', 'downRight', 'upLeft', 'downLeft'` | `'down'`                  | Направление иконки в открытом состоянии см. [Collapse](?path=/docs/components-collapse--playground)                      |
-| `onOpen?`             | `OnOpen<IS_ACCORDION>`                                                        | -                         | Функция обратного вызова которая сработает при клике на коллапс                                                          |
-| `opened?`             | `Opened<IS_ACCORDION>`                                                        | -                         | Индексы открытых коллапсов                                                                                               |
-| `className?`          | `string`                                                                      | -                         | Дополнительный CSS-класс                                                                                                 |
+| Свойство                                    | Тип                                                                           | По умолчанию              | Описание                                                                                                         |
+| ------------------------------------------- | ----------------------------------------------------------------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| [`isAccordion`](#режим-аккордеона)          | `boolean`                                                                     | -                         | Включает режим аккордеона аккордеона                                                                             |
+| [`items`](#содержимое)                      | `Item[]`                                                                      | -                         | Элементы                                                                                                         |
+| [`getItemLabel`](#кастомный-тип-данных)     | `GetItemLabel<ITEM>`                                                          | `defaultGetItemLabel`     | Функция для формирования текста для лейбла                                                                       |
+| [`getItemContent`](#кастомный-тип-данных)   | `GetItemContent<ITEM>`                                                        | `defaultGetItemContent`   | Функция для получения контента коллапса                                                                          |
+| [`getItemRightSide`](#кастомный-тип-данных) | `GetItemRightSide<ITEM>`                                                      | `defaultGetItemRightSide` | Функция для получения дополнительный контента, который помещается рядом с заголовком коллапса                    |
+| `size?`                                     | `'l', 'm', 's', 'xs', '2xs'`                                                  | `'m'`                     | Размер, см. [Collapse](?path=/docs/components-collapse--playground)                                              |
+| `view?`                                     | `'primary', 'secondary'`                                                      | `'primary'`               | Внешний вид, см. [Collapse](?path=/docs/components-collapse--playground)                                         |
+| `hoverEffect?`                              | `boolean`                                                                     | -                         | Подсвечивает заголовок при наведении, см. [Collapse](?path=/docs/components-collapse--playground)                |
+| `divider?`                                  | `boolean`                                                                     | -                         | Добавляет разделитель между заголовком и содержимым, см. [Collapse](?path=/docs/components-collapse--playground) |
+| `horizontalSpace?`                          | `'6xl', '5xl', '4xl', '3xl', '2xl', 'xl', 'l', 'm', 's', 'xs', '2xs', '3xs'`  | -                         | Устанавливает боковые отступы, см. [Collapse](?path=/docs/components-collapse--playground)                       |
+| `icon?`                                     | `React.FC<IconProps>`                                                         | `React.FC<IconProps>`     | Иконка в закрытом состоянии, см. [Collapse](?path=/docs/components-collapse--playground)                         |
+| `closeIcon?`                                | `React.FC<IconProps>`                                                         | -                         | Иконка в открытом состоянии, см. [Collapse](?path=/docs/components-collapse--playground)                         |
+| `iconPosition?`                             | `'left', 'right'`                                                             | `'left'`                  | Расположение иконки, см. [Collapse](?path=/docs/components-collapse--playground)                                 |
+| `directionIcon?`                            | `'up', 'right', 'down', 'left', 'upRight', 'downRight', 'upLeft', 'downLeft'` | `'up'`                    | Направление иконки в закрытом состоянии см. [Collapse](?path=/docs/components-collapse--playground)              |
+| `closeDirectionIcon?`                       | `'up', 'right', 'down', 'left', 'upRight', 'downRight', 'upLeft', 'downLeft'` | `'down'`                  | Направление иконки в открытом состоянии, см. [Collapse](?path=/docs/components-collapse--playground)             |
+| `onOpen?`                                   | `OnOpen<IS_ACCORDION>`                                                        | -                         | Функция обратного вызова, которая сработает при клике на коллапс                                                 |
+| `opened?`                                   | `Opened<IS_ACCORDION>`                                                        | -                         | Индексы открытых коллапсов                                                                                       |
+| `className?`                                | `string`                                                                      | -                         | Дополнительный CSS-класс                                                                                         |

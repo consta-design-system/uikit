@@ -24,7 +24,7 @@ export const DragNDropFieldContent: DragNDropFieldChildrenRenderProp = ({
   return (
     <>
       <Text view="secondary" size="s" lineHeight="s" align="center">
-        Загрузите {fileText} простым переносом или&nbsp;по&nbsp;кнопке&nbsp;ниже
+        Перетащите {fileText} сюда или&nbsp;загрузите по&nbsp;кнопке
         {requirements && (
           <>
             <br />
@@ -34,7 +34,7 @@ export const DragNDropFieldContent: DragNDropFieldChildrenRenderProp = ({
       </Text>
       <Button
         className={cnDragNDropFieldContent('Button')}
-        label={`Загрузить ${fileText}`}
+        label={`Выбрать ${fileText}`}
         iconLeft={IconAttach}
         view="ghost"
         size="s"
