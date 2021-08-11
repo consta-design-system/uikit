@@ -5,6 +5,17 @@ import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExamp
 import { Text } from '../../../../Text/Text';
 import { DragNDropField } from '../../../DragNDropField';
 
+import imageFile from './images/too_many_files.png';
+
+export default {
+  title: 'Ошибка: слишком много файлов',
+};
+
+const image = {
+  src: imageFile,
+  alt: 'Ошибка: слишком много файлов',
+};
+
 export const DragNDropFieldExampleSingle = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
     <div>
@@ -21,6 +32,14 @@ export const DragNDropFieldExampleMultiple = () => (
       <DragNDropField multiple onDropFiles={(files) => console.log(files)}>
         <Text>Сюда можно перетащить много файлов за раз</Text>
       </DragNDropField>
+    </div>
+  </StoryBookExample>
+);
+
+export const DragNDropFieldExampleMultipleError = () => (
+  <StoryBookExample className={cnDocsDecorator('Section')}>
+    <div>
+      <img src={image.src} alt={image.alt} style={{ maxWidth: 700 }} />
     </div>
   </StoryBookExample>
 );

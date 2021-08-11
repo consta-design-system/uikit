@@ -1,16 +1,21 @@
 import {
   DragNDropFieldExampleAcceptImage,
   DragNDropFieldExampleAcceptDoc,
+  DragNDropFieldExampleAcceptError,
 } from './examples/DragNDropFieldExampleAccept/DragNDropFieldExampleAccept';
 import {
   DragNDropFieldExampleChildren,
   DragNDropFieldExampleRenderProps,
   DragNDropFieldExampleEmpty,
 } from './examples/DragNDropFieldExampleChildren/DragNDropFieldExampleChildren';
-import { DragNDropFieldExampleMaxSize } from './examples/DragNDropFieldExampleMaxSize/DragNDropFieldExampleMaxSize';
+import {
+  DragNDropFieldExampleMaxSize,
+  DragNDropFieldExampleMaxSizeError,
+} from './examples/DragNDropFieldExampleMaxSize/DragNDropFieldExampleMaxSize';
 import {
   DragNDropFieldExampleMultiple,
   DragNDropFieldExampleSingle,
+  DragNDropFieldExampleMultipleError,
 } from './examples/DragNDropFieldExampleMultiple/DragNDropFieldExampleMultiple';
 import { DragNDropFieldExampleOnDropFiles } from './examples/DragNDropFieldExampleOnDropFiles/DragNDropFieldExampleOnDropFiles';
 
@@ -20,7 +25,7 @@ import { DragNDropFieldExampleOnDropFiles } from './examples/DragNDropFieldExamp
 
 Похож на [FileField](#/?path=/docs/components-filefield--playground), но возможностей больше:
 
-- это самостоятельный компонент (FileField обязательно нужно использовать с другим компонентом),
+- это самостоятельный компонент (`FileField` обязательно нужно использовать с другим компонентом),
 - в него можно перетаскивать файлы,
 - можно ограничить типы и размер файлов, есть обработка ошибок.
 
@@ -69,6 +74,14 @@ import { DragNDropFieldExampleOnDropFiles } from './examples/DragNDropFieldExamp
 
 По умолчанию можно загрузить один файл. Чтобы загрузить несколько, добавьте `multiple`.
 
+<DragNDropFieldExampleMultiple />
+
+```tsx
+<DragNDropField multiple>
+  <Text>Сюда можно перетащить много файлов за раз</Text>
+</DragNDropField>
+```
+
 <DragNDropFieldExampleSingle />
 
 ```tsx
@@ -79,13 +92,7 @@ import { DragNDropFieldExampleOnDropFiles } from './examples/DragNDropFieldExamp
 
 Если пользователь попробует перетащить несколько файлов, компонент покажет ошибку.
 
-<DragNDropFieldExampleMultiple />
-
-```tsx
-<DragNDropField multiple>
-  <Text>Сюда можно перетащить много файлов за раз</Text>
-</DragNDropField>
-```
+<DragNDropFieldExampleMultipleError />
 
 ## Типы файлов
 
@@ -99,7 +106,7 @@ import { DragNDropFieldExampleOnDropFiles } from './examples/DragNDropFieldExamp
 - `audio/*` — только аудиофайлы,
 - `video/*` — только видеофайлы.
 
-[Подробнее об обозначениях файлов](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers)
+[Подробнее о типах файлов](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers)
 
 <DragNDropFieldExampleAcceptImage />
 
@@ -125,6 +132,8 @@ import { DragNDropFieldExampleOnDropFiles } from './examples/DragNDropFieldExamp
 
 Если пользователь попробует загрузить файл другого типа, компонент покажет ошибку.
 
+<DragNDropFieldExampleAcceptError />
+
 ## Размер файла
 
 Вы можете ограничить размер файла, за это отвечает `maxSize`. Укажите размер в байтах.
@@ -138,6 +147,8 @@ import { DragNDropFieldExampleOnDropFiles } from './examples/DragNDropFieldExamp
 ```
 
 Если пользователь попробует загрузить файл большего размера, компонент покажет ошибку.
+
+<DragNDropFieldExampleMaxSizeError />
 
 ## Обработка загрузки файлов
 

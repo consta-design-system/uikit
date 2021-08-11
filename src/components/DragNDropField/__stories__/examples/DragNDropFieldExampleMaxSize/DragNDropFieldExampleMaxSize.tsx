@@ -5,6 +5,17 @@ import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExamp
 import { Text } from '../../../../Text/Text';
 import { DragNDropField } from '../../../DragNDropField';
 
+import imageFile from './images/too_big_file.png';
+
+export default {
+  title: 'Ошибка: файл слишком большой',
+};
+
+const image = {
+  src: imageFile,
+  alt: 'Ошибка: файл слишком большой',
+};
+
 export const DragNDropFieldExampleMaxSize = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
     <div>
@@ -12,6 +23,14 @@ export const DragNDropFieldExampleMaxSize = () => (
         <Text>Сюда можно перетаскивать файлы</Text>
         <Text>размером 1 Мб или меньше</Text>
       </DragNDropField>
+    </div>
+  </StoryBookExample>
+);
+
+export const DragNDropFieldExampleMaxSizeError = () => (
+  <StoryBookExample className={cnDocsDecorator('Section')}>
+    <div>
+      <img src={image.src} alt={image.alt} style={{ maxWidth: 700 }} />
     </div>
   </StoryBookExample>
 );

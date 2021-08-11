@@ -5,6 +5,17 @@ import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExamp
 import { Text } from '../../../../Text/Text';
 import { DragNDropField } from '../../../DragNDropField';
 
+import imageFile from './images/wrong_file_format.png';
+
+export default {
+  title: 'Ошибка: формат файла не подходит',
+};
+
+const image = {
+  src: imageFile,
+  alt: 'Ошибка: формат файла не подходит',
+};
+
 export const DragNDropFieldExampleAcceptDoc = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
     <div>
@@ -28,6 +39,14 @@ export const DragNDropFieldExampleAcceptImage = () => (
           image/*
         </Text>
       </DragNDropField>
+    </div>
+  </StoryBookExample>
+);
+
+export const DragNDropFieldExampleAcceptError = () => (
+  <StoryBookExample className={cnDocsDecorator('Section')}>
+    <div>
+      <img src={image.src} alt={image.alt} style={{ maxWidth: 700 }} />
     </div>
   </StoryBookExample>
 );
