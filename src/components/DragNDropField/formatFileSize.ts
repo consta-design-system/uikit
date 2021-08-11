@@ -1,7 +1,7 @@
 const UNITS = [
-  { value: 1024 * 1024 * 1024, name: 'Гбайт' },
-  { value: 1024 * 1024, name: 'Мбайт' },
-  { value: 1024, name: 'Кбайт' },
+  { value: 1024 * 1024 * 1024, name: 'Гб' },
+  { value: 1024 * 1024, name: 'Мб' },
+  { value: 1024, name: 'Кб' },
   { value: 1, name: 'байт' },
 ];
 
