@@ -1,28 +1,66 @@
+import { TabsExample } from './examples/TabsExample/TabsExample';
 import { TabsExampleIcon } from './examples/TabsExampleIcon/TabsExampleIcon';
 import { TabsExampleSize } from './examples/TabsExampleSize/TabsExampleSize';
 import { TabsExampleView } from './examples/TabsExampleView/TabsExampleView';
-import { TabsExampleRenderItem } from './examples/TabsExampleRenderItem/TabsExampleRenderItem';
+import {
+  TabsExampleRenderItem,
+  TabsExampleRenderItemBadge,
+} from './examples/TabsExampleRenderItem/TabsExampleRenderItem';
 
 # Tabs
 
 Табы переключают вкладки на странице.
 
-- [Текст](#текст-для-таба)
-- [Иконки](#иконки)
+<TabsExample />
+
+- [Табы](#табы)
+  - [Текст](#текст-для-таба)
+  - [Иконки](#иконки)
 - [Размер](#размер-табов)
 - [Внешний вид](#внешний-вид)
+- [Кастомизация](#кастомизация)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
 
-## Текст для таба
+## Табы
+
+Создайте массив с информацией о табах и укажите его имя в свойстве `items`.
+Для каждого таба нужно добавить текст (он же — уникальный ключ). Можно добавить иконку, но не обязательно.
+
+### Текст для таба
+
+Текст для таба описывается в `items` и формируется с помощью функции `getLabel`.
 
 Хорошо, если текст будет коротким и лаконичным, а табы — примерно одинаковой длины.
 
-Текст для таба указывается в `Items` и формируется с помощью функции `getLabel`.
+<TabsExample />
 
-## Иконки
+```tsx
+mport React, { useState } from 'react';
+import { Tabs } from '@consta/uikit/Tabs';
 
-Чтобы показать иконку у таба, используйте `getItemIcon`.
+type Item = string;
+
+const items: Item[] = ['Один', 'Два', 'Три'];
+
+export const TabsExample = () => {
+  const [value, setValue] = useState<Item | null>(items[0]);
+  return (
+    <>
+      <Tabs
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        items={items}
+        getLabel={(item) => item}
+      />
+    </>
+  );
+};
+```
+
+### Иконки
+
+Чтобы добавить иконки, используйте функцию `getItemIcon`. В неё нужно передать название элемента массива c иконкой.
 
 Добавьте `onlyIcon`, чтобы убрать текст и оставить только иконку (текст будет показываться по наведению).
 
@@ -158,9 +196,13 @@ export const TabsExampleView = () => {
 };
 ```
 
-## Кастоматизация элемента
+## Кастомизация
 
-Для кастоматизации элемента, воспользуйтесь свойством `renderItem`.
+Чтобы сделать кастомные табы, используйте свойство `renderItem`.
+
+#### Пример кастомных табов с иконкой
+
+<TabsExampleRenderItem />
 
 ```tsx
 import React, { useState } from 'react';
@@ -168,7 +210,7 @@ import { Tabs, cnTabsTab } from '@consta/ui-kit/Tabs';
 
 type Item = string;
 
-const items: Item[] = ['один', 'два', 'три'];
+const items: Item[] = ['Один', 'Два', 'Три'];
 
 export const TabsExampleRenderItem = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
@@ -198,7 +240,65 @@ export const TabsExampleRenderItem = () => {
 };
 ```
 
-<TabsExampleRenderItem />
+#### Пример кастомных табов с бейджиком
+
+<TabsExampleRenderItemBadge />
+
+```tsx
+import React, { useState } from 'react';
+
+import { Badge, BadgePropStatus } from '@consta/uikit//Badge';
+import { cnTabsTab, Tabs } from '@consta/uikit/Tabs';
+
+type Item = {
+  text: string;
+  badgeStatus: BadgePropStatus;
+  badgeCount: number;
+};
+
+const items: Item[] = [
+  {
+    text: 'Открыто',
+    badgeStatus: 'normal',
+    badgeCount: 10,
+  },
+  {
+    text: 'Сделано',
+    badgeStatus: 'success',
+    badgeCount: 5,
+  },
+  {
+    text: 'Закрыто',
+    badgeStatus: 'error',
+    badgeCount: 2,
+  },
+];
+
+export const TabsExampleRenderItem = () => {
+  const [value, setValue] = useState<Item | null>(items[0]);
+  return (
+    <Tabs
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      items={items}
+      getLabel={(item) => item.text}
+      size="m"
+      renderItem={({ item, className, ref, onChange, key }) => (
+        <button
+          key={key}
+          type="button"
+          onClick={onChange}
+          ref={ref}
+          className={cnTabsTab(null, [className])}
+        >
+          <div style={{ marginRight: 'var(--space-2xs)' }}>{item.text}</div>
+          <Badge status={item.badgeStatus} label={item.badgeCount.toString()} size="s" />
+        </button>
+      )}
+    />
+  );
+};
+```
 
 ## Свойства
 
@@ -223,20 +323,19 @@ className: string;
 
 ```
 
-| Свойство                                  | Тип                                              | По умолчанию | Описание                                                                                 |
-| ----------------------------------------- | ------------------------------------------------ | ------------ | ---------------------------------------------------------------------------------------- |
-| `items`                                   | `Item[]`                                         | -            | Массив элементов с данными для табов (текст, иконка)                                     |
-| `multiple`                                | `boolean`                                        | -            | Множественный выбор                                                                      |
-| `value`                                   | `Item`, `null`                                   | -            | Значение                                                                                 |
-| [`getLabel`](#текст-для-таба)             | `(item: Item) => string, number`                 | -            | Функция для формирования текста таба. Используется в качестве уникального ключа элемента |
-| [`getIcon?`](#иконки)                     | `(item: Item) => React.FC<IconProps>, undefined` | -            | Функция для формирования иконки                                                          |
-| [`onlyIcon?`](#иконки)                    | `boolean`                                        | -            | Показывать только иконку                                                                 |
-| [`size?`](#размер-табов)                  | `'s', 'm'`                                       | `'m'`        | Размер компонента                                                                        |
-| [`view?`](#внешний-вид)                   | `'bordered', 'clear'`                            | `'bordered'` | Внешний вид компонента (с рамкой или без)                                                |
-| `onChange`                                | `OnChange`                                       | -            | Действие при выборе элемента                                                             |
-| `className?`                              | `string`                                         | -            | Дополнительный CSS-класс                                                                 |
-| [`renderItem?`](#кастоматизация-элемента) | `RenderItem`                                     | -            | Функция рендера элемента                                                                 |
-| `ref?`                                    | `React.Ref<HTMLDivElement>`                      | -            | Ссылка на корневой DOM-элемент этого компонента                                          |
+| Свойство                       | Тип                                              | По умолчанию | Описание                                                                                 |
+| ------------------------------ | ------------------------------------------------ | ------------ | ---------------------------------------------------------------------------------------- |
+| [`items`](#табы)               | `Item[]`                                         | -            | Массив элементов с данными для табов (текст, иконка)                                     |
+| `value`                        | `Item`, `null`                                   | -            | Значение                                                                                 |
+| [`getLabel`](#текст-для-таба)  | `(item: Item) => string, number`                 | -            | Функция для формирования текста таба. Используется в качестве уникального ключа элемента |
+| [`getIcon?`](#иконки)          | `(item: Item) => React.FC<IconProps>, undefined` | -            | Функция для формирования иконки                                                          |
+| [`onlyIcon?`](#иконки)         | `boolean`                                        | -            | Показывать только иконку                                                                 |
+| [`size?`](#размер-табов)       | `'s', 'm'`                                       | `'m'`        | Размер компонента                                                                        |
+| [`view?`](#внешний-вид)        | `'bordered', 'clear'`                            | `'bordered'` | Внешний вид компонента (с рамкой или без)                                                |
+| `onChange`                     | `OnChange`                                       | -            | Действие при выборе элемента                                                             |
+| `className?`                   | `string`                                         | -            | Дополнительный CSS-класс                                                                 |
+| [`renderItem?`](#кастомизация) | `RenderItem`                                     | -            | Функция рендера элемента                                                                 |
+| `ref?`                         | `React.Ref<HTMLDivElement>`                      | -            | Ссылка на корневой DOM-элемент этого компонента                                          |
 
 <!-- props:end -->
 
