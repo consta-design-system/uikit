@@ -12,7 +12,6 @@ import { Calendar } from '../Calendar';
 import {
   calendarPropType,
   calendarPropTypeDefault,
-  CalendarPropValue,
   calendarPropView,
   calendarPropViewDefault,
 } from '../helpers';
@@ -43,7 +42,7 @@ export function Playground() {
   const { type, view, withEvents, minDate, maxDate, locale } = defaultKnobs();
   const currentDay = new Date();
 
-  const [value, setValue] = useState<CalendarPropValue<typeof type> | undefined>(undefined);
+  const [value, setValue] = useState<Date | undefined>(undefined);
 
   const events = withEvents
     ? [startOfWeek(currentDay, { locale: ruLocale }), currentDay, addDays(currentDay, 2)]
