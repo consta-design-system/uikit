@@ -1,4 +1,4 @@
-.CalendarСell {
+.CalendarCell {
   --bg-color: var(--color-control-bg-ghost);
   position: relative;
   display: flex;
