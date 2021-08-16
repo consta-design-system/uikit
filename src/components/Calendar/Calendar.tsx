@@ -32,7 +32,7 @@ export const Calendar: CalendarComponent = React.forwardRef((props, ref) => {
 });
 
 export * from './CalendarСell/CalendarСell';
-export * from './CalendarDay/CalendarDay';
+export * from './CalendarItem/CalendarItem';
 export * from './CalendarMonth/CalendarMonth';
 export * from './CalendarMonthLabel/CalendarMonthLabel';
 export * from './CalendarMonthToggler/CalendarMonthToggler';

@@ -5,10 +5,10 @@ import React from 'react';
 import { cn } from '../../../utils/bem';
 import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
 import { Text } from '../../Text/Text';
-import { CalendarDay, CalendarDayProps } from '../CalendarDay/CalendarDay';
+import { CalendarItem, CalendarItemProps } from '../CalendarItem/CalendarItem';
 import { CalendarCell, CalendarCellProps } from '../CalendarСell/CalendarСell';
 
-type DayOfMonth = Omit<CalendarDayProps & CalendarCellProps, 'ref'>;
+type DayOfMonth = Omit<CalendarItemProps & CalendarCellProps, 'ref'>;
 
 export type CalendarMonthProps = PropsWithJsxAttributes<
   {
@@ -35,10 +35,10 @@ export const CalendarMonth: React.FC<CalendarMonthProps> = (props) => {
       ))}
       {daysOfMonth.map(({ range, ...dayProps }, index) => (
         <CalendarCell
-          key={cnCalendarMonth('DayOfMonth', { index, number: dayProps.number })}
+          key={cnCalendarMonth('DayOfMonth', { index, number: dayProps.label })}
           range={range}
         >
-          <CalendarDay {...dayProps} />
+          <CalendarItem {...dayProps} />
         </CalendarCell>
       ))}
     </div>
