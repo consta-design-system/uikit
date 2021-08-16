@@ -1,8 +1,7 @@
 .CalendarMonth {
-  display: grid;
-  grid-template-columns: repeat(
-    7,
-    var(--calendar-cell-width, calc(var(--control-height-s) + var(--space-2xs)))
-  );
-  justify-content: start;
+  --calendar-cell-width: calc(var(--control-height-s) + var(--space-2xs));
+  --calendar-cell-height: calc(var(--control-height-s) + var(--space-2xs));
+  --calendar-grid-columns: 7;
+  --calendar-item-width: var(--control-height-s);
+  --calendar-item-height: var(--control-height-s);
 }
