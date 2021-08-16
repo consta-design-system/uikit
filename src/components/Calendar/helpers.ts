@@ -182,11 +182,11 @@ export const getDaysOfMonth = (props: {
 }): {
   disabled?: boolean;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
-  number: string;
+  label: string;
   selected?: boolean;
   range?: CalendarCellPropRange;
   event?: boolean;
-  today?: boolean;
+  current?: boolean;
 }[] => {
   const { date, locale, handleDayClick, value, events, minDate, maxDate } = props;
   const currentMonth = date.getMonth();
@@ -196,24 +196,24 @@ export const getDaysOfMonth = (props: {
 
   return range(diffDays).map((index) => {
     const date = addDays(startDate, index);
-    const number = format(date, 'd');
+    const label = format(date, 'd');
 
     if (date.getMonth() === currentMonth) {
       return {
-        number,
+        label,
         onClick: handleDayClick
           ? (e: React.MouseEvent<HTMLDivElement>) => handleDayClick({ e, value: date })
           : undefined,
         selected: isSelected({ date, value }),
         range: Array.isArray(value) && isDateInRange(date, value),
         event: events && hasEvent(date, events),
-        today: isToday(date),
+        current: isToday(date),
         disabled: !isWithInIntervalMinMaxDade(date, minDate, maxDate),
       };
     }
 
     return {
-      number,
+      label,
       disabled: true,
     };
   });
