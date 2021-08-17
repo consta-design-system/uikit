@@ -3,16 +3,28 @@ import { boolean, select } from '@storybook/addon-knobs';
 
 import { IconProps } from '../../../icons/Icon/Icon';
 import { IconCamera } from '../../../icons/IconCamera/IconCamera';
+import { IconPhone } from '../../../icons/IconPhone/IconPhone';
 import { IconPhoto } from '../../../icons/IconPhoto/IconPhoto';
 import { IconRing } from '../../../icons/IconRing/IconRing';
 import { createMetadata } from '../../../utils/storybook';
-import { Tabs } from '../Tabs';
+import {
+  Tabs,
+  tabsDefaultFitMode,
+  tabsDefaultLinePosition,
+  tabsDefaultSize,
+  tabsDefaultView,
+  tabsFitModes,
+  tabsLinePositions,
+  tabsSizes,
+  tabsViews,
+} from '../Tabs';
 
 import mdx from './Tabs.docs.mdx';
 
 const defaultKnobs = () => ({
-  size: select('size', ['s', 'm'], 'm'),
-  view: select('view', ['bordered', 'clear'], 'bordered'),
+  size: select('size', tabsSizes, tabsDefaultSize),
+  view: select('view', tabsViews, tabsDefaultView),
+  linePosition: select('linePosition', tabsLinePositions, tabsDefaultLinePosition),
   withIcon: boolean('withIcon', false),
   onlyIcon: boolean('onlyIcon', false),
 });
@@ -35,10 +47,14 @@ const items = [
     name: 'Третий вариант',
     icon: IconCamera,
   },
+  {
+    name: 'Четвёртый вариант',
+    icon: IconPhone,
+  },
 ];
 
 export function Playground() {
-  const { size, view, withIcon, onlyIcon } = defaultKnobs();
+  const { size, view, linePosition, withIcon, onlyIcon } = defaultKnobs();
 
   const [value, setValue] = useState<Item | null>(items[0]);
 
@@ -51,6 +67,14 @@ export function Playground() {
       onChange={({ value }) => setValue(value)}
       size={size}
       view={view}
+      {...(linePosition === 'bottom' || linePosition === 'top'
+        ? {
+            linePosition,
+            fitMode: select('fitMode', tabsFitModes, tabsDefaultFitMode),
+          }
+        : {
+            linePosition,
+          })}
       onlyIcon={onlyIcon}
     />
   );

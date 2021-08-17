@@ -10,14 +10,29 @@
   font-family: var(--font);
   font-size: var(--tab-font-size);
   line-height: var(--line-height-text-s);
+  text-align: left;
+  white-space: nowrap;
   cursor: pointer;
   transition: color 0.2s;
+
+  &_size {
+    &_s {
+      --only-icon-size: var(--space-l);
+      --tab-font-size: var(--size-text-s);
+    }
+
+    &_m {
+      --only-icon-size: var(--space-xl);
+      --tab-font-size: var(--size-text-m);
+    }
+  }
 
   &_checked,
   &:hover {
     color: var(--color-typo-primary);
   }
 
+  /* Увеличиваем область клика и фокуса */
   &::before {
     content: '';
     position: absolute;
@@ -33,7 +48,11 @@
     outline: none;
   }
 
-  &:not(.TabsTab_onlyIcon) .TabsTab-Icon {
+  &-Icon {
+    flex-shrink: 0;
+  }
+
+  &:not(&_onlyIcon) &-Icon {
     margin-right: calc(var(--tab-indent) * 0.5);
   }
 

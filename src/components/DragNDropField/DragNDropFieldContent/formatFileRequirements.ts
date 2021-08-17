@@ -8,16 +8,13 @@ export const formatFileRequirements = (
 ): string | undefined => {
   if (accept?.length) {
     const formattedAccept = Array.isArray(accept) ? accept.join(', ') : accept;
-    return [
-      `Поддерживаемые форматы: ${formattedAccept}`,
-      maxSize ? `до ${formatFileSize(maxSize)}` : null,
-    ]
+    return [`Подходят файлы ${formattedAccept}`, maxSize ? `до ${formatFileSize(maxSize)}` : null]
       .filter(isNotNil)
       .join(', ');
   }
 
   if (maxSize) {
-    return `Размер файла до ${formatFileSize(maxSize)}`;
+    return `Максимум ${formatFileSize(maxSize)}`;
   }
 
   return undefined;

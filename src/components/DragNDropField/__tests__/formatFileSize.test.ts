@@ -7,17 +7,17 @@ describe('formatMaxFileSize', () => {
   });
 
   it('форматирует килобайты', () => {
-    expect(formatFileSize(1024)).toBe('1 Кбайт');
-    expect(formatFileSize(1024 * 1024 - 1)).toBe('1023.9 Кбайт');
+    expect(formatFileSize(1024)).toBe('1 Кб');
+    expect(formatFileSize(1024 * 1024 - 1)).toBe('1023.9 Кб');
   });
 
   it('форматирует мегабайты', () => {
-    expect(formatFileSize(1024 * 1024)).toBe('1 Мбайт');
-    expect(formatFileSize(1024 * 1024 * 1024 - 1)).toBe('1023.9 Мбайт');
+    expect(formatFileSize(1024 * 1024)).toBe('1 Мб');
+    expect(formatFileSize(1024 * 1024 * 1024 - 1)).toBe('1023.9 Мб');
   });
 
   it('форматирует гигабайты', () => {
-    expect(formatFileSize(1024 * 1024 * 1024)).toBe('1 Гбайт');
-    expect(formatFileSize(1024 * 1024 * 1024 * 234.56)).toBe('234.5 Гбайт');
+    expect(formatFileSize(1024 * 1024 * 1024)).toBe('1 Гб');
+    expect(formatFileSize(1024 * 1024 * 1024 * 234.56)).toBe('234.5 Гб');
   });
 });
