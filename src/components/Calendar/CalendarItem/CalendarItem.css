@@ -26,7 +26,7 @@
   height: var(--calendar-item-height);
   color: var(--text-color);
   background: var(--bg-color);
-  border-radius: 50%;
+  border-radius: calc(var(--calendar-item-height) / 2);
   font-size: var(--size-text-s);
   line-height: var(--calendar-item-height);
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
