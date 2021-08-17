@@ -7,8 +7,8 @@ import ruLocale from 'date-fns/locale/ru';
 import zhCNLocale from 'date-fns/locale/zh-CN';
 
 import { getSizeByMap } from '../../../utils/getSizeByMap';
-import { createMetadata } from '../../../utils/storybook';
-import { Calendar } from '../Calendar';
+import { createMetadata, createStory } from '../../../utils/storybook';
+import { Calendar, Calendar10Years, CalendarYear } from '../Calendar';
 import {
   calendarPropType,
   calendarPropTypeDefault,
@@ -61,6 +61,54 @@ export function Playground() {
     />
   );
 }
+
+export const Calendar10YearsStory = createStory(
+  () => (
+    <Calendar10Years
+      years={[
+        { label: '2000' },
+        { label: '2001' },
+        { label: '2002', current: true },
+        { label: '2003', selected: true },
+        { label: '2004' },
+        { label: '2005', range: 'first', selected: true },
+        { label: '2006', range: true },
+        { label: '2007', range: true },
+        { label: '2008', range: true },
+        { label: '2010', range: 'last', selected: true },
+        { label: '2011' },
+        { label: '2012' },
+      ]}
+    />
+  ),
+  {
+    name: 'Calendar10Years',
+  },
+);
+
+export const CalendarYearStory = createStory(
+  () => (
+    <CalendarYear
+      years={[
+        { label: 'Янв' },
+        { label: 'Фев' },
+        { label: 'Мар', current: true },
+        { label: 'Апр', selected: true },
+        { label: 'Май' },
+        { label: 'Июн', range: 'first', selected: true },
+        { label: 'Июл', range: true },
+        { label: 'Авг', range: true },
+        { label: 'Сен', range: true },
+        { label: 'Окт', range: 'last', selected: true },
+        { label: 'Ноя' },
+        { label: 'Дек' },
+      ]}
+    />
+  ),
+  {
+    name: 'CalendarYear',
+  },
+);
 
 export default createMetadata({
   title: 'Компоненты/Базовые/Calendar',
