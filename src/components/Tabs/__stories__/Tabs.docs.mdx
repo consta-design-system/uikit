@@ -2,7 +2,10 @@ import { TabsExample } from './examples/TabsExample/TabsExample';
 import { TabsExampleIcon } from './examples/TabsExampleIcon/TabsExampleIcon';
 import { TabsExampleSize } from './examples/TabsExampleSize/TabsExampleSize';
 import { TabsExampleView } from './examples/TabsExampleView/TabsExampleView';
-import { TabsExampleRenderItem } from './examples/TabsExampleRenderItem/TabsExampleRenderItem';
+import {
+  TabsExampleRenderItem,
+  TabsExampleRenderItemBadge,
+} from './examples/TabsExampleRenderItem/TabsExampleRenderItem';
 import { TabsExampleLinePosition } from './examples/TabsExampleLinePosition/TabsExampleLinePosition';
 import { TabsExampleFitModeDropdown } from './examples/TabsExampleFitModeDropdown/TabsExampleFitModeDropdown';
 import { TabsExampleFitModeScroll } from './examples/TabsExampleFitModeScroll/TabsExampleFitModeScroll';
@@ -239,7 +242,7 @@ export const TabsExampleView = () => {
 
 ```tsx
 import React, { useState } from 'react';
-import { Tabs, cnTabsTab } from '@consta/ui-kit/Tabs';
+import { Tabs, cnTabsTab } from '@consta/uikit/Tabs';
 
 type Item = string;
 
@@ -274,16 +277,16 @@ export const TabsExampleRenderItem = () => {
 ```tsx
 import React, { useState } from 'react';
 
-import { Badge, BadgePropStatus } from '@consta/uikit//Badge';
+import { Badge, BadgePropStatus } from '@consta/uikit/Badge';
 import { cnTabsTab, Tabs } from '@consta/uikit/Tabs';
 
-type Item = {
+type ItemBadge = {
   text: string;
   badgeStatus: BadgePropStatus;
   badgeCount: number;
 };
 
-const items: Item[] = [
+const itemsBadge: ItemBadge[] = [
   {
     text: 'Открыто',
     badgeStatus: 'normal',
@@ -301,25 +304,24 @@ const items: Item[] = [
   },
 ];
 
-export const TabsExampleRenderItem = () => {
-  const [value, setValue] = useState<Item | null>(items[0]);
+export const TabsExampleRenderItemBadge = () => {
+  const [value, setValue] = useState<ItemBadge | null>(itemsBadge[0]);
   return (
     <Tabs
       value={value}
       onChange={({ value }) => setValue(value)}
-      items={items}
+      items={itemsBadge}
       getLabel={(item) => item.text}
       size="m"
-      renderItem={({ item, className, ref, onChange, key }) => (
-        <button
-          key={key}
-          type="button"
-          onClick={onChange}
-          ref={ref}
-          className={cnTabsTab(null, [className])}
-        >
-          <div style={{ marginRight: 'var(--space-2xs)' }}>{item.text}</div>
-          <Badge status={item.badgeStatus} label={item.badgeCount.toString()} size="s" />
+      renderItem={({ item, onChange, checked }) => (
+        <button type="button" onClick={onChange} className={cnTabsTab({ checked })}>
+          {item.text}
+          <Badge
+            status={item.badgeStatus}
+            label={item.badgeCount.toString()}
+            size="s"
+            style={{ marginLeft: 'var(--space-s)' }}
+          />
         </button>
       )}
     />
