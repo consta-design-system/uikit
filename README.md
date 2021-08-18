@@ -8,7 +8,7 @@ Consta — дизайн-система для разработки интерф�
 
 ### Библиотека компонентов
 
-В этом репозитории | [NPM](https://www.npmjs.com/package/@consta/uikit) | [Документация и стенд](https://consta-uikit.vercel.app/?path=/story/common-about--page) | [Макеты](https://www.figma.com/community/file/853774806786762374)
+[Репозиторий](https://github.com/gazprom-neft/consta-uikit) | [NPM](https://www.npmjs.com/package/@consta/uikit) | [Документация и стенд](https://consta-uikit.vercel.app/?path=/story/common-about--page) | [Макеты](https://www.figma.com/community/file/853774806786762374)
 
 ### Библиотека графиков
 
@@ -33,7 +33,7 @@ yarn add @consta/uikit
 Чтобы начать работу с библиотекой интерфейсных компонентов, подключите тему:
 
 ```tsx
-mport { Theme, presetGpnDefault } from '@consta/uikit/Theme';
+import { Theme, presetGpnDefault } from '@consta/uikit/Theme';
 import { Button } from '@consta/uikit/Button';
 
 const App = () => (
