@@ -1,18 +1,36 @@
-Consta — библиотека компонентов и правила их взаимодействия на GitHub для разработчиков, в Figma для дизайнеров. Подробнее читайте [на сайте дизайн-системы](http://consta.gazprom-neft.ru/).
+# [Дизайн-система Consta](http://consta.gazprom-neft.ru/) | Библиотека интерфейсных компонентов
 
-[Телеграм-канал с обновлениями и новостями](https://t.me/consta_ui_releases)
+Consta — дизайн-система для разработки интерфейсов, написана на [React](https://reactjs.org/), сделана и поддерживается в «Газпром нефти».
 
-# Использование
+**В этом репозитории — библиотека интерфейсных компонентов:** простые контролы, сложные блоки, темы и хуки. В другом репозитории — [библиотека графиков](https://github.com/gazprom-neft/consta-charts). Обе библиотеки представлены в виде компонентов и макетов в Figma.
 
-## Установка пакета
+## Что входит в дизайн-систему
+
+### Библиотека компонентов
+
+[Репозиторий](https://github.com/gazprom-neft/consta-uikit) | [NPM](https://www.npmjs.com/package/@consta/uikit) | [Документация и стенд](https://consta-uikit.vercel.app/?path=/story/common-about--page) | [Макеты](https://www.figma.com/community/file/853774806786762374)
+
+### Библиотека графиков
+
+[Репозиторий](https://github.com/gazprom-neft/consta-charts) | [NPM](https://www.npmjs.com/package/@consta/charts) | [Документация и стенд](https://consta-charts.vercel.app/) | [Макеты](https://www.figma.com/community/file/982611119114314434)
+
+<hr>
+
+Подробности — на [на сайте дизайн-системы Consta](http://consta.gazprom-neft.ru/)
+
+Следите за новостями и релизами в [телеграм-канале дизайн-системы](https://t.me/consta_ui_releases)
+
+# Как использовать
+
+## Установите пакет
 
 ```
 yarn add @consta/uikit
 ```
 
-## Применение
+## Начните работу с библиотекой
 
-Для использования компонентов на проекте следует подключить тему:
+Чтобы начать работу с библиотекой интерфейсных компонентов, подключите тему:
 
 ```tsx
 import { Theme, presetGpnDefault } from '@consta/uikit/Theme';
@@ -25,8 +43,18 @@ const App = () => (
 );
 ```
 
+[Что такое темы и как с ними работать](https://consta-uikit.vercel.app/?path=/docs/thematization-what-are-themes--page)
+
 ## Документация и стенд
 
 На стенде можно менять параметры и смотреть, как меняются компоненты. Документация — во вкладке у каждого компонента.
 
-[Вперед, к стенду](https://consta-uikit.vercel.app/)
+[Вперёд, к стенду](https://consta-uikit.vercel.app/)
+
+## Контрибьюторам
+
+Будем рады, если вы захотите принять участие в разработке дизайн-системы =) Но сначала прочитайте [инструкцию для контрибьюторов](https://consta-uikit.vercel.app/?path=/docs/common-develop-contributors--page).
+
+## Лицензия
+
+Дизайн-систему можно использовать бесплатно, она распространяется ПАО «Газпром нефть» на условиях открытой [лицензии MIT](https://consta.gazprom-neft.ru/static/licence_mit.pdf).
