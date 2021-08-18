@@ -14,6 +14,6 @@ module.exports = {
     group: '\n#### {{heading}}\n',
     changelogTitle: '# Changelog\n\n',
     release: '## {{release}} ({{date}})\n{{body}}',
-    releaseSeparator: '\n---\n\n',
+    releaseSeparator: '\n--------------------\n\n',
   },
 };
