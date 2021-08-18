@@ -7,7 +7,6 @@
 
     &_direction_horizontal {
       align-items: center;
-      white-space: nowrap;
     }
 
     &_direction_vertical {
