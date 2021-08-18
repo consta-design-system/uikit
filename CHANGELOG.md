@@ -1,5 +1,25 @@
 # Changelog
 
+## v3.0.0 (18/08/2021)
+
+**Важное из обновления:**
+
+Переработали компонент `Tabs`, добавили новые возможности (горизонтальная прокрутка, возможность отображать Badge и другие). Вертикальные `Tabs` теперь не только в Figma, но и в коде!
+
+**Внимание**: свойство `renderItem` обратно не совместимо.
+
+---
+
+- [docs(readme): edit readme (#1433)](https://github.com/gazprom-neft/consta-uikit/commit/9d5c28b594a1afebf2000637457301ccbfcb90dd) - [@arhayka](https://github.com/arhayka)
+- [docs(Tabs): edit docs, add examples (#1421)](https://github.com/gazprom-neft/consta-uikit/commit/3aa860e8229578876c68311b48a0c7c59459c071) - [@arhayka](https://github.com/arhayka)
+- [chore(gren): edit config](https://github.com/gazprom-neft/consta-uikit/commit/e83d823e2d82cf7a09a430fc1fa1b12ae1cecd51) - [@gizeasy](https://github.com/gizeasy)
+- [fix(DragNDropField): show custom view while dragging files (#1378)](https://github.com/gazprom-neft/consta-uikit/commit/1ce1fb0b6661e43e080cbd8e719b5ae238f5cf66) - [@nekitk](https://github.com/nekitk)
+- [feat(Tabs): added new items fit mode - scroll](https://github.com/gazprom-neft/consta-uikit/commit/408c7d7cc03803603cb2bc0bd4102a69c8b049cf) - [@nekitk](https://github.com/nekitk)
+- [feat(Tabs): adapt tabs to available width by hiding unfitting tabs in dropdown](https://github.com/gazprom-neft/consta-uikit/commit/874087f0504b751c775a50fc84be59bc03072eca) - [@nekitk](https://github.com/nekitk)
+- [feat(Tabs): added line position variants](https://github.com/gazprom-neft/consta-uikit/commit/d4fa13f4dbcec6764b5249a65cca8f7d1b8091a0) - [@nekitk](https://github.com/nekitk)
+
+---
+
 ## v2.2.1 (11/08/2021)
 
 - [test(DragNDropField): fix tests](https://github.com/gazprom-neft/consta-uikit/commit/1a1283319db53c9b8361bab9977ddceb347b756a) - [@gizeasy](https://github.com/gizeasy)
@@ -350,10 +370,3 @@ _Обращаем внимание_: _версии компонентов обр
 - [docs(Modal): add docs for Modal (#640)](https://github.com/gazprom-neft/consta-uikit/commit/3f94b557f62fbbcee887628c5886055454715898) - [@arhayka](https://github.com/arhayka)
 - [docs(Sidebar): add docs for Sidebar (#641)](https://github.com/gazprom-neft/consta-uikit/commit/20484d691d6fd708bc063c27215cfdac2fb54779) - [@arhayka](https://github.com/arhayka)
 - [chore(telegram): added telegram bot integration (#653)](https://github.com/gazprom-neft/consta-uikit/commit/f29c1d98a5a05a7b208dd2cf84c82a6806b5fb0a) - [@gizeasy](https://github.com/gizeasy)
-
----
-
-## v1.10.8 (26/11/2020)
-
-- [feat(Modal): added refsForExcludeClickOutside (#625)](https://github.com/gazprom-neft/consta-uikit/commit/35f83e65be396cf2b38dc0dc3181d5291169968a) - [@c1n1k](https://github.com/c1n1k)
-- [ fix(selects): Many fixs (#620)](https://github.com/gazprom-neft/consta-uikit/commit/beb0fe6b0b4860900f1eb29a776ac56b8c7542e4) - [@c1n1k](https://github.com/c1n1k)
