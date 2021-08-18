@@ -6,16 +6,21 @@ import { Tabs, tabsLinePositions } from '../../../Tabs';
 
 type Item = string;
 
-const items: Item[] = ['один', 'два', 'три'];
+const items: Item[] = ['Первый', 'Второй', 'Третий'];
 
 export const TabsExampleLinePosition = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
   return (
-    <ul>
+    <div>
       {tabsLinePositions.map((linePosition) => (
-        <li key={linePosition}>
-          <code>linePosition=&quot;{linePosition}&quot;</code>
-          <StoryBookExample className={cnDocsDecorator('Section')}>
+        <div key={linePosition} style={{ marginBottom: 'var(--space-l)' }}>
+          <p>
+            <code>linePosition=&quot;{linePosition}&quot;</code>
+          </p>
+          <StoryBookExample
+            className={cnDocsDecorator('Section')}
+            style={{ marginBottom: 'var(--space-xl)' }}
+          >
             <Tabs
               value={value}
               onChange={({ value }) => setValue(value)}
@@ -24,8 +29,8 @@ export const TabsExampleLinePosition = () => {
               linePosition={linePosition}
             />
           </StoryBookExample>
-        </li>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 };
