@@ -1,11 +1,18 @@
+/* 
+--calendar-cell-width
+--calendar-cell-height
+
+задаются сверху
+*/
+
 .CalendarCell {
   --bg-color: var(--color-control-bg-ghost);
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: var(--calendar-cell-width, calc(var(--control-height-s) + var(--space-2xs)));
-  height: var(--control-height-s);
+  width: var(--calendar-cell-width);
+  height: var(--calendar-cell-height);
 
   &_range {
     background: var(--bg-color);
