@@ -131,12 +131,12 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
     multiple: false,
   });
 
-  const tabRefs = useMemo(
-    () => new Array(items.length).fill(null).map(() => createRef<HTMLDivElement>()),
-    [items, fitMode],
-  );
   const tabsDirection = getTabsDirection(linePosition);
   const isVertical = tabsDirection === 'vertical';
+  const tabRefs = useMemo(
+    () => new Array(items.length).fill(null).map(() => createRef<HTMLDivElement>()),
+    [items, fitMode, isVertical],
+  );
   const tabsDimensions = useResizeObserved(
     tabRefs,
     (el): TabDimensions => ({
