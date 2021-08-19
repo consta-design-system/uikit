@@ -1,6 +1,14 @@
 .Tabs {
   position: relative;
 
+  &_size_s {
+    --list-offset: var(--space-s);
+  }
+
+  &_size_m {
+    --list-offset: var(--space-m);
+  }
+
   &-List {
     position: relative;
     display: flex;
@@ -13,6 +21,14 @@
     &_direction_vertical {
       flex-direction: column;
     }
+
+    &_linePosition_left {
+      padding-left: var(--list-offset);
+    }
+
+    &_linePosition_right {
+      padding-right: var(--list-offset);
+    }
   }
 
   &-Tab {
@@ -23,7 +39,6 @@
     }
 
     &_direction_vertical {
-      margin: 0 var(--space-s);
       text-align: left;
 
       & > * {

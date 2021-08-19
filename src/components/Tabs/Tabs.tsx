@@ -163,7 +163,7 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
     });
 
   const renderItemsList: RenderItemsListProp = ({ withRunningLine = true, getTabClassName }) => (
-    <div className={cnTabs('List', { direction: tabsDirection })}>
+    <div className={cnTabs('List', { direction: tabsDirection, linePosition })}>
       {items.map((item, idx) => (
         <div
           ref={tabRefs[idx]}
