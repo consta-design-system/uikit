@@ -12,6 +12,10 @@
     border: 1px solid var(--color-bg-border);
     border-radius: var(--control-radius);
     box-shadow: var(--shadow-modal);
+
+    /* Если текст будет переноситься на несколько строк,
+    не получится сразу правильно вычислить направление попапа и он будет скакать при открытии */
+    white-space: nowrap;
   }
 
   &-Item {
