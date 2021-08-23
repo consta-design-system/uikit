@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { boolean, select } from '@storybook/addon-knobs';
+import { boolean, object, select } from '@storybook/addon-knobs';
 
 import { IconProps } from '../../../icons/Icon/Icon';
 import { IconCamera } from '../../../icons/IconCamera/IconCamera';
@@ -34,28 +34,33 @@ type Item = {
   icon?: React.FC<IconProps>;
 };
 
-const items = [
-  {
-    name: 'Первый',
-    icon: IconPhoto,
-  },
-  {
-    name: 'Очень длинный второй вариант',
-    icon: IconRing,
-  },
-  {
-    name: 'Третий вариант',
-    icon: IconCamera,
-  },
-  {
-    name: 'Четвёртый вариант',
-    icon: IconPhone,
-  },
-];
+const itemIcons = [IconPhoto, IconRing, IconCamera, IconPhone];
+
+const getItems = (): Item[] => {
+  const knobItems = object('items', [
+    {
+      name: 'Первый',
+    },
+    {
+      name: 'Очень длинный второй вариант',
+    },
+    {
+      name: 'Третий вариант',
+    },
+    {
+      name: 'Четвёртый вариант',
+    },
+  ]);
+
+  return knobItems.map((item, idx) => ({
+    ...item,
+    icon: itemIcons[idx % itemIcons.length],
+  }));
+};
 
 export function Playground() {
   const { size, view, linePosition, withIcon, onlyIcon } = defaultKnobs();
-
+  const items = getItems();
   const [value, setValue] = useState<Item | null>(items[0]);
 
   return (
