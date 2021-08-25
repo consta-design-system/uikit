@@ -1,5 +1,17 @@
 # Changelog
 
+## v3.0.1 (25/08/2021)
+
+- [fix(Tabs): active tab was not calculated properly for unmemoized items](https://github.com/gazprom-neft/consta-uikit/commit/66c1f4aeab84a0e227641a5c7aea5b104bea8595) - [@nekitk](https://github.com/nekitk)
+- [fix(Tabs): open "more tabs" popup to the right if there's no space to open it fully](https://github.com/gazprom-neft/consta-uikit/commit/f9f777bbcb1f2e629b844b09356bfadfa55656a6) - [@nekitk](https://github.com/nekitk)
+- [fix(Tabs): updated list offset in vertical orientation according to design](https://github.com/gazprom-neft/consta-uikit/commit/5077a743932219c1caaea11b5aa0fe5596a1c971) - [@nekitk](https://github.com/nekitk)
+- [fix(Tabs): incorrect line size after changing tabs direction](https://github.com/gazprom-neft/consta-uikit/commit/ee6616d24c11db0b074d19537c304aa5e1978f41) - [@nekitk](https://github.com/nekitk)
+- [fix(Tabs): tabs don't break on new line in vertical orientation](https://github.com/gazprom-neft/consta-uikit/commit/10539c33a5c798d2c3e884443d4419aa3346c17c) - [@nekitk](https://github.com/nekitk)
+- [fix(Tabs): "more items" dropdown doesn't appear in Safari](https://github.com/gazprom-neft/consta-uikit/commit/443c4562ae5dc5fbfc6c7861ef21bde43b48868d) - [@nekitk](https://github.com/nekitk)
+- [fix(Tabs): tabs doesn't change on small screen in scroll mode](https://github.com/gazprom-neft/consta-uikit/commit/fde863b183a0a2579fce0b00bbfe5b5abecca1f1) - [@nekitk](https://github.com/nekitk)
+
+---
+
 ## v3.0.0 (18/08/2021)
 
 **Важное из обновления:**
@@ -355,18 +367,3 @@ _Обращаем внимание_: _версии компонентов обр
 - [fix(RadioGroup): fixed name story](https://github.com/gazprom-neft/consta-uikit/commit/bd061b0b24b9c19cb74219e1c71a98dce255658f) - [@gizeasy](https://github.com/gizeasy)
 - [refactor(Selects): refactor BasicSelect, Combobox, MultiCombobox (#642)](https://github.com/gazprom-neft/consta-uikit/commit/3a9785ab00fba067bb8051e35033c5dd0041aa3c) - [@gizeasy](https://github.com/gizeasy)
 - [fix(CODEOWNERS): remove al-fyodorov (#659)](https://github.com/gazprom-neft/consta-uikit/commit/a0b9d05b8daffa8323fe394266c61965739b9dc6) - [@al-fyodorov](https://github.com/al-fyodorov)
-
----
-
-## v1.10.9 (04/12/2020)
-
-- [docs(howToGo): added new section (#655)](https://github.com/gazprom-neft/consta-uikit/commit/aaae9cdb94d54eb6e353bb27a2646385c84f5cdf) - [@gizeasy](https://github.com/gizeasy)
-- [fix(ChoiceGroup): types, mixFocus (#618)](https://github.com/gazprom-neft/consta-uikit/commit/753d6b2d76f583f475d8a8ea96b532d9b5e36fff) - [@gizeasy](https://github.com/gizeasy)
-- [feat(RadioGroup): added RadioGroup component (#612)](https://github.com/gazprom-neft/consta-uikit/commit/0a2390920ca79323c985b70245f11eb3e8953aea) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
-- [feat(Table): set columns widths after 1st render for disabling autoresize in filtering and lazyload cases (#616)](https://github.com/gazprom-neft/consta-uikit/commit/516404e2f017125c136d9bfdcd84f74f1c9d1e34) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
-- [feat(Tooltip): added statuses (#644)](https://github.com/gazprom-neft/consta-uikit/commit/b1cafa5fc5930ad87f477a09bdb2813bc19180a1) - [@fooontic](https://github.com/fooontic)
-- [feat(table): added sortBy (#647)](https://github.com/gazprom-neft/consta-uikit/commit/0cba9aedfc4081a6e3551359226491a2dbc56771) - [@Kamys](https://github.com/Kamys)
-- [Modal(fix): padding to space #526 (#649)](https://github.com/gazprom-neft/consta-uikit/commit/f3341c453a2b0fb4126b20059723d3f5dd02dddf) - [@fooontic](https://github.com/fooontic)
-- [docs(Modal): add docs for Modal (#640)](https://github.com/gazprom-neft/consta-uikit/commit/3f94b557f62fbbcee887628c5886055454715898) - [@arhayka](https://github.com/arhayka)
-- [docs(Sidebar): add docs for Sidebar (#641)](https://github.com/gazprom-neft/consta-uikit/commit/20484d691d6fd708bc063c27215cfdac2fb54779) - [@arhayka](https://github.com/arhayka)
-- [chore(telegram): added telegram bot integration (#653)](https://github.com/gazprom-neft/consta-uikit/commit/f29c1d98a5a05a7b208dd2cf84c82a6806b5fb0a) - [@gizeasy](https://github.com/gizeasy)
