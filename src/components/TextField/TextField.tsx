@@ -1,112 +1,30 @@
 import './TextField.css';
 
-import React, { useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 import TextAreaAutoSize from 'react-textarea-autosize';
 
-import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
-import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 
-export type TextFieldPropValue = string | null;
-export type TextFieldPropName = string;
-export type TextFieldPropId = string | number;
-
-export const textFieldPropSize = ['m', 'xs', 's', 'l'] as const;
-export type TextFieldPropSize = typeof textFieldPropSize[number];
-export const textFieldPropSizeDefault: TextFieldPropSize = textFieldPropSize[0];
-
-export type TextFieldPropOnChange = (args: TextFieldOnChangeArguments) => void;
-export type TextFieldOnChangeArguments = {
-  e: React.ChangeEvent;
-  id?: TextFieldPropId;
-  name?: TextFieldPropName;
-  value: TextFieldPropValue;
-};
-
-export const textFieldPropView = ['default', 'clear'] as const;
-export type TextFieldPropView = typeof textFieldPropView[number];
-export const textFieldPropViewDefault: TextFieldPropView = textFieldPropView[0];
-
-export const textFieldPropForm = [
-  'default',
-  'defaultClear',
-  'defaultBrick',
-  'brick',
-  'brickDefault',
-  'brickClear',
-  'brickRound',
-  'round',
-  'roundClear',
-  'roundBrick',
-  'clearRound',
-  'clearDefault',
-  'clearBrick',
-  'clearClear',
-] as const;
-export type TextFieldPropForm = typeof textFieldPropForm[number];
-export const textFieldPropFormDefault: TextFieldPropForm = textFieldPropForm[0];
-
-export const textFieldPropState = ['alert', 'success', 'warning'] as const;
-export type TextFieldPropState = typeof textFieldPropState[number];
-
-export const textFieldPropWidth = ['default', 'full'] as const;
-export type TextFieldPropWidth = typeof textFieldPropWidth[number];
-export const textFieldPropWidthDefault: TextFieldPropWidth = textFieldPropWidth[0];
-
-export type TextFieldPropAutoComplete = 'on' | 'off';
-
-type Props = {
-  className?: string;
-  value?: TextFieldPropValue;
-  onChange?: TextFieldPropOnChange;
-  id?: TextFieldPropId;
-  name?: TextFieldPropName;
-  type?: string;
-  disabled?: boolean;
-  rows?: number;
-  cols?: number;
-  minRows?: number;
-  maxRows?: number;
-  maxLength?: number;
-  size?: TextFieldPropSize;
-  view?: TextFieldPropView;
-  form?: TextFieldPropForm;
-  state?: TextFieldPropState;
-  width?: TextFieldPropWidth;
-  onFocus?: React.FocusEventHandler<HTMLElement>;
-  onBlur?: React.FocusEventHandler<HTMLElement>;
-  autoFocus?: boolean;
-  placeholder?: string;
-  leftSide?: string | React.FC<IconProps>;
-  rightSide?: string | React.FC<IconProps>;
-  autoComplete?: TextFieldPropAutoComplete;
-  max?: number | string;
-  min?: number | string;
-  readOnly?: boolean;
-  required?: boolean;
-  step?: number | string;
-  tabIndex?: number;
-  inputRef?: React.Ref<HTMLTextAreaElement | HTMLInputElement>;
-  ariaLabel?: string;
-  iconSize?: IconPropSize;
-  children?: never;
-};
-
-export type TextFieldProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
+import {
+  sizeMap,
+  TextFieldComponent,
+  textFieldPropFormDefault,
+  TextFieldProps,
+  textFieldPropSizeDefault,
+  textFieldPropViewDefault,
+  textFieldPropWidthDefault,
+} from './helpers';
 
 export const cnTextField = cn('TextField');
 
-const sizeMap: Record<TextFieldPropSize, IconPropSize> = {
-  xs: 'xs',
-  s: 's',
-  m: 's',
-  l: 'm',
-};
+export function TextFieldRender<TYPE extends string>(
+  props: TextFieldProps<TYPE>,
+  ref: React.Ref<HTMLDivElement>,
+) {
+  const textFieldRef = React.useRef<HTMLDivElement>(null);
 
-export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>((props, ref) => {
-  const textFieldRef = ref || React.useRef<HTMLDivElement>(null);
   const {
     className,
     type = 'text',
@@ -142,7 +60,11 @@ export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>((props
     ariaLabel,
     iconSize: iconSizeProp,
     ...otherProps
-  } = usePropsHandler(cnTextField(), props, textFieldRef as React.RefObject<HTMLDivElement>);
+  } = usePropsHandler(
+    cnTextField(),
+    props,
+    (ref as React.RefObject<HTMLDivElement>) || (textFieldRef as React.RefObject<HTMLDivElement>),
+  );
   const [focus, setFocus] = useState<boolean>(autoFocus);
   const textarea = type === 'textarea';
   const LeftIcon = leftSide;
@@ -156,12 +78,12 @@ export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>((props
     !disabled && onChange && onChange({ e, id, name, value: value || null });
   };
 
-  const handleBlur: Props['onBlur'] = (e) => {
+  const handleBlur: React.FocusEventHandler<HTMLElement> = (e: React.FocusEvent<HTMLElement>) => {
     setFocus(false);
     onBlur && onBlur(e);
   };
 
-  const handleFocus: Props['onFocus'] = (e) => {
+  const handleFocus: React.FocusEventHandler<HTMLElement> = (e: React.FocusEvent<HTMLElement>) => {
     setFocus(true);
     onFocus && onFocus(e);
   };
@@ -260,4 +182,8 @@ export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>((props
       )}
     </div>
   );
-});
+}
+
+export const TextField = forwardRef(TextFieldRender) as TextFieldComponent;
+
+export * from './helpers';
