@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { boolean, number, select, text } from '@storybook/addon-knobs';
+import { boolean, number, select } from '@storybook/addon-knobs';
 
+import { data } from '../__mocks__/data.mock';
 import { FileIconsGallery } from '../../../fileIcons/FileIcon/__stories__/FileIconsGallery/FileIconsGallery';
 import { fileIconPropSize, fileIconPropSizeDefault } from '../../../fileIcons/FileIcon/FileIcon';
 import { cn } from '../../../utils/bem';
@@ -11,7 +12,7 @@ import mdx from './File.docs.mdx';
 
 const defaultKnobs = () => ({
   size: select('size', fileIconPropSize, fileIconPropSizeDefault),
-  extension: text('extension', 'doc'),
+  extension: select('extension', data, 'doc'),
   loading: boolean('loading', false),
   loadingWithProgressSpin: boolean('loadingWithProgressSpin', false),
   loadingProgress: number('loadingProgress', 70),

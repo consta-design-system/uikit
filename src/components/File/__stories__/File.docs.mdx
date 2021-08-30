@@ -63,9 +63,42 @@ import { FileExampleSize } from './examples/FileExampleSize/FileExampleSize';
 
 ## Свойства
 
+```tsx
+export enum FileExtensionTypes {
+  bmp = 'bmp',
+  csv = 'csv',
+  avi = 'avi',
+  doc = 'doc',
+  docx = 'docx',
+  gif = 'gif',
+  exe = 'exe',
+  jpg = 'jpg',
+  jpeg = 'jpeg',
+  mp3 = 'mp3',
+  mov = 'mov',
+  mp4 = 'mp4',
+  pdf = 'pdf',
+  ptt = 'ptt',
+  pttx = 'pttx',
+  png = 'png',
+  rar = 'rar',
+  rtf = 'rtf',
+  tiff = 'tiff',
+  txt = 'txt',
+  wav = 'wav',
+  zip = 'zip',
+  gz = 'gz',
+  xls = 'xls',
+  xlsx = 'xlsx',
+  json = 'json',
+}
+
+export type FilePropExtensions = typeof FileExtensionTypes | string;
+```
+
 | Свойство                                          | Тип                         | По умолчанию | Описание                                                         |
 | ------------------------------------------------- | --------------------------- | ------------ | ---------------------------------------------------------------- |
-| [`extension`](#иконка)                            | `string`                    | -            | Иконка файла                                                     |
+| [`extension`](#иконка)                            | `FilePropExtensions`        | -            | Иконка файла                                                     |
 | [`size`](#размер-иконки)                          | `'m', 's'`                  | `'m'`        | Размер иконки                                                    |
 | [`loading`](#индикаторы-загрузки)                 | `boolean`                   | -            | Показывает, что файл загружается                                 |
 | [`loadingWithProgressSpin`](#индикаторы-загрузки) | `boolean`                   | -            | Показывает индикатор прогресса загрузки                          |
