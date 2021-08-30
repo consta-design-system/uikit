@@ -50,6 +50,9 @@ export function Playground() {
           size={size}
           view={view}
           disabled={disabled}
+          style={{
+            width: '300px',
+          }}
         />
       </form>
     </div>
