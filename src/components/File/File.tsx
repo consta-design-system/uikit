@@ -29,8 +29,39 @@ import { FileIconZip } from '../../fileIcons/FileIconZip/FileIconZip';
 import { cn } from '../../utils/bem';
 import { ProgressSpin } from '../ProgressSpin/ProgressSpin';
 
+export enum FileExtensionTypes {
+  bmp = 'bmp',
+  csv = 'csv',
+  avi = 'avi',
+  doc = 'doc',
+  docx = 'docx',
+  gif = 'gif',
+  exe = 'exe',
+  jpg = 'jpg',
+  jpeg = 'jpeg',
+  mp3 = 'mp3',
+  mov = 'mov',
+  mp4 = 'mp4',
+  pdf = 'pdf',
+  ptt = 'ptt',
+  pttx = 'pttx',
+  png = 'png',
+  rar = 'rar',
+  rtf = 'rtf',
+  tiff = 'tiff',
+  txt = 'txt',
+  wav = 'wav',
+  zip = 'zip',
+  gz = 'gz',
+  xls = 'xls',
+  xlsx = 'xlsx',
+  json = 'json',
+}
+
+export type FilePropExtensions = typeof FileExtensionTypes | string;
+
 type Props = {
-  extension?: string;
+  extension?: FilePropExtensions;
   loading?: boolean;
   loadingWithProgressSpin?: boolean;
   loadingProgress?: number;
@@ -70,11 +101,11 @@ const mapExtensionToSvg: { [value: string]: React.FC<FileIconProps> } = {
   json: FileIconJson,
 };
 
-function getIconByExtension(extension?: string): React.FC<FileIconProps> {
+function getIconByExtension(extension?: FilePropExtensions): React.FC<FileIconProps> {
   if (!extension) {
     return FileIconUndefined;
   }
-  return mapExtensionToSvg[extension.toLowerCase()] || FileIconUndefined;
+  return mapExtensionToSvg[extension.toString().toLowerCase()] || FileIconUndefined;
 }
 
 export const File: React.FC<FileProps> = (props) => {

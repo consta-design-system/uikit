@@ -6,11 +6,11 @@ import { IconProps } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { Button } from '../Button/Button';
-import { File } from '../File/File';
+import { File, FilePropExtensions } from '../File/File';
 import { Text } from '../Text/Text';
 
 type Props = {
-  fileExtension?: string;
+  fileExtension?: FilePropExtensions;
   loading?: boolean;
   fileName?: string;
   fileDescription?: string;
