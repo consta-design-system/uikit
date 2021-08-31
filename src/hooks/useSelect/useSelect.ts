@@ -123,6 +123,14 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   const value =
     (params.value && (Array.isArray(params.value) ? params.value : [params.value])) || [];
 
+  const isEmpty = (() => {
+    if (isMultipleParams(params)) {
+      return !params.value?.length;
+    }
+
+    return !params.value;
+  })();
+
   const [
     { searchValue, isOpen, highlightedIndex, resolvedSearchValue, scrollToHighlighted },
     setState,
@@ -505,6 +513,7 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
 
   return {
     isOpen,
+    isEmpty,
     isFocused,
     highlightedIndex,
     visibleItems,

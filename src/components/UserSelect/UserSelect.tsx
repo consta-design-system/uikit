@@ -93,6 +93,7 @@ function UserSelectRender<
     getKeyProps,
     getOptionProps,
     isOpen,
+    isEmpty,
     visibleItems,
     isFocused,
     handleInputFocus,
@@ -238,7 +239,7 @@ function UserSelectRender<
           </div>
         </div>
         <span className={cnSelect('Indicators')}>
-          {value && (
+          {!isEmpty && (
             <button
               type="button"
               onClick={clearValue}
