@@ -123,14 +123,6 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   const value =
     (params.value && (Array.isArray(params.value) ? params.value : [params.value])) || [];
 
-  const isEmpty = (() => {
-    if (isMultipleParams(params)) {
-      return !params.value?.length;
-    }
-
-    return !params.value;
-  })();
-
   const [
     { searchValue, isOpen, highlightedIndex, resolvedSearchValue, scrollToHighlighted },
     setState,
@@ -278,9 +270,10 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   const removeValue = (e: React.SyntheticEvent, valueItem: ITEM) => {
     e.stopPropagation();
     if (isMultipleParams(params)) {
+      const newValue = params.value?.filter((item) => getItemKey(item) !== getItemKey(valueItem));
       params.onChange({
         e,
-        value: params.value?.filter((item) => getItemKey(item) !== getItemKey(valueItem)) || null,
+        value: newValue?.length ? newValue : null,
       });
     }
   };
@@ -290,10 +283,10 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
       return;
     }
     if (isMultipleParams(params)) {
-      const newVal = value.some((value) => getItemKey(value) === getItemKey(item))
+      const newValue = value.some((value) => getItemKey(value) === getItemKey(item))
         ? value.filter((value) => getItemKey(value) !== getItemKey(item))
         : [...value, item];
-      params.onChange({ value: newVal, e });
+      params.onChange({ value: newValue.length ? newValue : null, e });
     }
     if (isNotMultipleParams(params)) {
       params.onChange({ value: item, e });
@@ -513,7 +506,6 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
 
   return {
     isOpen,
-    isEmpty,
     isFocused,
     highlightedIndex,
     visibleItems,

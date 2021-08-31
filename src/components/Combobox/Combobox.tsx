@@ -79,7 +79,6 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
     getKeyProps,
     getOptionProps,
     isOpen,
-    isEmpty,
     visibleItems,
     isFocused,
     handleInputFocus,
@@ -223,7 +222,7 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
           </div>
         </div>
         <span className={cnSelect('Indicators')}>
-          {!isEmpty && (
+          {value && (
             <button
               type="button"
               onClick={clearValue}
