@@ -1,6 +1,7 @@
 import './Table.stories.css';
 
 import React, { useState } from 'react';
+import { action } from '@storybook/addon-actions';
 import { boolean, number, object, select, text } from '@storybook/addon-knobs';
 
 import {
@@ -81,6 +82,7 @@ const getKnobs = <T extends TableRow>(replacedProps?: Partial<Props<T>>): Props<
       headerVerticalAligns,
       props.headerVerticalAlign,
     ),
+    onRowClick: ({ id, e }) => action(`onRowClick[${id}]`)(e),
   };
 };
 

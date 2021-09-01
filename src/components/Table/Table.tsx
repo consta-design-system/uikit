@@ -75,6 +75,8 @@ type ActiveRow = {
 
 type onRowHover = ({ id, e }: { id: string | undefined; e: React.MouseEvent }) => void;
 
+type onRowClick = ({ id, e }: { id: string; e: React.MouseEvent }) => void;
+
 export type TableRow = {
   id: string;
   rows?: TableRow[];
@@ -138,6 +140,7 @@ export type Props<T extends TableRow> = {
   emptyRowsPlaceholder?: React.ReactNode;
   className?: string;
   onRowHover?: onRowHover;
+  onRowClick?: onRowClick;
   lazyLoad?: LazyLoad;
   onFiltersUpdated?: (filters: SelectedFilters) => void;
   isExpandedRowsByDefault?: boolean;
@@ -209,6 +212,7 @@ export const Table = <T extends TableRow>({
   emptyRowsPlaceholder = defaultEmptyRowsPlaceholder,
   className,
   onRowHover,
+  onRowClick,
   lazyLoad,
   onSortBy,
   onFiltersUpdated,
@@ -640,12 +644,14 @@ export const Table = <T extends TableRow>({
           return (
             <div
               key={row.id}
+              role="presentation"
               className={cnTable('CellsRow', {
                 nth,
                 withMergedCells: hasMergedCells,
               })}
               onMouseEnter={(e) => onRowHover && onRowHover({ id: row.id, e })}
               onMouseLeave={(e) => onRowHover && onRowHover({ id: undefined, e })}
+              onClick={(e) => onRowClick && onRowClick({ id: row.id, e })}
             >
               {columnsWithMetaData(lowHeaders).map((column: TableColumn<T>, columnIdx: number) => {
                 const { show, style, rowSpan } = getTableCellProps(
