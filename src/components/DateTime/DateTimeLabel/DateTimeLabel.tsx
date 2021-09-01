@@ -1,4 +1,4 @@
-import './DateTimeMonthLabel.css';
+import './DateTimeLabel.css';
 
 import React from 'react';
 
@@ -6,23 +6,23 @@ import { cn } from '../../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import { Text } from '../../Text/Text';
 
-export type DateTimeMonthLabelProps = PropsWithHTMLAttributes<
+export type DateTimeLabelProps = PropsWithHTMLAttributes<
   {
-    label: string;
+    label: string | number;
     children?: never;
   },
   HTMLDivElement
 >;
 
-export const cnDateTimeMonthLabel = cn('DateTimeMonthLabel');
+export const cnDateTimeLabel = cn('DateTimeLabel');
 
-export const DateTimeMonthLabel: React.FC<DateTimeMonthLabelProps> = (props) => {
+export const DateTimeLabel: React.FC<DateTimeLabelProps> = (props) => {
   const { label, className, ...otherProps } = props;
 
   return (
     <Text
       {...otherProps}
-      className={cnDateTimeMonthLabel(null, [className])}
+      className={cnDateTimeLabel(null, [className])}
       as="span"
       size="s"
       align="center"

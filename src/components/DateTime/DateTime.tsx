@@ -11,9 +11,9 @@ import { DateTimeViewTwoMonths } from './DateTimeViewTwoMonths/DateTimeViewTwoMo
 import {
   DateTimeComponent,
   DateTimePropView,
-  DateTimePropViewDefault,
+  dateTimePropViewDefault,
   DateTimeViewComponent,
-} from './helpers';
+} from './helpers/types';
 
 export const cnDateTime = cn('DateTime');
 
@@ -24,7 +24,7 @@ const viewMap: Record<DateTimePropView, DateTimeViewComponent> = {
 };
 
 export const DateTime: DateTimeComponent = React.forwardRef((props, ref) => {
-  const { view = DateTimePropViewDefault, className, ...otherProps } = props;
+  const { view = dateTimePropViewDefault, className, ...otherProps } = props;
 
   const ViewComponent = getSizeByMap(viewMap, view);
 
@@ -34,8 +34,8 @@ export const DateTime: DateTimeComponent = React.forwardRef((props, ref) => {
 export * from './DateTimeCell/DateTimeCell';
 export * from './DateTimeItem/DateTimeItem';
 export * from './DateTimeMonth/DateTimeMonth';
-export * from './DateTimeMonthLabel/DateTimeMonthLabel';
-export * from './DateTimeMonthToggler/DateTimeMonthToggler';
+export * from './DateTimeLabel/DateTimeLabel';
+export * from './DateTimeLabel/DateTimeLabel';
 export * from './DateTimeSlider/DateTimeSlider';
 export * from './DateTimeViewOneMonth/DateTimeViewOneMonth';
 export * from './DateTimeViewSlider/DateTimeViewSlider';
@@ -46,3 +46,4 @@ export * from './DateTimeTime/DateTimeTime';
 export * from './DateTimeYearSlider/DateTimeYearSlider';
 export * from './DateTime10YearSlider/DateTime10YearSlider';
 export * from './DateTime100YearSlider/DateTime100YearSlider';
+export * from './DateTimeTypeYearViewClassic/DateTimeTypeYearViewClassic';

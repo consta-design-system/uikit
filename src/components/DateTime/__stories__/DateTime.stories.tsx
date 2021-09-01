@@ -14,14 +14,15 @@ import {
   DateTime10YearSlider,
   DateTime100YearSlider,
   DateTimeTime,
+  DateTimeTypeYearViewClassic,
   DateTimeYear,
   DateTimeYearSlider,
 } from '../DateTime';
 import {
-  DateTimePropType,
-  DateTimePropTypeDefault,
-  DateTimePropView,
-  DateTimePropViewDefault,
+  dateTimePropType,
+  dateTimePropTypeDefault,
+  dateTimePropView,
+  dateTimePropViewDefault,
 } from '../helpers';
 
 import mdx from './DateTime.docs.mdx';
@@ -38,8 +39,8 @@ const localeMap: Record<LocaleProp, Locale> = {
 };
 
 const defaultKnobs = () => ({
-  type: select('type', DateTimePropType, DateTimePropTypeDefault),
-  view: select('view', DateTimePropView, DateTimePropViewDefault),
+  type: select('type', dateTimePropType, dateTimePropTypeDefault),
+  view: select('view', dateTimePropView, dateTimePropViewDefault),
   withEvents: boolean('withEvents', false),
   minDate: date('minDate', startOfYear(new Date())),
   maxDate: date('maxDate', endOfYear(new Date())),
@@ -187,6 +188,24 @@ export const DateTime100YearSliderStory = createStory(
   },
   {
     name: 'DateTime100YearSlider',
+  },
+);
+
+export const DateTimeTypeYearViewClassicStory = createStory(
+  () => {
+    const [value, setValue] = useState<[Date?, Date?] | undefined>(undefined);
+
+    return (
+      <DateTimeTypeYearViewClassic
+        value={value}
+        onChangeRange={({ value }) => setValue(value)}
+        minDate={new Date(2021, 0)}
+        maxDate={new Date(2027, 0)}
+      />
+    );
+  },
+  {
+    name: 'DateTimeTypeYearViewClassic',
   },
 );
 

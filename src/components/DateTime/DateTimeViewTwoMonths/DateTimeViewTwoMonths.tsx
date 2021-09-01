@@ -1,18 +1,19 @@
 import './DateTimeViewTwoMonths.css';
 
 import React from 'react';
-import { addMonths } from 'date-fns';
+import { addMonths, startOfMonth } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 
 import { cn } from '../../../utils/bem';
 import { DateTimeMonth } from '../DateTimeMonth/DateTimeMonth';
-import { DateTimeMonthToggler } from '../DateTimeMonthToggler/DateTimeMonthToggler';
+import { DateTimeToggler } from '../DateTimeToggler/DateTimeToggler';
 import {
   DateTimeViewComponent,
   getDaysOfMonth,
   getDaysOfWeek,
   getHandleSelectDate,
   getMouthLabelWithYear,
+  isEqualDay,
   useCurrentVisibleDate,
 } from '../helpers';
 
@@ -37,6 +38,7 @@ export const DateTimeViewTwoMonths: DateTimeViewComponent = React.forwardRef((pr
     maxDate,
     minDate,
     value,
+    startOfUnit: startOfMonth,
   });
 
   const handleSelectDate = getHandleSelectDate({
@@ -45,6 +47,7 @@ export const DateTimeViewTwoMonths: DateTimeViewComponent = React.forwardRef((pr
     value,
     onChange,
     onChangeRange,
+    isEqualUnit: isEqualDay,
   });
 
   const daysOfMonth = getDaysOfMonth({
@@ -77,11 +80,11 @@ export const DateTimeViewTwoMonths: DateTimeViewComponent = React.forwardRef((pr
   return (
     <div {...otherProps} ref={ref} className={cnDateTimeViewTwoMonths({}, [className])}>
       <div className={cnDateTimeViewTwoMonths('Calendar')}>
-        <DateTimeMonthToggler prevOnClick={prevMonthHandle} label={monthLabel} />
+        <DateTimeToggler prevOnClick={prevMonthHandle} label={monthLabel} />
         <DateTimeMonth daysOfWeek={daysOfWeek} daysOfMonth={daysOfMonth} />
       </div>
       <div className={cnDateTimeViewTwoMonths('Calendar')}>
-        <DateTimeMonthToggler nextOnClick={nextMonthHandle} label={nextMonthLabel} />
+        <DateTimeToggler nextOnClick={nextMonthHandle} label={nextMonthLabel} />
         <DateTimeMonth daysOfWeek={daysOfWeek} daysOfMonth={nextDaysOfMonth} />
       </div>
     </div>
