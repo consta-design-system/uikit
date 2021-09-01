@@ -82,7 +82,6 @@
   &-EmptyCell {
     display: flex;
     justify-content: center;
-    height: 100%;
     padding-top: var(--cell-padding-vertical);
     padding-bottom: var(--cell-padding-vertical);
     text-align: center;
