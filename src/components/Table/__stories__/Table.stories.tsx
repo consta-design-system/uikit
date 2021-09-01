@@ -1,6 +1,7 @@
 import './Table.stories.css';
 
 import React, { useState } from 'react';
+import { action } from '@storybook/addon-actions';
 import { boolean, number, object, select, text } from '@storybook/addon-knobs';
 
 import {
@@ -67,6 +68,7 @@ const getKnobs = <T extends TableRow>(replacedProps?: Partial<Props<T>>): Props<
     columns: object('columns', props.columns),
     rows: object('rows', props.rows),
     filters: getFiltersKnob(props.filters),
+    onFiltersUpdated: (filters) => action('onFiltersUpdated')(filters),
     size: getSizeKnob(),
     borderBetweenColumns: boolean('borderBetweenColumns', props.borderBetweenColumns!),
     borderBetweenRows: boolean('borderBetweenRows', props.borderBetweenRows!),
