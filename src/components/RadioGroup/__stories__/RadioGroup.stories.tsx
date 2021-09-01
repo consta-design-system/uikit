@@ -10,6 +10,8 @@ import {
   radioGroupDefaultSize,
   radioGroupDefaultView,
   radioGroupDirections,
+  radioGroupPropAlign,
+  radioGroupPropAlignDefault,
   radioGroupSizes,
   radioGroupViews,
 } from '../RadioGroup';
@@ -24,11 +26,12 @@ const defaultKnobs = () => ({
   view: select('view', radioGroupViews, radioGroupDefaultView),
   disabled: boolean('disabled', false),
   disabledItem: boolean('disabledItem', false),
+  align: select('align', radioGroupPropAlign, radioGroupPropAlignDefault),
 });
 
 export function Playground() {
   const [value, setValue] = React.useState<Item | null>(null);
-  const { direction, size, view, disabled, disabledItem } = defaultKnobs();
+  const { direction, size, view, disabled, disabledItem, align } = defaultKnobs();
 
   const onChange = ({ value }: { value: Item }) => setValue(value);
 
@@ -36,6 +39,7 @@ export function Playground() {
     <div className={cnRadioGroupStories()}>
       <form>
         <RadioGroup
+          align={align}
           value={value}
           items={items}
           getLabel={(item) => item.name}
@@ -46,6 +50,9 @@ export function Playground() {
           size={size}
           view={view}
           disabled={disabled}
+          style={{
+            width: '300px',
+          }}
         />
       </form>
     </div>
