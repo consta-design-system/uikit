@@ -30,6 +30,7 @@ type SidebarProps = {
   hasOverlay?: boolean;
   onOverlayClick?: (event: MouseEvent) => void;
   onClickOutside?: (event: MouseEvent) => void;
+  onEsc?: (event: KeyboardEvent) => void;
   position?: SidebarPropPosition;
   width?: SidebarPropWidth;
   height?: SidebarPropHeight;
@@ -90,6 +91,7 @@ export const Sidebar: SidebarComponent = (props) => {
     hasOverlay = true,
     onOverlayClick,
     onClickOutside,
+    onEsc,
     position = sidebarPropPositionDefault,
     width = sidebarPropWidthDefault,
     height = sidebarPropHeightDefault,

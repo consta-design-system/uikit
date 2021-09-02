@@ -24,6 +24,7 @@ type ModalProps = {
   hasOverlay?: boolean;
   onOverlayClick?: (event: MouseEvent) => void;
   onClickOutside?: (event: MouseEvent) => void;
+  onEsc?: (event: KeyboardEvent) => void;
   className?: string;
   rootClassName?: string;
   width?: ModalPropWidth;
@@ -63,6 +64,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
     hasOverlay = true,
     onOverlayClick,
     onClickOutside,
+    onEsc,
     className,
     width = modalPropWidthDefault,
     position = modalPropPositionDefault,
