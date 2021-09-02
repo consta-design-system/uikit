@@ -14,6 +14,7 @@ import {
   DateTime10YearSlider,
   DateTime100YearSlider,
   DateTimeTime,
+  DateTimeTypeYearViewBook,
   DateTimeTypeYearViewClassic,
   DateTimeYear,
   DateTimeYearSlider,
@@ -206,6 +207,24 @@ export const DateTimeTypeYearViewClassicStory = createStory(
   },
   {
     name: 'DateTimeTypeYearViewClassic',
+  },
+);
+
+export const DateTimeTypeYearViewBookStory = createStory(
+  () => {
+    const [value, setValue] = useState<[Date?, Date?] | undefined>(undefined);
+
+    return (
+      <DateTimeTypeYearViewBook
+        value={value}
+        onChangeRange={({ value }) => setValue(value)}
+        minDate={new Date(2021, 0)}
+        maxDate={new Date(2041, 0)}
+      />
+    );
+  },
+  {
+    name: 'DateTimeTypeYearViewBook',
   },
 );
 
