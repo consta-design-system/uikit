@@ -86,6 +86,23 @@ export const Modal: React.FC<ModalProps> = (props) => {
     }
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!onEsc) {
+      return;
+    }
+
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onEsc(e);
+      }
+    };
+
+    document.addEventListener('keydown', handler);
+    return () => {
+      document.removeEventListener('keydown', handler);
+    };
+  }, [onEsc]);
+
   return (
     <CSSTransition
       in={isOpen}
