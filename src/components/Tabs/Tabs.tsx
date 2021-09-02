@@ -131,12 +131,12 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
     multiple: false,
   });
 
-  const tabRefs = useMemo(
-    () => new Array(items.length).fill(null).map(() => createRef<HTMLDivElement>()),
-    [items, fitMode],
-  );
   const tabsDirection = getTabsDirection(linePosition);
   const isVertical = tabsDirection === 'vertical';
+  const tabRefs = useMemo(
+    () => new Array(items.length).fill(null).map(() => createRef<HTMLDivElement>()),
+    [items, fitMode, isVertical],
+  );
   const tabsDimensions = useResizeObserved(
     tabRefs,
     (el): TabDimensions => ({
@@ -145,7 +145,7 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
     }),
   );
 
-  const activeTabIdx = (value && items.indexOf(value)) ?? -1;
+  const activeTabIdx = items.findIndex(getChecked);
 
   const renderItem = (item: typeof items[number], onClick?: () => void) =>
     renderItemProp({
@@ -163,7 +163,7 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
     });
 
   const renderItemsList: RenderItemsListProp = ({ withRunningLine = true, getTabClassName }) => (
-    <div className={cnTabs('List', { direction: tabsDirection })}>
+    <div className={cnTabs('List', { direction: tabsDirection, linePosition })}>
       {items.map((item, idx) => (
         <div
           ref={tabRefs[idx]}
