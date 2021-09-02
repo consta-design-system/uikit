@@ -20,15 +20,20 @@ export const getVisibleTabsRange = ({
   for (let idx = 0; idx < tabsDimensions.length; idx++) {
     const previousTabsWidth = getTabsWidth(tabsDimensions.slice(0, idx));
     const tabElLeftSide = containerPaddingLeft + previousTabsWidth;
+    const isTabLeftSideVisible = tabElLeftSide >= containerLeftSide;
+    if (isTabLeftSideVisible && firstVisibleTabIdx === null) {
+      firstVisibleTabIdx = idx;
+    }
+
     const tabElRightSide = tabElLeftSide + tabsDimensions[idx].size;
-
-    const isTabVisible = tabElLeftSide >= containerLeftSide && tabElRightSide <= containerRightSide;
-
-    if (isTabVisible) {
-      firstVisibleTabIdx = firstVisibleTabIdx ?? idx;
+    const isTabRightSideVisible = tabElRightSide <= containerRightSide;
+    if (isTabRightSideVisible) {
       lastVisibleTabIdx = idx;
     }
   }
 
-  return [firstVisibleTabIdx ?? 0, lastVisibleTabIdx ?? 0];
+  firstVisibleTabIdx = firstVisibleTabIdx ?? 0;
+  lastVisibleTabIdx = Math.max(firstVisibleTabIdx, lastVisibleTabIdx ?? 0);
+
+  return [firstVisibleTabIdx, lastVisibleTabIdx];
 };

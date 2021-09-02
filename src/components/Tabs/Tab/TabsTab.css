@@ -11,7 +11,6 @@
   font-size: var(--tab-font-size);
   line-height: var(--line-height-text-s);
   text-align: left;
-  white-space: nowrap;
   cursor: pointer;
   transition: color 0.2s;
 
