@@ -512,6 +512,10 @@ export const Table = <T extends TableRow>({
     return <TableRowsCollapse {...collapseRollProps}>{cellContent}</TableRowsCollapse>;
   };
 
+  const renderEmptyRowsPlaceholder = (placeholder: React.ReactNode): React.ReactNode => {
+    return typeof placeholder === 'string' ? <Text size="s">{placeholder}</Text> : placeholder;
+  };
+
   const getTableCellProps = (
     row: TableTreeRow<T>,
     rowIdx: number,
@@ -694,7 +698,9 @@ export const Table = <T extends TableRow>({
         })
       ) : (
         <div className={cnTable('RowWithoutCells')}>
-          <div className={cnTable('EmptyCell')}>{emptyRowsPlaceholder}</div>
+          <div className={cnTable('EmptyCell')}>
+            {renderEmptyRowsPlaceholder(emptyRowsPlaceholder)}
+          </div>
         </div>
       )}
     </div>
