@@ -54,7 +54,7 @@ export const TabsMoreItems: TabsMoreItems = React.forwardRef(
             anchorRef={buttonRef}
             offset={-1}
             direction="downStartRight"
-            spareDirection="downCenter"
+            spareDirection="downStartLeft"
             possibleDirections={[
               'downStartRight',
               'downStartLeft',

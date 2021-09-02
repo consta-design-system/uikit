@@ -72,6 +72,17 @@ describe('getVisibleTabsRange', () => {
     ).toEqual([1, 1]);
   });
 
+  it('возвращает только средний таб, даже если он не влез полностью, но виден его левый край', () => {
+    expect(
+      getVisibleTabsRange({
+        tabsDimensions,
+        containerWidth: 50,
+        scrollLeft: 110,
+        containerPaddingLeft: 10,
+      }),
+    ).toEqual([1, 1]);
+  });
+
   it('возвращает только первый таб, если ничего не влезает', () => {
     expect(
       getVisibleTabsRange({

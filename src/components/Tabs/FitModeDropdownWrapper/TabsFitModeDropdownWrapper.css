@@ -3,11 +3,11 @@
   align-items: center;
 
   &-Tabs {
-    flex-shrink: 1;
+    max-width: 100%;
   }
 
   &-MoreItems {
-    flex-shrink: 0;
+    position: absolute;
   }
 
   &-Tab {
