@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { array, boolean, number } from '@storybook/addon-knobs';
 
 import { createMetadata } from '../../../utils/storybook';
-import { Attach } from '../../Attach/Attach';
+import { Attachment } from '../../Attachment/Attachment';
 import { DragNDropField } from '../DragNDropField';
 
 import mdx from './DragNDropField.docs.mdx';
@@ -41,7 +41,7 @@ export function Playground() {
           : undefined}
       </DragNDropField>
       {files.map((file) => (
-        <Attach
+        <Attachment
           key={file.name}
           fileExtension={file.name.match(/\.(?!.*\.)(\w*)/)?.[1]}
           fileName={file.name}

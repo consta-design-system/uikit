@@ -167,7 +167,7 @@ export function MyComponent() {
         <Text>Перетяните файлы сюда</Text>
       </DragNDropField>
       {files.map((file) => (
-        <Attach
+        <Attachment
           key={file.name}
           fileName={file.name}
           fileExtension={file.name.match(/\.(?!.*\.)(\w*)/)?.[1]}
