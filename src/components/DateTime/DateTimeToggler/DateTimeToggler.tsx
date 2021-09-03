@@ -41,7 +41,7 @@ export const DateTimeToggler: React.FC<DateTimeTogglerProps> = (props) => {
           iconSize="s"
         />
       )}
-      <DateTimeLabel className={cnDateTimeToggler('Label')} label={label} />
+      <DateTimeLabel className={cnDateTimeToggler('Label')} label={label} align="center" />
       {nextOnClick && (
         <Button
           className={cnDateTimeToggler('Button', { direction: 'next' })}

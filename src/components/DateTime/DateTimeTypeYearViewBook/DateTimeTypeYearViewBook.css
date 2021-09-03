@@ -1,7 +1,5 @@
 .DateTimeTypeYearViewBook {
-  --date-time-cell-width: calc(var(--control-height-s) + (var(--space-3xs) * 2));
   display: flex;
-  width: calc(var(--date-time-cell-width) * 7);
 
   &-Label {
     margin-bottom: var(--space-l);

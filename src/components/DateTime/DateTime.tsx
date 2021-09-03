@@ -48,3 +48,4 @@ export * from './DateTime10YearSlider/DateTime10YearSlider';
 export * from './DateTime100YearSlider/DateTime100YearSlider';
 export * from './DateTimeTypeYearViewClassic/DateTimeTypeYearViewClassic';
 export * from './DateTimeTypeYearViewBook/DateTimeTypeYearViewBook';
+export * from './DateTimeTypeYearViewSlider/DateTimeTypeYearViewSlider';
