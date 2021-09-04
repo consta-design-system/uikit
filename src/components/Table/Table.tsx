@@ -269,20 +269,23 @@ export const Table = <T extends TableRow>({
 
   React.useLayoutEffect(() => {
     const columnsElements = Object.values(columnsRefs.current).filter(isNotNil);
-    if (columnsElements.length === 0 || (resizedColumnWidths.some(isNotNil) && !stickyColumns)) {
-      return;
-    }
+    if (columnsElements.length === 0) return;
 
     const columnsElementsWidths = columnsElements.map((el) => el.getBoundingClientRect().width);
-
     setInitialColumnWidths(columnsElementsWidths);
 
-    // Проверяем, что таблица отрисовалась корректно, и устанавливаем значения ширин колонок после 1го рендера
+    // Проверяем, что таблица отрисовалась корректно, и устанавливаем значения ширин колонок после 1го и последующих рендера
     if (
       columnsElements[0].getBoundingClientRect().left !==
-      columnsElements[columnsElements.length - 1].getBoundingClientRect().left
+        columnsElements[columnsElements.length - 1].getBoundingClientRect().left &&
+      !resizedColumnWidths.some(isNotNil)
     ) {
-      setResizedColumnWidths(columnsElementsWidths);
+      return setResizedColumnWidths(columnsElementsWidths);
+    }
+
+    // условие изменения ширины колонок при изменении ширины экрана (контейнера таблицы)
+    if (tableWidth > 0 && !isResizable) {
+      return setResizedColumnWidths(getColumnsWidth());
     }
   }, [tableWidth]);
 
