@@ -2,8 +2,7 @@ import './MixCard.css';
 
 import { cn } from '../../utils/bem';
 
-const sizeMap = ['xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl'] as const;
-type SizeMap = typeof sizeMap[number];
+type Size = 'xs' | 's' | 'm' | 'l' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl';
 
 const formMap = ['round', 'square'] as const;
 type FormMap = typeof formMap[number];
@@ -13,8 +12,8 @@ type CardState = typeof cardState[number] | string;
 
 type Props = {
   shadow?: boolean;
-  verticalSpace?: SizeMap;
-  horizontalSpace?: SizeMap;
+  verticalSpace?: Size;
+  horizontalSpace?: Size;
   form?: FormMap;
   state?: CardState;
 };

@@ -11,7 +11,7 @@ export const cardPropForm = ['round', 'square'] as const;
 export type CardPropForm = typeof cardPropForm[number];
 export const cardPropFormDefault: CardPropForm = cardPropForm[0];
 
-export const cardPropSize = ['xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl'] as const;
+export const cardPropSize = ['m', 'xs', 's', 'l', 'xl', '2xl', '3xl', '4xl', '5xl'] as const;
 export type CardPropSize = typeof cardPropSize[number];
 export const cardPropSizeDefault: CardPropSize = cardPropSize[0];
 
@@ -24,7 +24,7 @@ export type Props = {
   horizontalSpace?: CardPropSize;
   state?: CardPropState;
   form?: CardPropForm;
-  hasShadow?: boolean;
+  shadow?: boolean;
   children?: React.ReactNode;
 };
 
@@ -36,7 +36,7 @@ export const Card = forwardRefWithAs<Props>((props, ref) => {
     horizontalSpace = cardPropSizeDefault,
     state,
     form = cardPropFormDefault,
-    hasShadow = true,
+    shadow = true,
     children,
     tabIndex,
     className,
@@ -51,7 +51,7 @@ export const Card = forwardRefWithAs<Props>((props, ref) => {
       tabIndex={tabIndex}
       ref={ref}
       className={cnCard({}, [
-        cnMixCard({ verticalSpace, horizontalSpace, shadow: hasShadow, form, state }),
+        cnMixCard({ verticalSpace, horizontalSpace, shadow, form, state }),
         className,
       ])}
       {...otherProps}
