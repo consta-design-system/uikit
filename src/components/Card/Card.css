@@ -1,0 +1,8 @@
+.Card {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: transparent;
+  border: none;
+}

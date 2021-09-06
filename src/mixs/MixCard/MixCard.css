@@ -1,0 +1,123 @@
+.MixCard {
+  &.MixCard_shadow {
+    box-shadow: var(--shadow-group);
+  }
+
+  &.MixCard_verticalSpace {
+    &_xs {
+      padding-top: var(--space-xs);
+      padding-bottom: var(--space-xs);
+    }
+
+    &_s {
+      padding-top: var(--space-s);
+      padding-bottom: var(--space-s);
+    }
+
+    &_m {
+      padding-top: var(--space-m);
+      padding-bottom: var(--space-m);
+    }
+
+    &_l {
+      padding-top: var(--space-l);
+      padding-bottom: var(--space-l);
+    }
+
+    &_xl {
+      padding-top: var(--space-xl);
+      padding-bottom: var(--space-xl);
+    }
+
+    &_2xl {
+      padding-top: var(--space-2xl);
+      padding-bottom: var(--space-2xl);
+    }
+
+    &_3xl {
+      padding-top: var(--space-3xl);
+      padding-bottom: var(--space-3xl);
+    }
+
+    &_4xl {
+      padding-top: var(--space-4xl);
+      padding-bottom: var(--space-4xl);
+    }
+
+    &_5xl {
+      padding-top: var(--space-5xl);
+      padding-bottom: var(--space-5xl);
+    }
+  }
+
+  &.MixCard_horizontalSpace {
+    &_xs {
+      padding-left: var(--space-xs);
+      padding-right: var(--space-xs);
+    }
+
+    &_s {
+      padding-left: var(--space-s);
+      padding-right: var(--space-s);
+    }
+
+    &_m {
+      padding-left: var(--space-m);
+      padding-right: var(--space-m);
+    }
+
+    &_l {
+      padding-left: var(--space-l);
+      padding-right: var(--space-l);
+    }
+
+    &_xl {
+      padding-left: var(--space-xl);
+      padding-right: var(--space-xl);
+    }
+
+    &_2xl {
+      padding-left: var(--space-2xl);
+      padding-right: var(--space-2xl);
+    }
+
+    &_3xl {
+      padding-left: var(--space-3xl);
+      padding-right: var(--space-3xl);
+    }
+
+    &_4xl {
+      padding-left: var(--space-4xl);
+      padding-right: var(--space-4xl);
+    }
+
+    &_5xl {
+      padding-left: var(--space-5xl);
+      padding-right: var(--space-5xl);
+    }
+  }
+
+  &.MixCard_form {
+    &_round {
+      border-radius: var(--control-radius);
+    }
+
+    &_square {
+      border-radius: 0;
+    }
+  }
+
+  &.MixCard_state {
+    &_alert {
+      border: var(--control-border-width) solid var(--color-bg-alert);
+    }
+
+    &_success {
+      border: var(--control-border-width) solid var(--color-bg-success);
+    }
+
+    &_warning {
+      border: var(--control-border-width) solid var(--color-bg-warning);
+    }
+  }
+}
