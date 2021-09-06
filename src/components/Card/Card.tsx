@@ -11,7 +11,7 @@ export const cardPropForm = ['round', 'square'] as const;
 export type CardPropForm = typeof cardPropForm[number];
 export const cardPropFormDefault: CardPropForm = cardPropForm[0];
 
-export const cardPropSize = ['xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl'] as const;
+export const cardPropSize = ['m', 'xs', 's', 'l', 'xl', '2xl', '3xl', '4xl', '5xl'] as const;
 export type CardPropSize = typeof cardPropSize[number];
 export const cardPropSizeDefault: CardPropSize = cardPropSize[0];
 
