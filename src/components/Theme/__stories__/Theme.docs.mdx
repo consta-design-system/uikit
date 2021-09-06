@@ -6,74 +6,166 @@ import { ThemeExampleRoot } from './examples/ThemeExampleRoot/ThemeExampleRoot';
 Тема — это основа, набор правил в CSS, который определяет, как выглядит проект,
 построенный с помощью дизайн-системы. Без неё ничего работать не будет.
 
-У темы есть несколько модификаторов: [шрифт](#шрифты),
-[размер текста](#размеры-текста), [отступы](#отступы), [цвета](#цвета), [контролы](#контролы), [тени](#тени).
-
-Каждому модификатору может соответствовать несколько CSS-файлов. Указать, какой из файлов нужно использовать, можно в [пресете](#пресеты).
-
 Вы можете использовать несколько тем в одном проекте: «дневную» и «ночную» для всего
 интерфейса или разные темы для отдельных блоков.
 
-> Чтобы смена тем работала, все значения в CSS нужно задавать переменными, а переменные использовать по смыслу. [Почитать про смысл цветов](https://consta-uikit.vercel.app/?path=/story/components-theme--playground)
-
-- [Структура темы](#структура-темы)
+- [Как всё работает](#как-всё-работает)
+- [Модификаторы](#модификаторы)
   - [Цвета](#цвета)
+    - [Цветовые схемы в Consta](#цветовые-схемы-в-consta)
+    - [Как использовать](#как-использовать-цветовые-схемы)
+    - [Как подключить](#как-подключить-разные-цветовые-схемы)
+    - [Цвета в CSS](#цвета-в-css)
+    - [Новые цвета](#новые-цвета)
   - [Шрифты](#шрифты)
   - [Размеры текста](#размеры-текста)
   - [Отступы](#отступы)
-  - [Контролы](#контролы)
+  - [Контролы](#внешний-вид-контролов)
   - [Тени](#тени)
-- [Как создать свою тему](#как-создать-свою-тему)
 - [Пресеты](#пресеты)
-  - [Как создать свой пресет](#как-создать-свой-пресет)
-- [Как подключить тему](#как-подключить-тему)
-- [Как использовать тему для отдельного блока](#как-использовать-тему-для-отдельного-блока)
-- [Как переключать темы](#как-переключать-темы)
-- [Как узнать, какая тема используется](#как-узнать-какая-тема-используется)
+  - [Пресеты в Consta](#пресеты-в-consta)
+  - [Цветовые схемы в пресете](#цветовые-схемы-в-пресете)
+  - [Кастомный пресет](/?path=/docs/thematization-how-to-create-preset--page)
+- [Подключение темы](#как-подключить-тему)
+  - [Для всего проекта](#как-подключить-основную-тему)
+  - [Для отдельного блока](#как-использовать-тему-для-отдельного-блока)
+  - [Переключатель тем](#как-переключать-темы)
+  - [Получить тему и переменные](#как-узнать-какая-тема-используется)
 
-## Модификаторы
+## Как всё работает
 
-Тема состоит из набора модификаторов, каждый отвечает за свою область.
+В компонент `Theme` входит набор модификаторов, каждый из которых отвечает за свою область:
+
+- `_color` — цвета,
+- `_control` — внешний вид компонентов,
+- `_font` — шрифты,
+- `_shadow` — тени,
+- `_size` — размер текста и междустрочный интервал,
+- `_space` — отступы.
+
+[Подробнее о модификаторах](#модификаторы)
+
+У любого модификатора может быть одно или несколько значений, которые описываются в отдельных CSS-файлах.
+
+Имя CSS-файла формируется так:
+
+`Theme_<модификатор>_<значение модификатора>.css`
+
+Файлы хранится в директории компонента `Theme`, в папках с именами модификаторов. В дизайн-системе Consta это выглядит так:
 
 ```
 _color/									# Цвета
-	Theme_color_MyDark.css
-	Theme_color_MyDefault.css
+	Theme_color_gpnDark.css
+	Theme_color_gpnDefault.css
+  Theme_color_gpnDisplay.css
 _control/								# Размеры элементов
-	Theme_control_MyDefault.css
+	Theme_control_gpnDefault.css
 _font/									# Шрифты
-	Theme_font_MyDefault.css
+	Theme_font_gpnDefault.css
 _size/									# Размер текста и междустрочный интервал
-	Theme_size_MyDefault.css
+	Theme_size_gpnDefault.css
 _space/									# Отступы
-	Theme_space_MyDefault.css
-_shadow/									# Тени
-	Theme_shadow_MyDefault.css
+	Theme_space_gpnDefault.css
+_shadow/								# Тени
+	Theme_shadow_gpnDefault.css
 Theme.css								# Стили темы
 ```
 
+[Посмотреть на GitHub](https://github.com/gazprom-neft/consta-uikit/tree/master/src/components/Theme)
+
+Значения модификатора используются при создании [пресета](#пресеты) — чтобы указать, какой CSS-файл в каких случаях подключать.
+
+Пресет — это `preset`, обязательное свойсто компонента `Theme`. В Consta три пресета:
+
+- `presetGpnDefault` — включает светлую цветовую схему,
+- `presetGpnDark` — тёмную,
+- `presetGpnDisplay` — акцентную.
+
+[Подробнее о цветовых схемах](#цветовые-схемы-в-consta)
+
+[Подробнее о пресетах](#пресеты)
+
+Чтобы подключить тему, добавьте компонент `Theme` и укажите пресет.
+
+```tsx
+import React from 'react';
+
+import { Theme, presetGpnDefault } from '@consta/uikit/Theme';
+
+const App = () => {
+  return <Theme preset={presetGpnDefault}>your code</Theme>;
+};
+```
+
+[Как подключить тему](#как-подключить-тему)
+
+## Модификаторы
+
 ### Цвета
 
-В дизайн-системе сейчас есть три основные темы на цвета: светлая тема Default,
-темная тема Dark и презентационная тема Display.
+> - Модификатор: `_color`
+> - CSS:
+>   - [\_color / Theme_color_gpnDark.css](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/Theme/_color/Theme_color_gpnDark.css)
+>   - [\_color / Theme_color_gpnDefault.css](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/Theme/_color/Theme_color_gpnDefault.css)
+>   - [\_color / Theme_color_gpnDisplay.css](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/Theme/_color/Theme_color_gpnDisplay.css)
 
-В основном проекты используют Dark и Default темы с возможностью переключения между ними.
-Display же не используется для сервисов, за которыми пользователь проводит много времени.
-Она нужна для видео-стен, экранов с мониторингом, которые нужны для беглого просмотра,
-либо для «ВАУ» эффекта.
+#### Цветовые схемы в Consta
+
+В дизайн-системе Consta три цветовые схемы:
 
 <ThemeExampleColors />
 
-Все цвета в теме высчитываются из базовых цветов через изменение значений HSLA. Для задания
-темы достаточно изменить только их. Базовые цвета не используются в интерфейсах. Они нужны
-только для высчитывания остальных цветов. Такие цвета описываются postcss переменными,
-а не custom properties.
+За каждую отвечает свой CSS-файл:
+
+```
+_color / Theme_color_gpnDark.css     # Тёмная или инверсная тема — Dark
+_color / Theme_color_gpnDefault.css  # Cветлая, она же основая — Default
+_color / Theme_color_gpnDisplay.css  # Презентационная или акцентная — Display
+```
+
+`gpnDark`, `gpnDefault` и `gpnDisplay` — это значения модификатора `_color`, с их помощью можно обращаться к нужной цветовой схеме, подключать, [переключать](#зачем-нужны-пресеты)
+и получать переменные из CSS.
+
+#### Как использовать цветовые схемы
+
+Обычно проекты, сделанные на основе Consta, используют темы Default и Dark с возможностью переключения между ними.
+
+Тему Display не стоит использовать для сервисов, за которыми пользователь проводит много времени. Она подходит для видео-стен, экранов с мониторингом, а также для блоков, которые нужно выделить.
+
+#### Как подключить разные цветовые схемы
+
+Для этого используют разные пресеты. Вот так:
+
+```tsx
+import React from 'react';
+import { Theme, presetGpnDefault, presetGpnDark, presetGpnDisplay } from '@consta/uikit/Theme';
+
+const App = () => {
+  return (
+    <Theme preset={presetGpnDefault}>your code</Theme> // тема Default
+    <Theme preset={presetGpnDark}>your code</Theme> // тема Dark
+    <Theme preset={presetGpnDisplay}>your code</Theme> // тема Display
+  );
+};
+```
+
+[Подробнее о пресетах](#пресет)
+
+[Как подключить тему](#как-подключить-тему)
+
+#### Цвета в CSS
+
+Все цвета в теме высчитываются из базовых цветов (меняется HSLA-значение). Базовые цвета не используются в интерфейсах, они нужны только для вычисления остальных цветов.
+
+> Если вы хотите поменять цветовую схему, достаточно поменять базовые цвета — остальные пересчитаются
+
+Базовые цвета описываются PostCSS-переменными. Вот так выглядят базовые цвета из темы Default:
 
 ```css
 $color-base-base: #002033; /* Базовый цвет содержимого, от которого выстраиваются цвета текста, иконок, ... */
 $color-base-essential: #fff; /* Базовый цвет поверхностей */
 $color-base-project: #0071b2; /* Проектный цвет, от которого выстраивают акцентные состояния */
-$color-base-phantom: #004269; /* Тонирующий цвет, от которого выстраиватся бордеры, паранджа, ... */
+$color-base-phantom: #004269; /* Тонирующий цвет, от которого выстраиватся бордеры, оверлей под модальными окнами, ... */
 $color-base-path: #0078d2; /* Цвет ссылок и контролов, от которого выстраиваются все их состояния */
 $color-base-system: #ced8de; /* Цвет системнный */
 
@@ -82,37 +174,65 @@ $color-base-alert: #eb5757; /* Цвет ошибки */
 $color-base-warning: #f38b00; /* Цвет предупреждения */
 $color-base-caution: #f2c94c; /* Цвет осторожности */
 $color-base-normal: #56b9f2; /* Цвет нейтральный */
-$color-base-critical: #33000f;
 ```
 
-Мы стараемся максимально использовать цвета из библиотеки. Добавляем новые цвета на проекте,
-если этого требует брендинг, нужны специфичные статусы помимо светофора или для графики и графиков.
+А так из них вычисляются цвета для фона:
+
+```css
+--color-bg-default: color($color-base-essential a(100%)); /* Цвет дефолта */
+--color-bg-secondary: color($color-base-project s(-75) l(+59)); /* Цвет дефолта */
+--color-bg-brand: color($color-base-project a(100%)); /* Цвет фона брендированый */
+--color-bg-link: color($color-base-path a(100%)); /* Цвет фона ссылки */
+--color-bg-border: color($color-base-phantom a(20%) l(+10)); /* Цвет границ */
+```
+
+[Посмотреть на GitHub](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/Theme/_color/Theme_color_gpnDefault.css)
+
+#### Новые цвета
+
+Если вы работаете с Consta и делаете проект для Газпром нефти, постарайтесь
+использовать цвета, которые уже есть в дизайн-системе.
+
+Добавить другой цвет можно, если этого требует брендинг, нужны специфичные статусы,
+для графических элементов или графиков.
 
 ### Шрифты
 
-Пользователи наших сервисов могут находиться в условиях слабого интернета. Поэтому мы
-используем нативные шрифты системы. Да, из-за этого типографика у разных пользователей будет
-отображаться по-разному. Но самый популярный шрифт наших пользователей — Segoe UI, поэтому
-мы ориентируемся на него.
+> - Модификатор: `_font`
+> - CSS: [\_font / Theme_font_gpnDefault.css](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/Theme/_font/Theme_font_gpnDefault.css)
+
+В дизайн-системе используются нативные шрифты. Мы ориентируемся на самый популярный шрифт у наших пользователей — Segoe UI.
 
 ```css
 --font-primary: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
   'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 --font-mono: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+font-family: var(--font-primary);
 ```
+
+[Посмотреть на GitHub](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/Theme/_font/Theme_font_gpnDefault.css)
+
+В этом файле подключаются все начертания/насыщенности/жирности шрифта.
+
+> Проверьте, что в шрифте есть насыщенность, которую вы используете.
+> Браузер имитирует насыщенность, которой нет в наборе, но неизвестно, как это будет выглядеть.
+>
+> [Посмотреть варианты насыщенности в компоненте `Text`](/?path=/docs/components-text--playground) (см. раздел «Насыщенность»).
 
 ### Размеры текста
 
-Тема на размеры текста описывает правила на размер текста и межстрочное расстрояние.
+> - Модификатор: `_size`
+> - CSS: [\_size / Theme_size_gpnDefault.css](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/Theme/_size/Theme_size_gpnDefault.css)
 
-Из-за того, что мы делаем много разных сервисов с разной плотностью информации, разными
-устройствами и для разных ситуаций, общих правил на типографику не существует. Каждый проект
-или экосиcтема проектов задает свои правила иерархии текста.
+Модификатор `_size` отвечает за размер текста и межстрочное расстрояние.
 
-> Любой размер текста можно использовать с любым межстрочным расстоянием, а не только `xs` с `xs`.
+В дизайн-системе нет общих правил для типографики: на ней построены очень разные сервисы — с разной плотностью информации, разными устройствами и для разных ситуаций. Каждый проект или экосиcтема проектов задает свои правила иерархии текста.
+
+> Любой размер текста можно использовать с любым межстрочным расстоянием, а не только `xs` с `xs`
 
 ```css
 /* Размер текста */
+
 --size-text-2xs: 10px;
 --size-text-xs: 12px;
 --size-text-s: 14px;
@@ -131,16 +251,30 @@ $color-base-critical: #33000f;
 --line-height-text-s: 1.4em;
 --line-height-text-m: 1.5em;
 --line-height-text-l: 1.6em;
+
+/* Ширина шрифта */
+--font-weight-text-thin: 100;
+--font-weight-text-light: 300;
+--font-weight-text-regular: normal;
+--font-weight-text-semibold: 600;
+--font-weight-text-bold: bold;
+--font-weight-text-black: 900;
 ```
+
+[Посмотреть на GitHub](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/Theme/_size/Theme_size_gpnDefault.css)
 
 ### Отступы
 
-Везде должны использоваться переменные на отступы. В коде не должно быть случайных пикселей.
+> - Модификатор: `_space`
+> - CSS: [\_size / Theme_space_gpnDefault.css](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/Theme/_space/Theme_space_gpnDefault.css)
 
-Для отступов используется модуль 4px. Исключение составляет отступ в 2px —
+Все отступы нужно описывать с помощью переменных, в коде не должно быть случайных пикселей.
+
+Для отступов используется модуль 4px. Исключение — отступ в 2px,
 он нужен для компенсации графических элементов.
 
 ```css
+/* Отступы */
 --space-3xs: 2px;
 --space-2xs: 4px;
 --space-xs: 8px;
@@ -155,10 +289,16 @@ $color-base-critical: #33000f;
 --space-6xl: 96px;
 ```
 
-### Контролы
+[Посмотреть на GitHub](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/Theme/_space/Theme_space_gpnDefault.css)
 
-Дополнительная модификатор темы для контроля за «контролами». Этим файлом
-определяются переменные для внешнего вида контролов кроме цветов.
+### Внешний вид контролов
+
+> - Модификатор: `_control`
+> - CSS: [\_control / Theme_control_gpnDefault.css](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/Theme/_control/Theme_control_gpnDefault.css)
+
+Отвечает за размеры контролов, внутренние отступы и размеры текста внутри контролов.
+
+Все значения наследуются из модификатора [`_space`](#отступы-space).
 
 ```css
 --control-radius: 4px; /* Основной радиус скругления контроллов */
@@ -179,9 +319,14 @@ $color-base-critical: #33000f;
 --control-text-size-xs: var(--size-text-xs);
 ```
 
+[Посмотреть на GitHub](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/Theme/_control/Theme_control_gpnDefault.css)
+
 ### Тени
 
-В дизайне тени можно посмотреть в [Figma Community](https://www.figma.com/community/file/855572288089401017?preview=fullscreen), вкладка Default Shadows.
+> - Модификатор: `_shadow`
+> - CSS: [\_shadow / Theme_shadow_gpnDefault.css](https://github.com/gazprom-neft/consta-uikit/tree/master/src/components/Theme/_shadow)
+
+Модификатор `_shadow` отвечает за тени. Посмотреть, как это выглдяит, можно в [Figma](https://www.figma.com/file/vNZFtFH6w0IjD2Twi5OXXE/Consta-Default-Colors), во вкладке **Default Shadows**.
 
 ```css
 --shadow-group: 0 2px 2px rgba(0, 32, 51, 0.02), 0 2px 8px rgba(0, 32, 51, 0.16);
@@ -189,99 +334,95 @@ $color-base-critical: #33000f;
 --shadow-modal: 0 8px 8px rgba(0, 32, 51, 0.04), 0 12px 28px rgba(0, 32, 51, 0.12);
 ```
 
-### Как создать свою тему
-
-Возьмите за основу [нашу тему](https://github.com/gazprom-neft/consta-uikit/tree/master/src/components/Theme),
-скопируйте и вставьте свои значения переменных.
-
-> Если вы пользуетесь пресетами, опишите в них новую тему.
+[Посмотреть на GitHub](https://github.com/gazprom-neft/consta-uikit/tree/master/src/components/Theme/_shadow)
 
 ## Пресеты
 
-Пресет темы — это набор модификаторов, которые можно применять ко всему проекту или к отдельным элементам.
+Пресет — это `preset`, свойство компонента `Theme`. Внутри — конструктор, в котором можно прописать, для какого модификатора какой CSS-файл нужно использовать.
 
-Если вы хотите использовать переключатель между темным и светлым интерфейсом или между другими
-модификациями темы, вам понадобится несколько пресетов и переключатель между ними.
+### Пресеты в Consta
 
-Если же ваш интерфейс используется в одном виде, то достаточно будет одного пресета.
+В дизайн-системе Consta три пресета:
 
-Часть компонентов должны быть вынесены на другой информационный слой, но без перекрытия
-всего остального интерфейса. Такие компоненты должны быть всегда в инвертной теме от используемой.
-Таким компонентом является [Tooltip](https://consta-uikit.vercel.app/?path=/story/components-tooltip--tooltip-positioned-by-anchor-story).
-Для таких случаев в пресете нужно указывать цветовую схему `invert` схему у `color`.
+- `presetGpnDefault` — включает светлую тему оформления,
+- `presetGpnDark` — тёмную,
+- `presetGpnDisplay` — акцентную.
 
-Некоторые компоненты должны быть яркими независимо от темы. Это разного рода статусные
-компоненты, которые пользователь не должен не заметить. К таким компонентам относятся [Snackbar](https://consta-uikit.vercel.app/?path=/story/components-snackbar--playground),
-[Informer](https://consta-uikit.vercel.app/?path=/story/components-informer--playground)
-и [Badge](https://consta-uikit.vercel.app/?path=/story/components-badge--playground). Они используются
-в единственном цветовом исполнении не зависимо от дефолтной темы.
-Для таких случаев в пресете нужно указывать цветовую схему `accent` схему у `color`.
+Эти пресеты описаны в отдельных файлах, в папке [`presets`](https://github.com/gazprom-neft/consta-uikit/tree/master/src/components/Theme/presets).
 
-```json
-{
-  "color": {
-    "primary": "myDefault", // основная цветовая схема, указывается значение модификатора _color
-    "accent": "myDark", // акцентная цветовая схема, указывается значение модификатора _color
-    "invert": "myDark" // инвертная цветовая схема, указывается значение модификатора _color
-  },
-  "control": "myDefault", // указывается значение модификатора _control
-  "font": "myDefault", // указывается значение модификатора _font
-  "size": "myDefault", // указывается значение модификатора _size
-  "space": "myDefault" // указывается значение модификатора _space
-  "shadow": "myDefault" // указывается значение модификатора _shadow
-}
-```
-
-### Как создать свой пресет
-
-1. Создайте файл пресета, за основу можно взять любой [пересет из ui-kit](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/Theme/presets/presetGpnDark.ts)
-2. Опишите, какие модификаторы использовать в этом пресете.
-
-### Пример пресета myDefault
+Вот так формируется пресет `presetGpnDefault`: сначала импортируются все CSS-файлы, которые используются в этом пресете, затем описывается соответствие между модификатором и CSS-файлом.
 
 ```tsx
-// Импортируйте CSS-файлы темы
+import '../Theme.css';
+import '../_color/Theme_color_gpnDefault.css';
+import '../_color/Theme_color_gpnDark.css';
+import '../_control/Theme_control_gpnDefault.css';
+import '../_font/Theme_font_gpnDefault.css';
+import '../_size/Theme_size_gpnDefault.css';
+import '../_space/Theme_space_gpnDefault.css';
+import '../_shadow/Theme_shadow_gpnDefault.css';
 
-import { ThemePreset } from '@consta/uikit/Theme';
+import { ThemePreset } from '../Theme';
 
-export const myDefault: ThemePreset = {
+export const presetGpnDefault: ThemePreset = {
   color: {
-    primary: 'myDefault',
-    accent: 'myDark',
-    invert: 'myDark',
+    primary: 'gpnDefault', //основная цветовая схема, указано значение модификатора _color
+    accent: 'gpnDark', //акцентная цветовая схема, указано значение модификатора _color
+    invert: 'gpnDark', //инвертная цветовая схема, указывается значение модификатора _color
   },
-  control: 'myDefault',
-  font: 'myDefault',
-  size: 'myDefault',
-  space: 'myDefault',
-  shadow: 'myDefault',
+  control: 'gpnDefault', // указывается значение модификатора _control
+  font: 'gpnDefault', // указывается значение модификатора _font
+  size: 'gpnDefault', // указывается значение модификатора _size
+  space: 'gpnDefault', // указывается значение модификатора _space
+  shadow: 'gpnDefault', // указывается значение модификатора _shadow
 };
 ```
 
-#### Пример пресета myDark
+[Посмотреть на GitHub](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/Theme/presets/presetGpnDefault.ts)
 
-```tsx
-// Импортируйте CSS-файлы темы
+### Цветовые схемы в пресете
 
-import { ThemePreset } from '@consta/uikit/Theme';
+У модификатора `_color` три цветовые схемы:
 
-export const myDark: ThemePreset = {
-  color: {
-    primary: 'myDark',
-    accent: 'myDark',
-    invert: 'myDefault',
-  },
-  control: 'myDefault',
-  font: 'myDefault',
-  size: 'myDefault',
-  space: 'myDefault',
-  shadow: 'myDefault',
-};
-```
+- `primary` — основная,
+- `accent` — акцентная,
+- `invert` — и инвертная, у остальных модификаторов — по одной.
+
+[Подробнее о цветовых схемах в Consta](#цветовые-схемы-в-consta)
+
+Большая часть компонентов дизайн-системы использует основную цветовую схему. Но не все.
+
+#### Компоненты в инвертной схеме
+
+Некоторые компоненты нужно вынести на другой информационный слой, но так, чтобы не перекрывать остальной интерфейс. Например, [Tooltip](https://consta-uikit.vercel.app/?path=/story/components-tooltip--tooltip-positioned-by-anchor-story).
+
+Такие компоненты должны быть всегда в инвертной схеме по отношению к основной. CSS-файл, который отвечает за отображение таких компонентов, описывается в `color.invert`.
+
+Например:
+
+- в presetGpnDefault `color.primary = 'gpnDefault'`, a `color.invert = 'gpnDark'`,
+- а в presetGpnDark всё наоборот: `color.primary = 'gpnDark'`, a `color.invert = 'gpnDefault'`.
+
+#### Компоненты в акцентной схеме
+
+Некоторые нужно сделать яркими независимо от темы. Например, статусные
+компоненты, на которые пользователю стоит обратить внимание: [Snackbar](/?path=/story/components-snackbar--playground),
+[Informer](/?path=/story/components-informer--playground)
+и [Badge](/?path=/story/components-badge--playground).
+
+Такие компоненты всегда выглядят одинаково, независимо от основной цветовой схемы. CSS-файл, который отвечает за отображение таких компонентов, описывается в `color.accent`.
+
+### Кастомный пресет
+
+Вы можете создать свой пресет — по тем же принципам, по которым организованы пресеты в дизайн-системе.
+
+[Как создать свой пресет](/?path=/docs/thematization-how-to-create-preset--page)
 
 ## Как подключить тему
 
-Тема — это основа. Без неё ничего не заработает. Обязательно подключите ее в корневом компоненте.
+### Как подключить основную тему
+
+В самом начале работы подключите компонент `Theme` и укажите пресет в корневом компоненте — так, чтобы все компоненты @consta/uikit были вложены в компонент `Theme`.
 
 ```tsx
 import React from 'react';
@@ -293,11 +434,11 @@ const App = () => {
 };
 ```
 
-## Как использовать тему для отдельного блока
+### Как использовать тему для отдельного блока
 
-Вы можете вкладывать тему одну в другую, чтобы отдельные блоки выглядели иначе.
+Вы можете вкладывать компоненты `Theme` друг в друга, если нужно, чтобы некоторые блоки выглядели не так, как основной контент.
 
-> Если вы переключите основную тему, вложенная тема не поменется
+> Если вы переключите основную тему, вложенная тема не поменяется
 
 ```tsx
 import React from 'react';
@@ -313,11 +454,11 @@ const App = () => {
 };
 ```
 
-## Как переключать темы
+### Как переключать темы
 
-В большинстве проектов пользователи работают с сервисом в разное время суток и в разных обстоятельствах.
-Поэтому желательно давать пользователю самому решать какой из тем он хочет пользоваться в данный момент —
-темной или светлой. Для этого в интерфейсе должен быть доступен переключатель тем.
+Вы можете добавить переключатель тем, чтобы пользователь мог сам решить, какой темой хочет пользоваться — тёмной или светлой. За это отвечает компонент [ThemeToggler](/docs/components-themetoggler--playground).
+
+> Чтобы смена тем работала, все значения в CSS нужно задавать переменными, а переменные использовать по смыслу. [Почитать про смысл цветов](/?path=/story/components-theme--playground)
 
 ```tsx
 import './RootTheme.css';
@@ -353,14 +494,14 @@ export const RootTheme: React.FC = () => {
 
 <ThemeExampleRoot />
 
-## Как узнать, какая тема используется
+### Как узнать, какая тема используется
 
 Чтобы узнать текущую тему, в которой находится компонент, используйте `useTheme`.
 
-`useTheme` вернет `{ theme, themeClassNames }`
+`useTheme` вернет `{ theme, themeClassNames }`, где:
 
-- `theme` — подключенная тема
-- `themeClassNames` - CSS-классы этой темы
+- `theme` — подключённая тема,
+- `themeClassNames` — CSS-классы этой темы.
 
 С помощью `useTheme` удобно переключать цветовую схему на акцентную или инвертную.
 
