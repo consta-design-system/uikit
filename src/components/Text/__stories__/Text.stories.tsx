@@ -5,6 +5,7 @@ import { createMetadata } from '../../../utils/storybook';
 import {
   Text,
   textPropAlign,
+  textPropCursor,
   textPropDecoration,
   textPropDisplay,
   textPropFont,
@@ -25,6 +26,7 @@ import mdx from './Text.docs.mdx';
 const defaultKnobs = () => ({
   as: select('as', ['p', 'div', 'a', 'span', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'], undefined),
   align: select('align', ['', ...textPropAlign], ''),
+  cursor: select('cursor', ['', ...textPropCursor], ''),
   decoration: select('decoration', ['', ...textPropDecoration], ''),
   display: select('display', ['', ...textPropDisplay], ''),
   font: select('font', textPropFont, 'primary'),
@@ -46,6 +48,7 @@ export function Playground() {
   const {
     as,
     align,
+    cursor,
     decoration,
     display,
     font,
@@ -64,6 +67,7 @@ export function Playground() {
     <Text
       as={as}
       align={align || undefined}
+      cursor={cursor || undefined}
       decoration={decoration || undefined}
       display={display || undefined}
       font={font}
