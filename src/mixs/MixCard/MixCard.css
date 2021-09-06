@@ -1,113 +1,98 @@
 .MixCard {
-  &.MixCard_shadow {
+  padding: var(--vertical-space, 0) var(--horizontal-space, 0);
+  border-radius: var(--border-radius, 0);
+
+  &_shadow {
     box-shadow: var(--shadow-group);
   }
 
-  &.MixCard_verticalSpace {
+  &_verticalSpace {
     &_xs {
-      padding-top: var(--space-xs);
-      padding-bottom: var(--space-xs);
+      --vertical-space: var(--space-xs);
     }
 
     &_s {
-      padding-top: var(--space-s);
-      padding-bottom: var(--space-s);
+      --vertical-space: var(--space-s);
     }
 
     &_m {
-      padding-top: var(--space-m);
-      padding-bottom: var(--space-m);
+      --vertical-space: var(--space-m);
     }
 
     &_l {
-      padding-top: var(--space-l);
-      padding-bottom: var(--space-l);
+      --vertical-space: var(--space-l);
     }
 
     &_xl {
-      padding-top: var(--space-xl);
-      padding-bottom: var(--space-xl);
+      --vertical-space: var(--space-xl);
     }
 
     &_2xl {
-      padding-top: var(--space-2xl);
-      padding-bottom: var(--space-2xl);
+      --vertical-space: var(--space-2xl);
     }
 
     &_3xl {
-      padding-top: var(--space-3xl);
-      padding-bottom: var(--space-3xl);
+      --vertical-space: var(--space-3xl);
     }
 
     &_4xl {
-      padding-top: var(--space-4xl);
-      padding-bottom: var(--space-4xl);
+      --vertical-space: var(--space-4xl);
     }
 
     &_5xl {
-      padding-top: var(--space-5xl);
-      padding-bottom: var(--space-5xl);
+      --vertical-space: var(--space-5xl);
     }
   }
 
-  &.MixCard_horizontalSpace {
+  &_horizontalSpace {
     &_xs {
-      padding-right: var(--space-xs);
-      padding-left: var(--space-xs);
+      --horizontal-space: var(--space-xs);
     }
 
     &_s {
-      padding-right: var(--space-s);
-      padding-left: var(--space-s);
+      --horizontal-space: var(--space-s);
     }
 
     &_m {
-      padding-right: var(--space-m);
-      padding-left: var(--space-m);
+      --horizontal-space: var(--space-m);
     }
 
     &_l {
-      padding-right: var(--space-l);
-      padding-left: var(--space-l);
+      --horizontal-space: var(--space-l);
     }
 
     &_xl {
-      padding-right: var(--space-xl);
-      padding-left: var(--space-xl);
+      --horizontal-space: var(--space-xl);
     }
 
     &_2xl {
-      padding-right: var(--space-2xl);
-      padding-left: var(--space-2xl);
+      --horizontal-space: var(--space-2xl);
     }
 
     &_3xl {
-      padding-right: var(--space-3xl);
-      padding-left: var(--space-3xl);
+      --horizontal-space: var(--space-3xl);
     }
 
     &_4xl {
-      padding-right: var(--space-4xl);
-      padding-left: var(--space-4xl);
+      --horizontal-space: var(--space-4xl);
     }
 
     &_5xl {
-      padding-right: var(--space-5xl);
-      padding-left: var(--space-5xl);
+      --horizontal-space: var(--space-5xl);
     }
   }
 
-  &.MixCard_form {
+  &_form {
     &_round {
-      border-radius: var(--control-radius);
+      --border-radius: var(--control-radius);
     }
 
     &_square {
-      border-radius: 0;
+      --border-radius: 0;
     }
   }
 
-  &.MixCard_state {
+  &_state {
     &_alert {
       border: var(--control-border-width) solid var(--color-bg-alert);
     }
