@@ -12,135 +12,110 @@ export type Group = {
 
 export const items: Item[] = [
   {
-    label: 'Neptunium',
+    label: 'Синий',
     groupId: 1,
     id: 1,
   },
   {
-    label: 'Plutonium',
+    label: 'Красный',
     groupId: 1,
     id: 2,
   },
   {
-    label: 'Americium',
+    label: 'Жёлтый',
     groupId: 1,
     id: 3,
     disabled: true,
   },
   {
-    label: 'Curium',
+    label: 'Зелёный',
     groupId: 1,
     id: 4,
   },
   {
-    label: 'Berkelium',
+    label: 'Белый',
     groupId: 2,
     id: 5,
   },
   {
-    label: 'Californium Berkelium Curium Plutonium',
+    label: 'Серо-буро-малиновый',
     groupId: 2,
     id: 6,
   },
   {
-    label: 'Einsteinium',
+    label: 'Чёрный',
     groupId: 1,
     id: 7,
   },
   {
-    label: 'Fermium',
+    label: 'В полоску',
     groupId: 3,
     id: 8,
   },
   {
-    label: 'Mendelevium',
+    label: 'В клетку',
     groupId: 3,
     id: 9,
   },
   {
-    label: 'Nobelium',
+    label: 'Коричневый',
     groupId: 1,
     id: 10,
   },
   {
-    label: 'Lawrencium',
+    label: 'Фиолетовый',
     groupId: 2,
     id: 11,
   },
   {
-    label: 'Rutherfordium',
+    label: 'Лиловый',
     groupId: 2,
     id: 12,
   },
   {
-    label: 'Dubnium',
+    label: 'Серый',
     groupId: 1,
     id: 13,
   },
   {
-    label: 'Seaborgium',
+    label: 'В горошек',
     groupId: 3,
     id: 14,
   },
   {
-    label: 'Bohrium',
+    label: 'Голубой',
     groupId: 1,
     id: 15,
   },
   {
-    label: 'Hassium',
+    label: 'Индиго',
     groupId: 2,
     id: 16,
   },
   {
-    label: 'Meitnerium',
+    label: 'Серебряный',
     groupId: 2,
     id: 17,
   },
   {
-    label: 'Darmstadtium',
+    label: 'Золотой',
     groupId: 2,
     id: 18,
   },
   {
-    label: 'Roentgenium',
+    label: 'Оранжевый',
     groupId: 2,
     id: 19,
   },
   {
-    label: 'Copernicium',
+    label: 'Бирюзовый',
     groupId: 2,
     id: 20,
   },
   {
-    label: 'Nihonium',
+    label: 'В цветочек',
     groupId: 3,
     id: 21,
-  },
-  {
-    label: 'Flerovium',
-    groupId: 2,
-    id: 22,
-  },
-  {
-    label: 'Moscovium',
-    groupId: 2,
-    id: 23,
-  },
-  {
-    label: 'Livermorium',
-    groupId: 2,
-    id: 24,
-  },
-  {
-    label: 'Tennessine',
-    groupId: 2,
-    id: 25,
-  },
-  {
-    label: 'Oganesson',
-    groupId: 1,
-    id: 26,
   },
 ];
 
