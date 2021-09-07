@@ -3,12 +3,14 @@ import './Table.css';
 import React, { useMemo } from 'react';
 
 import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
+import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { IconSortDown } from '../../icons/IconSortDown/IconSortDown';
 import { IconSortUp } from '../../icons/IconSortUp/IconSortUp';
 import { IconUnsort } from '../../icons/IconUnsort/IconUnsort';
 import { sortBy as sortByDefault, updateAt } from '../../utils/array';
 import { cn } from '../../utils/bem';
 import { isNotNil } from '../../utils/type-guards';
+import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { Text } from '../Text/Text';
 
 import { HorizontalAlign, TableCell, VerticalAlign } from './Cell/TableCell';
@@ -143,6 +145,10 @@ export type Props<T extends TableRow> = {
   isExpandedRowsByDefault?: boolean;
 };
 
+type TableProps<T extends TableRow> = PropsWithHTMLAttributesAndRef<Props<T>, HTMLDivElement>;
+
+type Table = <T extends TableRow>(props: TableProps<T>) => React.ReactElement | null;
+
 export type ColumnMetaData = {
   filterable: boolean;
   isSortingActive: boolean;
@@ -192,28 +198,29 @@ const defaultEmptyRowsPlaceholder = (
   </Text>
 );
 
-export const Table = <T extends TableRow>({
-  columns,
-  rows,
-  size = 'l',
-  filters,
-  isResizable = false,
-  stickyHeader = false,
-  stickyColumns = 0,
-  activeRow,
-  verticalAlign = 'top',
-  headerVerticalAlign = 'center',
-  zebraStriped,
-  borderBetweenRows = false,
-  borderBetweenColumns = false,
-  emptyRowsPlaceholder = defaultEmptyRowsPlaceholder,
-  className,
-  onRowHover,
-  lazyLoad,
-  onSortBy,
-  onFiltersUpdated,
-  isExpandedRowsByDefault = false,
-}: Props<T>): React.ReactElement => {
+const InternalTable = <T extends TableRow>(props: Props<T>, ref: React.Ref<HTMLDivElement>) => {
+  const {
+    columns,
+    rows,
+    size = 'l',
+    filters,
+    isResizable = false,
+    stickyHeader = false,
+    stickyColumns = 0,
+    activeRow,
+    verticalAlign = 'top',
+    headerVerticalAlign = 'center',
+    zebraStriped,
+    borderBetweenRows = false,
+    borderBetweenColumns = false,
+    emptyRowsPlaceholder = defaultEmptyRowsPlaceholder,
+    className,
+    onRowHover,
+    lazyLoad,
+    onSortBy,
+    onFiltersUpdated,
+    isExpandedRowsByDefault = false,
+  } = props;
   const {
     headers,
     flattenedHeaders,
@@ -239,6 +246,7 @@ export const Table = <T extends TableRow>({
   const [sorting, setSorting] = React.useState<SortingState<T>>(null);
   const [visibleFilter, setVisibleFilter] = React.useState<string | null>(null);
   const [tableScroll, setTableScroll] = React.useState({ top: 0, left: 0 });
+
   const tableRef = React.useRef<HTMLDivElement>(null);
   const columnsRefs = React.useRef<Record<number, HTMLDivElement | null>>({});
   const {
@@ -250,11 +258,11 @@ export const Table = <T extends TableRow>({
   const [expandedRowIds, setExpandedRowIds] = React.useState<string[]>([]);
 
   /*
-    Подписываемся на изменения размеров таблицы, но не используем значения из
-    хука так как нам нужна ширина и высота таблицы без размера скролла. Этот хук
-    использует значения `offsetWidth` и `offsetHeight` которые включают размер
-    скролл бара.
-  */
+  Подписываемся на изменения размеров таблицы, но не используем значения из
+  хука так как нам нужна ширина и высота таблицы без размера скролла. Этот хук
+  использует значения `offsetWidth` и `offsetHeight` которые включают размер
+  скролл бара.
+*/
   useComponentSize(tableRef);
   const tableHeight = tableRef.current?.clientHeight || 0;
   const tableWidth = tableRef.current?.clientWidth || 0;
@@ -554,7 +562,7 @@ export const Table = <T extends TableRow>({
 
   return (
     <div
-      ref={tableRef}
+      ref={useForkRef([tableRef, ref])}
       className={cnTable(
         {
           size,
@@ -700,3 +708,5 @@ export const Table = <T extends TableRow>({
     </div>
   );
 };
+
+export const Table = React.forwardRef(InternalTable) as Table;
