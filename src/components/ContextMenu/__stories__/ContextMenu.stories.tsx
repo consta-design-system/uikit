@@ -129,7 +129,7 @@ export function Playground() {
 
   return (
     <div className={cnChoiceGroupStories()}>
-      <Button label="Открой контекстное меню" ref={ref} onClick={() => setIsOpen(!isOpen)} />
+      <Button label="Откройте контекстное меню" ref={ref} onClick={() => setIsOpen(!isOpen)} />
       {isOpen && (
         <ContextMenu
           items={items}
