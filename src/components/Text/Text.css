@@ -23,6 +23,12 @@
     }
   }
 
+  &_cursor {
+    &_pointer {
+      cursor: pointer;
+    }
+  }
+
   &_decoration {
     &_underline {
       text-decoration: underline;
@@ -179,8 +185,6 @@
 
     &_link {
       color: var(--color-typo-link);
-      text-decoration: none;
-      cursor: pointer;
       transition: 0.3s ease;
 
       :hover {
@@ -190,7 +194,6 @@
 
     &_linkMinor {
       color: var(--color-typo-link-minor);
-      text-decoration: none;
       transition: 0.3s ease;
 
       :hover {
