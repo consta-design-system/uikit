@@ -31,7 +31,7 @@ const getKnobs = () => ({
   size: select('size', multiComboboxPropSize, multiComboboxPropSizeDefault),
   view: select('view', view, DefaultPropView),
   form: select('form', form, DefaultPropForm),
-  placeholder: text('placeholder', 'Placeholder'),
+  placeholder: text('placeholder', 'Выберите'),
 });
 
 const Default = (

@@ -25,36 +25,21 @@ type SelectOption = {
 };
 
 const items = [
-  { label: 'Neptunium', value: 'Neptunium', id: 1 },
-  { label: 'Plutonium', value: 'Plutonium', id: 2 },
-  { label: 'Americium', value: 'Americium', id: 3 },
-  { label: 'Curium', value: 'Curium', id: 4 },
-  { label: 'Berkelium', value: 'Berkelium', id: 5 },
+  { label: 'Синий', value: 'blue', id: 1 },
+  { label: 'Белый', value: 'white', id: 2 },
+  { label: 'Красный', value: 'red', id: 3 },
+  { label: 'Жёлтый', value: 'yellow', id: 4 },
+  { label: 'Зелёный', value: 'green', id: 5 },
   {
-    label: 'Californium Berkelium Curium Plutonium',
-    value: 'Californium Berkelium Curium Plutonium',
+    label: 'Серо-буро-малиновый в крапинку',
+    value: 'mix',
     id: 6,
   },
-  { label: 'Einsteinium', value: 'Einsteinium', id: 7 },
-  { label: 'Fermium', value: 'Fermium', id: 8 },
-  { label: 'Mendelevium', value: 'Mendelevium', id: 9 },
-  { label: 'Nobelium', value: 'Nobelium', id: 10 },
-  { label: 'Lawrencium', value: 'Lawrencium', id: 11 },
-  { label: 'Rutherfordium', value: 'Rutherfordium', id: 12 },
-  { label: 'Dubnium', value: 'Dubnium', id: 13 },
-  { label: 'Seaborgium', value: 'Seaborgium', id: 14 },
-  { label: 'Bohrium', value: 'Bohrium', id: 15 },
-  { label: 'Hassium', value: 'Hassium', id: 16 },
-  { label: 'Meitnerium', value: 'Meitnerium', id: 17 },
-  { label: 'Darmstadtium', value: 'Darmstadtium', id: 18 },
-  { label: 'Roentgenium', value: 'Roentgenium', id: 19 },
-  { label: 'Copernicium', value: 'Copernicium', id: 20 },
-  { label: 'Nihonium', value: 'Nihonium', id: 21 },
-  { label: 'Flerovium', value: 'Flerovium', id: 22 },
-  { label: 'Moscovium', value: 'Moscovium', id: 23 },
-  { label: 'Livermorium', value: 'Livermorium', id: 24 },
-  { label: 'Tennessine', value: 'Tennessine', id: 25 },
-  { label: 'Oganesson', value: 'Oganesson', id: 26 },
+  { label: 'Оранжевый', value: 'orange', id: 7 },
+  { label: 'Фиолетовый', value: 'violet', id: 8 },
+  { label: 'Лиловый', value: 'lilas', id: 9 },
+  { label: 'В клеточку', value: 'checked', id: 10 },
+  { label: 'В полосочку', value: 'striped', id: 11 },
 ];
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -63,7 +48,7 @@ const getKnobs = () => ({
   size: select('size', sizes, DefaultPropSize),
   view: select('view', view, DefaultPropView),
   form: select('form', form, DefaultPropForm),
-  placeholder: text('placeholder', 'Placeholder'),
+  placeholder: text('placeholder', 'Выберите цвет'),
 });
 
 export function Playground(props: {

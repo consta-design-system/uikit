@@ -309,6 +309,8 @@ type Filter = {
 
 type OnRowHover = ({ id, e }: { id: string | undefined; e: React.MouseEvent }) => void;
 
+type onRowClick = ({ id, e }: { id: string; e: React.MouseEvent }) => void;
+
 type LazyLoad = { maxVisibleRows?: number; scrollableEl?: HTMLDivElement / Window; }
 // maxVisibleRows - количество строк
 // scrollableEl - элемент с onScroll listener
@@ -331,6 +333,7 @@ type LazyLoad = { maxVisibleRows?: number; scrollableEl?: HTMLDivElement / Windo
 | [`borderBetweenColumns`](#границы)                  | `boolean`                                           | false                                             | Отображение границ между колонками                   |
 | [`emptyRowsPlaceholder`](#заглушка)                 | `React.ReactNode`                                   | -                                                 | Заглушка, показывается, когда в таблице нет данных   |
 | [`onRowHover`](#выделить-строки)                    | `OnRowHover`                                        | -                                                 | Функция которая сработает при наведении на строку    |
+| [`onRowClick`](#выделить-строки)                    | `OnRowHover`                                        | -                                                 | Функция которая сработает при клике на строку        |
 | [`onSortBy`](#сортировка)                           | `onSortBy`                                          | sortByDefault                                     | Функция срабатывает при нажатии на иконку сортировки |
 | `className`                                         | `string`                                            | -                                                 | Дополнительный CSS-класс                             |
 | `lazyLoad?`                                         | `LazyLoad`                                          | `{ maxVisibleRows: 210; scrollableEl: tableRef }` | Включает виртуальную прокрутку в таблице             |

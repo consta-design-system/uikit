@@ -2,6 +2,7 @@ import './Checkbox.css';
 
 import React, { ChangeEventHandler } from 'react';
 
+import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
@@ -50,7 +51,8 @@ export type CheckboxProps = PropsWithHTMLAttributes<Props, HTMLLabelElement>;
 export const cnCheckbox = cn('Checkbox');
 
 export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>((props, ref) => {
-  const checkboxRef = ref || React.useRef<HTMLLabelElement>(null);
+  const checkboxRef = React.useRef<HTMLLabelElement>(null);
+
   const {
     checked = false,
     name,
@@ -70,7 +72,7 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>((props
     tabIndex,
     inputRef,
     ...otherProps
-  } = usePropsHandler(cnCheckbox(), props, checkboxRef as React.RefObject<HTMLLabelElement>);
+  } = usePropsHandler(cnCheckbox(), props, checkboxRef);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     if (onChange) {
@@ -82,7 +84,7 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>((props
     <label
       {...otherProps}
       className={cnCheckbox({ size, view, disabled, intermediate, align }, [className])}
-      ref={checkboxRef}
+      ref={useForkRef([ref, checkboxRef])}
     >
       <input
         type="checkbox"

@@ -83,6 +83,7 @@ const getKnobs = <T extends TableRow>(replacedProps?: Partial<Props<T>>): Props<
       headerVerticalAligns,
       props.headerVerticalAlign,
     ),
+    onRowClick: ({ id, e }) => action(`onRowClick[${id}]`)(e),
   };
 };
 
