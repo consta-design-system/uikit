@@ -1,5 +1,45 @@
 # Changelog
 
+## v3.2.0 (08/09/2021)
+**Важное из обновления:**
+* Добавлен миксин `MixCard`
+* Добавлен компонент `Card`
+* Переработана документация по тематизации
+
+---
+
+- [docs(MixCard): moved docs to stories.mdx](https://github.com/gazprom-neft/consta-uikit/commit/9a2e042e699f543fc3c6812e22149279bdd2607d) - [@gizeasy](https://github.com/gizeasy)
+- [ docs(Mixin): add documentation for MixCard (#1532)](https://github.com/gazprom-neft/consta-uikit/commit/f9bfbf218146605e15c9e0639be7797f19c95cd1) - [@N1MBER](https://github.com/N1MBER)
+- [feat(Card): add mixin and component card(#1508)](https://github.com/gazprom-neft/consta-uikit/commit/11737b816db2784ba11e2a5131d1b72fd043dab7) - [@N1MBER](https://github.com/N1MBER)
+- [feat(TabsFitModeScrollWrapper): add native scroll (#1528)](https://github.com/gazprom-neft/consta-uikit/commit/bb08d735f9596c18cf36184caa736b6e5864dc32) - [@N1MBER](https://github.com/N1MBER)
+- [chore(deps): bump path-parse from 1.0.6 to 1.0.7 (#1418)](https://github.com/gazprom-neft/consta-uikit/commit/bb1c90c552320e844ec837b4ceba702b6f928c2b) - [@dependabot](https://github.com/dependabot)
+- [chore(deps): bump tar from 4.4.13 to 4.4.19 (#1471)](https://github.com/gazprom-neft/consta-uikit/commit/00b14353fbad6ac9e4c27047d515d68a16a1e99d) - [@dependabot](https://github.com/dependabot)
+- [docs(thematization): rewrite docs about theme (#1454)](https://github.com/gazprom-neft/consta-uikit/commit/f5078d803e574d9a5592f9aacb0aad69129c9286) - [@arhayka](https://github.com/arhayka)
+- [docs(Theme): rewrite docs (#1507)](https://github.com/gazprom-neft/consta-uikit/commit/d64e2bfc6aadb74da8ed81a681e82a884b504a74) - [@arhayka](https://github.com/arhayka)
+- [docs(BasicSelect): docs review (#1509)](https://github.com/gazprom-neft/consta-uikit/commit/50fedaf120b9b743f4fe31042c29348d57e1b81f) - [@arhayka](https://github.com/arhayka)
+- [docs(Button): review docs (#1510)](https://github.com/gazprom-neft/consta-uikit/commit/8a1b02a2b65c2913699f96f774c8e7b7056e0ff6) - [@arhayka](https://github.com/arhayka)
+- [docs(Checkbox): docs review (#1511)](https://github.com/gazprom-neft/consta-uikit/commit/4e7e4a55e1a1ade876c3dbec9885e6fba1e7f22f) - [@arhayka](https://github.com/arhayka)
+- [docs(ComboboxDeprecated): docs review (#1512)](https://github.com/gazprom-neft/consta-uikit/commit/a32e2dcb0f8d0b87750f015a56423908dea6a9bc) - [@arhayka](https://github.com/arhayka)
+- [docs(ChoiceGroup): docs review (#1516)](https://github.com/gazprom-neft/consta-uikit/commit/a51c36be27166507bf4c5749719b9a2243a0d2df) - [@arhayka](https://github.com/arhayka)
+- [docs(ContextMenu): docs review (#1517)](https://github.com/gazprom-neft/consta-uikit/commit/c722ac8131756a0f1272076c1b78526616cfd8f5) - [@arhayka](https://github.com/arhayka)
+- [docs(FileField): docs review (#1519)](https://github.com/gazprom-neft/consta-uikit/commit/beeb37d572d0bbf954fc7f51b1e5789de37e43b9) - [@arhayka](https://github.com/arhayka)
+- [docs(MultiComboboxDepecated): docs review (#1520)](https://github.com/gazprom-neft/consta-uikit/commit/f0d9494f47c7fcd5ed512bfa8e27cf8048d1b8a1) - [@arhayka](https://github.com/arhayka)
+- [docs(Select): docs review (#1521)](https://github.com/gazprom-neft/consta-uikit/commit/aadbecf0847672a22f5f9349db4ce6ed5522fc7b) - [@arhayka](https://github.com/arhayka)
+- [docs(Switch): docs review (#1522)](https://github.com/gazprom-neft/consta-uikit/commit/c53b08a390e5469cb57d2bc5612113cca22830be) - [@arhayka](https://github.com/arhayka)
+- [docs(SwitchGroup): edit docs, add examples (#1529)](https://github.com/gazprom-neft/consta-uikit/commit/edef830232e32fb5e6fe6b6be8d5304948af7418) - [@arhayka](https://github.com/arhayka)
+- [fix(components): fix misprint (#1526)](https://github.com/gazprom-neft/consta-uikit/commit/656cedf4b25eeffd7f170daa270bd102a2b19ad3) - [@kolebayev](https://github.com/kolebayev)
+- [refactor(Checkbox): refactor ref (#1514)](https://github.com/gazprom-neft/consta-uikit/commit/5e1f48ab70bfb9b3a313c4a7cf4f70f2c0ce3893) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Text): Add underline & cursor props (#1513)](https://github.com/gazprom-neft/consta-uikit/commit/ae964fb334536bc86a7c584da5ce90e6d3ec6a57) - [@N1KN](https://github.com/N1KN)
+- [fix(Table): setting automatic column width when changing the window width (#1505)](https://github.com/gazprom-neft/consta-uikit/commit/57d05fc1f8a673f3e814f8ecf6fa8d59892e6ea2) - [@AntonS86](https://github.com/AntonS86)
+- [feat(TableNumberFilter): added className props (#1502)](https://github.com/gazprom-neft/consta-uikit/commit/3ced9f3a2e8de0de014dadec530996c2e6d345a2) - [@AntonS86](https://github.com/AntonS86)
+- [feat(Table): add onRowClick callback (#1489)](https://github.com/gazprom-neft/consta-uikit/commit/69e2059bb9f9582b96442107b384acd5526d8fe9) - [@N1KN](https://github.com/N1KN)
+- [fix(Table): added a wrapper for an empty placeholder, if placeholder is a string (#1497)](https://github.com/gazprom-neft/consta-uikit/commit/6044130d3fc5dc614e3defce7527c62d18cfee5f) - [@AntonS86](https://github.com/AntonS86)
+- [refactor(Attach, Attachment): rename Attach to Attachment (#1500)](https://github.com/gazprom-neft/consta-uikit/commit/c72d379b6d10b8808f223f00d7b51f05efbc178f) - [@N1KN](https://github.com/N1KN)
+- [fix(Table): fixed onFiltersUpdated not called on removeAllSelectedFilters (#1493)](https://github.com/gazprom-neft/consta-uikit/commit/07a1cf5cd7414a54b3007cc54658142bc2bb5a7a) - [@N1KN](https://github.com/N1KN)
+- [chore(gh-actions): add action for automatic test](https://github.com/gazprom-neft/consta-uikit/commit/5e6cd1e7ed99047a8c214877542ce20b17ce0962) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v3.1.0 (01/09/2021)
 - [chore(yarn.lock): fixed deps](https://github.com/gazprom-neft/consta-uikit/commit/07d3039d29fd3fa175e8083444d96a066939e77a) - [@gizeasy](https://github.com/gizeasy)
 - [docs(common): add how to docs, edit common docs (#1470)](https://github.com/gazprom-neft/consta-uikit/commit/e7787ab396d931c620f62cd959c448340842023a) - [@arhayka](https://github.com/arhayka)
@@ -324,15 +364,3 @@ _Обращаем внимание_: *версии компонентов обр
 - [fix(SideBar): remove extra border-radius (#723)](https://github.com/gazprom-neft/consta-uikit/commit/16b05716a4a7512bd96787644083b2f4a97cc346) - [@fooontic](https://github.com/fooontic)
 - [ docs(MultiCombobox): add docs for MultiCombobox (#639)](https://github.com/gazprom-neft/consta-uikit/commit/3ddbe119d62795ac8820c199aa584ee0c8e450c3) - [@arhayka](https://github.com/arhayka)
 - [fix(MultiCombobox): fixed getGroupOptions types (#717)](https://github.com/gazprom-neft/consta-uikit/commit/e43de5b859401718c58bb17686a320cf1cecfb78) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v1.10.11 (18/12/2020)
-- [feat(Responses): add new components (#656)](https://github.com/gazprom-neft/consta-uikit/commit/f1798bca4d5302e99a0bb26e722413ff730bb1c1) - [@Miocene](https://github.com/Miocene)
-- [fix(Pagination): fix pagination (#712)](https://github.com/gazprom-neft/consta-uikit/commit/4421aeed0d2860d5c9eef0725479b46dbc2aa6fa) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
-- [feat(Table): add callback on filters updated (#658)](https://github.com/gazprom-neft/consta-uikit/commit/c21af435d0583536aae9f57a1d0ebd34538c1878) - [@ISlukin](https://github.com/ISlukin)
-- [feat(storyBook): added id for stories (#710)](https://github.com/gazprom-neft/consta-uikit/commit/63545635796bc8c0a455bc2fea57c4c9322a3f81) - [@gizeasy](https://github.com/gizeasy)
-- [feat(CheckboxGroup): added CheckboxGroup component (#703)](https://github.com/gazprom-neft/consta-uikit/commit/6cfb58da2a1555c4f60b03f36c50ca25bffe7c93) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
-- [feat(Steps): added Steps component (#676)](https://github.com/gazprom-neft/consta-uikit/commit/2ac509ee1d967875820d956b01b67fd3bbf8094e) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
-- [fix(Header): fix menu colors (#705)](https://github.com/gazprom-neft/consta-uikit/commit/f309ce9542580f1604e3d4093e3e27c04c03aae9) - [@Miocene](https://github.com/Miocene)
-- [fix(docs): update line-height for Headings (#679)](https://github.com/gazprom-neft/consta-uikit/commit/1ccea2a8222c8abb6960934d4c6b8355f75bace0) - [@fooontic](https://github.com/fooontic)
