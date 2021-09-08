@@ -1,0 +1,10 @@
+.MixCardExampleForm {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  grid-gap: 20px;
+
+  & > * {
+    flex: 1;
+  }
+}
