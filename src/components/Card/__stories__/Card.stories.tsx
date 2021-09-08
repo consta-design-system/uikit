@@ -13,20 +13,20 @@ import {
 
 import mdx from './Card.docs.mdx';
 
-const cardStateMap = ['default', 'alert', 'success', 'warning'];
+const cardStatusMap = ['default', 'alert', 'success', 'warning'];
 
 const defaultKnobs = () => ({
   verticalSpace: select('Vertical padding', cardPropSize, cardPropSizeDefault),
   horizontalSpace: select('Horizontal padding', cardPropSize, cardPropSizeDefault),
   shadow: boolean('Shadow', true),
-  state: select('Border style', cardStateMap, cardStateMap[0]),
+  status: select('Border style', cardStatusMap, cardStatusMap[0]),
   form: select('Form', cardPropForm, cardPropFormDefault),
 });
 
 const cnCardStories = cn('cnCardStories');
 
 export function Playground() {
-  const { verticalSpace, horizontalSpace, shadow, state, form } = defaultKnobs();
+  const { verticalSpace, horizontalSpace, shadow, status, form } = defaultKnobs();
 
   return (
     <div className={cnCardStories()}>
@@ -34,7 +34,7 @@ export function Playground() {
         horizontalSpace={horizontalSpace}
         verticalSpace={verticalSpace}
         shadow={shadow}
-        state={state}
+        status={status}
         form={form}
       />
     </div>

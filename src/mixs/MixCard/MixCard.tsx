@@ -7,15 +7,15 @@ type Size = 'xs' | 's' | 'm' | 'l' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl';
 const formMap = ['round', 'square'] as const;
 type FormMap = typeof formMap[number];
 
-const cardState = ['alert', 'success', 'warning'] as const;
-type CardState = typeof cardState[number] | string;
+const cardStatus = ['alert', 'success', 'warning'] as const;
+type CardStatus = typeof cardStatus[number] | string;
 
 type Props = {
   shadow?: boolean;
   verticalSpace?: Size;
   horizontalSpace?: Size;
   form?: FormMap;
-  state?: CardState;
+  status?: CardStatus;
 };
 
 type CnCard = (

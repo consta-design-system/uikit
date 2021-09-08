@@ -1,6 +1,23 @@
 .MixCard {
-  padding: var(--vertical-space, 0) var(--horizontal-space, 0);
-  border-radius: var(--border-radius, 0);
+  box-sizing: border-box;
+
+  &[class*='_verticalSpace'] {
+    padding-top: var(--vertical-space);
+    padding-bottom: var(--vertical-space);
+  }
+
+  &[class*='_horisontalSpase'] {
+    padding-right: var(--horisontal-space);
+    padding-left: var(--horisontal-space);
+  }
+
+  &[class*='_form'] {
+    border-radius: var(--border-radius, 0);
+  }
+
+  &[class*='_status'] {
+    border: var(--control-border-width) solid var(--border-color);
+  }
 
   &_shadow {
     box-shadow: var(--shadow-group);
@@ -92,17 +109,17 @@
     }
   }
 
-  &_state {
+  &_status {
     &_alert {
-      border: var(--control-border-width) solid var(--color-bg-alert);
+      --border-color: var(--color-bg-alert);
     }
 
     &_success {
-      border: var(--control-border-width) solid var(--color-bg-success);
+      --border-color: var(--color-bg-success);
     }
 
     &_warning {
-      border: var(--control-border-width) solid var(--color-bg-warning);
+      --border-color: var(--color-bg-warning);
     }
   }
 }
