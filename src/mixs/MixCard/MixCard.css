@@ -1,29 +1,24 @@
 .MixCard {
   box-sizing: border-box;
 
-  &[class*='_verticalSpace'] {
-    padding-top: var(--vertical-space);
-    padding-bottom: var(--vertical-space);
-  }
-
-  &[class*='_horisontalSpase'] {
-    padding-right: var(--horisontal-space);
-    padding-left: var(--horisontal-space);
-  }
-
-  &[class*='_form'] {
-    border-radius: var(--border-radius, 0);
-  }
-
-  &[class*='_status'] {
-    border: var(--control-border-width) solid var(--border-color);
-  }
-
   &_shadow {
     box-shadow: var(--shadow-group);
   }
 
   &_verticalSpace {
+    &_xs,
+    &_s,
+    &_m,
+    &_l,
+    &_xl,
+    &_2xl,
+    &_3xl,
+    &_4xl,
+    &_5xl {
+      padding-right: var(--vertical-space);
+      padding-left: var(--vertical-space);
+    }
+
     &_xs {
       --vertical-space: var(--space-xs);
     }
@@ -62,6 +57,19 @@
   }
 
   &_horizontalSpace {
+    &_xs,
+    &_s,
+    &_m,
+    &_l,
+    &_xl,
+    &_2xl,
+    &_3xl,
+    &_4xl,
+    &_5xl {
+      padding-top: var(--vertical-space);
+      padding-bottom: var(--vertical-space);
+    }
+
     &_xs {
       --horizontal-space: var(--space-xs);
     }
@@ -100,6 +108,11 @@
   }
 
   &_form {
+    &_round,
+    &_square {
+      border-radius: var(--border-radius);
+    }
+
     &_round {
       --border-radius: var(--control-radius);
     }
@@ -110,6 +123,12 @@
   }
 
   &_status {
+    &_alert,
+    &_success,
+    &_warning {
+      border: var(--control-border-width) solid var(--border-color);
+    }
+
     &_alert {
       --border-color: var(--color-bg-alert);
     }

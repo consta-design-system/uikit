@@ -3,24 +3,16 @@ import { boolean, select } from '@storybook/addon-knobs';
 
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
-import {
-  Card,
-  cardPropForm,
-  cardPropFormDefault,
-  cardPropSize,
-  cardPropSizeDefault,
-} from '../Card';
+import { Card, cardPropForm, cardPropFormDefault, cardPropSpace, cardPropStatus } from '../Card';
 
 import mdx from './Card.docs.mdx';
 
-const cardStatusMap = ['default', 'alert', 'success', 'warning'];
-
 const defaultKnobs = () => ({
-  verticalSpace: select('Vertical padding', cardPropSize, cardPropSizeDefault),
-  horizontalSpace: select('Horizontal padding', cardPropSize, cardPropSizeDefault),
-  shadow: boolean('Shadow', true),
-  status: select('Border style', cardStatusMap, cardStatusMap[0]),
-  form: select('Form', cardPropForm, cardPropFormDefault),
+  verticalSpace: select('verticalSpace', cardPropSpace, cardPropSpace[0]),
+  horizontalSpace: select('horizontalSpace', cardPropSpace, cardPropSpace[0]),
+  shadow: boolean('shadow', true),
+  status: select('status', ['', ...cardPropStatus], ''),
+  form: select('form', cardPropForm, cardPropFormDefault),
 });
 
 const cnCardStories = cn('cnCardStories');

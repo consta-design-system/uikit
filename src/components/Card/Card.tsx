@@ -8,17 +8,15 @@ export const cardPropForm = ['round', 'square'] as const;
 export type CardPropForm = typeof cardPropForm[number];
 export const cardPropFormDefault: CardPropForm = cardPropForm[0];
 
-export const cardPropSize = ['m', 'xs', 's', 'l', 'xl', '2xl', '3xl', '4xl', '5xl'] as const;
-export type CardPropSize = typeof cardPropSize[number];
-export const cardPropSizeDefault: CardPropSize = cardPropSize[0];
+export const cardPropSpace = ['m', 'xs', 's', 'l', 'xl', '2xl', '3xl', '4xl', '5xl'] as const;
+export type CardPropSpace = typeof cardPropSpace[number];
 
 export const cardPropStatus = ['alert', 'success', 'warning'] as const;
 export type CardPropStatus = typeof cardPropStatus[number] | string;
-export const cardPropStatusDefault: CardPropStatus = cardPropStatus[0];
 
 export type Props = {
-  verticalSpace?: CardPropSize;
-  horizontalSpace?: CardPropSize;
+  verticalSpace?: CardPropSpace;
+  horizontalSpace?: CardPropSpace;
   status?: CardPropStatus;
   form?: CardPropForm;
   shadow?: boolean;
