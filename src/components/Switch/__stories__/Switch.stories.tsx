@@ -19,7 +19,7 @@ const defaultKnobs = () => ({
   size: select('size', switchPropSize, switchPropSizeDefault),
   view: select('view', switchPropView, switchPropViewDefault),
   align: select('align', switchPropAlign, switchPropAlignDefault),
-  label: text('label', 'Move me, I beg you!'),
+  label: text('label', 'Это переключатель'),
 });
 
 export function Playground() {

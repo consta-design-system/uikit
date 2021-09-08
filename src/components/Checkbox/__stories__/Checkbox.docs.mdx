@@ -9,7 +9,7 @@ import { CheckboxExampleView } from './examples/CheckboxExampleView/CheckboxExam
 Чекбокс — элемент с двумя состояниями: **выбран** и **не выбран**.
 
 Используйте чекбокс, если хотите, чтобы пользователь сделал выбор, а потом подтвердил
-изменения. Например, согласился с обработкой персональны данных и нажал **Отправить**.
+изменения. Например, согласился с обработкой персональных данных и нажал **Отправить**.
 
 Этот компонент подходит, если вам нужен один чекбокс. Если нужно выбрать несколько элементов из списка, используйте [CheckboxGroup](?path=/docs/components-checkboxgroup--playground).
 
@@ -28,11 +28,11 @@ import { CheckboxExampleView } from './examples/CheckboxExampleView/CheckboxExam
 
 Название — это надпись рядом с чекбоксом, за него отвечает свойство `label`. Пишется с заглавной буквы, без точки.
 
-<CheckboxExampleName />
-
 ```tsx
 <Checkbox label="Это чекбокс" />
 ```
+
+<CheckboxExampleName />
 
 ## Состояния
 
@@ -46,8 +46,6 @@ import { CheckboxExampleView } from './examples/CheckboxExampleView/CheckboxExam
 
 Если не хотите, чтобы выбор можно было менять, добавьте свойство `disabled`.
 
-<CheckboxExampleStatus />
-
 ```tsx
 <Checkbox label="Checkbox" />
 <Checkbox checked label="Checked" />
@@ -56,16 +54,18 @@ import { CheckboxExampleView } from './examples/CheckboxExampleView/CheckboxExam
 <Checkbox disabled checked label="Disabled Checked" />
 ```
 
+<CheckboxExampleStatus />
+
 ## Размер
 
 За размер отвечает свойство `size`. Варианты: `'m'`, `'l'`, по умолчанию `'m'`.
-
-<CheckboxExampleSize />
 
 ```tsx
 <Checkbox size="m" label="Размер m" />
 <Checkbox size="l" label="Размер l" />
 ```
+
+<CheckboxExampleSize />
 
 ## Внешний вид
 
@@ -74,12 +74,12 @@ import { CheckboxExampleView } from './examples/CheckboxExampleView/CheckboxExam
 - `primary` — акцентный чекбокс (по умолчанию),
 - `ghost` — второстепенный чекбокс.
 
-<CheckboxExampleView />
-
 ```tsx
 <Checkbox view="primary" checked label="Акцентный чекбокс" />
 <Checkbox view="ghost" checked label="Второстепенный чекбокс" />
 ```
+
+<CheckboxExampleView />
 
 ## Выравнивание
 
@@ -87,8 +87,6 @@ import { CheckboxExampleView } from './examples/CheckboxExampleView/CheckboxExam
 
 - `center` — чекбокс выровнен по центру контейнера с текстом,
 - `top` — чекбокс выровнен по верхнему краю контейнера с текстом.
-
-<CheckboxExampleAlign />
 
 ```tsx
 <Checkbox
@@ -100,6 +98,8 @@ import { CheckboxExampleView } from './examples/CheckboxExampleView/CheckboxExam
   label="Длинный текст для чекбокса с выравниванием по верху, здесь несколько строк"
 />
 ```
+
+<CheckboxExampleAlign />
 
 ## Свойства
 

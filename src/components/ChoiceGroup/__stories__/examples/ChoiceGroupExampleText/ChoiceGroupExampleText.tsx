@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
+import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { ChoiceGroup } from '../../../ChoiceGroup';
 
@@ -9,6 +10,7 @@ type Item = string;
 
 const itemsWrong: Item[] = ['Сетка', 'Таблицей', 'Карточка'];
 const items: Item[] = ['Списком', 'В таблице', 'По одному'];
+const itemsSimple: Item[] = ['один', 'два', 'три', 'четыре', 'пять', 'шесть'];
 
 export const ChoiceGroupExampleText = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
@@ -41,5 +43,21 @@ export const ChoiceGroupExampleText = () => {
         <p className={cnDocsExample('Status', { view: 'right' })}>Правильно</p>
       </div>
     </div>
+  );
+};
+
+export const ChoiceGroupExample = () => {
+  const [value, setValue] = useState<Item | null>(items[0]);
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <ChoiceGroup
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        items={itemsSimple}
+        getLabel={(item) => item}
+        multiple={false}
+        name="ChoiceGroupExampleText"
+      />
+    </StoryBookExample>
   );
 };

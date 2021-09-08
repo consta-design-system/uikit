@@ -30,7 +30,7 @@ const getKnobs = () => ({
   size: select('size', sizes, DefaultPropSize),
   view: select('view', view, DefaultPropView),
   form: select('form', form, DefaultPropForm),
-  placeholder: text('placeholder', 'Placeholder'),
+  placeholder: text('placeholder', 'Выберите цвет'),
 });
 
 const Default = (props: {

@@ -35,6 +35,34 @@ import { BasicSelectExampleForm } from './examples/BasicSelectExampleForm/BasicS
 
 Если не знаете, что написать в подсказке, используйте универсальное **Выберите**.
 
+```tsx
+type SelectOption = {
+  label: string;
+  value: string;
+};
+
+const items = [
+  { label: 'Синий', value: 'blue' },
+  { label: 'Белый', value: 'white' },
+  { label: 'Красный', value: 'red' },
+  { label: 'Черный', value: 'black' },
+  { label: 'Зелёный', value: 'green' },
+  { label: 'В полосочку', value: 'stripe' },
+];
+
+export const BasicSelectExampleText = () => {
+  const getItemLabel = (option: SelectOption): string => option.label;
+  return (
+    <BasicSelect
+      id="colors"
+      options={items}
+      getOptionLabel={getItemLabel}
+      placeholder="Выберите цвет"
+    />
+  );
+};
+```
+
 <BasicSelectExampleText />
 
 ## Размер
@@ -61,24 +89,24 @@ import { BasicSelectExampleForm } from './examples/BasicSelectExampleForm/BasicS
 
 ## Cвойства
 
-| Свойство                      | Тип или варианты значения                              | По умолчанию   | Описание                                                                                         |
-| ----------------------------- | ------------------------------------------------------ | -------------- | ------------------------------------------------------------------------------------------------ |
-| [`view?`](#внешний-вид)       | `default , clear`                                      | `default`      | Внешний вид компонента                                                                           |
-| [`disabled?`](#внешний-вид)   | `boolean`                                              | -              | Делает компонент недоступным                                                                     |
-| [`size?`](#размер)            | `'s' , 'm' , 'l'`                                      | `'m'`          | Размер компонента                                                                                |
-| [`form?`](#форма)             | `default`, `brick`, `round`                            | `default`      | Размер компонента                                                                                |
-| [`placeholder?`](#варианты)   | `string`                                               | -              | Подсказка, отображается, когда вариант не выбран                                                 |
-| [`options`](#варианты)        | `T[]`                                                  | -              | Варианты, которые можно выбрать                                                                  |
-| [`getOptionLabel`](#варианты) | `(arg: T) => string`                                   | -              | Функция для получения текста варианта, который будет отображаться в поле для выбранного значения |
-| [`getOptionKey?`](#варианты)  | `(arg: T) => string | number`                          | getOptionLabel | Функция для получения уникального ключа элемента списка                                          |
-| `value?`                      | `T , null`                                             | `null`         | Значение селекта                                                                                 |
-| `ariaLabel?`                  | `string`                                               | -              | `aria` атрибут для метки                                                                         |
-| `id`                          | `string`                                               | -              | Идентификатор селекта в DOM                                                                      |
-| `onChange?`                   | `(value: string | null) => void`                       | -              | Обработчик события изменения значения компонента                                                 |
-| `onBlur?`                     | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -              | Обработчик события `blur`                                                                        |
-| `onFocus?`                    | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -              | Обработчик события `focus`                                                                       |
-| `className?`                  | `string`                                               | -              | Дополнительный CSS-класс                                                                         |
-| dropdownClassName?            | `string`                                               | -              | Дополнительный CSS-класс для выпадающего блока                                                   |
+| Свойство                      | Тип или варианты значения                              | По умолчанию     | Описание                                                                                         |
+| ----------------------------- | ------------------------------------------------------ | ---------------- | ------------------------------------------------------------------------------------------------ |
+| [`view?`](#внешний-вид)       | `default , clear`                                      | `default`        | Внешний вид компонента                                                                           |
+| [`disabled?`](#внешний-вид)   | `boolean`                                              | -                | Делает компонент недоступным                                                                     |
+| [`size?`](#размер)            | `'s' , 'm' , 'l'`                                      | `'m'`            | Размер компонента                                                                                |
+| [`form?`](#форма)             | `default`, `brick`, `round`                            | `default`        | Размер компонента                                                                                |
+| [`placeholder?`](#варианты)   | `string`                                               | -                | Подсказка, отображается, когда вариант не выбран                                                 |
+| [`options`](#варианты)        | `T[]`                                                  | -                | Варианты, которые можно выбрать                                                                  |
+| [`getOptionLabel`](#варианты) | `(arg: T) => string`                                   | -                | Функция для получения текста варианта, который будет отображаться в поле для выбранного значения |
+| [`getOptionKey?`](#варианты)  | `(arg: T) => string` <code>&#124;</code> `number`      | `getOptionLabel` | Функция для получения уникального ключа элемента списка                                          |
+| `value?`                      | `T , null`                                             | `null`           | Значение селекта                                                                                 |
+| `ariaLabel?`                  | `string`                                               | -                | `aria` атрибут для метки                                                                         |
+| `id`                          | `string`                                               | -                | Идентификатор селекта в DOM                                                                      |
+| `onChange?`                   | `(value: string` <code>&#124;</code> `null) => void`   | -                | Обработчик события изменения значения компонента                                                 |
+| `onBlur?`                     | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                | Обработчик события `blur`                                                                        |
+| `onFocus?`                    | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                | Обработчик события `focus`                                                                       |
+| `className?`                  | `string`                                               | -                | Дополнительный CSS-класс                                                                         |
+| `dropdownClassName?`          | `string`                                               | -                | Дополнительный CSS-класс для выпадающего блока                                                   |
 
 ## Примеры
 

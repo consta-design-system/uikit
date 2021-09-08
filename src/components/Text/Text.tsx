@@ -14,6 +14,9 @@ export type TextPropDisplay = typeof textPropDisplay[number];
 export const textPropFont = ['primary', 'mono'] as const;
 export type TextPropFont = typeof textPropFont[number];
 
+export const textPropCursor = ['pointer'] as const;
+export type TextPropCursor = typeof textPropCursor[number];
+
 export const textPropDecoration = ['underline'] as const;
 export type TextPropDecoration = typeof textPropDecoration[number];
 
@@ -72,6 +75,7 @@ export type TextPropWidth = typeof textPropWidth[number];
 
 type Props = {
   align?: TextPropAlign;
+  cursor?: TextPropCursor;
   decoration?: TextPropDecoration;
   display?: TextPropDisplay;
   font?: TextPropFont;
@@ -92,6 +96,7 @@ export const Text = forwardRefWithAs<Props>((props, ref) => {
   const {
     as = 'div',
     align,
+    cursor,
     decoration,
     display,
     font,
@@ -117,6 +122,7 @@ export const Text = forwardRefWithAs<Props>((props, ref) => {
       className={cnText(
         {
           align,
+          cursor,
           decoration,
           display,
           font,
