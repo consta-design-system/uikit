@@ -1,0 +1,144 @@
+.MixCard {
+  box-sizing: border-box;
+
+  &_shadow {
+    box-shadow: var(--shadow-group);
+  }
+
+  &_verticalSpace {
+    &_xs,
+    &_s,
+    &_m,
+    &_l,
+    &_xl,
+    &_2xl,
+    &_3xl,
+    &_4xl,
+    &_5xl {
+      padding-right: var(--vertical-space);
+      padding-left: var(--vertical-space);
+    }
+
+    &_xs {
+      --vertical-space: var(--space-xs);
+    }
+
+    &_s {
+      --vertical-space: var(--space-s);
+    }
+
+    &_m {
+      --vertical-space: var(--space-m);
+    }
+
+    &_l {
+      --vertical-space: var(--space-l);
+    }
+
+    &_xl {
+      --vertical-space: var(--space-xl);
+    }
+
+    &_2xl {
+      --vertical-space: var(--space-2xl);
+    }
+
+    &_3xl {
+      --vertical-space: var(--space-3xl);
+    }
+
+    &_4xl {
+      --vertical-space: var(--space-4xl);
+    }
+
+    &_5xl {
+      --vertical-space: var(--space-5xl);
+    }
+  }
+
+  &_horizontalSpace {
+    &_xs,
+    &_s,
+    &_m,
+    &_l,
+    &_xl,
+    &_2xl,
+    &_3xl,
+    &_4xl,
+    &_5xl {
+      padding-top: var(--vertical-space);
+      padding-bottom: var(--vertical-space);
+    }
+
+    &_xs {
+      --horizontal-space: var(--space-xs);
+    }
+
+    &_s {
+      --horizontal-space: var(--space-s);
+    }
+
+    &_m {
+      --horizontal-space: var(--space-m);
+    }
+
+    &_l {
+      --horizontal-space: var(--space-l);
+    }
+
+    &_xl {
+      --horizontal-space: var(--space-xl);
+    }
+
+    &_2xl {
+      --horizontal-space: var(--space-2xl);
+    }
+
+    &_3xl {
+      --horizontal-space: var(--space-3xl);
+    }
+
+    &_4xl {
+      --horizontal-space: var(--space-4xl);
+    }
+
+    &_5xl {
+      --horizontal-space: var(--space-5xl);
+    }
+  }
+
+  &_form {
+    &_round,
+    &_square {
+      border-radius: var(--border-radius);
+    }
+
+    &_round {
+      --border-radius: var(--control-radius);
+    }
+
+    &_square {
+      --border-radius: 0;
+    }
+  }
+
+  &_status {
+    &_alert,
+    &_success,
+    &_warning {
+      border: var(--control-border-width) solid var(--border-color);
+    }
+
+    &_alert {
+      --border-color: var(--color-bg-alert);
+    }
+
+    &_success {
+      --border-color: var(--color-bg-success);
+    }
+
+    &_warning {
+      --border-color: var(--color-bg-warning);
+    }
+  }
+}
