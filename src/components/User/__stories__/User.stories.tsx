@@ -23,7 +23,7 @@ const defaultKnobs = () => ({
   status: select('status', ['', ...userPropStatus], ''),
   avatarUrl: text('avatarUrl', ``),
   name: text('Name', `Имя Фамилия`),
-  info: text('Info', `Сегодня на Почтамской`),
+  info: text('Info', `Сегодня на Почтамтской`),
   withArrow: boolean('withArrow', false),
   onlyAvatar: boolean('onlyAvatar', false),
   withIconRight: boolean('withIconRight', false),
