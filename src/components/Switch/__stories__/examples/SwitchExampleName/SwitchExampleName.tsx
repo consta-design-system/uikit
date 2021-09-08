@@ -60,7 +60,7 @@ export const SwitchExampleNameNoVerb = () => (
       <Switch label="Тестовый режим" checked onChange={emptyFunction} />
     </div>
     <div>
-      <Switch label="Темная тема" checked={false} onChange={emptyFunction} />
+      <Switch label="Тёмная тема" checked={false} onChange={emptyFunction} />
     </div>
     <div>
       <Switch label="Автоматическая трансформация" checked={false} onChange={emptyFunction} />
