@@ -6,7 +6,9 @@ import { boolean, number, object, select, text } from '@storybook/addon-knobs';
 
 import {
   customFilters,
+  CustomIDs,
   generateData,
+  partOfTableDataForCustomTagLabelFunction,
   tableData,
   tableDataWithRenderFn,
   tableWithBagdeData,
@@ -18,6 +20,7 @@ import { IconCopy } from '../../../icons/IconCopy/IconCopy';
 import { updateAt } from '../../../utils/array';
 import { cn } from '../../../utils/bem';
 import { createMetadata, createStory } from '../../../utils/storybook';
+import { isNotNil } from '../../../utils/type-guards';
 import { Button } from '../../Button/Button';
 import { Checkbox } from '../../Checkbox/Checkbox';
 import { Text } from '../../Text/Text';
@@ -84,6 +87,7 @@ const getKnobs = <T extends TableRow>(replacedProps?: Partial<Props<T>>): Props<
       props.headerVerticalAlign,
     ),
     onRowClick: ({ id, e }) => action(`onRowClick[${id}]`)(e),
+    getTagLabel: props.getTagLabel,
   };
 };
 
@@ -352,6 +356,60 @@ export const withCustomFilters = createStory(
   },
   {
     name: 'с кастомными фильтрами',
+  },
+);
+
+export const withCustomTagLabelFunction = createStory(
+  () => {
+    type GetTagLabel = (filterValue: any) => string;
+
+    const tagLabelById: Record<CustomIDs, GetTagLabel> = {
+      [CustomIDs.fullName]: (filterValue: Array<{ value: string; name: string }>) => {
+        if (!Array.isArray(filterValue)) {
+          return '';
+        }
+
+        return filterValue.reduce((fullText, { value }) => {
+          // Выводим только первые буквы в отдельных словах, таким образом получим инициалы
+          return `${fullText}${fullText.length ? ', ' : ''}${value
+            .split(' ')
+            .map((str) => str.slice(0, 1))
+            .join('')}`;
+        }, '');
+      },
+      [CustomIDs.yearOfRegistration]: (filterValue) => {
+        let restName = '';
+        if (filterValue.min && filterValue.max) {
+          restName = `начиная с ${filterValue.min} и заканчивая ${filterValue.max}`;
+        } else if (filterValue.min) {
+          restName = `начиная с ${filterValue.min}`;
+        } else if (filterValue.max) {
+          restName = `заканчивая ${filterValue.max}`;
+        }
+
+        return restName;
+      },
+    };
+
+    return (
+      <div className={cnTableStories()}>
+        <Table
+          {...partOfTableDataForCustomTagLabelFunction}
+          getTagLabel={(id, name, filterValue: any) => {
+            if (!isNotNil(filterValue)) {
+              return name;
+            }
+
+            const getTagLabel = tagLabelById[id as CustomIDs];
+
+            return name + getTagLabel(filterValue);
+          }}
+        />
+      </div>
+    );
+  },
+  {
+    name: 'со своей функцией именования тэга фильтра',
   },
 );
 

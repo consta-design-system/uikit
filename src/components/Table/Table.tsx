@@ -18,7 +18,10 @@ import {
   Props as TableRowsCollapseProps,
   TableRowsCollapse,
 } from './RowsCollapse/TableRowsCollapse';
-import { TableSelectedOptionsList } from './SelectedOptionsList/TableSelectedOptionsList';
+import {
+  GetTagLabel,
+  TableSelectedOptionsList,
+} from './SelectedOptionsList/TableSelectedOptionsList';
 import {
   fieldFiltersPresent,
   FieldSelectedValues,
@@ -143,6 +146,7 @@ export type Props<T extends TableRow> = {
   onRowClick?: onRowClick;
   lazyLoad?: LazyLoad;
   onFiltersUpdated?: (filters: SelectedFilters) => void;
+  getTagLabel?: GetTagLabel;
   isExpandedRowsByDefault?: boolean;
 };
 
@@ -216,6 +220,7 @@ export const Table = <T extends TableRow>({
   lazyLoad,
   onSortBy,
   onFiltersUpdated,
+  getTagLabel,
   isExpandedRowsByDefault = false,
 }: Props<T>): React.ReactElement => {
   const {
@@ -636,6 +641,7 @@ export const Table = <T extends TableRow>({
         <div className={cnTable('RowWithoutCells')}>
           <TableSelectedOptionsList
             values={getSelectedFiltersList({ filters, selectedFilters, columns: lowHeaders })}
+            getTagLabel={getTagLabel}
             onRemove={removeSelectedFilter(filters)}
             onReset={resetSelectedFilters}
           />

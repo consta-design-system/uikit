@@ -10,12 +10,6 @@ import { Tag } from '../../Tag/Tag';
 
 const cnTableSelectedOptionsList = cn('TableSelectedOptionsList');
 
-type Props = {
-  values: Array<{ id: string; name: string; value?: any }>;
-  onRemove: (id: string) => void;
-  onReset: () => void;
-};
-
 type OptionValue = {
   min?: string;
   max?: string;
@@ -27,32 +21,46 @@ type OptionValue = {
     value: string | number;
   };
 
-const getTagLabel = (name: string, value?: OptionValue): string => {
-  if (!isNotNil(value)) {
+export type GetTagLabel = (id: string, name: string, filterValue?: OptionValue) => string;
+
+type Props = {
+  values: Array<{ id: string; name: string; value?: any }>;
+  getTagLabel?: GetTagLabel;
+  onRemove: (id: string) => void;
+  onReset: () => void;
+};
+
+const getTagLabelDefault: GetTagLabel = (id, name, filterValue?: OptionValue): string => {
+  if (!isNotNil(filterValue)) {
     return name;
   }
 
   let restName = '';
-  if (Array.isArray(value)) {
-    restName = value.map(({ name }) => name).join(', ');
+  if (Array.isArray(filterValue)) {
+    restName = filterValue.map(({ name }) => name).join(', ');
   }
 
-  if (value.min && value.max) {
-    restName = `от ${value.min} до ${value.max}`;
-  } else if (value.min) {
-    restName = `от ${value.min}`;
-  } else if (value.max) {
-    restName = `до ${value.max}`;
+  if (filterValue.min && filterValue.max) {
+    restName = `от ${filterValue.min} до ${filterValue.max}`;
+  } else if (filterValue.min) {
+    restName = `от ${filterValue.min}`;
+  } else if (filterValue.max) {
+    restName = `до ${filterValue.max}`;
   }
 
-  if (value.name) {
-    restName = `${value.name}`;
+  if (filterValue.name) {
+    restName = `${filterValue.name}`;
   }
 
   return name + restName;
 };
 
-export const TableSelectedOptionsList: React.FC<Props> = ({ values, onRemove, onReset }) => {
+export const TableSelectedOptionsList: React.FC<Props> = ({
+  values,
+  onRemove,
+  onReset,
+  getTagLabel = getTagLabelDefault,
+}) => {
   return (
     <div className={cnTableSelectedOptionsList()}>
       <div className={cnTableSelectedOptionsList('Options')}>
@@ -60,7 +68,7 @@ export const TableSelectedOptionsList: React.FC<Props> = ({ values, onRemove, on
           <Tag
             className={cnTableSelectedOptionsList('Option')}
             key={option.id}
-            label={getTagLabel(option.name, option.value)}
+            label={getTagLabel(option.id, option.name, option.value)}
             size="xs"
             mode="cancel"
             onCancel={(): void => onRemove(option.id)}
