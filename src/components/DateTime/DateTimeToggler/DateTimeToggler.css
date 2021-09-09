@@ -1,0 +1,24 @@
+.DateTimeToggler {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  width: calc(var(--date-time-cell-width) * 7);
+
+  &:not(&_withPrevButton) {
+    padding-left: var(--control-height-s);
+  }
+
+  &:not(&_withNextButton) {
+    padding-right: var(--control-height-s);
+  }
+
+  &-Label {
+    flex: 1;
+    margin: 0 var(--space-xs);
+  }
+
+  &-Button_direction_prev {
+    transform: rotate(180deg);
+  }
+}
