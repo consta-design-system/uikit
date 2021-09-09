@@ -1,0 +1,34 @@
+<Meta title="Hooks|useGlobalKeys" id="useGlobalKeys" />
+
+# useGlobalKeys
+
+Этот хук может понадобиться в компонентах, где нужно перехватывать нажатия клавиш глобальной области
+Например, [Modal](/?path=/story/components-modal--playground).
+
+Хук `useGlobalKeys` занимается всей логикой выбора: вы можете использовать его,
+чтобы не обрабатывать эту логику самостоятельно.
+
+```tsx
+import React, { FC } from 'react';
+import { useGlobalKeys } from '../useGlobalKeys';
+
+const Component: FC = () => {
+  useGlobalKeys({
+    Escape: (e: KeyboardEvent) => console.log('Пользователь нажал Escape', e),
+    ArrowUp: (e: KeyboardEvent) => console.log('Пользователь нажал стрелку вверх', e),
+  });
+
+  return <>Пример компонента</>;
+};
+```
+
+## Свойства
+
+| Свойство      | Тип и значения                                      | По умолчанию | Описание                                              |
+| ------------- | --------------------------------------------------- | ------------ | ----------------------------------------------------- |
+| `keyHandlers` | `{ [key: string]: (event: KeyboardEvent) => void }` | `{}`         | Колбек вызывается при совпадении ключа и `event.code` |
+| `eventType`   | `"keyup" | "keydown"`                               | `"keyup"`    | Тип события, на которые подписываемся                 |
+
+## Пример
+
+Пример использования хука `useGlobalKeys` можно посмотреть в компоненте [Modal](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/Modal/Modal.tsx)

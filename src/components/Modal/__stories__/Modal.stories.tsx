@@ -1,10 +1,11 @@
 import './Modal.stories.css';
 
 import React from 'react';
+import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
 
 import { cn } from '../../../utils/bem';
-import { createMetadata } from '../../../utils/storybook';
+import { callbackWithSelector, createMetadata } from '../../../utils/storybook';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 import { Modal } from '../Modal';
@@ -32,6 +33,16 @@ export function Playground(): JSX.Element {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const { hasOverlay, width, position } = defaultKnobs();
 
+  const handleClickOutside = callbackWithSelector({ name: 'onClickOutside' }, () => {
+    setIsModalOpen(false);
+  });
+
+  const handleEscPress = callbackWithSelector({ name: 'onEsc' }, () => {
+    setIsModalOpen(false);
+
+    return false;
+  });
+
   return (
     <div className={cnModalStories()}>
       <Button
@@ -45,14 +56,13 @@ export function Playground(): JSX.Element {
         className={cnModalStories('Modal')}
         isOpen={isModalOpen}
         hasOverlay={hasOverlay}
-        onOverlayClick={(): void => setIsModalOpen(false)}
+        onClickOutside={handleClickOutside}
+        onEsc={handleEscPress}
         width={width}
         position={position}
         refsForExcludeClickOutside={[...[]]}
-        // eslint-disable-next-line no-console
-        onClose={(): void => console.log('Коллбэк на закрытие')}
-        // eslint-disable-next-line no-console
-        onOpen={(): void => console.log('Коллбэк на открытие')}
+        onClose={action('onClose')}
+        onOpen={action('onOpen')}
       >
         {
           <>
