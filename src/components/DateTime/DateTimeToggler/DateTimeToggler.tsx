@@ -1,4 +1,4 @@
-import './DateTimeMonthToggler.css';
+import './DateTimeToggler.css';
 
 import React from 'react';
 
@@ -6,34 +6,34 @@ import { IconForward } from '../../../icons/IconForward/IconForward';
 import { cn } from '../../../utils/bem';
 import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
 import { Button } from '../../Button/Button';
-import { DateTimeMonthLabel } from '../DateTimeMonthLabel/DateTimeMonthLabel';
+import { DateTimeLabel } from '../DateTimeLabel/DateTimeLabel';
 
-export type DateTimeMonthTogglerProps = PropsWithJsxAttributes<
+export type DateTimeTogglerProps = PropsWithJsxAttributes<
   {
     prevOnClick?: React.EventHandler<React.MouseEvent<HTMLDivElement>>;
     nextOnClick?: React.EventHandler<React.MouseEvent<HTMLDivElement>>;
-    label: string;
+    label: string | number;
     children?: never;
   },
   'div'
 >;
 
-export const cnDateTimeMonthToggler = cn('DateTimeMonthToggler');
+export const cnDateTimeToggler = cn('DateTimeToggler');
 
-export const DateTimeMonthToggler: React.FC<DateTimeMonthTogglerProps> = (props) => {
+export const DateTimeToggler: React.FC<DateTimeTogglerProps> = (props) => {
   const { label, className, prevOnClick, nextOnClick, ...otherProps } = props;
 
   return (
     <div
       {...otherProps}
-      className={cnDateTimeMonthToggler(
+      className={cnDateTimeToggler(
         { withPrevButton: Boolean(prevOnClick), withNextButton: Boolean(nextOnClick) },
         [className],
       )}
     >
       {prevOnClick && (
         <Button
-          className={cnDateTimeMonthToggler('Button', { direction: 'prev' })}
+          className={cnDateTimeToggler('Button', { direction: 'prev' })}
           onClick={prevOnClick}
           iconLeft={IconForward}
           size="s"
@@ -41,10 +41,10 @@ export const DateTimeMonthToggler: React.FC<DateTimeMonthTogglerProps> = (props)
           iconSize="s"
         />
       )}
-      <DateTimeMonthLabel className={cnDateTimeMonthToggler('Label')} label={label} />
+      <DateTimeLabel className={cnDateTimeToggler('Label')} label={label} align="center" />
       {nextOnClick && (
         <Button
-          className={cnDateTimeMonthToggler('Button', { direction: 'next' })}
+          className={cnDateTimeToggler('Button', { direction: 'next' })}
           onClick={nextOnClick}
           iconLeft={IconForward}
           size="s"

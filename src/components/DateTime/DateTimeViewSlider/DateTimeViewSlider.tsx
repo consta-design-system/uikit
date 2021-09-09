@@ -1,12 +1,12 @@
 import './DateTimeViewSlider.css';
 
 import React from 'react';
-import { addMonths } from 'date-fns';
+import { addMonths, startOfMonth } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 
 import { cn } from '../../../utils/bem';
+import { DateTimeLabel } from '../DateTimeLabel/DateTimeLabel';
 import { DateTimeMonth } from '../DateTimeMonth/DateTimeMonth';
-import { DateTimeMonthLabel } from '../DateTimeMonthLabel/DateTimeMonthLabel';
 import { DateTimeYearSlider } from '../DateTimeYearSlider/DateTimeYearSlider';
 import {
   DateTimeViewComponent,
@@ -14,6 +14,7 @@ import {
   getDaysOfWeek,
   getHandleSelectDate,
   getMonthTitle,
+  isEqualDay,
   useCurrentVisibleDate,
 } from '../helpers';
 
@@ -38,6 +39,7 @@ export const DateTimeViewSlider: DateTimeViewComponent = React.forwardRef((props
     maxDate,
     minDate,
     value,
+    startOfUnit: startOfMonth,
   });
 
   const handleSelectDate = getHandleSelectDate({
@@ -46,6 +48,7 @@ export const DateTimeViewSlider: DateTimeViewComponent = React.forwardRef((props
     value,
     onChange,
     onChangeRange,
+    isEqualUnit: isEqualDay,
   });
 
   const daysOfMonth = getDaysOfMonth({
@@ -83,11 +86,11 @@ export const DateTimeViewSlider: DateTimeViewComponent = React.forwardRef((props
       />
       <div className={cnDateTimeViewSlider('CalendarsWrapper')}>
         <div className={cnDateTimeViewSlider('Calendar')}>
-          <DateTimeMonthLabel label={monthLabel} />
+          <DateTimeLabel label={monthLabel} />
           <DateTimeMonth daysOfWeek={daysOfWeek} daysOfMonth={daysOfMonth} />
         </div>
         <div className={cnDateTimeViewSlider('Calendar')}>
-          <DateTimeMonthLabel label={nextMonthLabel} />
+          <DateTimeLabel label={nextMonthLabel} />
           <DateTimeMonth daysOfWeek={daysOfWeek} daysOfMonth={nextDaysOfMonth} />
         </div>
       </div>

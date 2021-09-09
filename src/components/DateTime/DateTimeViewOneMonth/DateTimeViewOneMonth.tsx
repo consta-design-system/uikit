@@ -1,16 +1,17 @@
 import React from 'react';
-import { addMonths } from 'date-fns';
+import { addMonths, startOfMonth } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 
 import { cn } from '../../../utils/bem';
 import { DateTimeMonth } from '../DateTimeMonth/DateTimeMonth';
-import { DateTimeMonthToggler } from '../DateTimeMonthToggler/DateTimeMonthToggler';
+import { DateTimeToggler } from '../DateTimeToggler/DateTimeToggler';
 import {
   DateTimeViewComponent,
   getDaysOfMonth,
   getDaysOfWeek,
   getHandleSelectDate,
   getMouthLabelWithYear,
+  isEqualDay,
   useCurrentVisibleDate,
 } from '../helpers';
 
@@ -36,6 +37,7 @@ export const DateTimeViewOneMonth: DateTimeViewComponent = React.forwardRef((pro
     maxDate,
     minDate,
     value,
+    startOfUnit: startOfMonth,
   });
 
   const handleSelectDate = getHandleSelectDate({
@@ -44,6 +46,7 @@ export const DateTimeViewOneMonth: DateTimeViewComponent = React.forwardRef((pro
     value,
     onChange,
     onChangeRange,
+    isEqualUnit: isEqualDay,
   });
 
   const daysOfMonth = getDaysOfMonth({
@@ -63,7 +66,7 @@ export const DateTimeViewOneMonth: DateTimeViewComponent = React.forwardRef((pro
 
   return (
     <div {...otherProps} ref={ref} className={cnDateTimeViewOneMonth({}, [className])}>
-      <DateTimeMonthToggler
+      <DateTimeToggler
         prevOnClick={prevMonthHandle}
         nextOnClick={nextMonthHandle}
         label={monthLabel}
