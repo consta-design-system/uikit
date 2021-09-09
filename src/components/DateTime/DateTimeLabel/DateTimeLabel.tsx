@@ -9,6 +9,7 @@ import { Text } from '../../Text/Text';
 export type DateTimeLabelProps = PropsWithHTMLAttributes<
   {
     label: string | number;
+    align?: 'left' | 'center' | 'right';
     children?: never;
   },
   HTMLDivElement
@@ -17,7 +18,7 @@ export type DateTimeLabelProps = PropsWithHTMLAttributes<
 export const cnDateTimeLabel = cn('DateTimeLabel');
 
 export const DateTimeLabel: React.FC<DateTimeLabelProps> = (props) => {
-  const { label, className, ...otherProps } = props;
+  const { label, className, align, ...otherProps } = props;
 
   return (
     <Text
@@ -25,7 +26,7 @@ export const DateTimeLabel: React.FC<DateTimeLabelProps> = (props) => {
       className={cnDateTimeLabel(null, [className])}
       as="span"
       size="s"
-      align="center"
+      align={align}
       weight="bold"
     >
       {label}

@@ -55,22 +55,21 @@
     }
 
     &_selected {
-      /* --fix исправляет разрыв между полосками */
-      --fix: calc(0);
-
       &::before {
         content: '';
         position: absolute;
-        left: calc(var(--value-offset) - var(--fix));
+        left: var(--value-offset);
         bottom: 0;
-        width: calc(var(--value-width) + var(--fix));
+        width: var(--value-width);
         height: var(--space-3xs);
         background-color: var(--color-control-bg-primary);
         pointer-events: none;
       }
 
-      & + .date-timeSlider-Parent_selected {
-        --fix: 1px;
+      /* исправляет разрыв между полосками */
+      & + .DateTimeSlider-Parent_selected {
+        left: calc(var(--value-offset) - 1px);
+        width: calc(var(--value-width) + 1px);
       }
     }
   }
