@@ -17,11 +17,11 @@ export const isInMinMaxDade = (date: Date, minDate?: Date, maxDate?: Date): bool
   const dateTime = date.getTime();
 
   if (minDateTime && !maxDateTime) {
-    return minDateTime < dateTime;
+    return minDateTime <= dateTime;
   }
 
   if (!minDateTime && maxDateTime) {
-    return maxDateTime > dateTime;
+    return maxDateTime >= dateTime;
   }
 
   return true;
