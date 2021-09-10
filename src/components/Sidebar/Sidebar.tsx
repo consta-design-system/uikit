@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import { useClickOutside } from '../../hooks/useClickOutside/useClickOutside';
+import { useGlobalKeys } from '../../hooks/useGlobalKeys/useGlobalKeys';
 import { cn } from '../../utils/bem';
 import { cnForCssTransition } from '../../utils/cnForCssTransition';
 import { PortalWithTheme, usePortalContext } from '../PortalWithTheme/PortalWithTheme';
@@ -28,8 +29,10 @@ type SidebarProps = {
   onClose?: () => void;
   onOpen?: () => void;
   hasOverlay?: boolean;
+  /** @deprecated Use onClickOutside */
   onOverlayClick?: (event: MouseEvent) => void;
   onClickOutside?: (event: MouseEvent) => void;
+  onEsc?: (event: KeyboardEvent) => void;
   position?: SidebarPropPosition;
   width?: SidebarPropWidth;
   height?: SidebarPropHeight;
@@ -90,6 +93,7 @@ export const Sidebar: SidebarComponent = (props) => {
     hasOverlay = true,
     onOverlayClick,
     onClickOutside,
+    onEsc,
     position = sidebarPropPositionDefault,
     width = sidebarPropWidthDefault,
     height = sidebarPropHeightDefault,
@@ -109,6 +113,10 @@ export const Sidebar: SidebarComponent = (props) => {
       onClose?.();
     }
   }, [isOpen]);
+
+  useGlobalKeys({
+    Escape: (e) => isOpen && onEsc && onEsc(e),
+  });
 
   return (
     <CSSTransition
