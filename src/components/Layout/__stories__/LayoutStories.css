@@ -1,0 +1,29 @@
+.LayoutStories {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  &-Root {
+    width: 100%;
+  }
+
+  &-Header {
+    z-index: 2;
+    left: var(--space-3xl) !important;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% - var(--space-3xl) - var(--space-3xl)) !important;
+    height: 50px;
+    background: var(--color-bg-normal);
+  }
+
+  &-Content {
+    height: 600px;
+  }
+
+  &-Block {
+    justify-content: center;
+    align-items: center;
+    background: var(--color-bg-success);
+  }
+}
