@@ -29,6 +29,7 @@ type SidebarProps = {
   onClose?: () => void;
   onOpen?: () => void;
   hasOverlay?: boolean;
+  /** @deprecated Use onClickOutside */
   onOverlayClick?: (event: MouseEvent) => void;
   onClickOutside?: (event: MouseEvent) => void;
   onEsc?: (event: KeyboardEvent) => void;
@@ -90,7 +91,6 @@ export const Sidebar: SidebarComponent = (props) => {
     onClose,
     onOpen,
     hasOverlay = true,
-    /** @deprecated Use onClickOutside */
     onOverlayClick,
     onClickOutside,
     onEsc,

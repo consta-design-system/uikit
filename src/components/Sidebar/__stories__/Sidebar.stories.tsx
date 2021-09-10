@@ -49,7 +49,7 @@ export function Playground() {
         onClose={action('onClose')}
         onOpen={action('onOpen')}
         hasOverlay={hasOverlay}
-        onClickOutside={handleClickOutside}
+        onOverlayClick={handleClickOutside}
         onEsc={handleEscPress}
         width={width}
         height={height}

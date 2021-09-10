@@ -39,8 +39,6 @@ export function Playground(): JSX.Element {
 
   const handleEscPress = callbackWithSelector({ name: 'onEsc' }, () => {
     setIsModalOpen(false);
-
-    return false;
   });
 
   return (
