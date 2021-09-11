@@ -61,7 +61,7 @@ type PropsWithMultiple<ITEM> = {
 
 type PropsWithoutMultiple<ITEM> = {
   value?: ITEM | null;
-  multiple: false;
+  multiple?: false;
   onChange: OnChangeWithoutMultiple<ITEM>;
 };
 
