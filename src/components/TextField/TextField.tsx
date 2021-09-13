@@ -3,6 +3,7 @@ import './TextField.css';
 import React, { forwardRef, useState } from 'react';
 import TextAreaAutoSize from 'react-textarea-autosize';
 
+import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
@@ -60,11 +61,7 @@ export function TextFieldRender<TYPE extends string>(
     ariaLabel,
     iconSize: iconSizeProp,
     ...otherProps
-  } = usePropsHandler(
-    cnTextField(),
-    props,
-    (ref as React.RefObject<HTMLDivElement>) || (textFieldRef as React.RefObject<HTMLDivElement>),
-  );
+  } = usePropsHandler(cnTextField(), props, textFieldRef);
   const [focus, setFocus] = useState<boolean>(autoFocus);
   const textarea = type === 'textarea';
   const LeftIcon = leftSide;
@@ -75,17 +72,17 @@ export function TextFieldRender<TYPE extends string>(
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (e) => {
     const { value } = e.target;
-    !disabled && onChange && onChange({ e, id, name, value: value || null });
+    !disabled && onChange?.({ e, id, name, value: value || null });
   };
 
-  const handleBlur: React.FocusEventHandler<HTMLElement> = (e: React.FocusEvent<HTMLElement>) => {
+  const handleBlur: React.FocusEventHandler<HTMLElement> = (e) => {
     setFocus(false);
-    onBlur && onBlur(e);
+    onBlur?.(e);
   };
 
-  const handleFocus: React.FocusEventHandler<HTMLElement> = (e: React.FocusEvent<HTMLElement>) => {
+  const handleFocus: React.FocusEventHandler<HTMLElement> = (e) => {
     setFocus(true);
-    onFocus && onFocus(e);
+    onFocus?.(e);
   };
 
   const commonProps = {
@@ -142,7 +139,7 @@ export function TextFieldRender<TYPE extends string>(
         },
         [className],
       )}
-      ref={textFieldRef}
+      ref={useForkRef([ref, textFieldRef])}
       {...otherProps}
     >
       {LeftIcon && (
