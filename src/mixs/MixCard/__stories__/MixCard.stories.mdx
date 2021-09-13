@@ -1,0 +1,78 @@
+import { MixCardExample } from './examples/MixCardExample/MixCardExample';
+import { MixCardExampleStates } from './examples/MixCardExampleStates/MixCardExampleStates';
+import { MixCardExampleForm } from './examples/MixCardExampleForm/MixCardExampleForm';
+
+<Meta title="Mixins|MixCard" id="MixCard" />
+
+# MixCards
+
+- [Что это](#что-это)
+- [Пример использования](#пример-использования)
+- [Свойства миксина](#свойства-mixcard)
+  - [Отступы](#отступы)
+  - [Статус](#статус)
+  - [Форма](#форма)
+  - [Тень](#тень)
+- [Список свойств](#список-свойств)
+
+## Что это
+
+С помощью миксина `MixCard` можно добавить стилизацию как у компонента
+[Card](?path=/docs/components-card--playground) любому компоненту.
+
+## Свойства MixCard
+
+### Отступы
+
+За отступы отвечают свойства `verticalSpace` и `horizontalSpace`, варианты значений:
+`'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl'`
+
+### Статус
+
+Свойство `status` отвечает за стилизацию границ компонента, принимает значения:
+`'alert', 'success', 'warning'`
+
+<MixCardExampleStates />
+
+### Форма
+
+Свойство `form` отвечает за форму границ компонента, принимает значения:
+`'round', 'square'`
+
+<MixCardExampleForm />
+
+### Тень
+
+Свойство `shadow` отвечает есть ли у компанента тень.
+
+## Пример использования
+
+```tsx
+export const MixCardExample = () => {
+  return (
+    <div
+      className={cnMixCard({
+        verticalSpace: 'xl',
+        horizontalSpace: '3xl',
+        status: 'success',
+        form: 'round',
+        shadow: true,
+      })}
+    >
+      <Text>Здесь мог быть ваш текст</Text>
+    </div>
+  );
+};
+```
+
+<MixCardExample />
+
+## Список свойств
+
+| Свойство          | Тип или варианты значения                               | По умолчанию | Описание                                                                     |
+| ----------------- | ------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------- |
+| `verticalSpace`   | `'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl'` | `xs`         | Вертикальные отступы                                                         |
+| `horizontalSpace` | `'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl'` | `xs`         | Горизонтальные отступы                                                       |
+| `status`          | `'alert', 'success', 'warning'`                         | -            | Состояние карточки, в зависимости от состояния отрисовываются разные границы |
+| `form`            | `'round', 'square'`                                     | 'round'      | Форма                                                                        |
+| `shadow`          | `boolean`                                               | 'true'       | Тень                                                                         |

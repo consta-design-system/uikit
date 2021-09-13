@@ -5,12 +5,23 @@
 
   &-Content {
     display: flex;
-    overflow-x: hidden;
+    overflow-x: scroll;
 
     /* Чтобы overflow не обрезал обводку фокуса */
     margin: calc(-1 * var(--list-padding));
     padding: var(--list-padding);
     flex-grow: 1;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar:horizontal {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+
+    &::-webkit-scrollbar-thumb:horizontal {
+      display: none;
+    }
   }
 
   &-Button {

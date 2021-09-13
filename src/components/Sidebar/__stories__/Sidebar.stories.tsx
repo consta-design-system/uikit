@@ -1,10 +1,11 @@
 import './Sidebar.stories.css';
 
 import React from 'react';
+import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
 
 import { cn } from '../../../utils/bem';
-import { createMetadata } from '../../../utils/storybook';
+import { callbackWithSelector, createMetadata } from '../../../utils/storybook';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 import { Sidebar } from '../Sidebar';
@@ -25,6 +26,14 @@ export function Playground() {
 
   const { hasOverlay, width, height, position } = defaultKnobs();
 
+  const handleClickOutside = callbackWithSelector({ name: 'onClickOutside' }, () => {
+    setIsSidebarOpen(false);
+  });
+
+  const handleEscPress = callbackWithSelector({ name: 'onEsc' }, () => {
+    setIsSidebarOpen(false);
+  });
+
   return (
     <div className={cnSidebarStories()}>
       <Button
@@ -37,10 +46,11 @@ export function Playground() {
       <Sidebar
         className={cnSidebarStories('Sidebar')}
         isOpen={isSidebarOpen}
-        onClose={() => console.log('Коллбэк на закрытие')}
-        onOpen={() => console.log('Коллбэк на открытие')}
+        onClose={action('onClose')}
+        onOpen={action('onOpen')}
         hasOverlay={hasOverlay}
-        onOverlayClick={() => setIsSidebarOpen(false)}
+        onOverlayClick={handleClickOutside}
+        onEsc={handleEscPress}
         width={width}
         height={height}
         position={position}

@@ -4,9 +4,9 @@ import { ComponentsGrid, ComponentsGridProps } from '../ComponentsGrid/Component
 
 const data: ComponentsGridProps['data'] = [
   {
-    name: 'Attach',
+    name: 'Attachment',
     description: 'Показывает загрузку файла или уже загруженные файлы.',
-    href: '/?path=/story/components-attach--playground',
+    href: '/?path=/story/components-attachment--playground',
   },
   {
     name: 'Avatar',

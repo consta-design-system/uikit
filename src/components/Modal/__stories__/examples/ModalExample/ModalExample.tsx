@@ -26,7 +26,8 @@ export function ModalExample() {
         className={cnModalExample('Modal')}
         isOpen={isModalOpen}
         hasOverlay
-        onOverlayClick={(): void => setIsModalOpen(false)}
+        onClickOutside={(): void => setIsModalOpen(false)}
+        onEsc={(): void => setIsModalOpen(false)}
       >
         <Text as="p" size="s" view="secondary" className={cnModalExample('Title')}>
           Заголовок модалки
@@ -66,7 +67,8 @@ export function ModalExampleTop() {
         isOpen={isModalOpen}
         hasOverlay
         position="top"
-        onOverlayClick={(): void => setIsModalOpen(false)}
+        onClickOutside={(): void => setIsModalOpen(false)}
+        onEsc={(): void => setIsModalOpen(false)}
       >
         <Text as="p" size="s" view="secondary" className={cnModalExample('Title')}>
           Я окно
@@ -104,7 +106,8 @@ export function ModalExampleCenter() {
         className={cnModalExample('Modal')}
         isOpen={isModalOpen}
         hasOverlay
-        onOverlayClick={(): void => setIsModalOpen(false)}
+        onClickOutside={(): void => setIsModalOpen(false)}
+        onEsc={(): void => setIsModalOpen(false)}
       >
         <Text as="p" size="s" view="secondary" className={cnModalExample('Title')}>
           Я окно
@@ -142,7 +145,8 @@ export function ModalExampleNoOverlay() {
         className={cnModalExample('Modal')}
         isOpen={isModalOpen}
         hasOverlay={false}
-        onOverlayClick={(): void => setIsModalOpen(false)}
+        onClickOutside={(): void => setIsModalOpen(false)}
+        onEsc={(): void => setIsModalOpen(false)}
       >
         <Text as="p" size="s" view="secondary" className={cnModalExample('Title')}>
           Я окно

@@ -23,11 +23,11 @@ type Item = {
 };
 
 const items: Item[] = [
-  { name: 'один' },
-  { name: 'два' },
-  { name: 'три' },
-  { name: 'disabled', disabled: true },
-  { name: 'пять' },
+  { name: 'Свет' },
+  { name: 'Вентилятор' },
+  { name: 'Кондиционер — не работает', disabled: true },
+  { name: 'Чайник' },
+  { name: 'Кофеварка' },
 ];
 
 const defaultKnobs = () => ({
