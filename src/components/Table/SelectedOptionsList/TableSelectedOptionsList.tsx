@@ -4,7 +4,7 @@ import React from 'react';
 
 import { IconClose } from '../../../icons/IconClose/IconClose';
 import { cn } from '../../../utils/bem';
-import { isNotNil } from '../../../utils/type-guards';
+import { isNotNil, isNumber } from '../../../utils/type-guards';
 import { Button } from '../../Button/Button';
 import { Tag } from '../../Tag/Tag';
 
@@ -21,35 +21,38 @@ type OptionValue = {
     value: string | number;
   };
 
-export type GetTagLabel = (id: string, name: string, filterValue?: OptionValue) => string;
+export type GetTagLabel = (id: string, name: string, filterValue?: unknown) => string;
 
 type Props = {
-  values: Array<{ id: string; name: string; value?: any }>;
+  values: Array<{ id: string; name: string; value?: unknown }>;
   getTagLabel?: GetTagLabel;
   onRemove: (id: string) => void;
   onReset: () => void;
 };
 
-const getTagLabelDefault: GetTagLabel = (id, name, filterValue?: OptionValue): string => {
-  if (!isNotNil(filterValue)) {
+const getTagLabelDefault: GetTagLabel = (id, name, filterValue?: unknown): string => {
+  const localFilterValue = (isNumber(filterValue)
+    ? { name: String(filterValue) }
+    : filterValue) as OptionValue;
+  if (!isNotNil(localFilterValue)) {
     return name;
   }
 
   let restName = '';
-  if (Array.isArray(filterValue)) {
-    restName = filterValue.map(({ name }) => name).join(', ');
+  if (Array.isArray(localFilterValue)) {
+    restName = localFilterValue.map(({ name }) => name).join(', ');
   }
 
-  if (filterValue.min && filterValue.max) {
-    restName = `от ${filterValue.min} до ${filterValue.max}`;
-  } else if (filterValue.min) {
-    restName = `от ${filterValue.min}`;
-  } else if (filterValue.max) {
-    restName = `до ${filterValue.max}`;
+  if (localFilterValue.min && localFilterValue.max) {
+    restName = `от ${localFilterValue.min} до ${localFilterValue.max}`;
+  } else if (localFilterValue.min) {
+    restName = `от ${localFilterValue.min}`;
+  } else if (localFilterValue.max) {
+    restName = `до ${localFilterValue.max}`;
   }
 
-  if (filterValue.name) {
-    restName = `${filterValue.name}`;
+  if (localFilterValue.name) {
+    restName = `${localFilterValue.name}`;
   }
 
   return name + restName;

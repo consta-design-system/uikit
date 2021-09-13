@@ -182,15 +182,15 @@ const sortingData = <T extends TableRow>(
   if (!sorting) {
     return rows;
   }
-  const sorredRows = sortByDefault(rows, sorting.by, sorting.order, sorting.sortFn);
+  const sortedRows = sortByDefault(rows, sorting.by, sorting.order, sorting.sortFn);
 
-  if (sorredRows.some((row) => row.rows?.length)) {
-    return sorredRows.map((row) => {
+  if (sortedRows.some((row) => row.rows?.length)) {
+    return sortedRows.map((row) => {
       return row.rows ? { ...row, rows: sortingData(row.rows as T[], sorting, onSortBy) } : row;
     });
   }
 
-  return sorredRows;
+  return sortedRows;
 };
 
 const defaultEmptyRowsPlaceholder = (
@@ -332,7 +332,7 @@ export const Table = <T extends TableRow>({
   const handleTooltipSave = (
     field: string,
     tooltipSelectedFilters: FieldSelectedValues,
-    value?: any,
+    value?: unknown,
   ): void => {
     updateSelectedFilters(field, tooltipSelectedFilters, value);
   };
@@ -663,12 +663,7 @@ export const Table = <T extends TableRow>({
               onClick={(e) => onRowClick && onRowClick({ id: row.id, e })}
             >
               {columnsWithMetaData(lowHeaders).map((column: TableColumn<T>, columnIdx: number) => {
-                const { show, style, rowSpan } = getTableCellProps(
-                  row as TableTreeRow<T>,
-                  rowIdx,
-                  column,
-                  columnIdx,
-                );
+                const { show, style, rowSpan } = getTableCellProps(row, rowIdx, column, columnIdx);
 
                 if (show) {
                   return (
