@@ -10,7 +10,6 @@ import { IconUnsort } from '../../icons/IconUnsort/IconUnsort';
 import { sortBy as sortByDefault, updateAt } from '../../utils/array';
 import { cn } from '../../utils/bem';
 import { isNotNil } from '../../utils/type-guards';
-import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { Text } from '../Text/Text';
 
 import { HorizontalAlign, TableCell, VerticalAlign } from './Cell/TableCell';
@@ -122,32 +121,32 @@ export type TableColumn<T extends TableRow> = {
   position?: Position;
 } & (GroupColumnAddition<T> | SingleColumnAddition<T>);
 
-export type TableProps<T extends TableRow> = PropsWithHTMLAttributesAndRef<
-  {
-    columns: TableColumn<T>[];
-    rows: T[];
-    filters?: Filters<T>;
-    onSortBy?: onSortBy<T>;
-    size?: Size;
-    stickyHeader?: boolean;
-    stickyColumns?: number;
-    isResizable?: boolean;
-    activeRow?: ActiveRow;
-    verticalAlign?: VerticalAlign;
-    headerVerticalAlign?: HeaderVerticalAlign;
-    zebraStriped?: ZebraStriped;
-    borderBetweenRows?: boolean;
-    borderBetweenColumns?: boolean;
-    emptyRowsPlaceholder?: React.ReactNode;
-    onRowHover?: onRowHover;
-    lazyLoad?: LazyLoad;
-    onFiltersUpdated?: (filters: SelectedFilters) => void;
-    isExpandedRowsByDefault?: boolean;
-  },
-  HTMLDivElement
->;
+export type TableProps<T extends TableRow> = {
+  columns: TableColumn<T>[];
+  rows: T[];
+  filters?: Filters<T>;
+  onSortBy?: onSortBy<T>;
+  size?: Size;
+  stickyHeader?: boolean;
+  stickyColumns?: number;
+  isResizable?: boolean;
+  activeRow?: ActiveRow;
+  verticalAlign?: VerticalAlign;
+  headerVerticalAlign?: HeaderVerticalAlign;
+  zebraStriped?: ZebraStriped;
+  borderBetweenRows?: boolean;
+  borderBetweenColumns?: boolean;
+  emptyRowsPlaceholder?: React.ReactNode;
+  className?: string;
+  onRowHover?: onRowHover;
+  lazyLoad?: LazyLoad;
+  onFiltersUpdated?: (filters: SelectedFilters) => void;
+  isExpandedRowsByDefault?: boolean;
+};
 
-type Table = <T extends TableRow>(props: TableProps<T>) => React.ReactElement | null;
+type Table = <T extends TableRow>(
+  props: TableProps<T> & { ref?: React.Ref<HTMLDivElement> },
+) => React.ReactElement | null;
 
 export type ColumnMetaData = {
   filterable: boolean;
@@ -200,7 +199,7 @@ const defaultEmptyRowsPlaceholder = (
 
 const InternalTable = <T extends TableRow>(
   props: TableProps<T>,
-  ref: React.Ref<HTMLDivElement>,
+  ref?: React.Ref<HTMLDivElement>,
 ) => {
   const {
     columns,
