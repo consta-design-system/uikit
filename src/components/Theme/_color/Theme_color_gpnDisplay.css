@@ -21,7 +21,7 @@ $color-base-critical: #33000f;
   --color-bg-secondary: color($color-base-essential s(+25) l(+4)); /* Цвет дефолта */
   --color-bg-brand: color($color-base-project a(100%)); /* Цвет фона брендированый */
   --color-bg-link: color($color-base-path a(100%)); /* Цвет фона ссылки */
-  --color-bg-border: color($color-base-phantom a(20%) l(+10)); /* Цвет границ */
+  --color-bg-border: color($color-base-phantom a(28%)); /* Цвет границ */
   --color-bg-stripe: color(
     $color-base-phantom a(5%)
   ); /* Цвет зебры (например, при окрашивании фона строк таблицы через одну) */

@@ -1,0 +1,9 @@
+.Theme_shadow_gpnDisplay {
+  /* Тени */
+  --shadow-group: 0 2px 2px rgba(0, 32, 51, 0.02), 0 2px 8px rgba(0, 32, 51, 0.16);
+  --shadow-layer: 0 27px 80px rgba(0, 0, 0, 0.09), 0 11.28px 33.4221px rgba(0, 0, 0, 0.0646969),
+    0 6.0308px 17.869px rgba(0, 0, 0, 0.0536497), 0 3.38082px 10.0172px rgba(0, 0, 0, 0.045),
+    0 1.79553px 5.32008px rgba(0, 0, 0, 0.0363503),
+    0 0.747159px 2.21381px rgba(0, 0, 0, 0.0253031);
+  --shadow-modal: 0 8px 8px rgba(0, 32, 51, 0.04), 0 12px 28px rgba(0, 32, 51, 0.12);
+}

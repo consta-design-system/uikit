@@ -5,7 +5,7 @@ import '../_control/Theme_control_gpnDefault.css';
 import '../_font/Theme_font_gpnDefault.css';
 import '../_size/Theme_size_gpnDefault.css';
 import '../_space/Theme_space_gpnDefault.css';
-import '../_shadow/Theme_shadow_gpnDefault.css';
+import '../_shadow/Theme_shadow_gpnDark.css';
 
 import { ThemePreset } from '../Theme';
 
@@ -19,5 +19,5 @@ export const presetGpnDark: ThemePreset = {
   font: 'gpnDefault',
   size: 'gpnDefault',
   space: 'gpnDefault',
-  shadow: 'gpnDefault',
+  shadow: 'gpnDark',
 };
