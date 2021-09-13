@@ -1,8 +1,6 @@
 .Layout {
   display: flex;
   box-sizing: border-box;
-  width: 100%;
-  position: relative;
   transition: flex 0.3s, width 0.3s;
 
   &_direction {

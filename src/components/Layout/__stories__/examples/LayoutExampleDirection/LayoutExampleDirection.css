@@ -1,7 +1,6 @@
-.LayoutStories {
-  position: relative;
+.LayoutExampleDirection {
   width: 100%;
-  height: 500px;
+  height: 300px;
 
   &-Block {
     justify-content: center;

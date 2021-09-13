@@ -1,6 +1,6 @@
 import './Layout.css';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { cn } from '../../utils/bem';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
@@ -51,6 +51,10 @@ export const Layout = forwardRefWithAs<Props>((props, ref) => {
   });
   const [isFixed, setIsFixed] = useState(false);
 
+  const containerRef = useRef(null) as React.Ref<HTMLElement>;
+
+  const layoutRef = (ref || containerRef) as React.RefObject<HTMLElement>;
+
   useEffect(() => {
     if (fixed) {
       handleScroll();
@@ -99,7 +103,7 @@ export const Layout = forwardRefWithAs<Props>((props, ref) => {
   return (
     <Tag
       tabIndex={tabIndex}
-      ref={ref}
+      ref={layoutRef}
       style={{
         flex: Number(flex),
         top: stationing.top,

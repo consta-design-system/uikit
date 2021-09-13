@@ -1,1 +1,94 @@
+import { LayoutExampleBasic } from './examples/LayoutExampleBasic/LayoutExampleBasic';
+import {
+  LayoutExampleFixedTop,
+  LayoutExampleFixedBottom,
+} from './examples/LayoutExampleFixed/LayoutExampleFixed';
+import {
+  LayoutExampleDirectionRow,
+  LayoutExampleDirectionColumn,
+} from './examples/LayoutExampleDirection/LayoutExampleDirection';
+import { LayoutExample } from './examples/LayoutExample/LayoutExample';
+
 # Layout
+
+Layout помогает вам структурировать контент на вашей странице.
+
+- [Контент](#контент)
+- [Порядок элементов](#порядок-элементов)
+- [Фиксация элемента](#фиксация-элемента)
+- [Список свойств](#список-свойств)
+- [Пример использования](#пример)
+
+## Контент
+
+```tsx
+<Layout>
+  <Layout flex={1}>
+    <Text>Контент</Text>
+  </Layout>
+  <Layout flex={2}>
+    <Text>Контент</Text>
+  </Layout>
+</Layout>
+```
+
+<LayoutExampleBasic />
+
+## Порядок элементов
+
+Свойство direction отвечает за порядок элементов, row - в строку,
+column - в колонку
+
+| `direction: row`             | `direction: column`             |
+| ---------------------------- | ------------------------------- |
+| <LayoutExampleDirectionRow/> | <LayoutExampleDirectionColumn/> |
+
+## Фиксация элемента
+
+При использовании свойства fixed элемент можно зафиксировать с
+верхнего или нижнего края контейнера
+
+### Top
+
+<LayoutExampleFixedTop />
+
+### Bottom
+
+<LayoutExampleFixedBottom />
+
+## Список свойств
+
+| Свойство    | Тип или варианты значения             | По умолчанию | Описание                                                                          |
+| ----------- | ------------------------------------- | ------------ | --------------------------------------------------------------------------------- |
+| `flex`      | `string` <code>&#124;</code> `number` | -            | Доля занимаемая элементом в флекс-контейнере                                      |
+| `fixed`     | `boolean`                             | -            | Фиксируется ли элемент внутри контейнера                                          |
+| `direction` | `'row', 'column'`                     | 'row'        | Расположение элементов внутри компонента                                          |
+| `top`       | `boolean`                             | -            | Фиксируется с верхней границы                                                     |
+| `bottom`    | `boolean`                             | -            | Фиксируется с нижней границы                                                      |
+| `anchorRef` | `React.RefObject<HTMLElement>`        | -            | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
+| `tabIndex`  | `number`                              | —            | Порядковый номер при переходе между элементами интерфейса по клавише **tab**      |
+| `as`        | `React.ElementType`                   | `div`        | HTML-тег для кнопки                                                               |
+| `className` | `string`                              | —            | Дополнительные CSS-классы                                                         |
+
+## Пример
+
+```tsx
+<Layout direction="column">
+  <Layout fixed>
+    <Text>Заголовок</Text>
+  </Layout>
+  <Layout direction="row">
+    <Layout flex={1}>
+      <Text>Контент</Text>
+    </Layout>
+    <Layout flex={2}>
+      <Text>Контент</Text>
+    </Layout>
+    <Layout flex={1}>
+      <Text>Контент</Text>
+    </Layout>
+  </Layout>
+</Layout>
+```
+
+<LayoutExample />

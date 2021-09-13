@@ -5,6 +5,7 @@ import { select, text } from '@storybook/addon-knobs';
 
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
+import { Text } from '../../Text/Text';
 import { Layout, layoutPropDirection, layoutPropDirectionDefault } from '../Layout';
 
 import mdx from './Layout.docs.mdx';
@@ -21,21 +22,14 @@ export function Playground() {
   const { direction, flexBlock1, flexBlock2 } = defaultKnobs();
 
   return (
-    <div className={cnLayoutStories()}>
-      <Layout>
-        <Layout fixed className={cnLayoutStories('Header')}>
-          Заголовок
-        </Layout>
-        <Layout direction={direction} className={cnLayoutStories('Content')}>
-          <Layout className={cnLayoutStories('Block')} flex={flexBlock1}>
-            Контент
-          </Layout>
-          <Layout className={cnLayoutStories('Block')} flex={flexBlock2}>
-            Контент
-          </Layout>
-        </Layout>
+    <Layout direction={direction} className={cnLayoutStories()}>
+      <Layout className={cnLayoutStories('Block')} flex={flexBlock1}>
+        <Text>Контент</Text>
       </Layout>
-    </div>
+      <Layout className={cnLayoutStories('Block')} flex={flexBlock2}>
+        <Text>Контент</Text>
+      </Layout>
+    </Layout>
   );
 }
 
