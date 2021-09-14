@@ -4,6 +4,7 @@ import './SnackBar-Item.css';
 import React, { useEffect, useState } from 'react';
 
 import { IconClose } from '../../../icons/IconClose/IconClose';
+import { isNumber } from '../../../utils/type-guards';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 import { cnTheme } from '../../Theme/Theme';
@@ -32,6 +33,7 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
   const {
     onClose,
     autoClose,
+    hideTimer,
     icon: Icon,
     message,
     actions,
@@ -49,6 +51,7 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
   const handleMouseEnter = () => setHover(true);
   const handleMouseLeave = () => setHover(false);
   const autoCloseTime = getAutoCloseTime(autoClose);
+  const hideAutoCloseTimer = !!hideTimer || !(isNumber(autoCloseTime) && autoCloseTime > 0);
   const onAutoClose = (item: Item) => {
     if (onAutoCloseProp) {
       onAutoCloseProp(item);
@@ -85,9 +88,10 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
           onMount={handleMountTimer}
           onTimeIsOver={handleTimeIsOver}
           startTime={autoCloseTime}
+          hidden={hideAutoCloseTimer}
         />
       )}
-      {!autoCloseTime && Icon && <Icon className={cnSnackBar('Icon')} size="m" />}
+      {hideAutoCloseTimer && Icon && <Icon className={cnSnackBar('Icon')} size="m" />}
       <div className={cnSnackBar('Content')}>
         {message && (
           <Text className={cnSnackBar('Message')} lineHeight="s">
