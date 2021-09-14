@@ -49,3 +49,6 @@ export * from './DateTime100YearSlider/DateTime100YearSlider';
 export * from './DateTimeTypeYearViewClassic/DateTimeTypeYearViewClassic';
 export * from './DateTimeTypeYearViewBook/DateTimeTypeYearViewBook';
 export * from './DateTimeTypeYearViewSlider/DateTimeTypeYearViewSlider';
+export * from './DateTimeTypeMountViewClassic/DateTimeTypeMountViewClassic';
+export * from './DateTimeTypeMountViewBook/DateTimeTypeMountViewBook';
+export * from './DateTimeTypeMonthViewSlider/DateTimeTypeMonthViewSlider';

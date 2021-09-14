@@ -62,12 +62,26 @@ export const getMonthTitle = (date: Date, locale: Locale): string => {
   return format(date, 'LLLL', { locale });
 };
 
+export const getMonthTitleAbbreviated = (date: Date, locale: Locale): string => {
+  const title = format(date, 'MMM', { locale });
+
+  if (title[title.length - 1] === '.') {
+    return title.substr(0, title.length - 1);
+  }
+
+  return title;
+};
+
+export const getYearTitle = (date: Date): string => {
+  return format(date, 'yyyy');
+};
+
 export const getMouthLabelWithYear = (date: Date, locale: Locale): string => {
   return `${getMonthTitle(date, locale)} ${date.getFullYear()}`;
 };
 
 export const getDecadeTitle = (date: Date): string => {
-  return `${format(date, 'yyyy')} - ${format(addYears(date, 9), 'yyyy')}`;
+  return `${getYearTitle(date)} - ${getYearTitle(addYears(date, 9))}`;
 };
 
 export const getDaysOfWeek = (locale: Locale): string[] => {
@@ -86,3 +100,5 @@ export * from './getYearsOfDecade';
 export * from './getHandleSelectDate';
 export * from './isEqualDay';
 export * from './isEqualYear';
+export * from './isEqualMount';
+export * from './getMonthsOfYear';

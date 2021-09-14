@@ -1,13 +1,14 @@
 import React from 'react';
-import { addYears, format, getDecade, Locale, startOfDecade } from 'date-fns';
+import { addMonths, getYear, Locale, startOfYear } from 'date-fns';
 
 import { range } from '../../../utils/array';
 import { isInMinMaxDade } from '../../../utils/date';
 import { DateRange } from '../../../utils/types/Date';
 import { DateTimeCellPropRange } from '../DateTimeCell/DateTimeCell';
 
+import { getMonthTitleAbbreviated } from './index';
 import { isDateInRange } from './isDateInRange';
-import { isEqualYear } from './isEqualYear';
+import { isEqualMount } from './isEqualMount';
 import { HandleSelectDate } from './types';
 
 const isSelected = ({ date, value }: { date: Date; value?: Date | DateRange }): boolean => {
@@ -16,18 +17,18 @@ const isSelected = ({ date, value }: { date: Date; value?: Date | DateRange }): 
   }
 
   if (Array.isArray(value)) {
-    return !!value.find((item) => (item ? isEqualYear(date, item) : false));
+    return !!value.find((item) => (item ? isEqualMount(date, item) : false));
   }
 
-  return isEqualYear(date, value);
+  return isEqualMount(date, value);
 };
 
 const hasEvent = (date: Date, events: Date[]): boolean =>
-  !!events.find((eventDate) => isEqualYear(eventDate, date));
+  !!events.find((eventDate) => isEqualMount(eventDate, date));
 
-const isCurrent = (date: Date): boolean => isEqualYear(new Date(), date);
+const isCurrent = (date: Date): boolean => isEqualMount(new Date(), date);
 
-export const getYearsOfDecade = (props: {
+export const getMonthsOfYear = (props: {
   date: Date;
   locale: Locale;
   onChange?: HandleSelectDate;
@@ -44,15 +45,15 @@ export const getYearsOfDecade = (props: {
   event?: boolean;
   current?: boolean;
 }[] => {
-  const { date, onChange, value, events, minDate, maxDate } = props;
-  const currentDecade = getDecade(date);
-  const startDate = addYears(startOfDecade(date), -1);
+  const { date, onChange, value, events, minDate, maxDate, locale } = props;
+  const currentYear = getYear(date);
+  const startDate = startOfYear(date);
 
   return range(12).map((index) => {
-    const date = addYears(startDate, index);
-    const label = format(date, 'yyyy');
+    const date = addMonths(startDate, index);
+    const label = getMonthTitleAbbreviated(date, locale);
 
-    if (getDecade(date) === currentDecade) {
+    if (getYear(date) === currentYear) {
       return {
         label,
         onClick: onChange

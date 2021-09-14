@@ -21,28 +21,35 @@ export type DateTimePropOnChangeRange = (props: {
   e: React.MouseEvent<HTMLDivElement>;
 }) => void;
 
-export type DateTimeProps = PropsWithHTMLAttributesAndRef<
-  {
-    currentVisibleDate?: Date;
-    type?: DateTimePropType;
-    value?: DateTimePropValue;
-    onChange?: DateTimePropOnChange;
-    onChangeRange?: DateTimePropOnChangeRange;
-    minDate?: Date;
-    maxDate?: Date;
-    events?: Date[];
-    view?: DateTimePropView;
-    locale?: Locale;
-    children?: never;
-    onChangeCurrentVisibleDate?: (date: Date) => void;
-  },
-  HTMLDivElement
->;
+export type DateTimePropsInner = {
+  currentVisibleDate?: Date;
+  type?: DateTimePropType;
+  value?: DateTimePropValue;
+  onChange?: DateTimePropOnChange;
+  onChangeRange?: DateTimePropOnChangeRange;
+  minDate?: Date;
+  maxDate?: Date;
+  events?: Date[];
+  view?: DateTimePropView;
+  locale?: Locale;
+  children?: never;
+  onChangeCurrentVisibleDate?: (date: Date) => void;
+};
+
+export type DateTimeProps = PropsWithHTMLAttributesAndRef<DateTimePropsInner, HTMLDivElement>;
 
 export type DateTimeComponent = (props: DateTimeProps) => React.ReactElement | null;
 
 export type DateTimeViewComponent = (
   props: Omit<DateTimeProps, 'view'>,
+) => React.ReactElement | null;
+
+export type DateTimeTypeViewComponent = (
+  props: Omit<DateTimeProps, 'view' | 'type'>,
+) => React.ReactElement | null;
+
+export type DateTimeTypeViewInner = (
+  props: Omit<DateTimePropsInner, 'view' | 'type'>,
 ) => React.ReactElement | null;
 
 export type HandleSelectDate = (props: {

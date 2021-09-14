@@ -18,6 +18,7 @@ import { cn } from '../../../utils/bem';
 import { DateRange } from '../../../utils/types/Date';
 import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import { DateTimeSlider } from '../DateTimeSlider/DateTimeSlider';
+import { getMonthTitleAbbreviated } from '../helpers';
 import { getSliderValueRange } from '../helpers/getSliderValueRange';
 
 export type DateTimeYearSliderProps = PropsWithHTMLAttributes<
@@ -44,7 +45,7 @@ const getYearItems = (currentVisibleDate: Date, date: Date, locale: Locale) =>
     const monthDate = addMonths(date, month);
     return {
       date: monthDate,
-      label: format(monthDate, 'MMM', { locale }),
+      label: getMonthTitleAbbreviated(monthDate, locale),
       current: isCurrentVisibleMonth(currentVisibleDate, monthDate),
     };
   });
