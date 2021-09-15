@@ -27,7 +27,7 @@ function renderHeader(
   return <ContextMenuGroupHeader label={groupLabel} first={first} size={size} />;
 }
 
-let timers: NodeJS.Timeout[] = [];
+let timers: ReturnType<typeof setTimeout>[] = [];
 export function clearTimers() {
   for (const timer of timers) {
     clearTimeout(timer);
@@ -100,13 +100,9 @@ export const ContextMenuLevel: ContextMenuLevelType = React.forwardRef(
     const itemsRefs = useMemo(constructItemRefs, [items]);
 
     useEffect(() => {
-      if (level !== 0 && hovered === false && hoveredParenLevel < level) {
+      if (level !== 0 && !hovered && hoveredParenLevel < level) {
         clearTimeout(timers[level]);
-        // привел к типам так как Jest почемуто думает что setTimeout вернет number
-        timers[level] = (setTimeout(
-          () => deleteLevel(level),
-          closeDelay,
-        ) as unknown) as NodeJS.Timeout;
+        timers[level] = setTimeout(() => deleteLevel(level), closeDelay);
       }
       return () => {
         clearTimeout(timers[level]);
