@@ -76,6 +76,8 @@ type ActiveRow = {
 
 type onRowHover = ({ id, e }: { id: string | undefined; e: React.MouseEvent }) => void;
 
+type onRowClick = ({ id, e }: { id: string; e: React.MouseEvent }) => void;
+
 export type TableRow = {
   id: string;
   rows?: TableRow[];
@@ -139,6 +141,7 @@ export type TableProps<T extends TableRow> = {
   emptyRowsPlaceholder?: React.ReactNode;
   className?: string;
   onRowHover?: onRowHover;
+  onRowClick?: onRowClick;
   lazyLoad?: LazyLoad;
   onFiltersUpdated?: (filters: SelectedFilters) => void;
   isExpandedRowsByDefault?: boolean;
@@ -218,6 +221,7 @@ const InternalTable = <T extends TableRow>(
     emptyRowsPlaceholder = defaultEmptyRowsPlaceholder,
     className,
     onRowHover,
+    onRowClick,
     lazyLoad,
     onSortBy,
     onFiltersUpdated,
@@ -260,11 +264,11 @@ const InternalTable = <T extends TableRow>(
   const [expandedRowIds, setExpandedRowIds] = React.useState<string[]>([]);
 
   /*
-  Подписываемся на изменения размеров таблицы, но не используем значения из
-  хука так как нам нужна ширина и высота таблицы без размера скролла. Этот хук
-  использует значения `offsetWidth` и `offsetHeight` которые включают размер
-  скролл бара.
-*/
+    Подписываемся на изменения размеров таблицы, но не используем значения из
+    хука так как нам нужна ширина и высота таблицы без размера скролла. Этот хук
+    использует значения `offsetWidth` и `offsetHeight` которые включают размер
+    скролл бара.
+  */
   useComponentSize(tableRef);
   const tableHeight = tableRef.current?.clientHeight || 0;
   const tableWidth = tableRef.current?.clientWidth || 0;
@@ -279,20 +283,23 @@ const InternalTable = <T extends TableRow>(
 
   React.useLayoutEffect(() => {
     const columnsElements = Object.values(columnsRefs.current).filter(isNotNil);
-    if (columnsElements.length === 0 || (resizedColumnWidths.some(isNotNil) && !stickyColumns)) {
-      return;
-    }
+    if (columnsElements.length === 0) return;
 
     const columnsElementsWidths = columnsElements.map((el) => el.getBoundingClientRect().width);
-
     setInitialColumnWidths(columnsElementsWidths);
 
-    // Проверяем, что таблица отрисовалась корректно, и устанавливаем значения ширин колонок после 1го рендера
+    // Проверяем, что таблица отрисовалась корректно, и устанавливаем значения ширин колонок после 1го и последующих рендера
     if (
       columnsElements[0].getBoundingClientRect().left !==
-      columnsElements[columnsElements.length - 1].getBoundingClientRect().left
+        columnsElements[columnsElements.length - 1].getBoundingClientRect().left &&
+      !resizedColumnWidths.some(isNotNil)
     ) {
-      setResizedColumnWidths(columnsElementsWidths);
+      return setResizedColumnWidths(columnsElementsWidths);
+    }
+
+    // условие изменения ширины колонок при изменении ширины экрана (контейнера таблицы)
+    if (tableWidth > 0 && !isResizable) {
+      return setResizedColumnWidths(getColumnsWidth());
     }
   }, [tableWidth]);
 
@@ -522,6 +529,10 @@ const InternalTable = <T extends TableRow>(
     return <TableRowsCollapse {...collapseRollProps}>{cellContent}</TableRowsCollapse>;
   };
 
+  const renderEmptyRowsPlaceholder = (placeholder: React.ReactNode): React.ReactNode => {
+    return typeof placeholder === 'string' ? <Text size="s">{placeholder}</Text> : placeholder;
+  };
+
   const getTableCellProps = (
     row: TableTreeRow<T>,
     rowIdx: number,
@@ -650,12 +661,14 @@ const InternalTable = <T extends TableRow>(
           return (
             <div
               key={row.id}
+              role="presentation"
               className={cnTable('CellsRow', {
                 nth,
                 withMergedCells: hasMergedCells,
               })}
               onMouseEnter={(e) => onRowHover && onRowHover({ id: row.id, e })}
               onMouseLeave={(e) => onRowHover && onRowHover({ id: undefined, e })}
+              onClick={(e) => onRowClick && onRowClick({ id: row.id, e })}
             >
               {columnsWithMetaData(lowHeaders).map((column: TableColumn<T>, columnIdx: number) => {
                 const { show, style, rowSpan } = getTableCellProps(
@@ -704,7 +717,9 @@ const InternalTable = <T extends TableRow>(
         })
       ) : (
         <div className={cnTable('RowWithoutCells')}>
-          <div className={cnTable('EmptyCell')}>{emptyRowsPlaceholder}</div>
+          <div className={cnTable('EmptyCell')}>
+            {renderEmptyRowsPlaceholder(emptyRowsPlaceholder)}
+          </div>
         </div>
       )}
     </div>

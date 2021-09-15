@@ -2,7 +2,7 @@ import React from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { Attach } from '../../../../Attach/Attach';
+import { Attachment } from '../../../../Attachment/Attachment';
 import { Text } from '../../../../Text/Text';
 import { DragNDropField } from '../../../DragNDropField';
 
@@ -17,7 +17,7 @@ export const DragNDropFieldExampleOnDropFiles = () => {
       </div>
       <div>
         {files.map((file) => (
-          <Attach
+          <Attachment
             key={file.name}
             fileExtension={file.name.match(/\.(?!.*\.)(\w*)/)?.[1]}
             fileName={file.name}

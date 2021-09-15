@@ -1,13 +1,11 @@
 .TableFilterContainer {
-  &-Content {
-    width: 400px;
-    max-width: 400px;
-    max-height: 440px;
-    padding: var(--space-m);
-    background-color: var(--color-bg-secondary);
-    border-radius: calc(var(--control-radius) * 2);
-    box-shadow: var(--shadow-layer);
-  }
+  width: 400px;
+  max-width: 400px;
+  max-height: 440px;
+  padding: var(--space-m);
+  background-color: var(--color-bg-secondary);
+  border-radius: calc(var(--control-radius) * 2);
+  box-shadow: var(--shadow-layer);
 
   &-Buttons {
     display: flex;

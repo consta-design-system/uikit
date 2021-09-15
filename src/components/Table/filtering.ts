@@ -240,7 +240,9 @@ export const useSelectedFilters = <T extends TableRow>(
   };
 
   const removeAllSelectedFilters = (availableFilters: Filters<T>): void => {
-    setSelectedFilters(getSelectedFiltersInitialState(availableFilters));
+    const initialSelectedFilters = getSelectedFiltersInitialState(availableFilters);
+    setSelectedFilters(initialSelectedFilters);
+    onFiltersUpdated && onFiltersUpdated(initialSelectedFilters);
   };
 
   return {
