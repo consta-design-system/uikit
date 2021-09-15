@@ -58,7 +58,12 @@ import { SnackBarExampleButtons } from './examples/SnackBarExampleButtons/SnackB
 **Не удалять**. Если пользователь, нажмет на кнопку. Если нет, сообщение само закроется
 по таймеру.
 
-Таймер можно добавить с помощью `autoClose`, а если вам нужна иконка, используйте этот параметр вместе с `hideTimer`.
+Таймер можно добавить с помощью `autoClose`, а с помощью `showProgress` можно выбрать его вид.
+
+| Значение `showProgress` | По умолчанию | Описание                                                                              |
+| ----------------------- | ------------ | ------------------------------------------------------------------------------------- |
+| `"timer"`               |              | Визуально отображает радиальный таймер (если указана иконка, то он заместит её собой) |
+| `undefined`             | +            | Работает только логика таймера. Сам таймер скрыт.                                     |
 
 <SnackBarExampleTimer />
 
@@ -70,7 +75,7 @@ type Item = {
   message?: string | number;
   status?: 'success' | 'warning' | 'alert' | 'normal';
   autoClose?: boolean | number;
-  hideTimer?: boolean;
+  showProgress?: 'timer';
   icon?: React.FC<IconProps>;
   actions?: {
     label: string | number;

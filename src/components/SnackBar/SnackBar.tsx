@@ -25,7 +25,7 @@ export type Item = {
   message?: string | number;
   status?: SnackBarItemStatus;
   autoClose?: boolean | number;
-  hideTimer?: boolean;
+  showProgress?: 'timer';
   icon?: React.FC<IconProps>;
   actions?: SnackBarPropItemAction[];
   onClose?: (item: Item) => void;

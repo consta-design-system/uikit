@@ -40,7 +40,7 @@ export const SnackBarExampleTimer: React.FC = () => {
   const [items, dispatchItems] = useReducer<
     React.Reducer<Item[], { type: 'add' | 'remove'; item: Item; key?: number | string }>
   >(reducer, []);
-  const generateHandleAdd = (status: SnackBarItemStatus, hideTimer?: boolean) => () => {
+  const generateHandleAdd = (status: SnackBarItemStatus, showProgress?: 'timer') => () => {
     const key = items.length + 1;
     const item: Item = {
       key,
@@ -49,14 +49,14 @@ export const SnackBarExampleTimer: React.FC = () => {
       icon: getItemIconByStatus(status),
       onClose: () => dispatchItems({ type: 'remove', item, key }),
       autoClose: 5,
-      hideTimer,
+      showProgress,
     };
     dispatchItems({ type: 'add', item });
   };
 
-  const handleAlertAdd = generateHandleAdd('alert');
-  const handleNormalAdd = generateHandleAdd('normal');
-  const handleHiddenTimerAdd = generateHandleAdd('normal', true);
+  const handleAlertAdd = generateHandleAdd('alert', 'timer');
+  const handleNormalAdd = generateHandleAdd('normal', 'timer');
+  const handleHiddenTimerAdd = generateHandleAdd('normal');
 
   React.useEffect(() => handleNormalAdd(), []);
 

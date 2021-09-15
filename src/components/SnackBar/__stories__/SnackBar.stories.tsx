@@ -28,7 +28,7 @@ const defaultKnobs = () => ({
   withActionButtons: boolean('withActionButtons', false),
   withAutoClose: boolean('withAutoClose', false),
   withCloseButton: boolean('withCloseButton', true),
-  withHiddenTimer: boolean('withHiddenTimer', false),
+  withShowProgress: boolean('withShowProgress', false),
 });
 
 const getItemIconByStatus = (status: SnackBarItemStatus): React.FC<IconProps> | undefined => {
@@ -58,7 +58,7 @@ export function Playground() {
     withIcon,
     withActionButtons,
     withAutoClose,
-    withHiddenTimer,
+    withShowProgress,
     withCloseButton,
   } = defaultKnobs();
   const [items, dispatchItems] = React.useReducer(reducer, []);
@@ -69,7 +69,7 @@ export function Playground() {
       message: `Сообщение о каком-то событии - ${key}`,
       status,
       ...(withAutoClose && { autoClose: 5 }),
-      ...(withHiddenTimer && { hideTimer: true }),
+      ...(withShowProgress && { showProgress: 'timer' }),
       ...(withIcon && { icon: getItemIconByStatus(status) }),
       ...(withActionButtons && {
         actions: [
