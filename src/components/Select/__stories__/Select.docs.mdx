@@ -76,8 +76,6 @@ const items: Item[] = [
 
 Выбор варианта срабатывает по клику мыши или по нажатию `Enter` на клавиатуре.
 
-<SelectExampleItems />
-
 ```tsx
 type Item = {
   label: string;
@@ -105,14 +103,14 @@ export function SelectExampleItems() {
 }
 ```
 
+<SelectExampleItems />
+
 ### Подсказка
 
 Подсказка, которая видна, когда ни один вариант не выбран, задаётся в свойстве `placeholder`.
 Сформулируйте подсказку так, чтобы стало понятно, что по клику на поле раскроется список вариантов, один из которых нужно выбрать.
 
 Если не знаете, что написать в подсказке, используйте универсальное **Выберите**.
-
-<SelectExamplePlaceholder />
 
 ```tsx
 type Item = {
@@ -148,11 +146,11 @@ export function SelectExamplePlaceholder() {
 }
 ```
 
+<SelectExamplePlaceholder />
+
 ### Неактивный элемент списка
 
 Чтобы сделать вариант в списке неактивным, добавьте к элементу массива `items` свойство `disabled: true`. Если используете [кастомный тип `items`](#кастомные-типы-данных-для-групп-и-вариантов), можете добавить своё свойство.
-
-<SelectExampleDisabledItem />
 
 ```tsx
 type Item = {
@@ -192,14 +190,14 @@ export function SelectExampleDisabledItem() {
 }
 ```
 
+<SelectExampleDisabledItem />
+
 ### Группы вариантов
 
 Чтобы разбить элементы списка на группы, передайте массив групп в свойство `groups`. Тип свойства `groups` по умолчанию равен [DefaultGroup](#свойства). Что внутри:
 
 - `label` — название группы,
 - `id` — уникальный ключ.
-
-<SelectExampleGroups />
 
 ```tsx
 type Item = {
@@ -270,13 +268,13 @@ export function SelectExampleGroups() {
 }
 ```
 
+<SelectExampleGroups />
+
 ## Размер
 
 За размер компонента отвечает свойство `size`. Варианты: `xs`, `s` , `m` , `l` , по умолчанию `m`.
 
 Компонент занимает всю ширину родительского блока.
-
-<SelectExampleSize />
 
 ```tsx
 type Item = {
@@ -313,13 +311,13 @@ export function SelectExampleSize() {
 }
 ```
 
+<SelectExampleSize />
+
 ## Форма
 
 За форму селекта отвечает свойство `form`. Варианты:
 `default`, `brick`, `round`, `clearRound`, `roundClear`, `clearDefault`, `defaultClear`, `defaultBrick`, `brickDefault`, `brickClear`, `clearBrick`, `clearClear`,
 по умолчанию `default`.
-
-<SelectExampleForm />
 
 ```tsx
 type Item = {
@@ -363,11 +361,11 @@ export function SelectExampleForm() {
 }
 ```
 
+<SelectExampleForm />
+
 ## Внешний вид
 
 За вид компонента отвечает свойство `view`. Варианты: `default`, `clear`, по умолчанию `default`.
-
-<SelectExampleView />
 
 ```tsx
 type Item = {
@@ -404,11 +402,11 @@ export function SelectExampleView() {
 }
 ```
 
+<SelectExampleView />
+
 ## Неактивный выпадающий список
 
 Чтобы сделать список неактивным, добавьте `disabled`.
-
-<SelectExampleDisabled />
 
 ```tsx
 type Item = {
@@ -445,6 +443,8 @@ export function SelectExampleDisabled() {
 }
 ```
 
+<SelectExampleDisabled />
+
 ## Кастомизация
 
 ### Кастомный элемент списка
@@ -453,8 +453,6 @@ export function SelectExampleDisabled() {
 Свойство принимает [функцию рендера](https://reactjs.org/docs/render-props.html).
 
 > У корневого DOM-элемента должно быть свойство `role="option"`.
-
-<SelectExampleRenderItem />
 
 ```tsx
 type Item = {
@@ -503,12 +501,12 @@ export function SelectExampleRenderItem() {
 }
 ```
 
+<SelectExampleRenderItem />
+
 ### Кастомное выбранное значение
 
 Сделать кастомное представление для выбранного значения можно с помощью свойства `renderValue`.
 Свойство принимает [функцию рендера](https://reactjs.org/docs/render-props.html).
-
-<SelectExampleRenderValue />
 
 ```tsx
 type Item = {
@@ -552,6 +550,8 @@ export function SelectExampleRenderValue() {
 }
 ```
 
+<SelectExampleRenderValue />
+
 ### Кастомные типы данных для вариантов и групп
 
 Вы можете использовать кастомные типы данных для элементов списка (`items`) и групп (`groups`) — они могут отличаться от [DefaultItem](#свойства) и [DefaultGroup](#свойства).
@@ -574,8 +574,6 @@ const defaultGetGroupLabel = (group) => group.label;
 
 #### Пример с кастомным Item
 
-<SelectExampleCustomTypes />
-
 ```tsx
 export function SelectExampleCustomTypes() {
   const [value, setValue] = useState<string | null>();
@@ -592,9 +590,9 @@ export function SelectExampleCustomTypes() {
 }
 ```
 
-#### Пример с кастомными Item и Group
+<SelectExampleCustomTypes />
 
-<SelectExampleCustomTypesWithGroups />
+#### Пример с кастомными Item и Group
 
 ```tsx
 export type Item = {
@@ -635,6 +633,8 @@ export function SelectExampleCustomTypesWithGroups() {
   );
 }
 ```
+
+<SelectExampleCustomTypesWithGroups />
 
 ## Свойства
 

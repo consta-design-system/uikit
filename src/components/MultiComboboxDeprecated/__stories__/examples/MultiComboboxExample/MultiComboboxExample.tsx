@@ -29,7 +29,6 @@ export const MultiComboboxExampleText = () => {
         options={items}
         getOptionLabel={getItemLabel}
         placeholder="Выберите цвет"
-        size="s"
         onChange={setValue}
         value={value}
       />

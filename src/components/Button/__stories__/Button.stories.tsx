@@ -31,7 +31,7 @@ const defaultKnobs = () => ({
   form: select('Form', buttonPropForm, buttonPropFormDefault),
   disabled: boolean('Disabled', false),
   loading: boolean('Loading', false),
-  label: text('Content', 'I am button'),
+  label: text('Content', 'Это кнопка'),
   iconLeft: boolean('Icon Left', false),
   iconRight: boolean('Icon Right', false),
   onlyIcon: boolean('Only Icon', false),

@@ -24,7 +24,8 @@ export const SidebarExample = () => {
       <Sidebar
         className={cnSidebarExample('Sidebar')}
         isOpen={isSidebarOpen}
-        onOverlayClick={() => setIsSidebarOpen(false)}
+        onClickOutside={() => setIsSidebarOpen(false)}
+        onEsc={() => setIsSidebarOpen(false)}
       >
         <Sidebar.Content className={cnSidebarExample('Content')}>
           <Text
@@ -98,7 +99,8 @@ export const SidebarExampleLeft = () => {
       <Sidebar
         className={cnSidebarExample('Sidebar')}
         isOpen={isSidebarOpen}
-        onOverlayClick={() => setIsSidebarOpen(false)}
+        onClickOutside={() => setIsSidebarOpen(false)}
+        onEsc={() => setIsSidebarOpen(false)}
         position="left"
       >
         <Sidebar.Content className={cnSidebarExample('Content')}>
@@ -150,7 +152,8 @@ export const SidebarExampleRight = () => {
       <Sidebar
         className={cnSidebarExample('Sidebar')}
         isOpen={isSidebarOpen}
-        onOverlayClick={() => setIsSidebarOpen(false)}
+        onClickOutside={() => setIsSidebarOpen(false)}
+        onEsc={() => setIsSidebarOpen(false)}
         position="right"
       >
         <Sidebar.Content className={cnSidebarExample('Content')}>
@@ -202,7 +205,8 @@ export const SidebarExampleTop = () => {
       <Sidebar
         className={cnSidebarExample('Sidebar')}
         isOpen={isSidebarOpen}
-        onOverlayClick={() => setIsSidebarOpen(false)}
+        onClickOutside={() => setIsSidebarOpen(false)}
+        onEsc={() => setIsSidebarOpen(false)}
         position="top"
       >
         <Sidebar.Content className={cnSidebarExample('Content')}>
@@ -254,7 +258,8 @@ export const SidebarExampleBottom = () => {
       <Sidebar
         className={cnSidebarExample('Sidebar')}
         isOpen={isSidebarOpen}
-        onOverlayClick={() => setIsSidebarOpen(false)}
+        onClickOutside={() => setIsSidebarOpen(false)}
+        onEsc={() => setIsSidebarOpen(false)}
         position="bottom"
       >
         <Sidebar.Content className={cnSidebarExample('Content')}>
@@ -306,7 +311,8 @@ export const SidebarExampleNoOverlay = () => {
       <Sidebar
         className={cnSidebarExample('Sidebar')}
         isOpen={isSidebarOpen}
-        onOverlayClick={() => setIsSidebarOpen(false)}
+        onClickOutside={() => setIsSidebarOpen(false)}
+        onEsc={() => setIsSidebarOpen(false)}
         position="right"
         hasOverlay={false}
       >

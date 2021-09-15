@@ -2,14 +2,14 @@ import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { act, renderHook } from '@testing-library/react-hooks';
 
-import { cnTextField, TextField, TextFieldProps } from '../../../TextField/TextField';
-import { useTextFieldEventsHandler } from '../useTextFieldEventsHandler';
+import { cnTextField, TextField } from '../../../TextField/TextField';
+import { Props, useTextFieldEventsHandler } from '../useTextFieldEventsHandler';
 
 const testId = 'TextField';
 const eventHandler = jest.fn();
 const textFieldRef = React.createRef<HTMLDivElement>();
 
-const renderComponent = (props: TextFieldProps = {}) => {
+const renderComponent = (props: Props) => {
   return render(<TextField data-testid={testId} {...props} />);
 };
 

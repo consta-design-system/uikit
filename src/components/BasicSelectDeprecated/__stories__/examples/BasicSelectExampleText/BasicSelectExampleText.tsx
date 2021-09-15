@@ -14,7 +14,7 @@ const items = [
   { label: 'Белый', value: 'white' },
   { label: 'Красный', value: 'red' },
   { label: 'Черный', value: 'black' },
-  { label: 'Зеленый', value: 'green' },
+  { label: 'Зелёный', value: 'green' },
   { label: 'В полосочку', value: 'stripe' },
 ];
 
@@ -22,13 +22,11 @@ export const BasicSelectExampleText = () => {
   const getItemLabel = (option: SelectOption): string => option.label;
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <p>Цвет фона</p>
       <BasicSelect
         id="colors"
         options={items}
         getOptionLabel={getItemLabel}
-        placeholder="Выберите"
-        size="s"
+        placeholder="Выберите цвет"
       />
     </StoryBookExample>
   );

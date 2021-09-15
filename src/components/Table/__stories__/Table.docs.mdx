@@ -257,8 +257,9 @@ import { TableFilterContainer } from '@consta/uikit/Table';
 Вы можете выделить строки через одну с помощью свойства `zebraStriped`,
 так удобнее следить за данными. В таблице появятся полоски, как у зебры.
 
-`activeRow` выделяет строку, на которую наведен курсор.
-`onRowHover` сработает при наведении настроку, полезно когда нужно скрыть/отобразить элементы в строке
+`activeRow` выделяет строку по клику [Подробнее](#обработка-клика-по-строке-и-ее-выделение)
+
+`onRowHover` сработает при наведении на строку, это полезно, когда нужно скрыть или показать элементы в строке.
 
 ### Закрепить заголовок или колонку
 
@@ -528,5 +529,93 @@ const App = () => {
     }));
 
   return <Table rows={rows} columns={columns} onSortBy={setSortSetting} />;
+};
+```
+
+### Обработка клика по строке и ее выделение
+
+Чтобы выделить строку по клику, передайте компоненту `Table` свойство `activeRow` типа `ActiveRow`.
+
+```tsx
+type ActiveRow = {
+  id: string | undefined;
+  onChange: ({ id, e }: { id: string | undefined; e?: React.SyntheticEvent }) => void;
+};
+```
+
+**Важно**: если вы передаете `id` активной строки, то при повторном клике по этой строке
+обработчик вернет `id === undefined`.
+
+```tsx
+import React from 'react';
+import { Table } from '@consta/uikit/Table';
+import { Text } from '@consta/uikit/Text';
+
+const columns = [
+  {
+    title: '№',
+    accessor: 'id',
+    align: 'center',
+  },
+  {
+    title: 'Имя',
+    accessor: 'name',
+    align: 'center',
+  },
+];
+
+const rows = [
+  {
+    id: '1',
+    name: 'Антон',
+  },
+  {
+    id: '2',
+    name: 'Василий',
+  },
+  {
+    id: '3',
+    name: 'Петр',
+  },
+];
+
+const App = () => {
+  const [selectedRow, setSelectedRow] = React.useState<string>();
+
+  const handleClickRow = ({
+    id,
+    e,
+  }: {
+    id: string | undefined;
+    e?: React.SyntheticEvent;
+  }): void => {
+    setSelectedRow(id);
+  };
+
+  return (
+    <Table
+      columns={columns}
+      rows={rows}
+      activeRow={{ id: selectedRow, onChange: handleClickRow }}
+    />
+  );
+};
+```
+
+Если вы хотите обрабатывать повторный и следующие клики по выделенной строке,
+установите `activeRow={{ id: undefined, onChange: handleClickRow }}`.
+
+```tsx
+const columns = [...];
+const rows = [...];
+
+const App = () => {
+  const handleClickRow = ({ id, e }: { id: string | undefined; e?: React.SyntheticEvent }): void => {
+    console.log(id, e)
+  };
+
+  return (
+    <Table columns={columns} rows={rows} activeRow={{ id: undefined, onChange: handleClickRow }} />
+  );
 };
 ```

@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import { useClickOutside } from '../../hooks/useClickOutside/useClickOutside';
+import { useGlobalKeys } from '../../hooks/useGlobalKeys/useGlobalKeys';
 import { cn } from '../../utils/bem';
 import { cnForCssTransition } from '../../utils/cnForCssTransition';
 import { PortalWithTheme, usePortalContext } from '../PortalWithTheme/PortalWithTheme';
@@ -22,8 +23,10 @@ type ModalProps = {
   onClose?: () => void;
   onOpen?: () => void;
   hasOverlay?: boolean;
+  /** @deprecated use onClickOutside */
   onOverlayClick?: (event: MouseEvent) => void;
   onClickOutside?: (event: MouseEvent) => void;
+  onEsc?: (event: KeyboardEvent) => void;
   className?: string;
   rootClassName?: string;
   width?: ModalPropWidth;
@@ -63,6 +66,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
     hasOverlay = true,
     onOverlayClick,
     onClickOutside,
+    onEsc,
     className,
     width = modalPropWidthDefault,
     position = modalPropPositionDefault,
@@ -83,6 +87,10 @@ export const Modal: React.FC<ModalProps> = (props) => {
       onClose?.();
     }
   }, [isOpen]);
+
+  useGlobalKeys({
+    Escape: (e: KeyboardEvent) => isOpen && onEsc && onEsc(e),
+  });
 
   return (
     <CSSTransition
