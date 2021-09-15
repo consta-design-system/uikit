@@ -11,7 +11,7 @@ const cnLayoutExampleFixed = cn('LayoutExampleFixed');
 export const LayoutExampleFixedTop = () => {
   return (
     <Layout className={cnLayoutExampleFixed()} direction="column">
-      <Layout top fixed className={cnLayoutExampleFixed('Header')}>
+      <Layout verticalAlign="top" fixed className={cnLayoutExampleFixed('Header')}>
         <Text>Заголовок</Text>
       </Layout>
       <Layout direction="row" className={cnLayoutExampleFixed('Content')}>
@@ -29,7 +29,7 @@ export const LayoutExampleFixedTop = () => {
 export const LayoutExampleFixedBottom = () => {
   return (
     <Layout className={cnLayoutExampleFixed()} direction="column">
-      <Layout bottom fixed className={cnLayoutExampleFixed('Header')}>
+      <Layout verticalAlign="bottom" fixed className={cnLayoutExampleFixed('Header')}>
         <Text>Заголовок</Text>
       </Layout>
       <Layout direction="row" className={cnLayoutExampleFixed('Content')}>

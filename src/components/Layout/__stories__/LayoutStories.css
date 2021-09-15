@@ -8,4 +8,11 @@
     align-items: center;
     background: var(--color-bg-success);
   }
+
+  &-Fixed {
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: var(--color-bg-normal);
+  }
 }

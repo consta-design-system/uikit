@@ -6,12 +6,26 @@ import { select, text } from '@storybook/addon-knobs';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import { Text } from '../../Text/Text';
-import { Layout, layoutPropDirection, layoutPropDirectionDefault } from '../Layout';
+import {
+  Layout,
+  layoutPropDirection,
+  layoutPropDirectionDefault,
+  layoutPropHorizontalAlign,
+  layoutPropHorizontalAlignDefault,
+  layoutPropVerticalAlign,
+  layoutPropVerticalAlignDefault,
+} from '../Layout';
 
 import mdx from './Layout.docs.mdx';
 
 const defaultKnobs = () => ({
   direction: select('Direction', layoutPropDirection, layoutPropDirectionDefault),
+  verticalAlign: select('Vertical align', layoutPropVerticalAlign, layoutPropVerticalAlignDefault),
+  horizontalAlign: select(
+    'Horizontal align',
+    layoutPropHorizontalAlign,
+    layoutPropHorizontalAlignDefault,
+  ),
   flexBlock1: text('Flex Block 1', '1'),
   flexBlock2: text('Flex Block 2', '1'),
 });
@@ -19,10 +33,18 @@ const defaultKnobs = () => ({
 const cnLayoutStories = cn('LayoutStories');
 
 export function Playground() {
-  const { direction, flexBlock1, flexBlock2 } = defaultKnobs();
+  const { direction, flexBlock1, flexBlock2, verticalAlign, horizontalAlign } = defaultKnobs();
 
   return (
     <Layout direction={direction} className={cnLayoutStories()}>
+      <Layout
+        fixed
+        verticalAlign={verticalAlign}
+        horizontalAlign={horizontalAlign}
+        className={cnLayoutStories('Fixed')}
+      >
+        <Text>Фикстрованный элемент</Text>
+      </Layout>
       <Layout className={cnLayoutStories('Block')} flex={flexBlock1}>
         <Text>Контент</Text>
       </Layout>

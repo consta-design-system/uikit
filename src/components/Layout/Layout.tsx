@@ -9,6 +9,15 @@ export const layoutPropDirection = ['row', 'column'] as const;
 export type LayoutPropDirection = typeof layoutPropDirection[number];
 export const layoutPropDirectionDefault: LayoutPropDirection = layoutPropDirection[0];
 
+export const layoutPropVerticalAlign = ['top', 'bottom'] as const;
+export type LayoutPropVerticalAlign = typeof layoutPropVerticalAlign[number];
+export const layoutPropVerticalAlignDefault: LayoutPropVerticalAlign = layoutPropVerticalAlign[0];
+
+export const layoutPropHorizontalAlign = ['left', 'right'] as const;
+export type LayoutPropHorizontalAlign = typeof layoutPropHorizontalAlign[number];
+export const layoutPropHorizontalAlignDefault: LayoutPropHorizontalAlign =
+  layoutPropHorizontalAlign[0];
+
 type LayoutStateStationing = {
   top?: number;
   left?: number;
@@ -19,8 +28,8 @@ type LayoutStateStationing = {
 export type Props = {
   flex?: string | number;
   fixed?: boolean;
-  top?: boolean;
-  bottom?: boolean;
+  verticalAlign?: LayoutPropVerticalAlign;
+  horizontalAlign?: LayoutPropHorizontalAlign;
   anchorRef?: React.RefObject<HTMLElement>;
   direction?: LayoutPropDirection;
   children?: React.ReactNode;
@@ -37,8 +46,8 @@ export const Layout = forwardRefWithAs<Props>((props, ref) => {
     children,
     className,
     tabIndex,
-    top,
-    bottom,
+    verticalAlign = layoutPropVerticalAlignDefault,
+    horizontalAlign = layoutPropHorizontalAlignDefault,
     as = 'div',
     ...otherProps
   } = props;
@@ -57,40 +66,40 @@ export const Layout = forwardRefWithAs<Props>((props, ref) => {
 
   useEffect(() => {
     if (fixed) {
+      document.removeEventListener('scroll', handleScroll);
       handleScroll();
       document.addEventListener('scroll', handleScroll);
     }
     return () => {
       if (fixed) document.removeEventListener('scroll', handleScroll);
     };
-  }, [fixed]);
+  }, [verticalAlign, horizontalAlign, fixed]);
 
   const handleScroll = () => {
-    if (layoutRef !== null && layoutRef.current && layoutRef.current.parentElement) {
+    if (layoutRef && layoutRef.current && layoutRef.current.parentElement && fixed) {
+      const parentContainer =
+        anchorRef && anchorRef.current ? anchorRef.current : layoutRef.current.parentElement;
       const containerPosition = {
-        top: layoutRef.current.parentElement?.offsetTop,
-        bottom:
-          layoutRef.current.parentElement?.offsetTop +
-          layoutRef.current.parentElement?.clientHeight,
-        left: layoutRef.current.parentElement?.offsetLeft,
-        right:
-          layoutRef.current.parentElement?.offsetLeft +
-          layoutRef.current.parentElement?.clientWidth,
-        width: layoutRef.current.parentElement?.clientWidth,
-        height: layoutRef.current.parentElement?.clientHeight,
+        top: parentContainer?.offsetTop,
+        bottom: parentContainer?.offsetTop + parentContainer?.clientHeight,
+        left: parentContainer?.offsetLeft,
+        right: parentContainer?.offsetLeft + parentContainer?.clientWidth,
+        width: parentContainer?.clientWidth,
+        height: parentContainer?.clientHeight,
       };
       if (
         window.scrollY + window.innerHeight >= containerPosition.top &&
         window.scrollY <= containerPosition.bottom
       ) {
         setStationing({
-          left: -window.scrollX + containerPosition.left,
-          top: bottom
-            ? -window.scrollY +
-              containerPosition.top +
-              containerPosition.height -
-              layoutRef.current.offsetHeight
-            : -window.scrollY + containerPosition.top,
+          left:
+            horizontalAlign === 'right'
+              ? -window.scrollX + containerPosition.right - layoutRef.current.offsetWidth
+              : -window.scrollX + containerPosition.left,
+          top:
+            verticalAlign === 'bottom'
+              ? -window.scrollY + containerPosition.bottom - layoutRef.current.offsetHeight
+              : -window.scrollY + containerPosition.top,
           width: containerPosition.width,
         });
         setIsFixed(true);
