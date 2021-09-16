@@ -73,6 +73,7 @@ export const DateTimeTypeMountViewClassic: DateTimeViewComponent = React.forward
       return (
         <DateTimeTypeYearViewClassic
           {...otherProps}
+          ref={ref}
           className={className}
           minDate={minDate}
           maxDate={maxDate}

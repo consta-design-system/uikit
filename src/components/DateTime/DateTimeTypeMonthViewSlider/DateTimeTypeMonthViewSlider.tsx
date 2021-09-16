@@ -84,6 +84,7 @@ export const DateTimeTypeMonthViewSlider: DateTimeTypeViewComponent = React.forw
       return (
         <DateTimeTypeYearViewSlider
           {...otherProps}
+          ref={ref}
           className={className}
           currentVisibleDate={currentVisibleDate}
           minDate={minDate}

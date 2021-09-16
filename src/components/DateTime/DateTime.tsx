@@ -52,3 +52,6 @@ export * from './DateTimeTypeYearViewSlider/DateTimeTypeYearViewSlider';
 export * from './DateTimeTypeMountViewClassic/DateTimeTypeMountViewClassic';
 export * from './DateTimeTypeMountViewBook/DateTimeTypeMountViewBook';
 export * from './DateTimeTypeMonthViewSlider/DateTimeTypeMonthViewSlider';
+export * from './DateTimeTypeDateViewClassic/DateTimeTypeDateViewClassic';
+export * from './DateTimeTypeDateViewBook/DateTimeTypeDateViewBook';
+export * from './DateTimeTypeDateViewSlider/DateTimeTypeDateViewSlider';

@@ -1,0 +1,20 @@
+.DateTimeTypeDateViewSlider {
+  &-Slider {
+    margin-bottom: var(--space-l);
+  }
+
+  &-Label {
+    display: block;
+    margin-bottom: var(--space-s);
+  }
+
+  &-PageWrapper {
+    display: flex;
+  }
+
+  &-Page {
+    &:not(:last-child) {
+      margin-right: var(--space-m);
+    }
+  }
+}

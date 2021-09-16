@@ -86,6 +86,7 @@ export const DateTimeTypeMountViewBook: DateTimeTypeViewComponent = React.forwar
       return (
         <DateTimeTypeYearViewBook
           {...otherProps}
+          ref={ref}
           className={className}
           currentVisibleDate={currentVisibleDate}
           minDate={minDate}
