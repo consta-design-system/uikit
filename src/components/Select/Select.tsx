@@ -6,7 +6,7 @@ import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { useSelect } from '../../hooks/useSelect/useSelect';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
-import { cnSelect } from '../SelectComponents/cnSelect';
+import { cnSelect, COMPONENT_NAME } from '../SelectComponents/cnSelect';
 import { getSelectDropdownForm } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
@@ -57,7 +57,7 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
     renderValue: renderValueProp,
     inputRef: inputRefProp,
     ...restProps
-  } = usePropsHandler('Select', withDefaultGetters(props), controlRef);
+  } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
 
   const {
     getKeyProps,
@@ -186,6 +186,7 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
   );
 }
 
+export { COMPONENT_NAME };
 export const Select = forwardRef(SelectRender) as SelectComponent;
 
 export * from './helpers';

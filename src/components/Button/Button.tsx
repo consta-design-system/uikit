@@ -52,7 +52,8 @@ export type Props = {
   children?: never;
 };
 
-export const cnButton = cn('Button');
+export const COMPONENT_NAME = 'Button' as const;
+export const cnButton = cn(COMPONENT_NAME);
 
 const sizeMap: Record<ButtonPropSize, IconPropSize> = {
   xs: 'xs',
@@ -86,7 +87,7 @@ export const Button = forwardRefWithAs<Props, 'button'>((props, ref) => {
     onlyIcon,
     iconSize: iconSizeProp,
     ...otherProps
-  } = usePropsHandler(cnButton(), props);
+  } = usePropsHandler(COMPONENT_NAME, props, ref);
 
   const Tag = as as string;
   const IconOnly = (!label || onlyIcon) && (iconLeft || iconRight);

@@ -6,6 +6,7 @@ import { useSelect } from '../../hooks/useSelectDeprecated/useSelect';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { scrollIntoView } from '../../utils/scrollIntoView';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
+import { COMPONENT_NAME } from '../Select/Select';
 import { cnSelect } from '../SelectComponentsDeprecated/cnSelect';
 import { getSelectDropdownForm } from '../SelectComponentsDeprecated/helpers';
 import { SelectContainer } from '../SelectComponentsDeprecated/SelectContainer/SelectContainer';
@@ -54,7 +55,7 @@ export const BasicSelect: Select = (props) => {
     dropdownClassName,
     name,
     ...restProps
-  } = usePropsHandler(cnSelect(), props, controlRef);
+  } = usePropsHandler(COMPONENT_NAME, props, controlRef);
   const toggleRef = useRef<HTMLInputElement>(null);
   const [isFocused, setIsFocused] = useState(false);
 
