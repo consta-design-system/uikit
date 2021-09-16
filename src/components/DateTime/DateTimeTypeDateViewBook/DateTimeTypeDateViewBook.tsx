@@ -5,7 +5,7 @@ import ruLocale from 'date-fns/locale/ru';
 import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { DateTimeMonth } from '../DateTimeMonth/DateTimeMonth';
 import { DateTimeToggler } from '../DateTimeToggler/DateTimeToggler';
-import { DateTimeTypeMountViewBook } from '../DateTimeTypeMountViewBook/DateTimeTypeMountViewBook';
+import { DateTimeTypeMonthViewBook } from '../DateTimeTypeMonthViewBook/DateTimeTypeMonthViewBook';
 import {
   DateTimeViewComponent,
   getDaysOfMonth,
@@ -79,7 +79,7 @@ export const DateTimeTypeDateViewBook: DateTimeViewComponent = React.forwardRef(
 
   if (changeMonth) {
     return (
-      <DateTimeTypeMountViewBook
+      <DateTimeTypeMonthViewBook
         {...otherProps}
         ref={ref}
         className={className}

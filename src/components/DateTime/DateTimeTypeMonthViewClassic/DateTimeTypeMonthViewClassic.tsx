@@ -16,7 +16,7 @@ import {
 } from '../helpers';
 import { cnDateTimeMixViewClassic } from '../mixs';
 
-export const DateTimeTypeMountViewClassic: DateTimeViewComponent = React.forwardRef(
+export const DateTimeTypeMonthViewClassic: DateTimeViewComponent = React.forwardRef(
   (props, ref) => {
     const {
       minDate,

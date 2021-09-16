@@ -16,7 +16,7 @@ import {
 } from '../helpers';
 import { cnDateTimeMixViewBook } from '../mixs';
 
-export const DateTimeTypeMountViewBook: DateTimeTypeViewComponent = React.forwardRef(
+export const DateTimeTypeMonthViewBook: DateTimeTypeViewComponent = React.forwardRef(
   (props, ref) => {
     const {
       minDate,

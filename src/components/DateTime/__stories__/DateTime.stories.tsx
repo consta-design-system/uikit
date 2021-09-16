@@ -17,9 +17,9 @@ import {
   DateTimeTypeDateViewBook,
   DateTimeTypeDateViewClassic,
   DateTimeTypeDateViewSlider,
+  DateTimeTypeMonthViewBook,
+  DateTimeTypeMonthViewClassic,
   DateTimeTypeMonthViewSlider,
-  DateTimeTypeMountViewBook,
-  DateTimeTypeMountViewClassic,
   DateTimeTypeYearViewBook,
   DateTimeTypeYearViewClassic,
   DateTimeTypeYearViewSlider,
@@ -253,12 +253,12 @@ export const DateTimeTypeYearViewSliderStory = createStory(
   },
 );
 
-export const DateTimeTypeMountViewClassicStory = createStory(
+export const DateTimeTypeMonthViewClassicStory = createStory(
   () => {
     const [value, setValue] = useState<[Date?, Date?] | undefined>(undefined);
 
     return (
-      <DateTimeTypeMountViewClassic
+      <DateTimeTypeMonthViewClassic
         value={value}
         onChangeRange={({ value }) => setValue(value)}
         minDate={new Date(2003, 0)}
@@ -267,16 +267,16 @@ export const DateTimeTypeMountViewClassicStory = createStory(
     );
   },
   {
-    name: 'DateTimeTypeMountViewClassic',
+    name: 'DateTimeTypeMonthViewClassic',
   },
 );
 
-export const DateTimeTypeMountViewBookStory = createStory(
+export const DateTimeTypeMonthViewBookStory = createStory(
   () => {
     const [value, setValue] = useState<[Date?, Date?] | undefined>(undefined);
 
     return (
-      <DateTimeTypeMountViewBook
+      <DateTimeTypeMonthViewBook
         value={value}
         onChangeRange={({ value }) => setValue(value)}
         minDate={new Date(2003, 0)}
@@ -285,7 +285,7 @@ export const DateTimeTypeMountViewBookStory = createStory(
     );
   },
   {
-    name: 'DateTimeTypeMountViewBook',
+    name: 'DateTimeTypeMonthViewBook',
   },
 );
 
