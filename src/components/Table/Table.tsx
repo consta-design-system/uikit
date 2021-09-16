@@ -103,6 +103,7 @@ type ColumnBase<T extends TableRow> = ValueOf<
       sortByField?: keyof T;
       sortFn?(a: T[K], b: T[K]): number;
       renderCell?: (row: T) => React.ReactNode;
+      getComparisonValue?: (cell: T[K]) => number | string;
     };
   }
 >;
@@ -529,15 +530,26 @@ export const Table = <T extends TableRow>({
     column: TableColumn<T>,
     columnIdx: number,
   ) => {
+    const { mergeCells, accessor, getComparisonValue = (e) => e } = column;
+
+    const currentCell = getComparisonValue(row[accessor!]);
     let rowSpan = 1;
+
     if (
-      (rowsData[rowIdx - 1] && rowsData[rowIdx - 1][column.accessor!] !== row[column.accessor!]) ||
+      (rowsData[rowIdx - 1] &&
+        getComparisonValue(rowsData[rowIdx - 1][accessor!]) !== currentCell) ||
       rowIdx === 0 ||
-      !column.mergeCells
+      !mergeCells
     ) {
       for (let i = rowIdx; i < rowsData.length; i++) {
-        if (rowsData[i + 1] && rowsData[i + 1][column.accessor!] === row[column.accessor!]) {
-          rowSpan++;
+        if (rowsData[i + 1]) {
+          const nextCell = getComparisonValue(rowsData[i + 1][accessor!]);
+
+          if (currentCell === nextCell) {
+            rowSpan++;
+          } else {
+            break;
+          }
         } else {
           break;
         }
@@ -548,7 +560,7 @@ export const Table = <T extends TableRow>({
         '--row-span': string | null;
       } = {
         'left': getStickyLeftOffset(columnIdx, column.position!.topHeaderGridIndex),
-        '--row-span': column.mergeCells ? `span ${rowSpan}` : null,
+        '--row-span': mergeCells ? `span ${rowSpan}` : null,
       };
 
       return {

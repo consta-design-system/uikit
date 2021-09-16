@@ -342,6 +342,66 @@ export const WithMergedCells = createStory(
   },
 );
 
+export const WithMergedByCustomCallbackCells = createStory(
+  () => {
+    const getRandomCase = (e: string) =>
+      e
+        .split('')
+        .map((chr) => (Math.round(Math.random()) ? chr.toLowerCase() : chr.toUpperCase()))
+        .join('');
+    return (
+      <Table
+        {...getKnobs({
+          borderBetweenColumns: true,
+          borderBetweenRows: true,
+          columns: [
+            {
+              title: 'ID',
+              accessor: 'id',
+              align: 'left',
+            },
+            {
+              title: 'Текст разного регистра',
+              accessor: 'randomCaseText',
+              mergeCells: true,
+              getComparisonValue: (cell: string) => cell.toLowerCase(),
+            },
+          ],
+          rows: [
+            {
+              id: '1',
+              randomCaseText: 'Текст',
+            },
+            {
+              id: '2',
+              randomCaseText: getRandomCase('Текст'),
+            },
+            {
+              id: '3',
+              randomCaseText: getRandomCase('Текст'),
+            },
+            {
+              id: '4',
+              randomCaseText: getRandomCase('Текст'),
+            },
+            {
+              id: '5',
+              randomCaseText: 'Строчка',
+            },
+            {
+              id: '6',
+              randomCaseText: getRandomCase('Строчка'),
+            },
+          ],
+        })}
+      />
+    );
+  },
+  {
+    name: 'с объединёнными кастомной функцией ячейками',
+  },
+);
+
 export const withCustomFilters = createStory(
   () => {
     return (

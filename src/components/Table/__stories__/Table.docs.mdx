@@ -268,6 +268,14 @@ import { TableFilterContainer } from '@consta/uikit/Table';
 
 Отдельно настраивается выравниваются для заголовков — `verticalHeaderAlign`.
 
+### Объединение ячеек
+
+Если вам нужно объединять ячейки с одинаковым содержимым, вы можете указать свойство `mergeCells: true` в объекте той колонки, в которой хотите объединять ячейки.
+Объединение происходит для тех ячеек, которые идут подряд и для их значений справедливо условие `firstValue === secondValue`.
+
+Если в ваших ячейках находятся **не** стандартные данные или вам нужно как-то иначе их сравнивать (например сравнить строки с разным регистром), вы можете использовать колбек `getComparisonValue`.
+Он принимает в себя значение текущей ячейки и должен возвращать строку или число.
+
 ## Свойства
 
 ```ts
@@ -283,6 +291,8 @@ type Column = {
   sortByField?: string;
   sortFn?: (a: FieldValue, b: FieldValue) => number;
   renderCell?: (row: Row) => React.ReactNode;
+  mergeCell?: boolean;
+  getComparisonValue?: (cell: Row[Column.accessor]) => number | string; // cell - значение из ячейки
 };
 
 type Row = {
