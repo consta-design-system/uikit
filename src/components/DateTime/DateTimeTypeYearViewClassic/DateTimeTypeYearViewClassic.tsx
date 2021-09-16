@@ -1,10 +1,7 @@
-import './DateTimeTypeYearViewClassic.css';
-
 import React from 'react';
 import { addYears, startOfDecade } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 
-import { cn } from '../../../utils/bem';
 import { DateTime10Years } from '../DateTime10Years/DateTime10Years';
 import { DateTimeToggler } from '../DateTimeToggler/DateTimeToggler';
 import {
@@ -15,8 +12,7 @@ import {
   isEqualYear,
   useCurrentVisibleDate,
 } from '../helpers';
-
-const cnDateTimeTypeYearViewClassic = cn('DateTimeTypeYearViewClassic');
+import { cnDateTimeMixViewClassic } from '../mixs';
 
 export const DateTimeTypeYearViewClassic: DateTimeTypeViewComponent = React.forwardRef(
   (props, ref) => {
@@ -66,9 +62,9 @@ export const DateTimeTypeYearViewClassic: DateTimeTypeViewComponent = React.forw
     const handlePrev = () => setCurrentVisibleDate(addYears(currentVisibleDate, -10));
 
     return (
-      <div {...otherProps} className={cnDateTimeTypeYearViewClassic(null, [className])} ref={ref}>
+      <div {...otherProps} className={cnDateTimeMixViewClassic(null, [className])} ref={ref}>
         <DateTimeToggler
-          className={cnDateTimeTypeYearViewClassic('Label')}
+          className={cnDateTimeMixViewClassic('Label')}
           prevOnClick={handlePrev}
           nextOnClick={handleNext}
           label={label}

@@ -1,11 +1,8 @@
-import './DateTimeTypeDateViewBook.css';
-
 import React from 'react';
 import { addMonths, startOfMonth } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 
 import { useFlag } from '../../../hooks/useFlag/useFlag';
-import { cn } from '../../../utils/bem';
 import { DateTimeMonth } from '../DateTimeMonth/DateTimeMonth';
 import { DateTimeToggler } from '../DateTimeToggler/DateTimeToggler';
 import { DateTimeTypeMountViewBook } from '../DateTimeTypeMountViewBook/DateTimeTypeMountViewBook';
@@ -18,8 +15,7 @@ import {
   isEqualDay,
   useCurrentVisibleDate,
 } from '../helpers';
-
-export const cnDateTimeTypeDateViewBook = cn('DateTimeTypeDateViewBook');
+import { cnDateTimeMixViewBook } from '../mixs';
 
 export const DateTimeTypeDateViewBook: DateTimeViewComponent = React.forwardRef((props, ref) => {
   const {
@@ -101,19 +97,19 @@ export const DateTimeTypeDateViewBook: DateTimeViewComponent = React.forwardRef(
   }
 
   return (
-    <div {...otherProps} ref={ref} className={cnDateTimeTypeDateViewBook(null, [className])}>
-      <div className={cnDateTimeTypeDateViewBook('Page')}>
+    <div {...otherProps} ref={ref} className={cnDateTimeMixViewBook(null, [className])}>
+      <div className={cnDateTimeMixViewBook('Page')}>
         <DateTimeToggler
-          className={cnDateTimeTypeDateViewBook('Label')}
+          className={cnDateTimeMixViewBook('Label')}
           prevOnClick={prevMonthHandle}
           label={monthLabel}
           onLabelClick={on}
         />
         <DateTimeMonth daysOfWeek={daysOfWeek} daysOfMonth={daysOfMonth} />
       </div>
-      <div className={cnDateTimeTypeDateViewBook('Page')}>
+      <div className={cnDateTimeMixViewBook('Page')}>
         <DateTimeToggler
-          className={cnDateTimeTypeDateViewBook('Label')}
+          className={cnDateTimeMixViewBook('Label')}
           nextOnClick={nextMonthHandle}
           label={nextMonthLabel}
           onLabelClick={on}

@@ -1,11 +1,8 @@
-import './DateTimeTypeMonthViewSlider.css';
-
 import React from 'react';
 import { addYears, startOfYear } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 
 import { useFlag } from '../../../hooks/useFlag/useFlag';
-import { cn } from '../../../utils/bem';
 import { DateTime10Years } from '../DateTime10Years/DateTime10Years';
 import { DateTime10YearSlider } from '../DateTime10YearSlider/DateTime10YearSlider';
 import { DateTimeLabel } from '../DateTimeLabel/DateTimeLabel';
@@ -18,8 +15,7 @@ import {
   isEqualMount,
   useCurrentVisibleDate,
 } from '../helpers';
-
-const cnDateTimeTypeMonthViewSlider = cn('DateTimeTypeMonthViewSlider');
+import { cnDateTimeMixViewSlider } from '../mixs';
 
 export const DateTimeTypeMonthViewSlider: DateTimeTypeViewComponent = React.forwardRef(
   (props, ref) => {
@@ -100,27 +96,27 @@ export const DateTimeTypeMonthViewSlider: DateTimeTypeViewComponent = React.forw
     }
 
     return (
-      <div {...otherProps} className={cnDateTimeTypeMonthViewSlider(null, [className])} ref={ref}>
+      <div {...otherProps} className={cnDateTimeMixViewSlider(null, [className])} ref={ref}>
         <DateTime10YearSlider
-          className={cnDateTimeTypeMonthViewSlider('Slider')}
+          className={cnDateTimeMixViewSlider('Slider')}
           currentVisibleDate={currentVisibleDate}
           onChange={setCurrentVisibleDate}
           value={value}
           locale={locale}
         />
-        <div className={cnDateTimeTypeMonthViewSlider('PageWrapper')}>
-          <div className={cnDateTimeTypeMonthViewSlider('Page')}>
+        <div className={cnDateTimeMixViewSlider('PageWrapper')}>
+          <div className={cnDateTimeMixViewSlider('Page')}>
             <DateTimeLabel
-              className={cnDateTimeTypeMonthViewSlider('Label')}
+              className={cnDateTimeMixViewSlider('Label')}
               label={pageOneLabel}
               onClick={on}
               cursor="pointer"
             />
             <DateTime10Years years={pageOneYearsOfDecade} />
           </div>
-          <div className={cnDateTimeTypeMonthViewSlider('Page')}>
+          <div className={cnDateTimeMixViewSlider('Page')}>
             <DateTimeLabel
-              className={cnDateTimeTypeMonthViewSlider('Label')}
+              className={cnDateTimeMixViewSlider('Label')}
               label={pageTwoLabel}
               onClick={on}
               cursor="pointer"

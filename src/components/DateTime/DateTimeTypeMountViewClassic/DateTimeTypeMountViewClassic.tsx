@@ -1,11 +1,8 @@
-import './DateTimeTypeMountViewClassic.css';
-
 import React from 'react';
 import { addYears, startOfYear } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 
 import { useFlag } from '../../../hooks/useFlag/useFlag';
-import { cn } from '../../../utils/bem';
 import { DateTimeToggler } from '../DateTimeToggler/DateTimeToggler';
 import { DateTimeTypeYearViewClassic } from '../DateTimeTypeYearViewClassic/DateTimeTypeYearViewClassic';
 import { DateTimeYear } from '../DateTimeYear/DateTimeYear';
@@ -17,8 +14,7 @@ import {
   isEqualMount,
   useCurrentVisibleDate,
 } from '../helpers';
-
-const cnDateTimeTypeMountViewClassic = cn('DateTimeTypeMountViewClassic');
+import { cnDateTimeMixViewClassic } from '../mixs';
 
 export const DateTimeTypeMountViewClassic: DateTimeViewComponent = React.forwardRef(
   (props, ref) => {
@@ -89,9 +85,9 @@ export const DateTimeTypeMountViewClassic: DateTimeViewComponent = React.forward
     }
 
     return (
-      <div {...otherProps} className={cnDateTimeTypeMountViewClassic(null, [className])} ref={ref}>
+      <div {...otherProps} className={cnDateTimeMixViewClassic(null, [className])} ref={ref}>
         <DateTimeToggler
-          className={cnDateTimeTypeMountViewClassic('Label')}
+          className={cnDateTimeMixViewClassic('Label')}
           prevOnClick={handlePrev}
           nextOnClick={handleNext}
           label={label}

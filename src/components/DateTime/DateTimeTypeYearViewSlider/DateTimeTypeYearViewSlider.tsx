@@ -1,10 +1,7 @@
-import './DateTimeTypeYearViewSlider.css';
-
 import React from 'react';
 import { addYears, startOfDecade } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 
-import { cn } from '../../../utils/bem';
 import { DateTime10Years } from '../DateTime10Years/DateTime10Years';
 import { DateTime100YearSlider } from '../DateTime100YearSlider/DateTime100YearSlider';
 import { DateTimeLabel } from '../DateTimeLabel/DateTimeLabel';
@@ -16,8 +13,7 @@ import {
   isEqualYear,
   useCurrentVisibleDate,
 } from '../helpers';
-
-const cnDateTimeTypeYearViewSlider = cn('DateTimeTypeYearViewSlider');
+import { cnDateTimeMixViewSlider } from '../mixs';
 
 export const DateTimeTypeYearViewSlider: DateTimeTypeViewComponent = React.forwardRef(
   (props, ref) => {
@@ -77,21 +73,21 @@ export const DateTimeTypeYearViewSlider: DateTimeTypeViewComponent = React.forwa
     const pageTwoLabel = getDecadeTitle(pageTwoCurrentVisibleDate);
 
     return (
-      <div {...otherProps} className={cnDateTimeTypeYearViewSlider(null, [className])} ref={ref}>
+      <div {...otherProps} className={cnDateTimeMixViewSlider(null, [className])} ref={ref}>
         <DateTime100YearSlider
-          className={cnDateTimeTypeYearViewSlider('Slider')}
+          className={cnDateTimeMixViewSlider('Slider')}
           currentVisibleDate={currentVisibleDate}
           onChange={setCurrentVisibleDate}
           value={value}
           locale={locale}
         />
-        <div className={cnDateTimeTypeYearViewSlider('PageWrapper')}>
-          <div className={cnDateTimeTypeYearViewSlider('Page')}>
-            <DateTimeLabel className={cnDateTimeTypeYearViewSlider('Label')} label={pageOneLabel} />
+        <div className={cnDateTimeMixViewSlider('PageWrapper')}>
+          <div className={cnDateTimeMixViewSlider('Page')}>
+            <DateTimeLabel className={cnDateTimeMixViewSlider('Label')} label={pageOneLabel} />
             <DateTime10Years years={pageOneYearsOfDecade} />
           </div>
-          <div className={cnDateTimeTypeYearViewSlider('Page')}>
-            <DateTimeLabel className={cnDateTimeTypeYearViewSlider('Label')} label={pageTwoLabel} />
+          <div className={cnDateTimeMixViewSlider('Page')}>
+            <DateTimeLabel className={cnDateTimeMixViewSlider('Label')} label={pageTwoLabel} />
             <DateTime10Years years={pageTwoYearsOfDecade} />
           </div>
         </div>

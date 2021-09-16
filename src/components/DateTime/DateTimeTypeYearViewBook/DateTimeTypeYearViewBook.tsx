@@ -1,10 +1,7 @@
-import './DateTimeTypeYearViewBook.css';
-
 import React from 'react';
 import { addYears, startOfDecade } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 
-import { cn } from '../../../utils/bem';
 import { DateTime10Years } from '../DateTime10Years/DateTime10Years';
 import { DateTimeToggler } from '../DateTimeToggler/DateTimeToggler';
 import {
@@ -15,8 +12,7 @@ import {
   isEqualYear,
   useCurrentVisibleDate,
 } from '../helpers';
-
-const cnDateTimeTypeYearViewBook = cn('DateTimeTypeYearViewBook');
+import { cnDateTimeMixViewBook } from '../mixs';
 
 export const DateTimeTypeYearViewBook: DateTimeTypeViewComponent = React.forwardRef(
   (props, ref) => {
@@ -79,18 +75,18 @@ export const DateTimeTypeYearViewBook: DateTimeTypeViewComponent = React.forward
     const handlePrev = () => setCurrentVisibleDate(addYears(currentVisibleDate, -10));
 
     return (
-      <div {...otherProps} className={cnDateTimeTypeYearViewBook(null, [className])} ref={ref}>
-        <div className={cnDateTimeTypeYearViewBook('Page')}>
+      <div {...otherProps} className={cnDateTimeMixViewBook(null, [className])} ref={ref}>
+        <div className={cnDateTimeMixViewBook('Page')}>
           <DateTimeToggler
-            className={cnDateTimeTypeYearViewBook('Label')}
+            className={cnDateTimeMixViewBook('Label')}
             prevOnClick={handlePrev}
             label={pageOneLabel}
           />
           <DateTime10Years years={pageOneYearsOfDecade} />
         </div>
-        <div className={cnDateTimeTypeYearViewBook('Page')}>
+        <div className={cnDateTimeMixViewBook('Page')}>
           <DateTimeToggler
-            className={cnDateTimeTypeYearViewBook('Label')}
+            className={cnDateTimeMixViewBook('Label')}
             nextOnClick={handleNext}
             label={pageTwoLabel}
           />

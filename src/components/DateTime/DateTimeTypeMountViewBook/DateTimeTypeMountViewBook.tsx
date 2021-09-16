@@ -1,11 +1,8 @@
-import './DateTimeTypeMountViewBook.css';
-
 import React from 'react';
 import { addYears, startOfYear } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 
 import { useFlag } from '../../../hooks/useFlag/useFlag';
-import { cn } from '../../../utils/bem';
 import { DateTime10Years } from '../DateTime10Years/DateTime10Years';
 import { DateTimeToggler } from '../DateTimeToggler/DateTimeToggler';
 import { DateTimeTypeYearViewBook } from '../DateTimeTypeYearViewBook/DateTimeTypeYearViewBook';
@@ -17,8 +14,7 @@ import {
   isEqualMount,
   useCurrentVisibleDate,
 } from '../helpers';
-
-const cnDateTimeTypeMountViewBook = cn('DateTimeTypeMountViewBook');
+import { cnDateTimeMixViewBook } from '../mixs';
 
 export const DateTimeTypeMountViewBook: DateTimeTypeViewComponent = React.forwardRef(
   (props, ref) => {
@@ -102,19 +98,19 @@ export const DateTimeTypeMountViewBook: DateTimeTypeViewComponent = React.forwar
     }
 
     return (
-      <div {...otherProps} className={cnDateTimeTypeMountViewBook(null, [className])} ref={ref}>
-        <div className={cnDateTimeTypeMountViewBook('Page')}>
+      <div {...otherProps} className={cnDateTimeMixViewBook(null, [className])} ref={ref}>
+        <div className={cnDateTimeMixViewBook('Page')}>
           <DateTimeToggler
-            className={cnDateTimeTypeMountViewBook('Label')}
+            className={cnDateTimeMixViewBook('Label')}
             prevOnClick={handlePrev}
             label={pageOneLabel}
             onLabelClick={on}
           />
           <DateTime10Years years={pageOneYearsOfDecade} />
         </div>
-        <div className={cnDateTimeTypeMountViewBook('Page')}>
+        <div className={cnDateTimeMixViewBook('Page')}>
           <DateTimeToggler
-            className={cnDateTimeTypeMountViewBook('Label')}
+            className={cnDateTimeMixViewBook('Label')}
             nextOnClick={handleNext}
             label={pageTwoLabel}
             onLabelClick={on}
