@@ -9,7 +9,7 @@ import { TextExampleSpacing } from './examples/TextExampleSpacing/TextExampleSpa
 import { TextExampleStyle } from './examples/TextExampleStyle/TextExampleStyle';
 import { TextExampleTransform } from './examples/TextExampleTransform/TextExampleTransform';
 import { TextExampleView } from './examples/TextExampleView/TextExampleView';
-import { TextExampleEllipsis } from './examples/TextExampleEllipsis/TextExampleEllipsis';
+import { TextExampleTruncate } from './examples/TextExampleTruncate/TextExampleTruncate';
 import { TextExampleWeight } from './examples/TextExampleWeight/TextExampleWeight';
 
 # Text
@@ -28,7 +28,7 @@ import { TextExampleWeight } from './examples/TextExampleWeight/TextExampleWeigh
   - [Подчеркивание](#подчеркивание) `decoration`
   - [Регистр](#регистр) `transform`
   - [Выравнивание](#выравнивание) `align`
-  - [Многоточие](#многоточие) `ellipsis`
+  - [Обрезание текста](#обрезание-текста) `truncate`
 - [Контейнер с текстом](#контейнер-с-текстом)
   - [Тег для контейнера](#тег-для-контейнера) `as`
   - [Расположение](#расположение) `display`
@@ -200,18 +200,18 @@ import { TextExampleWeight } from './examples/TextExampleWeight/TextExampleWeigh
 
 <TextExampleAlign />
 
-### Многоточие
+### Обрезание текста
 
-`ellipsis` устанавливает многоточие в конце строки при переполнении родительского элемента
+`truncate` обрезает текст и устанавливает многоточие в конце строки при переполнении родительского элемента
 
 ```ts
-<Text ellipsis>
+<Text truncate>
   Очень длинный текст, который должен располагаться в одну строку и быть ограничен родительским
   контейнером.
 </Text>
 ```
 
-<TextExampleEllipsis />
+<TextExampleTruncate />
 
 ## Контейнер с текстом
 
@@ -322,7 +322,7 @@ import { TextExampleWeight } from './examples/TextExampleWeight/TextExampleWeigh
 | [`size`](#размер)                   | `'2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'`                                     | `'m'`        | Размер текста                                                             |
 | [`display`](#расположение)          | `'block', 'inlineBlock', 'inline'`                                                                        | —            | Поведение контейнера с текстом в документе (блочный или строчный элемент) |
 | [`as`](#тег-для-контейнера)         | `keyof JSX.IntrinsicElements`                                                                             | `'div'`      | HTML-тег, в виде которого этот компонент будет представлен в DOM          |
-| [`ellipsis`](#многоточие)           | `boolean`                                                                                                 | `false`      | Видимости текста в блоке                                                  |
+| [`truncate?`](#обрезание-текста)    | `boolean`                                                                                                 | `false`      | Видимости текста в блоке                                                  |
 | `className`                         | `string`                                                                                                  | —            | Дополнительный CSS-класс                                                  |
 | `children`                          | `React.ReactNode`                                                                                         | —            | Дочерние компоненты                                                       |
 | `ref`                               | `React.Ref<HTMLElement>`                                                                                  | —            | Ссылка на корневой DOM-элемент этого компонента                           |

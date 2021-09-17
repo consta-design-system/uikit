@@ -88,7 +88,7 @@ type Props = {
   view?: TextPropView;
   weight?: TextPropWeight;
   width?: TextPropWidth;
-  ellipsis?: boolean;
+  truncate?: boolean;
 };
 
 export const cnText = cn('Text');
@@ -112,7 +112,7 @@ export const Text = forwardRefWithAs<Props>((props, ref) => {
     width,
     className,
     children,
-    ellipsis = false,
+    truncate = false,
     ...otherProps
   } = props;
 
@@ -137,7 +137,7 @@ export const Text = forwardRefWithAs<Props>((props, ref) => {
           view,
           weight,
           width,
-          ellipsis,
+          truncate,
         },
         [className],
       )}
