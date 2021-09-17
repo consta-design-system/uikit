@@ -570,7 +570,7 @@ export const Table = <T extends TableRow>({
         {
           size,
           isResizable,
-          zebraStriped: !hasMergedCells && zebraStriped,
+          zebraStriped,
           withBorderBottom: !filteredData.length,
         },
         [className],
