@@ -132,7 +132,7 @@
     transform: translateY(-50%);
   }
 
-  &-Label:not(.ChoiceGroup-Label_checked) {
+  &-Label:not(.ChoiceGroup-Label_checked, .ChoiceGroup-Label_disabled) {
     &:hover {
       color: var(--color-control-typo-secondary-hover);
     }
@@ -173,6 +173,25 @@
   &_width {
     &_full {
       width: 100%;
+    }
+  }
+
+  &-Label.ChoiceGroup-Label_disabled {
+    color: var(--color-control-typo-disable);
+    background-color: var(--color-control-bg-disable);
+    pointer-events: none;
+
+    & + .ChoiceGroup-Label::after {
+      background-color: transparent;
+    }
+  }
+
+  &_disabled {
+    background-color: var(--color-control-bg-disable);
+    box-shadow: inset 0 0 0 var(--control-border-width) transparent;
+
+    .ChoiceGroup-Label.ChoiceGroup-Label_disabled:not(.ChoiceGroup-Label_checked) {
+      background-color: transparent;
     }
   }
 }

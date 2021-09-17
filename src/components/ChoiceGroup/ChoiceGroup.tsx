@@ -41,6 +41,8 @@ type CommonProps<ITEM> = {
   getIcon?: ChoiceGroupPropGetIcon<ITEM>;
   name: string;
   children?: never;
+  disabled?: boolean;
+  getDisabled?: (item: ITEM) => boolean | undefined;
 };
 
 type OnChangeMultiple<ITEM> = (props: {
@@ -97,6 +99,8 @@ export const ChoiceGroup: ChoiceGroup = React.forwardRef((props, ref) => {
     getIcon,
     name,
     className,
+    disabled = false,
+    getDisabled,
     ...otherProps
   } = props;
 
@@ -117,7 +121,7 @@ export const ChoiceGroup: ChoiceGroup = React.forwardRef((props, ref) => {
     <div
       {...otherProps}
       ref={ref}
-      className={cnChoiceGroup({ size, form, view, width, onlyIcon }, [className])}
+      className={cnChoiceGroup({ size, form, view, width, onlyIcon, disabled }, [className])}
     >
       {items.map((item) => (
         <ChoiceGroupItem
@@ -130,6 +134,7 @@ export const ChoiceGroup: ChoiceGroup = React.forwardRef((props, ref) => {
           multiple={multiple}
           onlyIcon={onlyIcon}
           name={name}
+          disabled={disabled || (!!getDisabled && getDisabled(item))}
         />
       ))}
     </div>

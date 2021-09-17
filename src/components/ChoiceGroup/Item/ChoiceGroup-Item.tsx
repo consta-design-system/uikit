@@ -13,10 +13,21 @@ type Props = {
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   checked: boolean;
   multiple: boolean;
+  disabled?: boolean;
 };
 
 export const ChoiceGroupItem: React.FC<Props> = (props) => {
-  const { label, onChange, checked, multiple, icon: Icon, onlyIcon, name, iconSize } = props;
+  const {
+    label,
+    onChange,
+    checked,
+    multiple,
+    icon: Icon,
+    onlyIcon,
+    name,
+    iconSize,
+    disabled = false,
+  } = props;
   const [focus, setFocus] = useState<boolean>(false);
 
   const handleBlur = () => setFocus(false);
@@ -24,7 +35,7 @@ export const ChoiceGroupItem: React.FC<Props> = (props) => {
 
   return (
     <label
-      className={cnChoiceGroup('Label', { focus, checked }, [cnMixFocus()])}
+      className={cnChoiceGroup('Label', { focus, checked, disabled }, [cnMixFocus()])}
       title={onlyIcon ? label : undefined}
     >
       <input
@@ -36,6 +47,7 @@ export const ChoiceGroupItem: React.FC<Props> = (props) => {
         value={`${name}-${label}`}
         onChange={onChange}
         name={name}
+        disabled={disabled}
       />
       {Icon && <Icon className={cnChoiceGroup('Icon')} size={iconSize} />}
       {!onlyIcon && <span className={cnChoiceGroup('Text')}>{label}</span>}

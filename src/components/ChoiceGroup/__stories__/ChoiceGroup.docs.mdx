@@ -19,6 +19,8 @@ import {
   ChoiceGroupExampleSwitchMode,
   ChoiceGroupExampleSwitchLetters,
 } from './examples/ChoiceGroupExampleSwitch/ChoiceGroupExampleSwitch';
+import { ChoiceGroupExampleDisabled } from './examples/ChoiceGroupExampleDisabled/ChoiceGroupExampleDisabled';
+import { ChoiceGroupExampleSomeDisabled } from './examples/ChoiceGroupExampleSomeDisabled/ChoiseGroupExampleSomeDisabled';
 
 # ChoiceGroup
 
@@ -44,6 +46,9 @@ import {
 - [Внешний вид](#внешний-вид)
 - [Форма кнопок](#форма-кнопок)
 - [Размер](#размер)
+- [Неактивные кнопки](#неактивные-кнопки)
+  - [Неактивная кнопка](#неактивная-кнопка)
+  - [Неактивная группа кнопок](#неактивная-группа-кнопок)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
 
@@ -339,6 +344,68 @@ export const ChoiceGroupExampleWidth = () => {
 
 <ChoiceGroupExampleWidth />
 
+## Неактивные кнопки
+
+### Неактивная кнопка
+
+Одну или несколько кнопок можно сделать неактивными — если вы не хотите, чтобы их выбирали.
+За неактивность отвечает функция `getDisabled`.
+
+```tsx
+type Item = { name: string; disabled?: boolean };
+
+const items: Item[] = [
+  { name: 'один' },
+  { name: 'два' },
+  { name: 'три', disabled: true },
+  { name: 'четыре', disabled: true },
+];
+
+export const ChoiceGroupExampleWidth = () => {
+  const [value, setValue] = useState<Item | null>(items[0]);
+  return (
+    <ChoiceGroup
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      items={items}
+      getLabel={(item) => item.name}
+      multiple={false}
+      name="ChoiceGroupExampleSomeDisabled"
+      getDisabled={(item: Item) => item.disabled}
+    />
+  );
+};
+```
+
+<ChoiceGroupExampleSomeDisabled />
+
+### Неактивная группа кнопок
+
+Используйте свойство `disabled` на компоненте `<ChoiceGroup {...props} disabled/>`, что бы сделать группу кнопок неактивной
+
+```tsx
+type Item = string;
+
+const items: Item[] = ['один', 'два', 'три'];
+
+export const ChoiceGroupExampleWidth = () => {
+  const [value, setValue] = useState<Item | null>(items[0]);
+  return (
+    <ChoiceGroup
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      items={items}
+      getLabel={(item) => item}
+      multiple={false}
+      name="ChoiceGroupExampleDisabled"
+      disabled
+    />
+  );
+};
+```
+
+<ChoiceGroupExampleDisabled />
+
 ## Свойства
 
 ```
@@ -364,6 +431,8 @@ type OnChangeMultiple = (props: { e: React.ChangeEvent<HTMLInputElement>; value:
 | [`form?`](#форма-кнопок)                  | `'default', 'brick', 'round'`                    | `'default'`  | Форма                                                                                                                                                  |
 | [`view?`](#внешний-вид)                   | `'primary', 'ghost', 'secondary'`                | `'primary'`  | Внешний вид                                                                                                                                            |
 | [`width?`](#группа-кнопок-в-ширину-блока) | `'default', 'full'`                              | `'default'`  | Ширина компонента                                                                                                                                      |
+| [`disabled?`](#неактивная-группа-кнопок)  | `boolean`                                        | `false`      | Делает группу кнопок неактивной                                                                                                                        |
+| [`getDisabled?`](#неактивная-кнопка)      | `(item: Item) => boolean`                        | -            | Функция для определения неактивного состояния кнопки                                                                                                   |
 | `className?`                              | `string`                                         | -            | Дополнительный CSS-класс                                                                                                                               |
 | `ref?`                                    | `React.Ref<HTMLDivElement>`                      | -            | Ссылка на корневой DOM-элемент этого компонента                                                                                                        |
 
