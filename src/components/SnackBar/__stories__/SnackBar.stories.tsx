@@ -16,6 +16,7 @@ import {
   eventInterceptorMap,
   EventInterceptorProvider,
 } from '../../EventInterceptor/EventInterceptor';
+import { Text } from '../../Text/Text';
 import { Item, SnackBar, SnackBarItemStatus } from '../SnackBar';
 
 import mdx from './SnackBar.docs.mdx';
@@ -28,6 +29,7 @@ const defaultKnobs = () => ({
   withActionButtons: boolean('withActionButtons', false),
   withAutoClose: boolean('withAutoClose', false),
   withCloseButton: boolean('withCloseButton', true),
+  withComponentInsteadOfText: boolean('withComponentInsteadOfText', false),
 });
 
 const getItemIconByStatus = (status: SnackBarItemStatus): React.FC<IconProps> | undefined => {
@@ -53,13 +55,29 @@ function reducer(state: State, action: Action) {
 }
 
 export function Playground() {
-  const { withIcon, withActionButtons, withAutoClose, withCloseButton } = defaultKnobs();
+  const {
+    withIcon,
+    withActionButtons,
+    withAutoClose,
+    withCloseButton,
+    withComponentInsteadOfText,
+  } = defaultKnobs();
+
   const [items, dispatchItems] = React.useReducer(reducer, []);
   const generateHandleAdd = (status: SnackBarItemStatus) => () => {
     const key = items.length + 1;
+
+    const text = `Сообщение о каком-то событии - ${key}`;
+    const message = withComponentInsteadOfText ? (
+      <Text as="a" cursor="pointer" font="mono" weight="bold" size="l">
+        {text}
+      </Text>
+    ) : (
+      text
+    );
     const item: Item = {
       key,
-      message: `Сообщение о каком-то событии - ${key}`,
+      message,
       status,
       ...(withAutoClose && { autoClose: 5 }),
       ...(withIcon && { icon: getItemIconByStatus(status) }),

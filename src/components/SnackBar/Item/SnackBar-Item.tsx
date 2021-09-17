@@ -89,10 +89,12 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
       )}
       {!autoCloseTime && Icon && <Icon className={cnSnackBar('Icon')} size="m" />}
       <div className={cnSnackBar('Content')}>
-        {message && (
+        {typeof message === 'string' || typeof message === 'number' ? (
           <Text className={cnSnackBar('Message')} lineHeight="s">
             {message}
           </Text>
+        ) : (
+          <>{message}</>
         )}
         {actions && <SnackBarActionButton actions={actions} />}
       </div>

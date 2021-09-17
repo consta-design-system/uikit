@@ -22,7 +22,7 @@ export const snackBarItemStatusDefault: SnackBarItemStatus = snackBarItemStatus[
 
 export type Item = {
   key: string | number;
-  message?: string | number;
+  message?: string | number | React.ReactNode;
   status?: SnackBarItemStatus;
   autoClose?: boolean | number;
   icon?: React.FC<IconProps>;
