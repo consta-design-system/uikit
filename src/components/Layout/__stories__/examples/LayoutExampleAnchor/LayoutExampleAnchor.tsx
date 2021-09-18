@@ -9,18 +9,40 @@ import { Layout } from '../../../Layout';
 const cnLayoutExampleAnchor = cn('LayoutExampleAnchor');
 
 export const LayoutExampleAnchor = () => {
-  const anchorRef = useRef(null);
+  const scrollContainerRef = useRef(null);
+  const fixedRef = useRef(null);
 
   return (
-    <div ref={anchorRef} className={cnLayoutExampleAnchor()}>
+    <Layout direction="column" ref={scrollContainerRef} className={cnLayoutExampleAnchor()}>
       <Layout className={cnLayoutExampleAnchor('Header')}>
         <Text>Заголовок</Text>
       </Layout>
       <Layout direction="column" className={cnLayoutExampleAnchor('Container')}>
         <Layout
+          ref={fixedRef}
           fixed
-          anchorRef={anchorRef}
+          scrollContainerRef={scrollContainerRef}
           verticalAlign="top"
+          className={cnLayoutExampleAnchor('FixedBlock')}
+        >
+          <Text>Фиксированный элемент</Text>
+        </Layout>
+        <Layout
+          fixed
+          scrollContainerRef={scrollContainerRef}
+          verticalAlign="top"
+          anchorRef={fixedRef}
+          className={cnLayoutExampleAnchor('FixedBlock')}
+        >
+          <Text>Фиксированный элемент</Text>
+        </Layout>
+        <Layout className={cnLayoutExampleAnchor('Content')}>
+          <Text>Контент</Text>
+        </Layout>
+        <Layout
+          fixed
+          scrollContainerRef={scrollContainerRef}
+          verticalAlign="bottom"
           className={cnLayoutExampleAnchor('FixedBlock')}
         >
           <Text>Фиксированный элемент</Text>
@@ -29,6 +51,6 @@ export const LayoutExampleAnchor = () => {
           <Text>Контент</Text>
         </Layout>
       </Layout>
-    </div>
+    </Layout>
   );
 };

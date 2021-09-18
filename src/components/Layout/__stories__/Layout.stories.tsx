@@ -1,7 +1,7 @@
 import './LayoutStories.css';
 
 import React from 'react';
-import { select, text } from '@storybook/addon-knobs';
+import { number, select } from '@storybook/addon-knobs';
 
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
@@ -26,8 +26,8 @@ const defaultKnobs = () => ({
     layoutPropHorizontalAlign,
     layoutPropHorizontalAlignDefault,
   ),
-  flexBlock1: text('Flex Block 1', '1'),
-  flexBlock2: text('Flex Block 2', '1'),
+  flexBlock1: number('Flex Block 1', 1),
+  flexBlock2: number('Flex Block 2', 1),
 });
 
 const cnLayoutStories = cn('LayoutStories');
@@ -56,7 +56,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Отображение данных/Layout',
+  title: 'Компоненты|/Служебные/Layout',
   id: 'components/Layout',
   parameters: {
     docs: {
