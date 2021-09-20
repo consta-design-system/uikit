@@ -344,11 +344,27 @@ export const WithMergedCells = createStory(
 
 export const WithMergedByCustomCallbackCells = createStory(
   () => {
-    const getRandomCase = (e: string) =>
-      e
-        .split('')
-        .map((chr) => (Math.round(Math.random()) ? chr.toLowerCase() : chr.toUpperCase()))
-        .join('');
+    const ADMIN_INDEXES = [3, 4, 7];
+    const USERS_COUNT = 12;
+
+    const checkedRow: { [key: string]: boolean } = new Array(USERS_COUNT)
+      .fill(false)
+      .reduce((previous, _, index) => {
+        return {
+          ...previous,
+          [`${index + 1}`]: !Math.round(Math.random()),
+        };
+      }, {});
+
+    const generateRowBase = (id: string, owner: string, viewed: boolean) => ({
+      id,
+      owner,
+      operationConfirmed: {
+        owner,
+        viewed,
+      },
+    });
+
     return (
       <Table
         {...getKnobs({
@@ -361,38 +377,28 @@ export const WithMergedByCustomCallbackCells = createStory(
               align: 'left',
             },
             {
-              title: 'Текст разного регистра',
-              accessor: 'randomCaseText',
+              title: 'Инициатор операции',
+              accessor: 'owner',
               mergeCells: true,
-              getComparisonValue: (cell: string) => cell.toLowerCase(),
+            },
+            {
+              title: 'Операция подтверждена',
+              accessor: 'operationConfirmed',
+              mergeCells: true,
+              getComparisonValue: ({ owner, viewed }) => `${owner}-${viewed}`,
+              renderCell: ({ operationConfirmed: { viewed } }) => <Checkbox checked={viewed} />,
             },
           ],
-          rows: [
-            {
-              id: '1',
-              randomCaseText: 'Текст',
-            },
-            {
-              id: '2',
-              randomCaseText: getRandomCase('Текст'),
-            },
-            {
-              id: '3',
-              randomCaseText: getRandomCase('Текст'),
-            },
-            {
-              id: '4',
-              randomCaseText: getRandomCase('Текст'),
-            },
-            {
-              id: '5',
-              randomCaseText: 'Строчка',
-            },
-            {
-              id: '6',
-              randomCaseText: getRandomCase('Строчка'),
-            },
-          ],
+          rows: Object.keys(checkedRow).map((id, index) => {
+            const isAuto = ADMIN_INDEXES.includes(index);
+            return {
+              ...generateRowBase(
+                id,
+                `${isAuto ? 'admin' : 'user'}`,
+                isAuto ? true : checkedRow[id],
+              ),
+            };
+          }),
         })}
       />
     );

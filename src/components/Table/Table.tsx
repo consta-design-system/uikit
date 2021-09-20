@@ -164,6 +164,15 @@ export type SortingState<T extends TableRow> = {
   sortFn?: (a: T[keyof T], b: T[keyof T]) => number;
 } | null;
 
+type GetTableCellProps = {
+  show: boolean;
+  rowSpan: number;
+  style: {
+    'left'?: number;
+    '--row-span'?: string;
+  };
+};
+
 const getColumnSortByField = <T extends TableRow>(column: TableColumn<T>): keyof T =>
   (column.sortable && column.sortByField) || column.accessor!;
 
@@ -529,24 +538,28 @@ export const Table = <T extends TableRow>({
     rowIdx: number,
     column: TableColumn<T>,
     columnIdx: number,
-  ) => {
-    const { mergeCells, accessor, getComparisonValue = (e) => e } = column;
+  ): GetTableCellProps => {
+    const { mergeCells, accessor, position, getComparisonValue = (e) => e } = column;
 
+    const previousCell =
+      rowsData[rowIdx - 1] && getComparisonValue(rowsData[rowIdx - 1][accessor!]);
     const currentCell = getComparisonValue(row[accessor!]);
-    let rowSpan = 1;
 
-    if (
-      (rowsData[rowIdx - 1] &&
-        getComparisonValue(rowsData[rowIdx - 1][accessor!]) !== currentCell) ||
-      rowIdx === 0 ||
-      !mergeCells
-    ) {
+    const result: GetTableCellProps = {
+      rowSpan: 1,
+      show: false,
+      style: {
+        left: getStickyLeftOffset(columnIdx, position!.topHeaderGridIndex),
+      },
+    };
+
+    if (mergeCells && ((rowsData[rowIdx - 1] && previousCell !== currentCell) || rowIdx === 0)) {
       for (let i = rowIdx; i < rowsData.length; i++) {
         if (rowsData[i + 1]) {
           const nextCell = getComparisonValue(rowsData[i + 1][accessor!]);
 
           if (currentCell === nextCell) {
-            rowSpan++;
+            result.rowSpan++;
           } else {
             break;
           }
@@ -555,24 +568,18 @@ export const Table = <T extends TableRow>({
         }
       }
 
-      const style: {
-        'left': number | undefined;
-        '--row-span': string | null;
-      } = {
-        'left': getStickyLeftOffset(columnIdx, column.position!.topHeaderGridIndex),
-        '--row-span': mergeCells ? `span ${rowSpan}` : null,
-      };
+      if (result.rowSpan > 1) {
+        result.style['--row-span'] = `span ${result.rowSpan}`;
+      }
 
-      return {
-        show: true,
-        style,
-        rowSpan,
-      };
+      result.show = true;
     }
-    return {
-      show: false,
-      rowSpan,
-    };
+
+    if (!mergeCells) {
+      result.show = true;
+    }
+
+    return result;
   };
 
   return (
