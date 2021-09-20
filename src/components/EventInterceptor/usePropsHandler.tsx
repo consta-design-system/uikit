@@ -13,10 +13,8 @@ export const usePropsHandler = <PROPS extends {}>(
     return props;
   }
 
-  const cn: EventInterceptorMapKeys = 'SnackBar';
-
   const { eventHandler, map } = context;
-  const propsHandler = map[cn] as ((...args: any[]) => any) | undefined;
+  const propsHandler = map[componentName] as ((...args: any[]) => any) | undefined;
 
   if (!propsHandler) {
     return props;

@@ -4,7 +4,7 @@ import { defaultGetItemLabel, SelectProps } from '../../Select/helpers';
 import { COMPONENT_NAME } from '../../Select/Select';
 import { EventInterceptorHandler } from '../EventInterceptor';
 
-export const useSelectEventsHandler = <A extends {}, PROPS extends SelectProps>(
+export const useSelectEventsHandler = <PROPS extends SelectProps>(
   props: PROPS,
   handler: EventInterceptorHandler,
   controlRef: React.RefObject<HTMLDivElement | null>,

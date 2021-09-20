@@ -15,15 +15,6 @@ export type EventInterceptorProps = {
 
 export type EventInterceptorHandler = ((props: EventInterceptorProps) => void) | undefined;
 
-// export type EventHandler = <T>(
-//   props: T,
-//   handler: EventInterceptorHandler,
-//   ref?: React.RefObject<HTMLElement>,
-// ) => T;
-// export type EventInterceptorPropMap = {
-//   [key: string]: EventHandler;
-// };
-
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const EventInterceptorContext = React.createContext<
   { eventHandler: EventInterceptorHandler; map: EventInterceptorMap } | undefined

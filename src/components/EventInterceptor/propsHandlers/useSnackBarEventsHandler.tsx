@@ -8,7 +8,6 @@ type SnackBarProps = Parameters<typeof SnackBar>[0];
 export const useSnackBarEventsHandler = <P extends SnackBarProps>(
   props: P,
   handler: EventInterceptorHandler,
-  ref?: React.Ref<HTMLElement>,
 ): P => {
   const newProps: P = { ...props };
 
@@ -19,7 +18,7 @@ export const useSnackBarEventsHandler = <P extends SnackBarProps>(
         event: 'change',
         options: {
           pageURL: window.location.href,
-          DOMRef: document.getElementsByClassName(COMPONENT_NAME)[0] || ref,
+          DOMRef: document.getElementsByClassName(COMPONENT_NAME)[0],
           items: newProps.items,
         },
       };
