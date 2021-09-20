@@ -8,36 +8,45 @@ import { Layout } from '../../../Layout';
 
 const cnLayoutExampleFixed = cn('LayoutExampleFixed');
 
-export const LayoutExampleFixedTop = () => {
+export const LayoutExampleFixed = () => {
   return (
-    <Layout className={cnLayoutExampleFixed()} direction="column">
-      <Layout verticalAlign="top" fixed className={cnLayoutExampleFixed('Header')}>
-        <Text>Заголовок</Text>
-      </Layout>
-      <Layout direction="row" className={cnLayoutExampleFixed('Content')}>
-        <Layout className={cnLayoutExampleFixed('Block')} flex={1}>
-          <Text>Контент</Text>
+    <Layout className={cnLayoutExampleFixed()}>
+      <Layout flex={1} className={cnLayoutExampleFixed('Container')} direction="column">
+        <Layout
+          verticalAlign="top"
+          horizontalAlign="right"
+          fixed
+          smooth
+          className={cnLayoutExampleFixed('Header')}
+        >
+          <Text>Заголовок</Text>
         </Layout>
-        <Layout className={cnLayoutExampleFixed('Block')} flex={1}>
-          <Text>Контент</Text>
+        <Layout direction="row" className={cnLayoutExampleFixed('Content')}>
+          <Layout className={cnLayoutExampleFixed('Block')} flex={1}>
+            <Text>Контент</Text>
+          </Layout>
+          <Layout className={cnLayoutExampleFixed('Block')} flex={1}>
+            <Text>Контент</Text>
+          </Layout>
         </Layout>
       </Layout>
-    </Layout>
-  );
-};
-
-export const LayoutExampleFixedBottom = () => {
-  return (
-    <Layout className={cnLayoutExampleFixed()} direction="column">
-      <Layout verticalAlign="bottom" fixed className={cnLayoutExampleFixed('Header')}>
-        <Text>Заголовок</Text>
-      </Layout>
-      <Layout direction="row" className={cnLayoutExampleFixed('Content')}>
-        <Layout className={cnLayoutExampleFixed('Block')} flex={1}>
-          <Text>Контент</Text>
+      <Layout flex={1} className={cnLayoutExampleFixed('Container')} direction="column">
+        <Layout direction="row" className={cnLayoutExampleFixed('Content')}>
+          <Layout className={cnLayoutExampleFixed('Block')} flex={1}>
+            <Text>Контент</Text>
+          </Layout>
+          <Layout className={cnLayoutExampleFixed('Block')} flex={1}>
+            <Text>Контент</Text>
+          </Layout>
         </Layout>
-        <Layout className={cnLayoutExampleFixed('Block')} flex={1}>
-          <Text>Контент</Text>
+        <Layout
+          verticalAlign="bottom"
+          horizontalAlign="right"
+          fixed
+          smooth
+          className={cnLayoutExampleFixed('Header')}
+        >
+          <Text>Заголовок</Text>
         </Layout>
       </Layout>
     </Layout>

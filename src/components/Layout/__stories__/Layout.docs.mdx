@@ -1,14 +1,11 @@
 import { LayoutExampleBasic } from './examples/LayoutExampleBasic/LayoutExampleBasic';
 import {
-  LayoutExampleFixedTop,
-  LayoutExampleFixedBottom,
-} from './examples/LayoutExampleFixed/LayoutExampleFixed';
-import {
   LayoutExampleDirectionRow,
   LayoutExampleDirectionColumn,
 } from './examples/LayoutExampleDirection/LayoutExampleDirection';
 import { LayoutExample } from './examples/LayoutExample/LayoutExample';
 import { LayoutExampleAnchor } from './examples/LayoutExampleAnchor/LayoutExampleAnchor';
+import { LayoutExampleRowFixed } from './examples/LayoutExampleRowFixed/LayoutExampleRowFixed';
 
 # Layout
 
@@ -48,77 +45,102 @@ column - в колонку
 ## Фиксация элемента
 
 При использовании свойства fixed элемент можно зафиксировать с
-верхнего или нижнего края контейнера
-
-### Top
-
-<!-- {/* <LayoutExampleFixedTop /> */} -->
-
-### Bottom
-
-<!-- {/* <LayoutExampleFixedBottom /> */} -->
+[верхнего и нижнего](?path=/story/components-layout--with-fixed-vertical), [правого и левого](?path=/docs/components-layout--with-fixed-horizontal) края контейнера
 
 ## Прикрепление к якорю
 
-Свойство anchorRef представляет из себя элемент к которому будет прикрепляться fixed-элемент
+Свойство anchorRef представляет из себя элемент к которому будет прикрепляться fixed-элемент ([пример](?path=/story/components-layout--with-anchor))
 
 ```tsx
 export const LayoutExampleAnchor = () => {
-  const anchorRef = useRef(null);
+  const scrollContainerRef = useRef(null);
+  const fixedRef = useRef(null);
 
   return (
-    <div ref={anchorRef}>
+    <Layout direction="column" ref={scrollContainerRef}>
       <Layout>
         <Text>Заголовок</Text>
       </Layout>
       <Layout direction="column">
-        <Layout fixed anchorRef={anchorRef} verticalAlign="top">
+        <Layout ref={fixedRef} fixed scrollContainerRef={scrollContainerRef} verticalAlign="top">
+          <Text>Фиксированный элемент</Text>
+        </Layout>
+        <Layout>
+          <Text>Контент</Text>
+        </Layout>
+        <Layout
+          fixed
+          scrollContainerRef={scrollContainerRef}
+          verticalAlign="bottom"
+          anchorRef={fixedRef}
+        >
           <Text>Фиксированный элемент</Text>
         </Layout>
         <Layout>
           <Text>Контент</Text>
         </Layout>
       </Layout>
-    </div>
+    </Layout>
   );
 };
 ```
 
-<LayoutExampleAnchor />
-
 ## Список свойств
 
-| Свойство          | Тип или варианты значения             | По умолчанию | Описание                                                                          |
-| ----------------- | ------------------------------------- | ------------ | --------------------------------------------------------------------------------- |
-| `flex`            | `string` <code>&#124;</code> `number` | -            | Доля занимаемая элементом в флекс-контейнере                                      |
-| `fixed`           | `boolean`                             | -            | Фиксируется ли элемент внутри контейнера                                          |
-| `direction`       | `'row', 'column'`                     | 'row'        | Расположение элементов внутри компонента                                          |
-| `verticalAlign`   | `'top', 'bottom'`                     | 'top'        | Фиксация по вертикали                                                             |
-| `horizontalAlign` | `'left', 'right'`                     | 'left'       | Фиксация по горизонтали                                                           |
-| `anchorRef`       | `React.RefObject<HTMLElement>`        | -            | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
-| `tabIndex`        | `number`                              | —            | Порядковый номер при переходе между элементами интерфейса по клавише **tab**      |
-| `as`              | `React.ElementType`                   | `div`        | HTML-тег для кнопки                                                               |
-| `className`       | `string`                              | —            | Дополнительные CSS-классы                                                         |
+| Свойство             | Тип или варианты значения             | По умолчанию | Описание                                                                          |
+| -------------------- | ------------------------------------- | ------------ | --------------------------------------------------------------------------------- |
+| `flex`               | `string` <code>&#124;</code> `number` | -            | Доля занимаемая элементом в флекс-контейнере                                      |
+| `fixed`              | `boolean`                             | -            | Фиксируется ли элемент внутри контейнера                                          |
+| `direction`          | `'row', 'column'`                     | 'row'        | Расположение элементов внутри компонента                                          |
+| `verticalAlign`      | `'top', 'bottom'`                     | 'top'        | Фиксация по вертикали                                                             |
+| `horizontalAlign`    | `'left', 'right'`                     | 'left'       | Фиксация по горизонтали                                                           |
+| `smooth`             | `boolean`                             | 'false'      | Более плавное отображение при скроле                                              |
+| `anchorRef`          | `React.RefObject<HTMLElement>`        | -            | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
+| `scrollContainerRef` | `React.RefObject<HTMLElement>`        | -            | Контейнер прокрутки, внутри которого фиксируется элемент                          |
+| `tabIndex`           | `number`                              | —            | Порядковый номер при переходе между элементами интерфейса по клавише **tab**      |
+| `as`                 | `React.ElementType`                   | `div`        | HTML-тег для кнопки                                                               |
+| `className`          | `string`                              | —            | Дополнительные CSS-классы                                                         |
 
 ## Пример
 
 ```tsx
-<Layout direction="column">
-  <Layout fixed>
-    <Text>Заголовок</Text>
-  </Layout>
-  <Layout direction="row">
-    <Layout flex={1}>
-      <Text>Контент</Text>
+export const LayoutExample = () => {
+  const scrollContainerRef = useRef(null);
+  const fixedRef = useRef(null);
+
+  return (
+    <Layout direction="column" ref={scrollContainerRef}>
+      <Layout>
+        <Text>Заголовок</Text>
+      </Layout>
+      <Layout direction="column">
+        <Layout ref={fixedRef} fixed scrollContainerRef={scrollContainerRef} verticalAlign="top">
+          <Text>Фиксированный элемент</Text>
+        </Layout>
+        <Layout>
+          <Text>Контент</Text>
+        </Layout>
+        <Layout
+          fixed
+          scrollContainerRef={scrollContainerRef}
+          verticalAlign="bottom"
+          anchorRef={fixedRef}
+        >
+          <Text>Фиксированный элемент</Text>
+        </Layout>
+        <Layout>
+          <Text>Контент</Text>
+        </Layout>
+        <Layout fixed scrollContainerRef={scrollContainerRef} verticalAlign="bottom">
+          <Text>Фиксированный элемент</Text>
+        </Layout>
+        <Layout>
+          <Text>Контент</Text>
+        </Layout>
+      </Layout>
     </Layout>
-    <Layout flex={2}>
-      <Text>Контент</Text>
-    </Layout>
-    <Layout flex={1}>
-      <Text>Контент</Text>
-    </Layout>
-  </Layout>
-</Layout>
+  );
+};
 ```
 
-<!-- {/* <LayoutExample /> */} -->
+<LayoutExample />

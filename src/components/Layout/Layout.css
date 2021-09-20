@@ -1,7 +1,7 @@
 .Layout {
   display: flex;
   box-sizing: border-box;
-  transition: flex 0.3s, width 0.3s;
+  transition: flex 0.3s, width 0.3s, height 0.3s;
 
   &_direction {
     &_row {
@@ -11,6 +11,10 @@
     &_column {
       flex-direction: column;
     }
+  }
+
+  &-Mock {
+    transition: flex 0.3s, width 0.3s, height 0.3s;
   }
 
   &_fixed {

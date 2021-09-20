@@ -4,7 +4,7 @@ import React from 'react';
 import { number, select } from '@storybook/addon-knobs';
 
 import { cn } from '../../../utils/bem';
-import { createMetadata } from '../../../utils/storybook';
+import { createMetadata, createStory } from '../../../utils/storybook';
 import { Text } from '../../Text/Text';
 import {
   Layout,
@@ -16,6 +16,9 @@ import {
   layoutPropVerticalAlignDefault,
 } from '../Layout';
 
+import { LayoutExampleAnchor } from './examples/LayoutExampleAnchor/LayoutExampleAnchor';
+import { LayoutExampleFixed } from './examples/LayoutExampleFixed/LayoutExampleFixed';
+import { LayoutExampleRowFixed } from './examples/LayoutExampleRowFixed/LayoutExampleRowFixed';
 import mdx from './Layout.docs.mdx';
 
 const defaultKnobs = () => ({
@@ -36,7 +39,7 @@ export function Playground() {
   const { direction, flexBlock1, flexBlock2, verticalAlign, horizontalAlign } = defaultKnobs();
 
   return (
-    <Layout direction={direction} className={cnLayoutStories()}>
+    <Layout direction="column" className={cnLayoutStories()}>
       <Layout
         fixed
         verticalAlign={verticalAlign}
@@ -45,15 +48,44 @@ export function Playground() {
       >
         <Text>Фикстрованный элемент</Text>
       </Layout>
-      <Layout className={cnLayoutStories('Block')} flex={flexBlock1}>
-        <Text>Контент</Text>
-      </Layout>
-      <Layout className={cnLayoutStories('Block')} flex={flexBlock2}>
-        <Text>Контент</Text>
+      <Layout direction={direction} className={cnLayoutStories('Content')}>
+        <Layout className={cnLayoutStories('Block')} flex={flexBlock1}>
+          <Text>Контент</Text>
+        </Layout>
+        <Layout className={cnLayoutStories('Block')} flex={flexBlock2}>
+          <Text>Контент</Text>
+        </Layout>
       </Layout>
     </Layout>
   );
 }
+
+export const WithFixedVertical = createStory(
+  () => {
+    return <LayoutExampleFixed />;
+  },
+  {
+    name: 'Фиксация строк',
+  },
+);
+
+export const WithFixedHorizontal = createStory(
+  () => {
+    return <LayoutExampleRowFixed />;
+  },
+  {
+    name: 'Фиксация колонок',
+  },
+);
+
+export const WithAnchor = createStory(
+  () => {
+    return <LayoutExampleAnchor />;
+  },
+  {
+    name: 'Фиксация к элементу якорю',
+  },
+);
 
 export default createMetadata({
   title: 'Компоненты|/Служебные/Layout',

@@ -1,6 +1,6 @@
 import './LayoutExample.css';
 
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { cn } from '../../../../../utils/bem';
 import { Text } from '../../../../Text/Text';
@@ -9,19 +9,51 @@ import { Layout } from '../../../Layout';
 const cnLayoutExample = cn('LayoutExample');
 
 export const LayoutExample = () => {
+  const scrollContainerRef = useRef(null);
+  const fixedRef = useRef(null);
+
   return (
-    <Layout className={cnLayoutExample()} direction="column">
-      <Layout fixed className={cnLayoutExample('Header')}>
+    <Layout direction="column" ref={scrollContainerRef} className={cnLayoutExample()}>
+      <Layout className={cnLayoutExample('Header')}>
         <Text>Заголовок</Text>
       </Layout>
-      <Layout direction="row" className={cnLayoutExample('Content')}>
-        <Layout className={cnLayoutExample('Block')} flex={1}>
+      <Layout direction="column" className={cnLayoutExample('Container')}>
+        <Layout
+          ref={fixedRef}
+          fixed
+          smooth
+          scrollContainerRef={scrollContainerRef}
+          verticalAlign="top"
+          className={cnLayoutExample('FixedBlock')}
+        >
+          <Text>Фиксированный элемент</Text>
+        </Layout>
+        <Layout className={cnLayoutExample('Content')}>
           <Text>Контент</Text>
         </Layout>
-        <Layout className={cnLayoutExample('Block', { yellow: true })} flex={2}>
+        <Layout
+          fixed
+          smooth
+          scrollContainerRef={scrollContainerRef}
+          verticalAlign="bottom"
+          anchorRef={fixedRef}
+          className={cnLayoutExample('FixedBlock')}
+        >
+          <Text>Фиксированный элемент</Text>
+        </Layout>
+        <Layout className={cnLayoutExample('Content')}>
           <Text>Контент</Text>
         </Layout>
-        <Layout className={cnLayoutExample('Block')} flex={1}>
+        <Layout
+          fixed
+          smooth
+          scrollContainerRef={scrollContainerRef}
+          verticalAlign="bottom"
+          className={cnLayoutExample('FixedBlock')}
+        >
+          <Text>Фиксированный элемент</Text>
+        </Layout>
+        <Layout className={cnLayoutExample('Content')}>
           <Text>Контент</Text>
         </Layout>
       </Layout>
