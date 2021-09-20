@@ -4,6 +4,7 @@ import './SnackBar-Item.css';
 import React, { useEffect, useState } from 'react';
 
 import { IconClose } from '../../../icons/IconClose/IconClose';
+import { isNumber, isString } from '../../../utils/type-guards';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 import { cnTheme } from '../../Theme/Theme';
@@ -89,7 +90,7 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
       )}
       {!autoCloseTime && Icon && <Icon className={cnSnackBar('Icon')} size="m" />}
       <div className={cnSnackBar('Content')}>
-        {typeof message === 'string' || typeof message === 'number' ? (
+        {isString(message) || isNumber(message) ? (
           <Text className={cnSnackBar('Message')} lineHeight="s">
             {message}
           </Text>
