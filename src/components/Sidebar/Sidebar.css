@@ -1,8 +1,17 @@
 .Sidebar {
-  --width-min-horizontal: 300px;
-  --width-max-horizontal: 480px;
-  --height-min-vertical: 200px;
-  --height-max-vertical: 380px;
+  --sidebar-size-s: 260px;
+  --sidebar-size-m: 320px;
+  --sidebar-size-l: 480px;
+  --sidebar-size-1-of-4: calc(1 / 4 * 100);
+  --sidebar-size-3-of-4: calc(3 / 4 * 100);
+  --sidebar-size-1-of-2: calc(1 / 2 * 100);
+  --sidebar-size-1-of-3: calc(1 / 3 * 100);
+  --sidebar-size-2-of-3: calc(2 / 3 * 100);
+  --sidebar-size-full: 100;
+  --sidebar-width-min: var(--sidebar-size-s);
+  --sidebar-width: var(--sidebar-size-m);
+  --sidebar-height-min: var(--sidebar-size-s);
+  --sidebar-height: var(--sidebar-size-m);
   position: fixed;
   top: 0;
   right: 0;
@@ -45,28 +54,94 @@
     box-shadow: var(--shadow-modal);
 
     &_position {
-      &_right {
-        min-width: var(--width-min-horizontal);
-        max-width: var(--width-max-horizontal);
-        height: 100vh;
-      }
-
-      &_bottom {
-        width: 100vw;
-        min-height: var(--height-min-vertical);
-        max-height: var(--height-max-vertical);
-      }
-
+      &_right,
       &_left {
-        min-width: var(--width-min-horizontal);
-        max-width: var(--width-max-horizontal);
+        width: var(--sidebar-width);
+        min-width: var(--sidebar-width-min);
         height: 100vh;
+
+        &.Sidebar-Window_size {
+          &_s {
+            --sidebar-width: var(--sidebar-size-s);
+          }
+
+          &_m {
+            --sidebar-width: var(--sidebar-size-m);
+          }
+
+          &_l {
+            --sidebar-width: var(--sidebar-size-l);
+          }
+
+          &_full {
+            --sidebar-width: calc(var(--sidebar-size-full) * 1vw);
+          }
+
+          &_1-of-4 {
+            --sidebar-width: calc(var(--sidebar-size-1-of-4) * 1vw);
+          }
+
+          &_3-of-4 {
+            --sidebar-width: calc(var(--sidebar-size-3-of-4) * 1vw);
+          }
+
+          &_1-of-2 {
+            --sidebar-width: calc(var(--sidebar-size-1-of-2) * 1vw);
+          }
+
+          &_1-of-3 {
+            --sidebar-width: calc(var(--sidebar-size-1-of-3) * 1vw);
+          }
+
+          &_2-of-3 {
+            --sidebar-width: calc(var(--sidebar-size-2-of-3) * 1vw);
+          }
+        }
       }
 
+      &_bottom,
       &_top {
         width: 100vw;
-        min-height: var(--height-min-vertical);
-        max-height: var(--height-max-vertical);
+        height: var(--sidebar-height);
+        min-height: var(--sidebar-height-min);
+
+        &.Sidebar-Window_size {
+          &_s {
+            --sidebar-height: var(--sidebar-size-s);
+          }
+
+          &_m {
+            --sidebar-height: var(--sidebar-size-m);
+          }
+
+          &_l {
+            --sidebar-height: var(--sidebar-size-l);
+          }
+
+          &_full {
+            --sidebar-height: calc(var(--sidebar-size-full) * 1vh);
+          }
+
+          &_1-of-4 {
+            --sidebar-height: calc(var(--sidebar-size-1-of-4) * 1vh);
+          }
+
+          &_3-of-4 {
+            --sidebar-height: calc(var(--sidebar-size-3-of-4) * 1vh);
+          }
+
+          &_1-of-2 {
+            --sidebar-height: calc(var(--sidebar-size-1-of-2) * 1vh);
+          }
+
+          &_1-of-3 {
+            --sidebar-height: calc(var(--sidebar-size-1-of-3) * 1vh);
+          }
+
+          &_2-of-3 {
+            --sidebar-height: calc(var(--sidebar-size-2-of-3) * 1vh);
+          }
+        }
       }
     }
   }

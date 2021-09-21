@@ -16,13 +16,19 @@ const sidebarPropPosition = ['right', 'bottom', 'left', 'top'] as const;
 type SidebarPropPosition = typeof sidebarPropPosition[number];
 const sidebarPropPositionDefault: SidebarPropPosition = sidebarPropPosition[0];
 
-const sidebarPropWidth = ['auto'] as const;
-type SidebarPropWidth = typeof sidebarPropWidth[number];
-const sidebarPropWidthDefault: SidebarPropWidth = sidebarPropWidth[0];
+export const SidebarSize = {
+  's': 's',
+  'm': 'm',
+  'l': 'l',
+  'full': 'full',
+  '1-of-4': '1-of-4',
+  '3-of-4': '3-of-4',
+  '1-of-2': '1-of-2',
+  '1-of-3': '1-of-3',
+  '2-of-3': '2-of-3',
+} as const;
 
-const sidebarPropHeight = ['auto'] as const;
-type SidebarPropHeight = typeof sidebarPropHeight[number];
-const sidebarPropHeightDefault: SidebarPropHeight = sidebarPropHeight[0];
+export type SidebarPropsSize = keyof typeof SidebarSize;
 
 type SidebarProps = {
   isOpen?: boolean;
@@ -34,8 +40,7 @@ type SidebarProps = {
   onClickOutside?: (event: MouseEvent) => void;
   onEsc?: (event: KeyboardEvent) => void;
   position?: SidebarPropPosition;
-  width?: SidebarPropWidth;
-  height?: SidebarPropHeight;
+  size?: SidebarPropsSize;
   className?: string;
   children?: React.ReactNode;
   container?: HTMLDivElement | undefined;
@@ -51,7 +56,7 @@ type SidebarActionsProps = {
   children: React.ReactNode;
 };
 
-const cnSidebar = cn('Sidebar');
+export const cnSidebar = cn('Sidebar');
 
 const SidebarContent: React.FC<SidebarContentProps> = ({ className, children, ...rest }) => (
   <div className={cnSidebar('Content', null, [className])} {...rest}>
@@ -95,8 +100,7 @@ export const Sidebar: SidebarComponent = (props) => {
     onClickOutside,
     onEsc,
     position = sidebarPropPositionDefault,
-    width = sidebarPropWidthDefault,
-    height = sidebarPropHeightDefault,
+    size: rawSize = SidebarSize.m,
     className,
     children,
     container = window.document.body,
@@ -105,6 +109,10 @@ export const Sidebar: SidebarComponent = (props) => {
 
   const ref = useRef<HTMLDivElement | null>(null);
   const { theme } = useTheme();
+
+  const size = React.useMemo(() => {
+    return SidebarSize?.[rawSize] ?? SidebarSize.m;
+  }, [position, rawSize]);
 
   useEffect(() => {
     if (isOpen) {
@@ -128,11 +136,7 @@ export const Sidebar: SidebarComponent = (props) => {
     >
       <PortalWithTheme preset={theme} container={container}>
         {hasOverlay && <div className={cnSidebar('Overlay')} aria-label="Overlay" />}
-        <div
-          className={cnSidebar('Window', { width, height, position }, [className])}
-          ref={ref}
-          {...rest}
-        >
+        <div className={cnSidebar('Window', { size, position }, [className])} ref={ref} {...rest}>
           <ContextConsumer
             onClickOutside={onClickOutside || onOverlayClick}
             ignoreClicksInsideRefs={[ref]}
