@@ -9,7 +9,7 @@ import { IconSortUp } from '../../icons/IconSortUp/IconSortUp';
 import { IconUnsort } from '../../icons/IconUnsort/IconUnsort';
 import { sortBy as sortByDefault, updateAt } from '../../utils/array';
 import { cn } from '../../utils/bem';
-import { isNotNil } from '../../utils/type-guards';
+import { isNotNil, isString } from '../../utils/type-guards';
 import { Text } from '../Text/Text';
 
 import { HorizontalAlign, TableCell, VerticalAlign } from './Cell/TableCell';
@@ -32,10 +32,13 @@ import {
   useSelectedFilters,
 } from './filtering';
 import {
+  createSortingState,
   getColumnLeftOffset,
   getColumnsSize,
   getNewSorting,
   Header,
+  Order,
+  OrderType,
   Position,
   transformRows,
   useHeaderData,
@@ -102,6 +105,7 @@ type ColumnBase<T extends TableRow> = ValueOf<
       accessor: K extends string ? K : never;
       sortable?: boolean;
       sortByField?: keyof T;
+      order?: OrderType;
       sortFn?(a: T[K], b: T[K]): number;
       renderCell?: (row: T) => React.ReactNode;
     };
@@ -262,6 +266,22 @@ const InternalTable = <T extends TableRow>(
     removeAllSelectedFilters,
   } = useSelectedFilters(filters, onFiltersUpdated);
   const [expandedRowIds, setExpandedRowIds] = React.useState<string[]>([]);
+
+  // установка сортировки по умолчанию
+
+  React.useEffect(() => {
+    const sortingColumn = columns.find(
+      (col) => isString(col.order) && Object.prototype.hasOwnProperty.call(Order, col.order),
+    );
+    if (sortingColumn) {
+      const sortingState = createSortingState(
+        getColumnSortByField(sortingColumn),
+        sortingColumn.order,
+        sortingColumn.sortFn,
+      );
+      setSorting(sortingState);
+    }
+  }, [columns]);
 
   /*
     Подписываемся на изменения размеров таблицы, но не используем значения из
