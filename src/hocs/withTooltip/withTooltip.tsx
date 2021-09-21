@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { Tooltip, TooltipProps as TooltipComponentProps } from '../../components/Tooltip/Tooltip';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
@@ -24,18 +24,20 @@ export type TooltipProps = Omit<TooltipComponentProps, 'children' | 'ref'> & {
   exitTimeout?: number;
 };
 
-type ClearTooltip = React.MutableRefObject<{
+type ClearTooltip = {
   closeFunction?: () => void;
-  timer?: NodeJS.Timeout;
-}>;
+  timer?: ReturnType<typeof setTimeout>;
+};
 
-export type WithToltipProps<Props> = Omit<Props, 'tooltipProps'> & { tooltipProps?: TooltipProps };
+type ClearTooltipRef = React.MutableRefObject<ClearTooltip>;
 
-const closeFunctions: ClearTooltip[] = [];
-// фукция которая закроет все тултипы на странице кроме текущего с которым взаимодействует пользователь
-function clearTooltips(currentRef: ClearTooltip, removeCurrent?: boolean) {
+export type WithTooltipProps<Props> = Omit<Props, 'tooltipProps'> & { tooltipProps?: TooltipProps };
+
+const closeFunctions: ClearTooltipRef[] = [];
+// функция которая закроет все тултипы на странице кроме текущего с которым взаимодействует пользователь
+function clearTooltips(currentRef: ClearTooltipRef, removeCurrent?: boolean) {
   if (removeCurrent) {
-    // удаляем только текущую функцию закрытия, нужна если компонент размантируется
+    // удаляем только текущую функцию закрытия, нужна если компонент размонтируется
     if (currentRef.current.timer) {
       clearTimeout(currentRef.current.timer);
     }
@@ -65,7 +67,7 @@ export function withTooltip(hocProps?: TooltipProps) {
       | ((props: ComponentProps) => React.ReactElement | null),
     COMPONENT_PROPS extends ComponentProps
   >(Component: COMPONENT_TYPE) {
-    return (React.forwardRef<HTMLElement, WithToltipProps<COMPONENT_PROPS>>((props, ref) => {
+    return (React.forwardRef<HTMLElement, WithTooltipProps<COMPONENT_PROPS>>((props, ref) => {
       const { tooltipProps: tooltipPropsFromComponent = {}, ...componentProps } = props;
       const tooltipProps: TooltipProps = { ...hocProps, ...tooltipPropsFromComponent };
       const {
@@ -74,21 +76,13 @@ export function withTooltip(hocProps?: TooltipProps) {
         closeOnClickOutside = true,
         appearTimeout = appearTimeoutDefault,
         exitTimeout = exitTimeoutDefault,
-        ...ontherTooltipProps
+        ...otherTooltipProps
       } = tooltipProps;
 
       const [visible, setVisible] = useState<boolean>(false);
       const componentRef = useRef<HTMLElement | null>(null);
       const tooltipRef = useRef<HTMLDivElement | null>(null);
-      const clearRef = useMemo(
-        // привел к типам так как в дальнейшем к этой ссылке нужно привязать функцию
-        () =>
-          createRef<{
-            closeFunction: () => void;
-            timer?: NodeJS.Timeout;
-          }>() as ClearTooltip,
-        [],
-      );
+      const clearRef = useRef<ClearTooltip>({});
 
       const clearTimer = () => {
         if (clearRef.current.timer) {
@@ -98,27 +92,18 @@ export function withTooltip(hocProps?: TooltipProps) {
 
       const setExitTimer = () => {
         if (mode === 'mouseover' && visible) {
-          // привел к типам, jest думает что setTimeout вернет number
-          clearRef.current.timer = (setTimeout(
-            () => setVisible(false),
-            exitTimeout,
-          ) as unknown) as NodeJS.Timeout;
+          clearRef.current.timer = setTimeout(() => setVisible(false), exitTimeout);
         }
       };
 
       const setAppearTimer = () => {
         if (mode === 'mouseover' && !visible) {
-          // привел к типам, jest думает что setTimeout вернет number
-          clearRef.current.timer = (setTimeout(
-            () => setVisible(true),
-            appearTimeout,
-          ) as unknown) as NodeJS.Timeout;
+          clearRef.current.timer = setTimeout(() => setVisible(true), appearTimeout);
         }
       };
 
       useEffect(() => {
-        clearRef.current = {};
-        // очищаем ссылку в clearTooltips при размантировании компонента
+        // очищаем ссылку в clearTooltips при размонтировании компонента
         return () => clearTooltips(clearRef, true);
       }, []);
 
@@ -165,16 +150,16 @@ export function withTooltip(hocProps?: TooltipProps) {
 
       const tooltipOnMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
         clearTimer();
-        if (ontherTooltipProps.onMouseEnter) {
-          ontherTooltipProps.onMouseEnter(e);
+        if (otherTooltipProps.onMouseEnter) {
+          otherTooltipProps.onMouseEnter(e);
         }
       };
 
       const tooltipOnMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
         clearTimer();
         setExitTimer();
-        if (ontherTooltipProps.onMouseLeave) {
-          ontherTooltipProps.onMouseLeave(e);
+        if (otherTooltipProps.onMouseLeave) {
+          otherTooltipProps.onMouseLeave(e);
         }
       };
 
@@ -191,7 +176,7 @@ export function withTooltip(hocProps?: TooltipProps) {
           />
           {visible && (
             <Tooltip
-              {...ontherTooltipProps}
+              {...otherTooltipProps}
               ref={tooltipRef}
               anchorRef={componentRef}
               onClickOutside={onClickOutside}
@@ -204,6 +189,6 @@ export function withTooltip(hocProps?: TooltipProps) {
         </>
       );
       // привел к типам, так как прокинутый компонент может иметь джененрики и они потеряются за хоком
-    }) as unknown) as COMPONENT_TYPE | React.ComponentType<WithToltipProps<COMPONENT_PROPS>>;
+    }) as unknown) as COMPONENT_TYPE | React.ComponentType<WithTooltipProps<COMPONENT_PROPS>>;
   };
 }

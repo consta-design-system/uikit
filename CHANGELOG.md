@@ -1,5 +1,18 @@
 # Changelog
 
+## v3.3.0 (15/09/2021)
+**Важное из обновления:**
+- В компонентах `Modal` и `SideBar` добавлена возможность закрытия по нажатию `Esc`
+- Добавлен хук `useGlobalKeys` для подписки на нажатия клавиш
+---
+
+- [feat(withTooltip,ContextMenuLevel): Fixed typings & typos (#1549)](https://github.com/gazprom-neft/consta-uikit/commit/4b142d3f593ef2282351a79ef4e383c5e2670888) - [@N1KN](https://github.com/N1KN)
+- [fix(TextField): change type of component properties (#1474)](https://github.com/gazprom-neft/consta-uikit/commit/9f4411861b612b1622dffa0d1719040bd8d0811c) - [@N1MBER](https://github.com/N1MBER)
+- [docs(Table): updated doc for activeRow props (#1527)](https://github.com/gazprom-neft/consta-uikit/commit/ed41c0ded7dd65bf90989580b69804f6d0530e50) - [@AntonS86](https://github.com/AntonS86)
+- [feat(Modal, SideBar): close by esc (#1498)](https://github.com/gazprom-neft/consta-uikit/commit/3888bb602cd1eb505fd81c516327a9febfe7cccb) - [@N1KN](https://github.com/N1KN)
+
+--------------------
+
 ## v3.2.0 (08/09/2021)
 **Важное из обновления:**
 - Добавлен миксин `MixCard`
@@ -353,14 +366,3 @@ _Обращаем внимание_: *версии компонентов обр
 - [feat(withTooltip): added HOC withTooltip (#564)](https://github.com/gazprom-neft/consta-uikit/commit/7385f3149abd8e87c45d27d2b1361958f4aca6a6) - [@gizeasy](https://github.com/gizeasy)
 - [feat(Icons): add new pack (#736)](https://github.com/gazprom-neft/consta-uikit/commit/6887bd8fc85947c1f2654c99a7c0a820ac3fc767) - [@fooontic](https://github.com/fooontic)
 - [fix(Table): fix table grid columns (#708)](https://github.com/gazprom-neft/consta-uikit/commit/2a7281fc9550ab266f34f989ffd7ba49111eddd2) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
-
---------------------
-
-## v1.10.12 (24/12/2020)
-- [feat(ContextMenu): added component (#715)](https://github.com/gazprom-neft/consta-uikit/commit/8bb83e1e98cd5d1a500a2e578cbf3dad66b50876) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Breadcrumbs): added Breadcrumbs (#677)](https://github.com/gazprom-neft/consta-uikit/commit/6440250be77ecdba6b6049ece1ea6f9d6ada6b7c) - [@dmitriykorsakovnedra](https://github.com/dmitriykorsakovnedra)
-- [feat(Pagination): fixed prop types (#720)](https://github.com/gazprom-neft/consta-uikit/commit/ba527a92dd7dcd58c3104526e6a9f6773a8ad98e) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
-- [docs(Sidebar): fix sidebar example bottom (#730)](https://github.com/gazprom-neft/consta-uikit/commit/11adb18230019c365e287f4152c01843fc30cdfc) - [@arhayka](https://github.com/arhayka)
-- [fix(SideBar): remove extra border-radius (#723)](https://github.com/gazprom-neft/consta-uikit/commit/16b05716a4a7512bd96787644083b2f4a97cc346) - [@fooontic](https://github.com/fooontic)
-- [ docs(MultiCombobox): add docs for MultiCombobox (#639)](https://github.com/gazprom-neft/consta-uikit/commit/3ddbe119d62795ac8820c199aa584ee0c8e450c3) - [@arhayka](https://github.com/arhayka)
-- [fix(MultiCombobox): fixed getGroupOptions types (#717)](https://github.com/gazprom-neft/consta-uikit/commit/e43de5b859401718c58bb17686a320cf1cecfb78) - [@gizeasy](https://github.com/gizeasy)
