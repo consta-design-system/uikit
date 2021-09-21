@@ -4,7 +4,7 @@ import { isNotNil } from '../../../utils/type-guards';
 import { Badge } from '../../Badge/Badge';
 import { TableChoiceGroupFilter } from '../ChoiceGroupFilter/TableChoiceGroupFilter';
 import { TableNumberFilter } from '../NumberFilter/TableNumberFilter';
-import { Props as TableProps, TableFilters as Filters } from '../Table';
+import { TableFilters as Filters, TableProps } from '../Table';
 import { TableTextFilter } from '../TextFilter/TableTextFilter';
 
 export const rangeFilterer = (

@@ -339,6 +339,7 @@ type LazyLoad = { maxVisibleRows?: number; scrollableEl?: HTMLDivElement / Windo
 | `className`                                         | `string`                                            | -                                                 | Дополнительный CSS-класс                             |
 | `lazyLoad?`                                         | `LazyLoad`                                          | `{ maxVisibleRows: 210; scrollableEl: tableRef }` | Включает виртуальную прокрутку в таблице             |
 | [`onFiltersUpdated`](#колбэк-на-применение-фильтра) | `(filters: { field: string[] }) => void`            | -                                                 | Колбэк на изменение фильтров                         |
+| `ref?`                                              | `React.Ref<HTMLDivElement>`                         | -                                                 | Ссылка на корневой DOM-элемент компонента            |
 
 ## Примеры
 

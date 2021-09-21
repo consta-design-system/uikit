@@ -3,6 +3,7 @@ import './Table.css';
 import React, { useMemo } from 'react';
 
 import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
+import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { IconSortDown } from '../../icons/IconSortDown/IconSortDown';
 import { IconSortUp } from '../../icons/IconSortUp/IconSortUp';
 import { IconUnsort } from '../../icons/IconUnsort/IconUnsort';
@@ -122,7 +123,7 @@ export type TableColumn<T extends TableRow> = {
   position?: Position;
 } & (GroupColumnAddition<T> | SingleColumnAddition<T>);
 
-export type Props<T extends TableRow> = {
+export type TableProps<T extends TableRow> = {
   columns: TableColumn<T>[];
   rows: T[];
   filters?: Filters<T>;
@@ -145,6 +146,10 @@ export type Props<T extends TableRow> = {
   onFiltersUpdated?: (filters: SelectedFilters) => void;
   isExpandedRowsByDefault?: boolean;
 };
+
+type Table = <T extends TableRow>(
+  props: TableProps<T> & { ref?: React.Ref<HTMLDivElement> },
+) => React.ReactElement | null;
 
 export type ColumnMetaData = {
   filterable: boolean;
@@ -195,29 +200,33 @@ const defaultEmptyRowsPlaceholder = (
   </Text>
 );
 
-export const Table = <T extends TableRow>({
-  columns,
-  rows,
-  size = 'l',
-  filters,
-  isResizable = false,
-  stickyHeader = false,
-  stickyColumns = 0,
-  activeRow,
-  verticalAlign = 'top',
-  headerVerticalAlign = 'center',
-  zebraStriped,
-  borderBetweenRows = false,
-  borderBetweenColumns = false,
-  emptyRowsPlaceholder = defaultEmptyRowsPlaceholder,
-  className,
-  onRowHover,
-  onRowClick,
-  lazyLoad,
-  onSortBy,
-  onFiltersUpdated,
-  isExpandedRowsByDefault = false,
-}: Props<T>): React.ReactElement => {
+const InternalTable = <T extends TableRow>(
+  props: TableProps<T>,
+  ref?: React.Ref<HTMLDivElement>,
+) => {
+  const {
+    columns,
+    rows,
+    size = 'l',
+    filters,
+    isResizable = false,
+    stickyHeader = false,
+    stickyColumns = 0,
+    activeRow,
+    verticalAlign = 'top',
+    headerVerticalAlign = 'center',
+    zebraStriped,
+    borderBetweenRows = false,
+    borderBetweenColumns = false,
+    emptyRowsPlaceholder = defaultEmptyRowsPlaceholder,
+    className,
+    onRowHover,
+    onRowClick,
+    lazyLoad,
+    onSortBy,
+    onFiltersUpdated,
+    isExpandedRowsByDefault = false,
+  } = props;
   const {
     headers,
     flattenedHeaders,
@@ -243,6 +252,7 @@ export const Table = <T extends TableRow>({
   const [sorting, setSorting] = React.useState<SortingState<T>>(null);
   const [visibleFilter, setVisibleFilter] = React.useState<string | null>(null);
   const [tableScroll, setTableScroll] = React.useState({ top: 0, left: 0 });
+
   const tableRef = React.useRef<HTMLDivElement>(null);
   const columnsRefs = React.useRef<Record<number, HTMLDivElement | null>>({});
   const {
@@ -565,7 +575,7 @@ export const Table = <T extends TableRow>({
 
   return (
     <div
-      ref={tableRef}
+      ref={useForkRef([tableRef, ref])}
       className={cnTable(
         {
           size,
@@ -715,3 +725,5 @@ export const Table = <T extends TableRow>({
     </div>
   );
 };
+
+export const Table = React.forwardRef(InternalTable) as Table;
