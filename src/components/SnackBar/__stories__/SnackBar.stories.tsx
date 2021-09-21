@@ -28,6 +28,7 @@ const defaultKnobs = () => ({
   withActionButtons: boolean('withActionButtons', false),
   withAutoClose: boolean('withAutoClose', false),
   withCloseButton: boolean('withCloseButton', true),
+  withShowProgress: boolean('withShowProgress', false),
 });
 
 const getItemIconByStatus = (status: SnackBarItemStatus): React.FC<IconProps> | undefined => {
@@ -53,7 +54,13 @@ function reducer(state: State, action: Action) {
 }
 
 export function Playground() {
-  const { withIcon, withActionButtons, withAutoClose, withCloseButton } = defaultKnobs();
+  const {
+    withIcon,
+    withActionButtons,
+    withAutoClose,
+    withShowProgress,
+    withCloseButton,
+  } = defaultKnobs();
   const [items, dispatchItems] = React.useReducer(reducer, []);
   const generateHandleAdd = (status: SnackBarItemStatus) => () => {
     const key = items.length + 1;
@@ -62,6 +69,7 @@ export function Playground() {
       message: `Сообщение о каком-то событии - ${key}`,
       status,
       ...(withAutoClose && { autoClose: 5 }),
+      ...(withShowProgress && { showProgress: 'timer' }),
       ...(withIcon && { icon: getItemIconByStatus(status) }),
       ...(withActionButtons && {
         actions: [
