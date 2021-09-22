@@ -8,7 +8,7 @@ import { cn } from '../../../utils/bem';
 import { callbackWithSelector, createMetadata } from '../../../utils/storybook';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
-import { Sidebar, SidebarSize } from '../Sidebar';
+import { Sidebar, sidebarPropSize } from '../Sidebar';
 
 import mdx from './Sidebar.docs.mdx';
 
@@ -16,7 +16,7 @@ const cnSidebarStories = cn('SidebarStories');
 
 const defaultKnobs = () => ({
   hasOverlay: boolean('hasOverlay', true),
-  size: select('size', [...Object.values(SidebarSize)], SidebarSize.m),
+  size: select('size', sidebarPropSize, sidebarPropSize[1]),
   position: select('position', ['right', 'bottom', 'left', 'top'], 'right'),
 });
 

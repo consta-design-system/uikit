@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { cnSidebar, Sidebar, SidebarPropsSize, SidebarSize } from '../Sidebar';
+import { cnSidebar, Sidebar, sidebarPropSize } from '../Sidebar';
 
 type SidebarProps = React.ComponentProps<typeof Sidebar>;
 
@@ -84,13 +84,8 @@ describe('Компонент Sidebar', () => {
       expect(screen.getByTestId(testId)).toHaveClass(cnSidebar('Window', { size: 'm' }));
     });
 
-    it('установлен размер - m, при не валидном размере', () => {
-      render(getComponent({ size: 'unknown' as SidebarPropsSize }));
-      expect(screen.getByTestId(testId)).toHaveClass(cnSidebar('Window', { size: 'm' }));
-    });
-
     describe('проверка валидных размеров', () => {
-      Object.values(SidebarSize).forEach((size) => {
+      sidebarPropSize.forEach((size) => {
         it(`установлен размер - ${size}`, () => {
           render(getComponent({ size }));
           expect(screen.getByTestId(testId)).toHaveClass(cnSidebar('Window', { size }));
