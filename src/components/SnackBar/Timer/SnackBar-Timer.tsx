@@ -12,13 +12,14 @@ export type SnackBarTimerProps = {
   onMount: SnackBarTimerPropOnMount;
   onTimeIsOver: () => void;
   startTime: number;
+  hidden?: boolean;
 };
 
 const interval = 1000;
 
 export const SnackBarTimer: React.FC<SnackBarTimerProps> = (props) => {
   const [running, setRunning] = useState<boolean>(false);
-  const { onMount, onTimeIsOver, startTime: startTimeprop } = props;
+  const { onMount, onTimeIsOver, startTime: startTimeprop, hidden } = props;
   const startTime = startTimeprop * interval;
   const { time, start, pause, isRunning } = useTimer({
     endTime: 0,
@@ -38,6 +39,10 @@ export const SnackBarTimer: React.FC<SnackBarTimerProps> = (props) => {
 
   const progress = running ? ((time - interval) / startTime) * 100 : (time / startTime) * 100;
   const seconds = time ? time / interval : 0;
+
+  if (hidden) {
+    return null;
+  }
 
   return (
     <Timer

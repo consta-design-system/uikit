@@ -1,10 +1,57 @@
 import React from 'react';
 
-import { cnTextField, TextFieldProps } from '../../TextField/TextField';
+import { IconProps, IconPropSize } from '../../../icons/Icon/Icon';
+import {
+  cnTextField,
+  TextFieldPropAutoComplete,
+  TextFieldPropForm,
+  TextFieldPropId,
+  TextFieldPropName,
+  TextFieldPropOnChange,
+  TextFieldPropSize,
+  TextFieldPropState,
+  TextFieldPropValue,
+  TextFieldPropView,
+  TextFieldPropWidth,
+} from '../../TextField/TextField';
 import { EventInterceptorHandler, EventInterceptorPropComponent } from '../EventInterceptor';
 
+export type Props = {
+  className?: string;
+  value?: TextFieldPropValue;
+  onChange?: TextFieldPropOnChange;
+  id?: TextFieldPropId;
+  name?: TextFieldPropName;
+  type?: string;
+  disabled?: boolean;
+  cols?: number;
+  maxLength?: number;
+  size?: TextFieldPropSize;
+  view?: TextFieldPropView;
+  form?: TextFieldPropForm;
+  state?: TextFieldPropState;
+  width?: TextFieldPropWidth;
+  onFocus?: React.FocusEventHandler<HTMLElement>;
+  onBlur?: React.FocusEventHandler<HTMLElement>;
+  autoFocus?: boolean;
+  placeholder?: string;
+  leftSide?: string | React.FC<IconProps>;
+  rightSide?: string | React.FC<IconProps>;
+  autoComplete?: TextFieldPropAutoComplete;
+  max?: number | string;
+  min?: number | string;
+  readOnly?: boolean;
+  required?: boolean;
+  step?: number | string;
+  tabIndex?: number;
+  inputRef?: React.Ref<HTMLTextAreaElement | HTMLInputElement>;
+  ariaLabel?: string;
+  iconSize?: IconPropSize;
+  children?: never;
+};
+
 export const useTextFieldEventsHandler = (
-  props: TextFieldProps,
+  props: Props,
   handler: EventInterceptorHandler,
   textFieldRef: React.RefObject<HTMLDivElement>,
 ) => {

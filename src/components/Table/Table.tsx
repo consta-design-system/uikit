@@ -3,12 +3,13 @@ import './Table.css';
 import React, { useMemo } from 'react';
 
 import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
+import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { IconSortDown } from '../../icons/IconSortDown/IconSortDown';
 import { IconSortUp } from '../../icons/IconSortUp/IconSortUp';
 import { IconUnsort } from '../../icons/IconUnsort/IconUnsort';
 import { sortBy as sortByDefault, updateAt } from '../../utils/array';
 import { cn } from '../../utils/bem';
-import { isNotNil } from '../../utils/type-guards';
+import { isNotNil, isString } from '../../utils/type-guards';
 import { Text } from '../Text/Text';
 
 import { HorizontalAlign, TableCell, VerticalAlign } from './Cell/TableCell';
@@ -31,10 +32,13 @@ import {
   useSelectedFilters,
 } from './filtering';
 import {
+  createSortingState,
   getColumnLeftOffset,
   getColumnsSize,
   getNewSorting,
   Header,
+  Order,
+  OrderType,
   Position,
   transformRows,
   useHeaderData,
@@ -101,6 +105,7 @@ type ColumnBase<T extends TableRow> = ValueOf<
       accessor: K extends string ? K : never;
       sortable?: boolean;
       sortByField?: keyof T;
+      order?: OrderType;
       sortFn?(a: T[K], b: T[K]): number;
       renderCell?: (row: T) => React.ReactNode;
     };
@@ -122,7 +127,7 @@ export type TableColumn<T extends TableRow> = {
   position?: Position;
 } & (GroupColumnAddition<T> | SingleColumnAddition<T>);
 
-export type Props<T extends TableRow> = {
+export type TableProps<T extends TableRow> = {
   columns: TableColumn<T>[];
   rows: T[];
   filters?: Filters<T>;
@@ -145,6 +150,10 @@ export type Props<T extends TableRow> = {
   onFiltersUpdated?: (filters: SelectedFilters) => void;
   isExpandedRowsByDefault?: boolean;
 };
+
+type Table = <T extends TableRow>(
+  props: TableProps<T> & { ref?: React.Ref<HTMLDivElement> },
+) => React.ReactElement | null;
 
 export type ColumnMetaData = {
   filterable: boolean;
@@ -195,29 +204,33 @@ const defaultEmptyRowsPlaceholder = (
   </Text>
 );
 
-export const Table = <T extends TableRow>({
-  columns,
-  rows,
-  size = 'l',
-  filters: rawFilters,
-  isResizable = false,
-  stickyHeader = false,
-  stickyColumns = 0,
-  activeRow,
-  verticalAlign = 'top',
-  headerVerticalAlign = 'center',
-  zebraStriped,
-  borderBetweenRows = false,
-  borderBetweenColumns = false,
-  emptyRowsPlaceholder = defaultEmptyRowsPlaceholder,
-  className,
-  onRowHover,
-  onRowClick,
-  lazyLoad,
-  onSortBy,
-  onFiltersUpdated,
-  isExpandedRowsByDefault = false,
-}: Props<T>): React.ReactElement => {
+const InternalTable = <T extends TableRow>(
+  props: TableProps<T>,
+  ref?: React.Ref<HTMLDivElement>,
+) => {
+  const {
+    columns,
+    rows,
+    size = 'l',
+    filters: rawFilters,
+    isResizable = false,
+    stickyHeader = false,
+    stickyColumns = 0,
+    activeRow,
+    verticalAlign = 'top',
+    headerVerticalAlign = 'center',
+    zebraStriped,
+    borderBetweenRows = false,
+    borderBetweenColumns = false,
+    emptyRowsPlaceholder = defaultEmptyRowsPlaceholder,
+    className,
+    onRowHover,
+    onRowClick,
+    lazyLoad,
+    onSortBy,
+    onFiltersUpdated,
+    isExpandedRowsByDefault = false,
+  } = props;
   const {
     headers,
     flattenedHeaders,
@@ -247,6 +260,7 @@ export const Table = <T extends TableRow>({
   const [sorting, setSorting] = React.useState<SortingState<T>>(null);
   const [visibleFilter, setVisibleFilter] = React.useState<string | null>(null);
   const [tableScroll, setTableScroll] = React.useState({ top: 0, left: 0 });
+
   const tableRef = React.useRef<HTMLDivElement>(null);
   const columnsRefs = React.useRef<Record<number, HTMLDivElement | null>>({});
   const {
@@ -256,6 +270,22 @@ export const Table = <T extends TableRow>({
     removeAllSelectedFilters,
   } = useSelectedFilters(filters, onFiltersUpdated);
   const [expandedRowIds, setExpandedRowIds] = React.useState<string[]>([]);
+
+  // установка сортировки по умолчанию
+
+  React.useEffect(() => {
+    const sortingColumn = columns.find(
+      (col) => isString(col.order) && Object.prototype.hasOwnProperty.call(Order, col.order),
+    );
+    if (sortingColumn) {
+      const sortingState = createSortingState(
+        getColumnSortByField(sortingColumn),
+        sortingColumn.order,
+        sortingColumn.sortFn,
+      );
+      setSorting(sortingState);
+    }
+  }, [columns]);
 
   /*
     Подписываемся на изменения размеров таблицы, но не используем значения из
@@ -569,12 +599,12 @@ export const Table = <T extends TableRow>({
 
   return (
     <div
-      ref={tableRef}
+      ref={useForkRef([tableRef, ref])}
       className={cnTable(
         {
           size,
           isResizable,
-          zebraStriped: !hasMergedCells && zebraStriped,
+          zebraStriped,
           withBorderBottom: !filteredData.length,
         },
         [className],
@@ -719,3 +749,5 @@ export const Table = <T extends TableRow>({
     </div>
   );
 };
+
+export const Table = React.forwardRef(InternalTable) as Table;

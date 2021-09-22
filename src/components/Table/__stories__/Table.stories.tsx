@@ -25,10 +25,10 @@ import { verticalAligns } from '../Cell/TableCell';
 import { Filters, SortByProps } from '../filtering';
 import {
   headerVerticalAligns,
-  Props,
   sizes,
   Table,
   TableColumn,
+  TableProps as Props,
   TableRow,
   zebraStriped,
 } from '../Table';

@@ -1,53 +1,202 @@
-import { MixCardExample } from './examples/MixCardExample/MixCardExample';
+import { MixCardExampleShadow } from './examples/MixCardExampleShadow/MixCardExampleShadow';
 import { MixCardExampleStates } from './examples/MixCardExampleStates/MixCardExampleStates';
 import { MixCardExampleForm } from './examples/MixCardExampleForm/MixCardExampleForm';
+import { MixCardExampleSpace } from './examples/MixCardExampleSpace/MixCardExampleSpace';
 
 <Meta title="Mixins|MixCard" id="MixCard" />
 
 # MixCards
 
-- [Что это](#что-это)
-- [Пример использования](#пример-использования)
-- [Свойства миксина](#свойства-mixcard)
-  - [Отступы](#отступы)
-  - [Статус](#статус)
-  - [Форма](#форма)
-  - [Тень](#тень)
+С помощью миксина `MixCard` можно добавить свойства компонента
+[Card](?path=/docs/components-card--playground) любому другому компоненту.
+
+- [Отступы](#отступы)
+- [Статус](#статус)
+- [Форма](#форма)
+- [Тень](#тень)
 - [Список свойств](#список-свойств)
+- [Пример использования](#пример-использования)
 
-## Что это
+## Отступы
 
-С помощью миксина `MixCard` можно добавить стилизацию как у компонента
-[Card](?path=/docs/components-card--playground) любому компоненту.
+Отступы внутри компонента можно менять с помощью двух свойств:
 
-## Свойства MixCard
+- за отступы сверху и снизу отвечает `verticalSpace`,
+- за отступы по бокам — `horizontalSpace`.
 
-### Отступы
+Варианты:
+`'xs'`, `'s'`, `'m'`, `'l'`, `'xl'`, `'2xl'`, `'3xl'`, `'4xl'`, `'5xl'`.
 
-За отступы отвечают свойства `verticalSpace` и `horizontalSpace`, варианты значений:
-`'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl'`
+По умолчанию — `'xs'`.
 
-### Статус
+```tsx
+export const MixCardExampleForm = () => {
+  return (
+    <>
+      <div
+        className={cnMixCard({
+          verticalSpace: 'xs',
+          horizontalSpace: 'xs',
+          form: 'square',
+          shadow: true,
+        })}
+      >
+        <Text>Отступы 'xs'</Text>
+      </div>
+      <div
+        className={cnMixCard({
+          verticalSpace: '5xl',
+          horizontalSpace: '5xl',
+          form: 'square',
+          shadow: true,
+        })}
+      >
+        <Text>Отступы '5xl'</Text>
+      </div>
+    </>
+  );
+};
+```
 
-Свойство `status` отвечает за стилизацию границ компонента, принимает значения:
-`'alert', 'success', 'warning'`
+<MixCardExampleSpace />
+
+## Статус
+
+Свойство `status` окрашивает рамку компонента в цвета соответствующего статуса. Варианты:
+`'alert'`, `'success'`, `'warning'`.
+
+```tsx
+export const MixCardExampleStates = () => {
+  return (
+    <div
+      className={cnMixCard({
+        verticalSpace: 'xl',
+        horizontalSpace: 'xl',
+        status: 'alert',
+        form: 'round',
+        shadow: true,
+      })}
+    >
+      <Text>alert</Text>
+    </div>
+    <div
+      className={cnMixCard({
+        verticalSpace: 'xl',
+        horizontalSpace: 'xl',
+        status: 'warning',
+        form: 'round',
+        shadow: true,
+      })}
+    >
+      <Text>warning</Text>
+    </div>
+    <div
+      className={cnMixCard({
+        verticalSpace: 'xl',
+        horizontalSpace: 'xl',
+        status: 'success',
+        form: 'round',
+        shadow: true,
+      })}
+    >
+      <Text>success</Text>
+    </div>
+  );
+};
+```
 
 <MixCardExampleStates />
 
-### Форма
+## Форма
 
-Свойство `form` отвечает за форму границ компонента, принимает значения:
-`'round', 'square'`
+За форму компонента отвечает свойство `form`. Варианты:
+`'round'`, `'square'`, по умолчанию `'round'`.
+
+```tsx
+export const MixCardExampleForm = () => {
+  return (
+    <div
+      className={cnMixCard({
+        verticalSpace: 'xl',
+        horizontalSpace: 'xl',
+        form: 'square',
+        shadow: true,
+      })}
+    >
+      <Text>square</Text>
+    </div>
+    <div
+      className={cnMixCard({
+        verticalSpace: 'xl',
+        horizontalSpace: 'xl',
+        form: 'round',
+        shadow: true,
+      })}
+    >
+      <Text>round</Text>
+    </div>
+  );
+};
+```
 
 <MixCardExampleForm />
 
-### Тень
+## Тень
 
-Свойство `shadow` отвечает есть ли у компанента тень.
+По умолчанию у карточки есть тень, за тень компонента с миксином отвечает свойство `shadow`.
+
+```tsx
+export const MixCardExampleShadow = () => {
+  return (
+    <div
+      className={cnMixCard({
+        verticalSpace: 'xl',
+        horizontalSpace: '3xl',
+        status: 'success',
+        form: 'round',
+        shadow: true,
+      })}
+    >
+      <Text>Карточка с тенью</Text>
+    </div>
+    <div
+      className={cnMixCard({
+        verticalSpace: 'xl',
+        horizontalSpace: '3xl',
+        status: 'success',
+        form: 'round',
+        shadow: false,
+      })}
+    >
+      <Text>Карточка без тени</Text>
+    </div>
+  );
+};
+
+```
+
+<MixCardExampleShadow />
+
+## Список свойств
+
+| Свойство                       | Тип или варианты значения                               | По умолчанию | Описание                              |
+| ------------------------------ | ------------------------------------------------------- | ------------ | ------------------------------------- |
+| [`verticalSpace?`](#отступы)   | `'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl'` | `'xs'`       | Вертикальные отступы                  |
+| [`horizontalSpace?`](#отступы) | `'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl'` | `'xs'`       | Горизонтальные отступы                |
+| [`status?`](#статус)           | `'alert', 'success', 'warning'`                         | -            | Статус, меняет цвет границ компонента |
+| [`form?`](#форма)              | `'round'`, `'square'`                                   | `'round'`    | Форма                                 |
+| [`shadow?`](#тень)             | `boolean`                                               | `'true'`     | Тень                                  |
 
 ## Пример использования
 
 ```tsx
+// src/App.ts
+
+import React from 'react';
+
+import { Text } from '@consta/uikit/Text';
+import { cnMixCard } from '@consta/uikit/MixCard';
+
 export const MixCardExample = () => {
   return (
     <div
@@ -59,20 +208,8 @@ export const MixCardExample = () => {
         shadow: true,
       })}
     >
-      <Text>Здесь мог быть ваш текст</Text>
+      <Text>Здесь может быть ваш текст</Text>
     </div>
   );
 };
 ```
-
-<MixCardExample />
-
-## Список свойств
-
-| Свойство          | Тип или варианты значения                               | По умолчанию | Описание                                                                     |
-| ----------------- | ------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------- |
-| `verticalSpace`   | `'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl'` | `xs`         | Вертикальные отступы                                                         |
-| `horizontalSpace` | `'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl'` | `xs`         | Горизонтальные отступы                                                       |
-| `status`          | `'alert', 'success', 'warning'`                         | -            | Состояние карточки, в зависимости от состояния отрисовываются разные границы |
-| `form`            | `'round', 'square'`                                     | 'round'      | Форма                                                                        |
-| `shadow`          | `boolean`                                               | 'true'       | Тень                                                                         |

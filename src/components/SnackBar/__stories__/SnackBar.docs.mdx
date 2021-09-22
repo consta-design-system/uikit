@@ -9,7 +9,7 @@ import { SnackBarExampleButtons } from './examples/SnackBarExampleButtons/SnackB
 
 Используется для мгновенных уведомлений.
 
-Снекбар (в отличие от [информера](?path=/docs/components-informer--playground))
+Снекбар (в отличие от [информера](/?path=/docs/components-informer--playground))
 всегда перекрывает основное содержимое, выносится в отдельный слой интерфейса
 и сопровождается анимацией. На него будет направлено всё внимание пользователя.
 
@@ -37,7 +37,7 @@ import { SnackBarExampleButtons } from './examples/SnackBarExampleButtons/SnackB
 
 ## Иконка
 
-Добавьте любую из [библиотеки иконок](?path=/story/components-icons--playground) с помощью свойства `icon`.
+Добавьте любую из [библиотеки иконок](/?path=/story/components-icons--playground) с помощью свойства `icon`.
 
 <SnackBarExampleIcon />
 
@@ -58,7 +58,12 @@ import { SnackBarExampleButtons } from './examples/SnackBarExampleButtons/SnackB
 **Не удалять**. Если пользователь, нажмет на кнопку. Если нет, сообщение само закроется
 по таймеру.
 
-Таймер можно добавить с помощью `autoClose`.
+Таймер можно добавить с помощью `autoClose`, а с помощью `showProgress` можно выбрать его вид.
+
+| Значение `showProgress` | По умолчанию | Описание                                                                              |
+| ----------------------- | ------------ | ------------------------------------------------------------------------------------- |
+| `"timer"`               |              | Визуально отображает радиальный таймер (если указана иконка, то он заместит её собой) |
+| `undefined`             | +            | Работает только логика таймера. Сам таймер скрыт.                                     |
 
 <SnackBarExampleTimer />
 
@@ -70,6 +75,7 @@ type Item = {
   message?: string | number;
   status?: 'success' | 'warning' | 'alert' | 'normal';
   autoClose?: boolean | number;
+  showProgress?: 'timer';
   icon?: React.FC<IconProps>;
   actions?: {
     label: string | number;
