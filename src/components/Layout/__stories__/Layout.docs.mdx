@@ -3,7 +3,6 @@ import {
   LayoutExampleDirectionRow,
   LayoutExampleDirectionColumn,
 } from './examples/LayoutExampleDirection/LayoutExampleDirection';
-import { LayoutExample } from './examples/LayoutExample/LayoutExample';
 import { LayoutExampleAnchor } from './examples/LayoutExampleAnchor/LayoutExampleAnchor';
 import { LayoutExampleRowFixed } from './examples/LayoutExampleRowFixed/LayoutExampleRowFixed';
 
@@ -100,47 +99,3 @@ export const LayoutExampleAnchor = () => {
 | `tabIndex`           | `number`                              | —            | Порядковый номер при переходе между элементами интерфейса по клавише **tab**      |
 | `as`                 | `React.ElementType`                   | `div`        | HTML-тег для кнопки                                                               |
 | `className`          | `string`                              | —            | Дополнительные CSS-классы                                                         |
-
-## Пример
-
-```tsx
-export const LayoutExample = () => {
-  const scrollContainerRef = useRef(null);
-  const fixedRef = useRef(null);
-
-  return (
-    <Layout direction="column" ref={scrollContainerRef}>
-      <Layout>
-        <Text>Заголовок</Text>
-      </Layout>
-      <Layout direction="column">
-        <Layout ref={fixedRef} fixed scrollContainerRef={scrollContainerRef} verticalAlign="top">
-          <Text>Фиксированный элемент</Text>
-        </Layout>
-        <Layout>
-          <Text>Контент</Text>
-        </Layout>
-        <Layout
-          fixed
-          scrollContainerRef={scrollContainerRef}
-          verticalAlign="bottom"
-          anchorRef={fixedRef}
-        >
-          <Text>Фиксированный элемент</Text>
-        </Layout>
-        <Layout>
-          <Text>Контент</Text>
-        </Layout>
-        <Layout fixed scrollContainerRef={scrollContainerRef} verticalAlign="bottom">
-          <Text>Фиксированный элемент</Text>
-        </Layout>
-        <Layout>
-          <Text>Контент</Text>
-        </Layout>
-      </Layout>
-    </Layout>
-  );
-};
-```
-
-<LayoutExample />

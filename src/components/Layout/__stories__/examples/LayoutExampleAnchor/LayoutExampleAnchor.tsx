@@ -21,7 +21,7 @@ export const LayoutExampleAnchor = () => {
         <Layout
           ref={fixedRef}
           fixed
-          scrollContainerRef={scrollContainerRef}
+          scrollContainer={window}
           verticalAlign="top"
           className={cnLayoutExampleAnchor('FixedBlock')}
         >
@@ -32,12 +32,15 @@ export const LayoutExampleAnchor = () => {
         </Layout>
         <Layout
           fixed
-          scrollContainerRef={scrollContainerRef}
+          scrollContainer={window}
           verticalAlign="bottom"
           anchorRef={fixedRef}
           className={cnLayoutExampleAnchor('FixedBlock')}
         >
           <Text>Фиксированный элемент</Text>
+        </Layout>
+        <Layout className={cnLayoutExampleAnchor('Content')}>
+          <Text>Контент</Text>
         </Layout>
         <Layout className={cnLayoutExampleAnchor('Content')}>
           <Text>Контент</Text>

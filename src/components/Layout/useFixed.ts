@@ -20,7 +20,7 @@ const horizontalAlignDefault: HorizontalAlign = horizontalAlign[0];
 
 type UseFixed = (
   layoutRef?: React.RefObject<HTMLElement> | null,
-  scrollContainerRef?: React.RefObject<HTMLElement> | null | HTMLElement,
+  scrollContainer?: React.RefObject<HTMLElement> | null | HTMLElement | Window,
   anchorRef?: React.RefObject<HTMLElement> | null,
   verticalAlign?: VerticalAlign,
   horizontalAlign?: HorizontalAlign,
@@ -37,7 +37,9 @@ export type ElementStationing = {
   scrollHeight: number;
 };
 
-type GetHTMLFunction = (element: React.RefObject<HTMLElement> | HTMLElement) => HTMLElement | null;
+type GetHTMLFunction = (
+  element: React.RefObject<HTMLElement> | HTMLElement | Window,
+) => HTMLElement | Window | null;
 
 type PositioningElement = (
   startScroll?: number,
@@ -48,7 +50,7 @@ type PositioningElement = (
   horizontalAlign?: HorizontalAlign,
 ) => UseFixedData;
 
-const positioningElement: PositioningElement = (
+export const positioningElement: PositioningElement = (
   startScroll,
   layoutStationing,
   scrollContainerStationing,
@@ -102,11 +104,11 @@ const positioningElement: PositioningElement = (
       if (verticalAlign === 'top')
         stationingData.top = anchorStationing
           ? anchorStationing.offsetTop
-          : -window.scrollY + scrollContainerPosition.top;
+          : scrollContainerPosition.top;
       else
         stationingData.top = anchorStationing
           ? anchorStationing.offsetTop + anchorStationing.offsetHeight
-          : -window.scrollY + scrollContainerPosition.bottom - layoutStationing.offsetHeight;
+          : scrollContainerPosition.bottom - layoutStationing.offsetHeight;
       if (horizontalAlign === 'left')
         stationingData.left = anchorStationing
           ? anchorStationing.offsetLeft
@@ -124,7 +126,7 @@ const positioningElement: PositioningElement = (
 
 export const useFixed: UseFixed = (
   layoutRef,
-  scrollContainerRef,
+  scrollContainer,
   anchorRef,
   verticalAlign = verticalAlignDefault,
   horizontalAlign = horizontalAlignDefault,
@@ -133,11 +135,14 @@ export const useFixed: UseFixed = (
   const [result, setResult] = useState<UseFixedData>({});
 
   const getHTMLElement: GetHTMLFunction = (element) => {
-    if (element && !(element instanceof HTMLElement)) return element?.current;
+    if (element && !(element instanceof HTMLElement || element instanceof Window))
+      return element?.current;
     return element;
   };
 
-  const getStationingElement = (element?: HTMLElement | null): ElementStationing | undefined => {
+  const getStationingElement = (
+    element?: HTMLElement | null | Window,
+  ): ElementStationing | undefined => {
     if (element instanceof HTMLElement)
       return {
         offsetTop: element.offsetTop,
@@ -149,32 +154,50 @@ export const useFixed: UseFixed = (
         scrollTop: element.scrollTop,
         scrollHeight: element.scrollHeight,
       };
+    if (element instanceof Window) {
+      return {
+        offsetTop: 0,
+        offsetHeight: element.innerHeight,
+        offsetLeft: 0,
+        offsetWidth: element.innerWidth,
+        clientHeight: element.innerHeight,
+        clientWidth: element.innerWidth,
+        scrollTop: element.scrollY,
+        scrollHeight: Math.max(document.body.scrollHeight, document.body.offsetHeight),
+      };
+    }
+    return undefined;
   };
 
   useEffect(() => {
     let startScroll = 0;
-    setTimeout(() => {
-      if (layoutRef && layoutRef.current && layoutRef.current.parentElement) {
-        const parentContainer = scrollContainerRef
-          ? getHTMLElement(scrollContainerRef)
-          : layoutRef.current.parentElement;
-        if (parentContainer)
-          startScroll =
-            layoutRef.current.offsetTop - parentContainer?.offsetTop >= 0
-              ? layoutRef.current.offsetTop - parentContainer?.offsetTop
-              : 0;
-        positioning(startScroll);
-        document.addEventListener('resize', resizing);
-        if (typeof parentContainer?.addEventListener === 'function') {
-          parentContainer?.addEventListener('resize', resizing);
-          parentContainer?.addEventListener('scroll', () => positioning(startScroll));
+    setTimeout(
+      () => {
+        if (layoutRef && layoutRef.current && layoutRef.current.parentElement) {
+          const parentContainer = scrollContainer
+            ? getHTMLElement(scrollContainer)
+            : layoutRef.current.parentElement;
+          const parentStationing = getStationingElement(parentContainer);
+          if (parentStationing) {
+            startScroll =
+              layoutRef.current.offsetTop - parentStationing?.offsetTop >= 0
+                ? layoutRef.current.offsetTop - parentStationing?.offsetTop
+                : 0;
+          }
+          positioning(startScroll);
+          document.addEventListener('resize', resizing);
+          if (typeof parentContainer?.addEventListener === 'function') {
+            parentContainer?.addEventListener('resize', resizing);
+            parentContainer?.addEventListener('scroll', () => positioning(startScroll));
+          }
         }
-      }
-    }, 500);
+      },
+      typeof scrollContainer !== 'undefined' ? 0 : 500,
+    );
     return () => {
       if (layoutRef && layoutRef.current && layoutRef.current.parentElement) {
-        const parentContainer = scrollContainerRef
-          ? getHTMLElement(scrollContainerRef)
+        const parentContainer = scrollContainer
+          ? getHTMLElement(scrollContainer)
           : layoutRef.current.parentElement;
         document.removeEventListener('resize', resizing);
         if (typeof parentContainer?.removeEventListener === 'function') {
@@ -183,7 +206,7 @@ export const useFixed: UseFixed = (
         }
       }
     };
-  }, [verticalAlign, horizontalAlign, layoutRef, scrollContainerRef, anchorRef]);
+  }, [verticalAlign, horizontalAlign, layoutRef, scrollContainer, anchorRef]);
 
   useEffect(() => {
     setResult({ ...stationing });
@@ -199,15 +222,16 @@ export const useFixed: UseFixed = (
 
   const resizing = () => {
     if (layoutRef && layoutRef.current && layoutRef.current.parentElement) {
-      const scrollContainer = scrollContainerRef
-        ? getHTMLElement(scrollContainerRef)
+      const parentContainer = scrollContainer
+        ? getHTMLElement(scrollContainer)
         : layoutRef.current.parentElement;
+      const parentStationing = getStationingElement(parentContainer);
       setStationing({
         ...stationing,
         width: layoutRef.current.offsetWidth,
         height: layoutRef.current.offsetHeight,
-        maxWidth: scrollContainer?.clientWidth,
-        maxHeight: scrollContainer?.clientHeight,
+        maxWidth: parentStationing?.clientWidth,
+        maxHeight: parentStationing?.clientHeight,
       });
     }
   };
@@ -220,14 +244,14 @@ export const useFixed: UseFixed = (
         layoutRef.current.parentElement &&
         typeof startScroll === 'number'
       ) {
-        const scrollContainer = scrollContainerRef
-          ? getHTMLElement(scrollContainerRef)
+        const parentContainer = scrollContainer
+          ? getHTMLElement(scrollContainer)
           : layoutRef.current.parentElement;
         if (scrollContainer) {
           const stationingData = positioningElement(
             startScroll,
             getStationingElement(layoutRef.current),
-            getStationingElement(scrollContainer),
+            getStationingElement(parentContainer),
             getStationingElement(anchorRef?.current),
             verticalAlign,
             horizontalAlign,

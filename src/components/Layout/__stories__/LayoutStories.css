@@ -1,8 +1,7 @@
 .LayoutStories {
-  position: relative;
-  overflow: scroll;
-  width: 100%;
-  max-height: 500px;
+  width: calc(100% + 2 * var(--space-3xl));
+  height: 2000px;
+  margin: calc(var(--space-3xl) * -1);
 
   &-Block {
     justify-content: center;
@@ -12,10 +11,24 @@
 
   &-Content {
     width: 100%;
-    min-height: 700px;
+    height: 100%;
+
+    &_direction {
+      &_row {
+        & > div:first-child {
+          border-right: 2px solid #fff;
+        }
+      }
+
+      &_column {
+        & > div:first-child {
+          border-bottom: 2px solid #fff;
+        }
+      }
+    }
   }
 
-  &-Fixed {
+  &-Header {
     justify-content: center;
     align-items: center;
     width: 100%;

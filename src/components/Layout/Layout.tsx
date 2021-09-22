@@ -27,7 +27,7 @@ export type Props = {
   verticalAlign?: LayoutPropVerticalAlign;
   horizontalAlign?: LayoutPropHorizontalAlign;
   anchorRef?: React.RefObject<HTMLElement>;
-  scrollContainerRef?: React.RefObject<HTMLElement> | HTMLElement;
+  scrollContainer?: React.RefObject<HTMLElement> | HTMLElement | null | Window;
   direction?: LayoutPropDirection;
   children?: React.ReactNode;
 };
@@ -39,7 +39,7 @@ export const Layout = forwardRefWithAs<Props>((props, ref) => {
     flex,
     fixed,
     anchorRef,
-    scrollContainerRef,
+    scrollContainer,
     direction = layoutPropDirectionDefault,
     children,
     className,
@@ -51,18 +51,17 @@ export const Layout = forwardRefWithAs<Props>((props, ref) => {
     ...otherProps
   } = props;
 
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLElement>(null);
 
   const { top, left, width, height, maxWidth, maxHeight, position } = useFixed(
     containerRef,
-    scrollContainerRef,
+    scrollContainer,
     anchorRef,
     verticalAlign,
     horizontalAlign,
   );
 
   const Tag = as as string;
-
   return (
     <>
       <Tag
@@ -103,9 +102,9 @@ export const Layout = forwardRefWithAs<Props>((props, ref) => {
             minWidth: width,
             minHeight: height,
             flex,
-            background:
+            backgroundColor:
               containerRef && containerRef.current
-                ? window.getComputedStyle(containerRef.current).getPropertyValue('background')
+                ? window.getComputedStyle(containerRef.current).getPropertyValue('background-color')
                 : 'none',
           }}
         />

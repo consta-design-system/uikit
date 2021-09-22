@@ -1,54 +1,37 @@
 import './LayoutStories.css';
 
 import React from 'react';
-import { number, select } from '@storybook/addon-knobs';
+import { select } from '@storybook/addon-knobs';
 
 import { cn } from '../../../utils/bem';
 import { createMetadata, createStory } from '../../../utils/storybook';
 import { Text } from '../../Text/Text';
-import {
-  Layout,
-  layoutPropDirection,
-  layoutPropDirectionDefault,
-  layoutPropHorizontalAlign,
-  layoutPropHorizontalAlignDefault,
-  layoutPropVerticalAlign,
-  layoutPropVerticalAlignDefault,
-} from '../Layout';
+import { Layout, layoutPropDirection, layoutPropDirectionDefault } from '../Layout';
 
 import { LayoutExampleAnchor } from './examples/LayoutExampleAnchor/LayoutExampleAnchor';
 import { LayoutExampleFixed } from './examples/LayoutExampleFixed/LayoutExampleFixed';
 import { LayoutExampleRowFixed } from './examples/LayoutExampleRowFixed/LayoutExampleRowFixed';
 import mdx from './Layout.docs.mdx';
 
+const flexArray = [1, 2, 3, 4, 5, 6];
+
 const defaultKnobs = () => ({
   direction: select('Direction', layoutPropDirection, layoutPropDirectionDefault),
-  verticalAlign: select('Vertical align', layoutPropVerticalAlign, layoutPropVerticalAlignDefault),
-  horizontalAlign: select(
-    'Horizontal align',
-    layoutPropHorizontalAlign,
-    layoutPropHorizontalAlignDefault,
-  ),
-  flexBlock1: number('Flex Block 1', 1),
-  flexBlock2: number('Flex Block 2', 1),
+  flexBlock1: select('Flex Block 1', flexArray, 1),
+  flexBlock2: select('Flex Block 2', flexArray, 1),
 });
 
 const cnLayoutStories = cn('LayoutStories');
 
 export function Playground() {
-  const { direction, flexBlock1, flexBlock2, verticalAlign, horizontalAlign } = defaultKnobs();
+  const { direction, flexBlock1, flexBlock2 } = defaultKnobs();
 
   return (
     <Layout direction="column" className={cnLayoutStories()}>
-      <Layout
-        fixed
-        verticalAlign={verticalAlign}
-        horizontalAlign={horizontalAlign}
-        className={cnLayoutStories('Fixed')}
-      >
-        <Text>Фикстрованный элемент</Text>
+      <Layout className={cnLayoutStories('Header')}>
+        <Text>Шапка</Text>
       </Layout>
-      <Layout direction={direction} className={cnLayoutStories('Content')}>
+      <Layout direction={direction} className={cnLayoutStories('Content', { direction })}>
         <Layout className={cnLayoutStories('Block')} flex={flexBlock1}>
           <Text>Контент</Text>
         </Layout>
