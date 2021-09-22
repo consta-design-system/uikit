@@ -394,7 +394,7 @@ export const withCustomTagLabelFunction = createStory(
     return (
       <div className={cnTableStories()}>
         <Table
-          {...partOfTableDataForCustomTagLabelFunction}
+          {...getKnobs(partOfTableDataForCustomTagLabelFunction)}
           getTagLabel={(id, name, filterValue: any) => {
             if (!isNotNil(filterValue)) {
               return name;
