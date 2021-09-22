@@ -212,7 +212,7 @@ const InternalTable = <T extends TableRow>(
     columns,
     rows,
     size = 'l',
-    filters,
+    filters: rawFilters,
     isResizable = false,
     stickyHeader = false,
     stickyColumns = 0,
@@ -247,6 +247,10 @@ const InternalTable = <T extends TableRow>(
   const [resizedColumnWidths, setResizedColumnWidths] = React.useState<ColumnWidth[]>(
     getColumnsWidth(),
   );
+
+  const filters = React.useMemo(() => {
+    return rawFilters && rawFilters.filter((filter) => filter.id && filter.field);
+  }, [rawFilters]);
 
   React.useEffect(() => {
     setResizedColumnWidths(getColumnsWidth());
