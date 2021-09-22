@@ -1,10 +1,12 @@
 import './Layout.css';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 
-import { useFixed, UseFixedData } from '../../hooks/useFixed/useFixed';
+import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { cn } from '../../utils/bem';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
+
+import { useFixed } from './useFixed';
 
 export const layoutPropDirection = ['row', 'column'] as const;
 export type LayoutPropDirection = typeof layoutPropDirection[number];
@@ -24,7 +26,6 @@ export type Props = {
   fixed?: boolean;
   verticalAlign?: LayoutPropVerticalAlign;
   horizontalAlign?: LayoutPropHorizontalAlign;
-  smooth?: boolean;
   anchorRef?: React.RefObject<HTMLElement>;
   scrollContainerRef?: React.RefObject<HTMLElement> | HTMLElement;
   direction?: LayoutPropDirection;
@@ -41,7 +42,6 @@ export const Layout = forwardRefWithAs<Props>((props, ref) => {
     scrollContainerRef,
     direction = layoutPropDirectionDefault,
     children,
-    smooth = false,
     className,
     tabIndex,
     verticalAlign = layoutPropVerticalAlignDefault,
@@ -51,33 +51,15 @@ export const Layout = forwardRefWithAs<Props>((props, ref) => {
     ...otherProps
   } = props;
 
-  const [stationing, setStationing] = useState<UseFixedData>({});
-
-  const containerRef = useRef(null) as React.Ref<HTMLElement>;
-
-  const layoutRef = (ref || containerRef) as React.RefObject<HTMLElement>;
+  const containerRef = useRef(null);
 
   const { top, left, width, height, maxWidth, maxHeight, position } = useFixed(
-    layoutRef,
+    containerRef,
     scrollContainerRef,
     anchorRef,
     verticalAlign,
     horizontalAlign,
-    smooth,
   );
-
-  useEffect(() => {
-    setStationing({
-      ...stationing,
-      top,
-      left,
-      width,
-      height,
-      maxHeight,
-      maxWidth,
-      position,
-    });
-  }, [top, left, width, height, maxWidth, maxHeight, position]);
 
   const Tag = as as string;
 
@@ -85,18 +67,19 @@ export const Layout = forwardRefWithAs<Props>((props, ref) => {
     <>
       <Tag
         tabIndex={tabIndex}
-        ref={layoutRef}
+        ref={useForkRef([ref, containerRef])}
         style={
           fixed
             ? {
                 ...style,
                 flex,
-                top: stationing.top,
-                left: stationing.left,
-                width: stationing.width,
-                maxHeight: stationing.maxHeight,
-                maxWidth: stationing.maxWidth,
-                position: stationing.position,
+                top,
+                left,
+                maxHeight,
+                maxWidth,
+                position,
+                minWidth: width,
+                minHeight: height,
               }
             : {
                 ...style,
@@ -105,7 +88,6 @@ export const Layout = forwardRefWithAs<Props>((props, ref) => {
         }
         className={cnLayout(
           {
-            // fixed: isFixed,
             direction,
           },
           [className],
@@ -114,10 +96,18 @@ export const Layout = forwardRefWithAs<Props>((props, ref) => {
       >
         {children}
       </Tag>
-      {stationing.position === 'fixed' && fixed && (
+      {position === 'fixed' && fixed && (
         <div
-          className={cnLayout('Mock')}
-          style={{ minWidth: stationing.width, minHeight: stationing.height, flex }}
+          className={cnLayout('Fake')}
+          style={{
+            minWidth: width,
+            minHeight: height,
+            flex,
+            background:
+              containerRef && containerRef.current
+                ? window.getComputedStyle(containerRef.current).getPropertyValue('background')
+                : 'none',
+          }}
         />
       )}
     </>

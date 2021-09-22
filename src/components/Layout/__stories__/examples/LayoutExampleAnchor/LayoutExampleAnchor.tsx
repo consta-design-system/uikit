@@ -21,7 +21,6 @@ export const LayoutExampleAnchor = () => {
         <Layout
           ref={fixedRef}
           fixed
-          smooth
           scrollContainerRef={scrollContainerRef}
           verticalAlign="top"
           className={cnLayoutExampleAnchor('FixedBlock')}
@@ -33,7 +32,6 @@ export const LayoutExampleAnchor = () => {
         </Layout>
         <Layout
           fixed
-          smooth
           scrollContainerRef={scrollContainerRef}
           verticalAlign="bottom"
           anchorRef={fixedRef}

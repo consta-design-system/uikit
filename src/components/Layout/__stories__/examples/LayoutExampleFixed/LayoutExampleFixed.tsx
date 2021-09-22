@@ -16,7 +16,6 @@ export const LayoutExampleFixed = () => {
           verticalAlign="top"
           horizontalAlign="right"
           fixed
-          smooth
           className={cnLayoutExampleFixed('Header')}
         >
           <Text>Заголовок</Text>
@@ -43,7 +42,6 @@ export const LayoutExampleFixed = () => {
           verticalAlign="bottom"
           horizontalAlign="right"
           fixed
-          smooth
           className={cnLayoutExampleFixed('Header')}
         >
           <Text>Заголовок</Text>

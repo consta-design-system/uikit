@@ -14,7 +14,6 @@ export const LayoutExampleRowFixed = () => {
       <Layout direction="row" className={cnLayoutExampleRowFixed()}>
         <Layout
           fixed
-          smooth
           verticalAlign="top"
           horizontalAlign="left"
           flex={1}
@@ -27,7 +26,6 @@ export const LayoutExampleRowFixed = () => {
         </Layout>
         <Layout
           fixed
-          smooth
           verticalAlign="top"
           horizontalAlign="right"
           flex={1}

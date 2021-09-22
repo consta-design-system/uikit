@@ -13,11 +13,7 @@
     }
   }
 
-  &-Mock {
+  &-Fake {
     transition: flex 0.3s, width 0.3s, height 0.3s;
-  }
-
-  &_fixed {
-    position: fixed;
   }
 }
