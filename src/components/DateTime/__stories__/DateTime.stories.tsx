@@ -16,6 +16,7 @@ import {
   DateTimeTime,
   DateTimeTypeDate,
   DateTimeTypeMonth,
+  DateTimeTypeTime,
   DateTimeTypeYear,
   DateTimeYear,
   DateTimeYearSlider,
@@ -247,6 +248,21 @@ export const DateTimeTypeDateStory = createStory(
   },
   {
     name: 'DateTimeTypeDate',
+  },
+);
+
+export const DateTimeTypeTimeStory = createStory(
+  () => {
+    const [value, setValue] = useState<Date | undefined>(undefined);
+
+    return (
+      <>
+        <DateTimeTypeTime value={value} onChange={({ value }) => setValue(value)} />
+      </>
+    );
+  },
+  {
+    name: 'DateTimeTypeTime',
   },
 );
 

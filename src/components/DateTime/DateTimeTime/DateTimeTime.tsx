@@ -1,11 +1,11 @@
 import './DateTimeTime.css';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { cn } from '../../../utils/bem';
 import { DateTimeTimeColumn } from '../DateTimeTimeColumn/DateTimeTimeColumn';
 
-import { DateTimeTimePropLocaleDefault, DateTimeTimeProps, useTimeItems } from './helpers';
+import { dateTimeTimePropLocaleDefault, DateTimeTimeProps, useTimeItems } from './helpers';
 
 export const cnDateTimeTime = cn('DateTimeTime');
 
@@ -19,9 +19,15 @@ export const DateTimeTime: React.FC<DateTimeTimeProps> = (props) => {
     multiplicityHours,
     multiplicityMinutes,
     multiplicitySeconds,
-    locale = DateTimeTimePropLocaleDefault,
+    locale: localeProp,
     ...otherProps
   } = props;
+
+  const locale = useMemo(() => ({ ...dateTimeTimePropLocaleDefault, ...localeProp }), [
+    localeProp?.hours,
+    localeProp?.minutes,
+    localeProp?.seconds,
+  ]);
 
   const [hours, minutes, seconds] = useTimeItems(
     value,

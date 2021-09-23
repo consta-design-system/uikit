@@ -21,6 +21,14 @@ export type DateTimePropOnChangeRange = (props: {
   e: React.MouseEvent<HTMLDivElement>;
 }) => void;
 
+export type DateTimePropLocale = Locale & {
+  words?: {
+    hours?: string;
+    minutes?: string;
+    seconds?: string;
+  };
+};
+
 export type DateTimeProps = PropsWithHTMLAttributesAndRef<
   {
     currentVisibleDate?: Date;
@@ -32,9 +40,12 @@ export type DateTimeProps = PropsWithHTMLAttributesAndRef<
     maxDate?: Date;
     events?: Date[];
     view?: DateTimePropView;
-    locale?: Locale;
+    locale?: DateTimePropLocale;
     children?: never;
     onChangeCurrentVisibleDate?: (date: Date) => void;
+    multiplicitySeconds?: number;
+    multiplicityMinutes?: number;
+    multiplicityHours?: number;
   },
   HTMLDivElement
 >;
