@@ -29,6 +29,7 @@
   border-radius: calc(var(--date-time-item-height) / 2);
   font-size: var(--size-text-s);
   line-height: var(--date-time-item-height);
+  text-transform: capitalize;
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 
   &:hover {

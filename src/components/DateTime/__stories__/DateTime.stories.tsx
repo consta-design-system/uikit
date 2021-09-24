@@ -14,9 +14,10 @@ import {
   DateTime10YearSlider,
   DateTime100YearSlider,
   DateTimeTime,
-  DateTimeTypeYearViewBook,
-  DateTimeTypeYearViewClassic,
-  DateTimeTypeYearViewSlider,
+  DateTimeTypeDate,
+  DateTimeTypeMonth,
+  DateTimeTypeTime,
+  DateTimeTypeYear,
   DateTimeYear,
   DateTimeYearSlider,
 } from '../DateTime';
@@ -193,57 +194,75 @@ export const DateTime100YearSliderStory = createStory(
   },
 );
 
-export const DateTimeTypeYearViewClassicStory = createStory(
+export const DateTimeTypeYearStory = createStory(
   () => {
     const [value, setValue] = useState<[Date?, Date?] | undefined>(undefined);
 
     return (
-      <DateTimeTypeYearViewClassic
-        value={value}
-        onChangeRange={({ value }) => setValue(value)}
-        minDate={new Date(2021, 0)}
-        maxDate={new Date(2027, 0)}
-      />
-    );
-  },
-  {
-    name: 'DateTimeTypeYearViewClassic',
-  },
-);
-
-export const DateTimeTypeYearViewBookStory = createStory(
-  () => {
-    const [value, setValue] = useState<[Date?, Date?] | undefined>(undefined);
-
-    return (
-      <DateTimeTypeYearViewBook
-        value={value}
-        onChangeRange={({ value }) => setValue(value)}
-        minDate={new Date(2021, 0)}
-        maxDate={new Date(2044, 0)}
-      />
-    );
-  },
-  {
-    name: 'DateTimeTypeYearViewBook',
-  },
-);
-
-export const DateTimeTypeYearViewSliderStory = createStory(
-  () => {
-    const [value, setValue] = useState<[Date?, Date?] | undefined>(undefined);
-
-    return (
-      <DateTimeTypeYearViewSlider
+      <DateTimeTypeYear
         value={value}
         onChangeRange={({ value }) => setValue(value)}
         minDate={new Date(2003, 0)}
         maxDate={new Date(2305, 0)}
+        view={select('view', dateTimePropView, dateTimePropViewDefault)}
       />
     );
   },
   {
-    name: 'DateTimeTypeYearViewSlider',
+    name: 'DateTimeTypeYear',
+  },
+);
+
+export const DateTimeTypeMonthStory = createStory(
+  () => {
+    const [value, setValue] = useState<[Date?, Date?] | undefined>(undefined);
+
+    return (
+      <DateTimeTypeMonth
+        value={value}
+        onChangeRange={({ value }) => setValue(value)}
+        minDate={new Date(2003, 0)}
+        maxDate={new Date(2305, 0)}
+        view={select('view', dateTimePropView, dateTimePropViewDefault)}
+      />
+    );
+  },
+  {
+    name: 'DateTimeTypeMonth',
+  },
+);
+
+export const DateTimeTypeDateStory = createStory(
+  () => {
+    const [value, setValue] = useState<[Date?, Date?] | undefined>(undefined);
+
+    return (
+      <DateTimeTypeDate
+        value={value}
+        onChangeRange={({ value }) => setValue(value)}
+        minDate={new Date(2003, 0)}
+        maxDate={new Date(2305, 0)}
+        view={select('view', dateTimePropView, dateTimePropViewDefault)}
+      />
+    );
+  },
+  {
+    name: 'DateTimeTypeDate',
+  },
+);
+
+export const DateTimeTypeTimeStory = createStory(
+  () => {
+    const [value, setValue] = useState<Date | undefined>(undefined);
+
+    return (
+      <>
+        <DateTimeTypeTime value={value} onChange={({ value }) => setValue(value)} />
+      </>
+    );
+  },
+  {
+    name: 'DateTimeTypeTime',
   },
 );
 

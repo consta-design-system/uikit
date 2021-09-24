@@ -1,7 +1,7 @@
 import { DateRange } from '../../../utils/types/Date';
 import { PropsWithHTMLAttributesAndRef } from '../../../utils/types/PropsWithHTMLAttributes';
 
-export const dateTimePropView = ['oneMonth', 'twoMonths', 'slider'] as const;
+export const dateTimePropView = ['classic', 'book', 'slider'] as const;
 export type DateTimePropView = typeof dateTimePropView[number];
 export const dateTimePropViewDefault: DateTimePropView = dateTimePropView[0];
 
@@ -21,6 +21,14 @@ export type DateTimePropOnChangeRange = (props: {
   e: React.MouseEvent<HTMLDivElement>;
 }) => void;
 
+export type DateTimePropLocale = Locale & {
+  words?: {
+    hours?: string;
+    minutes?: string;
+    seconds?: string;
+  };
+};
+
 export type DateTimeProps = PropsWithHTMLAttributesAndRef<
   {
     currentVisibleDate?: Date;
@@ -32,9 +40,12 @@ export type DateTimeProps = PropsWithHTMLAttributesAndRef<
     maxDate?: Date;
     events?: Date[];
     view?: DateTimePropView;
-    locale?: Locale;
+    locale?: DateTimePropLocale;
     children?: never;
     onChangeCurrentVisibleDate?: (date: Date) => void;
+    multiplicitySeconds?: number;
+    multiplicityMinutes?: number;
+    multiplicityHours?: number;
   },
   HTMLDivElement
 >;
@@ -43,6 +54,10 @@ export type DateTimeComponent = (props: DateTimeProps) => React.ReactElement | n
 
 export type DateTimeViewComponent = (
   props: Omit<DateTimeProps, 'view'>,
+) => React.ReactElement | null;
+
+export type DateTimeTypeComponent = (
+  props: Omit<DateTimeProps, 'type'>,
 ) => React.ReactElement | null;
 
 export type HandleSelectDate = (props: {

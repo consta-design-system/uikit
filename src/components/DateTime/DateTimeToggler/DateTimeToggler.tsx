@@ -12,6 +12,7 @@ export type DateTimeTogglerProps = PropsWithJsxAttributes<
   {
     prevOnClick?: React.EventHandler<React.MouseEvent<HTMLDivElement>>;
     nextOnClick?: React.EventHandler<React.MouseEvent<HTMLDivElement>>;
+    onLabelClick?: React.EventHandler<React.MouseEvent<HTMLDivElement>>;
     label: string | number;
     children?: never;
   },
@@ -21,7 +22,7 @@ export type DateTimeTogglerProps = PropsWithJsxAttributes<
 export const cnDateTimeToggler = cn('DateTimeToggler');
 
 export const DateTimeToggler: React.FC<DateTimeTogglerProps> = (props) => {
-  const { label, className, prevOnClick, nextOnClick, ...otherProps } = props;
+  const { label, className, prevOnClick, nextOnClick, onLabelClick, ...otherProps } = props;
 
   return (
     <div
@@ -41,7 +42,13 @@ export const DateTimeToggler: React.FC<DateTimeTogglerProps> = (props) => {
           iconSize="s"
         />
       )}
-      <DateTimeLabel className={cnDateTimeToggler('Label')} label={label} align="center" />
+      <DateTimeLabel
+        onClick={onLabelClick}
+        cursor={onLabelClick && 'pointer'}
+        className={cnDateTimeToggler('Label')}
+        label={label}
+        align="center"
+      />
       {nextOnClick && (
         <Button
           className={cnDateTimeToggler('Button', { direction: 'next' })}

@@ -18,8 +18,8 @@ import {
 export const cnDateTime = cn('DateTime');
 
 const viewMap: Record<DateTimePropView, DateTimeViewComponent> = {
-  oneMonth: DateTimeViewOneMonth,
-  twoMonths: DateTimeViewTwoMonths,
+  classic: DateTimeViewOneMonth,
+  book: DateTimeViewTwoMonths,
   slider: DateTimeViewSlider,
 };
 
@@ -46,6 +46,7 @@ export * from './DateTimeTime/DateTimeTime';
 export * from './DateTimeYearSlider/DateTimeYearSlider';
 export * from './DateTime10YearSlider/DateTime10YearSlider';
 export * from './DateTime100YearSlider/DateTime100YearSlider';
-export * from './DateTimeTypeYearViewClassic/DateTimeTypeYearViewClassic';
-export * from './DateTimeTypeYearViewBook/DateTimeTypeYearViewBook';
-export * from './DateTimeTypeYearViewSlider/DateTimeTypeYearViewSlider';
+export * from './DateTimeTypeYear/DateTimeTypeYear';
+export * from './DateTimeTypeMonth/DateTimeTypeMonth';
+export * from './DateTimeTypeDate/DateTimeTypeDate';
+export * from './DateTimeTypeTime/DateTimeTypeTime';

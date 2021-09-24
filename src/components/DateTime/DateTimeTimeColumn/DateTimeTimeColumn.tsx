@@ -1,6 +1,6 @@
 import './DateTimeTimeColumn.css';
 
-import React, { useRef } from 'react';
+import React, { memo, useRef } from 'react';
 
 import { cn } from '../../../utils/bem';
 import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
@@ -12,7 +12,7 @@ import { useScrollToElement } from './useScrollToElement/useScrollToElement';
 
 type DateTimeTimeColumnPropItem = {
   label: string;
-  onClick?: (e: React.MouseEvent) => void;
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
   disabled?: boolean;
   selected?: boolean;
 };
@@ -28,7 +28,7 @@ type DateTimeTimeColumnProps = PropsWithJsxAttributes<
 
 export const cnDateTimeTimeColumn = cn('DateTimeTimeColumn');
 
-export const DateTimeTimeColumn: React.FC<DateTimeTimeColumnProps> = (props) => {
+export const DateTimeTimeColumn: React.FC<DateTimeTimeColumnProps> = memo((props) => {
   const { label, items, className, ...otherProps } = props;
 
   const scrollWrapperRef = useRef<HTMLDivElement>(null);
@@ -56,4 +56,4 @@ export const DateTimeTimeColumn: React.FC<DateTimeTimeColumnProps> = (props) => 
       </div>
     </div>
   );
-};
+});
