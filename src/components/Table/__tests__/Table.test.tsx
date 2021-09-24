@@ -50,6 +50,10 @@ const defaultProps: Props<Row> = {
   rows,
 };
 
+function getRows() {
+  return screen.getAllByRole('presentation');
+}
+
 const renderComponent = (props: Props<Row> = defaultProps) => {
   return render(<Table {...props} />);
 };
@@ -91,6 +95,25 @@ describe('Компонент Table', () => {
         renderComponentWithRefAndAddAttr();
         jest.advanceTimersByTime(1000);
         expect(screen.queryByTestId(refTestID)).toBeInTheDocument();
+      });
+    });
+
+    describe('проверка обработчика клика по строке onRowClick', () => {
+      it('onRowClick возвращает id текущей строки и имеет event', () => {
+        const onRowClick = jest.fn(({ id, e }: { id: string; e: React.MouseEvent }) => [id, e]);
+        renderComponent({ ...defaultProps, onRowClick });
+        const nodeRows = getRows();
+        nodeRows.forEach((row) => {
+          fireEvent.click(row);
+        });
+        expect(onRowClick).toHaveBeenCalled();
+        expect(onRowClick).toHaveBeenCalledTimes(rows.length);
+        defaultProps.rows.forEach((row, i) => {
+          expect(onRowClick.mock.calls[i][0]).toHaveProperty('id');
+          expect(onRowClick.mock.calls[i][0]).toHaveProperty('e');
+          expect(onRowClick.mock.calls[i][0].id).toEqual(row.id);
+          expect(onRowClick.mock.results[i].value).toHaveLength(2);
+        });
       });
     });
   });
