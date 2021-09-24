@@ -1,0 +1,115 @@
+import { Meta, Preview, Story } from '@storybook/addon-docs/dist/blocks';
+
+import { Slider } from '../Slider.tsx';
+import { TextField } from '../../TextField/TextField';
+import { IconSettings } from '../../../icons/IconSettings/IconSettings';
+
+# Slider
+
+Ползунки позволяют пользователям выбирать значения из выбранного диапазона.
+
+- [Ползунок](#Ползунок)
+  - [Варианты](#варианты)
+    - [С видимыми шагами](#разделенный)
+    - [Без выделенных шагов](#целый)
+    - [Двойной ползунок](#двойной)
+  - [Шаги](#шаги)
+  - [Минимальное и максимальное значение ползунка](#минимальное-и-максимальное-значение)
+  - [Префикс](#префикс)
+  - [Суффикс](#суффикс)
+- [Неактивный ползунок](#неактивный-ползунок)
+- [Список свойств](#свойства)
+
+## Ползунок
+
+### Варианты
+
+Имеется несколько вариантов использования:
+
+### С видимыми шагами
+
+При наличии атрибута division линия ползунка делится на step, который передаётся в компонент
+
+<Slider min={0} max={100} step={25} withTooltip division />
+
+При отсутствии атрибута division линия ползунка будет неделимой
+
+<Slider min={0} max={100} step={25} withTooltip />
+
+Так же при наличии атрибута value со значением массива с двумя значениями ползунок будет иметь 2 точки
+
+<Slider min={0} max={100} step={25} value={[0, 50]} withTooltip />
+
+### Шаги
+
+Шаги движения ползунка передаются в атрибут steps. В него можно передать число
+
+<Slider min={0} max={100} step={10} withTooltip division />
+
+и можно передать массив с числами (каждый элемент массива является длинной конкретного промежутка в диапазон от min до max)
+
+<Slider min={0} max={100} step={[8, 23, 30, 36]} withTooltip division />
+
+если в step не передано значение, то step = 1
+
+<Slider min={0} max={100} withTooltip division />
+
+### Минимальное и максимальное значение ползунка
+
+Минимальное и максимальное значение устанавливается атрибутами min и max
+Если минимальное значение больше, чем максимальное, что устанавливаются стандартные значение - min = 0, max=100
+
+### Префикс и суффикс
+
+Префикс отвечает за заполнение слота перед ползунком, в который можно передать компонент для рендеринга (в случае с нашим ползунком мы передаем инпут или иконку).
+Суффикс отвечает за заполнение слота после ползунка (в который так же можно передать инпут или иконку)<Slider
+min={0}
+max={100}
+prefix={({ value }) => (<TextField value={(Array.isArray(value) ? value[0] : value).toString()} />)}
+suffix={
+<IconSettings />}
+withTooltip
+/>
+<Slider
+  min={0}
+  max={100}
+  prefix={<IconSettings />}
+suffix={({ value }) => (<TextField value={(Array.isArray(value) ? value[0] : value).toString()} />)}
+withTooltip
+/>
+
+Для уточнения по стилизации и размерам компонента TextField можно обратиться к [документации](??path=/docs/components-textfield--playground)
+
+### Неактивный ползунок
+
+За активность ползунка отвечает атрибут disabled. Если атрибут присутствует - ползунок блокируется, и его использование невозможно.
+
+<Slider min={0} max={100} value={50} step={25} withTooltip disabled />
+<Slider min={0} max={100} value={25} step={25} withTooltip division disabled />
+<Slider min={0} max={100} step={10} value={[20, 70]} withTooltip division disabled /><Slider
+min={0}
+max={100}
+prefix={({ value }) => (<TextField value={(Array.isArray(value) ? value[0] : value).toString()} />)}
+value={50}
+suffix={
+<IconSettings />}
+disabled
+withTooltip
+/>
+
+## Список свойств
+
+| Свойство                                               | Тип или варианты значения                                                               | По умолчанию | Описание                                                    |
+| ------------------------------------------------------ | --------------------------------------------------------------------------------------- | ------------ | ----------------------------------------------------------- |
+| [`className`](#класс)                                  | `string`                                                                                | -            | Добавление класса для кастомизации                          |
+| [`step`](#внешний-вид)                                 | `number, number[]`                                                                      | `1`          | Шаг/шаги движения ползунка                                  |
+| [`disabled`](#disabled)                                | `boolean`                                                                               | `false`      | Блокировка ползунка                                         |
+| [`min`](#Минимальное-и-максимальное-значение-ползунка) | `number`                                                                                | `0`          | Минимально значение, начало ползунка                        |
+| [`max`](#Минимальное-и-максимальное-значение-ползунка) | `number`                                                                                | `100`        | Максимальное значение, конец ползунка                       |
+| [`division`](#деление)                                 | `boolean`                                                                               | `false`      | Разделение шкалы ползунка на указанный в свойстве step шаги |
+| `withTooltip`                                          | `boolean`                                                                               | `false`      | видимость тултипа                                           |
+| [`value`](#значение)                                   | `number, number[]`                                                                      | `0`          | Начальное значение ползунка/ползунков                       |
+| [`onChange`](#размер-иконки)                           | `(event : Event React.MouseEvent, value: number, index: number) => void`                | -            | Колбэк, срабатывающий при клике на ползунок                 |
+| [`onAfterChange`](#размер-иконки)                      | `(event : Event React.MouseEvent, value: number, index: number) => void`                | -            | Колбэк, срабатывающий при отпускании мыши с ползунка        |
+| `prefix`                                               | `React.ReactNode (({ value }: { value: number number[] }) => React.ReactElement) false` | `false`      | React-компонент, переданный в слот перед ползунком          |
+| `suffix`                                               | `React.ReactNode (({ value }: { value: number number[] }) => React.ReactElement) false` | `false`      | React-компонент, переданный в слот после ползунка           |
