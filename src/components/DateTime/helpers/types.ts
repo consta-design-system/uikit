@@ -1,7 +1,7 @@
 import { DateRange } from '../../../utils/types/Date';
 import { PropsWithHTMLAttributesAndRef } from '../../../utils/types/PropsWithHTMLAttributes';
 
-export const dateTimePropView = ['oneMonth', 'twoMonths', 'slider'] as const;
+export const dateTimePropView = ['classic', 'book', 'slider'] as const;
 export type DateTimePropView = typeof dateTimePropView[number];
 export const dateTimePropViewDefault: DateTimePropView = dateTimePropView[0];
 
@@ -21,22 +21,34 @@ export type DateTimePropOnChangeRange = (props: {
   e: React.MouseEvent<HTMLDivElement>;
 }) => void;
 
-export type DateTimePropsInner = {
-  currentVisibleDate?: Date;
-  type?: DateTimePropType;
-  value?: DateTimePropValue;
-  onChange?: DateTimePropOnChange;
-  onChangeRange?: DateTimePropOnChangeRange;
-  minDate?: Date;
-  maxDate?: Date;
-  events?: Date[];
-  view?: DateTimePropView;
-  locale?: Locale;
-  children?: never;
-  onChangeCurrentVisibleDate?: (date: Date) => void;
+export type DateTimePropLocale = Locale & {
+  words?: {
+    hours?: string;
+    minutes?: string;
+    seconds?: string;
+  };
 };
 
-export type DateTimeProps = PropsWithHTMLAttributesAndRef<DateTimePropsInner, HTMLDivElement>;
+export type DateTimeProps = PropsWithHTMLAttributesAndRef<
+  {
+    currentVisibleDate?: Date;
+    type?: DateTimePropType;
+    value?: DateTimePropValue;
+    onChange?: DateTimePropOnChange;
+    onChangeRange?: DateTimePropOnChangeRange;
+    minDate?: Date;
+    maxDate?: Date;
+    events?: Date[];
+    view?: DateTimePropView;
+    locale?: DateTimePropLocale;
+    children?: never;
+    onChangeCurrentVisibleDate?: (date: Date) => void;
+    multiplicitySeconds?: number;
+    multiplicityMinutes?: number;
+    multiplicityHours?: number;
+  },
+  HTMLDivElement
+>;
 
 export type DateTimeComponent = (props: DateTimeProps) => React.ReactElement | null;
 
@@ -44,12 +56,8 @@ export type DateTimeViewComponent = (
   props: Omit<DateTimeProps, 'view'>,
 ) => React.ReactElement | null;
 
-export type DateTimeTypeViewComponent = (
-  props: Omit<DateTimeProps, 'view' | 'type'>,
-) => React.ReactElement | null;
-
-export type DateTimeTypeViewInner = (
-  props: Omit<DateTimePropsInner, 'view' | 'type'>,
+export type DateTimeTypeComponent = (
+  props: Omit<DateTimeProps, 'type'>,
 ) => React.ReactElement | null;
 
 export type HandleSelectDate = (props: {
