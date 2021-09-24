@@ -12,7 +12,5 @@
   --date-time-grid-columns: 1;
   --date-time-grid-row-gap: 0;
   display: flex;
-
-  /* это временно, чтоб видеть результат скрола */
-  max-height: 400px;
+  max-height: calc(var(--date-time-cell-height) * 7);
 }
