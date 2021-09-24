@@ -14,15 +14,10 @@ import {
   DateTime10YearSlider,
   DateTime100YearSlider,
   DateTimeTime,
-  DateTimeTypeDateViewBook,
-  DateTimeTypeDateViewClassic,
-  DateTimeTypeDateViewSlider,
-  DateTimeTypeMonthViewBook,
-  DateTimeTypeMonthViewClassic,
-  DateTimeTypeMonthViewSlider,
-  DateTimeTypeYearViewBook,
-  DateTimeTypeYearViewClassic,
-  DateTimeTypeYearViewSlider,
+  DateTimeTypeDate,
+  DateTimeTypeMonth,
+  DateTimeTypeTime,
+  DateTimeTypeYear,
   DateTimeYear,
   DateTimeYearSlider,
 } from '../DateTime';
@@ -199,165 +194,75 @@ export const DateTime100YearSliderStory = createStory(
   },
 );
 
-export const DateTimeTypeYearViewClassicStory = createStory(
+export const DateTimeTypeYearStory = createStory(
   () => {
     const [value, setValue] = useState<[Date?, Date?] | undefined>(undefined);
 
     return (
-      <DateTimeTypeYearViewClassic
-        value={value}
-        onChangeRange={({ value }) => setValue(value)}
-        minDate={new Date(2021, 0)}
-        maxDate={new Date(2027, 0)}
-      />
-    );
-  },
-  {
-    name: 'DateTimeTypeYearViewClassic',
-  },
-);
-
-export const DateTimeTypeYearViewBookStory = createStory(
-  () => {
-    const [value, setValue] = useState<[Date?, Date?] | undefined>(undefined);
-
-    return (
-      <DateTimeTypeYearViewBook
-        value={value}
-        onChangeRange={({ value }) => setValue(value)}
-        minDate={new Date(2021, 0)}
-        maxDate={new Date(2044, 0)}
-      />
-    );
-  },
-  {
-    name: 'DateTimeTypeYearViewBook',
-  },
-);
-
-export const DateTimeTypeYearViewSliderStory = createStory(
-  () => {
-    const [value, setValue] = useState<[Date?, Date?] | undefined>(undefined);
-
-    return (
-      <DateTimeTypeYearViewSlider
+      <DateTimeTypeYear
         value={value}
         onChangeRange={({ value }) => setValue(value)}
         minDate={new Date(2003, 0)}
         maxDate={new Date(2305, 0)}
+        view={select('view', dateTimePropView, dateTimePropViewDefault)}
       />
     );
   },
   {
-    name: 'DateTimeTypeYearViewSlider',
+    name: 'DateTimeTypeYear',
   },
 );
 
-export const DateTimeTypeMonthViewClassicStory = createStory(
+export const DateTimeTypeMonthStory = createStory(
   () => {
     const [value, setValue] = useState<[Date?, Date?] | undefined>(undefined);
 
     return (
-      <DateTimeTypeMonthViewClassic
+      <DateTimeTypeMonth
         value={value}
         onChangeRange={({ value }) => setValue(value)}
         minDate={new Date(2003, 0)}
         maxDate={new Date(2305, 0)}
+        view={select('view', dateTimePropView, dateTimePropViewDefault)}
       />
     );
   },
   {
-    name: 'DateTimeTypeMonthViewClassic',
+    name: 'DateTimeTypeMonth',
   },
 );
 
-export const DateTimeTypeMonthViewBookStory = createStory(
+export const DateTimeTypeDateStory = createStory(
   () => {
     const [value, setValue] = useState<[Date?, Date?] | undefined>(undefined);
 
     return (
-      <DateTimeTypeMonthViewBook
+      <DateTimeTypeDate
         value={value}
         onChangeRange={({ value }) => setValue(value)}
         minDate={new Date(2003, 0)}
         maxDate={new Date(2305, 0)}
+        view={select('view', dateTimePropView, dateTimePropViewDefault)}
       />
     );
   },
   {
-    name: 'DateTimeTypeMonthViewBook',
+    name: 'DateTimeTypeDate',
   },
 );
 
-export const DateTimeTypeMonthViewSliderStory = createStory(
+export const DateTimeTypeTimeStory = createStory(
   () => {
-    const [value, setValue] = useState<[Date?, Date?] | undefined>(undefined);
+    const [value, setValue] = useState<Date | undefined>(undefined);
 
     return (
-      <DateTimeTypeMonthViewSlider
-        value={value}
-        onChangeRange={({ value }) => setValue(value)}
-        minDate={new Date(2003, 0)}
-        maxDate={new Date(2305, 0)}
-      />
+      <>
+        <DateTimeTypeTime value={value} onChange={({ value }) => setValue(value)} />
+      </>
     );
   },
   {
-    name: 'DateTimeTypeMonthViewSlider',
-  },
-);
-
-export const DateTimeTypeDateViewClassicStory = createStory(
-  () => {
-    const [value, setValue] = useState<[Date?, Date?] | undefined>(undefined);
-
-    return (
-      <DateTimeTypeDateViewClassic
-        value={value}
-        onChangeRange={({ value }) => setValue(value)}
-        minDate={new Date(2003, 0)}
-        maxDate={new Date(2305, 0)}
-      />
-    );
-  },
-  {
-    name: 'DateTimeTypeDateViewClassic',
-  },
-);
-
-export const DateTimeTypeDateViewBookStory = createStory(
-  () => {
-    const [value, setValue] = useState<[Date?, Date?] | undefined>(undefined);
-
-    return (
-      <DateTimeTypeDateViewBook
-        value={value}
-        onChangeRange={({ value }) => setValue(value)}
-        minDate={new Date(2003, 0)}
-        maxDate={new Date(2305, 0)}
-      />
-    );
-  },
-  {
-    name: 'DateTimeTypeDateViewBook',
-  },
-);
-
-export const DateTimeTypeDateViewSliderStory = createStory(
-  () => {
-    const [value, setValue] = useState<[Date?, Date?] | undefined>(undefined);
-
-    return (
-      <DateTimeTypeDateViewSlider
-        value={value}
-        onChangeRange={({ value }) => setValue(value)}
-        minDate={new Date(2003, 0)}
-        maxDate={new Date(2305, 0)}
-      />
-    );
-  },
-  {
-    name: 'DateTimeTypeDateViewSlider',
+    name: 'DateTimeTypeTime',
   },
 );
 
