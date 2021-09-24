@@ -9,7 +9,7 @@ import { DateTime } from '../../../DateTime';
 export const DateTimeExampleView = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <DateTime view="oneMonth" />
+      <DateTime view="classic" />
     </StoryBookExample>
   );
 };
@@ -17,7 +17,7 @@ export const DateTimeExampleView = () => {
 export const DateTimeExampleViewTwo = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <DateTime view="twoMonths" />
+      <DateTime view="book" />
     </StoryBookExample>
   );
 };
