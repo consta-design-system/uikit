@@ -166,11 +166,9 @@ const doesSupportTouchActionNone = () => {
   return cachedSupportsTouchActionNone;
 };
 
-const getDividedValue = (step: number | number[] | undefined, length: number) => {
-  if (!step) return [length];
-
+const getDividedValue = (step: number | number[], length: number) => {
   const stepData = (typeof step === 'number'
-    ? Array.from({ length: length / step }, () => step)
+    ? Array.from({ length: length / (step || 1) }, () => step || 1)
     : step
   ).reduce(
     (acc, el) =>
@@ -232,7 +230,7 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
       : [valueDerived as number];
     valueDerivedRef.current = valueDerived;
 
-    const localStep = useRef(step || 0);
+    const localStep = useRef(step || 1);
     const pointValueOne = useRef<HTMLButtonElement | null>(null);
     const pointValueTwo = useRef<HTMLButtonElement | null>(null);
 
@@ -472,7 +470,7 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
     useEffect(() => {
       localStep.current = Array.isArray(step)
         ? getDividedValue(step, maxValue - minValue)
-        : step || 0;
+        : step || 1;
       setDividedValue(getDividedValue(step, maxValue - minValue));
     }, [step, maxValue, minValue]);
 
