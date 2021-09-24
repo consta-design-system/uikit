@@ -84,6 +84,10 @@ export const getDecadeTitle = (date: Date): string => {
   return `${getYearTitle(date)} - ${getYearTitle(addYears(date, 9))}`;
 };
 
+export const getLabelHours = (date: Date) => format(date, 'HH');
+export const getLabelMinutes = (date: Date) => format(date, 'mm');
+export const getLabelSeconds = (date: Date) => format(date, 'ss');
+
 export const getDaysOfWeek = (locale: Locale): string[] => {
   const now = new Date();
 
@@ -92,6 +96,24 @@ export const getDaysOfWeek = (locale: Locale): string[] => {
     end: endOfWeek(now, { locale }),
   }).map((date) => format(date, 'EEEEEE', { locale }));
 };
+
+const getUnitLabelMap = [getLabelHours, getLabelMinutes, getLabelSeconds];
+
+export const getTimeTitle = (
+  value: Date | undefined,
+  multiplicityHours: number | undefined,
+  multiplicityMinutes: number | undefined,
+  multiplicitySeconds: number | undefined,
+): string =>
+  [multiplicityHours, multiplicityMinutes, multiplicitySeconds]
+    .map((item, i) => {
+      if (!value) {
+        return item ? '--:' : '';
+      }
+      return item ? `${getUnitLabelMap[i](value)}:` : '';
+    })
+    .join('')
+    .slice(0, -1);
 
 export * from './useCurrentVisibleDate';
 export * from './types';

@@ -1,0 +1,6 @@
+.DateTimeTypeTime {
+  &-Label {
+    display: block;
+    width: calc((var(--control-height-s) + (var(--space-3xs) * 2)) * 3);
+  }
+}

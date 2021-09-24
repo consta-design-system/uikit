@@ -3,39 +3,43 @@ import {
   addHours,
   addMinutes,
   addSeconds,
-  format,
   setHours,
   setMinutes,
   setSeconds,
   startOfToday,
 } from 'date-fns';
 
+import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
 import { range } from '../../../utils/array';
 import { isInMinMaxDade } from '../../../utils/date';
-import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
+import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
+import { getLabelHours, getLabelMinutes, getLabelSeconds, getTimeTitle } from '../helpers';
 
 type DateTimeTimePropLocale = {
-  hours: string;
-  minutes: string;
-  seconds: string;
+  hours?: string;
+  minutes?: string;
+  seconds?: string;
 };
 
-export const DateTimeTimePropLocaleDefault: DateTimeTimePropLocale = {
+export const dateTimeTimePropLocaleDefault = {
   hours: 'Часы',
   minutes: 'Мин.',
   seconds: 'Сек.',
-};
+} as const;
 
-type DateTimeTimePropOnChange = (props: { e: React.MouseEvent; value: Date }) => void;
+type DateTimeTimePropOnChange = (props: {
+  value: Date;
+  e: React.MouseEvent<HTMLDivElement>;
+}) => void;
 
 type ResultItem = {
   label: string;
-  onClick?: (e: React.MouseEvent) => void;
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
   disabled?: boolean;
   selected?: boolean;
 };
 
-export type DateTimeTimeProps = PropsWithJsxAttributes<
+export type DateTimeTimeProps = PropsWithHTMLAttributes<
   {
     children?: never;
     value?: Date;
@@ -47,18 +51,14 @@ export type DateTimeTimeProps = PropsWithJsxAttributes<
     multiplicityHours?: number;
     locale?: DateTimeTimePropLocale;
   },
-  'div'
+  HTMLDivElement
 >;
-
-const getLabelHours = (date: Date) => format(date, 'HH');
-const getLabelMinutes = (date: Date) => format(date, 'mm');
-const getLabelSeconds = (date: Date) => format(date, 'ss');
 
 const startOfDay = (date: Date) => setHours(date, 0);
 const startOfHour = (date: Date) => setMinutes(date, 0);
 const startOfMinute = (date: Date) => setSeconds(date, 0);
 
-const useItemData = (
+const getItemData = (
   length: number,
   multiplicity = 1,
   startOfUnit: typeof startOfDay,
@@ -67,12 +67,9 @@ const useItemData = (
   value?: Date,
   minDate?: Date,
   maxDate?: Date,
-  onChange?: DateTimeTimePropOnChange,
+  onChangeRef?: React.MutableRefObject<DateTimeTimePropOnChange | undefined>,
 ): ResultItem[] => {
-  const numbers = useMemo(() => range(multiplicity ? Math.floor(length / multiplicity) : 0), [
-    length,
-    multiplicity,
-  ]);
+  const numbers = range(multiplicity ? Math.floor(length / multiplicity) : 0);
 
   if (numbers.length === 0) {
     return [];
@@ -85,10 +82,8 @@ const useItemData = (
     const label = getItemLabel(date);
     const selected = value ? getItemLabel(date) === getItemLabel(value) : false;
     const disabled = !isInMinMaxDade(date, minDate, maxDate);
-    const onClick =
-      onChange && !disabled && !selected
-        ? (e: React.MouseEvent) => onChange({ e, value: date })
-        : undefined;
+    const onClick = (e: React.MouseEvent<HTMLDivElement>) =>
+      !disabled && onChangeRef?.current?.({ e, value: date });
 
     return {
       label,
@@ -108,39 +103,53 @@ export const useTimeItems = (
   minDate?: Date,
   maxDate?: Date,
 ): ResultItem[][] => {
-  return [
-    useItemData(
-      24,
+  const onChangeRef = useMutableRef(onChange);
+
+  return useMemo(
+    () => [
+      getItemData(
+        24,
+        multiplicityHours,
+        startOfDay,
+        addHours,
+        getLabelHours,
+        value,
+        minDate,
+        maxDate,
+        onChangeRef,
+      ),
+      getItemData(
+        60,
+        multiplicityMinutes,
+        startOfHour,
+        addMinutes,
+        getLabelMinutes,
+        value,
+        minDate,
+        maxDate,
+        onChangeRef,
+      ),
+      getItemData(
+        60,
+        multiplicitySeconds,
+        startOfMinute,
+        addSeconds,
+        getLabelSeconds,
+        value,
+        minDate,
+        maxDate,
+        onChangeRef,
+      ),
+    ],
+    [
+      minDate || maxDate
+        ? value?.getTime()
+        : getTimeTitle(value, multiplicityHours, multiplicityMinutes, multiplicitySeconds),
+      minDate?.getTime(),
+      maxDate?.getTime(),
       multiplicityHours,
-      startOfDay,
-      addHours,
-      getLabelHours,
-      value,
-      minDate,
-      maxDate,
-      onChange,
-    ),
-    useItemData(
-      60,
       multiplicityMinutes,
-      startOfHour,
-      addMinutes,
-      getLabelMinutes,
-      value,
-      minDate,
-      maxDate,
-      onChange,
-    ),
-    useItemData(
-      60,
       multiplicitySeconds,
-      startOfMinute,
-      addSeconds,
-      getLabelSeconds,
-      value,
-      minDate,
-      maxDate,
-      onChange,
-    ),
-  ];
+    ],
+  );
 };
