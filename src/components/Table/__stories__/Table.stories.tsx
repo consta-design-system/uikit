@@ -367,38 +367,32 @@ export const WithMergedByCustomCallbackCells = createStory(
 
     return (
       <Table
-        {...getKnobs({
-          borderBetweenColumns: true,
-          borderBetweenRows: true,
-          columns: [
-            {
-              title: 'ID',
-              accessor: 'id',
-              align: 'left',
-            },
-            {
-              title: 'Инициатор операции',
-              accessor: 'owner',
-              mergeCells: true,
-            },
-            {
-              title: 'Операция подтверждена',
-              accessor: 'operationConfirmed',
-              mergeCells: true,
-              getComparisonValue: ({ owner, viewed }) => `${owner}-${viewed}`,
-              renderCell: ({ operationConfirmed: { viewed } }) => <Checkbox checked={viewed} />,
-            },
-          ],
-          rows: Object.keys(checkedRow).map((id, index) => {
-            const isAuto = ADMIN_INDEXES.includes(index);
-            return {
-              ...generateRowBase(
-                id,
-                `${isAuto ? 'admin' : 'user'}`,
-                isAuto ? true : checkedRow[id],
-              ),
-            };
-          }),
+        borderBetweenColumns
+        borderBetweenRows
+        columns={[
+          {
+            title: 'ID',
+            accessor: 'id',
+            align: 'left',
+          },
+          {
+            title: 'Инициатор операции',
+            accessor: 'owner',
+            mergeCells: true,
+          },
+          {
+            title: 'Операция подтверждена',
+            accessor: 'operationConfirmed',
+            mergeCells: true,
+            getComparisonValue: ({ owner, viewed }) => `${owner}-${viewed}`,
+            renderCell: ({ operationConfirmed: { viewed } }) => <Checkbox checked={viewed} />,
+          },
+        ]}
+        rows={Object.keys(checkedRow).map((id, index) => {
+          const isAuto = ADMIN_INDEXES.includes(index);
+          return {
+            ...generateRowBase(id, `${isAuto ? 'admin' : 'user'}`, isAuto ? true : checkedRow[id]),
+          };
         })}
       />
     );
