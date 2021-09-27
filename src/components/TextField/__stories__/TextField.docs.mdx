@@ -23,6 +23,9 @@ import {
   TextFieldExampleFormHybrid,
 } from './examples/TextFieldExampleForm/TextFieldExampleForm';
 
+import { TextFieldExampleLabel } from './examples/TextFieldExampleLabel/TextFieldExampleLabel';
+import { TextFieldExampleCaption } from './examples/TextFieldExampleCaption/TextFieldExampleCaption';
+
 # TextField
 
 Поле для ввода текста — из одной или нескольких строк. Используется в формах.
@@ -36,6 +39,8 @@ import {
 - [Внешний вид](#внешний-вид)
   - [Вид](#внешний-вид)
   - [Форма](#форма)
+  - [Лэйбл](#лэйбл)
+  - [Подпись](#подпись)
 - [Размеры](#размеры)
   - [Размер шрифта, высота, отступы](#размер-поля)
   - [Строки и колонки](#строки-и-колонки)
@@ -161,6 +166,33 @@ const App = () => {
 <Button form="brickRound" label="Подписаться" />
 ```
 
+### Лэйбл
+
+Вы можете добавить лэйбл для поля ввода, обазначив за что оно отвечает. За текст
+отвечает свойство `label`, за его расположение `labelAlign`.
+
+<TextFieldExampleLabel />
+
+```tsx
+<TextField placeholder="Top" label="Top" labelAlign="top" />
+<TextField placeholder="Left" label="Left" labelAlign="left" />
+```
+
+### Подпись
+
+Вы можете добавить подпись, которая буде нести дополнительную информацию
+о состоянии поля ввода. За это отвечает свойство `caption`, оно наследует
+статус поля и стилизуется в соответствии с этим.
+
+<TextFieldExampleCaption />
+
+```ts
+<TextField state="success" placeholder="success" caption="success" />
+<TextField state="alert" placeholder="error" caption="error" />
+<TextField state="warning" placeholder="warning" caption="warning" />
+<TextField placeholder="TextField" caption="default" />
+```
+
 ## Размеры
 
 ### Размер поля
@@ -236,6 +268,9 @@ const App = () => {
 | [`maxRows?`](#строки-и-колонки)            | `number`                                                                                                                                                             | -            | Максимум видимых строк, используется только в случае type=`'textarea'`, нельзя использовать совместно с **rows**           |
 | [`maxLength?`](#строки-и-колонки)          | `number`                                                                                                                                                             | -            | Максимальная ширина                                                                                                        |
 | [`view?`](#внешний-вид)                    | `'default', 'clear'`                                                                                                                                                 | `'default'`  | Вид поля                                                                                                                   |
+| [`label?`](#лэйбл)                         | `string`                                                                                                                                                             | -            | Лэйбл к полю ввода                                                                                                         |
+| [`labelAlign?`](#лэйбл)                    | `'top', 'left'`                                                                                                                                                      | `'top'`      | Положение лэйбла                                                                                                           |
+| [`caption?`](#подпись)                     | `string`                                                                                                                                                             | -            | Подпись к полю ввода                                                                                                       |
 | [`form?`](#форма)                          | `'default', 'brick', 'round', 'clearRound', 'roundClear', 'clearDefault', 'defaultClear', 'defaultBrick', 'brickDefault', 'brickClear', 'clearBrick', 'clearClear'`, | `'default'`  | Форма поля                                                                                                                 |
 | [`leftSide?`](#дополнительная-информация)  | `React.FC<IconProps>\string`                                                                                                                                         | -            | Иконка или текст слева, внутри поля                                                                                        |
 | [`rightSide?`](#дополнительная-информация) | `React.FC<IconProps>\string`                                                                                                                                         | -            | Иконка или текст справа, внутри поля                                                                                       |
