@@ -108,6 +108,7 @@ type ColumnBase<T extends TableRow> = ValueOf<
       order?: OrderType;
       sortFn?(a: T[K], b: T[K]): number;
       renderCell?: (row: T) => React.ReactNode;
+      getComparisonValue?: (cell: T[K]) => number | string;
     };
   }
 >;
@@ -171,6 +172,15 @@ export type SortingState<T extends TableRow> = {
   order: 'asc' | 'desc';
   sortFn?: (a: T[keyof T], b: T[keyof T]) => number;
 } | null;
+
+type GetTableCellProps = {
+  show: boolean;
+  rowSpan: number;
+  style: {
+    'left'?: number;
+    '--row-span'?: string;
+  };
+};
 
 const getColumnSortByField = <T extends TableRow>(column: TableColumn<T>): keyof T =>
   (column.sortable && column.sortByField) || column.accessor!;
@@ -562,39 +572,48 @@ const InternalTable = <T extends TableRow>(
     rowIdx: number,
     column: TableColumn<T>,
     columnIdx: number,
-  ) => {
-    let rowSpan = 1;
-    if (
-      (rowsData[rowIdx - 1] && rowsData[rowIdx - 1][column.accessor!] !== row[column.accessor!]) ||
-      rowIdx === 0 ||
-      !column.mergeCells
-    ) {
+  ): GetTableCellProps => {
+    const { mergeCells, accessor, position, getComparisonValue = (e) => e } = column;
+
+    const previousCell =
+      rowsData[rowIdx - 1] && getComparisonValue(rowsData[rowIdx - 1][accessor!]);
+    const currentCell = getComparisonValue(row[accessor!]);
+
+    const result: GetTableCellProps = {
+      rowSpan: 1,
+      show: false,
+      style: {
+        left: getStickyLeftOffset(columnIdx, position!.topHeaderGridIndex),
+      },
+    };
+
+    if (mergeCells && ((rowsData[rowIdx - 1] && previousCell !== currentCell) || rowIdx === 0)) {
       for (let i = rowIdx; i < rowsData.length; i++) {
-        if (rowsData[i + 1] && rowsData[i + 1][column.accessor!] === row[column.accessor!]) {
-          rowSpan++;
+        if (rowsData[i + 1]) {
+          const nextCell = getComparisonValue(rowsData[i + 1][accessor!]);
+
+          if (currentCell === nextCell) {
+            result.rowSpan++;
+          } else {
+            break;
+          }
         } else {
           break;
         }
       }
 
-      const style: {
-        'left': number | undefined;
-        '--row-span': string | null;
-      } = {
-        'left': getStickyLeftOffset(columnIdx, column.position!.topHeaderGridIndex),
-        '--row-span': column.mergeCells ? `span ${rowSpan}` : null,
-      };
+      if (result.rowSpan > 1) {
+        result.style['--row-span'] = `span ${result.rowSpan}`;
+      }
 
-      return {
-        show: true,
-        style,
-        rowSpan,
-      };
+      result.show = true;
     }
-    return {
-      show: false,
-      rowSpan,
-    };
+
+    if (!mergeCells) {
+      result.show = true;
+    }
+
+    return result;
   };
 
   return (

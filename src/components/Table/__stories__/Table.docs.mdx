@@ -289,7 +289,15 @@ import { TableFilterContainer } from '@consta/uikit/Table';
 У этого свойства три значения: `'center', 'top', 'bottom'`. По умолчанию содержимое ячеек
 выравнивается по верхнему краю.
 
-Отдельно настраивается выравниваются для заголовков — `verticalHeaderAlign`.
+Отдельно настраивается выравнивания для заголовков — `verticalHeaderAlign`.
+
+### Объединение ячеек
+
+Если вам нужно объединять ячейки с одинаковым содержимым, вы можете указать свойство `mergeCells: true` в объекте той колонки, в которой хотите объединять ячейки.
+Объединение происходит для тех ячеек, которые идут подряд и для их значений справедливо условие `firstValue === secondValue`.
+
+Если в ваших ячейках находятся **не** стандартные данные или вам нужно как-то иначе их сравнивать (например сравнить строки с разным регистром), вы можете использовать колбек `getComparisonValue`.
+Он принимает в себя значение текущей ячейки и должен возвращать строку или число по которым произойдет сравнение.
 
 ## Свойства
 
@@ -306,6 +314,8 @@ type Column = {
   sortByField?: string;
   sortFn?: (a: FieldValue, b: FieldValue) => number;
   renderCell?: (row: Row) => React.ReactNode;
+  mergeCell?: boolean;
+  getComparisonValue?: (cell: Row[Column.accessor]) => number | string; // cell - значение из ячейки
 };
 
 type Row = {
@@ -316,7 +326,7 @@ type Row = {
 type FilterComponentProps = {
   onConfirm: (value: any) => void;
   onCancel: () => void;
-  filterValue?: any
+  filterValue?: any;
 } & Record<string, unknown>;
 
 type Filter = {
@@ -324,18 +334,21 @@ type Filter = {
   name: string;
   field: string;
   filterer: (value: any, filterValue?: any) => boolean;
-} & ({ component?: never } | {
-  component: {
-    name: React.FC<FilterComponentProps>;
-    props?: Omit<FilterComponentProps, 'onConfirm' | 'filterValue'>;
-  }
-});
+} & (
+  | { component?: never }
+  | {
+      component: {
+        name: React.FC<FilterComponentProps>;
+        props?: Omit<FilterComponentProps, 'onConfirm' | 'filterValue'>;
+      };
+    }
+);
 
 type OnRowHover = ({ id, e }: { id: string | undefined; e: React.MouseEvent }) => void;
 
 type onRowClick = ({ id, e }: { id: string; e: React.MouseEvent }) => void;
 
-type LazyLoad = { maxVisibleRows?: number; scrollableEl?: HTMLDivElement / Window; }
+type LazyLoad = { maxVisibleRows?: number; scrollableEl?: HTMLDivElement | Window };
 // maxVisibleRows - количество строк
 // scrollableEl - элемент с onScroll listener
 ```
@@ -436,6 +449,49 @@ const App = () => {
   return <Table columns={columns} rows={rows} />;
 };
 ```
+
+### Со своей функцией генерации признака объединения
+
+Расширенный пример можно найти [ТУТ](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/Table/__stories__/Table.stories.tsx) в переменной `WithMergedByCustomCallbackCells`.
+
+```tsx
+import React from 'react';
+import { Table } from '@consta/uikit/Table';
+import { Checkbox } from '@consta/uikit/Checkbox';
+
+const colums = [
+  {
+    title: 'Операция подтверждена',
+    accessor: 'operationConfirmed',
+    mergeCells: true,
+    getComparisonValue: ({ owner, viewed }) => `${owner}-${viewed}`,
+    renderCell: ({ operationConfirmed: { viewed } }) => <Checkbox checked={viewed} />,
+  },
+];
+
+const rows = [
+  {
+    id: '1',
+    operationConfirmed: { owner: 'user', viewed: false },
+  },
+  {
+    id: '2',
+    operationConfirmed: { owner: 'user', viewed: false },
+  },
+  {
+    id: '3',
+    operationConfirmed: { owner: 'user', viewed: true },
+  },
+  {
+    id: '4',
+    operationConfirmed: { owner: 'admin', viewed: true },
+  },
+];
+
+const App = () => <Table columns={colums} rows={rows} />;
+```
+
+Посмотреть этот пример в работе можно [ТУТ](/?path=/story/components-table--with-merged-by-custom-callback-cells).
 
 ### Со своим текстом, если нет данных
 

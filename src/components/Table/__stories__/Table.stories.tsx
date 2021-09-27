@@ -342,6 +342,66 @@ export const WithMergedCells = createStory(
   },
 );
 
+export const WithMergedByCustomCallbackCells = createStory(
+  () => {
+    const ADMIN_INDEXES = [3, 4, 7];
+    const USERS_COUNT = 12;
+
+    const checkedRow: { [key: string]: boolean } = new Array(USERS_COUNT)
+      .fill(false)
+      .reduce((previous, _, index) => {
+        return {
+          ...previous,
+          [`${index + 1}`]: !Math.round(Math.random()),
+        };
+      }, {});
+
+    const generateRowBase = (id: string, owner: string, viewed: boolean) => ({
+      id,
+      owner,
+      operationConfirmed: {
+        owner,
+        viewed,
+      },
+    });
+
+    return (
+      <Table
+        borderBetweenColumns
+        borderBetweenRows
+        columns={[
+          {
+            title: 'ID',
+            accessor: 'id',
+            align: 'left',
+          },
+          {
+            title: 'Инициатор операции',
+            accessor: 'owner',
+            mergeCells: true,
+          },
+          {
+            title: 'Операция подтверждена',
+            accessor: 'operationConfirmed',
+            mergeCells: true,
+            getComparisonValue: ({ owner, viewed }) => `${owner}-${viewed}`,
+            renderCell: ({ operationConfirmed: { viewed } }) => <Checkbox checked={viewed} />,
+          },
+        ]}
+        rows={Object.keys(checkedRow).map((id, index) => {
+          const isAuto = ADMIN_INDEXES.includes(index);
+          return {
+            ...generateRowBase(id, `${isAuto ? 'admin' : 'user'}`, isAuto ? true : checkedRow[id]),
+          };
+        })}
+      />
+    );
+  },
+  {
+    name: 'с объединёнными кастомной функцией ячейками',
+  },
+);
+
 export const withCustomFilters = createStory(
   () => {
     return (
