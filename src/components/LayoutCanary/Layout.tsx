@@ -22,7 +22,7 @@ export const layoutPropHorizontalAlignDefault: LayoutPropHorizontalAlign =
   layoutPropHorizontalAlign[0];
 
 export type Props = {
-  flex?: number | 'none' | 'undefined';
+  flex?: number | 'none';
   fixed?: boolean;
   verticalAlign?: LayoutPropVerticalAlign;
   horizontalAlign?: LayoutPropHorizontalAlign;
@@ -62,6 +62,12 @@ export const Layout = forwardRefWithAs<Props>((props, ref) => {
   );
 
   const Tag = as as string;
+
+  const backgroundColor =
+    containerRef && containerRef.current
+      ? window.getComputedStyle(containerRef.current).getPropertyValue('background-color')
+      : 'none';
+
   return (
     <>
       <Tag
@@ -71,18 +77,18 @@ export const Layout = forwardRefWithAs<Props>((props, ref) => {
           fixed
             ? {
                 ...style,
-                flex,
-                top,
-                left,
-                maxHeight,
-                maxWidth,
-                position,
-                minWidth: width,
-                minHeight: height,
+                ['--layout-flex' as string]: flex,
+                ['--layout-top' as string]: `${top}px`,
+                ['--layout-left' as string]: `${left}px`,
+                ['--layout-max-height' as string]: `${maxHeight}px`,
+                ['--layout-max-width' as string]: `${maxWidth}px`,
+                ['--layout-position' as string]: position,
+                ['--layout-min-width' as string]: `${width}px`,
+                ['--layout-min-height' as string]: `${height}px`,
               }
             : {
                 ...style,
-                flex,
+                ['--layout-flex' as string]: flex,
               }
         }
         className={cnLayout(
@@ -99,13 +105,10 @@ export const Layout = forwardRefWithAs<Props>((props, ref) => {
         <div
           className={cnLayout('Fake')}
           style={{
-            minWidth: width,
-            minHeight: height,
-            flex,
-            backgroundColor:
-              containerRef && containerRef.current
-                ? window.getComputedStyle(containerRef.current).getPropertyValue('background-color')
-                : 'none',
+            ['--layout-flex' as string]: flex,
+            ['--layout-min-width' as string]: `${width}px`,
+            ['--layout-min-height' as string]: `${height}px`,
+            ['--layout-bg-color' as string]: backgroundColor,
           }}
         />
       )}

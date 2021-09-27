@@ -50,6 +50,26 @@ type PositioningElement = (
   horizontalAlign?: HorizontalAlign,
 ) => UseFixedData;
 
+const isElementScrollible = (
+  element: ElementStationing,
+  container: ElementStationing,
+  anchor: ElementStationing | undefined,
+  isVerticalFixation: boolean,
+  startScroll: number,
+): boolean | undefined => {
+  if (isVerticalFixation)
+    return (
+      container.scrollTop >= startScroll &&
+      container.scrollTop <= container.scrollHeight - container.offsetHeight + element.offsetHeight
+    );
+  return anchor
+    ? container.scrollTop + anchor.offsetHeight >= startScroll &&
+        container.scrollTop <=
+          container.scrollHeight - container.offsetHeight + element.offsetHeight
+    : container.scrollTop + container.offsetHeight <= startScroll + element.offsetHeight &&
+        container.scrollTop <= container.scrollHeight - container.offsetHeight;
+};
+
 export const positioningElement: PositioningElement = (
   startScroll,
   layoutStationing,
@@ -80,26 +100,15 @@ export const positioningElement: PositioningElement = (
     stationingData.height = layoutStationing.offsetHeight;
     stationingData.maxWidth = scrollContainerPosition.width;
     stationingData.maxHeight = scrollContainerPosition.height;
-    let isFixable = false;
-    if (verticalAlign === 'top')
-      isFixable =
-        scrollContainerStationing.scrollTop >= startScroll &&
-        scrollContainerStationing.scrollTop <=
-          scrollContainerStationing.scrollHeight -
-            scrollContainerStationing.offsetHeight +
-            layoutStationing.offsetHeight;
-    else
-      isFixable = anchorStationing
-        ? scrollContainerStationing.scrollTop + anchorStationing.offsetHeight >= startScroll &&
-          scrollContainerStationing.scrollTop <=
-            scrollContainerStationing.scrollHeight -
-              scrollContainerStationing.offsetHeight +
-              layoutStationing.offsetHeight
-        : scrollContainerStationing.scrollTop + scrollContainerStationing.offsetHeight <=
-            startScroll + layoutStationing.offsetHeight &&
-          scrollContainerStationing.scrollTop <=
-            scrollContainerStationing.scrollHeight - scrollContainerStationing.offsetHeight;
-    if (isFixable) {
+    if (
+      isElementScrollible(
+        layoutStationing,
+        scrollContainerStationing,
+        anchorStationing,
+        verticalAlign === 'top',
+        startScroll,
+      )
+    ) {
       stationingData.position = 'fixed';
       if (verticalAlign === 'top')
         stationingData.top = anchorStationing
