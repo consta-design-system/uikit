@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
+import { FieldLabelPropAlign } from '../FieldLabel/FieldLabel';
 import { PropForm, PropSize, PropView, RenderItemProps } from '../SelectComponents/types';
 
 export type DefaultItem = {
@@ -74,6 +75,9 @@ export type ComboboxProps<
     getItemDisabled?: PropGetItemDisabled<ITEM>;
     getGroupLabel?: PropGetGroupLabel<GROUP>;
     getGroupKey?: PropGetGroupKey<GROUP>;
+    label?: string;
+    caption?: string;
+    labelAlign?: FieldLabelPropAlign;
   },
   HTMLDivElement
 > &

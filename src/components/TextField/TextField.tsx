@@ -4,6 +4,8 @@ import React, { forwardRef, useState } from 'react';
 import TextAreaAutoSize from 'react-textarea-autosize';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
+import { cnMixCaption } from '../../mixs/MixCaption/MixCaption';
+import { cnMixLabel } from '../../mixs/MixLabel/MixLabel';
 import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
@@ -62,7 +64,7 @@ export function TextFieldRender<TYPE extends string>(
     tabIndex,
     ariaLabel,
     label,
-    labelAlign,
+    labelAlign = 'top',
     caption,
     iconSize: iconSizeProp,
     ...otherProps
@@ -130,16 +132,11 @@ export function TextFieldRender<TYPE extends string>(
 
   return (
     <div
-      className={cnTextField(
-        {
-          labelAlign,
-          size,
-        },
-        [className],
-      )}
+      className={cnTextField(null, [cnMixLabel({ align: labelAlign, size }), className])}
+      {...otherProps}
     >
       {label && <FieldLabel size={size}>{label}</FieldLabel>}
-      <div className={cnTextField('CaptionContainer', { size })}>
+      <div className={cnTextField('CaptionContainer', [cnMixCaption({ size })])}>
         <div
           className={cnTextField('InputContainer', {
             size,
@@ -153,7 +150,6 @@ export function TextFieldRender<TYPE extends string>(
             withValue: !!value,
           })}
           ref={useForkRef([ref, textFieldRef])}
-          {...otherProps}
         >
           {LeftIcon && (
             <div

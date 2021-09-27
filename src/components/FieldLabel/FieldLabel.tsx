@@ -26,7 +26,7 @@ export const FieldLabel = forwardRefWithAs<Props>((props, ref) => {
   const { className, children, ...otherProps } = props;
 
   return (
-    <Text {...otherProps} className={cnFieldLabel({}, [className])} ref={ref}>
+    <Text {...otherProps} className={cnFieldLabel(null, [className])} ref={ref}>
       {children}
     </Text>
   );

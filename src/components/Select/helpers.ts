@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
+import { FieldLabelPropAlign } from '../FieldLabel/FieldLabel';
 import { PropForm, PropSize, PropView, RenderItemProps } from '../SelectComponents/types';
 
 export type DefaultItem = {
@@ -58,6 +59,9 @@ export type SelectProps<ITEM = DefaultItem, GROUP = DefaultGroup> = PropsWithHTM
     getItemDisabled?: PropGetItemDisabled<ITEM>;
     getGroupLabel?: PropGetGroupLabel<GROUP>;
     getGroupKey?: PropGetGroupKey<GROUP>;
+    label?: string;
+    labelAlign?: FieldLabelPropAlign;
+    caption?: string;
   },
   HTMLDivElement
 > &

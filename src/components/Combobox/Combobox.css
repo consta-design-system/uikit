@@ -1,0 +1,7 @@
+.Combobox {
+  width: 100%;
+
+  &-CaptionContainer {
+    width: 100%;
+  }
+}

@@ -1,4 +1,6 @@
 .FieldCaption {
+  color: var(--color-typo-secondary);
+
   &_status {
     &_alert {
       color: var(--color-bg-alert);
