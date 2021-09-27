@@ -514,7 +514,9 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
                     disabled,
                     active: isActiveOne || isActiveTwo,
                   })}
-                  style={{ width: `${Math.min(getPercent(item, minValue, maxValue))}%` }}
+                  style={{
+                    width: `${Math.min(getPercent(item, minValue, maxValue))}%`,
+                  }}
                 />
               ))}
             </div>
