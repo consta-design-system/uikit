@@ -19,7 +19,10 @@ import {
   Props as TableRowsCollapseProps,
   TableRowsCollapse,
 } from './RowsCollapse/TableRowsCollapse';
-import { TableSelectedOptionsList } from './SelectedOptionsList/TableSelectedOptionsList';
+import {
+  GetTagLabel,
+  TableSelectedOptionsList,
+} from './SelectedOptionsList/TableSelectedOptionsList';
 import {
   fieldFiltersPresent,
   FieldSelectedValues,
@@ -149,6 +152,7 @@ export type TableProps<T extends TableRow> = {
   onRowClick?: onRowClick;
   lazyLoad?: LazyLoad;
   onFiltersUpdated?: (filters: SelectedFilters) => void;
+  getTagLabel?: GetTagLabel;
   isExpandedRowsByDefault?: boolean;
 };
 
@@ -197,15 +201,15 @@ const sortingData = <T extends TableRow>(
   if (!sorting) {
     return rows;
   }
-  const sorredRows = sortByDefault(rows, sorting.by, sorting.order, sorting.sortFn);
+  const sortedRows = sortByDefault(rows, sorting.by, sorting.order, sorting.sortFn);
 
-  if (sorredRows.some((row) => row.rows?.length)) {
-    return sorredRows.map((row) => {
+  if (sortedRows.some((row) => row.rows?.length)) {
+    return sortedRows.map((row) => {
       return row.rows ? { ...row, rows: sortingData(row.rows as T[], sorting, onSortBy) } : row;
     });
   }
 
-  return sorredRows;
+  return sortedRows;
 };
 
 const defaultEmptyRowsPlaceholder = (
@@ -239,8 +243,9 @@ const InternalTable = <T extends TableRow>(
     lazyLoad,
     onSortBy,
     onFiltersUpdated,
-    isExpandedRowsByDefault = false,
-  } = props;
+    getTagLabel,
+  isExpandedRowsByDefault = false,
+}= props;
   const {
     headers,
     flattenedHeaders,
@@ -371,7 +376,7 @@ const InternalTable = <T extends TableRow>(
   const handleTooltipSave = (
     field: string,
     tooltipSelectedFilters: FieldSelectedValues,
-    value?: any,
+    value?: unknown,
   ): void => {
     updateSelectedFilters(field, tooltipSelectedFilters, value);
   };
@@ -693,6 +698,7 @@ const InternalTable = <T extends TableRow>(
         <div className={cnTable('RowWithoutCells')}>
           <TableSelectedOptionsList
             values={getSelectedFiltersList({ filters, selectedFilters, columns: lowHeaders })}
+            getTagLabel={getTagLabel}
             onRemove={removeSelectedFilter(filters)}
             onReset={resetSelectedFilters}
           />
@@ -714,12 +720,7 @@ const InternalTable = <T extends TableRow>(
               onClick={(e) => onRowClick && onRowClick({ id: row.id, e })}
             >
               {columnsWithMetaData(lowHeaders).map((column: TableColumn<T>, columnIdx: number) => {
-                const { show, style, rowSpan } = getTableCellProps(
-                  row as TableTreeRow<T>,
-                  rowIdx,
-                  column,
-                  columnIdx,
-                );
+                const { show, style, rowSpan } = getTableCellProps(row, rowIdx, column, columnIdx);
 
                 if (show) {
                   return (
