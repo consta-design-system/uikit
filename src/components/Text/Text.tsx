@@ -73,7 +73,7 @@ export type TextPropTransform = typeof textPropTransform[number];
 export const textPropWidth = ['default'] as const;
 export type TextPropWidth = typeof textPropWidth[number];
 
-type Props = {
+export type Props = {
   align?: TextPropAlign;
   cursor?: TextPropCursor;
   decoration?: TextPropDecoration;

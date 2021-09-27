@@ -1,0 +1,15 @@
+.FieldCaption {
+  &_status {
+    &_alert {
+      color: var(--color-bg-alert);
+    }
+
+    &_warning {
+      color: var(--color-bg-warning);
+    }
+
+    &_success {
+      color: var(--color-bg-success);
+    }
+  }
+}

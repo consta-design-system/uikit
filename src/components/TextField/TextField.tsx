@@ -7,6 +7,8 @@ import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
+import { FieldCaption } from '../FieldCaption/FieldCaption';
+import { FieldLabel } from '../FieldLabel/FieldLabel';
 
 import {
   sizeMap,
@@ -59,6 +61,9 @@ export function TextFieldRender<TYPE extends string>(
     step,
     tabIndex,
     ariaLabel,
+    label,
+    labelAlign,
+    caption,
     iconSize: iconSizeProp,
     ...otherProps
   } = usePropsHandler(cnTextField(), props, textFieldRef);
@@ -127,56 +132,67 @@ export function TextFieldRender<TYPE extends string>(
     <div
       className={cnTextField(
         {
+          labelAlign,
           size,
-          view,
-          form,
-          state,
-          disabled,
-          width,
-          type,
-          focus,
-          withValue: !!value,
         },
         [className],
       )}
-      ref={useForkRef([ref, textFieldRef])}
-      {...otherProps}
     >
-      {LeftIcon && (
+      {label && <FieldLabel size={size}>{label}</FieldLabel>}
+      <div className={cnTextField('CaptionContainer', { size })}>
         <div
-          className={cnTextField('Side', {
-            position: 'left',
-            type: leftSideIsString ? 'string' : 'icon',
+          className={cnTextField('InputContainer', {
+            size,
+            view,
+            form,
+            state,
+            disabled,
+            width,
+            type,
+            focus,
+            withValue: !!value,
           })}
-          title={typeof leftSide === 'string' ? leftSide : undefined}
+          ref={useForkRef([ref, textFieldRef])}
+          {...otherProps}
         >
-          {leftSideIsString ? (
-            leftSide
+          {LeftIcon && (
+            <div
+              className={cnTextField('Side', {
+                position: 'left',
+                type: leftSideIsString ? 'string' : 'icon',
+              })}
+              title={typeof leftSide === 'string' ? leftSide : undefined}
+            >
+              {leftSideIsString ? (
+                leftSide
+              ) : (
+                <LeftIcon className={cnTextField('Icon')} size={iconSize} />
+              )}
+            </div>
+          )}
+          {textarea ? (
+            <TextAreaAutoSize {...commonProps} {...textareaProps} />
           ) : (
-            <LeftIcon className={cnTextField('Icon')} size={iconSize} />
+            <input {...commonProps} {...inputProps} />
+          )}
+          {RightIcon && (
+            <div
+              className={cnTextField('Side', {
+                position: 'right',
+                type: rightSideIsString ? 'string' : 'icon',
+              })}
+              title={typeof rightSide === 'string' ? rightSide : undefined}
+            >
+              {rightSideIsString ? (
+                rightSide
+              ) : (
+                <RightIcon className={cnTextField('Icon')} size={iconSize} />
+              )}
+            </div>
           )}
         </div>
-      )}
-      {textarea ? (
-        <TextAreaAutoSize {...commonProps} {...textareaProps} />
-      ) : (
-        <input {...commonProps} {...inputProps} />
-      )}
-      {RightIcon && (
-        <div
-          className={cnTextField('Side', {
-            position: 'right',
-            type: rightSideIsString ? 'string' : 'icon',
-          })}
-          title={typeof rightSide === 'string' ? rightSide : undefined}
-        >
-          {rightSideIsString ? (
-            rightSide
-          ) : (
-            <RightIcon className={cnTextField('Icon')} size={iconSize} />
-          )}
-        </div>
-      )}
+        {caption && <FieldCaption status={state}>{caption}</FieldCaption>}
+      </div>
     </div>
   );
 }
