@@ -31,8 +31,7 @@ const cnStoryBookRootDecorator = cn('StoryBookRootDecorator');
 
 export const StoryBookRootDecorator: React.FC<StoryBookRootDecoratorProps> = (props) => {
   const { children, themeName, className } = props;
-
-  return (
+  const content = (
     <Theme
       preset={getThemeByName(themeName)}
       className={cnStoryBookRootDecorator(null, ['theme_gap_medium', className])}
@@ -40,4 +39,10 @@ export const StoryBookRootDecorator: React.FC<StoryBookRootDecoratorProps> = (pr
       {children}
     </Theme>
   );
+
+  if (process.env.NODE_ENV === 'development') {
+    return <React.StrictMode>{content}</React.StrictMode>;
+  }
+
+  return content;
 };
