@@ -46,6 +46,13 @@ describe('getDaysOfMonth', () => {
       { label: '30', selected: false, range: false, current: false, disabled: false },
       { label: '31', selected: false, range: false, current: false, disabled: false },
       { label: '1', disabled: true },
+      { disabled: true, label: '2' },
+      { disabled: true, label: '3' },
+      { disabled: true, label: '4' },
+      { disabled: true, label: '5' },
+      { disabled: true, label: '6' },
+      { disabled: true, label: '7' },
+      { disabled: true, label: '8' },
     ];
 
     expect(result).toEqual(expected);
@@ -95,6 +102,13 @@ describe('getDaysOfMonth', () => {
       { label: '30', selected: false, range: false, current: false, disabled: true },
       { label: '31', selected: false, range: false, current: false, disabled: true },
       { label: '1', disabled: true },
+      { disabled: true, label: '2' },
+      { disabled: true, label: '3' },
+      { disabled: true, label: '4' },
+      { disabled: true, label: '5' },
+      { disabled: true, label: '6' },
+      { disabled: true, label: '7' },
+      { disabled: true, label: '8' },
     ];
 
     expect(result).toEqual(expected);
@@ -143,6 +157,13 @@ describe('getDaysOfMonth', () => {
       { label: '30', selected: false, range: false, event: false, current: false, disabled: false },
       { label: '31', selected: false, range: false, event: false, current: false, disabled: false },
       { label: '1', disabled: true },
+      { disabled: true, label: '2' },
+      { disabled: true, label: '3' },
+      { disabled: true, label: '4' },
+      { disabled: true, label: '5' },
+      { disabled: true, label: '6' },
+      { disabled: true, label: '7' },
+      { disabled: true, label: '8' },
     ];
 
     expect(result).toEqual(expected);
@@ -191,6 +212,13 @@ describe('getDaysOfMonth', () => {
       { label: '30', selected: false, range: false, current: false, disabled: false },
       { label: '31', selected: false, range: false, current: false, disabled: false },
       { label: '1', disabled: true },
+      { disabled: true, label: '2' },
+      { disabled: true, label: '3' },
+      { disabled: true, label: '4' },
+      { disabled: true, label: '5' },
+      { disabled: true, label: '6' },
+      { disabled: true, label: '7' },
+      { disabled: true, label: '8' },
     ];
 
     expect(result).toEqual(expected);
@@ -239,6 +267,13 @@ describe('getDaysOfMonth', () => {
       { label: '30', selected: false, range: false, current: false, disabled: false },
       { label: '31', selected: false, range: false, current: false, disabled: false },
       { label: '1', disabled: true },
+      { disabled: true, label: '2' },
+      { disabled: true, label: '3' },
+      { disabled: true, label: '4' },
+      { disabled: true, label: '5' },
+      { disabled: true, label: '6' },
+      { disabled: true, label: '7' },
+      { disabled: true, label: '8' },
     ];
 
     expect(result).toEqual(expected);
@@ -286,6 +321,13 @@ describe('getDaysOfMonth', () => {
       { label: '29', selected: false, range: false, current: false, disabled: false },
       { label: '30', selected: false, range: false, current: false, disabled: false },
       { label: '31', selected: false, range: false, current: false, disabled: false },
+      { label: '1', disabled: true },
+      { disabled: true, label: '2' },
+      { disabled: true, label: '3' },
+      { disabled: true, label: '4' },
+      { disabled: true, label: '5' },
+      { disabled: true, label: '6' },
+      { disabled: true, label: '7' },
     ];
 
     expect(result).toEqual(expected);
@@ -343,6 +385,13 @@ describe('getDaysOfMonth', () => {
       { label: '30', selected: false, range: false, event: false, current: false, disabled: true },
       { label: '31', selected: false, range: false, event: false, current: false, disabled: true },
       { label: '1', disabled: true },
+      { disabled: true, label: '2' },
+      { disabled: true, label: '3' },
+      { disabled: true, label: '4' },
+      { disabled: true, label: '5' },
+      { disabled: true, label: '6' },
+      { disabled: true, label: '7' },
+      { disabled: true, label: '8' },
     ];
 
     expect(result).toEqual(expected);

@@ -50,3 +50,4 @@ export * from './DateTimeTypeYear/DateTimeTypeYear';
 export * from './DateTimeTypeMonth/DateTimeTypeMonth';
 export * from './DateTimeTypeDate/DateTimeTypeDate';
 export * from './DateTimeTypeTime/DateTimeTypeTime';
+export * from './DateTimeTypeDateTime/DateTimeTypeDateTime';

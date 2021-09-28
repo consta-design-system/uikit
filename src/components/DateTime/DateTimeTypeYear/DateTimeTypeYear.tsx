@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 import { addYears, startOfDecade } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 
@@ -12,6 +12,7 @@ import {
   getHandleSelectDate,
   getYearsOfDecade,
   isEqualYear,
+  moveTypes,
   useCurrentVisibleDate,
 } from '../helpers';
 import { dateTimePropView, dateTimePropViewDefault } from '../helpers/types';
@@ -29,8 +30,13 @@ export const DateTimeTypeYear: DateTimeTypeComponent = forwardRef((props, ref) =
     locale = ruLocale,
     className,
     view = dateTimePropViewDefault,
+    onMove,
     ...otherProps
   } = props;
+
+  useEffect(() => {
+    onMove?.(moveTypes[0]);
+  }, []);
 
   const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate({
     currentVisibleDate: currentVisibleDateProp,

@@ -1,13 +1,13 @@
 import './DateTimeTypeTime.css';
 
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 
 import { cn } from '../../../utils/bem';
 import { DateTimeLabel } from '../DateTimeLabel/DateTimeLabel';
 import { DateTimeTime } from '../DateTimeTime/DateTimeTime';
-import { DateTimeProps, getTimeTitle } from '../helpers';
+import { DateTimeProps, getTimeTitle, moveTypes } from '../helpers';
 
-export type DateTimeTypeTypeComponent = (
+export type DateTimeTypeTimeComponent = (
   props: Omit<DateTimeProps, 'type' | 'onChangeRange' | 'value' | 'view'> & {
     value?: Date;
   },
@@ -15,7 +15,7 @@ export type DateTimeTypeTypeComponent = (
 
 const cnDateTimeTypeTime = cn('DateTimeTypeTime');
 
-export const DateTimeTypeTime: DateTimeTypeTypeComponent = forwardRef((props, ref) => {
+export const DateTimeTypeTime: DateTimeTypeTimeComponent = forwardRef((props, ref) => {
   const {
     locale,
     value,
@@ -26,8 +26,13 @@ export const DateTimeTypeTime: DateTimeTypeTypeComponent = forwardRef((props, re
     multiplicityHours = 1,
     multiplicityMinutes = 1,
     multiplicitySeconds = 1,
+    onMove,
     ...otherProps
   } = props;
+
+  useEffect(() => {
+    onMove?.(moveTypes[3]);
+  }, []);
 
   const label = getTimeTitle(value, multiplicityHours, multiplicityMinutes, multiplicitySeconds);
 

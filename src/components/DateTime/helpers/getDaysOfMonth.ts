@@ -1,8 +1,8 @@
 import React from 'react';
 import {
   addDays,
+  addWeeks,
   differenceInDays,
-  endOfMonth,
   endOfWeek,
   format,
   Locale,
@@ -56,7 +56,7 @@ export const getDaysOfMonth = (props: {
   const { date, locale, handleDayClick, value, events, minDate, maxDate } = props;
   const currentMonth = date.getMonth();
   const startDate = startOfWeek(startOfMonth(date), { locale });
-  const endDate = endOfWeek(endOfMonth(date), { locale });
+  const endDate = endOfWeek(addWeeks(startDate, 5), { locale });
   const diffDays = differenceInDays(endDate, startDate) + 1;
 
   return range(diffDays).map((index) => {

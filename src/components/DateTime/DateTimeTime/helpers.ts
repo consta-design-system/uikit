@@ -13,7 +13,7 @@ import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
 import { range } from '../../../utils/array';
 import { isInMinMaxDade } from '../../../utils/date';
 import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
-import { getLabelHours, getLabelMinutes, getLabelSeconds, getTimeTitle } from '../helpers';
+import { getLabelHours, getLabelMinutes, getLabelSeconds } from '../helpers';
 
 type DateTimeTimePropLocale = {
   hours?: string;
@@ -142,9 +142,7 @@ export const useTimeItems = (
       ),
     ],
     [
-      minDate || maxDate
-        ? value?.getTime()
-        : getTimeTitle(value, multiplicityHours, multiplicityMinutes, multiplicitySeconds),
+      value?.getTime(),
       minDate?.getTime(),
       maxDate?.getTime(),
       multiplicityHours,

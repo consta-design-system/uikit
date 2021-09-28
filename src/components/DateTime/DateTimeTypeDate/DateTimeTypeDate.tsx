@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef, useEffect } from 'react';
 import { addMonths, startOfMonth } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 
@@ -15,12 +15,13 @@ import {
   getHandleSelectDate,
   getMouthLabelWithYear,
   isEqualDay,
+  moveTypes,
   useCurrentVisibleDate,
 } from '../helpers';
 import { dateTimePropView, dateTimePropViewDefault } from '../helpers/types';
 import { cnDateTimeMixLayout } from '../mixs';
 
-export const DateTimeTypeDate: DateTimeTypeComponent = React.forwardRef((props, ref) => {
+export const DateTimeTypeDate: DateTimeTypeComponent = forwardRef((props, ref) => {
   const {
     className,
     minDate,
@@ -32,10 +33,15 @@ export const DateTimeTypeDate: DateTimeTypeComponent = React.forwardRef((props, 
     events,
     locale = ruLocale,
     view = dateTimePropViewDefault,
+    onMove,
     ...otherProps
   } = props;
 
   const [changeMonth, { on, off }] = useFlag();
+
+  useEffect(() => {
+    !changeMonth && onMove?.(moveTypes[2]);
+  }, [changeMonth]);
 
   const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate({
     currentVisibleDate: currentVisibleDateProp,
@@ -61,6 +67,7 @@ export const DateTimeTypeDate: DateTimeTypeComponent = React.forwardRef((props, 
           setCurrentVisibleDate(value);
           off();
         }}
+        onMove={onMove}
       />
     );
   }

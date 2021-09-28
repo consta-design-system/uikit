@@ -29,6 +29,9 @@ export type DateTimePropLocale = Locale & {
   };
 };
 
+export const moveTypes = ['year', 'month', 'day', 'time'] as const;
+export type MoveType = typeof moveTypes[number];
+
 export type DateTimeProps = PropsWithHTMLAttributesAndRef<
   {
     currentVisibleDate?: Date;
@@ -46,6 +49,7 @@ export type DateTimeProps = PropsWithHTMLAttributesAndRef<
     multiplicitySeconds?: number;
     multiplicityMinutes?: number;
     multiplicityHours?: number;
+    onMove?: (type: MoveType) => void;
   },
   HTMLDivElement
 >;
