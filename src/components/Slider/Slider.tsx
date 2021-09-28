@@ -1,9 +1,3 @@
-/* eslint-disable react/button-has-type */
-/* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import './Slider.css';
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
@@ -36,7 +30,6 @@ type SliderProps = {
     value: number,
     index: number,
   ) => void;
-  onChangeCommitted?: any;
   prefix?:
     | React.ReactNode
     | (({ value }: { value: number | number[] }) => React.ReactElement)
@@ -87,7 +80,7 @@ const findClosest = (values: number[], currentValue: number) => {
     (acc, value, index: number) => {
       const distance = Math.abs(currentValue - value);
 
-      if (acc === null || distance < acc.distance || distance === acc.distance) {
+      if (distance <= acc.distance) {
         return {
           distance,
           index,
@@ -96,16 +89,19 @@ const findClosest = (values: number[], currentValue: number) => {
 
       return acc;
     },
-    null as {
-      distance: number;
-      index: number;
-    } | null,
-  )!;
+    {
+      distance: Infinity,
+      index: 0,
+    },
+  );
   return closestIndex;
 };
 
-const trackFinger = (event: any, touchId: any) => {
-  if (touchId.current !== undefined && event.changedTouches) {
+const trackFinger = (
+  event: MouseEvent | TouchEvent,
+  touchId: React.MutableRefObject<number | null | undefined>,
+) => {
+  if (touchId.current !== undefined && 'changedTouches' in event) {
     for (let i = 0; i < event.changedTouches.length; i += 1) {
       const touch = event.changedTouches[i];
       if (touch.identifier === touchId.current) {
@@ -119,12 +115,12 @@ const trackFinger = (event: any, touchId: any) => {
   }
 
   return {
-    x: event.clientX,
-    y: event.clientY,
+    x: (event as MouseEvent).clientX,
+    y: (event as MouseEvent).clientY,
   };
 };
 
-const percentToValue = (percent: any, min: any, max: any) => {
+const percentToValue = (percent: number, min: number, max: number) => {
   return (max - min) * percent + min;
 };
 
@@ -154,7 +150,7 @@ const roundValueToStep = (value: number, step: number | number[], min: number) =
   ).value;
 };
 
-let cachedSupportsTouchActionNone: any;
+let cachedSupportsTouchActionNone: boolean;
 const doesSupportTouchActionNone = () => {
   if (cachedSupportsTouchActionNone === undefined) {
     if (typeof CSS !== 'undefined' && typeof CSS.supports === 'function') {
@@ -202,7 +198,6 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
       disabled,
       withTooltip,
       division,
-      onChangeCommitted,
       prefix,
       suffix,
     },
@@ -236,9 +231,9 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
 
     const moveCount = React.useRef(0);
     const sliderRef = React.useRef<HTMLDivElement>(null);
-    const touchId = React.useRef<number>();
+    const touchId = React.useRef<number | null | undefined>();
 
-    const previousIndex = React.useRef();
+    const previousIndex = React.useRef<number>();
 
     const getFingerNewValue = useCallback(
       (finger: PositionType, move: boolean, source: number | number[]) => {
@@ -254,13 +249,13 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
         }
 
         temporaryValue = clamp(temporaryValue, minValue, maxValue);
-        let activeIndex: any = 0;
+        let activeIndex = 0;
 
         if (range.current) {
           if (!move) {
             activeIndex = findClosest(values.current as number[], temporaryValue);
           } else {
-            activeIndex = previousIndex.current;
+            activeIndex = previousIndex.current || activeIndex;
           }
 
           if (disabled) {
@@ -293,7 +288,8 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
     );
 
     const handleTouchMove = useCallback<EventListener>(
-      (nativeEvent) => {
+      (event) => {
+        const nativeEvent = event as MouseEvent | TouchEvent;
         const finger = trackFinger(nativeEvent, touchId);
 
         if (!finger) {
@@ -328,10 +324,6 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
         ) {
           setValueState(newValue);
 
-          if (onChangeCommitted) {
-            onChangeCommitted(nativeEvent, newValue);
-          }
-
           const rect = (activeIndex || !range.current
             ? pointValueTwo
             : pointValueOne
@@ -343,7 +335,8 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
     );
 
     const handleTouchEnd = useCallback<EventListener>(
-      (nativeEvent) => {
+      (event) => {
+        const nativeEvent = event as MouseEvent | TouchEvent;
         const finger = trackFinger(nativeEvent, touchId);
         setDragging(false);
 
@@ -351,9 +344,6 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
 
         const { newValue, activeIndex } = getFingerNewValue(finger, true, valueDerivedRef.current)!;
 
-        if (onChangeCommitted) {
-          onChangeCommitted(nativeEvent, newValue);
-        }
         setIsActiveOne(false);
         setIsActiveTwo(false);
 
@@ -369,7 +359,8 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
     );
 
     const handleTouchStart = useCallback(
-      (nativeEvent: React.TouchEvent) => {
+      (event) => {
+        const nativeEvent = event as MouseEvent | TouchEvent;
         if (!doesSupportTouchActionNone()) {
           nativeEvent.preventDefault();
         }
@@ -411,7 +402,8 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
     );
 
     const handleMouseDown = useCallback(
-      (nativeEvent: React.MouseEvent) => {
+      (event) => {
+        const nativeEvent = event as MouseEvent | TouchEvent;
         if (nativeEvent.button !== 0) return;
 
         nativeEvent.preventDefault();
@@ -496,6 +488,7 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
           onTouchStart={handleTouchStart}
           ref={sliderRef}
           className={cnSlider('input', { division: division && !!step })}
+          aria-hidden="true"
         >
           {division && !!step && (
             <div className={cnSlider('input-divided', { disabled })}>
@@ -543,6 +536,7 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
           {range.current && (
             <>
               <button
+                type="button"
                 onMouseDown={() => setIsActiveOne(true)}
                 onTouchStart={() => setIsActiveOne(true)}
                 className={cnSlider('point', { isActive: isActiveOne || isActiveTwo, disabled })}
@@ -554,6 +548,7 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
                     maxValue,
                   )}%`,
                 }}
+                aria-label="button"
               />
               {withTooltip && isActiveOne && (
                 <Popover
@@ -572,6 +567,7 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
             </>
           )}
           <button
+            type="button"
             onMouseDown={() => setIsActiveTwo(true)}
             onTouchStart={() => setIsActiveTwo(true)}
             className={cnSlider('point', { isActive: isActiveOne || isActiveTwo, disabled })}
@@ -583,6 +579,7 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
                 maxValue,
               )}%`,
             }}
+            aria-label="button"
           />
           {withTooltip && isActiveTwo && (
             <Popover

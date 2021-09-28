@@ -51,7 +51,6 @@ export function Playground() {
           step={customStep ? [20, 17, 22, 20] : step}
           value={value}
           onChange={action('onChange')}
-          onChangeCommitted={action('onChangeCommitted')}
         />
       </div>
     </EventInterceptorProvider>
