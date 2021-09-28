@@ -54,88 +54,59 @@
       &_left {
         width: var(--sidebar-width);
         height: 100vh;
-
-        &.Sidebar-Window_size {
-          &_s {
-            --sidebar-width: var(--sidebar-size-s);
-          }
-
-          &_m {
-            --sidebar-width: var(--sidebar-size-m);
-          }
-
-          &_l {
-            --sidebar-width: var(--sidebar-size-l);
-          }
-
-          &_full {
-            --sidebar-width: calc(var(--sidebar-size-full) * 1vw);
-          }
-
-          &_1\/4 {
-            --sidebar-width: calc(var(--sidebar-size-1-of-4) * 1vw);
-          }
-
-          &_3\/4 {
-            --sidebar-width: calc(var(--sidebar-size-3-of-4) * 1vw);
-          }
-
-          &_1\/2 {
-            --sidebar-width: calc(var(--sidebar-size-1-of-2) * 1vw);
-          }
-
-          &_1\/3 {
-            --sidebar-width: calc(var(--sidebar-size-1-of-3) * 1vw);
-          }
-
-          &_2\/3 {
-            --sidebar-width: calc(var(--sidebar-size-2-of-3) * 1vw);
-          }
-        }
       }
 
       &_bottom,
       &_top {
         width: 100vw;
         height: var(--sidebar-height);
+      }
+    }
 
-        &.Sidebar-Window_size {
-          &_s {
-            --sidebar-height: var(--sidebar-size-s);
-          }
+    &_size {
+      &_s {
+        --sidebar-width: var(--sidebar-size-s);
+        --sidebar-height: var(--sidebar-size-s);
+      }
 
-          &_m {
-            --sidebar-height: var(--sidebar-size-m);
-          }
+      &_m {
+        --sidebar-width: var(--sidebar-size-m);
+        --sidebar-height: var(--sidebar-size-m);
+      }
 
-          &_l {
-            --sidebar-height: var(--sidebar-size-l);
-          }
+      &_l {
+        --sidebar-width: var(--sidebar-size-l);
+        --sidebar-height: var(--sidebar-size-l);
+      }
 
-          &_full {
-            --sidebar-height: calc(var(--sidebar-size-full) * 1vh);
-          }
+      &_full {
+        --sidebar-width: calc(var(--sidebar-size-full) * 1vw);
+        --sidebar-height: calc(var(--sidebar-size-full) * 1vh);
+      }
 
-          &_1\/4 {
-            --sidebar-height: calc(var(--sidebar-size-1-of-4) * 1vh);
-          }
+      &_1\/4 {
+        --sidebar-width: calc(var(--sidebar-size-1-of-4) * 1vw);
+        --sidebar-height: calc(var(--sidebar-size-1-of-4) * 1vh);
+      }
 
-          &_3\/4 {
-            --sidebar-height: calc(var(--sidebar-size-3-of-4) * 1vh);
-          }
+      &_3\/4 {
+        --sidebar-width: calc(var(--sidebar-size-3-of-4) * 1vw);
+        --sidebar-height: calc(var(--sidebar-size-3-of-4) * 1vh);
+      }
 
-          &_1\/2 {
-            --sidebar-height: calc(var(--sidebar-size-1-of-2) * 1vh);
-          }
+      &_1\/2 {
+        --sidebar-width: calc(var(--sidebar-size-1-of-2) * 1vw);
+        --sidebar-height: calc(var(--sidebar-size-1-of-2) * 1vh);
+      }
 
-          &_1\/3 {
-            --sidebar-height: calc(var(--sidebar-size-1-of-3) * 1vh);
-          }
+      &_1\/3 {
+        --sidebar-width: calc(var(--sidebar-size-1-of-3) * 1vw);
+        --sidebar-height: calc(var(--sidebar-size-1-of-3) * 1vh);
+      }
 
-          &_2\/3 {
-            --sidebar-height: calc(var(--sidebar-size-2-of-3) * 1vh);
-          }
-        }
+      &_2\/3 {
+        --sidebar-width: calc(var(--sidebar-size-2-of-3) * 1vw);
+        --sidebar-height: calc(var(--sidebar-size-2-of-3) * 1vh);
       }
     }
   }
