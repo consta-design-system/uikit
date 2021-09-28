@@ -21,7 +21,7 @@ export type LayoutPropHorizontalAlign = typeof layoutPropHorizontalAlign[number]
 export const layoutPropHorizontalAlignDefault: LayoutPropHorizontalAlign =
   layoutPropHorizontalAlign[0];
 
-export type Props = {
+export type LayoutProps = {
   flex?: number | 'none';
   fixed?: boolean;
   verticalAlign?: LayoutPropVerticalAlign;
@@ -34,7 +34,7 @@ export type Props = {
 
 export const cnLayout = cn('Layout');
 
-export const Layout = forwardRefWithAs<Props>((props, ref) => {
+export const Layout = forwardRefWithAs<LayoutProps>((props, ref) => {
   const {
     flex,
     fixed,

@@ -50,6 +50,41 @@ type PositioningElement = (
   horizontalAlign?: HorizontalAlign,
 ) => UseFixedData;
 
+const getHTMLElement: GetHTMLFunction = (element) => {
+  if (element && !(element instanceof HTMLElement || element instanceof Window))
+    return element?.current;
+  return element;
+};
+
+const getStationingElement = (
+  element?: HTMLElement | null | Window,
+): ElementStationing | undefined => {
+  if (element instanceof HTMLElement)
+    return {
+      offsetTop: element.offsetTop,
+      offsetHeight: element.offsetHeight,
+      offsetLeft: element.offsetLeft,
+      offsetWidth: element.offsetWidth,
+      clientHeight: element.clientHeight,
+      clientWidth: element.clientWidth,
+      scrollTop: element.scrollTop,
+      scrollHeight: element.scrollHeight,
+    };
+  if (element instanceof Window) {
+    return {
+      offsetTop: 0,
+      offsetHeight: element.innerHeight,
+      offsetLeft: 0,
+      offsetWidth: element.innerWidth,
+      clientHeight: element.innerHeight,
+      clientWidth: element.innerWidth,
+      scrollTop: element.scrollY,
+      scrollHeight: Math.max(document.body.scrollHeight, document.body.offsetHeight),
+    };
+  }
+  return undefined;
+};
+
 const isElementScrollible = (
   element: ElementStationing,
   container: ElementStationing,
@@ -142,41 +177,6 @@ export const useFixed: UseFixed = (
 ) => {
   const [stationing, setStationing] = useState<UseFixedData>({});
   const [result, setResult] = useState<UseFixedData>({});
-
-  const getHTMLElement: GetHTMLFunction = (element) => {
-    if (element && !(element instanceof HTMLElement || element instanceof Window))
-      return element?.current;
-    return element;
-  };
-
-  const getStationingElement = (
-    element?: HTMLElement | null | Window,
-  ): ElementStationing | undefined => {
-    if (element instanceof HTMLElement)
-      return {
-        offsetTop: element.offsetTop,
-        offsetHeight: element.offsetHeight,
-        offsetLeft: element.offsetLeft,
-        offsetWidth: element.offsetWidth,
-        clientHeight: element.clientHeight,
-        clientWidth: element.clientWidth,
-        scrollTop: element.scrollTop,
-        scrollHeight: element.scrollHeight,
-      };
-    if (element instanceof Window) {
-      return {
-        offsetTop: 0,
-        offsetHeight: element.innerHeight,
-        offsetLeft: 0,
-        offsetWidth: element.innerWidth,
-        clientHeight: element.innerHeight,
-        clientWidth: element.innerWidth,
-        scrollTop: element.scrollY,
-        scrollHeight: Math.max(document.body.scrollHeight, document.body.offsetHeight),
-      };
-    }
-    return undefined;
-  };
 
   useEffect(() => {
     let startScroll = 0;
