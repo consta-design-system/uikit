@@ -404,7 +404,6 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
     const handleMouseDown = useCallback(
       (event) => {
         const nativeEvent = event as MouseEvent | TouchEvent;
-        if (nativeEvent.button !== 0) return;
 
         nativeEvent.preventDefault();
         const finger = trackFinger(nativeEvent, touchId);
