@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 
 import { PropsWithHTMLAttributesAndRef } from '../../../utils/types/PropsWithHTMLAttributes';
 import { FieldCaption } from '../../FieldCaption/FieldCaption';
-import { FieldLabel, FieldLabelPropAlign } from '../../FieldLabel/FieldLabel';
+import { FieldLabel, FieldLabelPropPosition } from '../../FieldLabel/FieldLabel';
 import { cnSelect } from '../cnSelect';
 import {
   defaultPropForm,
@@ -22,7 +22,7 @@ export type SelectContainerProps = PropsWithHTMLAttributesAndRef<
     focused?: boolean;
     multiple?: boolean;
     label?: string;
-    labelAlign?: FieldLabelPropAlign;
+    labelPosition?: FieldLabelPropPosition;
     caption?: string;
   },
   HTMLDivElement
@@ -38,23 +38,27 @@ export const SelectContainer = forwardRef<HTMLDivElement, SelectContainerProps>(
     children,
     focused,
     multiple,
-    labelAlign = 'top',
+    labelPosition = 'top',
     label,
     caption,
     ...otherProps
   } = props;
 
   return (
-    <div className={cnSelect({ labelAlign, size }, [className])} {...otherProps}>
-      {label && <FieldLabel size={size}>{label}</FieldLabel>}
-      <div className={cnSelect('CaptionContainer', { size })}>
+    <div className={cnSelect({ position: labelPosition, size, view }, [className])} {...otherProps}>
+      {label && (
+        <FieldLabel className={cnSelect('Label')} size={size}>
+          {label}
+        </FieldLabel>
+      )}
+      <div className={cnSelect('CaptionContainer')}>
         <div
-          className={cnSelect('SelectContainer', { size, form, disabled, view, focused, multiple })}
+          className={cnSelect('SelectContainer', { form, disabled, focused, multiple })}
           ref={ref}
         >
           {children}
         </div>
-        {caption && <FieldCaption>{caption}</FieldCaption>}
+        {caption && <FieldCaption className={cnSelect('Caption')}>{caption}</FieldCaption>}
       </div>
     </div>
   );

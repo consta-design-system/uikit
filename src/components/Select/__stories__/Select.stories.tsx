@@ -29,12 +29,25 @@ const getKnobs = () => ({
   size: select('size', propSize, defaultPropSize),
   view: select('view', propView, defaultPropView),
   form: select('form', propForm, defaultPropForm),
+  caption: text('caption', ''),
+  label: text('label', ''),
+  labelPosition: select('labelPosition', ['top', 'left'], 'top'),
   placeholder: text('placeholder', 'Выберите цвет'),
   withGroups: boolean('withGroups', false),
 });
 
 export function Playground(): JSX.Element {
-  const { size, disabled, view, form, placeholder, withGroups } = getKnobs();
+  const {
+    size,
+    disabled,
+    view,
+    form,
+    placeholder,
+    withGroups,
+    label,
+    labelPosition,
+    caption,
+  } = getKnobs();
   const [value, setValue] = useState<Item | null | undefined>();
 
   return (
@@ -50,6 +63,9 @@ export function Playground(): JSX.Element {
           value={value}
           onChange={({ value }) => setValue(value)}
           groups={withGroups ? groups : []}
+          label={label}
+          labelPosition={labelPosition}
+          caption={caption}
         />
       </div>
     </EventInterceptorProvider>
@@ -58,7 +74,17 @@ export function Playground(): JSX.Element {
 
 export const WithRender = createStory(
   () => {
-    const { size, disabled, view, form, placeholder, withGroups } = getKnobs();
+    const {
+      size,
+      disabled,
+      view,
+      form,
+      placeholder,
+      withGroups,
+      label,
+      labelPosition,
+      caption,
+    } = getKnobs();
     const [value, setValue] = useState<MyItem | null | undefined>();
     return (
       <Select
@@ -97,6 +123,9 @@ export const WithRender = createStory(
         getItemGroupKey={(item) => item.group}
         getItemKey={(item) => item.name}
         getItemLabel={(item) => item.name}
+        label={label}
+        labelPosition={labelPosition}
+        caption={caption}
       />
     );
   },

@@ -485,7 +485,7 @@ export function UserSelectExampleView() {
 ## Лэйбл и подпись
 
 Лэйбл к компоненту можно добавить через свойство `label`, а за его позиционирование отвечает
-свойство `labelAlign`. Подпись можно добавить через свойство `caption`.
+свойство `labelPosition`. Подпись можно добавить через свойство `caption`.
 
 <UserSelectExampleLabel />
 
@@ -958,7 +958,7 @@ export type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | [`form?`](#форма)                                                   | `default`, `brick`, `round`                            | `default`                                                     | Форма компонента                                                       |
 | [`placeholder?`](#подсказка)                                        | `string`                                               | -                                                             | Подсказка, отображается, когда вариант не выбран                       |
 | [`label?`](#лэйбл-и-подпись)                                        | `string`                                               | -                                                             | Лэйбл                                                                  |
-| [`labelAlign?`](#лэйбл-и-подпись)                                   | `'top', 'left'`                                        | `'top'`                                                       | Положение лэйбла                                                       |
+| [`labelPosition?`](#лэйбл-и-подпись)                                | `'top', 'left'`                                        | `'top'`                                                       | Положение лэйбла                                                       |
 | [`caption?`](#лэйбл-и-подпись)                                      | `string`                                               | -                                                             | Подпись                                                                |
 | [`items`](#варианты)                                                | `ITEM[]`                                               | -                                                             | Варианты                                                               |
 | [`value?`](#выбранное-значение)                                     | `PropValue<ITEM,MULTIPLE>`                             | -                                                             | Выбранное значение                                                     |

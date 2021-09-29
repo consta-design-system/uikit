@@ -18,14 +18,14 @@ export const TextFieldExampleLabel = () => {
         value={value}
         placeholder="Top"
         label="Top"
-        labelAlign="top"
+        labelPosition="top"
       />
       <TextField
         onChange={handleChange}
         value={value}
         placeholder="Left "
         label="Left"
-        labelAlign="left"
+        labelPosition="left"
       />
     </div>
   );

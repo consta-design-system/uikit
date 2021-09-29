@@ -12,9 +12,9 @@ export const fieldLabelPropSize = ['xs', 's', 'm', 'l'] as const;
 export type FieldLabelPropSize = typeof fieldLabelPropSize[number];
 export const fieldLabelPropSizeDefault: FieldLabelPropSize = 'm';
 
-export const fieldLabelPropAlign = ['top', 'left'] as const;
-export type FieldLabelPropAlign = typeof fieldLabelPropAlign[number];
-export const fieldLabelPropAlignDefault: FieldLabelPropAlign = 'top';
+export const fieldLabelPropPosition = ['top', 'left'] as const;
+export type FieldLabelPropPosition = typeof fieldLabelPropPosition[number];
+export const fieldLabelPropPositionDefault: FieldLabelPropPosition = 'top';
 
 type FieldLabelProps = Omit<TextProps, ExcludeProps> & {
   size: FieldLabelPropSize;

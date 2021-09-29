@@ -23,6 +23,9 @@ const getKnobs = () => ({
   size: select('size', ['m', 's', 'l'], defaultPropSize),
   view: select('view', propView, defaultPropView),
   form: select('form', propForm, defaultPropForm),
+  caption: text('caption', ''),
+  label: text('label', ''),
+  labelPosition: select('labelPosition', ['top', 'left'], 'top'),
   placeholder: text('placeholder', 'Placeholder'),
   withGroups: boolean('withGroups', false),
 });
@@ -30,7 +33,17 @@ const getKnobs = () => ({
 const cnUserSelectStories = cn('UserSelectStories');
 
 export function Playground(): JSX.Element {
-  const { size, disabled, view, form, placeholder, withGroups } = getKnobs();
+  const {
+    size,
+    disabled,
+    view,
+    form,
+    placeholder,
+    withGroups,
+    label,
+    labelPosition,
+    caption,
+  } = getKnobs();
   const [value, setValue] = useState<Item | null>(null);
   const [valueMultiple, setValueMultiple] = useState<Item[] | null>(null);
   const multiple = boolean('multiple', false);
@@ -49,6 +62,9 @@ export function Playground(): JSX.Element {
         onChange={({ value }) => setValueMultiple(value)}
         groups={withGroups ? groups : []}
         multiple
+        label={label}
+        labelPosition={labelPosition}
+        caption={caption}
       />
     );
   }
@@ -65,6 +81,9 @@ export function Playground(): JSX.Element {
       onChange={({ value }) => setValue(value)}
       groups={withGroups ? groups : []}
       multiple={false}
+      label={label}
+      labelPosition={labelPosition}
+      caption={caption}
     />
   );
 }
@@ -89,7 +108,17 @@ const searchFunction = (item: MyItem, searchValue: string): boolean => {
 
 export const WithRender = createStory(
   () => {
-    const { size, disabled, view, form, placeholder, withGroups } = getKnobs();
+    const {
+      size,
+      disabled,
+      view,
+      form,
+      placeholder,
+      withGroups,
+      label,
+      labelPosition,
+      caption,
+    } = getKnobs();
     const [value, setValue] = useState<MyItem | null>();
 
     return (
@@ -138,6 +167,9 @@ export const WithRender = createStory(
         getItemAvatarUrl={(item) => item.avatarUrl}
         getItemSubLabel={(item) => item.email}
         searchFunction={searchFunction}
+        label={label}
+        labelPosition={labelPosition}
+        caption={caption}
       />
     );
   },
@@ -148,7 +180,17 @@ export const WithRender = createStory(
 
 export const WithCreate = createStory(
   () => {
-    const { size, disabled, view, form, placeholder, withGroups } = getKnobs();
+    const {
+      size,
+      disabled,
+      view,
+      form,
+      placeholder,
+      withGroups,
+      label,
+      labelPosition,
+      caption,
+    } = getKnobs();
     const [value, setValue] = useState<Item | null>();
     const [list, setList] = useState<Item[]>(items);
 
@@ -164,6 +206,9 @@ export const WithCreate = createStory(
         onChange={({ value }) => setValue(value)}
         groups={withGroups ? groups : []}
         onCreate={({ label }) => setList([{ label, id: `${label}_${list.length + 1}` }, ...list])}
+        label={label}
+        labelPosition={labelPosition}
+        caption={caption}
       />
     );
   },

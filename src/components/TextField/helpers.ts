@@ -2,7 +2,7 @@ import React from 'react';
 
 import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
-import { FieldLabelPropAlign } from '../FieldLabel/FieldLabel';
+import { FieldLabelPropPosition } from '../FieldLabel/FieldLabel';
 
 export type TextFieldPropValue = string | null;
 export type TextFieldPropName = string;
@@ -104,7 +104,7 @@ export type Props<TYPE extends string> = {
   children?: never;
   label?: string;
   caption?: string;
-  labelAlign?: FieldLabelPropAlign;
+  labelPosition?: FieldLabelPropPosition;
 };
 
 export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<

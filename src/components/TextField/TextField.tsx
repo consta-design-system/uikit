@@ -62,7 +62,7 @@ export function TextFieldRender<TYPE extends string>(
     tabIndex,
     ariaLabel,
     label,
-    labelAlign = 'top',
+    labelPosition = 'top',
     caption,
     iconSize: iconSizeProp,
     ...otherProps
@@ -129,13 +129,18 @@ export function TextFieldRender<TYPE extends string>(
   };
 
   return (
-    <div className={cnTextField({ labelAlign, size }, [className])} {...otherProps}>
-      {label && <FieldLabel size={size}>{label}</FieldLabel>}
-      <div className={cnTextField('CaptionContainer', { size })}>
+    <div
+      className={cnTextField({ position: labelPosition, size, view }, [className])}
+      {...otherProps}
+    >
+      {label && (
+        <FieldLabel className={cnTextField('Label')} size={size}>
+          {label}
+        </FieldLabel>
+      )}
+      <div className={cnTextField('CaptionContainer')}>
         <div
           className={cnTextField('InputContainer', {
-            size,
-            view,
             form,
             state,
             disabled,
@@ -182,7 +187,11 @@ export function TextFieldRender<TYPE extends string>(
             </div>
           )}
         </div>
-        {caption && <FieldCaption status={state}>{caption}</FieldCaption>}
+        {caption && (
+          <FieldCaption className={cnTextField('Caption')} status={state}>
+            {caption}
+          </FieldCaption>
+        )}
       </div>
     </div>
   );

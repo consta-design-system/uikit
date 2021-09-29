@@ -169,13 +169,13 @@ const App = () => {
 ### Лэйбл
 
 Вы можете добавить лэйбл для поля ввода, обазначив за что оно отвечает. За текст
-отвечает свойство `label`, за его расположение `labelAlign`.
+отвечает свойство `label`, за его расположение `labelPosition`.
 
 <TextFieldExampleLabel />
 
 ```tsx
-<TextField placeholder="Top" label="Top" labelAlign="top" />
-<TextField placeholder="Left" label="Left" labelAlign="left" />
+<TextField placeholder="Top" label="Top" labelPosition="top" />
+<TextField placeholder="Left" label="Left" labelPosition="left" />
 ```
 
 ### Подпись
@@ -269,7 +269,7 @@ const App = () => {
 | [`maxLength?`](#строки-и-колонки)          | `number`                                                                                                                                                             | -            | Максимальная ширина                                                                                                        |
 | [`view?`](#внешний-вид)                    | `'default', 'clear'`                                                                                                                                                 | `'default'`  | Вид поля                                                                                                                   |
 | [`label?`](#лэйбл)                         | `string`                                                                                                                                                             | -            | Лэйбл к полю ввода                                                                                                         |
-| [`labelAlign?`](#лэйбл)                    | `'top', 'left'`                                                                                                                                                      | `'top'`      | Положение лэйбла                                                                                                           |
+| [`labelPosition?`](#лэйбл)                 | `'top', 'left'`                                                                                                                                                      | `'top'`      | Положение лэйбла                                                                                                           |
 | [`caption?`](#подпись)                     | `string`                                                                                                                                                             | -            | Подпись к полю ввода                                                                                                       |
 | [`form?`](#форма)                          | `'default', 'brick', 'round', 'clearRound', 'roundClear', 'clearDefault', 'defaultClear', 'defaultBrick', 'brickDefault', 'brickClear', 'clearBrick', 'clearClear'`, | `'default'`  | Форма поля                                                                                                                 |
 | [`leftSide?`](#дополнительная-информация)  | `React.FC<IconProps>\string`                                                                                                                                         | -            | Иконка или текст слева, внутри поля                                                                                        |

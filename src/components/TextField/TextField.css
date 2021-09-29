@@ -2,11 +2,37 @@
   position: relative;
   display: inline-flex;
 
-  &_labelAlign {
+  &_size {
+    &_xs {
+      --input-height: var(--control-height-xs);
+      --input-font-size: var(--control-text-size-xs);
+      --input-space: calc(var(--control-space-xs) * 0.5);
+    }
+
+    &_s {
+      --input-height: var(--control-height-s);
+      --input-font-size: var(--control-text-size-s);
+      --input-space: calc(var(--control-space-s) * 0.5);
+    }
+
+    &_m {
+      --input-height: var(--control-height-m);
+      --input-font-size: var(--control-text-size-m);
+      --input-space: calc(var(--control-space-m) * 0.5);
+    }
+
+    &_l {
+      --input-height: var(--control-height-l);
+      --input-font-size: var(--control-text-size-l);
+      --input-space: calc(var(--control-space-l) * 0.5);
+    }
+  }
+
+  &_position {
     &_top {
       flex-direction: column;
 
-      & .FieldLabel {
+      & .TextField-Label {
         margin-bottom: var(--space-xs);
       }
     }
@@ -14,29 +40,14 @@
     &_left {
       flex-direction: row;
 
-      & .FieldLabel {
+      & .TextField-Label {
         display: inline-flex;
         align-items: center;
-        height: var(--field-label-height);
-        margin-right: var(--space-s);
+        height: var(--input-height);
       }
 
-      &.TextField_size {
-        &_xs {
-          --field-label-height: var(--control-height-xs);
-        }
-
-        &_s {
-          --field-label-height: var(--control-height-s);
-        }
-
-        &_m {
-          --field-label-height: var(--control-height-m);
-        }
-
-        &_l {
-          --field-label-height: var(--control-height-l);
-        }
+      & > *:not(:last-child) {
+        margin-right: var(--space-s);
       }
     }
   }
@@ -46,73 +57,20 @@
     flex-direction: column;
     width: 100%;
 
-    & .FieldCaption {
+    & .TextField-Caption {
       margin-top: var(--space-2xs);
       margin-left: calc(var(--input-space) + var(--control-border-width));
     }
-
-    &_size {
-      &_xs {
-        --input-space: calc(var(--control-space-xs) * 0.5);
-      }
-
-      &_s {
-        --input-space: calc(var(--control-space-s) * 0.5);
-      }
-
-      &_m {
-        --input-space: calc(var(--control-space-m) * 0.5);
-      }
-
-      &_l {
-        --input-space: calc(var(--control-space-l) * 0.5);
-      }
-    }
   }
 
-  &-InputContainer {
-    position: relative;
-    display: inline-flex;
-    box-sizing: border-box;
-    max-width: 100%;
-    min-height: var(--input-height);
-    font-family: var(--font-primary);
-    font-weight: var(--font-weight-text-regular);
-    transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
-
-    &_width_full {
-      width: 100%;
+  &_view_clear,
+  &_view_clear:hover,
+  &_view_clear:focus {
+    & .TextField-Caption {
+      margin-left: 0;
     }
 
-    &_size {
-      &_xs {
-        --input-height: var(--control-height-xs);
-        --input-font-size: var(--control-text-size-xs);
-        --input-space: calc(var(--control-space-xs) * 0.5);
-      }
-
-      &_s {
-        --input-height: var(--control-height-s);
-        --input-font-size: var(--control-text-size-s);
-        --input-space: calc(var(--control-space-s) * 0.5);
-      }
-
-      &_m {
-        --input-height: var(--control-height-m);
-        --input-font-size: var(--control-text-size-m);
-        --input-space: calc(var(--control-space-m) * 0.5);
-      }
-
-      &_l {
-        --input-height: var(--control-height-l);
-        --input-font-size: var(--control-text-size-l);
-        --input-space: calc(var(--control-space-l) * 0.5);
-      }
-    }
-
-    &_view_clear,
-    &_view_clear:hover,
-    &_view_clear:focus {
+    & .TextField-InputContainer {
       padding: 0;
       color: var(--color-control-typo-default);
 
@@ -144,8 +102,10 @@
         }
       }
     }
+  }
 
-    &_view_default {
+  &_view_default {
+    & .TextField-InputContainer {
       padding: 0 var(--input-space);
       color: var(--color-control-typo-default);
       background: var(--color-control-bg-default);
@@ -236,6 +196,21 @@
           color: var(--color-control-typo-disable);
         }
       }
+    }
+  }
+
+  &-InputContainer {
+    position: relative;
+    display: inline-flex;
+    box-sizing: border-box;
+    max-width: 100%;
+    min-height: var(--input-height);
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-text-regular);
+    transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
+
+    &_width_full {
+      width: 100%;
     }
 
     &_form {

@@ -5,11 +5,41 @@
   align-items: flex-start;
   width: 100%;
 
-  &_labelAlign {
+  &_size {
+    &_xs {
+      --input-height: var(--control-height-xs);
+      --input-space: calc(var(--control-space-xs) * 0.5);
+      --input-font-size: var(--control-text-size-xs);
+      --input-space: calc(var(--control-space-xs) * 0.5);
+    }
+
+    &_s {
+      --input-height: var(--control-height-s);
+      --input-space: calc(var(--control-space-s) * 0.5);
+      --input-font-size: var(--control-text-size-s);
+      --tag-space: calc(var(--space-xs) / 2 - var(--control-border-width));
+    }
+
+    &_m {
+      --input-height: var(--control-height-m);
+      --input-space: calc(var(--control-space-m) * 0.5);
+      --input-font-size: var(--control-text-size-m);
+      --tag-space: calc(var(--space-s) / 2 - var(--control-border-width));
+    }
+
+    &_l {
+      --input-height: var(--control-height-l);
+      --input-space: calc(var(--control-space-l) * 0.5);
+      --input-font-size: var(--control-text-size-l);
+      --tag-space: calc(var(--space-m) / 2 - var(--control-border-width));
+    }
+  }
+
+  &_position {
     &_top {
       flex-direction: column;
 
-      & .FieldLabel {
+      & .Select-Label {
         margin-bottom: var(--space-xs);
       }
     }
@@ -17,29 +47,14 @@
     &_left {
       flex-direction: row;
 
-      & .FieldLabel {
+      & .Select-Label {
         display: inline-flex;
         align-items: center;
-        height: var(--field-label-height);
-        margin-right: var(--space-s);
+        height: var(--input-height);
       }
 
-      &.Select_size {
-        &_xs {
-          --field-label-height: var(--control-height-xs);
-        }
-
-        &_s {
-          --field-label-height: var(--control-height-s);
-        }
-
-        &_m {
-          --field-label-height: var(--control-height-m);
-        }
-
-        &_l {
-          --field-label-height: var(--control-height-l);
-        }
+      & > *:not(:last-child) {
+        margin-right: var(--space-s);
       }
     }
   }
@@ -49,28 +64,96 @@
     flex-direction: column;
     width: 100%;
 
-    & .FieldCaption {
+    & .Select-Caption {
       margin-top: var(--space-2xs);
       margin-left: calc(var(--input-space) + var(--control-border-width));
     }
+  }
 
-    &_size {
-      &_xs {
-        --input-space: calc(var(--control-space-xs) * 0.5);
-      }
+  &_view_default .Select-Control {
+    padding: 0;
+    color: var(--color-control-typo-default);
+    background: var(--color-control-bg-default);
+    border: var(--control-border-width) solid var(--color-control-bg-border-default);
+    border-radius: var(--control-radius);
 
-      &_s {
-        --input-space: calc(var(--control-space-s) * 0.5);
-      }
+    &:hover {
+      border-color: var(--color-control-bg-border-default-hover);
+    }
+  }
 
-      &_m {
-        --input-space: calc(var(--control-space-m) * 0.5);
-      }
+  &_view_default .Select-SelectContainer_focused .Select-Control {
+    z-index: 1;
+    border-color: var(--color-control-bg-border-focus);
+    outline: none;
+  }
 
-      &_l {
-        --input-space: calc(var(--control-space-l) * 0.5);
+  &_view_default .Select-SelectContainer_form_clear.Select-SelectContainer_focused .Select-Control,
+  &_view_default
+    .Select-SelectContainer_form_clearClear.Select-SelectContainer_focused
+    .Select-Control {
+    box-shadow: var(--control-border-width) 0 var(--color-control-bg-border-focus),
+      calc(-1 * var(--control-border-width)) 0 var(--color-control-bg-border-focus);
+  }
+
+  &_view_default
+    .Select-SelectContainer_form_defaultClear.Select-SelectContainer_focused
+    .Select-Control,
+  &_view_default
+    .Select-SelectContainer_form_brickClear.Select-SelectContainer_focused
+    .Select-Control,
+  &_view_default
+    .Select-SelectContainer_form_roundClear.Select-SelectContainer_focused
+    .Select-Control {
+    box-shadow: var(--control-border-width) 0 var(--color-control-bg-border-focus);
+  }
+
+  &_view_default
+    .Select-SelectContainer_form_clearDefault.Select-SelectContainer_focused
+    .Select-Control,
+  &_view_default
+    .Select-SelectContainer_form_clearBrick.Select-SelectContainer_focused
+    .Select-Control,
+  &_view_default
+    .Select-SelectContainer_form_clearRound.Select-SelectContainer_focused
+    .Select-Control {
+    box-shadow: calc(-1 * var(--control-border-width)) 0 var(--color-control-bg-border-focus);
+  }
+
+  &_view_default .Select-SelectContainer_disabled .Select-Control {
+    color: var(--color-control-typo-disable);
+    background: var(--color-control-bg-disable);
+    border-color: var(--color-control-bg-border-disable);
+    pointer-events: none;
+  }
+
+  &_view_clear {
+    & .Select-Caption {
+      margin-left: 0;
+    }
+  }
+
+  &_view_clear .Select-Control,
+  &_view_clear .Select-Control:hover,
+  &_view_clear .Select-Control:focus {
+    padding: 0;
+    color: var(--color-control-typo-default);
+
+    &.Select-SelectContainer_disabled {
+      pointer-events: none;
+
+      & .Select-Control {
+        color: var(--color-control-typo-disable);
       }
     }
+  }
+
+  &_view_clear.Select-SelectContainer_disabled .Select-Control {
+    pointer-events: none;
+  }
+
+  &_view_default .Select-ControlValueContainer {
+    padding: 0 0 0 var(--input-space);
   }
 
   &-SelectContainer {
@@ -78,56 +161,9 @@
     display: flex;
     width: 100%;
 
-    &_size {
-      &_xs {
-        --input-height: var(--control-height-xs);
-        --input-font-size: var(--control-text-size-xs);
-        --input-space: calc(var(--control-space-xs) * 0.5);
-      }
-
-      &_s {
-        --input-height: var(--control-height-s);
-        --input-font-size: var(--control-text-size-s);
-        --input-space: calc(var(--control-space-s) * 0.5);
-        --tag-space: calc(var(--space-xs) / 2 - var(--control-border-width));
-      }
-
-      &_m {
-        --input-height: var(--control-height-m);
-        --input-font-size: var(--control-text-size-m);
-        --input-space: calc(var(--control-space-m) * 0.5);
-        --tag-space: calc(var(--space-s) / 2 - var(--control-border-width));
-      }
-
-      &_l {
-        --input-height: var(--control-height-l);
-        --input-font-size: var(--control-text-size-l);
-        --input-space: calc(var(--control-space-l) * 0.5);
-        --tag-space: calc(var(--space-m) / 2 - var(--control-border-width));
-      }
-    }
-
     &_multiple &-Control {
       height: auto;
       min-height: var(--input-height);
-    }
-
-    &_view_default .Select-Control {
-      padding: 0;
-      color: var(--color-control-typo-default);
-      background: var(--color-control-bg-default);
-      border: var(--control-border-width) solid var(--color-control-bg-border-default);
-      border-radius: var(--control-radius);
-
-      &:hover {
-        border-color: var(--color-control-bg-border-default-hover);
-      }
-    }
-
-    &_view_default.Select-SelectContainer_focused .Select-Control {
-      z-index: 1;
-      border-color: var(--color-control-bg-border-focus);
-      outline: none;
     }
 
     &_form {
@@ -204,63 +240,8 @@
       }
     }
 
-    &_view_default.Select-SelectContainer_form_clear.Select-SelectContainer_focused .Select-Control,
-    &_view_default.Select-SelectContainer_form_clearClear.Select-SelectContainer_focused
-      .Select-Control {
-      box-shadow: var(--control-border-width) 0 var(--color-control-bg-border-focus),
-        calc(-1 * var(--control-border-width)) 0 var(--color-control-bg-border-focus);
-    }
-
-    &_view_default.Select-SelectContainer_form_defaultClear.Select-SelectContainer_focused
-      .Select-Control,
-    &_view_default.Select-SelectContainer_form_brickClear.Select-SelectContainer_focused
-      .Select-Control,
-    &_view_default.Select-SelectContainer_form_roundClear.Select-SelectContainer_focused
-      .Select-Control {
-      box-shadow: var(--control-border-width) 0 var(--color-control-bg-border-focus);
-    }
-
-    &_view_default.Select-SelectContainer_form_clearDefault.Select-SelectContainer_focused
-      .Select-Control,
-    &_view_default.Select-SelectContainer_form_clearBrick.Select-SelectContainer_focused
-      .Select-Control,
-    &_view_default.Select-SelectContainer_form_clearRound.Select-SelectContainer_focused
-      .Select-Control {
-      box-shadow: calc(-1 * var(--control-border-width)) 0 var(--color-control-bg-border-focus);
-    }
-
-    &_view_default.Select-SelectContainer_disabled .Select-Control {
-      color: var(--color-control-typo-disable);
-      background: var(--color-control-bg-disable);
-      border-color: var(--color-control-bg-border-disable);
-      pointer-events: none;
-    }
-
-    &_view_clear .Select-Control,
-    &_view_clear .Select-Control:hover,
-    &_view_clear .Select-Control:focus {
-      padding: 0;
-      color: var(--color-control-typo-default);
-
-      &.Select-SelectContainer_disabled {
-        pointer-events: none;
-
-        & .Select-Control {
-          color: var(--color-control-typo-disable);
-        }
-      }
-    }
-
-    &_view_clear.Select-SelectContainer_disabled .Select-Control {
-      pointer-events: none;
-    }
-
     &_form_round &-IndicatorsDropdown {
       border-radius: 0 calc(var(--input-height) / 2) calc(var(--input-height) / 2) 0;
-    }
-
-    &_view_default .Select-ControlValueContainer {
-      padding: 0 0 0 var(--input-space);
     }
 
     &_multiple &-ControlValueContainer {

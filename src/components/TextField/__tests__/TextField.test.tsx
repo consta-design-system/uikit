@@ -53,7 +53,7 @@ describe('Компонент Button', () => {
       textFieldPropSize.forEach((size) => {
         it(`присваивает класс для size=${size}`, () => {
           renderComponent({ size });
-          expect(getInputContainer()).toHaveClass(cnTextField('InputContainer', { size }));
+          expect(getRender()).toHaveClass(cnTextField({ size }));
         });
       });
     });
@@ -77,7 +77,7 @@ describe('Компонент Button', () => {
       textFieldPropView.forEach((view) => {
         it(`присваивает класс для view=${view}`, () => {
           renderComponent({ view });
-          expect(getInputContainer()).toHaveClass(cnTextField('InputContainer', { view }));
+          expect(getRender()).toHaveClass(cnTextField({ view }));
         });
       });
     });
