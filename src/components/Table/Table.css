@@ -86,4 +86,16 @@
     padding-bottom: var(--cell-padding-vertical);
     text-align: center;
   }
+
+  &-CreatRowCell {
+    position: sticky;
+    left: 0;
+    display: block;
+    background-color: var(--color-bg-default);
+    grid-column: 1 / -1;
+  }
+
+  &-CreateRowButton {
+    border-top: var(--table-border);
+  }
 }

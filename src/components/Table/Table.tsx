@@ -10,6 +10,7 @@ import { IconUnsort } from '../../icons/IconUnsort/IconUnsort';
 import { sortBy as sortByDefault, updateAt } from '../../utils/array';
 import { cn } from '../../utils/bem';
 import { isNotNil, isString } from '../../utils/type-guards';
+import { Button, ButtonPropSize } from '../Button/Button';
 import { Text } from '../Text/Text';
 
 import { HorizontalAlign, TableCell, VerticalAlign } from './Cell/TableCell';
@@ -64,6 +65,12 @@ type ZebraStriped = typeof zebraStriped[number];
 export const headerVerticalAligns = ['center', 'bottom'] as const;
 export type HeaderVerticalAlign = typeof headerVerticalAligns[number];
 
+const createButtonSizeMap: Record<Size, ButtonPropSize> = {
+  s: 'xs',
+  m: 's',
+  l: 'm',
+};
+
 type TableCSSCustomProperty = {
   '--table-width': string;
 };
@@ -83,6 +90,8 @@ type ActiveRow = {
 type onRowHover = ({ id, e }: { id: string | undefined; e: React.MouseEvent }) => void;
 
 type onRowClick = ({ id, e }: { id: string; e: React.MouseEvent }) => void;
+
+type onRowCreate = ({ id, index, e }: { id?: string; index: number; e: React.MouseEvent }) => void;
 
 export type TableRow = {
   id: string;
@@ -150,6 +159,8 @@ export type TableProps<T extends TableRow> = {
   className?: string;
   onRowHover?: onRowHover;
   onRowClick?: onRowClick;
+  onRowCreate?: onRowCreate;
+  rowCreateText?: string;
   lazyLoad?: LazyLoad;
   onFiltersUpdated?: (filters: SelectedFilters) => void;
   getTagLabel?: GetTagLabel;
@@ -240,12 +251,14 @@ const InternalTable = <T extends TableRow>(
     className,
     onRowHover,
     onRowClick,
+    onRowCreate,
+    rowCreateText = '+ Добавить строку',
     lazyLoad,
     onSortBy,
     onFiltersUpdated,
     getTagLabel,
-  isExpandedRowsByDefault = false,
-}= props;
+    isExpandedRowsByDefault = false,
+  } = props;
   const {
     headers,
     flattenedHeaders,
@@ -431,6 +444,12 @@ const InternalTable = <T extends TableRow>(
     activeRow.onChange({ id: activeRow.id === id ? undefined : id, e });
   };
 
+  const handleRowHover = (id?: string) => (e: React.MouseEvent) =>
+    onRowHover && onRowHover({ id, e });
+
+  const handleRowCreate = (index: number, id?: string) => (e: React.MouseEvent) =>
+    onRowCreate && onRowCreate({ e, id, index });
+
   const handleColumnResize = (idx: number, delta: number): void => {
     const columnMinWidth = Math.min(150, initialColumnWidths[idx]);
     const prevColumnWidth = resizedColumnWidths[idx] || initialColumnWidths[idx];
@@ -487,7 +506,7 @@ const InternalTable = <T extends TableRow>(
     flattenedHeaders,
   );
 
-  const hasNestedRows = useMemo(() => rows.some((row) => Boolean(row.rows?.length)), [rows]);
+  const hasNestedRows = React.useMemo(() => rows.some((row) => Boolean(row.rows?.length)), [rows]);
 
   const sortedTableData = sortingData(rows, sorting, onSortBy);
 
@@ -571,6 +590,31 @@ const InternalTable = <T extends TableRow>(
   const renderEmptyRowsPlaceholder = (placeholder: React.ReactNode): React.ReactNode => {
     return typeof placeholder === 'string' ? <Text size="s">{placeholder}</Text> : placeholder;
   };
+
+  const bottomCreateRowButton = useMemo(() => {
+    const rowsLength = rowsData.length;
+    /* Можно и rowsData[rowsLength - 1], но в таком случае TS не подскажет,
+    что мы будем искать id в undefined это может привести к ошибке */
+    const { id: lastRowId } = rowsData.slice(-1).pop() ?? {};
+
+    if (!onRowCreate) {
+      return null;
+    }
+
+    return (
+      <div className={cnTable(rowsLength ? 'CreatRowCell' : 'RowWithoutCells')}>
+        <Button
+          size={createButtonSizeMap[size]}
+          form="brick"
+          label={rowCreateText}
+          view="clear"
+          className={cnTable('CreateRowButton')}
+          onClick={handleRowCreate(rowsLength, lastRowId)}
+          width="full"
+        />
+      </div>
+    );
+  }, [rowCreateText, rowsData.length, onRowCreate]);
 
   const getTableCellProps = (
     row: TableTreeRow<T>,
@@ -715,8 +759,8 @@ const InternalTable = <T extends TableRow>(
                 nth,
                 withMergedCells: hasMergedCells,
               })}
-              onMouseEnter={(e) => onRowHover && onRowHover({ id: row.id, e })}
-              onMouseLeave={(e) => onRowHover && onRowHover({ id: undefined, e })}
+              onMouseEnter={handleRowHover(row.id)}
+              onMouseLeave={handleRowHover(undefined)}
               onClick={(e) => onRowClick && onRowClick({ id: row.id, e })}
             >
               {columnsWithMetaData(lowHeaders).map((column: TableColumn<T>, columnIdx: number) => {
@@ -766,6 +810,7 @@ const InternalTable = <T extends TableRow>(
           </div>
         </div>
       )}
+      {bottomCreateRowButton}
     </div>
   );
 };
