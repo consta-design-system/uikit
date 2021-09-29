@@ -5,7 +5,7 @@
   --sticky-top-and-left-z: calc(var(--sticky-top-z) + 1);
   --resizer-z: calc(var(--sticky-top-and-left-z) + 1);
   --fast-transition: 0.15s ease-out;
-  --shadow-color: rgba(var(--color-nums-shadow), 0.2);
+  --shadow-color: var(--color-bg-ghost);
   --table-border: 1px solid var(--color-bg-border);
   --resizer-width: calc(0 * 1px);
   position: relative;
