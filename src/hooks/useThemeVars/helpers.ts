@@ -29,7 +29,6 @@ const cssColorVars = [
   '--color-typo-link',
   '--color-typo-link-minor',
   '--color-typo-link-hover',
-  '--color-nums-shadow',
   '--color-scroll-bg',
   '--color-scroll-thumb',
   '--color-scroll-thumb-hover',

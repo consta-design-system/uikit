@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { select, text } from '@storybook/addon-knobs';
+import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { createMetadata } from '../../../utils/storybook';
 import {
@@ -38,6 +38,7 @@ const defaultKnobs = () => ({
   type: select('type', ['', ...textPropType], ''),
   view: select('View', textPropView, textPropViewDefault),
   weight: select('weight', ['', ...textPropWeight], ''),
+  truncate: boolean('truncate', false),
   text: text(
     'Content',
     'Чтобы человек захотел это прочитать, у него должна быть очень веская причина. Может быть, его заставили. Может быть, это модный автор, и все друзья уже прочитали. Может быть, где-то здесь в тексте решение его насущной проблемы. Или он просто устроился в кресле, чтобы познакомиться с классной книгой. В любом случае нужна веская причина. Сам по себе этот текст ничем не привлекает.',
@@ -61,6 +62,7 @@ export function Playground() {
     view,
     weight,
     text,
+    truncate,
   } = defaultKnobs();
 
   return (
@@ -79,6 +81,7 @@ export function Playground() {
       type={type || undefined}
       view={view || undefined}
       weight={weight || undefined}
+      truncate={truncate}
     >
       {text}
     </Text>

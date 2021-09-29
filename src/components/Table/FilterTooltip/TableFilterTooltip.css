@@ -21,8 +21,9 @@
   &-Content {
     width: 312px;
     padding: var(--space-s);
-    background-color: var(--color-bg-secondary);
-    border-radius: 8px;
+    background-color: var(--color-bg-default);
+    border: var(--control-border-width) solid var(--color-bg-border);
+    border-radius: var(--control-radius);
     box-shadow: var(--shadow-layer);
   }
 

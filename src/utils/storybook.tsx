@@ -47,17 +47,20 @@ type CallbackSelectorParams = {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const callbackWithSelector = <T extends (...args: any[]) => any>(
-  { name, isActive = true }: CallbackSelectorParams,
-  fn: T,
+  { name, isActive = false }: CallbackSelectorParams,
+  fn?: T,
 ) => {
   const defaultOptions = ['undefined', '() => void'];
   const options = isActive ? defaultOptions.reverse() : defaultOptions;
 
-  const fnIsActive = select(name, options, options[0]) !== 'undefined';
+  if (select(name, options, options[0]) === 'undefined') {
+    return undefined;
+  }
 
   return (...args: Parameters<T>): ReturnType<T> | void => {
-    if (fnIsActive) {
-      action(name)(...args);
+    action(name)(...args);
+
+    if (fn) {
       return fn(...args);
     }
   };

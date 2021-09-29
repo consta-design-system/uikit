@@ -34,7 +34,7 @@ type Props<T extends TableRow> = {
   handleTooltipSave: (
     field: string,
     tooltipSelectedFilters: FieldSelectedValues,
-    value?: any,
+    value?: unknown,
   ) => void;
   filters: Filters<T> | undefined;
   visibleFilter: string | null;
@@ -98,7 +98,7 @@ export const TableHeader = <T extends TableRow>({
     const filterComponentProps = curFilter?.component?.props ?? {};
     const onToggle = handleFilterTogglerClick(column.accessor);
     const filterId = curFilter?.id;
-    const handleFilterSave = (filterValue: any) => {
+    const handleFilterSave = (filterValue?: unknown) => {
       if (filterId) {
         handleTooltipSave(column.accessor!, [filterId], filterValue);
       }

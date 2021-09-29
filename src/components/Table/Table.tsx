@@ -3,12 +3,14 @@ import './Table.css';
 import React, { useMemo } from 'react';
 
 import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
+import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { IconSortDown } from '../../icons/IconSortDown/IconSortDown';
 import { IconSortUp } from '../../icons/IconSortUp/IconSortUp';
 import { IconUnsort } from '../../icons/IconUnsort/IconUnsort';
 import { sortBy as sortByDefault, updateAt } from '../../utils/array';
 import { cn } from '../../utils/bem';
-import { isNotNil } from '../../utils/type-guards';
+import { isNotNil, isString } from '../../utils/type-guards';
+import { Button, ButtonPropSize } from '../Button/Button';
 import { Text } from '../Text/Text';
 
 import { HorizontalAlign, TableCell, VerticalAlign } from './Cell/TableCell';
@@ -18,7 +20,10 @@ import {
   Props as TableRowsCollapseProps,
   TableRowsCollapse,
 } from './RowsCollapse/TableRowsCollapse';
-import { TableSelectedOptionsList } from './SelectedOptionsList/TableSelectedOptionsList';
+import {
+  GetTagLabel,
+  TableSelectedOptionsList,
+} from './SelectedOptionsList/TableSelectedOptionsList';
 import {
   fieldFiltersPresent,
   FieldSelectedValues,
@@ -31,10 +36,13 @@ import {
   useSelectedFilters,
 } from './filtering';
 import {
+  createSortingState,
   getColumnLeftOffset,
   getColumnsSize,
   getNewSorting,
   Header,
+  Order,
+  OrderType,
   Position,
   transformRows,
   useHeaderData,
@@ -57,6 +65,12 @@ type ZebraStriped = typeof zebraStriped[number];
 export const headerVerticalAligns = ['center', 'bottom'] as const;
 export type HeaderVerticalAlign = typeof headerVerticalAligns[number];
 
+const createButtonSizeMap: Record<Size, ButtonPropSize> = {
+  s: 'xs',
+  m: 's',
+  l: 'm',
+};
+
 type TableCSSCustomProperty = {
   '--table-width': string;
 };
@@ -76,6 +90,8 @@ type ActiveRow = {
 type onRowHover = ({ id, e }: { id: string | undefined; e: React.MouseEvent }) => void;
 
 type onRowClick = ({ id, e }: { id: string; e: React.MouseEvent }) => void;
+
+type onRowCreate = ({ id, index, e }: { id?: string; index: number; e: React.MouseEvent }) => void;
 
 export type TableRow = {
   id: string;
@@ -101,8 +117,10 @@ type ColumnBase<T extends TableRow> = ValueOf<
       accessor: K extends string ? K : never;
       sortable?: boolean;
       sortByField?: keyof T;
+      order?: OrderType;
       sortFn?(a: T[K], b: T[K]): number;
       renderCell?: (row: T) => React.ReactNode;
+      getComparisonValue?: (cell: T[K]) => number | string;
     };
   }
 >;
@@ -122,7 +140,7 @@ export type TableColumn<T extends TableRow> = {
   position?: Position;
 } & (GroupColumnAddition<T> | SingleColumnAddition<T>);
 
-export type Props<T extends TableRow> = {
+export type TableProps<T extends TableRow> = {
   columns: TableColumn<T>[];
   rows: T[];
   filters?: Filters<T>;
@@ -141,10 +159,17 @@ export type Props<T extends TableRow> = {
   className?: string;
   onRowHover?: onRowHover;
   onRowClick?: onRowClick;
+  onRowCreate?: onRowCreate;
+  rowCreateText?: string;
   lazyLoad?: LazyLoad;
   onFiltersUpdated?: (filters: SelectedFilters) => void;
+  getTagLabel?: GetTagLabel;
   isExpandedRowsByDefault?: boolean;
 };
+
+type Table = <T extends TableRow>(
+  props: TableProps<T> & { ref?: React.Ref<HTMLDivElement> },
+) => React.ReactElement | null;
 
 export type ColumnMetaData = {
   filterable: boolean;
@@ -163,6 +188,15 @@ export type SortingState<T extends TableRow> = {
   sortFn?: (a: T[keyof T], b: T[keyof T]) => number;
 } | null;
 
+type GetTableCellProps = {
+  show: boolean;
+  rowSpan: number;
+  style: {
+    'left'?: number;
+    '--row-span'?: string;
+  };
+};
+
 const getColumnSortByField = <T extends TableRow>(column: TableColumn<T>): keyof T =>
   (column.sortable && column.sortByField) || column.accessor!;
 
@@ -178,15 +212,15 @@ const sortingData = <T extends TableRow>(
   if (!sorting) {
     return rows;
   }
-  const sorredRows = sortByDefault(rows, sorting.by, sorting.order, sorting.sortFn);
+  const sortedRows = sortByDefault(rows, sorting.by, sorting.order, sorting.sortFn);
 
-  if (sorredRows.some((row) => row.rows?.length)) {
-    return sorredRows.map((row) => {
+  if (sortedRows.some((row) => row.rows?.length)) {
+    return sortedRows.map((row) => {
       return row.rows ? { ...row, rows: sortingData(row.rows as T[], sorting, onSortBy) } : row;
     });
   }
 
-  return sorredRows;
+  return sortedRows;
 };
 
 const defaultEmptyRowsPlaceholder = (
@@ -195,29 +229,36 @@ const defaultEmptyRowsPlaceholder = (
   </Text>
 );
 
-export const Table = <T extends TableRow>({
-  columns,
-  rows,
-  size = 'l',
-  filters,
-  isResizable = false,
-  stickyHeader = false,
-  stickyColumns = 0,
-  activeRow,
-  verticalAlign = 'top',
-  headerVerticalAlign = 'center',
-  zebraStriped,
-  borderBetweenRows = false,
-  borderBetweenColumns = false,
-  emptyRowsPlaceholder = defaultEmptyRowsPlaceholder,
-  className,
-  onRowHover,
-  onRowClick,
-  lazyLoad,
-  onSortBy,
-  onFiltersUpdated,
-  isExpandedRowsByDefault = false,
-}: Props<T>): React.ReactElement => {
+const InternalTable = <T extends TableRow>(
+  props: TableProps<T>,
+  ref?: React.Ref<HTMLDivElement>,
+) => {
+  const {
+    columns,
+    rows,
+    size = 'l',
+    filters: rawFilters,
+    isResizable = false,
+    stickyHeader = false,
+    stickyColumns = 0,
+    activeRow,
+    verticalAlign = 'top',
+    headerVerticalAlign = 'center',
+    zebraStriped,
+    borderBetweenRows = false,
+    borderBetweenColumns = false,
+    emptyRowsPlaceholder = defaultEmptyRowsPlaceholder,
+    className,
+    onRowHover,
+    onRowClick,
+    onRowCreate,
+    rowCreateText = '+ Добавить строку',
+    lazyLoad,
+    onSortBy,
+    onFiltersUpdated,
+    getTagLabel,
+    isExpandedRowsByDefault = false,
+  } = props;
   const {
     headers,
     flattenedHeaders,
@@ -235,6 +276,10 @@ export const Table = <T extends TableRow>({
     getColumnsWidth(),
   );
 
+  const filters = React.useMemo(() => {
+    return rawFilters && rawFilters.filter((filter) => filter.id && filter.field);
+  }, [rawFilters]);
+
   React.useEffect(() => {
     setResizedColumnWidths(getColumnsWidth());
   }, [lowHeaders.length]);
@@ -243,6 +288,7 @@ export const Table = <T extends TableRow>({
   const [sorting, setSorting] = React.useState<SortingState<T>>(null);
   const [visibleFilter, setVisibleFilter] = React.useState<string | null>(null);
   const [tableScroll, setTableScroll] = React.useState({ top: 0, left: 0 });
+
   const tableRef = React.useRef<HTMLDivElement>(null);
   const columnsRefs = React.useRef<Record<number, HTMLDivElement | null>>({});
   const {
@@ -252,6 +298,22 @@ export const Table = <T extends TableRow>({
     removeAllSelectedFilters,
   } = useSelectedFilters(filters, onFiltersUpdated);
   const [expandedRowIds, setExpandedRowIds] = React.useState<string[]>([]);
+
+  // установка сортировки по умолчанию
+
+  React.useEffect(() => {
+    const sortingColumn = columns.find(
+      (col) => isString(col.order) && Object.prototype.hasOwnProperty.call(Order, col.order),
+    );
+    if (sortingColumn) {
+      const sortingState = createSortingState(
+        getColumnSortByField(sortingColumn),
+        sortingColumn.order,
+        sortingColumn.sortFn,
+      );
+      setSorting(sortingState);
+    }
+  }, [columns]);
 
   /*
     Подписываемся на изменения размеров таблицы, но не используем значения из
@@ -327,7 +389,7 @@ export const Table = <T extends TableRow>({
   const handleTooltipSave = (
     field: string,
     tooltipSelectedFilters: FieldSelectedValues,
-    value?: any,
+    value?: unknown,
   ): void => {
     updateSelectedFilters(field, tooltipSelectedFilters, value);
   };
@@ -381,6 +443,12 @@ export const Table = <T extends TableRow>({
 
     activeRow.onChange({ id: activeRow.id === id ? undefined : id, e });
   };
+
+  const handleRowHover = (id?: string) => (e: React.MouseEvent) =>
+    onRowHover && onRowHover({ id, e });
+
+  const handleRowCreate = (index: number, id?: string) => (e: React.MouseEvent) =>
+    onRowCreate && onRowCreate({ e, id, index });
 
   const handleColumnResize = (idx: number, delta: number): void => {
     const columnMinWidth = Math.min(150, initialColumnWidths[idx]);
@@ -438,7 +506,7 @@ export const Table = <T extends TableRow>({
     flattenedHeaders,
   );
 
-  const hasNestedRows = useMemo(() => rows.some((row) => Boolean(row.rows?.length)), [rows]);
+  const hasNestedRows = React.useMemo(() => rows.some((row) => Boolean(row.rows?.length)), [rows]);
 
   const sortedTableData = sortingData(rows, sorting, onSortBy);
 
@@ -523,54 +591,88 @@ export const Table = <T extends TableRow>({
     return typeof placeholder === 'string' ? <Text size="s">{placeholder}</Text> : placeholder;
   };
 
+  const bottomCreateRowButton = useMemo(() => {
+    const rowsLength = rowsData.length;
+    /* Можно и rowsData[rowsLength - 1], но в таком случае TS не подскажет,
+    что мы будем искать id в undefined это может привести к ошибке */
+    const { id: lastRowId } = rowsData.slice(-1).pop() ?? {};
+
+    if (!onRowCreate) {
+      return null;
+    }
+
+    return (
+      <div className={cnTable(rowsLength ? 'CreatRowCell' : 'RowWithoutCells')}>
+        <Button
+          size={createButtonSizeMap[size]}
+          form="brick"
+          label={rowCreateText}
+          view="clear"
+          className={cnTable('CreateRowButton')}
+          onClick={handleRowCreate(rowsLength, lastRowId)}
+          width="full"
+        />
+      </div>
+    );
+  }, [rowCreateText, rowsData.length, onRowCreate]);
+
   const getTableCellProps = (
     row: TableTreeRow<T>,
     rowIdx: number,
     column: TableColumn<T>,
     columnIdx: number,
-  ) => {
-    let rowSpan = 1;
-    if (
-      (rowsData[rowIdx - 1] && rowsData[rowIdx - 1][column.accessor!] !== row[column.accessor!]) ||
-      rowIdx === 0 ||
-      !column.mergeCells
-    ) {
+  ): GetTableCellProps => {
+    const { mergeCells, accessor, position, getComparisonValue = (e) => e } = column;
+
+    const previousCell =
+      rowsData[rowIdx - 1] && getComparisonValue(rowsData[rowIdx - 1][accessor!]);
+    const currentCell = getComparisonValue(row[accessor!]);
+
+    const result: GetTableCellProps = {
+      rowSpan: 1,
+      show: false,
+      style: {
+        left: getStickyLeftOffset(columnIdx, position!.topHeaderGridIndex),
+      },
+    };
+
+    if (mergeCells && ((rowsData[rowIdx - 1] && previousCell !== currentCell) || rowIdx === 0)) {
       for (let i = rowIdx; i < rowsData.length; i++) {
-        if (rowsData[i + 1] && rowsData[i + 1][column.accessor!] === row[column.accessor!]) {
-          rowSpan++;
+        if (rowsData[i + 1]) {
+          const nextCell = getComparisonValue(rowsData[i + 1][accessor!]);
+
+          if (currentCell === nextCell) {
+            result.rowSpan++;
+          } else {
+            break;
+          }
         } else {
           break;
         }
       }
 
-      const style: {
-        'left': number | undefined;
-        '--row-span': string | null;
-      } = {
-        'left': getStickyLeftOffset(columnIdx, column.position!.topHeaderGridIndex),
-        '--row-span': column.mergeCells ? `span ${rowSpan}` : null,
-      };
+      if (result.rowSpan > 1) {
+        result.style['--row-span'] = `span ${result.rowSpan}`;
+      }
 
-      return {
-        show: true,
-        style,
-        rowSpan,
-      };
+      result.show = true;
     }
-    return {
-      show: false,
-      rowSpan,
-    };
+
+    if (!mergeCells) {
+      result.show = true;
+    }
+
+    return result;
   };
 
   return (
     <div
-      ref={tableRef}
+      ref={useForkRef([tableRef, ref])}
       className={cnTable(
         {
           size,
           isResizable,
-          zebraStriped: !hasMergedCells && zebraStriped,
+          zebraStriped,
           withBorderBottom: !filteredData.length,
         },
         [className],
@@ -640,6 +742,7 @@ export const Table = <T extends TableRow>({
         <div className={cnTable('RowWithoutCells')}>
           <TableSelectedOptionsList
             values={getSelectedFiltersList({ filters, selectedFilters, columns: lowHeaders })}
+            getTagLabel={getTagLabel}
             onRemove={removeSelectedFilter(filters)}
             onReset={resetSelectedFilters}
           />
@@ -656,17 +759,12 @@ export const Table = <T extends TableRow>({
                 nth,
                 withMergedCells: hasMergedCells,
               })}
-              onMouseEnter={(e) => onRowHover && onRowHover({ id: row.id, e })}
-              onMouseLeave={(e) => onRowHover && onRowHover({ id: undefined, e })}
+              onMouseEnter={handleRowHover(row.id)}
+              onMouseLeave={handleRowHover(undefined)}
               onClick={(e) => onRowClick && onRowClick({ id: row.id, e })}
             >
               {columnsWithMetaData(lowHeaders).map((column: TableColumn<T>, columnIdx: number) => {
-                const { show, style, rowSpan } = getTableCellProps(
-                  row as TableTreeRow<T>,
-                  rowIdx,
-                  column,
-                  columnIdx,
-                );
+                const { show, style, rowSpan } = getTableCellProps(row, rowIdx, column, columnIdx);
 
                 if (show) {
                   return (
@@ -712,6 +810,9 @@ export const Table = <T extends TableRow>({
           </div>
         </div>
       )}
+      {bottomCreateRowButton}
     </div>
   );
 };
+
+export const Table = React.forwardRef(InternalTable) as Table;

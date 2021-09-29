@@ -64,11 +64,6 @@ const bgColors = [
     color: '--color-bg-critical',
     description: 'Цвет фона для блоков, сообщающих об критичном действии/статусе',
   },
-  {
-    color: '--color-nums-shadow',
-    description:
-      'Цвет теней, который содержит в себе конкретные цифры из rgb и может быть использован только в конструкциях типа rgba( var(--color-nums-shadow), 0.5 ) Значение альфа-канала описывается отдельно в каждом отдельном случае',
-  },
 ] as const;
 
 const typoColors = [
