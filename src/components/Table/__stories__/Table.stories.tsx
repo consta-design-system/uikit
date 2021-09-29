@@ -16,8 +16,7 @@ import {
 } from '../__mock__/data.mock';
 import { IconCopy } from '../../../icons/IconCopy/IconCopy';
 import { updateAt } from '../../../utils/array';
-import { cn } from '../../../utils/bem';
-import { createMetadata, createStory } from '../../../utils/storybook';
+import { callbackWithSelector, createMetadata, createStory } from '../../../utils/storybook';
 import { Button } from '../../Button/Button';
 import { Checkbox } from '../../Checkbox/Checkbox';
 import { Text } from '../../Text/Text';
@@ -33,9 +32,9 @@ import {
   zebraStriped,
 } from '../Table';
 
+import WithRowCreationAndDeletion from './examples/WithRowCreationAndDeletion';
+import { cnTableStories } from './helpers';
 import mdx from './Table.docs.mdx';
-
-const cnTableStories = cn('TableStories');
 
 const defaultProps: Props<typeof tableData.rows[number]> = {
   columns: tableData.columns,
@@ -64,6 +63,9 @@ const getKnobs = <T extends TableRow>(replacedProps?: Partial<Props<T>>): Props<
 
   const zebraStripedProp = select('zebraStriped', ['', ...zebraStriped], props.zebraStriped);
 
+  const handleRowClick = callbackWithSelector({ name: 'onRowClick', isActive: false });
+  const handleRowHover = callbackWithSelector({ name: 'onRowHover', isActive: false });
+
   return {
     columns: object('columns', props.columns),
     rows: object('rows', props.rows),
@@ -83,7 +85,10 @@ const getKnobs = <T extends TableRow>(replacedProps?: Partial<Props<T>>): Props<
       headerVerticalAligns,
       props.headerVerticalAlign,
     ),
-    onRowClick: ({ id, e }) => action(`onRowClick[${id}]`)(e),
+    onRowClick: handleRowClick,
+    onRowHover: handleRowHover,
+    onRowCreate: undefined,
+    rowCreateText: undefined,
   };
 };
 
@@ -354,6 +359,10 @@ export const withCustomFilters = createStory(
     name: 'с кастомными фильтрами',
   },
 );
+
+export const WithRowActions = createStory(() => <WithRowCreationAndDeletion />, {
+  name: 'с добавлением/удалением строк',
+});
 
 export default createMetadata({
   title: 'Компоненты|/Отображение данных/Table',

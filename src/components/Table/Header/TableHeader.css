@@ -3,6 +3,12 @@
     display: contents;
   }
 
+  &-RemoveCell {
+    position: relative;
+    width: 0;
+    height: 0;
+  }
+
   &-Cell {
     &_level {
       &_high {
