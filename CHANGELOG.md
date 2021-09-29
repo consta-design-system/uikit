@@ -1,5 +1,18 @@
 # Changelog
 
+## v3.4.0 (22/09/2021)
+- [chore(deps): bump tmpl from 1.0.4 to 1.0.5 (#1583)](https://github.com/gazprom-neft/consta-uikit/commit/c7abe9ee09d845d2d602fe529c9948d6e959df04) - [@dependabot](https://github.com/dependabot[bot])
+- [fix(Table): added check for filters and tests (#1561)](https://github.com/gazprom-neft/consta-uikit/commit/8c02bd71a04b24b5df40cdd7508dbd0a50a7311a) - [@AntonS86](https://github.com/AntonS86)
+- [docs(common): rewrite main page (#1573)](https://github.com/gazprom-neft/consta-uikit/commit/87fa76085e69700cb35379de7deb13d7c69c121d) - [@arhayka](https://github.com/arhayka)
+- [fix(Table): edited appearance TableFilterContainer and TableFilterTooltip (#1550)](https://github.com/gazprom-neft/consta-uikit/commit/22ef3f1d9fc4e6f0e1ad8a9b6f96f47311dc6f64) - [@AntonS86](https://github.com/AntonS86)
+- [chore(commitizen): change footer (#1586)](https://github.com/gazprom-neft/consta-uikit/commit/93033456822df519ae9d346607dfbf96b0a03d2d) - [@gizeasy](https://github.com/gizeasy)
+- [feat(SnackBar): Add hideTimer props (#1552)](https://github.com/gazprom-neft/consta-uikit/commit/a03df88c26d66f363b0dd8e0d4491d7975380963) - [@N1KN](https://github.com/N1KN)
+- [feat(Table): added default sort (#1545)](https://github.com/gazprom-neft/consta-uikit/commit/8126255aa82605c2542fea4e127e77d36cd577e2) - [@AntonS86](https://github.com/AntonS86)
+- [feat(Table): added ref to component parameters (#1518)](https://github.com/gazprom-neft/consta-uikit/commit/c87693262ba3e25053c59f88dcece04c821c4145) - [@AntonS86](https://github.com/AntonS86)
+- [docs(MixCard): edit docs, add examples (#1562)](https://github.com/gazprom-neft/consta-uikit/commit/4f7a4027b47f9075d4e1b7f97ebd8889b878803b) - [@arhayka](https://github.com/arhayka)
+
+--------------------
+
 ## v3.3.0 (15/09/2021)
 **Важное из обновления:**
 - В компонентах `Modal` и `SideBar` добавлена возможность закрытия по нажатию `Esc`
@@ -359,10 +372,3 @@ _Обращаем внимание_: *версии компонентов обр
 - [feat(table): add event to arguments for activeRow (#733)](https://github.com/gazprom-neft/consta-uikit/commit/762ccabde2d937920408b03973f7492142d01212) - [@c1n1k](https://github.com/c1n1k)
 - [fix(Table): parent width related child headers (#553) (#707)](https://github.com/gazprom-neft/consta-uikit/commit/149df47c67dad8794d32cb3eccac551bc9b2d1a4) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
 - [fix(BasicSelect): fixed blur (#728)](https://github.com/gazprom-neft/consta-uikit/commit/2d734352f034d81543c2d63a9671f044e324f3b9) - [@c1n1k](https://github.com/c1n1k)
-
---------------------
-
-## v1.10.13 (30/12/2020)
-- [feat(withTooltip): added HOC withTooltip (#564)](https://github.com/gazprom-neft/consta-uikit/commit/7385f3149abd8e87c45d27d2b1361958f4aca6a6) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Icons): add new pack (#736)](https://github.com/gazprom-neft/consta-uikit/commit/6887bd8fc85947c1f2654c99a7c0a820ac3fc767) - [@fooontic](https://github.com/fooontic)
-- [fix(Table): fix table grid columns (#708)](https://github.com/gazprom-neft/consta-uikit/commit/2a7281fc9550ab266f34f989ffd7ba49111eddd2) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)

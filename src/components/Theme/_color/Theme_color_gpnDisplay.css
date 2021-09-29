@@ -5,6 +5,7 @@ $color-base-project: #0071b2; /* Проектный цвет, от которо�
 $color-base-phantom: #f6fbfd; /* Тонирующий цвет, от которого выстраиватся бордеры, оверлей под модальными окнами, ... */
 $color-base-path: #0078d2; /* Цвет ссылок и контролов, от которого выстраиваются все их состояния */
 $color-base-system: #4b6272; /* Цвет системнный */
+$color-base-shadow: #000306; /* Цвет тени */
 
 $color-base-success: #22c38e; /* Цвет успеха */
 $color-base-alert: #eb5757; /* Цвет ошибки */
@@ -21,7 +22,7 @@ $color-base-critical: #33000f;
   --color-bg-secondary: color($color-base-essential s(+25) l(+4)); /* Цвет дефолта */
   --color-bg-brand: color($color-base-project a(100%)); /* Цвет фона брендированый */
   --color-bg-link: color($color-base-path a(100%)); /* Цвет фона ссылки */
-  --color-bg-border: color($color-base-phantom a(20%) l(+10)); /* Цвет границ */
+  --color-bg-border: color($color-base-phantom a(28%)); /* Цвет границ */
   --color-bg-stripe: color(
     $color-base-phantom a(5%)
   ); /* Цвет зебры (например, при окрашивании фона строк таблицы через одну) */
@@ -148,5 +149,14 @@ $color-base-critical: #33000f;
   --color-control-typo-disable: color(
     $color-base-base a(24%)
   ); /* Цвет основного текста неактивного контрола */
+
+  /* /////////////////////////////
+  // Цвета тени /////////// */
+  --color-shadow-group-1: color($color-base-shadow a(8%));
+  --color-shadow-group-2: color($color-base-shadow a(32%));
+  --color-shadow-layer-1: color($color-base-shadow a(8%));
+  --color-shadow-layer-2: color($color-base-shadow a(32%));
+  --color-shadow-modal-1: color($color-base-shadow a(8%));
+  --color-shadow-modal-2: color($color-base-shadow a(32%));
 }
 /* stylelint-enable */

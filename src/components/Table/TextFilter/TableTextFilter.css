@@ -23,7 +23,7 @@
 
     .Button {
       height: auto;
-      margin-right: var(--space-3xl);
+      margin-right: var(--space-l);
       padding: 0;
       color: var(--color-typo-link);
       background-color: transparent;

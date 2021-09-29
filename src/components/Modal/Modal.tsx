@@ -78,6 +78,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
   } = props;
 
   const ref = useRef<HTMLDivElement | null>(null);
+  const portalRef = useRef<HTMLDivElement | null>(null);
   const { theme } = useTheme();
 
   useEffect(() => {
@@ -99,11 +100,13 @@ export const Modal: React.FC<ModalProps> = (props) => {
       appear
       classNames={cnForCssTransition(cnModal)}
       timeout={200}
+      nodeRef={portalRef}
     >
       <PortalWithTheme
         preset={theme}
         container={container}
         className={cnModal(null, [rootClassName])}
+        ref={portalRef}
       >
         {hasOverlay && <div className={cnModal('Overlay')} aria-label="Overlay" />}
         <div className={cnModal('Window', { width, position }, [className])} ref={ref} {...rest}>

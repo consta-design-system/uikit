@@ -3,8 +3,9 @@
   max-width: 400px;
   max-height: 440px;
   padding: var(--space-m);
-  background-color: var(--color-bg-secondary);
-  border-radius: calc(var(--control-radius) * 2);
+  background-color: var(--color-bg-default);
+  border: var(--control-border-width) solid var(--color-bg-border);
+  border-radius: var(--control-radius);
   box-shadow: var(--shadow-layer);
 
   &-Buttons {

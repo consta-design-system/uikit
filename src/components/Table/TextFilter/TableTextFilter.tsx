@@ -35,7 +35,9 @@ export const TableTextFilter: React.FC<TableTextFilterProps> = ({
   emptySearchText = 'Ничего не найдено :(',
 }) => {
   const [searchValue, setSearchValue] = useState<string | null>(null);
-  const [checkboxGroupValue, setCheckboxGroupValue] = useState<Item[] | null>(filterValue || items);
+  const [checkboxGroupValue, setCheckboxGroupValue] = useState<Item[] | null>(
+    (filterValue as Item[]) || items,
+  );
 
   const confirmHandler = () => {
     setSearchValue(null);

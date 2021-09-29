@@ -9,6 +9,11 @@ import { FilterComponentProps } from '../filtering';
 
 const cnNumberFilter = cn('TableNumberFilter');
 
+type Item = {
+  min?: string;
+  max?: string;
+};
+
 type TableNumberFilterProps = FilterComponentProps & {
   title?: string;
 };
@@ -19,8 +24,8 @@ export const TableNumberFilter: React.FC<TableNumberFilterProps> = ({
   title,
   onCancel,
 }) => {
-  const [minValue, setMinValue] = useState<string | undefined | null>(filterValue?.min);
-  const [maxValue, setMaxValue] = useState<string | undefined | null>(filterValue?.max);
+  const [minValue, setMinValue] = useState<string | undefined | null>((filterValue as Item)?.min);
+  const [maxValue, setMaxValue] = useState<string | undefined | null>((filterValue as Item)?.max);
 
   const textFieldRef = useRef<HTMLInputElement>(null);
 
