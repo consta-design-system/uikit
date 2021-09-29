@@ -5,6 +5,7 @@ $color-base-project: #0071b2; /* Проектный цвет, от которо�
 $color-base-phantom: #004269; /* Тонирующий цвет, от которого выстраиватся бордеры, оверлей под модальными окнами, ... */
 $color-base-path: #0078d2; /* Цвет ссылок и контролов, от которого выстраиваются все их состояния */
 $color-base-system: #ced8de; /* Цвет системнный */
+$color-base-shadow: #002033; /* Цвет тени */
 
 $color-base-success: #22c38e; /* Цвет успеха */
 $color-base-alert: #eb5757; /* Цвет ошибки */
@@ -21,7 +22,7 @@ $color-base-critical: #33000f;
   --color-bg-secondary: color($color-base-project s(-75) l(+59)); /* Цвет дефолта */
   --color-bg-brand: color($color-base-project a(100%)); /* Цвет фона брендированый */
   --color-bg-link: color($color-base-path a(100%)); /* Цвет фона ссылки */
-  --color-bg-border: color($color-base-phantom a(20%) l(+10)); /* Цвет границ */
+  --color-bg-border: color($color-base-phantom l(-1) a(20%)); /* Цвет границ */
   --color-bg-stripe: color(
     $color-base-phantom l(-11) a(5%)
   ); /* Цвет зебры (например, при окрашивании фона строк таблицы через одну) */
@@ -59,7 +60,6 @@ $color-base-critical: #33000f;
   --color-typo-link: color($color-base-path a(100%)); /* Цвет основной ссылки */
   --color-typo-link-minor: color($color-base-path s(-35%) l(-10%)); /* Цвет второстепенной ссылки */
   --color-typo-link-hover: color($color-base-path l(+8%)); /* Цвет ховера ссылки */
-  --color-nums-shadow: 0, 32, 51; /* Значения RGB для указания теней в конструкции rgba(R,G,B, alpha) */
 
   /* //////////////////////////////
   // Цвета скроллбара ////////////// */
@@ -153,5 +153,14 @@ $color-base-critical: #33000f;
   --color-control-typo-disable: color(
     $color-base-base a(26%)
   ); /* Цвет основного текста неактивного контрола */
+
+  /* /////////////////////////////
+  // Цвета тени /////////// */
+  --color-shadow-group-1: color($color-base-shadow a(2%));
+  --color-shadow-group-2: color($color-base-shadow a(16%));
+  --color-shadow-layer-1: color($color-base-shadow a(4%));
+  --color-shadow-layer-2: color($color-base-shadow a(12%));
+  --color-shadow-modal-1: color($color-base-shadow a(4%));
+  --color-shadow-modal-2: color($color-base-shadow a(12%));
 }
 /* stylelint-enable */

@@ -33,6 +33,7 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
   const {
     onClose,
     autoClose,
+    showProgress,
     icon: Icon,
     message,
     actions,
@@ -50,6 +51,8 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
   const handleMouseEnter = () => setHover(true);
   const handleMouseLeave = () => setHover(false);
   const autoCloseTime = getAutoCloseTime(autoClose);
+  const hideAutoCloseTimer =
+    showProgress === undefined || !(isNumber(autoCloseTime) && autoCloseTime > 0);
   const onAutoClose = (item: Item) => {
     if (onAutoCloseProp) {
       onAutoCloseProp(item);
@@ -86,9 +89,10 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
           onMount={handleMountTimer}
           onTimeIsOver={handleTimeIsOver}
           startTime={autoCloseTime}
+          hidden={hideAutoCloseTimer}
         />
       )}
-      {!autoCloseTime && Icon && <Icon className={cnSnackBar('Icon')} size="m" />}
+      {hideAutoCloseTimer && Icon && <Icon className={cnSnackBar('Icon')} size="m" />}
       <div className={cnSnackBar('Content')}>
         {isString(message) || isNumber(message) ? (
           <Text className={cnSnackBar('Message')} lineHeight="s">

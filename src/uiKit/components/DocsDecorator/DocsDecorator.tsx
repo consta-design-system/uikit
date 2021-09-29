@@ -13,12 +13,16 @@ export const cnDocsDecorator = cn('DocsDecorator');
 
 export const DocsDecorator: React.FC<DocsContainerProps> = (props) => {
   const { children, context } = props;
-
-  return (
+  const content = (
     <DocsContainer context={context}>
       <Theme preset={presetGpnDefault} className={cnDocsDecorator(null, ['theme_gap_medium'])}>
         {children}
       </Theme>
     </DocsContainer>
   );
+  if (process.env.NODE_ENV === 'development') {
+    return <React.StrictMode>{content}</React.StrictMode>;
+  }
+
+  return content;
 };

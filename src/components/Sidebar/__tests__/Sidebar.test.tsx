@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { Sidebar } from '../Sidebar';
+import { cnSidebar, Sidebar, sidebarPropSize } from '../Sidebar';
 
 type SidebarProps = React.ComponentProps<typeof Sidebar>;
 
@@ -75,6 +75,31 @@ describe('Компонент Sidebar', () => {
         render(getComponent({ onOpen, onClose, isOpen: false }));
         expect(onOpen).toBeCalled();
         expect(onClose).toBeCalled();
+      });
+    });
+
+    describe('проверка обработчиков событий нажатий клавиш', () => {
+      it('onEsc отрабатывает после нажатия на esc', () => {
+        const onEsc = jest.fn(() => true);
+        const { container } = render(getComponent({ isOpen: true, onEsc }));
+        fireEvent.keyUp(container, { key: 'Escape', code: 'Escape' });
+        expect(onEsc).toHaveBeenCalled();
+        expect(onEsc).toHaveReturned();
+      });
+    });
+  });
+  describe('проверка размера', () => {
+    it('размера по умолчанию - m', () => {
+      render(getComponent({}));
+      expect(screen.getByTestId(testId)).toHaveClass(cnSidebar('Window', { size: 'm' }));
+    });
+
+    describe('проверка валидных размеров', () => {
+      sidebarPropSize.forEach((size) => {
+        it(`установлен размер - ${size}`, () => {
+          render(getComponent({ size }));
+          expect(screen.getByTestId(testId)).toHaveClass(cnSidebar('Window', { size }));
+        });
       });
     });
   });

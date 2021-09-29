@@ -25,6 +25,7 @@ export type Item = {
   message?: string | number | React.ReactNode;
   status?: SnackBarItemStatus;
   autoClose?: boolean | number;
+  showProgress?: 'timer';
   icon?: React.FC<IconProps>;
   actions?: SnackBarPropItemAction[];
   onClose?: (item: Item) => void;

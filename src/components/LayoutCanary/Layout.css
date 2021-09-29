@@ -1,0 +1,31 @@
+.Layout {
+  position: var(--layout-position);
+  top: var(--layout-top);
+  left: var(--layout-left);
+  display: flex;
+  flex: var(--layout-flex);
+  box-sizing: border-box;
+  min-width: var(--layout-min-width);
+  max-width: var(--layout-max-width);
+  min-height: var(--layout-min-height);
+  max-height: var(--layout-max-height);
+  transition: flex 0.3s, width 0.3s, height 0.3s;
+
+  &_direction {
+    &_row {
+      flex-direction: row;
+    }
+
+    &_column {
+      flex-direction: column;
+    }
+  }
+
+  &-Fake {
+    flex: var(--layout-flex);
+    min-width: var(--layout-min-width);
+    min-height: var(--layout-min-height);
+    background-color: var(--layout-bg-color);
+    transition: flex 0.3s, width 0.3s, height 0.3s;
+  }
+}

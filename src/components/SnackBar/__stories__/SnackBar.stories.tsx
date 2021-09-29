@@ -29,6 +29,7 @@ const defaultKnobs = () => ({
   withActionButtons: boolean('withActionButtons', false),
   withAutoClose: boolean('withAutoClose', false),
   withCloseButton: boolean('withCloseButton', true),
+  withShowProgress: boolean('withShowProgress', false),
   withComponentInsteadOfText: boolean('withComponentInsteadOfText', false),
 });
 
@@ -59,10 +60,10 @@ export function Playground() {
     withIcon,
     withActionButtons,
     withAutoClose,
+    withShowProgress,
     withCloseButton,
     withComponentInsteadOfText,
   } = defaultKnobs();
-
   const [items, dispatchItems] = React.useReducer(reducer, []);
   const generateHandleAdd = (status: SnackBarItemStatus) => () => {
     const key = items.length + 1;
@@ -80,6 +81,7 @@ export function Playground() {
       message,
       status,
       ...(withAutoClose && { autoClose: 5 }),
+      ...(withShowProgress && { showProgress: 'timer' }),
       ...(withIcon && { icon: getItemIconByStatus(status) }),
       ...(withActionButtons && {
         actions: [

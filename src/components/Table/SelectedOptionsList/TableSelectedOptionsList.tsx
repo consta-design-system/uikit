@@ -4,17 +4,11 @@ import React from 'react';
 
 import { IconClose } from '../../../icons/IconClose/IconClose';
 import { cn } from '../../../utils/bem';
-import { isNotNil } from '../../../utils/type-guards';
+import { isNotNil, isNumber } from '../../../utils/type-guards';
 import { Button } from '../../Button/Button';
 import { Tag } from '../../Tag/Tag';
 
 const cnTableSelectedOptionsList = cn('TableSelectedOptionsList');
-
-type Props = {
-  values: Array<{ id: string; name: string; value?: any }>;
-  onRemove: (id: string) => void;
-  onReset: () => void;
-};
 
 type OptionValue = {
   min?: string;
@@ -27,32 +21,49 @@ type OptionValue = {
     value: string | number;
   };
 
-const getTagLabel = (name: string, value?: OptionValue): string => {
-  if (!isNotNil(value)) {
+export type GetTagLabel = (id: string, name: string, filterValue?: unknown) => string;
+
+type Props = {
+  values: Array<{ id: string; name: string; value?: unknown }>;
+  getTagLabel?: GetTagLabel;
+  onRemove: (id: string) => void;
+  onReset: () => void;
+};
+
+const getTagLabelDefault: GetTagLabel = (id, name, filterValue?: unknown): string => {
+  const localFilterValue = (isNumber(filterValue)
+    ? { name: String(filterValue) }
+    : filterValue) as OptionValue;
+  if (!isNotNil(localFilterValue)) {
     return name;
   }
 
   let restName = '';
-  if (Array.isArray(value)) {
-    restName = value.map(({ name }) => name).join(', ');
+  if (Array.isArray(localFilterValue)) {
+    restName = localFilterValue.map(({ name }) => name).join(', ');
   }
 
-  if (value.min && value.max) {
-    restName = `от ${value.min} до ${value.max}`;
-  } else if (value.min) {
-    restName = `от ${value.min}`;
-  } else if (value.max) {
-    restName = `до ${value.max}`;
+  if (localFilterValue.min && localFilterValue.max) {
+    restName = `от ${localFilterValue.min} до ${localFilterValue.max}`;
+  } else if (localFilterValue.min) {
+    restName = `от ${localFilterValue.min}`;
+  } else if (localFilterValue.max) {
+    restName = `до ${localFilterValue.max}`;
   }
 
-  if (value.name) {
-    restName = `${value.name}`;
+  if (localFilterValue.name) {
+    restName = `${localFilterValue.name}`;
   }
 
   return name + restName;
 };
 
-export const TableSelectedOptionsList: React.FC<Props> = ({ values, onRemove, onReset }) => {
+export const TableSelectedOptionsList: React.FC<Props> = ({
+  values,
+  onRemove,
+  onReset,
+  getTagLabel = getTagLabelDefault,
+}) => {
   return (
     <div className={cnTableSelectedOptionsList()}>
       <div className={cnTableSelectedOptionsList('Options')}>
@@ -60,7 +71,7 @@ export const TableSelectedOptionsList: React.FC<Props> = ({ values, onRemove, on
           <Tag
             className={cnTableSelectedOptionsList('Option')}
             key={option.id}
-            label={getTagLabel(option.name, option.value)}
+            label={getTagLabel(option.id, option.name, option.value)}
             size="xs"
             mode="cancel"
             onCancel={(): void => onRemove(option.id)}

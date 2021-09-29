@@ -41,6 +41,16 @@ describe('Компонент Modal', () => {
         expect(modal).toHaveClass(className);
       });
     });
+
+    describe('проверка обработчиков событий нажатий клавиш', () => {
+      it('onEsc: отрабатывает после нажатия на esc', () => {
+        const onEsc = jest.fn(() => true);
+        const { container } = render(getComponent({ isOpen: true, onEsc }));
+        fireEvent.keyUp(container, { key: 'Escape', code: 'Escape' });
+        expect(onEsc).toHaveBeenCalled();
+        expect(onEsc).toHaveReturned();
+      });
+    });
   });
 
   describe('проверка оверлэя', () => {

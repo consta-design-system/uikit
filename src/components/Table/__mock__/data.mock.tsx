@@ -4,7 +4,7 @@ import { isNotNil } from '../../../utils/type-guards';
 import { Badge } from '../../Badge/Badge';
 import { TableChoiceGroupFilter } from '../ChoiceGroupFilter/TableChoiceGroupFilter';
 import { TableNumberFilter } from '../NumberFilter/TableNumberFilter';
-import { Props as TableProps, TableFilters as Filters } from '../Table';
+import { TableFilters as Filters, TableProps } from '../Table';
 import { TableTextFilter } from '../TextFilter/TableTextFilter';
 
 export const rangeFilterer = (
@@ -1152,6 +1152,93 @@ export const tableDataWithRenderFn: TableProps<typeof rowsWithObjectFields[numbe
       name: '8000 и более',
       filterer: (value) => value >= 8000,
       field: 'remainingReserves',
+    },
+  ],
+};
+
+enum CustomIDs {
+  fullName = 'fullName',
+  yearOfRegistration = 'yearOfRegistration',
+}
+
+export { CustomIDs };
+
+const rowsForCustomTagLabelFunction = [
+  {
+    id: 'row1',
+    [CustomIDs.fullName]: 'Воронин Ян Фёдорович',
+    [CustomIDs.yearOfRegistration]: 2000,
+  },
+  {
+    id: 'row2',
+    [CustomIDs.fullName]: 'Иванов Иван Иванович',
+    [CustomIDs.yearOfRegistration]: 2018,
+  },
+  {
+    id: 'row3',
+    [CustomIDs.fullName]: 'Новиков Никита Максимович',
+    [CustomIDs.yearOfRegistration]: 2021,
+  },
+  {
+    id: 'row4',
+    [CustomIDs.fullName]: 'Крабов Виктор Дмитриевич',
+    [CustomIDs.yearOfRegistration]: 2009,
+  },
+];
+
+export const partOfTableDataForCustomTagLabelFunction = {
+  columns: [
+    {
+      title: 'Имя',
+      accessor: CustomIDs.fullName,
+      sortable: true,
+    },
+    {
+      title: 'Год регистрации',
+      accessor: CustomIDs.yearOfRegistration,
+      sortable: true,
+    },
+  ],
+  rows: rowsForCustomTagLabelFunction,
+  filters: [
+    {
+      id: CustomIDs.fullName,
+      name: 'Выбранные инициалы: ',
+      field: CustomIDs.fullName,
+      filterer: customFilters[0].filterer,
+      component: {
+        name: TableTextFilter,
+        props: {
+          withSearch: true,
+          items: [
+            {
+              name: rowsForCustomTagLabelFunction[0].fullName,
+              value: rowsForCustomTagLabelFunction[0].fullName,
+            },
+            {
+              name: rowsForCustomTagLabelFunction[1].fullName,
+              value: rowsForCustomTagLabelFunction[1].fullName,
+            },
+            {
+              name: rowsForCustomTagLabelFunction[2].fullName,
+              value: rowsForCustomTagLabelFunction[2].fullName,
+            },
+            {
+              name: rowsForCustomTagLabelFunction[3].fullName,
+              value: rowsForCustomTagLabelFunction[3].fullName,
+            },
+          ],
+        },
+      },
+    },
+    {
+      id: CustomIDs.yearOfRegistration,
+      name: 'Год регистрации: ',
+      field: CustomIDs.yearOfRegistration,
+      filterer: rangeFilterer,
+      component: {
+        name: TableNumberFilter,
+      },
     },
   ],
 };
