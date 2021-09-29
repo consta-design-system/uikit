@@ -1,5 +1,3 @@
-import './FieldLabel.css';
-
 import React from 'react';
 
 import { cn } from '../../utils/bem';
@@ -26,7 +24,7 @@ export const FieldLabel = forwardRefWithAs<FieldLabelProps>((props, ref) => {
   const { className, children, ...otherProps } = props;
 
   return (
-    <Text {...otherProps} className={cnFieldLabel(null, [className])} ref={ref}>
+    <Text {...otherProps} view="secondary" className={cnFieldLabel(null, [className])} ref={ref}>
       {children}
     </Text>
   );
