@@ -1,5 +1,74 @@
 .TextField {
   position: relative;
+  display: inline-flex;
+
+  &_labelAlign {
+    &_top {
+      flex-direction: column;
+
+      & .FieldLabel {
+        margin-bottom: var(--space-xs);
+      }
+    }
+
+    &_left {
+      flex-direction: row;
+
+      & .FieldLabel {
+        display: inline-flex;
+        align-items: center;
+        height: var(--field-label-height);
+        margin-right: var(--space-s);
+      }
+
+      &.TextField_size {
+        &_xs {
+          --field-label-height: var(--control-height-xs);
+        }
+
+        &_s {
+          --field-label-height: var(--control-height-s);
+        }
+
+        &_m {
+          --field-label-height: var(--control-height-m);
+        }
+
+        &_l {
+          --field-label-height: var(--control-height-l);
+        }
+      }
+    }
+  }
+
+  &-CaptionContainer {
+    display: inline-flex;
+    flex-direction: column;
+    width: 100%;
+
+    & .FieldCaption {
+      margin-top: var(--space-2xs);
+      margin-left: calc(var(--input-space) + var(--control-border-width));
+    }
+
+    &_size {
+      &_xs {
+        --input-space: calc(var(--control-space-xs) * 0.5);
+      }
+
+      &_s {
+        --input-space: calc(var(--control-space-s) * 0.5);
+      }
+
+      &_m {
+        --input-space: calc(var(--control-space-m) * 0.5);
+      }
+
+      &_l {
+        --input-space: calc(var(--control-space-l) * 0.5);
+      }
+    }
+  }
 
   &-InputContainer {
     position: relative;

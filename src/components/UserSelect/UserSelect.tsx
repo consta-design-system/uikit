@@ -1,5 +1,4 @@
 import '../SelectComponents/Select.css';
-import './UserSelect.css';
 
 import React, { forwardRef, useRef } from 'react';
 
@@ -7,12 +6,7 @@ import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { useSelect } from '../../hooks/useSelect/useSelect';
 import { IconClose } from '../../icons/IconClose/IconClose';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
-import { cnMixCaption } from '../../mixs/MixCaption/MixCaption';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
-import { cnMixLabel } from '../../mixs/MixLabel/MixLabel';
-import { cn } from '../../utils/bem';
-import { FieldCaption } from '../FieldCaption/FieldCaption';
-import { FieldLabel } from '../FieldLabel/FieldLabel';
 import { cnSelect } from '../SelectComponents/cnSelect';
 import {
   defaultlabelForCreate,
@@ -38,8 +32,6 @@ import {
   UserSelectProps,
   withDefaultGetters,
 } from './helpers';
-
-const cnUserSelect = cn('UserSelect');
 
 function UserSelectRender<
   ITEM = DefaultItem,
@@ -84,10 +76,6 @@ function UserSelectRender<
     labelForCreate = defaultlabelForCreate,
     multiple = false,
     searchFunction,
-    className,
-    label,
-    labelAlign = 'top',
-    caption,
     ...restProps
   } = withDefaultGetters(props);
 
@@ -215,87 +203,79 @@ function UserSelectRender<
   };
 
   return (
-    <div
-      className={cnUserSelect(null, [cnMixLabel({ align: labelAlign, size }), className])}
+    <SelectContainer
+      focused={isFocused}
+      disabled={disabled}
+      size={size}
+      view={view}
+      form={form}
+      multiple
+      ref={ref}
       {...restProps}
     >
-      {label && <FieldLabel size={size}>{label}</FieldLabel>}
-      <div className={cnUserSelect('CaptionContainer', [cnMixCaption({ size })])}>
-        <SelectContainer
-          focused={isFocused}
-          disabled={disabled}
-          size={size}
-          view={view}
-          form={form}
-          multiple
-          ref={ref}
+      <div
+        className={cnSelect('Control', { hasInput: true })}
+        ref={controlRef}
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
+        id={id}
+      >
+        <div
+          className={cnSelect('ControlInner')}
+          onClick={handleInputClick}
+          role="button"
+          ref={controlInnerRef}
+          aria-hidden="true"
         >
-          <div
-            className={cnSelect('Control', { hasInput: true })}
-            ref={controlRef}
-            aria-expanded={isOpen}
-            aria-haspopup="listbox"
-            id={id}
-          >
-            <div
-              className={cnSelect('ControlInner')}
-              onClick={handleInputClick}
-              role="button"
-              ref={controlInnerRef}
-              aria-hidden="true"
-            >
-              <div className={cnSelect('ControlValueContainer')}>
-                {multiple ? (
-                  <div className={cnSelect('ControlValue', { isUserSelect: true })}>
-                    {renderControlValue()}
-                  </div>
-                ) : (
-                  renderControlValue()
-                )}
+          <div className={cnSelect('ControlValueContainer')}>
+            {multiple ? (
+              <div className={cnSelect('ControlValue', { isUserSelect: true })}>
+                {renderControlValue()}
               </div>
-            </div>
-            <span className={cnSelect('Indicators')}>
-              {value && (
-                <button
-                  type="button"
-                  onClick={clearValue}
-                  className={cnSelect('ClearIndicator', [cnMixFocus()])}
-                >
-                  <IconClose size="xs" className={cnSelect('ClearIndicatorIcon')} />
-                </button>
-              )}
-              <span className={cnSelect('Delimiter')} />
-              <button
-                type="button"
-                className={cnSelect('IndicatorsDropdown')}
-                tabIndex={-1}
-                onClick={handleToggleDropdown}
-              >
-                <IconSelect size="xs" className={cnSelect('DropdownIndicatorIcon')} />
-              </button>
-            </span>
+            ) : (
+              renderControlValue()
+            )}
           </div>
-          <SelectDropdown
-            isOpen={isOpen}
-            size={size}
-            controlRef={controlRef}
-            getOptionProps={getOptionProps}
-            dropdownRef={dropdownRef}
-            form={dropdownForm}
-            className={dropdownClassName}
-            renderItem={renderItem || renderItemDefault}
-            getGroupLabel={getGroupLabel}
-            visibleItems={visibleItems}
-            labelForNotFound={labelForNotFound}
-            labelForCreate={labelForCreate}
-          />
-          <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
-            {searchValue}
-          </div>
-        </SelectContainer>
-        {caption && <FieldCaption>{caption}</FieldCaption>}
+        </div>
+        <span className={cnSelect('Indicators')}>
+          {value && (
+            <button
+              type="button"
+              onClick={clearValue}
+              className={cnSelect('ClearIndicator', [cnMixFocus()])}
+            >
+              <IconClose size="xs" className={cnSelect('ClearIndicatorIcon')} />
+            </button>
+          )}
+          <span className={cnSelect('Delimiter')} />
+          <button
+            type="button"
+            className={cnSelect('IndicatorsDropdown')}
+            tabIndex={-1}
+            onClick={handleToggleDropdown}
+          >
+            <IconSelect size="xs" className={cnSelect('DropdownIndicatorIcon')} />
+          </button>
+        </span>
       </div>
-    </div>
+      <SelectDropdown
+        isOpen={isOpen}
+        size={size}
+        controlRef={controlRef}
+        getOptionProps={getOptionProps}
+        dropdownRef={dropdownRef}
+        form={dropdownForm}
+        className={dropdownClassName}
+        renderItem={renderItem || renderItemDefault}
+        getGroupLabel={getGroupLabel}
+        visibleItems={visibleItems}
+        labelForNotFound={labelForNotFound}
+        labelForCreate={labelForCreate}
+      />
+      <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
+        {searchValue}
+      </div>
+    </SelectContainer>
   );
 }
 

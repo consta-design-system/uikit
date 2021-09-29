@@ -1,4 +1,3 @@
-import './Combobox.css';
 import '../SelectComponents/Select.css';
 
 import React, { forwardRef, useRef } from 'react';
@@ -7,12 +6,7 @@ import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { useSelect } from '../../hooks/useSelect/useSelect';
 import { IconClose } from '../../icons/IconClose/IconClose';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
-import { cnMixCaption } from '../../mixs/MixCaption/MixCaption';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
-import { cnMixLabel } from '../../mixs/MixLabel/MixLabel';
-import { cn } from '../../utils/bem';
-import { FieldCaption } from '../FieldCaption/FieldCaption';
-import { FieldLabel } from '../FieldLabel/FieldLabel';
 import { cnSelect } from '../SelectComponents/cnSelect';
 import {
   defaultlabelForCreate,
@@ -38,8 +32,6 @@ import {
   withDefaultGetters,
 } from './helpers';
 
-const cnCombobox = cn('Combobox');
-
 function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE extends boolean = false>(
   props: ComboboxProps<ITEM, GROUP, MULTIPLE>,
   ref: React.Ref<HTMLDivElement>,
@@ -64,7 +56,6 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
     view = defaultPropView,
     size = defaultPropSize,
     dropdownClassName,
-    className,
     name,
     groups = [],
     getItemLabel,
@@ -81,9 +72,6 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
     labelForCreate = defaultlabelForCreate,
     searchFunction,
     multiple = false,
-    label,
-    labelAlign = 'top',
-    caption,
     ...restProps
   } = withDefaultGetters(props);
 
@@ -201,85 +189,77 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
   };
 
   return (
-    <div
-      className={cnCombobox(null, [cnMixLabel({ align: labelAlign, size }), className])}
+    <SelectContainer
+      focused={isFocused}
+      disabled={disabled}
+      size={size}
+      view={view}
+      form={form}
+      multiple={multiple}
+      ref={ref}
       {...restProps}
     >
-      {label && <FieldLabel size={size}>{label}</FieldLabel>}
-      <div className={cnCombobox('CaptionContainer', [cnMixCaption({ size })])}>
-        <SelectContainer
-          focused={isFocused}
-          disabled={disabled}
-          size={size}
-          view={view}
-          form={form}
-          multiple={multiple}
-          ref={ref}
+      <div
+        className={cnSelect('Control', { hasInput: true })}
+        ref={controlRef}
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
+        id={id}
+      >
+        <div
+          className={cnSelect('ControlInner')}
+          onClick={handleInputClick}
+          role="button"
+          ref={controlInnerRef}
+          aria-hidden="true"
         >
-          <div
-            className={cnSelect('Control', { hasInput: true })}
-            ref={controlRef}
-            aria-expanded={isOpen}
-            aria-haspopup="listbox"
-            id={id}
-          >
-            <div
-              className={cnSelect('ControlInner')}
-              onClick={handleInputClick}
-              role="button"
-              ref={controlInnerRef}
-              aria-hidden="true"
+          <div className={cnSelect('ControlValueContainer')}>
+            {multiple ? (
+              <div className={cnSelect('ControlValue')}>{renderControlValue()}</div>
+            ) : (
+              renderControlValue()
+            )}
+          </div>
+        </div>
+        <span className={cnSelect('Indicators')}>
+          {value && (
+            <button
+              type="button"
+              onClick={clearValue}
+              className={cnSelect('ClearIndicator', [cnMixFocus()])}
             >
-              <div className={cnSelect('ControlValueContainer')}>
-                {multiple ? (
-                  <div className={cnSelect('ControlValue')}>{renderControlValue()}</div>
-                ) : (
-                  renderControlValue()
-                )}
-              </div>
-            </div>
-            <span className={cnSelect('Indicators')}>
-              {value && (
-                <button
-                  type="button"
-                  onClick={clearValue}
-                  className={cnSelect('ClearIndicator', [cnMixFocus()])}
-                >
-                  <IconClose size="xs" className={cnSelect('ClearIndicatorIcon')} />
-                </button>
-              )}
-              <span className={cnSelect('Delimiter')} />
-              <button
-                type="button"
-                className={cnSelect('IndicatorsDropdown')}
-                tabIndex={-1}
-                onClick={handleToggleDropdown}
-              >
-                <IconSelect size="xs" className={cnSelect('DropdownIndicatorIcon')} />
-              </button>
-            </span>
-          </div>
-          <SelectDropdown
-            isOpen={isOpen}
-            size={size}
-            controlRef={controlRef}
-            getOptionProps={getOptionProps}
-            dropdownRef={dropdownRef}
-            form={dropdownForm}
-            className={dropdownClassName}
-            renderItem={renderItem || renderItemDefault}
-            getGroupLabel={getGroupLabel}
-            visibleItems={visibleItems}
-            labelForNotFound={labelForNotFound}
-            labelForCreate={labelForCreate}
-          />
-          <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
-            {searchValue}
-          </div>
-        </SelectContainer>
-        {caption && <FieldCaption>{caption}</FieldCaption>}
+              <IconClose size="xs" className={cnSelect('ClearIndicatorIcon')} />
+            </button>
+          )}
+          <span className={cnSelect('Delimiter')} />
+          <button
+            type="button"
+            className={cnSelect('IndicatorsDropdown')}
+            tabIndex={-1}
+            onClick={handleToggleDropdown}
+          >
+            <IconSelect size="xs" className={cnSelect('DropdownIndicatorIcon')} />
+          </button>
+        </span>
       </div>
-    </div>
+      <SelectDropdown
+        isOpen={isOpen}
+        size={size}
+        controlRef={controlRef}
+        getOptionProps={getOptionProps}
+        dropdownRef={dropdownRef}
+        form={dropdownForm}
+        className={dropdownClassName}
+        renderItem={renderItem || renderItemDefault}
+        getGroupLabel={getGroupLabel}
+        visibleItems={visibleItems}
+        labelForNotFound={labelForNotFound}
+        labelForCreate={labelForCreate}
+      />
+      <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
+        {searchValue}
+      </div>
+    </SelectContainer>
   );
 }
 

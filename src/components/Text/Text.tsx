@@ -73,7 +73,7 @@ export type TextPropTransform = typeof textPropTransform[number];
 export const textPropWidth = ['default'] as const;
 export type TextPropWidth = typeof textPropWidth[number];
 
-export type Props = {
+export type TextProps = {
   align?: TextPropAlign;
   cursor?: TextPropCursor;
   decoration?: TextPropDecoration;
@@ -92,7 +92,7 @@ export type Props = {
 
 export const cnText = cn('Text');
 
-export const Text = forwardRefWithAs<Props>((props, ref) => {
+export const Text = forwardRefWithAs<TextProps>((props, ref) => {
   const {
     as = 'div',
     align,

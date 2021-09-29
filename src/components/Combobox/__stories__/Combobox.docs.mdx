@@ -14,6 +14,7 @@ import {
   ComboboxExampleCustomTypes,
   ComboboxExampleCustomTypesWithGroups,
 } from './examples/ComboboxExampleCustomTypes/ComboboxExampleCustomTypes';
+import { ComboboxExampleLabel } from './examples/ComboboxExampleLabel/ComboboxExampleLabel';
 
 # Combobox
 
@@ -43,6 +44,7 @@ import {
 - [Размер](#размер)
 - [Форма](#форма)
 - [Внешний вид](#внешний-вид)
+- [Лэйбл и подпись](#лэйбл-и-подпись)
 - [Неактивный выпадающий список](#неактивный-выпадающий-список)
 - [Создание новых вариантов](#создание-новых-вариантов)
 - [Кастомизация](#кастомизация)
@@ -438,6 +440,51 @@ export function ComboboxExampleView() {
 }
 ```
 
+## Лэйбл и подпись
+
+Лэйбл к компоненту можно добавить через свойство `label`, а за его позиционирование отвечает
+свойство `labelAlign`. Подпись можно добавить через свойство `caption`.
+
+<ComboboxExampleLabel />
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function ComboboxExampleLabel() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <Combobox
+        label="Выберите что-нибудь"
+        caption={value?.label}
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        placeholder="Выберите что-нибудь хорошее"
+      />
+    </StoryBookExample>
+  );
+}
+```
+
 ## Неактивный выпадающий список
 
 Чтобы сделать весь комбобокс неактивным, добавьте `disabled`.
@@ -818,9 +865,9 @@ type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | [`size?`](#размер)                                        | `'xs'`, `'s'` , `'m'` , `'l'`                          | `'m'`                                                         | Размер компонента                                                      |
 | [`form?`](#форма)                                         | `default`, `brick`, `round`                            | `default`                                                     | Форма компонента                                                       |
 | [`placeholder?`](#подсказка)                              | `string`                                               | -                                                             | Подсказка, отображается, когда вариант не выбран                       |
-| [`label?`](#лэйбл)                                        | `string`                                               | -                                                             | см. [TextField](?path=/docs/components-textfield--playground)          |
-| [`labelAlign?`](#лэйбл)                                   | `'top', 'left'`                                        | `'top'`                                                       | см. [TextField](?path=/docs/components-textfield--playground)          |
-| [`caption?`](#подпись)                                    | `string`                                               | -                                                             | см. [TextField](?path=/docs/components-textfield--playground)          |
+| [`label?`](#лэйбл-и-подпись)                              | `string`                                               | -                                                             | Лэйбл                                                                  |
+| [`labelAlign?`](#лэйбл-и-подпись)                         | `'top', 'left'`                                        | `'top'`                                                       | Положение лэйбла                                                       |
+| [`caption?`](#лэйбл-и-подпись)                            | `string`                                               | -                                                             | Подпись                                                                |
 | [`items`](#варианты)                                      | `ITEM[]`                                               | -                                                             | Варианты                                                               |
 | [`value?`](#значение)                                     | `PropValue<ITEM,MULTIPLE>`                             | -                                                             | Значение селекта                                                       |
 | [`onChange?`](#onchange)                                  | `PropOnChange<ITEM,MULTIPLE>`                          | -                                                             | Обработчик события изменения значения компонента                       |

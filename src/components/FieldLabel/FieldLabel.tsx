@@ -4,7 +4,7 @@ import React from 'react';
 
 import { cn } from '../../utils/bem';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
-import { Props as TextProps, Text } from '../Text/Text';
+import { Text, TextProps } from '../Text/Text';
 
 type ExcludeProps = 'size';
 
@@ -16,13 +16,13 @@ export const fieldLabelPropAlign = ['top', 'left'] as const;
 export type FieldLabelPropAlign = typeof fieldLabelPropAlign[number];
 export const fieldLabelPropAlignDefault: FieldLabelPropAlign = 'top';
 
-type Props = Omit<TextProps, ExcludeProps> & {
+type FieldLabelProps = Omit<TextProps, ExcludeProps> & {
   size: FieldLabelPropSize;
 };
 
 const cnFieldLabel = cn('FieldLabel');
 
-export const FieldLabel = forwardRefWithAs<Props>((props, ref) => {
+export const FieldLabel = forwardRefWithAs<FieldLabelProps>((props, ref) => {
   const { className, children, ...otherProps } = props;
 
   return (

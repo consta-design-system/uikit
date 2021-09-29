@@ -1,17 +1,11 @@
 import '../SelectComponents/Select.css';
-import './Select.css';
 
 import React, { forwardRef, useRef } from 'react';
-import { cn } from '@bem-react/classname';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { useSelect } from '../../hooks/useSelect/useSelect';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
-import { cnMixCaption } from '../../mixs/MixCaption/MixCaption';
-import { cnMixLabel } from '../../mixs/MixLabel/MixLabel';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
-import { FieldCaption } from '../FieldCaption/FieldCaption';
-import { FieldLabel } from '../FieldLabel/FieldLabel';
 import { cnSelect } from '../SelectComponents/cnSelect';
 import { getSelectDropdownForm } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
@@ -28,8 +22,6 @@ import {
   SelectProps,
   withDefaultGetters,
 } from './helpers';
-
-const cnSelectComponent = cn('SelectComponent');
 
 function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
   props: SelectProps<ITEM, GROUP>,
@@ -62,10 +54,6 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
     getGroupKey,
     getGroupLabel,
     renderItem,
-    className,
-    labelAlign = 'top',
-    label,
-    caption,
     renderValue: renderValueProp,
     inputRef: inputRefProp,
     ...restProps
@@ -133,76 +121,68 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
   const renderValue = renderValueProp || renderValueDefault;
 
   return (
-    <div
-      className={cnSelectComponent(null, [cnMixLabel({ align: labelAlign, size }), className])}
+    <SelectContainer
+      focused={isFocused}
+      disabled={disabled}
+      size={size}
+      view={view}
+      form={form}
+      ref={ref}
       {...restProps}
     >
-      {label && <FieldLabel size={size}>{label}</FieldLabel>}
-      <div className={cnSelectComponent('CaptionContainer', [cnMixCaption({ size })])}>
-        <SelectContainer
-          focused={isFocused}
-          disabled={disabled}
-          size={size}
-          view={view}
-          form={form}
-          ref={ref}
-        >
-          <div
-            className={cnSelect('Control')}
-            ref={controlRef}
-            aria-expanded={isOpen}
-            aria-haspopup="listbox"
-            id={id}
-          >
-            <div className={cnSelect('ControlInner')}>
-              <div className={cnSelect('ControlValueContainer')}>
-                <input
-                  {...getKeyProps()}
-                  type="button"
-                  name={name}
-                  onFocus={handleInputFocus}
-                  onBlur={handleInputBlur}
-                  aria-label={ariaLabel}
-                  onClick={handleInputClick}
-                  ref={useForkRef([inputRef, inputRefProp])}
-                  className={cnSelect('FakeField')}
-                  readOnly
-                />
-                {value && renderValue({ item: value })}
-                {!value && placeholder && (
-                  <span className={cnSelect('Placeholder')} title="placeholder">
-                    {placeholder}
-                  </span>
-                )}
-              </div>
-            </div>
-            <span className={cnSelect('Indicators')}>
-              <button
-                type="button"
-                className={cnSelect('IndicatorsDropdown')}
-                tabIndex={-1}
-                onClick={handleToggleDropdown}
-              >
-                <IconSelect size="xs" className={cnSelect('DropdownIndicatorIcon')} />
-              </button>
-            </span>
+      <div
+        className={cnSelect('Control')}
+        ref={controlRef}
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
+        id={id}
+      >
+        <div className={cnSelect('ControlInner')}>
+          <div className={cnSelect('ControlValueContainer')}>
+            <input
+              {...getKeyProps()}
+              type="button"
+              name={name}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+              aria-label={ariaLabel}
+              onClick={handleInputClick}
+              ref={useForkRef([inputRef, inputRefProp])}
+              className={cnSelect('FakeField')}
+              readOnly
+            />
+            {value && renderValue({ item: value })}
+            {!value && placeholder && (
+              <span className={cnSelect('Placeholder')} title="placeholder">
+                {placeholder}
+              </span>
+            )}
           </div>
-          <SelectDropdown
-            isOpen={isOpen}
-            size={size}
-            controlRef={controlRef}
-            getOptionProps={getOptionProps}
-            dropdownRef={dropdownRef}
-            form={dropdownForm}
-            className={dropdownClassName}
-            renderItem={renderItem || renderItemDefault}
-            getGroupLabel={getGroupLabel}
-            visibleItems={visibleItems}
-          />
-        </SelectContainer>
-        {caption && <FieldCaption>{caption}</FieldCaption>}
+        </div>
+        <span className={cnSelect('Indicators')}>
+          <button
+            type="button"
+            className={cnSelect('IndicatorsDropdown')}
+            tabIndex={-1}
+            onClick={handleToggleDropdown}
+          >
+            <IconSelect size="xs" className={cnSelect('DropdownIndicatorIcon')} />
+          </button>
+        </span>
       </div>
-    </div>
+      <SelectDropdown
+        isOpen={isOpen}
+        size={size}
+        controlRef={controlRef}
+        getOptionProps={getOptionProps}
+        dropdownRef={dropdownRef}
+        form={dropdownForm}
+        className={dropdownClassName}
+        renderItem={renderItem || renderItemDefault}
+        getGroupLabel={getGroupLabel}
+        visibleItems={visibleItems}
+      />
+    </SelectContainer>
   );
 }
 

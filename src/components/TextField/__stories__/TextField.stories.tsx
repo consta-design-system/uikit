@@ -30,6 +30,9 @@ const defaultKnobs = () => ({
   view: select('view', textFieldPropView, textFieldPropViewDefault),
   disabled: boolean('disabled', false),
   type: select('type', ['text', 'textarea'], 'text'),
+  caption: text('caption', ''),
+  label: text('label', ''),
+  labelAlign: select('labelAlign', ['top', 'left'], 'top'),
   maxLength: number('maxLength', 200),
   minRows: number('minRows', 1),
   maxRows: number('maxRows', 5),
@@ -48,6 +51,9 @@ export function Playground() {
     size,
     view,
     type,
+    label,
+    caption,
+    labelAlign,
     maxLength,
     minRows,
     maxRows,
@@ -97,6 +103,9 @@ export function Playground() {
           leftSide={leftSide}
           rightSide={rightSide}
           disabled={disabled}
+          label={label}
+          caption={caption}
+          labelAlign={labelAlign}
         />
       </div>
     </EventInterceptorProvider>

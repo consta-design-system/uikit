@@ -4,20 +4,20 @@ import React from 'react';
 
 import { cn } from '../../utils/bem';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
-import { Props as TextProps, Text } from '../Text/Text';
+import { Text, TextProps } from '../Text/Text';
 
 export const fieldCaptionPropStatus = ['alert', 'warning', 'success'] as const;
 export type FieldCaptionPropStatus = typeof fieldCaptionPropStatus[number];
 export const fieldCaptionPropStatusDefault: FieldCaptionPropStatus = 'alert';
 type ExcludeProps = 'size' | 'lineHeight';
 
-type Props = Omit<TextProps, ExcludeProps> & {
+type FieldCaptionProps = Omit<TextProps, ExcludeProps> & {
   status?: FieldCaptionPropStatus;
 };
 
 const cnFieldCaption = cn('FieldCaption');
 
-export const FieldCaption = forwardRefWithAs<Props>((props, ref) => {
+export const FieldCaption = forwardRefWithAs<FieldCaptionProps>((props, ref) => {
   const { status, children, className, ...otherProps } = props;
 
   return (
