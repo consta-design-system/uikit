@@ -4,7 +4,7 @@ import React, { useRef } from 'react';
 
 import { cn } from '../../../../../utils/bem';
 import { Text } from '../../../../Text/Text';
-import { Layout } from '../../../Layout';
+import { Layout } from '../../../LayoutCanary';
 
 const cnLayoutExampleAnchor = cn('LayoutExampleAnchor');
 

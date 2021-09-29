@@ -6,7 +6,7 @@ import {
 import { LayoutExampleAnchor } from './examples/LayoutExampleAnchor/LayoutExampleAnchor';
 import { LayoutExampleRowFixed } from './examples/LayoutExampleRowFixed/LayoutExampleRowFixed';
 
-# Layout
+# Layout (Canary)
 
 Layout помогает вам структурировать контент на вашей странице.
 
@@ -51,6 +51,8 @@ column - в колонку
 Свойство anchorRef представляет из себя элемент к которому будет прикрепляться fixed-элемент ([пример](?path=/story/components-layout--with-anchor))
 
 ```tsx
+import { Layout } from '@consta/uikit/LayoutCanary';
+
 export const LayoutExampleAnchor = () => {
   const scrollContainerRef = useRef(null);
   const fixedRef = useRef(null);

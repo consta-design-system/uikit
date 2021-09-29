@@ -11,7 +11,7 @@ import {
   layoutPropDirectionDefault,
   layoutPropVerticalAlign,
   layoutPropVerticalAlignDefault,
-} from '../../../Layout';
+} from '../../../LayoutCanary';
 
 const cnLayoutExampleFixed = cn('LayoutExampleFixed');
 

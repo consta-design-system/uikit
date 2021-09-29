@@ -4,7 +4,7 @@ import React from 'react';
 
 import { cn } from '../../../../../utils/bem';
 import { Text } from '../../../../Text/Text';
-import { Layout } from '../../../Layout';
+import { Layout } from '../../../LayoutCanary';
 
 const cnLayoutExampleDirection = cn('LayoutExampleDirection');
 
