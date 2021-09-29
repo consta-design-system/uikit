@@ -96,7 +96,7 @@
       outline: none;
     }
 
-    &_multiple &-Control {
+    &_multiple .Select-Control {
       height: auto;
       min-height: var(--input-height);
     }
@@ -234,7 +234,7 @@
       border-radius: 0 calc(var(--input-height) / 2) calc(var(--input-height) / 2) 0;
     }
 
-    &_multiple &-ControlValueContainer {
+    &_multiple .Select-ControlValueContainer {
       position: relative;
       display: flex;
       box-sizing: border-box;
@@ -243,13 +243,13 @@
       line-height: 1;
     }
 
-    &_multiple &-ControlValue {
+    &_multiple .Select-ControlValue {
       overflow: visible;
       padding-top: calc(var(--tag-space) - var(--control-border-width));
       white-space: normal;
     }
 
-    &_multiple &-ControlValue_isUserSelect {
+    &_multiple .Select-ControlValue_isUserSelect {
       display: flex;
       padding-top: calc(var(--space-s) / 4);
       flex-wrap: wrap;

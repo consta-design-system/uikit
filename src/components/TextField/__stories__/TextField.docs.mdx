@@ -67,7 +67,7 @@ import { TextFieldExampleCaption } from './examples/TextFieldExampleCaption/Text
 
 <TextFieldExampleStatus />
 
-```ts
+```tsx
 <TextField state="success" placeholder="success" />
 <TextField state="alert" placeholder="error" />
 <TextField state="warning" placeholder="warning" />
@@ -83,7 +83,7 @@ import { TextFieldExampleCaption } from './examples/TextFieldExampleCaption/Text
 
 <TextFieldExampleTextPlaceholder />
 
-```ts
+```tsx
 <TextField placeholder="Здесь только цифры" />
 ```
 
@@ -93,7 +93,7 @@ import { TextFieldExampleCaption } from './examples/TextFieldExampleCaption/Text
 
 <TextFieldExampleTextValue />
 
-```ts
+```tsx
 const App = () => {
   const [value, setValue] = useState('стопиццот');
   const handleChange = ({ value }) => setValue(value);
@@ -110,7 +110,7 @@ const App = () => {
 
 <TextFieldExampleTextLeft />
 
-```ts
+```tsx
 <TextField leftSide="куда" />
 <TextField leftSide="кому" />
 ```
@@ -119,7 +119,7 @@ const App = () => {
 
 <TextFieldExampleTextRight />
 
-```ts
+```tsx
 <TextField leftSide={IconDiamond} rightSide="карат" />
 ```
 
@@ -130,7 +130,7 @@ const App = () => {
 
 <TextFieldExampleView />
 
-```ts
+```tsx
 <TextField view="default" placeholder="Самое обычное поле" />
 <TextField view="clear" placeholder="Незаметное поле" />
 ```
@@ -139,7 +139,7 @@ const App = () => {
 
 <TextFieldExampleViewDisabled />
 
-```ts
+```tsx
 <TextField placeholder="Самое обычное поле" disabled />
 ```
 
@@ -150,7 +150,7 @@ const App = () => {
 
 <TextFieldExampleFormBasic />
 
-```ts
+```tsx
 <TextField placeholder="Default" />
 <TextField form="brick" placeholder="Brick" />
 <TextField form="round" placeholder="Round" />
@@ -161,7 +161,7 @@ const App = () => {
 
 <TextFieldExampleFormHybrid />
 
-```ts
+```tsx
 <TextField placeholder="Электронная почта" form="roundClear" style={{ width: '260px' }} />
 <Button form="brickRound" label="Подписаться" />
 ```
@@ -186,7 +186,7 @@ const App = () => {
 
 <TextFieldExampleCaption />
 
-```ts
+```tsx
 <TextField state="success" placeholder="success" caption="success" />
 <TextField state="alert" placeholder="error" caption="error" />
 <TextField state="warning" placeholder="warning" caption="warning" />
@@ -203,7 +203,7 @@ const App = () => {
 
 <TextFieldExampleSize />
 
-```ts
+```tsx
 <TextField size="xs" placeholder="Размер XS" />
 <TextField size="s" placeholder="Размер S" />
 <TextField size="m" placeholder="Размер M" />
@@ -214,7 +214,7 @@ const App = () => {
 
 <TextFieldExampleSizeWidth />
 
-```ts
+```tsx
 <TextField width="full" placeholder="Страшно широкое поле" />
 ```
 
@@ -228,7 +228,7 @@ const App = () => {
 
 <TextFieldExampleSizeRows />
 
-```ts
+```tsx
 <TextField
   type="textarea"
   rows="13"
@@ -244,7 +244,7 @@ const App = () => {
 
 <TextFieldExampleSizeMinRows />
 
-```ts
+```tsx
 <TextField
   type="textarea"
   minRows="13"
@@ -290,7 +290,7 @@ const App = () => {
 
 ## Пример
 
-```ts
+```tsx
 // src/App.ts
 import React, { useState } from 'react';
 import { TextField } from '@consta/uikit/TextField';

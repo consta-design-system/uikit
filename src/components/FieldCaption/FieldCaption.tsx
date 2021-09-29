@@ -4,9 +4,7 @@ import { cn } from '../../utils/bem';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { Text } from '../Text/Text';
 
-export const fieldCaptionPropStatus = ['alert', 'warning', 'success'] as const;
-export type FieldCaptionPropStatus = typeof fieldCaptionPropStatus[number];
-export const fieldCaptionPropStatusDefault: FieldCaptionPropStatus = 'alert';
+export type FieldCaptionPropStatus = 'alert' | 'warning' | 'success';
 
 type FieldCaptionProps = {
   status?: FieldCaptionPropStatus;

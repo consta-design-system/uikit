@@ -4,9 +4,7 @@ import { cn } from '../../utils/bem';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { Text } from '../Text/Text';
 
-export const fieldLabelPropSize = ['xs', 's', 'm', 'l'] as const;
-export type FieldLabelPropSize = typeof fieldLabelPropSize[number];
-export const fieldLabelPropSizeDefault: FieldLabelPropSize = 'm';
+export type FieldLabelPropSize = 'xs' | 's' | 'm' | 'l';
 
 type FieldLabelProps = {
   size: FieldLabelPropSize;
