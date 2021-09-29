@@ -11,7 +11,7 @@ import { callbackWithSelector } from '../../../../utils/storybook';
 import { isNumber } from '../../../../utils/type-guards';
 import { Button } from '../../../Button/Button';
 import { ContextMenu } from '../../../ContextMenu/ContextMenu';
-import { Props, Table, TableColumn, TableRow } from '../../Table';
+import { Table, TableColumn, TableProps, TableRow } from '../../Table';
 import { cnTableStories } from '../helpers';
 
 type ContextMenuState = {
@@ -21,7 +21,9 @@ type ContextMenuState = {
   };
 };
 
-type OnRowCreateProps = Parameters<Exclude<Props<{ id: string }>['onRowCreate'], undefined>>[0];
+type OnRowCreateProps = Parameters<
+  Exclude<TableProps<{ id: string }>['onRowCreate'], undefined>
+>[0];
 
 type ActionFunctionNames = 'addUp' | 'addDown' | 'addDeep' | 'remove';
 

@@ -1,8 +1,17 @@
 import React from 'react';
 
-import { isNotNil, isNumber } from '../../utils/type-guards';
+import { isNotNil, isNumber, isString } from '../../utils/type-guards';
 
 import { ColumnWidth, SortingState, TableColumn, TableRow, TableTreeRow } from './Table';
+
+export const Order = {
+  ASC: 'ASC',
+  asc: 'asc',
+  DESC: 'DESC',
+  desc: 'desc',
+} as const;
+
+export type OrderType = typeof Order[keyof typeof Order];
 
 export type Position = {
   colSpan?: number;
@@ -46,6 +55,18 @@ export const getColumnLeftOffset = ({
     .map((size, index) => resizedColumnWidths[index] || size);
 
   return selectedColumns.reduce((acc, column) => acc + column, 0);
+};
+
+export const createSortingState = <T extends TableRow>(
+  by: keyof T,
+  order?: OrderType,
+  sortFn?: (a: T[keyof T], b: T[keyof T]) => number,
+): SortingState<T> => {
+  if (!isString(order)) {
+    return null;
+  }
+
+  return { by, order: order.toLowerCase(), sortFn } as SortingState<T>;
 };
 
 export const getNewSorting = <T extends TableRow>(

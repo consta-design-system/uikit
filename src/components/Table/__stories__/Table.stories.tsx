@@ -6,7 +6,9 @@ import { boolean, number, object, select, text } from '@storybook/addon-knobs';
 
 import {
   customFilters,
+  CustomIDs,
   generateData,
+  partOfTableDataForCustomTagLabelFunction,
   tableData,
   tableDataWithRenderFn,
   tableWithBagdeData,
@@ -17,6 +19,7 @@ import {
 import { IconCopy } from '../../../icons/IconCopy/IconCopy';
 import { updateAt } from '../../../utils/array';
 import { callbackWithSelector, createMetadata, createStory } from '../../../utils/storybook';
+import { isNotNil } from '../../../utils/type-guards';
 import { Button } from '../../Button/Button';
 import { Checkbox } from '../../Checkbox/Checkbox';
 import { Text } from '../../Text/Text';
@@ -24,10 +27,10 @@ import { verticalAligns } from '../Cell/TableCell';
 import { Filters, SortByProps } from '../filtering';
 import {
   headerVerticalAligns,
-  Props,
   sizes,
   Table,
   TableColumn,
+  TableProps as Props,
   TableRow,
   zebraStriped,
 } from '../Table';
@@ -89,6 +92,7 @@ const getKnobs = <T extends TableRow>(replacedProps?: Partial<Props<T>>): Props<
     onRowHover: handleRowHover,
     onRowCreate: undefined,
     rowCreateText: undefined,
+    getTagLabel: props.getTagLabel,
   };
 };
 
@@ -347,6 +351,66 @@ export const WithMergedCells = createStory(
   },
 );
 
+export const WithMergedByCustomCallbackCells = createStory(
+  () => {
+    const ADMIN_INDEXES = [3, 4, 7];
+    const USERS_COUNT = 12;
+
+    const checkedRow: { [key: string]: boolean } = new Array(USERS_COUNT)
+      .fill(false)
+      .reduce((previous, _, index) => {
+        return {
+          ...previous,
+          [`${index + 1}`]: !Math.round(Math.random()),
+        };
+      }, {});
+
+    const generateRowBase = (id: string, owner: string, viewed: boolean) => ({
+      id,
+      owner,
+      operationConfirmed: {
+        owner,
+        viewed,
+      },
+    });
+
+    return (
+      <Table
+        borderBetweenColumns
+        borderBetweenRows
+        columns={[
+          {
+            title: 'ID',
+            accessor: 'id',
+            align: 'left',
+          },
+          {
+            title: 'Инициатор операции',
+            accessor: 'owner',
+            mergeCells: true,
+          },
+          {
+            title: 'Операция подтверждена',
+            accessor: 'operationConfirmed',
+            mergeCells: true,
+            getComparisonValue: ({ owner, viewed }) => `${owner}-${viewed}`,
+            renderCell: ({ operationConfirmed: { viewed } }) => <Checkbox checked={viewed} />,
+          },
+        ]}
+        rows={Object.keys(checkedRow).map((id, index) => {
+          const isAuto = ADMIN_INDEXES.includes(index);
+          return {
+            ...generateRowBase(id, `${isAuto ? 'admin' : 'user'}`, isAuto ? true : checkedRow[id]),
+          };
+        })}
+      />
+    );
+  },
+  {
+    name: 'с объединёнными кастомной функцией ячейками',
+  },
+);
+
 export const withCustomFilters = createStory(
   () => {
     return (
@@ -357,6 +421,60 @@ export const withCustomFilters = createStory(
   },
   {
     name: 'с кастомными фильтрами',
+  },
+);
+
+export const withCustomTagLabelFunction = createStory(
+  () => {
+    type GetTagLabel = (filterValue: any) => string;
+
+    const tagLabelById: Record<CustomIDs, GetTagLabel> = {
+      [CustomIDs.fullName]: (filterValue: Array<{ value: string; name: string }>) => {
+        if (!Array.isArray(filterValue)) {
+          return '';
+        }
+
+        return filterValue.reduce((fullText, { value }) => {
+          // Выводим только первые буквы в отдельных словах, таким образом получим инициалы
+          return `${fullText}${fullText.length ? ', ' : ''}${value
+            .split(' ')
+            .map((str) => str.slice(0, 1))
+            .join('')}`;
+        }, '');
+      },
+      [CustomIDs.yearOfRegistration]: (filterValue) => {
+        let restName = '';
+        if (filterValue.min && filterValue.max) {
+          restName = `начиная с ${filterValue.min} и заканчивая ${filterValue.max}`;
+        } else if (filterValue.min) {
+          restName = `начиная с ${filterValue.min}`;
+        } else if (filterValue.max) {
+          restName = `заканчивая ${filterValue.max}`;
+        }
+
+        return restName;
+      },
+    };
+
+    return (
+      <div className={cnTableStories()}>
+        <Table
+          {...getKnobs(partOfTableDataForCustomTagLabelFunction)}
+          getTagLabel={(id, name, filterValue: any) => {
+            if (!isNotNil(filterValue)) {
+              return name;
+            }
+
+            const getTagLabel = tagLabelById[id as CustomIDs];
+
+            return name + getTagLabel(filterValue);
+          }}
+        />
+      </div>
+    );
+  },
+  {
+    name: 'со своей функцией именования тэга фильтра',
   },
 );
 
