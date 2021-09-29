@@ -33,6 +33,33 @@ const rows = [
   },
 ];
 
+const defaultFilters = [
+  {
+    id: 'price>50',
+    name: 'Больше 50',
+    filterer: (value) => value > 50,
+    field: 'price',
+  },
+  {
+    id: 'price>250',
+    name: 'Больше 250',
+    filterer: (value) => value > 250,
+    field: 'price',
+  },
+  {
+    id: 'price<100',
+    name: 'Меньше 100',
+    filterer: (value) => value < 100,
+    field: 'price',
+  },
+  {
+    id: 'count>100',
+    name: 'Кол-во Больше 100',
+    filterer: (value) => value > 100,
+    field: 'count',
+  },
+] as Filters<Row>;
+
 type Row = typeof rows[number];
 
 const defaultProps: Props<Row> = {
@@ -48,6 +75,7 @@ const defaultProps: Props<Row> = {
     },
   ],
   rows,
+  filters: defaultFilters,
 };
 
 function getRows() {
@@ -119,29 +147,13 @@ describe('Компонент Table', () => {
   });
 
   describe('Проверка работы фильтров', () => {
+    const filterColumn = {
+      accessor: 'price',
+      title: 'Цена',
+    };
     describe('Компонент с выбором фильтра работает', () => {
-      const filters: Filters<Row> = [
-        {
-          id: 'price>50',
-          name: 'Больше 50',
-          filterer: (value) => value > 50,
-          field: 'price',
-        },
-        {
-          id: 'price>250',
-          name: 'Больше 250',
-          filterer: (value) => value > 250,
-          field: 'price',
-        },
-        {
-          id: 'price<100',
-          name: 'Меньше 100',
-          filterer: (value) => value < 100,
-          field: 'price',
-        },
-      ];
-      const root = renderComponent({ ...defaultProps, filters });
-      const priceCell = screen.getByText('Цена', { selector: '.TableCell-Wrapper' });
+      const root = renderComponent({ ...defaultProps });
+      const priceCell = screen.getByText(filterColumn.title, { selector: '.TableCell-Wrapper' });
       const buttonFilterPrice = priceCell.querySelector(
         '.TableCell-Wrapper .TableFilterTooltip-Button',
       );
@@ -151,7 +163,9 @@ describe('Компонент Table', () => {
 
       fireEvent.click(buttonFilterPrice!);
       const options = screen.getAllByRole('option') as HTMLOptionElement[];
-      const correctFilters = filters.map((f) => f.name);
+      const correctFilters = defaultFilters
+        .filter((f) => f.field === filterColumn.accessor)
+        .map((f) => f.name);
       const optionsTexNodes = options.map((o) => o.textContent);
 
       it('Окно с выбором фильтров отобразилось корректно', () => {
@@ -161,7 +175,7 @@ describe('Компонент Table', () => {
 
       const targetOption = options[1];
       it('Целевой option имеет корректное значение', () => {
-        expect(targetOption).toHaveValue(filters[1].id);
+        expect(targetOption).toHaveValue(defaultFilters[1].id);
       });
       const select = screen.getByRole('listbox');
       fireEvent.change(select, { target: { value: targetOption.value } });
@@ -191,7 +205,7 @@ describe('Компонент Table', () => {
       ] as Filters<Row>;
 
       renderComponent({ ...defaultProps, filters });
-      const priceCell = screen.getByText('Цена', { selector: '.TableCell-Wrapper' });
+      const priceCell = screen.getByText(filterColumn.title, { selector: '.TableCell-Wrapper' });
       const buttonFilterPrice = priceCell.querySelector(
         '.TableCell-Wrapper .TableFilterTooltip-Button',
       );
@@ -200,6 +214,25 @@ describe('Компонент Table', () => {
       const correctFilters = filters.filter((f) => f.id && f.field).map((f) => f.name);
       const optionsTexNodes = options.map((o) => o.textContent);
       expect(optionsTexNodes).toEqual(correctFilters);
+    });
+
+    it('Кнопка "Сбросить все фильтры" работает (вызывает onFiltersUpdate)', () => {
+      const onFiltersUpdated = jest.fn(() => true);
+      renderComponent({ ...defaultProps, onFiltersUpdated });
+      const priceCell = screen.getByText(filterColumn.title, { selector: '.TableCell-Wrapper' });
+      const buttonFilterPrice = priceCell.querySelector(
+        '.TableCell-Wrapper .TableFilterTooltip-Button',
+      );
+      fireEvent.click(buttonFilterPrice!);
+      const options = screen.getAllByRole('option') as HTMLOptionElement[];
+      const targetOption = options[0];
+      const select = screen.getByRole('listbox');
+      fireEvent.change(select, { target: { value: targetOption.value } });
+      const buttonResetAllFilters = screen.getByTitle('Сбросить все фильтры');
+      fireEvent.click(buttonResetAllFilters);
+      expect(onFiltersUpdated).toBeCalled();
+      expect(onFiltersUpdated).toBeCalledTimes(2);
+      expect(onFiltersUpdated).toHaveReturnedTimes(2);
     });
   });
 });
