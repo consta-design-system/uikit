@@ -1,17 +1,14 @@
-import './FieldCaption.css';
-
 import React from 'react';
 
 import { cn } from '../../utils/bem';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
-import { Text, TextProps } from '../Text/Text';
+import { Text } from '../Text/Text';
 
 export const fieldCaptionPropStatus = ['alert', 'warning', 'success'] as const;
 export type FieldCaptionPropStatus = typeof fieldCaptionPropStatus[number];
 export const fieldCaptionPropStatusDefault: FieldCaptionPropStatus = 'alert';
-type ExcludeProps = 'size' | 'lineHeight';
 
-type FieldCaptionProps = Omit<TextProps, ExcludeProps> & {
+type FieldCaptionProps = {
   status?: FieldCaptionPropStatus;
 };
 
@@ -22,7 +19,8 @@ export const FieldCaption = forwardRefWithAs<FieldCaptionProps>((props, ref) => 
 
   return (
     <Text
-      className={cnFieldCaption({ status }, [className])}
+      view={status || 'secondary'}
+      className={cnFieldCaption(null, [className])}
       {...otherProps}
       ref={ref}
       size="xs"

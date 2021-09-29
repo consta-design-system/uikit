@@ -129,18 +129,16 @@ export function TextFieldRender<TYPE extends string>(
   };
 
   return (
-    <div
-      className={cnTextField({ position: labelPosition, size, view }, [className])}
-      {...otherProps}
-    >
+    <div className={cnTextField({ labelPosition, size, view }, [className])} {...otherProps}>
       {label && (
-        <FieldLabel className={cnTextField('Label')} size={size}>
+        <FieldLabel className={cnTextField('Label', { labelPosition })} size={size}>
           {label}
         </FieldLabel>
       )}
-      <div className={cnTextField('CaptionContainer')}>
+      <div className={cnTextField('Body')}>
         <div
           className={cnTextField('InputContainer', {
+            view,
             form,
             state,
             disabled,

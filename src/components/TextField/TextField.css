@@ -28,23 +28,13 @@
     }
   }
 
-  &_position {
+  &_labelPosition {
     &_top {
       flex-direction: column;
-
-      & .TextField-Label {
-        margin-bottom: var(--space-xs);
-      }
     }
 
     &_left {
       flex-direction: row;
-
-      & .TextField-Label {
-        display: inline-flex;
-        align-items: center;
-        height: var(--input-height);
-      }
 
       & > *:not(:last-child) {
         margin-right: var(--space-s);
@@ -52,7 +42,21 @@
     }
   }
 
-  &-CaptionContainer {
+  &-Label {
+    &_labelPosition {
+      &_top {
+        margin-bottom: var(--space-xs);
+      }
+
+      &_left {
+        display: inline-flex;
+        align-items: center;
+        height: var(--input-height);
+      }
+    }
+  }
+
+  &-Body {
     display: inline-flex;
     flex-direction: column;
     width: 100%;
@@ -63,14 +67,29 @@
     }
   }
 
-  &_view_clear,
-  &_view_clear:hover,
-  &_view_clear:focus {
+  &_view_clear {
     & .TextField-Caption {
       margin-left: 0;
     }
+  }
 
-    & .TextField-InputContainer {
+  &-InputContainer {
+    position: relative;
+    display: inline-flex;
+    box-sizing: border-box;
+    max-width: 100%;
+    min-height: var(--input-height);
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-text-regular);
+    transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
+
+    &_width_full {
+      width: 100%;
+    }
+
+    &_view_clear,
+    &_view_clear:hover,
+    &_view_clear:focus {
       padding: 0;
       color: var(--color-control-typo-default);
 
@@ -102,10 +121,8 @@
         }
       }
     }
-  }
 
-  &_view_default {
-    & .TextField-InputContainer {
+    &_view_default {
       padding: 0 var(--input-space);
       color: var(--color-control-typo-default);
       background: var(--color-control-bg-default);
@@ -196,21 +213,6 @@
           color: var(--color-control-typo-disable);
         }
       }
-    }
-  }
-
-  &-InputContainer {
-    position: relative;
-    display: inline-flex;
-    box-sizing: border-box;
-    max-width: 100%;
-    min-height: var(--input-height);
-    font-family: var(--font-primary);
-    font-weight: var(--font-weight-text-regular);
-    transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
-
-    &_width_full {
-      width: 100%;
     }
 
     &_form {
