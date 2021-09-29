@@ -1,5 +1,27 @@
 # Changelog
 
+## v3.5.0 (29/09/2021)
+Важное из обновления:
+- Добавили новый компонент `Layout`
+- Расширили функционал таблицы
+
+---
+
+- [feat(Table): Add create row button; (#1611)](https://github.com/gazprom-neft/consta-uikit/commit/2b842b2de2b9814bd00c4cfac66e52a05262d695) - [@N1KN](https://github.com/N1KN)
+- [docs(Card): edit docs (#1613)](https://github.com/gazprom-neft/consta-uikit/commit/af8ae24da9c0795b0abb284062548ff435fd6f02) - [@arhayka](https://github.com/arhayka)
+- [feat(Layout): add new component (#1554)](https://github.com/gazprom-neft/consta-uikit/commit/4037e2a9204988da215f7a8c65823bf051c84c64) - [@N1MBER](https://github.com/N1MBER)
+- [feat(Text): added prop ellipsis and update docs (#1566)](https://github.com/gazprom-neft/consta-uikit/commit/4e2529b81072d23f5a3d88f780c61557e1dcb16c) - [@AntonS86](https://github.com/AntonS86)
+- [fix(Theme): Remove css variable --color-nums-shadow (#1590)](https://github.com/gazprom-neft/consta-uikit/commit/b41e8e5c56738058dd62f7474523bda532773682) - [@N1KN](https://github.com/N1KN)
+- [test(Table): added test for checking onFiltersUpdated call (#1607)](https://github.com/gazprom-neft/consta-uikit/commit/660765c5699270d43040a8ce0b7726c7b699568a) - [@AntonS86](https://github.com/AntonS86)
+- [feat(Sidebar): added property 'size' (#1588)](https://github.com/gazprom-neft/consta-uikit/commit/756fc839009932b5c37d7aadfcae6f40c1090119) - [@AntonS86](https://github.com/AntonS86)
+- [feat(Table): Add getTagLabel props (#1531)](https://github.com/gazprom-neft/consta-uikit/commit/2d866722d753740629438391afa23204a2141ace) - [@N1KN](https://github.com/N1KN)
+- [feat(Table): Add getComparisonValue function (#1570)](https://github.com/gazprom-neft/consta-uikit/commit/56fc45d253ca79936d5d50d6caae80fd850b3338) - [@N1KN](https://github.com/N1KN)
+- [fix(Modal): added nodeRef for CssTransition (#1600)](https://github.com/gazprom-neft/consta-uikit/commit/9ab034375657559c016810962280e0c9f770283f) - [@AntonS86](https://github.com/AntonS86)
+- [test(Table): added test for onRowClick (#1602)](https://github.com/gazprom-neft/consta-uikit/commit/31d1d1cd8161b0ada6d322a3ef1e77c88b5ec35b) - [@AntonS86](https://github.com/AntonS86)
+- [test(Modal_Sidebar): added tests for events when the escape key is pressed (#1603)](https://github.com/gazprom-neft/consta-uikit/commit/e03b59ce8bed50e5ce76adebb7f08d584fcf9d47) - [@AntonS86](https://github.com/AntonS86)
+
+--------------------
+
 ## v3.4.0 (22/09/2021)
 - [chore(deps): bump tmpl from 1.0.4 to 1.0.5 (#1583)](https://github.com/gazprom-neft/consta-uikit/commit/c7abe9ee09d845d2d602fe529c9948d6e959df04) - [@dependabot](https://github.com/dependabot[bot])
 - [fix(Table): added check for filters and tests (#1561)](https://github.com/gazprom-neft/consta-uikit/commit/8c02bd71a04b24b5df40cdd7508dbd0a50a7311a) - [@AntonS86](https://github.com/AntonS86)
@@ -362,13 +384,3 @@ _Обращаем внимание_: *версии компонентов обр
 
 ## v1.11.1 (19/01/2021)
 - [feat(EventInterceptor): added textfield, checkbox, snackbar, select components (#749)](https://github.com/gazprom-neft/consta-uikit/commit/9ed6f341c1475704619db78936a772348a3c2599) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
-
---------------------
-
-## v1.11.0 (14/01/2021)
-- [feat(Modal): added rootClassName prop (#746)](https://github.com/gazprom-neft/consta-uikit/commit/f3585403e029f7de6b84cfa27904c5381011b171) - [@gizeasy](https://github.com/gizeasy)
-- [feat(EventInterceptor): added EventInterceptor context (#739)](https://github.com/gazprom-neft/consta-uikit/commit/b6098de25e0c18db1be637d0e6bd751e409cec37) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
-- [fix(TextField): add missing forms (#724)](https://github.com/gazprom-neft/consta-uikit/commit/1727974d2bc1ec023fc47faf3f8aa884e91598a7) - [@fooontic](https://github.com/fooontic)
-- [feat(table): add event to arguments for activeRow (#733)](https://github.com/gazprom-neft/consta-uikit/commit/762ccabde2d937920408b03973f7492142d01212) - [@c1n1k](https://github.com/c1n1k)
-- [fix(Table): parent width related child headers (#553) (#707)](https://github.com/gazprom-neft/consta-uikit/commit/149df47c67dad8794d32cb3eccac551bc9b2d1a4) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
-- [fix(BasicSelect): fixed blur (#728)](https://github.com/gazprom-neft/consta-uikit/commit/2d734352f034d81543c2d63a9671f044e324f3b9) - [@c1n1k](https://github.com/c1n1k)
