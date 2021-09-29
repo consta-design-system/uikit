@@ -1,6 +1,10 @@
 import { Meta, Preview, Story } from '@storybook/addon-docs/dist/blocks';
 
 import { CardExample } from './examples/CardExample/CardExample';
+import { CardExampleForm } from './examples/CardExampleForm/CardExampleForm';
+import { CardExampleState } from './examples/CardExampleState/CardExampleState';
+import { CardExampleShadow } from './examples/CardExampleShadow/CardExampleShadow';
+import { CardExampleSpace } from './examples/CardExampleSpace/CardExampleSpace';
 
 # Card
 
@@ -11,17 +15,101 @@ import { CardExample } from './examples/CardExample/CardExample';
 
 Вместо этого сделали карточку в виде «коробки», которая подчиняется правилам
 тематизации нашей дизайн-системы. В неё можно поместить любой контент —
-главное, чтобы контент тоже подчинялся правилам тематизации.
+главное, чтобы контент тоже подчинялся [правилам тематизации](?path=/docs/thematization-what-are-themes--page).
 
-Данный компонент использует в себе миксин `MixCard`, ознакомиться с его документацией и
-примерами [можно здесь](?path=/docs/mixins-mixcard--playground)
+> В карточке используется миксин [MixCard](?path=/docs/mixcard--page)
 
+- [Отступы](#отступы)
+- [Статус](#статус)
+- [Форма](#форма)
+- [Тень](#тень)
 - [Список свойств](#список-свойств)
-- [Пример использования](#пример-использования)
+- [Пример использования](#пример)
 
-## Пример использования
+## Отступы
 
-<CardExample />
+Отступы внутри карточки можно менять с помощью двух свойств:
+
+- за отступы сверху и снизу отвечает `verticalSpace`,
+- за отступы по бокам — `horizontalSpace`.
+
+Варианты:
+`'xs'`, `'s'`, `'m'`, `'l'`, `'xl'`, `'2xl'`, `'3xl'`, `'4xl'`, `'5xl'`.
+
+По умолчанию — `'xs'`.
+
+```tsx
+<Card verticalSpace="xs" horizontalSpace="xs">
+  <Text>Отступы 'xs'</Text>
+</Card>
+```
+
+<CardExampleSpace />
+
+## Статус
+
+Свойство `status` окрашивает рамку карточки в цвета соответствующего статуса. Варианты:
+`'alert'`, `'success'`, `'warning'`.
+
+```tsx
+<Card verticalSpace="2xl" horizontalSpace="2xl" status="alert">
+  <Text>Опасная карточка</Text>
+</Card>
+<Card verticalSpace="2xl" horizontalSpace="2xl" status="warning">
+  <Text>Тревожная карточка</Text>
+</Card>
+<Card verticalSpace="2xl" horizontalSpace="2xl" status="success">
+  <Text>Успешная карточка</Text>
+</Card>
+```
+
+<CardExampleState />
+
+## Форма
+
+За форму карточки отвечает свойство `form`. Варианты:
+`'round'`, `'square'`, по умолчанию `'round'`.
+
+```tsx
+<Card verticalSpace="2xl" horizontalSpace="2xl" form="round">
+  <Text>Круглая карточка</Text>
+</Card>
+<Card verticalSpace="2xl" horizontalSpace="2xl" form="square">
+  <Text>Квадратная карточка</Text>
+</Card>
+```
+
+<CardExampleForm />
+
+## Тень
+
+По умолчанию у карточки есть тень, её можно убирать и показывать с помощью свойства `shadow`.
+
+```tsx
+<Card verticalSpace="2xl" horizontalSpace="2xl" status="success">
+  <Text>Карточка с тенью</Text>
+</Card>
+<Card verticalSpace="2xl" horizontalSpace="2xl" status="success" shadow={false}>
+  <Text>Карточка без тени</Text>
+</Card>
+```
+
+<CardExampleShadow />
+
+## Список свойств
+
+| Свойство                       | Тип или варианты значения                               | По умолчанию | Описание                                                                     |
+| ------------------------------ | ------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------- |
+| [`verticalSpace?`](#отступы)   | `'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl'` | `'xs'`       | Вертикальные отступы                                                         |
+| [`horizontalSpace?`](#отступы) | `'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl'` | `'xs'`       | Горизонтальные отступы                                                       |
+| [`status?`](#статус)           | `'alert', 'success', 'warning'`                         | -            | Статус, меняет цвет границ карточки                                          |
+| [`form?`](#форма)              | `'round'`, `'square'`                                   | `'round'`    | Форма                                                                        |
+| [`shadow?`](#тень)             | `boolean`                                               | `'true'`     | Тень                                                                         |
+| `tabIndex`                     | `number`                                                | —            | Порядковый номер при переходе между элементами интерфейса по клавише **tab** |
+| `as`                           | `React.ElementType`                                     | `button`     | HTML-тег для кнопки                                                          |
+| `className`                    | `string`                                                | —            | Дополнительные CSS-классы                                                    |
+
+## Пример
 
 ```tsx
 <Card verticalSpace={'2xl'} horizontalSpace={'2xl'} status={'alert'}>
@@ -29,15 +117,4 @@ import { CardExample } from './examples/CardExample/CardExample';
 </Card>
 ```
 
-## Список свойств
-
-| Свойство          | Тип или варианты значения                               | По умолчанию | Описание                                                                     |
-| ----------------- | ------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------- |
-| `verticalSpace`   | `'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl'` | `xs`         | Вертикальные отступы                                                         |
-| `horizontalSpace` | `'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl'` | `xs`         | Горизонтальные отступы                                                       |
-| `status`          | `'alert', 'success', 'warning'`                         | -            | Состояние карточки, в зависимости от состояния отрисовываются разные границы |
-| `form`            | `'round', 'square'`                                     | 'round'      | Форма                                                                        |
-| `shadow`          | `boolean`                                               | 'true'       | Тень                                                                         |
-| `tabIndex`        | `number`                                                | —            | Порядковый номер при переходе между элементами интерфейса по клавише **tab** |
-| `as`              | `React.ElementType`                                     | `button`     | HTML-тег для кнопки                                                          |
-| `className`       | `string`                                                | —            | Дополнительные CSS-классы                                                    |
+<CardExample /> |
