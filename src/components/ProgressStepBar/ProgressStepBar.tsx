@@ -1,44 +1,59 @@
 import './ProgressStepBar.css';
 
-import React from 'react';
+import React, { forwardRef } from 'react';
 
-import { cn } from '../../utils/bem';
-import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
+import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 
-export const propSize = ['s', 'xs', 'm'] as const;
-export type PropSize = typeof propSize[number];
-export const propSizeDefault = propSize[0];
+import { ProgressStepBarItem } from './ProgressStepBarItem/ProgressStepBarItem';
+import {
+  cnProgressStepBar,
+  DefaultItem,
+  ProgressStepBarComponent,
+  ProgressStepBarProps,
+  propDirectionDefault,
+  propSizeDefault,
+  withDefaultGetters,
+} from './helpers';
 
-export const propDirection = ['horizontal', 'vertical'] as const;
-export type PropDirection = typeof propDirection[number];
-export const propDirectionDefault = propDirection[0];
-
-export const propLineColor = ['system', 'normal', 'success', 'warning', 'alert'] as const;
-export type PropLineColor = typeof propLineColor[number];
-export const propLineColorDefault = propLineColor[0];
-
-type Props = {
-  lineColor: PropLineColor;
-  direction: PropDirection;
-  size: PropSize;
-};
-
-const cnProgressStepBar = cn('ProgressStepBar');
-
-export const ProgressStepBar = forwardRefWithAs<Props>((props, ref) => {
+function ProgressStepBarRender<ITEM = DefaultItem>(
+  props: ProgressStepBarProps<ITEM>,
+  ref: React.Ref<HTMLDivElement>,
+) {
   const {
-    size = propSizeDefault,
+    steps = [],
     direction = propDirectionDefault,
-    lineColor = propLineColorDefault,
+    size = propSizeDefault,
     className,
+    getItemContent,
+    getItemKey,
+    getItemLabel,
+    getItemOnClick,
+    getItemPoint,
+    getItemProgress,
+    getItemStatus,
+    getItemTooltipContent,
     ...otherProps
-  } = props;
+  } = usePropsHandler('ProgressStepBar', withDefaultGetters(props));
 
   return (
-    <div
-      ref={ref as React.RefObject<HTMLDivElement>}
-      className={cnProgressStepBar({ direction, lineColor, size }, [className])}
-      {...otherProps}
-    />
+    <div ref={ref} {...otherProps} className={cnProgressStepBar({ direction }, [className])}>
+      {steps.map((step) => (
+        <ProgressStepBarItem
+          step={step}
+          size={size}
+          direction={direction}
+          getItemContent={getItemContent}
+          getItemKey={getItemKey}
+          getItemLabel={getItemLabel}
+          getItemOnClick={getItemOnClick}
+          getItemPoint={getItemPoint}
+          getItemProgress={getItemProgress}
+          getItemStatus={getItemStatus}
+          getItemTooltipContent={getItemTooltipContent}
+        />
+      ))}
+    </div>
   );
-});
+}
+
+export const ProgressStepBar = forwardRef(ProgressStepBarRender) as ProgressStepBarComponent;
