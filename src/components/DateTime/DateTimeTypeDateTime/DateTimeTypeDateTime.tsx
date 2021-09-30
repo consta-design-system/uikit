@@ -6,15 +6,9 @@ import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
 import { cn } from '../../../utils/bem';
 import { DateTimeTypeDate } from '../DateTimeTypeDate/DateTimeTypeDate';
 import { DateTimeTypeTime } from '../DateTimeTypeTime/DateTimeTypeTime';
-import { DateTimeProps, MoveType, moveTypes } from '../helpers';
+import { DateTimeTypeComponent, MoveType, moveTypes } from '../helpers';
 
 import { useOnChange } from './useOnChange';
-
-export type DateTimeTypeDateTimeComponent = (
-  props: Omit<DateTimeProps, 'type' | 'onChangeRange' | 'value' | 'view'> & {
-    value?: Date;
-  },
-) => React.ReactElement | null;
 
 const cnDateTimeTypeDateTime = cn('DateTimeTypeDateTime');
 
@@ -22,7 +16,7 @@ type CssVars = {
   '--root-padding-left': string;
 };
 
-export const DateTimeTypeDateTime: DateTimeTypeDateTimeComponent = forwardRef((props, ref) => {
+export const DateTimeTypeDateTime: DateTimeTypeComponent<'date-time'> = forwardRef((props, ref) => {
   const {
     className,
     onMove: onMoveProp,

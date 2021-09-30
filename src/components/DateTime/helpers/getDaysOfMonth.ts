@@ -3,9 +3,11 @@ import {
   addDays,
   addWeeks,
   differenceInDays,
+  endOfDay,
   endOfWeek,
   format,
   Locale,
+  startOfDay,
   startOfMonth,
   startOfWeek,
 } from 'date-fns';
@@ -46,7 +48,7 @@ export const getDaysOfMonth = (props: {
   maxDate?: Date;
 }): {
   disabled?: boolean;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   label: string;
   selected?: boolean;
   range?: DateTimeCellPropRange;
@@ -62,18 +64,21 @@ export const getDaysOfMonth = (props: {
   return range(diffDays).map((index) => {
     const date = addDays(startDate, index);
     const label = format(date, 'd');
+    const disabled = !isInMinMaxDade(date, minDate, maxDate, startOfDay, endOfDay);
+    const onClick =
+      !disabled && handleDayClick
+        ? (e: React.MouseEvent<HTMLButtonElement>) => handleDayClick({ e, value: date })
+        : undefined;
 
     if (date.getMonth() === currentMonth) {
       return {
         label,
-        onClick: handleDayClick
-          ? (e: React.MouseEvent<HTMLDivElement>) => handleDayClick({ e, value: date })
-          : undefined,
+        onClick,
         selected: isSelected({ date, value }),
         range: Array.isArray(value) && isDateInRange(date, value),
         event: events && hasEvent(date, events),
         current: isToday(date),
-        disabled: !isInMinMaxDade(date, minDate, maxDate),
+        disabled,
       };
     }
 

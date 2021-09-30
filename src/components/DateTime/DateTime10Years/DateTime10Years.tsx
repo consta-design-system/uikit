@@ -4,14 +4,19 @@ import React from 'react';
 
 import { cn } from '../../../utils/bem';
 import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
-import { DateTimeCellProps } from '../DateTimeCell/DateTimeCell';
+import { DateTimeCellPropRange } from '../DateTimeCell/DateTimeCell';
 import { DateTimeGrid } from '../DateTimeGrid/DateTimeGrid';
 import { DateTimeItemProps } from '../DateTimeItem/DateTimeItem';
 
 export type DateTime10YearsProps = PropsWithJsxAttributes<
   {
     children?: never;
-    years: Omit<DateTimeItemProps & DateTimeCellProps, 'ref'>[];
+    years: Omit<
+      DateTimeItemProps & {
+        range?: DateTimeCellPropRange;
+      },
+      'ref'
+    >[];
   },
   'div'
 >;

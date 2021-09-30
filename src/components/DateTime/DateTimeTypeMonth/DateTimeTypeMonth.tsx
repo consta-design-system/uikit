@@ -21,7 +21,7 @@ import {
 import { dateTimePropView, dateTimePropViewDefault } from '../helpers/types';
 import { cnDateTimeMixLayout } from '../mixs';
 
-export const DateTimeTypeMonth: DateTimeTypeComponent = forwardRef((props, ref) => {
+export const DateTimeTypeMonth: DateTimeTypeComponent<'month'> = forwardRef((props, ref) => {
   const {
     minDate,
     maxDate,

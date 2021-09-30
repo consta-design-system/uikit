@@ -18,7 +18,7 @@ import {
 import { dateTimePropView, dateTimePropViewDefault } from '../helpers/types';
 import { cnDateTimeMixLayout } from '../mixs';
 
-export const DateTimeTypeYear: DateTimeTypeComponent = forwardRef((props, ref) => {
+export const DateTimeTypeYear: DateTimeTypeComponent<'year'> = forwardRef((props, ref) => {
   const {
     minDate,
     maxDate,
