@@ -24,7 +24,7 @@ const getKnobs = () => ({
   size: select('size', ['m', 's', 'l'], defaultPropSize),
   view: select('view', propView, defaultPropView),
   form: select('form', propForm, defaultPropForm),
-  placeholder: text('placeholder', 'Placeholder'),
+  placeholder: text('placeholder', 'Выберите вариант'),
   withGroups: boolean('withGroups', false),
 });
 
