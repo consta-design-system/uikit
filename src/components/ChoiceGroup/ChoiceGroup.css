@@ -1,9 +1,12 @@
 .ChoiceGroup {
+  --choice-group-bg-color: transparent;
+  --choice-group-border-color: var(--color-control-bg-border-default);
   position: relative;
   display: inline-flex;
   max-width: 100%;
+  background-color: var(--choice-group-bg-color);
   border-radius: var(--choice-radius);
-  box-shadow: inset 0 0 0 var(--control-border-width) var(--color-control-bg-border-default);
+  box-shadow: inset 0 0 0 var(--control-border-width) var(--choice-group-border-color);
 
   &_view {
     &_primary {
@@ -57,6 +60,7 @@
     &_brick {
       --divider-width: var(--control-border-width);
       --divider-height: 65%;
+      --choise-offset-disabled: 2px;
     }
 
     &_default {
@@ -68,6 +72,7 @@
     }
 
     &_round {
+      --choise-offset-disabled: 5px;
       --choice-radius: 99em;
       --divider-width: 4px;
       --divider-height: 4px;
@@ -84,32 +89,49 @@
   }
 
   &-Label {
+    --choice-group-label-color: var(--color-control-typo-default);
+    --choice-group-label-bg-color: transparent;
+    --choice-group-label-bg-left: 0;
+    --divider-bg-color: var(--color-control-bg-border-default);
     position: relative;
     z-index: 0;
     display: flex;
     overflow: hidden;
     justify-content: center;
     align-items: center;
-    flex-grow: 1;
     box-sizing: border-box;
     height: var(--choice-height);
     padding: 0 var(--choice-space) 0 var(--choice-space);
-    color: var(--color-control-typo-default);
+    color: var(--choice-group-label-color);
     border-radius: var(--choice-radius);
     font-size: var(--choice-font-size);
     font-weight: var(--font-weight-text-regular);
     line-height: calc(var(--choice-height) - var(--control-border-width) * 2);
     text-decoration: none;
     cursor: pointer;
-    transition: background-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease,
-      fill 0.15s ease;
+    transition: box-shadow 0.15s ease, color 0.15s ease, fill 0.15s ease;
+    flex-grow: 1;
+
+    /* background layout */
+    &::before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: var(--choice-group-label-bg-left);
+      width: 100%;
+      height: 100%;
+      background-color: var(--choice-group-label-bg-color);
+      border-radius: var(--choice-radius);
+      transition: background-color 0.15s ease;
+    }
   }
 
   &-Input {
     position: absolute;
+    opacity: 0;
     -webkit-appearance: none;
     appearance: none;
-    opacity: 0;
   }
 
   &-Label:last-child {
@@ -129,25 +151,26 @@
     left: 0;
     width: var(--divider-width);
     height: var(--divider-height);
+    background-color: var(--divider-bg-color);
     transform: translateY(-50%);
   }
 
-  &-Label:not(.ChoiceGroup-Label_checked, .ChoiceGroup-Label_disabled) {
+  &-Label:not(.ChoiceGroup-Label_checked) {
     &:hover {
-      color: var(--color-control-typo-secondary-hover);
-    }
-
-    &::after {
-      background-color: var(--color-control-bg-border-default);
+      --choice-group-label-color: var(--color-control-typo-secondary-hover);
     }
   }
 
   &-Label_checked {
-    color: var(--choice-text-color);
-    background-color: var(--choice-bg-color);
+    --choice-group-label-color: var(--choice-text-color);
+    --choice-group-label-bg-color: var(--choice-bg-color);
 
-    & + .ChoiceGroup-Label::after {
-      background-color: transparent;
+    &:not(.ChoiceGroup-Label_disabled) {
+      --divider-bg-color: transparent;
+
+      & + .ChoiceGroup-Label::after {
+        --divider-bg-color: transparent;
+      }
     }
   }
 
@@ -177,21 +200,27 @@
   }
 
   &-Label.ChoiceGroup-Label_disabled {
-    color: var(--color-control-typo-disable);
-    background-color: var(--color-control-bg-disable);
+    --choice-group-label-color: var(--color-control-typo-disable);
+    --choice-group-label-bg-color: var(--color-control-bg-disable);
     pointer-events: none;
-
-    & + .ChoiceGroup-Label::after {
-      background-color: transparent;
-    }
   }
 
   &_disabled {
-    background-color: var(--color-control-bg-disable);
-    box-shadow: inset 0 0 0 var(--control-border-width) transparent;
+    --choice-group-bg-color: var(--color-control-bg-disable);
+    --choice-group-border-color: transparent;
 
-    .ChoiceGroup-Label.ChoiceGroup-Label_disabled:not(.ChoiceGroup-Label_checked) {
-      background-color: transparent;
+    .ChoiceGroup-Label_disabled:not(.ChoiceGroup-Label_checked) {
+      --choice-group-label-bg-color: transparent;
+    }
+
+    .ChoiceGroup-Label::after {
+      --divider-bg-color: transparent;
+    }
+  }
+
+  &:not(.ChoiceGroup_disabled) {
+    .ChoiceGroup-Label_disabled::before {
+      --choice-group-label-bg-left: var(--choise-offset-disabled);
     }
   }
 }
