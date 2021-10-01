@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { defaultGetItemLabel, SelectProps } from '../../Select/helpers';
-import { COMPONENT_NAME } from '../../Select/Select';
+import { COMPONENT_NAME } from '../../SelectComponents/cnSelect';
 import { EventInterceptorHandler } from '../EventInterceptor';
 
 export const useSelectEventsHandler = <PROPS extends SelectProps>(

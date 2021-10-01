@@ -186,7 +186,6 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
   );
 }
 
-export { COMPONENT_NAME };
 export const Select = forwardRef(SelectRender) as SelectComponent;
 
 export * from './helpers';

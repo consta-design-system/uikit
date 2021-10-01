@@ -1,6 +1,6 @@
 import { COMPONENT_NAME as BUTTON_NAME } from '../Button/Button';
 import { COMPONENT_NAME as CHECKBOX_NAME } from '../Checkbox/Checkbox';
-import { COMPONENT_NAME as SELECT_NAME } from '../Select/Select';
+import { COMPONENT_NAME as SELECT_NAME } from '../SelectComponents/cnSelect';
 import { COMPONENT_NAME as SNACKBAR_NAME } from '../SnackBar/SnackBar';
 import { COMPONENT_NAME as TEXTFIELD_NAME } from '../TextField/TextField';
 

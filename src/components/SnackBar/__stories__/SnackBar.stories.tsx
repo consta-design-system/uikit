@@ -1,6 +1,7 @@
 import './SnackBar.stories.css';
 
 import * as React from 'react';
+import { action } from '@storybook/addon-actions';
 import { boolean } from '@storybook/addon-knobs';
 
 import { IconProps } from '../../../icons/Icon/Icon';
@@ -101,7 +102,7 @@ export function Playground() {
   React.useEffect(() => handleNormalAdd(), []);
 
   return (
-    <EventInterceptorProvider eventHandler={console.log} map={eventInterceptorMap}>
+    <EventInterceptorProvider eventHandler={action('EventInterceptor')} map={eventInterceptorMap}>
       <div className={cnSnackBarStories()}>
         <div className={cnSnackBarStories('Buttons')}>
           <Button
