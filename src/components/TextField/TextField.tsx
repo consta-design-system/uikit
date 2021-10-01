@@ -7,6 +7,8 @@ import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
+import { FieldCaption } from '../FieldCaption/FieldCaption';
+import { FieldLabel } from '../FieldLabel/FieldLabel';
 
 import {
   sizeMap,
@@ -60,6 +62,9 @@ export function TextFieldRender<TYPE extends string>(
     step,
     tabIndex,
     ariaLabel,
+    label,
+    labelPosition = 'top',
+    caption,
     iconSize: iconSizeProp,
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, props, textFieldRef);
@@ -125,59 +130,67 @@ export function TextFieldRender<TYPE extends string>(
   };
 
   return (
-    <div
-      className={cnTextField(
-        {
-          size,
-          view,
-          form,
-          state,
-          disabled,
-          width,
-          type,
-          focus,
-          withValue: !!value,
-        },
-        [className],
+    <div className={cnTextField({ labelPosition, size, view, width }, [className])} {...otherProps}>
+      {label && (
+        <FieldLabel className={cnTextField('Label', { labelPosition })} size={size}>
+          {label}
+        </FieldLabel>
       )}
-      ref={useForkRef([ref, textFieldRef])}
-      {...otherProps}
-    >
-      {LeftIcon && (
+      <div className={cnTextField('Body')}>
         <div
-          className={cnTextField('Side', {
-            position: 'left',
-            type: leftSideIsString ? 'string' : 'icon',
+          className={cnTextField('InputContainer', {
+            view,
+            form,
+            state,
+            disabled,
+            type,
+            focus,
+            withValue: !!value,
           })}
-          title={typeof leftSide === 'string' ? leftSide : undefined}
+          ref={useForkRef([ref, textFieldRef])}
         >
-          {leftSideIsString ? (
-            leftSide
+          {LeftIcon && (
+            <div
+              className={cnTextField('Side', {
+                position: 'left',
+                type: leftSideIsString ? 'string' : 'icon',
+              })}
+              title={typeof leftSide === 'string' ? leftSide : undefined}
+            >
+              {leftSideIsString ? (
+                leftSide
+              ) : (
+                <LeftIcon className={cnTextField('Icon')} size={iconSize} />
+              )}
+            </div>
+          )}
+          {textarea ? (
+            <TextAreaAutoSize {...commonProps} {...textareaProps} />
           ) : (
-            <LeftIcon className={cnTextField('Icon')} size={iconSize} />
+            <input {...commonProps} {...inputProps} />
+          )}
+          {RightIcon && (
+            <div
+              className={cnTextField('Side', {
+                position: 'right',
+                type: rightSideIsString ? 'string' : 'icon',
+              })}
+              title={typeof rightSide === 'string' ? rightSide : undefined}
+            >
+              {rightSideIsString ? (
+                rightSide
+              ) : (
+                <RightIcon className={cnTextField('Icon')} size={iconSize} />
+              )}
+            </div>
           )}
         </div>
-      )}
-      {textarea ? (
-        <TextAreaAutoSize {...commonProps} {...textareaProps} />
-      ) : (
-        <input {...commonProps} {...inputProps} />
-      )}
-      {RightIcon && (
-        <div
-          className={cnTextField('Side', {
-            position: 'right',
-            type: rightSideIsString ? 'string' : 'icon',
-          })}
-          title={typeof rightSide === 'string' ? rightSide : undefined}
-        >
-          {rightSideIsString ? (
-            rightSide
-          ) : (
-            <RightIcon className={cnTextField('Icon')} size={iconSize} />
-          )}
-        </div>
-      )}
+        {caption && (
+          <FieldCaption className={cnTextField('Caption')} status={state}>
+            {caption}
+          </FieldCaption>
+        )}
+      </div>
     </div>
   );
 }

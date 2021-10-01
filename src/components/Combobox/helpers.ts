@@ -74,6 +74,9 @@ export type ComboboxProps<
     getItemDisabled?: PropGetItemDisabled<ITEM>;
     getGroupLabel?: PropGetGroupLabel<GROUP>;
     getGroupKey?: PropGetGroupKey<GROUP>;
+    label?: string;
+    caption?: string;
+    labelPosition?: 'top' | 'left';
   },
   HTMLDivElement
 > &
