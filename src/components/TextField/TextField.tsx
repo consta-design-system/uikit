@@ -129,7 +129,7 @@ export function TextFieldRender<TYPE extends string>(
   };
 
   return (
-    <div className={cnTextField({ labelPosition, size, view }, [className])} {...otherProps}>
+    <div className={cnTextField({ labelPosition, size, view, width }, [className])} {...otherProps}>
       {label && (
         <FieldLabel className={cnTextField('Label', { labelPosition })} size={size}>
           {label}
@@ -142,7 +142,6 @@ export function TextFieldRender<TYPE extends string>(
             form,
             state,
             disabled,
-            width,
             type,
             focus,
             withValue: !!value,
