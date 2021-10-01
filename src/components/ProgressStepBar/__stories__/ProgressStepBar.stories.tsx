@@ -3,23 +3,50 @@ import { select } from '@storybook/addon-knobs';
 
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
-import { propSize, propSizeDefault } from '../helpers';
+import {
+  propDirection,
+  propDirectionDefault,
+  propSize,
+  propSizeDefault,
+  propStatus,
+  propStatusDefault,
+} from '../helpers';
 import { ProgressStepBar } from '../ProgressStepBar';
 
 const cnProgressStepBarStories = cn('ProgressStepBarStories');
 
 const defaultKnobs = () => ({
   size: select('size', propSize, propSizeDefault),
+  direction: select('direction', propDirection, propDirectionDefault),
+  status: select('status', propStatus, propStatusDefault),
 });
 
 export function Playground() {
-  const { size } = defaultKnobs();
+  const { size, direction, status } = defaultKnobs();
 
   const example = [
     {
       label: 'Первый пункт',
       point: 1,
-      status: 'system',
+      status,
+      progress: 50,
+      tooltipContent: `Небольшое описание
+            выполнения или состояния
+            текущего этапа`,
+    },
+    {
+      label: 'Второй пункт',
+      point: 2,
+      status,
+      progress: 50,
+      tooltipContent: `Небольшое описание
+            выполнения или состояния
+            текущего этапа`,
+    },
+    {
+      label: 'Третий пункт',
+      point: 3,
+      status,
       progress: 50,
       tooltipContent: `Небольшое описание
             выполнения или состояния
@@ -30,7 +57,7 @@ export function Playground() {
   return (
     <ProgressStepBar
       className={cnProgressStepBarStories()}
-      direction="horizontal"
+      direction={direction}
       size={size}
       steps={example}
       getItemKey={(el) => el.toString()}

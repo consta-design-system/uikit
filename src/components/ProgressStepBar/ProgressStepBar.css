@@ -1,29 +1,126 @@
 .ProgressStepBar {
+  display: inline-flex;
+  justify-content: space-between;
+  position: relative;
+
+  &_direction {
+    &_horizontal {
+      width: 100%;
+      flex-direction: row;
+
+      & .ProgressStepBar-Point_size_xs {
+        margin-bottom: var(--space-2xs);
+      }
+
+      & .ProgressStepBar-Point_size_s,
+      & .ProgressStepBar-Point_size_m {
+        margin-bottom: var(--space-xs);
+      }
+    }
+
+    &_vertical {
+      height: 100%;
+      flex-direction: column;
+    }
+  }
+
   &-Step {
+    position: relative;
     display: inline-flex;
     align-items: flex-start;
+    width: 100%;
+    height: 100%;
+
+    &_size {
+      &_xs {
+        --step-line-size: var(--space-3xs);
+        --step-line-padding: calc((var(--space-xs) - var(--space-3xs)) * 0.5);
+      }
+
+      &_s {
+        --step-line-size: var(--space-2xs);
+        --step-line-padding: calc((var(--space-m) - var(--space-2xs)) * 0.5);
+      }
+
+      &_m {
+        --step-line-size: var(--space-2xs);
+        --step-line-padding: calc((var(--space-xl) - var(--space-2xs)) * 0.5);
+      }
+    }
 
     &_direction {
       &_horizontal {
         flex-direction: column;
+
+        &::before,
+        &::after {
+          left: 0;
+          top: var(--step-line-padding);
+          height: var(--step-line-size);
+          width: 100%;
+        }
       }
 
       &_vertical {
         flex-direction: row;
+
+        &::before,
+        &::after {
+          top: 0;
+          left: var(--step-line-padding);
+          width: var(--step-line-size);
+          height: 100%;
+        }
       }
     }
 
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+    }
+
+    &::after {
+      background-color: var(--point-background);
+    }
+
+    &::before {
+      background-color: var(--color-bg-system);
+    }
+
     &_position {
-      &_start.ProgressStepBar-Step_direction_vertical {
-        justify-content: flex-start;
+      &_start.ProgressStepBar-Step_direction_horizontal {
+        align-items: flex-start;
       }
 
-      &_center.ProgressStepBar-Step_direction_vertical {
-        justify-content: center;
+      &_center.ProgressStepBar-Step_direction_horizontal {
+        align-items: center;
       }
 
-      &_end.ProgressStepBar-Step_direction_vertical {
-        justify-content: flex-end;
+      &_end.ProgressStepBar-Step_direction_horizontal {
+        align-items: flex-end;
+      }
+    }
+
+    &_status {
+      &_system {
+        --point-background: var(--color-bg-system);
+      }
+
+      &_normal {
+        --point-background: var(--color-bg-normal);
+      }
+
+      &_success {
+        --point-background: var(--color-bg-success);
+      }
+
+      &_warning {
+        --point-background: var(--color-bg-warning);
+      }
+
+      &_alert {
+        --point-background: var(--color-bg-alert);
       }
     }
   }
@@ -40,9 +137,15 @@
     color: var(--color-bg-default);
     background-color: var(--point-background);
     border-radius: calc(var(--point-size) * 0.5);
+    transition: background-color 0.3s;
 
     &-Text {
       color: var(--color-typo-secondary);
+      transition: color 0.3s;
+    }
+
+    & .ProgressSpin.Timer-Progress {
+      transition: stroke 0.3s;
     }
 
     &:not(.ProgressStepBar-Point_status_system) {
@@ -70,28 +173,6 @@
 
       &_m {
         --point-size: var(--space-xl);
-      }
-    }
-
-    &_status {
-      &_system {
-        --point-background: var(--color-bg-system);
-      }
-
-      &_normal {
-        --point-background: var(--color-bg-normal);
-      }
-
-      &_success {
-        --point-background: var(--color-bg-success);
-      }
-
-      &_warning {
-        --point-background: var(--color-bg-warning);
-      }
-
-      &_alert {
-        --point-background: var(--color-bg-alert);
       }
     }
   }

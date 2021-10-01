@@ -57,7 +57,7 @@ export const ProgressStepBarItem: StepComponent = (props) => {
   const [isTooltipHidden, setIsTooltipHidden] = useState<boolean>(true);
   const [isContentHidden, setIsContentHidden] = useState<boolean>(true);
 
-  const containerRef = useRef<HTMLDivElement>(null);
+  const anchorRef = useRef<HTMLDivElement>(null);
 
   const PointContent =
     getItemPoint(step) instanceof SVGElement ? (
@@ -81,8 +81,11 @@ export const ProgressStepBarItem: StepComponent = (props) => {
   return (
     <>
       <div
-        ref={containerRef}
-        className={cnProgressStepBar('Step', { direction, position })}
+        className={cnProgressStepBar('Step', {
+          direction,
+          position,
+          status: getItemStatus(step) || propStatusDefault,
+        })}
         {...otherProps}
       >
         <button
@@ -91,7 +94,6 @@ export const ProgressStepBarItem: StepComponent = (props) => {
           onMouseLeave={() => setIsTooltipHidden(true)}
           className={cnProgressStepBar('Point', {
             size,
-            status: getItemStatus(step) || propStatusDefault,
           })}
           onClick={handleClick}
         >
@@ -103,7 +105,7 @@ export const ProgressStepBarItem: StepComponent = (props) => {
             ))}
         </button>
         <div className={cnProgressStepBar('Content')}>
-          <Text size={size === 'm' ? 'm' : 's'} view="primary">
+          <Text ref={anchorRef} size={size === 'm' ? 'm' : 's'} view="primary">
             {getItemLabel(step)}
           </Text>
           {getItemContent(step)}
@@ -111,8 +113,9 @@ export const ProgressStepBarItem: StepComponent = (props) => {
       </div>
       {getItemTooltipContent(step) && !isTooltipHidden && (
         <Tooltip
-          anchorRef={containerRef}
+          anchorRef={anchorRef}
           direction={direction === 'horizontal' ? 'downCenter' : 'leftUp'}
+          spareDirection={direction === 'horizontal' ? 'upCenter' : 'rightUp'}
         >
           {getItemTooltipContent(step)}
         </Tooltip>

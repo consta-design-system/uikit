@@ -13,10 +13,13 @@ export const propStatus = ['system', 'normal', 'success', 'warning', 'alert'] as
 export type PropStatus = typeof propStatus[number];
 export const propStatusDefault = propStatus[0];
 
+export const pointNumbersMap = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] as const;
+export type PointNumbersMap = typeof pointNumbersMap[number];
+
 export type PropGetItemLabel<ITEM> = (item: ITEM) => string;
 export type PropGetItemKey<ITEM> = (item: ITEM) => string | number;
 export type PropGetItemTooltipContent<ITEM> = (item: ITEM) => string | undefined;
-export type PropGetItemPoint<ITEM> = (item: ITEM) => string | number | SVGElement | undefined;
+export type PropGetItemPoint<ITEM> = (item: ITEM) => PointNumbersMap | SVGElement | undefined;
 export type PropGetItemProgress<ITEM> = (item: ITEM) => number | undefined;
 export type PropGetItemContent<ITEM> = (item: ITEM) => React.ReactNode | undefined;
 export type PropGetItemStatus<ITEM> = (item: ITEM) => PropStatus | undefined;
@@ -28,7 +31,7 @@ export type DefaultItem = {
   label: string;
   id: string | number;
   tooltipContent?: string;
-  point?: string | number | SVGElement;
+  point?: PointNumbersMap | SVGElement;
   status?: PropStatus;
   progress?: number;
   content?: React.ReactNode;
