@@ -78,6 +78,20 @@
     display: flex;
     width: 100%;
 
+    &_view_default.Select-SelectContainer_state {
+      &_alert .Select-Control {
+        border-color: var(--color-bg-alert);
+      }
+
+      &_success .Select-Control {
+        border-color: var(--color-bg-success);
+      }
+
+      &_warning .Select-Control {
+        border-color: var(--color-bg-warning);
+      }
+    }
+
     &_view_default .Select-Control {
       padding: 0;
       color: var(--color-control-typo-default);

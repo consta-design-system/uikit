@@ -13,6 +13,7 @@ import {
   SelectExampleCustomTypesWithGroups,
 } from './examples/SelectExampleCustomTypes/SelectExampleCustomTypes';
 import { SelectExampleLabel } from './examples/SelectExampleLabel/SelectExampleLabel';
+import { SelectExampleStatus } from './examples/SelectExampleStatus/SelectExampleStatus';
 
 # Select
 
@@ -28,6 +29,7 @@ import { SelectExampleLabel } from './examples/SelectExampleLabel/SelectExampleL
   - [Подсказка](#подсказка)
   - [Неактивный вариант](#неактивный-элемент-списка)
   - [Группы вариантов](#группы-вариантов)
+- [Статус](#статус-поля)
 - [Размер](#размер)
 - [Форма](#форма)
 - [Внешний вид](#внешний-вид)
@@ -271,6 +273,80 @@ export function SelectExampleGroups() {
 ```
 
 <SelectExampleGroups />
+
+## Статус поля
+
+С помощью статуса можно выделить поле: показать, где ошибка, или, наоборот,
+отметить правильно заполненные поля.
+
+За статус отвечает свойство `state`. Если оно не указано, поле будет обычным.
+
+<SelectExampleStatus />
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function SelectExampleStatus() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <div className={cnDocsDecorator('Section')}>
+      <Select
+        placeholder="default"
+        caption="default"
+        size="s"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <Select
+        placeholder="alert"
+        caption="alert"
+        state="alert"
+        size="s"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <Select
+        placeholder="warning"
+        caption="warning"
+        state="warning"
+        size="s"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <Select
+        placeholder="success"
+        caption="success"
+        size="s"
+        state="success"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+    </div>
+  );
+}
+```
 
 ## Размер
 
@@ -725,6 +801,7 @@ type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | ------------------------------------------------------------------ | ------------------------------------------------------ | ------------------------- | ---------------------------------------------------------------------- |
 | [`view?`](#внешний-вид)                                            | `default` , `clear`                                    | `default`                 | Внешний вид компонента                                                 |
 | [`disabled?`](#неактивный-выпадающий-список)                       | `boolean`                                              | -                         | Делает компонент неактивным                                            |
+| [`state?`](#статус-поля)                                           | `'', 'alert', 'success', 'warning'`                    | `' '`                     | Тип поля                                                               |
 | [`size?`](#размер)                                                 | `'xs'`, `'s'` , `'m'` , `'l'`                          | `'m'`                     | Размер компонента                                                      |
 | [`form?`](#форма)                                                  | `default`, `brick`, `round`                            | `default`                 | Форма компонента                                                       |
 | [`placeholder?`](#подсказка)                                       | `string`                                               | -                         | Подсказка. Отображается, когда вариант не выбран                       |

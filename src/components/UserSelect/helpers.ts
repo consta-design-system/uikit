@@ -1,7 +1,13 @@
 import React from 'react';
 
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
-import { PropForm, PropSize, PropView, RenderItemProps } from '../SelectComponents/types';
+import {
+  PropForm,
+  PropSize,
+  PropState,
+  PropView,
+  RenderItemProps,
+} from '../SelectComponents/types';
 
 export type DefaultItem = {
   label: string;
@@ -57,6 +63,7 @@ export type UserSelectProps<
     placeholder?: string;
     ariaLabel?: string;
     dropdownClassName?: string;
+    state?: PropState;
     dropdownRef?: React.RefObject<HTMLDivElement>;
     name?: string;
     items: ITEM[];

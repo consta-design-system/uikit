@@ -1,7 +1,13 @@
 import React from 'react';
 
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
-import { PropForm, PropSize, PropView, RenderItemProps } from '../SelectComponents/types';
+import {
+  PropForm,
+  PropSize,
+  PropState,
+  PropView,
+  RenderItemProps,
+} from '../SelectComponents/types';
 
 export type DefaultItem = {
   label: string;
@@ -38,6 +44,7 @@ export type SelectProps<ITEM = DefaultItem, GROUP = DefaultGroup> = PropsWithHTM
     form?: PropForm;
     size?: PropSize;
     view?: PropView;
+    state?: PropState;
     focused?: boolean;
     multiple?: boolean;
     placeholder?: string;
