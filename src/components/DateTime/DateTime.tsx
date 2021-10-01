@@ -1,52 +1,33 @@
-import './DateTime.css';
+import React, { forwardRef } from 'react';
 
-import React from 'react';
-
-import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
 
-import { DateTimeViewOneMonth } from './DateTimeViewOneMonth/DateTimeViewOneMonth';
-import { DateTimeViewSlider } from './DateTimeViewSlider/DateTimeViewSlider';
-import { DateTimeViewTwoMonths } from './DateTimeViewTwoMonths/DateTimeViewTwoMonths';
+import { DateTimeTypeDate } from './DateTimeTypeDate/DateTimeTypeDate';
+import { DateTimeTypeDateTime } from './DateTimeTypeDateTime/DateTimeTypeDateTime';
+import { DateTimeTypeMonth } from './DateTimeTypeMonth/DateTimeTypeMonth';
+import { DateTimeTypeTime } from './DateTimeTypeTime/DateTimeTypeTime';
+import { DateTimeTypeYear } from './DateTimeTypeYear/DateTimeTypeYear';
 import {
   DateTimeComponent,
-  DateTimePropView,
-  dateTimePropViewDefault,
-  DateTimeViewComponent,
+  DateTimePropType,
+  dateTimePropTypeDefault,
+  DateTimeTypeComponent,
 } from './helpers/types';
 
-export const cnDateTime = cn('DateTime');
+const typeMap: Record<DateTimePropType, DateTimeTypeComponent<DateTimePropType>> = {
+  'date': DateTimeTypeDate,
+  'month': DateTimeTypeMonth,
+  'year': DateTimeTypeYear,
+  'time': DateTimeTypeTime,
+  'date-time': DateTimeTypeDateTime,
+} as const;
 
-const viewMap: Record<DateTimePropView, DateTimeViewComponent> = {
-  classic: DateTimeViewOneMonth,
-  book: DateTimeViewTwoMonths,
-  slider: DateTimeViewSlider,
-};
+export const DateTime: DateTimeComponent = forwardRef((props, ref) => {
+  const { type = dateTimePropTypeDefault, ...otherProps } = props;
 
-export const DateTime: DateTimeComponent = React.forwardRef((props, ref) => {
-  const { view = dateTimePropViewDefault, className, ...otherProps } = props;
+  const Component = getSizeByMap(typeMap, type);
 
-  const ViewComponent = getSizeByMap(viewMap, view);
-
-  return <ViewComponent {...otherProps} ref={ref} className={cnDateTime(null, [className])} />;
+  return <Component {...otherProps} ref={ref} />;
 });
 
-export * from './DateTimeCell/DateTimeCell';
-export * from './DateTimeItem/DateTimeItem';
-export * from './DateTimeMonth/DateTimeMonth';
-export * from './DateTimeLabel/DateTimeLabel';
-export * from './DateTimeLabel/DateTimeLabel';
-export * from './DateTimeSlider/DateTimeSlider';
-export * from './DateTimeViewOneMonth/DateTimeViewOneMonth';
-export * from './DateTimeViewSlider/DateTimeViewSlider';
-export * from './DateTimeViewTwoMonths/DateTimeViewTwoMonths';
-export * from './DateTime10Years/DateTime10Years';
-export * from './DateTimeYear/DateTimeYear';
-export * from './DateTimeTime/DateTimeTime';
-export * from './DateTimeYearSlider/DateTimeYearSlider';
-export * from './DateTime10YearSlider/DateTime10YearSlider';
-export * from './DateTime100YearSlider/DateTime100YearSlider';
-export * from './DateTimeTypeYear/DateTimeTypeYear';
-export * from './DateTimeTypeMonth/DateTimeTypeMonth';
-export * from './DateTimeTypeDate/DateTimeTypeDate';
-export * from './DateTimeTypeTime/DateTimeTypeTime';
+export * from './helpers/types';

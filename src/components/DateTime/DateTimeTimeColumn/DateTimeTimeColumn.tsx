@@ -12,7 +12,7 @@ import { useScrollToElement } from './useScrollToElement/useScrollToElement';
 
 type DateTimeTimeColumnPropItem = {
   label: string;
-  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   selected?: boolean;
 };

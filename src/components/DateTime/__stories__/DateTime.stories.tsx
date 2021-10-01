@@ -1,26 +1,14 @@
 import React, { useState } from 'react';
-import { boolean, date, select } from '@storybook/addon-knobs';
-import { addDays, endOfYear, Locale, set, startOfWeek, startOfYear } from 'date-fns';
+import { boolean, date, number, select } from '@storybook/addon-knobs';
+import { addDays, endOfDecade, startOfDecade, startOfWeek } from 'date-fns';
 import enUSLocale from 'date-fns/locale/en-US';
 import esLocale from 'date-fns/locale/es';
 import ruLocale from 'date-fns/locale/ru';
 import zhCNLocale from 'date-fns/locale/zh-CN';
 
 import { getSizeByMap } from '../../../utils/getSizeByMap';
-import { createMetadata, createStory } from '../../../utils/storybook';
-import {
-  DateTime,
-  DateTime10Years,
-  DateTime10YearSlider,
-  DateTime100YearSlider,
-  DateTimeTime,
-  DateTimeTypeDate,
-  DateTimeTypeMonth,
-  DateTimeTypeTime,
-  DateTimeTypeYear,
-  DateTimeYear,
-  DateTimeYearSlider,
-} from '../DateTime';
+import { createMetadata } from '../../../utils/storybook';
+import { DateTime, DateTimePropLocale } from '../DateTime';
 import {
   dateTimePropType,
   dateTimePropTypeDefault,
@@ -34,19 +22,19 @@ const localeProp = ['ru', 'en-US', 'zh-CN', 'es'] as const;
 type LocaleProp = typeof localeProp[number];
 const localeDefault: LocaleProp = localeProp[0];
 
-const localeMap: Record<LocaleProp, Locale> = {
+const localeMap: Record<LocaleProp, DateTimePropLocale> = {
   'ru': ruLocale,
-  'en-US': enUSLocale,
-  'zh-CN': zhCNLocale,
-  'es': esLocale,
+  'en-US': { ...enUSLocale, words: { hours: 'hrs', minutes: 'min', seconds: 'sec' } },
+  'zh-CN': { ...zhCNLocale, words: { hours: '小时', minutes: '分钟', seconds: '秒' } },
+  'es': { ...esLocale, words: { hours: 'hrs', minutes: 'min', seconds: 'seg' } },
 };
 
 const defaultKnobs = () => ({
   type: select('type', dateTimePropType, dateTimePropTypeDefault),
   view: select('view', dateTimePropView, dateTimePropViewDefault),
   withEvents: boolean('withEvents', false),
-  minDate: date('minDate', startOfYear(new Date())),
-  maxDate: date('maxDate', endOfYear(new Date())),
+  minDate: date('minDate', startOfDecade(new Date())),
+  maxDate: date('maxDate', endOfDecade(new Date())),
   locale: select('locale', localeProp, localeDefault),
 });
 
@@ -60,6 +48,15 @@ export function Playground() {
     ? [startOfWeek(currentDay, { locale: ruLocale }), currentDay, addDays(currentDay, 2)]
     : undefined;
 
+  const timeProps =
+    type === 'time' || type === 'date-time'
+      ? {
+          multiplicityHours: number('multiplicityHours', 1),
+          multiplicityMinutes: number('multiplicityMinutes', 1),
+          multiplicitySeconds: number('multiplicitySeconds', 1),
+        }
+      : {};
+
   return (
     <DateTime
       type={type}
@@ -70,201 +67,10 @@ export function Playground() {
       maxDate={new Date(maxDate)}
       events={events}
       locale={getSizeByMap(localeMap, locale)}
+      {...timeProps}
     />
   );
 }
-
-export const DateTime10YearsStory = createStory(
-  () => (
-    <DateTime10Years
-      years={[
-        { label: '2000' },
-        { label: '2001' },
-        { label: '2002', current: true },
-        { label: '2003', selected: true },
-        { label: '2004' },
-        { label: '2005', range: 'first', selected: true },
-        { label: '2006', range: true },
-        { label: '2007', range: true },
-        { label: '2008', range: true },
-        { label: '2010', range: 'last', selected: true },
-        { label: '2011' },
-        { label: '2012' },
-      ]}
-    />
-  ),
-  {
-    name: 'DateTime10Years',
-  },
-);
-
-export const DateTimeYearStory = createStory(
-  () => (
-    <DateTimeYear
-      years={[
-        { label: 'Янв' },
-        { label: 'Фев' },
-        { label: 'Мар', current: true },
-        { label: 'Апр', selected: true },
-        { label: 'Май' },
-        { label: 'Июн', range: 'first', selected: true },
-        { label: 'Июл', range: true },
-        { label: 'Авг', range: true },
-        { label: 'Сен', range: true },
-        { label: 'Окт', range: 'last', selected: true },
-        { label: 'Ноя' },
-        { label: 'Дек' },
-      ]}
-    />
-  ),
-  {
-    name: 'DateTimeYear',
-  },
-);
-
-const minDate = set(new Date(), { hours: 2, minutes: 59, seconds: 59 });
-const maxDate = set(new Date(), { hours: 18, minutes: 30, seconds: 20 });
-
-export const DateTimeTimeStory = createStory(
-  () => {
-    const [value, setValue] = useState<Date | undefined>(undefined);
-
-    return (
-      <DateTimeTime
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        minDate={minDate}
-        maxDate={maxDate}
-      />
-    );
-  },
-  {
-    name: 'DateTimeTime',
-  },
-);
-
-export const DateTimeYearSliderStory = createStory(
-  () => {
-    const [value, setValue] = useState<Date>(new Date());
-
-    return (
-      <DateTimeYearSlider
-        currentVisibleDate={value}
-        onChange={(date) => setValue(date)}
-        value={[new Date(), addDays(new Date(), 200)]}
-      />
-    );
-  },
-  {
-    name: 'DateTimeYearSlider',
-  },
-);
-
-export const DateTime10YearSliderStory = createStory(
-  () => {
-    const [value, setValue] = useState<Date>(new Date('2010'));
-
-    return (
-      <DateTime10YearSlider
-        currentVisibleDate={value}
-        onChange={(date) => setValue(date)}
-        value={[new Date(2014, 7, 1), new Date(2031, 6)]}
-      />
-    );
-  },
-  {
-    name: 'DateTime10YearSlider',
-  },
-);
-
-export const DateTime100YearSliderStory = createStory(
-  () => {
-    const [value, setValue] = useState<Date>(new Date('0110'));
-
-    return (
-      <DateTime100YearSlider
-        currentVisibleDate={value}
-        onChange={(date) => setValue(date)}
-        value={[new Date(-80, 5), new Date(2071, 5)]}
-      />
-    );
-  },
-  {
-    name: 'DateTime100YearSlider',
-  },
-);
-
-export const DateTimeTypeYearStory = createStory(
-  () => {
-    const [value, setValue] = useState<[Date?, Date?] | undefined>(undefined);
-
-    return (
-      <DateTimeTypeYear
-        value={value}
-        onChangeRange={({ value }) => setValue(value)}
-        minDate={new Date(2003, 0)}
-        maxDate={new Date(2305, 0)}
-        view={select('view', dateTimePropView, dateTimePropViewDefault)}
-      />
-    );
-  },
-  {
-    name: 'DateTimeTypeYear',
-  },
-);
-
-export const DateTimeTypeMonthStory = createStory(
-  () => {
-    const [value, setValue] = useState<[Date?, Date?] | undefined>(undefined);
-
-    return (
-      <DateTimeTypeMonth
-        value={value}
-        onChangeRange={({ value }) => setValue(value)}
-        minDate={new Date(2003, 0)}
-        maxDate={new Date(2305, 0)}
-        view={select('view', dateTimePropView, dateTimePropViewDefault)}
-      />
-    );
-  },
-  {
-    name: 'DateTimeTypeMonth',
-  },
-);
-
-export const DateTimeTypeDateStory = createStory(
-  () => {
-    const [value, setValue] = useState<[Date?, Date?] | undefined>(undefined);
-
-    return (
-      <DateTimeTypeDate
-        value={value}
-        onChangeRange={({ value }) => setValue(value)}
-        minDate={new Date(2003, 0)}
-        maxDate={new Date(2305, 0)}
-        view={select('view', dateTimePropView, dateTimePropViewDefault)}
-      />
-    );
-  },
-  {
-    name: 'DateTimeTypeDate',
-  },
-);
-
-export const DateTimeTypeTimeStory = createStory(
-  () => {
-    const [value, setValue] = useState<Date | undefined>(undefined);
-
-    return (
-      <>
-        <DateTimeTypeTime value={value} onChange={({ value }) => setValue(value)} />
-      </>
-    );
-  },
-  {
-    name: 'DateTimeTypeTime',
-  },
-);
 
 export default createMetadata({
   title: 'Компоненты/Базовые/DateTime',

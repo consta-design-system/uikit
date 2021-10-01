@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 import { addYears, startOfYear } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 
@@ -15,12 +15,13 @@ import {
   getMonthsOfYear,
   getYearTitle,
   isEqualMount,
+  moveTypes,
   useCurrentVisibleDate,
 } from '../helpers';
 import { dateTimePropView, dateTimePropViewDefault } from '../helpers/types';
 import { cnDateTimeMixLayout } from '../mixs';
 
-export const DateTimeTypeMonth: DateTimeTypeComponent = forwardRef((props, ref) => {
+export const DateTimeTypeMonth: DateTimeTypeComponent<'month'> = forwardRef((props, ref) => {
   const {
     minDate,
     maxDate,
@@ -32,10 +33,15 @@ export const DateTimeTypeMonth: DateTimeTypeComponent = forwardRef((props, ref) 
     locale = ruLocale,
     className,
     view = dateTimePropViewDefault,
+    onMove,
     ...otherProps
   } = props;
 
   const [changeYear, { on, off }] = useFlag();
+
+  useEffect(() => {
+    !changeYear && onMove?.(moveTypes[1]);
+  }, [changeYear]);
 
   const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate({
     currentVisibleDate: currentVisibleDateProp,
@@ -61,6 +67,7 @@ export const DateTimeTypeMonth: DateTimeTypeComponent = forwardRef((props, ref) 
           setCurrentVisibleDate(value);
           off();
         }}
+        onMove={onMove}
       />
     );
   }
@@ -86,7 +93,7 @@ export const DateTimeTypeMonth: DateTimeTypeComponent = forwardRef((props, ref) 
 
   const pageOneLabel = getYearTitle(currentVisibleDate);
 
-  const handleNext = () => setCurrentVisibleDate(pageTwoCurrentVisibleDate);
+  const handleNext = () => setCurrentVisibleDate(addYears(currentVisibleDate, 1));
   const handlePrev = () => setCurrentVisibleDate(addYears(currentVisibleDate, -1));
 
   if (view === dateTimePropView[0]) {

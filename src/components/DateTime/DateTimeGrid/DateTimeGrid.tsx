@@ -5,10 +5,17 @@ import React from 'react';
 import { cn } from '../../../utils/bem';
 import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
 import { Text } from '../../Text/Text';
-import { DateTimeCell, DateTimeCellProps } from '../DateTimeCell/DateTimeCell';
+import { DateTimeCell, DateTimeCellPropRange } from '../DateTimeCell/DateTimeCell';
 import { DateTimeItem, DateTimeItemProps } from '../DateTimeItem/DateTimeItem';
 
-type Item = string | Omit<DateTimeItemProps & DateTimeCellProps, 'ref'>;
+type Item =
+  | string
+  | Omit<
+      DateTimeItemProps & {
+        range?: DateTimeCellPropRange;
+      },
+      'ref'
+    >;
 
 export type DateTimeGridProps = PropsWithJsxAttributes<
   {

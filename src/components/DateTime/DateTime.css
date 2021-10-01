@@ -1,3 +1,0 @@
-.DateTime {
-  --date-time-cell-width: calc(var(--control-height-s) + (var(--space-3xs) * 2));
-}

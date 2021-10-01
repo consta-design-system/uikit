@@ -1,4 +1,3 @@
-import { isInMinMaxDade } from '../../../utils/date';
 import { isDefined } from '../../../utils/type-guards';
 import { DateRange } from '../../../utils/types/Date';
 
@@ -7,23 +6,20 @@ import {
   DateTimePropOnChangeRange,
   DateTimePropValue,
   HandleSelectDate,
+  СapableRangeType,
 } from './types';
 
 type GetHandleSelectDateProps = {
   isEqualUnit: (date1: Date, date2: Date) => boolean;
-  value?: DateTimePropValue;
+  value?: DateTimePropValue<СapableRangeType>;
   onChange?: DateTimePropOnChange;
-  onChangeRange?: DateTimePropOnChangeRange;
+  onChangeRange?: DateTimePropOnChangeRange<СapableRangeType>;
   minDate?: Date;
   maxDate?: Date;
 };
 
 export function getHandleSelectDate(props: GetHandleSelectDateProps): HandleSelectDate {
   return (callbackProps) => {
-    if (!isInMinMaxDade(callbackProps.value, props.minDate, props.maxDate)) {
-      return;
-    }
-
     if (typeof props.onChange === 'function') {
       props.onChange(callbackProps);
     }
