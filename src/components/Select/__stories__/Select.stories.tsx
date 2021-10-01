@@ -16,7 +16,7 @@ import {
   defaultPropView,
   propForm,
   propSize,
-  propState,
+  propStatus,
   propView,
 } from '../../SelectComponents/types';
 import { Select } from '../Select';
@@ -30,7 +30,7 @@ const getKnobs = () => ({
   size: select('size', propSize, defaultPropSize),
   view: select('view', propView, defaultPropView),
   form: select('form', propForm, defaultPropForm),
-  state: select('state', ['', ...propState], ''),
+  status: select('status', ['', ...propStatus], ''),
   caption: text('caption', 'Подпись'),
   label: text('label', 'Заголовок'),
   labelPosition: select('labelPosition', ['top', 'left'], 'top'),
@@ -44,7 +44,7 @@ export function Playground(): JSX.Element {
     disabled,
     view,
     form,
-    state,
+    status,
     placeholder,
     withGroups,
     label,
@@ -61,7 +61,7 @@ export function Playground(): JSX.Element {
           disabled={disabled}
           view={view}
           form={form}
-          state={state || undefined}
+          status={status || undefined}
           placeholder={placeholder}
           items={items}
           value={value}
@@ -85,7 +85,7 @@ export const WithRender = createStory(
       form,
       placeholder,
       withGroups,
-      state,
+      status,
       label,
       labelPosition,
       caption,
@@ -97,7 +97,7 @@ export const WithRender = createStory(
         disabled={disabled}
         view={view}
         form={form}
-        state={state || undefined}
+        status={status || undefined}
         placeholder={placeholder}
         items={myData}
         value={value}

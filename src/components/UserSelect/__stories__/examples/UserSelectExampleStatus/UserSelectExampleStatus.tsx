@@ -46,7 +46,7 @@ export const UserSelectExampleStatus = () => {
       <UserSelect
         placeholder="alert"
         caption="alert"
-        state="alert"
+        status="alert"
         size="s"
         items={items}
         value={value}
@@ -55,7 +55,7 @@ export const UserSelectExampleStatus = () => {
       <UserSelect
         placeholder="warning"
         caption="warning"
-        state="warning"
+        status="warning"
         size="s"
         items={items}
         value={value}
@@ -65,7 +65,7 @@ export const UserSelectExampleStatus = () => {
         placeholder="success"
         caption="success"
         size="s"
-        state="success"
+        status="success"
         items={items}
         value={value}
         onChange={({ value }) => setValue(value)}

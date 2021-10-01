@@ -7,7 +7,7 @@ import {
   TextField,
   textFieldPropForm,
   textFieldPropSize,
-  textFieldPropState,
+  textFieldPropStatus,
   textFieldPropView,
   textFieldPropWidth,
 } from '../TextField';
@@ -65,8 +65,8 @@ describe('Компонент Button', () => {
         });
       });
     });
-    describe('проверка state', () => {
-      textFieldPropState.forEach((state) => {
+    describe('проверка status', () => {
+      textFieldPropStatus.forEach((state) => {
         it(`присваивает класс для state=${state}`, () => {
           renderComponent({ state });
           expect(getInputContainer()).toHaveClass(cnTextField('InputContainer', { state }));

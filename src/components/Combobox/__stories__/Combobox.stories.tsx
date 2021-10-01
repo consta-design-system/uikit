@@ -11,7 +11,7 @@ import {
   defaultPropSize,
   defaultPropView,
   propForm,
-  propState,
+  propStatus,
   propView,
 } from '../../SelectComponents/types';
 import { Combobox } from '../Combobox';
@@ -25,7 +25,7 @@ const getKnobs = () => ({
   size: select('size', ['m', 's', 'l'], defaultPropSize),
   view: select('view', propView, defaultPropView),
   form: select('form', propForm, defaultPropForm),
-  state: select('state', ['', ...propState], ''),
+  status: select('status', ['', ...propStatus], ''),
   caption: text('caption', 'Подпись'),
   label: text('label', 'Заголовок'),
   labelPosition: select('labelPosition', ['top', 'left'], 'top'),
@@ -39,7 +39,7 @@ export function Playground(): JSX.Element {
     disabled,
     view,
     form,
-    state,
+    status,
     placeholder,
     withGroups,
     label,
@@ -58,7 +58,7 @@ export function Playground(): JSX.Element {
         disabled={disabled}
         view={view}
         form={form}
-        state={state || undefined}
+        status={status || undefined}
         placeholder={placeholder}
         items={items}
         value={valueMultiple}
@@ -78,7 +78,7 @@ export function Playground(): JSX.Element {
       disabled={disabled}
       view={view}
       form={form}
-      state={state || undefined}
+      status={status || undefined}
       placeholder={placeholder}
       items={items}
       value={value}
@@ -97,7 +97,7 @@ export const WithRender = createStory(
       size,
       disabled,
       view,
-      state,
+      status,
       form,
       placeholder,
       withGroups,
@@ -113,7 +113,7 @@ export const WithRender = createStory(
         disabled={disabled}
         view={view}
         form={form}
-        state={state || undefined}
+        status={status || undefined}
         placeholder={placeholder}
         items={myData}
         value={value}
@@ -163,7 +163,7 @@ export const WithCreate = createStory(
       disabled,
       view,
       form,
-      state,
+      status,
       placeholder,
       withGroups,
       label,
@@ -179,7 +179,7 @@ export const WithCreate = createStory(
         disabled={disabled}
         view={view}
         form={form}
-        state={state || undefined}
+        status={status || undefined}
         placeholder={placeholder}
         items={list}
         value={value}

@@ -78,7 +78,7 @@
     display: flex;
     width: 100%;
 
-    &_view_default.Select-SelectContainer_state {
+    &_view_default.Select-SelectContainer_status {
       &_alert .Select-Control {
         border-color: var(--color-bg-alert);
       }

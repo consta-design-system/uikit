@@ -4,7 +4,7 @@ import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAt
 import {
   PropForm,
   PropSize,
-  PropState,
+  PropStatus,
   PropView,
   RenderItemProps,
 } from '../SelectComponents/types';
@@ -59,7 +59,7 @@ export type ComboboxProps<
     view?: PropView;
     placeholder?: string;
     ariaLabel?: string;
-    state?: PropState;
+    status?: PropStatus;
     dropdownClassName?: string;
     dropdownRef?: React.RefObject<HTMLDivElement>;
     name?: string;

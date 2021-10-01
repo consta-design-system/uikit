@@ -46,6 +46,7 @@ export function TextFieldRender<TYPE extends string>(
     view = textFieldPropViewDefault,
     form = textFieldPropFormDefault,
     state,
+    status,
     width = textFieldPropWidthDefault,
     onBlur,
     onFocus,
@@ -140,7 +141,7 @@ export function TextFieldRender<TYPE extends string>(
           className={cnTextField('InputContainer', {
             view,
             form,
-            state,
+            state: status || state,
             disabled,
             width,
             type,
@@ -186,7 +187,7 @@ export function TextFieldRender<TYPE extends string>(
           )}
         </div>
         {caption && (
-          <FieldCaption className={cnTextField('Caption')} status={state}>
+          <FieldCaption className={cnTextField('Caption')} status={status || state}>
             {caption}
           </FieldCaption>
         )}

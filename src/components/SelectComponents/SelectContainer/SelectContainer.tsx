@@ -10,7 +10,7 @@ import {
   defaultPropView,
   PropForm,
   PropSize,
-  PropState,
+  PropStatus,
   PropView,
 } from '../types';
 
@@ -22,7 +22,7 @@ export type SelectContainerProps = PropsWithHTMLAttributesAndRef<
     view?: PropView;
     focused?: boolean;
     multiple?: boolean;
-    state?: PropState;
+    status?: PropStatus;
     label?: string;
     labelPosition?: 'top' | 'left';
     caption?: string;
@@ -38,7 +38,7 @@ export const SelectContainer = forwardRef<HTMLDivElement, SelectContainerProps>(
     className,
     disabled,
     children,
-    state,
+    status,
     focused,
     multiple,
     labelPosition = 'top',
@@ -62,14 +62,14 @@ export const SelectContainer = forwardRef<HTMLDivElement, SelectContainerProps>(
             disabled,
             focused,
             multiple,
-            state,
+            status,
           })}
           ref={ref}
         >
           {children}
         </div>
         {caption && (
-          <FieldCaption className={cnSelect('Caption')} status={state}>
+          <FieldCaption className={cnSelect('Caption')} status={status}>
             {caption}
           </FieldCaption>
         )}

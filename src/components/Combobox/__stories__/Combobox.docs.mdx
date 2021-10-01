@@ -321,7 +321,7 @@ export function ComboboxExampleGroups() {
 С помощью статуса можно выделить поле: показать, где ошибка, или, наоборот,
 отметить правильно заполненные поля.
 
-За статус отвечает свойство `state`. Если оно не указано, поле будет обычным.
+За статус отвечает свойство `status`. Если оно не указано, поле будет обычным.
 
 <ComboboxExampleStatus />
 
@@ -361,7 +361,7 @@ export function ComboboxExampleStatus() {
       <Combobox
         placeholder="alert"
         caption="alert"
-        state="alert"
+        status="alert"
         size="s"
         items={items}
         value={value}
@@ -370,7 +370,7 @@ export function ComboboxExampleStatus() {
       <Combobox
         placeholder="warning"
         caption="warning"
-        state="warning"
+        status="warning"
         size="s"
         items={items}
         value={value}
@@ -380,7 +380,7 @@ export function ComboboxExampleStatus() {
         placeholder="success"
         caption="success"
         size="s"
-        state="success"
+        status="success"
         items={items}
         value={value}
         onChange={({ value }) => setValue(value)}
@@ -938,7 +938,7 @@ type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | --------------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | [`view?`](#внешний-вид)                                   | `default` , `clear`                                    | `default`                                                     | Внешний вид компонента                                                 |
 | [`disabled?`](#отключение-поля-ввода)                     | `boolean`                                              | -                                                             | Делает компонент недоступным                                           |
-| [`state?`](#статус-поля)                                  | `'', 'alert', 'success', 'warning'`                    | `' '`                                                         | Тип поля                                                               |
+| [`status?`](#статус-поля)                                 | `'', 'alert', 'success', 'warning'`                    | `' '`                                                         | Тип поля                                                               |
 | [`size?`](#размер)                                        | `'xs'`, `'s'` , `'m'` , `'l'`                          | `'m'`                                                         | Размер компонента                                                      |
 | [`form?`](#форма)                                         | `default`, `brick`, `round`                            | `default`                                                     | Форма компонента                                                       |
 | [`placeholder?`](#подсказка)                              | `string`                                               | -                                                             | Подсказка, отображается, когда вариант не выбран                       |

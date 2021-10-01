@@ -331,7 +331,7 @@ export function UserSelectExampleGroups() {
 С помощью статуса можно выделить поле: показать, где ошибка, или, наоборот,
 отметить правильно заполненные поля.
 
-За статус отвечает свойство `state`. Если оно не указано, поле будет обычным.
+За статус отвечает свойство `status`. Если оно не указано, поле будет обычным.
 
 <UserSelectExampleStatus />
 
@@ -377,7 +377,7 @@ export const UserSelectExampleStatus = () => {
       <UserSelect
         placeholder="alert"
         caption="alert"
-        state="alert"
+        status="alert"
         items={items}
         value={value}
         onChange={({ value }) => setValue(value)}
@@ -385,7 +385,7 @@ export const UserSelectExampleStatus = () => {
       <UserSelect
         placeholder="warning"
         caption="warning"
-        state="warning"
+        status="warning"
         items={items}
         value={value}
         onChange={({ value }) => setValue(value)}
@@ -393,7 +393,7 @@ export const UserSelectExampleStatus = () => {
       <UserSelect
         placeholder="success"
         caption="success"
-        state="success"
+        status="success"
         items={items}
         value={value}
         onChange={({ value }) => setValue(value)}
@@ -1033,7 +1033,7 @@ export type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | ------------------------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | [`view?`](#внешний-вид)                                             | `default` , `clear`                                    | `default`                                                     | Внешний вид компонента                                                 |
 | [`disabled?`](#неактивный-выпадающий-список)                        | `boolean`                                              | -                                                             | Делает компонент неактивным                                            |
-| [`state?`](#статус-поля)                                            | `'', 'alert', 'success', 'warning'`                    | `' '`                                                         | Тип поля                                                               |
+| [`status?`](#статус-поля)                                           | `'', 'alert', 'success', 'warning'`                    | `' '`                                                         | Тип поля                                                               |
 | [`size?`](#размер)                                                  | `'xs'`, `'s'` , `'m'` , `'l'`                          | `'m'`                                                         | Размер компонента                                                      |
 | [`form?`](#форма)                                                   | `default`, `brick`, `round`                            | `default`                                                     | Форма компонента                                                       |
 | [`placeholder?`](#подсказка)                                        | `string`                                               | -                                                             | Подсказка, отображается, когда вариант не выбран                       |

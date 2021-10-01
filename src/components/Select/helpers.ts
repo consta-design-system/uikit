@@ -4,7 +4,7 @@ import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAt
 import {
   PropForm,
   PropSize,
-  PropState,
+  PropStatus,
   PropView,
   RenderItemProps,
 } from '../SelectComponents/types';
@@ -44,7 +44,7 @@ export type SelectProps<ITEM = DefaultItem, GROUP = DefaultGroup> = PropsWithHTM
     form?: PropForm;
     size?: PropSize;
     view?: PropView;
-    state?: PropState;
+    status?: PropStatus;
     focused?: boolean;
     multiple?: boolean;
     placeholder?: string;
