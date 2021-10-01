@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { action } from '@storybook/addon-actions';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { createMetadata } from '../../../utils/storybook';
@@ -62,7 +63,7 @@ export function Playground(props: {
   const { onChange = setValue } = props;
 
   return (
-    <EventInterceptorProvider eventHandler={console.log} map={eventInterceptorMap}>
+    <EventInterceptorProvider eventHandler={action('EventInterceptor')} map={eventInterceptorMap}>
       <div>
         <BasicSelect
           {...getKnobs()}

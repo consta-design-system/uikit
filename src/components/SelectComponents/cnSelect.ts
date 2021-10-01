@@ -2,4 +2,5 @@ import './Select.css';
 
 import { cn } from '../../utils/bem';
 
-export const cnSelect = cn('Select');
+export const COMPONENT_NAME = 'Select' as const;
+export const cnSelect = cn(COMPONENT_NAME);

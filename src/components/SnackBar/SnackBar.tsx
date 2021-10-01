@@ -39,13 +39,14 @@ type Props = {
 
 export type SnackBarProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
 
-export const cnSnackBar = cn('SnackBar');
-export const cnSnackBarItem = cn('SnackBar', 'Item');
+export const COMPONENT_NAME = 'SnackBar' as const;
+export const cnSnackBar = cn(COMPONENT_NAME);
+export const cnSnackBarItem = cn(COMPONENT_NAME, 'Item');
 
 const cssTransitionClassNames = cnForCssTransition(cnSnackBarItem);
 
 export const SnackBar: React.FC<SnackBarProps> = (props) => {
-  const { items, className, ...otherProps } = usePropsHandler(cnSnackBar(), props);
+  const { items, className, ...otherProps } = usePropsHandler(COMPONENT_NAME, props);
 
   return (
     <TransitionGroup {...otherProps} className={cnSnackBar(null, [className])} appear enter exit>

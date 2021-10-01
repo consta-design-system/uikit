@@ -1,10 +1,12 @@
 import React from 'react';
 
-import { EventInterceptorContext } from './EventInterceptor';
+import { EventInterceptorContext, EventInterceptorMapKeys } from './EventInterceptor';
 
-type PropsHandler = <T>(componentName: string, props: T, ref?: React.RefObject<HTMLElement>) => T;
-
-export const usePropsHandler: PropsHandler = (componentName, props, ref) => {
+export const usePropsHandler = <PROPS extends {}>(
+  componentName: EventInterceptorMapKeys,
+  props: PROPS,
+  ref?: React.Ref<HTMLElement>,
+): PROPS => {
   const context = React.useContext(EventInterceptorContext);
 
   if (!context) {
@@ -12,11 +14,11 @@ export const usePropsHandler: PropsHandler = (componentName, props, ref) => {
   }
 
   const { eventHandler, map } = context;
-  const propsHandler = map[componentName];
+  const propsHandler = map[componentName] as ((...args: any[]) => any) | undefined;
 
   if (!propsHandler) {
     return props;
   }
 
-  return propsHandler(props, eventHandler, ref);
+  return propsHandler(props, eventHandler, ref) as PROPS;
 };

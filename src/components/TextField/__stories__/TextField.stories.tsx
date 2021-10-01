@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { action } from '@storybook/addon-actions';
 import { boolean, number, select, text } from '@storybook/addon-knobs';
 
 import { IconPhoto } from '../../../icons/IconPhoto/IconPhoto';
@@ -79,7 +80,7 @@ export function Playground() {
   };
 
   return (
-    <EventInterceptorProvider eventHandler={console.log} map={eventInterceptorMap}>
+    <EventInterceptorProvider eventHandler={action('EventInterceptor')} map={eventInterceptorMap}>
       <div>
         <TextField
           value={value}
