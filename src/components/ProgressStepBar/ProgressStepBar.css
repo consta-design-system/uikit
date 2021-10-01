@@ -1,3 +1,98 @@
 .ProgressStepBar {
-  background: 'red';
+  &-Step {
+    display: inline-flex;
+    align-items: flex-start;
+
+    &_direction {
+      &_horizontal {
+        flex-direction: column;
+      }
+
+      &_vertical {
+        flex-direction: row;
+      }
+    }
+
+    &_position {
+      &_start.ProgressStepBar-Step_direction_vertical {
+        justify-content: flex-start;
+      }
+
+      &_center.ProgressStepBar-Step_direction_vertical {
+        justify-content: center;
+      }
+
+      &_end.ProgressStepBar-Step_direction_vertical {
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  &-Point {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--point-size);
+    height: var(--point-size);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: var(--color-bg-default);
+    background-color: var(--point-background);
+    border-radius: calc(var(--point-size) * 0.5);
+
+    &-Text {
+      color: var(--color-typo-secondary);
+    }
+
+    &:not(.ProgressStepBar-Point_status_system) {
+      & .ProgressStepBar-Point-Text {
+        color: var(--color-bg-default);
+      }
+
+      & .ProgressSpin.Timer-Progress {
+        stroke: var(--color-bg-default);
+      }
+    }
+
+    & .Timer-Counter {
+      display: none;
+    }
+
+    &_size {
+      &_xs {
+        --point-size: var(--space-xs);
+      }
+
+      &_s {
+        --point-size: var(--space-m);
+      }
+
+      &_m {
+        --point-size: var(--space-xl);
+      }
+    }
+
+    &_status {
+      &_system {
+        --point-background: var(--color-bg-system);
+      }
+
+      &_normal {
+        --point-background: var(--color-bg-normal);
+      }
+
+      &_success {
+        --point-background: var(--color-bg-success);
+      }
+
+      &_warning {
+        --point-background: var(--color-bg-warning);
+      }
+
+      &_alert {
+        --point-background: var(--color-bg-alert);
+      }
+    }
+  }
 }

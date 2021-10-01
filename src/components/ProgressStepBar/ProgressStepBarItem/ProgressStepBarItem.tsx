@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
+import { Text } from '../../Text/Text';
 import { Timer } from '../../Timer/Timer';
 import { Tooltip } from '../../Tooltip/Tooltip';
 import {
@@ -7,7 +8,6 @@ import {
   DefaultItem,
   PropDirection,
   PropGetItemContent,
-  PropGetItemKey,
   PropGetItemLabel,
   PropGetItemOnCLick,
   PropGetItemPoint,
@@ -18,12 +18,16 @@ import {
   propStatusDefault,
 } from '../helpers';
 
+const propPosition = ['center', 'start', 'end'] as const;
+export type PropPosition = typeof propPosition[number];
+const propPositionDefault: PropPosition = propPosition[0];
+
 type Props<ITEM> = {
   step: ITEM;
+  position?: PropPosition;
   direction: PropDirection;
   size: PropSize;
   getItemLabel: PropGetItemLabel<ITEM>;
-  getItemKey: PropGetItemKey<ITEM>;
   getItemTooltipContent: PropGetItemTooltipContent<ITEM>;
   getItemPoint: PropGetItemPoint<ITEM>;
   getItemProgress: PropGetItemProgress<ITEM>;
@@ -39,8 +43,8 @@ export const ProgressStepBarItem: StepComponent = (props) => {
     step,
     direction,
     size,
+    position = propPositionDefault,
     getItemContent,
-    getItemKey,
     getItemLabel,
     getItemOnClick,
     getItemPoint,
@@ -50,27 +54,62 @@ export const ProgressStepBarItem: StepComponent = (props) => {
     ...otherProps
   } = props;
 
+  const [isTooltipHidden, setIsTooltipHidden] = useState<boolean>(true);
+  const [isContentHidden, setIsContentHidden] = useState<boolean>(true);
+
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const PointContent =
+    getItemPoint(step) instanceof SVGElement ? (
+      getItemPoint(step)
+    ) : (
+      <Text
+        className={cnProgressStepBar('Point-Text')}
+        size={size === 's' ? '2xs' : 'xs'}
+        weight="bold"
+      >
+        {getItemPoint(step)}
+      </Text>
+    );
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const clickAction = getItemOnClick(step);
+    clickAction && clickAction(e);
+    setIsContentHidden(!isContentHidden);
+  };
 
   return (
     <>
-      <div ref={containerRef} className={cnProgressStepBar('Step', { direction })} {...otherProps}>
+      <div
+        ref={containerRef}
+        className={cnProgressStepBar('Step', { direction, position })}
+        {...otherProps}
+      >
         <button
           type="button"
+          onMouseEnter={() => setIsTooltipHidden(false)}
+          onMouseLeave={() => setIsTooltipHidden(true)}
           className={cnProgressStepBar('Point', {
             size,
             status: getItemStatus(step) || propStatusDefault,
           })}
-          onClick={() => getItemOnClick(step)}
+          onClick={handleClick}
         >
-          {size !== 'xs' && (getItemProgress(step) ? <Timer size={size} /> : getItemPoint(step))}
+          {size !== 'xs' &&
+            (getItemProgress(step) ? (
+              <Timer size={size} progress={getItemProgress(step)} />
+            ) : (
+              PointContent
+            ))}
         </button>
         <div className={cnProgressStepBar('Content')}>
-          {getItemLabel(step)}
+          <Text size={size === 'm' ? 'm' : 's'} view="primary">
+            {getItemLabel(step)}
+          </Text>
           {getItemContent(step)}
         </div>
       </div>
-      {getItemTooltipContent(step) && (
+      {getItemTooltipContent(step) && !isTooltipHidden && (
         <Tooltip
           anchorRef={containerRef}
           direction={direction === 'horizontal' ? 'downCenter' : 'leftUp'}

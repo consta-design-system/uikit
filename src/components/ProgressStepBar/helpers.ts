@@ -16,7 +16,7 @@ export const propStatusDefault = propStatus[0];
 export type PropGetItemLabel<ITEM> = (item: ITEM) => string;
 export type PropGetItemKey<ITEM> = (item: ITEM) => string | number;
 export type PropGetItemTooltipContent<ITEM> = (item: ITEM) => string | undefined;
-export type PropGetItemPoint<ITEM> = (item: ITEM) => string | number | undefined;
+export type PropGetItemPoint<ITEM> = (item: ITEM) => string | number | SVGElement | undefined;
 export type PropGetItemProgress<ITEM> = (item: ITEM) => number | undefined;
 export type PropGetItemContent<ITEM> = (item: ITEM) => React.ReactNode | undefined;
 export type PropGetItemStatus<ITEM> = (item: ITEM) => PropStatus | undefined;
@@ -28,7 +28,7 @@ export type DefaultItem = {
   label: string;
   id: string | number;
   tooltipContent?: string;
-  point?: string | number;
+  point?: string | number | SVGElement;
   status?: PropStatus;
   progress?: number;
   content?: React.ReactNode;

@@ -4,7 +4,7 @@ import React, { forwardRef } from 'react';
 
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 
-import { ProgressStepBarItem } from './ProgressStepBarItem/ProgressStepBarItem';
+import { ProgressStepBarItem, PropPosition } from './ProgressStepBarItem/ProgressStepBarItem';
 import {
   cnProgressStepBar,
   DefaultItem,
@@ -25,7 +25,6 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
     size = propSizeDefault,
     className,
     getItemContent,
-    getItemKey,
     getItemLabel,
     getItemOnClick,
     getItemPoint,
@@ -37,21 +36,26 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
 
   return (
     <div ref={ref} {...otherProps} className={cnProgressStepBar({ direction }, [className])}>
-      {steps.map((step) => (
-        <ProgressStepBarItem
-          step={step}
-          size={size}
-          direction={direction}
-          getItemContent={getItemContent}
-          getItemKey={getItemKey}
-          getItemLabel={getItemLabel}
-          getItemOnClick={getItemOnClick}
-          getItemPoint={getItemPoint}
-          getItemProgress={getItemProgress}
-          getItemStatus={getItemStatus}
-          getItemTooltipContent={getItemTooltipContent}
-        />
-      ))}
+      {steps.map((step, index) => {
+        let position: PropPosition = 'center';
+        if (index === 0) position = 'start';
+        if (index === steps.length - 1) position = 'end';
+        return (
+          <ProgressStepBarItem
+            step={step}
+            size={size}
+            position={position}
+            direction={direction}
+            getItemContent={getItemContent}
+            getItemLabel={getItemLabel}
+            getItemOnClick={getItemOnClick}
+            getItemPoint={getItemPoint}
+            getItemProgress={getItemProgress}
+            getItemStatus={getItemStatus}
+            getItemTooltipContent={getItemTooltipContent}
+          />
+        );
+      })}
     </div>
   );
 }
