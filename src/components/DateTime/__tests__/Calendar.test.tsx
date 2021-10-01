@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { cnDateTime, cnDateTimeItem, DateTime } from '../DateTime';
+import { DateTime } from '../DateTime';
+import { cnDateTimeItem } from '../DateTimeItem/DateTimeItem';
 
 type DateTimeProps = React.ComponentProps<typeof DateTime>;
 
-const testId = cnDateTime();
+const testId = 'DateTime';
 
 const getRender = () => screen.getByTestId(testId);
 const getDateTimeItems = () => getRender().querySelectorAll(`.${cnDateTimeItem()}`);

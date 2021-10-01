@@ -1,5 +1,5 @@
 import React from 'react';
-import { addMonths, getYear, Locale, startOfYear } from 'date-fns';
+import { addMonths, endOfMonth, getYear, Locale, startOfMonth, startOfYear } from 'date-fns';
 
 import { range } from '../../../utils/array';
 import { isInMinMaxDade } from '../../../utils/date';
@@ -38,7 +38,7 @@ export const getMonthsOfYear = (props: {
   maxDate?: Date;
 }): {
   disabled?: boolean;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   label: string;
   selected?: boolean;
   range?: DateTimeCellPropRange;
@@ -52,18 +52,20 @@ export const getMonthsOfYear = (props: {
   return range(12).map((index) => {
     const date = addMonths(startDate, index);
     const label = getMonthTitleAbbreviated(date, locale);
-
+    const disabled = !isInMinMaxDade(date, minDate, maxDate, startOfMonth, endOfMonth);
+    const onClick =
+      !disabled && onChange
+        ? (e: React.MouseEvent<HTMLButtonElement>) => onChange({ e, value: date })
+        : undefined;
     if (getYear(date) === currentYear) {
       return {
         label,
-        onClick: onChange
-          ? (e: React.MouseEvent<HTMLDivElement>) => onChange({ e, value: date })
-          : undefined,
+        onClick,
         selected: isSelected({ date, value }),
         range: Array.isArray(value) && isDateInRange(date, value),
         event: events && hasEvent(date, events),
         current: isCurrent(date),
-        disabled: !isInMinMaxDade(date, minDate, maxDate),
+        disabled,
       };
     }
 

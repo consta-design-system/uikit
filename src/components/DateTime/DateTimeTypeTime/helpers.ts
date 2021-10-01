@@ -3,23 +3,20 @@ import {
   addHours,
   addMinutes,
   addSeconds,
-  setHours,
-  setMinutes,
-  setSeconds,
+  endOfHour,
+  endOfMinute,
+  endOfSecond,
+  startOfDay,
+  startOfHour,
+  startOfMinute,
+  startOfSecond,
   startOfToday,
 } from 'date-fns';
 
 import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
 import { range } from '../../../utils/array';
 import { isInMinMaxDade } from '../../../utils/date';
-import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import { getLabelHours, getLabelMinutes, getLabelSeconds } from '../helpers';
-
-type DateTimeTimePropLocale = {
-  hours?: string;
-  minutes?: string;
-  seconds?: string;
-};
 
 export const dateTimeTimePropLocaleDefault = {
   hours: 'Часы',
@@ -29,39 +26,22 @@ export const dateTimeTimePropLocaleDefault = {
 
 type DateTimeTimePropOnChange = (props: {
   value: Date;
-  e: React.MouseEvent<HTMLDivElement>;
+  e: React.MouseEvent<HTMLButtonElement>;
 }) => void;
 
 type ResultItem = {
   label: string;
-  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   selected?: boolean;
 };
 
-export type DateTimeTimeProps = PropsWithHTMLAttributes<
-  {
-    children?: never;
-    value?: Date;
-    onChange?: DateTimeTimePropOnChange;
-    maxDate?: Date;
-    minDate?: Date;
-    multiplicitySeconds?: number;
-    multiplicityMinutes?: number;
-    multiplicityHours?: number;
-    locale?: DateTimeTimePropLocale;
-  },
-  HTMLDivElement
->;
-
-const startOfDay = (date: Date) => setHours(date, 0);
-const startOfHour = (date: Date) => setMinutes(date, 0);
-const startOfMinute = (date: Date) => setSeconds(date, 0);
-
 const getItemData = (
   length: number,
   multiplicity = 1,
-  startOfUnit: typeof startOfDay,
+  startOfUnits: (date: Date) => Date,
+  startOfUnit: (date: Date) => Date,
+  endOfUnit: (date: Date) => Date,
   addUnits: typeof addHours,
   getItemLabel: (date: Date) => string,
   value?: Date,
@@ -75,14 +55,14 @@ const getItemData = (
     return [];
   }
 
-  const startDate = startOfUnit(value || startOfToday());
+  const startDate = startOfUnits(value || startOfToday());
 
   return numbers.map((number) => {
     const date = addUnits(startDate, number * multiplicity);
     const label = getItemLabel(date);
     const selected = value ? getItemLabel(date) === getItemLabel(value) : false;
-    const disabled = !isInMinMaxDade(date, minDate, maxDate);
-    const onClick = (e: React.MouseEvent<HTMLDivElement>) =>
+    const disabled = !isInMinMaxDade(date, minDate, maxDate, startOfUnit, endOfUnit);
+    const onClick = (e: React.MouseEvent<HTMLButtonElement>) =>
       !disabled && onChangeRef?.current?.({ e, value: date });
 
     return {
@@ -111,6 +91,8 @@ export const useTimeItems = (
         24,
         multiplicityHours,
         startOfDay,
+        startOfHour,
+        endOfHour,
         addHours,
         getLabelHours,
         value,
@@ -122,6 +104,8 @@ export const useTimeItems = (
         60,
         multiplicityMinutes,
         startOfHour,
+        startOfMinute,
+        endOfMinute,
         addMinutes,
         getLabelMinutes,
         value,
@@ -133,6 +117,8 @@ export const useTimeItems = (
         60,
         multiplicitySeconds,
         startOfMinute,
+        startOfSecond,
+        endOfSecond,
         addSeconds,
         getLabelSeconds,
         value,

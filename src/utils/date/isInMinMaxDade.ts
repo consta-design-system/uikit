@@ -1,10 +1,6 @@
 import { isWithinInterval } from 'date-fns';
 
-export const isInMinMaxDade = (date: Date, minDate?: Date, maxDate?: Date): boolean => {
-  if (!minDate && !maxDate) {
-    return true;
-  }
-
+const isMinMax = (date: Date, minDate?: Date, maxDate?: Date): boolean => {
   const minDateTime = minDate?.getTime();
   const maxDateTime = maxDate?.getTime();
 
@@ -25,4 +21,21 @@ export const isInMinMaxDade = (date: Date, minDate?: Date, maxDate?: Date): bool
   }
 
   return true;
+};
+
+export const isInMinMaxDade = (
+  date: Date,
+  minDate?: Date,
+  maxDate?: Date,
+  startOf?: (date: Date) => Date,
+  endOf?: (date: Date) => Date,
+): boolean => {
+  if (!minDate && !maxDate) {
+    return true;
+  }
+  return isMinMax(
+    date,
+    (startOf && minDate && startOf(minDate)) || minDate,
+    (endOf && maxDate && endOf(maxDate)) || maxDate,
+  );
 };

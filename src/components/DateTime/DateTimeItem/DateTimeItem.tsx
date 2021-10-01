@@ -1,8 +1,9 @@
 import './DateTimeItem.css';
 
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { classnames } from '@bem-react/classnames';
 
+import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
 import { cn } from '../../../utils/bem';
 import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
 import { useTheme } from '../../Theme/Theme';
@@ -17,12 +18,12 @@ export type DateTimeItemProps = PropsWithJsxAttributes<
     role?: never;
     children?: never;
   },
-  'div'
+  'button'
 >;
 
 export const cnDateTimeItem = cn('DateTimeItem');
 
-export const DateTimeItem = React.forwardRef<HTMLDivElement, DateTimeItemProps>((props, ref) => {
+export const DateTimeItem = forwardRef<HTMLButtonElement, DateTimeItemProps>((props, ref) => {
   const { label, current, selected, event, disabled, ...otherProps } = props;
   const { themeClassNames } = useTheme();
 
@@ -32,13 +33,14 @@ export const DateTimeItem = React.forwardRef<HTMLDivElement, DateTimeItemProps>(
       : props.className;
 
   return (
-    <div
+    <button
       {...otherProps}
       ref={ref}
-      className={cnDateTimeItem({ event, current, disabled, selected }, [className])}
-      role="button"
+      className={cnDateTimeItem({ event, current, disabled, selected }, [className, cnMixFocus()])}
+      type="button"
+      disabled={disabled}
     >
       {label}
-    </div>
+    </button>
   );
 });
