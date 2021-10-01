@@ -123,20 +123,33 @@ export const ChoiceGroup: ChoiceGroup = React.forwardRef((props, ref) => {
       ref={ref}
       className={cnChoiceGroup({ size, form, view, width, onlyIcon, disabled }, [className])}
     >
-      {items.map((item) => (
-        <ChoiceGroupItem
-          key={getLabel(item)}
-          onChange={getOnChange(item)}
-          checked={getChecked(item)}
-          label={getLabel(item).toString()}
-          icon={getIcon && getIcon(item)}
-          iconSize={iconSize}
-          multiple={multiple}
-          onlyIcon={onlyIcon}
-          name={name}
-          disabled={disabled || (!!getDisabled && getDisabled(item))}
-        />
-      ))}
+      {items.map((item, idx) => {
+        const itemChecked = getChecked(item);
+        const itemDisabled = !!getDisabled && getDisabled(item);
+        return (
+          <React.Fragment key={getLabel(item)}>
+            {idx > 0 && (
+              <div
+                className={cnChoiceGroup('Divider', {
+                  checked: itemChecked,
+                  disabled: itemDisabled,
+                })}
+              />
+            )}
+            <ChoiceGroupItem
+              onChange={getOnChange(item)}
+              checked={itemChecked}
+              label={getLabel(item).toString()}
+              icon={getIcon && getIcon(item)}
+              iconSize={iconSize}
+              multiple={multiple}
+              onlyIcon={onlyIcon}
+              name={name}
+              disabled={disabled || itemDisabled}
+            />
+          </React.Fragment>
+        );
+      })}
     </div>
   );
 });
