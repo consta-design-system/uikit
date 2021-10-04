@@ -27,7 +27,7 @@ export const TableChoiceGroupFilter: React.FC<Props> = ({
   onCancel,
 }) => {
   const cnChoiceGroupFilter = cn('TableChoiceGroupFilter');
-  const [value, setValue] = useState<Item | null>(filterValue || defaultValue);
+  const [value, setValue] = useState<Item | null>((filterValue as Item) || defaultValue);
 
   const confirmHandler = () => {
     onConfirm(value);

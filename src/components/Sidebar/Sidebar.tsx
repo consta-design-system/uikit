@@ -16,13 +16,10 @@ const sidebarPropPosition = ['right', 'bottom', 'left', 'top'] as const;
 type SidebarPropPosition = typeof sidebarPropPosition[number];
 const sidebarPropPositionDefault: SidebarPropPosition = sidebarPropPosition[0];
 
-const sidebarPropWidth = ['auto'] as const;
-type SidebarPropWidth = typeof sidebarPropWidth[number];
-const sidebarPropWidthDefault: SidebarPropWidth = sidebarPropWidth[0];
+export const sidebarPropSize = ['s', 'm', 'l', 'full', '1/2', '1/3', '1/4', '2/3', '3/4'] as const;
 
-const sidebarPropHeight = ['auto'] as const;
-type SidebarPropHeight = typeof sidebarPropHeight[number];
-const sidebarPropHeightDefault: SidebarPropHeight = sidebarPropHeight[0];
+export type SidebarPropSize = typeof sidebarPropSize[number];
+const sidebarPropSizeDefault: SidebarPropSize = sidebarPropSize[1];
 
 type SidebarProps = {
   isOpen?: boolean;
@@ -34,8 +31,7 @@ type SidebarProps = {
   onClickOutside?: (event: MouseEvent) => void;
   onEsc?: (event: KeyboardEvent) => void;
   position?: SidebarPropPosition;
-  width?: SidebarPropWidth;
-  height?: SidebarPropHeight;
+  size?: SidebarPropSize;
   className?: string;
   children?: React.ReactNode;
   container?: HTMLDivElement | undefined;
@@ -51,7 +47,7 @@ type SidebarActionsProps = {
   children: React.ReactNode;
 };
 
-const cnSidebar = cn('Sidebar');
+export const cnSidebar = cn('Sidebar');
 
 const SidebarContent: React.FC<SidebarContentProps> = ({ className, children, ...rest }) => (
   <div className={cnSidebar('Content', null, [className])} {...rest}>
@@ -95,8 +91,7 @@ export const Sidebar: SidebarComponent = (props) => {
     onClickOutside,
     onEsc,
     position = sidebarPropPositionDefault,
-    width = sidebarPropWidthDefault,
-    height = sidebarPropHeightDefault,
+    size = sidebarPropSizeDefault,
     className,
     children,
     container = window.document.body,
@@ -128,11 +123,7 @@ export const Sidebar: SidebarComponent = (props) => {
     >
       <PortalWithTheme preset={theme} container={container}>
         {hasOverlay && <div className={cnSidebar('Overlay')} aria-label="Overlay" />}
-        <div
-          className={cnSidebar('Window', { width, height, position }, [className])}
-          ref={ref}
-          {...rest}
-        >
+        <div className={cnSidebar('Window', { size, position }, [className])} ref={ref} {...rest}>
           <ContextConsumer
             onClickOutside={onClickOutside || onOverlayClick}
             ignoreClicksInsideRefs={[ref]}
