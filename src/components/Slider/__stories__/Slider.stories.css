@@ -1,0 +1,32 @@
+.SliderStories {
+  width: 400px;
+
+  &-textfield {
+    width: 100%;
+    max-width: 100px;
+
+    &_prefix {
+      margin-right: 20px;
+    }
+
+    &_suffix {
+      margin-left: 20px;
+    }
+  }
+
+  &-icon {
+    color: var(--color-control-typo-clear);
+
+    &_prefix {
+      margin-right: 20px;
+    }
+
+    &_suffix {
+      margin-left: 20px;
+    }
+
+    &_disabled {
+      color: var(--color-control-typo-disable);
+    }
+  }
+}

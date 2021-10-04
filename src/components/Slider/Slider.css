@@ -3,10 +3,11 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  min-width: 400px;
   min-height: 80px;
   cursor: pointer;
 
-  &-input {
+  &-Input {
     position: relative;
     flex: 1;
     width: 100%;
@@ -68,8 +69,7 @@
     }
   }
 
-  &-point,
-  &-point_one {
+  &-Point {
     position: absolute;
     z-index: 2;
     top: 50%;
@@ -81,9 +81,7 @@
     border-radius: 8px;
     transition: border 0.3s ease;
     transform: translate(-50%, -50%);
-  }
 
-  &-point {
     &_disabled {
       border: 2px solid var(--color-control-typo-disable);
     }
@@ -97,15 +95,15 @@
     }
   }
 
-  &-prefix {
+  &-Prefix {
     margin-right: 12px;
   }
 
-  &-suffix {
+  &-Suffix {
     margin-left: 12px;
   }
 
-  &-tooltip {
+  &-Tooltip {
     z-index: 2;
     padding: 8px;
     color: var(--color-bg-default);
@@ -113,34 +111,4 @@
     opacity: 0.9;
     box-shadow: 0 3px 8px 8px rgb(0 66 105 / 7%);
   }
-
-  &-suffix .TextField,
-  &-prefix .TextField {
-    width: 100%;
-    max-width: 102px;
-  }
-
-  &-suffix .TextField,
-  &-suffix .Icon {
-    margin-left: 20px;
-  }
-
-  &-prefix .TextField,
-  &-prefix .Icon {
-    margin-right: 20px;
-  }
-
-  &-suffix .Icon,
-  &-prefix .Icon {
-    color: var(--color-control-typo-clear);
-  }
-
-  &-suffix_disabled .Icon,
-  &-prefix_disabled .Icon {
-    color: var(--color-control-typo-disable);
-  }
-}
-
-.SliderStories {
-  width: 400px;
 }

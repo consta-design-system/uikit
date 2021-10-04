@@ -62,19 +62,15 @@ import { IconSettings } from '../../../icons/IconSettings/IconSettings';
 ### Префикс и суффикс
 
 Префикс отвечает за заполнение слота перед ползунком, в который можно передать компонент для рендеринга (в случае с нашим ползунком мы передаем инпут или иконку).
-Суффикс отвечает за заполнение слота после ползунка (в который так же можно передать инпут или иконку)
-
-<Slider
+Суффикс отвечает за заполнение слота после ползунка (в который так же можно передать инпут или иконку)<Slider
 min={0}
 max={100}
-prefix={(({ value }) => (
-<TextField value={(Array.isArray(value) ? value[0] : value).toString()} />
+prefix={(({ value }) => (<TextField value={(Array.isArray(value) ? value[0] : value).toString()} />
 ))
 }
 suffix={
 <IconSettings />}
 withTooltip
-value={0}
 />
 <Slider 
   min={0} 
@@ -85,7 +81,6 @@ suffix={(({ value }) => (
 <TextField value={(Array.isArray(value) ? value[0] : value).toString()} />
 ))}
 withTooltip
-value={0}
 />
 
 Для уточнения по стилизации и размерам компонента TextField можно обратиться к [документации](??path=/docs/components-textfield--playground)
@@ -96,9 +91,7 @@ value={0}
 
 <Slider min={0} max={100} value={50} step={25} withTooltip disabled />
 <Slider min={0} max={100} value={25} step={25} withTooltip division disabled />
-<Slider min={0} max={100} step={10} value={[20, 70]} withTooltip division disabled />
-
-<Slider
+<Slider min={0} max={100} step={10} value={[20, 70]} withTooltip division disabled /><Slider
 min={0}
 max={100}
 prefix={(({ value }) => (
