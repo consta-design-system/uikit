@@ -81,7 +81,10 @@ export function Playground() {
       key,
       message,
       status,
-      ...(withAutoClose && { autoClose: 5 }),
+      ...(withAutoClose && {
+        autoClose: 5,
+        onAutoClose: () => dispatchItems({ type: 'remove', key }),
+      }),
       ...(withShowProgress && { showProgress: 'timer' }),
       ...(withIcon && { icon: getItemIconByStatus(status) }),
       ...(withActionButtons && {

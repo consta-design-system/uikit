@@ -85,7 +85,7 @@ describe('Компонент Button', () => {
       textFieldPropWidth.forEach((width) => {
         it(`присваивает класс для width=${width}`, () => {
           renderComponent({ width });
-          expect(getInputContainer()).toHaveClass(cnTextField('InputContainer', { width }));
+          expect(getRender()).toHaveClass(cnTextField({ width }));
         });
       });
     });
