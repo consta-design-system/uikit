@@ -23,6 +23,9 @@ import {
   TextFieldExampleFormHybrid,
 } from './examples/TextFieldExampleForm/TextFieldExampleForm';
 
+import { TextFieldExampleLabel } from './examples/TextFieldExampleLabel/TextFieldExampleLabel';
+import { TextFieldExampleCaption } from './examples/TextFieldExampleCaption/TextFieldExampleCaption';
+
 # TextField
 
 Поле для ввода текста — из одной или нескольких строк. Используется в формах.
@@ -36,6 +39,8 @@ import {
 - [Внешний вид](#внешний-вид)
   - [Вид](#внешний-вид)
   - [Форма](#форма)
+  - [Лэйбл](#лэйбл)
+  - [Подпись](#подпись)
 - [Размеры](#размеры)
   - [Размер шрифта, высота, отступы](#размер-поля)
   - [Строки и колонки](#строки-и-колонки)
@@ -62,7 +67,7 @@ import {
 
 <TextFieldExampleStatus />
 
-```ts
+```tsx
 <TextField state="success" placeholder="success" />
 <TextField state="alert" placeholder="error" />
 <TextField state="warning" placeholder="warning" />
@@ -78,7 +83,7 @@ import {
 
 <TextFieldExampleTextPlaceholder />
 
-```ts
+```tsx
 <TextField placeholder="Здесь только цифры" />
 ```
 
@@ -88,7 +93,7 @@ import {
 
 <TextFieldExampleTextValue />
 
-```ts
+```tsx
 const App = () => {
   const [value, setValue] = useState('стопиццот');
   const handleChange = ({ value }) => setValue(value);
@@ -105,7 +110,7 @@ const App = () => {
 
 <TextFieldExampleTextLeft />
 
-```ts
+```tsx
 <TextField leftSide="куда" />
 <TextField leftSide="кому" />
 ```
@@ -114,7 +119,7 @@ const App = () => {
 
 <TextFieldExampleTextRight />
 
-```ts
+```tsx
 <TextField leftSide={IconDiamond} rightSide="карат" />
 ```
 
@@ -125,7 +130,7 @@ const App = () => {
 
 <TextFieldExampleView />
 
-```ts
+```tsx
 <TextField view="default" placeholder="Самое обычное поле" />
 <TextField view="clear" placeholder="Незаметное поле" />
 ```
@@ -134,7 +139,7 @@ const App = () => {
 
 <TextFieldExampleViewDisabled />
 
-```ts
+```tsx
 <TextField placeholder="Самое обычное поле" disabled />
 ```
 
@@ -145,7 +150,7 @@ const App = () => {
 
 <TextFieldExampleFormBasic />
 
-```ts
+```tsx
 <TextField placeholder="Default" />
 <TextField form="brick" placeholder="Brick" />
 <TextField form="round" placeholder="Round" />
@@ -156,9 +161,36 @@ const App = () => {
 
 <TextFieldExampleFormHybrid />
 
-```ts
+```tsx
 <TextField placeholder="Электронная почта" form="roundClear" style={{ width: '260px' }} />
 <Button form="brickRound" label="Подписаться" />
+```
+
+### Лэйбл
+
+Вы можете добавить лэйбл для поля ввода, обазначив за что оно отвечает. За текст
+отвечает свойство `label`, за его расположение `labelPosition`.
+
+<TextFieldExampleLabel />
+
+```tsx
+<TextField placeholder="Top" label="Top" labelPosition="top" />
+<TextField placeholder="Left" label="Left" labelPosition="left" />
+```
+
+### Подпись
+
+Вы можете добавить подпись, которая буде нести дополнительную информацию
+о состоянии поля ввода. За это отвечает свойство `caption`, оно наследует
+статус поля и стилизуется в соответствии с этим.
+
+<TextFieldExampleCaption />
+
+```tsx
+<TextField state="success" placeholder="success" caption="success" />
+<TextField state="alert" placeholder="error" caption="error" />
+<TextField state="warning" placeholder="warning" caption="warning" />
+<TextField placeholder="TextField" caption="default" />
 ```
 
 ## Размеры
@@ -171,7 +203,7 @@ const App = () => {
 
 <TextFieldExampleSize />
 
-```ts
+```tsx
 <TextField size="xs" placeholder="Размер XS" />
 <TextField size="s" placeholder="Размер S" />
 <TextField size="m" placeholder="Размер M" />
@@ -182,7 +214,7 @@ const App = () => {
 
 <TextFieldExampleSizeWidth />
 
-```ts
+```tsx
 <TextField width="full" placeholder="Страшно широкое поле" />
 ```
 
@@ -196,7 +228,7 @@ const App = () => {
 
 <TextFieldExampleSizeRows />
 
-```ts
+```tsx
 <TextField
   type="textarea"
   rows="13"
@@ -212,7 +244,7 @@ const App = () => {
 
 <TextFieldExampleSizeMinRows />
 
-```ts
+```tsx
 <TextField
   type="textarea"
   minRows="13"
@@ -236,6 +268,9 @@ const App = () => {
 | [`maxRows?`](#строки-и-колонки)            | `number`                                                                                                                                                             | -            | Максимум видимых строк, используется только в случае type=`'textarea'`, нельзя использовать совместно с **rows**           |
 | [`maxLength?`](#строки-и-колонки)          | `number`                                                                                                                                                             | -            | Максимальная ширина                                                                                                        |
 | [`view?`](#внешний-вид)                    | `'default', 'clear'`                                                                                                                                                 | `'default'`  | Вид поля                                                                                                                   |
+| [`label?`](#лэйбл)                         | `string`                                                                                                                                                             | -            | Лэйбл к полю ввода                                                                                                         |
+| [`labelPosition?`](#лэйбл)                 | `'top', 'left'`                                                                                                                                                      | `'top'`      | Положение лэйбла                                                                                                           |
+| [`caption?`](#подпись)                     | `string`                                                                                                                                                             | -            | Подпись к полю ввода                                                                                                       |
 | [`form?`](#форма)                          | `'default', 'brick', 'round', 'clearRound', 'roundClear', 'clearDefault', 'defaultClear', 'defaultBrick', 'brickDefault', 'brickClear', 'clearBrick', 'clearClear'`, | `'default'`  | Форма поля                                                                                                                 |
 | [`leftSide?`](#дополнительная-информация)  | `React.FC<IconProps>\string`                                                                                                                                         | -            | Иконка или текст слева, внутри поля                                                                                        |
 | [`rightSide?`](#дополнительная-информация) | `React.FC<IconProps>\string`                                                                                                                                         | -            | Иконка или текст справа, внутри поля                                                                                       |
@@ -255,7 +290,7 @@ const App = () => {
 
 ## Пример
 
-```ts
+```tsx
 // src/App.ts
 import React, { useState } from 'react';
 import { TextField } from '@consta/uikit/TextField';

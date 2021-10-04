@@ -67,11 +67,18 @@ const defaultProps: Props<Row> = {
     {
       accessor: 'price',
       title: 'Цена',
+      mergeCells: true,
+    },
+    {
+      accessor: 'count',
+      title: 'Количество',
     },
     {
       accessor: 'date',
-      title: 'Дата',
+      title: 'Год',
       renderCell: (row) => <h1>Отображает {row.date.year} год</h1>,
+      mergeCells: true,
+      getComparisonValue: (cell) => cell.year,
     },
   ],
   rows,
@@ -114,6 +121,54 @@ describe('Компонент Table', () => {
         renderComponent();
         expect(screen.getByText('Отображает 2021 год')).toBeInTheDocument();
         expect(screen.getByText('Отображает 2020 год').tagName).toBe('H1');
+      });
+    });
+
+    describe('проверка объединения ячеек', () => {
+      const rowsWithMergeCells = [
+        {
+          id: 'row1',
+          count: 200,
+          price: 300,
+          date: {
+            year: 2019,
+          },
+        },
+        {
+          id: 'row2',
+          count: 150,
+          price: 300,
+          date: {
+            year: 2020,
+          },
+        },
+        {
+          id: 'row3',
+          count: 100,
+          price: 150,
+          date: {
+            year: 2020,
+          },
+        },
+      ];
+
+      const propsWithMergeCells: Props<Row> = {
+        ...defaultProps,
+        rows: rowsWithMergeCells,
+      };
+
+      it('c простыми данными', () => {
+        renderComponent({ ...propsWithMergeCells });
+        expect(screen.getByText('Отображает 2020 год')).toBeInTheDocument();
+        const countCellsWithNumber = screen.getAllByText('Отображает 2020 год');
+        expect(countCellsWithNumber.length).toBe(1);
+      });
+
+      it('с объектами', () => {
+        renderComponent({ ...propsWithMergeCells });
+        expect(screen.getByText('300')).toBeInTheDocument();
+        const countCellsWithObject = screen.getAllByText('300');
+        expect(countCellsWithObject.length).toBe(1);
       });
     });
 

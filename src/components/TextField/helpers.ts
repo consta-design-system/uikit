@@ -101,6 +101,9 @@ export type Props<TYPE extends string> = {
   ariaLabel?: string;
   iconSize?: IconPropSize;
   children?: never;
+  label?: string;
+  caption?: string;
+  labelPosition?: 'top' | 'left';
 };
 
 export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { action } from '@storybook/addon-actions';
 import { boolean, number, select, text } from '@storybook/addon-knobs';
 
 import { IconPhoto } from '../../../icons/IconPhoto/IconPhoto';
@@ -30,6 +31,9 @@ const defaultKnobs = () => ({
   view: select('view', textFieldPropView, textFieldPropViewDefault),
   disabled: boolean('disabled', false),
   type: select('type', ['text', 'textarea'], 'text'),
+  caption: text('caption', 'Подпись'),
+  label: text('label', 'Заголовок'),
+  labelPosition: select('labelPosition', ['top', 'left'], 'top'),
   maxLength: number('maxLength', 200),
   minRows: number('minRows', 1),
   maxRows: number('maxRows', 5),
@@ -48,6 +52,9 @@ export function Playground() {
     size,
     view,
     type,
+    label,
+    caption,
+    labelPosition,
     maxLength,
     minRows,
     maxRows,
@@ -79,7 +86,7 @@ export function Playground() {
   };
 
   return (
-    <EventInterceptorProvider eventHandler={console.log} map={eventInterceptorMap}>
+    <EventInterceptorProvider eventHandler={action('EventInterceptor')} map={eventInterceptorMap}>
       <div>
         <TextField
           value={value}
@@ -97,6 +104,9 @@ export function Playground() {
           leftSide={leftSide}
           rightSide={rightSide}
           disabled={disabled}
+          label={label}
+          caption={caption}
+          labelPosition={labelPosition}
         />
       </div>
     </EventInterceptorProvider>

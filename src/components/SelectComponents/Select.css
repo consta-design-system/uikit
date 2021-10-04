@@ -1,40 +1,269 @@
 .Select {
+  --caption-margin-left: calc(var(--input-space) + var(--control-border-width));
   position: relative;
   display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
   width: 100%;
-
-  &-Delimiter {
-    width: 1px;
-    background-color: var(--color-control-bg-border-default);
-  }
 
   &_size {
     &_xs {
       --input-height: var(--control-height-xs);
-      --input-font-size: var(--control-text-size-xs);
       --input-space: calc(var(--control-space-xs) * 0.5);
+      --input-font-size: var(--control-text-size-xs);
     }
 
     &_s {
       --input-height: var(--control-height-s);
-      --input-font-size: var(--control-text-size-s);
       --input-space: calc(var(--control-space-s) * 0.5);
+      --input-font-size: var(--control-text-size-s);
       --tag-space: calc(var(--space-xs) / 2 - var(--control-border-width));
     }
 
     &_m {
       --input-height: var(--control-height-m);
-      --input-font-size: var(--control-text-size-m);
       --input-space: calc(var(--control-space-m) * 0.5);
+      --input-font-size: var(--control-text-size-m);
       --tag-space: calc(var(--space-s) / 2 - var(--control-border-width));
     }
 
     &_l {
       --input-height: var(--control-height-l);
-      --input-font-size: var(--control-text-size-l);
       --input-space: calc(var(--control-space-l) * 0.5);
+      --input-font-size: var(--control-text-size-l);
       --tag-space: calc(var(--space-m) / 2 - var(--control-border-width));
     }
+  }
+
+  &_labelPosition {
+    &_top {
+      flex-direction: column;
+
+      & > *:not(:last-child) {
+        margin-bottom: var(--space-xs);
+      }
+    }
+
+    &_left {
+      flex-direction: row;
+
+      & > *:not(:last-child) {
+        margin-right: var(--space-s);
+      }
+    }
+  }
+
+  &-Label {
+    &_labelPosition {
+      &_left {
+        display: inline-flex;
+        align-items: center;
+        height: var(--input-height);
+      }
+    }
+  }
+
+  &-Caption {
+    margin-top: var(--space-2xs);
+    margin-left: var(--caption-margin-left);
+  }
+
+  &-Body {
+    display: inline-flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &-SelectContainer {
+    position: relative;
+    display: flex;
+    width: 100%;
+
+    &_view_default .Select-Control {
+      padding: 0;
+      color: var(--color-control-typo-default);
+      background: var(--color-control-bg-default);
+      border: var(--control-border-width) solid var(--color-control-bg-border-default);
+      border-radius: var(--control-radius);
+
+      &:hover {
+        border-color: var(--color-control-bg-border-default-hover);
+      }
+    }
+
+    &_view_default.Select-SelectContainer_focused .Select-Control {
+      z-index: 1;
+      border-color: var(--color-control-bg-border-focus);
+      outline: none;
+    }
+
+    &_multiple .Select-Control {
+      height: auto;
+      min-height: var(--input-height);
+    }
+
+    &_form {
+      &_round .Select-Control {
+        padding-left: calc(var(--input-space) * 1.6);
+        border-radius: calc(var(--input-height) / 2);
+      }
+
+      &_brick .Select-Control {
+        border-radius: 0;
+      }
+
+      &_clear .Select-Control {
+        border-width: 0;
+        border-bottom-width: var(--control-border-width);
+        border-radius: 0;
+      }
+
+      &_defaultClear .Select-Control {
+        border-right-width: 0;
+        border-radius: var(--control-radius) 0 0 var(--control-radius);
+      }
+
+      &_clearDefault .Select-Control {
+        border-left-width: 0;
+        border-radius: 0 var(--control-radius) var(--control-radius) 0;
+      }
+
+      &_defaultBrick .Select-Control {
+        border-radius: var(--control-radius) 0 0 var(--control-radius);
+      }
+
+      &_brickDefault .Select-Control {
+        border-radius: 0 var(--control-radius) var(--control-radius) 0;
+      }
+
+      &_roundBrick .Select-Control {
+        padding-left: calc(var(--input-space) * 1.6);
+        border-radius: calc(var(--input-height) / 2) 0 0 calc(var(--input-height) / 2);
+      }
+
+      &_brickRound .Select-Control {
+        padding-right: calc(var(--input-space) * 1.6);
+        border-radius: 0 calc(var(--input-height) / 2) 99rem calc(var(--input-height) / 2);
+      }
+
+      &_brickClear .Select-Control {
+        border-right-width: 0;
+        border-radius: 0;
+      }
+
+      &_clearBrick .Select-Control {
+        border-left-width: 0;
+        border-radius: 0;
+      }
+
+      &_clearRound .Select-Control {
+        padding-right: calc(var(--input-space) * 1.6);
+        border-left-width: 0;
+        border-radius: 0 calc(var(--input-height) / 2) calc(var(--input-height) / 2) 0;
+      }
+
+      &_roundClear .Select-Control {
+        padding-left: calc(var(--input-space) * 1.6);
+        border-right-width: 0;
+        border-radius: calc(var(--input-height) / 2) 0 0 calc(var(--input-height) / 2);
+      }
+
+      &_clearClear .Select-Control {
+        border-width: 0;
+        border-top-width: var(--control-border-width);
+        border-bottom-width: var(--control-border-width);
+        border-radius: 0;
+      }
+    }
+
+    &_view_default.Select-SelectContainer_form_clear.Select-SelectContainer_focused .Select-Control,
+    &_view_default.Select-SelectContainer_form_clearClear.Select-SelectContainer_focused
+      .Select-Control {
+      box-shadow: var(--control-border-width) 0 var(--color-control-bg-border-focus),
+        calc(-1 * var(--control-border-width)) 0 var(--color-control-bg-border-focus);
+    }
+
+    &_view_default.Select-SelectContainer_form_defaultClear.Select-SelectContainer_focused
+      .Select-Control,
+    &_view_default.Select-SelectContainer_form_brickClear.Select-SelectContainer_focused
+      .Select-Control,
+    &_view_default.Select-SelectContainer_form_roundClear.Select-SelectContainer_focused
+      .Select-Control {
+      box-shadow: var(--control-border-width) 0 var(--color-control-bg-border-focus);
+    }
+
+    &_view_default.Select-SelectContainer_form_clearDefault.Select-SelectContainer_focused
+      .Select-Control,
+    &_view_default.Select-SelectContainer_form_clearBrick.Select-SelectContainer_focused
+      .Select-Control,
+    &_view_default.Select-SelectContainer_form_clearRound.Select-SelectContainer_focused
+      .Select-Control {
+      box-shadow: calc(-1 * var(--control-border-width)) 0 var(--color-control-bg-border-focus);
+    }
+
+    &_view_default.Select-SelectContainer_disabled .Select-Control {
+      color: var(--color-control-typo-disable);
+      background: var(--color-control-bg-disable);
+      border-color: var(--color-control-bg-border-disable);
+      pointer-events: none;
+    }
+
+    &_view_clear .Select-Control,
+    &_view_clear .Select-Control:hover,
+    &_view_clear .Select-Control:focus {
+      padding: 0;
+      color: var(--color-control-typo-default);
+
+      &.Select-SelectContainer_disabled {
+        pointer-events: none;
+
+        & .Select-Control {
+          color: var(--color-control-typo-disable);
+        }
+      }
+    }
+
+    &_view_clear.Select-SelectContainer_disabled .Select-Control {
+      pointer-events: none;
+    }
+
+    &_view_default .Select-ControlValueContainer {
+      padding: 0 0 0 var(--input-space);
+    }
+
+    &_form_round &-IndicatorsDropdown {
+      border-radius: 0 calc(var(--input-height) / 2) calc(var(--input-height) / 2) 0;
+    }
+
+    &_multiple .Select-ControlValueContainer {
+      position: relative;
+      display: flex;
+      box-sizing: border-box;
+      padding-top: 0;
+      padding-bottom: 0;
+      line-height: 1;
+    }
+
+    &_multiple .Select-ControlValue {
+      overflow: visible;
+      padding-top: calc(var(--tag-space) - var(--control-border-width));
+      white-space: normal;
+    }
+
+    &_multiple .Select-ControlValue_isUserSelect {
+      display: flex;
+      padding-top: calc(var(--space-s) / 4);
+      flex-wrap: wrap;
+    }
+  }
+
+  &_view_clear {
+    --caption-margin-left: 0;
+  }
+
+  &-Delimiter {
+    width: 1px;
+    background-color: var(--color-control-bg-border-default);
   }
 
   &-Control {
@@ -58,147 +287,6 @@
     }
   }
 
-  &_multiple &-Control {
-    height: auto;
-    min-height: var(--input-height);
-  }
-
-  &_view_default .Select-Control {
-    padding: 0;
-    color: var(--color-control-typo-default);
-    background: var(--color-control-bg-default);
-    border: var(--control-border-width) solid var(--color-control-bg-border-default);
-    border-radius: var(--control-radius);
-
-    &:hover {
-      border-color: var(--color-control-bg-border-default-hover);
-    }
-  }
-
-  &_view_default.Select_focused .Select-Control {
-    z-index: 1;
-    border-color: var(--color-control-bg-border-focus);
-    outline: none;
-  }
-
-  &_form {
-    &_round .Select-Control {
-      padding-left: calc(var(--input-space) * 1.6);
-      border-radius: calc(var(--input-height) / 2);
-    }
-
-    &_brick .Select-Control {
-      border-radius: 0;
-    }
-
-    &_clear .Select-Control {
-      border-width: 0;
-      border-bottom-width: var(--control-border-width);
-      border-radius: 0;
-    }
-
-    &_defaultClear .Select-Control {
-      border-right-width: 0;
-      border-radius: var(--control-radius) 0 0 var(--control-radius);
-    }
-
-    &_clearDefault .Select-Control {
-      border-left-width: 0;
-      border-radius: 0 var(--control-radius) var(--control-radius) 0;
-    }
-
-    &_defaultBrick .Select-Control {
-      border-radius: var(--control-radius) 0 0 var(--control-radius);
-    }
-
-    &_brickDefault .Select-Control {
-      border-radius: 0 var(--control-radius) var(--control-radius) 0;
-    }
-
-    &_roundBrick .Select-Control {
-      padding-left: calc(var(--input-space) * 1.6);
-      border-radius: calc(var(--input-height) / 2) 0 0 calc(var(--input-height) / 2);
-    }
-
-    &_brickRound .Select-Control {
-      padding-right: calc(var(--input-space) * 1.6);
-      border-radius: 0 calc(var(--input-height) / 2) 99rem calc(var(--input-height) / 2);
-    }
-
-    &_brickClear .Select-Control {
-      border-right-width: 0;
-      border-radius: 0;
-    }
-
-    &_clearBrick .Select-Control {
-      border-left-width: 0;
-      border-radius: 0;
-    }
-
-    &_clearRound .Select-Control {
-      padding-right: calc(var(--input-space) * 1.6);
-      border-left-width: 0;
-      border-radius: 0 calc(var(--input-height) / 2) calc(var(--input-height) / 2) 0;
-    }
-
-    &_roundClear .Select-Control {
-      padding-left: calc(var(--input-space) * 1.6);
-      border-right-width: 0;
-      border-radius: calc(var(--input-height) / 2) 0 0 calc(var(--input-height) / 2);
-    }
-
-    &_clearClear .Select-Control {
-      border-width: 0;
-      border-top-width: var(--control-border-width);
-      border-bottom-width: var(--control-border-width);
-      border-radius: 0;
-    }
-  }
-
-  &_view_default.Select_form_clear.Select_focused .Select-Control,
-  &_view_default.Select_form_clearClear.Select_focused .Select-Control {
-    box-shadow: var(--control-border-width) 0 var(--color-control-bg-border-focus),
-      calc(-1 * var(--control-border-width)) 0 var(--color-control-bg-border-focus);
-  }
-
-  &_view_default.Select_form_defaultClear.Select_focused .Select-Control,
-  &_view_default.Select_form_brickClear.Select_focused .Select-Control,
-  &_view_default.Select_form_roundClear.Select_focused .Select-Control {
-    box-shadow: var(--control-border-width) 0 var(--color-control-bg-border-focus);
-  }
-
-  &_view_default.Select_form_clearDefault.Select_focused .Select-Control,
-  &_view_default.Select_form_clearBrick.Select_focused .Select-Control,
-  &_view_default.Select_form_clearRound.Select_focused .Select-Control {
-    box-shadow: calc(-1 * var(--control-border-width)) 0 var(--color-control-bg-border-focus);
-  }
-
-  &_view_default.Select_disabled .Select-Control {
-    color: var(--color-control-typo-disable);
-    background: var(--color-control-bg-disable);
-    border-color: var(--color-control-bg-border-disable);
-    pointer-events: none;
-  }
-
-  &_view_clear .Select-Control,
-  &_view_clear .Select-Control:hover,
-  &_view_clear .Select-Control:focus {
-    padding: 0;
-    color: var(--color-control-typo-default);
-
-    &.Select_disabled {
-      pointer-events: none;
-
-      & .Select-Control {
-        color: var(--color-control-typo-disable);
-      }
-    }
-  }
-
-  &_view_clear.Select_disabled .Select-Control {
-    pointer-events: none;
-  }
-
   &-Indicators {
     display: flex;
     height: 100%;
@@ -218,10 +306,6 @@
     &:focus {
       outline: none;
     }
-  }
-
-  &_form_round &-IndicatorsDropdown {
-    border-radius: 0 calc(var(--input-height) / 2) calc(var(--input-height) / 2) 0;
   }
 
   &-ControlInner {
@@ -250,19 +334,6 @@
     }
   }
 
-  &_view_default .Select-ControlValueContainer {
-    padding: 0 0 0 var(--input-space);
-  }
-
-  &_multiple &-ControlValueContainer {
-    position: relative;
-    display: flex;
-    box-sizing: border-box;
-    padding-top: 0;
-    padding-bottom: 0;
-    line-height: 1;
-  }
-
   &-Control[aria-expanded='true'] &-IndicatorsDropdown {
     transform: rotate(180deg);
   }
@@ -273,18 +344,6 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-  }
-
-  &_multiple &-ControlValue {
-    overflow: visible;
-    padding-top: calc(var(--tag-space) - var(--control-border-width));
-    white-space: normal;
-  }
-
-  &_multiple &-ControlValue_isUserSelect {
-    display: flex;
-    flex-wrap: wrap;
-    padding-top: calc(var(--space-s) / 4);
   }
 
   &-Placeholder {

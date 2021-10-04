@@ -2,7 +2,8 @@ import React from 'react';
 
 import { IconProps, IconPropSize } from '../../../icons/Icon/Icon';
 import {
-  cnTextField,
+  COMPONENT_NAME,
+  TextField,
   TextFieldPropAutoComplete,
   TextFieldPropForm,
   TextFieldPropId,
@@ -14,7 +15,7 @@ import {
   TextFieldPropView,
   TextFieldPropWidth,
 } from '../../TextField/TextField';
-import { EventInterceptorHandler, EventInterceptorPropComponent } from '../EventInterceptor';
+import { EventInterceptorHandler } from '../EventInterceptor';
 
 export type Props = {
   className?: string;
@@ -50,13 +51,15 @@ export type Props = {
   children?: never;
 };
 
-export const useTextFieldEventsHandler = (
-  props: Props,
+type TextFieldProps = Parameters<typeof TextField>[0];
+
+export const useTextFieldEventsHandler = <P extends TextFieldProps>(
+  props: P,
   handler: EventInterceptorHandler,
   textFieldRef: React.RefObject<HTMLDivElement>,
-) => {
+): P => {
   const [inputChanged, setInputChanged] = React.useState<boolean>(false);
-  const newProps = { ...props };
+  const newProps: P = { ...props };
 
   React.useEffect(() => {
     setInputChanged(true);
@@ -70,7 +73,7 @@ export const useTextFieldEventsHandler = (
 
   newProps.onBlur = (...onBlurArgs) => {
     const value = {
-      component: cnTextField() as EventInterceptorPropComponent,
+      component: COMPONENT_NAME,
       event: 'change',
       options: {
         placeholder: newProps.placeholder,

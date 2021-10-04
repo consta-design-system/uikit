@@ -19,9 +19,10 @@ const testId = cnChoiceGroup();
 type Item = {
   name: string;
   icon: React.FC<IconProps>;
+  disabled?: boolean;
 };
 
-const items: Item[] = [
+const elements: Item[] = [
   {
     name: 'один',
     icon: IconCamera,
@@ -37,22 +38,26 @@ const items: Item[] = [
 ];
 
 const additionalClass = 'additionalClass';
-const defaultValue = items[0];
+const defaultValue = elements[0];
 
 const renderComponent = (props: {
+  items?: Item[];
   size?: ChoiceGroupProps['size'];
   view?: ChoiceGroupProps['view'];
   form?: ChoiceGroupProps['form'];
   onlyIcon?: ChoiceGroupProps['onlyIcon'];
   onChange?: (props: { e: React.ChangeEvent<HTMLInputElement>; value: Item | null }) => void;
+  disabled?: boolean;
+  getDisabled?: (item: Item) => boolean | undefined;
 }) => {
+  const { items = elements, ...otherProps } = props;
   const value = defaultValue;
   const handleChange = jest.fn();
 
   return render(
     <>
       <ChoiceGroup
-        {...props}
+        {...otherProps}
         items={items}
         value={value}
         multiple={false}
@@ -68,6 +73,7 @@ const renderComponent = (props: {
 };
 
 const renderComponentMultiple = (props: {
+  items?: Item[];
   size?: ChoiceGroupProps['size'];
   view?: ChoiceGroupProps['view'];
   form?: ChoiceGroupProps['form'];
@@ -75,13 +81,14 @@ const renderComponentMultiple = (props: {
   onChange?: (props: { e: React.ChangeEvent<HTMLInputElement>; value: Item[] | null }) => void;
   value?: Item[];
 }) => {
+  const { items = elements, ...otherProps } = props;
   const value = props.value || [defaultValue];
   const handleChange = jest.fn();
 
   return render(
     <>
       <ChoiceGroup
-        {...props}
+        {...otherProps}
         items={items}
         value={value}
         multiple
@@ -108,8 +115,12 @@ function getItem(index = 0) {
   return getItems()[index] as HTMLLabelElement;
 }
 
+function getInputs() {
+  return getRender().querySelectorAll(`.${cnChoiceGroup('Input')}`) as NodeListOf<HTMLInputElement>;
+}
+
 function getInput(index = 0) {
-  return getRender().querySelectorAll(`.${cnChoiceGroup('Input')}`)[index] as HTMLInputElement;
+  return getInputs()[index] as HTMLInputElement;
 }
 
 function getIcon(index = 0) {
@@ -125,7 +136,7 @@ describe('Компонент ChoiceGroup', () => {
       it(`количество совпадает с передоваемым`, () => {
         renderComponent({});
         const itemsRender = getItems();
-        expect(itemsRender.length).toEqual(items.length);
+        expect(itemsRender.length).toEqual(elements.length);
       });
     });
     describe('проверка value', () => {
@@ -137,7 +148,7 @@ describe('Компонент ChoiceGroup', () => {
     describe('проверка getLabel', () => {
       it(`label у элемента верный`, () => {
         renderComponent({});
-        expect(getItem().textContent).toEqual(`Name-${items[0].name}`);
+        expect(getItem().textContent).toEqual(`Name-${elements[0].name}`);
       });
     });
     describe('проверка getIcon', () => {
@@ -205,7 +216,7 @@ describe('Компонент ChoiceGroup', () => {
         expect(handleChange).toHaveBeenCalled();
         expect(handleChange).toHaveBeenCalledTimes(1);
         expect(handleChange).toHaveBeenCalledWith(
-          expect.objectContaining({ value: items[elementIndex] }),
+          expect.objectContaining({ value: elements[elementIndex] }),
         );
       });
       it('клик по выбраному элементу, не должен вызвать callback', () => {
@@ -235,7 +246,7 @@ describe('Компонент ChoiceGroup', () => {
         expect(handleChange).toHaveBeenCalled();
         expect(handleChange).toHaveBeenCalledTimes(1);
         expect(handleChange).toHaveBeenCalledWith(
-          expect.objectContaining({ value: [defaultValue, items[elementIndex]] }),
+          expect.objectContaining({ value: [defaultValue, elements[elementIndex]] }),
         );
       });
       it(`клик по выбраному элементу (всего выбран 1 элемент), должен вызвать callback c ожидаемыми параметрами`, () => {
@@ -255,7 +266,7 @@ describe('Компонент ChoiceGroup', () => {
         const handleChange = jest.fn();
         const elementIndex = 1;
 
-        renderComponentMultiple({ onChange: handleChange, value: [defaultValue, items[1]] });
+        renderComponentMultiple({ onChange: handleChange, value: [defaultValue, elements[1]] });
 
         const item = getItem(elementIndex);
 
@@ -268,7 +279,92 @@ describe('Компонент ChoiceGroup', () => {
         );
       });
     });
+
+    describe('проверка заблокированной группы элементов', () => {
+      it(`группе присваивается класс ${cnChoiceGroup({ disabled: true })}`, () => {
+        renderComponent({ disabled: true });
+        expect(getRender()).toHaveClass(cnChoiceGroup({ disabled: true }));
+      });
+
+      it(`всем лайблам присваивается класс ${cnChoiceGroup('Label', { disabled: true })}`, () => {
+        renderComponent({ disabled: true });
+        getItems().forEach((label) => {
+          expect(label).toHaveClass(cnChoiceGroup('Label', { disabled: true }));
+        });
+      });
+
+      it('всем инпутам присваивается disabled', () => {
+        renderComponent({ disabled: true });
+        getInputs().forEach((input) => {
+          expect(input).toHaveAttribute('disabled');
+        });
+      });
+
+      it('при клике по лейблу коллбэк не вызывается', () => {
+        const handleChange = jest.fn();
+        renderComponent({ disabled: true, onChange: handleChange });
+
+        getItems().forEach((label) => {
+          fireEvent.click(label);
+        });
+        expect(handleChange).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('проверка выборочных заблокированных элементов', () => {
+      const items = [
+        {
+          name: 'один',
+          icon: IconCamera,
+          disabled: true,
+        },
+        {
+          name: 'два',
+          icon: IconCamera,
+          disabled: true,
+        },
+        {
+          name: 'три',
+          icon: IconCamera,
+        },
+      ];
+
+      it(`disabled элементам присваивается класс ${cnChoiceGroup('Label', {
+        disabled: true,
+      })}`, () => {
+        renderComponent({ items, getDisabled: (item) => item.disabled });
+        items.forEach((el, i) => {
+          if (el.disabled) {
+            expect(getItem(i)).toHaveClass(cnChoiceGroup('Label', { disabled: true }));
+          } else {
+            expect(getItem(i)).not.toHaveClass(cnChoiceGroup('Label', { disabled: true }));
+          }
+        });
+      });
+
+      it('disabled элементы получают аттрибут disabled', () => {
+        renderComponent({ items, getDisabled: (item) => item.disabled });
+        items.forEach((el, i) => {
+          if (el.disabled) {
+            expect(getInput(i)).toHaveAttribute('disabled');
+          } else {
+            expect(getInput(i)).not.toHaveAttribute('disabled');
+          }
+        });
+      });
+
+      it('события обрабатываются только у разблокированных элементов', () => {
+        const handleChange = jest.fn();
+        renderComponent({ items, getDisabled: (item) => item.disabled, onChange: handleChange });
+        getItems().forEach((label) => {
+          fireEvent.click(label);
+        });
+        expect(handleChange).toHaveBeenCalled();
+        expect(handleChange).toHaveBeenCalledTimes(items.filter((el) => !el.disabled).length);
+      });
+    });
   });
+
   it(`на элементах есть миксин ${cnMixFocus()}`, () => {
     renderComponent({});
     const item = getItem();

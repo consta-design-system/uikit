@@ -28,6 +28,10 @@ function getInput() {
   return screen.getByTestId(testId).querySelector(`input.${cnTextField('Input')}`);
 }
 
+function getInputContainer() {
+  return screen.getByTestId(testId).querySelector(`.TextField-InputContainer`);
+}
+
 function getTextArea() {
   return screen.getByTestId(testId).querySelector(`textarea.${cnTextField('Input')}`);
 }
@@ -57,7 +61,7 @@ describe('Компонент Button', () => {
       textFieldPropForm.forEach((form) => {
         it(`присваивает класс для form=${form}`, () => {
           renderComponent({ form });
-          expect(getRender()).toHaveClass(cnTextField({ form }));
+          expect(getInputContainer()).toHaveClass(cnTextField('InputContainer', { form }));
         });
       });
     });
@@ -65,7 +69,7 @@ describe('Компонент Button', () => {
       textFieldPropState.forEach((state) => {
         it(`присваивает класс для state=${state}`, () => {
           renderComponent({ state });
-          expect(getRender()).toHaveClass(cnTextField({ state }));
+          expect(getInputContainer()).toHaveClass(cnTextField('InputContainer', { state }));
         });
       });
     });

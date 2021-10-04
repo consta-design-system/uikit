@@ -14,6 +14,7 @@ import {
   ComboboxExampleCustomTypes,
   ComboboxExampleCustomTypesWithGroups,
 } from './examples/ComboboxExampleCustomTypes/ComboboxExampleCustomTypes';
+import { ComboboxExampleLabel } from './examples/ComboboxExampleLabel/ComboboxExampleLabel';
 
 # Combobox
 
@@ -37,6 +38,7 @@ import {
   - [Варианты](#варианты)
   - [Выбранное значение](#выбранное-значение)
   - [Подсказка](#подсказка)
+  - [Заголовок и подпись](#заголовок-и-подпись)
   - [Неактивный вариант](#неактивный-элемент-списка)
   - [Несколько вариантов](#несколько-вариантов)
   - [Группы вариантов](#группы-вариантов)
@@ -144,6 +146,56 @@ export function ComboboxExamplePlaceholder() {
 ```
 
 <ComboboxExamplePlaceholder />
+
+## Заголовок и подпись
+
+Вы можете добавить к выпадающему два необязательных элемента — заголовок и подпись.
+
+Заголовок можно добавить с помощью свойства `label`.
+За его расположение отвечает свойство `labelPosition`.
+Варианты: `'top'` (над полем) или `'left'` (слева от поля), по умолчанию `'top'`.
+
+Подпись можно добавить с помощью свойства `caption`.
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function ComboboxExampleLabel() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <Combobox
+        label="Выберите что-нибудь"
+        caption={value?.label}
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        placeholder="Выберите что-нибудь хорошее"
+      />
+    </StoryBookExample>
+  );
+}
+```
+
+<ComboboxExampleLabel />
 
 ### Неактивный элемент списка
 
@@ -815,6 +867,9 @@ type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | [`size?`](#размер)                                        | `'xs'`, `'s'` , `'m'` , `'l'`                          | `'m'`                                                         | Размер компонента                                                      |
 | [`form?`](#форма)                                         | `default`, `brick`, `round`                            | `default`                                                     | Форма компонента                                                       |
 | [`placeholder?`](#подсказка)                              | `string`                                               | -                                                             | Подсказка, отображается, когда вариант не выбран                       |
+| [`label?`](#заголовок-и-подпись)                          | `string`                                               | -                                                             | Заголовок                                                              |
+| [`labelPosition?`](#заголовок-и-подпись)                  | `'top', 'left'`                                        | `'top'`                                                       | Расположение заголвока (над полем или слева от него)                   |
+| [`caption?`](#заголовок-и-подпись)                        | `string`                                               | -                                                             | Подпись под полем                                                      |
 | [`items`](#варианты)                                      | `ITEM[]`                                               | -                                                             | Варианты                                                               |
 | [`value?`](#значение)                                     | `PropValue<ITEM,MULTIPLE>`                             | -                                                             | Значение селекта                                                       |
 | [`onChange?`](#onchange)                                  | `PropOnChange<ITEM,MULTIPLE>`                          | -                                                             | Обработчик события изменения значения компонента                       |

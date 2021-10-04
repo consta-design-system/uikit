@@ -12,6 +12,7 @@ import {
   SelectExampleCustomTypes,
   SelectExampleCustomTypesWithGroups,
 } from './examples/SelectExampleCustomTypes/SelectExampleCustomTypes';
+import { SelectExampleLabel } from './examples/SelectExampleLabel/SelectExampleLabel';
 
 # Select
 
@@ -30,6 +31,7 @@ import {
 - [Размер](#размер)
 - [Форма](#форма)
 - [Внешний вид](#внешний-вид)
+- [Лэйбл и подпись](#лэйбл-и-подпись)
 - [Неактивный выпадающий список](#неактивный-выпадающий-список)
 - [Кастомизация](#кастомизация)
   - [Кастомный элемент списка](#кастомный-элемент-списка)
@@ -404,6 +406,51 @@ export function SelectExampleView() {
 
 <SelectExampleView />
 
+## Лэйбл и подпись
+
+Лэйбл к компоненту можно добавить через свойство `label`, а за его позиционирование отвечает
+свойство `labelPosition`. Подпись можно добавить через свойство `caption`.
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function SelectExampleLabel() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <div className={cnDocsDecorator('Section')}>
+      <Select
+        label="Значение"
+        caption={value?.label}
+        placeholder="Выберите значение"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+    </div>
+  );
+}
+```
+
+<SelectExampleLabel />
+
 ## Неактивный выпадающий список
 
 Чтобы сделать список неактивным, добавьте `disabled`.
@@ -681,6 +728,9 @@ type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | [`size?`](#размер)                                                 | `'xs'`, `'s'` , `'m'` , `'l'`                          | `'m'`                     | Размер компонента                                                      |
 | [`form?`](#форма)                                                  | `default`, `brick`, `round`                            | `default`                 | Форма компонента                                                       |
 | [`placeholder?`](#подсказка)                                       | `string`                                               | -                         | Подсказка. Отображается, когда вариант не выбран                       |
+| [`label?`](#лэйбл-и-подпись)                                       | `string`                                               | -                         | Лэйбл                                                                  |
+| [`labelPosition?`](#лэйбл-и-подпись)                               | `'top', 'left'`                                        | `'top'`                   | Положение лэйбла                                                       |
+| [`caption?`](#лэйбл-и-подпись)                                     | `string`                                               | -                         | Подпись                                                                |
 | [`items`](#варианты)                                               | `ITEM[]`                                               | -                         | Варианты                                                               |
 | [`value?`](#выбранное-значение)                                    | `ITEM`, `null`                                         | -                         | Выбранное значение                                                     |
 | [`onChange?`](#выбранное-значение)                                 | `PropOnChange<ITEM>`                                   | -                         | Обработчик события изменения значения компонента                       |
