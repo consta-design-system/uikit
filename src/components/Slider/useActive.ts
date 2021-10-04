@@ -3,8 +3,8 @@ import { useCallback, useRef, useState } from 'react';
 export default () => {
   const [isActiveOne, setIsActiveOne] = useState<boolean>(false);
   const [isActiveTwo, setIsActiveTwo] = useState<boolean>(false);
-  const pointValueOne = useRef<HTMLButtonElement | null>(null);
-  const pointValueTwo = useRef<HTMLButtonElement | null>(null);
+  const pointValueOne: React.MutableRefObject<HTMLButtonElement | null> = useRef(null);
+  const pointValueTwo: React.MutableRefObject<HTMLButtonElement | null> = useRef(null);
 
   const clearActive = useCallback(() => {
     setIsActiveOne(false);

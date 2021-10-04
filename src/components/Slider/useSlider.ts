@@ -1,11 +1,4 @@
-import React, {
-  MutableRefObject,
-  RefObject,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { MutableRefObject, useCallback, useEffect, useRef, useState } from 'react';
 
 import {
   asc,
@@ -26,18 +19,7 @@ type PositionType = {
   y: number;
 };
 
-export default (
-  props: SliderProps,
-  {
-    clearActive,
-    pointValueOne,
-    pointValueTwo,
-  }: {
-    clearActive: () => void;
-    pointValueOne: RefObject<HTMLButtonElement>;
-    pointValueTwo: RefObject<HTMLButtonElement>;
-  },
-) => {
+export default (props: SliderProps, { clearActive }: { clearActive: () => void }) => {
   const { step = 1, min, max, value, disabled, onChange, onChangeCommitted, onAfterChange } = props;
 
   const minValue = max > min ? min : 0;
@@ -61,12 +43,14 @@ export default (
     y: 0,
   });
 
-  const moveCount = useRef(0);
-  const touchId: MutableRefObject<number | null> = useRef<number>(null);
+  const moveCount = React.useRef(0);
+  const touchId: MutableRefObject<number | null> = React.useRef<number>(null);
   const previousIndex = React.useRef<number>(0);
   const localStep = useRef(step || 0);
+  const pointValueOne = useRef<HTMLButtonElement | null>(null);
+  const pointValueTwo = useRef<HTMLButtonElement | null>(null);
 
-  const sliderRef = useRef<HTMLDivElement>(null);
+  const sliderRef = React.useRef<HTMLDivElement>(null);
 
   const getFingerNewValue = useCallback(
     (finger: PositionType, move: boolean, source: number | number[]) => {
@@ -84,9 +68,9 @@ export default (
       temporaryValue = clamp(temporaryValue, minValue, maxValue);
       let activeIndex = 0;
 
-      if (range.current && Array.isArray(values.current)) {
+      if (range.current) {
         if (!move) {
-          activeIndex = findClosest(values.current, temporaryValue);
+          activeIndex = findClosest(values.current as number[], temporaryValue);
         } else {
           activeIndex = previousIndex.current;
         }
@@ -94,8 +78,8 @@ export default (
         if (disabled) {
           temporaryValue = clamp(
             temporaryValue,
-            values.current[activeIndex - 1] || -Infinity,
-            values.current[activeIndex + 1] || Infinity,
+            (values.current as number[])[activeIndex - 1] || -Infinity,
+            (values.current as number[])[activeIndex + 1] || Infinity,
           );
         }
 
@@ -130,6 +114,7 @@ export default (
       moveCount.current += 1;
 
       if ('buttons' in nativeEvent && (nativeEvent as MouseEvent).buttons === 0) {
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         handleTouchEnd(nativeEvent);
         return;
       }
@@ -199,11 +184,7 @@ export default (
   );
 
   const handleDragStart = useCallback(
-    (
-      nativeEvent: React.MouseEvent | React.TouchEvent,
-      eventMove: 'touchmove' | 'mousemove',
-      eventEnd: 'touchend' | 'mouseup',
-    ) => {
+    (nativeEvent: React.MouseEvent | React.TouchEvent) => {
       const finger = trackFinger(nativeEvent, touchId);
 
       if (!finger) return;
@@ -222,8 +203,8 @@ export default (
 
       moveCount.current = 0;
       const doc = ownerDocument(sliderRef.current);
-      doc.addEventListener(eventMove, handleTouchMove);
-      doc.addEventListener(eventEnd, handleTouchEnd);
+      doc.addEventListener('touchmove', handleTouchMove);
+      doc.addEventListener('touchend', handleTouchEnd);
 
       const rect = (activeIndex || !range.current
         ? pointValueTwo
@@ -245,15 +226,17 @@ export default (
       if (touch != null) {
         touchId.current = touch.identifier;
       }
-      handleDragStart(nativeEvent, 'touchmove', 'touchend');
+      handleDragStart(nativeEvent);
     },
     [handleDragStart],
   );
 
   const handleMouseDown = useCallback(
     (nativeEvent: React.MouseEvent) => {
+      if (nativeEvent.button !== 0) return;
+
       nativeEvent.preventDefault();
-      handleDragStart(nativeEvent, 'mousemove', 'mouseup');
+      handleDragStart(nativeEvent);
     },
     [handleDragStart],
   );
@@ -277,11 +260,6 @@ export default (
       ? getDividedValue(step, maxValue - minValue)
       : step || 0;
     setDividedValue(getDividedValue(step, maxValue - minValue));
-    setValueState((prev) =>
-      Array.isArray(prev)
-        ? prev.map((el) => roundValueToStep(el, localStep.current, minValue))
-        : roundValueToStep(prev, localStep.current, minValue),
-    );
   }, [step, maxValue, minValue]);
 
   useEffect(() => {
@@ -297,7 +275,6 @@ export default (
   return {
     handleTouchStart,
     handleMouseDown,
-    handleTouchMove,
     popoverPosition,
     sliderRef,
     valueDerived,

@@ -94,7 +94,10 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>((props, ref)
                 key={index}
                 className={cnSlider('Input-divide', {
                   fill: checkFill(
-                    dividedValue?.reduce((acc, item, i) => (i <= index - 1 ? acc + item : acc), 0),
+                    dividedValue?.reduce(
+                      (acc: any, item: any, i: number) => (i <= index - 1 ? acc + item : acc),
+                      0,
+                    ),
                     valueDerived,
                     minValue,
                   ),
