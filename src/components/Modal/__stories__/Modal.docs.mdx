@@ -30,13 +30,13 @@ export function ModalExample() {
         view="primary"
         label="Открыть модальное окно"
         width="default"
-        onClick={(): void => setIsModalOpen(true)}
+        onClick={() => setIsModalOpen(true)}
       />
       <Modal
         isOpen={isModalOpen}
         hasOverlay
-        onClickOutside={(): void => setIsModalOpen(false)}
-        onEsc={(): void => setIsModalOpen(false)}
+        onClickOutside={() => setIsModalOpen(false)}
+        onEsc={() => setIsModalOpen(false)}
       >
         <Text as="p" size="s" view="secondary">
           Это заголовок модального окна
@@ -51,7 +51,7 @@ export function ModalExample() {
             view="primary"
             label="Закрыть"
             width="default"
-            onClick={(): void => setIsModalOpen(false)}
+            onClick={() => setIsModalOpen(false)}
           />
         </div>
       </Modal>
@@ -78,14 +78,14 @@ export function ModalExampleTop() {
         view="primary"
         label="Окно сверху"
         width="default"
-        onClick={(): void => setIsModalOpen(true)}
+        onClick={() => setIsModalOpen(true)}
       />
       <Modal
         isOpen={isModalOpen}
         hasOverlay
         position="top"
-        onClickOutside={(): void => setIsModalOpen(false)}
-        onEsc={(): void => setIsModalOpen(false)}
+        onClickOutside={() => setIsModalOpen(false)}
+        onEsc={() => setIsModalOpen(false)}
       >
         <Text as="p" size="s" view="secondary">
           Я окно
@@ -99,7 +99,7 @@ export function ModalExampleTop() {
             view="primary"
             label="Ясно-понятно"
             width="default"
-            onClick={(): void => setIsModalOpen(false)}
+            onClick={() => setIsModalOpen(false)}
           />
         </div>
       </Modal>
@@ -121,13 +121,13 @@ export function ModalExampleCenter() {
         view="primary"
         label="Окно по центру"
         width="default"
-        onClick={(): void => setIsModalOpen(true)}
+        onClick={() => setIsModalOpen(true)}
       />
       <Modal
         isOpen={isModalOpen}
         hasOverlay
-        onClickOutside={(): void => setIsModalOpen(false)}
-        onEsc={(): void => setIsModalOpen(false)}
+        onClickOutside={() => setIsModalOpen(false)}
+        onEsc={() => setIsModalOpen(false)}
       >
         <Text as="p" size="s" view="secondary">
           Я окно
@@ -141,7 +141,7 @@ export function ModalExampleCenter() {
             view="primary"
             label="И тут всё понятно"
             width="default"
-            onClick={(): void => setIsModalOpen(false)}
+            onClick={() => setIsModalOpen(false)}
           />
         </div>
       </Modal>
@@ -170,13 +170,13 @@ export function ModalExampleNoOverlay() {
         view="primary"
         label="Без подложки"
         width="default"
-        onClick={(): void => setIsModalOpen(true)}
+        onClick={() => setIsModalOpen(true)}
       />
       <Modal
         isOpen={isModalOpen}
         hasOverlay={false}
-        onClickOutside={(): void => setIsModalOpen(false)}
-        onEsc={(): void => setIsModalOpen(false)}
+        onClickOutside={() => setIsModalOpen(false)}
+        onEsc={() => setIsModalOpen(false)}
       >
         <Text as="p" size="s" view="secondary">
           Я окно
@@ -190,7 +190,7 @@ export function ModalExampleNoOverlay() {
             view="primary"
             label="Закройся!"
             width="default"
-            onClick={(): void => setIsModalOpen(false)}
+            onClick={() => setIsModalOpen(false)}
           />
         </div>
       </Modal>
