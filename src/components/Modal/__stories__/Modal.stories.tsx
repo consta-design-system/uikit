@@ -65,11 +65,12 @@ export function Playground(): JSX.Element {
         {
           <>
             <Text as="p" size="s" view="secondary" className={cnModalStories('Title')}>
-              Заголовок модалки
+              Это заголовок модального окна
             </Text>
             <Text as="p" size="m" view="primary" className={cnModalStories('Body')}>
-              Описание в теле модалки. Здесь может находиться какая-то информация. Lorem ipsum dolor
-              sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+              Это содержимое модального окна. Здесь может быть что угодно: текст, изображение, форма
+              или таблица. Всё, что хочется вынести из контекста и показать поверх основной
+              страницы.
             </Text>
           </>
         }
