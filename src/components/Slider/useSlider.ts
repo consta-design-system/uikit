@@ -19,7 +19,16 @@ type PositionType = {
   y: number;
 };
 
-export default (props: SliderProps, { clearActive }: { clearActive: () => void }) => {
+type UseSliderArguments = {
+  clearActive: () => void;
+  pointValueOne: React.MutableRefObject<HTMLButtonElement | null>;
+  pointValueTwo: React.MutableRefObject<HTMLButtonElement | null>;
+};
+
+export default (
+  props: SliderProps,
+  { clearActive, pointValueOne, pointValueTwo }: UseSliderArguments,
+) => {
   const { step = 1, min, max, value, disabled, onChange, onChangeCommitted, onAfterChange } = props;
 
   const minValue = max > min ? min : 0;
@@ -47,8 +56,6 @@ export default (props: SliderProps, { clearActive }: { clearActive: () => void }
   const touchId: MutableRefObject<number | null> = React.useRef<number>(null);
   const previousIndex = React.useRef<number>(0);
   const localStep = useRef(step || 0);
-  const pointValueOne = useRef<HTMLButtonElement | null>(null);
-  const pointValueTwo = useRef<HTMLButtonElement | null>(null);
 
   const sliderRef = React.useRef<HTMLDivElement>(null);
 
@@ -68,9 +75,9 @@ export default (props: SliderProps, { clearActive }: { clearActive: () => void }
       temporaryValue = clamp(temporaryValue, minValue, maxValue);
       let activeIndex = 0;
 
-      if (range.current) {
+      if (range.current && Array.isArray(values.current)) {
         if (!move) {
-          activeIndex = findClosest(values.current as number[], temporaryValue);
+          activeIndex = findClosest(values.current, temporaryValue);
         } else {
           activeIndex = previousIndex.current;
         }
@@ -78,14 +85,14 @@ export default (props: SliderProps, { clearActive }: { clearActive: () => void }
         if (disabled) {
           temporaryValue = clamp(
             temporaryValue,
-            (values.current as number[])[activeIndex - 1] || -Infinity,
-            (values.current as number[])[activeIndex + 1] || Infinity,
+            values.current[activeIndex - 1] || -Infinity,
+            values.current[activeIndex + 1] || Infinity,
           );
         }
 
         const previousValue = temporaryValue;
         const newValue = setValueIndex(
-          values.current as number[],
+          values.current,
           source as number[],
           temporaryValue,
           activeIndex,
@@ -113,7 +120,7 @@ export default (props: SliderProps, { clearActive }: { clearActive: () => void }
 
       moveCount.current += 1;
 
-      if ('buttons' in nativeEvent && (nativeEvent as MouseEvent).buttons === 0) {
+      if ('buttons' in nativeEvent && nativeEvent.buttons === 0) {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         handleTouchEnd(nativeEvent);
         return;
@@ -127,22 +134,20 @@ export default (props: SliderProps, { clearActive }: { clearActive: () => void }
         setDragging(true);
       }
 
-      onChange?.(
-        nativeEvent,
-        Array.isArray(newValue) ? newValue[activeIndex] : newValue,
-        activeIndex,
-      );
-
       if (
         Array.isArray(newValue) && Array.isArray(valueDerivedRef.current)
           ? newValue[0] !== valueDerivedRef.current[0] || newValue[1] !== valueDerivedRef.current[1]
           : newValue !== valueDerivedRef.current
       ) {
+        onChange?.(
+          nativeEvent,
+          Array.isArray(newValue) ? newValue[activeIndex] : newValue,
+          activeIndex,
+        );
+
         setValueState(newValue);
 
-        if (onChangeCommitted) {
-          onChangeCommitted(nativeEvent, Array.isArray(newValue) ? newValue : [newValue]);
-        }
+        onChangeCommitted?.(nativeEvent, Array.isArray(newValue) ? newValue : [newValue]);
 
         const rect = (activeIndex || !range.current
           ? pointValueTwo
@@ -167,9 +172,13 @@ export default (props: SliderProps, { clearActive }: { clearActive: () => void }
       if (!fingerNewValue) return;
       const { newValue, activeIndex } = fingerNewValue;
 
-      if (onChangeCommitted) {
-        onChangeCommitted(nativeEvent, Array.isArray(newValue) ? newValue : [newValue]);
-      }
+      onChange?.(
+        nativeEvent,
+        Array.isArray(newValue) ? newValue[activeIndex] : newValue,
+        activeIndex,
+      );
+
+      onChangeCommitted?.(nativeEvent, Array.isArray(newValue) ? newValue : [newValue]);
       clearActive();
 
       onAfterChange?.(
@@ -179,17 +188,22 @@ export default (props: SliderProps, { clearActive }: { clearActive: () => void }
       );
 
       touchId.current = null;
+      stopListening();
     },
     [getFingerNewValue],
   );
 
   const handleDragStart = useCallback(
-    (nativeEvent: React.MouseEvent | React.TouchEvent) => {
+    (
+      nativeEvent: React.MouseEvent | React.TouchEvent,
+      eventMove: 'touchmove' | 'mousemove',
+      eventEnd: 'touchend' | 'mouseup',
+    ) => {
       const finger = trackFinger(nativeEvent, touchId);
 
       if (!finger) return;
 
-      const fingerNewValue = getFingerNewValue(finger, true, valueDerivedRef.current);
+      const fingerNewValue = getFingerNewValue(finger, false, valueDerivedRef.current);
       if (!fingerNewValue) return;
       const { newValue, activeIndex } = fingerNewValue;
 
@@ -201,10 +215,12 @@ export default (props: SliderProps, { clearActive }: { clearActive: () => void }
         activeIndex,
       );
 
+      onChangeCommitted?.(nativeEvent, Array.isArray(newValue) ? newValue : [newValue]);
+
       moveCount.current = 0;
       const doc = ownerDocument(sliderRef.current);
-      doc.addEventListener('touchmove', handleTouchMove);
-      doc.addEventListener('touchend', handleTouchEnd);
+      doc.addEventListener(eventMove, handleTouchMove);
+      doc.addEventListener(eventEnd, handleTouchEnd);
 
       const rect = (activeIndex || !range.current
         ? pointValueTwo
@@ -226,17 +242,15 @@ export default (props: SliderProps, { clearActive }: { clearActive: () => void }
       if (touch != null) {
         touchId.current = touch.identifier;
       }
-      handleDragStart(nativeEvent);
+      handleDragStart(nativeEvent, 'touchmove', 'touchend');
     },
     [handleDragStart],
   );
 
   const handleMouseDown = useCallback(
     (nativeEvent: React.MouseEvent) => {
-      if (nativeEvent.button !== 0) return;
-
       nativeEvent.preventDefault();
-      handleDragStart(nativeEvent);
+      handleDragStart(nativeEvent, 'mousemove', 'mouseup');
     },
     [handleDragStart],
   );
@@ -250,9 +264,7 @@ export default (props: SliderProps, { clearActive }: { clearActive: () => void }
   }, [handleTouchEnd, handleTouchMove]);
 
   React.useEffect(() => {
-    if (disabled) {
-      stopListening();
-    }
+    if (disabled) stopListening();
   }, [disabled, stopListening]);
 
   useEffect(() => {
@@ -260,15 +272,21 @@ export default (props: SliderProps, { clearActive }: { clearActive: () => void }
       ? getDividedValue(step, maxValue - minValue)
       : step || 0;
     setDividedValue(getDividedValue(step, maxValue - minValue));
+    setValueState((prev) =>
+      Array.isArray(prev)
+        ? prev.map((el) => roundValueToStep(el, localStep.current, minValue))
+        : roundValueToStep(prev, localStep.current, minValue),
+    );
   }, [step, maxValue, minValue]);
 
   useEffect(() => {
-    if (Array.isArray(value)) {
-      setValueState(value);
-      range.current = true;
-    } else if (!Array.isArray(value) && value !== undefined) {
-      setValueState(value);
-      range.current = false;
+    if (value) {
+      range.current = Array.isArray(value);
+      setValueState(
+        Array.isArray(value)
+          ? value.map((el) => roundValueToStep(el, localStep.current, minValue))
+          : roundValueToStep(value, localStep.current, minValue),
+      );
     }
   }, [value]);
 

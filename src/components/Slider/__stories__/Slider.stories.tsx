@@ -11,12 +11,7 @@ import {
   eventInterceptorMap,
   EventInterceptorProvider,
 } from '../../EventInterceptor/EventInterceptor';
-import {
-  TextField,
-  TextFieldPropOnChange,
-  textFieldPropSize,
-  textFieldPropSizeDefault,
-} from '../../TextField/TextField';
+import { TextField, textFieldPropSize, textFieldPropSizeDefault } from '../../TextField/TextField';
 import { Slider } from '../Slider';
 
 import mdx from './Slider.docs.mdx';
@@ -32,7 +27,7 @@ const defaultKnobs = () => ({
   max: number('maxValue', 200),
   withTooltip: boolean('withTooltip', true),
   range: boolean('range', false),
-  prefix: boolean('prefix', false),
+  prefix: boolean('prefix', true),
   suffix: boolean('suffix', false),
 });
 
@@ -52,9 +47,12 @@ export function Playground() {
     ...props
   } = defaultKnobs();
   const [value, setValue] = useState([50]);
+  const [inputValue, setInputValue] = useState<string>();
 
-  const handleChange: TextFieldPropOnChange = (e) =>
-    setValue((prev) => (prev.length > 1 ? [Number(e.value), prev[1]] : [Number(e.value)]));
+  const handleChange = () => {
+    setValue((prev) => (prev.length > 1 ? [Number(inputValue), prev[1]] : [Number(inputValue)]));
+    setInputValue(undefined);
+  };
 
   useEffect(() => {
     setValue(range ? [0, 50] : [50]);
@@ -70,17 +68,19 @@ export function Playground() {
           {...props}
           prefix={
             prefix &&
+            !range &&
             (({ value }) => (
               <TextField
                 type="number"
                 size={size}
                 min={min}
                 max={max}
-                step={step}
-                value={(Array.isArray(value) ? value[0] : value || 0).toString()}
+                step={customStep ? 1 : step}
+                value={inputValue || (Array.isArray(value) ? value[0] : value || 0).toString()}
                 className={cnSliderStories('textfield', { prefix })}
-                onChange={handleChange}
-                disabled={disabled || range}
+                onChange={(e) => setInputValue(e.value || '0')}
+                onBlur={handleChange}
+                disabled={disabled}
                 required
               />
             ))

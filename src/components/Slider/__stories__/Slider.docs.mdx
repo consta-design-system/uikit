@@ -57,7 +57,7 @@ import { IconSettings } from '../../../icons/IconSettings/IconSettings';
 ### Минимальное и максимальное значение ползунка
 
 Минимальное и максимальное значение устанавливается атрибутами min и max
-Если минимальньное значение больше, чем максимальное, что устанавливаются стандартные значение - min = 0, max=100
+Если минимальное значение больше, чем максимальное, что устанавливаются стандартные значение - min = 0, max=100
 
 ### Префикс и суффикс
 
@@ -65,21 +65,16 @@ import { IconSettings } from '../../../icons/IconSettings/IconSettings';
 Суффикс отвечает за заполнение слота после ползунка (в который так же можно передать инпут или иконку)<Slider
 min={0}
 max={100}
-prefix={(({ value }) => (<TextField value={(Array.isArray(value) ? value[0] : value).toString()} />
-))
-}
+prefix={({ value }) => (<TextField value={(Array.isArray(value) ? value[0] : value).toString()} />)}
 suffix={
 <IconSettings />}
 withTooltip
 />
-<Slider 
-  min={0} 
-  max={100} 
-  prefix={<IconSettings />
-}
-suffix={(({ value }) => (
-<TextField value={(Array.isArray(value) ? value[0] : value).toString()} />
-))}
+<Slider
+  min={0}
+  max={100}
+  prefix={<IconSettings />}
+suffix={({ value }) => (<TextField value={(Array.isArray(value) ? value[0] : value).toString()} />)}
 withTooltip
 />
 
@@ -94,10 +89,7 @@ withTooltip
 <Slider min={0} max={100} step={10} value={[20, 70]} withTooltip division disabled /><Slider
 min={0}
 max={100}
-prefix={(({ value }) => (
-<TextField value={(Array.isArray(value) ? value[0] : value).toString()} />
-))
-}
+prefix={({ value }) => (<TextField value={(Array.isArray(value) ? value[0] : value).toString()} />)}
 value={50}
 suffix={
 <IconSettings />}

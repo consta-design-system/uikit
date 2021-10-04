@@ -46,9 +46,9 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>((props, ref)
   const { className, step = 1, disabled, withTooltip, division, prefix, suffix } = props;
   const {
     isActiveOne,
-    setIsActiveOne,
+    changerActiveOne,
     isActiveTwo,
-    setIsActiveTwo,
+    changerActiveTwo,
     pointValueOne,
     pointValueTwo,
     clearActive,
@@ -89,15 +89,12 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>((props, ref)
       >
         {division && !!step && (
           <div className={cnSlider('Input-divided', { disabled })}>
-            {dividedValue?.map((item: number, index: number) => (
+            {dividedValue?.map((item, index) => (
               <div
                 key={index}
                 className={cnSlider('Input-divide', {
                   fill: checkFill(
-                    dividedValue?.reduce(
-                      (acc: any, item: any, i: number) => (i <= index - 1 ? acc + item : acc),
-                      0,
-                    ),
+                    dividedValue?.reduce((acc, item, i) => (i <= index - 1 ? acc + item : acc), 0),
                     valueDerived,
                     minValue,
                   ),
@@ -133,8 +130,8 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>((props, ref)
             <button
               type="button"
               aria-label="Left pin"
-              onMouseDown={() => setIsActiveOne(true)}
-              onTouchStart={() => setIsActiveOne(true)}
+              onMouseDown={changerActiveOne.on}
+              onTouchStart={changerActiveOne.on}
               className={cnSlider('Point', { isActive: isActiveOne || isActiveTwo, disabled })}
               ref={pointValueOne}
               style={{
@@ -164,8 +161,8 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>((props, ref)
         <button
           type="button"
           aria-label="Right pin"
-          onMouseDown={() => setIsActiveTwo(true)}
-          onTouchStart={() => setIsActiveTwo(true)}
+          onMouseDown={changerActiveTwo.on}
+          onTouchStart={changerActiveTwo.on}
           className={cnSlider('Point', { isActive: isActiveOne || isActiveTwo, disabled })}
           ref={pointValueTwo}
           style={{
