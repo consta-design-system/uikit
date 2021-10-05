@@ -1,35 +1,43 @@
 .ProgressStepBar {
+  position: relative;
   display: inline-flex;
   justify-content: space-between;
-  position: relative;
 
   &_direction {
     &_horizontal {
-      width: 100%;
       flex-direction: row;
-
-      & .ProgressStepBar-Point_size_xs {
-        margin-bottom: var(--space-2xs);
-      }
-
-      & .ProgressStepBar-Point_size_s,
-      & .ProgressStepBar-Point_size_m {
-        margin-bottom: var(--space-xs);
-      }
+      width: 100%;
     }
 
     &_vertical {
-      height: 100%;
       flex-direction: column;
+      height: 100%;
+
+      & .ProgressStepBar-Point {
+        margin-right: var(--space-xs);
+      }
     }
   }
 
-  &-Step {
-    position: relative;
-    display: inline-flex;
-    align-items: flex-start;
-    width: 100%;
-    height: 100%;
+  &-Line {
+    position: absolute;
+    background-color: var(--color-bg-system);
+
+    &_direction {
+      &_horizontal {
+        top: var(--step-line-padding);
+        left: 0;
+        width: var(--line-size);
+        height: var(--step-line-size);
+      }
+
+      &_vertical {
+        top: 0;
+        left: var(--step-line-padding);
+        width: var(--step-line-size);
+        height: var(--line-size);
+      }
+    }
 
     &_size {
       &_xs {
@@ -47,96 +55,157 @@
         --step-line-padding: calc((var(--space-xl) - var(--space-2xs)) * 0.5);
       }
     }
+  }
+
+  &-ProgressLine {
+    position: absolute;
+    z-index: var(--progress-line-index);
+    top: 0;
+    left: 0;
+    background-color: var(--progress-line-color);
+    transition: width var(--progress-line-resize), height var(--progress-line-resize);
+
+    &_direction {
+      &_horizontal {
+        width: var(--progress-line-size);
+        height: 100%;
+      }
+
+      &_vertical {
+        width: 100%;
+        height: var(--progress-line-size);
+      }
+    }
+
+    &_status {
+      &_normal {
+        --progress-line-color: var(--color-bg-normal);
+      }
+
+      &_success {
+        --progress-line-color: var(--color-bg-success);
+      }
+
+      &_warning {
+        --progress-line-color: var(--color-bg-warning);
+      }
+
+      &_alert {
+        --progress-line-color: var(--color-bg-alert);
+      }
+    }
+  }
+
+  &-Step {
+    position: relative;
+    display: inline-flex;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
 
     &_direction {
       &_horizontal {
         flex-direction: column;
-
-        &::before,
-        &::after {
-          left: 0;
-          top: var(--step-line-padding);
-          height: var(--step-line-size);
-          width: 100%;
-        }
       }
 
       &_vertical {
         flex-direction: row;
 
-        &::before,
-        &::after {
-          top: 0;
-          left: var(--step-line-padding);
-          width: var(--step-line-size);
-          height: 100%;
+        & .ProgressStepBar-Content_size_xs .ProgressStepBar-Label {
+          margin-bottom: var(--space-2xs);
+        }
+
+        & .ProgressStepBar-Content_size_s .ProgressStepBar-Label {
+          margin-bottom: var(--space-xs);
+        }
+
+        & .ProgressStepBar-Content_size_m .ProgressStepBar-Label {
+          margin-bottom: var(--space-s);
         }
       }
     }
 
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-    }
-
-    &::after {
-      background-color: var(--point-background);
-    }
-
-    &::before {
-      background-color: var(--color-bg-system);
-    }
-
     &_position {
-      &_start.ProgressStepBar-Step_direction_horizontal {
-        align-items: flex-start;
+      &_start {
+        flex: 1;
+
+        &.ProgressStepBar-Step_direction_horizontal,
+        & .ProgressStepBar-Content {
+          align-items: flex-start;
+          text-align: left;
+        }
       }
 
-      &_center.ProgressStepBar-Step_direction_horizontal {
-        align-items: center;
+      &_center {
+        flex: 2;
+
+        &.ProgressStepBar-Step_direction_horizontal,
+        & .ProgressStepBar-Content {
+          align-items: center;
+          text-align: center;
+        }
       }
 
-      &_end.ProgressStepBar-Step_direction_horizontal {
-        align-items: flex-end;
+      &_end {
+        flex: 1;
+
+        &.ProgressStepBar-Step_direction_horizontal,
+        & .ProgressStepBar-Content {
+          align-items: flex-end;
+          text-align: right;
+        }
       }
     }
 
     &_status {
       &_system {
         --point-background: var(--color-bg-system);
+        --point-content-color: var(--color-typo-secondary);
       }
 
       &_normal {
         --point-background: var(--color-bg-normal);
+        --point-content-color: var(--color-bg-default);
       }
 
       &_success {
         --point-background: var(--color-bg-success);
+        --point-content-color: var(--color-bg-default);
       }
 
       &_warning {
         --point-background: var(--color-bg-warning);
+        --point-content-color: var(--color-bg-default);
       }
 
       &_alert {
         --point-background: var(--color-bg-alert);
+        --point-content-color: var(--color-bg-default);
       }
+    }
+
+    & .ProgressStepBar-Point-Text {
+      color: var(--point-content-color);
+    }
+
+    & .ProgressSpin {
+      stroke: var(--point-content-color);
     }
   }
 
   &-Point {
+    z-index: 10;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     width: var(--point-size);
     height: var(--point-size);
-    border: none;
     padding: 0;
-    cursor: pointer;
     color: var(--color-bg-default);
     background-color: var(--point-background);
+    border: none;
     border-radius: calc(var(--point-size) * 0.5);
+    cursor: pointer;
     transition: background-color 0.3s;
 
     &-Text {
@@ -144,18 +213,8 @@
       transition: color 0.3s;
     }
 
-    & .ProgressSpin.Timer-Progress {
+    & .ProgressSpin {
       transition: stroke 0.3s;
-    }
-
-    &:not(.ProgressStepBar-Point_status_system) {
-      & .ProgressStepBar-Point-Text {
-        color: var(--color-bg-default);
-      }
-
-      & .ProgressSpin.Timer-Progress {
-        stroke: var(--color-bg-default);
-      }
     }
 
     & .Timer-Counter {
@@ -174,6 +233,12 @@
       &_m {
         --point-size: var(--space-xl);
       }
+    }
+  }
+
+  &-Content {
+    &_size_xs {
+      margin-top: -4px;
     }
   }
 }

@@ -19,17 +19,19 @@ const defaultKnobs = () => ({
   size: select('size', propSize, propSizeDefault),
   direction: select('direction', propDirection, propDirectionDefault),
   status: select('status', propStatus, propStatusDefault),
+  activeStep: select('activeStep', [1, 2, 3, 4], 1),
 });
 
 export function Playground() {
-  const { size, direction, status } = defaultKnobs();
+  const { size, direction, status, activeStep } = defaultKnobs();
 
   const example = [
     {
       label: 'Первый пункт',
+      id: 1,
       point: 1,
       status,
-      progress: 50,
+      lineStatus: 'normal',
       tooltipContent: `Небольшое описание
             выполнения или состояния
             текущего этапа`,
@@ -37,8 +39,10 @@ export function Playground() {
     {
       label: 'Второй пункт',
       point: 2,
+      id: 2,
       status,
       progress: 50,
+      lineStatus: 'warning',
       tooltipContent: `Небольшое описание
             выполнения или состояния
             текущего этапа`,
@@ -46,8 +50,19 @@ export function Playground() {
     {
       label: 'Третий пункт',
       point: 3,
+      id: 3,
       status,
       progress: 50,
+      lineStatus: 'alert',
+      tooltipContent: `Небольшое описание
+            выполнения или состояния
+            текущего этапа`,
+    },
+    {
+      label: 'Четвертый пункт',
+      point: 4,
+      id: 4,
+      status,
       tooltipContent: `Небольшое описание
             выполнения или состояния
             текущего этапа`,
@@ -60,7 +75,7 @@ export function Playground() {
       direction={direction}
       size={size}
       steps={example}
-      getItemKey={(el) => el.toString()}
+      activeStepId={activeStep}
     />
   );
 }

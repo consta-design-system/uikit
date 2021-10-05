@@ -1,7 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { forwardRef, useRef, useState } from 'react';
 
+import { ProgressSpin } from '../../ProgressSpin/ProgressSpin';
 import { Text } from '../../Text/Text';
-import { Timer } from '../../Timer/Timer';
 import { Tooltip } from '../../Tooltip/Tooltip';
 import {
   cnProgressStepBar,
@@ -24,6 +24,8 @@ const propPositionDefault: PropPosition = propPosition[0];
 
 type Props<ITEM> = {
   step: ITEM;
+  isActiveStep?: boolean;
+  isCompletedStep?: boolean;
   position?: PropPosition;
   direction: PropDirection;
   size: PropSize;
@@ -36,14 +38,21 @@ type Props<ITEM> = {
   getItemStatus: PropGetItemStatus<ITEM>;
 };
 
-type StepComponent = <ITEM = DefaultItem>(props: Props<ITEM>) => React.ReactElement | null;
+type StepComponent = <ITEM = DefaultItem>(
+  props: Props<ITEM> & React.RefAttributes<HTMLButtonElement>,
+) => React.ReactElement | null;
 
-export const ProgressStepBarItem: StepComponent = (props) => {
+function ProgressStepBarItemRender<ITEM = DefaultItem>(
+  props: Props<ITEM>,
+  ref: React.Ref<HTMLButtonElement>,
+) {
   const {
     step,
     direction,
     size,
     position = propPositionDefault,
+    isCompletedStep,
+    isActiveStep,
     getItemContent,
     getItemLabel,
     getItemOnClick,
@@ -68,7 +77,7 @@ export const ProgressStepBarItem: StepComponent = (props) => {
         size={size === 's' ? '2xs' : 'xs'}
         weight="bold"
       >
-        {getItemPoint(step)}
+        {getItemPoint(step)?.toString()[0]}
       </Text>
     );
 
@@ -85,10 +94,13 @@ export const ProgressStepBarItem: StepComponent = (props) => {
           direction,
           position,
           status: getItemStatus(step) || propStatusDefault,
+          completed: isCompletedStep,
+          active: isActiveStep,
         })}
         {...otherProps}
       >
         <button
+          ref={ref}
           type="button"
           onMouseEnter={() => setIsTooltipHidden(false)}
           onMouseLeave={() => setIsTooltipHidden(true)}
@@ -97,15 +109,16 @@ export const ProgressStepBarItem: StepComponent = (props) => {
           })}
           onClick={handleClick}
         >
-          {size !== 'xs' &&
-            (getItemProgress(step) ? (
-              <Timer size={size} progress={getItemProgress(step)} />
-            ) : (
-              PointContent
-            ))}
+          {size !== 'xs' && (getItemProgress(step) ? <ProgressSpin size={size} /> : PointContent)}
         </button>
-        <div className={cnProgressStepBar('Content')}>
-          <Text ref={anchorRef} size={size === 'm' ? 'm' : 's'} view="primary">
+        <div className={cnProgressStepBar('Content', { size })}>
+          <Text
+            className={cnProgressStepBar('Label')}
+            ref={anchorRef}
+            size={size}
+            lineHeight={size === 's' ? 'xs' : size}
+            view="primary"
+          >
             {getItemLabel(step)}
           </Text>
           {getItemContent(step)}
@@ -122,4 +135,6 @@ export const ProgressStepBarItem: StepComponent = (props) => {
       )}
     </>
   );
-};
+}
+
+export const ProgressStepBarItem = forwardRef(ProgressStepBarItemRender) as StepComponent;
