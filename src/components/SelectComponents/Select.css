@@ -38,27 +38,23 @@
   &_labelPosition {
     &_top {
       flex-direction: column;
+
+      & > *:not(:last-child) {
+        margin-bottom: var(--space-xs);
+      }
     }
 
     &_left {
       flex-direction: row;
 
-      & > *:not(:last-child) {
-        margin-right: var(--space-s);
-      }
-    }
-  }
-
-  &-Label {
-    &_labelPosition {
-      &_top {
-        margin-bottom: var(--space-xs);
-      }
-
-      &_left {
+      & .Select-Label {
         display: inline-flex;
         align-items: center;
         height: var(--input-height);
+      }
+
+      & > *:not(:last-child) {
+        margin-right: var(--space-s);
       }
     }
   }
@@ -70,7 +66,7 @@
 
     & .Select-Caption {
       margin-top: var(--space-2xs);
-      margin-left: calc(var(--input-space) + var(--control-border-width));
+      margin-left: var(--caption-margin-left);
     }
   }
 
@@ -79,29 +75,32 @@
     display: flex;
     width: 100%;
 
-    &_view_default.Select-SelectContainer_status {
-      &_alert .Select-Control {
-        border-color: var(--color-bg-alert);
+    &_view_default {
+      & .Select-Control {
+        --container-border-color: var(--color-control-bg-border-default);
+        padding: 0;
+        color: var(--color-control-typo-default);
+        background: var(--color-control-bg-default);
+        border: var(--control-border-width) solid var(--container-border-color);
+        border-radius: var(--control-radius);
+
+        &:hover {
+          border-color: var(--color-control-bg-border-default-hover);
+        }
       }
 
-      &_success .Select-Control {
-        border-color: var(--color-bg-success);
-      }
+      &.Select-SelectContainer_status {
+        &_alert .Select-Control {
+          --container-border-color: var(--color-bg-alert);
+        }
 
-      &_warning .Select-Control {
-        border-color: var(--color-bg-warning);
-      }
-    }
+        &_success .Select-Control {
+          --container-border-color: var(--color-bg-success);
+        }
 
-    &_view_default .Select-Control {
-      padding: 0;
-      color: var(--color-control-typo-default);
-      background: var(--color-control-bg-default);
-      border: var(--control-border-width) solid var(--color-control-bg-border-default);
-      border-radius: var(--control-radius);
-
-      &:hover {
-        border-color: var(--color-control-bg-border-default-hover);
+        &_warning .Select-Control {
+          --container-border-color: var(--color-bg-warning);
+        }
       }
     }
 
@@ -273,7 +272,7 @@
 
   &_view_clear {
     & .Select-Caption {
-      margin-left: 0;
+      --caption-margin-left: 0;
     }
   }
 

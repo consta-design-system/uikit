@@ -66,10 +66,10 @@ describe('Компонент Button', () => {
       });
     });
     describe('проверка status', () => {
-      textFieldPropStatus.forEach((state) => {
-        it(`присваивает класс для state=${state}`, () => {
-          renderComponent({ state });
-          expect(getInputContainer()).toHaveClass(cnTextField('InputContainer', { state }));
+      textFieldPropStatus.forEach((status) => {
+        it(`присваивает класс для status=${status}`, () => {
+          renderComponent({ status });
+          expect(getInputContainer()).toHaveClass(cnTextField('InputContainer', { status }));
         });
       });
     });
@@ -85,7 +85,7 @@ describe('Компонент Button', () => {
       textFieldPropWidth.forEach((width) => {
         it(`присваивает класс для width=${width}`, () => {
           renderComponent({ width });
-          expect(getInputContainer()).toHaveClass(cnTextField('InputContainer', { width }));
+          expect(getRender()).toHaveClass(cnTextField({ width }));
         });
       });
     });

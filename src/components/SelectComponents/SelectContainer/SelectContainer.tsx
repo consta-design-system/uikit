@@ -50,7 +50,7 @@ export const SelectContainer = forwardRef<HTMLDivElement, SelectContainerProps>(
   return (
     <div className={cnSelect({ labelPosition, size, view }, [className])} {...otherProps}>
       {label && (
-        <FieldLabel className={cnSelect('Label', { labelPosition })} size={size}>
+        <FieldLabel className={cnSelect('Label')} size={size}>
           {label}
         </FieldLabel>
       )}

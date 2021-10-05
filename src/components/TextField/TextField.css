@@ -3,6 +3,10 @@
   position: relative;
   display: inline-flex;
 
+  &_width_full {
+    width: 100%;
+  }
+
   &_size {
     &_xs {
       --input-height: var(--control-height-xs);
@@ -32,27 +36,23 @@
   &_labelPosition {
     &_top {
       flex-direction: column;
+
+      & > *:not(:last-child) {
+        margin-bottom: var(--space-xs);
+      }
     }
 
     &_left {
       flex-direction: row;
 
-      & > *:not(:last-child) {
-        margin-right: var(--space-s);
-      }
-    }
-  }
-
-  &-Label {
-    &_labelPosition {
-      &_top {
-        margin-bottom: var(--space-xs);
-      }
-
-      &_left {
+      & .TextField-Label {
         display: inline-flex;
         align-items: center;
         height: var(--input-height);
+      }
+
+      & > *:not(:last-child) {
+        margin-right: var(--space-s);
       }
     }
   }
@@ -64,13 +64,13 @@
 
     & .TextField-Caption {
       margin-top: var(--space-2xs);
-      margin-left: calc(var(--input-space) + var(--control-border-width));
+      margin-left: var(--caption-margin-left);
     }
   }
 
   &_view_clear {
     & .TextField-Caption {
-      margin-left: 0;
+      --caption-margin-left: 0;
     }
   }
 
@@ -83,10 +83,6 @@
     font-family: var(--font-primary);
     font-weight: var(--font-weight-text-regular);
     transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
-
-    &_width_full {
-      width: 100%;
-    }
 
     &_view_clear,
     &_view_clear:hover,
@@ -124,27 +120,28 @@
     }
 
     &_view_default {
+      --container-border-color: var(--color-control-bg-border-default);
       padding: 0 var(--input-space);
       color: var(--color-control-typo-default);
       background: var(--color-control-bg-default);
-      border: var(--control-border-width) solid var(--color-control-bg-border-default);
+      border: var(--control-border-width) solid var(--container-border-color);
       border-radius: var(--control-radius);
 
       &:hover {
         border-color: var(--color-control-bg-border-default-hover);
       }
 
-      &.TextField-InputContainer_state {
+      &.TextField-InputContainer_status {
         &_alert {
-          border-color: var(--color-bg-alert);
+          --container-border-color: var(--color-bg-alert);
         }
 
         &_success {
-          border-color: var(--color-bg-success);
+          --container-border-color: var(--color-bg-success);
         }
 
         &_warning {
-          border-color: var(--color-bg-warning);
+          --container-border-color: var(--color-bg-warning);
         }
       }
 
