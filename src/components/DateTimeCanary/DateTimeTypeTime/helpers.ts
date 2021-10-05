@@ -19,9 +19,9 @@ import { isInMinMaxDade } from '../../../utils/date';
 import { getLabelHours, getLabelMinutes, getLabelSeconds } from '../helpers';
 
 export const dateTimeTimePropLocaleDefault = {
-  hours: 'Часы',
-  minutes: 'Мин.',
-  seconds: 'Сек.',
+  hours: 'Час',
+  minutes: 'Мин',
+  seconds: 'Сек',
 } as const;
 
 type DateTimeTimePropOnChange = (props: {

@@ -1,15 +1,13 @@
 import React from 'react';
-import { startOfWeek } from 'date-fns';
-import ruLocale from 'date-fns/locale/ru';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { DateTime } from '../../../DateTime';
+import { DateTime } from '../../../DateTimeCanary';
 
-export const DateTimeExampleDateMin = () => {
+export const DateTimeExampleMultiplicity = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <DateTime minDate={startOfWeek(new Date(), { locale: ruLocale })} maxDate={new Date()} />
+      <DateTime type="time" multiplicityHours={2} multiplicityMinutes={5} multiplicitySeconds={0} />
     </StoryBookExample>
   );
 };

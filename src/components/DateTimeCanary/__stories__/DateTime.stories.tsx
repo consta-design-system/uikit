@@ -8,7 +8,7 @@ import zhCNLocale from 'date-fns/locale/zh-CN';
 
 import { getSizeByMap } from '../../../utils/getSizeByMap';
 import { createMetadata } from '../../../utils/storybook';
-import { DateTime, DateTimePropLocale } from '../DateTime';
+import { DateTime, DateTimePropLocale } from '../DateTimeCanary';
 import {
   dateTimePropType,
   dateTimePropTypeDefault,

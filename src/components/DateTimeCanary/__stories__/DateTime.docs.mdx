@@ -1,0 +1,296 @@
+import {
+  DateTimeExampleViewClassic,
+  DateTimeExampleViewBook,
+  DateTimeExampleViewSlider,
+} from './examples/DateTimeExampleView/DateTimeExampleView';
+
+import { DateTimeExampleCurrentVisibleDate } from './examples/DateTimeExampleCurrentVisibleDate/DateTimeExampleCurrentVisibleDate';
+
+import {
+  DateTimeExampleTypeYear,
+  DateTimeExampleTypeMonth,
+  DateTimeExampleTypeDate,
+  DateTimeExampleTypeDateTime,
+  DateTimeExampleTypeTime,
+} from './examples/DateTimeExampleType/DateTimeExampleType';
+
+import { DateTimeExampleDateMin } from './examples/DateTimeExampleDateMin/DateTimeExampleDateMin';
+
+import { DateTimeExampleMultiplicity } from './examples/DateTimeExampleMultiplicity/DateTimeExampleMultiplicity';
+
+import { DateTimeExamplePeriod } from './examples/DateTimeExamplePeriod/DateTimeExamplePeriod';
+
+import { DateTimeExampleLocale } from './examples/DateTimeExampleLocale/DateTimeExampleLocale';
+
+import { DateTimeExampleEvents } from './examples/DateTimeExampleEvents/DateTimeExampleEvents';
+
+# DateTime (Canary)
+
+DateTime нужен, чтобы пользователь мог выбрать дату или период.
+
+- [Внешний вид](#внешний-вид)
+  - [Какой месяц показывать](#какой-месяц-показывать)
+- [Выбор даты](#выбор-даты)
+  - [Ограничение выбора](#ограничение-выбора)
+- [События на календаре](#события-на-календаре)
+- [Локализация](#локализация)
+- [Список свойств](#свойства)
+
+## Внешний вид
+
+За внешний вид отвечает свойство `view`. Варианты:
+
+- класический вид — `'classic'` (отображается по умолчанию),
+- в виде двух страничек — `'book'`,
+- в виде двух страничек со слайдером — `'slider'`.
+
+**view="classic"**
+
+<DateTimeExampleViewClassic />
+
+```tsx
+<DateTime view="classic" />
+```
+
+**view="book"**
+
+<DateTimeExampleViewBook />
+
+```tsx
+<DateTime view="book" />
+```
+
+**view="slider"**
+
+<DateTimeExampleViewSlider />
+
+```tsx
+<DateTime view="slider" />
+```
+
+## Тип календаря
+
+За тип отвечает свойство `type`, моджет принимать значения `'date'`, `'month'`, `'year'`, `'time'`, `'date-time'`
+
+**type="year"**
+
+<DateTimeExampleTypeYear />
+
+```tsx
+<DateTime type="year" />
+```
+
+**type="month"**
+
+<DateTimeExampleTypeMonth />
+
+```tsx
+<DateTime type="month" />
+```
+
+**type="date"**
+
+<DateTimeExampleTypeDate />
+
+```tsx
+<DateTime type="date" />
+```
+
+**type="date-time"**
+
+<DateTimeExampleTypeDateTime />
+
+```tsx
+<DateTime type="date-time" />
+```
+
+**type="time"**
+
+<DateTimeExampleTypeTime />
+
+```tsx
+<DateTime type="time" />
+```
+
+## Какой месяц показывать
+
+Вы можете выбрать, на какой странице показывать календарь.
+Для этого передайте дату в свойстве `currentVisibleDate`.
+Пользователь увидит страницу, в который входит эта дата.
+
+**Показывает месяц, в который входит начало текущей недели**
+
+<DateTimeExampleCurrentVisibleDate />
+
+```tsx
+<DateTime currentVisibleDate={new Date(2000, 1, 1)} />
+```
+
+## Выбор даты
+
+Выбранная дата передаётся в свойстве `value`.
+
+Пользователь может выбрать одну дату или указать период. Период можно указать только при `type: 'date' | 'month' | 'year'`
+
+Для получения события выбора даты существует свойства `onChange` и `onChangeRange`
+
+> Свойство `value` описано в [DateTimePropValue](#свойства)
+
+> Событие выбора даты описано в [DateTimePropOnChange](#свойства) и в [DateTimePropOnChangeRange](#свойства)
+
+### Пример с выбором периода
+
+<DateTimeExamplePeriod />
+
+```tsx
+export const DateTimeExamplePeriod = () => {
+  const [rangeValue, setRangeValue] = useState<[Date?, Date?]>([]);
+
+  return (
+    <DateTime
+      value={rangeValue}
+      onChangeRange={({ value }) => setRangeValue(value)}
+      view="slider"
+    />
+  );
+};
+```
+
+### Ограничение выбора
+
+Можно установить диапазон, в котором пользователь может выбрать дату в календаре.
+
+Начало диапазона укажите в свойстве `minDate`, конец — в свойстве `maxDate`.
+
+**Календарь с диапазоном дат**
+
+<DateTimeExampleDateMin />
+
+```tsx
+import { startOfWeek } from 'date-fns';
+import ruLocale from 'date-fns/locale/ru';
+
+const minDate = startOfWeek(new Date(), { locale: ruLocale });
+const maxDate = new Date();
+
+export const DateTimeExampleDateMin = () => {
+  const [value, setValue] = useState<Date | undefined>();
+  return (
+    <DateTime
+      type="date-time"
+      minDate={minDate}
+      maxDate={maxDate}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
+  );
+};
+```
+
+## События на календаре
+
+Если какие-то события уже запланированы, укажите их даты в массиве `events`. Тогда их можно будет увидеть на календаре.
+
+**На этой неделе что-то запланировано**
+
+<DateTimeExampleEvents />
+
+```tsx
+import { addDays, startOfWeek } from 'date-fns';
+
+const events = [startOfWeek(new Date(), { locale: ruLocale }), new Date(), addDays(new Date(), 2)];
+
+<DateTime events={events} />;
+```
+
+## Локализация
+
+По умолчанию календарь отображается по-русски. Чтобы поменять язык,
+подключите библиотеку [date-fns](https://date-fns.org/) и укажите локализацию в свойстве `locale`.
+
+**Календарь по-французски**
+
+<DateTimeExampleLocale />
+
+```tsx
+import frLocale from 'date-fns/locale/fr';
+
+const dateTimeLocale = {
+  ...frLocale,
+  words: {
+    hours: 'H',
+    minutes: 'Min',
+    seconds: 'S',
+  },
+};
+
+export const DateTimeExampleLocale = () => {
+  return <DateTime type="date-time" locale={dateTimeLocale} />;
+};
+```
+
+## Настройка вывода времени
+
+Вы моджете указывать время с переодичностью и отключить минуты и секунды за это оствечают свойства:
+
+- `multiplicitySeconds` - кратность секунд
+- `multiplicityMinutes` - кратнось минут
+- `multiplicityHours` - кратность часов
+
+Свойства принимают на вход число, оно укажит переодичность времени, если указать `0` то отключит вывод
+
+<DateTimeExampleMultiplicity />
+
+```tsx
+<DateTime type="time" multiplicityHours={2} multiplicityMinutes={5} multiplicitySeconds={0} />
+```
+
+## Свойства
+
+```ts
+import { Locale } from 'date-fns';
+import ruLocale from 'date-fns/locale/ru';
+
+type DateTimePropValue = Date | [Date?, Date?];
+
+type СapableRangeType = 'date' | 'month' | 'year';
+
+type DateTimePropValue<TYPE> = TYPE extends СapableRangeType ? Date | DateRange : Date;
+
+type DateTimePropOnChange = (props: {
+  value: Date;
+  e: React.MouseEvent<HTMLButtonElement>;
+}) => void;
+
+type DateTimePropOnChangeRange<TYPE> = TYPE extends СapableRangeType
+  ? (props: { value: DateRange; e: React.MouseEvent<HTMLButtonElement> }) => void
+  : never;
+
+type LocaleWords = {
+  words?: {
+    hours?: string;
+    minutes?: string;
+    seconds?: string;
+  };
+};
+
+export type DateTimePropLocale = Locale & LocaleWords;
+```
+
+| Свойство                                            | Тип или варианты значения                              | По умолчанию | Описание                                                          |
+| --------------------------------------------------- | ------------------------------------------------------ | ------------ | ----------------------------------------------------------------- |
+| [`view?`](#внешний-вид)                             | `'classic'`, `'book'`, `'slider'`                      | `'classic'`  | Вид календаря                                                     |
+| [`type?`](#выбор-даты)                              | `'date'`, `'month'`, `'year'`, `'time'`, `'date-time'` | `'date'`     | Тип календаря                                                     |
+| [`value?`](#выбор-даты)                             | `DateTimePropValue`                                    | -            | Выбранная дата или диапазон дат                                   |
+| [`minDate?`](#ограничение-выбора)                   | `Date`                                                 | -            | Ограничение выбора дат по меньшей дате                            |
+| [`maxDate?`](#ограничение-выбора)                   | `Date`                                                 | -            | Ограничение выбора дат по большей дате                            |
+| [`events?`](#события-на-календаре)                  | `Date[]`                                               | -            | События                                                           |
+| [`locale?`](#локализация)                           | `DateTimePropLocale`                                   | `ruLocale`   | Локализация                                                       |
+| [`currentVisibleDate?`](#какой-месяц-показывать)    | `Date`                                                 | `new Date()` | Дата, которая входит в страницу календаря, которую нужно показать |
+| [`onChange?`](#выбор-даты)                          | `DateTimePropOnChange`                                 | -            | Обработчик событий выбора даты                                    |
+| [`onChangeRange?`](#выбор-даты)                     | `DateTimePropOnChangeRange`                            | -            | Обработчик событий выбора диапазона дат                           |
+| [`multiplicitySeconds?`](#настройка-вывода-времени) | `number`                                               | 1            | Периодичность секунд                                              |
+| [`multiplicityMinutes?`](#настройка-вывода-времени) | `number`                                               | 1            | Периодичность минут                                               |
+| [`multiplicityHours?`](#настройка-вывода-времени)   | `number`                                               | 1            | Периодичность часов                                               |
+| `ref?`                                              | `React.Ref<HTMLDivElement>`                            | —            | Ссылка на корневой DOM-элемент компонента                         |
+| `className?`                                        | `string`                                               | —            | Дополнительные CSS-классы                                         |

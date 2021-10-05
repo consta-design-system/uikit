@@ -1,39 +1,45 @@
 import React from 'react';
-import { startOfWeek } from 'date-fns';
-import ruLocale from 'date-fns/locale/ru';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { DateTime } from '../../../DateTime';
+import { DateTime } from '../../../DateTimeCanary';
 
-export const DateTimeExampleView = () => {
+export const DateTimeExampleTypeYear = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <DateTime view="classic" />
+      <DateTime type="year" />
     </StoryBookExample>
   );
 };
 
-export const DateTimeExampleViewTwo = () => {
+export const DateTimeExampleTypeMonth = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <DateTime view="book" />
+      <DateTime type="month" />
     </StoryBookExample>
   );
 };
 
-export const DateTimeExampleViewSlider = () => {
+export const DateTimeExampleTypeDate = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <DateTime view="slider" />
+      <DateTime type="date" />
     </StoryBookExample>
   );
 };
 
-export const DateTimeExampleCurrent = () => {
+export const DateTimeExampleTypeDateTime = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <DateTime currentVisibleDate={startOfWeek(new Date(), { locale: ruLocale })} />
+      <DateTime type="date-time" />
+    </StoryBookExample>
+  );
+};
+
+export const DateTimeExampleTypeTime = () => {
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <DateTime type="time" />
     </StoryBookExample>
   );
 };

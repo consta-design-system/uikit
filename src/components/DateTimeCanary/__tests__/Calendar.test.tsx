@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { DateTime } from '../DateTime';
+import { DateTime } from '../DateTimeCanary';
 import { cnDateTimeItem } from '../DateTimeItem/DateTimeItem';
 
 type DateTimeProps = React.ComponentProps<typeof DateTime>;

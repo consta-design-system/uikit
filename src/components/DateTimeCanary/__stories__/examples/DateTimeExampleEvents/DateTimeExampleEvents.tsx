@@ -4,7 +4,7 @@ import ruLocale from 'date-fns/locale/ru';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { DateTime } from '../../../DateTime';
+import { DateTime } from '../../../DateTimeCanary';
 
 const events = [startOfWeek(new Date(), { locale: ruLocale }), new Date(), addDays(new Date(), 2)];
 
