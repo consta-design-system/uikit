@@ -3,6 +3,7 @@ import './ModalExample.css';
 import React from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
+import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { cn } from '../../../../../utils/bem';
 import { Button } from '../../../../Button/Button';
 import { Text } from '../../../../Text/Text';
@@ -30,11 +31,11 @@ export function ModalExample() {
         onEsc={(): void => setIsModalOpen(false)}
       >
         <Text as="p" size="s" view="secondary" className={cnModalExample('Title')}>
-          Заголовок модалки
+          Это заголовок модального окна
         </Text>
         <Text as="p" size="m" view="primary" className={cnModalExample('Body')}>
-          Описание в теле модалки. Здесь может находиться какая-то информация. Lorem ipsum dolor sit
-          amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+          Это содержимое модального окна. Здесь может быть что угодно: текст, изображение, форма или
+          таблица. Всё, что хочется вынести из контекста и показать поверх основной страницы.
         </Text>
         <div className={cnModalExample('Action')}>
           <Button
@@ -54,7 +55,7 @@ export function ModalExampleTop() {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <StoryBookExample className={cnDocsDecorator('Section')}>
       <Button
         size="m"
         view="primary"
@@ -86,7 +87,7 @@ export function ModalExampleTop() {
           />
         </div>
       </Modal>
-    </div>
+    </StoryBookExample>
   );
 }
 
@@ -94,7 +95,7 @@ export function ModalExampleCenter() {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <StoryBookExample className={cnDocsDecorator('Section')}>
       <Button
         size="m"
         view="primary"
@@ -125,7 +126,7 @@ export function ModalExampleCenter() {
           />
         </div>
       </Modal>
-    </div>
+    </StoryBookExample>
   );
 }
 
