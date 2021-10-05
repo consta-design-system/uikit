@@ -33,6 +33,33 @@ const rows = [
   },
 ];
 
+const defaultFilters = [
+  {
+    id: 'price>50',
+    name: 'Больше 50',
+    filterer: (value) => value > 50,
+    field: 'price',
+  },
+  {
+    id: 'price>250',
+    name: 'Больше 250',
+    filterer: (value) => value > 250,
+    field: 'price',
+  },
+  {
+    id: 'price<100',
+    name: 'Меньше 100',
+    filterer: (value) => value < 100,
+    field: 'price',
+  },
+  {
+    id: 'count>100',
+    name: 'Кол-во Больше 100',
+    filterer: (value) => value > 100,
+    field: 'count',
+  },
+] as Filters<Row>;
+
 type Row = typeof rows[number];
 
 const defaultProps: Props<Row> = {
@@ -40,15 +67,27 @@ const defaultProps: Props<Row> = {
     {
       accessor: 'price',
       title: 'Цена',
+      mergeCells: true,
+    },
+    {
+      accessor: 'count',
+      title: 'Количество',
     },
     {
       accessor: 'date',
-      title: 'Дата',
+      title: 'Год',
       renderCell: (row) => <h1>Отображает {row.date.year} год</h1>,
+      mergeCells: true,
+      getComparisonValue: (cell) => cell.year,
     },
   ],
   rows,
+  filters: defaultFilters,
 };
+
+function getRows() {
+  return screen.getAllByRole('presentation');
+}
 
 const renderComponent = (props: Props<Row> = defaultProps) => {
   return render(<Table {...props} />);
@@ -85,6 +124,54 @@ describe('Компонент Table', () => {
       });
     });
 
+    describe('проверка объединения ячеек', () => {
+      const rowsWithMergeCells = [
+        {
+          id: 'row1',
+          count: 200,
+          price: 300,
+          date: {
+            year: 2019,
+          },
+        },
+        {
+          id: 'row2',
+          count: 150,
+          price: 300,
+          date: {
+            year: 2020,
+          },
+        },
+        {
+          id: 'row3',
+          count: 100,
+          price: 150,
+          date: {
+            year: 2020,
+          },
+        },
+      ];
+
+      const propsWithMergeCells: Props<Row> = {
+        ...defaultProps,
+        rows: rowsWithMergeCells,
+      };
+
+      it('c простыми данными', () => {
+        renderComponent({ ...propsWithMergeCells });
+        expect(screen.getByText('Отображает 2020 год')).toBeInTheDocument();
+        const countCellsWithNumber = screen.getAllByText('Отображает 2020 год');
+        expect(countCellsWithNumber.length).toBe(1);
+      });
+
+      it('с объектами', () => {
+        renderComponent({ ...propsWithMergeCells });
+        expect(screen.getByText('300')).toBeInTheDocument();
+        const countCellsWithObject = screen.getAllByText('300');
+        expect(countCellsWithObject.length).toBe(1);
+      });
+    });
+
     describe('проверка ref', () => {
       it(`добавлен с помощью ref аттрибут "data-testid=${refTestID}"`, () => {
         jest.useFakeTimers();
@@ -93,32 +180,35 @@ describe('Компонент Table', () => {
         expect(screen.queryByTestId(refTestID)).toBeInTheDocument();
       });
     });
+
+    describe('проверка обработчика клика по строке onRowClick', () => {
+      it('onRowClick возвращает id текущей строки и имеет event', () => {
+        const onRowClick = jest.fn(({ id, e }: { id: string; e: React.MouseEvent }) => [id, e]);
+        renderComponent({ ...defaultProps, onRowClick });
+        const nodeRows = getRows();
+        nodeRows.forEach((row) => {
+          fireEvent.click(row);
+        });
+        expect(onRowClick).toHaveBeenCalled();
+        expect(onRowClick).toHaveBeenCalledTimes(rows.length);
+        defaultProps.rows.forEach((row, i) => {
+          expect(onRowClick.mock.calls[i][0]).toHaveProperty('id');
+          expect(onRowClick.mock.calls[i][0]).toHaveProperty('e');
+          expect(onRowClick.mock.calls[i][0].id).toEqual(row.id);
+          expect(onRowClick.mock.results[i].value).toHaveLength(2);
+        });
+      });
+    });
   });
 
   describe('Проверка работы фильтров', () => {
+    const filterColumn = {
+      accessor: 'price',
+      title: 'Цена',
+    };
     describe('Компонент с выбором фильтра работает', () => {
-      const filters: Filters<Row> = [
-        {
-          id: 'price>50',
-          name: 'Больше 50',
-          filterer: (value) => value > 50,
-          field: 'price',
-        },
-        {
-          id: 'price>250',
-          name: 'Больше 250',
-          filterer: (value) => value > 250,
-          field: 'price',
-        },
-        {
-          id: 'price<100',
-          name: 'Меньше 100',
-          filterer: (value) => value < 100,
-          field: 'price',
-        },
-      ];
-      const root = renderComponent({ ...defaultProps, filters });
-      const priceCell = screen.getByText('Цена', { selector: '.TableCell-Wrapper' });
+      const root = renderComponent({ ...defaultProps });
+      const priceCell = screen.getByText(filterColumn.title, { selector: '.TableCell-Wrapper' });
       const buttonFilterPrice = priceCell.querySelector(
         '.TableCell-Wrapper .TableFilterTooltip-Button',
       );
@@ -128,7 +218,9 @@ describe('Компонент Table', () => {
 
       fireEvent.click(buttonFilterPrice!);
       const options = screen.getAllByRole('option') as HTMLOptionElement[];
-      const correctFilters = filters.map((f) => f.name);
+      const correctFilters = defaultFilters
+        .filter((f) => f.field === filterColumn.accessor)
+        .map((f) => f.name);
       const optionsTexNodes = options.map((o) => o.textContent);
 
       it('Окно с выбором фильтров отобразилось корректно', () => {
@@ -138,7 +230,7 @@ describe('Компонент Table', () => {
 
       const targetOption = options[1];
       it('Целевой option имеет корректное значение', () => {
-        expect(targetOption).toHaveValue(filters[1].id);
+        expect(targetOption).toHaveValue(defaultFilters[1].id);
       });
       const select = screen.getByRole('listbox');
       fireEvent.change(select, { target: { value: targetOption.value } });
@@ -168,7 +260,7 @@ describe('Компонент Table', () => {
       ] as Filters<Row>;
 
       renderComponent({ ...defaultProps, filters });
-      const priceCell = screen.getByText('Цена', { selector: '.TableCell-Wrapper' });
+      const priceCell = screen.getByText(filterColumn.title, { selector: '.TableCell-Wrapper' });
       const buttonFilterPrice = priceCell.querySelector(
         '.TableCell-Wrapper .TableFilterTooltip-Button',
       );
@@ -177,6 +269,25 @@ describe('Компонент Table', () => {
       const correctFilters = filters.filter((f) => f.id && f.field).map((f) => f.name);
       const optionsTexNodes = options.map((o) => o.textContent);
       expect(optionsTexNodes).toEqual(correctFilters);
+    });
+
+    it('Кнопка "Сбросить все фильтры" работает (вызывает onFiltersUpdate)', () => {
+      const onFiltersUpdated = jest.fn(() => true);
+      renderComponent({ ...defaultProps, onFiltersUpdated });
+      const priceCell = screen.getByText(filterColumn.title, { selector: '.TableCell-Wrapper' });
+      const buttonFilterPrice = priceCell.querySelector(
+        '.TableCell-Wrapper .TableFilterTooltip-Button',
+      );
+      fireEvent.click(buttonFilterPrice!);
+      const options = screen.getAllByRole('option') as HTMLOptionElement[];
+      const targetOption = options[0];
+      const select = screen.getByRole('listbox');
+      fireEvent.change(select, { target: { value: targetOption.value } });
+      const buttonResetAllFilters = screen.getByTitle('Сбросить все фильтры');
+      fireEvent.click(buttonResetAllFilters);
+      expect(onFiltersUpdated).toBeCalled();
+      expect(onFiltersUpdated).toBeCalledTimes(2);
+      expect(onFiltersUpdated).toHaveReturnedTimes(2);
     });
   });
 });

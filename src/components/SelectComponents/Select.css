@@ -1,4 +1,5 @@
 .Select {
+  --caption-margin-left: calc(var(--input-space) + var(--control-border-width));
   position: relative;
   display: flex;
   justify-content: flex-start;

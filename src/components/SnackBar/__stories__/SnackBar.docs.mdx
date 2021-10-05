@@ -27,7 +27,7 @@ import { SnackBarExampleButtons } from './examples/SnackBarExampleButtons/SnackB
 
 За текст сообщения отвечает `message`.
 
-Пишите коротко и лаконично. С заглавной, точка не нужна.
+В качестве значения можно передавать текст или JSX разметку[`React.ReactNode`], например ссылку `<a href="#">Ссылка</a>`
 
 ## Статус
 
@@ -72,7 +72,7 @@ import { SnackBarExampleButtons } from './examples/SnackBarExampleButtons/SnackB
 ```tsx
 type Item = {
   key: string | number;
-  message?: string | number;
+  message?: string | number | React.ReactNode;
   status?: 'success' | 'warning' | 'alert' | 'normal';
   autoClose?: boolean | number;
   showProgress?: 'timer';

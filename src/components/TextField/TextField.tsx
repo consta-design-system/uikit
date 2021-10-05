@@ -20,7 +20,8 @@ import {
   textFieldPropWidthDefault,
 } from './helpers';
 
-export const cnTextField = cn('TextField');
+export const COMPONENT_NAME = 'TextField' as const;
+export const cnTextField = cn(COMPONENT_NAME);
 
 export function TextFieldRender<TYPE extends string>(
   props: TextFieldProps<TYPE>,
@@ -67,7 +68,7 @@ export function TextFieldRender<TYPE extends string>(
     caption,
     iconSize: iconSizeProp,
     ...otherProps
-  } = usePropsHandler(cnTextField(), props, textFieldRef);
+  } = usePropsHandler(COMPONENT_NAME, props, textFieldRef);
   const [focus, setFocus] = useState<boolean>(autoFocus);
   const textarea = type === 'textarea';
   const LeftIcon = leftSide;

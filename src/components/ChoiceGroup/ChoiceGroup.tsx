@@ -41,6 +41,8 @@ type CommonProps<ITEM> = {
   getIcon?: ChoiceGroupPropGetIcon<ITEM>;
   name: string;
   children?: never;
+  disabled?: boolean;
+  getDisabled?: (item: ITEM) => boolean | undefined;
 };
 
 type OnChangeMultiple<ITEM> = (props: {
@@ -97,6 +99,8 @@ export const ChoiceGroup: ChoiceGroup = React.forwardRef((props, ref) => {
     getIcon,
     name,
     className,
+    disabled = false,
+    getDisabled,
     ...otherProps
   } = props;
 
@@ -117,21 +121,35 @@ export const ChoiceGroup: ChoiceGroup = React.forwardRef((props, ref) => {
     <div
       {...otherProps}
       ref={ref}
-      className={cnChoiceGroup({ size, form, view, width, onlyIcon }, [className])}
+      className={cnChoiceGroup({ size, form, view, width, onlyIcon, disabled }, [className])}
     >
-      {items.map((item) => (
-        <ChoiceGroupItem
-          key={getLabel(item)}
-          onChange={getOnChange(item)}
-          checked={getChecked(item)}
-          label={getLabel(item).toString()}
-          icon={getIcon && getIcon(item)}
-          iconSize={iconSize}
-          multiple={multiple}
-          onlyIcon={onlyIcon}
-          name={name}
-        />
-      ))}
+      {items.map((item, idx) => {
+        const itemChecked = getChecked(item);
+        const itemDisabled = !!getDisabled && getDisabled(item);
+        return (
+          <React.Fragment key={getLabel(item)}>
+            {idx > 0 && (
+              <div
+                className={cnChoiceGroup('Divider', {
+                  checked: itemChecked,
+                  disabled: itemDisabled,
+                })}
+              />
+            )}
+            <ChoiceGroupItem
+              onChange={getOnChange(item)}
+              checked={itemChecked}
+              label={getLabel(item).toString()}
+              icon={getIcon && getIcon(item)}
+              iconSize={iconSize}
+              multiple={multiple}
+              onlyIcon={onlyIcon}
+              name={name}
+              disabled={disabled || itemDisabled}
+            />
+          </React.Fragment>
+        );
+      })}
     </div>
   );
 });

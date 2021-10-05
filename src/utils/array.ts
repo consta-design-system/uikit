@@ -10,11 +10,20 @@ export const sortBy = <T extends {}>(
   return [...array].sort(compareFn);
 };
 
-export const updateAt = <T>(array: T[], index: number, newItem: T): T[] => {
-  return index >= array.length
-    ? array
-    : [...array.slice(0, index), newItem, ...array.slice(index + 1, array.length)];
+export const updateAt = <T>(array: T[], index: number, newItem: T, isExpand = false): T[] => {
+  const fixedIndex = index < 0 ? 0 : index;
+  if (fixedIndex >= array.length) {
+    return isExpand ? [...array, newItem] : array;
+  }
+  return [
+    ...array.slice(0, fixedIndex),
+    newItem,
+    ...array.slice(fixedIndex + (isExpand ? 0 : 1), array.length),
+  ];
 };
+
+export const putBefore = <T>(array: T[], index: number, newItem: T): T[] =>
+  updateAt(array, index, newItem, true);
 
 export const range = (n: number): number[] => [...Array(n).keys()];
 

@@ -24,6 +24,7 @@ import mdx from './ChoiceGroup.docs.mdx';
 declare type Item = {
   name: string;
   icon: React.FC<IconProps>;
+  disabled?: boolean;
 };
 
 const items = [
@@ -34,10 +35,20 @@ const items = [
   {
     name: 'два',
     icon: IconCopy,
+    disabled: true,
   },
   {
     name: 'три',
     icon: IconFavorite,
+    disabled: true,
+  },
+  {
+    name: 'четыре',
+    icon: IconCamera,
+  },
+  {
+    name: 'пять',
+    icon: IconCamera,
   },
 ];
 
@@ -49,6 +60,8 @@ const defaultKnobs = () => ({
   form: select('form', choiceGroupForms, choiceGroupDefaultForm),
   withIcon: boolean('withIcon', false),
   onlyIcon: boolean('onlyIcon', false),
+  disabled: boolean('disabled', false),
+  disabledItem: boolean('disabledItem', false),
 });
 
 const cnChoiceGroupStories = cn('ChoiceGroupStories');
@@ -56,7 +69,17 @@ const cnChoiceGroupStories = cn('ChoiceGroupStories');
 export function Playground() {
   const [valueMultiple, setValueMultiple] = useState<Item[] | null>(null);
   const [value, setValue] = useState<Item | null>(null);
-  const { multiple, size, view, width, form, withIcon, onlyIcon } = defaultKnobs();
+  const {
+    multiple,
+    size,
+    view,
+    width,
+    form,
+    withIcon,
+    onlyIcon,
+    disabled,
+    disabledItem,
+  } = defaultKnobs();
 
   const getIcon = withIcon ? (item: Item) => item.icon : undefined;
   const getLabel = (item: Item) => item.name;
@@ -78,6 +101,8 @@ export function Playground() {
             form={form}
             onlyIcon={onlyIcon}
             getIcon={getIcon}
+            disabled={disabled}
+            getDisabled={disabledItem ? (item) => item.disabled : undefined}
           />
         ) : (
           <ChoiceGroup
@@ -93,6 +118,8 @@ export function Playground() {
             form={form}
             onlyIcon={onlyIcon}
             getIcon={getIcon}
+            disabled={disabled}
+            getDisabled={disabledItem ? (item) => item.disabled : undefined}
           />
         )}
       </form>

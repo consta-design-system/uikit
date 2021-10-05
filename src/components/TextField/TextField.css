@@ -1,4 +1,5 @@
 .TextField {
+  --caption-margin-left: calc(var(--input-space) + var(--control-border-width));
   position: relative;
   display: inline-flex;
 

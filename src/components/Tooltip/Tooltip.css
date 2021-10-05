@@ -29,7 +29,7 @@
     --tooltip-bg-opacity: 1;
 
     & .Tooltip-Content {
-      text-shadow: 0 0 2px rgba(var(--color-nums-shadow), 0.16);
+      text-shadow: var(--shadow-group);
     }
   }
 

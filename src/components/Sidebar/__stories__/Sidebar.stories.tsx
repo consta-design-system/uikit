@@ -8,7 +8,7 @@ import { cn } from '../../../utils/bem';
 import { callbackWithSelector, createMetadata } from '../../../utils/storybook';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
-import { Sidebar } from '../Sidebar';
+import { Sidebar, sidebarPropSize } from '../Sidebar';
 
 import mdx from './Sidebar.docs.mdx';
 
@@ -16,15 +16,14 @@ const cnSidebarStories = cn('SidebarStories');
 
 const defaultKnobs = () => ({
   hasOverlay: boolean('hasOverlay', true),
-  width: select('width', ['auto'], 'auto'),
-  height: select('height', ['auto'], 'auto'),
+  size: select('size', sidebarPropSize, sidebarPropSize[1]),
   position: select('position', ['right', 'bottom', 'left', 'top'], 'right'),
 });
 
 export function Playground() {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
-  const { hasOverlay, width, height, position } = defaultKnobs();
+  const { hasOverlay, size, position } = defaultKnobs();
 
   const handleClickOutside = callbackWithSelector({ name: 'onClickOutside' }, () => {
     setIsSidebarOpen(false);
@@ -51,8 +50,7 @@ export function Playground() {
         hasOverlay={hasOverlay}
         onOverlayClick={handleClickOutside}
         onEsc={handleEscPress}
-        width={width}
-        height={height}
+        size={size}
         position={position}
       >
         <Sidebar.Content className={cnSidebarStories('Content')}>

@@ -54,7 +54,7 @@ export function Playground() {
   } = defaultKnobs();
 
   return (
-    <EventInterceptorProvider eventHandler={console.log} map={eventInterceptorMap}>
+    <EventInterceptorProvider eventHandler={action('EventInterceptor')} map={eventInterceptorMap}>
       <div className={cnButtonStories()}>
         <Button
           width={width}

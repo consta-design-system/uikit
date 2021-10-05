@@ -134,7 +134,6 @@ export const Collapse: Collapse = React.forwardRef<HTMLDivElement, CollapseProps
       <div
         className={cnCollapse('Label', {
           hoverEffect,
-          divider,
           iconPosition,
         })}
         {...otherProps}
@@ -153,7 +152,7 @@ export const Collapse: Collapse = React.forwardRef<HTMLDivElement, CollapseProps
         </Text>
         {iconPosition === 'left' && renderSide(rightSide)}
       </div>
-      <div className={cnCollapse('Body', { isOpen })}>
+      <div className={cnCollapse('Body', { isOpen, divider })}>
         <div className={cnCollapse('Content')}>{children}</div>
       </div>
     </div>

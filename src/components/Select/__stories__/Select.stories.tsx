@@ -1,6 +1,7 @@
 import './SelectStories.css';
 
 import React, { useState } from 'react';
+import { action } from '@storybook/addon-actions';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { groups, Item, items, myData, myGroup, MyItem } from '../__mocks__/data.mock';
@@ -54,7 +55,7 @@ export function Playground(): JSX.Element {
   const [value, setValue] = useState<Item | null | undefined>();
 
   return (
-    <EventInterceptorProvider eventHandler={console.log} map={eventInterceptorMap}>
+    <EventInterceptorProvider eventHandler={action('EventInterceptor')} map={eventInterceptorMap}>
       <div>
         <Select
           size={size}
