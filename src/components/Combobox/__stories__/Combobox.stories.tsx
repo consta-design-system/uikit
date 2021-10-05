@@ -24,10 +24,10 @@ const getKnobs = () => ({
   size: select('size', ['m', 's', 'l'], defaultPropSize),
   view: select('view', propView, defaultPropView),
   form: select('form', propForm, defaultPropForm),
-  caption: text('caption', 'Подпись'),
-  label: text('label', 'Заголовок'),
+  caption: text('caption', 'Хорошо подумайте, это важно'),
+  label: text('label', 'Здесь можно выбрать цвет'),
   labelPosition: select('labelPosition', ['top', 'left'], 'top'),
-  placeholder: text('placeholder', 'Placeholder'),
+  placeholder: text('placeholder', 'Выберите цвет'),
   withGroups: boolean('withGroups', false),
 });
 
