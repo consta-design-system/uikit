@@ -3,7 +3,6 @@ import './ProgressStepBar.css';
 import React, { createRef, forwardRef, useEffect, useMemo, useRef, useState } from 'react';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
-import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 
 import { ProgressStepBarItem, PropPosition } from './ProgressStepBarItem/ProgressStepBarItem';
 import {
@@ -36,7 +35,7 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
     getItemTooltipContent,
     getItemLineStatus,
     ...otherProps
-  } = usePropsHandler('ProgressStepBar', withDefaultGetters(props));
+  } = withDefaultGetters(props);
 
   const [activeStepIndex, setActiveStepIndex] = useState<number>(-1);
   const [linesSize, setLinesSize] = useState<number[]>([]);
@@ -45,17 +44,15 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
 
   useEffect(() => {
     if (steps.length > 0) {
-      if (activeStepId) {
-        const sizeArray: number[] = [];
-        steps.forEach((step, index) => {
-          if (getItemKey(step) === activeStepId) {
-            setActiveStepIndex(index);
-          }
-          if (index !== steps.length - 1)
-            sizeArray.push(getLineSize(containerRef, stepsRef[index + 1]));
-        });
-        setLinesSize(sizeArray);
-      } else setActiveStepIndex(-1);
+      const sizeArray: number[] = [];
+      steps.forEach((step, index) => {
+        if (getItemKey(step) === activeStepId) {
+          setActiveStepIndex(index);
+        }
+        if (index !== steps.length - 1)
+          sizeArray.push(getLineSize(containerRef, stepsRef[index + 1]));
+      });
+      setLinesSize(sizeArray);
     } else setActiveStepIndex(-1);
   }, [activeStepId, steps, direction, size]);
 
@@ -95,7 +92,7 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
           <div
             style={{
               ['--progress-line-size' as string]: `${
-                index < activeStepIndex ? linesSize[index] || 0 : 0
+                index < activeStepIndex ? linesSize[index] : 0
               }px`,
               ['--progress-line-index' as string]: steps.length - index,
               ['--progress-line-resize' as string]: `${
@@ -111,8 +108,8 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
       </div>
       {steps.map((step, index) => {
         let position: PropPosition = 'center';
-        if (index === 0) position = 'start';
         if (index === steps.length - 1) position = 'end';
+        if (index === 0) position = 'start';
         return (
           <ProgressStepBarItem
             step={step}

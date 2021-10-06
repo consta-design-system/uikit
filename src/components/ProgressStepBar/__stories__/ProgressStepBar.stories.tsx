@@ -6,6 +6,8 @@ import { createMetadata } from '../../../utils/storybook';
 import { propDirection, propDirectionDefault, propSize, propSizeDefault } from '../helpers';
 import { ProgressStepBar } from '../ProgressStepBar';
 
+import mdx from './ProgressStepBar.docs.mdx';
+
 const cnProgressStepBarStories = cn('ProgressStepBarStories');
 
 const stepsExample = [
@@ -22,7 +24,7 @@ const stepsExample = [
     point: 2,
     id: 2,
     status: 'warning',
-    progress: 50,
+    progress: true,
     lineStatus: 'warning',
     tooltipContent: `Небольшое описание выполнения или состояния текущего этапа`,
   },
@@ -31,7 +33,7 @@ const stepsExample = [
     point: 3,
     id: 3,
     status: 'alert',
-    progress: 50,
+    progress: true,
     lineStatus: 'alert',
     tooltipContent: `Небольшое описание выполнения или состояния текущего этапа`,
   },
@@ -69,9 +71,12 @@ export default createMetadata({
   title: 'Компоненты|/Служебные/ProgressStepBar',
   id: 'components/ProgressStepBar',
   parameters: {
+    docs: {
+      page: mdx,
+    },
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=58%3A11236',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=55787%3A112460',
     },
   },
 });

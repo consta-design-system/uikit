@@ -1,0 +1,9 @@
+.ProgressStepBarExmapleContent {
+  &-Content {
+    display: inline-flex;
+    overflow: visible;
+    align-items: center;
+    max-width: 100%;
+    flex-wrap: nowrap;
+  }
+}

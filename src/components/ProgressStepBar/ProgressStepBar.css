@@ -132,18 +132,6 @@
             margin-top: -4px;
           }
         }
-
-        & .ProgressStepBar-Content_size_xs .ProgressStepBar-Label {
-          margin-bottom: var(--space-2xs);
-        }
-
-        & .ProgressStepBar-Content_size_s .ProgressStepBar-Label {
-          margin-bottom: var(--space-xs);
-        }
-
-        & .ProgressStepBar-Content_size_m .ProgressStepBar-Label {
-          margin-bottom: var(--space-s);
-        }
       }
     }
 
@@ -254,6 +242,22 @@
 
       &_m {
         --point-size: var(--space-xl);
+      }
+    }
+  }
+
+  &-Content {
+    &_size {
+      &_xs .ProgressStepBar-Label {
+        margin-bottom: var(--space-2xs);
+      }
+
+      &_s .ProgressStepBar-Label {
+        margin-bottom: var(--space-xs);
+      }
+
+      &_m .ProgressStepBar-Label {
+        margin-bottom: var(--space-s);
       }
     }
   }

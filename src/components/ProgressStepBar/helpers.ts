@@ -9,7 +9,7 @@ export const propDirection = ['horizontal', 'vertical'] as const;
 export type PropDirection = typeof propDirection[number];
 export const propDirectionDefault = propDirection[0];
 
-export const propStatus = ['system', 'normal', 'success', 'warning', 'alert'] as const;
+export const propStatus = ['normal', 'success', 'warning', 'alert'] as const;
 export type PropStatus = typeof propStatus[number];
 export const propStatusDefault = propStatus[0];
 
@@ -32,7 +32,7 @@ export type DefaultItem = {
   label: string;
   id: string | number;
   tooltipContent?: string;
-  lineStatus?: 'normal' | 'success' | 'warning' | 'alert';
+  lineStatus?: PropStatus;
   point?: PointNumbersMap | SVGElement;
   status?: PropStatus;
   progress?: boolean;
