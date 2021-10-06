@@ -81,6 +81,8 @@ export const DateTimeYearSlider: React.FC<DateTimeYearSliderProps> = (props) => 
     ...otherProps
   } = props;
 
+  console.log(currentVisibleDate);
+
   const handlePrev = () => onChange(addYears(currentVisibleDate, -1));
   const handleNext = () => onChange(addYears(currentVisibleDate, 1));
 

@@ -34,6 +34,7 @@ export const DateTimeTypeMonth: DateTimeTypeComponent<'month'> = forwardRef((pro
     className,
     view = dateTimePropViewDefault,
     onMove,
+    onChangeCurrentVisibleDate,
     ...otherProps
   } = props;
 
@@ -49,6 +50,7 @@ export const DateTimeTypeMonth: DateTimeTypeComponent<'month'> = forwardRef((pro
     minDate,
     value,
     startOfUnit: startOfYear,
+    onChangeCurrentVisibleDate,
   });
 
   if (changeYear) {
