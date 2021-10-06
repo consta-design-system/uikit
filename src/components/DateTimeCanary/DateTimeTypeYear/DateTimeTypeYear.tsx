@@ -31,6 +31,7 @@ export const DateTimeTypeYear: DateTimeTypeComponent<'year'> = forwardRef((props
     className,
     view = dateTimePropViewDefault,
     onMove,
+    onChangeCurrentVisibleDate,
     ...otherProps
   } = props;
 
@@ -44,6 +45,7 @@ export const DateTimeTypeYear: DateTimeTypeComponent<'year'> = forwardRef((props
     minDate,
     value,
     startOfUnit: startOfDecade,
+    onChangeCurrentVisibleDate,
   });
 
   const handleSelectDate = getHandleSelectDate({

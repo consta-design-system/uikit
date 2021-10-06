@@ -34,6 +34,7 @@ export const DateTimeTypeDate: DateTimeTypeComponent<'date'> = forwardRef((props
     locale = ruLocale,
     view = dateTimePropViewDefault,
     onMove,
+    onChangeCurrentVisibleDate,
     ...otherProps
   } = props;
 
@@ -49,6 +50,7 @@ export const DateTimeTypeDate: DateTimeTypeComponent<'date'> = forwardRef((props
     minDate,
     value,
     startOfUnit: startOfMonth,
+    onChangeCurrentVisibleDate,
   });
 
   if (changeMonth) {
