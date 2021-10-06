@@ -71,36 +71,34 @@
   }
 
   &-SelectContainer {
+    --container-border-color: var(--color-control-bg-border-default);
     position: relative;
     display: flex;
     width: 100%;
 
-    &_view_default {
-      & .Select-Control {
-        --container-border-color: var(--color-control-bg-border-default);
-        padding: 0;
-        color: var(--color-control-typo-default);
-        background: var(--color-control-bg-default);
-        border: var(--control-border-width) solid var(--container-border-color);
-        border-radius: var(--control-radius);
-
-        &:hover {
-          border-color: var(--color-control-bg-border-default-hover);
-        }
+    &_status {
+      &_alert {
+        --container-border-color: var(--color-bg-alert);
       }
 
-      &.Select-SelectContainer_status {
-        &_alert .Select-Control {
-          --container-border-color: var(--color-bg-alert);
-        }
+      &_success {
+        --container-border-color: var(--color-bg-success);
+      }
 
-        &_success .Select-Control {
-          --container-border-color: var(--color-bg-success);
-        }
+      &_warning {
+        --container-border-color: var(--color-bg-warning);
+      }
+    }
 
-        &_warning .Select-Control {
-          --container-border-color: var(--color-bg-warning);
-        }
+    &_view_default .Select-Control {
+      padding: 0;
+      color: var(--color-control-typo-default);
+      background: var(--color-control-bg-default);
+      border: var(--control-border-width) solid var(--container-border-color);
+      border-radius: var(--control-radius);
+
+      &:hover {
+        border-color: var(--color-control-bg-border-default-hover);
       }
     }
 
@@ -271,9 +269,7 @@
   }
 
   &_view_clear {
-    & .Select-Caption {
-      --caption-margin-left: 0;
-    }
+    --caption-margin-left: 0;
   }
 
   &-Delimiter {
