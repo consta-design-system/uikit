@@ -67,10 +67,7 @@ export const TableTextFilter: React.FC<TableTextFilterProps> = ({
     checkboxGroupValue,
   ]);
 
-  const isSelected = useMemo(
-    () => typeof checkboxGroupValue?.length !== 'undefined' && checkboxGroupValue?.length > 0,
-    [checkboxGroupValue],
-  );
+  const isSelected = useMemo(() => checkboxGroupValue?.length, [checkboxGroupValue]);
 
   return (
     <TableFilterContainer title={title} onCancel={onCancel} onConfirm={confirmHandler}>
