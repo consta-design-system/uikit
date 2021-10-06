@@ -12,10 +12,10 @@ export const LayoutExampleBasic = () => {
   return (
     <Layout className={cnLayoutExampleBasic()}>
       <Layout flex={1} className={cnLayoutExampleBasic('Block')}>
-        <Text>Контент</Text>
+        <Text>Это первый блок</Text>
       </Layout>
       <Layout flex={2} className={cnLayoutExampleBasic('Block')}>
-        <Text>Контент</Text>
+        <Text>А это второй блок, он в два раза шире первого</Text>
       </Layout>
     </Layout>
   );
