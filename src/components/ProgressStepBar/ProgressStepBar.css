@@ -7,6 +7,10 @@
     &_horizontal {
       flex-direction: row;
       width: 100%;
+
+      & .ProgressStepBar-ProgressLine {
+        transition: width var(--progress-line-resize);
+      }
     }
 
     &_vertical {
@@ -15,6 +19,10 @@
 
       & .ProgressStepBar-Point {
         margin-right: var(--space-xs);
+      }
+
+      & .ProgressStepBar-ProgressLine {
+        transition: height var(--progress-line-resize);
       }
     }
   }
@@ -63,7 +71,6 @@
     top: 0;
     left: 0;
     background-color: var(--progress-line-color);
-    transition: width var(--progress-line-resize), height var(--progress-line-resize);
 
     &_direction {
       &_horizontal {
@@ -106,10 +113,25 @@
     &_direction {
       &_horizontal {
         flex-direction: column;
+
+        & .ProgressStepBar-Point_size_xs {
+          margin-bottom: var(--space-2xs);
+        }
+
+        & .ProgressStepBar-Point_size_s,
+        & .ProgressStepBar-Point_size_m {
+          margin-bottom: var(--space-xs);
+        }
       }
 
       &_vertical {
         flex-direction: row;
+
+        & .ProgressStepBar-Content {
+          &_size_xs {
+            margin-top: -4px;
+          }
+        }
 
         & .ProgressStepBar-Content_size_xs .ProgressStepBar-Label {
           margin-bottom: var(--space-2xs);
@@ -233,12 +255,6 @@
       &_m {
         --point-size: var(--space-xl);
       }
-    }
-  }
-
-  &-Content {
-    &_size_xs {
-      margin-top: -4px;
     }
   }
 }

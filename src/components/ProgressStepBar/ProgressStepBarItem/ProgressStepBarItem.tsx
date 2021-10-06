@@ -24,8 +24,6 @@ const propPositionDefault: PropPosition = propPosition[0];
 
 type Props<ITEM> = {
   step: ITEM;
-  isActiveStep?: boolean;
-  isCompletedStep?: boolean;
   position?: PropPosition;
   direction: PropDirection;
   size: PropSize;
@@ -51,8 +49,6 @@ function ProgressStepBarItemRender<ITEM = DefaultItem>(
     direction,
     size,
     position = propPositionDefault,
-    isCompletedStep,
-    isActiveStep,
     getItemContent,
     getItemLabel,
     getItemOnClick,
@@ -94,8 +90,6 @@ function ProgressStepBarItemRender<ITEM = DefaultItem>(
           direction,
           position,
           status: getItemStatus(step) || propStatusDefault,
-          completed: isCompletedStep,
-          active: isActiveStep,
         })}
         {...otherProps}
       >

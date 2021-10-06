@@ -117,8 +117,6 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
           <ProgressStepBarItem
             step={step}
             size={size}
-            isCompletedStep={index < activeStepIndex}
-            isActiveStep={index === activeStepIndex}
             position={position}
             ref={stepsRef[index]}
             direction={direction}
