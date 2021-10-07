@@ -7,7 +7,7 @@ import { getSizeByMap } from '../../utils/getSizeByMap';
 import { isNumber } from '../../utils/type-guards';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
-export const progressSpinPropSize = ['m', 's'] as const;
+export const progressSpinPropSize = ['m', 's', 'l', 'xl', '2xl'] as const;
 export type ProgressSpinPropSize = typeof progressSpinPropSize[number];
 export const progressSpinPropSizeDefault: ProgressSpinPropSize = progressSpinPropSize[0];
 
@@ -23,13 +23,16 @@ export type ProgressSpinProps = PropsWithHTMLAttributes<Props, SVGElement>;
 export const cnProgressSpin = cn('ProgressSpin');
 
 const sizeMap: Record<ProgressSpinPropSize, number> = {
-  s: 12,
-  m: 20,
+  's': 12,
+  'm': 20,
+  'l': 28,
+  'xl': 36,
+  '2xl': 44,
 };
 
 function getSvgParamsBySize(size: ProgressSpinPropSize): [number, number, number, number] {
   const sizeOfPixels = getSizeByMap(sizeMap, size);
-  const strokeWidth = 2;
+  const strokeWidth = size === 's' || size === 'm' ? 2 : 4;
   const radius = (sizeOfPixels - strokeWidth) / 2;
   const strokeDasharray = radius * 2 * Math.PI;
 

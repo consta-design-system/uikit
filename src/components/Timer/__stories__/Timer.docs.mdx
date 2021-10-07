@@ -29,6 +29,9 @@ import { TimerExampleProgress } from './examples/TimerExampleProgress/TimerExamp
 <TimerExampleSize />
 
 ```ts
+<Timer size="2xl" seconds={5} progress={80} />
+<Timer size="xl" seconds={5} progress={80} />
+<Timer size="l" seconds={5} progress={80} />
 <Timer size="m" seconds={5} progress={80} />
 <Timer size="s" seconds={5} progress={80} />
 ```
@@ -65,7 +68,7 @@ import { TimerExampleProgress } from './examples/TimerExampleProgress/TimerExamp
 
 | Свойство                     | Тип                         | По умолчанию | Описание                                        |
 | ---------------------------- | --------------------------- | ------------ | ----------------------------------------------- |
-| [`size?`](#размер)           | `'m','s'`                   | `'m'`        | Размер                                          |
+| [`size?`](#размер)           | `'m','s','l','xl','2xl'`    | `'m'`        | Размер                                          |
 | [`seconds?`](#секунды)       | `number`                    | `5`          | Секунды                                         |
 | [`progress?`](#прогрессбар)  | `number`                    | `0`          | Процент заполнения прогрессбара                 |
 | [`animation?`](#прогрессбар) | `boolean`                   | -            | Включает плавное изменение прогрессбара         |
