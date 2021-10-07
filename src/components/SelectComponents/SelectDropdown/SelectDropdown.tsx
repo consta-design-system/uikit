@@ -1,6 +1,6 @@
 import './SelectDropdown.css';
 
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import {
@@ -65,10 +65,24 @@ export const SelectDropdown: SelectDropdown = (props) => {
     visibleItems,
     getGroupLabel,
   } = props;
+  const [isListEmpty, setIsListEmpty] = useState<boolean>(false);
 
   const getIndex = fabricIndex(-1);
 
   const indent = form === 'round' ? 'increased' : 'normal';
+
+  const getIsListEmpty: (items: typeof visibleItems) => boolean = (items) => {
+    let flag = true;
+    items.forEach((group) => {
+      if (isOptionForCreate(group)) flag = false;
+      else if (group.items.length > 0 || group.group) flag = false;
+    });
+    return flag;
+  };
+
+  useEffect(() => {
+    setIsListEmpty(getIsListEmpty(visibleItems));
+  }, [JSON.stringify(visibleItems)]);
 
   return (
     <CSSTransition
@@ -122,7 +136,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
               </Fragment>
             );
           })}
-          {visibleItems.length === 0 && (
+          {isListEmpty && labelForNotFound && (
             <Text className={cnSelectDropdown('LabelForNotFound')}>{labelForNotFound}</Text>
           )}
         </div>
