@@ -1,0 +1,7 @@
+.DatePickerFieldTypeDateRange {
+  display: flex;
+
+  &-Field {
+    flex: 1;
+  }
+}

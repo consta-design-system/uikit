@@ -67,6 +67,7 @@ export function TextFieldRender<TYPE extends string>(
     labelPosition = 'top',
     caption,
     iconSize: iconSizeProp,
+    focused,
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, props, textFieldRef);
   const [focus, setFocus] = useState<boolean>(autoFocus);
@@ -145,7 +146,7 @@ export function TextFieldRender<TYPE extends string>(
             status: status || state,
             disabled,
             type,
-            focus,
+            focus: focus || focused,
             withValue: !!value,
           })}
           ref={useForkRef([ref, textFieldRef])}
