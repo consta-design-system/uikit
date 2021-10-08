@@ -67,6 +67,8 @@ export const TableTextFilter: React.FC<TableTextFilterProps> = ({
     checkboxGroupValue,
   ]);
 
+  const isSelected = useMemo(() => checkboxGroupValue?.length, [checkboxGroupValue]);
+
   return (
     <TableFilterContainer title={title} onCancel={onCancel} onConfirm={confirmHandler}>
       {withSearch && (
@@ -95,7 +97,7 @@ export const TableTextFilter: React.FC<TableTextFilterProps> = ({
           label="Сбросить"
           view="clear"
           onClick={resetHandler}
-          disabled={!filteredItems.length}
+          disabled={!filteredItems.length || !isSelected}
         />
       </div>
       <div className={cnTextFilter('Checkboxes')}>
