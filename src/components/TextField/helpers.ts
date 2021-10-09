@@ -13,7 +13,7 @@ export const textFieldPropSizeDefault: TextFieldPropSize = textFieldPropSize[0];
 
 export type TextFieldPropOnChange = (args: TextFieldOnChangeArguments) => void;
 export type TextFieldOnChangeArguments = {
-  e: React.ChangeEvent;
+  e: React.ChangeEvent | React.MouseEvent;
   id?: TextFieldPropId;
   name?: TextFieldPropName;
   value: TextFieldPropValue;
@@ -54,16 +54,25 @@ export type TextFieldPropAutoComplete = 'on' | 'off';
 export type TextFieldPropsTextareaType<TYPE> = TYPE extends 'textarea'
   ?
       | {
+          rightSide?: string | React.FC<IconProps>;
           minRows?: never;
           maxRows?: never;
           rows?: number;
         }
       | {
+          rightSide?: string | React.FC<IconProps>;
           rows?: never;
           minRows?: number;
           maxRows?: number;
         }
+  : TYPE extends 'number'
+  ? {
+      rows?: never;
+      minRows?: never;
+      maxRows?: never;
+    }
   : {
+      rightSide?: string | React.FC<IconProps>;
       rows?: never;
       minRows?: never;
       maxRows?: never;
@@ -89,7 +98,6 @@ export type Props<TYPE extends string> = {
   autoFocus?: boolean;
   placeholder?: string;
   leftSide?: string | React.FC<IconProps>;
-  rightSide?: string | React.FC<IconProps>;
   autoComplete?: TextFieldPropAutoComplete;
   max?: number | string;
   min?: number | string;

@@ -30,7 +30,7 @@ const defaultKnobs = () => ({
   size: select('size', textFieldPropSize, textFieldPropSizeDefault),
   view: select('view', textFieldPropView, textFieldPropViewDefault),
   disabled: boolean('disabled', false),
-  type: select('type', ['text', 'textarea'], 'text'),
+  type: select('type', ['text', 'number', 'textarea'], 'text'),
   caption: text('caption', 'Подпись'),
   label: text('label', 'Заголовок'),
   labelPosition: select('labelPosition', ['top', 'left'], 'top'),

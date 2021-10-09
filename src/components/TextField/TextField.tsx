@@ -4,6 +4,8 @@ import React, { forwardRef, useState } from 'react';
 import TextAreaAutoSize from 'react-textarea-autosize';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
+import { IconSelect } from '../../icons/IconSelect/IconSelect';
+import { IconSelectOpen } from '../../icons/IconSelectOpen/IconSelectOpen';
 import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
@@ -129,6 +131,15 @@ export function TextFieldRender<TYPE extends string>(
     ref: inputRef as React.Ref<HTMLInputElement>,
   };
 
+  const changeNumberValue: (
+    e: React.MouseEvent<HTMLButtonElement>,
+    isIncrement?: boolean,
+  ) => void = (e, isIncrement = true) => {
+    let currentValue = value || 0;
+    currentValue = isIncrement ? Number(currentValue) + 1 : Number(currentValue) - 1;
+    onChange?.({ e, value: currentValue.toString() });
+  };
+
   return (
     <div className={cnTextField({ labelPosition, size, view, width }, [className])} {...otherProps}>
       {label && (
@@ -169,7 +180,25 @@ export function TextFieldRender<TYPE extends string>(
           ) : (
             <input {...commonProps} {...inputProps} />
           )}
-          {RightIcon && (
+          {type === 'number' && (
+            <div className={cnTextField('Counter')}>
+              <button
+                onClick={(e) => changeNumberValue(e, true)}
+                type="button"
+                className={cnTextField('CounterButton')}
+              >
+                <IconSelectOpen className={cnTextField('CounterButton-Icon')} size="xs" />
+              </button>
+              <button
+                onClick={(e) => changeNumberValue(e, false)}
+                type="button"
+                className={cnTextField('CounterButton')}
+              >
+                <IconSelect className={cnTextField('CounterButton-Icon')} size="xs" />
+              </button>
+            </div>
+          )}
+          {RightIcon && type !== 'number' && (
             <div
               className={cnTextField('Side', {
                 position: 'right',
