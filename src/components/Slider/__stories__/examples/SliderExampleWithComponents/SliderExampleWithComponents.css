@@ -1,6 +1,4 @@
-.SliderStories {
-  width: 400px;
-
+.UiKit--DocsDecorator {
   &-Textfield {
     width: 100%;
     max-width: 100px;

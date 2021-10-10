@@ -25,7 +25,7 @@ type UseSliderArguments = {
   pointValueTwo: React.MutableRefObject<HTMLButtonElement | null>;
 };
 
-export default (
+export const useSlider = (
   props: SliderProps,
   { clearActive, pointValueOne, pointValueTwo }: UseSliderArguments,
 ) => {

@@ -2,7 +2,7 @@ import { useCallback, useRef } from 'react';
 
 import { useFlag } from '../../hooks/useFlag/useFlag';
 
-export default () => {
+export const useActive = () => {
   const [isActiveOne, changerActiveOne] = useFlag();
   const [isActiveTwo, changerActiveTwo] = useFlag();
   const pointValueOne = useRef(null);

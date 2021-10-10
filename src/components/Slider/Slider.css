@@ -11,7 +11,7 @@
     flex: 1;
     align-items: center;
     width: 100%;
-    min-height: 16px;
+    min-height: 4px;
     background-color: var(--color-bg-stripe);
     border-radius: 4px;
     transition: background-color 0.3s ease;
@@ -49,7 +49,7 @@
       }
 
       &_fill::before {
-        background: var(--color-control-typo-disable);
+        background: var(--color-bg-stripe);
       }
     }
   }
@@ -57,6 +57,10 @@
   &_disabled {
     cursor: inherit;
     pointer-events: none;
+
+    .Slider-Input-divide_fill:not(.Slider-input-divide_disabled)::before {
+      background: var(--color-control-typo-disable);
+    }
   }
 
   &-fill {

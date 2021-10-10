@@ -1,6 +1,6 @@
 import './Slider.stories.css';
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { boolean, number, select, text } from '@storybook/addon-knobs';
 
@@ -54,6 +54,10 @@ export function Playground() {
     setInputValue(undefined);
   };
 
+  const getValue = useCallback((val) => {
+    return val;
+  }, []);
+
   useEffect(() => {
     setValue(range ? [0, 50] : [50]);
   }, [range]);
@@ -63,6 +67,7 @@ export function Playground() {
       <div className={cnSliderStories()}>
         <Slider
           disabled={disabled}
+          getTooltipContent={getValue}
           min={min}
           max={max}
           {...props}
@@ -77,7 +82,7 @@ export function Playground() {
                 max={max}
                 step={customStep ? 1 : step}
                 value={inputValue || (Array.isArray(value) ? value[0] : value || 0).toString()}
-                className={cnSliderStories('textfield', { prefix })}
+                className={cnSliderStories('Textfield', { prefix })}
                 onChange={(e) => setInputValue(e.value || '0')}
                 onBlur={handleChange}
                 disabled={disabled}
@@ -86,7 +91,7 @@ export function Playground() {
             ))
           }
           suffix={
-            suffix && <IconSettings className={cnSliderStories('icon', { disabled, suffix })} />
+            suffix && <IconSettings className={cnSliderStories('Icon', { disabled, suffix })} />
           }
           step={customStep ? [20, 17, 22, 20] : step}
           value={range ? value : value[0]}

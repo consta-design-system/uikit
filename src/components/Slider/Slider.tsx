@@ -7,8 +7,8 @@ import { Popover } from '../Popover/Popover';
 import { Text } from '../Text/Text';
 
 import { checkFill, getPercent } from './helpers';
-import useActive from './useActive';
-import useSlider from './useSlider';
+import { useActive } from './useActive';
+import { useSlider } from './useSlider';
 
 export type SliderProps = {
   className?: string;
@@ -17,7 +17,7 @@ export type SliderProps = {
   max: number;
   disabled?: boolean;
   division?: boolean;
-  withTooltip?: boolean;
+  getTooltipContent: (value: number) => string;
   value?: number[] | number;
   onChange?: (
     event: Event | React.TouchEvent | React.MouseEvent,
@@ -33,17 +33,17 @@ export type SliderProps = {
   prefix?:
     | React.ReactNode
     | (({ value }: { value: number | number[] }) => React.ReactElement)
-    | false;
+    | undefined;
   suffix?:
     | React.ReactNode
     | (({ value }: { value: number | number[] }) => React.ReactElement)
-    | false;
+    | undefined;
 };
 
 export const cnSlider = cn('Slider');
 
 export const Slider = React.forwardRef<HTMLDivElement, SliderProps>((props, ref) => {
-  const { className, step = 1, disabled, withTooltip, division, prefix, suffix } = props;
+  const { className, step = 1, disabled, getTooltipContent, division, prefix, suffix } = props;
   const {
     isActiveOne,
     changerActiveOne,
@@ -135,14 +135,16 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>((props, ref)
               className={cnSlider('Point', { isActive: isActiveOne || isActiveTwo, disabled })}
               ref={pointValueOne}
               style={{
-                left: `${getPercent(
-                  (Array.isArray(valueDerived) ? valueDerived[0] : valueDerived) - minValue,
-                  minValue,
-                  maxValue,
+                left: `${Math.trunc(
+                  getPercent(
+                    (Array.isArray(valueDerived) ? valueDerived[0] : valueDerived) - minValue,
+                    minValue,
+                    maxValue,
+                  ),
                 )}%`,
               }}
             />
-            {withTooltip && isActiveOne && (
+            {!!getTooltipContent && isActiveOne && (
               <Popover
                 direction="downCenter"
                 spareDirection="upCenter"
@@ -166,14 +168,16 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>((props, ref)
           className={cnSlider('Point', { isActive: isActiveOne || isActiveTwo, disabled })}
           ref={pointValueTwo}
           style={{
-            left: `${getPercent(
-              (Array.isArray(valueDerived) ? valueDerived[1] : valueDerived) - minValue,
-              minValue,
-              maxValue,
+            left: `${Math.trunc(
+              getPercent(
+                (Array.isArray(valueDerived) ? valueDerived[1] : valueDerived) - minValue,
+                minValue,
+                maxValue,
+              ),
             )}%`,
           }}
         />
-        {withTooltip && isActiveTwo && (
+        {!!getTooltipContent && isActiveTwo && (
           <Popover
             direction="downCenter"
             spareDirection="upCenter"
@@ -182,7 +186,7 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>((props, ref)
           >
             <div className={cnSlider('Tooltip')}>
               <Text size="xs">
-                {Math.round(Array.isArray(valueDerived) ? valueDerived[1] : valueDerived)}
+                {getTooltipContent(Array.isArray(valueDerived) ? valueDerived[1] : valueDerived)}
               </Text>
             </div>
           </Popover>
