@@ -13,7 +13,7 @@ export const textFieldPropSizeDefault: TextFieldPropSize = textFieldPropSize[0];
 
 export type TextFieldPropOnChange = (args: TextFieldOnChangeArguments) => void;
 export type TextFieldOnChangeArguments = {
-  e: React.ChangeEvent;
+  e: React.ChangeEvent | React.MouseEvent;
   id?: TextFieldPropId;
   name?: TextFieldPropName;
   value: TextFieldPropValue;

@@ -4,6 +4,7 @@ import React, { forwardRef, useState } from 'react';
 import TextAreaAutoSize from 'react-textarea-autosize';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
+import { IconClose } from '../../icons/IconClose/IconClose';
 import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
@@ -129,6 +130,13 @@ export function TextFieldRender<TYPE extends string>(
     ref: inputRef as React.Ref<HTMLInputElement>,
   };
 
+  const clearValue: (e: React.MouseEvent<HTMLButtonElement>) => void = (e) => {
+    onChange?.({
+      e,
+      value: '',
+    });
+  };
+
   return (
     <div className={cnTextField({ labelPosition, size, view, width }, [className])} {...otherProps}>
       {label && (
@@ -168,6 +176,11 @@ export function TextFieldRender<TYPE extends string>(
             <TextAreaAutoSize {...commonProps} {...textareaProps} />
           ) : (
             <input {...commonProps} {...inputProps} />
+          )}
+          {value && type !== 'number' && type !== 'textarea' && (
+            <button type="button" onClick={clearValue} className={cnTextField('ClearButton')}>
+              <IconClose size="xs" className={cnTextField('ClearButtonIcon')} />
+            </button>
           )}
           {RightIcon && (
             <div
