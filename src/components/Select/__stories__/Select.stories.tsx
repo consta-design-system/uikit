@@ -30,6 +30,7 @@ const getKnobs = () => ({
   size: select('size', propSize, defaultPropSize),
   view: select('view', propView, defaultPropView),
   form: select('form', propForm, defaultPropForm),
+  required: boolean('required', false),
   caption: text('caption', 'Подпись'),
   label: text('label', 'Заголовок'),
   labelPosition: select('labelPosition', ['top', 'left'], 'top'),
@@ -44,6 +45,7 @@ export function Playground(): JSX.Element {
     view,
     form,
     placeholder,
+    required,
     withGroups,
     label,
     labelPosition,
@@ -59,6 +61,7 @@ export function Playground(): JSX.Element {
           disabled={disabled}
           view={view}
           form={form}
+          required={required}
           placeholder={placeholder}
           items={items}
           value={value}
@@ -81,6 +84,7 @@ export const WithRender = createStory(
       view,
       form,
       placeholder,
+      required,
       withGroups,
       label,
       labelPosition,
@@ -92,6 +96,7 @@ export const WithRender = createStory(
         size={size}
         disabled={disabled}
         view={view}
+        required={required}
         form={form}
         placeholder={placeholder}
         items={myData}

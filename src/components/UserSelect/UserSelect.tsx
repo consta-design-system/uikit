@@ -53,6 +53,7 @@ function UserSelectRender<
     disabled,
     ariaLabel,
     id,
+    required,
     dropdownRef = defaultDropdownRef,
     form = defaultPropForm,
     view = defaultPropView,
@@ -207,6 +208,7 @@ function UserSelectRender<
       focused={isFocused}
       disabled={disabled}
       size={size}
+      required={required}
       view={view}
       form={form}
       multiple

@@ -60,6 +60,7 @@ export type UserSelectProps<
     dropdownRef?: React.RefObject<HTMLDivElement>;
     name?: string;
     items: ITEM[];
+    required?: boolean;
     renderItem?: PropRenderItem<ITEM>;
     renderValue?: PropRenderValue<ITEM>;
     onFocus?: React.FocusEventHandler<HTMLInputElement>;

@@ -37,6 +37,7 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
     items,
     onChange,
     value,
+    required,
     disabled,
     ariaLabel,
     id,
@@ -127,6 +128,7 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
       size={size}
       view={view}
       form={form}
+      required={required}
       ref={ref}
       {...restProps}
     >

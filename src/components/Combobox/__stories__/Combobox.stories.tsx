@@ -24,6 +24,7 @@ const getKnobs = () => ({
   size: select('size', ['m', 's', 'l'], defaultPropSize),
   view: select('view', propView, defaultPropView),
   form: select('form', propForm, defaultPropForm),
+  required: boolean('required', false),
   caption: text('caption', 'Хорошо подумайте, это важно'),
   label: text('label', 'Здесь можно выбрать цвет'),
   labelPosition: select('labelPosition', ['top', 'left'], 'top'),
@@ -37,6 +38,7 @@ export function Playground(): JSX.Element {
     disabled,
     view,
     form,
+    required,
     placeholder,
     withGroups,
     label,
@@ -55,6 +57,7 @@ export function Playground(): JSX.Element {
         disabled={disabled}
         view={view}
         form={form}
+        required={required}
         placeholder={placeholder}
         items={items}
         value={valueMultiple}
@@ -74,6 +77,7 @@ export function Playground(): JSX.Element {
       disabled={disabled}
       view={view}
       form={form}
+      required={required}
       placeholder={placeholder}
       items={items}
       value={value}
@@ -93,6 +97,7 @@ export const WithRender = createStory(
       disabled,
       view,
       form,
+      required,
       placeholder,
       withGroups,
       label,
@@ -109,6 +114,7 @@ export const WithRender = createStory(
         form={form}
         placeholder={placeholder}
         items={myData}
+        required={required}
         value={value}
         onChange={({ value }) => setValue(value)}
         groups={withGroups ? myGroup : []}
@@ -156,6 +162,7 @@ export const WithCreate = createStory(
       disabled,
       view,
       form,
+      required,
       placeholder,
       withGroups,
       label,
@@ -170,6 +177,7 @@ export const WithCreate = createStory(
         size={size}
         disabled={disabled}
         view={view}
+        required={required}
         form={form}
         placeholder={placeholder}
         items={list}

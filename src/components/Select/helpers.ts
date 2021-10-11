@@ -44,6 +44,7 @@ export type SelectProps<ITEM = DefaultItem, GROUP = DefaultGroup> = PropsWithHTM
     ariaLabel?: string;
     dropdownClassName?: string;
     dropdownRef?: React.RefObject<HTMLDivElement>;
+    required?: boolean;
     name?: string;
     value?: PropValue<ITEM>;
     renderItem?: PropRenderItem<ITEM>;

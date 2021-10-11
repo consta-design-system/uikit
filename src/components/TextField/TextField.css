@@ -34,7 +34,7 @@
       flex-direction: column;
 
       & > *:not(:last-child) {
-        margin-bottom: var(--space-s);
+        margin-bottom: var(--space-xs);
       }
     }
 
