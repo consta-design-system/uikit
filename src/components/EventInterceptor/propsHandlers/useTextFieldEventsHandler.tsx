@@ -10,7 +10,7 @@ import {
   TextFieldPropName,
   TextFieldPropOnChange,
   TextFieldPropSize,
-  TextFieldPropState,
+  TextFieldPropStatus,
   TextFieldPropValue,
   TextFieldPropView,
   TextFieldPropWidth,
@@ -30,7 +30,7 @@ export type Props = {
   size?: TextFieldPropSize;
   view?: TextFieldPropView;
   form?: TextFieldPropForm;
-  state?: TextFieldPropState;
+  state?: TextFieldPropStatus;
   width?: TextFieldPropWidth;
   onFocus?: React.FocusEventHandler<HTMLElement>;
   onBlur?: React.FocusEventHandler<HTMLElement>;
