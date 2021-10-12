@@ -22,8 +22,8 @@ import {
 } from '../../TextField/TextField';
 import { DatePicker } from '../DatePickerCanary';
 import {
-  datePickerPropCalendarForm,
-  datePickerPropCalendarFormDefault,
+  datePickerPropDropdownForm,
+  datePickerPropDropdownFormDefault,
   datePickerPropFormatDefault,
   datePickerPropPlaceholderDefault,
   datePickerPropSeparatorDefault,
@@ -63,11 +63,11 @@ const defaultKnobs = () => ({
   separator: text('separator', datePickerPropSeparatorDefault),
   withEvents: boolean('withEvents', false),
   locale: select('locale', localeProp, localeDefault),
-  calendarView: select('calendarView', dateTimePropView, dateTimePropViewDefault),
-  calendarForm: select(
-    'calendarForm',
-    datePickerPropCalendarForm,
-    datePickerPropCalendarFormDefault,
+  dateTimeView: select('dateTimeView', dateTimePropView, dateTimePropViewDefault),
+  dropdownForm: select(
+    'dropdownForm',
+    datePickerPropDropdownForm,
+    datePickerPropDropdownFormDefault,
   ),
 });
 
@@ -85,10 +85,10 @@ export function Playground() {
     disabled,
     withEvents,
     locale,
-    calendarView,
+    dateTimeView,
     format,
     separator,
-    calendarForm,
+    dropdownForm,
     type,
   } = defaultKnobs();
 
@@ -136,10 +136,10 @@ export function Playground() {
         rightSide={rightSide}
         events={events}
         locale={getSizeByMap(localeMap, locale)}
-        calendarView={calendarView}
+        dateTimeView={dateTimeView}
         format={format}
         separator={separator}
-        calendarForm={calendarForm}
+        dropdownForm={dropdownForm}
       />
     </div>
   );

@@ -1,4 +1,4 @@
-import './DatePickerCalendar.css';
+import './DatePickerDropdown.css';
 
 import React, { forwardRef, useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
@@ -15,41 +15,41 @@ import {
 } from '../../DateTimeCanary/DateTimeCanary';
 import { Popover } from '../../Popover/Popover';
 import {
-  DatePickerPropCalendarForm,
-  datePickerPropCalendarFormDefault,
-  DatePickerPropCalendarView,
+  DatePickerPropDateTimeView,
+  DatePickerPropDropdownForm,
+  datePickerPropDropdownFormDefault,
 } from '../helpers';
 
-export type DatePickerCalendarPropOnChange = DateTimePropOnChange;
+export type DatePickerDropdownPropOnChange = DateTimePropOnChange;
 
-export type DatePickerCalendarProps = PropsWithHTMLAttributesAndRef<
+export type DatePickerDropdownProps = PropsWithHTMLAttributesAndRef<
   {
     anchorRef: React.RefObject<HTMLElement>;
     currentVisibleDate?: Date;
     type?: DateTimePropType;
     value?: Date | DateRange;
-    onChange?: DatePickerCalendarPropOnChange;
+    onChange?: DatePickerDropdownPropOnChange;
     minDate?: Date;
     maxDate?: Date;
     events?: Date[];
-    view?: DatePickerPropCalendarView;
+    view?: DatePickerPropDateTimeView;
     locale?: Locale;
     children?: never;
-    form?: DatePickerPropCalendarForm;
+    form?: DatePickerPropDropdownForm;
     isOpen?: boolean;
     onChangeCurrentVisibleDate?: (date: Date) => void;
   },
   HTMLDivElement
 >;
 
-type DatePickerCalendarComponent = (props: DatePickerCalendarProps) => React.ReactElement | null;
+type DatePickerDropdownComponent = (props: DatePickerDropdownProps) => React.ReactElement | null;
 
-const cnDatePickerCalendar = cn('DatePickerCalendar');
-const cnDatePickerCalendarCssTransition = cnForCssTransition(cnDatePickerCalendar);
+const cnDatePickerDropdown = cn('DatePickerDropdown');
+const cnDatePickerDropdownCssTransition = cnForCssTransition(cnDatePickerDropdown);
 
-export const DatePickerCalendar: DatePickerCalendarComponent = forwardRef((props, ref) => {
+export const DatePickerDropdown: DatePickerDropdownComponent = forwardRef((props, ref) => {
   const {
-    form = datePickerPropCalendarFormDefault,
+    form = datePickerPropDropdownFormDefault,
     anchorRef,
     isOpen,
     value,
@@ -65,14 +65,14 @@ export const DatePickerCalendar: DatePickerCalendarComponent = forwardRef((props
       in={isOpen}
       unmountOnExit
       appear
-      classNames={cnDatePickerCalendarCssTransition}
+      classNames={cnDatePickerDropdownCssTransition}
       timeout={200}
       nodeRef={rootRef}
     >
       <Popover
         ref={useForkRef([ref, rootRef])}
         anchorRef={anchorRef}
-        className={cnDatePickerCalendar({ form }, [className])}
+        className={cnDatePickerDropdown({ form }, [className])}
         direction="downStartLeft"
         spareDirection="downStartLeft"
         possibleDirections={['downStartLeft', 'upStartLeft', 'downStartRight', 'upStartRight']}

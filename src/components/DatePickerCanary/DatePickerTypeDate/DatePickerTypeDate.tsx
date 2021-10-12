@@ -4,12 +4,12 @@ import startOfMonth from 'date-fns/startOfMonth';
 
 import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
 import { setRef } from '../../../utils/setRef';
-import { DatePickerCalendar } from '../DatePickerCalendar/DatePickerCalendar';
+import { DatePickerDropdown } from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeDate } from '../DatePickerFieldTypeDate/DatePickerFieldTypeDate';
 import { DatePickerTypeDateComponent } from '../helpers';
 
 export const DatePickerTypeDate: DatePickerTypeDateComponent = forwardRef((props, ref) => {
-  const { events, calendarView, locale, calendarForm, onFocus, ...otherProps } = props;
+  const { events, dateTimeView, locale, dropdownForm, onFocus, ...otherProps } = props;
 
   const fieldRef = useRef<HTMLDivElement>(null);
   const calendarRef = useRef<HTMLDivElement>(null);
@@ -32,14 +32,14 @@ export const DatePickerTypeDate: DatePickerTypeDateComponent = forwardRef((props
   }, [ref, fieldRef]);
 
   useEffect(() => {
-    if (props.value && props.calendarView === 'classic' && calendarVisibleDate) {
+    if (props.value && props.dateTimeView === 'classic' && calendarVisibleDate) {
       const newVisibleDate = startOfMonth(props.value);
       if (newVisibleDate.getTime() !== calendarVisibleDate.getTime()) {
         setCurrentVisibleDate(newVisibleDate);
       }
       return;
     }
-    if (props.value && props.calendarView !== 'classic' && calendarVisibleDate) {
+    if (props.value && props.dateTimeView !== 'classic' && calendarVisibleDate) {
       const newVisibleDate = startOfMonth(props.value);
       if (
         newVisibleDate.getTime() !== calendarVisibleDate.getTime() &&
@@ -64,19 +64,19 @@ export const DatePickerTypeDate: DatePickerTypeDateComponent = forwardRef((props
   return (
     <>
       <DatePickerFieldTypeDate {...otherProps} ref={fieldRef} onFocus={onFocusHandler} />
-      <DatePickerCalendar
+      <DatePickerDropdown
         ref={calendarRef}
         anchorRef={fieldRef}
         isOpen={calendarVisible}
         value={props.value || undefined}
         type={props.type}
-        view={calendarView}
+        view={dateTimeView}
         events={events}
         locale={locale}
         minDate={props.minDate}
         maxDate={props.maxDate}
         currentVisibleDate={currentVisibleDate}
-        form={calendarForm}
+        form={dropdownForm}
         onChange={(params) => {
           props.onChange?.(params);
           handleClose();

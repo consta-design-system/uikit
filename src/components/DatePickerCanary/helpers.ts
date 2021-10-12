@@ -16,7 +16,7 @@ export const datePickerPropType = ['date', 'date-range'] as const;
 export type DatePickerPropType = typeof datePickerPropType[number];
 export const datePickerPropTypeDefault = datePickerPropType[0];
 
-export type DatePickerPropCalendarView = DateTimePropView;
+export type DatePickerPropDateTimeView = DateTimePropView;
 
 export const datePickerErrorTypes = [
   'outOfRange',
@@ -33,10 +33,9 @@ export type DatePickerPropOnChange<TYPE extends DatePickerPropType> = (props: {
   e: React.MouseEvent<HTMLButtonElement, MouseEvent> | Event;
 }) => void;
 
-export const datePickerPropCalendarForm = ['default', 'brick', 'round'] as const;
-export type DatePickerPropCalendarForm = typeof datePickerPropCalendarForm[number];
-export const datePickerPropCalendarFormDefault: DatePickerPropCalendarForm =
-  datePickerPropCalendarForm[0];
+export const datePickerPropDropdownForm = ['default', 'brick', 'round'] as const;
+export type DatePickerPropDropdownForm = typeof datePickerPropDropdownForm[number];
+export const datePickerPropDropdownFormDefault = datePickerPropDropdownForm[0];
 
 type DatePickerPropCalendarWidth<TYPE> = TYPE extends 'date' ? TextFieldPropWidth : never;
 
@@ -66,7 +65,7 @@ export type DatePickerProps<
     minDate?: Date;
     maxDate?: Date;
     events?: Date[];
-    calendarView?: DatePickerPropCalendarView;
+    dateTimeView?: DatePickerPropDateTimeView;
     locale?: Locale;
     children?: never;
     onError?: DatePickerPropOnError;
@@ -89,7 +88,7 @@ export type DatePickerProps<
     iconSize?: IconPropSize;
     format?: string;
     separator?: string;
-    calendarForm?: DatePickerPropCalendarForm;
+    dropdownForm?: DatePickerPropDropdownForm;
     width?: DatePickerPropCalendarWidth<TYPE>;
     leftSide?: string | React.FC<IconProps>;
     rightSide?: string | React.FC<IconProps>;

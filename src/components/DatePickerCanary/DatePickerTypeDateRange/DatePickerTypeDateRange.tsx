@@ -5,10 +5,10 @@ import startOfMonth from 'date-fns/startOfMonth';
 import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
 import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
 import {
-  DatePickerCalendar,
-  DatePickerCalendarPropOnChange,
-  DatePickerCalendarProps,
-} from '../DatePickerCalendar/DatePickerCalendar';
+  DatePickerDropdown,
+  DatePickerDropdownPropOnChange,
+  DatePickerDropdownProps,
+} from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeDateRange } from '../DatePickerFieldTypeDateRange/DatePickerFieldTypeDateRange';
 import { DatePickerTypeDateRangeComponent, normalizeRangeValue } from '../helpers';
 
@@ -16,9 +16,9 @@ export const DatePickerTypeDateRange: DatePickerTypeDateRangeComponent = forward
   (props, ref) => {
     const {
       events,
-      calendarView,
+      dateTimeView,
       locale,
-      calendarForm,
+      dropdownForm,
       startFieldRightSide,
       startFieldLeftSide,
       startFieldOnBlur,
@@ -47,7 +47,7 @@ export const DatePickerTypeDateRange: DatePickerTypeDateRangeComponent = forward
     const startFocused = fieldFocused === 'start';
     const endFocused = fieldFocused === 'end';
 
-    const hadleChange: DatePickerCalendarPropOnChange = ({ e, value }) => {
+    const hadleChange: DatePickerDropdownPropOnChange = ({ e, value }) => {
       if (startFocused) {
         props.onChange?.({ e, value: normalizeRangeValue([value, props?.value?.[1]]) });
         endFieldInputRef.current?.focus();
@@ -62,14 +62,14 @@ export const DatePickerTypeDateRange: DatePickerTypeDateRangeComponent = forward
 
     const [currentVisibleDate, setCurrentVisibleDate] = useState<Date | undefined>();
 
-    const commonProps: Omit<DatePickerCalendarProps, 'anchorRef'> = {
+    const commonProps: Omit<DatePickerDropdownProps, 'anchorRef'> = {
       value: props.value || undefined,
-      view: calendarView,
+      view: dateTimeView,
       events,
       locale,
       minDate: props.minDate,
       maxDate: props.maxDate,
-      form: calendarForm,
+      form: dropdownForm,
       onChange: hadleChange,
     };
 
@@ -101,7 +101,7 @@ export const DatePickerTypeDateRange: DatePickerTypeDateRangeComponent = forward
     useEffect(() => {
       if (
         props.value?.[0] &&
-        props.calendarView === 'classic' &&
+        props.dateTimeView === 'classic' &&
         currentVisibleDate &&
         startFocused
       ) {
@@ -113,7 +113,7 @@ export const DatePickerTypeDateRange: DatePickerTypeDateRangeComponent = forward
       }
       if (
         props.value?.[0] &&
-        props.calendarView !== 'classic' &&
+        props.dateTimeView !== 'classic' &&
         currentVisibleDate &&
         startFocused
       ) {
@@ -130,7 +130,7 @@ export const DatePickerTypeDateRange: DatePickerTypeDateRangeComponent = forward
     useEffect(() => {
       if (
         props.value?.[1] &&
-        props.calendarView === 'classic' &&
+        props.dateTimeView === 'classic' &&
         currentVisibleDate &&
         endFocused
       ) {
@@ -142,7 +142,7 @@ export const DatePickerTypeDateRange: DatePickerTypeDateRangeComponent = forward
       }
       if (
         props.value?.[1] &&
-        props.calendarView !== 'classic' &&
+        props.dateTimeView !== 'classic' &&
         currentVisibleDate &&
         endFocused
       ) {
@@ -185,7 +185,7 @@ export const DatePickerTypeDateRange: DatePickerTypeDateRangeComponent = forward
           startFocused={startFocused}
           endFocused={endFocused}
         />
-        <DatePickerCalendar
+        <DatePickerDropdown
           {...commonProps}
           ref={calendarRef}
           anchorRef={startFieldRef}
