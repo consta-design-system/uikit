@@ -1,5 +1,37 @@
 # Changelog
 
+## v3.6.0 (06/10/2021)
+Ура, добавили `DateTime` — новый компонент для выбора даты и времени, заменяет `Calendar`. (`Calendar` работает, но с меткой `Deprecated`)
+
+И ещё несколько небольших обновлений:
+— в `SnackBar` теперь можно положить любую вёрстку,
+— в `ChoiceGroup` можно сделать неактивным один или несколько элементов,
+— в `TextField`, `Select`, `Combobox` и `UserSelect` добавили подсказку и заголовок (`label` и `caption`),
+— в `Select`, `Combobox` и `UserSelect` — возможность указывать статус поля,
+— а ещё обновили документацию для `Modal`, `Table` и `Layout`.
+
+---
+
+- [chore(deps): bump url-parse from 1.5.1 to 1.5.3 (#1638)](https://github.com/gazprom-neft/consta-uikit/commit/97a83093a9575b142fe948b36d9093e4533e93fa) - [@dependabot](https://github.com/dependabot[bot])
+- [docs(Layout): edit docs (#1640)](https://github.com/gazprom-neft/consta-uikit/commit/fba6187dd31696d21e6b705ed02a7c48d0ca01f2) - [@arhayka](https://github.com/arhayka)
+- [docs(Table): docs review (#1637)](https://github.com/gazprom-neft/consta-uikit/commit/2f045ec229a641e9ab049e80b03cef92728c5f59) - [@arhayka](https://github.com/arhayka)
+- [ feat(SelectContainer): add status (#1623)](https://github.com/gazprom-neft/consta-uikit/commit/23f6f9761c1d0dbd31cad0bc7305bb64aed3ba7f) - [@N1MBER](https://github.com/N1MBER)
+- [fix(DateTime): fixed onChangeCurrentVisibleDate](https://github.com/gazprom-neft/consta-uikit/commit/323f25a0fbbe912b308ff8fbbea81a50f52153a6) - [@gizeasy](https://github.com/gizeasy)
+- [feat(DateTime): add component (#1422)](https://github.com/gazprom-neft/consta-uikit/commit/b8d2d7dac3043f4cc6279d6349f0158267e7269e) - [@gizeasy](https://github.com/gizeasy)
+- [docs(Combobox): docs review (#1622)](https://github.com/gazprom-neft/consta-uikit/commit/e55f45cc5a114c432160306f803d63a4ff316210) - [@arhayka](https://github.com/arhayka)
+- [docs(Modal): edit docs and examples (#1626)](https://github.com/gazprom-neft/consta-uikit/commit/4e82d95385eabd9f23de5a49d738c625b4e6cdb5) - [@arhayka](https://github.com/arhayka)
+- [feat(ChoiceGroup): added setting disabled (#1575)](https://github.com/gazprom-neft/consta-uikit/commit/d6bf274533fe88434474fb55c2e9709e1a86f402) - [@AntonS86](https://github.com/AntonS86)
+- [test(TextField): fix test](https://github.com/gazprom-neft/consta-uikit/commit/df48bd381f8dc29bcd2b2841e68e857f6fd3c9c4) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Collapse): add divider from label to body (#1625)](https://github.com/gazprom-neft/consta-uikit/commit/dbd5582a0ad0b56f0c82a9080288b2147a780cf3) - [@N1MBER](https://github.com/N1MBER)
+- [docs(RadioGroup): add align example (#1619)](https://github.com/gazprom-neft/consta-uikit/commit/70d2c2ebf3852af82b4d10a273377d86abad0df8) - [@arhayka](https://github.com/arhayka)
+- [fix(SnackBar): fix bug with not working autoclose in storybook (#1618)](https://github.com/gazprom-neft/consta-uikit/commit/ab721fabea22486251e0b6e12b35571769bee428) - [@N1MBER](https://github.com/N1MBER)
+- [feat(FieldLabel): add components (#1606)](https://github.com/gazprom-neft/consta-uikit/commit/573c7cc7a9333156cf28389f89f15fc86e133e2a) - [@N1MBER](https://github.com/N1MBER)
+- [fix(Switch): updated background-color disabled state (#1591)](https://github.com/gazprom-neft/consta-uikit/commit/440f1d750463290c887f99ffbfd58719ec75f52e) - [@AntonS86](https://github.com/AntonS86)
+- [feat(SnackBar): Adding the ability to pass a React component (#1574)](https://github.com/gazprom-neft/consta-uikit/commit/943b81287eb5b6de1c6e28e3b13331e4a6bbe4c3) - [@N1KN](https://github.com/N1KN)
+- [feat(EventInterceptor): Fix typings of usePropsHandler (#1563)](https://github.com/gazprom-neft/consta-uikit/commit/590bfa4a1e5fbea50a14a7b6ff8438ce0c7e641d) - [@N1KN](https://github.com/N1KN)
+
+--------------------
+
 ## v3.5.0 (29/09/2021)
 Важное из обновления:
 - Добавили новый компонент `Layout`
@@ -379,8 +411,3 @@ _Обращаем внимание_: *версии компонентов обр
 - [fix(EventInterceptor): fixed event handlers (#754)](https://github.com/gazprom-neft/consta-uikit/commit/b8de5f97311d6a2e6d6246a54012541c04dbafca) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
 - [docs(Header): add docs for Header](https://github.com/gazprom-neft/consta-uikit/commit/75ef513999664d556d211763e145876df1f55e0e) - [@gizeasy](https://github.com/gizeasy)
 - [fix(ProgressSpin): fixed fill(#753)](https://github.com/gazprom-neft/consta-uikit/commit/160fc94ce5db1d95e509b58cee85112940e5f2d9) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v1.11.1 (19/01/2021)
-- [feat(EventInterceptor): added textfield, checkbox, snackbar, select components (#749)](https://github.com/gazprom-neft/consta-uikit/commit/9ed6f341c1475704619db78936a772348a3c2599) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)

@@ -42,8 +42,8 @@ export const textFieldPropForm = [
 export type TextFieldPropForm = typeof textFieldPropForm[number];
 export const textFieldPropFormDefault: TextFieldPropForm = textFieldPropForm[0];
 
-export const textFieldPropState = ['alert', 'success', 'warning'] as const;
-export type TextFieldPropState = typeof textFieldPropState[number];
+export const textFieldPropStatus = ['alert', 'success', 'warning'] as const;
+export type TextFieldPropStatus = typeof textFieldPropStatus[number];
 
 export const textFieldPropWidth = ['default', 'full'] as const;
 export type TextFieldPropWidth = typeof textFieldPropWidth[number];
@@ -82,7 +82,8 @@ export type Props<TYPE extends string> = {
   size?: TextFieldPropSize;
   view?: TextFieldPropView;
   form?: TextFieldPropForm;
-  state?: TextFieldPropState;
+  state?: TextFieldPropStatus;
+  status?: TextFieldPropStatus;
   width?: TextFieldPropWidth;
   onFocus?: React.FocusEventHandler<HTMLElement>;
   onBlur?: React.FocusEventHandler<HTMLElement>;
