@@ -15,6 +15,7 @@ import {
   UserSelectExampleCustomTypesWithGroups,
 } from './examples/UserSelectExampleCustomTypes/UserSelectExampleCustomTypes';
 import { UserSelectExampleLabel } from './examples/UserSelectExampleLabel/UserSelectExampleLabel';
+import { UserSelectExampleStatus } from './examples/UserSelectExampleStatus/UserSelectExampleStatus';
 
 # UserSelect
 
@@ -34,6 +35,7 @@ import { UserSelectExampleLabel } from './examples/UserSelectExampleLabel/UserSe
   - [Неактивный вариант](#неактивный-элемент-списка)
   - [Несколько вариантов](#несколько-вариантов)
   - [Группы вариантов](#группы-вариантов)
+- [Статус](#статус-поля)
 - [Размер](#размер)
 - [Форма](#форма)
 - [Внешний вид](#внешний-вид)
@@ -322,6 +324,83 @@ export function UserSelectExampleGroups() {
     />
   );
 }
+```
+
+## Статус поля
+
+С помощью статуса можно выделить поле: показать, где ошибка, или, наоборот,
+отметить правильно заполненные поля.
+
+За статус отвечает свойство `status`. Если оно не указано, поле будет обычным.
+
+<UserSelectExampleStatus />
+
+```tsx
+type Item = {
+  label: string;
+  subLabel?: string;
+  avatarUrl?: string;
+  id: string | number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Андрей Андреев',
+    subLabel: 'andrey@gmail.com',
+    id: 1,
+  },
+  {
+    label: 'Иван Иванов',
+    subLabel: 'ivan@gmail.com',
+    id: 2,
+  },
+  {
+    label: 'Егор Егоров',
+    subLabel: 'igor@icloud.com',
+    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
+    id: 3,
+  },
+];
+
+export const UserSelectExampleStatus = () => {
+  const [value, setValue] = useState<Item | null>();
+
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <UserSelect
+        placeholder="default"
+        caption="default"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <UserSelect
+        placeholder="alert"
+        caption="alert"
+        status="alert"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <UserSelect
+        placeholder="warning"
+        caption="warning"
+        status="warning"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <UserSelect
+        placeholder="success"
+        caption="success"
+        status="success"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+    </StoryBookExample>
+  );
+};
 ```
 
 ## Размер
@@ -954,6 +1033,7 @@ export type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | ------------------------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | [`view?`](#внешний-вид)                                             | `default` , `clear`                                    | `default`                                                     | Внешний вид компонента                                                 |
 | [`disabled?`](#неактивный-выпадающий-список)                        | `boolean`                                              | -                                                             | Делает компонент неактивным                                            |
+| [`status?`](#статус-поля)                                           | `'', 'alert', 'success', 'warning'`                    | `' '`                                                         | Тип поля                                                               |
 | [`size?`](#размер)                                                  | `'xs'`, `'s'` , `'m'` , `'l'`                          | `'m'`                                                         | Размер компонента                                                      |
 | [`form?`](#форма)                                                   | `default`, `brick`, `round`                            | `default`                                                     | Форма компонента                                                       |
 | [`placeholder?`](#подсказка)                                        | `string`                                               | -                                                             | Подсказка, отображается, когда вариант не выбран                       |

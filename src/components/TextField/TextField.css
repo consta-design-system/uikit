@@ -3,6 +3,10 @@
   position: relative;
   display: inline-flex;
 
+  &_width_full {
+    width: 100%;
+  }
+
   &_size {
     &_xs {
       --input-height: var(--control-height-xs);
@@ -34,25 +38,21 @@
       flex-direction: column;
 
       & > *:not(:last-child) {
-        margin-bottom: var(--space-s);
+        margin-bottom: var(--space-xs);
       }
     }
 
     &_left {
       flex-direction: row;
 
-      & > *:not(:last-child) {
-        margin-right: var(--space-s);
-      }
-    }
-  }
-
-  &-Label {
-    &_labelPosition {
-      &_left {
+      & .TextField-Label {
         display: inline-flex;
         align-items: center;
         height: var(--input-height);
+      }
+
+      & > *:not(:last-child) {
+        margin-right: var(--space-s);
       }
     }
   }
@@ -61,19 +61,17 @@
     display: inline-flex;
     flex-direction: column;
     width: 100%;
-  }
 
-  &-Caption {
-    margin-top: var(--space-2xs);
-    margin-left: var(--caption-margin-left);
+    & .TextField-Caption {
+      margin-top: var(--space-2xs);
+      margin-left: var(--caption-margin-left);
+    }
   }
 
   &_view_clear {
-    --caption-margin-left: 0;
-  }
-
-  &_width_full {
-    width: 100%;
+    & .TextField-Caption {
+      --caption-margin-left: 0;
+    }
   }
 
   &-InputContainer {
@@ -122,27 +120,28 @@
     }
 
     &_view_default {
+      --container-border-color: var(--color-control-bg-border-default);
       padding: 0 var(--input-space);
       color: var(--color-control-typo-default);
       background: var(--color-control-bg-default);
-      border: var(--control-border-width) solid var(--color-control-bg-border-default);
+      border: var(--control-border-width) solid var(--container-border-color);
       border-radius: var(--control-radius);
 
       &:hover {
         border-color: var(--color-control-bg-border-default-hover);
       }
 
-      &.TextField-InputContainer_state {
+      &.TextField-InputContainer_status {
         &_alert {
-          border-color: var(--color-bg-alert);
+          --container-border-color: var(--color-bg-alert);
         }
 
         &_success {
-          border-color: var(--color-bg-success);
+          --container-border-color: var(--color-bg-success);
         }
 
         &_warning {
-          border-color: var(--color-bg-warning);
+          --container-border-color: var(--color-bg-warning);
         }
       }
 

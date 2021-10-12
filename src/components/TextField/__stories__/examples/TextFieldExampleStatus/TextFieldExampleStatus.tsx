@@ -10,9 +10,9 @@ export const TextFieldExampleStatus = () => {
 
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <TextField onChange={handleChange} value={value} state="success" placeholder="success" />
-      <TextField onChange={handleChange} value={value} state="alert" placeholder="error" />
-      <TextField onChange={handleChange} value={value} state="warning" placeholder="warning" />
+      <TextField onChange={handleChange} value={value} status="success" placeholder="success" />
+      <TextField onChange={handleChange} value={value} status="alert" placeholder="error" />
+      <TextField onChange={handleChange} value={value} status="warning" placeholder="warning" />
       <TextField onChange={handleChange} value={value} placeholder="TextField" />
     </StoryBookExample>
   );
