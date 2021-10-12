@@ -30,9 +30,17 @@ const sizeMap: Record<ProgressSpinPropSize, number> = {
   '2xl': 44,
 };
 
+const strokeWidthMap: Record<ProgressSpinPropSize, number> = {
+  's': 2,
+  'm': 2,
+  'l': 2.2,
+  'xl': 2.7,
+  '2xl': 3.5,
+};
+
 function getSvgParamsBySize(size: ProgressSpinPropSize): [number, number, number, number] {
   const sizeOfPixels = getSizeByMap(sizeMap, size);
-  const strokeWidth = size === 's' || size === 'm' ? 2 : 4;
+  const strokeWidth = getSizeByMap(strokeWidthMap, size);
   const radius = (sizeOfPixels - strokeWidth) / 2;
   const strokeDasharray = radius * 2 * Math.PI;
 
