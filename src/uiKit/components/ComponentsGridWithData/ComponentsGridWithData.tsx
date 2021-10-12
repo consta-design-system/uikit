@@ -109,7 +109,7 @@ const data: ComponentsGridProps['data'] = [
     description: 'Пагинация. Можно выбрать страницу.',
   },
   {
-    href: '/?path=/story/components-popover--playground',
+    href: '/?path=/story/components-popover--popover-banned-positions-story',
     name: 'Popover',
     description: 'Поповер. Позиционирование элементов по координатам или якорю.',
   },
@@ -129,8 +129,8 @@ const data: ComponentsGridProps['data'] = [
     description: 'Группа радиокнопок. Можно выбрать один вариант.',
   },
   {
-    href: '/?path=/story/components-responces--playground',
-    name: 'Responces',
+    href: '/?path=/story/components-responses--playground',
+    name: 'Responses',
     description:
       ' Заглушки с сообщениями об ошибках и важных статусах (404, 503, не найдены данные и похожие).',
   },
@@ -145,8 +145,8 @@ const data: ComponentsGridProps['data'] = [
     description: 'Всплывающее окно. Прилипает к краю экрана.',
   },
   {
-    href: '/?path=/story/components-snackbbar--playground',
-    name: 'SnackbBar',
+    href: '/?path=/story/components-snackbar--playground',
+    name: 'SnackBar',
     description: 'Мгновенные сообщения для пользователя. Перекрывает содержимое.',
   },
   {
@@ -170,7 +170,7 @@ const data: ComponentsGridProps['data'] = [
     description: 'Табы. Переключает вкладки на странице.',
   },
   {
-    href: '/?path=/story/components-table--playground',
+    href: '/?path=/story/components-table--custom-rows',
     name: 'Table',
     description: 'Таблица. Выводит данные с фильтрами и сортировкой.',
   },
@@ -205,7 +205,7 @@ const data: ComponentsGridProps['data'] = [
     description: 'Таймер. Отсчитывает время до окончания процесса.',
   },
   {
-    href: '/?path=/story/components-tooltip--playground',
+    href: '/?path=/story/components-tooltip--tooltip-positioned-by-anchor-story',
     name: 'Tooltip',
     description: 'Тултип. Всплывающее окно возле элемента или точки.',
   },
