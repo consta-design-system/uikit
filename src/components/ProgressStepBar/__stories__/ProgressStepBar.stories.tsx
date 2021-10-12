@@ -13,7 +13,6 @@ const cnProgressStepBarStories = cn('ProgressStepBarStories');
 const stepsExample = [
   {
     label: 'Первый пункт',
-    id: 1,
     point: 1,
     status: 'normal',
     lineStatus: 'normal',
@@ -22,7 +21,6 @@ const stepsExample = [
   {
     label: 'Второй пункт',
     point: 2,
-    id: 2,
     status: 'warning',
     progress: true,
     lineStatus: 'warning',
@@ -31,7 +29,6 @@ const stepsExample = [
   {
     label: 'Третий пункт',
     point: 3,
-    id: 3,
     status: 'alert',
     progress: true,
     lineStatus: 'alert',
@@ -40,7 +37,6 @@ const stepsExample = [
   {
     label: 'Четвертый пункт',
     point: 4,
-    id: 4,
     status: 'success',
     tooltipContent: `Небольшое описание выполнения или состояния текущего этапа`,
   },
@@ -62,7 +58,7 @@ export function Playground() {
       direction={direction}
       size={size}
       steps={steps}
-      activeStepId={activeStep}
+      activeStepIndex={activeStep}
     />
   );
 }

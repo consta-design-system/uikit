@@ -1,0 +1,163 @@
+.ProgressStepBarItem {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+
+  &_direction {
+    &_horizontal {
+      flex-direction: column;
+
+      & .ProgressStepBarItem-Point_size_xs {
+        margin-bottom: var(--space-2xs);
+      }
+
+      & .ProgressStepBarItem-Point_size_s,
+      & .ProgressStepBarItem-Point_size_m {
+        margin-bottom: var(--space-xs);
+      }
+    }
+
+    &_vertical {
+      flex-direction: row;
+
+      & .ProgressStepBarItem-Point {
+        margin-right: var(--space-xs);
+      }
+
+      & .ProgressStepBarItem-Content {
+        &_size_xs {
+          margin-top: -4px;
+        }
+      }
+    }
+  }
+
+  &_position {
+    &_start {
+      flex: 1;
+
+      &.ProgressStepBarItem_direction_horizontal,
+      & .ProgressStepBarItem-Content {
+        align-items: flex-start;
+        text-align: left;
+      }
+    }
+
+    &_center {
+      flex: 2;
+
+      &.ProgressStepBarItem_direction_horizontal,
+      & .ProgressStepBarItemr-Content {
+        align-items: center;
+        text-align: center;
+      }
+    }
+
+    &_end {
+      flex: 1;
+
+      &.ProgressStepBarItem_direction_horizontal,
+      & .ProgressStepBarItem-Content {
+        align-items: flex-end;
+        text-align: right;
+      }
+    }
+  }
+
+  &_status {
+    &_system {
+      --point-background: var(--color-bg-system);
+      --point-content-color: var(--color-typo-secondary);
+    }
+
+    &_normal {
+      --point-background: var(--color-bg-normal);
+      --point-content-color: var(--color-bg-default);
+    }
+
+    &_success {
+      --point-background: var(--color-bg-success);
+      --point-content-color: var(--color-bg-default);
+    }
+
+    &_warning {
+      --point-background: var(--color-bg-warning);
+      --point-content-color: var(--color-bg-default);
+    }
+
+    &_alert {
+      --point-background: var(--color-bg-alert);
+      --point-content-color: var(--color-bg-default);
+    }
+  }
+
+  & .ProgressStepBarItem-Point-Text {
+    color: var(--point-content-color);
+  }
+
+  & .ProgressSpin {
+    stroke: var(--point-content-color);
+  }
+
+  &-Point {
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: var(--point-size);
+    min-height: var(--point-size);
+    margin: 0;
+    padding: 0;
+    color: var(--color-bg-default);
+    background-color: var(--point-background);
+    border: none;
+    border-radius: calc(var(--point-size) * 0.5);
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &-Text {
+      color: var(--color-typo-secondary);
+      transition: color 0.3s;
+    }
+
+    & .ProgressSpin {
+      transition: stroke 0.3s;
+    }
+
+    & .Timer-Counter {
+      display: none;
+    }
+
+    &_size {
+      &_xs {
+        --point-size: var(--space-xs);
+      }
+
+      &_s {
+        --point-size: var(--space-m);
+      }
+
+      &_m {
+        --point-size: var(--space-xl);
+      }
+    }
+  }
+
+  &-Label {
+    &_size {
+      &_xs {
+        margin-bottom: var(--space-2xs);
+      }
+
+      &_s {
+        margin-bottom: var(--space-xs);
+      }
+
+      &_m {
+        margin-bottom: var(--space-s);
+      }
+    }
+  }
+}

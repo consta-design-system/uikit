@@ -5,7 +5,6 @@ import { ProgressStepBar } from '../../../ProgressStepBar';
 
 type Item = {
   label: string;
-  id: number | string;
   point?: number;
   progress?: boolean;
   status?: 'normal' | 'success' | 'alert' | 'warning';
@@ -15,7 +14,6 @@ type Item = {
 const steps: Item[] = [
   {
     label: 'Пункт 1',
-    id: 1,
     point: 1,
     status: 'normal',
     lineStatus: 'normal',
@@ -23,21 +21,18 @@ const steps: Item[] = [
   {
     label: 'Пункт 2',
     point: 2,
-    id: 2,
     status: 'normal',
     lineStatus: 'normal',
   },
   {
     label: 'Пункт 3',
     point: 3,
-    id: 3,
     status: 'normal',
     lineStatus: 'normal',
   },
   {
     label: 'Пункт 4',
     point: 4,
-    id: 4,
     status: 'normal',
   },
 ];
@@ -45,9 +40,9 @@ const steps: Item[] = [
 export const ProgressStepBarExampleSize = () => {
   return (
     <div className={cnDocsDecorator('Section')}>
-      <ProgressStepBar size="xs" direction="horizontal" steps={steps} activeStepId={2} />
-      <ProgressStepBar size="s" direction="horizontal" steps={steps} activeStepId={2} />
-      <ProgressStepBar size="m" direction="horizontal" steps={steps} activeStepId={2} />
+      <ProgressStepBar size="xs" direction="horizontal" steps={steps} activeStepIndex={2} />
+      <ProgressStepBar size="s" direction="horizontal" steps={steps} activeStepIndex={2} />
+      <ProgressStepBar size="m" direction="horizontal" steps={steps} activeStepIndex={2} />
     </div>
   );
 };

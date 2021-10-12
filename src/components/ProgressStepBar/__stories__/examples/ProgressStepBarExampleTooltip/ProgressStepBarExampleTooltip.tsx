@@ -4,7 +4,6 @@ import { ProgressStepBar } from '../../../ProgressStepBar';
 
 type Item = {
   label: string;
-  id: number | string;
   tooltipContent?: string;
   point?: number;
   progress?: boolean;
@@ -15,7 +14,6 @@ type Item = {
 const steps: Item[] = [
   {
     label: 'Первый пункт',
-    id: 1,
     point: 1,
     status: 'normal',
     lineStatus: 'normal',
@@ -24,7 +22,6 @@ const steps: Item[] = [
   {
     label: 'Второй пункт',
     point: 2,
-    id: 2,
     status: 'warning',
     progress: true,
     lineStatus: 'warning',
@@ -33,7 +30,6 @@ const steps: Item[] = [
   {
     label: 'Третий пункт',
     point: 3,
-    id: 3,
     status: 'alert',
     progress: true,
     lineStatus: 'alert',
@@ -42,7 +38,6 @@ const steps: Item[] = [
   {
     label: 'Четвертый пункт',
     point: 4,
-    id: 4,
     status: 'success',
     tooltipContent: `Небольшое описание выполнения или состояния текущего этапа`,
   },

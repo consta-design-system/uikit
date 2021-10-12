@@ -5,13 +5,16 @@ import React, { createRef, forwardRef, useEffect, useMemo, useRef, useState } fr
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 
 import { ProgressStepBarItem, PropPosition } from './ProgressStepBarItem/ProgressStepBarItem';
+import { ProgressStepBarLine } from './ProgressStepBarLine/ProgressStepBarLine';
 import {
   cnProgressStepBar,
   DefaultItem,
+  Line,
   ProgressStepBarComponent,
   ProgressStepBarProps,
   propDirectionDefault,
   propSizeDefault,
+  StepBarItem,
   withDefaultGetters,
 } from './helpers';
 
@@ -24,11 +27,10 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
     direction = propDirectionDefault,
     size = propSizeDefault,
     className,
-    activeStepId,
+    activeStepIndex,
+    onItemClick,
     getItemContent,
     getItemLabel,
-    getItemKey,
-    getItemOnClick,
     getItemPoint,
     getItemProgress,
     getItemStatus,
@@ -37,24 +39,24 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
     ...otherProps
   } = withDefaultGetters(props);
 
-  const [activeStepIndex, setActiveStepIndex] = useState<number>(-1);
-  const [linesSize, setLinesSize] = useState<number[]>([]);
+  const [lines, setLines] = useState<Line[]>([]);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (steps.length > 0) {
-      const sizeArray: number[] = [];
+      const linesArray: Line[] = [];
       steps.forEach((step, index) => {
-        if (getItemKey(step) === activeStepId) {
-          setActiveStepIndex(index);
-        }
         if (index !== steps.length - 1)
-          sizeArray.push(getLineSize(containerRef, stepsRef[index + 1]));
+          linesArray.push({
+            status: getItemLineStatus(step),
+            size: getLineSize(containerRef, stepsRef[index + 1]),
+          });
       });
-      setLinesSize(sizeArray);
-    } else setActiveStepIndex(-1);
-  }, [activeStepId, steps, direction, size]);
+      console.log(linesArray);
+      setLines(linesArray);
+    }
+  }, [activeStepIndex, steps, direction, size]);
 
   const stepsRef = useMemo(
     () => new Array(steps.length).fill(null).map(() => createRef<HTMLButtonElement>()),
@@ -76,54 +78,41 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
     return size;
   };
 
+  const getStepItem: (item: ITEM) => StepBarItem = (item) => {
+    return {
+      content: getItemContent(item),
+      label: getItemLabel(item),
+      point: getItemPoint(item),
+      progress: getItemProgress(item),
+      status: getItemStatus(item),
+      tooltipContent: getItemTooltipContent(item),
+    };
+  };
+
   return (
     <div
       ref={useForkRef([ref, containerRef])}
       {...otherProps}
       className={cnProgressStepBar({ direction }, [className])}
     >
-      <div
-        style={{
-          ['--line-size' as string]: `${linesSize[steps.length - 2]}px`,
-        }}
-        className={cnProgressStepBar('Line', { size, direction })}
-      >
-        {steps.map((step, index) => (
-          <div
-            style={{
-              ['--progress-line-size' as string]: `${
-                index < activeStepIndex ? linesSize[index] : 0
-              }px`,
-              ['--progress-line-index' as string]: steps.length - index,
-              ['--progress-line-resize' as string]: `${
-                index < activeStepIndex ? (index + 1) * 0.3 : (steps.length - index - 1) * 0.3
-              }s`,
-            }}
-            className={cnProgressStepBar('ProgressLine', {
-              status: getItemLineStatus(step),
-              direction,
-            })}
-          />
-        ))}
-      </div>
+      <ProgressStepBarLine
+        lines={lines}
+        size={size}
+        direction={direction}
+        activeStepIndex={activeStepIndex}
+      />
       {steps.map((step, index) => {
         let position: PropPosition = 'center';
         if (index === steps.length - 1) position = 'end';
         if (index === 0) position = 'start';
         return (
           <ProgressStepBarItem
-            step={step}
+            step={getStepItem(step)}
             size={size}
             position={position}
             ref={stepsRef[index]}
             direction={direction}
-            getItemContent={getItemContent}
-            getItemLabel={getItemLabel}
-            getItemOnClick={getItemOnClick}
-            getItemPoint={getItemPoint}
-            getItemProgress={getItemProgress}
-            getItemStatus={getItemStatus}
-            getItemTooltipContent={getItemTooltipContent}
+            onItemClick={(e) => onItemClick?.(e, step, index)}
           />
         );
       })}

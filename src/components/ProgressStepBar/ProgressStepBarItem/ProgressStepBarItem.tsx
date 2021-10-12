@@ -1,44 +1,30 @@
+import './ProgressStepBarItem.css';
+
 import React, { forwardRef, useRef, useState } from 'react';
 
+import { cn } from '../../../utils/bem';
 import { ProgressSpin } from '../../ProgressSpin/ProgressSpin';
 import { Text } from '../../Text/Text';
 import { Tooltip } from '../../Tooltip/Tooltip';
-import {
-  cnProgressStepBar,
-  DefaultItem,
-  PropDirection,
-  PropGetItemContent,
-  PropGetItemLabel,
-  PropGetItemOnCLick,
-  PropGetItemPoint,
-  PropGetItemProgress,
-  PropGetItemStatus,
-  PropGetItemTooltipContent,
-  PropSize,
-  propStatusDefault,
-} from '../helpers';
+import { DefaultItem, PropDirection, PropSize, propStatusDefault, StepBarItem } from '../helpers';
 
 const propPosition = ['center', 'start', 'end'] as const;
 export type PropPosition = typeof propPosition[number];
 const propPositionDefault: PropPosition = propPosition[0];
 
 type Props<ITEM> = {
-  step: ITEM;
+  step: StepBarItem;
   position?: PropPosition;
   direction: PropDirection;
   size: PropSize;
-  getItemLabel: PropGetItemLabel<ITEM>;
-  getItemTooltipContent: PropGetItemTooltipContent<ITEM>;
-  getItemPoint: PropGetItemPoint<ITEM>;
-  getItemProgress: PropGetItemProgress<ITEM>;
-  getItemContent: PropGetItemContent<ITEM>;
-  getItemOnClick: PropGetItemOnCLick<ITEM>;
-  getItemStatus: PropGetItemStatus<ITEM>;
+  onItemClick?: (e: React.MouseEvent) => void;
 };
 
-type StepComponent = <ITEM = DefaultItem>(
+type StepComponent = <ITEM>(
   props: Props<ITEM> & React.RefAttributes<HTMLButtonElement>,
 ) => React.ReactElement | null;
+
+const cnProgressStepBarItem = cn('ProgressStepBarItem');
 
 function ProgressStepBarItemRender<ITEM = DefaultItem>(
   props: Props<ITEM>,
@@ -48,14 +34,8 @@ function ProgressStepBarItemRender<ITEM = DefaultItem>(
     step,
     direction,
     size,
+    onItemClick,
     position = propPositionDefault,
-    getItemContent,
-    getItemLabel,
-    getItemOnClick,
-    getItemPoint,
-    getItemProgress,
-    getItemStatus,
-    getItemTooltipContent,
     ...otherProps
   } = props;
 
@@ -65,31 +45,30 @@ function ProgressStepBarItemRender<ITEM = DefaultItem>(
   const anchorRef = useRef<HTMLDivElement>(null);
 
   const PointContent =
-    getItemPoint(step) instanceof SVGElement ? (
-      getItemPoint(step)
+    step.point instanceof SVGElement ? (
+      step.point
     ) : (
       <Text
-        className={cnProgressStepBar('Point-Text')}
+        className={cnProgressStepBarItem('Point-Text')}
         size={size === 's' ? '2xs' : 'xs'}
         weight="bold"
       >
-        {getItemPoint(step)?.toString()[0]}
+        {step.point?.toString()[0]}
       </Text>
     );
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const clickAction = getItemOnClick(step);
-    clickAction && clickAction(e);
+    onItemClick?.(e);
     setIsContentHidden(!isContentHidden);
   };
 
   return (
     <>
       <div
-        className={cnProgressStepBar('Step', {
+        className={cnProgressStepBarItem({
           direction,
           position,
-          status: getItemStatus(step) || propStatusDefault,
+          status: step.status || propStatusDefault,
         })}
         {...otherProps}
       >
@@ -98,33 +77,33 @@ function ProgressStepBarItemRender<ITEM = DefaultItem>(
           type="button"
           onMouseEnter={() => setIsTooltipHidden(false)}
           onMouseLeave={() => setIsTooltipHidden(true)}
-          className={cnProgressStepBar('Point', {
+          className={cnProgressStepBarItem('Point', {
             size,
           })}
           onClick={handleClick}
         >
-          {size !== 'xs' && (getItemProgress(step) ? <ProgressSpin size={size} /> : PointContent)}
+          {size !== 'xs' && (step.progress ? <ProgressSpin size={size} /> : PointContent)}
         </button>
-        <div className={cnProgressStepBar('Content', { size })}>
+        <div className={cnProgressStepBarItem('Content')}>
           <Text
-            className={cnProgressStepBar('Label')}
+            className={cnProgressStepBarItem('Label', { size })}
             ref={anchorRef}
             size={size}
             lineHeight={size === 's' ? 'xs' : size}
             view="primary"
           >
-            {getItemLabel(step)}
+            {step.label}
           </Text>
-          {getItemContent(step)}
+          {step.content}
         </div>
       </div>
-      {getItemTooltipContent(step) && !isTooltipHidden && (
+      {step.tooltipContent && !isTooltipHidden && (
         <Tooltip
           anchorRef={anchorRef}
           direction={direction === 'horizontal' ? 'downCenter' : 'leftUp'}
           spareDirection={direction === 'horizontal' ? 'upCenter' : 'rightUp'}
         >
-          {getItemTooltipContent(step)}
+          {step.tooltipContent}
         </Tooltip>
       )}
     </>

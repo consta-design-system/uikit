@@ -1,0 +1,77 @@
+.ProgressStepBarLine {
+  position: absolute;
+  background-color: var(--color-bg-system);
+
+  &_direction {
+    &_horizontal {
+      top: var(--step-line-padding);
+      left: 0;
+      width: var(--line-size);
+      height: var(--step-line-size);
+    }
+
+    &_vertical {
+      top: 0;
+      left: var(--step-line-padding);
+      width: var(--step-line-size);
+      height: var(--line-size);
+    }
+  }
+
+  &_size {
+    &_xs {
+      --step-line-size: var(--space-3xs);
+      --step-line-padding: calc((var(--space-xs) - var(--space-3xs)) * 0.5);
+    }
+
+    &_s {
+      --step-line-size: var(--space-2xs);
+      --step-line-padding: calc((var(--space-m) - var(--space-2xs)) * 0.5);
+    }
+
+    &_m {
+      --step-line-size: var(--space-2xs);
+      --step-line-padding: calc((var(--space-xl) - var(--space-2xs)) * 0.5);
+    }
+  }
+
+  &-ProgressLine {
+    position: absolute;
+    z-index: var(--progress-line-index);
+    top: 0;
+    left: 0;
+    background-color: var(--progress-line-color);
+
+    &_direction {
+      &_horizontal {
+        width: var(--progress-line-size);
+        height: var(--step-line-size);
+        transition: width var(--progress-line-resize);
+      }
+
+      &_vertical {
+        width: var(--step-line-size);
+        height: var(--progress-line-size);
+        transition: height var(--progress-line-resize);
+      }
+    }
+
+    &_status {
+      &_normal {
+        --progress-line-color: var(--color-bg-normal);
+      }
+
+      &_success {
+        --progress-line-color: var(--color-bg-success);
+      }
+
+      &_warning {
+        --progress-line-color: var(--color-bg-warning);
+      }
+
+      &_alert {
+        --progress-line-color: var(--color-bg-alert);
+      }
+    }
+  }
+}

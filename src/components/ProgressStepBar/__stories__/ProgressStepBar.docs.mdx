@@ -16,13 +16,11 @@ import { ProgressStepBarExampleContent } from './examples/ProgressStepBarExample
 Список шагов передаются в свойстве `steps`. Тип элементов массива `steps` по умолчанию равен [DefaultItem](#свойства). Что внутри:
 
 - `label` - текст (название шага)
-- `id` - уникальный ключ
 - `tooltipContent` - вспомогательный текст для [Tooltip](?path=/docs/components-tooltip--tooltip-positioned-by-anchor-story) (краткое описание шага)
 - `lineStatus` - цвет линии прогресса, если шаг выполнен
 - `point` - номер шага или svg
 - `progress` - находится ли шаг на выполнении, если да то отображается кольцо загрузки
 - `content` - прочий контент для шага (лэйблы, описания, картинки)
-- `onClick` - действие запущенное по нажатию на шаг
 
 ### Подсказка
 
@@ -60,7 +58,7 @@ import { ProgressStepBarExampleContent } from './examples/ProgressStepBarExample
 
 ### Активный шаг
 
-Активный шаг задается идентификатором шага и передаётся в свойство `activeStepId`.
+Активный шаг задается идентификатором шага и передаётся в свойство `activeStepIndex`.
 
 ### Размер
 
@@ -71,7 +69,6 @@ import { ProgressStepBarExampleContent } from './examples/ProgressStepBarExample
 ```tsx
 type Item = {
   label?: string;
-  id: number | string;
   point?: number;
   progress?: boolean;
   status?: 'normal' | 'success' | 'alert' | 'warning';
@@ -81,7 +78,6 @@ type Item = {
 const steps: Item[] = [
   {
     label: 'Пункт 1',
-    id: 1,
     point: 1,
     status: 'normal',
     lineStatus: 'normal',
@@ -89,30 +85,27 @@ const steps: Item[] = [
   {
     label: 'Пункт 2',
     point: 2,
-    id: 2,
     status: 'normal',
     lineStatus: 'normal',
   },
   {
     label: 'Пункт 3',
     point: 3,
-    id: 3,
     status: 'normal',
     lineStatus: 'normal',
   },
   {
     label: 'Пункт 4',
     point: 4,
-    id: 4,
     status: 'normal',
   },
 ];
 
 export const ProgressStepBarExampleSize = () => {
   return (
-      <ProgressStepBar size="xs" direction="horizontal" steps={steps} activeStepId={2} />
-      <ProgressStepBar size="s" direction="horizontal" steps={steps} activeStepId={2} />
-      <ProgressStepBar size="m" direction="horizontal" steps={steps} activeStepId={2} />
+      <ProgressStepBar size="xs" direction="horizontal" steps={steps} activeStepIndex={2} />
+      <ProgressStepBar size="s" direction="horizontal" steps={steps} activeStepIndex={2} />
+      <ProgressStepBar size="m" direction="horizontal" steps={steps} activeStepIndex={2} />
   );
 };
 ```
@@ -122,34 +115,31 @@ export const ProgressStepBarExampleSize = () => {
 ```tsx
 export type DefaultItem = {
   label: string;
-  id: string | number;
   tooltipContent?: string;
   lineStatus?: PropStatus;
   point?: PointNumbersMap | SVGElement;
   status?: PropStatus;
   progress?: boolean;
   content?: React.ReactNode;
-  onClick?: React.EventHandler<React.MouseEvent>;
 };
 
 export type PropStatus = 'normal' | 'success' | 'warning' | 'alert';
 export type PointNumbersMap = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 ```
 
-| Свойство                         | Тип или варианты значения           | По умолчанию                    | Описание                                             |
-| -------------------------------- | ----------------------------------- | ------------------------------- | ---------------------------------------------------- |
-| [`steps`](#элементы)             | `ITEM[]`                            | -                               | Шаги                                                 |
-| [`direction?`](#ориентация)      | `'horizontal', 'verical'`           | `'horizontal'`                  | Ориентация                                           |
-| [`size?`](#размер)               | `'xs', 's', 'm'`                    | `'s'`                           | Размер                                               |
-| [`activeStepId?`](#активный-шаг) | `string`<code>&#124;</code>`number` | -                               | Идентификатор активного шага                         |
-| `getItemLabel?`                  | `PropGetItemLabel<ITEM>`            | `(item) => item.label`          | Функция для определения названия элемента            |
-| `getItemKey?`                    | `PropGetItemKey<ITEM>`              | `(item) => item.id`             | Функция для определения уникального ключа элемента   |
-| `getItemLineStatus?`             | `PropGetItemLineStatus<ITEM>`       | `(item) => item.lineStatus`     | Функция для определения статуса линии                |
-| `getItemTooltipContent?`         | `PropGetItemTooltipContent<ITEM>`   | `(item) => item.tooltipContent` | Функция для определения контента тултипа             |
-| `getItemPoint?`                  | `PropGetItemPoint<ITEM>`            | `(item) => item.point`          | Функция для определения внктреннего контента шага    |
-| `getItemProgress?`               | `PropGetItemProgress<ITEM>`         | `(item) => item.progress`       | Функция для определения находится ли шаг в прогрессе |
-| `getItemContent?`                | `PropGetItemContent<ITEM>;`         | `(item) => item.content`        | Функция для определения контента                     |
-| `getItemOnClick?`                | `PropGetItemOnCLick<ITEM>`          | `(item) => item.onClick`        | Функция для определения действия клика               |
-| `getItemStatus?`                 | `PropGetItemStatus<ITEM>`           | `(item) => item.status`         | Функция для определения статуса шага                 |
-| `ref?`                           | `React.Ref<HTMLDivElement>`         | -                               | Ссылка на основной контейнер                         |
-| `className?`                     | `string`                            | -                               | Дополнительный CSS-класс                             |
+| Свойство                            | Тип или варианты значения           | По умолчанию                    | Описание                                             |
+| ----------------------------------- | ----------------------------------- | ------------------------------- | ---------------------------------------------------- |
+| [`steps`](#элементы)                | `ITEM[]`                            | -                               | Шаги                                                 |
+| [`direction?`](#ориентация)         | `'horizontal', 'verical'`           | `'horizontal'`                  | Ориентация                                           |
+| [`size?`](#размер)                  | `'xs', 's', 'm'`                    | `'s'`                           | Размер                                               |
+| [`activeStepIndex?`](#активный-шаг) | `string`<code>&#124;</code>`number` | -                               | Идентификатор активного шага                         |
+| `onItemClick?`                      | `(e, item, index) => void`          | -                               | Функция для ивента нажатя на определенный шаг        |
+| `getItemLabel?`                     | `PropGetItemLabel<ITEM>`            | `(item) => item.label`          | Функция для определения названия элемента            |
+| `getItemLineStatus?`                | `PropGetItemLineStatus<ITEM>`       | `(item) => item.lineStatus`     | Функция для определения статуса линии                |
+| `getItemTooltipContent?`            | `PropGetItemTooltipContent<ITEM>`   | `(item) => item.tooltipContent` | Функция для определения контента тултипа             |
+| `getItemPoint?`                     | `PropGetItemPoint<ITEM>`            | `(item) => item.point`          | Функция для определения внктреннего контента шага    |
+| `getItemProgress?`                  | `PropGetItemProgress<ITEM>`         | `(item) => item.progress`       | Функция для определения находится ли шаг в прогрессе |
+| `getItemContent?`                   | `PropGetItemContent<ITEM>;`         | `(item) => item.content`        | Функция для определения контента                     |
+| `getItemStatus?`                    | `PropGetItemStatus<ITEM>`           | `(item) => item.status`         | Функция для определения статуса шага                 |
+| `ref?`                              | `React.Ref<HTMLDivElement>`         | -                               | Ссылка на основной контейнер                         |
+| `className?`                        | `string`                            | -                               | Дополнительный CSS-класс                             |
