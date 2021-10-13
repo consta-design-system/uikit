@@ -1,6 +1,6 @@
 import './SelectDropdown.css';
 
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import {
@@ -43,6 +43,7 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   getGroupLabel?: (group: GROUP) => string;
   labelForCreate?: string;
   labelForNotFound?: string;
+  isListEmpty?: boolean;
 }>;
 
 type SelectDropdown = <ITEM, GROUP>(props: Props<ITEM, GROUP>) => React.ReactElement | null;
@@ -64,25 +65,12 @@ export const SelectDropdown: SelectDropdown = (props) => {
     renderItem,
     visibleItems,
     getGroupLabel,
+    isListEmpty,
   } = props;
-  const [isListEmpty, setIsListEmpty] = useState<boolean>(false);
 
   const getIndex = fabricIndex(-1);
 
   const indent = form === 'round' ? 'increased' : 'normal';
-
-  const getIsListEmpty: (items: typeof visibleItems) => boolean = (items) => {
-    let flag = true;
-    items.forEach((group) => {
-      if (isOptionForCreate(group)) flag = false;
-      else if (group.items.length > 0 || group.group) flag = false;
-    });
-    return flag;
-  };
-
-  useEffect(() => {
-    setIsListEmpty(getIsListEmpty(visibleItems));
-  }, [JSON.stringify(visibleItems)]);
 
   return (
     <CSSTransition

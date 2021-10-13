@@ -175,6 +175,18 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
     return optionForCreate ? [optionForCreate, ...resultGroups] : resultGroups;
   }, [filteredOptions, groups, getItemGroupKey, getGroupKey, sortGroups, optionForCreate]);
 
+  const isListEmpty = useMemo(() => {
+    let flag = true;
+    if (searchValue.length > 0) {
+      visibleItems.forEach((group) => {
+        if (isOptionForCreate(group) || group.items.length > 0 || group.group) {
+          flag = false;
+        }
+      });
+    }
+    return flag;
+  }, [visibleItems]);
+
   const getSelectedOptionIndex = (): number => {
     let index = 0;
     if (value.length > 0) {
@@ -521,5 +533,6 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
     searchValue,
     clearValue,
     getHandleRemoveValue,
+    isListEmpty,
   };
 }
