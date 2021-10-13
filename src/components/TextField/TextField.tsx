@@ -49,6 +49,7 @@ export function TextFieldRender<TYPE extends string>(
     view = textFieldPropViewDefault,
     form = textFieldPropFormDefault,
     state,
+    status,
     width = textFieldPropWidthDefault,
     onBlur,
     onFocus,
@@ -143,7 +144,7 @@ export function TextFieldRender<TYPE extends string>(
   return (
     <div className={cnTextField({ labelPosition, size, view, width }, [className])} {...otherProps}>
       {label && (
-        <FieldLabel className={cnTextField('Label', { labelPosition })} size={size}>
+        <FieldLabel className={cnTextField('Label')} size={size}>
           {label}
         </FieldLabel>
       )}
@@ -152,7 +153,7 @@ export function TextFieldRender<TYPE extends string>(
           className={cnTextField('InputContainer', {
             view,
             form,
-            state,
+            status: status || state,
             disabled,
             type,
             focus,
@@ -215,7 +216,7 @@ export function TextFieldRender<TYPE extends string>(
           )}
         </div>
         {caption && (
-          <FieldCaption className={cnTextField('Caption')} status={state}>
+          <FieldCaption className={cnTextField('Caption')} status={status || state}>
             {caption}
           </FieldCaption>
         )}

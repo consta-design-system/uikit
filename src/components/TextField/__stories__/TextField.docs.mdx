@@ -63,14 +63,14 @@ import { TextFieldExampleCaption } from './examples/TextFieldExampleCaption/Text
 С помощью статуса можно выделить поле: показать, где ошибка, или, наоборот,
 отметить правильно заполненные поля.
 
-За статус отвечает свойство `state`. Если оно не указано, поле будет обычным.
+За статус отвечает свойство `status`. Если оно не указано, поле будет обычным.
 
 <TextFieldExampleStatus />
 
 ```tsx
-<TextField state="success" placeholder="success" />
-<TextField state="alert" placeholder="error" />
-<TextField state="warning" placeholder="warning" />
+<TextField status="success" placeholder="success" />
+<TextField status="alert" placeholder="error" />
+<TextField status="warning" placeholder="warning" />
 <TextField placeholder="TextField" />
 ```
 
@@ -187,9 +187,10 @@ const App = () => {
 <TextFieldExampleCaption />
 
 ```tsx
-<TextField state="success" placeholder="success" caption="success" />
-<TextField state="alert" placeholder="error" caption="error" />
-<TextField state="warning" placeholder="warning" caption="warning" />
+<TextField status="success" placeholder="success" caption="success" />
+<TextField status="alert" placeholder="error" caption="error" />
+<TextField status="warning" placeholder="warning" caption="warning" />
+
 <TextField placeholder="TextField" caption="default" />
 ```
 
@@ -257,8 +258,8 @@ const App = () => {
 
 | Свойство                                   | Тип                                                                                                                                                                  | По умолчанию | Описание                                                                                                                   |
 | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| [`type?`](#тег-для-поля)                   | `'text', 'textarea', 'number'`                                                                                                                                       | `'text'`     | Тег для текстового поля в DOM                                                                                              |
-| [`state?`](#статус-поля)                   | `'', 'alert', 'success', 'warning'`                                                                                                                                  | `' '`        | Тип поля                                                                                                                   |
+| [`type?`](#тег-для-поля)                   | `'text', 'textarea'`                                                                                                                                                 | `'text'`     | Тег для текстового поля в DOM                                                                                              |
+| [`status?`](#статус-поля)                  | `'', 'alert', 'success', 'warning'`                                                                                                                                  | `' '`        | Тип поля                                                                                                                   |
 | [`disabled?`](#внешний-вид)                | `boolean`                                                                                                                                                            | -            | Делает поле неактивным                                                                                                     |
 | [`size?`](#размеры)                        | `'xs', 's', 'm', 'l'`                                                                                                                                                | `'m'`        | Размер шрифта, отступы и высота поля                                                                                       |
 | [`width?`](#размеры)                       | `'full', 'default'`                                                                                                                                                  | `'default'`  | Ширина поля                                                                                                                |

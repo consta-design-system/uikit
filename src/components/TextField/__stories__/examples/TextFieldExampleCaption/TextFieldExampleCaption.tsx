@@ -13,21 +13,21 @@ export const TextFieldExampleCaption = () => {
       <TextField
         onChange={handleChange}
         value={value}
-        state="success"
+        status="success"
         placeholder="success"
         caption="success"
       />
       <TextField
         onChange={handleChange}
         value={value}
-        state="alert"
+        status="alert"
         placeholder="error"
         caption="error"
       />
       <TextField
         onChange={handleChange}
         value={value}
-        state="warning"
+        status="warning"
         placeholder="warning"
         caption="warning"
       />
