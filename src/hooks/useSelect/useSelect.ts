@@ -175,7 +175,7 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
     return optionForCreate ? [optionForCreate, ...resultGroups] : resultGroups;
   }, [filteredOptions, groups, getItemGroupKey, getGroupKey, sortGroups, optionForCreate]);
 
-  const isListEmpty = useMemo(() => {
+  const notFound = useMemo(() => {
     let flag = true;
     if (searchValue.length > 0) {
       visibleItems.forEach((group) => {
@@ -533,6 +533,6 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
     searchValue,
     clearValue,
     getHandleRemoveValue,
-    isListEmpty,
+    notFound,
   };
 }

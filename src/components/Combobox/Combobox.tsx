@@ -90,7 +90,7 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
     searchValue,
     clearValue,
     getHandleRemoveValue,
-    isListEmpty,
+    notFound,
   } = useSelect({
     items,
     groups,
@@ -256,7 +256,7 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
         visibleItems={visibleItems}
         labelForNotFound={labelForNotFound}
         labelForCreate={labelForCreate}
-        isListEmpty={isListEmpty}
+        notFound={notFound}
       />
       <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
         {searchValue}
