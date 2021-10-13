@@ -2,7 +2,7 @@ import React from 'react';
 import { boolean, number, select } from '@storybook/addon-knobs';
 
 import { createMetadata } from '../../../utils/storybook';
-import { Timer } from '../Timer';
+import { Timer, timerPropsSize, timerPropsSizeDefault } from '../Timer';
 
 import mdx from './Timer.docs.mdx';
 
@@ -10,7 +10,7 @@ const defaultKnobs = () => ({
   seconds: number('seconds', 5),
   progress: number('progress', 50),
   animation: boolean('animation', false),
-  size: select('size', ['s', 'm'], 'm'),
+  size: select('size', timerPropsSize, timerPropsSizeDefault),
 });
 
 export function Playground() {

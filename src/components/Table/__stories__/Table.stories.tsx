@@ -244,7 +244,7 @@ const WithOnRowHoverContent = <T extends TableRow>(): JSX.Element => {
 };
 
 export const WithCheckboxHeader = createStory(() => <WithCheckboxHeaderContent />, {
-  name: 'с Checkbox в шапке',
+  name: 'с чекбоксом в шапке',
 });
 
 export const WithCustomRowsPlaceholder = createStory(
@@ -256,7 +256,7 @@ export const WithCustomRowsPlaceholder = createStory(
     />
   ),
   {
-    name: 'со своим текстом если данных нет',
+    name: 'со своим текстом, если данных нет',
   },
 );
 
@@ -407,7 +407,7 @@ export const WithMergedByCustomCallbackCells = createStory(
     );
   },
   {
-    name: 'с объединёнными кастомной функцией ячейками',
+    name: 'с ячейками, объединёнными кастомной функцией',
   },
 );
 
@@ -474,7 +474,7 @@ export const withCustomTagLabelFunction = createStory(
     );
   },
   {
-    name: 'со своей функцией именования тэга фильтра',
+    name: 'со своей функцией переименования тега в фильтре',
   },
 );
 

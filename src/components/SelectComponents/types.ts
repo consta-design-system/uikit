@@ -25,6 +25,9 @@ export const propView = ['default', 'clear'] as const;
 export type PropView = typeof propView[number];
 export const defaultPropView = propView[0];
 
+export const propStatus = ['alert', 'warning', 'success'] as const;
+export type PropStatus = typeof propStatus[number];
+
 export type CommonSelectProps<ITEM> = {
   options: ITEM[];
   id: string;
