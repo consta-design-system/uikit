@@ -4,34 +4,34 @@
 
   &_direction {
     &_horizontal {
-      top: var(--step-line-padding);
+      top: var(--progress-step-bar-line-padding);
       left: 0;
       width: var(--line-size);
-      height: var(--step-line-size);
+      height: var(--progress-step-bar-line-size);
     }
 
     &_vertical {
       top: 0;
-      left: var(--step-line-padding);
-      width: var(--step-line-size);
+      left: var(--progress-step-bar-line-padding);
+      width: var(--progress-step-bar-line-size);
       height: var(--line-size);
     }
   }
 
   &_size {
     &_xs {
-      --step-line-size: var(--space-3xs);
-      --step-line-padding: calc((var(--space-xs) - var(--space-3xs)) * 0.5);
+      --progress-step-bar-line-size: var(--space-3xs);
+      --progress-step-bar-line-padding: calc((var(--space-xs) - var(--space-3xs)) * 0.5);
     }
 
     &_s {
-      --step-line-size: var(--space-2xs);
-      --step-line-padding: calc((var(--space-m) - var(--space-2xs)) * 0.5);
+      --progress-step-bar-line-size: var(--space-2xs);
+      --progress-step-bar-line-padding: calc((var(--space-m) - var(--space-2xs)) * 0.5);
     }
 
     &_m {
-      --step-line-size: var(--space-2xs);
-      --step-line-padding: calc((var(--space-xl) - var(--space-2xs)) * 0.5);
+      --progress-step-bar-line-size: var(--space-2xs);
+      --progress-step-bar-line-padding: calc((var(--space-xl) - var(--space-2xs)) * 0.5);
     }
   }
 
@@ -45,12 +45,12 @@
     &_direction {
       &_horizontal {
         width: var(--progress-line-size);
-        height: var(--step-line-size);
+        height: var(--progress-step-bar-line-size);
         transition: width var(--progress-line-resize);
       }
 
       &_vertical {
-        width: var(--step-line-size);
+        width: var(--progress-step-bar-line-size);
         height: var(--progress-line-size);
         transition: height var(--progress-line-resize);
       }

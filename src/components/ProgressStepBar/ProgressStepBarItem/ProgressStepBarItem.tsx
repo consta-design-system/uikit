@@ -1,39 +1,32 @@
 import './ProgressStepBarItem.css';
 
-import React, { forwardRef, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { cn } from '../../../utils/bem';
+import { Direction } from '../../Popover/Popover';
 import { ProgressSpin } from '../../ProgressSpin/ProgressSpin';
 import { Text } from '../../Text/Text';
 import { Tooltip } from '../../Tooltip/Tooltip';
-import { DefaultItem, PropDirection, PropSize, propStatusDefault, StepBarItem } from '../helpers';
+import { ProgressStepBarItemProps, propPositionDefault, propStatusDefault } from '../helpers';
 
-const propPosition = ['center', 'start', 'end'] as const;
-export type PropPosition = typeof propPosition[number];
-const propPositionDefault: PropPosition = propPosition[0];
-
-type Props<ITEM> = {
-  step: StepBarItem;
-  position?: PropPosition;
-  direction: PropDirection;
-  size: PropSize;
-  onItemClick?: (e: React.MouseEvent) => void;
-};
-
-type StepComponent = <ITEM>(
-  props: Props<ITEM> & React.RefAttributes<HTMLButtonElement>,
-) => React.ReactElement | null;
+type StepComponent = (props: ProgressStepBarItemProps) => React.ReactElement | null;
 
 const cnProgressStepBarItem = cn('ProgressStepBarItem');
 
-function ProgressStepBarItemRender<ITEM = DefaultItem>(
-  props: Props<ITEM>,
-  ref: React.Ref<HTMLButtonElement>,
-) {
+const possibleVerticalDirections: Direction[] = ['leftCenter', 'rightUp', 'downCenter'];
+const possibleHorizontalDirections: Direction[] = ['upCenter', 'downLeft', 'rightUp'];
+
+export const ProgressStepBarItem: StepComponent = (props) => {
   const {
-    step,
+    content,
+    tooltipContent,
+    label,
+    point,
+    status,
+    progress,
     direction,
     size,
+    buttonRef,
     onItemClick,
     position = propPositionDefault,
     ...otherProps
@@ -45,15 +38,15 @@ function ProgressStepBarItemRender<ITEM = DefaultItem>(
   const anchorRef = useRef<HTMLDivElement>(null);
 
   const PointContent =
-    step.point instanceof SVGElement ? (
-      step.point
+    point instanceof SVGElement ? (
+      point
     ) : (
       <Text
         className={cnProgressStepBarItem('Point-Text')}
         size={size === 's' ? '2xs' : 'xs'}
         weight="bold"
       >
-        {step.point?.toString()[0]}
+        {point}
       </Text>
     );
 
@@ -68,12 +61,13 @@ function ProgressStepBarItemRender<ITEM = DefaultItem>(
         className={cnProgressStepBarItem({
           direction,
           position,
-          status: step.status || propStatusDefault,
+          status: status || propStatusDefault,
+          size,
         })}
         {...otherProps}
       >
         <button
-          ref={ref}
+          ref={buttonRef}
           type="button"
           onMouseEnter={() => setIsTooltipHidden(false)}
           onMouseLeave={() => setIsTooltipHidden(true)}
@@ -82,32 +76,34 @@ function ProgressStepBarItemRender<ITEM = DefaultItem>(
           })}
           onClick={handleClick}
         >
-          {size !== 'xs' && (step.progress ? <ProgressSpin size={size} /> : PointContent)}
+          {size !== 'xs' && (progress ? <ProgressSpin size={size} /> : PointContent)}
         </button>
         <div className={cnProgressStepBarItem('Content')}>
           <Text
-            className={cnProgressStepBarItem('Label', { size })}
+            className={cnProgressStepBarItem('Label')}
             ref={anchorRef}
             size={size}
+            onMouseEnter={() => setIsTooltipHidden(false)}
+            onMouseLeave={() => setIsTooltipHidden(true)}
             lineHeight={size === 's' ? 'xs' : size}
             view="primary"
           >
-            {step.label}
+            {label}
           </Text>
-          {step.content}
+          {content}
         </div>
       </div>
-      {step.tooltipContent && !isTooltipHidden && (
+      {tooltipContent && !isTooltipHidden && (
         <Tooltip
           anchorRef={anchorRef}
           direction={direction === 'horizontal' ? 'downCenter' : 'leftUp'}
-          spareDirection={direction === 'horizontal' ? 'upCenter' : 'rightUp'}
+          possibleDirections={
+            direction === 'horizontal' ? possibleHorizontalDirections : possibleVerticalDirections
+          }
         >
-          {step.tooltipContent}
+          {tooltipContent}
         </Tooltip>
       )}
     </>
   );
-}
-
-export const ProgressStepBarItem = forwardRef(ProgressStepBarItemRender) as StepComponent;
+};

@@ -34,6 +34,23 @@
     }
   }
 
+  &_size {
+    &_xs {
+      --progress-step-bar-item-point-size: var(--space-xs);
+      --progress-step-bar-item-label-margin: var(--space-2xs);
+    }
+
+    &_s {
+      --progress-step-bar-item-point-size: var(--space-m);
+      --progress-step-bar-item-label-margin: var(--space-xs);
+    }
+
+    &_m {
+      --progress-step-bar-item-point-size: var(--space-xl);
+      --progress-step-bar-item-label-margin: var(--space-xs);
+    }
+  }
+
   &_position {
     &_start {
       flex: 1;
@@ -68,37 +85,37 @@
 
   &_status {
     &_system {
-      --point-background: var(--color-bg-system);
-      --point-content-color: var(--color-typo-secondary);
+      --progress-step-bar-item-point-background: var(--color-bg-system);
+      --progress-step-bar-item-point-content-color: var(--color-typo-secondary);
     }
 
     &_normal {
-      --point-background: var(--color-bg-normal);
-      --point-content-color: var(--color-bg-default);
+      --progress-step-bar-item-point-background: var(--color-bg-normal);
+      --progress-step-bar-item-point-content-color: var(--color-bg-default);
     }
 
     &_success {
-      --point-background: var(--color-bg-success);
-      --point-content-color: var(--color-bg-default);
+      --progress-step-bar-item-point-background: var(--color-bg-success);
+      --progress-step-bar-item-point-content-color: var(--color-bg-default);
     }
 
     &_warning {
-      --point-background: var(--color-bg-warning);
-      --point-content-color: var(--color-bg-default);
+      --progress-step-bar-item-point-background: var(--color-bg-warning);
+      --progress-step-bar-item-point-content-color: var(--color-bg-default);
     }
 
     &_alert {
-      --point-background: var(--color-bg-alert);
-      --point-content-color: var(--color-bg-default);
+      --progress-step-bar-item-point-background: var(--color-bg-alert);
+      --progress-step-bar-item-point-content-color: var(--color-bg-default);
     }
   }
 
   & .ProgressStepBarItem-Point-Text {
-    color: var(--point-content-color);
+    color: var(--progress-step-bar-item-point-content-color);
   }
 
   & .ProgressSpin {
-    stroke: var(--point-content-color);
+    stroke: var(--progress-step-bar-item-point-content-color);
   }
 
   &-Point {
@@ -106,14 +123,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: var(--point-size);
-    min-height: var(--point-size);
+    min-width: var(--progress-step-bar-item-point-size);
+    min-height: var(--progress-step-bar-item-point-size);
     margin: 0;
     padding: 0;
     color: var(--color-bg-default);
-    background-color: var(--point-background);
+    background-color: var(--progress-step-bar-item-point-background);
     border: none;
-    border-radius: calc(var(--point-size) * 0.5);
+    border-radius: calc(var(--progress-step-bar-item-point-size) * 0.5);
     cursor: pointer;
     transition: background-color 0.3s;
 
@@ -129,35 +146,9 @@
     & .Timer-Counter {
       display: none;
     }
-
-    &_size {
-      &_xs {
-        --point-size: var(--space-xs);
-      }
-
-      &_s {
-        --point-size: var(--space-m);
-      }
-
-      &_m {
-        --point-size: var(--space-xl);
-      }
-    }
   }
 
   &-Label {
-    &_size {
-      &_xs {
-        margin-bottom: var(--space-2xs);
-      }
-
-      &_s {
-        margin-bottom: var(--space-xs);
-      }
-
-      &_m {
-        margin-bottom: var(--space-s);
-      }
-    }
+    margin-bottom: var(--progress-step-bar-item-label-margin);
   }
 }

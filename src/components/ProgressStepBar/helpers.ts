@@ -18,6 +18,10 @@ export const propStatusDefault = propStatus[0];
 export const pointNumbersMap = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] as const;
 export type PointNumbersMap = typeof pointNumbersMap[number];
 
+export const propPosition = ['center', 'start', 'end'] as const;
+export type PropPosition = typeof propPosition[number];
+export const propPositionDefault: PropPosition = propPosition[0];
+
 export type PropGetItemLabel<ITEM> = (item: ITEM) => string;
 export type PropGetItemKey<ITEM> = (item: ITEM) => string | number;
 export type PropGetItemTooltipContent<ITEM> = (item: ITEM) => string | undefined;
@@ -45,15 +49,6 @@ export type Line = {
   size?: number;
 };
 
-export type StepBarItem = {
-  content?: React.ReactNode;
-  label: string;
-  point?: PointNumbersMap | SVGElement;
-  progress?: boolean;
-  status?: PropStatus;
-  tooltipContent?: string;
-};
-
 export type ProgressStepBarProps<ITEM = DefaultItem> = PropsWithHTMLAttributesAndRef<
   {
     steps: ITEM[];
@@ -72,6 +67,20 @@ export type ProgressStepBarProps<ITEM = DefaultItem> = PropsWithHTMLAttributesAn
   HTMLDivElement
 > &
   (ITEM extends { label: DefaultItem['label'] } ? {} : { getItemLabel: PropGetItemLabel<ITEM> });
+
+export type ProgressStepBarItemProps = {
+  content?: React.ReactNode;
+  label: string;
+  point?: PointNumbersMap | SVGElement;
+  progress?: boolean;
+  status?: PropStatus;
+  tooltipContent?: string;
+  position?: PropPosition;
+  direction: PropDirection;
+  buttonRef?: React.RefObject<HTMLButtonElement>;
+  size: PropSize;
+  onItemClick?: (e: React.MouseEvent) => void;
+};
 
 export const cnProgressStepBar = cn('ProgressStepBar');
 

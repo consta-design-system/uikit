@@ -2,21 +2,28 @@ import './ProgressStepBar.css';
 
 import React, { createRef, forwardRef, useEffect, useMemo, useRef, useState } from 'react';
 
+import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 
-import { ProgressStepBarItem, PropPosition } from './ProgressStepBarItem/ProgressStepBarItem';
+import { ProgressStepBarItem } from './ProgressStepBarItem/ProgressStepBarItem';
 import { ProgressStepBarLine } from './ProgressStepBarLine/ProgressStepBarLine';
 import {
   cnProgressStepBar,
   DefaultItem,
   Line,
   ProgressStepBarComponent,
+  ProgressStepBarItemProps,
   ProgressStepBarProps,
   propDirectionDefault,
+  PropPosition,
   propSizeDefault,
-  StepBarItem,
   withDefaultGetters,
 } from './helpers';
+
+export type TabDimensions = {
+  size: number;
+  gap: number;
+};
 
 function ProgressStepBarRender<ITEM = DefaultItem>(
   props: ProgressStepBarProps<ITEM>,
@@ -43,6 +50,8 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
 
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const { width, height } = useComponentSize(containerRef);
+
   useEffect(() => {
     if (steps.length > 0) {
       const linesArray: Line[] = [];
@@ -53,10 +62,9 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
             size: getLineSize(containerRef, stepsRef[index + 1]),
           });
       });
-      console.log(linesArray);
       setLines(linesArray);
     }
-  }, [activeStepIndex, steps, direction, size]);
+  }, [activeStepIndex, steps, direction, size, width, height]);
 
   const stepsRef = useMemo(
     () => new Array(steps.length).fill(null).map(() => createRef<HTMLButtonElement>()),
@@ -78,7 +86,10 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
     return size;
   };
 
-  const getStepItem: (item: ITEM) => StepBarItem = (item) => {
+  const getStepItem: (item: ITEM, index: number) => ProgressStepBarItemProps = (item, index) => {
+    let position: PropPosition = 'center';
+    if (index === steps.length - 1) position = 'end';
+    if (index === 0) position = 'start';
     return {
       content: getItemContent(item),
       label: getItemLabel(item),
@@ -86,6 +97,11 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
       progress: getItemProgress(item),
       status: getItemStatus(item),
       tooltipContent: getItemTooltipContent(item),
+      size,
+      position,
+      buttonRef: stepsRef[index],
+      direction,
+      onItemClick: (e) => onItemClick?.(e, item, index),
     };
   };
 
@@ -102,19 +118,8 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
         activeStepIndex={activeStepIndex}
       />
       {steps.map((step, index) => {
-        let position: PropPosition = 'center';
-        if (index === steps.length - 1) position = 'end';
-        if (index === 0) position = 'start';
-        return (
-          <ProgressStepBarItem
-            step={getStepItem(step)}
-            size={size}
-            position={position}
-            ref={stepsRef[index]}
-            direction={direction}
-            onItemClick={(e) => onItemClick?.(e, step, index)}
-          />
-        );
+        const item = getStepItem(step, index);
+        return <ProgressStepBarItem {...item} />;
       })}
     </div>
   );
