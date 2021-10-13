@@ -46,7 +46,7 @@ const defaultKnobs = () => ({
   steps: object('steps', stepsExample),
   size: select('size', propSize, propSizeDefault),
   direction: select('direction', propDirection, propDirectionDefault),
-  activeStep: select('activeStep', [1, 2, 3, 4], 1),
+  activeStep: select('activeStep', [0, 1, 2, 3], 1),
 });
 
 export function Playground() {
