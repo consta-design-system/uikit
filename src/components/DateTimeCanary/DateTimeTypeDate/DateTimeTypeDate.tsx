@@ -29,7 +29,7 @@ export const DateTimeTypeDate: DateTimeTypeComponent<'date'> = forwardRef((props
     value,
     onChange,
     onChangeRange,
-    currentVisibleDate: currentVisibleDateProp = new Date(),
+    currentVisibleDate: currentVisibleDateProp,
     events,
     locale = ruLocale,
     view = dateTimePropViewDefault,

@@ -75,7 +75,7 @@ export const getDaysOfMonth = (props: {
         label,
         onClick,
         selected: isSelected({ date, value }),
-        range: Array.isArray(value) && isDateInRange(date, value),
+        range: Array.isArray(value) && isDateInRange(date, value, startOfDay),
         event: events && hasEvent(date, events),
         current: isToday(date),
         disabled,

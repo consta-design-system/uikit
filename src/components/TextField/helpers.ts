@@ -105,6 +105,7 @@ export type Props<TYPE extends string> = {
   label?: string;
   caption?: string;
   labelPosition?: 'top' | 'left';
+  focused?: boolean;
 };
 
 export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
