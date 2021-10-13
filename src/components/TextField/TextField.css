@@ -309,17 +309,18 @@
   }
 
   &-ClearButton {
+    height: calc(var(--input-height) - (var(--control-border-width) * 2));
     margin: 0;
     padding: 0 var(--space-3xs);
     color: var(--color-control-typo-clear);
     background-color: transparent;
     border: none;
     cursor: pointer;
+  }
 
-    &Icon {
-      position: relative;
-      top: 1px;
-    }
+  &-ClearButtonIcon {
+    position: relative;
+    top: 1px;
   }
 
   &-Input {
