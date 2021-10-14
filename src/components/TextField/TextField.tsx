@@ -62,7 +62,7 @@ export function TextFieldRender<TYPE extends string>(
     min,
     readOnly,
     required,
-    step,
+    step = 1,
     tabIndex,
     ariaLabel,
     label,
@@ -137,7 +137,9 @@ export function TextFieldRender<TYPE extends string>(
     isIncrement?: boolean,
   ) => void = (e, isIncrement = true) => {
     let currentValue = value || 0;
-    currentValue = isIncrement ? Number(currentValue) + 1 : Number(currentValue) - 1;
+    currentValue = isIncrement
+      ? Number(currentValue) + Number(step)
+      : Number(currentValue) - Number(step);
     onChange?.({ e, value: currentValue.toString() });
   };
 

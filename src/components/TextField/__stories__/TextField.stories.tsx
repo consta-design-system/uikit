@@ -30,6 +30,7 @@ const defaultKnobs = () => ({
   size: select('size', textFieldPropSize, textFieldPropSizeDefault),
   view: select('view', textFieldPropView, textFieldPropViewDefault),
   disabled: boolean('disabled', false),
+  step: number('step', 1),
   type: select('type', ['text', 'number', 'textarea'], 'text'),
   caption: text('caption', 'Подпись'),
   label: text('label', 'Заголовок'),
@@ -55,6 +56,7 @@ export function Playground() {
     label,
     caption,
     labelPosition,
+    step,
     maxLength,
     minRows,
     maxRows,
@@ -96,6 +98,7 @@ export function Playground() {
           size={size}
           view={view}
           type={type}
+          step={step}
           maxLength={maxLength}
           minRows={minRows}
           maxRows={maxRows}
