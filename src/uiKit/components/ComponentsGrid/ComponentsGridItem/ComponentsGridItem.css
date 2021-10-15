@@ -1,3 +1,8 @@
 .UiKit--ComponentsGridItem {
-  margin: 0 0 var(--space-2xl) 0;
+  margin-bottom: var(--space-2xl);
+
+  &-Image {
+    width: 100%;
+    margin-bottom: var(--space-s);
+  }
 }

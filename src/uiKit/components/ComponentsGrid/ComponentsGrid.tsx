@@ -10,9 +10,10 @@ import { ComponentsGridItem } from './ComponentsGridItem/ComponentsGridItem';
 const cnComponentsGrid = cn('ComponentsGrid');
 
 type Item = {
-  name: string;
+  name?: string;
   description?: string;
-  href: string;
+  url?: string;
+  image?: React.FC<React.SVGProps<SVGSVGElement>>;
 };
 
 export type ComponentsGridProps = {
