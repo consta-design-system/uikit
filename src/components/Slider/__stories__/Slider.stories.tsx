@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import './Slider.stories.css';
 
 import React, { useCallback, useEffect, useState } from 'react';
@@ -11,21 +12,21 @@ import {
   eventInterceptorMap,
   EventInterceptorProvider,
 } from '../../EventInterceptor/EventInterceptor';
-import { TextField, textFieldPropSize, textFieldPropSizeDefault } from '../../TextField/TextField';
-import { Slider } from '../Slider';
+import { TextField } from '../../TextField/TextField';
+import { Slider, SliderPropSize, SliderPropSizeDefault } from '../Slider';
 
 import mdx from './Slider.docs.mdx';
 
 const defaultKnobs = () => ({
   disabled: boolean('disabled', false),
-  division: boolean('division', true),
+  division: boolean('division', false),
   classname: text('classname', 'inputRange'),
-  size: select('size', textFieldPropSize, textFieldPropSizeDefault),
+  size: select('size', SliderPropSize, SliderPropSizeDefault),
   step: number('step', 25),
   customStep: boolean('customStep', false),
-  min: number('minValue', -50),
-  max: number('maxValue', 200),
-  withTooltip: boolean('withTooltip', true),
+  min: number('minValue', 0),
+  max: number('maxValue', 100),
+  withTooltip: boolean('withTooltip', false),
   range: boolean('range', false),
   prefix: boolean('prefix', true),
   suffix: boolean('suffix', false),
@@ -44,6 +45,7 @@ export function Playground() {
     step,
     min,
     max,
+    withTooltip,
     ...props
   } = defaultKnobs();
   const [value, setValue] = useState([50]);
@@ -54,8 +56,15 @@ export function Playground() {
     setInputValue(undefined);
   };
 
+  const changeInput = useCallback(
+    (e) => {
+      setInputValue(`${e.value}`);
+    },
+    [inputValue],
+  );
+
   const getValue = useCallback((val) => {
-    return val;
+    return Math.round(val).toString();
   }, []);
 
   useEffect(() => {
@@ -67,7 +76,7 @@ export function Playground() {
       <div className={cnSliderStories()}>
         <Slider
           disabled={disabled}
-          getTooltipContent={getValue}
+          getTooltipContent={withTooltip ? getValue : undefined}
           min={min}
           max={max}
           {...props}
@@ -81,22 +90,27 @@ export function Playground() {
                 min={min}
                 max={max}
                 step={customStep ? 1 : step}
-                value={inputValue || (Array.isArray(value) ? value[0] : value || 0).toString()}
+                value={
+                  inputValue || (Array.isArray(value) ? value[0] : Math.round(value)).toString()
+                }
                 className={cnSliderStories('Textfield', { prefix })}
-                onChange={(e) => setInputValue(e.value || '0')}
+                onChange={changeInput}
                 onBlur={handleChange}
+                onFocus={handleChange}
                 disabled={disabled}
                 required
               />
             ))
           }
           suffix={
-            suffix && <IconSettings className={cnSliderStories('Icon', { disabled, suffix })} />
+            suffix && (
+              <IconSettings className={cnSliderStories('Icon', { disabled, suffix })} size={size} />
+            )
           }
-          step={customStep ? [20, 17, 22, 20] : step}
-          value={range ? value : value[0]}
+          step={customStep ? [6, 19, 33, 57, 74, 96] : step}
+          value={range ? value : Math.round(Number(inputValue))}
           onChange={action('onChange')}
-          onChangeCommitted={(_, v) => setValue(v)}
+          onChangeCommitted={action('onChangeCommitted')}
         />
       </div>
     </EventInterceptorProvider>

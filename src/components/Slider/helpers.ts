@@ -1,5 +1,9 @@
 import React, { RefObject } from 'react';
 
+export const SliderPropSize = ['m', 's', 'xs'] as const;
+export type SliderPropSize = typeof SliderPropSize[number];
+export const SliderPropSizeDefault: SliderPropSize = SliderPropSize[0];
+
 export const asc = (a: number, b: number) => {
   return a - b;
 };
@@ -120,21 +124,41 @@ export const doesSupportTouchActionNone = () => {
   return cachedSupportsTouchActionNone;
 };
 
-export const getDividedValue = (step: number | number[] | undefined, length: number) => {
-  if (!step) return [length];
+export const getDividedValue = (step: number | number[] | undefined, min: number, max: number) => {
+  const length = max - min;
 
-  const stepData = (typeof step === 'number'
-    ? Array.from({ length: length / step }, () => step)
-    : step
-  ).reduce(
-    (acc, el) =>
-      acc.sum + el > length
-        ? { array: acc.array, sum: acc.sum }
-        : { array: [...acc.array, el], sum: acc.sum + el },
-    { array: [] as number[], sum: 0 },
-  );
-  if (stepData.sum < length) return [...stepData.array, length - stepData.sum];
-  return stepData.array;
+  if (!step) return 1;
+
+  if (typeof step === 'number') {
+    const stepData = Array.from({ length: length / step }, () => step).reduce(
+      (acc, el) =>
+        acc.sum + el > length
+          ? { array: acc.array, sum: acc.sum }
+          : { array: [...acc.array, el], sum: acc.sum + el },
+      { array: [] as number[], sum: 0 },
+    );
+    if (stepData.sum < length) return [...stepData.array, length - stepData.sum];
+    return stepData.array;
+  }
+
+  if (Array.isArray(step)) {
+    const arr = [step[0]];
+
+    for (let i = 0; i <= step.length; i++) {
+      arr.push(step[i] - step[i - 1]);
+    }
+
+    arr.push(max - step[step.length - 1]);
+
+    const stepData = arr.filter((item) => !Number.isNaN(item));
+
+    return stepData;
+  }
+
+  const stepData = step.filter((el: number) => el > min && el < max);
+  const data = new Set([min, ...stepData, max]);
+
+  return [...data.values()];
 };
 
 export const checkFill = (path: number, value: number | number[], min: number) => {

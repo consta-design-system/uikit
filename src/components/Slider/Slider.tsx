@@ -2,7 +2,9 @@ import './Slider.css';
 
 import React, { useEffect } from 'react';
 
+import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { cn } from '../../utils/bem';
+import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 import { Popover } from '../Popover/Popover';
 import { Text } from '../Text/Text';
 
@@ -10,39 +12,48 @@ import { checkFill, getPercent } from './helpers';
 import { useActive } from './useActive';
 import { useSlider } from './useSlider';
 
-export type SliderProps = {
-  className?: string;
-  step?: number | number[];
-  min: number;
-  max: number;
-  disabled?: boolean;
-  division?: boolean;
-  getTooltipContent: (value: number) => string;
-  value?: number[] | number;
-  onChange?: (
-    event: Event | React.TouchEvent | React.MouseEvent,
-    value: number,
-    index: number,
-  ) => void;
-  onAfterChange?: (
-    event: Event | React.TouchEvent | React.MouseEvent,
-    value: number,
-    index: number,
-  ) => void;
-  onChangeCommitted?: (event: Event | React.TouchEvent | React.MouseEvent, value: number[]) => void;
-  prefix?:
-    | React.ReactNode
-    | (({ value }: { value: number | number[] }) => React.ReactElement)
-    | undefined;
-  suffix?:
-    | React.ReactNode
-    | (({ value }: { value: number | number[] }) => React.ReactElement)
-    | undefined;
-};
+export type SliderProps = Omit<
+  PropsWithHTMLAttributes<
+    {
+      className?: string;
+      step?: number | number[];
+      min: number;
+      max: number;
+      disabled?: boolean;
+      division?: boolean;
+      getTooltipContent?: (value: number) => string;
+      value?: number[] | number;
+      onChange?: (
+        event: Event | React.TouchEvent | React.MouseEvent,
+        value: number,
+        index: number,
+      ) => void;
+      onAfterChange?: (
+        event: Event | React.TouchEvent | React.MouseEvent,
+        value: number,
+        index: number,
+      ) => void;
+      onChangeCommitted?: (
+        event: Event | React.TouchEvent | React.MouseEvent,
+        value: number[],
+      ) => void;
+      prefix?:
+        | React.ReactNode
+        | (({ value }: { value: number | number[] }) => React.ReactElement)
+        | undefined;
+      suffix?:
+        | React.ReactNode
+        | (({ value }: { value: number | number[] }) => React.ReactElement)
+        | undefined;
+    },
+    HTMLDivElement
+  >,
+  'children'
+>;
 
 export const cnSlider = cn('Slider');
 
-export const Slider = React.forwardRef<HTMLDivElement, SliderProps>((props, ref) => {
+export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(({ ...props }, ref) => {
   const { className, step = 1, disabled, getTooltipContent, division, prefix, suffix } = props;
   const {
     isActiveOne,
@@ -87,28 +98,51 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>((props, ref)
         ref={sliderRef}
         className={cnSlider('Input', { division: division && !!step })}
       >
-        {division && !!step && (
+        {division && !!step && Array.isArray(dividedValue) && (
           <div className={cnSlider('Input-divided', { disabled })}>
-            {dividedValue?.map((item, index) => (
+            {dividedValue?.map((item: number, index: number) => (
               <div
                 key={index}
-                className={cnSlider('Input-divide', {
-                  fill: checkFill(
-                    dividedValue?.reduce((acc, item, i) => (i <= index - 1 ? acc + item : acc), 0),
-                    valueDerived,
-                    minValue,
-                  ),
-                  disabled,
-                  active: isActiveOne || isActiveTwo,
-                })}
-                style={{ width: `${Math.min(getPercent(item, minValue, maxValue))}%` }}
+                className={cnSlider(
+                  'Input-divide',
+                  {
+                    first: index === 0,
+                    last: index === dividedValue.length - 1,
+                    fill: checkFill(
+                      dividedValue?.reduce(
+                        (acc, item, i) => (i <= index - 1 ? acc + item : acc),
+                        0,
+                      ),
+                      valueDerived,
+                      minValue,
+                    ),
+                    disabled,
+                    focus:
+                      isActiveOne ||
+                      (isActiveTwo &&
+                        checkFill(
+                          dividedValue?.reduce(
+                            (acc, item, i) => (i <= index - 1 ? acc + item : acc),
+                            0,
+                          ),
+                          valueDerived,
+                          minValue,
+                        )),
+                  },
+                  [cnMixFocus()],
+                )}
+                style={{
+                  width: `${Math.trunc(getPercent(item, minValue, maxValue))}%`,
+                }}
               />
             ))}
           </div>
         )}
         {(!division || !step) && (
           <div
-            className={cnSlider('fill', { isActive: isActiveOne || isActiveTwo, disabled })}
+            className={cnSlider('Fill', { focus: isActiveOne || isActiveTwo, disabled }, [
+              cnMixFocus(),
+            ])}
             style={{
               width: `${getPercent(
                 Array.isArray(valueDerived)
@@ -117,11 +151,7 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>((props, ref)
                 minValue,
                 maxValue,
               )}%`,
-              marginLeft: `${Math.min(
-                Array.isArray(valueDerived)
-                  ? getPercent(valueDerived[0] - minValue, minValue, maxValue)
-                  : 0,
-              )}%`,
+              left: `${Math.round(Array.isArray(valueDerived) ? valueDerived[0] : 0)}%`,
             }}
           />
         )}
@@ -132,15 +162,13 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>((props, ref)
               aria-label="Left pin"
               onMouseDown={changerActiveOne.on}
               onTouchStart={changerActiveOne.on}
-              className={cnSlider('Point', { isActive: isActiveOne || isActiveTwo, disabled })}
+              className={cnSlider('Point', { focus: isActiveOne || isActiveTwo, disabled }, [
+                cnMixFocus(),
+              ])}
               ref={pointValueOne}
               style={{
-                left: `${Math.trunc(
-                  getPercent(
-                    (Array.isArray(valueDerived) ? valueDerived[0] : valueDerived) - minValue,
-                    minValue,
-                    maxValue,
-                  ),
+                left: `${Math.round(
+                  Array.isArray(valueDerived) ? valueDerived[0] : valueDerived,
                 )}%`,
               }}
             />
@@ -165,7 +193,9 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>((props, ref)
           aria-label="Right pin"
           onMouseDown={changerActiveTwo.on}
           onTouchStart={changerActiveTwo.on}
-          className={cnSlider('Point', { isActive: isActiveOne || isActiveTwo, disabled })}
+          className={cnSlider('Point', { focus: isActiveOne || isActiveTwo, disabled }, [
+            cnMixFocus(),
+          ])}
           ref={pointValueTwo}
           style={{
             left: `${Math.trunc(
@@ -200,3 +230,5 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>((props, ref)
     </div>
   );
 });
+
+export * from './helpers';

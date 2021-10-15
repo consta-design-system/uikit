@@ -9,17 +9,27 @@ import { TextField } from '../../../../TextField/TextField';
 import { Slider } from '../../../Slider';
 
 export const SliderExampleWithInputLeft = () => {
-  const [value, setValue] = useState(50);
+  const [value, setValue] = useState([50]);
   const [inputValue, setInputValue] = useState<string>();
 
-  const getValue = useCallback((val) => {
-    return val;
-  }, []);
-
   const handleChange = () => {
-    setValue(Number(inputValue));
+    setValue((prev) => (prev.length > 1 ? [Number(inputValue), prev[1]] : [Number(inputValue)]));
     setInputValue(undefined);
   };
+
+  const changeInput = useCallback(
+    (e) => {
+      setInputValue(`${e.value}`);
+    },
+    [inputValue],
+  );
+
+  const getValue = useCallback(
+    (val) => {
+      return Math.round(val).toString();
+    },
+    [value],
+  );
 
   return (
     <StoryBookExample className={cnDocsDecorator('SectionSlider')}>
@@ -34,15 +44,15 @@ export const SliderExampleWithInputLeft = () => {
             min={0}
             max={100}
             step={25}
-            value={value.toString()}
+            value={inputValue || (Array.isArray(value) ? value[0] : Math.round(value)).toString()}
             className={cnDocsDecorator('Textfield')}
-            onChange={(e) => setInputValue(e.value?.toString())}
+            onChange={changeInput}
             onBlur={handleChange}
             required
           />
         )}
         suffix={<IconSettings className={cnDocsDecorator('Icon')} />}
-        value={value}
+        value={Math.round(Number(inputValue))}
         onChange={handleChange}
       />
     </StoryBookExample>
@@ -50,17 +60,28 @@ export const SliderExampleWithInputLeft = () => {
 };
 
 export const SliderExampleWithInputRight = () => {
-  const [value, setValue] = useState(50);
+  const [value, setValue] = useState([50]);
   const [inputValue, setInputValue] = useState<string>();
 
-  const getValue = useCallback((val) => {
-    return val;
-  }, []);
-
   const handleChange = () => {
-    setValue(Number(inputValue));
+    setValue((prev) => (prev.length > 1 ? [Number(inputValue), prev[1]] : [Number(inputValue)]));
     setInputValue(undefined);
   };
+
+  const changeInput = useCallback(
+    (e) => {
+      setInputValue(`${e.value}`);
+    },
+    [inputValue],
+  );
+
+  const getValue = useCallback(
+    (val) => {
+      return Math.round(val).toString();
+    },
+    [value],
+  );
+
   return (
     <StoryBookExample className={cnDocsDecorator('SectionSlider')}>
       <Slider
@@ -75,14 +96,14 @@ export const SliderExampleWithInputRight = () => {
             min={0}
             max={100}
             step={25}
-            value={value.toString()}
+            value={inputValue || (Array.isArray(value) ? value[0] : Math.round(value)).toString()}
             className={cnDocsDecorator('Textfield')}
-            onChange={(e) => setInputValue(e.value?.toString())}
+            onChange={changeInput}
             onBlur={handleChange}
             required
           />
         )}
-        value={value}
+        value={Math.round(Number(inputValue))}
         onChange={handleChange}
       />
     </StoryBookExample>

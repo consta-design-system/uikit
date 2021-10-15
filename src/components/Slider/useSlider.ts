@@ -36,7 +36,7 @@ export const useSlider = (
 
   const [valueDerived, setValueState] = useState<number | number[]>(value || 0);
 
-  const [dividedValue, setDividedValue] = useState(getDividedValue(step, maxValue - minValue));
+  const [dividedValue, setDividedValue] = useState(getDividedValue(step, minValue, maxValue));
 
   const range = useRef(Array.isArray(valueDerived));
   const values = useRef<number | number[]>(0);
@@ -268,10 +268,8 @@ export const useSlider = (
   }, [disabled, stopListening]);
 
   useEffect(() => {
-    localStep.current = Array.isArray(step)
-      ? getDividedValue(step, maxValue - minValue)
-      : step || 0;
-    setDividedValue(getDividedValue(step, maxValue - minValue));
+    localStep.current = Array.isArray(step) ? getDividedValue(step, minValue, maxValue) : step || 0;
+    setDividedValue(getDividedValue(step, minValue, maxValue));
     setValueState((prev) =>
       Array.isArray(prev)
         ? prev.map((el) => roundValueToStep(el, localStep.current, minValue))
