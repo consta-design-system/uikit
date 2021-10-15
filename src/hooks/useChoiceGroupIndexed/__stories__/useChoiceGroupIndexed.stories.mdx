@@ -1,0 +1,24 @@
+<Meta title="Hooks|useChoiceGroupIndexed" id="useChoiceGroupIndexed" />
+
+# useChoiceGroupIndexed
+
+Этот хук может понадобиться в компонентах, где пользователи могут выбрать несколько значений из списка.
+Например, [CollapseGroup](/?path=/docs/components-collapsegroup--playgrounds).
+
+Хук `useChoiceGroupIndexed` занимается всей логикой выбора: вы можете использовать его,
+чтобы не обрабатывать эту логику самостоятельно.
+
+> Для работы хука не нужен уникальный ключ элемента. Выбор происходит по порядковому номеру.
+
+## Свойства
+
+| Свойство           | Тип и значения                                                                                    | По умолчанию | Описание                                              |
+| ------------------ | ------------------------------------------------------------------------------------------------- | ------------ | ----------------------------------------------------- |
+| `multiple`         | `boolean`                                                                                         | -            | Показывает, что может быть выбрано несколько значений |
+| `value`            | `ITEM, ITEM[], null;`                                                                             | -            | Текущее значение или несколько                        |
+| `callBack`         | `(props: { e: EVENT; value: ITEM[], null }) => void, (props: { e: EVENT; value: ITEM }) => void;` | -            | Обработчик, который нужно вызывать                    |
+| `isNullableValue?` | `boolean`                                                                                         | -            | Показывает, что значение может быть нулевым           |
+
+## Пример
+
+Пример использования хука `useChoiceGroupIndexed` можно посмотреть в компоненете [CollapseGroup](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/CollapseGroup/useChoice.ts).
