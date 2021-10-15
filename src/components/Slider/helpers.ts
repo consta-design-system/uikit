@@ -124,7 +124,7 @@ export const doesSupportTouchActionNone = () => {
   return cachedSupportsTouchActionNone;
 };
 
-export const getDividedValue = (step: number | number[] | undefined, min: number, max: number) => {
+export const getDividedValue = (step: number | number[], min: number, max: number) => {
   const length = max - min;
 
   if (!step) return 1;
@@ -155,7 +155,7 @@ export const getDividedValue = (step: number | number[] | undefined, min: number
     return stepData;
   }
 
-  const stepData = step.filter((el: number) => el > min && el < max);
+  const stepData = (step as number[]).filter((el: number) => el > min && el < max);
   const data = new Set([min, ...stepData, max]);
 
   return [...data.values()];
