@@ -57,6 +57,7 @@ export function TextFieldRender<TYPE extends string>(
     leftSide,
     rightSide,
     autoComplete,
+    withClearButton,
     max,
     min,
     readOnly,
@@ -178,7 +179,7 @@ export function TextFieldRender<TYPE extends string>(
           ) : (
             <input {...commonProps} {...inputProps} />
           )}
-          {value && type !== 'number' && (
+          {withClearButton && type !== 'number' && (
             <button type="button" onClick={clearValue} className={cnTextField('ClearButton')}>
               <IconClose size="xs" className={cnTextField('ClearButtonIcon')} />
             </button>
