@@ -54,10 +54,6 @@
 
       &_focus {
         box-shadow: none !important;
-
-        &::before {
-          background-color: #0091ff !important;
-        }
       }
 
       &_fill:not(.Slider-input-divide_disabled)::before {

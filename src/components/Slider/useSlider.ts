@@ -121,7 +121,6 @@ export const useSlider = (
       moveCount.current += 1;
 
       if ('buttons' in nativeEvent && nativeEvent.buttons === 0) {
-        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         handleTouchEnd(nativeEvent);
         return;
       }

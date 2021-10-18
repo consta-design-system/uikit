@@ -21,6 +21,7 @@ export type SliderProps = Omit<
       max: number;
       disabled?: boolean;
       division?: boolean;
+      range?: boolean | undefined;
       getTooltipContent?: (value: number) => string;
       value?: number[] | number;
       onChange?: (
@@ -54,7 +55,16 @@ export type SliderProps = Omit<
 export const cnSlider = cn('Slider');
 
 export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(({ ...props }, ref) => {
-  const { className, step = 1, disabled, getTooltipContent, division, prefix, suffix } = props;
+  const {
+    className,
+    step = 1,
+    disabled,
+    getTooltipContent,
+    division,
+    prefix,
+    range,
+    suffix,
+  } = props;
   const {
     isActiveOne,
     changerActiveOne,
@@ -73,7 +83,6 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(({ ...props 
     dividedValue,
     minValue,
     maxValue,
-    range,
     stopListening,
   } = useSlider(props, { clearActive, pointValueOne, pointValueTwo });
 
@@ -151,20 +160,18 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(({ ...props 
                 minValue,
                 maxValue,
               )}%`,
-              left: `${Math.round(Array.isArray(valueDerived) ? valueDerived[0] : 0)}%`,
+              left: `${Math.round(Array.isArray(valueDerived) && range ? valueDerived[0] : 0)}%`,
             }}
           />
         )}
-        {range.current && (
+        {range && (
           <>
             <button
               type="button"
               aria-label="Left pin"
               onMouseDown={changerActiveOne.on}
               onTouchStart={changerActiveOne.on}
-              className={cnSlider('Point', { focus: isActiveOne || isActiveTwo, disabled }, [
-                cnMixFocus(),
-              ])}
+              className={cnSlider('Point', { focus: isActiveOne, disabled }, [cnMixFocus()])}
               ref={pointValueOne}
               style={{
                 left: `${Math.round(
@@ -193,9 +200,7 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(({ ...props 
           aria-label="Right pin"
           onMouseDown={changerActiveTwo.on}
           onTouchStart={changerActiveTwo.on}
-          className={cnSlider('Point', { focus: isActiveOne || isActiveTwo, disabled }, [
-            cnMixFocus(),
-          ])}
+          className={cnSlider('Point', { focus: isActiveTwo, disabled }, [cnMixFocus()])}
           ref={pointValueTwo}
           style={{
             left: `${Math.trunc(

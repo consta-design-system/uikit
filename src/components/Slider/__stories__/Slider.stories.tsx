@@ -28,7 +28,7 @@ const defaultKnobs = () => ({
   max: number('maxValue', 100),
   withTooltip: boolean('withTooltip', false),
   range: boolean('range', false),
-  prefix: boolean('prefix', true),
+  prefix: boolean('prefix', false),
   suffix: boolean('suffix', false),
 });
 
@@ -102,6 +102,7 @@ export function Playground() {
               />
             ))
           }
+          range={range}
           suffix={
             suffix && (
               <IconSettings className={cnSliderStories('Icon', { disabled, suffix })} size={size} />
