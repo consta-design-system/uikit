@@ -176,7 +176,7 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   }, [filteredOptions, groups, getItemGroupKey, getGroupKey, sortGroups, optionForCreate]);
 
   const notFound = useMemo(() => {
-    let flag = true;
+    let flag = !params.onCreate;
     if (searchValue.length > 0) {
       visibleItems.forEach((group) => {
         if (isOptionForCreate(group) || group.items.length > 0 || group.group) {
