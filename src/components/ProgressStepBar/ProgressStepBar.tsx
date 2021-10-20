@@ -35,7 +35,7 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
     size = propSizeDefault,
     className,
     activeStepIndex,
-    onItemClick,
+    onClick,
     getItemContent,
     getItemLabel,
     getItemPoint,
@@ -99,9 +99,9 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
       tooltipContent: getItemTooltipContent(item),
       size,
       position,
-      buttonRef: stepsRef[index],
+      pointRef: stepsRef[index],
       direction,
-      onItemClick: (e) => onItemClick?.(e, item, index),
+      onClick: (e) => onClick?.(e, item, index),
     };
   };
 

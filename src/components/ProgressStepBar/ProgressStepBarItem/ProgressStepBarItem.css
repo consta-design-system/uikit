@@ -138,14 +138,10 @@
       color: var(--color-typo-secondary);
       transition: color 0.3s;
     }
+  }
 
-    & .ProgressSpin {
-      transition: stroke 0.3s;
-    }
-
-    & .Timer-Counter {
-      display: none;
-    }
+  &-Tooltip {
+    z-index: 11;
   }
 
   &-Label {

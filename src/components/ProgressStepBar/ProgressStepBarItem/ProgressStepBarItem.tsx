@@ -2,45 +2,34 @@ import './ProgressStepBarItem.css';
 
 import React, { useRef, useState } from 'react';
 
+import { IconProps } from '../../../icons/Icon/Icon';
+import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
 import { cn } from '../../../utils/bem';
 import { Direction } from '../../Popover/Popover';
 import { ProgressSpin } from '../../ProgressSpin/ProgressSpin';
 import { Text } from '../../Text/Text';
 import { Tooltip } from '../../Tooltip/Tooltip';
-import { ProgressStepBarItemProps, propPositionDefault, propStatusDefault } from '../helpers';
-
-type StepComponent = (props: ProgressStepBarItemProps) => React.ReactElement | null;
+import {
+  PointNumbersMap,
+  ProgressStepBarItemComponent,
+  propPositionDefault,
+  propStatusDefault,
+} from '../helpers';
 
 const cnProgressStepBarItem = cn('ProgressStepBarItem');
 
 const possibleVerticalDirections: Direction[] = ['leftCenter', 'rightUp', 'downCenter'];
 const possibleHorizontalDirections: Direction[] = ['upCenter', 'downLeft', 'rightUp'];
 
-export const ProgressStepBarItem: StepComponent = (props) => {
-  const {
-    content,
-    tooltipContent,
-    label,
-    point,
-    status,
-    progress,
-    direction,
-    size,
-    buttonRef,
-    onItemClick,
-    position = propPositionDefault,
-    ...otherProps
-  } = props;
-
-  const [isTooltipHidden, setIsTooltipHidden] = useState<boolean>(true);
-  const [isContentHidden, setIsContentHidden] = useState<boolean>(true);
-
-  const anchorRef = useRef<HTMLDivElement>(null);
-
-  const PointContent =
-    point instanceof SVGElement ? (
-      point
-    ) : (
+const getPointContent = (
+  point: PointNumbersMap | React.FC<IconProps> | undefined,
+  size: 'm' | 's',
+  progress: boolean | undefined,
+) => {
+  if (!point) return null;
+  if (progress) return <ProgressSpin size={size} />;
+  if (typeof point === 'number' || !point)
+    return (
       <Text
         className={cnProgressStepBarItem('Point-Text')}
         size={size === 's' ? '2xs' : 'xs'}
@@ -50,9 +39,55 @@ export const ProgressStepBarItem: StepComponent = (props) => {
       </Text>
     );
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    onItemClick?.(e);
-    setIsContentHidden(!isContentHidden);
+  const Icon = point;
+
+  return <Icon size="xs" />;
+};
+
+export const ProgressStepBarItem: ProgressStepBarItemComponent = (props) => {
+  const {
+    content,
+    tooltipContent,
+    label,
+    point,
+    status,
+    progress,
+    direction,
+    size,
+    pointRef,
+    onClick,
+    position = propPositionDefault,
+    ...otherProps
+  } = props;
+
+  const [isTooltipHidden, setIsTooltipHidden] = useState<boolean>(true);
+
+  const anchorRef = useRef<HTMLDivElement>(null);
+
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    onClick?.(e);
+  };
+
+  const pointProps = {
+    onMouseEnter: () => setIsTooltipHidden(false),
+    onMouseLeave: () => setIsTooltipHidden(true),
+    className: cnProgressStepBarItem(
+      'Point',
+      {
+        size,
+      },
+      [cnMixFocus()],
+    ),
+    children: size !== 'xs' && getPointContent(point, size, progress),
+  };
+
+  const pointButtonProps = {
+    ref: pointRef as React.RefObject<HTMLButtonElement>,
+    onClick: handleClick,
+  };
+
+  const pointDivButton = {
+    ref: pointRef as React.RefObject<HTMLDivElement>,
   };
 
   return (
@@ -66,18 +101,11 @@ export const ProgressStepBarItem: StepComponent = (props) => {
         })}
         {...otherProps}
       >
-        <button
-          ref={buttonRef}
-          type="button"
-          onMouseEnter={() => setIsTooltipHidden(false)}
-          onMouseLeave={() => setIsTooltipHidden(true)}
-          className={cnProgressStepBarItem('Point', {
-            size,
-          })}
-          onClick={handleClick}
-        >
-          {size !== 'xs' && (progress ? <ProgressSpin size={size} /> : PointContent)}
-        </button>
+        {onClick ? (
+          <button type="button" {...pointButtonProps} {...pointProps} />
+        ) : (
+          <div {...pointProps} {...pointDivButton} />
+        )}
         <div className={cnProgressStepBarItem('Content')}>
           <Text
             className={cnProgressStepBarItem('Label')}
@@ -96,6 +124,7 @@ export const ProgressStepBarItem: StepComponent = (props) => {
       {tooltipContent && !isTooltipHidden && (
         <Tooltip
           anchorRef={anchorRef}
+          className={cnProgressStepBarItem('Tooltip')}
           direction={direction === 'horizontal' ? 'downCenter' : 'leftUp'}
           possibleDirections={
             direction === 'horizontal' ? possibleHorizontalDirections : possibleVerticalDirections

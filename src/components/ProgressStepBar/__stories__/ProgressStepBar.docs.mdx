@@ -25,7 +25,7 @@ import { ProgressStepBarExampleContent } from './examples/ProgressStepBarExample
 - `label` — название шага,
 - `tooltipContent` — текст для подсказки в [тултипе](?path=/docs/components-tooltip--tooltip-positioned-by-anchor-story) (краткое описание шага),
 - `lineStatus` — цвет линии для выполненного шага,
-- `point` — номер шага или изображение в формате SVG, обозначающее этот шаг,
+- `point` — номер шага или изображение в формате иконки, обозначающее этот шаг,
 - `progress` — показывает, что этот шаг в процессе выполнения (на его месте отображается индикатор загрузки),
 - `content` — любое содержимое для шага (лэйблы, описания, картинки).
 
@@ -127,7 +127,7 @@ export type DefaultItem = {
   label: string;
   tooltipContent?: string;
   lineStatus?: PropStatus;
-  point?: PointNumbersMap | SVGElement;
+  point?: PointNumbersMap | React.FC<IconProps>;
   status?: PropStatus;
   progress?: boolean;
   content?: React.ReactNode;
@@ -143,7 +143,7 @@ export type PointNumbersMap = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 | [`direction?`](#ориентация)         | `'horizontal', 'verical'`           | `'horizontal'`                  | Ориентация                                                  |
 | [`size?`](#размер)                  | `'xs', 's', 'm'`                    | `'s'`                           | Размер                                                      |
 | [`activeStepIndex?`](#активный-шаг) | `string`<code>&#124;</code>`number` | -                               | Номер активного шага (по порядку), у первого шага номер `0` |
-| `onItemClick?`                      | `(e, item, index) => void`          | -                               | Функция для события нажатия на определенный шаг             |
+| `onClick?`                          | `(e, item, index) => void`          | -                               | Функция для события нажатия на определенный шаг             |
 | `getItemLabel?`                     | `PropGetItemLabel<ITEM>`            | `(item) => item.label`          | Функция для определения названия шага                       |
 | `getItemLineStatus?`                | `PropGetItemLineStatus<ITEM>`       | `(item) => item.lineStatus`     | Функция для определения статуса линии                       |
 | `getItemTooltipContent?`            | `PropGetItemTooltipContent<ITEM>`   | `(item) => item.tooltipContent` | Функция для определения содержимого тултипа                 |

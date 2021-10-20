@@ -1,6 +1,7 @@
 import React from 'react';
 import { object, select } from '@storybook/addon-knobs';
 
+import { IconCheck } from '../../../icons/IconCheck/IconCheck';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import { propDirection, propDirectionDefault, propSize, propSizeDefault } from '../helpers';
@@ -28,9 +29,8 @@ const stepsExample = [
   },
   {
     label: 'Третий пункт',
-    point: 3,
+    point: IconCheck,
     status: 'alert',
-    progress: true,
     lineStatus: 'alert',
     tooltipContent: `Небольшое описание выполнения или состояния текущего этапа`,
   },
