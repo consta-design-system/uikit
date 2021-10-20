@@ -179,8 +179,13 @@ export function TextFieldRender<TYPE extends string>(
           ) : (
             <input {...commonProps} {...inputProps} />
           )}
-          {withClearButton && type !== 'number' && (
-            <button type="button" onClick={clearValue} className={cnTextField('ClearButton')}>
+          {value && withClearButton && type !== 'number' && (
+            <button
+              type="button"
+              disabled={disabled}
+              onClick={clearValue}
+              className={cnTextField('ClearButton')}
+            >
               <IconClose size="xs" className={cnTextField('ClearButtonIcon')} />
             </button>
           )}
