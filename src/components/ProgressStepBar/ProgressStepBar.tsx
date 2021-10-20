@@ -95,7 +95,10 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
       label: getItemLabel(item),
       point: getItemPoint(item),
       progress: getItemProgress(item),
-      status: getItemStatus(item),
+      status:
+        typeof activeStepIndex === 'number' && activeStepIndex >= index
+          ? getItemStatus(item)
+          : 'system',
       tooltipContent: getItemTooltipContent(item),
       size,
       position,

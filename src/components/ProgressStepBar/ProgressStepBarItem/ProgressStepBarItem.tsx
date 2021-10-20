@@ -21,7 +21,7 @@ const cnProgressStepBarItem = cn('ProgressStepBarItem');
 const possibleVerticalDirections: Direction[] = ['leftCenter', 'rightUp', 'downCenter'];
 const possibleHorizontalDirections: Direction[] = ['upCenter', 'downLeft', 'rightUp'];
 
-const getPointContent = (
+const renderPointContent = (
   point: PointNumbersMap | React.FC<IconProps> | undefined,
   size: 'm' | 's',
   progress: boolean | undefined,
@@ -31,7 +31,7 @@ const getPointContent = (
   if (typeof point === 'number' || !point)
     return (
       <Text
-        className={cnProgressStepBarItem('Point-Text')}
+        className={cnProgressStepBarItem('PointText')}
         size={size === 's' ? '2xs' : 'xs'}
         weight="bold"
       >
@@ -64,10 +64,6 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent = (props) => {
 
   const anchorRef = useRef<HTMLDivElement>(null);
 
-  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    onClick?.(e);
-  };
-
   const pointProps = {
     onMouseEnter: () => setIsTooltipHidden(false),
     onMouseLeave: () => setIsTooltipHidden(true),
@@ -78,12 +74,12 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent = (props) => {
       },
       [cnMixFocus()],
     ),
-    children: size !== 'xs' && getPointContent(point, size, progress),
+    children: size !== 'xs' && renderPointContent(point, size, progress),
   };
 
   const pointButtonProps = {
     ref: pointRef as React.RefObject<HTMLButtonElement>,
-    onClick: handleClick,
+    onClick: (e: React.MouseEvent) => onClick?.(e),
   };
 
   const pointDivButton = {

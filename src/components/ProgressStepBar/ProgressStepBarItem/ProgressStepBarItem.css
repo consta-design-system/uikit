@@ -110,7 +110,8 @@
     }
   }
 
-  & .ProgressStepBarItem-Point-Text {
+  & .ProgressStepBarItem-PointText,
+  & .Icon {
     color: var(--progress-step-bar-item-point-content-color);
   }
 
@@ -133,11 +134,11 @@
     border-radius: calc(var(--progress-step-bar-item-point-size) * 0.5);
     cursor: pointer;
     transition: background-color 0.3s;
+  }
 
-    &-Text {
-      color: var(--color-typo-secondary);
-      transition: color 0.3s;
-    }
+  &-PointText {
+    color: var(--color-typo-secondary);
+    transition: color 0.3s;
   }
 
   &-Tooltip {

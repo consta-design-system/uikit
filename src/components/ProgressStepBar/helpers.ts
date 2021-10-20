@@ -32,7 +32,7 @@ export type PropGetItemPoint<ITEM> = (
 ) => PointNumbersMap | React.FC<IconProps> | undefined;
 export type PropGetItemProgress<ITEM> = (item: ITEM) => boolean | undefined;
 export type PropGetItemContent<ITEM> = (item: ITEM) => React.ReactNode | undefined;
-export type PropGetItemStatus<ITEM> = (item: ITEM) => PropStatus | undefined;
+export type PropGetItemStatus<ITEM> = (item: ITEM) => PropStatus | 'system' | undefined;
 export type PropGetItemOnCLick<ITEM> = (
   item: ITEM,
 ) => React.EventHandler<React.MouseEvent> | undefined;
@@ -42,7 +42,7 @@ export type DefaultItem = {
   tooltipContent?: string;
   lineStatus?: PropStatus;
   point?: PointNumbersMap | React.FC<IconProps>;
-  status?: PropStatus;
+  status?: PropStatus | 'system';
   progress?: boolean;
   content?: React.ReactNode;
 };
@@ -76,7 +76,7 @@ export type ProgressStepBarItemProps = {
   label: string;
   point?: PointNumbersMap | React.FC<IconProps>;
   progress?: boolean;
-  status?: PropStatus;
+  status?: PropStatus | 'system';
   tooltipContent?: string;
   position?: PropPosition;
   direction: PropDirection;
