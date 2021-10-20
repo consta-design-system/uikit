@@ -10,6 +10,7 @@ import { TextExampleStyle } from './examples/TextExampleStyle/TextExampleStyle';
 import { TextExampleTransform } from './examples/TextExampleTransform/TextExampleTransform';
 import { TextExampleView } from './examples/TextExampleView/TextExampleView';
 import { TextExampleTruncate } from './examples/TextExampleTruncate/TextExampleTruncate';
+import { TextExampleCursor } from './examples/TextExampleCursor/TextExampleCursor';
 import { TextExampleWeight } from './examples/TextExampleWeight/TextExampleWeight';
 
 # Text
@@ -24,11 +25,11 @@ import { TextExampleWeight } from './examples/TextExampleWeight/TextExampleWeigh
   - [Наклон](#наклон) `fontStyle`
   - [Межбуквенный интервал](#межбуквенный-интервал) `spacing`
   - [Высота строки](#высота-строки) `lineHeight`
-  - [Отображение курсора](#отображение-курсора) `cursor`
-  - [Подчеркивание](#подчеркивание) `decoration`
+  - [Курсор](#курсор) `cursor`
+  - [Подчёркивание](#подчеркивание) `decoration`
   - [Регистр](#регистр) `transform`
   - [Выравнивание](#выравнивание) `align`
-  - [Обрезание текста](#обрезание-текста) `truncate`
+  - [Слишком длинный текст](#слишком-длинный-текст) `truncate`
 - [Контейнер с текстом](#контейнер-с-текстом)
   - [Тег для контейнера](#тег-для-контейнера) `as`
   - [Расположение](#расположение) `display`
@@ -168,9 +169,9 @@ import { TextExampleWeight } from './examples/TextExampleWeight/TextExampleWeigh
 
 <TextExampleLineheight />
 
-### Подчеркивание
+### Подчёркивание
 
-`decoration` в значении `underline` подчеркивает текст.
+`decoration` в значении `underline` подчёркивает текст.
 
 ```ts
 <Text decoration="underline">Газпром нефть</Text>
@@ -200,14 +201,27 @@ import { TextExampleWeight } from './examples/TextExampleWeight/TextExampleWeigh
 
 <TextExampleAlign />
 
-### Обрезание текста
+### Курсор
 
-`truncate` обрезает текст и устанавливает многоточие в конце строки при переполнении родительского элемента
+`cursor` отвечает за внешний вид курсора при наведении на текст.
+По умолчанию это текстовый курсор, если нужно поменять его на указатель,
+добавьте `cursor="pointer"`.
+
+```ts
+<Text>Это текст с обычным текстовым курсором</Text>
+<Text cursor="pointer">Это текст с курсором-указателем</Text>
+```
+
+<TextExampleCursor />
+
+### Слишком длинный текст
+
+Текст в одну строчку, который может не поместиться в родительский контейнер, можно обрезать с помощью `truncate`. В конце добавляется многоточие.
 
 ```ts
 <Text truncate>
-  Очень длинный текст, который должен располагаться в одну строку и быть ограничен родительским
-  контейнером.
+  Очень длинный текст, который должен располагаться на одной строке и не влезает в родительский
+  контейнер.
 </Text>
 ```
 
@@ -251,6 +265,7 @@ import { TextExampleWeight } from './examples/TextExampleWeight/TextExampleWeigh
   микротему. Что же ещё можно сказать про абзацы? Мы видим, что обычно в абзацах несколько
   предложений. В таком случае каждый абзац служит для выделения своей микротемы.
 </Text>
+
 ```
 
 <TextExampleHeadingAndParagraph />
@@ -307,25 +322,25 @@ import { TextExampleWeight } from './examples/TextExampleWeight/TextExampleWeigh
 
 <!-- props:start -->
 
-| Свойство                            | Тип                                                                                                       | По умолчанию | Описание                                                                  |
-| ----------------------------------- | --------------------------------------------------------------------------------------------------------- | ------------ | ------------------------------------------------------------------------- |
-| [`view`](#цвет)                     | `'alert', 'brand', 'ghost', 'link', 'linkMinor', 'primary', 'secondary', 'success', 'warning'`, `primary` | `'primary'`  | Тип и цвет текста                                                         |
-| [`font`](#гарнитура)                | `'primary', 'mono';`                                                                                      | —            | Гарнитура                                                                 |
-| [`lineHeight`](#высота-строки)      | `'2xs', 'xs', 's', 'm', 'l'`                                                                              | `'m'`        | Высота строки                                                             |
-| [`spacing`](#межбуквенный-интервал) | `'xs', 's', 'm', 'l'`                                                                                     | —            | Межбуквенное расстояние                                                   |
-| [`fontStyle`](#начертание)          | `italic`                                                                                                  | —            | Начертание                                                                |
-| [`weight`](#насыщенность)           | `'black', 'bold', 'light', 'regular', 'semibold', 'thin'`                                                 | —            | Насыщенность                                                              |
-| [`transform`](#регистр)             | `uppercase`                                                                                               | —            | Регистр                                                                   |
-| [`cursor`](#отображение-курсора)    | `pointer`                                                                                                 | —            | Отображение курсора                                                       |
-| [`decoration`](#подчеркивание)      | `underline`                                                                                               | —            | Подчеркивание                                                             |
-| [`align`](#выравнивание)            | `'left', 'center', 'right'`                                                                               | —            | Выравнивание                                                              |
-| [`size`](#размер)                   | `'2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'`                                     | `'m'`        | Размер текста                                                             |
-| [`display`](#расположение)          | `'block', 'inlineBlock', 'inline'`                                                                        | —            | Поведение контейнера с текстом в документе (блочный или строчный элемент) |
-| [`as`](#тег-для-контейнера)         | `keyof JSX.IntrinsicElements`                                                                             | `'div'`      | HTML-тег, в виде которого этот компонент будет представлен в DOM          |
-| [`truncate?`](#обрезание-текста)    | `boolean`                                                                                                 | `false`      | Видимости текста в блоке                                                  |
-| `className`                         | `string`                                                                                                  | —            | Дополнительный CSS-класс                                                  |
-| `children`                          | `React.ReactNode`                                                                                         | —            | Дочерние компоненты                                                       |
-| `ref`                               | `React.Ref<HTMLElement>`                                                                                  | —            | Ссылка на корневой DOM-элемент этого компонента                           |
+| Свойство                              | Тип                                                                                            | По умолчанию | Описание                                                                  |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------- | ------------ | ------------------------------------------------------------------------- |
+| [`view?`](#цвет)                      | `'alert', 'brand', 'ghost', 'link', 'linkMinor', 'primary', 'secondary', 'success', 'warning'` | `'primary'`  | Тип и цвет текста                                                         |
+| [`font?`](#гарнитура)                 | `'primary', 'mono'`                                                                            | -            | Гарнитура                                                                 |
+| [`lineHeight?`](#высота-строки)       | `'2xs', 'xs', 's', 'm', 'l'`                                                                   | `'m'`        | Высота строки                                                             |
+| [`spacing?`](#межбуквенный-интервал)  | `'xs', 's', 'm', 'l'`                                                                          | -            | Межбуквенное расстояние                                                   |
+| [`fontStyle?`](#начертание)           | `'italic'`                                                                                     | -            | Начертание                                                                |
+| [`weight?`](#насыщенность)            | `'black', 'bold', 'light', 'regular', 'semibold', 'thin'`                                      | -            | Насыщенность                                                              |
+| [`transform?`](#регистр)              | `'uppercase'`                                                                                  | -            | Регистр                                                                   |
+| [`cursor?`](#курсор)                  | `'pointer'`                                                                                    | -            | Отображение курсора                                                       |
+| [`decoration?`](#подчёркивание)       | `'underline'`                                                                                  | -            | Подчеркивание                                                             |
+| [`align?`](#выравнивание)             | `'left', 'center', 'right'`                                                                    | -            | Выравнивание                                                              |
+| [`size?`](#размер)                    | `'2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'`                          | `'m'`        | Размер текста                                                             |
+| [`display?`](#расположение)           | `'block', 'inlineBlock', 'inline'`                                                             | -            | Поведение контейнера с текстом в документе (блочный или строчный элемент) |
+| [`as?`](#тег-для-контейнера)          | `keyof JSX.IntrinsicElements`                                                                  | `'div'`      | HTML-тег, в виде которого этот компонент будет представлен в DOM          |
+| [`truncate?`](#слишком-длинный-текст) | `boolean`                                                                                      | `false`      | Видимости текста в блоке                                                  |
+| `className?`                          | `string`                                                                                       | -            | Дополнительный CSS-класс                                                  |
+| `children?`                           | `React.ReactNode`                                                                              | -            | Дочерние компоненты                                                       |
+| `ref?`                                | `React.Ref<HTMLElement>`                                                                       | -            | Ссылка на корневой DOM-элемент этого компонента                           |
 
 <!-- props:end -->
 
