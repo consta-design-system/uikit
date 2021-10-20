@@ -58,7 +58,7 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
       steps.forEach((step, index) => {
         if (index !== steps.length - 1)
           linesArray.push({
-            status: getItemLineStatus(step),
+            status: getItemLineStatus(step) || 'normal',
             size: getLineSize(containerRef, stepsRef[index + 1]),
           });
       });

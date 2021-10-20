@@ -1,20 +1,25 @@
 .ProgressStepBarLine {
   position: absolute;
-  background-color: var(--color-bg-system);
+  top: var(--progress-step-bar-line-top);
+  left: var(--progress-step-bar-line-left);
+  overflow: hidden;
+  width: var(--progress-step-bar-line-width);
+  height: var(--progress-step-bar-line-height);
+  background: var(--line-background);
 
   &_direction {
     &_horizontal {
-      top: var(--progress-step-bar-line-padding);
-      left: 0;
-      width: var(--line-size);
-      height: var(--progress-step-bar-line-size);
+      --progress-step-bar-line-top: var(--progress-step-bar-line-padding);
+      --progress-step-bar-line-left: 0;
+      --progress-step-bar-line-width: var(--line-size);
+      --progress-step-bar-line-height: var(--progress-step-bar-line-size);
     }
 
     &_vertical {
-      top: 0;
-      left: var(--progress-step-bar-line-padding);
-      width: var(--progress-step-bar-line-size);
-      height: var(--line-size);
+      --progress-step-bar-line-top: 0;
+      --progress-step-bar-line-left: var(--progress-step-bar-line-padding);
+      --progress-step-bar-line-width: var(--progress-step-bar-line-size);
+      --progress-step-bar-line-height: var(--line-size);
     }
   }
 
@@ -35,43 +40,14 @@
     }
   }
 
-  &-ProgressLine {
+  &::after {
+    content: '';
     position: absolute;
-    z-index: var(--progress-line-index);
     top: 0;
-    left: 0;
-    background-color: var(--progress-line-color);
-
-    &_direction {
-      &_horizontal {
-        width: var(--progress-line-size);
-        height: var(--progress-step-bar-line-size);
-        transition: width var(--progress-line-resize);
-      }
-
-      &_vertical {
-        width: var(--progress-step-bar-line-size);
-        height: var(--progress-line-size);
-        transition: height var(--progress-line-resize);
-      }
-    }
-
-    &_status {
-      &_normal {
-        --progress-line-color: var(--color-bg-normal);
-      }
-
-      &_success {
-        --progress-line-color: var(--color-bg-success);
-      }
-
-      &_warning {
-        --progress-line-color: var(--color-bg-warning);
-      }
-
-      &_alert {
-        --progress-line-color: var(--color-bg-alert);
-      }
-    }
+    right: 0;
+    left: var(--line-active-size);
+    bottom: 0;
+    background: var(--color-bg-system);
+    transition: left 0.3s;
   }
 }

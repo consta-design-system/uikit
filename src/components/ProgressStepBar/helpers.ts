@@ -26,7 +26,7 @@ export const propPositionDefault: PropPosition = propPosition[0];
 export type PropGetItemLabel<ITEM> = (item: ITEM) => string;
 export type PropGetItemKey<ITEM> = (item: ITEM) => string | number;
 export type PropGetItemTooltipContent<ITEM> = (item: ITEM) => string | undefined;
-export type PropGetItemLineStatus<ITEM> = (item: ITEM) => string | undefined;
+export type PropGetItemLineStatus<ITEM> = (item: ITEM) => PropStatus | undefined;
 export type PropGetItemPoint<ITEM> = (
   item: ITEM,
 ) => PointNumbersMap | React.FC<IconProps> | undefined;
@@ -48,8 +48,8 @@ export type DefaultItem = {
 };
 
 export type Line = {
-  status?: string;
-  size?: number;
+  status: PropStatus;
+  size: number;
 };
 
 export type ProgressStepBarProps<ITEM = DefaultItem> = PropsWithHTMLAttributesAndRef<

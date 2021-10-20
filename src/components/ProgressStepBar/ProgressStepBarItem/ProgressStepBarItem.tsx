@@ -18,8 +18,18 @@ import {
 
 const cnProgressStepBarItem = cn('ProgressStepBarItem');
 
-const possibleVerticalDirections: Direction[] = ['leftCenter', 'rightUp', 'downCenter'];
-const possibleHorizontalDirections: Direction[] = ['upCenter', 'downLeft', 'rightUp'];
+const possibleVerticalDirections: Direction[] = [
+  'leftCenter',
+  'rightCenter',
+  'rightUp',
+  'downCenter',
+];
+const possibleHorizontalDirections: Direction[] = [
+  'downCenter',
+  'upCenter',
+  'downStartLeft',
+  'downStartRight',
+];
 
 const renderPointContent = (
   point: PointNumbersMap | React.FC<IconProps> | undefined,
@@ -102,7 +112,7 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent = (props) => {
         ) : (
           <div {...pointProps} {...pointDivButton} />
         )}
-        <div className={cnProgressStepBarItem('Content')}>
+        <div className={cnProgressStepBarItem('Content', { bottomOffset: !!content })}>
           <Text
             className={cnProgressStepBarItem('Label')}
             ref={anchorRef}
