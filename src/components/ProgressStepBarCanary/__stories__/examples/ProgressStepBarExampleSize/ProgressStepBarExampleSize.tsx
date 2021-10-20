@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { ProgressStepBar } from '../../../ProgressStepBar';
+import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
+import { ProgressStepBar } from '../../../ProgressStepBarCanary';
 
 type Item = {
   label: string;
@@ -26,7 +27,6 @@ const steps: Item[] = [
   {
     label: 'Пункт 3',
     point: 3,
-    progress: true,
     status: 'normal',
     lineStatus: 'normal',
   },
@@ -37,6 +37,12 @@ const steps: Item[] = [
   },
 ];
 
-export const ProgressStepBarExampleProgress = () => {
-  return <ProgressStepBar steps={steps} activeStepIndex={3} />;
+export const ProgressStepBarExampleSize = () => {
+  return (
+    <div className={cnDocsDecorator('Section')}>
+      <ProgressStepBar size="xs" direction="horizontal" steps={steps} activeStepIndex={2} />
+      <ProgressStepBar size="s" direction="horizontal" steps={steps} activeStepIndex={2} />
+      <ProgressStepBar size="m" direction="horizontal" steps={steps} activeStepIndex={2} />
+    </div>
+  );
 };

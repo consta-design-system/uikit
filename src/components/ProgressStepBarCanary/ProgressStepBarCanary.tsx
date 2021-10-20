@@ -20,11 +20,6 @@ import {
   withDefaultGetters,
 } from './helpers';
 
-export type TabDimensions = {
-  size: number;
-  gap: number;
-};
-
 function ProgressStepBarRender<ITEM = DefaultItem>(
   props: ProgressStepBarProps<ITEM>,
   ref: React.Ref<HTMLDivElement>,

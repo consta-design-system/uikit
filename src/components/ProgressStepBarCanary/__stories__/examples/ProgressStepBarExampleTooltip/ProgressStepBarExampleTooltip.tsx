@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ProgressStepBar } from '../../../ProgressStepBar';
+import { ProgressStepBar } from '../../../ProgressStepBarCanary';
 
 type Item = {
   label: string;

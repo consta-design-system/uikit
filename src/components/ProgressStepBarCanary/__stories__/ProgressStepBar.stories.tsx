@@ -5,7 +5,7 @@ import { IconCheck } from '../../../icons/IconCheck/IconCheck';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import { propDirection, propDirectionDefault, propSize, propSizeDefault } from '../helpers';
-import { ProgressStepBar } from '../ProgressStepBar';
+import { ProgressStepBar } from '../ProgressStepBarCanary';
 
 import mdx from './ProgressStepBar.docs.mdx';
 
@@ -64,7 +64,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Служебные/ProgressStepBar',
+  title: 'Компоненты|/Служебные/ProgressStepBar(Canary)',
   id: 'components/ProgressStepBar',
   parameters: {
     docs: {

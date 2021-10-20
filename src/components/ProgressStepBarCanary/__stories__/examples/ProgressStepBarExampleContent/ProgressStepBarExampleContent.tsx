@@ -6,7 +6,7 @@ import { IconDinosaur } from '../../../../../icons/IconDinosaur/IconDinosaur';
 import { IconSettings } from '../../../../../icons/IconSettings/IconSettings';
 import { cn } from '../../../../../utils/bem';
 import { Tag } from '../../../../Tag/Tag';
-import { ProgressStepBar } from '../../../ProgressStepBar';
+import { ProgressStepBar } from '../../../ProgressStepBarCanary';
 
 const cnProgressStepBarExampleContent = cn('ProgressStepBarExmapleContent');
 
