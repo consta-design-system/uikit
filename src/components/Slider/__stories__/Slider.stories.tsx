@@ -58,9 +58,10 @@ export function Playground() {
 
   const changeInput = useCallback(
     (e) => {
+      setValue([e.value]);
       setInputValue(`${e.value}`);
     },
-    [inputValue],
+    [inputValue, value],
   );
 
   const getValue = useCallback((val) => {
@@ -109,7 +110,7 @@ export function Playground() {
             )
           }
           step={customStep ? [6, 19, 33, 57, 74, 96] : step}
-          value={range ? value : Math.round(Number(inputValue))}
+          value={range ? value : value[0]}
           onChange={action('onChange')}
           onChangeCommitted={action('onChangeCommitted')}
         />
