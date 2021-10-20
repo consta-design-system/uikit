@@ -86,11 +86,11 @@
 
     &_disabled {
       & .TextField-CounterButton {
-        background-color: var(--color-control-bg-disable);
+        --counter-button-background: var(--color-control-bg-disable);
       }
 
       & .TextField-CounterButton-Icon path {
-        fill: var(--color-control-bg-disable);
+        fill: var(--color-control-typo-disable);
       }
     }
 
@@ -331,6 +331,7 @@
   }
 
   &-CounterButton {
+    --counter-button-background: transparent;
     display: inline-flex;
     overflow-y: hidden;
     flex-direction: column;
@@ -340,7 +341,7 @@
     width: var(--space-xl);
     margin: 0;
     padding: 0;
-    background-color: transparent;
+    background-color: var(--counter-button-background);
     border: none;
     cursor: pointer;
     transition: background-color 0.15s;

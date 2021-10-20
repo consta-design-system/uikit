@@ -140,7 +140,20 @@ export function TextFieldRender<TYPE extends string>(
     currentValue = isIncrement
       ? Number(currentValue) + Number(step)
       : Number(currentValue) - Number(step);
-    onChange?.({ e, value: currentValue.toString() });
+    onChange?.({
+      e,
+      value: currentValue.toFixed(
+        Number(
+          /* Необходимо для того чтобы избежать ситуации, когда по нажатию
+          на кнопку прибавляется число с погрешностью. 
+          Здесь мы берем разрядность дробной части шага и ограничиваем 
+          результирующее число этой разрядностью */
+          Number(step)
+            .toString()
+            .split('.')[1]?.length,
+        ) || 0,
+      ),
+    });
   };
 
   return (

@@ -54,28 +54,27 @@ export type TextFieldPropAutoComplete = 'on' | 'off';
 export type TextFieldPropsTextareaType<TYPE> = TYPE extends 'textarea'
   ?
       | {
-          rightSide?: string | React.FC<IconProps>;
           minRows?: never;
           maxRows?: never;
           rows?: number;
         }
       | {
-          rightSide?: string | React.FC<IconProps>;
           rows?: never;
           minRows?: number;
           maxRows?: number;
         }
-  : TYPE extends 'number'
-  ? {
+  : {
       rows?: never;
       minRows?: never;
       maxRows?: never;
+    };
+
+export type TextFieldPropRightSide<TYPE> = TYPE extends 'number'
+  ? {
+      rightSide?: never;
     }
   : {
       rightSide?: string | React.FC<IconProps>;
-      rows?: never;
-      minRows?: never;
-      maxRows?: never;
     };
 
 export type Props<TYPE extends string> = {
@@ -116,7 +115,7 @@ export type Props<TYPE extends string> = {
 };
 
 export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
-  Props<TYPE> & TextFieldPropsTextareaType<TYPE>,
+  Props<TYPE> & TextFieldPropsTextareaType<TYPE> & TextFieldPropRightSide<TYPE>,
   HTMLDivElement
 >;
 
