@@ -10,12 +10,13 @@ import { ProgressStepBarLine } from './ProgressStepBarLine/ProgressStepBarLine';
 import {
   cnProgressStepBar,
   DefaultItem,
+  getItemPosition,
+  getLineSize,
   Line,
   ProgressStepBarComponent,
   ProgressStepBarItemProps,
   ProgressStepBarProps,
   propDirectionDefault,
-  PropPosition,
   propSizeDefault,
   withDefaultGetters,
 } from './helpers';
@@ -30,7 +31,7 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
     size = propSizeDefault,
     className,
     activeStepIndex,
-    onClick,
+    onItemClick,
     getItemContent,
     getItemLabel,
     getItemPoint,
@@ -38,6 +39,7 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
     getItemStatus,
     getItemTooltipContent,
     getItemLineStatus,
+    getItemOnClick,
     ...otherProps
   } = withDefaultGetters(props);
 
@@ -54,7 +56,7 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
         if (index !== steps.length - 1)
           linesArray.push({
             status: getItemLineStatus(step) || 'normal',
-            size: getLineSize(containerRef, stepsRef[index + 1]),
+            size: getLineSize(containerRef, stepsRef[index + 1], direction),
           });
       });
       setLines(linesArray);
@@ -66,25 +68,16 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
     [steps.length],
   );
 
-  const getLineSize: (
-    container: React.RefObject<HTMLElement>,
-    activeElement: React.RefObject<HTMLElement>,
-  ) => number = (container, activeElement) => {
-    let size = 0;
-    if (container && container.current && activeElement && activeElement.current) {
-      const containerPosition = container.current.getBoundingClientRect();
-      const activeElementPosition = activeElement.current.getBoundingClientRect();
-      if (direction === 'vertical')
-        size = activeElementPosition.y - containerPosition.y + activeElementPosition.height;
-      else size = activeElementPosition.x - containerPosition.x;
-    }
-    return size;
-  };
-
   const getStepItem: (item: ITEM, index: number) => ProgressStepBarItemProps = (item, index) => {
-    let position: PropPosition = 'center';
-    if (index === steps.length - 1) position = 'end';
-    if (index === 0) position = 'start';
+    const onClick = getItemOnClick(item);
+
+    const onItemClickHandler = onItemClick
+      ? (e: React.MouseEvent<Element, MouseEvent>) => {
+          onItemClick({ e, item, index });
+          onClick?.(e);
+        }
+      : undefined;
+
     return {
       content: getItemContent(item),
       label: getItemLabel(item),
@@ -92,22 +85,22 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
       progress: getItemProgress(item),
       status:
         typeof activeStepIndex === 'number' && activeStepIndex >= index
-          ? getItemStatus(item)
+          ? getItemStatus(item) || 'normal'
           : 'system',
       tooltipContent: getItemTooltipContent(item),
       size,
-      position,
+      position: getItemPosition(index, steps.length),
       pointRef: stepsRef[index],
       direction,
-      onClick: (e) => onClick?.(e, item, index),
+      onClick: onClick || onItemClickHandler,
     };
   };
 
   return (
     <div
-      ref={useForkRef([ref, containerRef])}
       {...otherProps}
       className={cnProgressStepBar({ direction }, [className])}
+      ref={useForkRef([ref, containerRef])}
     >
       <ProgressStepBarLine
         lines={lines}
@@ -115,10 +108,9 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
         direction={direction}
         activeStepIndex={activeStepIndex}
       />
-      {steps.map((step, index) => {
-        const item = getStepItem(step, index);
-        return <ProgressStepBarItem {...item} />;
-      })}
+      {steps.map((step, index) => (
+        <ProgressStepBarItem {...getStepItem(step, index)} />
+      ))}
     </div>
   );
 }
