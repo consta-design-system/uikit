@@ -1,0 +1,17 @@
+.ProgressStepBar {
+  position: relative;
+  display: inline-flex;
+  justify-content: space-between;
+
+  &_direction {
+    &_horizontal {
+      flex-direction: row;
+      width: 100%;
+    }
+
+    &_vertical {
+      flex-direction: column;
+      height: 100%;
+    }
+  }
+}
