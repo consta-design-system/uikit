@@ -1,8 +1,5 @@
 import { Preview } from '@storybook/addon-docs/dist/blocks';
-import {
-  PopoverPositionedByAnchorStory,
-  PopoverPositionedByCoordsStory,
-} from './Popover.stories.tsx';
+import { Playground, PopoverPositionedByCoordsStory } from './Popover.stories.tsx';
 
 <!--info
 description: Поповер. Позиционирование элементов по координатам или якорю.
@@ -12,7 +9,7 @@ description: Поповер. Позиционирование элементов
 
 Поповер используется для позиционирования элементов, привязанных к координате или якорю.
 Это логический компонент, у него нет стилей, поэтому он не является до конца самостоятельным.
-Может быть полезен при создании [тултипов](?path=/docs/components-tooltip--tooltip-positioned-by-anchor-story),
+Может быть полезен при создании [тултипов](?path=/docs/components-tooltip--playground),
 выпадающих списков, контекстных меню и других похожих элементов.
 
 Поповер отрисовывается внутри `body`, чтобы на него не влияли `overflow`-свойства других элементов.
@@ -39,7 +36,7 @@ description: Поповер. Позиционирование элементов
 Поповер прикрепляется к HTML-элементу (например, кнопке). Ссылка на этот элемент передается в свойстве `anchorRef`.
 
 <Preview>
-  <PopoverPositionedByAnchorStory />
+  <Playground />
 </Preview>
 
 ```ts

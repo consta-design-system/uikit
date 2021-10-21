@@ -11,14 +11,14 @@ import { DataItem } from './types';
 
 export const data: DataItem[] = [
   {
-    name: 'Attachment',
-    url: '/?path=/docs/components-attachment--playground',
-    description: 'Показывает загрузку файла или уже загруженные файл.',
-  },
-  {
     name: 'Avatar',
     url: '/?path=/docs/components-avatar--playground',
     description: 'Аватарка. Изображение пользователя.',
+  },
+  {
+    name: 'Attachment',
+    url: '/?path=/docs/components-attachment--playground',
+    description: 'Показывает загрузку файла или уже загруженные файл.',
   },
   {
     name: 'Badge',
@@ -96,14 +96,14 @@ export const data: DataItem[] = [
     description: 'Иконка для файла с расширением.',
   },
   {
-    name: 'Grid',
-    url: '/?path=/docs/components-grid--playground',
-    description: 'Модульная сетка. Отвечает за расположение содержимого на странице.',
-  },
-  {
     name: 'FileField',
     url: '/?path=/docs/components-filefield--playground',
     description: 'Можно выбрать файлы, чтобы загрузить или отправить.',
+  },
+  {
+    name: 'Grid',
+    url: '/?path=/docs/components-grid--playground',
+    description: 'Модульная сетка. Отвечает за расположение содержимого на странице.',
   },
   {
     name: 'Header',
@@ -156,15 +156,15 @@ export const data: DataItem[] = [
     description: 'Группа радиокнопок. Можно выбрать один вариант.',
   },
   {
+    name: 'Select',
+    url: '/?path=/docs/components-select--playground',
+    description: 'Выпадающий список. Можно выбрать один вариант.',
+  },
+  {
     name: 'Responses',
     url: '/?path=/docs/components-responses--playground',
     description:
       'Заглушки с сообщениями об ошибках и важных статусах (404, 503, не найдены данные и похожие).',
-  },
-  {
-    name: 'Select',
-    url: '/?path=/docs/components-select--playground',
-    description: 'Выпадающий список. Можно выбрать один вариант.',
   },
   {
     name: 'Sidebar',
@@ -223,14 +223,14 @@ export const data: DataItem[] = [
     description: 'Поле ввода. Одна или несколько строк.',
   },
   {
-    name: 'Theme',
-    url: '/?path=/docs/components-theme--playground',
-    description: 'Тема. Набор правил в CSS, который определяет, как выглядит проект.',
-  },
-  {
     name: 'ThemeToggler',
     url: '/?path=/docs/components-themetoggler--playground',
     description: 'Переключатель тем.',
+  },
+  {
+    name: 'Theme',
+    url: '/?path=/docs/components-theme--playground',
+    description: 'Тема. Набор правил в CSS, который определяет, как выглядит проект.',
   },
   {
     name: 'Timer',

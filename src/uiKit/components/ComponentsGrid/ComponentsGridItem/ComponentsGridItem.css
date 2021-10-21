@@ -2,7 +2,10 @@
   margin-bottom: var(--space-2xl);
 
   &-Image {
+    overflow: hidden;
     width: 100%;
     margin-bottom: var(--space-s);
+    border: solid var(--control-border-width) var(--color-control-bg-border-default);
+    border-radius: var(--control-radius);
   }
 }

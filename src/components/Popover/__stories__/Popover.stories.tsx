@@ -69,7 +69,7 @@ export const PopoverPositionedByCoordsStory = createStory(
   { name: 'с позиционированием по координатам' },
 );
 
-export const PopoverPositionedByAnchorStory = createStory(
+export const Playground = createStory(
   () => {
     const anchorRef = useRef<HTMLButtonElement>(null);
     const [isPopoverVisible, setIsPopoverVisible] = useState(false);
