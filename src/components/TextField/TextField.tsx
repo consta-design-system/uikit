@@ -4,6 +4,9 @@ import React, { forwardRef, useState } from 'react';
 import TextAreaAutoSize from 'react-textarea-autosize';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
+import { IconClose } from '../../icons/IconClose/IconClose';
+import { IconSelect } from '../../icons/IconSelect/IconSelect';
+import { IconSelectOpen } from '../../icons/IconSelectOpen/IconSelectOpen';
 import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
@@ -28,6 +31,7 @@ export function TextFieldRender<TYPE extends string>(
   ref: React.Ref<HTMLDivElement>,
 ) {
   const textFieldRef = React.useRef<HTMLDivElement>(null);
+  const inputRef = React.useRef<HTMLInputElement | HTMLTextAreaElement>(null);
 
   const {
     className,
@@ -40,7 +44,7 @@ export function TextFieldRender<TYPE extends string>(
     cols,
     minRows,
     maxRows,
-    inputRef,
+    inputRef: inputRefProp,
     maxLength,
     disabled,
     size = textFieldPropSizeDefault,
@@ -56,11 +60,12 @@ export function TextFieldRender<TYPE extends string>(
     leftSide,
     rightSide,
     autoComplete,
+    withClearButton,
     max,
     min,
     readOnly,
     required,
-    step,
+    step = 1,
     tabIndex,
     ariaLabel,
     label,
@@ -117,10 +122,7 @@ export function TextFieldRender<TYPE extends string>(
     cols,
     minRows: minRows || rows,
     maxRows: maxRows || rows,
-    inputRef:
-      inputRef === null
-        ? undefined
-        : (inputRef as (node: HTMLTextAreaElement) => void | React.RefObject<HTMLTextAreaElement>),
+    inputRef: useForkRef([inputRef, inputRefProp]) as (node: HTMLTextAreaElement) => void,
   };
 
   const inputProps = {
@@ -128,7 +130,39 @@ export function TextFieldRender<TYPE extends string>(
     max,
     min,
     step,
-    ref: inputRef as React.Ref<HTMLInputElement>,
+    ref: useForkRef([inputRef, inputRefProp]) as React.RefCallback<HTMLInputElement>,
+  };
+
+  const handleClear: (e: React.MouseEvent<HTMLButtonElement>) => void = (e) => {
+    onChange?.({
+      e,
+      value: '',
+    });
+    inputRef.current?.focus();
+  };
+
+  const changeNumberValue: (
+    e: React.MouseEvent<HTMLButtonElement>,
+    isIncrement?: boolean,
+  ) => void = (e, isIncrement = true) => {
+    let currentValue = value || 0;
+    currentValue = isIncrement
+      ? Number(currentValue) + Number(step)
+      : Number(currentValue) - Number(step);
+    onChange?.({
+      e,
+      value: currentValue.toFixed(
+        Number(
+          /* Необходимо для того чтобы избежать ситуации, когда по нажатию
+          на кнопку прибавляется число с погрешностью. 
+          Здесь мы берем разрядность дробной части шага и ограничиваем 
+          результирующее число этой разрядностью */
+          Number(step)
+            .toString()
+            .split('.')[1]?.length,
+        ) || 0,
+      ),
+    });
   };
 
   return (
@@ -175,7 +209,38 @@ export function TextFieldRender<TYPE extends string>(
           ) : (
             <input {...commonProps} {...inputProps} />
           )}
-          {RightIcon && (
+
+          {type === 'number' && (
+            <div className={cnTextField('Counter')}>
+              <button
+                onClick={(e) => changeNumberValue(e, true)}
+                type="button"
+                className={cnTextField('CounterButton')}
+              >
+                <IconSelectOpen size="xs" />
+              </button>
+              <button
+                onClick={(e) => changeNumberValue(e, false)}
+                type="button"
+                className={cnTextField('CounterButton')}
+              >
+                <IconSelect size="xs" />
+              </button>
+            </div>
+          )}
+
+          {value && withClearButton && type !== 'number' && (
+            <button
+              type="button"
+              disabled={disabled}
+              onClick={handleClear}
+              className={cnTextField('ClearButton')}
+            >
+              <IconClose size="xs" className={cnTextField('ClearButtonIcon')} />
+            </button>
+          )}
+
+          {RightIcon && type !== 'number' && (
             <div
               className={cnTextField('Side', {
                 position: 'right',
