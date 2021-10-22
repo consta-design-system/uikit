@@ -32,8 +32,8 @@ export type PropGetItemPoint<ITEM> = (
 ) => PointNumbersMap | React.FC<IconProps> | undefined;
 export type PropGetItemProgress<ITEM> = (item: ITEM) => boolean | undefined;
 export type PropGetItemContent<ITEM> = (item: ITEM) => React.ReactNode | undefined;
-export type PropGetItemStatus<ITEM> = (item: ITEM) => PropStatus | 'system' | undefined;
-export type PropGetItemOnCLick<ITEM> = (
+export type PropGetItemStatus<ITEM> = (item: ITEM) => PropStatus | undefined;
+export type PropGetItemOnClick<ITEM> = (
   item: ITEM,
 ) => React.EventHandler<React.MouseEvent> | undefined;
 
@@ -42,9 +42,10 @@ export type DefaultItem = {
   tooltipContent?: string;
   lineStatus?: PropStatus;
   point?: PointNumbersMap | React.FC<IconProps>;
-  status?: PropStatus | 'system';
+  status?: PropStatus;
   progress?: boolean;
   content?: React.ReactNode;
+  onClick?: React.EventHandler<React.MouseEvent>;
 };
 
 export type Line = {
@@ -58,7 +59,7 @@ export type ProgressStepBarProps<ITEM = DefaultItem> = PropsWithHTMLAttributesAn
     direction?: PropDirection;
     size?: PropSize;
     activeStepIndex?: number;
-    onClick?: (e: React.MouseEvent, item: ITEM, index: number) => void;
+    onItemClick?: (props: { e: React.MouseEvent; item: ITEM; index: number }) => void;
     getItemLabel?: PropGetItemLabel<ITEM>;
     getItemLineStatus?: PropGetItemLineStatus<ITEM>;
     getItemTooltipContent?: PropGetItemTooltipContent<ITEM>;
@@ -66,6 +67,7 @@ export type ProgressStepBarProps<ITEM = DefaultItem> = PropsWithHTMLAttributesAn
     getItemProgress?: PropGetItemProgress<ITEM>;
     getItemContent?: PropGetItemContent<ITEM>;
     getItemStatus?: PropGetItemStatus<ITEM>;
+    getItemOnClick?: PropGetItemOnClick<ITEM>;
   },
   HTMLDivElement
 > &
@@ -96,6 +98,7 @@ export const defaultGetItemLineStatus: PropGetItemLineStatus<DefaultItem> = (ite
 export const defaultGetItemProgress: PropGetItemProgress<DefaultItem> = (item) => item.progress;
 export const defaultGetItemContent: PropGetItemContent<DefaultItem> = (item) => item.content;
 export const defaultGetItemStatus: PropGetItemStatus<DefaultItem> = (item) => item.status;
+export const defaultGetItemOnClick: PropGetItemOnClick<DefaultItem> = (item) => item.onClick;
 
 export type ProgressStepBarComponent = <ITEM = DefaultItem>(
   props: ProgressStepBarProps<ITEM>,
@@ -115,5 +118,30 @@ export function withDefaultGetters<ITEM>(props: ProgressStepBarProps<ITEM>) {
     getItemContent: props.getItemContent || defaultGetItemContent,
     getItemStatus: props.getItemStatus || defaultGetItemStatus,
     getItemLineStatus: props.getItemLineStatus || defaultGetItemLineStatus,
+    getItemOnClick: props.getItemOnClick || defaultGetItemOnClick,
   };
 }
+
+export const getItemPosition = (index: number, lendth: number) => {
+  let position: PropPosition = 'center';
+  if (index === lendth - 1) position = 'end';
+  if (index === 0) position = 'start';
+
+  return position;
+};
+
+export const getLineSize: (
+  container: React.RefObject<HTMLElement>,
+  activeElement: React.RefObject<HTMLElement>,
+  direction: PropDirection,
+) => number = (container, activeElement, direction) => {
+  let size = 0;
+  if (container && container.current && activeElement && activeElement.current) {
+    const containerPosition = container.current.getBoundingClientRect();
+    const activeElementPosition = activeElement.current.getBoundingClientRect();
+    if (direction === 'vertical')
+      size = activeElementPosition.y - containerPosition.y + activeElementPosition.height;
+    else size = activeElementPosition.x - containerPosition.x;
+  }
+  return size;
+};
