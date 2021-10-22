@@ -123,7 +123,7 @@ export const ProgressStepBarExampleSize = () => {
 ## Свойства
 
 ```tsx
-type DefaultItem = {
+export type DefaultItem = {
   label: string;
   tooltipContent?: string;
   lineStatus?: PropStatus;
@@ -131,6 +131,7 @@ type DefaultItem = {
   status?: PropStatus;
   progress?: boolean;
   content?: React.ReactNode;
+  onClick?: React.EventHandler<React.MouseEvent>;
 };
 
 type PropStatus = 'normal' | 'success' | 'warning' | 'alert';
