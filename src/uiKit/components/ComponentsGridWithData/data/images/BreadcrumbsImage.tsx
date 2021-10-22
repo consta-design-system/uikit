@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function Breadcrumbs(props: React.SVGProps<SVGSVGElement>) {
+function BreadcrumbsImage(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <g clipPath="url(#SvgBreadcrumbsImage__clip0_2:3124)">
@@ -63,4 +63,4 @@ function Breadcrumbs(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-export default Breadcrumbs;
+export default BreadcrumbsImage;

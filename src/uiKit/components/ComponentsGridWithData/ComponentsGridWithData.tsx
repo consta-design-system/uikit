@@ -8,7 +8,7 @@ import { additionalData, data, imageMap } from './data';
 const getImage = (name: string) => imageMap[name] || NoImage;
 
 const allData = [...data, ...additionalData].map((item) => ({
-  image: getImage(item.name),
+  image: getImage(item.componentName || item.name),
   ...item,
 }));
 

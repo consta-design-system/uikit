@@ -14,6 +14,7 @@ const fg = require('fast-glob');
 const { svgParse } = require('../svgParse');
 
 const infoTest = /<!--info((.*\n)*)-->/;
+const canaryTest = /(.*)(Canary)$/;
 const folderTest = /.\/src\/components\/(.+)\/__stories__\/(.+).docs.mdx/;
 
 const parseInfo = (stringInfo) => {
@@ -41,6 +42,18 @@ const getSvgPath = (path) => {
   return path.replace('.docs.mdx', '.image.svg');
 };
 
+const getUrl = (componentName) => {
+  return `/?path=/docs/components-${componentName.toLowerCase()}--playground`;
+};
+
+const getComponentData = (folderName) => {
+  if (canaryTest.test(folderName)) {
+    const [_, name, postfix] = canaryTest.exec(folderName);
+    return [name, `${name}(${postfix})`, getUrl(name)];
+  }
+  return [folderName, folderName, getUrl(folderName)];
+};
+
 async function processMdxFiles(array) {
   const data = [];
   let imports = '';
@@ -48,17 +61,19 @@ async function processMdxFiles(array) {
 
   for (const path of array) {
     if (folderTest.test(path)) {
-      const [file, componentName] = folderTest.exec(path);
+      const [_, folderName] = folderTest.exec(path);
       const mdx = await readFile(path, 'utf8');
       const info = getInfo(mdx);
+      const [componentName, name, url] = getComponentData(folderName);
 
       if (!info) {
         continue;
       }
 
       data.push({
-        name: componentName,
-        url: `/?path=/docs/components-${componentName.toLowerCase()}--playground`,
+        name: name,
+        componentName: componentName,
+        url,
         ...info,
       });
 
@@ -71,19 +86,17 @@ async function processMdxFiles(array) {
       const imageComponentName = `${componentName}Image`;
 
       await svgParse({
-        componentName,
+        componentName: imageComponentName,
         path: svgPath,
         pathOutdir: `./src/uiKit/components/ComponentsGridWithData/data/images/`,
         fileName: imageComponentName,
         svgo: true,
       });
 
+      console.log(folderName);
+
       imports += `import ${imageComponentName} from './images/${imageComponentName}';\n`;
       imageMap += `${componentName}: ${imageComponentName},\n`;
-
-      // const svg = await readFile(svgPath, 'utf8');
-
-      // console.log(svg);
     }
   }
 
