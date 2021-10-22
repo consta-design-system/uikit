@@ -1,5 +1,6 @@
 .TextField {
   --caption-margin-left: calc(var(--input-space) + var(--control-border-width));
+  --clear-button-color: var(--color-control-typo-clear);
   position: relative;
   display: inline-flex;
 
@@ -193,6 +194,8 @@
         border-color: var(--color-control-bg-border-disable);
         pointer-events: none;
 
+        --clear-button-color: var(--color-control-typo-disable);
+
         & .TextField-Input {
           color: var(--color-control-typo-disable);
         }
@@ -306,6 +309,26 @@
         line-height: var(--line-height-text-m);
       }
     }
+  }
+
+  &-ClearButton {
+    height: calc(var(--input-height) - (var(--control-border-width) * 2));
+    margin: 0;
+    margin-left: var(--input-space);
+    padding: 0;
+    color: var(--clear-button-color);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      --clear-button-color: var(--color-control-typo-clear-hover);
+    }
+  }
+
+  &-ClearButtonIcon {
+    position: relative;
+    top: 1px;
   }
 
   &-Input {

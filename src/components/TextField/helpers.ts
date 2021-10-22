@@ -13,7 +13,7 @@ export const textFieldPropSizeDefault: TextFieldPropSize = textFieldPropSize[0];
 
 export type TextFieldPropOnChange = (args: TextFieldOnChangeArguments) => void;
 export type TextFieldOnChangeArguments = {
-  e: React.ChangeEvent;
+  e: React.ChangeEvent | React.MouseEvent;
   id?: TextFieldPropId;
   name?: TextFieldPropName;
   value: TextFieldPropValue;
@@ -91,6 +91,7 @@ export type Props<TYPE extends string> = {
   placeholder?: string;
   leftSide?: string | React.FC<IconProps>;
   rightSide?: string | React.FC<IconProps>;
+  withClearButton?: boolean;
   autoComplete?: TextFieldPropAutoComplete;
   max?: number | string;
   min?: number | string;

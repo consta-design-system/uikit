@@ -4,6 +4,7 @@ import React, { forwardRef, useState } from 'react';
 import TextAreaAutoSize from 'react-textarea-autosize';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
+import { IconClose } from '../../icons/IconClose/IconClose';
 import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
@@ -28,6 +29,7 @@ export function TextFieldRender<TYPE extends string>(
   ref: React.Ref<HTMLDivElement>,
 ) {
   const textFieldRef = React.useRef<HTMLDivElement>(null);
+  const inputRef = React.useRef<HTMLInputElement | HTMLTextAreaElement>(null);
 
   const {
     className,
@@ -40,7 +42,7 @@ export function TextFieldRender<TYPE extends string>(
     cols,
     minRows,
     maxRows,
-    inputRef,
+    inputRef: inputRefProp,
     maxLength,
     disabled,
     size = textFieldPropSizeDefault,
@@ -56,6 +58,7 @@ export function TextFieldRender<TYPE extends string>(
     leftSide,
     rightSide,
     autoComplete,
+    withClearButton,
     max,
     min,
     readOnly,
@@ -117,10 +120,7 @@ export function TextFieldRender<TYPE extends string>(
     cols,
     minRows: minRows || rows,
     maxRows: maxRows || rows,
-    inputRef:
-      inputRef === null
-        ? undefined
-        : (inputRef as (node: HTMLTextAreaElement) => void | React.RefObject<HTMLTextAreaElement>),
+    inputRef: useForkRef([inputRef, inputRefProp]) as (node: HTMLTextAreaElement) => void,
   };
 
   const inputProps = {
@@ -128,7 +128,15 @@ export function TextFieldRender<TYPE extends string>(
     max,
     min,
     step,
-    ref: inputRef as React.Ref<HTMLInputElement>,
+    ref: useForkRef([inputRef, inputRefProp]) as React.RefCallback<HTMLInputElement>,
+  };
+
+  const handleClear: (e: React.MouseEvent<HTMLButtonElement>) => void = (e) => {
+    onChange?.({
+      e,
+      value: '',
+    });
+    inputRef.current?.focus();
   };
 
   return (
@@ -170,6 +178,16 @@ export function TextFieldRender<TYPE extends string>(
             <TextAreaAutoSize {...commonProps} {...textareaProps} />
           ) : (
             <input {...commonProps} {...inputProps} />
+          )}
+          {value && withClearButton && type !== 'number' && (
+            <button
+              type="button"
+              disabled={disabled}
+              onClick={handleClear}
+              className={cnTextField('ClearButton')}
+            >
+              <IconClose size="xs" className={cnTextField('ClearButtonIcon')} />
+            </button>
           )}
           {RightIcon && (
             <div
