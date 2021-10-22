@@ -1,5 +1,7 @@
 .TextField {
   --caption-margin-left: calc(var(--input-space) + var(--control-border-width));
+  --counter-button-icon-color: var(--color-control-typo-ghost);
+  --counter-button-background: transparent;
   --clear-button-color: var(--color-control-typo-clear);
   position: relative;
   display: inline-flex;
@@ -85,6 +87,11 @@
     font-weight: var(--font-weight-text-regular);
     transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
 
+    &_disabled {
+      --counter-button-background: var(--color-control-bg-disable);
+      --counter-button-icon-color: var(--color-control-typo-disable);
+    }
+
     &_view_clear,
     &_view_clear:hover,
     &_view_clear:focus {
@@ -122,6 +129,7 @@
 
     &_view_default {
       --container-border-color: var(--color-control-bg-border-default);
+      overflow-x: hidden;
       padding: 0 var(--input-space);
       color: var(--color-control-typo-default);
       background: var(--color-control-bg-default);
@@ -190,11 +198,10 @@
       }
 
       &.TextField-InputContainer_disabled {
+        --clear-button-color: var(--color-control-typo-disable);
         background: var(--color-control-bg-disable);
         border-color: var(--color-control-bg-border-disable);
         pointer-events: none;
-
-        --clear-button-color: var(--color-control-typo-disable);
 
         & .TextField-Input {
           color: var(--color-control-typo-disable);
@@ -295,6 +302,10 @@
       }
     }
 
+    &_type_number {
+      padding-right: 0;
+    }
+
     &_type_textarea {
       & .TextField-Input {
         resize: none;
@@ -309,6 +320,30 @@
         line-height: var(--line-height-text-m);
       }
     }
+  }
+
+  &-Counter {
+    display: inline-flex;
+    flex-direction: column;
+    width: var(--space-xl);
+    height: calc(var(--input-height) - (var(--control-border-width) * 2));
+  }
+
+  &-CounterButton {
+    display: inline-flex;
+    overflow-y: hidden;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    width: var(--space-xl);
+    margin: 0;
+    padding: 0;
+    color: var(--counter-button-icon-color);
+    background-color: var(--counter-button-background);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.15s;
   }
 
   &-ClearButton {
@@ -343,6 +378,16 @@
     outline: none;
     font-family: var(--font-primary);
     font-size: var(--input-font-size);
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &[type='number'] {
+      -moz-appearance: textfield;
+    }
 
     &:focus {
       outline: none;

@@ -69,15 +69,23 @@ export type TextFieldPropsTextareaType<TYPE> = TYPE extends 'textarea'
       maxRows?: never;
     };
 
+export type TextFieldPropRightSide<TYPE> = TYPE extends 'number'
+  ? {
+      rightSide?: never;
+    }
+  : {
+      rightSide?: string | React.FC<IconProps>;
+    };
+
 export type Props<TYPE extends string> = {
   className?: string;
   value?: TextFieldPropValue;
+  cols?: number;
   onChange?: TextFieldPropOnChange;
   id?: TextFieldPropId;
   name?: TextFieldPropName;
   type?: TYPE;
   disabled?: boolean;
-  cols?: number;
   maxLength?: number;
   size?: TextFieldPropSize;
   view?: TextFieldPropView;
@@ -107,10 +115,11 @@ export type Props<TYPE extends string> = {
   caption?: string;
   labelPosition?: 'top' | 'left';
   focused?: boolean;
-};
+} & TextFieldPropsTextareaType<TYPE> &
+  TextFieldPropRightSide<TYPE>;
 
 export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
-  Props<TYPE> & TextFieldPropsTextareaType<TYPE>,
+  Props<TYPE>,
   HTMLDivElement
 >;
 

@@ -53,6 +53,10 @@
     &_warning {
       color: var(--color-typo-warning);
     }
+
+    &_disabled {
+      color: var(--color-control-typo-disable);
+    }
   }
 
   &-Svg {
