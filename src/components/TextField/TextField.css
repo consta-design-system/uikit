@@ -1,5 +1,7 @@
 .TextField {
   --caption-margin-left: calc(var(--input-space) + var(--control-border-width));
+  --counter-button-icon-color: var(--color-control-typo-ghost);
+  --counter-button-background: transparent;
   position: relative;
   display: inline-flex;
 
@@ -85,13 +87,8 @@
     transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
 
     &_disabled {
-      & .TextField-CounterButton {
-        --counter-button-background: var(--color-control-bg-disable);
-      }
-
-      & .TextField-CounterButton-Icon path {
-        fill: var(--color-control-typo-disable);
-      }
+      --counter-button-background: var(--color-control-bg-disable);
+      --counter-button-icon-color: var(--color-control-typo-disable);
     }
 
     &_view_clear,
@@ -331,7 +328,6 @@
   }
 
   &-CounterButton {
-    --counter-button-background: transparent;
     display: inline-flex;
     overflow-y: hidden;
     flex-direction: column;
@@ -345,10 +341,7 @@
     border: none;
     cursor: pointer;
     transition: background-color 0.15s;
-
-    &-Icon path {
-      fill: var(--color-control-typo-ghost);
-    }
+    color: var(--counter-button-icon-color);
   }
 
   &-Input {

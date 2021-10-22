@@ -80,12 +80,12 @@ export type TextFieldPropRightSide<TYPE> = TYPE extends 'number'
 export type Props<TYPE extends string> = {
   className?: string;
   value?: TextFieldPropValue;
+  cols?: number;
   onChange?: TextFieldPropOnChange;
   id?: TextFieldPropId;
   name?: TextFieldPropName;
   type?: TYPE;
   disabled?: boolean;
-  cols?: number;
   maxLength?: number;
   size?: TextFieldPropSize;
   view?: TextFieldPropView;
@@ -112,10 +112,11 @@ export type Props<TYPE extends string> = {
   label?: string;
   caption?: string;
   labelPosition?: 'top' | 'left';
-};
+} & TextFieldPropsTextareaType<TYPE> &
+  TextFieldPropRightSide<TYPE>;
 
 export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
-  Props<TYPE> & TextFieldPropsTextareaType<TYPE> & TextFieldPropRightSide<TYPE>,
+  Props<TYPE>,
   HTMLDivElement
 >;
 

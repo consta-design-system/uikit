@@ -14,7 +14,8 @@ export type IconPropView =
   | 'primary'
   | 'secondary'
   | 'success'
-  | 'warning';
+  | 'warning'
+  | 'disabled';
 
 export type Props = {
   view?: IconPropView;

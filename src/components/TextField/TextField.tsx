@@ -203,14 +203,14 @@ export function TextFieldRender<TYPE extends string>(
                 type="button"
                 className={cnTextField('CounterButton')}
               >
-                <IconSelectOpen className={cnTextField('CounterButton-Icon')} size="xs" />
+                <IconSelectOpen size="xs" />
               </button>
               <button
                 onClick={(e) => changeNumberValue(e, false)}
                 type="button"
                 className={cnTextField('CounterButton')}
               >
-                <IconSelect className={cnTextField('CounterButton-Icon')} size="xs" />
+                <IconSelect size="xs" />
               </button>
             </div>
           )}
