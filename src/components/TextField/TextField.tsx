@@ -47,6 +47,7 @@ export function TextFieldRender<TYPE extends string>(
     view = textFieldPropViewDefault,
     form = textFieldPropFormDefault,
     state,
+    status,
     width = textFieldPropWidthDefault,
     onBlur,
     onFocus,
@@ -66,6 +67,7 @@ export function TextFieldRender<TYPE extends string>(
     labelPosition = 'top',
     caption,
     iconSize: iconSizeProp,
+    focused,
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, props, textFieldRef);
   const [focus, setFocus] = useState<boolean>(autoFocus);
@@ -145,10 +147,10 @@ export function TextFieldRender<TYPE extends string>(
           className={cnTextField('InputContainer', {
             view,
             form,
-            state,
+            status: status || state,
             disabled,
             type,
-            focus,
+            focus: focus || focused,
             withValue: !!value,
           })}
           ref={useForkRef([ref, textFieldRef])}
@@ -190,7 +192,7 @@ export function TextFieldRender<TYPE extends string>(
           )}
         </div>
         {caption && (
-          <FieldCaption className={cnTextField('Caption')} status={state}>
+          <FieldCaption className={cnTextField('Caption')} status={status || state}>
             {caption}
           </FieldCaption>
         )}

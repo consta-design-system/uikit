@@ -1,0 +1,166 @@
+import {
+  ProgressStepBarExampleDirectionHorizontal,
+  ProgressStepBarExampleDirectionVerical,
+} from './examples/ProgressStepBarExampleDirection/ProgressStepBarExampleDirection';
+import { ProgressStepBarExampleSize } from './examples/ProgressStepBarExampleSize/ProgressStepBarExampleSize';
+import { ProgressStepBarExampleTooltip } from './examples/ProgressStepBarExampleTooltip/ProgressStepBarExampleTooltip';
+import { ProgressStepBarExampleProgress } from './examples/ProgressStepBarExampleProgress/ProgressStepBarExampleProgress';
+import { ProgressStepBarExampleContent } from './examples/ProgressStepBarExampleContent/ProgressStepBarExampleContent';
+
+# ProgressStepBar (Canary)
+
+Показывает прогресс по шагам.
+
+- [Шаги](#шаги)
+- [Расположение](#расположение)
+- [Активный шаг](#активный-шаг)
+- [Список свойств](#свойства)
+- [Размер](#размер)
+- [Пример использования](#пример)
+
+## Шаги
+
+Список шагов передаётся в свойстве `steps`. Тип элементов массива `steps` по умолчанию равен [DefaultItem](#свойства). Что внутри:
+
+- `label` — название шага,
+- `tooltipContent` — текст для подсказки в [тултипе](?path=/docs/components-tooltip--tooltip-positioned-by-anchor-story) (краткое описание шага),
+- `lineStatus` — цвет линии для выполненного шага,
+- `point` — номер шага или изображение в формате иконки, обозначающее этот шаг,
+- `progress` — показывает, что этот шаг в процессе выполнения (на его месте отображается индикатор загрузки),
+- `content` — любое содержимое для шага (лэйблы, описания, картинки).
+
+Шаги отображаются в том порядке, в котором описаны.
+
+#### Пример с подсказкой в тултипе
+
+<ProgressStepBarExampleTooltip />
+
+#### Пример с индикатором шага, который выполняется
+
+<ProgressStepBarExampleProgress />
+
+### Контент и действие
+
+<ProgressStepBarExampleContent />
+
+## Расположение
+
+За расположение шагов отвечает свойство `direction`:
+
+- `horizontal` — шаги располагаются по горизонтали,
+- `vertical` — по вертикали, друг под другом.
+
+#### Пример горизонтальных шагов
+
+```tsx
+<ProgressStepBar direction="horizontal" />
+```
+
+<ProgressStepBarExampleDirectionHorizontal />
+
+#### Пример вертикальных шагов
+
+```tsx
+<ProgressStepBar direction="vertical" />
+```
+
+<ProgressStepBarExampleDirectionVerical />
+
+## Активный шаг
+
+Чтобы указать активный шаг, передайте номер этого шага по порядку в свойство `activeStepIndex`. У первого шага номер равен `0`.
+
+## Размер
+
+Размер компонента определяется в свойстве `size`. Варианты: `xs`, `s`, `m`, по умолчанию `s`.
+
+```tsx
+type Item = {
+  label?: string;
+  point?: number;
+  progress?: boolean;
+  status?: 'normal' | 'success' | 'alert' | 'warning';
+  lineStatus?: 'normal' | 'success' | 'alert' | 'warning';
+};
+
+const steps: Item[] = [
+  {
+    label: 'Пункт 1',
+    point: 1,
+    status: 'normal',
+    lineStatus: 'normal',
+  },
+  {
+    label: 'Пункт 2',
+    point: 2,
+    status: 'normal',
+    lineStatus: 'normal',
+  },
+  {
+    label: 'Пункт 3',
+    point: 3,
+    status: 'normal',
+    lineStatus: 'normal',
+  },
+  {
+    label: 'Пункт 4',
+    point: 4,
+    status: 'normal',
+  },
+];
+
+export const ProgressStepBarExampleSize = () => {
+  return (
+      <ProgressStepBar size="xs" direction="horizontal" steps={steps} activeStepIndex={2} />
+      <ProgressStepBar size="s" direction="horizontal" steps={steps} activeStepIndex={2} />
+      <ProgressStepBar size="m" direction="horizontal" steps={steps} activeStepIndex={2} />
+  );
+};
+```
+
+<ProgressStepBarExampleSize />
+
+## Свойства
+
+```tsx
+export type DefaultItem = {
+  label: string;
+  tooltipContent?: string;
+  lineStatus?: PropStatus;
+  point?: PointNumbersMap | React.FC<IconProps>;
+  status?: PropStatus;
+  progress?: boolean;
+  content?: React.ReactNode;
+  onClick?: React.EventHandler<React.MouseEvent>;
+};
+
+type PropStatus = 'normal' | 'success' | 'warning' | 'alert';
+type PointNumbersMap = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+type PropGetItemLabel<ITEM> = (item: ITEM) => string;
+type PropGetItemKey<ITEM> = (item: ITEM) => string | number;
+type PropGetItemTooltipContent<ITEM> = (item: ITEM) => string | undefined;
+type PropGetItemLineStatus<ITEM> = (item: ITEM) => PropStatus | undefined;
+type PropGetItemPoint<ITEM> = (item: ITEM) => PointNumbersMap | React.FC<IconProps> | undefined;
+type PropGetItemProgress<ITEM> = (item: ITEM) => boolean | undefined;
+type PropGetItemContent<ITEM> = (item: ITEM) => React.ReactNode | undefined;
+type PropGetItemStatus<ITEM> = (item: ITEM) => PropStatus | undefined;
+type PropGetItemOnClick<ITEM> = (item: ITEM) => React.EventHandler<React.MouseEvent> | undefined;
+```
+
+| Свойство                            | Тип или варианты значения                                              | По умолчанию                    | Описание                                                    |
+| ----------------------------------- | ---------------------------------------------------------------------- | ------------------------------- | ----------------------------------------------------------- |
+| [`steps`](#элементы)                | `ITEM[]`                                                               | -                               | Шаги                                                        |
+| [`direction?`](#ориентация)         | `'horizontal'` &#124; `'verical'`                                      | `'horizontal'`                  | Ориентация                                                  |
+| [`size?`](#размер)                  | `'xs'` &#124; `'s'` &#124; `'m'`                                       | `'s'`                           | Размер                                                      |
+| [`activeStepIndex?`](#активный-шаг) | `string` &#124; `number`                                               | -                               | Номер активного шага (по порядку), у первого шага номер `0` |
+| `onItemClick?`                      | `(props: { e: React.MouseEvent; item: ITEM; index: number }) => void;` | -                               | Функция для события нажатия на определенный шаг             |
+| `getItemLabel?`                     | `PropGetItemLabel<ITEM>`                                               | `(item) => item.label`          | Функция для определения названия шага                       |
+| `getItemLineStatus?`                | `PropGetItemLineStatus<ITEM>`                                          | `(item) => item.lineStatus`     | Функция для определения статуса линии                       |
+| `getItemTooltipContent?`            | `PropGetItemTooltipContent<ITEM>`                                      | `(item) => item.tooltipContent` | Функция для определения содержимого тултипа                 |
+| `getItemPoint?`                     | `PropGetItemPoint<ITEM>`                                               | `(item) => item.point`          | Функция для определения внутреннего контента шага           |
+| `getItemProgress?`                  | `PropGetItemProgress<ITEM>`                                            | `(item) => item.progress`       | Функция определяет, находится ли шаг в прогрессе            |
+| `getItemContent?`                   | `PropGetItemContent<ITEM>;`                                            | `(item) => item.content`        | Функция для получения контента                              |
+| `getItemStatus?`                    | `PropGetItemStatus<ITEM>`                                              | `(item) => item.status`         | Функция для определения статуса шага                        |
+| `getItemClick?`                     | `PropGetItemOnClick<ITEM>`                                             | `(item) => item.onClick`        | Функция для определения клика нажития на шаг                |
+| `ref?`                              | `React.Ref<HTMLDivElement>`                                            | -                               | Ссылка на основной контейнер                                |
+| `className?`                        | `string`                                                               | -                               | Дополнительный CSS-класс                                    |

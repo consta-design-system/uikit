@@ -11,6 +11,7 @@ import {
   defaultPropSize,
   defaultPropView,
   propForm,
+  propStatus,
   propView,
 } from '../../SelectComponents/types';
 import { Combobox } from '../Combobox';
@@ -27,8 +28,9 @@ const getKnobs = () => ({
   required: boolean('required', false),
   caption: text('caption', 'Хорошо подумайте, это важно'),
   label: text('label', 'Здесь можно выбрать цвет'),
+  status: select('status', ['', ...propStatus], ''),
   labelPosition: select('labelPosition', ['top', 'left'], 'top'),
-  placeholder: text('placeholder', 'Выберите цвет'),
+  placeholder: text('placeholder', 'Placeholder'),
   withGroups: boolean('withGroups', false),
 });
 
@@ -39,6 +41,7 @@ export function Playground(): JSX.Element {
     view,
     form,
     required,
+    status,
     placeholder,
     withGroups,
     label,
@@ -58,6 +61,7 @@ export function Playground(): JSX.Element {
         view={view}
         form={form}
         required={required}
+        status={status || undefined}
         placeholder={placeholder}
         items={items}
         value={valueMultiple}
@@ -78,6 +82,7 @@ export function Playground(): JSX.Element {
       view={view}
       form={form}
       required={required}
+      status={status || undefined}
       placeholder={placeholder}
       items={items}
       value={value}
@@ -96,6 +101,7 @@ export const WithRender = createStory(
       size,
       disabled,
       view,
+      status,
       form,
       required,
       placeholder,
@@ -112,6 +118,7 @@ export const WithRender = createStory(
         disabled={disabled}
         view={view}
         form={form}
+        status={status || undefined}
         placeholder={placeholder}
         items={myData}
         required={required}
@@ -163,6 +170,7 @@ export const WithCreate = createStory(
       view,
       form,
       required,
+      status,
       placeholder,
       withGroups,
       label,
@@ -179,6 +187,7 @@ export const WithCreate = createStory(
         view={view}
         required={required}
         form={form}
+        status={status || undefined}
         placeholder={placeholder}
         items={list}
         value={value}

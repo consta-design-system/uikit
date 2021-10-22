@@ -1,0 +1,248 @@
+import { DatePickerExampleValue } from './examples/DatePickerExampleValue/DatePickerExampleValue';
+import { DatePickerExampleOnError } from './examples/DatePickerExampleOnError/DatePickerExampleOnError';
+import { DatePickerExampleFormat } from './examples/DatePickerExampleFormat/DatePickerExampleFormat';
+import {
+  DatePickerExampleTypeDate,
+  DatePickerExampleTypeDateRange,
+} from './examples/DatePickerExampleType/DatePickerExampleType';
+
+# DatePicker (Canary)
+
+```tsx
+import { DatePicker } from '@consta/DatePickerCanary';
+```
+
+Это поле со всплывающим календарём, в котором можно выбрать дату или период. Выбранное значение подставляется в поле.
+
+> `DatePicker` сделан из двух других компонентов — [TextField](?path=/docs/components-textfield--playground) (поле ввода) и [DateTime](?path=/docs/components-datetime--playground) (календарь),
+> поэтому обладает их свойствами
+
+- [Выбор даты](#выбор-даты)
+- [Тип: дата или период](#тип-дата-или-период)
+- [Формат даты](#формат-даты)
+- [Обработка ошибок](#обработка-ошибок)
+- [Список свойств](#свойства)
+
+## Выбор даты
+
+Выбранная дата (при `type = "date"`) или диапазон дат (при `type = "date-range"`) передаётся в свойстве `value`.
+
+За событие выбора даты отвечает свойство `onChange`.
+
+```tsx
+export const DatePickerExampleValue = () => {
+  const [value, setValue] = useState<Date | null>(null);
+  return <DatePicker value={value} onChange={({ value }) => setValue(value)} />;
+};
+```
+
+<DatePickerExampleValue />
+
+## Тип: дата или период
+
+За способ выбора даты отвечает свойство `type`. Варианты:
+
+- `date` — позволяет выбрать одну дату (показывает одно поле ввода),
+- `date-range` — позволяет выбрать период: дату начала и дату конца (показывает два поля ввода).
+
+```tsx
+export const DatePickerExampleTypeDate = () => {
+  const [value, setValue] = useState<Date | null>(null);
+  return <DatePicker type="date" value={value} onChange={({ value }) => setValue(value)} />;
+};
+```
+
+<DatePickerExampleTypeDate />
+
+```tsx
+export const DatePickerExampleTypeDateRange = () => {
+  const [value, setValue] = useState<[Date?, Date?] | null>(null);
+  return <DatePicker type="date-range" value={value} onChange={({ value }) => setValue(value)} />;
+};
+```
+
+<DatePickerExampleTypeDateRange />
+
+## Формат даты
+
+За формат даты отвечают два свойства вместе:
+
+- `format` — маска для отображения даты,
+- `separator` — разделитель, который нужно использовать в этой маске.
+
+По умолчанию `format` = `'dd.MM.yyyy'`, а `separator` — точка `'.'`
+
+Чтобы задать формат, который используется в США, укажите `format` = `'MM/dd/yyyy'`, `separator` = `'/'`.
+
+**Важно:** если тип требует ввода даты с точностью до дня, то и формат нужно указывать с точностью до дня, если тип даты предполагает только месяц и год, в формате нужно указать только месяц и год.
+
+```tsx
+export const DatePickerExampleFormat = () => {
+  const [value, setValue] = useState<Date | null>(null);
+  return (
+    <DatePicker
+      format="MM/dd/yyyy"
+      separator="/"
+      placeholder="ММ/ДД/ГГГГ"
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
+  );
+};
+```
+
+<DatePickerExampleFormat />
+
+## Обработка ошибок
+
+Вы можете отследить ошибки, которые могут возникнуть у пользователя при вводе даты,
+и сообщить ему об этом. Для этого существует свойсво `onError`.
+
+#### Типы ошибок
+
+- `outOfRange` — дата, которую вводит пользователь, не попадает в диапазон между `minDate` и `maxDate`.
+- `invalidInputAttempt` — пользователь вводит несуществующую дату.
+- `startDateIsGreaterThanEndDate` — дата начала больше, чем дата конца периода.
+
+#### Пример с обработкой ошибок
+
+```tsx
+const minDate = new Date(2000, 1, 1);
+const maxDate = new Date(2001, 1, 1);
+const formatDate = (date: Date) => format(date, 'dd.MM.yyyy');
+
+export const DatePickerExampleOnError = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [value, setValue] = useState<[Date?, Date?] | null>(null);
+  const [error, setError] = useState<string | undefined>();
+
+  const onChange: DatePickerPropOnChange<'date-range'> = ({ value }) => {
+    setValue(value);
+    setError(undefined);
+  };
+
+  const onError: DatePickerPropOnError = (props) => {
+    if (props.type === 'outOfRange') {
+      setError(
+        `Дата ${formatDate(props.date)} не в ходит в диапазон c ${formatDate(
+          minDate,
+        )} по ${formatDate(maxDate)}`,
+      );
+    }
+    if (props.type === 'invalidInputAttempt') {
+      setError(`Даты ${props.stringValue} не существует`);
+    }
+    if (props.type === 'startDateIsGreaterThanEndDate') {
+      setError(
+        `Дата начала (${formatDate(props.date[0])}) больше чем дата конца (${formatDate(
+          props.date[1],
+        )})`,
+      );
+    }
+  };
+
+  return (
+    <>
+      <DatePicker
+        minDate={minDate}
+        maxDate={maxDate}
+        ref={ref}
+        status={error ? 'alert' : undefined}
+        value={value}
+        onChange={onChange}
+        type="date-range"
+        onError={onError}
+      />
+      {error && (
+        <Tooltip status="alert" anchorRef={ref}>
+          {error}
+        </Tooltip>
+      )}
+    </>
+  );
+};
+```
+
+Чтобы увидеть ошибку, введите в поле:
+
+- дату меньше 01.02.2000 или больше 01.02.2001,
+- 29.02.2001 (этот год — не високосный, в нём нет 29 февраля),
+- дату начала, которая больше даты конца.
+
+<DatePickerExampleOnError />
+
+## Свойства
+
+```ts
+import { Locale } from 'date-fns';
+import ruLocale from 'date-fns/locale/ru';
+
+type DatePickerPropValue<TYPE> = (TYPE extends 'date' ? Date : DateRange) | null;
+
+type DatePickerPropOnChange<TYPE> = (props: {
+  value: DatePickerPropValue<TYPE>;
+  e: React.MouseEvent<HTMLButtonElement, MouseEvent> | Event;
+}) => void;
+
+type DatePickerPropOnError = (
+  props:
+    | {
+        type: 'outOfRange';
+        stringValue: string;
+        dd?: string;
+        MM?: string;
+        yyyy?: string;
+        date: Date;
+      }
+    | {
+        type: 'invalidInputAttempt';
+        stringValue: string;
+        dd?: string;
+        MM?: string;
+        yyyy?: string;
+      }
+    | {
+        type: 'startDateIsGreaterThanEndDate';
+        date: DateRange;
+      },
+) => void;
+```
+
+| Свойство                        | Тип                                                                                                                                                                 | По умолчанию          | Описание                                                                                                               |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| [`onChange?`](#выбор-даты)      | `DatePickerPropOnChange<TYPE>`                                                                                                                                      | -                     | Событие выбора даты или периода                                                                                        |
+| [`value?`](#выбор-даты)         | `DatePickerPropValue<TYPE>`                                                                                                                                         | -                     | Выбранная дата или период                                                                                              |
+| [`type?`](#тип-дата-или-период) | `'date'`, `'date-range'`                                                                                                                                            | `date`                | Тип календаря: выбор даты или выбор периода                                                                            |
+| `minDate?`                      | `Date`                                                                                                                                                              | `01.01.0001 00:00:00` | Ограничение выбора по меньшей дате, см. [DateTime](/?path=/docs/components-datetime--playground)                       |
+| `maxDate?`                      | `Date`                                                                                                                                                              | `31.12.9999 23:59:59` | Ограничение выбора по большей дате, см. [DateTime](/?path=/docs/components-datetime--playground)                       |
+| `events?`                       | `Date[]`                                                                                                                                                            | -                     | События на календаре, см. [DateTime](/?path=/docs/components-datetime--playground)                                     |
+| `dateTimeView?`                 | `'classic'`, `'book'`, `'slider'`                                                                                                                                   | `'classic'`           | Вид календаря: одна страничка, две странички или слайдер, см. [DateTime](/?path=/docs/components-datetime--playground) |
+| `locale?`                       | `Locale`                                                                                                                                                            | `ruLocale`            | Локализация, см. [DateTime](/?path=/docs/components-datetime--playground)                                              |
+| [`onError?`](#обработка-ошибок) | `DatePickerPropOnError`                                                                                                                                             | -                     | Сработает, если пользователь ввёл дату с ошибкой                                                                       |
+| `disabled?`                     | `boolean`                                                                                                                                                           | -                     | Отключает возможность ввода, см. [TextField](?path=/docs/components-textfield--playground)                             |
+| `size?`                         | `'m', 'xs', 's', 'l'`                                                                                                                                               | `'m'`                 | Размер, см. [TextField](?path=/docs/components-textfield--playground)                                                  |
+| `form?`                         | `'default', 'brick', 'round', 'clearRound', 'roundClear', 'clearDefault', 'defaultClear', 'defaultBrick', 'brickDefault', 'brickClear', 'clearBrick', 'clearClear'` | `'default'`           | Форма поля, см. [TextField](?path=/docs/components-textfield--playground)                                              |
+| `view?`                         | `'default', 'clear'`                                                                                                                                                | `'default'`           | Внешний вид поля, см. [TextField](?path=/docs/components-textfield--playground)                                        |
+| `status?`                       | `''alert', 'success', 'warning'`                                                                                                                                    | -                     | Статус поля, см. [TextField](?path=/docs/components-textfield--playground)                                             |
+| `onFocus?`                      | `React.FocusEventHandler<HTMLElement>`                                                                                                                              | -                     | Событие по фокусу в поле, см. [TextField](?path=/docs/components-textfield--playground)                                |
+| `onBlur?`                       | `React.FocusEventHandler<HTMLElement>`                                                                                                                              | -                     | Событие при потере фокуса в поле, см. [TextField](?path=/docs/components-textfield--playground)                        |
+| `autoFocus?`                    | `boolean`                                                                                                                                                           | -                     | Перемещает фокус в поле, см. [TextField](?path=/docs/components-textfield--playground)                                 |
+| `placeholder?`                  | `string`                                                                                                                                                            | -                     | Подсказка в поле, см. [TextField](?path=/docs/components-textfield--playground)                                        |
+| `inputRef?`                     | `React.Ref<HTMLInputElement>`                                                                                                                                       | -                     | Ссылка на DOM-элемент поля ввода, недоступна при выборе диапазона дат                                                  |
+| [`format?`](#формат-даты)       | `string`                                                                                                                                                            | `'dd.MM.yyyy'`        | Формат даты                                                                                                            |
+| [`separator?`](#формат-даты)    | `string`                                                                                                                                                            | `'.'`                 | Разделитель для даты, используется вместе с форматом                                                                   |
+| `dropdownForm?`                 | `'default', 'brick', 'round'`                                                                                                                                       | `'default'`           | Форма календаря                                                                                                        |
+| `leftSide?`                     | `string`, `React.FC<IconProps>`                                                                                                                                     | -                     | Иконка или текст слева, внутри поля, см. [TextField](?path=/docs/components-textfield--playground)                     |
+| `rightSide?`                    | `string`, `React.FC<IconProps>`                                                                                                                                     | -                     | Иконка или текст справа, внутри поля, см. [TextField](?path=/docs/components-textfield--playground)                    |
+| `startFieldInputRef?`           | `React.Ref<HTMLInputElement>`                                                                                                                                       | -                     | Ссылка на DOM-элемент поля ввода 'от', доступна только при выборе диапазона дат                                        |
+| `endFieldInputRef?`             | `React.Ref<HTMLInputElement>`                                                                                                                                       | -                     | Ссылка на DOM-элемент поля ввода 'до', доступна только при выборе диапазона дат                                        |
+| `startFieldLeftSide?`           | `string`, `React.FC<IconProps>`                                                                                                                                     | -                     | Иконка или текст слева, внутри поля 'от', доступна только при выборе диапазона дат                                     |
+| `startFieldRightSide?`          | `string`, `React.FC<IconProps>`                                                                                                                                     | -                     | Иконка или текст справа, внутри поля 'от', доступна только при выборе диапазона дат                                    |
+| `endFieldLeftSide?`             | `string`, `React.FC<IconProps>`                                                                                                                                     | -                     | Иконка или текст слева, внутри поля 'до', доступна только при выборе диапазона дат                                     |
+| `endFieldRightSide?`            | `string`, `React.FC<IconProps>`                                                                                                                                     | -                     | Иконка или текст справа, внутри поля 'до', доступна только при выборе диапазона дат                                    |
+| `startFieldOnFocus?`            | `React.FocusEventHandler<HTMLElement>`                                                                                                                              | -                     | Событие по фокусу поля 'от', доступен только при выборе диапазона дат                                                  |
+| `startFieldOnBlur?`             | `React.FocusEventHandler<HTMLElement>`                                                                                                                              | -                     | Событие при потере фокуса поля 'от', доступно только при выборе диапазона дат                                          |
+| `endFieldOnFocus?`              | `React.FocusEventHandler<HTMLElement>`                                                                                                                              | -                     | Событие по фокусу в поле 'до', доступно только при выборе диапазона дат                                                |
+| `endFieldOnBlur?`               | `React.FocusEventHandler<HTMLElement>`                                                                                                                              | -                     | Событие при потере фокуса поля 'до', доступно только при выборе диапазона дат                                          |
+| `className?`                    | `string`                                                                                                                                                            | -                     | Дополнительный CSS-класс                                                                                               |
+| `ref?`                          | `React.Ref<HTMLDivElement>`                                                                                                                                         | -                     | Ссылка на корневой DOM-элемент компонента                                                                              |

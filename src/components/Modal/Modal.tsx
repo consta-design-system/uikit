@@ -105,7 +105,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
       <PortalWithTheme
         preset={theme}
         container={container}
-        className={cnModal(null, [rootClassName])}
+        className={cnModal({ hasOverlay }, [rootClassName])}
         ref={portalRef}
       >
         {hasOverlay && <div className={cnModal('Overlay')} aria-label="Overlay" />}

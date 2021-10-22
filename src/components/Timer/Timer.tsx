@@ -6,7 +6,7 @@ import { cn } from '../../utils/bem';
 import { PropsWithJsxAttributes } from '../../utils/types/PropsWithJsxAttributes';
 import { ProgressSpin } from '../ProgressSpin/ProgressSpin';
 
-export const timerPropsSize = ['m', 's'] as const;
+export const timerPropsSize = ['m', 's', 'l', 'xl', '2xl'] as const;
 export type TimerPropsSize = typeof timerPropsSize[number];
 export const timerPropsSizeDefault: TimerPropsSize = timerPropsSize[0];
 
@@ -38,7 +38,7 @@ export const Timer = React.forwardRef<HTMLDivElement, TimerProps>((props, ref) =
         progress={progress}
         animation={animation}
       />
-      {size === 'm' && <div className={cnTimer('Counter')}>{seconds}</div>}
+      {size !== 's' && <div className={cnTimer('Counter')}>{seconds}</div>}
     </div>
   );
 });

@@ -105,6 +105,7 @@ function UserSelectRender<
     searchValue,
     clearValue,
     getHandleRemoveValue,
+    notFound,
   } = useSelect({
     items,
     groups,
@@ -273,6 +274,7 @@ function UserSelectRender<
         visibleItems={visibleItems}
         labelForNotFound={labelForNotFound}
         labelForCreate={labelForCreate}
+        notFound={notFound}
       />
       <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
         {searchValue}

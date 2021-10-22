@@ -1,6 +1,6 @@
 {
   "name": "@consta/uikit",
-  "version": "3.5.0",
+  "version": "3.8.0",
   "keywords": [
     "ui-kit",
     "design-system",
@@ -13,6 +13,7 @@
     "compute-scroll-into-view": "^1.0.14",
     "date-fns": "^2.17.0",
     "focus-trap-react": "8.7.0",
+    "imask": "^6.2.2",
     "react-dropzone": "11.3.4",
     "react-textarea-autosize": "^7.1.2",
     "react-transition-group": "^4.4.1",

@@ -62,7 +62,7 @@ export const getMonthsOfYear = (props: {
         label,
         onClick,
         selected: isSelected({ date, value }),
-        range: Array.isArray(value) && isDateInRange(date, value),
+        range: Array.isArray(value) && isDateInRange(date, value, startOfMonth),
         event: events && hasEvent(date, events),
         current: isCurrent(date),
         disabled,

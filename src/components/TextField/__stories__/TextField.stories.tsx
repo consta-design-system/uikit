@@ -14,7 +14,7 @@ import {
   textFieldPropFormDefault,
   textFieldPropSize,
   textFieldPropSizeDefault,
-  textFieldPropState,
+  textFieldPropStatus,
   textFieldPropView,
   textFieldPropViewDefault,
   textFieldPropWidth,
@@ -26,7 +26,7 @@ import mdx from './TextField.docs.mdx';
 const defaultKnobs = () => ({
   width: select('width', textFieldPropWidth, textFieldPropWidthDefault),
   form: select('form', textFieldPropForm, textFieldPropFormDefault),
-  state: select('state', ['', ...textFieldPropState], ''),
+  status: select('status', ['', ...textFieldPropStatus], ''),
   size: select('size', textFieldPropSize, textFieldPropSizeDefault),
   view: select('view', textFieldPropView, textFieldPropViewDefault),
   disabled: boolean('disabled', false),
@@ -49,7 +49,7 @@ export function Playground() {
   const {
     width,
     form,
-    state,
+    status,
     size,
     view,
     type,
@@ -94,7 +94,7 @@ export function Playground() {
           value={value}
           width={width}
           form={form}
-          state={state || undefined}
+          status={status || undefined}
           size={size}
           view={view}
           type={type}
