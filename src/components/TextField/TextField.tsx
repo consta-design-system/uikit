@@ -168,7 +168,11 @@ export function TextFieldRender<TYPE extends string>(
   return (
     <div className={cnTextField({ labelPosition, size, view, width }, [className])} {...otherProps}>
       {label && (
-        <FieldLabel className={cnTextField('Label')} size={size}>
+        <FieldLabel
+          required={required}
+          className={cnTextField('Label', { labelPosition })}
+          size={size}
+        >
           {label}
         </FieldLabel>
       )}

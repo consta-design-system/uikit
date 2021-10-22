@@ -30,6 +30,7 @@ const defaultKnobs = () => ({
   size: select('size', textFieldPropSize, textFieldPropSizeDefault),
   view: select('view', textFieldPropView, textFieldPropViewDefault),
   disabled: boolean('disabled', false),
+  required: boolean('required', false),
   step: number('step', 1),
   type: select('type', ['text', 'number', 'textarea'], 'text'),
   withClearButton: boolean('withClearButton', false),
@@ -55,6 +56,7 @@ export function Playground() {
     view,
     type,
     label,
+    required,
     caption,
     labelPosition,
     step,
@@ -100,6 +102,7 @@ export function Playground() {
           size={size}
           view={view}
           type={type}
+          required={required}
           step={step}
           withClearButton={withClearButton}
           maxLength={maxLength}

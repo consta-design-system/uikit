@@ -51,6 +51,7 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
     disabled,
     ariaLabel,
     id,
+    required,
     dropdownRef = defaultDropdownRef,
     form = defaultPropForm,
     view = defaultPropView,
@@ -195,6 +196,7 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
       disabled={disabled}
       size={size}
       view={view}
+      required={required}
       form={form}
       multiple={multiple}
       ref={ref}
