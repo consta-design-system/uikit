@@ -29,6 +29,7 @@ export function TextFieldRender<TYPE extends string>(
   ref: React.Ref<HTMLDivElement>,
 ) {
   const textFieldRef = React.useRef<HTMLDivElement>(null);
+  const inputRef = React.useRef<HTMLInputElement | HTMLTextAreaElement>(null);
 
   const {
     className,
@@ -41,7 +42,7 @@ export function TextFieldRender<TYPE extends string>(
     cols,
     minRows,
     maxRows,
-    inputRef,
+    inputRef: inputRefProp,
     maxLength,
     disabled,
     size = textFieldPropSizeDefault,
@@ -118,10 +119,7 @@ export function TextFieldRender<TYPE extends string>(
     cols,
     minRows: minRows || rows,
     maxRows: maxRows || rows,
-    inputRef:
-      inputRef === null
-        ? undefined
-        : (inputRef as (node: HTMLTextAreaElement) => void | React.RefObject<HTMLTextAreaElement>),
+    inputRef: useForkRef([inputRef, inputRefProp]) as (node: HTMLTextAreaElement) => void,
   };
 
   const inputProps = {
@@ -129,14 +127,15 @@ export function TextFieldRender<TYPE extends string>(
     max,
     min,
     step,
-    ref: inputRef as React.Ref<HTMLInputElement>,
+    ref: useForkRef([inputRef, inputRefProp]) as React.RefCallback<HTMLInputElement>,
   };
 
-  const clearValue: (e: React.MouseEvent<HTMLButtonElement>) => void = (e) => {
+  const handleClear: (e: React.MouseEvent<HTMLButtonElement>) => void = (e) => {
     onChange?.({
       e,
       value: '',
     });
+    inputRef.current?.focus();
   };
 
   return (
@@ -183,7 +182,7 @@ export function TextFieldRender<TYPE extends string>(
             <button
               type="button"
               disabled={disabled}
-              onClick={clearValue}
+              onClick={handleClear}
               className={cnTextField('ClearButton')}
             >
               <IconClose size="xs" className={cnTextField('ClearButtonIcon')} />
