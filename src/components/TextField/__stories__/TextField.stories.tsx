@@ -32,6 +32,7 @@ const defaultKnobs = () => ({
   disabled: boolean('disabled', false),
   step: number('step', 1),
   type: select('type', ['text', 'number', 'textarea'], 'text'),
+  withClearButton: boolean('withClearButton', false),
   caption: text('caption', 'Подпись'),
   label: text('label', 'Заголовок'),
   labelPosition: select('labelPosition', ['top', 'left'], 'top'),
@@ -64,6 +65,7 @@ export function Playground() {
     leftSideType,
     leftSideText,
     rightSideType,
+    withClearButton,
     rightSideText,
     disabled,
   } = defaultKnobs();
@@ -99,6 +101,7 @@ export function Playground() {
           view={view}
           type={type}
           step={step}
+          withClearButton={withClearButton}
           maxLength={maxLength}
           minRows={minRows}
           maxRows={maxRows}

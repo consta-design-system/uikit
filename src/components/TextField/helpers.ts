@@ -98,6 +98,8 @@ export type Props<TYPE extends string> = {
   autoFocus?: boolean;
   placeholder?: string;
   leftSide?: string | React.FC<IconProps>;
+  rightSide?: string | React.FC<IconProps>;
+  withClearButton?: boolean;
   autoComplete?: TextFieldPropAutoComplete;
   max?: number | string;
   min?: number | string;

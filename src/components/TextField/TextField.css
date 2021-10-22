@@ -2,6 +2,7 @@
   --caption-margin-left: calc(var(--input-space) + var(--control-border-width));
   --counter-button-icon-color: var(--color-control-typo-ghost);
   --counter-button-background: transparent;
+  --clear-button-color: var(--color-control-typo-clear);
   position: relative;
   display: inline-flex;
 
@@ -197,6 +198,7 @@
       }
 
       &.TextField-InputContainer_disabled {
+        --clear-button-color: var(--color-control-typo-disable);
         background: var(--color-control-bg-disable);
         border-color: var(--color-control-bg-border-disable);
         pointer-events: none;
@@ -337,11 +339,31 @@
     width: var(--space-xl);
     margin: 0;
     padding: 0;
+    color: var(--counter-button-icon-color);
     background-color: var(--counter-button-background);
     border: none;
     cursor: pointer;
     transition: background-color 0.15s;
-    color: var(--counter-button-icon-color);
+  }
+
+  &-ClearButton {
+    height: calc(var(--input-height) - (var(--control-border-width) * 2));
+    margin: 0;
+    margin-left: var(--input-space);
+    padding: 0;
+    color: var(--clear-button-color);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      --clear-button-color: var(--color-control-typo-clear-hover);
+    }
+  }
+
+  &-ClearButtonIcon {
+    position: relative;
+    top: 1px;
   }
 
   &-Input {
