@@ -1,0 +1,28 @@
+.SliderLine {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  &_view {
+    &_division {
+      gap: var(--space-2xs);
+    }
+  }
+
+  &-Line {
+    --slider-line-color: var(--color-control-bg-ghost);
+    width: var(--slider-line-size);
+    height: var(--space-2xs);
+    background-color: var(--slider-line-color);
+    border-radius: var(--control-radius);
+    transition: background-color 0.3s, width 0.3s;
+
+    &_active {
+      --slider-line-color: var(--color-control-bg-primary);
+    }
+
+    &_hovered.SliderLine-Line_active {
+      --slider-line-color: var(--color-control-bg-primary-hover);
+    }
+  }
+}

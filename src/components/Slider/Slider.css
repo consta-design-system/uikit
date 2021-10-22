@@ -1,0 +1,8 @@
+.Slider {
+  display: inline-flex;
+  min-width: 300px;
+
+  &-Container {
+    width: 100%;
+  }
+}
