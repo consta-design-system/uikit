@@ -112,6 +112,7 @@ export type Props<TYPE extends string> = {
   label?: string;
   caption?: string;
   labelPosition?: 'top' | 'left';
+  focused?: boolean;
 } & TextFieldPropsTextareaType<TYPE> &
   TextFieldPropRightSide<TYPE>;
 

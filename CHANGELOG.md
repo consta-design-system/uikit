@@ -1,5 +1,33 @@
 # Changelog
 
+## v3.8.0 (20/10/2021)
+Вечер. Среда. Consta. Новый релиз!
+
+Добавили `ProgressStepBar` — компонент, с которым удобно считать шаги. 
+
+Ну и важные и не очень важные мелочи, как без них :)
+
+---
+
+- [feat(ProgressStepBar): add new component (#1643)](https://github.com/gazprom-neft/consta-uikit/commit/d0e6a9564ebaaeddaffe9924c554b85e8aa673ed) - [@N1MBER](https://github.com/N1MBER)
+- [fix(Modal): fix unclickable overlay (#1685)](https://github.com/gazprom-neft/consta-uikit/commit/ffaaa827ea55413898ce9ee97983562f58969f45) - [@N1MBER](https://github.com/N1MBER)
+- [docs(Text):  update docs(#1680)](https://github.com/gazprom-neft/consta-uikit/commit/e933d2dfdd4662cbcaf6675a6ee9f0e67df09e7f) - [@arhayka](https://github.com/arhayka)
+- [chore(ISSUE_TEMPLATE): cleared assignees](https://github.com/gazprom-neft/consta-uikit/commit/6f299f28e71889bceb821665eee8149ec32f0f0f) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
+## v3.7.0 (13/10/2021)
+Сегодня выкатили DatePiker! Пока в режиме Canary, но мы всё равно пританцовываем от радости 💃
+
+---
+
+- [feat(DatePicker): add component (#1650)](https://github.com/gazprom-neft/consta-uikit/commit/e88f5d371d6b3c7db2d71ec438fb258fbe906946) - [@gizeasy](https://github.com/gizeasy)
+- [docs(storybook): fix figma links (#1655)](https://github.com/gazprom-neft/consta-uikit/commit/6f81480e9347120c53d3d3bacdb12ba2d122fe80) - [@hell0anna](https://github.com/hell0anna)
+- [feat(ProgressSpin): add new size map (#1648)](https://github.com/gazprom-neft/consta-uikit/commit/34774ed94c103a4f22eb2a43f749811dc4be9e51) - [@N1MBER](https://github.com/N1MBER)
+- [fix(TableTextFilter): fixed reset button (#1639)](https://github.com/gazprom-neft/consta-uikit/commit/8e9fa1c466c977e6e5e151e56b7e398920b17d7c) - [@yekaterinadochinetsnedra](https://github.com/yekaterinadochinetsnedra)
+
+--------------------
+
 ## v3.6.0 (06/10/2021)
 Ура, добавили `DateTime` — новый компонент для выбора даты и времени, заменяет `Calendar`. (`Calendar` работает, но с меткой `Deprecated`)
 
@@ -393,21 +421,3 @@ _Обращаем внимание_: *версии компонентов обр
 - [docs(Table): mock data changed (#810)](https://github.com/gazprom-neft/consta-uikit/commit/ebd07d52a4b9e79c772537b0e9ca10eca681bff5) - [@schurf-des](https://github.com/schurf-des)
 - [docs(withTooltip): edit docs and examples (#788)](https://github.com/gazprom-neft/consta-uikit/commit/8d88a401811991456ccc8e7d88afded12198f0b6) - [@arhayka](https://github.com/arhayka)
 - [fix(Badge): fixed height (#785)](https://github.com/gazprom-neft/consta-uikit/commit/93fd9d17af053108762888591f5454597fd74b53) - [@azhadanov](https://github.com/azhadanov)
-
---------------------
-
-## v1.11.3 (29/01/2021)
-- [fix(Modal): remove story with combobox (#799)](https://github.com/gazprom-neft/consta-uikit/commit/6aa71b99744c1e1e25fa38f18def8fe8b112177f) - [@azhadanov](https://github.com/azhadanov)
-- [docs(storybook): add custom colors and Consta Kit logo to Storybook (#800)](https://github.com/gazprom-neft/consta-uikit/commit/2b87ce7ea1c91e4713e26c20e8dbf4556f599d81) - [@kolebayev](https://github.com/kolebayev)
-- [fix(Switch): onChange made an optional prop in Switch, Radio, Checkbox, updated docs for these compo (#787)](https://github.com/gazprom-neft/consta-uikit/commit/b8b8bcf0f40cdf74f1522a1c3e0220eb8d31a5b0) - [@azhadanov](https://github.com/azhadanov)
-- [fix(Breadcrumbs): fixed indents and font color (#784)](https://github.com/gazprom-neft/consta-uikit/commit/2fab268800d764cf4a568f80256d33e1ce7cbfff) - [@azhadanov](https://github.com/azhadanov)
-- [fix(components): fix css variable name and add letter spacing (#767)](https://github.com/gazprom-neft/consta-uikit/commit/e593bc021d2167fb1160ff604c23c620bbbd57b2) - [@kolebayev](https://github.com/kolebayev)
-- [fix(PortalWithTheme): fixed outside click in components based on PortalWithTheme (#781)](https://github.com/gazprom-neft/consta-uikit/commit/b0910a6d20a726352426a932b94c6d3f4ce7b4de) - [@gizeasy](https://github.com/gizeasy)
-- [chore(CODEOWNERS): added @azhadanov (#783)](https://github.com/gazprom-neft/consta-uikit/commit/ba60d7d0120c5bb16986dc6a62a45306506b6495) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v1.11.2 (22/01/2021)
-- [fix(EventInterceptor): fixed event handlers (#754)](https://github.com/gazprom-neft/consta-uikit/commit/b8de5f97311d6a2e6d6246a54012541c04dbafca) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
-- [docs(Header): add docs for Header](https://github.com/gazprom-neft/consta-uikit/commit/75ef513999664d556d211763e145876df1f55e0e) - [@gizeasy](https://github.com/gizeasy)
-- [fix(ProgressSpin): fixed fill(#753)](https://github.com/gazprom-neft/consta-uikit/commit/160fc94ce5db1d95e509b58cee85112940e5f2d9) - [@gizeasy](https://github.com/gizeasy)

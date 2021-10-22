@@ -70,6 +70,7 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
     handleToggleDropdown,
     inputRef,
     handleInputClick,
+    notFound,
   } = useSelect<ITEM, GROUP, false>({
     items,
     groups,
@@ -181,6 +182,7 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
         renderItem={renderItem || renderItemDefault}
         getGroupLabel={getGroupLabel}
         visibleItems={visibleItems}
+        notFound={notFound}
       />
     </SelectContainer>
   );
