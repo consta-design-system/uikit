@@ -73,7 +73,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты/Базовые/DateTime',
+  title: 'Компоненты/Базовые/DateTime(Canary)',
   id: 'components/DateTime',
   parameters: {
     docs: {
