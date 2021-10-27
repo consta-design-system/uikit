@@ -1,5 +1,21 @@
 # Changelog
 
+## v3.9.0 (27/10/2021)
+В `TextField` добавили возможность очищать по крестику и при `type = number` теперь красивые стилизованные кнопочки. Так же обновлена документация и внесены фиксы в некоторые компоненты.
+
+---
+
+- [docs(componets): Add canary label (#1714)](https://github.com/gazprom-neft/consta-uikit/commit/ec1953ddfb58d8df696856a6056ece5e0d3cf613) - [@N1MBER](https://github.com/N1MBER)
+- [feat(FieldLabel): add new prop 'required' (#1661)](https://github.com/gazprom-neft/consta-uikit/commit/813b371f93c7bf66f0e5356aece7cba065411b50) - [@N1MBER](https://github.com/N1MBER)
+- [ feat(TextField): add custom arrows to type number (#1658)](https://github.com/gazprom-neft/consta-uikit/commit/c71bd7265a2bcd0ff880c868658cf17a66a5041d) - [@N1MBER](https://github.com/N1MBER)
+- [feat(TextField): add button for cleaning (#1657)](https://github.com/gazprom-neft/consta-uikit/commit/5567ea2fb1a93cc86cef315ae4c10b5bbe605dab) - [@N1MBER](https://github.com/N1MBER)
+- [docs(common): edit main page (#1698)](https://github.com/gazprom-neft/consta-uikit/commit/336c2b56f599366fdfb40d166c6c8cad092f7c5f) - [@arhayka](https://github.com/arhayka)
+- [docs(useChoiceGroupIndexed): add docs (#1675)](https://github.com/gazprom-neft/consta-uikit/commit/9d8536abf43a6e0392422f2f876ec3ec78e6a688) - [@arhayka](https://github.com/arhayka)
+- [ fix(Combobox): fix bug with labelForNotFound and add props to docs](https://github.com/gazprom-neft/consta-uikit/commit/8f49e3bbd5c82c7044372d7b357931d2a0000f66) - [@N1MBER](https://github.com/N1MBER)
+- [fix(ProgressStepBar): fixed several bugs (#1699)](https://github.com/gazprom-neft/consta-uikit/commit/dfbb57572fb89767318d59528d6db59b7aceb36f) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v3.8.0 (20/10/2021)
 Вечер. Среда. Consta. Новый релиз!
 
@@ -405,19 +421,3 @@ _Обращаем внимание_: *версии компонентов обр
 - [docs(Responces): add docs and examples (#839)](https://github.com/gazprom-neft/consta-uikit/commit/82f36fbc17f853e742c288a6a13f4038d1e131d4) - [@arhayka](https://github.com/arhayka)
 - [docs(Pagination): edit docs, add examples (#833)](https://github.com/gazprom-neft/consta-uikit/commit/b213ef1373e4f5e51ec5a16efad8e0f3660d3d52) - [@arhayka](https://github.com/arhayka)
 - [fix(File): fixed loader color   (#807)](https://github.com/gazprom-neft/consta-uikit/commit/23eaabd4c3d1f6e079e7f85b0479be0f67d4b91f) - [@azhadanov](https://github.com/azhadanov)
-
---------------------
-
-## v1.11.4 (10/02/2021)
-- [fix(Checkbox): fixed centering and colors for intermediate (#786)](https://github.com/gazprom-neft/consta-uikit/commit/635b17eec094a7e0ba6acbb7cb27c4626f409ef5) - [@azhadanov](https://github.com/azhadanov)
-- [fix(Tooltip): fixed theme (#832)](https://github.com/gazprom-neft/consta-uikit/commit/f21c6e03de00d97e429540ecd5197548c8fe114d) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Table): table header's vertical align center → bottom (#809)](https://github.com/gazprom-neft/consta-uikit/commit/98455c7727af1bbbdef0ad0fd00fe7287e0db775) - [@schurf-des](https://github.com/schurf-des)
-- [docs(breadcrumbs): add docs for Breadcrumbs (#764)](https://github.com/gazprom-neft/consta-uikit/commit/58b0172ae283a52c5c42e94363ed65b09039f2de) - [@arhayka](https://github.com/arhayka)
-- [docs(ContextMenu): edit docs (#801)](https://github.com/gazprom-neft/consta-uikit/commit/9efde4d96512026d822e7f021b600479b6d3885e) - [@arhayka](https://github.com/arhayka)
-- [fix(ChoiceGroup): fixed input style on IOS (#805)](https://github.com/gazprom-neft/consta-uikit/commit/c86ab5f1926e2733f79e1d865432c88ebfa21558) - [@gizeasy](https://github.com/gizeasy)
-- [feat(SwitchGroup): add SwitchGroup component, story and tests (#806)](https://github.com/gazprom-neft/consta-uikit/commit/22b2aefe05453c694c336a2b2ff3dcf1f67c4c30) - [@azhadanov](https://github.com/azhadanov)
-- [feat(Avatar): add XS-size (#815)](https://github.com/gazprom-neft/consta-uikit/commit/cb95c9e05f4b13a94327ccaf225a3aaba82707c7) - [@azhadanov](https://github.com/azhadanov)
-- [feat(Storybook): update favicon (#828)](https://github.com/gazprom-neft/consta-uikit/commit/97fa49989c86498ed9438bad6f5e30d1c30ddfbe) - [@fooontic](https://github.com/fooontic)
-- [docs(Table): mock data changed (#810)](https://github.com/gazprom-neft/consta-uikit/commit/ebd07d52a4b9e79c772537b0e9ca10eca681bff5) - [@schurf-des](https://github.com/schurf-des)
-- [docs(withTooltip): edit docs and examples (#788)](https://github.com/gazprom-neft/consta-uikit/commit/8d88a401811991456ccc8e7d88afded12198f0b6) - [@arhayka](https://github.com/arhayka)
-- [fix(Badge): fixed height (#785)](https://github.com/gazprom-neft/consta-uikit/commit/93fd9d17af053108762888591f5454597fd74b53) - [@azhadanov](https://github.com/azhadanov)
