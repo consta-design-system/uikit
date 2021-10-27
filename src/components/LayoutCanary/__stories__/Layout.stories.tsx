@@ -71,7 +71,7 @@ export const WithAnchor = createStory(
 );
 
 export default createMetadata({
-  title: 'Компоненты|/Служебные/Layout',
+  title: 'Компоненты|/Служебные/Layout(Canary)',
   id: 'components/Layout',
   parameters: {
     docs: {
