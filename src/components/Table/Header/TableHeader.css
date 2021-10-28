@@ -57,6 +57,10 @@
     right: calc(var(--half-cell-padding-horizontal) + var(--resizer-width));
     display: flex;
 
+    &_control {
+      margin-right: var(--space-xs);
+    }
+
     &_verticalAlign_bottom {
       bottom: var(--cell-padding-vertical);
       transform: translateY(calc((var(--control-height-xs) - var(--graphics-size-s)) / 2));

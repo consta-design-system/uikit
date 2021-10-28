@@ -60,6 +60,8 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
 
 `order` — устанавливает порядок [сортировки](#сортировка) по умолчанию.
 
+`control` — Добавляет компонент, справа от названия колонки, например checkbox
+
 В этой таблице будет две колонки — номер и имя.
 
 ```ts
@@ -76,6 +78,32 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
     accessor: 'name',
     sortable: true,
     order: 'ASC',
+  },
+];
+```
+
+#### control
+
+В случае, когда вам необходимо добавить кастомную контрол справа(в header), то вы можете воспользоваться `control`
+В него необходимо передать `({ column }: TableControl<{}>) => ReactNode`
+
+```tsx
+const columns = [
+  {
+    title: '№',
+    accessor: 'id',
+    align: 'center',
+    control: ({ column }: TableControl<{}>) => (
+      <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconAdd} />
+    ),
+  },
+  {
+    title: 'Имя',
+    accessor: 'name',
+    align: 'center',
+    control: ({ column }: TableControl<{}>) => (
+      <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconRemove} />
+    ),
   },
 ];
 ```
@@ -150,28 +178,6 @@ type OrderType = 'ASC' | 'DESC' | 'asc' | 'desc';
     name: 'Антон',
     filterer: (value) => value === 'Антон',
     field: 'name',
-  },
-];
-```
-
-#### filterIcon
-
-В случае, когда вам необходимо добавить кастомную иконку справа(в header), то вы можете воспользоваться `filterIcon`
-В него необходимо передать `ReactNode`
-
-```tsx
-const columns = [
-  {
-    title: '№',
-    accessor: 'id',
-    align: 'center',
-    filterIcon: <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconAdd} />,
-  },
-  {
-    title: 'Имя',
-    accessor: 'name',
-    align: 'center',
-    filterIcon: <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconRemove} />,
   },
 ];
 ```

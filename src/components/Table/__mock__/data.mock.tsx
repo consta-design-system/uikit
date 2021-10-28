@@ -1246,19 +1246,19 @@ export const partOfTableDataForCustomTagLabelFunction = {
   ],
 };
 
-export const withIconTableMock = {
+export const withControlTableMock = {
   columns: [
     {
       title: 'Имя',
       accessor: CustomIDs.fullName,
       sortable: true,
-      filterIcon: <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconAdd} />,
+      control: () => <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconAdd} />,
     },
     {
       title: 'Год регистрации',
       accessor: CustomIDs.yearOfRegistration,
       sortable: true,
-      filterIcon: <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconRemove} />,
+      control: () => <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconRemove} />,
     },
   ],
   rows: rowsForCustomTagLabelFunction,
