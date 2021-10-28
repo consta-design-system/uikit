@@ -224,14 +224,14 @@ const WithOnRowHoverContent = <T extends TableRow>(): JSX.Element => {
     ),
   }));
 
-  const columns: Array<TableColumn<typeof rows[number]>> = [
+  const columns: TableColumn<typeof rows[number]>[] = [
     {
       title: 'Появится кнопка при наведении',
       accessor: 'button',
       align: 'center',
       width: 120,
     },
-    ...tableData.columns,
+    ...(tableData.columns as TableColumn<typeof rows[number]>[]),
   ];
 
   return (

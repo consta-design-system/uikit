@@ -131,7 +131,7 @@ type GroupColumnAddition<T extends TableRow> = {
   [K in keyof ColumnBase<T>]?: never;
 };
 export interface TableControl<T extends TableRow> {
-  column: (Header<T> & ColumnMetaData) | undefined;
+  column: Header<T> & ColumnMetaData;
 }
 
 export type TableColumn<T extends TableRow> = {
