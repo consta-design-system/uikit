@@ -15,6 +15,7 @@ import {
   tableWithExpandableRowsData,
   tableWithMergedCellsData,
   tableWithMultiLevelHeadersData,
+  withIconTableMock,
 } from '../__mock__/data.mock';
 import { IconCopy } from '../../../icons/IconCopy/IconCopy';
 import { updateAt } from '../../../utils/array';
@@ -480,6 +481,10 @@ export const withCustomTagLabelFunction = createStory(
 
 export const WithRowActions = createStory(() => <WithRowCreationAndDeletion />, {
   name: 'с добавлением/удалением строк',
+});
+
+export const WithIcon = createStory(() => <Table {...getKnobs(withIconTableMock)} />, {
+  name: 'С использованием filterIcon',
 });
 
 export default createMetadata({

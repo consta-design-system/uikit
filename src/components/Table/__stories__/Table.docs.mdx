@@ -154,6 +154,28 @@ type OrderType = 'ASC' | 'DESC' | 'asc' | 'desc';
 ];
 ```
 
+#### filterIcon
+
+В случае, когда вам необходимо добавить кастомную иконку справа(в header), то вы можете воспользоваться `filterIcon`
+В него необходимо передать `ReactNode`
+
+```tsx
+const columns = [
+  {
+    title: '№',
+    accessor: 'id',
+    align: 'center',
+    filterIcon: <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconAdd} />,
+  },
+  {
+    title: 'Имя',
+    accessor: 'name',
+    align: 'center',
+    filterIcon: <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconRemove} />,
+  },
+];
+```
+
 #### Кастомный фильтр
 
 Нестандартные компоненты для фильтрации можно добавить в объекте `component`. Например, так:

@@ -1,7 +1,10 @@
 import React from 'react';
 
+import { IconAdd } from '../../../icons/IconAdd/IconAdd';
+import { IconRemove } from '../../../icons/IconRemove/IconRemove';
 import { isNotNil } from '../../../utils/type-guards';
 import { Badge } from '../../Badge/Badge';
+import { Button } from '../../Button/Button';
 import { TableChoiceGroupFilter } from '../ChoiceGroupFilter/TableChoiceGroupFilter';
 import { TableNumberFilter } from '../NumberFilter/TableNumberFilter';
 import { TableFilters as Filters, TableProps } from '../Table';
@@ -1241,4 +1244,22 @@ export const partOfTableDataForCustomTagLabelFunction = {
       },
     },
   ],
+};
+
+export const withIconTableMock = {
+  columns: [
+    {
+      title: 'Имя',
+      accessor: CustomIDs.fullName,
+      sortable: true,
+      filterIcon: <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconAdd} />,
+    },
+    {
+      title: 'Год регистрации',
+      accessor: CustomIDs.yearOfRegistration,
+      sortable: true,
+      filterIcon: <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconRemove} />,
+    },
+  ],
+  rows: rowsForCustomTagLabelFunction,
 };

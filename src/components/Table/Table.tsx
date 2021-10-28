@@ -138,6 +138,7 @@ export type TableColumn<T extends TableRow> = {
   width?: ColumnWidth;
   mergeCells?: boolean;
   position?: Position;
+  filterIcon?: React.ReactNode;
 } & (GroupColumnAddition<T> | SingleColumnAddition<T>);
 
 export type TableProps<T extends TableRow> = {

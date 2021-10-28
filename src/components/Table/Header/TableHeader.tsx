@@ -90,7 +90,7 @@ export const TableHeader = <T extends TableRow>({
   };
 
   const getFilterPopover = (column: Header<T> & ColumnMetaData): React.ReactNode => {
-    if (!filters || !column.accessor) {
+    if (!filters || !column.accessor || column.filterIcon) {
       return null;
     }
     const curFilter = filters.find(({ field }) => field === column.accessor);
@@ -125,6 +125,14 @@ export const TableHeader = <T extends TableRow>({
         )}
       </TableFilterTooltip>
     ) : null;
+  };
+
+  const filterIcon = (column: Header<T> & ColumnMetaData): React.ReactNode => {
+    if (!column.isFilterActive && column.filterIcon) {
+      return column.filterIcon;
+    }
+
+    return null;
   };
 
   return (
@@ -177,13 +185,17 @@ export const TableHeader = <T extends TableRow>({
               }
             >
               {column.title}
+
               <div
                 className={cnTableHeader('Buttons', {
                   isSortingActive: column.isSortingActive,
                   isFilterActive: column.isFilterActive,
+                  isFilterIconActive: Boolean(column.filterIcon),
                   verticalAlign: headerVerticalAlign,
                 })}
               >
+                {filterIcon(column)}
+
                 {column.sortable && (
                   <Button
                     size="xs"
@@ -195,6 +207,7 @@ export const TableHeader = <T extends TableRow>({
                     className={cnTableHeader('Icon', { type: 'sort' })}
                   />
                 )}
+
                 {getFilterPopover(column)}
               </div>
             </TableCell>
