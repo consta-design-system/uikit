@@ -90,7 +90,7 @@ export const TableHeader = <T extends TableRow>({
   };
 
   const getFilterPopover = (column: Header<T> & ColumnMetaData): React.ReactNode => {
-    if (!filters || !column.accessor || column.control) {
+    if (!filters || !column.accessor) {
       return null;
     }
     const curFilter = filters.find(({ field }) => field === column.accessor);
@@ -127,7 +127,7 @@ export const TableHeader = <T extends TableRow>({
     ) : null;
   };
 
-  const filterIcon = (column: Header<T> & ColumnMetaData): React.ReactNode => {
+  const control = (column: Header<T> & ColumnMetaData): React.ReactNode => {
     if (!column.isFilterActive && column.control) {
       return <div className={cnTableHeader('Buttons_control')}>{column.control({ column })}</div>;
     }
@@ -190,11 +190,11 @@ export const TableHeader = <T extends TableRow>({
                 className={cnTableHeader('Buttons', {
                   isSortingActive: column.isSortingActive,
                   isFilterActive: column.isFilterActive,
-                  isFilterIconActive: Boolean(column.control),
+                  isControlActive: Boolean(column.control),
                   verticalAlign: headerVerticalAlign,
                 })}
               >
-                {filterIcon(column)}
+                {control(column)}
 
                 {column.sortable && (
                   <Button
