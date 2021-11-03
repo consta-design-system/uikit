@@ -60,6 +60,8 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
 
 `order` — устанавливает порядок [сортировки](#сортировка) по умолчанию.
 
+`control` — Добавляет компонент, справа от названия колонки, например checkbox
+
 В этой таблице будет две колонки — номер и имя.
 
 ```ts
@@ -76,6 +78,32 @@ import { Preview } from '@storybook/addon-docs/dist/blocks';
     accessor: 'name',
     sortable: true,
     order: 'ASC',
+  },
+];
+```
+
+#### control
+
+В случае, когда вам необходимо добавить кастомную контрол справа(в header), то вы можете воспользоваться `control`
+В него необходимо передать `({ column }: TableControl<{}>) => ReactNode`
+
+```tsx
+const columns = [
+  {
+    title: '№',
+    accessor: 'id',
+    align: 'center',
+    control: ({ column }: TableControl<{}>) => (
+      <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconAdd} />
+    ),
+  },
+  {
+    title: 'Имя',
+    accessor: 'name',
+    align: 'center',
+    control: ({ column }: TableControl<{}>) => (
+      <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconRemove} />
+    ),
   },
 ];
 ```

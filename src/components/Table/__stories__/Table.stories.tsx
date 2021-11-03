@@ -15,6 +15,7 @@ import {
   tableWithExpandableRowsData,
   tableWithMergedCellsData,
   tableWithMultiLevelHeadersData,
+  withControlTableMock,
 } from '../__mock__/data.mock';
 import { IconCopy } from '../../../icons/IconCopy/IconCopy';
 import { updateAt } from '../../../utils/array';
@@ -223,14 +224,14 @@ const WithOnRowHoverContent = <T extends TableRow>(): JSX.Element => {
     ),
   }));
 
-  const columns: Array<TableColumn<typeof rows[number]>> = [
+  const columns: TableColumn<typeof rows[number]>[] = [
     {
       title: 'Появится кнопка при наведении',
       accessor: 'button',
       align: 'center',
       width: 120,
     },
-    ...tableData.columns,
+    ...(tableData.columns as TableColumn<typeof rows[number]>[]),
   ];
 
   return (
@@ -480,6 +481,10 @@ export const withCustomTagLabelFunction = createStory(
 
 export const WithRowActions = createStory(() => <WithRowCreationAndDeletion />, {
   name: 'с добавлением/удалением строк',
+});
+
+export const WithIcon = createStory(() => <Table {...getKnobs(withControlTableMock)} />, {
+  name: 'С использованием control',
 });
 
 export default createMetadata({

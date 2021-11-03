@@ -127,6 +127,14 @@ export const TableHeader = <T extends TableRow>({
     ) : null;
   };
 
+  const control = (column: Header<T> & ColumnMetaData): React.ReactNode => {
+    if (column.control) {
+      return <div className={cnTableHeader('Сontrol')}>{column.control({ column })}</div>;
+    }
+
+    return null;
+  };
+
   return (
     <>
       <div className={cnTableHeader('Row', { withVerticalBorder: borderBetweenColumns })}>
@@ -177,6 +185,7 @@ export const TableHeader = <T extends TableRow>({
               }
             >
               {column.title}
+
               <div
                 className={cnTableHeader('Buttons', {
                   isSortingActive: column.isSortingActive,
@@ -195,7 +204,10 @@ export const TableHeader = <T extends TableRow>({
                     className={cnTableHeader('Icon', { type: 'sort' })}
                   />
                 )}
+
                 {getFilterPopover(column)}
+
+                {control(column)}
               </div>
             </TableCell>
           );

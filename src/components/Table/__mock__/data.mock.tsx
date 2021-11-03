@@ -1,7 +1,10 @@
 import React from 'react';
 
+import { IconAdd } from '../../../icons/IconAdd/IconAdd';
+import { IconRemove } from '../../../icons/IconRemove/IconRemove';
 import { isNotNil } from '../../../utils/type-guards';
 import { Badge } from '../../Badge/Badge';
+import { Button } from '../../Button/Button';
 import { TableChoiceGroupFilter } from '../ChoiceGroupFilter/TableChoiceGroupFilter';
 import { TableNumberFilter } from '../NumberFilter/TableNumberFilter';
 import { TableFilters as Filters, TableProps } from '../Table';
@@ -1197,6 +1200,73 @@ export const partOfTableDataForCustomTagLabelFunction = {
       title: 'Год регистрации',
       accessor: CustomIDs.yearOfRegistration,
       sortable: true,
+    },
+  ],
+  rows: rowsForCustomTagLabelFunction,
+  filters: [
+    {
+      id: CustomIDs.fullName,
+      name: 'Выбранные инициалы: ',
+      field: CustomIDs.fullName,
+      filterer: customFilters[0].filterer,
+      component: {
+        name: TableTextFilter,
+        props: {
+          withSearch: true,
+          items: [
+            {
+              name: rowsForCustomTagLabelFunction[0].fullName,
+              value: rowsForCustomTagLabelFunction[0].fullName,
+            },
+            {
+              name: rowsForCustomTagLabelFunction[1].fullName,
+              value: rowsForCustomTagLabelFunction[1].fullName,
+            },
+            {
+              name: rowsForCustomTagLabelFunction[2].fullName,
+              value: rowsForCustomTagLabelFunction[2].fullName,
+            },
+            {
+              name: rowsForCustomTagLabelFunction[3].fullName,
+              value: rowsForCustomTagLabelFunction[3].fullName,
+            },
+          ],
+        },
+      },
+    },
+    {
+      id: CustomIDs.yearOfRegistration,
+      name: 'Год регистрации: ',
+      field: CustomIDs.yearOfRegistration,
+      filterer: rangeFilterer,
+      component: {
+        name: TableNumberFilter,
+      },
+    },
+  ],
+};
+
+export const withControlTableMock = {
+  columns: [
+    {
+      title: 'Имя',
+      accessor: CustomIDs.fullName,
+      sortable: true,
+      filterer: rangeFilterer,
+      component: {
+        name: TableNumberFilter,
+      },
+      control: () => <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconAdd} />,
+    },
+    {
+      title: 'Год регистрации',
+      accessor: CustomIDs.yearOfRegistration,
+      sortable: true,
+      filterer: rangeFilterer,
+      component: {
+        name: TableNumberFilter,
+      },
+      control: () => <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconRemove} />,
     },
   ],
   rows: rowsForCustomTagLabelFunction,

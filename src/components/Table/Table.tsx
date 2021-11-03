@@ -130,6 +130,9 @@ type GroupColumnAddition<T extends TableRow> = {
 } & {
   [K in keyof ColumnBase<T>]?: never;
 };
+export interface TableControl<T extends TableRow> {
+  column: Header<T> & ColumnMetaData;
+}
 
 export type TableColumn<T extends TableRow> = {
   title: React.ReactNode;
@@ -138,6 +141,7 @@ export type TableColumn<T extends TableRow> = {
   width?: ColumnWidth;
   mergeCells?: boolean;
   position?: Position;
+  control?: ({ column }: TableControl<T>) => React.ReactNode;
 } & (GroupColumnAddition<T> | SingleColumnAddition<T>);
 
 export type TableProps<T extends TableRow> = {
