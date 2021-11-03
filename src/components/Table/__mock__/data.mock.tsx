@@ -1252,14 +1252,63 @@ export const withControlTableMock = {
       title: 'Имя',
       accessor: CustomIDs.fullName,
       sortable: true,
+      filterer: rangeFilterer,
+      component: {
+        name: TableNumberFilter,
+      },
       control: () => <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconAdd} />,
     },
     {
       title: 'Год регистрации',
       accessor: CustomIDs.yearOfRegistration,
       sortable: true,
+      filterer: rangeFilterer,
+      component: {
+        name: TableNumberFilter,
+      },
       control: () => <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconRemove} />,
     },
   ],
   rows: rowsForCustomTagLabelFunction,
+  filters: [
+    {
+      id: CustomIDs.fullName,
+      name: 'Выбранные инициалы: ',
+      field: CustomIDs.fullName,
+      filterer: customFilters[0].filterer,
+      component: {
+        name: TableTextFilter,
+        props: {
+          withSearch: true,
+          items: [
+            {
+              name: rowsForCustomTagLabelFunction[0].fullName,
+              value: rowsForCustomTagLabelFunction[0].fullName,
+            },
+            {
+              name: rowsForCustomTagLabelFunction[1].fullName,
+              value: rowsForCustomTagLabelFunction[1].fullName,
+            },
+            {
+              name: rowsForCustomTagLabelFunction[2].fullName,
+              value: rowsForCustomTagLabelFunction[2].fullName,
+            },
+            {
+              name: rowsForCustomTagLabelFunction[3].fullName,
+              value: rowsForCustomTagLabelFunction[3].fullName,
+            },
+          ],
+        },
+      },
+    },
+    {
+      id: CustomIDs.yearOfRegistration,
+      name: 'Год регистрации: ',
+      field: CustomIDs.yearOfRegistration,
+      filterer: rangeFilterer,
+      component: {
+        name: TableNumberFilter,
+      },
+    },
+  ],
 };
