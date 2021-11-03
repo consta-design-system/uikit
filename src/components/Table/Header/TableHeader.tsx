@@ -129,7 +129,7 @@ export const TableHeader = <T extends TableRow>({
 
   const control = (column: Header<T> & ColumnMetaData): React.ReactNode => {
     if (column.control) {
-      return <div className={cnTableHeader('Buttons_control')}>{column.control({ column })}</div>;
+      return <div className={cnTableHeader('Сontrol')}>{column.control({ column })}</div>;
     }
 
     return null;
