@@ -20,6 +20,7 @@ export const useSnackBarEventsHandler = <P extends SnackBarProps>(
           pageURL: window.location.href,
           DOMRef: document.getElementsByClassName(COMPONENT_NAME)[0],
           items: newProps.items,
+          customParams: newProps?.customAnalyticsData,
         },
       };
 

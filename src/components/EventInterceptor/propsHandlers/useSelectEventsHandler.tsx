@@ -24,6 +24,7 @@ export const useSelectEventsHandler = <PROPS extends SelectProps>(
           value: newProps.value,
           pageURL: window.location.href,
           DOMRef: controlRef.current,
+          customParams: newProps?.customAnalyticsData,
         },
       };
       handler!(value);

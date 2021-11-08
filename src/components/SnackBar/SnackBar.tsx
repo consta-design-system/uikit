@@ -35,6 +35,7 @@ export type Item = {
 type Props = {
   items: Item[];
   children?: never;
+  customAnalyticsData?: [{ name: string; type: string; value: unknown }];
 };
 
 export type SnackBarProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;

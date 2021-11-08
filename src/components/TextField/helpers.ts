@@ -115,6 +115,7 @@ export type Props<TYPE extends string> = {
   caption?: string;
   labelPosition?: 'top' | 'left';
   focused?: boolean;
+  customAnalyticsData?: [{ name: string; type: string; value: unknown }];
 } & TextFieldPropsTextareaType<TYPE> &
   TextFieldPropRightSide<TYPE>;
 

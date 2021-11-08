@@ -50,6 +50,7 @@ export type Props = {
   iconSize?: IconPropSize;
   title?: string;
   children?: never;
+  customAnalyticsData?: [{ name: string; type: string; value: unknown }];
 };
 
 export const COMPONENT_NAME = 'Button' as const;
