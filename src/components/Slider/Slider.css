@@ -1,8 +1,57 @@
 .Slider {
+  --slider-side-margin: 0;
   display: inline-flex;
-  min-width: 300px;
+  flex-direction: column;
+  min-width: 200px;
 
   &-Container {
+    position: relative;
+    height: var(--space-m);
     width: 100%;
+    display: inline-flex;
+    align-items: center;
+    margin: var(--slider-container-margin) 0;
+
+    &_size {
+      &_xs {
+        --slider-container-margin: var(--space-2xs);
+        --slider-side-margin: var(--space-xs);
+      }
+
+      &_s {
+        --slider-container-margin: var(--space-2xs);
+        --slider-side-margin: var(--space-s);
+      }
+
+      &_m {
+        --slider-container-margin: var(--space-2xs);
+        --slider-side-margin: var(--space-s);
+      }
+
+      &_l {
+        --slider-container-margin: var(--space-xs);
+        --slider-side-margin: var(--space-l);
+      }
+    }
+  }
+
+  &-Control {
+    position: relative;
+    height: var(--space-m);
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &-Side {
+    &_position {
+      &_left {
+        margin-right: var(--slider-side-margin);
+      }
+
+      &_right {
+        margin-left: var(--slider-side-margin);
+      }
+    }
   }
 }

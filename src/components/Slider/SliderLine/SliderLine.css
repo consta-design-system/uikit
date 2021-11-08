@@ -6,6 +6,20 @@
   &_view {
     &_division {
       gap: var(--space-2xs);
+
+      & .SliderLine-Line {
+        border-radius: var(--control-radius);
+      }
+    }
+
+    &_default {
+      & > div:first-child {
+        border-radius: var(--control-radius) 0 0 var(--control-radius);
+      }
+
+      & > div:last-child {
+        border-radius: 0 var(--control-radius) var(--control-radius) 0;
+      }
     }
   }
 
@@ -14,7 +28,6 @@
     width: var(--slider-line-size);
     height: var(--space-2xs);
     background-color: var(--slider-line-color);
-    border-radius: var(--control-radius);
     transition: background-color 0.3s, width 0.3s;
 
     &_active {

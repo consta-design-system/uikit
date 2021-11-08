@@ -1,0 +1,27 @@
+.SliderPoint {
+  position: absolute;
+  top: 0;
+  left: var(--slider-button-left);
+  width: var(--space-m);
+  height: var(--space-m);
+  cursor: pointer;
+  display: flex;
+  z-index: 1;
+  align-items: center;
+  justify-content: center;
+  border-radius: calc(var(--space-m) * 0.5);
+  background-color: var(--color-bg-default);
+  border: var(--space-3xs) solid var(--color-control-bg-primary);
+  transition: border-color 0.3s, left 0.3s;
+
+  &:hover,
+  &:focus,
+  &_hovered {
+    border-color: var(--color-control-bg-primary-hover);
+  }
+
+  &-Tooltip {
+    z-index: 2;
+    pointer-events: none;
+  }
+}
