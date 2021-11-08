@@ -25,7 +25,7 @@ export type ContextMenuPropGetGroupLabel = (
 export type ContextMenuPropSortGroup = (a: string | number, b: string | number) => number;
 export type ContextMenuPropGetOnClick<ITEM> = (
   item: ITEM,
-) => React.EventHandler<React.MouseEvent<HTMLDivElement>>;
+) => React.EventHandler<React.MouseEvent<HTMLDivElement>> | undefined;
 
 export const contextMenuPropSubMenuDirections = [
   'rightStartUp',
