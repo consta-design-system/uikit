@@ -177,13 +177,11 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
 
   const notFound = useMemo(() => {
     let flag = !params.onCreate;
-    if (searchValue.length > 0) {
-      visibleItems.forEach((group) => {
-        if (isOptionForCreate(group) || group.items.length > 0 || group.group) {
-          flag = false;
-        }
-      });
-    }
+    visibleItems.forEach((group) => {
+      if (isOptionForCreate(group) || group.items.length > 0 || group.group) {
+        flag = false;
+      }
+    });
     return flag;
   }, [visibleItems]);
 
