@@ -14,24 +14,29 @@ export const TextFieldExampleCaption = () => {
         onChange={handleChange}
         value={value}
         status="success"
-        placeholder="success"
-        caption="success"
+        placeholder="Статус success"
+        caption="Это подпись"
       />
       <TextField
         onChange={handleChange}
         value={value}
         status="alert"
-        placeholder="error"
-        caption="error"
+        placeholder="Статус alert"
+        caption="Это подпись"
       />
       <TextField
         onChange={handleChange}
         value={value}
         status="warning"
-        placeholder="warning"
-        caption="warning"
+        placeholder="Статус warning"
+        caption="Это подпись"
       />
-      <TextField onChange={handleChange} value={value} placeholder="TextField" caption="default" />
+      <TextField
+        onChange={handleChange}
+        value={value}
+        placeholder="Обычное поле"
+        caption="Это подпись"
+      />
     </StoryBookExample>
   );
 };
