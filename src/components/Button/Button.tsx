@@ -50,13 +50,11 @@ export type Props = {
   iconSize?: IconPropSize;
   title?: string;
   children?: never;
-  customAnalyticsData?: [
-    {
-      name: string;
-      type: 'STRING' | 'INT' | 'FLOAT' | 'BOOLEAN' | 'DATE';
-      value: string | number | boolean;
-    },
-  ];
+  customAnalyticsData?: {
+    name: string;
+    type: 'STRING' | 'INT' | 'FLOAT' | 'BOOLEAN' | 'DATE';
+    value: string | number | boolean;
+  }[];
 };
 
 export const COMPONENT_NAME = 'Button' as const;

@@ -104,13 +104,11 @@ import { CheckboxExampleView } from './examples/CheckboxExampleView/CheckboxExam
 ## Свойства
 
 ```tsx
-type PropCustomAnalyticsData = [
-  {
-    name: string;
-    type: 'STRING' | 'INT' | 'FLOAT' | 'BOOLEAN' | 'DATE';
-    value: string | number | boolean;
-  },
-];
+type PropCustomAnalyticsData = {
+  name: string;
+  type: 'STRING' | 'INT' | 'FLOAT' | 'BOOLEAN' | 'DATE';
+  value: string | number | boolean;
+}[];
 ```
 
 | Свойство                      | Тип                                                                              | По умолчанию | Описание                                                                     |

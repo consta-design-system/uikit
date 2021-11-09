@@ -44,13 +44,11 @@ type Props = {
   tabIndex?: number;
   inputRef?: React.Ref<HTMLInputElement>;
   children?: never;
-  customAnalyticsData?: [
-    {
-      name: string;
-      type: 'STRING' | 'INT' | 'FLOAT' | 'BOOLEAN' | 'DATE';
-      value: string | number | boolean;
-    },
-  ];
+  customAnalyticsData?: {
+    name: string;
+    type: 'STRING' | 'INT' | 'FLOAT' | 'BOOLEAN' | 'DATE';
+    value: string | number | boolean;
+  }[];
 };
 
 export type CheckboxProps = PropsWithHTMLAttributes<Props, HTMLLabelElement>;

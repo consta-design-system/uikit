@@ -255,13 +255,11 @@ import { ButtonExampleLoading } from './examples/ButtonExampleLoading/ButtonExam
 ## Список свойств
 
 ```tsx
-type PropCustomAnalyticsData = [
-  {
-    name: string;
-    type: 'STRING' | 'INT' | 'FLOAT' | 'BOOLEAN' | 'DATE';
-    value: string | number | boolean;
-  },
-];
+type PropCustomAnalyticsData = {
+  name: string;
+  type: 'STRING' | 'INT' | 'FLOAT' | 'BOOLEAN' | 'DATE';
+  value: string | number | boolean;
+}[];
 ```
 
 | Свойство                         | Тип или варианты значения                                                                 | По умолчанию              | Описание                                                                         |

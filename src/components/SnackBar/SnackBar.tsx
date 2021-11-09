@@ -35,13 +35,11 @@ export type Item = {
 type Props = {
   items: Item[];
   children?: never;
-  customAnalyticsData?: [
-    {
-      name: string;
-      type: 'STRING' | 'INT' | 'FLOAT' | 'BOOLEAN' | 'DATE';
-      value: string | number | boolean;
-    },
-  ];
+  customAnalyticsData?: {
+    name: string;
+    type: 'STRING' | 'INT' | 'FLOAT' | 'BOOLEAN' | 'DATE';
+    value: string | number | boolean;
+  }[];
 };
 
 export type SnackBarProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;

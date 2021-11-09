@@ -795,13 +795,11 @@ type PropGetItemGroupKey<ITEM> = (item: ITEM) => string | number | undefined;
 type PropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
 type PropGetGroupKey<GROUP> = (group: GROUP) => string | number;
 type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
-type PropCustomAnalyticsData = [
-  {
-    name: string;
-    type: 'STRING' | 'INT' | 'FLOAT' | 'BOOLEAN' | 'DATE';
-    value: string | number | boolean;
-  },
-];
+type PropCustomAnalyticsData = {
+  name: string;
+  type: 'STRING' | 'INT' | 'FLOAT' | 'BOOLEAN' | 'DATE';
+  value: string | number | boolean;
+}[];
 ```
 
 | Свойство                                                           | Тип или варианты значения                              | По умолчанию              | Описание                                                               |
