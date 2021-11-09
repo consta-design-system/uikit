@@ -14,29 +14,40 @@ export const propSize = ['s', 'xs', 'm', 'l'] as const;
 export type PropSize = typeof propSize[number];
 export const defaultPropSize: PropSize = propSize[1];
 
-export type SliderValue<RANGE> = RANGE extends true ? number[] : number;
+export type SliderValue<RANGE> = RANGE extends true ? [number, number] : number;
 
-type Props<RANGE> = {
+export type PropOnChange<RANGE> = (prop: {
+  e?: Event | React.TouchEvent | React.MouseEvent | React.KeyboardEvent;
+  value: SliderValue<RANGE>;
+}) => void;
+
+export const propWidth = ['default', 'full'] as const;
+export type PropWidth = typeof propWidth[number];
+export const defultPropWidth: PropWidth = propWidth[1];
+
+export type PropSide<RANGE> =
+  | React.ReactNode
+  | (({ value }: { value?: SliderValue<RANGE> }) => React.ReactElement);
+
+type Props<RANGE extends boolean = false> = {
   className?: string;
   step?: number | number[];
   view?: PropView;
   disabled?: boolean;
   range?: RANGE;
   withTooltip?: boolean;
-  value?: SliderValue<RANGE>;
+  value: SliderValue<RANGE>;
   label?: string;
   caption?: string;
   smooth?: boolean;
   status?: PropStatus;
   min?: number;
   size?: PropSize;
+  width?: PropWidth;
   max?: number;
-  onChange?: (prop: {
-    e?: Event | React.TouchEvent | React.MouseEvent | React.KeyboardEvent;
-    value: number | number[];
-  }) => void;
-  leftSide?: React.ReactNode | (({ value }: { value?: number | number[] }) => React.ReactElement);
-  rightSide?: React.ReactNode | (({ value }: { value?: number | number[] }) => React.ReactElement);
+  onChange?: PropOnChange<RANGE>;
+  leftSide?: PropSide<RANGE>;
+  rightSide?: PropSide<RANGE>;
 };
 
 export type Line = {

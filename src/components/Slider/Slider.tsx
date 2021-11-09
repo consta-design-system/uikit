@@ -21,14 +21,15 @@ export function Slider<RANGE extends boolean>(props: SliderProps<RANGE>) {
     max = 100,
     onChange,
     value,
-    step = 10,
+    step = 1,
     disabled = false,
+    width = 'default',
     size = defaultPropSize,
     view = 'default',
     leftSide,
     rightSide,
     withTooltip,
-    range,
+    range = false,
     label,
     status,
     caption,
@@ -79,12 +80,12 @@ export function Slider<RANGE extends boolean>(props: SliderProps<RANGE>) {
   };
 
   return (
-    <div className={cnSlider(null, [className])} {...otherProps}>
+    <div className={cnSlider({ width }, [className])} {...otherProps}>
       {label && <FieldLabel size={size}>{label}</FieldLabel>}
       <div className={cnSlider('Container', { size })}>
         {leftSide && (
           <div className={cnSlider('Side', { position: 'left' })}>
-            {typeof leftSide === 'function' ? leftSide({ value }) : leftSide}
+            {typeof leftSide === 'function' ? leftSide({ value }) : leftSide}{' '}
           </div>
         )}
         <div
@@ -100,6 +101,7 @@ export function Slider<RANGE extends boolean>(props: SliderProps<RANGE>) {
             hovered={isHovered}
             onHover={(hovered) => changeHovered(hovered)}
             lines={lineSizes}
+            disabled={disabled}
             view={view}
           />
           <SliderPoint
@@ -108,6 +110,7 @@ export function Slider<RANGE extends boolean>(props: SliderProps<RANGE>) {
             popoverPosition={popoverPosition[0]}
             onKeyPress={onKeyPress}
             onFocus={onFocus}
+            disabled={disabled}
             position={buttonPositions[0]}
             focused={activeButton === 'left'}
             buttonLabel="left"
@@ -122,6 +125,7 @@ export function Slider<RANGE extends boolean>(props: SliderProps<RANGE>) {
               onFocus={onFocus}
               popoverPosition={popoverPosition[1]}
               onKeyPress={onKeyPress}
+              disabled={disabled}
               focused={activeButton === 'right'}
               withTooltip={withTooltip}
               position={buttonPositions[1]}

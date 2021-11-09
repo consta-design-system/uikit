@@ -1,6 +1,6 @@
 import React, { MutableRefObject, useCallback, useEffect, useRef } from 'react';
 
-import { TrackPosition } from '../helper';
+import { SliderValue, TrackPosition } from '../helper';
 import { getSteps } from '../useSliderStationing';
 
 import {
@@ -8,21 +8,15 @@ import {
   detectActiveButton,
   getValidValue,
   getValueByPosition,
+  isRangeParams,
   trackPosition,
-  UseSlider,
+  UseSliderProps,
+  UseSliderValues,
 } from './helper';
 
-export const useSlider: UseSlider = ({
-  disabled,
-  range,
-  value,
-  min,
-  max,
-  step = 1,
-  onChange,
-  sliderRef,
-  buttonRefs,
-}) => {
+export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): UseSliderValues {
+  const { disabled, range, value, min, max, step = 1, onChange, sliderRef, buttonRefs } = props;
+
   const minValue = max > min ? min : 0;
   const maxValue = max > min ? max : 100;
 
@@ -30,23 +24,23 @@ export const useSlider: UseSlider = ({
 
   const popoverPosition: MutableRefObject<TrackPosition[]> = useRef([]);
 
-  const valueDerived: MutableRefObject<number | number[] | undefined> = useRef(value);
-
   useEffect(() => {
     if (typeof value !== 'undefined' && typeof step !== 'undefined') {
-      const targetValue = Array.isArray(value)
-        ? [getValidValue(value[0], min, max, step), getValidValue(value[1], min, max, step)]
-        : getValidValue(value, min, max, step);
+      const targetValue = isRangeParams(props)
+        ? [
+            getValidValue(props.value[0], min, max, step),
+            getValidValue(props.value[1], min, max, step),
+          ]
+        : getValidValue(props.value as number, min, max, step);
       onChange?.({
-        value: targetValue,
+        value: targetValue as SliderValue<RANGE>,
       });
-      valueDerived.current = targetValue;
     }
   }, [range]);
 
   useEffect(() => {
-    if (Array.isArray(value)) {
-      value.forEach((val, index) => {
+    if (isRangeParams(props)) {
+      props.value.forEach((val, index) => {
         activeButton.current = index === 0 ? 'left' : 'right';
         getNewValue(val, step);
       });
@@ -58,9 +52,9 @@ export const useSlider: UseSlider = ({
   }, []);
 
   useEffect(() => {
-    if (Array.isArray(value)) {
-      if (value[0] > value[1]) {
-        onChange?.({ value: [value[1], value[1]] });
+    if (isRangeParams(props)) {
+      if (props.value[0] > props.value[1]) {
+        onChange?.({ value: [props.value[1], props.value[1]] as SliderValue<RANGE> });
       }
     }
   }, [value]);
@@ -84,14 +78,14 @@ export const useSlider: UseSlider = ({
   );
 
   const onKeyPress = (event: React.KeyboardEvent) => {
-    if (typeof activeButton.current === 'string' && typeof value !== 'undefined') {
+    if (!disabled && typeof activeButton.current === 'string' && typeof value !== 'undefined') {
       let stepIncrement = !Array.isArray(step) ? step || 1 : 1;
       let validKeyCode = false;
       let changedValue: number;
       if (Array.isArray(value)) {
         changedValue = activeButton.current === 'left' ? value[0] : value[1];
       } else {
-        changedValue = value;
+        changedValue = value as number;
       }
       switch (event.key) {
         case 'ArrowUp':
@@ -112,7 +106,8 @@ export const useSlider: UseSlider = ({
         let stepsArr = [...step];
         if (step[0] !== minValue) {
           stepsArr = [minValue, ...stepsArr];
-        } else if (step[step.length - 1] !== maxValue) {
+        }
+        if (step[step.length - 1] !== maxValue) {
           stepsArr = [...stepsArr, maxValue];
         }
         stepsArr.forEach((stepPoint, index) => {
@@ -145,8 +140,7 @@ export const useSlider: UseSlider = ({
     }
   };
 
-  const getNewValue = (changedValue: number, step: number | number[]) => {
-    let newValue: typeof value = value;
+  const getNewValue = (changedValue: number, step: number | number[]): SliderValue<RANGE> => {
     let maxRangeValue = maxValue;
     let minRangeValue = minValue;
     if (Array.isArray(value)) {
@@ -164,13 +158,12 @@ export const useSlider: UseSlider = ({
       step,
     );
     setTooltipPosition(analyzedValue);
-    if (Array.isArray(value) && range) {
-      newValue =
-        activeButton.current === 'right' ? [value[0], analyzedValue] : [analyzedValue, value[1]];
-    } else {
-      newValue = analyzedValue;
+    if (isRangeParams(props)) {
+      return (activeButton.current === 'right'
+        ? [props.value[0], analyzedValue]
+        : [analyzedValue, props.value[1]]) as SliderValue<RANGE>;
     }
-    return newValue;
+    return analyzedValue as SliderValue<RANGE>;
   };
 
   const setTooltipPosition = useCallback(
@@ -199,7 +192,7 @@ export const useSlider: UseSlider = ({
       }
       return newValue;
     },
-    [sliderRef, valueDerived, value, activeButton, range, step],
+    [sliderRef, value, activeButton, range, step],
   );
 
   const onFocus = (e: React.FocusEvent, button: ActiveButton) => {
@@ -209,12 +202,12 @@ export const useSlider: UseSlider = ({
   const handleTouchEnd = useCallback<EventListener>(
     (event: Event) => {
       const position = changePosition(event);
-      const nativeEvent = event as MouseEvent | TouchEvent;
-      if (typeof position !== 'undefined') onChange?.({ e: nativeEvent, value: position });
-      // activeButton.current = null;
+      if (typeof position !== 'undefined') {
+        onChange?.({ e: event, value: position });
+      }
       stopListening();
     },
-    [sliderRef, valueDerived, value, activeButton],
+    [sliderRef, value, activeButton, step],
   );
 
   const handleDragStart = useCallback(
@@ -223,11 +216,13 @@ export const useSlider: UseSlider = ({
       eventMove: 'touchmove' | 'mousemove',
       eventEnd: 'touchend' | 'mouseup',
     ) => {
-      const buttonSide = detectActiveButton(trackPosition(nativeEvent), buttonRefs);
-      activeButton.current = buttonSide;
-      if (typeof buttonSide === 'string') {
-        const doc = sliderRef.current || document;
-        doc.addEventListener(eventEnd, handleTouchEnd);
+      if (!disabled) {
+        const buttonSide = detectActiveButton(trackPosition(nativeEvent), buttonRefs);
+        activeButton.current = buttonSide;
+        if (typeof buttonSide === 'string') {
+          const doc = sliderRef.current || document;
+          doc.addEventListener(eventEnd, handleTouchEnd);
+        }
       }
     },
     [sliderRef, buttonRefs],
@@ -235,7 +230,9 @@ export const useSlider: UseSlider = ({
 
   const handleTouchStart = useCallback(
     (nativeEvent: React.TouchEvent) => {
-      handleDragStart(nativeEvent, 'touchmove', 'touchend');
+      if (!disabled) {
+        handleDragStart(nativeEvent, 'touchmove', 'touchend');
+      }
     },
     [handleDragStart],
   );
@@ -265,7 +262,6 @@ export const useSlider: UseSlider = ({
     onFocus,
     stopListening,
     activeButton: activeButton.current,
-    valueDerived: valueDerived.current,
     popoverPosition: popoverPosition.current,
   };
-};
+}

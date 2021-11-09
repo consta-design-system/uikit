@@ -1,25 +1,22 @@
 import React from 'react';
 
-import { TrackPosition } from '../helper';
+import { PropOnChange, SliderValue, TrackPosition } from '../helper';
 
 export type ActiveButton = 'left' | 'right' | null | undefined;
 
-export type UseSlider = (props: {
+export type UseSliderProps<RANGE extends boolean = false> = {
   disabled: boolean;
-  range: boolean | undefined;
-  value: number | number[] | undefined;
+  range?: RANGE;
+  value: SliderValue<RANGE>;
   min: number;
   max: number;
-  step?: number | number[] | undefined;
-  onChange?:
-    | ((prop: {
-        e?: Event | React.TouchEvent | React.MouseEvent | React.KeyboardEvent;
-        value: number | number[];
-      }) => void)
-    | undefined;
+  step?: number | number[];
+  onChange?: PropOnChange<RANGE>;
   sliderRef: React.RefObject<HTMLDivElement>;
   buttonRefs: React.RefObject<HTMLButtonElement>[];
-}) => {
+};
+
+export type UseSliderValues = {
   handleTouchStart: (e: React.TouchEvent) => void;
   handleMouseDown: (e: React.MouseEvent) => void;
   onKeyPress: (e: React.KeyboardEvent) => void;
@@ -27,15 +24,26 @@ export type UseSlider = (props: {
   stopListening: () => void;
   activeButton: ActiveButton;
   popoverPosition: TrackPosition[];
-  valueDerived?: number | number[];
 };
 
-export const trackPosition = (event: Event | React.TouchEvent | React.MouseEvent) => {
+export const isRangeParams = (params: UseSliderProps<boolean>): params is UseSliderProps<true> => {
+  return !!params.range;
+};
+
+export const isNotRangeParams = (
+  params: UseSliderProps<boolean>,
+): params is UseSliderProps<false> => {
+  return !!params.range;
+};
+
+export const trackPosition = (
+  event: Event | React.TouchEvent | React.MouseEvent,
+): TrackPosition => {
   if ('clientX' in event) {
     return {
       x: event.clientX,
       y: event.clientY,
-    } as TrackPosition;
+    };
   }
   return null;
 };

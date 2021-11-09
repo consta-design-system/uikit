@@ -45,17 +45,21 @@ export const SliderPoint = (props: SliderPointProps) => {
   }, [focused]);
 
   const handleFocus = (e: React.FocusEvent<HTMLButtonElement>) => {
-    onFocus?.(e, buttonLabel);
-    on();
+    if (!disabled) {
+      onFocus?.(e, buttonLabel);
+      on();
+    }
   };
 
   const tooltipThemeClassNames = generateThemeClassNames(tooltipTheme);
 
   const handleMouseAction = (enter: boolean) => {
-    onHover?.(enter);
-    enter && on();
-    if (enter) on();
-    if (!enter && !focused) off();
+    if (!disabled) {
+      onHover?.(enter);
+      enter && on();
+      if (enter) on();
+      if (!enter && !focused) off();
+    }
   };
 
   const getTooltipPosition = () => {
@@ -70,8 +74,10 @@ export const SliderPoint = (props: SliderPointProps) => {
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLButtonElement>) => {
-    onFocus?.(e, null);
-    off();
+    if (!disabled) {
+      onFocus?.(e, null);
+      off();
+    }
   };
 
   return (

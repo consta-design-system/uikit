@@ -4,12 +4,16 @@
   flex-direction: column;
   min-width: 200px;
 
+  &_width_full {
+    width: 100%;
+  }
+
   &-Container {
     position: relative;
-    height: var(--space-m);
-    width: 100%;
     display: inline-flex;
     align-items: center;
+    width: 100%;
+    min-height: var(--space-m);
     margin: var(--slider-container-margin) 0;
 
     &_size {
@@ -37,10 +41,10 @@
 
   &-Control {
     position: relative;
-    height: var(--space-m);
-    width: 100%;
     display: inline-flex;
     align-items: center;
+    width: 100%;
+    height: var(--space-m);
   }
 
   &-Side {

@@ -37,5 +37,9 @@
     &_hovered.SliderLine-Line_active {
       --slider-line-color: var(--color-control-bg-primary-hover);
     }
+
+    &_disabled {
+      --slider-line-color: var(--color-control-bg-disable);
+    }
   }
 }

@@ -8,7 +8,7 @@ import { SliderLineProps } from '../helper';
 const cnSliderLine = cn('SliderLine');
 
 export const SliderLine = (props: SliderLineProps) => {
-  const { hovered, onHover, lines, view = 'default', ...otherProps } = props;
+  const { hovered, onHover, lines, disabled, view = 'default', ...otherProps } = props;
 
   const [isLineHovered, setIsLineHovered] = useState<boolean>(false);
 
@@ -17,14 +17,14 @@ export const SliderLine = (props: SliderLineProps) => {
   }, [hovered]);
 
   const handleHover = (active: boolean) => {
-    if (active) {
+    if (!disabled && active) {
       setIsLineHovered(true);
       onHover?.(true);
     }
   };
 
   const handleBlur = (active: boolean) => {
-    if (active) {
+    if (!disabled && active) {
       setIsLineHovered(false);
       onHover?.(false);
     }
@@ -40,6 +40,7 @@ export const SliderLine = (props: SliderLineProps) => {
             className={cnSliderLine('Line', {
               active: line.active,
               hovered: line.active && isLineHovered,
+              disabled,
             })}
             style={{
               ['--slider-line-size' as string]: `${line.width}%`,

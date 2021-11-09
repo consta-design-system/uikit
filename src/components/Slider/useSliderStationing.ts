@@ -90,7 +90,7 @@ export const useSliderStationing: UseSliderStationing = (
           active: false,
         });
       }
-    } else if (step) {
+    } else if (typeof step !== 'undefined') {
       getSteps(step, min, max).forEach((stepSize) => {
         sizesArray.push({
           width: (Math.abs(stepSize.max - stepSize.min) * 100) / absoluteSize,
@@ -134,7 +134,7 @@ export const useSliderStationing: UseSliderStationing = (
   useEffect(() => {
     setLineSizes(calculateLines());
     setButtonPositions(calculateButtonPositions());
-  }, [value, min, max, range, step]);
+  }, [value, min, max, range, step, view]);
 
   return {
     lineSizes,

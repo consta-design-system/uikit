@@ -1,0 +1,386 @@
+import { SliderExampleBasic } from './examples/SliderExampleBasic/SliderExampleBasic';
+import {
+  SliderExampleViewDefault,
+  SliderExampleViewDivision,
+} from './examples/SliderExampleView/SliderExampleView';
+import { SliderExampleRange } from './examples/SliderExampleRange/SliderExampleRange';
+import {
+  SliderExampleStepSingle,
+  SliderExampleStepArray,
+} from './examples/SliderExampleStep/SliderExampleStep';
+import { SliderExampleTooltip } from './examples/SliderExampleTooltip/SliderExampleTooltip';
+import { SliderExampleLabel } from './examples/SliderExampleLabel/SliderExampleLabel';
+import { SliderExampleDisabled } from './examples/SliderExampleDisabled/SliderExampleDisabled';
+import { SliderExampleContent } from './examples/SliderExampleContent/SliderExampleContent';
+import { SliderExampleWidth } from './examples/SliderExampleWidth/SliderExampleWidth';
+import { SliderExampleSize } from './examples/SliderExampleSize/SliderExampleSize';
+
+# Slider
+
+Слайдер позволякт пользователям выбирать значения из выбранного диапазона.
+
+- [Слайдер](#слайдер)
+- [Вид](#вид)
+  - [Вид линии](#вид-линии)
+  - [Ширина](#ширина)
+- [Размер](#размер)
+- [Варианты](#варианты)
+  - [Одно значение](#оодно-значение)
+  - [Диапозон](#диапозон)
+- [Шаги](#шаги)
+- [Подсказка](#подсказка)
+- [Лэйбл и подпись](#лэйбл-и-подпись)
+- [Минимальное и максимальное значение ползунка](#минимальное-и-максимальное-значение)
+- [Дополнительные элементы](#дополнительные-элементы)
+- [Неактивный ползунок](#неактивный-ползунок)
+- [Список свойств](#свойства)
+
+## Слайдер
+
+<SliderExampleBasic />
+
+## Вид
+
+### Вид линии
+
+За отображение внешнего вида линии отвечает свойство `view`.
+
+#### Default
+
+<SliderExampleViewDefault />
+
+```tsx
+export const SliderExampleViewDefault = () => {
+  const [value, setValue] = useState<number>(20);
+
+  return (
+    <Slider
+      view="default"
+      label={`Значение ${value}`}
+      onChange={({ value }) => setValue(value)}
+      value={value}
+    />
+  );
+};
+```
+
+#### Division
+
+<SliderExampleViewDivision />
+
+```tsx
+export const SliderExampleViewDivision = () => {
+  const [value, setValue] = useState<number>(20);
+
+  return (
+    <Slider
+      view="division"
+      step={10}
+      label={`Значение ${value}`}
+      onChange={({ value }) => setValue(value)}
+      value={value}
+    />
+  );
+};
+```
+
+### Ширина
+
+За ширину отвечает свойство `width`, которое принимает значения `full`, `default`.
+
+#### Default
+
+<SliderExampleBasic />
+
+#### Full
+
+<SliderExampleWidth />
+
+## Размер
+
+За размер компонента отвечает свойство `size`.
+
+<SliderExampleSize />
+
+```tsx
+export const SliderExampleSize = () => {
+  const [value, setValue] = useState<number>(20);
+
+  return (
+    <div>
+      <Slider
+        range={false}
+        label={`Значение ${value}`}
+        onChange={({ value }) => setValue(value)}
+        value={value}
+        size="xs"
+      />
+      <Slider
+        range={false}
+        label={`Значение ${value}`}
+        onChange={({ value }) => setValue(value)}
+        value={value}
+        size="s"
+      />
+      <Slider
+        range={false}
+        label={`Значение ${value}`}
+        onChange={({ value }) => setValue(value)}
+        value={value}
+        size="m"
+      />
+      <Slider
+        range={false}
+        label={`Значение ${value}`}
+        onChange={({ value }) => setValue(value)}
+        value={value}
+        size="l"
+      />
+    </div>
+  );
+};
+```
+
+## Варианты
+
+Если необходимо выбрать диапозон, то нужно передать в `value` массив значений
+и проставить `range=true`, в ином случае стоит передавать единственное значение в `value`.
+
+### Одно значение
+
+<SliderExampleBasic />
+
+```tsx
+export const SliderExampleBasic = () => {
+  const [value, setValue] = useState<number>(20);
+
+  return (
+    <Slider label={`Значение ${value}`} onChange={({ value }) => setValue(value)} value={value} />
+  );
+};
+```
+
+### Диапозон
+
+<SliderExampleRange />
+
+```tsx
+export const SliderExampleViewRange = () => {
+  const [value, setValue] = useState<number[]>([20, 50]);
+
+  return (
+    <Slider
+      step={5}
+      label={`Значение ${value[0]}-${value[1]}`}
+      onChange={({ value }) => setValue(value)}
+      value={value}
+    />
+  );
+};
+```
+
+## Шаги
+
+Шаги движения ползунка передаются в атрибут steps. В него можно передать число или массив конечных значений.
+
+### Фиксированный шаг
+
+<SliderExampleStepSingle />
+
+```tsx
+export const SliderExampleStepSingle = () => {
+  const [value, setValue] = useState<number>(20);
+
+  return (
+    <Slider
+      view="division"
+      step={10}
+      label={`Значение ${value}`}
+      onChange={({ value }) => setValue(value)}
+      value={value}
+    />
+  );
+};
+```
+
+### Массив конечных значений
+
+<SliderExampleStepArray />
+
+```tsx
+export const SliderExampleStepArray = () => {
+  const [value, setValue] = useState<number>(20);
+
+  return (
+    <Slider
+      view="division"
+      step={[15, 40, 70]}
+      label={`Значение ${value}`}
+      onChange={({ value }) => setValue(value)}
+      value={value}
+    />
+  );
+};
+```
+
+### Подсказка
+
+Для отображение подсказки для активного ползунка необходимо проставить свойство `withTooltip=true`
+
+<SliderExampleTooltip />
+
+```tsx
+export const SliderExampleTooltip = () => {
+  const [value, setValue] = useState<number[]>([20, 50]);
+
+  return (
+    <Slider
+      step={5}
+      range
+      label={`Значение ${value[0]}-${value[1]}`}
+      onChange={({ value }) => setValue(value)}
+      value={value}
+      withTooltip
+    />
+  );
+};
+```
+
+### Лэйбл и подпись
+
+Для того чтобы указать лэйбл для компонента необходимо использовать свойство
+`label`. Для подписи стоит использовать свойство `caption`, также ее можно
+стилизовать через свойство `status`.
+
+<SliderExampleLabel />
+
+```tsx
+export const SliderExampleLabel = () => {
+  const [value, setValue] = useState<number[]>([20, 50]);
+
+  return (
+    <Slider
+      step={5}
+      range
+      label="Пример"
+      caption="Выберите значения"
+      status="success"
+      withTooltip
+      onChange={({ value }) => setValue(value)}
+      value={value}
+    />
+  );
+};
+```
+
+### Минимальное и максимальное значение ползунка
+
+Минимальное и максимальное значение устанавливается атрибутами min и max
+Если минимальное значение больше, чем максимальное, что устанавливаются стандартные значение - min = 0, max=100
+
+### Дополнительные элементы
+
+Для того чтобы добавить элементы с правой или с левой стороны
+нужно использовать `leftSide` или `rightSide`.
+
+<SliderExampleContent />
+
+```tsx
+export const SliderExampleContent = () => {
+  const [value, setValue] = useState<number[]>([20, 50]);
+
+  const onChange = useCallback(
+    (e: TextFieldOnChangeArguments) => {
+      const newVal = Number(e.value);
+      setValue([newVal, value[1]]);
+    },
+    [value],
+  );
+
+  const right = ({ value }: { value: number | number[] }) => (
+    <TextField
+      min={0}
+      max={100}
+      type="number"
+      onChange={onChange}
+      step={5}
+      value={(Array.isArray(value) ? value[1] : value).toString()}
+    />
+  );
+
+  const left = <IconSettings view="secondary" />;
+
+  return (
+    <Slider
+      value={value}
+      range
+      label={`Значение ${value[0]}-${value[1]}`}
+      withTooltip
+      step={5}
+      width="full"
+      view="division"
+      leftSide={left}
+      rightSide={right}
+      onChange={({ value }) => setValue(value)}
+    />
+  );
+};
+```
+
+### Неактивный ползунок
+
+За активность ползунка отвечает атрибут disabled. Если атрибут присутствует - ползунок блокируется, и его использование невозможно.
+
+<SliderExampleDisabled />
+
+```tsx
+export const SliderExampleDisabled = () => {
+  const [value, setValue] = useState<number>(20);
+
+  return (
+    <Slider
+      disabled
+      label={`Значение ${value}`}
+      onChange={({ value }) => setValue(value)}
+      value={value}
+    />
+  );
+};
+```
+
+## Свойства
+
+```tsx
+export type SliderValue<RANGE> = RANGE extends true ? [number, number] : number;
+
+export type PropOnChange<RANGE> = (prop: {
+  e?: Event | React.TouchEvent | React.MouseEvent | React.KeyboardEvent;
+  value: SliderValue<RANGE>;
+}) => void;
+
+export type PropSide =
+  | React.ReactNode
+  | (({ value }: { value?: number | number[] }) => React.ReactElement);
+
+export type SliderValue<RANGE> = RANGE extends true ? number[] : number;
+```
+
+| Свойство                                       | Тип или варианты значения                       | По умолчанию | Описание                                         |
+| ---------------------------------------------- | ----------------------------------------------- | ------------ | ------------------------------------------------ |
+| [`view?`](#вид-линии)                          | `default` , `division`                          | `default`    | Внешний вид линии слайдера                       |
+| [`width?`](#ширина)                            | `default` , `full`                              | `default`    | Занимаемое слайдером пространство                |
+| [`disabled?`](#неактивный-ползунок)            | `boolean`                                       | `false`      | Делает компонент неактивным                      |
+| [`status?`](#лэйбл-и-подпись)                  | `'', 'alert', 'success', 'warning'`             | -            | Статус поля                                      |
+| [`size?`](#размер)                             | `'xs'`, `'s'` , `'m'` , `'l'`                   | `'m'`        | Размер компонента                                |
+| [`step?`](#шаги)                               | `number` <code>&#124;</code> `[number, number]` | `1`          | Шаг изменения                                    |
+| [`range?`](#варианты)                          | `boolean`                                       | -            | Выбор числового промежутка                       |
+| [`label?`](#лэйбл-и-подпись)                   | `string`                                        | -            | Лэйбл                                            |
+| [`caption?`](#лэйбл-и-подпись)                 | `string`                                        | -            | Подпись                                          |
+| [`value?`](#варианты)                          | `SliderValue<RANGE>`                            | -            | Значение или масив значений                      |
+| [`onChange?`](#варианты)                       | `PropOnChange<RANGE>`                           | -            | Обработчик события изменения значения компонента |
+| [`withTooltip?`](#подсказка)                   | `boolean`                                       | -            | Флаг отображения тултипа                         |
+| [`min?`](#минимальное-и-максимальное-значение) | `number`                                        | `0`          | Минимальное значение                             |
+| [`max?`](#минимальное-и-максимальное-значение) | `number`                                        | `100`        | Максимальное значение                            |
+| [`leftSide?`](#дополнительные-элементы)        | `PropSide`                                      | -            | Элемент отображаемый слева от компонента         |
+| [`rightSide?`](#дополнительные-элементы)       | `PropSide`                                      | -            | Элемент отображаемый справа от компонента        |
+| `className?`                                   | `string`                                        | -            | Дополнительный CSS-класс                         |
