@@ -7,9 +7,19 @@ import CheckboxGroupImage from './images/CheckboxGroupImage';
 import CheckboxImage from './images/CheckboxImage';
 import DateTimeImage from './images/DateTimeImage';
 import RadioGroupImage from './images/RadioGroupImage';
+import RadioImage from './images/RadioImage';
+import SwitchGroupImage from './images/SwitchGroupImage';
+import SwitchImage from './images/SwitchImage';
+import UserImage from './images/UserImage';
 import { DataItem } from './types';
 
 export const data: DataItem[] = [
+  {
+    name: 'Attachment',
+    componentName: 'Attachment',
+    url: '/?path=/docs/components-attachment--playground',
+    description: 'Показывает загрузку файла или уже загруженные файл.',
+  },
   {
     name: 'Avatar',
     componentName: 'Avatar',
@@ -21,12 +31,6 @@ export const data: DataItem[] = [
     componentName: 'Badge',
     url: '/?path=/docs/components-badge--playground',
     description: 'Бейджик. Показывает статус процесса.',
-  },
-  {
-    name: 'Attachment',
-    componentName: 'Attachment',
-    url: '/?path=/docs/components-attachment--playground',
-    description: 'Показывает загрузку файла или уже загруженные файл.',
   },
   {
     name: 'Breadcrumbs',
@@ -265,16 +269,16 @@ export const data: DataItem[] = [
     description: 'Поле ввода. Одна или несколько строк.',
   },
   {
-    name: 'ThemeToggler',
-    componentName: 'ThemeToggler',
-    url: '/?path=/docs/components-themetoggler--playground',
-    description: 'Переключатель тем.',
-  },
-  {
     name: 'Theme',
     componentName: 'Theme',
     url: '/?path=/docs/components-theme--playground',
     description: 'Тема. Набор правил в CSS, который определяет, как выглядит проект.',
+  },
+  {
+    name: 'ThemeToggler',
+    componentName: 'ThemeToggler',
+    url: '/?path=/docs/components-themetoggler--playground',
+    description: 'Переключатель тем.',
   },
   {
     name: 'Timer',
@@ -309,5 +313,9 @@ export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> =
   Checkbox: CheckboxImage,
   CheckboxGroup: CheckboxGroupImage,
   DateTime: DateTimeImage,
+  Radio: RadioImage,
   RadioGroup: RadioGroupImage,
+  Switch: SwitchImage,
+  SwitchGroup: SwitchGroupImage,
+  User: UserImage,
 };
