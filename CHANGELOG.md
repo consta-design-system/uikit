@@ -1,5 +1,10 @@
 # Changelog
 
+## v3.9.1 (03/11/2021)
+- [feat(Table): added control for table (#1716)](https://github.com/gazprom-neft/consta-uikit/commit/99d67aff670d2f499abcefc168eba73805ef3f16) - [@SergeyKatugin](https://github.com/SergeyKatugin)
+
+--------------------
+
 ## v3.9.0 (27/10/2021)
 В `TextField` добавили возможность очищать по крестику и при `type = number` теперь красивые стилизованные кнопочки. Так же обновлена документация и внесены фиксы в некоторые компоненты.
 
@@ -414,10 +419,3 @@ _Обращаем внимание_: *версии компонентов обр
 ## v1.11.6 (03/03/2021)
 - [docs(components): fix some links (#884)](https://github.com/gazprom-neft/consta-uikit/commit/5bb19e3be64943f8b50c9c3f1fb083ab03ac61c1) - [@azhadanov](https://github.com/azhadanov)
 - [docs(Theme): add doc for creating custom preset (#856)](https://github.com/gazprom-neft/consta-uikit/commit/2c921381f4ce0a35fe07a09ccf4c104fa296ba5c) - [@kolebayev](https://github.com/kolebayev)
-
---------------------
-
-## v1.11.5 (24/02/2021)
-- [docs(Responces): add docs and examples (#839)](https://github.com/gazprom-neft/consta-uikit/commit/82f36fbc17f853e742c288a6a13f4038d1e131d4) - [@arhayka](https://github.com/arhayka)
-- [docs(Pagination): edit docs, add examples (#833)](https://github.com/gazprom-neft/consta-uikit/commit/b213ef1373e4f5e51ec5a16efad8e0f3660d3d52) - [@arhayka](https://github.com/arhayka)
-- [fix(File): fixed loader color   (#807)](https://github.com/gazprom-neft/consta-uikit/commit/23eaabd4c3d1f6e079e7f85b0479be0f67d4b91f) - [@azhadanov](https://github.com/azhadanov)
