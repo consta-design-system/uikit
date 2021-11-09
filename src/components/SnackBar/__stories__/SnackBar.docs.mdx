@@ -84,12 +84,20 @@ type Item = {
   onClose?: (item: Item) => void;
   onAutoClose?: (item: Item) => void; // Если не передавать `onAutoClose` то по истечению таймера будет срабатывать `onClose`
 };
+type PropCustomAnalyticsData = [
+  {
+    name: string;
+    type: 'STRING' | 'INT' | 'FLOAT' | 'BOOLEAN' | 'DATE';
+    value: string | number | boolean;
+  },
+];
 ```
 
-| Свойство   | Тип      | По умолчанию | Описание             |
-| ---------- | -------- | ------------ | -------------------- |
-| className? | `string` | -            | Дополнительный класс |
-| items      | `Item[]` | -            | Массив элементов     |
+| Свойство             | Тип                       | По умолчанию | Описание                                      |
+| -------------------- | ------------------------- | ------------ | --------------------------------------------- |
+| className?           | `string`                  | -            | Дополнительный класс                          |
+| items                | `Item[]`                  | -            | Массив элементов                              |
+| customAnalyticsData? | `PropCustomAnalyticsData` | -            | Для передачи кастомных параметров в аналитику |
 
 ## Пример
 

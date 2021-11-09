@@ -103,6 +103,16 @@ import { CheckboxExampleView } from './examples/CheckboxExampleView/CheckboxExam
 
 ## Свойства
 
+```tsx
+type PropCustomAnalyticsData = [
+  {
+    name: string;
+    type: 'STRING' | 'INT' | 'FLOAT' | 'BOOLEAN' | 'DATE';
+    value: string | number | boolean;
+  },
+];
+```
+
 | Свойство                      | Тип                                                                              | По умолчанию | Описание                                                                     |
 | ----------------------------- | -------------------------------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------- |
 | [`label?`](#название)         | `string`                                                                         | -            | Надпись рядом с чекбоксом                                                    |
@@ -120,6 +130,7 @@ import { CheckboxExampleView } from './examples/CheckboxExampleView/CheckboxExam
 | `className?`                  | `string`                                                                         | -            | Дополнительный CSS-класс                                                     |
 | `inputRef?`                   | `React.Ref<HTMLInputElement>`                                                    | -            | Ссылка на DOM-элемент `<input>`                                              |
 | `ref?`                        | `React.Ref<HTMLLabelElement>`                                                    | -            | Ссылка на корневой DOM-элемент этого компонента                              |
+| `customAnalyticsData?`        | `PropCustomAnalyticsData`                                                        | -            | Для передачи кастомных параметров в аналитику                                |
 
 ## Пример
 

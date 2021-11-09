@@ -254,6 +254,16 @@ import { ButtonExampleLoading } from './examples/ButtonExampleLoading/ButtonExam
 
 ## Список свойств
 
+```tsx
+type PropCustomAnalyticsData = [
+  {
+    name: string;
+    type: 'STRING' | 'INT' | 'FLOAT' | 'BOOLEAN' | 'DATE';
+    value: string | number | boolean;
+  },
+];
+```
+
 | Свойство                         | Тип или варианты значения                                                                 | По умолчанию              | Описание                                                                         |
 | -------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------- | -------------------------------------------------------------------------------- |
 | [`label`](#текст-на-кнопке)      | `string`                                                                                  | -                         | Текст на кнопке                                                                  |
@@ -273,6 +283,7 @@ import { ButtonExampleLoading } from './examples/ButtonExampleLoading/ButtonExam
 | `onClick`                        | `React.EventHandler<React.MouseEvent>`                                                    | -                         | Действие по клику                                                                |
 | `innerRef`                       | `React.Ref<HTMLElement>`                                                                  | -                         | Ссылка на корневой DOM-элемент                                                   |
 | `className`                      | `string`                                                                                  | -                         | Дополнительные CSS-классы                                                        |
+| `customAnalyticsData?`           | `PropCustomAnalyticsData`                                                                 | -                         | Для передачи кастомных параметров в аналитику                                    |
 
 ## Пример использования
 

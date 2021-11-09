@@ -795,6 +795,13 @@ type PropGetItemGroupKey<ITEM> = (item: ITEM) => string | number | undefined;
 type PropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
 type PropGetGroupKey<GROUP> = (group: GROUP) => string | number;
 type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
+type PropCustomAnalyticsData = [
+  {
+    name: string;
+    type: 'STRING' | 'INT' | 'FLOAT' | 'BOOLEAN' | 'DATE';
+    value: string | number | boolean;
+  },
+];
 ```
 
 | Свойство                                                           | Тип или варианты значения                              | По умолчанию              | Описание                                                               |
@@ -828,3 +835,4 @@ type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | `className?`                                                       | `string`                                               | -                         | Дополнительный CSS-класс                                               |
 | `dropdownClassName?`                                               | `string`                                               | -                         | Дополнительный CSS-класс для выпадающего блока                         |
 | `ref?`                                                             | `React.Ref<HTMLDivElement>`                            | -                         | Ссылка на корневой DOM-элемент компонента                              |
+| `customAnalyticsData?`                                             | `PropCustomAnalyticsData`                              | -                         | Для передачи кастомных параметров в аналитику                          |
