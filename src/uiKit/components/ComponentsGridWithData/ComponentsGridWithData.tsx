@@ -7,10 +7,15 @@ import { additionalData, data, imageMap } from './data';
 
 const getImage = (name: string) => imageMap[name] || NoImage;
 
-const allData = [...data, ...additionalData].map((item) => ({
-  image: getImage(item.componentName || item.name),
-  ...item,
-}));
+const allData: typeof data = [...data, ...additionalData].map((group) => {
+  return {
+    title: group.title,
+    items: group?.items?.map((item) => ({
+      image: getImage(item.componentName || item.name),
+      ...item,
+    })),
+  };
+});
 
 export const ComponentsGridWithData = () => {
   return <ComponentsGrid data={allData} />;

@@ -39,15 +39,15 @@ class GenerateCommand extends Command {
         componentsInfoBuild(srcPath).then(() =>
           this.log(logSymbols.success, 'component info generated'),
         ),
-        // iconsTransformed(ignore, srcPath).then(() =>
-        //   this.log(logSymbols.success, 'icons copied & transformed'),
-        // ),
-        // iconsFileTransformed(ignore, srcPath).then(() =>
-        //   this.log(logSymbols.success, 'fileIcons copied & transformed'),
-        // ),
-        // responsesImagesTransformed(ignore, srcPath).then(() =>
-        //   this.log(logSymbols.success, 'responsesImages copied & transformed'),
-        // ),
+        iconsTransformed(ignore, srcPath).then(() =>
+          this.log(logSymbols.success, 'icons copied & transformed'),
+        ),
+        iconsFileTransformed(ignore, srcPath).then(() =>
+          this.log(logSymbols.success, 'fileIcons copied & transformed'),
+        ),
+        responsesImagesTransformed(ignore, srcPath).then(() =>
+          this.log(logSymbols.success, 'responsesImages copied & transformed'),
+        ),
       ]);
       await this.safeInvokeHook(afterBuild);
     } catch (err) {

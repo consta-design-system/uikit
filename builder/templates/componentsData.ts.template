@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { DataItem } from './types';
+import { Data } from './types';
 
 #imports#
 
-export const data: DataItem[] = #data#
+export const data: Data = #data#
 
 export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
   #imageMap#

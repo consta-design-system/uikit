@@ -55,7 +55,7 @@ const getComponentData = (folderName) => {
 };
 
 async function processMdxFiles(array) {
-  const data = [];
+  const data = [{ items: [] }];
   let imports = '';
   let imageMap = '';
 
@@ -70,7 +70,7 @@ async function processMdxFiles(array) {
         continue;
       }
 
-      data.push({
+      data[0].items.push({
         name: name,
         componentName: componentName,
         url,
@@ -92,8 +92,6 @@ async function processMdxFiles(array) {
         fileName: imageComponentName,
         svgo: true,
       });
-
-      console.log(folderName);
 
       imports += `import ${imageComponentName} from './images/${imageComponentName}';\n`;
       imageMap += `${componentName}: ${imageComponentName},\n`;
