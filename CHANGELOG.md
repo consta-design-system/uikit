@@ -1,5 +1,21 @@
 # Changelog
 
+## v3.9.2 (10/11/2021)
+Важное из обновления:
+- Дополнили документацию по компонентам `ProgressStepBar` и `TextField`
+- Добавили таблицу возможность указывать минимальную ширину столбца.
+- Исправили баг с отображением "Не найдено" в `Combobox`
+
+---
+- [chore(storybook): automatic assembly of overview page (#1676)](https://github.com/gazprom-neft/consta-uikit/commit/cd5d4cf84b3f20f806345a211d8301f9a0c574ff) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Table): add minColumnWidth prop (#1727)](https://github.com/gazprom-neft/consta-uikit/commit/e9f8d2ca70779e11f38f147fe7490e475f794b1e) - [@vlzelensky](https://github.com/vlzelensky)
+- [docs(TextField): review docs, add type=number (#1725)](https://github.com/gazprom-neft/consta-uikit/commit/3eeb425b7ac563f60c16071888d42af114340a8d) - [@arhayka](https://github.com/arhayka)
+- [fix(Combobox): fix bug with notFoundLabel (#1728)](https://github.com/gazprom-neft/consta-uikit/commit/8857af9aced15b304a915778ff203abbbbbdbc98) - [@N1MBER](https://github.com/N1MBER)
+- [fix(ContextMenu): edit getOnClick type (#1722)](https://github.com/gazprom-neft/consta-uikit/commit/000c969fb97c4ae45e265611119785e71f897b21) - [@gizeasy](https://github.com/gizeasy)
+- [docs(ProgressStepBar): edit docs, add examples (#1703)](https://github.com/gazprom-neft/consta-uikit/commit/e0b1b91c27d52e838a16ba89eac883b68b54f097) - [@arhayka](https://github.com/arhayka)
+
+--------------------
+
 ## v3.9.1 (03/11/2021)
 - [feat(Table): added control for table (#1716)](https://github.com/gazprom-neft/consta-uikit/commit/99d67aff670d2f499abcefc168eba73805ef3f16) - [@SergeyKatugin](https://github.com/SergeyKatugin)
 
@@ -413,9 +429,3 @@ _Обращаем внимание_: *версии компонентов обр
 - [chore(Prettier): add commit-formatting for mdx files (#970)](https://github.com/gazprom-neft/consta-uikit/commit/cb013105d6304c849cc6154b1bf4cc1b5d99acd6) - [@azhadanov](https://github.com/azhadanov)
 - [chore(deps): bump elliptic from 6.5.3 to 6.5.4 (#969)](https://github.com/gazprom-neft/consta-uikit/commit/a54a7c4d38f09e5ef319be01fd35f010fb35403d) - [@dependabot[bot]](https://github.com/dependabot[bot])
 - [chore(CODEOWNERS): update (#960)](https://github.com/gazprom-neft/consta-uikit/commit/4af8e14ff9735804d2b3e67f8eae207086eadf2e) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v1.11.6 (03/03/2021)
-- [docs(components): fix some links (#884)](https://github.com/gazprom-neft/consta-uikit/commit/5bb19e3be64943f8b50c9c3f1fb083ab03ac61c1) - [@azhadanov](https://github.com/azhadanov)
-- [docs(Theme): add doc for creating custom preset (#856)](https://github.com/gazprom-neft/consta-uikit/commit/2c921381f4ce0a35fe07a09ccf4c104fa296ba5c) - [@kolebayev](https://github.com/kolebayev)
