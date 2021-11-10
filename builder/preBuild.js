@@ -3,6 +3,7 @@ const { Command, flags } = require('@oclif/command');
 const logSymbols = require('log-symbols');
 
 const { iconsTransformed, iconsFileTransformed, responsesImagesTransformed } = require('./helpers');
+const { componentsInfoBuild } = require('./helpers/componentsInfoBuild');
 
 class GenerateCommand extends Command {
   async safeInvokeHook(hook) {
@@ -35,6 +36,9 @@ class GenerateCommand extends Command {
 
     try {
       await Promise.all([
+        componentsInfoBuild(srcPath).then(() =>
+          this.log(logSymbols.success, 'component info generated'),
+        ),
         iconsTransformed(ignore, srcPath).then(() =>
           this.log(logSymbols.success, 'icons copied & transformed'),
         ),

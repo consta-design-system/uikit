@@ -14,6 +14,7 @@ const postcss = require('postcss');
 const { react } = require('@bem/sdk.naming.presets');
 const createMatch = require('@bem/sdk.naming.cell.match');
 const svgr = require('@svgr/core').default;
+const { svgParse } = require('./svgParse');
 
 // TODO: https://github.com/bem/bem-sdk/issues/385
 const enhancedReactNaming = {
@@ -124,42 +125,6 @@ const createFileIconsStories = async (svgComponents, src) => {
 
   const jsCode = template.replace(/#imports#/g, imports).replace(/#icons#/g, icons);
   const jsPatch = `${src}/fileIcons/FileIcon/__stories__/FileIconsGallery/FileIconsGallery.tsx`;
-  await ensureDir(dirname(jsPatch));
-  await writeFile(jsPatch, jsCode);
-};
-
-const svgFillRegexp = /(fill|FILL)=\"[a-zA-Z0-9#_.-]*\"/gm;
-
-const svgCleanFill = (svg) => svg.replace(svgFillRegexp, '');
-
-const svgParse = async ({ componentName, path, pathOutdir, fileName, cleanFill, svgo = true }) => {
-  let svg = await readFile(path, 'utf8');
-
-  if (cleanFill) {
-    svg = svgCleanFill(svg);
-  }
-
-  const jsCode = await svgr(
-    svg,
-    {
-      plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx', '@svgr/plugin-prettier'],
-      typescript: true,
-      dimensions: false,
-      svgo,
-      svgoConfig: {
-        plugins: [
-          {
-            prefixIds: {
-              prefix: `Svg${fileName}`,
-            },
-          },
-          { cleanupIDs: false },
-        ],
-      },
-    },
-    { componentName },
-  );
-  const jsPatch = `${pathOutdir}/${fileName}.tsx`;
   await ensureDir(dirname(jsPatch));
   await writeFile(jsPatch, jsCode);
 };
