@@ -27,7 +27,7 @@ export const TextFieldExampleViewDisabled = () => {
 
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <TextField placeholder="Самое обычное поле" disabled value={value} onChange={handleChange} />
+      <TextField placeholder="Неактивное поле" disabled value={value} onChange={handleChange} />
     </StoryBookExample>
   );
 };

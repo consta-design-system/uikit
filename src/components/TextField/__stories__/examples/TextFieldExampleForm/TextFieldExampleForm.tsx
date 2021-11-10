@@ -10,9 +10,9 @@ export const TextFieldExampleFormBasic = () => {
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <TextField placeholder="Default" value={value} onChange={handleChange} />
-      <TextField form="brick" placeholder="Brick" value={value} onChange={handleChange} />
-      <TextField form="round" placeholder="Round" value={value} onChange={handleChange} />
+      <TextField placeholder="Форма default" value={value} onChange={handleChange} />
+      <TextField form="brick" placeholder="Форма brick" value={value} onChange={handleChange} />
+      <TextField form="round" placeholder="Форма round" value={value} onChange={handleChange} />
     </StoryBookExample>
   );
 };

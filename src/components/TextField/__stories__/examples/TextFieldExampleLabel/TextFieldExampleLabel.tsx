@@ -16,15 +16,15 @@ export const TextFieldExampleLabel = () => {
       <TextField
         onChange={handleChange}
         value={value}
-        placeholder="Top"
-        label="Top"
+        placeholder="Здесь лейбл сверху"
+        label="Лейбл"
         labelPosition="top"
       />
       <TextField
         onChange={handleChange}
         value={value}
-        placeholder="Left "
-        label="Left"
+        placeholder="Здесь лейбл слева"
+        label="Лейбл"
         labelPosition="left"
       />
     </div>
