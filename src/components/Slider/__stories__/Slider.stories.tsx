@@ -64,7 +64,7 @@ export function Playground() {
   useEffect(() => {
     if (range) setValue([10, 40]);
     else setValue(knobValue);
-  }, [range]);
+  }, [range, knobValue]);
 
   const onChange = useCallback(
     (e: TextFieldOnChangeArguments) => {

@@ -77,41 +77,46 @@ export const getValidValue = (
   max: number,
   step?: number | number[],
 ) => {
-  if (value > max) return max;
-  if (value < min) return min;
-  if (!Array.isArray(step)) {
-    const division = step?.toString().split('.')[1];
-    const stepValue = step || 1;
-    return Math.ceil(Number(value.toFixed(division ? division.length : 0)) / stepValue) * stepValue;
-  }
-  let resultValue = value;
-  let stepsArr = step;
-  if (step[0] !== min) {
-    stepsArr = [min, ...stepsArr];
-  } else if (step[step.length - 1] !== max) {
-    stepsArr = [...stepsArr, max];
-  }
-  stepsArr.forEach((stepPoint, index) => {
-    let minValue = min;
-    let maxValue = max;
-    if (index === 0) {
-      maxValue = stepsArr[index + 1];
-    } else if (index === stepsArr.length - 1) {
-      minValue = stepPoint;
-      maxValue = max;
-    } else {
-      maxValue = stepsArr[index + 1];
-      minValue = stepPoint;
+  if (typeof value === 'number') {
+    if (value > max) return max;
+    if (value < min) return min;
+    if (!Array.isArray(step)) {
+      const division = step?.toString().split('.')[1];
+      const stepValue = step || 1;
+      return (
+        Math.ceil(Number(value.toFixed(division ? division.length : 0)) / stepValue) * stepValue
+      );
     }
-    if (value <= maxValue && value >= minValue) {
-      if ((maxValue + minValue) / 2 > value) {
-        resultValue = minValue;
+    let resultValue = value;
+    let stepsArr = step;
+    if (step[0] !== min) {
+      stepsArr = [min, ...stepsArr];
+    } else if (step[step.length - 1] !== max) {
+      stepsArr = [...stepsArr, max];
+    }
+    stepsArr.forEach((stepPoint, index) => {
+      let minValue = min;
+      let maxValue = max;
+      if (index === 0) {
+        maxValue = stepsArr[index + 1];
+      } else if (index === stepsArr.length - 1) {
+        minValue = stepPoint;
+        maxValue = max;
       } else {
-        resultValue = maxValue;
+        maxValue = stepsArr[index + 1];
+        minValue = stepPoint;
       }
-    }
-  });
-  return resultValue;
+      if (value <= maxValue && value >= minValue) {
+        if ((maxValue + minValue) / 2 > value) {
+          resultValue = minValue;
+        } else {
+          resultValue = maxValue;
+        }
+      }
+    });
+    return resultValue;
+  }
+  return value;
 };
 
 export const getValueByPosition = (

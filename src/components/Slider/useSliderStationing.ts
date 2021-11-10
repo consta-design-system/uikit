@@ -105,6 +105,12 @@ export const useSliderStationing: UseSliderStationing = (
     return sizesArray;
   };
 
+  const getValidValue = (value: number) => {
+    if (value < min) return min;
+    if (value > max) return max;
+    return value;
+  };
+
   const calculateButtonPositions = useCallback(() => {
     const absoluteSize = Math.abs(max - min);
     let defaultPaddingValue = 0;
@@ -123,8 +129,8 @@ export const useSliderStationing: UseSliderStationing = (
       if (typeof value === 'number' || Array.isArray(value)) {
         positions.push(
           typeof value === 'number'
-            ? (1 - (max - value + defaultPaddingValue) / absoluteSize) * 100
-            : (1 - (max - value[index] + defaultPaddingValue) / absoluteSize) * 100,
+            ? (1 - (max - getValidValue(value) + defaultPaddingValue) / absoluteSize) * 100
+            : (1 - (max - getValidValue(value[index]) + defaultPaddingValue) / absoluteSize) * 100,
         );
       }
     });
