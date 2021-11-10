@@ -141,6 +141,7 @@ export type TableColumn<T extends TableRow> = {
   width?: ColumnWidth;
   mergeCells?: boolean;
   position?: Position;
+  hidden?: boolean;
   control?: ({ column }: TableControl<T>) => React.ReactNode;
 } & (GroupColumnAddition<T> | SingleColumnAddition<T>);
 

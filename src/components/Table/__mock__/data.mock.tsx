@@ -1166,26 +1166,30 @@ enum CustomIDs {
 
 export { CustomIDs };
 
-const rowsForCustomTagLabelFunction = [
+export const rowsForCustomTagLabelFunction = [
   {
     id: 'row1',
     [CustomIDs.fullName]: 'Воронин Ян Фёдорович',
     [CustomIDs.yearOfRegistration]: 2000,
+    phone: 79002332120,
   },
   {
     id: 'row2',
     [CustomIDs.fullName]: 'Иванов Иван Иванович',
     [CustomIDs.yearOfRegistration]: 2018,
+    phone: 79002332120,
   },
   {
     id: 'row3',
     [CustomIDs.fullName]: 'Новиков Никита Максимович',
     [CustomIDs.yearOfRegistration]: 2021,
+    phone: 79002332120,
   },
   {
     id: 'row4',
     [CustomIDs.fullName]: 'Крабов Виктор Дмитриевич',
     [CustomIDs.yearOfRegistration]: 2009,
+    phone: 79002332120,
   },
 ];
 
@@ -1246,61 +1250,31 @@ export const partOfTableDataForCustomTagLabelFunction = {
   ],
 };
 
-export const withControlTableMock = {
+export const withControlTableMock: TableProps<typeof rowsForCustomTagLabelFunction[number]> = {
   columns: [
     {
       title: 'Имя',
       accessor: CustomIDs.fullName,
       sortable: true,
-      filterer: rangeFilterer,
-      component: {
-        name: TableNumberFilter,
-      },
+      align: 'right',
       control: () => <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconAdd} />,
     },
     {
       title: 'Год регистрации',
       accessor: CustomIDs.yearOfRegistration,
       sortable: true,
-      filterer: rangeFilterer,
-      component: {
-        name: TableNumberFilter,
-      },
+      align: 'right',
       control: () => <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconRemove} />,
+    },
+    {
+      title: 'Телефон',
+      align: 'right',
+      accessor: 'phone',
+      control: () => <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconAdd} />,
     },
   ],
   rows: rowsForCustomTagLabelFunction,
   filters: [
-    {
-      id: CustomIDs.fullName,
-      name: 'Выбранные инициалы: ',
-      field: CustomIDs.fullName,
-      filterer: customFilters[0].filterer,
-      component: {
-        name: TableTextFilter,
-        props: {
-          withSearch: true,
-          items: [
-            {
-              name: rowsForCustomTagLabelFunction[0].fullName,
-              value: rowsForCustomTagLabelFunction[0].fullName,
-            },
-            {
-              name: rowsForCustomTagLabelFunction[1].fullName,
-              value: rowsForCustomTagLabelFunction[1].fullName,
-            },
-            {
-              name: rowsForCustomTagLabelFunction[2].fullName,
-              value: rowsForCustomTagLabelFunction[2].fullName,
-            },
-            {
-              name: rowsForCustomTagLabelFunction[3].fullName,
-              value: rowsForCustomTagLabelFunction[3].fullName,
-            },
-          ],
-        },
-      },
-    },
     {
       id: CustomIDs.yearOfRegistration,
       name: 'Год регистрации: ',
@@ -1311,4 +1285,21 @@ export const withControlTableMock = {
       },
     },
   ],
+};
+
+export const withHiddenColumnTableMock: TableProps<typeof rowsForCustomTagLabelFunction[number]> = {
+  columns: [
+    {
+      title: 'Имя',
+      accessor: CustomIDs.fullName,
+      sortable: true,
+    },
+    {
+      title: 'Год регистрации',
+      accessor: CustomIDs.yearOfRegistration,
+      sortable: true,
+      hidden: true,
+    },
+  ],
+  rows: rowsForCustomTagLabelFunction,
 };
