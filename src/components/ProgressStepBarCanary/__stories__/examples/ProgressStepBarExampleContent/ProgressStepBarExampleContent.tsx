@@ -29,7 +29,7 @@ export const ProgressStepBarExampleContent = () => {
 
   const steps = [
     {
-      label: 'Пункт 1',
+      label: 'Первый шаг',
       point: 1,
       status,
       lineStatus: 'normal',
@@ -37,21 +37,21 @@ export const ProgressStepBarExampleContent = () => {
       onClick: () => clickAction(),
     },
     {
-      label: 'Пункт 2',
+      label: 'Второй шаг',
       point: 2,
       status,
       lineStatus: 'normal',
       onClick: () => clickAction(),
     },
     {
-      label: 'Пункт 3',
+      label: 'Третий шаг',
       point: 3,
       status,
       lineStatus: 'normal',
       onClick: () => clickAction(),
     },
     {
-      label: 'Пункт 4',
+      label: 'Четвёртый шаг',
       point: 4,
       status,
       content: <StepContent />,
