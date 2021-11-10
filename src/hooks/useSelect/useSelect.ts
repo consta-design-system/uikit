@@ -176,13 +176,12 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   }, [filteredOptions, groups, getItemGroupKey, getGroupKey, sortGroups, optionForCreate]);
 
   const notFound = useMemo(() => {
-    let flag = !params.onCreate;
+    let flag = false;
     if (searchValue.length > 0) {
-      visibleItems.forEach((group) => {
-        if (isOptionForCreate(group) || group.items.length > 0 || group.group) {
-          flag = false;
-        }
-      });
+      flag =
+        visibleItems.filter(
+          (group) => isOptionForCreate(group) || group.items.length > 0 || group.group,
+        ).length === 0 || !params.onCreate;
     }
     return flag;
   }, [visibleItems]);
