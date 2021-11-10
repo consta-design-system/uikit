@@ -152,6 +152,7 @@ export type TableProps<T extends TableRow> = {
   size?: Size;
   stickyHeader?: boolean;
   stickyColumns?: number;
+  minColumnWidth?: number;
   isResizable?: boolean;
   activeRow?: ActiveRow;
   verticalAlign?: VerticalAlign;
@@ -245,6 +246,7 @@ const InternalTable = <T extends TableRow>(
     isResizable = false,
     stickyHeader = false,
     stickyColumns = 0,
+    minColumnWidth = 150,
     activeRow,
     verticalAlign = 'top',
     headerVerticalAlign = 'center',
@@ -455,7 +457,7 @@ const InternalTable = <T extends TableRow>(
     onRowCreate && onRowCreate({ e, id, index });
 
   const handleColumnResize = (idx: number, delta: number): void => {
-    const columnMinWidth = Math.min(150, initialColumnWidths[idx]);
+    const columnMinWidth = Math.min(minColumnWidth, initialColumnWidths[idx]);
     const prevColumnWidth = resizedColumnWidths[idx] || initialColumnWidths[idx];
     const newColumnWidth = Math.max(columnMinWidth, prevColumnWidth + delta);
 
