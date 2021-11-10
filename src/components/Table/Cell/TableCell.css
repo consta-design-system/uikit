@@ -34,12 +34,19 @@
   }
 
   &_isSortable,
-  &_isFilterable {
+  &_isFilterable,
+  &_isControl {
     --buttons-wrapper-size: var(--space-xl);
   }
 
-  &_isSortable&_isFilterable {
+  &_isSortable&_isFilterable,
+  &_isSortable&_isControl,
+  &_isFilterable&_isControl {
     --buttons-wrapper-size: var(--space-4xl);
+  }
+
+  &_isSortable&_isFilterable&_isControl {
+    --buttons-wrapper-size: var(--space-5xl);
   }
 
   &_stickyOnTop,
