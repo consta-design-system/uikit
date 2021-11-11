@@ -2,7 +2,7 @@ import React from 'react';
 
 import { defaultGetItemLabel, SelectProps } from '../../Select/helpers';
 import { COMPONENT_NAME } from '../../SelectComponents/cnSelect';
-import { EventInterceptorHandler } from '../EventInterceptor';
+import { EventInterceptorHandler, getDataAnalyticsAttribute } from '../EventInterceptor';
 
 export const useSelectEventsHandler = <PROPS extends SelectProps>(
   props: PROPS,
@@ -24,7 +24,7 @@ export const useSelectEventsHandler = <PROPS extends SelectProps>(
           value: newProps.value,
           pageURL: window.location.href,
           DOMRef: controlRef.current,
-          customParams: newProps?.customAnalyticsData,
+          dataAnalyticAttributes: getDataAnalyticsAttribute(newProps),
         },
       };
       handler!(value);

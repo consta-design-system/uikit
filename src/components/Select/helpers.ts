@@ -69,11 +69,6 @@ export type SelectProps<ITEM = DefaultItem, GROUP = DefaultGroup> = PropsWithHTM
     label?: string;
     labelPosition?: 'top' | 'left';
     caption?: string;
-    customAnalyticsData?: {
-      name: string;
-      type: 'STRING' | 'INT' | 'FLOAT' | 'BOOLEAN' | 'DATE';
-      value: string | number | boolean;
-    }[];
   },
   HTMLDivElement
 > &
