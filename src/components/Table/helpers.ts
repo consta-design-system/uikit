@@ -198,14 +198,17 @@ export const useHeaderData = <T extends TableRow>(
   const headerColumnsHeights: Array<number> = Object.values(headerRowsRefs.current)
     .filter(isNotNil)
     .map((ref) => ref.getBoundingClientRect().height);
-  const flattenedHeaders = headers.flat().map((column, index) => ({
-    ...column,
-    position: {
-      ...column.position,
-      smallTextSize: headers.length > 1 && column.position.level === headers.length - 1,
-      height: headerColumnsHeights[index] || 0,
-    },
-  }));
+  const flattenedHeaders = headers
+    .flat()
+    .filter((column: TableColumn<T>) => !column.hidden)
+    .map((column, index) => ({
+      ...column,
+      position: {
+        ...column.position,
+        smallTextSize: headers.length > 1 && column.position.level === headers.length - 1,
+        height: headerColumnsHeights[index] || 0,
+      },
+    }));
   const headerRowsHeights = headers.map((arr, index) => {
     return Math.min.apply(
       null,
