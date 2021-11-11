@@ -15,7 +15,7 @@ import {
   TextFieldPropView,
   TextFieldPropWidth,
 } from '../../TextField/TextField';
-import { EventInterceptorHandler, getDataAnalyticsAttribute } from '../EventInterceptor';
+import { EventInterceptorHandler } from '../EventInterceptor';
 
 export type Props = {
   className?: string;
@@ -80,7 +80,7 @@ export const useTextFieldEventsHandler = <P extends TextFieldProps>(
         pageURL: window.location.href,
         DOMRef: textFieldRef.current,
         value: newProps.value,
-        dataAnalyticAttributes: getDataAnalyticsAttribute(newProps),
+        props: newProps,
       },
     };
     if (inputChanged) {

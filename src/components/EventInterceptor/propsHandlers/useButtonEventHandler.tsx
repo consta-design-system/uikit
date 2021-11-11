@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { COMPONENT_NAME, Props } from '../../Button/Button';
-import { EventInterceptorHandler, getDataAnalyticsAttribute } from '../EventInterceptor';
+import { EventInterceptorHandler } from '../EventInterceptor';
 
 export type ButtonProps = Props;
 
@@ -21,7 +21,7 @@ export const useButtonEventHandler = <T extends ButtonProps>(
         text: (e.currentTarget as HTMLButtonElement).innerText,
         pageURL: e.currentTarget.baseURI,
         DOMRef: ref.current,
-        dataAnalyticAttributes: getDataAnalyticsAttribute(newProps),
+        props: newProps,
       },
     };
     handler!(value);

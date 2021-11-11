@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { COMPONENT_NAME, SnackBar } from '../../SnackBar/SnackBar';
-import { EventInterceptorHandler, getDataAnalyticsAttribute } from '../EventInterceptor';
+import { EventInterceptorHandler } from '../EventInterceptor';
 
 type SnackBarProps = Parameters<typeof SnackBar>[0];
 
@@ -20,7 +20,7 @@ export const useSnackBarEventsHandler = <P extends SnackBarProps>(
           pageURL: window.location.href,
           DOMRef: document.getElementsByClassName(COMPONENT_NAME)[0],
           items: newProps.items,
-          dataAnalyticAttributes: getDataAnalyticsAttribute(newProps),
+          props: newProps,
         },
       };
 

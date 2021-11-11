@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Checkbox, COMPONENT_NAME } from '../../Checkbox/Checkbox';
-import { EventInterceptorHandler, getDataAnalyticsAttribute } from '../EventInterceptor';
+import { EventInterceptorHandler } from '../EventInterceptor';
 
 type CheckboxProps = Parameters<typeof Checkbox>[0];
 
@@ -22,7 +22,7 @@ export const useCheckboxEventsHandler = <P extends CheckboxProps>(
         checked,
         pageURL: window.location.href,
         DOMRef: checkboxRef.current,
-        dataAnalyticAttributes: getDataAnalyticsAttribute(newProps),
+        props: newProps,
       },
     };
     handler!(value);
