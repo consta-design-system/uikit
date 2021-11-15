@@ -22,6 +22,7 @@ export const useCheckboxEventsHandler = <P extends CheckboxProps>(
         checked,
         pageURL: window.location.href,
         DOMRef: checkboxRef.current,
+        props: newProps,
       },
     };
     handler!(value);
