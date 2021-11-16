@@ -53,10 +53,7 @@ const defaultKnobs = () => ({
   view: select('view', textFieldPropView, textFieldPropViewDefault),
   disabled: boolean('disabled', false),
   placeholder: text('placeholder', datePickerPropPlaceholderDefault),
-  leftSideType: select('leftSideType', ['icon', 'text', 'false'], 'false'),
-  leftSideText: text('leftSideText', 'from'),
-  rightSideType: select('rightSideType', ['icon', 'text', 'false'], 'false'),
-  rightSideText: text('rightSideText', 'text'),
+  withIcon: boolean('withIcon', false),
   minDate: date('minDate', minDateDefault),
   maxDate: date('maxDate', maxDateDefault),
   format: text('format', datePickerPropFormatDefault),
@@ -78,10 +75,7 @@ export function Playground() {
     size,
     view,
     placeholder,
-    leftSideType,
-    leftSideText,
-    rightSideType,
-    rightSideText,
+    withIcon,
     disabled,
     withEvents,
     locale,
@@ -90,30 +84,19 @@ export function Playground() {
     separator,
     dropdownForm,
     type,
+    minDate,
+    maxDate,
   } = defaultKnobs();
 
   const [value, setValue] = useState<DatePickerPropValue<typeof type>>(null);
 
   const currentDay = new Date();
 
-  const leftSideSelect = {
-    text: leftSideText,
-    icon: IconCalendar,
-    false: undefined,
-  };
-
-  const rightSideSelect = {
-    text: rightSideText,
-    icon: IconCalendar,
-    false: undefined,
-  };
-
   const events = withEvents
     ? [startOfWeek(currentDay, { locale: ruLocale }), currentDay, addDays(currentDay, 2)]
     : undefined;
 
-  const leftSide = leftSideSelect[leftSideType];
-  const rightSide = rightSideSelect[rightSideType];
+  const icon = withIcon ? IconCalendar : undefined;
 
   useEffect(() => {
     setValue(null);
@@ -132,14 +115,19 @@ export function Playground() {
         disabled={disabled}
         size={size}
         onChange={({ value }) => setValue(value)}
-        leftSide={leftSide}
-        rightSide={rightSide}
+        rightSide={icon}
         events={events}
         locale={getSizeByMap(localeMap, locale)}
         dateTimeView={dateTimeView}
         format={format}
         separator={separator}
         dropdownForm={dropdownForm}
+        minDate={new Date(minDate)}
+        maxDate={new Date(maxDate)}
+        {...(type === 'date-range' && {
+          endFieldRightSide: icon,
+          startFieldRightSide: icon,
+        })}
       />
     </div>
   );

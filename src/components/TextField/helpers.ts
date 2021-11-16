@@ -77,51 +77,52 @@ export type TextFieldPropRightSide<TYPE> = TYPE extends 'number'
       rightSide?: string | React.FC<IconProps>;
     };
 
-export type Props<TYPE extends string> = {
-  className?: string;
-  value?: TextFieldPropValue;
-  cols?: number;
-  onChange?: TextFieldPropOnChange;
-  id?: TextFieldPropId;
-  name?: TextFieldPropName;
-  type?: TYPE;
-  disabled?: boolean;
-  maxLength?: number;
-  size?: TextFieldPropSize;
-  view?: TextFieldPropView;
-  form?: TextFieldPropForm;
-  state?: TextFieldPropStatus;
-  status?: TextFieldPropStatus;
-  width?: TextFieldPropWidth;
-  onFocus?: React.FocusEventHandler<HTMLElement>;
-  onBlur?: React.FocusEventHandler<HTMLElement>;
-  autoFocus?: boolean;
-  placeholder?: string;
-  leftSide?: string | React.FC<IconProps>;
-  rightSide?: string | React.FC<IconProps>;
-  withClearButton?: boolean;
-  autoComplete?: TextFieldPropAutoComplete;
-  max?: number | string;
-  min?: number | string;
-  readOnly?: boolean;
-  required?: boolean;
-  step?: number | string;
-  tabIndex?: number;
-  inputRef?: React.Ref<HTMLTextAreaElement | HTMLInputElement>;
-  ariaLabel?: string;
-  iconSize?: IconPropSize;
-  children?: never;
-  label?: string;
-  caption?: string;
-  labelPosition?: 'top' | 'left';
-  focused?: boolean;
-} & TextFieldPropsTextareaType<TYPE> &
+export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
+  {
+    className?: string;
+    value?: TextFieldPropValue;
+    cols?: number;
+    onChange?: TextFieldPropOnChange;
+    id?: TextFieldPropId;
+    name?: TextFieldPropName;
+    type?: TYPE;
+    disabled?: boolean;
+    maxLength?: number;
+    size?: TextFieldPropSize;
+    view?: TextFieldPropView;
+    form?: TextFieldPropForm;
+    state?: TextFieldPropStatus;
+    status?: TextFieldPropStatus;
+    width?: TextFieldPropWidth;
+    onFocus?: React.FocusEventHandler<HTMLElement>;
+    onBlur?: React.FocusEventHandler<HTMLElement>;
+    autoFocus?: boolean;
+    placeholder?: string;
+    leftSide?: string | React.FC<IconProps>;
+    rightSide?: string | React.FC<IconProps>;
+    withClearButton?: boolean;
+    autoComplete?: TextFieldPropAutoComplete;
+    max?: number | string;
+    min?: number | string;
+    readOnly?: boolean;
+    required?: boolean;
+    step?: number | string;
+    tabIndex?: number;
+    inputRef?: React.Ref<HTMLTextAreaElement | HTMLInputElement>;
+    ariaLabel?: string;
+    iconSize?: IconPropSize;
+    children?: never;
+    label?: string;
+    caption?: string;
+    labelPosition?: 'top' | 'left';
+    focused?: boolean;
+  },
+  HTMLDivElement
+> &
+  TextFieldPropsTextareaType<TYPE> &
   TextFieldPropRightSide<TYPE>;
 
-export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
-  Props<TYPE>,
-  HTMLDivElement
->;
+// export type TextFieldProps<TYPE extends string> = PropsWithJsxAttributes<Props<TYPE>, 'div'>;
 
 export type TextFieldComponent = <TYPE extends string>(
   props: TextFieldProps<TYPE> & React.RefAttributes<HTMLElement>,
