@@ -4,6 +4,13 @@ import { PropOnChange, SliderValue, TrackPosition } from '../helper';
 
 export type ActiveButton = 'left' | 'right' | null | undefined;
 
+export type Stationing = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+};
+
 export type UseSliderProps<RANGE extends boolean = false> = {
   disabled: boolean;
   range?: RANGE;
@@ -12,6 +19,7 @@ export type UseSliderProps<RANGE extends boolean = false> = {
   max: number;
   step?: number | number[];
   onChange?: PropOnChange<RANGE>;
+  onAfterChange?: PropOnChange<RANGE>;
   sliderRef: React.RefObject<HTMLDivElement>;
   buttonRefs: React.RefObject<HTMLButtonElement>[];
 };
@@ -23,6 +31,7 @@ export type UseSliderValues = {
   onFocus: (e: React.FocusEvent<HTMLButtonElement>, button: ActiveButton) => void;
   stopListening: () => void;
   activeButton: ActiveButton;
+  currentValue: number | [number, number];
   popoverPosition: TrackPosition[];
 };
 
@@ -33,7 +42,7 @@ export const isRangeParams = (params: UseSliderProps<boolean>): params is UseSli
 export const isNotRangeParams = (
   params: UseSliderProps<boolean>,
 ): params is UseSliderProps<false> => {
-  return !!params.range;
+  return !params.range;
 };
 
 export const trackPosition = (
@@ -46,6 +55,13 @@ export const trackPosition = (
     };
   }
   return null;
+};
+
+export const getActiveValue = (value: number | [number, number], active: ActiveButton) => {
+  if (Array.isArray(value)) {
+    return active === 'left' ? value[0] : value[1];
+  }
+  return value;
 };
 
 export const detectActiveButton: (

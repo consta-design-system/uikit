@@ -3,13 +3,13 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Line, PropView } from './helper';
 
 type UseSliderStationing = (
-  value: number | number[] | undefined,
+  value: number | [number, number] | undefined,
   min: number,
   max: number,
   view: PropView,
   range: boolean | undefined,
   step: number | number[] | undefined,
-  buttonRefs: React.RefObject<HTMLButtonElement>[],
+  buttonRefs: [React.RefObject<HTMLButtonElement>, React.RefObject<HTMLButtonElement>],
   sliderLineRef: React.RefObject<HTMLDivElement>,
 ) => {
   lineSizes: Line[];
@@ -61,45 +61,52 @@ export const useSliderStationing: UseSliderStationing = (
   const calculateLines = () => {
     const sizesArray: Line[] = [];
     const absoluteSize = Math.abs(max - min);
-    if (view === 'default') {
-      if (!Array.isArray(value) && typeof value === 'number') {
-        sizesArray.push({
-          width: (1 - (max - value) / absoluteSize) * 100,
-          active: true,
-        });
-        sizesArray.push({
-          width: ((max - value) / absoluteSize) * 100,
-          active: false,
-        });
-      } else if (Array.isArray(value) && value) {
-        sizesArray.push({
-          width: ((value[0] - min) / absoluteSize) * 100,
-          active: false,
-        });
-        sizesArray.push({
-          width: ((value[1] - value[0]) / absoluteSize) * 100,
-          active: true,
-        });
-        sizesArray.push({
-          width: ((max - value[1]) / absoluteSize) * 100,
-          active: false,
-        });
-      } else {
-        sizesArray.push({
-          width: 100,
-          active: false,
+    if (typeof value !== 'undefined') {
+      if (view === 'default') {
+        if (!Array.isArray(value) && typeof value === 'number') {
+          sizesArray.push({
+            width: (1 - (max - value) / absoluteSize) * 100,
+            active: true,
+          });
+          sizesArray.push({
+            width: ((max - value) / absoluteSize) * 100,
+            active: false,
+          });
+        } else if (Array.isArray(value) && value) {
+          sizesArray.push({
+            width: ((value[0] - min) / absoluteSize) * 100,
+            active: false,
+          });
+          sizesArray.push({
+            width: ((value[1] - value[0]) / absoluteSize) * 100,
+            active: true,
+          });
+          sizesArray.push({
+            width: ((max - value[1]) / absoluteSize) * 100,
+            active: false,
+          });
+        } else {
+          sizesArray.push({
+            width: 100,
+            active: false,
+          });
+        }
+      } else if (typeof step !== 'undefined') {
+        getSteps(step, min, max).forEach((stepSize) => {
+          sizesArray.push({
+            width: (Math.abs(stepSize.max - stepSize.min) * 100) / absoluteSize,
+            active:
+              (typeof value === 'number' || Array.isArray(value)) &&
+              (range && Array.isArray(value)
+                ? stepSize.max > value[0] && stepSize.min < value[1]
+                : stepSize.max <= value),
+          });
         });
       }
-    } else if (typeof step !== 'undefined') {
-      getSteps(step, min, max).forEach((stepSize) => {
-        sizesArray.push({
-          width: (Math.abs(stepSize.max - stepSize.min) * 100) / absoluteSize,
-          active:
-            (typeof value === 'number' || Array.isArray(value)) &&
-            (range && Array.isArray(value)
-              ? stepSize.max > value[0] && stepSize.min < value[1]
-              : stepSize.max <= value),
-        });
+    } else {
+      sizesArray.push({
+        width: 100,
+        active: false,
       });
     }
     return sizesArray;

@@ -24,7 +24,7 @@
   }
 
   &-Tooltip {
-    z-index: 2;
     pointer-events: none;
+    transition: left 0.3s;
   }
 }

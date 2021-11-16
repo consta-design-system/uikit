@@ -12,8 +12,8 @@ import { SliderExampleTooltip } from './examples/SliderExampleTooltip/SliderExam
 import { SliderExampleLabel } from './examples/SliderExampleLabel/SliderExampleLabel';
 import { SliderExampleDisabled } from './examples/SliderExampleDisabled/SliderExampleDisabled';
 import { SliderExampleContent } from './examples/SliderExampleContent/SliderExampleContent';
-import { SliderExampleWidth } from './examples/SliderExampleWidth/SliderExampleWidth';
 import { SliderExampleSize } from './examples/SliderExampleSize/SliderExampleSize';
+import { SliderExampleTooltipFormatter } from './examples/SliderExampleTooltipFormatter/SliderExampleTooltipFormatter';
 
 # Slider
 
@@ -22,10 +22,9 @@ import { SliderExampleSize } from './examples/SliderExampleSize/SliderExampleSiz
 - [Слайдер](#слайдер)
 - [Вид](#вид)
   - [Вид линии](#вид-линии)
-  - [Ширина](#ширина)
 - [Размер](#размер)
 - [Варианты](#варианты)
-  - [Одно значение](#оодно-значение)
+  - [Одно значение](#одно-значение)
   - [Диапозон](#диапозон)
 - [Шаги](#шаги)
 - [Подсказка](#подсказка)
@@ -83,18 +82,6 @@ export const SliderExampleViewDivision = () => {
   );
 };
 ```
-
-### Ширина
-
-За ширину отвечает свойство `width`, которое принимает значения `full`, `default`.
-
-#### Default
-
-<SliderExampleBasic />
-
-#### Full
-
-<SliderExampleWidth />
 
 ## Размер
 
@@ -246,6 +233,30 @@ export const SliderExampleTooltip = () => {
 };
 ```
 
+#### Кастомная подсказка
+
+<SliderExampleTooltipFormatter />
+
+```tsx
+export const SliderExampleTooltipFormatter = () => {
+  const [value, setValue] = useState<[number, number]>([20, 50]);
+
+  return (
+    <div className={cnDocsDecorator('Section')}>
+      <Slider
+        step={5}
+        range
+        label={`Значение ${value[0]}-${value[1]}`}
+        tooltipFormatter={(value) => `${value}%`}
+        onChange={({ value }) => setValue(value)}
+        value={value}
+        withTooltip
+      />
+    </div>
+  );
+};
+```
+
 ### Лэйбл и подпись
 
 Для того чтобы указать лэйбл для компонента необходимо использовать свойство
@@ -289,25 +300,6 @@ export const SliderExampleLabel = () => {
 export const SliderExampleContent = () => {
   const [value, setValue] = useState<number[]>([20, 50]);
 
-  const onChange = useCallback(
-    (e: TextFieldOnChangeArguments) => {
-      const newVal = Number(e.value);
-      setValue([newVal, value[1]]);
-    },
-    [value],
-  );
-
-  const right = ({ value }: { value: number | number[] }) => (
-    <TextField
-      min={0}
-      max={100}
-      type="number"
-      onChange={onChange}
-      step={5}
-      value={(Array.isArray(value) ? value[1] : value).toString()}
-    />
-  );
-
   const left = <IconSettings view="secondary" />;
 
   return (
@@ -320,7 +312,7 @@ export const SliderExampleContent = () => {
       width="full"
       view="division"
       leftSide={left}
-      rightSide={right}
+      rightSide={'input'}
       onChange={({ value }) => setValue(value)}
     />
   );
@@ -357,30 +349,23 @@ export type PropOnChange<RANGE> = (prop: {
   e?: Event | React.TouchEvent | React.MouseEvent | React.KeyboardEvent;
   value: SliderValue<RANGE>;
 }) => void;
-
-export type PropSide =
-  | React.ReactNode
-  | (({ value }: { value?: number | number[] }) => React.ReactElement);
-
-export type SliderValue<RANGE> = RANGE extends true ? number[] : number;
 ```
 
-| Свойство                                       | Тип или варианты значения                       | По умолчанию | Описание                                         |
-| ---------------------------------------------- | ----------------------------------------------- | ------------ | ------------------------------------------------ |
-| [`view?`](#вид-линии)                          | `default` , `division`                          | `default`    | Внешний вид линии слайдера                       |
-| [`width?`](#ширина)                            | `default` , `full`                              | `default`    | Занимаемое слайдером пространство                |
-| [`disabled?`](#неактивный-ползунок)            | `boolean`                                       | `false`      | Делает компонент неактивным                      |
-| [`status?`](#лэйбл-и-подпись)                  | `'', 'alert', 'success', 'warning'`             | -            | Статус поля                                      |
-| [`size?`](#размер)                             | `'xs'`, `'s'` , `'m'` , `'l'`                   | `'m'`        | Размер компонента                                |
-| [`step?`](#шаги)                               | `number` <code>&#124;</code> `[number, number]` | `1`          | Шаг изменения                                    |
-| [`range?`](#варианты)                          | `boolean`                                       | -            | Выбор числового промежутка                       |
-| [`label?`](#лэйбл-и-подпись)                   | `string`                                        | -            | Лэйбл                                            |
-| [`caption?`](#лэйбл-и-подпись)                 | `string`                                        | -            | Подпись                                          |
-| [`value?`](#варианты)                          | `SliderValue<RANGE>`                            | -            | Значение или масив значений                      |
-| [`onChange?`](#варианты)                       | `PropOnChange<RANGE>`                           | -            | Обработчик события изменения значения компонента |
-| [`withTooltip?`](#подсказка)                   | `boolean`                                       | -            | Флаг отображения тултипа                         |
-| [`min?`](#минимальное-и-максимальное-значение) | `number`                                        | `0`          | Минимальное значение                             |
-| [`max?`](#минимальное-и-максимальное-значение) | `number`                                        | `100`        | Максимальное значение                            |
-| [`leftSide?`](#дополнительные-элементы)        | `PropSide`                                      | -            | Элемент отображаемый слева от компонента         |
-| [`rightSide?`](#дополнительные-элементы)       | `PropSide`                                      | -            | Элемент отображаемый справа от компонента        |
-| `className?`                                   | `string`                                        | -            | Дополнительный CSS-класс                         |
+| Свойство                                       | Тип или варианты значения                             | По умолчанию | Описание                                         |
+| ---------------------------------------------- | ----------------------------------------------------- | ------------ | ------------------------------------------------ |
+| [`view?`](#вид-линии)                          | `default` , `division`                                | `default`    | Внешний вид линии слайдера                       |
+| [`disabled?`](#неактивный-ползунок)            | `boolean`                                             | `false`      | Делает компонент неактивным                      |
+| [`status?`](#лэйбл-и-подпись)                  | `'', 'alert', 'success', 'warning'`                   | -            | Статус поля                                      |
+| [`size?`](#размер)                             | `'xs'`, `'s'` , `'m'` , `'l'`                         | `'m'`        | Размер компонента                                |
+| [`step?`](#шаги)                               | `number` <code>&#124;</code> `[number, number]`       | `1`          | Шаг изменения                                    |
+| [`range?`](#варианты)                          | `boolean`                                             | -            | Выбор числового промежутка                       |
+| [`label?`](#лэйбл-и-подпись)                   | `string`                                              | -            | Лэйбл                                            |
+| [`caption?`](#лэйбл-и-подпись)                 | `string`                                              | -            | Подпись                                          |
+| [`value?`](#варианты)                          | `SliderValue<RANGE>`                                  | -            | Значение или масив значений                      |
+| [`onChange?`](#варианты)                       | `PropOnChange<RANGE>`                                 | -            | Обработчик события изменения значения компонента |
+| [`withTooltip?`](#подсказка)                   | `boolean`                                             | -            | Флаг отображения тултипа                         |
+| [`min?`](#минимальное-и-максимальное-значение) | `number`                                              | `0`          | Минимальное значение                             |
+| [`max?`](#минимальное-и-максимальное-значение) | `number`                                              | `100`        | Максимальное значение                            |
+| [`leftSide?`](#дополнительные-элементы)        | `'React.FC<IconProps>'` <code>&#124;</code> `'input'` | -            | Элемент отображаемый слева от компонента         |
+| [`rightSide?`](#дополнительные-элементы)       | `'React.FC<IconProps>'` <code>&#124;</code> `'input'` | -            | Элемент отображаемый справа от компонента        |
+| `className?`                                   | `string`                                              | -            | Дополнительный CSS-класс                         |

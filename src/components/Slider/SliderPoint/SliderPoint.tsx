@@ -1,15 +1,30 @@
 import './SliderPoint.css';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { useFlag } from '../../../hooks/useFlag/useFlag';
+import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
 import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
 import { cn } from '../../../utils/bem';
 import { generateThemeClassNames, ThemeContext, useTheme } from '../../Theme/Theme';
 import { Tooltip } from '../../Tooltip/Tooltip';
-import { SliderPointProps } from '../helper';
+import { SliderPointProps, TrackPosition } from '../helper';
 
 const cnSliderPoint = cn('SliderPoint');
+
+const getTooltipPosition = (
+  popoverPosition: TrackPosition,
+  buttonRef: React.RefObject<HTMLButtonElement>,
+) => {
+  if (popoverPosition && buttonRef && buttonRef.current) {
+    const { y, height } = buttonRef.current.getBoundingClientRect();
+    return {
+      x: popoverPosition.x,
+      y: y - height + 30,
+    };
+  }
+  return { x: 0, y: 0 };
+};
 
 export const SliderPoint = (props: SliderPointProps) => {
   const {
@@ -62,23 +77,14 @@ export const SliderPoint = (props: SliderPointProps) => {
     }
   };
 
-  const getTooltipPosition = () => {
-    if (popoverPosition && buttonRef && buttonRef.current) {
-      const { y, height } = buttonRef.current.getBoundingClientRect();
-      return {
-        x: popoverPosition.x,
-        y: y - height + 30,
-      };
-    }
-    return { x: 0, y: 0 };
-  };
-
   const handleBlur = (e: React.FocusEvent<HTMLButtonElement>) => {
     if (!disabled) {
       onFocus?.(e, null);
       off();
     }
   };
+
+  const pointRef = useRef<HTMLButtonElement>(null);
 
   return (
     <>
@@ -91,7 +97,7 @@ export const SliderPoint = (props: SliderPointProps) => {
         onKeyDown={(e) => onKeyPress?.(e)}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        ref={buttonRef}
+        ref={useForkRef([buttonRef, pointRef])}
         tabIndex={0}
         style={{
           ['--slider-button-left' as string]: `${position}%`,
@@ -102,7 +108,7 @@ export const SliderPoint = (props: SliderPointProps) => {
           value={{ theme: tooltipTheme, themeClassNames: tooltipThemeClassNames }}
         >
           <Tooltip
-            position={getTooltipPosition()}
+            position={getTooltipPosition(popoverPosition, buttonRef || pointRef)}
             className={cnSliderPoint('Tooltip')}
             direction="downCenter"
             possibleDirections={['downCenter', 'leftDown', 'rightDown']}

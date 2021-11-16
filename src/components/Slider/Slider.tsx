@@ -1,29 +1,52 @@
 import './Slider.css';
 
-import React, { useRef } from 'react';
+import React, { forwardRef, useEffect, useRef } from 'react';
 
 import { useFlag } from '../../hooks/useFlag/useFlag';
+import { useForkRef } from '../../hooks/useForkRef/useForkRef';
+import { IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
+import { getSizeByMap } from '../../utils/getSizeByMap';
 import { FieldCaption } from '../FieldCaption/FieldCaption';
 import { FieldLabel } from '../FieldLabel/FieldLabel';
 
+import { SliderInput } from './SliderInput/SliderInput';
 import { SliderLine } from './SliderLine/SliderLine';
 import { SliderPoint } from './SliderPoint/SliderPoint';
+import { getActiveValue } from './useSlider/helper';
 import { useSlider } from './useSlider/useSlider';
-import { defaultPropSize, SliderProps } from './helper';
+import {
+  defaultPropSize,
+  defaultTooltipFormatter,
+  isNotRangeParams,
+  isRangeParams,
+  PropSize,
+  SliderComponent,
+  SliderProps,
+} from './helper';
 import { useSliderStationing } from './useSliderStationing';
 
 const cnSlider = cn('Slider');
 
-export function Slider<RANGE extends boolean>(props: SliderProps<RANGE>) {
+const sizeMap: Record<PropSize, IconPropSize> = {
+  xs: 'xs',
+  s: 's',
+  m: 'm',
+  l: 'm',
+};
+
+function SliderRender<RANGE extends boolean>(
+  props: SliderProps<RANGE>,
+  ref: React.Ref<HTMLDivElement>,
+) {
   const {
     min = 0,
     max = 100,
     onChange,
+    onAfterChange,
     value,
     step = 1,
     disabled = false,
-    width = 'default',
     size = defaultPropSize,
     view = 'default',
     leftSide,
@@ -33,6 +56,7 @@ export function Slider<RANGE extends boolean>(props: SliderProps<RANGE>) {
     label,
     status,
     caption,
+    tooltipFormatter = defaultTooltipFormatter,
     className,
     ...otherProps
   } = props;
@@ -43,6 +67,11 @@ export function Slider<RANGE extends boolean>(props: SliderProps<RANGE>) {
   const rightButtonRef = useRef<HTMLButtonElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
 
+  const LeftIcon = leftSide;
+  const RightIcon = rightSide;
+
+  const iconSize = getSizeByMap(sizeMap, size);
+
   const {
     handleTouchStart,
     handleMouseDown,
@@ -51,6 +80,7 @@ export function Slider<RANGE extends boolean>(props: SliderProps<RANGE>) {
     popoverPosition,
     activeButton,
     stopListening,
+    currentValue,
   } = useSlider({
     disabled,
     range,
@@ -59,12 +89,13 @@ export function Slider<RANGE extends boolean>(props: SliderProps<RANGE>) {
     max,
     step,
     onChange,
+    onAfterChange,
     sliderRef,
     buttonRefs: [leftButtonRef, rightButtonRef],
   });
 
   const { lineSizes, buttonPositions } = useSliderStationing(
-    value,
+    currentValue,
     min,
     max,
     view,
@@ -79,18 +110,60 @@ export function Slider<RANGE extends boolean>(props: SliderProps<RANGE>) {
     else off();
   };
 
+  useEffect(() => {
+    return () => stopListening();
+  }, []);
+
+  const changeValueFromInput = (newValue: number, side: 'left' | 'right' | null) => {
+    if (isRangeParams(props)) {
+      props.onChange?.({
+        value: [
+          side === 'left' ? newValue : props.value[0],
+          side === 'right' ? newValue : props.value[1],
+        ],
+      });
+    }
+    if (isNotRangeParams(props)) {
+      props.onChange?.({
+        value: newValue,
+      });
+    }
+  };
+
+  const inputValue: number = isRangeParams(props) ? props.value[0] : (props.value as number);
+
   return (
-    <div className={cnSlider({ width }, [className])} {...otherProps}>
-      {label && <FieldLabel size={size}>{label}</FieldLabel>}
-      <div className={cnSlider('Container', { size })}>
-        {leftSide && (
+    <div
+      ref={useForkRef([ref, sliderRef])}
+      className={cnSlider({ size }, [className])}
+      {...otherProps}
+    >
+      {label && (
+        <FieldLabel className={cnSlider('Label')} size={size}>
+          {label}
+        </FieldLabel>
+      )}
+      <div className={cnSlider('Container')}>
+        {LeftIcon && (
           <div className={cnSlider('Side', { position: 'left' })}>
-            {typeof leftSide === 'function' ? leftSide({ value }) : leftSide}{' '}
+            {LeftIcon === 'input' ? (
+              <SliderInput
+                value={inputValue}
+                onChange={({ value }) => changeValueFromInput(value, 'left')}
+                size={size}
+                min={min}
+                max={max}
+                status={status}
+                step={Array.isArray(step) ? 1 : step}
+                disabled={disabled}
+              />
+            ) : (
+              <LeftIcon size={iconSize} view="secondary" />
+            )}
           </div>
         )}
         <div
           className={cnSlider('Control')}
-          ref={sliderRef}
           role="button"
           onMouseDown={handleMouseDown}
           onTouchStart={handleTouchStart}
@@ -116,9 +189,9 @@ export function Slider<RANGE extends boolean>(props: SliderProps<RANGE>) {
             buttonLabel="left"
             withTooltip={withTooltip}
             onHover={(hovered) => changeHovered(hovered)}
-            value={Array.isArray(value) ? value[0] : value}
+            value={tooltipFormatter(getActiveValue(currentValue, 'left'))}
           />
-          {Array.isArray(value) && range && (
+          {Array.isArray(currentValue) && range && (
             <SliderPoint
               hovered={isHovered}
               buttonRef={rightButtonRef}
@@ -131,17 +204,36 @@ export function Slider<RANGE extends boolean>(props: SliderProps<RANGE>) {
               position={buttonPositions[1]}
               buttonLabel="right"
               onHover={(hovered) => changeHovered(hovered)}
-              value={value[1]}
+              value={tooltipFormatter(getActiveValue(currentValue, 'right'))}
             />
           )}
         </div>
-        {rightSide && (
+        {RightIcon && (
           <div className={cnSlider('Side', { position: 'right' })}>
-            {typeof rightSide === 'function' ? rightSide({ value }) : rightSide}
+            {RightIcon === 'input' ? (
+              <SliderInput
+                value={inputValue}
+                onChange={({ value }) => changeValueFromInput(value, 'left')}
+                size={size}
+                min={min}
+                max={max}
+                status={status}
+                step={Array.isArray(step) ? 1 : step}
+                disabled={disabled}
+              />
+            ) : (
+              <RightIcon size={iconSize} view="secondary" />
+            )}
           </div>
         )}
       </div>
-      {caption && <FieldCaption status={status}>{caption}</FieldCaption>}
+      {caption && (
+        <FieldCaption className={cnSlider('Caption')} status={status}>
+          {caption}
+        </FieldCaption>
+      )}
     </div>
   );
 }
+
+export const Slider = forwardRef(SliderRender) as SliderComponent;

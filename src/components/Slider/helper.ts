@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { IconProps } from '../../icons/Icon/Icon';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
 import { ActiveButton } from './useSlider/helper';
@@ -12,22 +13,16 @@ export type PropView = 'default' | 'division';
 
 export const propSize = ['s', 'xs', 'm', 'l'] as const;
 export type PropSize = typeof propSize[number];
-export const defaultPropSize: PropSize = propSize[1];
+export const defaultPropSize: PropSize = propSize[0];
 
 export type SliderValue<RANGE> = RANGE extends true ? [number, number] : number;
 
 export type PropOnChange<RANGE> = (prop: {
-  e?: Event | React.TouchEvent | React.MouseEvent | React.KeyboardEvent;
+  e?: Event | React.TouchEvent | React.MouseEvent | React.KeyboardEvent | React.ChangeEvent;
   value: SliderValue<RANGE>;
 }) => void;
 
-export const propWidth = ['default', 'full'] as const;
-export type PropWidth = typeof propWidth[number];
-export const defultPropWidth: PropWidth = propWidth[1];
-
-export type PropSide<RANGE> =
-  | React.ReactNode
-  | (({ value }: { value?: SliderValue<RANGE> }) => React.ReactElement);
+type PropToolipFormatter = (value: number | undefined) => string;
 
 type Props<RANGE extends boolean = false> = {
   className?: string;
@@ -39,15 +34,15 @@ type Props<RANGE extends boolean = false> = {
   value: SliderValue<RANGE>;
   label?: string;
   caption?: string;
-  smooth?: boolean;
   status?: PropStatus;
   min?: number;
   size?: PropSize;
-  width?: PropWidth;
   max?: number;
   onChange?: PropOnChange<RANGE>;
-  leftSide?: PropSide<RANGE>;
-  rightSide?: PropSide<RANGE>;
+  onAfterChange?: PropOnChange<RANGE>;
+  leftSide?: React.FC<IconProps> | 'input';
+  tooltipFormatter?: PropToolipFormatter;
+  rightSide?: React.FC<IconProps> | 'input';
 };
 
 export type Line = {
@@ -58,14 +53,14 @@ export type Line = {
 
 export type SliderLineProps = {
   view?: PropView;
-  lines?: Line[];
+  lines: Line[];
   disabled?: boolean;
   hovered?: boolean;
   onHover?: (hovered: boolean) => void;
 };
 
 export type SliderPointProps = {
-  value?: number;
+  value?: number | string;
   disabled?: boolean;
   focused?: boolean;
   hovered?: boolean;
@@ -83,6 +78,20 @@ export type SliderProps<RANGE extends boolean> = PropsWithHTMLAttributes<
   Props<RANGE>,
   HTMLDivElement
 >;
+
+export type SliderComponent = <RANGE extends boolean>(
+  props: SliderProps<RANGE>,
+) => React.ReactElement | null;
+
+export const isRangeParams = (params: Props<boolean>): params is Props<true> => {
+  return !!params.range;
+};
+
+export const isNotRangeParams = (params: Props<boolean>): params is Props<false> => {
+  return !params.range;
+};
+
+export const defaultTooltipFormatter: PropToolipFormatter = (value) => value?.toString() || '';
 
 export type TrackPosition = {
   x: number;
