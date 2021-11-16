@@ -73,6 +73,7 @@ export function TextFieldRender<TYPE extends string>(
     caption,
     iconSize: iconSizeProp,
     focused,
+    onClick,
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, props, textFieldRef);
   const [focus, setFocus] = useState<boolean>(autoFocus);
@@ -138,7 +139,6 @@ export function TextFieldRender<TYPE extends string>(
       e,
       value: '',
     });
-    inputRef.current?.focus();
   };
 
   const changeNumberValue: (
@@ -165,8 +165,21 @@ export function TextFieldRender<TYPE extends string>(
     });
   };
 
+  const rootProps = {
+    // для того чтобы любые клики во внутренним элементам фокусили инпут
+    onClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      inputRef.current?.focus();
+      onClick?.(e);
+    },
+  };
+
   return (
-    <div className={cnTextField({ labelPosition, size, view, width }, [className])} {...otherProps}>
+    <div
+      className={cnTextField({ labelPosition, size, view, width }, [className])}
+      ref={useForkRef([ref, textFieldRef])}
+      {...rootProps}
+      {...otherProps}
+    >
       {label && (
         <FieldLabel
           required={required}
@@ -187,7 +200,6 @@ export function TextFieldRender<TYPE extends string>(
             focus: focus || focused,
             withValue: !!value,
           })}
-          ref={useForkRef([ref, textFieldRef])}
         >
           {LeftIcon && (
             <div
@@ -267,5 +279,4 @@ export function TextFieldRender<TYPE extends string>(
 }
 
 export const TextField = forwardRef(TextFieldRender) as TextFieldComponent;
-
 export * from './helpers';
