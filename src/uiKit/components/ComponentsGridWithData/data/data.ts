@@ -1,5 +1,6 @@
 import React from 'react';
 
+import AttachmentImage from './images/AttachmentImage';
 import BreadcrumbsImage from './images/BreadcrumbsImage';
 import ButtonImage from './images/ButtonImage';
 import CardImage from './images/CardImage';
@@ -10,6 +11,8 @@ import RadioGroupImage from './images/RadioGroupImage';
 import RadioImage from './images/RadioImage';
 import SwitchGroupImage from './images/SwitchGroupImage';
 import SwitchImage from './images/SwitchImage';
+import TabsImage from './images/TabsImage';
+import TooltipImage from './images/TooltipImage';
 import UserImage from './images/UserImage';
 import { Data } from './types';
 
@@ -95,10 +98,10 @@ export const data: Data = [
         description: 'Контекстное меню. Дополнительные действия на странице.',
       },
       {
-        name: 'DatePicker(Canary)',
-        componentName: 'DatePicker',
-        url: '/?path=/docs/components-datepicker--playground',
-        description: 'Поле, в котором можно выбрать дату или период.',
+        name: 'DragNDropField',
+        componentName: 'DragNDropField',
+        url: '/?path=/docs/components-dragndropfield--playground',
+        description: 'Можно перетащить файлы, чтобы загрузить или отправить.',
       },
       {
         name: 'DateTime(Canary)',
@@ -107,22 +110,22 @@ export const data: Data = [
         description: 'Календарь. Можно выбрать дату или период.',
       },
       {
-        name: 'DragNDropField',
-        componentName: 'DragNDropField',
-        url: '/?path=/docs/components-dragndropfield--playground',
-        description: 'Можно перетащить файлы, чтобы загрузить или отправить.',
-      },
-      {
-        name: 'File',
-        componentName: 'File',
-        url: '/?path=/docs/components-file--playground',
-        description: 'Иконка для файла с расширением.',
+        name: 'DatePicker(Canary)',
+        componentName: 'DatePicker',
+        url: '/?path=/docs/components-datepicker--playground',
+        description: 'Поле, в котором можно выбрать дату или период.',
       },
       {
         name: 'FileField',
         componentName: 'FileField',
         url: '/?path=/docs/components-filefield--playground',
         description: 'Можно выбрать файлы, чтобы загрузить или отправить.',
+      },
+      {
+        name: 'File',
+        componentName: 'File',
+        url: '/?path=/docs/components-file--playground',
+        description: 'Иконка для файла с расширением.',
       },
       {
         name: 'Grid',
@@ -177,6 +180,12 @@ export const data: Data = [
         componentName: 'ProgressSpin',
         url: '/?path=/docs/components-progressspin--playground',
         description: 'Индикатор. Показывает течение процесса',
+      },
+      {
+        name: 'ProgressStepBar(Canary)',
+        componentName: 'ProgressStepBar',
+        url: '/?path=/docs/components-progressstepbar--playground',
+        description: 'Прогресс по шагам. Показывает, на каком шаге процесс.',
       },
       {
         name: 'Radio',
@@ -311,6 +320,7 @@ export const data: Data = [
 ];
 
 export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
+  Attachment: AttachmentImage,
   Breadcrumbs: BreadcrumbsImage,
   Button: ButtonImage,
   Card: CardImage,
@@ -321,5 +331,7 @@ export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> =
   RadioGroup: RadioGroupImage,
   Switch: SwitchImage,
   SwitchGroup: SwitchGroupImage,
+  Tabs: TabsImage,
+  Tooltip: TooltipImage,
   User: UserImage,
 };
