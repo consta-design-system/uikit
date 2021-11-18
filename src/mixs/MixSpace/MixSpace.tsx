@@ -36,10 +36,53 @@ type Props = {
   pBottom?: PropSpace;
 };
 
+type SpaceProps = {
+  pT?: PropSpace;
+  pL?: PropSpace;
+  pR?: PropSpace;
+  pB?: PropSpace;
+  mT?: PropSpace;
+  mL?: PropSpace;
+  mR?: PropSpace;
+  mB?: PropSpace;
+};
+
 type CnSpace = (
-  elemNameOrBlockMods?: Props | string | null,
-  elemModsOrBlockMix?: Props | Array<string | undefined> | null,
+  elemNameOrBlockMods?: SpaceProps | string | null,
+  elemModsOrBlockMix?: SpaceProps | Array<string | undefined> | null,
   elemMix?: Array<string | undefined>,
 ) => string;
 
-export const cnMixSpace: CnSpace = cn('MixSpace');
+type CnMixSpace = (props: Props) => string;
+
+const cnSpace: CnSpace = cn('MixSpace');
+
+export const cnMixSpace: CnMixSpace = (props) => {
+  const {
+    padding,
+    margin,
+    verticalPadding,
+    horizontalPadding,
+    verticalMargin,
+    horizontalMargin,
+    mTop,
+    mLeft,
+    mRight,
+    mBottom,
+    pTop,
+    pLeft,
+    pRight,
+    pBottom,
+  } = props;
+
+  return cnSpace({
+    pT: pTop || verticalPadding || padding,
+    pL: pLeft || horizontalPadding || padding,
+    pR: pRight || horizontalPadding || padding,
+    pB: pBottom || verticalPadding || padding,
+    mT: mTop || verticalMargin || margin,
+    mL: mLeft || horizontalMargin || margin,
+    mR: mRight || horizontalMargin || margin,
+    mB: mBottom || verticalMargin || margin,
+  });
+};
