@@ -55,18 +55,18 @@ export const SliderPoint = (props: SliderPointProps) => {
     },
   };
 
+  const tooltipThemeClassNames = generateThemeClassNames(tooltipTheme);
+
   useEffect(() => {
     focused ? on() : off();
   }, [focused]);
 
-  const handleFocus = (e: React.FocusEvent<HTMLButtonElement>) => {
+  const handleFocus = (e: React.FocusEvent<HTMLButtonElement> | React.MouseEvent) => {
     if (!disabled) {
       onFocus?.(e, buttonLabel);
       on();
     }
   };
-
-  const tooltipThemeClassNames = generateThemeClassNames(tooltipTheme);
 
   const handleMouseAction = (enter: boolean) => {
     if (!disabled) {
@@ -96,6 +96,7 @@ export const SliderPoint = (props: SliderPointProps) => {
         onMouseOut={() => handleMouseAction(false)}
         onKeyDown={(e) => onKeyPress?.(e)}
         onFocus={handleFocus}
+        onClick={handleFocus}
         onBlur={handleBlur}
         ref={useForkRef([buttonRef, pointRef])}
         tabIndex={0}

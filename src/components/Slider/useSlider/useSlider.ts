@@ -35,11 +35,21 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
   const maxValue = max > min ? max : 100;
 
   const [currentValue, setCurrentValue] = useState<number | [number, number]>(value);
+  const [leftPopover, setLeftPopover] = useState<TrackPosition>(null);
+  const [rightPopover, setRightPopover] = useState<TrackPosition>(null);
 
-  const popoverPosition: MutableRefObject<TrackPosition[]> = useRef([]);
   const activeButton: MutableRefObject<ActiveButton | null> = useRef(null);
 
   const sizeSlider = useComponentSize(sliderRef);
+
+  useEffect(() => {
+    if (JSON.stringify(value) !== JSON.stringify(currentValue)) {
+      setCurrentValue(value);
+      activeButton.current = 'left';
+      setTooltipPosition(getActiveValue(value, activeButton.current));
+      activeButton.current = null;
+    }
+  }, [value]);
 
   useEffect(() => {
     if (typeof value !== 'undefined' && typeof step !== 'undefined') {
@@ -175,7 +185,11 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
           y: button.offsetTop + button.offsetHeight + 50,
           x: x + Math.abs((value - minValue) / (maxValue - minValue)) * width,
         };
-        popoverPosition.current[activeButton.current === 'left' ? 0 : 1] = newPosition;
+        if (activeButton.current === 'left') {
+          setLeftPopover(newPosition);
+        } else {
+          setRightPopover(newPosition);
+        }
       }
     },
     [sliderRef, minValue, maxValue],
@@ -195,7 +209,7 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
     [sliderRef, value, activeButton, range, step],
   );
 
-  const onFocus = (e: React.FocusEvent, button: ActiveButton) => {
+  const onFocus = (e: React.FocusEvent | React.MouseEvent, button: ActiveButton) => {
     activeButton.current = button;
   };
 
@@ -288,6 +302,10 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
     if (disabled) stopListening();
   }, [disabled, stopListening]);
 
+  useEffect(() => {
+    return () => stopListening();
+  }, []);
+
   return {
     handleTouchStart,
     handleMouseDown,
@@ -295,7 +313,7 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
     onFocus,
     stopListening,
     activeButton: activeButton.current,
-    popoverPosition: popoverPosition.current,
+    popoverPosition: [leftPopover, rightPopover],
     currentValue,
   };
 }

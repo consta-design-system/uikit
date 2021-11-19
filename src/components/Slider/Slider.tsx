@@ -1,9 +1,8 @@
 import './Slider.css';
 
-import React, { forwardRef, useEffect, useRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 
 import { useFlag } from '../../hooks/useFlag/useFlag';
-import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { getSizeByMap } from '../../utils/getSizeByMap';
@@ -67,8 +66,7 @@ function SliderRender<RANGE extends boolean>(
   const rightButtonRef = useRef<HTMLButtonElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
 
-  const LeftIcon = leftSide;
-  const RightIcon = rightSide;
+  const Icon = rightSide;
 
   const iconSize = getSizeByMap(sizeMap, size);
 
@@ -110,10 +108,6 @@ function SliderRender<RANGE extends boolean>(
     else off();
   };
 
-  useEffect(() => {
-    return () => stopListening();
-  }, []);
-
   const changeValueFromInput = (newValue: number, side: 'left' | 'right' | null) => {
     if (isRangeParams(props)) {
       props.onChange?.({
@@ -133,33 +127,25 @@ function SliderRender<RANGE extends boolean>(
   const inputValue: number = isRangeParams(props) ? props.value[0] : (props.value as number);
 
   return (
-    <div
-      ref={useForkRef([ref, sliderRef])}
-      className={cnSlider({ size }, [className])}
-      {...otherProps}
-    >
+    <div ref={ref} className={cnSlider({ size }, [className])} {...otherProps}>
       {label && (
         <FieldLabel className={cnSlider('Label')} size={size}>
           {label}
         </FieldLabel>
       )}
       <div className={cnSlider('Container')}>
-        {LeftIcon && (
+        {leftSide === 'input' && (
           <div className={cnSlider('Side', { position: 'left' })}>
-            {LeftIcon === 'input' ? (
-              <SliderInput
-                value={inputValue}
-                onChange={({ value }) => changeValueFromInput(value, 'left')}
-                size={size}
-                min={min}
-                max={max}
-                status={status}
-                step={Array.isArray(step) ? 1 : step}
-                disabled={disabled}
-              />
-            ) : (
-              <LeftIcon size={iconSize} view="secondary" />
-            )}
+            <SliderInput
+              value={inputValue}
+              onChange={({ value }) => changeValueFromInput(value, 'left')}
+              size={size}
+              min={min}
+              max={max}
+              status={status}
+              step={Array.isArray(step) ? 1 : step}
+              disabled={disabled}
+            />
           </div>
         )}
         <div
@@ -169,6 +155,7 @@ function SliderRender<RANGE extends boolean>(
           onTouchStart={handleTouchStart}
           onMouseUp={() => stopListening()}
           aria-hidden="true"
+          ref={sliderRef}
         >
           <SliderLine
             hovered={isHovered}
@@ -208,22 +195,9 @@ function SliderRender<RANGE extends boolean>(
             />
           )}
         </div>
-        {RightIcon && (
+        {Icon && (
           <div className={cnSlider('Side', { position: 'right' })}>
-            {RightIcon === 'input' ? (
-              <SliderInput
-                value={inputValue}
-                onChange={({ value }) => changeValueFromInput(value, 'left')}
-                size={size}
-                min={min}
-                max={max}
-                status={status}
-                step={Array.isArray(step) ? 1 : step}
-                disabled={disabled}
-              />
-            ) : (
-              <RightIcon size={iconSize} view="secondary" />
-            )}
+            <Icon size={iconSize} view="secondary" />
           </div>
         )}
       </div>

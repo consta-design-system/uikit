@@ -40,9 +40,9 @@ type Props<RANGE extends boolean = false> = {
   max?: number;
   onChange?: PropOnChange<RANGE>;
   onAfterChange?: PropOnChange<RANGE>;
-  leftSide?: React.FC<IconProps> | 'input';
+  leftSide?: 'input';
   tooltipFormatter?: PropToolipFormatter;
-  rightSide?: React.FC<IconProps> | 'input';
+  rightSide?: React.FC<IconProps>;
 };
 
 export type Line = {
@@ -68,7 +68,10 @@ export type SliderPointProps = {
   buttonLabel?: ActiveButton;
   buttonRef?: React.RefObject<HTMLButtonElement>;
   popoverPosition?: TrackPosition;
-  onFocus?: (e: React.FocusEvent<HTMLButtonElement>, button: ActiveButton) => void;
+  onFocus?: (
+    e: React.FocusEvent<HTMLButtonElement> | React.MouseEvent,
+    button: ActiveButton,
+  ) => void;
   onKeyPress?: (e: React.KeyboardEvent) => void;
   onHover?: (hovered: boolean) => void;
   position: number;

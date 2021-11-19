@@ -23,8 +23,8 @@ const defaultKnobs = () => ({
   steparray: boolean('steparray', false),
   withFormatter: boolean('withFormatter', false),
   view: select('view', ['default', 'division'], 'default'),
-  leftSide: select('leftSide', ['', 'icon', 'input'], ''),
-  rightSide: select('rightSide', ['', 'icon', 'input'], ''),
+  leftSide: select('leftSide', ['', 'input'], ''),
+  rightSide: select('rightSide', ['', 'icon'], ''),
 });
 
 export function Playground() {
@@ -63,14 +63,6 @@ export function Playground() {
     else setValue(50);
   }, [range]);
 
-  const getSupElement = (side: 'input' | '' | 'icon') => {
-    if (side !== '') {
-      if (side === 'input') return 'input';
-      return IconSettings;
-    }
-    return undefined;
-  };
-
   return (
     <Slider
       value={value}
@@ -86,8 +78,8 @@ export function Playground() {
       step={stepValue}
       view={view}
       tooltipFormatter={withFormatter ? (value) => `${value}%` : undefined}
-      leftSide={getSupElement(leftSide)}
-      rightSide={getSupElement(rightSide)}
+      leftSide={leftSide === '' ? undefined : leftSide}
+      rightSide={rightSide === 'icon' ? IconSettings : undefined}
       onChange={({ value }) => setValue(value)}
     />
   );

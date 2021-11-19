@@ -16,8 +16,8 @@ export const SliderExampleContent = () => {
         withTooltip
         step={5}
         view="division"
-        leftSide={IconSettings}
-        rightSide="input"
+        leftSide="input"
+        rightSide={IconSettings}
         onChange={({ value }) => setValue(value)}
       />
     </div>

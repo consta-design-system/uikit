@@ -27,7 +27,7 @@ export const SliderLine = (props: SliderLineProps) => {
             hovered: line.active && hovered,
             disabled,
           })}
-          key={`SliderLine-Line-${index}`}
+          key={cnSliderLine({ index })}
           style={{
             ['--slider-line-size' as string]: `${line.width}%`,
           }}

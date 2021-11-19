@@ -28,7 +28,10 @@ export type UseSliderValues = {
   handleTouchStart: (e: React.TouchEvent) => void;
   handleMouseDown: (e: React.MouseEvent) => void;
   onKeyPress: (e: React.KeyboardEvent) => void;
-  onFocus: (e: React.FocusEvent<HTMLButtonElement>, button: ActiveButton) => void;
+  onFocus: (
+    e: React.FocusEvent<HTMLButtonElement> | React.MouseEvent,
+    button: ActiveButton,
+  ) => void;
   stopListening: () => void;
   activeButton: ActiveButton;
   currentValue: number | [number, number];

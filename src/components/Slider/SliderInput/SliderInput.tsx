@@ -11,7 +11,7 @@ type Props = Omit<TextFieldProps<'number'>, 'value' | 'onChange'> & {
 export const SliderInput = (props: Props) => {
   const { value, onChange, ...otherProps } = props;
 
-  const [currentValue, setCurrentValue] = useState<string | null>();
+  const [currentValue, setCurrentValue] = useState<string | null>(value.toString());
 
   useEffect(() => {
     setCurrentValue(value.toString());
@@ -29,7 +29,7 @@ export const SliderInput = (props: Props) => {
 
   return (
     <TextField
-      onBlur={() => commitChange()}
+      onBlur={commitChange}
       type="number"
       onChange={handleChange}
       value={currentValue}
