@@ -2,38 +2,35 @@ import './MixSpace.css';
 
 import { cn } from '../../utils/bem';
 
-export const propSpace = [
-  'm',
-  '3xs',
-  '2xs',
-  'xs',
-  's',
-  'l',
-  'xl',
-  '2xl',
-  '3xl',
-  '4xl',
-  '5xl',
-  '6xl',
-] as const;
-type PropSpace = typeof propSpace[number];
-export const defaultPropSpace: PropSpace = propSpace[0];
+type PropSpace =
+  | 'm'
+  | '3xs'
+  | '2xs'
+  | 'xs'
+  | 's'
+  | 'l'
+  | 'xl'
+  | '2xl'
+  | '3xl'
+  | '4xl'
+  | '5xl'
+  | '6xl';
 
 type Props = {
-  padding?: PropSpace;
-  margin?: PropSpace;
-  verticalPadding?: PropSpace;
-  horizontalPadding?: PropSpace;
-  verticalMargin?: PropSpace;
-  horizontalMargin?: PropSpace;
-  mTop?: PropSpace;
-  mLeft?: PropSpace;
-  mRight?: PropSpace;
-  mBottom?: PropSpace;
-  pTop?: PropSpace;
-  pLeft?: PropSpace;
-  pRight?: PropSpace;
-  pBottom?: PropSpace;
+  p?: PropSpace;
+  m?: PropSpace;
+  pV?: PropSpace;
+  pH?: PropSpace;
+  mV?: PropSpace;
+  mH?: PropSpace;
+  mT?: PropSpace;
+  mL?: PropSpace;
+  mR?: PropSpace;
+  mB?: PropSpace;
+  pT?: PropSpace;
+  pL?: PropSpace;
+  pR?: PropSpace;
+  pB?: PropSpace;
 };
 
 type SpaceProps = {
@@ -58,31 +55,16 @@ type CnMixSpace = (props: Props) => string;
 const cnSpace: CnSpace = cn('MixSpace');
 
 export const cnMixSpace: CnMixSpace = (props) => {
-  const {
-    padding,
-    margin,
-    verticalPadding,
-    horizontalPadding,
-    verticalMargin,
-    horizontalMargin,
-    mTop,
-    mLeft,
-    mRight,
-    mBottom,
-    pTop,
-    pLeft,
-    pRight,
-    pBottom,
-  } = props;
+  const { p, m, pV, pH, mV, mH, mT, mL, mR, mB, pT, pL, pR, pB } = props;
 
   return cnSpace({
-    pT: pTop || verticalPadding || padding,
-    pL: pLeft || horizontalPadding || padding,
-    pR: pRight || horizontalPadding || padding,
-    pB: pBottom || verticalPadding || padding,
-    mT: mTop || verticalMargin || margin,
-    mL: mLeft || horizontalMargin || margin,
-    mR: mRight || horizontalMargin || margin,
-    mB: mBottom || verticalMargin || margin,
+    pT: pT || pV || p,
+    pL: pL || pH || p,
+    pR: pR || pH || p,
+    pB: pB || pV || p,
+    mT: mT || mV || m,
+    mL: mL || mH || m,
+    mR: mR || mH || m,
+    mB: mB || mV || m,
   });
 };
