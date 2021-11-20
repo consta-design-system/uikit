@@ -104,16 +104,17 @@ describe('Компонент ContextMenu', () => {
         expect(getGroupHeader()?.textContent).toEqual(groups[0].name);
       });
     });
-    describe('проверка getOnClick', () => {
+    describe('проверка getOnItemClick', () => {
       it('клик по элементу должен вызвать callback', () => {
         const handleChange = jest.fn();
 
         renderComponent({
-          getOnClick: (item) => () => handleChange(item),
+          getOnItemClick: handleChange,
         });
 
         fireEvent.click(getItem());
 
+        expect(handleChange).toHaveBeenCalled();
         expect(handleChange).toHaveBeenCalledTimes(1);
         expect(handleChange).toHaveBeenCalledWith(expect.objectContaining(items[0]));
       });

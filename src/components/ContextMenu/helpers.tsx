@@ -23,7 +23,7 @@ export type ContextMenuPropGetGroupLabel = (
   id: string | number | undefined,
 ) => string | number | undefined;
 export type ContextMenuPropSortGroup = (a: string | number, b: string | number) => number;
-export type ContextMenuPropGetOnClick<ITEM> = (
+export type ContextMenuPropGetOnItemClick<ITEM> = (
   item: ITEM,
 ) => React.EventHandler<React.MouseEvent<HTMLDivElement>> | undefined;
 
@@ -59,13 +59,15 @@ export type ContextMenuProps<ITEM> = PropsWithHTMLAttributesAndRef<
     getAccent?: ContextMenuPropGetAccent<ITEM>;
     size?: ContextMenuPropSize;
     sortGroup?: ContextMenuPropSortGroup;
-    getOnClick?: ContextMenuPropGetOnClick<ITEM>;
+    getOnClick?: ContextMenuPropGetOnItemClick<ITEM>;
+    getOnItemClick?: ContextMenuPropGetOnItemClick<ITEM>;
     direction?: Direction;
     possibleDirections?: readonly Direction[];
     subMenuDirection?: ContextMenuPropSubMenuDirection;
     getKey?: ContextMenuPropGetKey<ITEM>;
     getDisabled?: ContextMenuPropGetDisable<ITEM>;
     offset?: number;
+    onClick?: (props: { e: React.MouseEvent; item: ITEM }) => void;
     onClickOutside?: ClickOutsideHandler;
     spareDirection?: Direction;
   } & PositioningProps,
