@@ -10,6 +10,7 @@
   font-family: var(--font);
   line-height: var(--line-height-text-s);
   text-align: left;
+  white-space: nowrap;
   cursor: pointer;
   transition: color 0.2s, font-weight 0.2s;
 
