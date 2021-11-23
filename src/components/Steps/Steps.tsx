@@ -3,7 +3,6 @@ import './Steps.css';
 import React, { useMemo, useRef, useState } from 'react';
 
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
-import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { useOverflow } from '../../hooks/useOverflow/useOverflow';
 import { useScrollElements } from '../../hooks/useScrollElements/useScrollElements';
 import { IconArrowLeft } from '../../icons/IconArrowLeft/IconArrowLeft';
@@ -89,11 +88,7 @@ export const Steps: Steps = React.forwardRef((props, ref) => {
   };
 
   return (
-    <div
-      ref={useForkRef([ref, stepsRef])}
-      className={cnSteps({ size }, [className])}
-      {...otherProps}
-    >
+    <div ref={ref} className={cnSteps({ size }, [className])} {...otherProps}>
       {isOverflow && (
         <Button
           iconLeft={() => <IconArrowLeft size="xs" />}
@@ -104,7 +99,7 @@ export const Steps: Steps = React.forwardRef((props, ref) => {
           onClick={(e) => changeStep(e, true)}
         />
       )}
-      <div className={cnSteps('List')}>
+      <div ref={stepsRef} className={cnSteps('List')}>
         {items.map((item, index) => (
           <StepsStep
             key={index}

@@ -1,8 +1,10 @@
 .ProgressStepBarItem {
   position: relative;
   display: inline-flex;
+  flex: 1;
   align-items: flex-start;
-  width: 100%;
+
+  /* width: 100%; */
   height: 100%;
 
   &_direction {

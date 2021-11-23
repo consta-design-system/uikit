@@ -57,7 +57,7 @@ const renderPointContent = (
   );
 };
 
-export const ProgressStepBarItem: ProgressStepBarItemComponent = (props) => {
+export const ProgressStepBarItem: ProgressStepBarItemComponent = React.forwardRef((props, ref) => {
   const {
     content,
     tooltipContent,
@@ -102,6 +102,7 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent = (props) => {
   return (
     <>
       <div
+        ref={ref}
         className={cnProgressStepBarItem({
           direction,
           position,
@@ -144,4 +145,4 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent = (props) => {
       )}
     </>
   );
-};
+});

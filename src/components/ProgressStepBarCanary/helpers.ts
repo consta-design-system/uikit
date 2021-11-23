@@ -105,7 +105,7 @@ export type ProgressStepBarComponent = <ITEM = DefaultItem>(
 ) => React.ReactElement | null;
 
 export type ProgressStepBarItemComponent = (
-  props: ProgressStepBarItemProps,
+  props: PropsWithHTMLAttributesAndRef<ProgressStepBarItemProps, HTMLDivElement>,
 ) => React.ReactElement | null;
 
 export function withDefaultGetters<ITEM>(props: ProgressStepBarProps<ITEM>) {

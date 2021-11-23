@@ -1,17 +1,49 @@
 .ProgressStepBar {
-  position: relative;
   display: inline-flex;
-  justify-content: space-between;
+  width: 100%;
+  max-width: 100%;
 
-  &_direction {
-    &_horizontal {
-      flex-direction: row;
-      width: 100%;
+  &-List {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+
+    &::-webkit-scrollbar {
+      display: none;
     }
 
-    &_vertical {
-      flex-direction: column;
-      height: 100%;
+    &_direction {
+      &_horizontal {
+        overflow-x: scroll;
+        overflow-y: visible;
+        flex-direction: row;
+
+        &:not(.ProgressStepBar-List_overflow) {
+          min-width: 100%;
+        }
+      }
+
+      &_vertical {
+        overflow-x: visible;
+        overflow-y: scroll;
+        flex-direction: column;
+
+        &:not(.ProgressStepBar-List_overflow) {
+          min-height: 100%;
+        }
+      }
+    }
+  }
+
+  &-Button {
+    &_side {
+      &_left {
+        margin-right: var(--space-xs);
+      }
+
+      &_right {
+        margin-left: var(--space-xs);
+      }
     }
   }
 }

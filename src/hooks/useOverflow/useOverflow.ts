@@ -34,8 +34,23 @@ export const useOverflow = (props: Props): boolean => {
 
   useEffect(() => {
     const container = containerRef || currentRef.current?.parentElement;
-    if (container) {
-      if (getMaxWidth(container) <= size.width) {
+    if (container && currentRef.current) {
+      const cs =
+        container instanceof HTMLElement
+          ? getComputedStyle(container)
+          : {
+              paddingLeft: '0',
+              paddingTop: '0',
+              paddingBottom: '0',
+              paddingRight: '0',
+            };
+      const padding = {
+        top: parseFloat(cs.paddingTop),
+        left: parseFloat(cs.paddingLeft),
+        right: parseFloat(cs.paddingRight),
+        bottom: parseFloat(cs.paddingBottom),
+      };
+      if (getMaxWidth(container) - padding.left - padding.right < currentRef.current.scrollWidth) {
         setIsOverflow(true);
       } else {
         setIsOverflow(false);
