@@ -1159,6 +1159,40 @@ export const tableDataWithRenderFn: TableProps<typeof rowsWithObjectFields[numbe
   ],
 };
 
+export const tableDataWithConditionalClassName: TableProps<typeof rowsWithObjectFields[number]> = {
+  columns: [
+    {
+      title: 'Месторождение',
+      accessor: 'field',
+      align: 'left',
+    },
+    {
+      title: 'Тип',
+      accessor: 'type',
+      align: 'center',
+    },
+    {
+      title: 'Предполагаемые полные \nзапасы, млн.т.',
+      accessor: 'estimatedReserves',
+      align: 'right',
+    },
+    {
+      title: 'Остаточные извлекаемые \nзапасы, млн.т.',
+      accessor: 'remainingReserves',
+      align: 'right',
+    },
+    {
+      title: 'Добыча тыс.т/сут.',
+      accessor: 'production',
+      align: 'right',
+      mergeCells: true,
+    },
+  ],
+  rows: rowsWithObjectFields,
+  getConditionalClassName: (column, row) =>
+    row.type === 'Нефтяное' && !column.mergeCells ? 'darkBackground' : '',
+};
+
 enum CustomIDs {
   fullName = 'fullName',
   yearOfRegistration = 'yearOfRegistration',

@@ -11,6 +11,7 @@ import {
   partOfTableDataForCustomTagLabelFunction,
   rowsForCustomTagLabelFunction,
   tableData,
+  tableDataWithConditionalClassName,
   tableDataWithRenderFn,
   tableWithBagdeData,
   tableWithExpandableRowsData,
@@ -55,6 +56,7 @@ const defaultProps: Props<typeof tableData.rows[number]> = {
   verticalAlign: 'top',
   zebraStriped: undefined,
   headerVerticalAlign: 'center',
+  getConditionalClassName: undefined,
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -72,6 +74,10 @@ const getKnobs = <T extends TableRow>(replacedProps?: Partial<Props<T>>): Props<
 
   const handleRowClick = callbackWithSelector({ name: 'onRowClick', isActive: false });
   const handleRowHover = callbackWithSelector({ name: 'onRowHover', isActive: false });
+  const handleConditionalClass = callbackWithSelector(
+    { name: 'getConditionalClassName', isActive: true },
+    props.getConditionalClassName,
+  ) as ((column: TableColumn<T>, row: T) => string) | undefined;
 
   return {
     columns: object('columns', props.columns),
@@ -97,6 +103,7 @@ const getKnobs = <T extends TableRow>(replacedProps?: Partial<Props<T>>): Props<
     onRowCreate: undefined,
     rowCreateText: undefined,
     getTagLabel: props.getTagLabel,
+    getConditionalClassName: handleConditionalClass,
   };
 };
 
@@ -168,6 +175,19 @@ export const WithBagde = createStory(
   },
   {
     name: 'с Bagde',
+  },
+);
+
+export const WithGetConditionalClassName = createStory(
+  () => {
+    return (
+      <div className={cnTableStories()}>
+        <Table {...getKnobs(tableDataWithConditionalClassName)} />
+      </div>
+    );
+  },
+  {
+    name: 'с getConditionalClassName',
   },
 );
 

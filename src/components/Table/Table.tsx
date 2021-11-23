@@ -166,6 +166,7 @@ export type TableProps<T extends TableRow> = {
   onRowHover?: onRowHover;
   onRowClick?: onRowClick;
   onRowCreate?: onRowCreate;
+  getConditionalClassName?: (column: TableColumn<T>, row: T) => string;
   rowCreateText?: string;
   lazyLoad?: LazyLoad;
   onFiltersUpdated?: (filters: SelectedFilters) => void;
@@ -259,6 +260,7 @@ const InternalTable = <T extends TableRow>(
     onRowHover,
     onRowClick,
     onRowCreate,
+    getConditionalClassName,
     rowCreateText = '+ Добавить строку',
     lazyLoad,
     onSortBy,
@@ -787,6 +789,7 @@ const InternalTable = <T extends TableRow>(
                           : false,
                         isMerged: column.mergeCells && rowSpan > 1,
                       })}
+                      className={getConditionalClassName?.(column, row)}
                       onClick={(e: React.SyntheticEvent): void =>
                         handleSelectRow({ id: row.id, e })
                       }

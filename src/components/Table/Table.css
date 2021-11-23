@@ -77,6 +77,10 @@
     &_isMerged {
       align-items: center;
     }
+
+    .darkBackground &:not(&_isActive) {
+      background-color: var(--color-bg-ghost);
+    }
   }
 
   &-EmptyCell {
