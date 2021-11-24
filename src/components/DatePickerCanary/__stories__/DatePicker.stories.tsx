@@ -8,7 +8,7 @@ import zhCNLocale from 'date-fns/locale/zh-CN';
 
 import { IconCalendar } from '../../../icons/IconCalendar/IconCalendar';
 import { maxDateDefault, minDateDefault } from '../../../utils/date';
-import { getSizeByMap } from '../../../utils/getSizeByMap';
+import { getByMap } from '../../../utils/getByMap';
 import { createMetadata } from '../../../utils/storybook';
 import { dateTimePropView, dateTimePropViewDefault } from '../../DateTimeCanary/helpers';
 import {
@@ -117,7 +117,7 @@ export function Playground() {
         onChange={({ value }) => setValue(value)}
         rightSide={icon}
         events={events}
-        locale={getSizeByMap(localeMap, locale)}
+        locale={getByMap(localeMap, locale)}
         dateTimeView={dateTimeView}
         format={format}
         separator={separator}

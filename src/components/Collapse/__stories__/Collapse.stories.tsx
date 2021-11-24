@@ -4,7 +4,7 @@ import { boolean, select, text } from '@storybook/addon-knobs';
 import { IconAdd } from '../../../icons/IconAdd/IconAdd';
 import { IconRemove } from '../../../icons/IconRemove/IconRemove';
 import { IconSun } from '../../../icons/IconSun/IconSun';
-import { getSizeByMap } from '../../../utils/getSizeByMap';
+import { getByMap } from '../../../utils/getByMap';
 import { createMetadata } from '../../../utils/storybook';
 import { Badge } from '../../Badge/Badge';
 import {
@@ -71,7 +71,7 @@ export function Playground() {
 
   const defaultRightSide: React.ReactNode = [
     <Badge label="Статус" size="s" />,
-    <IconSun size={getSizeByMap(sizeIconMap, size)} />,
+    <IconSun size={getByMap(sizeIconMap, size)} />,
   ];
 
   return (

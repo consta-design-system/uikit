@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
 import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { IconCheck } from '../../icons/IconCheck/IconCheck';
-import { getSizeByMap } from '../../utils/getSizeByMap';
+import { getByMap } from '../../utils/getByMap';
 import { setRef } from '../../utils/setRef';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { Button } from '../Button/Button';
@@ -85,8 +85,8 @@ export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef)
     multiple: false,
   });
 
-  const iconSize = getSizeByMap(iconSizeMap, size);
-  const contextMenuSize = getSizeByMap(contextMenuSizeMap, size);
+  const iconSize = getByMap(iconSizeMap, size);
+  const contextMenuSize = getByMap(contextMenuSizeMap, size);
 
   const getButtonIcon = () => getItemIcon(items.find((theme) => getChecked(theme))!);
 

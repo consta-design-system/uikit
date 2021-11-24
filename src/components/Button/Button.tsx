@@ -5,7 +5,7 @@ import React from 'react';
 import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { cn } from '../../utils/bem';
-import { getSizeByMap } from '../../utils/getSizeByMap';
+import { getByMap } from '../../utils/getByMap';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { Loader } from '../Loader/Loader';
@@ -96,8 +96,8 @@ export const Button = forwardRefWithAs<Props, 'button'>((props, ref) => {
   const withIcon = !!iconLeft || !!iconRight;
   const title = props.title || (!!IconOnly && label) || undefined;
   const iconSize = IconOnly
-    ? getSizeByMap(sizeMapOnlyIcon, size, iconSizeProp)
-    : getSizeByMap(sizeMap, size, iconSizeProp);
+    ? getByMap(sizeMapOnlyIcon, size, iconSizeProp)
+    : getByMap(sizeMap, size, iconSizeProp);
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     if (!disabled && !loading && onClick) {

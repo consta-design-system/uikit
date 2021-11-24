@@ -5,7 +5,7 @@ import React, { forwardRef } from 'react';
 import { IconProps, IconPropSize } from '../../../icons/Icon/Icon';
 import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
 import { cn } from '../../../utils/bem';
-import { getSizeByMap } from '../../../utils/getSizeByMap';
+import { getByMap } from '../../../utils/getByMap';
 import { TabsPropSize } from '../Tabs';
 
 export const cnTabsTab = cn('TabsTab');
@@ -37,7 +37,7 @@ export const TabsTab = forwardRef<HTMLButtonElement, Props>((props, ref) => {
     iconSize: iconSizeProp,
     className,
   } = props;
-  const iconSize = getSizeByMap(sizeMap, size, iconSizeProp);
+  const iconSize = getByMap(sizeMap, size, iconSizeProp);
 
   return (
     <button

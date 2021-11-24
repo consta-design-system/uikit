@@ -8,7 +8,7 @@ import { IconClose } from '../../icons/IconClose/IconClose';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { IconSelectOpen } from '../../icons/IconSelectOpen/IconSelectOpen';
 import { cn } from '../../utils/bem';
-import { getSizeByMap } from '../../utils/getSizeByMap';
+import { getByMap } from '../../utils/getByMap';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { FieldCaption } from '../FieldCaption/FieldCaption';
 import { FieldLabel } from '../FieldLabel/FieldLabel';
@@ -82,7 +82,7 @@ export function TextFieldRender<TYPE extends string>(
   const RightIcon = rightSide;
   const leftSideIsString = typeof leftSide === 'string';
   const rightSideIsString = typeof rightSide === 'string';
-  const iconSize = getSizeByMap(sizeMap, size, iconSizeProp);
+  const iconSize = getByMap(sizeMap, size, iconSizeProp);
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (e) => {
     const { value } = e.target;
