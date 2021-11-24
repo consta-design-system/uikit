@@ -1,16 +1,12 @@
 import React from 'react';
 
-const eventInterceptorPropComponent = [
-  'Button',
-  'TextField',
-  'Checkbox',
-  'SnackBar',
-  'Select',
-] as const;
-export type EventInterceptorPropComponent = typeof eventInterceptorPropComponent[number];
+import { eventInterceptorMap } from './eventInterceptorMap';
+
+export type EventInterceptorMap = typeof eventInterceptorMap;
+export type EventInterceptorMapKeys = keyof EventInterceptorMap;
 
 export type EventInterceptorProps = {
-  component: EventInterceptorPropComponent;
+  component: EventInterceptorMapKeys;
   event?: string;
   options: {
     [key: string]: any;
@@ -19,18 +15,9 @@ export type EventInterceptorProps = {
 
 export type EventInterceptorHandler = ((props: EventInterceptorProps) => void) | undefined;
 
-export type EventHandler = <T>(
-  props: T,
-  handler: EventInterceptorHandler,
-  ref?: React.RefObject<HTMLElement>,
-) => T;
-export type EventInterceptorPropMap = {
-  [key: string]: EventHandler;
-};
-
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const EventInterceptorContext = React.createContext<
-  { eventHandler: EventInterceptorHandler; map: EventInterceptorPropMap } | undefined
+  { eventHandler: EventInterceptorHandler; map: EventInterceptorMap } | undefined
 >(undefined);
 
 const EventInterceptorProvider = ({
@@ -40,7 +27,7 @@ const EventInterceptorProvider = ({
 }: {
   children: React.ReactNode;
   eventHandler: EventInterceptorHandler;
-  map: EventInterceptorPropMap;
+  map: EventInterceptorMap;
 }) => {
   return (
     <EventInterceptorContext.Provider value={{ eventHandler, map }}>

@@ -19,12 +19,16 @@ describe('Компонент Container', () => {
   it('добавляется фокус', () => {
     const component = renderComponent({ focused: true });
 
-    expect(component.container.querySelector('.Select')).toHaveClass('Select_focused');
+    expect(component.container.querySelector('.Select-SelectContainer')).toHaveClass(
+      'Select-SelectContainer_focused',
+    );
   });
 
   it('добавляется класс disabled', () => {
     const component = renderComponent({ disabled: true });
 
-    expect(component.container.querySelector('.Select')).toHaveClass('Select_disabled');
+    expect(component.container.querySelector('.Select-SelectContainer')).toHaveClass(
+      'Select-SelectContainer_disabled',
+    );
   });
 });

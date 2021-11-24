@@ -10,17 +10,34 @@
   &_size {
     &_s {
       --timer-size: 16px;
+      --timer-font-size: var(--size-text-xs);
     }
 
     &_m {
       --timer-size: 24px;
+      --timer-font-size: var(--size-text-xs);
+    }
+
+    &_l {
+      --timer-size: 32px;
+      --timer-font-size: var(--size-text-m);
+    }
+
+    &_xl {
+      --timer-size: 40px;
+      --timer-font-size: var(--size-text-l);
+    }
+
+    &_2xl {
+      --timer-size: 48px;
+      --timer-font-size: var(--size-text-xl);
     }
   }
 
   &-Counter {
     width: 100%;
     color: var(--color-control-typo-ghost);
-    font-size: var(--size-text-xs);
+    font-size: var(--timer-font-size);
     font-weight: var(--font-weight-text-bold);
     line-height: var(--timer-size);
     text-align: center;

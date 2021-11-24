@@ -1,7 +1,13 @@
 import React from 'react';
 
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
-import { PropForm, PropSize, PropView, RenderItemProps } from '../SelectComponents/types';
+import {
+  PropForm,
+  PropSize,
+  PropStatus,
+  PropView,
+  RenderItemProps,
+} from '../SelectComponents/types';
 
 export type DefaultItem = {
   label: string;
@@ -38,12 +44,14 @@ export type SelectProps<ITEM = DefaultItem, GROUP = DefaultGroup> = PropsWithHTM
     form?: PropForm;
     size?: PropSize;
     view?: PropView;
+    status?: PropStatus;
     focused?: boolean;
     multiple?: boolean;
     placeholder?: string;
     ariaLabel?: string;
     dropdownClassName?: string;
     dropdownRef?: React.RefObject<HTMLDivElement>;
+    required?: boolean;
     name?: string;
     value?: PropValue<ITEM>;
     renderItem?: PropRenderItem<ITEM>;
@@ -58,6 +66,9 @@ export type SelectProps<ITEM = DefaultItem, GROUP = DefaultGroup> = PropsWithHTM
     getItemDisabled?: PropGetItemDisabled<ITEM>;
     getGroupLabel?: PropGetGroupLabel<GROUP>;
     getGroupKey?: PropGetGroupKey<GROUP>;
+    label?: string;
+    labelPosition?: 'top' | 'left';
+    caption?: string;
   },
   HTMLDivElement
 > &

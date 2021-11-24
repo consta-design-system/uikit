@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React from 'react';
+import { action } from '@storybook/addon-actions';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { cn } from '../../../utils/bem';
@@ -38,7 +39,7 @@ export function Playground() {
   const handleChange = ({ checked }: { checked: boolean }) => setChecked(checked);
 
   return (
-    <EventInterceptorProvider eventHandler={console.log} map={eventInterceptorMap}>
+    <EventInterceptorProvider eventHandler={action('EventInterceptor')} map={eventInterceptorMap}>
       <div className={cnCheckboxStories()}>
         <Checkbox
           disabled={disabled}

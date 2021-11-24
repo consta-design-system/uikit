@@ -6,7 +6,7 @@ import { select } from '@storybook/addon-knobs';
 import { cn } from '../../../utils/bem';
 import { createMetadata, createStory } from '../../../utils/storybook';
 import { Text } from '../../Text/Text';
-import { Layout, layoutPropDirection, layoutPropDirectionDefault } from '../Layout';
+import { Layout, layoutPropDirection, layoutPropDirectionDefault } from '../LayoutCanary';
 
 import { LayoutExampleAnchor } from './examples/LayoutExampleAnchor/LayoutExampleAnchor';
 import { LayoutExampleFixed } from './examples/LayoutExampleFixed/LayoutExampleFixed';
@@ -71,7 +71,7 @@ export const WithAnchor = createStory(
 );
 
 export default createMetadata({
-  title: 'Компоненты|/Служебные/Layout',
+  title: 'Компоненты|/Служебные/Layout(Canary)',
   id: 'components/Layout',
   parameters: {
     docs: {

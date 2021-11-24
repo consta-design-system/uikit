@@ -11,6 +11,7 @@ import {
   defaultPropSize,
   defaultPropView,
   propForm,
+  propStatus,
   propView,
 } from '../../SelectComponents/types';
 import { Combobox } from '../Combobox';
@@ -24,12 +25,29 @@ const getKnobs = () => ({
   size: select('size', ['m', 's', 'l'], defaultPropSize),
   view: select('view', propView, defaultPropView),
   form: select('form', propForm, defaultPropForm),
+  required: boolean('required', false),
+  caption: text('caption', 'Хорошо подумайте, это важно'),
+  label: text('label', 'Здесь можно выбрать цвет'),
+  status: select('status', ['', ...propStatus], ''),
+  labelPosition: select('labelPosition', ['top', 'left'], 'top'),
   placeholder: text('placeholder', 'Placeholder'),
   withGroups: boolean('withGroups', false),
 });
 
 export function Playground(): JSX.Element {
-  const { size, disabled, view, form, placeholder, withGroups } = getKnobs();
+  const {
+    size,
+    disabled,
+    view,
+    form,
+    required,
+    status,
+    placeholder,
+    withGroups,
+    label,
+    labelPosition,
+    caption,
+  } = getKnobs();
   const [value, setValue] = useState<Item | null>(null);
   const [valueMultiple, setValueMultiple] = useState<Item[] | null>(null);
   const multiple = boolean('multiple', false);
@@ -42,12 +60,17 @@ export function Playground(): JSX.Element {
         disabled={disabled}
         view={view}
         form={form}
+        required={required}
+        status={status || undefined}
         placeholder={placeholder}
         items={items}
         value={valueMultiple}
         onChange={({ value }) => setValueMultiple(value)}
         groups={withGroups ? groups : []}
         multiple
+        label={label}
+        labelPosition={labelPosition}
+        caption={caption}
       />
     );
   }
@@ -58,18 +81,35 @@ export function Playground(): JSX.Element {
       disabled={disabled}
       view={view}
       form={form}
+      required={required}
+      status={status || undefined}
       placeholder={placeholder}
       items={items}
       value={value}
       onChange={({ value }) => setValue(value)}
       groups={withGroups ? groups : []}
+      label={label}
+      labelPosition={labelPosition}
+      caption={caption}
     />
   );
 }
 
 export const WithRender = createStory(
   () => {
-    const { size, disabled, view, form, placeholder, withGroups } = getKnobs();
+    const {
+      size,
+      disabled,
+      view,
+      status,
+      form,
+      required,
+      placeholder,
+      withGroups,
+      label,
+      labelPosition,
+      caption,
+    } = getKnobs();
     const [value, setValue] = useState<MyItem | null>();
 
     return (
@@ -78,8 +118,10 @@ export const WithRender = createStory(
         disabled={disabled}
         view={view}
         form={form}
+        status={status || undefined}
         placeholder={placeholder}
         items={myData}
+        required={required}
         value={value}
         onChange={({ value }) => setValue(value)}
         groups={withGroups ? myGroup : []}
@@ -109,6 +151,9 @@ export const WithRender = createStory(
         getItemGroupKey={(item) => item.group}
         getItemKey={(item) => item.name}
         getItemLabel={(item) => item.name}
+        label={label}
+        labelPosition={labelPosition}
+        caption={caption}
       />
     );
   },
@@ -119,7 +164,19 @@ export const WithRender = createStory(
 
 export const WithCreate = createStory(
   () => {
-    const { size, disabled, view, form, placeholder, withGroups } = getKnobs();
+    const {
+      size,
+      disabled,
+      view,
+      form,
+      required,
+      status,
+      placeholder,
+      withGroups,
+      label,
+      labelPosition,
+      caption,
+    } = getKnobs();
     const [value, setValue] = useState<Item | null>();
     const [list, setList] = useState<Item[]>(items);
     return (
@@ -128,13 +185,18 @@ export const WithCreate = createStory(
         size={size}
         disabled={disabled}
         view={view}
+        required={required}
         form={form}
+        status={status || undefined}
         placeholder={placeholder}
         items={list}
         value={value}
         onChange={({ value }) => setValue(value)}
         groups={withGroups ? groups : []}
         onCreate={({ label }) => setList([{ label, id: `${label}_${list.length + 1}` }, ...list])}
+        label={label}
+        labelPosition={labelPosition}
+        caption={caption}
       />
     );
   },

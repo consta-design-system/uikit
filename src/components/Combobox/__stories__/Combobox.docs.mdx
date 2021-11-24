@@ -14,10 +14,16 @@ import {
   ComboboxExampleCustomTypes,
   ComboboxExampleCustomTypesWithGroups,
 } from './examples/ComboboxExampleCustomTypes/ComboboxExampleCustomTypes';
+import { ComboboxExampleLabel } from './examples/ComboboxExampleLabel/ComboboxExampleLabel';
+import { ComboboxExampleStatus } from './examples/ComboboxExampleStatus/ComboboxExampleStatus';
+
+<!--info
+description: Выпадающий список с поиском. Можно выбрать один или несколько вариантов.
+-->
 
 # Combobox
 
-Выпадающий список. Позволяет выбрать один из нескольких вариантов.
+Выпадающий список. Позволяет выбрать один или несколько вариантов.
 Этот компонент выглядит как [Select](?path=/docs/components-select--playground),
 но возможностей больше.
 
@@ -37,12 +43,15 @@ import {
   - [Варианты](#варианты)
   - [Выбранное значение](#выбранное-значение)
   - [Подсказка](#подсказка)
+  - [Заголовок и подпись](#заголовок-и-подпись)
   - [Неактивный вариант](#неактивный-элемент-списка)
   - [Несколько вариантов](#несколько-вариантов)
   - [Группы вариантов](#группы-вариантов)
+- [Статус](#статус-поля)
 - [Размер](#размер)
 - [Форма](#форма)
 - [Внешний вид](#внешний-вид)
+- [Лэйбл и подпись](#лэйбл-и-подпись)
 - [Неактивный выпадающий список](#неактивный-выпадающий-список)
 - [Создание новых вариантов](#создание-новых-вариантов)
 - [Кастомизация](#кастомизация)
@@ -73,8 +82,6 @@ import {
 
 Выбор варианта срабатывает по клику мыши или по нажатию `Enter` на клавиатуре.
 
-<ComboboxExampleItems />
-
 ```tsx
 type Item = {
   label: string;
@@ -102,14 +109,14 @@ export function ComboboxExampleItems() {
 }
 ```
 
+<ComboboxExampleItems />
+
 ### Подсказка
 
 Подсказка, которая видна, когда ни один вариант не выбран, задаётся в свойстве `placeholder`.
 Сформулируйте подсказку так, чтобы стало понятно, что по клику на поле раскроется список вариантов, один из которых нужно выбрать.
 
 Если не знаете, что написать в подсказке, используйте универсальное **Выберите**.
-
-<ComboboxExamplePlaceholder />
 
 ```tsx
 type Item = {
@@ -145,11 +152,61 @@ export function ComboboxExamplePlaceholder() {
 }
 ```
 
+<ComboboxExamplePlaceholder />
+
+## Заголовок и подпись
+
+Вы можете добавить к выпадающему два необязательных элемента — заголовок и подпись.
+
+Заголовок можно добавить с помощью свойства `label`.
+За его расположение отвечает свойство `labelPosition`.
+Варианты: `'top'` (над полем) или `'left'` (слева от поля), по умолчанию `'top'`.
+
+Подпись можно добавить с помощью свойства `caption`.
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function ComboboxExampleLabel() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <Combobox
+        label="Выберите что-нибудь"
+        caption={value?.label}
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        placeholder="Выберите что-нибудь хорошее"
+      />
+    </StoryBookExample>
+  );
+}
+```
+
+<ComboboxExampleLabel />
+
 ### Неактивный элемент списка
 
 Чтобы сделать вариант в списке неактивным, добавьте к элементу массива `items` свойство `disabled: true`. Если используете [кастомный тип `items`](#кастомные-типы-данных-для-групп-и-вариантов), можете добавить своё свойство.
-
-<ComboboxExampleDisabledItem />
 
 ```tsx
 type Item = {
@@ -189,13 +246,13 @@ export function ComboboxExampleDisabledItem() {
 }
 ```
 
+<ComboboxExampleDisabledItem />
+
 ### Несколько вариантов
 
 По умолчанию из списка можно выбрать только одного пользователя. Чтобы выбрать нескольких, добавьте `multiple`.
 
 > В этом случае `value` становится массивом, а в `onChange` передаётся массив выбранных элементов.
-
-<ComboboxExampleMultiple />
 
 ```tsx
 type Item = {
@@ -234,14 +291,14 @@ export function ComboboxExampleMultiple() {
 }
 ```
 
+<ComboboxExampleMultiple />
+
 ### Группы вариантов
 
 Чтобы разбить элементы списка на группы, передайте массив групп в свойство `groups`. Тип свойства `groups` по умолчанию равен [DefaultGroup](#свойства). Что внутри:
 
 - `label` — название группы,
 - `id` — уникальный ключ.
-
-<ComboboxExampleGroups />
 
 ```tsx
 type Item = {
@@ -312,13 +369,85 @@ export function ComboboxExampleGroups() {
 }
 ```
 
+## Статус поля
+
+С помощью статуса можно выделить поле: показать, где ошибка, или, наоборот,
+отметить правильно заполненные поля.
+
+За статус отвечает свойство `status`. Если оно не указано, поле будет обычным.
+
+<ComboboxExampleStatus />
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function ComboboxExampleStatus() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <Combobox
+        placeholder="default"
+        caption="default"
+        size="s"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <Combobox
+        placeholder="alert"
+        caption="alert"
+        status="alert"
+        size="s"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <Combobox
+        placeholder="warning"
+        caption="warning"
+        status="warning"
+        size="s"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <Combobox
+        placeholder="success"
+        caption="success"
+        size="s"
+        status="success"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+    </StoryBookExample>
+  );
+}
+```
+
 ## Размер
 
 За размер компонента отвечает свойство `size`. Варианты: `s` , `m` , `l` , по умолчанию `m`.
 
 Компонент занимает всю ширину родительского блока.
-
-<ComboboxExampleSize />
 
 ```tsx
 type Item = {
@@ -355,12 +484,12 @@ export function ComboboxExampleSize() {
 }
 ```
 
+<ComboboxExampleSize />
+
 ## Форма
 
 За форму селекта отвечает свойство `form`. Варианты:
 `default`, `brick`, `round`, `clearRound`, `roundClear`, `clearDefault`, `defaultClear`, `defaultBrick`, `brickDefault`, `brickClear`, `clearBrick`, `clearClear`. По умолчанию `default`.
-
-<ComboboxExampleForm />
 
 ```tsx
 type Item = {
@@ -397,11 +526,11 @@ export function ComboboxExampleForm() {
 }
 ```
 
+<ComboboxExampleForm />
+
 ## Внешний вид
 
 За вид компонента отвечает свойство `view`. Варианты: `default`, `clear`, по умолчанию `default`.
-
-<ComboboxExampleView />
 
 ```tsx
 type Item = {
@@ -438,11 +567,54 @@ export function ComboboxExampleView() {
 }
 ```
 
+## Лэйбл и подпись
+
+Лэйбл к компоненту можно добавить через свойство `label`, а за его позиционирование отвечает
+свойство `labelPosition`. Подпись можно добавить через свойство `caption`.
+
+<ComboboxExampleLabel />
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function ComboboxExampleLabel() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <Combobox
+        label="Выберите что-нибудь"
+        caption={value?.label}
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        placeholder="Выберите что-нибудь хорошее"
+      />
+    </StoryBookExample>
+  );
+}
+```
+
 ## Неактивный выпадающий список
 
 Чтобы сделать весь комбобокс неактивным, добавьте `disabled`.
-
-<ComboboxExampleDisabled />
 
 ```tsx
 type Item = {
@@ -479,6 +651,8 @@ export function ComboboxExampleDisabled() {
 }
 ```
 
+<ComboboxExampleDisabled />
+
 ## Поиск
 
 Если в поле что-то напечатать, компонент найдёт всех варианты, в названии которых есть напечатанные символы.
@@ -488,8 +662,6 @@ export function ComboboxExampleDisabled() {
 ## Создание новых вариантов
 
 Если при поиске в поле ничего не нашлось, можно показать в комбобоксе кнопку для создания нового значения. Пользователь сможет добавить значение в список, а потом выбрать его. В функцию на вход придёт `label` созданного элемента.
-
-<ComboboxExampleCreate />
 
 ```tsx
 type Item = {
@@ -527,6 +699,8 @@ export function ComboboxExampleCreate() {
 }
 ```
 
+<ComboboxExampleCreate />
+
 ## Кастомизация
 
 ### Кастомный элемент списка
@@ -537,8 +711,6 @@ export function ComboboxExampleCreate() {
 > У корневого DOM-элемента должно быть свойство role="option".
 
 #### Пример с кастомным элементом списка и своей функцией поиска
-
-<ComboboxExampleRenderItem />
 
 ```tsx
 const cnComboboxExampleRenderItem = cn('ComboboxExampleRenderItem');
@@ -633,12 +805,12 @@ export function ComboboxExampleRenderItem() {
 }
 ```
 
+<ComboboxExampleRenderItem />
+
 ### Кастомное выбранное значение
 
 Для того чтобы сделать Кастомное выбранное значение, воспользуйтесь свойством `renderValue`.
 Свойство принимает [функцию рендера](https://reactjs.org/docs/render-props.html).
-
-<ComboboxExampleRenderValue />
 
 ```tsx
 type Item = {
@@ -682,14 +854,13 @@ export function ComboboxExampleRenderValue() {
 }
 ```
 
+<ComboboxExampleRenderValue />
+
 ### Кастомные типы данных для групп и вариантов
 
-Вы можете использовать отличные от [DefaultItem](#свойства) и [DefaultGroup](#свойства) типы данных.
+Вы можете использовать кастомные типы данных для элементов списка (items) и групп (groups) — они могут отличаться от [DefaultItem](#свойства) и [DefaultGroup](#свойства).
 
-Если ваш тип данных отличен от [DefaultItem](#свойства) и [DefaultGroup](#свойства),
-необходимо использовать свойства:
-`getItemLabel`, `getItemKey`, `getItemGroupKey`, `getItemDisabled`, `getGroupLabel`, `getGroupKey`,
-для того чтобы компонент понимал откуда брать данные.
+В этом случае нужно использовать геттеры `getItemLabel`, `getItemKey`, `getItemGroupKey`, `getItemDisabled`, `getGroupLabel`, `getGroupKey`, чтобы компонент понимал, откуда брать данные.
 
 #### Геттеры по умолчанию
 
@@ -703,8 +874,6 @@ const defaultGetGroupLabel = (group) => group.label;
 ```
 
 #### Пример с кастомным Item
-
-<ComboboxExampleCustomTypes />
 
 ```tsx
 export function ComboboxExampleCustomTypes() {
@@ -722,9 +891,9 @@ export function ComboboxExampleCustomTypes() {
 }
 ```
 
-#### Пример с кастомным Item и Group
+<ComboboxExampleCustomTypes />
 
-<ComboboxExampleCustomTypesWithGroups />
+#### Пример с кастомным Item и Group
 
 ```tsx
 export type Item = {
@@ -765,6 +934,8 @@ export function ComboboxExampleCustomTypesWithGroups() {
   );
 }
 ```
+
+<ComboboxExampleCustomTypesWithGroups />
 
 ## Свойства
 
@@ -815,9 +986,13 @@ type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | --------------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | [`view?`](#внешний-вид)                                   | `default` , `clear`                                    | `default`                                                     | Внешний вид компонента                                                 |
 | [`disabled?`](#отключение-поля-ввода)                     | `boolean`                                              | -                                                             | Делает компонент недоступным                                           |
+| [`status?`](#статус-поля)                                 | `'', 'alert', 'success', 'warning'`                    | `' '`                                                         | Тип поля                                                               |
 | [`size?`](#размер)                                        | `'xs'`, `'s'` , `'m'` , `'l'`                          | `'m'`                                                         | Размер компонента                                                      |
 | [`form?`](#форма)                                         | `default`, `brick`, `round`                            | `default`                                                     | Форма компонента                                                       |
 | [`placeholder?`](#подсказка)                              | `string`                                               | -                                                             | Подсказка, отображается, когда вариант не выбран                       |
+| [`label?`](#лэйбл-и-подпись)                              | `string`                                               | -                                                             | Лэйбл                                                                  |
+| [`labelPosition?`](#лэйбл-и-подпись)                      | `'top', 'left'`                                        | `'top'`                                                       | Положение лэйбла                                                       |
+| [`caption?`](#лэйбл-и-подпись)                            | `string`                                               | -                                                             | Подпись                                                                |
 | [`items`](#варианты)                                      | `ITEM[]`                                               | -                                                             | Варианты                                                               |
 | [`value?`](#значение)                                     | `PropValue<ITEM,MULTIPLE>`                             | -                                                             | Значение селекта                                                       |
 | [`onChange?`](#onchange)                                  | `PropOnChange<ITEM,MULTIPLE>`                          | -                                                             | Обработчик события изменения значения компонента                       |
@@ -832,6 +1007,9 @@ type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | [`getItemDisabled?`](#свои-тип-данных-items-и-groups)     | `PropGetItemDisabled<ITEM>`                            | `(item) => item.disabled`                                     | Функция для определения состояния `disabled`                           |
 | [`getGroupLabel?`](#свои-тип-данных-items-и-groups)       | `PropGetGroupKey<GROUP>`                               | `(group) => group.id`                                         | Функция для определения названия группы                                |
 | [`getGroupKey?`](#свои-тип-данных-items-и-groups)         | `PropGetGroupLabel<GROUP>`                             | `(group) => group.label`                                      | Функция для определения уникального ключа группы                       |
+| `required?`                                               | `boolean`                                              | -                                                             | Нужно заполнить                                                        |
+| `labelForNotFound?`                                       | `string`                                               | `Не найдено`                                                  | Отоброжаемые текст если результаты не были найдены                     |
+| `labelForCreate?`                                         | `string`                                               | `+`                                                           | Отоброжаемый текст для добавления нового элемента                      |
 | `onBlur?`                                                 | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                                                             | Обработчик события `blur`                                              |
 | `onFocus?`                                                | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                                                             | Обработчик события `focus`                                             |
 | `ariaLabel?`                                              | `string`                                               | -                                                             | `aria` атрибут для поля ввода                                          |

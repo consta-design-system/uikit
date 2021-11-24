@@ -12,6 +12,12 @@ import {
   SelectExampleCustomTypes,
   SelectExampleCustomTypesWithGroups,
 } from './examples/SelectExampleCustomTypes/SelectExampleCustomTypes';
+import { SelectExampleLabel } from './examples/SelectExampleLabel/SelectExampleLabel';
+import { SelectExampleStatus } from './examples/SelectExampleStatus/SelectExampleStatus';
+
+<!--info
+description: Выпадающий список. Можно выбрать один вариант.
+-->
 
 # Select
 
@@ -27,9 +33,11 @@ import {
   - [Подсказка](#подсказка)
   - [Неактивный вариант](#неактивный-элемент-списка)
   - [Группы вариантов](#группы-вариантов)
+- [Статус](#статус-поля)
 - [Размер](#размер)
 - [Форма](#форма)
 - [Внешний вид](#внешний-вид)
+- [Лэйбл и подпись](#лэйбл-и-подпись)
 - [Неактивный выпадающий список](#неактивный-выпадающий-список)
 - [Кастомизация](#кастомизация)
   - [Кастомный элемент списка](#кастомный-элемент-списка)
@@ -270,6 +278,80 @@ export function SelectExampleGroups() {
 
 <SelectExampleGroups />
 
+## Статус поля
+
+С помощью статуса можно выделить поле: показать, где ошибка, или, наоборот,
+отметить правильно заполненные поля.
+
+За статус отвечает свойство `status`. Если оно не указано, поле будет обычным.
+
+<SelectExampleStatus />
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function SelectExampleStatus() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <div className={cnDocsDecorator('Section')}>
+      <Select
+        placeholder="default"
+        caption="default"
+        size="s"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <Select
+        placeholder="alert"
+        caption="alert"
+        status="alert"
+        size="s"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <Select
+        placeholder="warning"
+        caption="warning"
+        status="warning"
+        size="s"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <Select
+        placeholder="success"
+        caption="success"
+        size="s"
+        status="success"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+    </div>
+  );
+}
+```
+
 ## Размер
 
 За размер компонента отвечает свойство `size`. Варианты: `xs`, `s` , `m` , `l` , по умолчанию `m`.
@@ -403,6 +485,51 @@ export function SelectExampleView() {
 ```
 
 <SelectExampleView />
+
+## Лэйбл и подпись
+
+Лэйбл к компоненту можно добавить через свойство `label`, а за его позиционирование отвечает
+свойство `labelPosition`. Подпись можно добавить через свойство `caption`.
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function SelectExampleLabel() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <div className={cnDocsDecorator('Section')}>
+      <Select
+        label="Значение"
+        caption={value?.label}
+        placeholder="Выберите значение"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+    </div>
+  );
+}
+```
+
+<SelectExampleLabel />
 
 ## Неактивный выпадающий список
 
@@ -678,9 +805,13 @@ type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | ------------------------------------------------------------------ | ------------------------------------------------------ | ------------------------- | ---------------------------------------------------------------------- |
 | [`view?`](#внешний-вид)                                            | `default` , `clear`                                    | `default`                 | Внешний вид компонента                                                 |
 | [`disabled?`](#неактивный-выпадающий-список)                       | `boolean`                                              | -                         | Делает компонент неактивным                                            |
+| [`status?`](#статус-поля)                                          | `'', 'alert', 'success', 'warning'`                    | `' '`                     | Тип поля                                                               |
 | [`size?`](#размер)                                                 | `'xs'`, `'s'` , `'m'` , `'l'`                          | `'m'`                     | Размер компонента                                                      |
 | [`form?`](#форма)                                                  | `default`, `brick`, `round`                            | `default`                 | Форма компонента                                                       |
 | [`placeholder?`](#подсказка)                                       | `string`                                               | -                         | Подсказка. Отображается, когда вариант не выбран                       |
+| [`label?`](#лэйбл-и-подпись)                                       | `string`                                               | -                         | Лэйбл                                                                  |
+| [`labelPosition?`](#лэйбл-и-подпись)                               | `'top', 'left'`                                        | `'top'`                   | Положение лэйбла                                                       |
+| [`caption?`](#лэйбл-и-подпись)                                     | `string`                                               | -                         | Подпись                                                                |
 | [`items`](#варианты)                                               | `ITEM[]`                                               | -                         | Варианты                                                               |
 | [`value?`](#выбранное-значение)                                    | `ITEM`, `null`                                         | -                         | Выбранное значение                                                     |
 | [`onChange?`](#выбранное-значение)                                 | `PropOnChange<ITEM>`                                   | -                         | Обработчик события изменения значения компонента                       |
@@ -693,6 +824,7 @@ type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | [`getItemDisabled?`](#кастомные-типы-данных-для-вариантов-и-групп) | `PropGetItemDisabled<ITEM>`                            | `(item) => item.disabled` | Функция для определения неактивного варианта (`disabled`)              |
 | [`getGroupLabel?`](#кастомные-типы-данных-для-вариантов-и-групп)   | `PropGetGroupKey<GROUP>`                               | `(group) => group.id`     | Функция для определения названия группы                                |
 | [`getGroupKey?`](#кастомные-типы-данных-для-вариантов-и-групп)     | `PropGetGroupLabel<GROUP>`                             | `(group) => group.label`  | Функция для определения уникального ключа группы                       |
+| `required?`                                                        | `boolean`                                              | -                         | Нужно заполнить                                                        |
 | `onBlur?`                                                          | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                         | Обработчик события `blur`                                              |
 | `onFocus?`                                                         | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                         | Обработчик события `focus`                                             |
 | `ariaLabel?`                                                       | `string`                                               | -                         | `aria` атрибут для поля ввода                                          |

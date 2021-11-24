@@ -1,7 +1,13 @@
 import React from 'react';
 
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
-import { PropForm, PropSize, PropView, RenderItemProps } from '../SelectComponents/types';
+import {
+  PropForm,
+  PropSize,
+  PropStatus,
+  PropView,
+  RenderItemProps,
+} from '../SelectComponents/types';
 
 export type DefaultItem = {
   label: string;
@@ -53,6 +59,7 @@ export type ComboboxProps<
     view?: PropView;
     placeholder?: string;
     ariaLabel?: string;
+    status?: PropStatus;
     dropdownClassName?: string;
     dropdownRef?: React.RefObject<HTMLDivElement>;
     name?: string;
@@ -63,6 +70,7 @@ export type ComboboxProps<
     onCreate?: (props: { e: React.SyntheticEvent; label: string }) => void;
     inputRef?: React.RefObject<HTMLInputElement>;
     labelForNotFound?: string;
+    required?: boolean;
     labelForCreate?: string;
     searchFunction?: PropSearchFunction<ITEM>;
     multiple?: MULTIPLE;
@@ -74,6 +82,9 @@ export type ComboboxProps<
     getItemDisabled?: PropGetItemDisabled<ITEM>;
     getGroupLabel?: PropGetGroupLabel<GROUP>;
     getGroupKey?: PropGetGroupKey<GROUP>;
+    label?: string;
+    caption?: string;
+    labelPosition?: 'top' | 'left';
   },
   HTMLDivElement
 > &

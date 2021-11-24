@@ -5,8 +5,8 @@ import React from 'react';
 import { cn } from '../../../utils/bem';
 import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
 import { Text } from '../../Text/Text';
+import { CalendarCell, CalendarCellProps } from '../CalendarCell/CalendarCell';
 import { CalendarDay, CalendarDayProps } from '../CalendarDay/CalendarDay';
-import { CalendarCell, CalendarCellProps } from '../CalendarСell/CalendarСell';
 
 type DayOfMonth = Omit<CalendarDayProps & CalendarCellProps, 'ref'>;
 

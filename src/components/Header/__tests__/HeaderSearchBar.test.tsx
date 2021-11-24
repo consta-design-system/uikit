@@ -16,7 +16,7 @@ function getRender() {
 }
 
 function getInput() {
-  return getRender().querySelector(`.${cnHeaderSearchBar('Input')} > input`);
+  return getRender().querySelector(`.${cnHeaderSearchBar('Input')} input`);
 }
 
 describe('Компонент HeaderSearchBar', () => {

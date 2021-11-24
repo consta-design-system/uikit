@@ -43,6 +43,7 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   getGroupLabel?: (group: GROUP) => string;
   labelForCreate?: string;
   labelForNotFound?: string;
+  notFound?: boolean;
 }>;
 
 type SelectDropdown = <ITEM, GROUP>(props: Props<ITEM, GROUP>) => React.ReactElement | null;
@@ -64,6 +65,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
     renderItem,
     visibleItems,
     getGroupLabel,
+    notFound,
   } = props;
 
   const getIndex = fabricIndex(-1);
@@ -122,7 +124,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
               </Fragment>
             );
           })}
-          {visibleItems.length === 0 && (
+          {notFound && labelForNotFound && (
             <Text className={cnSelectDropdown('LabelForNotFound')}>{labelForNotFound}</Text>
           )}
         </div>

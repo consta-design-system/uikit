@@ -1,6 +1,7 @@
 import './SelectStories.css';
 
 import React, { useState } from 'react';
+import { action } from '@storybook/addon-actions';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { groups, Item, items, myData, myGroup, MyItem } from '../__mocks__/data.mock';
@@ -16,6 +17,7 @@ import {
   defaultPropView,
   propForm,
   propSize,
+  propStatus,
   propView,
 } from '../../SelectComponents/types';
 import { Select } from '../Select';
@@ -29,27 +31,49 @@ const getKnobs = () => ({
   size: select('size', propSize, defaultPropSize),
   view: select('view', propView, defaultPropView),
   form: select('form', propForm, defaultPropForm),
+  required: boolean('required', false),
+  status: select('status', ['', ...propStatus], ''),
+  caption: text('caption', 'Подпись'),
+  label: text('label', 'Заголовок'),
+  labelPosition: select('labelPosition', ['top', 'left'], 'top'),
   placeholder: text('placeholder', 'Выберите цвет'),
   withGroups: boolean('withGroups', false),
 });
 
 export function Playground(): JSX.Element {
-  const { size, disabled, view, form, placeholder, withGroups } = getKnobs();
+  const {
+    size,
+    disabled,
+    view,
+    form,
+    status,
+    placeholder,
+    required,
+    withGroups,
+    label,
+    labelPosition,
+    caption,
+  } = getKnobs();
   const [value, setValue] = useState<Item | null | undefined>();
 
   return (
-    <EventInterceptorProvider eventHandler={console.log} map={eventInterceptorMap}>
+    <EventInterceptorProvider eventHandler={action('EventInterceptor')} map={eventInterceptorMap}>
       <div>
         <Select
           size={size}
           disabled={disabled}
           view={view}
           form={form}
+          required={required}
+          status={status || undefined}
           placeholder={placeholder}
           items={items}
           value={value}
           onChange={({ value }) => setValue(value)}
           groups={withGroups ? groups : []}
+          label={label}
+          labelPosition={labelPosition}
+          caption={caption}
         />
       </div>
     </EventInterceptorProvider>
@@ -58,14 +82,28 @@ export function Playground(): JSX.Element {
 
 export const WithRender = createStory(
   () => {
-    const { size, disabled, view, form, placeholder, withGroups } = getKnobs();
+    const {
+      size,
+      disabled,
+      view,
+      form,
+      placeholder,
+      required,
+      withGroups,
+      status,
+      label,
+      labelPosition,
+      caption,
+    } = getKnobs();
     const [value, setValue] = useState<MyItem | null | undefined>();
     return (
       <Select
         size={size}
         disabled={disabled}
         view={view}
+        required={required}
         form={form}
+        status={status || undefined}
         placeholder={placeholder}
         items={myData}
         value={value}
@@ -97,6 +135,9 @@ export const WithRender = createStory(
         getItemGroupKey={(item) => item.group}
         getItemKey={(item) => item.name}
         getItemLabel={(item) => item.name}
+        label={label}
+        labelPosition={labelPosition}
+        caption={caption}
       />
     );
   },

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { act, renderHook } from '@testing-library/react-hooks';
 
@@ -24,7 +24,9 @@ describe('useButtonEventHandler', () => {
     label: 'label',
     onClick: jest.fn(),
   };
-  const { result } = renderHook(() => useButtonEventHandler(buttonProps, eventHandler));
+  const { result } = renderHook(() =>
+    useButtonEventHandler(buttonProps, eventHandler, createRef()),
+  );
 
   it('возвращает пропсы в том же виде, что и получил', () => {
     let props = {};

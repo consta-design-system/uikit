@@ -7,7 +7,7 @@ import {
   TextField,
   textFieldPropForm,
   textFieldPropSize,
-  textFieldPropState,
+  textFieldPropStatus,
   textFieldPropView,
   textFieldPropWidth,
 } from '../TextField';
@@ -26,6 +26,10 @@ function getRender() {
 
 function getInput() {
   return screen.getByTestId(testId).querySelector(`input.${cnTextField('Input')}`);
+}
+
+function getInputContainer() {
+  return screen.getByTestId(testId).querySelector(`.TextField-InputContainer`);
 }
 
 function getTextArea() {
@@ -57,15 +61,15 @@ describe('Компонент Button', () => {
       textFieldPropForm.forEach((form) => {
         it(`присваивает класс для form=${form}`, () => {
           renderComponent({ form });
-          expect(getRender()).toHaveClass(cnTextField({ form }));
+          expect(getInputContainer()).toHaveClass(cnTextField('InputContainer', { form }));
         });
       });
     });
-    describe('проверка state', () => {
-      textFieldPropState.forEach((state) => {
-        it(`присваивает класс для state=${state}`, () => {
-          renderComponent({ state });
-          expect(getRender()).toHaveClass(cnTextField({ state }));
+    describe('проверка status', () => {
+      textFieldPropStatus.forEach((status) => {
+        it(`присваивает класс для status=${status}`, () => {
+          renderComponent({ status });
+          expect(getInputContainer()).toHaveClass(cnTextField('InputContainer', { status }));
         });
       });
     });

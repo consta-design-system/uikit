@@ -1,15 +1,369 @@
 .TextField {
+  --caption-margin-left: calc(var(--input-space) + var(--control-border-width));
+  --counter-button-icon-color: var(--color-control-typo-ghost);
+  --counter-button-background: transparent;
+  --clear-button-color: var(--color-control-typo-clear);
   position: relative;
   display: inline-flex;
-  box-sizing: border-box;
-  max-width: 100%;
-  min-height: var(--input-height);
-  font-family: var(--font-primary);
-  font-weight: var(--font-weight-text-regular);
-  transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
 
   &_width_full {
     width: 100%;
+  }
+
+  &_size {
+    &_xs {
+      --input-height: var(--control-height-xs);
+      --input-font-size: var(--control-text-size-xs);
+      --input-space: calc(var(--control-space-xs) * 0.5);
+    }
+
+    &_s {
+      --input-height: var(--control-height-s);
+      --input-font-size: var(--control-text-size-s);
+      --input-space: calc(var(--control-space-s) * 0.5);
+    }
+
+    &_m {
+      --input-height: var(--control-height-m);
+      --input-font-size: var(--control-text-size-m);
+      --input-space: calc(var(--control-space-m) * 0.5);
+    }
+
+    &_l {
+      --input-height: var(--control-height-l);
+      --input-font-size: var(--control-text-size-l);
+      --input-space: calc(var(--control-space-l) * 0.5);
+    }
+  }
+
+  &_labelPosition {
+    &_top {
+      flex-direction: column;
+
+      & > *:not(:last-child) {
+        margin-bottom: var(--space-xs);
+      }
+    }
+
+    &_left {
+      flex-direction: row;
+
+      & .TextField-Label {
+        display: inline-flex;
+        align-items: center;
+        height: var(--input-height);
+      }
+
+      & > *:not(:last-child) {
+        margin-right: var(--space-s);
+      }
+    }
+  }
+
+  &-Body {
+    display: inline-flex;
+    flex-direction: column;
+    width: 100%;
+
+    & .TextField-Caption {
+      margin-top: var(--space-2xs);
+      margin-left: var(--caption-margin-left);
+    }
+  }
+
+  &_view_clear {
+    & .TextField-Caption {
+      --caption-margin-left: 0;
+    }
+  }
+
+  &-InputContainer {
+    position: relative;
+    display: inline-flex;
+    box-sizing: border-box;
+    max-width: 100%;
+    min-height: var(--input-height);
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-text-regular);
+    transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
+
+    &_disabled {
+      --counter-button-background: var(--color-control-bg-disable);
+      --counter-button-icon-color: var(--color-control-typo-disable);
+    }
+
+    &_view_clear,
+    &_view_clear:hover,
+    &_view_clear:focus {
+      padding: 0;
+      color: var(--color-control-typo-default);
+
+      &.TextField-InputContainer_disabled {
+        pointer-events: none;
+
+        & .TextField-Input {
+          color: var(--color-control-typo-disable);
+
+          &:-webkit-autofill,
+          &:-webkit-autofill:hover,
+          &:-webkit-autofill:focus {
+            -webkit-text-fill-color: var(--color-control-typo-disable);
+          }
+        }
+
+        & .TextField-Input::placeholder {
+          color: var(--color-control-typo-disable);
+        }
+
+        & .TextField-Side_type_string,
+        &.TextField-InputContainer_withValue .TextField-Side_type_string {
+          color: var(--color-control-typo-disable);
+        }
+
+        &.TextField-InputContainer .TextField-Icon,
+        &.TextField-InputContainer_withValue .TextField-Icon {
+          color: var(--color-control-typo-disable);
+        }
+      }
+    }
+
+    &_view_default {
+      --container-border-color: var(--color-control-bg-border-default);
+      overflow-x: hidden;
+      padding: 0 var(--input-space);
+      color: var(--color-control-typo-default);
+      background: var(--color-control-bg-default);
+      border: var(--control-border-width) solid var(--container-border-color);
+      border-radius: var(--control-radius);
+
+      &:hover {
+        border-color: var(--color-control-bg-border-default-hover);
+      }
+
+      &.TextField-InputContainer_status {
+        &_alert {
+          --container-border-color: var(--color-bg-alert);
+        }
+
+        &_success {
+          --container-border-color: var(--color-bg-success);
+        }
+
+        &_warning {
+          --container-border-color: var(--color-bg-warning);
+        }
+      }
+
+      & .TextField-Input {
+        color: var(--color-control-typo-default);
+
+        &::placeholder {
+          color: var(--color-control-typo-placeholder);
+        }
+
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus {
+          -webkit-text-fill-color: var(--color-control-typo-default);
+        }
+      }
+
+      & .TextField-Side {
+        &_type_string {
+          color: var(--color-control-typo-placeholder);
+        }
+      }
+
+      &.TextField-InputContainer_focus {
+        z-index: 1;
+        border-color: var(--color-control-bg-border-focus);
+        outline: none;
+
+        &.TextField-InputContainer_form_clearClear {
+          box-shadow: var(--control-border-width) 0 var(--color-control-bg-border-focus),
+            calc(-1 * var(--control-border-width)) 0 var(--color-control-bg-border-focus);
+        }
+
+        &.TextField-InputContainer_form_defaultClear,
+        &.TextField-InputContainer_form_brickClear,
+        &.TextField-InputContainer_form_roundClear {
+          box-shadow: var(--control-border-width) 0 var(--color-control-bg-border-focus);
+        }
+
+        &.TextField-InputContainer_form_clearDefault,
+        &.TextField-InputContainer_form_clearBrick,
+        &.TextField-InputContainer_form_clearRound {
+          box-shadow: calc(-1 * var(--control-border-width)) 0 var(--color-control-bg-border-focus);
+        }
+      }
+
+      &.TextField-InputContainer_disabled {
+        --clear-button-color: var(--color-control-typo-disable);
+        background: var(--color-control-bg-disable);
+        border-color: var(--color-control-bg-border-disable);
+        pointer-events: none;
+
+        & .TextField-Input {
+          color: var(--color-control-typo-disable);
+        }
+
+        & .TextField-Input::placeholder {
+          color: var(--color-control-typo-disable);
+        }
+
+        & .TextField-Side_type_string,
+        &.TextField-InputContainer_withValue .TextField-Side_type_string {
+          color: var(--color-control-typo-disable);
+        }
+
+        &.TextField-InputContainer .TextField-Icon,
+        &.TextField-InputContainer_withValue .TextField-Icon {
+          color: var(--color-control-typo-disable);
+        }
+      }
+    }
+
+    &_form {
+      &_defaultClear {
+        border-right-width: 0;
+        border-radius: var(--control-radius) 0 0 var(--control-radius);
+      }
+
+      &_defaultBrick {
+        border-radius: var(--control-radius) 0 0 var(--control-radius);
+      }
+
+      &_round {
+        padding-right: calc(var(--input-space) * 1.6);
+        padding-left: calc(var(--input-space) * 1.6);
+        border-radius: calc(var(--input-height) / 2);
+      }
+
+      &_roundBrick {
+        padding-left: calc(var(--input-space) * 1.6);
+        border-radius: calc(var(--input-height) / 2) 0 0 calc(var(--input-height) / 2);
+      }
+
+      &_roundClear {
+        padding-left: calc(var(--input-space) * 1.6);
+        border-right-width: 0;
+        border-radius: calc(var(--input-height) / 2) 0 0 calc(var(--input-height) / 2);
+      }
+
+      &_brick {
+        border-radius: 0;
+      }
+
+      &_brickDefault {
+        border-radius: 0 var(--control-radius) var(--control-radius) 0;
+      }
+
+      &_brickRound {
+        padding-right: calc(var(--input-space) * 1.6);
+        border-radius: 0 calc(var(--input-height) / 2) calc(var(--input-height) / 2) 0;
+      }
+
+      &_brickClear {
+        border-right-width: 0;
+        border-radius: 0;
+      }
+
+      &_clearDefault {
+        border-left-width: 0;
+        border-radius: 0 var(--control-radius) var(--control-radius) 0;
+      }
+
+      &_clearBrick {
+        border-left-width: 0;
+        border-radius: 0;
+      }
+
+      &_clearRound {
+        padding-right: calc(var(--input-space) * 1.6);
+        border-left-width: 0;
+        border-radius: 0 calc(var(--input-height) / 2) calc(var(--input-height) / 2) 0;
+      }
+
+      &_clearClear {
+        border-width: 0;
+        border-top-width: var(--control-border-width);
+        border-bottom-width: var(--control-border-width);
+        border-radius: 0;
+      }
+    }
+
+    &_withValue {
+      & .TextField-Side.TextField-Side_type_string {
+        color: var(--color-control-typo-default);
+      }
+
+      & .TextField-Icon {
+        color: var(--color-typo-secondary);
+      }
+    }
+
+    &_type_number {
+      padding-right: 0;
+    }
+
+    &_type_textarea {
+      & .TextField-Input {
+        resize: none;
+        display: block;
+        min-width: 0;
+        padding-top: calc(
+          (var(--input-height) - (var(--control-border-width) * 2) - var(--line-height-text-m)) / 2
+        );
+        padding-bottom: calc(
+          (var(--input-height) - (var(--control-border-width) * 2) - var(--line-height-text-m)) / 2
+        );
+        line-height: var(--line-height-text-m);
+      }
+    }
+  }
+
+  &-Counter {
+    display: inline-flex;
+    flex-direction: column;
+    width: var(--space-xl);
+    height: calc(var(--input-height) - (var(--control-border-width) * 2));
+  }
+
+  &-CounterButton {
+    display: inline-flex;
+    overflow-y: hidden;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    width: var(--space-xl);
+    margin: 0;
+    padding: 0;
+    color: var(--counter-button-icon-color);
+    background-color: var(--counter-button-background);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.15s;
+  }
+
+  &-ClearButton {
+    height: calc(var(--input-height) - (var(--control-border-width) * 2));
+    margin: 0;
+    margin-left: var(--input-space);
+    padding: 0;
+    color: var(--clear-button-color);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      --clear-button-color: var(--color-control-typo-clear-hover);
+    }
+  }
+
+  &-ClearButtonIcon {
+    position: relative;
+    top: 1px;
   }
 
   &-Input {
@@ -24,6 +378,16 @@
     outline: none;
     font-family: var(--font-primary);
     font-size: var(--input-font-size);
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &[type='number'] {
+      -moz-appearance: textfield;
+    }
 
     &:focus {
       outline: none;
@@ -64,253 +428,5 @@
 
   &-Icon {
     color: var(--color-control-typo-placeholder);
-  }
-
-  &_size {
-    &_xs {
-      --input-height: var(--control-height-xs);
-      --input-font-size: var(--control-text-size-xs);
-      --input-space: calc(var(--control-space-xs) * 0.5);
-    }
-
-    &_s {
-      --input-height: var(--control-height-s);
-      --input-font-size: var(--control-text-size-s);
-      --input-space: calc(var(--control-space-s) * 0.5);
-    }
-
-    &_m {
-      --input-height: var(--control-height-m);
-      --input-font-size: var(--control-text-size-m);
-      --input-space: calc(var(--control-space-m) * 0.5);
-    }
-
-    &_l {
-      --input-height: var(--control-height-l);
-      --input-font-size: var(--control-text-size-l);
-      --input-space: calc(var(--control-space-l) * 0.5);
-    }
-  }
-
-  &_view_clear,
-  &_view_clear:hover,
-  &_view_clear:focus {
-    padding: 0;
-    color: var(--color-control-typo-default);
-
-    &.TextField_disabled {
-      pointer-events: none;
-
-      & .TextField-Input {
-        color: var(--color-control-typo-disable);
-
-        &:-webkit-autofill,
-        &:-webkit-autofill:hover,
-        &:-webkit-autofill:focus {
-          -webkit-text-fill-color: var(--color-control-typo-disable);
-        }
-      }
-
-      & .TextField-Input::placeholder {
-        color: var(--color-control-typo-disable);
-      }
-
-      & .TextField-Side_type_string,
-      &.TextField_withValue .TextField-Side_type_string {
-        color: var(--color-control-typo-disable);
-      }
-
-      &.TextField .TextField-Icon,
-      &.TextField_withValue .TextField-Icon {
-        color: var(--color-control-typo-disable);
-      }
-    }
-  }
-
-  &_view_default {
-    padding: 0 var(--input-space);
-    color: var(--color-control-typo-default);
-    background: var(--color-control-bg-default);
-    border: var(--control-border-width) solid var(--color-control-bg-border-default);
-    border-radius: var(--control-radius);
-
-    &:hover {
-      border-color: var(--color-control-bg-border-default-hover);
-    }
-
-    &.TextField_state {
-      &_alert {
-        border-color: var(--color-bg-alert);
-      }
-
-      &_success {
-        border-color: var(--color-bg-success);
-      }
-
-      &_warning {
-        border-color: var(--color-bg-warning);
-      }
-    }
-
-    & .TextField-Input {
-      color: var(--color-control-typo-default);
-
-      &::placeholder {
-        color: var(--color-control-typo-placeholder);
-      }
-
-      &:-webkit-autofill,
-      &:-webkit-autofill:hover,
-      &:-webkit-autofill:focus {
-        -webkit-text-fill-color: var(--color-control-typo-default);
-      }
-    }
-
-    & .TextField-Side {
-      &_type_string {
-        color: var(--color-control-typo-placeholder);
-      }
-    }
-
-    &.TextField_focus {
-      z-index: 1;
-      border-color: var(--color-control-bg-border-focus);
-      outline: none;
-
-      &.TextField_form_clearClear {
-        box-shadow: var(--control-border-width) 0 var(--color-control-bg-border-focus),
-          calc(-1 * var(--control-border-width)) 0 var(--color-control-bg-border-focus);
-      }
-
-      &.TextField_form_defaultClear,
-      &.TextField_form_brickClear,
-      &.TextField_form_roundClear {
-        box-shadow: var(--control-border-width) 0 var(--color-control-bg-border-focus);
-      }
-
-      &.TextField_form_clearDefault,
-      &.TextField_form_clearBrick,
-      &.TextField_form_clearRound {
-        box-shadow: calc(-1 * var(--control-border-width)) 0 var(--color-control-bg-border-focus);
-      }
-    }
-
-    &.TextField_disabled {
-      background: var(--color-control-bg-disable);
-      border-color: var(--color-control-bg-border-disable);
-      pointer-events: none;
-
-      & .TextField-Input {
-        color: var(--color-control-typo-disable);
-      }
-
-      & .TextField-Input::placeholder {
-        color: var(--color-control-typo-disable);
-      }
-
-      & .TextField-Side_type_string,
-      &.TextField_withValue .TextField-Side_type_string {
-        color: var(--color-control-typo-disable);
-      }
-
-      &.TextField .TextField-Icon,
-      &.TextField_withValue .TextField-Icon {
-        color: var(--color-control-typo-disable);
-      }
-    }
-  }
-
-  &_form {
-    &_defaultClear {
-      border-right-width: 0;
-      border-radius: var(--control-radius) 0 0 var(--control-radius);
-    }
-
-    &_defaultBrick {
-      border-radius: var(--control-radius) 0 0 var(--control-radius);
-    }
-
-    &_round {
-      padding-right: calc(var(--input-space) * 1.6);
-      padding-left: calc(var(--input-space) * 1.6);
-      border-radius: calc(var(--input-height) / 2);
-    }
-
-    &_roundBrick {
-      padding-left: calc(var(--input-space) * 1.6);
-      border-radius: calc(var(--input-height) / 2) 0 0 calc(var(--input-height) / 2);
-    }
-
-    &_roundClear {
-      padding-left: calc(var(--input-space) * 1.6);
-      border-right-width: 0;
-      border-radius: calc(var(--input-height) / 2) 0 0 calc(var(--input-height) / 2);
-    }
-
-    &_brick {
-      border-radius: 0;
-    }
-
-    &_brickDefault {
-      border-radius: 0 var(--control-radius) var(--control-radius) 0;
-    }
-
-    &_brickRound {
-      padding-right: calc(var(--input-space) * 1.6);
-      border-radius: 0 calc(var(--input-height) / 2) calc(var(--input-height) / 2) 0;
-    }
-
-    &_brickClear {
-      border-right-width: 0;
-      border-radius: 0;
-    }
-
-    &_clearDefault {
-      border-left-width: 0;
-      border-radius: 0 var(--control-radius) var(--control-radius) 0;
-    }
-
-    &_clearBrick {
-      border-left-width: 0;
-      border-radius: 0;
-    }
-
-    &_clearRound {
-      padding-right: calc(var(--input-space) * 1.6);
-      border-left-width: 0;
-      border-radius: 0 calc(var(--input-height) / 2) calc(var(--input-height) / 2) 0;
-    }
-
-    &_clearClear {
-      border-width: 0;
-      border-top-width: var(--control-border-width);
-      border-bottom-width: var(--control-border-width);
-      border-radius: 0;
-    }
-  }
-
-  &_withValue {
-    & .TextField-Side.TextField-Side_type_string {
-      color: var(--color-control-typo-default);
-    }
-
-    & .TextField-Icon {
-      color: var(--color-typo-secondary);
-    }
-  }
-
-  &_type_textarea {
-    & .TextField-Input {
-      resize: none;
-      display: block;
-      min-width: 0;
-      padding-top: calc(
-        (var(--input-height) - (var(--control-border-width) * 2) - var(--line-height-text-m)) / 2
-      );
-      padding-bottom: calc(
-        (var(--input-height) - (var(--control-border-width) * 2) - var(--line-height-text-m)) / 2
-      );
-      line-height: var(--line-height-text-m);
-    }
   }
 }

@@ -2,19 +2,20 @@ import React from 'react';
 
 import { IconProps, IconPropSize } from '../../../icons/Icon/Icon';
 import {
-  cnTextField,
+  COMPONENT_NAME,
+  TextField,
   TextFieldPropAutoComplete,
   TextFieldPropForm,
   TextFieldPropId,
   TextFieldPropName,
   TextFieldPropOnChange,
   TextFieldPropSize,
-  TextFieldPropState,
+  TextFieldPropStatus,
   TextFieldPropValue,
   TextFieldPropView,
   TextFieldPropWidth,
 } from '../../TextField/TextField';
-import { EventInterceptorHandler, EventInterceptorPropComponent } from '../EventInterceptor';
+import { EventInterceptorHandler } from '../EventInterceptor';
 
 export type Props = {
   className?: string;
@@ -29,7 +30,7 @@ export type Props = {
   size?: TextFieldPropSize;
   view?: TextFieldPropView;
   form?: TextFieldPropForm;
-  state?: TextFieldPropState;
+  state?: TextFieldPropStatus;
   width?: TextFieldPropWidth;
   onFocus?: React.FocusEventHandler<HTMLElement>;
   onBlur?: React.FocusEventHandler<HTMLElement>;
@@ -50,13 +51,15 @@ export type Props = {
   children?: never;
 };
 
-export const useTextFieldEventsHandler = (
-  props: Props,
+type TextFieldProps = Parameters<typeof TextField>[0];
+
+export const useTextFieldEventsHandler = <P extends TextFieldProps>(
+  props: P,
   handler: EventInterceptorHandler,
   textFieldRef: React.RefObject<HTMLDivElement>,
-) => {
+): P => {
   const [inputChanged, setInputChanged] = React.useState<boolean>(false);
-  const newProps = { ...props };
+  const newProps: P = { ...props };
 
   React.useEffect(() => {
     setInputChanged(true);
@@ -70,13 +73,14 @@ export const useTextFieldEventsHandler = (
 
   newProps.onBlur = (...onBlurArgs) => {
     const value = {
-      component: cnTextField() as EventInterceptorPropComponent,
+      component: COMPONENT_NAME,
       event: 'change',
       options: {
         placeholder: newProps.placeholder,
         pageURL: window.location.href,
         DOMRef: textFieldRef.current,
         value: newProps.value,
+        props: newProps,
       },
     };
     if (inputChanged) {
