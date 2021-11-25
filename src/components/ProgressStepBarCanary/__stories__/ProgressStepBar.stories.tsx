@@ -2,6 +2,7 @@ import React from 'react';
 import { select } from '@storybook/addon-knobs';
 
 import { IconCheck } from '../../../icons/IconCheck/IconCheck';
+import { IconClose } from '../../../icons/IconClose/IconClose';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import { propDirection, propDirectionDefault, propSize, propSizeDefault } from '../helpers';
@@ -14,23 +15,23 @@ const cnProgressStepBarStories = cn('ProgressStepBarStories');
 const stepsExample = [
   {
     label: 'Первый пункт',
-    point: 1,
     status: 'success',
+    point: IconCheck,
     lineStatus: 'success',
     tooltipContent: `Небольшое описание выполнения или состояния текущего этапа`,
   },
   {
     label: 'Второй пункт',
-    point: 2,
+    point: IconClose,
     status: 'alert',
-    progress: true,
     lineStatus: 'alert',
     tooltipContent: `Небольшое описание выполнения или состояния текущего этапа`,
   },
   {
     label: 'Третий пункт',
-    point: IconCheck,
     status: 'warning',
+    point: 3,
+    progress: true,
     lineStatus: 'warning',
     tooltipContent: `Небольшое описание выполнения или состояния текущего этапа`,
   },
@@ -46,7 +47,7 @@ const stepsExample = [
 const defaultKnobs = () => ({
   size: select('size', propSize, propSizeDefault),
   direction: select('direction', propDirection, propDirectionDefault),
-  activeStepIndex: select('activeStepIndex', ['', 0, 1, 2, 3], ''),
+  activeStepIndex: select('activeStepIndex', ['', 0, 1, 2, 3], 3),
 });
 
 export function Playground() {
