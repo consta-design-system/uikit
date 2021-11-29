@@ -181,7 +181,7 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
       flag =
         visibleItems.filter(
           (group) => isOptionForCreate(group) || group.items.length > 0 || group.group,
-        ).length === 0 || !params.onCreate;
+        ).length === 0 && !params.onCreate;
     }
     return flag;
   }, [visibleItems]);
