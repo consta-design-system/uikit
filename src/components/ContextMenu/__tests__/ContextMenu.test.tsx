@@ -104,12 +104,12 @@ describe('Компонент ContextMenu', () => {
         expect(getGroupHeader()?.textContent).toEqual(groups[0].name);
       });
     });
-    describe('проверка getOnItemClick', () => {
+    describe('проверка getItemOnClick', () => {
       it('клик по элементу должен вызвать callback', () => {
         const handleChange = jest.fn();
 
         renderComponent({
-          getOnItemClick: handleChange,
+          getItemOnClick: handleChange,
         });
 
         fireEvent.click(getItem());

@@ -58,8 +58,8 @@ export const ContextMenuLevel: ContextMenuLevelType = React.forwardRef(
       getAccent,
       getDisabled,
       getOnClick,
-      getOnItemClick,
-      onClick,
+      getItemOnClick,
+      onItemClick,
 
       // props относящиеся к группам меню
       sortGroup,
@@ -141,14 +141,16 @@ export const ContextMenuLevel: ContextMenuLevelType = React.forwardRef(
                 const rightSide =
                   typeof getRightSideBar === 'function' ? getRightSideBar(item) : undefined;
                 const subItems = typeof getSubItems === 'function' ? getSubItems(item) : undefined;
-                const onItemClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+                const onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
                   if (!disabled) {
-                    if (typeof getOnItemClick === 'function') {
-                      getOnItemClick(item)?.(e);
-                    } else if (typeof getOnClick === 'function') {
+                    if (typeof getItemOnClick === 'function') {
+                      getItemOnClick(item)?.(e);
+                    }
+                    if (typeof getOnClick === 'function') {
                       getOnClick(item)?.(e);
-                    } else {
-                      onClick?.({ e, item });
+                    }
+                    if (typeof onItemClick === 'function') {
+                      onItemClick?.({ e, item });
                     }
                   }
                 };
@@ -172,7 +174,7 @@ export const ContextMenuLevel: ContextMenuLevelType = React.forwardRef(
                     size={size}
                     key={itemIndex}
                     onMouseEnter={onMouseEnter}
-                    onClick={onItemClick}
+                    onClick={onClick}
                     active={activeItem === itemIndex}
                     withSubMenu={Boolean(subItems)}
                     accent={accent}
