@@ -5,7 +5,7 @@ import React from 'react';
 import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { IconArrowDown } from '../../icons/IconArrowDown/IconArrowDown';
 import { cn } from '../../utils/bem';
-import { getSizeByMap } from '../../utils/getSizeByMap';
+import { getByMap } from '../../utils/getByMap';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { Text } from '../Text/Text';
 
@@ -140,7 +140,7 @@ export const Collapse: Collapse = React.forwardRef<HTMLDivElement, CollapseProps
       >
         <CollapseIcon
           className={cnCollapse('Icon', { position: iconPosition })}
-          size={getSizeByMap(sizeIconMap, size)}
+          size={getByMap(sizeIconMap, size)}
           icon={icon}
           closeIcon={closeIcon}
           isOpen={isOpen}

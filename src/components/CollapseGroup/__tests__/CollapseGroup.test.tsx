@@ -2,7 +2,7 @@ import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 
 import { IconSun } from '../../../icons/IconSun/IconSun';
-import { getSizeByMap } from '../../../utils/getSizeByMap';
+import { getByMap } from '../../../utils/getByMap';
 import { Badge } from '../../Badge/Badge';
 import { cnCollapse, sizeIconMap } from '../../Collapse/Collapse';
 import { CollapseGroup, CollapseGroupProps } from '../CollapseGroup';
@@ -30,7 +30,7 @@ export const items: Item[] = [
 
 const defaultRightSide: React.ReactNode = [
   <Badge label="Статус" size="s" />,
-  <IconSun size={getSizeByMap(sizeIconMap, 'm')} />,
+  <IconSun size={getByMap(sizeIconMap, 'm')} />,
 ];
 
 const getItemLabel = (item: Item) => item.name;

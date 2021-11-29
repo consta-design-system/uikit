@@ -1,4 +1,4 @@
-import { getSizeByMap } from './getSizeByMap';
+import { getByMap } from './getByMap';
 
 type SizeComponent = 'm' | 's';
 type SizeIcon = 's' | 'xs';
@@ -10,12 +10,12 @@ const sizeMap: Record<SizeComponent, SizeIcon> = {
 
 describe('helper getSizeByMap', () => {
   it('Выборка из объекта верная', () => {
-    const result = getSizeByMap(sizeMap, 'm');
+    const result = getByMap(sizeMap, 'm');
 
     expect(result).toEqual('s');
   });
   it('при указании аргумента 3, нужно вернуть значение этого аргумента', () => {
-    const result = getSizeByMap(sizeMap, 'm', 'xs');
+    const result = getByMap(sizeMap, 'm', 'xs');
 
     expect(result).toEqual('xs');
   });
