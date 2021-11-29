@@ -8,6 +8,9 @@ import ButtonImage from './images/ButtonImage';
 import CardImage from './images/CardImage';
 import CheckboxGroupImage from './images/CheckboxGroupImage';
 import CheckboxImage from './images/CheckboxImage';
+import CollapseGroupImage from './images/CollapseGroupImage';
+import CollapseImage from './images/CollapseImage';
+import ComboboxImage from './images/ComboboxImage';
 import DatePickerImage from './images/DatePickerImage';
 import DateTimeImage from './images/DateTimeImage';
 import DragNDropFieldImage from './images/DragNDropFieldImage';
@@ -23,6 +26,8 @@ import SwitchGroupImage from './images/SwitchGroupImage';
 import SwitchImage from './images/SwitchImage';
 import TabsImage from './images/TabsImage';
 import TagImage from './images/TagImage';
+import ThemeImage from './images/ThemeImage';
+import ThemeTogglerImage from './images/ThemeTogglerImage';
 import TimerImage from './images/TimerImage';
 import TooltipImage from './images/TooltipImage';
 import UserImage from './images/UserImage';
@@ -129,28 +134,28 @@ export const data: Data = [
         description: 'Можно перетащить файлы, чтобы загрузить или отправить.',
       },
       {
-        name: 'FileField',
-        componentName: 'FileField',
-        url: '/?path=/docs/components-filefield--playground',
-        description: 'Можно выбрать файлы, чтобы загрузить или отправить.',
-      },
-      {
         name: 'File',
         componentName: 'File',
         url: '/?path=/docs/components-file--playground',
         description: 'Иконка для файла с расширением.',
       },
       {
-        name: 'Header',
-        componentName: 'Header',
-        url: '/?path=/docs/components-header--playground',
-        description: 'Шапка. Блок с меню, поиском и аватаркой.',
+        name: 'FileField',
+        componentName: 'FileField',
+        url: '/?path=/docs/components-filefield--playground',
+        description: 'Можно выбрать файлы, чтобы загрузить или отправить.',
       },
       {
         name: 'Grid',
         componentName: 'Grid',
         url: '/?path=/docs/components-grid--playground',
         description: 'Модульная сетка. Отвечает за расположение содержимого на странице.',
+      },
+      {
+        name: 'Header',
+        componentName: 'Header',
+        url: '/?path=/docs/components-header--playground',
+        description: 'Шапка. Блок с меню, поиском и аватаркой.',
       },
       {
         name: 'Informer',
@@ -342,6 +347,9 @@ export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> =
   Card: CardImage,
   Checkbox: CheckboxImage,
   CheckboxGroup: CheckboxGroupImage,
+  Collapse: CollapseImage,
+  CollapseGroup: CollapseGroupImage,
+  Combobox: ComboboxImage,
   DatePicker: DatePickerImage,
   DateTime: DateTimeImage,
   DragNDropField: DragNDropFieldImage,
@@ -357,6 +365,8 @@ export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> =
   SwitchGroup: SwitchGroupImage,
   Tabs: TabsImage,
   Tag: TagImage,
+  Theme: ThemeImage,
+  ThemeToggler: ThemeTogglerImage,
   Timer: TimerImage,
   Tooltip: TooltipImage,
   User: UserImage,
