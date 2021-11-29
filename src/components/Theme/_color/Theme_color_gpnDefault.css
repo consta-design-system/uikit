@@ -30,7 +30,10 @@ $color-base-critical: #33000f;
   --color-bg-ghost: color($color-base-phantom l(-11) a(8%)); /* Цвет затенения */
   --color-bg-tone: color($color-base-phantom l(-11) a(85%)); /* Цвет паранджи */
   --color-bg-soft: color($color-base-essential a(90%)); /* Цвет молока */
-  --color-bg-system: color($color-base-system a(100%)); /* Цвет фона системнный */
+  --color-bg-system: color(
+    $color-base-system h(204) s(18) l(89) a(100%)
+  ); /* Цвет фона системнный */
+
   --color-bg-normal: color($color-base-normal a(100%)); /* Цвет фона нейтральный */
   --color-bg-success: color($color-base-success a(100%)); /* Цвет фона успеха */
   --color-bg-caution: color($color-base-caution a(100%)); /* Цвет фона осторожности */
@@ -44,7 +47,10 @@ $color-base-critical: #33000f;
   --color-typo-secondary: color($color-base-base a(60%)); /* Цвет второстепенного текста */
   --color-typo-ghost: color($color-base-base a(30%)); /* Цвет дополнительного текста */
   --color-typo-brand: color($color-base-project a(100%)); /* Цвет брендового текста */
-  --color-typo-system: color($color-base-system s(+10) l(-21)); /* Цвет фона системнный */
+  --color-typo-system: color(
+    $color-base-system h(204) s(28) l(68) a(100%)
+  ); /* Цвет фона системнный */
+
   --color-typo-normal: color($color-base-normal s(+14) l(-4)); /* Цвет фона нейтральный */
   --color-typo-success: color($color-base-success s(+20) l(-8)); /* Цвет текста успеха */
   --color-typo-caution: color(
