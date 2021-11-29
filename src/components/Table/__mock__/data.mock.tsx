@@ -1189,8 +1189,8 @@ export const tableDataWithConditionalClassName: TableProps<typeof rowsWithObject
     },
   ],
   rows: rowsWithObjectFields,
-  getConditionalClassName: (column, row) =>
-    row.type === 'Нефтяное' && !column.mergeCells ? 'darkBackground' : '',
+  getConditionalClassName: (column, row, isActive) =>
+    !isActive && row.type === 'Нефтяное' && !column.mergeCells ? 'darkBackground' : '',
 };
 
 enum CustomIDs {

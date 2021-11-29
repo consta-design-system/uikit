@@ -77,10 +77,6 @@
     &_isMerged {
       align-items: center;
     }
-
-    .darkBackground &:not(&_isActive) {
-      background-color: var(--color-bg-ghost);
-    }
   }
 
   &-EmptyCell {
@@ -102,4 +98,8 @@
   &-CreateRowButton {
     border-top: var(--table-border);
   }
+}
+
+.darkBackground {
+  background-color: var(--color-bg-ghost) !important;
 }

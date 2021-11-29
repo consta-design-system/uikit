@@ -77,7 +77,7 @@ const getKnobs = <T extends TableRow>(replacedProps?: Partial<Props<T>>): Props<
   const handleConditionalClass = callbackWithSelector(
     { name: 'getConditionalClassName', isActive: true },
     props.getConditionalClassName,
-  ) as ((column: TableColumn<T>, row: T) => string) | undefined;
+  ) as ((column: TableColumn<T>, row: T, isActive: boolean) => string) | undefined;
 
   return {
     columns: object('columns', props.columns),
