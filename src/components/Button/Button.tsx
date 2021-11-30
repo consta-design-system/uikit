@@ -1,6 +1,6 @@
 import './Button.css';
 
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
@@ -8,6 +8,7 @@ import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
+import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { Loader } from '../Loader/Loader';
 
 export const buttonPropSize = ['m', 'xs', 's', 'l'] as const;
@@ -70,6 +71,8 @@ const sizeMapOnlyIcon: Record<ButtonPropSize, IconPropSize> = {
 };
 
 export const Button = forwardRefWithAs<Props, 'button'>((props, ref) => {
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+
   const {
     size = buttonPropSizeDefault,
     view = buttonPropViewDefault,
@@ -87,7 +90,7 @@ export const Button = forwardRefWithAs<Props, 'button'>((props, ref) => {
     onlyIcon,
     iconSize: iconSizeProp,
     ...otherProps
-  } = usePropsHandler(COMPONENT_NAME, props, ref);
+  } = usePropsHandler(COMPONENT_NAME, props, buttonRef);
 
   const Tag = as as string;
   const IconOnly = (!label || onlyIcon) && (iconLeft || iconRight);
@@ -124,7 +127,7 @@ export const Button = forwardRefWithAs<Props, 'button'>((props, ref) => {
       )}
       tabIndex={tabIndex}
       title={title}
-      ref={ref}
+      ref={useForkRef([ref, buttonRef])}
       {...(Tag === 'button' ? { disabled: disabled || loading } : {})}
     >
       {IconOnly && <IconOnly className={cnButton('Icon')} size={iconSize} />}
