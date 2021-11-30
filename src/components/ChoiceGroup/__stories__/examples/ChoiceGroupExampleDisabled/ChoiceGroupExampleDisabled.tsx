@@ -17,7 +17,6 @@ export const ChoiceGroupExampleDisabled = () => {
         onChange={({ value }) => setValue(value)}
         items={items}
         getLabel={(item) => item}
-        multiple={false}
         name="ChoiceGroupExampleDisabled"
         disabled
       />
