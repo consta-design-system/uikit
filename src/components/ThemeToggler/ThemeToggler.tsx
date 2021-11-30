@@ -134,7 +134,7 @@ export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef)
           getLeftSideBar={renderIcons}
           getRightSideBar={renderChecks}
           onClickOutside={() => setIsOpen(false)}
-          getOnItemClick={getOnChange}
+          getItemOnClick={getOnChange}
           size={contextMenuSize}
         />
       )}
