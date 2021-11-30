@@ -1,12 +1,56 @@
+import {
+  MixSpaceExampleButtonWithSpaces,
+  MixSpaceExampleButtonWithoutSpaces,
+} from './examples/MixSpaceExample/MixSpaceExample';
+
 <Meta title="Mixins|MixSpace" id="MixSpace" />
 
 # MixSpace
 
-С помощью миксина `MixSpace` можно добавить отступы от и внутри
-любого элемента.
+```tsx
+import { cnMixSpace } from '@consta/uikit/MixSpace';
+```
 
-- [Список свойств](#список-свойств)
-- [Пример использования](#пример-использования)
+С помощью миксина `MixSpace` можно добавить отступы внутри
+любого элемента и вокруг него.
+
+##### Пример кнопки без отступов
+
+```tsx
+export const MixSpaceExampleButtonWithoutSpaces = () => {
+  return (
+    <>
+      <Text>Это текст, он нужен, чтобы показать отступы от кнопки сверху</Text>
+      <Button label="Это кнопка без отступов" />
+      <Text>Это текст, он нужен, чтобы показать отступы от кнопки снизу</Text>
+    </>
+  );
+};
+```
+
+<MixSpaceExampleButtonWithoutSpaces />
+
+##### Пример кнопки с отступами снаружи
+
+```tsx
+export const MixSpaceExampleButtonWithSpaces = () => {
+  return (
+    <>
+      <Text>Это текст, он нужен, чтобы показать отступы от кнопки сверху</Text>
+      <Button
+        label="Это кнопка с отступами снаружи"
+        className={cnMixSpace({
+          m: 'm',
+          mT: '3xs',
+        })}
+      />
+      <Text>Это текст, он нужен, чтобы показать отступы от кнопки снизу</Text>
+    </>
+  );
+};
+```
+
+<MixSpaceExampleButtonWithSpaces />
 
 ## Список свойств
 
@@ -29,7 +73,7 @@ type PropSpace =
 | Свойство | Тип или варианты значения | По умолчанию | Описание                               |
 | -------- | ------------------------- | ------------ | -------------------------------------- |
 | `p?`     | `PropSpace`               | -            | Отступы внутри элемента                |
-| `m?`     | `PropSpace`               | -            | Отступы от элемента                    |
+| `m?`     | `PropSpace`               | -            | Отступы вокруг элемента                |
 | `pV?`    | `PropSpace`               | -            | Вертикальные отступы внутри элемента   |
 | `pH?`    | `PropSpace`               | -            | Горизонтальные отступы внутри элемента |
 | `mV?`    | `PropSpace`               | -            | Вертикальные отступы от элемента       |
@@ -49,7 +93,7 @@ type PropSpace =
 import React from 'react';
 
 import { Text } from '@consta/uikit/Text';
-import { cnMixCard } from '@consta/uikit/MixSpace';
+import { cnMixSpace } from '@consta/uikit/MixSpace';
 
 export const MixSpaceExample = () => {
   return (
