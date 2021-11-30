@@ -21,6 +21,7 @@ export const useButtonEventHandler = <T extends ButtonProps>(
         text: (e.currentTarget as HTMLButtonElement).innerText,
         pageURL: e.currentTarget.baseURI,
         DOMRef: ref.current,
+        props: newProps,
       },
     };
     handler!(value);

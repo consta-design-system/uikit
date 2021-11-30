@@ -3,7 +3,7 @@ import './ContextMenuGroupHeader.css';
 import React from 'react';
 
 import { cn } from '../../../utils/bem';
-import { getSizeByMap } from '../../../utils/getSizeByMap';
+import { getByMap } from '../../../utils/getByMap';
 import { Text, TextPropSize } from '../../Text/Text';
 import { contextMenuDefaultSize, ContextMenuPropSize } from '../helpers';
 
@@ -25,7 +25,7 @@ export const ContextMenuGroupHeader: React.FC<{
     view="secondary"
     transform="uppercase"
     className={cnContextMenuGroupHeader({ size, first })}
-    size={getSizeByMap(sizeMap, size)}
+    size={getByMap(sizeMap, size)}
   >
     {label}
   </Text>

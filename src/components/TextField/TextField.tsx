@@ -4,8 +4,11 @@ import React, { forwardRef, useState } from 'react';
 import TextAreaAutoSize from 'react-textarea-autosize';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
+import { IconClose } from '../../icons/IconClose/IconClose';
+import { IconSelect } from '../../icons/IconSelect/IconSelect';
+import { IconSelectOpen } from '../../icons/IconSelectOpen/IconSelectOpen';
 import { cn } from '../../utils/bem';
-import { getSizeByMap } from '../../utils/getSizeByMap';
+import { getByMap } from '../../utils/getByMap';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { FieldCaption } from '../FieldCaption/FieldCaption';
 import { FieldLabel } from '../FieldLabel/FieldLabel';
@@ -28,6 +31,7 @@ export function TextFieldRender<TYPE extends string>(
   ref: React.Ref<HTMLDivElement>,
 ) {
   const textFieldRef = React.useRef<HTMLDivElement>(null);
+  const inputRef = React.useRef<HTMLInputElement | HTMLTextAreaElement>(null);
 
   const {
     className,
@@ -40,7 +44,7 @@ export function TextFieldRender<TYPE extends string>(
     cols,
     minRows,
     maxRows,
-    inputRef,
+    inputRef: inputRefProp,
     maxLength,
     disabled,
     size = textFieldPropSizeDefault,
@@ -56,11 +60,12 @@ export function TextFieldRender<TYPE extends string>(
     leftSide,
     rightSide,
     autoComplete,
+    withClearButton,
     max,
     min,
     readOnly,
     required,
-    step,
+    step = 1,
     tabIndex,
     ariaLabel,
     label,
@@ -68,6 +73,7 @@ export function TextFieldRender<TYPE extends string>(
     caption,
     iconSize: iconSizeProp,
     focused,
+    onClick,
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, props, textFieldRef);
   const [focus, setFocus] = useState<boolean>(autoFocus);
@@ -76,7 +82,7 @@ export function TextFieldRender<TYPE extends string>(
   const RightIcon = rightSide;
   const leftSideIsString = typeof leftSide === 'string';
   const rightSideIsString = typeof rightSide === 'string';
-  const iconSize = getSizeByMap(sizeMap, size, iconSizeProp);
+  const iconSize = getByMap(sizeMap, size, iconSizeProp);
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (e) => {
     const { value } = e.target;
@@ -117,10 +123,7 @@ export function TextFieldRender<TYPE extends string>(
     cols,
     minRows: minRows || rows,
     maxRows: maxRows || rows,
-    inputRef:
-      inputRef === null
-        ? undefined
-        : (inputRef as (node: HTMLTextAreaElement) => void | React.RefObject<HTMLTextAreaElement>),
+    inputRef: useForkRef([inputRef, inputRefProp]) as (node: HTMLTextAreaElement) => void,
   };
 
   const inputProps = {
@@ -128,13 +131,61 @@ export function TextFieldRender<TYPE extends string>(
     max,
     min,
     step,
-    ref: inputRef as React.Ref<HTMLInputElement>,
+    ref: useForkRef([inputRef, inputRefProp]) as React.RefCallback<HTMLInputElement>,
+  };
+
+  const handleClear: (e: React.MouseEvent<HTMLButtonElement>) => void = (e) => {
+    onChange?.({
+      e,
+      value: '',
+    });
+  };
+
+  const changeNumberValue: (
+    e: React.MouseEvent<HTMLButtonElement>,
+    isIncrement?: boolean,
+  ) => void = (e, isIncrement = true) => {
+    let currentValue = value || 0;
+    currentValue = isIncrement
+      ? Number(currentValue) + Number(step)
+      : Number(currentValue) - Number(step);
+    onChange?.({
+      e,
+      value: currentValue.toFixed(
+        Number(
+          /* Необходимо для того, чтобы избежать ситуации, когда по нажатию
+          на кнопку прибавляется число с погрешностью.
+          Здесь мы берем разрядность дробной части шага и ограничиваем
+          результирующее число этой разрядностью */
+          Number(step)
+            .toString()
+            .split('.')[1]?.length,
+        ) || 0,
+      ),
+    });
+  };
+
+  const rootProps = {
+    // для того чтобы любые клики во внутренним элементам фокусили инпут
+    onClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      inputRef.current?.focus();
+      onClick?.(e);
+    },
   };
 
   return (
-    <div className={cnTextField({ labelPosition, size, view, width }, [className])} {...otherProps}>
+    <div
+      className={cnTextField({ labelPosition, size, view, width }, [className])}
+      ref={useForkRef([ref, textFieldRef])}
+      {...rootProps}
+      {...otherProps}
+    >
       {label && (
-        <FieldLabel className={cnTextField('Label')} size={size}>
+        <FieldLabel
+          required={required}
+          className={cnTextField('Label', { labelPosition })}
+          size={size}
+        >
           {label}
         </FieldLabel>
       )}
@@ -149,7 +200,6 @@ export function TextFieldRender<TYPE extends string>(
             focus: focus || focused,
             withValue: !!value,
           })}
-          ref={useForkRef([ref, textFieldRef])}
         >
           {LeftIcon && (
             <div
@@ -171,7 +221,38 @@ export function TextFieldRender<TYPE extends string>(
           ) : (
             <input {...commonProps} {...inputProps} />
           )}
-          {RightIcon && (
+
+          {type === 'number' && (
+            <div className={cnTextField('Counter')}>
+              <button
+                onClick={(e) => changeNumberValue(e, true)}
+                type="button"
+                className={cnTextField('CounterButton')}
+              >
+                <IconSelectOpen size="xs" />
+              </button>
+              <button
+                onClick={(e) => changeNumberValue(e, false)}
+                type="button"
+                className={cnTextField('CounterButton')}
+              >
+                <IconSelect size="xs" />
+              </button>
+            </div>
+          )}
+
+          {value && withClearButton && type !== 'number' && (
+            <button
+              type="button"
+              disabled={disabled}
+              onClick={handleClear}
+              className={cnTextField('ClearButton')}
+            >
+              <IconClose size="xs" className={cnTextField('ClearButtonIcon')} />
+            </button>
+          )}
+
+          {RightIcon && type !== 'number' && (
             <div
               className={cnTextField('Side', {
                 position: 'right',
@@ -198,5 +279,4 @@ export function TextFieldRender<TYPE extends string>(
 }
 
 export const TextField = forwardRef(TextFieldRender) as TextFieldComponent;
-
 export * from './helpers';

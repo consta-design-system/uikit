@@ -53,6 +53,7 @@ function UserSelectRender<
     disabled,
     ariaLabel,
     id,
+    required,
     dropdownRef = defaultDropdownRef,
     form = defaultPropForm,
     view = defaultPropView,
@@ -104,6 +105,7 @@ function UserSelectRender<
     searchValue,
     clearValue,
     getHandleRemoveValue,
+    notFound,
   } = useSelect({
     items,
     groups,
@@ -207,6 +209,7 @@ function UserSelectRender<
       focused={isFocused}
       disabled={disabled}
       size={size}
+      required={required}
       view={view}
       form={form}
       multiple
@@ -271,6 +274,7 @@ function UserSelectRender<
         visibleItems={visibleItems}
         labelForNotFound={labelForNotFound}
         labelForCreate={labelForCreate}
+        notFound={notFound}
       />
       <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
         {searchValue}

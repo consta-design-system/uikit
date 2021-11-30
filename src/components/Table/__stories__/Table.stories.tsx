@@ -9,12 +9,15 @@ import {
   CustomIDs,
   generateData,
   partOfTableDataForCustomTagLabelFunction,
+  rowsForCustomTagLabelFunction,
   tableData,
   tableDataWithRenderFn,
   tableWithBagdeData,
   tableWithExpandableRowsData,
   tableWithMergedCellsData,
   tableWithMultiLevelHeadersData,
+  withControlTableMock,
+  withHiddenColumnTableMock,
 } from '../__mock__/data.mock';
 import { IconCopy } from '../../../icons/IconCopy/IconCopy';
 import { updateAt } from '../../../utils/array';
@@ -31,6 +34,7 @@ import {
   Table,
   TableColumn,
   TableProps as Props,
+  TableProps,
   TableRow,
   zebraStriped,
 } from '../Table';
@@ -223,14 +227,14 @@ const WithOnRowHoverContent = <T extends TableRow>(): JSX.Element => {
     ),
   }));
 
-  const columns: Array<TableColumn<typeof rows[number]>> = [
+  const columns: TableColumn<typeof rows[number]>[] = [
     {
       title: 'Появится кнопка при наведении',
       accessor: 'button',
       align: 'center',
       width: 120,
     },
-    ...tableData.columns,
+    ...(tableData.columns as TableColumn<typeof rows[number]>[]),
   ];
 
   return (
@@ -481,6 +485,47 @@ export const withCustomTagLabelFunction = createStory(
 export const WithRowActions = createStory(() => <WithRowCreationAndDeletion />, {
   name: 'с добавлением/удалением строк',
 });
+
+export const WithIcon = createStory(() => <Table {...getKnobs(withControlTableMock)} />, {
+  name: 'С использованием control',
+});
+
+export const WithHiddenColumn = createStory(
+  () => {
+    const [mock, setMock] = useState<TableProps<typeof rowsForCustomTagLabelFunction[number]>>(
+      withHiddenColumnTableMock,
+    );
+    const [isHidden, setIsHidden] = useState<boolean>(true);
+
+    const handleClick = () => {
+      setIsHidden(!isHidden);
+
+      const overrideMock = { ...mock };
+
+      overrideMock.columns = overrideMock.columns.map((column) => {
+        const newColumn = { ...column };
+
+        if (newColumn.hidden !== undefined) {
+          newColumn.hidden = !column.hidden;
+        }
+
+        return newColumn;
+      });
+
+      setMock(overrideMock);
+    };
+
+    return (
+      <div>
+        <Button label={isHidden ? 'Показать колонку' : 'Скрыть колонку'} onClick={handleClick} />
+        <Table {...getKnobs(mock)} columns={mock.columns} />
+      </div>
+    );
+  },
+  {
+    name: 'со скрытыми колонками',
+  },
+);
 
 export default createMetadata({
   title: 'Компоненты|/Отображение данных/Table',

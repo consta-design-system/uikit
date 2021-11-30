@@ -80,6 +80,7 @@ export const useTextFieldEventsHandler = <P extends TextFieldProps>(
         pageURL: window.location.href,
         DOMRef: textFieldRef.current,
         value: newProps.value,
+        props: newProps,
       },
     };
     if (inputChanged) {

@@ -70,6 +70,7 @@ export type ComboboxProps<
     onCreate?: (props: { e: React.SyntheticEvent; label: string }) => void;
     inputRef?: React.RefObject<HTMLInputElement>;
     labelForNotFound?: string;
+    required?: boolean;
     labelForCreate?: string;
     searchFunction?: PropSearchFunction<ITEM>;
     multiple?: MULTIPLE;

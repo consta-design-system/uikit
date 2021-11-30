@@ -25,9 +25,10 @@ const getKnobs = () => ({
   size: select('size', ['m', 's', 'l'], defaultPropSize),
   view: select('view', propView, defaultPropView),
   form: select('form', propForm, defaultPropForm),
+  required: boolean('required', false),
+  caption: text('caption', 'Хорошо подумайте, это важно'),
+  label: text('label', 'Здесь можно выбрать цвет'),
   status: select('status', ['', ...propStatus], ''),
-  caption: text('caption', 'Подпись'),
-  label: text('label', 'Заголовок'),
   labelPosition: select('labelPosition', ['top', 'left'], 'top'),
   placeholder: text('placeholder', 'Placeholder'),
   withGroups: boolean('withGroups', false),
@@ -39,6 +40,7 @@ export function Playground(): JSX.Element {
     disabled,
     view,
     form,
+    required,
     status,
     placeholder,
     withGroups,
@@ -58,6 +60,7 @@ export function Playground(): JSX.Element {
         disabled={disabled}
         view={view}
         form={form}
+        required={required}
         status={status || undefined}
         placeholder={placeholder}
         items={items}
@@ -78,6 +81,7 @@ export function Playground(): JSX.Element {
       disabled={disabled}
       view={view}
       form={form}
+      required={required}
       status={status || undefined}
       placeholder={placeholder}
       items={items}
@@ -99,6 +103,7 @@ export const WithRender = createStory(
       view,
       status,
       form,
+      required,
       placeholder,
       withGroups,
       label,
@@ -116,6 +121,7 @@ export const WithRender = createStory(
         status={status || undefined}
         placeholder={placeholder}
         items={myData}
+        required={required}
         value={value}
         onChange={({ value }) => setValue(value)}
         groups={withGroups ? myGroup : []}
@@ -163,6 +169,7 @@ export const WithCreate = createStory(
       disabled,
       view,
       form,
+      required,
       status,
       placeholder,
       withGroups,
@@ -178,6 +185,7 @@ export const WithCreate = createStory(
         size={size}
         disabled={disabled}
         view={view}
+        required={required}
         form={form}
         status={status || undefined}
         placeholder={placeholder}

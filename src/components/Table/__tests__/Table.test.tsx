@@ -124,6 +124,28 @@ describe('Компонент Table', () => {
       });
     });
 
+    describe('проверка работы добавления control', () => {
+      it('control отображается корректно', () => {
+        /** Добавляем нашу filterIcon */
+        defaultProps.columns = defaultProps.columns.map((column) => {
+          const cloneColumn = { ...column };
+
+          cloneColumn.control = () => <div className="filterIcon">test</div>;
+
+          return cloneColumn;
+        });
+
+        renderComponent(defaultProps);
+
+        const filterIcons = screen.getAllByText('test', {
+          selector: '.TableCell-Wrapper .filterIcon',
+        });
+
+        /** Проверяем, что корректно появились компоненты с filterIcon */
+        expect(filterIcons.length > 0).toBeTruthy();
+      });
+    });
+
     describe('проверка объединения ячеек', () => {
       const rowsWithMergeCells = [
         {

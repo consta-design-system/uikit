@@ -5,7 +5,7 @@ import React, { useMemo } from 'react';
 import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { IconArrowRight } from '../../icons/IconArrowRight/IconArrowRight';
 import { cn } from '../../utils/bem';
-import { getSizeByMap } from '../../utils/getSizeByMap';
+import { getByMap } from '../../utils/getByMap';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { Button } from '../Button/Button';
 
@@ -59,7 +59,7 @@ export const Breadcrumbs: Breadcrumbs = React.forwardRef((props, ref) => {
     ...restProps
   } = props;
 
-  const iconSize = getSizeByMap(sizeMap, size);
+  const iconSize = getByMap(sizeMap, size);
 
   const { head, tail, rest } = useMemo(() => {
     const rest = pages.slice();

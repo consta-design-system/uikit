@@ -17,9 +17,13 @@ import {
 import { ComboboxExampleLabel } from './examples/ComboboxExampleLabel/ComboboxExampleLabel';
 import { ComboboxExampleStatus } from './examples/ComboboxExampleStatus/ComboboxExampleStatus';
 
+<!--info
+description: Выпадающий список с поиском. Можно выбрать один или несколько вариантов.
+-->
+
 # Combobox
 
-Выпадающий список. Позволяет выбрать один из нескольких вариантов.
+Выпадающий список. Позволяет выбрать один или несколько вариантов.
 Этот компонент выглядит как [Select](?path=/docs/components-select--playground),
 но возможностей больше.
 
@@ -1003,6 +1007,9 @@ type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | [`getItemDisabled?`](#свои-тип-данных-items-и-groups)     | `PropGetItemDisabled<ITEM>`                            | `(item) => item.disabled`                                     | Функция для определения состояния `disabled`                           |
 | [`getGroupLabel?`](#свои-тип-данных-items-и-groups)       | `PropGetGroupKey<GROUP>`                               | `(group) => group.id`                                         | Функция для определения названия группы                                |
 | [`getGroupKey?`](#свои-тип-данных-items-и-groups)         | `PropGetGroupLabel<GROUP>`                             | `(group) => group.label`                                      | Функция для определения уникального ключа группы                       |
+| `required?`                                               | `boolean`                                              | -                                                             | Нужно заполнить                                                        |
+| `labelForNotFound?`                                       | `string`                                               | `Не найдено`                                                  | Отоброжаемые текст если результаты не были найдены                     |
+| `labelForCreate?`                                         | `string`                                               | `+`                                                           | Отоброжаемый текст для добавления нового элемента                      |
 | `onBlur?`                                                 | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                                                             | Обработчик события `blur`                                              |
 | `onFocus?`                                                | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                                                             | Обработчик события `focus`                                             |
 | `ariaLabel?`                                              | `string`                                               | -                                                             | `aria` атрибут для поля ввода                                          |

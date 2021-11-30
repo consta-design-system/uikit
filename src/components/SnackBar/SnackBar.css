@@ -1,6 +1,11 @@
 .SnackBar {
   display: flex;
   flex-direction: column-reverse;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: calc(400px + var(--space-xs) * 2);
+  padding-right: var(--space-xs);
+  padding-left: var(--space-xs);
 
   &-Item {
     &_animate {

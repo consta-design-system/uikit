@@ -30,14 +30,17 @@ const defaultKnobs = () => ({
   size: select('size', textFieldPropSize, textFieldPropSizeDefault),
   view: select('view', textFieldPropView, textFieldPropViewDefault),
   disabled: boolean('disabled', false),
-  type: select('type', ['text', 'textarea'], 'text'),
+  required: boolean('required', false),
+  step: number('step', 1),
+  type: select('type', ['text', 'number', 'textarea'], 'text'),
+  withClearButton: boolean('withClearButton', false),
   caption: text('caption', 'Подпись'),
   label: text('label', 'Заголовок'),
   labelPosition: select('labelPosition', ['top', 'left'], 'top'),
   maxLength: number('maxLength', 200),
   minRows: number('minRows', 1),
   maxRows: number('maxRows', 5),
-  placeholder: text('placeholder', 'My placeholder'),
+  placeholder: text('placeholder', 'Подсказка в поле'),
   leftSideType: select('leftSideType', ['icon', 'text', 'false'], 'false'),
   leftSideText: text('leftSideText', 'from'),
   rightSideType: select('rightSideType', ['icon', 'text', 'false'], 'false'),
@@ -53,8 +56,10 @@ export function Playground() {
     view,
     type,
     label,
+    required,
     caption,
     labelPosition,
+    step,
     maxLength,
     minRows,
     maxRows,
@@ -62,6 +67,7 @@ export function Playground() {
     leftSideType,
     leftSideText,
     rightSideType,
+    withClearButton,
     rightSideText,
     disabled,
   } = defaultKnobs();
@@ -96,6 +102,9 @@ export function Playground() {
           size={size}
           view={view}
           type={type}
+          required={required}
+          step={step}
+          withClearButton={withClearButton}
           maxLength={maxLength}
           minRows={minRows}
           maxRows={maxRows}

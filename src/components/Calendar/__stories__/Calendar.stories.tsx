@@ -6,7 +6,7 @@ import esLocale from 'date-fns/locale/es';
 import ruLocale from 'date-fns/locale/ru';
 import zhCNLocale from 'date-fns/locale/zh-CN';
 
-import { getSizeByMap } from '../../../utils/getSizeByMap';
+import { getByMap } from '../../../utils/getByMap';
 import { createMetadata } from '../../../utils/storybook';
 import { Calendar } from '../Calendar';
 import {
@@ -58,7 +58,7 @@ export function Playground() {
       minDate={new Date(minDate)}
       maxDate={new Date(maxDate)}
       events={events}
-      locale={getSizeByMap(localeMap, locale)}
+      locale={getByMap(localeMap, locale)}
     />
   );
 }

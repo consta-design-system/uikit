@@ -5,7 +5,7 @@ import isBefore from 'date-fns/isBefore';
 import isEqual from 'date-fns/isEqual';
 
 import { cn } from '../../../utils/bem';
-import { getSizeByMap } from '../../../utils/getSizeByMap';
+import { getByMap } from '../../../utils/getByMap';
 import { DatePickerFieldTypeDate } from '../DatePickerFieldTypeDate/DatePickerFieldTypeDate';
 import { datePickerErrorTypes } from '../helpers';
 
@@ -154,7 +154,7 @@ export const DatePickerFieldTypeDateRange = forwardRef<
         ref={startFieldRef}
         leftSide={startFieldLeftSide}
         rightSide={startFieldRightSide}
-        form={getSizeByMap(mapFormForStart, form)}
+        form={getByMap(mapFormForStart, form)}
         value={startDate}
         onChange={handleStartDateChange}
         onFocus={startFieldOnFocus}
@@ -167,7 +167,7 @@ export const DatePickerFieldTypeDateRange = forwardRef<
         ref={endFieldRef}
         leftSide={endFieldLeftSide}
         rightSide={endFieldRightSide}
-        form={getSizeByMap(mapFormForEnd, form)}
+        form={getByMap(mapFormForEnd, form)}
         value={endDate}
         onChange={handleEndDateChange}
         onFocus={endFieldOnFocus}

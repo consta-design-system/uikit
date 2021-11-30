@@ -5,7 +5,7 @@ import React from 'react';
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
 import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
-import { getSizeByMap } from '../../utils/getSizeByMap';
+import { getByMap } from '../../utils/getByMap';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
 import { ChoiceGroupItem } from './Item/ChoiceGroup-Item';
@@ -115,7 +115,7 @@ export const ChoiceGroup: ChoiceGroup = React.forwardRef((props, ref) => {
     // TS не понимает что PropsWithMultiple и PropsWithoutMultiple не могут прийти одновременно
   });
 
-  const iconSize = getSizeByMap(sizeMap, size, iconSizeProp);
+  const iconSize = getByMap(sizeMap, size, iconSizeProp);
 
   return (
     <div

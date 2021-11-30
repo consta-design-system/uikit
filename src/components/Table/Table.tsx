@@ -130,6 +130,9 @@ type GroupColumnAddition<T extends TableRow> = {
 } & {
   [K in keyof ColumnBase<T>]?: never;
 };
+export interface TableControl<T extends TableRow> {
+  column: Header<T> & ColumnMetaData;
+}
 
 export type TableColumn<T extends TableRow> = {
   title: React.ReactNode;
@@ -138,6 +141,8 @@ export type TableColumn<T extends TableRow> = {
   width?: ColumnWidth;
   mergeCells?: boolean;
   position?: Position;
+  hidden?: boolean;
+  control?: ({ column }: TableControl<T>) => React.ReactNode;
 } & (GroupColumnAddition<T> | SingleColumnAddition<T>);
 
 export type TableProps<T extends TableRow> = {
@@ -148,6 +153,7 @@ export type TableProps<T extends TableRow> = {
   size?: Size;
   stickyHeader?: boolean;
   stickyColumns?: number;
+  minColumnWidth?: number;
   isResizable?: boolean;
   activeRow?: ActiveRow;
   verticalAlign?: VerticalAlign;
@@ -241,6 +247,7 @@ const InternalTable = <T extends TableRow>(
     isResizable = false,
     stickyHeader = false,
     stickyColumns = 0,
+    minColumnWidth = 150,
     activeRow,
     verticalAlign = 'top',
     headerVerticalAlign = 'center',
@@ -451,7 +458,7 @@ const InternalTable = <T extends TableRow>(
     onRowCreate && onRowCreate({ e, id, index });
 
   const handleColumnResize = (idx: number, delta: number): void => {
-    const columnMinWidth = Math.min(150, initialColumnWidths[idx]);
+    const columnMinWidth = Math.min(minColumnWidth, initialColumnWidths[idx]);
     const prevColumnWidth = resizedColumnWidths[idx] || initialColumnWidths[idx];
     const newColumnWidth = Math.max(columnMinWidth, prevColumnWidth + delta);
 

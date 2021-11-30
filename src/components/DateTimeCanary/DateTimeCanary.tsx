@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 
-import { getSizeByMap } from '../../utils/getSizeByMap';
+import { getByMap } from '../../utils/getByMap';
 
 import { DateTimeTypeDate } from './DateTimeTypeDate/DateTimeTypeDate';
 import { DateTimeTypeDateTime } from './DateTimeTypeDateTime/DateTimeTypeDateTime';
@@ -25,7 +25,7 @@ const typeMap: Record<DateTimePropType, DateTimeTypeComponent<DateTimePropType>>
 export const DateTime: DateTimeComponent = forwardRef((props, ref) => {
   const { type = dateTimePropTypeDefault, ...otherProps } = props;
 
-  const Component = getSizeByMap(typeMap, type);
+  const Component = getByMap(typeMap, type);
 
   return <Component {...otherProps} ref={ref} />;
 });

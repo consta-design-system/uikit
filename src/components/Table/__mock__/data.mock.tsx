@@ -1,7 +1,10 @@
 import React from 'react';
 
+import { IconAdd } from '../../../icons/IconAdd/IconAdd';
+import { IconRemove } from '../../../icons/IconRemove/IconRemove';
 import { isNotNil } from '../../../utils/type-guards';
 import { Badge } from '../../Badge/Badge';
+import { Button } from '../../Button/Button';
 import { TableChoiceGroupFilter } from '../ChoiceGroupFilter/TableChoiceGroupFilter';
 import { TableNumberFilter } from '../NumberFilter/TableNumberFilter';
 import { TableFilters as Filters, TableProps } from '../Table';
@@ -1163,26 +1166,30 @@ enum CustomIDs {
 
 export { CustomIDs };
 
-const rowsForCustomTagLabelFunction = [
+export const rowsForCustomTagLabelFunction = [
   {
     id: 'row1',
     [CustomIDs.fullName]: 'Воронин Ян Фёдорович',
     [CustomIDs.yearOfRegistration]: 2000,
+    phone: 79002332120,
   },
   {
     id: 'row2',
     [CustomIDs.fullName]: 'Иванов Иван Иванович',
     [CustomIDs.yearOfRegistration]: 2018,
+    phone: 79002332120,
   },
   {
     id: 'row3',
     [CustomIDs.fullName]: 'Новиков Никита Максимович',
     [CustomIDs.yearOfRegistration]: 2021,
+    phone: 79002332120,
   },
   {
     id: 'row4',
     [CustomIDs.fullName]: 'Крабов Виктор Дмитриевич',
     [CustomIDs.yearOfRegistration]: 2009,
+    phone: 79002332120,
   },
 ];
 
@@ -1241,4 +1248,58 @@ export const partOfTableDataForCustomTagLabelFunction = {
       },
     },
   ],
+};
+
+export const withControlTableMock: TableProps<typeof rowsForCustomTagLabelFunction[number]> = {
+  columns: [
+    {
+      title: 'Имя',
+      accessor: CustomIDs.fullName,
+      sortable: true,
+      align: 'right',
+      control: () => <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconAdd} />,
+    },
+    {
+      title: 'Год регистрации',
+      accessor: CustomIDs.yearOfRegistration,
+      sortable: true,
+      align: 'right',
+      control: () => <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconRemove} />,
+    },
+    {
+      title: 'Телефон',
+      align: 'right',
+      accessor: 'phone',
+      control: () => <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconAdd} />,
+    },
+  ],
+  rows: rowsForCustomTagLabelFunction,
+  filters: [
+    {
+      id: CustomIDs.yearOfRegistration,
+      name: 'Год регистрации: ',
+      field: CustomIDs.yearOfRegistration,
+      filterer: rangeFilterer,
+      component: {
+        name: TableNumberFilter,
+      },
+    },
+  ],
+};
+
+export const withHiddenColumnTableMock: TableProps<typeof rowsForCustomTagLabelFunction[number]> = {
+  columns: [
+    {
+      title: 'Имя',
+      accessor: CustomIDs.fullName,
+      sortable: true,
+    },
+    {
+      title: 'Год регистрации',
+      accessor: CustomIDs.yearOfRegistration,
+      sortable: true,
+      hidden: true,
+    },
+  ],
+  rows: rowsForCustomTagLabelFunction,
 };
