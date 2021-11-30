@@ -1,24 +1,48 @@
 import React from 'react';
 
 import AttachmentImage from './images/AttachmentImage';
+import AvatarImage from './images/AvatarImage';
+import BadgeImage from './images/BadgeImage';
 import BreadcrumbsImage from './images/BreadcrumbsImage';
 import ButtonImage from './images/ButtonImage';
 import CardImage from './images/CardImage';
 import CheckboxGroupImage from './images/CheckboxGroupImage';
 import CheckboxImage from './images/CheckboxImage';
+import CollapseGroupImage from './images/CollapseGroupImage';
+import CollapseImage from './images/CollapseImage';
+import ComboboxImage from './images/ComboboxImage';
+import DatePickerImage from './images/DatePickerImage';
 import DateTimeImage from './images/DateTimeImage';
+import DragNDropFieldImage from './images/DragNDropFieldImage';
+import LoaderImage from './images/LoaderImage';
+import ModalImage from './images/ModalImage';
 import RadioGroupImage from './images/RadioGroupImage';
 import RadioImage from './images/RadioImage';
+import ResponsesImage from './images/ResponsesImage';
+import SelectImage from './images/SelectImage';
+import SidebarImage from './images/SidebarImage';
+import SnackBarImage from './images/SnackBarImage';
 import SwitchGroupImage from './images/SwitchGroupImage';
 import SwitchImage from './images/SwitchImage';
 import TabsImage from './images/TabsImage';
+import TagImage from './images/TagImage';
+import ThemeImage from './images/ThemeImage';
+import ThemeTogglerImage from './images/ThemeTogglerImage';
+import TimerImage from './images/TimerImage';
 import TooltipImage from './images/TooltipImage';
 import UserImage from './images/UserImage';
+import UserSelectImage from './images/UserSelectImage';
 import { Data } from './types';
 
 export const data: Data = [
   {
     items: [
+      {
+        name: 'Attachment',
+        componentName: 'Attachment',
+        url: '/?path=/docs/components-attachment--playground',
+        description: 'Показывает загрузку файла или уже загруженный файл.',
+      },
       {
         name: 'Avatar',
         componentName: 'Avatar',
@@ -30,12 +54,6 @@ export const data: Data = [
         componentName: 'Badge',
         url: '/?path=/docs/components-badge--playground',
         description: 'Бейджик. Показывает статус процесса.',
-      },
-      {
-        name: 'Attachment',
-        componentName: 'Attachment',
-        url: '/?path=/docs/components-attachment--playground',
-        description: 'Показывает загрузку файла или уже загруженные файл.',
       },
       {
         name: 'Breadcrumbs',
@@ -98,10 +116,10 @@ export const data: Data = [
         description: 'Контекстное меню. Дополнительные действия на странице.',
       },
       {
-        name: 'DragNDropField',
-        componentName: 'DragNDropField',
-        url: '/?path=/docs/components-dragndropfield--playground',
-        description: 'Можно перетащить файлы, чтобы загрузить или отправить.',
+        name: 'DatePicker(Canary)',
+        componentName: 'DatePicker',
+        url: '/?path=/docs/components-datepicker--playground',
+        description: 'Поле, в котором можно выбрать дату или период.',
       },
       {
         name: 'DateTime(Canary)',
@@ -110,22 +128,22 @@ export const data: Data = [
         description: 'Календарь. Можно выбрать дату или период.',
       },
       {
-        name: 'DatePicker(Canary)',
-        componentName: 'DatePicker',
-        url: '/?path=/docs/components-datepicker--playground',
-        description: 'Поле, в котором можно выбрать дату или период.',
-      },
-      {
-        name: 'FileField',
-        componentName: 'FileField',
-        url: '/?path=/docs/components-filefield--playground',
-        description: 'Можно выбрать файлы, чтобы загрузить или отправить.',
+        name: 'DragNDropField',
+        componentName: 'DragNDropField',
+        url: '/?path=/docs/components-dragndropfield--playground',
+        description: 'Можно перетащить файлы, чтобы загрузить или отправить.',
       },
       {
         name: 'File',
         componentName: 'File',
         url: '/?path=/docs/components-file--playground',
         description: 'Иконка для файла с расширением.',
+      },
+      {
+        name: 'FileField',
+        componentName: 'FileField',
+        url: '/?path=/docs/components-filefield--playground',
+        description: 'Можно выбрать файлы, чтобы загрузить или отправить.',
       },
       {
         name: 'Grid',
@@ -179,7 +197,8 @@ export const data: Data = [
         name: 'ProgressSpin',
         componentName: 'ProgressSpin',
         url: '/?path=/docs/components-progressspin--playground',
-        description: 'Индикатор. Показывает течение процесса',
+        description:
+          'Индикатор. Показывает течение процесса — загрузку, отправку или что-то похожее.',
       },
       {
         name: 'ProgressStepBar(Canary)',
@@ -241,7 +260,7 @@ export const data: Data = [
         name: 'Switch',
         componentName: 'Switch',
         url: '/?path=/docs/components-switch--playground',
-        description: 'Переключатель. Два положения',
+        description: 'Переключатель. Два положения — включено и выключено.',
       },
       {
         name: 'SwitchGroup',
@@ -265,7 +284,7 @@ export const data: Data = [
         name: 'Tag',
         componentName: 'Tag',
         url: '/?path=/docs/components-tag--playground',
-        description: 'Тег. Объединяет группы объектов',
+        description: 'Тег. Объединяет группы объектов — статьи, документы, фотографии.',
       },
       {
         name: 'Text',
@@ -307,13 +326,13 @@ export const data: Data = [
         name: 'User',
         componentName: 'User',
         url: '/?path=/docs/components-user--playground',
-        description: 'Выпадающий список для выбора пользователей.',
+        description: 'Информация о пользователе — аватарка, имя, статус.',
       },
       {
         name: 'UserSelect',
         componentName: 'UserSelect',
         url: '/?path=/docs/components-userselect--playground',
-        description: 'Информация о пользователе',
+        description: 'Выпадающий список для выбора пользователей.',
       },
     ],
   },
@@ -321,17 +340,35 @@ export const data: Data = [
 
 export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
   Attachment: AttachmentImage,
+  Avatar: AvatarImage,
+  Badge: BadgeImage,
   Breadcrumbs: BreadcrumbsImage,
   Button: ButtonImage,
   Card: CardImage,
   Checkbox: CheckboxImage,
   CheckboxGroup: CheckboxGroupImage,
+  Collapse: CollapseImage,
+  CollapseGroup: CollapseGroupImage,
+  Combobox: ComboboxImage,
+  DatePicker: DatePickerImage,
   DateTime: DateTimeImage,
+  DragNDropField: DragNDropFieldImage,
+  Loader: LoaderImage,
+  Modal: ModalImage,
   Radio: RadioImage,
   RadioGroup: RadioGroupImage,
+  Responses: ResponsesImage,
+  Select: SelectImage,
+  Sidebar: SidebarImage,
+  SnackBar: SnackBarImage,
   Switch: SwitchImage,
   SwitchGroup: SwitchGroupImage,
   Tabs: TabsImage,
+  Tag: TagImage,
+  Theme: ThemeImage,
+  ThemeToggler: ThemeTogglerImage,
+  Timer: TimerImage,
   Tooltip: TooltipImage,
   User: UserImage,
+  UserSelect: UserSelectImage,
 };
