@@ -4,12 +4,10 @@ import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/D
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { ChoiceGroup } from '../../../ChoiceGroup';
 
-type Item = string;
-
-const items: Item[] = ['один', 'два', 'три', 'четыре', 'пять', 'шесть'];
+const items: string[] = ['один', 'два', 'три', 'четыре', 'пять', 'шесть'];
 
 export const ChoiceGroupExampleOne = () => {
-  const [value, setValue] = useState<Item | null>(items[0]);
+  const [value, setValue] = useState<string | null>(items[0]);
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <p>Выберите один вариант</p>
@@ -18,7 +16,6 @@ export const ChoiceGroupExampleOne = () => {
         onChange={({ value }) => setValue(value)}
         items={items}
         getLabel={(item) => item}
-        multiple={false}
         name="ChoiceGroupExampleOne"
       />
     </StoryBookExample>
@@ -26,7 +23,7 @@ export const ChoiceGroupExampleOne = () => {
 };
 
 export const ChoiceGroupExampleMultiple = () => {
-  const [value, setValue] = useState<Item[] | null>([]);
+  const [value, setValue] = useState<string[] | null>([]);
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <p>Выберите несколько вариантов</p>

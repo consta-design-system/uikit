@@ -13,7 +13,7 @@ type Item = {
   icon?: React.FC<IconProps>;
 };
 
-const items = [
+const items: Item[] = [
   {
     name: 'Первый',
     icon: IconPhoto,
@@ -39,7 +39,6 @@ export const ChoiceGroupExampleIcon = () => {
         getLabel={(item) => item.name}
         getIcon={(item) => item.icon}
         name="ChoiceGroupExampleIcon"
-        multiple={false}
       />
       <ChoiceGroup
         value={value}
@@ -49,7 +48,6 @@ export const ChoiceGroupExampleIcon = () => {
         getIcon={(item) => item.icon}
         onlyIcon
         name="ChoiceGroupExampleIcon"
-        multiple={false}
       />
     </StoryBookExample>
   );

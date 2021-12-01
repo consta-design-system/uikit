@@ -2,13 +2,13 @@ import './Button.css';
 
 import React, { useRef } from 'react';
 
+import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
-import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { Loader } from '../Loader/Loader';
 
 export const buttonPropSize = ['m', 'xs', 's', 'l'] as const;

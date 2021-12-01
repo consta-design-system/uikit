@@ -19,7 +19,6 @@ export const ChoiceGroupExampleSize = () => {
           items={items}
           getLabel={(item) => item}
           size="xs"
-          multiple={false}
           name="ChoiceGroupExampleSize"
         />
       </div>
@@ -30,7 +29,6 @@ export const ChoiceGroupExampleSize = () => {
           items={items}
           getLabel={(item) => item}
           size="s"
-          multiple={false}
           name="ChoiceGroupExampleSize"
         />
       </div>
@@ -41,7 +39,6 @@ export const ChoiceGroupExampleSize = () => {
           items={items}
           getLabel={(item) => item}
           size="m"
-          multiple={false}
           name="ChoiceGroupExampleSize"
         />
       </div>
@@ -52,7 +49,6 @@ export const ChoiceGroupExampleSize = () => {
           items={items}
           getLabel={(item) => item}
           size="l"
-          multiple={false}
           name="ChoiceGroupExampleSize"
         />
       </div>
