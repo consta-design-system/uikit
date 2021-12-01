@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { PropOnChange, SliderValue, TrackPosition } from '../helper';
+import { getSteps } from '../useSliderStationing';
 
 export type ActiveButton = 'left' | 'right' | null | undefined;
 
@@ -25,15 +26,13 @@ export type UseSliderProps<RANGE extends boolean = false> = {
 };
 
 export type UseSliderValues = {
-  handleTouchStart: (e: React.TouchEvent) => void;
-  handleMouseDown: (e: React.MouseEvent) => void;
   onKeyPress: (e: React.KeyboardEvent) => void;
   onFocus: (
     e: React.FocusEvent<HTMLButtonElement> | React.MouseEvent,
     button: ActiveButton,
   ) => void;
-  stopListening: () => void;
   activeButton: ActiveButton;
+  dragPoint: () => void;
   currentValue: number | [number, number];
   popoverPosition: TrackPosition[];
 };
@@ -151,4 +150,56 @@ export const getValueByPosition = (
     return getValidValue(value, min, max);
   }
   return 0;
+};
+
+export const getNewValue = (
+  changedValue: number,
+  currentValue: number | [number, number],
+  step: number | number[],
+  min: number,
+  max: number,
+  activeButton: ActiveButton,
+): number | [number, number] => {
+  let maxRangeValue = max;
+  let minRangeValue = min;
+  if (Array.isArray(currentValue)) {
+    const [left, right] = currentValue;
+    if (activeButton === 'right') {
+      minRangeValue = left;
+    } else {
+      maxRangeValue = right;
+    }
+  }
+  const analyzedValue = getValidValue(
+    analyzeDivisionValue(changedValue, step, min, max),
+    minRangeValue,
+    maxRangeValue,
+    step,
+  );
+  if (Array.isArray(currentValue)) {
+    return activeButton === 'right'
+      ? [currentValue[0], analyzedValue]
+      : [analyzedValue, currentValue[1]];
+  }
+  return analyzedValue;
+};
+
+export const analyzeDivisionValue = (
+  value: number,
+  step: number | number[],
+  min: number,
+  max: number,
+) => {
+  const steps = getSteps(step, min, max);
+  let newValue: number = value;
+  steps.forEach((stepSize) => {
+    if (value && stepSize.min < value && stepSize.max >= value) {
+      if ((stepSize.max + stepSize.min) / 2 > value) {
+        newValue = stepSize.min;
+      } else {
+        newValue = stepSize.max;
+      }
+    }
+  });
+  return newValue;
 };

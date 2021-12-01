@@ -70,27 +70,20 @@ function SliderRender<RANGE extends boolean>(
 
   const iconSize = getSizeByMap(sizeMap, size);
 
-  const {
-    handleTouchStart,
-    handleMouseDown,
-    onKeyPress,
-    onFocus,
-    popoverPosition,
-    activeButton,
-    stopListening,
-    currentValue,
-  } = useSlider({
-    disabled,
-    range,
-    value,
-    min,
-    max,
-    step,
-    onChange,
-    onAfterChange,
-    sliderRef,
-    buttonRefs: [leftButtonRef, rightButtonRef],
-  });
+  const { onKeyPress, onFocus, dragPoint, popoverPosition, activeButton, currentValue } = useSlider(
+    {
+      disabled,
+      range,
+      value,
+      min,
+      max,
+      step,
+      onChange,
+      onAfterChange,
+      sliderRef,
+      buttonRefs: [leftButtonRef, rightButtonRef],
+    },
+  );
 
   const { lineSizes, buttonPositions } = useSliderStationing(
     currentValue,
@@ -143,20 +136,12 @@ function SliderRender<RANGE extends boolean>(
               min={min}
               max={max}
               status={status}
-              step={Array.isArray(step) ? 1 : step}
+              step={step}
               disabled={disabled}
             />
           </div>
         )}
-        <div
-          className={cnSlider('Control')}
-          role="button"
-          onMouseDown={handleMouseDown}
-          onTouchStart={handleTouchStart}
-          onMouseUp={() => stopListening()}
-          aria-hidden="true"
-          ref={sliderRef}
-        >
+        <div className={cnSlider('Control')} ref={sliderRef}>
           <SliderLine
             hovered={isHovered}
             onHover={(hovered) => changeHovered(hovered)}
@@ -171,6 +156,7 @@ function SliderRender<RANGE extends boolean>(
             onKeyPress={onKeyPress}
             onFocus={onFocus}
             disabled={disabled}
+            onMouseDown={dragPoint}
             position={buttonPositions[0]}
             focused={activeButton === 'left'}
             buttonLabel="left"
@@ -186,6 +172,7 @@ function SliderRender<RANGE extends boolean>(
               popoverPosition={popoverPosition[1]}
               onKeyPress={onKeyPress}
               disabled={disabled}
+              onMouseDown={dragPoint}
               focused={activeButton === 'right'}
               withTooltip={withTooltip}
               position={buttonPositions[1]}

@@ -59,23 +59,26 @@ export type SliderLineProps = {
   onHover?: (hovered: boolean) => void;
 };
 
-export type SliderPointProps = {
-  value?: number | string;
-  disabled?: boolean;
-  focused?: boolean;
-  hovered?: boolean;
-  withTooltip?: boolean;
-  buttonLabel?: ActiveButton;
-  buttonRef?: React.RefObject<HTMLButtonElement>;
-  popoverPosition?: TrackPosition;
-  onFocus?: (
-    e: React.FocusEvent<HTMLButtonElement> | React.MouseEvent,
-    button: ActiveButton,
-  ) => void;
-  onKeyPress?: (e: React.KeyboardEvent) => void;
-  onHover?: (hovered: boolean) => void;
-  position: number;
-};
+export type SliderPointProps = PropsWithHTMLAttributes<
+  {
+    value?: number | string;
+    disabled?: boolean;
+    focused?: boolean;
+    hovered?: boolean;
+    withTooltip?: boolean;
+    buttonLabel?: ActiveButton;
+    buttonRef?: React.RefObject<HTMLButtonElement>;
+    popoverPosition?: TrackPosition;
+    onFocus?: (
+      e: React.FocusEvent<HTMLButtonElement> | React.MouseEvent,
+      button: ActiveButton,
+    ) => void;
+    onKeyPress?: (e: React.KeyboardEvent) => void;
+    onHover?: (hovered: boolean) => void;
+    position: number;
+  },
+  HTMLButtonElement
+>;
 
 export type SliderProps<RANGE extends boolean> = PropsWithHTMLAttributes<
   Props<RANGE>,

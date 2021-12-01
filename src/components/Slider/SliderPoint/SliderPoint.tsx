@@ -40,6 +40,7 @@ export const SliderPoint = (props: SliderPointProps) => {
     onKeyPress,
     buttonLabel,
     onFocus,
+    ...otherProps
   } = props;
 
   const [tooltipVisible, { on, off }] = useFlag(false);
@@ -63,7 +64,7 @@ export const SliderPoint = (props: SliderPointProps) => {
 
   const handleFocus = (e: React.FocusEvent<HTMLButtonElement> | React.MouseEvent) => {
     if (!disabled) {
-      onFocus?.(e, buttonLabel);
+      onFocus?.(e, focused ? null : buttonLabel);
       on();
     }
   };
@@ -77,7 +78,9 @@ export const SliderPoint = (props: SliderPointProps) => {
     }
   };
 
-  const handleBlur = (e: React.FocusEvent<HTMLButtonElement>) => {
+  const handleBlur = (
+    e: React.FocusEvent<HTMLButtonElement> | React.MouseEvent<HTMLButtonElement>,
+  ) => {
     if (!disabled) {
       onFocus?.(e, null);
       off();
@@ -91,18 +94,19 @@ export const SliderPoint = (props: SliderPointProps) => {
       <button
         type="button"
         aria-label={`${buttonLabel}-button`}
-        className={cnSliderPoint({ hovered, disabled }, [cnMixFocus()])}
+        className={cnSliderPoint({ hovered, disabled }, [!disabled ? cnMixFocus() : ''])}
         onMouseOver={() => handleMouseAction(true)}
         onMouseOut={() => handleMouseAction(false)}
         onKeyDown={(e) => onKeyPress?.(e)}
         onFocus={handleFocus}
-        onClick={handleFocus}
         onBlur={handleBlur}
+        // onMouseUp={handleBlur}
         ref={useForkRef([buttonRef, pointRef])}
         tabIndex={0}
         style={{
           ['--slider-button-left' as string]: `${position}%`,
         }}
+        {...otherProps}
       />
       {tooltipVisible && withTooltip && popoverPosition && (
         <ThemeContext.Provider

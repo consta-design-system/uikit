@@ -1,13 +1,13 @@
 import React, { MutableRefObject, useCallback, useEffect, useRef, useState } from 'react';
 
 import { useComponentSize } from '../../../hooks/useComponentSize/useComponentSize';
+import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { SliderValue, TrackPosition } from '../helper';
-import { getSteps } from '../useSliderStationing';
 
 import {
   ActiveButton,
-  detectActiveButton,
   getActiveValue,
+  getNewValue,
   getValidValue,
   getValueByPosition,
   isNotRangeParams,
@@ -37,19 +37,71 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
   const [currentValue, setCurrentValue] = useState<number | [number, number]>(value);
   const [leftPopover, setLeftPopover] = useState<TrackPosition>(null);
   const [rightPopover, setRightPopover] = useState<TrackPosition>(null);
+  const [draggable, { on, off }] = useFlag(false);
 
   const activeButton: MutableRefObject<ActiveButton | null> = useRef(null);
 
   const sizeSlider = useComponentSize(sliderRef);
 
+  const addListeners = () => {
+    document.addEventListener('mouseup', handleTouchEnd);
+    document.addEventListener('touchend', handleTouchEnd);
+    document.addEventListener('mousemove', handleTouchMove);
+    document.addEventListener('touchmove', handleTouchMove);
+  };
+
+  const removeListeners = () => {
+    document.removeEventListener('mouseup', handleTouchEnd);
+    document.removeEventListener('touchend', handleTouchEnd);
+    document.removeEventListener('mousemove', handleTouchMove);
+    document.removeEventListener('touchmove', handleTouchMove);
+  };
+
+  useEffect(() => {
+    addListeners();
+    return () => {
+      removeListeners();
+    };
+  }, [
+    activeButton.current,
+    step,
+    currentValue,
+    value,
+    min,
+    max,
+    sliderRef.current,
+    buttonRefs,
+    disabled,
+    draggable,
+  ]);
+
+  useEffect(() => {
+    if (Array.isArray(currentValue)) {
+      setTooltipPosition(currentValue[0], 'left');
+      setTooltipPosition(currentValue[1], 'right');
+    } else {
+      setTooltipPosition(currentValue, 'left');
+    }
+  }, [currentValue]);
+
   useEffect(() => {
     if (JSON.stringify(value) !== JSON.stringify(currentValue)) {
       setCurrentValue(value);
-      activeButton.current = 'left';
-      setTooltipPosition(getActiveValue(value, activeButton.current));
+      setTooltipPosition(getActiveValue(value, activeButton.current), 'left');
       activeButton.current = null;
     }
   }, [value]);
+
+  useEffect(() => {
+    onChange?.({
+      value: Array.isArray(currentValue)
+        ? ([
+            getNewValue(currentValue[0], currentValue[0], step, min, max, 'left'),
+            getNewValue(currentValue[1], currentValue[1], step, min, max, 'right'),
+          ] as SliderValue<RANGE>)
+        : (getNewValue(currentValue, currentValue, step, min, max, 'left') as SliderValue<RANGE>),
+    });
+  }, [step]);
 
   useEffect(() => {
     if (typeof value !== 'undefined' && typeof step !== 'undefined') {
@@ -72,246 +124,155 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
     }
   }, []);
 
-  const analyzeDivisionValue = useCallback(
-    (value: number) => {
-      const steps = getSteps(step, minValue, maxValue);
-      let newValue: number = value;
-      steps.forEach((stepSize) => {
-        if (value && stepSize.min < value && stepSize.max >= value) {
-          if ((stepSize.max + stepSize.min) / 2 > value) {
-            newValue = stepSize.min;
-          } else {
-            newValue = stepSize.max;
-          }
+  const onKeyPress = useCallback(
+    (event: React.KeyboardEvent) => {
+      if (
+        !disabled &&
+        typeof activeButton.current === 'string' &&
+        typeof currentValue !== 'undefined'
+      ) {
+        let stepIncrement = !Array.isArray(step) ? step || 1 : 1;
+        let validKeyCode = false;
+        const changedValue = getActiveValue(currentValue, activeButton.current);
+        switch (event.key) {
+          case 'ArrowUp':
+          case 'ArrowRight':
+          case '+':
+            validKeyCode = true;
+            break;
+          case 'ArrowLeft':
+          case 'ArrowDown':
+          case '-':
+            validKeyCode = true;
+            stepIncrement *= -1;
+            break;
+          default:
+            break;
         }
-      });
-      return newValue;
-    },
-    [step, min, max],
-  );
-
-  const onKeyPress = (event: React.KeyboardEvent) => {
-    if (!disabled && typeof activeButton.current === 'string' && typeof value !== 'undefined') {
-      let stepIncrement = !Array.isArray(step) ? step || 1 : 1;
-      let validKeyCode = false;
-      const changedValue = getActiveValue(value, activeButton.current);
-      switch (event.key) {
-        case 'ArrowUp':
-        case 'ArrowRight':
-        case '+':
-          validKeyCode = true;
-          break;
-        case 'ArrowLeft':
-        case 'ArrowDown':
-        case '-':
-          validKeyCode = true;
-          stepIncrement *= -1;
-          break;
-        default:
-          break;
-      }
-      if (validKeyCode) {
-        if (Array.isArray(step)) {
-          let stepsArr = [...step];
-          if (step[0] !== minValue) {
-            stepsArr = [minValue, ...stepsArr];
-          }
-          if (step[step.length - 1] !== maxValue) {
-            stepsArr = [...stepsArr, maxValue];
-          }
-          stepsArr.forEach((stepPoint, index) => {
-            if (typeof activeButton.current === 'string' && changedValue === stepPoint) {
-              if (stepIncrement >= 0) {
-                if (index === 0) {
-                  stepIncrement = stepsArr[1] - minValue;
+        if (validKeyCode) {
+          if (Array.isArray(step)) {
+            let stepsArr = [...step];
+            if (step[0] !== minValue) {
+              stepsArr = [minValue, ...stepsArr];
+            }
+            if (step[step.length - 1] !== maxValue) {
+              stepsArr = [...stepsArr, maxValue];
+            }
+            stepsArr.forEach((stepPoint, index) => {
+              if (typeof activeButton.current === 'string' && changedValue === stepPoint) {
+                if (stepIncrement >= 0) {
+                  if (index === 0) {
+                    stepIncrement = stepsArr[1] - minValue;
+                  } else {
+                    stepIncrement =
+                      (typeof stepsArr[index + 1] !== 'undefined'
+                        ? stepsArr[index + 1]
+                        : maxValue) - stepPoint;
+                  }
+                } else if (index === 0) {
+                  stepIncrement = minValue - stepsArr[1];
                 } else {
                   stepIncrement =
-                    (typeof stepsArr[index + 1] !== 'undefined' ? stepsArr[index + 1] : maxValue) -
+                    (typeof stepsArr[index - 1] !== 'undefined' ? stepsArr[index - 1] : minValue) -
                     stepPoint;
                 }
-              } else if (index === 0) {
-                stepIncrement = minValue - stepsArr[1];
-              } else {
-                stepIncrement =
-                  (typeof stepsArr[index - 1] !== 'undefined' ? stepsArr[index - 1] : minValue) -
-                  stepPoint;
               }
-            }
+            });
+          }
+          const newValue = getNewValue(
+            changedValue + stepIncrement,
+            currentValue,
+            step,
+            min,
+            max,
+            activeButton.current,
+          );
+          setCurrentValue(newValue);
+          setTooltipPosition(getActiveValue(newValue, activeButton.current), activeButton.current);
+          onChange?.({
+            e: event,
+            value: newValue as SliderValue<RANGE>,
           });
         }
-        const newValue = getNewValue(changedValue + stepIncrement, step);
-        setCurrentValue(newValue);
-        setTooltipPosition(getActiveValue(newValue, activeButton.current));
-        onChange?.({
-          e: event,
-          value: newValue,
-        });
       }
-    }
-  };
+    },
+    [currentValue, step, min, max],
+  );
 
-  const getNewValue = (changedValue: number, step: number | number[]): SliderValue<RANGE> => {
-    let maxRangeValue = maxValue;
-    let minRangeValue = minValue;
-    if (Array.isArray(value)) {
-      const [left, right] = value;
-      if (activeButton.current === 'right') {
-        minRangeValue = left;
+  const setTooltipPosition = (value: number, position: ActiveButton) => {
+    if (sliderRef.current && position) {
+      const button = buttonRefs[position === 'left' ? 0 : 1].current || sliderRef.current;
+      const { x, width } = sliderRef.current.getBoundingClientRect();
+      const newPosition = {
+        y: button.offsetTop + button.offsetHeight + 50,
+        x: x + Math.abs((value - minValue) / (maxValue - minValue)) * width,
+      };
+      if (position === 'left') {
+        setLeftPopover(newPosition);
       } else {
-        maxRangeValue = right;
+        setRightPopover(newPosition);
       }
     }
-    const analyzedValue = getValidValue(
-      analyzeDivisionValue(changedValue),
-      minRangeValue,
-      maxRangeValue,
-      step,
-    );
-    if (isRangeParams(props)) {
-      return (activeButton.current === 'right'
-        ? [props.value[0], analyzedValue]
-        : [analyzedValue, props.value[1]]) as SliderValue<RANGE>;
-    }
-    return analyzedValue as SliderValue<RANGE>;
   };
 
-  const setTooltipPosition = useCallback(
-    (value: number) => {
-      if (sliderRef.current) {
-        const button =
-          buttonRefs[activeButton.current === 'left' ? 0 : 1].current || sliderRef.current;
-        const { x, width } = sliderRef.current.getBoundingClientRect();
-        const newPosition = {
-          y: button.offsetTop + button.offsetHeight + 50,
-          x: x + Math.abs((value - minValue) / (maxValue - minValue)) * width,
-        };
-        if (activeButton.current === 'left') {
-          setLeftPopover(newPosition);
-        } else {
-          setRightPopover(newPosition);
-        }
-      }
-    },
-    [sliderRef, minValue, maxValue],
-  );
-
-  const changePosition = useCallback(
-    (event: Event) => {
-      const nativeEvent = event as MouseEvent | TouchEvent;
-      let newValue: typeof value = value;
-      if (typeof activeButton.current === 'string') {
-        const position = trackPosition(nativeEvent);
-        const currentValue = getValueByPosition(position, sliderRef, minValue, maxValue);
-        newValue = getNewValue(currentValue, step);
-      }
-      return newValue;
-    },
-    [sliderRef, value, activeButton, range, step],
-  );
+  const changePosition = (event: Event) => {
+    const nativeEvent = event as MouseEvent | TouchEvent;
+    if (typeof activeButton.current !== 'string') {
+      return value;
+    }
+    const position = trackPosition(nativeEvent);
+    const positionValue = getValueByPosition(position, sliderRef, minValue, maxValue);
+    return getNewValue(positionValue, currentValue, step, min, max, activeButton.current);
+  };
 
   const onFocus = (e: React.FocusEvent | React.MouseEvent, button: ActiveButton) => {
     activeButton.current = button;
   };
 
-  const handleTouchMove = useCallback<EventListener>(
-    (event) => {
-      if (typeof activeButton.current === 'string') {
-        const nativeEvent = event as MouseEvent | TouchEvent;
-        const position = changePosition(event);
-        const oldValue: number = getActiveValue(currentValue, activeButton.current);
-        const newValue: number = getActiveValue(position, activeButton.current);
-        if (oldValue !== newValue) {
-          setTooltipPosition(newValue);
-          setCurrentValue(position);
-          onAfterChange?.({ e: nativeEvent, value: position });
-        }
-      }
-    },
-    [sliderRef, value, activeButton, step, currentValue],
-  );
-
-  const handleTouchEnd = useCallback<EventListener>(
-    (event: Event) => {
+  const handleTouchMove = (event: MouseEvent | TouchEvent) => {
+    if (typeof activeButton.current === 'string' && draggable) {
       const position = changePosition(event);
-      if (typeof position !== 'undefined') {
+      const oldValue: number = getActiveValue(currentValue, activeButton.current);
+      const newValue: number = getActiveValue(position, activeButton.current);
+      if (oldValue !== newValue) {
         setCurrentValue(position);
-        onChange?.({ e: event, value: position });
+        onAfterChange?.({ e: event, value: position as SliderValue<RANGE> });
       }
-      stopListening();
-      activeButton.current = null;
-    },
-    [sliderRef, value, activeButton, step],
-  );
+    }
+  };
 
-  const handleDragStart = useCallback(
-    (
-      nativeEvent: React.MouseEvent | React.TouchEvent,
-      eventMove: 'touchmove' | 'mousemove',
-      eventEnd: 'touchend' | 'mouseup',
-    ) => {
-      if (!disabled) {
-        const buttonSide = detectActiveButton(trackPosition(nativeEvent), buttonRefs);
-        activeButton.current = buttonSide;
-        if (typeof buttonSide === 'string') {
-          const doc = sliderRef.current || document;
-          doc.addEventListener(eventEnd, handleTouchEnd);
-          doc.addEventListener(eventMove, handleTouchMove);
-        }
-      }
-    },
-    [sliderRef, buttonRefs],
-  );
-
-  const handleTouchStart = useCallback(
-    (nativeEvent: React.TouchEvent) => {
-      handleDragStart(nativeEvent, 'touchmove', 'touchend');
-    },
-    [handleDragStart],
-  );
-
-  const handleMouseDown = useCallback(
-    (nativeEvent: React.MouseEvent) => {
-      handleDragStart(nativeEvent, 'mousemove', 'mouseup');
-    },
-    [handleDragStart],
-  );
+  const handleTouchEnd = (event: MouseEvent | TouchEvent) => {
+    const position = changePosition(event);
+    if (typeof position !== 'undefined') {
+      setCurrentValue(position);
+      onChange?.({ e: event, value: position as SliderValue<RANGE> });
+    }
+    buttonRefs.forEach((button) => {
+      button.current?.blur();
+    });
+    off();
+    activeButton.current = null;
+  };
 
   useEffect(() => {
     if (isRangeParams(props)) {
       props.value.forEach((val, index) => {
-        activeButton.current = index === 0 ? 'left' : 'right';
-        setTooltipPosition(getActiveValue(val, activeButton.current));
+        setTooltipPosition(
+          getActiveValue(val, activeButton.current),
+          index === 0 ? 'left' : 'right',
+        );
       });
     }
     if (isNotRangeParams(props)) {
-      activeButton.current = 'left';
-      setTooltipPosition(getActiveValue(value, activeButton.current));
+      setTooltipPosition(getActiveValue(value, activeButton.current), 'left');
     }
     activeButton.current = null;
   }, [sizeSlider, typeof value]);
 
-  const stopListening = useCallback(() => {
-    const doc = sliderRef.current || document;
-    doc.removeEventListener('mouseup', handleTouchEnd);
-    doc.removeEventListener('touchend', handleTouchEnd);
-    doc.removeEventListener('mousemove', handleTouchMove);
-    doc.removeEventListener('touchmove', handleTouchMove);
-  }, [handleTouchEnd]);
-
-  useEffect(() => {
-    if (disabled) stopListening();
-  }, [disabled, stopListening]);
-
-  useEffect(() => {
-    return () => stopListening();
-  }, []);
-
   return {
-    handleTouchStart,
-    handleMouseDown,
     onKeyPress,
     onFocus,
-    stopListening,
+    dragPoint: on,
     activeButton: activeButton.current,
     popoverPosition: [leftPopover, rightPopover],
     currentValue,
