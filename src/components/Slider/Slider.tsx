@@ -5,7 +5,7 @@ import React, { forwardRef, useRef } from 'react';
 import { useFlag } from '../../hooks/useFlag/useFlag';
 import { IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
-import { getSizeByMap } from '../../utils/getSizeByMap';
+import { getByMap } from '../../utils/getByMap';
 import { FieldCaption } from '../FieldCaption/FieldCaption';
 import { FieldLabel } from '../FieldLabel/FieldLabel';
 
@@ -68,7 +68,7 @@ function SliderRender<RANGE extends boolean>(
 
   const Icon = rightSide;
 
-  const iconSize = getSizeByMap(sizeMap, size);
+  const iconSize = getByMap(sizeMap, size);
 
   const { onKeyPress, onFocus, dragPoint, popoverPosition, activeButton, currentValue } = useSlider(
     {
