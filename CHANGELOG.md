@@ -1,5 +1,29 @@
 # Changelog
 
+## v3.10.0 (01/12/2021)
+- В `ContextMenu` добавили свойство `onItemClick`, для более удобной обработки клика по элементам
+- `ChoiceGroup`, теперь свойство `multiple` не обязательное
+- Изменили зависимость `react` в `peerDependencies` так чтобы `npm@7` не ругался если версия мажерная версия react выше чем 16, при сборке ваших проектов.
+- Добавили `MixSpace` для быстрой простановки отступов
+
+---
+
+- [docs(workflow): add workflow description (#1688)](https://github.com/gazprom-neft/consta-uikit/commit/1b530c106e76c017f6eb5deee5e66081dc019f79) - [@arhayka](https://github.com/arhayka)
+- [feat(ContextMenu): add onClick properties (#1787)](https://github.com/gazprom-neft/consta-uikit/commit/30c4bd272571a5b7addd87cc726e34315108d43a) - [@N1MBER](https://github.com/N1MBER)
+- [fix(ChoiceGroup): fixed multiple type (#1817)](https://github.com/gazprom-neft/consta-uikit/commit/ec34946a006a5317e9e8e3b65477dffd28deb37e) - [@gizeasy](https://github.com/gizeasy)
+- [chore(deps): change peerDependencies (#1815)](https://github.com/gazprom-neft/consta-uikit/commit/73ae3e46c4663f1eb79dba5420293db07a879a93) - [@gizeasy](https://github.com/gizeasy)
+- [docs(review): add component images, fix misprints (#1814)](https://github.com/gazprom-neft/consta-uikit/commit/0e901320582217251960f38a40ba4cf968c705a2) - [@arhayka](https://github.com/arhayka)
+- [docs(MixSpace): edit docs, add examples (#1812)](https://github.com/gazprom-neft/consta-uikit/commit/ea57cd870f350c6f08bc18e6c391afef13a82ce0) - [@arhayka](https://github.com/arhayka)
+- [fix(Button): add inner ref (#1811)](https://github.com/gazprom-neft/consta-uikit/commit/24ee305acf60f569050944b54d72797db9729c8d) - [@iliasov-artem](https://github.com/iliasov-artem)
+- [fix(Theme): fix system colors (#1808)](https://github.com/gazprom-neft/consta-uikit/commit/8f1b175fc55fc0e7f6f330f5833e728026bb0bf2) - [@N1MBER](https://github.com/N1MBER)
+- [refactor(getSizeByMap): rename from getSizeByMap to  getByMap (#1798)](https://github.com/gazprom-neft/consta-uikit/commit/86c55833973d55439acb6778c40ee7db9a0f558d) - [@N1MBER](https://github.com/N1MBER)
+- [feat(SnackBar): add adaptivity for SnackBar (#1792)](https://github.com/gazprom-neft/consta-uikit/commit/6642676e9706cb06901c8688ec693a45c38798a7) - [@N1MBER](https://github.com/N1MBER)
+- [fix(useSelect): fix bug with notFoundLabel (#1793)](https://github.com/gazprom-neft/consta-uikit/commit/1f1425e9eb9cfe97d0c04b7b4453954899237ea9) - [@N1MBER](https://github.com/N1MBER)
+- [feat(MixSpace): add new mixin and documentation for him (#1776)](https://github.com/gazprom-neft/consta-uikit/commit/fa85cf1bdd74edcd81df8521ebf664a937a7dcdf) - [@N1MBER](https://github.com/N1MBER)
+- [docs(TextField): fix examples code (#1785)](https://github.com/gazprom-neft/consta-uikit/commit/6e6b6ce3a7a285a817711e990c2e6edc7c6d4801) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v3.9.3 (17/11/2021)
 Важное из изменений:
 - В `Table` добавили возможность скрывать колонки
@@ -430,14 +454,3 @@ _Обращаем внимание_: *версии компонентов обр
 
 ## v1.11.9 (25/03/2021)
 - [feat(Table): add custom filters (#804)](https://github.com/gazprom-neft/consta-uikit/commit/e6c956776758a8990b51d194f32c374758dff879) - [@vasilevx](https://github.com/vasilevx)
-
---------------------
-
-## v1.11.8 (17/03/2021)
-- [chore(bem-cn): removed package from dependencies](https://github.com/gazprom-neft/consta-uikit/commit/3347b6c02d4fd94de96672ce9a6c075293f065b6) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Button): added new sizes for modifier _onlyIcon (#982)](https://github.com/gazprom-neft/consta-uikit/commit/0016c6cdd7a5bedf5c6ba255b183c7786c3abc7f) - [@gizeasy](https://github.com/gizeasy)
-- [docs(Step): edit docs for Steps (#924)](https://github.com/gazprom-neft/consta-uikit/commit/a0deff43d5630d7a0027abdb9524d84999c60676) - [@arhayka](https://github.com/arhayka)
-- [feat(hooks): added the ability to get the sizes of SVG elements in useComponentSize (#980)](https://github.com/gazprom-neft/consta-uikit/commit/de5b294b86347790d6a36ec0b5ea226d7e313ce2) - [@al-fyodorov](https://github.com/al-fyodorov)
-- [docs(general): add remark about IE and old Edge version (#961)](https://github.com/gazprom-neft/consta-uikit/commit/3b4691e768e9b0a519a2539ec10940d975eb62eb) - [@arhayka](https://github.com/arhayka)
-- [chore(postcss): added postcss-mixin](https://github.com/gazprom-neft/consta-uikit/commit/c27a6c25c38d0a53ec33661316522ae5c76faed9) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Grid): added component](https://github.com/gazprom-neft/consta-uikit/commit/97391f3983565b68ad2d76e4dd44d18b618943e9) - [@fooontic](https://github.com/fooontic)
