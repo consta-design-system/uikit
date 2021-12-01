@@ -24,18 +24,78 @@ import { DateTimeExampleLocale } from './examples/DateTimeExampleLocale/DateTime
 
 import { DateTimeExampleEvents } from './examples/DateTimeExampleEvents/DateTimeExampleEvents';
 
+<!--info
+description: Календарь. Можно выбрать дату или период.
+-->
+
 # DateTime (Canary)
+
+```tsx
+import { DateTime } from '@consta/DateTimeCanary';
+```
 
 Этот компонент нужен, чтобы пользователь мог выбрать дату или период.
 
+- [Тип календаря](#тип-календаря)
 - [Внешний вид](#внешний-вид)
-  - [Какой месяц показывать](#какой-месяц-показывать)
 - [Выбор даты](#выбор-даты)
   - [Ограничение выбора](#ограничение-выбора)
+  - [Какой месяц показывать](#какой-месяц-показывать)
 - [Выбор времени](#выбор-времени)
 - [События на календаре](#события-на-календаре)
 - [Локализация](#локализация)
+- [Импорт](#импорт)
 - [Список свойств](#свойства)
+
+## Тип календаря
+
+За содержимое календаря отвечает свойство `type`, варианты:
+
+- `'year'` — выбор года,
+- `'month'` — выбор месяца,
+- `'date'` — выбор даты,
+- `'date-time'` — выбор даты и времени,
+- `'time'` — выбор времени.
+
+##### type="year"
+
+```tsx
+<DateTime type="year" />
+```
+
+<DateTimeExampleTypeYear />
+
+##### type="month"
+
+```tsx
+<DateTime type="month" />
+```
+
+<DateTimeExampleTypeMonth />
+
+##### type="date"
+
+```tsx
+<DateTime type="date" />
+```
+
+<DateTimeExampleTypeDate />
+
+##### type="date-time"
+
+```tsx
+<DateTime type="date-time" />
+```
+
+<DateTimeExampleTypeDateTime />
+
+##### type="time"
+
+```tsx
+<DateTime type="time" />
+```
+
+<DateTimeExampleTypeTime />
 
 ## Внешний вид
 
@@ -45,87 +105,25 @@ import { DateTimeExampleEvents } from './examples/DateTimeExampleEvents/DateTime
 - в виде двух страничек — `'book'`,
 - в виде двух страничек со слайдером — `'slider'`.
 
-**view="classic"**
-
-<DateTimeExampleViewClassic />
+##### view="classic"
 
 ```tsx
 <DateTime view="classic" />
 ```
 
-**view="book"**
+<DateTimeExampleViewClassic />
 
-<DateTimeExampleViewBook />
+##### view="book"
 
 ```tsx
 <DateTime view="book" />
 ```
 
-**view="slider"**
+<DateTimeExampleViewBook />
+
+##### view="slider"
 
 <DateTimeExampleViewSlider />
-
-```tsx
-<DateTime view="slider" />
-```
-
-## Тип календаря
-
-За содержимое календаря отвечает свойство `type`, варианты: `'date'`, `'month'`, `'year'`, `'time'`, `'date-time'`.
-
-**type="year"**
-
-<DateTimeExampleTypeYear />
-
-```tsx
-<DateTime type="year" />
-```
-
-**type="month"**
-
-<DateTimeExampleTypeMonth />
-
-```tsx
-<DateTime type="month" />
-```
-
-**type="date"**
-
-<DateTimeExampleTypeDate />
-
-```tsx
-<DateTime type="date" />
-```
-
-**type="date-time"**
-
-<DateTimeExampleTypeDateTime />
-
-```tsx
-<DateTime type="date-time" />
-```
-
-**type="time"**
-
-<DateTimeExampleTypeTime />
-
-```tsx
-<DateTime type="time" />
-```
-
-## Какой месяц показывать
-
-Вы можете выбрать, на какой странице открывать календарь.
-Для этого передайте дату в свойстве `currentVisibleDate`.
-Пользователь увидит страницу, на которой находится эта дата.
-
-**Показывает месяц, в который входит начало текущей недели**
-
-<DateTimeExampleCurrentVisibleDate />
-
-```tsx
-<DateTime currentVisibleDate={new Date(2000, 1, 1)} />
-```
 
 ## Выбор даты
 
@@ -139,9 +137,7 @@ import { DateTimeExampleEvents } from './examples/DateTimeExampleEvents/DateTime
 
 > Событие выбора даты описано в [DateTimePropOnChange](#свойства) и в [DateTimePropOnChangeRange](#свойства)
 
-#### Пример с выбором периода
-
-<DateTimeExamplePeriod />
+##### Пример с выбором периода
 
 ```tsx
 export const DateTimeExamplePeriod = () => {
@@ -157,15 +153,15 @@ export const DateTimeExamplePeriod = () => {
 };
 ```
 
+<DateTimeExamplePeriod />
+
 ### Ограничение выбора
 
 Можно установить диапазон, в котором пользователь может выбрать дату в календаре.
 
 Начало диапазона укажите в свойстве `minDate`, конец — в свойстве `maxDate`.
 
-**Календарь с диапазоном дат**
-
-<DateTimeExampleDateMin />
+##### Календарь с диапазоном дат
 
 ```tsx
 import { startOfWeek } from 'date-fns';
@@ -188,6 +184,22 @@ export const DateTimeExampleDateMin = () => {
 };
 ```
 
+<DateTimeExampleDateMin />
+
+### Какой месяц показывать
+
+Вы можете выбрать, на какой странице открывать календарь.
+Для этого передайте дату в свойстве `currentVisibleDate`.
+Пользователь увидит страницу, на которой находится эта дата.
+
+##### Показывает месяц, в который входит начало текущей недели
+
+```tsx
+<DateTime currentVisibleDate={new Date(2000, 1, 1)} />
+```
+
+<DateTimeExampleCurrentVisibleDate />
+
 ## Выбор времени
 
 В режиме с выбором времени (`type="time"` или `type="date-time"`) можно показать часы, минуты и секунды.
@@ -206,19 +218,17 @@ export const DateTimeExampleDateMin = () => {
 пользователь сможет выбрать только чётные часы — 0, 2, 4 и так далее.
 А если в `multiplicityMinutes` передать `15`, пользователь увидит только четверти часа.
 
-<DateTimeExampleMultiplicity />
-
 ```tsx
 <DateTime type="time" multiplicityHours={2} multiplicityMinutes={5} multiplicitySeconds={0} />
 ```
+
+<DateTimeExampleMultiplicity />
 
 ## События на календаре
 
 Если какие-то события уже запланированы, укажите их даты в массиве `events`. Тогда их можно будет увидеть на календаре.
 
-**На этой неделе что-то запланировано**
-
-<DateTimeExampleEvents />
+##### На этой неделе что-то запланировано
 
 ```tsx
 import { addDays, startOfWeek } from 'date-fns';
@@ -228,14 +238,14 @@ const events = [startOfWeek(new Date(), { locale: ruLocale }), new Date(), addDa
 <DateTime events={events} />;
 ```
 
+<DateTimeExampleEvents />
+
 ## Локализация
 
 По умолчанию календарь отображается по-русски. Чтобы поменять язык,
 подключите библиотеку [date-fns](https://date-fns.org/) и укажите локализацию в свойстве `locale`.
 
-**Календарь по-французски**
-
-<DateTimeExampleLocale />
+##### Календарь по-французски
 
 ```tsx
 import frLocale from 'date-fns/locale/fr';
@@ -252,6 +262,14 @@ const dateTimeLocale = {
 export const DateTimeExampleLocale = () => {
   return <DateTime type="date-time" locale={dateTimeLocale} />;
 };
+```
+
+<DateTimeExampleLocale />
+
+## Импорт
+
+```tsx
+import { DateTime } from '@consta/DateTimeCanary';
 ```
 
 ## Свойства
@@ -289,7 +307,7 @@ export type DateTimePropLocale = Locale & LocaleWords;
 | Свойство                                         | Тип или варианты значения                              | По умолчанию | Описание                                                                  |
 | ------------------------------------------------ | ------------------------------------------------------ | ------------ | ------------------------------------------------------------------------- |
 | [`view?`](#внешний-вид)                          | `'classic'`, `'book'`, `'slider'`                      | `'classic'`  | Вид календаря                                                             |
-| [`type?`](#выбор-даты)                           | `'date'`, `'month'`, `'year'`, `'time'`, `'date-time'` | `'date'`     | Тип календаря                                                             |
+| [`type?`](#тип-календаря)                        | `'date'`, `'month'`, `'year'`, `'time'`, `'date-time'` | `'date'`     | Тип календаря                                                             |
 | [`value?`](#выбор-даты)                          | `DateTimePropValue`                                    | -            | Выбранная дата или диапазон дат                                           |
 | [`minDate?`](#ограничение-выбора)                | `Date`                                                 | -            | Ограничение выбора дат по меньшей дате                                    |
 | [`maxDate?`](#ограничение-выбора)                | `Date`                                                 | -            | Ограничение выбора дат по большей дате                                    |

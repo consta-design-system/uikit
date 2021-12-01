@@ -1,7 +1,8 @@
 import './ProgressStepBarItem.css';
 
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 
+import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { IconProps } from '../../../icons/Icon/Icon';
 import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
 import { cn } from '../../../utils/bem';
@@ -38,20 +39,22 @@ const renderPointContent = (
 ) => {
   if (!point) return null;
   if (progress) return <ProgressSpin size={size} />;
-  if (typeof point === 'number' || !point)
-    return (
-      <Text
-        className={cnProgressStepBarItem('PointText')}
-        size={size === 's' ? '2xs' : 'xs'}
-        weight="bold"
-      >
-        {point}
-      </Text>
-    );
 
-  const Icon = point;
+  if (typeof point === 'function') {
+    const Icon = point;
 
-  return <Icon size="xs" />;
+    return <Icon size="xs" />;
+  }
+
+  return (
+    <Text
+      className={cnProgressStepBarItem('PointText')}
+      size={size === 's' ? '2xs' : 'xs'}
+      weight="bold"
+    >
+      {point}
+    </Text>
+  );
 };
 
 export const ProgressStepBarItem: ProgressStepBarItemComponent = (props) => {
@@ -70,13 +73,13 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent = (props) => {
     ...otherProps
   } = props;
 
-  const [isTooltipHidden, setIsTooltipHidden] = useState<boolean>(true);
+  const [isTooltipVisible, { on: setTooltipVisible, off: setTooltipUnVisible }] = useFlag();
 
   const anchorRef = useRef<HTMLDivElement>(null);
 
   const pointProps = {
-    onMouseEnter: () => setIsTooltipHidden(false),
-    onMouseLeave: () => setIsTooltipHidden(true),
+    onMouseEnter: setTooltipVisible,
+    onMouseLeave: setTooltipUnVisible,
     className: cnProgressStepBarItem(
       'Point',
       {
@@ -89,7 +92,7 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent = (props) => {
 
   const pointButtonProps = {
     ref: pointRef as React.RefObject<HTMLButtonElement>,
-    onClick: (e: React.MouseEvent) => onClick?.(e),
+    onClick,
   };
 
   const pointDivButton = {
@@ -117,8 +120,8 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent = (props) => {
             className={cnProgressStepBarItem('Label')}
             ref={anchorRef}
             size={size}
-            onMouseEnter={() => setIsTooltipHidden(false)}
-            onMouseLeave={() => setIsTooltipHidden(true)}
+            onMouseEnter={setTooltipVisible}
+            onMouseLeave={setTooltipUnVisible}
             lineHeight={size === 's' ? 'xs' : size}
             view="primary"
           >
@@ -127,7 +130,7 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent = (props) => {
           {content}
         </div>
       </div>
-      {tooltipContent && !isTooltipHidden && (
+      {tooltipContent && isTooltipVisible && (
         <Tooltip
           anchorRef={anchorRef}
           className={cnProgressStepBarItem('Tooltip')}

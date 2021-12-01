@@ -26,6 +26,7 @@ const getKnobs = () => ({
   form: select('form', propForm, defaultPropForm),
   status: select('status', ['', ...propStatus], ''),
   caption: text('caption', 'Подпись'),
+  required: boolean('required', false),
   label: text('label', 'Заголовок'),
   labelPosition: select('labelPosition', ['top', 'left'], 'top'),
   placeholder: text('placeholder', 'Placeholder'),
@@ -40,6 +41,7 @@ export function Playground(): JSX.Element {
     disabled,
     view,
     form,
+    required,
     placeholder,
     status,
     withGroups,
@@ -56,6 +58,7 @@ export function Playground(): JSX.Element {
       <UserSelect
         key="multiple"
         size={size}
+        required={required}
         disabled={disabled}
         view={view}
         form={form}
@@ -79,6 +82,7 @@ export function Playground(): JSX.Element {
       disabled={disabled}
       view={view}
       form={form}
+      required={required}
       placeholder={placeholder}
       items={items}
       status={status || undefined}
@@ -122,6 +126,7 @@ export const WithRender = createStory(
       placeholder,
       withGroups,
       label,
+      required,
       labelPosition,
       caption,
     } = getKnobs();
@@ -134,6 +139,7 @@ export const WithRender = createStory(
         view={view}
         status={status || undefined}
         form={form}
+        required={required}
         placeholder={placeholder}
         items={myItems}
         value={value}
@@ -191,6 +197,7 @@ export const WithCreate = createStory(
       size,
       disabled,
       view,
+      required,
       form,
       status,
       placeholder,
@@ -207,6 +214,7 @@ export const WithCreate = createStory(
         size={size}
         disabled={disabled}
         view={view}
+        required={required}
         form={form}
         status={status || undefined}
         placeholder={placeholder}

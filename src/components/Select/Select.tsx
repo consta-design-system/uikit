@@ -37,6 +37,7 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
     items,
     onChange,
     value,
+    required,
     disabled,
     ariaLabel,
     id,
@@ -70,6 +71,7 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
     handleToggleDropdown,
     inputRef,
     handleInputClick,
+    notFound,
   } = useSelect<ITEM, GROUP, false>({
     items,
     groups,
@@ -127,6 +129,7 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
       size={size}
       view={view}
       form={form}
+      required={required}
       ref={ref}
       {...restProps}
     >
@@ -152,7 +155,7 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
               readOnly
             />
             {value && renderValue({ item: value })}
-            {!value && placeholder && (
+            {(typeof value === 'undefined' || value === null) && placeholder && (
               <span className={cnSelect('Placeholder')} title="placeholder">
                 {placeholder}
               </span>
@@ -181,6 +184,7 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
         renderItem={renderItem || renderItemDefault}
         getGroupLabel={getGroupLabel}
         visibleItems={visibleItems}
+        notFound={notFound}
       />
     </SelectContainer>
   );

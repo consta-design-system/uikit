@@ -3,7 +3,7 @@ import './ProgressStepBarLine.css';
 import React from 'react';
 
 import { cn } from '../../../utils/bem';
-import { getSizeByMap } from '../../../utils/getSizeByMap';
+import { getByMap } from '../../../utils/getByMap';
 import { Line, PropDirection, PropSize, PropStatus } from '../helpers';
 
 type ProgressStepBarLineProps = {
@@ -29,7 +29,7 @@ const backgroundGenerate = (lines: Line[], direction: PropDirection) => {
 
   for (let index = 0; index < length; index++) {
     const line = lines[index];
-    const color = getSizeByMap(mapVarsByStatus, line.status || 'normal');
+    const color = getByMap(mapVarsByStatus, line.status || 'normal');
     const from = lines[index - 1] ? lines[index - 1].size : 0;
     const to = line.size;
     background += `${color} ${from}px, ${color} ${to}px${index < length - 1 ? ', ' : ')'}`;

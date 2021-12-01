@@ -15,6 +15,10 @@ import {
 import { SelectExampleLabel } from './examples/SelectExampleLabel/SelectExampleLabel';
 import { SelectExampleStatus } from './examples/SelectExampleStatus/SelectExampleStatus';
 
+<!--info
+description: Выпадающий список. Можно выбрать один вариант.
+-->
+
 # Select
 
 Выпадающий список. Позволяет выбрать один из нескольких вариантов.
@@ -820,6 +824,7 @@ type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | [`getItemDisabled?`](#кастомные-типы-данных-для-вариантов-и-групп) | `PropGetItemDisabled<ITEM>`                            | `(item) => item.disabled` | Функция для определения неактивного варианта (`disabled`)              |
 | [`getGroupLabel?`](#кастомные-типы-данных-для-вариантов-и-групп)   | `PropGetGroupKey<GROUP>`                               | `(group) => group.id`     | Функция для определения названия группы                                |
 | [`getGroupKey?`](#кастомные-типы-данных-для-вариантов-и-групп)     | `PropGetGroupLabel<GROUP>`                             | `(group) => group.label`  | Функция для определения уникального ключа группы                       |
+| `required?`                                                        | `boolean`                                              | -                         | Нужно заполнить                                                        |
 | `onBlur?`                                                          | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                         | Обработчик события `blur`                                              |
 | `onFocus?`                                                         | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                         | Обработчик события `focus`                                             |
 | `ariaLabel?`                                                       | `string`                                               | -                         | `aria` атрибут для поля ввода                                          |

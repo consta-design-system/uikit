@@ -58,7 +58,7 @@ export const TooltipPositionedByCoordsStory = createStory(
   },
 );
 
-export const TooltipPositionedByAnchorStory = createStory(
+export const Playground = createStory(
   () => {
     const anchorRef = useRef<HTMLButtonElement>(null);
     const [isTooltipVisible, setIsTooltipVisible] = useState(false);

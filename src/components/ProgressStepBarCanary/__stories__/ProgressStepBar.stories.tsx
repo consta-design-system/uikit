@@ -1,5 +1,5 @@
 import React from 'react';
-import { object, select } from '@storybook/addon-knobs';
+import { select } from '@storybook/addon-knobs';
 
 import { IconCheck } from '../../../icons/IconCheck/IconCheck';
 import { cn } from '../../../utils/bem';
@@ -15,50 +15,50 @@ const stepsExample = [
   {
     label: 'Первый пункт',
     point: 1,
-    status: 'normal',
-    lineStatus: 'normal',
+    status: 'success',
+    lineStatus: 'success',
     tooltipContent: `Небольшое описание выполнения или состояния текущего этапа`,
   },
   {
     label: 'Второй пункт',
     point: 2,
-    status: 'warning',
+    status: 'alert',
     progress: true,
-    lineStatus: 'warning',
+    lineStatus: 'alert',
     tooltipContent: `Небольшое описание выполнения или состояния текущего этапа`,
   },
   {
     label: 'Третий пункт',
     point: IconCheck,
-    status: 'alert',
-    lineStatus: 'alert',
+    status: 'warning',
+    lineStatus: 'warning',
     tooltipContent: `Небольшое описание выполнения или состояния текущего этапа`,
   },
   {
     label: 'Четвертый пункт',
     point: 4,
-    status: 'success',
+    status: 'normal',
+    lineStatus: 'normal',
     tooltipContent: `Небольшое описание выполнения или состояния текущего этапа`,
   },
 ];
 
 const defaultKnobs = () => ({
-  steps: object('steps', stepsExample),
   size: select('size', propSize, propSizeDefault),
   direction: select('direction', propDirection, propDirectionDefault),
-  activeStep: select('activeStep', ['', 0, 1, 2, 3], ''),
+  activeStepIndex: select('activeStepIndex', ['', 0, 1, 2, 3], ''),
 });
 
 export function Playground() {
-  const { size, direction, activeStep, steps } = defaultKnobs();
+  const { size, direction, activeStepIndex } = defaultKnobs();
 
   return (
     <ProgressStepBar
       className={cnProgressStepBarStories()}
       direction={direction}
       size={size}
-      steps={steps}
-      activeStepIndex={typeof activeStep === 'number' ? activeStep : undefined}
+      steps={stepsExample}
+      activeStepIndex={typeof activeStepIndex === 'number' ? activeStepIndex : undefined}
     />
   );
 }

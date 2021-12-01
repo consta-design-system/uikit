@@ -1,3 +1,8 @@
 .UiKit--ComponentsGrid {
   background-color: var(--color-bg-secondary);
+
+  &-Title {
+    margin-top: 1.6em;
+    margin-bottom: 0.4em;
+  }
 }

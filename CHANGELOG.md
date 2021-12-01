@@ -1,5 +1,65 @@
 # Changelog
 
+## v3.9.3 (17/11/2021)
+Важное из изменений:
+- В `Table` добавили возможность скрывать колонки
+- Добавили в `Avatar` размер `L`
+- Обновили документацию
+- `Select` исправили критичный баг
+
+---
+
+- [docs(DateTime): edit docs, fix format (#1778)](https://github.com/gazprom-neft/consta-uikit/commit/f305f99c3e0febeb4c42fde1e2056c11331e08c5) - [@arhayka](https://github.com/arhayka)
+- [docs(Avatar): add size L to docs (#1774)](https://github.com/gazprom-neft/consta-uikit/commit/780fe0258fc6afa0145e80794b141a12231897e5) - [@arhayka](https://github.com/arhayka)
+- [docs(developer): add pages about design and code style (#1766)](https://github.com/gazprom-neft/consta-uikit/commit/ce7bed2918acf3d34f99867b67d256e854585ff3) - [@arhayka](https://github.com/arhayka)
+- [docs(common): add components and images to review (#1773)](https://github.com/gazprom-neft/consta-uikit/commit/bb8d7800d608a8813cca3d27e783c001766d1855) - [@arhayka](https://github.com/arhayka)
+- [docs(DatePicker): add note about this doc (#1777)](https://github.com/gazprom-neft/consta-uikit/commit/b313947c833f1f1217810fd12ed272b8fd02e8e5) - [@arhayka](https://github.com/arhayka)
+- [fix(DatePicker): fixed bugs (#1771)](https://github.com/gazprom-neft/consta-uikit/commit/4e4aa55e013fc2f6723a4b7923833cefc30f9bda) - [@gizeasy](https://github.com/gizeasy)
+- [fix(Select): fix bug with placeholder (#1759)](https://github.com/gazprom-neft/consta-uikit/commit/4aa9e146b307bd091a7da68c62894e947a2018a4) - [@N1MBER](https://github.com/N1MBER)
+- [feat(EventInterceptor): add all props for analitic](https://github.com/gazprom-neft/consta-uikit/commit/0f702ef8469308dc60bc8f51971335df07c68d4f) - [@RuWolf](https://github.com/RuWolf)
+- [feat(Avatar): add L size (#1760)](https://github.com/gazprom-neft/consta-uikit/commit/90e450d68b04b5ec0922cb7acd999aaebc94c505) - [@gizeasy](https://github.com/gizeasy)
+- [chore(deps): bump ws from 5.2.2 to 5.2.3 (#1749)](https://github.com/gazprom-neft/consta-uikit/commit/daf297c71c9ef641a3a44db9d4c15a63ccab2d6e) - [@dependabot[bot]](https://github.com/dependabot[bot])
+- [feat(Table): added hidden prop to table column (#1732)](https://github.com/gazprom-neft/consta-uikit/commit/09605ec9744428a1b8de4a158605e3660a2d3d86) - [@SergeyKatugin](https://github.com/SergeyKatugin)
+
+--------------------
+
+## v3.9.2 (10/11/2021)
+Важное из обновления:
+- Дополнили документацию по компонентам `ProgressStepBar` и `TextField`
+- Добавили таблицу возможность указывать минимальную ширину столбца.
+- Исправили баг с отображением "Не найдено" в `Combobox`
+
+---
+- [chore(storybook): automatic assembly of overview page (#1676)](https://github.com/gazprom-neft/consta-uikit/commit/cd5d4cf84b3f20f806345a211d8301f9a0c574ff) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Table): add minColumnWidth prop (#1727)](https://github.com/gazprom-neft/consta-uikit/commit/e9f8d2ca70779e11f38f147fe7490e475f794b1e) - [@vlzelensky](https://github.com/vlzelensky)
+- [docs(TextField): review docs, add type=number (#1725)](https://github.com/gazprom-neft/consta-uikit/commit/3eeb425b7ac563f60c16071888d42af114340a8d) - [@arhayka](https://github.com/arhayka)
+- [fix(Combobox): fix bug with notFoundLabel (#1728)](https://github.com/gazprom-neft/consta-uikit/commit/8857af9aced15b304a915778ff203abbbbbdbc98) - [@N1MBER](https://github.com/N1MBER)
+- [fix(ContextMenu): edit getOnClick type (#1722)](https://github.com/gazprom-neft/consta-uikit/commit/000c969fb97c4ae45e265611119785e71f897b21) - [@gizeasy](https://github.com/gizeasy)
+- [docs(ProgressStepBar): edit docs, add examples (#1703)](https://github.com/gazprom-neft/consta-uikit/commit/e0b1b91c27d52e838a16ba89eac883b68b54f097) - [@arhayka](https://github.com/arhayka)
+
+--------------------
+
+## v3.9.1 (03/11/2021)
+- [feat(Table): added control for table (#1716)](https://github.com/gazprom-neft/consta-uikit/commit/99d67aff670d2f499abcefc168eba73805ef3f16) - [@SergeyKatugin](https://github.com/SergeyKatugin)
+
+--------------------
+
+## v3.9.0 (27/10/2021)
+В `TextField` добавили возможность очищать по крестику и при `type = number` теперь красивые стилизованные кнопочки. Так же обновлена документация и внесены фиксы в некоторые компоненты.
+
+---
+
+- [docs(componets): Add canary label (#1714)](https://github.com/gazprom-neft/consta-uikit/commit/ec1953ddfb58d8df696856a6056ece5e0d3cf613) - [@N1MBER](https://github.com/N1MBER)
+- [feat(FieldLabel): add new prop 'required' (#1661)](https://github.com/gazprom-neft/consta-uikit/commit/813b371f93c7bf66f0e5356aece7cba065411b50) - [@N1MBER](https://github.com/N1MBER)
+- [ feat(TextField): add custom arrows to type number (#1658)](https://github.com/gazprom-neft/consta-uikit/commit/c71bd7265a2bcd0ff880c868658cf17a66a5041d) - [@N1MBER](https://github.com/N1MBER)
+- [feat(TextField): add button for cleaning (#1657)](https://github.com/gazprom-neft/consta-uikit/commit/5567ea2fb1a93cc86cef315ae4c10b5bbe605dab) - [@N1MBER](https://github.com/N1MBER)
+- [docs(common): edit main page (#1698)](https://github.com/gazprom-neft/consta-uikit/commit/336c2b56f599366fdfb40d166c6c8cad092f7c5f) - [@arhayka](https://github.com/arhayka)
+- [docs(useChoiceGroupIndexed): add docs (#1675)](https://github.com/gazprom-neft/consta-uikit/commit/9d8536abf43a6e0392422f2f876ec3ec78e6a688) - [@arhayka](https://github.com/arhayka)
+- [ fix(Combobox): fix bug with labelForNotFound and add props to docs](https://github.com/gazprom-neft/consta-uikit/commit/8f49e3bbd5c82c7044372d7b357931d2a0000f66) - [@N1MBER](https://github.com/N1MBER)
+- [fix(ProgressStepBar): fixed several bugs (#1699)](https://github.com/gazprom-neft/consta-uikit/commit/dfbb57572fb89767318d59528d6db59b7aceb36f) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v3.8.0 (20/10/2021)
 Вечер. Среда. Consta. Новый релиз!
 
@@ -381,43 +441,3 @@ _Обращаем внимание_: *версии компонентов обр
 - [docs(general): add remark about IE and old Edge version (#961)](https://github.com/gazprom-neft/consta-uikit/commit/3b4691e768e9b0a519a2539ec10940d975eb62eb) - [@arhayka](https://github.com/arhayka)
 - [chore(postcss): added postcss-mixin](https://github.com/gazprom-neft/consta-uikit/commit/c27a6c25c38d0a53ec33661316522ae5c76faed9) - [@gizeasy](https://github.com/gizeasy)
 - [feat(Grid): added component](https://github.com/gazprom-neft/consta-uikit/commit/97391f3983565b68ad2d76e4dd44d18b618943e9) - [@fooontic](https://github.com/fooontic)
-
---------------------
-
-## v1.11.7 (10/03/2021)
-- [refactor(Tabs): removed casting to types and more fix (#958)](https://github.com/gazprom-neft/consta-uikit/commit/82949196c2ecdfd51242257e8f15cf4d9e535119) - [@gizeasy](https://github.com/gizeasy)
-- [chore(react-app-env): add mdx types (#974)](https://github.com/gazprom-neft/consta-uikit/commit/d35bafef3f78b877b6670b71666c5af681784e83) - [@azhadanov](https://github.com/azhadanov)
-- [fix(TextField): fix cols and rows props (#957)](https://github.com/gazprom-neft/consta-uikit/commit/a6d1704eb791910319615dee3a9298aa78654231) - [@azhadanov](https://github.com/azhadanov)
-- [fix(MultiCombobox): fix clear value function (#959)](https://github.com/gazprom-neft/consta-uikit/commit/64e428c16b1100c262c2db011f66fd7bc935d259) - [@azhadanov](https://github.com/azhadanov)
-- [chore(Prettier): add commit-formatting for mdx files (#970)](https://github.com/gazprom-neft/consta-uikit/commit/cb013105d6304c849cc6154b1bf4cc1b5d99acd6) - [@azhadanov](https://github.com/azhadanov)
-- [chore(deps): bump elliptic from 6.5.3 to 6.5.4 (#969)](https://github.com/gazprom-neft/consta-uikit/commit/a54a7c4d38f09e5ef319be01fd35f010fb35403d) - [@dependabot[bot]](https://github.com/dependabot[bot])
-- [chore(CODEOWNERS): update (#960)](https://github.com/gazprom-neft/consta-uikit/commit/4af8e14ff9735804d2b3e67f8eae207086eadf2e) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v1.11.6 (03/03/2021)
-- [docs(components): fix some links (#884)](https://github.com/gazprom-neft/consta-uikit/commit/5bb19e3be64943f8b50c9c3f1fb083ab03ac61c1) - [@azhadanov](https://github.com/azhadanov)
-- [docs(Theme): add doc for creating custom preset (#856)](https://github.com/gazprom-neft/consta-uikit/commit/2c921381f4ce0a35fe07a09ccf4c104fa296ba5c) - [@kolebayev](https://github.com/kolebayev)
-
---------------------
-
-## v1.11.5 (24/02/2021)
-- [docs(Responces): add docs and examples (#839)](https://github.com/gazprom-neft/consta-uikit/commit/82f36fbc17f853e742c288a6a13f4038d1e131d4) - [@arhayka](https://github.com/arhayka)
-- [docs(Pagination): edit docs, add examples (#833)](https://github.com/gazprom-neft/consta-uikit/commit/b213ef1373e4f5e51ec5a16efad8e0f3660d3d52) - [@arhayka](https://github.com/arhayka)
-- [fix(File): fixed loader color   (#807)](https://github.com/gazprom-neft/consta-uikit/commit/23eaabd4c3d1f6e079e7f85b0479be0f67d4b91f) - [@azhadanov](https://github.com/azhadanov)
-
---------------------
-
-## v1.11.4 (10/02/2021)
-- [fix(Checkbox): fixed centering and colors for intermediate (#786)](https://github.com/gazprom-neft/consta-uikit/commit/635b17eec094a7e0ba6acbb7cb27c4626f409ef5) - [@azhadanov](https://github.com/azhadanov)
-- [fix(Tooltip): fixed theme (#832)](https://github.com/gazprom-neft/consta-uikit/commit/f21c6e03de00d97e429540ecd5197548c8fe114d) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Table): table header's vertical align center → bottom (#809)](https://github.com/gazprom-neft/consta-uikit/commit/98455c7727af1bbbdef0ad0fd00fe7287e0db775) - [@schurf-des](https://github.com/schurf-des)
-- [docs(breadcrumbs): add docs for Breadcrumbs (#764)](https://github.com/gazprom-neft/consta-uikit/commit/58b0172ae283a52c5c42e94363ed65b09039f2de) - [@arhayka](https://github.com/arhayka)
-- [docs(ContextMenu): edit docs (#801)](https://github.com/gazprom-neft/consta-uikit/commit/9efde4d96512026d822e7f021b600479b6d3885e) - [@arhayka](https://github.com/arhayka)
-- [fix(ChoiceGroup): fixed input style on IOS (#805)](https://github.com/gazprom-neft/consta-uikit/commit/c86ab5f1926e2733f79e1d865432c88ebfa21558) - [@gizeasy](https://github.com/gizeasy)
-- [feat(SwitchGroup): add SwitchGroup component, story and tests (#806)](https://github.com/gazprom-neft/consta-uikit/commit/22b2aefe05453c694c336a2b2ff3dcf1f67c4c30) - [@azhadanov](https://github.com/azhadanov)
-- [feat(Avatar): add XS-size (#815)](https://github.com/gazprom-neft/consta-uikit/commit/cb95c9e05f4b13a94327ccaf225a3aaba82707c7) - [@azhadanov](https://github.com/azhadanov)
-- [feat(Storybook): update favicon (#828)](https://github.com/gazprom-neft/consta-uikit/commit/97fa49989c86498ed9438bad6f5e30d1c30ddfbe) - [@fooontic](https://github.com/fooontic)
-- [docs(Table): mock data changed (#810)](https://github.com/gazprom-neft/consta-uikit/commit/ebd07d52a4b9e79c772537b0e9ca10eca681bff5) - [@schurf-des](https://github.com/schurf-des)
-- [docs(withTooltip): edit docs and examples (#788)](https://github.com/gazprom-neft/consta-uikit/commit/8d88a401811991456ccc8e7d88afded12198f0b6) - [@arhayka](https://github.com/arhayka)
-- [fix(Badge): fixed height (#785)](https://github.com/gazprom-neft/consta-uikit/commit/93fd9d17af053108762888591f5454597fd74b53) - [@azhadanov](https://github.com/azhadanov)

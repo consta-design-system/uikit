@@ -5,7 +5,7 @@ import React from 'react';
 import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { cn } from '../../utils/bem';
-import { getSizeByMap } from '../../utils/getSizeByMap';
+import { getByMap } from '../../utils/getByMap';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { Avatar } from '../Avatar/Avatar';
 import { Button, ButtonPropSize } from '../Button/Button';
@@ -103,7 +103,7 @@ export const User = forwardRefWithAs<Props>((props, ref) => {
       ref={ref}
     >
       <div className={cnUser('AvatarWrapper', { status })}>
-        <Avatar size={getSizeByMap(avatarSizeMap, size)} url={avatarUrl} name={name} />
+        <Avatar size={getByMap(avatarSizeMap, size)} url={avatarUrl} name={name} />
       </div>
       {!onlyAvatar && (name || info) && (
         <div className={cnUser('Block')}>
@@ -115,7 +115,7 @@ export const User = forwardRefWithAs<Props>((props, ref) => {
           {info && size !== 's' && (
             <Text
               className={cnUser('Info')}
-              size={getSizeByMap(infoSizeMap, size)}
+              size={getByMap(infoSizeMap, size)}
               view="secondary"
               lineHeight="2xs"
             >
@@ -127,16 +127,12 @@ export const User = forwardRefWithAs<Props>((props, ref) => {
       {withArrow && (
         <IconSelect
           className={cnUser('Icon')}
-          size={getSizeByMap(iconSizeMap, size)}
+          size={getByMap(iconSizeMap, size)}
           view="secondary"
         />
       )}
       {IconRight && !onIconRightClick && (
-        <IconRight
-          className={cnUser('Icon')}
-          size={getSizeByMap(iconSizeMap, size)}
-          view="secondary"
-        />
+        <IconRight className={cnUser('Icon')} size={getByMap(iconSizeMap, size)} view="secondary" />
       )}
       {IconRight && onIconRightClick && (
         <Button
@@ -145,7 +141,7 @@ export const User = forwardRefWithAs<Props>((props, ref) => {
           iconRight={IconRight}
           onlyIcon
           view="clear"
-          size={getSizeByMap(buttonSizeMap, size)}
+          size={getByMap(buttonSizeMap, size)}
           form="round"
         />
       )}

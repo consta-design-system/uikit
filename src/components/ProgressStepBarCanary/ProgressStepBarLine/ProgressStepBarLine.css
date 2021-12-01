@@ -13,6 +13,8 @@
       --progress-step-bar-line-left: 0;
       --progress-step-bar-line-width: var(--line-size);
       --progress-step-bar-line-height: var(--progress-step-bar-line-size);
+      --progress-step-bar-line-after-top: 0;
+      --progress-step-bar-line-after-left: var(--line-active-size);
     }
 
     &_vertical {
@@ -20,6 +22,8 @@
       --progress-step-bar-line-left: var(--progress-step-bar-line-padding);
       --progress-step-bar-line-width: var(--progress-step-bar-line-size);
       --progress-step-bar-line-height: var(--line-size);
+      --progress-step-bar-line-after-top: var(--line-active-size);
+      --progress-step-bar-line-after-left: 0;
     }
   }
 
@@ -43,11 +47,11 @@
   &::after {
     content: '';
     position: absolute;
-    top: 0;
+    top: var(--progress-step-bar-line-after-top);
     right: 0;
-    left: var(--line-active-size);
+    left: var(--progress-step-bar-line-after-left);
     bottom: 0;
     background: var(--color-bg-system);
-    transition: left 0.3s;
+    transition: left 0.3s, top 0.3s;
   }
 }

@@ -3,7 +3,7 @@ import './SelectItem.css';
 import React from 'react';
 
 import { cn } from '../../../utils/bem';
-import { getSizeByMap } from '../../../utils/getSizeByMap';
+import { getByMap } from '../../../utils/getByMap';
 import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import { Checkbox, CheckboxPropSize } from '../../Checkbox/Checkbox';
 import { PropSize } from '../types';
@@ -55,7 +55,7 @@ export const SelectItem: React.FC<SelectItemProps> = (props) => {
         <Checkbox
           className={cnSelectItem('Checkbox')}
           checked={active}
-          size={getSizeByMap(sizeCheckboxMap, size)}
+          size={getByMap(sizeCheckboxMap, size)}
         />
       )}
       {label}

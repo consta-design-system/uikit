@@ -13,33 +13,33 @@ type Item = {
 
 const steps: Item[] = [
   {
-    label: 'Первый пункт',
+    label: 'Первый шаг',
     point: 1,
     status: 'normal',
     lineStatus: 'normal',
-    tooltipContent: `Небольшое описание выполнения или состояния текущего этапа`,
+    tooltipContent: `Небольшое описание выполнения или состояния на шаге 1`,
   },
   {
-    label: 'Второй пункт',
+    label: 'Второй шаг',
     point: 2,
     status: 'warning',
     progress: true,
     lineStatus: 'warning',
-    tooltipContent: `Небольшое описание выполнения или состояния текущего этапа`,
+    tooltipContent: `Небольшое описание выполнения или состояния на шаге 2`,
   },
   {
-    label: 'Третий пункт',
+    label: 'Третий шаг',
     point: 3,
     status: 'alert',
     progress: true,
     lineStatus: 'alert',
-    tooltipContent: `Небольшое описание выполнения или состояния текущего этапа`,
+    tooltipContent: `Небольшое описание выполнения или состояния на шаге 3`,
   },
   {
-    label: 'Четвертый пункт',
+    label: 'Четвертый шаг',
     point: 4,
     status: 'success',
-    tooltipContent: `Небольшое описание выполнения или состояния текущего этапа`,
+    tooltipContent: `Небольшое описание выполнения или состояния на шаге 4`,
   },
 ];
 export const ProgressStepBarExampleTooltip = () => {

@@ -13,7 +13,7 @@ export const textFieldPropSizeDefault: TextFieldPropSize = textFieldPropSize[0];
 
 export type TextFieldPropOnChange = (args: TextFieldOnChangeArguments) => void;
 export type TextFieldOnChangeArguments = {
-  e: React.ChangeEvent;
+  e: React.ChangeEvent | React.MouseEvent;
   id?: TextFieldPropId;
   name?: TextFieldPropName;
   value: TextFieldPropValue;
@@ -69,49 +69,60 @@ export type TextFieldPropsTextareaType<TYPE> = TYPE extends 'textarea'
       maxRows?: never;
     };
 
-export type Props<TYPE extends string> = {
-  className?: string;
-  value?: TextFieldPropValue;
-  onChange?: TextFieldPropOnChange;
-  id?: TextFieldPropId;
-  name?: TextFieldPropName;
-  type?: TYPE;
-  disabled?: boolean;
-  cols?: number;
-  maxLength?: number;
-  size?: TextFieldPropSize;
-  view?: TextFieldPropView;
-  form?: TextFieldPropForm;
-  state?: TextFieldPropStatus;
-  status?: TextFieldPropStatus;
-  width?: TextFieldPropWidth;
-  onFocus?: React.FocusEventHandler<HTMLElement>;
-  onBlur?: React.FocusEventHandler<HTMLElement>;
-  autoFocus?: boolean;
-  placeholder?: string;
-  leftSide?: string | React.FC<IconProps>;
-  rightSide?: string | React.FC<IconProps>;
-  autoComplete?: TextFieldPropAutoComplete;
-  max?: number | string;
-  min?: number | string;
-  readOnly?: boolean;
-  required?: boolean;
-  step?: number | string;
-  tabIndex?: number;
-  inputRef?: React.Ref<HTMLTextAreaElement | HTMLInputElement>;
-  ariaLabel?: string;
-  iconSize?: IconPropSize;
-  children?: never;
-  label?: string;
-  caption?: string;
-  labelPosition?: 'top' | 'left';
-  focused?: boolean;
-};
+export type TextFieldPropRightSide<TYPE> = TYPE extends 'number'
+  ? {
+      rightSide?: never;
+    }
+  : {
+      rightSide?: string | React.FC<IconProps>;
+    };
 
 export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
-  Props<TYPE> & TextFieldPropsTextareaType<TYPE>,
+  {
+    className?: string;
+    value?: TextFieldPropValue;
+    cols?: number;
+    onChange?: TextFieldPropOnChange;
+    id?: TextFieldPropId;
+    name?: TextFieldPropName;
+    type?: TYPE;
+    disabled?: boolean;
+    maxLength?: number;
+    size?: TextFieldPropSize;
+    view?: TextFieldPropView;
+    form?: TextFieldPropForm;
+    state?: TextFieldPropStatus;
+    status?: TextFieldPropStatus;
+    width?: TextFieldPropWidth;
+    onFocus?: React.FocusEventHandler<HTMLElement>;
+    onBlur?: React.FocusEventHandler<HTMLElement>;
+    autoFocus?: boolean;
+    placeholder?: string;
+    leftSide?: string | React.FC<IconProps>;
+    rightSide?: string | React.FC<IconProps>;
+    withClearButton?: boolean;
+    autoComplete?: TextFieldPropAutoComplete;
+    max?: number | string;
+    min?: number | string;
+    readOnly?: boolean;
+    required?: boolean;
+    step?: number | string;
+    tabIndex?: number;
+    inputRef?: React.Ref<HTMLTextAreaElement | HTMLInputElement>;
+    ariaLabel?: string;
+    iconSize?: IconPropSize;
+    children?: never;
+    label?: string;
+    caption?: string;
+    labelPosition?: 'top' | 'left';
+    focused?: boolean;
+  },
   HTMLDivElement
->;
+> &
+  TextFieldPropsTextareaType<TYPE> &
+  TextFieldPropRightSide<TYPE>;
+
+// export type TextFieldProps<TYPE extends string> = PropsWithJsxAttributes<Props<TYPE>, 'div'>;
 
 export type TextFieldComponent = <TYPE extends string>(
   props: TextFieldProps<TYPE> & React.RefAttributes<HTMLElement>,

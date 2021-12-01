@@ -59,6 +59,7 @@ const getCellClasses = <T extends TableRow>(props: Props<T>): string => {
       stickyOnTop: (props.type === 'header' && props.isSticky) || props.type === 'resizer',
       stickyOnLeft: column.isSticky,
       isFilterable: column.filterable,
+      isControl: Boolean(column.control),
       withoutBorder: props.type === 'resizer',
       isClickable: 'isClickable' in props && props.isClickable,
       isBorderTop: 'isBorderTop' in props && props.isBorderTop,

@@ -8,9 +8,6 @@
   &-SnackBar {
     overflow: auto;
     flex: none;
-    width: 400px;
-    padding-right: var(--space-xs);
-    padding-left: var(--space-xs);
   }
 
   &-Buttons {

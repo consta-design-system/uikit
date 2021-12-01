@@ -1,6 +1,6 @@
 {
   "name": "@consta/uikit",
-  "version": "3.8.0",
+  "version": "3.9.3",
   "keywords": [
     "ui-kit",
     "design-system",
@@ -20,8 +20,8 @@
     "tslib": "^2.1.0"
   },
   "peerDependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react": ">= 16.8.0",
+    "react-dom": ">= 16.8.0"
   },
   "files": [],
   "publishConfig": {
