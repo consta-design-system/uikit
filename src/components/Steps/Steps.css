@@ -1,5 +1,6 @@
 .Steps {
   display: inline-flex;
+  align-items: center;
   width: max-content;
   max-width: 100%;
 

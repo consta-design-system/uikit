@@ -135,7 +135,7 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
           iconLeft={() => <IconArrowLeft size="xs" />}
           view="clear"
           onlyIcon
-          size={size}
+          size="xs"
           className={cnProgressStepBar('Button', { side: 'left' })}
           onClick={() => changePosition(true)}
         />
@@ -159,7 +159,7 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
           iconLeft={() => <IconArrowRight size="xs" />}
           view="clear"
           onlyIcon
-          size={size}
+          size="xs"
           className={cnProgressStepBar('Button', { side: 'right' })}
           onClick={() => changePosition(false)}
         />

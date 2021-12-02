@@ -94,7 +94,7 @@ export const Steps: Steps = React.forwardRef((props, ref) => {
           iconLeft={() => <IconArrowLeft size="xs" />}
           view="clear"
           onlyIcon
-          size={size}
+          size="xs"
           className={cnSteps('Button', { side: 'left' })}
           onClick={(e) => changeStep(e, true)}
         />
@@ -120,7 +120,7 @@ export const Steps: Steps = React.forwardRef((props, ref) => {
           iconLeft={() => <IconArrowRight size="xs" />}
           view="clear"
           onlyIcon
-          size={size}
+          size="xs"
           className={cnSteps('Button', { side: 'right' })}
           onClick={(e) => changeStep(e, false)}
         />
