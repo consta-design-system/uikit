@@ -26,7 +26,7 @@ export type UseSliderProps<RANGE extends boolean = false> = {
 };
 
 export type UseSliderValues = {
-  onKeyPress: (e: React.KeyboardEvent) => void;
+  onKeyPress: (e: React.KeyboardEvent, typeButton: ActiveButton) => void;
   onFocus: (
     e: React.FocusEvent<HTMLButtonElement> | React.MouseEvent,
     button: ActiveButton,

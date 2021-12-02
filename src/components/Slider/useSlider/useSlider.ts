@@ -125,15 +125,11 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
   }, []);
 
   const onKeyPress = useCallback(
-    (event: React.KeyboardEvent) => {
-      if (
-        !disabled &&
-        typeof activeButton.current === 'string' &&
-        typeof currentValue !== 'undefined'
-      ) {
+    (event: React.KeyboardEvent, typeButton: ActiveButton) => {
+      if (!disabled && typeof typeButton === 'string' && typeof currentValue !== 'undefined') {
         let stepIncrement = !Array.isArray(step) ? step || 1 : 1;
         let validKeyCode = false;
-        const changedValue = getActiveValue(currentValue, activeButton.current);
+        const changedValue = getActiveValue(currentValue, typeButton);
         switch (event.key) {
           case 'ArrowUp':
           case 'ArrowRight':
@@ -159,7 +155,7 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
               stepsArr = [...stepsArr, maxValue];
             }
             stepsArr.forEach((stepPoint, index) => {
-              if (typeof activeButton.current === 'string' && changedValue === stepPoint) {
+              if (typeof typeButton === 'string' && changedValue === stepPoint) {
                 if (stepIncrement >= 0) {
                   if (index === 0) {
                     stepIncrement = stepsArr[1] - minValue;
@@ -185,10 +181,10 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
             step,
             min,
             max,
-            activeButton.current,
+            typeButton,
           );
           setCurrentValue(newValue);
-          setTooltipPosition(getActiveValue(newValue, activeButton.current), activeButton.current);
+          setTooltipPosition(getActiveValue(newValue, typeButton), typeButton);
           onChange?.({
             e: event,
             value: newValue as SliderValue<RANGE>,
@@ -247,11 +243,13 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
       setCurrentValue(position);
       onChange?.({ e: event, value: position as SliderValue<RANGE> });
     }
-    buttonRefs.forEach((button) => {
-      button.current?.blur();
-    });
     off();
-    activeButton.current = null;
+    if (JSON.stringify(position) !== JSON.stringify(currentValue)) {
+      buttonRefs.forEach((button) => {
+        button.current?.blur();
+      });
+      activeButton.current = null;
+    }
   };
 
   useEffect(() => {

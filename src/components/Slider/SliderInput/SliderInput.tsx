@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { TextFieldOnChangeArguments, TextFieldProps } from '../../TextField/helpers';
 import { TextField } from '../../TextField/TextField';
@@ -17,16 +17,15 @@ export const SliderInput = (props: Props) => {
 
   const [currentValue, setCurrentValue] = useState<string | null>(value.toString());
 
-  useEffect(() => {
-    setCurrentValue(value.toString());
-  }, [value]);
-
   const handleChange = (e: TextFieldOnChangeArguments) => {
     onChange?.({ value: Number(e.value) });
+    setCurrentValue(e.value);
   };
 
   const commitChange = () => {
-    onChange?.({ value: getValidValue(Number(currentValue), min, max, step) });
+    const validatedValue = getValidValue(Number(currentValue), min, max, step);
+    onChange?.({ value: validatedValue });
+    setCurrentValue(validatedValue.toString());
   };
 
   return (

@@ -73,7 +73,7 @@ export type SliderPointProps = PropsWithHTMLAttributes<
       e: React.FocusEvent<HTMLButtonElement> | React.MouseEvent,
       button: ActiveButton,
     ) => void;
-    onKeyPress?: (e: React.KeyboardEvent) => void;
+    onKeyPress?: (e: React.KeyboardEvent, typeButton: ActiveButton) => void;
     onHover?: (hovered: boolean) => void;
     position: number;
   },

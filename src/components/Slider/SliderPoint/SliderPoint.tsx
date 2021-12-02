@@ -97,9 +97,10 @@ export const SliderPoint = (props: SliderPointProps) => {
         className={cnSliderPoint({ hovered, disabled }, [!disabled ? cnMixFocus() : ''])}
         onMouseOver={() => handleMouseAction(true)}
         onMouseOut={() => handleMouseAction(false)}
-        onKeyDown={(e) => onKeyPress?.(e)}
+        onKeyDown={(e) => onKeyPress?.(e, buttonLabel)}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        onClick={handleFocus}
         // onMouseUp={handleBlur}
         ref={useForkRef([buttonRef, pointRef])}
         tabIndex={0}
