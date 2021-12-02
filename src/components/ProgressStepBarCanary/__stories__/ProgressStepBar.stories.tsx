@@ -65,7 +65,7 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Служебные/ProgressStepBar(Canary)',
+  title: 'Компоненты|/Отображение данных/ProgressStepBar(Canary)',
   id: 'components/ProgressStepBar',
   parameters: {
     docs: {

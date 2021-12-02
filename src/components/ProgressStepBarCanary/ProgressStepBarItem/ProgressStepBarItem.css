@@ -131,8 +131,11 @@
     background-color: var(--progress-step-bar-item-point-background);
     border: none;
     border-radius: calc(var(--progress-step-bar-item-point-size) * 0.5);
-    cursor: pointer;
     transition: background-color 0.3s;
+
+    &[type*='button'] {
+      cursor: pointer;
+    }
   }
 
   &-PointText {
