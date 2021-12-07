@@ -2,6 +2,7 @@ import React from 'react';
 
 import { IconAdd } from '../../../icons/IconAdd/IconAdd';
 import { IconRemove } from '../../../icons/IconRemove/IconRemove';
+import { cn } from '../../../utils/bem';
 import { isNotNil } from '../../../utils/type-guards';
 import { Badge } from '../../Badge/Badge';
 import { Button } from '../../Button/Button';
@@ -1159,7 +1160,9 @@ export const tableDataWithRenderFn: TableProps<typeof rowsWithObjectFields[numbe
   ],
 };
 
-export const tableDataWithConditionalClassName: TableProps<typeof rowsWithObjectFields[number]> = {
+const cnCustomCell = cn('CustomCell');
+
+export const tableDataWithAdditionalClassName: TableProps<typeof rowsWithObjectFields[number]> = {
   columns: [
     {
       title: 'Месторождение',
@@ -1189,8 +1192,8 @@ export const tableDataWithConditionalClassName: TableProps<typeof rowsWithObject
     },
   ],
   rows: rowsWithObjectFields,
-  getConditionalClassName: (column, row, isActive) =>
-    !isActive && row.type === 'Нефтяное' && !column.mergeCells ? 'darkBackground' : '',
+  getAdditionalClassName: ({ column, row, isActive }) =>
+    cnCustomCell({ darked: !isActive && row.type === 'Нефтяное' && !column.mergeCells }),
 };
 
 enum CustomIDs {

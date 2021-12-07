@@ -99,7 +99,3 @@
     border-top: var(--table-border);
   }
 }
-
-.darkBackground {
-  background-color: var(--color-bg-ghost) !important;
-}

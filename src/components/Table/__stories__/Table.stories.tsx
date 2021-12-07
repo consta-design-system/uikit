@@ -11,7 +11,7 @@ import {
   partOfTableDataForCustomTagLabelFunction,
   rowsForCustomTagLabelFunction,
   tableData,
-  tableDataWithConditionalClassName,
+  tableDataWithAdditionalClassName,
   tableDataWithRenderFn,
   tableWithBagdeData,
   tableWithExpandableRowsData,
@@ -40,6 +40,7 @@ import {
   zebraStriped,
 } from '../Table';
 
+import WithAdditionalClassName from './examples/WithAdditionalClassName/WithAdditionalClassName';
 import WithRowCreationAndDeletion from './examples/WithRowCreationAndDeletion';
 import { cnTableStories } from './helpers';
 import mdx from './Table.docs.mdx';
@@ -56,7 +57,7 @@ const defaultProps: Props<typeof tableData.rows[number]> = {
   verticalAlign: 'top',
   zebraStriped: undefined,
   headerVerticalAlign: 'center',
-  getConditionalClassName: undefined,
+  getAdditionalClassName: undefined,
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -74,10 +75,10 @@ const getKnobs = <T extends TableRow>(replacedProps?: Partial<Props<T>>): Props<
 
   const handleRowClick = callbackWithSelector({ name: 'onRowClick', isActive: false });
   const handleRowHover = callbackWithSelector({ name: 'onRowHover', isActive: false });
-  const handleConditionalClass = callbackWithSelector(
-    { name: 'getConditionalClassName', isActive: true },
-    props.getConditionalClassName,
-  ) as ((column: TableColumn<T>, row: T, isActive: boolean) => string) | undefined;
+  const handleAdditionalClass = callbackWithSelector(
+    { name: 'getAdditionalClassName', isActive: true },
+    props.getAdditionalClassName,
+  ) as ((props: { column: TableColumn<T>; row: T; isActive: boolean }) => string) | undefined;
 
   return {
     columns: object('columns', props.columns),
@@ -103,7 +104,7 @@ const getKnobs = <T extends TableRow>(replacedProps?: Partial<Props<T>>): Props<
     onRowCreate: undefined,
     rowCreateText: undefined,
     getTagLabel: props.getTagLabel,
-    getConditionalClassName: handleConditionalClass,
+    getAdditionalClassName: handleAdditionalClass,
   };
 };
 
@@ -178,16 +179,12 @@ export const WithBagde = createStory(
   },
 );
 
-export const WithGetConditionalClassName = createStory(
+export const WithGetAdditionalClassName = createStory(
   () => {
-    return (
-      <div className={cnTableStories()}>
-        <Table {...getKnobs(tableDataWithConditionalClassName)} />
-      </div>
-    );
+    return <WithAdditionalClassName {...getKnobs(tableDataWithAdditionalClassName)} />;
   },
   {
-    name: 'с getConditionalClassName',
+    name: 'с getAdditionalClassName',
   },
 );
 
