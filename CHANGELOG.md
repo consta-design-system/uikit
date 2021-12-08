@@ -1,5 +1,27 @@
 # Changelog
 
+## v3.11.0 (08/12/2021)
+Ура! Добавили `Slider` , его можно двигать и выбирать значение (слайдер 🔥🔥🔥, но вы проверьте :)
+
+И ещё по мелочи:
+⁃ сделали адаптивными `ProgressStepBar` и `Steps`,
+⁃ добавили в таблицу возможность применить свой CSS-класс к любой ячейке,
+⁃ исправили баг с undefined в `eventInterceptionMap` в ключах объекта,
+⁃ обновили документацию по `UserSelect` и `Attachment`.
+
+---
+
+- [feat(Slider): add new component (#1726)](https://github.com/gazprom-neft/consta-uikit/commit/c641d23d5ddb8ed9a846696bacdaf37d9efe4a58) - [@N1MBER](https://github.com/N1MBER)
+- [feat(components): add adaptivity for ProgressStepBar and Steps (#1791)](https://github.com/gazprom-neft/consta-uikit/commit/d0f87aeb7ec71eb0edf9fd8b31966aaa8aee09d8) - [@N1MBER](https://github.com/N1MBER)
+- [docs(UserSelect): docs review (#1834)](https://github.com/gazprom-neft/consta-uikit/commit/675994f8659dcc87e2b6b959e4a823b6c319d3a4) - [@arhayka](https://github.com/arhayka)
+- [docs(Attachment): docs review (#1835)](https://github.com/gazprom-neft/consta-uikit/commit/ca2187bd581f079e044972626c5d98d1d9664220) - [@arhayka](https://github.com/arhayka)
+- [docs(units): remove slash before $ (#1803)](https://github.com/gazprom-neft/consta-uikit/commit/6b1fc7f48b8dfbf3b3b37204dafe58283354d7f0) - [@arhayka](https://github.com/arhayka)
+- [feat(ProgressStepBar): change example on playground and also change label prop to optional (#1816)](https://github.com/gazprom-neft/consta-uikit/commit/6ee0d18ff79fcb5d63c82fd52abe3fbb47fe684c) - [@N1MBER](https://github.com/N1MBER)
+- [feat(components): added getConditionalClassName prop to Table (#1789)](https://github.com/gazprom-neft/consta-uikit/commit/6ed65dae14eecee1afc9bcd383b1a9edc323302f) - [@ndrzhn](https://github.com/ndrzhn)
+- [fix(EventInterceptor): fixed import loop in eventInterceptorMap (#1830)](https://github.com/gazprom-neft/consta-uikit/commit/c2bc7fc241d7d037978454a08c4b5840d51f1646) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v3.10.0 (01/12/2021)
 - В `ContextMenu` добавили свойство `onItemClick`, для более удобной обработки клика по элементам
 - `ChoiceGroup`, теперь свойство `multiple` не обязательное
@@ -449,8 +471,3 @@ _Обращаем внимание_: *версии компонентов обр
 - [feat(ProgressSpin): add default spinning (#971)](https://github.com/gazprom-neft/consta-uikit/commit/2a7bdc550e9525d373df28c543a5a747d25703ed) - [@azhadanov](https://github.com/azhadanov)
 - [Feat/themetoggler development (#879)](https://github.com/gazprom-neft/consta-uikit/commit/7698d605af18033d8e0468cfe7c98f370807b084) - [@azhadanov](https://github.com/azhadanov)
 - [chore(Storybook): add Figma integration (#1014)](https://github.com/gazprom-neft/consta-uikit/commit/fc455406a8c9d7f9584425f8226ae3118483e57f) - [@azhadanov](https://github.com/azhadanov)
-
---------------------
-
-## v1.11.9 (25/03/2021)
-- [feat(Table): add custom filters (#804)](https://github.com/gazprom-neft/consta-uikit/commit/e6c956776758a8990b51d194f32c374758dff879) - [@vasilevx](https://github.com/vasilevx)
