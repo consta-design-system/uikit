@@ -56,7 +56,7 @@ export const useOverflow = (props: Props): boolean => {
         setIsOverflow(false);
       }
     }
-  }, [{ ...size }]);
+  }, [size.width, size.height]);
 
   return isOverflow;
 };
