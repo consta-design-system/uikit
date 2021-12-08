@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
+import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { UserSelect } from '../../../UserSelect';
 
 type Item = {
@@ -42,5 +43,33 @@ export function UserSelectExampleLabel() {
         placeholder="Выберите пользователя"
       />
     </div>
+  );
+}
+
+export function UserSelectExampleLabelPosition() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <>
+      <StoryBookExample>
+        <UserSelect
+          items={items}
+          value={value}
+          onChange={({ value }) => setValue(value)}
+          placeholder="Здесь лейбл сверху"
+          label="Лейбл"
+          labelPosition="top"
+        />
+      </StoryBookExample>
+      <StoryBookExample>
+        <UserSelect
+          items={items}
+          value={value}
+          onChange={({ value }) => setValue(value)}
+          placeholder="Здесь лейбл слева"
+          label="Лейбл"
+          labelPosition="left"
+        />
+      </StoryBookExample>
+    </>
   );
 }

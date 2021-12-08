@@ -44,3 +44,20 @@ export function UserSelectExampleCreate() {
     </div>
   );
 }
+
+export function UserSelectExampleCreateCustomLabel() {
+  const [value, setValue] = useState<Item | null>();
+  const [list, setList] = useState<Item[]>(items);
+  return (
+    <div className={cnDocsDecorator('Section')}>
+      <UserSelect
+        placeholder="Выберите пользователя"
+        items={list}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        onCreate={({ label }) => setList([{ label, id: `${label}_${list.length + 1}` }, ...list])}
+        labelForCreate="Добавить"
+      />
+    </div>
+  );
+}
