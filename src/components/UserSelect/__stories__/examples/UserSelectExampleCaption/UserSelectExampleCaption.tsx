@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { UserSelect } from '../../../UserSelect';
 
@@ -30,37 +29,49 @@ const items: Item[] = [
   },
 ];
 
-export function UserSelectExampleSize() {
+export function UserSelectExampleCaption() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <>
       <StoryBookExample>
         <UserSelect
-          placeholder="Размер s"
-          size="s"
           items={items}
           value={value}
           onChange={({ value }) => setValue(value)}
+          status="success"
+          placeholder="Статус success"
+          caption="Это подпись"
         />
       </StoryBookExample>
       <StoryBookExample>
         <UserSelect
-          placeholder="Размер m"
-          size="m"
           items={items}
           value={value}
           onChange={({ value }) => setValue(value)}
+          status="alert"
+          placeholder="Статус alert"
+          caption="Это подпись"
         />
       </StoryBookExample>
       <StoryBookExample>
         <UserSelect
-          placeholder="Размер l"
-          size="l"
           items={items}
           value={value}
           onChange={({ value }) => setValue(value)}
+          status="warning"
+          placeholder="Статус warning"
+          caption="Это подпись"
         />
       </StoryBookExample>
-    </div>
+      <StoryBookExample>
+        <UserSelect
+          items={items}
+          value={value}
+          onChange={({ value }) => setValue(value)}
+          placeholder="Обычное поле"
+          caption="Это подпись"
+        />
+      </StoryBookExample>
+    </>
   );
 }

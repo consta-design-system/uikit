@@ -29,7 +29,7 @@ const getKnobs = () => ({
   required: boolean('required', false),
   label: text('label', 'Заголовок'),
   labelPosition: select('labelPosition', ['top', 'left'], 'top'),
-  placeholder: text('placeholder', 'Placeholder'),
+  placeholder: text('placeholder', 'Подсказка'),
   withGroups: boolean('withGroups', false),
 });
 
