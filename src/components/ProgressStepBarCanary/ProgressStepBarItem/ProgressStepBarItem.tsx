@@ -37,8 +37,8 @@ const renderPointContent = (
   size: 'm' | 's',
   progress: boolean | undefined,
 ) => {
-  if (!point) return null;
   if (progress) return <ProgressSpin size={size} />;
+  if (!point) return null;
 
   if (typeof point === 'function') {
     const Icon = point;
@@ -115,24 +115,28 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent = (props) => {
         ) : (
           <div {...pointProps} {...pointDivButton} />
         )}
-        <div className={cnProgressStepBarItem('Content', { bottomOffset: !!content })}>
-          <Text
-            className={cnProgressStepBarItem('Label')}
-            ref={anchorRef}
-            size={size}
-            onMouseEnter={setTooltipVisible}
-            onMouseLeave={setTooltipUnVisible}
-            lineHeight={size === 's' ? 'xs' : size}
-            view="primary"
-          >
-            {label}
-          </Text>
-          {content}
-        </div>
+        {(label || content) && (
+          <div className={cnProgressStepBarItem('Content', { bottomOffset: !!content })}>
+            {label && (
+              <Text
+                className={cnProgressStepBarItem('Label')}
+                ref={anchorRef}
+                size={size}
+                onMouseEnter={setTooltipVisible}
+                onMouseLeave={setTooltipUnVisible}
+                lineHeight={size === 's' ? 'xs' : size}
+                view="primary"
+              >
+                {label}
+              </Text>
+            )}
+            {content}
+          </div>
+        )}
       </div>
       {tooltipContent && isTooltipVisible && (
         <Tooltip
-          anchorRef={anchorRef}
+          anchorRef={label || content ? anchorRef : pointRef}
           className={cnProgressStepBarItem('Tooltip')}
           direction={direction === 'horizontal' ? 'downCenter' : 'leftUp'}
           possibleDirections={

@@ -23,7 +23,7 @@ export const propPosition = ['center', 'start', 'end'] as const;
 export type PropPosition = typeof propPosition[number];
 export const propPositionDefault: PropPosition = propPosition[0];
 
-export type PropGetItemLabel<ITEM> = (item: ITEM) => string;
+export type PropGetItemLabel<ITEM> = (item: ITEM) => string | undefined;
 export type PropGetItemKey<ITEM> = (item: ITEM) => string | number;
 export type PropGetItemTooltipContent<ITEM> = (item: ITEM) => string | undefined;
 export type PropGetItemLineStatus<ITEM> = (item: ITEM) => PropStatus | undefined;
@@ -38,7 +38,7 @@ export type PropGetItemOnClick<ITEM> = (
 ) => React.EventHandler<React.MouseEvent> | undefined;
 
 export type DefaultItem = {
-  label: string;
+  label?: string;
   tooltipContent?: string;
   lineStatus?: PropStatus;
   point?: PointNumbersMap | React.FC<IconProps>;
@@ -75,7 +75,7 @@ export type ProgressStepBarProps<ITEM = DefaultItem> = PropsWithHTMLAttributesAn
 
 export type ProgressStepBarItemProps = {
   content?: React.ReactNode;
-  label: string;
+  label?: string;
   point?: PointNumbersMap | React.FC<IconProps>;
   progress?: boolean;
   status?: PropStatus | 'system';
