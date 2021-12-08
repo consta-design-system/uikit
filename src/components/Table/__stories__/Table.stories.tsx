@@ -11,6 +11,7 @@ import {
   partOfTableDataForCustomTagLabelFunction,
   rowsForCustomTagLabelFunction,
   tableData,
+  tableDataWithAdditionalClassName,
   tableDataWithRenderFn,
   tableWithBagdeData,
   tableWithExpandableRowsData,
@@ -39,6 +40,7 @@ import {
   zebraStriped,
 } from '../Table';
 
+import WithAdditionalClassName from './examples/WithAdditionalClassName/WithAdditionalClassName';
 import WithRowCreationAndDeletion from './examples/WithRowCreationAndDeletion';
 import { cnTableStories } from './helpers';
 import mdx from './Table.docs.mdx';
@@ -55,6 +57,7 @@ const defaultProps: Props<typeof tableData.rows[number]> = {
   verticalAlign: 'top',
   zebraStriped: undefined,
   headerVerticalAlign: 'center',
+  getAdditionalClassName: undefined,
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -72,6 +75,10 @@ const getKnobs = <T extends TableRow>(replacedProps?: Partial<Props<T>>): Props<
 
   const handleRowClick = callbackWithSelector({ name: 'onRowClick', isActive: false });
   const handleRowHover = callbackWithSelector({ name: 'onRowHover', isActive: false });
+  const handleAdditionalClass = callbackWithSelector(
+    { name: 'getAdditionalClassName', isActive: true },
+    props.getAdditionalClassName,
+  ) as ((props: { column: TableColumn<T>; row: T; isActive: boolean }) => string) | undefined;
 
   return {
     columns: object('columns', props.columns),
@@ -97,6 +104,7 @@ const getKnobs = <T extends TableRow>(replacedProps?: Partial<Props<T>>): Props<
     onRowCreate: undefined,
     rowCreateText: undefined,
     getTagLabel: props.getTagLabel,
+    getAdditionalClassName: handleAdditionalClass,
   };
 };
 
@@ -168,6 +176,15 @@ export const WithBagde = createStory(
   },
   {
     name: 'с Bagde',
+  },
+);
+
+export const WithGetAdditionalClassName = createStory(
+  () => {
+    return <WithAdditionalClassName {...getKnobs(tableDataWithAdditionalClassName)} />;
+  },
+  {
+    name: 'с getAdditionalClassName',
   },
 );
 
