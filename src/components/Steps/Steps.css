@@ -1,9 +1,34 @@
 .Steps {
-  display: flex;
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  max-width: 100%;
 
   &-Item {
     &:not(:last-child) {
       margin-right: var(--space-xs);
+    }
+  }
+
+  &-List {
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: visible;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &-Button {
+    &_side {
+      &_left {
+        margin-right: var(--space-xs);
+      }
+
+      &_right {
+        margin-left: var(--space-xs);
+      }
     }
   }
 }

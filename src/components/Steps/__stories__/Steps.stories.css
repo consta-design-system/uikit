@@ -1,7 +1,7 @@
 .StepsStories {
   display: flex;
   flex-direction: column;
-  width: 550px;
+  max-width: 550px;
   height: 330px;
 
   &-Content {

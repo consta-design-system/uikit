@@ -1,10 +1,15 @@
 import './Steps.css';
 
-import React from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
+import { useOverflow } from '../../hooks/useOverflow/useOverflow';
+import { useScrollElements } from '../../hooks/useScrollElements/useScrollElements';
+import { IconArrowLeft } from '../../icons/IconArrowLeft/IconArrowLeft';
+import { IconArrowRight } from '../../icons/IconArrowRight/IconArrowRight';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
+import { Button } from '../Button/Button';
 
 import { StepsStep } from './StepsStep/StepsStep';
 
@@ -48,6 +53,8 @@ export const Steps: Steps = React.forwardRef((props, ref) => {
     ...otherProps
   } = props;
 
+  const [activeStep, setActiveStep] = useState<number>(-1);
+
   const { getOnChange, getChecked } = useChoiceGroup({
     value,
     getKey: getLabel,
@@ -55,21 +62,69 @@ export const Steps: Steps = React.forwardRef((props, ref) => {
     multiple: false,
   });
 
+  useMemo(() => {
+    items.forEach((item, index) => {
+      if (getChecked(item)) {
+        setActiveStep(index);
+      }
+    });
+  }, [items, value]);
+
+  const { refs, scrollTo } = useScrollElements(items);
+
+  const stepsRef = useRef<HTMLDivElement>(null);
+
+  const isOverflow = useOverflow({ currentRef: stepsRef });
+
+  const changeStep = (e: React.MouseEvent, prev: boolean) => {
+    if (prev && activeStep !== 0) {
+      getOnChange(items[activeStep - 1])(e);
+      scrollTo(activeStep - 1);
+    }
+    if (!prev && activeStep !== items.length - 1) {
+      getOnChange(items[activeStep + 1])(e);
+      scrollTo(activeStep + 1);
+    }
+  };
+
   return (
     <div ref={ref} className={cnSteps({ size }, [className])} {...otherProps}>
-      {items.map((item, index) => (
-        <StepsStep
-          key={index}
-          className={cnSteps('Item')}
-          label={getCompleted?.(item) ? getLabel(item) : `${index + 1} ${getLabel(item)}`}
-          size={size}
-          active={getChecked(item)}
-          onChange={getOnChange(item)}
-          completed={getCompleted?.(item)}
-          skipped={getSkipped?.(item)}
-          disabled={getDisabled?.(item)}
+      {isOverflow && (
+        <Button
+          iconLeft={() => <IconArrowLeft size="xs" />}
+          view="clear"
+          onlyIcon
+          size="xs"
+          className={cnSteps('Button', { side: 'left' })}
+          onClick={(e) => changeStep(e, true)}
         />
-      ))}
+      )}
+      <div ref={stepsRef} className={cnSteps('List')}>
+        {items.map((item, index) => (
+          <StepsStep
+            key={index}
+            ref={refs[index] as React.RefObject<HTMLButtonElement>}
+            className={cnSteps('Item')}
+            label={getCompleted?.(item) ? getLabel(item) : `${index + 1} ${getLabel(item)}`}
+            size={size}
+            active={activeStep === index}
+            onChange={getOnChange(item)}
+            completed={getCompleted?.(item)}
+            skipped={getSkipped?.(item)}
+            disabled={getDisabled?.(item)}
+          />
+        ))}
+      </div>
+      {isOverflow && (
+        <Button
+          iconLeft={() => <IconArrowRight size="xs" />}
+          view="clear"
+          onlyIcon
+          size="xs"
+          className={cnSteps('Button', { side: 'right' })}
+          onClick={(e) => changeStep(e, false)}
+        />
+      )}
     </div>
   );
 });
