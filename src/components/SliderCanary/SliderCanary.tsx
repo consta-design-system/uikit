@@ -103,16 +103,6 @@ function SliderRender<RANGE extends boolean>(
     else off();
   };
 
-  const changeValueFromInput = (params: { value: number }) => {
-    if (isNotRangeParams(props)) {
-      props.onChange?.({
-        value: params.value,
-      });
-    }
-  };
-
-  const inputValue: number = isRangeParams(props) ? props.value[0] : (props.value as number);
-
   return (
     <div ref={ref} className={cnSlider({ size }, [className])} {...otherProps}>
       {label && (
@@ -124,8 +114,8 @@ function SliderRender<RANGE extends boolean>(
         {leftSide === 'input' && isNotRangeParams(props) && (
           <div className={cnSlider('Side', { position: 'left' })}>
             <SliderInput
-              value={inputValue}
-              onChange={changeValueFromInput}
+              value={props.value}
+              onChange={(params) => isNotRangeParams(props) && props.onChange?.(params)}
               size={size}
               min={min}
               max={max}

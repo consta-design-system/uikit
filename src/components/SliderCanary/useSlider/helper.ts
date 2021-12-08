@@ -137,6 +137,9 @@ export const getValidValue = (
   return value;
 };
 
+export const isValidValue = (value: number, min: number, max: number, step?: number | number[]) =>
+  getValidValue(value, min, max, step) === value;
+
 export const getValueByPosition = (
   position: TrackPosition,
   sliderRef: React.RefObject<HTMLDivElement>,

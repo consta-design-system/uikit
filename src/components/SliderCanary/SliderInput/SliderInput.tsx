@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 
 import { TextFieldOnChangeArguments, TextFieldProps } from '../../TextField/helpers';
 import { TextField } from '../../TextField/TextField';
-import { getValidValue } from '../useSlider/helper';
+import { getValidValue, isValidValue } from '../useSlider/helper';
 
 type Props = Omit<TextFieldProps<'number'>, 'value' | 'onChange' | 'min' | 'max' | 'step'> & {
   value: number;
   step?: number | number[];
   min?: number;
   max?: number;
-  onChange?: (props: { e?: React.ChangeEvent; value: number }) => void;
+  onChange?: (props: { e?: React.ChangeEvent | React.MouseEvent; value: number }) => void;
 };
 
 export const SliderInput = (props: Props) => {
@@ -17,9 +17,11 @@ export const SliderInput = (props: Props) => {
 
   const [currentValue, setCurrentValue] = useState<string | null>(value.toString());
 
-  const handleChange = (e: TextFieldOnChangeArguments) => {
-    onChange?.({ value: Number(e.value) });
-    setCurrentValue(e.value);
+  const handleChange = ({ e, value }: TextFieldOnChangeArguments) => {
+    setCurrentValue(value);
+    if (isValidValue(Number(value), min, max, step)) {
+      onChange?.({ value: Number(value), e });
+    }
   };
 
   const commitChange = () => {
