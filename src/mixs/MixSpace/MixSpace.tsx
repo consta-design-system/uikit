@@ -3,6 +3,8 @@ import './MixSpace.css';
 import { cn } from '../../utils/bem';
 
 type PropSpace =
+  | 0
+  | 'auto'
   | 'm'
   | '3xs'
   | '2xs'

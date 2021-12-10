@@ -1,5 +1,7 @@
 .MixSpace {
   &_pT {
+    &_0,
+    &_auto,
     &_3xs,
     &_2xs,
     &_xs,
@@ -13,6 +15,14 @@
     &_5xl,
     &_6xl {
       padding-top: var(--space-padding-top);
+    }
+
+    &_0 {
+      --space-padding-top: 0;
+    }
+
+    &_auto {
+      --space-padding-top: auto;
     }
 
     &_3xs {
@@ -65,6 +75,8 @@
   }
 
   &_pL {
+    &_0,
+    &_auto,
     &_3xs,
     &_2xs,
     &_xs,
@@ -78,6 +90,14 @@
     &_5xl,
     &_6xl {
       padding-left: var(--space-padding-left);
+    }
+
+    &_0 {
+      --space-padding-left: 0;
+    }
+
+    &_auto {
+      --space-padding-left: auto;
     }
 
     &_3xs {
@@ -130,6 +150,8 @@
   }
 
   &_pR {
+    &_0,
+    &_auto,
     &_3xs,
     &_2xs,
     &_xs,
@@ -143,6 +165,14 @@
     &_5xl,
     &_6xl {
       padding-right: var(--space-padding-right);
+    }
+
+    &_0 {
+      --space-padding-right: 0;
+    }
+
+    &_auto {
+      --space-padding-right: auto;
     }
 
     &_3xs {
@@ -195,6 +225,8 @@
   }
 
   &_pB {
+    &_0,
+    &_auto,
     &_3xs,
     &_2xs,
     &_xs,
@@ -208,6 +240,14 @@
     &_5xl,
     &_6xl {
       padding-bottom: var(--space-padding-bottom);
+    }
+
+    &_0 {
+      --space-padding-bottom: 0;
+    }
+
+    &_auto {
+      --space-padding-bottom: auto;
     }
 
     &_3xs {
@@ -260,6 +300,8 @@
   }
 
   &_mT {
+    &_0,
+    &_auto,
     &_3xs,
     &_2xs,
     &_xs,
@@ -273,6 +315,14 @@
     &_5xl,
     &_6xl {
       margin-top: var(--space-margin-top);
+    }
+
+    &_0 {
+      --space-margin-top: 0;
+    }
+
+    &_auto {
+      --space-margin-top: auto;
     }
 
     &_3xs {
@@ -325,6 +375,8 @@
   }
 
   &_mL {
+    &_0,
+    &_auto,
     &_3xs,
     &_2xs,
     &_xs,
@@ -338,6 +390,14 @@
     &_5xl,
     &_6xl {
       margin-left: var(--space-margin-left);
+    }
+
+    &_0 {
+      --space-margin-left: 0;
+    }
+
+    &_auto {
+      --space-margin-left: auto;
     }
 
     &_3xs {
@@ -390,6 +450,8 @@
   }
 
   &_mR {
+    &_0,
+    &_auto,
     &_3xs,
     &_2xs,
     &_xs,
@@ -403,6 +465,14 @@
     &_5xl,
     &_6xl {
       margin-right: var(--space-margin-right);
+    }
+
+    &_0 {
+      --space-margin-right: 0;
+    }
+
+    &_auto {
+      --space-margin-right: auto;
     }
 
     &_3xs {
@@ -455,6 +525,8 @@
   }
 
   &_mB {
+    &_0,
+    &_auto,
     &_3xs,
     &_2xs,
     &_xs,
@@ -468,6 +540,14 @@
     &_5xl,
     &_6xl {
       margin-bottom: var(--space-margin-bottom);
+    }
+
+    &_0 {
+      --space-margin-bottom: 0;
+    }
+
+    &_auto {
+      --space-margin-bottom: auto;
     }
 
     &_3xs {
