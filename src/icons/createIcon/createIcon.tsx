@@ -11,7 +11,7 @@ type CreateIconArguments = {
 };
 
 export function createIcon({ m, s, xs, name }: CreateIconArguments) {
-  const IconComponent: React.FC<IconProps> = (props) => {
+  const IconComponent = React.forwardRef<HTMLSpanElement, IconProps>((props, ref) => {
     function getSvgBySize(size: IconProps['size'] | undefined) {
       switch (size) {
         case 'xs':
@@ -28,11 +28,11 @@ export function createIcon({ m, s, xs, name }: CreateIconArguments) {
     const Svg: SizeComponent = getSvgBySize(props.size);
 
     return (
-      <Icon {...props} className={cnIcon(null, [name, props.className])}>
+      <Icon ref={ref} {...props} className={cnIcon(null, [name, props.className])}>
         <Svg className={cnIcon('Svg')} />
       </Icon>
     );
-  };
+  });
 
   return IconComponent;
 }
