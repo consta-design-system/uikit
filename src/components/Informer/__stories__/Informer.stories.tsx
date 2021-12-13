@@ -17,8 +17,8 @@ import mdx from './Informer.docs.mdx';
 
 const defaultKnobs = () => ({
   status: select('status', informerPropStatus, informerPropStatusDefault),
-  title: text('title', 'Some title'),
-  label: text('label', 'Hey there! I am Informer. Be ready to be informed :)'),
+  title: text('title', 'Это заголовок'),
+  label: text('label', 'Это очень важное сообщение. Или не очень :)'),
   view: select('view', informerPropView, informerPropViewDefault),
   size: select('size', informerPropSize, informerPropSiseDefault),
   icon: boolean('icon', false),
