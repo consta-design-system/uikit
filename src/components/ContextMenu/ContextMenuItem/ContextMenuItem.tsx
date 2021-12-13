@@ -1,11 +1,11 @@
 import './ContextMenuItem.css';
 
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { IconArrowRight } from '../../../icons/IconArrowRight/IconArrowRight';
 import { cn } from '../../../utils/bem';
 import { Text } from '../../Text/Text';
-import { contextMenuDefaultSize, ContextMenuItem as ContextMenuItemType } from '../helpers';
+import { contextMenuDefaultSize, ContextMenuItemComponent, ContextMenuItemProps } from '../helpers';
 
 export const cnContextMenuItem = cn('ContextMenuItem');
 
@@ -32,8 +32,8 @@ function renderSide(
   return sidesRender;
 }
 
-export const ContextMenuItem: ContextMenuItemType = React.forwardRef(
-  (props, ref: React.Ref<HTMLDivElement>) => {
+export const ContextMenuItem: ContextMenuItemComponent = forwardRef(
+  (props: ContextMenuItemProps, ref: React.Ref<HTMLDivElement>) => {
     const {
       label,
       rightSide,
@@ -43,18 +43,21 @@ export const ContextMenuItem: ContextMenuItemType = React.forwardRef(
       withSubMenu,
       accent,
       disabled,
+      as = 'div',
+      className,
       ...otherProps
     } = props;
-    const view = disabled ? undefined : accent;
+    const view = (disabled ? undefined : accent) || 'primary';
 
     return (
       <Text
         {...otherProps}
-        className={cnContextMenuItem({ size, active, disabled })}
+        className={cnContextMenuItem({ size, active, disabled }, [className])}
         ref={ref}
         size={size}
         view={view}
         lineHeight="xs"
+        as={as}
       >
         {renderSide(leftSide, 'left', false)}
         {!rightSide && !leftSide && !withSubMenu ? (
@@ -66,4 +69,4 @@ export const ContextMenuItem: ContextMenuItemType = React.forwardRef(
       </Text>
     );
   },
-);
+) as ContextMenuItemComponent;
