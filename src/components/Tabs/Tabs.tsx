@@ -4,7 +4,7 @@ import React, { createRef, useMemo } from 'react';
 
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
 import { useResizeObserved } from '../../hooks/useResizeObserved/useResizeObserved';
-import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
+import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
@@ -37,7 +37,7 @@ export type TabsPropFitMode = typeof tabsFitModes[number];
 export const tabsDefaultFitMode: TabsPropFitMode = 'dropdown';
 
 export type TabsPropGetLabel<ITEM> = (item: ITEM) => string | number;
-export type TabsPropGetIcon<ITEM> = (item: ITEM) => React.FC<IconProps> | undefined;
+export type TabsPropGetIcon<ITEM> = (item: ITEM) => IconComponent | undefined;
 export type TabsPropOnChange<ITEM, ITEM_ELEMENT> = (props: {
   e: React.MouseEvent<ITEM_ELEMENT>;
   value: ITEM;
@@ -48,7 +48,7 @@ type RenderItemProps<ITEM, ELEMENT extends HTMLElement> = {
   onChange: React.MouseEventHandler<ELEMENT>;
   checked: boolean;
   label: string;
-  icon?: React.FC<IconProps>;
+  icon?: IconComponent;
   size: TabsPropSize;
   iconSize?: IconPropSize;
   onlyIcon?: boolean;

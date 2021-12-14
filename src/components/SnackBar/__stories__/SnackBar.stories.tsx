@@ -4,7 +4,7 @@ import * as React from 'react';
 import { action } from '@storybook/addon-actions';
 import { boolean } from '@storybook/addon-knobs';
 
-import { IconProps } from '../../../icons/Icon/Icon';
+import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconAdd } from '../../../icons/IconAdd/IconAdd';
 import { IconAlert } from '../../../icons/IconAlert/IconAlert';
 import { IconProcessing } from '../../../icons/IconProcessing/IconProcessing';
@@ -34,8 +34,8 @@ const defaultKnobs = () => ({
   withComponentInsteadOfText: boolean('withComponentInsteadOfText', false),
 });
 
-const getItemIconByStatus = (status: SnackBarItemStatus): React.FC<IconProps> | undefined => {
-  const mapIconByStatus: Record<SnackBarItemStatus, React.FC<IconProps>> = {
+const getItemIconByStatus = (status: SnackBarItemStatus): IconComponent | undefined => {
+  const mapIconByStatus: Record<SnackBarItemStatus, IconComponent> = {
     success: IconThumbUp,
     warning: IconAlert,
     alert: IconAlert,

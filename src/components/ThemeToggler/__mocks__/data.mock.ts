@@ -1,4 +1,4 @@
-import { IconProps } from '../../../icons/Icon/Icon';
+import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconLightningBolt } from '../../../icons/IconLightningBolt/IconLightningBolt';
 import { IconMoon } from '../../../icons/IconMoon/IconMoon';
 import { IconSun } from '../../../icons/IconSun/IconSun';
@@ -8,7 +8,7 @@ import { presetGpnDark, presetGpnDefault, ThemePreset } from '../../Theme/Theme'
 export type Theme = {
   label: string;
   theme: ThemePreset;
-  icon: React.FC<IconProps>;
+  icon: IconComponent;
 };
 
 export const exampleThemesTwo: Theme[] = [

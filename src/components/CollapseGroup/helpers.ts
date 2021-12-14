@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IconProps } from '../../icons/Icon/Icon';
+import { IconComponent } from '../../icons/Icon/Icon';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import {
   CollapsePropHorizontalSpace,
@@ -36,7 +36,7 @@ export type CollapseGroupProps<ITEM, IS_ACCORDION extends boolean> = PropsWithHT
     items: ITEM[];
     isAccordion?: IS_ACCORDION;
     children?: never;
-    icon?: React.FC<IconProps>;
+    icon?: IconComponent;
     divider?: boolean;
     size?: CollapsePropSize;
     view?: CollapsePropView;
@@ -48,7 +48,7 @@ export type CollapseGroupProps<ITEM, IS_ACCORDION extends boolean> = PropsWithHT
     getItemContent?: CollapseGroupPropGetItemContent<ITEM>;
   } & (
     | {
-        closeIcon: React.FC<IconProps>;
+        closeIcon: IconComponent;
         directionIcon?: never;
         closeDirectionIcon?: never;
       }

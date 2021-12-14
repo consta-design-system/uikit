@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IconProps, IconPropSize } from '../../../icons/Icon/Icon';
+import { IconComponent, IconPropSize } from '../../../icons/Icon/Icon';
 import {
   TextField,
   TextFieldPropAutoComplete,
@@ -35,8 +35,8 @@ export type Props = {
   onBlur?: React.FocusEventHandler<HTMLElement>;
   autoFocus?: boolean;
   placeholder?: string;
-  leftSide?: string | React.FC<IconProps>;
-  rightSide?: string | React.FC<IconProps>;
+  leftSide?: string | IconComponent;
+  rightSide?: string | IconComponent;
   autoComplete?: TextFieldPropAutoComplete;
   max?: number | string;
   min?: number | string;

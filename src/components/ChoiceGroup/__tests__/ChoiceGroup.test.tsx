@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { IconProps } from '../../../icons/Icon/Icon';
+import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconCamera } from '../../../icons/IconCamera/IconCamera';
 import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
 import {
@@ -18,7 +18,7 @@ const testId = cnChoiceGroup();
 
 type Item = {
   name: string;
-  icon: React.FC<IconProps>;
+  icon: IconComponent;
   disabled?: boolean;
 };
 

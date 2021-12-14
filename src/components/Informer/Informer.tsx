@@ -3,7 +3,7 @@ import './Informer.css';
 import React from 'react';
 import { classnames } from '@bem-react/classnames';
 
-import { IconProps } from '../../icons/Icon/Icon';
+import { IconComponent } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 import { Text } from '../Text/Text';
@@ -24,7 +24,7 @@ export const informerPropSiseDefault: InformerPropSize = informerPropSize[0];
 type Props = {
   view?: InformerPropView;
   status?: InformerPropStatus;
-  icon?: React.FC<IconProps>;
+  icon?: IconComponent;
   label?: React.ReactNode;
   title?: string;
   size?: InformerPropSize;

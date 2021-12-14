@@ -80,7 +80,7 @@ type Item = {
   status?: 'success' | 'warning' | 'alert' | 'normal';
   autoClose?: boolean | number;
   showProgress?: 'timer';
-  icon?: React.FC<IconProps>;
+  icon?: IconComponent;
   actions?: {
     label: string | number;
     onClick: React.EventHandler<React.MouseEvent>;
@@ -122,7 +122,7 @@ import './SnackBarStories.css';
 import * as React from 'react';
 import { cn } from '@bem-react/classname';
 import { Button } from '@consta/uikit/Button';
-import { IconProps } from '@consta/uikit/Icon';
+import { IconComponent } from '@consta/uikit/Icon';
 import { IconAdd } from '@consta/uikit/IconAdd';
 import { IconThumbUp } from '@consta/uikit/IconThumbUp';
 import { IconAlert } from '@consta/uikit/IconAlert';
@@ -142,8 +142,8 @@ function reducer(
   }
 }
 
-const getItemIconByStatus = (status: SnackBarItemStatus): React.FC<IconProps> | undefined => {
-  const mapIconByStatus: Record<SnackBarItemStatus, React.FC<IconProps>> = {
+const getItemIconByStatus = (status: SnackBarItemStatus): IconComponent | undefined => {
+  const mapIconByStatus: Record<SnackBarItemStatus, IconComponent> = {
     success: IconThumbUp,
     warning: IconAlert,
     alert: IconAlert,

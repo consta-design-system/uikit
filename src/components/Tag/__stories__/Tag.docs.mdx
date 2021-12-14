@@ -106,7 +106,7 @@ description: Тег. Объединяет группы объектов — ст
 | [`checked?`](#режим-работы)  | `boolean, never`                                                              | -            | Отмечает тег выбранным. Доступно только при `mode` = `'check'`                  |
 | [`size?`](#размер)           | `'xs' , 's' , 'm' , 'l'`                                                      | `'m'`        | Размер тега                                                                     |
 | [`group?`](#группы-тегов)    | `1..9, '1'...'9'`                                                             | -            | Метка группы                                                                    |
-| [`icon?`](#иконка)           | `React.FC<IconProps>`                                                         | -            | Иконка                                                                          |
+| [`icon?`](#иконка)           | `IconComponent`                                                               | -            | Иконка                                                                          |
 | `onClick?`                   | `React.MouseEventHandler, never`                                              | -            | Действие при клике по тегу. Доступно при `mode` = `'button'`, `'link'`          |
 | [`onCancel?`](#режим-работы) | `React.MouseEventHandler, never`                                              | -            | Действие при клике по крестику на теге. Доступно только при `mode` = `'cancel'` |
 | [`onChange?`](#режим-работы) | `({ e, checked }: { e?: React.MouseEvent; checked: boolean }) => void, never` | -            | Действие при клике по тегу. Доступно только при `mode` = `'check'`              |

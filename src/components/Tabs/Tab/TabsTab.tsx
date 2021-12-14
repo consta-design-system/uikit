@@ -2,7 +2,7 @@ import './TabsTab.css';
 
 import React, { forwardRef } from 'react';
 
-import { IconProps, IconPropSize } from '../../../icons/Icon/Icon';
+import { IconComponent, IconPropSize } from '../../../icons/Icon/Icon';
 import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
 import { cn } from '../../../utils/bem';
 import { getByMap } from '../../../utils/getByMap';
@@ -13,7 +13,7 @@ export const cnTabsTab = cn('TabsTab');
 type Props = {
   size: TabsPropSize;
   onlyIcon?: boolean;
-  icon?: React.FC<IconProps>;
+  icon?: IconComponent;
   iconSize?: IconPropSize;
   label: string;
   checked: boolean;

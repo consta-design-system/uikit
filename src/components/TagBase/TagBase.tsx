@@ -2,7 +2,7 @@ import './TagBase.css';
 
 import React from 'react';
 
-import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
+import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
 import { IconClose } from '../../icons/IconClose/IconClose';
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
@@ -29,7 +29,7 @@ export type Props = {
   view?: TagBasePropView;
   group?: TagBasePropGroup;
   onCancel?: React.MouseEventHandler<HTMLButtonElement>;
-  icon?: React.FC<IconProps>;
+  icon?: IconComponent;
   iconSize?: IconPropSize;
   withAction?: boolean;
 };

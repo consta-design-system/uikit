@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
-import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
+import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
 import { IconCheck } from '../../icons/IconCheck/IconCheck';
 import { getByMap } from '../../utils/getByMap';
 import { setRef } from '../../utils/setRef';
@@ -18,7 +18,7 @@ export const themeTogglerPropSizeDefault: ThemeTogglerPropSize = themeTogglerPro
 export type ThemePropSetValue<ITEM> = (props: { e: React.MouseEvent; value: ITEM }) => void;
 export type ThemePropGetKey<ITEM> = (item: ITEM) => string | number;
 export type ThemePropGetLabel<ITEM> = (item: ITEM) => string;
-export type ThemePropGetIcon<ITEM> = (item: ITEM) => React.FC<IconProps>;
+export type ThemePropGetIcon<ITEM> = (item: ITEM) => IconComponent;
 
 export type Props<ITEM> = PropsWithHTMLAttributesAndRef<
   {

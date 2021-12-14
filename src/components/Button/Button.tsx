@@ -3,7 +3,7 @@ import './Button.css';
 import React, { useRef } from 'react';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
-import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
+import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
@@ -45,8 +45,8 @@ export type Props = {
   loading?: boolean;
   label?: string | number;
   onClick?: React.EventHandler<React.MouseEvent>;
-  iconLeft?: React.FC<IconProps>;
-  iconRight?: React.FC<IconProps>;
+  iconLeft?: IconComponent;
+  iconRight?: IconComponent;
   onlyIcon?: boolean;
   iconSize?: IconPropSize;
   title?: string;

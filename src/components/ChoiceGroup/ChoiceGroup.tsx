@@ -3,7 +3,7 @@ import './ChoiceGroup.css';
 import React from 'react';
 
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
-import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
+import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
@@ -27,7 +27,7 @@ export type СhoiceGroupPropWidth = typeof choiceGroupWidth[number];
 export const choiceGroupWidthDefault: СhoiceGroupPropWidth = choiceGroupWidth[0];
 
 export type ChoiceGroupPropGetLabel<ITEM> = (item: ITEM) => string | number;
-export type ChoiceGroupPropGetIcon<ITEM> = (item: ITEM) => React.FC<IconProps> | undefined;
+export type ChoiceGroupPropGetIcon<ITEM> = (item: ITEM) => IconComponent | undefined;
 
 export type ChoiceGroupPropValue<ITEM, MULTIPLE extends boolean> =
   | (MULTIPLE extends true ? ITEM[] : ITEM)

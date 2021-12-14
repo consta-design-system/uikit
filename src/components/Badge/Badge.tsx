@@ -3,7 +3,7 @@ import './Badge.css';
 import React from 'react';
 import { classnames } from '@bem-react/classnames';
 
-import { IconProps } from '../../icons/Icon/Icon';
+import { IconComponent } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { useTheme } from '../Theme/Theme';
@@ -30,7 +30,7 @@ type Props = {
   status?: BadgePropStatus;
   form?: BadgePropForm;
   minified?: boolean;
-  icon?: React.FC<IconProps>;
+  icon?: IconComponent;
   label?: string;
   children?: never;
 };

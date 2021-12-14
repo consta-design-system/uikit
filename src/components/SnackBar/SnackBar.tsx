@@ -3,7 +3,7 @@ import './SnackBar.css';
 import React from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-import { IconProps } from '../../icons/Icon/Icon';
+import { IconComponent } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { cnForCssTransition } from '../../utils/cnForCssTransition';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
@@ -26,7 +26,7 @@ export type Item = {
   status?: SnackBarItemStatus;
   autoClose?: boolean | number;
   showProgress?: 'timer';
-  icon?: React.FC<IconProps>;
+  icon?: IconComponent;
   actions?: SnackBarPropItemAction[];
   onClose?: (item: Item) => void;
   onAutoClose?: (item: Item) => void;
