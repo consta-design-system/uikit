@@ -1,4 +1,4 @@
-import { IconProps } from '../../../icons/Icon/Icon';
+import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconAllDone } from '../../../icons/IconAllDone/IconAllDone';
 import { IconAttach } from '../../../icons/IconAttach/IconAttach';
 import { IconBag } from '../../../icons/IconBag/IconBag';
@@ -24,7 +24,7 @@ export declare type Item = {
   subMenu?: Item[];
   switch?: boolean;
   status?: BadgePropStatus;
-  icon?: React.FC<IconProps> | null;
+  icon?: IconComponent | null;
   accent?: ContextMenuAccent;
   disabled?: boolean;
 };

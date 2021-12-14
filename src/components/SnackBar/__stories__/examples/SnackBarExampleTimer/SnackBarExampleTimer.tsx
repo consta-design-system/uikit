@@ -2,7 +2,7 @@ import './SnackBarExampleTimer.css';
 
 import React, { useReducer } from 'react';
 
-import { IconProps } from '../../../../../icons/Icon/Icon';
+import { IconComponent } from '../../../../../icons/Icon/Icon';
 import { IconAdd } from '../../../../../icons/IconAdd/IconAdd';
 import { IconAlert } from '../../../../../icons/IconAlert/IconAlert';
 import { IconRing } from '../../../../../icons/IconRing/IconRing';
@@ -13,7 +13,7 @@ import { Item, SnackBar, SnackBarItemStatus } from '../../../SnackBar';
 
 const cnSnackBarExampleTimer = cn('SnackBarExampleTimer');
 
-const mapIconByStatus: Record<SnackBarItemStatus, React.FC<IconProps> | undefined> = {
+const mapIconByStatus: Record<SnackBarItemStatus, IconComponent | undefined> = {
   alert: IconAlert,
   normal: IconRing,
   system: undefined,
@@ -21,7 +21,7 @@ const mapIconByStatus: Record<SnackBarItemStatus, React.FC<IconProps> | undefine
   warning: undefined,
 };
 
-const getItemIconByStatus = (status: SnackBarItemStatus): React.FC<IconProps> | undefined =>
+const getItemIconByStatus = (status: SnackBarItemStatus): IconComponent | undefined =>
   mapIconByStatus[status];
 
 function reducer(

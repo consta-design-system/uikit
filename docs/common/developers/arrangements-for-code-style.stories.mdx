@@ -73,20 +73,18 @@ export const Component: React.FC<Props> = ({ data }) => {
 Требования к иконками в UI-ките:
 
 - для каждого размера иконки нужно использовать отдельное изображение,
-- все иконки в библиотеке должны соответствовать интерфейсу `React.FC<IconProps>` ([посмотреть тип `IconProps`](https://github.com/gazprom-neft/consta-uikit/blob/master/src/icons/Icon/Icon.tsx)).
+- все иконки в библиотеке должны соответствовать типу `IconComponent` ([посмотреть тип `IconComponent`](https://github.com/gazprom-neft/consta-uikit/blob/master/src/icons/Icon/Icon.tsx#L36)).
 
-Если в API компонента используются иконки, стоит указывать тип `React.FC<IconProps>`.
+Если в API компонента используются иконки, стоит указывать тип `IconComponent`.
 
 Пример:
 
 ```tsx
 import { ReactElement } from 'react';
 
-import { IconProps } from '@consta/uikit/Icon';
+import { IconComponent } from '@consta/uikit/Icon';
 
-type Icon = (props: IconProps) => ReactElement | null;
-
-const Component: Icon = ({ icon: Icon }) => (
+const Component: Icon = ({ icon: IconComponent }) => (
   <div>
     <Icon size="s" />
   </div>

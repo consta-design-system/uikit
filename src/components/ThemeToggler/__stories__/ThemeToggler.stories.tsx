@@ -1,10 +1,10 @@
 import './ThemeToggler.stories.css';
 
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import { object, select } from '@storybook/addon-knobs';
 
 import { exampleThemesThree, exampleThemesTwo, Theme as ThemeType } from '../__mocks__/data.mock';
-import { IconProps } from '../../../icons/Icon/Icon';
+import { IconComponent } from '../../../icons/Icon/Icon';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import { directions } from '../../Popover/Popover';
@@ -27,7 +27,7 @@ export function Playground() {
   const themeArray = themes === 'two' ? exampleThemesTwo : exampleThemesThree;
   const [value, setValue] = useState<ThemeType>(themeArray[0]);
   const getThemeLabelDefault = (theme: ThemeType): string => theme.label;
-  const getThemeIconDefault = (theme: ThemeType): FC<IconProps> => theme.icon;
+  const getThemeIconDefault = (theme: ThemeType): IconComponent => theme.icon;
 
   return (
     <Theme preset={value.theme} className={cnThemeTogglerStories()}>

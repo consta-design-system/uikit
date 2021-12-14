@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
+import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
 export type TextFieldPropValue = string | null;
@@ -74,7 +74,7 @@ export type TextFieldPropRightSide<TYPE> = TYPE extends 'number'
       rightSide?: never;
     }
   : {
-      rightSide?: string | React.FC<IconProps>;
+      rightSide?: string | IconComponent;
     };
 
 export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
@@ -98,8 +98,8 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
     onBlur?: React.FocusEventHandler<HTMLElement>;
     autoFocus?: boolean;
     placeholder?: string;
-    leftSide?: string | React.FC<IconProps>;
-    rightSide?: string | React.FC<IconProps>;
+    leftSide?: string | IconComponent;
+    rightSide?: string | IconComponent;
     withClearButton?: boolean;
     autoComplete?: TextFieldPropAutoComplete;
     max?: number | string;

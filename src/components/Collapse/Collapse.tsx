@@ -2,7 +2,7 @@ import './Collapse.css';
 
 import React from 'react';
 
-import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
+import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
 import { IconArrowDown } from '../../icons/IconArrowDown/IconArrowDown';
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
@@ -50,7 +50,7 @@ export const collapsePropCloseDirectionIconDefault = collapsePropDirectionIcon[2
 type CollapseProps = PropsWithHTMLAttributesAndRef<
   {
     size?: CollapsePropSize;
-    icon?: React.FC<IconProps>;
+    icon?: IconComponent;
     view?: CollapsePropView;
     divider?: boolean;
     label: string;
@@ -59,7 +59,7 @@ type CollapseProps = PropsWithHTMLAttributesAndRef<
     isOpen?: boolean;
   } & (
     | {
-        closeIcon?: React.FC<IconProps>;
+        closeIcon?: IconComponent;
         directionIcon?: never;
         closeDirectionIcon?: never;
       }

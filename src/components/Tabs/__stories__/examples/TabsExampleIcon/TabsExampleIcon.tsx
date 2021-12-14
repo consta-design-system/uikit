@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Icon } from '../../../../../icons/Icon/Icon';
+import { IconComponent } from '../../../../../icons/Icon/Icon';
 import { IconCamera } from '../../../../../icons/IconCamera/IconCamera';
 import { IconPhoto } from '../../../../../icons/IconPhoto/IconPhoto';
 import { IconRing } from '../../../../../icons/IconRing/IconRing';
@@ -10,10 +10,10 @@ import { Tabs } from '../../../Tabs';
 
 type Item = {
   name: string;
-  icon?: typeof Icon;
+  icon?: IconComponent;
 };
 
-const items = [
+const items: Item[] = [
   {
     name: 'Первый',
     icon: IconPhoto,

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
-import { IconProps, IconPropSize } from '../../../icons/Icon/Icon';
+import { IconComponent, IconPropSize } from '../../../icons/Icon/Icon';
 import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
 import { cnChoiceGroup } from '../ChoiceGroup';
 
 type Props = {
-  icon?: React.FC<IconProps>;
+  icon?: IconComponent;
   onlyIcon?: boolean;
   iconSize?: IconPropSize;
   label: string;

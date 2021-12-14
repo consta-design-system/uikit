@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IconProps } from '../../icons/Icon/Icon';
+import { IconComponent } from '../../icons/Icon/Icon';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
 import { ActiveButton } from './useSlider/helper';
@@ -40,9 +40,9 @@ type Props<RANGE extends boolean = false> = {
   max?: number;
   onChange?: PropOnChange<RANGE>;
   onAfterChange?: PropOnChange<RANGE>;
-  leftSide?: React.FC<IconProps> | 'input';
+  leftSide?: IconComponent | 'input';
   tooltipFormatter?: PropToolipFormatter;
-  rightSide?: React.FC<IconProps>;
+  rightSide?: IconComponent;
 };
 
 export type Line = {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { boolean, select } from '@storybook/addon-knobs';
 
-import { IconProps } from '../../../icons/Icon/Icon';
+import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconSettings } from '../../../icons/IconSettings/IconSettings';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
@@ -15,7 +15,7 @@ const defaultKnobs = () => ({
 });
 
 type Page = {
-  icon?: React.FC<IconProps>;
+  icon?: IconComponent;
   link: string;
   label: string;
   isActive?: boolean;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { boolean, select } from '@storybook/addon-knobs';
 
-import { IconProps } from '../../../icons/Icon/Icon';
+import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconCamera } from '../../../icons/IconCamera/IconCamera';
 import { IconCopy } from '../../../icons/IconCopy/IconCopy';
 import { IconFavorite } from '../../../icons/IconFavorite/IconFavorite';
@@ -23,7 +23,7 @@ import mdx from './ChoiceGroup.docs.mdx';
 
 declare type Item = {
   name: string;
-  icon: React.FC<IconProps>;
+  icon: IconComponent;
   disabled?: boolean;
 };
 

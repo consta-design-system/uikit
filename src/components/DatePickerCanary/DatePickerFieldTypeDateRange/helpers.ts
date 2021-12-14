@@ -1,4 +1,4 @@
-import { IconProps } from '../../../icons/Icon/Icon';
+import { IconComponent } from '../../../icons/Icon/Icon';
 import { DateRange } from '../../../utils/types/Date';
 import { TextFieldPropForm } from '../../TextField/TextField';
 import { DatePickerFieldTypeDateProps } from '../DatePickerFieldTypeDate/helpers';
@@ -16,10 +16,10 @@ export type DatePickerFieldTypeDateRangeProps = Omit<
   value?: DateRange | null;
   startFieldInputRef?: React.Ref<HTMLInputElement>;
   endFieldInputRef?: React.Ref<HTMLInputElement>;
-  startFieldLeftSide?: string | React.FC<IconProps>;
-  startFieldRightSide?: string | React.FC<IconProps>;
-  endFieldLeftSide?: string | React.FC<IconProps>;
-  endFieldRightSide?: string | React.FC<IconProps>;
+  startFieldLeftSide?: string | IconComponent;
+  startFieldRightSide?: string | IconComponent;
+  endFieldLeftSide?: string | IconComponent;
+  endFieldRightSide?: string | IconComponent;
   startFieldRef?: React.Ref<HTMLDivElement>;
   endFieldRef?: React.Ref<HTMLDivElement>;
   startFieldOnFocus?: React.FocusEventHandler<HTMLElement>;

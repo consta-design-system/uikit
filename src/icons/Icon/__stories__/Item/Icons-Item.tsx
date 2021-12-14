@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { IconProps } from '../../Icon';
+import { IconComponent, IconProps } from '../../Icon';
 
 export type IconsItemProps = {
-  icon: React.FC<IconProps>;
+  icon: IconComponent;
   name: string;
 } & IconProps;
 

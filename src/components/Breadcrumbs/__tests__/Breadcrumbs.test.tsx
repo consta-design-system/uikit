@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { render } from '@testing-library/react';
 
-import { IconProps } from '../../../icons/Icon/Icon';
+import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconCamera } from '../../../icons/IconCamera/IconCamera';
 import { IconUser } from '../../../icons/IconUser/IconUser';
 import { breadcrumbPropSize, Breadcrumbs, cnBreadcrumbs } from '../Breadcrumbs';
 
 type Page = {
-  icon?: React.FC<IconProps>;
+  icon?: IconComponent;
   link: string;
   label: string;
   isActive?: boolean;
