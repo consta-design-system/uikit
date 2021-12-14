@@ -2,7 +2,7 @@ import './User.css';
 
 import React from 'react';
 
-import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
+import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
@@ -44,7 +44,7 @@ type Props = {
     }
   | {
       withArrow?: never;
-      iconRight?: React.FC<IconProps>;
+      iconRight?: IconComponent;
       onIconRightClick?: (e: React.SyntheticEvent) => void;
     }
 );

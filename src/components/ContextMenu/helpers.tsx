@@ -1,8 +1,6 @@
 import { ClickOutsideHandler } from '../../hooks/useClickOutside/useClickOutside';
-import {
-  PropsWithHTMLAttributes,
-  PropsWithHTMLAttributesAndRef,
-} from '../../utils/types/PropsWithHTMLAttributes';
+import { PropsWithAsAttributes } from '../../utils/types/PropsWithAsAttributes';
+import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { Direction, Position } from '../Popover/Popover';
 
 export const contextMenuSizes = ['m', 's', 'l'] as const;
@@ -25,7 +23,11 @@ export type ContextMenuPropGetGroupLabel = (
 export type ContextMenuPropSortGroup = (a: string | number, b: string | number) => number;
 export type ContextMenuPropGetItemOnClick<ITEM> = (
   item: ITEM,
-) => React.EventHandler<React.MouseEvent<HTMLDivElement>> | undefined;
+) => React.EventHandler<React.MouseEvent> | undefined;
+export type ContextMenuPropGetItemAs<ITEM> = (item: ITEM) => keyof JSX.IntrinsicElements;
+export type ContextMenuPropGetItemHTMLAttributes<ITEM> = (
+  item: ITEM,
+) => JSX.IntrinsicElements[keyof JSX.IntrinsicElements];
 
 export const contextMenuPropSubMenuDirections = [
   'rightStartUp',
@@ -70,6 +72,8 @@ export type ContextMenuProps<ITEM> = PropsWithHTMLAttributesAndRef<
     onItemClick?: (props: { e: React.MouseEvent; item: ITEM }) => void;
     onClickOutside?: ClickOutsideHandler;
     spareDirection?: Direction;
+    getItemAs?: ContextMenuPropGetItemAs<ITEM>;
+    getItemHTMLAttributes?: ContextMenuPropGetItemHTMLAttributes<ITEM>;
   } & PositioningProps,
   HTMLDivElement
 >;
@@ -96,7 +100,9 @@ type ContextMenuLevelProps<ITEM> = Omit<
   'subMenuDirection' | 'getKey' | 'onClickOutside' | 'isOpen'
 >;
 
-export type ContextMenuItemProps<ITEM> = PropsWithHTMLAttributes<
+export type ContextMenuItemProps<
+  AS extends keyof JSX.IntrinsicElements = 'div'
+> = PropsWithAsAttributes<
   {
     label: string | number;
     rightSide?: React.ReactNode;
@@ -106,9 +112,10 @@ export type ContextMenuItemProps<ITEM> = PropsWithHTMLAttributes<
     withSubMenu: boolean;
     accent?: ContextMenuAccent;
     disabled?: boolean;
-  } & React.RefAttributes<HTMLDivElement>,
-  HTMLDivElement
->;
+  },
+  AS
+> &
+  React.RefAttributes<HTMLDivElement>;
 
 export type Level<ITEM> = {
   items: ITEM[];
@@ -118,8 +125,8 @@ export type Level<ITEM> = {
   offset?: number;
 } & PositioningProps;
 
-export type ContextMenuItem = <ITEM>(
-  props: ContextMenuItemProps<ITEM>,
+export type ContextMenuItemComponent = <AS extends keyof JSX.IntrinsicElements = 'div'>(
+  props: ContextMenuItemProps<AS>,
   ref: React.Ref<HTMLElement>,
 ) => React.ReactElement | null;
 

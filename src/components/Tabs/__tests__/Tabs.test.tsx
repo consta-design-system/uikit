@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { IconProps } from '../../../icons/Icon/Icon';
+import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconCamera } from '../../../icons/IconCamera/IconCamera';
 import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
 import { cnTabs, cnTabsTab, Tabs, TabsProps as Props, tabsSizes, tabsViews } from '../Tabs';
@@ -10,7 +10,7 @@ const testId = cnTabs();
 
 type Item = {
   name: string;
-  icon: React.FC<IconProps>;
+  icon: IconComponent;
 };
 
 type TabsProps = Props<Item>;

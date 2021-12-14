@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IconProps } from '../../icons/Icon/Icon';
+import { IconComponent, IconProps } from '../../icons/Icon/Icon';
 import { TagBase } from '../TagBase/TagBase';
 
 type TagBaseProps = React.ComponentProps<typeof TagBase>;
@@ -13,7 +13,7 @@ type CommonProps = {
   size?: TagBaseProps['size'];
   label: TagBaseProps['label'];
   group?: TagBaseProps['group'];
-  icon?: React.FC<IconProps>;
+  icon?: IconComponent;
   iconSize?: IconProps['size'];
   children?: never;
 };

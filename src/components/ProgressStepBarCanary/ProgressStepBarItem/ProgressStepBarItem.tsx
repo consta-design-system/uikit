@@ -3,7 +3,7 @@ import './ProgressStepBarItem.css';
 import React, { useRef } from 'react';
 
 import { useFlag } from '../../../hooks/useFlag/useFlag';
-import { IconProps } from '../../../icons/Icon/Icon';
+import { IconComponent } from '../../../icons/Icon/Icon';
 import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
 import { cn } from '../../../utils/bem';
 import { Direction } from '../../Popover/Popover';
@@ -33,7 +33,7 @@ const possibleHorizontalDirections: Direction[] = [
 ];
 
 const renderPointContent = (
-  point: PointNumbersMap | React.FC<IconProps> | undefined,
+  point: PointNumbersMap | IconComponent | undefined,
   size: 'm' | 's',
   progress: boolean | undefined,
 ) => {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { boolean, object, select } from '@storybook/addon-knobs';
 
-import { IconProps } from '../../../icons/Icon/Icon';
+import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconCamera } from '../../../icons/IconCamera/IconCamera';
 import { IconPhone } from '../../../icons/IconPhone/IconPhone';
 import { IconPhoto } from '../../../icons/IconPhoto/IconPhoto';
@@ -31,7 +31,7 @@ const defaultKnobs = () => ({
 
 type Item = {
   name: string;
-  icon?: React.FC<IconProps>;
+  icon?: IconComponent;
 };
 
 const itemIcons = [IconPhoto, IconRing, IconCamera, IconPhone];

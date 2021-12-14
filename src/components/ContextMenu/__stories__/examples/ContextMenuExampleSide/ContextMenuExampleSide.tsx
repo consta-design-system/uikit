@@ -2,7 +2,7 @@ import './ContextMenuExampleSide.css';
 
 import React, { useRef, useState } from 'react';
 
-import { IconProps } from '../../../../../icons/Icon/Icon';
+import { IconComponent } from '../../../../../icons/Icon/Icon';
 import { IconAdd } from '../../../../../icons/IconAdd/IconAdd';
 import { IconInfo } from '../../../../../icons/IconInfo/IconInfo';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
@@ -15,7 +15,7 @@ import { ContextMenu } from '../../../ContextMenu';
 
 type Item = {
   name: string;
-  icon: React.FC<IconProps>;
+  icon: IconComponent;
   switch?: boolean;
   status: 'warning' | 'success';
 };

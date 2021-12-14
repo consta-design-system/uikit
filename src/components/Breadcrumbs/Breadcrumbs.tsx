@@ -2,7 +2,7 @@ import './Breadcrumbs.css';
 
 import React, { useMemo } from 'react';
 
-import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
+import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
 import { IconArrowRight } from '../../icons/IconArrowRight/IconArrowRight';
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
@@ -25,7 +25,7 @@ const sizeMap: Record<BreadcrumbPropSize, IconPropSize> = {
 export type BreadcrumbsPropGetLabel<ITEM> = (item: ITEM) => string | React.ReactNode;
 export type BreadcrumbsPropGetIsActive<ITEM> = (item: ITEM) => boolean;
 export type BreadcrumbsPropGetLink<ITEM> = (item: ITEM) => string;
-export type BreadcrumbsPropGetIcon<ITEM> = (item: ITEM) => React.FC<IconProps> | undefined;
+export type BreadcrumbsPropGetIcon<ITEM> = (item: ITEM) => IconComponent | undefined;
 
 export type BreadcrumbsProps<ITEM> = {
   pages: ITEM[];

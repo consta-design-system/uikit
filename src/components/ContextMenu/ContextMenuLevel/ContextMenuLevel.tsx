@@ -60,6 +60,8 @@ export const ContextMenuLevel: ContextMenuLevelType = React.forwardRef(
       getOnClick,
       getItemOnClick,
       onItemClick,
+      getItemHTMLAttributes,
+      getItemAs,
 
       // props относящиеся к группам меню
       sortGroup,
@@ -164,9 +166,13 @@ export const ContextMenuLevel: ContextMenuLevelType = React.forwardRef(
                         setHoveredParenLevel(level);
                       };
                 const accent = typeof getAccent === 'function' ? getAccent(item) : undefined;
+                const atributes =
+                  typeof getItemHTMLAttributes === 'function' ? getItemHTMLAttributes(item) : {};
+                const as = typeof getItemAs === 'function' ? getItemAs(item) : undefined;
 
                 return (
                   <ContextMenuItem
+                    {...atributes}
                     ref={ref}
                     label={label}
                     leftSide={leftSide}
@@ -179,6 +185,7 @@ export const ContextMenuLevel: ContextMenuLevelType = React.forwardRef(
                     withSubMenu={Boolean(subItems)}
                     accent={accent}
                     disabled={disabled}
+                    as={as}
                   />
                 );
               })}

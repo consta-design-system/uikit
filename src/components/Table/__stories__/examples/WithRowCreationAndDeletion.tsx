@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { text } from '@storybook/addon-knobs';
 
-import { IconProps } from '../../../../icons/Icon/Icon';
+import { IconComponent } from '../../../../icons/Icon/Icon';
 import { IconAdd } from '../../../../icons/IconAdd/IconAdd';
 import { IconKebab } from '../../../../icons/IconKebab/IconKebab';
 import { IconTrash } from '../../../../icons/IconTrash/IconTrash';
@@ -46,7 +46,7 @@ type ActionItems = {
   type: ActionFunctionNames;
   name: string;
   group: AVAILABLE_ACTIONS;
-  icon: React.FC<IconProps>;
+  icon: IconComponent;
 };
 
 // eslint-disable-next-line no-bitwise
