@@ -1,5 +1,25 @@
 # Changelog
 
+## v3.12.0 (15/12/2021)
+- Добавили хук `useBreakpoints` для подписки на изменение `breakpoints`
+- Иконки теперь умеют возвращать `ref`
+- В `MixSpace` добавили новые значения модификаторов
+- Доработали документацию
+
+---
+
+- [docs(useBreakpoints): add docs](https://github.com/gazprom-neft/consta-uikit/commit/656502fc8396f1e6d88371a946ed1ee3be131e89) - [@gizeasy](https://github.com/gizeasy)
+- [feat(useBreakpoints): add hook useBreakpoints](https://github.com/gazprom-neft/consta-uikit/commit/8efa228a2ce57e1e981c3fc0ad09407fb6a64f68) - [@gizeasy](https://github.com/gizeasy)
+- [fix(TextField): fix bug with non-working autofocus (#1855)](https://github.com/gazprom-neft/consta-uikit/commit/15bf72198baa6e66a9e015019ea512551e80b2a3) - [@N1MBER](https://github.com/N1MBER)
+- [docs(Informer): docs review (#1845)](https://github.com/gazprom-neft/consta-uikit/commit/01d93f3cbec3a93ad4008754fc03e315057b6b14) - [@arhayka](https://github.com/arhayka)
+- [docs(Collapse): docs review (#1846)](https://github.com/gazprom-neft/consta-uikit/commit/27f543bc5f191a1a0c960e446d39f1b3f915eac7) - [@arhayka](https://github.com/arhayka)
+- [refactor(Icon): refactor createIcon, types, types in docs](https://github.com/gazprom-neft/consta-uikit/commit/6a8c18a5cb720401bc0ad1984acb3cb576115254) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Icon): createIcon return component can hold ref;](https://github.com/gazprom-neft/consta-uikit/commit/dcc5647bbd31fa22a24584a716bc609efbe1f2b3) - [@levi2ki](https://github.com/levi2ki)
+- [feat(MixSpace): add new values for padding & margin (#1844)](https://github.com/gazprom-neft/consta-uikit/commit/7fcc5a635278c245578d7fc97a02a26a93cb7beb) - [@N1MBER](https://github.com/N1MBER)
+- [feat(ContextMenu): added getItemAs and getItemHTMLAttributes (#1848)](https://github.com/gazprom-neft/consta-uikit/commit/7afb10808bc6f105724c0ec8dcbfedaf45c0885e) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v3.11.0 (08/12/2021)
 Ура! Добавили `Slider` , его можно двигать и выбирать значение (слайдер 🔥🔥🔥, но вы проверьте :)
 
@@ -453,21 +473,3 @@ _Обращаем внимание_: *версии компонентов обр
 - [docs(FileField): edit docs for FileField (#1034)](https://github.com/gazprom-neft/consta-uikit/commit/3e37f45c188ffd95cc03b990bca7ed36a20091fb) - [@arhayka](https://github.com/arhayka)
 - [docs(ThemeToggler): update docs (#1045)](https://github.com/gazprom-neft/consta-uikit/commit/5bc97e9557c5861c58fb840f87e6ede9ed058c7e) - [@arhayka](https://github.com/arhayka)
 - [docs(Header): edit docs (#1053)](https://github.com/gazprom-neft/consta-uikit/commit/a4df2e73c5a4d6d44781fba4cc9c52095775b38e) - [@arhayka](https://github.com/arhayka)
-
---------------------
-
-## v1.11.10 (20/04/2021)
-- [chore(github): Update issue templates (#1041)](https://github.com/gazprom-neft/consta-uikit/commit/bd71b9bbace0730438d3bc51033b307360006410) - [@kolebayev](https://github.com/kolebayev)
-- [feat(useThemeVars): added hook useThemeVars (#1042)](https://github.com/gazprom-neft/consta-uikit/commit/6c6f133781bd48c7e4ac7ed3fcb6a1eeb8c850be) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Icon): add new icons (#1058)](https://github.com/gazprom-neft/consta-uikit/commit/cc5c1fea76683f08b31c2557baff2823f15a4f8b) - [@kolebayev](https://github.com/kolebayev)
-- [feat(FileIcon):  refactor file-icons,  add JSON file icon (#1057)](https://github.com/gazprom-neft/consta-uikit/commit/a16c746df1016a9e1a43ddd7bf481d13e9000b35) - [@kolebayev](https://github.com/kolebayev)
-- [fix(storybook): add to group in sidebar (#1060)](https://github.com/gazprom-neft/consta-uikit/commit/123352a264670675fc81b4cb8c3a98a07840469e) - [@kolebayev](https://github.com/kolebayev)
-- [feat(icons): add IconLineAndBarChart (#1026)](https://github.com/gazprom-neft/consta-uikit/commit/b93a33f3d1c9354356e68181f48b0853e7a6fc6f) - [@kolebayev](https://github.com/kolebayev)
-- [fix(storybook): component groups (#1025)](https://github.com/gazprom-neft/consta-uikit/commit/211d6238fc167378a42ee679fb81cfa95dd98900) - [@kolebayev](https://github.com/kolebayev)
-- [docs(common): add docs about issues (#1023)](https://github.com/gazprom-neft/consta-uikit/commit/9a5041f2078d887fc76474ae7081b186ab429c15) - [@arhayka](https://github.com/arhayka)
-- [feat(Table): add column render fn (#824)](https://github.com/gazprom-neft/consta-uikit/commit/59bfc9a39ddc06c9dc08358389790dd7f8609cb7) - [@vasilevx](https://github.com/vasilevx)
-- [chore(deps): bump y18n from 3.2.1 to 3.2.2 (#1013)](https://github.com/gazprom-neft/consta-uikit/commit/639818524e8dea91b26aad2dc6c66fef637519b9) - [@dependabot[bot]](https://github.com/dependabot[bot])
-- [chore(CODEOWNERS): update CODEOWNERS (#1043)](https://github.com/gazprom-neft/consta-uikit/commit/cd0f9b72f3d5882699f7a34226c8571972106f5c) - [@gizeasy](https://github.com/gizeasy)
-- [feat(ProgressSpin): add default spinning (#971)](https://github.com/gazprom-neft/consta-uikit/commit/2a7bdc550e9525d373df28c543a5a747d25703ed) - [@azhadanov](https://github.com/azhadanov)
-- [Feat/themetoggler development (#879)](https://github.com/gazprom-neft/consta-uikit/commit/7698d605af18033d8e0468cfe7c98f370807b084) - [@azhadanov](https://github.com/azhadanov)
-- [chore(Storybook): add Figma integration (#1014)](https://github.com/gazprom-neft/consta-uikit/commit/fc455406a8c9d7f9584425f8226ae3118483e57f) - [@azhadanov](https://github.com/azhadanov)
