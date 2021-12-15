@@ -1,6 +1,6 @@
 import './TextField.css';
 
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import TextAreaAutoSize from 'react-textarea-autosize';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
@@ -117,6 +117,14 @@ export function TextFieldRender<TYPE extends string>(
     'id': id ? id.toString() : '',
     'aria-label': ariaLabel,
   };
+
+  useEffect(() => {
+    if (autoFocus) {
+      setTimeout(() => {
+        inputRef.current?.focus();
+      });
+    }
+  }, []);
 
   const textareaProps = {
     rows,

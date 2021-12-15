@@ -1,6 +1,6 @@
 import './TableNumberFilter.css';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { cn } from '../../../utils/bem';
 import { TextField } from '../../TextField/TextField';
@@ -29,15 +29,6 @@ export const TableNumberFilter: React.FC<TableNumberFilterProps> = ({
 
   const textFieldRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    // setTimeout нужен для корректного выставления автофокуса
-    setTimeout(() => {
-      if (textFieldRef.current) {
-        textFieldRef.current.focus();
-      }
-    });
-  }, []);
-
   const confirmHandler = () => {
     onConfirm({
       min: minValue,
@@ -55,6 +46,7 @@ export const TableNumberFilter: React.FC<TableNumberFilterProps> = ({
           onChange={(e) => setMinValue(e.value)}
           form="defaultBrick"
           size="m"
+          autoFocus
           inputRef={textFieldRef}
         />
         <TextField
