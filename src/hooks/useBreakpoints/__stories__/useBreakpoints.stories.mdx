@@ -1,0 +1,25 @@
+<Meta title="Hooks|useBreakpoints" id="useBreakpoints" />
+
+# useBreakpoints
+
+Хук `useBreakpoints` подписывается на изменение ширины экрана, и отдает какие сейчас `breakpoints` применяются.
+
+```tsx
+const breakpoints = useBreakpoints();
+// type breakpoints = Record<"5xs" | "4xs" | "3xs" | "2xs" | "xs" | "s" | "m" | "l" | "xl" | "2xl" | "3xl" | "4xl" | "5xl", boolean>
+```
+
+```tsx
+const breakpoints = useBreakpoints({ isDesktop: 1000 });
+// type breakpoints = Record<"isDesktop", boolean>
+```
+
+## Свойства
+
+```tsx
+Map<POINTS extends string> = Record<POINTS, number>
+```
+
+| Свойство | Тип и значения | По умолчанию | Описание      |
+| -------- | -------------- | ------------ | ------------- |
+| `map?`   | `Map`          | -            | `breakpoints` |
