@@ -7,6 +7,10 @@ description: Тултип. Всплывающее окно возле элеме
 
 # Tooltip
 
+```tsx
+import { Tooltip } from '@consta/uikit/Tooltip';
+```
+
 Тултип — компонент для отображения всплывающего окна возле элемента или определенной точки на экране.
 
 - [Тема](#тема-тултипа)
@@ -15,6 +19,7 @@ description: Тултип. Всплывающее окно возле элеме
 - [Позиционирование](#позиционирование-тултипа)
   - [По якорю](#по-элементу-якорю)
   - [По координатам](#по-координатам)
+- [Импорт](#импорт)
 - [Список свойств](#свойства)
 - [Пример использования](#примеры)
 
@@ -51,12 +56,10 @@ description: Тултип. Всплывающее окно возле элеме
 
 <TooltipPositionedByCoordsStory />
 
-### Пример
+## Импорт
 
-```ts
-<Tooltip size="s" position={{ x: 100, y: 200 }}>
-  Контент тултипа
-</Tooltip>
+```tsx
+import { Tooltip } from '@consta/uikit/Tooltip';
 ```
 
 ## Свойства
@@ -73,3 +76,11 @@ description: Тултип. Всплывающее окно возле элеме
 | `isInteractive?`      | `boolean`                                     | `true`                  | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
 | `onClickOutside?`     | `(event: MouseEvent) => void`                 | —                       | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
 | `equalAnchorWidth?`   | `boolean`                                     | `fasle`                 | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
+
+### Пример
+
+```ts
+<Tooltip size="s" position={{ x: 100, y: 200 }}>
+  Контент тултипа
+</Tooltip>
+```

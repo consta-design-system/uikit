@@ -12,6 +12,10 @@ description:  Группа скрытых блоков. Раскрывается
 
 # CollapseGroup
 
+```tsx
+import { CollapseGroup } from '@consta/uikit/CollapseGroup';
+```
+
 Группа коллапсов — несколько блоков, которые раскрываются по нажатию на заголовок. Подходит, если нужно показать много информации и помочь быстро найти нужное. Например, сделать блок с вопросами и ответами.
 
 Если вам нужен только один раскрывающийся блок, используйте [Collapse](/?path=/docs/components-collapse--playground).
@@ -26,6 +30,7 @@ description:  Группа скрытых блоков. Раскрывается
   - [Обычный режим](#обычный-режим)
   - [Режим аккордеона](#режим-аккордеона)
   - [Кастомное поведение](#кастомное-поведение)
+- [Импорт](#импорт)
 - [Список свойств](#свойства)
 
 ## Содержимое
@@ -185,6 +190,12 @@ const CollapseGroupExampleControl = () => {
 
   return <CollapseGroup items={items} opened={opened} onOpen={({ value }) => setOpened(value)} />;
 };
+```
+
+## Импорт
+
+```tsx
+import { CollapseGroup } from '@consta/uikit/CollapseGroup';
 ```
 
 ## Свойства

@@ -107,5 +107,9 @@ export default createMetadata({
     docs: {
       page: mdx,
     },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=12734%3A116504',
+    },
   },
 });

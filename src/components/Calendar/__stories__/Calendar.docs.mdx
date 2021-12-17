@@ -13,6 +13,10 @@ import { CalendarExampleEvents } from './examples/CalendarExampleEvents/Calendar
 
 # Calendar (Deprecated)
 
+```tsx
+import { Calendar } from '@consta/uikit/Calendar';
+```
+
 Компонент не поддерживается, используйте [DateTime](?path=/docs/components-datetime--playground)
 
 Календарь нужен, чтобы пользователь мог выбрать дату или период.
@@ -23,6 +27,7 @@ import { CalendarExampleEvents } from './examples/CalendarExampleEvents/Calendar
   - [Ограничение выбора](#ограничение-выбора)
 - [События на календаре](#события-на-календаре)
 - [Локализация](#локализация)
+- [Импорт](#импорт)
 - [Список свойств](#свойства)
 
 ## Внешний вид
@@ -135,6 +140,12 @@ import frLocale from 'date-fns/locale/fr';
 const CalendarExampleLocale = () => {
   return <Calendar locale={frLocale} />;
 };
+```
+
+## Импорт
+
+```tsx
+import { Calendar } from '@consta/uikit/Calendar';
 ```
 
 ## Свойства
