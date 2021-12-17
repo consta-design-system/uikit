@@ -99,7 +99,7 @@ export default createMetadata({
     },
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=5164%3A84922',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=67568%3A129967',
     },
   },
 });
