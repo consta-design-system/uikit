@@ -2,12 +2,16 @@
 
 # useBreakpoints
 
-Хук `useBreakpoints` подписывается на изменение ширины экрана, и отдает какие сейчас `breakpoints` применяются.
+Хук `useBreakpoints` подписывается на изменение ширины экрана и возвращает набор контрольных точек (`breakpoints`), которые применяются в момент этого изменения.
+
+Если вызвать `useBreakpoints` без аргументов, вернутся стандартные брейкпоинты:
 
 ```tsx
 const breakpoints = useBreakpoints();
 // type breakpoints = Record<"5xs" | "4xs" | "3xs" | "2xs" | "xs" | "s" | "m" | "l" | "xl" | "2xl" | "3xl" | "4xl" | "5xl", boolean>
 ```
+
+Можно установить свои брейкпоинты:
 
 ```tsx
 const breakpoints = useBreakpoints({ isDesktop: 1000 });
@@ -20,6 +24,6 @@ const breakpoints = useBreakpoints({ isDesktop: 1000 });
 Map<POINTS extends string> = Record<POINTS, number>
 ```
 
-| Свойство | Тип и значения | По умолчанию | Описание      |
-| -------- | -------------- | ------------ | ------------- |
-| `map?`   | `Map`          | -            | `breakpoints` |
+| Свойство | Тип и значения | По умолчанию | Описание                                |
+| -------- | -------------- | ------------ | --------------------------------------- |
+| `map?`   | `Map`          | -            | Набор контрольных точек (`breakpoints`) |
