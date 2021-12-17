@@ -2,9 +2,20 @@ import React from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { Table } from '../../../Table';
+import { Table, TableColumn } from '../../../Table';
 
-const columns = [
+const rows = [
+  {
+    id: '1',
+    name: 'Антон',
+  },
+  {
+    id: '2',
+    name: 'Василий',
+  },
+];
+
+const columns: TableColumn<typeof rows[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -16,17 +27,6 @@ const columns = [
     title: 'Имя',
     accessor: 'name',
     sortable: true,
-  },
-];
-
-const rows = [
-  {
-    id: '1',
-    name: 'Антон',
-  },
-  {
-    id: '2',
-    name: 'Василий',
   },
 ];
 
