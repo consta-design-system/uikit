@@ -13,6 +13,10 @@ description: Пагинация. Можно выбрать страницу.
 
 # Pagination
 
+```tsx
+import { Pagination } from '@consta/uikit/Pagination';
+```
+
 Компонент `Pagination` позволяет пользователю выбрать конкретную страницу из диапазона страниц
 и перейти к ней.
 
@@ -23,6 +27,7 @@ description: Пагинация. Можно выбрать страницу.
 - [Выравнивание](#выравнивание)
 - [Состояние](#состояние)
 - [Горячие клавиши](#горячие-клавиши)
+- [Импорт](#импорт)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
 
@@ -129,6 +134,12 @@ hotkeys = {
 };
 ```
 
+## Импорт
+
+```tsx
+import { Pagination } from '@consta/uikit/Pagination';
+```
+
 ## Свойства
 
 ```
@@ -193,7 +204,7 @@ const App = () => {
       currentPage={currentPage}
       onChange={handleChange}
       totalPages={totalPages}
-      hotKeys={hotKeys}
+      hotkeys={hotKeys}
     />
   );
 };

@@ -119,6 +119,7 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
       pointRef: stepsRef[index] as React.RefObject<HTMLButtonElement>,
       direction,
       onClick: onClick || onItemClickHandler,
+      key: cnProgressStepBar({ index }),
     };
   };
 

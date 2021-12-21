@@ -40,21 +40,21 @@ const renderPointContent = (
   if (progress) return <ProgressSpin size={size} />;
   if (!point) return null;
 
-  if (typeof point === 'function') {
-    const Icon = point;
-
-    return <Icon size="xs" />;
+  if (typeof point === 'number') {
+    return (
+      <Text
+        className={cnProgressStepBarItem('PointText')}
+        size={size === 's' ? '2xs' : 'xs'}
+        weight="bold"
+      >
+        {point}
+      </Text>
+    );
   }
 
-  return (
-    <Text
-      className={cnProgressStepBarItem('PointText')}
-      size={size === 's' ? '2xs' : 'xs'}
-      weight="bold"
-    >
-      {point}
-    </Text>
-  );
+  const Icon = point;
+
+  return <Icon size="xs" />;
 };
 
 export const ProgressStepBarItem: ProgressStepBarItemComponent = React.forwardRef((props, ref) => {
