@@ -3,8 +3,10 @@ import './SnackBar-Item.css';
 
 import React, { useEffect, useState } from 'react';
 
+import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { IconClose } from '../../../icons/IconClose/IconClose';
 import { isNumber, isString } from '../../../utils/type-guards';
+import { PropsWithHTMLAttributesAndRef } from '../../../utils/types/PropsWithHTMLAttributes';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 import { cnTheme } from '../../Theme/Theme';
@@ -15,6 +17,10 @@ import { SnackBarTimer, SnackBarTimerPropOnMount } from '../Timer/SnackBar-Timer
 export type SnackBarItemProps = {
   item: Item;
 };
+
+type SnackBarItemComponent = (
+  props: PropsWithHTMLAttributesAndRef<SnackBarItemProps, HTMLDivElement>,
+) => React.ReactElement | null;
 
 const defaultInitialTimerTime = 3;
 
@@ -28,7 +34,7 @@ const getAutoCloseTime = (autoClose: boolean | number | undefined): number | fal
   return false;
 };
 
-export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
+export const SnackBarItem: SnackBarItemComponent = React.forwardRef((props, ref) => {
   const { item } = props;
   const {
     onClose,
@@ -44,12 +50,12 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
     start: () => void;
     pause: () => void;
   } | null>(null);
-  const [hover, setHover] = useState<boolean>(false);
-  const [timeIsOver, setTimeIsOver] = useState<boolean>(false);
+  const [hover, { on: onHover, off: offHover }] = useFlag(false);
+  const [timeIsOver, { on: onTimeIsOver }] = useFlag(false);
   const handleMountTimer: SnackBarTimerPropOnMount = (timerFunctions) =>
     setTimerFunctions(timerFunctions);
-  const handleMouseEnter = () => setHover(true);
-  const handleMouseLeave = () => setHover(false);
+  const handleMouseEnter = () => onHover();
+  const handleMouseLeave = () => offHover();
   const autoCloseTime = getAutoCloseTime(autoClose);
   const hideAutoCloseTimer =
     showProgress === undefined || !(isNumber(autoCloseTime) && autoCloseTime > 0);
@@ -72,7 +78,7 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
   }, [hover, timeIsOver, timerFunctions]);
 
   const handleTimeIsOver = () => {
-    setTimeIsOver(true);
+    onTimeIsOver();
     onAutoClose(item);
   };
 
@@ -80,6 +86,7 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
 
   return (
     <div
+      ref={ref}
       className={cnSnackBarItem({ status }, [cnTheme({ color: 'gpnDark' })])}
       onMouseEnter={autoCloseTime ? handleMouseEnter : undefined}
       onMouseLeave={autoCloseTime ? handleMouseLeave : undefined}
@@ -115,4 +122,4 @@ export const SnackBarItem: React.FC<SnackBarItemProps> = (props) => {
       )}
     </div>
   );
-};
+});
