@@ -5,26 +5,23 @@ import {
   TableExampleZebraOdd,
   TableExampleZebraEven,
 } from './examples/TableExampleZebraStriped/TableExampleZebraStriped';
-//import {
-//  TableExampleVerticalAlign,
-//  TableExampleAlignLeft,
-//  TableExampleAlignCenter,
-//   TableExampleAlignRight,
-// } from './examples/TableExampleAlign/TableExampleAlign';
-// // import { TableExampleFilter } from './examples/TableExampleFilter/TableExampleFilter';
-// import { TableExampleRenderCell } from './examples/TableExampleRenderCell/TableExampleRenderCell';
-// import { TableExampleSize } from './examples/TableExampleSize/TableExampleSize';
-// import {
-//   TableExampleBorderBetweenRows,
-//   TableExampleBorderBetweenColumns,
-// } from './examples/TableExampleBorder/TableExampleBorder';
-// import { TableExampleIsResizable } from './examples/TableExampleIsResizable/TableExampleIsResizable';
-// import { TableExampleMerge } from './examples/TableExampleMerge/TableExampleMerge';
-// import {
-//   TableExampleNoSortable,
-//   TableExampleSort,
-// } from './examples/TableExampleSort/TableExampleSort';
-// import { TableExampleOnSortBy } from './examples/TableExampleOnSortBy/TableExampleOnSortBy';
+import {
+  TableExampleVerticalAlign,
+  TableExampleAlignLeft,
+  TableExampleAlignCenter,
+  TableExampleAlignRight,
+} from './examples/TableExampleAlign/TableExampleAlign';
+import { TableExampleFilter } from './examples/TableExampleFilter/TableExampleFilter';
+import { TableExampleRenderCell } from './examples/TableExampleRenderCell/TableExampleRenderCell';
+import { TableExampleSize } from './examples/TableExampleSize/TableExampleSize';
+import {
+  TableExampleBorderBetweenRows,
+  TableExampleBorderBetweenColumns,
+} from './examples/TableExampleBorder/TableExampleBorder';
+import { TableExampleIsResizable } from './examples/TableExampleIsResizable/TableExampleIsResizable';
+import { TableExampleMerge } from './examples/TableExampleMerge/TableExampleMerge';
+import { TableExampleSort } from './examples/TableExampleSort/TableExampleSort';
+import { TableExampleOnSortBy } from './examples/TableExampleOnSortBy/TableExampleOnSortBy';
 
 <!--info
 description: Таблица. Выводит данные с фильтрами и сортировкой.
@@ -78,45 +75,25 @@ import { Table } from '@consta/Table';
 
 Структура и данные для таблицы описываются в объектах. Обязательно опишите:
 
-- [колонки](#колонки) в свойстве `rows`,
-- [строки](#строки) в свойсте `columns`.
+- сначала [строки](#строки) в свойсте `rows`,
+- затем [колонки](#колонки) в свойстве `columns`.
 
 Ещё можно добавить [фильтры](#фильтры) в свойсвте `filters`, настроить [сортировку](#сортировка) и [внешний вид](#внешний-вид).
 
-### Пример несложной таблицы
+### Строки
+
+Строки хранятся в объекте `rows`.
+
+Формат строки: `{ идентификатор колонки (accessor): 'содержимое ячейки'}`
+
+Если пропустить в строке ячейку, она останется пустой.
 
 ```tsx
-import React from 'react';
-import { Table } from '@consta/uikit/Table';
-
-const columns = [
-  // колонки
-  {
-    title: '№',
-    accessor: 'id',
-    align: 'center',
-    width: 100,
-    sortable: true,
-  },
-  {
-    title: 'Имя',
-    accessor: 'name',
-    sortable: true,
-  },
-];
-
 const rows = [
-  // строки
   { id: '1', name: 'Антон' },
   { id: '2', name: 'Василий' },
 ];
-
-const App = () => {
-  return <Table columns={columns} rows={rows} />;
-};
 ```
-
-<TableExampleBasic />
 
 ### Колонки
 
@@ -149,9 +126,8 @@ const App = () => {
 
 Вот так можно создать две колонки для таблицы — номер и имя.
 
-```ts
-const columns = [
-  // колонки
+```tsx
+const columns: TableColumn<typeof rows[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -167,28 +143,51 @@ const columns = [
 ];
 ```
 
-### Строки
+### Пример таблицы
 
-Строки хранятся в объекте `rows`.
+```tsx
+import React from 'react';
+import { Table } from '@consta/uikit/Table';
 
-Формат строки: `{ идентификатор колонки (accessor): 'содержимое ячейки'}`
-
-Если пропустить в строке ячейку, она останется пустой.
-
-```ts
 const rows = [
-  // строки
-  { id: '1', name: 'Антон' },
-  { id: '2', name: 'Василий' },
+  {
+    id: '1',
+    name: 'Антон',
+  },
+  {
+    id: '2',
+    name: 'Василий',
+  },
 ];
+
+const columns: TableColumn<typeof rows[number]>[] = [
+  {
+    title: '№',
+    accessor: 'id',
+    align: 'center',
+    width: 100,
+    sortable: true,
+  },
+  {
+    title: 'Имя',
+    accessor: 'name',
+    sortable: true,
+  },
+];
+
+const App = () => {
+  return <Table rows={rows} columns={columns} />;
+};
 ```
+
+<TableExampleBasic />
 
 ## Структура
 
 ### Зафиксированный заголовок
 
 Чтобы зафиксировать заголовок, добавьте к описанию таблицы свойство `stickyHeader`.
-При вертикальной прокрутке строги будут двигаться, а заголовок остается на месте —
+При вертикальной прокрутке строги будут двигаться, а заголовок останется на месте —
 если таблица не поместится по вертикали в границы экрана или родительского блока.
 
 ```tsx
@@ -213,8 +212,7 @@ const rows = [
 Чтобы скрыть колонку, добавьте в объект с описанием этой колокни `hidden: true`.
 
 ```tsx
-const columns = [
-  // колонки
+const columns: TableColumn<typeof rows[number]>[] = [
   {
     title: 'Имя',
     accessor: 'fullName',
@@ -239,7 +237,15 @@ const columns = [
 если для их значений справедливо условие: `firstValue === secondValue`.
 
 ```tsx
-const columns = [
+const rows = [
+  { person: 'Винни Пух', food: 'Мёд' },
+  { person: 'Пятачок', food: 'Мёд' },
+  { person: 'Ослик Иа', food: 'Чертополох' },
+  { person: 'Крошка Ру', food: 'Рыбий жир' },
+  { person: 'Кристофер Робин', food: 'Мёд' },
+];
+
+const columns: TableColumn<typeof rows[number]>[] = [
   {
     title: 'Кто',
     accessor: 'person',
@@ -250,18 +256,6 @@ const columns = [
     mergeCells: true,
   },
 ];
-
-const rows = [
-  { person: 'Винни Пух', food: 'Мёд' },
-  { person: 'Пятачок', food: 'Мёд' },
-  { person: 'Ослик Иа', food: 'Чертополох' },
-  { person: 'Крошка Ру', food: 'Рыбий жир' },
-  { person: 'Кристофер Робин', food: 'Мёд' },
-];
-
-export function TableExampleMerge() {
-  return <Table columns={columns} rows={rows} borderBetweenRows borderBetweenColumns />;
-}
 ```
 
 <TableExampleMerge />
@@ -275,16 +269,6 @@ export function TableExampleMerge() {
 import React from 'react';
 import { Table } from '@consta/uikit/Table';
 import { Checkbox } from '@consta/uikit/Checkbox';
-
-const colums = [
-  {
-    title: 'Операция подтверждена',
-    accessor: 'operationConfirmed',
-    mergeCells: true,
-    getComparisonValue: ({ owner, viewed }) => `${owner}-${viewed}`,
-    renderCell: ({ operationConfirmed: { viewed } }) => <Checkbox checked={viewed} />,
-  },
-];
 
 const rows = [
   {
@@ -305,6 +289,16 @@ const rows = [
   },
 ];
 
+const columns: TableColumn<typeof rows[number]>[] = [
+  {
+    title: 'Операция подтверждена',
+    accessor: 'operationConfirmed',
+    mergeCells: true,
+    getComparisonValue: ({ owner, viewed }) => `${owner}-${viewed}`,
+    renderCell: ({ operationConfirmed: { viewed } }) => <Checkbox checked={viewed} />,
+  },
+];
+
 const App = () => <Table columns={colums} rows={rows} />;
 ```
 
@@ -316,21 +310,9 @@ const App = () => <Table columns={colums} rows={rows} />;
 
 Чтобы создать кастомные ячейки в колонке, добавьте в объект с описанием этой колокни функцию `renderCell`.
 
-```ts
+```tsx
 import React from 'react';
 import { Table } from '@consta/uikit/Table';
-
-const columns = [
-  {
-    title: '№',
-    accessor: 'id',
-  },
-  {
-    title: 'Имя',
-    accessor: 'name',
-    renderCell: (row) => <h1>{row.name}</h1>,
-  },
-];
 
 const rows = [
   {
@@ -340,6 +322,18 @@ const rows = [
   {
     id: '2',
     name: 'Василий',
+  },
+];
+
+const columns: TableColumn<typeof rows[number]>[] = [
+  {
+    title: '№',
+    accessor: 'id',
+  },
+  {
+    title: 'Имя',
+    accessor: 'name',
+    renderCell: (row) => <h1>{row.name}</h1>,
   },
 ];
 
@@ -356,7 +350,7 @@ const App = () => {
 В него необходимо передать `({ column }: TableControl<{}>) => ReactNode`.
 
 ```tsx
-const columns = [
+const columns: TableColumn<typeof rows[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -409,10 +403,12 @@ const columns = [
 
 ```tsx
 import React from 'react';
-import { Table } from '@consta/uikit/Table';
+import { Table, TableColumn } from '@consta/uikit/Table';
 import { Text } from '@consta/uikit/Text';
 
-const columns = [
+const rows = [];
+
+const columns: TableColumn<typeof rows[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -426,8 +422,6 @@ const columns = [
     sortable: true,
   },
 ];
-
-const rows = [];
 
 const App = () => {
   return <Table columns={columns} rows={rows} emptyRowsPlaceholder={<Text>Пусто</Text>} />;
@@ -458,6 +452,41 @@ const App = () => {
 Чтобы пользователь мог отсортировать таблицу по одной из колонок, добавьте в объект с описанием этой
 колонки `sortable: true`. В шапке колонки появится иконка сортировки.
 
+```tsx
+import React from 'react';
+import { Table, TableColumn } from '@consta/uikit/Table';
+
+const rows = [
+  {
+    id: '1',
+    name: 'Антон',
+  },
+  {
+    id: '2',
+    name: 'Василий',
+  },
+];
+
+const columns: TableColumn<typeof rows[number]>[] = [
+  {
+    title: '№',
+    accessor: 'id',
+    align: 'center',
+    width: 100,
+    sortable: true,
+  },
+  {
+    title: 'Имя',
+    accessor: 'name',
+    sortable: true,
+  },
+];
+
+const App = () => {
+  return <Table rows={rows} columns={columns} />;
+};
+```
+
 <TableExampleBasic />
 
 ### Предварительная сортировка
@@ -469,7 +498,34 @@ type OrderType = 'ASC' | 'DESC' | 'asc' | 'desc';
 ```
 
 Таблица отсортируется по первой колонке с этим свойством — по алфавиту (`'ask'`, `'ASK'`) или в
-обратном порядке (`'desk'`, `'DESK'`).
+обратном порядке (`'desc'`, `'DESC'`).
+
+```tsx
+export function TableExampleSort() {
+  const rows = [
+    { id: '1', letter: 'А' },
+    { id: '2', letter: 'Б' },
+    { id: '3', letter: 'В' },
+  ];
+
+  const columns: TableColumn<typeof rows[number]>[] = [
+    {
+      title: '№',
+      accessor: 'id',
+      width: 100,
+      sortable: true,
+    },
+    {
+      title: 'Буква',
+      accessor: 'letter',
+      sortable: true,
+      order: 'desc',
+    },
+  ];
+
+  return <Table columns={columns} rows={rows} />;
+}
+```
 
 <TableExampleSort />
 
@@ -482,7 +538,7 @@ type OrderType = 'ASC' | 'DESC' | 'asc' | 'desc';
 
 ```tsx
 import React, { useState } from 'react';
-import { Table, SortByProps } from '@consta/uikit/Table';
+import { Table, SortByProps, TableColumn } from '@consta/uikit/Table';
 
 const data = [
   {
@@ -503,7 +559,7 @@ const data = [
   },
 ];
 
-const columns = [
+const columns: TableColumn<typeof data[number]>[] = [
   {
     title: `Id`,
     accessor: `id`,
@@ -552,7 +608,12 @@ const App = () => {
 Например, эту таблицу можно отфильтровать по имени «Антон».
 
 ```tsx
-const columns = [
+const rows = [
+  { id: '1', name: 'Антон' },
+  { id: '2', name: 'Василий' },
+];
+
+const columns: TableColumn<typeof rows[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -561,11 +622,6 @@ const columns = [
     title: 'Имя',
     accessor: 'name',
   },
-];
-
-const rows = [
-  { id: '1', name: 'Антон' },
-  { id: '2', name: 'Василий' },
 ];
 
 const filters = [
@@ -643,6 +699,8 @@ const filters = [
 ];
 ```
 
+[Пример в работе](?path=/story/components-table--with-custom-filters)
+
 #### Свойства кастомного компонента фильтра
 
 | Свойство      | Тип                    | Описание                                             |
@@ -675,8 +733,6 @@ import { TableFilterContainer } from '@consta/uikit/Table';
 | `confirmButtonLabel` | `string`     | Текст на кнопке подтверждения              |
 | `cancelButtonLabel`  | `string`     | Текст на кнопке сброса                     |
 | `children`           | `ReactNode`  | Вложенные элементы                         |
-
-[Пример в работе](?path=/story/components-table--with-custom-filters)
 
 ### Колбэк на применение фильтра
 
@@ -740,7 +796,7 @@ import { TableFilterContainer } from '@consta/uikit/Table';
 Чтобы поменять выравнивание по горизонтали для всех ячеек в колонке, добавьте в объект с описанием этой колонки атрибут `align`. Варианты: `'left'`, `'center'`, `'right'`.
 
 ```tsx
-const columnsAlignLeft = [
+const columnsAlignLeft: TableColumn<typeof rows[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -757,7 +813,7 @@ const columnsAlignLeft = [
 <TableExampleAlignLeft />
 
 ```tsx
-const columnsAlignCenter = [
+const columnsAlignCenter: TableColumn<typeof rows[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -774,7 +830,7 @@ const columnsAlignCenter = [
 <TableExampleAlignCenter />
 
 ```tsx
-const columnsAlignRight = [
+const columnsAlignRight: TableColumn<typeof rows[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -847,21 +903,8 @@ type ActiveRow = {
 
 ```tsx
 import React from 'react';
-import { Table } from '@consta/uikit/Table';
+import { Table, TableColumn } from '@consta/uikit/Table';
 import { Text } from '@consta/uikit/Text';
-
-const columns = [
-  {
-    title: '№',
-    accessor: 'id',
-    align: 'center',
-  },
-  {
-    title: 'Имя',
-    accessor: 'name',
-    align: 'center',
-  },
-];
 
 const rows = [
   {
@@ -875,6 +918,19 @@ const rows = [
   {
     id: '3',
     name: 'Петр',
+  },
+];
+
+const columns: TableColumn<typeof rows[number]>[] = [
+  {
+    title: '№',
+    accessor: 'id',
+    align: 'center',
+  },
+  {
+    title: 'Имя',
+    accessor: 'name',
+    align: 'center',
   },
 ];
 
@@ -930,6 +986,8 @@ const App = () => {
 - `isActive` — переменная, которая показывает, наведен ли курсор на текущую строку.
 
 Функция должна возвращать название CSS-класса типа `string`.
+
+[Посмотреть пример](?path=/story/components-table--with-get-additional-class-name)
 
 ## Свойства
 
