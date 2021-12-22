@@ -22,7 +22,7 @@ export function TableExampleSort() {
       title: 'Буква',
       accessor: 'letter',
       sortable: true,
-      order: 'desс',
+      order: 'desc',
     },
   ];
 

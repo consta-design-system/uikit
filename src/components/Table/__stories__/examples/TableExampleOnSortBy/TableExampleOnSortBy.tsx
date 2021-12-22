@@ -3,31 +3,36 @@ import React, { useState } from 'react';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { SortByProps } from '../../../filtering';
-import { Table } from '../../../Table';
+import { Table, TableColumn } from '../../../Table';
+
+type Row = {
+  id: string;
+  date: string;
+};
 
 const data = [
   {
-    id: 1,
+    id: '1',
     date: new Date('Thu Dec 03 2020 14:23:13 GMT+0300 (Moscow Standard Time)'),
   },
   {
-    id: 2,
+    id: '2',
     date: new Date('Thu Dec 03 2020 14:04:13 GMT+0300 (Moscow Standard Time)'),
   },
   {
-    id: 3,
+    id: '3',
     date: new Date('Thu Dec 03 2020 14:55:13 GMT+0300 (Moscow Standard Time)'),
   },
   {
-    id: 4,
+    id: '4',
     date: new Date('Thu Dec 03 2020 14:12:13 GMT+0300 (Moscow Standard Time)'),
   },
 ];
 
-const columns = [
+const columns: TableColumn<Row>[] = [
   {
     title: `Id`,
-    accessor: `id`,
+    accessor: 'id',
     sortable: true,
   },
   {
@@ -38,7 +43,7 @@ const columns = [
 ];
 
 export function TableExampleOnSortBy() {
-  const [sortSetting, setSortSetting] = useState<SortByProps<any> | null>(null);
+  const [sortSetting, setSortSetting] = useState<SortByProps<Row> | null>(null);
 
   const rows = data
     .sort((a, b) => {

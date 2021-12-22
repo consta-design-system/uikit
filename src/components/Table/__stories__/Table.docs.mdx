@@ -523,7 +523,11 @@ export function TableExampleSort() {
     },
   ];
 
-  return <Table columns={columns} rows={rows} />;
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <Table columns={columns} rows={rows} />
+    </StoryBookExample>
+  );
 }
 ```
 
@@ -540,29 +544,34 @@ export function TableExampleSort() {
 import React, { useState } from 'react';
 import { Table, SortByProps, TableColumn } from '@consta/uikit/Table';
 
+type Row = {
+  id: string;
+  date: string;
+};
+
 const data = [
   {
-    id: 1,
+    id: '1',
     date: new Date('Thu Dec 03 2020 14:23:13 GMT+0300 (Moscow Standard Time)'),
   },
   {
-    id: 2,
+    id: '2',
     date: new Date('Thu Dec 03 2020 14:04:13 GMT+0300 (Moscow Standard Time)'),
   },
   {
-    id: 3,
+    id: '3',
     date: new Date('Thu Dec 03 2020 14:55:13 GMT+0300 (Moscow Standard Time)'),
   },
   {
-    id: 4,
+    id: '4',
     date: new Date('Thu Dec 03 2020 14:12:13 GMT+0300 (Moscow Standard Time)'),
   },
 ];
 
-const columns: TableColumn<typeof data[number]>[] = [
+const columns: TableColumn<Row>[] = [
   {
     title: `Id`,
-    accessor: `id`,
+    accessor: 'id',
     sortable: true,
   },
   {
@@ -572,8 +581,8 @@ const columns: TableColumn<typeof data[number]>[] = [
   },
 ];
 
-const App = () => {
-  const [sortSetting, setSortSetting] = useState<SortByProps<any> | null>(null);
+export function TableExampleOnSortBy() {
+  const [sortSetting, setSortSetting] = useState<SortByProps<Row> | null>(null);
 
   const rows = data
     .sort((a, b) => {
@@ -589,8 +598,12 @@ const App = () => {
       date: item.date.toString(),
     }));
 
-  return <Table rows={rows} columns={columns} onSortBy={setSortSetting} />;
-};
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <Table rows={rows} columns={columns} onSortBy={setSortSetting} />
+    </StoryBookExample>
+  );
+}
 ```
 
 <TableExampleOnSortBy />
@@ -624,7 +637,7 @@ const columns: TableColumn<typeof rows[number]>[] = [
   },
 ];
 
-const filters = [
+const filters: TableFilters<typeof rows[number]> = [
   {
     id: 'executor',
     name: 'Антон',
@@ -634,7 +647,11 @@ const filters = [
 ];
 
 export function TableExampleFilter() {
-  return <Table columns={columns} rows={rows} filters={filters} />;
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <Table columns={columns} rows={rows} filters={filters} />
+    </StoryBookExample>
+  );
 }
 ```
 
