@@ -184,7 +184,7 @@ export const WithGetAdditionalClassName = createStory(
     return <WithAdditionalClassName {...getKnobs(tableDataWithAdditionalClassName)} />;
   },
   {
-    name: 'с getAdditionalClassName',
+    name: 'с дополнительным классом',
   },
 );
 
@@ -504,7 +504,7 @@ export const WithRowActions = createStory(() => <WithRowCreationAndDeletion />, 
 });
 
 export const WithIcon = createStory(() => <Table {...getKnobs(withControlTableMock)} />, {
-  name: 'С использованием control',
+  name: 'с дополнительным элементом в заголовке',
 });
 
 export const WithHiddenColumn = createStory(

@@ -1,5 +1,28 @@
 import { Preview } from '@storybook/addon-docs/dist/blocks';
 
+import { TableExampleBasic } from './examples/TableExampleBasic/TableExampleBasic';
+import {
+  TableExampleZebraOdd,
+  TableExampleZebraEven,
+} from './examples/TableExampleZebraStriped/TableExampleZebraStriped';
+import {
+  TableExampleVerticalAlign,
+  TableExampleAlignLeft,
+  TableExampleAlignCenter,
+  TableExampleAlignRight,
+} from './examples/TableExampleAlign/TableExampleAlign';
+import { TableExampleFilter } from './examples/TableExampleFilter/TableExampleFilter';
+import { TableExampleRenderCell } from './examples/TableExampleRenderCell/TableExampleRenderCell';
+import { TableExampleSize } from './examples/TableExampleSize/TableExampleSize';
+import {
+  TableExampleBorderBetweenRows,
+  TableExampleBorderBetweenColumns,
+} from './examples/TableExampleBorder/TableExampleBorder';
+import { TableExampleIsResizable } from './examples/TableExampleIsResizable/TableExampleIsResizable';
+import { TableExampleMerge } from './examples/TableExampleMerge/TableExampleMerge';
+import { TableExampleSort } from './examples/TableExampleSort/TableExampleSort';
+import { TableExampleOnSortBy } from './examples/TableExampleOnSortBy/TableExampleOnSortBy';
+
 <!--info
 description: Таблица. Выводит данные с фильтрами и сортировкой.
 -->
@@ -12,52 +35,75 @@ import { Table } from '@consta/uikit/Table';
 
 Таблица — компонент для отображения данных, с возможностью сортировки и фильтрации.
 
-- [Структура](#структура)
+> Если вам не хватает настроек этого компонента, используйте библиотеку[ @consta/table](https://consta-table.vercel.app/) для создания сложных таблиц
+
+- [Как формируется таблица](#как-формируется-таблица)
   - [Колонки](#колонки)
   - [Строки](#строки)
-  - [Сортировка](#сортировка)
-    - [Сортировка для пользователя](#сортировка-для-пользователя)
-    - [Предварительная сортировка](#предварительная-сортировка)
-    - [Сортировка не по алфавиту](#сортировка-не-по-алфавиту)
-  - [Фильтры](#фильтры)
-    - [Кастомный фильтр](#кастомный-фильтр)
-    - [Колбэк на применение фильтра](#колбэк-на-применение-фильтра)
-    - [Переименование тегов в фильтрах](#переименование-тегов-в-фильтрах)
-  - [Заглушка](#заглушка)
+  - [Пример таблицы](#пример-таблицы)
+- [Структура](#структура)
+  - [Зафиксированная колонка](#зафиксированная-колонка)
+  - [Зафиксированный заголовок](#зафиксированный-заголовок)
+  - [Скрытая колонка](#скрытая-колонка)
+  - [Объединение ячеек в колонке](#объединение-ячеек)
+  - [Рендер ячеек](#рендер-ячеек)
+  - [Дополнительный элемент рядом с заголовком](#дополнительный-элемент-рядом-с-заголовком)
+  - [Изменяемая ширина колонок](#изменяемая-ширина-колонок)
+  - [Возможность добавить строку](#возможность-добавить-строку)
+  - [Заглушка для пустой таблицы](#заглушка-для-пустой-таблицы)
+  - [Постепенная загрузка](#постепенная-загрузка)
+- [Сортировка](#сортировка)
+  - [Сортировка для пользователя](#сортировка-для-пользователя)
+  - [Предварительная сортировка](#предварительная-сортировка)
+  - [Сортировка не по алфавиту](#сортировка-не-по-алфавиту)
+- [Фильтры](#фильтры)
+  - [Кастомный фильтр](#кастомный-фильтр)
+  - [Колбэк на применение фильтра](#колбэк-на-применение-фильтра)
+  - [Переименование тегов в фильтрах](#переименование-тегов-в-фильтрах)
 - [Внешний вид](#внешний-вид)
   - [Размер](#размер)
-  - [Границы](#границы)
-  - [Выделение строк](#выделение-строк)
-    - [Обработка клика по строке и её выделение](#обработка-клика-по-строке-и-её-выделение)
-  - [Создание строк](#создание-строк)
-  - [Фиксированный заголовок или колонка](#фиксированный-заголовок-или-колонка)
-  - [Изменение ширины колонок](#изменение-ширины-колонок)
+  - [Границы между строками](#границы-между-строками)
+  - [Границы между колонками](#границы-между-колонками)
+  - [Выравнивание по горизонтали](#выравнивание-по-горизонтали)
   - [Выравнивание по вертикали](#выравнивание-по-вертикали)
-  - [Объединение ячеек](#объединение-ячеек)
-  - [Добавление класса по условию](#добавление-класса-по-условию)
-- [Импорт](#импорт)
+  - [Выделение строк](#выделение-строк)
+  - [Дополнительный CSS-класс по условию](#дополнительный-css-класс-по-условию)
 - [Список свойств](#свойства)
 - [Примеры использования](#примеры)
-  - [Обычная таблица](#обычная-таблица)
-  - [Рендер ячеек](#рендер-ячеек)
-  - [Со своей функцией генерации признака объединения](#со-своей-функцией-генерации-признака-объединения)
-  - [Со своим текстом, если нет данных](#со-своим-текстом-если-нет-данных)
-  - [С большим количеством строк](#с-большим-количеством-строк)
-  - [Сортировка по времени через onSortBy](#сортировка-по-времени-через-onsortby)
 
-## Структура
+## Как формируется таблица
 
-Структура и данные для таблицы описываются в объекте. Можно описать [колонки](#колонки) и [строки](#строки), добавить [сортировку](#сортировка) и [фильтры](#фильтры).
+Структура и данные для таблицы описываются в объектах. Обязательно опишите:
+
+- сначала [строки](#строки) в свойсте `rows`,
+- затем [колонки](#колонки) в свойстве `columns`.
+
+Ещё можно добавить [фильтры](#фильтры) в свойсвте `filters`, настроить [сортировку](#сортировка) и [внешний вид](#внешний-вид).
+
+### Строки
+
+Строки хранятся в объекте `rows`.
+
+Формат строки: `{ идентификатор колонки (accessor): 'содержимое ячейки'}`
+
+Если пропустить в строке ячейку, она останется пустой.
+
+```tsx
+const rows = [
+  { id: '1', name: 'Антон' },
+  { id: '2', name: 'Василий' },
+];
+```
 
 ### Колонки
 
-Сначала добавьте заголовки и опишите параметры для всех колонок — с помощью свойства `columns`.
+Информация о колонках хранится в свойстве `columns`.
 
-`title` — Название колонки, которое увидит пользователь. Можно использовать переносы строк ('\n').
+#### Атрибуты объекта `columns`
 
-`accessor` — идентификатор, по которому можно будет подставить данные в таблицу.
-Должны быть уникальными для разных колонок в одной таблице. Например, для имени
-пользователя можно использовать идентификатор `name`, для возраста — `age`.
+`title` — заголовок колонки. Можно использовать переносы строк ('\n').
+
+`accessor` — идентификатор, по которому данные из объекта со строками (`rows`) подставляются в ячейки в этой колонке. Идентификаторы должны быть уникальными для всех колонок в одной таблице.
 
 `align` — выравнивание данных в строке. Можно выровнять по левому краю (`left`),
 по центру (`center`) или по правому краю (`right`).
@@ -70,14 +116,18 @@ import { Table } from '@consta/uikit/Table';
 
 `order` — устанавливает порядок [сортировки](#сортировка) по умолчанию.
 
-`control` — Добавляет компонент, справа от названия колонки, например checkbox
+`control` — добавляет справа от заголовка колонки какой-то компонент, например [Checkbox](?path=/docs/components-checkbox--playground).
 
-`hidden` — Сокрытие колонки, при переданном true, в таблице не будет данной колонки
+`hidden` — скрывает колонку.
 
-В этой таблице будет две колонки — номер и имя.
+`mergeCells` — объединяет одинаковые ячейки в колонке.
 
-```ts
-[
+`renderCell` — создаёт кастомные ячейки в колонке.
+
+Вот так можно создать две колонки для таблицы — номер и имя.
+
+```tsx
+const columns: TableColumn<typeof rows[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -89,18 +139,218 @@ import { Table } from '@consta/uikit/Table';
     title: 'Имя',
     accessor: 'name',
     sortable: true,
-    order: 'ASC',
   },
 ];
 ```
 
-#### control
-
-В случае, когда вам необходимо добавить кастомную контрол справа(в header), то вы можете воспользоваться `control`
-В него необходимо передать `({ column }: TableControl<{}>) => ReactNode`
+### Пример таблицы
 
 ```tsx
-const columns = [
+import React from 'react';
+import { Table } from '@consta/uikit/Table';
+
+const rows = [
+  {
+    id: '1',
+    name: 'Антон',
+  },
+  {
+    id: '2',
+    name: 'Василий',
+  },
+];
+
+const columns: TableColumn<typeof rows[number]>[] = [
+  {
+    title: '№',
+    accessor: 'id',
+    align: 'center',
+    width: 100,
+    sortable: true,
+  },
+  {
+    title: 'Имя',
+    accessor: 'name',
+    sortable: true,
+  },
+];
+
+const App = () => {
+  return <Table rows={rows} columns={columns} />;
+};
+```
+
+<TableExampleBasic />
+
+## Структура
+
+### Зафиксированный заголовок
+
+Чтобы зафиксировать заголовок, добавьте к описанию таблицы свойство `stickyHeader`.
+При вертикальной прокрутке строги будут двигаться, а заголовок останется на месте —
+если таблица не поместится по вертикали в границы экрана или родительского блока.
+
+```tsx
+<Table columns={columns} rows={rows} stickyHeader />
+```
+
+[Посмотреть пример](?path=/docs/components-table--with-sticky-header)
+
+### Зафиксированная колонка
+
+В свойстве`stickyColumns` можно указать количество колонок, которое нужно зафиксировать.
+Тогда при горизонтальной прокрутке одна или несколько колонок останутся на месте.
+
+```tsx
+<Table columns={columns} rows={rows} stickyColumns=1 />
+```
+
+[Посмотреть пример](?path=/docs/components-table--with-sticky-column)
+
+### Скрытая колонка
+
+Чтобы скрыть колонку, добавьте в объект с описанием этой колокни `hidden: true`.
+
+```tsx
+const columns: TableColumn<typeof rows[number]>[] = [
+  {
+    title: 'Имя',
+    accessor: 'fullName',
+    sortable: true,
+  },
+  {
+    title: 'Год регистрации',
+    accessor: 'yearOfRegistration',
+    sortable: true,
+    hidden: true,
+  },
+];
+```
+
+[Посмотреть пример](?path=/story/components-table--with-hidden-column)
+
+### Объединение ячеек
+
+Чтобы объединить одинаковые ячейки в колонке, добавьте в объект с описанием колонки
+`mergeCells: true`.
+Ячейки в соседних строках, друг под другом, объединятся,
+если для их значений справедливо условие: `firstValue === secondValue`.
+
+```tsx
+const rows = [
+  { person: 'Винни Пух', food: 'Мёд' },
+  { person: 'Пятачок', food: 'Мёд' },
+  { person: 'Ослик Иа', food: 'Чертополох' },
+  { person: 'Крошка Ру', food: 'Рыбий жир' },
+  { person: 'Кристофер Робин', food: 'Мёд' },
+];
+
+const columns: TableColumn<typeof rows[number]>[] = [
+  {
+    title: 'Кто',
+    accessor: 'person',
+  },
+  {
+    title: 'Что ест',
+    accessor: 'food',
+    mergeCells: true,
+  },
+];
+```
+
+<TableExampleMerge />
+
+Если в ваших ячейках **нестандартные данные** или вам нужно как-то иначе их сравнивать (например, сравнить строки с разным регистром), вы можете использовать колбэк `getComparisonValue`.
+Он принимает значение текущей ячейки и возвращает строку или число, по которым можно провести сравнение.
+
+##### Пример таблицы со своей функцией генерации признака объединения
+
+```tsx
+import React from 'react';
+import { Table } from '@consta/uikit/Table';
+import { Checkbox } from '@consta/uikit/Checkbox';
+
+const rows = [
+  {
+    id: '1',
+    operationConfirmed: { owner: 'user', viewed: false },
+  },
+  {
+    id: '2',
+    operationConfirmed: { owner: 'user', viewed: false },
+  },
+  {
+    id: '3',
+    operationConfirmed: { owner: 'user', viewed: true },
+  },
+  {
+    id: '4',
+    operationConfirmed: { owner: 'admin', viewed: true },
+  },
+];
+
+const columns: TableColumn<typeof rows[number]>[] = [
+  {
+    title: 'Операция подтверждена',
+    accessor: 'operationConfirmed',
+    mergeCells: true,
+    getComparisonValue: ({ owner, viewed }) => `${owner}-${viewed}`,
+    renderCell: ({ operationConfirmed: { viewed } }) => <Checkbox checked={viewed} />,
+  },
+];
+
+const App = () => <Table columns={colums} rows={rows} />;
+```
+
+[Посмотреть этот пример в работе](/?path=/story/components-table--with-merged-by-custom-callback-cells)
+
+[Посмотреть расширенный пример на GitHub](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/Table/__stories__/Table.stories.tsx) (в переменной `WithMergedByCustomCallbackCells`)
+
+### Рендер ячеек
+
+Чтобы создать кастомные ячейки в колонке, добавьте в объект с описанием этой колокни функцию `renderCell`.
+
+```tsx
+import React from 'react';
+import { Table } from '@consta/uikit/Table';
+
+const rows = [
+  {
+    id: '1',
+    name: 'Антон',
+  },
+  {
+    id: '2',
+    name: 'Василий',
+  },
+];
+
+const columns: TableColumn<typeof rows[number]>[] = [
+  {
+    title: '№',
+    accessor: 'id',
+  },
+  {
+    title: 'Имя',
+    accessor: 'name',
+    renderCell: (row) => <h1>{row.name}</h1>,
+  },
+];
+
+const App = () => {
+  return <Table columns={columns} rows={rows} />;
+};
+```
+
+<TableExampleRenderCell />
+
+### Дополнительный элемент рядом с заголовком
+
+Добавить рядом с заголовком таблицы дополнительный элемент можно в свойстве `control`.
+В него необходимо передать `({ column }: TableControl<{}>) => ReactNode`.
+
+```tsx
+const columns: TableColumn<typeof rows[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -120,19 +370,93 @@ const columns = [
 ];
 ```
 
-### Строки
+[Посмотреть пример](?path=/story/components-table--with-icon)
 
-Когда колонки описаны, можно добавлять строки. Сначала указываете `id` — идентификатор строки,
-затем — содержимое ячеек в строке, во всех колонках.
+### Изменяемая ширина колонок
 
-Формат такой: `{ идентификатор колонки (accessor): 'содержимое ячейки'}`
+Чтобы пользователи могли менять ширину колонок в таблице, добавьте в описание таблицы `isResizable`.
 
-Если не укажете содержимое ячейки, она останется пустой.
+```tsx
+<Table columns={columns} rows={rows} isResizable />
+```
 
-Добавим в нашу таблицу две строки:
+<TableExampleIsResizable />
 
-```ts
-[
+### Возможность добавить строку
+
+Чтобы пользователь мог добавить строки в таблицу, добавьте в описание таблицы функцию `onRowCreate`. В конце таблицы появится кнопка с текстом **+ Добавить**, при нажатии на неё вызывается функция `onRowCreate`. В аргументах передаётся `id` последнего элемента или `undefined`(если таблица пуста). Новая строка добавится в конец таблицы.
+
+Поменять текст на кнопке можно с помощью свойства `rowCreateText`.
+
+Если нужно удалять строки или добавлять их не только в конец таблицы, можно написать свой код на основе нашего примера. [Посмотреть пример на GitHub](https://github.com/gazprom-neft/consta-uikit/tree/dev/src/components/Table/__stories__/examples/WithRowCreationAndDeletion.tsx)
+
+[Пример в работе](/?path=/story/components-table--with-row-actions)
+
+### Заглушка для пустой таблицы
+
+Вы можете добавить заглушку, которую увидят пользователи, если в таблице нет данных.
+Это может быть текст, изображение или что угодно, указанное в свойстве `emptyRowsPlaceholder`.
+
+```tsx
+<Table columns={columns} rows={rows} emptyRowsPlaceholder={<Text>Здесь пока нет данных</Text>} />
+```
+
+```tsx
+import React from 'react';
+import { Table, TableColumn } from '@consta/uikit/Table';
+import { Text } from '@consta/uikit/Text';
+
+const rows = [];
+
+const columns: TableColumn<typeof rows[number]>[] = [
+  {
+    title: '№',
+    accessor: 'id',
+    align: 'center',
+    width: 100,
+    sortable: true,
+  },
+  {
+    title: 'Имя',
+    accessor: 'name',
+    sortable: true,
+  },
+];
+
+const App = () => {
+  return <Table columns={columns} rows={rows} emptyRowsPlaceholder={<Text>Пусто</Text>} />;
+};
+```
+
+[Посмотреть пример](?path=/story/components-table--with-custom-rows-placeholder)
+
+### Постепенная загрузка
+
+Если в таблице очень много строк, можно показать только часть, а остальные — загружать постепенно, при прокрутке. Это можно сделать с помощью свойства `lazyLoad` (тип [`LazyLoad`](#свойства)). Его атрибуты:
+
+- `maxVisibleRows` — максимальное количество строк, которые загрузятся сразу (по умолчанию 210),
+- `scrollableEl` — элемент, который будет прокручиваться (по умолчанию — сама таблица, обязательно укажите её высоту, чтобы scroll listener отрабатывал правильно).
+
+```tsx
+<Table columns={columns} rows={rows} lazyLoad={{ maxVisibleRows: 210, scrollableEl: window }} />
+```
+
+[Посмотреть пример](?path=/story/components-table--with-big-data)
+
+## Сортировка
+
+По умолчанию строки в таблице выводятся в том порядке, в котором перечислены.
+
+### Сортировка для пользователя
+
+Чтобы пользователь мог отсортировать таблицу по одной из колонок, добавьте в объект с описанием этой
+колонки `sortable: true`. В шапке колонки появится иконка сортировки.
+
+```tsx
+import React from 'react';
+import { Table, TableColumn } from '@consta/uikit/Table';
+
+const rows = [
   {
     id: '1',
     name: 'Антон',
@@ -142,18 +466,30 @@ const columns = [
     name: 'Василий',
   },
 ];
+
+const columns: TableColumn<typeof rows[number]>[] = [
+  {
+    title: '№',
+    accessor: 'id',
+    align: 'center',
+    width: 100,
+    sortable: true,
+  },
+  {
+    title: 'Имя',
+    accessor: 'name',
+    sortable: true,
+  },
+];
+
+const App = () => {
+  return <Table rows={rows} columns={columns} />;
+};
 ```
 
-### Сортировка
+<TableExampleBasic />
 
-По умолчанию строки в таблице выводятся в том порядке, в котором перечислены.
-
-#### Сортировка для пользователя
-
-Чтобы пользователь мог отсортировать таблицу по одной из колонок, добавьте в объект с описанием этой
-колонки `sortable: true`. В шапке колонки появится иконка сортировки.
-
-#### Предварительная сортировка
+### Предварительная сортировка
 
 Чтобы отсортировать данные в таблице заранее, добавьте свойство `order` типа `OrderType` в объект с описанием колонки.
 
@@ -162,29 +498,146 @@ type OrderType = 'ASC' | 'DESC' | 'asc' | 'desc';
 ```
 
 Таблица отсортируется по первой колонке с этим свойством — по алфавиту (`'ask'`, `'ASK'`) или в
-обратном порядке (`'desk'`, `'DESK'`).
+обратном порядке (`'desc'`, `'DESC'`).
 
-#### Сортировка не по алфавиту
+```tsx
+export function TableExampleSort() {
+  const rows = [
+    { id: '1', letter: 'А' },
+    { id: '2', letter: 'Б' },
+    { id: '3', letter: 'В' },
+  ];
+
+  const columns: TableColumn<typeof rows[number]>[] = [
+    {
+      title: '№',
+      accessor: 'id',
+      width: 100,
+      sortable: true,
+    },
+    {
+      title: 'Буква',
+      accessor: 'letter',
+      sortable: true,
+      order: 'desc',
+    },
+  ];
+
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <Table columns={columns} rows={rows} />
+    </StoryBookExample>
+  );
+}
+```
+
+<TableExampleSort />
+
+### Сортировка не по алфавиту
 
 Если вам нужно отсортировать строки не по алфавиту, а, например, по дате или времени, используйте `onSortBy`.
 С помощью этого свойства можно получить имя столбца и порядок сортировки, самостоятельно отсортировать данные и передать в `rows`.
 
-[Пример кода](#сортировка-по-времени-через-onsortby)
+##### Пример сортировки по времени через onSortBy
 
-### Фильтры
+```tsx
+import React, { useState } from 'react';
+import { Table, SortByProps, TableColumn } from '@consta/uikit/Table';
+
+type Row = {
+  id: string;
+  date: string;
+};
+
+const data = [
+  {
+    id: '1',
+    date: new Date('Thu Dec 03 2020 14:23:13 GMT+0300 (Moscow Standard Time)'),
+  },
+  {
+    id: '2',
+    date: new Date('Thu Dec 03 2020 14:04:13 GMT+0300 (Moscow Standard Time)'),
+  },
+  {
+    id: '3',
+    date: new Date('Thu Dec 03 2020 14:55:13 GMT+0300 (Moscow Standard Time)'),
+  },
+  {
+    id: '4',
+    date: new Date('Thu Dec 03 2020 14:12:13 GMT+0300 (Moscow Standard Time)'),
+  },
+];
+
+const columns: TableColumn<Row>[] = [
+  {
+    title: `Id`,
+    accessor: 'id',
+    sortable: true,
+  },
+  {
+    title: `Дата`,
+    accessor: `date`,
+    sortable: true,
+  },
+];
+
+export function TableExampleOnSortBy() {
+  const [sortSetting, setSortSetting] = useState<SortByProps<Row> | null>(null);
+
+  const rows = data
+    .sort((a, b) => {
+      if (sortSetting?.sortingBy === 'date') {
+        const [firstDate, secondDate] =
+          sortSetting.sortOrder === 'asc' ? [a.date, b.date] : [b.date, a.date];
+        return firstDate.valueOf() - secondDate.valueOf();
+      }
+      return 0;
+    })
+    .map((item) => ({
+      id: item.id.valueOf(),
+      date: item.date.toString(),
+    }));
+
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <Table rows={rows} columns={columns} onSortBy={setSortSetting} />
+    </StoryBookExample>
+  );
+}
+```
+
+<TableExampleOnSortBy />
+
+## Фильтры
 
 Вы можете добавить фильтры в колонки с помощью свойства `filters`:
 
-`id` — идентификатор фильтра,
+- `id` — идентификатор фильтра,
+- `name` — название фильтра, которое увидит пользователь,
+- `field` — поле, по которому всё нужно отфильтровать,
+- `filterer` — функция фильтрации,
+- `component` — объект с данными для [кастомных фильтров](#кастомный-фильтр).
 
-`name` — название строки,
-
-`field` — поле, по которому всё нужно отфильтровать,
-
-`filterer` — функция фильтрации.
+Например, эту таблицу можно отфильтровать по имени «Антон».
 
 ```tsx
-[
+const rows = [
+  { id: '1', name: 'Антон' },
+  { id: '2', name: 'Василий' },
+];
+
+const columns: TableColumn<typeof rows[number]>[] = [
+  {
+    title: '№',
+    accessor: 'id',
+  },
+  {
+    title: 'Имя',
+    accessor: 'name',
+  },
+];
+
+const filters: TableFilters<typeof rows[number]> = [
   {
     id: 'executor',
     name: 'Антон',
@@ -192,9 +645,19 @@ type OrderType = 'ASC' | 'DESC' | 'asc' | 'desc';
     field: 'name',
   },
 ];
+
+export function TableExampleFilter() {
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <Table columns={columns} rows={rows} filters={filters} />
+    </StoryBookExample>
+  );
+}
 ```
 
-#### Кастомный фильтр
+<TableExampleFilter />
+
+### Кастомный фильтр
 
 Нестандартные компоненты для фильтрации можно добавить в объекте `component`. Например, так:
 
@@ -253,7 +716,9 @@ const filters = [
 ];
 ```
 
-##### Свойства кастомного компонента фильтра
+[Пример в работе](?path=/story/components-table--with-custom-filters)
+
+#### Свойства кастомного компонента фильтра
 
 | Свойство      | Тип                    | Описание                                             |
 | ------------- | ---------------------- | ---------------------------------------------------- |
@@ -261,7 +726,7 @@ const filters = [
 | `onCancel`    | `() => void`           | Функция для закрытия окна фильтра без его применения |
 | `filterValue` | `any`                  | Значение сохраненного значения фильтра               |
 
-##### Предустановленные компоненты
+#### Предустановленные компоненты
 
 | Компонент                | Дополнительные свойства                                               | Описание                           |
 | ------------------------ | --------------------------------------------------------------------- | ---------------------------------- |
@@ -275,7 +740,7 @@ const filters = [
 import { TableFilterContainer } from '@consta/uikit/Table';
 ```
 
-##### Свойства компонента `TableFilterContainer`
+#### Свойства компонента `TableFilterContainer`
 
 | Свойство             | Тип          | Описание                                   |
 | -------------------- | ------------ | ------------------------------------------ |
@@ -286,13 +751,11 @@ import { TableFilterContainer } from '@consta/uikit/Table';
 | `cancelButtonLabel`  | `string`     | Текст на кнопке сброса                     |
 | `children`           | `ReactNode`  | Вложенные элементы                         |
 
-[Пример в работе](?path=/story/components-table--with-custom-filters)
-
-#### Колбэк на применение фильтра
+### Колбэк на применение фильтра
 
 Если вам нужно повесить обработчик на событие изменения фильтров в таблице (например, для загрузки данных, к которым применён фильтр), вы можете сделать это с помощью свойства `onFiltersUpdated`.
 
-#### Переименование тегов в фильтрах
+### Переименование тегов в фильтрах
 
 Если вы хотите поменять текст в тегах, которые выводятся при фильтрации, — например, чтобы вывести дату в текстовом виде или сократить слишком длинный тег, можно написать свою функцию-обработчик `getTagLabel`.
 
@@ -308,19 +771,6 @@ import { TableFilterContainer } from '@consta/uikit/Table';
 
 [Пример в работе](?path=/story/components-table--with-custom-tag-label-function)
 
-### Заглушка
-
-Вы можете добавить заглушку, которую увидят пользователи, если в таблице нет данных.
-Это может быть текст, изображение или что угодно, указанное в свойстве `emptyRowsPlaceholder`.
-
-```tsx
-<Table columns={columns} rows={rows} emptyRowsPlaceholder={<Text>Здесь пока нет данных</Text>} />
-```
-
-[Пример кода](#со-своим-текстом-если-нет-данных)
-
-[Пример в работе](?path=/story/components-table--with-custom-rows-placeholder)
-
 ## Внешний вид
 
 ### Размер
@@ -330,24 +780,131 @@ import { TableFilterContainer } from '@consta/uikit/Table';
 
 Таблицы бывают трёх размеров — `'s', 'm', 'l'`.
 
-### Границы
+```tsx
+<Table columns={columns} rows={rows} size="s" />
+<Table columns={columns} rows={rows} size="m" />
+<Table columns={columns} rows={rows} size="l" />
+```
 
-По умолчанию в таблице нет рамок.
+<TableExampleSize />
 
-`borderBetweenRows` добавит границы между строками.
+### Границы между строками
+
+По умолчанию в таблице нет рамок. `borderBetweenRows` добавит границы между строками.
+
+```tsx
+<Table columns={columns} rows={rows} borderBetweenRows />
+```
+
+<TableExampleBorderBetweenRows />
+
+### Границы между колонками
 
 `borderBetweenColumns` добавит границы между колонками.
+
+```tsx
+<Table columns={columns} rows={rows} borderBetweenColumns />
+```
+
+<TableExampleBorderBetweenColumns />
+
+### Выравнивание по горизонтали
+
+Чтобы поменять выравнивание по горизонтали для всех ячеек в колонке, добавьте в объект с описанием этой колонки атрибут `align`. Варианты: `'left'`, `'center'`, `'right'`.
+
+```tsx
+const columnsAlignLeft: TableColumn<typeof rows[number]>[] = [
+  {
+    title: '№',
+    accessor: 'id',
+    align: 'left',
+  },
+  {
+    title: 'Имя',
+    accessor: 'name',
+    align: 'left',
+  },
+];
+```
+
+<TableExampleAlignLeft />
+
+```tsx
+const columnsAlignCenter: TableColumn<typeof rows[number]>[] = [
+  {
+    title: '№',
+    accessor: 'id',
+    align: 'center',
+  },
+  {
+    title: 'Имя',
+    accessor: 'name',
+    align: 'center',
+  },
+];
+```
+
+<TableExampleAlignCenter />
+
+```tsx
+const columnsAlignRight: TableColumn<typeof rows[number]>[] = [
+  {
+    title: '№',
+    accessor: 'id',
+    align: 'right',
+  },
+  {
+    title: 'Имя',
+    accessor: 'name',
+    align: 'right',
+  },
+];
+```
+
+<TableExampleAlignRight />
+
+### Выравнивание по вертикали
+
+Вы можете поменять выравнивание по высоте сразу для всех строк в таблице с помощью `verticalAlign`.
+
+У этого свойства три варианта значения: `'center', 'top', 'bottom'`. По умолчанию содержимое ячеек
+выравнивается по верхнему краю.
+
+```tsx
+<Table columns={columns} rows={rows} verticalAlign="top" borderBetweenRows borderBetweenColumns />
+<Table columns={columns} rows={rows} verticalAlign="center" borderBetweenRows borderBetweenColumns />
+<Table columns={columns} rows={rows} verticalAlign="bottom" borderBetweenRows borderBetweenColumns />
+```
+
+<TableExampleVerticalAlign />
+
+Отдельно настраивается выравнивания для заголовков — `verticalHeaderAlign`. Варианты те же: `'center', 'top', 'bottom'`.
 
 ### Выделение строк
 
 Вы можете выделить строки через одну с помощью свойства `zebraStriped`,
-так удобнее следить за данными. В таблице появятся полоски, как у зебры.
+так удобнее следить за данными. В таблице появятся полоски, как у зебры. Варианты:
 
-`onRowHover` сработает при наведении на строку, это полезно, когда нужно скрыть или показать элементы в строке.
+- `'odd'` — выделяет нечётные строки,
+- `'even'`— выделяет чётные строки.
 
-`activeRow` выделяет строку по клику.
+```tsx
+<Table columns={columns} rows={rows} zebraStriped="odd" />
+```
 
-#### Обработка клика по строке и ее выделение
+<TableExampleZebraOdd />
+
+```tsx
+<Table columns={columns} rows={rows} zebraStriped="even" />
+```
+
+<TableExampleZebraEven />
+
+Чтобы обработать наведение на строку, используйте `onRowHover`. Например, если нужнор скрыть или показать элементы в строке.
+
+Чтобы выделить строку по клику, используйте `activeRow`.
+
+#### Пример таблицы с обработкой клика по строке и её выделение
 
 Чтобы выделить строку по клику, передайте компоненту `Table` свойство `activeRow` типа `ActiveRow`.
 
@@ -363,21 +920,8 @@ type ActiveRow = {
 
 ```tsx
 import React from 'react';
-import { Table } from '@consta/uikit/Table';
+import { Table, TableColumn } from '@consta/uikit/Table';
 import { Text } from '@consta/uikit/Text';
-
-const columns = [
-  {
-    title: '№',
-    accessor: 'id',
-    align: 'center',
-  },
-  {
-    title: 'Имя',
-    accessor: 'name',
-    align: 'center',
-  },
-];
 
 const rows = [
   {
@@ -391,6 +935,19 @@ const rows = [
   {
     id: '3',
     name: 'Петр',
+  },
+];
+
+const columns: TableColumn<typeof rows[number]>[] = [
+  {
+    title: '№',
+    accessor: 'id',
+    align: 'center',
+  },
+  {
+    title: 'Имя',
+    accessor: 'name',
+    align: 'center',
   },
 ];
 
@@ -435,51 +992,19 @@ const App = () => {
 };
 ```
 
-### Создание строк
+### Дополнительный CSS-класс по условию
 
-Чтобы пользователь мог добавить строки в таблицу, используйте функцию `onRowCreate`. В конце таблицы появится кнопка с текстом **+ Добавить**, при нажатии на неё вызывается функция `onRowCreate`. В аргументах передаётся `id` последнего элемента или `undefined`(если таблица пуста). Новая строка добавится в конец таблицы.
+Вы можете добавить дополнительный CSS-класс к строке или колонке в зависимости от данных, которые в них содержатся, с помощью функции `getAdditionalClassName`.
 
-Поменять текст на кнопке можно с помощью свойства `rowCreateText`.
+Функция принимает объект `props` с тремя свойствами:
 
-Если нужно удалять строки или добавлять их не только в конец таблицы, можно написать свой код на основе нашего примера. [Посмотреть пример на GitHub](https://github.com/gazprom-neft/consta-uikit/tree/dev/src/components/Table/__stories__/examples/WithRowCreationAndDeletion.tsx)
+- `column` — данные в колонке,
+- `row` — данные в строке,
+- `isActive` — переменная, которая показывает, наведен ли курсор на текущую строку.
 
-[Пример в работе](/?path=/story/components-table--with-row-actions)
+Функция должна возвращать название CSS-класса типа `string`.
 
-### Фиксированный заголовок или колонка
-
-`stickyHeader` фиксирует заголовок: если таблица длинная, при вертикальной прокрутке
-строки двигаются, а заголовок остается на месте.
-
-`stickyColumns` фиксирует строку, в этом случае при горизонтальной прокрутке
-одна или несколько колонок остаются на месте.
-
-### Изменение ширины колонок
-
-Если хотите, чтобы пользователи могли менять ширину колонок в таблице, добавьте `isResizable`.
-
-### Выравнивание по вертикали
-
-Вы можете поменять выравнивание по высоте сразу для всех строк в таблице с помощью `verticalAlign`.
-
-У этого свойства три значения: `'center', 'top', 'bottom'`. По умолчанию содержимое ячеек
-выравнивается по верхнему краю.
-
-Отдельно настраивается выравнивания для заголовков — `verticalHeaderAlign`.
-
-### Объединение ячеек
-
-Если вам нужно объединять ячейки с одинаковым содержимым, вы можете указать свойство `mergeCells: true` в объекте той колонки, в которой хотите объединять ячейки.
-Объединение происходит для тех ячеек, которые идут подряд, для их значений справедливо условие `firstValue === secondValue`.
-
-Если в ваших ячейках **нестандартные данные** или вам нужно как-то иначе их сравнивать (например, сравнить строки с разным регистром), вы можете использовать колбэк `getComparisonValue`.
-Он принимает значение текущей ячейки и возвращает строку или число, по которым можно провести сравнение.
-
-### Добавление класса по условию
-
-Вы можете добавить какой-либо css-класс в зависимости от данных, которые содержатся в строке или колонке. Для этого надо задать таблице свойство `getAdditionalClassName`.
-
-Данное свойство - функция, на вход которой подаётся объект `props` с тремя совйствами: `column`, `row` и `isActive`, где `column` - данные колонки, `row` - данные строки таблицы, а `isActive` - переменная, которая показывает, наведен ли курсор на текущую строку.
-Функция должна возвращать название css-класса типа `string`.
+[Посмотреть пример](?path=/story/components-table--with-get-additional-class-name)
 
 ## Импорт
 
@@ -532,259 +1057,55 @@ type Filter = {
     }
 );
 
+type OrderType = 'ASC' | 'DESC' | 'asc' | 'desc';
+
 type OnRowHover = ({ id, e }: { id: string | undefined; e: React.MouseEvent }) => void;
 
 type onRowClick = ({ id, e }: { id: string; e: React.MouseEvent }) => void;
 
-type LazyLoad = { maxVisibleRows?: number; scrollableEl?: HTMLDivElement | Window };
-// maxVisibleRows - количество строк
-// scrollableEl - элемент с onScroll listener
+type ActiveRow = {
+  id: string | undefined;
+  onChange: ({ id, e }: { id: string | undefined; e?: React.SyntheticEvent }) => void;
+};
+
+type LazyLoad = {
+  maxVisibleRows?: number; // количество строк
+  scrollableEl?: HTMLDivElement | Window; // элемент с onScroll listener
+};
 ```
 
-| Свойство                                                  | Тип или варианты значения                                            | По умолчанию                                      | Описание                                                                                       |
-| --------------------------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| [`columns`](#колонки)                                     | `Column[]`                                                           | -                                                 | Колонки в таблице                                                                              |
-| [`rows`](#строки)                                         | `Row[]`                                                              | -                                                 | Строки в таблице                                                                               |
-| [`filters`](#фильтры)                                     | `Filter[]`                                                           | -                                                 | Список фильтров                                                                                |
-| [`size`](#размер)                                         | `'s', 'm', 'l'`                                                      | 'l'                                               | Размер таблицы                                                                                 |
-| [`stickyHeader`](#фиксированный-заголовок-или-колонка)    | `boolean`                                                            | false                                             | Зафиксированный заголовок                                                                      |
-| [`stickyColumns`](#фиксированный-заголовок-или-колонка)   | `number`                                                             | 0                                                 | Количество зафиксированных колонок                                                             |
-| [`isResizable`](#изменение-ширины-колонок)                | `boolean`                                                            | false                                             | Возможность изменения размера колонок                                                          |
-| [`activeRow`](#выделение-строк)                           | `{ id?: string; onChange: (id?: string) => void; }`                  | -                                                 | Активная строка                                                                                |
-| [`verticalAlign`](#выравнивание-по-вертикали)             | `'center', 'top', 'bottom'`                                          | `'top'`                                           | Выравнивание по вертикали                                                                      |
-| [`verticalHeaderAlign`](#выравнивание-по-вертикали)       | `'center'`, `'bottom'`                                               | `center`                                          | Выравнивание заголовков по вертикали                                                           |
-| [`zebraStriped`](#выделение-строк)                        | `'odd', 'even'`                                                      | false                                             | Окрашивание строк через одну                                                                   |
-| [`borderBetweenRows`](#границы)                           | `boolean`                                                            | false                                             | Отображение границ между строками                                                              |
-| [`borderBetweenColumns`](#границы)                        | `boolean`                                                            | false                                             | Отображение границ между колонками                                                             |
-| [`emptyRowsPlaceholder`](#заглушка)                       | `React.ReactNode`                                                    | -                                                 | Заглушка, показывается, когда в таблице нет данных                                             |
-| [`onRowCreate`](#создание-строк)                          | `(arg: { id?: string; index: number; e: React.MouseEvent }) => void` | -                                                 | Функция, которая сработает при нажатии на кнопку создания строки                               |
-| [`rowCreateText`](#создание-строк)                        | `string`                                                             | `'+ Добавить строку'`                             | Текст на кнопке для создания новой строки                                                      |
-| [`onRowHover`](#выделение-строк)                          | `(arg: { id: string | undefined; e: React.MouseEvent }) => void`     | -                                                 | Функция, которая сработает при наведении на строку                                             |
-| [`onRowClick`](#выделение-строк)                          | `(arg: { id: string; e: React.MouseEvent }) => void`                 | -                                                 | Функция, которая сработает при клике на строку                                                 |
-| [`getAdditionalClassName`](#добавление-класса-по-условию) | `(props: {column: any, row: any, isActive: boolean}) => string`      | -                                                 | Функция, которая на основе данных строки/колонки определяет css-класс, который нужно применить |
-| [`onSortBy`](#сортировка-не-по-алфавиту)                  | `onSortBy`                                                           | sortByDefault                                     | Функция, которая срабатывает при нажатии на иконку сортировки                                  |
-| `className`                                               | `string`                                                             | -                                                 | Дополнительный CSS-класс                                                                       |
-| `lazyLoad?`                                               | `LazyLoad`                                                           | `{ maxVisibleRows: 210; scrollableEl: tableRef }` | Включает виртуальную прокрутку в таблице                                                       |
-| [`onFiltersUpdated`](#колбэк-на-применение-фильтра)       | `(filters: { field: string[] }) => void`                             | -                                                 | Колбэк на изменение фильтров                                                                   |
-| [`getTagLabel`](#переименование-тегов-в-фильтрах)         | `(id: string, name: string, filterValue:any) => string`              | `getTagLabelDefault`                              | Функция для создания имени в тегах фильтров                                                    |
-| `ref?`                                                    | `React.Ref<HTMLDivElement>`                                          | -                                                 | Ссылка на корневой DOM-элемент компонента                                                      |
+| Свойство                                                         | Тип или варианты значения                                               | По умолчанию                                      | Описание                                                                                             |
+| ---------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| [`columns`](#колонки)                                            | `Column[]`                                                              | -                                                 | Колонки в таблице                                                                                    |
+| [`rows`](#строки)                                                | `Row[]`                                                                 | -                                                 | Строки в таблице                                                                                     |
+| [`filters?`](#фильтры)                                           | `Filter[]`                                                              | -                                                 | Список фильтров                                                                                      |
+| [`size?`](#размер)                                               | `'s', 'm', 'l'`                                                         | `'l'`                                             | Размер таблицы                                                                                       |
+| [`stickyHeader?`](#зафиксированный-заголовок)                    | `boolean`                                                               | `false`                                           | Зафиксированный заголовок                                                                            |
+| [`stickyColumns?`](#зафиксированная-колонка)                     | `number`                                                                | 0                                                 | Количество зафиксированных колонок                                                                   |
+| [`isResizable?`](#изменяемая-ширина-колонок)                     | `boolean`                                                               | `false`                                           | Возможность изменения размера колонок                                                                |
+| [`activeRow?`](#выделение-строк)                                 | `{ id?: string; onChange: (id?: string) => void; }`                     | -                                                 | Активная строка                                                                                      |
+| [`verticalAlign?`](#выравнивание-по-вертикали)                   | `'center', 'top', 'bottom'`                                             | `'top'`                                           | Выравнивание по вертикали                                                                            |
+| [`verticalHeaderAlign?`](#выравнивание-по-вертикали)             | `'center'`, `'bottom'`                                                  | `center`                                          | Выравнивание заголовков по вертикали                                                                 |
+| [`zebraStriped?`](#выделение-строк)                              | `'odd', 'even'`                                                         | `false`                                           | Окрашивание строк через одну                                                                         |
+| [`borderBetweenRows?`](#границы-между-колонками)                 | `boolean`                                                               | `false`                                           | Отображение границ между строками                                                                    |
+| [`borderBetweenColumns?`](#границы-между-строками)               | `boolean`                                                               | `false`                                           | Отображение границ между колонками                                                                   |
+| [`emptyRowsPlaceholder?`](#возможность-добавить-строку)          | `React.ReactNode`                                                       | -                                                 | Заглушка, показывается, когда в таблице нет данных                                                   |
+| [`onRowCreate?`](#возможность-добавить-строку)                   | `(arg: { id?: string; index: number; e: React.MouseEvent }) => void`    | -                                                 | Функция, которая сработает при нажатии на кнопку создания строки                                     |
+| [`rowCreateText?`](#возможность-добавить-строку)                 | `string`                                                                | `'+ Добавить строку'`                             | Текст на кнопке для создания новой строки                                                            |
+| [`onRowHover?`](#выделение-строк)                                | `(arg: { id: string` &#124; `undefined; e: React.MouseEvent }) => void` | -                                                 | Функция, которая сработает при наведении на строку                                                   |
+| [`onRowClick?`](#выделение-строк)                                | `(arg: { id: string; e: React.MouseEvent }) => void`                    | -                                                 | Функция, которая сработает при клике на строку                                                       |
+| [`getAdditionalClassName`](#дополнительный-css-класс-по-условию) | `(props: {column: any, row: any, isActive: boolean}) => string`         | -                                                 | Функция, которая на основе данных в строке или колонке определяет CSS-класс, который нужно применить |
+| [`onSortBy?`](#сортировка-не-по-алфавиту)                        | `onSortBy`                                                              | `sortByDefault`                                   | Функция, которая срабатывает при нажатии на иконку сортировки                                        |
+| [`lazyLoad?`](#постепенная-загрузка)                             | `LazyLoad`                                                              | `{ maxVisibleRows: 210; scrollableEl: tableRef }` | Включает виртуальную прокрутку в таблице                                                             |
+| [`onFiltersUpdated?`](#колбэк-на-применение-фильтра)             | `(filters: { field: string[] }) => void`                                | -                                                 | Колбэк на изменение фильтров                                                                         |
+| [`getTagLabel?`](#переименование-тегов-в-фильтрах)               | `(id: string, name: string, filterValue:any) => string`                 | `getTagLabelDefault`                              | Функция для создания имени в тегах фильтров                                                          |
+| `className?`                                                     | `string`                                                                | -                                                 | Дополнительный CSS-класс                                                                             |
+| `ref?`                                                           | `React.Ref<HTMLDivElement>`                                             | -                                                 | Ссылка на корневой DOM-элемент компонента                                                            |
 
 ## Примеры
 
-### Обычная таблица
-
-```tsx
-import React from 'react';
-import { Table } from '@consta/uikit/Table';
-
-const columns = [
-  {
-    title: '№',
-    accessor: 'id',
-    align: 'center',
-    width: 100,
-    sortable: true,
-  },
-  {
-    title: 'Имя',
-    accessor: 'name',
-    sortable: true,
-  },
-];
-
-const rows = [
-  {
-    id: '1',
-    name: 'Антон',
-  },
-  {
-    id: '2',
-    name: 'Василий',
-  },
-];
-
-const App = () => {
-  return <Table columns={columns} rows={rows} />;
-};
-```
-
-### Рендер ячеек
-
-```ts
-import React from 'react';
-import { Table } from '@consta/uikit/Table';
-
-const columns = [
-  {
-    title: '№',
-    accessor: 'id',
-  },
-  {
-    title: 'Имя',
-    accessor: 'name',
-    renderCell: (row) => <h1>{row.name}</h1>,
-  },
-];
-
-const rows = [
-  {
-    id: '1',
-    name: 'Антон',
-  },
-  {
-    id: '2',
-    name: 'Василий',
-  },
-];
-
-const App = () => {
-  return <Table columns={columns} rows={rows} />;
-};
-```
-
-### Со своей функцией генерации признака объединения
-
-```tsx
-import React from 'react';
-import { Table } from '@consta/uikit/Table';
-import { Checkbox } from '@consta/uikit/Checkbox';
-
-const colums = [
-  {
-    title: 'Операция подтверждена',
-    accessor: 'operationConfirmed',
-    mergeCells: true,
-    getComparisonValue: ({ owner, viewed }) => `${owner}-${viewed}`,
-    renderCell: ({ operationConfirmed: { viewed } }) => <Checkbox checked={viewed} />,
-  },
-];
-
-const rows = [
-  {
-    id: '1',
-    operationConfirmed: { owner: 'user', viewed: false },
-  },
-  {
-    id: '2',
-    operationConfirmed: { owner: 'user', viewed: false },
-  },
-  {
-    id: '3',
-    operationConfirmed: { owner: 'user', viewed: true },
-  },
-  {
-    id: '4',
-    operationConfirmed: { owner: 'admin', viewed: true },
-  },
-];
-
-const App = () => <Table columns={colums} rows={rows} />;
-```
-
-[Посмотреть этот пример в работе](/?path=/story/components-table--with-merged-by-custom-callback-cells)
-
-[Посмотреть расширенный пример на GitHub](https://github.com/gazprom-neft/consta-uikit/blob/master/src/components/Table/__stories__/Table.stories.tsx) (в переменной `WithMergedByCustomCallbackCells`)
-
-### Со своим текстом, если нет данных
-
-```tsx
-import React from 'react';
-import { Table } from '@consta/uikit/Table';
-import { Text } from '@consta/uikit/Text';
-
-const columns = [
-  {
-    title: '№',
-    accessor: 'id',
-    align: 'center',
-    width: 100,
-    sortable: true,
-  },
-  {
-    title: 'Имя',
-    accessor: 'name',
-    sortable: true,
-  },
-];
-
-const rows = [];
-
-const App = () => {
-  return <Table columns={columns} rows={rows} emptyRowsPlaceholder={<Text>Пусто</Text>} />;
-};
-```
-
-### С большим количеством строк
-
-По умолчанию `scrollableEl` — сама таблица. Обязательно укажите её высоту, чтобы scroll listener отрабатывал правильно.
-
-```tsx
-import React from 'react';
-import { Table } from '@consta/uikit/Table';
-
-const columns = [ ... ];
-const rows = [ ... ];
-
-const App = () => {
-  return <Table columns={columns} rows={rows} />;
-};
-```
-
-### Сортировка по времени через onSortBy
-
-```tsx
-import React, { useState } from 'react';
-import { Table, SortByProps } from '@consta/uikit/Table';
-
-const data = [
-  {
-    id: 1,
-    date: new Date('Thu Dec 03 2020 14:23:13 GMT+0300 (Moscow Standard Time)'),
-  },
-  {
-    id: 2,
-    date: new Date('Thu Dec 03 2020 14:04:13 GMT+0300 (Moscow Standard Time)'),
-  },
-  {
-    id: 3,
-    date: new Date('Thu Dec 03 2020 14:55:13 GMT+0300 (Moscow Standard Time)'),
-  },
-  {
-    id: 4,
-    date: new Date('Thu Dec 03 2020 14:12:13 GMT+0300 (Moscow Standard Time)'),
-  },
-];
-
-const columns = [
-  {
-    title: `Id`,
-    accessor: `id`,
-    sortable: true,
-  },
-  {
-    title: `Дата`,
-    accessor: `date`,
-    sortable: true,
-  },
-];
-
-const App = () => {
-  const [sortSetting, setSortSetting] = useState<SortByProps<any> | null>(null);
-
-  const rows = data
-    .sort((a, b) => {
-      if (sortSetting?.sortingBy === 'date') {
-        const [firstDate, secondDate] =
-          sortSetting.sortOrder === 'asc' ? [a.date, b.date] : [b.date, a.date];
-        return firstDate.valueOf() - secondDate.valueOf();
-      }
-      return 0;
-    })
-    .map((item) => ({
-      id: item.id.valueOf(),
-      date: item.date.toString(),
-    }));
-
-  return <Table rows={rows} columns={columns} onSortBy={setSortSetting} />;
-};
-```
+[Обычная таблица](#пример-таблицы)
+[С сортировкой по времени через onSortBy](#пример-сортировки-по-времени-через-onsortby)
+[Со своей функцией генерации признака объединения ячеек](#пример-таблицы-со-своей-функцией генерации-признака-объединения)
+[Со своим текстом, если нет данных](#заглушка-для-пустой-таблицы)
+[Рендер ячеек](#рендер-ячеек)
