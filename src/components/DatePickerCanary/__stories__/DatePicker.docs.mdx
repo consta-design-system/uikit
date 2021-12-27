@@ -1,6 +1,7 @@
 import { DatePickerExampleValue } from './examples/DatePickerExampleValue/DatePickerExampleValue';
 import { DatePickerExampleOnError } from './examples/DatePickerExampleOnError/DatePickerExampleOnError';
 import { DatePickerExampleFormat } from './examples/DatePickerExampleFormat/DatePickerExampleFormat';
+import { DatePickerExampleAdditionalControls } from './examples/DatePickerExampleAdditionalControls/DatePickerExampleAdditionalControls';
 import {
   DatePickerExampleTypeDate,
   DatePickerExampleTypeDateRange,
@@ -179,6 +180,34 @@ export const DatePickerExampleOnError = () => {
 
 <DatePickerExampleOnError />
 
+## Дополнительные контролы
+
+Чтобы добавить контролы в поле выбора дат нужно указать в свойсво `renderAdditionalControls`
+рендер функцию для отрисовки элементов
+
+```tsx
+const additionalControls = () => {
+  return [<Button label="Кнопка №1" />, <Button label="Кнопка №2" />];
+};
+
+const control = () => {
+  return <Button label="Кнопка" />;
+};
+
+<DatePicker
+  value={value}
+  onChange={({ value }) => setValue(value)}
+  renderAdditionalControls={control}
+/>
+<DatePicker
+  value={value}
+  onChange={({ value }) => setValue(value)}
+  renderAdditionalControls={additionalControls}
+/>
+```
+
+<DatePickerExampleAdditionalControls />
+
 ## Импорт
 
 ```tsx
@@ -260,3 +289,4 @@ type DatePickerPropOnError = (
 | `endFieldOnBlur?`               | `React.FocusEventHandler<HTMLElement>`                                                                                                                              | -                     | Событие при потере фокуса поля 'до', доступно только при выборе диапазона дат                                          |
 | `className?`                    | `string`                                                                                                                                                            | -                     | Дополнительный CSS-класс                                                                                               |
 | `ref?`                          | `React.Ref<HTMLDivElement>`                                                                                                                                         | -                     | Ссылка на корневой DOM-элемент компонента                                                                              |
+| `renderAdditionalControls?`     | `() => React.ReactNode` <code>&#124;</code> `React.ReactNode[]`                                                                                                     | -                     | Дополнительные конторолы для выбора даты                                                                               |

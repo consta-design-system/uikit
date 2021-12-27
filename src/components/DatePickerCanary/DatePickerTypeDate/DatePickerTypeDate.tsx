@@ -81,6 +81,7 @@ export const DatePickerTypeDate: DatePickerTypeDateComponent = forwardRef((props
           props.onChange?.(params);
           handleClose();
         }}
+        renderAdditionalControls={props.renderAdditionalControls}
         onChangeCurrentVisibleDate={(date) => setCalendarVisibleDate(date)}
       />
     </>

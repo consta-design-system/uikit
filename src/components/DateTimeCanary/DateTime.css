@@ -1,0 +1,8 @@
+.DateTime {
+  &-Controls {
+    display: flex;
+    margin-top: var(--space-l);
+    gap: var(--space-s);
+    flex-wrap: wrap;
+  }
+}

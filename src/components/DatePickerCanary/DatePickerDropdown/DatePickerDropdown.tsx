@@ -38,6 +38,7 @@ export type DatePickerDropdownProps = PropsWithHTMLAttributesAndRef<
     form?: DatePickerPropDropdownForm;
     isOpen?: boolean;
     onChangeCurrentVisibleDate?: (date: Date) => void;
+    renderAdditionalControls?: () => React.ReactNode | React.ReactNode[];
   },
   HTMLDivElement
 >;

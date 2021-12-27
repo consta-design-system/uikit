@@ -71,6 +71,7 @@ export const DatePickerTypeDateRange: DatePickerTypeDateRangeComponent = forward
       maxDate: props.maxDate,
       form: dropdownForm,
       onChange: hadleChange,
+      renderAdditionalControls: props.renderAdditionalControls,
     };
 
     const startFieldOnBlurHandler = (e: React.FocusEvent<HTMLElement>) => {
