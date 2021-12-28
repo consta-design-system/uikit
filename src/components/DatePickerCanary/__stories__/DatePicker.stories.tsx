@@ -51,6 +51,10 @@ const defaultKnobs = () => ({
   form: select('form', textFieldPropForm, textFieldPropFormDefault),
   status: select('status', ['', ...textFieldPropStatus], ''),
   withAdditionalControls: boolean('withAdditionalControls', false),
+  label: text('label', 'Заголовок'),
+  caption: text('caption', 'Подпись'),
+  required: boolean('required', false),
+  labelPosition: select('labelPosition', ['top', 'left'], 'top'),
   size: select('size', textFieldPropSize, textFieldPropSizeDefault),
   view: select('view', textFieldPropView, textFieldPropViewDefault),
   disabled: boolean('disabled', false),
@@ -78,6 +82,10 @@ export function Playground() {
   const {
     form,
     status,
+    label,
+    caption,
+    required,
+    labelPosition,
     size,
     view,
     placeholder,
@@ -115,6 +123,10 @@ export function Playground() {
         type={type}
         width="full"
         form={form}
+        label={label}
+        labelPosition={labelPosition}
+        caption={caption}
+        required={required}
         value={value}
         status={status || undefined}
         view={view}

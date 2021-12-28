@@ -103,6 +103,9 @@ export type DatePickerProps<
     endFieldOnFocus?: DatePickerPropCalendarStartOnFocus<TYPE>;
     startFieldOnBlur?: DatePickerPropCalendarStartOnFocus<TYPE>;
     endFieldOnBlur?: DatePickerPropCalendarStartOnFocus<TYPE>;
+    label?: string;
+    caption?: string;
+    labelPosition?: 'top' | 'left';
   },
   HTMLDivElement
 >;
