@@ -15,8 +15,8 @@
     &_3xl,
     &_4xl,
     &_5xl {
-      padding-right: var(--vertical-space);
-      padding-left: var(--vertical-space);
+      padding-top: var(--vertical-space);
+      padding-bottom: var(--vertical-space);
     }
 
     &_xs {
@@ -66,8 +66,8 @@
     &_3xl,
     &_4xl,
     &_5xl {
-      padding-top: var(--vertical-space);
-      padding-bottom: var(--vertical-space);
+      padding-right: var(--horizontal-space);
+      padding-left: var(--horizontal-space);
     }
 
     &_xs {
