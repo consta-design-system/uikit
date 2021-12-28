@@ -1,6 +1,10 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 
-import { ReposData1, ReposData2 } from './components/ReposData/ReposData.tsx';
+import {
+  ReposDataBase,
+  ReposDataSingleComponents,
+  ReposDataAdapters,
+} from './components/ReposData/ReposData.tsx';
 
 <Meta
   title="Документация|О дизайн-системе/Репозитории"
@@ -10,10 +14,24 @@ import { ReposData1, ReposData2 } from './components/ReposData/ReposData.tsx';
 
 # Репозитории
 
+Библиотеки дизайн-системы Consta для разработчиков написаны на React и хранятся в репозиториях на GitHub — в открытом доступе.
+
+Все сущности из этих библиотек (например, элементы интерфейса) существуют в виде макетов, их можно найти в соответствующих [библиотеках в Figma](?path=/docs/common-about-figma--page).
+
+- [Основные библиотеки](#основные-библиотеки)
+- [Отдельные компоненты](#отдельные-компоненты)
+- [Адаптеры для сторонних библиотек](#адаптеры-для-сторонних-библиотек)
+
 ## Основные библиотеки
 
-<ReposData1 />
+<ReposDataBase />
 
 ## Отдельные компоненты
 
-<ReposData2 />
+<ReposDataSingleComponents />
+
+## Адаптеры для сторонних библиотек
+
+Добавляют к сторонним компонентам стилизацию Consta.
+
+<ReposDataAdapters />
