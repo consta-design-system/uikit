@@ -8,24 +8,41 @@ import ButtonImage from './images/ButtonImage';
 import CardImage from './images/CardImage';
 import CheckboxGroupImage from './images/CheckboxGroupImage';
 import CheckboxImage from './images/CheckboxImage';
+import ChoiceGroupImage from './images/ChoiceGroupImage';
 import CollapseGroupImage from './images/CollapseGroupImage';
 import CollapseImage from './images/CollapseImage';
 import ComboboxImage from './images/ComboboxImage';
+import ContextMenuImage from './images/ContextMenuImage';
 import DatePickerImage from './images/DatePickerImage';
 import DateTimeImage from './images/DateTimeImage';
 import DragNDropFieldImage from './images/DragNDropFieldImage';
+import FileFieldImage from './images/FileFieldImage';
+import FileImage from './images/FileImage';
+import GridImage from './images/GridImage';
+import HeaderImage from './images/HeaderImage';
+import InformerImage from './images/InformerImage';
+import LayoutImage from './images/LayoutImage';
 import LoaderImage from './images/LoaderImage';
 import ModalImage from './images/ModalImage';
+import PaginationImage from './images/PaginationImage';
+import PopoverImage from './images/PopoverImage';
+import ProgressSpinImage from './images/ProgressSpinImage';
+import ProgressStepBarImage from './images/ProgressStepBarImage';
 import RadioGroupImage from './images/RadioGroupImage';
 import RadioImage from './images/RadioImage';
 import ResponsesImage from './images/ResponsesImage';
 import SelectImage from './images/SelectImage';
 import SidebarImage from './images/SidebarImage';
+import SkeletonImage from './images/SkeletonImage';
 import SnackBarImage from './images/SnackBarImage';
+import StepsImage from './images/StepsImage';
 import SwitchGroupImage from './images/SwitchGroupImage';
 import SwitchImage from './images/SwitchImage';
+import TableImage from './images/TableImage';
 import TabsImage from './images/TabsImage';
 import TagImage from './images/TagImage';
+import TextFieldImage from './images/TextFieldImage';
+import TextImage from './images/TextImage';
 import ThemeImage from './images/ThemeImage';
 import ThemeTogglerImage from './images/ThemeTogglerImage';
 import TimerImage from './images/TimerImage';
@@ -38,10 +55,10 @@ export const data: Data = [
   {
     items: [
       {
-        name: 'Attachment',
-        componentName: 'Attachment',
-        url: '/?path=/docs/components-attachment--playground',
-        description: 'Показывает загрузку файла или уже загруженный файл.',
+        name: 'Badge',
+        componentName: 'Badge',
+        url: '/?path=/docs/components-badge--playground',
+        description: 'Бейджик. Показывает статус процесса.',
       },
       {
         name: 'Avatar',
@@ -50,10 +67,10 @@ export const data: Data = [
         description: 'Аватарка. Изображение пользователя.',
       },
       {
-        name: 'Badge',
-        componentName: 'Badge',
-        url: '/?path=/docs/components-badge--playground',
-        description: 'Бейджик. Показывает статус процесса.',
+        name: 'Attachment',
+        componentName: 'Attachment',
+        url: '/?path=/docs/components-attachment--playground',
+        description: 'Показывает загрузку файла или уже загруженный файл.',
       },
       {
         name: 'Breadcrumbs',
@@ -74,16 +91,16 @@ export const data: Data = [
         description: 'Карточка. Контейнер для любого контента.',
       },
       {
-        name: 'Checkbox',
-        componentName: 'Checkbox',
-        url: '/?path=/docs/components-checkbox--playground',
-        description: 'Чекбокс. Можно сделать выбор и подтвердить.',
-      },
-      {
         name: 'CheckboxGroup',
         componentName: 'CheckboxGroup',
         url: '/?path=/docs/components-checkboxgroup--playground',
         description: 'Группа чекбоксов. Можно выбрать несколько вариантов.',
+      },
+      {
+        name: 'Checkbox',
+        componentName: 'Checkbox',
+        url: '/?path=/docs/components-checkbox--playground',
+        description: 'Чекбокс. Можно сделать выбор и подтвердить.',
       },
       {
         name: 'ChoiceGroup',
@@ -207,16 +224,22 @@ export const data: Data = [
         description: 'Прогресс по шагам. Показывает, на каком шаге процесс.',
       },
       {
+        name: 'RadioGroup',
+        componentName: 'RadioGroup',
+        url: '/?path=/docs/components-radiogroup--playground',
+        description: 'Группа радиокнопок. Можно выбрать один вариант.',
+      },
+      {
         name: 'Radio',
         componentName: 'Radio',
         url: '/?path=/docs/components-radio--playground',
         description: 'Радиокнопка. Можно выбрать один вариант.',
       },
       {
-        name: 'RadioGroup',
-        componentName: 'RadioGroup',
-        url: '/?path=/docs/components-radiogroup--playground',
-        description: 'Группа радиокнопок. Можно выбрать один вариант.',
+        name: 'Select',
+        componentName: 'Select',
+        url: '/?path=/docs/components-select--playground',
+        description: 'Выпадающий список. Можно выбрать один вариант.',
       },
       {
         name: 'Responses',
@@ -224,12 +247,6 @@ export const data: Data = [
         url: '/?path=/docs/components-responses--playground',
         description:
           'Заглушки с сообщениями об ошибках и важных статусах (404, 503, не найдены данные и похожие).',
-      },
-      {
-        name: 'Select',
-        componentName: 'Select',
-        url: '/?path=/docs/components-select--playground',
-        description: 'Выпадающий список. Можно выбрать один вариант.',
       },
       {
         name: 'Sidebar',
@@ -243,6 +260,12 @@ export const data: Data = [
         url: '/?path=/docs/components-skeleton--playground',
         description:
           'Заглушка для элементов интерфейса. Можно показать на месте элемента, который ещё не загрузился.',
+      },
+      {
+        name: 'Slider(Canary)',
+        componentName: 'Slider',
+        url: '/?path=/docs/components-slider--playground',
+        description: 'Ползунок. Можно выбрать значение из диапазона.',
       },
       {
         name: 'SnackBar',
@@ -339,32 +362,49 @@ export const data: Data = [
 ];
 
 export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
-  Attachment: AttachmentImage,
-  Avatar: AvatarImage,
   Badge: BadgeImage,
+  Avatar: AvatarImage,
+  Attachment: AttachmentImage,
   Breadcrumbs: BreadcrumbsImage,
   Button: ButtonImage,
   Card: CardImage,
-  Checkbox: CheckboxImage,
   CheckboxGroup: CheckboxGroupImage,
+  Checkbox: CheckboxImage,
+  ChoiceGroup: ChoiceGroupImage,
   Collapse: CollapseImage,
   CollapseGroup: CollapseGroupImage,
   Combobox: ComboboxImage,
+  ContextMenu: ContextMenuImage,
   DatePicker: DatePickerImage,
   DateTime: DateTimeImage,
   DragNDropField: DragNDropFieldImage,
+  File: FileImage,
+  FileField: FileFieldImage,
+  Grid: GridImage,
+  Header: HeaderImage,
+  Informer: InformerImage,
+  Layout: LayoutImage,
   Loader: LoaderImage,
   Modal: ModalImage,
-  Radio: RadioImage,
+  Pagination: PaginationImage,
+  Popover: PopoverImage,
+  ProgressSpin: ProgressSpinImage,
+  ProgressStepBar: ProgressStepBarImage,
   RadioGroup: RadioGroupImage,
-  Responses: ResponsesImage,
+  Radio: RadioImage,
   Select: SelectImage,
+  Responses: ResponsesImage,
   Sidebar: SidebarImage,
+  Skeleton: SkeletonImage,
   SnackBar: SnackBarImage,
+  Steps: StepsImage,
   Switch: SwitchImage,
   SwitchGroup: SwitchGroupImage,
+  Table: TableImage,
   Tabs: TabsImage,
   Tag: TagImage,
+  Text: TextImage,
+  TextField: TextFieldImage,
   Theme: ThemeImage,
   ThemeToggler: ThemeTogglerImage,
   Timer: TimerImage,
