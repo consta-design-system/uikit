@@ -55,10 +55,10 @@ export const data: Data = [
   {
     items: [
       {
-        name: 'Attachment',
-        componentName: 'Attachment',
-        url: '/?path=/docs/components-attachment--playground',
-        description: 'Показывает загрузку файла или уже загруженный файл.',
+        name: 'Badge',
+        componentName: 'Badge',
+        url: '/?path=/docs/components-badge--playground',
+        description: 'Бейджик. Показывает статус процесса.',
       },
       {
         name: 'Avatar',
@@ -67,10 +67,10 @@ export const data: Data = [
         description: 'Аватарка. Изображение пользователя.',
       },
       {
-        name: 'Badge',
-        componentName: 'Badge',
-        url: '/?path=/docs/components-badge--playground',
-        description: 'Бейджик. Показывает статус процесса.',
+        name: 'Attachment',
+        componentName: 'Attachment',
+        url: '/?path=/docs/components-attachment--playground',
+        description: 'Показывает загрузку файла или уже загруженный файл.',
       },
       {
         name: 'Breadcrumbs',
@@ -91,16 +91,16 @@ export const data: Data = [
         description: 'Карточка. Контейнер для любого контента.',
       },
       {
-        name: 'Checkbox',
-        componentName: 'Checkbox',
-        url: '/?path=/docs/components-checkbox--playground',
-        description: 'Чекбокс. Можно сделать выбор и подтвердить.',
-      },
-      {
         name: 'CheckboxGroup',
         componentName: 'CheckboxGroup',
         url: '/?path=/docs/components-checkboxgroup--playground',
         description: 'Группа чекбоксов. Можно выбрать несколько вариантов.',
+      },
+      {
+        name: 'Checkbox',
+        componentName: 'Checkbox',
+        url: '/?path=/docs/components-checkbox--playground',
+        description: 'Чекбокс. Можно сделать выбор и подтвердить.',
       },
       {
         name: 'ChoiceGroup',
@@ -224,16 +224,22 @@ export const data: Data = [
         description: 'Прогресс по шагам. Показывает, на каком шаге процесс.',
       },
       {
+        name: 'RadioGroup',
+        componentName: 'RadioGroup',
+        url: '/?path=/docs/components-radiogroup--playground',
+        description: 'Группа радиокнопок. Можно выбрать один вариант.',
+      },
+      {
         name: 'Radio',
         componentName: 'Radio',
         url: '/?path=/docs/components-radio--playground',
         description: 'Радиокнопка. Можно выбрать один вариант.',
       },
       {
-        name: 'RadioGroup',
-        componentName: 'RadioGroup',
-        url: '/?path=/docs/components-radiogroup--playground',
-        description: 'Группа радиокнопок. Можно выбрать один вариант.',
+        name: 'Select',
+        componentName: 'Select',
+        url: '/?path=/docs/components-select--playground',
+        description: 'Выпадающий список. Можно выбрать один вариант.',
       },
       {
         name: 'Responses',
@@ -241,12 +247,6 @@ export const data: Data = [
         url: '/?path=/docs/components-responses--playground',
         description:
           'Заглушки с сообщениями об ошибках и важных статусах (404, 503, не найдены данные и похожие).',
-      },
-      {
-        name: 'Select',
-        componentName: 'Select',
-        url: '/?path=/docs/components-select--playground',
-        description: 'Выпадающий список. Можно выбрать один вариант.',
       },
       {
         name: 'Sidebar',
@@ -362,14 +362,14 @@ export const data: Data = [
 ];
 
 export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
-  Attachment: AttachmentImage,
-  Avatar: AvatarImage,
   Badge: BadgeImage,
+  Avatar: AvatarImage,
+  Attachment: AttachmentImage,
   Breadcrumbs: BreadcrumbsImage,
   Button: ButtonImage,
   Card: CardImage,
-  Checkbox: CheckboxImage,
   CheckboxGroup: CheckboxGroupImage,
+  Checkbox: CheckboxImage,
   ChoiceGroup: ChoiceGroupImage,
   Collapse: CollapseImage,
   CollapseGroup: CollapseGroupImage,
@@ -390,10 +390,10 @@ export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> =
   Popover: PopoverImage,
   ProgressSpin: ProgressSpinImage,
   ProgressStepBar: ProgressStepBarImage,
-  Radio: RadioImage,
   RadioGroup: RadioGroupImage,
-  Responses: ResponsesImage,
+  Radio: RadioImage,
   Select: SelectImage,
+  Responses: ResponsesImage,
   Sidebar: SidebarImage,
   Skeleton: SkeletonImage,
   SnackBar: SnackBarImage,
