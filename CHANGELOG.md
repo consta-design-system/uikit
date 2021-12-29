@@ -1,5 +1,13 @@
 # Changelog
 
+## v3.12.2 (22/12/2021)
+- [docs(Table): edit docs, add examples (#1864)](https://github.com/gazprom-neft/consta-uikit/commit/58c88be03d1699c4331095dafcf9c83114769445) - [@arhayka](https://github.com/arhayka)
+- [fix(Theme): fixed --line-height-text-2xs (#1870)](https://github.com/gazprom-neft/consta-uikit/commit/6eab23112af357fce46ee6a415d1b824fc130704) - [@gizeasy](https://github.com/gizeasy)
+- [fix(SnackBar): fix warning with findDOMNode (#1867)](https://github.com/gazprom-neft/consta-uikit/commit/6320f47055018b20a854f76b203939a1ccb02d8a) - [@N1MBER](https://github.com/N1MBER)
+- [refactor(Checkbox): edit code (#1868)](https://github.com/gazprom-neft/consta-uikit/commit/5f2d43f178676ba94aa0aeb9aab9556047ffd6dd) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v3.12.1 (17/12/2021)
 - [docs(global): add import field to all components and fix mistakes (#1865)](https://github.com/gazprom-neft/consta-uikit/commit/54fa15bbd9527e92f73841740b8488b9aaa72ee8) - [@N1MBER](https://github.com/N1MBER)
 - [fix(ProgressStepBar): fixed icon render](https://github.com/gazprom-neft/consta-uikit/commit/c6cdded99572b9cfe769bde603ecdd6ee5aa6c9b) - [@gizeasy](https://github.com/gizeasy)
@@ -465,9 +473,3 @@ _Обращаем внимание_: *версии компонентов обр
 - [chore(deps): bump ssri from 6.0.1 to 6.0.2 (#1097)](https://github.com/gazprom-neft/consta-uikit/commit/4615b96f062a54bd2cdfcfced2c6c00c544db1e8) - [@dependabot](https://github.com/dependabot)
 - [chore(github): Update issue templates (#1098)](https://github.com/gazprom-neft/consta-uikit/commit/7ad000ac89c7c2bb18bac685806b6cf60b62bbf6) - [@kolebayev](https://github.com/kolebayev)
 - [fix(collapse): fix grouping in storybook sidebar(#1100)](https://github.com/gazprom-neft/consta-uikit/commit/61bd2b2588261f9f5b36ac3280023b1e94ccbeb6) - [@kolebayev](https://github.com/kolebayev)
-
---------------------
-
-## v1.11.12 (28/04/2021)
-- [chore(storybook): edit configs](https://github.com/gazprom-neft/consta-uikit/commit/b08ba8a274b70fdb7989160d46d81261fcf3a184) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Collapse): create component, story, doc (#988)](https://github.com/gazprom-neft/consta-uikit/commit/8ee65c35fbe94a7a3926df1fd4ba5c926c7050be) - [@azhadanov](https://github.com/azhadanov)

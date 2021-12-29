@@ -1,6 +1,11 @@
 import { DatePickerExampleValue } from './examples/DatePickerExampleValue/DatePickerExampleValue';
 import { DatePickerExampleOnError } from './examples/DatePickerExampleOnError/DatePickerExampleOnError';
 import { DatePickerExampleFormat } from './examples/DatePickerExampleFormat/DatePickerExampleFormat';
+import { DatePickerExampleStatus } from './examples/DatePickerExampleStatus/DatePickerExampleStatus';
+import { DatePickerExampleLabel } from './examples/DatePickerExampleLabel/DatePickerExampleLabel';
+import { DatePickerExampleRequired } from './examples/DatePickerExampleRequired/DatePickerExampleRequired';
+import { DatePickerExampleCaption } from './examples/DatePickerExampleCaption/DatePickerExampleCaption';
+
 import {
   DatePickerExampleTypeDate,
   DatePickerExampleTypeDateRange,
@@ -25,6 +30,11 @@ import { DatePicker } from '@consta/uikit/DatePickerCanary';
 > Полный список свойств со ссылками на документацию — [в конце этой страницы](#свойства)
 
 - [Выбор даты](#выбор-даты)
+- [Лейбл](#лейбл)
+- [Подпись](#подпись)
+- [Обязательность](#обязательность)
+- [Фокус](#фокус)
+- [Статус](#статус-поля)
 - [Тип: дата или период](#тип-дата-или-период)
 - [Формат даты](#формат-даты)
 - [Обработка ошибок](#обработка-ошибок)
@@ -179,6 +189,63 @@ export const DatePickerExampleOnError = () => {
 
 <DatePickerExampleOnError />
 
+### Лейбл
+
+К полю можно добавить лейбл. За текст отвечает свойство `label`,
+за его расположение — `labelPosition`. Варианты расположения:
+`left` — лейбл слева от поля, `top` — лейбл над полем.
+
+```tsx
+<DatePicker label="Лейбл" labelPosition="top" />
+<DatePicker label="Лейбл" labelPosition="left" />
+```
+
+<DatePickerExampleLabel />
+
+### Подпись
+
+Под полем можно добавить подпись — например, чтобы показать информацию о его состоянии.
+За подпись отвечает свойство `caption`, оно наследует
+[статус поля](#статус) и стилизуется в соответствии с ним.
+
+```tsx
+<DatePicker status="success" />
+<DatePicker status="alert" />
+<DatePicker status="warning" />
+<DatePicker/>
+```
+
+<DatePickerExampleCaption />
+
+## Обязательность
+
+Чтобы сделать поле обязательным, добавьте `required`.
+Если у поля есть лейбл, рядом с ним появится маркер обязательности.
+
+```tsx
+<DatePicker label="Обязательное" required />
+<DatePicker label="Необязательное" />
+```
+
+<DatePickerExampleRequired />
+
+## Статус поля
+
+С помощью статуса можно выделить поле: показать, где ошибка, или, наоборот,
+отметить правильно заполненные поля.
+
+За статус отвечает свойство `status`. Варианты: `success`, `alert` и `warning`.
+Если статус не указан, поле будет обычным.
+
+```tsx
+<DatePicker status="success" />
+<DatePicker status="alert" />
+<DatePicker status="warning" />
+<DatePicker/>
+```
+
+<DatePickerExampleStatus />
+
 ## Импорт
 
 ```tsx
@@ -227,6 +294,10 @@ type DatePickerPropOnError = (
 | [`onChange?`](#выбор-даты)      | `DatePickerPropOnChange<TYPE>`                                                                                                                                      | -                     | Событие выбора даты или периода                                                                                        |
 | [`value?`](#выбор-даты)         | `DatePickerPropValue<TYPE>`                                                                                                                                         | -                     | Выбранная дата или период                                                                                              |
 | [`type?`](#тип-дата-или-период) | `'date'`, `'date-range'`                                                                                                                                            | `date`                | Тип календаря: выбор даты или выбор периода                                                                            |
+| [`label?`](#лейбл)              | `string`                                                                                                                                                            | -                     | Лейбл к полю ввода                                                                                                     |
+| [`labelPosition?`](#лейбл)      | `'top', 'left'`                                                                                                                                                     | `'top'`               | Положение лейбла относительно поля                                                                                     |
+| [`caption?`](#подпись)          | `string`                                                                                                                                                            | -                     | Подпись под полем ввода                                                                                                |
+| [`required?`](#обязательность)  | `boolean`                                                                                                                                                           | -                     | Нужно заполнить                                                                                                        |
 | `minDate?`                      | `Date`                                                                                                                                                              | `01.01.0001 00:00:00` | Ограничение выбора по меньшей дате, см. [DateTime](/?path=/docs/components-datetime--playground)                       |
 | `maxDate?`                      | `Date`                                                                                                                                                              | `31.12.9999 23:59:59` | Ограничение выбора по большей дате, см. [DateTime](/?path=/docs/components-datetime--playground)                       |
 | `events?`                       | `Date[]`                                                                                                                                                            | -                     | События на календаре, см. [DateTime](/?path=/docs/components-datetime--playground)                                     |
