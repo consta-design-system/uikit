@@ -8,24 +8,41 @@ import ButtonImage from './images/ButtonImage';
 import CardImage from './images/CardImage';
 import CheckboxGroupImage from './images/CheckboxGroupImage';
 import CheckboxImage from './images/CheckboxImage';
+import ChoiceGroupImage from './images/ChoiceGroupImage';
 import CollapseGroupImage from './images/CollapseGroupImage';
 import CollapseImage from './images/CollapseImage';
 import ComboboxImage from './images/ComboboxImage';
+import ContextMenuImage from './images/ContextMenuImage';
 import DatePickerImage from './images/DatePickerImage';
 import DateTimeImage from './images/DateTimeImage';
 import DragNDropFieldImage from './images/DragNDropFieldImage';
+import FileFieldImage from './images/FileFieldImage';
+import FileImage from './images/FileImage';
+import GridImage from './images/GridImage';
+import HeaderImage from './images/HeaderImage';
+import InformerImage from './images/InformerImage';
+import LayoutImage from './images/LayoutImage';
 import LoaderImage from './images/LoaderImage';
 import ModalImage from './images/ModalImage';
+import PaginationImage from './images/PaginationImage';
+import PopoverImage from './images/PopoverImage';
+import ProgressSpinImage from './images/ProgressSpinImage';
+import ProgressStepBarImage from './images/ProgressStepBarImage';
 import RadioGroupImage from './images/RadioGroupImage';
 import RadioImage from './images/RadioImage';
 import ResponsesImage from './images/ResponsesImage';
 import SelectImage from './images/SelectImage';
 import SidebarImage from './images/SidebarImage';
+import SkeletonImage from './images/SkeletonImage';
 import SnackBarImage from './images/SnackBarImage';
+import StepsImage from './images/StepsImage';
 import SwitchGroupImage from './images/SwitchGroupImage';
 import SwitchImage from './images/SwitchImage';
+import TableImage from './images/TableImage';
 import TabsImage from './images/TabsImage';
 import TagImage from './images/TagImage';
+import TextFieldImage from './images/TextFieldImage';
+import TextImage from './images/TextImage';
 import ThemeImage from './images/ThemeImage';
 import ThemeTogglerImage from './images/ThemeTogglerImage';
 import TimerImage from './images/TimerImage';
@@ -245,6 +262,12 @@ export const data: Data = [
           'Заглушка для элементов интерфейса. Можно показать на месте элемента, который ещё не загрузился.',
       },
       {
+        name: 'Slider(Canary)',
+        componentName: 'Slider',
+        url: '/?path=/docs/components-slider--playground',
+        description: 'Ползунок. Можно выбрать значение из диапазона.',
+      },
+      {
         name: 'SnackBar',
         componentName: 'SnackBar',
         url: '/?path=/docs/components-snackbar--playground',
@@ -347,24 +370,41 @@ export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> =
   Card: CardImage,
   Checkbox: CheckboxImage,
   CheckboxGroup: CheckboxGroupImage,
+  ChoiceGroup: ChoiceGroupImage,
   Collapse: CollapseImage,
   CollapseGroup: CollapseGroupImage,
   Combobox: ComboboxImage,
+  ContextMenu: ContextMenuImage,
   DatePicker: DatePickerImage,
   DateTime: DateTimeImage,
   DragNDropField: DragNDropFieldImage,
+  File: FileImage,
+  FileField: FileFieldImage,
+  Grid: GridImage,
+  Header: HeaderImage,
+  Informer: InformerImage,
+  Layout: LayoutImage,
   Loader: LoaderImage,
   Modal: ModalImage,
+  Pagination: PaginationImage,
+  Popover: PopoverImage,
+  ProgressSpin: ProgressSpinImage,
+  ProgressStepBar: ProgressStepBarImage,
   Radio: RadioImage,
   RadioGroup: RadioGroupImage,
   Responses: ResponsesImage,
   Select: SelectImage,
   Sidebar: SidebarImage,
+  Skeleton: SkeletonImage,
   SnackBar: SnackBarImage,
+  Steps: StepsImage,
   Switch: SwitchImage,
   SwitchGroup: SwitchGroupImage,
+  Table: TableImage,
   Tabs: TabsImage,
   Tag: TagImage,
+  Text: TextImage,
+  TextField: TextFieldImage,
   Theme: ThemeImage,
   ThemeToggler: ThemeTogglerImage,
   Timer: TimerImage,
