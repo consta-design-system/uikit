@@ -1,5 +1,14 @@
 # Changelog
 
+## v3.12.3 (29/12/2021)
+- [fix(MixCard): fix  mistakes in stylesheet file (#1889)](https://github.com/gazprom-neft/consta-uikit/commit/070b7b2589b11e520bc5ca079fe385f31a411ea7) - [@N1MBER](https://github.com/N1MBER)
+- [docs(review): add images (#1894)](https://github.com/gazprom-neft/consta-uikit/commit/7c34f9aefd50a1904b602f3da42cdb0ebc1c199c) - [@arhayka](https://github.com/arhayka)
+- [docs(common): write docs about new components creation (#1871)](https://github.com/gazprom-neft/consta-uikit/commit/5db2b97ddcd2bb028db4200e191fbd7b85ee3b98) - [@arhayka](https://github.com/arhayka)
+- [docs(global): review docs structure (#1879)](https://github.com/gazprom-neft/consta-uikit/commit/28450362b5ca79664bad6eb3ce4de33758f49fe3) - [@arhayka](https://github.com/arhayka)
+- [feat(DatePicker): add label and caption props, update docs and playground (#1876)](https://github.com/gazprom-neft/consta-uikit/commit/5eb6952506e5066f7b176f1612707f698d292cc7) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
 ## v3.12.2 (22/12/2021)
 - [docs(Table): edit docs, add examples (#1864)](https://github.com/gazprom-neft/consta-uikit/commit/58c88be03d1699c4331095dafcf9c83114769445) - [@arhayka](https://github.com/arhayka)
 - [fix(Theme): fixed --line-height-text-2xs (#1870)](https://github.com/gazprom-neft/consta-uikit/commit/6eab23112af357fce46ee6a415d1b824fc130704) - [@gizeasy](https://github.com/gizeasy)
@@ -460,16 +469,3 @@ _Обращаем внимание_: *версии компонентов обр
 - [feat(Informer): add mod size (#1160)](https://github.com/gazprom-neft/consta-uikit/commit/6d95f875a05cda973f686219b7fcff51dc4e92fa) - [@gizeasy](https://github.com/gizeasy)
 - [chore(storybook): added .stories.mdx for build (#1162)](https://github.com/gazprom-neft/consta-uikit/commit/9299f27327cb132a8de2d71fc3d6549f1d011d40) - [@gizeasy](https://github.com/gizeasy)
 - [chore(github): Update issue templates (#1141)](https://github.com/gazprom-neft/consta-uikit/commit/e8767f4d0ad9a8eb150ab32d58a95f52ff91a185) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v1.11.13 (12/05/2021)
-- [docs(theme): add shadows info (#1121)](https://github.com/gazprom-neft/consta-uikit/commit/ac985e2e5fdd26c84850ce9072ad0e44e68cc87f) - [@kolebayev](https://github.com/kolebayev)
-- [chore(chromatic): remove (#1118)](https://github.com/gazprom-neft/consta-uikit/commit/09afcee88f2b0050f6f4ac9a83f1d24967d61bcf) - [@gizeasy](https://github.com/gizeasy)
-- [feat(useThemeVars): export types (#1117)](https://github.com/gazprom-neft/consta-uikit/commit/0e5284d03fa81c91838a6dccf947b40c986a6c37) - [@gizeasy](https://github.com/gizeasy)
-- [chore(deps-dev): bump postcss from 7.0.31 to 8.2.10 (#1114)](https://github.com/gazprom-neft/consta-uikit/commit/deac73bfde551ff7397792bc804857c5d264fe51) - [@dependabot](https://github.com/dependabot)
-- [chore(deps): bump hosted-git-info from 2.8.8 to 2.8.9 (#1108)](https://github.com/gazprom-neft/consta-uikit/commit/9ed3fc7c8d339e9a1e7a20d62b66fdbd3b21666b) - [@dependabot](https://github.com/dependabot)
-- [chore(deps): bump url-parse from 1.4.7 to 1.5.1 (#1107)](https://github.com/gazprom-neft/consta-uikit/commit/f5f19d580227886a7a178c5daade518f3856b925) - [@dependabot](https://github.com/dependabot)
-- [chore(deps): bump ssri from 6.0.1 to 6.0.2 (#1097)](https://github.com/gazprom-neft/consta-uikit/commit/4615b96f062a54bd2cdfcfced2c6c00c544db1e8) - [@dependabot](https://github.com/dependabot)
-- [chore(github): Update issue templates (#1098)](https://github.com/gazprom-neft/consta-uikit/commit/7ad000ac89c7c2bb18bac685806b6cf60b62bbf6) - [@kolebayev](https://github.com/kolebayev)
-- [fix(collapse): fix grouping in storybook sidebar(#1100)](https://github.com/gazprom-neft/consta-uikit/commit/61bd2b2588261f9f5b36ac3280023b1e94ccbeb6) - [@kolebayev](https://github.com/kolebayev)
