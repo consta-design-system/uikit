@@ -49,6 +49,7 @@
     align-items: center;
     width: 100%;
     height: var(--space-m);
+    user-select: none;
   }
 
   &-Side {

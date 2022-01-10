@@ -73,18 +73,15 @@ export const useSliderStationing: UseSliderStationing = (
             active: false,
           });
         } else if (Array.isArray(value) && value) {
-          sizesArray.push({
-            width: ((value[0] - min) / absoluteSize) * 100,
-            active: false,
-          });
-          sizesArray.push({
-            width: ((value[1] - value[0]) / absoluteSize) * 100,
-            active: true,
-          });
-          sizesArray.push({
-            width: ((max - value[1]) / absoluteSize) * 100,
-            active: false,
-          });
+          const endPointArray = [...value];
+          endPointArray.unshift(min);
+          endPointArray.push(max);
+          for (let i = 0; i < endPointArray.length - 1; i++) {
+            sizesArray.push({
+              width: ((endPointArray[i + 1] - endPointArray[i]) / absoluteSize) * 100,
+              active: endPointArray[i] !== min && endPointArray[i + 1] !== max,
+            });
+          }
         } else {
           sizesArray.push({
             width: 100,
@@ -98,7 +95,7 @@ export const useSliderStationing: UseSliderStationing = (
             active:
               (typeof value === 'number' || Array.isArray(value)) &&
               (range && Array.isArray(value)
-                ? stepSize.max > value[0] && stepSize.min < value[1]
+                ? stepSize.max > value[0] && stepSize.min < value[value.length - 1]
                 : stepSize.max <= value),
           });
         });

@@ -37,7 +37,9 @@ export const SliderPoint = (props: SliderPointProps) => {
     focused,
     popoverPosition,
     buttonRef,
+    handlePress,
     onKeyPress,
+    tooltipFormatter,
     buttonLabel,
     onFocus,
     ...otherProps
@@ -97,11 +99,12 @@ export const SliderPoint = (props: SliderPointProps) => {
         className={cnSliderPoint({ hovered, disabled }, [!disabled ? cnMixFocus() : ''])}
         onMouseOver={() => handleMouseAction(true)}
         onMouseOut={() => handleMouseAction(false)}
+        onMouseDown={() => handlePress?.(buttonLabel)}
+        onTouchStart={() => handlePress?.(buttonLabel)}
         onKeyDown={(e) => onKeyPress?.(e, buttonLabel)}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onClick={handleFocus}
-        // onMouseUp={handleBlur}
         ref={useForkRef([buttonRef, pointRef])}
         tabIndex={0}
         style={{
@@ -119,7 +122,7 @@ export const SliderPoint = (props: SliderPointProps) => {
             direction="downCenter"
             possibleDirections={['downCenter', 'leftDown', 'rightDown']}
           >
-            {value}
+            {tooltipFormatter ? tooltipFormatter(value) : value}
           </Tooltip>
         </ThemeContext.Provider>
       )}

@@ -61,19 +61,21 @@ export type SliderLineProps = {
 
 export type SliderPointProps = PropsWithHTMLAttributes<
   {
-    value?: number | string;
+    value?: number;
     disabled?: boolean;
     focused?: boolean;
     hovered?: boolean;
     withTooltip?: boolean;
+    handlePress?: (typeButton: ActiveButton) => void;
     buttonLabel?: ActiveButton;
     buttonRef?: React.RefObject<HTMLButtonElement>;
     popoverPosition?: TrackPosition;
+    tooltipFormatter?: PropToolipFormatter;
     onFocus?: (
       e: React.FocusEvent<HTMLButtonElement> | React.MouseEvent,
       button: ActiveButton,
     ) => void;
-    onKeyPress?: (e: React.KeyboardEvent, typeButton: ActiveButton) => void;
+    onKeyPress?: (e: React.KeyboardEvent, typeButton?: ActiveButton) => void;
     onHover?: (hovered: boolean) => void;
     position: number;
   },
