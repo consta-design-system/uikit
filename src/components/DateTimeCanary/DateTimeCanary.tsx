@@ -1,8 +1,5 @@
-import './DateTime.css';
-
 import React, { forwardRef } from 'react';
 
-import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
 
 import { DateTimeTypeDate } from './DateTimeTypeDate/DateTimeTypeDate';
@@ -25,21 +22,12 @@ const typeMap: Record<DateTimePropType, DateTimeTypeComponent<DateTimePropType>>
   'date-time': DateTimeTypeDateTime,
 } as const;
 
-const cnDateTime = cn('DateTime');
-
 export const DateTime: DateTimeComponent = forwardRef((props, ref) => {
-  const { type = dateTimePropTypeDefault, renderAdditionalControls, ...otherProps } = props;
+  const { type = dateTimePropTypeDefault, ...otherProps } = props;
 
   const Component = getByMap(typeMap, type);
 
-  return (
-    <>
-      <Component {...otherProps} ref={ref} />
-      {renderAdditionalControls && (
-        <div className={cnDateTime('Controls')}>{renderAdditionalControls()}</div>
-      )}
-    </>
-  );
+  return <Component {...otherProps} ref={ref} />;
 });
 
 export * from './helpers/types';

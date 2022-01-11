@@ -147,7 +147,7 @@ export function Playground() {
           endFieldRightSide: icon,
           startFieldRightSide: icon,
         })}
-        renderAdditionalControls={withAdditionalControls ? additionalControls : undefined}
+        renderAdditionalControls={withAdditionalControls ? additionalControls() : undefined}
       />
     </div>
   );
