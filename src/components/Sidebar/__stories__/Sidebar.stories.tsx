@@ -38,7 +38,7 @@ export function Playground() {
       <Button
         size="m"
         view="primary"
-        label="Открыть Sidebar"
+        label="Открыть сайдбар"
         width="default"
         onClick={() => setIsSidebarOpen(true)}
       />
@@ -64,30 +64,43 @@ export function Playground() {
             Заголовок сайдбара
           </Text>
           <Text as="p" size="m" view="secondary" className={cnSidebarStories('Body')}>
-            Sed porta sollicitudin purus sagittis elementum. Pellentesque habitant morbi tristique
-            senectus et netus et malesuada fames ac turpis egestas. Pellentesque tincidunt, augue et
-            placerat cursus, neque sem imperdiet mi, ut fringilla nunc nibh non enim. Vivamus id
-            metus convallis, commodo magna vel, scelerisque nisi. Morbi vehicula lectus id risus
-            malesuada, at finibus urna egestas. Ut diam arcu, tempus nec metus sed, egestas maximus
-            mi. Aenean hendrerit lorem mauris. Nam ut elit elementum, rhoncus lectus a, tincidunt
-            diam. Pellentesque consequat ante in vestibulum viverra. Aliquam vitae facilisis purus.
-            Sed metus ante, ultricies quis mi vel, blandit fringilla sem. Mauris vitae mauris massa.
-            Nunc pulvinar purus nec est dictum venenatis. Pellentesque vulputate metus imperdiet
-            ipsum mollis, nec finibus ante mollis. Cras ligula dui, feugiat non orci vitae, commodo
-            suscipit mi. Ut commodo nunc eget massa feugiat, et vulputate nisl euismod. Phasellus
-            orci massa, eleifend eget consequat aliquet, imperdiet ut neque. Ut et tortor vitae
-            augue semper euismod a ut lacus. Duis vulputate orci risus, eget dapibus nulla hendrerit
-            eget. Vivamus finibus blandit nunc, ut fringilla eros pharetra a. Integer vitae commodo
-            sapien. Cras posuere eleifend nulla in mollis. Fusce in lacus dignissim, egestas lacus
-            et, laoreet quam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-            posuere cubilia curae; Sed placerat, quam vel sodales consectetur, enim nulla lacinia
-            risus, a laoreet ipsum diam sed quam. Nullam ornare, est at mollis venenatis, eros purus
-            tincidunt augue, et elementum sapien leo ut nunc. Suspendisse vel nunc felis. Praesent a
-            tortor venenatis, semper quam sed, pretium eros. Phasellus non nunc id augue malesuada
-            aliquam. Pellentesque molestie mi non neque mattis, ut congue purus vulputate.
-            Suspendisse placerat dapibus metus mollis rutrum. Donec et nulla sapien. Donec
-            sollicitudin ultrices mi vel blandit. Sed imperdiet libero eu tellus laoreet cursus.
-            Maecenas non sem non est venenatis porta.
+            Содержимое сайдбара. Сайдбар — это всплывающее окно, «прилипающее» к краю экрана.
+            Показывается поверх контента, содержимое страницы можно закрыть полупрозрачной
+            подложкой. Внутри может быть что угодно: текст, кнопки, изображения или другие элементы.
+          </Text>
+          <Text as="p" size="m" view="secondary" className={cnSidebarStories('Body')}>
+            Сайдбар входит в дизайн-систему Consta. В ней несколько библиотек с интерфейсными
+            компонентами и правилами их взаимодействия. Компоненты — кнопки, иконки, списки, таблицы
+            и другие элементы, из которых собирается интерфейс, реализованы в двух форматах: для
+            дизайнеров, чтобы собирать макеты в Figma, и для разработчиков — в виде кода на React.
+          </Text>
+          <Text
+            as="p"
+            size="m"
+            view="primary"
+            weight="semibold"
+            className={cnSidebarStories('Title')}
+          >
+            Особенности дизайн-системы
+          </Text>
+          <Text as="p" size="m" view="secondary" className={cnSidebarStories('Body')}>
+            Гибкая тематизация. Тема определяет внешний вид всего интерфейса — цвета, шрифты,
+            отступы. В тему вкладываются все компоненты, а ещё темы вкладываются друг в друга. В
+            дизайн-системе может быть сколько угодно вариантов темы.
+          </Text>
+          <Text as="p" size="m" view="secondary" className={cnSidebarStories('Body')}>
+            Семантические переменные. Все параметры темы описаны с помощью переменных (CSS Custom
+            Properties) — значения цветов, отступов и размеров типографики берутся из темы, а
+            значит, легко меняются вместе с ней.
+          </Text>
+          <Text as="p" size="m" view="secondary" className={cnSidebarStories('Body')}>
+            Кастомные блоки и компоненты. В дизайн-системе есть готовые блоки, но из её компонентов
+            можно собирать кастомные блоки и элементы интерфейса. Если чего-то не хватает, можно
+            создавать своё по принципам дизайн-системы.
+          </Text>
+          <Text as="p" size="m" view="secondary" className={cnSidebarStories('Body')}>
+            Одинаковые сущности в макетах и в коде. Все сущности есть в двух видах: в виде макетов в
+            Figma и в коде.
           </Text>
         </Sidebar.Content>
         <Sidebar.Actions className={cnSidebarStories('Actions')}>
