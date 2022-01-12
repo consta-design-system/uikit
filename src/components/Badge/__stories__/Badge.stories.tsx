@@ -18,7 +18,7 @@ import {
 import mdx from './Badge.docs.mdx';
 
 const defaultKnobs = () => ({
-  label: text('label', 'Statusing along'),
+  label: text('label', 'это бейджик'),
   size: select('size', badgePropSize, badgePropSizeDefault),
   view: select('view', badgePropView, badgePropViewDefault),
   status: select('status', badgePropStatus, badgePropStatusDefault),
