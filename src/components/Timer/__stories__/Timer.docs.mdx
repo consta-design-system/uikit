@@ -29,13 +29,17 @@ import { Timer } from '@consta/uikit/Timer';
 Таймер предназначен для очень коротких промежутков времени, до 10 секунд, поэтому
 двузначные числа лучше не использовать.
 
+```ts
+<Timer size="m" seconds={3} progress={80} />
+<Timer size="m" seconds={5} progress={80} />
+<Timer size="m" seconds={7} progress={80} />
+```
+
 <TimerExampleSeconds />
 
 ## Размер
 
 За размер таймера отвечает свойство `size`.
-
-<TimerExampleSize />
 
 ```ts
 <Timer size="2xl" seconds={5} progress={80} />
@@ -45,11 +49,11 @@ import { Timer } from '@consta/uikit/Timer';
 <Timer size="s" seconds={5} progress={80} />
 ```
 
+<TimerExampleSize />
+
 ## Прогрессбар
 
 Вы можете указать процент заполнения прогрессбара в процентах в свойстве `progress`.
-
-<TimerExampleProgress />
 
 ```ts
 <StoryBookExample className={cnDocsDecorator('Section')}>
@@ -60,6 +64,8 @@ import { Timer } from '@consta/uikit/Timer';
   <Timer size="m" seconds={5} progress={80} />
 </StoryBookExample>
 ```
+
+<TimerExampleProgress />
 
 Включите анимацию с помощью `animation`.
 
