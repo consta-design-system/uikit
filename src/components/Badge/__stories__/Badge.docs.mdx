@@ -54,8 +54,6 @@ import { Badge } from '@consta/uikit/Badge';
 Представьте, что пользователь построил маршрут для марсохода и отправляет его на проверку.
 Какие у этого маршрута могут быть статусы?
 
-<BadgeExampleStatus />
-
 ```ts
 <Badge status="normal" label="Новый" /> /* маршрут готов, отправьте на проверку */
 <Badge status="success" label="Cойдёт" /> /* всё получилось, запускайте марсоход  */
@@ -64,6 +62,8 @@ import { Badge } from '@consta/uikit/Badge';
 <Badge status="system" label="В работе" /> /* это нужно доделать */
 ```
 
+<BadgeExampleStatus />
+
 ### Бейджик без текста
 
 Если статусы очевидны и хорошо определяются по цвету (или просто нет места), можно
@@ -71,12 +71,12 @@ import { Badge } from '@consta/uikit/Badge';
 
 Например, если вы строите пешеходный переход, достаточно двух статусов — `success` и `error`.
 
-<BadgeExampleMinified />
-
 ```ts
 <Badge minified status="error" label="Стойте" />
 <Badge minified status="success" label="Идите" />
 ```
+
+<BadgeExampleMinified />
 
 ## Внешний вид
 
@@ -88,18 +88,16 @@ import { Badge } from '@consta/uikit/Badge';
 
 `stroked` — второстепенный, такой бейдж не будет так сильно бросаться в глаза.
 
-<BadgeExampleView />
-
 ```ts
 <Badge view="filled" label="Filled badge" />
 <Badge view="stroked" label="Stroked badge" />
 ```
 
+<BadgeExampleView />
+
 ### Размер
 
 За размер бейджиков отвечает свойство `size`.
-
-<BadgeExampleSize />
 
 ```ts
 <Badge size="s" label="Badge S" />
@@ -107,28 +105,30 @@ import { Badge } from '@consta/uikit/Badge';
 <Badge size="l" label="Badge L" />
 ```
 
+<BadgeExampleSize />
+
 ### Форма
 
 За форму бейджиков отвечает свойство `form`.
-
-<BadgeExampleForm />
 
 ```ts
 <Badge form="default" label="Default badge" />
 <Badge form="round" label="Round badge" />
 ```
 
+<BadgeExampleForm />
+
 ### Бейджик с иконкой
 
 Слева от надписи на бейджике можно поставить иконку — любую из нашей [библиотеки
 иконок](?path=/story/components-icons--playground). За иконку отвечает свойство `icon`.
 
-<BadgeExampleIcon />
-
 ```ts
 <Badge icon={IconCheck} status="success" label="Съедобно" />
 <Badge icon={IconClose} status="error" label="Отрава" />
 ```
+
+<BadgeExampleIcon />
 
 ## Тег для бейджика
 
@@ -137,11 +137,11 @@ import { Badge } from '@consta/uikit/Badge';
 добавить бейджику свойства другого элемента. Например, чтобы поставить
 с бейджика ссылку, поменяйте тег на `a`.
 
-<BadgeExampleAs />
-
 ```ts
 <Badge as="a" href="#" label="Я ссылка, которая притворяется бейджиком" />
 ```
+
+<BadgeExampleAs />
 
 ## Импорт
 
@@ -151,18 +151,18 @@ import { Badge } from '@consta/uikit/Badge';
 
 ## Свойства
 
-| Свойство                      | Тип                                                     | По умолчанию | Описание                                                         |
-| ----------------------------- | ------------------------------------------------------- | ------------ | ---------------------------------------------------------------- |
-| [`size`](#размер)             | `'s' , 'm' , 'l'`                                       | `'m'`        | Размер                                                           |
-| [`view`](#типы-бейджиков)     | `'filled' , 'stroked'`                                  | `'filled'`   | Вид                                                              |
-| [`status`](#статус)           | `'success' , 'error' , 'warning' , 'normal' , 'system'` | `'normal'`   | Статус                                                           |
-| [`form`](#форма)              | `'default' , 'round'`                                   | `'default'`  | Форма                                                            |
-| [`minified`](#типы-бейджиков) | `boolean`                                               | -            | Отвечает за отрисовку бейджика без надписи, в виде точки         |
-| [`icon`](#бейджик-с-иконкой)  | `IconComponent`                                         | -            | Добавляет иконку                                                 |
-| [`label`](#текст-на-бейджике) | `string`                                                | -            | Текст на бейджике                                                |
-| [`as`](#тег-для-бейджика)     | `keyof JSX.IntrinsicElements`                           | `'div'`      | HTML-тег, в виде которого этот компонент будет представлен в DOM |
-| `className`                   | `string`                                                | -            | Дополнительный CSS-класс (mix)                                   |
-| `ref`                         | `React.Ref<HTMLElement>`                                | -            | Ссылка на корневой DOM-элемент компонента                        |
+| Свойство                       | Тип                                                     | По умолчанию | Описание                                                         |
+| ------------------------------ | ------------------------------------------------------- | ------------ | ---------------------------------------------------------------- |
+| [`size?`](#размер)             | `'s' , 'm' , 'l'`                                       | `'m'`        | Размер                                                           |
+| [`view?`](#типы-бейджиков)     | `'filled' , 'stroked'`                                  | `'filled'`   | Вид                                                              |
+| [`status?`](#статус)           | `'success' , 'error' , 'warning' , 'normal' , 'system'` | `'normal'`   | Статус                                                           |
+| [`form?`](#форма)              | `'default' , 'round'`                                   | `'default'`  | Форма                                                            |
+| [`minified?`](#типы-бейджиков) | `boolean`                                               | -            | Отвечает за отрисовку бейджика без надписи, в виде точки         |
+| [`icon?`](#бейджик-с-иконкой)  | `IconComponent`                                         | -            | Добавляет иконку                                                 |
+| [`label?`](#текст-на-бейджике) | `string`                                                | -            | Текст на бейджике                                                |
+| [`as?`](#тег-для-бейджика)     | `keyof JSX.IntrinsicElements`                           | `'div'`      | HTML-тег, в виде которого этот компонент будет представлен в DOM |
+| `className?`                   | `string`                                                | -            | Дополнительный CSS-класс (mix)                                   |
+| `ref?`                         | `React.Ref<HTMLElement>`                                | -            | Ссылка на корневой DOM-элемент компонента                        |
 
 ## Пример
 
