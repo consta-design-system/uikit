@@ -42,11 +42,66 @@ import { SnackBar } from '@consta/uikit/SnackBar';
 
 От статуса зависит цвет фона под текстом (задается в свойстве `status`).
 
+```tsx
+const items: Item[] = [
+  {
+    key: 1,
+    message: 'Сообщение — normal',
+    status: 'normal',
+  },
+  {
+    key: 2,
+    message: 'Ошибка — alert',
+    status: 'alert',
+  },
+  {
+    key: 3,
+    message: 'Предупреждение — warning',
+    status: 'warning',
+  },
+  {
+    key: 4,
+    message: 'Успех — success',
+    status: 'success',
+  },
+  {
+    key: 5,
+    message: 'Системное — system',
+    status: 'system',
+  },
+];
+
+export const SnackBarExampleStatus: React.FC = () => {
+  return <SnackBar items={items} />;
+};
+```
+
 <SnackBarExampleStatus />
 
 ## Иконка
 
 Добавьте любую из [библиотеки иконок](/?path=/story/components-icons--playground) с помощью свойства `icon`.
+
+```tsx
+const items: Item[] = [
+  {
+    key: 1,
+    message: 'Тихо, тигры спят!',
+    status: 'alert',
+    icon: IconMoon,
+  },
+  {
+    key: 2,
+    message: 'Интернет внезапно кончился',
+    status: 'warning',
+    icon: IconDisconnection,
+  },
+];
+
+export const SnackBarExampleIcon = () => {
+  return <SnackBar items={items} />;
+};
+```
 
 <SnackBarExampleIcon />
 
@@ -54,6 +109,34 @@ import { SnackBar } from '@consta/uikit/SnackBar';
 
 Добавьте кнопки, если хотите, чтобы пользователь мог отреагировать на событие.
 Например, отменить его или куда-то перейти.
+
+```tsx
+const items: Item[] = [
+  {
+    key: 1,
+    message: 'С этим сообщением нельзя не согласиться',
+    status: 'normal',
+    actions: [
+      {
+        label: 'Согласен',
+        onClick: () => {
+          console.log('Согласен');
+        },
+      },
+      {
+        label: 'Не согласен',
+        onClick: () => {
+          console.log('Не согласен');
+        },
+      },
+    ],
+  },
+];
+
+export const SnackBarExampleButtons: React.FC = () => {
+  return <SnackBar items={items} />;
+};
+```
 
 <SnackBarExampleButtons />
 
@@ -73,6 +156,67 @@ import { SnackBar } from '@consta/uikit/SnackBar';
 | ----------------------- | ------------ | ------------------------------------------------------------------------------------- |
 | `"timer"`               |              | Визуально отображает радиальный таймер (если указана иконка, то он заместит её собой) |
 | `undefined`             | +            | Работает только логика таймера. Сам таймер скрыт.                                     |
+
+```tsx
+const mapIconByStatus: Record<SnackBarItemStatus, IconComponent | undefined> = {
+  alert: IconAlert,
+  normal: IconRing,
+  system: undefined,
+  success: undefined,
+  warning: undefined,
+};
+
+const getItemIconByStatus = (status: SnackBarItemStatus): IconComponent | undefined =>
+  mapIconByStatus[status];
+
+function reducer(
+  state: Item[],
+  action: { type: 'add' | 'remove'; item: Item; key?: number | string },
+): Item[] {
+  switch (action.type) {
+    case 'add':
+      return [...state, action.item];
+    case 'remove':
+      return state.filter((item) => item.key !== action.key);
+  }
+}
+
+export const SnackBarExampleTimer: React.FC = () => {
+  const [items, dispatchItems] = useReducer<
+    React.Reducer<Item[], { type: 'add' | 'remove'; item: Item; key?: number | string }>
+  >(reducer, []);
+  const generateHandleAdd = (status: SnackBarItemStatus, showProgress?: 'timer') => () => {
+    const key = items.length + 1;
+    const item: Item = {
+      key,
+      message: `Сейчас эта штука закроется ${key}`,
+      status,
+      icon: getItemIconByStatus(status),
+      onClose: () => dispatchItems({ type: 'remove', item, key }),
+      autoClose: 5,
+      showProgress,
+    };
+    dispatchItems({ type: 'add', item });
+  };
+
+  const handleAlertAdd = generateHandleAdd('alert', 'timer');
+  const handleNormalAdd = generateHandleAdd('normal', 'timer');
+  const handleHiddenTimerAdd = generateHandleAdd('normal');
+
+  React.useEffect(() => handleNormalAdd(), []);
+
+  return (
+    <div>
+      <div>
+        <Button iconLeft={IconAdd} label="Обычный таймер" onClick={handleNormalAdd} />
+        <Button iconLeft={IconAdd} label="Тревожный таймер" onClick={handleAlertAdd} />
+        <Button iconLeft={IconAdd} label="Скрытый таймер + иконка" onClick={handleHiddenTimerAdd} />
+      </div>
+      <SnackBar items={items} />
+    </div>
+  );
+};
+```
 
 <SnackBarExampleTimer />
 
@@ -97,14 +241,14 @@ type Item = {
     onClick: React.EventHandler<React.MouseEvent>;
   }[];
   onClose?: (item: Item) => void;
-  onAutoClose?: (item: Item) => void; // Если не передавать `onAutoClose` то по истечению таймера будет срабатывать `onClose`
+  onAutoClose?: (item: Item) => void; // Если не передавать `onAutoClose`, то по истечению таймера будет срабатывать `onClose`
 };
 ```
 
-| Свойство   | Тип      | По умолчанию | Описание             |
-| ---------- | -------- | ------------ | -------------------- |
-| className? | `string` | -            | Дополнительный класс |
-| items      | `Item[]` | -            | Массив элементов     |
+| Свойство   | Тип      | По умолчанию | Описание                 |
+| ---------- | -------- | ------------ | ------------------------ |
+| className? | `string` | -            | Дополнительный CSS-класс |
+| items      | `Item[]` | -            | Массив элементов         |
 
 ## Пример
 
