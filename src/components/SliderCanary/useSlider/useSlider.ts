@@ -1,7 +1,7 @@
 import React, { MutableRefObject, useCallback, useEffect, useRef, useState } from 'react';
 
 import { useComponentSize } from '../../../hooks/useComponentSize/useComponentSize';
-import { useFlag } from '../../../hooks/useFlag/useFlag';
+import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
 import { SliderValue, TrackPosition } from '../helper';
 
 import {
@@ -37,57 +37,40 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
   const [currentValue, setCurrentValue] = useState<number | [number, number]>(value);
   const [leftPopover, setLeftPopover] = useState<TrackPosition>(null);
   const [rightPopover, setRightPopover] = useState<TrackPosition>(null);
-  const [draggable, { on, off }] = useFlag(false);
 
   const activeButton: MutableRefObject<ActiveButton | null> = useRef(null);
 
   const sizeSlider = useComponentSize(sliderRef);
 
-  const addListeners = () => {
-    document.addEventListener('mouseup', handleTouchEnd);
-    document.addEventListener('touchend', handleTouchEnd);
-    document.addEventListener('mousemove', handleTouchMove);
-    document.addEventListener('touchmove', handleTouchMove);
-  };
-
-  const removeListeners = () => {
-    document.removeEventListener('mouseup', handleTouchEnd);
-    document.removeEventListener('touchend', handleTouchEnd);
-    document.removeEventListener('mousemove', handleTouchMove);
-    document.removeEventListener('touchmove', handleTouchMove);
-  };
+  const lastValue = useMutableRef(currentValue);
 
   useEffect(() => {
-    addListeners();
-    return () => {
-      removeListeners();
-    };
-  }, [
-    activeButton.current,
-    step,
-    currentValue,
-    value,
-    min,
-    max,
-    sliderRef.current,
-    buttonRefs,
-    disabled,
-    draggable,
-  ]);
+    if (disabled) {
+      controlListeners('remove');
+    }
+  }, [disabled]);
+
+  const controlListeners = (type: 'add' | 'remove') => {
+    const method = type === 'add' ? 'addEventListener' : 'removeEventListener';
+    document[method]('mouseup', handleRelease);
+    document[method]('touchend', handleRelease);
+    document[method]('mousemove', handleTouchMove);
+    document[method]('touchmove', handleTouchMove);
+  };
 
   useEffect(() => {
     if (Array.isArray(currentValue)) {
-      setTooltipPosition(currentValue[0], 'left');
-      setTooltipPosition(currentValue[1], 'right');
+      setTooltipPosition(currentValue[0], 0);
+      setTooltipPosition(currentValue[1], 1);
     } else {
-      setTooltipPosition(currentValue, 'left');
+      setTooltipPosition(currentValue, 0);
     }
   }, [currentValue]);
 
   useEffect(() => {
     if (JSON.stringify(value) !== JSON.stringify(currentValue)) {
       setCurrentValue(value);
-      setTooltipPosition(getActiveValue(value, activeButton.current), 'left');
+      setTooltipPosition(getActiveValue(value, activeButton.current), 0);
       activeButton.current = null;
     }
   }, [value]);
@@ -96,10 +79,10 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
     onChange?.({
       value: Array.isArray(currentValue)
         ? ([
-            getNewValue(currentValue[0], currentValue[0], step, min, max, 'left'),
-            getNewValue(currentValue[1], currentValue[1], step, min, max, 'right'),
+            getNewValue(currentValue[0], currentValue[0], step, min, max, 0),
+            getNewValue(currentValue[1], currentValue[1], step, min, max, 1),
           ] as SliderValue<RANGE>)
-        : (getNewValue(currentValue, currentValue, step, min, max, 'left') as SliderValue<RANGE>),
+        : (getNewValue(currentValue, currentValue, step, min, max, 0) as SliderValue<RANGE>),
     });
   }, [step]);
 
@@ -126,7 +109,7 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
 
   const onKeyPress = useCallback(
     (event: React.KeyboardEvent, typeButton: ActiveButton) => {
-      if (!disabled && typeof typeButton === 'string' && typeof currentValue !== 'undefined') {
+      if (!disabled && typeof typeButton === 'number' && typeof currentValue !== 'undefined') {
         let stepIncrement = !Array.isArray(step) ? step || 1 : 1;
         let validKeyCode = false;
         const changedValue = getActiveValue(currentValue, typeButton);
@@ -155,7 +138,7 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
               stepsArr = [...stepsArr, maxValue];
             }
             stepsArr.forEach((stepPoint, index) => {
-              if (typeof typeButton === 'string' && changedValue === stepPoint) {
+              if (typeof typeButton === 'number' && changedValue === stepPoint) {
                 if (stepIncrement >= 0) {
                   if (index === 0) {
                     stepIncrement = stepsArr[1] - minValue;
@@ -196,14 +179,14 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
   );
 
   const setTooltipPosition = (value: number, position: ActiveButton) => {
-    if (sliderRef.current && position) {
-      const button = buttonRefs[position === 'left' ? 0 : 1].current || sliderRef.current;
+    if (sliderRef.current && typeof position === 'number') {
+      const button = buttonRefs[position].current || sliderRef.current;
       const { x, width } = sliderRef.current.getBoundingClientRect();
       const newPosition = {
         y: button.offsetTop + button.offsetHeight + 50,
         x: x + Math.abs((value - minValue) / (maxValue - minValue)) * width,
       };
-      if (position === 'left') {
+      if (position === 0) {
         setLeftPopover(newPosition);
       } else {
         setRightPopover(newPosition);
@@ -213,7 +196,7 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
 
   const changePosition = (event: Event) => {
     const nativeEvent = event as MouseEvent | TouchEvent;
-    if (typeof activeButton.current !== 'string') {
+    if (typeof activeButton.current !== 'number') {
       return value;
     }
     const position = trackPosition(nativeEvent);
@@ -225,11 +208,12 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
     activeButton.current = button;
   };
 
-  const handleTouchMove = (event: MouseEvent | TouchEvent) => {
-    if (typeof activeButton.current === 'string' && draggable) {
+  const handleTouchMove = (event: MouseEvent | TouchEvent | Event, typeButton?: ActiveButton) => {
+    const button = typeButton || activeButton.current;
+    if (typeof button === 'number') {
       const position = changePosition(event);
-      const oldValue: number = getActiveValue(currentValue, activeButton.current);
-      const newValue: number = getActiveValue(position, activeButton.current);
+      const oldValue: number = getActiveValue(currentValue, button);
+      const newValue: number = getActiveValue(position, button);
       if (oldValue !== newValue) {
         setCurrentValue(position);
         onAfterChange?.({ e: event, value: position as SliderValue<RANGE> });
@@ -237,42 +221,51 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
     }
   };
 
-  const handleTouchEnd = (event: MouseEvent | TouchEvent) => {
-    const position = changePosition(event);
-    if (typeof position !== 'undefined') {
-      setCurrentValue(position);
-      onChange?.({ e: event, value: position as SliderValue<RANGE> });
-    }
-    off();
-    if (JSON.stringify(position) !== JSON.stringify(currentValue)) {
-      buttonRefs.forEach((button) => {
-        button.current?.blur();
-      });
-      activeButton.current = null;
-    }
-  };
-
   useEffect(() => {
     if (isRangeParams(props)) {
       props.value.forEach((val, index) => {
-        setTooltipPosition(
-          getActiveValue(val, activeButton.current),
-          index === 0 ? 'left' : 'right',
-        );
+        setTooltipPosition(getActiveValue(val, activeButton.current), index === 0 ? 0 : 1);
       });
     }
     if (isNotRangeParams(props)) {
-      setTooltipPosition(getActiveValue(value, activeButton.current), 'left');
+      setTooltipPosition(getActiveValue(value, activeButton.current), 0);
     }
     activeButton.current = null;
   }, [sizeSlider, typeof value]);
 
+  const handleRelease = useCallback(
+    (e: MouseEvent | TouchEvent | Event) => {
+      controlListeners('remove');
+      if (isRangeParams(props) && Array.isArray(lastValue.current)) {
+        const copyValues = [...lastValue.current].sort(
+          (a, b) => Number(a) - Number(b),
+        ) as SliderValue<true>;
+        props.onChange?.({ e, value: copyValues });
+      }
+      if (isNotRangeParams(props) && typeof lastValue.current === 'number') {
+        props.onChange?.({ e, value: lastValue.current });
+      }
+      activeButton.current = null;
+    },
+    [lastValue, value, onChange, handleTouchMove],
+  );
+
+  const handlePress = useCallback(
+    (typeButton: ActiveButton) => {
+      if (!disabled) {
+        activeButton.current = typeButton;
+        controlListeners('add');
+      }
+    },
+    [currentValue, value, onChange, handleTouchMove, disabled],
+  );
+
   return {
     onKeyPress,
     onFocus,
-    dragPoint: on,
+    handlePress,
     activeButton: activeButton.current,
     popoverPosition: [leftPopover, rightPopover],
-    currentValue,
+    currentValue: Array.isArray(currentValue) ? currentValue : [currentValue],
   };
 }

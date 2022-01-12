@@ -3,7 +3,7 @@ import React from 'react';
 import { PropOnChange, SliderValue, TrackPosition } from '../helper';
 import { getSteps } from '../useSliderStationing';
 
-export type ActiveButton = 'left' | 'right' | null | undefined;
+export type ActiveButton = 0 | 1 | null | undefined;
 
 export type Stationing = {
   x: number;
@@ -31,9 +31,9 @@ export type UseSliderValues = {
     e: React.FocusEvent<HTMLButtonElement> | React.MouseEvent,
     button: ActiveButton,
   ) => void;
+  handlePress: (typeButton: ActiveButton) => void;
   activeButton: ActiveButton;
-  dragPoint: () => void;
-  currentValue: number | [number, number];
+  currentValue: [number] | [number, number];
   popoverPosition: TrackPosition[];
 };
 
@@ -47,21 +47,22 @@ export const isNotRangeParams = (
   return !params.range;
 };
 
-export const trackPosition = (
-  event: Event | React.TouchEvent | React.MouseEvent,
-): TrackPosition => {
+export const trackPosition = (event: TouchEvent | MouseEvent): TrackPosition => {
   if ('clientX' in event) {
     return {
       x: event.clientX,
       y: event.clientY,
     };
   }
-  return null;
+  return {
+    x: event.changedTouches[0].clientX,
+    y: event.changedTouches[0].clientY,
+  };
 };
 
 export const getActiveValue = (value: number | [number, number], active: ActiveButton) => {
   if (Array.isArray(value)) {
-    return active === 'left' ? value[0] : value[1];
+    return value[typeof active === 'number' ? active : 0];
   }
   return value;
 };
@@ -81,7 +82,7 @@ export const detectActiveButton: (
         y <= position.y &&
         y + height >= position.y
       ) {
-        activeButton = index === 0 ? 'left' : 'right';
+        activeButton = index as ActiveButton;
         button.focus();
       }
     }
@@ -167,7 +168,7 @@ export const getNewValue = (
   let minRangeValue = min;
   if (Array.isArray(currentValue)) {
     const [left, right] = currentValue;
-    if (activeButton === 'right') {
+    if (activeButton === 1) {
       minRangeValue = left;
     } else {
       maxRangeValue = right;
@@ -180,9 +181,7 @@ export const getNewValue = (
     step,
   );
   if (Array.isArray(currentValue)) {
-    return activeButton === 'right'
-      ? [currentValue[0], analyzedValue]
-      : [analyzedValue, currentValue[1]];
+    return activeButton === 1 ? [currentValue[0], analyzedValue] : [analyzedValue, currentValue[1]];
   }
   return analyzedValue;
 };

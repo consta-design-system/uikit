@@ -12,13 +12,12 @@ import { FieldLabel } from '../FieldLabel/FieldLabel';
 import { SliderInput } from './SliderInput/SliderInput';
 import { SliderLine } from './SliderLine/SliderLine';
 import { SliderPoint } from './SliderPoint/SliderPoint';
-import { getActiveValue } from './useSlider/helper';
+import { ActiveButton } from './useSlider/helper';
 import { useSlider } from './useSlider/useSlider';
 import {
   defaultPropSize,
   defaultTooltipFormatter,
   isNotRangeParams,
-  isRangeParams,
   PropSize,
   SliderComponent,
   SliderProps,
@@ -72,23 +71,28 @@ function SliderRender<RANGE extends boolean>(
 
   const iconSize = getByMap(sizeMap, size);
 
-  const { onKeyPress, onFocus, dragPoint, popoverPosition, activeButton, currentValue } = useSlider(
-    {
-      disabled,
-      range,
-      value,
-      min,
-      max,
-      step,
-      onChange,
-      onAfterChange,
-      sliderRef,
-      buttonRefs: [leftButtonRef, rightButtonRef],
-    },
-  );
+  const {
+    onKeyPress,
+    onFocus,
+    handlePress,
+    popoverPosition,
+    activeButton,
+    currentValue,
+  } = useSlider({
+    disabled,
+    range,
+    value,
+    min,
+    max,
+    step,
+    onChange,
+    onAfterChange,
+    sliderRef,
+    buttonRefs: [leftButtonRef, rightButtonRef],
+  });
 
   const { lineSizes, buttonPositions } = useSliderStationing(
-    currentValue,
+    currentValue.length === 1 ? currentValue[0] : currentValue,
     min,
     max,
     view,
@@ -132,44 +136,34 @@ function SliderRender<RANGE extends boolean>(
         )}
         <div className={cnSlider('Control')} ref={sliderRef}>
           <SliderLine
-            hovered={isHovered}
+            hovered={isHovered || typeof activeButton === 'number'}
             onHover={changeHovered}
             lines={lineSizes}
             disabled={disabled}
             view={view}
           />
-          <SliderPoint
-            hovered={isHovered}
-            buttonRef={leftButtonRef}
-            popoverPosition={popoverPosition[0]}
-            onKeyPress={onKeyPress}
-            onFocus={onFocus}
-            disabled={disabled}
-            onMouseDown={dragPoint}
-            position={buttonPositions[0]}
-            focused={activeButton === 'left'}
-            buttonLabel="left"
-            withTooltip={withTooltip}
-            onHover={changeHovered}
-            value={tooltipFormatter(getActiveValue(currentValue, 'left'))}
-          />
-          {isRangeParams(props) && (
+          {currentValue.map((val, index) => (
             <SliderPoint
-              hovered={isHovered}
-              buttonRef={rightButtonRef}
-              onFocus={onFocus}
-              popoverPosition={popoverPosition[1]}
+              hovered={isHovered || typeof activeButton === 'number'}
+              buttonRef={leftButtonRef}
+              popoverPosition={popoverPosition[index]}
               onKeyPress={onKeyPress}
+              onFocus={onFocus}
+              handlePress={handlePress}
               disabled={disabled}
-              onMouseDown={dragPoint}
-              focused={activeButton === 'right'}
+              position={buttonPositions[index]}
+              focused={activeButton === index}
+              buttonLabel={index as ActiveButton}
               withTooltip={withTooltip}
-              position={buttonPositions[1]}
-              buttonLabel="right"
               onHover={changeHovered}
-              value={tooltipFormatter(getActiveValue(currentValue, 'right'))}
+              tooltipFormatter={tooltipFormatter}
+              value={val}
+              role="slider"
+              aria-valuemin={min}
+              aria-valuemax={max}
+              aria-valuenow={val}
             />
-          )}
+          ))}
         </div>
         {IconRight && (
           <div className={cnSlider('Side', { position: 'right' })}>
