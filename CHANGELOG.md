@@ -1,5 +1,22 @@
 # Changelog
 
+## v3.12.4 (12/01/2022)
+- адаптировали `Slider` для мобильных устройств
+- доработали документацию
+
+---
+
+- [docs(Badge): docs review (#1909)](https://github.com/gazprom-neft/consta-uikit/commit/814a1ecec3feb766c20dba5a6bffbda987ea41fa) - [@arhayka](https://github.com/arhayka)
+- [docs(Popover): docs review (#1912)](https://github.com/gazprom-neft/consta-uikit/commit/8d9dca5b476aa964ffa43f3fc9c7ebfddb930a78) - [@arhayka](https://github.com/arhayka)
+- [docs(Loader): docs review (#1913)](https://github.com/gazprom-neft/consta-uikit/commit/202c8e5175aee3719ab2b27ea081aee4191cec0c) - [@arhayka](https://github.com/arhayka)
+- [docs(ProgressSpin): docs review (#1915)](https://github.com/gazprom-neft/consta-uikit/commit/a65ea44190987be5ea0a9eed8e79261d9f55a52a) - [@arhayka](https://github.com/arhayka)
+- [docs(Responses): docs review (#1916)](https://github.com/gazprom-neft/consta-uikit/commit/e3bfbebad05f1f72b2dad72a814daa3dfeafaf9f) - [@arhayka](https://github.com/arhayka)
+- [docs(SnackBar): docs review (#1917)](https://github.com/gazprom-neft/consta-uikit/commit/e681f982c4e11acc85955706533b14ab0f33016f) - [@arhayka](https://github.com/arhayka)
+- [docs(Timer): docs reivew (#1918)](https://github.com/gazprom-neft/consta-uikit/commit/618dea0861e8031ecb30802ad43b1183aa665133) - [@arhayka](https://github.com/arhayka)
+- [fix(Slider): fix bug with non working mobile mode (#1900)](https://github.com/gazprom-neft/consta-uikit/commit/01bf0d7e470e208762fb1d2874b2cfe066231a24) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
 ## v3.12.3 (29/12/2021)
 - [fix(MixCard): fix  mistakes in stylesheet file (#1889)](https://github.com/gazprom-neft/consta-uikit/commit/070b7b2589b11e520bc5ca079fe385f31a411ea7) - [@N1MBER](https://github.com/N1MBER)
 - [docs(review): add images (#1894)](https://github.com/gazprom-neft/consta-uikit/commit/7c34f9aefd50a1904b602f3da42cdb0ebc1c199c) - [@arhayka](https://github.com/arhayka)
@@ -454,18 +471,3 @@ _Обращаем внимание_: *версии компонентов обр
 - [refactor(Calendar): rename api props and internal variables (#1198)](https://github.com/gazprom-neft/consta-uikit/commit/a5c1bf596037d398a989c982c3a4d54a4d007dd1) - [@gizeasy](https://github.com/gizeasy)
 - [fix(ThemePreview): fixed state (#1187)](https://github.com/gazprom-neft/consta-uikit/commit/a9c8aaaf3057705f1c7cb9d9995bdec52c1724c2) - [@gizeasy](https://github.com/gizeasy)
 - [docs(common): add docs about validation (#1080)](https://github.com/gazprom-neft/consta-uikit/commit/6096886eb43437048860607b44edf72fce60e62a) - [@arhayka](https://github.com/arhayka)
-
---------------------
-
-## v1.11.14 (19/05/2021)
-- [docs(useForkRef): add docs (#1181)](https://github.com/gazprom-neft/consta-uikit/commit/c9f6337d2b731ab8d9c25204e35dd5c805026b1f) - [@gizeasy](https://github.com/gizeasy)
-- [docs(useDebounce): add docs (#1171)](https://github.com/gazprom-neft/consta-uikit/commit/6afe35aebb921a8b812627ca14d47af2c10f4c3a) - [@gizeasy](https://github.com/gizeasy)
-- [docs(useClickOutside): add docs (#1170)](https://github.com/gazprom-neft/consta-uikit/commit/a0c774dbc2cc5121b2f0ac04b4fd5c292cc273ee) - [@gizeasy](https://github.com/gizeasy)
-- [docs(useThemeVars): edit docs (#1169)](https://github.com/gazprom-neft/consta-uikit/commit/f8a457987e81e99116c3c1b73c6453df60e7dcab) - [@gizeasy](https://github.com/gizeasy)
-- [docs(useChoiceGroup): add docs (#1168)](https://github.com/gazprom-neft/consta-uikit/commit/4e0032baf118e008e9c921799fdd2fcc5f53cb5a) - [@gizeasy](https://github.com/gizeasy)
-- [fix(BasicSelect/Combobox/MultiCombobox): fix unique key error (#1172)](https://github.com/gazprom-neft/consta-uikit/commit/0440c1a0eeb6a6ab42096a34bbd584d3d6c18c07) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
-- [docs(Theme): add color value preview (#1173)](https://github.com/gazprom-neft/consta-uikit/commit/cdcdf30d5cca84463e2d9e182044e17a16b7f2c8) - [@kolebayev](https://github.com/kolebayev)
-- [feat(Calendar): added component and tests (#1154)](https://github.com/gazprom-neft/consta-uikit/commit/93751cad6031b201c5f3083d1bfdfbb7e87975fa) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Informer): add mod size (#1160)](https://github.com/gazprom-neft/consta-uikit/commit/6d95f875a05cda973f686219b7fcff51dc4e92fa) - [@gizeasy](https://github.com/gizeasy)
-- [chore(storybook): added .stories.mdx for build (#1162)](https://github.com/gazprom-neft/consta-uikit/commit/9299f27327cb132a8de2d71fc3d6549f1d011d40) - [@gizeasy](https://github.com/gizeasy)
-- [chore(github): Update issue templates (#1141)](https://github.com/gazprom-neft/consta-uikit/commit/e8767f4d0ad9a8eb150ab32d58a95f52ff91a185) - [@gizeasy](https://github.com/gizeasy)
