@@ -118,3 +118,19 @@ export const ExampleResponsesActions = () => {
     </StoryBookExample>
   );
 };
+
+export const ExampleResponsesSizeM = () => {
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <Responses404 size="m" />
+    </StoryBookExample>
+  );
+};
+
+export const ExampleResponsesSizeL = () => {
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <Responses404 size="l" />
+    </StoryBookExample>
+  );
+};

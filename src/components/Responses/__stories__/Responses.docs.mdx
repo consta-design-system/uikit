@@ -11,6 +11,8 @@ import {
   ExampleResponsesSuccess,
   ExampleResponsesText,
   ExampleResponsesActions,
+  ExampleResponsesSizeM,
+  ExampleResponsesSizeL,
 } from './examples/ResponsesExample/ResponsesExample';
 
 <!--info
@@ -230,7 +232,19 @@ import { Responses404 } from '@consta/uikit/Responses404';
 
 ## Размер
 
-За размер сообщения отвечате свойство `size`. Варианты: `'m'`, `'l'`. По умлочанию `'l'`.
+За размер сообщения отвечате свойство `size`. Варианты: `'m'`, `'l'`. По умолчанию `'l'`.
+
+```tsx
+<Responses404 size="m" />
+```
+
+<ExampleResponsesSizeM />
+
+```tsx
+<Responses404 size="l" />
+```
+
+<ExampleResponsesSizeL />
 
 ## Импорт
 
@@ -253,11 +267,11 @@ import { ResponsesSuccess } from '@consta/uikit/ResponsesSuccess';
 
 | Свойство                 | Тип               | По умолчанию | Описание                                       |
 | ------------------------ | ----------------- | ------------ | ---------------------------------------------- |
-| [`title?`](#текст)       | `React.ReactNode` | —            | Заголовок сообщения                            |
-| [`description?`](#текст) | `React.ReactNode` | —            | Описание сообщения                             |
+| [`title?`](#текст)       | `React.ReactNode` | -            | Заголовок сообщения                            |
+| [`description?`](#текст) | `React.ReactNode` | -            | Описание сообщения                             |
 | [`size?`](#размер)       | `'m'`, `'l'`      | `'l'`        | Размер всех элементов                          |
-| [`actions?`](#кнопки)    | `React.ReactNode` | —            | Кнопки под сообщением                          |
-| `className?`             | `string`          | —            | Дополнительные CSS-классы для этого компонента |
+| [`actions?`](#кнопки)    | `React.ReactNode` | -            | Кнопки под сообщением                          |
+| `className?`             | `string`          | -            | Дополнительные CSS-классы для этого компонента |
 
 <!-- props:end -->
 
