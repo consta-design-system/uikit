@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
-import { boolean, number, select, text } from '@storybook/addon-knobs';
+import { array, boolean, number, select, text } from '@storybook/addon-knobs';
 
 import { IconPhoto } from '../../../icons/IconPhoto/IconPhoto';
 import { createMetadata } from '../../../utils/storybook';
@@ -32,6 +32,10 @@ const defaultKnobs = () => ({
   disabled: boolean('disabled', false),
   required: boolean('required', false),
   step: number('step', 1),
+  withStepArray: boolean('withStepArray', false),
+  stepArray: array('stepArray', ['10', '50', '100']),
+  min: number('min', 0),
+  max: number('max', 150),
   type: select('type', ['text', 'number', 'textarea'], 'text'),
   withClearButton: boolean('withClearButton', false),
   caption: text('caption', 'Подпись'),
@@ -63,6 +67,10 @@ export function Playground() {
     maxLength,
     minRows,
     maxRows,
+    stepArray,
+    withStepArray,
+    min,
+    max,
     placeholder,
     leftSideType,
     leftSideText,
@@ -84,6 +92,8 @@ export function Playground() {
     false: undefined,
   };
 
+  const numberStepArray = stepArray.map((val) => Number(val));
+
   const leftSide = leftSideSelect[leftSideType];
   const rightSide = rightSideSelect[rightSideType];
 
@@ -103,7 +113,9 @@ export function Playground() {
           view={view}
           type={type}
           required={required}
-          step={step}
+          step={withStepArray ? numberStepArray : step}
+          min={min}
+          max={max}
           withClearButton={withClearButton}
           maxLength={maxLength}
           minRows={minRows}

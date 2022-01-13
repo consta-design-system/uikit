@@ -14,6 +14,7 @@ import { FieldCaption } from '../FieldCaption/FieldCaption';
 import { FieldLabel } from '../FieldLabel/FieldLabel';
 
 import {
+  getValueByStepArray,
   sizeMap,
   TextFieldComponent,
   textFieldPropFormDefault,
@@ -126,6 +127,19 @@ export function TextFieldRender<TYPE extends string>(
     }
   }, []);
 
+  const onKeyPress = (e: React.KeyboardEvent) => {
+    if (Array.isArray(step)) {
+      const newValue = getValueByStepArray({ event: e, value, steps: step, min, max });
+      !disabled &&
+        typeof newValue === 'number' &&
+        Array.isArray(step) &&
+        onChange?.({
+          e,
+          value: newValue?.toString(),
+        });
+    }
+  };
+
   const textareaProps = {
     rows,
     cols,
@@ -138,7 +152,8 @@ export function TextFieldRender<TYPE extends string>(
     type,
     max,
     min,
-    step,
+    step: !Array.isArray(step) ? step : 0,
+    onKeyDown: Array.isArray(step) && type === 'number' ? onKeyPress : undefined,
     ref: useForkRef([inputRef, inputRefProp]) as React.RefCallback<HTMLInputElement>,
   };
 
@@ -153,23 +168,27 @@ export function TextFieldRender<TYPE extends string>(
     e: React.MouseEvent<HTMLButtonElement>,
     isIncrement?: boolean,
   ) => void = (e, isIncrement = true) => {
-    let currentValue = value || 0;
-    currentValue = isIncrement
-      ? Number(currentValue) + Number(step)
-      : Number(currentValue) - Number(step);
+    let currentValue: number = typeof value === 'string' ? Number(value) : 0;
+    if (!Array.isArray(step)) {
+      currentValue = isIncrement
+        ? Number(currentValue) + Number(step)
+        : Number(currentValue) - Number(step);
+    }
     onChange?.({
       e,
-      value: currentValue.toFixed(
-        Number(
-          /* Необходимо для того, чтобы избежать ситуации, когда по нажатию
+      value: Array.isArray(step)
+        ? (getValueByStepArray({ min, max, value, isIncrement, steps: step }) || 0).toString()
+        : currentValue.toFixed(
+            Number(
+              /* Необходимо для того, чтобы избежать ситуации, когда по нажатию
           на кнопку прибавляется число с погрешностью.
           Здесь мы берем разрядность дробной части шага и ограничиваем
           результирующее число этой разрядностью */
-          Number(step)
-            .toString()
-            .split('.')[1]?.length,
-        ) || 0,
-      ),
+              Number(step)
+                .toString()
+                .split('.')[1]?.length,
+            ) || 0,
+          ),
     });
   };
 

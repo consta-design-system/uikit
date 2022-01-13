@@ -9,7 +9,10 @@ type Props = Omit<TextFieldProps<'number'>, 'value' | 'onChange' | 'min' | 'max'
   step?: number | number[];
   min?: number;
   max?: number;
-  onChange?: (props: { e?: React.ChangeEvent | React.MouseEvent; value: number }) => void;
+  onChange?: (props: {
+    e?: React.ChangeEvent | React.MouseEvent | React.KeyboardEvent;
+    value: number;
+  }) => void;
 };
 
 export const SliderInput = (props: Props) => {
@@ -38,7 +41,7 @@ export const SliderInput = (props: Props) => {
       type="number"
       min={min}
       max={max}
-      step={Array.isArray(step) ? 1 : step}
+      step={step}
       onChange={handleChange}
       value={currentValue}
       {...otherProps}
