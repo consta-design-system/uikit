@@ -66,4 +66,40 @@ export const additionalData: Data = [
       },
     ],
   },
+  {
+    title: 'Отдельные компоненты',
+    items: [
+      {
+        url: 'https://stats-consta.vercel.app/?path=/docs/components-stats--interactive',
+        name: 'Stats',
+        description:
+          'Компонент для отображения чисел, с заголовком, единицами измерения, иконками и другими настройками.',
+      },
+      {
+        url: 'https://analytic-ui.vercel.app/?path=/docs/feedbackform--playground',
+        name: 'FeedbackForm',
+        description: 'Виджет обратной связи. Можно ставить оценки и писать отзывы.',
+      },
+      {
+        url: 'https://gpn-responses.vercel.app/?path=/docs/components-responses--playground',
+        name: 'GPN-Responses',
+        description: 'Заглушки с сообщениями об ошибках и важных статусах в стиле «Газпром нефти».',
+      },
+    ],
+  },
+  {
+    title: 'Адаптеры',
+    items: [
+      {
+        url: 'https://consta-table.vercel.app/?path=/story/common-start--page',
+        name: 'rcTableAdapter',
+        description: 'Адаптер для rc-table. Таблица со множеством настроек',
+      },
+      {
+        url: 'https://consta-tree.vercel.app/',
+        name: 'rcTreeAdapter',
+        description: 'Адаптер для rc-tree. Дерево, подходит для создания иерархических структур.',
+      },
+    ],
+  },
 ];
