@@ -201,7 +201,7 @@ export const DatePickerFieldTypeDate = React.forwardRef<
     <TextField
       {...otherProps}
       type="text"
-      ref={ref}
+      inputContainerRef={ref}
       inputRef={useForkRef([inputRef, inputRefProp])}
       value={stringValue}
       placeholder={placeholder}
