@@ -64,7 +64,7 @@ export type DatePickerProps<
     onChange?: DatePickerPropOnChange<TYPE>;
     minDate?: Date;
     maxDate?: Date;
-    renderAdditionalControls?: React.ReactNode | React.ReactNode[];
+    renderAdditionalControls?: (currentVisibleDate?: Date) => React.ReactNode | React.ReactNode[];
     events?: Date[];
     dateTimeView?: DatePickerPropDateTimeView;
     locale?: Locale;
@@ -106,6 +106,8 @@ export type DatePickerProps<
     label?: string;
     caption?: string;
     labelPosition?: 'top' | 'left';
+    onChangeCurrentVisibleDate?: (date: Date) => void;
+    currentVisibleDate?: Date;
   },
   HTMLDivElement
 >;

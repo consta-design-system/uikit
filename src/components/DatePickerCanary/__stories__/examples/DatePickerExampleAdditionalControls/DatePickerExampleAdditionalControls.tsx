@@ -20,12 +20,12 @@ export const DatePickerExampleAdditionalControls = () => {
       <DatePicker
         value={value}
         onChange={({ value }) => setValue(value)}
-        renderAdditionalControls={control()}
+        renderAdditionalControls={control}
       />
       <DatePicker
         value={value}
         onChange={({ value }) => setValue(value)}
-        renderAdditionalControls={additionalControls()}
+        renderAdditionalControls={additionalControls}
       />
     </StoryBookExample>
   );

@@ -33,6 +33,8 @@ export const DatePickerTypeDateRange: DatePickerTypeDateRangeComponent = forward
       rightSide,
       endFieldInputRef: endFieldInputRefProp,
       startFieldInputRef: startFieldInputRefProp,
+      currentVisibleDate: visibleDate,
+      onChangeCurrentVisibleDate: onChangeDate,
       ...fieldProps
     } = props;
 
@@ -191,8 +193,11 @@ export const DatePickerTypeDateRange: DatePickerTypeDateRangeComponent = forward
           ref={calendarRef}
           anchorRef={startFieldRef}
           isOpen={calendarVisible}
-          onChangeCurrentVisibleDate={(date) => setCurrentVisibleDate(date)}
-          currentVisibleDate={currentVisibleDate}
+          onChangeCurrentVisibleDate={(date) => {
+            setCurrentVisibleDate(date);
+            onChangeDate?.(date);
+          }}
+          currentVisibleDate={visibleDate || currentVisibleDate}
         />
       </>
     );

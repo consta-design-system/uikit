@@ -53,6 +53,7 @@ export type DateTimeProps<TYPE extends DateTimePropType = 'date'> = PropsWithHTM
     multiplicityMinutes?: number;
     multiplicityHours?: number;
     onMove?: (type: MoveType) => void;
+    renderAdditionalControls?: (currentVisibleDate?: Date) => React.ReactNode | React.ReactNode[];
   },
   HTMLDivElement
 >;
