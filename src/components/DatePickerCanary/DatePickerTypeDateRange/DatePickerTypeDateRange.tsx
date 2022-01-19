@@ -62,7 +62,9 @@ export const DatePickerTypeDateRange: DatePickerTypeDateRangeComponent = forward
 
     const [calendarVisible, setCalendarVisible] = useState<boolean>(false);
 
-    const [currentVisibleDate, setCurrentVisibleDate] = useState<Date | undefined>();
+    const [currentVisibleDate, setCurrentVisibleDate] = useState<Date | undefined>(
+      currentVisibleDateProp,
+    );
 
     const commonProps: Omit<DatePickerDropdownProps, 'anchorRef'> = {
       value: props.value || undefined,

@@ -25,7 +25,9 @@ export const DatePickerTypeDate: DatePickerTypeDateComponent = forwardRef((props
 
   const [calendarVisible, setCalendarVisible] = useState<boolean>(false);
 
-  const [currentVisibleDate, setCurrentVisibleDate] = useState<Date | undefined>();
+  const [currentVisibleDate, setCurrentVisibleDate] = useState<Date | undefined>(
+    currentVisibleDateProp,
+  );
 
   const [calendarVisibleDate, setCalendarVisibleDate] = useState<Date | undefined>();
 
