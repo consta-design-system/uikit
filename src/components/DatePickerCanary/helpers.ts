@@ -3,7 +3,7 @@ import { Locale } from 'date-fns';
 import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
 import { DateRange } from '../../utils/types/Date';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
-import { DateTimePropView } from '../DateTimeCanary/helpers';
+import { DateTimeAdditionalControlRenderProp, DateTimePropView } from '../DateTimeCanary/helpers';
 import {
   TextFieldPropForm,
   TextFieldPropSize,
@@ -64,7 +64,7 @@ export type DatePickerProps<
     onChange?: DatePickerPropOnChange<TYPE>;
     minDate?: Date;
     maxDate?: Date;
-    renderAdditionalControls?: (currentVisibleDate?: Date) => React.ReactNode | React.ReactNode[];
+    renderAdditionalControls?: DateTimeAdditionalControlRenderProp;
     events?: Date[];
     dateTimeView?: DatePickerPropDateTimeView;
     locale?: Locale;

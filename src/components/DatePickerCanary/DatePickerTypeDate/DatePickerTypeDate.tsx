@@ -15,8 +15,8 @@ export const DatePickerTypeDate: DatePickerTypeDateComponent = forwardRef((props
     locale,
     dropdownForm,
     onFocus,
-    currentVisibleDate: visibleDate,
-    onChangeCurrentVisibleDate: onChangeDate,
+    currentVisibleDate: currentVisibleDateProp,
+    onChangeCurrentVisibleDate: onChangeCurrentVisibleDateProp,
     ...otherProps
   } = props;
 
@@ -39,6 +39,14 @@ export const DatePickerTypeDate: DatePickerTypeDateComponent = forwardRef((props
       setRef(ref, fieldRef.current);
     }
   }, [ref, fieldRef]);
+
+  useEffect(() => setCurrentVisibleDate(currentVisibleDateProp), [
+    currentVisibleDateProp?.getTime(),
+  ]);
+
+  useEffect(() => currentVisibleDate && onChangeCurrentVisibleDateProp?.(currentVisibleDate), [
+    currentVisibleDate?.getTime(),
+  ]);
 
   useEffect(() => {
     if (props.value && props.dateTimeView === 'classic' && calendarVisibleDate) {
@@ -84,17 +92,14 @@ export const DatePickerTypeDate: DatePickerTypeDateComponent = forwardRef((props
         locale={locale}
         minDate={props.minDate}
         maxDate={props.maxDate}
-        currentVisibleDate={visibleDate || currentVisibleDate}
+        currentVisibleDate={currentVisibleDate}
         form={dropdownForm}
         onChange={(params) => {
           props.onChange?.(params);
           handleClose();
         }}
         renderAdditionalControls={props.renderAdditionalControls}
-        onChangeCurrentVisibleDate={(date) => {
-          setCalendarVisibleDate(date);
-          onChangeDate?.(date);
-        }}
+        onChangeCurrentVisibleDate={setCalendarVisibleDate}
       />
     </>
   );
