@@ -1,5 +1,27 @@
 # Changelog
 
+## v3.13.0 (19/01/2022)
+Выкатили обновления, вот самое важное:
+
+- сделали новый `Breadcrumbs` (пока в статусе Canary),
+- исправили ошибку в `DatePicker`, теперь с якорем, к которому цепляется Popover, всё в порядке,
+- и немного улучшили документацию.
+
+Чуть не забыли: наши репозитории переехали в новый спейс, теперь всё [тут](https://github.com/consta-design-system)
+
+Не потеряйте нас :)
+
+---
+
+- [docs(DepricatedCoponents): removed from documentation (#1965)](https://github.com/consta-design-system/uikit/commit/f2ee18cd5fe8dce562eb253077c8ca7db51e9bb1) - [@gizeasy](https://github.com/gizeasy)
+- [feat(BreadcrumbsCanary): add component (#1931)](https://github.com/consta-design-system/uikit/commit/c255909bfe43342e1925e31c5c5f97460d286fcb) - [@gizeasy](https://github.com/gizeasy)
+- [fix(DatePicker): fix bug with incorrect popover position (#1932)](https://github.com/consta-design-system/uikit/commit/c895916796b6ad1231328f0d76fce0e8874d6ede) - [@N1MBER](https://github.com/N1MBER)
+- [refactor(mixCard): added usage of cnMixSpace for padding (#1927)](https://github.com/consta-design-system/uikit/commit/9fb738dab23ff98778d2ef7203ee3b7ef1995b5a) - [@N1MBER](https://github.com/N1MBER)
+- [docs(Sidebar): docs review (#1919)](https://github.com/consta-design-system/uikit/commit/1fd9e328095c24cd752454caee73aee472dc6bbe) - [@arhayka](https://github.com/arhayka)
+- [docs(ThemeToggler): docs review (#1914)](https://github.com/consta-design-system/uikit/commit/93a4533176d4f3aaa2f8c3d3c6a5a1424bd3b05c) - [@arhayka](https://github.com/arhayka)
+
+--------------------
+
 ## v3.12.4 (12/01/2022)
 - адаптировали `Slider` для мобильных устройств
 - доработали документацию
@@ -457,17 +479,3 @@ _Обращаем внимание_: *версии компонентов обр
 ## v1.12.1 (31/05/2021)
 - [chore(deps): bump dns-packet from 1.3.1 to 1.3.4 (#1231)](https://github.com/gazprom-neft/consta-uikit/commit/2b218dd47c02bd704631a9e9cfd4421494e0fe00) - [@dependabot[bot]](https://github.com/dependabot[bot])
 - [fix(TabsTab): fix styles (#1236)](https://github.com/gazprom-neft/consta-uikit/commit/7d59677f50f413eb362d980e39dbe0412da642ce) - [@dmitriykorsakovnedra](https://github.com/dmitriykorsakovnedra)
-
---------------------
-
-## v1.12.0 (26/05/2021)
-- [feat(Calendar): added useCurrentVisibleDate (#1223)](https://github.com/gazprom-neft/consta-uikit/commit/6285a52d31f3b82e1016296cfd50cfadc5da5e24) - [@gizeasy](https://github.com/gizeasy)
-- [feat(UserSelect): create UserSelect component and story/docs (#1127)](https://github.com/gazprom-neft/consta-uikit/commit/38b606bd6a57895741af7c7fac5d8db469eea333) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
-- [fix(Table): reexport filter components and TableFilterContainer(#1208)](https://github.com/gazprom-neft/consta-uikit/commit/30cb3eb49badde39f1a57bcd5ecbd99ddbcfcb5e) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Theme): added shadow variables (#1204)](https://github.com/gazprom-neft/consta-uikit/commit/0434cd1f5c76cfb081b441a6e02a680745f5d669) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
-- [feat(ThemeToggler): added tests (#1202)](https://github.com/gazprom-neft/consta-uikit/commit/1e1f0f447b4572a620932d0c008a859c6e7d6d68) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
-- [feat(Combobox): added inputRef prop (#1193)](https://github.com/gazprom-neft/consta-uikit/commit/e8a67bb704c2501833b112cfc19742e9ff301046) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
-- [chore(postCss): remove postcss-calc (#1200)](https://github.com/gazprom-neft/consta-uikit/commit/191e3e8dc8c5760163bbd21f09eaaab00c24fe2a) - [@gizeasy](https://github.com/gizeasy)
-- [refactor(Calendar): rename api props and internal variables (#1198)](https://github.com/gazprom-neft/consta-uikit/commit/a5c1bf596037d398a989c982c3a4d54a4d007dd1) - [@gizeasy](https://github.com/gizeasy)
-- [fix(ThemePreview): fixed state (#1187)](https://github.com/gazprom-neft/consta-uikit/commit/a9c8aaaf3057705f1c7cb9d9995bdec52c1724c2) - [@gizeasy](https://github.com/gizeasy)
-- [docs(common): add docs about validation (#1080)](https://github.com/gazprom-neft/consta-uikit/commit/6096886eb43437048860607b44edf72fce60e62a) - [@arhayka](https://github.com/arhayka)
