@@ -14,6 +14,8 @@ import { FieldCaption } from '../FieldCaption/FieldCaption';
 import { FieldLabel } from '../FieldLabel/FieldLabel';
 
 import {
+  getChangedValueByStep,
+  getIncrementFlag,
   getValueByStepArray,
   sizeMap,
   TextFieldComponent,
@@ -127,9 +129,16 @@ export function TextFieldRender<TYPE extends string>(
     }
   }, []);
 
-  const onKeyPress = (e: React.KeyboardEvent) => {
-    if (Array.isArray(step)) {
-      const newValue = getValueByStepArray({ event: e, value, steps: step, min, max });
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    const flag = getIncrementFlag(e);
+    if (Array.isArray(step) && typeof flag === 'boolean') {
+      const newValue = getValueByStepArray({
+        isIncrement: flag,
+        value,
+        steps: step,
+        min,
+        max,
+      });
       !disabled &&
         typeof newValue === 'number' &&
         Array.isArray(step) &&
@@ -153,7 +162,7 @@ export function TextFieldRender<TYPE extends string>(
     max,
     min,
     step: !Array.isArray(step) ? step : 0,
-    onKeyDown: Array.isArray(step) && type === 'number' ? onKeyPress : undefined,
+    onKeyDown,
     ref: useForkRef([inputRef, inputRefProp]) as React.RefCallback<HTMLInputElement>,
   };
 
@@ -168,27 +177,20 @@ export function TextFieldRender<TYPE extends string>(
     e: React.MouseEvent<HTMLButtonElement>,
     isIncrement?: boolean,
   ) => void = (e, isIncrement = true) => {
-    let currentValue: number = typeof value === 'string' ? Number(value) : 0;
-    if (!Array.isArray(step)) {
-      currentValue = isIncrement
-        ? Number(currentValue) + Number(step)
-        : Number(currentValue) - Number(step);
-    }
     onChange?.({
       e,
       value: Array.isArray(step)
-        ? (getValueByStepArray({ min, max, value, isIncrement, steps: step }) || 0).toString()
-        : currentValue.toFixed(
-            Number(
-              /* Необходимо для того, чтобы избежать ситуации, когда по нажатию
-          на кнопку прибавляется число с погрешностью.
-          Здесь мы берем разрядность дробной части шага и ограничиваем
-          результирующее число этой разрядностью */
-              Number(step)
-                .toString()
-                .split('.')[1]?.length,
-            ) || 0,
-          ),
+        ? (
+            getValueByStepArray({
+              min,
+              max,
+              value,
+              isIncrement,
+              steps: step,
+              changeType: 'button',
+            }) || 0
+          ).toString()
+        : getChangedValueByStep({ value, step, isIncrement }),
     });
   };
 

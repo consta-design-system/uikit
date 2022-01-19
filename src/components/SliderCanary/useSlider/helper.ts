@@ -107,11 +107,11 @@ export const getValidValue = (
       );
     }
     let resultValue = value;
-    let stepsArr = step;
+    const stepsArr = step.sort((a, b) => a - b);
     if (step[0] !== min) {
-      stepsArr = [min, ...stepsArr];
+      stepsArr.unshift(min);
     } else if (step[step.length - 1] !== max) {
-      stepsArr = [...stepsArr, max];
+      stepsArr.push(max);
     }
     stepsArr.forEach((stepPoint, index) => {
       let minValue = min;

@@ -130,12 +130,12 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
         }
         if (validKeyCode) {
           if (Array.isArray(step)) {
-            let stepsArr = [...step];
+            const stepsArr = [...step].sort((a, b) => a - b);
             if (step[0] !== minValue) {
-              stepsArr = [minValue, ...stepsArr];
+              stepsArr.unshift(minValue);
             }
             if (step[step.length - 1] !== maxValue) {
-              stepsArr = [...stepsArr, maxValue];
+              stepsArr.push(maxValue);
             }
             stepsArr.forEach((stepPoint, index) => {
               if (typeof typeButton === 'number' && changedValue === stepPoint) {

@@ -136,62 +136,78 @@ export const sizeMap: Record<TextFieldPropSize, IconPropSize> = {
 };
 
 export const getValueByStepArray = (params: {
-  event?: React.KeyboardEvent;
   value?: string | null;
   steps: number[];
   min?: number | string;
   max?: number | string;
   isIncrement?: boolean;
+  changeType?: 'keyboard' | 'button';
 }): number | null => {
-  const { event, value, steps, min, max, isIncrement } = params;
+  const { value, steps, min, max, isIncrement, changeType } = params;
   const currentValue = Number(value || min);
   const minValue = Number(min);
   const maxValue = Number(max);
-  let increment = !!isIncrement;
-  let validKeyCode = false;
-  if (event?.key === 'ArrowUp') {
-    validKeyCode = true;
-    increment = true;
-  } else if (event?.key === 'ArrowDown') {
-    increment = false;
-    validKeyCode = true;
+  if (typeof value !== 'string') {
+    return typeof min !== 'undefined' ? minValue : 0;
   }
-  if (validKeyCode || typeof isIncrement === 'boolean') {
-    if (typeof value !== 'string') {
-      return typeof min !== 'undefined' ? minValue : 0;
-    }
-    const stepsArr = [...steps];
-    // Для того чтобы правильно рассчитывалось при нажатии
-    // кнопок стрелочек на самом инпуте
-    const miniStep = typeof isIncrement === 'boolean' ? 0 : 1;
-    if (typeof min !== 'undefined' && steps[0] !== minValue) {
-      stepsArr.unshift(minValue);
-    }
-    if (typeof max !== 'undefined' && steps[steps.length - 1] !== maxValue) {
-      stepsArr.push(maxValue);
-    }
-    if (currentValue < stepsArr[0]) {
-      return stepsArr[0] + miniStep * (increment ? -1 : 1);
-    }
-    if (currentValue > stepsArr[stepsArr.length - 1]) {
-      return stepsArr[stepsArr.length - 1] + miniStep * (increment ? -1 : 1);
-    }
+  const stepsArr = [...steps].sort((a, b) => a - b);
+  // Для того чтобы правильно рассчитывалось при нажатии
+  // кнопок стрелочек на самом инпуте
+  const miniStep = changeType === 'button' ? 0 : 1;
+  if (typeof min !== 'undefined' && steps[0] !== minValue) {
+    stepsArr.unshift(minValue);
+  }
+  if (typeof max !== 'undefined' && steps[steps.length - 1] !== maxValue) {
+    stepsArr.push(maxValue);
+  }
+  if (currentValue < stepsArr[0]) {
+    return stepsArr[0] + miniStep * (isIncrement ? -1 : 1);
+  }
+  if (currentValue > stepsArr[stepsArr.length - 1]) {
+    return stepsArr[stepsArr.length - 1] + miniStep * (isIncrement ? -1 : 1);
+  }
+  if (
+    (!isIncrement && currentValue === stepsArr[0]) ||
+    (isIncrement && currentValue === stepsArr[stepsArr.length - 1])
+  ) {
+    return currentValue + miniStep * (isIncrement ? -1 : 1);
+  }
+  for (let i = 0; i < stepsArr.length; i++) {
     if (
-      (!increment && currentValue === stepsArr[0]) ||
-      (increment && currentValue === stepsArr[stepsArr.length - 1])
+      currentValue === stepsArr[i] ||
+      (stepsArr[i] < currentValue && stepsArr[i + 1] > currentValue)
     ) {
-      return currentValue + miniStep * (increment ? -1 : 1);
+      if (isIncrement) return stepsArr[i + 1] - miniStep;
+      return stepsArr[i - 1] + miniStep;
     }
-    for (let i = 0; i < stepsArr.length; i++) {
-      if (
-        currentValue === stepsArr[i] ||
-        (stepsArr[i] < currentValue && stepsArr[i + 1] > currentValue)
-      ) {
-        if (increment) return stepsArr[i + 1] - miniStep;
-        return stepsArr[i - 1] + miniStep;
-      }
-    }
-    return null;
   }
   return null;
+};
+
+export const getChangedValueByStep = (params: {
+  value?: string | null;
+  step: number | string;
+  isIncrement?: boolean;
+}): string => {
+  const { value, step, isIncrement } = params;
+  const currentValue: number =
+    (typeof value === 'string' ? Number(value) : 0) + Number(step) * (isIncrement ? 1 : -1);
+  return currentValue.toFixed(
+    Number(
+      /* Необходимо для того, чтобы избежать ситуации, когда по нажатию
+на кнопку прибавляется число с погрешностью.
+Здесь мы берем разрядность дробной части шага и ограничиваем
+результирующее число этой разрядностью */
+      Number(step)
+        .toString()
+        .split('.')[1]?.length,
+    ) || 0,
+  );
+};
+
+export const getIncrementFlag = (event: React.KeyboardEvent): boolean | null => {
+  if (event?.key !== 'ArrowUp' && event?.key !== 'ArrowDown') {
+    return null;
+  }
+  return event?.key === 'ArrowUp';
 };
