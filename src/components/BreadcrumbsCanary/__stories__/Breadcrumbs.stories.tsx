@@ -75,8 +75,8 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Навигация/BreadcrumbsCanary',
-  id: 'components/BreadcrumbsCanary',
+  title: 'Компоненты|/Навигация/Breadcrumbs(Canary)',
+  id: 'components/Breadcrumbs',
   parameters: {
     docs: {
       page: mdx,

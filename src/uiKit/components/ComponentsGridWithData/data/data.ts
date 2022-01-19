@@ -55,10 +55,10 @@ export const data: Data = [
   {
     items: [
       {
-        name: 'Badge',
-        componentName: 'Badge',
-        url: '/?path=/docs/components-badge--playground',
-        description: 'Бейджик. Показывает статус процесса.',
+        name: 'Attachment',
+        componentName: 'Attachment',
+        url: '/?path=/docs/components-attachment--playground',
+        description: 'Показывает загрузку файла или уже загруженный файл.',
       },
       {
         name: 'Avatar',
@@ -67,13 +67,13 @@ export const data: Data = [
         description: 'Аватарка. Изображение пользователя.',
       },
       {
-        name: 'Attachment',
-        componentName: 'Attachment',
-        url: '/?path=/docs/components-attachment--playground',
-        description: 'Показывает загрузку файла или уже загруженный файл.',
+        name: 'Badge',
+        componentName: 'Badge',
+        url: '/?path=/docs/components-badge--playground',
+        description: 'Бейджик. Показывает статус процесса.',
       },
       {
-        name: 'Breadcrumbs',
+        name: 'Breadcrumbs(Canary)',
         componentName: 'Breadcrumbs',
         url: '/?path=/docs/components-breadcrumbs--playground',
         description: 'Хлебные крошки. Показывают путь к текущей странице.',
@@ -91,16 +91,16 @@ export const data: Data = [
         description: 'Карточка. Контейнер для любого контента.',
       },
       {
-        name: 'CheckboxGroup',
-        componentName: 'CheckboxGroup',
-        url: '/?path=/docs/components-checkboxgroup--playground',
-        description: 'Группа чекбоксов. Можно выбрать несколько вариантов.',
-      },
-      {
         name: 'Checkbox',
         componentName: 'Checkbox',
         url: '/?path=/docs/components-checkbox--playground',
         description: 'Чекбокс. Можно сделать выбор и подтвердить.',
+      },
+      {
+        name: 'CheckboxGroup',
+        componentName: 'CheckboxGroup',
+        url: '/?path=/docs/components-checkboxgroup--playground',
+        description: 'Группа чекбоксов. Можно выбрать несколько вариантов.',
       },
       {
         name: 'ChoiceGroup',
@@ -224,22 +224,16 @@ export const data: Data = [
         description: 'Прогресс по шагам. Показывает, на каком шаге процесс.',
       },
       {
-        name: 'RadioGroup',
-        componentName: 'RadioGroup',
-        url: '/?path=/docs/components-radiogroup--playground',
-        description: 'Группа радиокнопок. Можно выбрать один вариант.',
-      },
-      {
         name: 'Radio',
         componentName: 'Radio',
         url: '/?path=/docs/components-radio--playground',
         description: 'Радиокнопка. Можно выбрать один вариант.',
       },
       {
-        name: 'Select',
-        componentName: 'Select',
-        url: '/?path=/docs/components-select--playground',
-        description: 'Выпадающий список. Можно выбрать один вариант.',
+        name: 'RadioGroup',
+        componentName: 'RadioGroup',
+        url: '/?path=/docs/components-radiogroup--playground',
+        description: 'Группа радиокнопок. Можно выбрать один вариант.',
       },
       {
         name: 'Responses',
@@ -247,6 +241,12 @@ export const data: Data = [
         url: '/?path=/docs/components-responses--playground',
         description:
           'Заглушки с сообщениями об ошибках и важных статусах (404, 503, не найдены данные и похожие).',
+      },
+      {
+        name: 'Select',
+        componentName: 'Select',
+        url: '/?path=/docs/components-select--playground',
+        description: 'Выпадающий список. Можно выбрать один вариант.',
       },
       {
         name: 'Sidebar',
@@ -262,10 +262,10 @@ export const data: Data = [
           'Заглушка для элементов интерфейса. Можно показать на месте элемента, который ещё не загрузился.',
       },
       {
-        name: 'Slider(Canary)',
-        componentName: 'Slider',
-        url: '/?path=/docs/components-slider--playground',
-        description: 'Ползунок. Можно выбрать значение из диапазона.',
+        name: 'Steps',
+        componentName: 'Steps',
+        url: '/?path=/docs/components-steps--playground',
+        description: 'Вкладки по шагам. Показывает контент в определённой последовательности.',
       },
       {
         name: 'SnackBar',
@@ -274,10 +274,10 @@ export const data: Data = [
         description: 'Мгновенные сообщения для пользователя. Перекрывает содержимое.',
       },
       {
-        name: 'Steps',
-        componentName: 'Steps',
-        url: '/?path=/docs/components-steps--playground',
-        description: 'Вкладки по шагам. Показывает контент в определённой последовательности.',
+        name: 'Slider(Canary)',
+        componentName: 'Slider',
+        url: '/?path=/docs/components-slider--playground',
+        description: 'Ползунок. Можно выбрать значение из диапазона.',
       },
       {
         name: 'Switch',
@@ -362,14 +362,14 @@ export const data: Data = [
 ];
 
 export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
-  Badge: BadgeImage,
-  Avatar: AvatarImage,
   Attachment: AttachmentImage,
+  Avatar: AvatarImage,
+  Badge: BadgeImage,
   Breadcrumbs: BreadcrumbsImage,
   Button: ButtonImage,
   Card: CardImage,
-  CheckboxGroup: CheckboxGroupImage,
   Checkbox: CheckboxImage,
+  CheckboxGroup: CheckboxGroupImage,
   ChoiceGroup: ChoiceGroupImage,
   Collapse: CollapseImage,
   CollapseGroup: CollapseGroupImage,
@@ -390,14 +390,14 @@ export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> =
   Popover: PopoverImage,
   ProgressSpin: ProgressSpinImage,
   ProgressStepBar: ProgressStepBarImage,
-  RadioGroup: RadioGroupImage,
   Radio: RadioImage,
-  Select: SelectImage,
+  RadioGroup: RadioGroupImage,
   Responses: ResponsesImage,
+  Select: SelectImage,
   Sidebar: SidebarImage,
   Skeleton: SkeletonImage,
-  SnackBar: SnackBarImage,
   Steps: StepsImage,
+  SnackBar: SnackBarImage,
   Switch: SwitchImage,
   SwitchGroup: SwitchGroupImage,
   Table: TableImage,
