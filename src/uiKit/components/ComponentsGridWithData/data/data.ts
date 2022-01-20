@@ -34,6 +34,7 @@ import ResponsesImage from './images/ResponsesImage';
 import SelectImage from './images/SelectImage';
 import SidebarImage from './images/SidebarImage';
 import SkeletonImage from './images/SkeletonImage';
+import SliderImage from './images/SliderImage';
 import SnackBarImage from './images/SnackBarImage';
 import StepsImage from './images/StepsImage';
 import SwitchGroupImage from './images/SwitchGroupImage';
@@ -55,12 +56,6 @@ export const data: Data = [
   {
     items: [
       {
-        name: 'Badge',
-        componentName: 'Badge',
-        url: '/?path=/docs/components-badge--playground',
-        description: 'Бейджик. Показывает статус процесса.',
-      },
-      {
         name: 'Avatar',
         componentName: 'Avatar',
         url: '/?path=/docs/components-avatar--playground',
@@ -71,6 +66,12 @@ export const data: Data = [
         componentName: 'Attachment',
         url: '/?path=/docs/components-attachment--playground',
         description: 'Показывает загрузку файла или уже загруженный файл.',
+      },
+      {
+        name: 'Badge',
+        componentName: 'Badge',
+        url: '/?path=/docs/components-badge--playground',
+        description: 'Бейджик. Показывает статус процесса.',
       },
       {
         name: 'Breadcrumbs',
@@ -91,16 +92,16 @@ export const data: Data = [
         description: 'Карточка. Контейнер для любого контента.',
       },
       {
-        name: 'CheckboxGroup',
-        componentName: 'CheckboxGroup',
-        url: '/?path=/docs/components-checkboxgroup--playground',
-        description: 'Группа чекбоксов. Можно выбрать несколько вариантов.',
-      },
-      {
         name: 'Checkbox',
         componentName: 'Checkbox',
         url: '/?path=/docs/components-checkbox--playground',
         description: 'Чекбокс. Можно сделать выбор и подтвердить.',
+      },
+      {
+        name: 'CheckboxGroup',
+        componentName: 'CheckboxGroup',
+        url: '/?path=/docs/components-checkboxgroup--playground',
+        description: 'Группа чекбоксов. Можно выбрать несколько вариантов.',
       },
       {
         name: 'ChoiceGroup',
@@ -157,16 +158,16 @@ export const data: Data = [
         description: 'Иконка для файла с расширением.',
       },
       {
-        name: 'FileField',
-        componentName: 'FileField',
-        url: '/?path=/docs/components-filefield--playground',
-        description: 'Можно выбрать файлы, чтобы загрузить или отправить.',
-      },
-      {
         name: 'Grid',
         componentName: 'Grid',
         url: '/?path=/docs/components-grid--playground',
         description: 'Модульная сетка. Отвечает за расположение содержимого на странице.',
+      },
+      {
+        name: 'FileField',
+        componentName: 'FileField',
+        url: '/?path=/docs/components-filefield--playground',
+        description: 'Можно выбрать файлы, чтобы загрузить или отправить.',
       },
       {
         name: 'Header',
@@ -224,22 +225,16 @@ export const data: Data = [
         description: 'Прогресс по шагам. Показывает, на каком шаге процесс.',
       },
       {
-        name: 'RadioGroup',
-        componentName: 'RadioGroup',
-        url: '/?path=/docs/components-radiogroup--playground',
-        description: 'Группа радиокнопок. Можно выбрать один вариант.',
-      },
-      {
         name: 'Radio',
         componentName: 'Radio',
         url: '/?path=/docs/components-radio--playground',
         description: 'Радиокнопка. Можно выбрать один вариант.',
       },
       {
-        name: 'Select',
-        componentName: 'Select',
-        url: '/?path=/docs/components-select--playground',
-        description: 'Выпадающий список. Можно выбрать один вариант.',
+        name: 'RadioGroup',
+        componentName: 'RadioGroup',
+        url: '/?path=/docs/components-radiogroup--playground',
+        description: 'Группа радиокнопок. Можно выбрать один вариант.',
       },
       {
         name: 'Responses',
@@ -247,6 +242,12 @@ export const data: Data = [
         url: '/?path=/docs/components-responses--playground',
         description:
           'Заглушки с сообщениями об ошибках и важных статусах (404, 503, не найдены данные и похожие).',
+      },
+      {
+        name: 'Select',
+        componentName: 'Select',
+        url: '/?path=/docs/components-select--playground',
+        description: 'Выпадающий список. Можно выбрать один вариант.',
       },
       {
         name: 'Sidebar',
@@ -362,14 +363,14 @@ export const data: Data = [
 ];
 
 export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
-  Badge: BadgeImage,
   Avatar: AvatarImage,
   Attachment: AttachmentImage,
+  Badge: BadgeImage,
   Breadcrumbs: BreadcrumbsImage,
   Button: ButtonImage,
   Card: CardImage,
-  CheckboxGroup: CheckboxGroupImage,
   Checkbox: CheckboxImage,
+  CheckboxGroup: CheckboxGroupImage,
   ChoiceGroup: ChoiceGroupImage,
   Collapse: CollapseImage,
   CollapseGroup: CollapseGroupImage,
@@ -379,8 +380,8 @@ export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> =
   DateTime: DateTimeImage,
   DragNDropField: DragNDropFieldImage,
   File: FileImage,
-  FileField: FileFieldImage,
   Grid: GridImage,
+  FileField: FileFieldImage,
   Header: HeaderImage,
   Informer: InformerImage,
   Layout: LayoutImage,
@@ -390,12 +391,13 @@ export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> =
   Popover: PopoverImage,
   ProgressSpin: ProgressSpinImage,
   ProgressStepBar: ProgressStepBarImage,
-  RadioGroup: RadioGroupImage,
   Radio: RadioImage,
-  Select: SelectImage,
+  RadioGroup: RadioGroupImage,
   Responses: ResponsesImage,
+  Select: SelectImage,
   Sidebar: SidebarImage,
   Skeleton: SkeletonImage,
+  Slider: SliderImage,
   SnackBar: SnackBarImage,
   Steps: StepsImage,
   Switch: SwitchImage,
