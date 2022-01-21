@@ -11,6 +11,7 @@ import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 import { cnTheme } from '../../Theme/Theme';
 import { SnackBarActionButton } from '../ActionButton/SnackBar-ActionButton';
+import { SnackBarProgressLine } from '../ProgressLine/SnackBar-ProgressLine';
 import { cnSnackBar, cnSnackBarItem, Item, snackBarItemStatusDefault } from '../SnackBar';
 import { SnackBarTimer, SnackBarTimerPropOnMount } from '../Timer/SnackBar-Timer';
 
@@ -87,11 +88,11 @@ export const SnackBarItem: SnackBarItemComponent = React.forwardRef((props, ref)
   return (
     <div
       ref={ref}
-      className={cnSnackBarItem({ status }, [cnTheme({ color: 'gpnDark' })])}
+      className={cnSnackBarItem({ status, showProgress }, [cnTheme({ color: 'gpnDark' })])}
       onMouseEnter={autoCloseTime ? handleMouseEnter : undefined}
       onMouseLeave={autoCloseTime ? handleMouseLeave : undefined}
     >
-      {autoCloseTime && (
+      {autoCloseTime && showProgress !== 'line' && (
         <SnackBarTimer
           onMount={handleMountTimer}
           onTimeIsOver={handleTimeIsOver}
@@ -118,6 +119,13 @@ export const SnackBarItem: SnackBarItemComponent = React.forwardRef((props, ref)
           form="round"
           size="xs"
           onClick={handleClose}
+        />
+      )}
+      {autoCloseTime && showProgress === 'line' && (
+        <SnackBarProgressLine
+          onMount={handleMountTimer}
+          onTimeIsOver={handleTimeIsOver}
+          startTime={autoCloseTime}
         />
       )}
     </div>

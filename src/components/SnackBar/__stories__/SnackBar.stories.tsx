@@ -2,7 +2,7 @@ import './SnackBar.stories.css';
 
 import * as React from 'react';
 import { action } from '@storybook/addon-actions';
-import { boolean } from '@storybook/addon-knobs';
+import { boolean, select } from '@storybook/addon-knobs';
 
 import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconAdd } from '../../../icons/IconAdd/IconAdd';
@@ -18,7 +18,7 @@ import {
   EventInterceptorProvider,
 } from '../../EventInterceptor/EventInterceptor';
 import { Text } from '../../Text/Text';
-import { Item, SnackBar, SnackBarItemStatus } from '../SnackBar';
+import { Item, SnackBar, snackBarItemShowProgressProp, SnackBarItemStatus } from '../SnackBar';
 
 import mdx from './SnackBar.docs.mdx';
 
@@ -28,9 +28,9 @@ type Action = { type: 'add'; item: Item } | { type: 'remove'; key: number | stri
 const defaultKnobs = () => ({
   withIcon: boolean('withIcon', false),
   withActionButtons: boolean('withActionButtons', false),
-  withAutoClose: boolean('withAutoClose', false),
+  withAutoClose: boolean('withAutoClose', true),
   withCloseButton: boolean('withCloseButton', true),
-  withShowProgress: boolean('withShowProgress', false),
+  showProgress: select('showProgress', ['', ...snackBarItemShowProgressProp], 'line'),
   withComponentInsteadOfText: boolean('withComponentInsteadOfText', false),
 });
 
@@ -61,7 +61,7 @@ export function Playground() {
     withIcon,
     withActionButtons,
     withAutoClose,
-    withShowProgress,
+    showProgress,
     withCloseButton,
     withComponentInsteadOfText,
   } = defaultKnobs();
@@ -85,7 +85,7 @@ export function Playground() {
         autoClose: 5,
         onAutoClose: () => dispatchItems({ type: 'remove', key }),
       }),
-      ...(withShowProgress && { showProgress: 'timer' }),
+      ...(showProgress !== '' && { showProgress }),
       ...(withIcon && { icon: getItemIconByStatus(status) }),
       ...(withActionButtons && {
         actions: [

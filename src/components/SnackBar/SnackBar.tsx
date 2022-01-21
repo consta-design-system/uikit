@@ -20,12 +20,15 @@ export const snackBarItemStatus = ['normal', 'system', 'success', 'warning', 'al
 export type SnackBarItemStatus = typeof snackBarItemStatus[number];
 export const snackBarItemStatusDefault: SnackBarItemStatus = snackBarItemStatus[0];
 
+export const snackBarItemShowProgressProp = ['timer', 'line'] as const;
+export type SnackBarItemShowProgressProp = typeof snackBarItemShowProgressProp[number];
+
 export type Item = {
   key: string | number;
   message?: string | number | React.ReactNode;
   status?: SnackBarItemStatus;
   autoClose?: boolean | number;
-  showProgress?: 'timer';
+  showProgress?: SnackBarItemShowProgressProp;
   icon?: IconComponent;
   actions?: SnackBarPropItemAction[];
   onClose?: (item: Item) => void;

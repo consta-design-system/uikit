@@ -155,6 +155,7 @@ export const SnackBarExampleButtons: React.FC = () => {
 | Значение `showProgress` | По умолчанию | Описание                                                                              |
 | ----------------------- | ------------ | ------------------------------------------------------------------------------------- |
 | `"timer"`               |              | Визуально отображает радиальный таймер (если указана иконка, то он заместит её собой) |
+| `"line"`                |              | Визуально отображает линейный таймер                                                  |
 | `undefined`             | +            | Работает только логика таймера. Сам таймер скрыт.                                     |
 
 ```tsx
@@ -185,7 +186,7 @@ export const SnackBarExampleTimer: React.FC = () => {
   const [items, dispatchItems] = useReducer<
     React.Reducer<Item[], { type: 'add' | 'remove'; item: Item; key?: number | string }>
   >(reducer, []);
-  const generateHandleAdd = (status: SnackBarItemStatus, showProgress?: 'timer') => () => {
+  const generateHandleAdd = (status: SnackBarItemStatus, showProgress?: 'timer' | 'line') => () => {
     const key = items.length + 1;
     const item: Item = {
       key,
@@ -201,6 +202,7 @@ export const SnackBarExampleTimer: React.FC = () => {
 
   const handleAlertAdd = generateHandleAdd('alert', 'timer');
   const handleNormalAdd = generateHandleAdd('normal', 'timer');
+  const handleLineNormalAdd = generateHandleAdd('normal', 'line');
   const handleHiddenTimerAdd = generateHandleAdd('normal');
 
   React.useEffect(() => handleNormalAdd(), []);
