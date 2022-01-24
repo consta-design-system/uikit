@@ -3,18 +3,19 @@ import addMonths from 'date-fns/addMonths';
 import startOfMonth from 'date-fns/startOfMonth';
 
 import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
+import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { setRef } from '../../../utils/setRef';
 import { DatePickerDropdown } from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeDate } from '../DatePickerFieldTypeDate/DatePickerFieldTypeDate';
-import { DatePickerTypeDateComponent } from '../helpers';
+import { DatePickerTypeComponent } from '../helpers';
 
-export const DatePickerTypeDate: DatePickerTypeDateComponent = forwardRef((props, ref) => {
+export const DatePickerTypeDate: DatePickerTypeComponent<'date'> = forwardRef((props, ref) => {
   const { events, dateTimeView, locale, dropdownForm, onFocus, ...otherProps } = props;
 
   const fieldRef = useRef<HTMLDivElement>(null);
   const calendarRef = useRef<HTMLDivElement>(null);
 
-  const [calendarVisible, setCalendarVisible] = useState<boolean>(false);
+  const [calendarVisible, setCalendarVisible] = useFlag(false);
 
   const [currentVisibleDate, setCurrentVisibleDate] = useState<Date | undefined>();
 
@@ -22,7 +23,7 @@ export const DatePickerTypeDate: DatePickerTypeDateComponent = forwardRef((props
 
   const onFocusHandler = (e: React.FocusEvent<HTMLElement>) => {
     onFocus && onFocus(e);
-    setCalendarVisible(true);
+    setCalendarVisible.on();
   };
 
   useEffect(() => {
@@ -51,7 +52,7 @@ export const DatePickerTypeDate: DatePickerTypeDateComponent = forwardRef((props
   }, [props.value]);
 
   const handleClose = () => {
-    setCalendarVisible(false);
+    setCalendarVisible.off();
     setCurrentVisibleDate(undefined);
   };
 
@@ -69,7 +70,7 @@ export const DatePickerTypeDate: DatePickerTypeDateComponent = forwardRef((props
         anchorRef={fieldRef}
         isOpen={calendarVisible}
         value={props.value || undefined}
-        type={props.type}
+        type="date"
         view={dateTimeView}
         events={events}
         locale={locale}

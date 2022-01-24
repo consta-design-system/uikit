@@ -12,7 +12,7 @@ import {
   TextFieldPropWidth,
 } from '../TextField/TextField';
 
-export const datePickerPropType = ['date', 'date-range'] as const;
+export const datePickerPropType = ['date', 'date-range', 'date-time'] as const;
 export type DatePickerPropType = typeof datePickerPropType[number];
 export const datePickerPropTypeDefault = datePickerPropType[0];
 
@@ -25,7 +25,7 @@ export const datePickerErrorTypes = [
 ] as const;
 
 export type DatePickerPropValue<TYPE extends DatePickerPropType> =
-  | (TYPE extends 'date' ? Date : DateRange)
+  | (TYPE extends 'date' | 'date-time' ? Date : DateRange)
   | null;
 
 export type DatePickerPropOnChange<TYPE extends DatePickerPropType> = (props: {
@@ -37,9 +37,11 @@ export const datePickerPropDropdownForm = ['default', 'brick', 'round'] as const
 export type DatePickerPropDropdownForm = typeof datePickerPropDropdownForm[number];
 export const datePickerPropDropdownFormDefault = datePickerPropDropdownForm[0];
 
-type DatePickerPropCalendarWidth<TYPE> = TYPE extends 'date' ? TextFieldPropWidth : never;
+type DatePickerPropCalendarWidth<TYPE> = TYPE extends 'date' | 'date-time'
+  ? TextFieldPropWidth
+  : never;
 
-type DatePickerPropCalendarInputRef<TYPE> = TYPE extends 'date'
+type DatePickerPropCalendarInputRef<TYPE> = TYPE extends 'date' | 'date-time'
   ? React.Ref<HTMLInputElement>
   : never;
 
@@ -113,12 +115,8 @@ export type DatePickerComponent = <TYPE extends DatePickerPropType = 'date'>(
   props: DatePickerProps<TYPE>,
 ) => React.ReactElement | null;
 
-export type DatePickerTypeDateComponent = (
-  props: DatePickerProps<'date'>,
-) => React.ReactElement | null;
-
-export type DatePickerTypeDateRangeComponent = (
-  props: DatePickerProps<'date-range'>,
+export type DatePickerTypeComponent<TYPE extends DatePickerPropType> = (
+  props: Omit<DatePickerProps<TYPE>, 'type'>,
 ) => React.ReactElement | null;
 
 export type DatePickerPropOnError = (
@@ -143,18 +141,6 @@ export type DatePickerPropOnError = (
         date: [Date, Date];
       },
 ) => void;
-
-export const isDateRangeParams = (
-  params: DatePickerProps<DatePickerPropType>,
-): params is DatePickerProps<'date-range'> => {
-  return params.type === datePickerPropType[1];
-};
-
-export const isNotDateRangeParams = (
-  params: DatePickerProps<DatePickerPropType>,
-): params is DatePickerProps<'date'> => {
-  return params.type === datePickerPropType[0];
-};
 
 export const datePickerPropSeparatorDefault = '.';
 export const datePickerPropFormatDefault = `dd${datePickerPropSeparatorDefault}MM${datePickerPropSeparatorDefault}yyyy`;

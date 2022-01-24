@@ -10,9 +10,9 @@ import {
   DatePickerDropdownProps,
 } from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeDateRange } from '../DatePickerFieldTypeDateRange/DatePickerFieldTypeDateRange';
-import { DatePickerTypeDateRangeComponent, normalizeRangeValue } from '../helpers';
+import { DatePickerTypeComponent, normalizeRangeValue } from '../helpers';
 
-export const DatePickerTypeDateRange: DatePickerTypeDateRangeComponent = forwardRef(
+export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = forwardRef(
   (props, ref) => {
     const {
       events,
@@ -33,6 +33,7 @@ export const DatePickerTypeDateRange: DatePickerTypeDateRangeComponent = forward
       rightSide,
       endFieldInputRef: endFieldInputRefProp,
       startFieldInputRef: startFieldInputRefProp,
+
       ...fieldProps
     } = props;
 
@@ -187,6 +188,7 @@ export const DatePickerTypeDateRange: DatePickerTypeDateRangeComponent = forward
         />
         <DatePickerDropdown
           {...commonProps}
+          type="date"
           ref={calendarRef}
           anchorRef={startFieldRef}
           isOpen={calendarVisible}

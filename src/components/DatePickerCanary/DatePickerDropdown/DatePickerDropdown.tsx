@@ -77,7 +77,7 @@ export const DatePickerDropdown: DatePickerDropdownComponent = forwardRef((props
         spareDirection="downStartLeft"
         possibleDirections={['downStartLeft', 'upStartLeft', 'downStartRight', 'upStartRight']}
       >
-        <DateTime {...otherProps} onChange={onChange} type="date" value={value || undefined} />
+        <DateTime {...otherProps} onChange={onChange} value={value || undefined} />
       </Popover>
     </CSSTransition>
   );
