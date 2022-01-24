@@ -10,6 +10,7 @@ import { DateRange } from '../../../utils/types/Date';
 import { PropsWithHTMLAttributesAndRef } from '../../../utils/types/PropsWithHTMLAttributes';
 import {
   DateTime,
+  DateTimeAdditionalControlRenderProp,
   DateTimePropOnChange,
   DateTimePropType,
 } from '../../DateTimeCanary/DateTimeCanary';
@@ -38,6 +39,7 @@ export type DatePickerDropdownProps = PropsWithHTMLAttributesAndRef<
     form?: DatePickerPropDropdownForm;
     isOpen?: boolean;
     onChangeCurrentVisibleDate?: (date: Date) => void;
+    renderAdditionalControls?: DateTimeAdditionalControlRenderProp;
   },
   HTMLDivElement
 >;
