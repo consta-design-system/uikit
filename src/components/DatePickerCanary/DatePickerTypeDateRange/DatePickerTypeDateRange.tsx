@@ -33,7 +33,8 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = fo
       rightSide,
       endFieldInputRef: endFieldInputRefProp,
       startFieldInputRef: startFieldInputRefProp,
-
+      currentVisibleDate: currentVisibleDateProp,
+      onChangeCurrentVisibleDate: onChangeCurrentVisibleDateProp,
       ...fieldProps
     } = props;
 
@@ -61,7 +62,9 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = fo
 
     const [calendarVisible, setCalendarVisible] = useState<boolean>(false);
 
-    const [currentVisibleDate, setCurrentVisibleDate] = useState<Date | undefined>();
+    const [currentVisibleDate, setCurrentVisibleDate] = useState<Date | undefined>(
+      currentVisibleDateProp,
+    );
 
     const commonProps: Omit<DatePickerDropdownProps, 'anchorRef'> = {
       value: props.value || undefined,
@@ -72,7 +75,16 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = fo
       maxDate: props.maxDate,
       form: dropdownForm,
       onChange: hadleChange,
+      renderAdditionalControls: props.renderAdditionalControls,
     };
+
+    useEffect(() => setCurrentVisibleDate(currentVisibleDateProp), [
+      currentVisibleDateProp?.getTime(),
+    ]);
+
+    useEffect(() => currentVisibleDate && onChangeCurrentVisibleDateProp?.(currentVisibleDate), [
+      currentVisibleDate?.getTime(),
+    ]);
 
     const startFieldOnBlurHandler = (e: React.FocusEvent<HTMLElement>) => {
       onBlur && onBlur(e);
@@ -192,7 +204,7 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = fo
           ref={calendarRef}
           anchorRef={startFieldRef}
           isOpen={calendarVisible}
-          onChangeCurrentVisibleDate={(date) => setCurrentVisibleDate(date)}
+          onChangeCurrentVisibleDate={setCurrentVisibleDate}
           currentVisibleDate={currentVisibleDate}
         />
       </>
