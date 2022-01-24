@@ -162,6 +162,7 @@ function SliderRender<RANGE extends boolean>(
               aria-valuemin={min}
               aria-valuemax={max}
               aria-valuenow={val}
+              key={`SliderPoint-${index}`}
             />
           ))}
         </div>

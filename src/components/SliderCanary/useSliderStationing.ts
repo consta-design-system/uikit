@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { Line, PropView } from './helper';
+import { useMemoSteps } from './useMemoSteps';
 
 type UseSliderStationing = (
   value: number | [number, number] | undefined,
@@ -20,17 +21,10 @@ export const getSteps = (step: number | number[], min: number, max: number) => {
   const stepsArray: { min: number; max: number }[] = [];
   let size = min;
   if (Array.isArray(step)) {
-    step.forEach((stepSize) => {
+    for (let i = 0; i < step.length - 1; i++) {
       stepsArray.push({
-        min: size,
-        max: stepSize,
-      });
-      size += stepSize - size;
-    });
-    if (size !== max) {
-      stepsArray.push({
-        min: size,
-        max,
+        min: step[i],
+        max: step[i + 1],
       });
     }
   } else {
@@ -51,12 +45,14 @@ export const useSliderStationing: UseSliderStationing = (
   max,
   view,
   range,
-  step,
+  step = 1,
   buttonRefs,
   sliderLineRef,
 ) => {
   const [lineSizes, setLineSizes] = useState<Line[]>([]);
   const [buttonPositions, setButtonPositions] = useState<number[]>([]);
+
+  const sortedSteps = useMemoSteps({ step, min, max });
 
   const calculateLines = () => {
     const sizesArray: Line[] = [];
@@ -88,8 +84,8 @@ export const useSliderStationing: UseSliderStationing = (
             active: false,
           });
         }
-      } else if (typeof step !== 'undefined') {
-        getSteps(step, min, max).forEach((stepSize) => {
+      } else if (typeof sortedSteps !== 'undefined') {
+        getSteps(sortedSteps, min, max).forEach((stepSize) => {
           sizesArray.push({
             width: (Math.abs(stepSize.max - stepSize.min) * 100) / absoluteSize,
             active:
@@ -144,7 +140,7 @@ export const useSliderStationing: UseSliderStationing = (
   useEffect(() => {
     setLineSizes(calculateLines());
     setButtonPositions(calculateButtonPositions());
-  }, [value, min, max, range, step, view]);
+  }, [value, min, max, range, sortedSteps, view]);
 
   return {
     lineSizes,

@@ -14,9 +14,9 @@ import { FieldCaption } from '../FieldCaption/FieldCaption';
 import { FieldLabel } from '../FieldLabel/FieldLabel';
 
 import {
-  getChangedValueByStep,
   getIncrementFlag,
   getValueByStepArray,
+  getValueByStepNumber,
   sizeMap,
   TextFieldComponent,
   textFieldPropFormDefault,
@@ -131,7 +131,7 @@ export function TextFieldRender<TYPE extends string>(
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     const flag = getIncrementFlag(e);
-    if (Array.isArray(step) && typeof flag === 'boolean') {
+    if (Array.isArray(step) && typeof flag === 'boolean' && !disabled) {
       const newValue = getValueByStepArray({
         isIncrement: flag,
         value,
@@ -139,9 +139,7 @@ export function TextFieldRender<TYPE extends string>(
         min,
         max,
       });
-      !disabled &&
-        typeof newValue === 'number' &&
-        Array.isArray(step) &&
+      typeof newValue === 'number' &&
         onChange?.({
           e,
           value: newValue?.toString(),
@@ -179,19 +177,23 @@ export function TextFieldRender<TYPE extends string>(
   ) => void = (e, isIncrement = true) => {
     onChange?.({
       e,
-      value: Array.isArray(step)
-        ? (
-            getValueByStepArray({
-              min,
-              max,
-              value,
-              isIncrement,
-              steps: step,
-              changeType: 'button',
-            }) || 0
-          ).toString()
-        : getChangedValueByStep({ value, step, isIncrement }),
+      value: getValueByStep(isIncrement),
     });
+  };
+
+  const getValueByStep = (isIncrement?: boolean) => {
+    return Array.isArray(step)
+      ? (
+          getValueByStepArray({
+            min,
+            max,
+            value,
+            isIncrement,
+            steps: step,
+            changeType: 'button',
+          }) || 0
+        ).toString()
+      : getValueByStepNumber({ value, step, isIncrement });
   };
 
   const rootProps = {

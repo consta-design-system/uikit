@@ -3,6 +3,7 @@ import React, { MutableRefObject, useCallback, useEffect, useRef, useState } fro
 import { useComponentSize } from '../../../hooks/useComponentSize/useComponentSize';
 import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
 import { SliderValue, TrackPosition } from '../helper';
+import { useMemoSteps } from '../useMemoSteps';
 
 import {
   ActiveButton,
@@ -37,6 +38,8 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
   const [currentValue, setCurrentValue] = useState<number | [number, number]>(value);
   const [leftPopover, setLeftPopover] = useState<TrackPosition>(null);
   const [rightPopover, setRightPopover] = useState<TrackPosition>(null);
+
+  const sortedSteps = useMemoSteps({ step, min: minValue, max: maxValue });
 
   const activeButton: MutableRefObject<ActiveButton | null> = useRef(null);
 
@@ -79,21 +82,21 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
     onChange?.({
       value: Array.isArray(currentValue)
         ? ([
-            getNewValue(currentValue[0], currentValue[0], step, min, max, 0),
-            getNewValue(currentValue[1], currentValue[1], step, min, max, 1),
+            getNewValue(currentValue[0], currentValue[0], sortedSteps, min, max, 0),
+            getNewValue(currentValue[1], currentValue[1], sortedSteps, min, max, 1),
           ] as SliderValue<RANGE>)
-        : (getNewValue(currentValue, currentValue, step, min, max, 0) as SliderValue<RANGE>),
+        : (getNewValue(currentValue, currentValue, sortedSteps, min, max, 0) as SliderValue<RANGE>),
     });
-  }, [step]);
+  }, [sortedSteps]);
 
   useEffect(() => {
-    if (typeof value !== 'undefined' && typeof step !== 'undefined') {
+    if (typeof value !== 'undefined') {
       const targetValue = isRangeParams(props)
         ? ([
-            getValidValue(props.value[0], min, max, step),
-            getValidValue(props.value[1], min, max, step),
+            getValidValue(props.value[0], min, max, sortedSteps),
+            getValidValue(props.value[1], min, max, sortedSteps),
           ] as [number, number])
-        : getValidValue(props.value as number, min, max, step);
+        : getValidValue(props.value as number, min, max, sortedSteps);
       setCurrentValue(targetValue);
     }
   }, [range, typeof value]);
@@ -110,7 +113,7 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
   const onKeyPress = useCallback(
     (event: React.KeyboardEvent, typeButton: ActiveButton) => {
       if (!disabled && typeof typeButton === 'number' && typeof currentValue !== 'undefined') {
-        let stepIncrement = !Array.isArray(step) ? step || 1 : 1;
+        let stepIncrement = !Array.isArray(sortedSteps) ? sortedSteps || 1 : 1;
         let validKeyCode = false;
         const changedValue = getActiveValue(currentValue, typeButton);
         switch (event.key) {
@@ -129,31 +132,25 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
             break;
         }
         if (validKeyCode) {
-          if (Array.isArray(step)) {
-            const stepsArr = [...step].sort((a, b) => a - b);
-            if (step[0] !== minValue) {
-              stepsArr.unshift(minValue);
-            }
-            if (step[step.length - 1] !== maxValue) {
-              stepsArr.push(maxValue);
-            }
-            stepsArr.forEach((stepPoint, index) => {
+          if (Array.isArray(sortedSteps)) {
+            sortedSteps.forEach((stepPoint, index) => {
               if (typeof typeButton === 'number' && changedValue === stepPoint) {
                 if (stepIncrement >= 0) {
                   if (index === 0) {
-                    stepIncrement = stepsArr[1] - minValue;
+                    stepIncrement = sortedSteps[1] - minValue;
                   } else {
                     stepIncrement =
-                      (typeof stepsArr[index + 1] !== 'undefined'
-                        ? stepsArr[index + 1]
+                      (typeof sortedSteps[index + 1] !== 'undefined'
+                        ? sortedSteps[index + 1]
                         : maxValue) - stepPoint;
                   }
                 } else if (index === 0) {
-                  stepIncrement = minValue - stepsArr[1];
+                  stepIncrement = minValue - sortedSteps[1];
                 } else {
                   stepIncrement =
-                    (typeof stepsArr[index - 1] !== 'undefined' ? stepsArr[index - 1] : minValue) -
-                    stepPoint;
+                    (typeof sortedSteps[index - 1] !== 'undefined'
+                      ? sortedSteps[index - 1]
+                      : minValue) - stepPoint;
                 }
               }
             });
@@ -161,7 +158,7 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
           const newValue = getNewValue(
             changedValue + stepIncrement,
             currentValue,
-            step,
+            sortedSteps,
             min,
             max,
             typeButton,
@@ -175,7 +172,7 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
         }
       }
     },
-    [currentValue, step, min, max],
+    [currentValue, sortedSteps, min, max],
   );
 
   const setTooltipPosition = (value: number, position: ActiveButton) => {
@@ -201,7 +198,7 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
     }
     const position = trackPosition(nativeEvent);
     const positionValue = getValueByPosition(position, sliderRef, minValue, maxValue);
-    return getNewValue(positionValue, currentValue, step, min, max, activeButton.current);
+    return getNewValue(positionValue, currentValue, sortedSteps, min, max, activeButton.current);
   };
 
   const onFocus = (e: React.FocusEvent | React.MouseEvent, button: ActiveButton) => {

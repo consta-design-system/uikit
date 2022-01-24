@@ -184,7 +184,7 @@ export const getValueByStepArray = (params: {
   return null;
 };
 
-export const getChangedValueByStep = (params: {
+export const getValueByStepNumber = (params: {
   value?: string | null;
   step: number | string;
   isIncrement?: boolean;
