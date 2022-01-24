@@ -64,6 +64,7 @@ export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef)
     getItemIcon,
     direction,
     possibleDirections,
+    style,
     ...otherProps
   } = props;
 
@@ -122,6 +123,7 @@ export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef)
         onlyIcon
         size={size}
         view="clear"
+        style={style}
       />
       {items.length > 2 && isOpen && (
         <ContextMenu
@@ -136,6 +138,7 @@ export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef)
           onClickOutside={() => setIsOpen(false)}
           getItemOnClick={getOnChange}
           size={contextMenuSize}
+          style={typeof style?.zIndex === 'number' ? { zIndex: style.zIndex + 1 } : undefined}
         />
       )}
     </>

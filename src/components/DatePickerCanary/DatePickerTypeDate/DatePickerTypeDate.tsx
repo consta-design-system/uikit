@@ -9,7 +9,7 @@ import { DatePickerFieldTypeDate } from '../DatePickerFieldTypeDate/DatePickerFi
 import { DatePickerTypeDateComponent } from '../helpers';
 
 export const DatePickerTypeDate: DatePickerTypeDateComponent = forwardRef((props, ref) => {
-  const { events, dateTimeView, locale, dropdownForm, onFocus, ...otherProps } = props;
+  const { events, dateTimeView, locale, dropdownForm, onFocus, style, ...otherProps } = props;
 
   const fieldRef = useRef<HTMLDivElement>(null);
   const calendarRef = useRef<HTMLDivElement>(null);
@@ -63,7 +63,12 @@ export const DatePickerTypeDate: DatePickerTypeDateComponent = forwardRef((props
 
   return (
     <>
-      <DatePickerFieldTypeDate {...otherProps} ref={fieldRef} onFocus={onFocusHandler} />
+      <DatePickerFieldTypeDate
+        {...otherProps}
+        ref={fieldRef}
+        onFocus={onFocusHandler}
+        style={style}
+      />
       <DatePickerDropdown
         ref={calendarRef}
         anchorRef={fieldRef}
@@ -82,6 +87,7 @@ export const DatePickerTypeDate: DatePickerTypeDateComponent = forwardRef((props
           handleClose();
         }}
         onChangeCurrentVisibleDate={(date) => setCalendarVisibleDate(date)}
+        zIndex={typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined}
       />
     </>
   );

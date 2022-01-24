@@ -73,7 +73,8 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
     labelForCreate = defaultlabelForCreate,
     searchFunction,
     multiple = false,
-    ...restProps
+    style,
+    ...otherProps
   } = withDefaultGetters(props);
 
   const {
@@ -200,7 +201,8 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
       form={form}
       multiple={multiple}
       ref={ref}
-      {...restProps}
+      style={style}
+      {...otherProps}
     >
       <div
         className={cnSelect('Control', { hasInput: true })}
@@ -259,6 +261,7 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
         labelForNotFound={labelForNotFound}
         labelForCreate={labelForCreate}
         notFound={notFound}
+        style={typeof style?.zIndex === 'number' ? { zIndex: style.zIndex + 1 } : undefined}
       />
       <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
         {searchValue}

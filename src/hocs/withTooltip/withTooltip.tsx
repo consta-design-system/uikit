@@ -76,6 +76,7 @@ export function withTooltip(hocProps?: TooltipProps) {
         closeOnClickOutside = true,
         appearTimeout = appearTimeoutDefault,
         exitTimeout = exitTimeoutDefault,
+        style,
         ...otherTooltipProps
       } = tooltipProps;
 
@@ -173,6 +174,7 @@ export function withTooltip(hocProps?: TooltipProps) {
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             ref={useForkRef([componentRef, ref])}
+            style={style}
           />
           {visible && (
             <Tooltip
@@ -182,6 +184,7 @@ export function withTooltip(hocProps?: TooltipProps) {
               onClickOutside={onClickOutside}
               onMouseEnter={tooltipOnMouseEnter}
               onMouseLeave={tooltipOnMouseLeave}
+              style={typeof style?.zIndex === 'number' ? { zIndex: style.zIndex + 1 } : undefined}
             >
               {content}
             </Tooltip>

@@ -7,6 +7,7 @@ import { useClickOutside } from '../../hooks/useClickOutside/useClickOutside';
 import { useGlobalKeys } from '../../hooks/useGlobalKeys/useGlobalKeys';
 import { cn } from '../../utils/bem';
 import { cnForCssTransition } from '../../utils/cnForCssTransition';
+import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 import { PortalWithTheme, usePortalContext } from '../PortalWithTheme/PortalWithTheme';
 import { useTheme } from '../Theme/Theme';
 
@@ -18,23 +19,25 @@ const modalPropPosition = ['center', 'top'] as const;
 type ModalPropPosition = typeof modalPropPosition[number];
 const modalPropPositionDefault: ModalPropPosition = modalPropPosition[0];
 
-type ModalProps = {
-  isOpen?: boolean;
-  onClose?: () => void;
-  onOpen?: () => void;
-  hasOverlay?: boolean;
-  /** @deprecated use onClickOutside */
-  onOverlayClick?: (event: MouseEvent) => void;
-  onClickOutside?: (event: MouseEvent) => void;
-  onEsc?: (event: KeyboardEvent) => void;
-  className?: string;
-  rootClassName?: string;
-  width?: ModalPropWidth;
-  position?: ModalPropPosition;
-  children?: React.ReactNode;
-  container?: HTMLDivElement | undefined;
-  refsForExcludeClickOutside?: React.RefObject<HTMLElement>[];
-};
+type ModalProps = PropsWithHTMLAttributes<
+  {
+    isOpen?: boolean;
+    onClose?: () => void;
+    onOpen?: () => void;
+    hasOverlay?: boolean;
+    /** @deprecated use onClickOutside */
+    onOverlayClick?: (event: MouseEvent) => void;
+    onClickOutside?: (event: MouseEvent) => void;
+    onEsc?: (event: KeyboardEvent) => void;
+    rootClassName?: string;
+    width?: ModalPropWidth;
+    position?: ModalPropPosition;
+    children?: React.ReactNode;
+    container?: HTMLDivElement | undefined;
+    refsForExcludeClickOutside?: React.RefObject<HTMLElement>[];
+  },
+  HTMLDivElement
+>;
 
 const cnModal = cn('Modal');
 
@@ -74,7 +77,8 @@ export const Modal: React.FC<ModalProps> = (props) => {
     container = window.document.body,
     refsForExcludeClickOutside,
     rootClassName,
-    ...rest
+    style,
+    ...otherProps
   } = props;
 
   const ref = useRef<HTMLDivElement | null>(null);
@@ -107,9 +111,18 @@ export const Modal: React.FC<ModalProps> = (props) => {
         container={container}
         className={cnModal({ hasOverlay }, [rootClassName])}
         ref={portalRef}
+        style={typeof style?.zIndex === 'number' ? { zIndex: style.zIndex } : undefined}
       >
         {hasOverlay && <div className={cnModal('Overlay')} aria-label="Overlay" />}
-        <div className={cnModal('Window', { width, position }, [className])} ref={ref} {...rest}>
+        <div
+          {...otherProps}
+          style={{
+            ...style,
+            ...(typeof style?.zIndex === 'number' && { zIndex: style?.zIndex + 1 }),
+          }}
+          className={cnModal('Window', { width, position }, [className])}
+          ref={ref}
+        >
           <ContextConsumer
             onClickOutside={onClickOutside || onOverlayClick}
             ignoreClicksInsideRefs={[...(refsForExcludeClickOutside || []), ref]}
