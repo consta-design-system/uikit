@@ -10,6 +10,7 @@ import { IconCalendar } from '../../../icons/IconCalendar/IconCalendar';
 import { maxDateDefault, minDateDefault } from '../../../utils/date';
 import { getByMap } from '../../../utils/getByMap';
 import { createMetadata } from '../../../utils/storybook';
+import { Button } from '../../Button/Button';
 import { dateTimePropView, dateTimePropViewDefault } from '../../DateTimeCanary/helpers';
 import {
   textFieldPropForm,
@@ -49,6 +50,7 @@ const defaultKnobs = () => ({
   type: select('type', datePickerPropType, datePickerPropTypeDefault),
   form: select('form', textFieldPropForm, textFieldPropFormDefault),
   status: select('status', ['', ...textFieldPropStatus], ''),
+  withAdditionalControls: boolean('withAdditionalControls', false),
   label: text('label', 'Заголовок'),
   caption: text('caption', 'Подпись'),
   required: boolean('required', false),
@@ -72,6 +74,10 @@ const defaultKnobs = () => ({
   ),
 });
 
+const additionalControls = () => {
+  return [<Button label="Кнопка" />, <Button label="Кнопка" />];
+};
+
 export function Playground() {
   const {
     form,
@@ -94,6 +100,7 @@ export function Playground() {
     type,
     minDate,
     maxDate,
+    withAdditionalControls,
   } = defaultKnobs();
 
   const [value, setValue] = useState<DatePickerPropValue<typeof type>>(null);
@@ -140,6 +147,7 @@ export function Playground() {
           endFieldRightSide: icon,
           startFieldRightSide: icon,
         })}
+        renderAdditionalControls={withAdditionalControls ? additionalControls : undefined}
       />
     </div>
   );

@@ -164,6 +164,7 @@ function SliderRender<RANGE extends boolean>(
               aria-valuemax={max}
               aria-valuenow={val}
               tooltipZIndex={typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined}
+              key={cnSlider('Point', { index })}
             />
           ))}
         </div>
