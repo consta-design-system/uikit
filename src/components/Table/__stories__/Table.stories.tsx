@@ -113,9 +113,26 @@ export const Interactive = createStory(() => <Table {...getKnobs()} />, {
   name: 'обычная',
 });
 
-export const CustomRows = createStory(() => <Table {...getKnobs(tableDataWithRenderFn)} />, {
-  name: 'рендер ячеек',
-});
+export const CustomRows = createStory(
+  () => {
+    const { columns, ...props } = getKnobs(tableDataWithRenderFn);
+
+    const copyColumns = [...columns].map((column) => {
+      const copy = { ...column };
+      if (copy.accessor === 'year') {
+        copy.renderCell = (row: typeof props.rows[number]): React.ReactNode => {
+          return <h2>{row.year.value}</h2>;
+        };
+      }
+      return copy;
+    });
+
+    return <Table columns={copyColumns} {...props} />;
+  },
+  {
+    name: 'рендер ячеек',
+  },
+);
 
 export const WithCollapcingRows = createStory(
   () => <Table {...getKnobs(tableWithExpandableRowsData)} />,
