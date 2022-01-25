@@ -29,6 +29,8 @@ export type DatePickerFieldTypeDateRangeProps = Omit<
   startFocused?: boolean;
   endFocused?: boolean;
   id?: string;
+  onChangeCurrentVisibleDate?: (date: Date) => void;
+  currentVisibleDate?: Date;
 };
 
 export const mapFormForStart: Record<TextFieldPropForm, TextFieldPropForm> = {

@@ -56,16 +56,16 @@ export const data: Data = [
   {
     items: [
       {
-        name: 'Avatar',
-        componentName: 'Avatar',
-        url: '/?path=/docs/components-avatar--playground',
-        description: 'Аватарка. Изображение пользователя.',
-      },
-      {
         name: 'Attachment',
         componentName: 'Attachment',
         url: '/?path=/docs/components-attachment--playground',
         description: 'Показывает загрузку файла или уже загруженный файл.',
+      },
+      {
+        name: 'Avatar',
+        componentName: 'Avatar',
+        url: '/?path=/docs/components-avatar--playground',
+        description: 'Аватарка. Изображение пользователя.',
       },
       {
         name: 'Badge',
@@ -74,7 +74,7 @@ export const data: Data = [
         description: 'Бейджик. Показывает статус процесса.',
       },
       {
-        name: 'Breadcrumbs',
+        name: 'Breadcrumbs(Canary)',
         componentName: 'Breadcrumbs',
         url: '/?path=/docs/components-breadcrumbs--playground',
         description: 'Хлебные крошки. Показывают путь к текущей странице.',
@@ -86,16 +86,16 @@ export const data: Data = [
         description: 'Кнопка. Разные формы, цвета и размеры.',
       },
       {
-        name: 'Card',
-        componentName: 'Card',
-        url: '/?path=/docs/components-card--playground',
-        description: 'Карточка. Контейнер для любого контента.',
-      },
-      {
         name: 'Checkbox',
         componentName: 'Checkbox',
         url: '/?path=/docs/components-checkbox--playground',
         description: 'Чекбокс. Можно сделать выбор и подтвердить.',
+      },
+      {
+        name: 'Card',
+        componentName: 'Card',
+        url: '/?path=/docs/components-card--playground',
+        description: 'Карточка. Контейнер для любого контента.',
       },
       {
         name: 'CheckboxGroup',
@@ -152,6 +152,12 @@ export const data: Data = [
         description: 'Можно перетащить файлы, чтобы загрузить или отправить.',
       },
       {
+        name: 'FileField',
+        componentName: 'FileField',
+        url: '/?path=/docs/components-filefield--playground',
+        description: 'Можно выбрать файлы, чтобы загрузить или отправить.',
+      },
+      {
         name: 'File',
         componentName: 'File',
         url: '/?path=/docs/components-file--playground',
@@ -162,12 +168,6 @@ export const data: Data = [
         componentName: 'Grid',
         url: '/?path=/docs/components-grid--playground',
         description: 'Модульная сетка. Отвечает за расположение содержимого на странице.',
-      },
-      {
-        name: 'FileField',
-        componentName: 'FileField',
-        url: '/?path=/docs/components-filefield--playground',
-        description: 'Можно выбрать файлы, чтобы загрузить или отправить.',
       },
       {
         name: 'Header',
@@ -206,12 +206,6 @@ export const data: Data = [
         description: 'Пагинация. Можно выбрать страницу.',
       },
       {
-        name: 'Popover',
-        componentName: 'Popover',
-        url: '/?path=/docs/components-popover--playground',
-        description: 'Поповер. Позиционирование элементов по координатам или якорю.',
-      },
-      {
         name: 'ProgressSpin',
         componentName: 'ProgressSpin',
         url: '/?path=/docs/components-progressspin--playground',
@@ -219,16 +213,22 @@ export const data: Data = [
           'Индикатор. Показывает течение процесса — загрузку, отправку или что-то похожее.',
       },
       {
-        name: 'ProgressStepBar(Canary)',
-        componentName: 'ProgressStepBar',
-        url: '/?path=/docs/components-progressstepbar--playground',
-        description: 'Прогресс по шагам. Показывает, на каком шаге процесс.',
+        name: 'Popover',
+        componentName: 'Popover',
+        url: '/?path=/docs/components-popover--playground',
+        description: 'Поповер. Позиционирование элементов по координатам или якорю.',
       },
       {
         name: 'Radio',
         componentName: 'Radio',
         url: '/?path=/docs/components-radio--playground',
         description: 'Радиокнопка. Можно выбрать один вариант.',
+      },
+      {
+        name: 'ProgressStepBar(Canary)',
+        componentName: 'ProgressStepBar',
+        url: '/?path=/docs/components-progressstepbar--playground',
+        description: 'Прогресс по шагам. Показывает, на каком шаге процесс.',
       },
       {
         name: 'RadioGroup',
@@ -363,13 +363,13 @@ export const data: Data = [
 ];
 
 export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
-  Avatar: AvatarImage,
   Attachment: AttachmentImage,
+  Avatar: AvatarImage,
   Badge: BadgeImage,
   Breadcrumbs: BreadcrumbsImage,
   Button: ButtonImage,
-  Card: CardImage,
   Checkbox: CheckboxImage,
+  Card: CardImage,
   CheckboxGroup: CheckboxGroupImage,
   ChoiceGroup: ChoiceGroupImage,
   Collapse: CollapseImage,
@@ -379,19 +379,19 @@ export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> =
   DatePicker: DatePickerImage,
   DateTime: DateTimeImage,
   DragNDropField: DragNDropFieldImage,
+  FileField: FileFieldImage,
   File: FileImage,
   Grid: GridImage,
-  FileField: FileFieldImage,
   Header: HeaderImage,
   Informer: InformerImage,
   Layout: LayoutImage,
   Loader: LoaderImage,
   Modal: ModalImage,
   Pagination: PaginationImage,
-  Popover: PopoverImage,
   ProgressSpin: ProgressSpinImage,
-  ProgressStepBar: ProgressStepBarImage,
+  Popover: PopoverImage,
   Radio: RadioImage,
+  ProgressStepBar: ProgressStepBarImage,
   RadioGroup: RadioGroupImage,
   Responses: ResponsesImage,
   Select: SelectImage,

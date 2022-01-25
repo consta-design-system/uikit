@@ -5,7 +5,7 @@ import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconSettings } from '../../../icons/IconSettings/IconSettings';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
-import { breadcrumbPropSize, breadcrumbPropSizeDefault, Breadcrumbs } from '../Breadcrumbs';
+import { breadcrumbPropSize, breadcrumbPropSizeDefault, Breadcrumbs } from '../BreadcrumbsCanary';
 
 import mdx from './Breadcrumbs.docs.mdx';
 
@@ -16,41 +16,41 @@ const defaultKnobs = () => ({
 
 type Page = {
   icon?: IconComponent;
-  link: string;
+  href: string;
   label: string;
-  isActive?: boolean;
+  active?: boolean;
 };
 
 const pages: Page[] = [
   {
     icon: IconSettings,
     label: 'Page1',
-    link: 'https://url.com/page-1',
+    href: 'https://url.com/page-1',
   },
   {
     label: 'Page2',
-    link: 'https://url.com/page-2',
+    href: 'https://url.com/page-2',
   },
   {
     label: 'Page3',
-    link: 'https://url.com/page-3',
+    href: 'https://url.com/page-3',
   },
   {
     label: 'Page4',
-    link: 'https://url.com/page-4',
+    href: 'https://url.com/page-4',
   },
   {
     label: 'Page5',
-    link: 'https://url.com/page-5',
+    href: 'https://url.com/page-5',
   },
   {
     label: 'Page6',
-    link: 'https://url.com/page-6',
+    href: 'https://url.com/page-6',
   },
   {
     label: 'Page7',
-    link: 'https://url.com/page-7',
-    isActive: true,
+    href: 'https://url.com/page-7',
+    active: true,
   },
 ];
 
@@ -62,16 +62,12 @@ export function Playground() {
   return (
     <div className={cnBreadcrumbsStories()}>
       <Breadcrumbs
-        pages={pages}
+        items={pages}
         size={size}
         onlyIconRoot={onlyIconRoot}
-        getLabel={(page) => page.label}
-        getIsActive={(page) => !!page.isActive}
-        getLink={(page) => page.label}
-        getIcon={(page) => page.icon}
-        onClick={(page, e) => {
+        onItemClick={({ item, e }) => {
           e.preventDefault();
-          console.log(page.link, e);
+          console.log(item.href, e);
         }}
       />
     </div>
@@ -79,8 +75,8 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Навигация/Breadcrumbs',
-  id: 'components/BreadcrumbsDeprecated',
+  title: 'Компоненты|/Навигация/Breadcrumbs(Canary)',
+  id: 'components/Breadcrumbs',
   parameters: {
     docs: {
       page: mdx,

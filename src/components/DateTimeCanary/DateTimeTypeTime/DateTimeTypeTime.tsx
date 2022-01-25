@@ -3,6 +3,7 @@ import './DateTimeTypeTime.css';
 import React, { forwardRef, useEffect, useMemo } from 'react';
 
 import { cn } from '../../../utils/bem';
+import { DateTimeAdditionalControls } from '../DateTimeAdditionalControls/DateTimeAdditionalControls';
 import { DateTimeLabel } from '../DateTimeLabel/DateTimeLabel';
 import { DateTimeTimeColumn } from '../DateTimeTimeColumn/DateTimeTimeColumn';
 import { DateTimeTypeComponent, getTimeTitle, moveTypes } from '../helpers';
@@ -23,6 +24,7 @@ export const DateTimeTypeTime: DateTimeTypeComponent<'time'> = forwardRef((props
     multiplicityMinutes = 1,
     multiplicitySeconds = 1,
     onMove,
+    renderAdditionalControls,
     ...otherProps
   } = props;
 
@@ -64,6 +66,7 @@ export const DateTimeTypeTime: DateTimeTypeComponent<'time'> = forwardRef((props
         <DateTimeTimeColumn label={locale.minutes} items={minutes} />
         <DateTimeTimeColumn label={locale.seconds} items={seconds} />
       </div>
+      <DateTimeAdditionalControls renderAdditionalControls={renderAdditionalControls} />
     </div>
   );
 });

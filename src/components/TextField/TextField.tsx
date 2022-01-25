@@ -69,6 +69,7 @@ export function TextFieldRender<TYPE extends string>(
     tabIndex,
     ariaLabel,
     label,
+    inputContainerRef,
     labelPosition = 'top',
     caption,
     iconSize: iconSizeProp,
@@ -199,6 +200,7 @@ export function TextFieldRender<TYPE extends string>(
       )}
       <div className={cnTextField('Body')}>
         <div
+          ref={inputContainerRef}
           className={cnTextField('InputContainer', {
             view,
             form,

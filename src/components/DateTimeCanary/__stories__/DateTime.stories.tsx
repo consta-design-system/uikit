@@ -8,6 +8,7 @@ import zhCNLocale from 'date-fns/locale/zh-CN';
 
 import { getByMap } from '../../../utils/getByMap';
 import { createMetadata } from '../../../utils/storybook';
+import { Button } from '../../Button/Button';
 import { DateTime, DateTimePropLocale } from '../DateTimeCanary';
 import {
   dateTimePropType,
@@ -33,13 +34,26 @@ const defaultKnobs = () => ({
   type: select('type', dateTimePropType, dateTimePropTypeDefault),
   view: select('view', dateTimePropView, dateTimePropViewDefault),
   withEvents: boolean('withEvents', false),
+  withAdditionalControls: boolean('withAdditionalControls', false),
   minDate: date('minDate', startOfDecade(new Date())),
   maxDate: date('maxDate', endOfDecade(new Date())),
   locale: select('locale', localeProp, localeDefault),
 });
 
+const additionalControls = () => {
+  return [<Button label="Кнопка" />, <Button label="Кнопка" />];
+};
+
 export function Playground() {
-  const { type, view, withEvents, minDate, maxDate, locale } = defaultKnobs();
+  const {
+    type,
+    view,
+    withEvents,
+    minDate,
+    maxDate,
+    locale,
+    withAdditionalControls,
+  } = defaultKnobs();
   const currentDay = new Date();
 
   const [value, setValue] = useState<Date | undefined>(undefined);
@@ -66,6 +80,7 @@ export function Playground() {
       minDate={new Date(minDate)}
       maxDate={new Date(maxDate)}
       events={events}
+      renderAdditionalControls={withAdditionalControls ? additionalControls : undefined}
       locale={getByMap(localeMap, locale)}
       {...timeProps}
     />

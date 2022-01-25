@@ -9,14 +9,25 @@ import { DatePickerFieldTypeDate } from '../DatePickerFieldTypeDate/DatePickerFi
 import { DatePickerTypeDateComponent } from '../helpers';
 
 export const DatePickerTypeDate: DatePickerTypeDateComponent = forwardRef((props, ref) => {
-  const { events, dateTimeView, locale, dropdownForm, onFocus, ...otherProps } = props;
+  const {
+    events,
+    dateTimeView,
+    locale,
+    dropdownForm,
+    onFocus,
+    currentVisibleDate: currentVisibleDateProp,
+    onChangeCurrentVisibleDate: onChangeCurrentVisibleDateProp,
+    ...otherProps
+  } = props;
 
   const fieldRef = useRef<HTMLDivElement>(null);
   const calendarRef = useRef<HTMLDivElement>(null);
 
   const [calendarVisible, setCalendarVisible] = useState<boolean>(false);
 
-  const [currentVisibleDate, setCurrentVisibleDate] = useState<Date | undefined>();
+  const [currentVisibleDate, setCurrentVisibleDate] = useState<Date | undefined>(
+    currentVisibleDateProp,
+  );
 
   const [calendarVisibleDate, setCalendarVisibleDate] = useState<Date | undefined>();
 
@@ -30,6 +41,14 @@ export const DatePickerTypeDate: DatePickerTypeDateComponent = forwardRef((props
       setRef(ref, fieldRef.current);
     }
   }, [ref, fieldRef]);
+
+  useEffect(() => setCurrentVisibleDate(currentVisibleDateProp), [
+    currentVisibleDateProp?.getTime(),
+  ]);
+
+  useEffect(() => currentVisibleDate && onChangeCurrentVisibleDateProp?.(currentVisibleDate), [
+    currentVisibleDate?.getTime(),
+  ]);
 
   useEffect(() => {
     if (props.value && props.dateTimeView === 'classic' && calendarVisibleDate) {
@@ -81,7 +100,8 @@ export const DatePickerTypeDate: DatePickerTypeDateComponent = forwardRef((props
           props.onChange?.(params);
           handleClose();
         }}
-        onChangeCurrentVisibleDate={(date) => setCalendarVisibleDate(date)}
+        renderAdditionalControls={props.renderAdditionalControls}
+        onChangeCurrentVisibleDate={setCalendarVisibleDate}
       />
     </>
   );

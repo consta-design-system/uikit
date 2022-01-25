@@ -108,6 +108,7 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
     required?: boolean;
     step?: number | string;
     tabIndex?: number;
+    inputContainerRef?: React.Ref<HTMLDivElement>;
     inputRef?: React.Ref<HTMLTextAreaElement | HTMLInputElement>;
     ariaLabel?: string;
     iconSize?: IconPropSize;
