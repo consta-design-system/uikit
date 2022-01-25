@@ -7,10 +7,10 @@ import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
 import {
   DatePickerDropdown,
   DatePickerDropdownPropOnChange,
-  DatePickerDropdownProps,
 } from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeDateRange } from '../DatePickerFieldTypeDateRange/DatePickerFieldTypeDateRange';
 import { DatePickerTypeComponent, normalizeRangeValue } from '../helpers';
+import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 
 export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = forwardRef(
   (props, ref) => {
@@ -35,6 +35,7 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = fo
       startFieldInputRef: startFieldInputRefProp,
       currentVisibleDate: currentVisibleDateProp,
       onChangeCurrentVisibleDate: onChangeCurrentVisibleDateProp,
+      renderAdditionalControls,
       ...fieldProps
     } = props;
 
@@ -62,29 +63,10 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = fo
 
     const [calendarVisible, setCalendarVisible] = useState<boolean>(false);
 
-    const [currentVisibleDate, setCurrentVisibleDate] = useState<Date | undefined>(
+    const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate(
       currentVisibleDateProp,
+      onChangeCurrentVisibleDateProp,
     );
-
-    const commonProps: Omit<DatePickerDropdownProps, 'anchorRef'> = {
-      value: props.value || undefined,
-      view: dateTimeView,
-      events,
-      locale,
-      minDate: props.minDate,
-      maxDate: props.maxDate,
-      form: dropdownForm,
-      onChange: hadleChange,
-      renderAdditionalControls: props.renderAdditionalControls,
-    };
-
-    useEffect(() => setCurrentVisibleDate(currentVisibleDateProp), [
-      currentVisibleDateProp?.getTime(),
-    ]);
-
-    useEffect(() => currentVisibleDate && onChangeCurrentVisibleDateProp?.(currentVisibleDate), [
-      currentVisibleDate?.getTime(),
-    ]);
 
     const startFieldOnBlurHandler = (e: React.FocusEvent<HTMLElement>) => {
       onBlur && onBlur(e);
@@ -199,13 +181,21 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = fo
           endFocused={endFocused}
         />
         <DatePickerDropdown
-          {...commonProps}
           type="date"
           ref={calendarRef}
           anchorRef={startFieldRef}
           isOpen={calendarVisible}
           onChangeCurrentVisibleDate={setCurrentVisibleDate}
           currentVisibleDate={currentVisibleDate}
+          value={props.value || undefined}
+          view={dateTimeView}
+          events={events}
+          locale={locale}
+          minDate={props.minDate}
+          maxDate={props.maxDate}
+          form={dropdownForm}
+          onChange={hadleChange}
+          renderAdditionalControls={renderAdditionalControls}
         />
       </>
     );

@@ -25,9 +25,7 @@ import { DatePicker } from '../DatePickerCanary';
 import {
   datePickerPropDropdownForm,
   datePickerPropDropdownFormDefault,
-  datePickerPropFormatDefault,
-  datePickerPropPlaceholderDefault,
-  datePickerPropSeparatorDefault,
+  datePickerPropPlaceholderTypeDate,
   datePickerPropType,
   datePickerPropTypeDefault,
   DatePickerPropValue,
@@ -58,12 +56,10 @@ const defaultKnobs = () => ({
   size: select('size', textFieldPropSize, textFieldPropSizeDefault),
   view: select('view', textFieldPropView, textFieldPropViewDefault),
   disabled: boolean('disabled', false),
-  placeholder: text('placeholder', datePickerPropPlaceholderDefault),
+  placeholder: text('placeholder', datePickerPropPlaceholderTypeDate),
   withIcon: boolean('withIcon', false),
   minDate: date('minDate', minDateDefault),
   maxDate: date('maxDate', maxDateDefault),
-  format: text('format', datePickerPropFormatDefault),
-  separator: text('separator', datePickerPropSeparatorDefault),
   withEvents: boolean('withEvents', false),
   locale: select('locale', localeProp, localeDefault),
   dateTimeView: select('dateTimeView', dateTimePropView, dateTimePropViewDefault),
@@ -94,8 +90,6 @@ export function Playground() {
     withEvents,
     locale,
     dateTimeView,
-    format,
-    separator,
     dropdownForm,
     type,
     minDate,
@@ -138,8 +132,6 @@ export function Playground() {
         events={events}
         locale={getByMap(localeMap, locale)}
         dateTimeView={dateTimeView}
-        format={format}
-        separator={separator}
         dropdownForm={dropdownForm}
         minDate={new Date(minDate)}
         maxDate={new Date(maxDate)}
@@ -148,6 +140,10 @@ export function Playground() {
           startFieldRightSide: icon,
         })}
         renderAdditionalControls={withAdditionalControls ? additionalControls : undefined}
+        format="dd.MM.yyyy HH:mm"
+        multiplicityHours={2}
+        multiplicityMinutes={30}
+        // multiplicitySeconds={0}
       />
     </div>
   );

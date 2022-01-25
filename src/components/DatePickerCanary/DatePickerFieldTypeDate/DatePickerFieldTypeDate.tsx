@@ -8,8 +8,8 @@ import { leapYear, maxDateDefault, minDateDefault } from '../../../utils/date';
 import { TextField } from '../../TextField/TextField';
 import {
   datePickerErrorTypes,
-  datePickerPropFormatDefault,
-  datePickerPropPlaceholderDefault,
+  datePickerPropFormatTypeDate,
+  datePickerPropPlaceholderTypeDate,
   datePickerPropSeparatorDefault,
 } from '../helpers';
 
@@ -20,9 +20,9 @@ export const DatePickerFieldTypeDate = React.forwardRef<
   DatePickerFieldTypeDateProps
 >((props, ref) => {
   const {
-    format: formatProp = datePickerPropFormatDefault,
+    format: formatProp = datePickerPropFormatTypeDate,
     separator = datePickerPropSeparatorDefault,
-    placeholder = datePickerPropPlaceholderDefault,
+    placeholder = datePickerPropPlaceholderTypeDate,
     onChange,
     onError,
     minDate = minDateDefault,
@@ -56,7 +56,7 @@ export const DatePickerFieldTypeDate = React.forwardRef<
         if (dd && MM && yyyy) {
           const date = parse(
             `${dd}${datePickerPropSeparatorDefault}${MM}${datePickerPropSeparatorDefault}${yyyy}`,
-            datePickerPropFormatDefault,
+            datePickerPropFormatTypeDate,
             new Date(),
           );
           if (!isWithinInterval(date, { start: minDate, end: maxDate })) {
@@ -132,7 +132,7 @@ export const DatePickerFieldTypeDate = React.forwardRef<
             !isValid(
               parse(
                 `${dd}${datePickerPropSeparatorDefault}${MM}${datePickerPropSeparatorDefault}${leapYear}`,
-                datePickerPropFormatDefault,
+                datePickerPropFormatTypeDate,
                 new Date(),
               ),
             )
@@ -156,7 +156,7 @@ export const DatePickerFieldTypeDate = React.forwardRef<
             !isValid(
               parse(
                 `${dd}${datePickerPropSeparatorDefault}${MM}${datePickerPropSeparatorDefault}${yyyy}`,
-                datePickerPropFormatDefault,
+                datePickerPropFormatTypeDate,
                 new Date(),
               ),
             )

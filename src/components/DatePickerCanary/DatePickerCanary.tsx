@@ -24,12 +24,24 @@ export const DatePicker: DatePickerComponent = forwardRef((props, ref) => {
     type = datePickerPropTypeDefault,
     minDate = minDateDefault,
     maxDate = maxDateDefault,
+    multiplicityMinutes,
+    multiplicitySeconds,
+    multiplicityHours,
     ...otherProps
   } = props;
 
+  const timeProps =
+    type === 'date-time'
+      ? {
+          multiplicityMinutes,
+          multiplicitySeconds,
+          multiplicityHours,
+        }
+      : undefined;
+
   const Component = getByMap(typeMap, type);
 
-  return <Component {...otherProps} minDate={minDate} maxDate={maxDate} ref={ref} />;
+  return <Component {...otherProps} {...timeProps} minDate={minDate} maxDate={maxDate} ref={ref} />;
 });
 
 export * from './helpers';

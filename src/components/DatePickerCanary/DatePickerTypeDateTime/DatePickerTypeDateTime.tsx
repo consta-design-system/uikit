@@ -6,19 +6,47 @@ import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside'
 import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { setRef } from '../../../utils/setRef';
 import { DatePickerDropdown } from '../DatePickerDropdown/DatePickerDropdown';
-import { DatePickerFieldTypeDate } from '../DatePickerFieldTypeDate/DatePickerFieldTypeDate';
-import { DatePickerTypeComponent } from '../helpers';
+import { DatePickerFieldTypeDateTime } from '../DatePickerFieldTypeDateTime/DatePickerFieldTypeDateTime';
+import {
+  datePickerPropFormatTypeDateTime,
+  DatePickerTypeComponent,
+  getMultiplicityTime,
+} from '../helpers';
+import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 
 export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> = forwardRef(
   (props, ref) => {
-    const { events, dateTimeView, locale, dropdownForm, onFocus, ...otherProps } = props;
+    const {
+      events,
+      dateTimeView,
+      locale,
+      dropdownForm,
+      onFocus,
+      currentVisibleDate: currentVisibleDateProp,
+      onChangeCurrentVisibleDate: onChangeCurrentVisibleDateProp,
+      multiplicityHours: multiplicityHoursProp,
+      multiplicityMinutes: multiplicityMinutesProp,
+      multiplicitySeconds: multiplicitySecondsProp,
+      renderAdditionalControls,
+      ...otherProps
+    } = props;
+
+    const [multiplicityHours, multiplicityMinutes, multiplicitySeconds] = getMultiplicityTime(
+      otherProps.format || datePickerPropFormatTypeDateTime,
+      multiplicityHoursProp,
+      multiplicityMinutesProp,
+      multiplicitySecondsProp,
+    );
 
     const fieldRef = useRef<HTMLDivElement>(null);
     const calendarRef = useRef<HTMLDivElement>(null);
 
     const [calendarVisible, setCalendarVisible] = useFlag(false);
 
-    const [currentVisibleDate, setCurrentVisibleDate] = useState<Date | undefined>();
+    const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate(
+      currentVisibleDateProp,
+      onChangeCurrentVisibleDateProp,
+    );
 
     const [calendarVisibleDate, setCalendarVisibleDate] = useState<Date | undefined>();
 
@@ -65,12 +93,20 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> = forw
 
     return (
       <>
-        <DatePickerFieldTypeDate {...otherProps} ref={fieldRef} onFocus={onFocusHandler} />
+        <DatePickerFieldTypeDateTime
+          {...otherProps}
+          ref={fieldRef}
+          onFocus={onFocusHandler}
+          multiplicityHours={multiplicityHours}
+          multiplicitySeconds={multiplicitySeconds}
+          multiplicityMinutes={multiplicityMinutes}
+        />
         <DatePickerDropdown
           ref={calendarRef}
           anchorRef={fieldRef}
           isOpen={calendarVisible}
           value={props.value || undefined}
+          type="date-time"
           view={dateTimeView}
           events={events}
           locale={locale}
@@ -78,12 +114,12 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> = forw
           maxDate={props.maxDate}
           currentVisibleDate={currentVisibleDate}
           form={dropdownForm}
-          onChange={(params) => {
-            props.onChange?.(params);
-            handleClose();
-          }}
-          onChangeCurrentVisibleDate={(date) => setCalendarVisibleDate(date)}
-          type="date-time"
+          onChange={props.onChange}
+          renderAdditionalControls={renderAdditionalControls}
+          onChangeCurrentVisibleDate={setCalendarVisibleDate}
+          multiplicityHours={multiplicityHours}
+          multiplicitySeconds={multiplicitySeconds}
+          multiplicityMinutes={multiplicityMinutes}
         />
       </>
     );

@@ -1,44 +1,47 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { format, isValid, isWithinInterval, parse } from 'date-fns';
-import IMask from 'imask';
 
 import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
 import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
-import { leapYear, maxDateDefault, minDateDefault } from '../../../utils/date';
+import { maxDateDefault, minDateDefault } from '../../../utils/date';
 import { TextField } from '../../TextField/TextField';
 import {
   datePickerErrorTypes,
-  datePickerPropFormatDefault,
-  datePickerPropPlaceholderDefault,
+  datePickerPropFormatTypeDateTime,
+  datePickerPropPlaceholderTypeDateTime,
   datePickerPropSeparatorDefault,
 } from '../helpers';
 
-import { DatePickerFieldTypeDateTimeProps, getPartsDate } from './helpers';
+import { DatePickerFieldTypeDateTimeProps, getParts, getPartsDate, useImask } from './helpers';
 
 export const DatePickerFieldTypeDateTime = React.forwardRef<
   HTMLDivElement,
   DatePickerFieldTypeDateTimeProps
 >((props, ref) => {
   const {
-    format: formatProp = datePickerPropFormatDefault,
+    format: formatProp = datePickerPropFormatTypeDateTime,
     separator = datePickerPropSeparatorDefault,
-    placeholder = datePickerPropPlaceholderDefault,
+    placeholder = datePickerPropPlaceholderTypeDateTime,
     onChange,
     onError,
     minDate = minDateDefault,
     maxDate = maxDateDefault,
     value,
     inputRef: inputRefProp,
+    multiplicityHours,
+    multiplicitySeconds,
+    multiplicityMinutes,
     ...otherProps
   } = props;
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const imaskRef = useRef<IMask.InputMask<IMask.MaskedDateOptions> | null>(null);
   const onChangeRef = useMutableRef(onChange);
 
   const [stringValue, setStringValue] = useState<string | null>(
     value && isValid(value) ? format(value, formatProp) : null,
   );
+
+  const formatParts = useMemo(() => getParts(formatProp, separator), [formatProp, separator]);
 
   const handleChange = useCallback(
     (e: Event, stringValue: string | null) => {
@@ -51,24 +54,28 @@ export const DatePickerFieldTypeDateTime = React.forwardRef<
           return;
         }
 
-        const [dd, MM, yyyy] = getPartsDate(stringValue, formatProp, separator);
+        const partsDate = getPartsDate(stringValue, formatProp, separator, formatParts);
+        const [dd, MM, yyyy, HH, mm, ss] = partsDate;
 
-        if (dd && MM && yyyy) {
+        if (partsDate.filter((item) => !!item).length === formatParts.length) {
           const date = parse(
-            `${dd}${datePickerPropSeparatorDefault}${MM}${datePickerPropSeparatorDefault}${yyyy}`,
-            datePickerPropFormatDefault,
+            `${dd}${datePickerPropSeparatorDefault}${MM}${datePickerPropSeparatorDefault}${yyyy} ${HH ||
+              '00'}:${mm || '00'}:${ss || '00'}`,
+            datePickerPropFormatTypeDateTime,
             new Date(),
           );
           if (!isWithinInterval(date, { start: minDate, end: maxDate })) {
-            onError &&
-              onError({
-                type: datePickerErrorTypes[0],
-                stringValue,
-                dd,
-                MM,
-                yyyy,
-                date,
-              });
+            onError?.({
+              type: datePickerErrorTypes[0],
+              stringValue,
+              dd,
+              MM,
+              yyyy,
+              date,
+              HH,
+              mm,
+              ss,
+            });
 
             onChange({ e, value: null });
             return;
@@ -80,6 +87,17 @@ export const DatePickerFieldTypeDateTime = React.forwardRef<
       }
     },
     [minDate?.getTime(), maxDate?.getTime(), formatProp, separator],
+  );
+
+  useImask(
+    formatProp,
+    separator,
+    multiplicityHours,
+    multiplicitySeconds,
+    multiplicityMinutes,
+    inputRef,
+    stringValue,
+    onError,
   );
 
   // при изменении value, нужно обновить stringValue
@@ -95,91 +113,6 @@ export const DatePickerFieldTypeDateTime = React.forwardRef<
     }
   }, [value?.getTime()]);
 
-  // задаем маску и сохраняем обьект маски в ref
-  // обнавляем при смене формата
-  useEffect(() => {
-    if (inputRef.current) {
-      imaskRef.current = (IMask(inputRef.current, {
-        mask: Date,
-        pattern: formatProp,
-        blocks: {
-          yyyy: {
-            mask: IMask.MaskedRange,
-            from: 1,
-            to: 9999,
-          },
-          MM: {
-            mask: IMask.MaskedRange,
-            from: 1,
-            to: 12,
-          },
-          dd: {
-            mask: IMask.MaskedRange,
-            from: 1,
-            to: 31,
-          },
-        },
-        lazy: true,
-        autofix: true,
-        format: (date) => format(date, formatProp),
-        parse: (string) => parse(string, formatProp, new Date()),
-        validate: (string: string) => {
-          const [dd, MM, yyyy] = getPartsDate(string, formatProp, separator);
-
-          if (
-            dd &&
-            MM &&
-            !isValid(
-              parse(
-                `${dd}${datePickerPropSeparatorDefault}${MM}${datePickerPropSeparatorDefault}${leapYear}`,
-                datePickerPropFormatDefault,
-                new Date(),
-              ),
-            )
-          ) {
-            onError &&
-              onError({
-                type: datePickerErrorTypes[1],
-                stringValue: string,
-                dd,
-                MM,
-                yyyy,
-              });
-
-            return false;
-          }
-
-          if (
-            dd &&
-            MM &&
-            yyyy &&
-            !isValid(
-              parse(
-                `${dd}${datePickerPropSeparatorDefault}${MM}${datePickerPropSeparatorDefault}${yyyy}`,
-                datePickerPropFormatDefault,
-                new Date(),
-              ),
-            )
-          ) {
-            onError &&
-              onError({
-                type: datePickerErrorTypes[1],
-                stringValue: string,
-                dd,
-                MM,
-                yyyy,
-              });
-
-            return false;
-          }
-
-          return true;
-        },
-        // проблема в типах IMask
-      }) as unknown) as IMask.InputMask<IMask.MaskedDateOptions>;
-    }
-  }, [formatProp, separator]);
-
   // задаем нативный oninput, так как с маской по другому не будет работать
   // обнавляем oninput при смене handleChange
   useEffect(() => {
@@ -189,13 +122,6 @@ export const DatePickerFieldTypeDateTime = React.forwardRef<
       };
     }
   }, [handleChange]);
-
-  // Нужно для синхранизации value c Imask,
-  // так как value мы можем задать через пропс без самого ввода,
-  // и Imask требует ручной синхронихации в этом случае
-  useEffect(() => {
-    imaskRef.current?.updateValue();
-  }, [stringValue]);
 
   return (
     <TextField

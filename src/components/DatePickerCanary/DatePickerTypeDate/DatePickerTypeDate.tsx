@@ -8,6 +8,7 @@ import { setRef } from '../../../utils/setRef';
 import { DatePickerDropdown } from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeDate } from '../DatePickerFieldTypeDate/DatePickerFieldTypeDate';
 import { DatePickerTypeComponent } from '../helpers';
+import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 
 export const DatePickerTypeDate: DatePickerTypeComponent<'date'> = forwardRef((props, ref) => {
   const {
@@ -18,6 +19,7 @@ export const DatePickerTypeDate: DatePickerTypeComponent<'date'> = forwardRef((p
     onFocus,
     currentVisibleDate: currentVisibleDateProp,
     onChangeCurrentVisibleDate: onChangeCurrentVisibleDateProp,
+    renderAdditionalControls,
     ...otherProps
   } = props;
 
@@ -26,8 +28,9 @@ export const DatePickerTypeDate: DatePickerTypeComponent<'date'> = forwardRef((p
 
   const [calendarVisible, setCalendarVisible] = useFlag(false);
 
-  const [currentVisibleDate, setCurrentVisibleDate] = useState<Date | undefined>(
+  const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate(
     currentVisibleDateProp,
+    onChangeCurrentVisibleDateProp,
   );
 
   const [calendarVisibleDate, setCalendarVisibleDate] = useState<Date | undefined>();
@@ -42,14 +45,6 @@ export const DatePickerTypeDate: DatePickerTypeComponent<'date'> = forwardRef((p
       setRef(ref, fieldRef.current);
     }
   }, [ref, fieldRef]);
-
-  useEffect(() => setCurrentVisibleDate(currentVisibleDateProp), [
-    currentVisibleDateProp?.getTime(),
-  ]);
-
-  useEffect(() => currentVisibleDate && onChangeCurrentVisibleDateProp?.(currentVisibleDate), [
-    currentVisibleDate?.getTime(),
-  ]);
 
   useEffect(() => {
     if (props.value && props.dateTimeView === 'classic' && calendarVisibleDate) {
@@ -101,7 +96,7 @@ export const DatePickerTypeDate: DatePickerTypeComponent<'date'> = forwardRef((p
           props.onChange?.(params);
           handleClose();
         }}
-        renderAdditionalControls={props.renderAdditionalControls}
+        renderAdditionalControls={renderAdditionalControls}
         onChangeCurrentVisibleDate={setCalendarVisibleDate}
       />
     </>

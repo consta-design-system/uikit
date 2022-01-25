@@ -1,6 +1,7 @@
-import { Locale } from 'date-fns';
+import { Locale, startOfToday } from 'date-fns';
 
 import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
+import { range } from '../../utils/array';
 import { DateRange } from '../../utils/types/Date';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { DateTimeAdditionalControlRenderProp, DateTimePropView } from '../DateTimeCanary/helpers';
@@ -110,6 +111,9 @@ export type DatePickerProps<
     labelPosition?: 'top' | 'left';
     onChangeCurrentVisibleDate?: (date: Date) => void;
     currentVisibleDate?: Date;
+    multiplicitySeconds?: number;
+    multiplicityMinutes?: number;
+    multiplicityHours?: number;
   },
   HTMLDivElement
 >;
@@ -130,6 +134,9 @@ export type DatePickerPropOnError = (
         dd?: string;
         MM?: string;
         yyyy?: string;
+        ss?: string;
+        mm?: string;
+        HH?: string;
         date: Date;
       }
     | {
@@ -138,6 +145,9 @@ export type DatePickerPropOnError = (
         dd?: string;
         MM?: string;
         yyyy?: string;
+        ss?: string;
+        mm?: string;
+        HH?: string;
       }
     | {
         type: typeof datePickerErrorTypes[2];
@@ -146,12 +156,52 @@ export type DatePickerPropOnError = (
 ) => void;
 
 export const datePickerPropSeparatorDefault = '.';
-export const datePickerPropFormatDefault = `dd${datePickerPropSeparatorDefault}MM${datePickerPropSeparatorDefault}yyyy`;
-export const datePickerPropPlaceholderDefault = `ДД${datePickerPropSeparatorDefault}ММ${datePickerPropSeparatorDefault}ГГГГ`;
+export const datePickerPropFormatTypeDate = `dd${datePickerPropSeparatorDefault}MM${datePickerPropSeparatorDefault}yyyy`;
+export const datePickerPropPlaceholderTypeDate = `ДД${datePickerPropSeparatorDefault}ММ${datePickerPropSeparatorDefault}ГГГГ`;
+
+export const datePickerPropFormatTypeDateTime = `${datePickerPropFormatTypeDate} HH:mm:ss`;
+export const datePickerPropPlaceholderTypeDateTime = `${datePickerPropPlaceholderTypeDate} ЧЧ:ММ:СС`;
 
 export const normalizeRangeValue = (dateRange: DateRange): DateRange => {
   if (dateRange[0] && dateRange[1] && dateRange[0]?.getTime() > dateRange[1]?.getTime()) {
     return [dateRange[1], dateRange[0]];
   }
   return dateRange;
+};
+
+export const getMultiplicityTime = (
+  format: string,
+  multiplicityHours: number | undefined,
+  multiplicityMinutes: number | undefined,
+  multiplicitySeconds: number | undefined,
+) => {
+  const markers = ['HH', 'mm', 'ss'] as const;
+  const formatArray = format.split(' ')[1]?.split(':');
+  const map = {
+    HH: multiplicityHours,
+    mm: multiplicityMinutes,
+    ss: multiplicitySeconds,
+  } as const;
+
+  return markers.map((marker) => (formatArray?.indexOf(marker) < 0 ? 0 : map[marker]));
+};
+
+export const getTimeEnum = (
+  length: number,
+  multiplicity = 1,
+  startOfUnits: (date: Date) => Date,
+  addUnits: (date: Date, amount: number) => Date,
+  getItemLabel: (date: Date) => string,
+) => {
+  const numbers = range(multiplicity ? Math.floor(length / multiplicity) : 0);
+
+  if (numbers.length === 0) {
+    return [];
+  }
+
+  const startDate = startOfUnits(startOfToday());
+
+  return numbers.map((number) => {
+    return getItemLabel(addUnits(startDate, number * multiplicity));
+  });
 };
