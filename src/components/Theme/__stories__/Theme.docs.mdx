@@ -1,7 +1,15 @@
 import { ThemeExampleColors } from './examples/ThemeExampleColors/ThemeExampleColors';
 import { ThemeExampleRoot } from './examples/ThemeExampleRoot/ThemeExampleRoot';
 
+<!--info
+description: Тема. Набор правил в CSS, который определяет, как выглядит проект.
+-->
+
 # Theme
+
+```tsx
+import { Theme } from '@consta/uikit/Theme';
+```
 
 Тема — это основа, набор правил в CSS, который определяет, как выглядит проект,
 построенный с помощью дизайн-системы. Без неё ничего работать не будет.
@@ -31,6 +39,7 @@ import { ThemeExampleRoot } from './examples/ThemeExampleRoot/ThemeExampleRoot';
   - [Для отдельного блока](#как-использовать-тему-для-отдельного-блока)
   - [Переключатель тем](#как-переключать-темы)
   - [Получить тему и переменные](#как-узнать-какая-тема-используется)
+- [Импорт](#импорт)
 
 ## Как всё работает
 
@@ -394,7 +403,7 @@ export const presetGpnDefault: ThemePreset = {
 
 #### Компоненты в инвертной схеме
 
-Некоторые компоненты нужно вынести на другой информационный слой, но так, чтобы не перекрывать остальной интерфейс. Например, [Tooltip](https://consta-uikit.vercel.app/?path=/story/components-tooltip--tooltip-positioned-by-anchor-story).
+Некоторые компоненты нужно вынести на другой информационный слой, но так, чтобы не перекрывать остальной интерфейс. Например, [Tooltip](/?path=/story/components-tooltip--playground).
 
 Такие компоненты должны быть всегда в инвертной схеме по отношению к основной. CSS-файл, который отвечает за отображение таких компонентов, описывается в `color.invert`.
 
@@ -513,4 +522,10 @@ const App = () => {
   const { themeClassNames } = useTheme();
   <Text className={themeClassNames.color.invert}>Текст в инвертном цвете</Text>;
 };
+```
+
+## Импорт
+
+```tsx
+import { Theme } from '@consta/uikit/Theme';
 ```

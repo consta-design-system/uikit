@@ -5,6 +5,7 @@ import ruLocale from 'date-fns/locale/ru';
 import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { DateTime10Years } from '../DateTime10Years/DateTime10Years';
 import { DateTime10YearSlider } from '../DateTime10YearSlider/DateTime10YearSlider';
+import { DateTimeAdditionalControls } from '../DateTimeAdditionalControls/DateTimeAdditionalControls';
 import { DateTimeLabel } from '../DateTimeLabel/DateTimeLabel';
 import { DateTimeToggler } from '../DateTimeToggler/DateTimeToggler';
 import { DateTimeTypeYear } from '../DateTimeTypeYear/DateTimeTypeYear';
@@ -35,6 +36,7 @@ export const DateTimeTypeMonth: DateTimeTypeComponent<'month'> = forwardRef((pro
     view = dateTimePropViewDefault,
     onMove,
     onChangeCurrentVisibleDate,
+    renderAdditionalControls,
     ...otherProps
   } = props;
 
@@ -109,6 +111,10 @@ export const DateTimeTypeMonth: DateTimeTypeComponent<'month'> = forwardRef((pro
           onLabelClick={on}
         />
         <DateTimeYear years={pageOneMonthsOfYear} />
+        <DateTimeAdditionalControls
+          renderAdditionalControls={renderAdditionalControls}
+          currentVisibleDate={currentVisibleDate}
+        />
       </div>
     );
   }
@@ -129,26 +135,32 @@ export const DateTimeTypeMonth: DateTimeTypeComponent<'month'> = forwardRef((pro
 
   if (view === dateTimePropView[1]) {
     return (
-      <div {...otherProps} className={cnDateTimeMixLayout({ view }, [className])} ref={ref}>
-        <div className={cnDateTimeMixLayout('Page')}>
-          <DateTimeToggler
-            className={cnDateTimeMixLayout('Label')}
-            prevOnClick={handlePrev}
-            label={pageOneLabel}
-            onLabelClick={on}
-          />
-          <DateTime10Years years={pageOneMonthsOfYear} />
+      <>
+        <div {...otherProps} className={cnDateTimeMixLayout({ view }, [className])} ref={ref}>
+          <div className={cnDateTimeMixLayout('Page')}>
+            <DateTimeToggler
+              className={cnDateTimeMixLayout('Label')}
+              prevOnClick={handlePrev}
+              label={pageOneLabel}
+              onLabelClick={on}
+            />
+            <DateTime10Years years={pageOneMonthsOfYear} />
+          </div>
+          <div className={cnDateTimeMixLayout('Page')}>
+            <DateTimeToggler
+              className={cnDateTimeMixLayout('Label')}
+              nextOnClick={handleNext}
+              label={pageTwoLabel}
+              onLabelClick={on}
+            />
+            <DateTime10Years years={pageTwoMonthsOfYear} />
+          </div>
         </div>
-        <div className={cnDateTimeMixLayout('Page')}>
-          <DateTimeToggler
-            className={cnDateTimeMixLayout('Label')}
-            nextOnClick={handleNext}
-            label={pageTwoLabel}
-            onLabelClick={on}
-          />
-          <DateTime10Years years={pageTwoMonthsOfYear} />
-        </div>
-      </div>
+        <DateTimeAdditionalControls
+          renderAdditionalControls={renderAdditionalControls}
+          currentVisibleDate={currentVisibleDate}
+        />
+      </>
     );
   }
 
@@ -181,6 +193,10 @@ export const DateTimeTypeMonth: DateTimeTypeComponent<'month'> = forwardRef((pro
           <DateTime10Years years={pageTwoMonthsOfYear} />
         </div>
       </div>
+      <DateTimeAdditionalControls
+        renderAdditionalControls={renderAdditionalControls}
+        currentVisibleDate={currentVisibleDate}
+      />
     </div>
   );
 });

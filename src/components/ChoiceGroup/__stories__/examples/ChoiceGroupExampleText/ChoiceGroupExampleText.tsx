@@ -25,7 +25,6 @@ export const ChoiceGroupExampleText = () => {
           onChange={({ value }) => setValue(value)}
           items={itemsWrong}
           getLabel={(item) => item}
-          multiple={false}
           name="ChoiceGroupExampleText"
         />
         <p className={cnDocsExample('Status', { view: 'wrong' })}>Неправильно</p>
@@ -37,7 +36,6 @@ export const ChoiceGroupExampleText = () => {
           onChange={({ value }) => setValue(value)}
           items={items}
           getLabel={(item) => item}
-          multiple={false}
           name="ChoiceGroupExampleText"
         />
         <p className={cnDocsExample('Status', { view: 'right' })}>Правильно</p>
@@ -55,7 +53,6 @@ export const ChoiceGroupExample = () => {
         onChange={({ value }) => setValue(value)}
         items={itemsSimple}
         getLabel={(item) => item}
-        multiple={false}
         name="ChoiceGroupExampleText"
       />
     </StoryBookExample>

@@ -23,7 +23,6 @@ export const ChoiceGroupExampleTextOverflow = () => {
         onChange={({ value }) => setValue(value)}
         items={items}
         getLabel={(item) => item}
-        multiple={false}
         name="ChoiceGroupExampleTextOverflow"
       />
     </StoryBookExample>

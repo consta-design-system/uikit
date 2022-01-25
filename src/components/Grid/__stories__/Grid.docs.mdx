@@ -13,7 +13,15 @@ import {
   GridExampleRowGap,
 } from './examples/GridExampleGap/GridExampleGap';
 
+<!--info
+description: Модульная сетка. Отвечает за расположение содержимого на странице.
+-->
+
 # Grid
+
+```tsx
+import { Grid, GridItem } from '@consta/uikit/Grid';
+```
 
 Модульная сетка — один из ключевых инструментов для компоновки содержимого на странице.
 Её можно встраивать в любые блоки для управления потоком контента или построить на ней свой лэйаут.
@@ -30,6 +38,7 @@ import {
   - [С какой строки начинать](#с-какой-строки-начинать)
   - [Порядок элементов](#порядок-элементов)
   - [Breakpoints](#контрольные-точки-для-элемента-сетки)
+- [Импорт](#импорт)
 - [Свойства Grid](#свойства-grid)
 - [Свойства GridItem](#свойства-griditem)
 
@@ -292,6 +301,12 @@ export function GridExampleBreakpoints() {
 ```
 
 <GridItemExampleBreakpoints />
+
+## Импорт
+
+```tsx
+import { Grid, GridItem } from '@consta/uikit/Grid';
+```
 
 ## Свойства Grid
 

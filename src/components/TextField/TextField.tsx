@@ -1,6 +1,6 @@
 import './TextField.css';
 
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import TextAreaAutoSize from 'react-textarea-autosize';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
@@ -8,7 +8,7 @@ import { IconClose } from '../../icons/IconClose/IconClose';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { IconSelectOpen } from '../../icons/IconSelectOpen/IconSelectOpen';
 import { cn } from '../../utils/bem';
-import { getSizeByMap } from '../../utils/getSizeByMap';
+import { getByMap } from '../../utils/getByMap';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { FieldCaption } from '../FieldCaption/FieldCaption';
 import { FieldLabel } from '../FieldLabel/FieldLabel';
@@ -69,10 +69,12 @@ export function TextFieldRender<TYPE extends string>(
     tabIndex,
     ariaLabel,
     label,
+    inputContainerRef,
     labelPosition = 'top',
     caption,
     iconSize: iconSizeProp,
     focused,
+    onClick,
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, props, textFieldRef);
   const [focus, setFocus] = useState<boolean>(autoFocus);
@@ -81,7 +83,7 @@ export function TextFieldRender<TYPE extends string>(
   const RightIcon = rightSide;
   const leftSideIsString = typeof leftSide === 'string';
   const rightSideIsString = typeof rightSide === 'string';
-  const iconSize = getSizeByMap(sizeMap, size, iconSizeProp);
+  const iconSize = getByMap(sizeMap, size, iconSizeProp);
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (e) => {
     const { value } = e.target;
@@ -117,6 +119,14 @@ export function TextFieldRender<TYPE extends string>(
     'aria-label': ariaLabel,
   };
 
+  useEffect(() => {
+    if (autoFocus) {
+      setTimeout(() => {
+        inputRef.current?.focus();
+      });
+    }
+  }, []);
+
   const textareaProps = {
     rows,
     cols,
@@ -138,7 +148,6 @@ export function TextFieldRender<TYPE extends string>(
       e,
       value: '',
     });
-    inputRef.current?.focus();
   };
 
   const changeNumberValue: (
@@ -153,9 +162,9 @@ export function TextFieldRender<TYPE extends string>(
       e,
       value: currentValue.toFixed(
         Number(
-          /* Необходимо для того чтобы избежать ситуации, когда по нажатию
-          на кнопку прибавляется число с погрешностью. 
-          Здесь мы берем разрядность дробной части шага и ограничиваем 
+          /* Необходимо для того, чтобы избежать ситуации, когда по нажатию
+          на кнопку прибавляется число с погрешностью.
+          Здесь мы берем разрядность дробной части шага и ограничиваем
           результирующее число этой разрядностью */
           Number(step)
             .toString()
@@ -165,8 +174,21 @@ export function TextFieldRender<TYPE extends string>(
     });
   };
 
+  const rootProps = {
+    // для того чтобы любые клики во внутренним элементам фокусили инпут
+    onClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      inputRef.current?.focus();
+      onClick?.(e);
+    },
+  };
+
   return (
-    <div className={cnTextField({ labelPosition, size, view, width }, [className])} {...otherProps}>
+    <div
+      className={cnTextField({ labelPosition, size, view, width }, [className])}
+      ref={useForkRef([ref, textFieldRef])}
+      {...rootProps}
+      {...otherProps}
+    >
       {label && (
         <FieldLabel
           required={required}
@@ -178,6 +200,7 @@ export function TextFieldRender<TYPE extends string>(
       )}
       <div className={cnTextField('Body')}>
         <div
+          ref={inputContainerRef}
           className={cnTextField('InputContainer', {
             view,
             form,
@@ -187,7 +210,6 @@ export function TextFieldRender<TYPE extends string>(
             focus: focus || focused,
             withValue: !!value,
           })}
-          ref={useForkRef([ref, textFieldRef])}
         >
           {LeftIcon && (
             <div
@@ -267,5 +289,4 @@ export function TextFieldRender<TYPE extends string>(
 }
 
 export const TextField = forwardRef(TextFieldRender) as TextFieldComponent;
-
 export * from './helpers';

@@ -9,7 +9,15 @@ import {
   ContextMenuExampleSizeM,
 } from './examples/ContextMenuExampleSize/ContextMenuExampleSize';
 
+<!--info
+description: Контекстное меню. Дополнительные действия на странице.
+-->
+
 # ContextMenu
+
+```tsx
+import { ContextMenu } from '@consta/uikit/ContextMenu';
+```
 
 Контекстное меню используется, когда нужно показать дополнительные действия,
 которые можно совершить с объектами интерфейса — например, возможность перейти
@@ -26,6 +34,7 @@ import {
 - [Размер меню](#размер-меню)
 - [Второй уровень меню](#второй-уровень-меню)
 - [Закрыть по клику за пределами](#закрыть-меню-по-клику-по-внешней-области)
+- [Импорт](#импорт)
 - [Список свойств](#свойства)
 
 ## Пункты меню
@@ -77,7 +86,7 @@ export const ContextMenuExampleSimple = () => {
 ```tsx
 type Item = {
   name: string;
-  icon: React.FC<IconProps>;
+  icon: IconComponent;
   switch?: boolean;
   status: 'warning' | 'success';
 };
@@ -348,6 +357,12 @@ export const ContextMenuExampleOutsideClick = () => {
 
 <ContextMenuExampleOutsideClick />
 
+## Импорт
+
+```tsx
+import { ContextMenu } from '@consta/uikit/ContextMenu';
+```
+
 ## Свойства
 
 ```tsx
@@ -386,6 +401,7 @@ type SubMenuDirection = 'rightStartUp' | 'rightStartDown' | 'leftStartUp' | 'lef
 | `direction?`                                                       | [`Direction`](direction)                                               | -                | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                                           |
 | `possibleDirections?`                                              | [`Direction`](direction)                                               | -                | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                                           |
 | `offset?`                                                          | `number`                                                               | -                | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                                           |
+| `onItemClick?`                                                     | `({e: React.MouseEvent<HTMLDivElement>, item: ITEM}) => void`          | -                | Действие по клику на пункт меню                                                                                                                             |
 | [`subMenuDirection?`](#второй-уровень-меню)                        | [`SubMenuDirection`](submenudirection)                                 | `'rightStartUp'` | Позиция, в которую будет изначально разворачиваться меню второго уровня                                                                                     |
 | [`size?`](#размер-меню)                                            | `'m', 's', 'l'`                                                        | -                | Размер контекстного меню                                                                                                                                    |
 | `getKey?`                                                          | `(item: ITEM) => string, number;`                                      | -                | Результат функции используется в качестве уникального ключа для пункта меню                                                                                 |
@@ -395,7 +411,7 @@ type SubMenuDirection = 'rightStartUp' | 'rightStartDown' | 'leftStartUp' | 'lef
 | [`sortGroup?`](#группы-пунктов)                                    | `(a: string, number; b: string, number) => number;`                    | -                | Функция сортировки групп                                                                                                                                    |
 | [`getSubItems?`](#второй-уровень-меню)                             | `(item: ITEM) => ITEM[], undefined;`                                   | -                | Результат функции используется как заголовок пункта меню второго уровня                                                                                     |
 | `getAccent?`                                                       | `(item: ITEM) => 'alert', 'warning', 'success', undefined;`            | -                | Результат функции используется как акцентный цвет пункта меню                                                                                               |
-| `getOnClick?`                                                      | `(item: ITEM) => React.EventHandler<React.MouseEvent<HTMLDivElement>>` | -                | Действие по клику на пункт меню                                                                                                                             |
+| `getItemOnClick?`                                                  | `(item: ITEM) => React.EventHandler<React.MouseEvent<HTMLDivElement>>` | -                | Действие по клику на пункт меню                                                                                                                             |
 | `getDisabled?`                                                     | `(item: ITEM) => boolean`                                              | -                | Функция, которая блокирует пункт меню. При значении `false` события пункта меню отключаются                                                                 |
 | [`getLeftSideBar?`](#добавить-дополнительные-элементы)             | `(item: ITEM) => React.ReactNode, null`                                | -                | Результат функции будет использоваться как рендер слева от названия пункта меню                                                                             |
 | [`getRightSideBar?`](#добавить-дополнительные-элементы)            | `(item: ITEM) => React.ReactNode, null`                                | -                | Результат функции будет использоваться как рендер справа от названия пункта меню                                                                            |

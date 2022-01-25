@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
-import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
+import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
 import { IconCheck } from '../../icons/IconCheck/IconCheck';
-import { getSizeByMap } from '../../utils/getSizeByMap';
+import { getByMap } from '../../utils/getByMap';
 import { setRef } from '../../utils/setRef';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { Button } from '../Button/Button';
@@ -18,7 +18,7 @@ export const themeTogglerPropSizeDefault: ThemeTogglerPropSize = themeTogglerPro
 export type ThemePropSetValue<ITEM> = (props: { e: React.MouseEvent; value: ITEM }) => void;
 export type ThemePropGetKey<ITEM> = (item: ITEM) => string | number;
 export type ThemePropGetLabel<ITEM> = (item: ITEM) => string;
-export type ThemePropGetIcon<ITEM> = (item: ITEM) => React.FC<IconProps>;
+export type ThemePropGetIcon<ITEM> = (item: ITEM) => IconComponent;
 
 export type Props<ITEM> = PropsWithHTMLAttributesAndRef<
   {
@@ -85,8 +85,8 @@ export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef)
     multiple: false,
   });
 
-  const iconSize = getSizeByMap(iconSizeMap, size);
-  const contextMenuSize = getSizeByMap(contextMenuSizeMap, size);
+  const iconSize = getByMap(iconSizeMap, size);
+  const contextMenuSize = getByMap(contextMenuSizeMap, size);
 
   const getButtonIcon = () => getItemIcon(items.find((theme) => getChecked(theme))!);
 
@@ -134,7 +134,7 @@ export const ThemeToggler: ThemeToggler = React.forwardRef((props, componentRef)
           getLeftSideBar={renderIcons}
           getRightSideBar={renderChecks}
           onClickOutside={() => setIsOpen(false)}
-          getOnClick={getOnChange}
+          getItemOnClick={getOnChange}
           size={contextMenuSize}
         />
       )}

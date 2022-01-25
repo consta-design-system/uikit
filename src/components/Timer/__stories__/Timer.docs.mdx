@@ -2,7 +2,15 @@ import { TimerExampleSize } from './examples/TimerExampleSize/TimerExampleSize';
 import { TimerExampleSeconds } from './examples/TimerExampleSeconds/TimerExampleSeconds';
 import { TimerExampleProgress } from './examples/TimerExampleProgress/TimerExampleProgress';
 
+<!--info
+description: Таймер. Отсчитывает время до окончания процесса.
+-->
+
 # Timer
+
+```tsx
+import { Timer } from '@consta/uikit/Timer';
+```
 
 Таймер показывает, сколько осталось секунд до окончания какого-то процесса.
 Например, до окончания загрузки файла или до момента, когда закроется сообщение об ошибке.
@@ -10,6 +18,7 @@ import { TimerExampleProgress } from './examples/TimerExampleProgress/TimerExamp
 - [Секунды](#секунды)
 - [Размер](#размер)
 - [Прогрессбар](#прогрессбар)
+- [Импорт](#импорт)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
 
@@ -20,13 +29,17 @@ import { TimerExampleProgress } from './examples/TimerExampleProgress/TimerExamp
 Таймер предназначен для очень коротких промежутков времени, до 10 секунд, поэтому
 двузначные числа лучше не использовать.
 
+```ts
+<Timer size="m" seconds={3} progress={80} />
+<Timer size="m" seconds={5} progress={80} />
+<Timer size="m" seconds={7} progress={80} />
+```
+
 <TimerExampleSeconds />
 
 ## Размер
 
 За размер таймера отвечает свойство `size`.
-
-<TimerExampleSize />
 
 ```ts
 <Timer size="2xl" seconds={5} progress={80} />
@@ -36,11 +49,11 @@ import { TimerExampleProgress } from './examples/TimerExampleProgress/TimerExamp
 <Timer size="s" seconds={5} progress={80} />
 ```
 
+<TimerExampleSize />
+
 ## Прогрессбар
 
 Вы можете указать процент заполнения прогрессбара в процентах в свойстве `progress`.
-
-<TimerExampleProgress />
 
 ```ts
 <StoryBookExample className={cnDocsDecorator('Section')}>
@@ -52,6 +65,8 @@ import { TimerExampleProgress } from './examples/TimerExampleProgress/TimerExamp
 </StoryBookExample>
 ```
 
+<TimerExampleProgress />
+
 Включите анимацию с помощью `animation`.
 
 Скорость анимации по умолчанию равна 1 секунде, ее можно поменять в CSS-переменной `--animation-duration`.
@@ -60,6 +75,12 @@ import { TimerExampleProgress } from './examples/TimerExampleProgress/TimerExamp
 .MyBlock.Timer-Progress.ProgressSpin {
   --animation-duration: 5s;
 }
+```
+
+## Импорт
+
+```tsx
+import { Timer } from '@consta/uikit/Timer';
 ```
 
 ## Свойства

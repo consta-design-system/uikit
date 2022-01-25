@@ -3,7 +3,7 @@ import './ProgressStepBarItem.css';
 import React, { useRef } from 'react';
 
 import { useFlag } from '../../../hooks/useFlag/useFlag';
-import { IconProps } from '../../../icons/Icon/Icon';
+import { IconComponent } from '../../../icons/Icon/Icon';
 import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
 import { cn } from '../../../utils/bem';
 import { Direction } from '../../Popover/Popover';
@@ -33,31 +33,31 @@ const possibleHorizontalDirections: Direction[] = [
 ];
 
 const renderPointContent = (
-  point: PointNumbersMap | React.FC<IconProps> | undefined,
+  point: PointNumbersMap | IconComponent | undefined,
   size: 'm' | 's',
   progress: boolean | undefined,
 ) => {
-  if (!point) return null;
   if (progress) return <ProgressSpin size={size} />;
+  if (!point) return null;
 
-  if (typeof point === 'function') {
-    const Icon = point;
-
-    return <Icon size="xs" />;
+  if (typeof point === 'number') {
+    return (
+      <Text
+        className={cnProgressStepBarItem('PointText')}
+        size={size === 's' ? '2xs' : 'xs'}
+        weight="bold"
+      >
+        {point}
+      </Text>
+    );
   }
 
-  return (
-    <Text
-      className={cnProgressStepBarItem('PointText')}
-      size={size === 's' ? '2xs' : 'xs'}
-      weight="bold"
-    >
-      {point}
-    </Text>
-  );
+  const Icon = point;
+
+  return <Icon size="xs" />;
 };
 
-export const ProgressStepBarItem: ProgressStepBarItemComponent = (props) => {
+export const ProgressStepBarItem: ProgressStepBarItemComponent = React.forwardRef((props, ref) => {
   const {
     content,
     tooltipContent,
@@ -102,6 +102,7 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent = (props) => {
   return (
     <>
       <div
+        ref={ref}
         className={cnProgressStepBarItem({
           direction,
           position,
@@ -115,24 +116,28 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent = (props) => {
         ) : (
           <div {...pointProps} {...pointDivButton} />
         )}
-        <div className={cnProgressStepBarItem('Content', { bottomOffset: !!content })}>
-          <Text
-            className={cnProgressStepBarItem('Label')}
-            ref={anchorRef}
-            size={size}
-            onMouseEnter={setTooltipVisible}
-            onMouseLeave={setTooltipUnVisible}
-            lineHeight={size === 's' ? 'xs' : size}
-            view="primary"
-          >
-            {label}
-          </Text>
-          {content}
-        </div>
+        {(label || content) && (
+          <div className={cnProgressStepBarItem('Content', { bottomOffset: !!content })}>
+            {label && (
+              <Text
+                className={cnProgressStepBarItem('Label')}
+                ref={anchorRef}
+                size={size}
+                onMouseEnter={setTooltipVisible}
+                onMouseLeave={setTooltipUnVisible}
+                lineHeight={size === 's' ? 'xs' : size}
+                view="primary"
+              >
+                {label}
+              </Text>
+            )}
+            {content}
+          </div>
+        )}
       </div>
       {tooltipContent && isTooltipVisible && (
         <Tooltip
-          anchorRef={anchorRef}
+          anchorRef={label || content ? anchorRef : pointRef}
           className={cnProgressStepBarItem('Tooltip')}
           direction={direction === 'horizontal' ? 'downCenter' : 'leftUp'}
           possibleDirections={
@@ -144,4 +149,4 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent = (props) => {
       )}
     </>
   );
-};
+});

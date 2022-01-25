@@ -23,7 +23,14 @@ const getCommonKnobs = () => ({
   onClickOutside: action('onClickOutside'),
 });
 
-const getText = () => <Text size="xs">{text('children', 'Контент поповера')}</Text>;
+const getText = () => (
+  <Text size="xs">
+    {text(
+      'children',
+      'Это содержимое поповера: здесь может быть что угодно, например, этот текст.',
+    )}
+  </Text>
+);
 
 const ExamplePopoverContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   children,
@@ -59,7 +66,7 @@ export const PopoverPositionedByCoordsStory = createStory(
           {(direction) => (
             <ExamplePopoverContent>
               {getText()}
-              <Text size="xs">Напраление: {direction}</Text>
+              <Text size="xs">Направление: {direction}</Text>
             </ExamplePopoverContent>
           )}
         </Popover>
@@ -69,7 +76,7 @@ export const PopoverPositionedByCoordsStory = createStory(
   { name: 'с позиционированием по координатам' },
 );
 
-export const PopoverPositionedByAnchorStory = createStory(
+export const Playground = createStory(
   () => {
     const anchorRef = useRef<HTMLButtonElement>(null);
     const [isPopoverVisible, setIsPopoverVisible] = useState(false);
@@ -87,7 +94,12 @@ export const PopoverPositionedByAnchorStory = createStory(
     return (
       <>
         <div className={cnPopoverStories()}>
-          <Button label="Нажми меня" type="button" onClick={handleClickOnAnchor} ref={anchorRef} />
+          <Button
+            label="Нажмите меня"
+            type="button"
+            onClick={handleClickOnAnchor}
+            ref={anchorRef}
+          />
         </div>
         {isPopoverVisible && (
           <Popover {...commonKnobs} anchorRef={anchorRef}>
@@ -116,7 +128,7 @@ export const PopoverBannedPositionsStory = createStory(
 
     return (
       <>
-        <Button label="Нажми меня" type="button" onClick={handleClickOnAnchor} ref={anchorRef} />
+        <Button label="Нажмите меня" type="button" onClick={handleClickOnAnchor} ref={anchorRef} />
         {isPopoverVisible && (
           <Popover
             anchorRef={anchorRef}

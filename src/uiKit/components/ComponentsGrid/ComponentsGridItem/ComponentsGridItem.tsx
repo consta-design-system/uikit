@@ -8,22 +8,28 @@ import { cn } from '../../../cn';
 const cnComponentsGridItem = cn('ComponentsGridItem');
 
 type ComponentsGridItemProps = {
-  name: string;
+  name?: string;
   description?: string;
-  href: string;
+  url?: string;
+  image?: React.FC<React.SVGProps<SVGSVGElement>>;
   children?: never;
 };
 
 export const ComponentsGridItem: React.FC<ComponentsGridItemProps> = ({
   name,
   description,
-  href,
+  url,
+  image: Svg,
 }) => {
   return (
     <div className={cnComponentsGridItem()}>
-      <Text size="l" as="a" view="link" href={href} target="blank">
-        {name}
-      </Text>
+      {Svg && <Svg className={cnComponentsGridItem('Image')} />}
+      {name && url && (
+        <Text size="l" as="a" view="link" href={url} target="blank">
+          {name}
+        </Text>
+      )}
+
       {description && <Text size="s">{description}</Text>}
     </div>
   );

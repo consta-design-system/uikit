@@ -3,7 +3,15 @@ import { SkeletonExampleAvatar } from './examples/SkeletonExampleAvatar/Skeleton
 import { SkeletonExampleImageAndText } from './examples/SkeletonExampleImageAndText';
 import { StoryBookExample } from '../../../uiKit/components/StoryBookExample/StoryBookExample';
 
+<!--info
+description: Заглушка для элементов интерфейса. Можно показать на месте элемента, который ещё не загрузился.
+-->
+
 # Skeleton
+
+```tsx
+import { SkeletonBrick, SkeletonCircle, SkeletonText } from '@consta/uikit/Skeleton';
+```
 
 Скелетон — это визуальный плейсхолдер, заглушка. Его можно показать на месте элемента, который ещё не загрузился.
 
@@ -22,6 +30,7 @@ import { StoryBookExample } from '../../../uiKit/components/StoryBookExample/Sto
 - [Скелетон для текста](#скелетон-для-текста)
   - [Описание](#скелетон-для-текста)
   - [Свойства](#свойства-skeletontext)
+- [Импорт](#импорт)
 - [Как использовать скелетоны](#как-использовать-скелетоны)
 
 ## Прямоугольный скелетон
@@ -100,6 +109,12 @@ import { StoryBookExample } from '../../../uiKit/components/StoryBookExample/Sto
 | `fontSize?`   | `'2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'` | `'m'`        | Размер текста            |
 | `lineHeight?` | `'2xs', 'xs', 's', 'm', 'l'`                                          | `'m'`        | Высота строки            |
 | `className?`  | `string`                                                              | -            | Дополнительный CSS-класс |
+
+## Импорт
+
+```tsx
+import { SkeletonBrick, SkeletonCircle, SkeletonText } from '@consta/uikit/Skeleton';
+```
 
 ## Как использовать скелетоны
 

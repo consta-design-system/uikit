@@ -19,33 +19,36 @@
   --avatar-color-16: #1abc1a;
   --avatar-color-17: #6fb80a;
   overflow: hidden;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
   color: #fff;
   background: linear-gradient(rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0)),
     linear-gradient(var(--avatar-color), var(--avatar-color));
+  font-size: var(--avatar-font-size);
   font-weight: var(--font-weight-text-semibold);
+  line-height: var(--avatar-size);
   text-align: center;
   letter-spacing: 0.1em;
 
   &_size {
     &_xs {
-      width: 20px;
-      height: 20px;
-      font-size: 6px;
-      line-height: 20px;
+      --avatar-size: 20px;
+      --avatar-font-size: 6px;
     }
 
     &_s {
-      width: 24px;
-      height: 24px;
-      font-size: 8px;
-      line-height: 24px;
+      --avatar-size: 24px;
+      --avatar-font-size: 8px;
     }
 
     &_m {
-      width: 32px;
-      height: 32px;
-      font-size: 10px;
-      line-height: 32px;
+      --avatar-size: 32px;
+      --avatar-font-size: 10px;
+    }
+
+    &_l {
+      --avatar-size: 40px;
+      --avatar-font-size: 14px;
     }
   }
 

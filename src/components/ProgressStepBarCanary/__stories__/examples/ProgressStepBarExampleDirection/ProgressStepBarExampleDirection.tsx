@@ -4,25 +4,25 @@ import { ProgressStepBar } from '../../../ProgressStepBarCanary';
 
 const steps = [
   {
-    label: 'Пункт 1',
+    label: 'Первый шаг',
     point: 1,
     status: 'normal',
     lineStatus: 'normal',
   },
   {
-    label: 'Пункт 2',
+    label: 'Второй шаг',
     point: 2,
     status: 'normal',
     lineStatus: 'normal',
   },
   {
-    label: 'Пункт 3',
+    label: 'Третий шаг',
     point: 3,
     status: 'normal',
     lineStatus: 'normal',
   },
   {
-    label: 'Пункт 4',
+    label: 'Четвёртый шаг',
     point: 4,
     status: 'normal',
   },

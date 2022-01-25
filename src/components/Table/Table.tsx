@@ -169,6 +169,7 @@ export type TableProps<T extends TableRow> = {
   size?: Size;
   stickyHeader?: boolean;
   stickyColumns?: number;
+  minColumnWidth?: number;
   isResizable?: boolean;
   activeRow?: ActiveRow;
   verticalAlign?: VerticalAlign;
@@ -182,6 +183,7 @@ export type TableProps<T extends TableRow> = {
   onRowClick?: onRowClick;
   onRowCreate?: onRowCreate;
   onCellClick?: onCellClick;
+  getAdditionalClassName?: (props: { column: TableColumn<T>; row: T; isActive: boolean }) => string;
   rowCreateText?: string;
   lazyLoad?: LazyLoad;
   onFiltersUpdated?: (filters: SelectedFilters) => void;
@@ -263,6 +265,7 @@ const InternalTable = <T extends TableRow>(
     isResizable = false,
     stickyHeader = false,
     stickyColumns = 0,
+    minColumnWidth = 150,
     activeRow,
     verticalAlign = 'top',
     headerVerticalAlign = 'center',
@@ -275,6 +278,7 @@ const InternalTable = <T extends TableRow>(
     onRowClick,
     onRowCreate,
     onCellClick,
+    getAdditionalClassName,
     rowCreateText = '+ Добавить строку',
     lazyLoad,
     onSortBy,
@@ -475,7 +479,7 @@ const InternalTable = <T extends TableRow>(
     onRowCreate && onRowCreate({ e, id, index });
 
   const handleColumnResize = (idx: number, delta: number): void => {
-    const columnMinWidth = Math.min(150, initialColumnWidths[idx]);
+    const columnMinWidth = Math.min(minColumnWidth, initialColumnWidths[idx]);
     const prevColumnWidth = resizedColumnWidths[idx] || initialColumnWidths[idx];
     const newColumnWidth = Math.max(columnMinWidth, prevColumnWidth + delta);
 
@@ -830,6 +834,11 @@ const InternalTable = <T extends TableRow>(
                           ? activeRow.id !== undefined && activeRow.id !== row.id
                           : false,
                         isMerged: column.mergeCells && rowSpan > 1,
+                      })}
+                      className={getAdditionalClassName?.({
+                        column,
+                        row,
+                        isActive: activeRow ? activeRow.id === row.id : false,
                       })}
                       onContextMenu={(e: React.SyntheticEvent) =>
                         handleCellClick({

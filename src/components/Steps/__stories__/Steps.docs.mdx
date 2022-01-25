@@ -5,7 +5,15 @@ import { ExampleStepsSkipped } from './examples/ExampleStepsSkipped/ExampleSteps
 import { ExampleStepsContent } from './examples/ExampleStepsContent/ExampleStepsContent';
 import { ExampleStepsSize } from './examples/ExampleStepsSize/ExampleStepsSize';
 
+<!--info
+description: Вкладки по шагам. Показывает контент в определённой последовательности.
+-->
+
 # Steps
+
+```tsx
+import { Steps } from '@consta/uikit/Steps';
+```
 
 Этот компонент позволяет показывать контент пользователю в нужной последовательности — во вкладках.
 И, если нужно, показать, какие шаги он прошел, какие пропустил и сколько осталось.
@@ -19,6 +27,7 @@ import { ExampleStepsSize } from './examples/ExampleStepsSize/ExampleStepsSize';
   - [Пропущенные шаги](#пропущенные-шаги)
 - [Содержимое](#содержимое)
 - [Размер](#размер)
+- [Импорт](#импорт)
 - [Список свойств](#свойства)
 
 ## Шаги
@@ -203,6 +212,12 @@ export const Items: string[] = ['Главное', 'Важное', 'Необяз�
 ```
 
 <ExampleStepsSize />
+
+## Импорт
+
+```tsx
+import { Steps } from '@consta/uikit/Steps';
+```
 
 ## Свойства
 

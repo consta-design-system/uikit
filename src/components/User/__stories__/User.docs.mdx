@@ -8,7 +8,15 @@ import { UserExampleView } from './examples/UserExampleView/UserExampleView';
 import { UserExampleSize, UserExampleSizeWidth } from './examples/UserExampleSize/UserExampleSize';
 import { UserExampleArrow } from './examples/UserExampleArrow/UserExampleArrow';
 
+<!--info
+description: Информация о пользователе — аватарка, имя, статус.
+-->
+
 # User
+
+```tsx
+import { User } from '@consta/uikit/User';
+```
 
 Показывает информацию о человеке: аватарку, имя, должность, статус.
 
@@ -18,6 +26,7 @@ import { UserExampleArrow } from './examples/UserExampleArrow/UserExampleArrow';
 - [Размер](#размер)
 - [Обводка](#обводка)
 - [Подробная информация](#подробная-информация)
+- [Импорт](#импорт)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
 
@@ -102,6 +111,12 @@ import { UserExampleArrow } from './examples/UserExampleArrow/UserExampleArrow';
 
 <UserExampleArrow />
 
+## Импорт
+
+```tsx
+import { User } from '@consta/uikit/User';
+```
+
 ## Свойства
 
 <!-- props:start -->
@@ -114,7 +129,7 @@ import { UserExampleArrow } from './examples/UserExampleArrow/UserExampleArrow';
 | [`info?`](#тексты)                    | `string`                            | `-`          | Дополнительная информация о человеке                        |
 | [`view?`](#обводка)                   | `'ghost', 'clear'`                  | `'clear'`    | Внешний вид компонента                                      |
 | [`withArrow?`](#подробная-информация) | `boolean`                           | -            | Показывать стрелочку, чтобы раскрывать подробную информацию |
-| `iconRight?`                          | `React.FC<IconProps>`               | -            | Иконка в правой части компонента, работает без 'withArrow'  |
+| `iconRight?`                          | `IconComponent`                     | -            | Иконка в правой части компонента, работает без 'withArrow'  |
 | `onIconRightClick?`                   | `(e: React.SyntheticEvent) => void` | -            | Действие на клик по иконке справа, работает без 'withArrow' |
 | [`status?`](#статус)                  | `'available', 'remote', 'out'`      | -            | Статус пользователя                                         |
 | [`size?`](#размер)                    | `'s', 'm', 'l'`                     | `'m'`        | Размер                                                      |

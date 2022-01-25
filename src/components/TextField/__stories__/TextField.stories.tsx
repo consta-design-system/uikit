@@ -40,7 +40,7 @@ const defaultKnobs = () => ({
   maxLength: number('maxLength', 200),
   minRows: number('minRows', 1),
   maxRows: number('maxRows', 5),
-  placeholder: text('placeholder', 'My placeholder'),
+  placeholder: text('placeholder', 'Подсказка в поле'),
   leftSideType: select('leftSideType', ['icon', 'text', 'false'], 'false'),
   leftSideText: text('leftSideText', 'from'),
   rightSideType: select('rightSideType', ['icon', 'text', 'false'], 'false'),

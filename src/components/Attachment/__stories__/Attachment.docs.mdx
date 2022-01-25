@@ -12,7 +12,15 @@ import { AttachmentExampleIcon } from './examples/AttachmentExampleIcon/Attachme
 import { AttachmentExampleName } from './examples/AttachmentExampleName/AttachmentExampleName';
 import { AttachmentExampleAs } from './examples/AttachmentExampleAs/AttachmentExampleAs';
 
+<!--info
+description: Показывает загрузку файла или уже загруженный файл.
+-->
+
 # Attachment
+
+```tsx
+import { Attachment } from '@consta/uikit/Attachment';
+```
 
 Показывает загрузку файла или уже загруженные файлы.
 
@@ -31,6 +39,7 @@ import { AttachmentExampleAs } from './examples/AttachmentExampleAs/AttachmentEx
   - [По клику на кнопку](#по-клику-на-кнопку)
   - [По клику на компонент](#по-клику-на-компонент)
 - [Тег для компонента](#тег-для-компонента)
+- [Импорт](#импорт)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
 
@@ -40,17 +49,76 @@ import { AttachmentExampleAs } from './examples/AttachmentExampleAs/AttachmentEx
 
 **Файл загружается**. Вместо иконки с расширением файла покажите [индикатор загрузки](#индикаторы-загрузки), если хотите — процент, на который файл загрузился. При наведении появляется кнопка для отмены загрузки с иконкой-крестиком (`IconClose`).
 
+```tsx
+<Attachment
+  className={cnAttachmentExampleBasics()}
+  fileName="Инструкция по сборке марсохода"
+  fileExtension="pdf"
+  loading
+  loadingText="Загружено на 51%"
+  buttonIcon={IconClose}
+  buttonTitle="Отменить"
+  onClick={() => console.log('onClick')}
+  onButtonClick={(e) => {
+    e.stopPropagation();
+    console.log('onButtonClick');
+  }}
+/>
+```
+
 <AttachmentExampleBasicsLoading />
 
 **Файл не загрузился** по причине какой-то ошибки. Тут всё просто: красным цветом напишите [описание ошибки](#ошибка-при-загрузке) и что нужно сделать. В этом состоянии тоже есть кнопка для отмены загрузки.
+
+```tsx
+<Attachment
+  className={cnAttachmentExampleBasics()}
+  fileName="Инструкция по сборке марсохода"
+  fileExtension="pdf"
+  errorText="Файл слишком большой, максимум 100 ТБ"
+  buttonIcon={IconClose}
+  buttonTitle="Отменить"
+  onClick={() => console.log('onClick')}
+  onButtonClick={(e) => {
+    e.stopPropagation();
+    console.log('onButtonClick');
+  }}
+/>
+```
 
 <AttachmentExampleBasicsError />
 
 **Файл успешно загрузился**. В этом состоянии уже точно известно расширение файла — можно показать соответствующую иконку (если она есть). Дополнительно можно вывести метаинформацию о файле: размер, дату, автора или что-то ещё. При наведении появляется кнопка для удаления файла с иконкой корзины (`IconTrash`).
 
+```tsx
+<Attachment
+  className={cnAttachmentExampleBasics()}
+  fileName="Инструкция по сборке марсохода"
+  fileExtension="pdf"
+  fileDescription="1,5 Mб • 21.02.2051, 14:12"
+  buttonIcon={IconTrash}
+  buttonTitle="Удалить"
+  onClick={() => console.log('onClick')}
+  onButtonClick={(e) => {
+    e.stopPropagation();
+    console.log('onButtonClick');
+  }}
+/>
+```
+
 <AttachmentExampleBasicsLoaded />
 
 **Просмотр файла**. На первый взгляд внешне это состояние не отличается от предыдущего. Разница в том, что тут нет никаких кнопок, так как с самим файлом уже нельзя ничего сделать. В этом случае компонент должен стать ссылкой или кнопкой, по которой открывается или скачивается файл.
+
+```tsx
+<Attachment
+  className={cnAttachmentExampleBasics()}
+  fileName="Инструкция по сборке марсохода"
+  fileExtension="pdf"
+  fileDescription="1,5 Mб • 21.02.2051, 14:12"
+  onClick={() => console.log('onClick')}
+/>
+```
 
 <AttachmentExampleBasicsLink />
 
@@ -61,9 +129,7 @@ import { AttachmentExampleAs } from './examples/AttachmentExampleAs/AttachmentEx
 Иконка файла зависит от его расширения, за это отвечает свойство `fileExtension`. Если вы укажете расширение, которого нет в нашей галерее иконок, пользователь увидит иконку с вопросом.
 [Посмотреть иконки для файлов](?path=/story/components-file--gallery)
 
-<AttachmentExampleIcon />
-
-```ts
+```tsx
 <Attachment
   fileName="Картинка в JPG"
   fileExtension="jpg"
@@ -75,6 +141,8 @@ import { AttachmentExampleAs } from './examples/AttachmentExampleAs/AttachmentEx
 />
 ```
 
+<AttachmentExampleIcon />
+
 Рядом с иконкой можно разместить информацию о файле.
 
 ### Название
@@ -83,9 +151,7 @@ import { AttachmentExampleAs } from './examples/AttachmentExampleAs/AttachmentEx
 
 Например, если вы просите загрузить фотографию, скан паспорта и сопроводительное письмо, загруженные файлы можно так и назвать.
 
-<AttachmentExampleDescription />
-
-```ts
+```tsx
 <Attachment
   className={cnAttachmentExampleList()}
   fileName="Фотография"
@@ -108,15 +174,15 @@ import { AttachmentExampleAs } from './examples/AttachmentExampleAs/AttachmentEx
 />
 ```
 
+<AttachmentExampleDescription />
+
 ### Описание
 
 За описание файла отвечает свойство `fileDescription`. Мы предполагаем, что здесь удобно
 показывать размер файла и время загрузки, но вы можете использовать его для любой
 информации, которую считаете важной.
 
-<AttachmentExampleName />
-
-```ts
+```tsx
 <Attachment
   className={cnAttachmentExampleName()}
   fileName="Файл с нормальным описанием"
@@ -132,6 +198,8 @@ import { AttachmentExampleAs } from './examples/AttachmentExampleAs/AttachmentEx
 />
 ```
 
+<AttachmentExampleName />
+
 ## Загрузка файла
 
 ### Индикаторы загрузки
@@ -144,9 +212,7 @@ import { AttachmentExampleAs } from './examples/AttachmentExampleAs/AttachmentEx
 
 `loadingProgress` позволяет показать прогресс загрузки файла в процентах.
 
-<AttachmentExampleLoading />
-
-```ts
+```tsx
 <Attachment
   fileName="Инструкция по сборке марсохода"
   fileExtension="docx"
@@ -157,6 +223,8 @@ import { AttachmentExampleAs } from './examples/AttachmentExampleAs/AttachmentEx
 />
 ```
 
+<AttachmentExampleLoading />
+
 ### Ошибка при загрузке
 
 Если во время загрузки файла произошла ошибка, вы можете показать, что случилось,
@@ -165,15 +233,15 @@ import { AttachmentExampleAs } from './examples/AttachmentExampleAs/AttachmentEx
 Постарайтесь в тексте ошибки объяснить пользователю не только, что произошло, но ещё
 и почему так получилось и как это исправить.
 
-<AttachmentExampleError />
-
-```ts
+```tsx
 <Attachment
   fileName="Марсианский закат"
   fileExtension="jpg"
   errorText="Файл слишком большой, максимум 100 ТБ"
 />
 ```
+
+<AttachmentExampleError />
 
 ## Обработка событий
 
@@ -188,15 +256,15 @@ import { AttachmentExampleAs } from './examples/AttachmentExampleAs/AttachmentEx
 
 `onButtonClick` задаёт событие, которое обрабатывается при клике на кнопку.
 
+`withAction` добавляет подсветку компонента по наведению.
+
 ### По клику на компонент
 
 За обработку событий по клику на весь компонент отвечает свойство `onClick`.
 
 > Не забудьте про всплытие событий
 
-<AttachmentExampleEvents />
-
-```ts
+```tsx
 <Attachment
   fileName="my_tale_about_mars_variant_121_final"
   fileExtension="docx"
@@ -212,13 +280,32 @@ import { AttachmentExampleAs } from './examples/AttachmentExampleAs/AttachmentEx
 />
 ```
 
+<AttachmentExampleEvents />
+
 ## Тег для компонента
 
 Свойство `as` отвечает за тег, в который `Attachment` оборачивается в HTML-документе.
 По умолчанию это `div`. Вы можете поменять этот тег, чтобы добавить компоненту
 свойства другого элемента — например, сделайте его ссылкой.
 
+```tsx
+<Attachment
+  as="a"
+  href="https://www.youtube.com/watch?v=dAZKu_ojb14"
+  className={cnAttachmentExampleAs()}
+  fileName="Вести с марса"
+  fileExtension="mov"
+  fileDescription="Нажми меня"
+/>
+```
+
 <AttachmentExampleAs />
+
+## Импорт
+
+```tsx
+import { Attachment } from '@consta/uikit/Attachment';
+```
 
 ## Свойства
 
@@ -235,12 +322,12 @@ import { AttachmentExampleAs } from './examples/AttachmentExampleAs/AttachmentEx
 | [`errorText`](#ошибка-при-загрузке)       | `string`                                | -            | Текст ошибки при загрузке файла                                  |
 | [`onClick`](#по-клику-на-компонент)       | `React.EventHandler<React.MouseEvent>;` | -            | Событие для клика по всему компоненту                            |
 | [`onButtonClick`](#по-клику-на-кнопку)    | `React.EventHandler<React.MouseEvent>;` | -            | Событие для клика по кнопке                                      |
-| [`buttonIcon`](#по-клику-на-кнопку)       | `React.FC<IconProps>;`                  | -            | Иконка для кнопки                                                |
+| [`buttonIcon`](#по-клику-на-кнопку)       | `IconComponent`                         | -            | Иконка для кнопки                                                |
 | [`buttonTitle`](#по-клику-на-кнопку)      | `string`                                | -            | Всплывающая подсказка для кнопки                                 |
+| [`withAction`](#обработка-событий)        | `boolean`                               | -            | Добавляет подсветку компонента по наведению                      |
 | [`as`](#тег-для-компонента)               | `keyof JSX.IntrinsicElements`           | `'div'`      | HTML-тег, в виде которого этот компонент будет представлен в DOM |
 | `className`                               | `string`                                | -            | Дополнительный CSS-класс                                         |
 | `ref`                                     | `React.Ref<HTMLDivElement>`             | -            | Ссылка на корневой DOM-элемент этого компонента                  |
-| `withAction`                              | `boolean`                               | -            | Имеется ли действие                                              |
 
 <!-- props:end -->
 

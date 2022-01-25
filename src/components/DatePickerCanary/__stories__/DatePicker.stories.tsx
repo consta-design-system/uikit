@@ -8,8 +8,9 @@ import zhCNLocale from 'date-fns/locale/zh-CN';
 
 import { IconCalendar } from '../../../icons/IconCalendar/IconCalendar';
 import { maxDateDefault, minDateDefault } from '../../../utils/date';
-import { getSizeByMap } from '../../../utils/getSizeByMap';
+import { getByMap } from '../../../utils/getByMap';
 import { createMetadata } from '../../../utils/storybook';
+import { Button } from '../../Button/Button';
 import { dateTimePropView, dateTimePropViewDefault } from '../../DateTimeCanary/helpers';
 import {
   textFieldPropForm,
@@ -49,14 +50,16 @@ const defaultKnobs = () => ({
   type: select('type', datePickerPropType, datePickerPropTypeDefault),
   form: select('form', textFieldPropForm, textFieldPropFormDefault),
   status: select('status', ['', ...textFieldPropStatus], ''),
+  withAdditionalControls: boolean('withAdditionalControls', false),
+  label: text('label', 'Заголовок'),
+  caption: text('caption', 'Подпись'),
+  required: boolean('required', false),
+  labelPosition: select('labelPosition', ['top', 'left'], 'top'),
   size: select('size', textFieldPropSize, textFieldPropSizeDefault),
   view: select('view', textFieldPropView, textFieldPropViewDefault),
   disabled: boolean('disabled', false),
   placeholder: text('placeholder', datePickerPropPlaceholderDefault),
-  leftSideType: select('leftSideType', ['icon', 'text', 'false'], 'false'),
-  leftSideText: text('leftSideText', 'from'),
-  rightSideType: select('rightSideType', ['icon', 'text', 'false'], 'false'),
-  rightSideText: text('rightSideText', 'text'),
+  withIcon: boolean('withIcon', false),
   minDate: date('minDate', minDateDefault),
   maxDate: date('maxDate', maxDateDefault),
   format: text('format', datePickerPropFormatDefault),
@@ -71,17 +74,22 @@ const defaultKnobs = () => ({
   ),
 });
 
+const additionalControls = () => {
+  return [<Button label="Кнопка" />, <Button label="Кнопка" />];
+};
+
 export function Playground() {
   const {
     form,
     status,
+    label,
+    caption,
+    required,
+    labelPosition,
     size,
     view,
     placeholder,
-    leftSideType,
-    leftSideText,
-    rightSideType,
-    rightSideText,
+    withIcon,
     disabled,
     withEvents,
     locale,
@@ -90,30 +98,20 @@ export function Playground() {
     separator,
     dropdownForm,
     type,
+    minDate,
+    maxDate,
+    withAdditionalControls,
   } = defaultKnobs();
 
   const [value, setValue] = useState<DatePickerPropValue<typeof type>>(null);
 
   const currentDay = new Date();
 
-  const leftSideSelect = {
-    text: leftSideText,
-    icon: IconCalendar,
-    false: undefined,
-  };
-
-  const rightSideSelect = {
-    text: rightSideText,
-    icon: IconCalendar,
-    false: undefined,
-  };
-
   const events = withEvents
     ? [startOfWeek(currentDay, { locale: ruLocale }), currentDay, addDays(currentDay, 2)]
     : undefined;
 
-  const leftSide = leftSideSelect[leftSideType];
-  const rightSide = rightSideSelect[rightSideType];
+  const icon = withIcon ? IconCalendar : undefined;
 
   useEffect(() => {
     setValue(null);
@@ -125,6 +123,10 @@ export function Playground() {
         type={type}
         width="full"
         form={form}
+        label={label}
+        labelPosition={labelPosition}
+        caption={caption}
+        required={required}
         value={value}
         status={status || undefined}
         view={view}
@@ -132,14 +134,20 @@ export function Playground() {
         disabled={disabled}
         size={size}
         onChange={({ value }) => setValue(value)}
-        leftSide={leftSide}
-        rightSide={rightSide}
+        rightSide={icon}
         events={events}
-        locale={getSizeByMap(localeMap, locale)}
+        locale={getByMap(localeMap, locale)}
         dateTimeView={dateTimeView}
         format={format}
         separator={separator}
         dropdownForm={dropdownForm}
+        minDate={new Date(minDate)}
+        maxDate={new Date(maxDate)}
+        {...(type === 'date-range' && {
+          endFieldRightSide: icon,
+          startFieldRightSide: icon,
+        })}
+        renderAdditionalControls={withAdditionalControls ? additionalControls : undefined}
       />
     </div>
   );

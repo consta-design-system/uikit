@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { IconProps } from '../../../../../icons/Icon/Icon';
+import { IconComponent } from '../../../../../icons/Icon/Icon';
 import { IconCamera } from '../../../../../icons/IconCamera/IconCamera';
 import { IconPhoto } from '../../../../../icons/IconPhoto/IconPhoto';
 import { IconRing } from '../../../../../icons/IconRing/IconRing';
@@ -10,10 +10,10 @@ import { ChoiceGroup } from '../../../ChoiceGroup';
 
 type Item = {
   name: string;
-  icon?: React.FC<IconProps>;
+  icon?: IconComponent;
 };
 
-const items = [
+const items: Item[] = [
   {
     name: 'Первый',
     icon: IconPhoto,
@@ -39,7 +39,6 @@ export const ChoiceGroupExampleIcon = () => {
         getLabel={(item) => item.name}
         getIcon={(item) => item.icon}
         name="ChoiceGroupExampleIcon"
-        multiple={false}
       />
       <ChoiceGroup
         value={value}
@@ -49,7 +48,6 @@ export const ChoiceGroupExampleIcon = () => {
         getIcon={(item) => item.icon}
         onlyIcon
         name="ChoiceGroupExampleIcon"
-        multiple={false}
       />
     </StoryBookExample>
   );

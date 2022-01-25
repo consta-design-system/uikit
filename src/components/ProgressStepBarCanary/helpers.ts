@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IconProps } from '../../icons/Icon/Icon';
+import { IconComponent } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
@@ -23,13 +23,11 @@ export const propPosition = ['center', 'start', 'end'] as const;
 export type PropPosition = typeof propPosition[number];
 export const propPositionDefault: PropPosition = propPosition[0];
 
-export type PropGetItemLabel<ITEM> = (item: ITEM) => string;
+export type PropGetItemLabel<ITEM> = (item: ITEM) => string | undefined;
 export type PropGetItemKey<ITEM> = (item: ITEM) => string | number;
 export type PropGetItemTooltipContent<ITEM> = (item: ITEM) => string | undefined;
 export type PropGetItemLineStatus<ITEM> = (item: ITEM) => PropStatus | undefined;
-export type PropGetItemPoint<ITEM> = (
-  item: ITEM,
-) => PointNumbersMap | React.FC<IconProps> | undefined;
+export type PropGetItemPoint<ITEM> = (item: ITEM) => PointNumbersMap | IconComponent | undefined;
 export type PropGetItemProgress<ITEM> = (item: ITEM) => boolean | undefined;
 export type PropGetItemContent<ITEM> = (item: ITEM) => React.ReactNode | undefined;
 export type PropGetItemStatus<ITEM> = (item: ITEM) => PropStatus | undefined;
@@ -38,10 +36,10 @@ export type PropGetItemOnClick<ITEM> = (
 ) => React.EventHandler<React.MouseEvent> | undefined;
 
 export type DefaultItem = {
-  label: string;
+  label?: string;
   tooltipContent?: string;
   lineStatus?: PropStatus;
-  point?: PointNumbersMap | React.FC<IconProps>;
+  point?: PointNumbersMap | IconComponent;
   status?: PropStatus;
   progress?: boolean;
   content?: React.ReactNode;
@@ -75,8 +73,8 @@ export type ProgressStepBarProps<ITEM = DefaultItem> = PropsWithHTMLAttributesAn
 
 export type ProgressStepBarItemProps = {
   content?: React.ReactNode;
-  label: string;
-  point?: PointNumbersMap | React.FC<IconProps>;
+  label?: string;
+  point?: PointNumbersMap | IconComponent;
   progress?: boolean;
   status?: PropStatus | 'system';
   tooltipContent?: string;
@@ -105,7 +103,7 @@ export type ProgressStepBarComponent = <ITEM = DefaultItem>(
 ) => React.ReactElement | null;
 
 export type ProgressStepBarItemComponent = (
-  props: ProgressStepBarItemProps,
+  props: PropsWithHTMLAttributesAndRef<ProgressStepBarItemProps, HTMLDivElement>,
 ) => React.ReactElement | null;
 
 export function withDefaultGetters<ITEM>(props: ProgressStepBarProps<ITEM>) {

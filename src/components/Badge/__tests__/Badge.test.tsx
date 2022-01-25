@@ -90,7 +90,7 @@ describe('Компонент Badge', () => {
 
         expect(getRender()).toHaveClass(cnBadge({ minified: true }));
       });
-      it(`lable используется как title`, () => {
+      it(`label используется как title`, () => {
         const label = 'label';
         renderComponent({ minified: true, label });
 

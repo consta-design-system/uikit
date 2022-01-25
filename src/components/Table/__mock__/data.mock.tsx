@@ -2,6 +2,7 @@ import React from 'react';
 
 import { IconAdd } from '../../../icons/IconAdd/IconAdd';
 import { IconRemove } from '../../../icons/IconRemove/IconRemove';
+import { cn } from '../../../utils/bem';
 import { isNotNil } from '../../../utils/type-guards';
 import { Badge } from '../../Badge/Badge';
 import { Button } from '../../Button/Button';
@@ -1157,6 +1158,42 @@ export const tableDataWithRenderFn: TableProps<typeof rowsWithObjectFields[numbe
       field: 'remainingReserves',
     },
   ],
+};
+
+const cnCustomCell = cn('CustomCell');
+
+export const tableDataWithAdditionalClassName: TableProps<typeof rowsWithObjectFields[number]> = {
+  columns: [
+    {
+      title: 'Месторождение',
+      accessor: 'field',
+      align: 'left',
+    },
+    {
+      title: 'Тип',
+      accessor: 'type',
+      align: 'center',
+    },
+    {
+      title: 'Предполагаемые полные \nзапасы, млн.т.',
+      accessor: 'estimatedReserves',
+      align: 'right',
+    },
+    {
+      title: 'Остаточные извлекаемые \nзапасы, млн.т.',
+      accessor: 'remainingReserves',
+      align: 'right',
+    },
+    {
+      title: 'Добыча тыс.т/сут.',
+      accessor: 'production',
+      align: 'right',
+      mergeCells: true,
+    },
+  ],
+  rows: rowsWithObjectFields,
+  getAdditionalClassName: ({ column, row, isActive }) =>
+    cnCustomCell({ darked: !isActive && row.type === 'Нефтяное' && !column.mergeCells }),
 };
 
 enum CustomIDs {

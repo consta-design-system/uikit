@@ -20,6 +20,7 @@ export const DatePicker: DatePickerComponent = forwardRef((props, ref) => {
     minDate: props.minDate || minDateDefault,
     maxDate: props.maxDate || maxDateDefault,
   };
+
   if (isNotDateRangeParams(propsWidthDefault)) {
     return <DatePickerTypeDate {...propsWidthDefault} ref={ref} />;
   }

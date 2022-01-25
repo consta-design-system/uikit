@@ -2,7 +2,7 @@ import './SnackBarExampleWithButtons.css';
 
 import React, { useReducer } from 'react';
 
-import { IconProps } from '../../../../../icons/Icon/Icon';
+import { IconComponent } from '../../../../../icons/Icon/Icon';
 import { IconAdd } from '../../../../../icons/IconAdd/IconAdd';
 import { IconAlert } from '../../../../../icons/IconAlert/IconAlert';
 import { IconProcessing } from '../../../../../icons/IconProcessing/IconProcessing';
@@ -18,8 +18,8 @@ type Action = { type: 'add'; item: Item } | { type: 'remove'; key: number | stri
 
 const cnSnackBarExampleWithButtons = cn('SnackBarExampleWithButtons');
 
-const getItemIconByStatus = (status: SnackBarItemStatus): React.FC<IconProps> | undefined => {
-  const mapIconByStatus: Record<SnackBarItemStatus, React.FC<IconProps>> = {
+const getItemIconByStatus = (status: SnackBarItemStatus): IconComponent | undefined => {
+  const mapIconByStatus: Record<SnackBarItemStatus, IconComponent> = {
     success: IconThumbUp,
     warning: IconAlert,
     alert: IconAlert,

@@ -4,7 +4,7 @@ import { boolean, select, text } from '@storybook/addon-knobs';
 import { IconAdd } from '../../../icons/IconAdd/IconAdd';
 import { IconRemove } from '../../../icons/IconRemove/IconRemove';
 import { IconSun } from '../../../icons/IconSun/IconSun';
-import { getSizeByMap } from '../../../utils/getSizeByMap';
+import { getByMap } from '../../../utils/getByMap';
 import { createMetadata } from '../../../utils/storybook';
 import { Badge } from '../../Badge/Badge';
 import {
@@ -27,7 +27,7 @@ const defaultKnobs = () => ({
   label: text('label', 'Заголовок'),
   children: text(
     'children',
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    'Здесь может быть что угодно. Например, этот текст. Но не обязательно: вы можете добавить иконки, кнопки, картинки или даже мини-игру (ну вдруг). Удивительная штука: никогда не угадаешь, что прячется под этим заголовком.',
   ),
   iconPosition: select('iconPosition', ['left', 'right'], 'left'),
   hoverEffect: boolean('hoverEffect', false),
@@ -71,7 +71,7 @@ export function Playground() {
 
   const defaultRightSide: React.ReactNode = [
     <Badge label="Статус" size="s" />,
-    <IconSun size={getSizeByMap(sizeIconMap, size)} />,
+    <IconSun size={getByMap(sizeIconMap, size)} />,
   ];
 
   return (

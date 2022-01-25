@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   padding: var(--vertical-space) var(--space-s);
+  text-decoration: none;
   word-break: break-word;
   cursor: pointer;
   transition: background 0.2s;

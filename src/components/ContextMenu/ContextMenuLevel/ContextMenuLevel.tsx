@@ -58,6 +58,10 @@ export const ContextMenuLevel: ContextMenuLevelType = React.forwardRef(
       getAccent,
       getDisabled,
       getOnClick,
+      getItemOnClick,
+      onItemClick,
+      getItemHTMLAttributes,
+      getItemAs,
 
       // props относящиеся к группам меню
       sortGroup,
@@ -139,8 +143,19 @@ export const ContextMenuLevel: ContextMenuLevelType = React.forwardRef(
                 const rightSide =
                   typeof getRightSideBar === 'function' ? getRightSideBar(item) : undefined;
                 const subItems = typeof getSubItems === 'function' ? getSubItems(item) : undefined;
-                const onClick =
-                  !disabled && typeof getOnClick === 'function' ? getOnClick(item) : undefined;
+                const onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+                  if (!disabled) {
+                    if (typeof getItemOnClick === 'function') {
+                      getItemOnClick(item)?.(e);
+                    }
+                    if (typeof getOnClick === 'function') {
+                      getOnClick(item)?.(e);
+                    }
+                    if (typeof onItemClick === 'function') {
+                      onItemClick?.({ e, item });
+                    }
+                  }
+                };
                 const onMouseEnter =
                   subItems && !disabled
                     ? () => {
@@ -151,9 +166,13 @@ export const ContextMenuLevel: ContextMenuLevelType = React.forwardRef(
                         setHoveredParenLevel(level);
                       };
                 const accent = typeof getAccent === 'function' ? getAccent(item) : undefined;
+                const atributes =
+                  typeof getItemHTMLAttributes === 'function' ? getItemHTMLAttributes(item) : {};
+                const as = typeof getItemAs === 'function' ? getItemAs(item) : undefined;
 
                 return (
                   <ContextMenuItem
+                    {...atributes}
                     ref={ref}
                     label={label}
                     leftSide={leftSide}
@@ -166,6 +185,7 @@ export const ContextMenuLevel: ContextMenuLevelType = React.forwardRef(
                     withSubMenu={Boolean(subItems)}
                     accent={accent}
                     disabled={disabled}
+                    as={as}
                   />
                 );
               })}

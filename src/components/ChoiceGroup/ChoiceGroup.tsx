@@ -3,9 +3,9 @@ import './ChoiceGroup.css';
 import React from 'react';
 
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
-import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
+import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
-import { getSizeByMap } from '../../utils/getSizeByMap';
+import { getByMap } from '../../utils/getByMap';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
 import { ChoiceGroupItem } from './Item/ChoiceGroup-Item';
@@ -27,52 +27,42 @@ export type СhoiceGroupPropWidth = typeof choiceGroupWidth[number];
 export const choiceGroupWidthDefault: СhoiceGroupPropWidth = choiceGroupWidth[0];
 
 export type ChoiceGroupPropGetLabel<ITEM> = (item: ITEM) => string | number;
-export type ChoiceGroupPropGetIcon<ITEM> = (item: ITEM) => React.FC<IconProps> | undefined;
+export type ChoiceGroupPropGetIcon<ITEM> = (item: ITEM) => IconComponent | undefined;
 
-type CommonProps<ITEM> = {
-  size?: ChoiceGroupPropSize;
-  form?: ChoiceGroupPropForm;
-  view?: ChoiceGroupPropView;
-  width?: СhoiceGroupPropWidth;
-  onlyIcon?: boolean;
-  iconSize?: IconPropSize;
-  items: ITEM[];
-  getLabel: ChoiceGroupPropGetLabel<ITEM>;
-  getIcon?: ChoiceGroupPropGetIcon<ITEM>;
-  name: string;
-  children?: never;
-  disabled?: boolean;
-  getDisabled?: (item: ITEM) => boolean | undefined;
-};
+export type ChoiceGroupPropValue<ITEM, MULTIPLE extends boolean> =
+  | (MULTIPLE extends true ? ITEM[] : ITEM)
+  | null;
 
-type OnChangeMultiple<ITEM> = (props: {
+export type ChoiceGroupPropOnChange<ITEM, MULTIPLE extends boolean> = (props: {
   e: React.ChangeEvent<HTMLInputElement>;
-  value: ITEM[] | null;
+  value: MULTIPLE extends true ? ITEM[] | null : ITEM;
 }) => void;
 
-type OnChangeWithoutMultiple<ITEM> = (props: {
-  e: React.ChangeEvent<HTMLInputElement>;
-  value: ITEM;
-}) => void;
-
-type PropsWithMultiple<ITEM> = {
-  value?: ITEM[] | null;
-  multiple: true;
-  onChange: OnChangeMultiple<ITEM>;
-};
-
-type PropsWithoutMultiple<ITEM> = {
-  value?: ITEM | null;
-  multiple: false;
-  onChange: OnChangeWithoutMultiple<ITEM>;
-};
-
-type Props<ITEM> = PropsWithHTMLAttributesAndRef<
-  CommonProps<ITEM> & (PropsWithMultiple<ITEM> | PropsWithoutMultiple<ITEM>),
+type Props<ITEM, MULTIPLE extends boolean = false> = PropsWithHTMLAttributesAndRef<
+  {
+    size?: ChoiceGroupPropSize;
+    form?: ChoiceGroupPropForm;
+    view?: ChoiceGroupPropView;
+    width?: СhoiceGroupPropWidth;
+    onlyIcon?: boolean;
+    iconSize?: IconPropSize;
+    items: ITEM[];
+    getLabel: ChoiceGroupPropGetLabel<ITEM>;
+    getIcon?: ChoiceGroupPropGetIcon<ITEM>;
+    name: string;
+    disabled?: boolean;
+    getDisabled?: (item: ITEM) => boolean | undefined;
+    value?: ChoiceGroupPropValue<ITEM, MULTIPLE>;
+    onChange?: ChoiceGroupPropOnChange<ITEM, MULTIPLE>;
+    multiple?: MULTIPLE;
+    children?: never;
+  },
   HTMLDivElement
 >;
 
-type ChoiceGroup = <ITEM>(props: Props<ITEM>) => React.ReactElement | null;
+type ChoiceGroupComponent = <ITEM, MULTIPLE extends boolean = false>(
+  props: Props<ITEM, MULTIPLE>,
+) => React.ReactElement | null;
 
 const sizeMap: Record<ChoiceGroupPropSize, IconPropSize> = {
   xs: 'xs',
@@ -83,7 +73,7 @@ const sizeMap: Record<ChoiceGroupPropSize, IconPropSize> = {
 
 export const cnChoiceGroup = cn('ChoiceGroup');
 
-export const ChoiceGroup: ChoiceGroup = React.forwardRef((props, ref) => {
+export const ChoiceGroup: ChoiceGroupComponent = React.forwardRef((props, ref) => {
   const {
     size = choiceGroupDefaultSize,
     form = choiceGroupDefaultForm,
@@ -109,13 +99,13 @@ export const ChoiceGroup: ChoiceGroup = React.forwardRef((props, ref) => {
   const { getOnChange, getChecked } = useChoiceGroup<Item, React.ChangeEvent<HTMLInputElement>>({
     value: value as Item,
     getKey: getLabel,
-    callBack: onChange as OnChangeWithoutMultiple<Item>,
+    callBack: onChange as ChoiceGroupPropOnChange<Item, false>,
     multiple: multiple as false,
     // привел к типам из-за того что
-    // TS не понимает что PropsWithMultiple и PropsWithoutMultiple не могут прийти одновременно
+    // TS не понимает что параметры для не Multiple и Multiple не могут прийти одновременно
   });
 
-  const iconSize = getSizeByMap(sizeMap, size, iconSizeProp);
+  const iconSize = getByMap(sizeMap, size, iconSizeProp);
 
   return (
     <div

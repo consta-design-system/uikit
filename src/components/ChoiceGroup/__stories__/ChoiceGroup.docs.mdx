@@ -22,7 +22,15 @@ import {
 import { ChoiceGroupExampleDisabled } from './examples/ChoiceGroupExampleDisabled/ChoiceGroupExampleDisabled';
 import { ChoiceGroupExampleSomeDisabled } from './examples/ChoiceGroupExampleSomeDisabled/ChoiseGroupExampleSomeDisabled';
 
+<!--info
+description: Группа кнопок. Можно выбрать один или несколько вариантов.
+-->
+
 # ChoiceGroup
+
+```tsx
+import { ChoiceGroup } from '@consta/uikit/ChoiceGroup';
+```
 
 Группа кнопок нужна, чтобы выбрать из списка один или несколько вариантов.
 Совмещает возможности [Radio](?path=/docs/components-radio--playground) и
@@ -49,6 +57,7 @@ import { ChoiceGroupExampleSomeDisabled } from './examples/ChoiceGroupExampleSom
 - [Неактивные кнопки](#неактивные-кнопки)
   - [Неактивная кнопка](#неактивная-кнопка)
   - [Неактивная группа кнопок](#неактивная-группа-кнопок)
+- [Импорт](#импорт)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
 
@@ -125,7 +134,7 @@ export const ChoiceGroupExampleTextOverflow = () => {
 ```tsx
 type Item = {
   name: string;
-  icon?: React.FC<IconProps>;
+  icon?: IconComponent;
 };
 
 const items = [
@@ -406,6 +415,12 @@ export const ChoiceGroupExampleWidth = () => {
 
 <ChoiceGroupExampleDisabled />
 
+## Импорт
+
+```tsx
+import { ChoiceGroup } from '@consta/uikit/ChoiceGroup';
+```
+
 ## Свойства
 
 ```
@@ -417,24 +432,24 @@ type OnChangeMultiple = (props: { e: React.ChangeEvent<HTMLInputElement>; value:
 
 ```
 
-| Свойство                                  | Тип                                              | По умолчанию | Описание                                                                                                                                               |
-| ----------------------------------------- | ------------------------------------------------ | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `items`                                   | `Item[]`                                         | -            | Элементы                                                                                                                                               |
-| [`multiple`](#один-или-несколько)         | `boolean`                                        | -            | Выбрать несколько вариантов                                                                                                                            |
-| `value`                                   | multiple ? `Item[]` : `Item` or `null`           | -            | Значение                                                                                                                                               |
-| `onChange`                                | multiple ? `onChangeMultiple` : `OnChange`       | -            | Действие при выборе элемента                                                                                                                           |
-| `name`                                    | `string`                                         | -            | Имя `<input>`, указывается для доступности                                                                                                             |
-| [`getLabel`](#текст-на-кнопках)           | `(item: Item) => string, number`                 | -            | Функция для формирования текста для кнопки или всплывающей подсказки (при `onlyIcon = true`). Также используется в качестве уникального ключа элемента |
-| [`getIcon`](#иконки)                      | `(item: Item) => React.FC<IconProps>, undefined` | -            | Функция для формирования иконки                                                                                                                        |
-| [`onlyIcon?`](#иконки)                    | `boolean`                                        | -            | Показывать только иконку                                                                                                                               |
-| [`size?`](#размер)                        | `'xs', 's', 'm', 'l'`                            | `'m'`        | Размер                                                                                                                                                 |
-| [`form?`](#форма-кнопок)                  | `'default', 'brick', 'round'`                    | `'default'`  | Форма                                                                                                                                                  |
-| [`view?`](#внешний-вид)                   | `'primary', 'ghost', 'secondary'`                | `'primary'`  | Внешний вид                                                                                                                                            |
-| [`width?`](#группа-кнопок-в-ширину-блока) | `'default', 'full'`                              | `'default'`  | Ширина компонента                                                                                                                                      |
-| [`disabled?`](#неактивная-группа-кнопок)  | `boolean`                                        | `false`      | Делает группу кнопок неактивной                                                                                                                        |
-| [`getDisabled?`](#неактивная-кнопка)      | `(item: Item) => boolean`                        | -            | Функция для определения неактивного состояния кнопки                                                                                                   |
-| `className?`                              | `string`                                         | -            | Дополнительный CSS-класс                                                                                                                               |
-| `ref?`                                    | `React.Ref<HTMLDivElement>`                      | -            | Ссылка на корневой DOM-элемент этого компонента                                                                                                        |
+| Свойство                                  | Тип                                        | По умолчанию | Описание                                                                                                                                               |
+| ----------------------------------------- | ------------------------------------------ | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `items`                                   | `Item[]`                                   | -            | Элементы                                                                                                                                               |
+| [`multiple`](#один-или-несколько)         | `boolean`                                  | -            | Выбрать несколько вариантов                                                                                                                            |
+| `value`                                   | multiple ? `Item[]` : `Item` or `null`     | -            | Значение                                                                                                                                               |
+| `onChange`                                | multiple ? `onChangeMultiple` : `OnChange` | -            | Действие при выборе элемента                                                                                                                           |
+| `name`                                    | `string`                                   | -            | Имя `<input>`, указывается для доступности                                                                                                             |
+| [`getLabel`](#текст-на-кнопках)           | `(item: Item) => string, number`           | -            | Функция для формирования текста для кнопки или всплывающей подсказки (при `onlyIcon = true`). Также используется в качестве уникального ключа элемента |
+| [`getIcon`](#иконки)                      | `(item: Item) => IconComponent, undefined` | -            | Функция для формирования иконки                                                                                                                        |
+| [`onlyIcon?`](#иконки)                    | `boolean`                                  | -            | Показывать только иконку                                                                                                                               |
+| [`size?`](#размер)                        | `'xs', 's', 'm', 'l'`                      | `'m'`        | Размер                                                                                                                                                 |
+| [`form?`](#форма-кнопок)                  | `'default', 'brick', 'round'`              | `'default'`  | Форма                                                                                                                                                  |
+| [`view?`](#внешний-вид)                   | `'primary', 'ghost', 'secondary'`          | `'primary'`  | Внешний вид                                                                                                                                            |
+| [`width?`](#группа-кнопок-в-ширину-блока) | `'default', 'full'`                        | `'default'`  | Ширина компонента                                                                                                                                      |
+| [`disabled?`](#неактивная-группа-кнопок)  | `boolean`                                  | `false`      | Делает группу кнопок неактивной                                                                                                                        |
+| [`getDisabled?`](#неактивная-кнопка)      | `(item: Item) => boolean`                  | -            | Функция для определения неактивного состояния кнопки                                                                                                   |
+| `className?`                              | `string`                                   | -            | Дополнительный CSS-класс                                                                                                                               |
+| `ref?`                                    | `React.Ref<HTMLDivElement>`                | -            | Ссылка на корневой DOM-элемент этого компонента                                                                                                        |
 
 ## Пример
 

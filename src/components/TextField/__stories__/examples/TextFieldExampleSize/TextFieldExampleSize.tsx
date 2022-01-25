@@ -50,7 +50,7 @@ export const TextFieldExampleSizeRows = () => {
 
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <TextField type="textarea" rows={13} cols={25} onChange={handleChange} value={value} />
+      <TextField type="textarea" rows={7} cols={50} onChange={handleChange} value={value} />
     </StoryBookExample>
   );
 };

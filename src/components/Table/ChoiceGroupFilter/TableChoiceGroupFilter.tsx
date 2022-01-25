@@ -48,7 +48,6 @@ export const TableChoiceGroupFilter: React.FC<Props> = ({
         name="choiceGroup"
         onChange={onChange}
         value={value?.value ? value : defaultValue}
-        multiple={false}
         className={cnChoiceGroupFilter()}
       />
     </TableFilterContainer>

@@ -1,9 +1,9 @@
 import { Locale } from 'date-fns';
 
-import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
+import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
 import { DateRange } from '../../utils/types/Date';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
-import { DateTimePropView } from '../DateTimeCanary/helpers';
+import { DateTimeAdditionalControlRenderProp, DateTimePropView } from '../DateTimeCanary/helpers';
 import {
   TextFieldPropForm,
   TextFieldPropSize,
@@ -48,7 +48,7 @@ type DatePickerPropCalendarStartInputRef<TYPE> = TYPE extends 'date-range'
   : never;
 
 type DatePickerPropCalendarStartLeftSide<TYPE> = TYPE extends 'date-range'
-  ? string | React.FC<IconProps>
+  ? string | IconComponent
   : never;
 
 type DatePickerPropCalendarStartOnFocus<TYPE> = TYPE extends 'date-range'
@@ -64,6 +64,7 @@ export type DatePickerProps<
     onChange?: DatePickerPropOnChange<TYPE>;
     minDate?: Date;
     maxDate?: Date;
+    renderAdditionalControls?: DateTimeAdditionalControlRenderProp;
     events?: Date[];
     dateTimeView?: DatePickerPropDateTimeView;
     locale?: Locale;
@@ -90,8 +91,8 @@ export type DatePickerProps<
     separator?: string;
     dropdownForm?: DatePickerPropDropdownForm;
     width?: DatePickerPropCalendarWidth<TYPE>;
-    leftSide?: string | React.FC<IconProps>;
-    rightSide?: string | React.FC<IconProps>;
+    leftSide?: string | IconComponent;
+    rightSide?: string | IconComponent;
     startFieldInputRef?: DatePickerPropCalendarStartInputRef<TYPE>;
     endFieldInputRef?: DatePickerPropCalendarStartInputRef<TYPE>;
     startFieldLeftSide?: DatePickerPropCalendarStartLeftSide<TYPE>;
@@ -102,6 +103,11 @@ export type DatePickerProps<
     endFieldOnFocus?: DatePickerPropCalendarStartOnFocus<TYPE>;
     startFieldOnBlur?: DatePickerPropCalendarStartOnFocus<TYPE>;
     endFieldOnBlur?: DatePickerPropCalendarStartOnFocus<TYPE>;
+    label?: string;
+    caption?: string;
+    labelPosition?: 'top' | 'left';
+    onChangeCurrentVisibleDate?: (date: Date) => void;
+    currentVisibleDate?: Date;
   },
   HTMLDivElement
 >;

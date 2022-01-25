@@ -6,7 +6,15 @@ import {
 import { LayoutExampleAnchor } from './examples/LayoutExampleAnchor/LayoutExampleAnchor';
 import { LayoutExampleRowFixed } from './examples/LayoutExampleRowFixed/LayoutExampleRowFixed';
 
+<!--info
+description: Лэйаут. Блоки, из которых можно построить каркас страницы.
+-->
+
 # Layout (Canary)
+
+```tsx
+import { Layout } from '@consta/uikit/LayoutCanary';
+```
 
 Лэйаут помогает структурировать контент на странице.
 С его помощью строится каркас, в котором можно располагать другие элементы.
@@ -15,6 +23,7 @@ import { LayoutExampleRowFixed } from './examples/LayoutExampleRowFixed/LayoutEx
 - [Расположение блоков](#порядок-блоков)
 - [Фиксация блоков](#фиксация-блоков)
 - [Прикрепление к якорю](#прикрепление-к-якорю)
+- [Импорт](#импорт)
 - [Список свойств](#список-свойств)
 - [Пример использования](#пример)
 
@@ -144,6 +153,12 @@ export const LayoutExampleAnchor = () => {
     </Layout>
   );
 };
+```
+
+## Импорт
+
+```tsx
+import { Layout } from '@consta/uikit/LayoutCanary';
 ```
 
 ## Список свойств

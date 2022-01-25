@@ -1,0 +1,120 @@
+import {
+  MixSpaceExampleButtonWithSpaces,
+  MixSpaceExampleButtonWithoutSpaces,
+} from './examples/MixSpaceExample/MixSpaceExample';
+
+<Meta title="Mixins|MixSpace" id="MixSpace" />
+
+# MixSpace
+
+```tsx
+import { cnMixSpace } from '@consta/uikit/MixSpace';
+```
+
+С помощью миксина `MixSpace` можно добавить отступы внутри
+любого элемента и вокруг него.
+
+##### Пример кнопки без отступов
+
+```tsx
+export const MixSpaceExampleButtonWithoutSpaces = () => {
+  return (
+    <>
+      <Text>Это текст, он нужен, чтобы показать отступы от кнопки сверху</Text>
+      <Button label="Это кнопка без отступов" />
+      <Text>Это текст, он нужен, чтобы показать отступы от кнопки снизу</Text>
+    </>
+  );
+};
+```
+
+<MixSpaceExampleButtonWithoutSpaces />
+
+##### Пример кнопки с отступами снаружи
+
+```tsx
+export const MixSpaceExampleButtonWithSpaces = () => {
+  return (
+    <>
+      <Text>Это текст, он нужен, чтобы показать отступы от кнопки сверху</Text>
+      <Button
+        label="Это кнопка с отступами снаружи"
+        className={cnMixSpace({
+          m: 'm',
+          mT: '3xs',
+        })}
+      />
+      <Text>Это текст, он нужен, чтобы показать отступы от кнопки снизу</Text>
+    </>
+  );
+};
+```
+
+<MixSpaceExampleButtonWithSpaces />
+
+## Импорт
+
+```tsx
+import { cnMixSpace } from '@consta/uikit/MixSpace';
+```
+
+## Список свойств
+
+```tsx
+type PropSpace =
+  | 0
+  | 'auto'
+  | '3xs'
+  | '2xs'
+  | 'xs'
+  | 's'
+  | 'm'
+  | 'l'
+  | 'xl'
+  | '2xl'
+  | '3xl'
+  | '4xl'
+  | '5xl'
+  | '6xl';
+```
+
+| Свойство | Тип или варианты значения | По умолчанию | Описание                               |
+| -------- | ------------------------- | ------------ | -------------------------------------- |
+| `p?`     | `PropSpace`               | -            | Отступы внутри элемента                |
+| `m?`     | `PropSpace`               | -            | Отступы вокруг элемента                |
+| `pV?`    | `PropSpace`               | -            | Вертикальные отступы внутри элемента   |
+| `pH?`    | `PropSpace`               | -            | Горизонтальные отступы внутри элемента |
+| `mV?`    | `PropSpace`               | -            | Вертикальные отступы от элемента       |
+| `mH?`    | `PropSpace`               | -            | Горизонтальные отступы от элемента     |
+| `mT?`    | `PropSpace`               | -            | Отступ сверху от элемента              |
+| `mL?`    | `PropSpace`               | -            | Отступ слева от элемента               |
+| `mR?`    | `PropSpace`               | -            | Отступ справа от элемента              |
+| `mB?`    | `PropSpace`               | -            | Отступ снизу от элемента               |
+| `pT?`    | `PropSpace`               | -            | Отступ сверху внутри элемента          |
+| `pL?`    | `PropSpace`               | -            | Отступ слева внутри элемента           |
+| `pR?`    | `PropSpace`               | -            | Отступ справа внутри элемента          |
+| `pB?`    | `PropSpace`               | -            | Отступ снизу внутри элемента           |
+
+## Пример использования
+
+```tsx
+import React from 'react';
+
+import { Text } from '@consta/uikit/Text';
+import { cnMixSpace } from '@consta/uikit/MixSpace';
+
+export const MixSpaceExample = () => {
+  return (
+    <div
+      className={cnMixSpace({
+        p: 'xl',
+        pH: '3xl',
+        m: 'm',
+        mT: '3xs',
+      })}
+    >
+      <Text>Здесь может быть ваш текст</Text>
+    </div>
+  );
+};
+```

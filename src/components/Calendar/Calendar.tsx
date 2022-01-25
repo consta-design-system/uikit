@@ -3,7 +3,7 @@ import './Calendar.css';
 import React from 'react';
 
 import { cn } from '../../utils/bem';
-import { getSizeByMap } from '../../utils/getSizeByMap';
+import { getByMap } from '../../utils/getByMap';
 
 import { CalendarViewOneMonth } from './CalendarViewOneMonth/CalendarViewOneMonth';
 import { CalendarViewSlider } from './CalendarViewSlider/CalendarViewSlider';
@@ -26,7 +26,7 @@ const viewMap: Record<CalendarPropView, CalendarViewComponent> = {
 export const Calendar: CalendarComponent = React.forwardRef((props, ref) => {
   const { view = calendarPropViewDefault, className, ...otherProps } = props;
 
-  const ViewComponent = getSizeByMap(viewMap, view);
+  const ViewComponent = getByMap(viewMap, view);
 
   return <ViewComponent {...otherProps} ref={ref} className={cnCalendar(null, [className])} />;
 });

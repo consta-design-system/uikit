@@ -5,7 +5,7 @@ import React, { useMemo } from 'react';
 import { cn } from '../../utils/bem';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 
-export const avatarPropSize = ['m', 's', 'xs'] as const;
+export const avatarPropSize = ['m', 's', 'xs', 'l'] as const;
 export type AvatarPropSize = typeof avatarPropSize[number];
 export const avatarPropSizeDefault: AvatarPropSize = avatarPropSize[0];
 

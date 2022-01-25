@@ -5,7 +5,7 @@ import React from 'react';
 import { IconPropSize } from '../../../icons/Icon/Icon';
 import { IconCheck } from '../../../icons/IconCheck/IconCheck';
 import { cn } from '../../../utils/bem';
-import { getSizeByMap } from '../../../utils/getSizeByMap';
+import { getByMap } from '../../../utils/getByMap';
 import { StepsPropSize } from '../Steps';
 
 export const cnStepsStep = cn('StepsStep');
@@ -41,7 +41,7 @@ export const StepsStep = React.forwardRef<HTMLButtonElement, Props>((props, ref)
   const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     !active && !disabled && onChange?.(e);
   };
-  const iconSize = getSizeByMap(sizeMap, size);
+  const iconSize = getByMap(sizeMap, size);
 
   return (
     <button

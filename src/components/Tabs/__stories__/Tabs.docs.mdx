@@ -10,7 +10,15 @@ import { TabsExampleLinePosition } from './examples/TabsExampleLinePosition/Tabs
 import { TabsExampleFitModeDropdown } from './examples/TabsExampleFitModeDropdown/TabsExampleFitModeDropdown';
 import { TabsExampleFitModeScroll } from './examples/TabsExampleFitModeScroll/TabsExampleFitModeScroll';
 
+<!--info
+description: Табы. Переключает вкладки на странице.
+-->
+
 # Tabs
+
+```tsx
+import { Tabs } from '@consta/uikit/Tabs';
+```
 
 Табы переключают вкладки на странице. Активный таб выделен цветом и помечен специальным маркером — горизонтальной или вертикальной линией.
 
@@ -24,6 +32,7 @@ import { TabsExampleFitModeScroll } from './examples/TabsExampleFitModeScroll/Ta
 - [Расположение табов и линии](#расположение-табов-и-линии)
 - [Адаптивность](#адаптивность)
 - [Кастомизация](#кастомизация)
+- [Импорт](#импорт)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
 
@@ -80,7 +89,7 @@ import { IconCamera } from '@consta/uikit/IconCamera';
 
 type Item = {
   name: string;
-  icon?: React.FC<IconProps>;
+  icon?: IconComponent;
 };
 
 const items = [
@@ -329,6 +338,12 @@ export const TabsExampleRenderItemBadge = () => {
 };
 ```
 
+## Импорт
+
+```tsx
+import { Tabs } from '@consta/uikit/Tabs';
+```
+
 ## Свойства
 
 ```ts
@@ -341,27 +356,27 @@ type RenderItem<ITEM, ELEMENT> = (props: {
   onChange: React.MouseEventHandler<ELEMENT>;
   checked: boolean;
   label: string;
-  icon?: React.FC<IconProps>;
+  icon?: IconComponent;
   iconSize: IconPropSize;
   onlyIcon?: boolean;
 }) => React.ReactElement | null;
 ```
 
-| Свойство                                       | Тип                                              | По умолчанию | Описание                                                                                                                                                                             |
-| ---------------------------------------------- | ------------------------------------------------ | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `items`                                        | `Item[]`                                         | -            | Массив элементов с данными для табов (текст, иконка)                                                                                                                                 |
-| `value`                                        | `Item`, `null`                                   | -            | Значение                                                                                                                                                                             |
-| [`getLabel`](#текст-для-таба)                  | `(item: Item) => string, number`                 | -            | Функция для формирования текста таба. Используется в качестве уникального ключа элемента                                                                                             |
-| [`getIcon?`](#иконки)                          | `(item: Item) => React.FC<IconProps>, undefined` | -            | Функция для формирования иконки                                                                                                                                                      |
-| [`onlyIcon?`](#иконки)                         | `boolean`                                        | -            | Показывать только иконку                                                                                                                                                             |
-| [`size?`](#размер-табов)                       | `'s', 'm'`                                       | `'m'`        | Размер компонента                                                                                                                                                                    |
-| [`view?`](#рамка)                              | `'bordered', 'clear'`                            | `'bordered'` | Внешний вид компонента (с рамкой или без)                                                                                                                                            |
-| [`linePosition?`](#расположение-табов-и-линии) | `'bottom', 'top', 'left', 'right'`               | `'bottom'`   | Расположение табов (вертикальные или горизонатльные) и линии, которая отмечает активный таб                                                                                          |
-| [`fitMode?`](#адаптивность)                    | `'dropdown', 'scroll'`                           | `'dropdown'` | Способ сворачивания табов при нехватке места: выпадающий список или прокрутка. Доступен только для горизонтального направления табов (когда `linePosition` = `'bottom'` или `'top'`) |
-| `onChange`                                     | `OnChange`                                       | -            | Действие при выборе элемента                                                                                                                                                         |
-| `className?`                                   | `string`                                         | -            | Дополнительный CSS-класс                                                                                                                                                             |
-| [`renderItem?`](#кастомизация)                 | `RenderItem`                                     | -            | Функция рендера элемента                                                                                                                                                             |
-| `ref?`                                         | `React.Ref<HTMLDivElement>`                      | -            | Ссылка на корневой DOM-элемент этого компонента                                                                                                                                      |
+| Свойство                                       | Тип                                        | По умолчанию | Описание                                                                                                                                                                             |
+| ---------------------------------------------- | ------------------------------------------ | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `items`                                        | `Item[]`                                   | -            | Массив элементов с данными для табов (текст, иконка)                                                                                                                                 |
+| `value`                                        | `Item`, `null`                             | -            | Значение                                                                                                                                                                             |
+| [`getLabel`](#текст-для-таба)                  | `(item: Item) => string, number`           | -            | Функция для формирования текста таба. Используется в качестве уникального ключа элемента                                                                                             |
+| [`getIcon?`](#иконки)                          | `(item: Item) => IconComponent, undefined` | -            | Функция для формирования иконки                                                                                                                                                      |
+| [`onlyIcon?`](#иконки)                         | `boolean`                                  | -            | Показывать только иконку                                                                                                                                                             |
+| [`size?`](#размер-табов)                       | `'s', 'm'`                                 | `'m'`        | Размер компонента                                                                                                                                                                    |
+| [`view?`](#рамка)                              | `'bordered', 'clear'`                      | `'bordered'` | Внешний вид компонента (с рамкой или без)                                                                                                                                            |
+| [`linePosition?`](#расположение-табов-и-линии) | `'bottom', 'top', 'left', 'right'`         | `'bottom'`   | Расположение табов (вертикальные или горизонатльные) и линии, которая отмечает активный таб                                                                                          |
+| [`fitMode?`](#адаптивность)                    | `'dropdown', 'scroll'`                     | `'dropdown'` | Способ сворачивания табов при нехватке места: выпадающий список или прокрутка. Доступен только для горизонтального направления табов (когда `linePosition` = `'bottom'` или `'top'`) |
+| `onChange`                                     | `OnChange`                                 | -            | Действие при выборе элемента                                                                                                                                                         |
+| `className?`                                   | `string`                                   | -            | Дополнительный CSS-класс                                                                                                                                                             |
+| [`renderItem?`](#кастомизация)                 | `RenderItem`                               | -            | Функция рендера элемента                                                                                                                                                             |
+| `ref?`                                         | `React.Ref<HTMLDivElement>`                | -            | Ссылка на корневой DOM-элемент этого компонента                                                                                                                                      |
 
 <!-- props:end -->
 

@@ -1,0 +1,120 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta
+  title="Документация|Разработчикам/Договоренности по оформлению кода"
+  id="common-develop-arrangements-for-code-style"
+  parameters={{ order: 331 }}
+/>
+
+# Договоренности по оформлению кода
+
+## Разбивка компонента
+
+Если вы собираетесь разбить компонент на более мелкие сущности, нужно придерживаться следующих правил:
+
+1. компонент должен [лежать в папке с дочерними компонентами](/?path=/docs/сommon-file-structure-components--page) (не быть в том же файле),
+2. компонент должен быть оформлен как отдельный БЭМ-блок.
+
+## Type vs Interface
+
+Стоит использовать `type` (не `interface`) для объявления props, да и для любых других типов.
+
+`interface` стоит использовать тогда, когда вы описываете общий тип, который где-то нужно имплементировать. Интерфейсы хорошо подходят для написания абстрактного кода, который не работает с конкретными типами или экземплярами, а ожидает получить любую сущность, реализующую заданный интерфейс.
+
+[Подробнее про type vs interface](https://medium.com/@martin_hotell/interface-vs-type-alias-in-typescript-2-7-2a8f1777af4c)
+
+## Default Props
+
+Не стоит использовать defaultProps в function component, вместо этого нужно использовать значения по умолчанию при деструктуризации props:
+
+```typescript
+const SomeComp: React.FC<SomeCompProps> = (props) => {
+  const { someValue = 'defaultValue' } = props;
+  return ...
+}
+```
+
+## Порядок сущностей внутри \*.ts(x) файлов
+
+```typescript
+// 1. Импорты
+import React from 'React'
+
+// 2. Типы
+type Data = [...]
+
+type Props = {
+  data: Data
+}
+
+// 3. Типы + константы, из которых они выводятся
+export const sizes = ['s', 'm'] as const
+type Size = typeof sizes[number]
+
+// 4. Константы
+const MAX_WIDTH = 100
+
+// 5. Функции
+const getTransformData = (data: Data): [] => ...
+
+// 6. Дочерние компоненты
+const ListItem: React.FC<{}> = (props) => ...
+
+// 7. Компонент
+export const Component: React.FC<Props> = ({ data }) => {
+  const items = getTransformData(data)
+
+  return <ul>{items.map(item => <ListItem {...item} />)}</ul>
+}
+```
+
+## Иконки
+
+Требования к иконками в UI-ките:
+
+- для каждого размера иконки нужно использовать отдельное изображение,
+- все иконки в библиотеке должны соответствовать типу `IconComponent` ([посмотреть тип `IconComponent`](https://github.com/gazprom-neft/consta-uikit/blob/master/src/icons/Icon/Icon.tsx#L36)).
+
+Если в API компонента используются иконки, стоит указывать тип `IconComponent`.
+
+Пример:
+
+```tsx
+import { ReactElement } from 'react';
+
+import { IconComponent } from '@consta/uikit/Icon';
+
+const Component: Icon = ({ icon: IconComponent }) => (
+  <div>
+    <Icon size="s" />
+  </div>
+);
+```
+
+Если в компоненте используется иконка, которой нет в UI-ките, её можно создать через `@consta/uikit/createIcon`. [Подробнее о создании иконок](?path=/docs/components-icons--playground)
+
+## Проксирование свойств корневого элемента компонента и возможность получения ссылки на DOM-элемент
+
+Необходимо проксировать свойства рутового JSX-элемента и оборачивать компонент в `React.forwardRef` для повышения гибкости взаимодействия с компонентом.
+
+Пример:
+
+```tsx
+import { cn } from '@/__private__/utils/bem';
+
+import { HTMLAttributes } from 'react';
+
+type Props = HTMLAttributes<HTMLDivElement> & {
+  label: string;
+};
+
+const cnComponent = cn('Component');
+
+const Component = React.forwardRef<HTMLDivElement, Props>(
+  ({ label, className, ...otherProps }, ref) => (
+    <div {...otherProps} className={cnComponent(null, [className])} ref={ref}>
+      {label}
+    </div>
+  ),
+);
+```

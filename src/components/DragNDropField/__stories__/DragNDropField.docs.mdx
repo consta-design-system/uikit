@@ -19,7 +19,15 @@ import {
 } from './examples/DragNDropFieldExampleMultiple/DragNDropFieldExampleMultiple';
 import { DragNDropFieldExampleOnDropFiles } from './examples/DragNDropFieldExampleOnDropFiles/DragNDropFieldExampleOnDropFiles';
 
+<!--info
+description: Можно перетащить файлы, чтобы загрузить или отправить.
+-->
+
 # DragNDropField
+
+```tsx
+import { DragNDropField } from '@consta/uikit/DragNDropField';
+```
 
 Компонент для выбора и загрузки файлов. Пользователь может перетащить в него файлы или загрузить по кнопке.
 
@@ -37,6 +45,7 @@ import { DragNDropFieldExampleOnDropFiles } from './examples/DragNDropFieldExamp
 - [Размер файла](#размер-файла)
 - [Обработка загрузки файлов](#обработка-загрузки-файлов)
 - [Обработка ошибок](#обработка-ошибок)
+- [Импорт](#импорт)
 - [Свойства](#свойства)
 
 ## Содержимое
@@ -186,6 +195,12 @@ export function MyComponent() {
 - предупредит, что [файл слишком большой](#размер-файла),
 - подскажет, что [тип файла не подходит](#типы-файлов),
 - или что [можно загрузить только один файл](#один-или-несколько).
+
+## Импорт
+
+```tsx
+import { DragNDropField } from '@consta/uikit/DragNDropField';
+```
 
 ## Свойства
 

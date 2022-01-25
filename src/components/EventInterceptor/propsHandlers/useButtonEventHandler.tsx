@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { COMPONENT_NAME, Props } from '../../Button/Button';
+import { Props } from '../../Button/Button';
 import { EventInterceptorHandler } from '../EventInterceptor';
 
 export type ButtonProps = Props;
@@ -15,12 +15,13 @@ export const useButtonEventHandler = <T extends ButtonProps>(
   newProps.onClick = (...onClickArgs) => {
     const [e] = onClickArgs;
     const value = {
-      component: COMPONENT_NAME,
+      component: 'Button' as const,
       event: e.type,
       options: {
         text: (e.currentTarget as HTMLButtonElement).innerText,
         pageURL: e.currentTarget.baseURI,
         DOMRef: ref.current,
+        props: newProps,
       },
     };
     handler!(value);

@@ -155,7 +155,7 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
               readOnly
             />
             {value && renderValue({ item: value })}
-            {!value && placeholder && (
+            {(typeof value === 'undefined' || value === null) && placeholder && (
               <span className={cnSelect('Placeholder')} title="placeholder">
                 {placeholder}
               </span>

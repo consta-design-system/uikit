@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { COMPONENT_NAME, SnackBar } from '../../SnackBar/SnackBar';
+import { SnackBar } from '../../SnackBar/SnackBar';
 import { EventInterceptorHandler } from '../EventInterceptor';
 
 type SnackBarProps = Parameters<typeof SnackBar>[0];
@@ -14,12 +14,13 @@ export const useSnackBarEventsHandler = <P extends SnackBarProps>(
   React.useEffect(() => {
     if (newProps.items.length) {
       const value = {
-        component: COMPONENT_NAME,
+        component: 'SnackBar' as const,
         event: 'change',
         options: {
           pageURL: window.location.href,
-          DOMRef: document.getElementsByClassName(COMPONENT_NAME)[0],
+          DOMRef: document.getElementsByClassName('SnackBar')[0],
           items: newProps.items,
+          props: newProps,
         },
       };
 

@@ -11,9 +11,19 @@ import {
   ExampleResponsesSuccess,
   ExampleResponsesText,
   ExampleResponsesActions,
+  ExampleResponsesSizeM,
+  ExampleResponsesSizeL,
 } from './examples/ResponsesExample/ResponsesExample';
 
+<!--info
+description: Заглушки с сообщениями об ошибках и важных статусах (404, 503, не найдены данные и похожие).
+-->
+
 # Responses
+
+```tsx
+import { Responses404 } from '@consta/uikit/Responses404';
+```
 
 Это набор компонентов, которые нужны, чтобы показывать пользователям сообщения о важных статусах:
 например, об ошибках в работе приложения, результате поиска или процесса.
@@ -32,6 +42,7 @@ import {
 - [Текст](#текст)
 - [Кнопки](#кнопки)
 - [Размер](#размер)
+- [Импорт](#импорт)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
 
@@ -221,7 +232,34 @@ import {
 
 ## Размер
 
-За размер сообщения отвечате свойство `size`. Варианты: `'m'`, `'l'`. По умлочанию `'l'`.
+За размер сообщения отвечате свойство `size`. Варианты: `'m'`, `'l'`. По умолчанию `'l'`.
+
+```tsx
+<Responses404 size="m" />
+```
+
+<ExampleResponsesSizeM />
+
+```tsx
+<Responses404 size="l" />
+```
+
+<ExampleResponsesSizeL />
+
+## Импорт
+
+```tsx
+import { Responses403 } from '@consta/uikit/Responses403';
+import { Responses404 } from '@consta/uikit/Responses404';
+import { Responses500 } from '@consta/uikit/Responses500';
+import { Responses503 } from '@consta/uikit/Responses503';
+import { ResponsesConnectionError } from '@consta/uikit/ResponsesConnectionError';
+import { ResponsesDeleted } from '@consta/uikit/ResponsesDeleted';
+import { ResponsesEmptyBox } from '@consta/uikit/ResponsesEmptyBox';
+import { ResponsesEmptyPockets } from '@consta/uikit/ResponsesEmptyPockets';
+import { ResponsesNothingFound } from '@consta/uikit/ResponsesNothingFound';
+import { ResponsesSuccess } from '@consta/uikit/ResponsesSuccess';
+```
 
 ## Свойства
 
@@ -229,11 +267,11 @@ import {
 
 | Свойство                 | Тип               | По умолчанию | Описание                                       |
 | ------------------------ | ----------------- | ------------ | ---------------------------------------------- |
-| [`title?`](#текст)       | `React.ReactNode` | —            | Заголовок сообщения                            |
-| [`description?`](#текст) | `React.ReactNode` | —            | Описание сообщения                             |
+| [`title?`](#текст)       | `React.ReactNode` | -            | Заголовок сообщения                            |
+| [`description?`](#текст) | `React.ReactNode` | -            | Описание сообщения                             |
 | [`size?`](#размер)       | `'m'`, `'l'`      | `'l'`        | Размер всех элементов                          |
-| [`actions?`](#кнопки)    | `React.ReactNode` | —            | Кнопки под сообщением                          |
-| `className?`             | `string`          | —            | Дополнительные CSS-классы для этого компонента |
+| [`actions?`](#кнопки)    | `React.ReactNode` | -            | Кнопки под сообщением                          |
+| `className?`             | `string`          | -            | Дополнительные CSS-классы для этого компонента |
 
 <!-- props:end -->
 

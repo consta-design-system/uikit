@@ -2,10 +2,10 @@ import './TagBase.css';
 
 import React from 'react';
 
-import { IconProps, IconPropSize } from '../../icons/Icon/Icon';
+import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
 import { IconClose } from '../../icons/IconClose/IconClose';
 import { cn } from '../../utils/bem';
-import { getSizeByMap } from '../../utils/getSizeByMap';
+import { getByMap } from '../../utils/getByMap';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 
 export const tagBasePropSize = ['m', 'xs', 's', 'l'] as const;
@@ -29,7 +29,7 @@ export type Props = {
   view?: TagBasePropView;
   group?: TagBasePropGroup;
   onCancel?: React.MouseEventHandler<HTMLButtonElement>;
-  icon?: React.FC<IconProps>;
+  icon?: IconComponent;
   iconSize?: IconPropSize;
   withAction?: boolean;
 };
@@ -61,8 +61,8 @@ export const TagBase = forwardRefWithAs<Props>((props, ref) => {
   const Tag = as as string;
   const withCancel = typeof onCancel === 'function';
   const withIcon = !!Icon;
-  const IconCloseSize = getSizeByMap(sizeMap, size);
-  const IconSize = getSizeByMap(sizeMap, size, iconSize);
+  const IconCloseSize = getByMap(sizeMap, size);
+  const IconSize = getByMap(sizeMap, size, iconSize);
 
   return (
     <Tag

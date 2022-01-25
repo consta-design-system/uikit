@@ -17,9 +17,17 @@ import {
 import { ComboboxExampleLabel } from './examples/ComboboxExampleLabel/ComboboxExampleLabel';
 import { ComboboxExampleStatus } from './examples/ComboboxExampleStatus/ComboboxExampleStatus';
 
+<!--info
+description: Выпадающий список с поиском. Можно выбрать один или несколько вариантов.
+-->
+
 # Combobox
 
-Выпадающий список. Позволяет выбрать один из нескольких вариантов.
+```tsx
+import { Combobox } from '@consta/uikit/Combobox';
+```
+
+Выпадающий список. Позволяет выбрать один или несколько вариантов.
 Этот компонент выглядит как [Select](?path=/docs/components-select--playground),
 но возможностей больше.
 
@@ -54,6 +62,7 @@ import { ComboboxExampleStatus } from './examples/ComboboxExampleStatus/Combobox
   - [Кастомный элемент списка](#кастомный-элемент-списка)
   - [Кастомное выбранное значение](#кастомное-выбранное-значение)
   - [Кастомные типы данных для групп и вариантов](#кастомные-типы-данных-для-групп-и-вариантов)
+- [Импорт](#импорт)
 - [Список свойств](#свойства)
 
 ## Содержимое
@@ -932,6 +941,12 @@ export function ComboboxExampleCustomTypesWithGroups() {
 ```
 
 <ComboboxExampleCustomTypesWithGroups />
+
+## Импорт
+
+```tsx
+import { Combobox } from '@consta/uikit/Combobox';
+```
 
 ## Свойства
 

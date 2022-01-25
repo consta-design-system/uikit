@@ -1,6 +1,7 @@
 import './MixCard.css';
 
 import { cn } from '../../utils/bem';
+import { cnMixSpace } from '../MixSpace/MixSpace';
 
 type Size = 'xs' | 's' | 'm' | 'l' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl';
 
@@ -18,10 +19,14 @@ type Props = {
   status?: CardStatus;
 };
 
-type CnCard = (
-  elemNameOrBlockMods?: Props | string | null,
-  elemModsOrBlockMix?: Props | Array<string | undefined> | null,
-  elemMix?: Array<string | undefined>,
-) => string;
+type CnCard = (props: Props, classNames?: Array<string | undefined>) => string;
 
-export const cnMixCard: CnCard = cn('MixCard');
+const cnCard = cn('MixCard');
+
+export const cnMixCard: CnCard = (props, classNames = []) => {
+  const { verticalSpace, horizontalSpace, ...otherProps } = props;
+  return cnCard({ ...otherProps }, [
+    cnMixSpace({ pV: verticalSpace, pH: horizontalSpace }),
+    ...classNames,
+  ]);
+};

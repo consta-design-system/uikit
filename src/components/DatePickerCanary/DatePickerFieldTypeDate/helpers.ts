@@ -1,4 +1,4 @@
-import { IconProps, IconPropSize } from '../../../icons/Icon/Icon';
+import { IconComponent, IconPropSize } from '../../../icons/Icon/Icon';
 import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import {
   TextFieldPropForm,
@@ -29,8 +29,8 @@ export type DatePickerFieldTypeDateProps = PropsWithHTMLAttributes<
     onBlur?: React.FocusEventHandler<HTMLElement>;
     autoFocus?: boolean;
     placeholder?: string;
-    leftSide?: string | React.FC<IconProps>;
-    rightSide?: string | React.FC<IconProps>;
+    leftSide?: string | IconComponent;
+    rightSide?: string | IconComponent;
     readOnly?: boolean;
     required?: boolean;
     tabIndex?: number;

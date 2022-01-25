@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { IconProps, IconPropSize } from '../../../icons/Icon/Icon';
+import { IconComponent, IconPropSize } from '../../../icons/Icon/Icon';
 import {
-  COMPONENT_NAME,
   TextField,
   TextFieldPropAutoComplete,
   TextFieldPropForm,
@@ -36,8 +35,8 @@ export type Props = {
   onBlur?: React.FocusEventHandler<HTMLElement>;
   autoFocus?: boolean;
   placeholder?: string;
-  leftSide?: string | React.FC<IconProps>;
-  rightSide?: string | React.FC<IconProps>;
+  leftSide?: string | IconComponent;
+  rightSide?: string | IconComponent;
   autoComplete?: TextFieldPropAutoComplete;
   max?: number | string;
   min?: number | string;
@@ -56,7 +55,7 @@ type TextFieldProps = Parameters<typeof TextField>[0];
 export const useTextFieldEventsHandler = <P extends TextFieldProps>(
   props: P,
   handler: EventInterceptorHandler,
-  textFieldRef: React.RefObject<HTMLDivElement>,
+  ref: React.RefObject<HTMLDivElement>,
 ): P => {
   const [inputChanged, setInputChanged] = React.useState<boolean>(false);
   const newProps: P = { ...props };
@@ -73,13 +72,14 @@ export const useTextFieldEventsHandler = <P extends TextFieldProps>(
 
   newProps.onBlur = (...onBlurArgs) => {
     const value = {
-      component: COMPONENT_NAME,
+      component: 'TextField' as const,
       event: 'change',
       options: {
         placeholder: newProps.placeholder,
         pageURL: window.location.href,
-        DOMRef: textFieldRef.current,
+        DOMRef: ref.current,
         value: newProps.value,
+        props: newProps,
       },
     };
     if (inputChanged) {

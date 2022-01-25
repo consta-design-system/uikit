@@ -5,7 +5,15 @@ import { InformerExampleSuccess } from './examples/InformerExampleText/InformerE
 import { InformerExampleAlert } from './examples/InformerExampleText/InformerExampleText';
 import { InformerExampleSize } from './examples/InformerExampleSize/InformerExampleSize';
 
+<!--info
+description: Сообщение для пользователя. Встраивается в содержимое страницы.
+-->
+
 # Informer
+
+```tsx
+import { Informer } from '@consta/uikit/Informer';
+```
 
 Нужен, чтобы показывать пользователям сообщения. Например, об ошибке в заполненной форме
 или о том, что изменения сохранились.
@@ -18,12 +26,40 @@ import { InformerExampleSize } from './examples/InformerExampleSize/InformerExam
   - [Тип информера](#тип-информера)
   - [Иконка](#иконка)
   - [Размер](#размер)
+- [Импорт](#импорт)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
 
 ## Тип сообщения
 
 За тип сообщения отвечает свойство `type`.
+
+```tsx
+<Informer
+  status="success"
+  view="filled"
+  title="Всё хорошо — это 'success'"
+  label="Подходит, чтобы рассказать об успешном результате процесса, в котором сейчас находится пользователь"
+/>
+<Informer
+  status="warning"
+  view="filled"
+  title="Внимание — это 'alert'"
+  label="Здесь можно написать важную информацию, которая может понадобиться прямо сейчас. Например, о каких-то ограничениях"
+/>
+<Informer
+  status="alert"
+  view="filled"
+  title="Не получилось — это 'warning'"
+  label="Подходит, чтобы рассказать об ошибке в процессе"
+/>
+<Informer
+  status="system"
+  view="filled"
+  title="Важно, но не критично — это 'system'"
+  label="Это просто информация, которую стоит выделить"
+/>
+```
 
 <InformerExampleType />
 
@@ -32,7 +68,7 @@ import { InformerExampleSize } from './examples/InformerExampleSize/InformerExam
 Текст состоит из двух частей:
 
 - заголовок задаётся свойством `title`,
-- основной текст — свойством `lable`.
+- основной текст — свойством `label`.
 
 Вы можете написать сообщение без заголовка. А вот заголовок без текста лучше не использовать:
 читателю может показаться, что на него кричат.
@@ -47,8 +83,6 @@ import { InformerExampleSize } from './examples/InformerExampleSize/InformerExam
 
 Если есть важная информация, к которой нужно сразу привлечь внимание. А к ней — пояснения. Например, так:
 
-<InformerExampleSuccess />
-
 ```tsx
 <Informer
   status="success"
@@ -58,9 +92,9 @@ import { InformerExampleSize } from './examples/InformerExampleSize/InformerExam
 />
 ```
 
-Или так:
+<InformerExampleSuccess />
 
-<InformerExampleAlert />
+Или так:
 
 ```tsx
 <Informer
@@ -71,6 +105,8 @@ import { InformerExampleSize } from './examples/InformerExampleSize/InformerExam
 />
 ```
 
+<InformerExampleAlert />
+
 Если всё важное можно передать одним коротким предложением, лучше обойтись без заголовка.
 
 ## Внешний вид
@@ -80,8 +116,6 @@ import { InformerExampleSize } from './examples/InformerExampleSize/InformerExam
 За тип информера отвечает свойство `view`. В дизайн-системе есть информеры двух типов:
 с заливкой `filled` или без неё `bordered`.
 
-<InformerExampleView />
-
 ```tsx
 <Informer label="Ваше сообщение отправлено" view="filled" status="success" />
 ```
@@ -90,37 +124,62 @@ import { InformerExampleSize } from './examples/InformerExampleSize/InformerExam
 <Informer label="Всё заполнено" view="bordered" status="success" />
 ```
 
+<InformerExampleView />
+
 ### Иконка
 
 С помощью свойства `icon` можно добавить иконку — любую из [библиотеки иконок](?path=/story/components-icons--playground).
 
 Не стоит добавлять иконку в информер без заливки.
 
-<InformerExampleIcon />
-
 ```tsx
 <Informer label="Сообщение отправлено" view="filled" status="success" icon={IconThumbUp} />
 ```
+
+<InformerExampleIcon />
 
 ### Размер
 
 За размер сообщения отвечает свойство `size`. Варианты: `m`, `s`, по умолчанию — `m`.
 
+```tsx
+<Informer
+  status="system"
+  view="filled"
+  title="Размер m"
+  label="Это обычное сообщение, и размер обычный"
+  size="m"
+/>
+<Informer
+  status="system"
+  view="filled"
+  title="Размер s"
+  label="Это сообщение поменьше"
+  size="s"
+/>
+```
+
 <InformerExampleSize />
+
+## Импорт
+
+```tsx
+import { Informer } from '@consta/uikit/Informer';
+```
 
 ## Свойства
 
 | Свойство                     | Тип или варианты значения                       | По умолчанию | Описание                           |
 | ---------------------------- | ----------------------------------------------- | ------------ | ---------------------------------- |
 | [`status?`](#тип-сообщения)  | `'system'`, `'alert'`, `'warning'`, '`success'` | `'success'`  | Тип сообщения                      |
-| [`title?`](#текст-сообщения) | `string`                                        | —            | Заголовок сообщения                |
-| [`lable?`](#текст-сообщения) | `string`                                        | —            | Текст сообщения                    |
-| `children?`                  | `React.ReactNode`                               | —            | Текст сообщения                    |
+| [`title?`](#текст-сообщения) | `string`                                        | -            | Заголовок сообщения                |
+| [`label?`](#текст-сообщения) | `string`                                        | -            | Текст сообщения                    |
+| `children?`                  | `React.ReactNode`                               | -            | Текст сообщения                    |
 | [`view?`](#внешний-вид)      | `'filled'`, `'bordered'`                        | `'filled'`   | Тип информера (с заливкой или без) |
-| [`icon?`](#внешний-вид)      | `React.FC<IconProps>`                           | —            | Иконка                             |
-| `size?`                      | `'m'`, `'s'`                                    | `'m'`        | Размер                             |
-| `ref?`                       | `React.Ref<HTMLDivElement>`                     | —            | Ссылка на DOM-элемент компонента   |
-| `className`                  | `string`                                        | —            | Дополнительный CSS-класс           |
+| [`icon?`](#внешний-вид)      | `IconComponent`                                 | -            | Иконка                             |
+| [`size?`](#размер)           | `'m'`, `'s'`                                    | `'m'`        | Размер                             |
+| `ref?`                       | `React.Ref<HTMLDivElement>`                     | -            | Ссылка на DOM-элемент компонента   |
+| `className`                  | `string`                                        | -            | Дополнительный CSS-класс           |
 
 ## Пример
 

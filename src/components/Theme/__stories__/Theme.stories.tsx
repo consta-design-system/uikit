@@ -16,5 +16,10 @@ export default createMetadata({
     docs: {
       page: mdx,
     },
+    design: {
+      type: 'figma',
+      url:
+        'https://www.figma.com/file/vNZFtFH6w0IjD2Twi5OXXE/Consta-Default-Colors?node-id=1721%3A6',
+    },
   },
 });
