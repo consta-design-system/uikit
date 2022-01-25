@@ -19,6 +19,7 @@ type Props<T extends TableRow> = {
     filterable?: boolean;
   };
   onClick?: (e: React.SyntheticEvent) => void;
+  onContextMenu?: (e: React.SyntheticEvent) => void;
   style?: React.CSSProperties;
   className?: string;
   wrapperClassName?: string;
@@ -84,7 +85,7 @@ const getWrapperClasses = <T extends TableRow>(props: Props<T>): string => {
 };
 
 export const TableCell: TableCell = React.forwardRef((props, ref) => {
-  const { style, onClick, children } = props;
+  const { style, onClick, onContextMenu, children } = props;
 
   const propsWithRole = onClick
     ? {
@@ -96,7 +97,13 @@ export const TableCell: TableCell = React.forwardRef((props, ref) => {
       };
 
   return (
-    <div {...propsWithRole} ref={ref} className={getCellClasses(props)} style={style}>
+    <div
+      {...propsWithRole}
+      onContextMenu={onContextMenu}
+      ref={ref}
+      className={getCellClasses(props)}
+      style={style}
+    >
       <div className={getWrapperClasses(props)}>{children}</div>
     </div>
   );
