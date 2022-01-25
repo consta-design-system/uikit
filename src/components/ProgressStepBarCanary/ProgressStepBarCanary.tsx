@@ -45,6 +45,7 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
     getItemTooltipContent,
     getItemLineStatus,
     getItemOnClick,
+    style,
     ...otherProps
   } = withDefaultGetters(props);
 
@@ -120,6 +121,7 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
       direction,
       onClick: onClick || onItemClickHandler,
       key: cnProgressStepBar({ index }),
+      tooltipZIndex: typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined,
     };
   };
 
@@ -128,6 +130,7 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
   return (
     <div
       {...otherProps}
+      style={style}
       className={cnProgressStepBar(null, [className])}
       ref={useForkRef([ref, containerRef])}
     >

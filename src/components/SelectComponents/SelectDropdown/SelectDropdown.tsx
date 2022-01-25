@@ -66,6 +66,8 @@ export const SelectDropdown: SelectDropdown = (props) => {
     visibleItems,
     getGroupLabel,
     notFound,
+    ref,
+    ...otherProps
   } = props;
 
   const getIndex = fabricIndex(-1);
@@ -81,6 +83,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
       timeout={200}
     >
       <Popover
+        {...otherProps}
         anchorRef={controlRef}
         direction="downStartLeft"
         possibleDirections={['downStartLeft', 'upStartLeft', 'downStartRight', 'upStartRight']}

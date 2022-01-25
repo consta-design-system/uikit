@@ -78,6 +78,7 @@ export type SliderPointProps = PropsWithHTMLAttributes<
     onKeyPress?: (e: React.KeyboardEvent, typeButton?: ActiveButton) => void;
     onHover?: (hovered: boolean) => void;
     position: number;
+    tooltipZIndex?: number;
   },
   HTMLButtonElement
 >;

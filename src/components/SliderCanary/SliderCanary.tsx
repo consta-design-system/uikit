@@ -56,6 +56,7 @@ function SliderRender<RANGE extends boolean>(
     caption,
     tooltipFormatter = defaultTooltipFormatter,
     className,
+    style,
     ...otherProps
   } = props;
 
@@ -108,7 +109,7 @@ function SliderRender<RANGE extends boolean>(
   };
 
   return (
-    <div ref={ref} className={cnSlider({ size }, [className])} {...otherProps}>
+    <div ref={ref} className={cnSlider({ size }, [className])} style={style} {...otherProps}>
       {label && (
         <FieldLabel className={cnSlider('Label')} size={size}>
           {label}
@@ -162,6 +163,8 @@ function SliderRender<RANGE extends boolean>(
               aria-valuemin={min}
               aria-valuemax={max}
               aria-valuenow={val}
+              tooltipZIndex={typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined}
+              key={cnSlider('Point', { index })}
             />
           ))}
         </div>

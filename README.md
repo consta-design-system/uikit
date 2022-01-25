@@ -33,6 +33,7 @@ yarn add @consta/uikit
 Чтобы начать работу с библиотекой интерфейсных компонентов, подключите тему:
 
 ```tsx
+import React from 'react';
 import { Theme, presetGpnDefault } from '@consta/uikit/Theme';
 import { Button } from '@consta/uikit/Button';
 

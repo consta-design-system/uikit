@@ -27,6 +27,7 @@ export const ContextMenu: ContextMenuType = (props) => {
     getLabel,
     onClickOutside,
     spareDirection,
+    style,
     ...otherProps
   } = props;
 
@@ -142,6 +143,10 @@ export const ContextMenu: ContextMenuType = (props) => {
         return (
           <ContextMenuLevel
             {...otherProps}
+            style={{
+              ...style,
+              ...(typeof style?.zIndex === 'number' && { zIndex: style?.zIndex + index }),
+            }}
             offset={level.offset}
             key={index}
             items={level.items}

@@ -77,6 +77,7 @@ import { IconGrouping } from '../../IconGrouping/IconGrouping';
 import { IconHamburger } from '../../IconHamburger/IconHamburger';
 import { IconHand } from '../../IconHand/IconHand';
 import { IconHealth } from '../../IconHealth/IconHealth';
+import { IconHome } from '../../IconHome/IconHome';
 import { IconInComparison } from '../../IconInComparison/IconInComparison';
 import { IconInfo } from '../../IconInfo/IconInfo';
 import { IconIntroduction } from '../../IconIntroduction/IconIntroduction';
@@ -110,6 +111,7 @@ import { IconNodes } from '../../IconNodes/IconNodes';
 import { IconNodeStart } from '../../IconNodeStart/IconNodeStart';
 import { IconNodeStep } from '../../IconNodeStep/IconNodeStep';
 import { IconOpenInNew } from '../../IconOpenInNew/IconOpenInNew';
+import { IconOperators } from '../../IconOperators/IconOperators';
 import { IconPanelBottom } from '../../IconPanelBottom/IconPanelBottom';
 import { IconPanelLeft } from '../../IconPanelLeft/IconPanelLeft';
 import { IconPanelRight } from '../../IconPanelRight/IconPanelRight';
@@ -135,10 +137,12 @@ import { IconRouble } from '../../IconRouble/IconRouble';
 import { IconRuler } from '../../IconRuler/IconRuler';
 import { IconRUO } from '../../IconRUO/IconRUO';
 import { IconRUS } from '../../IconRUS/IconRUS';
+import { IconSave } from '../../IconSave/IconSave';
 import { IconScreen } from '../../IconScreen/IconScreen';
 import { IconSearch } from '../../IconSearch/IconSearch';
 import { IconSelect } from '../../IconSelect/IconSelect';
 import { IconSelectOpen } from '../../IconSelectOpen/IconSelectOpen';
+import { IconSendMessage } from '../../IconSendMessage/IconSendMessage';
 import { IconSettings } from '../../IconSettings/IconSettings';
 import { IconShape } from '../../IconShape/IconShape';
 import { IconShuffle } from '../../IconShuffle/IconShuffle';
@@ -154,6 +158,7 @@ import { IconSun } from '../../IconSun/IconSun';
 import { IconTable } from '../../IconTable/IconTable';
 import { IconTarget } from '../../IconTarget/IconTarget';
 import { IconTeam } from '../../IconTeam/IconTeam';
+import { IconTechResponse } from '../../IconTechResponse/IconTechResponse';
 import { IconTest } from '../../IconTest/IconTest';
 import { IconThumbUp } from '../../IconThumbUp/IconThumbUp';
 import { IconTie } from '../../IconTie/IconTie';
@@ -261,6 +266,7 @@ const icons = {
   IconHamburger,
   IconHand,
   IconHealth,
+  IconHome,
   IconInComparison,
   IconInfo,
   IconIntroduction,
@@ -294,6 +300,7 @@ const icons = {
   IconNodeStep,
   IconNodes,
   IconOpenInNew,
+  IconOperators,
   IconPanelBottom,
   IconPanelLeft,
   IconPanelRight,
@@ -319,10 +326,12 @@ const icons = {
   IconRing,
   IconRouble,
   IconRuler,
+  IconSave,
   IconScreen,
   IconSearch,
   IconSelect,
   IconSelectOpen,
+  IconSendMessage,
   IconSettings,
   IconShape,
   IconShuffle,
@@ -338,6 +347,7 @@ const icons = {
   IconTable,
   IconTarget,
   IconTeam,
+  IconTechResponse,
   IconTest,
   IconThumbUp,
   IconTie,

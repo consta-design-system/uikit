@@ -33,6 +33,7 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = fo
       rightSide,
       endFieldInputRef: endFieldInputRefProp,
       startFieldInputRef: startFieldInputRefProp,
+      style,
       currentVisibleDate: currentVisibleDateProp,
       onChangeCurrentVisibleDate: onChangeCurrentVisibleDateProp,
       renderAdditionalControls,
@@ -164,6 +165,7 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = fo
       <>
         <DatePickerFieldTypeDateRange
           {...fieldProps}
+          style={style}
           ref={ref}
           startFieldRef={startFieldRef}
           endFieldRef={endFieldRef}
@@ -196,6 +198,7 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = fo
           form={dropdownForm}
           onChange={hadleChange}
           renderAdditionalControls={renderAdditionalControls}
+          zIndex={typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined}
         />
       </>
     );
