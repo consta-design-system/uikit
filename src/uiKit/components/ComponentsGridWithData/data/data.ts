@@ -86,12 +86,6 @@ export const data: Data = [
         description: 'Кнопка. Разные формы, цвета и размеры.',
       },
       {
-        name: 'Checkbox',
-        componentName: 'Checkbox',
-        url: '/?path=/docs/components-checkbox--playground',
-        description: 'Чекбокс. Можно сделать выбор и подтвердить.',
-      },
-      {
         name: 'Card',
         componentName: 'Card',
         url: '/?path=/docs/components-card--playground',
@@ -102,6 +96,12 @@ export const data: Data = [
         componentName: 'CheckboxGroup',
         url: '/?path=/docs/components-checkboxgroup--playground',
         description: 'Группа чекбоксов. Можно выбрать несколько вариантов.',
+      },
+      {
+        name: 'Checkbox',
+        componentName: 'Checkbox',
+        url: '/?path=/docs/components-checkbox--playground',
+        description: 'Чекбокс. Можно сделать выбор и подтвердить.',
       },
       {
         name: 'ChoiceGroup',
@@ -368,9 +368,9 @@ export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> =
   Badge: BadgeImage,
   Breadcrumbs: BreadcrumbsImage,
   Button: ButtonImage,
-  Checkbox: CheckboxImage,
   Card: CardImage,
   CheckboxGroup: CheckboxGroupImage,
+  Checkbox: CheckboxImage,
   ChoiceGroup: ChoiceGroupImage,
   Collapse: CollapseImage,
   CollapseGroup: CollapseGroupImage,
