@@ -56,12 +56,6 @@ export const data: Data = [
   {
     items: [
       {
-        name: 'Attachment',
-        componentName: 'Attachment',
-        url: '/?path=/docs/components-attachment--playground',
-        description: 'Показывает загрузку файла или уже загруженный файл.',
-      },
-      {
         name: 'Avatar',
         componentName: 'Avatar',
         url: '/?path=/docs/components-avatar--playground',
@@ -78,6 +72,12 @@ export const data: Data = [
         componentName: 'Breadcrumbs',
         url: '/?path=/docs/components-breadcrumbs--playground',
         description: 'Хлебные крошки. Показывают путь к текущей странице.',
+      },
+      {
+        name: 'Attachment',
+        componentName: 'Attachment',
+        url: '/?path=/docs/components-attachment--playground',
+        description: 'Показывает загрузку файла или уже загруженный файл.',
       },
       {
         name: 'Button',
@@ -98,16 +98,16 @@ export const data: Data = [
         description: 'Группа чекбоксов. Можно выбрать несколько вариантов.',
       },
       {
-        name: 'Checkbox',
-        componentName: 'Checkbox',
-        url: '/?path=/docs/components-checkbox--playground',
-        description: 'Чекбокс. Можно сделать выбор и подтвердить.',
-      },
-      {
         name: 'ChoiceGroup',
         componentName: 'ChoiceGroup',
         url: '/?path=/docs/components-choicegroup--playground',
         description: 'Группа кнопок. Можно выбрать один или несколько вариантов.',
+      },
+      {
+        name: 'Checkbox',
+        componentName: 'Checkbox',
+        url: '/?path=/docs/components-checkbox--playground',
+        description: 'Чекбокс. Можно сделать выбор и подтвердить.',
       },
       {
         name: 'Collapse',
@@ -140,28 +140,28 @@ export const data: Data = [
         description: 'Поле, в котором можно выбрать дату или период.',
       },
       {
-        name: 'DateTime(Canary)',
-        componentName: 'DateTime',
-        url: '/?path=/docs/components-datetime--playground',
-        description: 'Календарь. Можно выбрать дату или период.',
-      },
-      {
         name: 'DragNDropField',
         componentName: 'DragNDropField',
         url: '/?path=/docs/components-dragndropfield--playground',
         description: 'Можно перетащить файлы, чтобы загрузить или отправить.',
       },
       {
-        name: 'FileField',
-        componentName: 'FileField',
-        url: '/?path=/docs/components-filefield--playground',
-        description: 'Можно выбрать файлы, чтобы загрузить или отправить.',
+        name: 'DateTime(Canary)',
+        componentName: 'DateTime',
+        url: '/?path=/docs/components-datetime--playground',
+        description: 'Календарь. Можно выбрать дату или период.',
       },
       {
         name: 'File',
         componentName: 'File',
         url: '/?path=/docs/components-file--playground',
         description: 'Иконка для файла с расширением.',
+      },
+      {
+        name: 'FileField',
+        componentName: 'FileField',
+        url: '/?path=/docs/components-filefield--playground',
+        description: 'Можно выбрать файлы, чтобы загрузить или отправить.',
       },
       {
         name: 'Grid',
@@ -188,16 +188,16 @@ export const data: Data = [
         description: 'Лэйаут. Блоки, из которых можно построить каркас страницы.',
       },
       {
-        name: 'Loader',
-        componentName: 'Loader',
-        url: '/?path=/docs/components-loader--playground',
-        description: 'Прелоадер. Показывает, что информация загружается.',
-      },
-      {
         name: 'Modal',
         componentName: 'Modal',
         url: '/?path=/docs/components-modal--playground',
         description: 'Всплывающее окно. Показывает контент поверх основной страницы.',
+      },
+      {
+        name: 'Loader',
+        componentName: 'Loader',
+        url: '/?path=/docs/components-loader--playground',
+        description: 'Прелоадер. Показывает, что информация загружается.',
       },
       {
         name: 'Pagination',
@@ -206,17 +206,17 @@ export const data: Data = [
         description: 'Пагинация. Можно выбрать страницу.',
       },
       {
+        name: 'Popover',
+        componentName: 'Popover',
+        url: '/?path=/docs/components-popover--playground',
+        description: 'Поповер. Позиционирование элементов по координатам или якорю.',
+      },
+      {
         name: 'ProgressSpin',
         componentName: 'ProgressSpin',
         url: '/?path=/docs/components-progressspin--playground',
         description:
           'Индикатор. Показывает течение процесса — загрузку, отправку или что-то похожее.',
-      },
-      {
-        name: 'Popover',
-        componentName: 'Popover',
-        url: '/?path=/docs/components-popover--playground',
-        description: 'Поповер. Позиционирование элементов по координатам или якорю.',
       },
       {
         name: 'Radio',
@@ -363,33 +363,33 @@ export const data: Data = [
 ];
 
 export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
-  Attachment: AttachmentImage,
   Avatar: AvatarImage,
   Badge: BadgeImage,
   Breadcrumbs: BreadcrumbsImage,
+  Attachment: AttachmentImage,
   Button: ButtonImage,
   Card: CardImage,
   CheckboxGroup: CheckboxGroupImage,
-  Checkbox: CheckboxImage,
   ChoiceGroup: ChoiceGroupImage,
+  Checkbox: CheckboxImage,
   Collapse: CollapseImage,
   CollapseGroup: CollapseGroupImage,
   Combobox: ComboboxImage,
   ContextMenu: ContextMenuImage,
   DatePicker: DatePickerImage,
-  DateTime: DateTimeImage,
   DragNDropField: DragNDropFieldImage,
-  FileField: FileFieldImage,
+  DateTime: DateTimeImage,
   File: FileImage,
+  FileField: FileFieldImage,
   Grid: GridImage,
   Header: HeaderImage,
   Informer: InformerImage,
   Layout: LayoutImage,
-  Loader: LoaderImage,
   Modal: ModalImage,
+  Loader: LoaderImage,
   Pagination: PaginationImage,
-  ProgressSpin: ProgressSpinImage,
   Popover: PopoverImage,
+  ProgressSpin: ProgressSpinImage,
   Radio: RadioImage,
   ProgressStepBar: ProgressStepBarImage,
   RadioGroup: RadioGroupImage,
