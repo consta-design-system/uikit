@@ -39,6 +39,7 @@ import {
   zebraStriped,
 } from '../Table';
 
+import WithHandleCellClick from './examples/WithHandleCellClick';
 import WithRowCreationAndDeletion from './examples/WithRowCreationAndDeletion';
 import { cnTableStories } from './helpers';
 import mdx from './Table.docs.mdx';
@@ -488,6 +489,10 @@ export const WithRowActions = createStory(() => <WithRowCreationAndDeletion />, 
 
 export const WithIcon = createStory(() => <Table {...getKnobs(withControlTableMock)} />, {
   name: 'С использованием control',
+});
+
+export const WithHandleCellClickExample = createStory(() => <WithHandleCellClick />, {
+  name: 'с обработкой клика по ячейке',
 });
 
 export const WithHiddenColumn = createStory(

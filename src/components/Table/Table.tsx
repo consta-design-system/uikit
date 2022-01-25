@@ -93,6 +93,22 @@ type onRowClick = ({ id, e }: { id: string; e: React.MouseEvent }) => void;
 
 type onRowCreate = ({ id, index, e }: { id?: string; index: number; e: React.MouseEvent }) => void;
 
+export type CellClickType = 'click' | 'contextMenu';
+
+export type onCellClick = ({
+  e,
+  type,
+  rowId,
+  columnIdx,
+  ref,
+}: {
+  e: React.SyntheticEvent;
+  type: CellClickType;
+  columnIdx: number;
+  ref: React.RefObject<HTMLDivElement>;
+  rowId?: string;
+}) => void;
+
 export type TableRow = {
   id: string;
   rows?: TableRow[];
@@ -165,6 +181,7 @@ export type TableProps<T extends TableRow> = {
   onRowHover?: onRowHover;
   onRowClick?: onRowClick;
   onRowCreate?: onRowCreate;
+  onCellClick?: onCellClick;
   rowCreateText?: string;
   lazyLoad?: LazyLoad;
   onFiltersUpdated?: (filters: SelectedFilters) => void;
@@ -257,6 +274,7 @@ const InternalTable = <T extends TableRow>(
     onRowHover,
     onRowClick,
     onRowCreate,
+    onCellClick,
     rowCreateText = '+ Добавить строку',
     lazyLoad,
     onSortBy,
@@ -296,6 +314,7 @@ const InternalTable = <T extends TableRow>(
 
   const tableRef = React.useRef<HTMLDivElement>(null);
   const columnsRefs = React.useRef<Record<number, HTMLDivElement | null>>({});
+  const cellsRefs = React.useRef<Record<string, HTMLDivElement | null>>({});
   const {
     selectedFilters,
     updateSelectedFilters,
@@ -670,6 +689,12 @@ const InternalTable = <T extends TableRow>(
     return result;
   };
 
+  const handleCellClick: onCellClick = (params) => {
+    if (onCellClick) {
+      onCellClick(params);
+    }
+  };
+
   return (
     <div
       ref={useForkRef([tableRef, ref])}
@@ -707,6 +732,22 @@ const InternalTable = <T extends TableRow>(
             style={{
               left: getStickyLeftOffset(columnIdx, columnIdx),
             }}
+            onContextMenu={(e: React.SyntheticEvent) =>
+              handleCellClick({
+                e,
+                type: 'contextMenu',
+                columnIdx,
+                ref: { current: columnsRefs.current[columnIdx] },
+              })
+            }
+            onClick={(e: React.SyntheticEvent) =>
+              handleCellClick({
+                e,
+                type: 'click',
+                columnIdx,
+                ref: { current: columnsRefs.current[columnIdx] },
+              })
+            }
             column={column}
             showVerticalShadow={showVerticalCellShadow}
           >
@@ -736,6 +777,7 @@ const InternalTable = <T extends TableRow>(
         getSortIcon={getSortIcon}
         handleSortClick={handleSortClick}
         handleFilterTogglerClick={handleFilterTogglerClick}
+        handleCellClick={handleCellClick}
         handleTooltipSave={handleTooltipSave}
         filters={filters}
         visibleFilter={visibleFilter}
@@ -776,7 +818,11 @@ const InternalTable = <T extends TableRow>(
                     <TableCell
                       type="content"
                       key={column.accessor}
-                      ref={setBoundaryRef(columnIdx, rowIdx)}
+                      ref={(ref: HTMLDivElement | null): void => {
+                        cellsRefs.current[`${columnIdx}-${row.id}`] = ref;
+
+                        setBoundaryRef(columnIdx, rowIdx);
+                      }}
                       style={style}
                       wrapperClassName={cnTable('ContentCell', {
                         isActive: activeRow ? activeRow.id === row.id : false,
@@ -785,9 +831,26 @@ const InternalTable = <T extends TableRow>(
                           : false,
                         isMerged: column.mergeCells && rowSpan > 1,
                       })}
-                      onClick={(e: React.SyntheticEvent): void =>
-                        handleSelectRow({ id: row.id, e })
+                      onContextMenu={(e: React.SyntheticEvent) =>
+                        handleCellClick({
+                          e,
+                          type: 'contextMenu',
+                          columnIdx,
+                          rowId: row.id,
+                          ref: { current: cellsRefs.current[`${columnIdx}-${row.id}`] },
+                        })
                       }
+                      onClick={(e: React.SyntheticEvent): void => {
+                        handleSelectRow({ id: row.id, e });
+
+                        handleCellClick({
+                          e,
+                          type: 'click',
+                          columnIdx,
+                          rowId: row.id,
+                          ref: { current: cellsRefs.current[`${columnIdx}-${row.id}`] },
+                        });
+                      }}
                       column={column}
                       verticalAlign={verticalAlign}
                       isClickable={!!isRowsClickable}
