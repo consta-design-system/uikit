@@ -68,6 +68,9 @@ export type DatePickerFieldTypeDateTimeProps = PropsWithHTMLAttributes<
     multiplicitySeconds?: number;
     multiplicityMinutes?: number;
     multiplicityHours?: number;
+    label?: string;
+    caption?: string;
+    labelPosition?: 'top' | 'left';
   },
   HTMLDivElement
 >;
@@ -118,8 +121,6 @@ export const useImask = (
     if (!inputRef.current) {
       return;
     }
-
-    // console.log(getTimeEnum(24, multiplicityHours, startOfDay, addHours, getLabelHours));
 
     imaskRef.current = (IMask(inputRef.current, {
       mask: Date,

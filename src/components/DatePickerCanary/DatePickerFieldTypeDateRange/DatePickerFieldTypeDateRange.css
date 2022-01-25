@@ -1,7 +1,79 @@
 .DatePickerFieldTypeDateRange {
+  --caption-margin-left: calc(var(--input-space) + var(--control-border-width));
   display: flex;
+
+  &_size {
+    &_xs {
+      --input-height: var(--control-height-xs);
+      --input-space: calc(var(--control-space-xs) * 0.5);
+    }
+
+    &_s {
+      --input-height: var(--control-height-s);
+      --input-space: calc(var(--control-space-s) * 0.5);
+    }
+
+    &_m {
+      --input-height: var(--control-height-m);
+      --input-space: calc(var(--control-space-m) * 0.5);
+    }
+
+    &_l {
+      --input-height: var(--control-height-l);
+      --input-space: calc(var(--control-space-l) * 0.5);
+    }
+  }
+
+  &_view {
+    &_clear {
+      --caption-margin-left: 0;
+    }
+  }
+
+  &_width_full {
+    width: 100%;
+  }
 
   &-Field {
     flex: 1;
+  }
+
+  &-Fields {
+    display: flex;
+  }
+
+  &_labelPosition {
+    &_top {
+      flex-direction: column;
+
+      & > *:not(:last-child) {
+        margin-bottom: var(--space-xs);
+      }
+    }
+
+    &_left {
+      flex-direction: row;
+
+      & .DatePickerFieldTypeDateRange-Label {
+        display: inline-flex;
+        align-items: center;
+        height: var(--input-height);
+      }
+
+      & > *:not(:last-child) {
+        margin-right: var(--space-s);
+      }
+    }
+  }
+
+  &-Body {
+    display: inline-flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &-Caption {
+    margin-top: var(--space-2xs);
+    margin-left: var(--caption-margin-left);
   }
 }

@@ -9,7 +9,7 @@ import { Text } from '../Text/Text';
 export type FieldLabelPropSize = 'xs' | 's' | 'm' | 'l';
 
 type FieldLabelProps = {
-  size: FieldLabelPropSize;
+  size?: FieldLabelPropSize;
   required?: boolean;
 };
 
