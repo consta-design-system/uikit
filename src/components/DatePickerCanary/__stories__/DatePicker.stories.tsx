@@ -140,10 +140,6 @@ export function Playground() {
           startFieldRightSide: icon,
         })}
         renderAdditionalControls={withAdditionalControls ? additionalControls : undefined}
-        // format="dd.MM.yyyy HH:mm"
-        // multiplicityHours={2}
-        // multiplicityMinutes={30}
-        // multiplicitySeconds={0}
       />
     </div>
   );

@@ -54,7 +54,7 @@ export const DatePickerFieldTypeDateTime = React.forwardRef<
           return;
         }
 
-        const partsDate = getPartsDate(stringValue, formatProp, separator, formatParts);
+        const partsDate = getPartsDate(stringValue, formatProp, separator);
         const [dd, MM, yyyy, HH, mm, ss] = partsDate;
 
         if (partsDate.filter((item) => !!item).length === formatParts.length) {
