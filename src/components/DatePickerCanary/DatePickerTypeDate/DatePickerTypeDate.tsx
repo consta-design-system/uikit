@@ -17,6 +17,7 @@ export const DatePickerTypeDate: DatePickerTypeDateComponent = forwardRef((props
     onFocus,
     currentVisibleDate: currentVisibleDateProp,
     onChangeCurrentVisibleDate: onChangeCurrentVisibleDateProp,
+    style,
     ...otherProps
   } = props;
 
@@ -82,7 +83,12 @@ export const DatePickerTypeDate: DatePickerTypeDateComponent = forwardRef((props
 
   return (
     <>
-      <DatePickerFieldTypeDate {...otherProps} ref={fieldRef} onFocus={onFocusHandler} />
+      <DatePickerFieldTypeDate
+        {...otherProps}
+        ref={fieldRef}
+        onFocus={onFocusHandler}
+        style={style}
+      />
       <DatePickerDropdown
         ref={calendarRef}
         anchorRef={fieldRef}
@@ -100,6 +106,7 @@ export const DatePickerTypeDate: DatePickerTypeDateComponent = forwardRef((props
           props.onChange?.(params);
           handleClose();
         }}
+        zIndex={typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined}
         renderAdditionalControls={props.renderAdditionalControls}
         onChangeCurrentVisibleDate={setCalendarVisibleDate}
       />

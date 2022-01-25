@@ -42,6 +42,7 @@ export const SliderPoint = (props: SliderPointProps) => {
     tooltipFormatter,
     buttonLabel,
     onFocus,
+    tooltipZIndex,
     ...otherProps
   } = props;
 
@@ -121,6 +122,7 @@ export const SliderPoint = (props: SliderPointProps) => {
             className={cnSliderPoint('Tooltip')}
             direction="downCenter"
             possibleDirections={['downCenter', 'leftDown', 'rightDown']}
+            style={{ zIndex: tooltipZIndex }}
           >
             {tooltipFormatter ? tooltipFormatter(value) : value}
           </Tooltip>

@@ -39,6 +39,7 @@ export type DatePickerDropdownProps = PropsWithHTMLAttributesAndRef<
     form?: DatePickerPropDropdownForm;
     isOpen?: boolean;
     onChangeCurrentVisibleDate?: (date: Date) => void;
+    zIndex?: number;
     renderAdditionalControls?: DateTimeAdditionalControlRenderProp;
   },
   HTMLDivElement
@@ -54,9 +55,8 @@ export const DatePickerDropdown: DatePickerDropdownComponent = forwardRef((props
     form = datePickerPropDropdownFormDefault,
     anchorRef,
     isOpen,
-    value,
     className,
-    onChange,
+    zIndex,
     ...otherProps
   } = props;
 
@@ -78,8 +78,9 @@ export const DatePickerDropdown: DatePickerDropdownComponent = forwardRef((props
         direction="downStartLeft"
         spareDirection="downStartLeft"
         possibleDirections={['downStartLeft', 'upStartLeft', 'downStartRight', 'upStartRight']}
+        style={{ zIndex }}
       >
-        <DateTime {...otherProps} onChange={onChange} type="date" value={value || undefined} />
+        <DateTime {...otherProps} type="date" />
       </Popover>
     </CSSTransition>
   );
