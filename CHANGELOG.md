@@ -1,5 +1,28 @@
 # Changelog
 
+## v3.14.0 (26/01/2022)
+Самое важное:
+- в `DatePicker` добавили тип `'date-time'` и возможность добавления своих контролов
+- обновили иконки
+- в `Table` добавили возможность подписки на клик по ячейке
+- обновили документацию
+
+---
+
+
+- [feat(DatePicker) add date-time type (#1984)](https://github.com/consta-design-system/uikit/commit/9aff4ba09a09c367303caa831194b6e380f0d995) - [@gizeasy](https://github.com/gizeasy)
+- [feat(components): improvement zIndex API (#1980)](https://github.com/consta-design-system/uikit/commit/b9c93262fff3b37bc328eb6da80566ee4604b053) - [@gizeasy](https://github.com/gizeasy)
+- [fix(Slider): removed warnings about required keys (#1981)](https://github.com/consta-design-system/uikit/commit/dd577d57c08ae5c641e3e10abe398e1fd32d2dbc) - [@gizeasy](https://github.com/gizeasy)
+- [docs(review): add images for charts & section (#1971)](https://github.com/consta-design-system/uikit/commit/8bb01196bc0b548912c22f0a233d10bcca948aa3) - [@arhayka](https://github.com/arhayka)
+- [fix(Table): fix bug with render function (#1979)](https://github.com/consta-design-system/uikit/commit/bcfa9bec719ecf864b2acc1a98d9b3c2c675afef) - [@N1MBER](https://github.com/N1MBER)
+- [feat(icon): add new icons (#1970)](https://github.com/consta-design-system/uikit/commit/6a25de0181a0c583f3b61f2f6dfb750f845ea387) - [@hell0anna](https://github.com/hell0anna)
+- [docs(import): add import react to all missing examples (#1969)](https://github.com/consta-design-system/uikit/commit/1e06364a76266f85698b3290d680cb19a88c484e) - [@N1MBER](https://github.com/N1MBER)
+- [feat(Table): added handle click and contextmenu click in table cell (#1983)](https://github.com/consta-design-system/uikit/commit/9fdd4017477f4f99cf9ebbacd8a5dbce25ab0ab0) - [@SergeyKatugin](https://github.com/SergeyKatugin)
+- [feat(DatePicker): add addtional controls to datepicker / dateTime (#1882)](https://github.com/consta-design-system/uikit/commit/ea1aa86877110aba5821833959912db8f228126f) - [@N1MBER](https://github.com/N1MBER)
+- [chore(CODEOWNERS): update](https://github.com/consta-design-system/uikit/commit/b0b3b7dd215e81f0c05d26ea611204b11ffc88dd) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v3.13.0 (19/01/2022)
 Выкатили обновления, вот самое важное:
 
@@ -473,9 +496,3 @@ _Обращаем внимание_: *версии компонентов обр
 ## v1.12.2 (02/06/2021)
 - [fix(Table): fixed tests](https://github.com/gazprom-neft/consta-uikit/commit/8e5a4608810e13c340d26caf2516cce3a5f60fd9) - [@gizeasy](https://github.com/gizeasy)
 - [feat(components): applied shadow variables (#1226)](https://github.com/gazprom-neft/consta-uikit/commit/75c0bc2f0db00a9013f81a80a1b4d45115ab18c1) - [@karpovfv-nedra](https://github.com/karpovfv-nedra)
-
---------------------
-
-## v1.12.1 (31/05/2021)
-- [chore(deps): bump dns-packet from 1.3.1 to 1.3.4 (#1231)](https://github.com/gazprom-neft/consta-uikit/commit/2b218dd47c02bd704631a9e9cfd4421494e0fe00) - [@dependabot[bot]](https://github.com/dependabot[bot])
-- [fix(TabsTab): fix styles (#1236)](https://github.com/gazprom-neft/consta-uikit/commit/7d59677f50f413eb362d980e39dbe0412da642ce) - [@dmitriykorsakovnedra](https://github.com/dmitriykorsakovnedra)
