@@ -18,7 +18,8 @@ import {
   EventInterceptorProvider,
 } from '../../EventInterceptor/EventInterceptor';
 import { Text } from '../../Text/Text';
-import { Item, SnackBar, snackBarItemShowProgressProp, SnackBarItemStatus } from '../SnackBar';
+import { Item, snackBarItemShowProgressProp, SnackBarItemStatus } from '../helper';
+import { SnackBar } from '../SnackBar';
 
 import mdx from './SnackBar.docs.mdx';
 
@@ -28,9 +29,9 @@ type Action = { type: 'add'; item: Item } | { type: 'remove'; key: number | stri
 const defaultKnobs = () => ({
   withIcon: boolean('withIcon', false),
   withActionButtons: boolean('withActionButtons', false),
-  withAutoClose: boolean('withAutoClose', true),
+  withAutoClose: boolean('withAutoClose', false),
   withCloseButton: boolean('withCloseButton', true),
-  showProgress: select('showProgress', ['', ...snackBarItemShowProgressProp], 'line'),
+  showProgress: select('showProgress', ['', ...snackBarItemShowProgressProp], ''),
   withComponentInsteadOfText: boolean('withComponentInsteadOfText', false),
 });
 

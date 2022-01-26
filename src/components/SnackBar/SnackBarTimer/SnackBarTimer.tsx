@@ -1,21 +1,15 @@
-import './SnackBar-Timer.css';
+import './SnackBarTimer.css';
 
 import React, { useEffect, useState } from 'react';
 
 import { useTimer } from '../../../hooks/useTimer/useTimer';
+import { cn } from '../../../utils/bem';
 import { Timer } from '../../Timer/Timer';
-import { cnSnackBar } from '../SnackBar';
-
-export type SnackBarTimerPropOnMount = (object: { pause: () => void; start: () => void }) => void;
-
-export type SnackBarTimerProps = {
-  onMount: SnackBarTimerPropOnMount;
-  onTimeIsOver: () => void;
-  startTime: number;
-  hidden?: boolean;
-};
+import { SnackBarTimerProps } from '../helper';
 
 const interval = 1000;
+
+const cnSnackBarTimer = cn('SnackBarTimer');
 
 export const SnackBarTimer: React.FC<SnackBarTimerProps> = (props) => {
   const [running, setRunning] = useState<boolean>(false);
@@ -45,12 +39,6 @@ export const SnackBarTimer: React.FC<SnackBarTimerProps> = (props) => {
   }
 
   return (
-    <Timer
-      className={cnSnackBar('Timer')}
-      seconds={seconds}
-      progress={progress}
-      size="m"
-      animation
-    />
+    <Timer className={cnSnackBarTimer()} seconds={seconds} progress={progress} size="m" animation />
   );
 };

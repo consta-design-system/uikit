@@ -1,29 +1,33 @@
 import '../../Theme/_color/Theme_color_gpnDark.css';
-import './SnackBar-Item.css';
+import './SnackBarItem.css';
 
 import React, { useEffect, useState } from 'react';
 
 import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { IconClose } from '../../../icons/IconClose/IconClose';
+import { cn } from '../../../utils/bem';
 import { isNumber, isString } from '../../../utils/type-guards';
 import { PropsWithHTMLAttributesAndRef } from '../../../utils/types/PropsWithHTMLAttributes';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 import { cnTheme } from '../../Theme/Theme';
-import { SnackBarActionButton } from '../ActionButton/SnackBar-ActionButton';
-import { SnackBarProgressLine } from '../ProgressLine/SnackBar-ProgressLine';
-import { cnSnackBar, cnSnackBarItem, Item, snackBarItemStatusDefault } from '../SnackBar';
-import { SnackBarTimer, SnackBarTimerPropOnMount } from '../Timer/SnackBar-Timer';
-
-export type SnackBarItemProps = {
-  item: Item;
-};
+import {
+  Item,
+  SnackBarItemProps,
+  snackBarItemStatusDefault,
+  SnackBarTimerPropOnMount,
+} from '../helper';
+import { SnackBarActionButton } from '../SnackBarActionButton/SnackBarActionButton';
+import { SnackBarLine } from '../SnackBarLine/SnackBarLine';
+import { SnackBarTimer } from '../SnackBarTimer/SnackBarTimer';
 
 type SnackBarItemComponent = (
   props: PropsWithHTMLAttributesAndRef<SnackBarItemProps, HTMLDivElement>,
 ) => React.ReactElement | null;
 
 const defaultInitialTimerTime = 3;
+
+const cnSnackBarItem = cn('SnackBarItem');
 
 const getAutoCloseTime = (autoClose: boolean | number | undefined): number | false => {
   if (autoClose) {
@@ -100,10 +104,10 @@ export const SnackBarItem: SnackBarItemComponent = React.forwardRef((props, ref)
           hidden={hideAutoCloseTimer}
         />
       )}
-      {hideAutoCloseTimer && Icon && <Icon className={cnSnackBar('Icon')} size="m" />}
-      <div className={cnSnackBar('Content')}>
+      {hideAutoCloseTimer && Icon && <Icon className={cnSnackBarItem('Icon')} size="m" />}
+      <div className={cnSnackBarItem('Content')}>
         {isString(message) || isNumber(message) ? (
-          <Text className={cnSnackBar('Message')} lineHeight="s">
+          <Text className={cnSnackBarItem('Message')} lineHeight="s">
             {message}
           </Text>
         ) : (
@@ -113,7 +117,7 @@ export const SnackBarItem: SnackBarItemComponent = React.forwardRef((props, ref)
       </div>
       {onClose && (
         <Button
-          className={cnSnackBar('CloseButton')}
+          className={cnSnackBarItem('CloseButton')}
           view="clear"
           iconLeft={IconClose}
           form="round"
@@ -122,7 +126,7 @@ export const SnackBarItem: SnackBarItemComponent = React.forwardRef((props, ref)
         />
       )}
       {autoCloseTime && showProgress === 'line' && (
-        <SnackBarProgressLine
+        <SnackBarLine
           onMount={handleMountTimer}
           onTimeIsOver={handleTimeIsOver}
           startTime={autoCloseTime}

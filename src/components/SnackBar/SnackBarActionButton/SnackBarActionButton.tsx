@@ -1,13 +1,12 @@
-import './SnackBar-ActionButton.css';
+import './SnackBarActionButton.css';
 
 import React from 'react';
 
+import { cn } from '../../../utils/bem';
 import { Button } from '../../Button/Button';
-import { cnSnackBar, SnackBarPropItemAction } from '../SnackBar';
+import { SnackBarActionButtonProps } from '../helper';
 
-export type SnackBarActionButtonProps = {
-  actions: SnackBarPropItemAction[];
-};
+const cnSnackBarActionButton = cn('SnackBarActionButton');
 
 export const SnackBarActionButton: React.FC<SnackBarActionButtonProps> = (props) => {
   const { actions } = props;
@@ -17,10 +16,10 @@ export const SnackBarActionButton: React.FC<SnackBarActionButtonProps> = (props)
   }
 
   return (
-    <div className={cnSnackBar('ActionButtonsWrapper')}>
+    <div className={cnSnackBarActionButton('ActionButtonsWrapper')}>
       {actions.map((item, i) => (
         <Button
-          className={cnSnackBar('ActionButton')}
+          className={cnSnackBarActionButton()}
           key={i}
           size="s"
           view="ghost"
