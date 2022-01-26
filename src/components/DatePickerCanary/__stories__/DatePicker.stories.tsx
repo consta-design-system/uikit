@@ -25,7 +25,6 @@ import { DatePicker } from '../DatePickerCanary';
 import {
   datePickerPropDropdownForm,
   datePickerPropDropdownFormDefault,
-  datePickerPropPlaceholderTypeDate,
   datePickerPropType,
   datePickerPropTypeDefault,
   DatePickerPropValue,
@@ -56,7 +55,6 @@ const defaultKnobs = () => ({
   size: select('size', textFieldPropSize, textFieldPropSizeDefault),
   view: select('view', textFieldPropView, textFieldPropViewDefault),
   disabled: boolean('disabled', false),
-  placeholder: text('placeholder', datePickerPropPlaceholderTypeDate),
   withIcon: boolean('withIcon', false),
   minDate: date('minDate', minDateDefault),
   maxDate: date('maxDate', maxDateDefault),
@@ -84,7 +82,6 @@ export function Playground() {
     labelPosition,
     size,
     view,
-    placeholder,
     withIcon,
     disabled,
     withEvents,
@@ -124,7 +121,6 @@ export function Playground() {
         value={value}
         status={status || undefined}
         view={view}
-        placeholder={placeholder}
         disabled={disabled}
         size={size}
         onChange={({ value }) => setValue(value)}
