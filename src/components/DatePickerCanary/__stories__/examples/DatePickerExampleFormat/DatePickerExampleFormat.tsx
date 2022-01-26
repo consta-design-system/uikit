@@ -9,9 +9,10 @@ export const DatePickerExampleFormat = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <DatePicker
-        format="MM/dd/yyyy"
+        type="date-time"
+        format="MM/dd/yyyy HH:mm"
         separator="/"
-        placeholder="ММ/ДД/ГГГГ"
+        placeholder="ММ/ДД/ГГГГ ЧЧ:ММ"
         value={value}
         onChange={({ value }) => setValue(value)}
       />

@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getHours, getMinutes, getSeconds, set } from 'date-fns';
 
 import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
@@ -11,8 +11,12 @@ const getTime = (date?: Date) => {
   return [getHours(date), getMinutes(date), getSeconds(date)] as const;
 };
 
-export const useOnChange = (onChange: DateTimePropOnChange | undefined) => {
-  const [time, setTime] = useState<Date | undefined>();
+export const useOnChange = (
+  onChange: DateTimePropOnChange | undefined,
+  value: Date | undefined,
+) => {
+  const [time, setTime] = useState<Date | undefined>(value);
+
   const onChangeRef = useMutableRef(onChange);
   const timeRef = useMutableRef(time);
 
@@ -22,9 +26,10 @@ export const useOnChange = (onChange: DateTimePropOnChange | undefined) => {
   }, []);
 
   const onTimeChange: DateTimePropOnChange = useCallback(({ e, value }) => {
-    setTime(value);
     onChangeRef.current?.({ e, value });
   }, []);
+
+  useEffect(() => setTime(value), [value?.getTime()]);
 
   return [onDateChange, onTimeChange];
 };

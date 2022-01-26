@@ -43,6 +43,9 @@ export type DatePickerFieldTypeDateProps = PropsWithHTMLAttributes<
     minDate?: Date;
     maxDate?: Date;
     focused?: boolean;
+    label?: string;
+    caption?: string;
+    labelPosition?: 'top' | 'left';
   },
   HTMLDivElement
 >;

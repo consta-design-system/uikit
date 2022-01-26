@@ -42,7 +42,7 @@ export const DateTimeTypeDateTime: DateTimeTypeComponent<'date-time'> = forwardR
     '--root-padding-left': '0px',
   });
 
-  const [onDateChange, onTimeChange] = useOnChange(onChange);
+  const [onDateChange, onTimeChange] = useOnChange(onChange, value);
 
   const rootRef = useRef<HTMLDivElement>(null);
 

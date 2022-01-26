@@ -1,6 +1,7 @@
-import { Locale } from 'date-fns';
+import { Locale, startOfToday } from 'date-fns';
 
 import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
+import { range } from '../../utils/array';
 import { DateRange } from '../../utils/types/Date';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { DateTimeAdditionalControlRenderProp, DateTimePropView } from '../DateTimeCanary/helpers';
@@ -12,7 +13,7 @@ import {
   TextFieldPropWidth,
 } from '../TextField/TextField';
 
-export const datePickerPropType = ['date', 'date-range'] as const;
+export const datePickerPropType = ['date', 'date-range', 'date-time'] as const;
 export type DatePickerPropType = typeof datePickerPropType[number];
 export const datePickerPropTypeDefault = datePickerPropType[0];
 
@@ -25,7 +26,7 @@ export const datePickerErrorTypes = [
 ] as const;
 
 export type DatePickerPropValue<TYPE extends DatePickerPropType> =
-  | (TYPE extends 'date' ? Date : DateRange)
+  | (TYPE extends 'date' | 'date-time' ? Date : DateRange)
   | null;
 
 export type DatePickerPropOnChange<TYPE extends DatePickerPropType> = (props: {
@@ -37,9 +38,11 @@ export const datePickerPropDropdownForm = ['default', 'brick', 'round'] as const
 export type DatePickerPropDropdownForm = typeof datePickerPropDropdownForm[number];
 export const datePickerPropDropdownFormDefault = datePickerPropDropdownForm[0];
 
-type DatePickerPropCalendarWidth<TYPE> = TYPE extends 'date' ? TextFieldPropWidth : never;
+type DatePickerPropCalendarWidth<TYPE> = TYPE extends 'date' | 'date-time'
+  ? TextFieldPropWidth
+  : never;
 
-type DatePickerPropCalendarInputRef<TYPE> = TYPE extends 'date'
+type DatePickerPropCalendarInputRef<TYPE> = TYPE extends 'date' | 'date-time'
   ? React.Ref<HTMLInputElement>
   : never;
 
@@ -108,6 +111,9 @@ export type DatePickerProps<
     labelPosition?: 'top' | 'left';
     onChangeCurrentVisibleDate?: (date: Date) => void;
     currentVisibleDate?: Date;
+    multiplicitySeconds?: number;
+    multiplicityMinutes?: number;
+    multiplicityHours?: number;
   },
   HTMLDivElement
 >;
@@ -116,12 +122,8 @@ export type DatePickerComponent = <TYPE extends DatePickerPropType = 'date'>(
   props: DatePickerProps<TYPE>,
 ) => React.ReactElement | null;
 
-export type DatePickerTypeDateComponent = (
-  props: DatePickerProps<'date'>,
-) => React.ReactElement | null;
-
-export type DatePickerTypeDateRangeComponent = (
-  props: DatePickerProps<'date-range'>,
+export type DatePickerTypeComponent<TYPE extends DatePickerPropType> = (
+  props: Omit<DatePickerProps<TYPE>, 'type'>,
 ) => React.ReactElement | null;
 
 export type DatePickerPropOnError = (
@@ -132,6 +134,9 @@ export type DatePickerPropOnError = (
         dd?: string;
         MM?: string;
         yyyy?: string;
+        ss?: string;
+        mm?: string;
+        HH?: string;
         date: Date;
       }
     | {
@@ -140,6 +145,9 @@ export type DatePickerPropOnError = (
         dd?: string;
         MM?: string;
         yyyy?: string;
+        ss?: string;
+        mm?: string;
+        HH?: string;
       }
     | {
         type: typeof datePickerErrorTypes[2];
@@ -147,25 +155,53 @@ export type DatePickerPropOnError = (
       },
 ) => void;
 
-export const isDateRangeParams = (
-  params: DatePickerProps<DatePickerPropType>,
-): params is DatePickerProps<'date-range'> => {
-  return params.type === datePickerPropType[1];
-};
-
-export const isNotDateRangeParams = (
-  params: DatePickerProps<DatePickerPropType>,
-): params is DatePickerProps<'date'> => {
-  return params.type === datePickerPropType[0];
-};
-
 export const datePickerPropSeparatorDefault = '.';
-export const datePickerPropFormatDefault = `dd${datePickerPropSeparatorDefault}MM${datePickerPropSeparatorDefault}yyyy`;
-export const datePickerPropPlaceholderDefault = `ДД${datePickerPropSeparatorDefault}ММ${datePickerPropSeparatorDefault}ГГГГ`;
+export const datePickerPropFormatTypeDate = `dd${datePickerPropSeparatorDefault}MM${datePickerPropSeparatorDefault}yyyy`;
+export const datePickerPropPlaceholderTypeDate = `ДД${datePickerPropSeparatorDefault}ММ${datePickerPropSeparatorDefault}ГГГГ`;
+
+export const datePickerPropFormatTypeDateTime = `${datePickerPropFormatTypeDate} HH:mm:ss`;
+export const datePickerPropPlaceholderTypeDateTime = `${datePickerPropPlaceholderTypeDate} ЧЧ:ММ:СС`;
 
 export const normalizeRangeValue = (dateRange: DateRange): DateRange => {
   if (dateRange[0] && dateRange[1] && dateRange[0]?.getTime() > dateRange[1]?.getTime()) {
     return [dateRange[1], dateRange[0]];
   }
   return dateRange;
+};
+
+export const getMultiplicityTime = (
+  format: string,
+  multiplicityHours: number | undefined,
+  multiplicityMinutes: number | undefined,
+  multiplicitySeconds: number | undefined,
+) => {
+  const markers = ['HH', 'mm', 'ss'] as const;
+  const formatArray = format.split(' ')[1]?.split(':');
+  const map = {
+    HH: multiplicityHours,
+    mm: multiplicityMinutes,
+    ss: multiplicitySeconds,
+  } as const;
+
+  return markers.map((marker) => (formatArray?.indexOf(marker) < 0 ? 0 : map[marker]));
+};
+
+export const getTimeEnum = (
+  length: number,
+  multiplicity = 1,
+  startOfUnits: (date: Date) => Date,
+  addUnits: (date: Date, amount: number) => Date,
+  getItemLabel: (date: Date) => string,
+) => {
+  const numbers = range(multiplicity ? Math.floor(length / multiplicity) : 0);
+
+  if (numbers.length === 0) {
+    return [];
+  }
+
+  const startDate = startOfUnits(startOfToday());
+
+  return numbers.map((number) => {
+    return getItemLabel(addUnits(startDate, number * multiplicity));
+  });
 };
