@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { Line, PropView } from './helper';
-import { useMemoSteps } from './useMemoSteps';
 
 type UseSliderStationing = (
   value: number | [number, number] | undefined,
@@ -52,8 +51,6 @@ export const useSliderStationing: UseSliderStationing = (
   const [lineSizes, setLineSizes] = useState<Line[]>([]);
   const [buttonPositions, setButtonPositions] = useState<number[]>([]);
 
-  const sortedSteps = useMemoSteps({ step, min, max });
-
   const calculateLines = () => {
     const sizesArray: Line[] = [];
     const absoluteSize = Math.abs(max - min);
@@ -84,8 +81,8 @@ export const useSliderStationing: UseSliderStationing = (
             active: false,
           });
         }
-      } else if (typeof sortedSteps !== 'undefined') {
-        getSteps(sortedSteps, min, max).forEach((stepSize) => {
+      } else if (typeof step !== 'undefined') {
+        getSteps(step, min, max).forEach((stepSize) => {
           sizesArray.push({
             width: (Math.abs(stepSize.max - stepSize.min) * 100) / absoluteSize,
             active:
@@ -140,7 +137,7 @@ export const useSliderStationing: UseSliderStationing = (
   useEffect(() => {
     setLineSizes(calculateLines());
     setButtonPositions(calculateButtonPositions());
-  }, [value, min, max, range, sortedSteps, view]);
+  }, [value, min, max, range, step, view]);
 
   return {
     lineSizes,

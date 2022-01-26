@@ -4,6 +4,7 @@ import React, { forwardRef, useEffect, useState } from 'react';
 import TextAreaAutoSize from 'react-textarea-autosize';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
+import { useSortSteps } from '../../hooks/useSortSteps/useSortSteps';
 import { IconClose } from '../../icons/IconClose/IconClose';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { IconSelectOpen } from '../../icons/IconSelectOpen/IconSelectOpen';
@@ -87,6 +88,8 @@ export function TextFieldRender<TYPE extends string>(
   const rightSideIsString = typeof rightSide === 'string';
   const iconSize = getByMap(sizeMap, size, iconSizeProp);
 
+  const sortedSteps = useSortSteps({ step, min: Number(min), max: Number(max) });
+
   const handleChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (e) => {
     const { value } = e.target;
     !disabled && onChange?.({ e, id, name, value: value || null });
@@ -131,11 +134,11 @@ export function TextFieldRender<TYPE extends string>(
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     const flag = getIncrementFlag(e);
-    if (Array.isArray(step) && typeof flag === 'boolean' && !disabled) {
+    if (Array.isArray(sortedSteps) && typeof flag === 'boolean' && !disabled) {
       const newValue = getValueByStepArray({
         isIncrement: flag,
         value,
-        steps: step,
+        steps: sortedSteps,
         min,
         max,
       });
@@ -159,7 +162,7 @@ export function TextFieldRender<TYPE extends string>(
     type,
     max,
     min,
-    step: !Array.isArray(step) ? step : 0,
+    step: !Array.isArray(sortedSteps) ? sortedSteps : 0,
     onKeyDown,
     ref: useForkRef([inputRef, inputRefProp]) as React.RefCallback<HTMLInputElement>,
   };
@@ -182,18 +185,18 @@ export function TextFieldRender<TYPE extends string>(
   };
 
   const getValueByStep = (isIncrement?: boolean) => {
-    return Array.isArray(step)
+    return Array.isArray(sortedSteps)
       ? (
           getValueByStepArray({
             min,
             max,
             value,
             isIncrement,
-            steps: step,
+            steps: sortedSteps,
             changeType: 'button',
           }) || 0
         ).toString()
-      : getValueByStepNumber({ value, step, isIncrement });
+      : getValueByStepNumber({ value, step: sortedSteps, isIncrement });
   };
 
   const rootProps = {
