@@ -11,6 +11,7 @@ import { ResponsesConnectionError } from '../../ResponsesConnectionError/Respons
 import { ResponsesDeleted } from '../../ResponsesDeleted/ResponsesDeleted';
 import { ResponsesEmptyBox } from '../../ResponsesEmptyBox/ResponsesEmptyBox';
 import { ResponsesEmptyPockets } from '../../ResponsesEmptyPockets/ResponsesEmptyPockets';
+import { ResponsesExit } from '../../ResponsesExit/ResponsesExit';
 import { ResponsesNothingFound } from '../../ResponsesNothingFound/ResponsesNothingFound';
 import { ResponsesSuccess } from '../../ResponsesSuccess/ResponsesSuccess';
 import { responsesPropSize, responsesPropSizeDefault } from '../Responses';
@@ -28,6 +29,7 @@ const components = {
   ResponsesDeleted,
   ResponsesNothingFound,
   ResponsesSuccess,
+  ResponsesExit,
 } as const;
 
 const componentsNames = Object.keys(components) as Array<keyof typeof components>;
