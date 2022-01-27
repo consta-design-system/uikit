@@ -143,42 +143,31 @@ export const getValueByStepArray = (params: {
   isIncrement?: boolean;
   changeType?: 'keyboard' | 'button';
 }): number | null => {
-  const { value, steps, min, max, isIncrement, changeType } = params;
+  const { value, steps, min, isIncrement, changeType } = params;
   const currentValue = Number(value || min);
   const minValue = Number(min);
-  const maxValue = Number(max);
   if (typeof value !== 'string') {
     return typeof min !== 'undefined' ? minValue : 0;
   }
-  const stepsArr = [...steps].sort((a, b) => a - b);
   // Для того чтобы правильно рассчитывалось при нажатии
   // кнопок стрелочек на самом инпуте
   const miniStep = changeType === 'button' ? 0 : 1;
-  if (typeof min !== 'undefined' && steps[0] !== minValue) {
-    stepsArr.unshift(minValue);
+  if (currentValue < steps[0]) {
+    return steps[0] + miniStep * (isIncrement ? -1 : 1);
   }
-  if (typeof max !== 'undefined' && steps[steps.length - 1] !== maxValue) {
-    stepsArr.push(maxValue);
-  }
-  if (currentValue < stepsArr[0]) {
-    return stepsArr[0] + miniStep * (isIncrement ? -1 : 1);
-  }
-  if (currentValue > stepsArr[stepsArr.length - 1]) {
-    return stepsArr[stepsArr.length - 1] + miniStep * (isIncrement ? -1 : 1);
+  if (currentValue > steps[steps.length - 1]) {
+    return steps[steps.length - 1] + miniStep * (isIncrement ? -1 : 1);
   }
   if (
-    (!isIncrement && currentValue === stepsArr[0]) ||
-    (isIncrement && currentValue === stepsArr[stepsArr.length - 1])
+    (!isIncrement && currentValue === steps[0]) ||
+    (isIncrement && currentValue === steps[steps.length - 1])
   ) {
     return currentValue + miniStep * (isIncrement ? -1 : 1);
   }
-  for (let i = 0; i < stepsArr.length; i++) {
-    if (
-      currentValue === stepsArr[i] ||
-      (stepsArr[i] < currentValue && stepsArr[i + 1] > currentValue)
-    ) {
-      if (isIncrement) return stepsArr[i + 1] - miniStep;
-      return stepsArr[i - 1] + miniStep;
+  for (let i = 0; i < steps.length; i++) {
+    if (currentValue === steps[i] || (steps[i] < currentValue && steps[i + 1] > currentValue)) {
+      if (isIncrement) return steps[i + 1] - miniStep;
+      return steps[i - 1] + miniStep;
     }
   }
   return null;
