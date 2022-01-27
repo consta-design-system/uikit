@@ -8,10 +8,12 @@ export type SnackBarPropItemAction = {
 
 export type SnackBarActionButtonProps = {
   actions: SnackBarPropItemAction[];
+  className?: string;
 };
 
 export type SnackBarItemProps = {
   item: Item;
+  className?: string;
 };
 
 export const snackBarItemStatus = ['normal', 'system', 'success', 'warning', 'alert'] as const;
@@ -47,4 +49,5 @@ export type SnackBarTimerProps = {
   onTimeIsOver: () => void;
   startTime: number;
   hidden?: boolean;
+  className?: string;
 };

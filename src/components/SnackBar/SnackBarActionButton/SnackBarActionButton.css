@@ -1,9 +1,7 @@
 .SnackBarActionButton {
-  margin-top: var(--space-xs);
-  margin-right: var(--space-xs);
   filter: drop-shadow(0 0 0 var(--color-bg-soft));
 
-  &-ActionButtonsWrapper {
-    padding-top: var(--space-2xs);
+  &-ActionButtonsWrapper > .SnackBarActionButton:not(:last-child) {
+    margin-right: var(--space-xs);
   }
 }

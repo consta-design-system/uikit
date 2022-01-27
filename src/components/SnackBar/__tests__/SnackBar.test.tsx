@@ -4,7 +4,8 @@ import { act, fireEvent, render, screen } from '@testing-library/react';
 import { cnIcon } from '../../../icons/Icon/Icon';
 import { IconAdd } from '../../../icons/IconAdd/IconAdd';
 import { snackBarItemStatus } from '../helper';
-import { cnSnackBar, cnSnackBarItem, SnackBar } from '../SnackBar';
+import { cnSnackBar, SnackBar } from '../SnackBar';
+import { cnSnackBarItem } from '../SnackBarItem/SnackBarItem';
 
 type SnackBarProps = React.ComponentProps<typeof SnackBar>;
 

@@ -1,7 +1,4 @@
 .SnackBarLine {
-  position: absolute;
-  left: 0%;
-  bottom: 0;
   overflow: hidden;
   width: 100%;
   height: var(--space-m);

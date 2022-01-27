@@ -27,7 +27,7 @@ type SnackBarItemComponent = (
 
 const defaultInitialTimerTime = 3;
 
-const cnSnackBarItem = cn('SnackBarItem');
+export const cnSnackBarItem = cn('SnackBarItem');
 
 const getAutoCloseTime = (autoClose: boolean | number | undefined): number | false => {
   if (autoClose) {
@@ -40,7 +40,7 @@ const getAutoCloseTime = (autoClose: boolean | number | undefined): number | fal
 };
 
 export const SnackBarItem: SnackBarItemComponent = React.forwardRef((props, ref) => {
-  const { item } = props;
+  const { item, className } = props;
   const {
     onClose,
     autoClose,
@@ -92,12 +92,16 @@ export const SnackBarItem: SnackBarItemComponent = React.forwardRef((props, ref)
   return (
     <div
       ref={ref}
-      className={cnSnackBarItem({ status, showProgress }, [cnTheme({ color: 'gpnDark' })])}
+      className={cnSnackBarItem({ status, showProgress }, [
+        cnTheme({ color: 'gpnDark' }),
+        className,
+      ])}
       onMouseEnter={autoCloseTime ? handleMouseEnter : undefined}
       onMouseLeave={autoCloseTime ? handleMouseLeave : undefined}
     >
       {autoCloseTime && showProgress !== 'line' && (
         <SnackBarTimer
+          className={cnSnackBarItem('Timer')}
           onMount={handleMountTimer}
           onTimeIsOver={handleTimeIsOver}
           startTime={autoCloseTime}
@@ -113,7 +117,9 @@ export const SnackBarItem: SnackBarItemComponent = React.forwardRef((props, ref)
         ) : (
           <>{message}</>
         )}
-        {actions && <SnackBarActionButton actions={actions} />}
+        {actions && (
+          <SnackBarActionButton actions={actions} className={cnSnackBarItem('ActionButton')} />
+        )}
       </div>
       {onClose && (
         <Button
@@ -127,6 +133,7 @@ export const SnackBarItem: SnackBarItemComponent = React.forwardRef((props, ref)
       )}
       {autoCloseTime && showProgress === 'line' && (
         <SnackBarLine
+          className={cnSnackBarItem('Line')}
           onMount={handleMountTimer}
           onTimeIsOver={handleTimeIsOver}
           startTime={autoCloseTime}

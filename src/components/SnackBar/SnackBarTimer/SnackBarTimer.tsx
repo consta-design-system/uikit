@@ -13,7 +13,7 @@ const cnSnackBarTimer = cn('SnackBarTimer');
 
 export const SnackBarTimer: React.FC<SnackBarTimerProps> = (props) => {
   const [running, setRunning] = useState<boolean>(false);
-  const { onMount, onTimeIsOver, startTime: startTimeprop, hidden } = props;
+  const { onMount, onTimeIsOver, startTime: startTimeprop, hidden, className } = props;
   const startTime = startTimeprop * interval;
   const { time, start, pause, isRunning } = useTimer({
     endTime: 0,
@@ -39,6 +39,12 @@ export const SnackBarTimer: React.FC<SnackBarTimerProps> = (props) => {
   }
 
   return (
-    <Timer className={cnSnackBarTimer()} seconds={seconds} progress={progress} size="m" animation />
+    <Timer
+      className={cnSnackBarTimer(null, [className])}
+      seconds={seconds}
+      progress={progress}
+      size="m"
+      animation
+    />
   );
 };

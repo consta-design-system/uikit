@@ -9,18 +9,18 @@ import { SnackBarActionButtonProps } from '../helper';
 const cnSnackBarActionButton = cn('SnackBarActionButton');
 
 export const SnackBarActionButton: React.FC<SnackBarActionButtonProps> = (props) => {
-  const { actions } = props;
+  const { actions, className } = props;
 
   if (actions.length < 1) {
     return null;
   }
 
   return (
-    <div className={cnSnackBarActionButton('ActionButtonsWrapper')}>
-      {actions.map((item, i) => (
+    <div className={cnSnackBarActionButton('ActionButtonsWrapper', [className])}>
+      {actions.map((item, index) => (
         <Button
           className={cnSnackBarActionButton()}
-          key={i}
+          key={`${cnSnackBarActionButton()}-${index}`}
           size="s"
           view="ghost"
           label={item.label}

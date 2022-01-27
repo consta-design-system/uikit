@@ -11,9 +11,8 @@ import { SnackBarItem } from './SnackBarItem/SnackBarItem';
 import { SnackBarProps } from './helper';
 
 export const cnSnackBar = cn('SnackBar');
-export const cnSnackBarItem = cn('SnackBarItem');
 
-const cssTransitionClassNames = cnForCssTransition(cnSnackBarItem);
+const cssTransitionClassNames = cnForCssTransition(cnSnackBar, 'Item');
 
 export const SnackBar: React.FC<SnackBarProps> = (props) => {
   const { items, className, ...otherProps } = usePropsHandler('SnackBar', props);
@@ -38,7 +37,7 @@ export const SnackBar: React.FC<SnackBarProps> = (props) => {
             key={item.key}
             timeout={200}
           >
-            <SnackBarItem item={item} ref={refs[index]} />
+            <SnackBarItem item={item} ref={refs[index]} className={cnSnackBar('Item')} />
           </CSSTransition>
         );
       })}
