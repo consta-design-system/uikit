@@ -2,62 +2,66 @@ import * as React from 'react';
 import { boolean, select } from '@storybook/addon-knobs';
 
 import { IconComponent } from '../../../icons/Icon/Icon';
-import { IconSettings } from '../../../icons/IconSettings/IconSettings';
+import { IconDocFilled } from '../../../icons/IconDocFilled/IconDocFilled';
+import { IconHome } from '../../../icons/IconHome/IconHome';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
-import { breadcrumbPropSize, breadcrumbPropSizeDefault, Breadcrumbs } from '../BreadcrumbsCanary';
+import {
+  breadcrumbPropFitMode,
+  breadcrumbPropFitModeDefault,
+  breadcrumbPropSize,
+  breadcrumbPropSizeDefault,
+  Breadcrumbs,
+} from '../BreadcrumbsCanary';
 
 import mdx from './Breadcrumbs.docs.mdx';
-
-const defaultKnobs = () => ({
-  size: select('Size', breadcrumbPropSize, breadcrumbPropSizeDefault),
-  onlyIconRoot: boolean('Only Icon Root', false),
-});
 
 type Page = {
   icon?: IconComponent;
   href: string;
   label: string;
-  active?: boolean;
 };
 
 const pages: Page[] = [
   {
-    icon: IconSettings,
-    label: 'Page1',
+    icon: IconHome,
+    label: 'Главная',
     href: 'https://url.com/page-1',
   },
   {
-    label: 'Page2',
+    label: 'Раздел',
     href: 'https://url.com/page-2',
   },
   {
-    label: 'Page3',
+    label: 'Подраздел',
     href: 'https://url.com/page-3',
   },
   {
-    label: 'Page4',
+    label: 'Элемент подраздела',
     href: 'https://url.com/page-4',
   },
   {
-    label: 'Page5',
+    label: 'Дополнительные свойства элемента подраздела',
     href: 'https://url.com/page-5',
   },
   {
-    label: 'Page6',
+    label: 'Детальное описание свойства элемента подраздела',
     href: 'https://url.com/page-6',
   },
-  {
-    label: 'Page7',
-    href: 'https://url.com/page-7',
-    active: true,
-  },
 ];
+
+const defaultKnobs = () => ({
+  size: select('size', breadcrumbPropSize, breadcrumbPropSizeDefault),
+  fitMode: select('fitMode', breadcrumbPropFitMode, breadcrumbPropFitModeDefault),
+  withIcon: boolean('withIcon', false),
+  onlyIconRoot: boolean('onlyIconRoot', false),
+  lastItemIsLink: boolean('lastItemIsLink', false),
+});
 
 const cnBreadcrumbsStories = cn('BreadcrumbsStories');
 
 export function Playground() {
-  const { size, onlyIconRoot } = defaultKnobs();
+  const { size, onlyIconRoot, fitMode, withIcon, lastItemIsLink } = defaultKnobs();
 
   return (
     <div className={cnBreadcrumbsStories()}>
@@ -65,10 +69,12 @@ export function Playground() {
         items={pages}
         size={size}
         onlyIconRoot={onlyIconRoot}
-        onItemClick={({ item, e }) => {
-          e.preventDefault();
-          console.log(item.href, e);
+        fitMode={fitMode}
+        onItemClick={(props) => {
+          props.e.preventDefault();
         }}
+        lastItemIsLink={lastItemIsLink}
+        getItemIcon={(item) => (withIcon ? item.icon || IconDocFilled : undefined)}
       />
     </div>
   );

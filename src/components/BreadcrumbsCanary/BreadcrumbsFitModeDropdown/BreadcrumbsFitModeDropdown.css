@@ -1,0 +1,19 @@
+.BreadcrumbsFitModeDropdown {
+  &_compression {
+    &_s {
+      --breadcrumbs-item-width: 45%;
+    }
+
+    &_m {
+      --breadcrumbs-item-width: 40%;
+    }
+
+    &_l {
+      --breadcrumbs-item-width: 35%;
+    }
+
+    &_xl {
+      --breadcrumbs-item-width: 30%;
+    }
+  }
+}

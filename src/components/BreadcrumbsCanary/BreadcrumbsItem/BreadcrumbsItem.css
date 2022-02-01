@@ -1,0 +1,21 @@
+.BreadcrumbsItem {
+  display: flex;
+  align-items: center;
+
+  &-Delimiter {
+    flex: none;
+  }
+
+  &-Link {
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &_active {
+      pointer-events: none;
+    }
+
+    &:hover {
+      color: var(--color-typo-link-hover);
+    }
+  }
+}

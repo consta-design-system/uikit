@@ -2,9 +2,10 @@ import {
   BreadcrumbsExampleSize,
   BreadcrumbsExampleIcons,
   BreadcrumbsExampleIconRoot,
-  BreadcrumbsExampleMax,
+  BreadcrumbsExampleFitMode,
   BreadcrumbsExample,
   BreadcrumbsExampleActive,
+  BreadcrumbsCustomType,
 } from './examples/BreadcrumbsExample/BreadcrumbsExample';
 
 <!--info
@@ -60,13 +61,25 @@ import { Breadcrumbs } from '@consta/uikit/BreadcrumbsCanary';
 
 ### Страницы
 
-Название страницы можно получить из массива `pages` с помощью функции `getLabel`.
+По умолчанию комопнент ожидает `items` c типом [DefaultItem](#свойства),
+но также вы можете использоват свой тип с указанием `getItemLabel`, `getItemHref`, `getItemIcon`, `getItemOnClick`
 
-Ссылку на страницу — с помощью `getItemLink`.
+```tsx
+const pages = ['Home', 'Page1', 'Page2', 'Page3'];
 
-Чтобы ограничить количество страниц в хлебных крошках, укажите максимум в `maxCount`.
+<Breadcrumbs items={pages} getItemLabel={(item) => item} />;
+```
 
-<BreadcrumbsExampleMax />
+<BreadcrumbsCustomType />
+
+Компонент автомотически подстраивается под ширину необходимую ширину скрывая страници под точки или включая прокрутку.
+
+```tsx
+<Breadcrumbs fitMode="dropdown" items={pages} onItemClick={onItemClick}  />
+<Breadcrumbs fitMode="scroll" items={pages} onItemClick={onItemClick}  />
+```
+
+<BreadcrumbsExampleFitMode />
 
 Если хотите выделить текущую страницу, используйте `getItemActive`.
 
@@ -99,7 +112,6 @@ import { Breadcrumbs } from '@consta/uikit/BreadcrumbsCanary';
 ```tsx
 export type DefaultItem = {
   label: string;
-  active?: boolean;
   icon?: IconComponent;
   href?: string;
   onClick?: React.MouseEventHandler<HTMLAnchorElement>;
@@ -115,49 +127,14 @@ export type BreadcrumbsPropGetItemOnClick<ITEM> = (
 export type BreadcrumbsPropOnItemClick<ITEM> = (props: { item: ITEM; e: React.MouseEvent }) => void;
 ```
 
-| Свойство                      | Тип или варианты значения       | По умолчанию | Описание                                                    |
-| ----------------------------- | ------------------------------- | ------------ | ----------------------------------------------------------- |
-| [`items`](#содержимое)        | `ITEM[]`                        | -            | Массив со списком страниц                                   |
-| [`getItemLabel`](#страницы)   | `BreadcrumbsPropGetItemLabel`   | -            | Функция для получения названия страницы                     |
-| [`getItemHref`](#страницы)    | `BreadcrumbsPropGetItemHref`    | -            | Функция для получения ссылки на страницу                    |
-| [`getItemIcon?`](#иконки)     | `BreadcrumbsPropGetItemIcon`    | -            | Функция для получения иконки                                |
-| [`getItemActive?`](#страницы) | `BreadcrumbsPropGetItemActive`  | -            | Функция для получения текущей страницы                      |
-| `getItemOnClick?`             | `BreadcrumbsPropGetItemOnClick` | -            | Функция для функции которая вызовится по клику на элемент   |
-| [`onlyIconRoot?`](#иконки)    | `boolean`                       | false        | Показывать иконку вместо названия первой страницы в крошках |
-| [`size?`](#размер)            | `'xs', s', 'm', 'l'`            | 'm'          | Размер хлебных крошек                                       |
-| [`maxCount?`](#страницы)      | `number`                        | 0            | Максимальное количество элементов в хлебных крошках         |
-| `onItemClick`                 | `BreadcrumbsPropOnItemClick`    | -            | Обработчик клика по хлебным крошкам                         |
-| `className?`                  | `string`                        | -            | Дополнительный CSS-класс                                    |
-
-## Пример
-
-```ts
-// src/App.ts
-import React from 'react';
-import { Breadcrumbs } from '@consta/uikit/BreadcrumbsCanary';
-
-const App = () => {
-  const items = [
-    {
-      icon: IconHand,
-      label: 'Home',
-      href: 'https://url.com',
-    },
-    {
-      label: 'Page1',
-      href: 'https://url.com/page-1',
-    },
-    {
-      label: 'Page2',
-      href: 'https://url.com/page-2',
-    },
-    {
-      label: 'Page3',
-      href: 'https://url.com/page-3',
-      active: true,
-    },
-  ];
-
-  return <Breadcrumbss items={items} />;
-};
-```
+| Свойство                     | Тип или варианты значения       | По умолчанию | Описание                                                    |
+| ---------------------------- | ------------------------------- | ------------ | ----------------------------------------------------------- |
+| [`items`](#содержимое)       | `ITEM[]`                        | -            | Массив со списком страниц                                   |
+| [`getItemLabel?`](#страницы) | `BreadcrumbsPropGetItemLabel`   | -            | Функция для получения названия страницы                     |
+| [`getItemHref?`](#страницы)  | `BreadcrumbsPropGetItemHref`    | -            | Функция для получения ссылки на страницу                    |
+| [`getItemIcon?`](#иконки)    | `BreadcrumbsPropGetItemIcon`    | -            | Функция для получения иконки                                |
+| `getItemOnClick?`            | `BreadcrumbsPropGetItemOnClick` | -            | Функция для функции которая вызовится по клику на элемент   |
+| [`onlyIconRoot?`](#иконки)   | `boolean`                       | false        | Показывать иконку вместо названия первой страницы в крошках |
+| [`size?`](#размер)           | `'xs', s', 'm', 'l'`            | 'm'          | Размер хлебных крошек                                       |
+| `onItemClick`                | `BreadcrumbsPropOnItemClick`    | -            | Обработчик клика по хлебным крошкам                         |
+| `className?`                 | `string`                        | -            | Дополнительный CSS-класс                                    |

@@ -1,0 +1,8 @@
+.BreadcrumbsMore {
+  &-Button.Button {
+    --button-font-size: var(--breadcrumbs-more-font-size);
+    width: var(--button-height);
+    padding: 0;
+    text-align: center;
+  }
+}
