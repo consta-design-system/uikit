@@ -26,7 +26,7 @@ type Props = PropsWithHTMLAttributes<
   HTMLLIElement
 >;
 
-const cnBreadcrumbsItem = cn('BreadcrumbsItem');
+export const cnBreadcrumbsItem = cn('BreadcrumbsItem');
 
 export const BreadcrumbsItem = forwardRef((props: Props, ref: React.Ref<HTMLLIElement>) => {
   const {
