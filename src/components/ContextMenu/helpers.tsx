@@ -130,7 +130,10 @@ export type ContextMenuItemComponent = <AS extends keyof JSX.IntrinsicElements =
   ref: React.Ref<HTMLElement>,
 ) => React.ReactElement | null;
 
-export type ContextMenuType = <ITEM>(props: ContextMenuProps<ITEM>) => React.ReactElement | null;
+export type ContextMenuComponent = <ITEM>(
+  props: ContextMenuProps<ITEM>,
+) => React.ReactElement | null;
+
 export type ContextMenuLevelType = <ITEM>(
   props: ContextMenuLevelProps<ITEM>,
   ref: React.Ref<HTMLElement>,
