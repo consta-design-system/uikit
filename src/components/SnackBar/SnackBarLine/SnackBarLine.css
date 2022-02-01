@@ -8,7 +8,7 @@
   &::after {
     content: '';
     position: absolute;
-    left: -100%;
+    left: 0;
     bottom: 0;
     width: 200%;
     height: var(--space-2xs);
@@ -19,10 +19,7 @@
       var(--color-bg-ghost) 50%,
       var(--color-bg-ghost) 100%
     );
-  }
-
-  &_running::after {
-    left: 0;
-    transition: left var(--progress-line-time) linear;
+    transition: transform 1s linear;
+    transform: translate(var(--progress-line-progress));
   }
 }
