@@ -374,3 +374,67 @@ export const ReposDataAdapters = () => {
     </div>
   );
 };
+
+export const ReposDataTemplates = () => {
+  return (
+    <div
+      className={cnDocsDecorator('Section', [
+        wp.tplGrid({ 'xs-columns': 2, 'col-gap': 'full', 'row-gap': 'full' }),
+      ])}
+    >
+      <div className={wp.tplGrid('fraction', { row: 'third' })}>
+        <div>
+          <Text weight="bold" size="l">
+            simple-template
+          </Text>
+        </div>
+        <Text className="ReposDataText">Архетип простого приложения.</Text>
+        <Text
+          className={cnReposData('Link')}
+          as="a"
+          view="link"
+          href="https://github.com/consta-design-system/simple-template"
+          target="_blank"
+        >
+          GitHub
+        </Text>
+      </div>
+      <div className={wp.tplGrid('fraction', { row: 'third' })}>
+        <div>
+          <Text weight="bold" size="l">
+            portal-template
+          </Text>
+        </div>
+        <Text className="ReposDataText">Портальный архетип приложения.</Text>
+        <Text
+          className={cnReposData('Link')}
+          as="a"
+          view="link"
+          href="https://github.com/consta-design-system/portal-template"
+          target="_blank"
+        >
+          GitHub
+        </Text>
+      </div>
+      <div className={wp.tplGrid('fraction', { row: 'third' })}>
+        <div>
+          <Text weight="bold" size="l">
+            portal-template-context
+          </Text>
+        </div>
+        <Text className="ReposDataText">
+          Портальный архетип приложения с контекстной зависимостью.
+        </Text>
+        <Text
+          className={cnReposData('Link')}
+          as="a"
+          view="link"
+          href="https://github.com/consta-design-system/portal-template-context"
+          target="_blank"
+        >
+          GitHub
+        </Text>
+      </div>
+    </div>
+  );
+};
