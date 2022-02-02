@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { IconComponent, IconPropSize } from '../../../icons/Icon/Icon';
+import { AutoCompete } from '../../../utils/types/AutoComplete';
 import {
   TextField,
-  TextFieldPropAutoComplete,
   TextFieldPropForm,
   TextFieldPropId,
   TextFieldPropName,
@@ -37,7 +37,7 @@ export type Props = {
   placeholder?: string;
   leftSide?: string | IconComponent;
   rightSide?: string | IconComponent;
-  autoComplete?: TextFieldPropAutoComplete;
+  autoComplete?: AutoCompete;
   max?: number | string;
   min?: number | string;
   readOnly?: boolean;
