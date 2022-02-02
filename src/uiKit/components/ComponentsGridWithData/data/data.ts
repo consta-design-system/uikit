@@ -34,6 +34,7 @@ import ResponsesImage from './images/ResponsesImage';
 import SelectImage from './images/SelectImage';
 import SidebarImage from './images/SidebarImage';
 import SkeletonImage from './images/SkeletonImage';
+import SliderImage from './images/SliderImage';
 import SnackBarImage from './images/SnackBarImage';
 import StepsImage from './images/StepsImage';
 import SwitchGroupImage from './images/SwitchGroupImage';
@@ -55,28 +56,28 @@ export const data: Data = [
   {
     items: [
       {
-        name: 'Badge',
-        componentName: 'Badge',
-        url: '/?path=/docs/components-badge--playground',
-        description: 'Бейджик. Показывает статус процесса.',
-      },
-      {
         name: 'Avatar',
         componentName: 'Avatar',
         url: '/?path=/docs/components-avatar--playground',
         description: 'Аватарка. Изображение пользователя.',
       },
       {
+        name: 'Badge',
+        componentName: 'Badge',
+        url: '/?path=/docs/components-badge--playground',
+        description: 'Бейджик. Показывает статус процесса.',
+      },
+      {
+        name: 'Breadcrumbs(Canary)',
+        componentName: 'Breadcrumbs',
+        url: '/?path=/docs/components-breadcrumbs--playground',
+        description: 'Хлебные крошки. Показывают путь к текущей странице.',
+      },
+      {
         name: 'Attachment',
         componentName: 'Attachment',
         url: '/?path=/docs/components-attachment--playground',
         description: 'Показывает загрузку файла или уже загруженный файл.',
-      },
-      {
-        name: 'Breadcrumbs',
-        componentName: 'Breadcrumbs',
-        url: '/?path=/docs/components-breadcrumbs--playground',
-        description: 'Хлебные крошки. Показывают путь к текущей странице.',
       },
       {
         name: 'Button',
@@ -97,16 +98,16 @@ export const data: Data = [
         description: 'Группа чекбоксов. Можно выбрать несколько вариантов.',
       },
       {
-        name: 'Checkbox',
-        componentName: 'Checkbox',
-        url: '/?path=/docs/components-checkbox--playground',
-        description: 'Чекбокс. Можно сделать выбор и подтвердить.',
-      },
-      {
         name: 'ChoiceGroup',
         componentName: 'ChoiceGroup',
         url: '/?path=/docs/components-choicegroup--playground',
         description: 'Группа кнопок. Можно выбрать один или несколько вариантов.',
+      },
+      {
+        name: 'Checkbox',
+        componentName: 'Checkbox',
+        url: '/?path=/docs/components-checkbox--playground',
+        description: 'Чекбокс. Можно сделать выбор и подтвердить.',
       },
       {
         name: 'Collapse',
@@ -139,16 +140,16 @@ export const data: Data = [
         description: 'Поле, в котором можно выбрать дату или период.',
       },
       {
-        name: 'DateTime(Canary)',
-        componentName: 'DateTime',
-        url: '/?path=/docs/components-datetime--playground',
-        description: 'Календарь. Можно выбрать дату или период.',
-      },
-      {
         name: 'DragNDropField',
         componentName: 'DragNDropField',
         url: '/?path=/docs/components-dragndropfield--playground',
         description: 'Можно перетащить файлы, чтобы загрузить или отправить.',
+      },
+      {
+        name: 'DateTime(Canary)',
+        componentName: 'DateTime',
+        url: '/?path=/docs/components-datetime--playground',
+        description: 'Календарь. Можно выбрать дату или период.',
       },
       {
         name: 'File',
@@ -187,16 +188,16 @@ export const data: Data = [
         description: 'Лэйаут. Блоки, из которых можно построить каркас страницы.',
       },
       {
-        name: 'Loader',
-        componentName: 'Loader',
-        url: '/?path=/docs/components-loader--playground',
-        description: 'Прелоадер. Показывает, что информация загружается.',
-      },
-      {
         name: 'Modal',
         componentName: 'Modal',
         url: '/?path=/docs/components-modal--playground',
         description: 'Всплывающее окно. Показывает контент поверх основной страницы.',
+      },
+      {
+        name: 'Loader',
+        componentName: 'Loader',
+        url: '/?path=/docs/components-loader--playground',
+        description: 'Прелоадер. Показывает, что информация загружается.',
       },
       {
         name: 'Pagination',
@@ -218,6 +219,12 @@ export const data: Data = [
           'Индикатор. Показывает течение процесса — загрузку, отправку или что-то похожее.',
       },
       {
+        name: 'Radio',
+        componentName: 'Radio',
+        url: '/?path=/docs/components-radio--playground',
+        description: 'Радиокнопка. Можно выбрать один вариант.',
+      },
+      {
         name: 'ProgressStepBar(Canary)',
         componentName: 'ProgressStepBar',
         url: '/?path=/docs/components-progressstepbar--playground',
@@ -230,23 +237,17 @@ export const data: Data = [
         description: 'Группа радиокнопок. Можно выбрать один вариант.',
       },
       {
-        name: 'Radio',
-        componentName: 'Radio',
-        url: '/?path=/docs/components-radio--playground',
-        description: 'Радиокнопка. Можно выбрать один вариант.',
+        name: 'Responses',
+        componentName: 'Responses',
+        url: '/?path=/docs/components-responses--playground',
+        description:
+          'Заглушки с сообщениями об ошибках и важных статусах (404, 503, не найдены данные и похожие).',
       },
       {
         name: 'Select',
         componentName: 'Select',
         url: '/?path=/docs/components-select--playground',
         description: 'Выпадающий список. Можно выбрать один вариант.',
-      },
-      {
-        name: 'Responses',
-        componentName: 'Responses',
-        url: '/?path=/docs/components-responses--playground',
-        description:
-          'Заглушки с сообщениями об ошибках и важных статусах (404, 503, не найдены данные и похожие).',
       },
       {
         name: 'Sidebar',
@@ -362,40 +363,41 @@ export const data: Data = [
 ];
 
 export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
-  Badge: BadgeImage,
   Avatar: AvatarImage,
-  Attachment: AttachmentImage,
+  Badge: BadgeImage,
   Breadcrumbs: BreadcrumbsImage,
+  Attachment: AttachmentImage,
   Button: ButtonImage,
   Card: CardImage,
   CheckboxGroup: CheckboxGroupImage,
-  Checkbox: CheckboxImage,
   ChoiceGroup: ChoiceGroupImage,
+  Checkbox: CheckboxImage,
   Collapse: CollapseImage,
   CollapseGroup: CollapseGroupImage,
   Combobox: ComboboxImage,
   ContextMenu: ContextMenuImage,
   DatePicker: DatePickerImage,
-  DateTime: DateTimeImage,
   DragNDropField: DragNDropFieldImage,
+  DateTime: DateTimeImage,
   File: FileImage,
   FileField: FileFieldImage,
   Grid: GridImage,
   Header: HeaderImage,
   Informer: InformerImage,
   Layout: LayoutImage,
-  Loader: LoaderImage,
   Modal: ModalImage,
+  Loader: LoaderImage,
   Pagination: PaginationImage,
   Popover: PopoverImage,
   ProgressSpin: ProgressSpinImage,
+  Radio: RadioImage,
   ProgressStepBar: ProgressStepBarImage,
   RadioGroup: RadioGroupImage,
-  Radio: RadioImage,
-  Select: SelectImage,
   Responses: ResponsesImage,
+  Select: SelectImage,
   Sidebar: SidebarImage,
   Skeleton: SkeletonImage,
+  Slider: SliderImage,
   SnackBar: SnackBarImage,
   Steps: StepsImage,
   Switch: SwitchImage,

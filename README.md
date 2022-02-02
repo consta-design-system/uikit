@@ -2,17 +2,19 @@
 
 Consta — дизайн-система для разработки интерфейсов, написана на [React](https://reactjs.org/), сделана и поддерживается в «Газпром нефти».
 
-**В этом репозитории — библиотека интерфейсных компонентов:** простые контролы, сложные блоки, темы и хуки. В другом репозитории — [библиотека графиков](https://github.com/gazprom-neft/consta-charts). Обе библиотеки представлены в виде компонентов и макетов в Figma.
+В дизайн-систему входит несколько библиотек. **Здесь — библиотека интерфейсных компонентов:** простые контролы, сложные блоки, темы и хуки. Все библиотеки представлены в виде компонентов и макетов в Figma.
 
 ## Что входит в дизайн-систему
 
 ### Библиотека компонентов
 
-[Репозиторий](https://github.com/gazprom-neft/consta-uikit) | [NPM](https://www.npmjs.com/package/@consta/uikit) | [Документация и стенд](https://consta-uikit.vercel.app/?path=/story/common-about--page) | [Макеты](https://www.figma.com/community/file/853774806786762374)
+[Репозиторий](https://github.com/consta-design-system/uikit) | [NPM](https://www.npmjs.com/package/@consta/uikit) | [Документация и стенд](https://consta-uikit.vercel.app/?path=/story/common-about--page) | [Макеты](https://www.figma.com/community/file/853774806786762374)
 
 ### Библиотека графиков
 
-[Репозиторий](https://github.com/gazprom-neft/consta-charts) | [NPM](https://www.npmjs.com/package/@consta/charts) | [Документация и стенд](https://consta-charts.vercel.app/) | [Макеты](https://www.figma.com/community/file/982611119114314434)
+[Репозиторий](https://github.com/consta-design-system/charts) | [NPM](https://www.npmjs.com/package/@consta/charts) | [Документация и стенд](https://consta-charts.vercel.app/) | [Макеты](https://www.figma.com/community/file/982611119114314434)
+
+[>> Посмотреть все библиотеки](https://consta-uikit.vercel.app/?path=/docs/common-about-github--page)
 
 <hr>
 
@@ -33,6 +35,7 @@ yarn add @consta/uikit
 Чтобы начать работу с библиотекой интерфейсных компонентов, подключите тему:
 
 ```tsx
+import React from 'react';
 import { Theme, presetGpnDefault } from '@consta/uikit/Theme';
 import { Button } from '@consta/uikit/Button';
 

@@ -11,7 +11,8 @@ import { IconThumbUp } from '../../../../../icons/IconThumbUp/IconThumbUp';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cn } from '../../../../../utils/bem';
 import { Button } from '../../../../Button/Button';
-import { Item, SnackBar, SnackBarItemStatus } from '../../../SnackBar';
+import { Item, SnackBarItemStatus } from '../../../helper';
+import { SnackBar } from '../../../SnackBar';
 
 type State = Item[];
 type Action = { type: 'add'; item: Item } | { type: 'remove'; key: number | string };

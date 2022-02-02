@@ -77,6 +77,7 @@ function UserSelectRender<
     labelForCreate = defaultlabelForCreate,
     multiple = false,
     searchFunction,
+    style,
     ...restProps
   } = withDefaultGetters(props);
 
@@ -214,6 +215,7 @@ function UserSelectRender<
       form={form}
       multiple
       ref={ref}
+      style={style}
       {...restProps}
     >
       <div
@@ -275,6 +277,7 @@ function UserSelectRender<
         labelForNotFound={labelForNotFound}
         labelForCreate={labelForCreate}
         notFound={notFound}
+        style={typeof style?.zIndex === 'number' ? { zIndex: style.zIndex + 1 } : undefined}
       />
       <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
         {searchValue}

@@ -1,0 +1,14 @@
+.BreadcrumbsFitModeScroll {
+  overflow-x: scroll;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar:horizontal {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  &::-webkit-scrollbar-thumb:horizontal {
+    display: none;
+  }
+}

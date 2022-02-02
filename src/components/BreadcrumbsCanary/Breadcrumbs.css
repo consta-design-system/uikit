@@ -1,0 +1,26 @@
+.Breadcrumbs {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--color-typo-secondary);
+  flex-wrap: nowrap;
+
+  &-Item {
+    max-width: var(--breadcrumbs-item-width, none);
+
+    &_hidden {
+      position: absolute;
+      left: -300vw;
+      visibility: hidden;
+    }
+
+    &_removed.BreadcrumbsItem {
+      display: none;
+    }
+
+    &:last-child {
+      max-width: var(--breadcrumbs-item-last-width, none);
+    }
+  }
+}

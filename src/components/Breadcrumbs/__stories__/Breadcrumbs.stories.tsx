@@ -80,7 +80,7 @@ export function Playground() {
 
 export default createMetadata({
   title: 'Компоненты|/Навигация/Breadcrumbs',
-  id: 'components/Breadcrumbs',
+  id: 'components/BreadcrumbsDeprecated',
   parameters: {
     docs: {
       page: mdx,

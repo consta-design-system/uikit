@@ -57,6 +57,7 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
     renderItem,
     renderValue: renderValueProp,
     inputRef: inputRefProp,
+    style,
     ...restProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
 
@@ -131,6 +132,7 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
       form={form}
       required={required}
       ref={ref}
+      style={style}
       {...restProps}
     >
       <div
@@ -185,6 +187,7 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
         getGroupLabel={getGroupLabel}
         visibleItems={visibleItems}
         notFound={notFound}
+        style={typeof style?.zIndex === 'number' ? { zIndex: style.zIndex + 1 } : undefined}
       />
     </SelectContainer>
   );

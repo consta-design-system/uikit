@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
+import { AutoCompete } from '../../utils/types/AutoComplete';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
 export type TextFieldPropValue = string | null;
@@ -48,8 +49,6 @@ export type TextFieldPropStatus = typeof textFieldPropStatus[number];
 export const textFieldPropWidth = ['default', 'full'] as const;
 export type TextFieldPropWidth = typeof textFieldPropWidth[number];
 export const textFieldPropWidthDefault: TextFieldPropWidth = textFieldPropWidth[0];
-
-export type TextFieldPropAutoComplete = 'on' | 'off';
 
 export type TextFieldPropsTextareaType<TYPE> = TYPE extends 'textarea'
   ?
@@ -101,13 +100,14 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
     leftSide?: string | IconComponent;
     rightSide?: string | IconComponent;
     withClearButton?: boolean;
-    autoComplete?: TextFieldPropAutoComplete;
+    autoComplete?: AutoCompete;
     max?: number | string;
     min?: number | string;
     readOnly?: boolean;
     required?: boolean;
     step?: number | string | number[];
     tabIndex?: number;
+    inputContainerRef?: React.Ref<HTMLDivElement>;
     inputRef?: React.Ref<HTMLTextAreaElement | HTMLInputElement>;
     ariaLabel?: string;
     iconSize?: IconPropSize;

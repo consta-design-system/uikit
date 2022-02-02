@@ -1,0 +1,29 @@
+.MixDropdownAnimate {
+  --animate-space: var(--space-s);
+
+  &_animate {
+    &_enter,
+    &_enterActive {
+      opacity: 0;
+      transform: translate(0, var(--animate-space));
+    }
+
+    &_enterDone {
+      opacity: 1;
+      transition: opacity 0.2s, transform 0.2s;
+      transform: translate(0);
+    }
+
+    &_exit {
+      opacity: 1;
+      transform: translate(0);
+    }
+
+    &_exitActive,
+    &_exitDone {
+      opacity: 0;
+      transition: opacity 0.2s, transform 0.2s;
+      transform: translate(0, var(--animate-space));
+    }
+  }
+}

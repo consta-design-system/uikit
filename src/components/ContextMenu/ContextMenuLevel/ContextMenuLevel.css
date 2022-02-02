@@ -1,6 +1,4 @@
 .ContextMenuLevel {
-  --transform-direction: translateY(0);
-  --transform-animate: translateX(0);
   z-index: 9999;
   box-sizing: border-box;
   width: 240px;
@@ -9,17 +7,16 @@
   border: var(--control-border-width) solid var(--color-control-bg-border-default);
   border-radius: var(--control-radius);
   box-shadow: var(--shadow-layer);
-  transform: var(--transform-direction) var(--transform-animate);
 
   &:not(&_firstLevel)&_direction {
     &_rightStartUp,
     &_leftStartUp {
-      --transform-direction: translateY(calc(-1 * (var(--space-xs) + 1px)));
+      transform: translateY(calc(-1 * (var(--space-xs) + 1px)));
     }
 
     &_rightStartDown,
     &_leftStartDown {
-      --transform-direction: translateY(calc(var(--space-xs) + 1px));
+      transform: translateY(calc(var(--space-xs) + 1px));
     }
   }
 }

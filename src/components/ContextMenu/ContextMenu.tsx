@@ -1,19 +1,20 @@
-import React, { createRef, useEffect, useMemo, useState } from 'react';
+import React, { createRef, forwardRef, useEffect, useMemo, useState } from 'react';
 
 import { useClickOutside } from '../../hooks/useClickOutside/useClickOutside';
+import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { Direction, directions } from '../Popover/Popover';
 
 import { clearTimers, ContextMenuLevel } from './ContextMenuLevel/ContextMenuLevel';
 import {
   AddLevel,
+  ContextMenuComponent,
   contextMenuPropDefaultSubMenuDirection,
   contextMenuPropSubMenuDirections,
-  ContextMenuType,
   DeleteLevel,
   Level,
 } from './helpers';
 
-export const ContextMenu: ContextMenuType = (props) => {
+export const ContextMenu: ContextMenuComponent = forwardRef((props, ref) => {
   const {
     items,
     anchorRef,
@@ -27,6 +28,7 @@ export const ContextMenu: ContextMenuType = (props) => {
     getLabel,
     onClickOutside,
     spareDirection,
+    style,
     ...otherProps
   } = props;
 
@@ -92,6 +94,8 @@ export const ContextMenu: ContextMenuType = (props) => {
 
   const levelsRefs = useMemo(constructItemRefs, [levels]);
 
+  const firstLevelRef = useForkRef([levelsRefs[0], ref]);
+
   useClickOutside({
     isActive: !!onClickOutside,
     ignoreClicksInsideRefs: [...levelsRefs, anchorRef || { current: null }],
@@ -142,6 +146,10 @@ export const ContextMenu: ContextMenuType = (props) => {
         return (
           <ContextMenuLevel
             {...otherProps}
+            style={{
+              ...style,
+              ...(typeof style?.zIndex === 'number' && { zIndex: style?.zIndex + index }),
+            }}
             offset={level.offset}
             key={index}
             items={level.items}
@@ -158,11 +166,11 @@ export const ContextMenu: ContextMenuType = (props) => {
             setHoveredParenLevel={setHoveredParenLevel}
             getSubItems={getSubItems}
             getLabel={getLabel}
-            ref={levelsRefs[index]}
+            ref={index === 0 ? firstLevelRef : levelsRefs[index]}
             spareDirection={index === 0 ? spareDirection : 'rightStartUp'}
           />
         );
       })}
     </>
   );
-};
+});

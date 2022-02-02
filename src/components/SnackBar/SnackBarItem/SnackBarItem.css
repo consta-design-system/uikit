@@ -1,0 +1,65 @@
+.SnackBarItem {
+  position: relative;
+  display: flex;
+  padding: var(--space-m) var(--space-2xl) var(--space-m) var(--space-m);
+  color: var(--color-typo-primary);
+  border-radius: var(--space-xs);
+  box-shadow: var(--shadow-group);
+
+  &_showProgress {
+    &_line {
+      padding-bottom: calc(var(--space-m) + var(--space-2xs));
+    }
+  }
+
+  &-ActionButton {
+    margin-top: calc(var(--space-2xs) + var(--space-xs));
+  }
+
+  &_status {
+    &_system {
+      background-color: var(--color-bg-system);
+    }
+
+    &_normal {
+      background-color: var(--color-bg-normal);
+    }
+
+    &_success {
+      background-color: var(--color-bg-success);
+    }
+
+    &_warning {
+      background-color: var(--color-bg-warning);
+    }
+
+    &_alert {
+      background-color: var(--color-bg-alert);
+    }
+  }
+
+  &-Timer {
+    margin-right: var(--space-m);
+  }
+
+  &-Line {
+    position: absolute;
+    left: 0%;
+    bottom: 0;
+  }
+
+  &-Icon {
+    flex: none;
+    margin-right: var(--space-m);
+  }
+
+  &-Content {
+    flex: 1;
+  }
+
+  &-CloseButton {
+    position: absolute;
+    top: var(--space-2xs);
+    right: var(--space-2xs);
+  }
+}

@@ -10,6 +10,7 @@ import { IconCalendar } from '../../../icons/IconCalendar/IconCalendar';
 import { maxDateDefault, minDateDefault } from '../../../utils/date';
 import { getByMap } from '../../../utils/getByMap';
 import { createMetadata } from '../../../utils/storybook';
+import { Button } from '../../Button/Button';
 import { dateTimePropView, dateTimePropViewDefault } from '../../DateTimeCanary/helpers';
 import {
   textFieldPropForm,
@@ -24,9 +25,6 @@ import { DatePicker } from '../DatePickerCanary';
 import {
   datePickerPropDropdownForm,
   datePickerPropDropdownFormDefault,
-  datePickerPropFormatDefault,
-  datePickerPropPlaceholderDefault,
-  datePickerPropSeparatorDefault,
   datePickerPropType,
   datePickerPropTypeDefault,
   DatePickerPropValue,
@@ -49,6 +47,7 @@ const defaultKnobs = () => ({
   type: select('type', datePickerPropType, datePickerPropTypeDefault),
   form: select('form', textFieldPropForm, textFieldPropFormDefault),
   status: select('status', ['', ...textFieldPropStatus], ''),
+  withAdditionalControls: boolean('withAdditionalControls', false),
   label: text('label', 'Заголовок'),
   caption: text('caption', 'Подпись'),
   required: boolean('required', false),
@@ -56,12 +55,9 @@ const defaultKnobs = () => ({
   size: select('size', textFieldPropSize, textFieldPropSizeDefault),
   view: select('view', textFieldPropView, textFieldPropViewDefault),
   disabled: boolean('disabled', false),
-  placeholder: text('placeholder', datePickerPropPlaceholderDefault),
   withIcon: boolean('withIcon', false),
   minDate: date('minDate', minDateDefault),
   maxDate: date('maxDate', maxDateDefault),
-  format: text('format', datePickerPropFormatDefault),
-  separator: text('separator', datePickerPropSeparatorDefault),
   withEvents: boolean('withEvents', false),
   locale: select('locale', localeProp, localeDefault),
   dateTimeView: select('dateTimeView', dateTimePropView, dateTimePropViewDefault),
@@ -71,6 +67,10 @@ const defaultKnobs = () => ({
     datePickerPropDropdownFormDefault,
   ),
 });
+
+const additionalControls = () => {
+  return [<Button label="Кнопка" />, <Button label="Кнопка" />];
+};
 
 export function Playground() {
   const {
@@ -82,18 +82,16 @@ export function Playground() {
     labelPosition,
     size,
     view,
-    placeholder,
     withIcon,
     disabled,
     withEvents,
     locale,
     dateTimeView,
-    format,
-    separator,
     dropdownForm,
     type,
     minDate,
     maxDate,
+    withAdditionalControls,
   } = defaultKnobs();
 
   const [value, setValue] = useState<DatePickerPropValue<typeof type>>(null);
@@ -123,7 +121,6 @@ export function Playground() {
         value={value}
         status={status || undefined}
         view={view}
-        placeholder={placeholder}
         disabled={disabled}
         size={size}
         onChange={({ value }) => setValue(value)}
@@ -131,8 +128,6 @@ export function Playground() {
         events={events}
         locale={getByMap(localeMap, locale)}
         dateTimeView={dateTimeView}
-        format={format}
-        separator={separator}
         dropdownForm={dropdownForm}
         minDate={new Date(minDate)}
         maxDate={new Date(maxDate)}
@@ -140,6 +135,7 @@ export function Playground() {
           endFieldRightSide: icon,
           startFieldRightSide: icon,
         })}
+        renderAdditionalControls={withAdditionalControls ? additionalControls : undefined}
       />
     </div>
   );

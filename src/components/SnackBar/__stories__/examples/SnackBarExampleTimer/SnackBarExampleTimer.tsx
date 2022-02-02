@@ -9,7 +9,8 @@ import { IconRing } from '../../../../../icons/IconRing/IconRing';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cn } from '../../../../../utils/bem';
 import { Button } from '../../../../Button/Button';
-import { Item, SnackBar, SnackBarItemStatus } from '../../../SnackBar';
+import { Item, SnackBarItemShowProgressProp, SnackBarItemStatus } from '../../../helper';
+import { SnackBar } from '../../../SnackBar';
 
 const cnSnackBarExampleTimer = cn('SnackBarExampleTimer');
 
@@ -40,7 +41,10 @@ export const SnackBarExampleTimer: React.FC = () => {
   const [items, dispatchItems] = useReducer<
     React.Reducer<Item[], { type: 'add' | 'remove'; item: Item; key?: number | string }>
   >(reducer, []);
-  const generateHandleAdd = (status: SnackBarItemStatus, showProgress?: 'timer') => () => {
+  const generateHandleAdd = (
+    status: SnackBarItemStatus,
+    showProgress?: SnackBarItemShowProgressProp,
+  ) => () => {
     const key = items.length + 1;
     const item: Item = {
       key,
@@ -56,6 +60,7 @@ export const SnackBarExampleTimer: React.FC = () => {
 
   const handleAlertAdd = generateHandleAdd('alert', 'timer');
   const handleNormalAdd = generateHandleAdd('normal', 'timer');
+  const handleLineNormalAdd = generateHandleAdd('normal', 'line');
   const handleHiddenTimerAdd = generateHandleAdd('normal');
 
   React.useEffect(() => handleNormalAdd(), []);
@@ -68,6 +73,12 @@ export const SnackBarExampleTimer: React.FC = () => {
           iconLeft={IconAdd}
           label="Обычный таймер"
           onClick={handleNormalAdd}
+        />
+        <Button
+          className={cnSnackBarExampleTimer('ButtonAdd')}
+          iconLeft={IconAdd}
+          label="Обычный таймер c линией"
+          onClick={handleLineNormalAdd}
         />
         <Button
           className={cnSnackBarExampleTimer('ButtonAdd')}

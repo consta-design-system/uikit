@@ -101,6 +101,8 @@ module.exports = {
     'no-plusplus': 'off',
     'react-hooks/exhaustive-deps': 'off',
     'default-case': 'off',
+    'no-continue': 'off',
+    'for-direction': 'off',
     'jsx-a11y/label-has-associated-control': [
       'error',
       {

@@ -1,0 +1,25 @@
+.SnackBarLine {
+  overflow: hidden;
+  width: 100%;
+  height: var(--space-m);
+  border-radius: var(--space-xs);
+  opacity: 0.8;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 200%;
+    height: var(--space-2xs);
+    background: linear-gradient(
+      90deg,
+      var(--color-bg-default) 0%,
+      var(--color-bg-default) 50%,
+      var(--color-bg-ghost) 50%,
+      var(--color-bg-ghost) 100%
+    );
+    transition: transform 1s linear;
+    transform: translate(var(--progress-line-progress));
+  }
+}

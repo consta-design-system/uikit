@@ -7,6 +7,7 @@ import { useClickOutside } from '../../hooks/useClickOutside/useClickOutside';
 import { useGlobalKeys } from '../../hooks/useGlobalKeys/useGlobalKeys';
 import { cn } from '../../utils/bem';
 import { cnForCssTransition } from '../../utils/cnForCssTransition';
+import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 import { PortalWithTheme, usePortalContext } from '../PortalWithTheme/PortalWithTheme';
 import { useTheme } from '../Theme/Theme';
 
@@ -21,21 +22,24 @@ export const sidebarPropSize = ['s', 'm', 'l', 'full', '1/2', '1/3', '1/4', '2/3
 export type SidebarPropSize = typeof sidebarPropSize[number];
 const sidebarPropSizeDefault: SidebarPropSize = sidebarPropSize[1];
 
-type SidebarProps = {
-  isOpen?: boolean;
-  onClose?: () => void;
-  onOpen?: () => void;
-  hasOverlay?: boolean;
-  /** @deprecated Use onClickOutside */
-  onOverlayClick?: (event: MouseEvent) => void;
-  onClickOutside?: (event: MouseEvent) => void;
-  onEsc?: (event: KeyboardEvent) => void;
-  position?: SidebarPropPosition;
-  size?: SidebarPropSize;
-  className?: string;
-  children?: React.ReactNode;
-  container?: HTMLDivElement | undefined;
-};
+type SidebarProps = PropsWithHTMLAttributes<
+  {
+    isOpen?: boolean;
+    onClose?: () => void;
+    onOpen?: () => void;
+    hasOverlay?: boolean;
+    /** @deprecated Use onClickOutside */
+    onOverlayClick?: (event: MouseEvent) => void;
+    onClickOutside?: (event: MouseEvent) => void;
+    onEsc?: (event: KeyboardEvent) => void;
+    position?: SidebarPropPosition;
+    size?: SidebarPropSize;
+    rootClassName?: string;
+    children?: React.ReactNode;
+    container?: HTMLDivElement | undefined;
+  },
+  HTMLDivElement
+>;
 
 type SidebarContentProps = {
   className?: string;
@@ -95,7 +99,9 @@ export const Sidebar: SidebarComponent = (props) => {
     className,
     children,
     container = window.document.body,
-    ...rest
+    style,
+    rootClassName,
+    ...otherProps
   } = props;
 
   const ref = useRef<HTMLDivElement | null>(null);
@@ -121,9 +127,22 @@ export const Sidebar: SidebarComponent = (props) => {
       classNames={cnForCssTransition(cnSidebar)}
       timeout={200}
     >
-      <PortalWithTheme preset={theme} container={container}>
+      <PortalWithTheme
+        preset={theme}
+        container={container}
+        className={rootClassName}
+        style={typeof style?.zIndex === 'number' ? { zIndex: style.zIndex } : undefined}
+      >
         {hasOverlay && <div className={cnSidebar('Overlay')} aria-label="Overlay" />}
-        <div className={cnSidebar('Window', { size, position }, [className])} ref={ref} {...rest}>
+        <div
+          {...otherProps}
+          style={{
+            ...style,
+            ...(typeof style?.zIndex === 'number' && { zIndex: style?.zIndex + 1 }),
+          }}
+          className={cnSidebar('Window', { size, position }, [className])}
+          ref={ref}
+        >
           <ContextConsumer
             onClickOutside={onClickOutside || onOverlayClick}
             ignoreClicksInsideRefs={[ref]}

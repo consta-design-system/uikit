@@ -4,6 +4,7 @@ import React, { forwardRef, useEffect, useRef, useState } from 'react';
 
 import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
 import { cn } from '../../../utils/bem';
+import { DateTimeAdditionalControls } from '../DateTimeAdditionalControls/DateTimeAdditionalControls';
 import { DateTimeTypeDate } from '../DateTimeTypeDate/DateTimeTypeDate';
 import { DateTimeTypeTime } from '../DateTimeTypeTime/DateTimeTypeTime';
 import { DateTimeTypeComponent, MoveType, moveTypes } from '../helpers';
@@ -32,6 +33,7 @@ export const DateTimeTypeDateTime: DateTimeTypeComponent<'date-time'> = forwardR
     multiplicityMinutes,
     multiplicityHours,
     style,
+    renderAdditionalControls,
     ...otherProps
   } = props;
 
@@ -40,7 +42,7 @@ export const DateTimeTypeDateTime: DateTimeTypeComponent<'date-time'> = forwardR
     '--root-padding-left': '0px',
   });
 
-  const [onDateChange, onTimeChange] = useOnChange(onChange);
+  const [onDateChange, onTimeChange] = useOnChange(onChange, value);
 
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -60,40 +62,47 @@ export const DateTimeTypeDateTime: DateTimeTypeComponent<'date-time'> = forwardR
   }, []);
 
   return (
-    <div
-      {...otherProps}
-      className={cnDateTimeTypeDateTime({ withTime }, [className])}
-      ref={useForkRef([rootRef, ref])}
-      style={{
-        ...style,
-        ...cssVars,
-      }}
-    >
-      <DateTimeTypeDate
-        className={cnDateTimeTypeDateTime('Date', { withTime })}
-        onMove={onMove}
-        currentVisibleDate={currentVisibleDate}
-        value={value}
-        onChange={onDateChange}
-        minDate={minDate}
-        maxDate={maxDate}
-        events={events}
-        locale={locale}
-        onChangeCurrentVisibleDate={onChangeCurrentVisibleDate}
-      />
-      {withTime && (
-        <DateTimeTypeTime
-          className={cnDateTimeTypeDateTime('Time')}
+    <>
+      <div
+        {...otherProps}
+        className={cnDateTimeTypeDateTime({ withTime }, [className])}
+        ref={useForkRef([rootRef, ref])}
+        style={{
+          ...style,
+          ...cssVars,
+        }}
+      >
+        <DateTimeTypeDate
+          className={cnDateTimeTypeDateTime('Date', { withTime })}
+          onMove={onMove}
+          currentVisibleDate={currentVisibleDate}
           value={value}
-          onChange={onTimeChange}
+          onChange={onDateChange}
           minDate={minDate}
           maxDate={maxDate}
+          events={events}
           locale={locale}
-          multiplicitySeconds={multiplicitySeconds}
-          multiplicityMinutes={multiplicityMinutes}
-          multiplicityHours={multiplicityHours}
+          renderAdditionalControls={withTime ? undefined : renderAdditionalControls}
+          onChangeCurrentVisibleDate={onChangeCurrentVisibleDate}
         />
-      )}
-    </div>
+        {withTime && (
+          <DateTimeTypeTime
+            className={cnDateTimeTypeDateTime('Time')}
+            value={value}
+            onChange={onTimeChange}
+            minDate={minDate}
+            maxDate={maxDate}
+            locale={locale}
+            multiplicitySeconds={multiplicitySeconds}
+            multiplicityMinutes={multiplicityMinutes}
+            multiplicityHours={multiplicityHours}
+          />
+        )}
+      </div>
+      <DateTimeAdditionalControls
+        currentVisibleDate={currentVisibleDate}
+        renderAdditionalControls={withTime ? renderAdditionalControls : undefined}
+      />
+    </>
   );
 });

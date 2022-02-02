@@ -78,6 +78,7 @@ export type ProgressStepBarItemProps = {
   progress?: boolean;
   status?: PropStatus | 'system';
   tooltipContent?: string;
+  tooltipZIndex?: number;
   position?: PropPosition;
   direction: PropDirection;
   size: PropSize;
