@@ -1,93 +1,100 @@
 import './Breadcrumbs.css';
 
-import React, { forwardRef, useMemo } from 'react';
+import React, { forwardRef } from 'react';
 
-import { IconArrowRight } from '../../icons/IconArrowRight/IconArrowRight';
 import { cn } from '../../utils/bem';
-import { getByMap } from '../../utils/getByMap';
-import { Button } from '../Button/Button';
 
+import { BreadcrumbsFitModeDropdown } from './BreadcrumbsFitModeDropdown/BreadcrumbsFitModeDropdown';
+import { BreadcrumbsFitModeScroll } from './BreadcrumbsFitModeScroll/BreadcrumbsFitModeScroll';
+import { BreadcrumbsItem } from './BreadcrumbsItem/BreadcrumbsItem';
 import { getItemClick, withDefaultGetters } from './helpers';
-import { breadcrumbPropSizeDefault, BreadcrumbsComponent, BreadcrumbsProps } from './types';
+import {
+  breadcrumbPropFitModeDefault,
+  breadcrumbPropSizeDefault,
+  BreadcrumbsComponent,
+  BreadcrumbsProps,
+  RenderItem,
+} from './types';
 
 export const cnBreadcrumbs = cn('Breadcrumbs');
-
-const sizeMap = {
-  xs: 'xs',
-  s: 'xs',
-  m: 'xs',
-  l: 'm',
-} as const;
 
 const BreadcrumbsRender = (props: BreadcrumbsProps, ref: React.Ref<HTMLUListElement>) => {
   const {
     items,
     getItemHref,
     getItemLabel,
-    getItemActive,
     getItemIcon,
     getItemOnClick,
     onItemClick,
     size = breadcrumbPropSizeDefault,
-    maxCount = 0,
     onlyIconRoot = false,
     className,
-    ...restProps
+    fitMode = breadcrumbPropFitModeDefault,
+    lastItemIsLink,
+    ...otherProps
   } = withDefaultGetters(props);
 
   type Item = typeof items[number];
 
-  const iconSize = getByMap(sizeMap, size);
+  const shortList = items.length <= 2;
 
-  const { head, tail, rest } = useMemo(() => {
-    const rest = items.slice();
-    const head = rest.splice(0, 1);
-    const tail = rest.splice(2 - maxCount);
+  const renderItem: RenderItem<Item> = (item, index, isFirst, isLast, ref, hidden) => {
+    if (item === undefined) {
+      return;
+    }
+    return (
+      <BreadcrumbsItem
+        className={cnBreadcrumbs('Item', { hidden })}
+        label={getItemLabel(item)}
+        href={getItemHref(item)}
+        icon={getItemIcon(item)}
+        active={lastItemIsLink ? false : isLast}
+        onClick={getItemClick(item, getItemOnClick, onItemClick)}
+        delimiter={!isFirst}
+        onlyIcon={onlyIconRoot && isFirst}
+        key={cnBreadcrumbs('Item', { index })}
+        size={size}
+        ref={ref}
+      />
+    );
+  };
 
-    return {
-      head,
-      tail,
-      rest,
-    };
-  }, [items, maxCount]);
+  if (items.length <= 2) {
+    return (
+      <ul {...otherProps} className={cnBreadcrumbs({ shortList }, [className])} ref={ref}>
+        {items.map((item, index) =>
+          renderItem(item, index, index === 0, index === items.length - 1),
+        )}
+      </ul>
+    );
+  }
 
-  const renderPages = (items: Item[], isFirst = false) =>
-    items.map((item, index) => {
-      const Icon = getItemIcon(item);
-      const label = getItemLabel(item);
-      const href = getItemHref(item);
-      const active = getItemActive(item);
-      const onClick = getItemClick(item, getItemOnClick, onItemClick);
-
-      return (
-        <li className={cnBreadcrumbs('Item')} key={cnBreadcrumbs('Item', { index, href })}>
-          {!isFirst && <IconArrowRight className={cnBreadcrumbs('Delimiter')} size={iconSize} />}
-          <a className={cnBreadcrumbs('Link', { active })} onClick={onClick} href={href}>
-            {Icon &&
-              (onlyIconRoot && isFirst ? (
-                <Button view="clear" onlyIcon iconLeft={Icon} size={iconSize} />
-              ) : (
-                <Icon className={cnBreadcrumbs('Icon')} size={iconSize} />
-              ))}
-            {(!isFirst || !onlyIconRoot) && <span className={cnBreadcrumbs('Label')}>{label}</span>}
-          </a>
-        </li>
-      );
-    });
+  if (fitMode === 'scroll') {
+    return (
+      <BreadcrumbsFitModeScroll
+        {...otherProps}
+        className={cnBreadcrumbs(null, [className])}
+        items={items}
+        renderItem={renderItem}
+        ref={ref}
+      />
+    );
+  }
 
   return (
-    <ul className={cnBreadcrumbs({ size }, [className])} ref={ref} {...restProps}>
-      {renderPages(head, true)}
-      {maxCount && rest.length > 1 ? (
-        <li className={cnBreadcrumbs('Item')}>
-          <IconArrowRight className={cnBreadcrumbs('Delimiter')} size={iconSize} />
-          <span className={cnBreadcrumbs('More')}>...</span>
-        </li>
-      ) : (
-        renderPages(rest)
-      )}
-      {renderPages(tail)}
-    </ul>
+    <BreadcrumbsFitModeDropdown
+      {...otherProps}
+      size={size}
+      className={cnBreadcrumbs(null, [className])}
+      items={items}
+      getItemHref={getItemHref}
+      getItemIcon={getItemIcon}
+      getItemLabel={getItemLabel}
+      getItemOnClick={getItemOnClick}
+      onItemClick={onItemClick}
+      ref={ref}
+      renderItem={renderItem}
+    />
   );
 };
 

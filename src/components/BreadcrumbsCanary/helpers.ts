@@ -1,5 +1,4 @@
 import {
-  BreadcrumbsPropGetItemActive,
   BreadcrumbsPropGetItemHref,
   BreadcrumbsPropGetItemIcon,
   BreadcrumbsPropGetItemLabel,
@@ -11,7 +10,6 @@ import {
 
 const defaultGetItemLabel: BreadcrumbsPropGetItemLabel<DefaultItem> = (item) => item.label;
 const defaultGetItemIcon: BreadcrumbsPropGetItemIcon<DefaultItem> = (item) => item.icon;
-const defaultGetItemActive: BreadcrumbsPropGetItemActive<DefaultItem> = (item) => item.active;
 const defaultGetItemHref: BreadcrumbsPropGetItemHref<DefaultItem> = (item) => item.href;
 const defaultGetItemOnClick: BreadcrumbsPropGetItemOnClick<DefaultItem> = (item) => item.onClick;
 
@@ -19,7 +17,6 @@ export function withDefaultGetters<ITEM>(props: BreadcrumbsProps<ITEM>) {
   return {
     ...props,
     getItemLabel: props.getItemLabel || defaultGetItemLabel,
-    getItemActive: props.getItemActive || defaultGetItemActive,
     getItemHref: props.getItemHref || defaultGetItemHref,
     getItemOnClick: props.getItemOnClick || defaultGetItemOnClick,
     getItemIcon: props.getItemIcon || defaultGetItemIcon,
@@ -36,3 +33,10 @@ export function getItemClick<ITEM>(
     getItemOnClick(item)?.(e);
   };
 }
+
+export const iconSizeMap = {
+  xs: 'xs',
+  s: 'xs',
+  m: 'xs',
+  l: 'm',
+} as const;
