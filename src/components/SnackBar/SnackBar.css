@@ -8,6 +8,10 @@
   padding-left: var(--space-xs);
 
   &-Item {
+    &:not(:first-child) {
+      margin-bottom: var(--space-s);
+    }
+
     &_animate {
       &_appear,
       &_enter,

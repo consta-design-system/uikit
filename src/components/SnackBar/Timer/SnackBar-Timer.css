@@ -1,6 +1,0 @@
-.SnackBar {
-  &-Timer {
-    flex: none;
-    margin-right: var(--space-m);
-  }
-}

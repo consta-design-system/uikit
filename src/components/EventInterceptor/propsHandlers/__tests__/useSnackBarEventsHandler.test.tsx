@@ -2,7 +2,8 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { act, renderHook } from '@testing-library/react-hooks';
 
-import { Item, SnackBar } from '../../../SnackBar/SnackBar';
+import { Item } from '../../../SnackBar/helper';
+import { SnackBar } from '../../../SnackBar/SnackBar';
 import { useSnackBarEventsHandler } from '../useSnackBarEventsHandler';
 
 type Props = React.ComponentProps<typeof SnackBar>;
