@@ -27,7 +27,7 @@
     }
   }
 
-  &_disabled {
+  &_disabled.Text {
     color: var(--color-control-typo-disable);
     cursor: default;
 
