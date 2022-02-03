@@ -1,53 +1,39 @@
-import { IconComponent } from '../../icons/Icon/Icon';
-import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
+import { Item } from './SnackBar';
+import {
+  SnackBarPropGetItemActions,
+  SnackBarPropGetItemAutoClose,
+  SnackBarPropGetItemIcon,
+  SnackBarPropGetItemKey,
+  SnackBarPropGetItemMessage,
+  SnackBarPropGetItemOnAutoClose,
+  SnackBarPropGetItemOnClose,
+  SnackBarPropGetItemShowProgress,
+  SnackBarPropGetItemStatus,
+  SnackBarProps,
+} from './types';
 
-export type SnackBarPropItemAction = {
-  label: string | number;
-  onClick: React.EventHandler<React.MouseEvent>;
-};
+const defaultGetItemKey: SnackBarPropGetItemKey<Item> = (item) => item.key;
+const defaultGetItemMessage: SnackBarPropGetItemMessage<Item> = (item) => item.message;
+const defaultGetItemStatus: SnackBarPropGetItemStatus<Item> = (item) => item.status;
+const defaultGetItemAutoClose: SnackBarPropGetItemAutoClose<Item> = (item) => item.autoClose;
+const defaultGetItemShowProgress: SnackBarPropGetItemShowProgress<Item> = (item) =>
+  item.showProgress;
+const defaultGetItemIcon: SnackBarPropGetItemIcon<Item> = (item) => item.icon;
+const defaultGetItemActions: SnackBarPropGetItemActions<Item> = (item) => item.actions;
+const defaultGetItemOnClose: SnackBarPropGetItemOnClose<Item> = (item) => item.onClose;
+const defaultGetItemOnAutoClose: SnackBarPropGetItemOnAutoClose<Item> = (item) => item.onAutoClose;
 
-export type SnackBarActionButtonProps = {
-  actions: SnackBarPropItemAction[];
-  className?: string;
-};
-
-export type SnackBarItemProps = {
-  item: Item;
-  className?: string;
-};
-
-export const snackBarItemStatus = ['normal', 'system', 'success', 'warning', 'alert'] as const;
-export type SnackBarItemStatus = typeof snackBarItemStatus[number];
-export const snackBarItemStatusDefault: SnackBarItemStatus = snackBarItemStatus[0];
-
-export const snackBarItemShowProgressProp = ['timer', 'line'] as const;
-export type SnackBarItemShowProgressProp = typeof snackBarItemShowProgressProp[number];
-
-export type Item = {
-  key: string | number;
-  message?: string | number | React.ReactNode;
-  status?: SnackBarItemStatus;
-  autoClose?: boolean | number;
-  showProgress?: SnackBarItemShowProgressProp;
-  icon?: IconComponent;
-  actions?: SnackBarPropItemAction[];
-  onClose?: (item: Item) => void;
-  onAutoClose?: (item: Item) => void;
-};
-
-type Props = {
-  items: Item[];
-  children?: never;
-};
-
-export type SnackBarProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
-
-export type SnackBarTimerPropOnMount = (object: { pause: () => void; start: () => void }) => void;
-
-export type SnackBarTimerProps = {
-  onMount: SnackBarTimerPropOnMount;
-  onTimeIsOver: () => void;
-  startTime: number;
-  hidden?: boolean;
-  className?: string;
+export const withDefaultGetters = <ITEM>(props: SnackBarProps<ITEM>) => {
+  return {
+    ...props,
+    getItemKey: props.getItemKey || defaultGetItemKey,
+    getItemMessage: props.getItemMessage || defaultGetItemMessage,
+    getItemStatus: props.getItemStatus || defaultGetItemStatus,
+    getItemAutoClose: props.getItemAutoClose || defaultGetItemAutoClose,
+    getItemShowProgress: props.getItemShowProgress || defaultGetItemShowProgress,
+    getItemIcon: props.getItemIcon || defaultGetItemIcon,
+    getItemActions: props.getItemActions || defaultGetItemActions,
+    getItemOnClose: props.getItemOnClose || defaultGetItemOnClose,
+    getItemOnAutoClose: props.getItemOnAutoClose || defaultGetItemOnAutoClose,
+  };
 };

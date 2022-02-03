@@ -18,8 +18,8 @@ import {
   EventInterceptorProvider,
 } from '../../EventInterceptor/EventInterceptor';
 import { Text } from '../../Text/Text';
-import { Item, snackBarItemShowProgressProp, SnackBarItemStatus } from '../helper';
-import { SnackBar } from '../SnackBar';
+import { Item, SnackBar } from '../SnackBar';
+import { snackBarItemShowProgressProp, SnackBarItemStatus } from '../types';
 
 import mdx from './SnackBar.docs.mdx';
 

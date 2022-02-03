@@ -2,8 +2,7 @@ import './ThemePreview.css';
 
 import React, { useReducer } from 'react';
 
-import { Item } from '../../../components/SnackBar/helper';
-import { SnackBar } from '../../../components/SnackBar/SnackBar';
+import { Item, SnackBar } from '../../../components/SnackBar/SnackBar';
 import { Text } from '../../../components/Text/Text';
 import { defaultVars } from '../../../hooks/useThemeVars/helpers';
 import { useThemeVars } from '../../../hooks/useThemeVars/useThemeVars';

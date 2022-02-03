@@ -7,25 +7,46 @@ import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { IconClose } from '../../../icons/IconClose/IconClose';
 import { cn } from '../../../utils/bem';
 import { isNumber, isString } from '../../../utils/type-guards';
-import { PropsWithHTMLAttributesAndRef } from '../../../utils/types/PropsWithHTMLAttributes';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 import { cnTheme } from '../../Theme/Theme';
-import {
-  Item,
-  SnackBarItemProps,
-  snackBarItemStatusDefault,
-  SnackBarTimerPropOnMount,
-} from '../helper';
+import { Item } from '../SnackBar';
 import { SnackBarActionButton } from '../SnackBarActionButton/SnackBarActionButton';
 import { SnackBarLine } from '../SnackBarLine/SnackBarLine';
 import { SnackBarTimer } from '../SnackBarTimer/SnackBarTimer';
-
-type SnackBarItemComponent = (
-  props: PropsWithHTMLAttributesAndRef<SnackBarItemProps, HTMLDivElement>,
-) => React.ReactElement | null;
+import {
+  GetItem,
+  SnackBarItemComponent,
+  snackBarItemStatusDefault,
+  SnackBarTimerPropOnMount,
+} from '../types';
 
 const defaultInitialTimerTime = 3;
+
+const getItem: GetItem = (item, params) => {
+  const {
+    getItemKey,
+    getItemActions,
+    getItemAutoClose,
+    getItemIcon,
+    getItemMessage,
+    getItemOnAutoClose,
+    getItemOnClose,
+    getItemShowProgress,
+    getItemStatus,
+  } = params;
+  return {
+    key: getItemKey(item),
+    message: getItemMessage(item),
+    status: getItemStatus(item),
+    autoClose: getItemAutoClose(item),
+    showProgress: getItemShowProgress(item),
+    icon: getItemIcon(item),
+    actions: getItemActions(item),
+    onClose: getItemOnClose(item),
+    onAutoClose: getItemOnAutoClose(item),
+  };
+};
 
 export const cnSnackBarItem = cn('SnackBarItem');
 
@@ -40,7 +61,7 @@ const getAutoCloseTime = (autoClose: boolean | number | undefined): number | fal
 };
 
 export const SnackBarItem: SnackBarItemComponent = React.forwardRef((props, ref) => {
-  const { item, className } = props;
+  const { item, className, ...otherProps } = props;
   const {
     onClose,
     autoClose,
@@ -50,7 +71,8 @@ export const SnackBarItem: SnackBarItemComponent = React.forwardRef((props, ref)
     actions,
     status = snackBarItemStatusDefault,
     onAutoClose: onAutoCloseProp,
-  } = item;
+  } = getItem(item, otherProps);
+
   const [timerFunctions, setTimerFunctions] = useState<{
     start: () => void;
     pause: () => void;
@@ -68,7 +90,7 @@ export const SnackBarItem: SnackBarItemComponent = React.forwardRef((props, ref)
     if (onAutoCloseProp) {
       onAutoCloseProp(item);
     } else {
-      onClose && onClose(item);
+      onClose?.(item);
     }
   };
 

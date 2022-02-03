@@ -4,7 +4,7 @@ import React from 'react';
 
 import { cn } from '../../../utils/bem';
 import { Button } from '../../Button/Button';
-import { SnackBarActionButtonProps } from '../helper';
+import { SnackBarActionButtonProps } from '../types';
 
 const cnSnackBarActionButton = cn('SnackBarActionButton');
 

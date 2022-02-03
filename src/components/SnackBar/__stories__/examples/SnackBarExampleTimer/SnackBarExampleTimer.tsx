@@ -9,8 +9,8 @@ import { IconRing } from '../../../../../icons/IconRing/IconRing';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cn } from '../../../../../utils/bem';
 import { Button } from '../../../../Button/Button';
-import { Item, SnackBarItemShowProgressProp, SnackBarItemStatus } from '../../../helper';
-import { SnackBar } from '../../../SnackBar';
+import { Item, SnackBar } from '../../../SnackBar';
+import { SnackBarItemShowProgressProp, SnackBarItemStatus } from '../../../types';
 
 const cnSnackBarExampleTimer = cn('SnackBarExampleTimer');
 
