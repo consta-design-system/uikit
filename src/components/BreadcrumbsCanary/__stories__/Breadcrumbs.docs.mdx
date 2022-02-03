@@ -118,7 +118,6 @@ export type DefaultItem = {
 };
 
 export type BreadcrumbsPropGetItemLabel<ITEM> = (item: ITEM) => string | React.ReactNode;
-export type BreadcrumbsPropGetItemActive<ITEM> = (item: ITEM) => boolean | undefined;
 export type BreadcrumbsPropGetItemHref<ITEM> = (item: ITEM) => string | undefined;
 export type BreadcrumbsPropGetItemIcon<ITEM> = (item: ITEM) => IconComponent | undefined;
 export type BreadcrumbsPropGetItemOnClick<ITEM> = (
@@ -134,7 +133,9 @@ export type BreadcrumbsPropOnItemClick<ITEM> = (props: { item: ITEM; e: React.Mo
 | [`getItemHref?`](#страницы)  | `BreadcrumbsPropGetItemHref`    | -            | Функция для получения ссылки на страницу                    |
 | [`getItemIcon?`](#иконки)    | `BreadcrumbsPropGetItemIcon`    | -            | Функция для получения иконки                                |
 | `getItemOnClick?`            | `BreadcrumbsPropGetItemOnClick` | -            | Функция для функции которая вызовится по клику на элемент   |
-| [`onlyIconRoot?`](#иконки)   | `boolean`                       | false        | Показывать иконку вместо названия первой страницы в крошках |
-| [`size?`](#размер)           | `'xs', s', 'm', 'l'`            | 'm'          | Размер хлебных крошек                                       |
-| `onItemClick`                | `BreadcrumbsPropOnItemClick`    | -            | Обработчик клика по хлебным крошкам                         |
+| [`onlyIconRoot?`](#иконки)   | `boolean`                       | `false`      | Показывать иконку вместо названия первой страницы в крошках |
+| [`size?`](#размер)           | `'xs', s', 'm', 'l'`            | `'m'`        | Размер хлебных крошек                                       |
+| `onItemClick?`               | `BreadcrumbsPropOnItemClick`    | -            | Обработчик клика по хлебным крошкам                         |
+| `fitMode?`                   | `'dropdown', 'scroll'`          | `'dropdown'` | Тип подсраивания под ширину контейнера                      |
+| `lastItemIsLink?`            | `boolean`                       | `false`      | Последний элемент будет отображен как ссылка                |
 | `className?`                 | `string`                        | -            | Дополнительный CSS-класс                                    |
