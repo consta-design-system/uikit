@@ -54,6 +54,8 @@ export function Playground() {
       skeletonText
     );
   }
+
+  return null;
 }
 
 export default createMetadata({
