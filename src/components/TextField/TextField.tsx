@@ -136,6 +136,7 @@ export function TextFieldRender<TYPE extends string>(
   const onKeyDown = (e: React.KeyboardEvent) => {
     const flag = getIncrementFlag(e);
     if (Array.isArray(sortedSteps) && typeof flag === 'boolean' && !disabled) {
+      e.preventDefault();
       const newValue = getValueByStepArray({
         isIncrement: flag,
         value,
@@ -194,7 +195,6 @@ export function TextFieldRender<TYPE extends string>(
             value,
             isIncrement,
             steps: sortedSteps,
-            changeType: 'button',
           }) || 0
         ).toString()
       : getValueByStepNumber({ value, step: sortedSteps, isIncrement });

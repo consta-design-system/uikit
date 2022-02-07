@@ -122,8 +122,6 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
   TextFieldPropsTextareaType<TYPE> &
   TextFieldPropRightSide<TYPE>;
 
-// export type TextFieldProps<TYPE extends string> = PropsWithJsxAttributes<Props<TYPE>, 'div'>;
-
 export type TextFieldComponent = <TYPE extends string>(
   props: TextFieldProps<TYPE> & React.RefAttributes<HTMLElement>,
 ) => React.ReactElement | null;
@@ -141,33 +139,28 @@ export const getValueByStepArray = (params: {
   min?: number | string;
   max?: number | string;
   isIncrement?: boolean;
-  changeType?: 'keyboard' | 'button';
 }): number | null => {
-  const { value, steps, min, isIncrement, changeType } = params;
+  const { value, steps, min, isIncrement = false } = params;
   const currentValue = Number(value || min);
   const minValue = Number(min);
   if (typeof value !== 'string') {
     return typeof min !== 'undefined' ? minValue : 0;
   }
-  // Для того чтобы правильно рассчитывалось при нажатии
-  // кнопок стрелочек на самом инпуте
-  const miniStep = changeType === 'button' ? 0 : 1;
   if (currentValue < steps[0]) {
-    return steps[0] + miniStep * (isIncrement ? -1 : 1);
+    return steps[0];
   }
   if (currentValue > steps[steps.length - 1]) {
-    return steps[steps.length - 1] + miniStep * (isIncrement ? -1 : 1);
+    return steps[steps.length - 1];
   }
   if (
     (!isIncrement && currentValue === steps[0]) ||
     (isIncrement && currentValue === steps[steps.length - 1])
   ) {
-    return currentValue + miniStep * (isIncrement ? -1 : 1);
+    return currentValue;
   }
   for (let i = 0; i < steps.length; i++) {
     if (currentValue === steps[i] || (steps[i] < currentValue && steps[i + 1] > currentValue)) {
-      if (isIncrement) return steps[i + 1] - miniStep;
-      return steps[i - 1] + miniStep;
+      return steps[i + (isIncrement ? 1 : -1)];
     }
   }
   return null;

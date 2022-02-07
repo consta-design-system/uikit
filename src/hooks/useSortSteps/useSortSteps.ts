@@ -7,7 +7,7 @@ type Props = {
 };
 
 const getIsValidValue = (value: number, min?: number, max?: number) => {
-  return !((min && value < min) || (max && value > max));
+  return !((typeof min === 'number' && value < min) || (typeof max === 'number' && value > max));
 };
 
 export const useSortSteps = (props: Props): number | number[] => {
