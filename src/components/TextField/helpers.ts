@@ -141,7 +141,7 @@ export const getValueByStepArray = (params: {
   isIncrement?: boolean;
 }): number | null => {
   const { value, steps, min, isIncrement = false } = params;
-  const currentValue = Number(value || min);
+  const currentValue = Number(value ?? min);
   const minValue = Number(min);
   if (typeof value !== 'string') {
     return typeof min !== 'undefined' ? minValue : 0;
@@ -170,10 +170,20 @@ export const getValueByStepNumber = (params: {
   value?: string | null;
   step: number | string;
   isIncrement?: boolean;
+  min?: number | string;
+  max?: number | string;
 }): string => {
-  const { value, step, isIncrement } = params;
+  const { value, step, isIncrement, max, min } = params;
+  const minValue = Number(min);
+  const maxValue = Number(max);
   const currentValue: number =
     (typeof value === 'string' ? Number(value) : 0) + Number(step) * (isIncrement ? 1 : -1);
+  if (!Number.isNaN(minValue) && currentValue <= minValue) {
+    return minValue.toString();
+  }
+  if (!Number.isNaN(maxValue) && currentValue >= maxValue) {
+    return maxValue.toString();
+  }
   return currentValue.toFixed(
     Number(
       /* Необходимо для того, чтобы избежать ситуации, когда по нажатию

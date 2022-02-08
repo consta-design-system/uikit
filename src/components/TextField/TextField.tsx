@@ -169,20 +169,10 @@ export function TextFieldRender<TYPE extends string>(
     ref: useForkRef([inputRef, inputRefProp]) as React.RefCallback<HTMLInputElement>,
   };
 
-  const handleClear: (e: React.MouseEvent<HTMLButtonElement>) => void = (e) => {
+  const handleClear = (e: React.MouseEvent<HTMLButtonElement>) => {
     onChange?.({
       e,
       value: '',
-    });
-  };
-
-  const changeNumberValue: (
-    e: React.MouseEvent<HTMLButtonElement>,
-    isIncrement?: boolean,
-  ) => void = (e, isIncrement = true) => {
-    onChange?.({
-      e,
-      value: getValueByStep(isIncrement),
     });
   };
 
@@ -197,7 +187,14 @@ export function TextFieldRender<TYPE extends string>(
             steps: sortedSteps,
           }) || 0
         ).toString()
-      : getValueByStepNumber({ value, step: sortedSteps, isIncrement });
+      : getValueByStepNumber({ value, step: sortedSteps, isIncrement, min, max });
+  };
+
+  const changeNumberValue = (e: React.MouseEvent<HTMLButtonElement>, isIncrement = true) => {
+    onChange?.({
+      e,
+      value: getValueByStep(isIncrement),
+    });
   };
 
   const rootProps = {
@@ -261,6 +258,7 @@ export function TextFieldRender<TYPE extends string>(
           {type === 'number' && (
             <div className={cnTextField('Counter')}>
               <button
+                onFocus={handleFocus}
                 onClick={(e) => changeNumberValue(e, true)}
                 type="button"
                 className={cnTextField('CounterButton')}
@@ -268,6 +266,7 @@ export function TextFieldRender<TYPE extends string>(
                 <IconSelectOpen size="xs" />
               </button>
               <button
+                onFocus={handleFocus}
                 onClick={(e) => changeNumberValue(e, false)}
                 type="button"
                 className={cnTextField('CounterButton')}
