@@ -1,5 +1,25 @@
 # Changelog
 
+## v3.15.1 (09/02/2022)
+Самое важное:
+
+- `DateTime`, обновлены тесты
+- Обновлена докуменация
+- Исправлены мелкие недочеты
+
+--- 
+
+- [docs(TextField): add autoComplit to the props table (#2040)](https://github.com/consta-design-system/uikit/commit/3c1e56e9ec5b32e82186d8bf01785f3f7501683a) - [@arhayka](https://github.com/arhayka)
+- [docs(Responces): add ResponsesExit to the docs (#2038)](https://github.com/consta-design-system/uikit/commit/3609a932fe231d3bd4016dc58f8afdf66b38562b) - [@arhayka](https://github.com/arhayka)
+- [test(DateTime): add tests (#2037)](https://github.com/consta-design-system/uikit/commit/28133c0531cbef19e61d26d24f06cbdb17850473) - [@gizeasy](https://github.com/gizeasy)
+- [docs(Icons): add create icons page (#2023)](https://github.com/consta-design-system/uikit/commit/50dcfe357f57bd224a60d2e5d71186f13d29539e) - [@arhayka](https://github.com/arhayka)
+- [docs(Breadcrumbs): edit docs (#2022)](https://github.com/consta-design-system/uikit/commit/a11dbcd3cecb33cb311e1c41df3704b6c621a449) - [@gizeasy](https://github.com/gizeasy)
+- [refactor(DateTime): small code change (#2036)](https://github.com/consta-design-system/uikit/commit/41fc55023cec03a149915a2ade8b23b962632f78) - [@gizeasy](https://github.com/gizeasy)
+- [fix(Storybook): fixed link to Skeleton (#2021)](https://github.com/consta-design-system/uikit/commit/1fe1b336ee55f7028ccc3cea84b1123a01d4c311) - [@gizeasy](https://github.com/gizeasy)
+- [fix(ContextMenuItem): fix cascading styles (#2020)](https://github.com/consta-design-system/uikit/commit/5093c47d3c07f68abf9e2175d3f626c8054184d9) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
 ## v3.15.0 (02/02/2022)
 Самое важное:
 
@@ -504,15 +524,3 @@ _Обращаем внимание_: *версии компонентов обр
 - [docs(Informer): add size description in documentation (#1287)](https://github.com/gazprom-neft/consta-uikit/commit/b508853dbc8deea503b7b019c4a3f0823c7a90fd) - [@arhayka](https://github.com/arhayka)
 - [docs(Text): remove width description (#1288)](https://github.com/gazprom-neft/consta-uikit/commit/6bb5a935c97d6dd051c8ea08fa59e703134c39b1) - [@arhayka](https://github.com/arhayka)
 - [docs(Collapse): add docs (#1291)](https://github.com/gazprom-neft/consta-uikit/commit/cc673f53eb1b352ee586a8dffa8c01b2ca63acac) - [@arhayka](https://github.com/arhayka)
-
---------------------
-
-## v1.12.3 (09/06/2021)
-- [docs(useThemeVars): edit docs (#1251)](https://github.com/gazprom-neft/consta-uikit/commit/7981b101e88ccd96533f866143d4fbfbeaabfbc8) - [@arhayka](https://github.com/arhayka)
-- [docs(useForkRef): edit docs (#1250)](https://github.com/gazprom-neft/consta-uikit/commit/172d5a71b93ddc30ac88f0357f1d589c81fcb8e1) - [@arhayka](https://github.com/arhayka)
-- [docs(UseDebounce): edit docs (#1249)](https://github.com/gazprom-neft/consta-uikit/commit/6d66b465ce51e2effcee2ea238f510f5f693f0b2) - [@arhayka](https://github.com/arhayka)
-- [docs(useClickOutside): edit docs (#1248)](https://github.com/gazprom-neft/consta-uikit/commit/356d70f3d67b6b59ac1100af741362767189168e) - [@arhayka](https://github.com/arhayka)
-- [docs(useChoiceGroup): edit docs (#1247)](https://github.com/gazprom-neft/consta-uikit/commit/716c416bf357d983173f65b8e82df613e5f2e36f) - [@arhayka](https://github.com/arhayka)
-- [feat(Table): add the ability to collapse table rows (#1199)](https://github.com/gazprom-neft/consta-uikit/commit/5639d8239eb1c67b47e98300b1af6a9b4403603c) - [@DmitriyKaurov](https://github.com/DmitriyKaurov)
-- [fix(Theme): fix color calculation parameter (#1254)](https://github.com/gazprom-neft/consta-uikit/commit/0fa0abaabd40e7a5b7e0f428ed6a343cee36a5bc) - [@kolebayev](https://github.com/kolebayev)
-- [docs(icons): add docs for new icons (#1252)](https://github.com/gazprom-neft/consta-uikit/commit/8a7f4a7f84439e5fd018d9f95ce7d3ad185b58a9) - [@kolebayev](https://github.com/kolebayev)
