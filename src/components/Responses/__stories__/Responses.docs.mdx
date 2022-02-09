@@ -13,6 +13,7 @@ import {
   ExampleResponsesActions,
   ExampleResponsesSizeM,
   ExampleResponsesSizeL,
+  ExampleResponsesExit,
 } from './examples/ResponsesExample/ResponsesExample';
 
 <!--info
@@ -39,6 +40,7 @@ import { Responses404 } from '@consta/uikit/Responses404';
   - [Информация удалена](#информация-удалена)
   - [Ничего не нашлось](#ничего-не-нашлось)
   - [Успешный результат](#успешный-результат)
+  - [Результат выхода](#результат-выхода)
 - [Текст](#текст)
 - [Кнопки](#кнопки)
 - [Размер](#размер)
@@ -189,6 +191,18 @@ import { Responses404 } from '@consta/uikit/Responses404';
 
 ```tsx
 <ResponsesSuccess />
+```
+
+### Результат выхода
+
+Эта сообщение об успешном выходе из системы, например, из личного кабинета или веб-версии почтового ящика.
+
+Здесь стоит чётко написать, откуда человек вышел, и дать возможность войти обратно.
+
+<ExampleResponsesExit />
+
+```tsx
+<ResponsesExit />
 ```
 
 ## Текст
