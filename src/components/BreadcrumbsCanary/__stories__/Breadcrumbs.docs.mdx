@@ -4,8 +4,8 @@ import {
   BreadcrumbsExampleIconRoot,
   BreadcrumbsExampleFitMode,
   BreadcrumbsExample,
-  BreadcrumbsExampleActive,
   BreadcrumbsCustomType,
+  BreadcrumbsExamplelastItemIsLink,
 } from './examples/BreadcrumbsExample/BreadcrumbsExample';
 
 <!--info
@@ -21,8 +21,10 @@ import { Breadcrumbs } from '@consta/uikit/BreadcrumbsCanary';
 Этот хлебные крошки — компонент, который используется, чтобы показать путь к текущей странице.
 
 - [Содержимое](#содержимое)
-  - [Страницы](#страницы)
-  - [Иконки](#иконки)
+  - [Кастомный тип](#кастомный-тип)
+  - [Иконка вместо первой страницы](#иконка-вместо-первой-страницы)
+  - [Последний элемент как ссылка](#последний-элемент-как-ссылка)
+- [Поведение](#поведение)
 - [Размер](#размер)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
@@ -32,72 +34,168 @@ import { Breadcrumbs } from '@consta/uikit/BreadcrumbsCanary';
 
 Хлебные крошки собираются из названий страниц и ссылок на них. К любой странице можно добавить иконку из библиотеки иконок.
 
-<BreadcrumbsExample />
+Всё это можно описать в массиве `items` типа [DefaultItem](#свойства). Что внутри:
 
-Всё это можно описать в массиве `items`. Он может выглядеть примерно так:
+- `label` — название страницы,
+- `icon` — иконка из [библиотеки иконок],
+- `href` — ссылка на страницу,
+- `onClick` — событие по клику.
+
+##### Пример простых хлебных крошек
 
 ```tsx
-[
+const pagesNoIcon = [
   {
-    icon: IconHand,
-    label: 'Home',
+    label: 'Главная',
     href: 'https://url.com',
   },
   {
-    label: 'Page1',
+    label: 'Страница 1',
     href: 'https://url.com/page-1',
   },
   {
-    label: 'Page2',
+    label: 'Страница 2',
     href: 'https://url.com/page-2',
   },
   {
-    label: 'Page3',
+    label: 'Страница 3',
     href: 'https://url.com/page-3',
-    active: true,
   },
 ];
+export const BreadcrumbsExample = () => {
+  return <Breadcrumbs items={pagesNoIcon} />;
+};
 ```
 
-### Страницы
+<BreadcrumbsExample />
 
-По умолчанию комопнент ожидает `items` c типом [DefaultItem](#свойства),
-но также вы можете использоват свой тип с указанием `getItemLabel`, `getItemHref`, `getItemIcon`, `getItemOnClick`
+##### Пример хлебных крошек с иконками
 
 ```tsx
-const pages = ['Home', 'Page1', 'Page2', 'Page3'];
+const pages = [
+  {
+    icon: IconHand,
+    label: 'Главная',
+    href: 'https://url.com',
+  },
+  {
+    icon: IconLeaf,
+    label: 'Страница 1',
+    href: 'https://url.com/page-1',
+  },
+  {
+    icon: IconCards,
+    label: 'Страница 2',
+    href: 'https://url.com/page-2',
+  },
+  {
+    icon: IconDrag,
+    label: 'Страница 3',
+    href: 'https://url.com/page-3',
+  },
+];
 
-<Breadcrumbs items={pages} getItemLabel={(item) => item} />;
+export const BreadcrumbsExampleIcons = () => {
+  return <Breadcrumbs items={pages} />;
+};
+```
+
+<BreadcrumbsExampleIcons />
+
+### Кастомный тип
+
+Вы можете создать кастомный тип и получить данные с помощью `getItemLabel`, `getItemHref`, `getItemIcon`, `getItemOnClick`.
+
+```tsx
+const pagesSimple = ['Главная', 'Страница 1', 'Страница 2', 'Страница 3'];
+
+export const BreadcrumbsCustomType = () => {
+  return <Breadcrumbs items={pagesSimple} getItemLabel={(item) => item} />;
+};
 ```
 
 <BreadcrumbsCustomType />
 
-Компонент автомотически подстраивается под ширину необходимую ширину скрывая страници под точки или включая прокрутку.
+### Иконка вместо первой страницы
+
+Чтобы показать иконку вместо названия первой страницы, добавьте `onlyIconRoot`.
 
 ```tsx
-<Breadcrumbs fitMode="dropdown" items={pages} onItemClick={onItemClick}  />
-<Breadcrumbs fitMode="scroll" items={pages} onItemClick={onItemClick}  />
+export const BreadcrumbsExampleIconRoot = () => {
+  return <Breadcrumbs items={pagesNoIcon} onlyIconRoot />;
+};
+```
+
+<BreadcrumbsExampleIconRoot />
+
+### Последний элемент как ссылка
+
+Чтобы показать ссылку с последнего элемента хлебных крошек, добавьте `lastItemIsLink`.
+
+```tsx
+export const BreadcrumbsExampleIconRoot = () => {
+  return <Breadcrumbs items={pagesNoIcon} lastItemIsLink />;
+};
+```
+
+<BreadcrumbsExamplelastItemIsLink />
+
+## Поведение
+
+Компонент автоматически подстраивается под ширину родительского контейнера.
+За то, как это будет происходить, отвечает свойство `fitMode`. Варианты:
+
+- фрагмент хлебных крошек заменяет многоточие, по клику на него открывается выпадающий список со скрытыми элементами: `fitmode='dropdown'` (работает по умолчанию),
+- виден только конец крошек, остальное можно прокрутить: `fitmode='scroll'`.
+
+```tsx
+const pagesLongLabels = [
+  {
+    label: 'Главная',
+    href: 'https://url.com',
+  },
+  {
+    label: 'Раздел',
+    href: 'https://url.com/page-1',
+  },
+  {
+    label: 'Элемент раздела',
+    href: 'https://url.com/page-2',
+  },
+  {
+    label: 'Дополнителные свойства элемента раздела',
+    href: 'https://url.com/page-3',
+  },
+  {
+    label: 'Описание свойства элемента раздела',
+    href: 'https://url.com/page-4',
+  },
+];
+
+export const BreadcrumbsFitMode = () => {
+  return (
+    <Breadcrumbs fitMode="dropdown" items={pages} />
+    <Breadcrumbs fitMode="scroll" items={pages} />
+  );
+};
 ```
 
 <BreadcrumbsExampleFitMode />
 
-Если хотите выделить текущую страницу, используйте `getItemActive`.
-
-<BreadcrumbsExampleActive />
-
-### Иконки
-
-Иконку указывать необязательно, но, если она есть, можно получить ее с помощью `getItemIcon`.
-
-<BreadcrumbsExampleIcons />
-
-Чтобы показать иконку вместо названия первой страницы, добавьте `onlyIconRoot`.
-
-<BreadcrumbsExampleIconRoot />
-
 ## Размер
 
 За размер компонента отвечает свойство `size`. Варианты: `'xs', s', 'm', 'l'`, по умолчанию `'m'`.
+
+```tsx
+export const BreadcrumbsExampleSize = () => {
+  return (
+    <Breadcrumbs items={pages} size="xs" onlyIconRoot />
+    <Breadcrumbs items={pages} size="s" onlyIconRoot  />
+    <Breadcrumbs items={pages} size="m" onlyIconRoot  />
+    <Breadcrumbs items={pages} size="l" onlyIconRoot />
+  );
+};
+```
 
 <BreadcrumbsExampleSize />
 
@@ -118,7 +216,6 @@ export type DefaultItem = {
 };
 
 export type BreadcrumbsPropGetItemLabel<ITEM> = (item: ITEM) => string | React.ReactNode;
-export type BreadcrumbsPropGetItemActive<ITEM> = (item: ITEM) => boolean | undefined;
 export type BreadcrumbsPropGetItemHref<ITEM> = (item: ITEM) => string | undefined;
 export type BreadcrumbsPropGetItemIcon<ITEM> = (item: ITEM) => IconComponent | undefined;
 export type BreadcrumbsPropGetItemOnClick<ITEM> = (
@@ -127,14 +224,16 @@ export type BreadcrumbsPropGetItemOnClick<ITEM> = (
 export type BreadcrumbsPropOnItemClick<ITEM> = (props: { item: ITEM; e: React.MouseEvent }) => void;
 ```
 
-| Свойство                     | Тип или варианты значения       | По умолчанию | Описание                                                    |
-| ---------------------------- | ------------------------------- | ------------ | ----------------------------------------------------------- |
-| [`items`](#содержимое)       | `ITEM[]`                        | -            | Массив со списком страниц                                   |
-| [`getItemLabel?`](#страницы) | `BreadcrumbsPropGetItemLabel`   | -            | Функция для получения названия страницы                     |
-| [`getItemHref?`](#страницы)  | `BreadcrumbsPropGetItemHref`    | -            | Функция для получения ссылки на страницу                    |
-| [`getItemIcon?`](#иконки)    | `BreadcrumbsPropGetItemIcon`    | -            | Функция для получения иконки                                |
-| `getItemOnClick?`            | `BreadcrumbsPropGetItemOnClick` | -            | Функция для функции которая вызовится по клику на элемент   |
-| [`onlyIconRoot?`](#иконки)   | `boolean`                       | false        | Показывать иконку вместо названия первой страницы в крошках |
-| [`size?`](#размер)           | `'xs', s', 'm', 'l'`            | 'm'          | Размер хлебных крошек                                       |
-| `onItemClick`                | `BreadcrumbsPropOnItemClick`    | -            | Обработчик клика по хлебным крошкам                         |
-| `className?`                 | `string`                        | -            | Дополнительный CSS-класс                                    |
+| Свойство                                           | Тип или варианты значения       | По умолчанию | Описание                                                                            |
+| -------------------------------------------------- | ------------------------------- | ------------ | ----------------------------------------------------------------------------------- |
+| [`items`](#содержимое)                             | `ITEM[]`                        | -            | Массив со списком страниц                                                           |
+| [`getItemLabel?`](#кастомный-тип)                  | `BreadcrumbsPropGetItemLabel`   | -            | Функция для получения названия страницы                                             |
+| [`getItemHref?`](#кастомный-тип)                   | `BreadcrumbsPropGetItemHref`    | -            | Функция для получения ссылки на страницу                                            |
+| [`getItemIcon?`](#кастомный-тип)                   | `BreadcrumbsPropGetItemIcon`    | -            | Функция для получения иконки                                                        |
+| `getItemOnClick?`                                  | `BreadcrumbsPropGetItemOnClick` | -            | Функция для функции, которая вызывается по клику на элемент                         |
+| [`onlyIconRoot?`](#иконка-вместо-первой-страницы)  | `boolean`                       | `false`      | Показывает иконку вместо названия первой страницы в крошках                         |
+| [`size?`](#размер)                                 | `'xs', s', 'm', 'l'`            | `'m'`        | Размер хлебных крошек                                                               |
+| `onItemClick?`                                     | `BreadcrumbsPropOnItemClick`    | -            | Обработчик клика по хлебным крошкам                                                 |
+| [`fitMode?`](#поведение)                           | `'dropdown', 'scroll'`          | `'dropdown'` | Тип подстройки под ширину контейнера: многоточие с выпадающим списком или прокрутка |
+| [`lastItemIsLink?`](#последний-элемент-как-ссылка) | `boolean`                       | `false`      | Последний элемент отображается как ссылка                                           |
+| `className?`                                       | `string`                        | -            | Дополнительный CSS-класс компонента                                                 |
