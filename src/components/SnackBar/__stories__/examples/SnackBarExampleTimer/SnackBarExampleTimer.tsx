@@ -71,6 +71,12 @@ export const SnackBarExampleTimer: React.FC = () => {
         <Button
           className={cnSnackBarExampleTimer('ButtonAdd')}
           iconLeft={IconAdd}
+          label="Без таймера + иконка"
+          onClick={handleHiddenTimerAdd}
+        />
+        <Button
+          className={cnSnackBarExampleTimer('ButtonAdd')}
+          iconLeft={IconAdd}
           label="Обычный таймер"
           onClick={handleNormalAdd}
         />
@@ -85,12 +91,6 @@ export const SnackBarExampleTimer: React.FC = () => {
           iconLeft={IconAdd}
           label="Тревожный таймер"
           onClick={handleAlertAdd}
-        />
-        <Button
-          className={cnSnackBarExampleTimer('ButtonAdd')}
-          iconLeft={IconAdd}
-          label="Скрытый таймер + иконка"
-          onClick={handleHiddenTimerAdd}
         />
       </div>
       <SnackBar className={cnSnackBarExampleTimer('SnackBar')} items={items} />
