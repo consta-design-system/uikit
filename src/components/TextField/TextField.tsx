@@ -135,20 +135,12 @@ export function TextFieldRender<TYPE extends string>(
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     const flag = getIncrementFlag(e);
-    if (Array.isArray(sortedSteps) && typeof flag === 'boolean' && !disabled) {
+    if (typeof flag === 'boolean' && !disabled) {
       e.preventDefault();
-      const newValue = getValueByStepArray({
-        isIncrement: flag,
-        value,
-        steps: sortedSteps,
-        min,
-        max,
+      onChange?.({
+        e,
+        value: getValueByStep(flag).toString(),
       });
-      typeof newValue === 'number' &&
-        onChange?.({
-          e,
-          value: newValue?.toString(),
-        });
     }
   };
 
@@ -178,22 +170,20 @@ export function TextFieldRender<TYPE extends string>(
 
   const getValueByStep = (isIncrement?: boolean) => {
     return Array.isArray(sortedSteps)
-      ? (
-          getValueByStepArray({
-            min,
-            max,
-            value,
-            isIncrement,
-            steps: sortedSteps,
-          }) || 0
-        ).toString()
+      ? getValueByStepArray({
+          min,
+          max,
+          value,
+          isIncrement,
+          steps: sortedSteps,
+        }) ?? 0
       : getValueByStepNumber({ value, step: sortedSteps, isIncrement, min, max });
   };
 
   const changeNumberValue = (e: React.MouseEvent<HTMLButtonElement>, isIncrement = true) => {
     onChange?.({
       e,
-      value: getValueByStep(isIncrement),
+      value: getValueByStep(isIncrement).toString(),
     });
   };
 

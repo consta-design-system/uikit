@@ -172,28 +172,30 @@ export const getValueByStepNumber = (params: {
   isIncrement?: boolean;
   min?: number | string;
   max?: number | string;
-}): string => {
+}): number => {
   const { value, step, isIncrement, max, min } = params;
   const minValue = Number(min);
   const maxValue = Number(max);
   const currentValue: number =
     (typeof value === 'string' ? Number(value) : 0) + Number(step) * (isIncrement ? 1 : -1);
   if (!Number.isNaN(minValue) && currentValue <= minValue) {
-    return minValue.toString();
+    return minValue;
   }
   if (!Number.isNaN(maxValue) && currentValue >= maxValue) {
-    return maxValue.toString();
+    return maxValue;
   }
-  return currentValue.toFixed(
-    Number(
-      /* Необходимо для того, чтобы избежать ситуации, когда по нажатию
+  return Number(
+    currentValue.toFixed(
+      Number(
+        /* Необходимо для того, чтобы избежать ситуации, когда по нажатию
 на кнопку прибавляется число с погрешностью.
 Здесь мы берем разрядность дробной части шага и ограничиваем
 результирующее число этой разрядностью */
-      Number(step)
-        .toString()
-        .split('.')[1]?.length,
-    ) || 0,
+        Number(step)
+          .toString()
+          .split('.')[1]?.length,
+      ) || 0,
+    ),
   );
 };
 
