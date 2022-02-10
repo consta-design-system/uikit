@@ -1,14 +1,12 @@
 import { DateRange } from '../../../utils/types/Date';
 
-type StartEndOfPeriod = (date: Date) => Date;
-
 const inProcent = (number: number, msInPeriod: number) => (number / msInPeriod) * 100;
 
 export const getSliderValueRange = (
   decadeDate: Date,
   value: Date | DateRange | undefined,
-  startOfPeriod: StartEndOfPeriod,
-  endOfPeriod: StartEndOfPeriod,
+  startOfPeriod: (date: Date) => Date,
+  endOfPeriod: (date: Date) => Date,
 ) => {
   if (!Array.isArray(value) || !value[0] || !value[1]) {
     return undefined;

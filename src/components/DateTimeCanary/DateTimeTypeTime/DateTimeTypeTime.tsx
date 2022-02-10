@@ -61,7 +61,7 @@ export const DateTimeTypeTime: DateTimeTypeComponent<'time'> = forwardRef((props
         style={{ ['--label-length' as string]: labelLenght }}
         label={label}
       />
-      <div {...otherProps} className={cnDateTimeTypeTime('Grid')}>
+      <div className={cnDateTimeTypeTime('Grid')}>
         <DateTimeTimeColumn label={locale.hours} items={hours} />
         <DateTimeTimeColumn label={locale.minutes} items={minutes} />
         <DateTimeTimeColumn label={locale.seconds} items={seconds} />

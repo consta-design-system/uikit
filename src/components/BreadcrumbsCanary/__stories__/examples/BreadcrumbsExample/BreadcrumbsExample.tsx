@@ -11,41 +11,41 @@ import { Breadcrumbs, DefaultItem } from '../../../BreadcrumbsCanary';
 const pages = [
   {
     icon: IconHand,
-    label: 'Home',
+    label: 'Главная',
     href: 'https://url.com',
   },
   {
     icon: IconLeaf,
-    label: 'Page1',
+    label: 'Страница 1',
     href: 'https://url.com/page-1',
   },
   {
     icon: IconCards,
-    label: 'Page2',
+    label: 'Страница 2',
     href: 'https://url.com/page-2',
   },
   {
     icon: IconDrag,
-    label: 'Page3',
+    label: 'Страница 3',
     href: 'https://url.com/page-3',
   },
 ];
 
 const pagesNoIcon = [
   {
-    label: 'Home',
+    label: 'Главная',
     href: 'https://url.com',
   },
   {
-    label: 'Page1',
+    label: 'Страница 1',
     href: 'https://url.com/page-1',
   },
   {
-    label: 'Page2',
+    label: 'Страница 2',
     href: 'https://url.com/page-2',
   },
   {
-    label: 'Page3',
+    label: 'Страница 3',
     href: 'https://url.com/page-3',
   },
 ];
@@ -73,7 +73,7 @@ const pagesLongLabels = [
   },
 ];
 
-const pagesSimple = ['Home', 'Page1', 'Page2', 'Page3'];
+const pagesSimple = ['Главная', 'Страница 1', 'Страница 2', 'Страница 3'];
 
 const onItemClick = (props: { item: DefaultItem; e: React.MouseEvent }) => {
   props.e.preventDefault();
@@ -123,7 +123,15 @@ export const BreadcrumbsExampleIcons = () => {
 export const BreadcrumbsExampleIconRoot = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <Breadcrumbs items={pages} size="m" onlyIconRoot onItemClick={onItemClick} />
+      <Breadcrumbs items={pagesNoIcon} size="m" onlyIconRoot onItemClick={onItemClick} />
+    </StoryBookExample>
+  );
+};
+
+export const BreadcrumbsExamplelastItemIsLink = () => {
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <Breadcrumbs items={pagesNoIcon} size="m" lastItemIsLink onItemClick={onItemClick} />
     </StoryBookExample>
   );
 };

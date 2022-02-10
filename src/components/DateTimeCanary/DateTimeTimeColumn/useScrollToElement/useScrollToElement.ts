@@ -1,4 +1,6 @@
-import { createRef, useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
+
+import { useRefs } from '../../../../hooks/useRefs/useRefs';
 
 type ItemDimentions = { height: number; offset: number };
 
@@ -8,21 +10,15 @@ export const useScrollToElement = (
 ) => {
   const [itemDimentions, setItemDimentions] = useState<ItemDimentions[]>([]);
 
-  const itemsRefs = useMemo(
-    () => new Array(items.length).fill(null).map(() => createRef<HTMLDivElement>()),
-    [items.length],
-  );
+  const itemsRefs = useRefs<HTMLDivElement>(items.length);
 
   useEffect(() => {
     const selectedItemIndex = items.findIndex((item) => item.selected);
-    const scrollWrapperElement = scrollWrapper.current;
 
-    if (scrollWrapperElement) {
-      scrollWrapperElement.scrollTo({
-        top: itemDimentions?.[selectedItemIndex]?.offset || 0,
-        behavior: 'smooth',
-      });
-    }
+    scrollWrapper.current?.scrollTo?.({
+      top: itemDimentions?.[selectedItemIndex]?.offset || 0,
+      behavior: 'smooth',
+    });
   });
 
   useLayoutEffect(() => {

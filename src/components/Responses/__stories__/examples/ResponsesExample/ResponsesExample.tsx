@@ -11,6 +11,7 @@ import { ResponsesConnectionError } from '../../../../ResponsesConnectionError/R
 import { ResponsesDeleted } from '../../../../ResponsesDeleted/ResponsesDeleted';
 import { ResponsesEmptyBox } from '../../../../ResponsesEmptyBox/ResponsesEmptyBox';
 import { ResponsesEmptyPockets } from '../../../../ResponsesEmptyPockets/ResponsesEmptyPockets';
+import { ResponsesExit } from '../../../../ResponsesExit/ResponsesExit';
 import { ResponsesNothingFound } from '../../../../ResponsesNothingFound/ResponsesNothingFound';
 import { ResponsesSuccess } from '../../../../ResponsesSuccess/ResponsesSuccess';
 
@@ -131,6 +132,14 @@ export const ExampleResponsesSizeL = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Responses404 size="l" />
+    </StoryBookExample>
+  );
+};
+
+export const ExampleResponsesExit = () => {
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <ResponsesExit />
     </StoryBookExample>
   );
 };

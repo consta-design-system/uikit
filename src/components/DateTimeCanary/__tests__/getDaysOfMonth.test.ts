@@ -3,7 +3,7 @@ import ruLocale from 'date-fns/locale/ru';
 
 import { getDaysOfMonth } from '../helpers';
 
-describe('getDaysOfMonth', () => {
+describe('DateTime/getDaysOfMonth', () => {
   it('верный результат c date', () => {
     const result = getDaysOfMonth({
       date: new Date(1970, 0),
