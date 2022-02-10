@@ -376,7 +376,7 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
 
       const item = getItem(highlightedIndex);
 
-      if (isOptionForCreate(item)) {
+      if (item && isOptionForCreate(item)) {
         onCreate(e, item.label);
         return;
       }
