@@ -79,12 +79,12 @@ export function Playground() {
       text
     );
     const item: Item = {
-      key,
+      key: key.toString(),
       message,
       status,
       ...(withAutoClose && {
         autoClose: 5,
-        onAutoClose: () => dispatchItems({ type: 'remove', key }),
+        // onAutoClose: () => dispatchItems({ type: 'remove', key }),
       }),
       ...(showProgress !== '' && { showProgress }),
       ...(withIcon && { icon: getItemIconByStatus(status) }),
@@ -104,7 +104,9 @@ export function Playground() {
           },
         ],
       }),
-      ...(withCloseButton && { onClose: () => dispatchItems({ type: 'remove', key }) }),
+      ...(withCloseButton && {
+        onClose: () => dispatchItems({ type: 'remove', key: key.toString() }),
+      }),
     };
     dispatchItems({ type: 'add', item });
   };

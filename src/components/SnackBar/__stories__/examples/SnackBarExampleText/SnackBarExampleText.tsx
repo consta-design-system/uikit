@@ -4,13 +4,13 @@ import React from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cn } from '../../../../../utils/bem';
-import { Item, SnackBar } from '../../../SnackBar';
+import { SnackBar, SnackBarItemDefault } from '../../../SnackBar';
 
 const cnSnackBarExampleText = cn('SnackBarExampleText');
 
-const items: Item[] = [
+const items: SnackBarItemDefault[] = [
   {
-    key: 1,
+    key: '1',
     message: 'Это просто сообщение',
   },
 ];

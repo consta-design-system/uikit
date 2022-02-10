@@ -9,10 +9,21 @@ import { IconRing } from '../../../../../icons/IconRing/IconRing';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cn } from '../../../../../utils/bem';
 import { Button } from '../../../../Button/Button';
-import { Item, SnackBar } from '../../../SnackBar';
+import { SnackBar } from '../../../SnackBar';
 import { SnackBarItemShowProgressProp, SnackBarItemStatus } from '../../../types';
 
 const cnSnackBarExampleTimer = cn('SnackBarExampleTimer');
+
+type Item = {
+  key: number;
+  message: string;
+  icon?: IconComponent;
+  buttons?: string[];
+  status?: SnackBarItemStatus;
+  onClose?: () => void;
+  closeTime: number;
+  progressMode?: 'line' | 'timer';
+};
 
 const mapIconByStatus: Record<SnackBarItemStatus, IconComponent | undefined> = {
   alert: IconAlert,
@@ -43,7 +54,7 @@ export const SnackBarExampleTimer: React.FC = () => {
   >(reducer, []);
   const generateHandleAdd = (
     status: SnackBarItemStatus,
-    showProgress?: SnackBarItemShowProgressProp,
+    progressMode?: SnackBarItemShowProgressProp,
   ) => () => {
     const key = items.length + 1;
     const item: Item = {
@@ -52,8 +63,8 @@ export const SnackBarExampleTimer: React.FC = () => {
       status,
       icon: getItemIconByStatus(status),
       onClose: () => dispatchItems({ type: 'remove', item, key }),
-      autoClose: 5,
-      showProgress,
+      closeTime: 5,
+      progressMode,
     };
     dispatchItems({ type: 'add', item });
   };
@@ -93,7 +104,12 @@ export const SnackBarExampleTimer: React.FC = () => {
           onClick={handleAlertAdd}
         />
       </div>
-      <SnackBar className={cnSnackBarExampleTimer('SnackBar')} items={items} />
+      <SnackBar
+        className={cnSnackBarExampleTimer('SnackBar')}
+        items={items}
+        getItemAutoClose={(item) => item.closeTime}
+        getItemShowProgress={(item) => item.progressMode}
+      />
     </div>
   );
 };

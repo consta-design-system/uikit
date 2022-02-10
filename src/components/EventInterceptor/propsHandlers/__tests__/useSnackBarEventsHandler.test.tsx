@@ -2,15 +2,15 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { act, renderHook } from '@testing-library/react-hooks';
 
-import { Item, SnackBar } from '../../../SnackBar/SnackBar';
+import { SnackBar, SnackBarItemDefault } from '../../../SnackBar/SnackBar';
 import { useSnackBarEventsHandler } from '../useSnackBarEventsHandler';
 
 type Props = React.ComponentProps<typeof SnackBar>;
 
 const testId = 'SnackBar';
-const items: Item[] = [
+const items: SnackBarItemDefault[] = [
   {
-    key: 1,
+    key: '1',
     message: 'message',
     status: 'normal',
   },

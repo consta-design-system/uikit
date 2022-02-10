@@ -1,5 +1,6 @@
-import { Item } from './SnackBar';
+import { SnackBarItemDefault } from './SnackBar';
 import {
+  Mappers,
   SnackBarPropGetItemActions,
   SnackBarPropGetItemAutoClose,
   SnackBarPropGetItemIcon,
@@ -12,16 +13,21 @@ import {
   SnackBarProps,
 } from './types';
 
-const defaultGetItemKey: SnackBarPropGetItemKey<Item> = (item) => item.key;
-const defaultGetItemMessage: SnackBarPropGetItemMessage<Item> = (item) => item.message;
-const defaultGetItemStatus: SnackBarPropGetItemStatus<Item> = (item) => item.status;
-const defaultGetItemAutoClose: SnackBarPropGetItemAutoClose<Item> = (item) => item.autoClose;
-const defaultGetItemShowProgress: SnackBarPropGetItemShowProgress<Item> = (item) =>
+const defaultGetItemKey: SnackBarPropGetItemKey<SnackBarItemDefault> = (item) => item.key;
+const defaultGetItemMessage: SnackBarPropGetItemMessage<SnackBarItemDefault> = (item) =>
+  item.message;
+const defaultGetItemStatus: SnackBarPropGetItemStatus<SnackBarItemDefault> = (item) => item.status;
+const defaultGetItemAutoClose: SnackBarPropGetItemAutoClose<SnackBarItemDefault> = (item) =>
+  item.autoClose;
+const defaultGetItemShowProgress: SnackBarPropGetItemShowProgress<SnackBarItemDefault> = (item) =>
   item.showProgress;
-const defaultGetItemIcon: SnackBarPropGetItemIcon<Item> = (item) => item.icon;
-const defaultGetItemActions: SnackBarPropGetItemActions<Item> = (item) => item.actions;
-const defaultGetItemOnClose: SnackBarPropGetItemOnClose<Item> = (item) => item.onClose;
-const defaultGetItemOnAutoClose: SnackBarPropGetItemOnAutoClose<Item> = (item) => item.onAutoClose;
+const defaultGetItemIcon: SnackBarPropGetItemIcon<SnackBarItemDefault> = (item) => item.icon;
+const defaultGetItemActions: SnackBarPropGetItemActions<SnackBarItemDefault> = (item) =>
+  item.actions;
+const defaultGetItemOnClose: SnackBarPropGetItemOnClose<SnackBarItemDefault> = (item) =>
+  item.onClose;
+const defaultGetItemOnAutoClose: SnackBarPropGetItemOnAutoClose<SnackBarItemDefault> = (item) =>
+  item.onAutoClose;
 
 export const withDefaultGetters = <ITEM>(props: SnackBarProps<ITEM>) => {
   return {
@@ -35,5 +41,5 @@ export const withDefaultGetters = <ITEM>(props: SnackBarProps<ITEM>) => {
     getItemActions: props.getItemActions || defaultGetItemActions,
     getItemOnClose: props.getItemOnClose || defaultGetItemOnClose,
     getItemOnAutoClose: props.getItemOnAutoClose || defaultGetItemOnAutoClose,
-  };
+  } as SnackBarProps<ITEM> & Required<Mappers<ITEM>>;
 };

@@ -10,43 +10,17 @@ import { isNumber, isString } from '../../../utils/type-guards';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 import { cnTheme } from '../../Theme/Theme';
-import { Item } from '../SnackBar';
 import { SnackBarActionButton } from '../SnackBarActionButton/SnackBarActionButton';
 import { SnackBarLine } from '../SnackBarLine/SnackBarLine';
 import { SnackBarTimer } from '../SnackBarTimer/SnackBarTimer';
 import {
-  GetItem,
   SnackBarItemComponent,
+  SnackBarItemProps,
   snackBarItemStatusDefault,
   SnackBarTimerPropOnMount,
 } from '../types';
 
 const defaultInitialTimerTime = 3;
-
-const getItem: GetItem = (item, params) => {
-  const {
-    getItemKey,
-    getItemActions,
-    getItemAutoClose,
-    getItemIcon,
-    getItemMessage,
-    getItemOnAutoClose,
-    getItemOnClose,
-    getItemShowProgress,
-    getItemStatus,
-  } = params;
-  return {
-    key: getItemKey(item),
-    message: getItemMessage(item),
-    status: getItemStatus(item),
-    autoClose: getItemAutoClose(item),
-    showProgress: getItemShowProgress(item),
-    icon: getItemIcon(item),
-    actions: getItemActions(item),
-    onClose: getItemOnClose(item),
-    onAutoClose: getItemOnAutoClose(item),
-  };
-};
 
 export const cnSnackBarItem = cn('SnackBarItem');
 
@@ -60,8 +34,7 @@ const getAutoCloseTime = (autoClose: boolean | number | undefined): number | fal
   return false;
 };
 
-export const SnackBarItem: SnackBarItemComponent = React.forwardRef((props, ref) => {
-  const { item, className, ...otherProps } = props;
+export function SnackBarItemRender(props: SnackBarItemProps, ref: React.Ref<HTMLDivElement>) {
   const {
     onClose,
     autoClose,
@@ -71,7 +44,9 @@ export const SnackBarItem: SnackBarItemComponent = React.forwardRef((props, ref)
     actions,
     status = snackBarItemStatusDefault,
     onAutoClose: onAutoCloseProp,
-  } = getItem(item, otherProps);
+    className,
+    ...otherProps
+  } = props;
 
   const [timerFunctions, setTimerFunctions] = useState<{
     start: () => void;
@@ -86,11 +61,11 @@ export const SnackBarItem: SnackBarItemComponent = React.forwardRef((props, ref)
   const autoCloseTime = getAutoCloseTime(autoClose);
   const hideAutoCloseTimer =
     showProgress === undefined || !(isNumber(autoCloseTime) && autoCloseTime > 0);
-  const onAutoClose = (item: Item) => {
+  const onAutoClose = () => {
     if (onAutoCloseProp) {
-      onAutoCloseProp(item);
+      onAutoCloseProp();
     } else {
-      onClose?.(item);
+      onClose?.();
     }
   };
 
@@ -106,10 +81,10 @@ export const SnackBarItem: SnackBarItemComponent = React.forwardRef((props, ref)
 
   const handleTimeIsOver = () => {
     onTimeIsOver();
-    onAutoClose(item);
+    onAutoClose();
   };
 
-  const handleClose = onClose ? () => onClose(item) : undefined;
+  const handleClose = onClose ? () => onClose() : undefined;
 
   return (
     <div
@@ -120,6 +95,7 @@ export const SnackBarItem: SnackBarItemComponent = React.forwardRef((props, ref)
       ])}
       onMouseEnter={autoCloseTime ? handleMouseEnter : undefined}
       onMouseLeave={autoCloseTime ? handleMouseLeave : undefined}
+      {...otherProps}
     >
       {autoCloseTime && showProgress !== 'line' && (
         <SnackBarTimer
@@ -163,4 +139,6 @@ export const SnackBarItem: SnackBarItemComponent = React.forwardRef((props, ref)
       )}
     </div>
   );
-});
+}
+
+export const SnackBarItem = React.forwardRef(SnackBarItemRender) as SnackBarItemComponent;

@@ -61,12 +61,12 @@ import { SnackBar } from '@consta/uikit/SnackBar';
 const items: Item[] = [
   {
     key: 1,
-    message: 'Это просто сообщение',
+    text: 'Это просто сообщение',
   },
 ];
 
 export const SnackBarExampleText: React.FC = () => {
-  return <SnackBar items={items} getItemText={(item) => item.text} />;
+  return <SnackBar items={items} getItemMessage={(item) => item.text} />;
 };
 ```
 
@@ -81,36 +81,42 @@ export const SnackBarExampleText: React.FC = () => {
 ```tsx
 import { SnackBar } from '@consta/uikit/SnackBar';
 
+type Item = {
+  key: number;
+  message?: string;
+  criticality?: number;
+};
+
 const items: Item[] = [
   {
     key: 1,
     message: 'Сообщение — normal',
-    status: 'normal',
+    criticality: 1,
   },
   {
     key: 2,
     message: 'Ошибка — alert',
-    status: 'alert',
+    criticality: 3,
   },
   {
     key: 3,
     message: 'Предупреждение — warning',
-    status: 'warning',
-  },
-  {
-    key: 4,
-    message: 'Успех — success',
-    status: 'success',
-  },
-  {
-    key: 5,
-    message: 'Системное — system',
-    status: 'system',
+    criticality: 2,
   },
 ];
 
+const getStatus = (criticality?: number) => {
+  if (criticality === 3) {
+    return 'alert';
+  }
+  if (criticality === 2) {
+    return 'warning';
+  }
+  return 'normal';
+};
+
 export const SnackBarExampleStatus: React.FC = () => {
-  return <SnackBar items={items} getItemStatus={(item) => item.status} />;
+  return <SnackBar items={items} getItemStatus={(item) => getStatus(item.criticality)} />;
 };
 ```
 
@@ -125,23 +131,34 @@ import { SnackBar } from '@consta/uikit/SnackBar';
 import { IconMoon } from '@consta/uikit/icons/IconMoon';
 import { IconDisconnection } from '@consta/uikit/icons/IconDisconnection';
 
+type Item = {
+  key: number;
+  message: string;
+  status: 'normal' | 'warning';
+};
+
 const items: Item[] = [
   {
     key: 1,
     message: 'Тихо, тигры спят!',
-    status: 'alert',
-    icon: IconMoon,
+    status: 'normal',
   },
   {
     key: 2,
     message: 'Интернет внезапно кончился',
     status: 'warning',
-    icon: IconDisconnection,
   },
 ];
 
+const getIcon = (status?: SnackBarItemStatus) => {
+  if (status === 'normal') {
+    return IconMoon;
+  }
+  return IconDisconnection;
+};
+
 export const SnackBarExampleIcon = () => {
-  return <SnackBar items={items} getItemIcon={(item) => item.icon} />;
+  return <SnackBar items={items} getItemIcon={(item) => getIcon(item.status)} />;
 };
 ```
 
@@ -161,30 +178,33 @@ export const SnackBarExampleIcon = () => {
 ```tsx
 import { SnackBar } from '@consta/uikit/SnackBar';
 
+type Item = {
+  key: number;
+  message: string;
+  buttons?: string[];
+};
+
 const items: Item[] = [
   {
     key: 1,
     message: 'С этим сообщением нельзя не согласиться',
-    status: 'normal',
-    actions: [
-      {
-        label: 'Согласен',
-        onClick: () => {
-          console.log('Согласен');
-        },
-      },
-      {
-        label: 'Не согласен',
-        onClick: () => {
-          console.log('Не согласен');
-        },
-      },
-    ],
+    buttons: ['Согласен', 'Не согласен'],
   },
 ];
 
+const getActions = (buttons?: string[]) => {
+  if (Array.isArray(buttons)) {
+    return buttons.map((button) => ({
+      label: button,
+      onClick: () => {
+        console.log(button);
+      },
+    }));
+  }
+};
+
 export const SnackBarExampleButtons: React.FC = () => {
-  return <SnackBar items={items} getItemActions={(item) => item.actions} />;
+  return <SnackBar items={items} getItemActions={(item) => getActions(item.buttons)} />;
 };
 ```
 
@@ -221,6 +241,17 @@ const mapIconByStatus: Record<SnackBarItemStatus, IconComponent | undefined> = {
   warning: undefined,
 };
 
+type Item = {
+  key: number;
+  message: string;
+  icon?: IconComponent;
+  buttons?: string[];
+  onClose?: () => void;
+  status?: SnackBarItemStatus;
+  closeTime: number;
+  progressMode?: 'line' | 'timer';
+};
+
 const getItemIconByStatus = (status: SnackBarItemStatus): IconComponent | undefined =>
   mapIconByStatus[status];
 
@@ -240,16 +271,15 @@ export const SnackBarExampleTimer: React.FC = () => {
   const [items, dispatchItems] = useReducer<
     React.Reducer<Item[], { type: 'add' | 'remove'; item: Item; key?: number | string }>
   >(reducer, []);
-  const generateHandleAdd = (status: SnackBarItemStatus, showProgress?: 'timer' | 'line') => () => {
+  const generateHandleAdd = (status: SnackBarItemStatus, closeTime?: 'timer' | 'line') => () => {
     const key = items.length + 1;
     const item: Item = {
       key,
       message: `Сейчас эта штука закроется ${key}`,
-      status,
       icon: getItemIconByStatus(status),
       onClose: () => dispatchItems({ type: 'remove', item, key }),
-      autoClose: 5,
-      showProgress,
+      closeTime: 5,
+      progressMode,
     };
     dispatchItems({ type: 'add', item });
   };
@@ -270,8 +300,8 @@ export const SnackBarExampleTimer: React.FC = () => {
       </div>
       <SnackBar
         items={items}
-        getItemShowProgress={(item) => item.showProgress}
-        getItemAutoClose={(item) => item.autoClose}
+        getItemAutoClose={(item) => item.closeTime}
+        getItemShowProgress={(item) => item.progressMode}
       />
     </div>
   );
@@ -289,7 +319,7 @@ import { SnackBar } from '@consta/uikit/SnackBar';
 ## Свойства
 
 ```tsx
-type Item = {
+type SnackBarItemDefault = {
   key: string | number;
   message?: string | number | React.ReactNode;
   status?: 'success' | 'warning' | 'alert' | 'normal';
