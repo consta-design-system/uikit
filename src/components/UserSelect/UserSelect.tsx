@@ -10,6 +10,7 @@ import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { cnSelect } from '../SelectComponents/cnSelect';
 import {
   defaultlabelForCreate,
+  defaultLabelForEmptyItems,
   defaultlabelForNotFound,
   getInputWidth,
   getSelectDropdownForm,
@@ -75,6 +76,7 @@ function UserSelectRender<
     inputRef: inputRefProp,
     labelForNotFound = defaultlabelForNotFound,
     labelForCreate = defaultlabelForCreate,
+    labelForEmptyItems = defaultLabelForEmptyItems,
     multiple = false,
     searchFunction,
     style,
@@ -107,6 +109,7 @@ function UserSelectRender<
     clearValue,
     getHandleRemoveValue,
     notFound,
+    hasItems,
   } = useSelect({
     items,
     groups,
@@ -277,6 +280,8 @@ function UserSelectRender<
         labelForNotFound={labelForNotFound}
         labelForCreate={labelForCreate}
         notFound={notFound}
+        hasItems={hasItems}
+        labelForEmptyItems={labelForEmptyItems}
         style={typeof style?.zIndex === 'number' ? { zIndex: style.zIndex + 1 } : undefined}
       />
       <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>

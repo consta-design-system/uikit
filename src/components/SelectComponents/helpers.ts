@@ -22,6 +22,7 @@ export function getSelectDropdownForm(form: PropForm): SelectDropdownPropForm {
 
 export const defaultlabelForNotFound = 'Не найдено';
 export const defaultlabelForCreate = '+';
+export const defaultLabelForEmptyItems = 'Список пуст';
 
 export const getInputWidth = (
   controlInnerRef: React.RefObject<HTMLDivElement>,

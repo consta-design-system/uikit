@@ -72,6 +72,7 @@ export type ComboboxProps<
     labelForNotFound?: string;
     required?: boolean;
     labelForCreate?: string;
+    labelForEmptyItems?: string;
     searchFunction?: PropSearchFunction<ITEM>;
     multiple?: MULTIPLE;
     value?: PropValue<ITEM, MULTIPLE>;

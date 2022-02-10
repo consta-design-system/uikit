@@ -7,7 +7,7 @@ import { useSelect } from '../../hooks/useSelect/useSelect';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { cnSelect, COMPONENT_NAME } from '../SelectComponents/cnSelect';
-import { getSelectDropdownForm } from '../SelectComponents/helpers';
+import { defaultLabelForEmptyItems, getSelectDropdownForm } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
 import { SelectItem } from '../SelectComponents/SelectItem/SelectItem';
@@ -49,6 +49,7 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
     name,
     groups = [],
     getItemLabel,
+    labelForEmptyItems = defaultLabelForEmptyItems,
     getItemKey,
     getItemGroupKey,
     getItemDisabled,
@@ -73,6 +74,7 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
     inputRef,
     handleInputClick,
     notFound,
+    hasItems,
   } = useSelect<ITEM, GROUP, false>({
     items,
     groups,
@@ -187,6 +189,8 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
         getGroupLabel={getGroupLabel}
         visibleItems={visibleItems}
         notFound={notFound}
+        labelForEmptyItems={labelForEmptyItems}
+        hasItems={hasItems}
         style={typeof style?.zIndex === 'number' ? { zIndex: style.zIndex + 1 } : undefined}
       />
     </SelectContainer>
