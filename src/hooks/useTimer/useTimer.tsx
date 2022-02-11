@@ -105,7 +105,12 @@ export function useTimer(config?: Partial<Config>): Values {
     createInterval();
   };
 
-  useEffect(cancelInterval, []);
+  useEffect(() => {
+    cancelInterval();
+    return () => {
+      intervalRef.current && clearInterval(intervalRef.current);
+    };
+  }, []);
   useEffect(timerOver, [timerType, time, endTime]);
 
   return { isRunning, pause, reset, start, time };
