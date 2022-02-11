@@ -1,34 +1,23 @@
 import * as React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import { DateTime, dateTimePropView } from '../DateTimeCanary';
-import { cnDateTimeCell } from '../DateTimeCell/DateTimeCell';
-import { cnDateTimeItem } from '../DateTimeItem/DateTimeItem';
-import { cnDateTimeLabel } from '../DateTimeLabel/DateTimeLabel';
+
+import {
+  getDateTimeCell,
+  getDateTimeItem,
+  getDateTimeLabel,
+  getDateTimeSliderButtonNext,
+  getDateTimeSliderButtonPrev,
+  getDateTimeSliderLabel,
+  getDateTimeTooglerButtonNext,
+  getDateTimeTooglerButtonPrev,
+  getDateTimeViewBookLabels,
+  getDateTimeViewSliderLabels,
+  testId,
+} from './helpers';
 
 type DateTimeProps = React.ComponentProps<typeof DateTime>;
-
-const testId = 'DateTime_type_month';
-
-const getRender = () => screen.getByTestId(testId);
-const getDateTimeItems = () => getRender().querySelectorAll(`.${cnDateTimeItem()}`);
-const getDateTimeCells = () => getRender().querySelectorAll(`.${cnDateTimeCell()}`);
-const getDateTimeLabel = () => getRender().querySelector(`.${cnDateTimeLabel()}`);
-const getDateTimeViewBookLabels = () => getRender().querySelectorAll(`.${cnDateTimeLabel()}`);
-const getDateTimeSliderLabel = () =>
-  getRender().querySelector(`.DateTimeSlider-ParentLabel_position_1`);
-const getDateTimeViewSliderLabels = () => getRender().querySelectorAll(`.DateTimeMixLayout-Label`);
-const getDateTimeTooglerButtonNext = () =>
-  getRender().querySelector(`.DateTimeToggler-Button_direction_next`) as Element;
-const getDateTimeTooglerButtonPrev = () =>
-  getRender().querySelector(`.DateTimeToggler-Button_direction_prev`) as Element;
-const getDateTimeSliderButtonNext = () =>
-  getRender().querySelector(`.DateTimeSlider-Button_direction_next`) as Element;
-const getDateTimeSliderButtonPrev = () =>
-  getRender().querySelector(`.DateTimeSlider-Button_direction_prev`) as Element;
-
-const getDateTimeItem = (item = 0) => getDateTimeItems()[item];
-const getDateTimeCell = (item = 0) => getDateTimeCells()[item];
 
 const renderComponent = (props: DateTimeProps = {}) => {
   return render(<DateTime {...props} type="month" data-testid={testId} />);

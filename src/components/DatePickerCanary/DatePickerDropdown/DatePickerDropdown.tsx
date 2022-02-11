@@ -4,8 +4,11 @@ import React, { forwardRef, useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
+import {
+  animateTimeout,
+  cnMixDropdownAnimateForCssTransition,
+} from '../../../mixs/MixDropdownAnimate/MixDropdownAnimate';
 import { cn } from '../../../utils/bem';
-import { cnForCssTransition } from '../../../utils/cnForCssTransition';
 import { DateRange } from '../../../utils/types/Date';
 import { PropsWithHTMLAttributesAndRef } from '../../../utils/types/PropsWithHTMLAttributes';
 import {
@@ -51,7 +54,6 @@ export type DatePickerDropdownProps = PropsWithHTMLAttributesAndRef<
 type DatePickerDropdownComponent = (props: DatePickerDropdownProps) => React.ReactElement | null;
 
 const cnDatePickerDropdown = cn('DatePickerDropdown');
-const cnDatePickerDropdownCssTransition = cnForCssTransition(cnDatePickerDropdown);
 
 export const DatePickerDropdown: DatePickerDropdownComponent = forwardRef((props, ref) => {
   const {
@@ -70,8 +72,8 @@ export const DatePickerDropdown: DatePickerDropdownComponent = forwardRef((props
       in={isOpen}
       unmountOnExit
       appear
-      classNames={cnDatePickerDropdownCssTransition}
-      timeout={200}
+      classNames={cnMixDropdownAnimateForCssTransition}
+      timeout={animateTimeout}
       nodeRef={rootRef}
     >
       <Popover
@@ -82,6 +84,7 @@ export const DatePickerDropdown: DatePickerDropdownComponent = forwardRef((props
         spareDirection="downStartLeft"
         possibleDirections={['downStartLeft', 'upStartLeft', 'downStartRight', 'upStartRight']}
         style={{ zIndex }}
+        role="listbox"
       >
         <DateTime {...otherProps} />
       </Popover>
