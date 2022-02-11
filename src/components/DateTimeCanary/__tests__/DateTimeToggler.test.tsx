@@ -1,19 +1,17 @@
 import * as React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
-import { cnDateTimeToggler, DateTimeToggler } from '../DateTimeToggler/DateTimeToggler';
+import { DateTimeToggler } from '../DateTimeToggler/DateTimeToggler';
+
+import {
+  getDateTimeTogglerLabel,
+  getDateTimeTooglerButtonNext,
+  getDateTimeTooglerButtonPrev,
+  getRender,
+  testId,
+} from './helpers';
 
 type DateTimeTogglerProps = React.ComponentProps<typeof DateTimeToggler>;
-
-const testId = 'DateTimeToggler';
-
-const getRender = () => screen.getByTestId(testId);
-const getDateTimeTogglerLabel = () =>
-  getRender().querySelector(`.${cnDateTimeToggler('Label')}`) as Element;
-const getDateTimeTogglerButtonDirectionPrev = () =>
-  getRender().querySelector(`.DateTimeToggler-Button_direction_prev`) as Element;
-const getDateTimeTogglerButtonDirectioNext = () =>
-  getRender().querySelector(`.DateTimeToggler-Button_direction_next`) as Element;
 
 const renderComponent = (props: DateTimeTogglerProps) => {
   return render(<DateTimeToggler {...props} data-testid={testId} />);
@@ -35,7 +33,7 @@ describe('Компонент DateTimeToggler', () => {
   });
 
   describe('проверка label', () => {
-    it(`Дополнительный className присваевается`, () => {
+    it(`label отображаеся`, () => {
       const label = 'label';
 
       renderComponent({ label });
@@ -45,7 +43,7 @@ describe('Компонент DateTimeToggler', () => {
   });
 
   describe('проверка onLabelClick', () => {
-    it(`Дополнительный className присваевается`, () => {
+    it(`onLabelClickорабатывает`, () => {
       const onLabelClick = jest.fn();
       const label = 'label';
 
@@ -60,30 +58,26 @@ describe('Компонент DateTimeToggler', () => {
   });
 
   describe('проверка prevOnClick', () => {
-    it(`Дополнительный className присваевается`, () => {
+    it(`prevOnClick орабатывает`, () => {
       const prevOnClick = jest.fn();
       const label = 'label';
 
       renderComponent({ prevOnClick, label });
 
-      const DateTimeTogglerButtonDirectionPrev = getDateTimeTogglerButtonDirectionPrev();
-
-      fireEvent.click(DateTimeTogglerButtonDirectionPrev);
+      fireEvent.click(getDateTimeTooglerButtonPrev());
 
       expect(prevOnClick).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('проверка nextOnClick', () => {
-    it(`Дополнительный className присваевается`, () => {
+    it(`nextOnClick орабатывает`, () => {
       const nextOnClick = jest.fn();
       const label = 'label';
 
       renderComponent({ nextOnClick, label });
 
-      const DateTimeTogglerButtonDirectionNext = getDateTimeTogglerButtonDirectioNext();
-
-      fireEvent.click(DateTimeTogglerButtonDirectionNext);
+      fireEvent.click(getDateTimeTooglerButtonNext());
 
       expect(nextOnClick).toHaveBeenCalledTimes(1);
     });

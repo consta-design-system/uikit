@@ -68,7 +68,7 @@ export const DatePickerTypeDate: DatePickerTypeComponent<'date'> = forwardRef((p
 
   const handleClose = () => {
     setCalendarVisible.off();
-    setCurrentVisibleDate(undefined);
+    setCurrentVisibleDate(props.value ? undefined : currentVisibleDateProp);
   };
 
   useClickOutside({

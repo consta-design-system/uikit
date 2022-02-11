@@ -80,15 +80,13 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> = forw
       }
     }, [props.value]);
 
-    const handleClose = () => {
-      setCalendarVisible.off();
-      setCurrentVisibleDate(undefined);
-    };
-
     useClickOutside({
       isActive: calendarVisible,
       ignoreClicksInsideRefs: [fieldRef, calendarRef],
-      handler: handleClose,
+      handler: () => {
+        setCalendarVisible.off();
+        setCurrentVisibleDate(props.value ? undefined : currentVisibleDateProp);
+      },
     });
 
     return (

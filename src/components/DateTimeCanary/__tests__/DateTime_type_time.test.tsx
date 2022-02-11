@@ -1,15 +1,9 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import { DateTime, DateTimeProps } from '../DateTimeCanary';
-import { cnDateTimeItem } from '../DateTimeItem/DateTimeItem';
 
-const testId = 'DateTime_type_time';
-
-const getRender = () => screen.getByTestId(testId);
-const getDateTimeItems = () => getRender().querySelectorAll(`.${cnDateTimeItem()}`);
-const getDateTimeItemsSelected = () => getRender().querySelectorAll(`.DateTimeItem_selected`);
-const getDateTimeItem = (item = 0) => getDateTimeItems()[item];
+import { getDateTimeItem, getDateTimeItemsSelected, testId } from './helpers';
 
 const renderComponent = (props: DateTimeProps<'time'> = {}) => {
   return render(<DateTime {...props} type="time" data-testid={testId} />);

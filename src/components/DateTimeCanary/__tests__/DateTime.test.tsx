@@ -1,14 +1,11 @@
 import * as React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import { DateTime, dateTimePropType, dateTimePropView } from '../DateTimeCanary';
 
+import { getAdditionalControls, getRender, testId } from './helpers';
+
 type DateTimeProps = React.ComponentProps<typeof DateTime>;
-
-const testId = 'DateTime';
-
-const getRender = () => screen.getByTestId(testId);
-const getAdditionalControls = () => getRender().querySelector(`.DateTimeAdditionalControls`);
 
 const renderComponent = (props: DateTimeProps = {}) => {
   return render(<DateTime {...props} data-testid={testId} />);

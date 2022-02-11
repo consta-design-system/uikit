@@ -3,6 +3,7 @@ import addMonths from 'date-fns/addMonths';
 import startOfMonth from 'date-fns/startOfMonth';
 
 import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
+import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
 import {
   DatePickerDropdown,
@@ -62,7 +63,7 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = fo
       }
     };
 
-    const [calendarVisible, setCalendarVisible] = useState<boolean>(false);
+    const [calendarVisible, setCalendarVisible] = useFlag(false);
 
     const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate(
       currentVisibleDateProp,
@@ -81,14 +82,14 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = fo
 
     const startFieldOnFocusHandler = (e: React.FocusEvent<HTMLElement>) => {
       setFieldFocused('start');
-      setCalendarVisible(true);
+      setCalendarVisible.on();
       onFocus && onFocus(e);
       startFieldOnFocus && startFieldOnFocus(e);
     };
 
     const endFieldOnFocusHandler = (e: React.FocusEvent<HTMLElement>) => {
       setFieldFocused('end');
-      setCalendarVisible(true);
+      setCalendarVisible.on();
       onFocus && onFocus(e);
       endFieldOnFocus && endFieldOnFocus(e);
     };
@@ -157,7 +158,8 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = fo
       ignoreClicksInsideRefs: [startFieldRef, endFieldRef, calendarRef],
       handler: () => {
         setFieldFocused(false);
-        setCalendarVisible(false);
+        setCalendarVisible.off();
+        setCurrentVisibleDate(props.value ? undefined : currentVisibleDateProp);
       },
     });
 
