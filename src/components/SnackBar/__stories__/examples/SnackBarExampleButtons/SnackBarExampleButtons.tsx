@@ -9,14 +9,14 @@ import { SnackBar } from '../../../SnackBar';
 const cnSnackBarExampleButtons = cn('SnackBarExampleButtons');
 
 type Item = {
-  key: number;
+  key: string;
   message: string;
   buttons?: string[];
 };
 
 const items: Item[] = [
   {
-    key: 1,
+    key: '1',
     message: 'С этим сообщением нельзя не согласиться',
     buttons: ['Согласен', 'Не согласен'],
   },

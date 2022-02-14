@@ -3,21 +3,19 @@ import { act, fireEvent, render, screen } from '@testing-library/react';
 
 import { cnIcon } from '../../../icons/Icon/Icon';
 import { IconAdd } from '../../../icons/IconAdd/IconAdd';
-import { cnSnackBar, SnackBar } from '../SnackBar';
+import { cnSnackBar, SnackBar, SnackBarItemDefault } from '../SnackBar';
 import { cnSnackBarItem } from '../SnackBarItem/SnackBarItem';
-import { snackBarItemStatus } from '../types';
-
-type SnackBarProps = React.ComponentProps<typeof SnackBar>;
+import { snackBarItemStatus, SnackBarProps } from '../types';
 
 const testId = cnSnackBar();
 
-const items: SnackBarProps['items'] = [
+const items: SnackBarItemDefault[] = [
   {
-    key: 1,
+    key: '1',
   },
 ];
 
-const renderComponent = (props: SnackBarProps = { items }) => {
+const renderComponent = (props: SnackBarProps<SnackBarItemDefault> = { items }) => {
   return render(<SnackBar data-testid={testId} {...props} />);
 };
 
@@ -28,15 +26,15 @@ describe('Компонент SnackBar', () => {
   describe('проверка items', () => {
     describe('массив рендерится верно', () => {
       it(`количество совпадает с передоваемым`, () => {
-        const items: SnackBarProps['items'] = [
+        const items: SnackBarItemDefault[] = [
           {
-            key: 1,
+            key: '1',
           },
           {
-            key: 2,
+            key: '2',
           },
           {
-            key: 3,
+            key: '3',
           },
         ];
 
@@ -52,7 +50,7 @@ describe('Компонент SnackBar', () => {
         const messageText = 'Сообщение';
         const items: SnackBarProps['items'] = [
           {
-            key: 1,
+            key: '1',
             message: messageText,
           },
         ];
@@ -70,7 +68,7 @@ describe('Компонент SnackBar', () => {
         it(`присваивает класс для status=${status} `, () => {
           const items: SnackBarProps['items'] = [
             {
-              key: 1,
+              key: '1',
               status,
             },
           ];
@@ -87,7 +85,7 @@ describe('Компонент SnackBar', () => {
       it('отображает иконку', () => {
         const items: SnackBarProps['items'] = [
           {
-            key: 1,
+            key: '1',
             icon: IconAdd,
           },
         ];
@@ -105,7 +103,7 @@ describe('Компонент SnackBar', () => {
       const handleClick = jest.fn();
       const items: SnackBarProps['items'] = [
         {
-          key: 1,
+          key: '1',
           actions: [
             {
               label: actionLabel,
@@ -137,7 +135,7 @@ describe('Компонент SnackBar', () => {
       const handleClick = jest.fn();
       const items: SnackBarProps['items'] = [
         {
-          key: 1,
+          key: '1',
           onClose: handleClick,
         },
       ];
@@ -169,7 +167,7 @@ describe('Компонент SnackBar', () => {
         const handleClick = jest.fn();
         const items: SnackBarProps['items'] = [
           {
-            key: 1,
+            key: '1',
             autoClose: 1,
             onClose: handleClick,
           },
@@ -192,7 +190,7 @@ describe('Компонент SnackBar', () => {
         const handleClick = jest.fn();
         const items: SnackBarProps['items'] = [
           {
-            key: 1,
+            key: '1',
             autoClose: true,
             onClose: handleClick,
           },
@@ -216,7 +214,7 @@ describe('Компонент SnackBar', () => {
         const handleAutoClose = jest.fn();
         const items: SnackBarProps['items'] = [
           {
-            key: 1,
+            key: '1',
             autoClose: true,
             onClose: handleClose,
             onAutoClose: handleAutoClose,

@@ -18,7 +18,6 @@ export type SnackBarActionButtonProps = {
 
 export type SnackBarItemProps = PropsWithHTMLAttributesAndRef<
   Omit<SnackBarItemDefault, 'onClose' | 'onAutoClose'> & {
-    className?: string;
     onClose?: () => void;
     onAutoClose?: () => void;
   },
@@ -64,7 +63,10 @@ export type SnackBarProps<ITEM = SnackBarItemDefault> = PropsWithHTMLAttributes<
     children?: never;
   } & Mappers<ITEM>,
   HTMLDivElement
->;
+> &
+  (ITEM extends { key: SnackBarItemDefault['key'] }
+    ? {}
+    : { getItemKey: SnackBarPropGetItemKey<ITEM> });
 
 export type SnackBarTimerPropOnMount = (object: { pause: () => void; start: () => void }) => void;
 
@@ -76,9 +78,7 @@ export type SnackBarTimerProps = {
   className?: string;
 };
 
-export type SnackBarItemComponent = <ITEM = SnackBarItemDefault>(
-  props: SnackBarItemProps,
-) => React.ReactElement | null;
+export type SnackBarItemComponent = (props: SnackBarItemProps) => React.ReactElement | null;
 
 export type GetItem = <ITEM>(
   item: ITEM,

@@ -3,9 +3,8 @@ import { render } from '@testing-library/react';
 import { act, renderHook } from '@testing-library/react-hooks';
 
 import { SnackBar, SnackBarItemDefault } from '../../../SnackBar/SnackBar';
+import { SnackBarProps } from '../../../SnackBar/types';
 import { useSnackBarEventsHandler } from '../useSnackBarEventsHandler';
-
-type Props = React.ComponentProps<typeof SnackBar>;
 
 const testId = 'SnackBar';
 const items: SnackBarItemDefault[] = [
@@ -20,8 +19,8 @@ const defaultProps = {
 };
 
 const eventHandler = jest.fn();
-const renderComponent = (props: Props = defaultProps) => {
-  return render(<SnackBar data-testid={testId} {...props} />);
+const renderComponent = (props: SnackBarProps<SnackBarItemDefault> = defaultProps) => {
+  return render(<SnackBar data-testid={testId} {...props} getItemKey={(item) => item.key} />);
 };
 
 describe('useSnackBarEventsHandler', () => {

@@ -9,24 +9,24 @@ import { SnackBar } from '../../../SnackBar';
 const cnSnackBarExampleStatus = cn('SnackBarExampleStatus');
 
 type Item = {
-  key: number;
+  key: string;
   message?: string;
   criticality?: number;
 };
 
 const items: Item[] = [
   {
-    key: 1,
+    key: '1',
     message: 'Сообщение — normal',
     criticality: 1,
   },
   {
-    key: 2,
+    key: '2',
     message: 'Ошибка — alert',
     criticality: 3,
   },
   {
-    key: 3,
+    key: '3',
     message: 'Предупреждение — warning',
     criticality: 2,
   },

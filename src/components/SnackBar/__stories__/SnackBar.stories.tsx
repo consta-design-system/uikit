@@ -18,13 +18,13 @@ import {
   EventInterceptorProvider,
 } from '../../EventInterceptor/EventInterceptor';
 import { Text } from '../../Text/Text';
-import { Item, SnackBar } from '../SnackBar';
+import { SnackBar, SnackBarItemDefault } from '../SnackBar';
 import { snackBarItemShowProgressProp, SnackBarItemStatus } from '../types';
 
 import mdx from './SnackBar.docs.mdx';
 
-type State = Item[];
-type Action = { type: 'add'; item: Item } | { type: 'remove'; key: number | string };
+type State = SnackBarItemDefault[];
+type Action = { type: 'add'; item: SnackBarItemDefault } | { type: 'remove'; key: number | string };
 
 const defaultKnobs = () => ({
   withIcon: boolean('withIcon', false),
@@ -78,7 +78,7 @@ export function Playground() {
     ) : (
       text
     );
-    const item: Item = {
+    const item: SnackBarItemDefault = {
       key: key.toString(),
       message,
       status,

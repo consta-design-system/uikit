@@ -15,7 +15,7 @@ import { SnackBarItemShowProgressProp, SnackBarItemStatus } from '../../../types
 const cnSnackBarExampleTimer = cn('SnackBarExampleTimer');
 
 type Item = {
-  key: number;
+  key: string;
   message: string;
   icon?: IconComponent;
   buttons?: string[];
@@ -58,7 +58,7 @@ export const SnackBarExampleTimer: React.FC = () => {
   ) => () => {
     const key = items.length + 1;
     const item: Item = {
-      key,
+      key: key.toString(),
       message: `Сейчас эта штука закроется ${key}`,
       status,
       icon: getItemIconByStatus(status),
