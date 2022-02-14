@@ -135,7 +135,7 @@ export function TextFieldRender<TYPE extends string>(
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     const flag = getIncrementFlag(e);
-    if (typeof flag === 'boolean' && !disabled) {
+    if (type === 'number' && typeof flag === 'boolean' && !disabled) {
       e.preventDefault();
       onChange?.({
         e,
