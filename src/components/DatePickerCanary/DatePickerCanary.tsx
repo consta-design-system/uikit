@@ -6,6 +6,7 @@ import { getByMap } from '../../utils/getByMap';
 import { DatePickerTypeDate } from './DatePickerTypeDate/DatePickerTypeDate';
 import { DatePickerTypeDateRange } from './DatePickerTypeDateRange/DatePickerTypeDateRange';
 import { DatePickerTypeDateTime } from './DatePickerTypeDateTime/DatePickerTypeDateTime';
+import { DatePickerTypeDateTimeRange } from './DatePickerTypeDateTimeRange/DatePickerTypeDateTimeRange';
 import {
   DatePickerComponent,
   DatePickerPropType,
@@ -17,6 +18,7 @@ const typeMap: Record<DatePickerPropType, DatePickerTypeComponent<DatePickerProp
   'date': DatePickerTypeDate,
   'date-range': DatePickerTypeDateRange,
   'date-time': DatePickerTypeDateTime,
+  'date-time-range': DatePickerTypeDateTimeRange,
 };
 
 export const DatePicker: DatePickerComponent = forwardRef((props, ref) => {

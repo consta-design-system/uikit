@@ -9,7 +9,7 @@ export const dateTimePropType = ['date', 'month', 'year', 'time', 'date-time'] a
 export type DateTimePropType = typeof dateTimePropType[number];
 export const dateTimePropTypeDefault = dateTimePropType[0];
 
-export type СapableRangeType = 'date' | 'month' | 'year';
+export type СapableRangeType = 'date' | 'month' | 'year' | 'date-time';
 
 export type DateTimePropValue<TYPE> = TYPE extends СapableRangeType ? Date | DateRange : Date;
 
@@ -35,6 +35,8 @@ export type DateTimePropLocale = Locale & LocaleWords;
 export const moveTypes = ['year', 'month', 'day', 'time'] as const;
 export type MoveType = typeof moveTypes[number];
 
+type DateTimePropTimeFor<TYPE> = TYPE extends 'date-time' ? 'start' | 'end' : never;
+
 export type DateTimeProps<TYPE extends DateTimePropType = 'date'> = PropsWithHTMLAttributesAndRef<
   {
     currentVisibleDate?: Date;
@@ -54,6 +56,7 @@ export type DateTimeProps<TYPE extends DateTimePropType = 'date'> = PropsWithHTM
     multiplicityHours?: number;
     onMove?: (type: MoveType) => void;
     renderAdditionalControls?: DateTimeAdditionalControlRenderProp;
+    timeFor?: DateTimePropTimeFor<TYPE>;
   },
   HTMLDivElement
 >;

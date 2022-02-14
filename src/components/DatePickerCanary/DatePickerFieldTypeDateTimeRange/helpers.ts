@@ -1,17 +1,17 @@
 import { IconComponent } from '../../../icons/Icon/Icon';
 import { DateRange } from '../../../utils/types/Date';
-import { DatePickerFieldTypeDateProps } from '../DatePickerFieldTypeDate/helpers';
+import { DatePickerFieldTypeDateTimeProps } from '../DatePickerFieldTypeDateTime/helpers';
 
-type DatePickerFieldTypeDateRangePropOnChange = (props: {
+type DatePickerFieldTypeDateTimeRangePropOnChange = (props: {
   e: Event;
   value: DateRange | null;
 }) => void;
 
-export type DatePickerFieldTypeDateRangeProps = Omit<
-  DatePickerFieldTypeDateProps,
+export type DatePickerFieldTypeDateTimeRangeProps = Omit<
+  DatePickerFieldTypeDateTimeProps,
   'onChange' | 'value' | 'inputRef' | 'leftSide' | 'rightSide' | 'id' | 'onFocus' | 'onBlur'
 > & {
-  onChange?: DatePickerFieldTypeDateRangePropOnChange;
+  onChange?: DatePickerFieldTypeDateTimeRangePropOnChange;
   value?: DateRange | null;
   startFieldInputRef?: React.Ref<HTMLInputElement>;
   endFieldInputRef?: React.Ref<HTMLInputElement>;

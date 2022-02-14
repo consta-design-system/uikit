@@ -24,6 +24,7 @@ export const DateTimeTypeDateTime: DateTimeTypeComponent<'date-time'> = forwardR
     currentVisibleDate,
     value,
     onChange,
+    onChangeRange,
     minDate,
     maxDate,
     events,
@@ -34,6 +35,7 @@ export const DateTimeTypeDateTime: DateTimeTypeComponent<'date-time'> = forwardR
     multiplicityHours,
     style,
     renderAdditionalControls,
+    timeFor = 'start',
     ...otherProps
   } = props;
 
@@ -42,7 +44,12 @@ export const DateTimeTypeDateTime: DateTimeTypeComponent<'date-time'> = forwardR
     '--root-padding-left': '0px',
   });
 
-  const [onDateChange, onTimeChange] = useOnChange(onChange, value);
+  const [onDateChange, onDateChangeRange, onTimeChange, valueTime] = useOnChange(
+    onChange,
+    onChangeRange,
+    value,
+    timeFor,
+  );
 
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -78,6 +85,7 @@ export const DateTimeTypeDateTime: DateTimeTypeComponent<'date-time'> = forwardR
           currentVisibleDate={currentVisibleDate}
           value={value}
           onChange={onDateChange}
+          onChangeRange={onDateChangeRange}
           minDate={minDate}
           maxDate={maxDate}
           events={events}
@@ -88,7 +96,7 @@ export const DateTimeTypeDateTime: DateTimeTypeComponent<'date-time'> = forwardR
         {withTime && (
           <DateTimeTypeTime
             className={cnDateTimeTypeDateTime('Time')}
-            value={value}
+            value={valueTime}
             onChange={onTimeChange}
             minDate={minDate}
             maxDate={maxDate}

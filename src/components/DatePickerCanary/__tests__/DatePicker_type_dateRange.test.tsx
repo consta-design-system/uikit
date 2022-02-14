@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { act, fireEvent, render } from '@testing-library/react';
 
-import { DatePicker } from '../DatePickerCanary';
+import { DatePicker, DatePickerProps } from '../DatePickerCanary';
 
 import {
   animateDelay,
@@ -12,9 +12,7 @@ import {
   testId,
 } from './helpers';
 
-type DateTimeProps = React.ComponentProps<typeof DatePicker>;
-
-const renderComponent = (props: DateTimeProps = {}) => {
+const renderComponent = (props: DatePickerProps<'date-range'> = {}) => {
   return render(<DatePicker {...props} type="date-range" data-testid={testId} />);
 };
 

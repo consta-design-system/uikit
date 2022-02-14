@@ -10,6 +10,7 @@ import {
   DatePickerExampleTypeDate,
   DatePickerExampleTypeDateRange,
   DatePickerExampleTypeDateTime,
+  DatePickerExampleTypeDateTimeRange,
 } from './examples/DatePickerExampleType/DatePickerExampleType';
 import { DatePickerExampleMulti } from './examples/DatePickerExampleMulti/DatePickerExampleMulti';
 
@@ -67,6 +68,7 @@ export const DatePickerExampleValue = () => {
 - `date` — позволяет выбрать одну дату (показывает одно поле ввода),
 - `date-range` — позволяет выбрать период: дату начала и дату конца (показывает два поля ввода).
 - `date-time` — позволяет выбрать одну дату cо временем (показывает одно поле ввода),
+- `date-time-range` — позволяет выбрать период cо временем (показывает два поля ввода),
 
 ```tsx
 const DatePickerExampleTypeDate = () => {
@@ -94,6 +96,19 @@ const DatePickerExampleTypeDateTime = () => {
 ```
 
 <DatePickerExampleTypeDateTime />
+
+```tsx
+export const DatePickerExampleTypeDateTimeRange = () => {
+  const [value, setValue] = useState<[Date?, Date?] | null>(null);
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <DatePicker type="date-time-range" value={value} onChange={({ value }) => setValue(value)} />
+    </StoryBookExample>
+  );
+};
+```
+
+<DatePickerExampleTypeDateTimeRange />
 
 ## Формат даты
 

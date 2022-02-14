@@ -123,10 +123,7 @@ export function Playground() {
         view={view}
         disabled={disabled}
         size={size}
-        onChange={({ value }) => {
-          setValue(value);
-          console.log(value);
-        }}
+        onChange={({ value }) => setValue(value)}
         rightSide={icon}
         events={events}
         locale={getByMap(localeMap, locale)}
@@ -139,7 +136,6 @@ export function Playground() {
           startFieldRightSide: icon,
         })}
         renderAdditionalControls={withAdditionalControls ? additionalControls : undefined}
-        currentVisibleDate={new Date(1970, 0)}
       />
     </div>
   );

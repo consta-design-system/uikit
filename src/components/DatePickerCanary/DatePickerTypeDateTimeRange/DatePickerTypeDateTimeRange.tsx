@@ -1,5 +1,4 @@
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
-import addMonths from 'date-fns/addMonths';
 import startOfMonth from 'date-fns/startOfMonth';
 
 import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
@@ -9,11 +8,11 @@ import {
   DatePickerDropdown,
   DatePickerDropdownPropOnChange,
 } from '../DatePickerDropdown/DatePickerDropdown';
-import { DatePickerFieldTypeDateRange } from '../DatePickerFieldTypeDateRange/DatePickerFieldTypeDateRange';
+import { DatePickerFieldTypeDateTimeRange } from '../DatePickerFieldTypeDateTimeRange/DatePickerFieldTypeDateTimeRange';
 import { DatePickerTypeComponent, normalizeRangeValue } from '../helpers';
 import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 
-export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = forwardRef(
+export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-range'> = forwardRef(
   (props, ref) => {
     const {
       events,
@@ -94,20 +93,9 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = fo
 
     // эфект для того чтобы календарь переключался при вводе с клавиатуры
     useEffect(() => {
-      if (props.value?.[0] && props.dateTimeView === 'classic' && startFocused) {
+      if (props.value?.[0] && startFocused) {
         const newVisibleDate = startOfMonth(props.value[0]);
         if (newVisibleDate.getTime() !== currentVisibleDate?.getTime()) {
-          setCurrentVisibleDate(newVisibleDate);
-        }
-        return;
-      }
-      if (props.value?.[0] && props.dateTimeView !== 'classic' && startFocused) {
-        const newVisibleDate = startOfMonth(props.value[0]);
-        if (
-          newVisibleDate.getTime() !== currentVisibleDate?.getTime() &&
-          newVisibleDate.getTime() !==
-            (currentVisibleDate && addMonths(currentVisibleDate, 1).getTime())
-        ) {
           setCurrentVisibleDate(newVisibleDate);
         }
         return;
@@ -118,21 +106,10 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = fo
     }, [props.value?.[0]?.getTime(), calendarVisible, startFocused]);
 
     useEffect(() => {
-      if (props.value?.[1] && props.dateTimeView === 'classic' && endFocused) {
+      if (props.value?.[1] && endFocused) {
         const newVisibleDate = startOfMonth(props.value[1]);
         if (newVisibleDate.getTime() !== currentVisibleDate?.getTime()) {
           setCurrentVisibleDate(newVisibleDate);
-        }
-        return;
-      }
-      if (props.value?.[1] && props.dateTimeView !== 'classic' && endFocused) {
-        const newVisibleDate = startOfMonth(props.value[1]);
-        if (
-          newVisibleDate.getTime() !== currentVisibleDate?.getTime() &&
-          newVisibleDate.getTime() !==
-            (currentVisibleDate && addMonths(currentVisibleDate, 1).getTime())
-        ) {
-          setCurrentVisibleDate(addMonths(newVisibleDate, -1));
         }
         return;
       }
@@ -152,7 +129,7 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = fo
 
     return (
       <>
-        <DatePickerFieldTypeDateRange
+        <DatePickerFieldTypeDateTimeRange
           {...fieldProps}
           style={style}
           ref={ref}
@@ -172,13 +149,14 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = fo
           endFocused={endFocused}
         />
         <DatePickerDropdown
-          type="date"
+          type="date-time"
           ref={calendarRef}
           anchorRef={startFieldRef}
           isOpen={calendarVisible}
           onChangeCurrentVisibleDate={setCurrentVisibleDate}
           currentVisibleDate={currentVisibleDate}
           value={props.value || undefined}
+          timeFor={fieldFocused || undefined}
           view={dateTimeView}
           events={events}
           locale={locale}
