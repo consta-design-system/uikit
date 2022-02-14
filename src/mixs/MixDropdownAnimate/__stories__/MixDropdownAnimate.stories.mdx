@@ -1,0 +1,46 @@
+<Meta title="Mixins|MixDropdownAnimate" id="MixDropdownAnimate" />
+
+# MixDropdownAnimate
+
+```tsx
+import {
+  cnMixDropdownAnimateForCssTransition,
+  animateTimeout,
+} from '@consta/uikit/MixDropdownAnimate';
+```
+
+Миксин `MixDropdownAnimate` добавляет анимацию к выпадающим элементам. Вы можете его использовать, если создаёте новый компонент, в котором есть выпадающий элемент (например, [ContextMenu](?path=/docs/components-contextmenu--playground)).
+
+Миксин можно применить к компоненту [CSSTransition](https://reactcommunity.org/react-transition-group/css-transition):
+
+- `cnMixDropdownAnimateForCssTransition` — в качестве значения для `classNames`,
+- `animateTimeout` — в качестве значения для `timeout`.
+
+## Пример
+
+```tsx
+import {
+  cnMixDropdownAnimateForCssTransition,
+  animateTimeout,
+} from '@consta/uikit/MixDropdownAnimate';
+
+return (
+  <NewComponent
+  // component props
+  >
+    <CSSTransition
+      in={open}
+      classNames={cnMixDropdownAnimateForCssTransition}
+      unmountOnExit
+      timeout={animateTimeout}
+      nodeRef={menuRef}
+    >
+      <ContextMenu
+        ref={menuRef}
+        items={items}
+        // menu props
+      />
+    </CSSTransition>
+  </NewComponent>
+);
+```
