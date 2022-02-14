@@ -186,7 +186,7 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
     return flag;
   }, [visibleItems]);
 
-  const hasItems = useMemo(() => items.length !== 0, [items.length]);
+  const hasItems = items.length !== 0;
 
   const getSelectedOptionIndex = (): number => {
     let index = 0;
