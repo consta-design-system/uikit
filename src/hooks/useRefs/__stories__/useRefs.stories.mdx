@@ -1,0 +1,20 @@
+<Meta title="hooks|useRefs" id="useRefs" />
+
+# useRefs
+
+```tsx
+import { useRefs } from '@consta/uikit/useRefs';
+```
+
+Этот хук создаёт массив ссылок (`ref`).
+
+## Свойства
+
+| Параметры | Тип         | По умолчанию | Описание                                                         |
+| --------- | ----------- | ------------ | ---------------------------------------------------------------- |
+| `length`  | `number`    | -            | Длина массива — количество ссылок (`ref`), которые нужно создать |
+| `deps`    | `unknown[]` | -            | Условия, при которых нужно обновить ссылки                       |
+
+## Пример
+
+Пример использования хука `useRefs` можно посмотреть в коде хука [useHideElementsInLine](https://github.com/consta-design-system/uikit/blob/master/src/hooks/useHideElementsInLine/useHideElementsInLine.ts).
