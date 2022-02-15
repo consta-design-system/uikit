@@ -31,7 +31,7 @@ export const snackBarItemStatusDefault: SnackBarItemStatus = snackBarItemStatus[
 export const snackBarItemShowProgressProp = ['timer', 'line'] as const;
 export type SnackBarItemShowProgressProp = typeof snackBarItemShowProgressProp[number];
 
-export type SnackBarPropGetItemKey<ITEM> = (item: ITEM) => string;
+export type SnackBarPropGetItemKey<ITEM> = (item: ITEM) => string | number;
 export type SnackBarPropGetItemMessage<ITEM> = (item: ITEM) => React.ReactNode | undefined;
 export type SnackBarPropGetItemStatus<ITEM> = (item: ITEM) => SnackBarItemStatus | undefined;
 export type SnackBarPropGetItemAutoClose<ITEM> = (item: ITEM) => boolean | number | undefined;

@@ -10,9 +10,8 @@ import { cnForCssTransition } from '../../utils/cnForCssTransition';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 
 import { cnSnackBarItem, SnackBarItem } from './SnackBarItem/SnackBarItem';
-import { withDefaultGetters } from './helper';
+import { getItem, withDefaultGetters } from './helper';
 import {
-  GetItem,
   SnackBarItemShowProgressProp,
   SnackBarItemStatus,
   SnackBarPropItemAction,
@@ -22,7 +21,7 @@ import {
 export const cnSnackBar = cn('SnackBar');
 
 export type SnackBarItemDefault = {
-  key: string;
+  key: string | number;
   message?: React.ReactNode;
   status?: SnackBarItemStatus;
   autoClose?: boolean | number;
@@ -41,41 +40,6 @@ export type Item = Omit<SnackBarItemDefault, 'key'> & {
 };
 
 const cssTransitionClassNames = cnForCssTransition(cnSnackBar, 'Item');
-
-const getItem: GetItem = (item, params) => {
-  const {
-    getItemKey,
-    getItemActions,
-    getItemAutoClose,
-    getItemIcon,
-    getItemMessage,
-    getItemOnAutoClose,
-    getItemOnClose,
-    getItemShowProgress,
-    getItemStatus,
-  } = params;
-  return {
-    key: getItemKey(item),
-    message: getItemMessage(item),
-    status: getItemStatus(item),
-    autoClose: getItemAutoClose(item),
-    showProgress: getItemShowProgress(item),
-    icon: getItemIcon(item),
-    actions: getItemActions(item),
-    onClose:
-      typeof getItemOnClose(item) === 'function'
-        ? () => {
-            getItemOnClose(item)?.(item);
-          }
-        : undefined,
-    onAutoClose:
-      typeof getItemOnAutoClose(item) === 'function'
-        ? () => {
-            getItemOnAutoClose(item)?.(item);
-          }
-        : undefined,
-  };
-};
 
 export function SnackBar<ITEM>(props: SnackBarProps<ITEM>) {
   const {

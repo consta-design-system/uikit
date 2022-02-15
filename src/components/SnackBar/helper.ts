@@ -1,5 +1,6 @@
 import { SnackBarItemDefault } from './SnackBar';
 import {
+  GetItem,
   Mappers,
   SnackBarPropGetItemActions,
   SnackBarPropGetItemAutoClose,
@@ -42,4 +43,39 @@ export const withDefaultGetters = <ITEM>(props: SnackBarProps<ITEM>) => {
     getItemOnClose: props.getItemOnClose || defaultGetItemOnClose,
     getItemOnAutoClose: props.getItemOnAutoClose || defaultGetItemOnAutoClose,
   } as SnackBarProps<ITEM> & Required<Mappers<ITEM>>;
+};
+
+export const getItem: GetItem = (item, params) => {
+  const {
+    getItemKey,
+    getItemActions,
+    getItemAutoClose,
+    getItemIcon,
+    getItemMessage,
+    getItemOnAutoClose,
+    getItemOnClose,
+    getItemShowProgress,
+    getItemStatus,
+  } = params;
+  return {
+    key: getItemKey(item),
+    message: getItemMessage(item),
+    status: getItemStatus(item),
+    autoClose: getItemAutoClose(item),
+    showProgress: getItemShowProgress(item),
+    icon: getItemIcon(item),
+    actions: getItemActions(item),
+    onClose:
+      typeof getItemOnClose(item) === 'function'
+        ? () => {
+            getItemOnClose(item)?.(item);
+          }
+        : undefined,
+    onAutoClose:
+      typeof getItemOnAutoClose(item) === 'function'
+        ? () => {
+            getItemOnAutoClose(item)?.(item);
+          }
+        : undefined,
+  };
 };
