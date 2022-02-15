@@ -10,14 +10,14 @@ const cnExampleUseHideElementsInLine = cn('ExampleUseHideElementsInLine');
 
 const items = [
   'первый',
-  'вотрой',
+  'второй',
   'третий',
-  'чеверый',
+  'четвёрый',
   'пятый',
   'шестой',
   'седьмой',
   'восьмой',
-  'девяый',
+  'девятый',
   'десятый',
 ];
 
