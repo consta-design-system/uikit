@@ -98,7 +98,8 @@
     }
   }
 
-  &-LabelForNotFound {
+  &-LabelForNotFound,
+  &-LabelForEmptyItems {
     padding: 0 var(--space-xs);
   }
 

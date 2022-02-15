@@ -53,6 +53,7 @@ export type SelectProps<ITEM = DefaultItem, GROUP = DefaultGroup> = PropsWithHTM
     dropdownRef?: React.RefObject<HTMLDivElement>;
     required?: boolean;
     name?: string;
+    labelForEmptyItems?: string;
     value?: PropValue<ITEM>;
     renderItem?: PropRenderItem<ITEM>;
     renderValue?: PropRenderValue<ITEM>;

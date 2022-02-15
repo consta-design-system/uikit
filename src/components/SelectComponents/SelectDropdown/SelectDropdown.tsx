@@ -43,7 +43,9 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   getGroupLabel?: (group: GROUP) => string;
   labelForCreate?: string;
   labelForNotFound?: string;
+  labelForEmptyItems?: string;
   notFound?: boolean;
+  hasItems?: boolean;
 }>;
 
 type SelectDropdown = <ITEM, GROUP>(props: Props<ITEM, GROUP>) => React.ReactElement | null;
@@ -60,6 +62,8 @@ export const SelectDropdown: SelectDropdown = (props) => {
     labelForCreate,
     className,
     labelForNotFound,
+    labelForEmptyItems,
+    hasItems = true,
     form,
     isOpen,
     renderItem,
@@ -129,6 +133,9 @@ export const SelectDropdown: SelectDropdown = (props) => {
           })}
           {notFound && labelForNotFound && (
             <Text className={cnSelectDropdown('LabelForNotFound')}>{labelForNotFound}</Text>
+          )}
+          {!hasItems && labelForEmptyItems && (
+            <Text className={cnSelectDropdown('LabelForEmptyItems')}>{labelForEmptyItems}</Text>
           )}
         </div>
       </Popover>

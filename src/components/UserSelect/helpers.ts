@@ -76,6 +76,7 @@ export type UserSelectProps<
     inputRef?: React.RefObject<HTMLInputElement>;
     labelForNotFound?: string;
     labelForCreate?: string;
+    labelForEmptyItems?: string;
     searchFunction?: PropSearchFunction<ITEM>;
     multiple?: MULTIPLE;
     value?: PropValue<ITEM, MULTIPLE>;
