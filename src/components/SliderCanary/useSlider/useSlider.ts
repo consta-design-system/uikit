@@ -87,7 +87,7 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
   }, [step]);
 
   useEffect(() => {
-    if (typeof value !== 'undefined' && typeof step !== 'undefined') {
+    if (typeof value !== 'undefined') {
       const targetValue = isRangeParams(props)
         ? ([
             getValidValue(props.value[0], min, max, step),
@@ -130,29 +130,21 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
         }
         if (validKeyCode) {
           if (Array.isArray(step)) {
-            let stepsArr = [...step];
-            if (step[0] !== minValue) {
-              stepsArr = [minValue, ...stepsArr];
-            }
-            if (step[step.length - 1] !== maxValue) {
-              stepsArr = [...stepsArr, maxValue];
-            }
-            stepsArr.forEach((stepPoint, index) => {
+            step.forEach((stepPoint, index) => {
               if (typeof typeButton === 'number' && changedValue === stepPoint) {
                 if (stepIncrement >= 0) {
                   if (index === 0) {
-                    stepIncrement = stepsArr[1] - minValue;
+                    stepIncrement = step[1] - minValue;
                   } else {
                     stepIncrement =
-                      (typeof stepsArr[index + 1] !== 'undefined'
-                        ? stepsArr[index + 1]
-                        : maxValue) - stepPoint;
+                      (typeof step[index + 1] !== 'undefined' ? step[index + 1] : maxValue) -
+                      stepPoint;
                   }
                 } else if (index === 0) {
-                  stepIncrement = minValue - stepsArr[1];
+                  stepIncrement = minValue - step[1];
                 } else {
                   stepIncrement =
-                    (typeof stepsArr[index - 1] !== 'undefined' ? stepsArr[index - 1] : minValue) -
+                    (typeof step[index - 1] !== 'undefined' ? step[index - 1] : minValue) -
                     stepPoint;
                 }
               }

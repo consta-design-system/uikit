@@ -14,7 +14,7 @@ export const textFieldPropSizeDefault: TextFieldPropSize = textFieldPropSize[0];
 
 export type TextFieldPropOnChange = (args: TextFieldOnChangeArguments) => void;
 export type TextFieldOnChangeArguments = {
-  e: React.ChangeEvent | React.MouseEvent;
+  e: React.ChangeEvent | React.MouseEvent | React.KeyboardEvent;
   id?: TextFieldPropId;
   name?: TextFieldPropName;
   value: TextFieldPropValue;
@@ -105,7 +105,7 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
     min?: number | string;
     readOnly?: boolean;
     required?: boolean;
-    step?: number | string;
+    step?: number | string | number[];
     tabIndex?: number;
     inputContainerRef?: React.Ref<HTMLDivElement>;
     inputRef?: React.Ref<HTMLTextAreaElement | HTMLInputElement>;
@@ -122,8 +122,6 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
   TextFieldPropsTextareaType<TYPE> &
   TextFieldPropRightSide<TYPE>;
 
-// export type TextFieldProps<TYPE extends string> = PropsWithJsxAttributes<Props<TYPE>, 'div'>;
-
 export type TextFieldComponent = <TYPE extends string>(
   props: TextFieldProps<TYPE> & React.RefAttributes<HTMLElement>,
 ) => React.ReactElement | null;
@@ -133,4 +131,77 @@ export const sizeMap: Record<TextFieldPropSize, IconPropSize> = {
   s: 's',
   m: 's',
   l: 'm',
+};
+
+export const getValueByStepArray = (params: {
+  value?: string | null;
+  steps: number[];
+  min?: number | string;
+  max?: number | string;
+  isIncrement?: boolean;
+}): number | null => {
+  const { value, steps, min, isIncrement = false } = params;
+  const currentValue = Number(value ?? min);
+  const minValue = Number(min);
+  if (typeof value !== 'string') {
+    return typeof min !== 'undefined' ? minValue : 0;
+  }
+  if (currentValue < steps[0]) {
+    return steps[0];
+  }
+  if (currentValue > steps[steps.length - 1]) {
+    return steps[steps.length - 1];
+  }
+  if (
+    (!isIncrement && currentValue === steps[0]) ||
+    (isIncrement && currentValue === steps[steps.length - 1])
+  ) {
+    return currentValue;
+  }
+  for (let i = 0; i < steps.length; i++) {
+    if (currentValue === steps[i] || (steps[i] < currentValue && steps[i + 1] > currentValue)) {
+      return steps[i + (isIncrement ? 1 : -1)];
+    }
+  }
+  return null;
+};
+
+export const getValueByStepNumber = (params: {
+  value?: string | null;
+  step: number | string;
+  isIncrement?: boolean;
+  min?: number | string;
+  max?: number | string;
+}): number => {
+  const { value, step, isIncrement, max, min } = params;
+  const minValue = Number(min);
+  const maxValue = Number(max);
+  const currentValue: number =
+    (typeof value === 'string' ? Number(value) : 0) + Number(step) * (isIncrement ? 1 : -1);
+  if (!Number.isNaN(minValue) && currentValue <= minValue) {
+    return minValue;
+  }
+  if (!Number.isNaN(maxValue) && currentValue >= maxValue) {
+    return maxValue;
+  }
+  return Number(
+    currentValue.toFixed(
+      Number(
+        /* Необходимо для того, чтобы избежать ситуации, когда по нажатию
+на кнопку прибавляется число с погрешностью.
+Здесь мы берем разрядность дробной части шага и ограничиваем
+результирующее число этой разрядностью */
+        Number(step)
+          .toString()
+          .split('.')[1]?.length,
+      ) || 0,
+    ),
+  );
+};
+
+export const getIncrementFlag = (event: React.KeyboardEvent): boolean | null => {
+  if (event?.key !== 'ArrowUp' && event?.key !== 'ArrowDown') {
+    return null;
+  }
+  return event?.key === 'ArrowUp';
 };

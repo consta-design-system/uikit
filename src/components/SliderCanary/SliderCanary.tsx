@@ -3,6 +3,7 @@ import './Slider.css';
 import React, { forwardRef, useRef } from 'react';
 
 import { useFlag } from '../../hooks/useFlag/useFlag';
+import { useSortSteps } from '../../hooks/useSortSteps/useSortSteps';
 import { IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
@@ -66,6 +67,8 @@ function SliderRender<RANGE extends boolean>(
   const rightButtonRef = useRef<HTMLButtonElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
 
+  const sortedSteps = useSortSteps({ step, min, max });
+
   const IconRight = rightSide;
   const IconLeft =
     isNotRangeParams && props.leftSide && props.leftSide !== 'input' ? props.leftSide : undefined;
@@ -85,7 +88,7 @@ function SliderRender<RANGE extends boolean>(
     value,
     min,
     max,
-    step,
+    step: sortedSteps,
     onChange,
     onAfterChange,
     sliderRef,
@@ -98,7 +101,7 @@ function SliderRender<RANGE extends boolean>(
     max,
     view,
     range,
-    step,
+    sortedSteps,
     [leftButtonRef, rightButtonRef],
     sliderRef,
   );
@@ -125,7 +128,7 @@ function SliderRender<RANGE extends boolean>(
               min={min}
               max={max}
               status={status}
-              step={step}
+              step={sortedSteps}
               disabled={disabled}
             />
           </div>

@@ -107,22 +107,16 @@ export const getValidValue = (
       );
     }
     let resultValue = value;
-    let stepsArr = step;
-    if (step[0] !== min) {
-      stepsArr = [min, ...stepsArr];
-    } else if (step[step.length - 1] !== max) {
-      stepsArr = [...stepsArr, max];
-    }
-    stepsArr.forEach((stepPoint, index) => {
+    step.forEach((stepPoint, index) => {
       let minValue = min;
       let maxValue = max;
       if (index === 0) {
-        maxValue = stepsArr[index + 1];
-      } else if (index === stepsArr.length - 1) {
+        maxValue = step[index + 1];
+      } else if (index === step.length - 1) {
         minValue = stepPoint;
         maxValue = max;
       } else {
-        maxValue = stepsArr[index + 1];
+        maxValue = step[index + 1];
         minValue = stepPoint;
       }
       if (value <= maxValue && value >= minValue) {

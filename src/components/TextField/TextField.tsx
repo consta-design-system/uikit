@@ -4,6 +4,7 @@ import React, { forwardRef, useEffect, useState } from 'react';
 import TextAreaAutoSize from 'react-textarea-autosize';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
+import { useSortSteps } from '../../hooks/useSortSteps/useSortSteps';
 import { IconClose } from '../../icons/IconClose/IconClose';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { IconSelectOpen } from '../../icons/IconSelectOpen/IconSelectOpen';
@@ -14,6 +15,9 @@ import { FieldCaption } from '../FieldCaption/FieldCaption';
 import { FieldLabel } from '../FieldLabel/FieldLabel';
 
 import {
+  getIncrementFlag,
+  getValueByStepArray,
+  getValueByStepNumber,
   sizeMap,
   TextFieldComponent,
   textFieldPropFormDefault,
@@ -85,6 +89,8 @@ export function TextFieldRender<TYPE extends string>(
   const rightSideIsString = typeof rightSide === 'string';
   const iconSize = getByMap(sizeMap, size, iconSizeProp);
 
+  const sortedSteps = useSortSteps({ step, min: Number(min), max: Number(max) });
+
   const handleChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (e) => {
     const { value } = e.target;
     !disabled && onChange?.({ e, id, name, value: value || null });
@@ -127,6 +133,17 @@ export function TextFieldRender<TYPE extends string>(
     }
   }, []);
 
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    const flag = getIncrementFlag(e);
+    if (type === 'number' && typeof flag === 'boolean' && !disabled) {
+      e.preventDefault();
+      onChange?.({
+        e,
+        value: getValueByStep(flag).toString(),
+      });
+    }
+  };
+
   const textareaProps = {
     rows,
     cols,
@@ -139,38 +156,34 @@ export function TextFieldRender<TYPE extends string>(
     type,
     max,
     min,
-    step,
+    step: !Array.isArray(sortedSteps) ? sortedSteps : 0,
+    onKeyDown,
     ref: useForkRef([inputRef, inputRefProp]) as React.RefCallback<HTMLInputElement>,
   };
 
-  const handleClear: (e: React.MouseEvent<HTMLButtonElement>) => void = (e) => {
+  const handleClear = (e: React.MouseEvent<HTMLButtonElement>) => {
     onChange?.({
       e,
       value: '',
     });
   };
 
-  const changeNumberValue: (
-    e: React.MouseEvent<HTMLButtonElement>,
-    isIncrement?: boolean,
-  ) => void = (e, isIncrement = true) => {
-    let currentValue = value || 0;
-    currentValue = isIncrement
-      ? Number(currentValue) + Number(step)
-      : Number(currentValue) - Number(step);
+  const getValueByStep = (isIncrement?: boolean) => {
+    return Array.isArray(sortedSteps)
+      ? getValueByStepArray({
+          min,
+          max,
+          value,
+          isIncrement,
+          steps: sortedSteps,
+        }) ?? 0
+      : getValueByStepNumber({ value, step: sortedSteps, isIncrement, min, max });
+  };
+
+  const changeNumberValue = (e: React.MouseEvent<HTMLButtonElement>, isIncrement = true) => {
     onChange?.({
       e,
-      value: currentValue.toFixed(
-        Number(
-          /* Необходимо для того, чтобы избежать ситуации, когда по нажатию
-          на кнопку прибавляется число с погрешностью.
-          Здесь мы берем разрядность дробной части шага и ограничиваем
-          результирующее число этой разрядностью */
-          Number(step)
-            .toString()
-            .split('.')[1]?.length,
-        ) || 0,
-      ),
+      value: getValueByStep(isIncrement).toString(),
     });
   };
 
@@ -235,6 +248,7 @@ export function TextFieldRender<TYPE extends string>(
           {type === 'number' && (
             <div className={cnTextField('Counter')}>
               <button
+                onFocus={handleFocus}
                 onClick={(e) => changeNumberValue(e, true)}
                 type="button"
                 className={cnTextField('CounterButton')}
@@ -242,6 +256,7 @@ export function TextFieldRender<TYPE extends string>(
                 <IconSelectOpen size="xs" />
               </button>
               <button
+                onFocus={handleFocus}
                 onClick={(e) => changeNumberValue(e, false)}
                 type="button"
                 className={cnTextField('CounterButton')}
