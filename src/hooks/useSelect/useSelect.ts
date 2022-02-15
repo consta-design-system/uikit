@@ -93,7 +93,7 @@ const initialState = {
 export const isOptionForCreate = <ITEM, GROUP>(
   params: OptionForCreate | Group<ITEM, GROUP> | ITEM,
 ): params is OptionForCreate => {
-  return Object.prototype.hasOwnProperty.call(params, '__optionForCreate');
+  return params && Object.prototype.hasOwnProperty.call(params, '__optionForCreate');
 };
 
 export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
