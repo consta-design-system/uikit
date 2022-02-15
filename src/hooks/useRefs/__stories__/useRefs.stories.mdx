@@ -17,4 +17,8 @@ import { useRefs } from '@consta/uikit/useRefs';
 
 ## Пример
 
-Пример использования хука `useRefs` можно посмотреть в коде хука [useHideElementsInLine](https://github.com/consta-design-system/uikit/blob/master/src/hooks/useHideElementsInLine/useHideElementsInLine.ts).
+```tsx
+const refs = useRefs<HTMLDivElement>(4);
+
+//  refs: RefObject<HTMLDivElement>[]
+```
