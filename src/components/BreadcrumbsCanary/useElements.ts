@@ -65,9 +65,9 @@ export const useElements = <ITEM>(items: ITEM[]) => {
   );
 
   const { itemsDimensions, wrapperWidth, ...hideElementsInLineResult } = useHideElementsInLine<
+    ITEM,
     HTMLLIElement,
-    HTMLUListElement,
-    ITEM
+    HTMLUListElement
   >(readyToHideItems, noHideElementsSizeSum, true);
 
   const elementsSizeSum =
