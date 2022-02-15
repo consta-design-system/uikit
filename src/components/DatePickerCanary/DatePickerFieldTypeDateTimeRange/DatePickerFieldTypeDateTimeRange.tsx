@@ -4,15 +4,15 @@ import isEqual from 'date-fns/isEqual';
 
 import { FieldCaption } from '../../FieldCaption/FieldCaption';
 import { FieldLabel } from '../../FieldLabel/FieldLabel';
-import { DatePickerFieldTypeDate } from '../DatePickerFieldTypeDate/DatePickerFieldTypeDate';
+import { DatePickerFieldTypeDateTime } from '../DatePickerFieldTypeDateTime/DatePickerFieldTypeDateTime';
 import { cnDatePickerMixRangeField } from '../DatePickerMixRangeField/DatePickerMixRangeField';
 import { datePickerErrorTypes, getFormForEnd, getFormForStart } from '../helpers';
 
-import { DatePickerFieldTypeDateRangeProps } from './helpers';
+import { DatePickerFieldTypeDateTimeRangeProps } from './helpers';
 
-export const DatePickerFieldTypeDateRange = forwardRef<
+export const DatePickerFieldTypeDateTimeRange = forwardRef<
   HTMLDivElement,
-  DatePickerFieldTypeDateRangeProps
+  DatePickerFieldTypeDateTimeRangeProps
 >((props, ref) => {
   const {
     className,
@@ -164,7 +164,7 @@ export const DatePickerFieldTypeDateRange = forwardRef<
       )}
       <div className={cnDatePickerMixRangeField('Body')}>
         <div className={cnDatePickerMixRangeField('Fields')}>
-          <DatePickerFieldTypeDate
+          <DatePickerFieldTypeDateTime
             {...commonProps}
             inputRef={startFieldInputRef}
             ref={startFieldRef}
@@ -177,7 +177,7 @@ export const DatePickerFieldTypeDateRange = forwardRef<
             onBlur={startFieldOnBlur}
             focused={startFocused}
           />
-          <DatePickerFieldTypeDate
+          <DatePickerFieldTypeDateTime
             {...commonProps}
             inputRef={endFieldInputRef}
             ref={endFieldRef}

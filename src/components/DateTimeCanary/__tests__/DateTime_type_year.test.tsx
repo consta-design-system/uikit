@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 
-import { DateTime, dateTimePropView } from '../DateTimeCanary';
+import { DateTime, DateTimeProps, dateTimePropView } from '../DateTimeCanary';
 
 import {
   getDateTimeCell,
@@ -17,9 +17,7 @@ import {
   testId,
 } from './helpers';
 
-type DateTimeProps = React.ComponentProps<typeof DateTime>;
-
-const renderComponent = (props: DateTimeProps = {}) => {
+const renderComponent = (props: DateTimeProps<'year'> = {}) => {
   return render(<DateTime {...props} type="year" data-testid={testId} />);
 };
 

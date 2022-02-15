@@ -47,6 +47,7 @@ export type DatePickerDropdownProps = PropsWithHTMLAttributesAndRef<
     multiplicitySeconds?: number;
     multiplicityMinutes?: number;
     multiplicityHours?: number;
+    timeFor?: 'start' | 'end';
   },
   HTMLDivElement
 >;

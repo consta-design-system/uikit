@@ -2,6 +2,7 @@ import { Locale, startOfToday } from 'date-fns';
 
 import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
 import { range } from '../../utils/array';
+import { getByMap } from '../../utils/getByMap';
 import { DateRange } from '../../utils/types/Date';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { DateTimeAdditionalControlRenderProp, DateTimePropView } from '../DateTimeCanary/helpers';
@@ -13,11 +14,13 @@ import {
   TextFieldPropWidth,
 } from '../TextField/TextField';
 
-export const datePickerPropType = ['date', 'date-range', 'date-time'] as const;
+export const datePickerPropType = ['date', 'date-range', 'date-time', 'date-time-range'] as const;
 export type DatePickerPropType = typeof datePickerPropType[number];
 export const datePickerPropTypeDefault = datePickerPropType[0];
 
 export type DatePickerPropDateTimeView = DateTimePropView;
+
+type Range = 'date-range' | 'date-time-range';
 
 export const datePickerErrorTypes = [
   'outOfRange',
@@ -26,7 +29,7 @@ export const datePickerErrorTypes = [
 ] as const;
 
 export type DatePickerPropValue<TYPE extends DatePickerPropType> =
-  | (TYPE extends 'date' | 'date-time' ? Date : DateRange)
+  | (TYPE extends Range ? DateRange : Date)
   | null;
 
 export type DatePickerPropOnChange<TYPE extends DatePickerPropType> = (props: {
@@ -38,23 +41,21 @@ export const datePickerPropDropdownForm = ['default', 'brick', 'round'] as const
 export type DatePickerPropDropdownForm = typeof datePickerPropDropdownForm[number];
 export const datePickerPropDropdownFormDefault = datePickerPropDropdownForm[0];
 
-type DatePickerPropCalendarWidth<TYPE> = TYPE extends 'date' | 'date-time'
-  ? TextFieldPropWidth
-  : never;
+type DatePickerPropCalendarWidth<TYPE> = TYPE extends Range ? TextFieldPropWidth : never;
 
-type DatePickerPropCalendarInputRef<TYPE> = TYPE extends 'date' | 'date-time'
+type DatePickerPropCalendarInputRef<TYPE> = TYPE extends Range
+  ? never
+  : React.Ref<HTMLInputElement>;
+
+type DatePickerPropCalendarStartInputRef<TYPE> = TYPE extends Range
   ? React.Ref<HTMLInputElement>
   : never;
 
-type DatePickerPropCalendarStartInputRef<TYPE> = TYPE extends 'date-range'
-  ? React.Ref<HTMLInputElement>
-  : never;
-
-type DatePickerPropCalendarStartLeftSide<TYPE> = TYPE extends 'date-range'
+type DatePickerPropCalendarStartLeftSide<TYPE> = TYPE extends Range
   ? string | IconComponent
   : never;
 
-type DatePickerPropCalendarStartOnFocus<TYPE> = TYPE extends 'date-range'
+type DatePickerPropCalendarStartOnFocus<TYPE> = TYPE extends Range
   ? React.FocusEventHandler<HTMLElement>
   : never;
 
@@ -205,3 +206,40 @@ export const getTimeEnum = (
     return getItemLabel(addUnits(startDate, number * multiplicity));
   });
 };
+
+const mapFormForStart: Record<TextFieldPropForm, TextFieldPropForm> = {
+  default: 'defaultClear',
+  defaultClear: 'defaultClear',
+  defaultBrick: 'defaultClear',
+  brick: 'brickClear',
+  brickDefault: 'brickClear',
+  brickClear: 'brickClear',
+  brickRound: 'brickClear',
+  round: 'roundClear',
+  roundClear: 'roundClear',
+  roundBrick: 'roundClear',
+  clearRound: 'clearClear',
+  clearDefault: 'clearClear',
+  clearBrick: 'clearClear',
+  clearClear: 'clearClear',
+};
+
+const mapFormForEnd: Record<TextFieldPropForm, TextFieldPropForm> = {
+  default: 'brickDefault',
+  defaultClear: 'brickClear',
+  defaultBrick: 'brick',
+  brick: 'brick',
+  brickDefault: 'brickDefault',
+  brickClear: 'brickClear',
+  brickRound: 'brickRound',
+  round: 'brickRound',
+  roundClear: 'brickClear',
+  roundBrick: 'brick',
+  clearRound: 'brickRound',
+  clearDefault: 'brickDefault',
+  clearBrick: 'brick',
+  clearClear: 'brickClear',
+};
+
+export const getFormForStart = (form: TextFieldPropForm) => getByMap(mapFormForStart, form);
+export const getFormForEnd = (form: TextFieldPropForm) => getByMap(mapFormForEnd, form);
