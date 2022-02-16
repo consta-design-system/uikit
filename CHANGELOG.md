@@ -1,5 +1,31 @@
 # Changelog
 
+## v3.16.0 (16/02/2022)
+Самое важное:
+
+- в `DatePicker` добавили новый тип `date-time-range` (выбор периода дат с временем)
+- `DatePicker` стал стабильнее, добавили тесты
+- в `Select` теперь можно указать текст, который будет выводиться, если нет ни одной опции для выбора
+- в `TextField` теперь можно указывать шаги массивом чисел
+- добавили документацию по хукам `useRefs`, `useHideElementsInLine` и миксину `MixPopoverAnimate`
+- в документацию для дизайнеров добавили раздел "Контрибьюторам" — для тех, кто хочет в развитии дизайн-системы
+---
+
+- [docs(MixPopoverAnimate): add docs (#2055)](https://github.com/consta-design-system/uikit/commit/db2c8832881379b88f5a21e94785c90b4105c03b) - [@arhayka](https://github.com/arhayka)
+- [docs(TextField): edit docs: steps, min, max (#2060)](https://github.com/consta-design-system/uikit/commit/5afe9ad2094c75ea2d5259e902d38ca4e67a6cf6) - [@arhayka](https://github.com/arhayka)
+- [docs(useHideElementsInLine): add docs (#2058)](https://github.com/consta-design-system/uikit/commit/0c6c7575c13350705c2b3ac7343cbb4781f94baa) - [@gizeasy](https://github.com/gizeasy)
+- [docs(useRefs): add docs (#2053)](https://github.com/consta-design-system/uikit/commit/a55943f0457bac07defe27f9b61c7a8da6ad3bfd) - [@arhayka](https://github.com/arhayka)
+- [feat(DatePicker): add date-time-range type (#2054)](https://github.com/consta-design-system/uikit/commit/04d1b38fed1edf39be4b025894ff79ed281887e3) - [@gizeasy](https://github.com/gizeasy)
+- [chore(deps): bump ajv from 6.12.2 to 6.12.6 (#2052)](https://github.com/consta-design-system/uikit/commit/67bf0290a9be76137812d22536b1c8cbc6098ddb) - [@dependabot](https://github.com/dependabot[bot])
+- [fix(useSelect): fix bug with Uncaught TypeError (#2047)](https://github.com/consta-design-system/uikit/commit/65f7cf10e41adb7982d19226bbe40346e9316c68) - [@N1MBER](https://github.com/N1MBER)
+- [feat(Selects): add prop labelForEmptyItems (#2046)](https://github.com/consta-design-system/uikit/commit/f77d6b2fc97d46671b1e19abd5223524d0c5925f) - [@N1MBER](https://github.com/N1MBER)
+- [feat(TextField): add step array to textfield props (#1926)](https://github.com/consta-design-system/uikit/commit/0c24f3e76835def89ff973e4f759dd52f96b3d94) - [@N1MBER](https://github.com/N1MBER)
+- [fix(useTimer): fix bug with memory leak (#2048)](https://github.com/consta-design-system/uikit/commit/9b02c336bc174398077e15ff7d9281219e933733) - [@N1MBER](https://github.com/N1MBER)
+- [test(DatePicker): add tests (#2050)](https://github.com/consta-design-system/uikit/commit/e175753c33e0b89f231ab947ba477c36e99c51ff) - [@gizeasy](https://github.com/gizeasy)
+- [feat(docs): add design contributing docs (#2039)](https://github.com/consta-design-system/uikit/commit/260be28aba02b2c17e18a36aed41b71cce8a5203) - [@kolebayev](https://github.com/kolebayev)
+
+--------------------
+
 ## v3.15.1 (09/02/2022)
 Самое важное:
 
@@ -516,11 +542,3 @@ _Обращаем внимание_: *версии компонентов обр
 - [test(Selects): added tests for Select, Combobox, UserSelect](https://github.com/gazprom-neft/consta-uikit/commit/b9a76f6a7e81f3e3436cc6eef2ce5fef91b675b4) - [@gizeasy](https://github.com/gizeasy)
 - [test(getGroups): edit tests (#1301)](https://github.com/gazprom-neft/consta-uikit/commit/e44922ec90435b4580f16a6af99b1a5e7d32dc8f) - [@gizeasy](https://github.com/gizeasy)
 - [feat(Components): refactoring Select, Combobox, UserSelect (#1280)](https://github.com/gazprom-neft/consta-uikit/commit/936176366cf178a09f4dc1a885c428a3db17cc94) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v1.12.4 (23/06/2021)
-- [docs(sla): add sla (#1302)](https://github.com/gazprom-neft/consta-uikit/commit/09477d001b5b392d568ae61cb6e72a1159c5dfd9) - [@kolebayev](https://github.com/kolebayev)
-- [docs(Informer): add size description in documentation (#1287)](https://github.com/gazprom-neft/consta-uikit/commit/b508853dbc8deea503b7b019c4a3f0823c7a90fd) - [@arhayka](https://github.com/arhayka)
-- [docs(Text): remove width description (#1288)](https://github.com/gazprom-neft/consta-uikit/commit/6bb5a935c97d6dd051c8ea08fa59e703134c39b1) - [@arhayka](https://github.com/arhayka)
-- [docs(Collapse): add docs (#1291)](https://github.com/gazprom-neft/consta-uikit/commit/cc673f53eb1b352ee586a8dffa8c01b2ca63acac) - [@arhayka](https://github.com/arhayka)
