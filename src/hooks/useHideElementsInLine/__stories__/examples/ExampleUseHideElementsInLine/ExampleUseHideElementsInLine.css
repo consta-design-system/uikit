@@ -1,0 +1,23 @@
+.ExampleUseHideElementsInLine {
+  margin-bottom: var(--space-l);
+
+  &-Tag {
+    margin-right: var(--space-xs);
+
+    &_display {
+      &_hidden {
+        position: absolute;
+        left: -300vw;
+        visibility: hidden;
+      }
+
+      &_none {
+        display: none;
+      }
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
