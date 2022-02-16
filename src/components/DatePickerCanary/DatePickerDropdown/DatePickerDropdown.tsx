@@ -1,13 +1,13 @@
 import './DatePickerDropdown.css';
 
-import React, { forwardRef, useRef } from 'react';
-import { CSSTransition } from 'react-transition-group';
+import React, { forwardRef, useRef, useState } from 'react';
+import { Transition } from 'react-transition-group';
 
 import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
 import {
   animateTimeout,
-  cnMixDropdownAnimateForCssTransition,
-} from '../../../mixs/MixDropdownAnimate/MixDropdownAnimate';
+  cnMixPopoverAnimate,
+} from '../../../mixs/MixPopoverAnimate/MixPopoverAnimate';
 import { cn } from '../../../utils/bem';
 import { DateRange } from '../../../utils/types/Date';
 import { PropsWithHTMLAttributesAndRef } from '../../../utils/types/PropsWithHTMLAttributes';
@@ -17,7 +17,7 @@ import {
   DateTimePropOnChange,
   DateTimePropType,
 } from '../../DateTimeCanary/DateTimeCanary';
-import { Popover } from '../../Popover/Popover';
+import { Direction, Popover } from '../../Popover/Popover';
 import {
   DatePickerPropDateTimeView,
   DatePickerPropDropdownForm,
@@ -55,7 +55,7 @@ type DatePickerDropdownComponent = (props: DatePickerDropdownProps) => React.Rea
 
 const cnDatePickerDropdown = cn('DatePickerDropdown');
 
-export const DatePickerDropdown: DatePickerDropdownComponent = forwardRef((props, ref) => {
+export const DatePickerDropdown: DatePickerDropdownComponent = forwardRef((props, componentRef) => {
   const {
     form = datePickerPropDropdownFormDefault,
     anchorRef,
@@ -66,28 +66,32 @@ export const DatePickerDropdown: DatePickerDropdownComponent = forwardRef((props
   } = props;
 
   const rootRef = useRef<HTMLDivElement>(null);
+  const [direction, setDirection] = useState<Direction>();
+
+  const ref = useForkRef([componentRef, rootRef]);
 
   return (
-    <CSSTransition
-      in={isOpen}
-      unmountOnExit
-      appear
-      classNames={cnMixDropdownAnimateForCssTransition}
-      timeout={animateTimeout}
-      nodeRef={rootRef}
-    >
-      <Popover
-        ref={useForkRef([ref, rootRef])}
-        anchorRef={anchorRef}
-        className={cnDatePickerDropdown({ form }, [className])}
-        direction="downStartLeft"
-        spareDirection="downStartLeft"
-        possibleDirections={['downStartLeft', 'upStartLeft', 'downStartRight', 'upStartRight']}
-        style={{ zIndex }}
-        role="listbox"
-      >
-        <DateTime {...otherProps} />
-      </Popover>
-    </CSSTransition>
+    <Transition in={isOpen} unmountOnExit timeout={animateTimeout} nodeRef={rootRef}>
+      {(animate) => {
+        return (
+          <Popover
+            ref={ref}
+            anchorRef={anchorRef}
+            className={cnDatePickerDropdown({ form }, [
+              className,
+              cnMixPopoverAnimate({ direction, animate }),
+            ])}
+            direction="downStartLeft"
+            spareDirection="downStartLeft"
+            possibleDirections={['downStartLeft', 'upStartLeft', 'downStartRight', 'upStartRight']}
+            style={{ zIndex }}
+            role="listbox"
+            onSetDirection={setDirection}
+          >
+            <DateTime {...otherProps} />
+          </Popover>
+        );
+      }}
+    </Transition>
   );
 });

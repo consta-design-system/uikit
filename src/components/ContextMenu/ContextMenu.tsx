@@ -141,7 +141,7 @@ export const ContextMenu: ContextMenuComponent = forwardRef((props, ref) => {
   return (
     <>
       {levels.map((level, index) => {
-        const onSetDirection = index > 0 ? setSubMenuDirection : undefined;
+        const onSetDirection = index > 0 ? setSubMenuDirection : props.onSetDirection;
 
         return (
           <ContextMenuLevel

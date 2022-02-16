@@ -1,6 +1,6 @@
 import { act, fireEvent, screen } from '@testing-library/react';
 
-import { animateTimeout } from '../../../mixs/MixDropdownAnimate/MixDropdownAnimate';
+import { animateTimeout } from '../../../mixs/MixPopoverAnimate/MixPopoverAnimate';
 
 export const testId = 'DatePicker';
 export const outsideId = 'outside';

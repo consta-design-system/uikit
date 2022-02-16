@@ -1,0 +1,74 @@
+.MixPopoverAnimate {
+  --mix-dropdown-animate-space: var(--space-s);
+  --mix-dropdown-animate-transform: translate(0, var(--mix-dropdown-animate-space));
+
+  &_animate {
+    &_exit {
+      opacity: 1;
+      transform: translate(0);
+    }
+
+    &_enter,
+    &_exitActive,
+    &_exitDone,
+    &_exited,
+    &_exiting,
+    &_unmounted {
+      opacity: 0;
+      pointer-events: none;
+      transform: var(--mix-dropdown-animate-transform);
+    }
+
+    &_enterDone,
+    &_enterActive,
+    &_entered,
+    &_entering {
+      opacity: 1;
+      transform: translate(0);
+    }
+
+    &_entered,
+    &_entering,
+    &_exiting,
+    &_enterDone,
+    &_exitActive,
+    &_enterActive,
+    &_exitDone {
+      transition: opacity 0.2s, transform 0.2s;
+    }
+  }
+
+  &_direction {
+    &_downCenter,
+    &_downRight,
+    &_downLeft,
+    &_downStartLeft,
+    &_downStartRight {
+      --mix-dropdown-animate-transform: translate(0, var(--mix-dropdown-animate-space));
+    }
+
+    &_upCenter,
+    &_upRight,
+    &_upLeft,
+    &_upStartLeft,
+    &_upStartRight {
+      --mix-dropdown-animate-transform: translate(0, calc(-1 * var(--mix-dropdown-animate-space)));
+    }
+
+    &_leftUp,
+    &_leftCenter,
+    &_leftDown,
+    &_leftStartUp,
+    &_leftStartDown {
+      --mix-dropdown-animate-transform: translate(calc(-1 * var(--mix-dropdown-animate-space)), 0);
+    }
+
+    &_rightUp,
+    &_rightCenter,
+    &_rightDown,
+    &_rightStartUp,
+    &_rightStartDown {
+      --mix-dropdown-animate-transform: translate(var(--mix-dropdown-animate-space), 0);
+    }
+  }
+}

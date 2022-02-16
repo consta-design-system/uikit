@@ -1,17 +1,18 @@
 import './BreadcrumbsMore.css';
 
-import React, { forwardRef, useEffect, useRef } from 'react';
-import { CSSTransition } from 'react-transition-group';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import { Transition } from 'react-transition-group';
 
 import { useFlag } from '../../../hooks/useFlag/useFlag';
 import {
   animateTimeout,
-  cnMixDropdownAnimateForCssTransition,
-} from '../../../mixs/MixDropdownAnimate/MixDropdownAnimate';
+  cnMixPopoverAnimate,
+} from '../../../mixs/MixPopoverAnimate/MixPopoverAnimate';
 import { cn } from '../../../utils/bem';
 import { getByMap } from '../../../utils/getByMap';
 import { Button } from '../../Button/Button';
 import { ContextMenu } from '../../ContextMenu/ContextMenu';
+import { Direction } from '../../Popover/Popover';
 import { BreadcrumbsItem } from '../BreadcrumbsItem/BreadcrumbsItem';
 import { iconSizeMap } from '../helpers';
 import {
@@ -46,6 +47,13 @@ function getItemHTMLAttributes<ITEM>(getItemHref: BreadcrumbsPropGetItemHref<ITE
   };
 }
 
+export const contextMenuSizeMap = {
+  xs: 's',
+  s: 's',
+  m: 'm',
+  l: 'l',
+} as const;
+
 function BreadcrumbsMoreRender<ITEM>(
   props: BreadcrumbsMoreProps<ITEM>,
   ref: React.Ref<HTMLLIElement>,
@@ -64,6 +72,7 @@ function BreadcrumbsMoreRender<ITEM>(
   } = props;
 
   const [open, setOpen] = useFlag();
+  const [direction, setDirection] = useState<Direction>();
 
   const buttonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -96,27 +105,35 @@ function BreadcrumbsMoreRender<ITEM>(
         ref={buttonRef}
         onClick={setOpen.toogle}
       />
-      <CSSTransition
-        in={open}
-        classNames={cnMixDropdownAnimateForCssTransition}
-        unmountOnExit
-        timeout={animateTimeout}
-        nodeRef={menuRef}
-      >
-        <ContextMenu
-          ref={menuRef}
-          items={items}
-          getLabel={getItemLabel}
-          getItemOnClick={getItemOnClick}
-          onItemClick={onItemClick}
-          getLeftSideBar={getLeftSideBar(getItemIcon, iconSize)}
-          anchorRef={buttonRef}
-          onClickOutside={setOpen.off}
-          getItemAs={getItemAs(getItemHref)}
-          getItemHTMLAttributes={getItemHTMLAttributes(getItemHref)}
-          direction="downCenter"
-        />
-      </CSSTransition>
+      <Transition in={open} unmountOnExit timeout={animateTimeout} nodeRef={menuRef}>
+        {(animate) => (
+          <ContextMenu
+            className={cnMixPopoverAnimate({ animate, direction })}
+            ref={menuRef}
+            items={items}
+            getLabel={getItemLabel}
+            getItemOnClick={getItemOnClick}
+            onItemClick={onItemClick}
+            getLeftSideBar={getLeftSideBar(getItemIcon, iconSize)}
+            anchorRef={buttonRef}
+            onClickOutside={setOpen.off}
+            getItemAs={getItemAs(getItemHref)}
+            getItemHTMLAttributes={getItemHTMLAttributes(getItemHref)}
+            direction="downCenter"
+            possibleDirections={[
+              'downCenter',
+              'upCenter',
+              'downStartLeft',
+              'upStartLeft',
+              'downStartRight',
+              'upStartRight',
+            ]}
+            onSetDirection={setDirection}
+            offset={8}
+            size={contextMenuSizeMap[size]}
+          />
+        )}
+      </Transition>
     </BreadcrumbsItem>
   );
 }

@@ -74,6 +74,7 @@ export type ContextMenuProps<ITEM> = PropsWithHTMLAttributesAndRef<
     spareDirection?: Direction;
     getItemAs?: ContextMenuPropGetItemAs<ITEM>;
     getItemHTMLAttributes?: ContextMenuPropGetItemHTMLAttributes<ITEM>;
+    onSetDirection?: (direction: Direction) => void;
   } & PositioningProps,
   HTMLDivElement
 >;
