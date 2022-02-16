@@ -1,0 +1,114 @@
+import {
+  MixPopoverAnimateExampleRenderFn,
+  MixPopoverAnimateExampleForCssTransition,
+} from './examples/MixPopoverAnimateExample/MixPopoverAnimateExample';
+
+<Meta title="Mixins|MixPopoverAnimate" id="MixPopoverAnimate" />
+
+# MixPopoverAnimate
+
+```tsx
+import {
+  cnMixPopoverAnimate,
+  cnMixPopoverAnimateForCssTransition,
+  animateTimeout,
+} from '@consta/uikit/MixPopoverAnimate';
+```
+
+Миксин `MixPopoverAnimate` добавляет анимацию к выпадающим элементам. Вы можете его использовать, если создаёте новый компонент, в котором есть выпадающий элемент.
+
+Миксин можно применить к компонентам из библиотеки [react-transition-group](http://reactcommunity.org/react-transition-group/).
+
+## Свойсва
+
+| Свойство     | Тип или варианты значения                                                                                                        | По умолчанию | Описание                                                                          |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------------------------------------------------------------------------- |
+| `animate?`   | `'entered', 'entering', 'exiting', 'exited', 'unmounted', 'enter', 'enterActive', 'enterDone', 'exit', 'exitActive', 'exitDone'` | -            | Анимация                                                                          |
+| `direction?` | `Direction`                                                                                                                      | -            | Позиция окна, см. [Popover](?path=/docs/components-popover--playground#direction) |
+
+## Примеры
+
+### Пример c Transition
+
+```tsx
+import React, { useRef, useState } from 'react';
+import { Transition } from 'react-transition-group';
+
+import { Button } from '@consta/uikit/Button';
+import { Direction, Popover } from '@consta/uikit/Popover';
+import { useFlag } from '@consta/uikit/useFlag';
+
+import { cnMixPopoverAnimate, animateTimeout } from '@consta/uikit/MixPopoverAnimate';
+
+export const MixPopoverAnimateExample = () => {
+  const [open, setOpen] = useFlag();
+  const popoverRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const [direction, setDirection] = useState<Direction | undefined>();
+
+  return (
+    <>
+      <Button label="Нажми" onClick={setOpen.toogle} ref={buttonRef} />
+      <Transition in={open} unmountOnExit timeout={animateTimeout} nodeRef={popoverRef}>
+        {(animate) => {
+          return (
+            <Popover
+              className={cnMixPopoverAnimate({ direction, animate })}
+              offset={8}
+              anchorRef={buttonRef}
+              ref={popoverRef}
+              direction="downStartLeft"
+              onSetDirection={setDirection}
+            >
+              я появился плавно <br /> c анимацией 🔥
+            </Popover>
+          );
+        }}
+      </Transition>
+    </>
+  );
+};
+```
+
+<MixPopoverAnimateExampleRenderFn />
+
+### Пример c CSSTransition
+
+```tsx
+import React, { useRef } from 'react';
+import { CSSTransition } from 'react-transition-group';
+
+import { Button } from '@consta/uikit/Button';
+import { Popover } from '@consta/uikit/Popover';
+import { useFlag } from '@consta/uikit/useFlag';
+
+import {
+  cnMixPopoverAnimate,
+  cnMixPopoverAnimateForCssTransition,
+} from '@consta/uikit/MixPopoverAnimate';
+
+export const MixPopoverAnimateExampleForCssTransition = () => {
+  const [open, setOpen] = useFlag();
+  const popoverRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  return (
+    <>
+      <Button label="Нажми" onClick={setOpen.toogle} ref={buttonRef} />
+      <CSSTransition
+        in={open}
+        unmountOnExit
+        classNames={cnMixPopoverAnimateForCssTransition}
+        timeout={animateTimeout}
+        nodeRef={popoverRef}
+      >
+        <Popover offset={8} anchorRef={buttonRef} ref={popoverRef} direction="downStartLeft">
+          я появился плавно <br /> c анимацией 🔥
+        </Popover>
+      </CSSTransition>
+    </>
+  );
+};
+```
+
+<MixPopoverAnimateExampleForCssTransition />
