@@ -82,41 +82,41 @@ export const SnackBarExampleText: React.FC = () => {
 import { SnackBar } from '@consta/uikit/SnackBar';
 
 type Item = {
-  key: number;
+  key: string;
   message?: string;
   criticality?: number;
 };
 
 const items: Item[] = [
   {
-    key: 1,
+    key: '1',
     message: 'Сообщение — normal',
     criticality: 1,
   },
   {
-    key: 2,
+    key: '2',
     message: 'Ошибка — alert',
     criticality: 3,
   },
   {
-    key: 3,
+    key: '3',
     message: 'Предупреждение — warning',
     criticality: 2,
   },
 ];
 
-const getStatus = (criticality?: number) => {
-  if (criticality === 3) {
+const getStatus = (item: Item) => {
+  if (item.criticality === 3) {
     return 'alert';
   }
-  if (criticality === 2) {
+  if (item.criticality === 2) {
     return 'warning';
   }
   return 'normal';
 };
 
 export const SnackBarExampleStatus: React.FC = () => {
-  return <SnackBar items={items} getItemStatus={(item) => getStatus(item.criticality)} />;
+  return <SnackBar items={items} getItemStatus={getStatus} />;
 };
 ```
 
@@ -132,33 +132,33 @@ import { IconMoon } from '@consta/uikit/icons/IconMoon';
 import { IconDisconnection } from '@consta/uikit/icons/IconDisconnection';
 
 type Item = {
-  key: number;
+  key: string;
   message: string;
   status: 'normal' | 'warning';
 };
 
 const items: Item[] = [
   {
-    key: 1,
+    key: '1',
     message: 'Тихо, тигры спят!',
     status: 'normal',
   },
   {
-    key: 2,
+    key: '2',
     message: 'Интернет внезапно кончился',
     status: 'warning',
   },
 ];
 
-const getIcon = (status?: SnackBarItemStatus) => {
-  if (status === 'normal') {
+const getIcon = (item: Item) => {
+  if (item.status === 'normal') {
     return IconMoon;
   }
   return IconDisconnection;
 };
 
 export const SnackBarExampleIcon = () => {
-  return <SnackBar items={items} getItemIcon={(item) => getIcon(item.status)} />;
+  return <SnackBar items={items} getItemIcon={getIcon} />;
 };
 ```
 
@@ -233,6 +233,13 @@ export const SnackBarExampleButtons: React.FC = () => {
 - `'line'` — показывает линейный таймер.
 
 ```tsx
+type Item = {
+  key: number;
+  message: string;
+  status: SnackBarItemStatus;
+  progressMode?: 'line' | 'timer';
+};
+
 const mapIconByStatus: Record<SnackBarItemStatus, IconComponent | undefined> = {
   alert: IconAlert,
   normal: IconRing,
@@ -241,44 +248,32 @@ const mapIconByStatus: Record<SnackBarItemStatus, IconComponent | undefined> = {
   warning: undefined,
 };
 
-type Item = {
-  key: number;
-  message: string;
-  icon?: IconComponent;
-  buttons?: string[];
-  onClose?: () => void;
-  status?: SnackBarItemStatus;
-  closeTime: number;
-  progressMode?: 'line' | 'timer';
-};
-
-const getItemIconByStatus = (status: SnackBarItemStatus): IconComponent | undefined =>
-  mapIconByStatus[status];
-
-function reducer(
-  state: Item[],
-  action: { type: 'add' | 'remove'; item: Item; key?: number | string },
-): Item[] {
+function reducer(state: Item[], action: { type: 'add' | 'remove'; item: Item }): Item[] {
   switch (action.type) {
     case 'add':
       return [...state, action.item];
     case 'remove':
-      return state.filter((item) => item.key !== action.key);
+      return state.filter((itemInState) => itemInState.key !== action.item.key);
   }
 }
+
+const getItemIcon = (item: Item) => mapIconByStatus[item.status];
+const getItemShowProgress = (item: Item) => item.progressMode;
 
 export const SnackBarExampleTimer: React.FC = () => {
   const [items, dispatchItems] = useReducer<
     React.Reducer<Item[], { type: 'add' | 'remove'; item: Item; key?: number | string }>
   >(reducer, []);
-  const generateHandleAdd = (status: SnackBarItemStatus, closeTime?: 'timer' | 'line') => () => {
+
+  const generateHandleAdd = (
+    status: SnackBarItemStatus,
+    progressMode?: SnackBarItemShowProgressProp,
+  ) => () => {
     const key = items.length + 1;
     const item: Item = {
       key,
       message: `Сейчас эта штука закроется ${key}`,
-      icon: getItemIconByStatus(status),
-      onClose: () => dispatchItems({ type: 'remove', item, key }),
-      closeTime: 5,
+      status,
       progressMode,
     };
     dispatchItems({ type: 'add', item });
@@ -294,14 +289,38 @@ export const SnackBarExampleTimer: React.FC = () => {
   return (
     <div>
       <div>
-        <Button iconLeft={IconAdd} label="Обычный таймер" onClick={handleNormalAdd} />
-        <Button iconLeft={IconAdd} label="Тревожный таймер" onClick={handleAlertAdd} />
-        <Button iconLeft={IconAdd} label="Скрытый таймер + иконка" onClick={handleHiddenTimerAdd} />
+        <Button
+          className={cnSnackBarExampleTimer('ButtonAdd')}
+          iconLeft={IconAdd}
+          label="Без таймера + иконка"
+          onClick={handleHiddenTimerAdd}
+        />
+        <Button
+          className={cnSnackBarExampleTimer('ButtonAdd')}
+          iconLeft={IconAdd}
+          label="Обычный таймер"
+          onClick={handleNormalAdd}
+        />
+        <Button
+          className={cnSnackBarExampleTimer('ButtonAdd')}
+          iconLeft={IconAdd}
+          label="Обычный таймер c линией"
+          onClick={handleLineNormalAdd}
+        />
+        <Button
+          className={cnSnackBarExampleTimer('ButtonAdd')}
+          iconLeft={IconAdd}
+          label="Тревожный таймер"
+          onClick={handleAlertAdd}
+        />
       </div>
       <SnackBar
+        className={cnSnackBarExampleTimer('SnackBar')}
         items={items}
-        getItemAutoClose={(item) => item.closeTime}
-        getItemShowProgress={(item) => item.progressMode}
+        onItemClose={(item) => dispatchItems({ type: 'remove', item })}
+        getItemShowProgress={getItemShowProgress}
+        getItemIcon={getItemIcon}
+        getItemAutoClose={() => 5}
       />
     </div>
   );
@@ -353,7 +372,7 @@ export type SnackBarPropGetItemOnAutoClose<ITEM> = (
 
 | Свойство                                          | Тип                               | По умолчанию | Описание                                                        |
 | ------------------------------------------------- | --------------------------------- | ------------ | --------------------------------------------------------------- |
-| items                                             | `Item[]`                          | -            | Массив элементов                                                |
+| `items`                                           | `Item[]`                          | -            | Массив элементов                                                |
 | `getItemKey?`                                     | `SnackBarPropGetItemKey`          | -            | Функция для получения ключа элемента                            |
 | [`getItemMessage?`](#текст-сообщения)             | `SnackBarPropGetItemMessage`      | -            | Функция для получения текста элемента                           |
 | [`getItemStatus?`](#статус)                       | `SnackBarPropGetItemStatus`       | -            | Функция для получения статуса элемента                          |
@@ -363,7 +382,9 @@ export type SnackBarPropGetItemOnAutoClose<ITEM> = (
 | [`getItemActions?`](#кнопки)                      | `SnackBarPropGetItemActions`      | -            | Функция для получения дополнительных контролов элемента         |
 | [`getItemOnClose?`](#возможность-закрыть-снекбар) | `SnackBarPropGetItemOnClose`      | -            | Функция для получения события закрытия элемента                 |
 | `getItemOnAutoClose?`                             | `SnackBarPropGetItemOnAutoClose`  | -            | Функция для получения события автоматического закрытия элемента |
-| className?                                        | `string`                          | -            | Дополнительный CSS-класс                                        |
+| `onItemClose?`                                    | `(item: Item) => void`            | -            | Функция сработает при закрытии элемента                         |
+| `onItemAutoClose?`                                | `(item: Item) => void`            | -            | Функция сработает при автоматическом закрытии элемента          |
+| `className?`                                      | `string`                          | -            | Дополнительный CSS-класс                                        |
 
 ## Пример
 

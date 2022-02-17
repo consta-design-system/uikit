@@ -17,11 +17,7 @@ const cnSnackBarExampleTimer = cn('SnackBarExampleTimer');
 type Item = {
   key: number;
   message: string;
-  icon?: IconComponent;
-  buttons?: string[];
-  status?: SnackBarItemStatus;
-  onClose?: () => void;
-  closeTime: number;
+  status: SnackBarItemStatus;
   progressMode?: 'line' | 'timer';
 };
 
@@ -33,25 +29,23 @@ const mapIconByStatus: Record<SnackBarItemStatus, IconComponent | undefined> = {
   warning: undefined,
 };
 
-const getItemIconByStatus = (status: SnackBarItemStatus): IconComponent | undefined =>
-  mapIconByStatus[status];
-
-function reducer(
-  state: Item[],
-  action: { type: 'add' | 'remove'; item: Item; key?: number | string },
-): Item[] {
+function reducer(state: Item[], action: { type: 'add' | 'remove'; item: Item }): Item[] {
   switch (action.type) {
     case 'add':
       return [...state, action.item];
     case 'remove':
-      return state.filter((item) => item.key !== action.key);
+      return state.filter((itemInState) => itemInState.key !== action.item.key);
   }
 }
+
+const getItemIcon = (item: Item) => mapIconByStatus[item.status];
+const getItemShowProgress = (item: Item) => item.progressMode;
 
 export const SnackBarExampleTimer: React.FC = () => {
   const [items, dispatchItems] = useReducer<
     React.Reducer<Item[], { type: 'add' | 'remove'; item: Item; key?: number | string }>
   >(reducer, []);
+
   const generateHandleAdd = (
     status: SnackBarItemStatus,
     progressMode?: SnackBarItemShowProgressProp,
@@ -61,9 +55,6 @@ export const SnackBarExampleTimer: React.FC = () => {
       key,
       message: `Сейчас эта штука закроется ${key}`,
       status,
-      icon: getItemIconByStatus(status),
-      onClose: () => dispatchItems({ type: 'remove', item, key }),
-      closeTime: 5,
       progressMode,
     };
     dispatchItems({ type: 'add', item });
@@ -107,8 +98,10 @@ export const SnackBarExampleTimer: React.FC = () => {
       <SnackBar
         className={cnSnackBarExampleTimer('SnackBar')}
         items={items}
-        getItemAutoClose={(item) => item.closeTime}
-        getItemShowProgress={(item) => item.progressMode}
+        onItemClose={(item) => dispatchItems({ type: 'remove', item })}
+        getItemShowProgress={getItemShowProgress}
+        getItemIcon={getItemIcon}
+        getItemAutoClose={() => 5}
       />
     </div>
   );

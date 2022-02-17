@@ -1,6 +1,6 @@
 import './SnackBar.stories.css';
 
-import * as React from 'react';
+import React, { useReducer } from 'react';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
 
@@ -66,7 +66,7 @@ export function Playground() {
     withCloseButton,
     withComponentInsteadOfText,
   } = defaultKnobs();
-  const [items, dispatchItems] = React.useReducer(reducer, []);
+  const [items, dispatchItems] = useReducer(reducer, []);
   const generateHandleAdd = (status: SnackBarItemStatus) => () => {
     const key = items.length + 1;
 
@@ -84,7 +84,6 @@ export function Playground() {
       status,
       ...(withAutoClose && {
         autoClose: 5,
-        onAutoClose: () => dispatchItems({ type: 'remove', key }),
       }),
       ...(showProgress !== '' && { showProgress }),
       ...(withIcon && { icon: getItemIconByStatus(status) }),
@@ -104,9 +103,6 @@ export function Playground() {
           },
         ],
       }),
-      ...(withCloseButton && {
-        onClose: () => dispatchItems({ type: 'remove', key }),
-      }),
     };
     dispatchItems({ type: 'add', item });
   };
@@ -118,6 +114,9 @@ export function Playground() {
   const handleNormalAdd = generateHandleAdd('normal');
 
   React.useEffect(() => handleNormalAdd(), []);
+
+  const handlerRemoveItem = (item: SnackBarItemDefault) =>
+    dispatchItems({ type: 'remove', key: item.key });
 
   return (
     <EventInterceptorProvider eventHandler={action('EventInterceptor')} map={eventInterceptorMap}>
@@ -169,7 +168,16 @@ export function Playground() {
             onClick={handleNormalAdd}
           />
         </div>
-        <SnackBar className={cnSnackBarStories('SnackBar')} items={items} />
+        <SnackBar
+          className={cnSnackBarStories('SnackBar')}
+          items={items}
+          {...(withCloseButton && {
+            onItemClose: handlerRemoveItem,
+          })}
+          {...(withAutoClose && {
+            onItemAutoClose: handlerRemoveItem,
+          })}
+        />
       </div>
     </EventInterceptorProvider>
   );

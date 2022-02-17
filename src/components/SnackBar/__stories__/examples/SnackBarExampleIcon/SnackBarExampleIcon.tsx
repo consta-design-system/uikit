@@ -7,7 +7,6 @@ import { IconMoon } from '../../../../../icons/IconMoon/IconMoon';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cn } from '../../../../../utils/bem';
 import { SnackBar } from '../../../SnackBar';
-import { SnackBarItemStatus } from '../../../types';
 
 const cnSnackBarExampleIcon = cn('SnackBarExampleIcon');
 
@@ -30,8 +29,8 @@ const items: Item[] = [
   },
 ];
 
-const getIcon = (status?: SnackBarItemStatus) => {
-  if (status === 'normal') {
+const getIcon = (item: Item) => {
+  if (item.status === 'normal') {
     return IconMoon;
   }
   return IconDisconnection;
@@ -40,11 +39,7 @@ const getIcon = (status?: SnackBarItemStatus) => {
 export const SnackBarExampleIcon = () => {
   return (
     <div className={cnSnackBarExampleIcon('', [cnDocsDecorator('Section')])}>
-      <SnackBar
-        className={cnSnackBarExampleIcon('SnackBar')}
-        items={items}
-        getItemIcon={(item) => getIcon(item.status)}
-      />
+      <SnackBar className={cnSnackBarExampleIcon('SnackBar')} items={items} getItemIcon={getIcon} />
     </div>
   );
 };

@@ -32,11 +32,11 @@ const items: Item[] = [
   },
 ];
 
-const getStatus = (criticality?: number) => {
-  if (criticality === 3) {
+const getStatus = (item: Item) => {
+  if (item.criticality === 3) {
     return 'alert';
   }
-  if (criticality === 2) {
+  if (item.criticality === 2) {
     return 'warning';
   }
   return 'normal';
@@ -48,7 +48,7 @@ export const SnackBarExampleStatus: React.FC = () => {
       <SnackBar
         className={cnSnackBarExampleStatus('SnackBar')}
         items={items}
-        getItemStatus={(item) => getStatus(item.criticality)}
+        getItemStatus={getStatus}
       />
     </div>
   );

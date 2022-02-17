@@ -22,17 +22,13 @@ const items: Item[] = [
   },
 ];
 
-const getActions = (buttons?: string[]) => {
-  if (Array.isArray(buttons)) {
-    return buttons.map((button) => ({
-      label: button,
-      onClick: () => {
-        console.log(button);
-      },
-    }));
-  }
-  return undefined;
-};
+const getActions = (item: Item) =>
+  item.buttons?.map((button) => ({
+    label: button,
+    onClick: () => {
+      console.log(button);
+    },
+  }));
 
 export const SnackBarExampleButtons: React.FC = () => {
   return (
@@ -40,7 +36,7 @@ export const SnackBarExampleButtons: React.FC = () => {
       <SnackBar
         className={cnSnackBarExampleButtons('SnackBar')}
         items={items}
-        getItemActions={(item) => getActions(item.buttons)}
+        getItemActions={getActions}
       />
     </div>
   );

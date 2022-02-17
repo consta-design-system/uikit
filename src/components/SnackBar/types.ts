@@ -1,8 +1,5 @@
 import { IconComponent } from '../../icons/Icon/Icon';
-import {
-  PropsWithHTMLAttributes,
-  PropsWithHTMLAttributesAndRef,
-} from '../../utils/types/PropsWithHTMLAttributes';
+import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
 export type SnackBarItemDefault = {
   key: string | number;
@@ -15,6 +12,11 @@ export type SnackBarItemDefault = {
   onClose?: (item: SnackBarItemDefault) => void;
   onAutoClose?: (item: SnackBarItemDefault) => void;
 };
+
+/**
+ * @deprecated since version 3.16.0 use SnackBarItemDefault
+ */
+export type Item = SnackBarItemDefault;
 
 export type SnackBarPropItemAction = {
   label: string | number;
@@ -67,16 +69,22 @@ export type Mappers<ITEM> = {
   getItemOnAutoClose?: SnackBarPropGetItemOnAutoClose<ITEM>;
 };
 
-export type SnackBarProps<ITEM = SnackBarItemDefault> = PropsWithHTMLAttributes<
+export type SnackBarProps<ITEM = SnackBarItemDefault> = PropsWithHTMLAttributesAndRef<
   {
     items: ITEM[];
     children?: never;
+    onItemClose?: (item: ITEM) => void;
+    onItemAutoClose?: (item: ITEM) => void;
   } & Mappers<ITEM>,
   HTMLDivElement
 > &
   (ITEM extends { key: SnackBarItemDefault['key'] }
     ? {}
     : { getItemKey: SnackBarPropGetItemKey<ITEM> });
+
+export type SnackBarComponent = <ITEM = SnackBarItemDefault>(
+  props: SnackBarProps<ITEM>,
+) => React.ReactElement | null;
 
 export type SnackBarTimerPropOnMount = (object: { pause: () => void; start: () => void }) => void;
 
@@ -89,21 +97,3 @@ export type SnackBarTimerProps = {
 };
 
 export type SnackBarItemComponent = (props: SnackBarItemProps) => React.ReactElement | null;
-
-export type GetItem = <ITEM>(
-  item: ITEM,
-  params: {
-    getItemKey: SnackBarPropGetItemKey<ITEM>;
-    getItemMessage: SnackBarPropGetItemMessage<ITEM>;
-    getItemStatus: SnackBarPropGetItemStatus<ITEM>;
-    getItemAutoClose: SnackBarPropGetItemAutoClose<ITEM>;
-    getItemShowProgress: SnackBarPropGetItemShowProgress<ITEM>;
-    getItemIcon: SnackBarPropGetItemIcon<ITEM>;
-    getItemActions: SnackBarPropGetItemActions<ITEM>;
-    getItemOnClose: SnackBarPropGetItemOnClose<ITEM>;
-    getItemOnAutoClose: SnackBarPropGetItemOnAutoClose<ITEM>;
-  },
-) => Omit<SnackBarItemDefault, 'onClose' | 'onAutoClose'> & {
-  onClose?: () => void;
-  onAutoClose?: () => void;
-};
