@@ -3,9 +3,9 @@ import { act, fireEvent, render, screen } from '@testing-library/react';
 
 import { cnIcon } from '../../../icons/Icon/Icon';
 import { IconAdd } from '../../../icons/IconAdd/IconAdd';
-import { cnSnackBar, SnackBar, SnackBarItemDefault } from '../SnackBar';
+import { cnSnackBar, SnackBar } from '../SnackBar';
 import { cnSnackBarItem } from '../SnackBarItem/SnackBarItem';
-import { snackBarItemStatus, SnackBarProps } from '../types';
+import { SnackBarItemDefault, snackBarItemStatus, SnackBarProps } from '../types';
 
 const testId = cnSnackBar();
 

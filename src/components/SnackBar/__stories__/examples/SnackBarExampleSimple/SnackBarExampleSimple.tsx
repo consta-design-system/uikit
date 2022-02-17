@@ -4,7 +4,8 @@ import React from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cn } from '../../../../../utils/bem';
-import { SnackBar, SnackBarItemDefault } from '../../../SnackBar';
+import { SnackBar } from '../../../SnackBar';
+import { SnackBarItemDefault } from '../../../types';
 
 const cnSnackBarExampleSimple = cn('SnackBarExampleSimple');
 

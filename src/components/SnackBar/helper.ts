@@ -1,7 +1,7 @@
-import { SnackBarItemDefault } from './SnackBar';
 import {
   GetItem,
   Mappers,
+  SnackBarItemDefault,
   SnackBarPropGetItemActions,
   SnackBarPropGetItemAutoClose,
   SnackBarPropGetItemIcon,

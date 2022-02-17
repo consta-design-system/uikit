@@ -2,8 +2,8 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { act, renderHook } from '@testing-library/react-hooks';
 
-import { SnackBar, SnackBarItemDefault } from '../../../SnackBar/SnackBar';
-import { SnackBarProps } from '../../../SnackBar/types';
+import { SnackBar } from '../../../SnackBar/SnackBar';
+import { SnackBarItemDefault, SnackBarProps } from '../../../SnackBar/types';
 import { useSnackBarEventsHandler } from '../useSnackBarEventsHandler';
 
 const testId = 'SnackBar';

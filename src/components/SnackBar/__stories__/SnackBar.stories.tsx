@@ -18,8 +18,8 @@ import {
   EventInterceptorProvider,
 } from '../../EventInterceptor/EventInterceptor';
 import { Text } from '../../Text/Text';
-import { SnackBar, SnackBarItemDefault } from '../SnackBar';
-import { snackBarItemShowProgressProp, SnackBarItemStatus } from '../types';
+import { SnackBar } from '../SnackBar';
+import { SnackBarItemDefault, snackBarItemShowProgressProp, SnackBarItemStatus } from '../types';
 
 import mdx from './SnackBar.docs.mdx';
 
@@ -79,12 +79,12 @@ export function Playground() {
       text
     );
     const item: SnackBarItemDefault = {
-      key: key.toString(),
+      key,
       message,
       status,
       ...(withAutoClose && {
         autoClose: 5,
-        // onAutoClose: () => dispatchItems({ type: 'remove', key }),
+        onAutoClose: () => dispatchItems({ type: 'remove', key }),
       }),
       ...(showProgress !== '' && { showProgress }),
       ...(withIcon && { icon: getItemIconByStatus(status) }),
@@ -105,7 +105,7 @@ export function Playground() {
         ],
       }),
       ...(withCloseButton && {
-        onClose: () => dispatchItems({ type: 'remove', key: key.toString() }),
+        onClose: () => dispatchItems({ type: 'remove', key }),
       }),
     };
     dispatchItems({ type: 'add', item });

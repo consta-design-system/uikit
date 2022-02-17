@@ -4,7 +4,17 @@ import {
   PropsWithHTMLAttributesAndRef,
 } from '../../utils/types/PropsWithHTMLAttributes';
 
-import { SnackBarItemDefault } from './SnackBar';
+export type SnackBarItemDefault = {
+  key: string | number;
+  message?: React.ReactNode;
+  status?: SnackBarItemStatus;
+  autoClose?: boolean | number;
+  showProgress?: SnackBarItemShowProgressProp;
+  icon?: IconComponent;
+  actions?: SnackBarPropItemAction[];
+  onClose?: (item: SnackBarItemDefault) => void;
+  onAutoClose?: (item: SnackBarItemDefault) => void;
+};
 
 export type SnackBarPropItemAction = {
   label: string | number;

@@ -4,40 +4,20 @@ import React from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import { useRefs } from '../../hooks/useRefs/useRefs';
-import { IconComponent } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { cnForCssTransition } from '../../utils/cnForCssTransition';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 
 import { cnSnackBarItem, SnackBarItem } from './SnackBarItem/SnackBarItem';
 import { getItem, withDefaultGetters } from './helper';
-import {
-  SnackBarItemShowProgressProp,
-  SnackBarItemStatus,
-  SnackBarPropItemAction,
-  SnackBarProps,
-} from './types';
+import { SnackBarItemDefault, SnackBarProps } from './types';
 
 export const cnSnackBar = cn('SnackBar');
 
-export type SnackBarItemDefault = {
-  key: string | number;
-  message?: React.ReactNode;
-  status?: SnackBarItemStatus;
-  autoClose?: boolean | number;
-  showProgress?: SnackBarItemShowProgressProp;
-  icon?: IconComponent;
-  actions?: SnackBarPropItemAction[];
-  onClose?: (item: SnackBarItemDefault) => void;
-  onAutoClose?: (item: SnackBarItemDefault) => void;
-};
-
 /**
- * @deprecated since version 3.15.1 Item
+ * @deprecated since version 3.16.0 use SnackBarItemDefault
  */
-export type Item = Omit<SnackBarItemDefault, 'key'> & {
-  key: string | number;
-};
+export type Item = SnackBarItemDefault;
 
 const cssTransitionClassNames = cnForCssTransition(cnSnackBar, 'Item');
 
