@@ -82,7 +82,6 @@ const getKnobs = <T extends TableRow>(replacedProps?: Partial<Props<T>>): Props<
   ) as ((props: { column: TableColumn<T>; row: T; isActive: boolean }) => string) | undefined;
 
   return {
-    autoCalculateWidthColumn: boolean('autoCalculateWidthColumn', true),
     columns: object('columns', props.columns),
     rows: object('rows', props.rows),
     filters: getFiltersKnob(props.filters),

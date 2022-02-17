@@ -166,7 +166,6 @@ export type TableColumn<T extends TableRow> = {
 export type TableProps<T extends TableRow> = {
   columns: TableColumn<T>[];
   rows: T[];
-  autoCalculateWidthColumn?: boolean;
   isResizable?: boolean;
   filters?: Filters<T>;
   onSortBy?: onSortBy<T>;
@@ -267,7 +266,6 @@ const InternalTable = <T extends TableRow>(
     filters: rawFilters,
     isResizable = false,
     stickyHeader = false,
-    autoCalculateWidthColumn = true,
     stickyColumns = 0,
     minColumnWidth = 150,
     activeRow,
@@ -365,33 +363,40 @@ const InternalTable = <T extends TableRow>(
     setResizedColumnWidths(updateAt(resizedColumnWidths, idx, newWidth));
   };
 
+  const overallColumnsWidth = useMemo(() => {
+    const columnsElements = Object.values(columnsRefs.current).filter(isNotNil);
+    const columnsElementsWidths = columnsElements.map((el) => el.getBoundingClientRect().width);
+    const resultArr = getMergedArray(columnsElementsWidths, resizedColumnWidths);
+    return resultArr.reduce((a, b) => (a ?? 0) + (b ?? 0));
+  }, [resizedColumnWidths, isResizable]);
+
   React.useLayoutEffect(() => {
     const columnsElements = Object.values(columnsRefs.current).filter(isNotNil);
     if (columnsElements.length === 0) return;
 
     const columnsElementsWidths = columnsElements.map((el) => el.getBoundingClientRect().width);
     setInitialColumnWidths(columnsElementsWidths);
-    console.log(resizedColumnWidths, initialColumnWidths, columnsElementsWidths);
 
     // Проверяем, что таблица отрисовалась корректно, и устанавливаем значения ширин колонок после 1го и последующих рендера
     if (
       columnsElements[0].getBoundingClientRect().left !==
-        columnsElements[columnsElements.length - 1].getBoundingClientRect().left &&
-      autoCalculateWidthColumn
+      columnsElements[columnsElements.length - 1].getBoundingClientRect().left
     ) {
       const resultArr = getMergedArray(columnsElementsWidths, resizedColumnWidths);
       // Выставляю в undefined так как если вычеслять значение для последней колонки так,
       // чтобы заполнялось все свободное пространство, при изменении ширины таблицы в меньшую сторону
       // ширина последней колонки изменяться не будет, а так она будет css'ом проставляться в auto
-      resultArr[resultArr.length - 1] = undefined;
+      if ((overallColumnsWidth ?? tableWidth) < tableWidth) {
+        resultArr[resultArr.length - 1] = undefined;
+      }
       return setResizedColumnWidths(resultArr);
     }
 
     // условие изменения ширины колонок при изменении ширины экрана (контейнера таблицы)
-    if (!autoCalculateWidthColumn && tableWidth > 0 && !isResizable) {
+    if (tableWidth > 0 && !isResizable) {
       return setResizedColumnWidths(getColumnsWidth());
     }
-  }, [tableWidth]);
+  }, [tableWidth, overallColumnsWidth]);
 
   const isSortedByColumn = (column: TableColumn<T>): boolean =>
     getColumnSortByField(column) === sorting?.by;
