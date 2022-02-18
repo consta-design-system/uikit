@@ -1,46 +1,66 @@
 import './SnackBar.css';
 
-import React, { createRef, useMemo } from 'react';
+import React, { forwardRef } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
+import { useRefs } from '../../hooks/useRefs/useRefs';
 import { cn } from '../../utils/bem';
 import { cnForCssTransition } from '../../utils/cnForCssTransition';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 
 import { SnackBarItem } from './SnackBarItem/SnackBarItem';
-import { SnackBarProps } from './helper';
+import { getItem, withDefaultGetters } from './helper';
+import { SnackBarComponent, SnackBarProps } from './types';
 
 export const cnSnackBar = cn('SnackBar');
 
 const cssTransitionClassNames = cnForCssTransition(cnSnackBar, 'Item');
 
-export const SnackBar: React.FC<SnackBarProps> = (props) => {
-  const { items, className, ...otherProps } = usePropsHandler('SnackBar', props);
+function SnackBarRender(propsComponent: SnackBarProps, ref: React.Ref<HTMLDivElement>) {
+  const props = usePropsHandler('SnackBar', withDefaultGetters(propsComponent));
+  const {
+    items,
+    className,
+    getItemKey,
+    getItemActions,
+    getItemAutoClose,
+    getItemIcon,
+    getItemMessage,
+    getItemOnAutoClose,
+    getItemOnClose,
+    getItemShowProgress,
+    getItemStatus,
+    onItemClose,
+    onItemAutoClose,
+    ...otherProps
+  } = props;
 
-  const refs = useMemo(() => {
-    const refArray: React.RefObject<HTMLDivElement>[] = [];
-
-    for (let i = 0; i < items.length; i++) {
-      refArray[i] = createRef<HTMLDivElement>();
-    }
-
-    return refArray;
-  }, [items]);
+  const refs = useRefs<HTMLDivElement>(items.length);
 
   return (
-    <TransitionGroup {...otherProps} className={cnSnackBar(null, [className])} appear enter exit>
-      {items.map((item, index) => {
-        return (
-          <CSSTransition
-            nodeRef={refs[index]}
-            classNames={cssTransitionClassNames}
-            key={item.key}
-            timeout={200}
-          >
-            <SnackBarItem item={item} ref={refs[index]} className={cnSnackBar('Item')} />
-          </CSSTransition>
-        );
-      })}
-    </TransitionGroup>
+    <div className={cnSnackBar(null, [className])} ref={ref} {...otherProps}>
+      <TransitionGroup component={null} appear enter exit>
+        {items.map((item, index) => {
+          return (
+            <CSSTransition
+              nodeRef={refs[index]}
+              classNames={cssTransitionClassNames}
+              key={cnSnackBar('Item', { key: getItemKey(item) })}
+              timeout={200}
+            >
+              <SnackBarItem
+                ref={refs[index]}
+                className={cnSnackBar('Item')}
+                {...getItem(item, props)}
+              />
+            </CSSTransition>
+          );
+        })}
+      </TransitionGroup>
+    </div>
   );
-};
+}
+
+export const SnackBar = forwardRef(SnackBarRender) as SnackBarComponent;
+
+export * from './types';

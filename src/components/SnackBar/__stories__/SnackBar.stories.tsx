@@ -1,6 +1,6 @@
 import './SnackBar.stories.css';
 
-import * as React from 'react';
+import React, { useReducer } from 'react';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
 
@@ -18,13 +18,13 @@ import {
   EventInterceptorProvider,
 } from '../../EventInterceptor/EventInterceptor';
 import { Text } from '../../Text/Text';
-import { Item, snackBarItemShowProgressProp, SnackBarItemStatus } from '../helper';
 import { SnackBar } from '../SnackBar';
+import { SnackBarItemDefault, snackBarItemShowProgressProp, SnackBarItemStatus } from '../types';
 
 import mdx from './SnackBar.docs.mdx';
 
-type State = Item[];
-type Action = { type: 'add'; item: Item } | { type: 'remove'; key: number | string };
+type State = SnackBarItemDefault[];
+type Action = { type: 'add'; item: SnackBarItemDefault } | { type: 'remove'; key: number | string };
 
 const defaultKnobs = () => ({
   withIcon: boolean('withIcon', false),
@@ -35,15 +35,16 @@ const defaultKnobs = () => ({
   withComponentInsteadOfText: boolean('withComponentInsteadOfText', false),
 });
 
-const getItemIconByStatus = (status: SnackBarItemStatus): IconComponent | undefined => {
-  const mapIconByStatus: Record<SnackBarItemStatus, IconComponent> = {
-    success: IconThumbUp,
-    warning: IconAlert,
-    alert: IconAlert,
-    system: IconProcessing,
-    normal: IconRing,
-  };
-  return mapIconByStatus[status];
+const mapIconByStatus: Record<SnackBarItemStatus, IconComponent> = {
+  success: IconThumbUp,
+  warning: IconAlert,
+  alert: IconAlert,
+  system: IconProcessing,
+  normal: IconRing,
+};
+
+const getItemIcon = (item: SnackBarItemDefault): IconComponent | undefined => {
+  return item.status ? mapIconByStatus[item.status] : undefined;
 };
 
 const cnSnackBarStories = cn('SnackBarStories');
@@ -66,7 +67,7 @@ export function Playground() {
     withCloseButton,
     withComponentInsteadOfText,
   } = defaultKnobs();
-  const [items, dispatchItems] = React.useReducer(reducer, []);
+  const [items, dispatchItems] = useReducer(reducer, []);
   const generateHandleAdd = (status: SnackBarItemStatus) => () => {
     const key = items.length + 1;
 
@@ -78,33 +79,10 @@ export function Playground() {
     ) : (
       text
     );
-    const item: Item = {
+    const item: SnackBarItemDefault = {
       key,
       message,
       status,
-      ...(withAutoClose && {
-        autoClose: 5,
-        onAutoClose: () => dispatchItems({ type: 'remove', key }),
-      }),
-      ...(showProgress !== '' && { showProgress }),
-      ...(withIcon && { icon: getItemIconByStatus(status) }),
-      ...(withActionButtons && {
-        actions: [
-          {
-            label: 'Согласен',
-            onClick: () => {
-              console.log('Согласен');
-            },
-          },
-          {
-            label: 'Не согласен',
-            onClick: () => {
-              console.log('Не согласен');
-            },
-          },
-        ],
-      }),
-      ...(withCloseButton && { onClose: () => dispatchItems({ type: 'remove', key }) }),
     };
     dispatchItems({ type: 'add', item });
   };
@@ -116,6 +94,9 @@ export function Playground() {
   const handleNormalAdd = generateHandleAdd('normal');
 
   React.useEffect(() => handleNormalAdd(), []);
+
+  const handlerRemoveItem = (item: SnackBarItemDefault) =>
+    dispatchItems({ type: 'remove', key: item.key });
 
   return (
     <EventInterceptorProvider eventHandler={action('EventInterceptor')} map={eventInterceptorMap}>
@@ -167,7 +148,37 @@ export function Playground() {
             onClick={handleNormalAdd}
           />
         </div>
-        <SnackBar className={cnSnackBarStories('SnackBar')} items={items} />
+        <SnackBar
+          className={cnSnackBarStories('SnackBar')}
+          items={items}
+          getItemIcon={withIcon ? getItemIcon : undefined}
+          {...(withCloseButton && {
+            onItemClose: handlerRemoveItem,
+          })}
+          {...(withAutoClose && {
+            onItemAutoClose: handlerRemoveItem,
+          })}
+          getItemAutoClose={withAutoClose ? () => 5 : undefined}
+          getItemShowProgress={showProgress !== '' ? () => showProgress : undefined}
+          getItemActions={
+            withActionButtons
+              ? () => [
+                  {
+                    label: 'Согласен',
+                    onClick: () => {
+                      console.log('Согласен');
+                    },
+                  },
+                  {
+                    label: 'Не согласен',
+                    onClick: () => {
+                      console.log('Не согласен');
+                    },
+                  },
+                ]
+              : undefined
+          }
+        />
       </div>
     </EventInterceptorProvider>
   );

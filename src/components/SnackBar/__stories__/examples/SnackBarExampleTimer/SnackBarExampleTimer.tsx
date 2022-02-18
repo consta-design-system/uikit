@@ -9,10 +9,17 @@ import { IconRing } from '../../../../../icons/IconRing/IconRing';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cn } from '../../../../../utils/bem';
 import { Button } from '../../../../Button/Button';
-import { Item, SnackBarItemShowProgressProp, SnackBarItemStatus } from '../../../helper';
 import { SnackBar } from '../../../SnackBar';
+import { SnackBarItemShowProgressProp, SnackBarItemStatus } from '../../../types';
 
 const cnSnackBarExampleTimer = cn('SnackBarExampleTimer');
+
+type Item = {
+  key: number;
+  message: string;
+  status: SnackBarItemStatus;
+  progressMode?: 'line' | 'timer';
+};
 
 const mapIconByStatus: Record<SnackBarItemStatus, IconComponent | undefined> = {
   alert: IconAlert,
@@ -22,38 +29,33 @@ const mapIconByStatus: Record<SnackBarItemStatus, IconComponent | undefined> = {
   warning: undefined,
 };
 
-const getItemIconByStatus = (status: SnackBarItemStatus): IconComponent | undefined =>
-  mapIconByStatus[status];
-
-function reducer(
-  state: Item[],
-  action: { type: 'add' | 'remove'; item: Item; key?: number | string },
-): Item[] {
+function reducer(state: Item[], action: { type: 'add' | 'remove'; item: Item }): Item[] {
   switch (action.type) {
     case 'add':
       return [...state, action.item];
     case 'remove':
-      return state.filter((item) => item.key !== action.key);
+      return state.filter((itemInState) => itemInState.key !== action.item.key);
   }
 }
+
+const getItemIcon = (item: Item) => mapIconByStatus[item.status];
+const getItemShowProgress = (item: Item) => item.progressMode;
 
 export const SnackBarExampleTimer: React.FC = () => {
   const [items, dispatchItems] = useReducer<
     React.Reducer<Item[], { type: 'add' | 'remove'; item: Item; key?: number | string }>
   >(reducer, []);
+
   const generateHandleAdd = (
     status: SnackBarItemStatus,
-    showProgress?: SnackBarItemShowProgressProp,
+    progressMode?: SnackBarItemShowProgressProp,
   ) => () => {
     const key = items.length + 1;
     const item: Item = {
       key,
       message: `Сейчас эта штука закроется ${key}`,
       status,
-      icon: getItemIconByStatus(status),
-      onClose: () => dispatchItems({ type: 'remove', item, key }),
-      autoClose: 5,
-      showProgress,
+      progressMode,
     };
     dispatchItems({ type: 'add', item });
   };
@@ -68,6 +70,12 @@ export const SnackBarExampleTimer: React.FC = () => {
   return (
     <div className={cnSnackBarExampleTimer('', [cnDocsDecorator('Section')])}>
       <div className={cnSnackBarExampleTimer('Buttons')}>
+        <Button
+          className={cnSnackBarExampleTimer('ButtonAdd')}
+          iconLeft={IconAdd}
+          label="Без таймера + иконка"
+          onClick={handleHiddenTimerAdd}
+        />
         <Button
           className={cnSnackBarExampleTimer('ButtonAdd')}
           iconLeft={IconAdd}
@@ -86,14 +94,15 @@ export const SnackBarExampleTimer: React.FC = () => {
           label="Тревожный таймер"
           onClick={handleAlertAdd}
         />
-        <Button
-          className={cnSnackBarExampleTimer('ButtonAdd')}
-          iconLeft={IconAdd}
-          label="Скрытый таймер + иконка"
-          onClick={handleHiddenTimerAdd}
-        />
       </div>
-      <SnackBar className={cnSnackBarExampleTimer('SnackBar')} items={items} />
+      <SnackBar
+        className={cnSnackBarExampleTimer('SnackBar')}
+        items={items}
+        onItemClose={(item) => dispatchItems({ type: 'remove', item })}
+        getItemShowProgress={getItemShowProgress}
+        getItemIcon={getItemIcon}
+        getItemAutoClose={() => 5}
+      />
     </div>
   );
 };

@@ -2,8 +2,8 @@ import './ThemePreview.css';
 
 import React, { useReducer } from 'react';
 
-import { Item } from '../../../components/SnackBar/helper';
 import { SnackBar } from '../../../components/SnackBar/SnackBar';
+import { SnackBarItemDefault } from '../../../components/SnackBar/types';
 import { Text } from '../../../components/Text/Text';
 import { defaultVars } from '../../../hooks/useThemeVars/helpers';
 import { useThemeVars } from '../../../hooks/useThemeVars/useThemeVars';
@@ -38,9 +38,9 @@ const varsMap = {
   shadow: [],
 } as const;
 
-type Action = { type: 'add'; item: Item } | { type: 'remove'; key: number | string };
+type Action = { type: 'add'; item: SnackBarItemDefault } | { type: 'remove'; key: number | string };
 
-function reducer(state: Item[], action: Action) {
+function reducer(state: SnackBarItemDefault[], action: Action) {
   switch (action.type) {
     case 'add':
       return [...state, action.item];

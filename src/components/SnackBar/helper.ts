@@ -1,53 +1,90 @@
-import { IconComponent } from '../../icons/Icon/Icon';
-import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
+import {
+  Mappers,
+  SnackBarItemDefault,
+  SnackBarPropGetItemActions,
+  SnackBarPropGetItemAutoClose,
+  SnackBarPropGetItemIcon,
+  SnackBarPropGetItemKey,
+  SnackBarPropGetItemMessage,
+  SnackBarPropGetItemOnAutoClose,
+  SnackBarPropGetItemOnClose,
+  SnackBarPropGetItemShowProgress,
+  SnackBarPropGetItemStatus,
+  SnackBarProps,
+} from './types';
 
-export type SnackBarPropItemAction = {
-  label: string | number;
-  onClick: React.EventHandler<React.MouseEvent>;
+const defaultGetItemKey: SnackBarPropGetItemKey<SnackBarItemDefault> = (item) => item.key;
+const defaultGetItemMessage: SnackBarPropGetItemMessage<SnackBarItemDefault> = (item) =>
+  item.message;
+const defaultGetItemStatus: SnackBarPropGetItemStatus<SnackBarItemDefault> = (item) => item.status;
+const defaultGetItemAutoClose: SnackBarPropGetItemAutoClose<SnackBarItemDefault> = (item) =>
+  item.autoClose;
+const defaultGetItemShowProgress: SnackBarPropGetItemShowProgress<SnackBarItemDefault> = (item) =>
+  item.showProgress;
+const defaultGetItemIcon: SnackBarPropGetItemIcon<SnackBarItemDefault> = (item) => item.icon;
+const defaultGetItemActions: SnackBarPropGetItemActions<SnackBarItemDefault> = (item) =>
+  item.actions;
+const defaultGetItemOnClose: SnackBarPropGetItemOnClose<SnackBarItemDefault> = (item) =>
+  item.onClose;
+const defaultGetItemOnAutoClose: SnackBarPropGetItemOnAutoClose<SnackBarItemDefault> = (item) =>
+  item.onAutoClose;
+
+export const withDefaultGetters = (props: SnackBarProps) => {
+  return {
+    ...props,
+    getItemKey: props.getItemKey || defaultGetItemKey,
+    getItemMessage: props.getItemMessage || defaultGetItemMessage,
+    getItemStatus: props.getItemStatus || defaultGetItemStatus,
+    getItemAutoClose: props.getItemAutoClose || defaultGetItemAutoClose,
+    getItemShowProgress: props.getItemShowProgress || defaultGetItemShowProgress,
+    getItemIcon: props.getItemIcon || defaultGetItemIcon,
+    getItemActions: props.getItemActions || defaultGetItemActions,
+    getItemOnClose: props.getItemOnClose || defaultGetItemOnClose,
+    getItemOnAutoClose: props.getItemOnAutoClose || defaultGetItemOnAutoClose,
+  };
 };
 
-export type SnackBarActionButtonProps = {
-  actions: SnackBarPropItemAction[];
-  className?: string;
-};
-
-export type SnackBarItemProps = {
-  item: Item;
-  className?: string;
-};
-
-export const snackBarItemStatus = ['normal', 'system', 'success', 'warning', 'alert'] as const;
-export type SnackBarItemStatus = typeof snackBarItemStatus[number];
-export const snackBarItemStatusDefault: SnackBarItemStatus = snackBarItemStatus[0];
-
-export const snackBarItemShowProgressProp = ['timer', 'line'] as const;
-export type SnackBarItemShowProgressProp = typeof snackBarItemShowProgressProp[number];
-
-export type Item = {
-  key: string | number;
-  message?: string | number | React.ReactNode;
-  status?: SnackBarItemStatus;
-  autoClose?: boolean | number;
-  showProgress?: SnackBarItemShowProgressProp;
-  icon?: IconComponent;
-  actions?: SnackBarPropItemAction[];
-  onClose?: (item: Item) => void;
-  onAutoClose?: (item: Item) => void;
-};
-
-type Props = {
-  items: Item[];
-  children?: never;
-};
-
-export type SnackBarProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
-
-export type SnackBarTimerPropOnMount = (object: { pause: () => void; start: () => void }) => void;
-
-export type SnackBarTimerProps = {
-  onMount: SnackBarTimerPropOnMount;
-  onTimeIsOver: () => void;
-  startTime: number;
-  hidden?: boolean;
-  className?: string;
+export const getItem = <ITEM>(
+  item: ITEM,
+  props: Required<Mappers<ITEM>> & {
+    onItemClose?: (item: ITEM) => void;
+    onItemAutoClose?: (item: ITEM) => void;
+  },
+) => {
+  const {
+    getItemKey,
+    getItemActions,
+    getItemAutoClose,
+    getItemIcon,
+    getItemMessage,
+    getItemOnAutoClose,
+    getItemOnClose,
+    getItemShowProgress,
+    getItemStatus,
+    onItemClose,
+    onItemAutoClose,
+  } = props;
+  return {
+    key: getItemKey(item),
+    message: getItemMessage(item),
+    status: getItemStatus(item),
+    autoClose: getItemAutoClose(item),
+    showProgress: getItemShowProgress(item),
+    icon: getItemIcon(item),
+    actions: getItemActions(item),
+    onClose:
+      typeof getItemOnClose(item) === 'function' || typeof onItemClose === 'function'
+        ? () => {
+            getItemOnClose(item)?.(item);
+            onItemClose?.(item);
+          }
+        : undefined,
+    onAutoClose:
+      typeof getItemOnAutoClose(item) === 'function' || typeof onItemAutoClose === 'function'
+        ? () => {
+            getItemOnAutoClose(item)?.(item);
+            onItemAutoClose?.(item);
+          }
+        : undefined,
+  };
 };

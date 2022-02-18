@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useTimer } from '../../../hooks/useTimer/useTimer';
 import { cn } from '../../../utils/bem';
 import { Timer } from '../../Timer/Timer';
-import { SnackBarTimerProps } from '../helper';
+import { SnackBarTimerProps } from '../types';
 
 const interval = 1000;
 
