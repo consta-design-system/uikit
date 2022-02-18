@@ -105,6 +105,9 @@ export const Sidebar: SidebarComponent = (props) => {
   } = props;
 
   const ref = useRef<HTMLDivElement | null>(null);
+
+  const portalRef = useRef<HTMLDivElement>(null);
+
   const { theme } = useTheme();
 
   useEffect(() => {
@@ -126,9 +129,11 @@ export const Sidebar: SidebarComponent = (props) => {
       className={cnSidebar({ position })}
       classNames={cnForCssTransition(cnSidebar)}
       timeout={200}
+      nodeRef={portalRef}
     >
       <PortalWithTheme
         preset={theme}
+        ref={portalRef}
         container={container}
         className={rootClassName}
         style={typeof style?.zIndex === 'number' ? { zIndex: style.zIndex } : undefined}

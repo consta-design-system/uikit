@@ -1,6 +1,6 @@
 import './SelectDropdown.css';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import {
@@ -78,6 +78,8 @@ export const SelectDropdown: SelectDropdown = (props) => {
     renderItem,
   } = props;
 
+  const popoverRef = useRef<HTMLDivElement>(null);
+
   return (
     <CSSTransition
       in={isOpen}
@@ -85,12 +87,14 @@ export const SelectDropdown: SelectDropdown = (props) => {
       appear
       classNames={cnSelectDropdownCssTransition}
       timeout={200}
+      nodeRef={popoverRef}
     >
       <Popover
         anchorRef={controlRef}
         direction="downStartLeft"
         possibleDirections={['downStartLeft', 'upStartLeft', 'downStartRight', 'upStartRight']}
         offset={1}
+        ref={popoverRef}
         role="listbox"
         className={cnSelectDropdown({ form, size }, [className])}
         aria-activedescendant={`${id}-${highlightedIndex}`}
