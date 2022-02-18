@@ -35,15 +35,16 @@ const defaultKnobs = () => ({
   withComponentInsteadOfText: boolean('withComponentInsteadOfText', false),
 });
 
-const getItemIconByStatus = (status: SnackBarItemStatus): IconComponent | undefined => {
-  const mapIconByStatus: Record<SnackBarItemStatus, IconComponent> = {
-    success: IconThumbUp,
-    warning: IconAlert,
-    alert: IconAlert,
-    system: IconProcessing,
-    normal: IconRing,
-  };
-  return mapIconByStatus[status];
+const mapIconByStatus: Record<SnackBarItemStatus, IconComponent> = {
+  success: IconThumbUp,
+  warning: IconAlert,
+  alert: IconAlert,
+  system: IconProcessing,
+  normal: IconRing,
+};
+
+const getItemIcon = (item: SnackBarItemDefault): IconComponent | undefined => {
+  return item.status ? mapIconByStatus[item.status] : undefined;
 };
 
 const cnSnackBarStories = cn('SnackBarStories');
@@ -82,27 +83,6 @@ export function Playground() {
       key,
       message,
       status,
-      ...(withAutoClose && {
-        autoClose: 5,
-      }),
-      ...(showProgress !== '' && { showProgress }),
-      ...(withIcon && { icon: getItemIconByStatus(status) }),
-      ...(withActionButtons && {
-        actions: [
-          {
-            label: 'Согласен',
-            onClick: () => {
-              console.log('Согласен');
-            },
-          },
-          {
-            label: 'Не согласен',
-            onClick: () => {
-              console.log('Не согласен');
-            },
-          },
-        ],
-      }),
     };
     dispatchItems({ type: 'add', item });
   };
@@ -171,12 +151,33 @@ export function Playground() {
         <SnackBar
           className={cnSnackBarStories('SnackBar')}
           items={items}
+          getItemIcon={withIcon ? getItemIcon : undefined}
           {...(withCloseButton && {
             onItemClose: handlerRemoveItem,
           })}
           {...(withAutoClose && {
             onItemAutoClose: handlerRemoveItem,
           })}
+          getItemAutoClose={withAutoClose ? () => 5 : undefined}
+          getItemShowProgress={showProgress !== '' ? () => showProgress : undefined}
+          getItemActions={
+            withActionButtons
+              ? () => [
+                  {
+                    label: 'Согласен',
+                    onClick: () => {
+                      console.log('Согласен');
+                    },
+                  },
+                  {
+                    label: 'Не согласен',
+                    onClick: () => {
+                      console.log('Не согласен');
+                    },
+                  },
+                ]
+              : undefined
+          }
         />
       </div>
     </EventInterceptorProvider>
