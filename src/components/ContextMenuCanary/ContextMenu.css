@@ -1,0 +1,8 @@
+.ContextMenu {
+  &-Level_exit {
+    opacity: 0 !important;
+    pointer-events: none;
+    transition: opacity 0.2s, transform 0.2s !important;
+    transform: var(--mix-dropdown-animate-transform) !important;
+  }
+}

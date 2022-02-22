@@ -1,0 +1,56 @@
+.ContextMenuItem {
+  --vertical-space: 0;
+  display: flex;
+  align-items: center;
+  padding: var(--vertical-space) var(--space-s);
+  text-decoration: none;
+  word-break: break-word;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  & > *:not(:last-child) {
+    margin-right: var(--space-xs);
+  }
+
+  &:hover,
+  &_active {
+    background: var(--color-control-bg-clear-hover);
+  }
+
+  &_size {
+    &_xs {
+      --vertical-space: var(--space-xs);
+    }
+
+    &_s {
+      --vertical-space: var(--space-xs);
+    }
+
+    &_m {
+      --vertical-space: var(--space-s);
+    }
+
+    &_l {
+      --vertical-space: var(--space-m);
+    }
+  }
+
+  &-Label {
+    flex: 1;
+  }
+
+  &_disabled.Text {
+    color: var(--color-control-typo-disable);
+    cursor: default;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  &-Side {
+    display: flex;
+    flex: 0;
+    align-items: center;
+  }
+}
