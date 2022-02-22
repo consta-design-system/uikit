@@ -1,0 +1,25 @@
+import React, { useRef, useState } from 'react';
+
+import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
+import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
+import { Button } from '../../../../Button/Button';
+import { ContextMenu } from '../../../ContextMenuCanary';
+
+const items: string[] = ['Пункт 1', 'Пункт 2', 'Пункт 3'];
+
+export const ContextMenuExampleOutsideClick = () => {
+  const ref = useRef(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+      <ContextMenu
+        items={items}
+        getItemLabel={(item) => item}
+        anchorRef={ref}
+        onClickOutside={() => setIsOpen(false)}
+      />
+    </StoryBookExample>
+  );
+};

@@ -8,7 +8,7 @@ import { Button } from '../../Button/Button';
 import { ContextMenu } from '../ContextMenuCanary';
 import { contextMenuDefaultSize, contextMenuSizes } from '../types';
 
-// import mdx from './ContextMenu.docs.mdx';
+import mdx from './ContextMenu.docs.mdx';
 
 const defaultKnobs = () => ({
   size: select('size', contextMenuSizes, contextMenuDefaultSize),
@@ -107,9 +107,9 @@ export default createMetadata({
   title: 'Компоненты|/Базовые/ContextMenuCanary',
   id: 'components|/ContextMenuCanary',
   parameters: {
-    // docs: {
-    //   page: mdx,
-    // },
+    docs: {
+      page: mdx,
+    },
     design: {
       type: 'figma',
       url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=4894%3A74617',

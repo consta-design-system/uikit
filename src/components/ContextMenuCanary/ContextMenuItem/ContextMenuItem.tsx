@@ -10,7 +10,6 @@ import {
   contextMenuDefaultSize,
   ContextMenuItemComponent,
   ContextMenuItemProps,
-  ContextMenuPropSide,
   ContextMenuPropSize,
 } from '../types';
 
@@ -18,7 +17,7 @@ const cnContextMenuItem = cn('ContextMenuItem');
 
 const renderSide = (props: {
   icon?: IconComponent;
-  side?: ContextMenuPropSide;
+  side?: React.ReactNode;
   position: 'left' | 'right';
   size: ContextMenuPropSize;
 }) => {

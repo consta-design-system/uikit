@@ -7,7 +7,6 @@ import {
   ContextMenuLevelProps,
   ContextMenuPropGetGroupId,
   ContextMenuPropGetGroupLabel,
-  ContextMenuPropGetItemActive,
   ContextMenuPropGetItemAs,
   ContextMenuPropGetItemAttributes,
   ContextMenuPropGetItemDisabled,
@@ -38,8 +37,6 @@ const defaultGetItemRightIcon: ContextMenuPropGetItemRightIcon<ContextMenuItemDe
   item.rightIcon;
 const defaultGetItemLeftIcon: ContextMenuPropGetItemLeftIcon<ContextMenuItemDefault> = (item) =>
   item.leftIcon;
-const defaultGetItemActive: ContextMenuPropGetItemActive<ContextMenuItemDefault> = (item) =>
-  item.active;
 const defaultGetItemStatus: ContextMenuPropGetItemStatus<ContextMenuItemDefault> = (item) =>
   item.status;
 const defaultGetItemDisabled: ContextMenuPropGetItemDisabled<ContextMenuItemDefault> = (item) =>
@@ -69,7 +66,6 @@ export function withDefaultGetters<ITEM, GROUP>(props: ContextMenuProps<ITEM, GR
     getItemLeftSide: props.getItemLeftSide || defaultGetItemLeftSide,
     getItemRightIcon: props.getItemRightIcon || defaultGetItemRightIcon,
     getItemLeftIcon: props.getItemLeftIcon || defaultGetItemLeftIcon,
-    getItemActive: props.getItemActive || defaultGetItemActive,
     getItemSubMenu: props.getItemSubMenu || defaultGetItemSubMenu,
     getItemStatus: props.getItemStatus || defaultGetItemStatus,
     getItemDisabled: props.getItemDisabled || defaultGetItemDisabled,
@@ -89,7 +85,6 @@ export const getItemMappers = <ITEM, GROUP>(
   getItemLabel: props.getItemLabel,
   getItemRightSide: props.getItemRightSide,
   getItemLeftSide: props.getItemLeftSide,
-  getItemActive: props.getItemActive,
   getItemSubMenu: props.getItemSubMenu,
   getItemStatus: props.getItemStatus,
   getItemDisabled: props.getItemDisabled,
@@ -103,7 +98,6 @@ export const getItemMappers = <ITEM, GROUP>(
 
 export const getItem = <ITEM>(item: ITEM, props: Required<MappersItem<ITEM>>) => {
   const {
-    getItemActive,
     getItemAs,
     getItemAttributes,
     getItemDisabled,
@@ -124,7 +118,6 @@ export const getItem = <ITEM>(item: ITEM, props: Required<MappersItem<ITEM>>) =>
     leftSide: getItemLeftSide(item),
     rightSide: getItemRightSide(item),
     disabled: getItemDisabled(item),
-    active: getItemActive(item),
     as: getItemAs(item),
     attributes: getItemAttributes(item),
     onClick:

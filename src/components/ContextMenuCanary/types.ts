@@ -12,8 +12,6 @@ export const contextMenuStatus = ['alert', 'success', 'warning'] as const;
 export type ContextMenuStatus = typeof contextMenuStatus[number];
 export const contextMenuDefaultStatus: ContextMenuStatus = contextMenuStatus[0];
 
-export type ContextMenuPropSide = string | React.ReactNode | undefined;
-
 export const contextMenuPropSubMenuDirections = [
   'rightStartUp',
   'rightStartDown',
@@ -37,11 +35,10 @@ export type ContextMenuGroupDefault = {
 export type ContextMenuItemDefault = {
   label: string | number;
   key?: string | number;
-  rightSide?: ContextMenuPropSide;
+  rightSide?: React.ReactNode;
   rightIcon?: IconComponent;
-  leftSide?: ContextMenuPropSide;
+  leftSide?: React.ReactNode;
   leftIcon?: IconComponent;
-  active?: boolean;
   subMenu?: ContextMenuItemDefault[];
   status?: ContextMenuStatus;
   disabled?: boolean;
@@ -54,9 +51,8 @@ export type ContextMenuItemDefault = {
 export type ContextMenuPropSortGroup = (a: string | number, b: string | number) => number;
 
 export type ContextMenuPropGetItemLabel<ITEM> = (item: ITEM) => string | number;
-export type ContextMenuPropGetItemRightSide<ITEM> = (item: ITEM) => ContextMenuPropSide;
-export type ContextMenuPropGetItemLeftSide<ITEM> = (item: ITEM) => ContextMenuPropSide;
-export type ContextMenuPropGetItemActive<ITEM> = (item: ITEM) => boolean | undefined;
+export type ContextMenuPropGetItemRightSide<ITEM> = (item: ITEM) => React.ReactNode | undefined;
+export type ContextMenuPropGetItemLeftSide<ITEM> = (item: ITEM) => React.ReactNode | undefined;
 export type ContextMenuPropGetItemSubMenu<ITEM> = (item: ITEM) => ITEM[] | undefined;
 export type ContextMenuPropGetItemStatus<ITEM> = (item: ITEM) => ContextMenuStatus | undefined;
 export type ContextMenuPropGetItemKey<ITEM> = (item: ITEM) => string | number | undefined;
@@ -91,7 +87,6 @@ export type MappersItem<ITEM> = {
   getItemLabel?: ContextMenuPropGetItemLabel<ITEM>;
   getItemRightSide?: ContextMenuPropGetItemRightSide<ITEM>;
   getItemLeftSide?: ContextMenuPropGetItemLeftSide<ITEM>;
-  getItemActive?: ContextMenuPropGetItemActive<ITEM>;
   getItemSubMenu?: ContextMenuPropGetItemSubMenu<ITEM>;
   getItemStatus?: ContextMenuPropGetItemStatus<ITEM>;
   getItemDisabled?: ContextMenuPropGetItemDisabled<ITEM>;
@@ -147,7 +142,7 @@ export type ContextMenuProps<
     PositioningProps,
   HTMLDivElement
 > &
-  (GROUP extends { id: ContextMenuGroupDefault['id'] }
+  (GROUP extends { id: ContextMenuGroupDefault['id'] | unknown }
     ? {}
     : { getGroupId: ContextMenuPropGetGroupId<GROUP> }) &
   (ITEM extends { label: ContextMenuItemDefault['label'] }
@@ -183,6 +178,7 @@ export type ContextMenuItemProps<
   Omit<ContextMenuItemDefault, 'onClick' | 'as' | 'attributes' | 'subMenu' | 'groupId'> & {
     withSubMenu: boolean;
     size?: ContextMenuPropSize;
+    active?: boolean;
   },
   AS
 > &
