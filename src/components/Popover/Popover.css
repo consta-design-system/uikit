@@ -1,0 +1,8 @@
+.Popover {
+  position: absolute;
+  top: var(--popover-top);
+  left: var(--popover-left);
+  visibility: var(--popover-visibility);
+  width: var(--popover-width);
+  pointer-events: var(--popover-pointer-events);
+}

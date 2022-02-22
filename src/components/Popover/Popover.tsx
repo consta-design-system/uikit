@@ -1,8 +1,11 @@
+import './Popover.css';
+
 import React, { useEffect } from 'react';
 
 import { ClickOutsideHandler, useClickOutside } from '../../hooks/useClickOutside/useClickOutside';
 import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
+import { cn } from '../../utils/bem';
 import { PropsWithJsxAttributes } from '../../utils/types/PropsWithJsxAttributes';
 import { PortalWithTheme, usePortalContext } from '../PortalWithTheme/PortalWithTheme';
 import { useTheme } from '../Theme/Theme';
@@ -48,6 +51,21 @@ export const directionsStartEdge = [
   'rightStartDown',
 ] as const;
 
+export type PopoverPropOffset =
+  | '3xs'
+  | '2xs'
+  | 'xs'
+  | 's'
+  | 'm'
+  | 'l'
+  | 'xl'
+  | '2xl'
+  | '3xl'
+  | '4xl'
+  | '5xl'
+  | '6xl'
+  | number;
+
 export const directions = [...directionsStartCenter, ...directionsStartEdge];
 
 export type Direction = typeof directions[number];
@@ -72,7 +90,7 @@ export type Props = PropsWithJsxAttributes<
   {
     direction?: Direction;
     spareDirection?: Direction;
-    offset?: number;
+    offset?: PopoverPropOffset;
     arrowOffset?: number;
     possibleDirections?: readonly Direction[];
     isInteractive?: boolean;
@@ -106,6 +124,8 @@ const ContextConsumer: React.FC<{
   return <>{children}</>;
 };
 
+const cnPopover = cn('Popover');
+
 export const Popover = React.forwardRef<HTMLDivElement, Props>((props, componentRef) => {
   const {
     children,
@@ -117,6 +137,7 @@ export const Popover = React.forwardRef<HTMLDivElement, Props>((props, component
     onClickOutside,
     spareDirection = 'downStartLeft',
     style,
+    className,
     position: passedPosition,
     anchorRef,
     equalAnchorWidth,
@@ -159,7 +180,7 @@ export const Popover = React.forwardRef<HTMLDivElement, Props>((props, component
       width: document.documentElement.clientWidth,
       height: document.documentElement.clientHeight,
     },
-    offset,
+    offset: typeof offset === 'number' ? offset : 0,
     arrowOffset,
     direction: passedDirection,
     possibleDirections,
@@ -196,16 +217,20 @@ export const Popover = React.forwardRef<HTMLDivElement, Props>((props, component
     <PortalWithTheme
       {...otherProps}
       preset={theme}
+      className={cnPopover(null, [className])}
       container={window.document.body}
       ref={useForkRef<HTMLDivElement>([ref, componentRef])}
       style={{
         ...style,
-        ...(equalAnchorWidth && { width: anchorSize.width }),
-        pointerEvents: isInteractive ? undefined : 'none',
-        position: 'absolute',
-        top: (position?.y || 0) + window.scrollY,
-        left: (position?.x || 0) + window.scrollX,
-        visibility: position ? undefined : 'hidden',
+        ['--popover-top' as string]: `calc(${(position?.y || 0) + window.scrollY}px${
+          typeof offset === 'string' ? ` + var(--space-${offset})` : ''
+        })`,
+        ['--popover-left' as string]: `calc(${(position?.x || 0) + window.scrollX}px${
+          typeof offset === 'string' ? ` + var(--space-${offset})` : ''
+        })`,
+        [`--popover-width` as string]: equalAnchorWidth ? `${anchorSize.width}px` : undefined,
+        [`--popover-pointer-events` as string]: isInteractive ? undefined : 'none',
+        [`--popover-visibility` as string]: position ? undefined : 'hidden',
       }}
     >
       <ContextConsumer
