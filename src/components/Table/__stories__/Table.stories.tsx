@@ -109,7 +109,7 @@ const getKnobs = <T extends TableRow>(replacedProps?: Partial<Props<T>>): Props<
   };
 };
 
-export const Interactive = createStory(() => <Table {...getKnobs()} />, {
+export const Playground = createStory(() => <Table {...getKnobs()} />, {
   name: 'обычная',
 });
 
