@@ -5,6 +5,8 @@ import React, { useEffect } from 'react';
 import { ClickOutsideHandler, useClickOutside } from '../../hooks/useClickOutside/useClickOutside';
 import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
+import { defaultVars } from '../../hooks/useThemeVars/helpers';
+import { useThemeVars } from '../../hooks/useThemeVars/useThemeVars';
 import { cn } from '../../utils/bem';
 import { PropsWithJsxAttributes } from '../../utils/types/PropsWithJsxAttributes';
 import { PortalWithTheme, usePortalContext } from '../PortalWithTheme/PortalWithTheme';
@@ -51,20 +53,21 @@ export const directionsStartEdge = [
   'rightStartDown',
 ] as const;
 
-export type PopoverPropOffset =
-  | '3xs'
-  | '2xs'
-  | 'xs'
-  | 's'
-  | 'm'
-  | 'l'
-  | 'xl'
-  | '2xl'
-  | '3xl'
-  | '4xl'
-  | '5xl'
-  | '6xl'
-  | number;
+export const popoverPropOffset = [
+  '3xs',
+  '2xs',
+  'xs',
+  's',
+  'm',
+  'l',
+  'xl',
+  '2xl',
+  '3xl',
+  '4xl',
+  '5xl',
+  '6xl',
+] as const;
+export type PopoverPropOffset = typeof popoverPropOffset[number] | number;
 
 export const directions = [...directionsStartCenter, ...directionsStartEdge];
 
@@ -159,6 +162,8 @@ export const Popover = React.forwardRef<HTMLDivElement, Props>((props, component
     previousDirectionRef.current = null;
   };
 
+  const vars = useThemeVars();
+
   const updateAnchorClientRect = () =>
     setAnchorClientRect(anchorRef?.current?.getBoundingClientRect());
 
@@ -180,7 +185,10 @@ export const Popover = React.forwardRef<HTMLDivElement, Props>((props, component
       width: document.documentElement.clientWidth,
       height: document.documentElement.clientHeight,
     },
-    offset: typeof offset === 'number' ? offset : 0,
+    offset:
+      typeof offset === 'string'
+        ? vars.space[`--space-${offset}` as typeof defaultVars.space[number]]
+        : offset,
     arrowOffset,
     direction: passedDirection,
     possibleDirections,
@@ -222,12 +230,8 @@ export const Popover = React.forwardRef<HTMLDivElement, Props>((props, component
       ref={useForkRef<HTMLDivElement>([ref, componentRef])}
       style={{
         ...style,
-        ['--popover-top' as string]: `calc(${(position?.y || 0) + window.scrollY}px${
-          typeof offset === 'string' ? ` + var(--space-${offset})` : ''
-        })`,
-        ['--popover-left' as string]: `calc(${(position?.x || 0) + window.scrollX}px${
-          typeof offset === 'string' ? ` + var(--space-${offset})` : ''
-        })`,
+        ['--popover-top' as string]: `${(position?.y || 0) + window.scrollY}px`,
+        ['--popover-left' as string]: `${(position?.x || 0) + window.scrollX}px`,
         [`--popover-width` as string]: equalAnchorWidth ? `${anchorSize.width}px` : undefined,
         [`--popover-pointer-events` as string]: isInteractive ? undefined : 'none',
         [`--popover-visibility` as string]: position ? undefined : 'hidden',
