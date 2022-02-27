@@ -130,6 +130,7 @@ export type ContextMenuProps<
     offset?: number;
     groups?: GROUP[];
     sortGroup?: ContextMenuPropSortGroup;
+    onItemClick?: ContextMenuPropOnClick<ITEM>;
     possibleDirections?: readonly Direction[];
     subMenuDirection?: ContextMenuPropSubMenuDirection;
     spareDirection?: Direction;

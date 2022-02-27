@@ -5,7 +5,9 @@ import React from 'react';
 import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconArrowRight } from '../../../icons/IconArrowRight/IconArrowRight';
 import { cn } from '../../../utils/bem';
+import { getByMap } from '../../../utils/getByMap';
 import { Text } from '../../Text/Text';
+import { sizeMapIcon } from '../helper';
 import {
   contextMenuDefaultSize,
   ContextMenuItemComponent,
@@ -26,7 +28,7 @@ const renderSide = (props: {
   return (
     (Icon || side) && (
       <div className={cnContextMenuItem('Side', { position })}>
-        {Icon ? <Icon size={size === 'l' ? 'm' : size} /> : side}
+        {Icon ? <Icon size={getByMap(sizeMapIcon, size)} /> : side}
       </div>
     )
   );
@@ -45,6 +47,7 @@ function ContextMenuItemRender(props: ContextMenuItemProps, ref: React.Ref<HTMLD
     className,
     active,
     leftIcon,
+    onClick,
     rightIcon,
     ...otherProps
   } = props;
@@ -53,12 +56,13 @@ function ContextMenuItemRender(props: ContextMenuItemProps, ref: React.Ref<HTMLD
   return (
     <Text
       className={cnContextMenuItem({ size, active, disabled }, [className])}
-      {...otherProps}
       as={as}
       size={size}
       view={view}
       lineHeight="xs"
+      onClick={!disabled ? onClick : undefined}
       ref={ref}
+      {...otherProps}
     >
       {renderSide({
         icon: leftIcon,
@@ -76,7 +80,7 @@ function ContextMenuItemRender(props: ContextMenuItemProps, ref: React.Ref<HTMLD
       {withSubMenu && (
         <div className={cnContextMenuItem('Side', { position: 'right' })}>
           <IconArrowRight
-            size={size === 'l' ? 'm' : size}
+            size={getByMap(sizeMapIcon, size)}
             view={disabled ? 'disabled' : 'secondary'}
           />
         </div>

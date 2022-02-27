@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { boolean, select } from '@storybook/addon-knobs';
 
 import { exampleItems, groups } from '../__mocks__/mock.data';
@@ -35,6 +35,17 @@ export function Playground() {
 
   const ref = useRef<HTMLButtonElement>(null);
   const [isOpen, setIsOpen] = useState(false);
+
+  const itemsArr = useMemo(() => {
+    if (withGroup) {
+      return exampleItems;
+    }
+    return exampleItems.map((item) => {
+      const copy = { ...item };
+      delete copy.groupId;
+      return copy;
+    });
+  }, [withGroup]);
 
   const sortGroup = (a: number | string, b: number | string) => {
     if (a > b) {
@@ -85,7 +96,7 @@ export function Playground() {
     <div className={cnChoiceGroupStories()}>
       <Button label="Откройте контекстное меню" ref={ref} onClick={() => setIsOpen(!isOpen)} />
       <ContextMenu
-        items={exampleItems}
+        items={itemsArr}
         isOpen={isOpen}
         groups={withGroup ? groups : undefined}
         getGroupLabel={getGroupLabel}
@@ -97,7 +108,7 @@ export function Playground() {
         size={size}
         sortGroup={sortGroup}
         onClickOutside={() => setIsOpen(false)}
-        offset={30}
+        offset={8}
       />
     </div>
   );

@@ -1,5 +1,3 @@
-import '../ContextMenu.css';
-
 import React, { useEffect, useState } from 'react';
 
 import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
@@ -17,10 +15,7 @@ import {
   Level,
 } from '../types';
 
-function ContextMenuLevelGroupRender(
-  propsComponent: ContextMenuProps,
-  ref: React.Ref<HTMLDivElement>,
-) {
+function ContextMenuLevelsRender(propsComponent: ContextMenuProps, ref: React.Ref<HTMLDivElement>) {
   const props = withDefaultGetters(propsComponent);
   const {
     items,
@@ -135,6 +130,4 @@ function ContextMenuLevelGroupRender(
   );
 }
 
-export const ContextMenuLevelGroup = React.forwardRef(
-  ContextMenuLevelGroupRender,
-) as ContextMenuComponent;
+export const ContextMenuLevels = React.forwardRef(ContextMenuLevelsRender) as ContextMenuComponent;

@@ -1,3 +1,4 @@
+import { IconPropSize } from '../../icons/Icon/Icon';
 import { isNotNil } from '../../utils/type-guards';
 import { TextPropSize } from '../Text/Text';
 
@@ -78,23 +79,57 @@ export function withDefaultGetters<ITEM, GROUP>(props: ContextMenuProps<ITEM, GR
   };
 }
 
-export const getItemMappers = <ITEM, GROUP>(
+export const getMappersAndProps = <ITEM, GROUP>(
   props: ContextMenuLevelProps<ITEM, GROUP>,
-): Required<MappersItem<ITEM>> => ({
-  getItemKey: props.getItemKey,
-  getItemLabel: props.getItemLabel,
-  getItemRightSide: props.getItemRightSide,
-  getItemLeftSide: props.getItemLeftSide,
-  getItemSubMenu: props.getItemSubMenu,
-  getItemStatus: props.getItemStatus,
-  getItemDisabled: props.getItemDisabled,
-  getItemOnClick: props.getItemOnClick,
-  getItemAs: props.getItemAs,
-  getItemAttributes: props.getItemAttributes,
-  getItemGroupId: props.getItemGroupId,
-  getItemLeftIcon: props.getItemLeftIcon,
-  getItemRightIcon: props.getItemRightIcon,
-});
+): {
+  itemMappers: Required<MappersItem<ITEM>>;
+  groupMappers: Required<MappersGroup<GROUP>>;
+  otherProps: Omit<
+    ContextMenuLevelProps<ITEM, GROUP>,
+    keyof MappersItem<ITEM> | keyof MappersGroup<GROUP>
+  >;
+} => {
+  const {
+    getGroupId,
+    getItemAs,
+    getItemLabel,
+    getItemOnClick,
+    getItemStatus,
+    getItemSubMenu,
+    getGroupLabel,
+    getItemAttributes,
+    getItemDisabled,
+    getItemGroupId,
+    getItemKey,
+    getItemLeftIcon,
+    getItemLeftSide,
+    getItemRightIcon,
+    getItemRightSide,
+    ...otherProps
+  } = props;
+  return {
+    itemMappers: {
+      getItemKey,
+      getItemLabel,
+      getItemRightSide,
+      getItemLeftSide,
+      getItemSubMenu,
+      getItemStatus,
+      getItemDisabled,
+      getItemOnClick,
+      getItemAs,
+      getItemAttributes,
+      getItemGroupId,
+      getItemLeftIcon,
+      getItemRightIcon,
+    },
+    groupMappers: {
+      getGroupId,
+      getGroupLabel,
+    },
+    otherProps,
+  };
+};
 
 export const getItem = <ITEM>(item: ITEM, props: Required<MappersItem<ITEM>>) => {
   const {
@@ -188,9 +223,16 @@ export const getLevels = <ITEM>(params: GetLevelsParams<ITEM>): Level<ITEM>[] =>
 export const getItemIndex = (groupId: number | string, itemIndex: number) =>
   `${groupId}-${itemIndex}`;
 
-export const sizeMap: Record<ContextMenuPropSize, TextPropSize> = {
+export const sizeMapHeader: Record<ContextMenuPropSize, TextPropSize> = {
   xs: '2xs',
   s: '2xs',
   m: 'xs',
   l: 's',
+};
+
+export const sizeMapIcon: Record<ContextMenuPropSize, IconPropSize> = {
+  xs: 'xs',
+  s: 's',
+  m: 'm',
+  l: 'm',
 };
