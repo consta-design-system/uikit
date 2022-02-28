@@ -20,9 +20,10 @@ export const exampleItems: ContextMenuItemDefault[] = [
   {
     label: 'Скрепка',
     leftIcon: IconAttach,
+    leftSide: '1',
+    rightSide: '1',
     status: 'success',
     groupId: 1,
-    disabled: true,
     subMenu: [
       {
         label: 'Пункт - 1',
