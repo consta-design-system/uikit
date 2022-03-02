@@ -1,7 +1,7 @@
 import { ClickOutsideHandler } from '../../hooks/useClickOutside/useClickOutside';
 import { PropsWithAsAttributes } from '../../utils/types/PropsWithAsAttributes';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
-import { Direction, Position } from '../Popover/Popover';
+import { Direction, PopoverPropOffset, Position } from '../Popover/Popover';
 
 export const contextMenuSizes = ['m', 's', 'l'] as const;
 export type ContextMenuPropSize = typeof contextMenuSizes[number];
@@ -68,7 +68,7 @@ export type ContextMenuProps<ITEM> = PropsWithHTMLAttributesAndRef<
     subMenuDirection?: ContextMenuPropSubMenuDirection;
     getKey?: ContextMenuPropGetKey<ITEM>;
     getDisabled?: ContextMenuPropGetDisable<ITEM>;
-    offset?: number;
+    offset?: PopoverPropOffset;
     onItemClick?: (props: { e: React.MouseEvent; item: ITEM }) => void;
     onClickOutside?: ClickOutsideHandler;
     spareDirection?: Direction;
@@ -123,7 +123,7 @@ export type Level<ITEM> = {
   activeItem?: string;
   direction?: Direction;
   possibleDirections?: readonly Direction[];
-  offset?: number;
+  offset?: PopoverPropOffset;
 } & PositioningProps;
 
 export type ContextMenuItemComponent = <AS extends keyof JSX.IntrinsicElements = 'div'>(
