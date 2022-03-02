@@ -152,8 +152,8 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Базовые/ContextMenu',
-  id: 'components|/ContextMenu',
+  title: 'Компоненты|/Базовые/ContextMenuDepricated',
+  id: 'components|/ContextMenuDepricated',
   parameters: {
     docs: {
       page: mdx,

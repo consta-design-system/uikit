@@ -10,7 +10,7 @@ import { getGroups } from '../../../utils/getGroups';
 import { Popover } from '../../Popover/Popover';
 import { Text } from '../../Text/Text';
 import { ContextMenuItem } from '../ContextMenuItem/ContextMenuItem';
-import { getItem, getItemIndex, getMappersAndProps, sizeMapHeader } from '../helper';
+import { getItem, getItemIndex, sizeMapHeader } from '../helper';
 import {
   contextMenuDefaultSize,
   ContextMenuLevelComponent,
@@ -44,11 +44,9 @@ const renderHeader = (
 };
 
 function ContextMenuLevelRender<ITEM, GROUP>(
-  propsComponent: ContextMenuLevelProps<ITEM, GROUP>,
+  props: ContextMenuLevelProps<ITEM, GROUP>,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const { itemMappers, groupMappers, otherProps: props } = getMappersAndProps(propsComponent);
-
   const {
     size = contextMenuDefaultSize,
     levelDepth,
@@ -59,6 +57,21 @@ function ContextMenuLevelRender<ITEM, GROUP>(
     items,
     groups: groupsProp,
     setHoveredParenLevel,
+    getItemLabel,
+    getItemRightSide,
+    getItemLeftSide,
+    getItemSubMenu,
+    getItemStatus,
+    getItemDisabled,
+    getItemKey,
+    getItemOnClick,
+    getItemAs,
+    getItemAttributes,
+    getItemGroupId,
+    getItemLeftIcon,
+    getItemRightIcon,
+    getGroupLabel,
+    getGroupId,
     sortGroup,
     onItemClick,
     direction,
@@ -83,9 +96,9 @@ function ContextMenuLevelRender<ITEM, GROUP>(
 
   const groups = getGroups<ITEM, GROUP>(
     items,
-    itemMappers.getItemGroupId,
+    getItemGroupId,
     groupsProp,
-    groupMappers.getGroupId,
+    getGroupId,
     sortGroup && ((a, b) => sortGroup(a.key, b.key)),
   );
 
@@ -110,8 +123,8 @@ function ContextMenuLevelRender<ITEM, GROUP>(
 
   const onMouseEnter = (item: ITEM, itemIndex: string) => {
     if (active) {
-      const subMenu = itemMappers.getItemSubMenu(item);
-      const disabled = itemMappers.getItemDisabled(item);
+      const subMenu = getItemSubMenu(item);
+      const disabled = getItemDisabled(item);
       if (Array.isArray(subMenu) && !disabled) {
         addLevel({
           level: levelDepth + 1,
@@ -143,41 +156,35 @@ function ContextMenuLevelRender<ITEM, GROUP>(
       {groups.map((group, groupIndex) => {
         return (
           <div className={cnContextMenuLevel('Group')} key={group.key}>
-            {renderHeader(
-              group.group && groupMappers.getGroupLabel(group.group),
-              groupIndex === 0,
-              size,
-            )}
+            {renderHeader(group.group && getGroupLabel(group.group), groupIndex === 0, size)}
             {group.items.map((item, index) => {
-              const standardizedItem = getItem(item, itemMappers);
+              const standardizedItem = getItem<typeof item>(item, {
+                getItemLabel,
+                getItemRightSide,
+                getItemLeftSide,
+                getItemSubMenu,
+                getItemStatus,
+                getItemDisabled,
+                getItemKey,
+                getItemOnClick,
+                getItemAs,
+                getItemAttributes,
+                getItemGroupId,
+                getItemLeftIcon,
+                getItemRightIcon,
+                onItemClick,
+              });
               const itemIndex = getItemIndex(group.key, index);
-              const ref = itemsRefs[itemIndex];
-              const atributes = { ...standardizedItem }.attributes ?? {};
-              const withSubMenu = !!{ ...standardizedItem }.subMenu;
-              const onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-                if (!standardizedItem.disabled) {
-                  if (typeof standardizedItem.onClick === 'function') {
-                    standardizedItem.onClick?.(e);
-                  }
-                  if (typeof onItemClick === 'function') {
-                    onItemClick?.({ e, item });
-                  }
-                }
-              };
-              delete standardizedItem.attributes;
-              delete standardizedItem.subMenu;
-              delete standardizedItem.groupId;
               return (
                 <ContextMenuItem
-                  {...atributes}
                   {...standardizedItem}
-                  ref={ref}
-                  onClick={onClick}
+                  {...(getItemAttributes(item) ?? {})}
+                  ref={itemsRefs[itemIndex]}
                   key={itemIndex}
                   onMouseEnter={() => onMouseEnter(item, itemIndex)}
                   active={activeItem === itemIndex}
-                  withSubMenu={withSubMenu}
                   size={size}
+                  withSubMenu={!!getItemSubMenu(item)}
                 />
               );
             })}

@@ -6,6 +6,7 @@ import { ContextMenuExampleStatus } from './examples/ContextMenuExampleStatus/Co
 import { ContextMenuExampleGroups } from './examples/ContextMenuExampleGroups/ContextMenuExampleGroups';
 import { ContextMenuExampleIcon } from './examples/ContextMenuExampleIcon/ContextMenuExampleIcon';
 import { ContextMenuExampleSize } from './examples/ContextMenuExampleSize/ContextMenuExampleSize';
+import { ContextMenuExampleDefault } from './examples/ContextMenuExampleDefault/ContextMenuExampleDefault';
 
 <!--info
 description: Контекстное меню. Дополнительные действия на странице.
@@ -14,7 +15,7 @@ description: Контекстное меню. Дополнительные де�
 # ContextMenu
 
 ```tsx
-import { ContextMenu } from '@consta/uikit/ContextMenu';
+import { ContextMenu } from '@consta/uikit/ContextMenuCanary';
 ```
 
 Контекстное меню используется, когда нужно показать дополнительные действия,
@@ -36,6 +37,7 @@ import { ContextMenu } from '@consta/uikit/ContextMenu';
 - [Закрыть по клику за пределами](#закрыть-меню-по-клику-по-внешней-области)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
+- [Пример](#пример)
 
 ## Содержимое
 
@@ -565,7 +567,6 @@ type Direction =
 | [`groups`](#группы-пунктов)                                        | `GROUP[]`                                                                                                           | -                | Группы меню                                                                                                                                                     |
 | `anchorRef`                                                        | `React.RefObject<HTMLElement>`                                                                                      | -                | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                                               |
 | `isOpen?`                                                          | `booelan`                                                                                                           | -                | Флаг отвечающий открыто меню или нет                                                                                                                            |
-| `zIndex?`                                                          | `number`                                                                                                            | -                | Положение меню по оси Z                                                                                                                                         |
 | `position`                                                         | `{ x: number; y: number }, undefined`                                                                               | -                | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                                               |
 | `direction?`                                                       | [`Direction`](direction)                                                                                            | -                | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                                               |
 | `possibleDirections?`                                              | [`Direction`](direction)                                                                                            | -                | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                                               |
@@ -590,3 +591,114 @@ type Direction =
 | [`getGroupLabel?`](#группы-пунктов)                                | `(group: GROUP) => string`<code>&#124;</code>`undefined`                                                            | -                | Результат функции используется как заголовок группы                                                                                                             |
 | [`sortGroup?`](#группы-пунктов)                                    | `(a: string, number; b: string, number) => number;`                                                                 | -                | Функция сортировки групп                                                                                                                                        |
 | `className?`                                                       | `string`                                                                                                            | -                | Дополнительный CSS-класс для каждого уровня меню                                                                                                                |
+
+## Пример
+
+<ContextMenuExampleDefault />
+
+```tsx
+export const groups = [
+  {
+    label: 'Первая группа',
+    id: 1,
+  },
+  {
+    label: 'Вторая группа',
+    id: 2,
+  },
+];
+
+export const exampleItems = [
+  {
+    label: 'Скрепка',
+    leftIcon: IconAttach,
+    status: 'success',
+    groupId: 1,
+    subMenu: [
+      {
+        label: 'Пункт - 1',
+        status: 'success',
+      },
+      {
+        label: 'Пункт - 2',
+        status: 'success',
+        subMenu: [
+          {
+            label: 'Пункт - 3',
+            leftIcon: IconSun,
+            subMenu: [
+              {
+                label: 'Пункт - 5',
+              },
+              {
+                label: 'Пункт - 6',
+              },
+            ],
+          },
+          {
+            label: 'Пункт - 4',
+            leftIcon: IconSun,
+            subMenu: [
+              {
+                label: 'Пункт - 7',
+              },
+              {
+                label: 'Пункт - 8',
+              },
+            ],
+          },
+          {
+            label: 'Пункт - 9',
+            leftIcon: IconSun,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Глаз',
+    leftIcon: IconEye,
+    groupId: 1,
+  },
+  {
+    label: 'Две галочки',
+    groupId: 2,
+    leftIcon: IconAllDone,
+    rightSide: '!',
+    status: 'alert',
+  },
+  {
+    label: 'Чемодан',
+    groupId: 2,
+    leftIcon: IconBag,
+    rightSide: '!',
+    status: 'alert',
+  },
+  {
+    label: 'Солнце',
+    groupId: 2,
+    leftIcon: IconSun,
+    status: 'alert',
+    rightSide: '!',
+    disabled: true,
+  },
+];
+
+export const ContextMenuExampleDefault = () => {
+  const ref = useRef(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  return (
+    <>
+      <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+      <ContextMenu
+        isOpen={isOpen}
+        items={exampleItems}
+        groups={groups}
+        anchorRef={ref}
+        onClickOutside={() => setIsOpen(false)}
+        direction="downStartLeft"
+      />
+    </>
+  );
+};
+```

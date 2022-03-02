@@ -5,7 +5,6 @@ import { TextPropSize } from '../Text/Text';
 import {
   ContextMenuGroupDefault,
   ContextMenuItemDefault,
-  ContextMenuLevelProps,
   ContextMenuPropGetGroupId,
   ContextMenuPropGetGroupLabel,
   ContextMenuPropGetItemAs,
@@ -23,10 +22,10 @@ import {
   ContextMenuPropGetItemSubMenu,
   ContextMenuProps,
   ContextMenuPropSize,
+  GetItem,
   GetLevelsParams,
   Level,
   MappersGroup,
-  MappersItem,
 } from './types';
 
 const defaultGetItemKey: ContextMenuPropGetItemKey<ContextMenuItemDefault> = (item) => item.key;
@@ -79,74 +78,30 @@ export function withDefaultGetters<ITEM, GROUP>(props: ContextMenuProps<ITEM, GR
   };
 }
 
-export const getMappersAndProps = <ITEM, GROUP>(
-  props: ContextMenuLevelProps<ITEM, GROUP>,
-): {
-  itemMappers: Required<MappersItem<ITEM>>;
-  groupMappers: Required<MappersGroup<GROUP>>;
-  otherProps: Omit<
-    ContextMenuLevelProps<ITEM, GROUP>,
-    keyof MappersItem<ITEM> | keyof MappersGroup<GROUP>
-  >;
-} => {
+export const getItem: GetItem = (item, props) => {
   const {
-    getGroupId,
     getItemAs,
-    getItemLabel,
-    getItemOnClick,
-    getItemStatus,
-    getItemSubMenu,
-    getGroupLabel,
-    getItemAttributes,
     getItemDisabled,
-    getItemGroupId,
     getItemKey,
-    getItemLeftIcon,
+    getItemLabel,
     getItemLeftSide,
-    getItemRightIcon,
+    getItemOnClick,
     getItemRightSide,
-    ...otherProps
+    getItemLeftIcon,
+    getItemRightIcon,
+    getItemStatus,
+    onItemClick,
   } = props;
-  return {
-    itemMappers: {
-      getItemKey,
-      getItemLabel,
-      getItemRightSide,
-      getItemLeftSide,
-      getItemSubMenu,
-      getItemStatus,
-      getItemDisabled,
-      getItemOnClick,
-      getItemAs,
-      getItemAttributes,
-      getItemGroupId,
-      getItemLeftIcon,
-      getItemRightIcon,
-    },
-    groupMappers: {
-      getGroupId,
-      getGroupLabel,
-    },
-    otherProps,
+  const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!getItemDisabled(item)) {
+      if (typeof getItemOnClick(item) === 'function') {
+        getItemOnClick(item)?.({ e, item });
+      }
+      if (typeof onItemClick === 'function') {
+        onItemClick?.({ e, item });
+      }
+    }
   };
-};
-
-export const getItem = <ITEM>(item: ITEM, props: Required<MappersItem<ITEM>>) => {
-  const {
-    getItemAs,
-    getItemAttributes,
-    getItemDisabled,
-    getItemKey,
-    getItemLabel,
-    getItemLeftSide,
-    getItemOnClick,
-    getItemRightSide,
-    getItemLeftIcon,
-    getItemRightIcon,
-    getItemStatus,
-    getItemSubMenu,
-    getItemGroupId,
-  } = props;
   return {
     key: getItemKey(item),
     label: getItemLabel(item),
@@ -154,16 +109,8 @@ export const getItem = <ITEM>(item: ITEM, props: Required<MappersItem<ITEM>>) =>
     rightSide: getItemRightSide(item),
     disabled: getItemDisabled(item),
     as: getItemAs(item),
-    attributes: getItemAttributes(item),
-    onClick:
-      typeof getItemOnClick(item) === 'function'
-        ? (e: React.MouseEvent<HTMLDivElement>) => {
-            getItemOnClick(item)?.({ e, item });
-          }
-        : undefined,
+    onClick,
     status: getItemStatus(item),
-    subMenu: getItemSubMenu(item),
-    groupId: getItemGroupId(item),
     leftIcon: getItemLeftIcon(item),
     rightIcon: getItemRightIcon(item),
   };

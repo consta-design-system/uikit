@@ -1,9 +1,8 @@
 import './ContextMenu.css';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Transition } from 'react-transition-group';
 
-import { useDebounce } from '../../hooks/useDebounce/useDebounce';
 import { useFlag } from '../../hooks/useFlag/useFlag';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import {
@@ -11,6 +10,7 @@ import {
   cnMixPopoverAnimate,
 } from '../../mixs/MixPopoverAnimate/MixPopoverAnimate';
 import { cn } from '../../utils/bem';
+import { Direction } from '../Popover/Popover';
 
 import { ContextMenuLevels } from './ContextMenuLevels/ContextMenuLevels';
 import { ContextMenuComponent, ContextMenuProps } from './types';
@@ -18,25 +18,16 @@ import { ContextMenuComponent, ContextMenuProps } from './types';
 const cnContextMenu = cn('ContextMenu');
 
 function ContextMenuRender(props: ContextMenuProps, ref: React.Ref<HTMLDivElement>) {
-  const { isOpen: isOpenProp, className, direction, ...otherProps } = props;
+  const { isOpen, className, onSetDirection, ...otherProps } = props;
   const [playAnimation, setPlayAnimation] = useFlag();
-  const [isOpen, setIsOpen] = useFlag(isOpenProp);
-
-  useEffect(() => {
-    if (isOpenProp) {
-      setIsOpen.on();
-    }
-  }, [isOpenProp]);
-
-  useEffect(
-    useDebounce(() => {
-      !isOpenProp && setIsOpen.off();
-    }, animateTimeout),
-    [isOpenProp],
-  );
-
+  const [direction, setDirection] = useState<Direction>();
   const nodeRef = useRef<HTMLDivElement>(null);
   const levelRef = useForkRef([ref, nodeRef]);
+
+  const handleSetDirection = (d: Direction) => {
+    setDirection(d);
+    onSetDirection?.(d);
+  };
 
   return (
     <Transition
@@ -51,7 +42,7 @@ function ContextMenuRender(props: ContextMenuProps, ref: React.Ref<HTMLDivElemen
         <ContextMenuLevels
           {...otherProps}
           ref={levelRef}
-          direction={direction}
+          onSetDirection={handleSetDirection}
           className={cnContextMenu('Level', { playAnimation }, [
             className,
             cnMixPopoverAnimate({ animate, direction }),

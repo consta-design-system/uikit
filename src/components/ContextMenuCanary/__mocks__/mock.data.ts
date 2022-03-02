@@ -22,7 +22,6 @@ export const exampleItems: ContextMenuItemDefault[] = [
     leftIcon: IconAttach,
     status: 'success',
     groupId: 1,
-    disabled: true,
     subMenu: [
       {
         label: 'Пункт - 1',
@@ -73,12 +72,14 @@ export const exampleItems: ContextMenuItemDefault[] = [
     label: 'Две галочки',
     groupId: 2,
     leftIcon: IconAllDone,
+    rightSide: '!',
     status: 'alert',
   },
   {
     label: 'Чемодан',
     groupId: 2,
     leftIcon: IconBag,
+    rightSide: '!',
     status: 'alert',
   },
   {
@@ -86,6 +87,7 @@ export const exampleItems: ContextMenuItemDefault[] = [
     groupId: 2,
     leftIcon: IconSun,
     status: 'alert',
+    rightSide: '!',
     disabled: true,
   },
 ];

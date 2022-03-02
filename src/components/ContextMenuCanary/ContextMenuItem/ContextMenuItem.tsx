@@ -47,7 +47,6 @@ function ContextMenuItemRender(props: ContextMenuItemProps, ref: React.Ref<HTMLD
     className,
     active,
     leftIcon,
-    onClick,
     rightIcon,
     ...otherProps
   } = props;
@@ -60,7 +59,6 @@ function ContextMenuItemRender(props: ContextMenuItemProps, ref: React.Ref<HTMLD
       size={size}
       view={view}
       lineHeight="xs"
-      onClick={!disabled ? onClick : undefined}
       ref={ref}
       {...otherProps}
     >
