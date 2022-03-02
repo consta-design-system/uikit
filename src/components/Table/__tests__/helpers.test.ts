@@ -16,7 +16,7 @@ describe('getColumnsSize', () => {
   it('получение размера колонок', () => {
     const result = getColumnsSize([150, undefined]);
 
-    expect(result).toEqual('150px minmax(min-content, 50%)');
+    expect(result).toEqual('150px auto');
   });
 });
 

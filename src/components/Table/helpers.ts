@@ -36,9 +36,7 @@ export type HeaderData<T extends TableRow> = {
 };
 
 export const getColumnsSize = (sizes: ColumnWidth[]): string => {
-  return sizes
-    .map((s) => (isNumber(s) ? `${s}px` : `minmax(min-content, ${100 / sizes.length}%)`))
-    .join(' ');
+  return sizes.map((s) => (isNumber(s) ? `${s}px` : `auto`)).join(' ');
 };
 
 export const getColumnLeftOffset = ({
@@ -355,3 +353,12 @@ export const transformRows = <T extends TableRow>(
   }
   return rowsArr;
 };
+
+export function getMergedArray<TYPE>(mainArr: TYPE[], mergeArr: TYPE[]) {
+  const length = Math.max(mainArr.length, mergeArr.length);
+  const resultArr: TYPE[] = [];
+  for (let i = 0; i < length; i++) {
+    resultArr.push(mergeArr[i] ?? mainArr[i]);
+  }
+  return resultArr;
+}
