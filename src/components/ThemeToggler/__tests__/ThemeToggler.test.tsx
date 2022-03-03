@@ -3,16 +3,15 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import { exampleThemesThree, exampleThemesTwo } from '../__mocks__/data.mock';
 import { cnContextMenuItem } from '../../ContextMenu/ContextMenuItem/ContextMenuItem';
-import { Props, ThemeToggler } from '../ThemeToggler';
+import { ThemeToggler } from '../ThemeToggler';
+import { ThemeTogglerProps } from '../types';
 
 type Item = typeof exampleThemesTwo[number];
-
-type ThemeTogglerProps = Props<Item>;
 
 const defaultSetValue = jest.fn();
 const testId = 'ThemeToggler';
 
-const renderComponent = (props: Partial<ThemeTogglerProps>) => {
+const renderComponent = (props: Partial<ThemeTogglerProps<Item>>) => {
   return render(
     <>
       <div data-testid="outside" />
@@ -21,8 +20,6 @@ const renderComponent = (props: Partial<ThemeTogglerProps>) => {
         data-testid={testId}
         className={props.className}
         items={props.items || exampleThemesThree}
-        getItemLabel={(theme) => theme.label}
-        getItemIcon={(theme) => theme.icon}
         value={props.value || (props.items && props.items[0]) || exampleThemesTwo[0]}
         onChange={props.onChange || defaultSetValue}
       />

@@ -4,6 +4,8 @@ import {
 } from './examples/ThemeTogglerExampleQuantity/ThemeTogglerExampleQuantity';
 
 import { ThemeTogglerExampleSize } from './examples/ThemeTogglerExampleSize/ThemeTogglerExampleSize';
+import { ThemeTogglerExampleGetters } from './examples/ThemeTogglerExampleGetters/ThemeTogglerExampleGetters';
+import { ThemeTogglerExampleDefault } from './examples/ThemeTogglerExampleDefault/ThemeTogglerExampleDefault';
 
 <!--info
 description: Переключатель тем.
@@ -17,12 +19,19 @@ import { ThemeToggler } from '@consta/uikit/ThemeToggler';
 
 Переключатель, с помощью которого можно выбрать тему — из двух или большего количества вариантов.
 
+- [Содержимое](#содержимое)
 - [Темы](#темы)
 - [Контекстное меню](#контекстное-меню)
 - [Размер](#размер)
 - [Импорт](#импорт)
 - [Свойства](#свойства)
 - [Пример использования](#пример)
+
+## Содержимое
+
+- `key` - идентификатор элемента.
+- `label` - текст элемента.
+- `icon` - иконка элемента.
 
 ## Темы
 
@@ -34,12 +43,60 @@ const items = ['Default', 'Dark'];
 
 Тема, которая сейчас выбрана, содержится в `value`.
 
-Иконку темы можно получить с помощью функции `getItemIcon`— на неё нужно нажать, чтобы переключить тему.
+Иконку темы можно получить с помощью функции `getItemIcon` или в атрибуте `icon`
+в свойстве `items` типа [ThemeTogglerItemDefault](#свойства) — на неё нужно нажать, чтобы переключить тему.
 
-Название темы можно получить с помощью функции `getItemLabel`. Его видно только в [контекстном меню](#контекстное-меню).
+Название темы можно получить с помощью функции `getItemLabel` или в атрибуте `label`
+в свойстве `items` типа [ThemeTogglerItemDefault](#свойства). Его видно только в [контекстном меню](#контекстное-меню).
 
-У каждой темы может быть уникальный идентификатор. Его можно получить с помощью функции `getItemKey?`.
+У каждой темы может быть уникальный идентификатор. Его можно получить с помощью функции `getItemKey?` или в атрибуте `key`
+в свойстве `items` типа [ThemeTogglerItemDefault](#свойства).
 Если идентификатор не указан, вместо него используется `getItemLabel`.
+
+```tsx
+type Item = 'Default' | 'Dark' | 'Display';
+
+const items: Item[] = ['Default', 'Dark', 'Display'];
+
+const getItemIcon = (item: Item) => {
+  if (item === 'Default') {
+    return IconSun;
+  }
+  if (item === 'Dark') {
+    return IconMoon;
+  }
+  return IconLightningBolt;
+};
+
+const getTheme = (item: Item) => {
+  if (item === 'Default') {
+    return presetGpnDefault;
+  }
+  if (item === 'Dark') {
+    return presetGpnDark;
+  }
+  return presetGpnDisplay;
+};
+
+export const ThemeTogglerExampleGetters = () => {
+  const [value, setValue] = useState<Item>(items[0]);
+
+  return (
+    <Theme preset={getTheme(value)}>
+      <ThemeToggler
+        items={items}
+        value={value}
+        getItemLabel={(item) => item}
+        getItemIcon={getItemIcon}
+        onChange={({ value }) => setValue(value)}
+        direction="downStartLeft"
+      />
+    </Theme>
+  );
+};
+```
+
+<ThemeTogglerExampleGetters />
 
 Если выбрать можно только из двух тем, тема меняется по нажатию на иконку.
 
@@ -76,17 +133,25 @@ import { ThemeToggler } from '@consta/uikit/ThemeToggler';
 
 ## Свойства
 
+```tsx
+export type ThemeTogglerItemDefault = {
+  key?: string | number;
+  label: string;
+  icon: IconComponent;
+};
+```
+
 <!-- props:start -->
 
 | Свойство                                   | Тип и значения                 | По умолчанию   | Описание                                                                                                                                                  |
 | ------------------------------------------ | ------------------------------ | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`size?`](#размер-переключателя)           | `'xs'`, `'s'`, `'m'`, `'l'`    | `'m'`          | Размер переключателя                                                                                                                                      |
-| [`items`](#темы)                           | `T[]`                          | -              | Массив тем для выбора                                                                                                                                     |
-| [`value`](#темы)                           | `T`                            | -              | Текущая тема                                                                                                                                              |
+| [`items`](#темы)                           | `ITMT[]`                       | -              | Массив тем для выбора                                                                                                                                     |
+| [`value`](#темы)                           | `ITEM`                         | -              | Текущая тема                                                                                                                                              |
 | `onChange`                                 | `(arg: T) => void`             | -              | Функция для изменения                                                                                                                                     |
 | [`getItemKey?`](#темы)                     | `(arg: T) => string OR number` | `getItemLabel` | Функция для получения ключа, уникального для каждой переданной темы. Если опустить это свойство, то вместо этой функции будет использована `getItemLabel` |
-| [`getItemLabel`](#темы)                    | `(arg: T) => string`           | -              | Функция для получения названия темы                                                                                                                       |
-| [`getItemIcon`](#темы)                     | `(arg: T) => IconComponent`    | -              | Функция для получения иконки темы в формате компонента                                                                                                    |
+| [`getItemLabel?`](#темы)                   | `(arg: T) => string`           | -              | Функция для получения названия темы                                                                                                                       |
+| [`getItemIcon?`](#темы)                    | `(arg: T) => IconComponent`    | -              | Функция для получения иконки темы в формате компонента                                                                                                    |
 | [`direction?`](#контекстное-меню)          | `Direction`                    | -              | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) (только если тем больше двух)                                           |
 | [`possibleDirections?`](#контекстное-меню) | `Direction[]`                  | -              | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) (только если тем больше двух)                                           |
 | `className?`                               | `string`                       | -              | Дополнительный CSS-класс для контейнера (если тем всего две) или для кнопки (если тем больше двух)                                                        |
@@ -95,26 +160,50 @@ import { ThemeToggler } from '@consta/uikit/ThemeToggler';
 
 ## Пример
 
-```ts
+<ThemeTogglerExampleDefault />
+
+```tsx
 import React, { useState } from 'react';
 import { ThemeToggler } from '@consta/uikit/ThemeToggler';
 import { IconSun } from '@consta/uikit/IconSun';
 import { IconMoon } from '@consta/uikit/IconMoon';
 
-const items = ['Default', 'Dark'];
+export type ThemeType = {
+  label: string;
+  theme: ThemePreset;
+  icon: IconComponent;
+};
+
+export const items: ThemeType[] = [
+  {
+    theme: presetGpnDefault,
+    label: 'Default',
+    icon: IconSun,
+  },
+  {
+    theme: presetGpnDark,
+    label: 'Dark',
+    icon: IconMoon,
+  },
+  {
+    theme: presetGpnDisplay,
+    label: 'Display',
+    icon: IconLightningBolt,
+  },
+];
 
 const Examle = () => {
-  const [value, setValue] = useState(themes[0]);
+  const [value, setValue] = useState<ThemeType>(items[0]);
 
   return (
-    <ThemeToggler
-      size="m"
-      items={items}
-      value={value}
-      onChange={({ value }) => setValue(value)}
-      getItemIcon={(theme) => (theme === 'Default' ? IconSun : IconMoon)}
-      getItemLabel={(theme) => theme}
-    />
+    <Theme preset={value.theme} className={cnDocsDecorator('Section')}>
+      <ThemeToggler
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        direction="downStartLeft"
+      />
+    </Theme>
   );
 };
 ```
