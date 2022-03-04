@@ -1,18 +1,22 @@
 .SelectDropdown {
   --transition-spase: var(--space-2xs);
-  z-index: 9999;
   overflow: hidden;
   box-sizing: border-box;
-  width: 100%;
   min-width: 220px;
   margin: -1px 0 -1px;
   background: var(--color-bg-default);
   border: var(--control-border-width) solid var(--color-control-bg-border-default);
   outline: none;
-  opacity: 0;
   box-shadow: var(--shadow-layer);
   font-size: var(--font-size);
   transform: translateY(var(--transition-spase));
+
+  &_playAnimation {
+    opacity: 0 !important;
+    pointer-events: none;
+    transition: opacity 0.2s, transform 0.2s !important;
+    transform: var(--mix-dropdown-animate-transform) !important;
+  }
 
   &_size {
     &_xs {
