@@ -5,7 +5,6 @@
   /* Задаются через js */
   --tooltip-arrow-size: 0;
   --tooltip-arrow-offset: 0;
-  position: relative;
 
   &_status {
     &_alert {
