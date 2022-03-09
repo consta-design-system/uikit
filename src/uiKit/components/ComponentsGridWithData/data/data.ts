@@ -56,6 +56,12 @@ export const data: Data = [
   {
     items: [
       {
+        name: 'Attachment',
+        componentName: 'Attachment',
+        url: '/?path=/docs/components-attachment--playground',
+        description: 'Показывает загрузку файла или уже загруженный файл.',
+      },
+      {
         name: 'Avatar',
         componentName: 'Avatar',
         url: '/?path=/docs/components-avatar--playground',
@@ -74,12 +80,6 @@ export const data: Data = [
         description: 'Хлебные крошки. Показывают путь к текущей странице.',
       },
       {
-        name: 'Attachment',
-        componentName: 'Attachment',
-        url: '/?path=/docs/components-attachment--playground',
-        description: 'Показывает загрузку файла или уже загруженный файл.',
-      },
-      {
         name: 'Button',
         componentName: 'Button',
         url: '/?path=/docs/components-button--playground',
@@ -92,6 +92,12 @@ export const data: Data = [
         description: 'Карточка. Контейнер для любого контента.',
       },
       {
+        name: 'Checkbox',
+        componentName: 'Checkbox',
+        url: '/?path=/docs/components-checkbox--playground',
+        description: 'Чекбокс. Можно сделать выбор и подтвердить.',
+      },
+      {
         name: 'CheckboxGroup',
         componentName: 'CheckboxGroup',
         url: '/?path=/docs/components-checkboxgroup--playground',
@@ -102,12 +108,6 @@ export const data: Data = [
         componentName: 'ChoiceGroup',
         url: '/?path=/docs/components-choicegroup--playground',
         description: 'Группа кнопок. Можно выбрать один или несколько вариантов.',
-      },
-      {
-        name: 'Checkbox',
-        componentName: 'Checkbox',
-        url: '/?path=/docs/components-checkbox--playground',
-        description: 'Чекбокс. Можно сделать выбор и подтвердить.',
       },
       {
         name: 'Collapse',
@@ -128,7 +128,7 @@ export const data: Data = [
         description: 'Выпадающий список с поиском. Можно выбрать один или несколько вариантов.',
       },
       {
-        name: 'ContextMenu',
+        name: 'ContextMenu(Canary)',
         componentName: 'ContextMenu',
         url: '/?path=/docs/components-contextmenu--playground',
         description: 'Контекстное меню. Дополнительные действия на странице.',
@@ -170,16 +170,16 @@ export const data: Data = [
         description: 'Модульная сетка. Отвечает за расположение содержимого на странице.',
       },
       {
-        name: 'Header',
-        componentName: 'Header',
-        url: '/?path=/docs/components-header--playground',
-        description: 'Шапка. Блок с меню, поиском и аватаркой.',
-      },
-      {
         name: 'Informer',
         componentName: 'Informer',
         url: '/?path=/docs/components-informer--playground',
         description: 'Сообщение для пользователя. Встраивается в содержимое страницы.',
+      },
+      {
+        name: 'Header',
+        componentName: 'Header',
+        url: '/?path=/docs/components-header--playground',
+        description: 'Шапка. Блок с меню, поиском и аватаркой.',
       },
       {
         name: 'Layout(Canary)',
@@ -188,16 +188,16 @@ export const data: Data = [
         description: 'Лэйаут. Блоки, из которых можно построить каркас страницы.',
       },
       {
-        name: 'Modal',
-        componentName: 'Modal',
-        url: '/?path=/docs/components-modal--playground',
-        description: 'Всплывающее окно. Показывает контент поверх основной страницы.',
-      },
-      {
         name: 'Loader',
         componentName: 'Loader',
         url: '/?path=/docs/components-loader--playground',
         description: 'Прелоадер. Показывает, что информация загружается.',
+      },
+      {
+        name: 'Modal',
+        componentName: 'Modal',
+        url: '/?path=/docs/components-modal--playground',
+        description: 'Всплывающее окно. Показывает контент поверх основной страницы.',
       },
       {
         name: 'Pagination',
@@ -219,16 +219,16 @@ export const data: Data = [
           'Индикатор. Показывает течение процесса — загрузку, отправку или что-то похожее.',
       },
       {
-        name: 'Radio',
-        componentName: 'Radio',
-        url: '/?path=/docs/components-radio--playground',
-        description: 'Радиокнопка. Можно выбрать один вариант.',
-      },
-      {
         name: 'ProgressStepBar(Canary)',
         componentName: 'ProgressStepBar',
         url: '/?path=/docs/components-progressstepbar--playground',
         description: 'Прогресс по шагам. Показывает, на каком шаге процесс.',
+      },
+      {
+        name: 'Radio',
+        componentName: 'Radio',
+        url: '/?path=/docs/components-radio--playground',
+        description: 'Радиокнопка. Можно выбрать один вариант.',
       },
       {
         name: 'RadioGroup',
@@ -363,15 +363,15 @@ export const data: Data = [
 ];
 
 export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
+  Attachment: AttachmentImage,
   Avatar: AvatarImage,
   Badge: BadgeImage,
   Breadcrumbs: BreadcrumbsImage,
-  Attachment: AttachmentImage,
   Button: ButtonImage,
   Card: CardImage,
+  Checkbox: CheckboxImage,
   CheckboxGroup: CheckboxGroupImage,
   ChoiceGroup: ChoiceGroupImage,
-  Checkbox: CheckboxImage,
   Collapse: CollapseImage,
   CollapseGroup: CollapseGroupImage,
   Combobox: ComboboxImage,
@@ -382,16 +382,16 @@ export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> =
   File: FileImage,
   FileField: FileFieldImage,
   Grid: GridImage,
-  Header: HeaderImage,
   Informer: InformerImage,
+  Header: HeaderImage,
   Layout: LayoutImage,
-  Modal: ModalImage,
   Loader: LoaderImage,
+  Modal: ModalImage,
   Pagination: PaginationImage,
   Popover: PopoverImage,
   ProgressSpin: ProgressSpinImage,
-  Radio: RadioImage,
   ProgressStepBar: ProgressStepBarImage,
+  Radio: RadioImage,
   RadioGroup: RadioGroupImage,
   Responses: ResponsesImage,
   Select: SelectImage,
