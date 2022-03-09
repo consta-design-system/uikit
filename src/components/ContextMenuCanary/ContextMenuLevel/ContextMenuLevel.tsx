@@ -155,7 +155,7 @@ function ContextMenuLevelRender<ITEM, GROUP>(
     >
       {groups.map((group, groupIndex) => {
         return (
-          <div className={cnContextMenuLevel('Group')} key={group.key}>
+          <div className={cnContextMenuLevel('Group', { size })} key={group.key}>
             {renderHeader(group.group && getGroupLabel(group.group), groupIndex === 0, size)}
             {group.items.map((item, index) => {
               const standardizedItem = getItem<typeof item>(item, {
@@ -181,6 +181,7 @@ function ContextMenuLevelRender<ITEM, GROUP>(
                   {...(getItemAttributes(item) ?? {})}
                   ref={itemsRefs[itemIndex]}
                   key={itemIndex}
+                  className={cnContextMenuLevel('Item')}
                   onMouseEnter={() => onMouseEnter(item, itemIndex)}
                   active={activeItem === itemIndex}
                   size={size}

@@ -180,6 +180,6 @@ export const sizeMapHeader: Record<ContextMenuPropSize, TextPropSize> = {
 export const sizeMapIcon: Record<ContextMenuPropSize, IconPropSize> = {
   xs: 'xs',
   s: 's',
-  m: 'm',
-  l: 'm',
+  m: 's',
+  l: 's',
 };

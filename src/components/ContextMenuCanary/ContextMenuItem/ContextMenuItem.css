@@ -19,7 +19,7 @@
 
   &_size {
     &_xs {
-      --vertical-space: var(--space-xs);
+      --vertical-space: var(--space-2xs);
     }
 
     &_s {

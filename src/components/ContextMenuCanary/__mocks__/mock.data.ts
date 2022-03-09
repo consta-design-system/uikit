@@ -16,7 +16,11 @@ export const groups: ContextMenuGroupDefault[] = [
   },
 ];
 
-export const exampleItems: ContextMenuItemDefault[] = [
+export type Item = ContextMenuItemDefault & {
+  switch?: boolean;
+};
+
+export const exampleItems: Item[] = [
   {
     label: 'Скрепка',
     leftIcon: IconAttach,
@@ -73,6 +77,7 @@ export const exampleItems: ContextMenuItemDefault[] = [
     groupId: 2,
     leftIcon: IconAllDone,
     rightSide: '!',
+    switch: true,
     status: 'alert',
   },
   {
@@ -80,6 +85,7 @@ export const exampleItems: ContextMenuItemDefault[] = [
     groupId: 2,
     leftIcon: IconBag,
     rightSide: '!',
+    switch: true,
     status: 'alert',
   },
   {
@@ -88,6 +94,7 @@ export const exampleItems: ContextMenuItemDefault[] = [
     leftIcon: IconSun,
     status: 'alert',
     rightSide: '!',
+    switch: true,
     disabled: true,
   },
 ];

@@ -31,9 +31,16 @@
       }
 
       &_m,
-      &_s {
+      &_s,
+      &_xs {
         --vertical-space: var(--space-2xs);
       }
+    }
+  }
+
+  &-Group {
+    &_size_xs > .ContextMenuLevel-Item:not(:last-child) {
+      margin-bottom: var(--space-2xs);
     }
   }
 
