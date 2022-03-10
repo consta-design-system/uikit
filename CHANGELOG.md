@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.17.3 (10/03/2022)
+- [fix(Select): fix width (#2113)](https://github.com/consta-design-system/uikit/commit/0eb45830884cc2e4aa73dcdaa2127d0b919011e7) - [@N1KN](https://github.com/N1KN)
+- [fix(SideBar): fix pointer-events (#2107)](https://github.com/consta-design-system/uikit/commit/f6b7ac20991df669128787e49f23e0e5dfe217cb) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
 ## v3.17.2 (04/03/2022)
 - [fix(Tooltip): fixed position (#2110)](https://github.com/consta-design-system/uikit/commit/a73c95ca2aac29c0c6ff2c2424c0aff5e3868925) - [@gizeasy](https://github.com/gizeasy)
 
@@ -503,14 +509,3 @@
 - [feat(Tabs): added new items fit mode - scroll](https://github.com/gazprom-neft/consta-uikit/commit/408c7d7cc03803603cb2bc0bd4102a69c8b049cf) - [@nekitk](https://github.com/nekitk)
 - [feat(Tabs): adapt tabs to available width by hiding unfitting tabs in dropdown](https://github.com/gazprom-neft/consta-uikit/commit/874087f0504b751c775a50fc84be59bc03072eca) - [@nekitk](https://github.com/nekitk)
 - [feat(Tabs): added line position variants](https://github.com/gazprom-neft/consta-uikit/commit/d4fa13f4dbcec6764b5249a65cca8f7d1b8091a0) - [@nekitk](https://github.com/nekitk)
-
---------------------
-
-## v2.2.1 (11/08/2021)
-- [test(DragNDropField): fix tests](https://github.com/gazprom-neft/consta-uikit/commit/1a1283319db53c9b8361bab9977ddceb347b756a) - [@gizeasy](https://github.com/gizeasy)
-- [docs(DragNDropField): edit docs, examples and error texts (#1393)](https://github.com/gazprom-neft/consta-uikit/commit/6a7b35309317a91d489b02881863c9e2359ab7f2) - [@arhayka](https://github.com/arhayka)
-- [docs(Skeleton): edit docs (#1385)](https://github.com/gazprom-neft/consta-uikit/commit/c16db37a063233b88b24fa7549a523d9306a7a1f) - [@arhayka](https://github.com/arhayka)
-- [docs(CollapseGroup): edit docs & examples (#1384)](https://github.com/gazprom-neft/consta-uikit/commit/4e393bfcaf10dfbcf1fdb7b9457fef47cf3b87e6) - [@arhayka](https://github.com/arhayka)
-- [docs(combobox): edit docs & example (#1376)](https://github.com/gazprom-neft/consta-uikit/commit/292f6ea92968e87ffbefb50a414175226488ccdf) - [@arhayka](https://github.com/arhayka)
-- [docs(Header): added a closing tag into the Header story (#1398)](https://github.com/gazprom-neft/consta-uikit/commit/0ae8199a38608e53a4b47b59226d8991f629d5cb) - [@monolithed](https://github.com/monolithed)
-- [fix(CollapseGroup): fixed accordion behavior (#1412)](https://github.com/gazprom-neft/consta-uikit/commit/dda555447b785295b573b3dd4b5f6e7bad566012) - [@gizeasy](https://github.com/gizeasy)
