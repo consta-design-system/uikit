@@ -3,7 +3,6 @@
   z-index: 9999;
   overflow: hidden;
   box-sizing: border-box;
-  width: 100%;
   min-width: 220px;
   margin: -1px 0 -1px;
   background: var(--color-bg-default);
