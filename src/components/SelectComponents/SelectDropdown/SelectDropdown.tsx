@@ -3,7 +3,6 @@ import './SelectDropdown.css';
 import React, { Fragment, useRef, useState } from 'react';
 import { Transition } from 'react-transition-group';
 
-import { useFlag } from '../../../hooks/useFlag/useFlag';
 import {
   GetOptionPropsResult,
   isOptionForCreate,
@@ -78,21 +77,13 @@ export const SelectDropdown: SelectDropdown = (props) => {
 
   const getIndex = fabricIndex(-1);
   const [direction, setDirection] = useState<Direction>('downStartLeft');
-  const [playAnimation, setPlayAnimation] = useFlag();
 
   const indent = form === 'round' ? 'increased' : 'normal';
 
   const popoverRef = useRef<HTMLDivElement>(null);
 
   return (
-    <Transition
-      in={isOpen}
-      onEnter={setPlayAnimation.off}
-      onExit={setPlayAnimation.on}
-      unmountOnExit
-      nodeRef={popoverRef}
-      timeout={animateTimeout}
-    >
+    <Transition in={isOpen} unmountOnExit nodeRef={popoverRef} timeout={animateTimeout}>
       {(animate) => (
         <Popover
           {...otherProps}
@@ -103,7 +94,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
           ref={popoverRef}
           role="listbox"
           onSetDirection={setDirection}
-          className={cnSelectDropdown({ form, size, playAnimation }, [
+          className={cnSelectDropdown({ form, size }, [
             className,
             cnMixPopoverAnimate({ direction, animate }),
           ])}

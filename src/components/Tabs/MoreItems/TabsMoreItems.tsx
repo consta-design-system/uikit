@@ -31,7 +31,7 @@ type TabsMoreItems = <ITEM>(
 
 export const TabsMoreItems: TabsMoreItems = React.forwardRef(
   ({ items, renderItem, getLabel, getChecked, height }, ref) => {
-    const [isOpen, { on, off }] = useFlag(false);
+    const [isOpen, { off, toogle }] = useFlag(false);
     const buttonRef = useRef<HTMLDivElement>(null);
     const popoverRef = useRef<HTMLDivElement>(null);
     const [direction, setDirection] = useState<Direction>('downStartLeft');
@@ -47,13 +47,7 @@ export const TabsMoreItems: TabsMoreItems = React.forwardRef(
           className={cnTabsMoreItems('Button')}
           style={{ height }}
         >
-          <Button
-            size="xs"
-            view="ghost"
-            onlyIcon
-            iconLeft={IconMeatball}
-            onClick={() => (isOpen ? off() : on())}
-          />
+          <Button size="xs" view="ghost" onlyIcon iconLeft={IconMeatball} onClick={toogle} />
         </div>
         <Transition in={isOpen} unmountOnExit nodeRef={popoverRef} timeout={animateTimeout}>
           {(animate) => (

@@ -11,13 +11,6 @@
   font-size: var(--font-size);
   transform: translateY(var(--transition-spase));
 
-  &_playAnimation {
-    opacity: 0 !important;
-    pointer-events: none;
-    transition: opacity 0.2s, transform 0.2s !important;
-    transform: var(--mix-dropdown-animate-transform) !important;
-  }
-
   &_size {
     &_xs {
       --input-height: var(--control-height-xs);
