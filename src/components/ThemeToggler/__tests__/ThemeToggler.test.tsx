@@ -17,6 +17,7 @@ const renderComponent = (props: Partial<ThemeTogglerProps<Item>>) => {
       <div data-testid="outside" />
       <ThemeToggler
         {...props}
+        getItemKey={(item) => item.label}
         data-testid={testId}
         className={props.className}
         items={props.items || exampleThemesThree}

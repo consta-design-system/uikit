@@ -16,10 +16,10 @@ const defaultGetItemLabel: ThemeTogglerPropGetItemLabel<ThemeTogglerItemDefault>
 const defaultGetItemIcon: ThemeTogglerPropGetItemIcon<ThemeTogglerItemDefault> = (item) =>
   item.icon;
 
-export function withDefaultGetters<ITEM>(props: ThemeTogglerProps<ITEM>) {
+export function withDefaultGetters(props: ThemeTogglerProps) {
   return {
     ...props,
-    getItemKey: props.getItemKey || defaultGetItemKey,
+    getItemKey: props.getItemKey || props.getItemLabel || defaultGetItemKey,
     getItemLabel: props.getItemLabel || defaultGetItemLabel,
     getItemIcon: props.getItemIcon || defaultGetItemIcon,
   };

@@ -86,6 +86,7 @@ export const ThemeTogglerExampleGetters = () => {
       <ThemeToggler
         items={items}
         value={value}
+        getItemKey={(item) => item}
         getItemLabel={(item) => item}
         getItemIcon={getItemIcon}
         onChange={({ value }) => setValue(value)}

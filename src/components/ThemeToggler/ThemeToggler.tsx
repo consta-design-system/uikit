@@ -12,10 +12,7 @@ import { ContextMenu } from '../ContextMenu/ContextMenu';
 import { contextMenuSizeMap, iconSizeMap, withDefaultGetters } from './helpers';
 import { ThemeTogglerComponent, ThemeTogglerProps, themeTogglerPropSizeDefault } from './types';
 
-function ThemeTogglerRender<ITEM>(
-  props: ThemeTogglerProps<ITEM>,
-  ref: React.Ref<HTMLButtonElement>,
-) {
+function ThemeTogglerRender(props: ThemeTogglerProps, ref: React.Ref<HTMLButtonElement>) {
   const {
     size = themeTogglerPropSizeDefault,
     items,
@@ -30,17 +27,19 @@ function ThemeTogglerRender<ITEM>(
     ...otherProps
   } = withDefaultGetters(props);
 
-  const [isOpen, { on, off }] = useFlag(false);
+  const [isOpen, setIsOpen] = useFlag(false);
 
   const { getOnChange, getChecked } = useChoiceGroup({
     value,
-    getKey: getItemLabel || getItemKey,
+    getKey: getItemKey || getItemLabel,
     callBack: onChange,
     multiple: false,
   });
 
   const anchorRef = useRef<HTMLButtonElement>(null);
   const buttonRef = useForkRef([anchorRef, ref]);
+
+  type Item = typeof items[number];
 
   const iconSize = getByMap(iconSizeMap, size);
   const contextMenuSize = getByMap(contextMenuSizeMap, size);
@@ -49,18 +48,18 @@ function ThemeTogglerRender<ITEM>(
 
   const onButtonClick = (e: React.MouseEvent<Element, MouseEvent>) => {
     if (items.length > 2) {
-      isOpen ? off() : on();
+      setIsOpen.toogle();
     } else {
       getOnChange(items[getChecked(items[0]) ? 1 : 0])(e);
     }
   };
 
-  const renderIcons = (item: ITEM) => {
+  const renderIcons = (item: Item) => {
     const Icon = getItemIcon(item);
     return Icon ? <Icon size={iconSize} /> : isNotMultipleParams;
   };
 
-  const renderChecks = (item: ITEM) => {
+  const renderChecks = (item: Item) => {
     return getChecked(item) && <IconCheck size={iconSize} />;
   };
 
@@ -82,7 +81,7 @@ function ThemeTogglerRender<ITEM>(
       />
       {items.length > 2 && isOpen && (
         <ContextMenu
-          offset={8}
+          offset="s"
           items={items}
           getLabel={getItemLabel}
           anchorRef={anchorRef}
@@ -90,7 +89,7 @@ function ThemeTogglerRender<ITEM>(
           possibleDirections={possibleDirections}
           getLeftSideBar={renderIcons}
           getRightSideBar={renderChecks}
-          onClickOutside={off}
+          onClickOutside={setIsOpen.off}
           getItemOnClick={getOnChange}
           size={contextMenuSize}
           style={typeof style?.zIndex === 'number' ? { zIndex: style.zIndex + 1 } : undefined}
