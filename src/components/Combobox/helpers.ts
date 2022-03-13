@@ -8,6 +8,7 @@ import {
   PropView,
   RenderItemProps,
 } from '../SelectComponents/types';
+import { TextFieldPropOnChange } from '../TextField/helpers';
 
 export type DefaultItem = {
   label: string;
@@ -77,6 +78,7 @@ export type ComboboxProps<
     multiple?: MULTIPLE;
     value?: PropValue<ITEM, MULTIPLE>;
     groups?: GROUP[];
+    onSearch?: TextFieldPropOnChange;
     getItemLabel?: PropGetItemLabel<ITEM>;
     getItemKey?: PropGetItemKey<ITEM>;
     getItemGroupKey?: PropGetItemGroupKey<ITEM>;

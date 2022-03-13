@@ -73,6 +73,7 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
     labelForNotFound = defaultlabelForNotFound,
     labelForCreate = defaultlabelForCreate,
     labelForEmptyItems = defaultLabelForEmptyItems,
+    onSearch,
     searchFunction,
     multiple = false,
     style,
@@ -162,6 +163,12 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
 
   const inputRefForRender = useForkRef([inputRef, inputRefProp]);
 
+  const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleInputChange(e);
+    const { value } = e.target;
+    !disabled && onSearch?.({ e, id, name, value: value || null });
+  };
+
   const renderControlValue = () => {
     const width = multiple ? getInputWidth(controlInnerRef, helperInputFakeElement) : undefined;
     return (
@@ -184,7 +191,7 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
           aria-label={ariaLabel}
-          onChange={handleInputChange}
+          onChange={handleChangeValue}
           ref={inputRefForRender}
           className={cnSelect('Input', { size, hide: !multiple && !!value, multiple })}
           value={searchValue}
