@@ -22,7 +22,6 @@ import {
   ContextMenuPropGetItemSubMenu,
   ContextMenuProps,
   ContextMenuPropSize,
-  GetItem,
   GetLevelsParams,
   Level,
   MappersGroup,
@@ -77,44 +76,6 @@ export function withDefaultGetters<ITEM, GROUP>(props: ContextMenuProps<ITEM, GR
     getGroupLabel: props.getGroupLabel || defaultGetGroupLabel,
   };
 }
-
-export const getItem: GetItem = (item, props) => {
-  const {
-    getItemAs,
-    getItemDisabled,
-    getItemKey,
-    getItemLabel,
-    getItemLeftSide,
-    getItemOnClick,
-    getItemRightSide,
-    getItemLeftIcon,
-    getItemRightIcon,
-    getItemStatus,
-    onItemClick,
-  } = props;
-  const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!getItemDisabled(item)) {
-      if (typeof getItemOnClick(item) === 'function') {
-        getItemOnClick(item)?.({ e, item });
-      }
-      if (typeof onItemClick === 'function') {
-        onItemClick?.({ e, item });
-      }
-    }
-  };
-  return {
-    key: getItemKey(item),
-    label: getItemLabel(item),
-    leftSide: getItemLeftSide(item),
-    rightSide: getItemRightSide(item),
-    disabled: getItemDisabled(item),
-    as: getItemAs(item),
-    onClick,
-    status: getItemStatus(item),
-    leftIcon: getItemLeftIcon(item),
-    rightIcon: getItemRightIcon(item),
-  };
-};
 
 export const getGroup = <GROUP>(group: GROUP, props: Required<MappersGroup<GROUP>>) => {
   const { getGroupId, getGroupLabel } = props;

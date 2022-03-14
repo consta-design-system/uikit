@@ -3,14 +3,13 @@ import './ContextMenuLevel.css';
 import React, { createRef, forwardRef, useEffect, useMemo } from 'react';
 
 import { useFlag } from '../../../hooks/useFlag/useFlag';
-import { animateTimeout } from '../../../mixs/MixPopoverAnimate/MixPopoverAnimate';
 import { cn } from '../../../utils/bem';
 import { getByMap } from '../../../utils/getByMap';
 import { getGroups } from '../../../utils/getGroups';
 import { Popover } from '../../Popover/Popover';
 import { Text } from '../../Text/Text';
 import { ContextMenuItem } from '../ContextMenuItem/ContextMenuItem';
-import { getItem, getItemIndex, sizeMapHeader } from '../helper';
+import { getItemIndex, sizeMapHeader } from '../helper';
 import {
   contextMenuDefaultSize,
   ContextMenuLevelComponent,
@@ -49,14 +48,26 @@ function ContextMenuLevelRender<ITEM, GROUP>(
 ) {
   const {
     size = contextMenuDefaultSize,
+    items,
+    groups: groupsProp,
+    className,
+    // Свойства относящиеся к меню
     levelDepth,
     activeItem,
     addLevel,
-    className,
     deleteLevel,
-    items,
-    groups: groupsProp,
     setHoveredParenLevel,
+    hoveredParenLevel,
+    sortGroup,
+    onItemClick,
+    // Свойства для поповера
+    direction,
+    possibleDirections,
+    offset,
+    onSetDirection,
+    spareDirection,
+    anchorRef,
+    // Геттеры для ITEM
     getItemLabel,
     getItemRightSide,
     getItemLeftSide,
@@ -70,29 +81,13 @@ function ContextMenuLevelRender<ITEM, GROUP>(
     getItemGroupId,
     getItemLeftIcon,
     getItemRightIcon,
+    // Геттеры для GROUP
     getGroupLabel,
     getGroupId,
-    sortGroup,
-    onItemClick,
-    direction,
-    possibleDirections,
-    offset,
-    onSetDirection,
-    hoveredParenLevel,
-    spareDirection,
-    anchorRef,
     ...otherProps
   } = props;
 
   const [hovered, { on, off }] = useFlag(false);
-  const [active, setActive] = useFlag(levelDepth !== 0);
-
-  useEffect(() => {
-    if (levelDepth === 0) {
-      // Необходимо для того чтобы при открытии и проигрывании анимации первый уровень автоматически не открывался
-      setTimeout(setActive.on, animateTimeout);
-    }
-  }, []);
 
   const groups = getGroups<ITEM, GROUP>(
     items,
@@ -122,20 +117,18 @@ function ContextMenuLevelRender<ITEM, GROUP>(
   }, [hovered, hoveredParenLevel]);
 
   const onMouseEnter = (item: ITEM, itemIndex: string) => {
-    if (active) {
-      const subMenu = getItemSubMenu(item);
-      const disabled = getItemDisabled(item);
-      if (Array.isArray(subMenu) && !disabled) {
-        addLevel({
-          level: levelDepth + 1,
-          items: subMenu,
-          anchorRef: itemsRefs[itemIndex],
-          activeItem: itemIndex,
-        });
-        setHoveredParenLevel(levelDepth + 1);
-      } else {
-        setHoveredParenLevel(levelDepth);
-      }
+    const subMenu = getItemSubMenu(item);
+    const disabled = getItemDisabled(item);
+    if (Array.isArray(subMenu) && !disabled) {
+      addLevel({
+        level: levelDepth + 1,
+        items: subMenu,
+        anchorRef: itemsRefs[itemIndex],
+        activeItem: itemIndex,
+      });
+      setHoveredParenLevel(levelDepth + 1);
+    } else {
+      setHoveredParenLevel(levelDepth);
     }
   };
 
@@ -158,29 +151,31 @@ function ContextMenuLevelRender<ITEM, GROUP>(
           <div className={cnContextMenuLevel('Group', { size })} key={group.key}>
             {renderHeader(group.group && getGroupLabel(group.group), groupIndex === 0, size)}
             {group.items.map((item, index) => {
-              const standardizedItem = getItem<typeof item>(item, {
-                getItemLabel,
-                getItemRightSide,
-                getItemLeftSide,
-                getItemSubMenu,
-                getItemStatus,
-                getItemDisabled,
-                getItemKey,
-                getItemOnClick,
-                getItemAs,
-                getItemAttributes,
-                getItemGroupId,
-                getItemLeftIcon,
-                getItemRightIcon,
-                onItemClick,
-              });
               const itemIndex = getItemIndex(group.key, index);
+              const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
+                if (!getItemDisabled(item)) {
+                  if (typeof getItemOnClick(item) === 'function') {
+                    getItemOnClick(item)?.({ e, item });
+                  }
+                  if (typeof onItemClick === 'function') {
+                    onItemClick?.({ e, item });
+                  }
+                }
+              };
               return (
                 <ContextMenuItem
-                  {...standardizedItem}
+                  label={getItemLabel(item)}
+                  rightSide={getItemRightSide(item)}
+                  rightIcon={getItemRightIcon(item)}
+                  leftSide={getItemLeftSide(item)}
+                  leftIcon={getItemLeftIcon(item)}
+                  status={getItemStatus(item)}
+                  key={getItemKey(item)}
+                  disabled={getItemDisabled(item)}
+                  onClick={onClick}
+                  as={getItemAs(item)}
                   {...(getItemAttributes(item) ?? {})}
                   ref={itemsRefs[itemIndex]}
-                  key={itemIndex}
                   className={cnContextMenuLevel('Item')}
                   onMouseEnter={() => onMouseEnter(item, itemIndex)}
                   active={activeItem === itemIndex}

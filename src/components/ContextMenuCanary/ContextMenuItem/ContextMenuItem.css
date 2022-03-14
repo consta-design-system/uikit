@@ -6,7 +6,7 @@
   text-decoration: none;
   word-break: break-word;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background-color 0.2s;
 
   & > *:not(:last-child) {
     margin-right: var(--space-xs);

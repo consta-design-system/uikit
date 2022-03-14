@@ -196,10 +196,3 @@ export type GetLevelsParams<ITEM> = {
   getItemKey: ContextMenuPropGetItemKey<ITEM>;
   getItemLabel: ContextMenuPropGetItemLabel<ITEM>;
 };
-
-export type GetItem = <ITEM>(
-  item: ITEM,
-  props: Required<MappersItem<ITEM>> & { onItemClick?: ContextMenuPropOnClick<ITEM> },
-) => Omit<ContextMenuItemDefault, 'subMenu' | 'onClick'> & {
-  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
-};
