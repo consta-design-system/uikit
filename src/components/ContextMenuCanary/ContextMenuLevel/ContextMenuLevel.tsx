@@ -87,7 +87,7 @@ function ContextMenuLevelRender<ITEM, GROUP>(
     ...otherProps
   } = props;
 
-  const [hovered, { on, off }] = useFlag(false);
+  const [hovered, setHovered] = useFlag(false);
 
   const groups = getGroups<ITEM, GROUP>(
     items,
@@ -141,8 +141,8 @@ function ContextMenuLevelRender<ITEM, GROUP>(
       direction={direction}
       offset={offset}
       onSetDirection={onSetDirection}
-      onMouseEnter={on}
-      onMouseLeave={off}
+      onMouseEnter={setHovered.on}
+      onMouseLeave={setHovered.off}
       ref={ref}
       {...otherProps}
     >

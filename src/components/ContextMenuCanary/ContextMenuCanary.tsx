@@ -20,7 +20,7 @@ const cnContextMenu = cn('ContextMenu');
 function ContextMenuRender(props: ContextMenuProps, ref: React.Ref<HTMLDivElement>) {
   const { isOpen, className, onSetDirection, ...otherProps } = props;
   const [playAnimation, setPlayAnimation] = useFlag();
-  const [direction, setDirection] = useState<Direction>();
+  const [direction, setDirection] = useState<Direction | undefined>(props.direction);
   const nodeRef = useRef<HTMLDivElement>(null);
   const levelRef = useForkRef([ref, nodeRef]);
 
