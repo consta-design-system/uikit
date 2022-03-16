@@ -39,6 +39,7 @@ import {
   createSortingState,
   getColumnLeftOffset,
   getColumnsSize,
+  getMergedArray,
   getNewSorting,
   Header,
   Order,
@@ -73,6 +74,7 @@ const createButtonSizeMap: Record<Size, ButtonPropSize> = {
 
 type TableCSSCustomProperty = {
   '--table-width': string;
+  '--table-grid-template-columns': string;
 };
 
 export type LazyLoad =
@@ -164,13 +166,13 @@ export type TableColumn<T extends TableRow> = {
 export type TableProps<T extends TableRow> = {
   columns: TableColumn<T>[];
   rows: T[];
+  isResizable?: boolean;
   filters?: Filters<T>;
   onSortBy?: onSortBy<T>;
   size?: Size;
   stickyHeader?: boolean;
   stickyColumns?: number;
   minColumnWidth?: number;
-  isResizable?: boolean;
   activeRow?: ActiveRow;
   verticalAlign?: VerticalAlign;
   headerVerticalAlign?: HeaderVerticalAlign;
@@ -361,6 +363,13 @@ const InternalTable = <T extends TableRow>(
     setResizedColumnWidths(updateAt(resizedColumnWidths, idx, newWidth));
   };
 
+  const overallColumnsWidth = useMemo(() => {
+    const columnsElements = Object.values(columnsRefs.current).filter(isNotNil);
+    const columnsElementsWidths = columnsElements.map((el) => el.getBoundingClientRect().width);
+    const resultArr = getMergedArray(columnsElementsWidths, resizedColumnWidths);
+    return resultArr.reduce((a, b) => (a ?? 0) + (b ?? 0));
+  }, [resizedColumnWidths, isResizable]);
+
   React.useLayoutEffect(() => {
     const columnsElements = Object.values(columnsRefs.current).filter(isNotNil);
     if (columnsElements.length === 0) return;
@@ -371,17 +380,23 @@ const InternalTable = <T extends TableRow>(
     // Проверяем, что таблица отрисовалась корректно, и устанавливаем значения ширин колонок после 1го и последующих рендера
     if (
       columnsElements[0].getBoundingClientRect().left !==
-        columnsElements[columnsElements.length - 1].getBoundingClientRect().left &&
-      !resizedColumnWidths.some(isNotNil)
+      columnsElements[columnsElements.length - 1].getBoundingClientRect().left
     ) {
-      return setResizedColumnWidths(columnsElementsWidths);
+      const resultArr = getMergedArray(columnsElementsWidths, resizedColumnWidths);
+      // Выставляю в undefined так как если вычеслять значение для последней колонки так,
+      // чтобы заполнялось все свободное пространство, при изменении ширины таблицы в меньшую сторону
+      // ширина последней колонки изменяться не будет, а так она будет css'ом проставляться в auto
+      if ((overallColumnsWidth ?? tableWidth) < tableWidth) {
+        resultArr[resultArr.length - 1] = undefined;
+      }
+      return setResizedColumnWidths(resultArr);
     }
 
     // условие изменения ширины колонок при изменении ширины экрана (контейнера таблицы)
     if (tableWidth > 0 && !isResizable) {
       return setResizedColumnWidths(getColumnsWidth());
     }
-  }, [tableWidth]);
+  }, [tableWidth, overallColumnsWidth]);
 
   const isSortedByColumn = (column: TableColumn<T>): boolean =>
     getColumnSortByField(column) === sorting?.by;
@@ -559,7 +574,7 @@ const InternalTable = <T extends TableRow>(
   const rowsData = getSlicedRows(flatRowsData);
 
   const tableStyle: React.CSSProperties & TableCSSCustomProperty = {
-    'gridTemplateColumns': getColumnsSize(resizedColumnWidths),
+    '--table-grid-template-columns': getColumnsSize(resizedColumnWidths),
     '--table-width': `${tableWidth}px`,
   };
 

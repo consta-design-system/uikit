@@ -16,6 +16,10 @@
   display: flex;
   overflow: hidden;
 
+  &:not(.Sidebar_hasOverlay) {
+    pointer-events: none;
+  }
+
   &_position {
     &_top {
       flex-direction: column;
@@ -48,6 +52,7 @@
     flex-direction: column;
     background-color: var(--color-bg-default);
     box-shadow: var(--shadow-modal);
+    pointer-events: auto;
 
     &_position {
       &_right,

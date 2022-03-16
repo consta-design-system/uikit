@@ -1,5 +1,44 @@
 # Changelog
 
+## v3.17.3 (10/03/2022)
+- [fix(Select): fix width (#2113)](https://github.com/consta-design-system/uikit/commit/0eb45830884cc2e4aa73dcdaa2127d0b919011e7) - [@N1KN](https://github.com/N1KN)
+- [fix(SideBar): fix pointer-events (#2107)](https://github.com/consta-design-system/uikit/commit/f6b7ac20991df669128787e49f23e0e5dfe217cb) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
+## v3.17.2 (04/03/2022)
+- [fix(Tooltip): fixed position (#2110)](https://github.com/consta-design-system/uikit/commit/a73c95ca2aac29c0c6ff2c2424c0aff5e3868925) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
+## v3.17.1 (02/03/2022)
+Самое важное:
+- В `Popover` расширили свойство offset, теперь можно указывать размеры, базирующиеся на теме.
+- В `Table` доработали расчет ширины колонок.
+
+---
+
+- [ fix(Table): fix bug with column width (#2051)](https://github.com/consta-design-system/uikit/commit/8c6d8593891e3bb7ae24c67903ed64a9af611c89) - [@N1MBER](https://github.com/N1MBER)
+- [feat(Popover): rewrite offset type (#2080)](https://github.com/consta-design-system/uikit/commit/4105c10895cbd66f67277897034d76de9513bc2c) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
+## v3.17.0 (24/02/2022)
+Самое важное:
+- Добавлена возможность указывать кастомный тип `Item` для `SnackBar`
+- Добавлены новые иконки
+- Доработана документация
+---
+
+- [docs(Selects): edit text (#2082)](https://github.com/consta-design-system/uikit/commit/943477417ea49e3590b92a4999c7dd8b5c9d62db) - [@arhayka](https://github.com/arhayka)
+- [docs(fix link to the Table): (#2081)](https://github.com/consta-design-system/uikit/commit/a0d54d0ab48441502be42e925b0b9d8f089d2269) - [@arhayka](https://github.com/arhayka)
+- [chore(deps): bump url-parse from 1.5.3 to 1.5.7 (#2073)](https://github.com/consta-design-system/uikit/commit/979d962af025b7d9864a45b037a1c8d398e12e56) - [@dependabot[bot]](https://github.com/dependabot[bot])
+- [feat(icon): add new icons (#2076)](https://github.com/consta-design-system/uikit/commit/a4ec03c929ecbc003549371f0fe45d399360156d) - [@kolebayev](https://github.com/kolebayev)
+- [fix(CssTransition): fix warning with finDOMNode in Transaction children (#2072)](https://github.com/consta-design-system/uikit/commit/766daf499c847fbf9760b5754f1884a6e5820138) - [@N1MBER](https://github.com/N1MBER)
+- [refactor(SnackBar): add other props for detecting item props and also update doc (#2032)](https://github.com/consta-design-system/uikit/commit/fa52bf026c3743c609ea508e0d4c6b5e8468dcf1) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
 ## v3.16.0 (16/02/2022)
 Самое важное:
 
@@ -470,75 +509,3 @@
 - [feat(Tabs): added new items fit mode - scroll](https://github.com/gazprom-neft/consta-uikit/commit/408c7d7cc03803603cb2bc0bd4102a69c8b049cf) - [@nekitk](https://github.com/nekitk)
 - [feat(Tabs): adapt tabs to available width by hiding unfitting tabs in dropdown](https://github.com/gazprom-neft/consta-uikit/commit/874087f0504b751c775a50fc84be59bc03072eca) - [@nekitk](https://github.com/nekitk)
 - [feat(Tabs): added line position variants](https://github.com/gazprom-neft/consta-uikit/commit/d4fa13f4dbcec6764b5249a65cca8f7d1b8091a0) - [@nekitk](https://github.com/nekitk)
-
---------------------
-
-## v2.2.1 (11/08/2021)
-- [test(DragNDropField): fix tests](https://github.com/gazprom-neft/consta-uikit/commit/1a1283319db53c9b8361bab9977ddceb347b756a) - [@gizeasy](https://github.com/gizeasy)
-- [docs(DragNDropField): edit docs, examples and error texts (#1393)](https://github.com/gazprom-neft/consta-uikit/commit/6a7b35309317a91d489b02881863c9e2359ab7f2) - [@arhayka](https://github.com/arhayka)
-- [docs(Skeleton): edit docs (#1385)](https://github.com/gazprom-neft/consta-uikit/commit/c16db37a063233b88b24fa7549a523d9306a7a1f) - [@arhayka](https://github.com/arhayka)
-- [docs(CollapseGroup): edit docs & examples (#1384)](https://github.com/gazprom-neft/consta-uikit/commit/4e393bfcaf10dfbcf1fdb7b9457fef47cf3b87e6) - [@arhayka](https://github.com/arhayka)
-- [docs(combobox): edit docs & example (#1376)](https://github.com/gazprom-neft/consta-uikit/commit/292f6ea92968e87ffbefb50a414175226488ccdf) - [@arhayka](https://github.com/arhayka)
-- [docs(Header): added a closing tag into the Header story (#1398)](https://github.com/gazprom-neft/consta-uikit/commit/0ae8199a38608e53a4b47b59226d8991f629d5cb) - [@monolithed](https://github.com/monolithed)
-- [fix(CollapseGroup): fixed accordion behavior (#1412)](https://github.com/gazprom-neft/consta-uikit/commit/dda555447b785295b573b3dd4b5f6e7bad566012) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v2.2.0 (23/07/2021)
-- [docs(Storybook): add thematization chapter (#1372)](https://github.com/gazprom-neft/consta-uikit/commit/55120c57be5a660ba7cdb04fe4cae35fc57c4ecc) - [@gizeasy](https://github.com/gizeasy)
-- [fix(DepricatedComponents): fix export](https://github.com/gazprom-neft/consta-uikit/commit/332b44f130d374add0e95bc6e849c7e161cebe7f) - [@gizeasy](https://github.com/gizeasy)
-- [chore(Storybook): edit addons structure](https://github.com/gazprom-neft/consta-uikit/commit/c09c89cf55b7dca2b16aa8c2e5d2c76ffce40937) - [@gizeasy](https://github.com/gizeasy)
-- [refactor(Tabs): used ResizeObserver to detect tab width changes (#1366)](https://github.com/gazprom-neft/consta-uikit/commit/edbb7284bed8f1b4256613b1ad8f4af04ff21afe) - [@nekitk](https://github.com/nekitk)
-- [feat(CollapseGroup): added CollapseGroup (#1306)](https://github.com/gazprom-neft/consta-uikit/commit/1aeee779f511b7ead84942070d8085357eef65fe) - [@Bright-Burn](https://github.com/Bright-Burn)
-- [docs(Selects): added information about ref (#1364)](https://github.com/gazprom-neft/consta-uikit/commit/b6bda3ed36c12f2b23778fb1d8b929e0c5274a4e) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v2.1.0 (21/07/2021)
-
-**Важное из обновления:**
-
-* У нас появился компонент `Skeleton` для составления экранов загрузки
-* Добавили компонент `DragNDropField` — файловое поле ввода с возможностью перетаскивания файлов курсором мыши
-* А ещё мы временно вернули старые селекты (`BasicSelect`,`Combobox`,`MultiCombobox`,`UserSelect`) под флагом `Deprecated` для более плавного перехода на новые
------
-
-- [feat(Theme): add font-weight variables (#1360)](https://github.com/gazprom-neft/consta-uikit/commit/3bd47d55270aac7eafb5c77220a907f49c29fc19) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Skeleton): added new component (#1354)](https://github.com/gazprom-neft/consta-uikit/commit/040c9be1c5b6b400e092bcf6a6cf60b905242c7f) - [@nekitk](https://github.com/nekitk)
-- [refactor(Components): refactor types in RadioGroup, SwitchGroup, CheckboxGroup](https://github.com/gazprom-neft/consta-uikit/commit/5248652d1836c13b79e57efcfaf9c22ae7c2677b) - [@gizeasy](https://github.com/gizeasy)
-- [docs(UserSelect): edit docs and examples (#1349)](https://github.com/gazprom-neft/consta-uikit/commit/437c2a12e45e4986395e16bc9e258b84c1bd4762) - [@arhayka](https://github.com/arhayka)
-- [feat(SelectDeprecated): returned the old components (#1350)](https://github.com/gazprom-neft/consta-uikit/commit/6eb72fce6e913b075a96977051f7c55212844cee) - [@gizeasy](https://github.com/gizeasy)
-- [docs(Select): edit docs (#1347)](https://github.com/gazprom-neft/consta-uikit/commit/a48a65d76b12325c8d8d31af1e3a9c41fbcf9dd7) - [@arhayka](https://github.com/arhayka)
-- [fix(UserSelect): fixed disable state of item (#1353)](https://github.com/gazprom-neft/consta-uikit/commit/35d25f9ffa2da0ecc67a6ca5b618e17a1237f515) - [@gizeasy](https://github.com/gizeasy)
-- [docs(common): add all components description (#1344)](https://github.com/gazprom-neft/consta-uikit/commit/0dabcd1775fc7fcc5a3f3558ceac4b646b004f83) - [@arhayka](https://github.com/arhayka)
-- [fix(Table): fixed filter portals (#1342)](https://github.com/gazprom-neft/consta-uikit/commit/a4510f8d802ff1f6ff37bc751bd2d5ab08672bdc) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Select): added ref (#1341)](https://github.com/gazprom-neft/consta-uikit/commit/00d1abd1a8ba64441741ee6b5bd8deedd5f42cb7) - [@gizeasy](https://github.com/gizeasy)
-- [feat(DragNDropField): more informative error messages (#1345)](https://github.com/gazprom-neft/consta-uikit/commit/0b4e8f0dbfcf1f7c3512eb911f2ff5c107931889) - [@nekitk](https://github.com/nekitk)
-- [feat(DragNDropField): added new component and examples (#1329)](https://github.com/gazprom-neft/consta-uikit/commit/a3bdf53a03a9322bb21b8b2f0dbb3cd7feaa9938) - [@nekitk](https://github.com/nekitk)
-
---------------------
-
-## v2.0.0 (14/07/2021)
-
----
-Встречайте новую версию!
-
-В ней мы переработали `BasicSelect`, `Combobox`, `MultiCombobox`, `UserSelect`, теперь кода стало меньше, а возможностей больше. 
-
-- `BasicSelect` переработали и переименовали в `Select`
-- `Combobox`, `MultiCombobox` объединили в один компонент `Combobox`
-- `UserSelect` переработали
-
-_Обращаем внимание_: *версии компонентов обратно не совместимы.*
-
----
-- [docs(Checkbox): edit docs (#1320)](https://github.com/gazprom-neft/consta-uikit/commit/c465ecc1ed79b53b74aeb79577e61ce2690b4f44) - [@arhayka](https://github.com/arhayka)
-- [docs(Calendar): add docs & examples (#1311)](https://github.com/gazprom-neft/consta-uikit/commit/151de5620be588d8061b8e3379493fe689e7fb08) - [@arhayka](https://github.com/arhayka)
-- [docs(Radio): edit docs, move part to RadioGroup (#1314)](https://github.com/gazprom-neft/consta-uikit/commit/95f722861a0138fb28ac1d2acf6d9e42be963a0f) - [@arhayka](https://github.com/arhayka)
-- [docs(Checkbox): edit docs, move to CheckboxGroup (#1318)](https://github.com/gazprom-neft/consta-uikit/commit/48a79c27940492c4cacc51a2948fd1e8dfa8da77) - [@arhayka](https://github.com/arhayka)
-- [docs(RadioGroup): edit docs, move docs from Radio (#1313)](https://github.com/gazprom-neft/consta-uikit/commit/964927ad1e0ff515f4e36385bdf3f86b859a9f4f) - [@arhayka](https://github.com/arhayka)
-- [docs(Grid): edit docs (#1310)](https://github.com/gazprom-neft/consta-uikit/commit/bba313e9faa00b92c1742434300211b58be0e44a) - [@arhayka](https://github.com/arhayka)
-- [docs(Selects): added docs for Select, Combobox, UserSelect (#1322)](https://github.com/gazprom-neft/consta-uikit/commit/eba1580dfff23c6682f40a43b2ad3ef763aa96e2) - [@gizeasy](https://github.com/gizeasy)
-- [test(Selects): added tests for Select, Combobox, UserSelect](https://github.com/gazprom-neft/consta-uikit/commit/b9a76f6a7e81f3e3436cc6eef2ce5fef91b675b4) - [@gizeasy](https://github.com/gizeasy)
-- [test(getGroups): edit tests (#1301)](https://github.com/gazprom-neft/consta-uikit/commit/e44922ec90435b4580f16a6af99b1a5e7d32dc8f) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Components): refactoring Select, Combobox, UserSelect (#1280)](https://github.com/gazprom-neft/consta-uikit/commit/936176366cf178a09f4dc1a885c428a3db17cc94) - [@gizeasy](https://github.com/gizeasy)

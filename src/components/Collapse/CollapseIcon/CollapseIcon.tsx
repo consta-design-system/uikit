@@ -1,6 +1,6 @@
 import './CollapseIcon.css';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import { cnIcon, IconProps, IconPropSize } from '../../../icons/Icon/Icon';
@@ -49,6 +49,9 @@ export const CollapseIcon: React.FC<CollapseIconProps> = (props) => {
     ...otherProps
   } = props;
 
+  const iconRef = useRef<HTMLSpanElement>(null);
+  const closeIconRef = useRef<HTMLSpanElement>(null);
+
   if (CloseIcon) {
     return (
       <span className={cnCollapseIcon('Wrapper', [cnIcon({ size }), className])}>
@@ -57,19 +60,27 @@ export const CollapseIcon: React.FC<CollapseIconProps> = (props) => {
           unmountOnExit
           classNames={cssTransitionClassNames}
           timeout={animateTimeout}
+          nodeRef={iconRef}
         >
-          <Icon {...otherProps} className={cnCollapseIcon({ withCloseIcon: true })} size={size} />
+          <Icon
+            {...otherProps}
+            className={cnCollapseIcon({ withCloseIcon: true })}
+            size={size}
+            ref={iconRef}
+          />
         </CSSTransition>
         <CSSTransition
           in={isOpen}
           unmountOnExit
           classNames={cssTransitionClassNames}
           timeout={animateTimeout}
+          nodeRef={closeIconRef}
         >
           <CloseIcon
             {...otherProps}
             className={cnCollapseIcon({ withCloseIcon: true })}
             size={size}
+            ref={closeIconRef}
           />
         </CSSTransition>
       </span>
