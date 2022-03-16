@@ -1,6 +1,6 @@
 import './SelectDropdown.css';
 
-import React, { Fragment, useRef } from 'react';
+import React, { Fragment, useMemo, useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import {
@@ -17,6 +17,7 @@ import { Popover } from '../../Popover/Popover';
 import { Text } from '../../Text/Text';
 import { SelectCreateButton } from '../SelectCreateButton/SelectCreateButton';
 import { SelectGroupLabel } from '../SelectGroupLabel/SelectGroupLabel';
+import { SelectLoader } from '../SelectLoader/SelectLoader';
 import { PropSize, RenderItemProps } from '../types';
 
 export const selectDropdownform = ['default', 'brick', 'round'] as const;
@@ -30,6 +31,7 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   getOptionProps(props: OptionProps<ITEM>): GetOptionPropsResult;
   form: SelectDropdownPropForm;
   isOpen: boolean;
+  isLoading?: boolean;
   renderItem: (props: RenderItemProps<ITEM>) => JSX.Element | null;
   visibleItems: (
     | OptionForCreate
@@ -68,6 +70,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
     isOpen,
     renderItem,
     visibleItems,
+    isLoading,
     getGroupLabel,
     notFound,
     ...otherProps
@@ -78,6 +81,15 @@ export const SelectDropdown: SelectDropdown = (props) => {
   const indent = form === 'round' ? 'increased' : 'normal';
 
   const popoverRef = useRef<HTMLDivElement>(null);
+
+  const isListShowed = useMemo(() => {
+    return (
+      visibleItems.filter(
+        (group) =>
+          isOptionForCreate(group) || (Array.isArray(group.items) && group.items.length > 0),
+      ).length > 0
+    );
+  }, [visibleItems]);
 
   return (
     <CSSTransition
@@ -100,6 +112,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
         equalAnchorWidth
       >
         <div className={cnSelectDropdown('List', { size, form })} ref={dropdownRef}>
+          {isLoading && <SelectLoader mode={isListShowed ? 'blur' : 'empty'} />}
           {visibleItems.map((group) => {
             if (isOptionForCreate(group)) {
               return (
@@ -134,10 +147,10 @@ export const SelectDropdown: SelectDropdown = (props) => {
               </Fragment>
             );
           })}
-          {notFound && labelForNotFound && (
+          {!isLoading && notFound && labelForNotFound && (
             <Text className={cnSelectDropdown('LabelForNotFound')}>{labelForNotFound}</Text>
           )}
-          {!hasItems && labelForEmptyItems && (
+          {!isLoading && !hasItems && labelForEmptyItems && (
             <Text className={cnSelectDropdown('LabelForEmptyItems')}>{labelForEmptyItems}</Text>
           )}
         </div>

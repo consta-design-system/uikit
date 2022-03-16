@@ -75,6 +75,7 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
     labelForEmptyItems = defaultLabelForEmptyItems,
     onSearch,
     searchFunction,
+    isLoading,
     multiple = false,
     style,
     ...otherProps
@@ -270,6 +271,7 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
         visibleItems={visibleItems}
         labelForNotFound={labelForNotFound}
         labelForCreate={labelForCreate}
+        isLoading={isLoading}
         labelForEmptyItems={labelForEmptyItems}
         notFound={notFound}
         hasItems={hasItems}

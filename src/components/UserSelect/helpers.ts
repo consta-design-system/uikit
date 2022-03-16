@@ -68,6 +68,7 @@ export type UserSelectProps<
     name?: string;
     items: ITEM[];
     required?: boolean;
+    isLoading?: boolean;
     renderItem?: PropRenderItem<ITEM>;
     renderValue?: PropRenderValue<ITEM>;
     onFocus?: React.FocusEventHandler<HTMLInputElement>;

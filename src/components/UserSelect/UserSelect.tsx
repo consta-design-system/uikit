@@ -54,6 +54,7 @@ function UserSelectRender<
     disabled,
     ariaLabel,
     id,
+    isLoading,
     required,
     dropdownRef = defaultDropdownRef,
     form = defaultPropForm,
@@ -273,6 +274,7 @@ function UserSelectRender<
         getOptionProps={getOptionProps}
         dropdownRef={dropdownRef}
         form={dropdownForm}
+        isLoading={isLoading}
         className={dropdownClassName}
         renderItem={renderItem || renderItemDefault}
         getGroupLabel={getGroupLabel}

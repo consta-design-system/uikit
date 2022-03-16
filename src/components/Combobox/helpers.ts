@@ -61,6 +61,7 @@ export type ComboboxProps<
     placeholder?: string;
     ariaLabel?: string;
     status?: PropStatus;
+    isLoading?: boolean;
     dropdownClassName?: string;
     dropdownRef?: React.RefObject<HTMLDivElement>;
     name?: string;
