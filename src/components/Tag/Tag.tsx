@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
+import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { IconComponent, IconProps } from '../../icons/Icon/Icon';
+import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { TagBase } from '../TagBase/TagBase';
 
 type TagBaseProps = React.ComponentProps<typeof TagBase>;
@@ -134,9 +136,19 @@ export function getParams(
   }
 }
 
+export const COMPONENT_NAME = 'Tag' as const;
+
 export const Tag: Component = forwardRef((props, ref) => {
-  const { mode = tagPropModeDefault, onChange, checked, onCancel, onClick, ...otherProps } = props;
+  const tagRef = useRef<HTMLDivElement>(null);
+  const {
+    mode = tagPropModeDefault,
+    onChange,
+    checked,
+    onCancel,
+    onClick,
+    ...otherProps
+  } = usePropsHandler(COMPONENT_NAME, props, tagRef);
   const params = getParams(mode, checked, onClick, onChange, onCancel);
 
-  return <TagBase {...otherProps} {...params} ref={ref} />;
+  return <TagBase {...otherProps} {...params} ref={useForkRef([ref, tagRef])} />;
 });
