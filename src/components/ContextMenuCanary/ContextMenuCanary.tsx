@@ -15,7 +15,7 @@ import { Direction } from '../Popover/Popover';
 import { ContextMenuLevels } from './ContextMenuLevels/ContextMenuLevels';
 import { ContextMenuComponent, ContextMenuProps } from './types';
 
-const cnContextMenu = cn('ContextMenu');
+const cnContextMenu = cn('ContextMenuCanary');
 
 function ContextMenuRender(props: ContextMenuProps, ref: React.Ref<HTMLDivElement>) {
   const { isOpen, className, onSetDirection, ...otherProps } = props;

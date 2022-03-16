@@ -2,6 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { boolean, select } from '@storybook/addon-knobs';
 
 import { exampleItems, groups, Item } from '../__mocks__/mock.data';
+import { useFlag } from '../../../hooks/useFlag/useFlag';
+import { IconSelect } from '../../../icons/IconSelect/IconSelect';
+import { IconSelectOpen } from '../../../icons/IconSelectOpen/IconSelectOpen';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import { Badge } from '../../Badge/Badge';
@@ -24,6 +27,8 @@ const defaultKnobs = () => ({
   withGroupLabel: boolean('withGroupLabel', false),
   withSubMenu: boolean('withSubMenu', false),
   withLeftIcon: boolean('withLeftIcon', false),
+  withLeftSide: boolean('withLeftSide', false),
+  withRightIcon: boolean('withRightIcon', false),
   withRightSide: boolean('withRightSide', false),
 });
 
@@ -70,7 +75,9 @@ export function Playground() {
     withGroupLabel,
     withSubMenu,
     withLeftIcon,
+    withLeftSide,
     withRightSide,
+    withRightIcon,
   } = defaultKnobs();
 
   const [items, setItems] = useState<Item[]>(exampleItems);
@@ -83,7 +90,7 @@ export function Playground() {
   };
 
   const ref = useRef<HTMLButtonElement>(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useFlag();
 
   useEffect(() => {
     if (withGroup) {
@@ -144,6 +151,13 @@ export function Playground() {
     return undefined;
   };
 
+  const getItemRightIcon = (item: typeof exampleItems[number]) => {
+    if (withRightIcon) {
+      return item.leftIcon;
+    }
+    return undefined;
+  };
+
   const getItemRightSide = (item: typeof exampleItems[number]) => {
     if (withRightSide) {
       return renderRightSide(item, size, onSwitch, getItemDisabled);
@@ -151,9 +165,21 @@ export function Playground() {
     return undefined;
   };
 
+  const getItemLeftSide = (item: typeof exampleItems[number]) => {
+    if (withLeftSide) {
+      return renderRightSide(item, size, onSwitch, getItemDisabled);
+    }
+    return undefined;
+  };
+
   return (
     <div className={cnChoiceGroupStories()}>
-      <Button label="Откройте контекстное меню" ref={ref} onClick={() => setIsOpen(!isOpen)} />
+      <Button
+        label="Откройте контекстное меню"
+        ref={ref}
+        onClick={setIsOpen.toogle}
+        iconRight={isOpen ? IconSelectOpen : IconSelect}
+      />
       <ContextMenu
         items={items}
         isOpen={isOpen}
@@ -163,11 +189,13 @@ export function Playground() {
         getItemSubMenu={getItemSubMenu}
         getItemDisabled={getItemDisabled}
         getItemLeftIcon={getItemLeftIcon}
+        getItemRightIcon={getItemRightIcon}
         anchorRef={ref}
         getItemRightSide={getItemRightSide}
+        getItemLeftSide={getItemLeftSide}
         size={size}
         sortGroup={sortGroup}
-        onClickOutside={() => setIsOpen(false)}
+        onClickOutside={setIsOpen.off}
         offset={8}
       />
     </div>

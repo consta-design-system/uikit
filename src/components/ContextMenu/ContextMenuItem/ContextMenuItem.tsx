@@ -7,7 +7,7 @@ import { cn } from '../../../utils/bem';
 import { Text } from '../../Text/Text';
 import { contextMenuDefaultSize, ContextMenuItemComponent, ContextMenuItemProps } from '../helpers';
 
-export const cnContextMenuItem = cn('ContextMenuItemDeprecated');
+export const cnContextMenuItem = cn('ContextMenuItem');
 
 function renderSide(
   side: React.ReactNode,

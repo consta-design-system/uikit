@@ -24,6 +24,7 @@ export const exampleItems: Item[] = [
   {
     label: 'Скрепка',
     leftIcon: IconAttach,
+    rightIcon: IconAttach,
     status: 'success',
     groupId: 1,
     subMenu: [
@@ -38,6 +39,7 @@ export const exampleItems: Item[] = [
           {
             label: 'Пункт - 3',
             leftIcon: IconSun,
+            rightIcon: IconSun,
             subMenu: [
               {
                 label: 'Пункт - 5',
@@ -50,6 +52,7 @@ export const exampleItems: Item[] = [
           {
             label: 'Пункт - 4',
             leftIcon: IconSun,
+            rightIcon: IconSun,
             subMenu: [
               {
                 label: 'Пункт - 7',
@@ -62,6 +65,7 @@ export const exampleItems: Item[] = [
           {
             label: 'Пункт - 9',
             leftIcon: IconSun,
+            rightIcon: IconSun,
           },
         ],
       },
@@ -70,12 +74,14 @@ export const exampleItems: Item[] = [
   {
     label: 'Глаз',
     leftIcon: IconEye,
+    rightIcon: IconEye,
     groupId: 1,
   },
   {
     label: 'Две галочки',
     groupId: 2,
     leftIcon: IconAllDone,
+    rightIcon: IconAllDone,
     rightSide: '!',
     switch: true,
     status: 'alert',
@@ -84,6 +90,7 @@ export const exampleItems: Item[] = [
     label: 'Чемодан',
     groupId: 2,
     leftIcon: IconBag,
+    rightIcon: IconBag,
     rightSide: '!',
     switch: true,
     status: 'alert',
@@ -92,6 +99,7 @@ export const exampleItems: Item[] = [
     label: 'Солнце',
     groupId: 2,
     leftIcon: IconSun,
+    rightIcon: IconSun,
     status: 'alert',
     rightSide: '!',
     switch: true,

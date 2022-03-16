@@ -1,4 +1,4 @@
-.ContextMenuItem {
+.ContextMenuItemCanary {
   --vertical-space: 0;
   display: flex;
   align-items: center;
@@ -7,10 +7,7 @@
   word-break: break-word;
   cursor: pointer;
   transition: background-color 0.2s;
-
-  & > *:not(:last-child) {
-    margin-right: var(--space-xs);
-  }
+  gap: var(--space-xs);
 
   &:hover,
   &_active {
@@ -48,9 +45,19 @@
     }
   }
 
-  &-Side {
+  &-Slot {
     display: flex;
-    flex: 0;
     align-items: center;
+
+    &_position {
+      &_left,
+      &_right {
+        flex: 0;
+      }
+
+      &_center {
+        flex: 1;
+      }
+    }
   }
 }

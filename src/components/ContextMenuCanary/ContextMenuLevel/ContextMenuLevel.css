@@ -1,4 +1,4 @@
-.ContextMenuLevel {
+.ContextMenuLevelCanary {
   box-sizing: border-box;
   width: 240px;
   padding: var(--space-xs) 0;
@@ -53,6 +53,7 @@
     letter-spacing: 0.05em;
 
     &_size {
+      &_xs,
       &_s {
         --top-space: var(--space-xs);
         --bottom-space: var(--space-2xs);

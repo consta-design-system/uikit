@@ -177,8 +177,8 @@ export type ContextMenuItemProps<
 > = PropsWithAsAttributes<
   Omit<ContextMenuItemDefault, 'onClick' | 'attributes'> & {
     size?: ContextMenuPropSize;
-    active?: boolean;
-    withSubMenu?: boolean;
+    active: boolean;
+    withSubMenu: boolean;
   },
   AS
 > &

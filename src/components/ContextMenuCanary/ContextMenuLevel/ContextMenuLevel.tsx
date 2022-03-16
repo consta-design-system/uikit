@@ -17,7 +17,7 @@ import {
   ContextMenuPropSize,
 } from '../types';
 
-export const cnContextMenuLevel = cn('ContextMenuLevel');
+export const cnContextMenuLevel = cn('ContextMenuLevelCanary');
 
 const renderHeader = (
   groupLabel: string | number | undefined,
@@ -170,7 +170,7 @@ function ContextMenuLevelRender<ITEM, GROUP>(
                   leftSide={getItemLeftSide(item)}
                   leftIcon={getItemLeftIcon(item)}
                   status={getItemStatus(item)}
-                  key={getItemKey(item)}
+                  key={cnContextMenuLevel('Item', { groupIndex, index })}
                   disabled={getItemDisabled(item)}
                   onClick={onClick}
                   as={getItemAs(item)}
