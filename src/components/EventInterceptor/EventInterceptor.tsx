@@ -3,7 +3,7 @@ import React from 'react';
 import { eventInterceptorMap } from './eventInterceptorMap';
 
 export type EventInterceptorMap = typeof eventInterceptorMap;
-export type EventInterceptorMapKeys = keyof EventInterceptorMap;
+export type EventInterceptorMapKeys = keyof EventInterceptorMap | 'Card' | 'Tag';
 
 export type EventInterceptorProps = {
   component: EventInterceptorMapKeys;

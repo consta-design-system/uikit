@@ -10,4 +10,6 @@ export const eventInterceptorMap = {
   Select: useSelectEventsHandler,
   SnackBar: useSnackBarEventsHandler,
   TextField: useTextFieldEventsHandler,
+  Card: undefined,
+  Tag: undefined,
 } as const;
