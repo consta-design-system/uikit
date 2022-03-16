@@ -4,12 +4,12 @@ import React, { useState } from 'react';
 import { object, select } from '@storybook/addon-knobs';
 
 import { exampleThemesThree, exampleThemesTwo, Theme as ThemeType } from '../__mocks__/data.mock';
-import { IconComponent } from '../../../icons/Icon/Icon';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import { directions } from '../../Popover/Popover';
 import { Theme } from '../../Theme/Theme';
-import { ThemeToggler, themeTogglerPropSize, themeTogglerPropSizeDefault } from '../ThemeToggler';
+import { ThemeToggler } from '../ThemeToggler';
+import { themeTogglerPropSize, themeTogglerPropSizeDefault } from '../types';
 
 import mdx from './ThemeToggler.docs.mdx';
 
@@ -26,8 +26,6 @@ export function Playground() {
   const { size, themes, direction, possibleDirections } = defaultKnobs();
   const themeArray = themes === 'two' ? exampleThemesTwo : exampleThemesThree;
   const [value, setValue] = useState<ThemeType>(themeArray[0]);
-  const getThemeLabelDefault = (theme: ThemeType): string => theme.label;
-  const getThemeIconDefault = (theme: ThemeType): IconComponent => theme.icon;
 
   return (
     <Theme preset={value.theme} className={cnThemeTogglerStories()}>
@@ -36,8 +34,6 @@ export function Playground() {
         items={themeArray}
         value={value}
         onChange={({ value }) => setValue(value)}
-        getItemLabel={getThemeLabelDefault}
-        getItemIcon={getThemeIconDefault}
         direction={direction}
         possibleDirections={possibleDirections}
       />
