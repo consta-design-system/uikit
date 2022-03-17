@@ -25,7 +25,7 @@ const items: Item[] = [
   },
 ];
 
-export function ComboboxExampleOnSearch() {
+export function ComboboxExampleOnInputChange() {
   const [value, setValue] = useState<Item | null>();
   const [search, setSearch] = useState<string | undefined | null>();
   return (
@@ -35,7 +35,7 @@ export function ComboboxExampleOnSearch() {
         placeholder="Выберите вариант"
         items={items}
         value={value}
-        onSearch={({ value }) => setSearch(value)}
+        onInputChange={({ value }) => setSearch(value)}
         onChange={({ value }) => setValue(value)}
       />
     </StoryBookExample>

@@ -79,7 +79,7 @@ export type ComboboxProps<
     multiple?: MULTIPLE;
     value?: PropValue<ITEM, MULTIPLE>;
     groups?: GROUP[];
-    onSearch?: TextFieldPropOnChange;
+    onInputChange?: TextFieldPropOnChange;
     getItemLabel?: PropGetItemLabel<ITEM>;
     getItemKey?: PropGetItemKey<ITEM>;
     getItemGroupKey?: PropGetItemGroupKey<ITEM>;

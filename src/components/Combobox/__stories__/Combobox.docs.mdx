@@ -16,7 +16,7 @@ import {
 } from './examples/ComboboxExampleCustomTypes/ComboboxExampleCustomTypes';
 import { ComboboxExampleLabel } from './examples/ComboboxExampleLabel/ComboboxExampleLabel';
 import { ComboboxExampleStatus } from './examples/ComboboxExampleStatus/ComboboxExampleStatus';
-import { ComboboxExampleOnSearch } from './examples/ComboboxExampleOnSearch/ComboboxExampleOnSearch';
+import { ComboboxExampleOnInputChange } from './examples/ComboboxExampleOnInputChange/ComboboxExampleOnInputChange';
 
 <!--info
 description: Выпадающий список с поиском. Можно выбрать один или несколько вариантов.
@@ -666,7 +666,7 @@ export function ComboboxExampleDisabled() {
 
 По умолчанию компонент ищет по `label` элемента. Вы можете поменять параметры поиска с помощью `searchFunction`. Например, если в комбобоксе есть [кастомные элементы](#кастомный-элемент-списка) и нужно искать варианты не только по `label`, но и по другим данным.
 
-Для того чтобы получить значение поисквого поля необходимо указать колбек для `onSearch`.
+Для того чтобы получить значение поисквого поля необходимо указать колбек для `onInputChange`.
 
 ```tsx
 type Item = {
@@ -689,7 +689,7 @@ const items: Item[] = [
   },
 ];
 
-export function ComboboxExampleOnSearch() {
+export function ComboboxExampleOnInputChange() {
   const [value, setValue] = useState<Item | null>();
   const [search, setSearch] = useState<string | undefined | null>();
   return (
@@ -707,7 +707,7 @@ export function ComboboxExampleOnSearch() {
 }
 ```
 
-<ComboboxExampleOnSearch />
+<ComboboxExampleOnInputChange />
 
 ## Создание новых вариантов
 
@@ -1054,7 +1054,7 @@ type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | [`onChange?`](#onchange)                                  | `PropOnChange<ITEM,MULTIPLE>`                                                                     | -                                                             | Обработчик события изменения значения компонента                       |
 | [`multiple?`](#множественный-выбор)                       | `boolean`                                                                                         | `fasle`                                                       | Указатель множественного выбора                                        |
 | [`groups?`](#группировка-списка)                          | `GROUP[]`                                                                                         | -                                                             | Группы                                                                 |
-| [`onSearch?`](#поиск)                                     | `(args: e: React.ChangeEvent; id?: string, number; name?: string; value: string, null;) => void;` | -                                                             | Функция для получения значения поля ввода                              |
+| [`onInputChange?`](#поиск)                                | `(args: e: React.ChangeEvent; id?: string, number; name?: string; value: string, null;) => void;` | -                                                             | Функция для получения значения поля ввода                              |
 | [`searchFunction?`](#поиск)                               | `PropSearchFunction<ITEM>`                                                                        | поиск по `label` элементов, `label` получен из `getItemLabel` | Функция поиска                                                         |
 | [`renderItem?`](#свое-представление-элемента-списка)      | `PropRenderItem<ITEM>`                                                                            | рендер по умолчанию                                           | Рендер-функция для элемента списка                                     |
 | [`renderValue?`](#свое-представление-выбранного-значения) | `PropRenderValue<ITEM>`                                                                           | рендер по умолчанию                                           | Рендер-функция для элемента значения                                   |

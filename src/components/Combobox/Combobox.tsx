@@ -73,7 +73,7 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
     labelForNotFound = defaultlabelForNotFound,
     labelForCreate = defaultlabelForCreate,
     labelForEmptyItems = defaultLabelForEmptyItems,
-    onSearch,
+    onInputChange,
     searchFunction,
     isLoading,
     multiple = false,
@@ -167,7 +167,7 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
   const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleInputChange(e);
     const { value } = e.target;
-    !disabled && onSearch?.({ e, id, name, value: value || null });
+    !disabled && onInputChange?.({ e, id, name, value: value || null });
   };
 
   const renderControlValue = () => {
