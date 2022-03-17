@@ -1,12 +1,14 @@
 import './Collapse.css';
 
-import React from 'react';
+import React, { useRef } from 'react';
 
+import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
 import { IconArrowDown } from '../../icons/IconArrowDown/IconArrowDown';
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
+import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { Text } from '../Text/Text';
 
 import {
@@ -46,6 +48,8 @@ export const collapsePropIconPositionDefault = collapsePropIconPosition[0];
 export const collapsePropDirectionIcon = collapseIconPropDirection;
 export const collapsePropDirectionIconDefault = collapsePropDirectionIcon[0];
 export const collapsePropCloseDirectionIconDefault = collapsePropDirectionIcon[2];
+
+export const COMPONENT_NAME = 'Collapse' as const;
 
 type CollapseProps = PropsWithHTMLAttributesAndRef<
   {
@@ -105,6 +109,8 @@ function renderSide(side: React.ReactNode): React.ReactNode {
 }
 
 export const Collapse: Collapse = React.forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
+  const collapseRef = useRef<HTMLDivElement>(null);
+
   const {
     label,
     size = collapsePropSizeDefault,
@@ -123,11 +129,11 @@ export const Collapse: Collapse = React.forwardRef<HTMLDivElement, CollapseProps
     closeDirectionIcon = collapsePropCloseDirectionIconDefault,
     style,
     ...otherProps
-  } = props;
+  } = usePropsHandler(COMPONENT_NAME, props, collapseRef);
 
   return (
     <div
-      ref={ref}
+      ref={useForkRef([ref, collapseRef])}
       className={cnCollapse({ size, view, horizontalSpace }, [className])}
       style={style}
     >

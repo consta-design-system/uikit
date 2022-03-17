@@ -8,11 +8,17 @@ import { getByMap } from '../../utils/getByMap';
 import { Button } from '../Button/Button';
 import { isNotMultipleParams } from '../Combobox/helpers';
 import { ContextMenu } from '../ContextMenu/ContextMenu';
+import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 
 import { contextMenuSizeMap, iconSizeMap, withDefaultGetters } from './helpers';
 import { ThemeTogglerComponent, ThemeTogglerProps, themeTogglerPropSizeDefault } from './types';
 
+export const COMPONENT_NAME = 'ThemeToggler' as const;
+
 function ThemeTogglerRender(props: ThemeTogglerProps, ref: React.Ref<HTMLButtonElement>) {
+  const anchorRef = useRef<HTMLButtonElement>(null);
+  const buttonRef = useForkRef([anchorRef, ref]);
+
   const {
     size = themeTogglerPropSizeDefault,
     items,
@@ -25,7 +31,7 @@ function ThemeTogglerRender(props: ThemeTogglerProps, ref: React.Ref<HTMLButtonE
     possibleDirections,
     style,
     ...otherProps
-  } = withDefaultGetters(props);
+  } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), buttonRef);
 
   const [isOpen, setIsOpen] = useFlag(false);
 
@@ -35,9 +41,6 @@ function ThemeTogglerRender(props: ThemeTogglerProps, ref: React.Ref<HTMLButtonE
     callBack: onChange,
     multiple: false,
   });
-
-  const anchorRef = useRef<HTMLButtonElement>(null);
-  const buttonRef = useForkRef([anchorRef, ref]);
 
   type Item = typeof items[number];
 

@@ -9,6 +9,7 @@ import { useScrollElements } from '../../hooks/useScrollElements/useScrollElemen
 import { IconArrowLeft } from '../../icons/IconArrowLeft/IconArrowLeft';
 import { IconArrowRight } from '../../icons/IconArrowRight/IconArrowRight';
 import { Button } from '../Button/Button';
+import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 
 import { ProgressStepBarItem } from './ProgressStepBarItem/ProgressStepBarItem';
 import { ProgressStepBarLine } from './ProgressStepBarLine/ProgressStepBarLine';
@@ -26,10 +27,14 @@ import {
   withDefaultGetters,
 } from './helpers';
 
+export const COMPONENT_NAME = 'ProgressStepBar' as const;
+
 function ProgressStepBarRender<ITEM = DefaultItem>(
   props: ProgressStepBarProps<ITEM>,
   ref: React.Ref<HTMLDivElement>,
 ) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const {
     steps = [],
     direction = propDirectionDefault,
@@ -47,12 +52,11 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
     getItemOnClick,
     style,
     ...otherProps
-  } = withDefaultGetters(props);
+  } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), containerRef);
 
   const [lines, setLines] = useState<Line[]>([]);
   const [visibleIndex, setVisibleIndex] = useState<number>(activeStepIndex || 0);
 
-  const containerRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
 
   const { width, height } = useComponentSize(containerRef);

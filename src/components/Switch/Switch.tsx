@@ -1,10 +1,12 @@
 import './Switch.css';
 
-import React, { ChangeEventHandler } from 'react';
+import React, { ChangeEventHandler, useRef } from 'react';
 
+import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
+import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 
 export const switchPropSize = ['m', 's', 'l'] as const;
 export type SwitchPropSize = typeof switchPropSize[number];
@@ -48,7 +50,10 @@ export type SwitchProps = PropsWithHTMLAttributes<Props, HTMLLabelElement>;
 
 export const cnSwitch = cn('Switch');
 
+export const COMPONENT_NAME = 'Switch' as const;
+
 export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>((props, ref) => {
+  const switchRef = useRef<HTMLLabelElement>(null);
   const {
     checked = false,
     name,
@@ -67,7 +72,7 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>((props, re
     tabIndex,
     inputRef,
     ...otherProps
-  } = props;
+  } = usePropsHandler(COMPONENT_NAME, props, switchRef);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     if (onChange) {
@@ -79,7 +84,7 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>((props, re
     <label
       {...otherProps}
       className={cnSwitch({ size, view, disabled, align }, [className])}
-      ref={ref}
+      ref={useForkRef([switchRef, ref])}
     >
       <input
         type="checkbox"
