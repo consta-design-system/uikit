@@ -100,3 +100,5 @@ function ThemeTogglerRender(props: ThemeTogglerProps, ref: React.Ref<HTMLButtonE
 }
 
 export const ThemeToggler = forwardRef(ThemeTogglerRender) as ThemeTogglerComponent;
+
+export * from './types';
