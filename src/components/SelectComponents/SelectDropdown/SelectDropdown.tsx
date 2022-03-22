@@ -90,7 +90,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
           anchorRef={controlRef}
           direction="downStartLeft"
           possibleDirections={['downStartLeft', 'upStartLeft', 'downStartRight', 'upStartRight']}
-          offset={0}
+          offset="2xs"
           ref={popoverRef}
           role="listbox"
           onSetDirection={setDirection}

@@ -1,5 +1,4 @@
 .SelectDropdown {
-  --transition-spase: var(--space-2xs);
   overflow: hidden;
   box-sizing: border-box;
   min-width: 220px;
@@ -9,7 +8,6 @@
   outline: none;
   box-shadow: var(--shadow-layer);
   font-size: var(--font-size);
-  transform: translateY(var(--transition-spase));
 
   &_size {
     &_xs {
@@ -52,46 +50,6 @@
 
     &_round {
       border-radius: calc(var(--input-height) * 0.5);
-    }
-  }
-
-  &_animate {
-    &_appear,
-    &_appearActive,
-    &_appearDone,
-    &_enter,
-    &_enterActive,
-    &_enterDone,
-    &_exit,
-    &_exitActive,
-    &_exitDone {
-      transition: 0.2s ease;
-      transition-property: opacity, transform;
-    }
-
-    &_appear,
-    &_enter {
-      opacity: 0;
-      transform: translateY(var(--transition-spase));
-    }
-
-    &_enterActive,
-    &_appearActive,
-    &_appearDone,
-    &_enterDone {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    &_exit {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    &_exitActive,
-    &_exitDone {
-      opacity: 0;
-      transform: translateY(var(--transition-spase));
     }
   }
 
