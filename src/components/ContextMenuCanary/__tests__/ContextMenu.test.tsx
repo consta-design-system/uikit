@@ -12,7 +12,7 @@ import { ContextMenuGroupDefault, ContextMenuItemDefault, ContextMenuProps } fro
 const testId = 'ContextMenuCanary';
 const additionalClass = 'additionalClass';
 
-const cnContextMenuItem = cn('ContextMenuItem');
+const cnContextMenuItem = cn('ContextMenuItemCanary');
 
 const renderComponent = (
   props: ContextMenuProps<ContextMenuItemDefault, ContextMenuGroupDefault> | {},
@@ -45,7 +45,7 @@ function getItem(index = 0) {
 }
 
 function getSide(index = 0, sideIndex = 0) {
-  return getItem(index).querySelectorAll(`.${cnContextMenuItem('Side')}`)[sideIndex];
+  return getItem(index).querySelectorAll(`.${cnContextMenuItem('Slot')}`)[sideIndex];
 }
 function getIcon(index = 0, sideIndex = 0) {
   return getSide(index, sideIndex).querySelectorAll('.Icon')[0];
@@ -136,20 +136,20 @@ describe('Компонент ContextMenu', () => {
       it('side cлева отобразился', () => {
         renderComponent({
           getItemLeftIcon: () => undefined,
-          getItemLeftSide: (item) => item.leftSide,
+          getItemLeftSide: () => 'test',
         });
 
-        expect(getSide()).toHaveClass(cnContextMenuItem('Side', { position: 'left' }));
+        expect(getSide()).toHaveClass(cnContextMenuItem('Slot', { position: 'left' }));
       });
     });
     describe('проверка getItemRightSide', () => {
       it('side справа отобразился', () => {
         renderComponent({
           getItemRightIcon: () => undefined,
-          getItemRightSide: (item) => item.rightSide,
+          getItemRightSide: () => 'test',
         });
 
-        expect(getSide(0, 1)).toHaveClass(cnContextMenuItem('Side', { position: 'right' }));
+        expect(getSide(0, 2)).toHaveClass(cnContextMenuItem('Slot', { position: 'right' }));
       });
     });
     describe('проверка getItemLeftIcon', () => {
@@ -169,7 +169,7 @@ describe('Компонент ContextMenu', () => {
           getItemRightIcon: () => IconAllDone,
         });
 
-        expect(getIcon(0, 1)).toHaveClass('IconAllDone');
+        expect(getIcon(0, 2)).toHaveClass('IconAllDone');
       });
     });
     describe('проверка getItemAs', () => {
