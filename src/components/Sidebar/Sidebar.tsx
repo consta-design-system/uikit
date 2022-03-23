@@ -126,7 +126,7 @@ export const Sidebar: SidebarComponent = (props) => {
     <CSSTransition
       in={isOpen}
       unmountOnExit
-      className={cnSidebar({ position })}
+      className={cnSidebar({ position, hasOverlay })}
       classNames={cnForCssTransition(cnSidebar)}
       timeout={200}
       nodeRef={portalRef}

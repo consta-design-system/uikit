@@ -1,5 +1,34 @@
 # Changelog
 
+## v3.18.0 (16/03/2022)
+Самое важное:
+- Выпустили обновленный `ContextMenu` (с флагом `Canary`) — добавлена  анимация появления и геттеры теперь не обязательны.
+- Сделали миксин `MixPopoverArrow` для добавления уголка к всплывающим окнам
+- В `ThemeToggler` геттеры теперь не обязательны
+- В `EventInterceptor` появилась возможность подписаться на события компонентов `Tag` и `Card`
+
+---
+
+- [ feat(ContextMenuCanary): rewrited and updated ContextMenu (#2079)](https://github.com/consta-design-system/uikit/commit/c37e9efe64e7b2927a180425a98f419c8b295d42) - [@N1MBER](https://github.com/N1MBER)
+- [ feat(EventInterceptor): add Tag and Card to EventInterceptor (#2128)](https://github.com/consta-design-system/uikit/commit/ffcbe2badd8896e1523aa0a5dbd4a9e883988f0c) - [@N1MBER](https://github.com/N1MBER)
+- [feat(MixPopoverArrow): add new mixin (#2129)](https://github.com/consta-design-system/uikit/commit/d2012783bce6c887cebf0dd68d5998bc4551fba2) - [@N1MBER](https://github.com/N1MBER)
+- [feat(ThemeToggler): rewrite examples, doc and component with getters (#2105)](https://github.com/consta-design-system/uikit/commit/daec7b0a6625b678979808701ffdafe58e94be5d) - [@N1MBER](https://github.com/N1MBER)
+- [chore(CODEOWNERS): edit (#2135)](https://github.com/consta-design-system/uikit/commit/e00ed728e7a6f44622c08f3460b2da155d87c7d8) - [@gizeasy](https://github.com/gizeasy)
+- [docs(principles): add doc (#2104)](https://github.com/consta-design-system/uikit/commit/8843535c6a2ad6ecebc1b41c19a020ccaae6a42c) - [@arhayka](https://github.com/arhayka)
+
+--------------------
+
+## v3.17.3 (10/03/2022)
+- [fix(Select): fix width (#2113)](https://github.com/consta-design-system/uikit/commit/0eb45830884cc2e4aa73dcdaa2127d0b919011e7) - [@N1KN](https://github.com/N1KN)
+- [fix(SideBar): fix pointer-events (#2107)](https://github.com/consta-design-system/uikit/commit/f6b7ac20991df669128787e49f23e0e5dfe217cb) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
+## v3.17.2 (04/03/2022)
+- [fix(Tooltip): fixed position (#2110)](https://github.com/consta-design-system/uikit/commit/a73c95ca2aac29c0c6ff2c2424c0aff5e3868925) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v3.17.1 (02/03/2022)
 Самое важное:
 - В `Popover` расширили свойство offset, теперь можно указывать размеры, базирующиеся на теме.
@@ -479,43 +508,3 @@
 - [fix(Tabs): tabs don't break on new line in vertical orientation](https://github.com/gazprom-neft/consta-uikit/commit/10539c33a5c798d2c3e884443d4419aa3346c17c) - [@nekitk](https://github.com/nekitk)
 - [fix(Tabs): "more items" dropdown doesn't appear in Safari](https://github.com/gazprom-neft/consta-uikit/commit/443c4562ae5dc5fbfc6c7861ef21bde43b48868d) - [@nekitk](https://github.com/nekitk)
 - [fix(Tabs): tabs doesn't change on small screen in scroll mode](https://github.com/gazprom-neft/consta-uikit/commit/fde863b183a0a2579fce0b00bbfe5b5abecca1f1) - [@nekitk](https://github.com/nekitk)
-
---------------------
-
-## v3.0.0 (18/08/2021)
-**Важное из обновления:**
-
-Переработали компонент `Tabs`, добавили новые возможности (горизонтальная прокрутка, возможность отображать Badge и другие). Вертикальные `Tabs` теперь не только в Figma, но и в коде!
-
-**Внимание**: свойство `renderItem` обратно не совместимо.
-
----
-
-- [docs(readme): edit readme (#1433)](https://github.com/gazprom-neft/consta-uikit/commit/9d5c28b594a1afebf2000637457301ccbfcb90dd) - [@arhayka](https://github.com/arhayka)
-- [docs(Tabs): edit docs, add examples (#1421)](https://github.com/gazprom-neft/consta-uikit/commit/3aa860e8229578876c68311b48a0c7c59459c071) - [@arhayka](https://github.com/arhayka)
-- [chore(gren): edit config](https://github.com/gazprom-neft/consta-uikit/commit/e83d823e2d82cf7a09a430fc1fa1b12ae1cecd51) - [@gizeasy](https://github.com/gizeasy)
-- [fix(DragNDropField): show custom view while dragging files (#1378)](https://github.com/gazprom-neft/consta-uikit/commit/1ce1fb0b6661e43e080cbd8e719b5ae238f5cf66) - [@nekitk](https://github.com/nekitk)
-- [feat(Tabs): added new items fit mode - scroll](https://github.com/gazprom-neft/consta-uikit/commit/408c7d7cc03803603cb2bc0bd4102a69c8b049cf) - [@nekitk](https://github.com/nekitk)
-- [feat(Tabs): adapt tabs to available width by hiding unfitting tabs in dropdown](https://github.com/gazprom-neft/consta-uikit/commit/874087f0504b751c775a50fc84be59bc03072eca) - [@nekitk](https://github.com/nekitk)
-- [feat(Tabs): added line position variants](https://github.com/gazprom-neft/consta-uikit/commit/d4fa13f4dbcec6764b5249a65cca8f7d1b8091a0) - [@nekitk](https://github.com/nekitk)
-
---------------------
-
-## v2.2.1 (11/08/2021)
-- [test(DragNDropField): fix tests](https://github.com/gazprom-neft/consta-uikit/commit/1a1283319db53c9b8361bab9977ddceb347b756a) - [@gizeasy](https://github.com/gizeasy)
-- [docs(DragNDropField): edit docs, examples and error texts (#1393)](https://github.com/gazprom-neft/consta-uikit/commit/6a7b35309317a91d489b02881863c9e2359ab7f2) - [@arhayka](https://github.com/arhayka)
-- [docs(Skeleton): edit docs (#1385)](https://github.com/gazprom-neft/consta-uikit/commit/c16db37a063233b88b24fa7549a523d9306a7a1f) - [@arhayka](https://github.com/arhayka)
-- [docs(CollapseGroup): edit docs & examples (#1384)](https://github.com/gazprom-neft/consta-uikit/commit/4e393bfcaf10dfbcf1fdb7b9457fef47cf3b87e6) - [@arhayka](https://github.com/arhayka)
-- [docs(combobox): edit docs & example (#1376)](https://github.com/gazprom-neft/consta-uikit/commit/292f6ea92968e87ffbefb50a414175226488ccdf) - [@arhayka](https://github.com/arhayka)
-- [docs(Header): added a closing tag into the Header story (#1398)](https://github.com/gazprom-neft/consta-uikit/commit/0ae8199a38608e53a4b47b59226d8991f629d5cb) - [@monolithed](https://github.com/monolithed)
-- [fix(CollapseGroup): fixed accordion behavior (#1412)](https://github.com/gazprom-neft/consta-uikit/commit/dda555447b785295b573b3dd4b5f6e7bad566012) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v2.2.0 (23/07/2021)
-- [docs(Storybook): add thematization chapter (#1372)](https://github.com/gazprom-neft/consta-uikit/commit/55120c57be5a660ba7cdb04fe4cae35fc57c4ecc) - [@gizeasy](https://github.com/gizeasy)
-- [fix(DepricatedComponents): fix export](https://github.com/gazprom-neft/consta-uikit/commit/332b44f130d374add0e95bc6e849c7e161cebe7f) - [@gizeasy](https://github.com/gizeasy)
-- [chore(Storybook): edit addons structure](https://github.com/gazprom-neft/consta-uikit/commit/c09c89cf55b7dca2b16aa8c2e5d2c76ffce40937) - [@gizeasy](https://github.com/gizeasy)
-- [refactor(Tabs): used ResizeObserver to detect tab width changes (#1366)](https://github.com/gazprom-neft/consta-uikit/commit/edbb7284bed8f1b4256613b1ad8f4af04ff21afe) - [@nekitk](https://github.com/nekitk)
-- [feat(CollapseGroup): added CollapseGroup (#1306)](https://github.com/gazprom-neft/consta-uikit/commit/1aeee779f511b7ead84942070d8085357eef65fe) - [@Bright-Burn](https://github.com/Bright-Burn)
-- [docs(Selects): added information about ref (#1364)](https://github.com/gazprom-neft/consta-uikit/commit/b6bda3ed36c12f2b23778fb1d8b929e0c5274a4e) - [@gizeasy](https://github.com/gizeasy)
