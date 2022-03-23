@@ -1,5 +1,26 @@
 # Changelog
 
+## v3.18.1 (23/03/2022)
+Самое важное:
+- в `Select`, `Combobox`, `UserSelect` добавили индикатор загрузки (`isLoading`)
+- в `Combobox`, `UserSelect`  добавили возможность получить значение вводимого текста в поле ввода (`onInputChange`)
+- добавили иконки социальных сетей
+- в `EventInterceptor` добавили поддержку всех компонентов, теперь можно подписаться на все компоненты.
+---
+
+- [ feat(cnMixPopoverAnimate): add animation to many components which use Popover component (#2109)](https://github.com/consta-design-system/uikit/commit/7ba359ce6ce41434c33c79d047d13ba00b8a0fae) - [@N1MBER](https://github.com/N1MBER)
+- [chore(deps): bump shelljs from 0.8.4 to 0.8.5 (#1933)](https://github.com/consta-design-system/uikit/commit/f688d2140d99da04bb021bf1acd5d0f6a2d887b8) - [@dependabot](https://github.com/dependabot[bot])
+- [chore(deps): bump url-parse from 1.5.7 to 1.5.10 (#2084)](https://github.com/consta-design-system/uikit/commit/ec533ef734ee90a3b2c9c7c63886bc276e27d0f0) - [@dependabot](https://github.com/dependabot[bot])
+- [feat(Selectors): add isLoading and onInputChange props (#2127)](https://github.com/consta-design-system/uikit/commit/49ea2b6f6e76d87868a78a9a7384a4afb915628f) - [@N1MBER](https://github.com/N1MBER)
+- [feat(Icons): add new icons for social (#2146)](https://github.com/consta-design-system/uikit/commit/f4bc4c4cfe7d3e219947115ef67a757831e94324) - [@N1MBER](https://github.com/N1MBER)
+- [docs(common): add images to review, components, repos and figma libraries (#2143)](https://github.com/consta-design-system/uikit/commit/4c203aaa1029172a993358e87d2a46a2b3803ac2) - [@arhayka](https://github.com/arhayka)
+- [fix(ContextMenu): fixed calculate zIndex (#2136)](https://github.com/consta-design-system/uikit/commit/667200a7c1d6c6783e1d26a31c3be2db96bc1d39) - [@gizeasy](https://github.com/gizeasy)
+- [fix(Radio): add new prop inputId to Checkbox and Radio (#2142)](https://github.com/consta-design-system/uikit/commit/6df6e9ff87b9851ea95b8117b25bdac28a12c9fa) - [@N1MBER](https://github.com/N1MBER)
+- [feat(EventInterceptor): connect other components to EventInterceptor (#2137)](https://github.com/consta-design-system/uikit/commit/37eb2f5dd0e2350a0e97e7f01c4585b9b9fed005) - [@N1MBER](https://github.com/N1MBER)
+- [fix(ThemeToggler): add reexport types (#2145)](https://github.com/consta-design-system/uikit/commit/fd266c2085a949f19e3af998ecf869fa6e2ba671) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
 ## v3.18.0 (16/03/2022)
 Самое важное:
 - Выпустили обновленный `ContextMenu` (с флагом `Canary`) — добавлена  анимация появления и геттеры теперь не обязательны.
@@ -497,14 +518,3 @@
 - [fix(cn fuction): fix bug with cn fuction](https://github.com/gazprom-neft/consta-uikit/commit/8c33625c46810cb4170b15d40620568e339157ca) - [@N1MBER](https://github.com/N1MBER)
 - [refactor(SnackBar): change description of props types](https://github.com/gazprom-neft/consta-uikit/commit/4f486dc1aca18219f986e9d49c2b4e6b90286666) - [@N1MBER](https://github.com/N1MBER)
 - [refactor(Tooltip): delete preview container from tooltip documentation](https://github.com/gazprom-neft/consta-uikit/commit/4651448dadd54721f7528ab91a4da022856925df) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v3.0.1 (25/08/2021)
-- [fix(Tabs): active tab was not calculated properly for unmemoized items](https://github.com/gazprom-neft/consta-uikit/commit/66c1f4aeab84a0e227641a5c7aea5b104bea8595) - [@nekitk](https://github.com/nekitk)
-- [fix(Tabs): open "more tabs" popup to the right if there's no space to open it fully](https://github.com/gazprom-neft/consta-uikit/commit/f9f777bbcb1f2e629b844b09356bfadfa55656a6) - [@nekitk](https://github.com/nekitk)
-- [fix(Tabs): updated list offset in vertical orientation according to design](https://github.com/gazprom-neft/consta-uikit/commit/5077a743932219c1caaea11b5aa0fe5596a1c971) - [@nekitk](https://github.com/nekitk)
-- [fix(Tabs): incorrect line size after changing tabs direction](https://github.com/gazprom-neft/consta-uikit/commit/ee6616d24c11db0b074d19537c304aa5e1978f41) - [@nekitk](https://github.com/nekitk)
-- [fix(Tabs): tabs don't break on new line in vertical orientation](https://github.com/gazprom-neft/consta-uikit/commit/10539c33a5c798d2c3e884443d4419aa3346c17c) - [@nekitk](https://github.com/nekitk)
-- [fix(Tabs): "more items" dropdown doesn't appear in Safari](https://github.com/gazprom-neft/consta-uikit/commit/443c4562ae5dc5fbfc6c7861ef21bde43b48868d) - [@nekitk](https://github.com/nekitk)
-- [fix(Tabs): tabs doesn't change on small screen in scroll mode](https://github.com/gazprom-neft/consta-uikit/commit/fde863b183a0a2579fce0b00bbfe5b5abecca1f1) - [@nekitk](https://github.com/nekitk)
