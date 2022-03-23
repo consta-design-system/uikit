@@ -5,10 +5,14 @@ import ColumnImage from './imagesForAdditionalData/ColumnImage';
 import DualAxesImage from './imagesForAdditionalData/DualAxesImage';
 import FeedbackFormImage from './imagesForAdditionalData/FeedbackFormImage';
 import GaugeImage from './imagesForAdditionalData/GaugeImage';
+import GpnResponsesImage from './imagesForAdditionalData/GpnResponsesImage';
+import HeaderUmdImage from './imagesForAdditionalData/HeaderUmdImage';
 import HistogramImage from './imagesForAdditionalData/HistogramImage';
 import LineImage from './imagesForAdditionalData/LineImage';
 import PieImage from './imagesForAdditionalData/PieImage';
 import RadarImage from './imagesForAdditionalData/RadarImage';
+import RcTableAdapterImage from './imagesForAdditionalData/RcTableAdapterImage';
+import RcTreeAdapterImage from './imagesForAdditionalData/RcTreeAdapterImage';
 import ScatterImage from './imagesForAdditionalData/ScatterImage';
 import StatsImage from './imagesForAdditionalData/StatsImage';
 import WaterfallImage from './imagesForAdditionalData/WaterfallImage';
@@ -96,6 +100,18 @@ export const additionalData: Data = [
     title: 'Отдельные компоненты',
     items: [
       {
+        url: 'https://header-consta.vercel.app/',
+        name: 'Header',
+        description:
+          'Шапка  @consta/header. Настраивается, много компонентов: 4 меню, бейджики, уведомления, логин, логотип и не только.',
+      },
+      {
+        url: 'https://github.com/consta-design-system/header-umd',
+        name: 'Header-umd',
+        description: 'Для проектов без React. Прикручивается скриптом, есть настройки.',
+        image: HeaderUmdImage,
+      },
+      {
         url: 'https://stats-consta.vercel.app/?path=/docs/components-stats--interactive',
         name: 'Stats',
         description:
@@ -112,6 +128,7 @@ export const additionalData: Data = [
         url: 'https://gpn-responses.vercel.app/?path=/docs/components-responses--playground',
         name: 'GPN-Responses',
         description: 'Заглушки с сообщениями об ошибках и важных статусах в стиле «Газпром нефти».',
+        image: GpnResponsesImage,
       },
     ],
   },
@@ -122,11 +139,18 @@ export const additionalData: Data = [
         url: 'https://consta-table.vercel.app/?path=/story/common-start--page',
         name: 'rcTableAdapter',
         description: 'Адаптер для rc-table. Таблица со множеством настроек.',
+        image: RcTableAdapterImage,
       },
       {
         url: 'https://consta-tree.vercel.app/',
         name: 'rcTreeAdapter',
         description: 'Адаптер для rc-tree. Дерево, подходит для создания иерархических структур.',
+        image: RcTreeAdapterImage,
+      },
+      {
+        url: 'https://gantt-task-react-adapter.vercel.app/',
+        name: 'gantt-task-react-adapter',
+        description: 'Адаптер для gantt-task-react. Диаграмма Ганта.',
       },
     ],
   },
