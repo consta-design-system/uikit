@@ -7,6 +7,7 @@ import { useSelect } from '../../hooks/useSelect/useSelect';
 import { IconClose } from '../../icons/IconClose/IconClose';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
+import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { cnSelect } from '../SelectComponents/cnSelect';
 import {
   defaultlabelForCreate,
@@ -32,6 +33,8 @@ import {
   PropRenderValue,
   withDefaultGetters,
 } from './helpers';
+
+export const COMPONENT_NAME = 'Combobox' as const;
 
 function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE extends boolean = false>(
   props: ComboboxProps<ITEM, GROUP, MULTIPLE>,
@@ -77,7 +80,7 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
     multiple = false,
     style,
     ...otherProps
-  } = withDefaultGetters(props);
+  } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
 
   const {
     getKeyProps,

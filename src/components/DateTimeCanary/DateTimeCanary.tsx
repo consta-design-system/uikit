@@ -1,6 +1,8 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 
+import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { getByMap } from '../../utils/getByMap';
+import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 
 import { DateTimeTypeDate } from './DateTimeTypeDate/DateTimeTypeDate';
 import { DateTimeTypeDateTime } from './DateTimeTypeDateTime/DateTimeTypeDateTime';
@@ -22,12 +24,19 @@ const typeMap: Record<DateTimePropType, DateTimeTypeComponent<DateTimePropType>>
   'date-time': DateTimeTypeDateTime,
 } as const;
 
+export const COMPONENT_NAME = 'DateTime' as const;
+
 export const DateTime: DateTimeComponent = forwardRef((props, ref) => {
-  const { type = dateTimePropTypeDefault, ...otherProps } = props;
+  const dateTimeRef = useRef<HTMLDivElement>(null);
+  const { type = dateTimePropTypeDefault, ...otherProps } = usePropsHandler(
+    COMPONENT_NAME,
+    props,
+    dateTimeRef,
+  );
 
   const Component = getByMap(typeMap, type);
 
-  return <Component {...otherProps} ref={ref} />;
+  return <Component {...otherProps} ref={useForkRef([ref, dateTimeRef])} />;
 });
 
 export * from './helpers/types';
