@@ -63,6 +63,7 @@ import { IconExit } from '../../IconExit/IconExit';
 import { IconExpand } from '../../IconExpand/IconExpand';
 import { IconEye } from '../../IconEye/IconEye';
 import { IconEyeClose } from '../../IconEyeClose/IconEyeClose';
+import { IconFacebook } from '../../IconFacebook/IconFacebook';
 import { IconFavorite } from '../../IconFavorite/IconFavorite';
 import { IconFilter } from '../../IconFilter/IconFilter';
 import { IconFitToDefault } from '../../IconFitToDefault/IconFitToDefault';
@@ -80,6 +81,7 @@ import { IconHealth } from '../../IconHealth/IconHealth';
 import { IconHome } from '../../IconHome/IconHome';
 import { IconInComparison } from '../../IconInComparison/IconInComparison';
 import { IconInfo } from '../../IconInfo/IconInfo';
+import { IconInstagram } from '../../IconInstagram/IconInstagram';
 import { IconIntroduction } from '../../IconIntroduction/IconIntroduction';
 import { IconIpad } from '../../IconIpad/IconIpad';
 import { IconItalic } from '../../IconItalic/IconItalic';
@@ -175,12 +177,15 @@ import { IconUnsortCenter } from '../../IconUnsortCenter/IconUnsortCenter';
 import { IconUpload } from '../../IconUpload/IconUpload';
 import { IconUser } from '../../IconUser/IconUser';
 import { IconVideo } from '../../IconVideo/IconVideo';
+import { IconVkontakte } from '../../IconVkontakte/IconVkontakte';
 import { IconVZD } from '../../IconVZD/IconVZD';
 import { IconWarning } from '../../IconWarning/IconWarning';
 import { IconWatch } from '../../IconWatch/IconWatch';
 import { IconWideScreen } from '../../IconWideScreen/IconWideScreen';
 import { IconWorld } from '../../IconWorld/IconWorld';
 import { IconWrench } from '../../IconWrench/IconWrench';
+import { IconYandexDzen } from '../../IconYandexDzen/IconYandexDzen';
+import { IconYoutube } from '../../IconYoutube/IconYoutube';
 
 import { IconsItem } from './Item/Icons-Item';
 import mdx from './Icon.docs.mdx';
@@ -374,6 +379,11 @@ const icons = {
   IconWideScreen,
   IconWorld,
   IconWrench,
+  IconFacebook,
+  IconInstagram,
+  IconVkontakte,
+  IconYandexDzen,
+  IconYoutube,
 } as const;
 
 type Name = keyof typeof icons;

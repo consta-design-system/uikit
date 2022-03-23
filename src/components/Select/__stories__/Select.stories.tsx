@@ -38,6 +38,7 @@ const getKnobs = () => ({
   labelPosition: select('labelPosition', ['top', 'left'], 'top'),
   placeholder: text('placeholder', 'Выберите цвет'),
   withGroups: boolean('withGroups', false),
+  isLoading: boolean('isLoading', false),
 });
 
 export function Playground(): JSX.Element {
@@ -53,6 +54,7 @@ export function Playground(): JSX.Element {
     label,
     labelPosition,
     caption,
+    isLoading,
   } = getKnobs();
   const [value, setValue] = useState<Item | null | undefined>();
 
@@ -68,6 +70,7 @@ export function Playground(): JSX.Element {
           status={status || undefined}
           placeholder={placeholder}
           items={items}
+          isLoading={isLoading}
           value={value}
           onChange={({ value }) => setValue(value)}
           groups={withGroups ? groups : []}
@@ -94,6 +97,7 @@ export const WithRender = createStory(
       label,
       labelPosition,
       caption,
+      isLoading,
     } = getKnobs();
     const [value, setValue] = useState<MyItem | null | undefined>();
     return (
@@ -107,6 +111,7 @@ export const WithRender = createStory(
         placeholder={placeholder}
         items={myData}
         value={value}
+        isLoading={isLoading}
         onChange={({ value }) => setValue(value)}
         groups={withGroups ? myGroup : []}
         renderItem={({ item, active, hovered, onClick, onMouseEnter }) => (

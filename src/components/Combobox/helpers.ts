@@ -8,6 +8,7 @@ import {
   PropView,
   RenderItemProps,
 } from '../SelectComponents/types';
+import { TextFieldPropOnChange } from '../TextField/helpers';
 
 export type DefaultItem = {
   label: string;
@@ -60,6 +61,7 @@ export type ComboboxProps<
     placeholder?: string;
     ariaLabel?: string;
     status?: PropStatus;
+    isLoading?: boolean;
     dropdownClassName?: string;
     dropdownRef?: React.RefObject<HTMLDivElement>;
     name?: string;
@@ -77,6 +79,7 @@ export type ComboboxProps<
     multiple?: MULTIPLE;
     value?: PropValue<ITEM, MULTIPLE>;
     groups?: GROUP[];
+    onInputChange?: TextFieldPropOnChange;
     getItemLabel?: PropGetItemLabel<ITEM>;
     getItemKey?: PropGetItemKey<ITEM>;
     getItemGroupKey?: PropGetItemGroupKey<ITEM>;

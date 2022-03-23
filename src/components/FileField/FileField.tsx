@@ -1,10 +1,12 @@
 import './FileField.css';
 
-import React from 'react';
+import React, { useRef } from 'react';
 
+import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { cnMixVisuallyHidden } from '../../mixs/MixVisuallyHidden/MixVisuallyHidden';
 import { cn } from '../../utils/bem';
 import { PropsWithJsxAttributes } from '../../utils/types/PropsWithJsxAttributes';
+import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 
 type ComponentProps = { role: string; as: keyof JSX.IntrinsicElements };
 
@@ -20,6 +22,8 @@ export type FileFieldProps = PropsWithJsxAttributes<
   'input'
 >;
 
+export const COMPONENT_NAME = 'FileField' as const;
+
 function isRenderFn(fn: RenderFn | React.ReactNode): fn is RenderFn {
   return (fn as RenderFn).call !== undefined;
 }
@@ -27,6 +31,8 @@ function isRenderFn(fn: RenderFn | React.ReactNode): fn is RenderFn {
 export const cnFileField = cn('FileField');
 
 export const FileField: React.FC<FileFieldProps> = (props) => {
+  const fileFieldRef = useRef<HTMLInputElement>(null);
+
   const {
     className,
     children,
@@ -34,7 +40,7 @@ export const FileField: React.FC<FileFieldProps> = (props) => {
     inputRef,
     'aria-label': ariaLabel = 'File input',
     ...inputProps
-  } = props;
+  } = usePropsHandler(COMPONENT_NAME, props, fileFieldRef);
 
   const content = isRenderFn(children) ? children({ role: 'button', as: 'span' }) : children;
 
@@ -46,7 +52,7 @@ export const FileField: React.FC<FileFieldProps> = (props) => {
         id={id}
         type="file"
         aria-label={ariaLabel}
-        ref={inputRef}
+        ref={useForkRef([inputRef, fileFieldRef])}
       />
       {content}
     </label>

@@ -7,6 +7,7 @@ import { useSelect } from '../../hooks/useSelect/useSelect';
 import { IconClose } from '../../icons/IconClose/IconClose';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
+import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { cnSelect } from '../SelectComponents/cnSelect';
 import {
   defaultlabelForCreate,
@@ -32,6 +33,8 @@ import {
   PropRenderValue,
   withDefaultGetters,
 } from './helpers';
+
+export const COMPONENT_NAME = 'Combobox' as const;
 
 function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE extends boolean = false>(
   props: ComboboxProps<ITEM, GROUP, MULTIPLE>,
@@ -73,11 +76,13 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
     labelForNotFound = defaultlabelForNotFound,
     labelForCreate = defaultlabelForCreate,
     labelForEmptyItems = defaultLabelForEmptyItems,
+    onInputChange,
     searchFunction,
+    isLoading,
     multiple = false,
     style,
     ...otherProps
-  } = withDefaultGetters(props);
+  } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
 
   const {
     getKeyProps,
@@ -162,6 +167,12 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
 
   const inputRefForRender = useForkRef([inputRef, inputRefProp]);
 
+  const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleInputChange(e);
+    const { value } = e.target;
+    !disabled && onInputChange?.({ e, id, name, value: value || null });
+  };
+
   const renderControlValue = () => {
     const width = multiple ? getInputWidth(controlInnerRef, helperInputFakeElement) : undefined;
     return (
@@ -184,7 +195,7 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
           aria-label={ariaLabel}
-          onChange={handleInputChange}
+          onChange={handleChangeValue}
           ref={inputRefForRender}
           className={cnSelect('Input', { size, hide: !multiple && !!value, multiple })}
           value={searchValue}
@@ -263,6 +274,7 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
         visibleItems={visibleItems}
         labelForNotFound={labelForNotFound}
         labelForCreate={labelForCreate}
+        isLoading={isLoading}
         labelForEmptyItems={labelForEmptyItems}
         notFound={notFound}
         hasItems={hasItems}

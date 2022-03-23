@@ -7,6 +7,7 @@ import { useSortSteps } from '../../hooks/useSortSteps/useSortSteps';
 import { IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
+import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { FieldCaption } from '../FieldCaption/FieldCaption';
 import { FieldLabel } from '../FieldLabel/FieldLabel';
 
@@ -34,10 +35,14 @@ const sizeMap: Record<PropSize, IconPropSize> = {
   l: 'm',
 };
 
+export const COMPONENT_NAME = 'Slider' as const;
+
 function SliderRender<RANGE extends boolean>(
   props: SliderProps<RANGE>,
   ref: React.Ref<HTMLDivElement>,
 ) {
+  const sliderRef = useRef<HTMLDivElement>(null);
+
   const {
     min = 0,
     max = 100,
@@ -59,13 +64,12 @@ function SliderRender<RANGE extends boolean>(
     className,
     style,
     ...otherProps
-  } = props;
+  } = usePropsHandler(COMPONENT_NAME, props, sliderRef);
 
   const [isHovered, { on, off }] = useFlag(false);
 
   const leftButtonRef = useRef<HTMLButtonElement>(null);
   const rightButtonRef = useRef<HTMLButtonElement>(null);
-  const sliderRef = useRef<HTMLDivElement>(null);
 
   const sortedSteps = useSortSteps({ step, min, max });
 

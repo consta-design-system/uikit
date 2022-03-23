@@ -1,10 +1,11 @@
 import './DragNDropField.css';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { DropzoneOptions, useDropzone } from 'react-dropzone';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { cn } from '../../utils/bem';
+import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { Text } from '../Text/Text';
 
 import { DragNDropFieldContent } from './DragNDropFieldContent/DragNDropFieldContent';
@@ -27,8 +28,20 @@ export type DragNDropFieldChildrenRenderProp = (
 
 const cnDragNDropField = cn('DragNDropField');
 
+export const COMPONENT_NAME = 'DragNDropField' as const;
+
 export const DragNDropField = React.forwardRef<HTMLDivElement, DragNDropFieldProps>(
-  ({ accept, maxSize, multiple = false, onDropFiles, children = DragNDropFieldContent }, ref) => {
+  (props, ref) => {
+    const dragNDropFieldRef = useRef<HTMLDivElement>(null);
+
+    const {
+      accept,
+      maxSize,
+      multiple = false,
+      onDropFiles,
+      children = DragNDropFieldContent,
+    } = usePropsHandler(COMPONENT_NAME, props, dragNDropFieldRef);
+
     const handleDrop: DropzoneOptions['onDrop'] = React.useCallback(
       (acceptedFiles) => acceptedFiles.length > 0 && onDropFiles(acceptedFiles),
       [onDropFiles],
@@ -66,7 +79,7 @@ export const DragNDropField = React.forwardRef<HTMLDivElement, DragNDropFieldPro
 
     return (
       <>
-        <div {...rootProps} ref={useForkRef([ref, rootRef])}>
+        <div {...rootProps} ref={useForkRef([ref, rootRef, dragNDropFieldRef])}>
           <input {...getInputProps()} />
           {isDragActive ? (
             <Text view="secondary" size="s" align="center">

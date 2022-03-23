@@ -56,6 +56,7 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
     getGroupKey,
     getGroupLabel,
     renderItem,
+    isLoading,
     renderValue: renderValueProp,
     inputRef: inputRefProp,
     style,
@@ -189,6 +190,7 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
         getGroupLabel={getGroupLabel}
         visibleItems={visibleItems}
         notFound={notFound}
+        isLoading={isLoading}
         labelForEmptyItems={labelForEmptyItems}
         hasItems={hasItems}
         style={typeof style?.zIndex === 'number' ? { zIndex: style.zIndex + 1 } : undefined}
