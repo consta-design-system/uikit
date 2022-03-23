@@ -1,6 +1,6 @@
 import './SelectDropdown.css';
 
-import React, { Fragment, useRef, useState } from 'react';
+import React, { Fragment, useMemo, useRef, useState } from 'react';
 import { Transition } from 'react-transition-group';
 
 import {
@@ -113,6 +113,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
           equalAnchorWidth
         >
           <div className={cnSelectDropdown('List', { size, form })} ref={dropdownRef}>
+            {isLoading && <SelectLoader mode={isListShowed ? 'blur' : 'empty'} />}
             {visibleItems.map((group) => {
               if (isOptionForCreate(group)) {
                 return (
@@ -147,10 +148,10 @@ export const SelectDropdown: SelectDropdown = (props) => {
                 </Fragment>
               );
             })}
-            {notFound && labelForNotFound && (
+            {!isLoading && notFound && labelForNotFound && (
               <Text className={cnSelectDropdown('LabelForNotFound')}>{labelForNotFound}</Text>
             )}
-            {!hasItems && labelForEmptyItems && (
+            {!isLoading && !hasItems && labelForEmptyItems && (
               <Text className={cnSelectDropdown('LabelForEmptyItems')}>{labelForEmptyItems}</Text>
             )}
           </div>
