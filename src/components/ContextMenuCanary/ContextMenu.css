@@ -1,8 +1,16 @@
-.ContextMenu {
-  &-Level_playAnimation {
-    opacity: 0 !important;
+.ContextMenuCanary {
+  &-Level {
     pointer-events: none;
-    transition: opacity 0.2s, transform 0.2s !important;
-    transform: var(--mix-dropdown-animate-transform) !important;
+
+    &.MixPopoverAnimate_animate_entered {
+      pointer-events: auto;
+    }
+
+    &_playAnimation.MixPopoverAnimate {
+      opacity: 0 !important;
+      pointer-events: none;
+      transition: opacity 0.2s, transform 0.2s !important;
+      transform: var(--mix-dropdown-animate-transform) !important;
+    }
   }
 }

@@ -63,6 +63,7 @@ import { IconExit } from '../../IconExit/IconExit';
 import { IconExpand } from '../../IconExpand/IconExpand';
 import { IconEye } from '../../IconEye/IconEye';
 import { IconEyeClose } from '../../IconEyeClose/IconEyeClose';
+import { IconFacebook } from '../../IconFacebook/IconFacebook';
 import { IconFavorite } from '../../IconFavorite/IconFavorite';
 import { IconFilter } from '../../IconFilter/IconFilter';
 import { IconFitToDefault } from '../../IconFitToDefault/IconFitToDefault';
@@ -80,6 +81,7 @@ import { IconHealth } from '../../IconHealth/IconHealth';
 import { IconHome } from '../../IconHome/IconHome';
 import { IconInComparison } from '../../IconInComparison/IconInComparison';
 import { IconInfo } from '../../IconInfo/IconInfo';
+import { IconInstagram } from '../../IconInstagram/IconInstagram';
 import { IconIntroduction } from '../../IconIntroduction/IconIntroduction';
 import { IconIpad } from '../../IconIpad/IconIpad';
 import { IconItalic } from '../../IconItalic/IconItalic';
@@ -120,8 +122,10 @@ import { IconPaste } from '../../IconPaste/IconPaste';
 import { IconPause } from '../../IconPause/IconPause';
 import { IconPhone } from '../../IconPhone/IconPhone';
 import { IconPhoto } from '../../IconPhoto/IconPhoto';
+import { IconPicture } from '../../IconPicture/IconPicture';
 import { IconPlay } from '../../IconPlay/IconPlay';
 import { IconPressure } from '../../IconPressure/IconPressure';
+import { IconPriceLabel } from '../../IconPriceLabel/IconPriceLabel';
 import { IconProcessing } from '../../IconProcessing/IconProcessing';
 import { IconQuestion } from '../../IconQuestion/IconQuestion';
 import { IconQuote } from '../../IconQuote/IconQuote';
@@ -156,6 +160,7 @@ import { IconStorage } from '../../IconStorage/IconStorage';
 import { IconStrikethrough } from '../../IconStrikethrough/IconStrikethrough';
 import { IconSun } from '../../IconSun/IconSun';
 import { IconTable } from '../../IconTable/IconTable';
+import { IconTable2 } from '../../IconTable2/IconTable2';
 import { IconTarget } from '../../IconTarget/IconTarget';
 import { IconTeam } from '../../IconTeam/IconTeam';
 import { IconTechResponse } from '../../IconTechResponse/IconTechResponse';
@@ -172,11 +177,15 @@ import { IconUnsortCenter } from '../../IconUnsortCenter/IconUnsortCenter';
 import { IconUpload } from '../../IconUpload/IconUpload';
 import { IconUser } from '../../IconUser/IconUser';
 import { IconVideo } from '../../IconVideo/IconVideo';
+import { IconVkontakte } from '../../IconVkontakte/IconVkontakte';
 import { IconVZD } from '../../IconVZD/IconVZD';
 import { IconWarning } from '../../IconWarning/IconWarning';
 import { IconWatch } from '../../IconWatch/IconWatch';
 import { IconWideScreen } from '../../IconWideScreen/IconWideScreen';
 import { IconWorld } from '../../IconWorld/IconWorld';
+import { IconWrench } from '../../IconWrench/IconWrench';
+import { IconYandexDzen } from '../../IconYandexDzen/IconYandexDzen';
+import { IconYoutube } from '../../IconYoutube/IconYoutube';
 
 import { IconsItem } from './Item/Icons-Item';
 import mdx from './Icon.docs.mdx';
@@ -309,8 +318,10 @@ const icons = {
   IconPause,
   IconPhone,
   IconPhoto,
+  IconPicture,
   IconPlay,
   IconPressure,
+  IconPriceLabel,
   IconProcessing,
   IconQuestion,
   IconQuote,
@@ -345,6 +356,7 @@ const icons = {
   IconStrikethrough,
   IconSun,
   IconTable,
+  IconTable2,
   IconTarget,
   IconTeam,
   IconTechResponse,
@@ -366,6 +378,12 @@ const icons = {
   IconWatch,
   IconWideScreen,
   IconWorld,
+  IconWrench,
+  IconFacebook,
+  IconInstagram,
+  IconVkontakte,
+  IconYandexDzen,
+  IconYoutube,
 } as const;
 
 type Name = keyof typeof icons;

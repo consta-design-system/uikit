@@ -189,6 +189,37 @@ export const ReposDataSingleComponents = () => {
           >
             GitHub
           </Text>
+          {' | '}
+          <Text
+            className={cnReposData('Link')}
+            as="a"
+            view="link"
+            href="https://header-consta.vercel.app/"
+            target="_blank"
+          >
+            Документация
+          </Text>
+        </Text>
+      </div>
+      <div className={wp.tplGrid('fraction', { row: 'third' })}>
+        <Text weight="bold" size="l">
+          Header UMD
+        </Text>
+
+        <Text className="ReposDataText">
+          Шапка для тех, кто не работает с React. Подходит для веб-проектов, подключается скриптом,
+          есть настройки.
+        </Text>
+        <Text>
+          <Text
+            as="a"
+            view="link"
+            size="s"
+            href="https://github.com/consta-design-system/header-umd"
+            target="_blank"
+          >
+            GitHub
+          </Text>
         </Text>
       </div>
       <div className={wp.tplGrid('fraction', { row: 'third' })}>
@@ -365,6 +396,45 @@ export const ReposDataAdapters = () => {
             as="a"
             view="link"
             href="https://consta-tree.vercel.app/"
+            target="_blank"
+          >
+            Документация
+          </Text>
+        </Text>
+      </div>
+      <div className={wp.tplGrid('fraction', { row: 'third' })}>
+        <Text weight="bold" size="l">
+          gantt-task-react-adapter
+        </Text>
+        <Text className="ReposDataText">
+          Адаптер для{' '}
+          <Text
+            className={cnReposData('Link')}
+            as="a"
+            view="link"
+            href="https://github.com/MaTeMaTuK/gantt-task-react"
+            target="_blank"
+          >
+            gantt-task-react
+          </Text>
+          . Дерево, подходит для создания иерархических структур.
+        </Text>
+        <Text>
+          <Text
+            className={cnReposData('Link')}
+            as="a"
+            view="link"
+            href="https://github.com/consta-design-system/gantt-task-react-adapter"
+            target="_blank"
+          >
+            GitHub
+          </Text>
+          {' | '}
+          <Text
+            className={cnReposData('Link')}
+            as="a"
+            view="link"
+            href="https://gantt-task-react-adapter.vercel.app/?path=/story/*"
             target="_blank"
           >
             Документация

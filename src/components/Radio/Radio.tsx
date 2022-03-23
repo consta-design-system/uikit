@@ -1,10 +1,12 @@
 import './Radio.css';
 
-import React, { ChangeEventHandler } from 'react';
+import React, { ChangeEventHandler, useRef } from 'react';
 
+import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
+import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 
 export const radioPropSize = ['m', 'l'] as const;
 export type RadioPropSize = typeof radioPropSize[number];
@@ -42,13 +44,19 @@ export type Props = {
   tabIndex?: number;
   inputRef?: React.Ref<HTMLInputElement>;
   children?: never;
+  for?: string;
+  inputId?: string;
 };
 
 export type RadioProps = PropsWithHTMLAttributes<Props, HTMLLabelElement>;
 
 export const cnRadio = cn('Radio');
 
+export const COMPONENT_NAME = 'Radio' as const;
+
 export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>((props, ref) => {
+  const radioRef = useRef<HTMLLabelElement>(null);
+
   const {
     checked = false,
     name,
@@ -65,9 +73,10 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>((props, ref)
     required,
     step,
     tabIndex,
+    inputId,
     inputRef,
     ...otherProps
-  } = props;
+  } = usePropsHandler(COMPONENT_NAME, props, radioRef);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     if (onChange) {
@@ -79,7 +88,7 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>((props, ref)
     <label
       {...otherProps}
       className={cnRadio({ size, view, disabled, align }, [className])}
-      ref={ref}
+      ref={useForkRef([ref, radioRef])}
     >
       <input
         type="radio"
@@ -93,6 +102,7 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>((props, ref)
         readOnly={readOnly}
         required={required}
         step={step}
+        id={inputId}
         tabIndex={tabIndex}
         ref={inputRef}
       />

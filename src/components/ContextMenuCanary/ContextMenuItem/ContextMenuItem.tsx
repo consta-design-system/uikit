@@ -15,24 +15,48 @@ import {
   ContextMenuPropSize,
 } from '../types';
 
-const cnContextMenuItem = cn('ContextMenuItem');
+const cnContextMenuItem = cn('ContextMenuItemCanary');
 
-const renderSide = (props: {
-  icon?: IconComponent;
-  side?: React.ReactNode;
-  position: 'left' | 'right';
-  size: ContextMenuPropSize;
-}) => {
-  const { icon, side, position, size } = props;
-  const Icon = icon;
-  return (
-    (Icon || side) && (
-      <div className={cnContextMenuItem('Side', { position })}>
-        {Icon ? <Icon size={getByMap(sizeMapIcon, size)} /> : side}
-      </div>
-    )
-  );
-};
+function renderSide(
+  side: React.ReactNode,
+  position: 'left' | 'right',
+  withArrow: boolean,
+  size: ContextMenuPropSize,
+  icon: IconComponent | undefined,
+): React.ReactNode {
+  const sides = side ? [...(Array.isArray(side) ? side : [side])] : [];
+
+  if (icon) {
+    const Icon = icon;
+    const render = <Icon size={getByMap(sizeMapIcon, size)} />;
+    if (position === 'left') {
+      sides.unshift(render);
+    }
+    if (position === 'right') {
+      sides.push(render);
+    }
+  }
+
+  if (withArrow) {
+    sides.push(<IconArrowRight size="xs" view="secondary" />);
+  }
+
+  const sidesRender: React.ReactNode[] = sides.map((item, index) => (
+    <div
+      className={cnContextMenuItem('Slot', {
+        position,
+      })}
+      key={cnContextMenuItem('Slot', {
+        position,
+        index,
+      })}
+    >
+      {item}
+    </div>
+  ));
+
+  return sidesRender;
+}
 
 function ContextMenuItemRender(props: ContextMenuItemProps, ref: React.Ref<HTMLDivElement>) {
   const {
@@ -47,7 +71,6 @@ function ContextMenuItemRender(props: ContextMenuItemProps, ref: React.Ref<HTMLD
     className,
     active,
     leftIcon,
-    onClick,
     rightIcon,
     ...otherProps
   } = props;
@@ -60,31 +83,18 @@ function ContextMenuItemRender(props: ContextMenuItemProps, ref: React.Ref<HTMLD
       size={size}
       view={view}
       lineHeight="xs"
-      onClick={!disabled ? onClick : undefined}
       ref={ref}
       {...otherProps}
     >
-      {renderSide({
-        icon: leftIcon,
-        side: leftSide,
-        position: 'left',
-        size,
-      })}
-      <div className={cnContextMenuItem('Label')}>{label}</div>
-      {renderSide({
-        icon: rightIcon,
-        side: rightSide,
-        position: 'right',
-        size,
-      })}
-      {withSubMenu && (
-        <div className={cnContextMenuItem('Side', { position: 'right' })}>
-          <IconArrowRight
-            size={getByMap(sizeMapIcon, size)}
-            view={disabled ? 'disabled' : 'secondary'}
-          />
+      {renderSide(leftSide, 'left', false, size, leftIcon)}
+      {!rightSide && !leftSide && !withSubMenu && !leftIcon && !rightIcon ? (
+        label
+      ) : (
+        <div className={cnContextMenuItem('Slot', { position: 'center' })} key="center">
+          {label}
         </div>
       )}
+      {renderSide(rightSide, 'right', withSubMenu, size, rightIcon)}
     </Text>
   );
 }

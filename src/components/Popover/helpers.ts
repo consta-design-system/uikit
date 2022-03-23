@@ -9,6 +9,10 @@ const getPosition = (x: number, y: number): NonNullable<Position> => ({
   y: Math.round(y),
 });
 
+export const convertPixelsToNumber = (pixels: string) => {
+  return Number(pixels.slice(0, pixels.length - 2));
+};
+
 export const getPositionsByDirection = ({
   contentSize,
   anchorSize,
@@ -88,7 +92,7 @@ type ComputedPositionAndDirectionParams = {
   contentSize: Size;
   viewportSize: Size;
   anchorSize?: Size;
-  offset: number;
+  offset?: number | string;
   arrowOffset?: number;
   direction: Direction;
   spareDirection: Direction;
@@ -101,7 +105,7 @@ export const getComputedPositionAndDirection = ({
   contentSize,
   viewportSize,
   anchorSize = { width: 0, height: 0 },
-  offset,
+  offset = 0,
   arrowOffset,
   direction: initialDirection,
   possibleDirections,
@@ -115,11 +119,13 @@ export const getComputedPositionAndDirection = ({
     return { position: initialPosition, direction: initialDirection };
   }
 
+  const currentOffset = typeof offset === 'string' ? convertPixelsToNumber(offset) : offset;
+
   const positionsByDirection = getPositionsByDirection({
     contentSize,
     anchorSize,
     position: initialPosition,
-    offset,
+    offset: currentOffset,
     arrowOffset,
   });
 

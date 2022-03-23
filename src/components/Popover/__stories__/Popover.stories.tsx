@@ -8,7 +8,7 @@ import { cn } from '../../../utils/bem';
 import { createMetadata, createStory, getStoryIds } from '../../../utils/storybook';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
-import { directions, Popover, Position } from '../Popover';
+import { directions, Popover, popoverPropOffset, Position } from '../Popover';
 
 import mdx from './Popover.docs.mdx';
 
@@ -17,7 +17,7 @@ const cnPopoverStories = cn('PopoverStories');
 const getCommonKnobs = () => ({
   direction: select('direction', directions, 'upCenter'),
   spareDirection: select('spareDirection', directions, 'downStartLeft'),
-  offset: number('offset', 5),
+  offset: select('offset', popoverPropOffset, '2xs'),
   arrowOffset: number('arrowOffset', 0),
   possibleDirections: object('possibleDirections', directions),
   onClickOutside: action('onClickOutside'),

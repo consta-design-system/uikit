@@ -7,6 +7,7 @@ import { useSelect } from '../../hooks/useSelect/useSelect';
 import { IconClose } from '../../icons/IconClose/IconClose';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
+import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { cnSelect } from '../SelectComponents/cnSelect';
 import {
   defaultlabelForCreate,
@@ -33,6 +34,8 @@ import {
   UserSelectProps,
   withDefaultGetters,
 } from './helpers';
+
+export const COMPONENT_NAME = 'UserSelect' as const;
 
 function UserSelectRender<
   ITEM = DefaultItem,
@@ -81,7 +84,7 @@ function UserSelectRender<
     searchFunction,
     style,
     ...restProps
-  } = withDefaultGetters(props);
+  } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
 
   const searchFunctionDefault = (item: ITEM, searchValue: string): boolean => {
     const searchOfLabel = searchCompare(searchValue, getItemLabel(item));

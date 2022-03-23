@@ -22,7 +22,7 @@ export type ContextMenuPropSubMenuDirection = typeof contextMenuPropSubMenuDirec
 export const contextMenuPropDefaultSubMenuDirection: ContextMenuPropSubMenuDirection =
   contextMenuPropSubMenuDirections[0];
 
-type ContextMenuPropOnClick<ITEM> = (params: {
+export type ContextMenuPropOnClick<ITEM> = (params: {
   e: React.MouseEvent<HTMLDivElement>;
   item: ITEM;
 }) => void;
@@ -136,7 +136,6 @@ export type ContextMenuProps<
     spareDirection?: Direction;
     onSetDirection?: (direction: Direction) => void;
     onClickOutside?: ClickOutsideHandler;
-    zIndex?: number;
     isOpen?: boolean;
   } & MappersItem<ITEM> &
     MappersGroup<GROUP> &
@@ -176,10 +175,10 @@ export type ContextMenuLevelComponent = <ITEM, GROUP>(
 export type ContextMenuItemProps<
   AS extends keyof JSX.IntrinsicElements = 'div'
 > = PropsWithAsAttributes<
-  Omit<ContextMenuItemDefault, 'onClick' | 'as' | 'attributes' | 'subMenu' | 'groupId'> & {
-    withSubMenu: boolean;
+  Omit<ContextMenuItemDefault, 'onClick' | 'attributes'> & {
     size?: ContextMenuPropSize;
-    active?: boolean;
+    active: boolean;
+    withSubMenu: boolean;
   },
   AS
 > &

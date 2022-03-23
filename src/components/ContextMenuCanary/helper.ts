@@ -5,7 +5,6 @@ import { TextPropSize } from '../Text/Text';
 import {
   ContextMenuGroupDefault,
   ContextMenuItemDefault,
-  ContextMenuLevelProps,
   ContextMenuPropGetGroupId,
   ContextMenuPropGetGroupLabel,
   ContextMenuPropGetItemAs,
@@ -26,7 +25,6 @@ import {
   GetLevelsParams,
   Level,
   MappersGroup,
-  MappersItem,
 } from './types';
 
 const defaultGetItemKey: ContextMenuPropGetItemKey<ContextMenuItemDefault> = (item) => item.key;
@@ -78,96 +76,6 @@ export function withDefaultGetters<ITEM, GROUP>(props: ContextMenuProps<ITEM, GR
     getGroupLabel: props.getGroupLabel || defaultGetGroupLabel,
   };
 }
-
-export const getMappersAndProps = <ITEM, GROUP>(
-  props: ContextMenuLevelProps<ITEM, GROUP>,
-): {
-  itemMappers: Required<MappersItem<ITEM>>;
-  groupMappers: Required<MappersGroup<GROUP>>;
-  otherProps: Omit<
-    ContextMenuLevelProps<ITEM, GROUP>,
-    keyof MappersItem<ITEM> | keyof MappersGroup<GROUP>
-  >;
-} => {
-  const {
-    getGroupId,
-    getItemAs,
-    getItemLabel,
-    getItemOnClick,
-    getItemStatus,
-    getItemSubMenu,
-    getGroupLabel,
-    getItemAttributes,
-    getItemDisabled,
-    getItemGroupId,
-    getItemKey,
-    getItemLeftIcon,
-    getItemLeftSide,
-    getItemRightIcon,
-    getItemRightSide,
-    ...otherProps
-  } = props;
-  return {
-    itemMappers: {
-      getItemKey,
-      getItemLabel,
-      getItemRightSide,
-      getItemLeftSide,
-      getItemSubMenu,
-      getItemStatus,
-      getItemDisabled,
-      getItemOnClick,
-      getItemAs,
-      getItemAttributes,
-      getItemGroupId,
-      getItemLeftIcon,
-      getItemRightIcon,
-    },
-    groupMappers: {
-      getGroupId,
-      getGroupLabel,
-    },
-    otherProps,
-  };
-};
-
-export const getItem = <ITEM>(item: ITEM, props: Required<MappersItem<ITEM>>) => {
-  const {
-    getItemAs,
-    getItemAttributes,
-    getItemDisabled,
-    getItemKey,
-    getItemLabel,
-    getItemLeftSide,
-    getItemOnClick,
-    getItemRightSide,
-    getItemLeftIcon,
-    getItemRightIcon,
-    getItemStatus,
-    getItemSubMenu,
-    getItemGroupId,
-  } = props;
-  return {
-    key: getItemKey(item),
-    label: getItemLabel(item),
-    leftSide: getItemLeftSide(item),
-    rightSide: getItemRightSide(item),
-    disabled: getItemDisabled(item),
-    as: getItemAs(item),
-    attributes: getItemAttributes(item),
-    onClick:
-      typeof getItemOnClick(item) === 'function'
-        ? (e: React.MouseEvent<HTMLDivElement>) => {
-            getItemOnClick(item)?.({ e, item });
-          }
-        : undefined,
-    status: getItemStatus(item),
-    subMenu: getItemSubMenu(item),
-    groupId: getItemGroupId(item),
-    leftIcon: getItemLeftIcon(item),
-    rightIcon: getItemRightIcon(item),
-  };
-};
 
 export const getGroup = <GROUP>(group: GROUP, props: Required<MappersGroup<GROUP>>) => {
   const { getGroupId, getGroupLabel } = props;
@@ -233,6 +141,6 @@ export const sizeMapHeader: Record<ContextMenuPropSize, TextPropSize> = {
 export const sizeMapIcon: Record<ContextMenuPropSize, IconPropSize> = {
   xs: 'xs',
   s: 's',
-  m: 'm',
-  l: 'm',
+  m: 's',
+  l: 's',
 };

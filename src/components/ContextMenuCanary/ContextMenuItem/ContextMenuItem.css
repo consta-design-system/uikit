@@ -1,20 +1,13 @@
-.ContextMenuItem {
+.ContextMenuItemCanary {
   --vertical-space: 0;
   display: flex;
   align-items: center;
-  width: 100%;
   padding: var(--vertical-space) var(--space-s);
-  background: transparent;
-  border: none;
-  text-align: left;
   text-decoration: none;
   word-break: break-word;
   cursor: pointer;
-  transition: background 0.2s;
-
-  & > *:not(:last-child) {
-    margin-right: var(--space-xs);
-  }
+  transition: background-color 0.2s;
+  gap: var(--space-xs);
 
   &:hover,
   &_active {
@@ -23,7 +16,7 @@
 
   &_size {
     &_xs {
-      --vertical-space: var(--space-xs);
+      --vertical-space: var(--space-2xs);
     }
 
     &_s {
@@ -52,9 +45,19 @@
     }
   }
 
-  &-Side {
+  &-Slot {
     display: flex;
-    flex: 0;
     align-items: center;
+
+    &_position {
+      &_left,
+      &_right {
+        flex: 0;
+      }
+
+      &_center {
+        flex: 1;
+      }
+    }
   }
 }

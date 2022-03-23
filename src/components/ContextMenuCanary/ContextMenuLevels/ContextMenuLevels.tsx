@@ -23,7 +23,6 @@ function ContextMenuLevelsRender(propsComponent: ContextMenuProps, ref: React.Re
     position,
     direction,
     possibleDirections = directions,
-    zIndex,
     offset,
     onClickOutside,
     getItemKey,
@@ -111,7 +110,9 @@ function ContextMenuLevelsRender(propsComponent: ContextMenuProps, ref: React.Re
           key={`ContextMenu-${index}`}
           style={{
             ...style,
-            ...{ zIndex: Number(zIndex ?? style?.zIndex ?? 0) + index },
+            ...{
+              zIndex: typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined,
+            },
           }}
           levelDepth={index}
           getItemLabel={getItemLabel}

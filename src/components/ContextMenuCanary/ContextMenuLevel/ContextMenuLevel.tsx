@@ -3,14 +3,13 @@ import './ContextMenuLevel.css';
 import React, { createRef, forwardRef, useEffect, useMemo } from 'react';
 
 import { useFlag } from '../../../hooks/useFlag/useFlag';
-import { animateTimeout } from '../../../mixs/MixPopoverAnimate/MixPopoverAnimate';
 import { cn } from '../../../utils/bem';
 import { getByMap } from '../../../utils/getByMap';
 import { getGroups } from '../../../utils/getGroups';
 import { Popover } from '../../Popover/Popover';
 import { Text } from '../../Text/Text';
 import { ContextMenuItem } from '../ContextMenuItem/ContextMenuItem';
-import { getItem, getItemIndex, getMappersAndProps, sizeMapHeader } from '../helper';
+import { getItemIndex, sizeMapHeader } from '../helper';
 import {
   contextMenuDefaultSize,
   ContextMenuLevelComponent,
@@ -18,7 +17,7 @@ import {
   ContextMenuPropSize,
 } from '../types';
 
-export const cnContextMenuLevel = cn('ContextMenuLevel');
+export const cnContextMenuLevel = cn('ContextMenuLevelCanary');
 
 const renderHeader = (
   groupLabel: string | number | undefined,
@@ -44,48 +43,57 @@ const renderHeader = (
 };
 
 function ContextMenuLevelRender<ITEM, GROUP>(
-  propsComponent: ContextMenuLevelProps<ITEM, GROUP>,
+  props: ContextMenuLevelProps<ITEM, GROUP>,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const { itemMappers, groupMappers, otherProps: props } = getMappersAndProps(propsComponent);
-
   const {
     size = contextMenuDefaultSize,
+    items,
+    groups: groupsProp,
+    className,
+    // Свойства относящиеся к меню
     levelDepth,
     activeItem,
     addLevel,
-    className,
     deleteLevel,
-    items,
-    groups: groupsProp,
     setHoveredParenLevel,
+    hoveredParenLevel,
     sortGroup,
     onItemClick,
+    // Свойства для поповера
     direction,
     possibleDirections,
     offset,
     onSetDirection,
-    hoveredParenLevel,
     spareDirection,
     anchorRef,
+    // Геттеры для ITEM
+    getItemLabel,
+    getItemRightSide,
+    getItemLeftSide,
+    getItemSubMenu,
+    getItemStatus,
+    getItemDisabled,
+    getItemKey,
+    getItemOnClick,
+    getItemAs,
+    getItemAttributes,
+    getItemGroupId,
+    getItemLeftIcon,
+    getItemRightIcon,
+    // Геттеры для GROUP
+    getGroupLabel,
+    getGroupId,
     ...otherProps
   } = props;
 
-  const [hovered, { on, off }] = useFlag(false);
-  const [active, setActive] = useFlag(levelDepth !== 0);
-
-  useEffect(() => {
-    if (levelDepth === 0) {
-      // Необходимо для того чтобы при открытии и проигрывании анимации первый уровень автоматически не открывался
-      setTimeout(setActive.on, animateTimeout);
-    }
-  }, []);
+  const [hovered, setHovered] = useFlag(false);
 
   const groups = getGroups<ITEM, GROUP>(
     items,
-    itemMappers.getItemGroupId,
+    getItemGroupId,
     groupsProp,
-    groupMappers.getGroupId,
+    getGroupId,
     sortGroup && ((a, b) => sortGroup(a.key, b.key)),
   );
 
@@ -109,20 +117,18 @@ function ContextMenuLevelRender<ITEM, GROUP>(
   }, [hovered, hoveredParenLevel]);
 
   const onMouseEnter = (item: ITEM, itemIndex: string) => {
-    if (active) {
-      const subMenu = itemMappers.getItemSubMenu(item);
-      const disabled = itemMappers.getItemDisabled(item);
-      if (Array.isArray(subMenu) && !disabled) {
-        addLevel({
-          level: levelDepth + 1,
-          items: subMenu,
-          anchorRef: itemsRefs[itemIndex],
-          activeItem: itemIndex,
-        });
-        setHoveredParenLevel(levelDepth + 1);
-      } else {
-        setHoveredParenLevel(levelDepth);
-      }
+    const subMenu = getItemSubMenu(item);
+    const disabled = getItemDisabled(item);
+    if (Array.isArray(subMenu) && !disabled) {
+      addLevel({
+        level: levelDepth + 1,
+        items: subMenu,
+        anchorRef: itemsRefs[itemIndex],
+        activeItem: itemIndex,
+      });
+      setHoveredParenLevel(levelDepth + 1);
+    } else {
+      setHoveredParenLevel(levelDepth);
     }
   };
 
@@ -135,49 +141,46 @@ function ContextMenuLevelRender<ITEM, GROUP>(
       direction={direction}
       offset={offset}
       onSetDirection={onSetDirection}
-      onMouseEnter={on}
-      onMouseLeave={off}
+      onMouseEnter={setHovered.on}
+      onMouseLeave={setHovered.off}
       ref={ref}
       {...otherProps}
     >
       {groups.map((group, groupIndex) => {
         return (
-          <div className={cnContextMenuLevel('Group')} key={group.key}>
-            {renderHeader(
-              group.group && groupMappers.getGroupLabel(group.group),
-              groupIndex === 0,
-              size,
-            )}
+          <div className={cnContextMenuLevel('Group', { size })} key={group.key}>
+            {renderHeader(group.group && getGroupLabel(group.group), groupIndex === 0, size)}
             {group.items.map((item, index) => {
-              const standardizedItem = getItem(item, itemMappers);
               const itemIndex = getItemIndex(group.key, index);
-              const ref = itemsRefs[itemIndex];
-              const atributes = { ...standardizedItem }.attributes ?? {};
-              const withSubMenu = !!{ ...standardizedItem }.subMenu;
-              const onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-                if (!standardizedItem.disabled) {
-                  if (typeof standardizedItem.onClick === 'function') {
-                    standardizedItem.onClick?.(e);
+              const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
+                if (!getItemDisabled(item)) {
+                  if (typeof getItemOnClick(item) === 'function') {
+                    getItemOnClick(item)?.({ e, item });
                   }
                   if (typeof onItemClick === 'function') {
                     onItemClick?.({ e, item });
                   }
                 }
               };
-              delete standardizedItem.attributes;
-              delete standardizedItem.subMenu;
-              delete standardizedItem.groupId;
               return (
                 <ContextMenuItem
-                  {...atributes}
-                  {...standardizedItem}
-                  ref={ref}
+                  label={getItemLabel(item)}
+                  rightSide={getItemRightSide(item)}
+                  rightIcon={getItemRightIcon(item)}
+                  leftSide={getItemLeftSide(item)}
+                  leftIcon={getItemLeftIcon(item)}
+                  status={getItemStatus(item)}
+                  key={cnContextMenuLevel('Item', { groupIndex, index })}
+                  disabled={getItemDisabled(item)}
                   onClick={onClick}
-                  key={itemIndex}
+                  as={getItemAs(item)}
+                  {...(getItemAttributes(item) ?? {})}
+                  ref={itemsRefs[itemIndex]}
+                  className={cnContextMenuLevel('Item')}
                   onMouseEnter={() => onMouseEnter(item, itemIndex)}
                   active={activeItem === itemIndex}
-                  withSubMenu={withSubMenu}
                   size={size}
+                  withSubMenu={!!getItemSubMenu(item)}
                 />
               );
             })}

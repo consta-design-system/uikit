@@ -1,6 +1,6 @@
 import './UserSelectItem.css';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import { IconCheck } from '../../../icons/IconCheck/IconCheck';
@@ -43,6 +43,8 @@ export const UserSelectItem: React.FC<UserSelectItemProps> = (props) => {
     ...otherProps
   } = props;
 
+  const iconRef = useRef<HTMLSpanElement>(null);
+
   return (
     <div
       {...otherProps}
@@ -58,8 +60,9 @@ export const UserSelectItem: React.FC<UserSelectItemProps> = (props) => {
             unmountOnExit
             classNames={cnUserSelectItemCheckIconCssTransition}
             timeout={200}
+            nodeRef={iconRef}
           >
-            <IconCheck className={cnUserSelectItem('CheckIcon')} />
+            <IconCheck className={cnUserSelectItem('CheckIcon')} ref={iconRef} />
           </CSSTransition>
         )}
         {!multiple && active && <IconCheck className={cnUserSelectItem('CheckIcon')} />}

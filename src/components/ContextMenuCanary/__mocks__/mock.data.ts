@@ -16,12 +16,15 @@ export const groups: ContextMenuGroupDefault[] = [
   },
 ];
 
-export const exampleItems: ContextMenuItemDefault[] = [
+export type Item = ContextMenuItemDefault & {
+  switch?: boolean;
+};
+
+export const exampleItems: Item[] = [
   {
     label: 'Скрепка',
     leftIcon: IconAttach,
-    leftSide: '1',
-    rightSide: '1',
+    rightIcon: IconAttach,
     status: 'success',
     groupId: 1,
     subMenu: [
@@ -36,6 +39,7 @@ export const exampleItems: ContextMenuItemDefault[] = [
           {
             label: 'Пункт - 3',
             leftIcon: IconSun,
+            rightIcon: IconSun,
             subMenu: [
               {
                 label: 'Пункт - 5',
@@ -48,6 +52,7 @@ export const exampleItems: ContextMenuItemDefault[] = [
           {
             label: 'Пункт - 4',
             leftIcon: IconSun,
+            rightIcon: IconSun,
             subMenu: [
               {
                 label: 'Пункт - 7',
@@ -60,6 +65,7 @@ export const exampleItems: ContextMenuItemDefault[] = [
           {
             label: 'Пункт - 9',
             leftIcon: IconSun,
+            rightIcon: IconSun,
           },
         ],
       },
@@ -68,25 +74,35 @@ export const exampleItems: ContextMenuItemDefault[] = [
   {
     label: 'Глаз',
     leftIcon: IconEye,
+    rightIcon: IconEye,
     groupId: 1,
   },
   {
     label: 'Две галочки',
     groupId: 2,
     leftIcon: IconAllDone,
+    rightIcon: IconAllDone,
+    rightSide: '!',
+    switch: true,
     status: 'alert',
   },
   {
     label: 'Чемодан',
     groupId: 2,
     leftIcon: IconBag,
+    rightIcon: IconBag,
+    rightSide: '!',
+    switch: true,
     status: 'alert',
   },
   {
     label: 'Солнце',
     groupId: 2,
     leftIcon: IconSun,
+    rightIcon: IconSun,
     status: 'alert',
+    rightSide: '!',
+    switch: true,
     disabled: true,
   },
 ];

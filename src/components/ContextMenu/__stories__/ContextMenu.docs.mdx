@@ -9,10 +9,6 @@ import {
   ContextMenuExampleSizeM,
 } from './examples/ContextMenuExampleSize/ContextMenuExampleSize';
 
-<!--info
-description: Контекстное меню. Дополнительные действия на странице.
--->
-
 # ContextMenu
 
 ```tsx
@@ -400,7 +396,7 @@ type SubMenuDirection = 'rightStartUp' | 'rightStartDown' | 'leftStartUp' | 'lef
 | `position`                                                         | `{ x: number; y: number }, undefined`                                  | -                | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                                           |
 | `direction?`                                                       | [`Direction`](direction)                                               | -                | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                                           |
 | `possibleDirections?`                                              | [`Direction`](direction)                                               | -                | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                                           |
-| `offset?`                                                          | `number`                                                               | -                | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                                           |
+| `offset?`                                                          | `PopoverPropOffset`                                                    | -                | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story)                                                                           |
 | `onItemClick?`                                                     | `({e: React.MouseEvent<HTMLDivElement>, item: ITEM}) => void`          | -                | Действие по клику на пункт меню                                                                                                                             |
 | [`subMenuDirection?`](#второй-уровень-меню)                        | [`SubMenuDirection`](submenudirection)                                 | `'rightStartUp'` | Позиция, в которую будет изначально разворачиваться меню второго уровня                                                                                     |
 | [`size?`](#размер-меню)                                            | `'m', 's', 'l'`                                                        | -                | Размер контекстного меню                                                                                                                                    |

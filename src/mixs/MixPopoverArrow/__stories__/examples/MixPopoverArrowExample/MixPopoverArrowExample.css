@@ -1,0 +1,7 @@
+.MixPopoverArrowExample {
+  --popover-bg-color: var(--color-bg-ghost);
+  --popover-arrow-bg-color: var(--popover-bg-color);
+  --popover-arrow-size: 10px;
+  --popover-arrow-offset: 6px;
+  background: var(--popover-bg-color);
+}

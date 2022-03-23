@@ -1,4 +1,4 @@
-.ContextMenuLevel {
+.ContextMenuLevelCanary {
   box-sizing: border-box;
   width: 240px;
   padding: var(--space-xs) 0;
@@ -31,9 +31,16 @@
       }
 
       &_m,
-      &_s {
+      &_s,
+      &_xs {
         --vertical-space: var(--space-2xs);
       }
+    }
+  }
+
+  &-Group {
+    &_size_xs > .ContextMenuLevel-Item:not(:last-child) {
+      margin-bottom: var(--space-2xs);
     }
   }
 
@@ -46,6 +53,7 @@
     letter-spacing: 0.05em;
 
     &_size {
+      &_xs,
       &_s {
         --top-space: var(--space-xs);
         --bottom-space: var(--space-2xs);

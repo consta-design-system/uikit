@@ -1,12 +1,12 @@
 import React from 'react';
 
 import { eventInterceptorMap } from './eventInterceptorMap';
+import { EventInterceptorComponentName } from './types';
 
 export type EventInterceptorMap = typeof eventInterceptorMap;
-export type EventInterceptorMapKeys = keyof EventInterceptorMap;
 
 export type EventInterceptorProps = {
-  component: EventInterceptorMapKeys;
+  component: EventInterceptorComponentName;
   event?: string;
   options: {
     [key: string]: any;

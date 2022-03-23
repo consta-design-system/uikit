@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { EventInterceptorContext, EventInterceptorMapKeys } from './EventInterceptor';
+import { EventInterceptorContext } from './EventInterceptor';
+import { EventInterceptorComponentName } from './types';
 
 export const usePropsHandler = <PROPS extends {}>(
-  componentName: EventInterceptorMapKeys,
+  componentName: EventInterceptorComponentName,
   props: PROPS,
   ref?: React.Ref<HTMLElement>,
 ): PROPS => {
@@ -14,7 +15,7 @@ export const usePropsHandler = <PROPS extends {}>(
   }
 
   const { eventHandler, map } = context;
-  const propsHandler = map[componentName] as ((...args: any[]) => any) | undefined;
+  const propsHandler = map[componentName];
 
   if (!propsHandler) {
     return props;

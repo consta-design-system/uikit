@@ -1,6 +1,6 @@
 import './SelectDropdown.css';
 
-import React, { Fragment } from 'react';
+import React, { Fragment, useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import {
@@ -70,7 +70,6 @@ export const SelectDropdown: SelectDropdown = (props) => {
     visibleItems,
     getGroupLabel,
     notFound,
-    ref,
     ...otherProps
   } = props;
 
@@ -78,11 +77,14 @@ export const SelectDropdown: SelectDropdown = (props) => {
 
   const indent = form === 'round' ? 'increased' : 'normal';
 
+  const popoverRef = useRef<HTMLDivElement>(null);
+
   return (
     <CSSTransition
       in={isOpen}
       unmountOnExit
       appear
+      nodeRef={popoverRef}
       classNames={cnSelectDropdownCssTransition}
       timeout={200}
     >
@@ -92,6 +94,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
         direction="downStartLeft"
         possibleDirections={['downStartLeft', 'upStartLeft', 'downStartRight', 'upStartRight']}
         offset={1}
+        ref={popoverRef}
         role="listbox"
         className={cnSelectDropdown({ form, size }, [className])}
         equalAnchorWidth
