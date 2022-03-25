@@ -29,5 +29,8 @@ jobs:
           host: ${{ secrets.DEPLOY_SERVER_HOST }}
           username: ${{ secrets.DEPLOY_SERVER_USERNAME }}
           key: ${{ secrets.DEPLOY_SERVER_KEY }}
+          source: package.json
           target: /var/www/${{ env.APP_NAME }}/${{ env.BRANCH_NAME }}
+          strip_components: 1
+          overwrite: true
           rm: true
