@@ -1,0 +1,74 @@
+name: Deploy
+
+on:
+  push:
+    branches: master
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+env:
+  BUILD_SCRIPT: yarn build:storybook
+  BUILD_SCRIPT_OUTPUT: build/storybook
+  APP_NAME: uikit
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Делаем checkout текущей ветки
+      - uses: actions/checkout@master
+      # Устанавливаем Node.JS для сборки приложения
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+
+      - name: Install yarn
+        id: yarn-setup
+        run: |
+          yarn policies set-version 1.19.1
+          echo "::set-output name=cache_dir::$(yarn cache dir)"
+
+      - name: Настройка кэширования yarn
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.yarn-setup.outputs.cache_dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
+      # Записываем в переменные окружения имя текущей ветки
+      # Чтобы избежать конфиликтов с URL, меняем точки на _, а слеши на минусы
+      - name: Get branch name
+        shell: bash
+        run: |
+          echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//-/g' | sed 's/\./_/g')" >> $GITHUB_ENV
+
+      # Собираем приложение
+      - name: Build Appliction
+        run: $BUILD_SCRIPT
+      # Доставляем собранное приложение на сервер
+      - name: Deploy to Server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.DEPLOY_SERVER_HOST }}
+          username: ${{ secrets.DEPLOY_SERVER_USERNAME }}
+          key: ${{ secrets.DEPLOY_SERVER_KEY }}
+          source: ${{ env.BUILD_SCRIPT_OUTPUT }}
+          target: /var/www/${{ env.APP_NAME }}/${{ env.BRANCH_NAME }}
+          strip_components: 1
+          overwrite: true
+          rm: true
+      - name: Print Info
+        run: echo "🎉 Deployed at http://${{env.BRANCH_NAME}}.${{env.APP_NAME}}.${{secrets.DEPLOY_DOMAIN}}"
+
+      - name: Add comment
+        uses: allthatjazzleo/actions-pull-request-add-comment@master
+        with:
+          message: '🎉 **Deployed at** http://${{env.BRANCH_NAME}}.${{env.APP_NAME}}.${{secrets.DEPLOY_DOMAIN}}'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
