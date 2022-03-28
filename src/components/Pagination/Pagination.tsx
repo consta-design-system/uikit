@@ -97,7 +97,7 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
     className,
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, props, paginationRef);
-  if (!totalPages) return null;
+
   const currPage = currentPage + 1;
   const { prevPage, nextPage, isStartDots, isEndDots, pages, isEmpty } = getPaginationInfo(
     currPage,
@@ -157,6 +157,8 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
   });
 
   const itemWidth = `var(--control-height-${size})`;
+
+  if (!totalPages) return null;
 
   return (
     (!isEmpty && (
