@@ -1,13 +1,18 @@
-name: deploy
+name: Deploy
 
-on: [push]
+on:
+  push:
+    branches: master
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
 
 env:
-  DEPLOY_PATH: /var/www/uikit
   BUILD_SCRIPT: yarn build:storybook
   BUILD_SCRIPT_OUTPUT: build/storybook
   APP_NAME: uikit
-  DOMAIN: gizeasy.ru
 
 jobs:
   deploy:
@@ -55,8 +60,15 @@ jobs:
           username: ${{ secrets.DEPLOY_SERVER_USERNAME }}
           key: ${{ secrets.DEPLOY_SERVER_KEY }}
           source: ${{ env.BUILD_SCRIPT_OUTPUT }}
-          target: ${{ env.DEPLOY_PATH }}/${{ env.BRANCH_NAME }}
+          target: /var/www/${{ env.APP_NAME }}/${{ env.BRANCH_NAME }}
           strip_components: 1
           overwrite: true
+          rm: true
       - name: Print Info
-        run: echo "Deployed at https://${BRANCH_NAME}.${APP_NAME}.${DOMAIN}/"
+        run: echo "🎉 Deployed at http://${{env.BRANCH_NAME}}.${{env.APP_NAME}}.${{secrets.DEPLOY_DOMAIN}}"
+
+      - name: Add comment
+        uses: allthatjazzleo/actions-pull-request-add-comment@master
+        with:
+          message: '🎉 **Deployed at** http://${{env.BRANCH_NAME}}.${{env.APP_NAME}}.${{secrets.DEPLOY_DOMAIN}}'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
