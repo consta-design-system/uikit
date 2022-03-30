@@ -10,7 +10,7 @@ import { ContextMenuGroupHeader } from '../ContextMenuGroupHeader/ContextMenuGro
 import { ContextMenuItem } from '../ContextMenuItem/ContextMenuItem';
 import { contextMenuDefaultSize, ContextMenuLevelType, ContextMenuPropSize } from '../helpers';
 
-export const cnContextMenuLevel = cn('ContextMenuLevel');
+export const cnContextMenuLevel = cn('ContextMenuLevelDeprecated');
 
 function renderHeader(
   groupLabel: string | number | undefined,
