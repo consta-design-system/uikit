@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.18.2 (30/03/2022)
+- [fix(Pagination): conditional rendering moved to the bottom (#2167)](https://github.com/consta-design-system/uikit/commit/530c2e9facdf821af0cdf195e2a701435deec398) - [@gizeasy](https://github.com/gizeasy)
+- [chore(deploy): add deploy automatization (#2166)](https://github.com/consta-design-system/uikit/commit/2d051e3578d5cbf0317b96ef8b3b28750dea5400) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v3.18.1 (23/03/2022)
 Самое важное:
 - в `Select`, `Combobox`, `UserSelect` добавили индикатор загрузки (`isLoading`)
@@ -507,14 +513,3 @@
 - [refactor(Attach, Attachment): rename Attach to Attachment (#1500)](https://github.com/gazprom-neft/consta-uikit/commit/c72d379b6d10b8808f223f00d7b51f05efbc178f) - [@N1KN](https://github.com/N1KN)
 - [fix(Table): fixed onFiltersUpdated not called on removeAllSelectedFilters (#1493)](https://github.com/gazprom-neft/consta-uikit/commit/07a1cf5cd7414a54b3007cc54658142bc2bb5a7a) - [@N1KN](https://github.com/N1KN)
 - [chore(gh-actions): add action for automatic test](https://github.com/gazprom-neft/consta-uikit/commit/5e6cd1e7ed99047a8c214877542ce20b17ce0962) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v3.1.0 (01/09/2021)
-- [chore(yarn.lock): fixed deps](https://github.com/gazprom-neft/consta-uikit/commit/07d3039d29fd3fa175e8083444d96a066939e77a) - [@gizeasy](https://github.com/gizeasy)
-- [docs(common): add how to docs, edit common docs (#1470)](https://github.com/gazprom-neft/consta-uikit/commit/e7787ab396d931c620f62cd959c448340842023a) - [@arhayka](https://github.com/arhayka)
-- [fix(useSelect): fixed clear button on empty select  (#1473)](https://github.com/gazprom-neft/consta-uikit/commit/b918af45477a969b0a6b0273c1b8de414298ccfb) - [@N1KN](https://github.com/N1KN)
-- [feat(RadioGroup): add new property for RadioGroup (align) (#1465)](https://github.com/gazprom-neft/consta-uikit/commit/ce4efd071dd761d8d0da4bbe3746f2585fecc717) - [@N1MBER](https://github.com/N1MBER)
-- [fix(cn fuction): fix bug with cn fuction](https://github.com/gazprom-neft/consta-uikit/commit/8c33625c46810cb4170b15d40620568e339157ca) - [@N1MBER](https://github.com/N1MBER)
-- [refactor(SnackBar): change description of props types](https://github.com/gazprom-neft/consta-uikit/commit/4f486dc1aca18219f986e9d49c2b4e6b90286666) - [@N1MBER](https://github.com/N1MBER)
-- [refactor(Tooltip): delete preview container from tooltip documentation](https://github.com/gazprom-neft/consta-uikit/commit/4651448dadd54721f7528ab91a4da022856925df) - [@N1MBER](https://github.com/N1MBER)
