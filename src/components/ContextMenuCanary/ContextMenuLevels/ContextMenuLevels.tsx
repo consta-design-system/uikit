@@ -4,7 +4,7 @@ import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside'
 import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
 import { useRefs } from '../../../hooks/useRefs/useRefs';
 import { Direction, directions } from '../../Popover/Popover';
-import { ContextMenuLevel } from '../ContextMenuLevel/ContextMenuLevel';
+import { clearTimers, ContextMenuLevel } from '../ContextMenuLevel/ContextMenuLevel';
 import { getLevels, withDefaultGetters } from '../helper';
 import {
   AddLevel,
@@ -88,6 +88,7 @@ function ContextMenuLevelsRender(propsComponent: ContextMenuProps, ref: React.Re
   });
 
   useEffect(() => {
+    clearTimers();
     setLevels(
       getLevels({
         levels,
@@ -97,6 +98,7 @@ function ContextMenuLevelsRender(propsComponent: ContextMenuProps, ref: React.Re
         getItemSubMenu,
       }),
     );
+    return () => clearTimers();
   }, [items]);
 
   const firstLevelRef = useForkRef([levelsRefs[0], ref]);

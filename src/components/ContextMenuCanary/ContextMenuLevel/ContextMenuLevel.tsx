@@ -42,6 +42,15 @@ const renderHeader = (
   );
 };
 
+let timers: ReturnType<typeof setTimeout>[] = [];
+export function clearTimers() {
+  for (const timer of timers) {
+    clearTimeout(timer);
+  }
+  timers = [];
+}
+const closeDelay = 300;
+
 function ContextMenuLevelRender<ITEM, GROUP>(
   props: ContextMenuLevelProps<ITEM, GROUP>,
   ref: React.Ref<HTMLDivElement>,
@@ -112,8 +121,10 @@ function ContextMenuLevelRender<ITEM, GROUP>(
 
   useEffect(() => {
     if (levelDepth !== 0 && !hovered && hoveredParenLevel < levelDepth) {
-      setTimeout(() => deleteLevel(levelDepth), 300);
+      clearTimeout(timers[levelDepth]);
+      timers[levelDepth] = setTimeout(() => deleteLevel(levelDepth), closeDelay);
     }
+    return () => clearTimeout(timers[levelDepth]);
   }, [hovered, hoveredParenLevel]);
 
   const onMouseEnter = (item: ITEM, itemIndex: string) => {
