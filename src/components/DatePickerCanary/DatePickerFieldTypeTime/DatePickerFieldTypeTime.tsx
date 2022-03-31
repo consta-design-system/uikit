@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { format, isValid, isWithinInterval, parse } from 'date-fns';
 
 import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
@@ -7,28 +7,32 @@ import { maxDateDefault, minDateDefault } from '../../../utils/date';
 import { TextField } from '../../TextField/TextField';
 import {
   datePickerErrorTypes,
-  datePickerPropFormatTypeDate,
-  datePickerPropPlaceholderTypeDate,
+  datePickerPropFormatTypeTime,
+  datePickerPropPlaceholderTypeTime,
   datePickerPropSeparatorDefault,
+  getParts,
   getPartsDate,
 } from '../helpers';
 
-import { DatePickerFieldTypeDateProps, useImask } from './helpers';
+import { DatePickerFieldTypeTimeProps, useImask } from './helpers';
 
-export const DatePickerFieldTypeDate = React.forwardRef<
+export const DatePickerFieldTypeTime = React.forwardRef<
   HTMLDivElement,
-  DatePickerFieldTypeDateProps
+  DatePickerFieldTypeTimeProps
 >((props, ref) => {
   const {
-    format: formatProp = datePickerPropFormatTypeDate,
+    format: formatProp = datePickerPropFormatTypeTime,
     separator = datePickerPropSeparatorDefault,
-    placeholder = datePickerPropPlaceholderTypeDate,
+    placeholder = datePickerPropPlaceholderTypeTime,
     onChange,
     onError,
     minDate = minDateDefault,
     maxDate = maxDateDefault,
     value,
     inputRef: inputRefProp,
+    multiplicityHours,
+    multiplicitySeconds,
+    multiplicityMinutes,
     ...otherProps
   } = props;
 
@@ -38,6 +42,8 @@ export const DatePickerFieldTypeDate = React.forwardRef<
   const [stringValue, setStringValue] = useState<string | null>(
     value && isValid(value) ? format(value, formatProp) : null,
   );
+
+  const formatParts = useMemo(() => getParts(formatProp, ':'), [formatProp, separator]);
 
   const handleChange = useCallback(
     (e: Event, stringValue: string | null) => {
@@ -50,32 +56,31 @@ export const DatePickerFieldTypeDate = React.forwardRef<
           return;
         }
 
-        const [dd, MM, yyyy] = getPartsDate(stringValue, formatProp, separator, false, [
-          'dd',
-          'MM',
-          'yyyy',
-        ]);
+        const partsTime = getPartsDate(stringValue, formatProp, ':', false, ['HH', 'mm', 'ss']);
 
-        if (dd && MM && yyyy) {
+        const [HH, mm, ss] = partsTime;
+
+        if (partsTime.filter((item) => !!item).length === formatParts.length) {
           const date = parse(
-            `${dd}${datePickerPropSeparatorDefault}${MM}${datePickerPropSeparatorDefault}${yyyy}`,
-            datePickerPropFormatTypeDate,
-            new Date(),
+            `${HH}:${mm}:${ss}`,
+            datePickerPropFormatTypeTime,
+            value || new Date(),
           );
+
           if (!isWithinInterval(date, { start: minDate, end: maxDate })) {
-            onError &&
-              onError({
-                type: datePickerErrorTypes[0],
-                stringValue,
-                dd,
-                MM,
-                yyyy,
-                date,
-              });
+            onError?.({
+              type: datePickerErrorTypes[0],
+              stringValue,
+              date,
+              HH,
+              mm,
+              ss,
+            });
 
             onChange({ e, value: null });
             return;
           }
+
           onChange({ e, value: date });
         } else {
           onChange({ e, value: null });
@@ -85,7 +90,16 @@ export const DatePickerFieldTypeDate = React.forwardRef<
     [minDate?.getTime(), maxDate?.getTime(), formatProp, separator],
   );
 
-  useImask(formatProp, separator, inputRef, stringValue, onError);
+  useImask(
+    formatProp,
+    separator,
+    multiplicityHours,
+    multiplicitySeconds,
+    multiplicityMinutes,
+    inputRef,
+    stringValue,
+    onError,
+  );
 
   // при изменении value, нужно обновить stringValue
   useEffect(() => {
@@ -99,9 +113,6 @@ export const DatePickerFieldTypeDate = React.forwardRef<
       setStringValue('');
     }
   }, [value?.getTime()]);
-
-  // задаем маску и сохраняем обьект маски в ref
-  // обнавляем при смене формата
 
   // задаем нативный oninput, так как с маской по другому не будет работать
   // обнавляем oninput при смене handleChange

@@ -13,7 +13,6 @@ import {
 import IMask from 'imask';
 
 import { IconComponent, IconPropSize } from '../../../icons/Icon/Icon';
-import { leapYear } from '../../../utils/date';
 import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import { getLabelHours, getLabelMinutes, getLabelSeconds } from '../../DateTimeCanary/helpers';
 import {
@@ -25,20 +24,19 @@ import {
 } from '../../TextField/TextField';
 import {
   datePickerErrorTypes,
-  datePickerPropFormatTypeDate,
+  datePickerPropFormatTypeTime,
   DatePickerPropOnError,
-  datePickerPropSeparatorDefault,
   getPartsDate,
   getTimeEnum,
 } from '../helpers';
 
-type DatePickerFieldTypeDateTimePropOnChange = (props: { e: Event; value: Date | null }) => void;
+type DatePickerFieldTypeTimePropOnChange = (props: { e: Event; value: Date | null }) => void;
 
-export type DatePickerFieldTypeDateTimeProps = PropsWithHTMLAttributes<
+export type DatePickerFieldTypeTimeProps = PropsWithHTMLAttributes<
   {
     className?: string;
     value?: Date | null;
-    onChange?: DatePickerFieldTypeDateTimePropOnChange;
+    onChange?: DatePickerFieldTypeTimePropOnChange;
     onError?: DatePickerPropOnError;
     id?: string;
     name?: string;
@@ -99,21 +97,6 @@ export const useImask = (
       mask: Date,
       pattern: formatProp,
       blocks: {
-        yyyy: {
-          mask: IMask.MaskedRange,
-          from: 1,
-          to: 9999,
-        },
-        MM: {
-          mask: IMask.MaskedRange,
-          from: 1,
-          to: 12,
-        },
-        dd: {
-          mask: IMask.MaskedRange,
-          from: 1,
-          to: 31,
-        },
         HH:
           multiplicityHours && multiplicityHours > 1
             ? {
@@ -165,58 +148,17 @@ export const useImask = (
       format: (date) => format(date, formatProp),
       parse: (string) => parse(string, formatProp, new Date()),
       validate: (string: string) => {
-        const [dd, MM, yyyy, HH, mm, ss] = getPartsDate(string, formatProp, separator, true, [
-          'dd',
-          'MM',
-          'yyyy',
-          'HH',
-          'mm',
-          'ss',
-        ]);
+        const [HH, mm, ss] = getPartsDate(string, formatProp, ':', false, ['HH', 'mm', 'ss']);
 
         if (
-          dd &&
-          MM &&
-          !isValid(
-            parse(
-              `${dd}${datePickerPropSeparatorDefault}${MM}${datePickerPropSeparatorDefault}${leapYear}`,
-              datePickerPropFormatTypeDate,
-              new Date(),
-            ),
-          )
+          HH &&
+          mm &&
+          ss &&
+          !isValid(parse(`${HH}:${mm}:${ss}`, datePickerPropFormatTypeTime, new Date()))
         ) {
           onError?.({
             type: datePickerErrorTypes[1],
             stringValue: string,
-            dd,
-            MM,
-            yyyy,
-            HH,
-            mm,
-            ss,
-          });
-
-          return false;
-        }
-
-        if (
-          dd &&
-          MM &&
-          yyyy &&
-          !isValid(
-            parse(
-              `${dd}${datePickerPropSeparatorDefault}${MM}${datePickerPropSeparatorDefault}${yyyy}`,
-              datePickerPropFormatTypeDate,
-              new Date(),
-            ),
-          )
-        ) {
-          onError?.({
-            type: datePickerErrorTypes[1],
-            stringValue: string,
-            dd,
-            MM,
-            yyyy,
             HH,
             mm,
             ss,

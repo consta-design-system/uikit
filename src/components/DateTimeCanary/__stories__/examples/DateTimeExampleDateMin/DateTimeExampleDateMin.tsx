@@ -11,6 +11,7 @@ const maxDate = new Date();
 
 export const DateTimeExampleDateMin = () => {
   const [value, setValue] = useState<Date | undefined>();
+
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <DateTime

@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef } from 'react';
+import React, { forwardRef, useMemo, useRef } from 'react';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { maxDateDefault, minDateDefault } from '../../utils/date';
@@ -9,11 +9,13 @@ import { DatePickerTypeDate } from './DatePickerTypeDate/DatePickerTypeDate';
 import { DatePickerTypeDateRange } from './DatePickerTypeDateRange/DatePickerTypeDateRange';
 import { DatePickerTypeDateTime } from './DatePickerTypeDateTime/DatePickerTypeDateTime';
 import { DatePickerTypeDateTimeRange } from './DatePickerTypeDateTimeRange/DatePickerTypeDateTimeRange';
+import { DatePickerTypeTime } from './DatePickerTypeTime/DatePickerTypeTime';
 import {
   DatePickerComponent,
   DatePickerPropType,
   datePickerPropTypeDefault,
   DatePickerTypeComponent,
+  isTypeWithTime,
 } from './helpers';
 
 const typeMap: Record<DatePickerPropType, DatePickerTypeComponent<DatePickerPropType>> = {
@@ -21,6 +23,7 @@ const typeMap: Record<DatePickerPropType, DatePickerTypeComponent<DatePickerProp
   'date-range': DatePickerTypeDateRange,
   'date-time': DatePickerTypeDateTime,
   'date-time-range': DatePickerTypeDateTimeRange,
+  'time': DatePickerTypeTime,
 };
 
 export const COMPONENT_NAME = 'DatePicker' as const;
@@ -37,14 +40,17 @@ export const DatePicker: DatePickerComponent = forwardRef((props, ref) => {
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, props, datePickerRef);
 
-  const timeProps =
-    type === 'date-time'
-      ? {
-          multiplicityMinutes,
-          multiplicitySeconds,
-          multiplicityHours,
-        }
-      : undefined;
+  const timeProps = useMemo(
+    () =>
+      isTypeWithTime(type)
+        ? {
+            multiplicityMinutes,
+            multiplicitySeconds,
+            multiplicityHours,
+          }
+        : undefined,
+    [type, multiplicityMinutes, multiplicitySeconds, multiplicityHours],
+  );
 
   const Component = getByMap(typeMap, type);
 

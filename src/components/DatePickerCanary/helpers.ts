@@ -14,7 +14,14 @@ import {
   TextFieldPropWidth,
 } from '../TextField/TextField';
 
-export const datePickerPropType = ['date', 'date-range', 'date-time', 'date-time-range'] as const;
+export const datePickerPropType = [
+  'date',
+  'date-range',
+  'date-time',
+  'date-time-range',
+  'time',
+] as const;
+
 export type DatePickerPropType = typeof datePickerPropType[number];
 export const datePickerPropTypeDefault = datePickerPropType[0];
 
@@ -160,8 +167,11 @@ export const datePickerPropSeparatorDefault = '.';
 export const datePickerPropFormatTypeDate = `dd${datePickerPropSeparatorDefault}MM${datePickerPropSeparatorDefault}yyyy`;
 export const datePickerPropPlaceholderTypeDate = `ДД${datePickerPropSeparatorDefault}ММ${datePickerPropSeparatorDefault}ГГГГ`;
 
-export const datePickerPropFormatTypeDateTime = `${datePickerPropFormatTypeDate} HH:mm:ss`;
-export const datePickerPropPlaceholderTypeDateTime = `${datePickerPropPlaceholderTypeDate} ЧЧ:ММ:СС`;
+export const datePickerPropFormatTypeTime = `HH:mm:ss`;
+export const datePickerPropPlaceholderTypeTime = `ЧЧ:ММ:СС`;
+
+export const datePickerPropFormatTypeDateTime = `${datePickerPropFormatTypeDate} ${datePickerPropFormatTypeTime}`;
+export const datePickerPropPlaceholderTypeDateTime = `${datePickerPropPlaceholderTypeDate} ${datePickerPropPlaceholderTypeTime}`;
 
 export const normalizeRangeValue = (dateRange: DateRange): DateRange => {
   if (dateRange[0] && dateRange[1] && dateRange[0]?.getTime() > dateRange[1]?.getTime()) {
@@ -243,3 +253,38 @@ const mapFormForEnd: Record<TextFieldPropForm, TextFieldPropForm> = {
 
 export const getFormForStart = (form: TextFieldPropForm) => getByMap(mapFormForStart, form);
 export const getFormForEnd = (form: TextFieldPropForm) => getByMap(mapFormForEnd, form);
+
+const getPartDate = (formatArray: string[], stringArray: string[], marker: string) => {
+  const index = formatArray.indexOf(marker);
+
+  if (index >= 0 && stringArray[index] && stringArray[index].length === marker.length) {
+    return stringArray[index];
+  }
+
+  return undefined;
+};
+
+export const getParts = (format: string, separator: string, withTime?: boolean) => {
+  if (withTime) {
+    const [date, time] = format.split(' ');
+
+    return [...(date ? date.split(separator) : []), ...(time ? time.split(':') : [])];
+  }
+
+  return format.split(separator);
+};
+
+export const getPartsDate = (
+  value: string,
+  format: string,
+  separator: string,
+  withTime: boolean,
+  markers: string[],
+) => {
+  const formatArray = getParts(format, separator, withTime);
+  const stringArray = getParts(value, separator, withTime);
+
+  return markers.map((marker) => getPartDate(formatArray, stringArray, marker));
+};
+
+export const isTypeWithTime = (type: DatePickerPropType) => type.indexOf('time') !== -1;
