@@ -24,7 +24,6 @@ export type EventInterceptorComponentName =
   | 'Layout'
   | 'Loader'
   | 'Modal'
-  | 'Pagination'
   | 'Popover'
   | 'ProgressSpin'
   | 'ProgressStepBar'
