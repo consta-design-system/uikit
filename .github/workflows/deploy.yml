@@ -11,7 +11,7 @@ on:
 
 env:
   BUILD_SCRIPT: yarn build:storybook
-  BUILD_SCRIPT_OUTPUT: build/storybook
+  BUILD_SCRIPT_OUTPUT: build
   APP_NAME: uikit
 
 jobs:

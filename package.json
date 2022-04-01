@@ -30,7 +30,7 @@
   "scripts": {
     "eject": "react-scripts eject",
     "start": "start-storybook -p 6006 -s public",
-    "build:storybook": "build-storybook -s public -o build/storybook",
+    "build:storybook": "rm -rf build && build-storybook -s public -o build",
     "build-storybook": "build-storybook",
     "tsc-dry-run": "tsc --noEmit",
     "lint:js": "eslint --ext .js,.jsx,.tsx,.ts --fix . --quiet",
