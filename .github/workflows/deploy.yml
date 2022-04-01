@@ -68,6 +68,7 @@ jobs:
         run: echo "🎉 Deployed at http://${{env.BRANCH_NAME}}.${{env.APP_NAME}}.${{secrets.DEPLOY_DOMAIN}}"
 
       - name: Add comment
+        if: ${{ github.event_name == 'pull_request'}}
         uses: allthatjazzleo/actions-pull-request-add-comment@master
         with:
           message: '🎉 **Deployed at** http://${{env.BRANCH_NAME}}.${{env.APP_NAME}}.${{secrets.DEPLOY_DOMAIN}}'
