@@ -4,7 +4,7 @@
     align-items: center;
   }
 
-  &-Popover {
+  &-Content {
     display: flex;
     flex-direction: column;
     padding: var(--space-s) 0;

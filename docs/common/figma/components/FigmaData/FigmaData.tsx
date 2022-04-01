@@ -209,6 +209,19 @@ export const FigmaDataCharts = () => {
         </Text>
       </div>
       <div className={wp.tplGrid('fraction', { row: 'third' })}>
+        <Text
+          as="a"
+          size="xl"
+          weight="bold"
+          href="https://www.figma.com/community/file/1063113573061305628"
+          target="_blank"
+          className="FigmaDataLink"
+        >
+          Consta Geo-Kit
+        </Text>
+        <Text className="FigmaDataText">Библиотека геологических графиков.</Text>
+      </div>
+      <div className={wp.tplGrid('fraction', { row: 'third' })}>
         <div
           className={cnDocsDecorator('Section', [
             wp.tplGrid({ 'xs-columns': 2, 'col-gap': 'full', 'row-gap': 'full' }),

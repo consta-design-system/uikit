@@ -32,6 +32,7 @@ const getKnobs = () => ({
   labelPosition: select('labelPosition', ['top', 'left'], 'top'),
   placeholder: text('placeholder', 'Placeholder'),
   withGroups: boolean('withGroups', false),
+  isLoading: boolean('isLoading', false),
 });
 
 export function Playground(): JSX.Element {
@@ -45,6 +46,7 @@ export function Playground(): JSX.Element {
     placeholder,
     withGroups,
     label,
+    isLoading,
     labelPosition,
     caption,
   } = getKnobs();
@@ -68,6 +70,7 @@ export function Playground(): JSX.Element {
         onChange={({ value }) => setValueMultiple(value)}
         groups={withGroups ? groups : []}
         multiple
+        isLoading={isLoading}
         label={label}
         labelPosition={labelPosition}
         caption={caption}
@@ -81,6 +84,7 @@ export function Playground(): JSX.Element {
       disabled={disabled}
       view={view}
       form={form}
+      isLoading={isLoading}
       required={required}
       status={status || undefined}
       placeholder={placeholder}
@@ -108,6 +112,7 @@ export const WithRender = createStory(
       withGroups,
       label,
       labelPosition,
+      isLoading,
       caption,
     } = getKnobs();
     const [value, setValue] = useState<MyItem | null>();
@@ -152,6 +157,7 @@ export const WithRender = createStory(
         getItemKey={(item) => item.name}
         getItemLabel={(item) => item.name}
         label={label}
+        isLoading={isLoading}
         labelPosition={labelPosition}
         caption={caption}
       />
@@ -176,6 +182,7 @@ export const WithCreate = createStory(
       label,
       labelPosition,
       caption,
+      isLoading,
     } = getKnobs();
     const [value, setValue] = useState<Item | null>();
     const [list, setList] = useState<Item[]>(items);
@@ -191,6 +198,7 @@ export const WithCreate = createStory(
         placeholder={placeholder}
         items={list}
         value={value}
+        isLoading={isLoading}
         onChange={({ value }) => setValue(value)}
         groups={withGroups ? groups : []}
         onCreate={({ label }) => setList([{ label, id: `${label}_${list.length + 1}` }, ...list])}

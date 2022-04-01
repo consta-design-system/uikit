@@ -70,6 +70,7 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent = React.forwardRe
     pointRef,
     onClick,
     position = propPositionDefault,
+    tooltipZIndex,
     ...otherProps
   } = props;
 
@@ -140,6 +141,7 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent = React.forwardRe
           anchorRef={label || content ? anchorRef : pointRef}
           className={cnProgressStepBarItem('Tooltip')}
           direction={direction === 'horizontal' ? 'downCenter' : 'leftUp'}
+          style={{ zIndex: tooltipZIndex }}
           possibleDirections={
             direction === 'horizontal' ? possibleHorizontalDirections : possibleVerticalDirections
           }

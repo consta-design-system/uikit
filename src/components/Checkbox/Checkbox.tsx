@@ -44,6 +44,8 @@ type Props = {
   tabIndex?: number;
   inputRef?: React.Ref<HTMLInputElement>;
   children?: never;
+  for?: string;
+  inputId?: string;
 };
 
 export type CheckboxProps = PropsWithHTMLAttributes<Props, HTMLLabelElement>;
@@ -71,6 +73,7 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>((props
     required,
     step,
     tabIndex,
+    inputId,
     inputRef,
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, props, checkboxRef);
@@ -92,6 +95,7 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>((props
         name={name}
         className={cnCheckbox('Input', [cnMixFocus()])}
         checked={checked}
+        id={inputId}
         disabled={disabled}
         onChange={handleChange}
         onFocus={onFocus}

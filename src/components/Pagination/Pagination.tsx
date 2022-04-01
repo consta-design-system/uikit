@@ -1,12 +1,13 @@
 import './Pagination.css';
 
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { IconBackward } from '../../icons/IconBackward/IconBackward';
 import { IconForward } from '../../icons/IconForward/IconForward';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { Button } from '../Button/Button';
+import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { Text } from '../Text/Text';
 import { TextField, TextFieldOnChangeArguments } from '../TextField/TextField';
 
@@ -68,7 +69,10 @@ type Pagination = (
   props: PropsWithHTMLAttributesAndRef<Props, HTMLDivElement>,
 ) => React.ReactElement | null;
 
+export const COMPONENT_NAME = 'Pagination' as const;
+
 export const Pagination: Pagination = React.forwardRef((props, ref) => {
+  const paginationRef = useRef<HTMLDivElement>(null);
   const {
     currentPage = 0,
     totalPages = 0,
@@ -92,8 +96,8 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
     containerEventListener = window,
     className,
     ...otherProps
-  } = props;
-  if (!totalPages) return null;
+  } = usePropsHandler(COMPONENT_NAME, props, paginationRef);
+
   const currPage = currentPage + 1;
   const { prevPage, nextPage, isStartDots, isEndDots, pages, isEmpty } = getPaginationInfo(
     currPage,
@@ -153,6 +157,8 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
   });
 
   const itemWidth = `var(--control-height-${size})`;
+
+  if (!totalPages) return null;
 
   return (
     (!isEmpty && (

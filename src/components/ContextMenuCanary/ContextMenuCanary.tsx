@@ -10,6 +10,7 @@ import {
   cnMixPopoverAnimate,
 } from '../../mixs/MixPopoverAnimate/MixPopoverAnimate';
 import { cn } from '../../utils/bem';
+import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { Direction } from '../Popover/Popover';
 
 import { ContextMenuLevels } from './ContextMenuLevels/ContextMenuLevels';
@@ -17,12 +18,19 @@ import { ContextMenuComponent, ContextMenuProps } from './types';
 
 const cnContextMenu = cn('ContextMenuCanary');
 
+export const COMPONENT_NAME = 'ContextMenu' as const;
+
 function ContextMenuRender(props: ContextMenuProps, ref: React.Ref<HTMLDivElement>) {
-  const { isOpen, className, onSetDirection, ...otherProps } = props;
-  const [playAnimation, setPlayAnimation] = useFlag();
-  const [direction, setDirection] = useState<Direction | undefined>(props.direction);
   const nodeRef = useRef<HTMLDivElement>(null);
   const levelRef = useForkRef([ref, nodeRef]);
+
+  const { isOpen, className, onSetDirection, ...otherProps } = usePropsHandler(
+    COMPONENT_NAME,
+    props,
+    levelRef,
+  );
+  const [playAnimation, setPlayAnimation] = useFlag();
+  const [direction, setDirection] = useState<Direction | undefined>(props.direction);
 
   const handleSetDirection = (d: Direction) => {
     setDirection(d);
