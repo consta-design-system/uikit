@@ -156,7 +156,7 @@ function BreadcrumbsItemRender<ITEM>(
             'upStartRight',
           ]}
           anchorRef={breadcrumbsItemRef}
-          offset={8}
+          offset="xs"
           size={contextMenuSizeMap[size]}
         />
       )}

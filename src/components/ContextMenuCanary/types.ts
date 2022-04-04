@@ -2,7 +2,7 @@ import { ClickOutsideHandler } from '../../hooks/useClickOutside/useClickOutside
 import { IconComponent } from '../../icons/Icon/Icon';
 import { PropsWithAsAttributes } from '../../utils/types/PropsWithAsAttributes';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
-import { Direction, Position } from '../Popover/Popover';
+import { Direction, PopoverPropOffset, Position } from '../Popover/Popover';
 
 export const contextMenuSizes = ['m', 'xs', 's', 'l'] as const;
 export type ContextMenuPropSize = typeof contextMenuSizes[number];
@@ -127,7 +127,7 @@ export type ContextMenuProps<
     items: ITEM[];
     size?: ContextMenuPropSize;
     direction?: Direction;
-    offset?: number;
+    offset?: PopoverPropOffset;
     groups?: GROUP[];
     sortGroup?: ContextMenuPropSortGroup;
     onItemClick?: ContextMenuPropOnClick<ITEM>;

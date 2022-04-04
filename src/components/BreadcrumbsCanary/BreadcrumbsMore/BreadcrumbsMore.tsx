@@ -131,7 +131,7 @@ function BreadcrumbsMoreRender<ITEM>(
           'downStartRight',
           'upStartRight',
         ]}
-        offset={8}
+        offset="xs"
         size={contextMenuSizeMap[size]}
       />
     </BreadcrumbsItem>
