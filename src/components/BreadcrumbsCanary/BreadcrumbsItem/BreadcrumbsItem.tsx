@@ -146,7 +146,7 @@ function BreadcrumbsItemRender<ITEM>(
           onItemClick={onItemClick}
           getItemAs={getItemAs(getItemHref)}
           getItemAttributes={getItemAttributes(getItemHref)}
-          direction="downCenter"
+          direction="downStartLeft"
           possibleDirections={[
             'downCenter',
             'upCenter',
