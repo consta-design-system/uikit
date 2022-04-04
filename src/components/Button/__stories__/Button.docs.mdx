@@ -28,6 +28,7 @@ import {
   ButtonExampleIconOnly,
 } from './examples/ButtonExampleIcon/ButtonExampleIcon';
 import { ButtonExampleLoading } from './examples/ButtonExampleLoading/ButtonExampleLoading';
+import { ButtonExampleAdaptive } from './examples/ButtonExampleAdaptive/ButtonExampleAdaptive';
 
 <!--info
 description: Кнопка. Разные формы, цвета и размеры.
@@ -50,6 +51,7 @@ import { Button } from '@consta/uikit/Button';
   - [Кнопка с иконкой](#кнопка-с-иконкой)
   - [Форма](#форма)
   - [Прелоадер](#прелоадер)
+- [Адаптивность](#адаптивность)
 - [Импорт](#импорт)
 - [Список свойств](#список-свойств)
 - [Пример использования](#пример-использования)
@@ -260,6 +262,17 @@ import { Button } from '@consta/uikit/Button';
 ```
 
 <ButtonExampleLoading />
+
+## Адаптивность
+
+Если кнопка не помещается в родительский контейнер по ширине, она сжимается,
+текст обрезается, в конце добавляется многоточие.
+
+```ts
+<Button label="Этот текст не помещается" />
+```
+
+<ButtonExampleAdaptive />
 
 ## Импорт
 
