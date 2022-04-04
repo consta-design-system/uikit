@@ -5,6 +5,7 @@ import { CardExampleForm } from './examples/CardExampleForm/CardExampleForm';
 import { CardExampleState } from './examples/CardExampleState/CardExampleState';
 import { CardExampleShadow } from './examples/CardExampleShadow/CardExampleShadow';
 import { CardExampleSpace } from './examples/CardExampleSpace/CardExampleSpace';
+import { CardExampleAdaptive } from './examples/CardExampleAdaptive/CardExampleAdaptive';
 
 <!--info
 description: Карточка. Контейнер для любого контента.
@@ -31,6 +32,7 @@ import { Card } from '@consta/uikit/Card';
 - [Статус](#статус)
 - [Форма](#форма)
 - [Тень](#тень)
+- [Адаптивность](#адаптивность)
 - [Импорт](#импорт)
 - [Список свойств](#список-свойств)
 - [Пример использования](#пример)
@@ -104,6 +106,18 @@ import { Card } from '@consta/uikit/Card';
 ```
 
 <CardExampleShadow />
+
+## Адаптивность
+
+Поведение карточек при изменении ширины экрана зависит от правил адаптивности, которые вы установили для своего проекта, от брекпойнтов, сетки и так далее.
+
+По умолчанию карточки растягиваются и сжимаются в зависимости от ширины экрана, а высота карточек зависит от высоты их содержимого. Но на самом деле карточка – просто контейнер, и может вести себя так, как вы захотите.
+
+Например, сетка из карточек может перестраиваться так:
+
+<CardExampleAdaptive name="1440" />
+<CardExampleAdaptive name="1280" />
+<CardExampleAdaptive name="923" />
 
 ## Импорт
 
