@@ -3,7 +3,7 @@ import {
   BreadcrumbsPropGetItemIcon,
   BreadcrumbsPropGetItemLabel,
   BreadcrumbsPropGetItemOnClick,
-  BreadcrumbsPropOnItemClick,
+  BreadcrumbsPropGetItemSubMenu,
   BreadcrumbsProps,
   DefaultItem,
 } from './types';
@@ -12,25 +12,16 @@ const defaultGetItemLabel: BreadcrumbsPropGetItemLabel<DefaultItem> = (item) => 
 const defaultGetItemIcon: BreadcrumbsPropGetItemIcon<DefaultItem> = (item) => item.icon;
 const defaultGetItemHref: BreadcrumbsPropGetItemHref<DefaultItem> = (item) => item.href;
 const defaultGetItemOnClick: BreadcrumbsPropGetItemOnClick<DefaultItem> = (item) => item.onClick;
+const defaultGetItemSubMenu: BreadcrumbsPropGetItemSubMenu<DefaultItem> = (item) => item.subMenu;
 
-export function withDefaultGetters<ITEM>(props: BreadcrumbsProps<ITEM>) {
+export function withDefaultGetters(props: BreadcrumbsProps) {
   return {
     ...props,
     getItemLabel: props.getItemLabel || defaultGetItemLabel,
     getItemHref: props.getItemHref || defaultGetItemHref,
     getItemOnClick: props.getItemOnClick || defaultGetItemOnClick,
     getItemIcon: props.getItemIcon || defaultGetItemIcon,
-  };
-}
-
-export function getItemClick<ITEM>(
-  item: ITEM,
-  getItemOnClick: BreadcrumbsPropGetItemOnClick<ITEM>,
-  onItemClick?: BreadcrumbsPropOnItemClick<ITEM>,
-): React.MouseEventHandler {
-  return (e) => {
-    onItemClick?.({ e, item });
-    getItemOnClick(item)?.(e);
+    getItemSubMenu: props.getItemSubMenu || defaultGetItemSubMenu,
   };
 }
 

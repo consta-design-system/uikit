@@ -2,6 +2,8 @@ import * as React from 'react';
 import { boolean, select } from '@storybook/addon-knobs';
 
 import { IconComponent } from '../../../icons/Icon/Icon';
+import { IconBag } from '../../../icons/IconBag/IconBag';
+import { IconBook } from '../../../icons/IconBook/IconBook';
 import { IconDocFilled } from '../../../icons/IconDocFilled/IconDocFilled';
 import { IconHome } from '../../../icons/IconHome/IconHome';
 import { cn } from '../../../utils/bem';
@@ -20,6 +22,7 @@ type Page = {
   icon?: IconComponent;
   href: string;
   label: string;
+  subMenu?: Page[];
 };
 
 const pages: Page[] = [
@@ -27,10 +30,26 @@ const pages: Page[] = [
     icon: IconHome,
     label: 'Главная',
     href: 'https://url.com/page-1',
+    subMenu: [
+      { icon: IconBag, label: 'Раздел 1', href: 'https://url.com/page-2-1' },
+      {
+        icon: IconBook,
+        label: 'Раздел',
+        href: 'https://url.com/page-2',
+      },
+    ],
   },
   {
     label: 'Раздел',
     href: 'https://url.com/page-2',
+    subMenu: [
+      { icon: IconBag, label: 'Раздел 1', href: 'https://url.com/page-2-1' },
+      {
+        icon: IconBook,
+        label: 'Раздел',
+        href: 'https://url.com/page-2',
+      },
+    ],
   },
   {
     label: 'Подраздел',
@@ -43,6 +62,14 @@ const pages: Page[] = [
   {
     label: 'Дополнительные свойства элемента подраздела',
     href: 'https://url.com/page-5',
+    subMenu: [
+      { icon: IconBag, label: 'Раздел 1', href: 'https://url.com/page-2-1' },
+      {
+        icon: IconBook,
+        label: 'Раздел',
+        href: 'https://url.com/page-2',
+      },
+    ],
   },
   {
     label: 'Детальное описание свойства элемента подраздела',

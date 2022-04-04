@@ -12,6 +12,7 @@ export const breadcrumbPropFitModeDefault = breadcrumbPropFitMode[0];
 export type BreadcrumbsPropGetItemLabel<ITEM> = (item: ITEM) => string;
 export type BreadcrumbsPropGetItemHref<ITEM> = (item: ITEM) => string | undefined;
 export type BreadcrumbsPropGetItemIcon<ITEM> = (item: ITEM) => IconComponent | undefined;
+export type BreadcrumbsPropGetItemSubMenu<ITEM> = (item: ITEM) => ITEM[] | undefined;
 export type BreadcrumbsPropGetItemOnClick<ITEM> = (
   item: ITEM,
 ) => React.MouseEventHandler | undefined;
@@ -22,6 +23,7 @@ export type DefaultItem = {
   icon?: IconComponent;
   href?: string;
   onClick?: React.MouseEventHandler<HTMLAnchorElement>;
+  subMenu?: DefaultItem[];
 };
 
 export type RenderItem<ITEM> = (
@@ -40,6 +42,7 @@ export type BreadcrumbsProps<ITEM = DefaultItem> = PropsWithHTMLAttributesAndRef
     getItemHref?: BreadcrumbsPropGetItemHref<ITEM>;
     getItemIcon?: BreadcrumbsPropGetItemIcon<ITEM>;
     getItemOnClick?: BreadcrumbsPropGetItemOnClick<ITEM>;
+    getItemSubMenu?: BreadcrumbsPropGetItemSubMenu<ITEM>;
     onItemClick?: BreadcrumbsPropOnItemClick<ITEM>;
     size?: BreadcrumbPropSize;
     onlyIconRoot?: boolean;
@@ -63,6 +66,7 @@ export type BreadcrumbsMoreProps<ITEM> = PropsWithHTMLAttributesAndRef<
     getItemLabel: BreadcrumbsPropGetItemLabel<ITEM>;
     getItemHref: BreadcrumbsPropGetItemHref<ITEM>;
     getItemIcon: BreadcrumbsPropGetItemIcon<ITEM>;
+    getItemSubMenu: BreadcrumbsPropGetItemSubMenu<ITEM>;
     getItemOnClick: BreadcrumbsPropGetItemOnClick<ITEM>;
     onItemClick?: BreadcrumbsPropOnItemClick<ITEM>;
   },
@@ -73,6 +77,26 @@ export type BreadcrumbsMoreComponent = <ITEM>(
   props: BreadcrumbsMoreProps<ITEM>,
 ) => React.ReactElement | null;
 
+export type BreadcrumbsItemProps<ITEM> = PropsWithHTMLAttributesAndRef<
+  {
+    size: 'm' | 'xs' | 's' | 'l';
+    item?: ITEM;
+    getItemLabel?: BreadcrumbsPropGetItemLabel<ITEM>;
+    getItemHref?: BreadcrumbsPropGetItemHref<ITEM>;
+    getItemIcon?: BreadcrumbsPropGetItemIcon<ITEM>;
+    getItemSubMenu?: BreadcrumbsPropGetItemSubMenu<ITEM>;
+    active?: boolean;
+    onlyIcon?: boolean;
+    delimiter?: boolean;
+    onItemClick?: BreadcrumbsPropOnItemClick<ITEM>;
+  },
+  HTMLLIElement
+>;
+
+export type BreadcrumbsItemComponent = <ITEM>(
+  props: BreadcrumbsItemProps<ITEM>,
+) => React.ReactElement | null;
+
 export type BreadcrumbsFitModeDropdownProps<ITEM> = PropsWithHTMLAttributesAndRef<
   {
     items: ITEM[];
@@ -80,6 +104,7 @@ export type BreadcrumbsFitModeDropdownProps<ITEM> = PropsWithHTMLAttributesAndRe
     getItemHref: BreadcrumbsPropGetItemHref<ITEM>;
     getItemIcon: BreadcrumbsPropGetItemIcon<ITEM>;
     getItemOnClick: BreadcrumbsPropGetItemOnClick<ITEM>;
+    getItemSubMenu: BreadcrumbsPropGetItemSubMenu<ITEM>;
     onItemClick?: BreadcrumbsPropOnItemClick<ITEM>;
     renderItem: RenderItem<ITEM>;
     size: BreadcrumbPropSize;

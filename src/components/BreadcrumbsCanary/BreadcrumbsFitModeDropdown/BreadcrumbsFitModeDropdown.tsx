@@ -18,6 +18,7 @@ export const BreadcrumbsFitModeDropdown: BreadcrumbsFitModeDropdownComponent = f
       getItemLabel,
       getItemIcon,
       getItemOnClick,
+      getItemSubMenu,
       onItemClick,
       size,
       className,
@@ -56,6 +57,7 @@ export const BreadcrumbsFitModeDropdown: BreadcrumbsFitModeDropdownComponent = f
           getItemLabel={getItemLabel}
           getItemOnClick={getItemOnClick}
           onItemClick={onItemClick}
+          getItemSubMenu={getItemSubMenu}
           items={hiddenItems}
           ref={moreRef}
           className={cnBreadcrumbsFitModeDropdown('Item', { removed: hiddenItems.length <= 0 })}
