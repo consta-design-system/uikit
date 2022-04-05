@@ -20,6 +20,10 @@ jobs:
     steps:
       # Делаем checkout текущей ветки
       - uses: actions/checkout@master
+
+      - name: Print Info
+        run: echo "🎉 ${{secrets.DEPLOY_SERVER_HOST}} ${{secrets.DEPLOY_SERVER_HOST}} at http://${{env.BRANCH_NAME}}.${{env.APP_NAME}}.${{secrets.DEPLOY_DOMAIN}}"
+
       # Устанавливаем Node.JS для сборки приложения
       - uses: actions/setup-node@v1
         with:
@@ -64,6 +68,7 @@ jobs:
           strip_components: 1
           overwrite: true
           rm: true
+          passphrase: ''
       - name: Print Info
         run: echo "🎉 Deployed at http://${{env.BRANCH_NAME}}.${{env.APP_NAME}}.${{secrets.DEPLOY_DOMAIN}}"
 
