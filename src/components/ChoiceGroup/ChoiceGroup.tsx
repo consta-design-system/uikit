@@ -55,6 +55,7 @@ type Props<ITEM, MULTIPLE extends boolean = false> = PropsWithHTMLAttributesAndR
     value?: ChoiceGroupPropValue<ITEM, MULTIPLE>;
     onChange?: ChoiceGroupPropOnChange<ITEM, MULTIPLE>;
     multiple?: MULTIPLE;
+    truncate?: boolean;
     children?: never;
   },
   HTMLDivElement
@@ -91,6 +92,7 @@ export const ChoiceGroup: ChoiceGroupComponent = React.forwardRef((props, ref) =
     className,
     disabled = false,
     getDisabled,
+    truncate,
     ...otherProps
   } = props;
 
@@ -111,7 +113,9 @@ export const ChoiceGroup: ChoiceGroupComponent = React.forwardRef((props, ref) =
     <div
       {...otherProps}
       ref={ref}
-      className={cnChoiceGroup({ size, form, view, width, onlyIcon, disabled }, [className])}
+      className={cnChoiceGroup({ size, form, view, width, onlyIcon, disabled, truncate }, [
+        className,
+      ])}
     >
       {items.map((item, idx) => {
         const itemChecked = getChecked(item);

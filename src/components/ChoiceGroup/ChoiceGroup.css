@@ -3,10 +3,13 @@
   --choice-group-border-color: var(--color-control-bg-border-default);
   position: relative;
   display: inline-flex;
-  max-width: 100%;
   background-color: var(--choice-group-bg-color);
   border-radius: var(--choice-radius);
   box-shadow: inset 0 0 0 var(--control-border-width) var(--choice-group-border-color);
+
+  &_truncate {
+    max-width: 100%;
+  }
 
   &_view {
     &_primary {
