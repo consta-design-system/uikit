@@ -21,6 +21,7 @@ import {
 } from './examples/ChoiceGroupExampleSwitch/ChoiceGroupExampleSwitch';
 import { ChoiceGroupExampleDisabled } from './examples/ChoiceGroupExampleDisabled/ChoiceGroupExampleDisabled';
 import { ChoiceGroupExampleSomeDisabled } from './examples/ChoiceGroupExampleSomeDisabled/ChoiseGroupExampleSomeDisabled';
+import { ChoiceGroupExampleAdaptive } from './examples/ChoiceGroupExampleAdaptive/ChoiceGroupExampleAdaptive';
 
 <!--info
 description: Группа кнопок. Можно выбрать один или несколько вариантов.
@@ -57,6 +58,7 @@ import { ChoiceGroup } from '@consta/uikit/ChoiceGroup';
 - [Неактивные кнопки](#неактивные-кнопки)
   - [Неактивная кнопка](#неактивная-кнопка)
   - [Неактивная группа кнопок](#неактивная-группа-кнопок)
+- [Адаптивность](#адаптивность)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
@@ -414,6 +416,15 @@ export const ChoiceGroupExampleWidth = () => {
 ```
 
 <ChoiceGroupExampleDisabled />
+
+## Адаптивность
+
+Если компонент не помещается в родительский контейнер по ширине, он сжимается,
+текст обрезается, в конце добавляется многоточие. [Посмотреть пример](#слишком-длинный-текст)
+
+Если кнопки не помещаются на мобильный экран, можно добавить горизонтальную прокрутку или преобразовать в [RadioGroup](?path=/docs/components-radiogroup--playground).
+
+<ChoiceGroupExampleAdaptive />
 
 ## Импорт
 
