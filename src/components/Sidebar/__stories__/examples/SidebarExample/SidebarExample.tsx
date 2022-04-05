@@ -26,6 +26,7 @@ export const SidebarExample = () => {
         isOpen={isSidebarOpen}
         onClickOutside={() => setIsSidebarOpen(false)}
         onEsc={() => setIsSidebarOpen(false)}
+        style={{ zIndex: 120 }}
       >
         <Sidebar.Content className={cnSidebarExample('Content')}>
           <Text

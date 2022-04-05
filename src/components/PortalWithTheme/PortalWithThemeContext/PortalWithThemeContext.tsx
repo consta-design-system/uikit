@@ -3,8 +3,10 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 const Context = createContext<{
   refs: React.RefObject<HTMLElement>[];
   addRefs?: (ref: React.RefObject<HTMLElement>[]) => void;
+  zIndex?: number;
 }>({
   refs: [],
+  zIndex: undefined,
 });
 
 export function usePortalContext() {
@@ -19,7 +21,7 @@ export function usePortalContext() {
  * компонент думал ччто клик произашел вне компонента и срабатывал onOutsideClick.
  * Сечас когда мы знаем рефы всех вложенных порталов мы можем игнорировать события кликов на вложенных порталах
  */
-export const PortalWithThemeProvider: React.FC = (props) => {
+export const PortalWithThemeProvider: React.FC<{ zIndex?: number }> = (props) => {
   const [refs, setRefs] = useState<React.RefObject<HTMLElement>[]>([]);
   const { addRefs: contextAddRefs } = usePortalContext();
 
@@ -51,5 +53,9 @@ export const PortalWithThemeProvider: React.FC = (props) => {
 
   useEffect(() => () => setRefs([]), []);
 
-  return <Context.Provider value={{ refs, addRefs }}>{props.children}</Context.Provider>;
+  return (
+    <Context.Provider value={{ refs, addRefs, zIndex: props.zIndex }}>
+      {props.children}
+    </Context.Provider>
+  );
 };

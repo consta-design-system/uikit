@@ -36,18 +36,18 @@
   }
 
   &-Overlay {
-    position: fixed;
+    position: absolute;
     top: 0;
+    right: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    bottom: 0;
     padding: 0;
     background: var(--color-bg-tone);
     border: none;
   }
 
   &-Window {
-    z-index: 100;
+    position: absolute;
     display: flex;
     flex-direction: column;
     background-color: var(--color-bg-default);
@@ -135,11 +135,11 @@
     &_exitActive {
       .Sidebar {
         &-Overlay {
-          transition: opacity 0.2s ease;
+          transition: opacity 0.24s ease;
         }
 
         &-Window {
-          transition: transform 0.2s ease;
+          transition: transform 0.24s ease;
         }
       }
     }

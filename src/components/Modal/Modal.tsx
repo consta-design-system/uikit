@@ -55,7 +55,7 @@ const ContextConsumer: React.FC<{
   useClickOutside({
     isActive: !!onClickOutside,
     ignoreClicksInsideRefs: [...(ignoreClicksInsideRefs || []), ...(refs || [])],
-    handler: (event: MouseEvent) => onClickOutside?.(event),
+    handler: onClickOutside,
   });
 
   return <>{children}</>;
@@ -103,7 +103,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
       unmountOnExit
       appear
       classNames={cnForCssTransition(cnModal)}
-      timeout={200}
+      timeout={240}
       nodeRef={portalRef}
     >
       <PortalWithTheme
@@ -118,7 +118,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
           {...otherProps}
           style={{
             ...style,
-            ...(typeof style?.zIndex === 'number' && { zIndex: style?.zIndex + 1 }),
+            zIndex: undefined,
           }}
           className={cnModal('Window', { width, position }, [className])}
           ref={ref}

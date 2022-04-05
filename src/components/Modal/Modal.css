@@ -1,4 +1,5 @@
 .Modal {
+  --modal-window-animate-space: var(--space-xl);
   position: fixed;
   top: 0;
   right: 0;
@@ -13,7 +14,7 @@
   }
 
   &-Window {
-    z-index: 100;
+    position: absolute;
     overflow: auto;
     min-width: 400px;
     max-width: 90%;
@@ -36,7 +37,7 @@
   }
 
   &-Overlay {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -53,25 +54,59 @@
     &_appearActive,
     &_enterActive,
     &_exitActive {
-      transition: opacity 0.2s ease;
+      & .Modal-Overlay {
+        transition: opacity 0.24s ease;
+      }
+
+      & .Modal-Window {
+        transition: opacity 0.24s, transform 0.24s;
+      }
     }
 
     &_appear,
     &_enter {
-      opacity: 0;
+      & .Modal-Overlay {
+        opacity: 0;
+      }
+
+      & .Modal-Window {
+        opacity: 0;
+        transform: translate(0, calc(-1 * var(--modal-window-animate-space)));
+      }
     }
 
     &_appearActive,
     &_enterActive {
-      opacity: 1;
+      & .Modal-Overlay {
+        opacity: 1;
+      }
+
+      & .Modal-Window {
+        opacity: 1;
+        transform: translate(0, 0);
+      }
     }
 
     &_exit {
-      opacity: 1;
+      & .Modal-Overlay {
+        opacity: 1;
+      }
+
+      & .Modal-Window {
+        opacity: 1;
+        transform: translate(0, 0);
+      }
     }
 
     &_exitActive {
-      opacity: 0;
+      & .Modal-Overlay {
+        opacity: 0;
+      }
+
+      & .Modal-Window {
+        opacity: 0;
+        transform: translate(0, var(--modal-window-animate-space));
+      }
     }
   }
 }

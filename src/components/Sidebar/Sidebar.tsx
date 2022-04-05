@@ -128,7 +128,7 @@ export const Sidebar: SidebarComponent = (props) => {
       unmountOnExit
       className={cnSidebar({ position, hasOverlay })}
       classNames={cnForCssTransition(cnSidebar)}
-      timeout={200}
+      timeout={240}
       nodeRef={portalRef}
     >
       <PortalWithTheme
@@ -143,7 +143,7 @@ export const Sidebar: SidebarComponent = (props) => {
           {...otherProps}
           style={{
             ...style,
-            ...(typeof style?.zIndex === 'number' && { zIndex: style?.zIndex + 1 }),
+            zIndex: undefined,
           }}
           className={cnSidebar('Window', { size, position }, [className])}
           ref={ref}
