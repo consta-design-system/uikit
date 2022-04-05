@@ -7,6 +7,7 @@ import { ContextMenuExampleGroups } from './examples/ContextMenuExampleGroups/Co
 import { ContextMenuExampleIcon } from './examples/ContextMenuExampleIcon/ContextMenuExampleIcon';
 import { ContextMenuExampleSize } from './examples/ContextMenuExampleSize/ContextMenuExampleSize';
 import { ContextMenuExampleDefault } from './examples/ContextMenuExampleDefault/ContextMenuExampleDefault';
+import { ContextMenuExampleDisabled } from './examples/ContextMenuExampleDisabled/ContextMenuExampleDisabled';
 
 <!--info
 description: Контекстное меню. Дополнительные действия на странице.
@@ -51,7 +52,7 @@ import { ContextMenu } from '@consta/uikit/ContextMenuCanary';
 - `leftIcon` — добавляет [иконку](#иконка) слева от текста.
 - `subMenu` — [второй уровень меню](#второй-уровень-меню).
 - `status` — [статус пункта меню](#статус-пункта-меню).
-- `disabled` — [блокирует пункт меню](#Заблокировать-пункт-меню).
+- `disabled` — [блокирует пункт меню](#заблокировать-пункт-меню).
 - `groupId` — идентификатор [группы, к которой относится пункт](#группы-пунктов-меню).
 - `onClick` — функция, которая вызывается при нажатии на пункт меню.
 - `as` — то, каким образом будет отрисовываться пункт меню.
@@ -468,22 +469,36 @@ export const ContextMenuExampleGroups = () => {
 Чтобы меню можно было закрыть по клику за его пределами, добавьте `onClickOutside`.
 
 ```tsx
-const items: string[] = ['Пункт 1', 'Пункт 2', 'Пункт 3'];
+type Item = {
+  label: string;
+};
+
+const items: Item[] = [
+  {
+    label: 'Пункт 1',
+  },
+  {
+    label: 'Пункт 2',
+  },
+  {
+    label: 'Пункт 3',
+  },
+];
 
 export const ContextMenuExampleOutsideClick = () => {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
   return (
-    <>
+    <StoryBookExample className={cnDocsDecorator('Section')}>
       <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
       <ContextMenu
+        isOpen={isOpen}
         items={items}
-        getItemLabel={(item) => item}
         anchorRef={ref}
         onClickOutside={() => setIsOpen(false)}
+        direction="downStartLeft"
       />
-    </>
+    </StoryBookExample>
   );
 };
 ```
