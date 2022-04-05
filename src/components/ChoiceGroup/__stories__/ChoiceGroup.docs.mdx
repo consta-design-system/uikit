@@ -429,6 +429,8 @@ export const ChoiceGroupExampleWidth = () => {
 
 Если кнопки не помещаются на мобильный экран, можно добавить горизонтальную прокрутку или преобразовать в [RadioGroup](?path=/docs/components-radiogroup--playground).
 
+##### Пример компонента с прокруткой
+
 ```css
 .ChoiceGroupExampleAdaptiveScroll {
   overflow: auto;
@@ -474,7 +476,11 @@ export const ChoiceGroupExampleAdaptiveScroll = () => {
 
 <ChoiceGroupExampleAdaptiveScroll />
 
-Ниже в примере если экран до 800px по ширине то отображаем `RadioGroup`, если больше то `RadioGroup`
+##### Пример с преобразованием в RadioGroup
+
+Если экран меньше 800 px по ширине, отображаем `ChoiceGroup`, если больше — `RadioGroup`.
+
+> Чтобы посмотреть, как это работает, уменьшите ширину окна в браузере
 
 ```tsx
 const items: string[] = ['один', 'два', 'три', 'четыре', 'пять'];
