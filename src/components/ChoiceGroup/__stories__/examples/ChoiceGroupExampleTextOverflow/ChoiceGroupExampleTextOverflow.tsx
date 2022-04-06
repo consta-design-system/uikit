@@ -24,6 +24,7 @@ export const ChoiceGroupExampleTextOverflow = () => {
         items={items}
         getLabel={(item) => item}
         name="ChoiceGroupExampleTextOverflow"
+        truncate
       />
     </StoryBookExample>
   );

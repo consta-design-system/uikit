@@ -21,6 +21,10 @@ import {
 } from './examples/ChoiceGroupExampleSwitch/ChoiceGroupExampleSwitch';
 import { ChoiceGroupExampleDisabled } from './examples/ChoiceGroupExampleDisabled/ChoiceGroupExampleDisabled';
 import { ChoiceGroupExampleSomeDisabled } from './examples/ChoiceGroupExampleSomeDisabled/ChoiseGroupExampleSomeDisabled';
+import {
+  ChoiceGroupExampleAdaptiveScroll,
+  ChoiceGroupExampleAdaptiveUseBreakpoints,
+} from './examples/ChoiceGroupExampleAdaptive/ChoiceGroupExampleAdaptive';
 
 <!--info
 description: Группа кнопок. Можно выбрать один или несколько вариантов.
@@ -57,6 +61,7 @@ import { ChoiceGroup } from '@consta/uikit/ChoiceGroup';
 - [Неактивные кнопки](#неактивные-кнопки)
   - [Неактивная кнопка](#неактивная-кнопка)
   - [Неактивная группа кнопок](#неактивная-группа-кнопок)
+- [Адаптивность](#адаптивность)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
@@ -95,7 +100,8 @@ export const ChoiceGroupExample = () => {
 
 ### Слишком длинный текст
 
-Если группа кнопок слишком большая или текст на кнопке слишком длинный и не помещается в выделенную область, текст на кнопке сокращается, в конце появляется многоточие.
+Если группа кнопок слишком большая или текст на кнопке слишком длинный и не помещается в выделенную область,
+текст на кнопке сокращается, в конце появляется многоточие, если включить модификатор `truncate`
 
 ```tsx
 type Item = string;
@@ -118,6 +124,7 @@ export const ChoiceGroupExampleTextOverflow = () => {
       getLabel={(item) => item}
       multiple={false}
       name="ChoiceGroupExampleTextOverflow"
+      truncate
     />
   );
 };
@@ -414,6 +421,103 @@ export const ChoiceGroupExampleWidth = () => {
 ```
 
 <ChoiceGroupExampleDisabled />
+
+## Адаптивность
+
+Если компонент не помещается на мобильный экран или в родительский контейнер
+по ширине, он сжимается, текст обрезается, в конце добавляется многоточие. [Посмотреть пример](#слишком-длинный-текст)
+
+Если кнопки не помещаются на мобильный экран, можно добавить горизонтальную прокрутку или преобразовать в [RadioGroup](?path=/docs/components-radiogroup--playground).
+
+##### Пример компонента с прокруткой
+
+```css
+.ChoiceGroupExampleAdaptiveScroll {
+  overflow: auto;
+  width: 100%;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}
+```
+
+```tsx
+const items: string[] = [
+  'один',
+  'два',
+  'три',
+  'четыре',
+  'пять',
+  'шесть',
+  'семь',
+  'восемь',
+  'девять',
+];
+
+const cnChoiceGroupExampleAdaptiveScroll = cn('ChoiceGroupExampleAdaptiveScroll');
+
+const getLabel = (item: string) => item;
+
+export const ChoiceGroupExampleAdaptiveScroll = () => {
+  return (
+    <div className={cnChoiceGroupExampleAdaptiveScroll()}>
+      <ChoiceGroup
+        name="ChoiceGroupExampleAdaptiveScroll"
+        items={items}
+        getLabel={getLabel}
+        form="round"
+      />
+    </div>
+  );
+};
+```
+
+<ChoiceGroupExampleAdaptiveScroll />
+
+##### Пример с преобразованием в RadioGroup
+
+Если экран меньше 800 px по ширине, отображаем `ChoiceGroup`, если больше — `RadioGroup`.
+
+> Чтобы посмотреть, как это работает, уменьшите ширину окна в браузере
+
+```tsx
+const items: string[] = ['один', 'два', 'три', 'четыре', 'пять'];
+
+const getLabel = (item: string) => item;
+
+export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
+  const { desktop } = useBreakpoints({ desktop: 800 });
+  const [value, setValue] = useState(items2[0]);
+  const onChandge = useCallback(({ value }: { value: string }) => setValue(value), []);
+
+  if (desktop) {
+    return (
+      <ChoiceGroup
+        name="ChoiceGroupExampleAdaptiveUseBreakpoints"
+        items={items}
+        getLabel={getLabel}
+        form="round"
+        value={value}
+        onChange={onChandge}
+      />
+    );
+  }
+
+  return (
+    <RadioGroup
+      name="ChoiceGroupExampleAdaptiveUseBreakpoints"
+      items={items}
+      getLabel={getLabel}
+      value={value}
+      onChange={onChandge}
+    />
+  );
+};
+```
+
+<ChoiceGroupExampleAdaptiveUseBreakpoints />
 
 ## Импорт
 
