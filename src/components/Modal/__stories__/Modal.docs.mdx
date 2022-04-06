@@ -23,6 +23,7 @@ import { Modal } from '@consta/uikit/Modal';
 - [Содержимое](#содержимое)
 - [Расположение](#расположение)
 - [Подложка](#подложка)
+- [Вложенные всплывающие окна](#zIndex-и-вложенные-всплывающие-окна)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
 
@@ -212,11 +213,11 @@ export function ModalExampleNoOverlay() {
 
 <ModalExampleNoOverlay />
 
-## ZIndex и вложенные всплывающие окна
+## zIndex и вложенные всплывающие окна
 
-Возможно вкладывать компонеы с всплывающими окнами в модалное окно.
-В этом случае все вложенные элемены буду находися выше модалки.
-Если указывать `zIndex` через свойсво `style`, то все вложенные всплывающие окна получат `zIndex + 1`
+В модальное окно можно вкладывать компоненты с всплывающими окнами, например, другие модальные окна или тултипы.
+
+В этом случае все вложенные элементы располагаются выше первого модального окна. Если указывать `zIndex` через свойство `style`, все вложенные всплывающие окна получат `zIndex + 1`.
 
 ```tsx
 const ButtonWithTooltip = withTooltip({ mode: 'click', content: 'Я тултип' })(Button);
@@ -252,7 +253,7 @@ export function ModalExampleZIndex() {
         />
         <ButtonWithTooltip
           className={cnMixSpace({ mB: 'm', mR: '6xl' })}
-          label="нажми и появится тултип"
+          label="Нажмите, и появится тултип"
         />
         <Button
           size="m"
@@ -276,7 +277,10 @@ export function ModalExampleZIndex() {
             onChange={({ value }) => console.log(value)}
             placeholder="Один или два"
           />
-          <ButtonWithTooltip className={cnMixSpace({ mB: 'm' })} label="нажми и появится тултип" />
+          <ButtonWithTooltip
+            className={cnMixSpace({ mB: 'm' })}
+            label="Нажмите, и появится тултип"
+          />
         </Modal>
       </Modal>
     </div>

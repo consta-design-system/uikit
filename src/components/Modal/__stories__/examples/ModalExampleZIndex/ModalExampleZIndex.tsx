@@ -41,7 +41,7 @@ export function ModalExampleZIndex() {
         />
         <ButtonWithTooltip
           className={cnMixSpace({ mB: 'm', mR: '6xl' })}
-          label="нажми и появится тултип"
+          label="Нажмите, и появится тултип"
         />
         <Button
           size="m"
@@ -65,7 +65,10 @@ export function ModalExampleZIndex() {
             onChange={({ value }) => console.log(value)}
             placeholder="Один или два"
           />
-          <ButtonWithTooltip className={cnMixSpace({ mB: 'm' })} label="нажми и появится тултип" />
+          <ButtonWithTooltip
+            className={cnMixSpace({ mB: 'm' })}
+            label="Нажмите, и появится тултип"
+          />
         </Modal>
       </Modal>
     </div>
