@@ -59,3 +59,17 @@ export const DatePickerExampleTypeDateTimeRange = () => {
     </StoryBookExample>
   );
 };
+
+export const DatePickerExampleTypeTime = () => {
+  const [value, setValue] = useState<Date | null>();
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <DatePicker
+        type="time"
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        style={{ zIndex: 2 }}
+      />
+    </StoryBookExample>
+  );
+};

@@ -10,9 +10,11 @@ import {
   datePickerPropFormatTypeDateTime,
   datePickerPropPlaceholderTypeDateTime,
   datePickerPropSeparatorDefault,
+  getParts,
+  getPartsDate,
 } from '../helpers';
 
-import { DatePickerFieldTypeDateTimeProps, getParts, getPartsDate, useImask } from './helpers';
+import { DatePickerFieldTypeDateTimeProps, useImask } from './helpers';
 
 export const DatePickerFieldTypeDateTime = React.forwardRef<
   HTMLDivElement,
@@ -41,7 +43,7 @@ export const DatePickerFieldTypeDateTime = React.forwardRef<
     value && isValid(value) ? format(value, formatProp) : null,
   );
 
-  const formatParts = useMemo(() => getParts(formatProp, separator), [formatProp, separator]);
+  const formatParts = useMemo(() => getParts(formatProp, separator, true), [formatProp, separator]);
 
   const handleChange = useCallback(
     (e: Event, stringValue: string | null) => {
@@ -54,7 +56,15 @@ export const DatePickerFieldTypeDateTime = React.forwardRef<
           return;
         }
 
-        const partsDate = getPartsDate(stringValue, formatProp, separator);
+        const partsDate = getPartsDate(stringValue, formatProp, separator, true, [
+          'dd',
+          'MM',
+          'yyyy',
+          'HH',
+          'mm',
+          'ss',
+        ]);
+
         const [dd, MM, yyyy, HH, mm, ss] = partsDate;
 
         if (partsDate.filter((item) => !!item).length === formatParts.length) {

@@ -28,6 +28,7 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> = forw
       multiplicityMinutes: multiplicityMinutesProp,
       multiplicitySeconds: multiplicitySecondsProp,
       renderAdditionalControls,
+      style,
       ...otherProps
     } = props;
 
@@ -98,6 +99,7 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> = forw
           multiplicityHours={multiplicityHours}
           multiplicitySeconds={multiplicitySeconds}
           multiplicityMinutes={multiplicityMinutes}
+          style={style}
         />
         <DatePickerDropdown
           ref={calendarRef}
@@ -118,6 +120,7 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> = forw
           multiplicityHours={multiplicityHours}
           multiplicitySeconds={multiplicitySeconds}
           multiplicityMinutes={multiplicityMinutes}
+          zIndex={typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined}
         />
       </>
     );

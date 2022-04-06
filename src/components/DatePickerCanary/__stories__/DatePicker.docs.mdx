@@ -11,6 +11,7 @@ import {
   DatePickerExampleTypeDateRange,
   DatePickerExampleTypeDateTime,
   DatePickerExampleTypeDateTimeRange,
+  DatePickerExampleTypeTime,
 } from './examples/DatePickerExampleType/DatePickerExampleType';
 import { DatePickerExampleMulti } from './examples/DatePickerExampleMulti/DatePickerExampleMulti';
 
@@ -69,6 +70,7 @@ export const DatePickerExampleValue = () => {
 - `date-range` — позволяет выбрать период: дату начала и дату конца (показывает два поля ввода).
 - `date-time` — позволяет выбрать одну дату cо временем (показывает одно поле ввода),
 - `date-time-range` — позволяет выбрать период cо временем (показывает два поля ввода),
+- `time` — позволяет выбрать время (показывает одно поле ввода).
 
 ```tsx
 const DatePickerExampleTypeDate = () => {
@@ -101,14 +103,21 @@ const DatePickerExampleTypeDateTime = () => {
 export const DatePickerExampleTypeDateTimeRange = () => {
   const [value, setValue] = useState<[Date?, Date?] | null>(null);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <DatePicker type="date-time-range" value={value} onChange={({ value }) => setValue(value)} />
-    </StoryBookExample>
+    <DatePicker type="date-time-range" value={value} onChange={({ value }) => setValue(value)} />
   );
 };
 ```
 
 <DatePickerExampleTypeDateTimeRange />
+
+```tsx
+export const DatePickerExampleTypeTime = () => {
+  const [value, setValue] = useState<Date | null>(null);
+  return <DatePicker type="time" value={value} onChange={({ value }) => setValue(value)} />;
+};
+```
+
+<DatePickerExampleTypeTime />
 
 ## Формат даты
 
@@ -401,7 +410,7 @@ type DatePickerPropOnError = (
 | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | [`onChange?`](#выбор-даты)                                                 | `DatePickerPropOnChange<TYPE>`                                                                                                                                      | -                     | Событие выбора даты или периода                                                                                        |
 | [`value?`](#выбор-даты)                                                    | `DatePickerPropValue<TYPE>`                                                                                                                                         | -                     | Выбранная дата или период                                                                                              |
-| [`type?`](#тип-дата-или-период)                                            | `'date'`, `'date-range'`, `'date-time'`                                                                                                                             | `date`                | Тип календаря: выбор даты или выбор периода                                                                            |
+| [`type?`](#тип-дата-или-период)                                            | `'date', 'date-range', 'date-time', 'date-time-range', 'time'`                                                                                                      | `date`                | Тип календаря: выбор даты, времени или выбор периода                                                                   |
 | [`label?`](#лейбл)                                                         | `string`                                                                                                                                                            | -                     | Лейбл к полю ввода                                                                                                     |
 | [`labelPosition?`](#лейбл)                                                 | `'top', 'left'`                                                                                                                                                     | `'top'`               | Положение лейбла относительно поля                                                                                     |
 | [`caption?`](#подпись)                                                     | `string`                                                                                                                                                            | -                     | Подпись под полем ввода                                                                                                |
