@@ -1,5 +1,29 @@
 # Changelog
 
+## v3.18.3 (06/04/2022)
+Самое важное:
+- В `DatePicker` добавлен новый тип `time` — когда нужно указать только время.
+- Добавили в документацию к компонентам `ChoiceGroup`, `Card`, `Button `раздел по адаптивности. Постепенно добавим такой раздел во все компоненты. 
+- Теперь если во всплывающие окна (к примеру, `Modal`) положить компоненты с всплывающими окнами (к примеру, `Select`), то `Select` будет всегда выше по `zIndex`, даже если в `Modal` указали свой `zIndex`.
+
+---
+
+- [docs(common): change links to vercel (#2199)](https://github.com/consta-design-system/uikit/commit/03c0113b8e80cd0f7decce33b588a5777ebc9a2a) - [@arhayka](https://github.com/arhayka)
+- [feat(Combobox): hide label for not found while items list is empty (#2181)](https://github.com/consta-design-system/uikit/commit/bee7232f6c693ee9ccffb2263fb271e1ee8fdd2e) - [@karpovfv](https://github.com/karpovfv)
+- [feat(DatePicker): added type time (#2174)](https://github.com/consta-design-system/uikit/commit/09ccf9cd26a827f71ac14c45dbb512b287420208) - [@gizeasy](https://github.com/gizeasy)
+- [docs(ContextMenu): fix examples (#2188)](https://github.com/consta-design-system/uikit/commit/43ae44bb1acb44e18db44aef7613e4bafaa0ecce) - [@arhayka](https://github.com/arhayka)
+- [docs(ChoiceGroup): add adaptive section (#2186)](https://github.com/consta-design-system/uikit/commit/d3d5cebfd0ac626ea6116d09afb9b7c8668155bd) - [@arhayka](https://github.com/arhayka)
+- [feat(PortalWithTheme): zIndex processing added (#2191)](https://github.com/consta-design-system/uikit/commit/d2942420986d1537105dd2e2cde15a983bb8cf40) - [@gizeasy](https://github.com/gizeasy)
+- [docs(Card): add adaptive section (#2184)](https://github.com/consta-design-system/uikit/commit/c2e199616357790e7053db3ec60a7e54ee6d68a6) - [@arhayka](https://github.com/arhayka)
+- [docs(Button): add adaptive section (#2182)](https://github.com/consta-design-system/uikit/commit/4b872f338bc2da5f48a1a2cc46ea4c10fbccc27a) - [@arhayka](https://github.com/arhayka)
+- [fix(ContextMenuCanary): fix timeout on close inner levels (#2173)](https://github.com/consta-design-system/uikit/commit/62d6c20f66ea2015a618dcfe80b49a0a7739d2b1) - [@N1MBER](https://github.com/N1MBER)
+- [fix(Pagination): remove usePropsHandler](https://github.com/consta-design-system/uikit/commit/911f3e54ea85ec5a6a0b665a9d278bfe833c6ec0) - [@gizeasy](https://github.com/gizeasy)
+- [chore(deploy): edit public path (#2179)](https://github.com/consta-design-system/uikit/commit/955a0fc47c33ddcfef75cefb313e7ba359e2de2d) - [@gizeasy](https://github.com/gizeasy)
+- [chore(deploy): conditional comment on a pull request (#2176)](https://github.com/consta-design-system/uikit/commit/8bddc476e4b2361888a50d61679c8b9883cf3418) - [@gizeasy](https://github.com/gizeasy)
+- [test(ContextMenuCanary): add tests to ContextMenuCanary (#2175)](https://github.com/consta-design-system/uikit/commit/254639c3428eb47ed74604061871202ddeb4684f) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
 ## v3.18.2 (30/03/2022)
 - [fix(Pagination): conditional rendering moved to the bottom (#2167)](https://github.com/consta-design-system/uikit/commit/530c2e9facdf821af0cdf195e2a701435deec398) - [@gizeasy](https://github.com/gizeasy)
 - [chore(deploy): add deploy automatization (#2166)](https://github.com/consta-design-system/uikit/commit/2d051e3578d5cbf0317b96ef8b3b28750dea5400) - [@gizeasy](https://github.com/gizeasy)
@@ -473,43 +497,3 @@
 - [fix(TextField): change type of component properties (#1474)](https://github.com/gazprom-neft/consta-uikit/commit/9f4411861b612b1622dffa0d1719040bd8d0811c) - [@N1MBER](https://github.com/N1MBER)
 - [docs(Table): updated doc for activeRow props (#1527)](https://github.com/gazprom-neft/consta-uikit/commit/ed41c0ded7dd65bf90989580b69804f6d0530e50) - [@AntonS86](https://github.com/AntonS86)
 - [feat(Modal, SideBar): close by esc (#1498)](https://github.com/gazprom-neft/consta-uikit/commit/3888bb602cd1eb505fd81c516327a9febfe7cccb) - [@N1KN](https://github.com/N1KN)
-
---------------------
-
-## v3.2.0 (08/09/2021)
-**Важное из обновления:**
-- Добавлен миксин `MixCard`
-- Добавлен компонент `Card`
-- Переработана документация по тематизации
-
----
-
-- [docs(MixCard): moved docs to stories.mdx](https://github.com/gazprom-neft/consta-uikit/commit/9a2e042e699f543fc3c6812e22149279bdd2607d) - [@gizeasy](https://github.com/gizeasy)
-- [ docs(Mixin): add documentation for MixCard (#1532)](https://github.com/gazprom-neft/consta-uikit/commit/f9bfbf218146605e15c9e0639be7797f19c95cd1) - [@N1MBER](https://github.com/N1MBER)
-- [feat(Card): add mixin and component card(#1508)](https://github.com/gazprom-neft/consta-uikit/commit/11737b816db2784ba11e2a5131d1b72fd043dab7) - [@N1MBER](https://github.com/N1MBER)
-- [feat(TabsFitModeScrollWrapper): add native scroll (#1528)](https://github.com/gazprom-neft/consta-uikit/commit/bb08d735f9596c18cf36184caa736b6e5864dc32) - [@N1MBER](https://github.com/N1MBER)
-- [chore(deps): bump path-parse from 1.0.6 to 1.0.7 (#1418)](https://github.com/gazprom-neft/consta-uikit/commit/bb1c90c552320e844ec837b4ceba702b6f928c2b) - [@dependabot](https://github.com/dependabot)
-- [chore(deps): bump tar from 4.4.13 to 4.4.19 (#1471)](https://github.com/gazprom-neft/consta-uikit/commit/00b14353fbad6ac9e4c27047d515d68a16a1e99d) - [@dependabot](https://github.com/dependabot)
-- [docs(thematization): rewrite docs about theme (#1454)](https://github.com/gazprom-neft/consta-uikit/commit/f5078d803e574d9a5592f9aacb0aad69129c9286) - [@arhayka](https://github.com/arhayka)
-- [docs(Theme): rewrite docs (#1507)](https://github.com/gazprom-neft/consta-uikit/commit/d64e2bfc6aadb74da8ed81a681e82a884b504a74) - [@arhayka](https://github.com/arhayka)
-- [docs(BasicSelect): docs review (#1509)](https://github.com/gazprom-neft/consta-uikit/commit/50fedaf120b9b743f4fe31042c29348d57e1b81f) - [@arhayka](https://github.com/arhayka)
-- [docs(Button): review docs (#1510)](https://github.com/gazprom-neft/consta-uikit/commit/8a1b02a2b65c2913699f96f774c8e7b7056e0ff6) - [@arhayka](https://github.com/arhayka)
-- [docs(Checkbox): docs review (#1511)](https://github.com/gazprom-neft/consta-uikit/commit/4e7e4a55e1a1ade876c3dbec9885e6fba1e7f22f) - [@arhayka](https://github.com/arhayka)
-- [docs(ComboboxDeprecated): docs review (#1512)](https://github.com/gazprom-neft/consta-uikit/commit/a32e2dcb0f8d0b87750f015a56423908dea6a9bc) - [@arhayka](https://github.com/arhayka)
-- [docs(ChoiceGroup): docs review (#1516)](https://github.com/gazprom-neft/consta-uikit/commit/a51c36be27166507bf4c5749719b9a2243a0d2df) - [@arhayka](https://github.com/arhayka)
-- [docs(ContextMenu): docs review (#1517)](https://github.com/gazprom-neft/consta-uikit/commit/c722ac8131756a0f1272076c1b78526616cfd8f5) - [@arhayka](https://github.com/arhayka)
-- [docs(FileField): docs review (#1519)](https://github.com/gazprom-neft/consta-uikit/commit/beeb37d572d0bbf954fc7f51b1e5789de37e43b9) - [@arhayka](https://github.com/arhayka)
-- [docs(MultiComboboxDepecated): docs review (#1520)](https://github.com/gazprom-neft/consta-uikit/commit/f0d9494f47c7fcd5ed512bfa8e27cf8048d1b8a1) - [@arhayka](https://github.com/arhayka)
-- [docs(Select): docs review (#1521)](https://github.com/gazprom-neft/consta-uikit/commit/aadbecf0847672a22f5f9349db4ce6ed5522fc7b) - [@arhayka](https://github.com/arhayka)
-- [docs(Switch): docs review (#1522)](https://github.com/gazprom-neft/consta-uikit/commit/c53b08a390e5469cb57d2bc5612113cca22830be) - [@arhayka](https://github.com/arhayka)
-- [docs(SwitchGroup): edit docs, add examples (#1529)](https://github.com/gazprom-neft/consta-uikit/commit/edef830232e32fb5e6fe6b6be8d5304948af7418) - [@arhayka](https://github.com/arhayka)
-- [fix(components): fix misprint (#1526)](https://github.com/gazprom-neft/consta-uikit/commit/656cedf4b25eeffd7f170daa270bd102a2b19ad3) - [@kolebayev](https://github.com/kolebayev)
-- [refactor(Checkbox): refactor ref (#1514)](https://github.com/gazprom-neft/consta-uikit/commit/5e1f48ab70bfb9b3a313c4a7cf4f70f2c0ce3893) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Text): Add underline & cursor props (#1513)](https://github.com/gazprom-neft/consta-uikit/commit/ae964fb334536bc86a7c584da5ce90e6d3ec6a57) - [@N1KN](https://github.com/N1KN)
-- [fix(Table): setting automatic column width when changing the window width (#1505)](https://github.com/gazprom-neft/consta-uikit/commit/57d05fc1f8a673f3e814f8ecf6fa8d59892e6ea2) - [@AntonS86](https://github.com/AntonS86)
-- [feat(TableNumberFilter): added className props (#1502)](https://github.com/gazprom-neft/consta-uikit/commit/3ced9f3a2e8de0de014dadec530996c2e6d345a2) - [@AntonS86](https://github.com/AntonS86)
-- [feat(Table): add onRowClick callback (#1489)](https://github.com/gazprom-neft/consta-uikit/commit/69e2059bb9f9582b96442107b384acd5526d8fe9) - [@N1KN](https://github.com/N1KN)
-- [fix(Table): added a wrapper for an empty placeholder, if placeholder is a string (#1497)](https://github.com/gazprom-neft/consta-uikit/commit/6044130d3fc5dc614e3defce7527c62d18cfee5f) - [@AntonS86](https://github.com/AntonS86)
-- [refactor(Attach, Attachment): rename Attach to Attachment (#1500)](https://github.com/gazprom-neft/consta-uikit/commit/c72d379b6d10b8808f223f00d7b51f05efbc178f) - [@N1KN](https://github.com/N1KN)
-- [fix(Table): fixed onFiltersUpdated not called on removeAllSelectedFilters (#1493)](https://github.com/gazprom-neft/consta-uikit/commit/07a1cf5cd7414a54b3007cc54658142bc2bb5a7a) - [@N1KN](https://github.com/N1KN)
-- [chore(gh-actions): add action for automatic test](https://github.com/gazprom-neft/consta-uikit/commit/5e6cd1e7ed99047a8c214877542ce20b17ce0962) - [@gizeasy](https://github.com/gizeasy)
