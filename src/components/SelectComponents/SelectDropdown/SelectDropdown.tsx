@@ -148,7 +148,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
                 </Fragment>
               );
             })}
-            {!isLoading && notFound && labelForNotFound && (
+            {!isLoading && hasItems && notFound && labelForNotFound && (
               <Text className={cnSelectDropdown('LabelForNotFound')}>{labelForNotFound}</Text>
             )}
             {!isLoading && !hasItems && labelForEmptyItems && (
