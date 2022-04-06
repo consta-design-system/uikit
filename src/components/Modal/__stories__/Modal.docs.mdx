@@ -5,6 +5,8 @@ import {
   ModalExampleNoOverlay,
 } from './examples/ModalExample/ModalExample';
 
+import { ModalExampleZIndex } from './examples/ModalExampleZIndex/ModalExampleZIndex';
+
 <!--info
 description: Всплывающее окно. Показывает контент поверх основной страницы.
 -->
@@ -21,6 +23,7 @@ import { Modal } from '@consta/uikit/Modal';
 - [Содержимое](#содержимое)
 - [Расположение](#расположение)
 - [Подложка](#подложка)
+- [Вложенные всплывающие окна](#zIndex-и-вложенные-всплывающие-окна)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
 
@@ -209,6 +212,83 @@ export function ModalExampleNoOverlay() {
 ```
 
 <ModalExampleNoOverlay />
+
+## zIndex и вложенные всплывающие окна
+
+В модальное окно можно вкладывать компоненты с всплывающими окнами, например, другие модальные окна или тултипы.
+
+В этом случае все вложенные элементы располагаются выше первого модального окна. Если указывать `zIndex` через свойство `style`, все вложенные всплывающие окна получат `zIndex + 1`.
+
+```tsx
+const ButtonWithTooltip = withTooltip({ mode: 'click', content: 'Я тултип' })(Button);
+
+export function ModalExampleZIndex() {
+  const [isModalOpen, setIsModalOpen] = useFlag();
+  const [isModal2Open, setIsModal2Open] = useFlag();
+
+  return (
+    <div className={cnDocsDecorator('Section')}>
+      <Button
+        size="m"
+        view="primary"
+        label="Открыть модальное окно"
+        width="default"
+        onClick={setIsModalOpen.toogle}
+      />
+      <Modal
+        className={cnMixSpace({ p: 'm' })}
+        isOpen={isModalOpen}
+        hasOverlay
+        onClickOutside={setIsModalOpen.off}
+        onEsc={setIsModalOpen.off}
+        style={{ zIndex: 100 }}
+      >
+        <Select
+          className={cnMixSpace({ mB: 'm' })}
+          items={['один', 'два']}
+          getItemLabel={(item) => item}
+          getItemKey={(item) => item}
+          onChange={({ value }) => console.log(value)}
+          placeholder="Один или два"
+        />
+        <ButtonWithTooltip
+          className={cnMixSpace({ mB: 'm', mR: '6xl' })}
+          label="Нажмите, и появится тултип"
+        />
+        <Button
+          size="m"
+          view="primary"
+          label="Открыть вложенное модальное окно"
+          width="default"
+          onClick={setIsModal2Open.toogle}
+        />
+        <Modal
+          className={cnMixSpace({ p: 'm' })}
+          isOpen={isModal2Open}
+          hasOverlay
+          onClickOutside={setIsModal2Open.off}
+          onEsc={setIsModal2Open.off}
+        >
+          <Select
+            className={cnMixSpace({ mB: 'm' })}
+            items={['один', 'два']}
+            getItemLabel={(item) => item}
+            getItemKey={(item) => item}
+            onChange={({ value }) => console.log(value)}
+            placeholder="Один или два"
+          />
+          <ButtonWithTooltip
+            className={cnMixSpace({ mB: 'm' })}
+            label="Нажмите, и появится тултип"
+          />
+        </Modal>
+      </Modal>
+    </div>
+  );
+}
+```
+
+<ModalExampleZIndex />
 
 ## Импорт
 
