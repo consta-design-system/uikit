@@ -42,7 +42,7 @@ export const ReposDataBase = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="https://consta-uikit.vercel.app/"
+            href="http://uikit.gizeasy.ru"
             target="_blank"
           >
             Документация и стенд
@@ -83,7 +83,7 @@ export const ReposDataBase = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="https://consta-charts.vercel.app/"
+            href="http://charts.gizeasy.ru"
             target="_blank"
           >
             Документация
@@ -138,7 +138,7 @@ export const ReposDataBase = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="https://consta-widgets.consta.vercel.app/"
+            href="http://widgets.gizeasy.ru/"
             target="_blank"
           >
             Документация
@@ -194,7 +194,7 @@ export const ReposDataSingleComponents = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="https://header-consta.vercel.app/"
+            href="http://header.gizeasy.ru/"
             target="_blank"
           >
             Документация
@@ -245,7 +245,7 @@ export const ReposDataSingleComponents = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="http://stats-consta.vercel.app/"
+            href="http://stats.gizeasy.ru/"
             target="_blank"
           >
             Документация
@@ -275,7 +275,7 @@ export const ReposDataSingleComponents = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="http://analytic-ui.vercel.app/"
+            href="http://analytic-ui.gizeasy.ru/"
             target="_blank"
           >
             Документация
@@ -304,7 +304,7 @@ export const ReposDataSingleComponents = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="http://gpn-responses.vercel.app/"
+            href="http://gpn-responses.gizeasy.ru/"
             target="_blank"
           >
             Документация
@@ -356,7 +356,7 @@ export const ReposDataAdapters = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="https://consta-table.vercel.app/"
+            href="http://rc-table-adapter.gizeasy.ru/"
             target="_blank"
           >
             Документация
@@ -395,7 +395,7 @@ export const ReposDataAdapters = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="https://consta-tree.vercel.app/"
+            href="http://rc-tree-adapter.gizeasy.ru/"
             target="_blank"
           >
             Документация
@@ -434,7 +434,7 @@ export const ReposDataAdapters = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="https://gantt-task-react-adapter.vercel.app/?path=/story/*"
+            href="http://gantt-task-react-adapter.gizeasy.ru/"
             target="_blank"
           >
             Документация
