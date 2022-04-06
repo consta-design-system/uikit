@@ -81,6 +81,7 @@ const defaultKnobs = () => ({
   size: select('size', breadcrumbPropSize, breadcrumbPropSizeDefault),
   fitMode: select('fitMode', breadcrumbPropFitMode, breadcrumbPropFitModeDefault),
   withIcon: boolean('withIcon', false),
+  withSubMenu: boolean('withSubMenu', false),
   onlyIconRoot: boolean('onlyIconRoot', false),
   lastItemIsLink: boolean('lastItemIsLink', false),
 });
@@ -88,7 +89,7 @@ const defaultKnobs = () => ({
 const cnBreadcrumbsStories = cn('BreadcrumbsStories');
 
 export function Playground() {
-  const { size, onlyIconRoot, fitMode, withIcon, lastItemIsLink } = defaultKnobs();
+  const { withSubMenu, size, onlyIconRoot, fitMode, withIcon, lastItemIsLink } = defaultKnobs();
 
   return (
     <div className={cnBreadcrumbsStories()}>
@@ -100,6 +101,7 @@ export function Playground() {
         onItemClick={(props) => {
           props.e.preventDefault();
         }}
+        getItemSubMenu={(item) => (withSubMenu ? item.subMenu : undefined)}
         lastItemIsLink={lastItemIsLink}
         getItemIcon={(item) => (withIcon ? item.icon || IconDocFilled : undefined)}
       />

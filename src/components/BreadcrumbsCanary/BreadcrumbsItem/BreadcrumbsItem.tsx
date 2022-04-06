@@ -2,7 +2,6 @@ import './BreadcrumbsItem.css';
 
 import React, { forwardRef, useRef } from 'react';
 
-import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
 import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { IconArrowRight } from '../../../icons/IconArrowRight/IconArrowRight';
 import { IconSelect } from '../../../icons/IconSelect/IconSelect';
@@ -49,9 +48,7 @@ function BreadcrumbsItemRender<ITEM>(
   const [open, setOpen] = useFlag();
   const [hovered, setHovered] = useFlag();
 
-  const breadcrumbsItemRef = useRef<HTMLLinkElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const contextMenuRef = useRef<HTMLDivElement>(null);
 
   const Icon = item && getItemIcon?.(item);
   const onlyIcon = Icon && onlyIconProp;
@@ -83,12 +80,6 @@ function BreadcrumbsItemRender<ITEM>(
     onMouseLeave: setHovered.off,
   };
 
-  useClickOutside({
-    isActive: true,
-    ignoreClicksInsideRefs: [breadcrumbsItemRef, buttonRef, contextMenuRef],
-    handler: setOpen.off,
-  });
-
   return (
     <li className={cnBreadcrumbsItem(null, [className])} ref={ref} {...otherProps}>
       {delimiter && (
@@ -106,7 +97,6 @@ function BreadcrumbsItemRender<ITEM>(
             onClick={handleClick}
             size={size}
             truncate={!onlyIcon}
-            ref={breadcrumbsItemRef}
             {...hoveredProps}
             {...linkProps}
           >
@@ -134,29 +124,21 @@ function BreadcrumbsItemRender<ITEM>(
           )}
         </>
       )}
-
       {subMenu && (
         <ContextMenu
           isOpen={open}
           items={subMenu}
-          ref={contextMenuRef}
           getItemLabel={getItemLabel}
           getItemSubMenu={getItemSubMenu}
           getItemLeftIcon={getItemIcon}
           onItemClick={onItemClick}
           getItemAs={getItemAs(getItemHref)}
           getItemAttributes={getItemAttributes(getItemHref)}
-          direction="downStartLeft"
-          possibleDirections={[
-            'downCenter',
-            'upCenter',
-            'downStartLeft',
-            'upStartLeft',
-            'downStartRight',
-            'upStartRight',
-          ]}
-          anchorRef={breadcrumbsItemRef}
+          direction="downStartRight"
+          possibleDirections={['downStartLeft', 'upStartLeft', 'downStartRight', 'upStartRight']}
+          anchorRef={buttonRef}
           offset="xs"
+          onClickOutside={setOpen.off}
           size={contextMenuSizeMap[size]}
         />
       )}
