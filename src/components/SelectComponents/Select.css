@@ -149,12 +149,16 @@
 
       &_roundBrick .Select-Control {
         padding-left: calc(var(--input-space) * 1.6);
-        border-radius: calc(var(--input-height) / 2) 0 0 calc(var(--input-height) / 2);
+        border-radius:
+          calc(var(--input-height) / 2) 0 0
+          calc(var(--input-height) / 2);
       }
 
       &_brickRound .Select-Control {
         padding-right: calc(var(--input-space) * 1.6);
-        border-radius: 0 calc(var(--input-height) / 2) 99rem calc(var(--input-height) / 2);
+        border-radius:
+          0 calc(var(--input-height) / 2) 99rem
+          calc(var(--input-height) / 2);
       }
 
       &_brickClear .Select-Control {
@@ -170,13 +174,17 @@
       &_clearRound .Select-Control {
         padding-right: calc(var(--input-space) * 1.6);
         border-left-width: 0;
-        border-radius: 0 calc(var(--input-height) / 2) calc(var(--input-height) / 2) 0;
+        border-radius:
+          0 calc(var(--input-height) / 2)
+          calc(var(--input-height) / 2) 0;
       }
 
       &_roundClear .Select-Control {
         padding-left: calc(var(--input-space) * 1.6);
         border-right-width: 0;
-        border-radius: calc(var(--input-height) / 2) 0 0 calc(var(--input-height) / 2);
+        border-radius:
+          calc(var(--input-height) / 2) 0 0
+          calc(var(--input-height) / 2);
       }
 
       &_clearClear .Select-Control {
@@ -188,28 +196,28 @@
     }
 
     &_view_default.Select-SelectContainer_form_clear.Select-SelectContainer_focused .Select-Control,
-    &_view_default.Select-SelectContainer_form_clearClear.Select-SelectContainer_focused
-      .Select-Control {
-      box-shadow: var(--control-border-width) 0 var(--color-control-bg-border-focus),
-        calc(-1 * var(--control-border-width)) 0 var(--color-control-bg-border-focus);
+    &_view_default.Select-SelectContainer_form_clearClear.Select-SelectContainer_focused .Select-Control {
+      box-shadow:
+        var(--control-border-width) 0
+        var(--color-control-bg-border-focus),
+        calc(-1 * var(--control-border-width)) 0
+        var(--color-control-bg-border-focus);
     }
 
-    &_view_default.Select-SelectContainer_form_defaultClear.Select-SelectContainer_focused
-      .Select-Control,
-    &_view_default.Select-SelectContainer_form_brickClear.Select-SelectContainer_focused
-      .Select-Control,
-    &_view_default.Select-SelectContainer_form_roundClear.Select-SelectContainer_focused
-      .Select-Control {
-      box-shadow: var(--control-border-width) 0 var(--color-control-bg-border-focus);
+    &_view_default.Select-SelectContainer_form_defaultClear.Select-SelectContainer_focused .Select-Control,
+    &_view_default.Select-SelectContainer_form_brickClear.Select-SelectContainer_focused .Select-Control,
+    &_view_default.Select-SelectContainer_form_roundClear.Select-SelectContainer_focused .Select-Control {
+      box-shadow:
+        var(--control-border-width) 0
+        var(--color-control-bg-border-focus);
     }
 
-    &_view_default.Select-SelectContainer_form_clearDefault.Select-SelectContainer_focused
-      .Select-Control,
-    &_view_default.Select-SelectContainer_form_clearBrick.Select-SelectContainer_focused
-      .Select-Control,
-    &_view_default.Select-SelectContainer_form_clearRound.Select-SelectContainer_focused
-      .Select-Control {
-      box-shadow: calc(-1 * var(--control-border-width)) 0 var(--color-control-bg-border-focus);
+    &_view_default.Select-SelectContainer_form_clearDefault.Select-SelectContainer_focused .Select-Control,
+    &_view_default.Select-SelectContainer_form_clearBrick.Select-SelectContainer_focused .Select-Control,
+    &_view_default.Select-SelectContainer_form_clearRound.Select-SelectContainer_focused .Select-Control {
+      box-shadow:
+        calc(-1 * var(--control-border-width)) 0
+        var(--color-control-bg-border-focus);
     }
 
     &_view_default.Select-SelectContainer_disabled .Select-Control {
@@ -243,7 +251,9 @@
     }
 
     &_form_round &-IndicatorsDropdown {
-      border-radius: 0 calc(var(--input-height) / 2) calc(var(--input-height) / 2) 0;
+      border-radius:
+        0 calc(var(--input-height) / 2)
+        calc(var(--input-height) / 2) 0;
     }
 
     &_multiple .Select-ControlValueContainer {
@@ -425,7 +435,10 @@
       height: calc(var(--input-height) - (var(--control-border-width) * 2));
       margin-top: calc(var(--tag-space) * -1);
       line-height: 1;
-      line-height: calc(var(--input-height) - (var(--control-border-width) * 2));
+      line-height:
+        calc(
+          var(--input-height) - (var(--control-border-width) * 2)
+        );
     }
 
     &_multiple.Select-Input_isUserSelect {

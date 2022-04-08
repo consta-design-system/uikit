@@ -7,6 +7,7 @@
 
 # testing
 /coverage
+/repos
 __diff_output__
 
 # production

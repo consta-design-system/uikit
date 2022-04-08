@@ -1,5 +1,8 @@
 .TableRowsCollapse {
-  padding-left: calc((var(--cell-padding-horizontal) + var(--space-s)) * var(--nesting-level));
+  padding-left:
+    calc(
+      (var(--cell-padding-horizontal) + var(--space-s)) * var(--nesting-level)
+    );
   cursor: pointer;
 
   &-buttonContainer {

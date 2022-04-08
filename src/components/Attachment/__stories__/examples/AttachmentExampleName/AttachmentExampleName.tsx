@@ -2,15 +2,14 @@ import './AttachmentExampleName.css';
 
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cn } from '../../../../../utils/bem';
 import { Attachment } from '../../../Attachment';
 
 const cnAttachmentExampleName = cn('AttachmentExampleName');
 
-export function AttachmentExampleName() {
+export const AttachmentExampleName = () => {
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <div>
       <div>
         <Attachment
           className={cnAttachmentExampleName()}
@@ -29,4 +28,4 @@ export function AttachmentExampleName() {
       </div>
     </div>
   );
-}
+};

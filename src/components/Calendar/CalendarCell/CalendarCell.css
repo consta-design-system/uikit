@@ -4,7 +4,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: var(--calendar-cell-width, calc(var(--control-height-s) + var(--space-2xs)));
+  width:
+    var(
+      --calendar-cell-width,
+      calc(var(--control-height-s) + var(--space-2xs))
+    );
   height: var(--control-height-s);
 
   &_range {

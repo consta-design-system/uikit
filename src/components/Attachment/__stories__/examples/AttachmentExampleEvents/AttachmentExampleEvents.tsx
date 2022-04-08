@@ -3,16 +3,14 @@ import './AttachmentExampleEvents.css';
 import React from 'react';
 
 import { IconTrash } from '../../../../../icons/IconTrash/IconTrash';
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
 import { cn } from '../../../../../utils/bem';
 import { Attachment } from '../../../Attachment';
 
 const cnAttachmentExampleEvents = cn('AttachmentExampleEvents');
 
-export function AttachmentExampleEvents() {
+export const AttachmentExampleEvents = () => {
   return (
-    <div className={cnDocsDecorator('Section', [cnDocsExample()])}>
+    <div>
       <Attachment
         className={cnAttachmentExampleEvents()}
         fileName="my_tale_about_mars_final_last_12"
@@ -29,4 +27,4 @@ export function AttachmentExampleEvents() {
       />
     </div>
   );
-}
+};

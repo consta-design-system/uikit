@@ -30,17 +30,26 @@
   &_size {
     &_xs {
       --progress-step-bar-line-size: var(--space-3xs);
-      --progress-step-bar-line-padding: calc((var(--space-xs) - var(--space-3xs)) * 0.5);
+      --progress-step-bar-line-padding:
+        calc(
+          (var(--space-xs) - var(--space-3xs)) * 0.5
+        );
     }
 
     &_s {
       --progress-step-bar-line-size: var(--space-2xs);
-      --progress-step-bar-line-padding: calc((var(--space-m) - var(--space-2xs)) * 0.5);
+      --progress-step-bar-line-padding:
+        calc(
+          (var(--space-m) - var(--space-2xs)) * 0.5
+        );
     }
 
     &_m {
       --progress-step-bar-line-size: var(--space-2xs);
-      --progress-step-bar-line-padding: calc((var(--space-xl) - var(--space-2xs)) * 0.5);
+      --progress-step-bar-line-padding:
+        calc(
+          (var(--space-xl) - var(--space-2xs)) * 0.5
+        );
     }
   }
 

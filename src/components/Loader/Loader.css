@@ -1,5 +1,9 @@
 .Loader {
-  --backgroundColor: var(--loaderBackgroundColor, var(--color-control-bg-primary));
+  --backgroundColor:
+    var(
+      --loaderBackgroundColor,
+      var(--color-control-bg-primary)
+    );
   position: relative;
   top: 50%;
   left: 50%;

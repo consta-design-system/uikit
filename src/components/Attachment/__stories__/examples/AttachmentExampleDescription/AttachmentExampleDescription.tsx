@@ -2,16 +2,14 @@ import './AttachmentExampleDescription.css';
 
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
 import { cn } from '../../../../../utils/bem';
 import { Attachment } from '../../../Attachment';
 
 const cnAttachmentExampleDescription = cn('AttachmentExampleDescription');
 
-export function AttachmentExampleDescription() {
+export const AttachmentExampleDescription = () => {
   return (
-    <div className={cnDocsDecorator('Section', [cnDocsExample()])}>
+    <div>
       <div>
         <Attachment
           className={cnAttachmentExampleDescription()}
@@ -38,4 +36,4 @@ export function AttachmentExampleDescription() {
       </div>
     </div>
   );
-}
+};

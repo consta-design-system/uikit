@@ -3,7 +3,9 @@
   --bottom-space: 0;
   margin: 0 var(--space-s);
   padding: var(--top-space) 0 var(--bottom-space) 0;
-  border-bottom: solid var(--control-border-width) var(--color-control-bg-border-default);
+  border-bottom:
+    solid var(--control-border-width)
+    var(--color-control-bg-border-default);
   letter-spacing: 0.05em;
 
   &_size {

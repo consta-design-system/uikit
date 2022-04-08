@@ -5,7 +5,9 @@
     overflow: hidden;
     width: 100%;
     margin-bottom: var(--space-s);
-    border: solid var(--control-border-width) var(--color-control-bg-border-default);
+    border:
+      solid var(--control-border-width)
+      var(--color-control-bg-border-default);
     border-radius: var(--control-radius);
   }
 }

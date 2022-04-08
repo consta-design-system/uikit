@@ -85,7 +85,10 @@
       }
 
       &_1 {
-        transform: translateX(calc((var(--parent-width) + var(--item-width)) / -2 + 50%));
+        transform:
+          translateX(
+            calc((var(--parent-width) + var(--item-width)) / -2 + 50%)
+          );
       }
 
       &_2 {

@@ -1,6 +1,10 @@
 .MixPopoverAnimate {
   --mix-dropdown-animate-space: var(--space-s);
-  --mix-dropdown-animate-transform: translate(0, var(--mix-dropdown-animate-space));
+  --mix-dropdown-animate-transform:
+    translate(
+      0,
+      var(--mix-dropdown-animate-space)
+    );
 
   &_animate {
     &_exit {
@@ -44,7 +48,11 @@
     &_downLeft,
     &_downStartLeft,
     &_downStartRight {
-      --mix-dropdown-animate-transform: translate(0, var(--mix-dropdown-animate-space));
+      --mix-dropdown-animate-transform:
+        translate(
+          0,
+          var(--mix-dropdown-animate-space)
+        );
     }
 
     &_upCenter,
@@ -52,7 +60,11 @@
     &_upLeft,
     &_upStartLeft,
     &_upStartRight {
-      --mix-dropdown-animate-transform: translate(0, calc(-1 * var(--mix-dropdown-animate-space)));
+      --mix-dropdown-animate-transform:
+        translate(
+          0,
+          calc(-1 * var(--mix-dropdown-animate-space))
+        );
     }
 
     &_leftUp,
@@ -60,7 +72,11 @@
     &_leftDown,
     &_leftStartUp,
     &_leftStartDown {
-      --mix-dropdown-animate-transform: translate(calc(-1 * var(--mix-dropdown-animate-space)), 0);
+      --mix-dropdown-animate-transform:
+        translate(
+          calc(-1 * var(--mix-dropdown-animate-space)),
+          0
+        );
     }
 
     &_rightUp,
@@ -68,7 +84,11 @@
     &_rightDown,
     &_rightStartUp,
     &_rightStartDown {
-      --mix-dropdown-animate-transform: translate(var(--mix-dropdown-animate-space), 0);
+      --mix-dropdown-animate-transform:
+        translate(
+          var(--mix-dropdown-animate-space),
+          0
+        );
     }
   }
 }

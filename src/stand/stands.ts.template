@@ -1,0 +1,10 @@
+import { Stand } from '@consta/stand';
+import { prepareStands } from '@consta/stand';
+
+#imports#
+
+#stands#
+
+#paths#
+
+export const stands = prepareStands(standsGenerated, pathsGenerated);

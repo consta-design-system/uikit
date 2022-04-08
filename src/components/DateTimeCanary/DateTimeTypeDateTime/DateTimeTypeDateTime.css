@@ -12,10 +12,11 @@
       content: '';
       position: absolute;
       top: 0;
-      left: calc(
-        (var(--control-height-s) + (var(--space-3xs) * 2)) * 7 + var(--space-s) +
+      left:
+        calc(
+          (var(--control-height-s) + (var(--space-3xs) * 2)) * 7 + var(--space-s) +
           var(--root-padding-left)
-      );
+        );
       display: block;
       width: 1px;
       height: 100%;

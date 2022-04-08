@@ -13,7 +13,9 @@
     max-height: 240px;
     padding: var(--space-s);
     background-color: var(--color-control-bg-default);
-    border: var(--control-border-width) solid var(--color-control-bg-border-default);
+    border:
+      var(--control-border-width) solid
+      var(--color-control-bg-border-default);
     border-radius: var(--control-radius);
   }
 

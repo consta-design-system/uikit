@@ -180,20 +180,27 @@
         outline: none;
 
         &.TextField-InputContainer_form_clearClear {
-          box-shadow: var(--control-border-width) 0 var(--color-control-bg-border-focus),
-            calc(-1 * var(--control-border-width)) 0 var(--color-control-bg-border-focus);
+          box-shadow:
+            var(--control-border-width) 0
+            var(--color-control-bg-border-focus),
+            calc(-1 * var(--control-border-width)) 0
+            var(--color-control-bg-border-focus);
         }
 
         &.TextField-InputContainer_form_defaultClear,
         &.TextField-InputContainer_form_brickClear,
         &.TextField-InputContainer_form_roundClear {
-          box-shadow: var(--control-border-width) 0 var(--color-control-bg-border-focus);
+          box-shadow:
+            var(--control-border-width) 0
+            var(--color-control-bg-border-focus);
         }
 
         &.TextField-InputContainer_form_clearDefault,
         &.TextField-InputContainer_form_clearBrick,
         &.TextField-InputContainer_form_clearRound {
-          box-shadow: calc(-1 * var(--control-border-width)) 0 var(--color-control-bg-border-focus);
+          box-shadow:
+            calc(-1 * var(--control-border-width)) 0
+            var(--color-control-bg-border-focus);
         }
       }
 
@@ -241,13 +248,17 @@
 
       &_roundBrick {
         padding-left: calc(var(--input-space) * 1.6);
-        border-radius: calc(var(--input-height) / 2) 0 0 calc(var(--input-height) / 2);
+        border-radius:
+          calc(var(--input-height) / 2) 0 0
+          calc(var(--input-height) / 2);
       }
 
       &_roundClear {
         padding-left: calc(var(--input-space) * 1.6);
         border-right-width: 0;
-        border-radius: calc(var(--input-height) / 2) 0 0 calc(var(--input-height) / 2);
+        border-radius:
+          calc(var(--input-height) / 2) 0 0
+          calc(var(--input-height) / 2);
       }
 
       &_brick {
@@ -260,7 +271,9 @@
 
       &_brickRound {
         padding-right: calc(var(--input-space) * 1.6);
-        border-radius: 0 calc(var(--input-height) / 2) calc(var(--input-height) / 2) 0;
+        border-radius:
+          0 calc(var(--input-height) / 2)
+          calc(var(--input-height) / 2) 0;
       }
 
       &_brickClear {
@@ -281,7 +294,9 @@
       &_clearRound {
         padding-right: calc(var(--input-space) * 1.6);
         border-left-width: 0;
-        border-radius: 0 calc(var(--input-height) / 2) calc(var(--input-height) / 2) 0;
+        border-radius:
+          0 calc(var(--input-height) / 2)
+          calc(var(--input-height) / 2) 0;
       }
 
       &_clearClear {
@@ -311,12 +326,20 @@
         resize: none;
         display: block;
         min-width: 0;
-        padding-top: calc(
-          (var(--input-height) - (var(--control-border-width) * 2) - var(--line-height-text-m)) / 2
-        );
-        padding-bottom: calc(
-          (var(--input-height) - (var(--control-border-width) * 2) - var(--line-height-text-m)) / 2
-        );
+        padding-top:
+          calc(
+            (
+              var(--input-height) - (var(--control-border-width) * 2) -
+              var(--line-height-text-m)
+            ) / 2
+          );
+        padding-bottom:
+          calc(
+            (
+              var(--input-height) - (var(--control-border-width) * 2) -
+              var(--line-height-text-m)
+            ) / 2
+          );
         line-height: var(--line-height-text-m);
       }
     }

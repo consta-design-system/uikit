@@ -6,19 +6,31 @@
 
   &_size {
     &_xs {
-      --loader-height: calc(var(--control-space-xs) + var(--control-text-size-xs));
+      --loader-height:
+        calc(
+          var(--control-space-xs) + var(--control-text-size-xs)
+        );
     }
 
     &_s {
-      --loader-height: calc(var(--control-space-s) + var(--control-text-size-s));
+      --loader-height:
+        calc(
+          var(--control-space-s) + var(--control-text-size-s)
+        );
     }
 
     &_m {
-      --loader-height: calc(var(--control-space-m) + var(--control-text-size-m));
+      --loader-height:
+        calc(
+          var(--control-space-m) + var(--control-text-size-m)
+        );
     }
 
     &_l {
-      --loader-height: calc(var(--control-space-l) + var(--control-text-size-l));
+      --loader-height:
+        calc(
+          var(--control-space-l) + var(--control-text-size-l)
+        );
     }
   }
 

@@ -3,7 +3,9 @@
   width: 240px;
   padding: var(--space-xs) 0;
   background: var(--color-bg-default);
-  border: var(--control-border-width) solid var(--color-control-bg-border-default);
+  border:
+    var(--control-border-width) solid
+    var(--color-control-bg-border-default);
   border-radius: var(--control-radius);
   box-shadow: var(--shadow-layer);
 
@@ -49,7 +51,9 @@
     --bottom-space: 0;
     margin: 0 var(--space-s);
     padding: var(--top-space) 0 var(--bottom-space) 0;
-    border-bottom: solid var(--control-border-width) var(--color-control-bg-border-default);
+    border-bottom:
+      solid var(--control-border-width)
+      var(--color-control-bg-border-default);
     letter-spacing: 0.05em;
 
     &_size {

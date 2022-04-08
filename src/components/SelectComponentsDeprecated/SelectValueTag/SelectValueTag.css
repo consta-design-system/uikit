@@ -9,8 +9,14 @@
   &_size {
     &_xs,
     &_s {
-      margin-top: calc(var(--space-xs) / 2 - calc(var(--control-border-width) * 4));
-      margin-bottom: calc(var(--space-xs) / 2 - calc(var(--control-border-width) * 3));
+      margin-top:
+        calc(
+          var(--space-xs) / 2 - calc(var(--control-border-width) * 4)
+        );
+      margin-bottom:
+        calc(
+          var(--space-xs) / 2 - calc(var(--control-border-width) * 3)
+        );
     }
   }
 

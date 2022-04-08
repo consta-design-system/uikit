@@ -26,7 +26,9 @@
 
 @keyframes Animation--MixFocus {
   from {
-    box-shadow: 0 0 0 0 var(--color-control-bg-focus), 0 0 0 0 var(--color-control-bg-active);
+    box-shadow:
+      0 0 0 0 var(--color-control-bg-focus),
+      0 0 0 0 var(--color-control-bg-active);
   }
 
   to {

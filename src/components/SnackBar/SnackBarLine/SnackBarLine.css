@@ -12,13 +12,14 @@
     bottom: 0;
     width: 200%;
     height: var(--space-2xs);
-    background: linear-gradient(
-      90deg,
-      var(--color-bg-default) 0%,
-      var(--color-bg-default) 50%,
-      var(--color-bg-ghost) 50%,
-      var(--color-bg-ghost) 100%
-    );
+    background:
+      linear-gradient(
+        90deg,
+        var(--color-bg-default) 0%,
+        var(--color-bg-default) 50%,
+        var(--color-bg-ghost) 50%,
+        var(--color-bg-ghost) 100%
+      );
     transition: transform 1s linear;
     transform: translate(var(--progress-line-progress));
   }
