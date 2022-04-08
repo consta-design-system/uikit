@@ -44,7 +44,6 @@ addons.setConfig({
     inputTextColor: colors['--color-control-typo-default'],
     inputBorderRadius: 4,
     brandTitle: 'Consta UI-kit storybook',
-    brandUrl: 'https://consta-uikit.vercel.app',
     brandImage: logo,
   }),
 });
