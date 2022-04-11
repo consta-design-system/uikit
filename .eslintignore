@@ -1,0 +1,5 @@
+!/.storybook
+node_modules/*
+build/*
+dist/*
+build.config.js

@@ -1,0 +1,10 @@
+import { CreatedStand } from '../types';
+import { prepareStands } from './exportFuctions';
+
+#imports#
+
+#stands#
+
+#paths#
+
+export const { stands, libs } = prepareStands(standsGenerated, pathsGenerated);
