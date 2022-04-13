@@ -138,7 +138,7 @@
     "fast-glob": "^3.2.2",
     "fs-extra": "^9.0.0",
     "github-release-notes": "^0.17.3",
-    "husky": "4.2.5",
+    "husky": "^4.2.5",
     "jest": "^25.4.0",
     "lint-staged": "^8.2.1",
     "log-symbols": "^3.0.0",
