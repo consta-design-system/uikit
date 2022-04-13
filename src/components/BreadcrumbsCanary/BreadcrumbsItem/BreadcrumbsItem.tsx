@@ -46,7 +46,6 @@ function BreadcrumbsItemRender<ITEM>(
   } = props;
 
   const [open, setOpen] = useFlag();
-  const [hovered, setHovered] = useFlag();
 
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -75,11 +74,6 @@ function BreadcrumbsItemRender<ITEM>(
     item && onItemClickProp?.({ e, item });
   };
 
-  const hoveredProps = {
-    onMouseEnter: setHovered.on,
-    onMouseLeave: setHovered.off,
-  };
-
   return (
     <li className={cnBreadcrumbsItem(null, [className])} ref={ref} {...otherProps}>
       {delimiter && (
@@ -92,12 +86,11 @@ function BreadcrumbsItemRender<ITEM>(
       {children || (
         <>
           <Text
-            className={cnBreadcrumbsItem('Link', { active, hovered })}
+            className={cnBreadcrumbsItem('Link', { active })}
             view={active ? 'primary' : 'secondary'}
             onClick={handleClick}
             size={size}
             truncate={!onlyIcon}
-            {...hoveredProps}
             {...linkProps}
           >
             {Icon &&
@@ -115,9 +108,8 @@ function BreadcrumbsItemRender<ITEM>(
             <button
               ref={buttonRef}
               onClick={setOpen.toogle}
-              {...hoveredProps}
               type="button"
-              className={cnBreadcrumbsItem('SelectButton', { hovered })}
+              className={cnBreadcrumbsItem('SelectButton')}
             >
               <IconSelect size="xs" view={active ? 'primary' : 'secondary'} />
             </button>

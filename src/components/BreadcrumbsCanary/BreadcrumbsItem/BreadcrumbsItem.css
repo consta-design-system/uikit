@@ -14,26 +14,26 @@
       pointer-events: none;
     }
 
-    &_hovered {
+    &:hover {
       color: var(--color-typo-link-hover);
     }
   }
 
   &-SelectButton {
+    width: vaer(--space-s);
+    height: var(--space-s);
     margin: 0;
     margin-left: var(--space-xs);
-    height: var(--space-s);
-    width: vaer(--space-s);
     padding: 0;
-    border: none;
     background: transparent;
+    border: none;
     cursor: pointer;
 
     & .Icon {
       transition: color 0.2s;
     }
 
-    &_hovered .Icon {
+    &:hover .Icon {
       color: var(--color-typo-link-hover);
     }
   }
