@@ -1,5 +1,16 @@
 # Changelog
 
+## v3.19.0 (13/04/2022)
+Самое важное:
+- В `BreadcrumbsCanary` добавлена возможность добавления под меню в элемент хлебных крошек
+---
+
+- [docs(review): add gantt picture (#2206)](https://github.com/consta-design-system/uikit/commit/4e79d1a62bdbbc19c3cfaacc077f104e116eadda) - [@arhayka](https://github.com/arhayka)
+- [feat(BreadcrumbsCanary): add inner submenu (#2183)](https://github.com/consta-design-system/uikit/commit/95a04092be8b38b66a5b6e0c6fd516261991da90) - [@N1MBER](https://github.com/N1MBER)
+- [chore(storybook): chage publick url (#2204)](https://github.com/consta-design-system/uikit/commit/16756a016cd920e03097bd9198067cf2e4caa967) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v3.18.3 (06/04/2022)
 Самое важное:
 - В `DatePicker` добавлен новый тип `time` — когда нужно указать только время.
@@ -484,16 +495,3 @@
 - [feat(Table): added default sort (#1545)](https://github.com/gazprom-neft/consta-uikit/commit/8126255aa82605c2542fea4e127e77d36cd577e2) - [@AntonS86](https://github.com/AntonS86)
 - [feat(Table): added ref to component parameters (#1518)](https://github.com/gazprom-neft/consta-uikit/commit/c87693262ba3e25053c59f88dcece04c821c4145) - [@AntonS86](https://github.com/AntonS86)
 - [docs(MixCard): edit docs, add examples (#1562)](https://github.com/gazprom-neft/consta-uikit/commit/4f7a4027b47f9075d4e1b7f97ebd8889b878803b) - [@arhayka](https://github.com/arhayka)
-
---------------------
-
-## v3.3.0 (15/09/2021)
-**Важное из обновления:**
-- В компонентах `Modal` и `SideBar` добавлена возможность закрытия по нажатию `Esc`
-- Добавлен хук `useGlobalKeys` для подписки на нажатия клавиш
----
-
-- [feat(withTooltip,ContextMenuLevel): Fixed typings & typos (#1549)](https://github.com/gazprom-neft/consta-uikit/commit/4b142d3f593ef2282351a79ef4e383c5e2670888) - [@N1KN](https://github.com/N1KN)
-- [fix(TextField): change type of component properties (#1474)](https://github.com/gazprom-neft/consta-uikit/commit/9f4411861b612b1622dffa0d1719040bd8d0811c) - [@N1MBER](https://github.com/N1MBER)
-- [docs(Table): updated doc for activeRow props (#1527)](https://github.com/gazprom-neft/consta-uikit/commit/ed41c0ded7dd65bf90989580b69804f6d0530e50) - [@AntonS86](https://github.com/AntonS86)
-- [feat(Modal, SideBar): close by esc (#1498)](https://github.com/gazprom-neft/consta-uikit/commit/3888bb602cd1eb505fd81c516327a9febfe7cccb) - [@N1KN](https://github.com/N1KN)
