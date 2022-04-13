@@ -4,6 +4,7 @@ import BulletImage from './imagesForAdditionalData/BulletImage';
 import ColumnImage from './imagesForAdditionalData/ColumnImage';
 import DualAxesImage from './imagesForAdditionalData/DualAxesImage';
 import FeedbackFormImage from './imagesForAdditionalData/FeedbackFormImage';
+import GanttImage from './imagesForAdditionalData/GanttImage';
 import GaugeImage from './imagesForAdditionalData/GaugeImage';
 import GpnResponsesImage from './imagesForAdditionalData/GpnResponsesImage';
 import HeaderUmdImage from './imagesForAdditionalData/HeaderUmdImage';
@@ -151,6 +152,7 @@ export const additionalData: Data = [
         url: 'http://gantt-task-react-adapter.gizeasy.ru/',
         name: 'gantt-task-react-adapter',
         description: 'Адаптер для gantt-task-react. Диаграмма Ганта.',
+        image: GanttImage,
       },
     ],
   },
