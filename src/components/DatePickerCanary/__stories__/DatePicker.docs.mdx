@@ -14,6 +14,7 @@ import {
   DatePickerExampleTypeTime,
 } from './examples/DatePickerExampleType/DatePickerExampleType';
 import { DatePickerExampleMulti } from './examples/DatePickerExampleMulti/DatePickerExampleMulti';
+import { DatePickerExampleAdaptive } from './examples/DatePickerExampleAdaptive/DatePickerExampleAdaptive';
 
 <!--info
 description: Поле, в котором можно выбрать дату или период.
@@ -44,6 +45,7 @@ import { DatePicker } from '@consta/uikit/DatePickerCanary';
   - [Статус](#статус-поля)
   - [Дополнительные контролы](#дополнительные-контролы)
 - [Обработка ошибок](#обработка-ошибок)
+- [Адаптивность](#адаптивность)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
 
@@ -362,6 +364,14 @@ export const DatePickerExampleOnError = () => {
 - дату начала, которая больше даты конца.
 
 <DatePickerExampleOnError />
+
+## Адаптивность
+
+Поле ввода подстраивается под ширину контейнера или экрана. Размеры всплывающего окна не меняются.
+
+##### Пример компонента в контейнере шириной 300 px
+
+<DatePickerExampleAdaptive />
 
 ## Импорт
 
