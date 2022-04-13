@@ -1,18 +1,12 @@
 import './BreadcrumbsMore.css';
 
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
-import { Transition } from 'react-transition-group';
+import React, { forwardRef, useEffect, useRef } from 'react';
 
 import { useFlag } from '../../../hooks/useFlag/useFlag';
-import {
-  animateTimeout,
-  cnMixPopoverAnimate,
-} from '../../../mixs/MixPopoverAnimate/MixPopoverAnimate';
 import { cn } from '../../../utils/bem';
 import { getByMap } from '../../../utils/getByMap';
 import { Button } from '../../Button/Button';
-import { ContextMenu } from '../../ContextMenu/ContextMenu';
-import { Direction } from '../../Popover/Popover';
+import { ContextMenu } from '../../ContextMenuCanary/ContextMenuCanary';
 import { BreadcrumbsItem } from '../BreadcrumbsItem/BreadcrumbsItem';
 import { iconSizeMap } from '../helpers';
 import {
@@ -24,9 +18,12 @@ import {
 
 const cnBreadcrumbsMore = cn('BreadcrumbsMore');
 
-function getLeftSideBar<ITEM>(getItemIcon: BreadcrumbsPropGetItemIcon<ITEM>, iconSize: 'xs' | 'm') {
+export function getLeftSideBar<ITEM>(
+  iconSize: 'xs' | 'm',
+  getItemIcon?: BreadcrumbsPropGetItemIcon<ITEM>,
+) {
   return (item: ITEM) => {
-    const Icon = getItemIcon(item);
+    const Icon = getItemIcon?.(item);
     if (Icon) {
       return <Icon size={iconSize} />;
     }
@@ -34,16 +31,16 @@ function getLeftSideBar<ITEM>(getItemIcon: BreadcrumbsPropGetItemIcon<ITEM>, ico
   };
 }
 
-function getItemAs<ITEM>(getItemHref: BreadcrumbsPropGetItemHref<ITEM>) {
+export function getItemAs<ITEM>(getItemHref?: BreadcrumbsPropGetItemHref<ITEM>) {
   return (item: ITEM) => {
-    const href = getItemHref(item);
+    const href = getItemHref?.(item);
     return href ? 'a' : 'span';
   };
 }
 
-function getItemHTMLAttributes<ITEM>(getItemHref: BreadcrumbsPropGetItemHref<ITEM>) {
+export function getItemAttributes<ITEM>(getItemHref?: BreadcrumbsPropGetItemHref<ITEM>) {
   return (item: ITEM) => {
-    return { href: getItemHref(item) };
+    return getItemHref && { href: getItemHref(item) };
   };
 }
 
@@ -66,16 +63,15 @@ function BreadcrumbsMoreRender<ITEM>(
     getItemHref,
     getItemIcon,
     getItemLabel,
-    getItemOnClick,
-    onItemClick,
+    getItemOnClick: getItemOnClickProp,
+    getItemSubMenu,
+    onItemClick: onItemClickProp,
     ...otherProps
   } = props;
 
   const [open, setOpen] = useFlag();
-  const [direction, setDirection] = useState<Direction>();
 
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const menuRef = useRef<HTMLDivElement>(null);
 
   const iconSize = getByMap(iconSizeMap, size);
 
@@ -84,6 +80,15 @@ function BreadcrumbsMoreRender<ITEM>(
   if (!items.length) {
     return null;
   }
+
+  const onItemClick = ({ e, item }: { e: React.MouseEvent<HTMLDivElement>; item: ITEM }) => {
+    onItemClickProp?.({ e, item });
+    getItemOnClickProp?.(item)?.(e);
+  };
+
+  const getItemOnClick = (element: ITEM) => ({ e }: { e: React.MouseEvent<HTMLDivElement> }) => {
+    return getItemOnClickProp?.(element)?.(e);
+  };
 
   return (
     <BreadcrumbsItem
@@ -105,35 +110,30 @@ function BreadcrumbsMoreRender<ITEM>(
         ref={buttonRef}
         onClick={setOpen.toogle}
       />
-      <Transition in={open} unmountOnExit timeout={animateTimeout} nodeRef={menuRef}>
-        {(animate) => (
-          <ContextMenu
-            className={cnMixPopoverAnimate({ animate, direction })}
-            ref={menuRef}
-            items={items}
-            getLabel={getItemLabel}
-            getItemOnClick={getItemOnClick}
-            onItemClick={onItemClick}
-            getLeftSideBar={getLeftSideBar(getItemIcon, iconSize)}
-            anchorRef={buttonRef}
-            onClickOutside={setOpen.off}
-            getItemAs={getItemAs(getItemHref)}
-            getItemHTMLAttributes={getItemHTMLAttributes(getItemHref)}
-            direction="downCenter"
-            possibleDirections={[
-              'downCenter',
-              'upCenter',
-              'downStartLeft',
-              'upStartLeft',
-              'downStartRight',
-              'upStartRight',
-            ]}
-            onSetDirection={setDirection}
-            offset={8}
-            size={contextMenuSizeMap[size]}
-          />
-        )}
-      </Transition>
+      <ContextMenu
+        items={items}
+        isOpen={open}
+        getItemLabel={getItemLabel}
+        getItemSubMenu={getItemSubMenu}
+        getItemOnClick={getItemOnClick}
+        onItemClick={onItemClick}
+        getItemLeftIcon={getItemIcon}
+        anchorRef={buttonRef}
+        onClickOutside={setOpen.off}
+        getItemAs={getItemAs(getItemHref)}
+        getItemAttributes={getItemAttributes(getItemHref)}
+        direction="downCenter"
+        possibleDirections={[
+          'downCenter',
+          'upCenter',
+          'downStartLeft',
+          'upStartLeft',
+          'downStartRight',
+          'upStartRight',
+        ]}
+        offset="xs"
+        size={contextMenuSizeMap[size]}
+      />
     </BreadcrumbsItem>
   );
 }

@@ -7,11 +7,12 @@ import { cn } from '../../utils/bem';
 import { BreadcrumbsFitModeDropdown } from './BreadcrumbsFitModeDropdown/BreadcrumbsFitModeDropdown';
 import { BreadcrumbsFitModeScroll } from './BreadcrumbsFitModeScroll/BreadcrumbsFitModeScroll';
 import { BreadcrumbsItem } from './BreadcrumbsItem/BreadcrumbsItem';
-import { getItemClick, withDefaultGetters } from './helpers';
+import { withDefaultGetters } from './helpers';
 import {
   breadcrumbPropFitModeDefault,
   breadcrumbPropSizeDefault,
   BreadcrumbsComponent,
+  BreadcrumbsPropOnItemClick,
   BreadcrumbsProps,
   RenderItem,
 } from './types';
@@ -25,6 +26,7 @@ const BreadcrumbsRender = (props: BreadcrumbsProps, ref: React.Ref<HTMLUListElem
     getItemLabel,
     getItemIcon,
     getItemOnClick,
+    getItemSubMenu,
     onItemClick,
     size = breadcrumbPropSizeDefault,
     onlyIconRoot = false,
@@ -42,14 +44,22 @@ const BreadcrumbsRender = (props: BreadcrumbsProps, ref: React.Ref<HTMLUListElem
     if (item === undefined) {
       return;
     }
+
+    const handleClick: BreadcrumbsPropOnItemClick<Item> = ({ e, item }) => {
+      getItemOnClick?.(item)?.(e);
+      onItemClick?.({ e, item });
+    };
+
     return (
       <BreadcrumbsItem
         className={cnBreadcrumbs('Item', { hidden })}
-        label={getItemLabel(item)}
-        href={getItemHref(item)}
-        icon={getItemIcon(item)}
+        item={item}
+        getItemHref={getItemHref}
+        getItemIcon={getItemIcon}
+        getItemLabel={getItemLabel}
+        getItemSubMenu={getItemSubMenu}
+        onItemClick={handleClick}
         active={lastItemIsLink ? false : isLast}
-        onClick={getItemClick(item, getItemOnClick, onItemClick)}
         delimiter={!isFirst}
         onlyIcon={onlyIconRoot && isFirst}
         key={cnBreadcrumbs('Item', { index })}
@@ -91,6 +101,7 @@ const BreadcrumbsRender = (props: BreadcrumbsProps, ref: React.Ref<HTMLUListElem
       getItemIcon={getItemIcon}
       getItemLabel={getItemLabel}
       getItemOnClick={getItemOnClick}
+      getItemSubMenu={getItemSubMenu}
       onItemClick={onItemClick}
       ref={ref}
       renderItem={renderItem}
