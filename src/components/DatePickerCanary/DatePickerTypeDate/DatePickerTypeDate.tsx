@@ -7,7 +7,7 @@ import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { setRef } from '../../../utils/setRef';
 import { DatePickerDropdown } from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeDate } from '../DatePickerFieldTypeDate/DatePickerFieldTypeDate';
-import { DatePickerTypeComponent } from '../helpers';
+import { DatePickerTypeComponent } from '../types';
 import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 
 export const DatePickerTypeDate: DatePickerTypeComponent<'date'> = forwardRef((props, ref) => {

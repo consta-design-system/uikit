@@ -6,13 +6,13 @@ import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
 import { maxDateDefault, minDateDefault } from '../../../utils/date';
 import { TextField } from '../../TextField/TextField';
 import {
-  datePickerErrorTypes,
   datePickerPropFormatTypeTime,
   datePickerPropPlaceholderTypeTime,
   datePickerPropSeparatorDefault,
   getParts,
   getPartsDate,
 } from '../helpers';
+import { datePickerErrorTypes } from '../types';
 
 import { DatePickerFieldTypeTimeProps, useImask } from './helpers';
 

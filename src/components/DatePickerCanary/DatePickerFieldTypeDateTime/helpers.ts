@@ -24,13 +24,12 @@ import {
   TextFieldPropWidth,
 } from '../../TextField/TextField';
 import {
-  datePickerErrorTypes,
   datePickerPropFormatTypeDate,
-  DatePickerPropOnError,
   datePickerPropSeparatorDefault,
   getPartsDate,
   getTimeEnum,
 } from '../helpers';
+import { datePickerErrorTypes, DatePickerPropOnError } from '../types';
 
 type DatePickerFieldTypeDateTimePropOnChange = (props: { e: Event; value: Date | null }) => void;
 
