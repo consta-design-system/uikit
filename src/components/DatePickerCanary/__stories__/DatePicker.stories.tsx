@@ -72,8 +72,6 @@ const additionalControls = () => {
   return [<Button label="Кнопка" />, <Button label="Кнопка" />];
 };
 
-export const isTypeRange = (type: string) => type.indexOf('radge') !== -1;
-
 export function Playground() {
   const {
     form,
