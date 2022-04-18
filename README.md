@@ -8,13 +8,13 @@ Consta — дизайн-система для разработки интерф�
 
 ### Библиотека компонентов
 
-[Репозиторий](https://github.com/consta-design-system/uikit) | [NPM](https://www.npmjs.com/package/@consta/uikit) | [Документация и стенд](http://uikit.gizeasy.ru/?path=/story/common-about--page) | [Макеты](https://www.figma.com/community/file/853774806786762374)
+[Репозиторий](https://github.com/consta-design-system/uikit) | [NPM](https://www.npmjs.com/package/@consta/uikit) | [Документация и стенд](http://uikit.consta.design/?path=/story/common-about--page) | [Макеты](https://www.figma.com/community/file/853774806786762374)
 
 ### Библиотека графиков
 
-[Репозиторий](https://github.com/consta-design-system/charts) | [NPM](https://www.npmjs.com/package/@consta/charts) | [Документация и стенд](http://charts.gizeasy.ru) | [Макеты](https://www.figma.com/community/file/982611119114314434)
+[Репозиторий](https://github.com/consta-design-system/charts) | [NPM](https://www.npmjs.com/package/@consta/charts) | [Документация и стенд](http://charts.consta.design) | [Макеты](https://www.figma.com/community/file/982611119114314434)
 
-[>> Посмотреть все библиотеки](http://uikit.gizeasy.ru/?path=/docs/common-about-github--page)
+[>> Посмотреть все библиотеки](http://uikit.consta.design/?path=/docs/common-about-github--page)
 
 <hr>
 
@@ -46,17 +46,17 @@ const App = () => (
 );
 ```
 
-[Что такое темы и как с ними работать](http://uikit.gizeasy.ru/?path=/docs/thematization-what-are-themes--page)
+[Что такое темы и как с ними работать](http://uikit.consta.design/?path=/docs/thematization-what-are-themes--page)
 
 ## Документация и стенд
 
 На стенде можно менять параметры и смотреть, как меняются компоненты. Документация — во вкладке у каждого компонента.
 
-[Вперёд, к стенду](http://uikit.gizeasy.ru/)
+[Вперёд, к стенду](http://uikit.consta.design/)
 
 ## Контрибьюторам
 
-Будем рады, если вы захотите принять участие в разработке дизайн-системы =) Но сначала прочитайте [инструкцию для контрибьюторов](http://uikit.gizeasy.ru/?path=/docs/common-develop-contributors--page).
+Будем рады, если вы захотите принять участие в разработке дизайн-системы =) Но сначала прочитайте [инструкцию для контрибьюторов](http://uikit.consta.design/?path=/docs/common-develop-contributors--page).
 
 ## Лицензия
 
