@@ -42,7 +42,7 @@ export const ReposDataBase = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="http://uikit.gizeasy.ru"
+            href="http://uikit.consta.design"
             target="_blank"
           >
             Документация и стенд
@@ -83,7 +83,7 @@ export const ReposDataBase = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="http://charts.gizeasy.ru"
+            href="http://charts.consta.design"
             target="_blank"
           >
             Документация
@@ -138,7 +138,7 @@ export const ReposDataBase = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="http://widgets.gizeasy.ru/"
+            href="http://widgets.consta.design/"
             target="_blank"
           >
             Документация
@@ -194,7 +194,7 @@ export const ReposDataSingleComponents = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="http://header.gizeasy.ru/"
+            href="http://header.consta.design/"
             target="_blank"
           >
             Документация
@@ -245,7 +245,7 @@ export const ReposDataSingleComponents = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="http://stats.gizeasy.ru/"
+            href="http://stats.consta.design/"
             target="_blank"
           >
             Документация
@@ -275,7 +275,7 @@ export const ReposDataSingleComponents = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="http://analytic-ui.gizeasy.ru/"
+            href="http://analytic-ui.consta.design/"
             target="_blank"
           >
             Документация
@@ -304,7 +304,7 @@ export const ReposDataSingleComponents = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="http://gpn-responses.gizeasy.ru/"
+            href="http://gpn-responses.consta.design/"
             target="_blank"
           >
             Документация
@@ -356,7 +356,7 @@ export const ReposDataAdapters = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="http://rc-table-adapter.gizeasy.ru/"
+            href="http://rc-table-adapter.consta.design/"
             target="_blank"
           >
             Документация
@@ -395,7 +395,7 @@ export const ReposDataAdapters = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="http://rc-tree-adapter.gizeasy.ru/"
+            href="http://rc-tree-adapter.consta.design/"
             target="_blank"
           >
             Документация
@@ -434,7 +434,7 @@ export const ReposDataAdapters = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="http://gantt-task-react-adapter.gizeasy.ru/"
+            href="http://gantt-task-react-adapter.consta.design/"
             target="_blank"
           >
             Документация
