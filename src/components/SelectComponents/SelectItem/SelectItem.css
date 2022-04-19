@@ -5,6 +5,7 @@
   color: var(--text-color);
   background-color: var(--color-control-bg-clear);
   font-size: var(--font-size);
+  word-wrap: break-word;
   cursor: pointer;
 
   &_size {
