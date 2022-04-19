@@ -9,6 +9,7 @@ import { IconSortUp } from '../../icons/IconSortUp/IconSortUp';
 import { IconUnsort } from '../../icons/IconUnsort/IconUnsort';
 import { sortBy as sortByDefault, updateAt } from '../../utils/array';
 import { cn } from '../../utils/bem';
+import { setRef } from '../../utils/setRef';
 import { isNotNil, isString } from '../../utils/type-guards';
 import { Button, ButtonPropSize } from '../Button/Button';
 import { Text } from '../Text/Text';
@@ -709,9 +710,7 @@ const InternalTable = <T extends TableRow>(
   };
 
   const handleCellClick: onCellClick = (params) => {
-    if (onCellClick) {
-      onCellClick(params);
-    }
+    onCellClick?.(params);
   };
 
   return (
@@ -831,16 +830,14 @@ const InternalTable = <T extends TableRow>(
             >
               {columnsWithMetaData(lowHeaders).map((column: TableColumn<T>, columnIdx: number) => {
                 const { show, style, rowSpan } = getTableCellProps(row, rowIdx, column, columnIdx);
-
                 if (show) {
                   return (
                     <TableCell
                       type="content"
                       key={column.accessor}
-                      ref={(ref: HTMLDivElement | null): void => {
+                      ref={(ref: HTMLDivElement | null) => {
                         cellsRefs.current[`${columnIdx}-${row.id}`] = ref;
-
-                        setBoundaryRef(columnIdx, rowIdx);
+                        setRef(setBoundaryRef(columnIdx, rowIdx), ref);
                       }}
                       style={style}
                       wrapperClassName={cnTable('ContentCell', {
