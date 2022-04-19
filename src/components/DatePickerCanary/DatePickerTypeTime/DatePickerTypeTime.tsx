@@ -5,11 +5,8 @@ import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { setRef } from '../../../utils/setRef';
 import { DatePickerDropdown } from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeTime } from '../DatePickerFieldTypeTime/DatePickerFieldTypeTime';
-import {
-  datePickerPropFormatTypeDateTime,
-  DatePickerTypeComponent,
-  getMultiplicityTime,
-} from '../helpers';
+import { datePickerPropFormatTypeDateTime, getMultiplicityTime } from '../helpers';
+import { DatePickerTypeComponent } from '../types';
 
 export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef((props, ref) => {
   const {

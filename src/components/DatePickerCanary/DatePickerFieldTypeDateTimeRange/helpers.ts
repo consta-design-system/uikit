@@ -9,7 +9,15 @@ type DatePickerFieldTypeDateTimeRangePropOnChange = (props: {
 
 export type DatePickerFieldTypeDateTimeRangeProps = Omit<
   DatePickerFieldTypeDateTimeProps,
-  'onChange' | 'value' | 'inputRef' | 'leftSide' | 'rightSide' | 'id' | 'onFocus' | 'onBlur'
+  | 'onChange'
+  | 'value'
+  | 'inputRef'
+  | 'leftSide'
+  | 'rightSide'
+  | 'id'
+  | 'onFocus'
+  | 'onBlur'
+  | 'name'
 > & {
   onChange?: DatePickerFieldTypeDateTimeRangePropOnChange;
   value?: DateRange | null;
@@ -30,4 +38,6 @@ export type DatePickerFieldTypeDateTimeRangeProps = Omit<
   id?: string;
   onChangeCurrentVisibleDate?: (date: Date) => void;
   currentVisibleDate?: Date;
+  startFieldName?: string;
+  endFieldName?: string;
 };

@@ -9,7 +9,8 @@ import {
   DatePickerDropdownPropOnChange,
 } from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeDateTimeRange } from '../DatePickerFieldTypeDateTimeRange/DatePickerFieldTypeDateTimeRange';
-import { DatePickerTypeComponent, normalizeRangeValue } from '../helpers';
+import { normalizeRangeValue } from '../helpers';
+import { DatePickerTypeComponent } from '../types';
 import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 
 export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-range'> = forwardRef(
@@ -19,24 +20,16 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
       dateTimeView,
       locale,
       dropdownForm,
-      startFieldRightSide,
-      startFieldLeftSide,
-      startFieldOnBlur,
-      startFieldOnFocus,
-      endFieldRightSide,
-      endFieldLeftSide,
-      endFieldOnBlur,
-      endFieldOnFocus,
       onFocus,
       onBlur,
       leftSide,
       rightSide,
-      endFieldInputRef: endFieldInputRefProp,
-      startFieldInputRef: startFieldInputRefProp,
       style,
       currentVisibleDate: currentVisibleDateProp,
       onChangeCurrentVisibleDate: onChangeCurrentVisibleDateProp,
       renderAdditionalControls,
+      inputRef,
+      name,
       ...fieldProps
     } = props;
 
@@ -67,28 +60,22 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
       onChangeCurrentVisibleDateProp,
     );
 
-    const startFieldOnBlurHandler = (e: React.FocusEvent<HTMLElement>) => {
-      onBlur && onBlur(e);
-      startFieldOnBlur && startFieldOnBlur(e);
-    };
+    const startFieldOnBlurHandler = (e: React.FocusEvent<HTMLElement>) =>
+      Array.isArray(onBlur) ? onBlur[0]?.(e) : onBlur?.(e);
 
-    const endFieldOnBlurHandler = (e: React.FocusEvent<HTMLElement>) => {
-      onBlur && onBlur(e);
-      endFieldOnBlur && endFieldOnBlur(e);
-    };
+    const endFieldOnBlurHandler = (e: React.FocusEvent<HTMLElement>) =>
+      Array.isArray(onBlur) ? onBlur[1]?.(e) : onBlur?.(e);
 
     const startFieldOnFocusHandler = (e: React.FocusEvent<HTMLElement>) => {
       setFieldFocused('start');
       setCalendarVisible.on();
-      onFocus && onFocus(e);
-      startFieldOnFocus && startFieldOnFocus(e);
+      Array.isArray(onFocus) ? onFocus[0]?.(e) : onFocus?.(e);
     };
 
     const endFieldOnFocusHandler = (e: React.FocusEvent<HTMLElement>) => {
       setFieldFocused('end');
       setCalendarVisible.on();
-      onFocus && onFocus(e);
-      endFieldOnFocus && endFieldOnFocus(e);
+      Array.isArray(onFocus) ? onFocus[1]?.(e) : onFocus?.(e);
     };
 
     // эфект для того чтобы календарь переключался при вводе с клавиатуры
@@ -135,18 +122,20 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
           ref={ref}
           startFieldRef={startFieldRef}
           endFieldRef={endFieldRef}
-          startFieldInputRef={useForkRef([startFieldInputRef, startFieldInputRefProp])}
-          endFieldInputRef={useForkRef([endFieldInputRef, endFieldInputRefProp])}
+          startFieldInputRef={useForkRef([startFieldInputRef, inputRef?.[0]])}
+          endFieldInputRef={useForkRef([endFieldInputRef, inputRef?.[1]])}
           startFieldOnFocus={startFieldOnFocusHandler}
           endFieldOnFocus={endFieldOnFocusHandler}
-          startFieldRightSide={startFieldRightSide}
-          startFieldLeftSide={startFieldLeftSide || leftSide}
-          endFieldRightSide={endFieldRightSide || rightSide}
-          endFieldLeftSide={endFieldLeftSide}
+          startFieldLeftSide={Array.isArray(leftSide) ? leftSide?.[0] : leftSide}
+          startFieldRightSide={Array.isArray(rightSide) ? rightSide?.[0] : undefined}
+          endFieldLeftSide={Array.isArray(leftSide) ? leftSide?.[1] : undefined}
+          endFieldRightSide={Array.isArray(rightSide) ? rightSide?.[1] : rightSide}
           startFieldOnBlur={startFieldOnBlurHandler}
           endFieldOnBlur={endFieldOnBlurHandler}
           startFocused={startFocused}
           endFocused={endFocused}
+          startFieldName={Array.isArray(name) ? name[0] : `${name}_start`}
+          endFieldName={Array.isArray(name) ? name[1] : `${name}_end`}
         />
         <DatePickerDropdown
           type="date-time"
