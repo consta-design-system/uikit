@@ -13,12 +13,11 @@ import {
   TextFieldPropWidth,
 } from '../../TextField/TextField';
 import {
-  datePickerErrorTypes,
   datePickerPropFormatTypeDate,
-  DatePickerPropOnError,
   datePickerPropSeparatorDefault,
   getPartsDate,
 } from '../helpers';
+import { datePickerErrorTypes, DatePickerPropOnError } from '../types';
 
 type DatePickerFieldTypeDatePropOnChange = (props: { e: Event; value: Date | null }) => void;
 

@@ -6,7 +6,8 @@ import { FieldCaption } from '../../FieldCaption/FieldCaption';
 import { FieldLabel } from '../../FieldLabel/FieldLabel';
 import { DatePickerFieldTypeDate } from '../DatePickerFieldTypeDate/DatePickerFieldTypeDate';
 import { cnDatePickerMixRangeField } from '../DatePickerMixRangeField/DatePickerMixRangeField';
-import { datePickerErrorTypes, getFormForEnd, getFormForStart } from '../helpers';
+import { getFormForEnd, getFormForStart } from '../helpers';
+import { datePickerErrorTypes } from '../types';
 
 import { DatePickerFieldTypeDateRangeProps } from './helpers';
 
@@ -26,7 +27,8 @@ export const DatePickerFieldTypeDateRange = forwardRef<
     value = [],
     onChange,
     onError,
-    name,
+    startFieldName,
+    endFieldName,
     disabled,
     size,
     view,
@@ -60,7 +62,6 @@ export const DatePickerFieldTypeDateRange = forwardRef<
   const commonProps = {
     className: cnDatePickerMixRangeField('Field'),
     disabled,
-    name,
     onError,
     size,
     view,
@@ -176,9 +177,11 @@ export const DatePickerFieldTypeDateRange = forwardRef<
             onFocus={startFieldOnFocus}
             onBlur={startFieldOnBlur}
             focused={startFocused}
+            name={startFieldName}
           />
           <DatePickerFieldTypeDate
             {...commonProps}
+            name={endFieldName}
             inputRef={endFieldInputRef}
             ref={endFieldRef}
             leftSide={endFieldLeftSide}

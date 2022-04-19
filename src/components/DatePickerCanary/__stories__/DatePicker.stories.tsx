@@ -21,14 +21,14 @@ import {
   textFieldPropView,
   textFieldPropViewDefault,
 } from '../../TextField/TextField';
-import { DatePicker } from '../DatePickerCanary';
 import {
+  DatePicker,
   datePickerPropDropdownForm,
   datePickerPropDropdownFormDefault,
   datePickerPropType,
   datePickerPropTypeDefault,
   DatePickerPropValue,
-} from '../helpers';
+} from '../DatePickerCanary';
 
 import mdx from './DatePicker.docs.mdx';
 
@@ -124,17 +124,13 @@ export function Playground() {
         disabled={disabled}
         size={size}
         onChange={({ value }) => setValue(value)}
-        rightSide={icon}
+        leftSide={icon}
         events={events}
         locale={getByMap(localeMap, locale)}
         dateTimeView={dateTimeView}
         dropdownForm={dropdownForm}
         minDate={new Date(minDate)}
         maxDate={new Date(maxDate)}
-        {...(type === 'date-range' && {
-          endFieldRightSide: icon,
-          startFieldRightSide: icon,
-        })}
         renderAdditionalControls={withAdditionalControls ? additionalControls : undefined}
       />
     </div>
