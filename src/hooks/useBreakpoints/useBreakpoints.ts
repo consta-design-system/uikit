@@ -64,12 +64,12 @@ export const useBreakpoints = <POINTS extends string = DefaultPoints>(map?: Map<
   const pointsMap = map || (defaultMap as Map<POINTS>);
 
   const [points, setSetPoints] = useState<Returned<POINTS>>(() =>
-    mapping(document.documentElement.clientWidth, pointsMap),
+    mapping(window.innerWidth, pointsMap),
   );
 
   useLayoutEffect(() => {
     const subscribe = () => {
-      const newPoints = mapping(document.documentElement.clientWidth, pointsMap);
+      const newPoints = mapping(window.innerWidth, pointsMap);
 
       setSetPoints((state) => (isEq(state, newPoints) ? state : newPoints));
     };
