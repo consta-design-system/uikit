@@ -78,7 +78,6 @@ export const SelectDropdown: SelectDropdown = (props) => {
     ...otherProps
   } = props;
 
-  const getIndex = fabricIndex(-1);
   const [direction, setDirection] = useState<Direction>('downStartLeft');
 
   const indent = form === 'round' ? 'increased' : 'normal';
@@ -96,67 +95,70 @@ export const SelectDropdown: SelectDropdown = (props) => {
 
   return (
     <Transition in={isOpen} unmountOnExit nodeRef={popoverRef} timeout={animateTimeout}>
-      {(animate) => (
-        <Popover
-          {...otherProps}
-          anchorRef={controlRef}
-          direction="downStartLeft"
-          possibleDirections={['downStartLeft', 'upStartLeft', 'downStartRight', 'upStartRight']}
-          offset="2xs"
-          ref={popoverRef}
-          role="listbox"
-          onSetDirection={setDirection}
-          className={cnSelectDropdown({ form, size }, [
-            className,
-            cnMixPopoverAnimate({ direction, animate }),
-          ])}
-          equalAnchorWidth
-        >
-          <div className={cnSelectDropdown('List', { size, form })} ref={dropdownRef}>
-            {isLoading && <SelectLoader mode={isListShowed ? 'blur' : 'empty'} />}
-            {visibleItems.map((group) => {
-              if (isOptionForCreate(group)) {
-                return (
-                  <SelectCreateButton
-                    size={size}
-                    labelForCreate={labelForCreate}
-                    inputValue={group.label}
-                    indent={indent}
-                    {...getOptionProps({ index: getIndex(), item: group })}
-                  />
-                );
-              }
-              return (
-                <Fragment key={group.key}>
-                  {group.group && getGroupLabel && (
-                    <SelectGroupLabel
-                      label={getGroupLabel(group.group)}
+      {(animate) => {
+        const getIndex = fabricIndex(-1);
+        return (
+          <Popover
+            {...otherProps}
+            anchorRef={controlRef}
+            direction="downStartLeft"
+            possibleDirections={['downStartLeft', 'upStartLeft', 'downStartRight', 'upStartRight']}
+            offset="2xs"
+            ref={popoverRef}
+            role="listbox"
+            onSetDirection={setDirection}
+            className={cnSelectDropdown({ form, size }, [
+              className,
+              cnMixPopoverAnimate({ direction, animate }),
+            ])}
+            equalAnchorWidth
+          >
+            <div className={cnSelectDropdown('List', { size, form })} ref={dropdownRef}>
+              {isLoading && <SelectLoader mode={isListShowed ? 'blur' : 'empty'} />}
+              {visibleItems.map((group) => {
+                if (isOptionForCreate(group)) {
+                  return (
+                    <SelectCreateButton
                       size={size}
+                      labelForCreate={labelForCreate}
+                      inputValue={group.label}
                       indent={indent}
+                      {...getOptionProps({ index: getIndex(), item: group })}
                     />
-                  )}
-                  {group.items.map((item, i) => {
-                    return (
-                      <Fragment key={`${group.key}-${i}`}>
-                        {renderItem({
-                          item,
-                          ...getOptionProps({ index: getIndex(), item }),
-                        })}
-                      </Fragment>
-                    );
-                  })}
-                </Fragment>
-              );
-            })}
-            {!isLoading && hasItems && notFound && labelForNotFound && (
-              <Text className={cnSelectDropdown('LabelForNotFound')}>{labelForNotFound}</Text>
-            )}
-            {!isLoading && !hasItems && labelForEmptyItems && (
-              <Text className={cnSelectDropdown('LabelForEmptyItems')}>{labelForEmptyItems}</Text>
-            )}
-          </div>
-        </Popover>
-      )}
+                  );
+                }
+                return (
+                  <Fragment key={group.key}>
+                    {group.group && getGroupLabel && (
+                      <SelectGroupLabel
+                        label={getGroupLabel(group.group)}
+                        size={size}
+                        indent={indent}
+                      />
+                    )}
+                    {group.items.map((item, i) => {
+                      return (
+                        <Fragment key={`${group.key}-${i}`}>
+                          {renderItem({
+                            item,
+                            ...getOptionProps({ index: getIndex(), item }),
+                          })}
+                        </Fragment>
+                      );
+                    })}
+                  </Fragment>
+                );
+              })}
+              {!isLoading && hasItems && notFound && labelForNotFound && (
+                <Text className={cnSelectDropdown('LabelForNotFound')}>{labelForNotFound}</Text>
+              )}
+              {!isLoading && !hasItems && labelForEmptyItems && (
+                <Text className={cnSelectDropdown('LabelForEmptyItems')}>{labelForEmptyItems}</Text>
+              )}
+            </div>
+          </Popover>
+        );
+      }}
     </Transition>
   );
 };
