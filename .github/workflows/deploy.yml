@@ -61,6 +61,7 @@ jobs:
           key: ${{ secrets.DEPLOY_SERVER_KEY }}
           source: ${{ env.BUILD_SCRIPT_OUTPUT }}
           target: /var/www/${{ env.APP_NAME }}/${{ env.BRANCH_NAME }}
+          password: ${{ secrets.DEPLOY_SERVER_PASS }}
           strip_components: 1
           overwrite: true
           rm: true
