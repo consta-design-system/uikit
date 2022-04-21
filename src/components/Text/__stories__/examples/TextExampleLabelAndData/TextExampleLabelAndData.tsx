@@ -36,7 +36,7 @@ export const TextExampleLabelAndData = () => {
           Должность
         </Text>
         <Text as="div" align="left" font="mono" lineHeight="l" size="l" view="primary">
-          Инженер по бурению
+          Главный по тарелочкам
         </Text>
       </div>
       <div className={wp.decorator({ 'indent-b': 'm' })}>
@@ -52,7 +52,7 @@ export const TextExampleLabelAndData = () => {
           Подразделение
         </Text>
         <Text as="div" align="left" font="mono" lineHeight="l" size="l" view="primary">
-          Группа разведки и бурения
+          Группа столовой посуды и хрусталя
         </Text>
       </div>
     </div>
