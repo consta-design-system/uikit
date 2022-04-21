@@ -50,8 +50,8 @@ jobs:
           echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//-/g' | sed 's/\./_/g')" >> $GITHUB_ENV
 
       # Собираем приложение
-      - name: Build Appliction
-        run: $BUILD_SCRIPT
+      # - name: Build Appliction
+      #   run: $BUILD_SCRIPT
       # Доставляем собранное приложение на сервер
       - name: Deploy to Server
         uses: appleboy/scp-action@master
@@ -59,9 +59,10 @@ jobs:
           host: ${{ secrets.DEPLOY_SERVER_HOST }}
           username: ${{ secrets.DEPLOY_SERVER_USERNAME }}
           key: ${{ secrets.DEPLOY_SERVER_KEY }}
-          source: ${{ env.BUILD_SCRIPT_OUTPUT }}
-          target: /var/www/${{ env.APP_NAME }}/${{ env.BRANCH_NAME }}
           password: ${{ secrets.DEPLOY_SERVER_PASS }}
+          # source: ${{ env.BUILD_SCRIPT_OUTPUT }}
+          source: package.json
+          target: /var/www/${{ env.APP_NAME }}/${{ env.BRANCH_NAME }}
           strip_components: 1
           overwrite: true
           rm: true
