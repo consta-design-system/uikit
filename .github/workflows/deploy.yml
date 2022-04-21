@@ -59,7 +59,7 @@ jobs:
           host: ${{ secrets.DEPLOY_SERVER_HOST }}
           username: ${{ secrets.DEPLOY_SERVER_USERNAME }}
           key: ${{ secrets.DEPLOY_SERVER_KEY }}
-          password: ${{ secrets.DEPLOY_SERVER_PASS }}
+          # password: ${{ secrets.DEPLOY_SERVER_PASS }}
           # source: ${{ env.BUILD_SCRIPT_OUTPUT }}
           source: package.json
           target: /var/www/${{ env.APP_NAME }}/${{ env.BRANCH_NAME }}
