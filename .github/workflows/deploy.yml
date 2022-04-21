@@ -21,26 +21,26 @@ jobs:
       # Делаем checkout текущей ветки
       - uses: actions/checkout@master
       # Устанавливаем Node.JS для сборки приложения
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12'
+      # - uses: actions/setup-node@v1
+      #   with:
+      #     node-version: '12'
 
-      - name: Install yarn
-        id: yarn-setup
-        run: |
-          yarn policies set-version 1.19.1
-          echo "::set-output name=cache_dir::$(yarn cache dir)"
+      # - name: Install yarn
+      #   id: yarn-setup
+      #   run: |
+      #     yarn policies set-version 1.19.1
+      #     echo "::set-output name=cache_dir::$(yarn cache dir)"
 
-      - name: Настройка кэширования yarn
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.yarn-setup.outputs.cache_dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+      # - name: Настройка кэширования yarn
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: ${{ steps.yarn-setup.outputs.cache_dir }}
+      #     key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-yarn-
 
-      - name: Install dependencies
-        run: yarn --frozen-lockfile
+      # - name: Install dependencies
+      #   run: yarn --frozen-lockfile
 
       # Записываем в переменные окружения имя текущей ветки
       # Чтобы избежать конфиликтов с URL, меняем точки на _, а слеши на минусы
