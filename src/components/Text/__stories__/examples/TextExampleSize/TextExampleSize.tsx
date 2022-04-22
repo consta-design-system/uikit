@@ -16,7 +16,7 @@ export const TextExampleSize = () => {
           <Text size="s" view="ghost" className={wp.decorator({ 'indent-b': 'm' })}>
             {`text*size*${item}`}
           </Text>
-          <Text size={item}>Нефть</Text>
+          <Text size={item}>Просто текст</Text>
         </div>
       ))}
     </div>

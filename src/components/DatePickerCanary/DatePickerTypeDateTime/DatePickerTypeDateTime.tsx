@@ -7,11 +7,8 @@ import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { setRef } from '../../../utils/setRef';
 import { DatePickerDropdown } from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeDateTime } from '../DatePickerFieldTypeDateTime/DatePickerFieldTypeDateTime';
-import {
-  datePickerPropFormatTypeDateTime,
-  DatePickerTypeComponent,
-  getMultiplicityTime,
-} from '../helpers';
+import { datePickerPropFormatTypeDateTime, getMultiplicityTime } from '../helpers';
+import { DatePickerTypeComponent } from '../types';
 import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 
 export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> = forwardRef(

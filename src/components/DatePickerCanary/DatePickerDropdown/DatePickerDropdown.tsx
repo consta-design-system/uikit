@@ -22,7 +22,7 @@ import {
   DatePickerPropDateTimeView,
   DatePickerPropDropdownForm,
   datePickerPropDropdownFormDefault,
-} from '../helpers';
+} from '../types';
 
 export type DatePickerDropdownPropOnChange = DateTimePropOnChange;
 

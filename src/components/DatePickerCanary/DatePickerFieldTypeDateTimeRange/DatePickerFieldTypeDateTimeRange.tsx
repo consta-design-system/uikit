@@ -6,7 +6,8 @@ import { FieldCaption } from '../../FieldCaption/FieldCaption';
 import { FieldLabel } from '../../FieldLabel/FieldLabel';
 import { DatePickerFieldTypeDateTime } from '../DatePickerFieldTypeDateTime/DatePickerFieldTypeDateTime';
 import { cnDatePickerMixRangeField } from '../DatePickerMixRangeField/DatePickerMixRangeField';
-import { datePickerErrorTypes, getFormForEnd, getFormForStart } from '../helpers';
+import { getFormForEnd, getFormForStart } from '../helpers';
+import { datePickerErrorTypes } from '../types';
 
 import { DatePickerFieldTypeDateTimeRangeProps } from './helpers';
 
@@ -26,7 +27,6 @@ export const DatePickerFieldTypeDateTimeRange = forwardRef<
     value = [],
     onChange,
     onError,
-    name,
     disabled,
     size,
     view,
@@ -54,18 +54,18 @@ export const DatePickerFieldTypeDateTimeRange = forwardRef<
     labelPosition,
     caption,
     width,
+    startFieldName,
+    endFieldName,
     ...otherProps
   } = props;
 
   const commonProps = {
     className: cnDatePickerMixRangeField('Field'),
     disabled,
-    name,
     onError,
     size,
     view,
     status,
-    autoFocus,
     placeholder,
     readOnly,
     required,
@@ -176,6 +176,8 @@ export const DatePickerFieldTypeDateTimeRange = forwardRef<
             onFocus={startFieldOnFocus}
             onBlur={startFieldOnBlur}
             focused={startFocused}
+            autoFocus={autoFocus}
+            name={startFieldName}
           />
           <DatePickerFieldTypeDateTime
             {...commonProps}
@@ -189,6 +191,7 @@ export const DatePickerFieldTypeDateTimeRange = forwardRef<
             onFocus={endFieldOnFocus}
             onBlur={endFieldOnBlur}
             focused={endFocused}
+            name={endFieldName}
           />
         </div>
         {caption && (
