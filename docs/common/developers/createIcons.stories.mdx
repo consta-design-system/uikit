@@ -18,17 +18,9 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 ### 1. Подготовьте SVG
 
-1. Удалите из SVG атрибуты `fill`, `fillOpacity`, `width`, `height`.
+Удалите из SVG атрибуты `fill`, `fillOpacity`, `width`, `height`.
 
 > Если эти атрибуты останутся, иконки не будут меняться, когда поменяется размер компонента или тема
-
-2. Добавьте `className="Icon-Svg"`.
-
-```
-<svg width="16" height="16" viewBox="0 0 16 16" className="Icon-Svg" xmlns="http://www.w3.org/2000/svg">
-  <path d="M13 8L3 14L3 2L13 8Z" />
-</svg>
-```
 
 ### 2. Создайте иконки с помощью функции `createIcon`
 
