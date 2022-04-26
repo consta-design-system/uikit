@@ -1,6 +1,5 @@
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
-import { startOfDecade } from 'date-fns';
-import { addYears } from 'date-fns/esm';
+import { addYears, startOfDecade } from 'date-fns';
 
 import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
 import { useFlag } from '../../../hooks/useFlag/useFlag';
