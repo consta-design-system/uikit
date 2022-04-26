@@ -10,7 +10,7 @@ import {
   DatePickerDropdownPropOnChange,
 } from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeDateRange } from '../DatePickerFieldTypeDateRange/DatePickerFieldTypeDateRange';
-import { normalizeRangeValue } from '../helpers';
+import { getFieldName, normalizeRangeValue } from '../helpers';
 import { DatePickerTypeComponent } from '../types';
 import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 
@@ -157,8 +157,8 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = fo
           endFieldOnBlur={endFieldOnBlurHandler}
           startFocused={startFocused}
           endFocused={endFocused}
-          startFieldName={Array.isArray(name) ? name[0] : `${name}_start`}
-          endFieldName={Array.isArray(name) ? name[1] : `${name}_end`}
+          startFieldName={getFieldName(name, 0)}
+          endFieldName={getFieldName(name, 1)}
         />
         <DatePickerDropdown
           type="date"

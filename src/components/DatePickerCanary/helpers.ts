@@ -135,3 +135,17 @@ export const getPartsDate = (
 };
 
 export const isTypeWithTime = (type: DatePickerPropType) => type.indexOf('time') !== -1;
+
+const fieldPrefixs = ['start', 'end'] as const;
+
+export const getFieldName = (name: [string?, string?] | string | undefined, rangeIndex: 0 | 1) => {
+  if (!name) {
+    return undefined;
+  }
+
+  if (Array.isArray(name)) {
+    return name[rangeIndex];
+  }
+
+  return `${name}_${fieldPrefixs[rangeIndex]}`;
+};

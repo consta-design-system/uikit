@@ -58,7 +58,7 @@ type DatePickerPropSide<TYPE> = TYPE extends Range
   ? [(string | IconComponent)?, (string | IconComponent)?] | string | IconComponent
   : string | IconComponent;
 
-type DatePickerPropCalendarOnFocus<TYPE> = TYPE extends Range
+type DatePickerPropOnFocus<TYPE> = TYPE extends Range
   ?
       | [React.FocusEventHandler<HTMLElement>?, React.FocusEventHandler<HTMLElement>?]
       | React.FocusEventHandler<HTMLElement>
@@ -88,8 +88,8 @@ export type DatePickerProps<
     view?: TextFieldPropView;
     form?: TextFieldPropForm;
     status?: TextFieldPropStatus;
-    onFocus?: DatePickerPropCalendarOnFocus<TYPE>;
-    onBlur?: DatePickerPropCalendarOnFocus<TYPE>;
+    onFocus?: DatePickerPropOnFocus<TYPE>;
+    onBlur?: DatePickerPropOnFocus<TYPE>;
     autoFocus?: boolean;
     placeholder?: string;
     readOnly?: boolean;

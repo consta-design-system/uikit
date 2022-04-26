@@ -1,5 +1,45 @@
 # Changelog
 
+## v3.20.0 (22/04/2022)
+- Изменили API для `DatePicker` — настройки для `range`-типов стали удобнее. ⚠️ Осторожно, ломающие изменения:  некоторые свойства поменялись, см. ниже. 
+- Исправили критическую ошибку в `useBreakpoints` —  `CSS` и `JS` брейкпоины теперь переключаются одновременно.
+- `Select` — исправили ошибку с неправильным выделением опций.
+- Добавили докуменацию про адапивность компонентов:  `Responses`,  `Pagination`, `Layout`,  `Grid`
+- в `Table` исправили баг с `lazyload`
+
+⚠️ Какие свойства поменялись в `DatePicker`
+
+```
+startFieldInputRef - deleted, use inputRef
+endFieldInputRef - deleted, use inputRef
+startFieldLeftSide - deleted, use leftSide
+startFieldRightSide - deleted, use rightSide
+endFieldLeftSide - deleted, use leftSide
+endFieldRightSide - deleted, use rightSide
+startFieldOnFocus - deleted, use onFocus
+startFieldOnBlur - deleted, use onBlur
+endFieldOnFocus - deleted, use onFocus
+endFieldOnBlur - deleted, use onBlur
+```
+
+---
+
+- [docs(global): remove gpn (#2245)](https://github.com/consta-design-system/uikit/commit/d367ba6b631c602a94460e411a5c57715db95787) - [@arhayka](https://github.com/arhayka)
+- [docs(Responses): add adaptive section (#2239)](https://github.com/consta-design-system/uikit/commit/d83e2b754ea9c8e6041b3b53e8d63609584244c0) - [@arhayka](https://github.com/arhayka)
+- [fix(Table): fix lazyload (#2236)](https://github.com/consta-design-system/uikit/commit/eec933b23553bc40b467404b2cad0341e5fc2a15) - [@N1MBER](https://github.com/N1MBER)
+- [docs(Pagination): add adattive section (#2225)](https://github.com/consta-design-system/uikit/commit/a6bcf44cab2d3ab211ee33e9cf7f3fd160d07421) - [@arhayka](https://github.com/arhayka)
+- [docs(Layout): add adaptive section (#2224)](https://github.com/consta-design-system/uikit/commit/6502713b2305f61228cb0e0c00940d9fc7e1ecce) - [@arhayka](https://github.com/arhayka)
+- [docs(Grid): add adaptive section (#2222)](https://github.com/consta-design-system/uikit/commit/387c4579bdd2b411a8cc58281ef1021436278e13) - [@arhayka](https://github.com/arhayka)
+- [chore(deploy): edit config (#2247)](https://github.com/consta-design-system/uikit/commit/34a860c2ed609376c77d12e8ae650c9dc8410267) - [@gizeasy](https://github.com/gizeasy)
+- [feat(DatePicker): edit api (#2230)](https://github.com/consta-design-system/uikit/commit/6a1c57e061e3a5daa7c3ae6041e1fd1fbdba2591) - [@gizeasy](https://github.com/gizeasy)
+- [fix(useBreakpoints): fixed EventListener (#2234)](https://github.com/consta-design-system/uikit/commit/9e054e422fded782c978f04fd7c25bd0c5258537) - [@gizeasy](https://github.com/gizeasy)
+- [feat(SelectItem): added break-word (#2233)](https://github.com/consta-design-system/uikit/commit/61877e21550d0563dcbf8dd356a427d9fc18d453) - [@gizeasy](https://github.com/gizeasy)
+- [docs(global): change links to the landing (#2226)](https://github.com/consta-design-system/uikit/commit/6e44faf9dd1ec6e6076b902e20f446213d6f5a1d) - [@arhayka](https://github.com/arhayka)
+- [fix(SelectDropdown): fix bug with items index (#2232)](https://github.com/consta-design-system/uikit/commit/8eb24883ee45e843357d4b3ec93c47c3db12eb04) - [@N1MBER](https://github.com/N1MBER)
+- [docs(global): replace url (#2228)](https://github.com/consta-design-system/uikit/commit/720df584d236bf436d0370e469916a16895f9e24) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v3.19.0 (13/04/2022)
 Самое важное:
 - В `BreadcrumbsCanary` добавлена возможность добавления под меню в элемент хлебных крошек
@@ -482,16 +522,3 @@
 - [fix(Modal): added nodeRef for CssTransition (#1600)](https://github.com/gazprom-neft/consta-uikit/commit/9ab034375657559c016810962280e0c9f770283f) - [@AntonS86](https://github.com/AntonS86)
 - [test(Table): added test for onRowClick (#1602)](https://github.com/gazprom-neft/consta-uikit/commit/31d1d1cd8161b0ada6d322a3ef1e77c88b5ec35b) - [@AntonS86](https://github.com/AntonS86)
 - [test(Modal_Sidebar): added tests for events when the escape key is pressed (#1603)](https://github.com/gazprom-neft/consta-uikit/commit/e03b59ce8bed50e5ce76adebb7f08d584fcf9d47) - [@AntonS86](https://github.com/AntonS86)
-
---------------------
-
-## v3.4.0 (22/09/2021)
-- [chore(deps): bump tmpl from 1.0.4 to 1.0.5 (#1583)](https://github.com/gazprom-neft/consta-uikit/commit/c7abe9ee09d845d2d602fe529c9948d6e959df04) - [@dependabot](https://github.com/dependabot[bot])
-- [fix(Table): added check for filters and tests (#1561)](https://github.com/gazprom-neft/consta-uikit/commit/8c02bd71a04b24b5df40cdd7508dbd0a50a7311a) - [@AntonS86](https://github.com/AntonS86)
-- [docs(common): rewrite main page (#1573)](https://github.com/gazprom-neft/consta-uikit/commit/87fa76085e69700cb35379de7deb13d7c69c121d) - [@arhayka](https://github.com/arhayka)
-- [fix(Table): edited appearance TableFilterContainer and TableFilterTooltip (#1550)](https://github.com/gazprom-neft/consta-uikit/commit/22ef3f1d9fc4e6f0e1ad8a9b6f96f47311dc6f64) - [@AntonS86](https://github.com/AntonS86)
-- [chore(commitizen): change footer (#1586)](https://github.com/gazprom-neft/consta-uikit/commit/93033456822df519ae9d346607dfbf96b0a03d2d) - [@gizeasy](https://github.com/gizeasy)
-- [feat(SnackBar): Add hideTimer props (#1552)](https://github.com/gazprom-neft/consta-uikit/commit/a03df88c26d66f363b0dd8e0d4491d7975380963) - [@N1KN](https://github.com/N1KN)
-- [feat(Table): added default sort (#1545)](https://github.com/gazprom-neft/consta-uikit/commit/8126255aa82605c2542fea4e127e77d36cd577e2) - [@AntonS86](https://github.com/AntonS86)
-- [feat(Table): added ref to component parameters (#1518)](https://github.com/gazprom-neft/consta-uikit/commit/c87693262ba3e25053c59f88dcece04c821c4145) - [@AntonS86](https://github.com/AntonS86)
-- [docs(MixCard): edit docs, add examples (#1562)](https://github.com/gazprom-neft/consta-uikit/commit/4f7a4027b47f9075d4e1b7f97ebd8889b878803b) - [@arhayka](https://github.com/arhayka)
