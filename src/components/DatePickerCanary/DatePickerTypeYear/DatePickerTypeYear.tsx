@@ -1,6 +1,6 @@
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
-import addMonths from 'date-fns/addMonths';
-import startOfMonth from 'date-fns/startOfMonth';
+import { startOfDecade } from 'date-fns';
+import { addYears } from 'date-fns/esm';
 
 import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
 import { useFlag } from '../../../hooks/useFlag/useFlag';
@@ -49,17 +49,17 @@ export const DatePickerTypeYear: DatePickerTypeComponent<'year'> = forwardRef((p
 
   useEffect(() => {
     if (props.value && props.dateTimeView === 'classic' && calendarVisibleDate) {
-      const newVisibleDate = startOfMonth(props.value);
+      const newVisibleDate = startOfDecade(props.value);
       if (newVisibleDate.getTime() !== calendarVisibleDate.getTime()) {
         setCurrentVisibleDate(newVisibleDate);
       }
       return;
     }
     if (props.value && props.dateTimeView !== 'classic' && calendarVisibleDate) {
-      const newVisibleDate = startOfMonth(props.value);
+      const newVisibleDate = startOfDecade(props.value);
       if (
         newVisibleDate.getTime() !== calendarVisibleDate.getTime() &&
-        newVisibleDate.getTime() !== addMonths(calendarVisibleDate, 1).getTime()
+        newVisibleDate.getTime() !== addYears(calendarVisibleDate, 10).getTime()
       ) {
         setCurrentVisibleDate(newVisibleDate);
       }

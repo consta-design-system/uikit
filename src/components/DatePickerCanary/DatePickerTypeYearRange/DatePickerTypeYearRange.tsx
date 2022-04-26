@@ -1,6 +1,5 @@
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
-import addMonths from 'date-fns/addMonths';
-import startOfMonth from 'date-fns/startOfMonth';
+import { addYears, startOfDecade } from 'date-fns';
 
 import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
 import { useFlag } from '../../../hooks/useFlag/useFlag';
@@ -82,18 +81,18 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> = fo
     // эфект для того чтобы календарь переключался при вводе с клавиатуры
     useEffect(() => {
       if (props.value?.[0] && props.dateTimeView === 'classic' && startFocused) {
-        const newVisibleDate = startOfMonth(props.value[0]);
+        const newVisibleDate = startOfDecade(props.value[0]);
         if (newVisibleDate.getTime() !== currentVisibleDate?.getTime()) {
           setCurrentVisibleDate(newVisibleDate);
         }
         return;
       }
       if (props.value?.[0] && props.dateTimeView !== 'classic' && startFocused) {
-        const newVisibleDate = startOfMonth(props.value[0]);
+        const newVisibleDate = startOfDecade(props.value[0]);
         if (
           newVisibleDate.getTime() !== currentVisibleDate?.getTime() &&
           newVisibleDate.getTime() !==
-            (currentVisibleDate && addMonths(currentVisibleDate, 1).getTime())
+            (currentVisibleDate && addYears(currentVisibleDate, 10).getTime())
         ) {
           setCurrentVisibleDate(newVisibleDate);
         }
@@ -106,20 +105,20 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> = fo
 
     useEffect(() => {
       if (props.value?.[1] && props.dateTimeView === 'classic' && endFocused) {
-        const newVisibleDate = startOfMonth(props.value[1]);
+        const newVisibleDate = startOfDecade(props.value[1]);
         if (newVisibleDate.getTime() !== currentVisibleDate?.getTime()) {
           setCurrentVisibleDate(newVisibleDate);
         }
         return;
       }
       if (props.value?.[1] && props.dateTimeView !== 'classic' && endFocused) {
-        const newVisibleDate = startOfMonth(props.value[1]);
+        const newVisibleDate = startOfDecade(props.value[1]);
         if (
           newVisibleDate.getTime() !== currentVisibleDate?.getTime() &&
           newVisibleDate.getTime() !==
-            (currentVisibleDate && addMonths(currentVisibleDate, 1).getTime())
+            (currentVisibleDate && addYears(currentVisibleDate, 10).getTime())
         ) {
-          setCurrentVisibleDate(addMonths(newVisibleDate, -1));
+          setCurrentVisibleDate(addYears(newVisibleDate, -10));
         }
         return;
       }

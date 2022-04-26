@@ -53,11 +53,7 @@ export const DatePickerFieldTypeYear = React.forwardRef<
         const [yyyy] = getPartsDate(stringValue, formatProp, separator, false, ['yyyy']);
 
         if (yyyy) {
-          const date = parse(
-            `${1}${datePickerPropSeparatorDefault}${1}${datePickerPropSeparatorDefault}${yyyy}`,
-            datePickerPropFormatTypeYear,
-            new Date(),
-          );
+          const date = parse(`${yyyy}`, datePickerPropFormatTypeYear, new Date());
           if (!isWithinInterval(date, { start: minDate, end: maxDate })) {
             onError &&
               onError({
