@@ -10,6 +10,8 @@ import { DatePickerTypeDateRange } from './DatePickerTypeDateRange/DatePickerTyp
 import { DatePickerTypeDateTime } from './DatePickerTypeDateTime/DatePickerTypeDateTime';
 import { DatePickerTypeDateTimeRange } from './DatePickerTypeDateTimeRange/DatePickerTypeDateTimeRange';
 import { DatePickerTypeTime } from './DatePickerTypeTime/DatePickerTypeTime';
+import { DatePickerTypeYear } from './DatePickerTypeYear/DatePickerTypeYear';
+import { DatePickerTypeYearRange } from './DatePickerTypeYearRange/DatePickerTypeYearRange';
 import { isTypeWithTime } from './helpers';
 import {
   DatePickerComponent,
@@ -24,6 +26,8 @@ const typeMap: Record<DatePickerPropType, DatePickerTypeComponent<DatePickerProp
   'date-time': DatePickerTypeDateTime,
   'date-time-range': DatePickerTypeDateTimeRange,
   'time': DatePickerTypeTime,
+  'year': DatePickerTypeYear,
+  'year-range': DatePickerTypeYearRange,
 };
 
 export const COMPONENT_NAME = 'DatePicker' as const;
