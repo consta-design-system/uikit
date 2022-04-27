@@ -14,6 +14,7 @@ import {
   DatePickerExampleTypeTime,
 } from './examples/DatePickerExampleType/DatePickerExampleType';
 import { DatePickerExampleMulti } from './examples/DatePickerExampleMulti/DatePickerExampleMulti';
+import { DatePickerExampleTwoIcons } from './examples/DatePickerExampleTwoFields/DatePickerExampleTwoFields';
 
 <!--info
 description: Поле, в котором можно выбрать дату или период.
@@ -42,7 +43,8 @@ import { DatePicker } from '@consta/uikit/DatePickerCanary';
   - [Подпись](#подпись)
   - [Обязательность](#обязательность)
   - [Статус](#статус-поля)
-  - [Дополнительные контролы](#дополнительные-контролы)
+  - [Два поля ввода](#два-поля-ввода-свойства-и-события)
+- [Дополнительные контролы](#дополнительные-контролы)
 - [Обработка ошибок](#обработка-ошибок)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
@@ -238,10 +240,41 @@ export const DatePickerExampleFormat = () => {
 
 <DatePickerExampleStatus />
 
-### Дополнительные контролы
+### Два поля ввода: свойства и события
 
-Чтобы добавить контролы в поле выбора дат, передайте в свойсве `renderAdditionalControls`
-рендер-функцию для отрисовки нужных элементов.
+Если у вас два поля ввода ([тип Range](#свойства): `date-range` или `date-time-range`), вы можете указать свойства и события для обоих. В этом случае синтаксис такой:
+
+`свойство = [значение для левого поля, значение для правого поля]`
+
+Это работает для свойств `name`, `leftSide` и `rightSide`, `value`, `inputRef` и для событий `onChange`, `onFocus`, `onBlur`.
+
+##### Пример с разными иконками и подсказками для левого и правого поля
+
+```tsx
+import { IconForward } from '../../../../../icons/IconForward/IconForward';
+import { IconBackward } from '../../../../../icons/IconBackward/IconBackward';
+
+export const DatePickerExampleTwoIcons = () => {
+  const [value, setValue] = useState<[Date?, Date?] | null>(null);
+
+  return (
+    <DatePicker
+      type="date-range"
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      leftSide={[IconForward, IconBackward]}
+      rightSide={['туда', 'обратно']}
+    />
+  );
+};
+```
+
+<DatePickerExampleTwoIcons />
+
+## Дополнительные контролы
+
+Чтобы добавить контролы в календарь, передайте в свойстве `renderAdditionalControls`
+рендер-функцию для отрисовки нужных элементов (например, кнопок).
 
 ```tsx
 export const DatePickerExampleAdditionalControls = () => {
@@ -326,7 +359,7 @@ export const DatePickerExampleOnError = () => {
     }
     if (props.type === 'startDateIsGreaterThanEndDate') {
       setError(
-        `Дата начала (${formatDate(props.date[0])}) больше чем дата конца (${formatDate(
+        `Дата начала (${formatDate(props.date[0])}) больше, чем дата конца (${formatDate(
           props.date[1],
         )})`,
       );
