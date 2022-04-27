@@ -12,6 +12,8 @@ import {
   DatePickerExampleTypeDateTime,
   DatePickerExampleTypeDateTimeRange,
   DatePickerExampleTypeTime,
+  DatePickerExampleTypeYear,
+  DatePickerExampleTypeYearRange,
 } from './examples/DatePickerExampleType/DatePickerExampleType';
 import { DatePickerExampleMulti } from './examples/DatePickerExampleMulti/DatePickerExampleMulti';
 import { DatePickerExampleTwoIcons } from './examples/DatePickerExampleTwoFields/DatePickerExampleTwoFields';
@@ -69,10 +71,14 @@ export const DatePickerExampleValue = () => {
 За способ выбора даты отвечает свойство `type`. Варианты:
 
 - `date` — позволяет выбрать одну дату (показывает одно поле ввода),
-- `date-range` — позволяет выбрать период: дату начала и дату конца (показывает два поля ввода).
-- `date-time` — позволяет выбрать одну дату cо временем (показывает одно поле ввода),
-- `date-time-range` — позволяет выбрать период cо временем (показывает два поля ввода),
-- `time` — позволяет выбрать время (показывает одно поле ввода).
+- `date-range` — период: дату начала и дату конца (показывает два поля ввода).
+- `date-time` — одну дату cо временем,
+- `date-time-range` — период cо временем,
+- `time` — время,
+- `year` – один год,
+- `year-range` — интервал в несколько лет.
+
+Все варианты с `-range` выводят два поля ввода и соответствуют типу [Range](#свойства).
 
 ```tsx
 const DatePickerExampleTypeDate = () => {
@@ -120,6 +126,24 @@ export const DatePickerExampleTypeTime = () => {
 ```
 
 <DatePickerExampleTypeTime />
+
+```tsx
+export const DatePickerExampleTypeYear = () => {
+  const [value, setValue] = useState<Date | null>();
+  return <DatePicker type="year" value={value} onChange={({ value }) => setValue(value)} />;
+};
+```
+
+<DatePickerExampleTypeYear />
+
+```tsx
+export const DatePickerExampleTypeYearRange = () => {
+  const [value, setValue] = useState<Date | null>();
+  return <DatePicker type="year-range" value={value} onChange={({ value }) => setValue(value)} />;
+};
+```
+
+<DatePickerExampleTypeYearRange />
 
 ## Формат даты
 
@@ -408,7 +432,7 @@ import { DatePicker } from '@consta/uikit/DatePickerCanary';
 import { Locale } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 
-type Range = 'date-range' | 'date-time-range';
+type Range = 'date-range' | 'date-time-range' | 'year-range';
 
 type DatePickerPropValue<TYPE> = (TYPE extends 'date' ? Date : [Date?, Date?]) | null;
 
@@ -461,10 +485,10 @@ type DatePickerPropOnError = (
 | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | [`onChange?`](#выбор-даты)                                                 | `DatePickerPropOnChange<TYPE>`                                                                                                                                                                                                                              | -                     | Событие выбора даты или периода                                                                                        |
 | [`value?`](#выбор-даты)                                                    | `DatePickerPropValue<TYPE>`                                                                                                                                                                                                                                 | -                     | Выбранная дата или период                                                                                              |
-| [`type?`](#тип-дата-или-период)                                            | `'date'` &#124; `'date-range'` &#124; `'date-time'` &#124; `'date-time-range'` &#124; `'time'`                                                                                                                                                              | `date`                | Тип календаря: выбор даты, времени или выбор периода                                                                   |
+| [`type?`](#тип-дата-или-период)                                            | `'date'` &#124; `'date-range'` &#124; `'date-time'` &#124; `'date-time-range'` &#124; `'time'` &#124; `'year'` &#124; `'year-range'`                                                                                                                        | `date`                | Тип календаря: выбор даты, времени или выбор периода                                                                   |
 | [`label?`](#лейбл)                                                         | `string`                                                                                                                                                                                                                                                    | -                     | Лейбл к полю ввода                                                                                                     |
 | [`labelPosition?`](#лейбл)                                                 | `'top'` &#124; `'left'`                                                                                                                                                                                                                                     | `'top'`               | Положение лейбла относительно поля                                                                                     |
-| [`caption?`](#подпись)                                                     | `string`                                                                                                                                                                                                                                                    | -                     | Подпись под полем ввода                                                                                                |
+| [`caption?`](#подпись)                                                     | `string`                                                                                                                                                                                                                                                    | -                     | Подпись под полем ввода                                                                                                |  | `string` | - | Подпись под полем ввода |
 | name?                                                                      | `DatePickerPropName<TYPE>`                                                                                                                                                                                                                                  | -                     | Имя поля ввода                                                                                                         |
 | [`required?`](#обязательность)                                             | `boolean`                                                                                                                                                                                                                                                   | -                     | Нужно заполнить                                                                                                        |
 | `minDate?`                                                                 | `Date`                                                                                                                                                                                                                                                      | `01.01.0001 00:00:00` | Ограничение выбора по меньшей дате, см. [DateTime](/?path=/docs/components-datetime--playground)                       |

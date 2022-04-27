@@ -73,3 +73,31 @@ export const DatePickerExampleTypeTime = () => {
     </StoryBookExample>
   );
 };
+
+export const DatePickerExampleTypeYear = () => {
+  const [value, setValue] = useState<Date | null>();
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <DatePicker
+        type="year"
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        style={{ zIndex: 2 }}
+      />
+    </StoryBookExample>
+  );
+};
+
+export const DatePickerExampleTypeYearRange = () => {
+  const [value, setValue] = useState<[Date?, Date?] | null>(null);
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <DatePicker
+        type="year-range"
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        style={{ zIndex: 2 }}
+      />
+    </StoryBookExample>
+  );
+};

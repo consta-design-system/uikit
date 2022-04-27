@@ -105,8 +105,11 @@ export function Playground() {
   const icon = withIcon ? IconCalendar : undefined;
 
   useEffect(() => {
+    console.log(type);
     setValue(null);
   }, [type]);
+
+  console.log(value);
 
   return (
     <div style={{ maxWidth: 500 }}>
