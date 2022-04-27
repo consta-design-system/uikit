@@ -4,6 +4,7 @@ import { SnackBarExampleIcon } from './examples/SnackBarExampleIcon/SnackBarExam
 import { SnackBarExampleTimer } from './examples/SnackBarExampleTimer/SnackBarExampleTimer';
 import { SnackBarExampleButtons } from './examples/SnackBarExampleButtons/SnackBarExampleButtons';
 import { SnackBarExampleText } from './examples/SnackBarExampleText/SnackBarExampleText';
+import { SnackBarExampleAdaptive } from './examples/SnackBarExampleAdaptive/SnackBarExampleAdaptive';
 
 <!--info
 description: Мгновенные сообщения для пользователя. Перекрывает содержимое.
@@ -31,6 +32,7 @@ import { SnackBar } from '@consta/uikit/SnackBar';
 - [Возможность закрыть снекбар](#возможность-закрыть-снекбар)
 - [Автоматическое закрытие](#автоматическое-закрытие)
   - [Таймер](#таймер)
+- [Адаптивность](#адаптивность)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
@@ -328,6 +330,13 @@ export const SnackBarExampleTimer: React.FC = () => {
 ```
 
 <SnackBarExampleTimer />
+
+## Адаптивность
+
+Максимальная ширина `SnackBar` всегда равна 400 px. Чтобы текст хорошо выглядел
+на мобильных экранах, не стоит делать `SnackBar` у́же контентной области.
+
+<SnackBarExampleAdaptive />
 
 ## Импорт
 
