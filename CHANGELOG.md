@@ -1,5 +1,19 @@
 # Changelog
 
+## v3.21.0 (27/04/2022)
+Самое главное:
+- в `DatePicker` появились типы `year` и `year-range`
+- Доработана документация по `DatePicker` и `Combobox`
+---
+
+- [fix(TableSelectedOptionsList): add ellipsis to filter list (#2257)](https://github.com/consta-design-system/uikit/commit/d3e5df5e78211ac79bd342dbc2959f136d9d8082) - [@N1MBER](https://github.com/N1MBER)
+- [docs(Combobox): verify examples (#2256)](https://github.com/consta-design-system/uikit/commit/cedcbfcf14778ab26c297eac6f53b5947f723927) - [@arhayka](https://github.com/arhayka)
+- [feat(DatePicker): add types year and year-range (#2254)](https://github.com/consta-design-system/uikit/commit/da36fda7386db228b1d3e458bfafe5aff06b4c25) - [@N1MBER](https://github.com/N1MBER)
+- [docs(DatePicker): add docs for type Range fields (#2253)](https://github.com/consta-design-system/uikit/commit/8d97debbb8e107f365ad57e5894913a149e2dc99) - [@arhayka](https://github.com/arhayka)
+- [docs(common): add SVG parameters to create icon docs (#2237)](https://github.com/consta-design-system/uikit/commit/e24316c67a123d368a2a79d4d0b69b054048edb5) - [@arhayka](https://github.com/arhayka)
+
+--------------------
+
 ## v3.20.0 (22/04/2022)
 - Изменили API для `DatePicker` — настройки для `range`-типов стали удобнее. ⚠️ Осторожно, ломающие изменения:  некоторые свойства поменялись, см. ниже. 
 - Исправили критическую ошибку в `useBreakpoints` —  `CSS` и `JS` брейкпоины теперь переключаются одновременно.
@@ -500,25 +514,3 @@ endFieldOnBlur - deleted, use onBlur
 - [fix(Switch): updated background-color disabled state (#1591)](https://github.com/gazprom-neft/consta-uikit/commit/440f1d750463290c887f99ffbfd58719ec75f52e) - [@AntonS86](https://github.com/AntonS86)
 - [feat(SnackBar): Adding the ability to pass a React component (#1574)](https://github.com/gazprom-neft/consta-uikit/commit/943b81287eb5b6de1c6e28e3b13331e4a6bbe4c3) - [@N1KN](https://github.com/N1KN)
 - [feat(EventInterceptor): Fix typings of usePropsHandler (#1563)](https://github.com/gazprom-neft/consta-uikit/commit/590bfa4a1e5fbea50a14a7b6ff8438ce0c7e641d) - [@N1KN](https://github.com/N1KN)
-
---------------------
-
-## v3.5.0 (29/09/2021)
-Важное из обновления:
-- Добавили новый компонент `Layout`
-- Расширили функционал таблицы
-
----
-
-- [feat(Table): Add create row button; (#1611)](https://github.com/gazprom-neft/consta-uikit/commit/2b842b2de2b9814bd00c4cfac66e52a05262d695) - [@N1KN](https://github.com/N1KN)
-- [docs(Card): edit docs (#1613)](https://github.com/gazprom-neft/consta-uikit/commit/af8ae24da9c0795b0abb284062548ff435fd6f02) - [@arhayka](https://github.com/arhayka)
-- [feat(Layout): add new component (#1554)](https://github.com/gazprom-neft/consta-uikit/commit/4037e2a9204988da215f7a8c65823bf051c84c64) - [@N1MBER](https://github.com/N1MBER)
-- [feat(Text): added prop ellipsis and update docs (#1566)](https://github.com/gazprom-neft/consta-uikit/commit/4e2529b81072d23f5a3d88f780c61557e1dcb16c) - [@AntonS86](https://github.com/AntonS86)
-- [fix(Theme): Remove css variable --color-nums-shadow (#1590)](https://github.com/gazprom-neft/consta-uikit/commit/b41e8e5c56738058dd62f7474523bda532773682) - [@N1KN](https://github.com/N1KN)
-- [test(Table): added test for checking onFiltersUpdated call (#1607)](https://github.com/gazprom-neft/consta-uikit/commit/660765c5699270d43040a8ce0b7726c7b699568a) - [@AntonS86](https://github.com/AntonS86)
-- [feat(Sidebar): added property 'size' (#1588)](https://github.com/gazprom-neft/consta-uikit/commit/756fc839009932b5c37d7aadfcae6f40c1090119) - [@AntonS86](https://github.com/AntonS86)
-- [feat(Table): Add getTagLabel props (#1531)](https://github.com/gazprom-neft/consta-uikit/commit/2d866722d753740629438391afa23204a2141ace) - [@N1KN](https://github.com/N1KN)
-- [feat(Table): Add getComparisonValue function (#1570)](https://github.com/gazprom-neft/consta-uikit/commit/56fc45d253ca79936d5d50d6caae80fd850b3338) - [@N1KN](https://github.com/N1KN)
-- [fix(Modal): added nodeRef for CssTransition (#1600)](https://github.com/gazprom-neft/consta-uikit/commit/9ab034375657559c016810962280e0c9f770283f) - [@AntonS86](https://github.com/AntonS86)
-- [test(Table): added test for onRowClick (#1602)](https://github.com/gazprom-neft/consta-uikit/commit/31d1d1cd8161b0ada6d322a3ef1e77c88b5ec35b) - [@AntonS86](https://github.com/AntonS86)
-- [test(Modal_Sidebar): added tests for events when the escape key is pressed (#1603)](https://github.com/gazprom-neft/consta-uikit/commit/e03b59ce8bed50e5ce76adebb7f08d584fcf9d47) - [@AntonS86](https://github.com/AntonS86)
