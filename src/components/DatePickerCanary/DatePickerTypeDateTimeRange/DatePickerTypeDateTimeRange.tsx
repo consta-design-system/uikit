@@ -30,6 +30,9 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
       renderAdditionalControls,
       inputRef,
       name,
+      multiplicityMinutes,
+      multiplicitySeconds,
+      multiplicityHours,
       ...fieldProps
     } = props;
 
@@ -154,6 +157,9 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
           form={dropdownForm}
           onChange={hadleChange}
           renderAdditionalControls={renderAdditionalControls}
+          multiplicityMinutes={multiplicityMinutes}
+          multiplicitySeconds={multiplicitySeconds}
+          multiplicityHours={multiplicityHours}
           zIndex={typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined}
         />
       </>
