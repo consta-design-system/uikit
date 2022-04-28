@@ -1,5 +1,10 @@
 # Changelog
 
+## v3.21.2 (28/04/2022)
+- [fix(DatePicker): fixed multiplicity on DatePicker type='date-time-range'](https://github.com/consta-design-system/uikit/commit/af801220f13c753fd67d98030057467535f450cf) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v3.21.0 (27/04/2022)
 Самое главное:
 - в `DatePicker` появились типы `year` и `year-range`
@@ -482,35 +487,3 @@ endFieldOnBlur - deleted, use onBlur
 - [docs(storybook): fix figma links (#1655)](https://github.com/gazprom-neft/consta-uikit/commit/6f81480e9347120c53d3d3bacdb12ba2d122fe80) - [@hell0anna](https://github.com/hell0anna)
 - [feat(ProgressSpin): add new size map (#1648)](https://github.com/gazprom-neft/consta-uikit/commit/34774ed94c103a4f22eb2a43f749811dc4be9e51) - [@N1MBER](https://github.com/N1MBER)
 - [fix(TableTextFilter): fixed reset button (#1639)](https://github.com/gazprom-neft/consta-uikit/commit/8e9fa1c466c977e6e5e151e56b7e398920b17d7c) - [@yekaterinadochinetsnedra](https://github.com/yekaterinadochinetsnedra)
-
---------------------
-
-## v3.6.0 (06/10/2021)
-Ура, добавили `DateTime` — новый компонент для выбора даты и времени, заменяет `Calendar`. (`Calendar` работает, но с меткой `Deprecated`)
-
-И ещё несколько небольших обновлений:
-— в `SnackBar` теперь можно положить любую вёрстку,
-— в `ChoiceGroup` можно сделать неактивным один или несколько элементов,
-— в `TextField`, `Select`, `Combobox` и `UserSelect` добавили подсказку и заголовок (`label` и `caption`),
-— в `Select`, `Combobox` и `UserSelect` — возможность указывать статус поля,
-— а ещё обновили документацию для `Modal`, `Table` и `Layout`.
-
----
-
-- [chore(deps): bump url-parse from 1.5.1 to 1.5.3 (#1638)](https://github.com/gazprom-neft/consta-uikit/commit/97a83093a9575b142fe948b36d9093e4533e93fa) - [@dependabot](https://github.com/dependabot[bot])
-- [docs(Layout): edit docs (#1640)](https://github.com/gazprom-neft/consta-uikit/commit/fba6187dd31696d21e6b705ed02a7c48d0ca01f2) - [@arhayka](https://github.com/arhayka)
-- [docs(Table): docs review (#1637)](https://github.com/gazprom-neft/consta-uikit/commit/2f045ec229a641e9ab049e80b03cef92728c5f59) - [@arhayka](https://github.com/arhayka)
-- [ feat(SelectContainer): add status (#1623)](https://github.com/gazprom-neft/consta-uikit/commit/23f6f9761c1d0dbd31cad0bc7305bb64aed3ba7f) - [@N1MBER](https://github.com/N1MBER)
-- [fix(DateTime): fixed onChangeCurrentVisibleDate](https://github.com/gazprom-neft/consta-uikit/commit/323f25a0fbbe912b308ff8fbbea81a50f52153a6) - [@gizeasy](https://github.com/gizeasy)
-- [feat(DateTime): add component (#1422)](https://github.com/gazprom-neft/consta-uikit/commit/b8d2d7dac3043f4cc6279d6349f0158267e7269e) - [@gizeasy](https://github.com/gizeasy)
-- [docs(Combobox): docs review (#1622)](https://github.com/gazprom-neft/consta-uikit/commit/e55f45cc5a114c432160306f803d63a4ff316210) - [@arhayka](https://github.com/arhayka)
-- [docs(Modal): edit docs and examples (#1626)](https://github.com/gazprom-neft/consta-uikit/commit/4e82d95385eabd9f23de5a49d738c625b4e6cdb5) - [@arhayka](https://github.com/arhayka)
-- [feat(ChoiceGroup): added setting disabled (#1575)](https://github.com/gazprom-neft/consta-uikit/commit/d6bf274533fe88434474fb55c2e9709e1a86f402) - [@AntonS86](https://github.com/AntonS86)
-- [test(TextField): fix test](https://github.com/gazprom-neft/consta-uikit/commit/df48bd381f8dc29bcd2b2841e68e857f6fd3c9c4) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Collapse): add divider from label to body (#1625)](https://github.com/gazprom-neft/consta-uikit/commit/dbd5582a0ad0b56f0c82a9080288b2147a780cf3) - [@N1MBER](https://github.com/N1MBER)
-- [docs(RadioGroup): add align example (#1619)](https://github.com/gazprom-neft/consta-uikit/commit/70d2c2ebf3852af82b4d10a273377d86abad0df8) - [@arhayka](https://github.com/arhayka)
-- [fix(SnackBar): fix bug with not working autoclose in storybook (#1618)](https://github.com/gazprom-neft/consta-uikit/commit/ab721fabea22486251e0b6e12b35571769bee428) - [@N1MBER](https://github.com/N1MBER)
-- [feat(FieldLabel): add components (#1606)](https://github.com/gazprom-neft/consta-uikit/commit/573c7cc7a9333156cf28389f89f15fc86e133e2a) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Switch): updated background-color disabled state (#1591)](https://github.com/gazprom-neft/consta-uikit/commit/440f1d750463290c887f99ffbfd58719ec75f52e) - [@AntonS86](https://github.com/AntonS86)
-- [feat(SnackBar): Adding the ability to pass a React component (#1574)](https://github.com/gazprom-neft/consta-uikit/commit/943b81287eb5b6de1c6e28e3b13331e4a6bbe4c3) - [@N1KN](https://github.com/N1KN)
-- [feat(EventInterceptor): Fix typings of usePropsHandler (#1563)](https://github.com/gazprom-neft/consta-uikit/commit/590bfa4a1e5fbea50a14a7b6ff8438ce0c7e641d) - [@N1KN](https://github.com/N1KN)
