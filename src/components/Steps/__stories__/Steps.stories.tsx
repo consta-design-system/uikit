@@ -59,11 +59,11 @@ export function Playground() {
     <div className={cnStepsStories()}>
       <Steps
         items={simpleItems}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         value={simpleItems[activeStep]}
         onChange={handleChange}
-        getCompleted={(item) => completedSteps.includes(getStepIndex(item))}
-        getSkipped={(item) => skippedSteps.includes(getStepIndex(item))}
+        getItemCompleted={(item) => completedSteps.includes(getStepIndex(item))}
+        getItemSkipped={(item) => skippedSteps.includes(getStepIndex(item))}
         size={size}
       />
       <div className={cnStepsStories('Content')}>{getStepContent(activeStep)}</div>

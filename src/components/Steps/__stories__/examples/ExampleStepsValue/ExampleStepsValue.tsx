@@ -10,6 +10,6 @@ const emptyFunction = action('emptyFunction');
 
 export const ExampleStepsValue = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
-    <Steps items={items} value={items[1]} getLabel={(item) => item} onChange={emptyFunction} />
+    <Steps items={items} value={items[1]} getItemLabel={(item) => item} onChange={emptyFunction} />
   </StoryBookExample>
 );

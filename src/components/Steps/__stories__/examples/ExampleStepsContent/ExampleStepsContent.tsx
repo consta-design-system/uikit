@@ -20,7 +20,7 @@ export const ExampleStepsContent = () => {
 
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <Steps items={items} getLabel={getLabel} value={activeStep} onChange={onChange} />
+      <Steps items={items} getItemLabel={getLabel} value={activeStep} onChange={onChange} />
       <div>{getContent(activeStepIndex)}</div>
       <Button label="Предыдущий" onClick={handlePrev} disabled={activeStepIndex === 0} />
       <Button

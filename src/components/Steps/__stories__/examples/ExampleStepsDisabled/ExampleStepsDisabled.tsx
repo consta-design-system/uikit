@@ -12,8 +12,7 @@ export const ExampleStepsDisabled = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
     <Steps
       items={items}
-      getLabel={(item) => item.label}
-      getDisabled={(item) => item.disabled || false}
+      getDisabled={(item) => item.disabled}
       value={items[2]}
       onChange={emptyFunction}
     />
