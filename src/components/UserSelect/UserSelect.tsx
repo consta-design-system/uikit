@@ -219,6 +219,7 @@ function UserSelectRender<
       size={size}
       required={required}
       view={view}
+      type="userselect"
       form={form}
       multiple
       ref={ref}

@@ -215,6 +215,7 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
       form={form}
       multiple={multiple}
       ref={ref}
+      type="combobox"
       style={style}
       {...otherProps}
     >
