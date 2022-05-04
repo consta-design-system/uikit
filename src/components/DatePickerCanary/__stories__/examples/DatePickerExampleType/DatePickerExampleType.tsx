@@ -74,6 +74,34 @@ export const DatePickerExampleTypeTime = () => {
   );
 };
 
+export const DatePickerExampleTypeMonth = () => {
+  const [value, setValue] = useState<Date | null>();
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <DatePicker
+        type="month"
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        style={{ zIndex: 2 }}
+      />
+    </StoryBookExample>
+  );
+};
+
+export const DatePickerExampleTypeMonthRange = () => {
+  const [value, setValue] = useState<[Date?, Date?] | null>(null);
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <DatePicker
+        type="month-range"
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        style={{ zIndex: 2 }}
+      />
+    </StoryBookExample>
+  );
+};
+
 export const DatePickerExampleTypeYear = () => {
   const [value, setValue] = useState<Date | null>();
   return (

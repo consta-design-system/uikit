@@ -20,6 +20,8 @@ export const datePickerPropType = [
   'time',
   'year',
   'year-range',
+  'month',
+  'month-range',
 ] as const;
 
 export type DatePickerPropType = typeof datePickerPropType[number];
@@ -27,7 +29,7 @@ export const datePickerPropTypeDefault = datePickerPropType[0];
 
 export type DatePickerPropDateTimeView = DateTimePropView;
 
-type Range = 'date-range' | 'date-time-range' | 'year-range';
+type Range = 'date-range' | 'date-time-range' | 'year-range' | 'month-range';
 
 export const datePickerErrorTypes = [
   'outOfRange',

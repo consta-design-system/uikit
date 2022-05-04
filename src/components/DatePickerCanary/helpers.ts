@@ -20,6 +20,9 @@ export const datePickerPropPlaceholderTypeDateTime = `${datePickerPropPlaceholde
 export const datePickerPropFormatTypeYear = `yyyy`;
 export const datePickerPropPlaceholderTypeYear = `ГГГГ`;
 
+export const datePickerPropFormatTypeMonth = `MM${datePickerPropSeparatorDefault}yyyy`;
+export const datePickerPropPlaceholderTypeMonth = `MM${datePickerPropSeparatorDefault}ГГГГ`;
+
 export const normalizeRangeValue = (dateRange: DateRange): DateRange => {
   if (dateRange[0] && dateRange[1] && dateRange[0]?.getTime() > dateRange[1]?.getTime()) {
     return [dateRange[1], dateRange[0]];
