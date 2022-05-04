@@ -25,6 +25,7 @@ export type SelectContainerProps = PropsWithHTMLAttributesAndRef<
     required?: boolean;
     status?: PropStatus;
     label?: string;
+    type?: 'select' | 'combobox' | 'userselect';
     labelPosition?: 'top' | 'left';
     caption?: string;
   },
@@ -43,6 +44,7 @@ export const SelectContainer = forwardRef<HTMLDivElement, SelectContainerProps>(
     status,
     focused,
     multiple,
+    type = 'select',
     labelPosition = 'top',
     label,
     caption,
@@ -50,7 +52,7 @@ export const SelectContainer = forwardRef<HTMLDivElement, SelectContainerProps>(
   } = props;
 
   return (
-    <div className={cnSelect({ labelPosition, size, view }, [className])} {...otherProps}>
+    <div className={cnSelect({ labelPosition, size, view, type }, [className])} {...otherProps}>
       {label && (
         <FieldLabel
           required={required}
