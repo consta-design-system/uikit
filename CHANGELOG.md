@@ -1,5 +1,22 @@
 # Changelog
 
+## v3.22.0 (04/05/2022)
+Самое важное:
+
+- в `DatePicker` добавили новые типы "month" и "month-range". Они позволяют выбирать дату или диапазон дат с точностью до месяца.
+- Обновлена документация, добавлены разделы про адаптивность компоненов.
+---
+
+- [docs(Table): add adaptive section (#2278)](https://github.com/consta-design-system/uikit/commit/997a3e7594f8c4331599615734c2a0653ed3df46) - [@arhayka](https://github.com/arhayka)
+- [docs(Header): fix typo in doc Heder —> Header (#2275)](https://github.com/consta-design-system/uikit/commit/e42f4287a8fca24143eceaf6d7e036e68cbcfd21) - [@arhayka](https://github.com/arhayka)
+- [docs(ProgressStepBar): add adaptive section (#2270)](https://github.com/consta-design-system/uikit/commit/3c455be69f53aeacf01769daff107f6df3fc8f27) - [@arhayka](https://github.com/arhayka)
+- [fix(Select): fix height on multiple mode (#2267)](https://github.com/consta-design-system/uikit/commit/09ea6155c48a685286469bf586dd861b2056e7b2) - [@N1MBER](https://github.com/N1MBER)
+- [feat(DatePickerTypeMonth): add new types month and month-range (#2265)](https://github.com/consta-design-system/uikit/commit/23af903b43fcd346d20a6d4c700ae978f5b1bcac) - [@N1MBER](https://github.com/N1MBER)
+- [docs(Steps): add adaptive (#2266)](https://github.com/consta-design-system/uikit/commit/e3d366c0b3fb6c37e093ff5139c00e99ec9950e0) - [@arhayka](https://github.com/arhayka)
+- [docs(Snackbar): add adaptive section (#2261)](https://github.com/consta-design-system/uikit/commit/7007668663c11e1d572cd3c8d6513448e3332296) - [@arhayka](https://github.com/arhayka)
+
+--------------------
+
 ## v3.21.2 (28/04/2022)
 - [fix(DatePicker): fixed multiplicity on DatePicker type='date-time-range'](https://github.com/consta-design-system/uikit/commit/af801220f13c753fd67d98030057467535f450cf) - [@gizeasy](https://github.com/gizeasy)
 
@@ -475,15 +492,3 @@ endFieldOnBlur - deleted, use onBlur
 - [fix(Modal): fix unclickable overlay (#1685)](https://github.com/gazprom-neft/consta-uikit/commit/ffaaa827ea55413898ce9ee97983562f58969f45) - [@N1MBER](https://github.com/N1MBER)
 - [docs(Text):  update docs(#1680)](https://github.com/gazprom-neft/consta-uikit/commit/e933d2dfdd4662cbcaf6675a6ee9f0e67df09e7f) - [@arhayka](https://github.com/arhayka)
 - [chore(ISSUE_TEMPLATE): cleared assignees](https://github.com/gazprom-neft/consta-uikit/commit/6f299f28e71889bceb821665eee8149ec32f0f0f) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v3.7.0 (13/10/2021)
-Сегодня выкатили DatePiker! Пока в режиме Canary, но мы всё равно пританцовываем от радости 💃
-
----
-
-- [feat(DatePicker): add component (#1650)](https://github.com/gazprom-neft/consta-uikit/commit/e88f5d371d6b3c7db2d71ec438fb258fbe906946) - [@gizeasy](https://github.com/gizeasy)
-- [docs(storybook): fix figma links (#1655)](https://github.com/gazprom-neft/consta-uikit/commit/6f81480e9347120c53d3d3bacdb12ba2d122fe80) - [@hell0anna](https://github.com/hell0anna)
-- [feat(ProgressSpin): add new size map (#1648)](https://github.com/gazprom-neft/consta-uikit/commit/34774ed94c103a4f22eb2a43f749811dc4be9e51) - [@N1MBER](https://github.com/N1MBER)
-- [fix(TableTextFilter): fixed reset button (#1639)](https://github.com/gazprom-neft/consta-uikit/commit/8e9fa1c466c977e6e5e151e56b7e398920b17d7c) - [@yekaterinadochinetsnedra](https://github.com/yekaterinadochinetsnedra)
