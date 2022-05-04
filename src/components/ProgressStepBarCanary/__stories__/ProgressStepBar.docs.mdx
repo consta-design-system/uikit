@@ -7,6 +7,7 @@ import { ProgressStepBarExampleTooltip } from './examples/ProgressStepBarExample
 import { ProgressStepBarExampleProgress } from './examples/ProgressStepBarExampleProgress/ProgressStepBarExampleProgress';
 import { ProgressStepBarExampleContent } from './examples/ProgressStepBarExampleContent/ProgressStepBarExampleContent';
 import { ProgressStepBarExampleActive } from './examples/ProgressStepBarExampleActive/ProgressStepBarExampleActive';
+import { ProgressStepBarExampleAdaptive } from './examples/ProgressStepBarExampleAdaptive/ProgressStepBarExampleAdaptive';
 
 <!--info
 description: Прогресс по шагам. Показывает, на каком шаге процесс.
@@ -27,6 +28,7 @@ import { ProgressStepBar } from '@consta/uikit/ProgressStepBarCanary';
 - [Расположение](#расположение)
 - [Активный шаг](#активный-шаг)
 - [Размер](#размер)
+- [Адаптивность](#адаптивность)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
 
@@ -251,6 +253,15 @@ export const ProgressStepBarExampleContent = () => {
 ```
 
 <ProgressStepBarExampleSize />
+
+## Адаптивность
+
+На мобильных и компактных экранах компонент заполняет всю доступную ширину.
+Если что-то не помещается, появляется прокрутка. Обозначение шагов и их названия сохраняются. Прокручивать список можно кнопками или свайпами вправо и влево (для мобильных устройств).
+
+<ProgressStepBarExampleAdaptive />
+
+Если вам не нравится, как выглядит компонент с прокруткой, можно использовать [вертикальный вариант](#расположение) (`direction="vertical"`).
 
 ## Импорт
 
