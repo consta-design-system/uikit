@@ -6,14 +6,14 @@ import { SnackBar } from '../../../SnackBar';
 const items = [
   {
     key: '1',
-    message: 'Это пример сообщения в контейнере шириной 450 px',
+    message: 'Это пример сообщения в контейнере шириной 300 px',
     status: 'normal',
   },
 ];
 
 export const SnackBarExampleAdaptive = () => {
   return (
-    <Card verticalSpace="l" horizontalSpace="l" style={{ maxWidth: 450 }}>
+    <Card verticalSpace="xs" style={{ maxWidth: 300 }}>
       <SnackBar items={items} />
     </Card>
   );

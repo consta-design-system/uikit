@@ -333,8 +333,31 @@ export const SnackBarExampleTimer: React.FC = () => {
 
 ## Адаптивность
 
-Максимальная ширина `SnackBar` всегда равна 400 px. Чтобы текст хорошо выглядел
-на мобильных экранах, не стоит делать `SnackBar` у́же контентной области.
+Компонент подстраивается под ширину контейнера, автоматически проставляются
+горизонтальные отступы `xs`.
+
+```tsx
+import React from 'react';
+
+import { Card } from '../../../../Card/Card';
+import { SnackBar } from '../../../SnackBar';
+
+const items = [
+  {
+    key: '1',
+    message: 'Это пример сообщения в контейнере шириной 450 px',
+    status: 'normal',
+  },
+];
+
+export const SnackBarExampleAdaptive = () => {
+  return (
+    <Card verticalSpace="xs" style={{ maxWidth: 200 }}>
+      <SnackBar items={items} />
+    </Card>
+  );
+};
+```
 
 <SnackBarExampleAdaptive />
 
