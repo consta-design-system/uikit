@@ -307,8 +307,8 @@
     &_multiple .Select-ControlValue {
       overflow-x: visible;
       overflow-y: auto;
-      padding-top: calc(var(--tag-space) - var(--control-border-width));
       max-height: calc(4 * var(--tag-space) + 4.5 * var(--select-element-height));
+      padding-top: calc(var(--tag-space) - var(--control-border-width));
       white-space: normal;
       -ms-overflow-style: none;
       scrollbar-width: none;
