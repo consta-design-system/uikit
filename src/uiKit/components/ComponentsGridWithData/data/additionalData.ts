@@ -68,8 +68,13 @@ export const additionalData: Data = [
       {
         url: 'http://charts.consta.design?path=/docs/components-line--playground',
         name: 'Line',
-        description: 'Линейный график',
+        description: 'Линейный график.',
         image: LineImage,
+      },
+      {
+        url: 'http://charts.consta.design/?path=/docs/components-mixplot--playground',
+        name: 'MixPlot',
+        description: 'Позволяет построить несколько графиков на основе одних данных.',
       },
       {
         url: 'http://charts.consta.design?path=/docs/components-pie--playground',
@@ -136,6 +141,12 @@ export const additionalData: Data = [
   {
     title: 'Адаптеры',
     items: [
+      {
+        url: 'http://ag-grid-adapter.consta.design/',
+        name: 'agGridAdapter',
+        description: 'Адаптер для таблицы ag-grid-react.',
+        image: RcTableAdapterImage,
+      },
       {
         url: 'http://rc-table-adapter.consta.design/?path=/story/common-start--page',
         name: 'rcTableAdapter',
