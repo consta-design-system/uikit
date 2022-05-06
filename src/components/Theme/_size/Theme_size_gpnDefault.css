@@ -21,9 +21,11 @@
 
   /* Ширина шрифта */
   --font-weight-text-thin: 100;
+  --font-weight-text-extralight: 100;
   --font-weight-text-light: 300;
   --font-weight-text-regular: normal;
   --font-weight-text-semibold: 600;
   --font-weight-text-bold: bold;
+  --font-weight-text-extrabold: 800;
   --font-weight-text-black: 900;
 }

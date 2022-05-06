@@ -1,0 +1,28 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Документация|Шрифт Inter" id="common-fonts" parameters={{ order: 110 }} />
+
+# Шрифт Inter
+
+## Подключение шрифта из пакета локально
+
+Данный способ работает если в вашей сборке проекта настроен `webpack css-loader`, [подробнее](https://webpack.js.org/guides/asset-management/#loading-fonts)
+
+В проекте импортируйте `@consta/uikit/fonts`, например в `App.tsx` или в конфигурации темы проекта.
+
+```ts
+import '@consta/uikit/fonts';
+```
+
+## Подключение шрифта из CDN fonts.google.com
+
+в CSS файле приложения
+
+```css
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+```
+
+## Подключение в ручную
+
+Скопируйте файлы шрифтов и css из [пакета](https://github.com/consta-design-system/uikit/tree/dev/src/fonts/inter) себе в проект,
+подключите css в проекте при необходимости укажите в скопированном css файле верные пути до файлов с шрифтом.
