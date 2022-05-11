@@ -1,11 +1,22 @@
 # Changelog
 
+## v3.23.0 (11/05/2022)
+Самое важное:
+- Добавили шрифт `Inter` в библиотеку, вы можете его попробовать на своем проекте.
+- Добавили в обзор `MixPlot` и `ag-grid-adapter`.
+---
+
+- [feat(fonts): add Inter (#2290)](https://github.com/consta-design-system/uikit/commit/ce494da31323a3e85c799d6c65131e8b2a24871f) - [@gizeasy](https://github.com/gizeasy)
+- [docs(review): add MixPlot and agGridAdapter (#2289)](https://github.com/consta-design-system/uikit/commit/d445c058c4f6085ad962775e54a850d635d16d6c) - [@arhayka](https://github.com/arhayka)
+
+--------------------
+
 ## v3.22.0 (04/05/2022)
 Самое важное:
 
 - в `DatePicker` добавили новые типы "month" и "month-range". Они позволяют выбирать дату или диапазон дат с точностью до месяца.
 - Обновлена документация, добавлены разделы про адаптивность компоненов.
----
+--- 
 
 - [docs(Table): add adaptive section (#2278)](https://github.com/consta-design-system/uikit/commit/997a3e7594f8c4331599615734c2a0653ed3df46) - [@arhayka](https://github.com/arhayka)
 - [docs(Header): fix typo in doc Heder —> Header (#2275)](https://github.com/consta-design-system/uikit/commit/e42f4287a8fca24143eceaf6d7e036e68cbcfd21) - [@arhayka](https://github.com/arhayka)
@@ -476,19 +487,3 @@ endFieldOnBlur - deleted, use onBlur
 - [docs(useChoiceGroupIndexed): add docs (#1675)](https://github.com/gazprom-neft/consta-uikit/commit/9d8536abf43a6e0392422f2f876ec3ec78e6a688) - [@arhayka](https://github.com/arhayka)
 - [ fix(Combobox): fix bug with labelForNotFound and add props to docs](https://github.com/gazprom-neft/consta-uikit/commit/8f49e3bbd5c82c7044372d7b357931d2a0000f66) - [@N1MBER](https://github.com/N1MBER)
 - [fix(ProgressStepBar): fixed several bugs (#1699)](https://github.com/gazprom-neft/consta-uikit/commit/dfbb57572fb89767318d59528d6db59b7aceb36f) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v3.8.0 (20/10/2021)
-Вечер. Среда. Consta. Новый релиз!
-
-Добавили `ProgressStepBar` — компонент, с которым удобно считать шаги. 
-
-Ну и важные и не очень важные мелочи, как без них :)
-
----
-
-- [feat(ProgressStepBar): add new component (#1643)](https://github.com/gazprom-neft/consta-uikit/commit/d0e6a9564ebaaeddaffe9924c554b85e8aa673ed) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Modal): fix unclickable overlay (#1685)](https://github.com/gazprom-neft/consta-uikit/commit/ffaaa827ea55413898ce9ee97983562f58969f45) - [@N1MBER](https://github.com/N1MBER)
-- [docs(Text):  update docs(#1680)](https://github.com/gazprom-neft/consta-uikit/commit/e933d2dfdd4662cbcaf6675a6ee9f0e67df09e7f) - [@arhayka](https://github.com/arhayka)
-- [chore(ISSUE_TEMPLATE): cleared assignees](https://github.com/gazprom-neft/consta-uikit/commit/6f299f28e71889bceb821665eee8149ec32f0f0f) - [@gizeasy](https://github.com/gizeasy)
