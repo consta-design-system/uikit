@@ -15,6 +15,7 @@ const { react } = require('@bem/sdk.naming.presets');
 const createMatch = require('@bem/sdk.naming.cell.match');
 const svgr = require('@svgr/core').default;
 const { svgParse } = require('./svgParse');
+const { generateReExportsFonts } = require('./generateReExportsFonts');
 
 // TODO: https://github.com/bem/bem-sdk/issues/385
 const enhancedReactNaming = {
@@ -313,7 +314,7 @@ const responsesImagesTransformed = async (ignore, src) => {
 };
 
 const copyAssets = async (ignore, src, distPaths) => {
-  const assetFiles = await fg([`${src}/**/*.{svg,jpg,png,gif,md}`], { ignore });
+  const assetFiles = await fg([`${src}/**/*.{svg,jpg,png,gif,md,woff,woff2}`], { ignore });
 
   assetFiles.forEach(async (fileName) => {
     const asset = await readFile(fileName);
@@ -581,4 +582,5 @@ module.exports = {
   responsesImagesTransformed,
   copyReadme,
   copyChangelog,
+  generateReExportsFonts,
 };

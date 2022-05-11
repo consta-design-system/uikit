@@ -12,6 +12,7 @@ const {
   copyPackageJson,
   copyReadme,
   copyChangelog,
+  generateReExportsFonts,
 } = require('./helpers');
 
 const execAsync = promisify(exec);
@@ -121,6 +122,9 @@ class GenerateCommand extends Command {
       );
       await generateReExports(ignore, srcPath, [jsSrc, esSrc], distPath, 'fileIcons').then(() =>
         this.log(logSymbols.success, 'fileIcons reExports generated!'),
+      );
+      await generateReExportsFonts(ignore, srcPath, [jsSrc, esSrc], distPath).then(() =>
+        this.log(logSymbols.success, 'fonts reExports generated!'),
       );
       await generateReExports(
         ignore,

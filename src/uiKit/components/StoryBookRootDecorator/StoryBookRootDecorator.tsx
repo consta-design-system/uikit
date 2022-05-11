@@ -3,6 +3,8 @@ import '../../whitepaper/whitepaper.css';
 
 import React from 'react';
 
+import '../../../fonts/inter';
+
 import {
   presetGpnDark,
   presetGpnDefault,
