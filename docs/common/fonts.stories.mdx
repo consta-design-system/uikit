@@ -4,25 +4,32 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # Шрифт Inter
 
+С версии 3.23.0 дизайн-система Consta переходит на шрифт Inter, с открытой лицензией.
+
+Если вы используете наши React-библиотеки, просто обновите версию Consta — во всех компонентах появится новый шрифт. (А для обновления шрифта в Figma есть специальный плагин.)
+
+Если вы не можете обновить шрифт вместе с Consta, есть другие варианты подключения: [локально из пакета](#подключение-шрифта-из-пакета-локально), из [fonts.google.com](#подключение-шрифта-из-CDN-fonts.google.com) или [вручную](#подключение-вручную).
+
 ## Подключение шрифта из пакета локально
 
-Данный способ работает если в вашей сборке проекта настроен `webpack css-loader`, [подробнее](https://webpack.js.org/guides/asset-management/#loading-fonts)
+Этот способ подходит, если в вашей сборке проекта настроен `webpack css-loader`. [Подробнее](https://webpack.js.org/guides/asset-management/#loading-fonts)
 
-В проекте импортируйте `@consta/uikit/fonts`, например в `App.tsx` или в конфигурации темы проекта.
+Импортируйте `@consta/uikit/fonts` в ваш проект, например, в `App.tsx` или в конфигурации темы проекта.
 
 ```ts
 import '@consta/uikit/fonts';
 ```
 
-## Подключение шрифта из CDN fonts.google.com
+## Подключение шрифта из fonts.google.com
 
-в CSS файле приложения
+Добавьте импорт в CSS-файл вашего проекта.
 
 ```css
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 ```
 
-## Подключение в ручную
+## Подключение вручную
 
-Скопируйте файлы шрифтов и css из [пакета](https://github.com/consta-design-system/uikit/tree/dev/src/fonts/inter) себе в проект,
-подключите css в проекте при необходимости укажите в скопированном css файле верные пути до файлов с шрифтом.
+1. Скопируйте файлы шрифтов и CSS из [пакета](https://github.com/consta-design-system/uikit/tree/dev/src/fonts/inter) в ваш проект.
+2. Проверьте пути к файлам шрифтов в скопированном CSS-файле.
+3. Подключите CSS к проекту.
