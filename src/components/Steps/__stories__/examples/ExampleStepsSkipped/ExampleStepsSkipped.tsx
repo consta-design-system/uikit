@@ -12,7 +12,8 @@ export const ExampleStepsSkipped = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
     <Steps
       items={items}
-      getSkipped={(item) => item.skip}
+      getLabel={(item) => item.label}
+      getSkipped={(item) => item.skipped || false}
       value={items[1]}
       onChange={emptyFunction}
     />

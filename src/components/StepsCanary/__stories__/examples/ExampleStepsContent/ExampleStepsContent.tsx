@@ -4,7 +4,7 @@ import { simpleItems as items } from '../../../__mocks__/mock.data';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Button } from '../../../../Button/Button';
-import { Steps } from '../../../Steps';
+import { Steps } from '../../../StepsCanary';
 
 const getContent = (index: number) => `Контент на шаге №${index + 1}`;
 const getLabel = (item: string) => item;
@@ -20,7 +20,7 @@ export const ExampleStepsContent = () => {
 
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <Steps items={items} getLabel={getLabel} value={activeStep} onChange={onChange} />
+      <Steps items={items} getItemLabel={getLabel} value={activeStep} onChange={onChange} />
       <div>{getContent(activeStepIndex)}</div>
       <Button label="Предыдущий" onClick={handlePrev} disabled={activeStepIndex === 0} />
       <Button

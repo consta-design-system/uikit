@@ -12,7 +12,8 @@ export const ExampleStepsCompleted = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
     <Steps
       items={items}
-      getCompleted={(item) => item.finish}
+      getLabel={(item) => item.label}
+      getCompleted={(item) => item.completed || false}
       value={items[1]}
       onChange={emptyFunction}
     />

@@ -13,14 +13,14 @@ export const ExampleStepsSize = () => (
     <Steps
       size="m"
       items={items}
-      getItemLabel={(item) => item}
+      getLabel={(item) => item}
       value={items[1]}
       onChange={emptyFunction}
     />
     <Steps
       size="l"
       items={items}
-      getItemLabel={(item) => item}
+      getLabel={(item) => item}
       value={items[1]}
       onChange={emptyFunction}
     />

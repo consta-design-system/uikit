@@ -15,9 +15,9 @@ const defaultGetItemSkipped: StepsPropGetSkipped<StepsItemDefault> = (item) => i
 export function withDefaultGetters(props: StepsProps) {
   return {
     ...props,
-    getItemLabel: props.getLabel || props.getItemLabel || defaultGetItemLabel,
-    getItemDisabled: props.getDisabled || props.getItemDisabled || defaultGetItemDisabled,
-    getItemCompleted: props.getCompleted || props.getItemCompleted || defaultGetItemCompleted,
-    getItemSkipped: props.getSkipped || props.getItemSkipped || defaultGetItemSkipped,
+    getItemLabel: props.getItemLabel || defaultGetItemLabel,
+    getItemDisabled: props.getItemDisabled || defaultGetItemDisabled,
+    getItemCompleted: props.getItemCompleted || defaultGetItemCompleted,
+    getItemSkipped: props.getItemSkipped || defaultGetItemSkipped,
   };
 }

@@ -23,12 +23,6 @@ export type StepsProps<ITEM = StepsItemDefault> = PropsWithHTMLAttributesAndRef<
     size?: StepsPropSize;
     items: ITEM[];
     value: ITEM;
-    // Старая версия
-    getLabel?: StepsPropGetLabel<ITEM>;
-    getDisabled?: StepsPropGetDisabled<ITEM>;
-    getCompleted?: StepsPropGetCompleted<ITEM>;
-    getSkipped?: StepsPropGetSkipped<ITEM>;
-    // Оставить только ее при повышении мажорной версии
     getItemLabel?: StepsPropGetLabel<ITEM>;
     getItemDisabled?: StepsPropGetDisabled<ITEM>;
     getItemCompleted?: StepsPropGetCompleted<ITEM>;
