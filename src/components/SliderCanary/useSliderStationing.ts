@@ -72,7 +72,7 @@ export const useSliderStationing: UseSliderStationing = (
           for (let i = 0; i < endPointArray.length - 1; i++) {
             sizesArray.push({
               width: ((endPointArray[i + 1] - endPointArray[i]) / absoluteSize) * 100,
-              active: endPointArray[i] !== min && endPointArray[i + 1] !== max,
+              active: endPointArray[i] >= value[0] && endPointArray[i + 1] <= value[1],
             });
           }
         } else {
