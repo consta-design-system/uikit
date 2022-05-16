@@ -34,10 +34,11 @@ const prepareStands = async ({
 
   standsFiles.forEach((fileName, index) => {
     const src = fileName.replace(/.tsx/g, '');
+    const dir = fileName.replace(/[^\/]+$/g, '');
 
     imports += `import stand_${index} from '${projectPath}/${src}';\n`;
     stands += `stand_${index},\n`;
-    paths += `'${standsImportPath}/${src}',\n`;
+    paths += `'${standsImportPath}/${dir}',\n`;
   });
 
   stands += '];\n';

@@ -12,6 +12,8 @@ const isEnvDevelopment = process.env.NODE_ENV === 'development' || 'standDevelop
 const isEnvProduction = process.env.NODE_ENV === 'production';
 const isEnvStandDevelopment = process.env.NODE_ENV === 'standDevelopment';
 
+console.log(path.resolve(__dirname, '../../../src'));
+
 module.exports = function () {
   return {
     target: 'web',
@@ -21,20 +23,47 @@ module.exports = function () {
     module: {
       rules: [
         {
+          // test: /\@consta\/stands\/(.*)\.tsx?$/,
           test: /\.tsx?$/,
           use: require.resolve('babel-loader'),
+          include: [path.resolve(__dirname, './src')],
+          resolve: {
+            alias: {
+              '##': path.resolve(__dirname, './src'),
+            },
+          },
+        },
+        {
+          test: /\.tsx?$/,
+          use: require.resolve('babel-loader'),
+          exclude: [path.resolve(__dirname, './src')],
+          resolve: {
+            alias: {
+              '##': path.resolve(__dirname, '../../../src'),
+            },
+          },
         },
         {
           test: /\.css$/,
           use: [productionMode ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader'],
         },
+        {
+          test: /\.mdx?$/,
+          use: [
+            {
+              loader: '@mdx-js/loader',
+              // @type {import('@mdx-js/loader').Options}
+              options: {},
+            },
+          ],
+        },
       ],
     },
     resolve: {
       extensions: ['.tsx', '.ts', '.js'],
-      alias: {
-        '##': path.resolve(__dirname, './src'),
-      },
+      // alias: {
+      //   '##': path.resolve(__dirname, '../../../../src'),
+      // },
     },
 
     plugins: [

@@ -12,6 +12,8 @@
     "@bem-react/classname": "^1.5.12",
     "@bem-react/classnames": "^1.3.10",
     "@consta/uikit": "^3.18.3",
+    "@mdx-js/loader": "^2.1.1",
+    "@mdx-js/react": "^2.1.1",
     "compute-scroll-into-view": "^1.0.17",
     "react-transition-group": "^4.4.2"
   },

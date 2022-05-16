@@ -3,12 +3,6 @@ export type RouterItem = {
   path: string;
 };
 
-// const LIBS = 'LIBS';
-// const LIB = 'LIB';
-// const STAND = 'STAND';
-// const DESIGN = 'DESIGN';
-// const SANDBOX = 'SANDBOX';
-
 const generateRouteName = (path: string, libsLenght: number, name?: string) =>
   `${path === '/' ? '' : 'LIBS.'}${libsLenght > 1 ? 'LIB.' : ''}${name ? name : ''}`;
 

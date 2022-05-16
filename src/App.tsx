@@ -1,25 +1,37 @@
 import React from 'react';
 
-import { routerAtom, routesNames } from '##/modules/router';
+import { routesNames } from '##/modules/router';
 import { standsAtom } from '##/modules/stands';
 import { libsAtom } from '##/modules/libs';
 import { useAtom } from '@reatom/react';
 import { useRoute, useRouter } from 'react-router5';
 
 import { LibsPage } from '##/pages/LibsPage';
+import { LibPage } from '##/pages/LibPage';
+import { StandPage } from '##/pages/StandPage';
 
 export const App: React.FC = () => {
-  // const [router] = useAtom(routerAtom);
   const [stands] = useAtom(standsAtom);
   const [libs] = useAtom(libsAtom);
   const route = useRoute();
   const router = useRouter();
 
-  console.log(route.route);
+  const routeName = route.route?.name;
+  const libsLength = libs.length;
 
-  // if (route.route?.name === routesNames.LIBS) {
-  //   return <LibsPage />;
-  // }
+  console.log(routeName);
+
+  if (routeName === routesNames.LIBS && libsLength > 1) {
+    return <LibsPage />;
+  }
+
+  if (routeName === routesNames.LIBS || routeName === routesNames.LIBS_LIB) {
+    return <LibPage />;
+  }
+
+  if (routeName === routesNames.LIBS_LIB_STAND) {
+    return <StandPage />;
+  }
 
   console.log(stands);
   console.log(libs);

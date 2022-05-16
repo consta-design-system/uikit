@@ -11,6 +11,7 @@ export type Stand<Group extends string = string> = {
   order?: number;
   status: 'depricated' | 'canary' | 'stable' | 'inWork';
   version: string;
+  docs?: React.FC;
 };
 
 export type Lib<GROUP extends Group> = {
@@ -24,6 +25,11 @@ export type Lib<GROUP extends Group> = {
 export type CreatedStand = {
   stand: Stand;
   lib: Lib<Group>;
+};
+
+export type PreparedStand = CreatedStand & {
+  id: string;
+  path: string;
 };
 
 export type LibWithStands = Lib<Group> & {

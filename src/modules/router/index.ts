@@ -10,8 +10,6 @@ export { routerAtom } from '##/exportAtoms/router';
 
 import { libs } from '##/stands';
 
-console.log(libs.length);
-
 export const { routesNames, routes } = createRoutes(undefined, libs.length);
 
 const router = createRouter(routes, { defaultRoute: routesNames.LIBS });

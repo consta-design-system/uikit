@@ -5,6 +5,7 @@ import { reatomContext } from '@reatom/react';
 import { store } from '##/modules/app';
 import { RouterProvider } from 'react-router5';
 import { router } from '@consta/stand/src/modules/router';
+import { AppTheme } from '##/containers/AppTheme';
 
 import { App } from './App';
 
@@ -12,7 +13,9 @@ const Root: React.FC = () => {
   return (
     <RouterProvider router={router}>
       <reatomContext.Provider value={store}>
-        <App />
+        <AppTheme>
+          <App />
+        </AppTheme>
       </reatomContext.Provider>
     </RouterProvider>
   );

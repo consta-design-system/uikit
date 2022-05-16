@@ -1,6 +1,6 @@
-import { Stand, CreatedStand, LibWithStands } from '@consta/stand/types';
+import { Stand, CreatedStand, PreparedStand, LibWithStands } from '@consta/stand/types';
 
-const sort = (a: CreatedStand, b: CreatedStand) => {
+const sort = (a: PreparedStand, b: PreparedStand) => {
   if (a.stand.order && b.stand.order) {
     return a.stand.order - b.stand.order;
   }
@@ -19,7 +19,7 @@ const sort = (a: CreatedStand, b: CreatedStand) => {
   return 0;
 };
 
-const addToLib = (stand: CreatedStand, lib: LibWithStands[]) => {
+const addToLib = (stand: PreparedStand, lib: LibWithStands[]) => {
   const indexLib = lib.findIndex((item) => item.id === stand.lib.id);
 
   if (indexLib !== -1) {
@@ -33,7 +33,7 @@ const addToLib = (stand: CreatedStand, lib: LibWithStands[]) => {
 };
 
 export const prepareStands = (initStands: CreatedStand[], paths: string[]) => {
-  let stands: Record<string, CreatedStand> = {};
+  let stands: Record<string, PreparedStand> = {};
   let libs: LibWithStands[] = [];
 
   initStands
