@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function FileIconPttSizeM(props: React.SVGProps<SVGSVGElement>) {
+function FileIconPptSizeM(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 30 40" {...props}>
       <path d="M28 0H2a2 2 0 00-2 2v36a2 2 0 002 2h26a2 2 0 002-2V2a2 2 0 00-2-2z" />
@@ -16,4 +16,4 @@ function FileIconPttSizeM(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-export default FileIconPttSizeM;
+export default FileIconPptSizeM;

@@ -17,7 +17,7 @@ import { FileIconMp3 } from '../../fileIcons/FileIconMp3/FileIconMp3';
 import { FileIconMp4 } from '../../fileIcons/FileIconMp4/FileIconMp4';
 import { FileIconPdf } from '../../fileIcons/FileIconPdf/FileIconPdf';
 import { FileIconPng } from '../../fileIcons/FileIconPng/FileIconPng';
-import { FileIconPtt } from '../../fileIcons/FileIconPtt/FileIconPtt';
+import { FileIconPpt } from '../../fileIcons/FileIconPpt/FileIconPpt';
 import { FileIconRar } from '../../fileIcons/FileIconRar/FileIconRar';
 import { FileIconRtf } from '../../fileIcons/FileIconRtf/FileIconRtf';
 import { FileIconTiff } from '../../fileIcons/FileIconTiff/FileIconTiff';
@@ -55,8 +55,8 @@ const mapExtensionToSvg: { [value: string]: React.FC<FileIconProps> } = {
   mov: FileIconMov,
   mp4: FileIconMp4,
   pdf: FileIconPdf,
-  ptt: FileIconPtt,
-  pttx: FileIconPtt,
+  ppt: FileIconPpt,
+  pptx: FileIconPpt,
   png: FileIconPng,
   rar: FileIconRar,
   rtf: FileIconRtf,
