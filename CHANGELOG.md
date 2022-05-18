@@ -1,5 +1,21 @@
 # Changelog
 
+## v3.23.1 (18/05/2022)
+Самое важное:
+- Выпустили обновленный Steps (с флагом `Canary`) — использование геттеров теперь не обязательно.
+- Добавили инструкцию по подключению шрифта Inter для дизайнеров, можете посмотреть, как [внедрить](https://uikit.consta.design/?path=/docs/new-font--page) его в свой проект.
+- Исправили ошибку с названием файлов в `File`.
+- Исправили баг в `Slider` на крайних значениях.
+
+---
+
+- [feat(StepsCanary): add new canary component (#2268)](https://github.com/consta-design-system/uikit/commit/5a084690e87f81aaf087e60caf85516861abdd23) - [@N1MBER](https://github.com/N1MBER)
+- [fix(Slider): fix detecting of active line (#2298)](https://github.com/consta-design-system/uikit/commit/5037568da0431d3eb2400d8cb8c4526abcb2f320) - [@N1MBER](https://github.com/N1MBER)
+- [fix(File): fixed file extensions (#2301)](https://github.com/consta-design-system/uikit/commit/7a5194a0217d82f24d92648c092b32de1be415fc) - [@gizeasy](https://github.com/gizeasy)
+- [docs(new font): new font instructions for designers (#2295)](https://github.com/consta-design-system/uikit/commit/09a781476fb38c1ab2596e4805d603e121568f6d) - [@kolebayev](https://github.com/kolebayev)
+
+--------------------
+
 ## v3.23.0 (11/05/2022)
 Самое важное:
 - Добавили шрифт `Inter` в библиотеку, вы можете его попробовать на своем проекте.
@@ -471,19 +487,3 @@ endFieldOnBlur - deleted, use onBlur
 
 ## v3.9.1 (03/11/2021)
 - [feat(Table): added control for table (#1716)](https://github.com/gazprom-neft/consta-uikit/commit/99d67aff670d2f499abcefc168eba73805ef3f16) - [@SergeyKatugin](https://github.com/SergeyKatugin)
-
---------------------
-
-## v3.9.0 (27/10/2021)
-В `TextField` добавили возможность очищать по крестику и при `type = number` теперь красивые стилизованные кнопочки. Так же обновлена документация и внесены фиксы в некоторые компоненты.
-
----
-
-- [docs(componets): Add canary label (#1714)](https://github.com/gazprom-neft/consta-uikit/commit/ec1953ddfb58d8df696856a6056ece5e0d3cf613) - [@N1MBER](https://github.com/N1MBER)
-- [feat(FieldLabel): add new prop 'required' (#1661)](https://github.com/gazprom-neft/consta-uikit/commit/813b371f93c7bf66f0e5356aece7cba065411b50) - [@N1MBER](https://github.com/N1MBER)
-- [ feat(TextField): add custom arrows to type number (#1658)](https://github.com/gazprom-neft/consta-uikit/commit/c71bd7265a2bcd0ff880c868658cf17a66a5041d) - [@N1MBER](https://github.com/N1MBER)
-- [feat(TextField): add button for cleaning (#1657)](https://github.com/gazprom-neft/consta-uikit/commit/5567ea2fb1a93cc86cef315ae4c10b5bbe605dab) - [@N1MBER](https://github.com/N1MBER)
-- [docs(common): edit main page (#1698)](https://github.com/gazprom-neft/consta-uikit/commit/336c2b56f599366fdfb40d166c6c8cad092f7c5f) - [@arhayka](https://github.com/arhayka)
-- [docs(useChoiceGroupIndexed): add docs (#1675)](https://github.com/gazprom-neft/consta-uikit/commit/9d8536abf43a6e0392422f2f876ec3ec78e6a688) - [@arhayka](https://github.com/arhayka)
-- [ fix(Combobox): fix bug with labelForNotFound and add props to docs](https://github.com/gazprom-neft/consta-uikit/commit/8f49e3bbd5c82c7044372d7b357931d2a0000f66) - [@N1MBER](https://github.com/N1MBER)
-- [fix(ProgressStepBar): fixed several bugs (#1699)](https://github.com/gazprom-neft/consta-uikit/commit/dfbb57572fb89767318d59528d6db59b7aceb36f) - [@gizeasy](https://github.com/gizeasy)
