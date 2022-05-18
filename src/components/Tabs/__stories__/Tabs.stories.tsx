@@ -68,7 +68,7 @@ export function Playground() {
       items={items}
       value={value}
       getLabel={(item) => item.name}
-      getIcon={withIcon ? (item) => item.icon : undefined}
+      getIcon={(item) => (withIcon ? item.icon : undefined)}
       onChange={({ value }) => setValue(value)}
       size={size}
       view={view}

@@ -74,7 +74,7 @@ export const TabsExample = () => {
 
 ### Иконки
 
-Чтобы добавить иконки, используйте функцию `getItemIcon`. В неё нужно передать название элемента массива c иконкой.
+Чтобы добавить иконки, используйте функцию `getIcon`. В неё нужно передать название элемента массива c иконкой.
 
 Добавьте `onlyIcon`, чтобы убрать текст и оставить только иконку (текст будет показываться по наведению).
 
@@ -89,21 +89,21 @@ import { IconCamera } from '@consta/uikit/IconCamera';
 
 type Item = {
   name: string;
-  icon?: IconComponent;
+  image?: IconComponent;
 };
 
 const items = [
   {
     name: 'Первый',
-    icon: IconPhoto,
+    image: IconPhoto,
   },
   {
     name: 'Второй',
-    icon: IconRing,
+    image: IconRing,
   },
   {
     name: 'Третий вариант',
-    icon: IconCamera,
+    image: IconCamera,
   },
 ];
 
@@ -116,14 +116,14 @@ export const TabsExampleIcon = () => {
         onChange={({ value }) => setValue(value)}
         items={items}
         getLabel={(item) => item.name}
-        getIcon={(item) => item.icon}
+        getIcon={(item) => item.image}
       />
       <Tabs
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
         getLabel={(item) => item.name}
-        getIcon={(item) => item.icon}
+        getIcon={(item) => item.image}
         onlyIcon
       />
     </>
@@ -347,7 +347,10 @@ import { Tabs } from '@consta/uikit/Tabs';
 ## Свойства
 
 ```ts
-type Item = unknown;
+export type TabsItemDefault = {
+  label: string | number;
+  icon?: IconComponent;
+};
 
 type OnChange = (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM | null }) => void;
 
@@ -364,10 +367,10 @@ type RenderItem<ITEM, ELEMENT> = (props: {
 
 | Свойство                                       | Тип                                        | По умолчанию | Описание                                                                                                                                                                             |
 | ---------------------------------------------- | ------------------------------------------ | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `items`                                        | `Item[]`                                   | -            | Массив элементов с данными для табов (текст, иконка)                                                                                                                                 |
-| `value`                                        | `Item`, `null`                             | -            | Значение                                                                                                                                                                             |
-| [`getLabel`](#текст-для-таба)                  | `(item: Item) => string, number`           | -            | Функция для формирования текста таба. Используется в качестве уникального ключа элемента                                                                                             |
-| [`getIcon?`](#иконки)                          | `(item: Item) => IconComponent, undefined` | -            | Функция для формирования иконки                                                                                                                                                      |
+| `items`                                        | `ITEM[]`                                   | -            | Массив элементов с данными для табов (текст, иконка)                                                                                                                                 |
+| `value`                                        | `ITEM`, `null`                             | -            | Значение                                                                                                                                                                             |
+| [`getLabe?l`](#текст-для-таба)                 | `(item: ITEM) => string, number`           | -            | Функция для формирования текста таба. Используется в качестве уникального ключа элемента                                                                                             |
+| [`getIcon?`](#иконки)                          | `(item: ITEM) => IconComponent, undefined` | -            | Функция для формирования иконки                                                                                                                                                      |
 | [`onlyIcon?`](#иконки)                         | `boolean`                                  | -            | Показывать только иконку                                                                                                                                                             |
 | [`size?`](#размер-табов)                       | `'s', 'm'`                                 | `'m'`        | Размер компонента                                                                                                                                                                    |
 | [`view?`](#рамка)                              | `'bordered', 'clear'`                      | `'bordered'` | Внешний вид компонента (с рамкой или без)                                                                                                                                            |

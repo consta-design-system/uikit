@@ -3,8 +3,9 @@ import './TabsFitModeDropdownWrapper.css';
 import React from 'react';
 
 import { cn } from '../../../utils/bem';
-import { getTabsWidth, TabsFitModeWrapperProps } from '../helpers';
+import { getTabsWidth } from '../helpers';
 import { TabsMoreItems } from '../MoreItems/TabsMoreItems';
+import { TabsFitModeWrapperProps } from '../types';
 
 import { useFittingItems } from './useFittingItems';
 

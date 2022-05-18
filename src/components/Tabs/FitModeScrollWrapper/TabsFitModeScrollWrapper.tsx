@@ -8,9 +8,8 @@ import { IconArrowLeft } from '../../../icons/IconArrowLeft/IconArrowLeft';
 import { IconArrowRight } from '../../../icons/IconArrowRight/IconArrowRight';
 import { cn } from '../../../utils/bem';
 import { Button } from '../../Button/Button';
-import { getTabsWidth, TabsFitModeWrapperProps } from '../helpers';
-
-import { getVisibleTabsRange } from './helpers';
+import { getTabsWidth, getVisibleTabsRange } from '../helpers';
+import { TabsFitModeWrapperProps } from '../types';
 
 const cnTabsFitModeScrollWrapper = cn('TabsFitModeScrollWrapper');
 
