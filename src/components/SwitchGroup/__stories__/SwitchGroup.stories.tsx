@@ -3,15 +3,15 @@ import { boolean, select } from '@storybook/addon-knobs';
 
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
+import { SwitchGroup } from '../SwitchGroup';
 import {
-  SwitchGroup,
   switchGroupDefaultDirection,
   switchGroupDefaultSize,
   switchGroupDefaultView,
   switchGroupDirections,
   switchGroupSizes,
   switchGroupViews,
-} from '../SwitchGroup';
+} from '../types';
 
 import mdx from './SwitchGroup.docs.mdx';
 
