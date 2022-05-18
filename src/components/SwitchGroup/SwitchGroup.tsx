@@ -64,3 +64,5 @@ function SwitchGroupRender(props: SwitchGroupProps, ref: React.Ref<HTMLDivElemen
 }
 
 export const SwitchGroup = forwardRef(SwitchGroupRender) as SwitchGroupComponent;
+
+export * from './types';
