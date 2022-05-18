@@ -4,6 +4,7 @@ import { ExampleStepsCompleted } from './examples/ExampleStepsCompleted/ExampleS
 import { ExampleStepsSkipped } from './examples/ExampleStepsSkipped/ExampleStepsSkipped';
 import { ExampleStepsContent } from './examples/ExampleStepsContent/ExampleStepsContent';
 import { ExampleStepsSize } from './examples/ExampleStepsSize/ExampleStepsSize';
+import { ExampleStepsAdaptive } from './examples/ExampleStepsAdaptive/ExampleStepsAdaptive';
 
 <!--info
 description: Вкладки по шагам. Показывает контент в определённой последовательности.
@@ -27,6 +28,7 @@ import { Steps } from '@consta/uikit/StepsCanary';
   - [Пропущенные шаги](#пропущенные-шаги)
 - [Содержимое](#содержимое)
 - [Размер](#размер)
+- [Адаптивность](#адаптивность)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
 
@@ -209,6 +211,13 @@ export const Items: string[] = ['Главное', 'Важное', 'Необяз�
 ```
 
 <ExampleStepsSize />
+
+## Адаптивность
+
+На мобильных и компактных экранах компонент заполняет всю доступную ширину.
+Если что-то не помещается, появляется прокрутка. Обозначение шагов и их названия сохраняются. Прокручивать список можно кнопками или свайпами вправо и влево (для мобильных устройств). Например, так:
+
+<ExampleStepsAdaptive />
 
 ## Импорт
 
