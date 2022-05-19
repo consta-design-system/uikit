@@ -33,24 +33,30 @@ describe('getErrorsList', () => {
 
   it('возвращает ошибки размера файла', () => {
     expect(
-      getErrorsList([
+      getErrorsList(
+        [
+          {
+            file: filePng,
+            errors: [
+              {
+                code: 'file-too-large',
+                message: '',
+              },
+              {
+                code: 'file-too-small',
+                message: '',
+              },
+            ],
+          },
+        ],
         {
-          file: filePng,
-          errors: [
-            {
-              code: 'file-too-large',
-              message: '',
-            },
-            {
-              code: 'file-too-small',
-              message: '',
-            },
-          ],
+          minSize: 512,
+          maxSize: 512 * 1024,
         },
-      ]),
+      ),
     ).toEqual([
-      'file.png: файл слишком большой (максимум 1 Мб)',
-      'file.png: файл слишком маленький (минимум 1 Мб)',
+      'file.png: файл слишком большой (максимум 512 Кб)',
+      'file.png: файл слишком маленький (минимум 512 байт)',
     ]);
   });
 

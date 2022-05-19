@@ -11,8 +11,8 @@ type FileSizes = {
 };
 
 const defaultFileSizes: FileSizes = {
-  maxSize: 10000,
-  minSize: 0,
+  maxSize: 1024 * 1024 * 1024,
+  minSize: 1,
 };
 
 const ERROR_FORMATTERS: Record<FileError['code'], (file: File, sizes: FileSizes) => string> = {
@@ -67,7 +67,6 @@ const getErrorMessage = (
 ): string => {
   const { code } = error;
   const message = errorMessages?.[code];
-  console.log(error, file, sizes, errorMessages);
   if (message) {
     return typeof message === 'function' ? message(file, error) : message;
   }
