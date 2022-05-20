@@ -1,5 +1,6 @@
 import React, { forwardRef, useEffect, useRef } from 'react';
-import { addMonths, startOfYear } from 'date-fns';
+import addYears from 'date-fns/addYears';
+import startOfYear from 'date-fns/startOfYear';
 
 import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
 import { useFlag } from '../../../hooks/useFlag/useFlag';
@@ -61,7 +62,7 @@ export const DatePickerTypeMonth: DatePickerTypeComponent<'month'> = forwardRef(
       const newVisibleDate = startOfYear(props.value);
       if (
         newVisibleDate.getTime() !== currentVisibleDate.getTime() &&
-        newVisibleDate.getTime() !== addMonths(currentVisibleDate, 1).getTime()
+        newVisibleDate.getTime() !== addYears(currentVisibleDate, 1).getTime()
       ) {
         setCurrentVisibleDate(newVisibleDate);
       }

@@ -67,7 +67,7 @@
       }
 
       /* исправляет разрыв между полосками */
-      & + .DateTimeSlider-Parent_selected {
+      & + .DateTimeSlider-Parent_selected::before {
         left: calc(var(--value-offset) - 1px);
         width: calc(var(--value-width) + 1px);
       }

@@ -1,5 +1,6 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
-import { addMonths, startOfYear } from 'date-fns';
+import React, { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
+import addYears from 'date-fns/addYears';
+import startOfYear from 'date-fns/startOfYear';
 
 import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
 import { useFlag } from '../../../hooks/useFlag/useFlag';
@@ -96,7 +97,7 @@ export const DatePickerTypeMonthRange: DatePickerTypeComponent<'month-range'> = 
         if (
           newVisibleDate.getTime() !== currentVisibleDate?.getTime() &&
           newVisibleDate.getTime() !==
-            (currentVisibleDate && addMonths(currentVisibleDate, 1).getTime())
+            (currentVisibleDate && addYears(currentVisibleDate, 1).getTime())
         ) {
           setCurrentVisibleDate(newVisibleDate);
         }
@@ -116,9 +117,9 @@ export const DatePickerTypeMonthRange: DatePickerTypeComponent<'month-range'> = 
         if (
           newVisibleDate.getTime() !== currentVisibleDate?.getTime() &&
           newVisibleDate.getTime() !==
-            (currentVisibleDate && addMonths(currentVisibleDate, 1).getTime())
+            (currentVisibleDate && addYears(currentVisibleDate, 1).getTime())
         ) {
-          setCurrentVisibleDate(addMonths(newVisibleDate, -1));
+          setCurrentVisibleDate(addYears(newVisibleDate, -1));
         }
       }
     }, [props.value?.[1]?.getTime(), calendarVisible, endFocused]);
@@ -126,10 +127,10 @@ export const DatePickerTypeMonthRange: DatePickerTypeComponent<'month-range'> = 
     useClickOutside({
       isActive: calendarVisible,
       ignoreClicksInsideRefs: [startFieldRef, endFieldRef, calendarRef],
-      handler: () => {
+      handler: useCallback(() => {
         setFieldFocused(false);
         setCalendarVisible.off();
-      },
+      }, []),
     });
 
     return (

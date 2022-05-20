@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
 import startOfMonth from 'date-fns/startOfMonth';
 
 import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
@@ -107,10 +107,10 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
     useClickOutside({
       isActive: calendarVisible,
       ignoreClicksInsideRefs: [startFieldRef, endFieldRef, calendarRef],
-      handler: () => {
+      handler: useCallback(() => {
         setFieldFocused(false);
         setCalendarVisible.off();
-      },
+      }, []),
     });
 
     return (

@@ -107,7 +107,6 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = fo
     useEffect(() => {
       if (props.value?.[1] && dateTimeView === 'classic' && endFocused) {
         const newVisibleDate = startOfMonth(props.value[1]);
-
         if (newVisibleDate.getTime() !== currentVisibleDate?.getTime()) {
           setCurrentVisibleDate(newVisibleDate);
         }
@@ -115,7 +114,6 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = fo
       }
       if (props.value?.[1] && dateTimeView !== 'classic' && endFocused) {
         const newVisibleDate = startOfMonth(props.value[1]);
-
         if (
           newVisibleDate.getTime() !== currentVisibleDate?.getTime() &&
           newVisibleDate.getTime() !==
