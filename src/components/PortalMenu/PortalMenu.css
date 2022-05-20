@@ -1,0 +1,7 @@
+.PortalMenu {
+  max-height: 100%;
+
+  & > *:not(:last-child) {
+    margin-bottom: var(--space-m);
+  }
+}

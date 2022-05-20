@@ -1,0 +1,13 @@
+.PortalMenuStories {
+  &-Controls {
+    margin-bottom: var(--space-xs);
+
+    & > .Button {
+      margin-bottom: var(--space-xl);
+    }
+
+    & > .TextField {
+      margin-bottom: var(--space-l);
+    }
+  }
+}

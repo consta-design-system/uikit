@@ -1,0 +1,45 @@
+.PortalMenuNavigationItem {
+  width: 100%;
+
+  &-Button {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding: var(--space-s) var(--space-s) var(--space-s)
+      calc(var(--space-s) + calc(var(--space-s) * var(--menu-navigation-item-deep)));
+    background: transparent;
+    border: none;
+    border-radius: var(--control-radius);
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background: var(--color-control-bg-clear-hover);
+    }
+
+    &_active {
+      background: var(--color-bg-stripe);
+    }
+  }
+
+  &-MoreButton {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: var(--control-radius);
+    cursor: pointer;
+    transition: transform 0.3s;
+
+    &_open {
+      transform: rotate(180deg);
+    }
+  }
+
+  &-List {
+    width: 100%;
+  }
+}
