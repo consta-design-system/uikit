@@ -13,12 +13,13 @@ import { DateRange } from '../../../utils/types/Date';
 import { PropsWithHTMLAttributesAndRef } from '../../../utils/types/PropsWithHTMLAttributes';
 import {
   DateTime,
-  DateTimeAdditionalControlRenderProp,
   DateTimePropOnChange,
   DateTimePropType,
 } from '../../DateTimeCanary/DateTimeCanary';
 import { Direction, Popover } from '../../Popover/Popover';
+import { DatePickerAdditionalControls } from '../DatePickerAdditionalControls/DatePickerAdditionalControls';
 import {
+  DatePickerAdditionalControlRenderProp,
   DatePickerPropDateTimeView,
   DatePickerPropDropdownForm,
   datePickerPropDropdownFormDefault,
@@ -30,20 +31,20 @@ export type DatePickerDropdownProps = PropsWithHTMLAttributesAndRef<
   {
     anchorRef: React.RefObject<HTMLElement>;
     currentVisibleDate?: Date;
-    type?: DateTimePropType;
+    type: DateTimePropType;
     value?: Date | DateRange;
     onChange?: DatePickerDropdownPropOnChange;
     minDate?: Date;
     maxDate?: Date;
     events?: Date[];
-    view?: DatePickerPropDateTimeView;
+    view: DatePickerPropDateTimeView;
     locale?: Locale;
     children?: never;
     form?: DatePickerPropDropdownForm;
     isOpen?: boolean;
     onChangeCurrentVisibleDate?: (date: Date) => void;
     zIndex?: number;
-    renderAdditionalControls?: DateTimeAdditionalControlRenderProp;
+    renderAdditionalControls?: DatePickerAdditionalControlRenderProp;
     multiplicitySeconds?: number;
     multiplicityMinutes?: number;
     multiplicityHours?: number;
@@ -63,6 +64,7 @@ export const DatePickerDropdown: DatePickerDropdownComponent = forwardRef((props
     isOpen,
     className,
     zIndex,
+    renderAdditionalControls,
     ...otherProps
   } = props;
 
@@ -90,6 +92,12 @@ export const DatePickerDropdown: DatePickerDropdownComponent = forwardRef((props
             onSetDirection={setDirection}
           >
             <DateTime {...otherProps} />
+            <DatePickerAdditionalControls
+              currentVisibleDate={props.currentVisibleDate}
+              renderAdditionalControls={renderAdditionalControls}
+              type={props.type}
+              view={props.view}
+            />
           </Popover>
         );
       }}

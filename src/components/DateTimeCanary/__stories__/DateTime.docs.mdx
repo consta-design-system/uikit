@@ -302,19 +302,6 @@ type LocaleWords = {
 };
 
 export type DateTimePropLocale = Locale & LocaleWords;
-
-export type DateTimeAdditionalControlRenderProp =
-  | React.ReactNode
-  | React.ReactNode[]
-  | AdditionalControlRenderType;
-
-export type AdditionalControlRenderType = (
-  props: DateTimeAdditionalControlRenderProps,
-) => React.ReactNode | React.ReactNode[];
-
-export type DateTimeAdditionalControlRenderProps = {
-  currentVisibleDate?: Date;
-};
 ```
 
 | Свойство                                         | Тип или варианты значения                              | По умолчанию | Описание                                                                  |
@@ -334,4 +321,3 @@ export type DateTimeAdditionalControlRenderProps = {
 | [`multiplicityHours?`](#выбор-времени)           | `number`                                               | 1            | Интервал для вывода часов (1 — показать все часы, 0 — убрать часы)        |
 | `ref?`                                           | `React.Ref<HTMLDivElement>`                            | -            | Ссылка на корневой DOM-элемент компонента                                 |
 | `className?`                                     | `string`                                               | -            | Дополнительные CSS-классы                                                 |
-| `renderAdditionalControls?`                      | `DateTimeAdditionalControlRenderProp`                  | -            | Дополнительные конторолы для выбора даты                                  |

@@ -3,7 +3,7 @@ import { Locale } from 'date-fns';
 import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
 import { DateRange } from '../../utils/types/Date';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
-import { DateTimeAdditionalControlRenderProp, DateTimePropView } from '../DateTimeCanary/helpers';
+import { DateTimePropView, dateTimePropViewDefault } from '../DateTimeCanary/helpers';
 import {
   TextFieldPropForm,
   TextFieldPropSize,
@@ -28,6 +28,7 @@ export type DatePickerPropType = typeof datePickerPropType[number];
 export const datePickerPropTypeDefault = datePickerPropType[0];
 
 export type DatePickerPropDateTimeView = DateTimePropView;
+export const datePickerPropDateTimeViewDefault = dateTimePropViewDefault;
 
 type Range = 'date-range' | 'date-time-range' | 'year-range' | 'month-range';
 
@@ -68,6 +69,14 @@ type DatePickerPropOnFocus<TYPE> = TYPE extends Range
 
 type DatePickerPropName<TYPE> = TYPE extends Range ? [string?, string?] | string : string;
 
+export type DatePickerAdditionalControlRenderFn = (props: {
+  currentVisibleDate?: Date;
+}) => React.ReactNode | React.ReactNode[];
+
+export type DatePickerAdditionalControlRenderProp =
+  | React.ReactNode
+  | DatePickerAdditionalControlRenderFn;
+
 export type DatePickerProps<
   TYPE extends DatePickerPropType = 'date'
 > = PropsWithHTMLAttributesAndRef<
@@ -77,7 +86,7 @@ export type DatePickerProps<
     onChange?: DatePickerPropOnChange<TYPE>;
     minDate?: Date;
     maxDate?: Date;
-    renderAdditionalControls?: DateTimeAdditionalControlRenderProp;
+    renderAdditionalControls?: DatePickerAdditionalControlRenderProp;
     events?: Date[];
     dateTimeView?: DatePickerPropDateTimeView;
     locale?: Locale;
@@ -114,6 +123,7 @@ export type DatePickerProps<
     multiplicitySeconds?: number;
     multiplicityMinutes?: number;
     multiplicityHours?: number;
+    isMobile?: number;
   },
   HTMLDivElement
 >;

@@ -6,13 +6,13 @@ import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { setRef } from '../../../utils/setRef';
 import { DatePickerDropdown } from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeMonth } from '../DatePickerFieldTypeMonth/DatePickerFieldTypeMonth';
-import { DatePickerTypeComponent } from '../types';
+import { datePickerPropDateTimeViewDefault, DatePickerTypeComponent } from '../types';
 import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 
 export const DatePickerTypeMonth: DatePickerTypeComponent<'month'> = forwardRef((props, ref) => {
   const {
     events,
-    dateTimeView,
+    dateTimeView = datePickerPropDateTimeViewDefault,
     locale,
     dropdownForm,
     onFocus,

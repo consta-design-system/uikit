@@ -10,14 +10,14 @@ import {
 } from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeDateTimeRange } from '../DatePickerFieldTypeDateTimeRange/DatePickerFieldTypeDateTimeRange';
 import { getFieldName, normalizeRangeValue } from '../helpers';
-import { DatePickerTypeComponent } from '../types';
+import { datePickerPropDateTimeViewDefault, DatePickerTypeComponent } from '../types';
 import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 
 export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-range'> = forwardRef(
   (props, ref) => {
     const {
       events,
-      dateTimeView,
+      dateTimeView = datePickerPropDateTimeViewDefault,
       locale,
       dropdownForm,
       onFocus,
