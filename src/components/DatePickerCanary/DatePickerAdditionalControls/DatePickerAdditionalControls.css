@@ -25,6 +25,6 @@
   }
 
   &_type_date-time {
-    width: calc(var(--date-picker-cell-width) * 10 + var(--space-m) * 2);
+    width: calc(var(--date-picker-cell-width) * 10 + var(--space-s) * 2);
   }
 }

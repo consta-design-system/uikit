@@ -20,9 +20,9 @@ export const DocsDecorator: React.FC<DocsContainerProps> = (props) => {
       </Theme>
     </DocsContainer>
   );
-  if (process.env.NODE_ENV === 'development') {
-    return <React.StrictMode>{content}</React.StrictMode>;
-  }
+  // if (process.env.NODE_ENV === 'development') {
+  //   return <React.StrictMode>{content}</React.StrictMode>;
+  // }
 
   return content;
 };

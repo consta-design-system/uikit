@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import React, { forwardRef, useEffect, useRef } from 'react';
 import { addMonths, startOfYear } from 'date-fns';
 
 import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
@@ -6,6 +6,7 @@ import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { setRef } from '../../../utils/setRef';
 import { DatePickerDropdown } from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeMonth } from '../DatePickerFieldTypeMonth/DatePickerFieldTypeMonth';
+import { getDropdownZIndex } from '../helpers';
 import { datePickerPropDateTimeViewDefault, DatePickerTypeComponent } from '../types';
 import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 
@@ -17,9 +18,8 @@ export const DatePickerTypeMonth: DatePickerTypeComponent<'month'> = forwardRef(
     dropdownForm,
     onFocus,
     currentVisibleDate: currentVisibleDateProp,
-    onChangeCurrentVisibleDate: onChangeCurrentVisibleDateProp,
+    onChangeCurrentVisibleDate,
     renderAdditionalControls,
-    style,
     ...otherProps
   } = props;
 
@@ -28,12 +28,15 @@ export const DatePickerTypeMonth: DatePickerTypeComponent<'month'> = forwardRef(
 
   const [calendarVisible, setCalendarVisible] = useFlag(false);
 
-  const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate(
-    currentVisibleDateProp,
-    onChangeCurrentVisibleDateProp,
-  );
-
-  const [calendarVisibleDate, setCalendarVisibleDate] = useState<Date | undefined>();
+  const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate({
+    currentVisibleDate: currentVisibleDateProp,
+    maxDate: props.maxDate,
+    minDate: props.minDate,
+    value: props.value,
+    startOfUnit: startOfYear,
+    onChangeCurrentVisibleDate,
+    calendarVisible,
+  });
 
   const onFocusHandler = (e: React.FocusEvent<HTMLElement>) => {
     onFocus && onFocus(e);
@@ -47,43 +50,33 @@ export const DatePickerTypeMonth: DatePickerTypeComponent<'month'> = forwardRef(
   }, [ref, fieldRef]);
 
   useEffect(() => {
-    if (props.value && props.dateTimeView === 'classic' && calendarVisibleDate) {
+    if (props.value && dateTimeView === 'classic' && currentVisibleDate) {
       const newVisibleDate = startOfYear(props.value);
-      if (newVisibleDate.getTime() !== calendarVisibleDate.getTime()) {
+      if (newVisibleDate.getTime() !== currentVisibleDate.getTime()) {
         setCurrentVisibleDate(newVisibleDate);
       }
       return;
     }
-    if (props.value && props.dateTimeView !== 'classic' && calendarVisibleDate) {
+    if (props.value && dateTimeView !== 'classic' && currentVisibleDate) {
       const newVisibleDate = startOfYear(props.value);
       if (
-        newVisibleDate.getTime() !== calendarVisibleDate.getTime() &&
-        newVisibleDate.getTime() !== addMonths(calendarVisibleDate, 1).getTime()
+        newVisibleDate.getTime() !== currentVisibleDate.getTime() &&
+        newVisibleDate.getTime() !== addMonths(currentVisibleDate, 1).getTime()
       ) {
         setCurrentVisibleDate(newVisibleDate);
       }
     }
   }, [props.value]);
 
-  const handleClose = () => {
-    setCalendarVisible.off();
-    setCurrentVisibleDate(props.value ? undefined : currentVisibleDateProp);
-  };
-
   useClickOutside({
     isActive: calendarVisible,
     ignoreClicksInsideRefs: [fieldRef, calendarRef],
-    handler: handleClose,
+    handler: setCalendarVisible.off,
   });
 
   return (
     <>
-      <DatePickerFieldTypeMonth
-        {...otherProps}
-        ref={fieldRef}
-        onFocus={onFocusHandler}
-        style={style}
-      />
+      <DatePickerFieldTypeMonth {...otherProps} ref={fieldRef} onFocus={onFocusHandler} />
       <DatePickerDropdown
         ref={calendarRef}
         anchorRef={fieldRef}
@@ -99,11 +92,11 @@ export const DatePickerTypeMonth: DatePickerTypeComponent<'month'> = forwardRef(
         form={dropdownForm}
         onChange={(params) => {
           props.onChange?.(params);
-          handleClose();
+          setCalendarVisible.off();
         }}
         renderAdditionalControls={renderAdditionalControls}
-        zIndex={typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined}
-        onChangeCurrentVisibleDate={setCalendarVisibleDate}
+        onChangeCurrentVisibleDate={setCurrentVisibleDate}
+        zIndex={getDropdownZIndex(props.style)}
       />
     </>
   );

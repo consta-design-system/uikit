@@ -5,7 +5,11 @@ import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { setRef } from '../../../utils/setRef';
 import { DatePickerDropdown } from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeTime } from '../DatePickerFieldTypeTime/DatePickerFieldTypeTime';
-import { datePickerPropFormatTypeDateTime, getMultiplicityTime } from '../helpers';
+import {
+  datePickerPropFormatTypeDateTime,
+  getDropdownZIndex,
+  getMultiplicityTime,
+} from '../helpers';
 import { datePickerPropDateTimeViewDefault, DatePickerTypeComponent } from '../types';
 
 export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef((props, ref) => {
@@ -19,7 +23,6 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef((p
     multiplicityMinutes: multiplicityMinutesProp,
     multiplicitySeconds: multiplicitySecondsProp,
     renderAdditionalControls,
-    style,
 
     currentVisibleDate,
     onChangeCurrentVisibleDate,
@@ -52,7 +55,7 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef((p
   useClickOutside({
     isActive: calendarVisible,
     ignoreClicksInsideRefs: [fieldRef, calendarRef],
-    handler: () => setCalendarVisible.off(),
+    handler: setCalendarVisible.off,
   });
 
   return (
@@ -64,7 +67,6 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef((p
         multiplicityHours={multiplicityHours}
         multiplicitySeconds={multiplicitySeconds}
         multiplicityMinutes={multiplicityMinutes}
-        style={style}
       />
       <DatePickerDropdown
         ref={calendarRef}
@@ -83,7 +85,7 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef((p
         multiplicityHours={multiplicityHours}
         multiplicitySeconds={multiplicitySeconds}
         multiplicityMinutes={multiplicityMinutes}
-        zIndex={typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined}
+        zIndex={getDropdownZIndex(props.style)}
       />
     </>
   );

@@ -152,3 +152,6 @@ export const getFieldName = (name: [string?, string?] | string | undefined, rang
 
   return `${name}_${fieldPrefixs[rangeIndex]}`;
 };
+
+export const getDropdownZIndex = (style?: React.CSSProperties) =>
+  typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined;

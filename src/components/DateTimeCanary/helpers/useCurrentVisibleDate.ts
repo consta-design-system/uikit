@@ -8,12 +8,16 @@ type GetCurrentVisibleDateProps = {
   currentVisibleDate: Date | undefined;
   minDate: Date | undefined;
   maxDate: Date | undefined;
-  value: Date | DateRange | undefined;
+  value: Date | DateRange | undefined | null;
   startOfUnit: (date: Date) => Date;
   onChangeCurrentVisibleDate?: (date: Date) => void;
 };
 
-const getCurrentVisibleDate = ({
+export type UseCurrentVisibleDateProps = GetCurrentVisibleDateProps & {
+  onChangeCurrentVisibleDate?: (date: Date) => void;
+};
+
+const calculateCurrentVisibleDate = ({
   currentVisibleDate,
   minDate,
   maxDate,
@@ -60,20 +64,23 @@ const getCurrentVisibleDate = ({
   return currentDate;
 };
 
-export const useCurrentVisibleDate = (props: GetCurrentVisibleDateProps) => {
+export const getCurrentVisibleDate = (props: GetCurrentVisibleDateProps): Date =>
+  props.startOfUnit(calculateCurrentVisibleDate(props));
+
+export const useCurrentVisibleDate = (props: UseCurrentVisibleDateProps) => {
   const currentVisibleDate = useMemo(() => {
-    return props.startOfUnit(getCurrentVisibleDate(props));
+    return getCurrentVisibleDate(props);
   }, [
     props.currentVisibleDate?.getTime() || 0,
     props.minDate?.getTime() || 0,
     props.maxDate?.getTime() || 0,
   ]);
 
-  const state = useState(currentVisibleDate);
+  const state = useState<Date>(currentVisibleDate);
 
   useEffect(() => state[1](currentVisibleDate), [currentVisibleDate.getTime()]);
 
-  useEffect(() => props.onChangeCurrentVisibleDate?.(state[0]), [state[0].getTime()]);
+  useEffect(() => state[0] && props.onChangeCurrentVisibleDate?.(state[0]), [state[0]?.getTime()]);
 
   return state;
 };
