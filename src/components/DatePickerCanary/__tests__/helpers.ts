@@ -30,3 +30,5 @@ export const getDateTimeDaySelected = (item = 0) => getDateTimeDaysSelected()[it
 export const getDateTimeTimesSelected = () =>
   getDropdown().querySelectorAll(`.DateTimeTypeDateTime-Time .DateTimeItem_selected`);
 export const getDateTimeTimeSelected = (item = 0) => getDateTimeTimesSelected()[item];
+export const getAdditionalControls = () =>
+  getDropdown().querySelector(`.DatePickerAdditionalControls`);

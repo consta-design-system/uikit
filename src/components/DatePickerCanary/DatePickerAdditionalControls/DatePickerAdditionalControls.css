@@ -1,9 +1,6 @@
 .DatePickerAdditionalControls {
   --date-picker-cell-width: calc(var(--control-height-s) + (var(--space-3xs) * 2));
-  display: flex;
-  margin-top: var(--space-l);
-  gap: var(--space-s);
-  flex-wrap: wrap;
+  padding-top: var(--space-l);
 
   &_type_date&_view_classic,
   &_type_year&_view_classic,
@@ -26,5 +23,13 @@
 
   &_type_date-time {
     width: calc(var(--date-picker-cell-width) * 10 + var(--space-s) * 2);
+  }
+
+  &_contentType {
+    &_array {
+      display: flex;
+      gap: var(--space-s);
+      flex-wrap: wrap;
+    }
   }
 }

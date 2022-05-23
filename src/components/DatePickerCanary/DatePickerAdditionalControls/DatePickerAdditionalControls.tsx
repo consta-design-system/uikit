@@ -45,7 +45,13 @@ export const DatePickerAdditionalControls: React.FC<Props> = (props) => {
       : renderAdditionalControls;
 
     return (
-      <div {...otherProps} className={cnDatePickerAdditionalControls({ type, view }, [className])}>
+      <div
+        {...otherProps}
+        className={cnDatePickerAdditionalControls(
+          { type, view, contentType: Array.isArray(content) && 'array' },
+          [className],
+        )}
+      >
         {content}
       </div>
     );

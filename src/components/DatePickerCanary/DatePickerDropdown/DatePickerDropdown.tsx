@@ -81,7 +81,7 @@ export const DatePickerDropdown: DatePickerDropdownComponent = forwardRef((props
   const rootRef = useRef<HTMLDivElement>(null);
   const [direction, setDirection] = useState<Direction>();
 
-  const [visibleAdditionalControls, setVisibleAdditionalControls] = useFlag();
+  const [visibleAdditionalControls, setVisibleAdditionalControls] = useFlag(true);
 
   const onMove = useCallback(
     (to: MoveType) => {
