@@ -5,8 +5,6 @@ import React, { useEffect } from 'react';
 import { ClickOutsideHandler, useClickOutside } from '../../hooks/useClickOutside/useClickOutside';
 import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
-import { defaultVars } from '../../hooks/useThemeVars/helpers';
-import { useThemeVars } from '../../hooks/useThemeVars/useThemeVars';
 import { cn } from '../../utils/bem';
 import { PropsWithJsxAttributes } from '../../utils/types/PropsWithJsxAttributes';
 import { PortalWithTheme, usePortalContext } from '../PortalWithTheme/PortalWithTheme';
@@ -162,8 +160,6 @@ export const Popover = React.forwardRef<HTMLDivElement, Props>((props, component
     previousDirectionRef.current = null;
   };
 
-  const vars = useThemeVars();
-
   const updateAnchorClientRect = () =>
     setAnchorClientRect(anchorRef?.current?.getBoundingClientRect());
 
@@ -185,10 +181,6 @@ export const Popover = React.forwardRef<HTMLDivElement, Props>((props, component
       width: document.documentElement.clientWidth,
       height: document.documentElement.clientHeight,
     },
-    offset:
-      typeof offset === 'string'
-        ? vars.space[`--space-${offset}` as typeof defaultVars.space[number]]
-        : offset,
     arrowOffset,
     direction: passedDirection,
     possibleDirections,
@@ -225,7 +217,7 @@ export const Popover = React.forwardRef<HTMLDivElement, Props>((props, component
     <PortalWithTheme
       {...otherProps}
       preset={theme}
-      className={cnPopover(null, [className])}
+      className={cnPopover({ direction }, [className])}
       container={window.document.body}
       ref={useForkRef<HTMLDivElement>([ref, componentRef])}
       style={{
@@ -235,6 +227,8 @@ export const Popover = React.forwardRef<HTMLDivElement, Props>((props, component
         [`--popover-width` as string]: equalAnchorWidth ? `${anchorSize.width}px` : undefined,
         [`--popover-pointer-events` as string]: isInteractive ? undefined : 'none',
         [`--popover-visibility` as string]: position ? undefined : 'hidden',
+        [`--popover-offset` as string]:
+          typeof offset === 'string' ? `var(--space-${offset})` : `${offset}px`,
       }}
     >
       <ContextConsumer

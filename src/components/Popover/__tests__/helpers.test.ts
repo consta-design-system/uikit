@@ -22,7 +22,6 @@ const defaultParams: Parameters<typeof getComputedPositionAndDirection>[0] = {
   possibleDirections: directions,
   bannedDirections: [],
   direction: 'leftCenter',
-  offset: 0,
   position: undefined,
   spareDirection: 'downStartLeft',
 };
@@ -33,7 +32,6 @@ describe('getPositionsByDirection', () => {
       contentSize: { width: 100, height: 50 },
       anchorSize: { width: 0, height: 0 },
       position: { x: 0, y: 0 },
-      offset: 0,
     });
 
     const expected: typeof result = {
@@ -63,47 +61,11 @@ describe('getPositionsByDirection', () => {
     expect(result).toEqual(expected);
   });
 
-  it('возвращает позиции по направлениям со сдвигом', () => {
-    const result = getPositionsByDirection({
-      contentSize: { width: 100, height: 50 },
-      anchorSize: { width: 0, height: 0 },
-      position: { x: 0, y: 0 },
-      offset: 5,
-    });
-
-    const expected: typeof result = {
-      upLeft: { x: -100, y: -50 - 5 },
-      upCenter: { x: -50, y: -50 - 5 },
-      upRight: { x: 0, y: -50 - 5 },
-      leftUp: { x: -100 - 5, y: -50 },
-      leftCenter: { x: -100 - 5, y: -25 },
-      leftDown: { x: -100 - 5, y: 0 },
-      rightUp: { x: 5, y: -50 },
-      rightCenter: { x: 5, y: -25 },
-      rightDown: { x: 5, y: 0 },
-      downLeft: { x: -100, y: 5 },
-      downCenter: { x: -50, y: 5 },
-      downRight: { x: 0, y: 5 },
-
-      downStartLeft: { x: 0, y: 5 },
-      upStartLeft: { x: 0, y: -50 - 5 },
-      downStartRight: { x: -100, y: 5 },
-      upStartRight: { x: -100, y: -50 - 5 },
-      leftStartUp: { x: -100 - 5, y: 0 },
-      leftStartDown: { x: -100 - 5, y: -50 },
-      rightStartUp: { x: 5, y: 0 },
-      rightStartDown: { x: 5, y: -50 },
-    };
-
-    expect(result).toEqual(expected);
-  });
-
   it('возвращает позиции по направлениям относительно якоря', () => {
     const result = getPositionsByDirection({
       contentSize: { width: 100, height: 50 },
       anchorSize: { width: 20, height: 20 },
       position: { x: 300, y: 500 },
-      offset: 0,
     });
 
     const expected: typeof result = {
@@ -138,7 +100,6 @@ describe('getPositionsByDirection', () => {
       contentSize: { width: 100, height: 50 },
       anchorSize: { width: 200, height: 200 },
       position: { x: 300, y: 500 },
-      offset: 0,
     });
 
     const expected: typeof result = {
@@ -173,7 +134,6 @@ describe('getPositionsByDirection', () => {
       contentSize: { width: 100, height: 50 },
       anchorSize: { width: 20, height: 20 },
       position: { x: 300, y: 500 },
-      offset: 0,
       arrowOffset: 8,
     });
 
@@ -363,7 +323,6 @@ describe('getComputedPositionAndDirection', () => {
   describe('если поповер спозициронирован относительно элемента', () => {
     const params = {
       ...defaultParams,
-      offset: 5,
     } as const;
 
     it('отображаем поповер вниз по центру', () => {
@@ -382,7 +341,7 @@ describe('getComputedPositionAndDirection', () => {
         }),
       ).toEqual({
         direction: 'downCenter',
-        position: { x: 125, y: 155 },
+        position: { x: 125, y: 150 },
       });
     });
 
@@ -402,7 +361,7 @@ describe('getComputedPositionAndDirection', () => {
         }),
       ).toEqual({
         direction: 'upCenter',
-        position: { x: 400, y: 345 },
+        position: { x: 400, y: 350 },
       });
     });
 
@@ -422,7 +381,7 @@ describe('getComputedPositionAndDirection', () => {
         }),
       ).toEqual({
         direction: 'downRight',
-        position: { x: 50, y: 55 },
+        position: { x: 50, y: 50 },
       });
     });
 
@@ -442,7 +401,7 @@ describe('getComputedPositionAndDirection', () => {
         }),
       ).toEqual({
         direction: 'downLeft',
-        position: { x: 0, y: 55 },
+        position: { x: 0, y: 50 },
       });
     });
 
@@ -462,7 +421,7 @@ describe('getComputedPositionAndDirection', () => {
         }),
       ).toEqual({
         direction: 'upRight',
-        position: { x: 50, y: 395 },
+        position: { x: 50, y: 400 },
       });
     });
 
@@ -482,7 +441,7 @@ describe('getComputedPositionAndDirection', () => {
         }),
       ).toEqual({
         direction: 'upLeft',
-        position: { x: 250, y: 345 },
+        position: { x: 250, y: 350 },
       });
     });
 
@@ -502,7 +461,7 @@ describe('getComputedPositionAndDirection', () => {
         }),
       ).toEqual({
         direction: 'rightCenter',
-        position: { x: 105, y: 0 },
+        position: { x: 100, y: 0 },
       });
     });
 
@@ -522,7 +481,7 @@ describe('getComputedPositionAndDirection', () => {
         }),
       ).toEqual({
         direction: 'leftCenter',
-        position: { x: 295, y: 0 },
+        position: { x: 300, y: 0 },
       });
     });
 
@@ -543,7 +502,7 @@ describe('getComputedPositionAndDirection', () => {
         }),
       ).toEqual({
         direction: 'downStartLeft',
-        position: { x: 0, y: 55 },
+        position: { x: 0, y: 50 },
       });
     });
 
@@ -564,7 +523,7 @@ describe('getComputedPositionAndDirection', () => {
         }),
       ).toEqual({
         direction: 'downRight',
-        position: { x: 450, y: 555 },
+        position: { x: 450, y: 550 },
       });
     });
   });
@@ -577,7 +536,6 @@ describe('getComputedPositionAndDirection', () => {
           contentSize: { width: 100, height: 50 },
           direction: 'downCenter',
           position: { x: 25, y: 500 },
-          offset: 0,
           possibleDirections: ['downCenter', 'downLeft', 'downRight'],
           bannedDirections: [],
           spareDirection: 'downCenter',
@@ -597,7 +555,6 @@ describe('getComputedPositionAndDirection', () => {
           contentSize: { width: 100, height: 50 },
           direction: 'upCenter',
           position: { x: 25, y: 500 },
-          offset: 0,
           possibleDirections: directions,
           bannedDirections: ['upRight'],
           spareDirection: 'downStartLeft',
@@ -615,7 +572,6 @@ describe('getComputedPositionAndDirection', () => {
           contentSize: { width: 100, height: 50 },
           direction: 'downCenter',
           position: { x: 25, y: 500 },
-          offset: 0,
           possibleDirections: directions,
           bannedDirections: directions,
           spareDirection: 'downStartLeft',
