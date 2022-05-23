@@ -336,19 +336,8 @@ export const DatePickerExampleAdditionalControls = () => {
     } else if (month >= 6 && month < 9) {
       setValue([new Date(year, 6, 1), new Date(year, 9, 0)]);
     } else {
-      setValue([new Date(year, 9, 1), new Date(year, 0, 0)]);
+      setValue([new Date(year, 9, 1), new Date(year + 1, 0, 0)]);
     }
-  };
-
-  const ControlRender = (props: DateTimeAdditionalControlRenderProps) => {
-    const { currentVisibleDate } = props;
-
-    return (
-      <Button
-        label="Этот квартал"
-        onClick={() => currentVisibleDate && setCuarter(currentVisibleDate)}
-      />
-    );
   };
 
   return (
@@ -356,7 +345,12 @@ export const DatePickerExampleAdditionalControls = () => {
       value={value}
       type="date-range"
       onChange={({ value }) => setValue(value)}
-      renderAdditionalControls={ControlRender}
+      renderAdditionalControls={({ currentVisibleDate }) => (
+        <Button
+          label="Этот квартал"
+          onClick={() => currentVisibleDate && setCuarter(currentVisibleDate)}
+        />
+      )}
     />
   );
 };

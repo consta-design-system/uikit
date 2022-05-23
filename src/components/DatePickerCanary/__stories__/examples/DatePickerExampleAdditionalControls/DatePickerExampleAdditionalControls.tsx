@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import { Button } from '../../../../Button/Button';
-import { DateTimeAdditionalControlRenderProps } from '../../../../DateTimeCanary/helpers';
 import { DatePicker, DatePickerPropValue } from '../../../DatePickerCanary';
 
 export const DatePickerExampleAdditionalControls = () => {
@@ -21,23 +20,17 @@ export const DatePickerExampleAdditionalControls = () => {
     }
   };
 
-  const ControlRender = (props: DateTimeAdditionalControlRenderProps) => {
-    const { currentVisibleDate } = props;
-
-    return (
-      <Button
-        label="Этот квартал"
-        onClick={() => currentVisibleDate && setCuarter(currentVisibleDate)}
-      />
-    );
-  };
-
   return (
     <DatePicker
       value={value}
       type="date-range"
       onChange={({ value }) => setValue(value)}
-      renderAdditionalControls={ControlRender}
+      renderAdditionalControls={({ currentVisibleDate }) => (
+        <Button
+          label="Этот квартал"
+          onClick={() => currentVisibleDate && setCuarter(currentVisibleDate)}
+        />
+      )}
     />
   );
 };

@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 
 import { DateTime, dateTimePropType, dateTimePropView } from '../DateTimeCanary';
 
-import { getAdditionalControls, getRender, testId } from './helpers';
+import { getRender, testId } from './helpers';
 
 type DateTimeProps = React.ComponentProps<typeof DateTime>;
 
@@ -34,29 +34,6 @@ describe('Компонент DateTime', () => {
 
           renderComponent({ className });
           expect(getRender()).toHaveClass(className);
-        });
-      });
-    });
-  });
-
-  describe('проверка renderAdditionalControls', () => {
-    const content = 'renderAdditionalControls';
-
-    const renderAdditionalControls = {
-      node: <div>{content}</div>,
-      function: () => <div>{content}</div>,
-    };
-
-    Object.keys(renderAdditionalControls).forEach((renderType) => {
-      dateTimePropType.forEach((type) => {
-        dateTimePropView.forEach((view) => {
-          it(`рендер при renderAdditionalControls="${renderType}" type="${type}" view="${view}"`, () => {
-            renderComponent({
-              renderAdditionalControls:
-                renderAdditionalControls[renderType as keyof typeof renderAdditionalControls],
-            });
-            expect(getAdditionalControls()).toHaveTextContent(content);
-          });
         });
       });
     });

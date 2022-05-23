@@ -69,7 +69,7 @@ const defaultKnobs = () => ({
 });
 
 const additionalControls = () => {
-  return [<Button label="Кнопка" />, <Button label="Кнопка" />];
+  return [<Button label="Кнопка" key="1" />, <Button label="Кнопка" key="2" />];
 };
 
 export function Playground() {

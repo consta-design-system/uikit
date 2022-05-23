@@ -7,7 +7,6 @@ import { cnDateTimeLabel } from '../DateTimeLabel/DateTimeLabel';
 export const testId = 'DateTime';
 
 export const getRender = () => screen.getByTestId(testId);
-export const getAdditionalControls = () => getRender().querySelector(`.DateTimeAdditionalControls`);
 export const getDateTimeItems = () => getRender().querySelectorAll(`.${cnDateTimeItem()}`);
 export const getDateTimeCells = () => getRender().querySelectorAll(`.${cnDateTimeCell()}`);
 export const getDateTimeLabel = () => getRender().querySelector(`.${cnDateTimeLabel()}`);

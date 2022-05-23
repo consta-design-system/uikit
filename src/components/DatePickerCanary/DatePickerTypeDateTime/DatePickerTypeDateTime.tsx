@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import React, { forwardRef, useEffect, useRef } from 'react';
 import addMonths from 'date-fns/addMonths';
 import startOfMonth from 'date-fns/startOfMonth';
 
@@ -7,25 +7,28 @@ import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { setRef } from '../../../utils/setRef';
 import { DatePickerDropdown } from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeDateTime } from '../DatePickerFieldTypeDateTime/DatePickerFieldTypeDateTime';
-import { datePickerPropFormatTypeDateTime, getMultiplicityTime } from '../helpers';
-import { DatePickerTypeComponent } from '../types';
+import {
+  datePickerPropFormatTypeDateTime,
+  getDropdownZIndex,
+  getMultiplicityTime,
+} from '../helpers';
+import { datePickerPropDateTimeViewDefault, DatePickerTypeComponent } from '../types';
 import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 
 export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> = forwardRef(
   (props, ref) => {
     const {
       events,
-      dateTimeView,
+      dateTimeView = datePickerPropDateTimeViewDefault,
       locale,
       dropdownForm,
       onFocus,
       currentVisibleDate: currentVisibleDateProp,
-      onChangeCurrentVisibleDate: onChangeCurrentVisibleDateProp,
+      onChangeCurrentVisibleDate,
       multiplicityHours: multiplicityHoursProp,
       multiplicityMinutes: multiplicityMinutesProp,
       multiplicitySeconds: multiplicitySecondsProp,
       renderAdditionalControls,
-      style,
       ...otherProps
     } = props;
 
@@ -41,12 +44,15 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> = forw
 
     const [calendarVisible, setCalendarVisible] = useFlag(false);
 
-    const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate(
-      currentVisibleDateProp,
-      onChangeCurrentVisibleDateProp,
-    );
-
-    const [calendarVisibleDate, setCalendarVisibleDate] = useState<Date | undefined>();
+    const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate({
+      currentVisibleDate: currentVisibleDateProp,
+      maxDate: props.maxDate,
+      minDate: props.minDate,
+      value: props.value,
+      startOfUnit: startOfMonth,
+      onChangeCurrentVisibleDate,
+      calendarVisible,
+    });
 
     const onFocusHandler = (e: React.FocusEvent<HTMLElement>) => {
       onFocus && onFocus(e);
@@ -60,18 +66,18 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> = forw
     }, [ref, fieldRef]);
 
     useEffect(() => {
-      if (props.value && props.dateTimeView === 'classic' && calendarVisibleDate) {
+      if (props.value && dateTimeView === 'classic' && currentVisibleDate) {
         const newVisibleDate = startOfMonth(props.value);
-        if (newVisibleDate.getTime() !== calendarVisibleDate.getTime()) {
+        if (newVisibleDate.getTime() !== currentVisibleDate.getTime()) {
           setCurrentVisibleDate(newVisibleDate);
         }
         return;
       }
-      if (props.value && props.dateTimeView !== 'classic' && calendarVisibleDate) {
+      if (props.value && dateTimeView !== 'classic' && currentVisibleDate) {
         const newVisibleDate = startOfMonth(props.value);
         if (
-          newVisibleDate.getTime() !== calendarVisibleDate.getTime() &&
-          newVisibleDate.getTime() !== addMonths(calendarVisibleDate, 1).getTime()
+          newVisibleDate.getTime() !== currentVisibleDate.getTime() &&
+          newVisibleDate.getTime() !== addMonths(currentVisibleDate, 1).getTime()
         ) {
           setCurrentVisibleDate(newVisibleDate);
         }
@@ -81,10 +87,7 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> = forw
     useClickOutside({
       isActive: calendarVisible,
       ignoreClicksInsideRefs: [fieldRef, calendarRef],
-      handler: () => {
-        setCalendarVisible.off();
-        setCurrentVisibleDate(props.value ? undefined : currentVisibleDateProp);
-      },
+      handler: setCalendarVisible.off,
     });
 
     return (
@@ -96,7 +99,6 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> = forw
           multiplicityHours={multiplicityHours}
           multiplicitySeconds={multiplicitySeconds}
           multiplicityMinutes={multiplicityMinutes}
-          style={style}
         />
         <DatePickerDropdown
           ref={calendarRef}
@@ -113,11 +115,11 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> = forw
           form={dropdownForm}
           onChange={props.onChange}
           renderAdditionalControls={renderAdditionalControls}
-          onChangeCurrentVisibleDate={setCalendarVisibleDate}
+          onChangeCurrentVisibleDate={setCurrentVisibleDate}
           multiplicityHours={multiplicityHours}
           multiplicitySeconds={multiplicitySeconds}
           multiplicityMinutes={multiplicityMinutes}
-          zIndex={typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined}
+          zIndex={getDropdownZIndex(props.style)}
         />
       </>
     );

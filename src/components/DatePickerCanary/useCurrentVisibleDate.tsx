@@ -1,14 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+
+import {
+  getCurrentVisibleDate,
+  useCurrentVisibleDate as useDateTimeCurrentVisibleDate,
+  UseCurrentVisibleDateProps,
+} from '../DateTimeCanary/helpers/useCurrentVisibleDate';
 
 export const useCurrentVisibleDate = (
-  date?: Date,
-  onChange?: (date: Date) => void,
-): [Date | undefined, React.Dispatch<React.SetStateAction<Date | undefined>>] => {
-  const state = useState<Date | undefined>(date);
+  props: UseCurrentVisibleDateProps & { calendarVisible: boolean },
+) => {
+  const state = useDateTimeCurrentVisibleDate(props);
 
-  useEffect(() => state[1](date), [date?.getTime()]);
-
-  useEffect(() => state[0] && onChange?.(state[0]), [state[0]?.getTime()]);
+  useEffect(() => {
+    if (props.calendarVisible) {
+      state[1](getCurrentVisibleDate(props));
+    }
+  }, [props.calendarVisible]);
 
   return state;
 };

@@ -4,7 +4,6 @@ import React, { forwardRef, useEffect, useRef, useState } from 'react';
 
 import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
 import { cn } from '../../../utils/bem';
-import { DateTimeAdditionalControls } from '../DateTimeAdditionalControls/DateTimeAdditionalControls';
 import { DateTimeTypeDate } from '../DateTimeTypeDate/DateTimeTypeDate';
 import { DateTimeTypeTime } from '../DateTimeTypeTime/DateTimeTypeTime';
 import { DateTimeTypeComponent, MoveType, moveTypes } from '../helpers';
@@ -34,7 +33,6 @@ export const DateTimeTypeDateTime: DateTimeTypeComponent<'date-time'> = forwardR
     multiplicityMinutes,
     multiplicityHours,
     style,
-    renderAdditionalControls,
     timeFor = 'start',
     ...otherProps
   } = props;
@@ -90,7 +88,6 @@ export const DateTimeTypeDateTime: DateTimeTypeComponent<'date-time'> = forwardR
           maxDate={maxDate}
           events={events}
           locale={locale}
-          renderAdditionalControls={withTime ? undefined : renderAdditionalControls}
           onChangeCurrentVisibleDate={onChangeCurrentVisibleDate}
         />
         {withTime && (
@@ -107,10 +104,6 @@ export const DateTimeTypeDateTime: DateTimeTypeComponent<'date-time'> = forwardR
           />
         )}
       </div>
-      <DateTimeAdditionalControls
-        currentVisibleDate={currentVisibleDate}
-        renderAdditionalControls={withTime ? renderAdditionalControls : undefined}
-      />
     </>
   );
 });

@@ -6,6 +6,7 @@ import { DatePicker, datePickerPropType } from '../DatePickerCanary';
 
 import {
   animateDelay,
+  getAdditionalControls,
   getDropdown,
   getRender,
   inputFocus,
@@ -72,6 +73,37 @@ describe('Компонент DatePicker', () => {
           animateDelay();
 
           expect(dropdown).not.toBeInTheDocument();
+        });
+      });
+    });
+  });
+
+  describe('проверка renderAdditionalControls', () => {
+    const content = 'renderAdditionalControls';
+
+    const renderAdditionalControls = {
+      node: <div>{content}</div>,
+      function: () => <div>{content}</div>,
+    };
+
+    Object.keys(renderAdditionalControls).forEach((renderType) => {
+      datePickerPropType.forEach((type) => {
+        dateTimePropView.forEach((view) => {
+          it(`рендер при type="${type}" view="${view}" renderAdditionalControlsType="${renderType}"`, () => {
+            jest.useFakeTimers();
+
+            act(() => {
+              renderComponent({
+                renderAdditionalControls:
+                  renderAdditionalControls[renderType as keyof typeof renderAdditionalControls],
+              });
+            });
+
+            inputFocus();
+            animateDelay();
+
+            expect(getAdditionalControls()).toHaveTextContent(content);
+          });
         });
       });
     });

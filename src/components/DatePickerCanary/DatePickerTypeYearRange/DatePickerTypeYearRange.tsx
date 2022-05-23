@@ -9,24 +9,23 @@ import {
   DatePickerDropdownPropOnChange,
 } from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeYearRange } from '../DatePickerFieldTypeYearRange/DatePickerFieldTypeYearRange';
-import { normalizeRangeValue } from '../helpers';
-import { DatePickerTypeComponent } from '../types';
+import { getDropdownZIndex, normalizeRangeValue } from '../helpers';
+import { datePickerPropDateTimeViewDefault, DatePickerTypeComponent } from '../types';
 import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 
 export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> = forwardRef(
   (props, ref) => {
     const {
       events,
-      dateTimeView,
+      dateTimeView = datePickerPropDateTimeViewDefault,
       locale,
       dropdownForm,
       onFocus,
       onBlur,
       leftSide,
       rightSide,
-      style,
       currentVisibleDate: currentVisibleDateProp,
-      onChangeCurrentVisibleDate: onChangeCurrentVisibleDateProp,
+      onChangeCurrentVisibleDate,
       renderAdditionalControls,
       inputRef,
       name,
@@ -55,10 +54,15 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> = fo
 
     const [calendarVisible, setCalendarVisible] = useFlag(false);
 
-    const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate(
-      currentVisibleDateProp,
-      onChangeCurrentVisibleDateProp,
-    );
+    const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate({
+      currentVisibleDate: currentVisibleDateProp,
+      maxDate: props.maxDate,
+      minDate: props.minDate,
+      value: props.value,
+      startOfUnit: startOfDecade,
+      onChangeCurrentVisibleDate,
+      calendarVisible,
+    });
 
     const startFieldOnBlurHandler = (e: React.FocusEvent<HTMLElement>) =>
       Array.isArray(onBlur) ? onBlur[0]?.(e) : onBlur?.(e);
@@ -80,14 +84,14 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> = fo
 
     // эфект для того чтобы календарь переключался при вводе с клавиатуры
     useEffect(() => {
-      if (props.value?.[0] && props.dateTimeView === 'classic' && startFocused) {
+      if (props.value?.[0] && dateTimeView === 'classic' && startFocused) {
         const newVisibleDate = startOfDecade(props.value[0]);
         if (newVisibleDate.getTime() !== currentVisibleDate?.getTime()) {
           setCurrentVisibleDate(newVisibleDate);
         }
         return;
       }
-      if (props.value?.[0] && props.dateTimeView !== 'classic' && startFocused) {
+      if (props.value?.[0] && dateTimeView !== 'classic' && startFocused) {
         const newVisibleDate = startOfDecade(props.value[0]);
         if (
           newVisibleDate.getTime() !== currentVisibleDate?.getTime() &&
@@ -96,22 +100,18 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> = fo
         ) {
           setCurrentVisibleDate(newVisibleDate);
         }
-        return;
-      }
-      if (!props.value?.[0] && startFocused) {
-        setCurrentVisibleDate(currentVisibleDateProp);
       }
     }, [props.value?.[0]?.getTime(), calendarVisible, startFocused]);
 
     useEffect(() => {
-      if (props.value?.[1] && props.dateTimeView === 'classic' && endFocused) {
+      if (props.value?.[1] && dateTimeView === 'classic' && endFocused) {
         const newVisibleDate = startOfDecade(props.value[1]);
         if (newVisibleDate.getTime() !== currentVisibleDate?.getTime()) {
           setCurrentVisibleDate(newVisibleDate);
         }
         return;
       }
-      if (props.value?.[1] && props.dateTimeView !== 'classic' && endFocused) {
+      if (props.value?.[1] && dateTimeView !== 'classic' && endFocused) {
         const newVisibleDate = startOfDecade(props.value[1]);
         if (
           newVisibleDate.getTime() !== currentVisibleDate?.getTime() &&
@@ -120,10 +120,6 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> = fo
         ) {
           setCurrentVisibleDate(addYears(newVisibleDate, -10));
         }
-        return;
-      }
-      if (!props.value?.[1] && endFocused) {
-        setCurrentVisibleDate(currentVisibleDateProp);
       }
     }, [props.value?.[1]?.getTime(), calendarVisible, endFocused]);
 
@@ -140,7 +136,6 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> = fo
       <>
         <DatePickerFieldTypeYearRange
           {...fieldProps}
-          style={style}
           ref={ref}
           startFieldRef={startFieldRef}
           endFieldRef={endFieldRef}
@@ -175,7 +170,7 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> = fo
           form={dropdownForm}
           onChange={hadleChange}
           renderAdditionalControls={renderAdditionalControls}
-          zIndex={typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined}
+          zIndex={getDropdownZIndex(props.style)}
         />
       </>
     );

@@ -1,5 +1,6 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
-import { addMonths, startOfYear } from 'date-fns';
+import React, { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
+import addYears from 'date-fns/addYears';
+import startOfYear from 'date-fns/startOfYear';
 
 import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
 import { useFlag } from '../../../hooks/useFlag/useFlag';
@@ -9,24 +10,23 @@ import {
   DatePickerDropdownPropOnChange,
 } from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeMonthRange } from '../DatePickerFieldTypeMonthRange/DatePickerFieldTypeMonthRange';
-import { normalizeRangeValue } from '../helpers';
-import { DatePickerTypeComponent } from '../types';
+import { getDropdownZIndex, normalizeRangeValue } from '../helpers';
+import { datePickerPropDateTimeViewDefault, DatePickerTypeComponent } from '../types';
 import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 
 export const DatePickerTypeMonthRange: DatePickerTypeComponent<'month-range'> = forwardRef(
   (props, ref) => {
     const {
       events,
-      dateTimeView,
+      dateTimeView = datePickerPropDateTimeViewDefault,
       locale,
       dropdownForm,
       onFocus,
       onBlur,
       leftSide,
       rightSide,
-      style,
       currentVisibleDate: currentVisibleDateProp,
-      onChangeCurrentVisibleDate: onChangeCurrentVisibleDateProp,
+      onChangeCurrentVisibleDate,
       renderAdditionalControls,
       inputRef,
       name,
@@ -55,10 +55,15 @@ export const DatePickerTypeMonthRange: DatePickerTypeComponent<'month-range'> = 
 
     const [calendarVisible, setCalendarVisible] = useFlag(false);
 
-    const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate(
-      currentVisibleDateProp,
-      onChangeCurrentVisibleDateProp,
-    );
+    const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate({
+      currentVisibleDate: currentVisibleDateProp,
+      maxDate: props.maxDate,
+      minDate: props.minDate,
+      value: props.value,
+      startOfUnit: startOfYear,
+      onChangeCurrentVisibleDate,
+      calendarVisible,
+    });
 
     const startFieldOnBlurHandler = (e: React.FocusEvent<HTMLElement>) =>
       Array.isArray(onBlur) ? onBlur[0]?.(e) : onBlur?.(e);
@@ -80,67 +85,58 @@ export const DatePickerTypeMonthRange: DatePickerTypeComponent<'month-range'> = 
 
     // эфект для того чтобы календарь переключался при вводе с клавиатуры
     useEffect(() => {
-      if (props.value?.[0] && props.dateTimeView === 'classic' && startFocused) {
+      if (props.value?.[0] && dateTimeView === 'classic' && startFocused) {
         const newVisibleDate = startOfYear(props.value[0]);
         if (newVisibleDate.getTime() !== currentVisibleDate?.getTime()) {
           setCurrentVisibleDate(newVisibleDate);
         }
         return;
       }
-      if (props.value?.[0] && props.dateTimeView !== 'classic' && startFocused) {
+      if (props.value?.[0] && dateTimeView !== 'classic' && startFocused) {
         const newVisibleDate = startOfYear(props.value[0]);
         if (
           newVisibleDate.getTime() !== currentVisibleDate?.getTime() &&
           newVisibleDate.getTime() !==
-            (currentVisibleDate && addMonths(currentVisibleDate, 1).getTime())
+            (currentVisibleDate && addYears(currentVisibleDate, 1).getTime())
         ) {
           setCurrentVisibleDate(newVisibleDate);
         }
-        return;
-      }
-      if (!props.value?.[0] && startFocused) {
-        setCurrentVisibleDate(currentVisibleDateProp);
       }
     }, [props.value?.[0]?.getTime(), calendarVisible, startFocused]);
 
     useEffect(() => {
-      if (props.value?.[1] && props.dateTimeView === 'classic' && endFocused) {
+      if (props.value?.[1] && dateTimeView === 'classic' && endFocused) {
         const newVisibleDate = startOfYear(props.value[1]);
         if (newVisibleDate.getTime() !== currentVisibleDate?.getTime()) {
           setCurrentVisibleDate(newVisibleDate);
         }
         return;
       }
-      if (props.value?.[1] && props.dateTimeView !== 'classic' && endFocused) {
+      if (props.value?.[1] && dateTimeView !== 'classic' && endFocused) {
         const newVisibleDate = startOfYear(props.value[1]);
         if (
           newVisibleDate.getTime() !== currentVisibleDate?.getTime() &&
           newVisibleDate.getTime() !==
-            (currentVisibleDate && addMonths(currentVisibleDate, 1).getTime())
+            (currentVisibleDate && addYears(currentVisibleDate, 1).getTime())
         ) {
-          setCurrentVisibleDate(addMonths(newVisibleDate, -1));
+          setCurrentVisibleDate(addYears(newVisibleDate, -1));
         }
-        return;
-      }
-      if (!props.value?.[1] && endFocused) {
-        setCurrentVisibleDate(currentVisibleDateProp);
       }
     }, [props.value?.[1]?.getTime(), calendarVisible, endFocused]);
 
     useClickOutside({
       isActive: calendarVisible,
       ignoreClicksInsideRefs: [startFieldRef, endFieldRef, calendarRef],
-      handler: () => {
+      handler: useCallback(() => {
         setFieldFocused(false);
         setCalendarVisible.off();
-      },
+      }, []),
     });
 
     return (
       <>
         <DatePickerFieldTypeMonthRange
           {...fieldProps}
-          style={style}
           ref={ref}
           startFieldRef={startFieldRef}
           endFieldRef={endFieldRef}
@@ -175,7 +171,7 @@ export const DatePickerTypeMonthRange: DatePickerTypeComponent<'month-range'> = 
           form={dropdownForm}
           onChange={hadleChange}
           renderAdditionalControls={renderAdditionalControls}
-          zIndex={typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined}
+          zIndex={getDropdownZIndex(props.style)}
         />
       </>
     );

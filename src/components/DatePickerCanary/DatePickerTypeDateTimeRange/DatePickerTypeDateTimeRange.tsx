@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
 import startOfMonth from 'date-fns/startOfMonth';
 
 import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
@@ -9,24 +9,23 @@ import {
   DatePickerDropdownPropOnChange,
 } from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeDateTimeRange } from '../DatePickerFieldTypeDateTimeRange/DatePickerFieldTypeDateTimeRange';
-import { getFieldName, normalizeRangeValue } from '../helpers';
-import { DatePickerTypeComponent } from '../types';
+import { getDropdownZIndex, getFieldName, normalizeRangeValue } from '../helpers';
+import { datePickerPropDateTimeViewDefault, DatePickerTypeComponent } from '../types';
 import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 
 export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-range'> = forwardRef(
   (props, ref) => {
     const {
       events,
-      dateTimeView,
+      dateTimeView = datePickerPropDateTimeViewDefault,
       locale,
       dropdownForm,
       onFocus,
       onBlur,
       leftSide,
       rightSide,
-      style,
       currentVisibleDate: currentVisibleDateProp,
-      onChangeCurrentVisibleDate: onChangeCurrentVisibleDateProp,
+      onChangeCurrentVisibleDate,
       renderAdditionalControls,
       inputRef,
       name,
@@ -58,10 +57,15 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
 
     const [calendarVisible, setCalendarVisible] = useFlag(false);
 
-    const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate(
-      currentVisibleDateProp,
-      onChangeCurrentVisibleDateProp,
-    );
+    const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate({
+      currentVisibleDate: currentVisibleDateProp,
+      maxDate: props.maxDate,
+      minDate: props.minDate,
+      value: props.value,
+      startOfUnit: startOfMonth,
+      onChangeCurrentVisibleDate,
+      calendarVisible,
+    });
 
     const startFieldOnBlurHandler = (e: React.FocusEvent<HTMLElement>) =>
       Array.isArray(onBlur) ? onBlur[0]?.(e) : onBlur?.(e);
@@ -88,10 +92,6 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
         if (newVisibleDate.getTime() !== currentVisibleDate?.getTime()) {
           setCurrentVisibleDate(newVisibleDate);
         }
-        return;
-      }
-      if (!props.value?.[0] && startFocused) {
-        setCurrentVisibleDate(currentVisibleDateProp);
       }
     }, [props.value?.[0]?.getTime(), calendarVisible, startFocused]);
 
@@ -101,27 +101,22 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
         if (newVisibleDate.getTime() !== currentVisibleDate?.getTime()) {
           setCurrentVisibleDate(newVisibleDate);
         }
-        return;
-      }
-      if (!props.value?.[1] && endFocused) {
-        setCurrentVisibleDate(currentVisibleDateProp);
       }
     }, [props.value?.[1]?.getTime(), calendarVisible, endFocused]);
 
     useClickOutside({
       isActive: calendarVisible,
       ignoreClicksInsideRefs: [startFieldRef, endFieldRef, calendarRef],
-      handler: () => {
+      handler: useCallback(() => {
         setFieldFocused(false);
         setCalendarVisible.off();
-      },
+      }, []),
     });
 
     return (
       <>
         <DatePickerFieldTypeDateTimeRange
           {...fieldProps}
-          style={style}
           ref={ref}
           startFieldRef={startFieldRef}
           endFieldRef={endFieldRef}
@@ -160,7 +155,7 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
           multiplicityMinutes={multiplicityMinutes}
           multiplicitySeconds={multiplicitySeconds}
           multiplicityHours={multiplicityHours}
-          zIndex={typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined}
+          zIndex={getDropdownZIndex(props.style)}
         />
       </>
     );

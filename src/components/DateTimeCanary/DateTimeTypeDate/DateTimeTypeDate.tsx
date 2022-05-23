@@ -3,7 +3,6 @@ import { addMonths, startOfMonth } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 
 import { useFlag } from '../../../hooks/useFlag/useFlag';
-import { DateTimeAdditionalControls } from '../DateTimeAdditionalControls/DateTimeAdditionalControls';
 import { DateTimeLabel } from '../DateTimeLabel/DateTimeLabel';
 import { DateTimeMonth } from '../DateTimeMonth/DateTimeMonth';
 import { DateTimeToggler } from '../DateTimeToggler/DateTimeToggler';
@@ -36,11 +35,10 @@ export const DateTimeTypeDate: DateTimeTypeComponent<'date'> = forwardRef((props
     view = dateTimePropViewDefault,
     onMove,
     onChangeCurrentVisibleDate,
-    renderAdditionalControls,
     ...otherProps
   } = props;
 
-  const [changeMonth, { on, off }] = useFlag();
+  const [changeMonth, setChangeMonth] = useFlag();
 
   useEffect(() => {
     !changeMonth && onMove?.(moveTypes[2]);
@@ -69,7 +67,7 @@ export const DateTimeTypeDate: DateTimeTypeComponent<'date'> = forwardRef((props
         view={view}
         onChange={({ value }) => {
           setCurrentVisibleDate(value);
-          off();
+          setChangeMonth.off();
         }}
         onMove={onMove}
       />
@@ -110,13 +108,9 @@ export const DateTimeTypeDate: DateTimeTypeComponent<'date'> = forwardRef((props
           prevOnClick={prevMonthHandle}
           nextOnClick={nextMonthHandle}
           label={pageOneLabel}
-          onLabelClick={on}
+          onLabelClick={setChangeMonth.on}
         />
         <DateTimeMonth daysOfWeek={daysOfWeek} daysOfMonth={pageOneDaysOfMonth} />
-        <DateTimeAdditionalControls
-          currentVisibleDate={currentVisibleDate}
-          renderAdditionalControls={renderAdditionalControls}
-        />
       </div>
     );
   }
@@ -144,7 +138,7 @@ export const DateTimeTypeDate: DateTimeTypeComponent<'date'> = forwardRef((props
               className={cnDateTimeMixLayout('Label')}
               prevOnClick={prevMonthHandle}
               label={pageOneLabel}
-              onLabelClick={on}
+              onLabelClick={setChangeMonth.on}
             />
             <DateTimeMonth daysOfWeek={daysOfWeek} daysOfMonth={pageOneDaysOfMonth} />
           </div>
@@ -153,15 +147,11 @@ export const DateTimeTypeDate: DateTimeTypeComponent<'date'> = forwardRef((props
               className={cnDateTimeMixLayout('Label')}
               nextOnClick={nextMonthHandle}
               label={pageTwoLabel}
-              onLabelClick={on}
+              onLabelClick={setChangeMonth.on}
             />
             <DateTimeMonth daysOfWeek={daysOfWeek} daysOfMonth={pageTwoDaysOfMonth} />
           </div>
         </div>
-        <DateTimeAdditionalControls
-          currentVisibleDate={currentVisibleDate}
-          renderAdditionalControls={renderAdditionalControls}
-        />
       </>
     );
   }
@@ -180,7 +170,7 @@ export const DateTimeTypeDate: DateTimeTypeComponent<'date'> = forwardRef((props
           <DateTimeLabel
             className={cnDateTimeMixLayout('Label')}
             label={pageOneLabel}
-            onClick={on}
+            onClick={setChangeMonth.on}
             cursor="pointer"
           />
           <DateTimeMonth daysOfWeek={daysOfWeek} daysOfMonth={pageOneDaysOfMonth} />
@@ -189,16 +179,12 @@ export const DateTimeTypeDate: DateTimeTypeComponent<'date'> = forwardRef((props
           <DateTimeLabel
             className={cnDateTimeMixLayout('Label')}
             label={pageTwoLabel}
-            onClick={on}
+            onClick={setChangeMonth.on}
             cursor="pointer"
           />
           <DateTimeMonth daysOfWeek={daysOfWeek} daysOfMonth={pageTwoDaysOfMonth} />
         </div>
       </div>
-      <DateTimeAdditionalControls
-        currentVisibleDate={currentVisibleDate}
-        renderAdditionalControls={renderAdditionalControls}
-      />
     </div>
   );
 });
