@@ -3,8 +3,8 @@ import './TabsLine.css';
 import React from 'react';
 
 import { cn } from '../../../utils/bem';
-import { getTabsWidth, TabDimensions } from '../helpers';
-import { TabsPropLinePosition } from '../Tabs';
+import { getTabsWidth } from '../helpers';
+import { TabDimensions, TabsPropLinePosition } from '../types';
 
 const cnTabsLine = cn('TabsLine');
 

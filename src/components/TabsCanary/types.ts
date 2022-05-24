@@ -29,9 +29,9 @@ export const tabsFitModes = ['scroll', 'dropdown'] as const;
 export type TabsPropFitMode = typeof tabsFitModes[number];
 export const tabsDefaultFitMode: TabsPropFitMode = 'dropdown';
 
-export type TabsPropGetLabel<ITEM> = (item: ITEM) => string | number;
-export type TabsPropGetChecked<ITEM> = (item: ITEM) => boolean | undefined;
-export type TabsPropGetIcon<ITEM> = (item: ITEM) => IconComponent | undefined;
+export type TabsPropGetItemLabel<ITEM> = (item: ITEM) => string | number;
+export type TabsPropGetItemChecked<ITEM> = (item: ITEM) => boolean | undefined;
+export type TabsPropGetItemIcon<ITEM> = (item: ITEM) => IconComponent | undefined;
 
 export type TabsPropOnChange<ITEM> = (props: { e: React.MouseEvent; value: ITEM }) => void;
 
@@ -51,8 +51,8 @@ export type RenderItem<ITEM> = (props: RenderItemProps<ITEM>) => React.ReactElem
 export type TabsFitModeWrapperProps<ITEM> = {
   items: ITEM[];
   tabsDimensions: TabDimensions[];
-  getLabel: TabsPropGetLabel<ITEM>;
-  getChecked: TabsPropGetChecked<ITEM>;
+  getItemLabel: TabsPropGetItemLabel<ITEM>;
+  getItemChecked: TabsPropGetItemChecked<ITEM>;
   renderItem: (item: ITEM) => React.ReactNode;
   renderItemsList: RenderItemsListProp;
   tabRefs: Array<React.RefObject<HTMLElement>>;
@@ -66,8 +66,8 @@ export type TabsProps<ITEM = TabsItemDefault> = PropsWithHTMLAttributesAndRef<
     iconSize?: IconPropSize;
     items: ITEM[];
     value?: ITEM | null;
-    getIcon?: TabsPropGetIcon<ITEM>;
-    getLabel?: TabsPropGetLabel<ITEM>;
+    getItemIcon?: TabsPropGetItemIcon<ITEM>;
+    getItemLabel?: TabsPropGetItemLabel<ITEM>;
     children?: never;
     onChange: TabsPropOnChange<ITEM>;
     renderItem?: RenderItem<ITEM>;
@@ -86,7 +86,7 @@ export type TabsProps<ITEM = TabsItemDefault> = PropsWithHTMLAttributesAndRef<
   (ITEM extends { label: TabsItemDefault['label'] }
     ? {}
     : {
-        getLabel: TabsPropGetLabel<ITEM>;
+        getItemLabel: TabsPropGetItemLabel<ITEM>;
       });
 
 export type TabsComponent = <ITEM>(props: TabsProps<ITEM>) => React.ReactElement | null;
@@ -106,8 +106,8 @@ export type TabsMoreItemsProps<ITEM = TabsItemDefault> = PropsWithHTMLAttributes
   {
     items: ITEM[];
     renderItem: (item: ITEM, onClick: () => void) => React.ReactNode;
-    getLabel: TabsPropGetLabel<ITEM>;
-    getChecked: TabsPropGetChecked<ITEM>;
+    getItemLabel: TabsPropGetItemLabel<ITEM>;
+    getItemChecked: TabsPropGetItemChecked<ITEM>;
     height: number;
   } & React.RefAttributes<HTMLDivElement>,
   HTMLDivElement

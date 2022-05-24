@@ -8,8 +8,8 @@ import {
   TabsFitModeWrapperProps,
   TabsItemDefault,
   TabsPropFitMode,
-  TabsPropGetIcon,
-  TabsPropGetLabel,
+  TabsPropGetItemIcon,
+  TabsPropGetItemLabel,
   TabsPropLinePosition,
   TabsProps,
 } from './types';
@@ -28,14 +28,14 @@ export const getTabsWrapper = (tabsDirection: TabsDirection, fitMode: TabsPropFi
   return fitMode === 'scroll' ? TabsFitModeScrollWrapper : TabsFitModeDropdownWrapper;
 };
 
-const defaultGetLabel: TabsPropGetLabel<TabsItemDefault> = (item) => item.label;
-const defaultGetIcon: TabsPropGetIcon<TabsItemDefault> = (item) => item.icon;
+const defaultGetItemLabel: TabsPropGetItemLabel<TabsItemDefault> = (item) => item.label;
+const defaultGetItemIcon: TabsPropGetItemIcon<TabsItemDefault> = (item) => item.icon;
 
 export const withDefaultGetters = (props: TabsProps) => {
   return {
     ...props,
-    getLabel: props.getLabel || defaultGetLabel,
-    getIcon: props.getIcon || defaultGetIcon,
+    getItemLabel: props.getItemLabel || defaultGetItemLabel,
+    getItemIcon: props.getItemIcon || defaultGetItemIcon,
   };
 };
 

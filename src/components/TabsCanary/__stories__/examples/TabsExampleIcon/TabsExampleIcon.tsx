@@ -6,25 +6,25 @@ import { IconPhoto } from '../../../../../icons/IconPhoto/IconPhoto';
 import { IconRing } from '../../../../../icons/IconRing/IconRing';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { Tabs } from '../../../Tabs';
+import { Tabs } from '../../../TabsCanary';
 
 type Item = {
   name: string;
-  icon?: IconComponent;
+  image?: IconComponent;
 };
 
 const items: Item[] = [
   {
     name: 'Первый',
-    icon: IconPhoto,
+    image: IconPhoto,
   },
   {
     name: 'Второй',
-    icon: IconRing,
+    image: IconRing,
   },
   {
     name: 'Третий вариант',
-    icon: IconCamera,
+    image: IconCamera,
   },
 ];
 
@@ -36,15 +36,15 @@ export const TabsExampleIcon = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getLabel={(item) => item.name}
-        getIcon={(item) => item.icon}
+        getItemLabel={(item) => item.name}
+        getItemIcon={(item) => item.image}
       />
       <Tabs
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getLabel={(item) => item.name}
-        getIcon={(item) => item.icon}
+        getItemLabel={(item) => item.name}
+        getItemIcon={(item) => item.image}
         onlyIcon
       />
     </StoryBookExample>

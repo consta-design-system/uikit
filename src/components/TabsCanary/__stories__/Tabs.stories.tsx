@@ -17,7 +17,7 @@ import {
   tabsLinePositions,
   tabsSizes,
   tabsViews,
-} from '../Tabs';
+} from '../TabsCanary';
 
 import mdx from './Tabs.docs.mdx';
 
@@ -67,8 +67,8 @@ export function Playground() {
     <Tabs
       items={items}
       value={value}
-      getLabel={(item) => item.name}
-      getIcon={withIcon ? (item) => item.icon : undefined}
+      getItemLabel={(item) => item.name}
+      getItemIcon={(item) => (withIcon ? item.icon : undefined)}
       onChange={({ value }) => setValue(value)}
       size={size}
       view={view}
@@ -86,8 +86,8 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Навигация/Tabs',
-  id: 'components/Tabs',
+  title: 'Компоненты|/Навигация/Tabs(Canary)',
+  id: 'components/TabsCanary',
   parameters: {
     docs: {
       page: mdx,

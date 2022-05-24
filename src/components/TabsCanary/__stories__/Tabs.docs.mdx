@@ -14,10 +14,10 @@ import { TabsExampleFitModeScroll } from './examples/TabsExampleFitModeScroll/Ta
 description: Табы. Переключает вкладки на странице.
 -->
 
-# Tabs
+# Tabs(Canary)
 
 ```tsx
-import { Tabs } from '@consta/uikit/Tabs';
+import { Tabs } from '@consta/uikit/TabsCanary';
 ```
 
 Табы переключают вкладки на странице. Активный таб выделен цветом и помечен специальным маркером — горизонтальной или вертикальной линией.
@@ -43,7 +43,7 @@ import { Tabs } from '@consta/uikit/Tabs';
 
 ### Текст для таба
 
-Текст для таба нужно добавить в `items` и получить с помощью функции `getLabel`.
+Текст для таба нужно добавить в `items` и получить с помощью функции `getItemLabel`.
 
 Хорошо, если текст будет коротким и лаконичным, а табы — примерно одинаковой длины.
 
@@ -65,7 +65,7 @@ export const TabsExample = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
       />
     </>
   );
@@ -89,21 +89,21 @@ import { IconCamera } from '@consta/uikit/IconCamera';
 
 type Item = {
   name: string;
-  icon?: IconComponent;
+  image?: IconComponent;
 };
 
 const items = [
   {
     name: 'Первый',
-    icon: IconPhoto,
+    image: IconPhoto,
   },
   {
     name: 'Второй',
-    icon: IconRing,
+    image: IconRing,
   },
   {
     name: 'Третий вариант',
-    icon: IconCamera,
+    image: IconCamera,
   },
 ];
 
@@ -115,15 +115,15 @@ export const TabsExampleIcon = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getLabel={(item) => item.name}
-        getIcon={(item) => item.icon}
+        getItemLabel={(item) => item.name}
+        getItemIcon={(item) => item.image}
       />
       <Tabs
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getLabel={(item) => item.name}
-        getIcon={(item) => item.icon}
+        getItemLabel={(item) => item.name}
+        getItemIcon={(item) => item.image}
         onlyIcon
       />
     </>
@@ -155,14 +155,14 @@ export const TabsExampleSize = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         size="m"
       />
       <Tabs
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         size="s"
       />
     </>
@@ -195,14 +195,14 @@ export const TabsExampleView = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         view="bordered"
       />
       <Tabs
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         view="clear"
       />
     </>
@@ -264,7 +264,7 @@ export const TabsExampleRenderItem = () => {
       value={value}
       onChange={({ value }) => setValue(value)}
       items={items}
-      getLabel={(item) => item}
+      getItemLabel={(item) => item}
       size="m"
       renderItem={({ label, checked, onChange }) => (
         <button type="button" onClick={onChange} className={cnTabsTab({ checked })}>
@@ -320,7 +320,7 @@ export const TabsExampleRenderItemBadge = () => {
       value={value}
       onChange={({ value }) => setValue(value)}
       items={itemsBadge}
-      getLabel={(item) => item.text}
+      getItemLabel={(item) => item.text}
       size="m"
       renderItem={({ item, onChange, checked }) => (
         <button type="button" onClick={onChange} className={cnTabsTab({ checked })}>
@@ -341,13 +341,16 @@ export const TabsExampleRenderItemBadge = () => {
 ## Импорт
 
 ```tsx
-import { Tabs } from '@consta/uikit/Tabs';
+import { Tabs } from '@consta/uikit/TabsCanary';
 ```
 
 ## Свойства
 
 ```ts
-type Item = unknown;
+export type TabsItemDefault = {
+  label: string | number;
+  icon?: IconComponent;
+};
 
 type OnChange = (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM | null }) => void;
 
@@ -364,10 +367,10 @@ type RenderItem<ITEM, ELEMENT> = (props: {
 
 | Свойство                                       | Тип                                        | По умолчанию | Описание                                                                                                                                                                             |
 | ---------------------------------------------- | ------------------------------------------ | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `items`                                        | `Item[]`                                   | -            | Массив элементов с данными для табов (текст, иконка)                                                                                                                                 |
-| `value`                                        | `Item`, `null`                             | -            | Значение                                                                                                                                                                             |
-| [`getLabel`](#текст-для-таба)                  | `(item: Item) => string, number`           | -            | Функция для формирования текста таба. Используется в качестве уникального ключа элемента                                                                                             |
-| [`getIcon?`](#иконки)                          | `(item: Item) => IconComponent, undefined` | -            | Функция для формирования иконки                                                                                                                                                      |
+| `items`                                        | `ITEM[]`                                   | -            | Массив элементов с данными для табов (текст, иконка)                                                                                                                                 |
+| `value`                                        | `ITEM`, `null`                             | -            | Значение                                                                                                                                                                             |
+| [`getItemLabe?l`](#текст-для-таба)             | `(item: ITEM) => string, number`           | -            | Функция для формирования текста таба. Используется в качестве уникального ключа элемента                                                                                             |
+| [`getItemIcon?`](#иконки)                      | `(item: ITEM) => IconComponent, undefined` | -            | Функция для формирования иконки                                                                                                                                                      |
 | [`onlyIcon?`](#иконки)                         | `boolean`                                  | -            | Показывать только иконку                                                                                                                                                             |
 | [`size?`](#размер-табов)                       | `'s', 'm'`                                 | `'m'`        | Размер компонента                                                                                                                                                                    |
 | [`view?`](#рамка)                              | `'bordered', 'clear'`                      | `'bordered'` | Внешний вид компонента (с рамкой или без)                                                                                                                                            |
@@ -385,7 +388,7 @@ type RenderItem<ITEM, ELEMENT> = (props: {
 ```ts
 // src/App.ts
 import React, { useState } from 'react';
-import { Tabs } from '@consta/uikit/Tabs';
+import { Tabs } from '@consta/uikit/TabsCanary';
 
 type Item = string;
 
@@ -398,7 +401,7 @@ export function App() {
       value={value}
       onChange={({ value }) => setValue(value)}
       items={items}
-      getLabel={(item) => item}
+      getItemLabel={(item) => item}
     />
   );
 }
