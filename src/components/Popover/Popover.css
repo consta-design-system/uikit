@@ -1,8 +1,44 @@
 .Popover {
   position: absolute;
-  top: var(--popover-top);
-  left: var(--popover-left);
   visibility: var(--popover-visibility);
   width: var(--popover-width);
   pointer-events: var(--popover-pointer-events);
+
+  &_direction {
+    &_downCenter,
+    &_downRight,
+    &_downLeft,
+    &_downStartLeft,
+    &_downStartRight {
+      top: calc(var(--popover-top) + var(--popover-offset));
+      left: var(--popover-left);
+    }
+
+    &_upCenter,
+    &_upRight,
+    &_upLeft,
+    &_upStartLeft,
+    &_upStartRight {
+      top: calc(var(--popover-top) - var(--popover-offset));
+      left: var(--popover-left);
+    }
+
+    &_leftUp,
+    &_leftCenter,
+    &_leftDown,
+    &_leftStartUp,
+    &_leftStartDown {
+      top: var(--popover-top);
+      left: calc(var(--popover-left) - var(--popover-offset));
+    }
+
+    &_rightUp,
+    &_rightCenter,
+    &_rightDown,
+    &_rightStartUp,
+    &_rightStartDown {
+      top: var(--popover-top);
+      left: calc(var(--popover-left) + var(--popover-offset));
+    }
+  }
 }

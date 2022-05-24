@@ -17,13 +17,11 @@ export const getPositionsByDirection = ({
   contentSize,
   anchorSize,
   position: { x, y },
-  offset,
   arrowOffset = 0,
 }: {
   contentSize: Size;
   anchorSize: Size;
   position: NonNullable<Position>;
-  offset: number;
   arrowOffset?: number;
 }): PositionsByDirection => {
   const { width: contentWidth, height: contentHeight } = contentSize;
@@ -33,16 +31,16 @@ export const getPositionsByDirection = ({
     y: y + anchorHeight / 2,
   };
 
-  const xForRightDirections = x + anchorWidth + offset;
-  const xForLeftDirections = x - contentWidth - offset;
+  const xForRightDirections = x + anchorWidth;
+  const xForLeftDirections = x - contentWidth;
   const xForVerticalDirections = {
     right: anchorCenter.x - arrowOffset,
     center: anchorCenter.x - contentWidth / 2,
     left: anchorCenter.x - contentWidth + arrowOffset,
   };
 
-  const yForDownDirections = y + anchorHeight + offset;
-  const yForUpDirections = y - contentHeight - offset;
+  const yForDownDirections = y + anchorHeight;
+  const yForUpDirections = y - contentHeight;
   const yForHorizontalDirections = {
     up: anchorCenter.y - contentHeight + arrowOffset,
     center: anchorCenter.y - contentHeight / 2,
@@ -105,7 +103,6 @@ export const getComputedPositionAndDirection = ({
   contentSize,
   viewportSize,
   anchorSize = { width: 0, height: 0 },
-  offset = 0,
   arrowOffset,
   direction: initialDirection,
   possibleDirections,
@@ -119,13 +116,10 @@ export const getComputedPositionAndDirection = ({
     return { position: initialPosition, direction: initialDirection };
   }
 
-  const currentOffset = typeof offset === 'string' ? convertPixelsToNumber(offset) : offset;
-
   const positionsByDirection = getPositionsByDirection({
     contentSize,
     anchorSize,
     position: initialPosition,
-    offset: currentOffset,
     arrowOffset,
   });
 
