@@ -23,9 +23,9 @@ export const choiceGroupWidth = ['default', 'full'] as const;
 export type СhoiceGroupPropWidth = typeof choiceGroupWidth[number];
 export const choiceGroupWidthDefault: СhoiceGroupPropWidth = choiceGroupWidth[0];
 
-export type ChoiceGroupPropGetLabel<ITEM> = (item: ITEM) => string | number;
-export type ChoiceGroupPropGetIcon<ITEM> = (item: ITEM) => IconComponent | undefined;
-export type ChoiceGroupPropGetDisabled<ITEM> = (item: ITEM) => boolean | undefined;
+export type ChoiceGroupPropGetItemLabel<ITEM> = (item: ITEM) => string | number;
+export type ChoiceGroupPropGetItemIcon<ITEM> = (item: ITEM) => IconComponent | undefined;
+export type ChoiceGroupPropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
 
 export type ChoiceGroupPropValue<ITEM, MULTIPLE extends boolean> =
   | (MULTIPLE extends true ? ITEM[] : ITEM)
@@ -48,11 +48,11 @@ export type ChoiceGroupProps<
     onlyIcon?: boolean;
     iconSize?: IconPropSize;
     items: ITEM[];
-    getLabel?: ChoiceGroupPropGetLabel<ITEM>;
-    getIcon?: ChoiceGroupPropGetIcon<ITEM>;
+    getItemLabel?: ChoiceGroupPropGetItemLabel<ITEM>;
+    getItemIcon?: ChoiceGroupPropGetItemIcon<ITEM>;
     name: string;
     disabled?: boolean;
-    getDisabled?: ChoiceGroupPropGetDisabled<ITEM>;
+    getItemDisabled?: ChoiceGroupPropGetItemDisabled<ITEM>;
     value?: ChoiceGroupPropValue<ITEM, MULTIPLE>;
     onChange?: ChoiceGroupPropOnChange<ITEM, MULTIPLE>;
     multiple?: MULTIPLE;
@@ -64,7 +64,7 @@ export type ChoiceGroupProps<
   (ITEM extends { label: ChoiceGroupDefaultItem['label'] }
     ? {}
     : {
-        getLabel: ChoiceGroupPropGetLabel<ITEM>;
+        getItemLabel: ChoiceGroupPropGetItemLabel<ITEM>;
       });
 
 export type ChoiceGroupItemProps = {
