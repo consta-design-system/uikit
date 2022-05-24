@@ -21,16 +21,16 @@ export const radioGroupPropAlign = ['center', 'top'] as const;
 export type RadioGroupPropAlign = typeof radioGroupPropAlign[number];
 export const radioGroupPropAlignDefault: RadioGroupPropAlign = radioGroupPropAlign[0];
 
-export type RadioGroupPropGetLabel<ITEM> = (item: ITEM) => string;
-export type RadioGroupPropGetDisabled<ITEM> = (item: ITEM) => boolean | undefined;
+export type RadioGroupPropGetItemLabel<ITEM> = (item: ITEM) => string;
+export type RadioGroupPropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
 
 export type RadioGroupProps<ITEM = RadioGroupDefaultItem> = PropsWithHTMLAttributesAndRef<
   {
     align?: RadioGroupPropAlign;
     value?: ITEM | null;
     items: ITEM[];
-    getLabel?: RadioGroupPropGetLabel<ITEM>;
-    getDisabled?: RadioGroupPropGetDisabled<ITEM>;
+    getItemLabel?: RadioGroupPropGetItemLabel<ITEM>;
+    getItemDisabled?: RadioGroupPropGetItemDisabled<ITEM>;
     onChange: (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM }) => void;
     name?: string;
     direction?: RadioGroupDirection;
@@ -44,7 +44,7 @@ export type RadioGroupProps<ITEM = RadioGroupDefaultItem> = PropsWithHTMLAttribu
   (ITEM extends { label: RadioGroupDefaultItem['label'] }
     ? {}
     : {
-        getLabel: RadioGroupPropGetLabel<ITEM>;
+        getItemLabel: RadioGroupPropGetItemLabel<ITEM>;
       });
 
 export type RadioGroupComponent = <ITEM = RadioGroupDefaultItem>(
