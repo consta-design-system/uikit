@@ -2,7 +2,7 @@ import React from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { SwitchGroup } from '../../../SwitchGroup';
+import { SwitchGroup } from '../../../SwitchGroupCanary';
 
 type Item = {
   name: string;
@@ -12,10 +12,10 @@ type Item = {
 const items: Item[] = [
   { name: 'Тёмная тема' },
   { name: 'Розовый текст' },
-  { name: 'Мигающие заголовки', disabled: true },
+  { name: 'Мигающие заголовки' },
 ];
 
-export function SwitchGroupExampleDisabled() {
+export function SwitchGroupExampleRow() {
   const [value, setValue] = React.useState<Item[] | null>(null);
 
   return (
@@ -23,16 +23,17 @@ export function SwitchGroupExampleDisabled() {
       <SwitchGroup
         value={value}
         items={items}
-        getLabel={(item) => item.name}
-        getDisabled={(item) => item.disabled}
+        getItemLabel={(item) => item.name}
+        getItemDisabled={(item) => item.disabled}
         onChange={({ value }) => setValue(value)}
-        name="SwitchGroupExampleDisabled"
+        name="SwitchGroupExampleRow"
+        direction="row"
       />
     </StoryBookExample>
   );
 }
 
-export function SwitchGroupExampleDisabledGroup() {
+export function SwitchGroupExampleColumn() {
   const [value, setValue] = React.useState<Item[] | null>(null);
 
   return (
@@ -40,11 +41,11 @@ export function SwitchGroupExampleDisabledGroup() {
       <SwitchGroup
         value={value}
         items={items}
-        getLabel={(item) => item.name}
-        getDisabled={(item) => item.disabled}
+        getItemLabel={(item) => item.name}
+        getItemDisabled={(item) => item.disabled}
         onChange={({ value }) => setValue(value)}
-        name="SwitchGroupExampleDisabledGroup"
-        disabled
+        name="SwitchGroupExampleColumn"
+        direction="column"
       />
     </StoryBookExample>
   );

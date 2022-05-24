@@ -3,15 +3,15 @@ import { boolean, select } from '@storybook/addon-knobs';
 
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
+import { SwitchGroup } from '../SwitchGroupCanary';
 import {
-  SwitchGroup,
   switchGroupDefaultDirection,
   switchGroupDefaultSize,
   switchGroupDefaultView,
   switchGroupDirections,
   switchGroupSizes,
   switchGroupViews,
-} from '../SwitchGroup';
+} from '../types';
 
 import mdx from './SwitchGroup.docs.mdx';
 
@@ -47,8 +47,8 @@ export function Playground() {
         <SwitchGroup
           value={value}
           items={items}
-          getLabel={(item) => item.name}
-          getDisabled={(item) => item.disabled}
+          getItemLabel={(item) => item.name}
+          getItemDisabled={(item) => item.disabled}
           onChange={({ value }) => setValue(value)}
           name={cnSwitchGroupStories()}
           direction={direction}
@@ -62,8 +62,8 @@ export function Playground() {
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Базовые/SwitchGroup',
-  id: 'components/SwitchGroup',
+  title: 'Компоненты|/Базовые/SwitchGroup(Canary)',
+  id: 'components/SwitchGroupCanary',
   parameters: {
     docs: {
       page: mdx,

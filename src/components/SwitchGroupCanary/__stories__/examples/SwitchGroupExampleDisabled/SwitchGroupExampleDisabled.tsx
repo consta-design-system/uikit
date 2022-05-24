@@ -2,17 +2,17 @@ import React from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { SwitchGroup } from '../../../SwitchGroup';
+import { SwitchGroup } from '../../../SwitchGroupCanary';
 
 type Item = {
-  name: string;
-  disabled?: boolean;
+  label: string;
+  off?: boolean;
 };
 
 const items: Item[] = [
-  { name: 'Тёмная тема' },
-  { name: 'Розовый текст' },
-  { name: 'Мигающие заголовки', disabled: true },
+  { label: 'Тёмная тема' },
+  { label: 'Розовый текст' },
+  { label: 'Мигающие заголовки', off: true },
 ];
 
 export function SwitchGroupExampleDisabled() {
@@ -23,8 +23,7 @@ export function SwitchGroupExampleDisabled() {
       <SwitchGroup
         value={value}
         items={items}
-        getLabel={(item) => item.name}
-        getDisabled={(item) => item.disabled}
+        getItemDisabled={(item) => item.off}
         onChange={({ value }) => setValue(value)}
         name="SwitchGroupExampleDisabled"
       />
@@ -40,8 +39,7 @@ export function SwitchGroupExampleDisabledGroup() {
       <SwitchGroup
         value={value}
         items={items}
-        getLabel={(item) => item.name}
-        getDisabled={(item) => item.disabled}
+        getItemDisabled={(item) => item.off}
         onChange={({ value }) => setValue(value)}
         name="SwitchGroupExampleDisabledGroup"
         disabled

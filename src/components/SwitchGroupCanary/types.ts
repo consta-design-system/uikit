@@ -17,15 +17,15 @@ export const switchGroupViews = ['primary', 'ghost'] as const;
 export type SwitchGroupPropView = typeof switchGroupViews[number];
 export const switchGroupDefaultView: SwitchGroupPropView = switchGroupViews[0];
 
-export type SwitchGroupPropGetLabel<ITEM> = (item: ITEM) => string;
-export type SwitchGroupPropGetDisabled<ITEM> = (item: ITEM) => boolean | undefined;
+export type SwitchGroupPropGetItemLabel<ITEM> = (item: ITEM) => string;
+export type SwitchGroupPropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
 
 export type SwitchGroupProps<ITEM = SwitchGroupDefaultItem> = PropsWithHTMLAttributesAndRef<
   {
     value?: ITEM[] | null;
     items: ITEM[];
-    getLabel?: SwitchGroupPropGetLabel<ITEM>;
-    getDisabled?: SwitchGroupPropGetDisabled<ITEM>;
+    getItemLabel?: SwitchGroupPropGetItemLabel<ITEM>;
+    getItemDisabled?: SwitchGroupPropGetItemDisabled<ITEM>;
     onChange: (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM[] | null }) => void;
     name: string;
     direction?: SwitchGroupDirection;
@@ -39,7 +39,7 @@ export type SwitchGroupProps<ITEM = SwitchGroupDefaultItem> = PropsWithHTMLAttri
   (ITEM extends { label: SwitchGroupDefaultItem['label'] }
     ? {}
     : {
-        getLabel: SwitchGroupPropGetLabel<ITEM>;
+        getItemLabel: SwitchGroupPropGetItemLabel<ITEM>;
       });
 
 export type SwitchGroupComponent = <ITEM>(

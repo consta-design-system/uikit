@@ -1,23 +1,45 @@
 import './SwitchGroup.css';
 
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
 import { cn } from '../../utils/bem';
+import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { Switch } from '../Switch/Switch';
-
-import { withDefaultGetters } from './helpers';
-import {
-  SwitchGroupComponent,
-  switchGroupDefaultDirection,
-  switchGroupDefaultSize,
-  switchGroupDefaultView,
-  SwitchGroupProps,
-} from './types';
 
 export const cnSwitchGroup = cn('SwitchGroup');
 
-function SwitchGroupRender(props: SwitchGroupProps, ref: React.Ref<HTMLDivElement>) {
+export const switchGroupDirections = ['column', 'row'] as const;
+export type SwitchGroupDirection = typeof switchGroupDirections[number];
+export const switchGroupDefaultDirection: SwitchGroupDirection = switchGroupDirections[0];
+
+export const switchGroupSizes = ['m', 'l'] as const;
+export type SwitchGroupPropSize = typeof switchGroupSizes[number];
+export const switchGroupDefaultSize: SwitchGroupPropSize = switchGroupSizes[0];
+
+export const switchGroupViews = ['primary', 'ghost'] as const;
+export type SwitchGroupPropView = typeof switchGroupViews[number];
+export const switchGroupDefaultView: SwitchGroupPropView = switchGroupViews[0];
+
+type CommonProps<ITEM> = {
+  value?: ITEM[] | null;
+  items: ITEM[];
+  getLabel: (item: ITEM) => string;
+  getDisabled?: (item: ITEM) => boolean | undefined;
+  onChange: (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM[] | null }) => void;
+  name: string;
+  direction?: SwitchGroupDirection;
+  size?: SwitchGroupPropSize;
+  view?: SwitchGroupPropView;
+  disabled?: boolean;
+  className?: string;
+};
+
+type Props<ITEM> = PropsWithHTMLAttributesAndRef<CommonProps<ITEM>, HTMLDivElement>;
+
+type SwitchGroup = <ITEM>(props: Props<ITEM>) => React.ReactElement | null;
+
+export const SwitchGroup: SwitchGroup = React.forwardRef((props, ref) => {
   const {
     value = null,
     items,
@@ -31,7 +53,7 @@ function SwitchGroupRender(props: SwitchGroupProps, ref: React.Ref<HTMLDivElemen
     disabled = false,
     className,
     ...otherProps
-  } = withDefaultGetters(props);
+  } = props;
 
   const { getOnChange, getChecked } = useChoiceGroup({
     value,
@@ -61,8 +83,4 @@ function SwitchGroupRender(props: SwitchGroupProps, ref: React.Ref<HTMLDivElemen
       ))}
     </div>
   );
-}
-
-export const SwitchGroup = forwardRef(SwitchGroupRender) as SwitchGroupComponent;
-
-export * from './types';
+});
