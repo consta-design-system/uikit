@@ -1,12 +1,12 @@
 import './PortalMenuStories.css';
 
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import {
   components as componentsArray,
   componentsGroup,
-  ComponentType,
   groups,
+  Item,
   navigation,
   navigationPackages,
   packages,
@@ -19,12 +19,24 @@ import { createMetadata } from '../../../utils/storybook';
 import { Button } from '../../Button/Button';
 import { Switch } from '../../Switch/Switch';
 import { TextField } from '../../TextField/TextField';
-import { PortalMenu, PortalMenuPropView } from '../PortalMenu';
+import { PortalMenu } from '../PortalMenu';
 
 const cnPortalMenuStories = cn('PortalMenuStories');
 
+type View = 'navigation' | 'packages' | 'components';
+
+const getItems = (view: View) => {
+  if (view === 'navigation') {
+    return navigation;
+  }
+  if (view === 'components') {
+    return componentsArray;
+  }
+  return [...navigationPackages, ...packages];
+};
+
 export function Playground() {
-  const [view, setView] = useState<PortalMenuPropView>('navigation');
+  const [view, setView] = useState<View>('navigation');
   const [searchValue, setSearchValue] = useState<string | undefined | null>(null);
   const [showDeprecated, setShowDeprecated] = useFlag(true);
 
@@ -57,8 +69,16 @@ export function Playground() {
     );
   };
 
-  const components: ComponentType[] = useMemo(() => {
-    return componentsArray.filter((item) => {
+  const toggle = () => {
+    if (view === 'navigation') {
+      setView('packages');
+    } else if (view === 'packages') {
+      setView('components');
+    }
+  };
+
+  const items: Item[] = useMemo(() => {
+    return getItems(view).filter((item) => {
       if (!showDeprecated && item.deprecated) {
         return false;
       }
@@ -67,18 +87,19 @@ export function Playground() {
       }
       return true;
     });
-  }, [showDeprecated, searchValue]);
+  }, [showDeprecated, searchValue, view]);
+
+  useEffect(() => {
+    setSearchValue(null);
+  }, [view]);
 
   return (
     <PortalMenu
       className={cnPortalMenuStories()}
-      view={view}
       additionalControls={view === 'components' ? additionalControls() : undefined}
-      packages={view === 'packages' ? packages : components}
+      items={items}
       groups={view === 'packages' ? groups : componentsGroup}
-      navigation={view === 'navigation' ? navigation : navigationPackages}
-      onNavigationClick={() => setView('packages')}
-      onPackageClick={() => setView('components')}
+      onItemClick={toggle}
     />
   );
 }

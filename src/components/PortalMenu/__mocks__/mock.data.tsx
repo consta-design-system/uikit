@@ -1,222 +1,218 @@
-import { DefaultMenuGroup, DefaultNavigationItem, DefaultPackageItem } from '../types';
+import React from 'react';
 
-export type ComponentType = DefaultPackageItem & {
+import { Badge } from '../../Badge/Badge';
+import { DefaultMenuGroup, DefaultMenuItem } from '../types';
+
+export type Item = DefaultMenuItem & {
   deprecated?: boolean;
 };
 
-export const navigationPackages: DefaultNavigationItem[] = [
+export const navigationPackages: Item[] = [
   {
-    key: '1',
+    key: 'navigation-7',
     label: 'Обзор',
     active: true,
   },
 ];
 
-export const navigation: DefaultNavigationItem[] = [
+export const navigation: Item[] = [
   {
-    key: '1',
+    key: 'navigation-1',
     label: 'О дизайн-системе',
     active: true,
   },
   {
-    key: '2',
+    key: 'navigation-2',
     label: 'Лицензионная политика',
   },
   {
-    key: '3',
+    key: 'navigation-3',
     label: 'Стратегия развития',
     subMenu: [
       {
-        key: '3-1',
+        key: 'navigation-3-1',
         label: 'Система версионирования',
       },
       {
-        key: '3-2',
+        key: 'navigation-3-2',
         label: 'История изменений',
       },
       {
-        key: '3-3',
+        key: 'navigation-3-3',
         label: 'Дорожная карта',
       },
     ],
   },
   {
-    key: '4',
+    key: 'navigation-4',
     label: 'Контрибьютинг',
     subMenu: [
       {
-        key: '4-1',
+        key: 'navigation-4-1',
         label: 'Протокол принятия изменений 🛠',
       },
       {
-        key: '4-2',
+        key: 'navigation-4-2',
         label: 'Правила оформления кода',
       },
       {
-        key: '4-3',
+        key: 'navigation-4-3',
         label: 'В коде',
       },
       {
-        key: '4-4',
+        key: 'navigation-4-4',
         label: 'В дизайне',
       },
     ],
   },
   {
-    key: '5',
+    key: 'navigation-5',
     label: 'Команда',
   },
   {
-    key: '6',
+    key: 'navigation-6',
     label: 'Помощь',
   },
 ];
 
 export const groups: DefaultMenuGroup[] = [
   {
-    id: '1',
+    id: 'groups-1',
     label: 'библиотеки компонентов',
   },
   {
-    id: '2',
+    id: 'groups-2',
     label: 'расширенные компоненты',
   },
   {
-    id: '3',
+    id: 'groups-3',
     label: 'адапетры',
   },
 ];
 
-export const packages: DefaultPackageItem[] = [
+export const packages: Item[] = [
   {
     key: '1',
     label: 'Consta UI-kit',
-    badgeLabel: 'V 12.2.12',
-    groupId: '1',
+    badge: <Badge label="V 12.2.12" status="system" view="stroked" size="s" />,
+    groupId: 'groups-1',
   },
   {
     key: '2',
     label: 'Consta Charts',
-    badgeLabel: 'V 12.2.12',
-    groupId: '1',
+    badge: <Badge label="V 12.2.12" status="system" view="stroked" size="s" />,
+    groupId: 'groups-1',
   },
   {
     key: '3',
     label: 'Дерево',
     description: 'Navigation tree',
-    groupId: '2',
+    groupId: 'groups-2',
   },
   {
     key: '4',
     label: 'Форма обратной связи',
     description: 'ConstaFeedbackForm',
-    groupId: '2',
+    groupId: 'groups-2',
   },
   {
     key: '5',
     label: 'Шапка',
     description: 'ConstaFeedbackForm',
-    groupId: '2',
+    groupId: 'groups-2',
   },
   {
     key: '6',
     label: 'Адаптер для таблиц 1',
     description: 'ConstaUltraTable',
-    groupId: '3',
+    groupId: 'groups-3',
   },
   {
     key: '7',
     label: 'Адаптер для таблиц 1',
     description: 'ConstaUltraTable',
-    groupId: '3',
+    groupId: 'groups-3',
   },
   {
     key: '8',
     label: 'Адаптер для таблиц 1',
     description: 'ConstaUltraTable',
-    groupId: '3',
+    groupId: 'groups-3',
   },
 ];
 
-export const components: ComponentType[] = [
+export const components: Item[] = [
   {
     key: '1',
     label: 'Обзор',
-    groupId: '1-1',
+    groupId: 'groups-1-1',
   },
   {
     key: '2',
     label: 'Attachment',
-    groupId: '1-2',
+    groupId: 'groups-1-2',
   },
   {
     key: '3',
     label: 'BasicSelect',
-    groupId: '1-2',
+    groupId: 'groups-1-2',
     deprecated: true,
-    badgeLabel: 'deprecated',
-    badgeStatus: 'error',
+    badge: <Badge label="deprecated" status="error" view="stroked" size="s" />,
   },
   {
     key: '4',
     label: 'Button',
-    groupId: '1-2',
+    groupId: 'groups-1-2',
   },
   {
     key: '5',
     label: 'Calendar',
-    groupId: '1-2',
+    groupId: 'groups-1-2',
     deprecated: true,
-    badgeLabel: 'deprecated',
-    badgeStatus: 'error',
+    badge: <Badge label="deprecated" status="error" view="stroked" size="s" />,
   },
   {
     key: '6',
     label: 'CheckBox',
-    groupId: '1-2',
+    groupId: 'groups-1-2',
   },
   {
     key: '7',
     label: 'CheckBoxGroup',
-    groupId: '1-2',
+    groupId: 'groups-1-2',
   },
   {
     key: '8',
     label: 'MultiCombobox',
-    groupId: '1-2',
+    groupId: 'groups-1-2',
+    badge: <Badge label="deprecated" status="error" view="stroked" size="s" />,
     deprecated: true,
-    badgeLabel: 'deprecated',
-    badgeStatus: 'error',
   },
   {
     key: '9',
     label: 'ProgressStepBar',
-    groupId: '1-3',
-    badgeLabel: 'canary',
-    badgeStatus: 'success',
-    badgeView: 'filled',
+    groupId: 'groups-1-3',
+    badge: <Badge label="canary" status="success" view="filled" size="s" />,
   },
   {
     key: '10',
     label: 'NewComponent',
-    groupId: '1-3',
-    badgeLabel: 'в работе',
-    badgeStatus: 'warning',
-    badgeView: 'filled',
+    groupId: 'groups-1-3',
+    badge: <Badge label="в работе" status="warning" view="filled" size="s" />,
   },
 ];
 
 export const componentsGroup: DefaultMenuGroup[] = [
   {
-    id: '1-1',
+    id: 'groups-1-1',
     label: 'компоненты',
   },
   {
-    id: '1-2',
+    id: 'groups-1-2',
     label: 'базовые',
   },
   {
-    id: '1-3',
+    id: 'groups-1-3',
     label: 'служебные',
   },
 ];

@@ -1,70 +1,37 @@
 import {
   DefaultMenuGroup,
-  DefaultNavigationItem,
-  DefaultPackageItem,
+  DefaultMenuItem,
   PortalMenuPropGetGroupKey,
   PortalMenuPropGetGroupLabel,
-  PortalMenuPropGetNavigationActive,
-  PortalMenuPropGetNavigationKey,
-  PortalMenuPropGetNavigationLabel,
-  PortalMenuPropGetNavigationOnClick,
-  PortalMenuPropGetNavigationSubMenu,
-  PortalMenuPropGetPackageActive,
-  PortalMenuPropGetPackageBadgeLabel,
-  PortalMenuPropGetPackageBadgeStatus,
-  PortalMenuPropGetPackageBadgeView,
-  PortalMenuPropGetPackageDescription,
-  PortalMenuPropGetPackageGroupId,
-  PortalMenuPropGetPackageKey,
-  PortalMenuPropGetPackageLabel,
-  PortalMenuPropGetPackageOnClick,
+  PortalMenuPropGetItemActive,
+  PortalMenuPropGetItemBadge,
+  PortalMenuPropGetItemDescription,
+  PortalMenuPropGetItemGroupId,
+  PortalMenuPropGetItemKey,
+  PortalMenuPropGetItemLabel,
+  PortalMenuPropGetItemOnClick,
+  PortalMenuPropGetItemSubMenu,
   PortalMenuProps,
 } from './types';
 
-// Navigation
+// Items
 
-export const defaultGetNavigationKey: PortalMenuPropGetNavigationKey<DefaultNavigationItem> = (
-  item,
-) => item.key;
-export const defaultGetNavigationLabel: PortalMenuPropGetNavigationLabel<DefaultNavigationItem> = (
-  item,
-) => item.label;
-export const defaultGetNavigationActive: PortalMenuPropGetNavigationActive<DefaultNavigationItem> = (
-  item,
-) => item.active;
-export const defaultGetNavigationOnClick: PortalMenuPropGetNavigationOnClick<DefaultNavigationItem> = (
-  item,
-) => item.onClick;
-export const defaultGetNavigationSubMenu: PortalMenuPropGetNavigationSubMenu<DefaultNavigationItem> = (
-  item,
-) => item.subMenu;
-
-// Menu
-
-export const defaultGetPackageKey: PortalMenuPropGetPackageKey<DefaultPackageItem> = (item) =>
-  item.key;
-export const defaultGetPackageLabel: PortalMenuPropGetPackageLabel<DefaultPackageItem> = (item) =>
+export const defaultGetItemKey: PortalMenuPropGetItemKey<DefaultMenuItem> = (item) => item.key;
+export const defaultGetItemLabel: PortalMenuPropGetItemLabel<DefaultMenuItem> = (item) =>
   item.label;
-export const defaultGetPackageActive: PortalMenuPropGetPackageActive<DefaultPackageItem> = (item) =>
+export const defaultGetItemActive: PortalMenuPropGetItemActive<DefaultMenuItem> = (item) =>
   item.active;
-export const defaultGetPackageDescription: PortalMenuPropGetPackageDescription<DefaultPackageItem> = (
+export const defaultGetItemDescription: PortalMenuPropGetItemDescription<DefaultMenuItem> = (
   item,
 ) => item.description;
-export const defaultGetPackagenOnClick: PortalMenuPropGetPackageOnClick<DefaultPackageItem> = (
-  item,
-) => item.onClick;
-export const defaultGetPackagenBadgeLabel: PortalMenuPropGetPackageBadgeLabel<DefaultPackageItem> = (
-  item,
-) => item.badgeLabel;
-export const defaultGetPackagenBadgeStatus: PortalMenuPropGetPackageBadgeStatus<DefaultPackageItem> = (
-  item,
-) => item.badgeStatus;
-export const defaultGetPackagenBadgeView: PortalMenuPropGetPackageBadgeView<DefaultPackageItem> = (
-  item,
-) => item.badgeView;
-export const defaultGetPackageGroupId: PortalMenuPropGetPackageGroupId<DefaultPackageItem> = (
-  item,
-) => item.groupId;
+export const defaultGetItemOnClick: PortalMenuPropGetItemOnClick<DefaultMenuItem> = (item) =>
+  item.onClick;
+export const defaultGetItemBadge: PortalMenuPropGetItemBadge<DefaultMenuItem> = (item) =>
+  item.badge;
+export const defaultGetItemGroupId: PortalMenuPropGetItemGroupId<DefaultMenuItem> = (item) =>
+  item.groupId;
+export const defaultGetItemSubMenu: PortalMenuPropGetItemSubMenu<DefaultMenuItem> = (item) =>
+  item.subMenu;
 
 // Group
 
@@ -72,27 +39,19 @@ export const defaultGetGroupKey: PortalMenuPropGetGroupKey<DefaultMenuGroup> = (
 export const defaultGetGroupLabel: PortalMenuPropGetGroupLabel<DefaultMenuGroup> = (item) =>
   item.label;
 
-export function withDefaultGetters<
-  NAVIGATION = DefaultNavigationItem,
-  MENU = DefaultPackageItem,
-  GROUP = DefaultMenuGroup
->(props: PortalMenuProps<NAVIGATION, MENU, GROUP>) {
+export function withDefaultGetters<ITEM = DefaultMenuItem, GROUP = DefaultMenuGroup>(
+  props: PortalMenuProps<ITEM, GROUP>,
+) {
   return {
     ...props,
-    getNavigationKey: props.getNavigationKey ?? defaultGetNavigationKey,
-    getNavigationLabel: props.getNavigationLabel ?? defaultGetNavigationLabel,
-    getNavigationActive: props.getNavigationActive ?? defaultGetNavigationActive,
-    getNavigationOnClick: props.getNavigationOnClick ?? defaultGetNavigationOnClick,
-    getNavigationSubMenu: props.getNavigationSubMenu ?? defaultGetNavigationSubMenu,
-    getPackageKey: props.getPackageKey ?? defaultGetPackageKey,
-    getPackageLabel: props.getPackageLabel ?? defaultGetPackageLabel,
-    getPackageActive: props.getPackageActive ?? defaultGetPackageActive,
-    getPackageDescription: props.getPackageDescription ?? defaultGetPackageDescription,
-    getPackageOnClick: props.getPackageOnClick ?? defaultGetPackagenOnClick,
-    getPackageBadgeLabel: props.getPackageBadgeLabel ?? defaultGetPackagenBadgeLabel,
-    getPackageBadgeStatus: props.getPackageBadgeStatus ?? defaultGetPackagenBadgeStatus,
-    getPackageBadgeView: props.getPackageBadgeView ?? defaultGetPackagenBadgeView,
-    getPackageGroupId: props.getPackageGroupId ?? defaultGetPackageGroupId,
+    getItemKey: props.getItemKey ?? defaultGetItemKey,
+    getItemLabel: props.getItemLabel ?? defaultGetItemLabel,
+    getItemActive: props.getItemActive ?? defaultGetItemActive,
+    getItemDescription: props.getItemDescription ?? defaultGetItemDescription,
+    getItemOnClick: props.getItemOnClick ?? defaultGetItemOnClick,
+    getItemBadge: props.getItemBadge ?? defaultGetItemBadge,
+    getItemGroupId: props.getItemGroupId ?? defaultGetItemGroupId,
+    getItemSubMenu: props.getItemSubMenu ?? defaultGetItemSubMenu,
     getGroupKey: props.getGroupKey ?? defaultGetGroupKey,
     getGroupLabel: props.getGroupLabel ?? defaultGetGroupLabel,
   };

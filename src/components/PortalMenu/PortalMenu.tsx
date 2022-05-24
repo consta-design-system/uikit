@@ -1,69 +1,76 @@
 import './PortalMenu.css';
 
-import React, { forwardRef, useEffect, useRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { cn } from '../../utils/bem';
+import { getGroups } from '../../utils/getGroups';
+import { Text } from '../Text/Text';
 
-import { PortalMenuNavigation } from './PortalMenuNavigation/PortalMenuNavigation';
-import { PortalMenuPackage } from './PortalMenuPackage/PortalMenuPackage';
+import { PortalMenuItem } from './PortalMenuItem/PortalMenuItem';
 import { withDefaultGetters } from './helper';
-import {
-  DefaultMenuGroup,
-  DefaultNavigationItem,
-  DefaultPackageItem,
-  PortalMenuComponent,
-  PortalMenuProps,
-} from './types';
+import { DefaultMenuGroup, DefaultMenuItem, PortalMenuComponent, PortalMenuProps } from './types';
 
 const cnPortalMenu = cn('PortalMenu');
 
-function PortalMenuRender<
-  NAVIGATION = DefaultNavigationItem,
-  MENU = DefaultPackageItem,
-  GROUP = DefaultMenuGroup
->(props: PortalMenuProps<NAVIGATION, MENU, GROUP>, ref: React.Ref<HTMLDivElement>) {
+const renderHeader = (groupLabel: string | undefined, first: boolean): React.ReactNode | null => {
+  if (!groupLabel) {
+    if (first) {
+      return null;
+    }
+    return <div className={cnPortalMenu('Divider')} />;
+  }
+  return (
+    <Text
+      className={cnPortalMenu('Header', { first })}
+      size="xs"
+      lineHeight="m"
+      view="ghost"
+      transform="uppercase"
+    >
+      {groupLabel}
+    </Text>
+  );
+};
+
+function PortalMenuRender<ITEM = DefaultMenuItem, GROUP = DefaultMenuGroup>(
+  props: PortalMenuProps<ITEM, GROUP>,
+  ref: React.Ref<HTMLDivElement>,
+) {
   const {
     className,
     additionalControls,
-    view,
+    sortGroup,
 
     // groups
-    groups,
+    groups: groupsProp,
     getGroupKey,
     getGroupLabel,
 
     // packages
-    packages,
-    onPackageClick,
-    getPackageActive,
-    getPackageBadgeStatus,
-    getPackageDescription,
-    getPackageLabel,
-    getPackageOnClick,
-    getPackageBadgeLabel,
-    getPackageGroupId,
-    getPackageBadgeView,
-    getPackageKey,
 
-    // navigation
-    navigation,
-    onNavigationClick,
-    getNavigationActive,
-    getNavigationKey,
-    getNavigationLabel,
-    getNavigationOnClick,
-    getNavigationSubMenu,
+    items,
+    onItemClick,
+    getItemActive,
+    getItemDescription,
+    getItemLabel,
+    getItemOnClick,
+    getItemGroupId,
+    getItemBadge,
+    getItemSubMenu,
+    getItemKey,
     ...otherProps
   } = withDefaultGetters(props);
 
-  const containerRef = useRef<HTMLDivElement>(null);
+  const groups = getGroups<ITEM, GROUP>(
+    items,
+    getItemGroupId,
+    groupsProp,
+    getGroupKey,
+    sortGroup && ((a, b) => sortGroup(a.key, b.key)),
+  );
 
-  useEffect(() => {
-    if (containerRef.current) {
-      containerRef.current.scrollTo(0, 0);
-    }
-  }, [view]);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   return (
     <div
@@ -72,37 +79,28 @@ function PortalMenuRender<
       {...otherProps}
     >
       {additionalControls}
-      {view !== 'components' && navigation && (
-        <PortalMenuNavigation
-          navigation={navigation}
-          onNavigationClick={onNavigationClick}
-          className={cnPortalMenu('Navigation')}
-          getNavigationActive={getNavigationActive}
-          getNavigationKey={getNavigationKey}
-          getNavigationLabel={getNavigationLabel}
-          getNavigationOnClick={getNavigationOnClick}
-          getNavigationSubMenu={getNavigationSubMenu}
-        />
-      )}
-      {view !== 'navigation' && packages && (
-        <PortalMenuPackage
-          packages={packages}
-          groups={groups}
-          className={cnPortalMenu('Packages')}
-          getGroupKey={getGroupKey}
-          onPackageClick={onPackageClick}
-          getGroupLabel={getGroupLabel}
-          getPackageActive={getPackageActive}
-          getPackageBadgeStatus={getPackageBadgeStatus}
-          getPackageDescription={getPackageDescription}
-          getPackageLabel={getPackageLabel}
-          getPackageOnClick={getPackageOnClick}
-          getPackageBadgeLabel={getPackageBadgeLabel}
-          getPackageBadgeView={getPackageBadgeView}
-          getPackageGroupId={getPackageGroupId}
-          getPackageKey={getPackageKey}
-        />
-      )}
+      <div className={cnPortalMenu('List', [className])}>
+        {groups.map((group, groupIndex) => (
+          <div className={cnPortalMenu('Group')} key={group.key}>
+            {renderHeader(group.group && getGroupLabel(group.group), groupIndex === 0)}
+            {group.items.map((item, itemIndex) => (
+              <PortalMenuItem
+                key={cnPortalMenu('Item', { groupIndex, itemIndex })}
+                item={item}
+                onClick={(e) => onItemClick?.({ e, item })}
+                getItemActive={getItemActive}
+                getItemDescription={getItemDescription}
+                getItemLabel={getItemLabel}
+                getItemOnClick={getItemOnClick}
+                getItemGroupId={getItemGroupId}
+                getItemBadge={getItemBadge}
+                getItemSubMenu={getItemSubMenu}
+                getItemKey={getItemKey}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

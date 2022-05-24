@@ -1,6 +1,4 @@
-.PortalMenuNavigationItem {
-  width: 100%;
-
+.PortalMenuItem {
   &-Button {
     display: inline-flex;
     justify-content: space-between;
@@ -9,7 +7,7 @@
     width: 100%;
     margin: 0;
     padding: var(--space-s) var(--space-s) var(--space-s)
-      calc(var(--space-s) + calc(var(--space-s) * var(--menu-navigation-item-deep)));
+      calc(var(--space-s) + calc(var(--space-s) * var(--menu-item-deep)));
     background: transparent;
     border: none;
     border-radius: var(--control-radius);
@@ -41,5 +39,16 @@
 
   &-List {
     width: 100%;
+  }
+
+  &-Text {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  &-Description {
+    margin-top: var(--space-2xs);
   }
 }
