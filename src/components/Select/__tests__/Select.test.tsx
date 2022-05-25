@@ -6,6 +6,8 @@ import { cn } from '../../../utils/bem';
 import { cnSelect } from '../../SelectComponents/cnSelect';
 import { cnSelectGroupLabel } from '../../SelectComponents/SelectGroupLabel/SelectGroupLabel';
 import { cnSelectItem } from '../../SelectComponents/SelectItem/SelectItem';
+import { cnSelectLoader } from '../../SelectComponents/SelectLoader/SelectLoader';
+import { propForm } from '../../SelectComponents/types';
 import { defaultGetItemLabel, Select, SelectProps } from '../Select';
 
 const animationDuration = 200;
@@ -73,6 +75,21 @@ function getGroups() {
 }
 function getItem(index = 1) {
   return getItems()[index];
+}
+function getPlaceholder() {
+  return getRender().querySelector(`.${cnSelect('Placeholder')}`);
+}
+function getLabel() {
+  return getRender().querySelector(`.${cnSelect('Label')}`);
+}
+function getCaption() {
+  return getRender().querySelector(`.${cnSelect('Caption')}`);
+}
+function getContainer() {
+  return getRender().querySelector(`.${cnSelect('SelectContainer')}`);
+}
+function getIsLoading() {
+  return getItemsList().querySelectorAll(`.${cnSelectLoader('')}`);
 }
 function inputClick() {
   fireEvent.click(getInput());
@@ -270,5 +287,63 @@ describe('Компонент Select', () => {
     animateDelay();
 
     expect(getRenderItems().length).toEqual(items.length);
+  });
+
+  it('проверка placeholder', () => {
+    const placeholder = 'test placeholder';
+    renderComponent({
+      ...defaultProps,
+      placeholder,
+    });
+
+    expect(getPlaceholder()).toBeInTheDocument();
+    expect(getPlaceholder()).toHaveTextContent(placeholder);
+  });
+
+  it('проверка label', () => {
+    const label = 'test label';
+    renderComponent({
+      ...defaultProps,
+      label,
+    });
+
+    expect(getLabel()).toBeInTheDocument();
+    expect(getLabel()).toHaveTextContent(label);
+  });
+
+  it('проверка caption', () => {
+    const caption = 'test caption';
+    renderComponent({
+      ...defaultProps,
+      caption,
+    });
+
+    expect(getCaption()).toBeInTheDocument();
+    expect(getCaption()).toHaveTextContent(caption);
+  });
+
+  it('проверка isLoading', () => {
+    const isLoading = true;
+    const amountLoader = 1;
+    jest.useFakeTimers();
+    act(() => {
+      renderComponent({
+        ...defaultProps,
+        isLoading,
+      });
+    });
+
+    inputClick();
+    animateDelay();
+    expect(getIsLoading().length).toEqual(amountLoader);
+  });
+
+  describe('проверка form', () => {
+    propForm.forEach((form) => {
+      it(`присваивает класс для form = ${form}`, () => {
+        renderComponent({ ...defaultProps, form });
+        expect(getContainer()).toHaveClass(cnSelect('SelectContainer', { form }));
+      });
+    });
   });
 });
