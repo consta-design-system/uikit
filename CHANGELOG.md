@@ -1,5 +1,23 @@
 # Changelog
 
+## v3.24.0 (25/05/2022)
+- Добавили RadioGroup(Canary), ChoiceGroup(Canary), CheckBoxGroup(Canary), SwichGroup(Canary) и Tabs(Canary). Всё те же компоненты, только теперь без обязательных геттеров
+- Доработали документацию
+- Исправили несколько багов
+
+---
+
+- [feat(RadioGroupCanary): add RadioGroupCanary (#2313)](https://github.com/consta-design-system/uikit/commit/08c3bcb552cbebdd01a5e870f370aaa548c9e31b) - [@N1MBER](https://github.com/N1MBER)
+- [feat(ChoiceGroupCanary): add ChoiceGroupCanary (#2312)](https://github.com/consta-design-system/uikit/commit/04cee6482933b27f7af6ef75a7c729ca6f0c02a3) - [@N1MBER](https://github.com/N1MBER)
+- [feat(CheckboxGroupCanary): add CheckboxGroupCanary (#2311)](https://github.com/consta-design-system/uikit/commit/afec05578c46184cdf6a447d2d455fb3eef35d3b) - [@N1MBER](https://github.com/N1MBER)
+- [feat(SwitchGroupCanary): add SwitchGroupCanary (#2310)](https://github.com/consta-design-system/uikit/commit/f1f4d12544dc405cdd9c188207437643e173b07b) - [@N1MBER](https://github.com/N1MBER)
+- [feat(TabsCanary): add TabsCanary (#2309)](https://github.com/consta-design-system/uikit/commit/6037cfc8fdc9afb56b1527bde6367e2842d4287a) - [@N1MBER](https://github.com/N1MBER)
+- [fix(getGroups): fixed calculate groups with groupId = 0 (#2322)](https://github.com/consta-design-system/uikit/commit/05a79381264b136533bdc355b964d8da5e32d37d) - [@gizeasy](https://github.com/gizeasy)
+- [fix(Popover): fixed calculate position (#2321)](https://github.com/consta-design-system/uikit/commit/718bcd4dafb0347f649056463052a543a372824a) - [@gizeasy](https://github.com/gizeasy)
+- [refactor(DatePicker): refactor renderAdditionalControls and useCurrentVisibleDate (#2318)](https://github.com/consta-design-system/uikit/commit/e556a36bbb96bb3213a91802caaaa3d4c38262a6) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v3.23.1 (18/05/2022)
 Самое важное:
 - Выпустили обновленный Steps (с флагом `Canary`) — использование геттеров теперь не обязательно.
@@ -482,8 +500,3 @@ endFieldOnBlur - deleted, use onBlur
 - [fix(Combobox): fix bug with notFoundLabel (#1728)](https://github.com/gazprom-neft/consta-uikit/commit/8857af9aced15b304a915778ff203abbbbbdbc98) - [@N1MBER](https://github.com/N1MBER)
 - [fix(ContextMenu): edit getOnClick type (#1722)](https://github.com/gazprom-neft/consta-uikit/commit/000c969fb97c4ae45e265611119785e71f897b21) - [@gizeasy](https://github.com/gizeasy)
 - [docs(ProgressStepBar): edit docs, add examples (#1703)](https://github.com/gazprom-neft/consta-uikit/commit/e0b1b91c27d52e838a16ba89eac883b68b54f097) - [@arhayka](https://github.com/arhayka)
-
---------------------
-
-## v3.9.1 (03/11/2021)
-- [feat(Table): added control for table (#1716)](https://github.com/gazprom-neft/consta-uikit/commit/99d67aff670d2f499abcefc168eba73805ef3f16) - [@SergeyKatugin](https://github.com/SergeyKatugin)
