@@ -17,15 +17,15 @@ export const checkboxGroupViews = ['primary', 'ghost'] as const;
 export type CheckboxGroupPropView = typeof checkboxGroupViews[number];
 export const checkboxGroupDefaultView: CheckboxGroupPropView = checkboxGroupViews[0];
 
-export type CheckboxGroupPropGetLabel<ITEM> = (item: ITEM) => string;
-export type CheckboxGroupPropGetDisabled<ITEM> = (item: ITEM) => boolean | undefined;
+export type CheckboxGroupPropGetItemLabel<ITEM> = (item: ITEM) => string;
+export type CheckboxGroupPropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
 
 export type CheckboxGroupProps<ITEM = CheckboxGroupDefaultItem> = PropsWithHTMLAttributesAndRef<
   {
     value?: ITEM[] | null;
     items: ITEM[];
-    getLabel?: CheckboxGroupPropGetLabel<ITEM>;
-    getDisabled?: CheckboxGroupPropGetDisabled<ITEM>;
+    getItemLabel?: CheckboxGroupPropGetItemLabel<ITEM>;
+    getItemDisabled?: CheckboxGroupPropGetItemDisabled<ITEM>;
     onChange: (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM[] | null }) => void;
     name?: string;
     direction?: CheckboxGroupDirection;
@@ -39,7 +39,7 @@ export type CheckboxGroupProps<ITEM = CheckboxGroupDefaultItem> = PropsWithHTMLA
   (ITEM extends { label: CheckboxGroupDefaultItem['label'] }
     ? {}
     : {
-        getLabel: CheckboxGroupPropGetLabel<ITEM>;
+        getItemLabel: CheckboxGroupPropGetItemLabel<ITEM>;
       });
 
 export type CheckboxGroupComponent = <ITEM = CheckboxGroupDefaultItem>(
