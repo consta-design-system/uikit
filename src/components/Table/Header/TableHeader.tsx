@@ -215,6 +215,8 @@ export const TableHeader = <T extends TableRow>({
                   <Button
                     size="xs"
                     iconSize="s"
+                    type="button"
+                    aria-label="Кнопка сортировки"
                     view="clear"
                     onlyIcon
                     onClick={(): void => handleSortClick(column)}
