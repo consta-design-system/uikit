@@ -1,0 +1,76 @@
+import React from 'react';
+import { boolean, select } from '@storybook/addon-knobs';
+
+import { cn } from '../../../utils/bem';
+import { createMetadata } from '../../../utils/storybook';
+import { SwitchGroup } from '../SwitchGroupCanary';
+import {
+  switchGroupDefaultDirection,
+  switchGroupDefaultSize,
+  switchGroupDefaultView,
+  switchGroupDirections,
+  switchGroupSizes,
+  switchGroupViews,
+} from '../types';
+
+import mdx from './SwitchGroup.docs.mdx';
+
+const cnSwitchGroupStories = cn('SwitchGroupStories');
+
+type Item = {
+  name: string;
+  disabled?: boolean;
+};
+
+const items: Item[] = [
+  { name: 'Свет' },
+  { name: 'Вентилятор' },
+  { name: 'Кондиционер — не работает', disabled: true },
+  { name: 'Чайник' },
+  { name: 'Кофеварка' },
+];
+
+const defaultKnobs = () => ({
+  size: select('size', switchGroupSizes, switchGroupDefaultSize),
+  view: select('view', switchGroupViews, switchGroupDefaultView),
+  direction: select('direction', switchGroupDirections, switchGroupDefaultDirection),
+  disabled: boolean('disabled', false),
+});
+
+export function Playground() {
+  const [value, setValue] = React.useState<Item[] | null>(null);
+  const { size, view, direction, disabled } = defaultKnobs();
+
+  return (
+    <div className={cnSwitchGroupStories()}>
+      <form>
+        <SwitchGroup
+          value={value}
+          items={items}
+          getItemLabel={(item) => item.name}
+          getItemDisabled={(item) => item.disabled}
+          onChange={({ value }) => setValue(value)}
+          name={cnSwitchGroupStories()}
+          direction={direction}
+          size={size}
+          view={view}
+          disabled={disabled}
+        />
+      </form>
+    </div>
+  );
+}
+
+export default createMetadata({
+  title: 'Компоненты|/Базовые/SwitchGroup(Canary)',
+  id: 'components/SwitchGroupCanary',
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=58%3A2269',
+    },
+  },
+});

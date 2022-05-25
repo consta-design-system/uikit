@@ -1,0 +1,31 @@
+.SwitchGroup {
+  display: flex;
+
+  &_direction {
+    &_column {
+      flex-direction: column;
+
+      .SwitchGroup-Item:not(:last-child) {
+        margin-bottom: var(--offset);
+      }
+    }
+
+    &_row {
+      flex-direction: row;
+
+      .SwitchGroup-Item:not(:last-child) {
+        margin-right: var(--offset);
+      }
+    }
+  }
+
+  &_size {
+    &_m {
+      --offset: var(--space-xs);
+    }
+
+    &_l {
+      --offset: var(--space-s);
+    }
+  }
+}
