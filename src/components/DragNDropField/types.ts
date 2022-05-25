@@ -1,6 +1,15 @@
+import { Locale } from './locale';
+
+export type DragNDropFieldPropLocale = Locale;
+
 export type FileError = {
   message: string;
-  code: 'file-too-large' | 'file-too-small' | 'too-many-files' | 'file-invalid-type' | string;
+  code: 'file-too-large' | 'file-too-small' | 'too-many-files' | 'file-invalid-type';
+};
+
+export type FileRejection = {
+  file: File;
+  errors: FileError[];
 };
 
 export type DragNDropFieldPropErrorMessages = Partial<
@@ -13,11 +22,16 @@ export type DragNDropFieldChildrenRenderProp = (
   } & Pick<DragNDropFieldProps, 'accept' | 'maxSize' | 'multiple'>,
 ) => React.ReactNode;
 
+export type FileSizes = {
+  minSize?: number;
+  maxSize?: number;
+};
+
 export type DragNDropFieldProps = {
   accept?: string | string[];
   maxSize?: number;
   multiple?: boolean;
   onDropFiles: (files: File[]) => void;
-  errorMessages?: DragNDropFieldPropErrorMessages;
   children?: React.ReactNode | DragNDropFieldChildrenRenderProp;
+  locale?: DragNDropFieldPropLocale;
 };

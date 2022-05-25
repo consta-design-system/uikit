@@ -11,6 +11,7 @@ import { Text } from '../Text/Text';
 import { DragNDropFieldContent } from './DragNDropFieldContent/DragNDropFieldContent';
 import { DragNDropFieldTooltip } from './DragNDropFieldTooltip/DragNDropFieldTooltip';
 import { getErrorsList } from './getErrorsList';
+import { withdefaultLocale } from './locale';
 import { DragNDropFieldChildrenRenderProp, DragNDropFieldProps } from './types';
 
 const cnDragNDropField = cn('DragNDropField');
@@ -27,8 +28,10 @@ export const DragNDropField = React.forwardRef<HTMLDivElement, DragNDropFieldPro
       multiple = false,
       onDropFiles,
       children = DragNDropFieldContent,
-      errorMessages,
+      locale: localeProp,
     } = usePropsHandler(COMPONENT_NAME, props, dragNDropFieldRef);
+
+    const locale = withdefaultLocale(localeProp);
 
     const handleDrop: DropzoneOptions['onDrop'] = React.useCallback(
       (acceptedFiles) => acceptedFiles.length > 0 && onDropFiles(acceptedFiles),
@@ -63,9 +66,9 @@ export const DragNDropField = React.forwardRef<HTMLDivElement, DragNDropFieldPro
     const content = isRenderProp(children)
       ? children({ accept, maxSize, multiple, openFileDialog: open })
       : children;
-    const errors = React.useMemo(() => getErrorsList(fileRejections, { maxSize }, errorMessages), [
+
+    const errors = React.useMemo(() => getErrorsList(fileRejections, { maxSize }, locale), [
       fileRejections,
-      errorMessages,
     ]);
 
     return (
