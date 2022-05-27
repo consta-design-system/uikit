@@ -30,6 +30,7 @@ function ContextMenuRender(props: ContextMenuProps, ref: React.Ref<HTMLDivElemen
     levelRef,
   );
   const [playAnimation, setPlayAnimation] = useFlag();
+  const [eventsNone, setEventsNone] = useFlag(true);
   const [direction, setDirection] = useState<Direction | undefined>(props.direction);
 
   const handleSetDirection = (d: Direction) => {
@@ -42,8 +43,12 @@ function ContextMenuRender(props: ContextMenuProps, ref: React.Ref<HTMLDivElemen
       in={isOpen}
       unmountOnExit
       timeout={animateTimeout}
+      onEntered={setEventsNone.off}
       onEnter={setPlayAnimation.off}
-      onExit={setPlayAnimation.on}
+      onExit={() => {
+        setPlayAnimation.on();
+        setEventsNone.on();
+      }}
       nodeRef={nodeRef}
     >
       {(animate) => (
@@ -51,7 +56,7 @@ function ContextMenuRender(props: ContextMenuProps, ref: React.Ref<HTMLDivElemen
           {...otherProps}
           ref={levelRef}
           onSetDirection={handleSetDirection}
-          className={cnContextMenu('Level', { playAnimation }, [
+          className={cnContextMenu('Level', { playAnimation, eventsNone }, [
             className,
             cnMixPopoverAnimate({ animate, direction }),
           ])}

@@ -1,6 +1,6 @@
 import './Popover.css';
 
-import React, { useEffect } from 'react';
+import React, { forwardRef, useEffect, useLayoutEffect } from 'react';
 
 import { ClickOutsideHandler, useClickOutside } from '../../hooks/useClickOutside/useClickOutside';
 import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
@@ -127,7 +127,7 @@ const ContextConsumer: React.FC<{
 
 const cnPopover = cn('Popover');
 
-export const Popover = React.forwardRef<HTMLDivElement, Props>((props, componentRef) => {
+export const Popover = forwardRef<HTMLDivElement, Props>((props, componentRef) => {
   const {
     children,
     direction: passedDirection = 'upCenter',
@@ -152,7 +152,6 @@ export const Popover = React.forwardRef<HTMLDivElement, Props>((props, component
   const { width, height } = useComponentSize(ref);
   const anchorSize = useComponentSize(anchorRef || { current: null });
   const previousDirectionRef = React.useRef<Direction | null>(null);
-  const { current: previousDirection } = previousDirectionRef;
   const [bannedDirections, setBannedDirections] = React.useState<readonly Direction[]>([]);
 
   const resetBannedDirections = () => {
@@ -162,17 +161,6 @@ export const Popover = React.forwardRef<HTMLDivElement, Props>((props, component
 
   const updateAnchorClientRect = () =>
     setAnchorClientRect(anchorRef?.current?.getBoundingClientRect());
-
-  React.useLayoutEffect(updateAnchorClientRect, [anchorSize]);
-
-  usePopoverReposition({
-    isActive: true,
-    scrollAnchorRef: anchorRef || { current: null },
-    onRequestReposition: () => {
-      resetBannedDirections();
-      updateAnchorClientRect();
-    },
-  });
 
   const { position, direction } = getComputedPositionAndDirection({
     contentSize: { width, height },
@@ -192,7 +180,21 @@ export const Popover = React.forwardRef<HTMLDivElement, Props>((props, component
     spareDirection,
   });
 
-  useEffect(() => onSetDirection && onSetDirection(direction), [direction]);
+  const content = isRenderProp(children) ? children(direction) : children;
+
+  useLayoutEffect(() => onSetDirection?.(direction), [direction]);
+
+  useLayoutEffect(resetBannedDirections, [props]);
+
+  useEffect(updateAnchorClientRect, [anchorSize]);
+
+  usePopoverReposition({
+    scrollAnchorRef: anchorRef || { current: null },
+    onRequestReposition: () => {
+      resetBannedDirections();
+      updateAnchorClientRect();
+    },
+  });
 
   /**
    * Может возникнуть ситуация, когда перерасчет поповера всегда будет выдавать 2 направления
@@ -200,18 +202,17 @@ export const Popover = React.forwardRef<HTMLDivElement, Props>((props, component
    * которые не подошли, чтобы не возвращаться к ним и предотвратить бесконечный ререндер.
    * См. PopoverBannedPositionsStory
    */
-  if (previousDirection !== direction) {
-    if (previousDirection && !bannedDirections.includes(previousDirection)) {
-      setBannedDirections([...bannedDirections, previousDirection]);
+  if (previousDirectionRef.current !== direction) {
+    if (previousDirectionRef.current && !bannedDirections.includes(previousDirectionRef.current)) {
+      setBannedDirections((state) =>
+        previousDirectionRef.current ? [...state, previousDirectionRef.current] : state,
+      );
     }
     previousDirectionRef.current = direction;
   }
 
   // Сбрасываем при любом изменении пропсов, чтобы заново начать перебор направлений
   // Главное не сбрасывать при изменении размеров поповера, т.к. именно оно может вызвать бесконечный перебор
-  React.useLayoutEffect(resetBannedDirections, [props]);
-
-  const content = isRenderProp(children) ? children(direction) : children;
 
   return (
     <PortalWithTheme
