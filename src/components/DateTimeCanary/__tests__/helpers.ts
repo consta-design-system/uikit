@@ -3,12 +3,14 @@ import { screen } from '@testing-library/react';
 import { cnDateTimeCell } from '../DateTimeCell/DateTimeCell';
 import { cnDateTimeItem } from '../DateTimeItem/DateTimeItem';
 import { cnDateTimeLabel } from '../DateTimeLabel/DateTimeLabel';
+import { cnDateTimeTimeColumn } from '../DateTimeTimeColumn/DateTimeTimeColumn';
 
 export const testId = 'DateTime';
 
 export const getRender = () => screen.getByTestId(testId);
 export const getDateTimeItems = () => getRender().querySelectorAll(`.${cnDateTimeItem()}`);
 export const getDateTimeCells = () => getRender().querySelectorAll(`.${cnDateTimeCell()}`);
+export const getDateTimeColumn = () => getRender().querySelectorAll(`.${cnDateTimeTimeColumn()}`);
 export const getDateTimeLabel = () => getRender().querySelector(`.${cnDateTimeLabel()}`);
 export const getDateTimeViewBookLabels = () =>
   getRender().querySelectorAll(`.${cnDateTimeLabel()}`);
@@ -38,3 +40,7 @@ export const getDateTimeItemsSelected = () =>
   getRender().querySelectorAll(`.DateTimeItem_selected`);
 export const getDateTimeTogglerLabel = () =>
   getRender().querySelector(`.DateTimeToggler-Label`) as Element;
+export const getColumnAllItem = (column: number) =>
+  getDateTimeColumn()[column].querySelectorAll(`.${cnDateTimeItem()}`);
+export const getDateTimeColumnItem = (column: number, item: number) =>
+  getColumnAllItem(column)[item];

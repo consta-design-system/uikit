@@ -215,8 +215,10 @@ describe('Компонент DateTime_type_date', () => {
           view,
           onChange,
         });
+
         const currentValue = getDateTimeItem(5);
         expect(currentValue).toHaveTextContent('3');
+
         const newCurrentValue = getDateTimeItem(6);
         fireEvent.click(newCurrentValue);
         expect(onChange).toHaveBeenCalled();
@@ -231,13 +233,17 @@ describe('Компонент DateTime_type_date', () => {
         value: new Date(1970, 0, 3),
         onChange,
       });
+
       expect(screen.getByText('январь 1970')).toBeInTheDocument();
+
       const nextButton = getDateTimeTooglerButtonNext();
       fireEvent.click(nextButton);
       expect(screen.getByText('февраль 1970')).toBeInTheDocument();
+
       const prevButton = getDateTimeTooglerButtonPrev();
       fireEvent.click(prevButton);
       expect(screen.getByText('январь 1970')).toBeInTheDocument();
+
       const newCurrentValue = getDateTimeItem(4);
       fireEvent.click(newCurrentValue);
       expect(onChange).toHaveReturnedWith(new Date(1970, 0, 2));
@@ -249,13 +255,17 @@ describe('Компонент DateTime_type_date', () => {
         value: new Date(1970, 0, 3),
         onChange,
       });
+
       expect(screen.getByText('январь 1970')).toBeInTheDocument();
+
       const labelButton = getDateTimeTogglerLabel();
       fireEvent.click(labelButton);
       expect(screen.getByText('фев')).toBeInTheDocument();
+
       const monthButton = getDateTimeItem(1);
       fireEvent.click(monthButton);
       expect(screen.getByText('февраль 1970')).toBeInTheDocument();
+
       const newCurrentValue = getDateTimeItem(7);
       fireEvent.click(newCurrentValue);
       expect(onChange).toHaveReturnedWith(new Date(1970, 1, 2));
@@ -267,19 +277,25 @@ describe('Компонент DateTime_type_date', () => {
         value: new Date(1970, 0, 3),
         onChange,
       });
+
       expect(screen.getByText('январь 1970')).toBeInTheDocument();
+
       const labelButton = getDateTimeTogglerLabel();
       fireEvent.click(labelButton);
       expect(screen.getByText('фев')).toBeInTheDocument();
+
       const newLabelButton = getDateTimeTogglerLabel();
       fireEvent.click(newLabelButton);
       expect(screen.getByText('1970 - 1979')).toBeInTheDocument();
+
       const yearButton = getDateTimeItem(2);
       fireEvent.click(yearButton);
       expect(screen.getByText('1971')).toBeInTheDocument();
+
       const monthButton = getDateTimeItem(2);
       fireEvent.click(monthButton);
       expect(screen.getByText('март 1971')).toBeInTheDocument();
+
       const newCurrentValue = getDateTimeItem(1);
       fireEvent.click(newCurrentValue);
       expect(onChange).toHaveReturnedWith(new Date(1971, 2, 2));

@@ -3,7 +3,13 @@ import { fireEvent, render } from '@testing-library/react';
 
 import { DateTime, DateTimeProps } from '../DateTimeCanary';
 
-import { getDateTimeItem, getDateTimeItemsSelected, testId } from './helpers';
+import {
+  getColumnAllItem,
+  getDateTimeColumnItem,
+  getDateTimeItem,
+  getDateTimeItemsSelected,
+  testId,
+} from './helpers';
 
 const renderComponent = (props: DateTimeProps<'time'> = {}) => {
   return render(<DateTime {...props} type="time" data-testid={testId} />);
@@ -64,6 +70,101 @@ describe('Компонент DateTime_type_time', () => {
       fireEvent.click(DateTimeItem);
 
       expect(onChange).toHaveBeenCalledTimes(0);
+    });
+
+    it('проверка изменения часов при onChange', () => {
+      const onChange = jest.fn((value) => new Date(value.value));
+
+      renderComponent({
+        onChange,
+        value: new Date(1970, 0, 1, 10, 10, 10),
+      });
+
+      const dateHoursItem = getDateTimeColumnItem(0, 11);
+      fireEvent.click(dateHoursItem);
+      expect(onChange).toHaveReturnedWith(new Date(1970, 0, 1, 11, 0, 0));
+    });
+
+    it('проверка изменения минут при onChange', () => {
+      const onChange = jest.fn((value) => new Date(value.value));
+
+      renderComponent({
+        onChange,
+        value: new Date(1970, 0, 1, 10, 10, 10),
+      });
+
+      const dateMinutesItem = getDateTimeColumnItem(1, 11);
+      fireEvent.click(dateMinutesItem);
+      expect(onChange).toHaveReturnedWith(new Date(1970, 0, 1, 10, 11, 0));
+    });
+
+    it('проверка изменения секунд при onChange', () => {
+      const onChange = jest.fn((value) => new Date(value.value));
+
+      renderComponent({
+        onChange,
+        value: new Date(1970, 0, 1, 10, 10, 10),
+      });
+
+      const dateSecondsItem = getDateTimeColumnItem(2, 11);
+      fireEvent.click(dateSecondsItem);
+      expect(onChange).toHaveReturnedWith(new Date(1970, 0, 1, 10, 10, 11));
+    });
+  });
+
+  describe('проверка multiplicity', () => {
+    it('проверка multiplicityHours и возможности менять часы', () => {
+      const onChange = jest.fn((value) => new Date(value.value));
+
+      renderComponent({
+        multiplicityHours: 2,
+        onChange,
+        value: new Date(1970, 0, 1, 10, 10, 10),
+      });
+
+      const numberColumn = 0;
+      const halfHours = 12;
+      expect(getColumnAllItem(numberColumn).length).toEqual(halfHours);
+
+      const dateHoursItem = getDateTimeColumnItem(numberColumn, 1);
+      fireEvent.click(dateHoursItem);
+      expect(onChange).toHaveReturnedWith(new Date(1970, 0, 1, 2, 0, 0));
+    });
+
+    it('проверка multiplicityMinutes и возможности менять минуты', () => {
+      const onChange = jest.fn((value) => new Date(value.value));
+
+      renderComponent({
+        multiplicityMinutes: 2,
+        onChange,
+        value: new Date(1970, 0, 1, 10, 10, 10),
+      });
+
+      const numberColumn = 1;
+      const halfMinutes = 30;
+      expect(getColumnAllItem(numberColumn).length).toEqual(halfMinutes);
+
+      const dateMinutesItem = getDateTimeColumnItem(numberColumn, 1);
+      fireEvent.click(dateMinutesItem);
+      expect(onChange).toHaveReturnedWith(new Date(1970, 0, 1, 10, 2, 0));
+    });
+
+    it('проверка multiplicitySeconds и возможности менять секунды', () => {
+      const onChange = jest.fn((value) => new Date(value.value));
+
+      renderComponent({
+        multiplicitySeconds: 2,
+        onChange,
+        value: new Date(1970, 0, 1, 10, 10, 10),
+      });
+
+      const numberColumn = 2;
+      const halfSeconds = 30;
+      expect(getColumnAllItem(numberColumn).length).toEqual(halfSeconds);
+
+      const dateSecondsItem = getDateTimeColumnItem(numberColumn, 1);
+      fireEvent.click(dateSecondsItem);
+      expect(onChange).toHaveReturnedWith(new Date(1970, 0, 1, 10, 10, 2));
     });
   });
 });
