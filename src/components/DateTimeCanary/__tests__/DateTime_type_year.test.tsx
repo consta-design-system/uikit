@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import { DateTime, DateTimeProps, dateTimePropView } from '../DateTimeCanary';
 
@@ -193,6 +193,51 @@ describe('Компонент DateTime_type_year', () => {
       fireEvent.click(DateTimeItem);
 
       expect(handleClick).toHaveBeenCalledTimes(0);
+    });
+
+    it('проверка смены даты при клике на новый год', () => {
+      const onChange = jest.fn((value) => new Date(value.value));
+      renderComponent({
+        value: new Date(1970, 0),
+        onChange,
+      });
+      const currentValue = getDateTimeItem(1);
+      expect(currentValue).toHaveTextContent('1970');
+      const newCurrentValue = getDateTimeItem(2);
+      fireEvent.click(newCurrentValue);
+      expect(onChange).toHaveBeenCalled();
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveReturnedWith(new Date(1971, 0));
+    });
+
+    it('проверка смены даты при изменении года через DateTimeToggler-Button_direction_prev', () => {
+      const onChange = jest.fn((value) => new Date(value.value));
+      renderComponent({
+        value: new Date(1970, 0),
+        onChange,
+      });
+      expect(screen.getByText('1970 - 1979')).toBeInTheDocument();
+      const nextButton = getDateTimeTooglerButtonNext();
+      fireEvent.click(nextButton);
+      expect(screen.getByText('1980 - 1989')).toBeInTheDocument();
+      const newCurrentValue = getDateTimeItem(1);
+      fireEvent.click(newCurrentValue);
+      expect(onChange).toHaveReturnedWith(new Date(1980, 0));
+    });
+
+    it('проверка смены даты при изменении года через DateTimeToggler-Button_direction_next', () => {
+      const onChange = jest.fn((value) => new Date(value.value));
+      renderComponent({
+        value: new Date(1970, 0),
+        onChange,
+      });
+      expect(screen.getByText('1970 - 1979')).toBeInTheDocument();
+      const prevButton = getDateTimeTooglerButtonPrev();
+      fireEvent.click(prevButton);
+      expect(screen.getByText('1960 - 1969')).toBeInTheDocument();
+      const newCurrentValue = getDateTimeItem(1);
+      fireEvent.click(newCurrentValue);
+      expect(onChange).toHaveReturnedWith(new Date(1960, 0));
     });
   });
 });
