@@ -23,7 +23,6 @@ module.exports = function () {
     module: {
       rules: [
         {
-          // test: /\@consta\/stands\/(.*)\.tsx?$/,
           test: /\.tsx?$/,
           use: require.resolve('babel-loader'),
           include: [path.resolve(__dirname, './src')],
@@ -45,25 +44,33 @@ module.exports = function () {
         },
         {
           test: /\.css$/,
-          use: [productionMode ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader'],
+          use: [
+            productionMode ? MiniCssExtractPlugin.loader : 'style-loader',
+            'css-loader',
+            'postcss-loader',
+          ],
         },
         {
           test: /\.mdx?$/,
           use: [
             {
               loader: '@mdx-js/loader',
-              // @type {import('@mdx-js/loader').Options}
               options: {},
             },
           ],
+        },
+        {
+          test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+          loader: require.resolve('url-loader'),
+          options: {
+            limit: false,
+            name: 'static/media/[name].[hash:8].[ext]',
+          },
         },
       ],
     },
     resolve: {
       extensions: ['.tsx', '.ts', '.js'],
-      // alias: {
-      //   '##': path.resolve(__dirname, '../../../../src'),
-      // },
     },
 
     plugins: [

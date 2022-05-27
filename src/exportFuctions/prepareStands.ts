@@ -1,4 +1,4 @@
-import { Stand, CreatedStand, PreparedStand, LibWithStands } from '@consta/stand/types';
+import { Stand, CreatedStand, PreparedStand, LibWithStands } from '##/exportTypes';
 
 const sort = (a: PreparedStand, b: PreparedStand) => {
   if (a.stand.order && b.stand.order) {
@@ -22,12 +22,17 @@ const sort = (a: PreparedStand, b: PreparedStand) => {
 const addToLib = (stand: PreparedStand, lib: LibWithStands[]) => {
   const indexLib = lib.findIndex((item) => item.id === stand.lib.id);
 
+  const standWithGroup = {
+    ...stand.stand,
+    group: stand.stand.group || 'Библиотеки компонентов',
+  };
+
   if (indexLib !== -1) {
-    lib[indexLib].stands.push(stand.stand);
+    lib[indexLib].stands.push(standWithGroup);
   } else {
     lib.push({
       ...stand.lib,
-      stands: [stand.stand],
+      stands: [standWithGroup],
     });
   }
 };

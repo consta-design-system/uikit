@@ -1121,10 +1121,10 @@
   dependencies:
     chalk "^4.0.0"
 
-"@consta/uikit@^3.18.3":
-  version "3.18.3"
-  resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-3.18.3.tgz#603b2dc67f936167d0ef16972bc71e282d33c341"
-  integrity sha512-uGYPvJoK2KJtoqfLB1sqDXG8NiE4z/dV3Sh4/ofszbe7imlAD3YYtvQQ4uNBG7U+eeGDD49WB5FkRquDjfIuZQ==
+"@consta/uikit@^3.24.0":
+  version "3.24.0"
+  resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-3.24.0.tgz#b3c2644abdc4e6d2b3c32ad03e31a5f360306b9d"
+  integrity sha512-9TgSgc5XrplSW6RepKXyOqw0eY4j+2hbdFzFAeI3lDuKHuRyIp40ALFC95+XFl01wcLUWIwGE+w+ydcpGC9W6w==
   dependencies:
     "@bem-react/classname" "^1.5.8"
     "@bem-react/classnames" "^1.3.9"
@@ -11172,6 +11172,11 @@ route-node@4.1.1:
     search-params "3.0.0"
     tslib "^1.10.0"
 
+router5-helpers@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/router5-helpers/-/router5-helpers-8.0.0.tgz#54b0fa34e4e00b8ffc4cfe5c1d4f853e1e6ba205"
+  integrity sha512-wmOMaPF6x6zJSdIjCWVGdcis4DO/kOxSJ2xhyVptd/7E/gPr55yrUO5jQSC18iZp7MLLmOlv/hr25JFaH5itMA==
+
 router5-plugin-browser@^8.0.1:
   version "8.0.1"
   resolved "https://registry.yarnpkg.com/router5-plugin-browser/-/router5-plugin-browser-8.0.1.tgz#30a15fc59ed4d59020587cfc5452b5443b1a3290"
@@ -12803,6 +12808,15 @@ uri-js@^4.2.2:
   integrity sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   dependencies:
     punycode "^2.1.0"
+
+url-loader@4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/url-loader/-/url-loader-4.1.1.tgz#28505e905cae158cf07c92ca622d7f237e70a4e2"
+  integrity sha512-3BTV812+AVHHOJQO8O5MkWgZ5aosP7GnROJwvzLS9hWDj00lZ6Z0wNak423Lp9PBZN05N+Jk/N5Si8jRAlGyWA==
+  dependencies:
+    loader-utils "^2.0.0"
+    mime-types "^2.1.27"
+    schema-utils "^3.0.0"
 
 url-parse-lax@^1.0.0:
   version "1.0.0"

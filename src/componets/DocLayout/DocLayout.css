@@ -1,0 +1,24 @@
+.stand--DocLayout {
+  display: grid;
+  grid-template-columns: 320px auto;
+  background: var(--color-bg-secondary);
+  min-height: 100vh;
+
+  &-LeftSide {
+    padding: var(--space-2xl) var(--space-xl);
+    background: var(--color-bg-default);
+    border-right: 1px solid var(--color-bg-border);
+  }
+
+  &-Content {
+    padding: var(--space-2xl);
+  }
+
+  &-Paper {
+    background: var(--color-bg-default);
+    max-width: 980px;
+    margin: 0 auto;
+    border-radius: 10px;
+    padding: var(--space-2xl) var(--space-3xl);
+  }
+}

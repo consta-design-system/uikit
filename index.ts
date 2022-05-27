@@ -1,3 +1,3 @@
 export * from './src/exportFuctions';
 export * from './src/exportAtoms';
-export * from './types';
+export * from '@consta/stand/src/exportTypes';

@@ -7,6 +7,8 @@ const generateRouteName = (path: string, libsLenght: number, name?: string) =>
   `${path === '/' ? '' : 'LIBS.'}${libsLenght > 1 ? 'LIB.' : ''}${name ? name : ''}`;
 
 export const createRoutes = (path = '/', libsLenght = 1) => {
+  console.log(libsLenght);
+
   const routesNames = {
     LIBS: 'LIBS',
     LIBS_LIB: libsLenght > 1 ? generateRouteName(path, 0, 'LIB') : 'LIB',

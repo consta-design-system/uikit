@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import { reatomContext } from '@reatom/react';
 import { store } from '##/modules/app';
@@ -21,7 +21,4 @@ const Root: React.FC = () => {
   );
 };
 
-// router.start();
-// createRoot(document.getElementById('app') as Element).render(<Root />);
-
-ReactDOM.render(<Root />, document.getElementById('app'));
+createRoot(document.getElementById('app') as Element).render(<Root />);

@@ -16,10 +16,12 @@ export type Stand<Group extends string = string> = {
 
 export type Lib<GROUP extends Group> = {
   groups: readonly GROUP[];
-  logo?: () => React.ReactElement | null;
   title: string;
   id: string;
-  urlPath?: string;
+  logo?: (() => React.ReactElement | null) | string;
+  image?: (() => React.ReactElement | null) | string;
+  group?: string;
+  description?: string;
 };
 
 export type CreatedStand = {

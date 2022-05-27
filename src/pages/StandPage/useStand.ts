@@ -6,10 +6,11 @@ import { routesNames } from '##/modules/router';
 
 export const useStand = () => {
   const [stand] = useAtom(standAtom);
+
   const router = useRouter();
 
   if (!stand) {
-    router.navigate(routesNames.LIBS);
+    router.navigate(routesNames.LIBS, {}, { replace: true });
   }
 
   return stand;

@@ -1,4 +1,4 @@
-import { PreparedStand } from '../../../types';
+import { PreparedStand } from '@consta/stand/src/exportTypes';
 
 import { createAtom } from '@reatom/core';
 

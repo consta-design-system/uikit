@@ -1,0 +1,24 @@
+.stand--PortalMenu {
+  max-height: 100%;
+
+  & > *:not(:last-child) {
+    margin-bottom: var(--space-m);
+  }
+
+  &-List {
+    width: 100%;
+
+    & > *:not(:last-child) {
+      margin-bottom: var(--space-xl);
+    }
+  }
+
+  &-Header {
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: var(--space-2xs);
+    padding-left: var(--space-s);
+    padding-bottom: var(--space-2xs);
+    border-bottom: var(--control-border-width) solid var(--color-control-bg-border-default);
+  }
+}

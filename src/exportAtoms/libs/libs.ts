@@ -1,4 +1,4 @@
-import { LibWithStands } from '@consta/stand/types';
+import { LibWithStands } from '@consta/stand/src/exportTypes';
 
 import { createAtom } from '@reatom/core';
 
