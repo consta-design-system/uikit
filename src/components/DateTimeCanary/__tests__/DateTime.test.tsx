@@ -74,7 +74,7 @@ describe('Компонент DateTime', () => {
     expect(prevDate).not.toHaveClass('DateTimeItem_disabled');
   });
 
-  it('проверка применения locale = en-US', () => {
+  it('проверка применения locale = fa-IR', () => {
     renderComponent({
       locale: faIRLocale,
       value: new Date(2022, 5, 27, 11),
