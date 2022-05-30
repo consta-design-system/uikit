@@ -10,9 +10,14 @@ import { LibsPage } from '##/pages/LibsPage';
 import { LibPage } from '##/pages/LibPage';
 import { StandPage } from '##/pages/StandPage';
 
+import { standsAtom } from '##/modules/stands';
+
 export const App: React.FC = () => {
   const [libs] = useAtom(libsAtom);
+  const [stands] = useAtom(standsAtom);
   const route = useRoute();
+
+  console.log(stands);
 
   const routeName = route.route?.name;
   const libsLength = libs.length;

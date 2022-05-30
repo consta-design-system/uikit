@@ -5,6 +5,6 @@ import { prepareStands } from '##/exportFuctions';
 
 #stands#
 
-#paths#
+#lazyIds#
 
-export const { stands, libs } = prepareStands(standsGenerated, pathsGenerated);
+export const { stands, libs } = prepareStands(standsGenerated, lazyIds);

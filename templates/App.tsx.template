@@ -1,6 +1,0 @@
-import React from 'react';
-
-#imports#
-export const App: React.FC = () => {
-  return <div>APP</div>;
-};

@@ -1,5 +1,10 @@
 import React, { lazy, Suspense } from 'react';
 
+// import Docs from '@consta/stand/src/lazyDocs/uikit-components-attachment-stable';
+
+import { LazyDocs } from '##/componets/LazyDocs';
+import { DocLayout } from '##/componets/DocLayout';
+
 // import { Stand } from '../../../../../../src/components/Attachment/__stand__/Attachment.stand';
 // import { Stand } from '../../../../../../src/components/Attachment/__stand__/Attachment.stand.mdx';
 
@@ -16,19 +21,30 @@ export const StandPage: React.FC = () => {
     return null;
   }
 
-  // const docs = lazy(() => import(/* webpackChunkName: "[request]" */ `${rootPath}${standPath}.js`));
-  const Docs = lazy(
-    () => import(`../../../../../../src/components/Attachment/__stand__/Attachment.stand.mdx`),
-  );
+  const standID = `${standPath}`;
 
-  console.log(stand);
+  // const importPath = `${rootPath}${standPath}${standID}.stand.mdx`;
+
+  // console.log(importPath);
+  // console.log(`../../${standPath}${standID}.stand.mdx`);
+  // console.log('../../../../../../src/components/Attachment/__stand__/Attachment.stand.mdx');
+
+  // const Docs = lazy(() => import(`../../${standPath}${standID}.stand.mdx`));
+
+  // const Docs = lazy(() => import(`${rootPath}${standPath}${standID}.stand.mdx`));
+
+  // const Docs = lazy(
+  //   () => import(`../../../../../../src/components/Attachment/__stand__/Attachment.stand.mdx`),
+  // );
+
+  // const Docs = lazy(() => import(`../../lazy/${standID}.tsx`));
+  // const Docs = lazy(() => import(`../../lazy/uikit-components-attachment-stable`));
+
+  console.log(stand.path);
 
   return (
-    <div>
-      <Suspense>
-        <Docs />
-      </Suspense>
-      StandPage
-    </div>
+    <DocLayout>
+      <LazyDocs id={standID} />
+    </DocLayout>
   );
 };

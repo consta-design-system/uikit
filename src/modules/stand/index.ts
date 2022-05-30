@@ -7,7 +7,5 @@ export const standAtom = createAtom({ routerAtom, standsAtom }, ({ get }) => {
   const standId = get('routerAtom').route?.params.standId as string | undefined;
   const stand = standId ? get('standsAtom')[standId] : undefined;
 
-  console.log(get('standsAtom'));
-
   return stand;
 });
