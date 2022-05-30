@@ -1,5 +1,6 @@
 import React from 'react';
 import { MDXProvider as MDXProviderComponent } from '@mdx-js/react';
+import { default as MDXTypes } from 'mdx/types';
 import { A } from '##/componets/A/A';
 import { Blockquote } from '##/componets/Blockquote/Blockquote';
 import { Br } from '##/componets/Br/Br';
@@ -42,6 +43,12 @@ const components = {
     ul: Ul,
 }
 
-export const MDXProvider = (props: Parameters<typeof MDXProviderComponent>) => {
+type Props = {
+      components?: MDXTypes.MDXComponents | undefined;
+      disableParentContext?: boolean | undefined;
+      children?: React.ReactNode;
+}
+
+export const MDXProvider = (props: Props) => {
     return <MDXProviderComponent components={components} {...props} />
 }
