@@ -196,7 +196,7 @@ export function Playground() {
         size={size}
         sortGroup={sortGroup}
         onClickOutside={setIsOpen.off}
-        offset={8}
+        offset="xs"
         style={{ zIndex: 100 }}
       />
     </div>
