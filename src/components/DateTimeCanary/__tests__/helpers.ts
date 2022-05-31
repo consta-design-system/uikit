@@ -40,6 +40,8 @@ export const getDateTimeItemsSelected = () =>
   getRender().querySelectorAll(`.DateTimeItem_selected`);
 export const getDateTimeTogglerLabel = () =>
   getRender().querySelector(`.DateTimeToggler-Label`) as Element;
+export const getDateTimeTogglerLabels = () =>
+  getRender().querySelectorAll(`.DateTimeToggler-Label`);
 export const getColumnAllItem = (column: number) =>
   getDateTimeColumn()[column].querySelectorAll(`.${cnDateTimeItem()}`);
 export const getDateTimeColumnItem = (column: number, item: number) =>

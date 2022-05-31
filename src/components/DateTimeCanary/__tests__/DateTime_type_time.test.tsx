@@ -27,17 +27,6 @@ describe('Компонент DateTime_type_time', () => {
   });
 
   describe('проверка onChange', () => {
-    it('onChange отрабатывает при клике на месяц', () => {
-      const onChange = jest.fn();
-      renderComponent({ onChange });
-
-      const DateTimeItem = getDateTimeItem(3);
-
-      fireEvent.click(DateTimeItem);
-
-      expect(onChange).toHaveBeenCalledTimes(1);
-    });
-
     it('onChange отрабатывает в допустимом интервале', () => {
       const onChange = jest.fn();
 
@@ -72,7 +61,7 @@ describe('Компонент DateTime_type_time', () => {
       expect(onChange).toHaveBeenCalledTimes(0);
     });
 
-    it('проверка изменения часов при onChange', () => {
+    it('onChange отрабатывает при клике на часы', () => {
       const onChange = jest.fn((value) => new Date(value.value));
 
       renderComponent({
@@ -82,10 +71,11 @@ describe('Компонент DateTime_type_time', () => {
 
       const dateHoursItem = getDateTimeColumnItem(0, 11);
       fireEvent.click(dateHoursItem);
+      expect(onChange).toHaveBeenCalledTimes(1);
       expect(onChange).toHaveReturnedWith(new Date(1970, 0, 1, 11, 0, 0));
     });
 
-    it('проверка изменения минут при onChange', () => {
+    it('onChange отрабатывает при клике на минуты', () => {
       const onChange = jest.fn((value) => new Date(value.value));
 
       renderComponent({
@@ -95,10 +85,11 @@ describe('Компонент DateTime_type_time', () => {
 
       const dateMinutesItem = getDateTimeColumnItem(1, 11);
       fireEvent.click(dateMinutesItem);
+      expect(onChange).toHaveBeenCalledTimes(1);
       expect(onChange).toHaveReturnedWith(new Date(1970, 0, 1, 10, 11, 0));
     });
 
-    it('проверка изменения секунд при onChange', () => {
+    it('onChange отрабатывает при клике на секунды', () => {
       const onChange = jest.fn((value) => new Date(value.value));
 
       renderComponent({
@@ -108,10 +99,15 @@ describe('Компонент DateTime_type_time', () => {
 
       const dateSecondsItem = getDateTimeColumnItem(2, 11);
       fireEvent.click(dateSecondsItem);
+      expect(onChange).toHaveBeenCalledTimes(1);
       expect(onChange).toHaveReturnedWith(new Date(1970, 0, 1, 10, 10, 11));
     });
   });
 
+  // TODO после того как поправится баг с multiplicity
+  //  (начиная со значения 5 для multiplicityHours ожидается (0, 5, 10, 15, 20),
+  //  а для multiplicityMinutes и multiplicitySeconds начиная со значения 16 ожидается (0, 16, 32, 48),
+  //  но последних значений нет)
   describe('проверка multiplicity', () => {
     it('проверка multiplicityHours и возможности менять часы', () => {
       const onChange = jest.fn((value) => new Date(value.value));
