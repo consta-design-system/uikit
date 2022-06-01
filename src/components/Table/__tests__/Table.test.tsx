@@ -109,7 +109,7 @@ function getRows() {
 }
 
 function getFilterButtons() {
-  return screen.getAllByRole('button', { name: 'Кнопка фильтрации' });
+  return getRender().querySelectorAll(`.TableHeader-Buttons .TableFilterTooltip-Button`);
 }
 
 const renderComponent = (props: Props<Row> = defaultProps) => {
@@ -688,7 +688,7 @@ describe('Компонент Table', () => {
 
       describe('Проверка TableFilterContainer', () => {
         it('Проверка наличия title', () => {
-          render(<Table {...props} />);
+          render(<Table {...props} data-testid={testId} />);
           fireEvent.click(getFilterButtons()[0]);
           expect(screen.getByText(/название/i)).toBeInTheDocument();
         });
@@ -696,7 +696,7 @@ describe('Компонент Table', () => {
 
       describe('Проверка TableTextFilter', () => {
         it('Функционал фильтрации', () => {
-          render(<Table {...props} />);
+          render(<Table {...props} data-testid={testId} />);
           fireEvent.click(getFilterButtons()[0]);
           fireEvent.click(screen.getByRole('button', { name: /сбросить/i }));
           fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Alex' } });
@@ -712,14 +712,14 @@ describe('Компонент Table', () => {
         });
 
         it('Отсутствие данных при поиске', () => {
-          render(<Table {...props} />);
+          render(<Table {...props} data-testid={testId} />);
           fireEvent.click(getFilterButtons()[0]);
           fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Anna' } });
           expect(screen.getByText(/ничего не найдено/i)).toBeInTheDocument();
         });
 
         it('Закрытие окна фильтров без применения', () => {
-          render(<Table {...props} />);
+          render(<Table {...props} data-testid={testId} />);
           fireEvent.click(getFilterButtons()[0]);
           fireEvent.click(screen.getByRole('button', { name: /отмена/i }));
           expect(getRows()).toHaveLength(3);
@@ -734,7 +734,7 @@ describe('Компонент Table', () => {
 
       describe('Проверка TableNumberFilter', () => {
         it('Функционал фильтрации', () => {
-          render(<Table {...props} />);
+          render(<Table {...props} data-testid={testId} />);
           fireEvent.click(getFilterButtons()[1]);
           fireEvent.change(screen.getAllByRole('textbox')[0], { target: { value: 20 } });
           fireEvent.change(screen.getAllByRole('textbox')[1], { target: { value: 30 } });
@@ -746,7 +746,7 @@ describe('Компонент Table', () => {
 
       describe('Проверка TableChoiceGroupFilter', () => {
         it('Функционал фильтрации', () => {
-          render(<Table {...props} />);
+          render(<Table {...props} data-testid={testId} />);
           fireEvent.click(getFilterButtons()[2]);
           fireEvent.click(screen.getByRole('radio', { name: /france/i }));
           fireEvent.click(screen.getByRole('button', { name: /применить/i }));

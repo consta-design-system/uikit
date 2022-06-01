@@ -49,7 +49,6 @@ export const TableFilterTooltip: React.FC<Props> = ({
     <>
       <Button
         ref={buttonRef}
-        aria-label="Кнопка фильтрации"
         size="xs"
         iconSize="s"
         view="clear"
