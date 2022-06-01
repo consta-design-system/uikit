@@ -112,6 +112,10 @@ function getFilterButtons() {
   return getRender().querySelectorAll(`.TableHeader-Buttons .TableFilterTooltip-Button`);
 }
 
+function getSortButtons() {
+  return getRender().querySelectorAll(`.TableHeader-Buttons .TableHeader-Icon`);
+}
+
 const renderComponent = (props: Props<Row> = defaultProps) => {
   return render(<Table {...props} data-testid={testId} />);
 };
@@ -216,7 +220,7 @@ describe('Компонент Table', () => {
         },
       ];
       it('проверка разворачивания и сворачивания строк Table-CellsRow', () => {
-        render(<Table {...{ columns, rows }} />);
+        render(<Table {...{ columns, rows }} data-testid={testId} />);
         expect(getRows().length).toEqual(rows.length);
         expect(screen.getByText('name1')).toBeInTheDocument();
 
@@ -382,7 +386,7 @@ describe('Компонент Table', () => {
           },
         ];
 
-        render(<Table {...{ columns, rows }} />);
+        render(<Table {...{ columns, rows }} data-testid={testId} />);
         getRows().forEach((el, i) => {
           expect(el.children[1].textContent).toBe(rows[i].num.toString());
         });
@@ -401,7 +405,7 @@ describe('Компонент Table', () => {
           },
         ];
 
-        render(<Table {...{ columns, rows }} />);
+        render(<Table {...{ columns, rows }} data-testid={testId} />);
         getRows().forEach((el, i) => {
           expect(el.children[1].textContent).toBe(ascRows[i].num.toString());
         });
@@ -420,7 +424,7 @@ describe('Компонент Table', () => {
           },
         ];
 
-        render(<Table {...{ columns, rows }} />);
+        render(<Table {...{ columns, rows }} data-testid={testId} />);
         getRows().forEach((el, i) => {
           expect(el.children[1].textContent).toBe(descRows[i].num.toString());
         });
@@ -440,8 +444,8 @@ describe('Компонент Table', () => {
         },
       ];
 
-      render(<Table {...{ columns, rows }} />);
-      const button = screen.getByRole('button', { name: 'Кнопка сортировки' });
+      render(<Table {...{ columns, rows }} data-testid={testId} />);
+      const button = getSortButtons()[0];
       fireEvent.click(button);
       getRows().forEach((el, i) => {
         expect(el.children[1].textContent).toBe(ascRows[i].num.toString());
@@ -472,8 +476,8 @@ describe('Компонент Table', () => {
         },
       ];
 
-      render(<Table {...{ columns, rows }} />);
-      const button = screen.getByRole('button', { name: 'Кнопка сортировки' });
+      render(<Table {...{ columns, rows }} data-testid={testId} />);
+      const button = getSortButtons()[0];
       fireEvent.click(button);
       expect(sortFn).toHaveBeenCalled();
       getRows().forEach((el, i) => {
@@ -484,12 +488,14 @@ describe('Компонент Table', () => {
 
   describe('Проверка отсутствие строк', () => {
     it('Информация по умолчанию', () => {
-      render(<Table {...defaultProps} rows={[]} />);
+      render(<Table {...defaultProps} rows={[]} data-testid={testId} />);
       expect(screen.getByText('Нет данных')).toBeInTheDocument();
     });
 
     it('Переопределенная заглушка', () => {
-      render(<Table {...defaultProps} rows={[]} emptyRowsPlaceholder="Пусто" />);
+      render(
+        <Table {...defaultProps} rows={[]} emptyRowsPlaceholder="Пусто" data-testid={testId} />,
+      );
       expect(screen.getByText('Пусто')).toBeInTheDocument();
     });
   });
