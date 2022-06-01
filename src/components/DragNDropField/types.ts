@@ -19,6 +19,7 @@ export type DragNDropFieldPropErrorMessages = Partial<
 export type DragNDropFieldChildrenRenderProp = (
   props: {
     openFileDialog: () => void;
+    locale: Required<DragNDropFieldPropLocale>;
   } & Pick<DragNDropFieldProps, 'accept' | 'maxSize' | 'multiple'>,
 ) => React.ReactNode;
 

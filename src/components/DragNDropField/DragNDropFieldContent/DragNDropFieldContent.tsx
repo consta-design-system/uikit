@@ -7,6 +7,7 @@ import { cn } from '../../../utils/bem';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 import { DragNDropFieldChildrenRenderProp } from '../DragNDropField';
+import { getText } from '../locale';
 
 import { formatFileRequirements } from './formatFileRequirements';
 
@@ -17,14 +18,15 @@ export const DragNDropFieldContent: DragNDropFieldChildrenRenderProp = ({
   maxSize,
   multiple,
   openFileDialog,
+  locale,
 }) => {
   const requirements = formatFileRequirements(accept, maxSize);
-  const fileText = multiple ? 'файлы' : 'файл';
+  const fileText = multiple ? locale.files : locale.file;
 
   return (
     <>
       <Text view="secondary" size="s" lineHeight="s" align="center">
-        Перетащите {fileText} сюда или&nbsp;загрузите по&nbsp;кнопке
+        {getText(locale['call-to-action'], { fileText })}
         {requirements && (
           <>
             <br />
@@ -34,7 +36,7 @@ export const DragNDropFieldContent: DragNDropFieldChildrenRenderProp = ({
       </Text>
       <Button
         className={cnDragNDropFieldContent('Button')}
-        label={`Выбрать ${fileText}`}
+        label={getText(locale['action-button'], { fileText })}
         iconLeft={IconAttach}
         view="ghost"
         size="s"

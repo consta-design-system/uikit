@@ -22,7 +22,7 @@ const getErrorMessage = (
   const message = locale[code];
 
   if (!isNotNil(message)) {
-    return NO_MESSAGE;
+    return file ? `${file.name}: ${locale['general-error']}` : NO_MESSAGE;
   }
 
   if (file) {
@@ -57,7 +57,8 @@ export const getErrorsList = (
   }
 
   if (isNotNil(errorsList.find((text) => text === NO_MESSAGE))) {
-    const list = errorsList.filter((text) => text === NO_MESSAGE);
+    const list = errorsList.filter((text) => text !== NO_MESSAGE);
+
     list.unshift(locale['general-error']);
     return list;
   }

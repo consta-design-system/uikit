@@ -7,15 +7,11 @@ import { DragNDropField } from '../../../DragNDropField';
 export const DragNDropFieldExampleErrorMessages = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <div>
-        <DragNDropField
-          onDropFiles={(files) => console.log(files)}
-          maxSize={10}
-          errorMessages={{
-            'file-too-large': 'Ой! Похоже этот файл слишком большой',
-          }}
-        />
-      </div>
+      <DragNDropField
+        onDropFiles={(files) => console.log(files)}
+        maxSize={10}
+        locale={{ 'file-too-large': ({ file }) => `Ой! Похоже ${file.name} слишком большой` }}
+      />
     </StoryBookExample>
   );
 };

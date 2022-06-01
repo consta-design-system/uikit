@@ -1,4 +1,4 @@
-import { isDefined, isNotNil } from '../../utils/type-guards';
+import { isDefined, isNotNil, isString } from '../../utils/type-guards';
 
 import { formatFileSize } from './formatFileSize';
 import { FileSizes } from './types';
@@ -21,13 +21,9 @@ export type Locale = {
   'kilobyte'?: string;
   'byte'?: string;
   'max'?: string;
-  'call-to-action': LocaleLabel;
+  'call-to-action'?: LocaleLabel;
+  'action-button'?: LocaleLabel;
 };
-
-// { value: 1024 * 1024 * 1024, name: 'Гб' },
-// { value: 1024 * 1024, name: 'Мб' },
-// { value: 1024, name: 'Кб' },
-// { value: 1, name: 'байт' },
 
 export const defaultLocale: Required<Locale> = {
   'file-invalid-type': (props) =>
@@ -35,9 +31,9 @@ export const defaultLocale: Required<Locale> = {
       .filter(isNotNil)
       .join(' '),
   'file-too-large': (props) =>
-    `файл слишком большой (максимум ${formatFileSize(props.sizes.maxSize ?? 0)})`,
+    `файл слишком большой (максимум ${formatFileSize(props.sizes.maxSize ?? 0, defaultLocale)})`,
   'file-too-small': (props) =>
-    `файл слишком маленький (минимум ${formatFileSize(props.sizes.minSize ?? 0)})`,
+    `файл слишком маленький (минимум ${formatFileSize(props.sizes.minSize ?? 0, defaultLocale)})`,
   'too-many-files': 'Вы перетащили несколько файлов. Выберите один, пожалуйста',
   'general-error': 'не получилось добавить файл',
   'fit-files': 'Подходят файлы',
@@ -50,6 +46,11 @@ export const defaultLocale: Required<Locale> = {
   'kilobyte': 'Кб',
   'byte': 'байт',
   'call-to-action': (props) => `Перетащите ${props.fileText} сюда или загрузите по кнопке`,
+  'action-button': (props) => `Выбрать ${props.fileText}`,
+};
+
+export const getText = <PROPS>(textOrFn: string | ((props: PROPS) => string), props: PROPS) => {
+  return isString(textOrFn) ? textOrFn : textOrFn(props);
 };
 
 export const withdefaultLocale = (locale?: Locale): Required<Locale> =>

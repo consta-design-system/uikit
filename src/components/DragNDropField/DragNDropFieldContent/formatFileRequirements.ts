@@ -12,14 +12,14 @@ export const formatFileRequirements = (
     const formattedAccept = Array.isArray(accept) ? accept.join(', ') : accept;
     return [
       `${locale['fit-files']} ${formattedAccept}`,
-      maxSize ? `${locale.before} ${formatFileSize(maxSize)}` : null,
+      maxSize ? `${locale.before} ${formatFileSize(maxSize, locale)}` : null,
     ]
       .filter(isNotNil)
       .join(', ');
   }
 
   if (maxSize) {
-    return `${locale.max} ${formatFileSize(maxSize)}`;
+    return `${locale.max} ${formatFileSize(maxSize, locale)}`;
   }
 
   return undefined;

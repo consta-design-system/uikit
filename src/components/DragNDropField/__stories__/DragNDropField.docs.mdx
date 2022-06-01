@@ -198,10 +198,11 @@ export function MyComponent() {
 - подскажет, что [тип файла не подходит](#типы-файлов),
 - или что [можно загрузить только один файл](#один-или-несколько).
 
-## Текст ошибок
+## Локализация
 
-Вы можете определить собственный текст для каждой, отдельно взятой ошибки.
-Чтобы сделать это вам необходимо определить свойство `errorMessages`
+Вы можете определить собственный текст.
+Чтобы сделать это вам необходимо определить свойство `locale`
+В примере ниже переобпределенеие текста ошибки.
 
 <DragNDropFieldExampleErrorMessages />
 
@@ -211,9 +212,7 @@ export const DragNDropFieldExampleErrorMessages = () => {
     <DragNDropField
       onDropFiles={(files) => console.log(files)}
       maxSize={10}
-      errorMessages={{
-        'file-too-large': 'Ой! Похоже этот файл слишком большой',
-      }}
+      locale={{ 'file-too-large': ({ file }) => `Ой! Похоже ${file.name} слишком большой` }}
     />
   );
 };
@@ -236,14 +235,33 @@ export type FileError = {
 export type DragNDropFieldPropErrorMessages = Partial<
   Record<FileError['code'], string | ((file: File | undefined, error?: FileError) => string)>
 >;
+
+export type Locale = {
+  'file-invalid-type'?: LocaleError;
+  'file-too-large'?: LocaleError;
+  'file-too-small'?: LocaleError;
+  'too-many-files'?: string;
+  'general-error'?: string;
+  'fit-files'?: string;
+  'file'?: string;
+  'files'?: string;
+  'before'?: string;
+  'gigabyte'?: string;
+  'megabyte'?: string;
+  'kilobyte'?: string;
+  'byte'?: string;
+  'max'?: string;
+  'call-to-action': LocaleLabel;
+  'action-button': LocaleLabel;
+};
 ```
 
 | Свойство                                    | Тип                                                                                   | По умолчанию | Описание                                                                                                                                      |
 | ------------------------------------------- | ------------------------------------------------------------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`multiple?`](#один-или-несколько)          | `boolean`                                                                             | `false`      | Можно ли выбирать сразу несколько файлов (см. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#attr-multiple))      |
 | [`accept?`](#типы-файлов)                   | `string` &#124; `string[]`                                                            | -            | Список разрешённых типов файлов (см. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers)) |
-| [`errorMessages?`](#типы-файлов)            | `DragNDropFieldPropErrorMessages`                                                     | -            | Список кастомных ошибок                                                                                                                       |
 | [`maxSize?`](#размер-файла)                 | `number`                                                                              | -            | Максимальный размер файла в байтах                                                                                                            |
 | [`onDropFiles`](#обработка-загрузки-файлов) | `(files: File[]) => void`                                                             | -            | Обработчик события выбора файлов                                                                                                              |
 | [`children?`](#содержимое)                  | `React.ReactNode` &#124; `(props: { openFileDialog: () => void }) => React.ReactNode` | -            | Дочерние элементы                                                                                                                             |
+| `locale?`                                   | `Locale`                                                                              | -            | Локализация                                                                                                                                   |
 | `ref?`                                      | `React.Ref<HTMLDivElement>`                                                           | -            | Ссылка на корневой DOM-элемент компонента                                                                                                     |
