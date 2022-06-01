@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import { DateTime, DateTimeProps, dateTimePropView } from '../DateTimeCanary';
 
@@ -150,49 +150,126 @@ describe('Компонент DateTime_type_year', () => {
   });
 
   describe('проверка onChange', () => {
-    it('onChange отрабатывает при клике на год', () => {
-      const handleClick = jest.fn();
-      renderComponent({ onChange: handleClick, currentVisibleDate: new Date(1970, 0) });
+    dateTimePropView.forEach((view) => {
+      it(`onChange отрабатывает при клике на год для view=${view}`, () => {
+        const handleClick = jest.fn((value) => new Date(value.value));
+        renderComponent({
+          onChange: handleClick,
+          view,
+          currentVisibleDate: new Date(1970, 0),
+        });
 
-      const DateTimeItem = getDateTimeItem(3);
+        const DateTimeItem = getDateTimeItem(3);
 
-      fireEvent.click(DateTimeItem);
+        fireEvent.click(DateTimeItem);
 
-      expect(handleClick).toHaveBeenCalledTimes(1);
+        expect(handleClick).toHaveBeenCalledTimes(1);
+        expect(handleClick).toHaveReturnedWith(new Date(1972, 0));
+      });
     });
 
-    it('onChange отрабатывает в допустимом интервале', () => {
-      const handleClick = jest.fn();
+    dateTimePropView.forEach((view) => {
+      it(`onChange отрабатывает в допустимом интервале для view=${view}`, () => {
+        const handleClick = jest.fn();
 
-      renderComponent({
-        onChange: handleClick,
-        currentVisibleDate: new Date(1970, 0),
-        minDate: new Date(1971, 3, 0),
-        maxDate: new Date(1975, 5, 0),
+        renderComponent({
+          onChange: handleClick,
+          view,
+          currentVisibleDate: new Date(1970, 0),
+          minDate: new Date(1971, 3, 0),
+          maxDate: new Date(1975, 5, 0),
+        });
+
+        const DateTimeItem = getDateTimeItem(3);
+
+        fireEvent.click(DateTimeItem);
+
+        expect(handleClick).toHaveBeenCalledTimes(1);
       });
-
-      const DateTimeItem = getDateTimeItem(3);
-
-      fireEvent.click(DateTimeItem);
-
-      expect(handleClick).toHaveBeenCalledTimes(1);
     });
 
-    it('onChange не отрабатывает вне допустимого интервала', () => {
-      const handleClick = jest.fn();
+    dateTimePropView.forEach((view) => {
+      it(`onChange не отрабатывает вне допустимого интервала для view=${view}`, () => {
+        const handleClick = jest.fn();
 
-      renderComponent({
-        onChange: handleClick,
-        currentVisibleDate: new Date(1970, 0),
-        minDate: new Date(1971, 3, 0),
-        maxDate: new Date(1975, 5, 0),
+        renderComponent({
+          onChange: handleClick,
+          view,
+          currentVisibleDate: new Date(1970, 0),
+          minDate: new Date(1971, 3, 0),
+          maxDate: new Date(1975, 5, 0),
+        });
+
+        const DateTimeItem = getDateTimeItem(1);
+
+        fireEvent.click(DateTimeItem);
+
+        expect(handleClick).toHaveBeenCalledTimes(0);
       });
+    });
 
-      const DateTimeItem = getDateTimeItem(1);
+    dateTimePropView.forEach((view) => {
+      it(`проверка смены даты при изменении года через DateTimeToggler-Button_direction_next для view=${view}`, () => {
+        const onChange = jest.fn((value) => new Date(value.value));
+        renderComponent({
+          value: new Date(1970, 0),
+          view,
+          onChange,
+        });
 
-      fireEvent.click(DateTimeItem);
+        if (view === 'slider') {
+          const nextButton = getDateTimeSliderButtonNext();
+          fireEvent.click(nextButton);
+          expect(screen.getByText('2070 - 2079')).toBeInTheDocument();
+          expect(screen.getByText('2080 - 2089')).toBeInTheDocument();
 
-      expect(handleClick).toHaveBeenCalledTimes(0);
+          const newCurrentValue = getDateTimeItem(1);
+          fireEvent.click(newCurrentValue);
+          expect(onChange).toHaveReturnedWith(new Date(2070, 0));
+        } else {
+          expect(screen.getByText('1970 - 1979')).toBeInTheDocument();
+
+          const nextButton = getDateTimeTooglerButtonNext();
+          fireEvent.click(nextButton);
+          expect(screen.getByText('1980 - 1989')).toBeInTheDocument();
+
+          const newCurrentValue = getDateTimeItem(1);
+          fireEvent.click(newCurrentValue);
+          expect(onChange).toHaveReturnedWith(new Date(1980, 0));
+        }
+      });
+    });
+
+    dateTimePropView.forEach((view) => {
+      it(`проверка смены даты при изменении года через DateTimeToggler-Button_direction_prev для view=${view}`, () => {
+        const onChange = jest.fn((value) => new Date(value.value));
+        renderComponent({
+          value: new Date(1970, 0),
+          view,
+          onChange,
+        });
+
+        if (view === 'slider') {
+          const prevButton = getDateTimeSliderButtonPrev();
+          fireEvent.click(prevButton);
+          expect(screen.getByText('1870 - 1879')).toBeInTheDocument();
+          expect(screen.getByText('1880 - 1889')).toBeInTheDocument();
+
+          const newCurrentValue = getDateTimeItem(1);
+          fireEvent.click(newCurrentValue);
+          expect(onChange).toHaveReturnedWith(new Date(1870, 0));
+        } else {
+          expect(screen.getByText('1970 - 1979')).toBeInTheDocument();
+
+          const prevButton = getDateTimeTooglerButtonPrev();
+          fireEvent.click(prevButton);
+          expect(screen.getByText('1960 - 1969')).toBeInTheDocument();
+
+          const newCurrentValue = getDateTimeItem(1);
+          fireEvent.click(newCurrentValue);
+          expect(onChange).toHaveReturnedWith(new Date(1960, 0));
+        }
+      });
     });
   });
 });

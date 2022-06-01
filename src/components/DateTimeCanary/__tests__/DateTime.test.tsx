@@ -32,8 +32,25 @@ describe('Компонент DateTime', () => {
         it(`className присваевается при type="${type}" view="${view}"`, () => {
           const className = 'className';
 
-          renderComponent({ className });
+          renderComponent({ className, type, view });
           expect(getRender()).toHaveClass(className);
+        });
+      });
+    });
+  });
+
+  describe('проверка ref', () => {
+    dateTimePropType.forEach((type) => {
+      dateTimePropView.forEach((view) => {
+        it(`добавление аттрибута с помощью ref при type="${type}" view="${view}"`, () => {
+          const refAttrName = 'data-test-ref';
+          const refAttrValue = 'test-ref';
+          const ref = { current: null } as React.RefObject<HTMLDivElement>;
+          renderComponent({ type, view, ref });
+          if (ref.current) {
+            ref.current.setAttribute(refAttrName, refAttrValue);
+          }
+          expect(getRender()).toHaveAttribute(refAttrName, refAttrValue);
         });
       });
     });
