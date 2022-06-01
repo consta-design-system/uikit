@@ -18,6 +18,7 @@ import {
   DragNDropFieldExampleMultipleError,
 } from './examples/DragNDropFieldExampleMultiple/DragNDropFieldExampleMultiple';
 import { DragNDropFieldExampleOnDropFiles } from './examples/DragNDropFieldExampleOnDropFiles/DragNDropFieldExampleOnDropFiles';
+import { DragNDropFieldExampleErrorMessages } from './examples/DragNDropFieldExampleErrorMessages/DragNDropFieldExampleErrorMessages';
 
 <!--info
 description: Можно перетащить файлы, чтобы загрузить или отправить.
@@ -45,6 +46,7 @@ import { DragNDropField } from '@consta/uikit/DragNDropField';
 - [Размер файла](#размер-файла)
 - [Обработка загрузки файлов](#обработка-загрузки-файлов)
 - [Обработка ошибок](#обработка-ошибок)
+- [Текст ошибок](#текст-ошибок)
 - [Импорт](#импорт)
 - [Свойства](#свойства)
 
@@ -196,6 +198,26 @@ export function MyComponent() {
 - подскажет, что [тип файла не подходит](#типы-файлов),
 - или что [можно загрузить только один файл](#один-или-несколько).
 
+## Локализация
+
+Вы можете определить собственный текст.
+Чтобы сделать это вам необходимо определить свойство `locale`
+В примере ниже переобпределенеие текста ошибки.
+
+<DragNDropFieldExampleErrorMessages />
+
+```tsx
+export const DragNDropFieldExampleErrorMessages = () => {
+  return (
+    <DragNDropField
+      onDropFiles={(files) => console.log(files)}
+      maxSize={10}
+      locale={{ 'file-too-large': ({ file }) => `Ой! Похоже ${file.name} слишком большой` }}
+    />
+  );
+};
+```
+
 ## Импорт
 
 ```tsx
@@ -204,6 +226,36 @@ import { DragNDropField } from '@consta/uikit/DragNDropField';
 
 ## Свойства
 
+```tsx
+export type FileError = {
+  message: string;
+  code: 'file-too-large' | 'file-too-small' | 'too-many-files' | 'file-invalid-type' | string;
+};
+
+export type DragNDropFieldPropErrorMessages = Partial<
+  Record<FileError['code'], string | ((file: File | undefined, error?: FileError) => string)>
+>;
+
+export type Locale = {
+  'file-invalid-type'?: LocaleError;
+  'file-too-large'?: LocaleError;
+  'file-too-small'?: LocaleError;
+  'too-many-files'?: string;
+  'general-error'?: string;
+  'fit-files'?: string;
+  'file'?: string;
+  'files'?: string;
+  'before'?: string;
+  'gigabyte'?: string;
+  'megabyte'?: string;
+  'kilobyte'?: string;
+  'byte'?: string;
+  'max'?: string;
+  'call-to-action': LocaleLabel;
+  'action-button': LocaleLabel;
+};
+```
+
 | Свойство                                    | Тип                                                                                   | По умолчанию | Описание                                                                                                                                      |
 | ------------------------------------------- | ------------------------------------------------------------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`multiple?`](#один-или-несколько)          | `boolean`                                                                             | `false`      | Можно ли выбирать сразу несколько файлов (см. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#attr-multiple))      |
@@ -211,4 +263,5 @@ import { DragNDropField } from '@consta/uikit/DragNDropField';
 | [`maxSize?`](#размер-файла)                 | `number`                                                                              | -            | Максимальный размер файла в байтах                                                                                                            |
 | [`onDropFiles`](#обработка-загрузки-файлов) | `(files: File[]) => void`                                                             | -            | Обработчик события выбора файлов                                                                                                              |
 | [`children?`](#содержимое)                  | `React.ReactNode` &#124; `(props: { openFileDialog: () => void }) => React.ReactNode` | -            | Дочерние элементы                                                                                                                             |
+| `locale?`                                   | `Locale`                                                                              | -            | Локализация                                                                                                                                   |
 | `ref?`                                      | `React.Ref<HTMLDivElement>`                                                           | -            | Ссылка на корневой DOM-элемент компонента                                                                                                     |

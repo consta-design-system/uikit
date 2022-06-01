@@ -11,20 +11,8 @@ import { Text } from '../Text/Text';
 import { DragNDropFieldContent } from './DragNDropFieldContent/DragNDropFieldContent';
 import { DragNDropFieldTooltip } from './DragNDropFieldTooltip/DragNDropFieldTooltip';
 import { getErrorsList } from './getErrorsList';
-
-export type DragNDropFieldProps = {
-  accept?: string | string[];
-  maxSize?: number;
-  multiple?: boolean;
-  onDropFiles: (files: File[]) => void;
-  children?: React.ReactNode | DragNDropFieldChildrenRenderProp;
-};
-
-export type DragNDropFieldChildrenRenderProp = (
-  props: {
-    openFileDialog: () => void;
-  } & Pick<DragNDropFieldProps, 'accept' | 'maxSize' | 'multiple'>,
-) => React.ReactNode;
+import { withdefaultLocale } from './locale';
+import { DragNDropFieldChildrenRenderProp, DragNDropFieldProps } from './types';
 
 const cnDragNDropField = cn('DragNDropField');
 
@@ -40,7 +28,10 @@ export const DragNDropField = React.forwardRef<HTMLDivElement, DragNDropFieldPro
       multiple = false,
       onDropFiles,
       children = DragNDropFieldContent,
+      locale: localeProp,
     } = usePropsHandler(COMPONENT_NAME, props, dragNDropFieldRef);
+
+    const locale = withdefaultLocale(localeProp);
 
     const handleDrop: DropzoneOptions['onDrop'] = React.useCallback(
       (acceptedFiles) => acceptedFiles.length > 0 && onDropFiles(acceptedFiles),
@@ -73,9 +64,12 @@ export const DragNDropField = React.forwardRef<HTMLDivElement, DragNDropFieldPro
     });
 
     const content = isRenderProp(children)
-      ? children({ accept, maxSize, multiple, openFileDialog: open })
+      ? children({ accept, maxSize, multiple, openFileDialog: open, locale })
       : children;
-    const errors = React.useMemo(() => getErrorsList(fileRejections), [fileRejections]);
+
+    const errors = React.useMemo(() => getErrorsList(fileRejections, { maxSize }, locale), [
+      fileRejections,
+    ]);
 
     return (
       <>
@@ -98,3 +92,5 @@ export const DragNDropField = React.forwardRef<HTMLDivElement, DragNDropFieldPro
 const isRenderProp = (
   children: React.ReactNode | DragNDropFieldChildrenRenderProp,
 ): children is DragNDropFieldChildrenRenderProp => typeof children === 'function';
+
+export * from './types';
