@@ -465,7 +465,7 @@ const rowsForMultiLevelHeadersData = [
   },
 ];
 
-const expandableRowsData = [
+export const expandableRowsData = [
   {
     id: 'row1',
     field: 'Северное',

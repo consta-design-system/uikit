@@ -288,6 +288,7 @@ const InternalTable = <T extends TableRow>(
     onFiltersUpdated,
     getTagLabel,
     isExpandedRowsByDefault = false,
+    ...otherProps
   } = props;
   const {
     headers,
@@ -715,6 +716,7 @@ const InternalTable = <T extends TableRow>(
 
   return (
     <div
+      {...otherProps}
       ref={useForkRef([tableRef, ref])}
       className={cnTable(
         {
