@@ -1,27 +1,26 @@
 import React from 'react';
 import { MDXProvider as MDXProviderComponent } from '@mdx-js/react';
-import { default as MDXTypes } from 'mdx/types';
-import { A } from '##/componets/A/A';
-import { Blockquote } from '##/componets/Blockquote/Blockquote';
-import { Br } from '##/componets/Br/Br';
-import { Code } from '##/componets/Code/Code';
-import { Em } from '##/componets/Em/Em';
-import { H1 } from '##/componets/H1/H1';
-import { H2 } from '##/componets/H2/H2';
-import { H3 } from '##/componets/H3/H3';
-import { H4 } from '##/componets/H4/H4';
-import { H5 } from '##/componets/H5/H5';
-import { H6 } from '##/componets/H6/H6';
-import { Hr } from '##/componets/Hr/Hr';
-import { Img } from '##/componets/Img/Img';
-import { Li } from '##/componets/Li/Li';
-import { Ol } from '##/componets/Ol/Ol';
-import { P } from '##/componets/P/P';
-import { Pre } from '##/componets/Pre/Pre';
-import { Strong } from '##/componets/Strong/Strong';
-import { Ul } from '##/componets/Ul/Ul';
+import { A } from '##/typography/A/A';
+import { Blockquote } from '##/typography/Blockquote/Blockquote';
+import { Br } from '##/typography/Br/Br';
+import { Code } from '##/typography/Code/Code';
+import { Em } from '##/typography/Em/Em';
+import { H1 } from '##/typography/H1/H1';
+import { H2 } from '##/typography/H2/H2';
+import { H3 } from '##/typography/H3/H3';
+import { H4 } from '##/typography/H4/H4';
+import { H5 } from '##/typography/H5/H5';
+import { H6 } from '##/typography/H6/H6';
+import { Hr } from '##/typography/Hr/Hr';
+import { Img } from '##/typography/Img/Img';
+import { Li } from '##/typography/Li/Li';
+import { Ol } from '##/typography/Ol/Ol';
+import { P } from '##/typography/P/P';
+import { Pre } from '##/typography/Pre/Pre';
+import { Strong } from '##/typography/Strong/Strong';
+import { Ul } from '##/typography/Ul/Ul';
 
-const components = {
+export const components = {
     a: A,
     blockquote: Blockquote,
     br: Br,
@@ -35,6 +34,8 @@ const components = {
     h6: H6,
     hr: Hr,
     img: Img,
+    b: Strong,
+    i: Em,
     li: Li,
     ol: Ol,
     p: P,
@@ -44,11 +45,10 @@ const components = {
 }
 
 type Props = {
-      components?: MDXTypes.MDXComponents | undefined;
-      disableParentContext?: boolean | undefined;
-      children?: React.ReactNode;
+    disableParentContext?: boolean;
+    children?: React.ReactNode;
 }
 
 export const MDXProvider = (props: Props) => {
-    return <MDXProviderComponent components={components} {...props} />
+    return <MDXProviderComponent {...props} components={components} />
 }
