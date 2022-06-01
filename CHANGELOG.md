@@ -1,5 +1,25 @@
 # Changelog
 
+## v3.24.1 (01/06/2022)
+Самое важное:
+- В `DragNDropField` добавили возможность локализации
+- Обновили тесты для `Table`, `DateTime`, `useKeys`, `Select`
+- Обновили документацию
+
+---
+
+- [test(Table): add tests to Table (#2330)](https://github.com/consta-design-system/uikit/commit/653998a80a4b3c50c31bf2605b90a7de5c6dd96c) - [@vebessonova](https://github.com/vebessonova)
+- [feat(DragNDropField): add locale (#2314)](https://github.com/consta-design-system/uikit/commit/35ff97c63b41034712db1d208b208b029691d0f5) - [@N1MBER](https://github.com/N1MBER)
+- [docs(Responses): add link to gpn-responses (#2346)](https://github.com/consta-design-system/uikit/commit/9eac0e09dc82199b959b3736bab4661620238d3d) - [@arhayka](https://github.com/arhayka)
+- [docs(Table): add links to other tables (#2345)](https://github.com/consta-design-system/uikit/commit/d8e4de56d5ff1f22027e3621297d6819b6a58abc) - [@arhayka](https://github.com/arhayka)
+- [docs(Header): add links to other headers (#2344)](https://github.com/consta-design-system/uikit/commit/0800da60c7a248ee79135de12f9c921763dccb28) - [@arhayka](https://github.com/arhayka)
+- [test(DateTime): add tests to DateTime (#2337)](https://github.com/consta-design-system/uikit/commit/1964cb7cf30e286c0fd4f274406edaa57209e767) - [@loel001](https://github.com/loel001)
+- [test(useKeys): add tests to useKeys (#2328)](https://github.com/consta-design-system/uikit/commit/513d786d923d0369af0819bda3098bdb9f61385f) - [@loel001](https://github.com/loel001)
+- [test(Select): add tests to Select (#2329)](https://github.com/consta-design-system/uikit/commit/50d9f45273c78313c8696ebdc5786d2443d625d4) - [@loel001](https://github.com/loel001)
+- [fix(Popover): fixed change position (#2335)](https://github.com/consta-design-system/uikit/commit/2503a1c455182ef4954d8589a1ae07429f941ab8) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v3.24.0 (25/05/2022)
 - Добавили RadioGroup(Canary), ChoiceGroup(Canary), CheckBoxGroup(Canary), SwichGroup(Canary) и Tabs(Canary). Всё те же компоненты, только теперь без обязательных геттеров
 - Доработали документацию
@@ -484,19 +504,3 @@ endFieldOnBlur - deleted, use onBlur
 - [feat(Avatar): add L size (#1760)](https://github.com/gazprom-neft/consta-uikit/commit/90e450d68b04b5ec0922cb7acd999aaebc94c505) - [@gizeasy](https://github.com/gizeasy)
 - [chore(deps): bump ws from 5.2.2 to 5.2.3 (#1749)](https://github.com/gazprom-neft/consta-uikit/commit/daf297c71c9ef641a3a44db9d4c15a63ccab2d6e) - [@dependabot[bot]](https://github.com/dependabot[bot])
 - [feat(Table): added hidden prop to table column (#1732)](https://github.com/gazprom-neft/consta-uikit/commit/09605ec9744428a1b8de4a158605e3660a2d3d86) - [@SergeyKatugin](https://github.com/SergeyKatugin)
-
---------------------
-
-## v3.9.2 (10/11/2021)
-Важное из обновления:
-- Дополнили документацию по компонентам `ProgressStepBar` и `TextField`
-- Добавили таблицу возможность указывать минимальную ширину столбца.
-- Исправили баг с отображением "Не найдено" в `Combobox`
-
----
-- [chore(storybook): automatic assembly of overview page (#1676)](https://github.com/gazprom-neft/consta-uikit/commit/cd5d4cf84b3f20f806345a211d8301f9a0c574ff) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Table): add minColumnWidth prop (#1727)](https://github.com/gazprom-neft/consta-uikit/commit/e9f8d2ca70779e11f38f147fe7490e475f794b1e) - [@vlzelensky](https://github.com/vlzelensky)
-- [docs(TextField): review docs, add type=number (#1725)](https://github.com/gazprom-neft/consta-uikit/commit/3eeb425b7ac563f60c16071888d42af114340a8d) - [@arhayka](https://github.com/arhayka)
-- [fix(Combobox): fix bug with notFoundLabel (#1728)](https://github.com/gazprom-neft/consta-uikit/commit/8857af9aced15b304a915778ff203abbbbbdbc98) - [@N1MBER](https://github.com/N1MBER)
-- [fix(ContextMenu): edit getOnClick type (#1722)](https://github.com/gazprom-neft/consta-uikit/commit/000c969fb97c4ae45e265611119785e71f897b21) - [@gizeasy](https://github.com/gizeasy)
-- [docs(ProgressStepBar): edit docs, add examples (#1703)](https://github.com/gazprom-neft/consta-uikit/commit/e0b1b91c27d52e838a16ba89eac883b68b54f097) - [@arhayka](https://github.com/arhayka)
