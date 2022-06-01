@@ -104,9 +104,9 @@ describe('Компонент DateTime_type_time', () => {
     });
   });
 
-  // TODO после того как поправится баг с multiplicity
+  // TODO после того как поправится баг с multiplicity проверить тест со значениями начиная от 5
   //  (начиная со значения 5 для multiplicityHours ожидается (0, 5, 10, 15, 20),
-  //  а для multiplicityMinutes и multiplicitySeconds начиная со значения 16 ожидается (0, 16, 32, 48),
+  //  а для multiplicityMinutes и multiplicitySeconds начиная со значения 7 ожидается (0, 7, 14, 21, 28, 35, 42, 49, 56),
   //  но последних значений нет)
   describe('проверка multiplicity', () => {
     it('проверка multiplicityHours и возможности менять часы', () => {

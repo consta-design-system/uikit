@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { fireEvent, render } from '@testing-library/react';
+import faIRLocale from 'date-fns/locale/fa-IR';
 
 import { DateTime, DateTimeProps, dateTimePropView } from '../DateTimeCanary';
 
@@ -150,243 +151,226 @@ describe('Компонент DateTime_type_month', () => {
   });
 
   describe('проверка onChange', () => {
-    it('onChange отрабатывает при клике на месяц', () => {
-      const handleClick = jest.fn();
-      renderComponent({ onChange: handleClick, currentVisibleDate: new Date(1970, 0) });
+    dateTimePropView.forEach((view) => {
+      it(`onChange отрабатывает при клике на месяц при view="${view}"`, () => {
+        const handleClick = jest.fn(({ value }) => new Date(value));
+        renderComponent({
+          onChange: handleClick,
+          currentVisibleDate: new Date(1970, 0),
+          view,
+        });
 
-      const DateTimeItem = getDateTimeItem(3);
+        const DateTimeItem = getDateTimeItem(3);
+        fireEvent.click(DateTimeItem);
 
-      fireEvent.click(DateTimeItem);
-
-      expect(handleClick).toHaveBeenCalledTimes(1);
+        expect(handleClick).toHaveBeenCalledTimes(1);
+        expect(handleClick).toHaveReturnedWith(new Date(1970, 3));
+      });
     });
 
-    it('onChange отрабатывает в допустимом интервале', () => {
-      const handleClick = jest.fn();
+    dateTimePropView.forEach((view) => {
+      it(`onChange отрабатывает в допустимом интервале при view="${view}"`, () => {
+        const handleClick = jest.fn();
 
-      renderComponent({
-        onChange: handleClick,
-        currentVisibleDate: new Date(1970, 0),
-        minDate: new Date(1970, 3, 0),
-        maxDate: new Date(1970, 5, 0),
+        renderComponent({
+          onChange: handleClick,
+          currentVisibleDate: new Date(1970, 0),
+          minDate: new Date(1970, 3, 0),
+          maxDate: new Date(1970, 5, 0),
+          view,
+        });
+
+        const DateTimeItem = getDateTimeItem(3);
+        fireEvent.click(DateTimeItem);
+
+        expect(handleClick).toHaveBeenCalledTimes(1);
       });
-
-      const DateTimeItem = getDateTimeItem(3);
-
-      fireEvent.click(DateTimeItem);
-
-      expect(handleClick).toHaveBeenCalledTimes(1);
     });
 
-    it('onChange не отрабатывает вне допустимого интервала', () => {
-      const handleClick = jest.fn();
+    dateTimePropView.forEach((view) => {
+      it(`onChange не отрабатывает вне допустимого интервала при view="${view}"`, () => {
+        const handleClick = jest.fn();
 
-      renderComponent({
-        onChange: handleClick,
-        currentVisibleDate: new Date(1970, 0),
-        minDate: new Date(1970, 3, 0),
-        maxDate: new Date(1970, 5, 0),
+        renderComponent({
+          onChange: handleClick,
+          currentVisibleDate: new Date(1970, 0),
+          minDate: new Date(1970, 3, 0),
+          maxDate: new Date(1970, 5, 0),
+          view,
+        });
+
+        const DateTimeItem = getDateTimeItem(1);
+        fireEvent.click(DateTimeItem);
+
+        expect(handleClick).toHaveBeenCalledTimes(0);
       });
-
-      const DateTimeItem = getDateTimeItem(1);
-
-      fireEvent.click(DateTimeItem);
-
-      expect(handleClick).toHaveBeenCalledTimes(0);
     });
   });
 
-  dateTimePropView.forEach((view) => {
-    it(`проверка изменения value при клике на месяц для view=${view} onChange'`, () => {
-      const onChange = jest.fn(({ value }) => new Date(value));
-      renderComponent({
-        value: new Date(1970, 0, 1),
-        view,
-        onChange,
+  describe('проверка onChangeRange', () => {
+    dateTimePropView.forEach((view) => {
+      it(`onChangeRange отрабатывает при клике на месяц при view="${view}"`, () => {
+        const onChangeRange = jest.fn(({ value }) => [
+          value[0] ? new Date(value[0]) : null,
+          value[1] ? new Date(value[1]) : null,
+        ]);
+        renderComponent({
+          currentVisibleDate: new Date(1970, 0),
+          view,
+          onChangeRange,
+        });
+
+        const newCurrentValueStart = getDateTimeItem(3);
+        fireEvent.click(newCurrentValueStart);
+
+        const newCurrentValueEnd = getDateTimeItem(5);
+        fireEvent.click(newCurrentValueEnd);
+
+        expect(onChangeRange).toHaveBeenCalledTimes(2);
+        expect(onChangeRange).toHaveNthReturnedWith(1, [new Date(1970, 3), null]);
+        expect(onChangeRange).toHaveNthReturnedWith(2, [new Date(1970, 5), null]);
       });
-      const currentValue = getDateTimeItem(0);
-      expect(currentValue).toHaveTextContent('янв');
-
-      const newCurrentValue = getDateTimeItem(3);
-      fireEvent.click(newCurrentValue);
-
-      expect(onChange).toHaveBeenCalled();
-
-      expect(onChange).toHaveBeenCalledTimes(1);
-
-      expect(onChange).toHaveReturnedWith(new Date(1970, 3));
     });
   });
 
-  dateTimePropView.forEach((view) => {
-    it(`проверка изменения value при клике на месяц для view=${view} onChangeRange'`, () => {
-      const onChangeRange = jest.fn(({ value }) => [new Date(value[0]), new Date(value[1])]);
-      renderComponent({
-        value: [new Date(1970, 0), new Date(1970, 1)],
-        view,
-        onChangeRange,
-      });
-      const currentValueStart = getDateTimeItem(0);
-
-      expect(currentValueStart).toHaveTextContent('янв');
-
-      const currentValueEnd = getDateTimeItem(1);
-
-      expect(currentValueEnd).toHaveTextContent('фев');
-
-      const newCurrentValueStart = getDateTimeItem(3);
-
-      fireEvent.click(newCurrentValueStart);
-
-      const newCurrentValueEnd = getDateTimeItem(4);
-
-      fireEvent.click(newCurrentValueEnd);
-
-      expect(onChangeRange).toHaveBeenCalled();
-
-      expect(onChangeRange).toHaveBeenCalledTimes(2);
-
-      expect(onChangeRange).toHaveLastReturnedWith([new Date(1970, 0), new Date(1970, 4)]);
-    });
-  });
-
-  dateTimePropView.forEach((view) => {
-    it(`проверка смены года через DateTime${
-      view === 'slider' ? 'Slider' : 'Toggler'
-    }-Button_direction_prev для view=${view}'`, () => {
-      const onChange = jest.fn(({ value }) => new Date(value));
+  describe('переключение календаря', () => {
+    it('проверка смены года через DateTimeToggler-Button_direction_prev для view="classic"', () => {
       renderComponent({
         value: new Date(2000, 0),
         currentVisibleDate: new Date(2000, 0),
-        view,
-        onChange,
+        view: 'classic',
       });
 
-      if (view === 'classic') {
-        const label = getDateTimeLabel();
+      const label = getDateTimeLabel();
+      expect(label).toHaveTextContent('2000');
 
-        expect(label).toHaveTextContent('2000');
+      fireEvent.click(getDateTimeTooglerButtonPrev());
 
-        fireEvent.click(getDateTimeTooglerButtonPrev());
-
-        expect(label).not.toHaveTextContent('2000');
-
-        expect(label).toHaveTextContent('1999');
-      }
-
-      if (view === 'book') {
-        const labels = getDateTimeViewBookLabels();
-
-        expect(labels[0]).toHaveTextContent('2000');
-
-        expect(labels[1]).toHaveTextContent('2001');
-
-        fireEvent.click(getDateTimeTooglerButtonPrev());
-
-        expect(labels[0]).not.toHaveTextContent('2001');
-
-        expect(labels[0]).toHaveTextContent('1999');
-
-        expect(labels[1]).toHaveTextContent('2000');
-      }
-
-      if (view === 'slider') {
-        const sliderlabel = getDateTimeSliderLabel();
-
-        const labels = getDateTimeViewSliderLabels();
-
-        expect(sliderlabel).toHaveTextContent('2000-2010');
-
-        expect(labels[0]).toHaveTextContent('2000');
-
-        expect(labels[1]).toHaveTextContent('2001');
-
-        fireEvent.click(getDateTimeSliderButtonPrev());
-
-        const updateSliderlabel = getDateTimeSliderLabel();
-
-        expect(updateSliderlabel).not.toHaveTextContent('2000-2010');
-
-        expect(updateSliderlabel).toHaveTextContent('1990-2000');
-
-        expect(labels[0]).not.toHaveTextContent('2000');
-
-        expect(labels[0]).toHaveTextContent('1990');
-
-        expect(labels[1]).not.toHaveTextContent('2001');
-
-        expect(labels[1]).toHaveTextContent('1991');
-      }
+      expect(label).not.toHaveTextContent('2000');
+      expect(label).toHaveTextContent('1999');
     });
-  });
 
-  dateTimePropView.forEach((view) => {
-    it(`проверка смены года через DateTime${
-      view === 'slider' ? 'Slider' : 'Toggler'
-    }-Button_direction_next для view=${view}'`, () => {
-      const onChange = jest.fn(({ value }) => new Date(value));
+    it('проверка смены года через DateTimeToggler-Button_direction_next для view="classic"', () => {
+      renderComponent({
+        value: new Date(2001, 0),
+        currentVisibleDate: new Date(2001, 0),
+        view: 'classic',
+      });
+
+      const label = getDateTimeLabel();
+      expect(label).toHaveTextContent('2001');
+
+      fireEvent.click(getDateTimeTooglerButtonNext());
+
+      expect(label).not.toHaveTextContent('2001');
+      expect(label).toHaveTextContent('2002');
+    });
+
+    it('проверка смены года через DateTimeToggler-Button_direction_prev для view="book"', () => {
       renderComponent({
         value: new Date(2000, 0),
         currentVisibleDate: new Date(2000, 0),
-        view,
-        onChange,
+        view: 'book',
       });
 
-      if (view === 'classic') {
-        const label = getDateTimeLabel();
+      const labels = getDateTimeViewBookLabels();
+      expect(labels[0]).toHaveTextContent('2000');
+      expect(labels[1]).toHaveTextContent('2001');
 
-        expect(label).toHaveTextContent('2000');
+      fireEvent.click(getDateTimeTooglerButtonPrev());
 
-        fireEvent.click(getDateTimeTooglerButtonNext());
+      expect(labels[0]).not.toHaveTextContent('2001');
+      expect(labels[0]).toHaveTextContent('1999');
+      expect(labels[1]).toHaveTextContent('2000');
+    });
 
-        expect(label).not.toHaveTextContent('2000');
+    it('проверка смены года через DateTimeToggler-Button_direction_next для view="book"', () => {
+      renderComponent({
+        value: new Date(2000, 0),
+        currentVisibleDate: new Date(2000, 0),
+        view: 'book',
+      });
 
-        expect(label).toHaveTextContent('2001');
-      }
+      const labels = getDateTimeViewBookLabels();
+      expect(labels[0]).toHaveTextContent('2000');
+      expect(labels[1]).toHaveTextContent('2001');
 
-      if (view === 'book') {
-        const labels = getDateTimeViewBookLabels();
+      fireEvent.click(getDateTimeTooglerButtonNext());
 
-        expect(labels[0]).toHaveTextContent('2000');
+      expect(labels[0]).not.toHaveTextContent('2000');
+      expect(labels[0]).toHaveTextContent('2001');
+      expect(labels[1]).toHaveTextContent('2002');
+    });
 
-        expect(labels[1]).toHaveTextContent('2001');
+    it('проверка смены года через DateTimeSlider-Button_direction_prev для view="slider"', () => {
+      renderComponent({
+        value: new Date(2000, 0),
+        currentVisibleDate: new Date(2000, 0),
+        view: 'slider',
+      });
 
-        fireEvent.click(getDateTimeTooglerButtonNext());
+      const sliderlabel = getDateTimeSliderLabel();
+      const labels = getDateTimeViewSliderLabels();
 
-        expect(labels[0]).not.toHaveTextContent('2000');
+      expect(sliderlabel).toHaveTextContent('2000-2010');
 
-        expect(labels[0]).toHaveTextContent('2001');
+      expect(labels[0]).toHaveTextContent('2000');
+      expect(labels[1]).toHaveTextContent('2001');
 
-        expect(labels[1]).toHaveTextContent('2002');
-      }
+      fireEvent.click(getDateTimeSliderButtonPrev());
 
-      if (view === 'slider') {
-        const sliderlabel = getDateTimeSliderLabel();
+      const updateSliderlabel = getDateTimeSliderLabel();
 
-        const labels = getDateTimeViewSliderLabels();
+      expect(updateSliderlabel).not.toHaveTextContent('2000-2010');
+      expect(updateSliderlabel).toHaveTextContent('1990-2000');
 
-        expect(sliderlabel).toHaveTextContent('2000-2010');
+      expect(labels[0]).not.toHaveTextContent('2000');
+      expect(labels[0]).toHaveTextContent('1990');
+      expect(labels[1]).not.toHaveTextContent('2001');
+      expect(labels[1]).toHaveTextContent('1991');
+    });
 
-        expect(labels[0]).toHaveTextContent('2000');
+    it('проверка смены года через DateTimeSlider-Button_direction_next для view="slider"', () => {
+      renderComponent({
+        value: new Date(2000, 0),
+        currentVisibleDate: new Date(2000, 0),
+        view: 'slider',
+      });
 
-        expect(labels[1]).toHaveTextContent('2001');
+      const sliderlabel = getDateTimeSliderLabel();
+      const labels = getDateTimeViewSliderLabels();
 
-        fireEvent.click(getDateTimeSliderButtonNext());
+      expect(sliderlabel).toHaveTextContent('2000-2010');
 
-        const updateSliderlabel = getDateTimeSliderLabel();
+      expect(labels[0]).toHaveTextContent('2000');
+      expect(labels[1]).toHaveTextContent('2001');
 
-        expect(updateSliderlabel).not.toHaveTextContent('2000-2010');
+      fireEvent.click(getDateTimeSliderButtonNext());
 
-        expect(updateSliderlabel).toHaveTextContent('2010-2020');
+      const updateSliderlabel = getDateTimeSliderLabel();
 
-        expect(labels[0]).not.toHaveTextContent('2000');
+      expect(updateSliderlabel).not.toHaveTextContent('2000-2010');
+      expect(updateSliderlabel).toHaveTextContent('2010-2020');
 
-        expect(labels[0]).toHaveTextContent('2010');
+      expect(labels[0]).not.toHaveTextContent('2000');
+      expect(labels[0]).toHaveTextContent('2010');
+      expect(labels[1]).not.toHaveTextContent('2001');
+      expect(labels[1]).toHaveTextContent('2011');
+    });
+  });
 
-        expect(labels[1]).not.toHaveTextContent('2001');
+  describe('проверка locale', () => {
+    dateTimePropView.forEach((view) => {
+      it(`проверка применения locale="fa-IR" при view="${view}"`, () => {
+        renderComponent({
+          locale: faIRLocale,
+          currentVisibleDate: new Date(2022, 5),
+          view,
+        });
 
-        expect(labels[1]).toHaveTextContent('2011');
-      }
+        const month = getDateTimeItem(0);
+        expect(month).toHaveTextContent('ژانـ');
+      });
     });
   });
 });

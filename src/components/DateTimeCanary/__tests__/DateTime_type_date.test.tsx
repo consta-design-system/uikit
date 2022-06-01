@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import faIRLocale from 'date-fns/locale/fa-IR';
 
 import { DateTime, DateTimeProps, dateTimePropView } from '../DateTimeCanary';
 
@@ -316,6 +317,21 @@ describe('Компонент DateTime_type_date', () => {
           fireEvent.click(yearButton);
           expect(screen.getByText('1971')).toBeInTheDocument();
         }
+      });
+    });
+  });
+
+  describe('проверка locale', () => {
+    dateTimePropView.forEach((view) => {
+      it(`проверка применения locale="fa-IR" при view="${view}"`, () => {
+        renderComponent({
+          view,
+          locale: faIRLocale,
+          currentVisibleDate: new Date(2022, 5),
+        });
+
+        const label = getDateTimeLabel();
+        expect(label).toHaveTextContent('جون 2022');
       });
     });
   });

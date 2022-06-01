@@ -46,4 +46,4 @@ export const getColumnAllItem = (column: number) =>
   getDateTimeColumn()[column].querySelectorAll(`.${cnDateTimeItem()}`);
 export const getDateTimeColumnItem = (column: number, item: number) =>
   getColumnAllItem(column)[item];
-export const getMultiplicityItem = [0, 1, 2, 3, 4];
+export const multiplicity = [0, 1, 2, 3, 4];
