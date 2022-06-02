@@ -1,24 +1,24 @@
 import React from 'react';
 import { MDXProvider as MDXProviderComponent } from '@mdx-js/react';
-import { A } from '##/typography/A/A';
-import { Blockquote } from '##/typography/Blockquote/Blockquote';
-import { Br } from '##/typography/Br/Br';
-import { Code } from '##/typography/Code/Code';
-import { Em } from '##/typography/Em/Em';
-import { H1 } from '##/typography/H1/H1';
-import { H2 } from '##/typography/H2/H2';
-import { H3 } from '##/typography/H3/H3';
-import { H4 } from '##/typography/H4/H4';
-import { H5 } from '##/typography/H5/H5';
-import { H6 } from '##/typography/H6/H6';
-import { Hr } from '##/typography/Hr/Hr';
-import { Img } from '##/typography/Img/Img';
-import { Li } from '##/typography/Li/Li';
-import { Ol } from '##/typography/Ol/Ol';
-import { P } from '##/typography/P/P';
-import { Pre } from '##/typography/Pre/Pre';
-import { Strong } from '##/typography/Strong/Strong';
-import { Ul } from '##/typography/Ul/Ul';
+import { A } from '##/typography/A';
+import { Blockquote } from '##/typography/Blockquote';
+import { Br } from '##/typography/Br';
+import { Code } from '##/typography/Code';
+import { Em } from '##/typography/Em';
+import { H1 } from '##/typography/H1';
+import { H2 } from '##/typography/H2';
+import { H3 } from '##/typography/H3';
+import { H4 } from '##/typography/H4';
+import { H5 } from '##/typography/H5';
+import { H6 } from '##/typography/H6';
+import { Hr } from '##/typography/Hr';
+import { Img } from '##/typography/Img';
+import { Li } from '##/typography/Li';
+import { Ol } from '##/typography/Ol';
+import { P } from '##/typography/P';
+import { Pre } from '##/typography/Pre';
+import { Strong } from '##/typography/Strong';
+import { Ul } from '##/typography/Ul';
 
 export const components = {
     a: A,
