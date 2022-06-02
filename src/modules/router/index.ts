@@ -8,7 +8,7 @@ import { plugin } from '##/exportAtoms/router';
 
 export { routerAtom } from '##/exportAtoms/router';
 
-import { libs } from '##/stands';
+import { libs } from '@consta/stand/src/stands';
 
 export const { routesNames, routes } = createRoutes(undefined, libs.length);
 
