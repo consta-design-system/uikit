@@ -1,7 +1,8 @@
 import React from 'react';
+import { components } from '##/containers/MDXProvider';
 #imports#
 const Component: React.FC = () => {
-  return <Docs />;
+  return <Docs components={components} />;
 };
 
 export default Component;

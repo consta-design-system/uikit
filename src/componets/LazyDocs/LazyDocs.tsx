@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { ErrorBoundary } from '##/componets/ErrorBoundary';
+import { MDXProvider } from '##/containers/MDXProvider'
 
 type LazyDocsProps = { id: string };
 
@@ -12,7 +13,9 @@ export const LazyDocsPreseter: React.FC<LazyDocsProps> = ({ id }) => {
   return (
     <div>
       <Suspense fallback={<FallbackLoading />}>
-        <Docs />
+        <MDXProvider>
+          <Docs />
+        </MDXProvider>
       </Suspense>
     </div>
   );
