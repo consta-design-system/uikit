@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { TextFieldOnChangeArguments, TextFieldProps } from '../../TextField/helpers';
-import { TextField } from '../../TextField/TextField';
+import { TextField, TextFieldOnChangeArguments, TextFieldProps } from '../../TextField/TextField';
 import { getValidValue, isValidValue } from '../useSlider/helper';
 
 type Props = Omit<TextFieldProps<'number'>, 'value' | 'onChange' | 'min' | 'max' | 'step'> & {
