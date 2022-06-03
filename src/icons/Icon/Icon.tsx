@@ -5,7 +5,10 @@ import React, { forwardRef } from 'react';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
-export type IconPropSize = 'xs' | 's' | 'm';
+const iconPropSize = ['xs', 's', 'm'] as const;
+export type IconPropSize = typeof iconPropSize[number];
+export const defaultIconPropSize = iconPropSize[2];
+
 export type IconPropView =
   | 'alert'
   | 'brand'
@@ -30,7 +33,7 @@ export type IconComponent = React.FC<IconProps>;
 export const cnIcon = cn('Icon');
 
 export const Icon: IconComponent = forwardRef<HTMLSpanElement, IconProps>((props, ref) => {
-  const { children, className, size = 'm', view, ...otherProps } = props;
+  const { children, className, size = defaultIconPropSize, view, ...otherProps } = props;
   return (
     <span {...otherProps} className={cnIcon({ size, view }, [className])} ref={ref}>
       {children}
