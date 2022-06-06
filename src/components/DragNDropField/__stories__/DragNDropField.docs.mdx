@@ -46,7 +46,7 @@ import { DragNDropField } from '@consta/uikit/DragNDropField';
 - [Размер файла](#размер-файла)
 - [Обработка загрузки файлов](#обработка-загрузки-файлов)
 - [Обработка ошибок](#обработка-ошибок)
-- [Текст ошибок](#текст-ошибок)
+- [Локализация](#локализация)
 - [Импорт](#импорт)
 - [Свойства](#свойства)
 
@@ -200,11 +200,47 @@ export function MyComponent() {
 
 ## Локализация
 
-Вы можете определить собственный текст.
-Чтобы сделать это вам необходимо определить свойство `locale`
-В примере ниже переобпределенеие текста ошибки.
+Компонент полностью локализован, вы можете переопределить тексты для всех кнопок, сообщений и ошибок. За тексты отвечает свойство `locale`.
 
-<DragNDropFieldExampleErrorMessages />
+##### Пример компонента с текстами по умолчанию
+
+```
+<DragNDropField onDropFiles={(files) => console.log(files)} />
+```
+
+<DragNDropFieldExampleEmpty />
+
+### Параметры locale
+
+| Свойство         | Тип и значения                | По умолчанию                                   | Описание                                                         |
+| ---------------- | ----------------------------- | ---------------------------------------------- | ---------------------------------------------------------------- |
+| `call-to-action` | `LocaleLabel` &#124; `string` | `Перетащите файл сюда или загрузите по кнопке` | Основной текст в окне компонента                                 |
+| `action-button`  | `LocaleLabel` &#124; `string` | `Выбрать файл`                                 | Кнопка в окне компонента                                         |
+| `file`           | `string`                      | `файл`                                         | Входит в `call-to-action` и `action-button` при `multiple=false` |
+| `files`          | `string`                      | `файлы`                                        | Входит в `call-to-action` и `action-button` при `multiple=true`  |
+| `fit-files`      | `string`                      | `Подходят файлы`                               | Показывается, если есть ограничения                              |
+| `before`         | `string`                      | `до`                                           | Показывается, если есть ограничения по размеру и формату         |
+| `max`            | `string`                      | `Максимум`                                     | Показывается, если есть ограничения по только по размеру         |
+
+#### Тексты ошибок
+
+| Свойство            | Тип и значения | По умолчанию                                                   | Описание                                                      |
+| ------------------- | -------------- | -------------------------------------------------------------- | ------------------------------------------------------------- |
+| `file-invalid-type` | `string`       | `формат файла не подходит`                                     | Ошибка при неподходящем формате файла                         |
+| `file-too-large`    | `string`       | `файл слишком большой (максимум {размер + единица измерения})` | Ошибка, если файл больше `max`                                |
+| `too-many-files`    | `string`       | `Вы перетащили несколько файлов. Выберите один, пожалуйста`    | Ошибка, если перетащили несколько файлов при `multiple=false` |
+| `general-error`     | `string`       | `не получилось добавить файл`                                  | Общая ошибка, если файл не загрузился по какой-то причине     |
+
+#### Тексты для единиц измерения
+
+| Свойство   | Тип и значения | По умолчанию |
+| ---------- | -------------- | ------------ |
+| `gigabyte` | `string`       | `Гб`         |
+| `megabyte` | `string`       | `Мб`         |
+| `kilobyte` | `string`       | `Кб`         |
+| `byte`     | `string`       | `байт`       |
+
+##### Пример с переопределением текста ошибки
 
 ```tsx
 export const DragNDropFieldExampleErrorMessages = () => {
@@ -217,6 +253,8 @@ export const DragNDropFieldExampleErrorMessages = () => {
   );
 };
 ```
+
+<DragNDropFieldExampleErrorMessages />
 
 ## Импорт
 
@@ -236,10 +274,13 @@ export type DragNDropFieldPropErrorMessages = Partial<
   Record<FileError['code'], string | ((file: File | undefined, error?: FileError) => string)>
 >;
 
+type LocaleError = string | ((props: { file: File; sizes: FileSizes }) => string);
+type LocaleLabel = string | ((props: { fileText: string }) => string);
+
 export type Locale = {
-  'file-invalid-type'?: LocaleError;
-  'file-too-large'?: LocaleError;
-  'file-too-small'?: LocaleError;
+  'file-invalid-type'?: LocaleError; // принимает string
+  'file-too-large'?: LocaleError; // принимает string
+  'file-too-small'?: LocaleError; // принимает string
   'too-many-files'?: string;
   'general-error'?: string;
   'fit-files'?: string;
@@ -251,8 +292,8 @@ export type Locale = {
   'kilobyte'?: string;
   'byte'?: string;
   'max'?: string;
-  'call-to-action': LocaleLabel;
-  'action-button': LocaleLabel;
+  'call-to-action'?: LocaleLabel; // принимает string
+  'action-button'?: LocaleLabel; // принимает string
 };
 ```
 
@@ -264,6 +305,6 @@ export type Locale = {
 | [`minSize?`](#размер-файла)                 | `number`                                                                              | -            | Минимальный размер файла в байтах                                                                                                             |
 | [`onDropFiles`](#обработка-загрузки-файлов) | `(files: File[]) => void`                                                             | -            | Обработчик события выбора файлов                                                                                                              |
 | [`children?`](#содержимое)                  | `React.ReactNode` &#124; `(props: { openFileDialog: () => void }) => React.ReactNode` | -            | Дочерние элементы                                                                                                                             |
+| [`locale?`](#локализация)                   | `Locale`                                                                              | -            | Локализация                                                                                                                                   |
 | `disabled?`                                 | `boolean`                                                                             | -            | Отключение поля                                                                                                                               |
-| `locale?`                                   | `Locale`                                                                              | -            | Локализация                                                                                                                                   |
 | `ref?`                                      | `React.Ref<HTMLDivElement>`                                                           | -            | Ссылка на корневой DOM-элемент компонента                                                                                                     |

@@ -28,10 +28,11 @@ import { Button } from '../../Button/Button';
 import { Checkbox } from '../../Checkbox/Checkbox';
 import { Text } from '../../Text/Text';
 import { verticalAligns } from '../Cell/TableCell';
-import { Filters, SortByProps } from '../filtering';
+import { Filters } from '../filtering';
 import {
   headerVerticalAligns,
   sizes,
+  SortByProps,
   Table,
   TableColumn,
   TableProps as Props,
