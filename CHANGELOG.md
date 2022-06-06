@@ -1,5 +1,12 @@
 # Changelog
 
+## v3.24.2 (02/06/2022)
+Самое важное:
+В пакете `v3.24.1` была критическая ошибка, используйте `v3.24.2`
+
+---
+--------------------
+
 ## v3.24.1 (01/06/2022)
 Самое важное:
 - В `DragNDropField` добавили возможность локализации
@@ -481,26 +488,3 @@ endFieldOnBlur - deleted, use onBlur
 - [fix(useSelect): fix bug with notFoundLabel (#1793)](https://github.com/gazprom-neft/consta-uikit/commit/1f1425e9eb9cfe97d0c04b7b4453954899237ea9) - [@N1MBER](https://github.com/N1MBER)
 - [feat(MixSpace): add new mixin and documentation for him (#1776)](https://github.com/gazprom-neft/consta-uikit/commit/fa85cf1bdd74edcd81df8521ebf664a937a7dcdf) - [@N1MBER](https://github.com/N1MBER)
 - [docs(TextField): fix examples code (#1785)](https://github.com/gazprom-neft/consta-uikit/commit/6e6b6ce3a7a285a817711e990c2e6edc7c6d4801) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v3.9.3 (17/11/2021)
-Важное из изменений:
-- В `Table` добавили возможность скрывать колонки
-- Добавили в `Avatar` размер `L`
-- Обновили документацию
-- `Select` исправили критичный баг
-
----
-
-- [docs(DateTime): edit docs, fix format (#1778)](https://github.com/gazprom-neft/consta-uikit/commit/f305f99c3e0febeb4c42fde1e2056c11331e08c5) - [@arhayka](https://github.com/arhayka)
-- [docs(Avatar): add size L to docs (#1774)](https://github.com/gazprom-neft/consta-uikit/commit/780fe0258fc6afa0145e80794b141a12231897e5) - [@arhayka](https://github.com/arhayka)
-- [docs(developer): add pages about design and code style (#1766)](https://github.com/gazprom-neft/consta-uikit/commit/ce7bed2918acf3d34f99867b67d256e854585ff3) - [@arhayka](https://github.com/arhayka)
-- [docs(common): add components and images to review (#1773)](https://github.com/gazprom-neft/consta-uikit/commit/bb8d7800d608a8813cca3d27e783c001766d1855) - [@arhayka](https://github.com/arhayka)
-- [docs(DatePicker): add note about this doc (#1777)](https://github.com/gazprom-neft/consta-uikit/commit/b313947c833f1f1217810fd12ed272b8fd02e8e5) - [@arhayka](https://github.com/arhayka)
-- [fix(DatePicker): fixed bugs (#1771)](https://github.com/gazprom-neft/consta-uikit/commit/4e4aa55e013fc2f6723a4b7923833cefc30f9bda) - [@gizeasy](https://github.com/gizeasy)
-- [fix(Select): fix bug with placeholder (#1759)](https://github.com/gazprom-neft/consta-uikit/commit/4aa9e146b307bd091a7da68c62894e947a2018a4) - [@N1MBER](https://github.com/N1MBER)
-- [feat(EventInterceptor): add all props for analitic](https://github.com/gazprom-neft/consta-uikit/commit/0f702ef8469308dc60bc8f51971335df07c68d4f) - [@RuWolf](https://github.com/RuWolf)
-- [feat(Avatar): add L size (#1760)](https://github.com/gazprom-neft/consta-uikit/commit/90e450d68b04b5ec0922cb7acd999aaebc94c505) - [@gizeasy](https://github.com/gizeasy)
-- [chore(deps): bump ws from 5.2.2 to 5.2.3 (#1749)](https://github.com/gazprom-neft/consta-uikit/commit/daf297c71c9ef641a3a44db9d4c15a63ccab2d6e) - [@dependabot[bot]](https://github.com/dependabot[bot])
-- [feat(Table): added hidden prop to table column (#1732)](https://github.com/gazprom-neft/consta-uikit/commit/09605ec9744428a1b8de4a158605e3660a2d3d86) - [@SergeyKatugin](https://github.com/SergeyKatugin)

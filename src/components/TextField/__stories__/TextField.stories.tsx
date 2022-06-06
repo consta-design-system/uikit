@@ -36,7 +36,7 @@ const defaultKnobs = () => ({
   stepArray: array('stepArray', ['10', '50', '100']),
   min: number('min', 0),
   max: number('max', 150),
-  type: select('type', ['text', 'number', 'textarea'], 'text'),
+  type: select('type', ['text', 'number', 'textarea', 'password'], 'text'),
   withClearButton: boolean('withClearButton', false),
   caption: text('caption', 'Подпись'),
   label: text('label', 'Заголовок'),

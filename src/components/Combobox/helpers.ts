@@ -8,7 +8,7 @@ import {
   PropView,
   RenderItemProps,
 } from '../SelectComponents/types';
-import { TextFieldPropOnChange } from '../TextField/helpers';
+import { TextFieldPropOnChange } from '../TextField/TextField';
 
 export type DefaultItem = {
   label: string;

@@ -2,4 +2,8 @@
   &-Button {
     margin-top: var(--space-s);
   }
+
+  &-Text_disabled.Text_view_secondary {
+    color: var(--color-control-typo-disable);
+  }
 }

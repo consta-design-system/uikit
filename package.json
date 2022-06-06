@@ -1,6 +1,6 @@
 {
   "name": "@consta/uikit",
-  "version": "3.24.1",
+  "version": "3.24.2",
   "keywords": [
     "ui-kit",
     "design-system",
@@ -15,7 +15,7 @@
     "focus-trap-react": "8.7.0",
     "imask": "^6.2.2",
     "react-dropzone": "11.3.4",
-    "react-textarea-autosize": "^7.1.2",
+    "react-textarea-autosize": "^8.3.4",
     "react-transition-group": "^4.4.1",
     "tslib": "^2.1.0"
   },
