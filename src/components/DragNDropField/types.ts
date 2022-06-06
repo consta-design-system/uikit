@@ -22,7 +22,7 @@ export type DragNDropFieldChildrenRenderProp = (
   props: {
     openFileDialog: () => void;
     locale: Required<DragNDropFieldPropLocale>;
-  } & Pick<DragNDropFieldProps, 'accept' | 'maxSize' | 'multiple' | 'disabled'>,
+  } & Pick<DragNDropFieldProps, 'accept' | 'maxSize' | 'multiple' | 'disabled' | 'minSize'>,
 ) => React.ReactNode;
 
 export type FileSizes = {
