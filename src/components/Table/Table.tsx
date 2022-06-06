@@ -153,6 +153,11 @@ export interface TableControl<T extends TableRow> {
   column: Header<T> & ColumnMetaData;
 }
 
+export type SortByProps<T extends TableRow> = {
+  sortingBy: keyof T;
+  sortOrder: 'asc' | 'desc';
+};
+
 export type TableColumn<T extends TableRow> = {
   title: React.ReactNode;
   align?: HorizontalAlign;
