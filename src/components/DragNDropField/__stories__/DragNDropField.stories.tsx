@@ -11,6 +11,7 @@ export function Playground() {
   const ref = useRef(null);
   const [files, setFiles] = React.useState<File[]>([]);
   const withCustomChildren = boolean('С кастомным контентом', false);
+  const disabled = boolean('disabled', false);
   return (
     <>
       <DragNDropField
@@ -19,6 +20,7 @@ export function Playground() {
         accept={array('accept', ['image/*'])}
         maxSize={number('maxSize', 0)}
         onDropFiles={setFiles}
+        disabled={disabled}
       >
         {withCustomChildren
           ? ({ openFileDialog }) => (

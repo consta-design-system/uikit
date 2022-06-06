@@ -19,13 +19,20 @@ export const DragNDropFieldContent: DragNDropFieldChildrenRenderProp = ({
   multiple,
   openFileDialog,
   locale,
+  disabled,
 }) => {
   const requirements = formatFileRequirements(accept, maxSize);
   const fileText = multiple ? locale.files : locale.file;
 
   return (
     <>
-      <Text view="secondary" size="s" lineHeight="s" align="center">
+      <Text
+        className={cnDragNDropFieldContent('Text', { disabled })}
+        view="secondary"
+        size="s"
+        lineHeight="s"
+        align="center"
+      >
         {getText(locale['call-to-action'], { fileText })}
         {requirements && (
           <>
@@ -41,6 +48,7 @@ export const DragNDropFieldContent: DragNDropFieldChildrenRenderProp = ({
         view="ghost"
         size="s"
         onClick={openFileDialog}
+        disabled={disabled}
       />
     </>
   );

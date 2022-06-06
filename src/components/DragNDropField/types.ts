@@ -1,3 +1,5 @@
+import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
+
 import { Locale } from './locale';
 
 export type DragNDropFieldPropLocale = Locale;
@@ -20,7 +22,7 @@ export type DragNDropFieldChildrenRenderProp = (
   props: {
     openFileDialog: () => void;
     locale: Required<DragNDropFieldPropLocale>;
-  } & Pick<DragNDropFieldProps, 'accept' | 'maxSize' | 'multiple'>,
+  } & Pick<DragNDropFieldProps, 'accept' | 'maxSize' | 'multiple' | 'disabled'>,
 ) => React.ReactNode;
 
 export type FileSizes = {
@@ -28,11 +30,15 @@ export type FileSizes = {
   maxSize?: number;
 };
 
-export type DragNDropFieldProps = {
-  accept?: string | string[];
-  maxSize?: number;
-  multiple?: boolean;
-  onDropFiles: (files: File[]) => void;
-  children?: React.ReactNode | DragNDropFieldChildrenRenderProp;
-  locale?: DragNDropFieldPropLocale;
-};
+export type DragNDropFieldProps = PropsWithHTMLAttributes<
+  {
+    accept?: string | string[];
+    maxSize?: number;
+    multiple?: boolean;
+    onDropFiles: (files: File[]) => void;
+    children?: React.ReactNode | DragNDropFieldChildrenRenderProp;
+    locale?: DragNDropFieldPropLocale;
+    disabled?: boolean;
+  },
+  HTMLDivElement
+>;
