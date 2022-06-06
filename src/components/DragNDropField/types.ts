@@ -34,6 +34,7 @@ export type DragNDropFieldProps = PropsWithHTMLAttributes<
   {
     accept?: string | string[];
     maxSize?: number;
+    minSize?: number;
     multiple?: boolean;
     onDropFiles: (files: File[]) => void;
     children?: React.ReactNode | DragNDropFieldChildrenRenderProp;

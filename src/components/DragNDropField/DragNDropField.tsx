@@ -25,6 +25,7 @@ export const DragNDropField = forwardRef<HTMLDivElement, DragNDropFieldProps>((p
   const {
     accept,
     maxSize,
+    minSize,
     multiple = false,
     onDropFiles,
     children = DragNDropFieldContent,
@@ -45,6 +46,7 @@ export const DragNDropField = forwardRef<HTMLDivElement, DragNDropFieldProps>((p
   const { fileRejections, getRootProps, getInputProps, isDragActive, rootRef, open } = useDropzone({
     accept: accept?.length ? accept : undefined,
     maxSize: maxSize || undefined,
+    minSize: minSize || undefined,
     onDrop: handleDrop,
     multiple,
     disabled,
@@ -68,7 +70,7 @@ export const DragNDropField = forwardRef<HTMLDivElement, DragNDropFieldProps>((p
     ? children({ accept, maxSize, multiple, openFileDialog: open, locale, disabled })
     : children;
 
-  const errors = React.useMemo(() => getErrorsList(fileRejections, { maxSize }, locale), [
+  const errors = React.useMemo(() => getErrorsList(fileRejections, { maxSize, minSize }, locale), [
     fileRejections,
   ]);
 
