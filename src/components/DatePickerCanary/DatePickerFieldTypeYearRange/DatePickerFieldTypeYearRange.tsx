@@ -1,13 +1,11 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
-import isBefore from 'date-fns/isBefore';
-import isEqual from 'date-fns/isEqual';
+import React, { forwardRef } from 'react';
 
 import { FieldCaption } from '../../FieldCaption/FieldCaption';
 import { FieldLabel } from '../../FieldLabel/FieldLabel';
 import { DatePickerFieldTypeYear } from '../DatePickerFieldTypeYear/DatePickerFieldTypeYear';
 import { cnDatePickerMixRangeField } from '../DatePickerMixRangeField/DatePickerMixRangeField';
+import { getChangeFnRange } from '../getChangeFnRange';
 import { getFormForEnd, getFormForStart } from '../helpers';
-import { datePickerErrorTypes } from '../types';
 
 import { DatePickerFieldTypeYearRangeProps } from './helpers';
 
@@ -56,6 +54,7 @@ export const DatePickerFieldTypeYearRange = forwardRef<
     labelPosition,
     caption,
     width,
+    withClearButton,
     ...otherProps
   } = props;
 
@@ -77,76 +76,10 @@ export const DatePickerFieldTypeYearRange = forwardRef<
     separator,
     minDate,
     maxDate,
+    withClearButton,
   };
 
-  const [startDate, setStartDate] = useState<Date | undefined | null>(value?.[0]);
-  const [endDate, setEndDate] = useState<Date | undefined | null>(value?.[1]);
-  const eventRef = useRef<Event>();
-
-  const handleChange = (
-    e: Event,
-    ownStartDate: Date | undefined | null,
-    ownEndDate: Date | undefined | null,
-  ) => {
-    const start = ownStartDate || startDate;
-    const end = ownEndDate || endDate;
-
-    if (!onChange) {
-      return;
-    }
-
-    if (start && end) {
-      if (isBefore(start, end) || isEqual(start, end)) {
-        onChange({ e, value: [start, end] });
-        return;
-      }
-      onChange({ e, value: [start, undefined] });
-      onError && onError({ type: datePickerErrorTypes[2], date: [start, end] });
-      return;
-    }
-
-    if (start) {
-      onChange({ e, value: [start, undefined] });
-      return;
-    }
-
-    if (end) {
-      onChange({ e, value: [undefined, end] });
-      return;
-    }
-
-    onChange({ e, value: null });
-  };
-
-  const handleStartDateChange = (props: { e: Event; value: Date | null }) => {
-    if (props.value?.getTime() === startDate?.getTime()) {
-      return;
-    }
-    eventRef.current = props.e;
-    setStartDate(props.value);
-  };
-
-  const handleEndDateChange = (props: { e: Event; value: Date | null }) => {
-    if (props.value?.getTime() === endDate?.getTime()) {
-      return;
-    }
-    eventRef.current = props.e;
-    setEndDate(props.value);
-  };
-
-  useEffect(() => {
-    if (eventRef.current) {
-      handleChange(eventRef.current, startDate, endDate);
-    }
-  }, [eventRef.current]);
-
-  useEffect(() => {
-    setStartDate(value?.[0]);
-  }, [value?.[0]?.getTime()]);
-
-  useEffect(() => {
-    setEndDate(value?.[1]);
-  }, [value?.[1]?.getTime()]);
+  const [handleStartDateChange, handleEndDateChange] = getChangeFnRange(onChange, onError, value);
 
   return (
     <div
@@ -172,7 +105,7 @@ export const DatePickerFieldTypeYearRange = forwardRef<
             leftSide={startFieldLeftSide}
             rightSide={startFieldRightSide}
             form={getFormForStart(form)}
-            value={startDate}
+            value={value?.[0]}
             onChange={handleStartDateChange}
             onFocus={startFieldOnFocus}
             onBlur={startFieldOnBlur}
@@ -187,7 +120,7 @@ export const DatePickerFieldTypeYearRange = forwardRef<
             leftSide={endFieldLeftSide}
             rightSide={endFieldRightSide}
             form={getFormForEnd(form)}
-            value={endDate}
+            value={value?.[1]}
             onChange={handleEndDateChange}
             onFocus={endFieldOnFocus}
             onBlur={endFieldOnBlur}

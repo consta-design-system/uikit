@@ -1,6 +1,6 @@
 import { IconComponent } from '../../../icons/Icon/Icon';
 import { DateRange } from '../../../utils/types/Date';
-import { DatePickerFieldTypeYearProps } from '../DatePickerFieldTypeYear/helpers';
+import { DatePickerFieldTypeMonthProps } from '../DatePickerFieldTypeMonth/helpers';
 
 type DatePickerFieldTypeMonthRangePropOnChange = (props: {
   e: Event;
@@ -8,7 +8,7 @@ type DatePickerFieldTypeMonthRangePropOnChange = (props: {
 }) => void;
 
 export type DatePickerFieldTypeMonthRangeProps = Omit<
-  DatePickerFieldTypeYearProps,
+  DatePickerFieldTypeMonthProps,
   | 'onChange'
   | 'value'
   | 'inputRef'

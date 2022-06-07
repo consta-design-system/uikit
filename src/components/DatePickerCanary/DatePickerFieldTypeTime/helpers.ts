@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import {
   addHours,
   addMinutes,
@@ -12,6 +12,7 @@ import {
 } from 'date-fns';
 import IMask from 'imask';
 
+import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
 import { IconComponent, IconPropSize } from '../../../icons/Icon/Icon';
 import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import { getLabelHours, getLabelMinutes, getLabelSeconds } from '../../DateTimeCanary/helpers';
@@ -65,6 +66,7 @@ export type DatePickerFieldTypeTimeProps = PropsWithHTMLAttributes<
     label?: string;
     caption?: string;
     labelPosition?: 'top' | 'left';
+    withClearButton?: boolean;
   },
   HTMLDivElement
 >;
@@ -78,8 +80,11 @@ export const useImask = (
   inputRef: React.RefObject<HTMLInputElement>,
   stringValue: string | null,
   onError: DatePickerPropOnError | undefined,
+  handleChanhe: ({ e, value: stringValue }: { e: Event; value: string | null }) => void,
 ) => {
   const imaskRef = useRef<IMask.InputMask<IMask.MaskedDateOptions> | null>(null);
+  const onErrorRef = useMutableRef(onError);
+  const handleChanheRef = useMutableRef(handleChanhe);
 
   // задаем маску и сохраняем обьект маски в ref
   // обнавляем при смене формата
@@ -151,7 +156,7 @@ export const useImask = (
           ss &&
           !isValid(parse(`${HH}:${mm}:${ss}`, datePickerPropFormatTypeTime, new Date()))
         ) {
-          onError?.({
+          onErrorRef.current?.({
             type: datePickerErrorTypes[1],
             stringValue: string,
             HH,
@@ -171,6 +176,17 @@ export const useImask = (
   // Нужно для синхранизации value c Imask,
   // так как value мы можем задать через пропс без самого ввода,
   // и Imask требует ручной синхронихации в этом случае
+  const onAcept = useCallback((e: Event) => {
+    handleChanheRef.current({ e, value: imaskRef.current?.value || null });
+  }, []);
+
+  useEffect(() => {
+    imaskRef.current?.on('accept', onAcept);
+    return () => {
+      imaskRef.current?.off('accept', onAcept);
+    };
+  }, []);
+
   useEffect(() => {
     imaskRef.current?.updateValue();
   }, [stringValue]);

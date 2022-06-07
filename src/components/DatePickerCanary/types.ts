@@ -124,6 +124,7 @@ export type DatePickerProps<
     multiplicityMinutes?: number;
     multiplicityHours?: number;
     isMobile?: number;
+    withClearButton?: boolean;
   },
   HTMLDivElement
 >;

@@ -105,10 +105,14 @@ export function TextFieldRender<TYPE extends string>(
 
   const sortedSteps = useSortSteps({ step, min: Number(min), max: Number(max) });
 
-  const handleChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (e) => {
-    const { value } = e.target;
-    !disabled && onChange?.({ e, id, name, value: value || null });
-  };
+  const handleChange: React.ChangeEventHandler<
+    HTMLInputElement | HTMLTextAreaElement
+  > = useCallback(
+    (e) => {
+      !disabled && onChangeRef.current?.({ e, id, name, value: e.target.value || null });
+    },
+    [id, name],
+  );
 
   const handleBlur: React.FocusEventHandler<HTMLElement> = (e) => {
     setFocus.off();
@@ -171,7 +175,7 @@ export function TextFieldRender<TYPE extends string>(
   const handleClear = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     onChangeRef.current?.({
       e,
-      value: '',
+      value: null,
     });
   }, []);
 

@@ -4,7 +4,7 @@ import { format, isValid, isWithinInterval, parse } from 'date-fns';
 import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
 import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
 import { maxDateDefault, minDateDefault } from '../../../utils/date';
-import { TextField } from '../../TextField/TextField';
+import { TextField, TextFieldPropOnChange } from '../../TextField/TextField';
 import {
   datePickerPropFormatTypeDateTime,
   datePickerPropPlaceholderTypeDateTime,
@@ -43,16 +43,27 @@ export const DatePickerFieldTypeDateTime = React.forwardRef<
     value && isValid(value) ? format(value, formatProp) : null,
   );
 
+  const stringValueRef = useMutableRef(stringValue);
+  const valueRef = useMutableRef(value);
+  const onErrorRef = useMutableRef(onError);
+
   const formatParts = useMemo(() => getParts(formatProp, separator, true), [formatProp, separator]);
 
   const handleChange = useCallback(
-    (e: Event, stringValue: string | null) => {
+    ({ e, value: stringValue }: { e: Event; value: string | null }) => {
+      if (stringValueRef.current === stringValue) {
+        return;
+      }
+
       setStringValue(stringValue);
       const onChange = onChangeRef.current;
+      const value = valueRef.current;
 
       if (onChange) {
         if (!stringValue) {
-          onChange({ e, value: null });
+          if (value) {
+            onChange({ e, value: null });
+          }
           return;
         }
 
@@ -75,7 +86,7 @@ export const DatePickerFieldTypeDateTime = React.forwardRef<
             new Date(),
           );
           if (!isWithinInterval(date, { start: minDate, end: maxDate })) {
-            onError?.({
+            onErrorRef.current?.({
               type: datePickerErrorTypes[0],
               stringValue,
               dd,
@@ -87,11 +98,13 @@ export const DatePickerFieldTypeDateTime = React.forwardRef<
               ss,
             });
 
-            onChange({ e, value: null });
+            if (value) {
+              onChange({ e, value: null });
+            }
             return;
           }
           onChange({ e, value: date });
-        } else {
+        } else if (value) {
           onChange({ e, value: null });
         }
       }
@@ -108,6 +121,7 @@ export const DatePickerFieldTypeDateTime = React.forwardRef<
     inputRef,
     stringValue,
     onError,
+    handleChange,
   );
 
   // при изменении value, нужно обновить stringValue
@@ -123,20 +137,11 @@ export const DatePickerFieldTypeDateTime = React.forwardRef<
     }
   }, [value?.getTime()]);
 
-  // задаем нативный oninput, так как с маской по другому не будет работать
-  // обнавляем oninput при смене handleChange
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.oninput = (e) => {
-        handleChange(e, inputRef.current?.value || '');
-      };
-    }
-  }, [handleChange]);
-
   return (
     <TextField
       {...otherProps}
       type="text"
+      onChange={(handleChange as unknown) as TextFieldPropOnChange}
       inputContainerRef={ref}
       inputRef={useForkRef([inputRef, inputRefProp])}
       value={stringValue}
