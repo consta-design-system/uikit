@@ -26,19 +26,16 @@ export const usePopoverReposition = ({
   const onRequestRepositionRef = useMutableRef(onRequestReposition);
 
   useEffect(() => {
-    window.addEventListener('resize', onRequestRepositionRef.current);
+    const fn = () => onRequestRepositionRef.current();
+    window.addEventListener('resize', fn);
 
     const allParents = scrollAnchorRef?.current ? getAllParents(scrollAnchorRef.current) : [];
-    allParents.forEach((parentEl) =>
-      parentEl.addEventListener('scroll', onRequestRepositionRef.current),
-    );
+    allParents.forEach((parentEl) => parentEl.addEventListener('scroll', fn));
 
     return () => {
-      window.removeEventListener('resize', onRequestRepositionRef.current);
+      window.removeEventListener('resize', fn);
 
-      allParents.forEach((parentEl) =>
-        parentEl.removeEventListener('scroll', onRequestRepositionRef.current),
-      );
+      allParents.forEach((parentEl) => parentEl.removeEventListener('scroll', fn));
     };
   }, [scrollAnchorRef]);
 };
