@@ -125,10 +125,7 @@ export function Playground() {
         view={view}
         disabled={disabled}
         size={size}
-        onChange={({ value }) => {
-          console.log(value);
-          setValue(value);
-        }}
+        onChange={({ value }) => setValue(value)}
         leftSide={icon}
         events={events}
         locale={getByMap(localeMap, locale)}
