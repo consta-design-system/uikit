@@ -1,6 +1,17 @@
 # Changelog
 
+## v3.24.4 (08/06/2022)
+- [refactor(DragNDropField): refactor locale (#2361)](https://github.com/consta-design-system/uikit/commit/15fbb25839545c6ab6a2be82f23addd65eb82f26) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v3.24.3 (08/06/2022)
+Самое важное:
+- В `TextField` появился функционал "показать пароль" при `_type_password`
+- В `DragNDropField` добавили модификацию `_disabled`
+- В `DatePicker` добавили крестик очистки поля ввода
+---
+
 - [fix(TextField): fixed bugs](https://github.com/consta-design-system/uikit/commit/07721120c0c5274305f9bc095d321def34ac483c) - [@gizeasy](https://github.com/gizeasy)
 - [refactor(Popover): refactor (#2374)](https://github.com/consta-design-system/uikit/commit/175b420ce331ccb9eb39363591f6351306cd859d) - [@gizeasy](https://github.com/gizeasy)
 - [feat(DatePicker): add withClearButton (#2365)](https://github.com/consta-design-system/uikit/commit/bdcf2bbd3578157faa61d87af454234234afe3d2) - [@gizeasy](https://github.com/gizeasy)
@@ -456,25 +467,3 @@ endFieldOnBlur - deleted, use onBlur
 - [feat(Icon): createIcon return component can hold ref;](https://github.com/gazprom-neft/consta-uikit/commit/dcc5647bbd31fa22a24584a716bc609efbe1f2b3) - [@levi2ki](https://github.com/levi2ki)
 - [feat(MixSpace): add new values for padding & margin (#1844)](https://github.com/gazprom-neft/consta-uikit/commit/7fcc5a635278c245578d7fc97a02a26a93cb7beb) - [@N1MBER](https://github.com/N1MBER)
 - [feat(ContextMenu): added getItemAs and getItemHTMLAttributes (#1848)](https://github.com/gazprom-neft/consta-uikit/commit/7afb10808bc6f105724c0ec8dcbfedaf45c0885e) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v3.11.0 (08/12/2021)
-Ура! Добавили `Slider` , его можно двигать и выбирать значение (слайдер 🔥🔥🔥, но вы проверьте :)
-
-И ещё по мелочи:
-⁃ сделали адаптивными `ProgressStepBar` и `Steps`,
-⁃ добавили в таблицу возможность применить свой CSS-класс к любой ячейке,
-⁃ исправили баг с undefined в `eventInterceptionMap` в ключах объекта,
-⁃ обновили документацию по `UserSelect` и `Attachment`.
-
----
-
-- [feat(Slider): add new component (#1726)](https://github.com/gazprom-neft/consta-uikit/commit/c641d23d5ddb8ed9a846696bacdaf37d9efe4a58) - [@N1MBER](https://github.com/N1MBER)
-- [feat(components): add adaptivity for ProgressStepBar and Steps (#1791)](https://github.com/gazprom-neft/consta-uikit/commit/d0f87aeb7ec71eb0edf9fd8b31966aaa8aee09d8) - [@N1MBER](https://github.com/N1MBER)
-- [docs(UserSelect): docs review (#1834)](https://github.com/gazprom-neft/consta-uikit/commit/675994f8659dcc87e2b6b959e4a823b6c319d3a4) - [@arhayka](https://github.com/arhayka)
-- [docs(Attachment): docs review (#1835)](https://github.com/gazprom-neft/consta-uikit/commit/ca2187bd581f079e044972626c5d98d1d9664220) - [@arhayka](https://github.com/arhayka)
-- [docs(units): remove slash before $ (#1803)](https://github.com/gazprom-neft/consta-uikit/commit/6b1fc7f48b8dfbf3b3b37204dafe58283354d7f0) - [@arhayka](https://github.com/arhayka)
-- [feat(ProgressStepBar): change example on playground and also change label prop to optional (#1816)](https://github.com/gazprom-neft/consta-uikit/commit/6ee0d18ff79fcb5d63c82fd52abe3fbb47fe684c) - [@N1MBER](https://github.com/N1MBER)
-- [feat(components): added getConditionalClassName prop to Table (#1789)](https://github.com/gazprom-neft/consta-uikit/commit/6ed65dae14eecee1afc9bcd383b1a9edc323302f) - [@ndrzhn](https://github.com/ndrzhn)
-- [fix(EventInterceptor): fixed import loop in eventInterceptorMap (#1830)](https://github.com/gazprom-neft/consta-uikit/commit/c2bc7fc241d7d037978454a08c4b5840d51f1646) - [@gizeasy](https://github.com/gizeasy)
