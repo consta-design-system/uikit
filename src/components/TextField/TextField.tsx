@@ -160,7 +160,7 @@ export function TextFieldRender<TYPE extends string>(
     cols,
     minRows: minRows || rows,
     maxRows: maxRows || rows,
-    inputRef: useForkRef([inputRef, inputRefProp]) as (node: HTMLTextAreaElement) => void,
+    ref: useForkRef([inputRef, inputRefProp]) as (node: HTMLTextAreaElement) => void,
   };
 
   const inputProps = {
@@ -193,15 +193,9 @@ export function TextFieldRender<TYPE extends string>(
     }, []),
   };
 
-  useEffect(() => {
-    if (autoFocus) {
-      inputRef.current?.focus();
-    }
-  }, []);
-
   // при смене passwordVible, перемещаем курсор в конец строки
   useEffect(() => {
-    if (inputRef.current) {
+    if (type === 'password' && inputRef.current) {
       inputRef.current.selectionStart = valueRef.current?.length || 0;
     }
   }, [passwordVisible]);

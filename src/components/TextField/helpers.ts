@@ -13,10 +13,10 @@ export const sizeMap: Record<TextFieldPropSize, IconPropSize> = {
 
 export const getValueByStepArray = (
   steps: number[],
-  value?: string | null,
-  min?: number | string,
-  max?: number | string,
-  isIncrement = false,
+  value: string | null | undefined,
+  min: number | string | undefined,
+  max: number | string | undefined,
+  isIncrement: boolean,
 ): number => {
   const currentValue = Number(value ?? min);
   const minValue = Number(min);
@@ -45,10 +45,10 @@ export const getValueByStepArray = (
 
 export const getValueByStepNumber = (
   step: number | string,
-  value?: string | null,
-  min?: number | string,
-  max?: number | string,
-  isIncrement = false,
+  value: string | null | undefined,
+  min: number | string | undefined,
+  max: number | string | undefined,
+  isIncrement: boolean,
 ): number => {
   const minValue = Number(min);
   const maxValue = Number(max);
@@ -94,8 +94,8 @@ export const getTypeForRender = (type: string, passwordVible: boolean) => {
 
 export const getValueByStep = (
   steps: number | number[],
-  value?: string | null,
-  isIncrement?: boolean,
+  value: string | null | undefined,
+  isIncrement: boolean,
   min?: number | string,
   max?: number | string,
 ) => {
