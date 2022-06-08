@@ -16,12 +16,11 @@ export type Locale = {
   'file'?: string;
   'files'?: string;
   'before'?: string;
+  'from'?: string;
   'gigabyte'?: string;
   'megabyte'?: string;
   'kilobyte'?: string;
   'byte'?: string;
-  'max'?: string;
-  'min'?: string;
   'call-to-action'?: LocaleLabel;
   'action-button'?: LocaleLabel;
 };
@@ -47,8 +46,7 @@ export const defaultLocale: Required<Locale> = {
   'file': 'файл',
   'files': 'файлы',
   'before': 'до',
-  'max': 'Максимум',
-  'min': 'Минимум',
+  'from': 'от',
   'gigabyte': 'Гб',
   'megabyte': 'Мб',
   'kilobyte': 'Кб',

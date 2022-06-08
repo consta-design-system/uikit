@@ -67,7 +67,7 @@ export const DragNDropField = forwardRef<HTMLDivElement, DragNDropFieldProps>((p
   });
 
   const content = isRenderProp(children)
-    ? children({ accept, maxSize, multiple, openFileDialog: open, locale, disabled })
+    ? children({ accept, maxSize, minSize, multiple, openFileDialog: open, locale, disabled })
     : children;
 
   const errors = React.useMemo(() => getErrorsList(fileRejections, { maxSize, minSize }, locale), [
