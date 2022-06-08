@@ -9,20 +9,18 @@ const getPosition = (x: number, y: number): NonNullable<Position> => ({
   y: Math.round(y),
 });
 
-export const convertPixelsToNumber = (pixels: string) => {
-  return Number(pixels.slice(0, pixels.length - 2));
-};
-
 export const getPositionsByDirection = ({
   contentSize,
   anchorSize,
   position: { x, y },
   arrowOffset = 0,
+  offset = 0,
 }: {
   contentSize: Size;
   anchorSize: Size;
   position: NonNullable<Position>;
   arrowOffset?: number;
+  offset?: number;
 }): PositionsByDirection => {
   const { width: contentWidth, height: contentHeight } = contentSize;
   const { width: anchorWidth, height: anchorHeight } = anchorSize;
@@ -31,16 +29,16 @@ export const getPositionsByDirection = ({
     y: y + anchorHeight / 2,
   };
 
-  const xForRightDirections = x + anchorWidth;
-  const xForLeftDirections = x - contentWidth;
+  const xForRightDirections = x + anchorWidth + offset;
+  const xForLeftDirections = x - contentWidth - offset;
   const xForVerticalDirections = {
     right: anchorCenter.x - arrowOffset,
     center: anchorCenter.x - contentWidth / 2,
     left: anchorCenter.x - contentWidth + arrowOffset,
   };
 
-  const yForDownDirections = y + anchorHeight;
-  const yForUpDirections = y - contentHeight;
+  const yForDownDirections = y + anchorHeight + offset;
+  const yForUpDirections = y - contentHeight - offset;
   const yForHorizontalDirections = {
     up: anchorCenter.y - contentHeight + arrowOffset,
     center: anchorCenter.y - contentHeight / 2,
@@ -90,7 +88,7 @@ type ComputedPositionAndDirectionParams = {
   contentSize: Size;
   viewportSize: Size;
   anchorSize?: Size;
-  offset?: number | string;
+  offset?: number;
   arrowOffset?: number;
   direction: Direction;
   spareDirection: Direction;
@@ -108,6 +106,7 @@ export const getComputedPositionAndDirection = ({
   possibleDirections,
   bannedDirections,
   spareDirection,
+  offset = 0,
 }: ComputedPositionAndDirectionParams): {
   direction: Direction;
   position: Position;
@@ -121,6 +120,7 @@ export const getComputedPositionAndDirection = ({
     anchorSize,
     position: initialPosition,
     arrowOffset,
+    offset,
   });
 
   const direction =
