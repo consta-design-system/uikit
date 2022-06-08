@@ -271,6 +271,7 @@ export function GridExampleBreakpoints() {
 ```tsx
 <Grid cols="3" gap="xl">
   <GridItem
+    style={{ background: 'rgb(87, 188, 255)' }} // синяя ячейка
     row="1"
     breakpoints={{
       m: {
@@ -282,6 +283,7 @@ export function GridExampleBreakpoints() {
   </GridItem>
   <GridItem>2</GridItem>
   <GridItem
+    style={{ background: '#36acaa' }} // зелёная ячейка
     order="-1"
     row="3"
     breakpoints={{
