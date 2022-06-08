@@ -51,6 +51,7 @@ export type DatePickerFieldTypeYearProps = PropsWithHTMLAttributes<
     label?: string;
     caption?: string;
     labelPosition?: 'top' | 'left';
+    withClearButton?: boolean;
   },
   HTMLDivElement
 >;
