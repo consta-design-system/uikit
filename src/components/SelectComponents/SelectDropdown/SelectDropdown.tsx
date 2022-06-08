@@ -1,6 +1,6 @@
 import './SelectDropdown.css';
 
-import React, { Fragment, useMemo, useRef, useState } from 'react';
+import React, { Fragment, useMemo, useRef } from 'react';
 import { Transition } from 'react-transition-group';
 
 import {
@@ -16,7 +16,7 @@ import {
 import { cn } from '../../../utils/bem';
 import { fabricIndex } from '../../../utils/fabricIndex';
 import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
-import { Direction, Popover } from '../../Popover/Popover';
+import { Popover } from '../../Popover/Popover';
 import { Text } from '../../Text/Text';
 import { SelectCreateButton } from '../SelectCreateButton/SelectCreateButton';
 import { SelectGroupLabel } from '../SelectGroupLabel/SelectGroupLabel';
@@ -78,8 +78,6 @@ export const SelectDropdown: SelectDropdown = (props) => {
     ...otherProps
   } = props;
 
-  const [direction, setDirection] = useState<Direction>('downStartLeft');
-
   const indent = form === 'round' ? 'increased' : 'normal';
 
   const popoverRef = useRef<HTMLDivElement>(null);
@@ -106,10 +104,9 @@ export const SelectDropdown: SelectDropdown = (props) => {
             offset="2xs"
             ref={popoverRef}
             role="listbox"
-            onSetDirection={setDirection}
             className={cnSelectDropdown({ form, size }, [
               className,
-              cnMixPopoverAnimate({ direction, animate }),
+              cnMixPopoverAnimate({ animate }),
             ])}
             equalAnchorWidth
           >

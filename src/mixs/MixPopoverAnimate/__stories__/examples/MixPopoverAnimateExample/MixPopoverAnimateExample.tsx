@@ -1,10 +1,10 @@
 import './MixPopoverAnimateExample.css';
 
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { CSSTransition, Transition } from 'react-transition-group';
 
 import { Button } from '../../../../../components/Button/Button';
-import { Direction, Popover } from '../../../../../components/Popover/Popover';
+import { Popover } from '../../../../../components/Popover/Popover';
 import { useFlag } from '../../../../../hooks/useFlag/useFlag';
 import { cn } from '../../../../../utils/bem';
 import {
@@ -19,7 +19,6 @@ export const MixPopoverAnimateExampleRenderFn = () => {
   const [open, setOpen] = useFlag();
   const popoverRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const [direction, setDirection] = useState<Direction>();
 
   return (
     <>
@@ -33,14 +32,11 @@ export const MixPopoverAnimateExampleRenderFn = () => {
         {(animate) => {
           return (
             <Popover
-              className={cnMixPopoverAnimateExample('Popover', [
-                cnMixPopoverAnimate({ direction, animate }),
-              ])}
-              offset={8}
+              className={cnMixPopoverAnimateExample('Popover', [cnMixPopoverAnimate({ animate })])}
+              offset="xs"
               anchorRef={buttonRef}
               ref={popoverRef}
               direction="downStartLeft"
-              onSetDirection={setDirection}
             >
               я появился плавно <br /> c анимацией 🔥
             </Popover>
@@ -73,10 +69,10 @@ export const MixPopoverAnimateExampleForCssTransition = () => {
       >
         <Popover
           className={cnMixPopoverAnimateExample('Popover')}
-          offset={8}
+          offset="xs"
           anchorRef={buttonRef}
           ref={popoverRef}
-          direction="downStartLeft"
+          direction="upStartLeft"
         >
           я появился плавно <br /> c анимацией 🔥
         </Popover>
