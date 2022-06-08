@@ -14,13 +14,13 @@ export const getPositionsByDirection = ({
   anchorSize,
   position: { x, y },
   arrowOffset = 0,
-  offset,
+  offset = 0,
 }: {
   contentSize: Size;
   anchorSize: Size;
   position: NonNullable<Position>;
   arrowOffset?: number;
-  offset: number;
+  offset?: number;
 }): PositionsByDirection => {
   const { width: contentWidth, height: contentHeight } = contentSize;
   const { width: anchorWidth, height: anchorHeight } = anchorSize;
@@ -88,7 +88,7 @@ type ComputedPositionAndDirectionParams = {
   contentSize: Size;
   viewportSize: Size;
   anchorSize?: Size;
-  offset: number;
+  offset?: number;
   arrowOffset?: number;
   direction: Direction;
   spareDirection: Direction;
@@ -106,7 +106,7 @@ export const getComputedPositionAndDirection = ({
   possibleDirections,
   bannedDirections,
   spareDirection,
-  offset,
+  offset = 0,
 }: ComputedPositionAndDirectionParams): {
   direction: Direction;
   position: Position;
