@@ -19,6 +19,7 @@ export function Playground() {
         multiple={boolean('multiple', true)}
         accept={array('accept', ['image/*'])}
         maxSize={number('maxSize', 0)}
+        minSize={number('minSize', 0)}
         onDropFiles={setFiles}
         disabled={disabled}
       >

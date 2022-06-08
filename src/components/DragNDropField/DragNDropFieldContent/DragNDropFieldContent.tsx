@@ -16,12 +16,13 @@ const cnDragNDropFieldContent = cn('DragNDropFieldContent');
 export const DragNDropFieldContent: DragNDropFieldChildrenRenderProp = ({
   accept,
   maxSize,
+  minSize,
   multiple,
   openFileDialog,
   locale,
   disabled,
 }) => {
-  const requirements = formatFileRequirements(accept, maxSize);
+  const requirements = formatFileRequirements(accept, maxSize, minSize, locale);
   const fileText = multiple ? locale.files : locale.file;
 
   return (

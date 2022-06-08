@@ -16,31 +16,37 @@ export type Locale = {
   'file'?: string;
   'files'?: string;
   'before'?: string;
+  'from'?: string;
   'gigabyte'?: string;
   'megabyte'?: string;
   'kilobyte'?: string;
   'byte'?: string;
-  'max'?: string;
   'call-to-action'?: LocaleLabel;
   'action-button'?: LocaleLabel;
 };
 
 export const defaultLocale: Required<Locale> = {
   'file-invalid-type': (props) =>
-    ['формат файла не подходит', props.file.type && `(${props.file.type})`]
+    [`${props.file.name}: формат файла не подходит`, props.file.type && `(${props.file.type})`]
       .filter(isNotNil)
       .join(' '),
   'file-too-large': (props) =>
-    `файл слишком большой (максимум ${formatFileSize(props.sizes.maxSize ?? 0, defaultLocale)})`,
+    `${props.file.name}: файл слишком большой (максимум ${formatFileSize(
+      props.sizes.maxSize ?? 0,
+      defaultLocale,
+    )})`,
   'file-too-small': (props) =>
-    `файл слишком маленький (минимум ${formatFileSize(props.sizes.minSize ?? 0, defaultLocale)})`,
+    `${props.file.name}: файл слишком маленький (минимум ${formatFileSize(
+      props.sizes.minSize ?? 0,
+      defaultLocale,
+    )})`,
   'too-many-files': 'Вы перетащили несколько файлов. Выберите один, пожалуйста',
   'general-error': 'не получилось добавить файл',
   'fit-files': 'Подходят файлы',
   'file': 'файл',
   'files': 'файлы',
   'before': 'до',
-  'max': 'Максимум',
+  'from': 'от',
   'gigabyte': 'Гб',
   'megabyte': 'Мб',
   'kilobyte': 'Кб',

@@ -147,7 +147,7 @@ import { DragNDropField } from '@consta/uikit/DragNDropField';
 
 ## Размер файла
 
-Вы можете ограничить размер файла, за это отвечает `maxSize`. Укажите размер в байтах.
+Вы можете ограничить размер файла, за это отвечает `maxSize` и `minSize`. Укажите размер в байтах.
 
 <DragNDropFieldExampleMaxSize />
 
@@ -302,6 +302,7 @@ export type Locale = {
 | [`multiple?`](#один-или-несколько)          | `boolean`                                                                             | `false`      | Можно ли выбирать сразу несколько файлов (см. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#attr-multiple))      |
 | [`accept?`](#типы-файлов)                   | `string` &#124; `string[]`                                                            | -            | Список разрешённых типов файлов (см. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers)) |
 | [`maxSize?`](#размер-файла)                 | `number`                                                                              | -            | Максимальный размер файла в байтах                                                                                                            |
+| [`minSize?`](#размер-файла)                 | `number`                                                                              | -            | Минимальный размер файла в байтах                                                                                                             |
 | [`onDropFiles`](#обработка-загрузки-файлов) | `(files: File[]) => void`                                                             | -            | Обработчик события выбора файлов                                                                                                              |
 | [`children?`](#содержимое)                  | `React.ReactNode` &#124; `(props: { openFileDialog: () => void }) => React.ReactNode` | -            | Дочерние элементы                                                                                                                             |
 | [`locale?`](#локализация)                   | `Locale`                                                                              | -            | Локализация                                                                                                                                   |

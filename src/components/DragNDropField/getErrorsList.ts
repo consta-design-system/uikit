@@ -26,7 +26,7 @@ const getErrorMessage = (
   }
 
   if (file) {
-    return `${file.name}: ${isString(message) ? message : message({ file, sizes })}`;
+    return isString(message) ? message : message({ file, sizes });
   }
 
   return isString(message) ? message : NO_MESSAGE;
