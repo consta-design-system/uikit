@@ -558,7 +558,7 @@ const generateReExports = (
     }
 
     // TODO: internal забирать из общего места.
-    const newKeys = ['__internal__', ...components.keys()];
+    const newKeys = ['__internal__', 'fonts', ...components.keys()];
     const allKeys = pack.files.concat(newKeys);
 
     const setKeys = new Set(allKeys.sort());

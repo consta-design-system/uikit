@@ -47,6 +47,7 @@ const defaultKnobs = () => ({
   type: select('type', datePickerPropType, datePickerPropTypeDefault),
   form: select('form', textFieldPropForm, textFieldPropFormDefault),
   status: select('status', ['', ...textFieldPropStatus], ''),
+  withClearButton: boolean('withClearButton', false),
   withAdditionalControls: boolean('withAdditionalControls', false),
   label: text('label', 'Заголовок'),
   caption: text('caption', 'Подпись'),
@@ -91,6 +92,7 @@ export function Playground() {
     type,
     minDate,
     maxDate,
+    withClearButton,
     withAdditionalControls,
   } = defaultKnobs();
 
@@ -132,6 +134,7 @@ export function Playground() {
         minDate={new Date(minDate)}
         maxDate={new Date(maxDate)}
         renderAdditionalControls={withAdditionalControls ? additionalControls : undefined}
+        withClearButton={withClearButton}
       />
     </div>
   );
