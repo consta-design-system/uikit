@@ -9,8 +9,10 @@ import {
   PortalMenuPropGetItemGroupId,
   PortalMenuPropGetItemKey,
   PortalMenuPropGetItemLabel,
+  PortalMenuPropGetItemHref,
   PortalMenuPropGetItemOnClick,
   PortalMenuPropGetItemSubMenu,
+  PortalMenuPropGetItemParams,
   PortalMenuProps,
 } from './types';
 
@@ -31,6 +33,10 @@ export const defaultGetItemGroupId: PortalMenuPropGetItemGroupId<DefaultMenuItem
   item.groupId;
 export const defaultGetItemSubMenu: PortalMenuPropGetItemSubMenu<DefaultMenuItem> = (item) =>
   item.subMenu;
+export const defaultGetItemHref: PortalMenuPropGetItemHref<DefaultMenuItem> = (item) =>
+  item.href;
+export const defaultGetItemParams: PortalMenuPropGetItemParams<DefaultMenuItem> = (item) => 
+  item.params;
 
 // Group
 
@@ -50,6 +56,8 @@ export function withDefaultGetters<ITEM = DefaultMenuItem, GROUP = DefaultMenuGr
     getItemBadge: props.getItemBadge ?? defaultGetItemBadge,
     getItemGroupId: props.getItemGroupId ?? defaultGetItemGroupId,
     getItemSubMenu: props.getItemSubMenu ?? defaultGetItemSubMenu,
+    getItemHref: props.getItemHref ?? defaultGetItemHref,
+    getItemParams: props.getItemParams ?? defaultGetItemParams,
     getGroupKey: props.getGroupKey ?? defaultGetGroupKey,
     getGroupLabel: props.getGroupLabel ?? defaultGetGroupLabel,
   };

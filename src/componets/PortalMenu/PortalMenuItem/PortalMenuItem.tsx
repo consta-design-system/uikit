@@ -8,32 +8,10 @@ import { cn } from '../../../utils/bem';
 import { Text } from '@consta/uikit/Text';
 import {
   PortalMenuItemProps,
-  PortalMenuPropGetItemActive,
-  PortalMenuPropGetItemSubMenu,
 } from '../types';
+import { Link } from '##/componets/Link';
 
 const cnPortalMenuItem = cn('PortalMenuItem');
-
-const isItemActive = <ITEM,>(
-  item: ITEM,
-  getItemActive: PortalMenuPropGetItemActive<ITEM>,
-  getItemSubMenu: PortalMenuPropGetItemSubMenu<ITEM>,
-): boolean | undefined => {
-  if (getItemActive(item)) {
-    return true;
-  }
-  const items = getItemSubMenu(item);
-  if (items && items.length > 0) {
-    let flag = false;
-    items.forEach((el) => {
-      if (isItemActive(el, getItemActive, getItemSubMenu)) {
-        flag = true;
-      }
-    });
-    return flag;
-  }
-  return undefined;
-};
 
 export const PortalMenuItem = <ITEM,>(props: PortalMenuItemProps<ITEM>) => {
   const {
@@ -48,22 +26,22 @@ export const PortalMenuItem = <ITEM,>(props: PortalMenuItemProps<ITEM>) => {
     getItemSubMenu,
     getItemOnClick,
     getItemGroupId,
+    getItemParams,
+    getItemHref,
   } = props;
 
   const handleClick: React.MouseEventHandler = (e) => {
     if ((subMenu && getItemOnClick(item)) || !subMenu) {
-      onClick?.(e);
-      getItemOnClick(item)?.(e);
+      if (!getItemHref(item)) {
+        onClick?.(e);
+        getItemOnClick(item)?.(e);
+      }
     } else {
       setShowSubMenu.toogle();
     }
   };
 
   const [showSubMenu, setShowSubMenu] = useFlag(true);
-
-  const active = useMemo(() => {
-    return !!isItemActive(item, getItemActive, getItemSubMenu);
-  }, [item]);
 
   const Component = getItemSubMenu(item) ? 'div' : 'button';
 
@@ -79,24 +57,17 @@ export const PortalMenuItem = <ITEM,>(props: PortalMenuItemProps<ITEM>) => {
 
   const nextDeep = deep + 1;
 
-  return (
-    <div className={cnPortalMenuItem(null, [className])}>
-      <Component
-        style={{
-          ['--menu-item-deep' as string]: deep,
-        }}
-        className={cnPortalMenuItem('Button', { active })}
-        {...(Component === 'button' && { type: 'button' })}
-        onClick={handleClick}
-      >
-        <div className={cnPortalMenuItem('Text')}>
+  const content = () => {
+    return (
+      <>
+      <div className={cnPortalMenuItem('Text')}>
           <Text
             className={cnPortalMenuItem('Label')}
             size="m"
             lineHeight="m"
             view={getItemActive(item) ? 'brand' : 'primary'}
           >
-            {getItemLabel(item)}
+           {getItemLabel(item)}
           </Text>
           {getItemDescription(item) && (
             <Text
@@ -123,7 +94,31 @@ export const PortalMenuItem = <ITEM,>(props: PortalMenuItemProps<ITEM>) => {
             )}
           </div>
         )}
+        </>
+    )
+  }
+
+  return (
+    <div className={cnPortalMenuItem(null, [className])}>
+      {getItemHref(item) ? (
+        <Link  style={{
+          ['--menu-item-deep' as string]: deep,
+        }}
+        className={cnPortalMenuItem('Button', { active: getItemActive(item) })} to={`${getItemHref(item)}`} params={getItemParams(item)}>
+        {content()}
+        </Link>
+      ): (
+        <Component
+        style={{
+          ['--menu-item-deep' as string]: deep,
+        }}
+        className={cnPortalMenuItem('Button', { active: getItemActive(item) })}
+        {...(Component === 'button' && { type: 'button' })}
+        onClick={handleClick}
+      >
+        {content()}
       </Component>
+      )}
       {showSubMenu && (
         <div className={cnPortalMenuItem('List')}>
           {subMenu?.map((element, index) => (
@@ -139,6 +134,8 @@ export const PortalMenuItem = <ITEM,>(props: PortalMenuItemProps<ITEM>) => {
               getItemBadge={getItemBadge}
               getItemDescription={getItemDescription}
               getItemGroupId={getItemGroupId}
+              getItemHref={getItemHref}
+              getItemParams={getItemParams}
             />
           ))}
         </div>

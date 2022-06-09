@@ -60,6 +60,8 @@ function PortalMenuRender<ITEM = DefaultMenuItem, GROUP = DefaultMenuGroup>(
     getItemGroupId,
     getItemBadge,
     getItemSubMenu,
+    getItemHref,
+    getItemParams,
 
     groupsByItems,
     ...otherProps
@@ -101,6 +103,8 @@ function PortalMenuRender<ITEM = DefaultMenuItem, GROUP = DefaultMenuGroup>(
                 getItemGroupId={getItemGroupId}
                 getItemBadge={getItemBadge}
                 getItemSubMenu={getItemSubMenu}
+                getItemHref={getItemHref}
+                getItemParams={getItemParams}
               />
             ))}
           </div>

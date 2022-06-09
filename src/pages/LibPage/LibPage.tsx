@@ -1,5 +1,14 @@
 import React from 'react';
 
+import { DocLayout } from '##/componets/DocLayout';
+
+import { LibPageMenu } from './LibPageMenu';
+import { LibPageContent } from './LibPageContent';
+
 export const LibPage: React.FC = () => {
-  return <div>LibPage</div>;
+  return (
+    <DocLayout leftSide={<LibPageMenu />}>
+      <LibPageContent />
+    </DocLayout>
+  );
 };

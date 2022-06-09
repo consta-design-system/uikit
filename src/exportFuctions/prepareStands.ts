@@ -24,6 +24,7 @@ const addToLib = (stand: PreparedStand, lib: LibWithStands[]) => {
 
   const standWithGroup = {
     ...stand.stand,
+    standId: stand.id,
     group: stand.stand.group || 'Библиотеки компонентов',
   };
 

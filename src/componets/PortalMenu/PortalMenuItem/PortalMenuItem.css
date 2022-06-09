@@ -13,11 +13,12 @@
     border-radius: var(--control-radius);
     cursor: pointer;
     transition: background-color 0.3s;
+    text-decoration: none;
 
     &:hover {
       background: var(--color-control-bg-clear-hover);
     }
-
+    
     &_active {
       background: var(--color-bg-stripe);
     }

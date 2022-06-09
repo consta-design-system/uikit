@@ -21,3 +21,4 @@ router.start(() => console.log('start'));
 console.log(router);
 
 export { router };
+export * from './useIsActiveRouter';

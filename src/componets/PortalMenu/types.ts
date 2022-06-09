@@ -22,6 +22,8 @@ export type DefaultMenuItem = {
   groupId?: string;
   onClick?: React.EventHandler<React.MouseEvent>;
   badge?: BadgeComponent;
+  href?: string;
+  params?: Record<string, string>;
   subMenu?: DefaultMenuItem[];
 };
 
@@ -37,6 +39,8 @@ export type PortalMenuPropGetItemOnClick<ITEM> = (
 export type PortalMenuPropGetItemBadge<ITEM> = (item: ITEM) => BadgeComponent | undefined;
 export type PortalMenuPropGetItemGroupId<ITEM> = (item: ITEM) => string | undefined;
 export type PortalMenuPropGetItemSubMenu<ITEM> = (item: ITEM) => ITEM[] | undefined;
+export type PortalMenuPropGetItemHref<ITEM> = (item: ITEM) => string | undefined;
+export type PortalMenuPropGetItemParams<ITEM> = (item: ITEM) => Record<string, string> | undefined;
 
 // Group
 
@@ -58,6 +62,8 @@ export type PortalMenuProps<
     getItemBadge?: PortalMenuPropGetItemBadge<ITEM>;
     getItemGroupId?: PortalMenuPropGetItemGroupId<ITEM>;
     getItemSubMenu?: PortalMenuPropGetItemSubMenu<ITEM>;
+    getItemParams?: PortalMenuPropGetItemParams<ITEM>;
+    getItemHref?: PortalMenuPropGetItemHref<ITEM>;
     getGroupKey?: PortalMenuPropGetGroupKey<GROUP>;
     getGroupLabel?: PortalMenuPropGetGroupLabel<GROUP>;
     groups?: GROUP[];
@@ -92,4 +98,6 @@ export type PortalMenuItemProps<ITEM> = {
   getItemBadge: PortalMenuPropGetItemBadge<ITEM>;
   getItemGroupId: PortalMenuPropGetItemGroupId<ITEM>;
   getItemSubMenu: PortalMenuPropGetItemSubMenu<ITEM>;
+  getItemHref: PortalMenuPropGetItemHref<ITEM>;
+  getItemParams: PortalMenuPropGetItemParams<ITEM>;
 };

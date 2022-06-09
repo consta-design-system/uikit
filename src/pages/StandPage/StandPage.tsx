@@ -4,6 +4,7 @@ import React, { lazy, Suspense } from 'react';
 
 import { LazyDocs } from '##/componets/LazyDocs';
 import { DocLayout } from '##/componets/DocLayout';
+import { LibPageMenu } from '../LibPage/LibPageMenu';
 
 // import { Stand } from '../../../../../../src/components/Attachment/__stand__/Attachment.stand';
 // import { Stand } from '../../../../../../src/components/Attachment/__stand__/Attachment.stand.mdx';
@@ -43,7 +44,7 @@ export const StandPage: React.FC = () => {
   console.log(stand.path);
 
   return (
-    <DocLayout>
+    <DocLayout key={standID} leftSide={<LibPageMenu/>}>
       <LazyDocs id={standID} />
     </DocLayout>
   );
