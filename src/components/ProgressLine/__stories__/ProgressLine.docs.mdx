@@ -1,0 +1,65 @@
+import { ProgressLineExampleMode } from './examples/ProgressLineExampleMode/ProgressLineExampleMode';
+import { ProgressLineExampleSize } from './examples/ProgressLineExampleSize/ProgressLineExampleSize';
+
+# ProgressLine
+
+```tsx
+import { ProgressLine } from '@consta/uikit/ProgressLine';
+```
+
+Индикатор загрузки для ваших проектов
+
+## Тип
+
+Свойство `mode` определяет по какому принципу будет работать компонент,
+если `mode=indeterminate`, то будет отображаться индикатор с бесконечной анимацией.
+Если же `determinate`, то будет отображаться текущий, указанный вами прогресс.
+
+<ProgressLineExampleMode />
+
+```tsx
+<ProgressLine mode="indeterminate" />
+<ProgressLine mode="determinate" progress={30} />
+```
+
+## Размер
+
+Свойство `size` отвечает за размер индикатора. Доступные размеры `s` и `m`.
+
+<ProgressLineExampleSize />
+
+```tsx
+<ProgressLine size="s" />
+<ProgressLine size="m" />
+```
+
+## Импорт
+
+```tsx
+import { ProgressLine } from '@consta/uikit/ProgressLine';
+```
+
+## Свойства
+
+```tsx
+type ProgressLinePropMode = 'determinate' | 'indeterminate';
+```
+
+| Свойство            | Тип                         | По умолчанию    | Описание                                  |
+| ------------------- | --------------------------- | --------------- | ----------------------------------------- |
+| [`size?`](#размер)  | `'s', 'm'`                  | `'m'`           | Размер индикатора                         |
+| [`mode?`](#тип)     | `ProgressLinePropMode`      | `indeterminate` | Модификация индикатора                    |
+| [`progress?`](#тип) | `number`                    | -               | Прогресс выполнения                       |
+| `className?`        | `string`                    | -               | Дополнительный CSS-класс                  |
+| `ref?`              | `React.Ref<HTMLDivElement>` | -               | Ссылка на корневой DOM-элемент компонента |
+
+## Пример
+
+```tsx
+import React, { useState } from 'react';
+import { ProgressLine } from '@consta/uikit/ProgressLine';
+
+const App = () => {
+  return <ProgressLine mode="determinate" size="s" progress={20} />;
+};
+```

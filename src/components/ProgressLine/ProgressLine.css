@@ -1,0 +1,52 @@
+.ProgressLine {
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+  height: var(--progress-line-height);
+  background: var(--color-bg-system);
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background-color: var(--color-bg-brand);
+    transition: width 0.3s, left 0.3s;
+  }
+
+  &_size {
+    &_s {
+      --progress-line-height: var(--space-3xs);
+    }
+
+    &_m {
+      --progress-line-height: var(--space-2xs);
+    }
+  }
+
+  &_mode {
+    &_determinate {
+      &::after {
+        left: 0;
+        width: var(--progress-line-progress);
+      }
+    }
+
+    &_indeterminate {
+      &::after {
+        width: calc(calc(10 / 12) * 100%);
+        animation: ProgressLineAnimation 2s linear infinite;
+      }
+    }
+  }
+}
+
+@keyframes ProgressLineAnimation {
+  0% {
+    left: calc(-100% + calc(1 / 12) * 100%);
+  }
+
+  100% {
+    left: calc(100% - calc(1 / 12) * 100%);
+  }
+}
