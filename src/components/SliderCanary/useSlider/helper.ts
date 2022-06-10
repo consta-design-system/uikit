@@ -102,6 +102,9 @@ export const getValidValue = (
     if (!Array.isArray(step)) {
       const division = step?.toString().split('.')[1];
       const stepValue = step || 1;
+      if (Math.abs(value) < 1) {
+        return Number(value.toFixed(division ? division.length : 0));
+      }
       return (
         Math.ceil(Number(value.toFixed(division ? division.length : 0)) / stepValue) * stepValue
       );
@@ -140,12 +143,13 @@ export const getValueByPosition = (
   sliderRef: React.RefObject<HTMLDivElement>,
   min: number,
   max: number,
+  step?: number | number[],
 ) => {
   if (sliderRef.current && position) {
     const { x, width } = sliderRef.current.getBoundingClientRect();
     const absoluteSize = Math.abs(max - min);
     const value = min + ((position.x - x) * absoluteSize) / width;
-    return getValidValue(value, min, max);
+    return getValidValue(value, min, max, step);
   }
   return 0;
 };
@@ -186,16 +190,26 @@ export const analyzeDivisionValue = (
   min: number,
   max: number,
 ) => {
-  const steps = getSteps(step, min, max);
   let newValue: number = value;
-  steps.forEach((stepSize) => {
-    if (value && stepSize.min < value && stepSize.max >= value) {
-      if ((stepSize.max + stepSize.min) / 2 > value) {
-        newValue = stepSize.min;
-      } else {
-        newValue = stepSize.max;
+  if (Array.isArray(step)) {
+    const steps = getSteps(step, min, max);
+    steps.forEach((stepSize) => {
+      if (value && stepSize.min < value && stepSize.max >= value) {
+        if ((stepSize.max + stepSize.min) / 2 > value) {
+          newValue = stepSize.min;
+        } else {
+          newValue = stepSize.max;
+        }
       }
+    });
+  } else {
+    const nearStep = (value - min) % step;
+    if (nearStep > step / 2) {
+      newValue = step - nearStep + value;
+    } else {
+      newValue = value - nearStep;
     }
-  });
+  }
+  // console.log(newValue)
   return newValue;
 };

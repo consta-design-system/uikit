@@ -1,4 +1,4 @@
-import React, { MutableRefObject, useCallback, useEffect, useRef, useState } from 'react';
+import React, { MutableRefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { useComponentSize } from '../../../hooks/useComponentSize/useComponentSize';
 import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
@@ -17,6 +17,8 @@ import {
   UseSliderValues,
 } from './helper';
 
+export const COUNT_STEPS = 250;
+
 export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): UseSliderValues {
   const {
     disabled,
@@ -33,6 +35,21 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
 
   const minValue = max > min ? min : 0;
   const maxValue = max > min ? max : 100;
+
+  const dragStepValue = useMemo(() => {
+    if (!Array.isArray(step)) {
+      if (step >= 1) {
+        const val = Math.abs((maxValue - minValue) / COUNT_STEPS);
+        if (val > step) {
+          return val - (val % step);
+        }
+        return Math.max(val, step);
+      }
+    }
+    return step;
+  }, [max, min, step]);
+
+  // console.log(dragStepValue)
 
   const [currentValue, setCurrentValue] = useState<number | [number, number]>(value);
   const [leftPopover, setLeftPopover] = useState<TrackPosition>(null);
@@ -192,8 +209,8 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
       return value;
     }
     const position = trackPosition(nativeEvent);
-    const positionValue = getValueByPosition(position, sliderRef, minValue, maxValue);
-    return getNewValue(positionValue, currentValue, step, min, max, activeButton.current);
+    const positionValue = getValueByPosition(position, sliderRef, minValue, maxValue, step);
+    return getNewValue(positionValue, currentValue, dragStepValue, min, max, activeButton.current);
   };
 
   const onFocus = (e: React.FocusEvent | React.MouseEvent, button: ActiveButton) => {

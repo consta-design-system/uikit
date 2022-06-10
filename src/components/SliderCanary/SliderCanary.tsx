@@ -49,7 +49,7 @@ function SliderRender<RANGE extends boolean>(
     onChange,
     onAfterChange,
     value,
-    step = 1,
+    step: stepProp,
     disabled = false,
     size = defaultPropSize,
     view = 'default',
@@ -71,11 +71,14 @@ function SliderRender<RANGE extends boolean>(
   const leftButtonRef = useRef<HTMLButtonElement>(null);
   const rightButtonRef = useRef<HTMLButtonElement>(null);
 
-  const sortedSteps = useSortSteps({ step, min, max });
+  const sortedSteps = useSortSteps({ step: stepProp, min, max });
+  const step = stepProp ? sortedSteps : Math.abs((max - min) / 100);
 
   const IconRight = rightSide;
   const IconLeft =
-    isNotRangeParams && props.leftSide && props.leftSide !== 'input' ? props.leftSide : undefined;
+    isNotRangeParams(props) && props.leftSide && props.leftSide !== 'input'
+      ? props.leftSide
+      : undefined;
 
   const iconSize = getByMap(sizeMap, size);
 
@@ -92,7 +95,7 @@ function SliderRender<RANGE extends boolean>(
     value,
     min,
     max,
-    step: sortedSteps,
+    step,
     onChange,
     onAfterChange,
     sliderRef,
@@ -105,7 +108,7 @@ function SliderRender<RANGE extends boolean>(
     max,
     view,
     range,
-    sortedSteps,
+    step,
     [leftButtonRef, rightButtonRef],
     sliderRef,
   );
@@ -132,14 +135,14 @@ function SliderRender<RANGE extends boolean>(
               min={min}
               max={max}
               status={status}
-              step={sortedSteps}
+              step={step}
               disabled={disabled}
             />
           </div>
         )}
         {IconLeft && (
           <div className={cnSlider('Side', { position: 'left' })}>
-            <IconLeft size={iconSize} view="secondary" />
+            <IconLeft size={iconSize ?? undefined} view="secondary" />
           </div>
         )}
         <div className={cnSlider('Control')} ref={sliderRef}>
