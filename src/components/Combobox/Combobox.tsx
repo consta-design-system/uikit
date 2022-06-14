@@ -14,7 +14,6 @@ import {
   defaultLabelForEmptyItems,
   defaultlabelForNotFound,
   getInputWidth,
-  getSelectDropdownForm,
 } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
@@ -81,6 +80,7 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
     isLoading,
     multiple = false,
     style,
+    dropdownForm = 'default',
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
 
@@ -120,8 +120,6 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
     onCreate,
     searchFunction,
   });
-
-  const dropdownForm = getSelectDropdownForm(form);
 
   const renderItemDefault: PropRenderItem<ITEM> = (props) => {
     const { item, active, hovered, onClick, onMouseEnter } = props;

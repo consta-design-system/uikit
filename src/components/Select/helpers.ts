@@ -42,6 +42,7 @@ export type SelectProps<ITEM = DefaultItem, GROUP = DefaultGroup> = PropsWithHTM
     onChange: (props: { value: ITEM | null; e: React.SyntheticEvent }) => void;
     disabled?: boolean;
     form?: PropForm;
+    dropdownForm?: 'default' | 'brick' | 'round';
     size?: PropSize;
     view?: PropView;
     status?: PropStatus;

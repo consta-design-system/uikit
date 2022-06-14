@@ -56,6 +56,7 @@ export type ComboboxProps<
     onChange: PropOnChange<ITEM, MULTIPLE>;
     disabled?: boolean;
     form?: PropForm;
+    dropdownForm?: 'default' | 'brick' | 'round';
     size?: Exclude<PropSize, 'xs'>;
     view?: PropView;
     placeholder?: string;

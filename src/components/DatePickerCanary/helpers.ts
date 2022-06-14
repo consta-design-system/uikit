@@ -1,8 +1,8 @@
 import { startOfToday } from 'date-fns';
 
 import { range } from '../../utils/array';
-import { getByMap } from '../../utils/getByMap';
 import { DateRange } from '../../utils/types/Date';
+import { getForm } from '../FieldGroup/FieldGroup';
 import { TextFieldPropForm } from '../TextField/TextField';
 
 import { DatePickerPropType } from './types';
@@ -67,42 +67,8 @@ export const getTimeEnum = (
   });
 };
 
-const mapFormForStart: Record<TextFieldPropForm, TextFieldPropForm> = {
-  default: 'defaultClear',
-  defaultClear: 'defaultClear',
-  defaultBrick: 'defaultClear',
-  brick: 'brickClear',
-  brickDefault: 'brickClear',
-  brickClear: 'brickClear',
-  brickRound: 'brickClear',
-  round: 'roundClear',
-  roundClear: 'roundClear',
-  roundBrick: 'roundClear',
-  clearRound: 'clearClear',
-  clearDefault: 'clearClear',
-  clearBrick: 'clearClear',
-  clearClear: 'clearClear',
-};
-
-const mapFormForEnd: Record<TextFieldPropForm, TextFieldPropForm> = {
-  default: 'brickDefault',
-  defaultClear: 'brickClear',
-  defaultBrick: 'brick',
-  brick: 'brick',
-  brickDefault: 'brickDefault',
-  brickClear: 'brickClear',
-  brickRound: 'brickRound',
-  round: 'brickRound',
-  roundClear: 'brickClear',
-  roundBrick: 'brick',
-  clearRound: 'brickRound',
-  clearDefault: 'brickDefault',
-  clearBrick: 'brick',
-  clearClear: 'brickClear',
-};
-
-export const getFormForStart = (form: TextFieldPropForm) => getByMap(mapFormForStart, form);
-export const getFormForEnd = (form: TextFieldPropForm) => getByMap(mapFormForEnd, form);
+export const getFormForStart = (form: TextFieldPropForm) => getForm(form, 0, 2);
+export const getFormForEnd = (form: TextFieldPropForm) => getForm(form, 1, 2);
 
 const getPartDate = (formatArray: string[], stringArray: string[], marker: string) => {
   const index = formatArray.indexOf(marker);

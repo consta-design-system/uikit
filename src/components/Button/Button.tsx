@@ -32,8 +32,43 @@ export const buttonPropForm = [
   'brickDefault',
   'defaultBrick',
 ] as const;
+
 export type ButtonPropForm = typeof buttonPropForm[number];
-export const buttonPropFormDefault: ButtonPropForm = buttonPropForm[0];
+
+type GlobalForm =
+  | 'default'
+  | 'brick'
+  | 'round'
+  | 'brickRound'
+  | 'roundBrick'
+  | 'brickDefault'
+  | 'defaultBrick'
+  | 'defaultClear'
+  | 'brickClear'
+  | 'roundClear'
+  | 'clearRound'
+  | 'clearDefault'
+  | 'clearBrick'
+  | 'clearClear';
+
+const mapStableForm: Record<GlobalForm, ButtonPropForm> = {
+  default: 'default',
+  defaultClear: 'defaultBrick',
+  defaultBrick: 'defaultBrick',
+  brick: 'brick',
+  brickDefault: 'brickDefault',
+  brickClear: 'brick',
+  brickRound: 'brickRound',
+  round: 'round',
+  roundClear: 'roundBrick',
+  roundBrick: 'roundBrick',
+  clearRound: 'brickRound',
+  clearDefault: 'brickDefault',
+  clearBrick: 'brick',
+  clearClear: 'brick',
+};
+
+export const buttonPropFormDefault = buttonPropForm[0];
 
 export type Props = {
   size?: ButtonPropSize;
@@ -117,7 +152,7 @@ export const Button = forwardRefWithAs<Props, 'button'>((props, ref) => {
           size,
           view,
           width,
-          form,
+          form: mapStableForm[form],
           disabled,
           loading,
           withIcon,

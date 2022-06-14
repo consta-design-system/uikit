@@ -1,0 +1,40 @@
+import { FieldGroupExample } from './examples/FieldGroupExample/FieldGroupExample';
+
+# FieldGroup
+
+```tsx
+import { FieldGroup } from '@consta/uikit/FieldGroup';
+```
+
+Компонент для обьеденения полей ввода в одну строку.
+
+```tsx
+<FieldGroup form="round" size="m">
+  <TextField placeholder="TextField" />
+  <Select
+    placeholder="Select"
+    items={items}
+    onChange={() => {
+      console.log('onChange');
+    }}
+  />
+  <Button label="Button" />
+</FieldGroup>
+```
+
+<FieldGroupExample />
+
+## Импорт
+
+```tsx
+import { FieldGroup } from '@consta/uikit/FiFieldGroupleField';
+```
+
+## Свойства
+
+| Свойство     | Тип                                                                                                                                                                                                                                                                                                     | По умолчанию | Описание                       |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ------------------------------ |
+| `form?`      | `'default'` &#124; `'brick'` &#124; `'round'` &#124; `'brickRound'` &#124; `'roundBrick'` &#124; `'brickDefault'` &#124; `'defaultBrick'` &#124; `'defaultClear'` &#124; `'brickClear'` &#124; `'roundClear'` &#124; `'clearRound'` &#124; `'clearDefault'` &#124; `'clearBrick'` &#124; `'clearClear'` | `'default'`  | Идентификатор компонента       |
+| `size?`      | `'m'` &#124; `'xs'` &#124; `'s'` &#124; `'l'`                                                                                                                                                                                                                                                           | `'m'`        | Действие при выборе файла      |
+| `ref?`       | `React.Ref<HTMLInputElement>`                                                                                                                                                                                                                                                                           | -            | Ссылка на корневой DOM-элемент |
+| `classname?` | `string`                                                                                                                                                                                                                                                                                                | -            | Дополнителный css класс        |
