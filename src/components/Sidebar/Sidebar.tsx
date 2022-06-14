@@ -126,7 +126,7 @@ export const Sidebar: SidebarComponent = (props) => {
     <CSSTransition
       in={isOpen}
       unmountOnExit
-      className={cnSidebar({ position, hasOverlay })}
+      className={cnSidebar({ position, hasOverlay }, [rootClassName])}
       classNames={cnForCssTransition(cnSidebar)}
       timeout={240}
       nodeRef={portalRef}
@@ -135,7 +135,6 @@ export const Sidebar: SidebarComponent = (props) => {
         preset={theme}
         ref={portalRef}
         container={container}
-        className={rootClassName}
         style={typeof style?.zIndex === 'number' ? { zIndex: style.zIndex } : undefined}
       >
         {hasOverlay && <div className={cnSidebar('Overlay')} aria-label="Overlay" />}
