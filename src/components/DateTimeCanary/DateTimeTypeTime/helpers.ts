@@ -49,7 +49,7 @@ const getItemData = (
   maxDate?: Date,
   onChangeRef?: React.MutableRefObject<DateTimeTimePropOnChange | undefined>,
 ): ResultItem[] => {
-  const numbers = range(multiplicity ? Math.floor(length / multiplicity) : 0);
+  const numbers = range(multiplicity ? Math.ceil(length / multiplicity) : 0);
 
   if (numbers.length === 0) {
     return [];
