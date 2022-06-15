@@ -3,8 +3,9 @@ import './ProgressLine.css';
 import React, { forwardRef } from 'react';
 
 import { cn } from '../../utils/bem';
+import { isNumber } from '../../utils/type-guards';
 
-import { ProgressLineComponent, ProgressLineProps } from './types';
+import { ProgressLineComponent } from './types';
 
 const cnProgressLine = cn('ProgressLine');
 
@@ -18,21 +19,20 @@ const getProgress = (progress: number) => {
   return progress;
 };
 
-function ProgressLineRender(props: ProgressLineProps) {
+export const ProgressLine: ProgressLineComponent = forwardRef((props, ref) => {
   const { size = 'm', value, ...otherProps } = props;
 
   return (
     <div
+      ref={ref}
       style={{
         ['--progress-line-value' as string]: `${getProgress(value ?? 0)}%`,
       }}
       className={cnProgressLine({
         size,
-        mode: value ? 'determinate' : 'indeterminate',
+        mode: isNumber(value) ? 'determinate' : 'indeterminate',
       })}
       {...otherProps}
     />
   );
-}
-
-export const ProgressLine = forwardRef(ProgressLineRender) as ProgressLineComponent;
+});
