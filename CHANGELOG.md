@@ -1,5 +1,16 @@
 # Changelog
 
+## v3.25.0 (15/06/2022)
+Самое важное:
+- Добавили новый компонент `FieldGroup`, который склеивает несколько элементов формы — например, два поля или поле и кнопку. Не нужно думать про позиционирование элементов, проставлять отступы и скругление, компонент сделает всё сам. Использовать можно будет для любых элементов, у которых есть свойство `form` — `TextField`, `Button`, `Select`, `UserSelect`, `Combobox`, `DatePiker` и похожих.
+---
+
+- [fix(DateTime): fixed multiplicity (#2389)](https://github.com/consta-design-system/uikit/commit/fd2fc46f3f0da6b6df419460522a12f8e5ff1e0a) - [@gizeasy](https://github.com/gizeasy)
+- [fix(Sidebar): fixed rootClassName (#2387)](https://github.com/consta-design-system/uikit/commit/406baed6caaaf72bae44d80054a15ff640bc8873) - [@gizeasy](https://github.com/gizeasy)
+- [feat(FieldGroup): add FieldGroup](https://github.com/consta-design-system/uikit/commit/40fee71989c9c1c4603e3b65cb132a4f418fa24a) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v3.24.4 (08/06/2022)
 - [refactor(DragNDropField): refactor locale (#2361)](https://github.com/consta-design-system/uikit/commit/15fbb25839545c6ab6a2be82f23addd65eb82f26) - [@gizeasy](https://github.com/gizeasy)
 
@@ -447,23 +458,3 @@ endFieldOnBlur - deleted, use onBlur
 - [docs(global): add import field to all components and fix mistakes (#1865)](https://github.com/gazprom-neft/consta-uikit/commit/54fa15bbd9527e92f73841740b8488b9aaa72ee8) - [@N1MBER](https://github.com/N1MBER)
 - [fix(ProgressStepBar): fixed icon render](https://github.com/gazprom-neft/consta-uikit/commit/c6cdded99572b9cfe769bde603ecdd6ee5aa6c9b) - [@gizeasy](https://github.com/gizeasy)
 - [docs(useBreakpoints): edit docs (#1863)](https://github.com/gazprom-neft/consta-uikit/commit/fff37e78ba85ade4f2d1b638003242a5f7f39636) - [@arhayka](https://github.com/arhayka)
-
---------------------
-
-## v3.12.0 (15/12/2021)
-- Добавили хук `useBreakpoints` для подписки на изменение `breakpoints`
-- Иконки теперь умеют возвращать `ref`
-- В `MixSpace` добавили новые значения модификаторов
-- Доработали документацию
-
----
-
-- [docs(useBreakpoints): add docs](https://github.com/gazprom-neft/consta-uikit/commit/656502fc8396f1e6d88371a946ed1ee3be131e89) - [@gizeasy](https://github.com/gizeasy)
-- [feat(useBreakpoints): add hook useBreakpoints](https://github.com/gazprom-neft/consta-uikit/commit/8efa228a2ce57e1e981c3fc0ad09407fb6a64f68) - [@gizeasy](https://github.com/gizeasy)
-- [fix(TextField): fix bug with non-working autofocus (#1855)](https://github.com/gazprom-neft/consta-uikit/commit/15bf72198baa6e66a9e015019ea512551e80b2a3) - [@N1MBER](https://github.com/N1MBER)
-- [docs(Informer): docs review (#1845)](https://github.com/gazprom-neft/consta-uikit/commit/01d93f3cbec3a93ad4008754fc03e315057b6b14) - [@arhayka](https://github.com/arhayka)
-- [docs(Collapse): docs review (#1846)](https://github.com/gazprom-neft/consta-uikit/commit/27f543bc5f191a1a0c960e446d39f1b3f915eac7) - [@arhayka](https://github.com/arhayka)
-- [refactor(Icon): refactor createIcon, types, types in docs](https://github.com/gazprom-neft/consta-uikit/commit/6a8c18a5cb720401bc0ad1984acb3cb576115254) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Icon): createIcon return component can hold ref;](https://github.com/gazprom-neft/consta-uikit/commit/dcc5647bbd31fa22a24584a716bc609efbe1f2b3) - [@levi2ki](https://github.com/levi2ki)
-- [feat(MixSpace): add new values for padding & margin (#1844)](https://github.com/gazprom-neft/consta-uikit/commit/7fcc5a635278c245578d7fc97a02a26a93cb7beb) - [@N1MBER](https://github.com/N1MBER)
-- [feat(ContextMenu): added getItemAs and getItemHTMLAttributes (#1848)](https://github.com/gazprom-neft/consta-uikit/commit/7afb10808bc6f105724c0ec8dcbfedaf45c0885e) - [@gizeasy](https://github.com/gizeasy)
