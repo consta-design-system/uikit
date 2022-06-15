@@ -8,10 +8,10 @@ export const ProgressLineExampleMode = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <div>
-        <ProgressLine mode="indeterminate" />
+        <ProgressLine />
       </div>
       <div>
-        <ProgressLine mode="determinate" progress={30} />
+        <ProgressLine value={30} />
       </div>
     </StoryBookExample>
   );

@@ -4,7 +4,7 @@ import React, { forwardRef } from 'react';
 
 import { cn } from '../../utils/bem';
 
-import { ProgressLineComponent, ProgressLineProps, PropgressLinePropMode } from './types';
+import { ProgressLineComponent, ProgressLineProps } from './types';
 
 const cnProgressLine = cn('ProgressLine');
 
@@ -18,19 +18,17 @@ const getProgress = (progress: number) => {
   return progress;
 };
 
-function ProgressLineRender<MODE extends PropgressLinePropMode = 'indeterminate'>(
-  props: ProgressLineProps<MODE>,
-) {
-  const { size = 'm', mode = 'indeterminate', progress, ...otherProps } = props;
+function ProgressLineRender(props: ProgressLineProps) {
+  const { size = 'm', value, ...otherProps } = props;
 
   return (
     <div
       style={{
-        ['--progress-line-progress' as string]: `${getProgress(progress ?? 0)}%`,
+        ['--progress-line-value' as string]: `${getProgress(value ?? 0)}%`,
       }}
       className={cnProgressLine({
         size,
-        mode: mode === 'determinate' && progress ? 'determinate' : 'indeterminate',
+        mode: value ? 'determinate' : 'indeterminate',
       })}
       {...otherProps}
     />

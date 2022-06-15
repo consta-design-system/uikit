@@ -11,15 +11,13 @@ import { ProgressLine } from '@consta/uikit/ProgressLine';
 
 ## Тип
 
-Свойство `mode` определяет по какому принципу будет работать компонент,
-если `mode=indeterminate`, то будет отображаться индикатор с бесконечной анимацией.
-Если же `determinate`, то будет отображаться текущий, указанный вами прогресс.
+Для указания конкретного прогресса нужно указать свойство `value`, иначе будет проигрываться бесконечнная анимация.
 
 <ProgressLineExampleMode />
 
 ```tsx
-<ProgressLine mode="indeterminate" />
-<ProgressLine mode="determinate" progress={30} />
+<ProgressLine />
+<ProgressLine value={30} />
 ```
 
 ## Размер
@@ -45,13 +43,12 @@ import { ProgressLine } from '@consta/uikit/ProgressLine';
 type ProgressLinePropMode = 'determinate' | 'indeterminate';
 ```
 
-| Свойство            | Тип                         | По умолчанию    | Описание                                  |
-| ------------------- | --------------------------- | --------------- | ----------------------------------------- |
-| [`size?`](#размер)  | `'s', 'm'`                  | `'m'`           | Размер индикатора                         |
-| [`mode?`](#тип)     | `ProgressLinePropMode`      | `indeterminate` | Модификация индикатора                    |
-| [`progress?`](#тип) | `number`                    | -               | Прогресс выполнения                       |
-| `className?`        | `string`                    | -               | Дополнительный CSS-класс                  |
-| `ref?`              | `React.Ref<HTMLDivElement>` | -               | Ссылка на корневой DOM-элемент компонента |
+| Свойство           | Тип                         | По умолчанию | Описание                                  |
+| ------------------ | --------------------------- | ------------ | ----------------------------------------- |
+| [`size?`](#размер) | `'s', 'm'`                  | `'m'`        | Размер индикатора                         |
+| [`value?`](#тип)   | `number`                    | -            | Прогресс выполнения                       |
+| `className?`       | `string`                    | -            | Дополнительный CSS-класс                  |
+| `ref?`             | `React.Ref<HTMLDivElement>` | -            | Ссылка на корневой DOM-элемент компонента |
 
 ## Пример
 
@@ -60,6 +57,6 @@ import React, { useState } from 'react';
 import { ProgressLine } from '@consta/uikit/ProgressLine';
 
 const App = () => {
-  return <ProgressLine mode="determinate" size="s" progress={20} />;
+  return <ProgressLine size="s" value={20} />;
 };
 ```

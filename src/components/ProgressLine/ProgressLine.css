@@ -28,13 +28,13 @@
     &_determinate {
       &::after {
         left: 0;
-        width: var(--progress-line-progress);
+        width: var(--progress-line-value);
       }
     }
 
     &_indeterminate {
       &::after {
-        width: calc(calc(10 / 12) * 100%);
+        width: calc(calc(5 / 6) * 100%);
         animation: ProgressLineAnimation 2s linear infinite;
       }
     }
@@ -43,10 +43,10 @@
 
 @keyframes ProgressLineAnimation {
   0% {
-    left: calc(-100% + calc(1 / 12) * 100%);
+    left: calc(-100% + calc(1 / 6) * 100%);
   }
 
   100% {
-    left: calc(100% - calc(1 / 12) * 100%);
+    left: 100%;
   }
 }

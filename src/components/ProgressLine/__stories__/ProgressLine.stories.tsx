@@ -3,29 +3,24 @@ import { number, select } from '@storybook/addon-knobs';
 
 import { createMetadata } from '../../../utils/storybook';
 import { ProgressLine } from '../ProgressLine';
-import {
-  defaultProgressLinePropMode,
-  defaultProgressLinePropSize,
-  progressLinePropMode,
-  progressLinePropSize,
-} from '../types';
+import { defaultProgressLinePropSize, progressLinePropSize } from '../types';
 
 import mdx from './ProgressLine.docs.mdx';
 
 const defaultKnobs = () => ({
-  mode: select('mode', progressLinePropMode, defaultProgressLinePropMode),
+  mode: select('mode', ['determinate', 'indeterminate'], 'indeterminate'),
   size: select('size', progressLinePropSize, defaultProgressLinePropSize),
-  progress: number('progress', 50),
+  value: number('progresvalues', 50),
 });
 
 export function Playground() {
-  const { mode, size, progress } = defaultKnobs();
+  const { mode, size, value } = defaultKnobs();
 
-  return <ProgressLine mode={mode} size={size} progress={progress} />;
+  return <ProgressLine size={size} value={mode === 'determinate' ? value : undefined} />;
 }
 
 export default createMetadata({
-  title: 'Компоненты|/Отображение данных/ProgressLine',
+  title: 'Компоненты|/Обратная связь/ProgressLine',
   id: 'components/ProgressLine',
   parameters: {
     docs: {
