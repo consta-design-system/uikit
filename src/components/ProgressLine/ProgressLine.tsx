@@ -20,19 +20,20 @@ const getProgress = (progress: number) => {
 };
 
 export const ProgressLine: ProgressLineComponent = forwardRef((props, ref) => {
-  const { size = 'm', value, ...otherProps } = props;
+  const { size = 'm', value, style, ...otherProps } = props;
 
   return (
     <div
+      {...otherProps}
       ref={ref}
       style={{
+        ...style,
         ['--progress-line-value' as string]: `${getProgress(value ?? 0)}%`,
       }}
       className={cnProgressLine({
         size,
         mode: isNumber(value) ? 'determinate' : 'indeterminate',
       })}
-      {...otherProps}
     />
   );
 });
