@@ -1,0 +1,28 @@
+.stand--StandPageSandbox {
+    width: 100%;
+    min-height: var(--sandbox-height);
+    position: relative;
+
+    &-Frame {
+        width: 100%;
+        height: 100%;
+        border: none;
+        min-height: var(--sandbox-height);
+    }
+
+    &-Loader {
+        position: absolute;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .stand--StandPageSandbox {
+        --sandbox-height: 570px;
+    }
+}
+
+@media screen and (max-width: 899px) {
+    .stand--StandPageSandbox {
+        --sandbox-height: 250px;
+    }
+}

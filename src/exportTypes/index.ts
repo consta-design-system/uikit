@@ -9,13 +9,17 @@ export type Stand<Group extends string = string> = {
   title: string;
   group: Group;
   image?: (() => React.ReactElement | null) | string;
-  logo?:  (() => React.ReactElement | null) | string;
-  description?: string;
+  logo?: (() => React.ReactElement | null) | string;
   order?: number;
   standId?: string;
-  status: 'depricated' | 'canary' | 'stable' | 'inWork';
+  status: 'deprecated' | 'canary' | 'stable' | 'inWork';
   version: string;
   docs?: React.FC;
+  figma?: string;
+  sandbox?: string;
+  playground?: React.FC;
+  description?: string;
+  otherVersion?: Stand<Group>[];
 };
 
 export type Lib<GROUP extends Group> = {

@@ -1,0 +1,49 @@
+.stand--StandPageFigma {
+    --figma-container-height: 0px;
+    width: 100%;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--color-bg-secondary);
+    min-height: var(--figma-container-height);
+    overflow: hidden;
+
+    &-Title {
+        margin-bottom: var(--space-2xs);
+    }
+
+    &-Button { 
+        margin-top: var(--space-2xl)
+    }
+
+    &-Frame {
+        width: 100%;
+        height: 100%;
+        border: none;
+        min-height: var(--figma-container-height);
+    }
+
+    &-Image {
+        position: absolute;
+        left: calc(100% - 131px);
+        top: calc(100% - 149px);
+    }
+
+    &-Loader {
+        position: absolute;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .stand--StandPageFigma {
+        --figma-container-height: 437px;
+    }
+}
+
+@media screen and (max-width: 899px) {
+    .stand--StandPageFigma {
+        --figma-container-height: 200px;
+    }
+}

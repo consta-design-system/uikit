@@ -1,0 +1,37 @@
+.stand--StandPageFooter {
+    width: 100%;
+
+    & a {
+        text-decoration: none;
+    }
+
+    &-SPA {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+        padding-top: var(--space-2xl);
+        border-top: 1px solid var(--color-bg-border);
+        padding-bottom: var(--space-2xl);
+    }
+
+    &-Container {
+        border-top: 1px solid var(--color-bg-border);
+        width: 100%;
+        padding-top: var(--space-2xl);
+    }
+
+    &-Links {
+        margin-top: var(--space-s);
+        display: flex;
+        align-items: flex-start;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    &-Buttons {
+        & > *:not(:last-child) {
+            margin-right: var(--space-l);
+        }
+    }
+}

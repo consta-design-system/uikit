@@ -45,6 +45,12 @@ export const prepareStands = (initStands: CreatedStand[], paths: string[]) => {
   initStands
     .map((item, index) => ({
       ...item,
+      stand: {
+        ...item.stand,
+        otherVersion: initStands
+          .filter((el) => el.stand.id === item.stand.id && el.stand.status !== item.stand.status)
+          .map((el) => el.stand),
+      },
       id: `${item.lib.id}-${item.stand.group}-${item.stand.id}-${item.stand.status}`
         .replace(/\W|_/g, '-')
         .toLowerCase(),
