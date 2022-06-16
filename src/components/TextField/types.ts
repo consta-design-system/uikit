@@ -95,6 +95,7 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
     width?: TextFieldPropWidth;
     onFocus?: React.FocusEventHandler<HTMLElement>;
     onBlur?: React.FocusEventHandler<HTMLElement>;
+    withNumberArrows?: boolean;
     autoFocus?: boolean;
     placeholder?: string;
     leftSide?: string | IconComponent;

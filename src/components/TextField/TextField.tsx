@@ -67,6 +67,7 @@ export function TextFieldRender<TYPE extends string>(
     rightSide,
     autoComplete,
     withClearButton,
+    withNumberArrows = true,
     max,
     min,
     readOnly,
@@ -263,7 +264,7 @@ export function TextFieldRender<TYPE extends string>(
             <input {...commonProps} {...inputProps} />
           )}
 
-          {type === 'number' && (
+          {type === 'number' && withNumberArrows && (
             <div className={cnTextField('Counter')}>
               <button
                 onFocus={handleFocus}
