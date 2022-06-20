@@ -21,7 +21,7 @@ export type UseSliderProps<RANGE extends boolean = false> = {
   step?: number | number[];
   onChange?: PropOnChange<RANGE>;
   onAfterChange?: PropOnChange<RANGE>;
-  sliderRef: React.RefObject<HTMLDivElement>;
+  sliderRef: React.RefObject<HTMLDivElement | HTMLButtonElement>;
   buttonRefs: React.RefObject<HTMLButtonElement>[];
 };
 
@@ -32,6 +32,7 @@ export type UseSliderValues = {
     button: ActiveButton,
   ) => void;
   handlePress: (typeButton: ActiveButton) => void;
+  onSliderClick: React.MouseEventHandler;
   activeButton: ActiveButton;
   currentValue: [number] | [number, number];
   popoverPosition: TrackPosition[];
@@ -97,17 +98,19 @@ export const getValidValue = (
   step?: number | number[],
 ) => {
   if (typeof value === 'number') {
-    if (value > max) return max;
-    if (value < min) return min;
+    if (value >= max) return max;
+    if (value <= min) return min;
     if (!Array.isArray(step)) {
       const division = step?.toString().split('.')[1];
       const stepValue = step || 1;
       if (Math.abs(value) < 1) {
         return Number(value.toFixed(division ? division.length : 0));
       }
-      return (
-        Math.ceil(Number(value.toFixed(division ? division.length : 0)) / stepValue) * stepValue
-      );
+      const roundValue =
+        Math.round(Number(value.toFixed(division ? division.length : 0)) / stepValue) * stepValue;
+      if (roundValue > max) return max;
+      if (roundValue < min) return min;
+      return Number(roundValue.toFixed(division ? division.length : 0));
     }
     let resultValue = value;
     step.forEach((stepPoint, index) => {
@@ -140,7 +143,7 @@ export const isValidValue = (value: number, min: number, max: number, step?: num
 
 export const getValueByPosition = (
   position: TrackPosition,
-  sliderRef: React.RefObject<HTMLDivElement>,
+  sliderRef: React.RefObject<HTMLDivElement | HTMLButtonElement>,
   min: number,
   max: number,
   step?: number | number[],
@@ -203,6 +206,8 @@ export const analyzeDivisionValue = (
       }
     });
   } else {
+    if (value >= max) return max;
+    if (value <= min) return min;
     const nearStep = (value - min) % step;
     if (nearStep > step / 2) {
       newValue = step - nearStep + value;
@@ -210,6 +215,5 @@ export const analyzeDivisionValue = (
       newValue = value - nearStep;
     }
   }
-  // console.log(newValue)
   return newValue;
 };

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import './Slider.css';
 
 import React, { forwardRef, useRef } from 'react';
@@ -86,6 +87,7 @@ function SliderRender<RANGE extends boolean>(
     onKeyPress,
     onFocus,
     handlePress,
+    onSliderClick,
     popoverPosition,
     activeButton,
     currentValue,
@@ -145,7 +147,13 @@ function SliderRender<RANGE extends boolean>(
             <IconLeft size={iconSize ?? undefined} view="secondary" />
           </div>
         )}
-        <div className={cnSlider('Control')} ref={sliderRef}>
+        <div
+          role="button"
+          tabIndex={0}
+          className={cnSlider('Control')}
+          ref={sliderRef}
+          onClick={onSliderClick}
+        >
           <SliderLine
             hovered={isHovered || typeof activeButton === 'number'}
             onHover={changeHovered}

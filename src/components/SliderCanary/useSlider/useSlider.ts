@@ -49,8 +49,6 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
     return step;
   }, [max, min, step]);
 
-  // console.log(dragStepValue)
-
   const [currentValue, setCurrentValue] = useState<number | [number, number]>(value);
   const [leftPopover, setLeftPopover] = useState<TrackPosition>(null);
   const [rightPopover, setRightPopover] = useState<TrackPosition>(null);
@@ -123,6 +121,34 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
       }
     }
   }, []);
+
+  const onSliderClick = (e: React.MouseEvent) => {
+    if (isNotRangeParams(props)) {
+      const positionValue = getValueByPosition(
+        { x: e.pageX, y: e.pageY },
+        sliderRef,
+        minValue,
+        maxValue,
+        step,
+      );
+      const newValue = getNewValue(
+        positionValue,
+        currentValue,
+        dragStepValue,
+        min,
+        max,
+        activeButton.current,
+      );
+      if (newValue !== value) {
+        setCurrentValue(newValue);
+        setTooltipPosition(getActiveValue(newValue, 0), 0);
+        onChange?.({
+          e,
+          value: newValue as SliderValue<RANGE>,
+        });
+      }
+    }
+  };
 
   const onKeyPress = useCallback(
     (event: React.KeyboardEvent, typeButton: ActiveButton) => {
@@ -223,8 +249,8 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
       const position = changePosition(event);
       const oldValue: number = getActiveValue(currentValue, button);
       const newValue: number = getActiveValue(position, button);
+      setCurrentValue(position);
       if (oldValue !== newValue) {
-        setCurrentValue(position);
         onAfterChange?.({ e: event, value: position as SliderValue<RANGE> });
       }
     }
@@ -273,6 +299,7 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
     onKeyPress,
     onFocus,
     handlePress,
+    onSliderClick,
     activeButton: activeButton.current,
     popoverPosition: [leftPopover, rightPopover],
     currentValue: Array.isArray(currentValue) ? currentValue : [currentValue],
