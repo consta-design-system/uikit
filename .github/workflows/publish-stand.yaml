@@ -1,0 +1,45 @@
+name: Publish storybook
+on:
+  push:
+    branches: master
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Установка yarn
+        id: yarn-setup
+        run: |
+          yarn policies set-version 1.19.1
+          echo "::set-output name=cache_dir::$(yarn cache dir)"
+      - name: Настройка кэширования зависимостей
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.yarn-setup.outputs.cache_dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Установка зависимостей
+        run: yarn --frozen-lockfile
+      - name: Сборка стенда
+        run: yarn build:storybook
+      - name: Копирование package.json
+        run: node builder/copyPackageJsonForStoryBook.js
+      - name: Установка npm токена
+        uses: filipstefansson/set-npm-token-action@v1
+        with:
+          token: ${{ secrets.NPM_REGISTRY_TOKEN }}
+      - name: Публикация пакета
+        run: npm publish ./build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
