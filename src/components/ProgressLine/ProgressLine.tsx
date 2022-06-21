@@ -10,13 +10,17 @@ import { ProgressLineComponent } from './types';
 const cnProgressLine = cn('ProgressLine');
 
 const getProgress = (progress: number) => {
-  if (progress > 100) {
-    return 100;
+  const progressNormal = Math.ceil(progress);
+
+  if (progressNormal >= 100) {
+    return 1;
   }
-  if (progress < 0) {
+
+  if (progressNormal <= 0) {
     return 0;
   }
-  return progress;
+
+  return progressNormal / 100;
 };
 
 export const ProgressLine: ProgressLineComponent = forwardRef((props, ref) => {
@@ -28,7 +32,7 @@ export const ProgressLine: ProgressLineComponent = forwardRef((props, ref) => {
       ref={ref}
       style={{
         ...style,
-        ['--progress-line-value' as string]: `${getProgress(value ?? 0)}%`,
+        ['--progress-line-value' as string]: `${getProgress(value ?? 0)}`,
       }}
       className={cnProgressLine({
         size,
