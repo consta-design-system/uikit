@@ -6,6 +6,7 @@ import { useAtom } from '@reatom/react';
 import { libsAtom } from '##/modules/libs';
 import { libAtom } from '##/modules/lib';
 import { useRouter } from 'react-router5';
+import { useRoute } from 'react-router5';
 import { routesNames } from '##/modules/router';
 import { cn } from '##/utils/bem';
 import { IconBackward } from '@consta/uikit/IconBackward';
@@ -61,6 +62,7 @@ export const LibPageMenu: React.FC = () => {
   const [libs] = useAtom(libsAtom);
   const [lib] = useAtom(libAtom);
   const router = useRouter();
+  const route = useRoute();
   const [searchValue, setSearchValue] = useState<string | undefined | null>(null);
   const [showDeprecated, setShowDeprecated] = useFlag(true);
   const getIsActive = useIsActiveRouter();
@@ -87,7 +89,8 @@ export const LibPageMenu: React.FC = () => {
         return getIsActive(routesNames.LIBS_LIB_STAND, { libId: lib?.id, standId: item.standId });
       } else {
         return (
-          getIsActive(routesNames.LIBS_LIB, { libId: lib?.id }) || router.getState().path === '/'
+          getIsActive(routesNames.LIBS_LIB, { libId: lib?.id }) &&
+          route.route.name === routesNames.LIBS_LIB
         );
       }
     }

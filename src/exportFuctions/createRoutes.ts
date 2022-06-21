@@ -40,10 +40,6 @@ export const createRoutes = (path = '/', libsLenght = 1) => {
       path: '/design',
     },
     {
-      name: routesNames.LIBS_LIB_STAND_DEV,
-      path: '/dev',
-    },
-    {
       name: routesNames.LIBS_LIB_STAND_SANDBOX,
       path: '/sandbox',
     },

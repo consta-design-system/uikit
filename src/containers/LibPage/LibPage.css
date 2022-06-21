@@ -1,0 +1,36 @@
+@media screen and (min-width: 720px) {
+  .stand--LibPage-Section {
+    --gap: var(--space-2xl);
+  }
+}
+@media screen and (min-width: 1024px) {
+  .stand--LibPage-Section {
+    --gap: var(--space-3xl);
+  }
+}
+@media screen and (min-width: 1280px) {
+  .stand--LibPage-Section {
+    --gap: var(--space-4xl);
+  }
+}
+
+.stand--LibPage {
+  &-Title {
+    margin-bottom: 0.4em;
+  }
+
+  &-Wrapper {
+    width: 100%;
+
+    & > *:not(:last-child) {
+      margin-bottom: var(--space-m);
+    }
+  }
+
+  &-Section {
+    display: grid;
+    width: 100%;
+    grid-column-gap: var(--gap);
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}

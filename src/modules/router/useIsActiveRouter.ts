@@ -18,7 +18,7 @@ export const useIsActiveRouter = () => {
       strictEquality?: boolean,
       ignoreQueryParams?: boolean,
     ) => {
-      if (testStartsWithSegment(path) && routeName === path) {
+      if (testStartsWithSegment(path)) {
         return (
           router.isActive(path, params, strictEquality, ignoreQueryParams) ||
           (path !== routesNames.LIBS_LIB &&

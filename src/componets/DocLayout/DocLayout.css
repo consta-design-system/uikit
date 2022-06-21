@@ -20,5 +20,6 @@
     margin: 0 auto;
     border-radius: 10px;
     padding: var(--space-2xl) var(--space-3xl);
+    min-height: 100%;
   }
 }

@@ -107,7 +107,7 @@ export const StandPage: React.FC = () => {
           onChange={setStandPage}
         />
         {getContent()}
-        {standPath && <LazyDocs id={standPath} />}
+        {standPath && <LazyDocs id={standPath} key={standPath} />}
         <StandPageFooter className={cnStandPage('Footer')} onSPAClick={() => {}} />
       </>
     </DocLayout>

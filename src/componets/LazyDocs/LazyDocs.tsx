@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { ErrorBoundary } from '##/componets/ErrorBoundary';
-import { MDXProvider } from '##/containers/MDXProvider'
+import { MDXProvider } from '##/containers/MDXProvider';
 
 type LazyDocsProps = { id: string };
 
