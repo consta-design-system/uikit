@@ -1,5 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
+import { COUNT_STEPS } from './useSlider/useSlider';
 import { Line, PropView } from './helper';
 
 type UseSliderStationing = (
@@ -10,7 +11,7 @@ type UseSliderStationing = (
   range: boolean | undefined,
   step: number | number[] | undefined,
   buttonRefs: [React.RefObject<HTMLButtonElement>, React.RefObject<HTMLButtonElement>],
-  sliderLineRef: React.RefObject<HTMLDivElement>,
+  sliderLineRef: React.RefObject<HTMLButtonElement | HTMLDivElement>,
 ) => {
   lineSizes: Line[];
   buttonPositions: number[];
@@ -51,6 +52,17 @@ export const useSliderStationing: UseSliderStationing = (
   const [lineSizes, setLineSizes] = useState<Line[]>([]);
   const [buttonPositions, setButtonPositions] = useState<number[]>([]);
 
+  const calcualtedStep = useMemo(() => {
+    if (!Array.isArray(step)) {
+      const val = Math.abs((max - min) / COUNT_STEPS);
+      if (val > step) {
+        return val - (val % step);
+      }
+      return Math.max(val, step);
+    }
+    return step;
+  }, [max, min, step]);
+
   const calculateLines = () => {
     const sizesArray: Line[] = [];
     const absoluteSize = Math.abs(max - min);
@@ -81,8 +93,8 @@ export const useSliderStationing: UseSliderStationing = (
             active: false,
           });
         }
-      } else if (typeof step !== 'undefined') {
-        getSteps(step, min, max).forEach((stepSize) => {
+      } else if (typeof calcualtedStep !== 'undefined') {
+        getSteps(calcualtedStep, min, max).forEach((stepSize) => {
           sizesArray.push({
             width: (Math.abs(stepSize.max - stepSize.min) * 100) / absoluteSize,
             active:
@@ -137,7 +149,7 @@ export const useSliderStationing: UseSliderStationing = (
   useEffect(() => {
     setLineSizes(calculateLines());
     setButtonPositions(calculateButtonPositions());
-  }, [value, min, max, range, step, view]);
+  }, [value, min, max, range, calcualtedStep, view]);
 
   return {
     lineSizes,
