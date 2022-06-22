@@ -119,7 +119,7 @@ export function TextFieldRender<TYPE extends string>(
     (e) => {
       !disabled && onChangeRef.current?.({ e, id, name, value: e.target.value || null });
     },
-    [id, name],
+    [id, name, disabled],
   );
 
   const handleBlur: React.FocusEventHandler<HTMLElement> = (e) => {
