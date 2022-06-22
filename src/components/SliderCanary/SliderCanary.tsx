@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import './Slider.css';
 
 import React, { forwardRef, useRef } from 'react';
@@ -76,10 +75,7 @@ function SliderRender<RANGE extends boolean>(
   const step = stepProp ? sortedSteps : Math.abs((max - min) / 100);
 
   const IconRight = rightSide;
-  const IconLeft =
-    isNotRangeParams(props) && props.leftSide && props.leftSide !== 'input'
-      ? props.leftSide
-      : undefined;
+  const IconLeft = props.leftSide !== 'input' && props.leftSide;
 
   const iconSize = getByMap(sizeMap, size);
 
@@ -115,6 +111,14 @@ function SliderRender<RANGE extends boolean>(
     sliderRef,
   );
 
+  const containerProps = {
+    role: 'button',
+    tabIndex: 0,
+    className: cnSlider('Control'),
+    ref: sliderRef,
+    onClick: onSliderClick,
+  };
+
   const changeHovered = (status: boolean) => {
     if (status) on();
     else off();
@@ -147,13 +151,7 @@ function SliderRender<RANGE extends boolean>(
             <IconLeft size={iconSize ?? undefined} view="secondary" />
           </div>
         )}
-        <div
-          role="button"
-          tabIndex={0}
-          className={cnSlider('Control')}
-          ref={sliderRef}
-          onClick={onSliderClick}
-        >
+        <div {...containerProps}>
           <SliderLine
             hovered={isHovered || typeof activeButton === 'number'}
             onHover={changeHovered}
