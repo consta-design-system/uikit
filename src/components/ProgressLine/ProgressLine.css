@@ -1,0 +1,54 @@
+.ProgressLine {
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+  height: var(--progress-line-height);
+  background: var(--color-bg-system);
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background-color: var(--color-bg-brand);
+    transition: transform 0.3s;
+  }
+
+  &_size {
+    &_s {
+      --progress-line-height: var(--space-3xs);
+    }
+
+    &_m {
+      --progress-line-height: var(--space-2xs);
+    }
+  }
+
+  &_mode {
+    &_determinate {
+      &::after {
+        width: 100%;
+        transform: scaleX(var(--progress-line-value));
+        transform-origin: left;
+      }
+    }
+
+    &_indeterminate {
+      &::after {
+        width: 80%;
+        transform-origin: left;
+        animation: ProgressLineAnimation 2s linear infinite;
+      }
+    }
+  }
+}
+
+@keyframes ProgressLineAnimation {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(130%);
+  }
+}

@@ -31,7 +31,7 @@ describe('Компонент ProgressSpin', () => {
       expect(getRender()).toHaveClass(cnProgressSpin({ spin: true }));
     });
     it(`при указанном loadingProgress ProgressSpin не должен крутитьтся`, () => {
-      renderComponent({ progress: 1 });
+      renderComponent({ value: 1 });
 
       expect(getRender()).not.toHaveClass(cnProgressSpin({ spin: true }));
     });
