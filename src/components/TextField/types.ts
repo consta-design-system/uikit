@@ -95,6 +95,7 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
     width?: TextFieldPropWidth;
     onFocus?: React.FocusEventHandler<HTMLElement>;
     onBlur?: React.FocusEventHandler<HTMLElement>;
+    incrementButtons?: boolean;
     autoFocus?: boolean;
     placeholder?: string;
     leftSide?: string | IconComponent;
@@ -116,6 +117,12 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
     caption?: string;
     labelPosition?: 'top' | 'left';
     focused?: boolean;
+    onKeyDownCapture?: React.KeyboardEventHandler;
+    onKeyPress?: React.KeyboardEventHandler;
+    onKeyPressCapture?: React.KeyboardEventHandler;
+    onKeyUp?: React.KeyboardEventHandler;
+    onKeyUpCapture?: React.KeyboardEventHandler;
+    onKeyDown?: React.KeyboardEventHandler;
   },
   HTMLDivElement
 > &

@@ -67,6 +67,7 @@ export function TextFieldRender<TYPE extends string>(
     rightSide,
     autoComplete,
     withClearButton,
+    incrementButtons = true,
     max,
     min,
     readOnly,
@@ -81,6 +82,13 @@ export function TextFieldRender<TYPE extends string>(
     iconSize: iconSizeProp,
     focused,
     onClick,
+    // onkey props
+    onKeyDown: onKeyDownProp,
+    onKeyDownCapture,
+    onKeyPress,
+    onKeyPressCapture,
+    onKeyUp,
+    onKeyUpCapture,
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, props, textFieldRef);
   const [focus, setFocus] = useFlag(autoFocus);
@@ -138,6 +146,11 @@ export function TextFieldRender<TYPE extends string>(
     readOnly,
     tabIndex,
     name,
+    onKeyDownCapture,
+    onKeyPress,
+    onKeyPressCapture,
+    onKeyUp,
+    onKeyUpCapture,
     'id': id ? id.toString() : '',
     'aria-label': ariaLabel,
   };
@@ -146,6 +159,7 @@ export function TextFieldRender<TYPE extends string>(
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     const flag = getIncrementFlag(e);
+    onKeyDownProp?.(e);
     if (type === 'number' && typeof flag === 'boolean' && !disabled) {
       e.preventDefault();
       onChange?.({
@@ -250,7 +264,7 @@ export function TextFieldRender<TYPE extends string>(
             <input {...commonProps} {...inputProps} />
           )}
 
-          {type === 'number' && (
+          {type === 'number' && incrementButtons && (
             <div className={cnTextField('Counter')}>
               <button
                 onFocus={handleFocus}
