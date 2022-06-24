@@ -4,6 +4,7 @@ import { CardExample } from './examples/CardExample/CardExample';
 import { CardExampleForm } from './examples/CardExampleForm/CardExampleForm';
 import { CardExampleState } from './examples/CardExampleState/CardExampleState';
 import { CardExampleShadow } from './examples/CardExampleShadow/CardExampleShadow';
+import { CardExampleBorder } from './examples/CardExampleBorder/CardExampleBorder';
 import { CardExampleSpace } from './examples/CardExampleSpace/CardExampleSpace';
 import { CardExampleAdaptive } from './examples/CardExampleAdaptive/CardExampleAdaptive';
 
@@ -32,6 +33,7 @@ import { Card } from '@consta/uikit/Card';
 - [Статус](#статус)
 - [Форма](#форма)
 - [Тень](#тень)
+- [Граница](#граница)
 - [Адаптивность](#адаптивность)
 - [Импорт](#импорт)
 - [Список свойств](#список-свойств)
@@ -97,6 +99,21 @@ import { Card } from '@consta/uikit/Card';
 По умолчанию у карточки есть тень, её можно убирать и показывать с помощью свойства `shadow`.
 
 ```tsx
+<Card verticalSpace="2xl" horizontalSpace="2xl" status="success" shadow={false} border>
+  <Text>Карточка с границей</Text>
+</Card>
+<Card verticalSpace="2xl" horizontalSpace="2xl" status="success" shadow={false}>
+  <Text>Карточка без границы</Text>
+</Card>
+```
+
+<CardExampleBorder />
+
+## Граница
+
+По умолчанию у карточки отключены границы, за их отображение отвечает свойство `border`.
+
+```tsx
 <Card verticalSpace="2xl" horizontalSpace="2xl" status="success">
   <Text>Карточка с тенью</Text>
 </Card>
@@ -134,6 +151,7 @@ import { Card } from '@consta/uikit/Card';
 | [`status?`](#статус)           | `'alert', 'success', 'warning'`                         | -            | Статус, меняет цвет границ карточки                                          |
 | [`form?`](#форма)              | `'round'`, `'square'`                                   | `'round'`    | Форма                                                                        |
 | [`shadow?`](#тень)             | `boolean`                                               | `'true'`     | Тень                                                                         |
+| [`border?`](#граница)          | `boolean`                                               | `'false'`    | Граница                                                                      |
 | `tabIndex`                     | `number`                                                | —            | Порядковый номер при переходе между элементами интерфейса по клавише **tab** |
 | `as`                           | `React.ElementType`                                     | `button`     | HTML-тег для кнопки                                                          |
 | `className`                    | `string`                                                | —            | Дополнительные CSS-классы                                                    |

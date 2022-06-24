@@ -11,6 +11,7 @@ const defaultKnobs = () => ({
   verticalSpace: select('verticalSpace', cardPropSpace, cardPropSpace[0]),
   horizontalSpace: select('horizontalSpace', cardPropSpace, cardPropSpace[0]),
   shadow: boolean('shadow', true),
+  border: boolean('border', false),
   status: select('status', ['', ...cardPropStatus], ''),
   form: select('form', cardPropForm, cardPropFormDefault),
 });
@@ -18,7 +19,7 @@ const defaultKnobs = () => ({
 const cnCardStories = cn('cnCardStories');
 
 export function Playground() {
-  const { verticalSpace, horizontalSpace, shadow, status, form } = defaultKnobs();
+  const { verticalSpace, horizontalSpace, shadow, status, form, border } = defaultKnobs();
 
   return (
     <div className={cnCardStories()}>
@@ -26,6 +27,7 @@ export function Playground() {
         horizontalSpace={horizontalSpace}
         verticalSpace={verticalSpace}
         shadow={shadow}
+        border={border}
         status={status}
         form={form}
       />
