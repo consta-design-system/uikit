@@ -48,3 +48,14 @@ export const TextFieldExampleTypeNumber = () => {
     </StoryBookExample>
   );
 };
+
+export const TextFieldExampleTypePassword = () => {
+  const [value, setValue] = useState<string | null>(null);
+  const handleChange = ({ value }: { value: string | null }) => setValue(value);
+
+  return (
+    <StoryBookExample>
+      <TextField onChange={handleChange} value={value} type="password" placeholder="Пароль" />
+    </StoryBookExample>
+  );
+};
