@@ -1,6 +1,6 @@
 .stand--DocLayout {
   display: grid;
-  grid-template-columns: 320px auto;
+  grid-template-columns: 320px auto 320px;
   background: var(--color-bg-secondary);
   min-height: 100vh;
 
@@ -8,6 +8,10 @@
     padding: var(--space-2xl) var(--space-xl);
     background: var(--color-bg-default);
     border-right: 1px solid var(--color-bg-border);
+  }
+
+  &-RightSide {
+    padding: var(--space-xl) var(--space-2xl) var(--space-xl) 0;
   }
 
   &-Content {
