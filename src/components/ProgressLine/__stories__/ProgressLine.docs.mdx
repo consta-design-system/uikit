@@ -1,4 +1,7 @@
-import { ProgressLineExampleMode } from './examples/ProgressLineExampleMode/ProgressLineExampleMode';
+import {
+  ProgressLineExampleMode,
+  ProgressLineExampleModeValue,
+} from './examples/ProgressLineExampleMode/ProgressLineExampleMode';
 import { ProgressLineExampleSize } from './examples/ProgressLineExampleSize/ProgressLineExampleSize';
 
 # ProgressLine
@@ -7,29 +10,39 @@ import { ProgressLineExampleSize } from './examples/ProgressLineExampleSize/Prog
 import { ProgressLine } from '@consta/uikit/ProgressLine';
 ```
 
-Индикатор загрузки для ваших проектов
+Индикатор загрузки или выполнения задачи в виде линии.
 
 ## Тип
 
-Для указания конкретного прогресса нужно указать свойство `value`, иначе будет проигрываться бесконечнная анимация.
+По умолчанию компонент отображается с бесконечной анимацией — 
+чтобы показать, что процесс идёт.
+
+Если нужно показать процент загрузки или выполнения задачи,
+передайте соответствующее значение в свойстве `value`.
+В этом случае анимация выключится.
+
+```tsx
+<ProgressLine />
+```
 
 <ProgressLineExampleMode />
 
 ```tsx
-<ProgressLine />
 <ProgressLine value={30} />
 ```
 
+<ProgressLineExampleModeValue />
+
 ## Размер
 
-Свойство `size` отвечает за размер индикатора. Доступные размеры `s` и `m`.
-
-<ProgressLineExampleSize />
+Свойство `size` отвечает за размер индикатора. Доступные размеры: `s` и `m`.
 
 ```tsx
 <ProgressLine size="s" />
 <ProgressLine size="m" />
 ```
+
+<ProgressLineExampleSize />
 
 ## Импорт
 
@@ -45,8 +58,8 @@ type ProgressLinePropMode = 'determinate' | 'indeterminate';
 
 | Свойство           | Тип                         | По умолчанию | Описание                                  |
 | ------------------ | --------------------------- | ------------ | ----------------------------------------- |
+| [`value?`](#тип)   | `number`                    | -            | Процент загрузки или выполнения           |
 | [`size?`](#размер) | `'s', 'm'`                  | `'m'`        | Размер индикатора                         |
-| [`value?`](#тип)   | `number`                    | -            | Прогресс выполнения                       |
 | `className?`       | `string`                    | -            | Дополнительный CSS-класс                  |
 | `ref?`             | `React.Ref<HTMLDivElement>` | -            | Ссылка на корневой DOM-элемент компонента |
 
