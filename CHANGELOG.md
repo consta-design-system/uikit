@@ -1,5 +1,23 @@
 # Changelog
 
+## v3.26.1 (29/06/2022)
+Самое важное:
+- Доработали документацию
+- Добавили в `MixCard` и `Card` модификацию `_border`
+---
+
+- [docs(ProgressLine): edit docs (#2418)](https://github.com/consta-design-system/uikit/commit/d86948696fe86db7c61c516015a4399078046bde) - [@arhayka](https://github.com/arhayka)
+- [docs(TextField): add docs for increamentButton, withClearButton and type=password (#2417)](https://github.com/consta-design-system/uikit/commit/acdf7fef90a8042c9f55acd9a562f7bcd2eecb33) - [@arhayka](https://github.com/arhayka)
+- [chore(storybook): add automatization for publish stand (#2421)](https://github.com/consta-design-system/uikit/commit/e20a4a2a215378e8df8e90de8817a9d8d7d0ec6f) - [@gizeasy](https://github.com/gizeasy)
+- [docs(review): add ProgressLine and FieldGroup (#2415)](https://github.com/consta-design-system/uikit/commit/453f7b0d15383e73e9f94a9ab5b3ab4019727d04) - [@arhayka](https://github.com/arhayka)
+- [docs(DatePicker): add withClearButton description (#2414)](https://github.com/consta-design-system/uikit/commit/75ef14a33f394a9d7a3c6d1afc4bd47e96a4f053) - [@arhayka](https://github.com/arhayka)
+- [docs(DragNDropField): edit locale descriptoin (#2413)](https://github.com/consta-design-system/uikit/commit/8bd09fc22451c73dce558420e3ffb0114d71b039) - [@arhayka](https://github.com/arhayka)
+- [docs(FieldGroup): edit docs (#2412)](https://github.com/consta-design-system/uikit/commit/b92aaa4707158809333e188f399485d655bc4aeb) - [@arhayka](https://github.com/arhayka)
+- [feat(MixCard): add border prop to mixin (#2416)](https://github.com/consta-design-system/uikit/commit/fcc736b78b422b3d143eff2ecde74796748e5ac3) - [@N1MBER](https://github.com/N1MBER)
+- [chore(storybook): add automatisation for publish stand (#2398)](https://github.com/consta-design-system/uikit/commit/5c0214fbd997d932fb69708f1e5ae9bb3386897f) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v3.26.0 (22/06/2022)
 Самое важное:
 
@@ -459,11 +477,3 @@ endFieldOnBlur - deleted, use onBlur
 - [docs(common): write docs about new components creation (#1871)](https://github.com/gazprom-neft/consta-uikit/commit/5db2b97ddcd2bb028db4200e191fbd7b85ee3b98) - [@arhayka](https://github.com/arhayka)
 - [docs(global): review docs structure (#1879)](https://github.com/gazprom-neft/consta-uikit/commit/28450362b5ca79664bad6eb3ce4de33758f49fe3) - [@arhayka](https://github.com/arhayka)
 - [feat(DatePicker): add label and caption props, update docs and playground (#1876)](https://github.com/gazprom-neft/consta-uikit/commit/5eb6952506e5066f7b176f1612707f698d292cc7) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v3.12.2 (22/12/2021)
-- [docs(Table): edit docs, add examples (#1864)](https://github.com/gazprom-neft/consta-uikit/commit/58c88be03d1699c4331095dafcf9c83114769445) - [@arhayka](https://github.com/arhayka)
-- [fix(Theme): fixed --line-height-text-2xs (#1870)](https://github.com/gazprom-neft/consta-uikit/commit/6eab23112af357fce46ee6a415d1b824fc130704) - [@gizeasy](https://github.com/gizeasy)
-- [fix(SnackBar): fix warning with findDOMNode (#1867)](https://github.com/gazprom-neft/consta-uikit/commit/6320f47055018b20a854f76b203939a1ccb02d8a) - [@N1MBER](https://github.com/N1MBER)
-- [refactor(Checkbox): edit code (#1868)](https://github.com/gazprom-neft/consta-uikit/commit/5f2d43f178676ba94aa0aeb9aab9556047ffd6dd) - [@gizeasy](https://github.com/gizeasy)
