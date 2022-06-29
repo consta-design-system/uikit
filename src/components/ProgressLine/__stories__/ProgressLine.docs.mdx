@@ -1,0 +1,66 @@
+import { ProgressLineExampleMode } from './examples/ProgressLineExampleMode/ProgressLineExampleMode';
+import { ProgressLineExampleSize } from './examples/ProgressLineExampleSize/ProgressLineExampleSize';
+
+<!--info
+description: Индикатор загрузки в виде линии. Показывает течение процесса.
+-->
+
+# ProgressLine
+
+```tsx
+import { ProgressLine } from '@consta/uikit/ProgressLine';
+```
+
+Индикатор загрузки для ваших проектов
+
+## Тип
+
+Для указания конкретного прогресса нужно указать свойство `value`, иначе будет проигрываться бесконечнная анимация.
+
+<ProgressLineExampleMode />
+
+```tsx
+<ProgressLine />
+<ProgressLine value={30} />
+```
+
+## Размер
+
+Свойство `size` отвечает за размер индикатора. Доступные размеры `s` и `m`.
+
+<ProgressLineExampleSize />
+
+```tsx
+<ProgressLine size="s" />
+<ProgressLine size="m" />
+```
+
+## Импорт
+
+```tsx
+import { ProgressLine } from '@consta/uikit/ProgressLine';
+```
+
+## Свойства
+
+```tsx
+type ProgressLinePropMode = 'determinate' | 'indeterminate';
+```
+
+| Свойство           | Тип                         | По умолчанию | Описание                                  |
+| ------------------ | --------------------------- | ------------ | ----------------------------------------- |
+| [`size?`](#размер) | `'s', 'm'`                  | `'m'`        | Размер индикатора                         |
+| [`value?`](#тип)   | `number`                    | -            | Прогресс выполнения                       |
+| `className?`       | `string`                    | -            | Дополнительный CSS-класс                  |
+| `ref?`             | `React.Ref<HTMLDivElement>` | -            | Ссылка на корневой DOM-элемент компонента |
+
+## Пример
+
+```tsx
+import React, { useState } from 'react';
+import { ProgressLine } from '@consta/uikit/ProgressLine';
+
+const App = () => {
+  return <ProgressLine size="s" value={20} />;
+};
+```

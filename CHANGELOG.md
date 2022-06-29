@@ -1,5 +1,21 @@
 # Changelog
 
+## v3.26.0 (22/06/2022)
+Самое важное:
+
+- Добавили новый компонент `ProgressLine`, для отображения статуса загрузки
+- В `TextField` добавили события по нажатию кнопок
+
+---
+
+- [fix(TextField): fixed disabled (#2409)](https://github.com/consta-design-system/uikit/commit/4d54487ed5d023b8cc65f7168cbb44cc09894f59) - [@gizeasy](https://github.com/gizeasy)
+- [fix(Slider): fix work of slider on a big and small values (#2382)](https://github.com/consta-design-system/uikit/commit/50ffaf64c01627c0cb0d45fa44b512f293515a2a) - [@N1MBER](https://github.com/N1MBER)
+- [feat(TextField): add onKey events for input and add incrementButtons (#2394)](https://github.com/consta-design-system/uikit/commit/fe892b020af944ecc1b46255ac480170951b79f2) - [@N1MBER](https://github.com/N1MBER)
+- [fix(User): fix word wrap (#2395)](https://github.com/consta-design-system/uikit/commit/11ba66ec0ff73a6a8e7180a740c520dc10934b1d) - [@N1MBER](https://github.com/N1MBER)
+- [feat(ProgressLine): add ProgressLine component (#2383)](https://github.com/consta-design-system/uikit/commit/77e844e2e34c82d698e7b95b685480b8ef9dea74) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
 ## v3.25.0 (15/06/2022)
 Самое важное:
 - Добавили новый компонент `FieldGroup`, который склеивает несколько элементов формы — например, два поля или поле и кнопку. Не нужно думать про позиционирование элементов, проставлять отступы и скругление, компонент сделает всё сам. Использовать можно будет для любых элементов, у которых есть свойство `form` — `TextField`, `Button`, `Select`, `UserSelect`, `Combobox`, `DatePiker` и похожих.
@@ -451,10 +467,3 @@ endFieldOnBlur - deleted, use onBlur
 - [fix(Theme): fixed --line-height-text-2xs (#1870)](https://github.com/gazprom-neft/consta-uikit/commit/6eab23112af357fce46ee6a415d1b824fc130704) - [@gizeasy](https://github.com/gizeasy)
 - [fix(SnackBar): fix warning with findDOMNode (#1867)](https://github.com/gazprom-neft/consta-uikit/commit/6320f47055018b20a854f76b203939a1ccb02d8a) - [@N1MBER](https://github.com/N1MBER)
 - [refactor(Checkbox): edit code (#1868)](https://github.com/gazprom-neft/consta-uikit/commit/5f2d43f178676ba94aa0aeb9aab9556047ffd6dd) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v3.12.1 (17/12/2021)
-- [docs(global): add import field to all components and fix mistakes (#1865)](https://github.com/gazprom-neft/consta-uikit/commit/54fa15bbd9527e92f73841740b8488b9aaa72ee8) - [@N1MBER](https://github.com/N1MBER)
-- [fix(ProgressStepBar): fixed icon render](https://github.com/gazprom-neft/consta-uikit/commit/c6cdded99572b9cfe769bde603ecdd6ee5aa6c9b) - [@gizeasy](https://github.com/gizeasy)
-- [docs(useBreakpoints): edit docs (#1863)](https://github.com/gazprom-neft/consta-uikit/commit/fff37e78ba85ade4f2d1b638003242a5f7f39636) - [@arhayka](https://github.com/arhayka)

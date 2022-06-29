@@ -21,7 +21,7 @@ export type UseSliderProps<RANGE extends boolean = false> = {
   step?: number | number[];
   onChange?: PropOnChange<RANGE>;
   onAfterChange?: PropOnChange<RANGE>;
-  sliderRef: React.RefObject<HTMLDivElement>;
+  sliderRef: React.RefObject<HTMLDivElement | HTMLButtonElement>;
   buttonRefs: React.RefObject<HTMLButtonElement>[];
 };
 
@@ -32,6 +32,7 @@ export type UseSliderValues = {
     button: ActiveButton,
   ) => void;
   handlePress: (typeButton: ActiveButton) => void;
+  onSliderClick: React.MouseEventHandler;
   activeButton: ActiveButton;
   currentValue: [number] | [number, number];
   popoverPosition: TrackPosition[];
@@ -97,14 +98,19 @@ export const getValidValue = (
   step?: number | number[],
 ) => {
   if (typeof value === 'number') {
-    if (value > max) return max;
-    if (value < min) return min;
+    if (value >= max) return max;
+    if (value <= min) return min;
     if (!Array.isArray(step)) {
       const division = step?.toString().split('.')[1];
       const stepValue = step || 1;
-      return (
-        Math.ceil(Number(value.toFixed(division ? division.length : 0)) / stepValue) * stepValue
-      );
+      if (Math.abs(value) < 1) {
+        return Number(value.toFixed(division ? division.length : 0));
+      }
+      const roundValue =
+        Math.round(Number(value.toFixed(division ? division.length : 0)) / stepValue) * stepValue;
+      if (roundValue > max) return max;
+      if (roundValue < min) return min;
+      return Number(roundValue.toFixed(division ? division.length : 0));
     }
     let resultValue = value;
     step.forEach((stepPoint, index) => {
@@ -137,15 +143,16 @@ export const isValidValue = (value: number, min: number, max: number, step?: num
 
 export const getValueByPosition = (
   position: TrackPosition,
-  sliderRef: React.RefObject<HTMLDivElement>,
+  sliderRef: React.RefObject<HTMLDivElement | HTMLButtonElement>,
   min: number,
   max: number,
+  step?: number | number[],
 ) => {
   if (sliderRef.current && position) {
     const { x, width } = sliderRef.current.getBoundingClientRect();
     const absoluteSize = Math.abs(max - min);
     const value = min + ((position.x - x) * absoluteSize) / width;
-    return getValidValue(value, min, max);
+    return getValidValue(value, min, max, step);
   }
   return 0;
 };
@@ -186,16 +193,27 @@ export const analyzeDivisionValue = (
   min: number,
   max: number,
 ) => {
-  const steps = getSteps(step, min, max);
   let newValue: number = value;
-  steps.forEach((stepSize) => {
-    if (value && stepSize.min < value && stepSize.max >= value) {
-      if ((stepSize.max + stepSize.min) / 2 > value) {
-        newValue = stepSize.min;
-      } else {
-        newValue = stepSize.max;
+  if (Array.isArray(step)) {
+    const steps = getSteps(step, min, max);
+    steps.forEach((stepSize) => {
+      if (value && stepSize.min < value && stepSize.max >= value) {
+        if ((stepSize.max + stepSize.min) / 2 > value) {
+          newValue = stepSize.min;
+        } else {
+          newValue = stepSize.max;
+        }
       }
+    });
+  } else {
+    if (value >= max) return max;
+    if (value <= min) return min;
+    const nearStep = (value - min) % step;
+    if (nearStep > step / 2) {
+      newValue = step - nearStep + value;
+    } else {
+      newValue = value - nearStep;
     }
-  });
+  }
   return newValue;
 };

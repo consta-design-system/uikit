@@ -1,17 +1,16 @@
 import React from 'react';
 
 import { items } from '../../../__mocks__/data.mock';
-import { cnMixSpace } from '../../../../../mixs/MixSpace/MixSpace';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Button } from '../../../../Button/Button';
 import { Select } from '../../../../Select/Select';
 import { TextField } from '../../../../TextField/TextField';
 import { FieldGroup } from '../../../FieldGroup';
 
-export const FieldGroupExample = () => {
+export const FieldGroupExampleForm = () => {
   return (
     <div className={cnDocsDecorator('Section')}>
-      <FieldGroup form="round" className={cnMixSpace({ mB: 's' })}>
+      <FieldGroup form="clearBrick">
         <TextField placeholder="TextField" />
         <Select
           placeholder="Select"

@@ -13,7 +13,7 @@
   border: var(--space-3xs) solid var(--color-control-bg-primary);
   border-radius: calc(var(--space-m) * 0.5);
   cursor: pointer;
-  transition: border-color 0.3s, left 0.3s;
+  transition: border-color 0.3s;
 
   &_hovered {
     border-color: var(--color-control-bg-primary-hover);
@@ -26,6 +26,5 @@
 
   &-Tooltip {
     pointer-events: none;
-    transition: left 0.3s;
   }
 }

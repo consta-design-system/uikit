@@ -19,6 +19,7 @@ import {
 } from './examples/DatePickerExampleType/DatePickerExampleType';
 import { DatePickerExampleMulti } from './examples/DatePickerExampleMulti/DatePickerExampleMulti';
 import { DatePickerExampleTwoIcons } from './examples/DatePickerExampleTwoFields/DatePickerExampleTwoFields';
+import { DatePickerExampleWithClearButton } from './examples/DatePickerExampleWithClearButton/DatePickerExampleWithClearButton';
 
 <!--info
 description: Поле, в котором можно выбрать дату или период.
@@ -48,6 +49,7 @@ import { DatePicker } from '@consta/uikit/DatePickerCanary';
   - [Обязательность](#обязательность)
   - [Статус](#статус-поля)
   - [Два поля ввода](#два-поля-ввода-свойства-и-события)
+  - [Кнопка для очистки поля](#кнопка-для-очистки-поля)
 - [Дополнительные контролы](#дополнительные-контролы)
 - [Обработка ошибок](#обработка-ошибок)
 - [Импорт](#импорт)
@@ -166,6 +168,22 @@ export const DatePickerExampleTypeYearRange = () => {
 ```
 
 <DatePickerExampleTypeYearRange />
+
+### Кнопка для очистки поля
+
+Если вы хотите добавить в поле кнопку, по которой можно его очистить, используйте свойство `withClearButton`. Если в поле есть значение, в справа появляется крестик. Нажмите на него — поле станет пустым.
+
+```tsx
+export const DatePickerExampleWithClearButton = () => {
+  const [value, setValue] = useState<Date | null>(null);
+
+  return <DatePicker value={value} onChange={({ value }) => setValue(value)} withClearButton />;
+};
+```
+
+Выберите дату — в поле появится крестик.
+
+<DatePickerExampleWithClearButton />
 
 ## Формат даты
 
@@ -505,7 +523,8 @@ type DatePickerPropOnError = (
 | [`label?`](#лейбл)                                                         | `string`                                                                                                                                                                                                                                                    | -                     | Лейбл к полю ввода                                                                                                     |
 | [`labelPosition?`](#лейбл)                                                 | `'top'` &#124; `'left'`                                                                                                                                                                                                                                     | `'top'`               | Положение лейбла относительно поля                                                                                     |
 | [`caption?`](#подпись)                                                     | `string`                                                                                                                                                                                                                                                    | -                     | Подпись под полем ввода                                                                                                |  | `string` | - | Подпись под полем ввода |
-| name?                                                                      | `DatePickerPropName<TYPE>`                                                                                                                                                                                                                                  | -                     | Имя поля ввода                                                                                                         |
+| `name?`                                                                    | `DatePickerPropName<TYPE>`                                                                                                                                                                                                                                  | -                     | Имя поля ввода                                                                                                         |
+| [`withClearButton?`](#кнопка-для-очистки-поля)                             | `boolean`                                                                                                                                                                                                                                                   | -                     | Добавляет крестик, по которому можно очистить поле, если оно заполнено                                                 |
 | [`required?`](#обязательность)                                             | `boolean`                                                                                                                                                                                                                                                   | -                     | Нужно заполнить                                                                                                        |
 | `minDate?`                                                                 | `Date`                                                                                                                                                                                                                                                      | `01.01.0001 00:00:00` | Ограничение выбора по меньшей дате, см. [DateTime](/?path=/docs/components-datetime--playground)                       |
 | `maxDate?`                                                                 | `Date`                                                                                                                                                                                                                                                      | `31.12.9999 23:59:59` | Ограничение выбора по большей дате, см. [DateTime](/?path=/docs/components-datetime--playground)                       |
