@@ -31,12 +31,13 @@ const defaultKnobs = () => ({
   view: select('view', textFieldPropView, textFieldPropViewDefault),
   disabled: boolean('disabled', false),
   required: boolean('required', false),
+  type: select('type', ['text', 'number', 'textarea', 'password'], 'text'),
   step: number('step', 1),
   withStepArray: boolean('withStepArray', false),
   stepArray: array('stepArray', ['10', '50', '100']),
   min: number('min', 0),
   max: number('max', 150),
-  type: select('type', ['text', 'number', 'textarea', 'password'], 'text'),
+  incrementButtons: boolean('incrementButtons', true),
   withClearButton: boolean('withClearButton', false),
   caption: text('caption', 'Подпись'),
   label: text('label', 'Заголовок'),
@@ -76,6 +77,7 @@ export function Playground() {
     leftSideText,
     rightSideType,
     withClearButton,
+    incrementButtons,
     rightSideText,
     disabled,
   } = defaultKnobs();
@@ -117,6 +119,7 @@ export function Playground() {
           min={min}
           max={max}
           withClearButton={withClearButton}
+          incrementButtons={incrementButtons}
           maxLength={maxLength}
           minRows={minRows}
           maxRows={maxRows}
