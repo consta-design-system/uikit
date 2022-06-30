@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { useRouter } from 'react-router5';
 import { NavigationOptions } from 'router5';
 
 import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
+
+import { useLink } from '##/hooks/useLink';
 
 export const Link: React.FC<
   PropsWithHTMLAttributes<
@@ -11,19 +12,10 @@ export const Link: React.FC<
     HTMLAnchorElement
   >
 > = ({ to, onClick, params, options, ...props }) => {
-  const router = useRouter();
+  const link = useLink({ to, params, options, onClick });
 
   return (
-    <a
-      {...props}
-      href={router.buildPath(to, params)}
-      onClick={(e) => {
-        e.preventDefault();
-        router.navigate(to, params || {}, options || {});
-
-        onClick?.(e);
-      }}
-    >
+    <a {...props} href={link[0]} onClick={link[1]}>
       {props.children}
     </a>
   );

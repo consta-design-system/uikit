@@ -57,7 +57,6 @@ const getItemParmas = (item: Stand, libId?: string): Record<string, string> => {
 };
 
 const cnLibPageMenu = cn('LibPageMenu');
-
 export const LibPageMenu: React.FC = () => {
   const [libs] = useAtom(libsAtom);
   const [lib] = useAtom(libAtom);
@@ -66,14 +65,6 @@ export const LibPageMenu: React.FC = () => {
   const [searchValue, setSearchValue] = useState<string | undefined | null>(null);
   const [showDeprecated, setShowDeprecated] = useFlag(true);
   const getIsActive = useIsActiveRouter();
-
-  const onItemClick = useCallback(({ item }: { item: { standId?: string; id: string } }) => {
-    if (item.standId) {
-      router.navigate(routesNames.LIBS_LIB_STAND, { libId: item.id, standId: item.standId });
-    } else {
-      router.navigate(routesNames.LIBS_LIB, { libId: item.id });
-    }
-  }, []);
 
   const defaultStand: Stand = {
     id: lib?.id ?? 'uikit',
@@ -172,7 +163,6 @@ export const LibPageMenu: React.FC = () => {
       getItemBadge={getItemBadge}
       getGroupKey={getGroupKey}
       getItemGroupId={getItemGroupId}
-      onItemClick={onItemClick}
       getItemDescription={getItemDescription}
     />
   );

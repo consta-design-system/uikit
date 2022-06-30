@@ -6,7 +6,7 @@ import { Image } from '##/componets/Image';
 import NoImage from '@consta/stand/src/containers/LibPage/LibPageCard/NoImage';
 import { Link } from '##/componets/Link';
 import { routesNames } from '##/modules/router';
-import '@consta/stand/src/containers/LibPage/LibPageCard/LibPageCard.css';
+import './LibPageCard.css';
 
 type Props = {
   stand: Stand;

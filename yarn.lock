@@ -1121,6 +1121,15 @@
   dependencies:
     chalk "^4.0.0"
 
+"@consta/header@^0.4.4":
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/@consta/header/-/header-0.4.4.tgz#f6f92abbb5334a0f84bf05a855a3fb99d7e1f397"
+  integrity sha512-LSvdF2+lXVZHEn3c6yOBpdjUr1v4+2AJCyKyOaHtlkjhTr+PLWK+FEMGiros+3Mf2JWg5+YCMhk3pUsHbXZxEQ==
+  dependencies:
+    "@bem-react/classname" "^1.5.8"
+    date-fns "^2.17.0"
+    react-transition-group "^4.4.2"
+
 "@consta/uikit@^3.24.0":
   version "3.24.0"
   resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-3.24.0.tgz#b3c2644abdc4e6d2b3c32ad03e31a5f360306b9d"

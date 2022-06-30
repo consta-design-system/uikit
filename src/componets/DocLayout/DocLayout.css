@@ -1,21 +1,101 @@
 .stand--DocLayout {
-  display: grid;
-  grid-template-columns: 320px auto 320px;
+  --doc-layout-header-height: 60px;
+  --doc-layout-side-width: 320px;
+  --doc-layout-leftside-z-index: 1010;
+
   background: var(--color-bg-secondary);
   min-height: 100vh;
+  padding-top: var(--doc-layout-header-height);
+  position: relative;
 
   &-LeftSide {
+    height: 100vh;
+    top: var(--doc-layout-header-height);
+    overflow-y: auto;
+    width: calc(100vw - var(--space-2xl));
+    max-width: var(--doc-layout-side-width);
+    position: fixed;
     padding: var(--space-2xl) var(--space-xl);
     background: var(--color-bg-default);
     border-right: 1px solid var(--color-bg-border);
+    left: 0;
+    top: 0;
+    z-index: var(--doc-layout-leftside-z-index);
+    transform: translateX(calc(var(--doc-layout-side-width) * -1));
+    box-shadow: 0 0 0 var(--color-shadow-modal-1);
+    transition: transform 0.2s, box-shadow 0.2s;
+
+    &::-webkit-scrollbar-track {
+      background-color: var(--color-bg-default);
+    }
+
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+
+    &_open {
+      box-shadow: var(--shadow-modal);
+      transform: translateX(0);
+    }
+
+    &::-webkit-scrollbar {
+      @media screen and (min-width: 1024px) {
+        width: 8;
+        height: 8;
+      }
+    }
+
+    @media screen and (min-width: 1364px) {
+      transform: translateX(0);
+      z-index: auto;
+      top: var(--doc-layout-header-height);
+      height: calc(100vh - var(--doc-layout-header-height));
+    }
+  }
+
+  &-Owerlay {
+    z-index: calc(var(--doc-layout-leftside-z-index) - 1);
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    padding: 0;
+    background: var(--color-bg-tone);
+    border: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+
+    &_open {
+      opacity: 1;
+      pointer-events: all;
+    }
   }
 
   &-RightSide {
+    top: var(--doc-layout-header-height);
+    overflow-y: auto;
+    width: var(--doc-layout-side-width);
+    position: fixed;
+    height: calc(100vh - var(--doc-layout-header-height));
+    position: fixed;
     padding: var(--space-xl) var(--space-2xl) var(--space-xl) 0;
+    right: 0;
   }
 
   &-Content {
     padding: var(--space-2xl);
+
+    @media screen and (min-width: 1364px) {
+      padding-left: calc(var(--doc-layout-side-width) + var(--space-2xl));
+      padding-right: var(--space-2xl);
+    }
+
+    @media screen and (min-width: 1690px) {
+      padding-right: calc(var(--doc-layout-side-width) + var(--space-2xl));
+    }
   }
 
   &-Paper {
@@ -25,5 +105,15 @@
     border-radius: 10px;
     padding: var(--space-2xl) var(--space-3xl);
     min-height: 100%;
+  }
+
+  &-Header {
+    position: fixed;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
   }
 }

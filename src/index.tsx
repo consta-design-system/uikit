@@ -2,7 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 
 import { reatomContext } from '@reatom/react';
-import { store, registry } from '##/modules/app';
+import { store } from '##/modules/app';
 import { RouterProvider } from 'react-router5';
 import { router } from '@consta/stand/src/modules/router';
 import { AppTheme } from '##/containers/AppTheme';
