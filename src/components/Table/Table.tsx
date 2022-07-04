@@ -197,6 +197,7 @@ export type TableProps<T extends TableRow> = {
   onFiltersUpdated?: (filters: SelectedFilters) => void;
   getTagLabel?: GetTagLabel;
   isExpandedRowsByDefault?: boolean;
+  getCellWrap?: (row: T) => 'truncate' | 'break';
 };
 
 type Table = <T extends TableRow>(
@@ -292,6 +293,7 @@ const InternalTable = <T extends TableRow>(
     onSortBy,
     onFiltersUpdated,
     getTagLabel,
+    getCellWrap,
     isExpandedRowsByDefault = false,
     ...otherProps
   } = props;
@@ -859,6 +861,7 @@ const InternalTable = <T extends TableRow>(
                         row,
                         isActive: activeRow ? activeRow.id === row.id : false,
                       })}
+                      wrap={getCellWrap?.(row)}
                       onContextMenu={(e: React.SyntheticEvent) =>
                         handleCellClick({
                           e,
