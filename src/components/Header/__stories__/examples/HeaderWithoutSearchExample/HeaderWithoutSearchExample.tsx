@@ -2,7 +2,7 @@ import './HeaderWithoutSearchExample.css';
 
 import React, { useState } from 'react';
 
-import { IconChat } from '../../../../../icons/IconChat/IconChat';
+import { IconChatStroked } from '../../../../../icons/IconChatStroked/IconChatStroked';
 import { IconRing } from '../../../../../icons/IconRing/IconRing';
 import { cn } from '../../../../../utils/bem';
 import { Text } from '../../../../Text/Text';
@@ -59,7 +59,7 @@ export function HeaderWithoutSearchExample() {
       rightSide={
         <>
           <HeaderModule indent="s">
-            <HeaderButton iconLeft={IconChat} />
+            <HeaderButton iconLeft={IconChatStroked} />
           </HeaderModule>
           <HeaderModule indent="s">
             <HeaderButton iconLeft={IconRing} />

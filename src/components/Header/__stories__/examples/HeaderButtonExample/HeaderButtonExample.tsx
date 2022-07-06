@@ -2,7 +2,7 @@ import './HeaderButtonExample.css';
 
 import React from 'react';
 
-import { IconChat } from '../../../../../icons/IconChat/IconChat';
+import { IconChatStroked } from '../../../../../icons/IconChatStroked/IconChatStroked';
 import { IconDiamond } from '../../../../../icons/IconDiamond/IconDiamond';
 import { IconRing } from '../../../../../icons/IconRing/IconRing';
 import { cn } from '../../../../../utils/bem';
@@ -20,7 +20,7 @@ export function HeaderButtonExample() {
             <HeaderButton iconLeft={IconDiamond} />
           </HeaderModule>
           <HeaderModule indent="s">
-            <HeaderButton iconLeft={IconChat} />
+            <HeaderButton iconLeft={IconChatStroked} />
           </HeaderModule>
           <HeaderModule indent="s">
             <HeaderButton iconLeft={IconRing} />

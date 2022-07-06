@@ -2,7 +2,7 @@ import React from 'react';
 
 import { IconAdd } from '../../../../../icons/IconAdd/IconAdd';
 import { IconBookmarkStroked } from '../../../../../icons/IconBookmarkStroked/IconBookmarkStroked';
-import { IconChat } from '../../../../../icons/IconChat/IconChat';
+import { IconChatStroked } from '../../../../../icons/IconChatStroked/IconChatStroked';
 import { IconCopy } from '../../../../../icons/IconCopy/IconCopy';
 import { IconEdit } from '../../../../../icons/IconEdit/IconEdit';
 import { IconForward } from '../../../../../icons/IconForward/IconForward';
@@ -36,7 +36,7 @@ export function ButtonExampleViewSecondary() {
         <Button view="secondary" label="Читать далее" />
       </div>
       <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>
-        <Button view="secondary" label="Комментировать" iconLeft={IconChat} />
+        <Button view="secondary" label="Комментировать" iconLeft={IconChatStroked} />
       </div>
       <div className={cnDocsExample()}>
         <Button view="secondary" label="Редактировать" iconRight={IconEdit} onlyIcon />
