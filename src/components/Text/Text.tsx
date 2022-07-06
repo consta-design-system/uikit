@@ -61,7 +61,15 @@ export const textPropView = [
 export type TextPropView = typeof textPropView[number];
 export const textPropViewDefault: TextPropView = textPropView[0];
 
-export const textPropWeight = ['black', 'bold', 'light', 'regular', 'semibold', 'thin'] as const;
+export const textPropWeight = [
+  'black',
+  'bold',
+  'light',
+  'regular',
+  'semibold',
+  'thin',
+  'medium',
+] as const;
 export type TextPropWeight = typeof textPropWeight[number];
 
 export const textPropFontStyle = ['italic'] as const;

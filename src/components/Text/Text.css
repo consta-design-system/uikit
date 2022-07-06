@@ -231,6 +231,10 @@
       font-weight: var(--font-weight-text-regular);
     }
 
+    &_medium {
+      font-weight: var(--font-weight-text-medium);
+    }
+
     &_semibold {
       font-weight: var(--font-weight-text-semibold);
     }
