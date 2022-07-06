@@ -1,5 +1,18 @@
 # Changelog
 
+## v3.26.2 (06/07/2022)
+Самое важное:
+
+- Добавлены новые иконки, а также исправлены размеры для уже существующих
+- Добавлен размер шрифта `medium` в `Text`
+
+---
+
+- [feat(Icons): add new icons and sizes (#2429)](https://github.com/consta-design-system/uikit/commit/6f668c9bef5b81e52948454366160fb3d2f8a1ba) - [@N1MBER](https://github.com/N1MBER)
+- [feat(Fonts): add new font weight ](https://github.com/consta-design-system/uikit/commit/bb44e76fb9a10f16efade19663e54b9d07b9fe06) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
 ## v3.26.1 (29/06/2022)
 Самое важное:
 - Доработали документацию
@@ -468,12 +481,3 @@ endFieldOnBlur - deleted, use onBlur
 - [docs(SnackBar): docs review (#1917)](https://github.com/gazprom-neft/consta-uikit/commit/e681f982c4e11acc85955706533b14ab0f33016f) - [@arhayka](https://github.com/arhayka)
 - [docs(Timer): docs reivew (#1918)](https://github.com/gazprom-neft/consta-uikit/commit/618dea0861e8031ecb30802ad43b1183aa665133) - [@arhayka](https://github.com/arhayka)
 - [fix(Slider): fix bug with non working mobile mode (#1900)](https://github.com/gazprom-neft/consta-uikit/commit/01bf0d7e470e208762fb1d2874b2cfe066231a24) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v3.12.3 (29/12/2021)
-- [fix(MixCard): fix  mistakes in stylesheet file (#1889)](https://github.com/gazprom-neft/consta-uikit/commit/070b7b2589b11e520bc5ca079fe385f31a411ea7) - [@N1MBER](https://github.com/N1MBER)
-- [docs(review): add images (#1894)](https://github.com/gazprom-neft/consta-uikit/commit/7c34f9aefd50a1904b602f3da42cdb0ebc1c199c) - [@arhayka](https://github.com/arhayka)
-- [docs(common): write docs about new components creation (#1871)](https://github.com/gazprom-neft/consta-uikit/commit/5db2b97ddcd2bb028db4200e191fbd7b85ee3b98) - [@arhayka](https://github.com/arhayka)
-- [docs(global): review docs structure (#1879)](https://github.com/gazprom-neft/consta-uikit/commit/28450362b5ca79664bad6eb3ce4de33758f49fe3) - [@arhayka](https://github.com/arhayka)
-- [feat(DatePicker): add label and caption props, update docs and playground (#1876)](https://github.com/gazprom-neft/consta-uikit/commit/5eb6952506e5066f7b176f1612707f698d292cc7) - [@N1MBER](https://github.com/N1MBER)
