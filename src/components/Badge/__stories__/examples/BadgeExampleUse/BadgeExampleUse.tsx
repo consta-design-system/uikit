@@ -14,17 +14,25 @@ export const BadgeExampleUse = () => (
       <div className={wp.tplGrid('fraction', { row: 'first' })}>
         <Text weight="bold">Первый ноутбук</Text>
       </div>
-      <div className={[wp.tplGrid('fraction', { row: 'first' })]}>
+      <div className={wp.tplGrid('fraction', { row: 'first' })}>
         <Badge label="В наличии" size="s" status="success" />
       </div>
-      <div className={[wp.tplGrid('fraction', { row: 'first' })]}>
+      <div className={wp.tplGrid('fraction', { row: 'first' })}>
         <Tag
+          mode="button"
+          onClick={() => console.log('onClick')}
           label="Мощный"
           group="1"
           size="s"
           className={wp.decorator({ 'indent-r': 'xs', 'indent-b': 's' })}
         />
-        <Tag label="Игровой" group="1" size="s" />
+        <Tag
+          mode="button"
+          onClick={() => console.log('onClick')}
+          label="Игровой"
+          group="1"
+          size="s"
+        />
       </div>
     </div>
     <div
@@ -33,11 +41,13 @@ export const BadgeExampleUse = () => (
       <div className={wp.tplGrid('fraction', { row: 'first' })}>
         <Text weight="bold">Второй ноутбук</Text>
       </div>
-      <div className={[wp.tplGrid('fraction', { row: 'first' })]}>
+      <div className={wp.tplGrid('fraction', { row: 'first' })}>
         <Badge label="Ожидается" size="s" status="system" />
       </div>
-      <div className={[wp.tplGrid('fraction', { row: 'first' })]}>
+      <div className={wp.tplGrid('fraction', { row: 'first' })}>
         <Tag
+          mode="button"
+          onClick={() => console.log('onClick')}
           label="Красивый"
           group="1"
           size="s"
