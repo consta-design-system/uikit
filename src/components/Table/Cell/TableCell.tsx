@@ -24,6 +24,7 @@ type Props<T extends TableRow> = {
   className?: string;
   wrapperClassName?: string;
   children: React.ReactNode;
+  wrap?: 'truncate' | 'break';
   showVerticalShadow?: boolean;
   verticalAlign?: VerticalAlign;
 } & (
@@ -79,6 +80,8 @@ const getWrapperClasses = <T extends TableRow>(props: Props<T>): string => {
       withoutPadding: column.withoutPadding || props.type === 'resizer',
       verticalAlign: props.verticalAlign,
       horizontalAlign: column.align,
+      isHeader: props.type === 'header',
+      wrap: props.wrap,
     },
     [wrapperClassName],
   );
