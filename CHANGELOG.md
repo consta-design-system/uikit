@@ -1,5 +1,18 @@
 # Changelog
 
+## v3.26.3 (21/07/2022)
+Самое важное:
+- В Table добавили возможность обрезать текст в ячейке.
+- Доработали документацию
+
+---
+
+- [docs(Popover): change examples (#2437)](https://github.com/consta-design-system/uikit/commit/ee76227db9da51bfbd3253009f58618d095540e5) - [@arhayka](https://github.com/arhayka)
+- [docs(Badge): add how to use section (#2435)](https://github.com/consta-design-system/uikit/commit/637abfb52282ce81f21b12daaf22a917dff6192c) - [@arhayka](https://github.com/arhayka)
+- [fix(Table): fix wrap text on cell (#2425)](https://github.com/consta-design-system/uikit/commit/99ae1052eb18aea07432d8d982940e16236c1343) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
 ## v3.26.2 (06/07/2022)
 Самое важное:
 
@@ -464,20 +477,3 @@ endFieldOnBlur - deleted, use onBlur
 - [refactor(mixCard): added usage of cnMixSpace for padding (#1927)](https://github.com/consta-design-system/uikit/commit/9fb738dab23ff98778d2ef7203ee3b7ef1995b5a) - [@N1MBER](https://github.com/N1MBER)
 - [docs(Sidebar): docs review (#1919)](https://github.com/consta-design-system/uikit/commit/1fd9e328095c24cd752454caee73aee472dc6bbe) - [@arhayka](https://github.com/arhayka)
 - [docs(ThemeToggler): docs review (#1914)](https://github.com/consta-design-system/uikit/commit/93a4533176d4f3aaa2f8c3d3c6a5a1424bd3b05c) - [@arhayka](https://github.com/arhayka)
-
---------------------
-
-## v3.12.4 (12/01/2022)
-- адаптировали `Slider` для мобильных устройств
-- доработали документацию
-
----
-
-- [docs(Badge): docs review (#1909)](https://github.com/gazprom-neft/consta-uikit/commit/814a1ecec3feb766c20dba5a6bffbda987ea41fa) - [@arhayka](https://github.com/arhayka)
-- [docs(Popover): docs review (#1912)](https://github.com/gazprom-neft/consta-uikit/commit/8d9dca5b476aa964ffa43f3fc9c7ebfddb930a78) - [@arhayka](https://github.com/arhayka)
-- [docs(Loader): docs review (#1913)](https://github.com/gazprom-neft/consta-uikit/commit/202c8e5175aee3719ab2b27ea081aee4191cec0c) - [@arhayka](https://github.com/arhayka)
-- [docs(ProgressSpin): docs review (#1915)](https://github.com/gazprom-neft/consta-uikit/commit/a65ea44190987be5ea0a9eed8e79261d9f55a52a) - [@arhayka](https://github.com/arhayka)
-- [docs(Responses): docs review (#1916)](https://github.com/gazprom-neft/consta-uikit/commit/e3bfbebad05f1f72b2dad72a814daa3dfeafaf9f) - [@arhayka](https://github.com/arhayka)
-- [docs(SnackBar): docs review (#1917)](https://github.com/gazprom-neft/consta-uikit/commit/e681f982c4e11acc85955706533b14ab0f33016f) - [@arhayka](https://github.com/arhayka)
-- [docs(Timer): docs reivew (#1918)](https://github.com/gazprom-neft/consta-uikit/commit/618dea0861e8031ecb30802ad43b1183aa665133) - [@arhayka](https://github.com/arhayka)
-- [fix(Slider): fix bug with non working mobile mode (#1900)](https://github.com/gazprom-neft/consta-uikit/commit/01bf0d7e470e208762fb1d2874b2cfe066231a24) - [@N1MBER](https://github.com/N1MBER)
