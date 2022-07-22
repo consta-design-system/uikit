@@ -3,45 +3,35 @@ export type RouterItem = {
   path: string;
 };
 
-const generateRouteName = (path: string, libsLenght: number, name?: string) =>
-  `${path === '/' ? '' : 'LIBS.'}${libsLenght > 1 ? 'LIB.' : ''}${name ? name : ''}`;
+const routesNames = {
+  LIBS: 'LIBS',
+  LIBS_STAND: 'LIBS.STAND',
+  LIBS_STAND_DESIGN: 'LIBS.STAND.DESIGN',
+  LIBS_STAND_DEV: 'LIBS.STAND.DEV',
+  LIBS_STAND_SANDBOX: 'LIBS.STAND.SANDBOX',
+};
 
-export const createRoutes = (path = '/', libsLenght = 1) => {
-  console.log(libsLenght);
-
-  const routesNames = {
-    LIBS: 'LIBS',
-    LIBS_LIB: libsLenght > 1 ? generateRouteName(path, 0, 'LIB') : 'LIB',
-    LIBS_LIB_STAND: generateRouteName(path, libsLenght, 'STAND'),
-    LIBS_LIB_STAND_DESIGN: generateRouteName(path, libsLenght, 'STAND.DESIGN'),
-    LIBS_LIB_STAND_DEV: generateRouteName(path, libsLenght, 'STAND.DEV'),
-    LIBS_LIB_STAND_SANDBOX: generateRouteName(path, libsLenght, 'STAND.SANDBOX'),
-  };
-
-  const routes = [
+export const createRoutes = (path = '/libs') => {
+  const routes: RouterItem[] = [
     {
       name: routesNames.LIBS,
-      path: path,
+      path: `${path}?:hash`,
     },
     {
-      name: routesNames.LIBS_LIB,
-      path: '/:libId',
+      name: routesNames.LIBS_STAND,
+      path: '/:stand?:hash',
     },
     {
-      name: routesNames.LIBS_LIB_STAND,
-      path: '/:standId',
+      name: routesNames.LIBS_STAND_DESIGN,
+      path: '/dev?:hash',
     },
     {
-      name: routesNames.LIBS_LIB_STAND_DEV,
-      path: '/dev',
+      name: routesNames.LIBS_STAND_DEV,
+      path: '/design?:hash',
     },
     {
-      name: routesNames.LIBS_LIB_STAND_DESIGN,
-      path: '/design',
-    },
-    {
-      name: routesNames.LIBS_LIB_STAND_SANDBOX,
-      path: '/sandbox',
+      name: routesNames.LIBS_STAND_SANDBOX,
+      path: '/sandbox?:hash',
     },
   ];
 

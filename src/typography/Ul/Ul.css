@@ -1,13 +1,13 @@
 .stand--Ul {
-    margin-bottom: var(--space-m);
+  margin-bottom: var(--space-m);
 
-    & .stand--Ul{
-        margin-left: var(--space-xl);
-        margin-bottom: 0;
-    }
+  & .stand--Ul {
+    margin-bottom: 0;
+    margin-left: var(--space-xl);
+  }
 
-    & li {
-        list-style: inherit;
-        list-style-position: inside;
-    }
+  & li {
+    list-style: inherit;
+    list-style-position: inside;
+  }
 }

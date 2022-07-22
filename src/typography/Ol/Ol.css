@@ -1,12 +1,12 @@
 .stand--Ol {
-    margin-bottom: var(--space-m);
-    
-    & .stand--Ol{
-        margin-left: var(--space-xl);
-    }
+  margin-bottom: var(--space-m);
 
-    & li {
-        list-style: inherit;
-        list-style-position: inside;
-    }
+  & .stand--Ol {
+    margin-left: var(--space-xl);
+  }
+
+  & li {
+    list-style: inherit;
+    list-style-position: inside;
+  }
 }

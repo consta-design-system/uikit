@@ -1,1 +1,0 @@
-export * from '@consta/stand/src/pages/StandPage/StandPageHeader/StandPageHeader';

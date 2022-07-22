@@ -39,13 +39,14 @@ export const Header = () => {
         left: [
           breakpoints.l ? undefined : (
             <Button
+              key="Button"
               view="clear"
               iconLeft={IconHamburger}
               className={cnMixSpace({ mR: 's' })}
               onClick={toggleMenu}
             />
           ),
-          <Text size="l" weight="bold">
+          <Text key="Logo" size="l" weight="bold">
             Consta
           </Text>,
         ],

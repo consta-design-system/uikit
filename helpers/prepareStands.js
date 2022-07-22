@@ -13,8 +13,6 @@ const { access, F_OK } = require('fs');
 
 const createlazyDocs = async (srcWithName, standsImportPath, type) => {
   const docsFile = `${srcWithName}${type}`;
-  // lazydocs.tsx.template
-  // console.log(lazyDocsFileName);
 
   const template = await readFile(
     'node_modules/@consta/stand/templates/lazydocs.tsx.template',
@@ -24,7 +22,6 @@ const createlazyDocs = async (srcWithName, standsImportPath, type) => {
   access(docsFile, F_OK, async (err) => {
     if (!err) {
       const lazyDocsFileName = `${docsFile.replace(/\W/g, '_')}.tsx`;
-      console.log(lazyDocsFileName);
 
       const imports = `import Docs from '../${standsImportPath}/${docsFile}';\n`;
 
@@ -87,62 +84,6 @@ const prepareStands = async ({
     .replace(/#lazyIds#/g, lazyIds);
 
   await writeFile(standsPath, jsCode);
-
-  //   const test = /.\/src\/icons\/(.+)\/(.+)_size_(.+).svg/;
-  //   const svgComponents = {};
-
-  //   svgFiles.forEach((fileName) => {
-  //     if (test.test(fileName)) {
-  //       const [file, componentName, svgName, size] = test.exec(fileName);
-  //       if (componentName === svgName) {
-  //         if (!svgComponents[componentName]) {
-  //           svgComponents[componentName] = {};
-  //         }
-  //         svgComponents[componentName][size.toLowerCase()] = file;
-  //       }
-  //     }
-  //   });
-
-  //   Object.keys(svgComponents).forEach(async (componentName) => {
-  //     const sizes = svgComponents[componentName];
-
-  //     if (iconComponentIsValid(sizes)) {
-  //       if (sizes.xs) {
-  //         await svgParse({
-  //           componentName: `${componentName}SizeXs`,
-  //           fileName: `${componentName}_size_xs`,
-  //           path: sizes.xs,
-  //           pathOutdir: `./src/icons/${componentName}/`,
-  //           cleanFill: true,
-  //         });
-  //       }
-  //       if (sizes.s) {
-  //         await svgParse({
-  //           componentName: `${componentName}SizeS`,
-  //           fileName: `${componentName}_size_s`,
-  //           path: sizes.s,
-  //           pathOutdir: `./src/icons/${componentName}/`,
-  //           cleanFill: true,
-  //         });
-  //       }
-  //       if (sizes.m) {
-  //         await svgParse({
-  //           componentName: `${componentName}SizeM`,
-  //           fileName: `${componentName}_size_m`,
-  //           path: sizes.m,
-  //           pathOutdir: `./src/icons/${componentName}/`,
-  //           cleanFill: true,
-  //         });
-  //       }
-  //       await createSvgComponent({
-  //         sizes,
-  //         componentName,
-  //         pathOutdir: `./src/icons/${componentName}/`,
-  //         templatePath: './builder/templates/Icon.js.template',
-  //       });
-  //     }
-  //   });
-  //   await createIconStories(svgComponents, src);
 };
 
 module.exports = {

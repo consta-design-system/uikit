@@ -1,27 +1,27 @@
 import React from 'react';
-import { Stand } from '##/exportTypes';
+import { PreparedStand } from '##/exportTypes';
 import { Text } from '@consta/uikit/Text';
 import { cn } from '##/utils/bem';
 import { Image } from '##/componets/Image';
-import NoImage from '@consta/stand/src/containers/LibPage/LibPageCard/NoImage';
+import NoImage from './NoImage';
 import { Link } from '##/componets/Link';
 import { routesNames } from '##/modules/router';
 import './LibPageCard.css';
 
 type Props = {
-  stand: Stand;
-  libId: string;
+  stand: PreparedStand;
 };
 
 const cnLibPageCard = cn('LibPageCard');
 
 export const LibPageCard = (props: Props) => {
-  const { stand, libId } = props;
-  const { title, description, image } = stand;
+  const { stand } = props;
+  const { title, description, image } = props.stand.stand;
+
   return (
     <div className={cnLibPageCard()}>
       <Image src={image ?? NoImage} className={cnLibPageCard('Image')} />
-      <Link to={routesNames.LIBS_LIB_STAND} params={{ libId, standId: stand.standId ?? '' }}>
+      <Link to={routesNames.LIBS_STAND} params={{ stand: stand.id }}>
         <Text
           className={cnLibPageCard('Title')}
           size="l"

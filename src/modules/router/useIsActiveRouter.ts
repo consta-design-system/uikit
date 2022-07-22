@@ -7,22 +7,21 @@ export const useIsActiveRouter = () => {
   const router = useRouter();
   const route = useRoute();
   const routeName = route.route?.name;
-  const routePath = route.route.path;
 
   const testStartsWithSegment = startsWithSegment(routeName);
 
   const getIsActive = useCallback(
     (
-      path: string,
+      name: string,
       params?: Record<string, string>,
       strictEquality?: boolean,
       ignoreQueryParams?: boolean,
     ) => {
-      if (testStartsWithSegment(path)) {
+      if (testStartsWithSegment(name)) {
         return (
-          router.isActive(path, params, strictEquality, ignoreQueryParams) ||
-          (path !== routesNames.LIBS_LIB &&
-            route.route.path.includes(router.buildPath(path, params)))
+          router.isActive(name, params, strictEquality, ignoreQueryParams) ||
+          (name !== routesNames.LIBS_STAND &&
+            route.route.path.includes(router.buildPath(name, params)))
         );
       }
       return false;

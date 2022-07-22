@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 
-import { PortalMenu } from '##/componets/PortalMenu';
+import { PortalMenu } from '##/containers/PortalMenu';
 import { useAtom } from '@reatom/react';
 
 import { libsAtom } from '##/modules/libs';
@@ -18,45 +18,50 @@ import { TextField } from '@consta/uikit/TextField';
 import { useFlag } from '@consta/uikit/useFlag';
 import { LibWithStands, Stand } from '##/exportTypes';
 import { useIsActiveRouter } from '##/modules/router';
+import { PreparedStand } from '##/exportTypes';
 
 import './LibPageMenu.css';
 import { useMemo } from 'react';
 
-const getItemLabel = (item: { title: string }) => item.title;
-const getItemGroupId = (item: { group?: string }) => item.group;
+const mapBadgeProps = {
+  stable: undefined,
+  canary: {
+    label: 'canary',
+    status: 'success',
+    view: 'filled',
+  },
+  inWork: {
+    label: 'в работе',
+    status: 'warning',
+    view: 'filled',
+  },
+  deprecated: {
+    label: 'deprecated',
+    status: 'error',
+    view: 'stroked',
+  },
+} as const;
+
+const getItemLabel = (item: PreparedStand) => item.stand.title;
+const getItemGroupId = (item: PreparedStand) => item.stand.group;
 const getItemDescription = () => undefined;
 const getGroupLabel = (group: { title: string }) => group.title;
 const getGroupKey = (group: { id: string }) => group.id;
-const getItemBadge = (item: Stand) => {
-  if (item.status === 'stable') {
+const getItemBadge = (item: PreparedStand) => {
+  const props = mapBadgeProps[item.stand.status];
+  if (!props) {
     return undefined;
-  } else if (item.status === 'canary') {
-    return <Badge label="Canary" view="filled" status="success" size="s" />;
-  } else if (item.status === 'inWork') {
-    return <Badge label="в работе" view="filled" status="warning" size="s" />;
-  } else {
-    return <Badge label="depricated" view="stroked" status="error" size="s" />;
   }
+
+  return <Badge {...props} size="s" />;
 };
-const getItemHref = (item: Stand) => {
-  if (item.standId) {
-    return routesNames.LIBS_LIB_STAND;
-  }
-  return routesNames.LIBS_LIB;
-};
-const getItemParmas = (item: Stand, libId?: string): Record<string, string> => {
-  if (item.standId) {
-    return {
-      libId: libId ?? '',
-      standId: item.standId ?? '',
-    };
-  }
-  return {
-    libId: libId ?? '',
-  };
-};
+const getItemHref = () => routesNames.LIBS_STAND;
+const getItemParmas = (item: PreparedStand): Record<string, string> => ({
+  stand: item.id,
+});
 
 const cnLibPageMenu = cn('LibPageMenu');
+
 export const LibPageMenu: React.FC = () => {
   const [libs] = useAtom(libsAtom);
   const [lib] = useAtom(libAtom);
@@ -66,26 +71,8 @@ export const LibPageMenu: React.FC = () => {
   const [showDeprecated, setShowDeprecated] = useFlag(true);
   const getIsActive = useIsActiveRouter();
 
-  const defaultStand: Stand = {
-    id: lib?.id ?? 'uikit',
-    title: 'Обзор',
-    group: 'review',
-    status: 'stable',
-    version: '',
-  };
-
-  const getItemActive = (item: Stand) => {
-    if (lib?.id) {
-      if (item.standId) {
-        return getIsActive(routesNames.LIBS_LIB_STAND, { libId: lib?.id, standId: item.standId });
-      } else {
-        return (
-          getIsActive(routesNames.LIBS_LIB, { libId: lib?.id }) &&
-          route.route.name === routesNames.LIBS_LIB
-        );
-      }
-    }
-  };
+  const getItemActive = (item: PreparedStand) =>
+    getIsActive(routesNames.LIBS_STAND, { stand: item.id });
 
   const back = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
@@ -94,15 +81,28 @@ export const LibPageMenu: React.FC = () => {
 
   const { stands, logo, groups } = lib ?? ({} as LibWithStands);
 
-  const allStands = [defaultStand, ...(stands ?? [])];
-
   const visibleStands = useMemo(() => {
-    return allStands.filter((item) => {
-      if (!showDeprecated && item.status === 'deprecated') {
+    const reviewItem: PreparedStand | undefined = lib
+      ? {
+          id: lib.id,
+          path: '',
+          lib,
+          stand: {
+            id: lib.id,
+            title: 'Обзор',
+            group: 'review',
+            status: 'stable',
+            version: '',
+          },
+        }
+      : undefined;
+
+    return [...(reviewItem ? [reviewItem] : []), ...stands].filter((item) => {
+      if (!showDeprecated && item.stand.status === 'deprecated') {
         return false;
       }
       if (searchValue && searchValue.trim() !== '') {
-        return item.title.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase());
+        return item.stand.title.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase());
       }
       return true;
     });
@@ -149,6 +149,10 @@ export const LibPageMenu: React.FC = () => {
     );
   };
 
+  if (!lib) {
+    return null;
+  }
+
   return (
     <PortalMenu
       items={visibleStands}
@@ -157,7 +161,7 @@ export const LibPageMenu: React.FC = () => {
       additionalControls={additionalControls()}
       getItemLabel={getItemLabel}
       getItemHref={getItemHref}
-      getItemParams={(item) => getItemParmas(item, lib?.id)}
+      getItemParams={getItemParmas}
       getGroupLabel={getGroupLabel}
       getItemActive={getItemActive}
       getItemBadge={getItemBadge}

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, memo } from 'react';
 import { ErrorBoundary } from '##/componets/ErrorBoundary';
 import { MDXProvider } from '##/containers/MDXProvider';
 
@@ -21,8 +21,11 @@ export const LazyDocsPreseter: React.FC<LazyDocsProps> = ({ id }) => {
   );
 };
 
-export const LazyDocs: React.FC<LazyDocsProps> = (props) => (
-  <ErrorBoundary fallback={<FallbackError />}>
-    <LazyDocsPreseter {...props} />
-  </ErrorBoundary>
+export const LazyDocs: React.FC<LazyDocsProps> = memo(
+  (props) => (
+    <ErrorBoundary fallback={<FallbackError />}>
+      <LazyDocsPreseter {...props} />
+    </ErrorBoundary>
+  ),
+  (prevProps: LazyDocsProps, nextProps: LazyDocsProps) => prevProps.id === nextProps.id,
 );

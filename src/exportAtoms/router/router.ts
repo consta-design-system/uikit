@@ -1,6 +1,8 @@
 import { Store, createAtom, defaultStore } from '@reatom/core';
 
-import { State as StateRouter5, Plugin, Router } from 'router5';
+import { createPrimitiveAtom } from '@reatom/core/primitives';
+
+import { State as StateRouter5, Plugin } from 'router5';
 
 export type State = {
   route?: StateRouter5;

@@ -22,11 +22,7 @@ export const Menu: React.FC = () => {
     return <LibsPageMenu />;
   }
 
-  if (
-    routeName === routesNames.LIBS ||
-    routeName === routesNames.LIBS_LIB ||
-    testStartsWithSegment(routesNames.LIBS_LIB_STAND)
-  ) {
+  if (routeName === routesNames.LIBS_STAND || testStartsWithSegment(routesNames.LIBS_STAND)) {
     return <LibPageMenu />;
   }
 

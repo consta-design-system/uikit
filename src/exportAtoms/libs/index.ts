@@ -1,1 +1,1 @@
-export * from '@consta/stand/src/exportAtoms/libs/libs';
+export * from '##/exportAtoms/libs/libs';

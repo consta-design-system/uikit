@@ -1,0 +1,44 @@
+.stand--SideLinks {
+  width: 100%;
+
+  & > *:not(:last-child) {
+    margin-bottom: calc(var(--space-xl) + var(--space-2xs));
+  }
+
+  &-List {
+    width: 100%;
+  }
+
+  &-ListItem.Button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-xs) 0;
+    color: var(--color-typo-secondary);
+    background-color: transparent;
+    border: none;
+    font-family: var(--font);
+    font-size: var(--size-text-s);
+    line-height: var(--line-height-text-s);
+    text-align: left;
+    cursor: pointer;
+    transition: color 0.2s;
+
+    &:hover {
+      color: var(--color-typo-primary);
+      background-color: transparent;
+    }
+
+    &.stand--SideLinks-ListItem_checked {
+      color: var(--color-typo-primary);
+    }
+  }
+
+  &-Links {
+    width: 100%;
+
+    & > *:not(:last-child) {
+      margin-bottom: calc(var(--space-xs) + var(--space-2xs));
+    }
+  }
+}

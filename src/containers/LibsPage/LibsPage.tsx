@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { cn } from '##/utils/bem';
 
@@ -37,7 +37,7 @@ export const LibsPage: React.FC = () => {
 
       {libs.map((lib) => {
         return (
-          <>
+          <Fragment key={lib.id}>
             <Text as="h3" size="3xl" weight="semibold" className={cnMixSpace({ mB: 'm' })}>
               {lib.title}
             </Text>
@@ -47,11 +47,11 @@ export const LibsPage: React.FC = () => {
               </Text>
             )}
             {lib.image && (
-              <Link to={routesNames.LIBS_LIB} params={{ libId: lib.id }}>
+              <Link to={routesNames.LIBS_STAND} params={{ stand: lib.id }}>
                 <Image src={lib.image} className={cnMixSpace({ mB: '3xl' })} />
               </Link>
             )}
-          </>
+          </Fragment>
         );
       })}
     </div>

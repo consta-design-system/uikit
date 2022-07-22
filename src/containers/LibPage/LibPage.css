@@ -12,12 +12,11 @@
   }
 
   &-Section {
+    --gap: var(--space-l);
     display: grid;
     width: 100%;
     grid-column-gap: var(--gap);
     grid-template-columns: 1fr;
-
-    --gap: var(--space-l);
 
     @media screen and (min-width: 460px) {
       grid-template-columns: 1fr 1fr;
@@ -26,8 +25,8 @@
       --gap: var(--space-2xl);
     }
     @media screen and (min-width: 860px) {
-      grid-template-columns: 1fr 1fr 1fr;
       --gap: var(--space-3xl);
+      grid-template-columns: 1fr 1fr 1fr;
     }
     @media screen and (min-width: 1280px) {
       --gap: var(--space-4xl);

@@ -1,6 +1,6 @@
 import { Stand, CreatedStand, PreparedStand, LibWithStands } from '##/exportTypes';
 
-const sort = (a: PreparedStand, b: PreparedStand) => {
+const sort = (a: CreatedStand, b: CreatedStand) => {
   if (a.stand.order && b.stand.order) {
     return a.stand.order - b.stand.order;
   }
@@ -19,19 +19,18 @@ const sort = (a: PreparedStand, b: PreparedStand) => {
   return 0;
 };
 
-const addToLib = (stand: PreparedStand, lib: LibWithStands[]) => {
-  const indexLib = lib.findIndex((item) => item.id === stand.lib.id);
+const addToLib = (stand: PreparedStand, libs: LibWithStands[]) => {
+  const indexLib = libs.findIndex((item) => item.id === stand.lib.id);
 
   const standWithGroup = {
-    ...stand.stand,
-    standId: stand.id,
+    ...stand,
     group: stand.stand.group || 'Библиотеки компонентов',
   };
 
   if (indexLib !== -1) {
-    lib[indexLib].stands.push(standWithGroup);
+    libs[indexLib].stands.push(standWithGroup);
   } else {
-    lib.push({
+    libs.push({
       ...stand.lib,
       stands: [standWithGroup],
     });
@@ -58,9 +57,15 @@ export const prepareStands = (initStands: CreatedStand[], paths: string[]) => {
     }))
     .sort(sort)
     .forEach((stand) => {
-      stands[stand.id] = stand;
-      addToLib(stand, libs);
+      stands[stand.id] = stand as PreparedStand;
+      addToLib(stand as PreparedStand, libs);
     });
+
+  const standsKeys = Object.keys(stands);
+
+  standsKeys.forEach((key) => {
+    stands[key].lib = libs.find((item) => item.id === stands[key].lib.id) as LibWithStands;
+  });
 
   return { stands, libs };
 };

@@ -18,9 +18,9 @@ import './StandPage.css';
 const cnStandPage = cn('StandPage');
 
 const standPathMap = {
-  [routesNames.LIBS_LIB_STAND]: '',
-  [routesNames.LIBS_LIB_STAND_DESIGN]: '_design',
-  [routesNames.LIBS_LIB_STAND_DEV]: '_dev',
+  [routesNames.LIBS_STAND]: '',
+  [routesNames.LIBS_STAND_DESIGN]: '_design',
+  [routesNames.LIBS_STAND_DEV]: '_dev',
 };
 
 const getStandPath = (routerName: string, standID: string) => {
@@ -36,8 +36,6 @@ export const StandPage: React.FC = () => {
   if (!standID) {
     return null;
   }
-
-  console.log(standID);
 
   const standPath = getStandPath(routeName, standID);
 
@@ -61,20 +59,18 @@ export const StandPage: React.FC = () => {
         className={cnStandPage('Informer')}
       />
       <StandPageNavigation className={cnStandPage('Navigation')} />
-      {stand.stand.figma && routeName === routesNames.LIBS_LIB_STAND_DESIGN && (
+      {stand.stand.figma && routeName === routesNames.LIBS_STAND_DESIGN && (
         <StandPageFigma className={cnStandPage('Figma')} link={stand.stand.figma} />
       )}
-      {routeName === routesNames.LIBS_LIB_STAND_SANDBOX &&
+      {routeName === routesNames.LIBS_STAND_SANDBOX &&
         (stand.stand.sandbox ? (
           <StandPageSandbox className={cnStandPage('SandBox')} link={stand.stand.sandbox} />
         ) : (
           'раздел в разработке'
         ))}
-      {(routeName === routesNames.LIBS_LIB_STAND ||
-        routeName === routesNames.LIBS_LIB_STAND_DESIGN ||
-        routeName === routesNames.LIBS_LIB_STAND_DEV) && (
-        <LazyDocs key={standPath} id={standPath} />
-      )}
+      {(routeName === routesNames.LIBS_STAND ||
+        routeName === routesNames.LIBS_STAND_DESIGN ||
+        routeName === routesNames.LIBS_STAND_DEV) && <LazyDocs key={standPath} id={standPath} />}
       <StandPageFooter className={cnStandPage('Footer')} onSPAClick={() => {}} />
     </div>
   );

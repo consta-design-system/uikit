@@ -1,38 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { routesNames } from '##/modules/router';
 import { libsAtom } from '##/modules/libs';
 import { useAtom } from '@reatom/react';
-import { useRoute } from 'react-router5';
+import { useRoute, useRouter } from 'react-router5';
 import { startsWithSegment } from 'router5-helpers';
 
 import { LibsPage } from '##/containers/LibsPage';
 import { LibPage } from '##/containers/LibPage';
 import { StandPage } from '##/containers/StandPage';
 
-import { standsAtom } from '##/modules/stands';
-
 export const Pages: React.FC = () => {
   const [libs] = useAtom(libsAtom);
-  const [stands] = useAtom(standsAtom);
-  const route = useRoute();
+  const { route } = useRoute();
+  const router = useRouter();
 
-  console.log(stands);
+  const testStartsWithSegment = startsWithSegment(route.name);
 
-  const routeName = route.route?.name;
-  const libsLength = libs.length;
+  // если библиотека одна то редереким на сраницу библиотеки
+  useEffect(() => {
+    if (libs.length <= 1) {
+      router.navigate(routesNames.LIBS_STAND, { stand: libs[0].id }, { replace: true });
+    }
+  }, []);
 
-  const testStartsWithSegment = startsWithSegment(routeName);
-
-  if (routeName === routesNames.LIBS && libsLength > 1) {
+  if (route.name === routesNames.LIBS) {
     return <LibsPage />;
   }
 
-  if (routeName === routesNames.LIBS || routeName === routesNames.LIBS_LIB) {
-    return <LibPage />;
-  }
-
-  if (testStartsWithSegment(routesNames.LIBS_LIB_STAND)) {
+  if (testStartsWithSegment(routesNames.LIBS_STAND)) {
+    if (libs.find((item) => item.id === route.params.stand)) {
+      return <LibPage />;
+    }
     return <StandPage />;
   }
 

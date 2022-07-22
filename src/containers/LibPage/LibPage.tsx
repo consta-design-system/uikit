@@ -2,7 +2,7 @@ import React from 'react';
 import { libAtom } from '##/modules/lib';
 import { useAtom } from '@reatom/react';
 import { getGroups } from '@consta/uikit/__internal__/src/utils/getGroups';
-import { Group, Stand, LibWithStands } from '##/exportTypes';
+import { Group, Stand, LibWithStands, PreparedStand } from '##/exportTypes';
 import { routesNames } from '##/modules/router';
 import { LibPageCard } from './LibPageCard';
 import { Text } from '@consta/uikit/Text';
@@ -10,28 +10,23 @@ import { useRouter } from 'react-router5';
 import { cn } from '##/utils/bem';
 import './LibPage.css';
 
-const getItemGroupId = (item: Stand) => item.group;
+const getItemGroupId = (item: PreparedStand) => item.stand.group;
 const getGroupKey = (group: Group) => group.id;
 
 const cnLibPage = cn('LibPage');
 
 export const LibPage: React.FC = () => {
   const [lib] = useAtom(libAtom);
-  const router = useRouter();
 
   const { stands, groups: groupsProp, id: libId } = lib ?? ({} as LibWithStands);
 
-  const groups = getGroups<Stand, Group>(
+  const groups = getGroups<PreparedStand, Group>(
     stands,
     getItemGroupId,
     [...groupsProp],
     getGroupKey,
     undefined,
   );
-
-  const handleClick = (item: Stand) => {
-    router.navigate(routesNames.LIBS_LIB_STAND, { libId, standId: item.standId });
-  };
 
   return (
     <div className={cnLibPage(null, ['theme_gap_medium'])}>
@@ -42,13 +37,9 @@ export const LibPage: React.FC = () => {
               {group.group?.title}
             </Text>
             <div className={cnLibPage('Section')}>
-              {group.items.map((stand, standIndex) => {
+              {group.items.map((stand, index) => {
                 return (
-                  <LibPageCard
-                    key={`${cnLibPage({ standIndex, stand: stand.id })}`}
-                    stand={stand}
-                    libId={libId}
-                  />
+                  <LibPageCard key={`${cnLibPage({ index, stand: stand.id })}`} stand={stand} />
                 );
               })}
             </div>

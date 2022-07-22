@@ -31,7 +31,7 @@ class GenerateCommand extends Command {
       this.error(`Can't load build config ${configPath}.`);
     }
 
-    console.log(config);
+    // console.log(config);
 
     try {
       await Promise.all([

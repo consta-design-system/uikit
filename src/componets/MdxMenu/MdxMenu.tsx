@@ -1,30 +1,29 @@
-import React, { useCallback, useEffect } from 'react';
-import { cn } from '##/utils/bem';
+import React, { useEffect } from 'react';
 
 import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
 import { menuMdxAtom } from '##/modules/menuMdx';
 import { useAction } from '@reatom/react';
-
-const cnMdxMenu = cn('MdxMenu');
+import { useBreakpoints } from '@consta/uikit/useBreakpoints';
 
 export const MdxMenu: React.FC<PropsWithHTMLAttributes<{}, HTMLDivElement>> = ({
   className,
   children,
   ...otherProps
 }) => {
-  const setMenuMdxAtom = useAction(menuMdxAtom.set);
+  const setMenu = useAction(menuMdxAtom.set);
+  const breakpoints = useBreakpoints({ xl: 1690 });
 
   useEffect(() => {
-    setMenuMdxAtom(children);
+    setMenu(children);
     return () => {
-      setMenuMdxAtom(undefined);
+      setMenu(undefined);
     };
   }, []);
 
-  return (
-    <div {...otherProps} className={cnMdxMenu(null, [className])}>
-      {children}
-    </div>
-  );
+  if (breakpoints.xl) {
+    return null;
+  }
+
+  return <>{children}</>;
 };

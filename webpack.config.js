@@ -12,7 +12,7 @@ const isEnvDevelopment = process.env.NODE_ENV === 'development' || 'standDevelop
 const isEnvProduction = process.env.NODE_ENV === 'production';
 const isEnvStandDevelopment = process.env.NODE_ENV === 'standDevelopment';
 
-console.log(path.resolve(__dirname, '../../../src'));
+// console.log(path.resolve(__dirname, '../../../src'));
 
 module.exports = function () {
   return {

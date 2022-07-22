@@ -1,23 +1,21 @@
 .stand--LibPageMenu {
-    &-Controls {
-        margin-bottom: var(--space-xs);
+  &-Controls {
+    margin-bottom: var(--space-xs);
 
-        & > *:not(:last-child) {
-            margin-bottom: var(--space-l);
-        }
-
-        & > *:first-child {
-            margin-bottom: var(--space-xl);
-        }
+    & > *:not(:last-child) {
+      margin-bottom: var(--space-l);
     }
 
-    
-
-    &-Input {
-        margin-bottom: var(--space-l);
+    & > *:first-child {
+      margin-bottom: var(--space-xl);
     }
+  }
 
-    &-Image {
-        margin-bottom: var(--space-l);
-    }
+  &-Input {
+    margin-bottom: var(--space-l);
+  }
+
+  &-Image {
+    margin-bottom: var(--space-l);
+  }
 }
