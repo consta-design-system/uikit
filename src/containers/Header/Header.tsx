@@ -1,24 +1,19 @@
+import { Layout } from '@consta/header/Layout';
+import { Button } from '@consta/uikit/Button';
+import { IconHamburger } from '@consta/uikit/IconHamburger';
+import { cnMixSpace } from '@consta/uikit/MixSpace';
+import { Text } from '@consta/uikit/Text';
+import { ThemePreset } from '@consta/uikit/Theme';
+import {
+  ThemeToggler,
+  ThemeTogglerPropSetValue,
+} from '@consta/uikit/ThemeToggler';
+import { useBreakpoints } from '@consta/uikit/useBreakpoints';
+import { useAction, useAtom } from '@reatom/react';
 import React from 'react';
 
-import { Layout } from '@consta/header/Layout';
-import { IconHamburger } from '@consta/uikit/IconHamburger';
-import { Button } from '@consta/uikit/Button';
-import { Text } from '@consta/uikit/Text';
-import { ThemeToggler, ThemeTogglerPropSetValue } from '@consta/uikit/ThemeToggler';
-import { cnMixSpace } from '@consta/uikit/MixSpace';
-
-import { cn } from '##/utils/bem';
-import { ThemePreset } from '@consta/uikit/Theme';
-
-import { themeAtom, themes, getThemeKey, getThemeIcon } from '##/modules/theme';
-
-import { useAction, useAtom } from '@reatom/react';
-
 import { openLeftSide } from '##/exportAtoms/layout';
-
-import { useBreakpoints } from '@consta/uikit/useBreakpoints';
-
-const cnHeader = cn('Header');
+import { getThemeIcon, getThemeKey, themeAtom, themes } from '##/modules/theme';
 
 export const Header = () => {
   const setTheme: ThemeTogglerPropSetValue<ThemePreset> = useAction((props) =>

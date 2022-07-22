@@ -1,3 +1,3 @@
 import React from 'react';
 
-export const Br = () => <br/>;
+export const Br = () => <br />;

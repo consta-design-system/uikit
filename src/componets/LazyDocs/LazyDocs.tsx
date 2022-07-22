@@ -1,4 +1,5 @@
-import React, { lazy, Suspense, memo } from 'react';
+import React, { lazy, memo, Suspense } from 'react';
+
 import { ErrorBoundary } from '##/componets/ErrorBoundary';
 import { MDXProvider } from '##/containers/MDXProvider';
 
@@ -27,5 +28,6 @@ export const LazyDocs: React.FC<LazyDocsProps> = memo(
       <LazyDocsPreseter {...props} />
     </ErrorBoundary>
   ),
-  (prevProps: LazyDocsProps, nextProps: LazyDocsProps) => prevProps.id === nextProps.id,
+  (prevProps: LazyDocsProps, nextProps: LazyDocsProps) =>
+    prevProps.id === nextProps.id,
 );

@@ -1,5 +1,5 @@
 import React from 'react';
 
-export const Img = (props: React.HTMLAttributes<HTMLImageElement>) => {
-    return <img {...props} />
-}
+export const Img = (props: React.HTMLAttributes<HTMLImageElement>) => (
+  <img {...props} />
+);

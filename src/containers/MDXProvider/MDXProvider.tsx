@@ -1,5 +1,6 @@
-import React from 'react';
 import { MDXProvider as MDXProviderComponent } from '@mdx-js/react';
+import React from 'react';
+
 import { A } from '##/typography/A';
 import { Blockquote } from '##/typography/Blockquote';
 import { Br } from '##/typography/Br';
@@ -21,34 +22,34 @@ import { Strong } from '##/typography/Strong';
 import { Ul } from '##/typography/Ul';
 
 export const components = {
-    a: A,
-    blockquote: Blockquote,
-    br: Br,
-    code: Code,
-    em: Em,
-    h1: H1,
-    h2: H2,
-    h3: H3,
-    h4: H4,
-    h5: H5,
-    h6: H6,
-    hr: Hr,
-    img: Img,
-    b: Strong,
-    i: Em,
-    li: Li,
-    ol: Ol,
-    p: P,
-    pre: Pre,
-    strong: Strong,
-    ul: Ul,
-}
+  a: A,
+  blockquote: Blockquote,
+  br: Br,
+  code: Code,
+  em: Em,
+  h1: H1,
+  h2: H2,
+  h3: H3,
+  h4: H4,
+  h5: H5,
+  h6: H6,
+  hr: Hr,
+  img: Img,
+  b: Strong,
+  i: Em,
+  li: Li,
+  ol: Ol,
+  p: P,
+  pre: Pre,
+  strong: Strong,
+  ul: Ul,
+};
 
 type Props = {
-    disableParentContext?: boolean;
-    children?: React.ReactNode;
-}
+  disableParentContext?: boolean;
+  children?: React.ReactNode;
+};
 
-export const MDXProvider = (props: Props) => {
-    return <MDXProviderComponent {...props} components={components} />
-}
+export const MDXProvider = (props: Props) => (
+  <MDXProviderComponent {...props} components={components} />
+);

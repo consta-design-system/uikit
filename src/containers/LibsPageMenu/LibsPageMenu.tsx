@@ -1,8 +1,7 @@
+import { useAtom } from '@reatom/react';
 import React from 'react';
 
 import { PortalMenu } from '##/containers/PortalMenu';
-import { useAtom } from '@reatom/react';
-
 import { libsAtom } from '##/modules/libs';
 import { routesNames } from '##/modules/router';
 

@@ -1,8 +1,5 @@
-import { Store, createAtom, defaultStore } from '@reatom/core';
-
-import { createPrimitiveAtom } from '@reatom/core/primitives';
-
-import { State as StateRouter5, Plugin } from 'router5';
+import { createAtom, defaultStore, Store } from '@reatom/core';
+import { Plugin, State as StateRouter5 } from 'router5';
 
 export type State = {
   route?: StateRouter5;
@@ -33,51 +30,44 @@ export const routerAtom = createAtom(
     clearErrors: () => {},
   },
   ({ onAction }, state = initialState) => {
-    onAction(
-      'transitionStart',
-      (payload) =>
-        (state = {
-          ...state,
-          transitionRoute: payload.toState,
-          transitionError: undefined,
-        }),
-    );
-    onAction(
-      'transitionSuccess',
-      (payload) =>
-        (state = {
-          ...state,
-          route: payload.toState,
-          transitionRoute: undefined,
-          transitionError: undefined,
-          previousRoute: payload.fromState,
-        }),
-    );
-    onAction(
-      'transitionError',
-      (payload) =>
-        (state = {
-          ...state,
-          transitionRoute: payload.toState,
-          transitionError: payload.err,
-        }),
-    );
-    onAction(
-      'clearErrors',
-      () =>
-        (state = {
-          ...state,
-          transitionRoute: undefined,
-          transitionError: undefined,
-        }),
-    );
+    onAction('transitionStart', (payload) => {
+      state = {
+        ...state,
+        transitionRoute: payload.toState,
+        transitionError: undefined,
+      };
+    });
+    onAction('transitionSuccess', (payload) => {
+      state = {
+        ...state,
+        route: payload.toState,
+        transitionRoute: undefined,
+        transitionError: undefined,
+        previousRoute: payload.fromState,
+      };
+    });
+    onAction('transitionError', (payload) => {
+      state = {
+        ...state,
+        transitionRoute: payload.toState,
+        transitionError: payload.err,
+      };
+    });
+    onAction('clearErrors', () => {
+      state = {
+        ...state,
+        transitionRoute: undefined,
+        transitionError: undefined,
+      };
+    });
 
     return state;
   },
 );
 
-export const plugin = (store: Store = defaultStore) => {
-  return (): Plugin => ({
+export const plugin =
+  (store: Store = defaultStore) =>
+  (): Plugin => ({
     onTransitionStart(toState, fromState) {
       store.dispatch(routerAtom.transitionStart({ toState, fromState }));
     },
@@ -91,4 +81,3 @@ export const plugin = (store: Store = defaultStore) => {
       store.dispatch(routerAtom.transitionError({ toState, fromState, err }));
     },
   });
-};

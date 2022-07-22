@@ -3,7 +3,8 @@ module.exports = {
   distPath: './dist',
   packagePath: 'node_modules/@consta/stand',
   projectPath: '../../../../..',
-  standsTemaplatePath: 'node_modules/@consta/stand/templates/stands.ts.template',
+  standsTemaplatePath:
+    'node_modules/@consta/stand/templates/stands.ts.template',
   standsPath: 'node_modules/@consta/stand/src/stands/index.ts',
   standsImportPath: '../../../../..',
 };

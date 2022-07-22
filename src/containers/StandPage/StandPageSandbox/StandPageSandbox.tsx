@@ -1,9 +1,10 @@
-import React from 'react';
-import { cn } from '##/utils/bem';
+import './StandPageSandbox.css';
+
 import { Loader } from '@consta/uikit/Loader';
 import { useFlag } from '@consta/uikit/useFlag';
+import React from 'react';
 
-import './StandPageSandbox.css';
+import { cn } from '##/utils/bem';
 
 type Props = {
   link?: string;

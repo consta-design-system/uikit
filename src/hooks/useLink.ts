@@ -19,23 +19,22 @@ export const buildLink = (
   router: Router,
   { to, params, options }: LinkProps,
   onClick?: React.MouseEventHandler,
-): ReturnItem => {
-  return [
-    router.buildPath(to, params),
-    (e) => {
-      e.preventDefault();
-      router.navigate(to, params || {}, options || {});
-      onClick?.(e);
-    },
-  ];
-};
+): ReturnItem => [
+  router.buildPath(to, params),
+  (e) => {
+    e.preventDefault();
+    router.navigate(to, params || {}, options || {});
+    onClick?.(e);
+  },
+];
 
-export const useLink = <PROPS extends UseLinkProps>(props: PROPS): UseLinkReturn<PROPS> => {
+export const useLink = <PROPS extends UseLinkProps>(
+  props: PROPS,
+): UseLinkReturn<PROPS> => {
   const router = useRouter();
 
   if (Array.isArray(props)) {
     return props.map((item) => buildLink(router, item)) as UseLinkReturn<PROPS>;
-  } else {
-    return buildLink(router, props) as UseLinkReturn<PROPS>;
   }
+  return buildLink(router, props) as UseLinkReturn<PROPS>;
 };

@@ -1,16 +1,16 @@
-import React from 'react';
-import { cn } from '##/utils/bem';
-import { Button } from '@consta/uikit/Button';
-import { IconForward } from '@consta/uikit/IconForward';
-import { Tabs, RenderItemProps } from '@consta/uikit/TabsCanary';
-import { activeItemAtom } from '##/modules/menuMdx';
-import { useAtom } from '@reatom/react';
-import { useMdxLink } from '##/hooks/useMdxLink';
-import { MenuItem } from '##/hooks/useMenu';
-import { IconComponent } from '@consta/uikit/Icon';
-import { useMenu } from '##/hooks/useMenu';
-
 import './SideLinks.css';
+
+import { Button } from '@consta/uikit/Button';
+import { IconComponent } from '@consta/uikit/Icon';
+import { IconForward } from '@consta/uikit/IconForward';
+import { RenderItemProps, Tabs } from '@consta/uikit/TabsCanary';
+import { useAtom } from '@reatom/react';
+import React from 'react';
+
+import { useMdxLink } from '##/hooks/useMdxLink';
+import { MenuItem, useMenu } from '##/hooks/useMenu';
+import { activeItemAtom } from '##/modules/menuMdx';
+import { cn } from '##/utils/bem';
 
 const cnSideLinks = cn('SideLinks');
 
@@ -51,7 +51,13 @@ export const SideLinks = () => {
       item: { href, label },
       checked,
     } = props;
-    return <LinkItem className={cnSideLinks('ListItem', { checked })} label={label} href={href} />;
+    return (
+      <LinkItem
+        className={cnSideLinks('ListItem', { checked })}
+        label={label}
+        href={href}
+      />
+    );
   };
 
   return (

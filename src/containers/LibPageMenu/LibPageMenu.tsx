@@ -1,27 +1,22 @@
-import React, { useCallback, useState } from 'react';
+import './LibPageMenu.css';
 
-import { PortalMenu } from '##/containers/PortalMenu';
-import { useAtom } from '@reatom/react';
-
-import { libsAtom } from '##/modules/libs';
-import { libAtom } from '##/modules/lib';
-import { useRouter } from 'react-router5';
-import { useRoute } from 'react-router5';
-import { routesNames } from '##/modules/router';
-import { cn } from '##/utils/bem';
+import { Badge } from '@consta/uikit/Badge';
+import { Button } from '@consta/uikit/Button';
 import { IconBackward } from '@consta/uikit/IconBackward';
 import { IconSearch } from '@consta/uikit/IconSearch';
 import { Switch } from '@consta/uikit/Switch';
-import { Button } from '@consta/uikit/Button';
-import { Badge } from '@consta/uikit/Badge';
 import { TextField } from '@consta/uikit/TextField';
 import { useFlag } from '@consta/uikit/useFlag';
-import { LibWithStands, Stand } from '##/exportTypes';
-import { useIsActiveRouter } from '##/modules/router';
-import { PreparedStand } from '##/exportTypes';
+import { useAtom } from '@reatom/react';
+import React, { useCallback, useMemo, useState } from 'react';
+import { useRouter } from 'react-router5';
 
-import './LibPageMenu.css';
-import { useMemo } from 'react';
+import { PortalMenu } from '##/containers/PortalMenu';
+import { LibWithStands, PreparedStand } from '##/exportTypes';
+import { libAtom } from '##/modules/lib';
+import { libsAtom } from '##/modules/libs';
+import { routesNames, useIsActiveRouter } from '##/modules/router';
+import { cn } from '##/utils/bem';
 
 const mapBadgeProps = {
   stable: undefined,
@@ -66,8 +61,10 @@ export const LibPageMenu: React.FC = () => {
   const [libs] = useAtom(libsAtom);
   const [lib] = useAtom(libAtom);
   const router = useRouter();
-  const route = useRoute();
-  const [searchValue, setSearchValue] = useState<string | undefined | null>(null);
+
+  const [searchValue, setSearchValue] = useState<string | undefined | null>(
+    null,
+  );
   const [showDeprecated, setShowDeprecated] = useFlag(true);
   const getIsActive = useIsActiveRouter();
 
@@ -102,52 +99,56 @@ export const LibPageMenu: React.FC = () => {
         return false;
       }
       if (searchValue && searchValue.trim() !== '') {
-        return item.stand.title.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase());
+        return item.stand.title
+          .toLocaleLowerCase()
+          .includes(searchValue.toLocaleLowerCase());
       }
       return true;
     });
   }, [showDeprecated, searchValue]);
 
-  const additionalControls = () => {
-    return (
-      <div className={cnLibPageMenu('Controls')}>
-        {libs?.length > 0 && (
-          <Button
-            as="a"
-            href={router.buildPath(routesNames.LIBS)}
-            label="К списку библиотек"
-            iconLeft={IconBackward}
-            size="xs"
-            view="clear"
-            onClick={back}
-            className={cnLibPageMenu('Button')}
-          />
-        )}
-        {typeof logo === 'string' ? (
-          <img alt="Consta-UIKit" src={logo?.toString()} className={cnLibPageMenu('Image')} />
-        ) : (
-          logo?.()
-        )}
-        <TextField
-          type="text"
-          value={searchValue}
-          size="s"
-          width="full"
-          placeholder="Поиск по компонентам"
-          leftSide={IconSearch}
-          className={cnLibPageMenu('Input')}
-          onChange={({ value }) => setSearchValue(value)}
+  const additionalControls = () => (
+    <div className={cnLibPageMenu('Controls')}>
+      {libs?.length > 0 && (
+        <Button
+          as="a"
+          href={router.buildPath(routesNames.LIBS)}
+          label="К списку библиотек"
+          iconLeft={IconBackward}
+          size="xs"
+          view="clear"
+          onClick={back}
+          className={cnLibPageMenu('Button')}
         />
-        <Switch
-          checked={showDeprecated}
-          size="m"
-          className={cnLibPageMenu('Switch')}
-          onChange={({ checked }) => setShowDeprecated[checked ? 'on' : 'off']()}
-          label="Показывать deprecated"
+      )}
+      {typeof logo === 'string' ? (
+        <img
+          alt="Consta-UIKit"
+          src={logo?.toString()}
+          className={cnLibPageMenu('Image')}
         />
-      </div>
-    );
-  };
+      ) : (
+        logo?.()
+      )}
+      <TextField
+        type="text"
+        value={searchValue}
+        size="s"
+        width="full"
+        placeholder="Поиск по компонентам"
+        leftSide={IconSearch}
+        className={cnLibPageMenu('Input')}
+        onChange={({ value }) => setSearchValue(value)}
+      />
+      <Switch
+        checked={showDeprecated}
+        size="m"
+        className={cnLibPageMenu('Switch')}
+        onChange={({ checked }) => setShowDeprecated[checked ? 'on' : 'off']()}
+        label="Показывать deprecated"
+      />
+    </div>
+  );
 
   if (!lib) {
     return null;

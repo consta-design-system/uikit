@@ -1,8 +1,9 @@
-import React from 'react';
-import { useRouter, useRoute } from 'react-router5';
 import { Tabs } from '@consta/uikit/TabsCanary';
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
+import { useRoute, useRouter } from 'react-router5';
+
 import { NavigationItem } from '##/containers/StandPage/StandPageNavigation/helpers';
+
 import { useStand } from '../useStand';
 import { navigationList } from './helpers';
 
@@ -16,9 +17,13 @@ export const StandPageNavigation = (props: Props) => {
   const route = useRoute();
   const stand = useStand();
 
-  const value = useMemo(() => {
-    return navigationList.find((item) => item.id === route.route.name) as NavigationItem;
-  }, [route]);
+  const value = useMemo(
+    () =>
+      navigationList.find(
+        (item) => item.id === route.route.name,
+      ) as NavigationItem,
+    [route],
+  );
 
   const handleClick = ({ value }: { value: NavigationItem }) => {
     router.navigate(value.id, { stand: stand?.id });

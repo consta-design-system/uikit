@@ -1,20 +1,19 @@
-import '@consta/stand/src/containers/PortalMenu/PortalMenu.css';
+import './PortalMenu.css';
 
-import React, { forwardRef, useRef } from 'react';
-
-import { useForkRef } from '@consta/uikit/useForkRef';
-import { cn } from '##/utils/bem';
 import { getGroups } from '@consta/uikit/__internal__/src/utils/getGroups';
 import { Text } from '@consta/uikit/Text';
+import { useForkRef } from '@consta/uikit/useForkRef';
+import React, { forwardRef, useRef } from 'react';
 
-import { PortalMenuItem } from '##/containers/PortalMenu/PortalMenuItem/PortalMenuItem';
 import { withDefaultGetters } from '##/containers/PortalMenu/helper';
+import { PortalMenuItem } from '##/containers/PortalMenu/PortalMenuItem/PortalMenuItem';
 import {
   DefaultMenuGroup,
   DefaultMenuItem,
   PortalMenuComponent,
   PortalMenuProps,
 } from '##/containers/PortalMenu/types';
+import { cn } from '##/utils/bem';
 
 const cnPortalMenu = cn('PortalMenu');
 
@@ -41,10 +40,10 @@ const renderHeader = (
   );
 };
 
-function PortalMenuRender<ITEM = DefaultMenuItem, GROUP = DefaultMenuGroup>(
+const PortalMenuRender = <ITEM = DefaultMenuItem, GROUP = DefaultMenuGroup>(
   props: PortalMenuProps<ITEM, GROUP>,
   ref: React.Ref<HTMLDivElement>,
-) {
+) => {
   const {
     className,
     additionalControls,
@@ -91,9 +90,14 @@ function PortalMenuRender<ITEM = DefaultMenuItem, GROUP = DefaultMenuGroup>(
       {additionalControls}
       <div className={cnPortalMenu('List')}>
         {groups.map((group, groupIndex) => (
-          <div className={cnPortalMenu('Group')} key={cnPortalMenu('Group', { groupIndex })}>
+          <div
+            className={cnPortalMenu('Group')}
+            key={cnPortalMenu('Group', { groupIndex })}
+          >
             {renderHeader(
-              groupsByItems ? group.key : group.group && getGroupLabel(group.group),
+              groupsByItems
+                ? group.key
+                : group.group && getGroupLabel(group.group),
               groupIndex === 0,
             )}
             {group.items.map((item, itemIndex) => (
@@ -117,7 +121,7 @@ function PortalMenuRender<ITEM = DefaultMenuItem, GROUP = DefaultMenuGroup>(
       </div>
     </div>
   );
-}
+};
 
 export const PortalMenu = forwardRef(PortalMenuRender) as PortalMenuComponent;
 

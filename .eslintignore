@@ -2,4 +2,8 @@
 node_modules/*
 build/*
 dist/*
+templates/*
+helpers/*
 build.config.js
+webpack.config.js
+src/stands/*

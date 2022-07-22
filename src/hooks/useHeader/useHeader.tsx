@@ -1,8 +1,9 @@
-import React, { useMemo, useEffect } from 'react';
-import { typographyHeaderConverter } from '##/utils/typographyHeaderConverter';
-import { useRoute } from 'react-router5';
 import { useAction } from '@reatom/react';
+import React, { useEffect, useMemo } from 'react';
+import { useRoute } from 'react-router5';
+
 import { activeItemAtom } from '##/modules/menuMdx';
+import { typographyHeaderConverter } from '##/utils/typographyHeaderConverter';
 
 type UseHeader = (
   children: React.ReactNode,
@@ -14,7 +15,7 @@ type UseHeader = (
 
 export const useHeader: UseHeader = (children, ref) => {
   const route = useRoute();
-  const params = route.route.params;
+  const { params } = route.route;
   const setActiveItem = useAction(activeItemAtom.set);
 
   const { id, label } = useMemo(() => {
@@ -22,9 +23,7 @@ export const useHeader: UseHeader = (children, ref) => {
     return typographyHeaderConverter(str);
   }, [children]);
 
-  const hash = useMemo(() => {
-    return params.hash;
-  }, [params]);
+  const hash = useMemo(() => params.hash, [params]);
 
   useEffect(() => {
     if (id && hash) {
@@ -36,7 +35,7 @@ export const useHeader: UseHeader = (children, ref) => {
           behavior: 'smooth',
         });
         setActiveItem({
-          label: label,
+          label,
           href: `#${id}`,
         });
       }

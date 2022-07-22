@@ -1,10 +1,9 @@
 import createRouter from 'router5';
 import browserPlugin from 'router5-plugin-browser';
-import { store } from '##/modules/app';
-
-import { createRoutes } from '##/exportFuctions';
 
 import { plugin } from '##/exportAtoms/router';
+import { createRoutes } from '##/exportFuctions';
+import { store } from '##/modules/app';
 
 export { routerAtom } from '##/exportAtoms/router';
 

@@ -26,7 +26,7 @@ class GenerateCommand extends Command {
     try {
       /*eslint-disable */
       config = require(configPath);
-      /*eslint-enable */
+      /* eslint-enable */
     } catch (error) {
       this.error(`Can't load build config ${configPath}.`);
     }
@@ -35,7 +35,9 @@ class GenerateCommand extends Command {
 
     try {
       await Promise.all([
-        prepareStands(config).then(() => this.log(logSymbols.success, 'stand info generated')),
+        prepareStands(config).then(() =>
+          this.log(logSymbols.success, 'stand info generated'),
+        ),
       ]);
       // await this.safeInvokeHook(afterBuild);
     } catch (err) {
@@ -44,7 +46,10 @@ class GenerateCommand extends Command {
 
     const hrend = process.hrtime(hrstart);
 
-    this.log(logSymbols.success, `${process.env.npm_package_name} - pre-build finished!🔧💥`);
+    this.log(
+      logSymbols.success,
+      `${process.env.npm_package_name} - pre-build finished!🔧💥`,
+    );
     this.log(`Execution time: ${hrend[0]}s`);
   }
 }

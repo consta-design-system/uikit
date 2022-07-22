@@ -1,13 +1,17 @@
-import React from 'react';
 import './Image.css';
 
-import { cn } from '##/utils/bem';
+import React from 'react';
 
-const cnImage = cn('Image');
+import { cn } from '##/utils/bem';
 import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
+const cnImage = cn('Image');
+
 export const Image: React.FC<
-  PropsWithHTMLAttributes<{ src?: string | (() => React.ReactElement | null) }, HTMLImageElement>
+  PropsWithHTMLAttributes<
+    { src?: string | (() => React.ReactElement | null) },
+    HTMLImageElement
+  >
 > = ({ className, src, ...props }) => {
   if (typeof src === 'undefined') {
     return null;

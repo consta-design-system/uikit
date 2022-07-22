@@ -1,13 +1,12 @@
-import React from 'react';
-
-import { routesNames } from '##/modules/router';
-import { libsAtom } from '##/modules/libs';
 import { useAtom } from '@reatom/react';
+import React from 'react';
 import { useRoute } from 'react-router5';
 import { startsWithSegment } from 'router5-helpers';
 
-import { LibsPageMenu } from '##/containers/LibsPageMenu';
 import { LibPageMenu } from '##/containers/LibPageMenu';
+import { LibsPageMenu } from '##/containers/LibsPageMenu';
+import { libsAtom } from '##/modules/libs';
+import { routesNames } from '##/modules/router';
 
 export const Menu: React.FC = () => {
   const [libs] = useAtom(libsAtom);
@@ -22,7 +21,10 @@ export const Menu: React.FC = () => {
     return <LibsPageMenu />;
   }
 
-  if (routeName === routesNames.LIBS_STAND || testStartsWithSegment(routesNames.LIBS_STAND)) {
+  if (
+    routeName === routesNames.LIBS_STAND ||
+    testStartsWithSegment(routesNames.LIBS_STAND)
+  ) {
     return <LibPageMenu />;
   }
 

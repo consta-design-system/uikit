@@ -1,14 +1,13 @@
-import React from 'react';
 import './AppTheme.css';
 
-import { cn } from '##/utils/bem';
-
 import { Theme } from '@consta/uikit/Theme';
-
-const cnAppTheme = cn('AppTheme');
+import { useAtom } from '@reatom/react';
+import React from 'react';
 
 import { themeAtom } from '##/modules/theme';
-import { useAtom } from '@reatom/react';
+import { cn } from '##/utils/bem';
+
+const cnAppTheme = cn('AppTheme');
 
 export const AppTheme: React.FC<{ children: React.ReactChild }> = (props) => {
   const [theme] = useAtom(themeAtom);

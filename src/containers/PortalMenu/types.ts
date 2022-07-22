@@ -3,9 +3,15 @@ import React from 'react';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 // import { Badge } from '../Badge/Badge';
 
-export type PortalMenuOnClick<ITEM> = (args: { e: React.MouseEvent; item: ITEM }) => void;
+export type PortalMenuOnClick<ITEM> = (args: {
+  e: React.MouseEvent;
+  item: ITEM;
+}) => void;
 
-export type PortalMenuPropSortGroup = (a: string | number, b: string | number) => number;
+export type PortalMenuPropSortGroup = (
+  a: string | number,
+  b: string | number,
+) => number;
 
 type BadgeComponent = React.ReactElement;
 
@@ -31,21 +37,37 @@ export type DefaultMenuItem = {
 
 export type PortalMenuPropGetItemKey<ITEM> = (item: ITEM) => string;
 export type PortalMenuPropGetItemLabel<ITEM> = (item: ITEM) => string;
-export type PortalMenuPropGetItemActive<ITEM> = (item: ITEM) => boolean | undefined;
-export type PortalMenuPropGetItemDescription<ITEM> = (item: ITEM) => string | undefined;
+export type PortalMenuPropGetItemActive<ITEM> = (
+  item: ITEM,
+) => boolean | undefined;
+export type PortalMenuPropGetItemDescription<ITEM> = (
+  item: ITEM,
+) => string | undefined;
 export type PortalMenuPropGetItemOnClick<ITEM> = (
   item: ITEM,
 ) => React.EventHandler<React.MouseEvent> | undefined;
-export type PortalMenuPropGetItemBadge<ITEM> = (item: ITEM) => BadgeComponent | undefined;
-export type PortalMenuPropGetItemGroupId<ITEM> = (item: ITEM) => string | undefined;
-export type PortalMenuPropGetItemSubMenu<ITEM> = (item: ITEM) => ITEM[] | undefined;
-export type PortalMenuPropGetItemHref<ITEM> = (item: ITEM) => string | undefined;
-export type PortalMenuPropGetItemParams<ITEM> = (item: ITEM) => Record<string, string> | undefined;
+export type PortalMenuPropGetItemBadge<ITEM> = (
+  item: ITEM,
+) => BadgeComponent | undefined;
+export type PortalMenuPropGetItemGroupId<ITEM> = (
+  item: ITEM,
+) => string | undefined;
+export type PortalMenuPropGetItemSubMenu<ITEM> = (
+  item: ITEM,
+) => ITEM[] | undefined;
+export type PortalMenuPropGetItemHref<ITEM> = (
+  item: ITEM,
+) => string | undefined;
+export type PortalMenuPropGetItemParams<ITEM> = (
+  item: ITEM,
+) => Record<string, string> | undefined;
 
 // Group
 
 export type PortalMenuPropGetGroupKey<GROUP> = (group: GROUP) => string;
-export type PortalMenuPropGetGroupLabel<GROUP> = (group: GROUP) => string | undefined;
+export type PortalMenuPropGetGroupLabel<GROUP> = (
+  group: GROUP,
+) => string | undefined;
 
 export type PortalMenuProps<
   ITEM = DefaultMenuItem,
@@ -82,7 +104,10 @@ export type PortalMenuProps<
         getGroupKey: PortalMenuPropGetGroupKey<GROUP>;
       });
 
-export type PortalMenuComponent = <ITEM = DefaultMenuItem, GROUP = DefaultMenuGroup>(
+export type PortalMenuComponent = <
+  ITEM = DefaultMenuItem,
+  GROUP = DefaultMenuGroup,
+>(
   props: PortalMenuProps<ITEM, GROUP>,
 ) => React.ReactElement | null;
 

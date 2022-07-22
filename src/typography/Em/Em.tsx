@@ -1,8 +1,7 @@
-import React from "react";
-import { Text } from '@consta/uikit/Text';
+import React from 'react';
 
 export const Em = (props: React.HTMLAttributes<HTMLEmbedElement>) => {
-    const { children, ...otherProps } = props;
+  const { children, ...otherProps } = props;
 
-    return <em {...otherProps}>{children}</em>
-}
+  return <em {...otherProps}>{children}</em>;
+};

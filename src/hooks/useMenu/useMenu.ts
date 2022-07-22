@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useMemo } from 'react';
+import { useAction, useAtom } from '@reatom/react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useRoute } from 'react-router5';
+
 import { Stand } from '##/exportTypes';
-import { menuMdxAtom, activeItemAtom } from '##/modules/menuMdx';
+import { activeItemAtom, menuMdxAtom } from '##/modules/menuMdx';
 import { standAtom } from '##/modules/stand';
-import { useAtom, useAction } from '@reatom/react';
-import { useRouter, useRoute } from 'react-router5';
-import { routesNames } from '##/modules/router';
 
 export type MenuItem = {
   label: string;
@@ -34,21 +33,22 @@ const getMenuData: GetMenuData = (children) => {
       label: childrenProp,
       href: decodeURI(href),
     });
+  } else if (Array.isArray(childrenProp)) {
+    childrenProp.forEach((child) => {
+      if (typeof child === 'object') {
+        array.push(...getMenuData(child));
+      }
+    });
   } else {
-    if (Array.isArray(childrenProp)) {
-      childrenProp.forEach((child) => {
-        if (typeof child === 'object') {
-          array.push(...getMenuData(child));
-        }
-      });
-    } else {
-      array.push(...getMenuData(childrenProp));
-    }
+    array.push(...getMenuData(childrenProp));
   }
   return array;
 };
 
-const scrollDetector = (positions: number[], scrollToElement: (index: number) => void) => {
+const scrollDetector = (
+  positions: number[],
+  scrollToElement: (index: number) => void,
+) => {
   const y = window.scrollY;
   if (y < positions[0]) {
     scrollToElement(-1);
@@ -70,28 +70,27 @@ export const useMenu: UseMenu = () => {
   const setActiveItem = useAction(activeItemAtom.set);
   const [menuNode] = useAtom(menuMdxAtom);
   const route = useRoute();
-  const path = route.route.path;
+  const { path } = route.route;
   const [stand] = useAtom(standAtom);
-  const router = useRouter();
   const [activeIndex, setActiveIndex] = useState<number>(-1);
   const [nodes, setNodes] = useState<NodeItem[]>([]);
 
   const { github, figma } = stand?.stand ?? ({} as Stand);
 
-  const menu: MenuItem[] = useMemo(() => {
-    return menuNode ? getMenuData(menuNode as React.ReactElement) : [];
-  }, [menuNode]);
+  const menu: MenuItem[] = useMemo(
+    () => (menuNode ? getMenuData(menuNode as React.ReactElement) : []),
+    [menuNode],
+  );
 
   useEffect(() => {
     setActiveItem(undefined);
     setActiveIndex(-1);
   }, [path]);
 
-  const menuPositions = useMemo(() => {
-    return nodes.map((item) => {
-      return item.element.offsetTop;
-    });
-  }, [nodes]);
+  const menuPositions = useMemo(
+    () => nodes.map((item) => item.element.offsetTop),
+    [nodes],
+  );
 
   useEffect(() => {
     if (menu.length > 0) {
@@ -117,9 +116,13 @@ export const useMenu: UseMenu = () => {
   }, [activeIndex]);
 
   useEffect(() => {
-    window.addEventListener('scroll', () => scrollDetector(menuPositions, setActiveIndex));
+    window.addEventListener('scroll', () =>
+      scrollDetector(menuPositions, setActiveIndex),
+    );
     return () => {
-      window.removeEventListener('scroll', () => scrollDetector(menuPositions, setActiveIndex));
+      window.removeEventListener('scroll', () =>
+        scrollDetector(menuPositions, setActiveIndex),
+      );
     };
   }, [menuPositions]);
 

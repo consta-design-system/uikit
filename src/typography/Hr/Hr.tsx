@@ -1,3 +1,3 @@
 import React from 'react';
 
-export const Hr = () => <hr/>;
+export const Hr = () => <hr />;

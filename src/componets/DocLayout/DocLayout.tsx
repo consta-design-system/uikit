@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
 import './DocLayout.css';
 
-import { cn } from '##/utils/bem';
 import { useBreakpoints } from '@consta/uikit/useBreakpoints';
-import { openLeftSide } from '##/exportAtoms/layout';
 import { useAtom } from '@reatom/react';
+import React, { useEffect } from 'react';
+
+import { openLeftSide } from '##/exportAtoms/layout';
+import { cn } from '##/utils/bem';
 
 const cnDocLayout = cn('DocLayout');
 
@@ -32,12 +33,18 @@ export const DocLayout: React.FC<{
       <div className={cnDocLayout('Header')}>{props.header}</div>
       <div className={cnDocLayout('LeftSide', { open })}>{props.leftSide}</div>
       {!breakpoints.l && (
-        <div className={cnDocLayout('Owerlay', { open })} onClick={action.setFalse} />
+        <div
+          className={cnDocLayout('Owerlay', { open })}
+          aria-hidden="true"
+          onClick={action.setFalse}
+        />
       )}
       <div className={cnDocLayout('Content')}>
         <div className={cnDocLayout('Paper')}>{props.children}</div>
       </div>
-      {breakpoints.xl && <div className={cnDocLayout('RightSide')}>{props.rightSide}</div>}
+      {breakpoints.xl && (
+        <div className={cnDocLayout('RightSide')}>{props.rightSide}</div>
+      )}
     </div>
   );
 };

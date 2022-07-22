@@ -1,12 +1,15 @@
-import React from 'react';
-import { PreparedStand } from '##/exportTypes';
-import { Text } from '@consta/uikit/Text';
-import { cn } from '##/utils/bem';
-import { Image } from '##/componets/Image';
-import NoImage from './NoImage';
-import { Link } from '##/componets/Link';
-import { routesNames } from '##/modules/router';
 import './LibPageCard.css';
+
+import { Text } from '@consta/uikit/Text';
+import React from 'react';
+
+import { Image } from '##/componets/Image';
+import { Link } from '##/componets/Link';
+import { PreparedStand } from '##/exportTypes';
+import { routesNames } from '##/modules/router';
+import { cn } from '##/utils/bem';
+
+import NoImage from './NoImage';
 
 type Props = {
   stand: PreparedStand;

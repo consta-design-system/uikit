@@ -1,4 +1,4 @@
-import { Stand, CreatedStand, PreparedStand, LibWithStands } from '##/exportTypes';
+import { CreatedStand, LibWithStands, PreparedStand } from '##/exportTypes';
 
 const sort = (a: CreatedStand, b: CreatedStand) => {
   if (a.stand.order && b.stand.order) {
@@ -38,8 +38,8 @@ const addToLib = (stand: PreparedStand, libs: LibWithStands[]) => {
 };
 
 export const prepareStands = (initStands: CreatedStand[], paths: string[]) => {
-  let stands: Record<string, PreparedStand> = {};
-  let libs: LibWithStands[] = [];
+  const stands: Record<string, PreparedStand> = {};
+  const libs: LibWithStands[] = [];
 
   initStands
     .map((item, index) => ({
@@ -47,7 +47,11 @@ export const prepareStands = (initStands: CreatedStand[], paths: string[]) => {
       stand: {
         ...item.stand,
         otherVersion: initStands
-          .filter((el) => el.stand.id === item.stand.id && el.stand.status !== item.stand.status)
+          .filter(
+            (el) =>
+              el.stand.id === item.stand.id &&
+              el.stand.status !== item.stand.status,
+          )
           .map((el) => el.stand),
       },
       id: `${item.lib.id}-${item.stand.group}-${item.stand.id}-${item.stand.status}`
@@ -64,7 +68,9 @@ export const prepareStands = (initStands: CreatedStand[], paths: string[]) => {
   const standsKeys = Object.keys(stands);
 
   standsKeys.forEach((key) => {
-    stands[key].lib = libs.find((item) => item.id === stands[key].lib.id) as LibWithStands;
+    stands[key].lib = libs.find(
+      (item) => item.id === stands[key].lib.id,
+    ) as LibWithStands;
   });
 
   return { stands, libs };

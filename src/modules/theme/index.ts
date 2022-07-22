@@ -1,9 +1,11 @@
-import { IconSun } from '@consta/uikit/IconSun';
 import { IconComponent } from '@consta/uikit/Icon';
 import { IconMoon } from '@consta/uikit/IconMoon';
-
-import { presetGpnDark, presetGpnDefault, ThemePreset } from '@consta/uikit/Theme';
-
+import { IconSun } from '@consta/uikit/IconSun';
+import {
+  presetGpnDark,
+  presetGpnDefault,
+  ThemePreset,
+} from '@consta/uikit/Theme';
 import { createAtom } from '@reatom/core';
 
 export const themes = [presetGpnDark, presetGpnDefault];
@@ -15,7 +17,8 @@ export const iconsMap: Record<string, IconComponent> = {
 
 export const getThemeKey = (theme: ThemePreset) => theme.color.primary;
 
-export const getThemeIcon = (theme: ThemePreset) => iconsMap[theme.color.primary];
+export const getThemeIcon = (theme: ThemePreset) =>
+  iconsMap[theme.color.primary];
 
 const localStorageItem = 'theme';
 

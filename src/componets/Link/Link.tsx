@@ -1,14 +1,17 @@
 import React from 'react';
-
 import { NavigationOptions } from 'router5';
 
-import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
-
 import { useLink } from '##/hooks/useLink';
+import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
 export const Link: React.FC<
   PropsWithHTMLAttributes<
-    { href?: never; to: string; params?: Record<string, string>; options?: NavigationOptions },
+    {
+      href?: never;
+      to: string;
+      params?: Record<string, string>;
+      options?: NavigationOptions;
+    },
     HTMLAnchorElement
   >
 > = ({ to, onClick, params, options, ...props }) => {

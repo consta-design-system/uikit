@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 
-type ErrorBoundaryProps = { fallback: React.ReactNode; children: React.ReactNode };
+type ErrorBoundaryProps = {
+  fallback: React.ReactNode;
+  children: React.ReactNode;
+};
 
-export class ErrorBoundary extends Component<ErrorBoundaryProps, { hasError: boolean }> {
+export class ErrorBoundary extends Component<
+  ErrorBoundaryProps,
+  { hasError: boolean }
+> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
@@ -13,6 +19,8 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, { hasError: boo
   }
 
   render() {
-    return this.state.hasError ? this.props.fallback || null : this.props.children;
+    return this.state.hasError
+      ? this.props.fallback || null
+      : this.props.children;
   }
 }

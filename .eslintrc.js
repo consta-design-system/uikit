@@ -8,11 +8,10 @@ module.exports = {
   extends: [
     'airbnb',
     'airbnb/hooks',
-    'plugin:import/typescript',
-    'plugin:@typescript-eslint/recommended',
+    'react-app',
+    'react-app/jest',
+    'prettier',
     'plugin:prettier/recommended',
-    'prettier/@typescript-eslint',
-    'prettier/react',
   ],
   globals: {
     Atomics: 'readonly',
@@ -29,12 +28,12 @@ module.exports = {
     project: './tsconfig.json',
   },
   plugins: [
-    'react',
     'import',
     'jsx-a11y',
     'react-hooks',
     '@typescript-eslint',
     'simple-import-sort',
+    'prettier',
   ],
   overrides: [
     {
@@ -65,32 +64,9 @@ module.exports = {
     'import/no-duplicates': 'error',
     'import/no-extraneous-dependencies': 'off',
     'import/prefer-default-export': 'off',
-    'import/extensions': [
-      'error',
-      'ignorePackages',
-      {
-        js: 'never',
-        jsx: 'never',
-        ts: 'never',
-        tsx: 'never',
-      },
-    ],
-    'simple-import-sort/sort': [
-      'error',
-      {
-        // https://github.com/lydell/eslint-plugin-simple-import-sort/blob/master/examples/.eslintrc.js#L71
-        groups: [
-          ['^.+\\.s?css$'],
-          [
-            '^(assert|buffer|child_process|cluster|console|constants|crypto|dgram|dns|domain|events|fs|http|https|module|net|os|path|punycode|querystring|readline|repl|stream|string_decoder|sys|timers|tls|tty|url|util|vm|zlib|freelist|v8|process|async_hooks|http2|perf_hooks)(/.*|$)',
-          ],
-          ['^react', '^@?\\w'],
-          ['^\\u0000'],
-          ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
-          ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
-        ],
-      },
-    ],
+    'import/extensions': 'off',
+    'import/no-unresolved': 'off',
+    'simple-import-sort/imports': 'error',
     'import/no-cycle': 'off',
     'no-unused-vars': 'error',
     'no-restricted-syntax': 'off',
@@ -103,6 +79,13 @@ module.exports = {
     'default-case': 'off',
     'no-continue': 'off',
     'for-direction': 'off',
+    'no-constant-condition': 'off',
+    'react/require-default-props': 'off',
+    'no-param-reassign': 'off',
+    'react/function-component-definition': [
+      'error',
+      { namedComponents: 'arrow-function' },
+    ],
     'jsx-a11y/label-has-associated-control': [
       'error',
       {

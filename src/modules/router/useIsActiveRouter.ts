@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { useRoute, useRouter } from 'react-router5';
 import { startsWithSegment } from 'router5-helpers';
+
 import { routesNames } from '##/modules/router';
 
 export const useIsActiveRouter = () => {
