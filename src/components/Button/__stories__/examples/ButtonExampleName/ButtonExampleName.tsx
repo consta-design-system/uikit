@@ -107,7 +107,7 @@ export function ButtonExampleNameTooBig() {
         className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' })])}
       >
         <div className={cnDocsExample()}>
-          <Button label="Отредактировать больничный лист" style={{ width: '240px' }} />
+          <Button label="Отредактировать больничный лист" />
         </div>
         <div className={cnDocsExample()}>
           <div className={wp.decorator({ distribute: 'left' })}>
@@ -122,6 +122,7 @@ export function ButtonExampleNameTooBig() {
         className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' })])}
       >
         <div className={cnDocsExample()}>
+          <Button label="Отредактировать больничный лист" style={{ width: '240px' }} />
           <p className={cnDocsExample('Status', { view: 'wrong' })}>Неправильно</p>
         </div>
         <div className={cnDocsExample()}>
