@@ -43,25 +43,8 @@
     "build:package.json": "node scripts/prepare-package-json.js",
     "build:docs": "cp README.md lib/README.md",
     "build": "rm -rf lib && yarn build:css && yarn build:js && yarn build:types && yarn build:package.json && yarn build:docs",
-    "stand:start": "NODE_ENV=standDevelopment webpack serve --open --progress --mode development --hot --progress --config webpack.config.js"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "git add"
-    ],
-    "*.css": [
-      "stylelint --fix",
-      "git add"
-    ],
-    "*.{json,md,mdx}": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.svg": [
-      "prettier --write --parser html",
-      "git add"
-    ]
+    "stand:start": "NODE_ENV=standDevelopment webpack serve --open --progress --mode development --hot --progress --config webpack.config.js",
+    "stylelint-fix": "stylelint --fix"
   },
   "config": {
     "commitizen": {
@@ -139,6 +122,7 @@
     "postcss-nested": "^5.0.6",
     "postcss-normalize": "^10.0.1",
     "postcss-preset-env": "^7.0.1",
+    "postcss-syntax": "^0.36.2",
     "prettier": "^2.6.2",
     "prompts": "^2.4.2",
     "react-app-polyfill": "^3.0.0",
@@ -157,7 +141,6 @@
     "source-map-loader": "^3.0.0",
     "style-loader": "^3.3.1",
     "stylelint": "^10.1.0",
-    "stylelint-config-prettier": "^5.2.0",
     "stylelint-config-standard": "^18.3.0",
     "stylelint-order": "^4.1.0",
     "stylelint-prettier": "^2.0.0",

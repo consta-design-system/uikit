@@ -1,4 +1,5 @@
 import { MDXProvider as MDXProviderComponent } from '@mdx-js/react';
+import { MDXComponents } from 'mdx/types';
 import React from 'react';
 
 import { A } from '##/typography/A';
@@ -43,7 +44,7 @@ export const components = {
   pre: Pre,
   strong: Strong,
   ul: Ul,
-};
+} as MDXComponents;
 
 type Props = {
   disableParentContext?: boolean;

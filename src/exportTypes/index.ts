@@ -8,8 +8,8 @@ export type Stand<Group extends string = string> = {
   id: string;
   title: string;
   group: Group;
-  image?: (() => React.ReactElement | null) | string;
-  logo?: (() => React.ReactElement | null) | string;
+  image?: (() => React.ReactElement | null) | string | React.FC;
+  logo?: (() => React.ReactElement | null) | string | React.FC;
   order?: number;
   status: 'deprecated' | 'canary' | 'stable' | 'inWork';
   version: string;

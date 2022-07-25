@@ -6,7 +6,8 @@
     box-sizing: border-box;
     width: 100%;
     margin: 0;
-    padding: var(--space-s) var(--space-s) var(--space-s)
+    padding:
+      var(--space-s) var(--space-s) var(--space-s)
       calc(var(--space-s) + calc(var(--space-s) * var(--menu-item-deep)));
     background: transparent;
     border: none;

@@ -9,7 +9,7 @@ const cnImage = cn('Image');
 
 export const Image: React.FC<
   PropsWithHTMLAttributes<
-    { src?: string | (() => React.ReactElement | null) },
+    { src?: string | (() => React.ReactElement | null) | React.FC },
     HTMLImageElement
   >
 > = ({ className, src, ...props }) => {

@@ -90,8 +90,12 @@
     font-weight: var(--font-weight-text-regular);
     line-height: var(--control-height-xs);
     cursor: pointer;
-    transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease,
-      color 0.15s ease, fill 0.15s ease;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      box-shadow 0.15s ease,
+      color 0.15s ease,
+      fill 0.15s ease;
     flex-shrink: 0;
     -webkit-appearance: none;
 
@@ -106,7 +110,9 @@
     overflow-x: auto;
     box-sizing: border-box;
     width: 100%;
-    padding: var(--space-m) calc(var(--space-xl) + var(--space-2xl)) var(--space-m) var(--space-l);
+    padding:
+      var(--space-m) calc(var(--space-xl) + var(--space-2xl))
+      var(--space-m) var(--space-l);
     color: var(--color-typo-primary);
     background-color: var(--color-bg-secondary);
     border-radius: var(--control-radius);

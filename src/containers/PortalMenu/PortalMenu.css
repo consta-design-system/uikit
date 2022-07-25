@@ -19,6 +19,8 @@
     margin-bottom: var(--space-2xs);
     padding-left: var(--space-s);
     padding-bottom: var(--space-2xs);
-    border-bottom: var(--control-border-width) solid var(--color-control-bg-border-default);
+    border-bottom:
+      var(--control-border-width) solid
+      var(--color-control-bg-border-default);
   }
 }
