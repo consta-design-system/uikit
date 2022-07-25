@@ -6,6 +6,7 @@ import { IconEdit } from '../../../../../icons/IconEdit/IconEdit';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
 import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
+import { Text } from '../../../../Text/Text';
 import { Button } from '../../../Button';
 
 export function ButtonExampleNameSemantics() {
@@ -94,6 +95,51 @@ export function ButtonExampleNameOverflow() {
           <Button label="Редактировать" iconRight={IconEdit} iconSize="s" onlyIcon />
         </div>
         <p className={cnDocsExample('Status', { view: 'right' })}>Правильно</p>
+      </div>
+    </div>
+  );
+}
+
+export function ButtonExampleNameTooBig() {
+  return (
+    <div>
+      <div
+        className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' })])}
+      >
+        <div className={cnDocsExample()}>
+          <Button label="Отредактировать больничный лист" style={{ width: '240px' }} />
+        </div>
+        <div className={cnDocsExample()}>
+          <div className={wp.decorator({ distribute: 'left' })}>
+            <Text size="l" weight="bold" lineHeight="l">
+              Больничный лист
+            </Text>
+            <Button label="Редактировать" size="s" className={wp.decorator({ 'indent-l': 's' })} />
+          </div>
+        </div>
+      </div>
+      <div
+        className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' })])}
+      >
+        <div className={cnDocsExample()}>
+          <p className={cnDocsExample('Status', { view: 'wrong' })}>Неправильно</p>
+        </div>
+        <div className={cnDocsExample()}>
+          <div className={wp.decorator({ distribute: 'left' })}>
+            <Text size="l" weight="bold" lineHeight="l">
+              Больничный лист
+            </Text>
+            <Button
+              label="Редактировать"
+              iconRight={IconEdit}
+              size="s"
+              iconSize="s"
+              onlyIcon
+              className={wp.decorator({ 'indent-l': 's' })}
+            />
+          </div>
+          <p className={cnDocsExample('Status', { view: 'right' })}>Правильно</p>
+        </div>
       </div>
     </div>
   );
