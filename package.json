@@ -24,6 +24,7 @@
     "access": "public"
   },
   "scripts": {
+    "postinstall": "husky install",
     "tsc-dry-run": "tsc --noEmit",
     "lint:js": "eslint --ext .js,.jsx,.tsx,.ts --fix . --quiet",
     "lint:css": "stylelint ./src/**/*.css --fix",
@@ -43,13 +44,6 @@
     "build:docs": "cp README.md lib/README.md",
     "build": "rm -rf lib && yarn build:css && yarn build:js && yarn build:types && yarn build:package.json && yarn build:docs",
     "stand:start": "NODE_ENV=standDevelopment webpack serve --open --progress --mode development --hot --progress --config webpack.config.js"
-  },
-  "husky": {
-    "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
-      "pre-commit": "yarn run pre-commit",
-      "pre-push": "yarn run pre-push"
-    }
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -71,7 +65,7 @@
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-customizable"
+      "path": "./node_modules/cz-conventional-changelog"
     },
     "cz-customizable": {
       "config": "./commitizen.js"
@@ -100,6 +94,8 @@
     "@types/node": "^16.7.13",
     "@types/react-highlight": "^0.12.5",
     "@types/react-transition-group": "^4.4.4",
+    "@typescript-eslint/eslint-plugin": "^5.30.7",
+    "@typescript-eslint/parser": "^5.30.7",
     "autoprefixer": "^10.4.4",
     "babel-jest": "^27.4.2",
     "babel-loader": "^8.2.4",
@@ -109,21 +105,30 @@
     "browserslist": "^4.18.1",
     "camelcase": "^6.2.1",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
-    "commitizen": "^4.2.4",
+    "commitizen": "^4.2.5",
     "css-loader": "^6.5.1",
     "css-minimizer-webpack-plugin": "^3.4.1",
+    "cz-conventional-changelog": "3.3.0",
     "cz-customizable": "^6.3.0",
     "dotenv": "^10.0.0",
     "dotenv-expand": "^5.1.0",
+    "eslint": "^8.20.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "file-loader": "^6.2.0",
     "fs-extra": "^10.0.1",
     "github-release-notes": "^0.17.3",
     "html-webpack-plugin": "^5.5.0",
-    "husky": "^7.0.4",
+    "husky": "^8.0.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.5.1",
     "jest-resolve": "^27.4.2",
     "jest-watch-typeahead": "^1.0.0",
+    "lint-staged": "^13.0.3",
     "mini-css-extract-plugin": "^2.6.0",
     "postcss": "^8.4.12",
     "postcss-color-function": "^4.1.0",
@@ -167,16 +172,7 @@
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.8.1",
     "webpack-manifest-plugin": "^4.0.2",
-    "workbox-webpack-plugin": "^6.4.1",
-    "eslint": "^8.20.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-config-react-app": "^7.0.1",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.30.1",
-    "eslint-plugin-simple-import-sort": "^7.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.30.7",
-    "@typescript-eslint/parser": "^5.30.7"
+    "workbox-webpack-plugin": "^6.4.1"
   },
   "homepage": "https://github.com/consta-design-system/stand",
   "browserslist": {
