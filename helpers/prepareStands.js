@@ -1,13 +1,5 @@
 const fg = require('fast-glob');
-const {
-  readFile,
-  writeFile,
-  ensureDir,
-  remove,
-  readJSON,
-  writeJSON,
-  copyFile,
-} = require('fs-extra');
+const { readFile, writeFile, ensureDir } = require('fs-extra');
 
 const { access, F_OK } = require('fs');
 
@@ -27,7 +19,10 @@ const createlazyDocs = async (srcWithName, standsImportPath, type) => {
 
       const jsCode = template.replace(/#imports#/g, imports);
 
-      await writeFile(`node_modules/@consta/stand/src/stands/lazyDocs/${lazyDocsFileName}`, jsCode);
+      await writeFile(
+        `node_modules/@consta/stand/src/stands/lazyDocs/${lazyDocsFileName}`,
+        jsCode,
+      );
     }
   });
 };
@@ -47,6 +42,8 @@ const prepareStands = async ({
   standsImportPath,
   standsUrlPath,
 }) => {
+  await ensureDir('node_modules/@consta/stand/src/stands/lazyDocs/');
+
   const path = `${srcPath}/**/*.stand.tsx`;
 
   const standsFiles = await fg(path);
