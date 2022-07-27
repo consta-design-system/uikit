@@ -14,9 +14,10 @@
     position: absolute;
     top: 0;
     right: 0;
+    display: block;
     box-sizing: border-box;
-    max-width: calc(var(--space-xl) + var(--space-2xl));
-    max-height: calc(var(--space-xl) + var(--space-2xl));
+    width: calc(var(--space-xl) + var(--space-2xl));
+    height: calc(var(--space-xl) + var(--space-2xl));
     padding: var(--space-m);
     background-color: var(--color-bg-secondary);
     border: none;
@@ -74,12 +75,13 @@
     position: relative;
     display: inline-flex;
     overflow: hidden;
+    justify-content: center;
+    align-items: center;
     box-sizing: border-box;
     width: var(--space-xl);
     height: var(--space-xl);
     margin: 0;
     padding: 0;
-    padding: 0 var(--control-space-xs);
     color: var(--color-control-typo-ghost);
     background: transparent;
     background-color: var(--color-control-bg-ghost);

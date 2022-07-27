@@ -13823,11 +13823,6 @@ stylehacks@^5.1.0:
     browserslist "^4.16.6"
     postcss-selector-parser "^6.0.4"
 
-stylelint-config-prettier@^5.2.0:
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/stylelint-config-prettier/-/stylelint-config-prettier-5.3.0.tgz#a6da626c2edabb2c5207bcf63fe449c16f5a24ec"
-  integrity sha512-To1lmaEYTmmGsVFSnVmU0cgXBrX4m31fm5sPgFCAH7Ep4ctdJhmTPe1aUnsZ9p2wY+SPhngqaFU5r1njaUyiaA==
-
 stylelint-config-recommended@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/stylelint-config-recommended/-/stylelint-config-recommended-2.2.0.tgz#46ab139db4a0e7151fd5f94af155512886c96d3f"

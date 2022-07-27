@@ -48,7 +48,7 @@ const prepareStands = async ({
 
   const standsFiles = await fg(path);
 
-  console.log(standsFiles);
+  console.info(standsFiles);
 
   const template = await readFile(standsTemaplatePath, 'utf8');
 

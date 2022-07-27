@@ -8,18 +8,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
 
-const isEnvDevelopment = process.env.NODE_ENV === 'development' || 'standDevelopment';
 const isEnvProduction = process.env.NODE_ENV === 'production';
-const isEnvStandDevelopment = process.env.NODE_ENV === 'standDevelopment';
-
-// console.log(path.resolve(__dirname, '../../../src'));
 
 module.exports = function () {
   return {
     target: 'web',
     entry: path.resolve(__dirname, 'src', 'index.tsx'),
-    // cache: !isEnvStandDevelopment,
-    cache: false,
+    cache: process.env.NODE_ENV === 'development',
     module: {
       rules: [
         {
@@ -78,7 +73,8 @@ module.exports = function () {
         template: path.resolve(__dirname, 'public', 'index.html'),
       }),
 
-      isEnvProduction && new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime-.+[.]js/]),
+      isEnvProduction &&
+        new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime-.+[.]js/]),
 
       new webpack.ProgressPlugin(),
 
@@ -89,7 +85,7 @@ module.exports = function () {
 
     output: {
       filename: 'index.js',
-      path: path.resolve(__dirname, 'build'),
+      path: path.resolve(__dirname, '../../../build'),
       ...(isEnvProduction && {
         filename: 'static/js/[name].[contenthash:8].js',
         chunkFilename: 'static/js/[name].[contenthash:8].chunk.js',
