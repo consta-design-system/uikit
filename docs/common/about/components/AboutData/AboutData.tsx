@@ -79,12 +79,7 @@ export const AboutDataGeneral = () => {
         </div>
         <ul>
           <li>
-            <Text
-              as="a"
-              view="link"
-              size="xs"
-              href="http://localhost:6006/?path=/docs/common-start--page"
-            >
+            <Text as="a" view="link" size="xs" href="/?path=/docs/common-start--page">
               быстрый старт
             </Text>
           </li>
