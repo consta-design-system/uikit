@@ -1,5 +1,13 @@
 # Changelog
 
+## v3.26.4 (27/07/2022)
+- [docs(about): add important links (#2443)](https://github.com/consta-design-system/uikit/commit/208d5fe5d3c5e3c6021c537f3c40bbccfcf0f595) - [@arhayka](https://github.com/arhayka)
+- [docs(Button): add too big label example (#2442)](https://github.com/consta-design-system/uikit/commit/76cd5c5252516a0dabcec9c12b54908918eb9871) - [@arhayka](https://github.com/arhayka)
+- [docs(Breadcrumbs): fix misprint (#2445)](https://github.com/consta-design-system/uikit/commit/7b8962c81a642f63f57e0bae8b3c35f2e39458be) - [@arhayka](https://github.com/arhayka)
+- [docs(Theme): add shadows description (#2447)](https://github.com/consta-design-system/uikit/commit/fd6696fbf3c766ddbb0f2f27eefe4c4b37290a02) - [@arhayka](https://github.com/arhayka)
+
+--------------------
+
 ## v3.26.3 (21/07/2022)
 Самое важное:
 - В Table добавили возможность обрезать текст в ячейке.
@@ -455,25 +463,3 @@ endFieldOnBlur - deleted, use onBlur
 - [feat(Table): added handle click and contextmenu click in table cell (#1983)](https://github.com/consta-design-system/uikit/commit/9fdd4017477f4f99cf9ebbacd8a5dbce25ab0ab0) - [@SergeyKatugin](https://github.com/SergeyKatugin)
 - [feat(DatePicker): add addtional controls to datepicker / dateTime (#1882)](https://github.com/consta-design-system/uikit/commit/ea1aa86877110aba5821833959912db8f228126f) - [@N1MBER](https://github.com/N1MBER)
 - [chore(CODEOWNERS): update](https://github.com/consta-design-system/uikit/commit/b0b3b7dd215e81f0c05d26ea611204b11ffc88dd) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v3.13.0 (19/01/2022)
-Выкатили обновления, вот самое важное:
-
-- сделали новый `Breadcrumbs` (пока в статусе Canary),
-- исправили ошибку в `DatePicker`, теперь с якорем, к которому цепляется Popover, всё в порядке,
-- и немного улучшили документацию.
-
-Чуть не забыли: наши репозитории переехали в новый спейс, теперь всё [тут](https://github.com/consta-design-system)
-
-Не потеряйте нас :)
-
----
-
-- [docs(DepricatedCoponents): removed from documentation (#1965)](https://github.com/consta-design-system/uikit/commit/f2ee18cd5fe8dce562eb253077c8ca7db51e9bb1) - [@gizeasy](https://github.com/gizeasy)
-- [feat(BreadcrumbsCanary): add component (#1931)](https://github.com/consta-design-system/uikit/commit/c255909bfe43342e1925e31c5c5f97460d286fcb) - [@gizeasy](https://github.com/gizeasy)
-- [fix(DatePicker): fix bug with incorrect popover position (#1932)](https://github.com/consta-design-system/uikit/commit/c895916796b6ad1231328f0d76fce0e8874d6ede) - [@N1MBER](https://github.com/N1MBER)
-- [refactor(mixCard): added usage of cnMixSpace for padding (#1927)](https://github.com/consta-design-system/uikit/commit/9fb738dab23ff98778d2ef7203ee3b7ef1995b5a) - [@N1MBER](https://github.com/N1MBER)
-- [docs(Sidebar): docs review (#1919)](https://github.com/consta-design-system/uikit/commit/1fd9e328095c24cd752454caee73aee472dc6bbe) - [@arhayka](https://github.com/arhayka)
-- [docs(ThemeToggler): docs review (#1914)](https://github.com/consta-design-system/uikit/commit/93a4533176d4f3aaa2f8c3d3c6a5a1424bd3b05c) - [@arhayka](https://github.com/arhayka)
