@@ -1,7 +1,8 @@
 import { cnMixSpace } from '@consta/uikit/MixSpace';
 import { Text } from '@consta/uikit/Text';
 import { useAtom } from '@reatom/react';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import { useRouter } from 'react-router5';
 
 import { Image } from '##/componets/Image';
 import { Link } from '##/componets/Link';
@@ -13,6 +14,18 @@ const cnLibsPage = cn('LibsPage');
 
 export const LibsPage: React.FC = () => {
   const [libs] = useAtom(libsAtom);
+  const router = useRouter();
+
+  // если библиотека одна то редереким на сраницу библиотеки
+  useEffect(() => {
+    if (libs.length <= 1) {
+      router.navigate(
+        routesNames.LIBS_STAND,
+        { stand: libs[0].id },
+        { replace: true },
+      );
+    }
+  }, []);
 
   return (
     <div className={cnLibsPage()}>

@@ -14,6 +14,7 @@ const router = createRouter(routes, { defaultRoute: routesNames.LIBS });
 router.usePlugin(browserPlugin());
 router.usePlugin(plugin(store));
 router.start();
+router.subscribe((state) => console.log(state));
 
 export { router };
 export * from './useIsActiveRouter';

@@ -1,13 +1,21 @@
+import { reatomContext } from '@reatom/react';
 import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { RouterProvider } from 'react-router5';
 
-import { DocLayout } from '##/componets/DocLayout';
-import { Header } from '##/containers/Header';
-import { Menu } from '##/containers/Menu';
-import { Pages } from '##/containers/Pages';
-import { SideLinks } from '##/containers/SideLinks';
+import { App } from '##/containers/App/App';
+import { AppTheme } from '##/containers/AppTheme';
+import { store } from '##/modules/app';
+import { router } from '##/modules/router';
 
-export const App: React.FC = () => (
-  <DocLayout leftSide={<Menu />} rightSide={<SideLinks />} header={<Header />}>
-    <Pages />
-  </DocLayout>
+const Root = () => (
+  <RouterProvider router={router}>
+    <reatomContext.Provider value={store}>
+      <AppTheme>
+        <App />
+      </AppTheme>
+    </reatomContext.Provider>
+  </RouterProvider>
 );
+
+createRoot(document.getElementById('app') as Element).render(<Root />);

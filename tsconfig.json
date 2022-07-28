@@ -1,26 +1,30 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
+    "target": "es2017",
+    "lib": ["dom", "es2015", "esnext"],
+    "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "commonjs",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
     "skipDefaultLibCheck": true,
     "jsx": "react-jsx",
+    "allowUnusedLabels": true,
+    "experimentalDecorators": true,
+    "declaration": true,
     "baseUrl": "./",
     "paths": {
       "##/*": ["./src/*"]
-    }
+    },
+    "plugins": [
+      { "transform": "typescript-transform-paths", "afterDeclarations": true }
+    ]
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "config.js", "scripts/prepareStands.js", "config.js"],
   "exclude": ["node_modules", "**/node_modules/*"]
 }

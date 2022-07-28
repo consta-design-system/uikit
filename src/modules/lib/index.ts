@@ -10,8 +10,6 @@ export const libAtom = createAtom(
   ({ get }) => {
     const stand = get('standAtom');
 
-    console.log('stand libAtom', stand);
-
     if (stand) {
       return stand.lib;
     }

@@ -9,11 +9,14 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
 
 const isEnvProduction = process.env.NODE_ENV === 'production';
+const isStandDevelopment = process.env.NODE_ENV === 'standDevelopment';
 
 module.exports = function () {
   return {
     target: 'web',
-    entry: path.resolve(__dirname, 'src', 'index.tsx'),
+    entry: isStandDevelopment
+      ? path.resolve(__dirname, 'src', 'app.tsx')
+      : path.resolve(__dirname, 'app.tsx'),
     cache: process.env.NODE_ENV === 'development',
     module: {
       rules: [
@@ -78,7 +81,10 @@ module.exports = function () {
 
       new webpack.ProgressPlugin(),
 
-      new MiniCssExtractPlugin({ filename: 'styles.css' }),
+      new MiniCssExtractPlugin({
+        filename: 'static/[name].[contenthash:8].css',
+        chunkFilename: 'static/[name].[contenthash:8].chunk.css',
+      }),
 
       new CssMinimizerPlugin(),
     ].filter(Boolean),
@@ -87,8 +93,8 @@ module.exports = function () {
       filename: 'index.js',
       path: path.resolve(__dirname, '../../../build'),
       ...(isEnvProduction && {
-        filename: 'static/js/[name].[contenthash:8].js',
-        chunkFilename: 'static/js/[name].[contenthash:8].chunk.js',
+        filename: 'static/[name].[contenthash:8].js',
+        chunkFilename: 'static/[name].[contenthash:8].chunk.js',
         assetModuleFilename: 'static/media/[name].[hash][ext]',
       }),
       publicPath: '/',
