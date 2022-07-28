@@ -206,6 +206,8 @@ import { IconWideScreen } from '../../IconWideScreen/IconWideScreen';
 import { IconWorldFilled } from '../../IconWorldFilled/IconWorldFilled';
 import { IconWorldStroked } from '../../IconWorldStroked/IconWorldStroked';
 import { IconWrench } from '../../IconWrench/IconWrench';
+import { IconYandexDzen } from '../../IconYandexDzen/IconYandexDzen';
+import { IconYoutube } from '../../IconYoutube/IconYoutube';
 
 import { IconsItem } from './Item/Icons-Item';
 import mdx from './Icon.docs.mdx';
@@ -424,6 +426,8 @@ const icons = {
   IconWorldFilled,
   IconWorldStroked,
   IconWrench,
+  IconYandexDzen,
+  IconYoutube,
 } as const;
 
 type Name = keyof typeof icons;

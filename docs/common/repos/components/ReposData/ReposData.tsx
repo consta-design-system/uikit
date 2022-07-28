@@ -364,6 +364,47 @@ export const ReposDataAdapters = () => {
         </Text>
       </div>
       <div className={wp.tplGrid('fraction', { row: 'third' })}>
+        <div>
+          <Text weight="bold" size="l">
+            ag-grid-adapter
+          </Text>
+        </div>
+        <Text className="ReposDataText">
+          Адаптер для таблицы{' '}
+          <Text
+            className={cnReposData('Link')}
+            as="a"
+            view="link"
+            href="https://github.com/react-component/table"
+            target="_blank"
+          >
+            ag-grid-react
+          </Text>
+          .
+        </Text>
+        <Text>
+          <Text
+            className={cnReposData('Link')}
+            as="a"
+            view="link"
+            href="https://github.com/consta-design-system/ag-grid-adapter"
+            target="_blank"
+          >
+            GitHub
+          </Text>
+          {' | '}
+          <Text
+            className={cnReposData('Link')}
+            as="a"
+            view="link"
+            href="https://www.ag-grid.com/react-data-grid/getting-started/"
+            target="_blank"
+          >
+            Документация
+          </Text>
+        </Text>
+      </div>
+      <div className={wp.tplGrid('fraction', { row: 'third' })}>
         <Text weight="bold" size="l">
           rc-tree-adapter
         </Text>
@@ -407,7 +448,7 @@ export const ReposDataAdapters = () => {
           gantt-task-react-adapter
         </Text>
         <Text className="ReposDataText">
-          Адаптер для{' '}
+          Адаптер для диаграммы Ганта{' '}
           <Text
             className={cnReposData('Link')}
             as="a"
@@ -417,7 +458,7 @@ export const ReposDataAdapters = () => {
           >
             gantt-task-react
           </Text>
-          . Дерево, подходит для создания иерархических структур.
+          .
         </Text>
         <Text>
           <Text
@@ -435,6 +476,45 @@ export const ReposDataAdapters = () => {
             as="a"
             view="link"
             href="http://gantt-task-react-adapter.consta.design/"
+            target="_blank"
+          >
+            Документация
+          </Text>
+        </Text>
+      </div>
+      <div className={wp.tplGrid('fraction', { row: 'third' })}>
+        <Text weight="bold" size="l">
+          react-big-calendar-adapter
+        </Text>
+        <Text className="ReposDataText">
+          Адаптер для календаря{' '}
+          <Text
+            className={cnReposData('Link')}
+            as="a"
+            view="link"
+            href="http://jquense.github.io/react-big-calendar/examples/"
+            target="_blank"
+          >
+            react-big-calendar
+          </Text>
+          .
+        </Text>
+        <Text>
+          <Text
+            className={cnReposData('Link')}
+            as="a"
+            view="link"
+            href="https://github.com/consta-design-system/react-big-calendar-adapter"
+            target="_blank"
+          >
+            GitHub
+          </Text>
+          {' | '}
+          <Text
+            className={cnReposData('Link')}
+            as="a"
+            view="link"
+            href="https://react-big-calendar-adapter.consta.design/"
             target="_blank"
           >
             Документация
