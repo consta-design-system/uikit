@@ -14,6 +14,12 @@
   flex-wrap: nowrap;
 
   &_size {
+    &_xs {
+      --badge-size: var(--control-box-size-m);
+      --badge-text-size: calc(var(--size-text-m) / 2);
+      padding: 0 var(--space-2xs);
+    }
+
     &_s {
       --badge-size: var(--control-box-size-l);
       --badge-text-size: var(--size-text-2xs);
