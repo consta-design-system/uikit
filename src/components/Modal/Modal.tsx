@@ -19,6 +19,8 @@ const modalPropPosition = ['center', 'top'] as const;
 type ModalPropPosition = typeof modalPropPosition[number];
 const modalPropPositionDefault: ModalPropPosition = modalPropPosition[0];
 
+const DEFAULT_TIMEOUT = 240;
+
 type ModalProps = PropsWithHTMLAttributes<
   {
     isOpen?: boolean;
@@ -34,6 +36,7 @@ type ModalProps = PropsWithHTMLAttributes<
     position?: ModalPropPosition;
     children?: React.ReactNode;
     container?: HTMLDivElement | undefined;
+    afterClose?: () => void;
     refsForExcludeClickOutside?: React.RefObject<HTMLElement>[];
   },
   HTMLDivElement
@@ -77,6 +80,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
     container = window.document.body,
     refsForExcludeClickOutside,
     rootClassName,
+    afterClose,
     style,
     ...otherProps
   } = props;
@@ -90,6 +94,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
       onOpen?.();
     } else {
       onClose?.();
+      setTimeout(() => afterClose?.(), DEFAULT_TIMEOUT);
     }
   }, [isOpen]);
 
@@ -103,7 +108,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
       unmountOnExit
       appear
       classNames={cnForCssTransition(cnModal)}
-      timeout={240}
+      timeout={DEFAULT_TIMEOUT}
       nodeRef={portalRef}
     >
       <PortalWithTheme
