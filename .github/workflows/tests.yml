@@ -19,12 +19,12 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 16
 
       - name: Установка yarn
         id: yarn-setup
         run: |
-          yarn policies set-version 1.19.1
+          yarn policies set-version 1.22.18
           echo "::set-output name=cache_dir::$(yarn cache dir)"
       - name: Настройка кэширования yarn
         uses: actions/cache@v2
