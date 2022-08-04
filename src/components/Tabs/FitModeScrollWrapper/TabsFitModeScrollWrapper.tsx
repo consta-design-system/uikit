@@ -9,7 +9,6 @@ import { IconArrowRight } from '../../../icons/IconArrowRight/IconArrowRight';
 import { cn } from '../../../utils/bem';
 import { Button } from '../../Button/Button';
 import { getTabsWidth, TabsFitModeWrapperProps } from '../helpers';
-
 import { getVisibleTabsRange } from './helpers';
 
 const cnTabsFitModeScrollWrapper = cn('TabsFitModeScrollWrapper');
@@ -90,10 +89,15 @@ export const TabsFitModeScrollWrapper = <ITEM,>({
           ))}
         </>
       )}
-      <div className={cnTabsFitModeScrollWrapper('Content')} ref={scrollContainerRef}>
+      <div
+        className={cnTabsFitModeScrollWrapper('Content')}
+        ref={scrollContainerRef}
+      >
         {renderItemsList({
           getTabClassName: (idx) =>
-            cnTabsFitModeScrollWrapper('Tab', { noMargin: idx === items.length - 1 }),
+            cnTabsFitModeScrollWrapper('Tab', {
+              noMargin: idx === items.length - 1,
+            }),
         })}
       </div>
     </div>

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function ColumnImage(props: React.SVGProps<SVGSVGElement>) {
+const ColumnImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <path
@@ -18,6 +18,6 @@ function ColumnImage(props: React.SVGProps<SVGSVGElement>) {
       <path d="M41 95V48h20v47H41ZM131 95V72h20v23h-20Z" fill="#DEE4E8" />
     </svg>
   );
-}
+};
 
 export default ColumnImage;

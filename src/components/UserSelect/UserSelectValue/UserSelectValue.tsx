@@ -20,7 +20,8 @@ type UserValueProps = {
 export const cnUserSelectValue = cn('UserSelectValue');
 
 export const UserSelectValue: React.FC<UserValueProps> = (props) => {
-  const { size, label, subLabel, disabled, handleRemove, avatarUrl, multiple } = props;
+  const { size, label, subLabel, disabled, handleRemove, avatarUrl, multiple } =
+    props;
 
   return (
     <User

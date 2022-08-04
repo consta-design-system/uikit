@@ -1,6 +1,9 @@
 import computeScrollIntoView from 'compute-scroll-into-view';
 
-export function scrollIntoView(node: HTMLDivElement, menuNode: HTMLDivElement): void {
+export function scrollIntoView(
+  node: HTMLDivElement,
+  menuNode: HTMLDivElement,
+): void {
   const actions = computeScrollIntoView(node, {
     boundary: menuNode,
     block: 'nearest',

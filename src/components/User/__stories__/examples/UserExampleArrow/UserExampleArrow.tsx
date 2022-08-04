@@ -10,7 +10,13 @@ export const UserExampleArrow = () => (
       <User name="Бон Фишер" info="Старший эксперт" view="ghost" withArrow />
     </div>
     <div>
-      <User name="Бон Фишер" info="Старший эксперт" view="ghost" withArrow onlyAvatar />
+      <User
+        name="Бон Фишер"
+        info="Старший эксперт"
+        view="ghost"
+        withArrow
+        onlyAvatar
+      />
     </div>
   </StoryBookExample>
 );

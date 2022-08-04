@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
 import { getHours, getMinutes, getSeconds, set } from 'date-fns';
+import { useCallback, useEffect, useState } from 'react';
 
 import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
 import { DateRange } from '../../../utils/types/Date';
@@ -23,7 +23,9 @@ export const useOnChange = (
   DateTimePropOnChange,
   Date | undefined,
 ] => {
-  const normalizeValue = Array.isArray(value) ? value[timeFor === 'start' ? 0 : 1] : value;
+  const normalizeValue = Array.isArray(value)
+    ? value[timeFor === 'start' ? 0 : 1]
+    : value;
 
   const [time, setTime] = useState<Date | undefined>(normalizeValue);
 
@@ -33,19 +35,25 @@ export const useOnChange = (
 
   const onDateChange: DateTimePropOnChange = useCallback(({ e, value }) => {
     const [hours, minutes, seconds] = getTime(timeRef.current);
-    onChangeRef.current?.({ e, value: set(value, { hours, minutes, seconds }) });
-  }, []);
-
-  const onDateChangeRange: DateTimePropOnChangeRange<'date-time'> = useCallback(({ e, value }) => {
-    const [hours, minutes, seconds] = getTime(timeRef.current);
-    onChangeRangeRef.current?.({
+    onChangeRef.current?.({
       e,
-      value: [
-        value[0] ? set(value[0], { hours, minutes, seconds }) : undefined,
-        value[1] ? set(value[1], { hours, minutes, seconds }) : undefined,
-      ],
+      value: set(value, { hours, minutes, seconds }),
     });
   }, []);
+
+  const onDateChangeRange: DateTimePropOnChangeRange<'date-time'> = useCallback(
+    ({ e, value }) => {
+      const [hours, minutes, seconds] = getTime(timeRef.current);
+      onChangeRangeRef.current?.({
+        e,
+        value: [
+          value[0] ? set(value[0], { hours, minutes, seconds }) : undefined,
+          value[1] ? set(value[1], { hours, minutes, seconds }) : undefined,
+        ],
+      });
+    },
+    [],
+  );
 
   const onTimeChange: DateTimePropOnChange = useCallback(({ e, value }) => {
     onChangeRef.current?.({ e, value });

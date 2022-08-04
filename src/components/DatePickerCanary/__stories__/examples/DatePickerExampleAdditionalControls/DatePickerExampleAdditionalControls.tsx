@@ -5,7 +5,10 @@ import { DateTimeAdditionalControlRenderProps } from '../../../../DateTimeCanary
 import { DatePicker, DatePickerPropValue } from '../../../DatePickerCanary';
 
 export const DatePickerExampleAdditionalControls = () => {
-  const [value, setValue] = useState<DatePickerPropValue<'date-range'>>([undefined, undefined]);
+  const [value, setValue] = useState<DatePickerPropValue<'date-range'>>([
+    undefined,
+    undefined,
+  ]);
 
   const setCuarter = (date: Date) => {
     const year = date.getFullYear();

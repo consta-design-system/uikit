@@ -1,10 +1,13 @@
 import * as React from 'react';
 
-function ProgressSpinImage(props: React.SVGProps<SVGSVGElement>) {
+const ProgressSpinImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <path fill="#002033" fillOpacity={0.08} d="M0 0h200v120H0z" />
-      <path d="M0 4a4 4 0 014-4h192a4 4 0 014 4v112a4 4 0 01-4 4H4a4 4 0 01-4-4V4z" fill="#fff" />
+      <path
+        d="M0 4a4 4 0 014-4h192a4 4 0 014 4v112a4 4 0 01-4 4H4a4 4 0 01-4-4V4z"
+        fill="#fff"
+      />
       <mask id="SvgProgressSpinImage__path-2-inside-1_1885_15895" fill="#fff">
         <path d="M100 41a19 19 0 11-18.07 13.129l4.862 1.58A13.888 13.888 0 10100 46.111V41z" />
       </mask>
@@ -26,6 +29,6 @@ function ProgressSpinImage(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default ProgressSpinImage;

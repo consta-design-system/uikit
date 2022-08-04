@@ -13,7 +13,12 @@ export const TextExampleAlign = () => {
     >
       {textPropAlign.map((item, index) => (
         <div key={index} className={wp.tplGrid('fraction', { row: 'third' })}>
-          <Text size="s" view="ghost" align={item} className={wp.decorator({ 'indent-b': 'xs' })}>
+          <Text
+            size="s"
+            view="ghost"
+            align={item}
+            className={wp.decorator({ 'indent-b': 'xs' })}
+          >
             {`text_align_${item}`}
           </Text>
           <Text align={item}>Газпром нефть</Text>

@@ -1,12 +1,15 @@
-import * as React from 'react';
 import { boolean, select } from '@storybook/addon-knobs';
+import * as React from 'react';
 
 import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconSettings } from '../../../icons/IconSettings/IconSettings';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
-import { breadcrumbPropSize, breadcrumbPropSizeDefault, Breadcrumbs } from '../Breadcrumbs';
-
+import {
+  breadcrumbPropSize,
+  breadcrumbPropSizeDefault,
+  Breadcrumbs,
+} from '../Breadcrumbs';
 import mdx from './Breadcrumbs.docs.mdx';
 
 const defaultKnobs = () => ({
@@ -56,7 +59,7 @@ const pages: Page[] = [
 
 const cnBreadcrumbsStories = cn('BreadcrumbsStories');
 
-export function Playground() {
+export const Playground = () => {
   const { size, onlyIconRoot } = defaultKnobs();
 
   return (
@@ -76,7 +79,7 @@ export function Playground() {
       />
     </div>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Навигация/Breadcrumbs',

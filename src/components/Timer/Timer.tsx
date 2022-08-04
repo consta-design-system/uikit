@@ -20,25 +20,27 @@ export type TimerProps = PropsWithJsxAttributes<{
 
 export const cnTimer = cn('Timer');
 
-export const Timer = React.forwardRef<HTMLDivElement, TimerProps>((props, ref) => {
-  const {
-    seconds = 0,
-    progress = 0,
-    size = timerPropsSizeDefault,
-    className,
-    animation,
-    ...otherProps
-  } = props;
+export const Timer = React.forwardRef<HTMLDivElement, TimerProps>(
+  (props, ref) => {
+    const {
+      seconds = 0,
+      progress = 0,
+      size = timerPropsSizeDefault,
+      className,
+      animation,
+      ...otherProps
+    } = props;
 
-  return (
-    <div {...otherProps} className={cnTimer({ size }, [className])} ref={ref}>
-      <ProgressSpin
-        className={cnTimer('Progress')}
-        size={size}
-        progress={progress}
-        animation={animation}
-      />
-      {size !== 's' && <div className={cnTimer('Counter')}>{seconds}</div>}
-    </div>
-  );
-});
+    return (
+      <div {...otherProps} className={cnTimer({ size }, [className])} ref={ref}>
+        <ProgressSpin
+          className={cnTimer('Progress')}
+          size={size}
+          progress={progress}
+          animation={animation}
+        />
+        {size !== 's' && <div className={cnTimer('Counter')}>{seconds}</div>}
+      </div>
+    );
+  },
+);

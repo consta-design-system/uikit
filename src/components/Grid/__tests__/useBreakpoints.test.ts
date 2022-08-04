@@ -31,7 +31,8 @@ describe('generateBreakpointsCn', () => {
     };
 
     const result = generateBreakpointsCn(cnTest, breakpoints);
-    const expected = 'Test Test_l:cols_8 Test_l:align_center Test_xl:cols_10 Test_xl:align_left';
+    const expected =
+      'Test Test_l:cols_8 Test_l:align_center Test_xl:cols_10 Test_xl:align_left';
     expect(result).toEqual(expected);
   });
 });

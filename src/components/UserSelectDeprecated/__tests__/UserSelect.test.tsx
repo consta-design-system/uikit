@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
 import { act, fireEvent, render, screen } from '@testing-library/react';
+import React, { useState } from 'react';
 
-import { simpleItems } from '../__mocks__/data.mock';
 import { getInitialsForName } from '../../Avatar/Avatar';
 import { cnSelect } from '../../SelectComponentsDeprecated/cnSelect';
+import { simpleItems } from '../__mocks__/data.mock';
 import { UserSelect } from '../UserSelectDeprecated';
 import { cnUserItem } from '../UserSelectItem/UserSelectItem';
 
@@ -34,8 +34,13 @@ const renderComponent = (props: {
   );
 };
 
-const ValueTest = ({ indexElementAfterClick = [0], indexElementBeforeClick = [1] }) => {
-  const [value, setValue] = useState(indexElementAfterClick.map((index) => simpleItems[index]));
+const ValueTest = ({
+  indexElementAfterClick = [0],
+  indexElementBeforeClick = [1],
+}) => {
+  const [value, setValue] = useState(
+    indexElementAfterClick.map((index) => simpleItems[index]),
+  );
   return (
     <div>
       <UserSelect
@@ -47,7 +52,9 @@ const ValueTest = ({ indexElementAfterClick = [0], indexElementBeforeClick = [1]
       />
       <button
         data-testid="changerValue"
-        onClick={() => setValue(indexElementBeforeClick.map((index) => simpleItems[index]))}
+        onClick={() =>
+          setValue(indexElementBeforeClick.map((index) => simpleItems[index]))
+        }
         type="button"
       >
         change
@@ -94,9 +101,11 @@ function getCheckedOptions() {
 function getCheckedOptionsText() {
   let text = '';
   getCheckedOptions().forEach((element) => {
-    element.querySelectorAll('.UserSelectItemDeprecated-AdditionalInfo').forEach((el) => {
-      text += el.textContent;
-    });
+    element
+      .querySelectorAll('.UserSelectItemDeprecated-AdditionalInfo')
+      .forEach((el) => {
+        text += el.textContent;
+      });
   });
   return text;
 }
@@ -106,7 +115,9 @@ function getInput() {
 }
 
 function getIndicatorsDropdown() {
-  return getRender().querySelector(`.${cnSelect('IndicatorsDropdown')}`) as HTMLElement;
+  return getRender().querySelector(
+    `.${cnSelect('IndicatorsDropdown')}`,
+  ) as HTMLElement;
 }
 
 function getOutside() {
@@ -208,7 +219,12 @@ describe('Компонент UserSelect', () => {
       renderComponent({ value });
       expect(getControlValue()).toHaveTextContent(
         elementIndex
-          .map((item) => `${getInitialsForName(simpleItems[item].label)}${simpleItems[item].label}`)
+          .map(
+            (item) =>
+              `${getInitialsForName(simpleItems[item].label)}${
+                simpleItems[item].label
+              }`,
+          )
           .join(''),
       );
     });
@@ -229,7 +245,9 @@ describe('Компонент UserSelect', () => {
       indicatorsDropdownClick();
 
       expect(getCheckedOptionsText()).toEqual(
-        indexElementBeforeClick.map((item) => `${simpleItems[item].label}`).join(''),
+        indexElementBeforeClick
+          .map((item) => `${simpleItems[item].label}`)
+          .join(''),
       );
     });
   });
@@ -244,13 +262,17 @@ describe('Компонент UserSelect', () => {
 
       expect(handleChange).toHaveBeenCalled();
       expect(handleChange).toHaveBeenCalledTimes(1);
-      expect(handleChange).toHaveBeenCalledWith(expect.objectContaining([simpleItems[1]]));
+      expect(handleChange).toHaveBeenCalledWith(
+        expect.objectContaining([simpleItems[1]]),
+      );
 
       fireEvent.click(getOption(2));
       fireEvent.click(getOption(1));
 
       expect(handleChange).toHaveBeenCalled();
-      expect(handleChange).toHaveBeenCalledWith(expect.objectContaining([simpleItems[2]]));
+      expect(handleChange).toHaveBeenCalledWith(
+        expect.objectContaining([simpleItems[2]]),
+      );
     });
   });
 });

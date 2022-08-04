@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
+
 import { createStand } from '../../../stand/standConfig';
 
 export const Stand = () => {
-  const d = useState();
   return <div>Avatar</div>;
 };
 

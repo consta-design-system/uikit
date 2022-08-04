@@ -31,7 +31,10 @@ type CollapseGroupPropGetItemRightSide<ITEM> = (
   item: ITEM,
 ) => React.ReactNode | React.ReactNode[] | undefined;
 
-export type CollapseGroupProps<ITEM, IS_ACCORDION extends boolean> = PropsWithHTMLAttributesAndRef<
+export type CollapseGroupProps<
+  ITEM,
+  IS_ACCORDION extends boolean,
+> = PropsWithHTMLAttributesAndRef<
   {
     items: ITEM[];
     isAccordion?: IS_ACCORDION;
@@ -77,17 +80,27 @@ export type CollapseGroupProps<ITEM, IS_ACCORDION extends boolean> = PropsWithHT
     ? {}
     : { getItemContent: CollapseGroupPropGetItemContent<ITEM> });
 
-export const defaultGetItemLabel: CollapseGroupPropGetItemLabel<DefaultItem> = (item) => item.label;
-export const defaultGetItemContent: CollapseGroupPropGetItemContent<DefaultItem> = (item) =>
-  item.content;
-export const defaultGetItemRightSide: CollapseGroupPropGetItemContent<DefaultItem> = (item) =>
-  item.rightSide;
+export const defaultGetItemLabel: CollapseGroupPropGetItemLabel<DefaultItem> = (
+  item,
+) => item.label;
+export const defaultGetItemContent: CollapseGroupPropGetItemContent<
+  DefaultItem
+> = (item) => item.content;
+export const defaultGetItemRightSide: CollapseGroupPropGetItemContent<
+  DefaultItem
+> = (item) => item.rightSide;
 
-export type CollapseGroupComponent = <ITEM, IS_ACCORDION extends boolean = false>(
+export type CollapseGroupComponent = <
+  ITEM,
+  IS_ACCORDION extends boolean = false,
+>(
   props: CollapseGroupProps<ITEM, IS_ACCORDION>,
 ) => React.ReactElement | null;
 
-export type CollapseGroupRenderFunction = <ITEM, IS_ACCORDION extends boolean = false>(
+export type CollapseGroupRenderFunction = <
+  ITEM,
+  IS_ACCORDION extends boolean = false,
+>(
   props: CollapseGroupProps<ITEM, IS_ACCORDION>,
   ref: React.Ref<HTMLDivElement>,
 ) => React.ReactElement | null;

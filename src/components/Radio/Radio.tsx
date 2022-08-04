@@ -54,59 +54,61 @@ export const cnRadio = cn('Radio');
 
 export const COMPONENT_NAME = 'Radio' as const;
 
-export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>((props, ref) => {
-  const radioRef = useRef<HTMLLabelElement>(null);
+export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>(
+  (props, ref) => {
+    const radioRef = useRef<HTMLLabelElement>(null);
 
-  const {
-    checked = false,
-    name,
-    size = radioPropSizeDefault,
-    view = radioPropViewDefault,
-    align = radioPropAlignDefault,
-    disabled,
-    className,
-    label,
-    onChange,
-    onFocus,
-    onBlur,
-    readOnly,
-    required,
-    step,
-    tabIndex,
-    inputId,
-    inputRef,
-    ...otherProps
-  } = usePropsHandler(COMPONENT_NAME, props, radioRef);
+    const {
+      checked = false,
+      name,
+      size = radioPropSizeDefault,
+      view = radioPropViewDefault,
+      align = radioPropAlignDefault,
+      disabled,
+      className,
+      label,
+      onChange,
+      onFocus,
+      onBlur,
+      readOnly,
+      required,
+      step,
+      tabIndex,
+      inputId,
+      inputRef,
+      ...otherProps
+    } = usePropsHandler(COMPONENT_NAME, props, radioRef);
 
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    if (onChange) {
-      onChange({ e, checked: !checked });
-    }
-  };
+    const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+      if (onChange) {
+        onChange({ e, checked: !checked });
+      }
+    };
 
-  return (
-    <label
-      {...otherProps}
-      className={cnRadio({ size, view, disabled, align }, [className])}
-      ref={useForkRef([ref, radioRef])}
-    >
-      <input
-        type="radio"
-        name={name}
-        className={cnRadio('Input', [cnMixFocus()])}
-        checked={checked}
-        disabled={disabled}
-        onChange={handleChange}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        readOnly={readOnly}
-        required={required}
-        step={step}
-        id={inputId}
-        tabIndex={tabIndex}
-        ref={inputRef}
-      />
-      {label && <span className={cnRadio('Label')}>{label}</span>}
-    </label>
-  );
-});
+    return (
+      <label
+        {...otherProps}
+        className={cnRadio({ size, view, disabled, align }, [className])}
+        ref={useForkRef([ref, radioRef])}
+      >
+        <input
+          type="radio"
+          name={name}
+          className={cnRadio('Input', [cnMixFocus()])}
+          checked={checked}
+          disabled={disabled}
+          onChange={handleChange}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          readOnly={readOnly}
+          required={required}
+          step={step}
+          id={inputId}
+          tabIndex={tabIndex}
+          ref={inputRef}
+        />
+        {label && <span className={cnRadio('Label')}>{label}</span>}
+      </label>
+    );
+  },
+);

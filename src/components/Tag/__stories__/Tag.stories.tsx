@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { boolean, select, text } from '@storybook/addon-knobs';
+import React, { useState } from 'react';
 
 import { IconAttach } from '../../../icons/IconAttach/IconAttach';
 import { createMetadata } from '../../../utils/storybook';
@@ -10,7 +10,6 @@ import {
   tagBasePropSizeDefault,
 } from '../../TagBase/TagBase';
 import { Tag, tagPropMode, tagPropModeDefault } from '../Tag';
-
 import mdx from './Tag.docs.mdx';
 
 const defaultKnobs = () => ({
@@ -21,7 +20,7 @@ const defaultKnobs = () => ({
   icon: boolean('icon', false),
 });
 
-export function Playground() {
+export const Playground = () => {
   const { label, size, mode, group: groupProp, icon } = defaultKnobs();
   const [checked, setChecked] = useState<boolean>(false);
   const group = typeof groupProp === 'number' ? groupProp : undefined;
@@ -64,14 +63,31 @@ export function Playground() {
           />
         );
       case 'link':
-        return <Tag mode={mode} href="#" label={label} size={size} group={group} icon={Icon} />;
+        return (
+          <Tag
+            mode={mode}
+            href="#"
+            label={label}
+            size={size}
+            group={group}
+            icon={Icon}
+          />
+        );
       case 'info':
-        return <Tag mode={mode} label={label} size={size} group={group} icon={Icon} />;
+        return (
+          <Tag
+            mode={mode}
+            label={label}
+            size={size}
+            group={group}
+            icon={Icon}
+          />
+        );
     }
   }
 
   return <div>{getTag()}</div>;
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Отображение данных/Tag',

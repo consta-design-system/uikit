@@ -6,7 +6,6 @@ import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
-
 import { CalendarViewOneMonth } from './CalendarViewOneMonth/CalendarViewOneMonth';
 import { CalendarViewSlider } from './CalendarViewSlider/CalendarViewSlider';
 import { CalendarViewTwoMonths } from './CalendarViewTwoMonths/CalendarViewTwoMonths';
@@ -30,11 +29,11 @@ export const COMPONENT_NAME = 'Calendar' as const;
 export const Calendar: CalendarComponent = React.forwardRef((props, ref) => {
   const calendarRef = useRef<HTMLDivElement>(null);
 
-  const { view = calendarPropViewDefault, className, ...otherProps } = usePropsHandler(
-    COMPONENT_NAME,
-    props,
-    calendarRef,
-  );
+  const {
+    view = calendarPropViewDefault,
+    className,
+    ...otherProps
+  } = usePropsHandler(COMPONENT_NAME, props, calendarRef);
 
   const ViewComponent = getByMap(viewMap, view);
 

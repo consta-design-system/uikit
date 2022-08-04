@@ -33,13 +33,20 @@ export const ColorPreview: React.FC<Props> = ({
   ...restProps
 }) => {
   return (
-    <div {...restProps} className={cnColorPreview('', [wp.ptIconPlus(), className])}>
+    <div
+      {...restProps}
+      className={cnColorPreview('', [wp.ptIconPlus(), className])}
+    >
       <div
         className={cnColorPreview('Circle', [
           wp.ptIconPlus('icon', { 'vertical-align': 'top', 'indent-r': 'm' }),
           wp.decorator({ 'indent-b': 'l' }),
         ])}
-        style={!rgba ? { color: `var(${color})` } : { color: `rgba(var(${color}), 0.5)` }}
+        style={
+          !rgba
+            ? { color: `var(${color})` }
+            : { color: `rgba(var(${color}), 0.5)` }
+        }
       />
       <div className={wp.ptIconPlus('block')}>
         <Text

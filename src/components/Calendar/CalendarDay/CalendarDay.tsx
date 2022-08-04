@@ -1,7 +1,7 @@
 import './CalendarDay.css';
 
-import React from 'react';
 import { classnames } from '@bem-react/classnames';
+import React from 'react';
 
 import { cn } from '../../../utils/bem';
 import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
@@ -22,23 +22,27 @@ export type CalendarDayProps = PropsWithJsxAttributes<
 
 export const cnCalendarDay = cn('CalendarDay');
 
-export const CalendarDay = React.forwardRef<HTMLDivElement, CalendarDayProps>((props, ref) => {
-  const { number, today, selected, event, disabled, ...otherProps } = props;
-  const { themeClassNames } = useTheme();
+export const CalendarDay = React.forwardRef<HTMLDivElement, CalendarDayProps>(
+  (props, ref) => {
+    const { number, today, selected, event, disabled, ...otherProps } = props;
+    const { themeClassNames } = useTheme();
 
-  const className =
-    selected && !disabled
-      ? classnames(props.className, themeClassNames.color.accent)
-      : props.className;
+    const className =
+      selected && !disabled
+        ? classnames(props.className, themeClassNames.color.accent)
+        : props.className;
 
-  return (
-    <div
-      {...otherProps}
-      ref={ref}
-      className={cnCalendarDay({ event, today, disabled, selected }, [className])}
-      role="button"
-    >
-      {number}
-    </div>
-  );
-});
+    return (
+      <div
+        {...otherProps}
+        ref={ref}
+        className={cnCalendarDay({ event, today, disabled, selected }, [
+          className,
+        ])}
+        role="button"
+      >
+        {number}
+      </div>
+    );
+  },
+);

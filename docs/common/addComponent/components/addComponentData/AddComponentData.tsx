@@ -8,7 +8,7 @@ import { cn } from '../../../../../src/utils/bem';
 
 const cnAddComponentData = cn('AddComponentData');
 
-export function AddComponentDataStage1() {
+export const AddComponentDataStage1 = () => {
   return (
     <div className={cnAddComponentData()}>
       <div>
@@ -18,26 +18,32 @@ export function AddComponentDataStage1() {
         </Text>
       </div>
       <ol>
-        <li>Оцениваем популярность компонента: смотрим, есть ли еще запросы на его разработку.</li>
         <li>
-          Составляем описание API и описываем, как компонент будет использоваться — на примерах,
-          чтобы лучше понимать, как всё работает и зачем это нужно.
+          Оцениваем популярность компонента: смотрим, есть ли еще запросы на его
+          разработку.
         </li>
         <li>
-          Смотрим, что уже готово: если вы прислали PR, проверяем его, смотрим, есть ли в нём
-          примеры использования и тесты.
+          Составляем описание API и описываем, как компонент будет
+          использоваться — на примерах, чтобы лучше понимать, как всё работает и
+          зачем это нужно.
+        </li>
+        <li>
+          Смотрим, что уже готово: если вы прислали PR, проверяем его, смотрим,
+          есть ли в нём примеры использования и тесты.
         </li>
       </ol>
       <Text size="s">
-        После этого этапа становится понятно, что это за компонент и нужно ли его добавлять в
-        дизайн-систему.
+        После этого этапа становится понятно, что это за компонент и нужно ли
+        его добавлять в дизайн-систему.
       </Text>
-      <Text size="s">Договариваемся, кто его разрабатывает — вы или команда Consta.</Text>
+      <Text size="s">
+        Договариваемся, кто его разрабатывает — вы или команда Consta.
+      </Text>
     </div>
   );
-}
+};
 
-export function AddComponentDataStage2() {
+export const AddComponentDataStage2 = () => {
   return (
     <div className={cnAddComponentData()}>
       <div>
@@ -52,9 +58,9 @@ export function AddComponentDataStage2() {
       </ol>
     </div>
   );
-}
+};
 
-export function AddComponentDataStage3() {
+export const AddComponentDataStage3 = () => {
   return (
     <div className={cnAddComponentData()}>
       <div>
@@ -66,15 +72,15 @@ export function AddComponentDataStage3() {
       <ol>
         <li>Проводим ревью кода и устраняем все замечания.</li>
         <li>
-          Команда дизайн-системы подтверждает, что компонент можно включить в состав основной
-          библиотеки.
+          Команда дизайн-системы подтверждает, что компонент можно включить в
+          состав основной библиотеки.
         </li>
       </ol>
     </div>
   );
-}
+};
 
-export function AddComponentDataStage4() {
+export const AddComponentDataStage4 = () => {
   return (
     <div className={cnAddComponentData()}>
       <div>
@@ -89,4 +95,4 @@ export function AddComponentDataStage4() {
       </ol>
     </div>
   );
-}
+};

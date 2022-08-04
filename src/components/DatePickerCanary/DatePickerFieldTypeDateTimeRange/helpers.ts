@@ -9,7 +9,14 @@ type DatePickerFieldTypeDateTimeRangePropOnChange = (props: {
 
 export type DatePickerFieldTypeDateTimeRangeProps = Omit<
   DatePickerFieldTypeDateTimeProps,
-  'onChange' | 'value' | 'inputRef' | 'leftSide' | 'rightSide' | 'id' | 'onFocus' | 'onBlur'
+  | 'onChange'
+  | 'value'
+  | 'inputRef'
+  | 'leftSide'
+  | 'rightSide'
+  | 'id'
+  | 'onFocus'
+  | 'onBlur'
 > & {
   onChange?: DatePickerFieldTypeDateTimeRangePropOnChange;
   value?: DateRange | null;

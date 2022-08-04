@@ -26,7 +26,10 @@ export const multiComboboxPropSize = ['m', 's', 'l'] as const;
 export type MultiComboboxPropSize = typeof multiComboboxPropSize[number];
 export const multiComboboxPropSizeDefault = multiComboboxPropSize[0];
 
-export type MultiComboboxProps<ITEM, GROUP> = Omit<CommonSelectProps<ITEM>, 'options'> &
+export type MultiComboboxProps<ITEM, GROUP> = Omit<
+  CommonSelectProps<ITEM>,
+  'options'
+> &
   Omit<SelectContainerProps, 'value' | 'onChange'> & {
     onChange?: (values: ITEM[] | null) => void;
     onCreate?: (str: string) => void;
@@ -97,7 +100,8 @@ export const MultiCombobox: MultiCombobox = (props) => {
   };
 
   const controlRef = useRef<HTMLDivElement | null>(null);
-  const arrValue: Items = typeof value !== 'undefined' && value !== null ? [...value] : null;
+  const arrValue: Items =
+    typeof value !== 'undefined' && value !== null ? [...value] : null;
   const hasGroup = typeof getGroupOptions === 'function';
 
   const scrollToIndex = (index: number): void => {
@@ -105,9 +109,8 @@ export const MultiCombobox: MultiCombobox = (props) => {
       return;
     }
 
-    const elements: NodeListOf<HTMLDivElement> = dropdownRef.current.querySelectorAll(
-      'div[role=option]',
-    );
+    const elements: NodeListOf<HTMLDivElement> =
+      dropdownRef.current.querySelectorAll('div[role=option]');
 
     scrollIntoView(elements[index], dropdownRef.current);
   };
@@ -119,9 +122,7 @@ export const MultiCombobox: MultiCombobox = (props) => {
   const searchFunctionDefault = (item: Item, searchValue: string): boolean => {
     const searchValueLowerCase = searchValue.toLowerCase();
 
-    return getOptionLabel(item)
-      .toLowerCase()
-      .includes(searchValueLowerCase);
+    return getOptionLabel(item).toLowerCase().includes(searchValueLowerCase);
   };
 
   const {
@@ -216,7 +217,8 @@ export const MultiCombobox: MultiCombobox = (props) => {
   };
 
   const showPlaceholder =
-    (!arrValue?.length && inputData.value === '') || (arrValue === null && inputData.value === '');
+    (!arrValue?.length && inputData.value === '') ||
+    (arrValue === null && inputData.value === '');
 
   const handleCreate = (): void => {
     if (typeof onCreate === 'function') {
@@ -226,7 +228,9 @@ export const MultiCombobox: MultiCombobox = (props) => {
   };
 
   const handleRemoveValue = (option: Item): void => {
-    const newVal = arrValue?.filter((arrVal) => getOptionKey(arrVal) !== getOptionKey(option));
+    const newVal = arrValue?.filter(
+      (arrVal) => getOptionKey(arrVal) !== getOptionKey(option),
+    );
     handlerChangeValue(newVal);
   };
 
@@ -239,7 +243,9 @@ export const MultiCombobox: MultiCombobox = (props) => {
       };
     }
     const fakeElWidth = helperInputFakeElement.current.offsetWidth + 20;
-    const maxWidth = controlInnerRef.current ? controlInnerRef.current.offsetWidth - 15 : 0;
+    const maxWidth = controlInnerRef.current
+      ? controlInnerRef.current.offsetWidth - 15
+      : 0;
     const width = fakeElWidth > maxWidth ? maxWidth : fakeElWidth;
 
     return {
@@ -247,7 +253,10 @@ export const MultiCombobox: MultiCombobox = (props) => {
     };
   };
 
-  const inputStyle = React.useMemo(() => getInputStyle(), [inputData.value, arrValue]);
+  const inputStyle = React.useMemo(
+    () => getInputStyle(),
+    [inputData.value, arrValue],
+  );
 
   const renderItemDefault = (props: RenderItemProps<Item>) => {
     const { item, id: itemId, active, hovered, ...restProps } = props;
@@ -323,7 +332,11 @@ export const MultiCombobox: MultiCombobox = (props) => {
                 className={cnSelect('Input', { size })}
                 style={inputStyle}
               />
-              <div className={cnSelect('Placeholder', { isHidden: !showPlaceholder })}>
+              <div
+                className={cnSelect('Placeholder', {
+                  isHidden: !showPlaceholder,
+                })}
+              >
                 {placeholder}
               </div>
             </div>
@@ -348,7 +361,10 @@ export const MultiCombobox: MultiCombobox = (props) => {
             tabIndex={-1}
             onClick={handleToggleDropdown}
           >
-            <IconSelect size="xs" className={cnSelect('DropdownIndicatorIcon')} />
+            <IconSelect
+              size="xs"
+              className={cnSelect('DropdownIndicatorIcon')}
+            />
           </button>
         </div>
       </div>
@@ -372,7 +388,10 @@ export const MultiCombobox: MultiCombobox = (props) => {
         className={dropdownClassName}
         renderItem={renderItemDefault}
       />
-      <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
+      <div
+        className={cnSelect('HelperInputFakeElement')}
+        ref={helperInputFakeElement}
+      >
         {inputData.value}
       </div>
     </SelectContainer>

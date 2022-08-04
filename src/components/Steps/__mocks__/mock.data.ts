@@ -1,6 +1,10 @@
 export type SimpleItem = string;
 
-export const simpleItems: SimpleItem[] = ['Главное', 'Важное', 'Необязательное'];
+export const simpleItems: SimpleItem[] = [
+  'Главное',
+  'Важное',
+  'Необязательное',
+];
 
 export type Item = {
   label: string;

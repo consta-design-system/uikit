@@ -22,7 +22,9 @@ export const ContextMenuExampleSize = () => {
   const [isOpenL, setIsOpenL] = useState<boolean>(false);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section', [cnContextMenuExampleSize()])}>
+    <StoryBookExample
+      className={cnDocsDecorator('Section', [cnContextMenuExampleSize()])}
+    >
       <Button
         iconLeft={IconAdd}
         ref={refXS}

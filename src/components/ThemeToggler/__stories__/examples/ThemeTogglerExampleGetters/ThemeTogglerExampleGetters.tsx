@@ -4,7 +4,12 @@ import { IconLightningBolt } from '../../../../../icons/IconLightningBolt/IconLi
 import { IconMoon } from '../../../../../icons/IconMoon/IconMoon';
 import { IconSun } from '../../../../../icons/IconSun/IconSun';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { presetGpnDark, presetGpnDefault, presetGpnDisplay, Theme } from '../../../../Theme/Theme';
+import {
+  presetGpnDark,
+  presetGpnDefault,
+  presetGpnDisplay,
+  Theme,
+} from '../../../../Theme/Theme';
 import { ThemeToggler } from '../../../ThemeToggler';
 
 type Item = 'Default' | 'Dark' | 'Display';

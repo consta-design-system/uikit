@@ -11,7 +11,8 @@ export const cnSwitchGroup = cn('SwitchGroup');
 
 export const switchGroupDirections = ['column', 'row'] as const;
 export type SwitchGroupDirection = typeof switchGroupDirections[number];
-export const switchGroupDefaultDirection: SwitchGroupDirection = switchGroupDirections[0];
+export const switchGroupDefaultDirection: SwitchGroupDirection =
+  switchGroupDirections[0];
 
 export const switchGroupSizes = ['m', 'l'] as const;
 export type SwitchGroupPropSize = typeof switchGroupSizes[number];
@@ -26,7 +27,10 @@ type CommonProps<ITEM> = {
   items: ITEM[];
   getLabel: (item: ITEM) => string;
   getDisabled?: (item: ITEM) => boolean | undefined;
-  onChange: (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM[] | null }) => void;
+  onChange: (props: {
+    e: React.ChangeEvent<HTMLInputElement>;
+    value: ITEM[] | null;
+  }) => void;
   name: string;
   direction?: SwitchGroupDirection;
   size?: SwitchGroupPropSize;
@@ -35,7 +39,10 @@ type CommonProps<ITEM> = {
   className?: string;
 };
 
-type Props<ITEM> = PropsWithHTMLAttributesAndRef<CommonProps<ITEM>, HTMLDivElement>;
+type Props<ITEM> = PropsWithHTMLAttributesAndRef<
+  CommonProps<ITEM>,
+  HTMLDivElement
+>;
 
 type SwitchGroup = <ITEM>(props: Props<ITEM>) => React.ReactElement | null;
 

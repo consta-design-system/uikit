@@ -50,12 +50,17 @@ const mapStatus = {
   inOffice: 'success',
 } as const;
 
-export const searchCompare = (searchValue: string, compare?: string): boolean => {
+export const searchCompare = (
+  searchValue: string,
+  compare?: string,
+): boolean => {
   if (!compare) {
     return false;
   }
 
-  return compare.toLocaleLowerCase().indexOf(searchValue.toLocaleLowerCase()) !== -1;
+  return (
+    compare.toLocaleLowerCase().indexOf(searchValue.toLocaleLowerCase()) !== -1
+  );
 };
 
 const searchFunction = (item: Item, searchValue: string): boolean => {
@@ -74,7 +79,7 @@ const searchFunction = (item: Item, searchValue: string): boolean => {
   return searchCompare(searchValue, item.status && mapLabel[item.status]);
 };
 
-export function UserSelectExampleRenderItem() {
+export const UserSelectExampleRenderItem = () => {
   const [value, setValue] = useState<Item | null>();
   return (
     <div className={cnDocsDecorator('Section')}>
@@ -86,7 +91,10 @@ export function UserSelectExampleRenderItem() {
         searchFunction={searchFunction}
         renderItem={({ item, active, hovered, onClick, onMouseEnter }) => (
           <div
-            className={cnUserSelectExampleRenderItem('Item', { active, hovered })}
+            className={cnUserSelectExampleRenderItem('Item', {
+              active,
+              hovered,
+            })}
             role="option"
             aria-selected={active}
             aria-hidden
@@ -99,10 +107,14 @@ export function UserSelectExampleRenderItem() {
               avatarUrl={item.avatarUrl}
               info={item.subLabel}
             />
-            <Badge status={mapStatus[item.status]} label={mapLabel[item.status]} size="s" />
+            <Badge
+              status={mapStatus[item.status]}
+              label={mapLabel[item.status]}
+              size="s"
+            />
           </div>
         )}
       />
     </div>
   );
-}
+};

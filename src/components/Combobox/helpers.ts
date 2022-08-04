@@ -29,7 +29,9 @@ type RenderValueProps<ITEM> = {
 
 export type PropGetItemLabel<ITEM> = (item: ITEM) => string;
 export type PropGetItemKey<ITEM> = (item: ITEM) => string | number;
-export type PropGetItemGroupKey<ITEM> = (item: ITEM) => string | number | undefined;
+export type PropGetItemGroupKey<ITEM> = (
+  item: ITEM,
+) => string | number | undefined;
 export type PropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
 export type PropGetGroupKey<GROUP> = (group: GROUP) => string | number;
 export type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
@@ -43,13 +45,17 @@ type PropValue<ITEM, MULTIPLE extends boolean> =
   | null
   | undefined;
 
-export type PropRenderItem<ITEM> = (props: RenderItemProps<ITEM>) => React.ReactElement | null;
-export type PropRenderValue<ITEM> = (props: RenderValueProps<ITEM>) => React.ReactElement | null;
+export type PropRenderItem<ITEM> = (
+  props: RenderItemProps<ITEM>,
+) => React.ReactElement | null;
+export type PropRenderValue<ITEM> = (
+  props: RenderValueProps<ITEM>,
+) => React.ReactElement | null;
 
 export type ComboboxProps<
   ITEM = DefaultItem,
   GROUP = DefaultGroup,
-  MULTIPLE extends boolean = false
+  MULTIPLE extends boolean = false,
 > = PropsWithHTMLAttributesAndRef<
   {
     items: ITEM[];
@@ -92,28 +98,41 @@ export type ComboboxProps<
   },
   HTMLDivElement
 > &
-  (ITEM extends { label: DefaultItem['label'] } ? {} : { getItemLabel: PropGetItemLabel<ITEM> }) &
-  (ITEM extends { id: DefaultItem['id'] } ? {} : { getItemKey: PropGetItemKey<ITEM> }) &
+  (ITEM extends { label: DefaultItem['label'] }
+    ? {}
+    : { getItemLabel: PropGetItemLabel<ITEM> }) &
+  (ITEM extends { id: DefaultItem['id'] }
+    ? {}
+    : { getItemKey: PropGetItemKey<ITEM> }) &
   (GROUP extends { label: DefaultGroup['label'] }
     ? {}
     : { getGroupLabel: PropGetGroupLabel<GROUP> }) &
-  (GROUP extends { id: DefaultGroup['id'] } ? {} : { getGroupKey: PropGetGroupKey<GROUP> });
+  (GROUP extends { id: DefaultGroup['id'] }
+    ? {}
+    : { getGroupKey: PropGetGroupKey<GROUP> });
 
 export type ComboboxComponent = <
   ITEM = DefaultItem,
   GROUP = DefaultGroup,
-  MULTIPLE extends boolean = false
+  MULTIPLE extends boolean = false,
 >(
   props: ComboboxProps<ITEM, GROUP, MULTIPLE>,
 ) => React.ReactElement | null;
 
 export const defaultGetItemKey: PropGetItemKey<DefaultItem> = (item) => item.id;
-export const defaultGetItemLabel: PropGetItemLabel<DefaultItem> = (item) => item.label;
-export const defaultGetItemGroupKey: PropGetItemGroupKey<DefaultItem> = (item) => item.groupId;
-export const defaultGetItemDisabled: PropGetItemDisabled<DefaultItem> = (item) => item.disabled;
+export const defaultGetItemLabel: PropGetItemLabel<DefaultItem> = (item) =>
+  item.label;
+export const defaultGetItemGroupKey: PropGetItemGroupKey<DefaultItem> = (
+  item,
+) => item.groupId;
+export const defaultGetItemDisabled: PropGetItemDisabled<DefaultItem> = (
+  item,
+) => item.disabled;
 
-export const defaultGetGroupKey: PropGetGroupKey<DefaultGroup> = (group) => group.id;
-export const defaultGetGroupLabel: PropGetGroupLabel<DefaultGroup> = (group) => group.label;
+export const defaultGetGroupKey: PropGetGroupKey<DefaultGroup> = (group) =>
+  group.id;
+export const defaultGetGroupLabel: PropGetGroupLabel<DefaultGroup> = (group) =>
+  group.label;
 
 export const isMultipleParams = <ITEM, GROUP>(
   params: ComboboxProps<ITEM, GROUP, boolean>,
@@ -130,7 +149,7 @@ export const isNotMultipleParams = <ITEM, GROUP>(
 export function withDefaultGetters<
   ITEM = DefaultItem,
   GROUP = DefaultGroup,
-  MULTIPLE extends boolean = false
+  MULTIPLE extends boolean = false,
 >(props: ComboboxProps<ITEM, GROUP, MULTIPLE>) {
   return {
     ...props,

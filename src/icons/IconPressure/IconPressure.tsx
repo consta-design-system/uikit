@@ -1,5 +1,4 @@
 import { createIcon } from '../createIcon/createIcon';
-
 import IconPressureSizeM from './IconPressure_size_m';
 
 export const IconPressure = createIcon({

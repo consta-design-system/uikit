@@ -29,7 +29,17 @@ export const cnUserItem = cn('UserSelectItemDeprecated');
 export const cnUserItemCssTransition = cnForCssTransition(cnUserItem);
 
 export const UserSelectItem: React.FC<UserSelectItemProps> = (props) => {
-  const { className, label, subLabel, url, active, hovered, size, indent, ...otherProps } = props;
+  const {
+    className,
+    label,
+    subLabel,
+    url,
+    active,
+    hovered,
+    size,
+    indent,
+    ...otherProps
+  } = props;
 
   const iconRef = useRef<HTMLSpanElement>(null);
 

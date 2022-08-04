@@ -5,18 +5,24 @@ import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsE
 import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Informer } from '../../../Informer';
 
-export function InformerExampleView() {
+export const InformerExampleView = () => {
   return (
     <div
-      className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' })])}
+      className={cnDocsDecorator('Section', [
+        wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
+      ])}
     >
       <div className={cnDocsExample()}>
-        <Informer label="Ваше сообщение отправлено" view="filled" status="success" />
+        <Informer
+          label="Ваше сообщение отправлено"
+          view="filled"
+          status="success"
+        />
       </div>
       <div className={cnDocsExample()}>
         <p className={cnDocsExample('Caption')}>
-          Такой лучше использовать, когда сообщение — часть контента и находится на одном уровне с
-          ним.
+          Такой лучше использовать, когда сообщение — часть контента и находится
+          на одном уровне с ним.
         </p>
       </div>
       <div className={cnDocsExample()}>
@@ -29,4 +35,4 @@ export function InformerExampleView() {
       </div>
     </div>
   );
-}
+};

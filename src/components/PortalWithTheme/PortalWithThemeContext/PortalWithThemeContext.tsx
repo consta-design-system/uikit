@@ -21,7 +21,9 @@ export function usePortalContext() {
  * компонент думал ччто клик произашел вне компонента и срабатывал onOutsideClick.
  * Сечас когда мы знаем рефы всех вложенных порталов мы можем игнорировать события кликов на вложенных порталах
  */
-export const PortalWithThemeProvider: React.FC<{ zIndex?: number }> = (props) => {
+export const PortalWithThemeProvider: React.FC<{ zIndex?: number }> = (
+  props,
+) => {
   const [refs, setRefs] = useState<React.RefObject<HTMLElement>[]>([]);
   const { addRefs: contextAddRefs } = usePortalContext();
 
@@ -54,6 +56,7 @@ export const PortalWithThemeProvider: React.FC<{ zIndex?: number }> = (props) =>
   useEffect(() => () => setRefs([]), []);
 
   return (
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
     <Context.Provider value={{ refs, addRefs, zIndex: props.zIndex }}>
       {props.children}
     </Context.Provider>

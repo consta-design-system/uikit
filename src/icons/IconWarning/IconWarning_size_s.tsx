@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function IconWarningSizeS(props: React.SVGProps<SVGSVGElement>) {
+const IconWarningSizeS = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 16 16" {...props}>
       <g clipPath="url(#SvgIconWarning_size_s__clip0)">
@@ -17,6 +17,6 @@ function IconWarningSizeS(props: React.SVGProps<SVGSVGElement>) {
       </defs>
     </svg>
   );
-}
+};
 
 export default IconWarningSizeS;

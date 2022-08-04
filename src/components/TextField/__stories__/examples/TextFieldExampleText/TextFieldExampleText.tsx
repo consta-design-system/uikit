@@ -11,7 +11,11 @@ export const TextFieldExampleTextPlaceholder = () => {
 
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <TextField value={value} onChange={handleChange} placeholder="Здесь только цифры" />
+      <TextField
+        value={value}
+        onChange={handleChange}
+        placeholder="Здесь только цифры"
+      />
     </StoryBookExample>
   );
 };
@@ -44,7 +48,12 @@ export const TextFieldExampleTextRight = () => {
 
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <TextField leftSide={IconDiamond} rightSide="карат" value={value} onChange={handleChange} />
+      <TextField
+        leftSide={IconDiamond}
+        rightSide="карат"
+        value={value}
+        onChange={handleChange}
+      />
     </StoryBookExample>
   );
 };

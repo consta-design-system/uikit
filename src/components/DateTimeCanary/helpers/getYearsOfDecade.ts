@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   addYears,
   endOfYear,
@@ -8,17 +7,23 @@ import {
   startOfDecade,
   startOfYear,
 } from 'date-fns';
+import React from 'react';
 
 import { range } from '../../../utils/array';
 import { isInMinMaxDade } from '../../../utils/date';
 import { DateRange } from '../../../utils/types/Date';
 import { DateTimeCellPropRange } from '../DateTimeCell/DateTimeCell';
-
 import { isDateInRange } from './isDateInRange';
 import { isEqualYear } from './isEqualYear';
 import { HandleSelectDate } from './types';
 
-const isSelected = ({ date, value }: { date: Date; value?: Date | DateRange }): boolean => {
+const isSelected = ({
+  date,
+  value,
+}: {
+  date: Date;
+  value?: Date | DateRange;
+}): boolean => {
   if (!value) {
     return false;
   }
@@ -59,10 +64,17 @@ export const getYearsOfDecade = (props: {
   return range(12).map((index) => {
     const date = addYears(startDate, index);
     const label = format(date, 'yyyy');
-    const disabled = !isInMinMaxDade(date, minDate, maxDate, startOfYear, endOfYear);
+    const disabled = !isInMinMaxDade(
+      date,
+      minDate,
+      maxDate,
+      startOfYear,
+      endOfYear,
+    );
     const onClick =
       !disabled && onChange
-        ? (e: React.MouseEvent<HTMLButtonElement>) => onChange({ e, value: date })
+        ? (e: React.MouseEvent<HTMLButtonElement>) =>
+            onChange({ e, value: date })
         : undefined;
     if (getDecade(date) === currentDecade) {
       return {

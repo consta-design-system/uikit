@@ -7,7 +7,12 @@ import { DateTime } from '../../../DateTimeCanary';
 export const DateTimeExampleMultiplicity = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <DateTime type="time" multiplicityHours={2} multiplicityMinutes={5} multiplicitySeconds={0} />
+      <DateTime
+        type="time"
+        multiplicityHours={2}
+        multiplicityMinutes={5}
+        multiplicitySeconds={0}
+      />
     </StoryBookExample>
   );
 };

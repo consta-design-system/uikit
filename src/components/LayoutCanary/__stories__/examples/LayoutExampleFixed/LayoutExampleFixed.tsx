@@ -1,7 +1,7 @@
 import './LayoutExampleFixed.css';
 
-import React from 'react';
 import { select } from '@storybook/addon-knobs';
+import React from 'react';
 
 import { cn } from '../../../../../utils/bem';
 import { Text } from '../../../../Text/Text';
@@ -18,8 +18,16 @@ const cnLayoutExampleFixed = cn('LayoutExampleFixed');
 const flexArray = [1, 2, 3, 4, 5, 6];
 
 const defaultKnobs = () => ({
-  direction: select('Direction', layoutPropDirection, layoutPropDirectionDefault),
-  verticalAlign: select('Vertical align', layoutPropVerticalAlign, layoutPropVerticalAlignDefault),
+  direction: select(
+    'Direction',
+    layoutPropDirection,
+    layoutPropDirectionDefault,
+  ),
+  verticalAlign: select(
+    'Vertical align',
+    layoutPropVerticalAlign,
+    layoutPropVerticalAlignDefault,
+  ),
   flexBlock1: select('Flex Block 1', flexArray, 1),
   flexBlock2: select('Flex Block 2', flexArray, 1),
 });
@@ -39,7 +47,10 @@ export const LayoutExampleFixed = () => {
           <Text>Заголовок</Text>
         </Layout>
       )}
-      <Layout direction={direction} className={cnLayoutExampleFixed('Content', { direction })}>
+      <Layout
+        direction={direction}
+        className={cnLayoutExampleFixed('Content', { direction })}
+      >
         <Layout className={cnLayoutExampleFixed('Block')} flex={flexBlock1}>
           <Text>Контент</Text>
         </Layout>

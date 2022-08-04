@@ -22,13 +22,23 @@ export type DateTimeTogglerProps = PropsWithJsxAttributes<
 export const cnDateTimeToggler = cn('DateTimeToggler');
 
 export const DateTimeToggler: React.FC<DateTimeTogglerProps> = (props) => {
-  const { label, className, prevOnClick, nextOnClick, onLabelClick, ...otherProps } = props;
+  const {
+    label,
+    className,
+    prevOnClick,
+    nextOnClick,
+    onLabelClick,
+    ...otherProps
+  } = props;
 
   return (
     <div
       {...otherProps}
       className={cnDateTimeToggler(
-        { withPrevButton: Boolean(prevOnClick), withNextButton: Boolean(nextOnClick) },
+        {
+          withPrevButton: Boolean(prevOnClick),
+          withNextButton: Boolean(nextOnClick),
+        },
         [className],
       )}
     >

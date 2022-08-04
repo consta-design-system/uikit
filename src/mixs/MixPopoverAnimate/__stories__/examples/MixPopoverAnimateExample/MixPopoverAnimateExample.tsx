@@ -29,7 +29,12 @@ export const MixPopoverAnimateExampleRenderFn = () => {
         onClick={setOpen.toogle}
         ref={buttonRef}
       />
-      <Transition in={open} unmountOnExit timeout={animateTimeout} nodeRef={popoverRef}>
+      <Transition
+        in={open}
+        unmountOnExit
+        timeout={animateTimeout}
+        nodeRef={popoverRef}
+      >
         {(animate) => {
           return (
             <Popover

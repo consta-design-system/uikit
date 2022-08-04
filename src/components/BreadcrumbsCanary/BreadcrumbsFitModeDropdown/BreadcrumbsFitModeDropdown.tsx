@@ -10,8 +10,8 @@ import { useElements } from '../useElements';
 
 export const cnBreadcrumbsFitModeDropdown = cn('BreadcrumbsFitModeDropdown');
 
-export const BreadcrumbsFitModeDropdown: BreadcrumbsFitModeDropdownComponent = forwardRef(
-  (props, ref) => {
+export const BreadcrumbsFitModeDropdown: BreadcrumbsFitModeDropdownComponent =
+  forwardRef((props, ref) => {
     const {
       items,
       getItemHref,
@@ -58,13 +58,21 @@ export const BreadcrumbsFitModeDropdown: BreadcrumbsFitModeDropdownComponent = f
           onItemClick={onItemClick}
           items={hiddenItems}
           ref={moreRef}
-          className={cnBreadcrumbsFitModeDropdown('Item', { removed: hiddenItems.length <= 0 })}
+          className={cnBreadcrumbsFitModeDropdown('Item', {
+            removed: hiddenItems.length <= 0,
+          })}
         />
         {readyToHideItems.map((item, index) =>
-          renderItem(item, index, false, false, itemsRefs[index], !!hiddenItems[index]),
+          renderItem(
+            item,
+            index,
+            false,
+            false,
+            itemsRefs[index],
+            !!hiddenItems[index],
+          ),
         )}
         {renderItem(lastItem, 'last', false, true, lastItemRef)}
       </ul>
     );
-  },
-);
+  });

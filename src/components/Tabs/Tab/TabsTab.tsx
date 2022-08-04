@@ -41,7 +41,10 @@ export const TabsTab = forwardRef<HTMLButtonElement, Props>((props, ref) => {
 
   return (
     <button
-      className={cnTabsTab({ size, checked, onlyIcon }, [cnMixFocus({ before: true }), className])}
+      className={cnTabsTab({ size, checked, onlyIcon }, [
+        cnMixFocus({ before: true }),
+        className,
+      ])}
       onClick={checked ? undefined : onChange}
       ref={ref}
       role="tab"

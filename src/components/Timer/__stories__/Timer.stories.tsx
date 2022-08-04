@@ -1,9 +1,8 @@
-import React from 'react';
 import { boolean, number, select } from '@storybook/addon-knobs';
+import React from 'react';
 
 import { createMetadata } from '../../../utils/storybook';
 import { Timer, timerPropsSize, timerPropsSizeDefault } from '../Timer';
-
 import mdx from './Timer.docs.mdx';
 
 const defaultKnobs = () => ({
@@ -13,11 +12,18 @@ const defaultKnobs = () => ({
   size: select('size', timerPropsSize, timerPropsSizeDefault),
 });
 
-export function Playground() {
+export const Playground = () => {
   const { seconds, progress, animation, size } = defaultKnobs();
 
-  return <Timer seconds={seconds} progress={progress} animation={animation} size={size} />;
-}
+  return (
+    <Timer
+      seconds={seconds}
+      progress={progress}
+      animation={animation}
+      size={size}
+    />
+  );
+};
 
 export default createMetadata({
   title: 'Компоненты|/Обратная связь/Timer',

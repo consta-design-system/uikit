@@ -1,9 +1,8 @@
-import * as React from 'react';
 import { act, render } from '@testing-library/react';
+import * as React from 'react';
 
 import { dateTimePropView } from '../../DateTimeCanary/DateTimeCanary';
 import { DatePicker, datePickerPropType } from '../DatePickerCanary';
-
 import {
   animateDelay,
   getDropdown,

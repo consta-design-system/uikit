@@ -2,10 +2,13 @@ import './ThemeTogglerExampleSize.css';
 
 import React, { useState } from 'react';
 
-import { exampleThemesThree, Theme as ThemeType } from '../../../__mocks__/data.mock';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cn } from '../../../../../utils/bem';
 import { Theme } from '../../../../Theme/Theme';
+import {
+  exampleThemesThree,
+  Theme as ThemeType,
+} from '../../../__mocks__/data.mock';
 import { ThemeToggler } from '../../../ThemeToggler';
 
 const cnThemeTogglerExample = cn('ThemeTogglerExample');
@@ -14,7 +17,10 @@ export const GetThemeTogglerExample = (items: ThemeType[]): JSX.Element => {
   const [value, setValue] = useState<ThemeType>(exampleThemesThree[0]);
 
   return (
-    <Theme preset={value.theme} className={cnThemeTogglerExample('', [cnDocsDecorator('Section')])}>
+    <Theme
+      preset={value.theme}
+      className={cnThemeTogglerExample('', [cnDocsDecorator('Section')])}
+    >
       <ThemeToggler
         items={items}
         value={value}
@@ -47,4 +53,5 @@ export const GetThemeTogglerExample = (items: ThemeType[]): JSX.Element => {
   );
 };
 
-export const ThemeTogglerExampleSize = () => GetThemeTogglerExample(exampleThemesThree);
+export const ThemeTogglerExampleSize = () =>
+  GetThemeTogglerExample(exampleThemesThree);

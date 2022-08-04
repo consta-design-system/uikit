@@ -16,7 +16,9 @@ export const ChoiceGroupExampleText = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
   return (
     <div
-      className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' })])}
+      className={cnDocsDecorator('Section', [
+        wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
+      ])}
     >
       <div className={cnDocsExample()}>
         <p className={cnDocsExample('Caption')}>Отображение</p>
@@ -27,7 +29,9 @@ export const ChoiceGroupExampleText = () => {
           getLabel={(item) => item}
           name="ChoiceGroupExampleText"
         />
-        <p className={cnDocsExample('Status', { view: 'wrong' })}>Неправильно</p>
+        <p className={cnDocsExample('Status', { view: 'wrong' })}>
+          Неправильно
+        </p>
       </div>
       <div className={cnDocsExample()}>
         <p className={cnDocsExample('Caption')}>Как показывать товары</p>

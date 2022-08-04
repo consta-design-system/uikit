@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function IconTargetSizeM(props: React.SVGProps<SVGSVGElement>) {
+const IconTargetSizeM = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 24 24" {...props}>
       <path d="M12 16a4 4 0 100-8 4 4 0 000 8z" />
@@ -11,6 +11,6 @@ function IconTargetSizeM(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default IconTargetSizeM;

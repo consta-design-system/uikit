@@ -10,12 +10,6 @@ import { getByMap } from '../../utils/getByMap';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { FieldCaption } from '../FieldCaption/FieldCaption';
 import { FieldLabel } from '../FieldLabel/FieldLabel';
-
-import { SliderInput } from './SliderInput/SliderInput';
-import { SliderLine } from './SliderLine/SliderLine';
-import { SliderPoint } from './SliderPoint/SliderPoint';
-import { ActiveButton } from './useSlider/helper';
-import { useSlider } from './useSlider/useSlider';
 import {
   defaultPropSize,
   defaultTooltipFormatter,
@@ -24,6 +18,11 @@ import {
   SliderComponent,
   SliderProps,
 } from './helper';
+import { SliderInput } from './SliderInput/SliderInput';
+import { SliderLine } from './SliderLine/SliderLine';
+import { SliderPoint } from './SliderPoint/SliderPoint';
+import { ActiveButton } from './useSlider/helper';
+import { useSlider } from './useSlider/useSlider';
 import { useSliderStationing } from './useSliderStationing';
 
 const cnSlider = cn('Slider');
@@ -37,10 +36,10 @@ const sizeMap: Record<PropSize, IconPropSize> = {
 
 export const COMPONENT_NAME = 'Slider' as const;
 
-function SliderRender<RANGE extends boolean>(
+const SliderRender = <RANGE extends boolean>(
   props: SliderProps<RANGE>,
   ref: React.Ref<HTMLDivElement>,
-) {
+) => {
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const {
@@ -75,7 +74,9 @@ function SliderRender<RANGE extends boolean>(
 
   const IconRight = rightSide;
   const IconLeft =
-    isNotRangeParams && props.leftSide && props.leftSide !== 'input' ? props.leftSide : undefined;
+    isNotRangeParams && props.leftSide && props.leftSide !== 'input'
+      ? props.leftSide
+      : undefined;
 
   const iconSize = getByMap(sizeMap, size);
 
@@ -116,7 +117,12 @@ function SliderRender<RANGE extends boolean>(
   };
 
   return (
-    <div ref={ref} className={cnSlider({ size }, [className])} style={style} {...otherProps}>
+    <div
+      ref={ref}
+      className={cnSlider({ size }, [className])}
+      style={style}
+      {...otherProps}
+    >
       {label && (
         <FieldLabel className={cnSlider('Label')} size={size}>
           {label}
@@ -127,7 +133,9 @@ function SliderRender<RANGE extends boolean>(
           <div className={cnSlider('Side', { position: 'left' })}>
             <SliderInput
               value={props.value}
-              onChange={(params) => isNotRangeParams(props) && props.onChange?.(params)}
+              onChange={(params) =>
+                isNotRangeParams(props) && props.onChange?.(params)
+              }
               size={size}
               min={min}
               max={max}
@@ -170,7 +178,9 @@ function SliderRender<RANGE extends boolean>(
               aria-valuemin={min}
               aria-valuemax={max}
               aria-valuenow={val}
-              tooltipZIndex={typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined}
+              tooltipZIndex={
+                typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined
+              }
               key={cnSlider('Point', { index })}
             />
           ))}
@@ -188,6 +198,6 @@ function SliderRender<RANGE extends boolean>(
       )}
     </div>
   );
-}
+};
 
 export const Slider = forwardRef(SliderRender) as SliderComponent;

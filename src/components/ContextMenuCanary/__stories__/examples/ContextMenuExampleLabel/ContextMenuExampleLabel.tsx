@@ -13,7 +13,12 @@ export const ContextMenuExampleLabel = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
-      <ContextMenu isOpen={isOpen} items={items} getItemLabel={(item) => item} anchorRef={ref} />
+      <ContextMenu
+        isOpen={isOpen}
+        items={items}
+        getItemLabel={(item) => item}
+        anchorRef={ref}
+      />
     </StoryBookExample>
   );
 };

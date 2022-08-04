@@ -7,7 +7,6 @@ import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
-
 import { ChoiceGroupItem } from './Item/ChoiceGroup-Item';
 
 export const choiceGroupForms = ['default', 'brick', 'round'] as const;
@@ -24,10 +23,13 @@ export const choiceGroupDefaultView: ChoiceGroupPropView = 'primary';
 
 export const choiceGroupWidth = ['default', 'full'] as const;
 export type СhoiceGroupPropWidth = typeof choiceGroupWidth[number];
-export const choiceGroupWidthDefault: СhoiceGroupPropWidth = choiceGroupWidth[0];
+export const choiceGroupWidthDefault: СhoiceGroupPropWidth =
+  choiceGroupWidth[0];
 
 export type ChoiceGroupPropGetLabel<ITEM> = (item: ITEM) => string | number;
-export type ChoiceGroupPropGetIcon<ITEM> = (item: ITEM) => IconComponent | undefined;
+export type ChoiceGroupPropGetIcon<ITEM> = (
+  item: ITEM,
+) => IconComponent | undefined;
 
 export type ChoiceGroupPropValue<ITEM, MULTIPLE extends boolean> =
   | (MULTIPLE extends true ? ITEM[] : ITEM)
@@ -38,7 +40,10 @@ export type ChoiceGroupPropOnChange<ITEM, MULTIPLE extends boolean> = (props: {
   value: MULTIPLE extends true ? ITEM[] | null : ITEM;
 }) => void;
 
-type Props<ITEM, MULTIPLE extends boolean = false> = PropsWithHTMLAttributesAndRef<
+type Props<
+  ITEM,
+  MULTIPLE extends boolean = false,
+> = PropsWithHTMLAttributesAndRef<
   {
     size?: ChoiceGroupPropSize;
     form?: ChoiceGroupPropForm;
@@ -74,76 +79,82 @@ const sizeMap: Record<ChoiceGroupPropSize, IconPropSize> = {
 
 export const cnChoiceGroup = cn('ChoiceGroup');
 
-export const ChoiceGroup: ChoiceGroupComponent = React.forwardRef((props, ref) => {
-  const {
-    size = choiceGroupDefaultSize,
-    form = choiceGroupDefaultForm,
-    view = choiceGroupDefaultView,
-    width = choiceGroupWidthDefault,
-    onlyIcon,
-    iconSize: iconSizeProp,
-    value = null,
-    multiple = false,
-    items,
-    getLabel,
-    onChange,
-    getIcon,
-    name,
-    className,
-    disabled = false,
-    getDisabled,
-    truncate,
-    ...otherProps
-  } = props;
+export const ChoiceGroup: ChoiceGroupComponent = React.forwardRef(
+  (props, ref) => {
+    const {
+      size = choiceGroupDefaultSize,
+      form = choiceGroupDefaultForm,
+      view = choiceGroupDefaultView,
+      width = choiceGroupWidthDefault,
+      onlyIcon,
+      iconSize: iconSizeProp,
+      value = null,
+      multiple = false,
+      items,
+      getLabel,
+      onChange,
+      getIcon,
+      name,
+      className,
+      disabled = false,
+      getDisabled,
+      truncate,
+      ...otherProps
+    } = props;
 
-  type Item = typeof items[number];
+    type Item = typeof items[number];
 
-  const { getOnChange, getChecked } = useChoiceGroup<Item, React.ChangeEvent<HTMLInputElement>>({
-    value: value as Item,
-    getKey: getLabel,
-    callBack: onChange as ChoiceGroupPropOnChange<Item, false>,
-    multiple: multiple as false,
-    // привел к типам из-за того что
-    // TS не понимает что параметры для не Multiple и Multiple не могут прийти одновременно
-  });
+    const { getOnChange, getChecked } = useChoiceGroup<
+      Item,
+      React.ChangeEvent<HTMLInputElement>
+    >({
+      value: value as Item,
+      getKey: getLabel,
+      callBack: onChange as ChoiceGroupPropOnChange<Item, false>,
+      multiple: multiple as false,
+      // привел к типам из-за того что
+      // TS не понимает что параметры для не Multiple и Multiple не могут прийти одновременно
+    });
 
-  const iconSize = getByMap(sizeMap, size, iconSizeProp);
+    const iconSize = getByMap(sizeMap, size, iconSizeProp);
 
-  return (
-    <div
-      {...otherProps}
-      ref={ref}
-      className={cnChoiceGroup({ size, form, view, width, onlyIcon, disabled, truncate }, [
-        className,
-      ])}
-    >
-      {items.map((item, idx) => {
-        const itemChecked = getChecked(item);
-        const itemDisabled = !!getDisabled && getDisabled(item);
-        return (
-          <React.Fragment key={getLabel(item)}>
-            {idx > 0 && (
-              <div
-                className={cnChoiceGroup('Divider', {
-                  checked: itemChecked,
-                  disabled: itemDisabled,
-                })}
+    return (
+      <div
+        {...otherProps}
+        ref={ref}
+        className={cnChoiceGroup(
+          { size, form, view, width, onlyIcon, disabled, truncate },
+          [className],
+        )}
+      >
+        {items.map((item, idx) => {
+          const itemChecked = getChecked(item);
+          const itemDisabled = !!getDisabled && getDisabled(item);
+          return (
+            <React.Fragment key={getLabel(item)}>
+              {idx > 0 && (
+                <div
+                  className={cnChoiceGroup('Divider', {
+                    checked: itemChecked,
+                    disabled: itemDisabled,
+                  })}
+                />
+              )}
+              <ChoiceGroupItem
+                onChange={getOnChange(item)}
+                checked={itemChecked}
+                label={getLabel(item).toString()}
+                icon={getIcon && getIcon(item)}
+                iconSize={iconSize}
+                multiple={multiple}
+                onlyIcon={onlyIcon}
+                name={name}
+                disabled={disabled || itemDisabled}
               />
-            )}
-            <ChoiceGroupItem
-              onChange={getOnChange(item)}
-              checked={itemChecked}
-              label={getLabel(item).toString()}
-              icon={getIcon && getIcon(item)}
-              iconSize={iconSize}
-              multiple={multiple}
-              onlyIcon={onlyIcon}
-              name={name}
-              disabled={disabled || itemDisabled}
-            />
-          </React.Fragment>
-        );
-      })}
-    </div>
-  );
-});
+            </React.Fragment>
+          );
+        })}
+      </div>
+    );
+  },
+);

@@ -1,9 +1,14 @@
-import * as React from 'react';
 import { render, RenderResult } from '@testing-library/react';
+import * as React from 'react';
 
-import { SelectContainer, SelectContainerProps } from '../SelectContainer/SelectContainer';
+import {
+  SelectContainer,
+  SelectContainerProps,
+} from '../SelectContainer/SelectContainer';
 
-const renderComponent = (props: Omit<SelectContainerProps, 'children'>): RenderResult => {
+const renderComponent = (
+  props: Omit<SelectContainerProps, 'children'>,
+): RenderResult => {
   return render(
     <SelectContainer {...props}>
       <div data-testid="content" />

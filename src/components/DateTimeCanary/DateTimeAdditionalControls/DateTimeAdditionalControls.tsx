@@ -3,14 +3,19 @@ import './DateTimeAdditionalControls.css';
 import React from 'react';
 
 import { cn } from '../../../utils/bem';
-import { AdditionalControlRenderType, DateTimeAdditionalControlRenderProp } from '../helpers';
+import {
+  AdditionalControlRenderType,
+  DateTimeAdditionalControlRenderProp,
+} from '../helpers';
 
 type Props = {
   renderAdditionalControls?: DateTimeAdditionalControlRenderProp;
   currentVisibleDate?: Date;
 };
 
-function isRenderFn(fn: DateTimeAdditionalControlRenderProp): fn is AdditionalControlRenderType {
+function isRenderFn(
+  fn: DateTimeAdditionalControlRenderProp,
+): fn is AdditionalControlRenderType {
   return (fn as AdditionalControlRenderType).call !== undefined;
 }
 

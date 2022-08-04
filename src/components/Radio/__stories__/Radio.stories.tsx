@@ -1,5 +1,5 @@
-import React from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
+import React from 'react';
 
 import { createMetadata } from '../../../utils/storybook';
 import {
@@ -11,7 +11,6 @@ import {
   radioPropView,
   radioPropViewDefault,
 } from '../Radio';
-
 import mdx from './Radio.docs.mdx';
 
 const defaultKnobs = () => ({
@@ -22,7 +21,7 @@ const defaultKnobs = () => ({
   label: text('label', 'Это радиокнопка'),
 });
 
-export function Playground() {
+export const Playground = () => {
   const { disabled, size, view, label, align } = defaultKnobs();
 
   const [checked, setChecked] = React.useState<boolean>(false);
@@ -44,7 +43,7 @@ export function Playground() {
       />
     </form>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Базовые/Radio',

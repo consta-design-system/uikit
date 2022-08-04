@@ -55,7 +55,9 @@ const sortGroup = (a: number | string, b: number | string) => {
 export const ContextMenuExampleGroups = () => {
   const ref = useRef(null);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section', [cnContextMenuExampleGroups()])}>
+    <StoryBookExample
+      className={cnDocsDecorator('Section', [cnContextMenuExampleGroups()])}
+    >
       <Button iconLeft={IconAdd} ref={ref} />
       <ContextMenu
         items={items}

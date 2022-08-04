@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { Item, items } from '../../../__mocks__/data.mock';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
+import { Item, items } from '../../../__mocks__/data.mock';
 import { CheckboxGroup } from '../../../CheckboxGroup';
 
-export function CheckboxGroupExampleView() {
+export const CheckboxGroupExampleView = () => {
   const [value, setValue] = React.useState<Item[] | null>(null);
 
   return (
@@ -39,4 +39,4 @@ export function CheckboxGroupExampleView() {
       />
     </StoryBookExample>
   );
-}
+};

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function IconCalendarSizeM(props: React.SVGProps<SVGSVGElement>) {
+const IconCalendarSizeM = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 24 24" {...props}>
       <path
@@ -10,6 +10,6 @@ function IconCalendarSizeM(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default IconCalendarSizeM;

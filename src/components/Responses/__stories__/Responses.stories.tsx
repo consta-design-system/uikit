@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
+import * as React from 'react';
 
 import { createMetadata } from '../../../utils/storybook';
 import { Button } from '../../Button/Button';
@@ -15,7 +15,6 @@ import { ResponsesExit } from '../../ResponsesExit/ResponsesExit';
 import { ResponsesNothingFound } from '../../ResponsesNothingFound/ResponsesNothingFound';
 import { ResponsesSuccess } from '../../ResponsesSuccess/ResponsesSuccess';
 import { responsesPropSize, responsesPropSizeDefault } from '../Responses';
-
 import mdx from './Responses.docs.mdx';
 
 const components = {
@@ -32,7 +31,9 @@ const components = {
   ResponsesExit,
 } as const;
 
-const componentsNames = Object.keys(components) as Array<keyof typeof components>;
+const componentsNames = Object.keys(components) as Array<
+  keyof typeof components
+>;
 
 const defaultKnobs = () => ({
   component: select('Component', componentsNames, componentsNames[0]),
@@ -42,8 +43,14 @@ const defaultKnobs = () => ({
   actions: boolean('Actions', false),
 });
 
-export function Playground() {
-  const { size, title, description, component: componentName, actions } = defaultKnobs();
+export const Playground = () => {
+  const {
+    size,
+    title,
+    description,
+    component: componentName,
+    actions,
+  } = defaultKnobs();
 
   const Component = components[componentName];
 
@@ -52,10 +59,12 @@ export function Playground() {
       title={title}
       description={description}
       size={size}
-      actions={actions && <Button size="m" view="ghost" label="Вернуться назад" />}
+      actions={
+        actions && <Button size="m" view="ghost" label="Вернуться назад" />
+      }
     />
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Обратная связь/Responses',

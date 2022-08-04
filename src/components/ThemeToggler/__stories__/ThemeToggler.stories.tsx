@@ -1,16 +1,19 @@
 import './ThemeToggler.stories.css';
 
-import React, { useState } from 'react';
 import { object, select } from '@storybook/addon-knobs';
+import React, { useState } from 'react';
 
-import { exampleThemesThree, exampleThemesTwo, Theme as ThemeType } from '../__mocks__/data.mock';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import { directions } from '../../Popover/Popover';
 import { Theme } from '../../Theme/Theme';
+import {
+  exampleThemesThree,
+  exampleThemesTwo,
+  Theme as ThemeType,
+} from '../__mocks__/data.mock';
 import { ThemeToggler } from '../ThemeToggler';
 import { themeTogglerPropSize, themeTogglerPropSizeDefault } from '../types';
-
 import mdx from './ThemeToggler.docs.mdx';
 
 const cnThemeTogglerStories = cn('ThemeTogglerStories');
@@ -22,7 +25,7 @@ const defaultKnobs = () => ({
   possibleDirections: object('possibleDirections', directions),
 });
 
-export function Playground() {
+export const Playground = () => {
   const { size, themes, direction, possibleDirections } = defaultKnobs();
   const themeArray = themes === 'two' ? exampleThemesTwo : exampleThemesThree;
   const [value, setValue] = useState<ThemeType>(themeArray[0]);
@@ -39,7 +42,7 @@ export function Playground() {
       />
     </Theme>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Служебные/ThemeToggler',

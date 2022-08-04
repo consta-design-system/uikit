@@ -24,7 +24,7 @@ const items: Item[] = [
   },
 ];
 
-export function ComboboxExampleCreate() {
+export const ComboboxExampleCreate = () => {
   const [value, setValue] = useState<Item | null>();
   const [list, setList] = useState<Item[]>(items);
   return (
@@ -34,8 +34,10 @@ export function ComboboxExampleCreate() {
         items={list}
         value={value}
         onChange={({ value }) => setValue(value)}
-        onCreate={({ label }) => setList([{ label, id: `${label}_${list.length + 1}` }, ...list])}
+        onCreate={({ label }) =>
+          setList([{ label, id: `${label}_${list.length + 1}` }, ...list])
+        }
       />
     </StoryBookExample>
   );
-}
+};

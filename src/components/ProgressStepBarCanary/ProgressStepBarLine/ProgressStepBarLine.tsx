@@ -23,7 +23,9 @@ const mapVarsByStatus: Record<PropStatus, string> = {
 };
 
 const backgroundGenerate = (lines: Line[], direction: PropDirection) => {
-  let background = `linear-gradient(${direction === 'horizontal' ? '90' : '180'}deg, `;
+  let background = `linear-gradient(${
+    direction === 'horizontal' ? '90' : '180'
+  }deg, `;
 
   const { length } = lines;
 
@@ -32,7 +34,9 @@ const backgroundGenerate = (lines: Line[], direction: PropDirection) => {
     const color = getByMap(mapVarsByStatus, line.status || 'normal');
     const from = lines[index - 1] ? lines[index - 1].size : 0;
     const to = line.size;
-    background += `${color} ${from}px, ${color} ${to}px${index < length - 1 ? ', ' : ')'}`;
+    background += `${color} ${from}px, ${color} ${to}px${
+      index < length - 1 ? ', ' : ')'
+    }`;
   }
 
   return background;

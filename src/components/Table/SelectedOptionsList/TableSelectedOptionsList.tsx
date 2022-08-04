@@ -21,7 +21,11 @@ type OptionValue = {
     value: string | number;
   };
 
-export type GetTagLabel = (id: string, name: string, filterValue?: unknown) => string;
+export type GetTagLabel = (
+  id: string,
+  name: string,
+  filterValue?: unknown,
+) => string;
 
 type Props = {
   values: Array<{ id: string; name: string; value?: unknown }>;
@@ -30,10 +34,14 @@ type Props = {
   onReset: () => void;
 };
 
-const getTagLabelDefault: GetTagLabel = (id, name, filterValue?: unknown): string => {
-  const localFilterValue = (isNumber(filterValue)
-    ? { name: String(filterValue) }
-    : filterValue) as OptionValue;
+const getTagLabelDefault: GetTagLabel = (
+  id,
+  name,
+  filterValue?: unknown,
+): string => {
+  const localFilterValue = (
+    isNumber(filterValue) ? { name: String(filterValue) } : filterValue
+  ) as OptionValue;
   if (!isNotNil(localFilterValue)) {
     return name;
   }

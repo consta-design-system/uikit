@@ -4,7 +4,6 @@ import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/D
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Text } from '../../../../Text/Text';
 import { DragNDropField } from '../../../DragNDropField';
-
 import imageFile from './images/too_big_file.png';
 
 export default {
@@ -19,7 +18,10 @@ const image = {
 export const DragNDropFieldExampleMaxSize = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
     <div>
-      <DragNDropField maxSize={1 * 1024 * 1024} onDropFiles={(files) => console.log(files)}>
+      <DragNDropField
+        maxSize={1 * 1024 * 1024}
+        onDropFiles={(files) => console.log(files)}
+      >
         <Text>Сюда можно перетаскивать файлы</Text>
         <Text>размером 1 Мб или меньше</Text>
       </DragNDropField>

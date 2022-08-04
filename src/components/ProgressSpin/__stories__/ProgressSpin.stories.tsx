@@ -1,10 +1,13 @@
-import * as React from 'react';
 import { boolean, number, select } from '@storybook/addon-knobs';
+import * as React from 'react';
 
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
-import { ProgressSpin, progressSpinPropSize, progressSpinPropSizeDefault } from '../ProgressSpin';
-
+import {
+  ProgressSpin,
+  progressSpinPropSize,
+  progressSpinPropSizeDefault,
+} from '../ProgressSpin';
 import mdx from './ProgressSpin.docs.mdx';
 
 const defaultKnobs = () => ({
@@ -15,7 +18,7 @@ const defaultKnobs = () => ({
 
 const cnProgressSpinStories = cn('ProgressSpinStories');
 
-export function Playground() {
+export const Playground = () => {
   const { progress, size, animation } = defaultKnobs();
 
   return (
@@ -23,7 +26,7 @@ export function Playground() {
       <ProgressSpin size={size} progress={progress} animation={animation} />
     </div>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Обратная связь/ProgressSpin',

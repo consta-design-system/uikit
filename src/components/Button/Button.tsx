@@ -15,7 +15,12 @@ export const buttonPropSize = ['m', 'xs', 's', 'l'] as const;
 export type ButtonPropSize = typeof buttonPropSize[number];
 export const buttonPropSizeDefault: ButtonPropSize = buttonPropSize[0];
 
-export const buttonPropView = ['primary', 'clear', 'ghost', 'secondary'] as const;
+export const buttonPropView = [
+  'primary',
+  'clear',
+  'ghost',
+  'secondary',
+] as const;
 export type ButtonPropView = typeof buttonPropView[number];
 export const buttonPropViewDefault: ButtonPropView = buttonPropView[0];
 
@@ -135,11 +140,17 @@ export const Button = forwardRefWithAs<Props, 'button'>((props, ref) => {
         ((IconLeft || IconRight) && label ? (
           <>
             {IconLeft && (
-              <IconLeft className={cnButton('Icon', { position: 'left' })} size={iconSize} />
+              <IconLeft
+                className={cnButton('Icon', { position: 'left' })}
+                size={iconSize}
+              />
             )}
             <span className={cnButton('Label')}>{label}</span>
             {IconRight && (
-              <IconRight className={cnButton('Icon', { position: 'right' })} size={iconSize} />
+              <IconRight
+                className={cnButton('Icon', { position: 'right' })}
+                size={iconSize}
+              />
             )}
           </>
         ) : (

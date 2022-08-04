@@ -18,7 +18,6 @@ import {
   PropForm,
   PropView,
 } from '../SelectComponentsDeprecated/types';
-
 import { UserSelectItem } from './UserSelectItem/UserSelectItem';
 import { UserSelectValue } from './UserSelectValue/UserSelectValue';
 
@@ -59,7 +58,9 @@ export type UserSelectProps<ITEM, GROUP> = {
     }
 );
 
-type UserSelect = <ITEM, GROUP>(props: UserSelectProps<ITEM, GROUP>) => React.ReactElement | null;
+type UserSelect = <ITEM, GROUP>(
+  props: UserSelectProps<ITEM, GROUP>,
+) => React.ReactElement | null;
 
 export const UserSelect: UserSelect = (props) => {
   const defaultOptionsRef = useRef<HTMLDivElement | null>(null);
@@ -111,7 +112,8 @@ export const UserSelect: UserSelect = (props) => {
   };
 
   const controlRef = useRef<HTMLDivElement | null>(null);
-  const arrValue: Items = typeof value !== 'undefined' && value !== null ? [...value] : null;
+  const arrValue: Items =
+    typeof value !== 'undefined' && value !== null ? [...value] : null;
   const hasGroup = typeof getGroupOptions === 'function';
 
   const scrollToIndex = (index: number): void => {
@@ -119,9 +121,8 @@ export const UserSelect: UserSelect = (props) => {
       return;
     }
 
-    const elements: NodeListOf<HTMLDivElement> = dropdownRef.current.querySelectorAll(
-      'div[role=option]',
-    );
+    const elements: NodeListOf<HTMLDivElement> =
+      dropdownRef.current.querySelectorAll('div[role=option]');
 
     scrollIntoView(elements[index], dropdownRef.current);
   };
@@ -235,10 +236,13 @@ export const UserSelect: UserSelect = (props) => {
   };
 
   const showPlaceholder =
-    (!arrValue?.length && inputData.value === '') || (arrValue === null && inputData.value === '');
+    (!arrValue?.length && inputData.value === '') ||
+    (arrValue === null && inputData.value === '');
 
   const handleRemoveValue = (option: Item): void => {
-    const newVal = arrValue?.filter((arrVal) => getOptionLabel(arrVal) !== getOptionLabel(option));
+    const newVal = arrValue?.filter(
+      (arrVal) => getOptionLabel(arrVal) !== getOptionLabel(option),
+    );
     handlerChangeValue(newVal);
   };
 
@@ -251,7 +255,9 @@ export const UserSelect: UserSelect = (props) => {
       };
     }
     const fakeElWidth = helperInputFakeElement.current.offsetWidth + 20;
-    const maxWidth = controlInnerRef.current ? controlInnerRef.current.offsetWidth - 15 : 0;
+    const maxWidth = controlInnerRef.current
+      ? controlInnerRef.current.offsetWidth - 15
+      : 0;
     const width = fakeElWidth > maxWidth ? maxWidth : fakeElWidth;
 
     return {
@@ -262,7 +268,9 @@ export const UserSelect: UserSelect = (props) => {
   const renderItemDefault = (props: RenderItemProps<Item>) => {
     const { item, id: itemId, active, hovered, ...restProps } = props;
     const label = getOptionLabel(item);
-    const subLabel = getOptionAdditionalInfo ? getOptionAdditionalInfo(item) : '';
+    const subLabel = getOptionAdditionalInfo
+      ? getOptionAdditionalInfo(item)
+      : '';
     const url = getOptionAvatarUrl ? getOptionAvatarUrl(item) : '';
     const indent = form === 'round' ? 'increased' : 'normal';
     return (
@@ -280,7 +288,10 @@ export const UserSelect: UserSelect = (props) => {
     );
   };
 
-  const inputStyle = React.useMemo(() => getInputStyle(), [inputData.value, arrValue]);
+  const inputStyle = React.useMemo(
+    () => getInputStyle(),
+    [inputData.value, arrValue],
+  );
 
   return (
     <SelectContainer
@@ -311,8 +322,12 @@ export const UserSelect: UserSelect = (props) => {
             <div className={cnSelect('ControlValue', { isUserSelect: true })}>
               {arrValue?.map((option) => {
                 const label = getOptionLabel(option);
-                const subLabel = getOptionAdditionalInfo ? getOptionAdditionalInfo(option) : '';
-                const url = getOptionAvatarUrl ? getOptionAvatarUrl(option) : '';
+                const subLabel = getOptionAdditionalInfo
+                  ? getOptionAdditionalInfo(option)
+                  : '';
+                const url = getOptionAvatarUrl
+                  ? getOptionAvatarUrl(option)
+                  : '';
                 const handleRemove = (e: React.SyntheticEvent): void => {
                   e.stopPropagation();
                   handleRemoveValue(option);
@@ -342,7 +357,11 @@ export const UserSelect: UserSelect = (props) => {
                 className={cnSelect('Input', { size })}
                 style={inputStyle}
               />
-              <div className={cnSelect('Placeholder', { isHidden: !showPlaceholder })}>
+              <div
+                className={cnSelect('Placeholder', {
+                  isHidden: !showPlaceholder,
+                })}
+              >
                 {placeholder}
               </div>
             </div>
@@ -367,7 +386,10 @@ export const UserSelect: UserSelect = (props) => {
             tabIndex={-1}
             onClick={handleToggleDropdown}
           >
-            <IconSelect size="xs" className={cnSelect('DropdownIndicatorIcon')} />
+            <IconSelect
+              size="xs"
+              className={cnSelect('DropdownIndicatorIcon')}
+            />
           </button>
         </div>
       </div>
@@ -389,7 +411,10 @@ export const UserSelect: UserSelect = (props) => {
         className={dropdownClassName}
         renderItem={renderItemDefault}
       />
-      <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
+      <div
+        className={cnSelect('HelperInputFakeElement')}
+        ref={helperInputFakeElement}
+      >
         {inputData.value}
       </div>
     </SelectContainer>

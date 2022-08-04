@@ -24,7 +24,9 @@ const defaultInitialTimerTime = 3;
 
 export const cnSnackBarItem = cn('SnackBarItem');
 
-const getAutoCloseTime = (autoClose: boolean | number | undefined): number | false => {
+const getAutoCloseTime = (
+  autoClose: boolean | number | undefined,
+): number | false => {
   if (autoClose) {
     if (typeof autoClose === 'number') {
       return autoClose;
@@ -34,7 +36,10 @@ const getAutoCloseTime = (autoClose: boolean | number | undefined): number | fal
   return false;
 };
 
-export function SnackBarItemRender(props: SnackBarItemProps, ref: React.Ref<HTMLDivElement>) {
+export const SnackBarItemRender = (
+  props: SnackBarItemProps,
+  ref: React.Ref<HTMLDivElement>,
+) => {
   const {
     onClose,
     autoClose,
@@ -60,7 +65,8 @@ export function SnackBarItemRender(props: SnackBarItemProps, ref: React.Ref<HTML
   const handleMouseLeave = () => offHover();
   const autoCloseTime = getAutoCloseTime(autoClose);
   const hideAutoCloseTimer =
-    showProgress === undefined || !(isNumber(autoCloseTime) && autoCloseTime > 0);
+    showProgress === undefined ||
+    !(isNumber(autoCloseTime) && autoCloseTime > 0);
   const onAutoClose = () => {
     if (onAutoCloseProp) {
       onAutoCloseProp();
@@ -106,17 +112,22 @@ export function SnackBarItemRender(props: SnackBarItemProps, ref: React.Ref<HTML
           hidden={hideAutoCloseTimer}
         />
       )}
-      {hideAutoCloseTimer && Icon && <Icon className={cnSnackBarItem('Icon')} size="m" />}
+      {hideAutoCloseTimer && Icon && (
+        <Icon className={cnSnackBarItem('Icon')} size="m" />
+      )}
       <div className={cnSnackBarItem('Content')}>
         {isString(message) || isNumber(message) ? (
           <Text className={cnSnackBarItem('Message')} lineHeight="s">
             {message}
           </Text>
         ) : (
-          <>{message}</>
+          message
         )}
         {actions && (
-          <SnackBarActionButton actions={actions} className={cnSnackBarItem('ActionButton')} />
+          <SnackBarActionButton
+            actions={actions}
+            className={cnSnackBarItem('ActionButton')}
+          />
         )}
       </div>
       {onClose && (
@@ -139,6 +150,8 @@ export function SnackBarItemRender(props: SnackBarItemProps, ref: React.Ref<HTML
       )}
     </div>
   );
-}
+};
 
-export const SnackBarItem = React.forwardRef(SnackBarItemRender) as SnackBarItemComponent;
+export const SnackBarItem = React.forwardRef(
+  SnackBarItemRender,
+) as SnackBarItemComponent;

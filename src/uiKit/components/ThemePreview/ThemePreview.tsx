@@ -10,7 +10,6 @@ import { useThemeVars } from '../../../hooks/useThemeVars/useThemeVars';
 import { cn } from '../../cn';
 import * as wp from '../../whitepaper/whitepaper';
 import { ColorPreview } from '../ColorPreview/ColorPreview';
-
 import {
   bgColors,
   clearControls,
@@ -38,7 +37,9 @@ const varsMap = {
   shadow: [],
 } as const;
 
-type Action = { type: 'add'; item: SnackBarItemDefault } | { type: 'remove'; key: number | string };
+type Action =
+  | { type: 'add'; item: SnackBarItemDefault }
+  | { type: 'remove'; key: number | string };
 
 function reducer(state: SnackBarItemDefault[], action: Action) {
   switch (action.type) {
@@ -89,7 +90,11 @@ export const ThemePreview: React.FC = () => {
               Цвета фонов
             </Text>
             <div
-              className={wp.tplGrid({ 's-ratio': '1-1-1', 'col-gap': 'full', 'row-gap': 'full' })}
+              className={wp.tplGrid({
+                's-ratio': '1-1-1',
+                'col-gap': 'full',
+                'row-gap': 'full',
+              })}
             >
               {bgColors.map((item, index) => {
                 return (
@@ -117,7 +122,11 @@ export const ThemePreview: React.FC = () => {
             </Text>
 
             <div
-              className={wp.tplGrid({ 's-ratio': '1-1-1', 'col-gap': 'full', 'row-gap': 'full' })}
+              className={wp.tplGrid({
+                's-ratio': '1-1-1',
+                'col-gap': 'full',
+                'row-gap': 'full',
+              })}
             >
               {typoColors.map((item, index) => {
                 return (
@@ -139,12 +148,19 @@ export const ThemePreview: React.FC = () => {
               size="xl"
               view="primary"
               weight="bold"
-              className={wp.decorator({ 'indent-b': '3xl', 'decorator_indent-t': '6xl' })}
+              className={wp.decorator({
+                'indent-b': '3xl',
+                'decorator_indent-t': '6xl',
+              })}
             >
               Цвета скроллбара
             </Text>
             <div
-              className={wp.tplGrid({ 's-ratio': '1-1-1', 'col-gap': 'full', 'row-gap': 'full' })}
+              className={wp.tplGrid({
+                's-ratio': '1-1-1',
+                'col-gap': 'full',
+                'row-gap': 'full',
+              })}
             >
               {scrollbarColors.map((item, index) => {
                 return (
@@ -166,12 +182,19 @@ export const ThemePreview: React.FC = () => {
               size="xl"
               view="primary"
               weight="bold"
-              className={wp.decorator({ 'indent-b': '3xl', 'decorator_indent-t': '6xl' })}
+              className={wp.decorator({
+                'indent-b': '3xl',
+                'decorator_indent-t': '6xl',
+              })}
             >
               Цвета контролов
             </Text>
             <div
-              className={wp.tplGrid({ 's-ratio': '1-1-1', 'col-gap': 'full', 'row-gap': 'full' })}
+              className={wp.tplGrid({
+                's-ratio': '1-1-1',
+                'col-gap': 'full',
+                'row-gap': 'full',
+              })}
             >
               <section>
                 <h3 className="text text_size_l text_view_secondary text_transform_uppercase text_weight-semibold text_spacing_xs decorator decorator_indent-b_xs">
@@ -244,7 +267,8 @@ export const ThemePreview: React.FC = () => {
                   Ghost
                 </h3>
                 <p className="text text_size_m text_view_secondary decorator decorator_indent-b_3xl decorator_space-b_m decorator_border_b">
-                  Цвета для третьестепенных контролов, часто идущих в паре с Primary
+                  Цвета для третьестепенных контролов, часто идущих в паре с
+                  Primary
                 </p>
                 <div className="tpl-grid tpl-grid_col-gap_full tpl-grid_row-gap_full">
                   {ghostControls.map((item, index) => {
@@ -266,7 +290,8 @@ export const ThemePreview: React.FC = () => {
                   Clear
                 </h3>
                 <p className="text text_size_m text_view_secondary decorator decorator_indent-b_3xl decorator_space-b_m decorator_border_b">
-                  Цвета для «невидимых» контролов (примущественно кнопки без явной границы)
+                  Цвета для «невидимых» контролов (примущественно кнопки без
+                  явной границы)
                 </p>
                 <div className="tpl-grid tpl-grid_col-gap_full tpl-grid_row-gap_full">
                   {clearControls.map((item, index) => {

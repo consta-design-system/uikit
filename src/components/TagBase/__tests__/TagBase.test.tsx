@@ -1,9 +1,15 @@
-import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import * as React from 'react';
 
 import { cnIcon } from '../../../icons/Icon/Icon';
 import { IconAttach } from '../../../icons/IconAttach/IconAttach';
-import { cnTagBase, TagBase, tagBasePropGroup, tagBasePropSize, tagBasePropView } from '../TagBase';
+import {
+  cnTagBase,
+  TagBase,
+  tagBasePropGroup,
+  tagBasePropSize,
+  tagBasePropView,
+} from '../TagBase';
 
 type TagBaseProps = React.ComponentProps<typeof TagBase>;
 
@@ -125,7 +131,9 @@ describe('Компонент TagBase', () => {
       it('отображает иконку', () => {
         renderComponent({ label, icon: IconAttach });
         const tagBase = screen.getByTestId(testId);
-        const icon = tagBase.querySelector(`.${cnTagBase('Icon')}`) as HTMLButtonElement;
+        const icon = tagBase.querySelector(
+          `.${cnTagBase('Icon')}`,
+        ) as HTMLButtonElement;
         expect(icon).toHaveClass('IconAttach');
       });
     });

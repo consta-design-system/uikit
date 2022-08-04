@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function IconCameraSizeS(props: React.SVGProps<SVGSVGElement>) {
+const IconCameraSizeS = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 16 16" {...props}>
       <path d="M8 11a3 3 0 100-6 3 3 0 000 6z" />
@@ -11,6 +11,6 @@ function IconCameraSizeS(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default IconCameraSizeS;

@@ -24,8 +24,12 @@ export type RenderItemsListProp = (props: {
 
 export type TabsDirection = 'horizontal' | 'vertical';
 
-export const getTabsDirection = (linePosition: TabsPropLinePosition): TabsDirection =>
-  linePosition === 'left' || linePosition === 'right' ? 'vertical' : 'horizontal';
+export const getTabsDirection = (
+  linePosition: TabsPropLinePosition,
+): TabsDirection =>
+  linePosition === 'left' || linePosition === 'right'
+    ? 'vertical'
+    : 'horizontal';
 
 export const getTabsWidth = (tabsDimensions: TabDimensions[]): number =>
   tabsDimensions.reduce((acc, td) => acc + td.size + td.gap, 0);

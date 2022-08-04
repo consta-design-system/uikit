@@ -30,7 +30,13 @@ describe('helper getGroups', () => {
   });
 
   it('групировка без массива групп', () => {
-    const result = getGroups(items, getItemGroupKey, undefined, undefined, undefined);
+    const result = getGroups(
+      items,
+      getItemGroupKey,
+      undefined,
+      undefined,
+      undefined,
+    );
 
     const expected: typeof result = [
       {
@@ -57,8 +63,12 @@ describe('helper getGroups', () => {
   });
 
   it('групировка без массива групп и с сортировкой', () => {
-    const result = getGroups(items, getItemGroupKey, undefined, undefined, (a, b) =>
-      sortGroup(a.key, b.key),
+    const result = getGroups(
+      items,
+      getItemGroupKey,
+      undefined,
+      undefined,
+      (a, b) => sortGroup(a.key, b.key),
     );
 
     const expected: typeof result = [
@@ -87,7 +97,13 @@ describe('helper getGroups', () => {
   });
 
   it('групировка c массивом групп', () => {
-    const result = getGroups(items, getItemGroupKey, groups, getGroupKey, undefined);
+    const result = getGroups(
+      items,
+      getItemGroupKey,
+      groups,
+      getGroupKey,
+      undefined,
+    );
 
     const expected: typeof result = [
       {
@@ -136,8 +152,12 @@ describe('helper getGroups', () => {
   });
 
   it('групировка c массивом групп и с сортировкой', () => {
-    const result = getGroups(items, getItemGroupKey, groups, getGroupKey, (a, b) =>
-      sortGroup(a.group?.label || 0, b.group?.label || 0),
+    const result = getGroups(
+      items,
+      getItemGroupKey,
+      groups,
+      getGroupKey,
+      (a, b) => sortGroup(a.group?.label || 0, b.group?.label || 0),
     );
 
     const expected: typeof result = [

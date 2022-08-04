@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 
-import { exampleThemesThree, Theme as ThemeType } from '../../../__mocks__/data.mock';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Theme } from '../../../../Theme/Theme';
+import {
+  exampleThemesThree,
+  Theme as ThemeType,
+} from '../../../__mocks__/data.mock';
 import { ThemeToggler } from '../../../ThemeToggler';
 
 export const ThemeTogglerExampleDefault = () => {

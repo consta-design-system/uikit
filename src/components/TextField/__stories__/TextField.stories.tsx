@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { array, boolean, number, select, text } from '@storybook/addon-knobs';
+import React, { useState } from 'react';
 
 import { IconPhoto } from '../../../icons/IconPhoto/IconPhoto';
 import { createMetadata } from '../../../utils/storybook';
@@ -20,7 +20,6 @@ import {
   textFieldPropWidth,
   textFieldPropWidthDefault,
 } from '../TextField';
-
 import mdx from './TextField.docs.mdx';
 
 const defaultKnobs = () => ({
@@ -51,7 +50,7 @@ const defaultKnobs = () => ({
   rightSideText: text('rightSideText', 'm²'),
 });
 
-export function Playground() {
+export const Playground = () => {
   const {
     width,
     form,
@@ -102,7 +101,10 @@ export function Playground() {
   };
 
   return (
-    <EventInterceptorProvider eventHandler={action('EventInterceptor')} map={eventInterceptorMap}>
+    <EventInterceptorProvider
+      eventHandler={action('EventInterceptor')}
+      map={eventInterceptorMap}
+    >
       <div>
         <TextField
           value={value}
@@ -132,7 +134,7 @@ export function Playground() {
       </div>
     </EventInterceptorProvider>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Базовые/TextField',

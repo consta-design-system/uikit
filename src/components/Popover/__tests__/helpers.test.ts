@@ -1,4 +1,7 @@
-import { getComputedPositionAndDirection, getPositionsByDirection } from '../helpers';
+import {
+  getComputedPositionAndDirection,
+  getPositionsByDirection,
+} from '../helpers';
 import { directions } from '../Popover';
 
 const VIEWPORT_SIZE = {

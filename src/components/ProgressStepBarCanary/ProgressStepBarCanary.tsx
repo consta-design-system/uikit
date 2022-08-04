@@ -1,6 +1,13 @@
 import './ProgressStepBar.css';
 
-import React, { createRef, forwardRef, useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+  createRef,
+  forwardRef,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
@@ -10,9 +17,6 @@ import { IconArrowLeft } from '../../icons/IconArrowLeft/IconArrowLeft';
 import { IconArrowRight } from '../../icons/IconArrowRight/IconArrowRight';
 import { Button } from '../Button/Button';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
-
-import { ProgressStepBarItem } from './ProgressStepBarItem/ProgressStepBarItem';
-import { ProgressStepBarLine } from './ProgressStepBarLine/ProgressStepBarLine';
 import {
   cnProgressStepBar,
   DefaultItem,
@@ -26,9 +30,12 @@ import {
   propSizeDefault,
   withDefaultGetters,
 } from './helpers';
+import { ProgressStepBarItem } from './ProgressStepBarItem/ProgressStepBarItem';
+import { ProgressStepBarLine } from './ProgressStepBarLine/ProgressStepBarLine';
 
 export const COMPONENT_NAME = 'ProgressStepBar' as const;
 
+// eslint-disable-next-line react/function-component-definition
 function ProgressStepBarRender<ITEM = DefaultItem>(
   props: ProgressStepBarProps<ITEM>,
   ref: React.Ref<HTMLDivElement>,
@@ -55,7 +62,9 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), containerRef);
 
   const [lines, setLines] = useState<Line[]>([]);
-  const [visibleIndex, setVisibleIndex] = useState<number>(activeStepIndex || 0);
+  const [visibleIndex, setVisibleIndex] = useState<number>(
+    activeStepIndex || 0,
+  );
 
   const listRef = useRef<HTMLDivElement>(null);
 
@@ -64,7 +73,10 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
   const { refs, scrollTo } = useScrollElements(steps);
 
   const stepsRef = useMemo(
-    () => new Array(steps.length).fill(null).map(() => createRef<HTMLButtonElement>()),
+    () =>
+      new Array(steps.length)
+        .fill(null)
+        .map(() => createRef<HTMLButtonElement>()),
     [steps.length],
   );
 
@@ -99,7 +111,10 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
     }
   };
 
-  const getStepItem: (item: ITEM, index: number) => ProgressStepBarItemProps = (item, index) => {
+  const getStepItem: (item: ITEM, index: number) => ProgressStepBarItemProps = (
+    item,
+    index,
+  ) => {
     const onClick = getItemOnClick(item);
 
     const onItemClickHandler = onItemClick
@@ -125,7 +140,8 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
       direction,
       onClick: onClick || onItemClickHandler,
       key: cnProgressStepBar({ index }),
-      tooltipZIndex: typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined,
+      tooltipZIndex:
+        typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined,
     };
   };
 
@@ -148,7 +164,13 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
           onClick={() => changePosition(true)}
         />
       )}
-      <div ref={listRef} className={cnProgressStepBar('List', { direction, overflow: isOverflow })}>
+      <div
+        ref={listRef}
+        className={cnProgressStepBar('List', {
+          direction,
+          overflow: isOverflow,
+        })}
+      >
         <ProgressStepBarLine
           lines={lines}
           size={size}
@@ -176,4 +198,6 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
   );
 }
 
-export const ProgressStepBar = forwardRef(ProgressStepBarRender) as ProgressStepBarComponent;
+export const ProgressStepBar = forwardRef(
+  ProgressStepBarRender,
+) as ProgressStepBarComponent;

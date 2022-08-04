@@ -9,7 +9,7 @@ import { Grid, GridItem } from '../../../Grid';
 
 const cnGridItemExampleCol = cn('GridItemExampleCol');
 
-export function GridItemExampleCol() {
+export const GridItemExampleCol = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Grid className={cnGridItemExampleCol()} cols="2" gap="xl">
@@ -26,4 +26,4 @@ export function GridItemExampleCol() {
       </Grid>
     </StoryBookExample>
   );
-}
+};

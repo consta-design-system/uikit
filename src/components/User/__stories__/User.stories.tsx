@@ -1,5 +1,5 @@
-import React from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
+import React from 'react';
 
 import { IconCrown } from '../../../icons/IconCrown/IconCrown';
 import { createMetadata } from '../../../utils/storybook';
@@ -13,7 +13,6 @@ import {
   userPropWidth,
   userPropWidthDefault,
 } from '../User';
-
 import mdx from './User.docs.mdx';
 
 const defaultKnobs = () => ({
@@ -29,7 +28,7 @@ const defaultKnobs = () => ({
   withIconRight: boolean('withIconRight', false),
 });
 
-export function Playground() {
+export const Playground = () => {
   const {
     view,
     width,
@@ -59,7 +58,7 @@ export function Playground() {
       />
     </div>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Отображение данных/User',

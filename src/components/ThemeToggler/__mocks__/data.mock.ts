@@ -3,7 +3,11 @@ import { IconLightningBolt } from '../../../icons/IconLightningBolt/IconLightnin
 import { IconMoon } from '../../../icons/IconMoon/IconMoon';
 import { IconSun } from '../../../icons/IconSun/IconSun';
 import { presetGpnDisplay } from '../../Theme/presets/presetGpnDisplay';
-import { presetGpnDark, presetGpnDefault, ThemePreset } from '../../Theme/Theme';
+import {
+  presetGpnDark,
+  presetGpnDefault,
+  ThemePreset,
+} from '../../Theme/Theme';
 
 export type Theme = {
   label: string;

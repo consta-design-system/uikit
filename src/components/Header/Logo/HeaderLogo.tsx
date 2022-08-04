@@ -7,11 +7,12 @@ import { PropsWithAsAttributes } from '../../../utils/types/PropsWithAsAttribute
 
 export const cnHeaderLogo = cn('HeaderLogo');
 
-export type HeaderProps<As extends keyof JSX.IntrinsicElements> = PropsWithAsAttributes<{}, As>;
+export type HeaderProps<As extends keyof JSX.IntrinsicElements> =
+  PropsWithAsAttributes<{}, As>;
 
-export function HeaderLogo<As extends keyof JSX.IntrinsicElements = 'div'>(
+export const HeaderLogo = <As extends keyof JSX.IntrinsicElements = 'div'>(
   props: HeaderProps<As>,
-): React.ReactElement {
+): React.ReactElement => {
   const { children, as = 'div', className, ...otherProps } = props;
   const Tag = as as string;
   return (
@@ -19,4 +20,4 @@ export function HeaderLogo<As extends keyof JSX.IntrinsicElements = 'div'>(
       {children}
     </Tag>
   );
-}
+};

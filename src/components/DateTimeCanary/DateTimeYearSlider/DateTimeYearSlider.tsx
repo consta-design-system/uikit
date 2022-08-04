@@ -1,6 +1,5 @@
 import './DateTimeYearSlider.css';
 
-import React from 'react';
 import {
   addMonths,
   addYears,
@@ -12,6 +11,7 @@ import {
   startOfYear,
 } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
+import React from 'react';
 
 import { range } from '../../../utils/array';
 import { cn } from '../../../utils/bem';
@@ -38,7 +38,8 @@ const isCurrentVisibleYear = (currentDate: Date, month: Date) =>
   getYear(currentDate) === getYear(month);
 
 const isCurrentVisibleMonth = (currentDate: Date, month: Date) =>
-  isCurrentVisibleYear(currentDate, month) && getMonth(currentDate) === getMonth(month);
+  isCurrentVisibleYear(currentDate, month) &&
+  getMonth(currentDate) === getMonth(month);
 
 const getYearItems = (currentVisibleDate: Date, date: Date, locale: Locale) =>
   range(12).map((month) => {
@@ -71,7 +72,9 @@ const getSliderData = (
   }));
 };
 
-export const DateTimeYearSlider: React.FC<DateTimeYearSliderProps> = (props) => {
+export const DateTimeYearSlider: React.FC<DateTimeYearSliderProps> = (
+  props,
+) => {
   const {
     currentVisibleDate,
     className,

@@ -1,9 +1,8 @@
 import './UserSelectStories.css';
 
-import React, { useState } from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
+import React, { useState } from 'react';
 
-import { groups, Item, items, myGroup, MyItem, myItems } from '../__mocks__/data.mock';
 import { cn } from '../../../utils/bem';
 import { createMetadata, createStory } from '../../../utils/storybook';
 import {
@@ -15,8 +14,15 @@ import {
   propView,
 } from '../../SelectComponents/types';
 import { Text } from '../../Text/Text';
+import {
+  groups,
+  Item,
+  items,
+  myGroup,
+  MyItem,
+  myItems,
+} from '../__mocks__/data.mock';
 import { UserSelect } from '../UserSelect';
-
 import mdx from './UserSelect.docs.mdx';
 
 const getKnobs = () => ({
@@ -36,7 +42,7 @@ const getKnobs = () => ({
 
 const cnUserSelectStories = cn('UserSelectStories');
 
-export function Playground(): JSX.Element {
+export const Playground = (): JSX.Element => {
   const {
     size,
     disabled,
@@ -99,24 +105,30 @@ export function Playground(): JSX.Element {
       caption={caption}
     />
   );
-}
+};
 
 const searchFunction = (item: MyItem, searchValue: string): boolean => {
   const searchOfName =
-    item.name.toLocaleLowerCase().indexOf(searchValue.toLocaleLowerCase()) !== -1;
+    item.name.toLocaleLowerCase().indexOf(searchValue.toLocaleLowerCase()) !==
+    -1;
 
   if (searchOfName) {
     return searchOfName;
   }
 
   const searchOfEmail =
-    item.email?.toLocaleLowerCase().indexOf(searchValue.toLocaleLowerCase()) !== -1;
+    item.email?.toLocaleLowerCase().indexOf(searchValue.toLocaleLowerCase()) !==
+    -1;
 
   if (searchOfEmail) {
     return searchOfEmail;
   }
 
-  return item.position?.toLocaleLowerCase().indexOf(searchValue.toLocaleLowerCase()) !== -1;
+  return (
+    item.position
+      ?.toLocaleLowerCase()
+      .indexOf(searchValue.toLocaleLowerCase()) !== -1
+  );
 };
 
 export const WithRender = createStory(
@@ -230,7 +242,9 @@ export const WithCreate = createStory(
         isLoading={isLoading}
         onChange={({ value }) => setValue(value)}
         groups={withGroups ? groups : []}
-        onCreate={({ label }) => setList([{ label, id: `${label}_${list.length + 1}` }, ...list])}
+        onCreate={({ label }) =>
+          setList([{ label, id: `${label}_${list.length + 1}` }, ...list])
+        }
         label={label}
         labelPosition={labelPosition}
         caption={caption}

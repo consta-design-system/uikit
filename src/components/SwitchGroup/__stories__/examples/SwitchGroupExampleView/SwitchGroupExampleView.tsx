@@ -15,7 +15,7 @@ const items: Item[] = [
   { name: 'Мигающие заголовки' },
 ];
 
-export function SwitchGroupExampleViewGhost() {
+export const SwitchGroupExampleViewGhost = () => {
   const [value, setValue] = React.useState<Item[] | null>(null);
 
   return (
@@ -31,9 +31,9 @@ export function SwitchGroupExampleViewGhost() {
       />
     </StoryBookExample>
   );
-}
+};
 
-export function SwitchGroupExampleViewPrimary() {
+export const SwitchGroupExampleViewPrimary = () => {
   const [value, setValue] = React.useState<Item[] | null>(null);
 
   return (
@@ -49,4 +49,4 @@ export function SwitchGroupExampleViewPrimary() {
       />
     </StoryBookExample>
   );
-}
+};

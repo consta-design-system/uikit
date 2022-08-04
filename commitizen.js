@@ -8,7 +8,10 @@ module.exports = {
       name: 'refactor:  Editing code without fixing bugs or adding new features',
     },
     { value: 'docs', name: 'docs:      Documentation Update' },
-    { value: 'chore', name: 'chore      Add / update / customize tools and libraries' },
+    {
+      value: 'chore',
+      name: 'chore      Add / update / customize tools and libraries',
+    },
     { value: 'changelog', name: 'changelog      Add / update / changelog' },
     { value: 'release', name: 'release      New release' },
   ],

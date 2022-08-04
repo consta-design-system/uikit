@@ -13,7 +13,6 @@ import { getByMap } from '../../utils/getByMap';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { FieldCaption } from '../FieldCaption/FieldCaption';
 import { FieldLabel } from '../FieldLabel/FieldLabel';
-
 import {
   getIncrementFlag,
   getValueByStepArray,
@@ -30,10 +29,10 @@ import {
 export const COMPONENT_NAME = 'TextField' as const;
 export const cnTextField = cn(COMPONENT_NAME);
 
-export function TextFieldRender<TYPE extends string>(
+export const TextFieldRender = <TYPE extends string>(
   props: TextFieldProps<TYPE>,
   ref: React.Ref<HTMLDivElement>,
-) {
+) => {
   const textFieldRef = React.useRef<HTMLDivElement>(null);
   const inputRef = React.useRef<HTMLInputElement | HTMLTextAreaElement>(null);
 
@@ -89,9 +88,15 @@ export function TextFieldRender<TYPE extends string>(
   const rightSideIsString = typeof rightSide === 'string';
   const iconSize = getByMap(sizeMap, size, iconSizeProp);
 
-  const sortedSteps = useSortSteps({ step, min: Number(min), max: Number(max) });
+  const sortedSteps = useSortSteps({
+    step,
+    min: Number(min),
+    max: Number(max),
+  });
 
-  const handleChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (e) => {
+  const handleChange: React.ChangeEventHandler<
+    HTMLInputElement | HTMLTextAreaElement
+  > = (e) => {
     const { value } = e.target;
     !disabled && onChange?.({ e, id, name, value: value || null });
   };
@@ -149,7 +154,9 @@ export function TextFieldRender<TYPE extends string>(
     cols,
     minRows: minRows || rows,
     maxRows: maxRows || rows,
-    inputRef: useForkRef([inputRef, inputRefProp]) as (node: HTMLTextAreaElement) => void,
+    inputRef: useForkRef([inputRef, inputRefProp]) as (
+      node: HTMLTextAreaElement,
+    ) => void,
   };
 
   const inputProps = {
@@ -158,7 +165,10 @@ export function TextFieldRender<TYPE extends string>(
     min,
     step: !Array.isArray(sortedSteps) ? sortedSteps : 0,
     onKeyDown,
-    ref: useForkRef([inputRef, inputRefProp]) as React.RefCallback<HTMLInputElement>,
+    ref: useForkRef([
+      inputRef,
+      inputRefProp,
+    ]) as React.RefCallback<HTMLInputElement>,
   };
 
   const handleClear = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -177,10 +187,19 @@ export function TextFieldRender<TYPE extends string>(
           isIncrement,
           steps: sortedSteps,
         }) ?? 0
-      : getValueByStepNumber({ value, step: sortedSteps, isIncrement, min, max });
+      : getValueByStepNumber({
+          value,
+          step: sortedSteps,
+          isIncrement,
+          min,
+          max,
+        });
   };
 
-  const changeNumberValue = (e: React.MouseEvent<HTMLButtonElement>, isIncrement = true) => {
+  const changeNumberValue = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    isIncrement = true,
+  ) => {
     onChange?.({
       e,
       value: getValueByStep(isIncrement).toString(),
@@ -294,14 +313,17 @@ export function TextFieldRender<TYPE extends string>(
           )}
         </div>
         {caption && (
-          <FieldCaption className={cnTextField('Caption')} status={status || state}>
+          <FieldCaption
+            className={cnTextField('Caption')}
+            status={status || state}
+          >
             {caption}
           </FieldCaption>
         )}
       </div>
     </div>
   );
-}
+};
 
 export const TextField = forwardRef(TextFieldRender) as TextFieldComponent;
 export * from './helpers';

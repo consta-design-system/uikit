@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-import { simpleItems as items } from '../../../__mocks__/mock.data';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Button } from '../../../../Button/Button';
+import { simpleItems as items } from '../../../__mocks__/mock.data';
 import { Steps } from '../../../Steps';
 
 const getContent = (index: number) => `Контент на шаге №${index + 1}`;
@@ -20,9 +20,18 @@ export const ExampleStepsContent = () => {
 
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <Steps items={items} getLabel={getLabel} value={activeStep} onChange={onChange} />
+      <Steps
+        items={items}
+        getLabel={getLabel}
+        value={activeStep}
+        onChange={onChange}
+      />
       <div>{getContent(activeStepIndex)}</div>
-      <Button label="Предыдущий" onClick={handlePrev} disabled={activeStepIndex === 0} />
+      <Button
+        label="Предыдущий"
+        onClick={handlePrev}
+        disabled={activeStepIndex === 0}
+      />
       <Button
         label="Следующий"
         onClick={handleNext}

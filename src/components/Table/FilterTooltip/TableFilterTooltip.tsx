@@ -57,7 +57,12 @@ export const TableFilterTooltip: React.FC<Props> = ({
         className={cnTableFilterTooltip('Button', { isOpened }, [className])}
         iconLeft={IconFunnel}
       />
-      <Transition in={isOpened} unmountOnExit nodeRef={popoverRef} timeout={animateTimeout}>
+      <Transition
+        in={isOpened}
+        unmountOnExit
+        nodeRef={popoverRef}
+        timeout={animateTimeout}
+      >
         {(animate) => (
           <Popover
             anchorRef={buttonRef}
@@ -74,7 +79,12 @@ export const TableFilterTooltip: React.FC<Props> = ({
           >
             {children || (
               <div className={cnTableFilterTooltip('Content')}>
-                <Text as="div" size="xs" view="primary" className={cnTableFilterTooltip('Title')}>
+                <Text
+                  as="div"
+                  size="xs"
+                  view="primary"
+                  className={cnTableFilterTooltip('Title')}
+                >
                   Фильтровать по условию
                 </Text>
                 <select
@@ -84,7 +94,9 @@ export const TableFilterTooltip: React.FC<Props> = ({
                   onChange={(e): void => {
                     onChange(
                       field,
-                      Array.from(e.target.selectedOptions).map((option) => option.value),
+                      Array.from(e.target.selectedOptions).map(
+                        (option) => option.value,
+                      ),
                     );
                   }}
                 >

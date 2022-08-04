@@ -30,7 +30,9 @@ export type SimpleSelectProps<ITEM> = CommonSelectProps<ITEM> &
     onChange?: (v: ITEM | null) => void;
   };
 
-type Select = <ITEM>(props: SimpleSelectProps<ITEM>) => React.ReactElement | null;
+type Select = <ITEM>(
+  props: SimpleSelectProps<ITEM>,
+) => React.ReactElement | null;
 
 export const BasicSelect: Select = (props) => {
   const defaultOptionsRef = useRef<HTMLDivElement | null>(null);
@@ -67,21 +69,24 @@ export const BasicSelect: Select = (props) => {
     }
   };
 
-  const arrValue = typeof value !== 'undefined' && value !== null ? [value] : null;
+  const arrValue =
+    typeof value !== 'undefined' && value !== null ? [value] : null;
 
   const scrollToIndex = (index: number): void => {
     if (!dropdownRef.current) {
       return;
     }
 
-    const elements: NodeListOf<HTMLDivElement> = dropdownRef.current.querySelectorAll(
-      'div[role=option]',
-    );
+    const elements: NodeListOf<HTMLDivElement> =
+      dropdownRef.current.querySelectorAll('div[role=option]');
 
     scrollIntoView(elements[index], dropdownRef.current);
   };
 
-  const searchFunctionDefault = (item: typeof value, searchValue: string): boolean => {
+  const searchFunctionDefault = (
+    item: typeof value,
+    searchValue: string,
+  ): boolean => {
     const searchValueLowerCase = searchValue.toLowerCase();
 
     return getOptionLabel(item as Item)
@@ -198,7 +203,10 @@ export const BasicSelect: Select = (props) => {
               readOnly
             />
             {arrValue ? (
-              <span className={cnSelect('ControlValue')} title={getOptionLabel(arrValue[0])}>
+              <span
+                className={cnSelect('ControlValue')}
+                title={getOptionLabel(arrValue[0])}
+              >
                 {getOptionLabel(arrValue[0])}
               </span>
             ) : (
@@ -215,7 +223,10 @@ export const BasicSelect: Select = (props) => {
             tabIndex={-1}
             onClick={handleToggleDropdown}
           >
-            <IconSelect size="xs" className={cnSelect('DropdownIndicatorIcon')} />
+            <IconSelect
+              size="xs"
+              className={cnSelect('DropdownIndicatorIcon')}
+            />
           </button>
         </span>
       </div>

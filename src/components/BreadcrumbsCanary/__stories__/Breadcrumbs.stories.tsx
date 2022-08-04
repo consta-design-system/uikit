@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { boolean, select } from '@storybook/addon-knobs';
+import * as React from 'react';
 
 import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconDocFilled } from '../../../icons/IconDocFilled/IconDocFilled';
@@ -13,7 +13,6 @@ import {
   breadcrumbPropSizeDefault,
   Breadcrumbs,
 } from '../BreadcrumbsCanary';
-
 import mdx from './Breadcrumbs.docs.mdx';
 
 type Page = {
@@ -52,7 +51,11 @@ const pages: Page[] = [
 
 const defaultKnobs = () => ({
   size: select('size', breadcrumbPropSize, breadcrumbPropSizeDefault),
-  fitMode: select('fitMode', breadcrumbPropFitMode, breadcrumbPropFitModeDefault),
+  fitMode: select(
+    'fitMode',
+    breadcrumbPropFitMode,
+    breadcrumbPropFitModeDefault,
+  ),
   withIcon: boolean('withIcon', false),
   onlyIconRoot: boolean('onlyIconRoot', false),
   lastItemIsLink: boolean('lastItemIsLink', false),
@@ -60,8 +63,9 @@ const defaultKnobs = () => ({
 
 const cnBreadcrumbsStories = cn('BreadcrumbsStories');
 
-export function Playground() {
-  const { size, onlyIconRoot, fitMode, withIcon, lastItemIsLink } = defaultKnobs();
+export const Playground = () => {
+  const { size, onlyIconRoot, fitMode, withIcon, lastItemIsLink } =
+    defaultKnobs();
 
   return (
     <div className={cnBreadcrumbsStories()}>
@@ -74,11 +78,13 @@ export function Playground() {
           props.e.preventDefault();
         }}
         lastItemIsLink={lastItemIsLink}
-        getItemIcon={(item) => (withIcon ? item.icon || IconDocFilled : undefined)}
+        getItemIcon={(item) =>
+          withIcon ? item.icon || IconDocFilled : undefined
+        }
       />
     </div>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Навигация/Breadcrumbs(Canary)',

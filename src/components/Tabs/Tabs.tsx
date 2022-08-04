@@ -7,11 +7,8 @@ import { useResizeObserved } from '../../hooks/useResizeObserved/useResizeObserv
 import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
-
 import { TabsFitModeDropdownWrapper } from './FitModeDropdownWrapper/TabsFitModeDropdownWrapper';
 import { TabsFitModeScrollWrapper } from './FitModeScrollWrapper/TabsFitModeScrollWrapper';
-import { TabsBorderLine, TabsRunningLine } from './Line/TabsLine';
-import { cnTabsTab, TabsTab } from './Tab/TabsTab';
 import {
   getTabsDirection,
   RenderItemsListProp,
@@ -19,6 +16,8 @@ import {
   TabsDirection,
   TabsFitModeWrapperProps,
 } from './helpers';
+import { TabsBorderLine, TabsRunningLine } from './Line/TabsLine';
+import { cnTabsTab, TabsTab } from './Tab/TabsTab';
 
 export const tabsSizes = ['m', 's'] as const;
 export type TabsPropSize = typeof tabsSizes[number];
@@ -60,7 +59,7 @@ type RenderItem<ITEM, ELEMENT extends HTMLElement> = (
 
 export type TabsProps<
   ITEM,
-  ITEM_ELEMENT extends HTMLElement = HTMLButtonElement
+  ITEM_ELEMENT extends HTMLElement = HTMLButtonElement,
 > = PropsWithHTMLAttributesAndRef<
   {
     size?: TabsPropSize;
@@ -101,7 +100,9 @@ function renderItemDefault<ITEM, ITEMELEMENT extends HTMLElement>(
   return (
     <TabsTab
       {...otherProps}
-      onChange={(onChange as unknown) as React.MouseEventHandler<HTMLButtonElement>}
+      onChange={
+        onChange as unknown as React.MouseEventHandler<HTMLButtonElement>
+      }
     />
   );
 }
@@ -134,14 +135,20 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
   const tabsDirection = getTabsDirection(linePosition);
   const isVertical = tabsDirection === 'vertical';
   const tabRefs = useMemo(
-    () => new Array(items.length).fill(null).map(() => createRef<HTMLDivElement>()),
+    () =>
+      new Array(items.length).fill(null).map(() => createRef<HTMLDivElement>()),
     [items, fitMode, isVertical],
   );
   const tabsDimensions = useResizeObserved(
     tabRefs,
     (el): TabDimensions => ({
       size: el?.[isVertical ? 'offsetHeight' : 'offsetWidth'] ?? 0,
-      gap: el ? parseInt(getComputedStyle(el)[isVertical ? 'marginBottom' : 'marginRight'], 10) : 0,
+      gap: el
+        ? parseInt(
+            getComputedStyle(el)[isVertical ? 'marginBottom' : 'marginRight'],
+            10,
+          )
+        : 0,
     }),
   );
 
@@ -162,13 +169,18 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
       iconSize,
     });
 
-  const renderItemsList: RenderItemsListProp = ({ withRunningLine = true, getTabClassName }) => (
+  const renderItemsList: RenderItemsListProp = ({
+    withRunningLine = true,
+    getTabClassName,
+  }) => (
     <div className={cnTabs('List', { direction: tabsDirection, linePosition })}>
       {items.map((item, idx) => (
         <div
           ref={tabRefs[idx]}
           key={getLabel(item)}
-          className={cnTabs('Tab', { direction: tabsDirection }, [getTabClassName?.(idx)])}
+          className={cnTabs('Tab', { direction: tabsDirection }, [
+            getTabClassName?.(idx),
+          ])}
         >
           {renderItem(item)}
         </div>
@@ -205,16 +217,23 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
   );
 });
 
-const getTabsWrapper = (tabsDirection: TabsDirection, fitMode: TabsPropFitMode) => {
+const getTabsWrapper = (
+  tabsDirection: TabsDirection,
+  fitMode: TabsPropFitMode,
+) => {
   if (tabsDirection === 'vertical') {
     return OnlyListWrapper;
   }
 
-  return fitMode === 'scroll' ? TabsFitModeScrollWrapper : TabsFitModeDropdownWrapper;
+  return fitMode === 'scroll'
+    ? TabsFitModeScrollWrapper
+    : TabsFitModeDropdownWrapper;
 };
 
 const OnlyListWrapper = <ITEM,>({
   renderItemsList,
-}: TabsFitModeWrapperProps<ITEM>): React.ReactElement | null => <>{renderItemsList({})}</>;
+}: TabsFitModeWrapperProps<ITEM>): React.ReactElement | null => (
+  <>{renderItemsList({})}</>
+);
 
 export { TabsTab, cnTabsTab };

@@ -15,7 +15,12 @@ const StepContent = () => {
     <div className={cnProgressStepBarExampleContent('Content')}>
       <IconDinosaur size="xs" view="secondary" />
       <Tag mode="button" onClick={() => console.log()} label="Черновик" />
-      <Tag mode="button" onClick={() => console.log()} label="" icon={IconSettings} />
+      <Tag
+        mode="button"
+        onClick={() => console.log()}
+        label=""
+        icon={IconSettings}
+      />
     </div>
   );
 };

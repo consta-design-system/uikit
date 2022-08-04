@@ -4,7 +4,7 @@ import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/D
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Table, TableColumn } from '../../../Table';
 
-export function TableExampleSort() {
+export const TableExampleSort = () => {
   const rows = [
     { id: '1', letter: 'А' },
     { id: '2', letter: 'Б' },
@@ -31,4 +31,4 @@ export function TableExampleSort() {
       <Table columns={columns} rows={rows} />
     </StoryBookExample>
   );
-}
+};

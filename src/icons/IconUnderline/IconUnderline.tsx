@@ -1,5 +1,4 @@
 import { createIcon } from '../createIcon/createIcon';
-
 import IconUnderlineSizeM from './IconUnderline_size_m';
 import IconUnderlineSizeS from './IconUnderline_size_s';
 

@@ -1,5 +1,5 @@
-import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import React from 'react';
 
 import { cnSteps, Steps } from '../Steps';
 
@@ -27,7 +27,10 @@ const items: Item[] = [
 
 const additionalClass = 'additionalClass';
 
-const renderComponent = (props: { size?: StepsProps['size']; onChange?: OnChange }) => {
+const renderComponent = (props: {
+  size?: StepsProps['size'];
+  onChange?: OnChange;
+}) => {
   const handleChange = jest.fn();
 
   return render(
@@ -85,7 +88,9 @@ describe('Компонент Steps', () => {
         fireEvent.click(item);
 
         expect(handleChange).toHaveBeenCalledTimes(1);
-        expect(handleChange).toHaveBeenCalledWith(expect.objectContaining({ value: items[1] }));
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({ value: items[1] }),
+        );
       });
     });
 

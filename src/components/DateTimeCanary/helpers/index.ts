@@ -20,7 +20,13 @@ export const dateComparer = (a?: Date, b?: Date): number =>
 export const getStartAndEndDate = (date1: Date, date2: Date): Date[] =>
   [date1, date2].sort(dateComparer);
 
-export const isDateSelected = ({ date, value }: { date: Date; value?: Date }): boolean => {
+export const isDateSelected = ({
+  date,
+  value,
+}: {
+  date: Date;
+  value?: Date;
+}): boolean => {
   return value ? isSameDay(value, date) : false;
 };
 
@@ -62,7 +68,10 @@ export const getMonthTitle = (date: Date, locale: Locale): string => {
   return format(date, 'LLLL', { locale });
 };
 
-export const getMonthTitleAbbreviated = (date: Date, locale: Locale): string => {
+export const getMonthTitleAbbreviated = (
+  date: Date,
+  locale: Locale,
+): string => {
   const title = format(date, 'MMM', { locale });
 
   if (title[title.length - 1] === '.') {

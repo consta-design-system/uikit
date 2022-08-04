@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-import { content } from '../../../__mocks__/mock.data';
 import { IconAdd } from '../../../../../icons/IconAdd/IconAdd';
 import { IconRemove } from '../../../../../icons/IconRemove/IconRemove';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
+import { content } from '../../../__mocks__/mock.data';
 import { Collapse } from '../../../Collapse';
 
 export const CollapseExampleIconCustomIconDirection = () => {

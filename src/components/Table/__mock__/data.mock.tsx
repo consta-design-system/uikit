@@ -30,7 +30,10 @@ export const rangeFilterer = (
     return true;
   }
 
-  return Number(value) <= Number(filterValue.max) && Number(value) >= Number(filterValue.min);
+  return (
+    Number(value) <= Number(filterValue.max) &&
+    Number(value) >= Number(filterValue.min)
+  );
 };
 
 export const rows = [
@@ -262,8 +265,13 @@ export const customFilters: Filters<typeof rows[number]> = [
     id: 'field',
     name: 'Месторождение: ',
     field: 'field',
-    filterer: (cellValue, filterValues: Array<{ value: string; name: string }>) => {
-      return filterValues.some((filterValue) => filterValue && filterValue.value === cellValue);
+    filterer: (
+      cellValue,
+      filterValues: Array<{ value: string; name: string }>,
+    ) => {
+      return filterValues.some(
+        (filterValue) => filterValue && filterValue.value === cellValue,
+      );
     },
     component: {
       name: TableTextFilter,
@@ -611,7 +619,9 @@ export const tableWithExpandableRowsData = {
   borderBetweenRows: true,
 };
 
-export const tableWithMultiLevelHeadersData: TableProps<typeof rowsForMultiLevelHeadersData[number]> = {
+export const tableWithMultiLevelHeadersData: TableProps<
+  typeof rowsForMultiLevelHeadersData[number]
+> = {
   columns: [
     {
       title: 'Месторождение',
@@ -710,7 +720,9 @@ const tableWithTrafficLightDataRows = [
   },
 ];
 
-export const tableWithBagdeData: TableProps<typeof tableWithTrafficLightDataRows[number]> = {
+export const tableWithBagdeData: TableProps<
+  typeof tableWithTrafficLightDataRows[number]
+> = {
   columns: [
     {
       title: 'Локация',
@@ -866,7 +878,12 @@ export const TRANSFORMED_COLUMNS = [
       title: 'Ответственный',
       columns: [
         { title: 'Смена 1', accessor: 'responsible1', align: 'left' },
-        { title: 'Смена 2', accessor: 'responsible2', align: 'left', sortable: true },
+        {
+          title: 'Смена 2',
+          accessor: 'responsible2',
+          align: 'left',
+          sortable: true,
+        },
       ],
       position: { colSpan: 2, topHeaderGridIndex: 3, gridIndex: 6, level: 0 },
     },
@@ -1059,7 +1076,9 @@ const rowsWithObjectFields = [
   },
 ];
 
-export const tableDataWithRenderFn: TableProps<typeof rowsWithObjectFields[number]> = {
+export const tableDataWithRenderFn: TableProps<
+  typeof rowsWithObjectFields[number]
+> = {
   columns: [
     {
       title: 'Месторождение',
@@ -1162,7 +1181,9 @@ export const tableDataWithRenderFn: TableProps<typeof rowsWithObjectFields[numbe
 
 const cnCustomCell = cn('CustomCell');
 
-export const tableDataWithAdditionalClassName: TableProps<typeof rowsWithObjectFields[number]> = {
+export const tableDataWithAdditionalClassName: TableProps<
+  typeof rowsWithObjectFields[number]
+> = {
   columns: [
     {
       title: 'Месторождение',
@@ -1193,13 +1214,10 @@ export const tableDataWithAdditionalClassName: TableProps<typeof rowsWithObjectF
   ],
   rows: rowsWithObjectFields,
   getAdditionalClassName: ({ column, row, isActive }) =>
-    cnCustomCell({ darked: !isActive && row.type === 'Нефтяное' && !column.mergeCells }),
+    cnCustomCell({
+      darked: !isActive && row.type === 'Нефтяное' && !column.mergeCells,
+    }),
 };
-
-enum CustomIDs {
-  fullName = 'fullName',
-  yearOfRegistration = 'yearOfRegistration',
-}
 
 export { CustomIDs };
 
@@ -1287,27 +1305,53 @@ export const partOfTableDataForCustomTagLabelFunction = {
   ],
 };
 
-export const withControlTableMock: TableProps<typeof rowsForCustomTagLabelFunction[number]> = {
+export const withControlTableMock: TableProps<
+  typeof rowsForCustomTagLabelFunction[number]
+> = {
   columns: [
     {
       title: 'Имя',
       accessor: CustomIDs.fullName,
       sortable: true,
       align: 'right',
-      control: () => <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconAdd} />,
+      control: () => (
+        <Button
+          size="xs"
+          iconSize="s"
+          view="clear"
+          onlyIcon
+          iconLeft={IconAdd}
+        />
+      ),
     },
     {
       title: 'Год регистрации',
       accessor: CustomIDs.yearOfRegistration,
       sortable: true,
       align: 'right',
-      control: () => <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconRemove} />,
+      control: () => (
+        <Button
+          size="xs"
+          iconSize="s"
+          view="clear"
+          onlyIcon
+          iconLeft={IconRemove}
+        />
+      ),
     },
     {
       title: 'Телефон',
       align: 'right',
       accessor: 'phone',
-      control: () => <Button size="xs" iconSize="s" view="clear" onlyIcon iconLeft={IconAdd} />,
+      control: () => (
+        <Button
+          size="xs"
+          iconSize="s"
+          view="clear"
+          onlyIcon
+          iconLeft={IconAdd}
+        />
+      ),
     },
   ],
   rows: rowsForCustomTagLabelFunction,
@@ -1324,7 +1368,9 @@ export const withControlTableMock: TableProps<typeof rowsForCustomTagLabelFuncti
   ],
 };
 
-export const withHiddenColumnTableMock: TableProps<typeof rowsForCustomTagLabelFunction[number]> = {
+export const withHiddenColumnTableMock: TableProps<
+  typeof rowsForCustomTagLabelFunction[number]
+> = {
   columns: [
     {
       title: 'Имя',

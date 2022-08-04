@@ -11,7 +11,11 @@ export const items: Item[] = [
   { name: 'Пять' },
 ];
 
-export const itemsHead: Item[] = [{ name: 'Тумбочка' }, { name: 'Банк' }, { name: 'Матрас' }];
+export const itemsHead: Item[] = [
+  { name: 'Тумбочка' },
+  { name: 'Банк' },
+  { name: 'Матрас' },
+];
 
 export const itemsHead2: Item[] = [
   { name: 'В тумбочке' },
@@ -19,9 +23,13 @@ export const itemsHead2: Item[] = [
   { name: 'Под матрасом' },
 ];
 
-export const itemsNeg: Item[] = [{ name: 'Hе хочу больше этих ваших дурацких булок' }];
+export const itemsNeg: Item[] = [
+  { name: 'Hе хочу больше этих ваших дурацких булок' },
+];
 
-export const itemsNeg2: Item[] = [{ name: 'Съесть ещё этих мягких французских булок' }];
+export const itemsNeg2: Item[] = [
+  { name: 'Съесть ещё этих мягких французских булок' },
+];
 
 export const itemsGen: Item[] = [
   { name: 'Этих' },

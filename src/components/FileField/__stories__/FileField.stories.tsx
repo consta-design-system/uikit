@@ -1,13 +1,12 @@
-import React from 'react';
 import { action } from '@storybook/addon-actions';
+import React from 'react';
 
 import { createMetadata } from '../../../utils/storybook';
 import { Button } from '../../Button/Button';
 import { FileField } from '../FileField';
-
 import mdx from './FileField.docs.mdx';
 
-export function Playground() {
+export const Playground = () => {
   return (
     <div>
       <FileField id="FileField" onChange={action('Файлы выбраны')} multiple>
@@ -15,7 +14,7 @@ export function Playground() {
       </FileField>
     </div>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Базовые/FileField',

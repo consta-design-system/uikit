@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function ThemeImage(props: React.SVGProps<SVGSVGElement>) {
+const ThemeImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <path fill="#ECF1F4" d="M0 0h200v120H0z" />
@@ -22,6 +22,6 @@ function ThemeImage(props: React.SVGProps<SVGSVGElement>) {
       <path fill="#F6FBFD" fillOpacity={0.3} d="M133 78h35v8h-35z" />
     </svg>
   );
-}
+};
 
 export default ThemeImage;

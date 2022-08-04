@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function IconDisconnectionSizeS(props: React.SVGProps<SVGSVGElement>) {
+const IconDisconnectionSizeS = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 16 16" {...props}>
       <g clipPath="url(#SvgIconDisconnection_size_s__clip0)">
@@ -13,6 +13,6 @@ function IconDisconnectionSizeS(props: React.SVGProps<SVGSVGElement>) {
       </defs>
     </svg>
   );
-}
+};
 
 export default IconDisconnectionSizeS;

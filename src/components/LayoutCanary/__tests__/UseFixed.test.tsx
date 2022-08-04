@@ -1,7 +1,10 @@
 import * as mockData from '../__mocks__/mock.data';
 import { positioningElement, UseFixedData } from '../useFixed';
 
-type ComparePositions = (position1: UseFixedData, position2: UseFixedData) => boolean;
+type ComparePositions = (
+  position1: UseFixedData,
+  position2: UseFixedData,
+) => boolean;
 
 const comparePositions: ComparePositions = (position1, position2) =>
   position1.top === position2.top &&
@@ -19,7 +22,8 @@ describe('Функция позиционирования в useFixed', () => {
         comparePositions(
           mockData.layoutTopWithoutScroll,
           positioningElement(
-            mockData.scrollContainerWithoutScroll.offsetTop - mockData.layoutTopFixed.offsetTop,
+            mockData.scrollContainerWithoutScroll.offsetTop -
+              mockData.layoutTopFixed.offsetTop,
             mockData.layoutTopFixed,
             mockData.scrollContainerWithoutScroll,
             undefined,
@@ -37,7 +41,8 @@ describe('Функция позиционирования в useFixed', () => {
         comparePositions(
           mockData.layoutBottomWithoutScroll,
           positioningElement(
-            mockData.scrollContainerWithoutScroll.offsetTop - mockData.layoutBottomFixed.offsetTop,
+            mockData.scrollContainerWithoutScroll.offsetTop -
+              mockData.layoutBottomFixed.offsetTop,
             mockData.layoutBottomFixed,
             mockData.scrollContainerWithoutScroll,
             undefined,
@@ -55,7 +60,8 @@ describe('Функция позиционирования в useFixed', () => {
         comparePositions(
           mockData.layoutTopWithScroll,
           positioningElement(
-            mockData.scrollContainerWithScroll.offsetTop - mockData.layoutTopFixed.offsetTop,
+            mockData.scrollContainerWithScroll.offsetTop -
+              mockData.layoutTopFixed.offsetTop,
             mockData.layoutTopFixed,
             mockData.scrollContainerWithScroll,
             undefined,
@@ -72,7 +78,8 @@ describe('Функция позиционирования в useFixed', () => {
           comparePositions(
             mockData.layoutBottomWithScroll,
             positioningElement(
-              mockData.scrollContainerWithScroll.offsetTop - mockData.layoutBottomFixed.offsetTop,
+              mockData.scrollContainerWithScroll.offsetTop -
+                mockData.layoutBottomFixed.offsetTop,
               mockData.layoutBottomFixed,
               mockData.scrollContainerWithScroll,
               undefined,
@@ -90,7 +97,8 @@ describe('Функция позиционирования в useFixed', () => {
           comparePositions(
             mockData.layoutTopAnchor,
             positioningElement(
-              mockData.scrollContainerWithScroll.offsetTop - mockData.layoutTopFixed.offsetTop,
+              mockData.scrollContainerWithScroll.offsetTop -
+                mockData.layoutTopFixed.offsetTop,
               mockData.layoutTopFixed,
               mockData.scrollContainerWithScroll,
               mockData.anchor,
@@ -108,7 +116,8 @@ describe('Функция позиционирования в useFixed', () => {
           comparePositions(
             mockData.layoutBottomAnchor,
             positioningElement(
-              mockData.scrollContainerWithScroll.offsetTop - mockData.layoutBottomFixed.offsetTop,
+              mockData.scrollContainerWithScroll.offsetTop -
+                mockData.layoutBottomFixed.offsetTop,
               mockData.layoutBottomFixed,
               mockData.scrollContainerWithScroll,
               mockData.anchor,

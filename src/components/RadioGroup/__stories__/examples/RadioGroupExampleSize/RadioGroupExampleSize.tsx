@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { simpleItems } from '../../../__mocks__/data.mock';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
+import { simpleItems } from '../../../__mocks__/data.mock';
 import { RadioGroup } from '../../../RadioGroup';
 
-export function RadioGroupExampleSize() {
+export const RadioGroupExampleSize = () => {
   const [value, setValue] = React.useState<string | null>(simpleItems[0]);
 
   return (
@@ -28,4 +28,4 @@ export function RadioGroupExampleSize() {
       />
     </StoryBookExample>
   );
-}
+};

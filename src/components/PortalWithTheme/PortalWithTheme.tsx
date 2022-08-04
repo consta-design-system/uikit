@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { Theme, ThemeProps } from '../Theme/Theme';
-
 import {
   PortalWithThemeProvider,
   usePortalContext,
@@ -28,7 +27,10 @@ const getZIndex = (contextZindex?: number, propZindex?: number | string) => {
 };
 
 export const PortalWithTheme = React.forwardRef<HTMLDivElement, Props>(
-  ({ children, container = window.document.body, style: styleProp, ...rest }, ref) => {
+  (
+    { children, container = window.document.body, style: styleProp, ...rest },
+    ref,
+  ) => {
     const { addRefs, zIndex: zIndexContext } = usePortalContext();
 
     const themeRef = useRef(null);

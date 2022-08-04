@@ -34,7 +34,9 @@ export type ComboboxSelectProps<ITEM> = CommonSelectProps<ITEM> &
     inputRef?: React.RefObject<HTMLInputElement | null>;
   };
 
-type ComboboxType = <ITEM>(props: ComboboxSelectProps<ITEM>) => React.ReactElement | null;
+type ComboboxType = <ITEM>(
+  props: ComboboxSelectProps<ITEM>,
+) => React.ReactElement | null;
 
 export const Combobox: ComboboxType = (props) => {
   const defaultOptionsRef = useRef<HTMLDivElement | null>(null);
@@ -80,7 +82,8 @@ export const Combobox: ComboboxType = (props) => {
   };
 
   const controlRef = useRef<HTMLDivElement | null>(null);
-  const arrValue = typeof value !== 'undefined' && value !== null ? [value] : null;
+  const arrValue =
+    typeof value !== 'undefined' && value !== null ? [value] : null;
   const hasGroup = typeof getGroupOptions === 'function';
 
   const scrollToIndex = (index: number): void => {
@@ -88,9 +91,8 @@ export const Combobox: ComboboxType = (props) => {
       return;
     }
 
-    const elements: NodeListOf<HTMLDivElement> = dropdownRef.current.querySelectorAll(
-      'div[role=option]',
-    );
+    const elements: NodeListOf<HTMLDivElement> =
+      dropdownRef.current.querySelectorAll('div[role=option]');
 
     if (index > elements.length - 1 || index < 0) {
       return;
@@ -99,7 +101,10 @@ export const Combobox: ComboboxType = (props) => {
     scrollIntoView(elements[index], dropdownRef.current);
   };
 
-  const searchFunctionDefault = (item: typeof value, searchValue: string): boolean => {
+  const searchFunctionDefault = (
+    item: typeof value,
+    searchValue: string,
+  ): boolean => {
     const searchValueLowerCase = searchValue.toLowerCase();
 
     return getOptionLabel(item as Item)
@@ -193,7 +198,8 @@ export const Combobox: ComboboxType = (props) => {
   };
 
   const showPlaceholder =
-    (!arrValue?.length && inputData.value === '') || (arrValue === null && inputData.value === '');
+    (!arrValue?.length && inputData.value === '') ||
+    (arrValue === null && inputData.value === '');
 
   const showInput = arrValue !== null && arrValue.length > 0;
 
@@ -251,9 +257,13 @@ export const Combobox: ComboboxType = (props) => {
         >
           <div className={cnSelect('ControlValueContainer')}>
             {arrValue && (
-              <span className={cnSelect('ControlValue')}>{getOptionLabel(arrValue[0])}</span>
+              <span className={cnSelect('ControlValue')}>
+                {getOptionLabel(arrValue[0])}
+              </span>
             )}
-            {showPlaceholder && <span className={cnSelect('Placeholder')}>{placeholder}</span>}
+            {showPlaceholder && (
+              <span className={cnSelect('Placeholder')}>{placeholder}</span>
+            )}
             <input
               {...getToggleProps({ onChange: handleInputChange })}
               type="text"
@@ -286,7 +296,10 @@ export const Combobox: ComboboxType = (props) => {
             tabIndex={-1}
             onClick={handleToggleDropdown}
           >
-            <IconSelect size="xs" className={cnSelect('DropdownIndicatorIcon')} />
+            <IconSelect
+              size="xs"
+              className={cnSelect('DropdownIndicatorIcon')}
+            />
           </button>
         </span>
       </div>

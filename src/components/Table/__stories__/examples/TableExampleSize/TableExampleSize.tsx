@@ -23,7 +23,7 @@ const columns: TableColumn<typeof rows[number]>[] = [
   },
 ];
 
-export function TableExampleSize() {
+export const TableExampleSize = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Table columns={columns} rows={rows} size="s" />
@@ -31,4 +31,4 @@ export function TableExampleSize() {
       <Table columns={columns} rows={rows} size="l" />
     </StoryBookExample>
   );
-}
+};

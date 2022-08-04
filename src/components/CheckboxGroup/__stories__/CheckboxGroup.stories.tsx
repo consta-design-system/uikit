@@ -1,5 +1,5 @@
-import React from 'react';
 import { boolean, select } from '@storybook/addon-knobs';
+import React from 'react';
 
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
@@ -12,7 +12,6 @@ import {
   checkboxGroupSizes,
   checkboxGroupViews,
 } from '../CheckboxGroup';
-
 import mdx from './CheckboxGroup.docs.mdx';
 
 const cnCheckboxGroupStories = cn('CheckboxGroupStories');
@@ -33,11 +32,15 @@ const items: Item[] = [
 const defaultKnobs = () => ({
   size: select('size', checkboxGroupSizes, checkboxGroupDefaultSize),
   view: select('view', checkboxGroupViews, checkboxGroupDefaultView),
-  direction: select('direction', checkboxGroupDirections, checkboxGroupDefaultDirection),
+  direction: select(
+    'direction',
+    checkboxGroupDirections,
+    checkboxGroupDefaultDirection,
+  ),
   disabled: boolean('disabled', false),
 });
 
-export function Playground() {
+export const Playground = () => {
   const [value, setValue] = React.useState<Item[] | null>(null);
   const { size, view, direction, disabled } = defaultKnobs();
 
@@ -59,7 +62,7 @@ export function Playground() {
       </form>
     </div>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Базовые/CheckboxGroup',

@@ -14,15 +14,23 @@ const itemsThree = ['Кусочек метеорита', 'Хвост комет�
 
 const itemsFour = ['На почту', 'Курьером', 'Дроном', 'Оставить у двери'];
 
-const itemsChecked = ['Под бобра', 'В кружок', 'А ля рюс', 'С бакенбардами', 'Только кончики'];
+const itemsChecked = [
+  'Под бобра',
+  'В кружок',
+  'А ля рюс',
+  'С бакенбардами',
+  'Только кончики',
+];
 
-export function RadioGroupExampleMore() {
+export const RadioGroupExampleMore = () => {
   const [value, setValue] = React.useState<string | null>(itemsOne[0]);
   const [valueTwo, setValueTwo] = React.useState<string | null>(itemsTwo[0]);
 
   return (
     <div
-      className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' })])}
+      className={cnDocsDecorator('Section', [
+        wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
+      ])}
     >
       <div className={cnDocsExample()}>
         <p className={cnDocsExample('Caption')}>
@@ -36,7 +44,9 @@ export function RadioGroupExampleMore() {
             onChange={({ value }) => setValue(value)}
           />
         </div>
-        <p className={cnDocsExample('Status', { view: 'wrong' })}>Неправильно</p>
+        <p className={cnDocsExample('Status', { view: 'wrong' })}>
+          Неправильно
+        </p>
       </div>
       <div className={cnDocsExample()}>
         <p className={cnDocsExample('Caption')}>
@@ -54,15 +64,17 @@ export function RadioGroupExampleMore() {
       </div>
     </div>
   );
-}
+};
 
-export function RadioGroupExampleOne() {
+export const RadioGroupExampleOne = () => {
   const [value, setValue] = React.useState<string | null>(itemsThree[0]);
   const [valueTwo, setValueTwo] = React.useState<string | null>(itemsFour[0]);
 
   return (
     <div
-      className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' })])}
+      className={cnDocsDecorator('Section', [
+        wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
+      ])}
     >
       <div className={cnDocsExample()}>
         <p className={cnDocsExample('Caption')}>
@@ -76,7 +88,9 @@ export function RadioGroupExampleOne() {
             onChange={({ value }) => setValue(value)}
           />
         </div>
-        <p className={cnDocsExample('Status', { view: 'wrong' })}>Неправильно</p>
+        <p className={cnDocsExample('Status', { view: 'wrong' })}>
+          Неправильно
+        </p>
       </div>
       <div className={cnDocsExample()}>
         <p className={cnDocsExample('Caption')}>
@@ -94,9 +108,9 @@ export function RadioGroupExampleOne() {
       </div>
     </div>
   );
-}
+};
 
-export function RadioGroupExampleChecked() {
+export const RadioGroupExampleChecked = () => {
   const [value, setValue] = React.useState<string | null>(itemsChecked[0]);
 
   return (
@@ -112,4 +126,4 @@ export function RadioGroupExampleChecked() {
       />
     </StoryBookExample>
   );
-}
+};

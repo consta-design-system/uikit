@@ -13,11 +13,16 @@ export const TextExampleSpacing = () => {
     >
       {textPropSpacing.map((item, index) => (
         <div key={index} className={wp.tplGrid('fraction', { row: 'third' })}>
-          <Text size="s" view="ghost" className={wp.decorator({ 'indent-b': 'xs' })}>
+          <Text
+            size="s"
+            view="ghost"
+            className={wp.decorator({ 'indent-b': 'xs' })}
+          >
             {`text*spacing*${item}`}
           </Text>
           <Text spacing={item}>
-            «Газпром нефть» ведет работу в крупнейших российских нефтегазовых регионах.
+            «Газпром нефть» ведет работу в крупнейших российских нефтегазовых
+            регионах.
           </Text>
         </div>
       ))}

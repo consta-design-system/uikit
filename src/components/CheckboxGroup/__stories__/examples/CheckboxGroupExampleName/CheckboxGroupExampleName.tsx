@@ -21,7 +21,7 @@ import React from 'react';
 //   disabled?: boolean;
 // };
 
-export function CheckboxGroupExampleName() {
+export const CheckboxGroupExampleName = () => {
   //
   return (
     <div />
@@ -39,9 +39,9 @@ export function CheckboxGroupExampleName() {
     //   />
     // </StoryBookExample>
   );
-}
+};
 
-export function CheckboxGroupExampleHead() {
+export const CheckboxGroupExampleHead = () => {
   //  const [value, setValue] = React.useState<Item | null>(null);
 
   return (
@@ -83,9 +83,9 @@ export function CheckboxGroupExampleHead() {
     //   </div>
     // </div>
   );
-}
+};
 
-export function CheckboxExampleGroupHead3() {
+export const CheckboxExampleGroupHead3 = () => {
   // const [value, setValue] = React.useState<Item[] | null>(null);
 
   return (
@@ -104,9 +104,9 @@ export function CheckboxExampleGroupHead3() {
     //   />
     // </StoryBookExample>
   );
-}
+};
 
-export function CheckboxGroupExampleNeg() {
+export const CheckboxGroupExampleNeg = () => {
   // const [value, setValue] = React.useState<Item | null>(null);
 
   return (
@@ -142,9 +142,9 @@ export function CheckboxGroupExampleNeg() {
     //   </div>
     // </div>
   );
-}
+};
 
-export function CheckboxGroupExampleGeneral() {
+export const CheckboxGroupExampleGeneral = () => {
   //  const [value, setValue] = React.useState<Item | null>(null);
 
   return (
@@ -189,4 +189,4 @@ export function CheckboxGroupExampleGeneral() {
     //   </div>
     // </div>
   );
-}
+};

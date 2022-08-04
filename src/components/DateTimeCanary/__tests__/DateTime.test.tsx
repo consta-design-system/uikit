@@ -1,8 +1,11 @@
-import * as React from 'react';
 import { render } from '@testing-library/react';
+import * as React from 'react';
 
-import { DateTime, dateTimePropType, dateTimePropView } from '../DateTimeCanary';
-
+import {
+  DateTime,
+  dateTimePropType,
+  dateTimePropView,
+} from '../DateTimeCanary';
 import { getAdditionalControls, getRender, testId } from './helpers';
 
 type DateTimeProps = React.ComponentProps<typeof DateTime>;
@@ -53,7 +56,9 @@ describe('Компонент DateTime', () => {
           it(`рендер при renderAdditionalControls="${renderType}" type="${type}" view="${view}"`, () => {
             renderComponent({
               renderAdditionalControls:
-                renderAdditionalControls[renderType as keyof typeof renderAdditionalControls],
+                renderAdditionalControls[
+                  renderType as keyof typeof renderAdditionalControls
+                ],
             });
             expect(getAdditionalControls()).toHaveTextContent(content);
           });

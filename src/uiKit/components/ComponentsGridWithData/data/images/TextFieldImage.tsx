@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function TextFieldImage(props: React.SVGProps<SVGSVGElement>) {
+const TextFieldImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <path
@@ -15,6 +15,6 @@ function TextFieldImage(props: React.SVGProps<SVGSVGElement>) {
       <path d="M96 72h-1V48h1v24z" fill="#002033" fillOpacity={0.6} />
     </svg>
   );
-}
+};
 
 export default TextFieldImage;

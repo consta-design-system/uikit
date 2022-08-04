@@ -17,7 +17,11 @@ export const ContextMenuExampleOutsideClick = () => {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState<boolean>(true);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section', [cnContextMenuExampleOutsideClick()])}>
+    <StoryBookExample
+      className={cnDocsDecorator('Section', [
+        cnContextMenuExampleOutsideClick(),
+      ])}
+    >
       <Button iconLeft={IconAdd} ref={ref} onClick={() => setIsOpen(!isOpen)} />
       {isOpen && (
         <ContextMenu

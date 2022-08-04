@@ -1,5 +1,5 @@
-import React from 'react';
 import { boolean, select } from '@storybook/addon-knobs';
+import React from 'react';
 
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
@@ -12,7 +12,6 @@ import {
   switchGroupSizes,
   switchGroupViews,
 } from '../SwitchGroup';
-
 import mdx from './SwitchGroup.docs.mdx';
 
 const cnSwitchGroupStories = cn('SwitchGroupStories');
@@ -33,11 +32,15 @@ const items: Item[] = [
 const defaultKnobs = () => ({
   size: select('size', switchGroupSizes, switchGroupDefaultSize),
   view: select('view', switchGroupViews, switchGroupDefaultView),
-  direction: select('direction', switchGroupDirections, switchGroupDefaultDirection),
+  direction: select(
+    'direction',
+    switchGroupDirections,
+    switchGroupDefaultDirection,
+  ),
   disabled: boolean('disabled', false),
 });
 
-export function Playground() {
+export const Playground = () => {
   const [value, setValue] = React.useState<Item[] | null>(null);
   const { size, view, direction, disabled } = defaultKnobs();
 
@@ -59,7 +62,7 @@ export function Playground() {
       </form>
     </div>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Базовые/SwitchGroup',

@@ -10,7 +10,12 @@ export const CardExampleShadow = () => {
       <Card verticalSpace="2xl" horizontalSpace="2xl" status="success">
         <Text>Карточка с тенью</Text>
       </Card>
-      <Card verticalSpace="2xl" horizontalSpace="2xl" status="success" shadow={false}>
+      <Card
+        verticalSpace="2xl"
+        horizontalSpace="2xl"
+        status="success"
+        shadow={false}
+      >
         <Text>Карточка без тени</Text>
       </Card>
     </StoryBookExample>

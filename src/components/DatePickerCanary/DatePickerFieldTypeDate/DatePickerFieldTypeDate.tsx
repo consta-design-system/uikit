@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { format, isValid, isWithinInterval, parse } from 'date-fns';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
 import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
@@ -12,7 +12,6 @@ import {
   datePickerPropSeparatorDefault,
   getPartsDate,
 } from '../helpers';
-
 import { DatePickerFieldTypeDateProps, useImask } from './helpers';
 
 export const DatePickerFieldTypeDate = React.forwardRef<
@@ -50,11 +49,13 @@ export const DatePickerFieldTypeDate = React.forwardRef<
           return;
         }
 
-        const [dd, MM, yyyy] = getPartsDate(stringValue, formatProp, separator, false, [
-          'dd',
-          'MM',
-          'yyyy',
-        ]);
+        const [dd, MM, yyyy] = getPartsDate(
+          stringValue,
+          formatProp,
+          separator,
+          false,
+          ['dd', 'MM', 'yyyy'],
+        );
 
         if (dd && MM && yyyy) {
           const date = parse(

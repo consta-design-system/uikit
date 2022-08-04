@@ -1,13 +1,16 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import isBefore from 'date-fns/isBefore';
 import isEqual from 'date-fns/isEqual';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 
 import { FieldCaption } from '../../FieldCaption/FieldCaption';
 import { FieldLabel } from '../../FieldLabel/FieldLabel';
 import { DatePickerFieldTypeDate } from '../DatePickerFieldTypeDate/DatePickerFieldTypeDate';
 import { cnDatePickerMixRangeField } from '../DatePickerMixRangeField/DatePickerMixRangeField';
-import { datePickerErrorTypes, getFormForEnd, getFormForStart } from '../helpers';
-
+import {
+  datePickerErrorTypes,
+  getFormForEnd,
+  getFormForStart,
+} from '../helpers';
 import { DatePickerFieldTypeDateRangeProps } from './helpers';
 
 export const DatePickerFieldTypeDateRange = forwardRef<
@@ -78,7 +81,9 @@ export const DatePickerFieldTypeDateRange = forwardRef<
     maxDate,
   };
 
-  const [startDate, setStartDate] = useState<Date | undefined | null>(value?.[0]);
+  const [startDate, setStartDate] = useState<Date | undefined | null>(
+    value?.[0],
+  );
   const [endDate, setEndDate] = useState<Date | undefined | null>(value?.[1]);
   const eventRef = useRef<Event>();
 
@@ -150,7 +155,10 @@ export const DatePickerFieldTypeDateRange = forwardRef<
   return (
     <div
       {...otherProps}
-      className={cnDatePickerMixRangeField({ view, labelPosition, width, size }, [className])}
+      className={cnDatePickerMixRangeField(
+        { view, labelPosition, width, size },
+        [className],
+      )}
       ref={ref}
     >
       {label && (
@@ -192,7 +200,10 @@ export const DatePickerFieldTypeDateRange = forwardRef<
           />
         </div>
         {caption && (
-          <FieldCaption className={cnDatePickerMixRangeField('Caption')} status={status}>
+          <FieldCaption
+            className={cnDatePickerMixRangeField('Caption')}
+            status={status}
+          >
             {caption}
           </FieldCaption>
         )}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { eventInterceptorMap } from './eventInterceptorMap';
 import { EventInterceptorComponentName } from './types';
@@ -13,11 +13,14 @@ export type EventInterceptorProps = {
   };
 };
 
-export type EventInterceptorHandler = ((props: EventInterceptorProps) => void) | undefined;
+export type EventInterceptorHandler =
+  | ((props: EventInterceptorProps) => void)
+  | undefined;
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const EventInterceptorContext = React.createContext<
-  { eventHandler: EventInterceptorHandler; map: EventInterceptorMap } | undefined
+  | { eventHandler: EventInterceptorHandler; map: EventInterceptorMap }
+  | undefined
 >(undefined);
 
 const EventInterceptorProvider = ({
@@ -29,8 +32,10 @@ const EventInterceptorProvider = ({
   eventHandler: EventInterceptorHandler;
   map: EventInterceptorMap;
 }) => {
+  const value = useMemo(() => ({ eventHandler, map }), [eventHandler, map]);
+
   return (
-    <EventInterceptorContext.Provider value={{ eventHandler, map }}>
+    <EventInterceptorContext.Provider value={value}>
       {children}
     </EventInterceptorContext.Provider>
   );

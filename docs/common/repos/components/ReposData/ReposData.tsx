@@ -24,8 +24,8 @@ export const ReposDataBase = () => {
           </Text>
         </div>
         <Text className="ReposDataText">
-          Библиотека интерфейсных компонентов. Основные элементы интерфейса: простые контролы,
-          сложные блоки, тематизация, хуки и миксины.
+          Библиотека интерфейсных компонентов. Основные элементы интерфейса:
+          простые контролы, сложные блоки, тематизация, хуки и миксины.
         </Text>
         <Text>
           <Text
@@ -93,7 +93,11 @@ export const ReposDataBase = () => {
       <div className={wp.tplGrid('fraction', { row: 'third' })}>
         <div
           className={cnDocsDecorator('Section', [
-            wp.tplGrid({ 'xs-columns': 2, 'col-gap': 'full', 'row-gap': 'full' }),
+            wp.tplGrid({
+              'xs-columns': 2,
+              'col-gap': 'full',
+              'row-gap': 'full',
+            }),
           ])}
         >
           <div className={wp.tplGrid('fraction', { row: 'third' })}>
@@ -103,15 +107,17 @@ export const ReposDataBase = () => {
           </div>
           <div
             className={
-              ([wp.tplGrid('fraction', { row: 'third' })], [wp.decorator({ distribute: 'right' })])
+              ([wp.tplGrid('fraction', { row: 'third' })],
+              [wp.decorator({ distribute: 'right' })])
             }
           >
             <Badge label="Не развивается" size="s" status="system" />
           </div>
         </div>
         <Text className="ReposDataText">
-          Библиотека графиков: линейные, столбчатые, круговые диаграммы и другие компоненты, с
-          помощью которых удобно показывать статистику. Библиотека сделана на основе{' '}
+          Библиотека графиков: линейные, столбчатые, круговые диаграммы и другие
+          компоненты, с помощью которых удобно показывать статистику. Библиотека
+          сделана на основе{' '}
           <Text
             className={cnReposData('Link')}
             as="a"
@@ -159,7 +165,11 @@ export const ReposDataSingleComponents = () => {
       <div className={wp.tplGrid('fraction', { row: 'third' })}>
         <div
           className={cnDocsDecorator('Section', [
-            wp.tplGrid({ 'xs-columns': 2, 'col-gap': 'full', 'row-gap': 'full' }),
+            wp.tplGrid({
+              'xs-columns': 2,
+              'col-gap': 'full',
+              'row-gap': 'full',
+            }),
           ])}
         >
           <div className={wp.tplGrid('fraction', { row: 'third' })}>
@@ -169,15 +179,16 @@ export const ReposDataSingleComponents = () => {
           </div>
           <div
             className={
-              ([wp.tplGrid('fraction', { row: 'third' })], [wp.decorator({ distribute: 'right' })])
+              ([wp.tplGrid('fraction', { row: 'third' })],
+              [wp.decorator({ distribute: 'right' })])
             }
           >
             <Badge label="В работе" size="s" status="system" />
           </div>
         </div>
         <Text className="ReposDataText">
-          Компоненты для создания шапки проекта: логотип, меню, поиск, логин и шапка целиком. Можно
-          использовать по отдельности.
+          Компоненты для создания шапки проекта: логотип, меню, поиск, логин и
+          шапка целиком. Можно использовать по отдельности.
         </Text>
         <Text>
           <Text
@@ -207,8 +218,8 @@ export const ReposDataSingleComponents = () => {
         </Text>
 
         <Text className="ReposDataText">
-          Шапка для тех, кто не работает с React. Подходит для веб-проектов, подключается скриптом,
-          есть настройки.
+          Шапка для тех, кто не работает с React. Подходит для веб-проектов,
+          подключается скриптом, есть настройки.
         </Text>
         <Text>
           <Text
@@ -227,8 +238,8 @@ export const ReposDataSingleComponents = () => {
           Stats
         </Text>
         <Text className="ReposDataText">
-          Компонент для отображения чисел, с заголовком, единицами измерения, иконками и другими
-          настройками.
+          Компонент для отображения чисел, с заголовком, единицами измерения,
+          иконками и другими настройками.
         </Text>
         <Text>
           <Text
@@ -257,8 +268,8 @@ export const ReposDataSingleComponents = () => {
           Analytic UI
         </Text>
         <Text className="ReposDataText">
-          Компоненты для аналитики, пока включает один компонент — форму для оценки и обратной связи
-          по методикам NPS и CSI.
+          Компоненты для аналитики, пока включает один компонент — форму для
+          оценки и обратной связи по методикам NPS и CSI.
         </Text>
         <Text>
           <Text

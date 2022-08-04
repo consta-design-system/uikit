@@ -1,6 +1,7 @@
 import { DateRange } from '../../../utils/types/Date';
 
-const inProcent = (number: number, msInPeriod: number) => (number / msInPeriod) * 100;
+const inProcent = (number: number, msInPeriod: number) =>
+  (number / msInPeriod) * 100;
 
 export const getSliderValueRange = (
   decadeDate: Date,
@@ -17,11 +18,17 @@ export const getSliderValueRange = (
   const valueStartDateTime = value[0].getTime();
   const valueEndDateTime = value[1].getTime();
 
-  if (valueStartDateTime > periodEndDateTime || valueEndDateTime < periodStartDateTime) {
+  if (
+    valueStartDateTime > periodEndDateTime ||
+    valueEndDateTime < periodStartDateTime
+  ) {
     return undefined;
   }
 
-  if (valueStartDateTime <= periodStartDateTime && valueEndDateTime >= periodEndDateTime) {
+  if (
+    valueStartDateTime <= periodStartDateTime &&
+    valueEndDateTime >= periodEndDateTime
+  ) {
     return [0, 100];
   }
 
@@ -29,7 +36,9 @@ export const getSliderValueRange = (
 
   const offset = Math.floor(
     inProcent(
-      valueStartDateTime <= periodStartDateTime ? 0 : valueStartDateTime - periodStartDateTime,
+      valueStartDateTime <= periodStartDateTime
+        ? 0
+        : valueStartDateTime - periodStartDateTime,
       msInPeriod,
     ),
   );
@@ -39,7 +48,9 @@ export const getSliderValueRange = (
       ? 100 - offset
       : inProcent(
           valueEndDateTime -
-            (valueStartDateTime <= periodStartDateTime ? periodStartDateTime : valueStartDateTime),
+            (valueStartDateTime <= periodStartDateTime
+              ? periodStartDateTime
+              : valueStartDateTime),
           msInPeriod,
         ),
   );

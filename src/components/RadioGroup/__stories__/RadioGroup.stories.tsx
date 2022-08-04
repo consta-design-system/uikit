@@ -1,9 +1,9 @@
-import React from 'react';
 import { boolean, select } from '@storybook/addon-knobs';
+import React from 'react';
 
-import { Item, items } from '../__mocks__/data.mock';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
+import { Item, items } from '../__mocks__/data.mock';
 import {
   RadioGroup,
   radioGroupDefaultDirection,
@@ -15,13 +15,16 @@ import {
   radioGroupSizes,
   radioGroupViews,
 } from '../RadioGroup';
-
 import mdx from './RadioGroup.docs.mdx';
 
 const cnRadioGroupStories = cn('RadioGroupStories');
 
 const defaultKnobs = () => ({
-  direction: select('direction', radioGroupDirections, radioGroupDefaultDirection),
+  direction: select(
+    'direction',
+    radioGroupDirections,
+    radioGroupDefaultDirection,
+  ),
   size: select('size', radioGroupSizes, radioGroupDefaultSize),
   view: select('view', radioGroupViews, radioGroupDefaultView),
   disabled: boolean('disabled', false),
@@ -29,9 +32,10 @@ const defaultKnobs = () => ({
   align: select('align', radioGroupPropAlign, radioGroupPropAlignDefault),
 });
 
-export function Playground() {
+export const Playground = () => {
   const [value, setValue] = React.useState<Item | null>(null);
-  const { direction, size, view, disabled, disabledItem, align } = defaultKnobs();
+  const { direction, size, view, disabled, disabledItem, align } =
+    defaultKnobs();
 
   const onChange = ({ value }: { value: Item }) => setValue(value);
 
@@ -57,7 +61,7 @@ export function Playground() {
       </form>
     </div>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Базовые/RadioGroup',

@@ -8,7 +8,11 @@ import { Popover } from '../../Popover/Popover';
 import { ContextMenuDivider } from '../ContextMenuDivider/ContextMenuDivider';
 import { ContextMenuGroupHeader } from '../ContextMenuGroupHeader/ContextMenuGroupHeader';
 import { ContextMenuItem } from '../ContextMenuItem/ContextMenuItem';
-import { contextMenuDefaultSize, ContextMenuLevelType, ContextMenuPropSize } from '../helpers';
+import {
+  contextMenuDefaultSize,
+  ContextMenuLevelType,
+  ContextMenuPropSize,
+} from '../helpers';
 
 export const cnContextMenuLevel = cn('ContextMenuLevel');
 
@@ -24,7 +28,9 @@ function renderHeader(
     }
     return <ContextMenuDivider size={size} />;
   }
-  return <ContextMenuGroupHeader label={groupLabel} first={first} size={size} />;
+  return (
+    <ContextMenuGroupHeader label={groupLabel} first={first} size={size} />
+  );
 }
 
 let timers: ReturnType<typeof setTimeout>[] = [];
@@ -88,9 +94,13 @@ export const ContextMenuLevel: ContextMenuLevelType = React.forwardRef(
       sortGroup && ((a, b) => sortGroup(a.key, b.key)),
     );
 
-    const getItemIndex = (groupId: number | string, itemIndex: number) => `${groupId}-${itemIndex}`;
+    const getItemIndex = (groupId: number | string, itemIndex: number) =>
+      `${groupId}-${itemIndex}`;
 
-    const constructItemRefs: () => Record<string, React.RefObject<HTMLDivElement>> = () => {
+    const constructItemRefs: () => Record<
+      string,
+      React.RefObject<HTMLDivElement>
+    > = () => {
       const refs: Record<string, React.RefObject<HTMLDivElement>> = {};
 
       for (const group of groups) {
@@ -117,7 +127,9 @@ export const ContextMenuLevel: ContextMenuLevelType = React.forwardRef(
       <Popover
         {...otherProps}
         anchorRef={anchorRef}
-        className={cnContextMenuLevel({ firstLevel: level === 0, direction }, [className])}
+        className={cnContextMenuLevel({ firstLevel: level === 0, direction }, [
+          className,
+        ])}
         possibleDirections={possibleDirections}
         spareDirection={spareDirection}
         direction={direction}
@@ -129,21 +141,33 @@ export const ContextMenuLevel: ContextMenuLevelType = React.forwardRef(
       >
         {groups.map((group, groupIndex) => {
           const groupLabel =
-            typeof getGroupLabel === 'function' ? getGroupLabel(group.key) : undefined;
+            typeof getGroupLabel === 'function'
+              ? getGroupLabel(group.key)
+              : undefined;
           return (
             <div className={cnContextMenuLevel('Group')} key={group.key}>
               {renderHeader(groupLabel, groupIndex === 0, groups.length, size)}
               {group.items.map((item, index) => {
                 const itemIndex = getItemIndex(group.key, index);
                 const ref = itemsRefs[itemIndex];
-                const disabled = typeof getDisabled === 'function' ? getDisabled(item) : false;
+                const disabled =
+                  typeof getDisabled === 'function' ? getDisabled(item) : false;
                 const label = getLabel(item);
                 const leftSide =
-                  typeof getLeftSideBar === 'function' ? getLeftSideBar(item) : undefined;
+                  typeof getLeftSideBar === 'function'
+                    ? getLeftSideBar(item)
+                    : undefined;
                 const rightSide =
-                  typeof getRightSideBar === 'function' ? getRightSideBar(item) : undefined;
-                const subItems = typeof getSubItems === 'function' ? getSubItems(item) : undefined;
-                const onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+                  typeof getRightSideBar === 'function'
+                    ? getRightSideBar(item)
+                    : undefined;
+                const subItems =
+                  typeof getSubItems === 'function'
+                    ? getSubItems(item)
+                    : undefined;
+                const onClick = (
+                  e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+                ) => {
                   if (!disabled) {
                     if (typeof getItemOnClick === 'function') {
                       getItemOnClick(item)?.(e);
@@ -165,10 +189,14 @@ export const ContextMenuLevel: ContextMenuLevelType = React.forwardRef(
                     : () => {
                         setHoveredParenLevel(level);
                       };
-                const accent = typeof getAccent === 'function' ? getAccent(item) : undefined;
+                const accent =
+                  typeof getAccent === 'function' ? getAccent(item) : undefined;
                 const atributes =
-                  typeof getItemHTMLAttributes === 'function' ? getItemHTMLAttributes(item) : {};
-                const as = typeof getItemAs === 'function' ? getItemAs(item) : undefined;
+                  typeof getItemHTMLAttributes === 'function'
+                    ? getItemHTMLAttributes(item)
+                    : {};
+                const as =
+                  typeof getItemAs === 'function' ? getItemAs(item) : undefined;
 
                 return (
                   <ContextMenuItem

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function BarImage(props: React.SVGProps<SVGSVGElement>) {
+const BarImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <path
@@ -18,6 +18,6 @@ function BarImage(props: React.SVGProps<SVGSVGElement>) {
       <path d="M20 66h105v20H20V66Z" fill="#DEE4E8" />
     </svg>
   );
-}
+};
 
 export default BarImage;

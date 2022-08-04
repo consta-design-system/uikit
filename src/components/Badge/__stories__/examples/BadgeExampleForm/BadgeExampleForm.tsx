@@ -7,7 +7,15 @@ import { Badge } from '../../../Badge';
 
 export const BadgeExampleForm = () => (
   <div className={cnDocsDecorator('Section', [cnDocsExample()])}>
-    <Badge form="default" label="Default badge" className={wp.decorator({ 'indent-r': 'm' })} />
-    <Badge form="round" label="Round badge" className={wp.decorator({ 'indent-r': 'm' })} />
+    <Badge
+      form="default"
+      label="Default badge"
+      className={wp.decorator({ 'indent-r': 'm' })}
+    />
+    <Badge
+      form="round"
+      label="Round badge"
+      className={wp.decorator({ 'indent-r': 'm' })}
+    />
   </div>
 );

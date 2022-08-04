@@ -15,7 +15,11 @@ export const DatePickerExampleRequired = () => {
         label="Обязательное"
         required
       />
-      <DatePicker value={value} onChange={({ value }) => setValue(value)} label="Необязательное" />
+      <DatePicker
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        label="Необязательное"
+      />
     </StoryBookExample>
   );
 };

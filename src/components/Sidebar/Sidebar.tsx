@@ -8,7 +8,10 @@ import { useGlobalKeys } from '../../hooks/useGlobalKeys/useGlobalKeys';
 import { cn } from '../../utils/bem';
 import { cnForCssTransition } from '../../utils/cnForCssTransition';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
-import { PortalWithTheme, usePortalContext } from '../PortalWithTheme/PortalWithTheme';
+import {
+  PortalWithTheme,
+  usePortalContext,
+} from '../PortalWithTheme/PortalWithTheme';
 import { useTheme } from '../Theme/Theme';
 
 type DivProps = JSX.IntrinsicElements['div'];
@@ -17,7 +20,17 @@ const sidebarPropPosition = ['right', 'bottom', 'left', 'top'] as const;
 type SidebarPropPosition = typeof sidebarPropPosition[number];
 const sidebarPropPositionDefault: SidebarPropPosition = sidebarPropPosition[0];
 
-export const sidebarPropSize = ['s', 'm', 'l', 'full', '1/2', '1/3', '1/4', '2/3', '3/4'] as const;
+export const sidebarPropSize = [
+  's',
+  'm',
+  'l',
+  'full',
+  '1/2',
+  '1/3',
+  '1/4',
+  '2/3',
+  '3/4',
+] as const;
 
 export type SidebarPropSize = typeof sidebarPropSize[number];
 const sidebarPropSizeDefault: SidebarPropSize = sidebarPropSize[1];
@@ -53,13 +66,21 @@ type SidebarActionsProps = {
 
 export const cnSidebar = cn('Sidebar');
 
-const SidebarContent: React.FC<SidebarContentProps> = ({ className, children, ...rest }) => (
+const SidebarContent: React.FC<SidebarContentProps> = ({
+  className,
+  children,
+  ...rest
+}) => (
   <div className={cnSidebar('Content', null, [className])} {...rest}>
     {children}
   </div>
 );
 
-const SidebarActions: React.FC<SidebarActionsProps> = ({ className, children, ...rest }) => (
+const SidebarActions: React.FC<SidebarActionsProps> = ({
+  className,
+  children,
+  ...rest
+}) => (
   <div className={cnSidebar('Actions', null, [className])} {...rest}>
     {children}
   </div>
@@ -73,11 +94,14 @@ const ContextConsumer: React.FC<{
 
   useClickOutside({
     isActive: !!onClickOutside,
-    ignoreClicksInsideRefs: [...(ignoreClicksInsideRefs || []), ...(refs || [])],
+    ignoreClicksInsideRefs: [
+      ...(ignoreClicksInsideRefs || []),
+      ...(refs || []),
+    ],
     handler: (event: MouseEvent) => onClickOutside?.(event),
   });
 
-  return <>{children}</>;
+  return children as React.ReactElement;
 };
 
 interface SidebarComponent extends React.FC<SidebarProps>, DivProps {
@@ -136,9 +160,15 @@ export const Sidebar: SidebarComponent = (props) => {
         ref={portalRef}
         container={container}
         className={rootClassName}
-        style={typeof style?.zIndex === 'number' ? { zIndex: style.zIndex } : undefined}
+        style={
+          typeof style?.zIndex === 'number'
+            ? { zIndex: style.zIndex }
+            : undefined
+        }
       >
-        {hasOverlay && <div className={cnSidebar('Overlay')} aria-label="Overlay" />}
+        {hasOverlay && (
+          <div className={cnSidebar('Overlay')} aria-label="Overlay" />
+        )}
         <div
           {...otherProps}
           style={{

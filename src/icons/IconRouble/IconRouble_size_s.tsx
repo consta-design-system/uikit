@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function IconRoubleSizeS(props: React.SVGProps<SVGSVGElement>) {
+const IconRoubleSizeS = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 16 16" {...props}>
       <path d="M8.728 4.412H7.77V7.5h.945c1.008 0 1.684-.532 1.684-1.55s-.676-1.538-1.672-1.538z" />
@@ -11,6 +11,6 @@ function IconRoubleSizeS(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default IconRoubleSizeS;

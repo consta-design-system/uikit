@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function ResponsesImageSuccess(props: React.SVGProps<SVGSVGElement>) {
+const ResponsesImageSuccess = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 420 280" {...props}>
       <path d="M197.078 10.5812L195.088 6.84608L193.589 7.66105L196.413 12.9612L205.241 7.70326L204.381 6.23169L197.078 10.5812Z" />
@@ -57,6 +57,6 @@ function ResponsesImageSuccess(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default ResponsesImageSuccess;

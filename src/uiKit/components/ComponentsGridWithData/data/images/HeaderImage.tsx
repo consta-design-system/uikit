@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function HeaderImage(props: React.SVGProps<SVGSVGElement>) {
+const HeaderImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <path
@@ -20,7 +20,15 @@ function HeaderImage(props: React.SVGProps<SVGSVGElement>) {
         <path fill="#0078D2" d="M49 67h21v1H49z" />
         <rect x={73} y={58} width={13} height={4} rx={2} fill="#DEE4E8" />
         <rect x={92} y={58} width={13} height={4} rx={2} fill="#DEE4E8" />
-        <rect x={52} y={58} width={15} height={4} rx={2} fill="#002033" fillOpacity={0.35} />
+        <rect
+          x={52}
+          y={58}
+          width={15}
+          height={4}
+          rx={2}
+          fill="#002033"
+          fillOpacity={0.35}
+        />
       </g>
       <defs>
         <clipPath id="SvgHeaderImage__clip0_1889_15922">
@@ -29,6 +37,6 @@ function HeaderImage(props: React.SVGProps<SVGSVGElement>) {
       </defs>
     </svg>
   );
-}
+};
 
 export default HeaderImage;

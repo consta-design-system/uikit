@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
+import React, { useState } from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';

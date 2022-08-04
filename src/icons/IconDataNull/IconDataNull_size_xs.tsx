@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function IconDataNullSizeXs(props: React.SVGProps<SVGSVGElement>) {
+const IconDataNullSizeXs = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 12 12" {...props}>
       <path
@@ -10,6 +10,6 @@ function IconDataNullSizeXs(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default IconDataNullSizeXs;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function IconTable2SizeS(props: React.SVGProps<SVGSVGElement>) {
+const IconTable2SizeS = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 16 16" {...props}>
       <path
@@ -10,6 +10,6 @@ function IconTable2SizeS(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default IconTable2SizeS;

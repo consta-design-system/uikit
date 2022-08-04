@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
+import * as React from 'react';
 
 import { IconUser } from '../../../icons/IconUser/IconUser';
 import { createMetadata } from '../../../utils/storybook';
@@ -14,7 +14,6 @@ import {
   badgePropView,
   badgePropViewDefault,
 } from '../Badge';
-
 import mdx from './Badge.docs.mdx';
 
 const defaultKnobs = () => ({
@@ -27,7 +26,7 @@ const defaultKnobs = () => ({
   icon: boolean('icon', false),
 });
 
-export function Playground() {
+export const Playground = () => {
   const { label, size, view, status, form, minified, icon } = defaultKnobs();
 
   return (
@@ -43,7 +42,7 @@ export function Playground() {
       />
     </div>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Отображение данных/Badge',

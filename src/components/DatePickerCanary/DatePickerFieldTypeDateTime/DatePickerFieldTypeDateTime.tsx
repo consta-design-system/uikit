@@ -1,5 +1,11 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { format, isValid, isWithinInterval, parse } from 'date-fns';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
 import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
@@ -13,7 +19,6 @@ import {
   getParts,
   getPartsDate,
 } from '../helpers';
-
 import { DatePickerFieldTypeDateTimeProps, useImask } from './helpers';
 
 export const DatePickerFieldTypeDateTime = React.forwardRef<
@@ -43,7 +48,10 @@ export const DatePickerFieldTypeDateTime = React.forwardRef<
     value && isValid(value) ? format(value, formatProp) : null,
   );
 
-  const formatParts = useMemo(() => getParts(formatProp, separator, true), [formatProp, separator]);
+  const formatParts = useMemo(
+    () => getParts(formatProp, separator, true),
+    [formatProp, separator],
+  );
 
   const handleChange = useCallback(
     (e: Event, stringValue: string | null) => {
@@ -56,21 +64,21 @@ export const DatePickerFieldTypeDateTime = React.forwardRef<
           return;
         }
 
-        const partsDate = getPartsDate(stringValue, formatProp, separator, true, [
-          'dd',
-          'MM',
-          'yyyy',
-          'HH',
-          'mm',
-          'ss',
-        ]);
+        const partsDate = getPartsDate(
+          stringValue,
+          formatProp,
+          separator,
+          true,
+          ['dd', 'MM', 'yyyy', 'HH', 'mm', 'ss'],
+        );
 
         const [dd, MM, yyyy, HH, mm, ss] = partsDate;
 
         if (partsDate.filter((item) => !!item).length === formatParts.length) {
           const date = parse(
-            `${dd}${datePickerPropSeparatorDefault}${MM}${datePickerPropSeparatorDefault}${yyyy} ${HH ||
-              '00'}:${mm || '00'}:${ss || '00'}`,
+            `${dd}${datePickerPropSeparatorDefault}${MM}${datePickerPropSeparatorDefault}${yyyy} ${
+              HH || '00'
+            }:${mm || '00'}:${ss || '00'}`,
             datePickerPropFormatTypeDateTime,
             new Date(),
           );

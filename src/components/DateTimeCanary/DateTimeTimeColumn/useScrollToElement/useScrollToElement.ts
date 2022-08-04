@@ -25,7 +25,8 @@ export const useScrollToElement = (
     const itemDimentions = itemsRefs.reduce<ItemDimentions[]>(
       (accumulator, currentValue, index) => {
         const height = currentValue.current?.offsetHeight || 0;
-        const offset = accumulator.length > 0 ? accumulator[index - 1]?.offset + height : 0;
+        const offset =
+          accumulator.length > 0 ? accumulator[index - 1].offset + height : 0;
 
         return [
           ...accumulator,

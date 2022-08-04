@@ -1,15 +1,14 @@
 import './Modal.stories.css';
 
-import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
+import React from 'react';
 
 import { cn } from '../../../utils/bem';
 import { callbackWithSelector, createMetadata } from '../../../utils/storybook';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 import { Modal } from '../Modal';
-
 import mdx from './Modal.docs.mdx';
 
 type SelectOption = {
@@ -29,13 +28,16 @@ const defaultKnobs = () => ({
   position: select('position', ['center', 'top'], 'center'),
 });
 
-export function Playground(): JSX.Element {
+export const Playground = (): JSX.Element => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const { hasOverlay, width, position } = defaultKnobs();
 
-  const handleClickOutside = callbackWithSelector({ name: 'onClickOutside' }, () => {
-    setIsModalOpen(false);
-  });
+  const handleClickOutside = callbackWithSelector(
+    { name: 'onClickOutside' },
+    () => {
+      setIsModalOpen(false);
+    },
+  );
 
   const handleEscPress = callbackWithSelector({ name: 'onEsc' }, () => {
     setIsModalOpen(false);
@@ -62,18 +64,26 @@ export function Playground(): JSX.Element {
         onClose={action('onClose')}
         onOpen={action('onOpen')}
       >
-        {
-          <>
-            <Text as="p" size="s" view="secondary" className={cnModalStories('Title')}>
-              Это заголовок модального окна
-            </Text>
-            <Text as="p" size="m" view="primary" className={cnModalStories('Body')}>
-              Это содержимое модального окна. Здесь может быть что угодно: текст, изображение, форма
-              или таблица. Всё, что хочется вынести из контекста и показать поверх основной
-              страницы.
-            </Text>
-          </>
-        }
+        <>
+          <Text
+            as="p"
+            size="s"
+            view="secondary"
+            className={cnModalStories('Title')}
+          >
+            Это заголовок модального окна
+          </Text>
+          <Text
+            as="p"
+            size="m"
+            view="primary"
+            className={cnModalStories('Body')}
+          >
+            Это содержимое модального окна. Здесь может быть что угодно: текст,
+            изображение, форма или таблица. Всё, что хочется вынести из
+            контекста и показать поверх основной страницы.
+          </Text>
+        </>
         <div className={cnModalStories('Action')}>
           <Button
             size="m"
@@ -86,7 +96,7 @@ export function Playground(): JSX.Element {
       </Modal>
     </div>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Наложение/Modal',

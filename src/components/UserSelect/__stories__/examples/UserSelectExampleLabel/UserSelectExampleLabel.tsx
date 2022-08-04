@@ -30,7 +30,7 @@ const items: Item[] = [
   },
 ];
 
-export function UserSelectExampleLabel() {
+export const UserSelectExampleLabel = () => {
   const [value, setValue] = useState<Item | null>();
   return (
     <div className={cnDocsDecorator('Section')}>
@@ -44,9 +44,9 @@ export function UserSelectExampleLabel() {
       />
     </div>
   );
-}
+};
 
-export function UserSelectExampleLabelPosition() {
+export const UserSelectExampleLabelPosition = () => {
   const [value, setValue] = useState<Item | null>();
   return (
     <>
@@ -72,4 +72,4 @@ export function UserSelectExampleLabelPosition() {
       </StoryBookExample>
     </>
   );
-}
+};

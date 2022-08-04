@@ -105,7 +105,9 @@ const initialState = {
   scrollToHighlighted: false,
 };
 
-function useHoistedState(initialState: State): [State, (updater: Updater, action: Action) => void] {
+function useHoistedState(
+  initialState: State,
+): [State, (updater: Updater, action: Action) => void] {
   const reducerRef = React.useRef<Reducer>((old, newState) => newState);
   const [state, _setState] = React.useState<State>(initialState);
   const setState = React.useCallback(
@@ -138,7 +140,13 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   } = params;
   const value = params.value ?? [];
   const [
-    { searchValue, isOpen, highlightedIndex, resolvedSearchValue, scrollToHighlighted },
+    {
+      searchValue,
+      isOpen,
+      highlightedIndex,
+      resolvedSearchValue,
+      scrollToHighlighted,
+    },
     setState,
   ] = useHoistedState(initialState);
 
@@ -148,7 +156,10 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
         ? options
             .map((group) => {
               const groupName = getOptionLabel(group);
-              const items = typeof getGroupOptions === 'function' ? getGroupOptions(group) : [];
+              const items =
+                typeof getGroupOptions === 'function'
+                  ? getGroupOptions(group)
+                  : [];
               return items.map((item) => ({ ...item, group: groupName }));
             })
             .flat()
@@ -172,31 +183,34 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   const onCreateRef = React.useRef<OnCreateFunctionType>();
   onCreateRef.current = onCreate;
 
-  const filterFnRef = React.useRef<
-    (options: T[], searchValue: string) => Option<typeof options[0]>[]
-  >();
-  filterFnRef.current = (options: T[], searchValue: string): Option<typeof options[0]>[] => {
+  const filterFnRef =
+    React.useRef<
+      (options: T[], searchValue: string) => Option<typeof options[0]>[]
+    >();
+  filterFnRef.current = (
+    options: T[],
+    searchValue: string,
+  ): Option<typeof options[0]>[] => {
     if (typeof getOptionLabel === 'function') {
       const searchValueLowerCase = searchValue.toLowerCase();
 
       const tempOptions = originalOptions
         .filter((option) => searchFunction(option, searchValue))
         .sort((a) =>
-          getOptionLabel(a)
-            .toLowerCase()
-            .indexOf(searchValueLowerCase),
+          getOptionLabel(a).toLowerCase().indexOf(searchValueLowerCase),
         );
       const matchWithValueSearch = Boolean(
         originalOptions.find(
-          (option) => getOptionLabel(option).toLowerCase() === searchValueLowerCase,
+          (option) =>
+            getOptionLabel(option).toLowerCase() === searchValueLowerCase,
         ),
       );
 
-      const optionForCreate = ({
+      const optionForCreate = {
         label: searchValue,
         item: { label: searchValue },
         optionForCreate: true,
-      } as unknown) as Option<typeof options[0]>;
+      } as unknown as Option<typeof options[0]>;
 
       return typeof onCreate === 'function' && !matchWithValueSearch
         ? [optionForCreate, ...tempOptions]
@@ -206,7 +220,11 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   };
 
   const filteredOptions = React.useMemo(() => {
-    if (resolvedSearchValue && resolvedSearchValue !== '' && filterFnRef.current) {
+    if (
+      resolvedSearchValue &&
+      resolvedSearchValue !== '' &&
+      filterFnRef.current
+    ) {
       return filterFnRef.current(options, resolvedSearchValue.trim());
     }
     return originalOptions;
@@ -268,7 +286,8 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
     if (value !== null && !prevIsOpen && isOpen) {
       const currentHighlightIndex = getSelectedOptionIndex();
       if (filteredOptions.length > 0) {
-        scrollToIndexRef.current && scrollToIndexRef.current(currentHighlightIndex);
+        scrollToIndexRef.current &&
+          scrollToIndexRef.current(currentHighlightIndex);
       }
     }
   });
@@ -299,7 +318,9 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
       const option = filteredOptions[index];
       if (option && onChangeRef.current) {
         if (multiple) {
-          const newVal = value.some((v) => getOptionKey(v) === getOptionKey(option))
+          const newVal = value.some(
+            (v) => getOptionKey(v) === getOptionKey(option),
+          )
             ? value.filter((v) => getOptionKey(v) !== getOptionKey(option))
             : [...value, option];
 
@@ -347,7 +368,8 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
 
   const removeValue = React.useCallback(
     (index) => {
-      onChangeRef.current && onChangeRef.current(value.filter((d, i) => i !== index));
+      onChangeRef.current &&
+        onChangeRef.current(value.filter((d, i) => i !== index));
       setSearch('');
     },
     [value],
@@ -355,28 +377,34 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
 
   // Prop Getters
 
-  const ArrowUp: KeyHandler = () => (_, e: React.SyntheticEvent): void => {
-    e.preventDefault();
-    !disabled && setOpen(true);
-    highlightIndex((old) => old - 1, true);
-  };
+  const ArrowUp: KeyHandler =
+    () =>
+    (_, e: React.SyntheticEvent): void => {
+      e.preventDefault();
+      !disabled && setOpen(true);
+      highlightIndex((old) => old - 1, true);
+    };
 
-  const ArrowDown: KeyHandler = () => (_, e: React.SyntheticEvent): void => {
-    e.preventDefault();
-    !disabled && setOpen(true);
-    highlightIndex((old) => old + 1, true);
-  };
+  const ArrowDown: KeyHandler =
+    () =>
+    (_, e: React.SyntheticEvent): void => {
+      e.preventDefault();
+      !disabled && setOpen(true);
+      highlightIndex((old) => old + 1, true);
+    };
 
-  const Enter: KeyHandler = () => (_, e: React.KeyboardEvent): void => {
-    if (isOpen) {
-      if (searchValue || filteredOptions[highlightedIndex]) {
-        e.preventDefault();
+  const Enter: KeyHandler =
+    () =>
+    (_, e: React.KeyboardEvent): void => {
+      if (isOpen) {
+        if (searchValue || filteredOptions[highlightedIndex]) {
+          e.preventDefault();
+        }
+        if (filteredOptions[highlightedIndex]) {
+          selectIndex(highlightedIndex);
+        }
       }
-      if (filteredOptions[highlightedIndex]) {
-        selectIndex(highlightedIndex);
-      }
-    }
-  };
+    };
 
   const Escape = (): void => {
     setOpen(false);
@@ -520,7 +548,8 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
     if (isOpen && inputRef.current) {
       inputRef.current && inputRef.current.focus();
       const currentHighlightIndex = getSelectedOptionIndex();
-      scrollToIndexRef.current && scrollToIndexRef.current(currentHighlightIndex);
+      scrollToIndexRef.current &&
+        scrollToIndexRef.current(currentHighlightIndex);
     }
   }, [isOpen, inputRef.current]);
 

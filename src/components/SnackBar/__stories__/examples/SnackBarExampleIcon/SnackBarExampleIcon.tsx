@@ -39,7 +39,11 @@ const getIcon = (item: Item) => {
 export const SnackBarExampleIcon = () => {
   return (
     <div className={cnSnackBarExampleIcon('', [cnDocsDecorator('Section')])}>
-      <SnackBar className={cnSnackBarExampleIcon('SnackBar')} items={items} getItemIcon={getIcon} />
+      <SnackBar
+        className={cnSnackBarExampleIcon('SnackBar')}
+        items={items}
+        getItemIcon={getIcon}
+      />
     </div>
   );
 };

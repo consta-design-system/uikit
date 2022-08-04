@@ -1,4 +1,3 @@
-import React, { useEffect, useRef } from 'react';
 import {
   addHours,
   addMinutes,
@@ -11,10 +10,15 @@ import {
   startOfMinute,
 } from 'date-fns';
 import IMask from 'imask';
+import React, { useEffect, useRef } from 'react';
 
 import { IconComponent, IconPropSize } from '../../../icons/Icon/Icon';
 import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
-import { getLabelHours, getLabelMinutes, getLabelSeconds } from '../../DateTimeCanary/helpers';
+import {
+  getLabelHours,
+  getLabelMinutes,
+  getLabelSeconds,
+} from '../../DateTimeCanary/helpers';
 import {
   TextFieldPropForm,
   TextFieldPropSize,
@@ -30,7 +34,10 @@ import {
   getTimeEnum,
 } from '../helpers';
 
-type DatePickerFieldTypeTimePropOnChange = (props: { e: Event; value: Date | null }) => void;
+type DatePickerFieldTypeTimePropOnChange = (props: {
+  e: Event;
+  value: Date | null;
+}) => void;
 
 export type DatePickerFieldTypeTimeProps = PropsWithHTMLAttributes<
   {
@@ -84,7 +91,9 @@ export const useImask = (
   stringValue: string | null,
   onError: DatePickerPropOnError | undefined,
 ) => {
-  const imaskRef = useRef<IMask.InputMask<IMask.MaskedDateOptions> | null>(null);
+  const imaskRef = useRef<IMask.InputMask<IMask.MaskedDateOptions> | null>(
+    null,
+  );
 
   // задаем маску и сохраняем обьект маски в ref
   // обнавляем при смене формата
@@ -93,7 +102,7 @@ export const useImask = (
       return;
     }
 
-    imaskRef.current = (IMask(inputRef.current, {
+    imaskRef.current = IMask(inputRef.current, {
       mask: Date,
       pattern: formatProp,
       blocks: {
@@ -101,7 +110,13 @@ export const useImask = (
           multiplicityHours && multiplicityHours > 1
             ? {
                 mask: IMask.MaskedEnum,
-                enum: getTimeEnum(24, multiplicityHours, startOfDay, addHours, getLabelHours),
+                enum: getTimeEnum(
+                  24,
+                  multiplicityHours,
+                  startOfDay,
+                  addHours,
+                  getLabelHours,
+                ),
               }
             : {
                 mask: IMask.MaskedRange,
@@ -148,13 +163,23 @@ export const useImask = (
       format: (date) => format(date, formatProp),
       parse: (string) => parse(string, formatProp, new Date()),
       validate: (string: string) => {
-        const [HH, mm, ss] = getPartsDate(string, formatProp, ':', false, ['HH', 'mm', 'ss']);
+        const [HH, mm, ss] = getPartsDate(string, formatProp, ':', false, [
+          'HH',
+          'mm',
+          'ss',
+        ]);
 
         if (
           HH &&
           mm &&
           ss &&
-          !isValid(parse(`${HH}:${mm}:${ss}`, datePickerPropFormatTypeTime, new Date()))
+          !isValid(
+            parse(
+              `${HH}:${mm}:${ss}`,
+              datePickerPropFormatTypeTime,
+              new Date(),
+            ),
+          )
         ) {
           onError?.({
             type: datePickerErrorTypes[1],
@@ -170,8 +195,14 @@ export const useImask = (
         return true;
       },
       // проблема в типах IMask
-    }) as unknown) as IMask.InputMask<IMask.MaskedDateOptions>;
-  }, [formatProp, separator, multiplicityHours, multiplicitySeconds, multiplicityMinutes]);
+    }) as unknown as IMask.InputMask<IMask.MaskedDateOptions>;
+  }, [
+    formatProp,
+    separator,
+    multiplicityHours,
+    multiplicitySeconds,
+    multiplicityMinutes,
+  ]);
 
   // Нужно для синхранизации value c Imask,
   // так как value мы можем задать через пропс без самого ввода,

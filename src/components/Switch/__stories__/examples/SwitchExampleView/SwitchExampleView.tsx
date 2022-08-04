@@ -1,5 +1,5 @@
-import React from 'react';
 import { action } from '@storybook/addon-actions';
+import React from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
@@ -10,9 +10,21 @@ const emptyFunction = action('emptyFunction');
 
 export const SwitchExampleView = () => (
   <StoryBookExample
-    className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' })])}
+    className={cnDocsDecorator('Section', [
+      wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
+    ])}
   >
-    <Switch view="primary" checked label="Акцентный переключатель" onChange={emptyFunction} />
-    <Switch view="ghost" checked label="Второстепенный переключатель" onChange={emptyFunction} />
+    <Switch
+      view="primary"
+      checked
+      label="Акцентный переключатель"
+      onChange={emptyFunction}
+    />
+    <Switch
+      view="ghost"
+      checked
+      label="Второстепенный переключатель"
+      onChange={emptyFunction}
+    />
   </StoryBookExample>
 );

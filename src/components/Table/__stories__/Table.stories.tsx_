@@ -1,9 +1,20 @@
 import './Table.stories.css';
 
-import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { boolean, number, object, select, text } from '@storybook/addon-knobs';
+import React, { useState } from 'react';
 
+import { IconCopy } from '../../../icons/IconCopy/IconCopy';
+import { updateAt } from '../../../utils/array';
+import {
+  callbackWithSelector,
+  createMetadata,
+  createStory,
+} from '../../../utils/storybook';
+import { isNotNil } from '../../../utils/type-guards';
+import { Button } from '../../Button/Button';
+import { Checkbox } from '../../Checkbox/Checkbox';
+import { Text } from '../../Text/Text';
 import {
   customFilters,
   CustomIDs,
@@ -20,13 +31,6 @@ import {
   withControlTableMock,
   withHiddenColumnTableMock,
 } from '../__mock__/data.mock';
-import { IconCopy } from '../../../icons/IconCopy/IconCopy';
-import { updateAt } from '../../../utils/array';
-import { callbackWithSelector, createMetadata, createStory } from '../../../utils/storybook';
-import { isNotNil } from '../../../utils/type-guards';
-import { Button } from '../../Button/Button';
-import { Checkbox } from '../../Checkbox/Checkbox';
-import { Text } from '../../Text/Text';
 import { verticalAligns } from '../Cell/TableCell';
 import { Filters, SortByProps } from '../filtering';
 import {
@@ -39,10 +43,9 @@ import {
   TableRow,
   zebraStriped,
 } from '../Table';
-
 import WithAdditionalClassName from './examples/WithAdditionalClassName/WithAdditionalClassName';
 import WithHandleCellClick from './examples/WithHandleCellClick';
-import WithRowCreationAndDeletion from './examples/WithRowCreationAndDeletion';
+import WithRowCreationAndDeletion from './examples/WithRowCreationAndDeletion.tsx_';
 import { cnTableStories } from './helpers';
 import mdx from './Table.docs.mdx';
 
@@ -63,23 +66,39 @@ const defaultProps: Props<typeof tableData.rows[number]> = {
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const getSizeKnob = () => select('size', sizes, 'l');
-const getFiltersKnob = <T extends TableRow>(filters?: Filters<T>): Filters<T> | undefined => {
+const getFiltersKnob = <T extends TableRow>(
+  filters?: Filters<T>,
+): Filters<T> | undefined => {
   const isFilterable = boolean('filterable', true);
 
   return isFilterable ? filters : undefined;
 };
 
-const getKnobs = <T extends TableRow>(replacedProps?: Partial<Props<T>>): Props<T> => {
+const getKnobs = <T extends TableRow>(
+  replacedProps?: Partial<Props<T>>,
+): Props<T> => {
   const props = { ...defaultProps, ...replacedProps } as Props<T>;
 
-  const zebraStripedProp = select('zebraStriped', ['', ...zebraStriped], props.zebraStriped);
+  const zebraStripedProp = select(
+    'zebraStriped',
+    ['', ...zebraStriped],
+    props.zebraStriped,
+  );
 
-  const handleRowClick = callbackWithSelector({ name: 'onRowClick', isActive: false });
-  const handleRowHover = callbackWithSelector({ name: 'onRowHover', isActive: false });
+  const handleRowClick = callbackWithSelector({
+    name: 'onRowClick',
+    isActive: false,
+  });
+  const handleRowHover = callbackWithSelector({
+    name: 'onRowHover',
+    isActive: false,
+  });
   const handleAdditionalClass = callbackWithSelector(
     { name: 'getAdditionalClassName', isActive: true },
     props.getAdditionalClassName,
-  ) as ((props: { column: TableColumn<T>; row: T; isActive: boolean }) => string) | undefined;
+  ) as
+    | ((props: { column: TableColumn<T>; row: T; isActive: boolean }) => string)
+    | undefined;
 
   return {
     columns: object('columns', props.columns),
@@ -87,7 +106,10 @@ const getKnobs = <T extends TableRow>(replacedProps?: Partial<Props<T>>): Props<
     filters: getFiltersKnob(props.filters),
     onFiltersUpdated: (filters) => action('onFiltersUpdated')(filters),
     size: getSizeKnob(),
-    borderBetweenColumns: boolean('borderBetweenColumns', props.borderBetweenColumns!),
+    borderBetweenColumns: boolean(
+      'borderBetweenColumns',
+      props.borderBetweenColumns!,
+    ),
     borderBetweenRows: boolean('borderBetweenRows', props.borderBetweenRows!),
     isResizable: boolean('isResizable', props.isResizable!),
     zebraStriped: zebraStripedProp === '' ? undefined : zebraStripedProp,
@@ -155,7 +177,12 @@ const WithActiveRowContent = (): JSX.Element => {
     setActiveRow(id);
   };
 
-  return <Table {...getKnobs()} activeRow={{ id: activeRow, onChange: handleClickRow }} />;
+  return (
+    <Table
+      {...getKnobs()}
+      activeRow={{ id: activeRow, onChange: handleClickRow }}
+    />
+  );
 };
 
 export const WithActiveRow = createStory(() => <WithActiveRowContent />, {
@@ -199,7 +226,11 @@ export const WithBagde = createStory(
 
 export const WithGetAdditionalClassName = createStory(
   () => {
-    return <WithAdditionalClassName {...getKnobs(tableDataWithAdditionalClassName)} />;
+    return (
+      <WithAdditionalClassName
+        {...getKnobs(tableDataWithAdditionalClassName)}
+      />
+    );
   },
   {
     name: 'с дополнительным классом',
@@ -208,14 +239,22 @@ export const WithGetAdditionalClassName = createStory(
 
 const WithCheckboxHeaderContent = (): JSX.Element => {
   const ROWS_COUNT = 3;
-  const [values, setValues] = React.useState<boolean[]>(new Array(ROWS_COUNT).fill(false));
+  const [values, setValues] = React.useState<boolean[]>(
+    new Array(ROWS_COUNT).fill(false),
+  );
   const toggleRow = (idx: number): void => {
     setValues(updateAt(values, idx, !values[idx]));
   };
 
   const rows = values.map((value, idx) => ({
     id: `row${idx}`,
-    checkbox: <Checkbox size="m" checked={value} onChange={(): void => toggleRow(idx)} />,
+    checkbox: (
+      <Checkbox
+        size="m"
+        checked={value}
+        onChange={(): void => toggleRow(idx)}
+      />
+    ),
     task: `Задача ${idx}`,
   }));
   const areAllSelected = values.every((v) => v);
@@ -231,7 +270,9 @@ const WithCheckboxHeaderContent = (): JSX.Element => {
               <Checkbox
                 size="m"
                 checked={areAllSelected}
-                onChange={(): void => setValues(values.map(() => !areAllSelected))}
+                onChange={(): void =>
+                  setValues(values.map(() => !areAllSelected))
+                }
               />
             ),
             accessor: 'checkbox',
@@ -248,7 +289,9 @@ const WithCheckboxHeaderContent = (): JSX.Element => {
 };
 
 const WithOnRowHoverContent = <T extends TableRow>(): JSX.Element => {
-  const [hoveredRow, setHoveredRow] = React.useState<string | undefined>(undefined);
+  const [hoveredRow, setHoveredRow] = React.useState<string | undefined>(
+    undefined,
+  );
   const rows = tableData.rows.map((row) => ({
     ...row,
     button: (
@@ -282,9 +325,12 @@ const WithOnRowHoverContent = <T extends TableRow>(): JSX.Element => {
   );
 };
 
-export const WithCheckboxHeader = createStory(() => <WithCheckboxHeaderContent />, {
-  name: 'с чекбоксом в шапке',
-});
+export const WithCheckboxHeader = createStory(
+  () => <WithCheckboxHeaderContent />,
+  {
+    name: 'с чекбоксом в шапке',
+  },
+);
 
 export const WithCustomRowsPlaceholder = createStory(
   () => (
@@ -317,23 +363,33 @@ export const WithBigData = createStory(
 export const SortByData = createStory(
   () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const [sortSetting, setSortSetting] = useState<SortByProps<any> | null>(null);
+    const [sortSetting, setSortSetting] = useState<SortByProps<any> | null>(
+      null,
+    );
     const data = [
       {
         id: 1,
-        date: new Date('Thu Dec 03 2020 14:23:13 GMT+0300 (Moscow Standard Time)'),
+        date: new Date(
+          'Thu Dec 03 2020 14:23:13 GMT+0300 (Moscow Standard Time)',
+        ),
       },
       {
         id: 2,
-        date: new Date('Thu Dec 03 2020 14:04:13 GMT+0300 (Moscow Standard Time)'),
+        date: new Date(
+          'Thu Dec 03 2020 14:04:13 GMT+0300 (Moscow Standard Time)',
+        ),
       },
       {
         id: 3,
-        date: new Date('Thu Dec 03 2020 14:55:13 GMT+0300 (Moscow Standard Time)'),
+        date: new Date(
+          'Thu Dec 03 2020 14:55:13 GMT+0300 (Moscow Standard Time)',
+        ),
       },
       {
         id: 4,
-        date: new Date('Thu Dec 03 2020 14:12:13 GMT+0300 (Moscow Standard Time)'),
+        date: new Date(
+          'Thu Dec 03 2020 14:12:13 GMT+0300 (Moscow Standard Time)',
+        ),
       },
     ];
 
@@ -341,7 +397,9 @@ export const SortByData = createStory(
       .sort((a, b) => {
         if (sortSetting?.sortingBy === 'date') {
           const [firstDate, secondDate] =
-            sortSetting.sortOrder === 'asc' ? [a.date, b.date] : [b.date, a.date];
+            sortSetting.sortOrder === 'asc'
+              ? [a.date, b.date]
+              : [b.date, a.date];
           return firstDate.valueOf() - secondDate.valueOf();
         }
         return 0;
@@ -433,13 +491,19 @@ export const WithMergedByCustomCallbackCells = createStory(
             accessor: 'operationConfirmed',
             mergeCells: true,
             getComparisonValue: ({ owner, viewed }) => `${owner}-${viewed}`,
-            renderCell: ({ operationConfirmed: { viewed } }) => <Checkbox checked={viewed} />,
+            renderCell: ({ operationConfirmed: { viewed } }) => (
+              <Checkbox checked={viewed} />
+            ),
           },
         ]}
         rows={Object.keys(checkedRow).map((id, index) => {
           const isAuto = ADMIN_INDEXES.includes(index);
           return {
-            ...generateRowBase(id, `${isAuto ? 'admin' : 'user'}`, isAuto ? true : checkedRow[id]),
+            ...generateRowBase(
+              id,
+              `${isAuto ? 'admin' : 'user'}`,
+              isAuto ? true : checkedRow[id],
+            ),
           };
         })}
       />
@@ -468,7 +532,9 @@ export const withCustomTagLabelFunction = createStory(
     type GetTagLabel = (filterValue: any) => string;
 
     const tagLabelById: Record<CustomIDs, GetTagLabel> = {
-      [CustomIDs.fullName]: (filterValue: Array<{ value: string; name: string }>) => {
+      [CustomIDs.fullName]: (
+        filterValue: Array<{ value: string; name: string }>,
+      ) => {
         if (!Array.isArray(filterValue)) {
           return '';
         }
@@ -517,23 +583,32 @@ export const withCustomTagLabelFunction = createStory(
   },
 );
 
-export const WithRowActions = createStory(() => <WithRowCreationAndDeletion />, {
-  name: 'с добавлением/удалением строк',
-});
+export const WithRowActions = createStory(
+  () => <WithRowCreationAndDeletion />,
+  {
+    name: 'с добавлением/удалением строк',
+  },
+);
 
-export const WithIcon = createStory(() => <Table {...getKnobs(withControlTableMock)} />, {
-  name: 'с дополнительным элементом в заголовке',
-});
+export const WithIcon = createStory(
+  () => <Table {...getKnobs(withControlTableMock)} />,
+  {
+    name: 'с дополнительным элементом в заголовке',
+  },
+);
 
-export const WithHandleCellClickExample = createStory(() => <WithHandleCellClick />, {
-  name: 'с обработкой клика по ячейке',
-});
+export const WithHandleCellClickExample = createStory(
+  () => <WithHandleCellClick />,
+  {
+    name: 'с обработкой клика по ячейке',
+  },
+);
 
 export const WithHiddenColumn = createStory(
   () => {
-    const [mock, setMock] = useState<TableProps<typeof rowsForCustomTagLabelFunction[number]>>(
-      withHiddenColumnTableMock,
-    );
+    const [mock, setMock] = useState<
+      TableProps<typeof rowsForCustomTagLabelFunction[number]>
+    >(withHiddenColumnTableMock);
     const [isHidden, setIsHidden] = useState<boolean>(true);
 
     const handleClick = () => {
@@ -556,7 +631,10 @@ export const WithHiddenColumn = createStory(
 
     return (
       <div>
-        <Button label={isHidden ? 'Показать колонку' : 'Скрыть колонку'} onClick={handleClick} />
+        <Button
+          label={isHidden ? 'Показать колонку' : 'Скрыть колонку'}
+          onClick={handleClick}
+        />
         <Table {...getKnobs(mock)} columns={mock.columns} />
       </div>
     );

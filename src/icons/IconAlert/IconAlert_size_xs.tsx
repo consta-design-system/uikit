@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function IconAlertSizeXs(props: React.SVGProps<SVGSVGElement>) {
+const IconAlertSizeXs = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 12 12" {...props}>
       <path
@@ -10,6 +10,6 @@ function IconAlertSizeXs(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default IconAlertSizeXs;

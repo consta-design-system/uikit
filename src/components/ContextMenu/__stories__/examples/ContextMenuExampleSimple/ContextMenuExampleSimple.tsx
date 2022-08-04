@@ -16,7 +16,9 @@ const cnContextMenuExampleSimple = cn('ContextMenuExampleSimple');
 export const ContextMenuExampleSimple = () => {
   const ref = useRef(null);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section', [cnContextMenuExampleSimple()])}>
+    <StoryBookExample
+      className={cnDocsDecorator('Section', [cnContextMenuExampleSimple()])}
+    >
       <Button iconLeft={IconAdd} ref={ref} />
       <ContextMenu
         items={items}

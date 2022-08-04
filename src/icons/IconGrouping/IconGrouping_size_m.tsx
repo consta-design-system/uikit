@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function IconGroupingSizeM(props: React.SVGProps<SVGSVGElement>) {
+const IconGroupingSizeM = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 24 24" {...props}>
       <path d="M6 7.5a.5.5 0 01.5-.5h11a.5.5 0 01.5.5v3a.5.5 0 01-.5.5h-11a.5.5 0 01-.5-.5v-3zm0 6a.5.5 0 01.5-.5h11a.5.5 0 01.5.5v3a.5.5 0 01-.5.5h-11a.5.5 0 01-.5-.5v-3z" />
@@ -11,6 +11,6 @@ function IconGroupingSizeM(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default IconGroupingSizeM;

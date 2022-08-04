@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function GaugeImage(props: React.SVGProps<SVGSVGElement>) {
+const GaugeImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <g clipPath="url(#a)">
@@ -24,6 +24,6 @@ function GaugeImage(props: React.SVGProps<SVGSVGElement>) {
       </defs>
     </svg>
   );
-}
+};
 
 export default GaugeImage;

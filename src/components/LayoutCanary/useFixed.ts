@@ -79,7 +79,10 @@ const getStationingElement = (
       clientHeight: element.innerHeight,
       clientWidth: element.innerWidth,
       scrollTop: element.scrollY,
-      scrollHeight: Math.max(document.body.scrollHeight, document.body.offsetHeight),
+      scrollHeight: Math.max(
+        document.body.scrollHeight,
+        document.body.offsetHeight,
+      ),
     };
   }
   return undefined;
@@ -95,13 +98,15 @@ const isElementScrollible = (
   if (isVerticalFixation)
     return (
       container.scrollTop >= startScroll &&
-      container.scrollTop <= container.scrollHeight - container.offsetHeight + element.offsetHeight
+      container.scrollTop <=
+        container.scrollHeight - container.offsetHeight + element.offsetHeight
     );
   return anchor
     ? container.scrollTop + anchor.offsetHeight >= startScroll &&
         container.scrollTop <=
           container.scrollHeight - container.offsetHeight + element.offsetHeight
-    : container.scrollTop + container.offsetHeight <= startScroll + element.offsetHeight &&
+    : container.scrollTop + container.offsetHeight <=
+        startScroll + element.offsetHeight &&
         container.scrollTop <= container.scrollHeight - container.offsetHeight;
 };
 
@@ -122,12 +127,20 @@ export const positioningElement: PositioningElement = (
     maxHeight: scrollContainerStationing?.clientHeight,
     position: 'unset',
   };
-  if (layoutStationing && scrollContainerStationing && typeof startScroll !== 'undefined') {
+  if (
+    layoutStationing &&
+    scrollContainerStationing &&
+    typeof startScroll !== 'undefined'
+  ) {
     const scrollContainerPosition = {
       top: scrollContainerStationing.offsetTop,
-      bottom: scrollContainerStationing.offsetTop + scrollContainerStationing.clientHeight,
+      bottom:
+        scrollContainerStationing.offsetTop +
+        scrollContainerStationing.clientHeight,
       left: scrollContainerStationing.offsetLeft,
-      right: scrollContainerStationing.offsetLeft + scrollContainerStationing.clientWidth,
+      right:
+        scrollContainerStationing.offsetLeft +
+        scrollContainerStationing.clientWidth,
       width: scrollContainerStationing.clientWidth,
       height: scrollContainerStationing.clientHeight,
     };
@@ -162,7 +175,9 @@ export const positioningElement: PositioningElement = (
           ? anchorStationing.offsetLeft +
             anchorStationing.offsetWidth -
             layoutStationing.offsetWidth
-          : -window.scrollX + scrollContainerPosition.right - layoutStationing.offsetWidth;
+          : -window.scrollX +
+            scrollContainerPosition.right -
+            layoutStationing.offsetWidth;
     } else stationingData.position = 'unset';
   }
   return stationingData;
@@ -189,15 +204,17 @@ export const useFixed: UseFixed = (
           const parentStationing = getStationingElement(parentContainer);
           if (parentStationing) {
             startScroll =
-              layoutRef.current.offsetTop - parentStationing?.offsetTop >= 0
-                ? layoutRef.current.offsetTop - parentStationing?.offsetTop
+              layoutRef.current.offsetTop - parentStationing.offsetTop >= 0
+                ? layoutRef.current.offsetTop - parentStationing.offsetTop
                 : 0;
           }
           positioning(startScroll);
           document.addEventListener('resize', resizing);
           if (typeof parentContainer?.addEventListener === 'function') {
             parentContainer?.addEventListener('resize', resizing);
-            parentContainer?.addEventListener('scroll', () => positioning(startScroll));
+            parentContainer?.addEventListener('scroll', () =>
+              positioning(startScroll),
+            );
           }
         }
       },
@@ -211,7 +228,9 @@ export const useFixed: UseFixed = (
         document.removeEventListener('resize', resizing);
         if (typeof parentContainer?.removeEventListener === 'function') {
           parentContainer?.removeEventListener('resize', resizing);
-          parentContainer?.removeEventListener('scroll', () => positioning(startScroll));
+          parentContainer?.removeEventListener('scroll', () =>
+            positioning(startScroll),
+          );
         }
       }
     };

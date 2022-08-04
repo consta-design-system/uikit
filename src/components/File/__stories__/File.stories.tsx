@@ -1,12 +1,14 @@
-import * as React from 'react';
 import { boolean, number, select, text } from '@storybook/addon-knobs';
+import * as React from 'react';
 
 import { FileIconsGallery } from '../../../fileIcons/FileIcon/__stories__/FileIconsGallery/FileIconsGallery';
-import { fileIconPropSize, fileIconPropSizeDefault } from '../../../fileIcons/FileIcon/FileIcon';
+import {
+  fileIconPropSize,
+  fileIconPropSizeDefault,
+} from '../../../fileIcons/FileIcon/FileIcon';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import { File } from '../File';
-
 import mdx from './File.docs.mdx';
 
 const defaultKnobs = () => ({
@@ -19,8 +21,9 @@ const defaultKnobs = () => ({
 
 const cnFileStories = cn('FileStories');
 
-export function Playground() {
-  const { size, extension, loading, loadingWithProgressSpin, loadingProgress } = defaultKnobs();
+export const Playground = () => {
+  const { size, extension, loading, loadingWithProgressSpin, loadingProgress } =
+    defaultKnobs();
 
   return (
     <div className={cnFileStories()}>
@@ -33,7 +36,7 @@ export function Playground() {
       />
     </div>
   );
-}
+};
 
 export const Gallery = FileIconsGallery;
 

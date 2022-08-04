@@ -61,7 +61,8 @@ export const additionalData: Data = [
       {
         url: 'http://charts.gizeasy.ru?path=/docs/components-histogram--playground',
         name: 'Histogram',
-        description: 'Гистограмма. Показывает количественное распределение данных.',
+        description:
+          'Гистограмма. Показывает количественное распределение данных.',
         image: HistogramImage,
       },
       {
@@ -108,7 +109,8 @@ export const additionalData: Data = [
       {
         url: 'https://github.com/consta-design-system/header-umd',
         name: 'Header-umd',
-        description: 'Для проектов без React. Прикручивается скриптом, есть настройки.',
+        description:
+          'Для проектов без React. Прикручивается скриптом, есть настройки.',
         image: HeaderUmdImage,
       },
       {
@@ -121,13 +123,15 @@ export const additionalData: Data = [
       {
         url: 'http://analytic-ui.gizeasy.ru/?path=/docs/feedbackform--playground',
         name: 'FeedbackForm',
-        description: 'Виджет обратной связи. Можно ставить оценки и писать отзывы.',
+        description:
+          'Виджет обратной связи. Можно ставить оценки и писать отзывы.',
         image: FeedbackFormImage,
       },
       {
         url: 'http://gpn-responses.gizeasy.ru/',
         name: 'GPN-Responses',
-        description: 'Заглушки с сообщениями об ошибках и важных статусах в стиле «Газпром нефти».',
+        description:
+          'Заглушки с сообщениями об ошибках и важных статусах в стиле «Газпром нефти».',
         image: GpnResponsesImage,
       },
     ],
@@ -144,7 +148,8 @@ export const additionalData: Data = [
       {
         url: 'http://rc-tree-adapter.gizeasy.ru/',
         name: 'rcTreeAdapter',
-        description: 'Адаптер для rc-tree. Дерево, подходит для создания иерархических структур.',
+        description:
+          'Адаптер для rc-tree. Дерево, подходит для создания иерархических структур.',
         image: RcTreeAdapterImage,
       },
       {

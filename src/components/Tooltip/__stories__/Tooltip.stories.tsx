@@ -1,8 +1,14 @@
 import './Tooltip.stories.css';
 
-import React, { useRef, useState } from 'react';
 import { action } from '@storybook/addon-actions';
-import { boolean, object, optionsKnob, select, text } from '@storybook/addon-knobs';
+import {
+  boolean,
+  object,
+  optionsKnob,
+  select,
+  text,
+} from '@storybook/addon-knobs';
+import React, { useRef, useState } from 'react';
 
 import { cn } from '../../../utils/bem';
 import { createMetadata, createStory } from '../../../utils/storybook';
@@ -10,8 +16,12 @@ import { Badge } from '../../Badge/Badge';
 import { Button } from '../../Button/Button';
 import { directions, Position } from '../../Popover/Popover';
 import { Text } from '../../Text/Text';
-import { Tooltip, tooltipPropSizes, tooltipPropSizesDefault, tooltipPropStatus } from '../Tooltip';
-
+import {
+  Tooltip,
+  tooltipPropSizes,
+  tooltipPropSizesDefault,
+  tooltipPropStatus,
+} from '../Tooltip';
 import mdx from './Tooltip.docs.mdx';
 
 const cnTooltipStories = cn('TooltipStories');
@@ -66,9 +76,14 @@ export const Playground = createStory(
     const handleClickOnAnchor = () => {
       setIsTooltipVisible(!isTooltipVisible);
     };
-    const anchorType = optionsKnob('Тип якоря', { Кнопка: 'button', Бейджик: 'badge ' }, 'button', {
-      display: 'inline-radio',
-    });
+    const anchorType = optionsKnob(
+      'Тип якоря',
+      { Кнопка: 'button', Бейджик: 'badge ' },
+      'button',
+      {
+        display: 'inline-radio',
+      },
+    );
     const anchor =
       anchorType === 'button' ? (
         <Button

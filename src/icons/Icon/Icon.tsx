@@ -29,11 +29,17 @@ export type IconComponent = React.FC<IconProps>;
 
 export const cnIcon = cn('Icon');
 
-export const Icon: IconComponent = forwardRef<HTMLSpanElement, IconProps>((props, ref) => {
-  const { children, className, size = 'm', view, ...otherProps } = props;
-  return (
-    <span {...otherProps} className={cnIcon({ size, view }, [className])} ref={ref}>
-      {children}
-    </span>
-  );
-});
+export const Icon: IconComponent = forwardRef<HTMLSpanElement, IconProps>(
+  (props, ref) => {
+    const { children, className, size = 'm', view, ...otherProps } = props;
+    return (
+      <span
+        {...otherProps}
+        className={cnIcon({ size, view }, [className])}
+        ref={ref}
+      >
+        {children}
+      </span>
+    );
+  },
+);

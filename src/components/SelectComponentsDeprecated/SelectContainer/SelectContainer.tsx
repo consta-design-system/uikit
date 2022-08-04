@@ -25,28 +25,31 @@ export type SelectContainerProps = PropsWithHTMLAttributes<
   HTMLDivElement
 >;
 
-export const SelectContainer = React.forwardRef<HTMLDivElement, SelectContainerProps>(
-  (props, ref) => {
-    const {
-      size = DefaultPropSize,
-      form = DefaultPropForm,
-      view = DefaultPropView,
-      className,
-      disabled,
-      children,
-      focused,
-      multiple,
-      ...otherProps
-    } = props;
+export const SelectContainer = React.forwardRef<
+  HTMLDivElement,
+  SelectContainerProps
+>((props, ref) => {
+  const {
+    size = DefaultPropSize,
+    form = DefaultPropForm,
+    view = DefaultPropView,
+    className,
+    disabled,
+    children,
+    focused,
+    multiple,
+    ...otherProps
+  } = props;
 
-    return (
-      <div
-        {...otherProps}
-        className={cnSelect({ size, form, disabled, view, focused, multiple }, [className])}
-        ref={ref}
-      >
-        {children}
-      </div>
-    );
-  },
-);
+  return (
+    <div
+      {...otherProps}
+      className={cnSelect({ size, form, disabled, view, focused, multiple }, [
+        className,
+      ])}
+      ref={ref}
+    >
+      {children}
+    </div>
+  );
+});

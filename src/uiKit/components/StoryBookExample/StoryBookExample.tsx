@@ -25,7 +25,9 @@ export const StoryBookExample: React.FC<StoryBookModsProps> = (props) => {
   return (
     <div className={cnStoryBookExample(null, [className])} {...otherProps}>
       {Array.isArray(children)
-        ? children.map((item, index) => renderCildren(item as React.ReactElement, index))
+        ? children.map((item, index) =>
+            renderCildren(item as React.ReactElement, index),
+          )
         : renderCildren(children as React.ReactElement)}
     </div>
   );

@@ -10,9 +10,13 @@ import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsE
 import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Button } from '../../../Button';
 
-export function ButtonExampleIconBasic() {
+export const ButtonExampleIconBasic = () => {
   return (
-    <div className={cnDocsDecorator('Section', [wp.decorator({ distribute: 'left' })])}>
+    <div
+      className={cnDocsDecorator('Section', [
+        wp.decorator({ distribute: 'left' }),
+      ])}
+    >
       <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>
         <Button label="Назад" iconLeft={IconBackward} />
       </div>
@@ -21,11 +25,15 @@ export function ButtonExampleIconBasic() {
       </div>
     </div>
   );
-}
+};
 
-export function ButtonExampleIconOnly() {
+export const ButtonExampleIconOnly = () => {
   return (
-    <div className={cnDocsDecorator('Section', [wp.decorator({ distribute: 'left' })])}>
+    <div
+      className={cnDocsDecorator('Section', [
+        wp.decorator({ distribute: 'left' }),
+      ])}
+    >
       <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>
         <Button label="Назад" view="ghost" iconLeft={IconHamburger} onlyIcon />
       </div>
@@ -37,4 +45,4 @@ export function ButtonExampleIconOnly() {
       </div>
     </div>
   );
-}
+};

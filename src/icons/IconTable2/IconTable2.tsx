@@ -1,5 +1,4 @@
 import { createIcon } from '../createIcon/createIcon';
-
 import IconTable2SizeM from './IconTable2_size_m';
 import IconTable2SizeS from './IconTable2_size_s';
 import IconTable2SizeXs from './IconTable2_size_xs';

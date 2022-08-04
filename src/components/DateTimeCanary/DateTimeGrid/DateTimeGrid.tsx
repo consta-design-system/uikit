@@ -5,7 +5,10 @@ import React from 'react';
 import { cn } from '../../../utils/bem';
 import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
 import { Text } from '../../Text/Text';
-import { DateTimeCell, DateTimeCellPropRange } from '../DateTimeCell/DateTimeCell';
+import {
+  DateTimeCell,
+  DateTimeCellPropRange,
+} from '../DateTimeCell/DateTimeCell';
 import { DateTimeItem, DateTimeItemProps } from '../DateTimeItem/DateTimeItem';
 
 type Item =
@@ -28,7 +31,11 @@ export type DateTimeGridProps = PropsWithJsxAttributes<
 
 export const cnDateTimeGrid = cn('DateTimeGrid');
 
-const renderItem = (item: Item, index: number, ref?: React.RefObject<HTMLDivElement>) => {
+const renderItem = (
+  item: Item,
+  index: number,
+  ref?: React.RefObject<HTMLDivElement>,
+) => {
   if (typeof item === 'string') {
     return (
       <DateTimeCell ref={ref} key={cnDateTimeGrid('String', { index, item })}>

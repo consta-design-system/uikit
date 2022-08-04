@@ -24,8 +24,11 @@ import {
 
 const cnBreadcrumbsMore = cn('BreadcrumbsMore');
 
-function getLeftSideBar<ITEM>(getItemIcon: BreadcrumbsPropGetItemIcon<ITEM>, iconSize: 'xs' | 'm') {
-  return (item: ITEM) => {
+function getLeftSideBar<ITEM>(
+  getItemIcon: BreadcrumbsPropGetItemIcon<ITEM>,
+  iconSize: 'xs' | 'm',
+) {
+  return function (item: ITEM) {
     const Icon = getItemIcon(item);
     if (Icon) {
       return <Icon size={iconSize} />;
@@ -41,7 +44,9 @@ function getItemAs<ITEM>(getItemHref: BreadcrumbsPropGetItemHref<ITEM>) {
   };
 }
 
-function getItemHTMLAttributes<ITEM>(getItemHref: BreadcrumbsPropGetItemHref<ITEM>) {
+function getItemHTMLAttributes<ITEM>(
+  getItemHref: BreadcrumbsPropGetItemHref<ITEM>,
+) {
   return (item: ITEM) => {
     return { href: getItemHref(item) };
   };
@@ -54,10 +59,10 @@ export const contextMenuSizeMap = {
   l: 'l',
 } as const;
 
-function BreadcrumbsMoreRender<ITEM>(
+const BreadcrumbsMoreRender: <ITEM>(
   props: BreadcrumbsMoreProps<ITEM>,
   ref: React.Ref<HTMLLIElement>,
-) {
+) => React.ReactElement | null = (props, ref) => {
   const {
     size,
     items,
@@ -105,7 +110,12 @@ function BreadcrumbsMoreRender<ITEM>(
         ref={buttonRef}
         onClick={setOpen.toogle}
       />
-      <Transition in={open} unmountOnExit timeout={animateTimeout} nodeRef={menuRef}>
+      <Transition
+        in={open}
+        unmountOnExit
+        timeout={animateTimeout}
+        nodeRef={menuRef}
+      >
         {(animate) => (
           <ContextMenu
             className={cnMixPopoverAnimate({ animate, direction })}
@@ -136,6 +146,8 @@ function BreadcrumbsMoreRender<ITEM>(
       </Transition>
     </BreadcrumbsItem>
   );
-}
+};
 
-export const BreadcrumbsMore = forwardRef(BreadcrumbsMoreRender) as BreadcrumbsMoreComponent;
+export const BreadcrumbsMore = forwardRef(
+  BreadcrumbsMoreRender,
+) as BreadcrumbsMoreComponent;

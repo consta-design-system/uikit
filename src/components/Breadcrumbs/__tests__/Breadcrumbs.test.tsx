@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { render } from '@testing-library/react';
+import * as React from 'react';
 
 import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconCamera } from '../../../icons/IconCamera/IconCamera';
@@ -130,7 +130,9 @@ describe('Компонент Breadcrumbs', () => {
       const links = container.querySelectorAll(`.${cnBreadcrumbs('Link')}`);
       pages.forEach((page, i) => {
         it(`наличие иконки=${!!page.icon}`, () => {
-          expect(!!links[i].querySelector(`.${cnBreadcrumbs('Icon')}`)).toEqual(!!page.icon);
+          expect(!!links[i].querySelector(`.${cnBreadcrumbs('Icon')}`)).toEqual(
+            !!page.icon,
+          );
         });
       });
     });
@@ -140,7 +142,9 @@ describe('Компонент Breadcrumbs', () => {
       const links = container.querySelectorAll(`.${cnBreadcrumbs('Link')}`);
       pages.forEach((page, i) => {
         it(`лэйбл=${page.label}`, () => {
-          expect(links[i].querySelector(`.${cnBreadcrumbs('Label')}`)).toContainHTML(page.label);
+          expect(
+            links[i].querySelector(`.${cnBreadcrumbs('Label')}`),
+          ).toContainHTML(page.label);
         });
       });
     });
@@ -149,13 +153,17 @@ describe('Компонент Breadcrumbs', () => {
       it(`Лэйбл первой ссылки не должен отображаться если выставлен флаг onlyIconRoot`, () => {
         const { container } = renderComponent({ pages, onlyIconRoot: true });
         const links = container.querySelectorAll(`.${cnBreadcrumbs('Link')}`);
-        expect(!!links[0].querySelector(`.${cnBreadcrumbs('Label')}`)).toEqual(false);
+        expect(!!links[0].querySelector(`.${cnBreadcrumbs('Label')}`)).toEqual(
+          false,
+        );
       });
 
       it(`Лэйбл первой ссылки должен отображаться если флаг onlyIconRoot не выставлен`, () => {
         const { container } = renderComponent({ pages, onlyIconRoot: false });
         const links = container.querySelectorAll(`.${cnBreadcrumbs('Link')}`);
-        expect(!!links[0].querySelector(`.${cnBreadcrumbs('Label')}`)).toEqual(true);
+        expect(!!links[0].querySelector(`.${cnBreadcrumbs('Label')}`)).toEqual(
+          true,
+        );
       });
     });
   });

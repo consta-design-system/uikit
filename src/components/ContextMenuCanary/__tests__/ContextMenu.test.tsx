@@ -1,13 +1,17 @@
-import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import React from 'react';
 
-import { exampleItems as items, groups } from '../__mocks__/mock.data';
 import { IconAllDone } from '../../../icons/IconAllDone/IconAllDone';
 import { cn } from '../../../utils/bem';
 import { cnText } from '../../Text/Text';
+import { exampleItems as items, groups } from '../__mocks__/mock.data';
 import { ContextMenu } from '../ContextMenuCanary';
 import { cnContextMenuLevel } from '../ContextMenuLevel/ContextMenuLevel';
-import { ContextMenuGroupDefault, ContextMenuItemDefault, ContextMenuProps } from '../types';
+import {
+  ContextMenuGroupDefault,
+  ContextMenuItemDefault,
+  ContextMenuProps,
+} from '../types';
 
 const testId = 'ContextMenuCanary';
 const additionalClass = 'additionalClass';
@@ -18,17 +22,15 @@ const renderComponent = (
   props: ContextMenuProps<ContextMenuItemDefault, ContextMenuGroupDefault> | {},
 ) => {
   return render(
-    <>
-      <ContextMenu
-        {...props}
-        isOpen
-        anchorRef={undefined}
-        position={{ x: 0, y: 0 }}
-        items={items}
-        className={additionalClass}
-        data-testid={testId}
-      />
-    </>,
+    <ContextMenu
+      {...props}
+      isOpen
+      anchorRef={undefined}
+      position={{ x: 0, y: 0 }}
+      items={items}
+      className={additionalClass}
+      data-testid={testId}
+    />,
   );
 };
 
@@ -45,7 +47,9 @@ function getItem(index = 0) {
 }
 
 function getSide(index = 0, sideIndex = 0) {
-  return getItem(index).querySelectorAll(`.${cnContextMenuItem('Slot')}`)[sideIndex];
+  return getItem(index).querySelectorAll(`.${cnContextMenuItem('Slot')}`)[
+    sideIndex
+  ];
 }
 function getIcon(index = 0, sideIndex = 0) {
   return getSide(index, sideIndex).querySelectorAll('.Icon')[0];
@@ -139,7 +143,9 @@ describe('Компонент ContextMenu', () => {
           getItemLeftSide: () => 'test',
         });
 
-        expect(getSide()).toHaveClass(cnContextMenuItem('Slot', { position: 'left' }));
+        expect(getSide()).toHaveClass(
+          cnContextMenuItem('Slot', { position: 'left' }),
+        );
       });
     });
     describe('проверка getItemRightSide', () => {
@@ -149,7 +155,9 @@ describe('Компонент ContextMenu', () => {
           getItemRightSide: () => 'test',
         });
 
-        expect(getSide(0, 2)).toHaveClass(cnContextMenuItem('Slot', { position: 'right' }));
+        expect(getSide(0, 2)).toHaveClass(
+          cnContextMenuItem('Slot', { position: 'right' }),
+        );
       });
     });
     describe('проверка getItemLeftIcon', () => {

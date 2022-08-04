@@ -29,9 +29,23 @@ const steps = [
 ];
 
 export const ProgressStepBarExampleDirectionHorizontal = () => {
-  return <ProgressStepBar size="s" direction="horizontal" steps={steps} activeStepIndex={2} />;
+  return (
+    <ProgressStepBar
+      size="s"
+      direction="horizontal"
+      steps={steps}
+      activeStepIndex={2}
+    />
+  );
 };
 
 export const ProgressStepBarExampleDirectionVerical = () => {
-  return <ProgressStepBar size="s" direction="vertical" steps={steps} activeStepIndex={2} />;
+  return (
+    <ProgressStepBar
+      size="s"
+      direction="vertical"
+      steps={steps}
+      activeStepIndex={2}
+    />
+  );
 };

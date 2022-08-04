@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function RcTreeAdapterImage(props: React.SVGProps<SVGSVGElement>) {
+const RcTreeAdapterImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <path
@@ -27,7 +27,11 @@ function RcTreeAdapterImage(props: React.SVGProps<SVGSVGElement>) {
         fill="#002033"
         fillOpacity={0.3}
       />
-      <path fill="#002033" fillOpacity={0.35} d="M79.958 67.5H161v7H79.958zM94 89.5h67v7H94z" />
+      <path
+        fill="#002033"
+        fillOpacity={0.35}
+        d="M79.958 67.5H161v7H79.958zM94 89.5h67v7H94z"
+      />
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -38,6 +42,6 @@ function RcTreeAdapterImage(props: React.SVGProps<SVGSVGElement>) {
       <path fill="#002033" fillOpacity={0.35} d="M62 23.5h99v7H62z" />
     </svg>
   );
-}
+};
 
 export default RcTreeAdapterImage;

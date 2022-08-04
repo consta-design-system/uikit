@@ -8,7 +8,10 @@ import { useGlobalKeys } from '../../hooks/useGlobalKeys/useGlobalKeys';
 import { cn } from '../../utils/bem';
 import { cnForCssTransition } from '../../utils/cnForCssTransition';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
-import { PortalWithTheme, usePortalContext } from '../PortalWithTheme/PortalWithTheme';
+import {
+  PortalWithTheme,
+  usePortalContext,
+} from '../PortalWithTheme/PortalWithTheme';
 import { useTheme } from '../Theme/Theme';
 
 const modalPropWidth = ['auto'] as const;
@@ -46,6 +49,7 @@ const cnModal = cn('Modal');
  * получает рефы всех вложенных порталов в модалку
  * для дальнейшего исключения их из useClickOutside
  */
+
 const ContextConsumer: React.FC<{
   onClickOutside?: (event: MouseEvent) => void;
   ignoreClicksInsideRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
@@ -54,11 +58,14 @@ const ContextConsumer: React.FC<{
 
   useClickOutside({
     isActive: !!onClickOutside,
-    ignoreClicksInsideRefs: [...(ignoreClicksInsideRefs || []), ...(refs || [])],
+    ignoreClicksInsideRefs: [
+      ...(ignoreClicksInsideRefs || []),
+      ...(refs || []),
+    ],
     handler: onClickOutside,
   });
 
-  return <>{children}</>;
+  return children as React.ReactElement;
 };
 
 export const Modal: React.FC<ModalProps> = (props) => {
@@ -111,9 +118,15 @@ export const Modal: React.FC<ModalProps> = (props) => {
         container={container}
         className={cnModal({ hasOverlay }, [rootClassName])}
         ref={portalRef}
-        style={typeof style?.zIndex === 'number' ? { zIndex: style.zIndex } : undefined}
+        style={
+          typeof style?.zIndex === 'number'
+            ? { zIndex: style.zIndex }
+            : undefined
+        }
       >
-        {hasOverlay && <div className={cnModal('Overlay')} aria-label="Overlay" />}
+        {hasOverlay && (
+          <div className={cnModal('Overlay')} aria-label="Overlay" />
+        )}
         <div
           {...otherProps}
           style={{
@@ -125,7 +138,10 @@ export const Modal: React.FC<ModalProps> = (props) => {
         >
           <ContextConsumer
             onClickOutside={onClickOutside || onOverlayClick}
-            ignoreClicksInsideRefs={[...(refsForExcludeClickOutside || []), ref]}
+            ignoreClicksInsideRefs={[
+              ...(refsForExcludeClickOutside || []),
+              ref,
+            ]}
           >
             {children}
           </ContextConsumer>

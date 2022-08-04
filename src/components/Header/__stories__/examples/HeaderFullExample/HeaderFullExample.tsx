@@ -15,11 +15,14 @@ import {
   HeaderModule,
   HeaderSearchBar,
 } from '../../../Header';
-import { SearchBarPropOnChange, SearchBarPropOnSearch } from '../../../SearchBar/HeaderSearchBar';
+import {
+  SearchBarPropOnChange,
+  SearchBarPropOnSearch,
+} from '../../../SearchBar/HeaderSearchBar';
 
 const cnExample = cn('HeaderFullExample');
 
-export function HeaderFullExample() {
+export const HeaderFullExample = () => {
   const [value, setValue] = useState<string | null>(null);
   const [isLogged, setIsLogged] = useState<boolean>(false);
   const handleChange: SearchBarPropOnChange = ({ value }) => setValue(value);
@@ -92,4 +95,4 @@ export function HeaderFullExample() {
       }
     />
   );
-}
+};

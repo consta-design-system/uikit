@@ -106,8 +106,16 @@ export const BreadcrumbsExampleActive = () => {
 export const BreadcrumbsExampleFitMode = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <Breadcrumbs items={pagesLongLabels} onItemClick={onItemClick} fitMode="dropdown" />
-      <Breadcrumbs items={pagesLongLabels} onItemClick={onItemClick} fitMode="scroll" />
+      <Breadcrumbs
+        items={pagesLongLabels}
+        onItemClick={onItemClick}
+        fitMode="dropdown"
+      />
+      <Breadcrumbs
+        items={pagesLongLabels}
+        onItemClick={onItemClick}
+        fitMode="scroll"
+      />
     </StoryBookExample>
   );
 };
@@ -123,7 +131,12 @@ export const BreadcrumbsExampleIcons = () => {
 export const BreadcrumbsExampleIconRoot = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <Breadcrumbs items={pagesNoIcon} size="m" onlyIconRoot onItemClick={onItemClick} />
+      <Breadcrumbs
+        items={pagesNoIcon}
+        size="m"
+        onlyIconRoot
+        onItemClick={onItemClick}
+      />
     </StoryBookExample>
   );
 };
@@ -131,7 +144,12 @@ export const BreadcrumbsExampleIconRoot = () => {
 export const BreadcrumbsExamplelastItemIsLink = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <Breadcrumbs items={pagesNoIcon} size="m" lastItemIsLink onItemClick={onItemClick} />
+      <Breadcrumbs
+        items={pagesNoIcon}
+        size="m"
+        lastItemIsLink
+        onItemClick={onItemClick}
+      />
     </StoryBookExample>
   );
 };
@@ -139,10 +157,30 @@ export const BreadcrumbsExamplelastItemIsLink = () => {
 export const BreadcrumbsExampleSize = () => {
   return (
     <StoryBookExample>
-      <Breadcrumbs items={pages} size="xs" onlyIconRoot onItemClick={onItemClick} />
-      <Breadcrumbs items={pages} size="s" onlyIconRoot onItemClick={onItemClick} />
-      <Breadcrumbs items={pages} size="m" onlyIconRoot onItemClick={onItemClick} />
-      <Breadcrumbs items={pages} size="l" onlyIconRoot onItemClick={onItemClick} />
+      <Breadcrumbs
+        items={pages}
+        size="xs"
+        onlyIconRoot
+        onItemClick={onItemClick}
+      />
+      <Breadcrumbs
+        items={pages}
+        size="s"
+        onlyIconRoot
+        onItemClick={onItemClick}
+      />
+      <Breadcrumbs
+        items={pages}
+        size="m"
+        onlyIconRoot
+        onItemClick={onItemClick}
+      />
+      <Breadcrumbs
+        items={pages}
+        size="l"
+        onlyIconRoot
+        onItemClick={onItemClick}
+      />
     </StoryBookExample>
   );
 };

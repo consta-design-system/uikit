@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function ResponsesImageNothingFound(props: React.SVGProps<SVGSVGElement>) {
+const ResponsesImageNothingFound = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 420 280" {...props}>
       <path
@@ -99,6 +99,6 @@ function ResponsesImageNothingFound(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default ResponsesImageNothingFound;

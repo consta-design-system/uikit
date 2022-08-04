@@ -1,6 +1,5 @@
 import './CalendarSlider.css';
 
-import React, { useEffect, useRef } from 'react';
 import {
   addMonths,
   addYears,
@@ -12,6 +11,7 @@ import {
   startOfYear,
 } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
+import React, { useEffect, useRef } from 'react';
 
 import { IconForward } from '../../../icons/IconForward/IconForward';
 import { range } from '../../../utils/array';
@@ -38,7 +38,8 @@ const isCurrentVisibleYear = (currentDate: Date, month: Date) =>
   getYear(currentDate) === getYear(month);
 
 const isCurrentVisibleMonth = (currentDate: Date, month: Date) =>
-  isCurrentVisibleYear(currentDate, month) && getMonth(currentDate) === getMonth(month);
+  isCurrentVisibleYear(currentDate, month) &&
+  getMonth(currentDate) === getMonth(month);
 
 const getValueRange = (yearDate: Date, value?: Date | DateRange) => {
   if (!Array.isArray(value)) {
@@ -54,18 +55,28 @@ const getValueRange = (yearDate: Date, value?: Date | DateRange) => {
   const valueStartDateTime = value[0].getTime();
   const valueEndDateTime = value[1].getTime();
 
-  if (valueStartDateTime > yearEndDateTime || valueEndDateTime < yearStartDateTime) {
+  if (
+    valueStartDateTime > yearEndDateTime ||
+    valueEndDateTime < yearStartDateTime
+  ) {
     return undefined;
   }
 
-  if (valueStartDateTime <= yearStartDateTime && valueEndDateTime >= yearEndDateTime) {
+  if (
+    valueStartDateTime <= yearStartDateTime &&
+    valueEndDateTime >= yearEndDateTime
+  ) {
     return [0, 100];
   }
 
   const msInYear = yearEndDateTime - yearStartDateTime;
   const inProcent = (number: number) => (number / msInYear) * 100;
   const offset = Math.floor(
-    inProcent(valueStartDateTime <= yearStartDateTime ? 0 : valueStartDateTime - yearStartDateTime),
+    inProcent(
+      valueStartDateTime <= yearStartDateTime
+        ? 0
+        : valueStartDateTime - yearStartDateTime,
+    ),
   );
 
   const minusYears = (n: number): number => {
@@ -97,7 +108,11 @@ const getMonthsData = (date: Date, locale: Locale) =>
 
 const getYearDate = (date: Date) => new Date(getYear(date), 0, 1, 0, 0, 0, 0);
 
-const getSliderData = (date: Date, value: Date | DateRange | undefined, locale: Locale) => {
+const getSliderData = (
+  date: Date,
+  value: Date | DateRange | undefined,
+  locale: Locale,
+) => {
   const currentYear = getYearDate(date);
 
   return [
@@ -154,11 +169,17 @@ export const CalendarSlider: React.FC<CalendarSliderProps> = (props) => {
           <div className={cnCalendarSlider('Selector')} />
           {data.map((year) => (
             <Text
-              className={cnCalendarSlider('YearLabel', { position: year.positon })}
+              className={cnCalendarSlider('YearLabel', {
+                position: year.positon,
+              })}
               weight="bold"
               size="s"
               key={year.label}
-              view={isCurrentVisibleYear(currentVisibleDate, year.date) ? undefined : 'ghost'}
+              view={
+                isCurrentVisibleYear(currentVisibleDate, year.date)
+                  ? undefined
+                  : 'ghost'
+              }
             >
               {year.label}
             </Text>
@@ -184,7 +205,9 @@ export const CalendarSlider: React.FC<CalendarSliderProps> = (props) => {
                   onClick={() => onChange(month.date)}
                   onKeyDown={() => onChange(addMonths(month.date, 1))}
                   ref={
-                    isCurrentVisibleMonth(currentVisibleDate, month.date) ? currentMonthRef : null
+                    isCurrentVisibleMonth(currentVisibleDate, month.date)
+                      ? currentMonthRef
+                      : null
                   }
                   type="button"
                 >

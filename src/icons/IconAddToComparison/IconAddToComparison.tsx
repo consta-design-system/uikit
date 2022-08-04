@@ -1,5 +1,4 @@
 import { createIcon } from '../createIcon/createIcon';
-
 import IconAddToComparisonSizeM from './IconAddToComparison_size_m';
 import IconAddToComparisonSizeS from './IconAddToComparison_size_s';
 import IconAddToComparisonSizeXs from './IconAddToComparison_size_xs';

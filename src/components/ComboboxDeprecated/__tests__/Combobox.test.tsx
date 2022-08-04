@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
 import { act, fireEvent, render, screen } from '@testing-library/react';
+import React, { useState } from 'react';
 
-import { simpleItems } from '../__mocks__/data.mock';
 import { cnSelect } from '../../SelectComponentsDeprecated/cnSelect';
 import { cnSelectItem } from '../../SelectComponentsDeprecated/SelectItem/SelectItem';
+import { simpleItems } from '../__mocks__/data.mock';
 import { Combobox } from '../ComboboxDeprecated';
 
 const testId = 'Combobox';
@@ -30,7 +30,10 @@ const renderComponent = (props: {
   );
 };
 
-const ValueTest = ({ indexElementAfterClick = 0, indexElementBeforeClick = 3 }) => {
+const ValueTest = ({
+  indexElementAfterClick = 0,
+  indexElementBeforeClick = 3,
+}) => {
   const [value, setValue] = useState(simpleItems[indexElementAfterClick]);
   return (
     <div>
@@ -92,7 +95,9 @@ function getInput() {
 }
 
 function getIndicatorsDropdown() {
-  return getRender().querySelector(`.${cnSelect('IndicatorsDropdown')}`) as HTMLElement;
+  return getRender().querySelector(
+    `.${cnSelect('IndicatorsDropdown')}`,
+  ) as HTMLElement;
 }
 
 function getOutside() {
@@ -189,12 +194,16 @@ describe('Компонент Combobox', () => {
     const value = simpleItems[elementIndex];
     it(`отображается в инпуте`, () => {
       renderComponent({ value });
-      expect(getControlValue()).toHaveTextContent(simpleItems[elementIndex].label);
+      expect(getControlValue()).toHaveTextContent(
+        simpleItems[elementIndex].label,
+      );
     });
     it(`подсвечивается в списке опций`, () => {
       renderComponent({ value });
       indicatorsDropdownClick();
-      expect(getCheckedOption()).toHaveTextContent(simpleItems[elementIndex].label);
+      expect(getCheckedOption()).toHaveTextContent(
+        simpleItems[elementIndex].label,
+      );
     });
     it(`изменение value вне компонента`, () => {
       const indexElementAfterClick = 1;
@@ -204,7 +213,9 @@ describe('Компонент Combobox', () => {
 
       indicatorsDropdownClick();
 
-      expect(getCheckedOption()).toHaveTextContent(simpleItems[indexElementBeforeClick].label);
+      expect(getCheckedOption()).toHaveTextContent(
+        simpleItems[indexElementBeforeClick].label,
+      );
     });
   });
   describe('проверка onChange', () => {
@@ -219,7 +230,9 @@ describe('Компонент Combobox', () => {
 
       expect(handleChange).toHaveBeenCalled();
       expect(handleChange).toHaveBeenCalledTimes(1);
-      expect(handleChange).toHaveBeenCalledWith(expect.objectContaining(simpleItems[elementIndex]));
+      expect(handleChange).toHaveBeenCalledWith(
+        expect.objectContaining(simpleItems[elementIndex]),
+      );
     });
   });
 });

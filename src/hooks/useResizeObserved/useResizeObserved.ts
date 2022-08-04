@@ -1,6 +1,9 @@
 import React, { RefObject } from 'react';
 
-export const useResizeObserved = <ELEMENT extends HTMLElement | SVGGraphicsElement, RETURN_TYPE>(
+export const useResizeObserved = <
+  ELEMENT extends HTMLElement | SVGGraphicsElement,
+  RETURN_TYPE,
+>(
   refs: Array<RefObject<ELEMENT>>,
   mapper: (el: ELEMENT | null) => RETURN_TYPE,
 ): RETURN_TYPE[] => {

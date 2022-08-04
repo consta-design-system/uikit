@@ -1,6 +1,6 @@
-import React from 'react';
 import { startOfWeek } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
+import React from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
@@ -33,7 +33,9 @@ export const DateTimeExampleViewSlider = () => {
 export const DateTimeExampleCurrent = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <DateTime currentVisibleDate={startOfWeek(new Date(), { locale: ruLocale })} />
+      <DateTime
+        currentVisibleDate={startOfWeek(new Date(), { locale: ruLocale })}
+      />
     </StoryBookExample>
   );
 };

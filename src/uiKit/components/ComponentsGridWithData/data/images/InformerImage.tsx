@@ -1,10 +1,13 @@
 import * as React from 'react';
 
-function InformerImage(props: React.SVGProps<SVGSVGElement>) {
+const InformerImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <g clipPath="url(#SvgInformerImage__clip0_1889_15805)">
-        <path d="M0 4a4 4 0 014-4h192a4 4 0 014 4v112a4 4 0 01-4 4H4a4 4 0 01-4-4V4z" fill="#fff" />
+        <path
+          d="M0 4a4 4 0 014-4h192a4 4 0 014 4v112a4 4 0 01-4 4H4a4 4 0 01-4-4V4z"
+          fill="#fff"
+        />
         <path fill="#002033" fillOpacity={0.08} d="M24 29h150v12H24z" />
         <path fill="#004269" fillOpacity={0.07} d="M-11-4h217v23H-11z" />
         <path fill="#F38B00" d="M115 51h59v14h-59z" />
@@ -30,6 +33,6 @@ function InformerImage(props: React.SVGProps<SVGSVGElement>) {
       </defs>
     </svg>
   );
-}
+};
 
 export default InformerImage;

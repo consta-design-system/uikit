@@ -23,18 +23,18 @@ const columns: TableColumn<typeof rows[number]>[] = [
   },
 ];
 
-export function TableExampleZebraOdd() {
+export const TableExampleZebraOdd = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Table columns={columns} rows={rows} zebraStriped="odd" />
     </StoryBookExample>
   );
-}
+};
 
-export function TableExampleZebraEven() {
+export const TableExampleZebraEven = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Table columns={columns} rows={rows} zebraStriped="even" />
     </StoryBookExample>
   );
-}
+};

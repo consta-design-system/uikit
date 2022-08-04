@@ -5,13 +5,21 @@ export const dateTimePropView = ['classic', 'book', 'slider'] as const;
 export type DateTimePropView = typeof dateTimePropView[number];
 export const dateTimePropViewDefault = dateTimePropView[0];
 
-export const dateTimePropType = ['date', 'month', 'year', 'time', 'date-time'] as const;
+export const dateTimePropType = [
+  'date',
+  'month',
+  'year',
+  'time',
+  'date-time',
+] as const;
 export type DateTimePropType = typeof dateTimePropType[number];
 export const dateTimePropTypeDefault = dateTimePropType[0];
 
 export type СapableRangeType = 'date' | 'month' | 'year' | 'date-time';
 
-export type DateTimePropValue<TYPE> = TYPE extends СapableRangeType ? Date | DateRange : Date;
+export type DateTimePropValue<TYPE> = TYPE extends СapableRangeType
+  ? Date | DateRange
+  : Date;
 
 export type DateTimePropOnChange = (props: {
   value: Date;
@@ -19,7 +27,10 @@ export type DateTimePropOnChange = (props: {
 }) => void;
 
 export type DateTimePropOnChangeRange<TYPE> = TYPE extends СapableRangeType
-  ? (props: { value: DateRange; e: React.MouseEvent<HTMLButtonElement> }) => void
+  ? (props: {
+      value: DateRange;
+      e: React.MouseEvent<HTMLButtonElement>;
+    }) => void
   : never;
 
 type LocaleWords = {
@@ -35,31 +46,34 @@ export type DateTimePropLocale = Locale & LocaleWords;
 export const moveTypes = ['year', 'month', 'day', 'time'] as const;
 export type MoveType = typeof moveTypes[number];
 
-type DateTimePropTimeFor<TYPE> = TYPE extends 'date-time' ? 'start' | 'end' : never;
+type DateTimePropTimeFor<TYPE> = TYPE extends 'date-time'
+  ? 'start' | 'end'
+  : never;
 
-export type DateTimeProps<TYPE extends DateTimePropType = 'date'> = PropsWithHTMLAttributesAndRef<
-  {
-    currentVisibleDate?: Date;
-    type?: TYPE;
-    value?: DateTimePropValue<TYPE>;
-    onChange?: DateTimePropOnChange;
-    onChangeRange?: DateTimePropOnChangeRange<TYPE>;
-    minDate?: Date;
-    maxDate?: Date;
-    events?: Date[];
-    view?: TYPE extends СapableRangeType ? DateTimePropView : 'classic';
-    locale?: DateTimePropLocale;
-    children?: never;
-    onChangeCurrentVisibleDate?: (date: Date) => void;
-    multiplicitySeconds?: number;
-    multiplicityMinutes?: number;
-    multiplicityHours?: number;
-    onMove?: (type: MoveType) => void;
-    renderAdditionalControls?: DateTimeAdditionalControlRenderProp;
-    timeFor?: DateTimePropTimeFor<TYPE>;
-  },
-  HTMLDivElement
->;
+export type DateTimeProps<TYPE extends DateTimePropType = 'date'> =
+  PropsWithHTMLAttributesAndRef<
+    {
+      currentVisibleDate?: Date;
+      type?: TYPE;
+      value?: DateTimePropValue<TYPE>;
+      onChange?: DateTimePropOnChange;
+      onChangeRange?: DateTimePropOnChangeRange<TYPE>;
+      minDate?: Date;
+      maxDate?: Date;
+      events?: Date[];
+      view?: TYPE extends СapableRangeType ? DateTimePropView : 'classic';
+      locale?: DateTimePropLocale;
+      children?: never;
+      onChangeCurrentVisibleDate?: (date: Date) => void;
+      multiplicitySeconds?: number;
+      multiplicityMinutes?: number;
+      multiplicityHours?: number;
+      onMove?: (type: MoveType) => void;
+      renderAdditionalControls?: DateTimeAdditionalControlRenderProp;
+      timeFor?: DateTimePropTimeFor<TYPE>;
+    },
+    HTMLDivElement
+  >;
 
 export type DateTimeAdditionalControlRenderProp =
   | React.ReactNode

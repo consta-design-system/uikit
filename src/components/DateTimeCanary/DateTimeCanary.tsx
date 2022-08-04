@@ -3,7 +3,6 @@ import React, { forwardRef, useRef } from 'react';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { getByMap } from '../../utils/getByMap';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
-
 import { DateTimeTypeDate } from './DateTimeTypeDate/DateTimeTypeDate';
 import { DateTimeTypeDateTime } from './DateTimeTypeDateTime/DateTimeTypeDateTime';
 import { DateTimeTypeMonth } from './DateTimeTypeMonth/DateTimeTypeMonth';
@@ -16,7 +15,10 @@ import {
   DateTimeTypeComponent,
 } from './helpers/types';
 
-const typeMap: Record<DateTimePropType, DateTimeTypeComponent<DateTimePropType>> = {
+const typeMap: Record<
+  DateTimePropType,
+  DateTimeTypeComponent<DateTimePropType>
+> = {
   'date': DateTimeTypeDate,
   'month': DateTimeTypeMonth,
   'year': DateTimeTypeYear,

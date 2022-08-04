@@ -13,7 +13,11 @@ export const TextExampleView = () => {
     >
       {textPropView.map((item, index) => (
         <div key={index} className={wp.tplGrid('fraction', { row: 'third' })}>
-          <Text size="s" view="ghost" className={wp.decorator({ 'indent-b': 'xs' })}>
+          <Text
+            size="s"
+            view="ghost"
+            className={wp.decorator({ 'indent-b': 'xs' })}
+          >
             {`text*view*${item}`}
           </Text>
           <Text size="l" view={item}>

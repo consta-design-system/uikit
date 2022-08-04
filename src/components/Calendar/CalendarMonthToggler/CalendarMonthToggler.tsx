@@ -20,14 +20,19 @@ export type CalendarMonthTogglerProps = PropsWithJsxAttributes<
 
 export const cnCalendarMonthToggler = cn('CalendarMonthToggler');
 
-export const CalendarMonthToggler: React.FC<CalendarMonthTogglerProps> = (props) => {
+export const CalendarMonthToggler: React.FC<CalendarMonthTogglerProps> = (
+  props,
+) => {
   const { label, className, prevOnClick, nextOnClick, ...otherProps } = props;
 
   return (
     <div
       {...otherProps}
       className={cnCalendarMonthToggler(
-        { withPrevButton: Boolean(prevOnClick), withNextButton: Boolean(nextOnClick) },
+        {
+          withPrevButton: Boolean(prevOnClick),
+          withNextButton: Boolean(nextOnClick),
+        },
         [className],
       )}
     >
@@ -41,7 +46,10 @@ export const CalendarMonthToggler: React.FC<CalendarMonthTogglerProps> = (props)
           iconSize="s"
         />
       )}
-      <CalendarMonthLabel className={cnCalendarMonthToggler('Label')} label={label} />
+      <CalendarMonthLabel
+        className={cnCalendarMonthToggler('Label')}
+        label={label}
+      />
       {nextOnClick && (
         <Button
           className={cnCalendarMonthToggler('Button', { direction: 'next' })}

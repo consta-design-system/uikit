@@ -21,7 +21,8 @@ const getLastWidth = (
   const widthExceptLast =
     fistWidth +
     itemsDimensions.reduce(
-      (previous, current, currentIndex) => previous + (hiddenItems[currentIndex] ? 0 : current),
+      (previous, current, currentIndex) =>
+        previous + (hiddenItems[currentIndex] ? 0 : current),
       0,
     );
 
@@ -64,14 +65,16 @@ export const useElements = <ITEM>(items: ITEM[]) => {
     0,
   );
 
-  const { itemsDimensions, wrapperWidth, ...hideElementsInLineResult } = useHideElementsInLine<
-    ITEM,
-    HTMLLIElement,
-    HTMLUListElement
-  >(readyToHideItems, noHideElementsSizeSum, true);
+  const { itemsDimensions, wrapperWidth, ...hideElementsInLineResult } =
+    useHideElementsInLine<ITEM, HTMLLIElement, HTMLUListElement>(
+      readyToHideItems,
+      noHideElementsSizeSum,
+      true,
+    );
 
   const elementsSizeSum =
-    noHideElementsSizeSum + itemsDimensions.reduce((previous, current) => previous + current, 0);
+    noHideElementsSizeSum +
+    itemsDimensions.reduce((previous, current) => previous + current, 0);
 
   const lastWidth = getLastWidth(
     wrapperWidth,

@@ -22,9 +22,8 @@ const items = [
 ];
 
 export const ExampleUseHideElementsInLine = () => {
-  const { itemsRefs, wrapperRef, hiddenItems, moreRef, visibleItems } = useHideElementsInLine(
-    items,
-  );
+  const { itemsRefs, wrapperRef, hiddenItems, moreRef, visibleItems } =
+    useHideElementsInLine(items);
 
   return (
     <div ref={wrapperRef} className={cnExampleUseHideElementsInLine()}>

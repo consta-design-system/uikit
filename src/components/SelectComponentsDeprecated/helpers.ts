@@ -1,4 +1,7 @@
-import { selectDropdownform, SelectDropdownPropForm } from './SelectDropdown/SelectDropdown';
+import {
+  selectDropdownform,
+  SelectDropdownPropForm,
+} from './SelectDropdown/SelectDropdown';
 import { PropForm } from './types';
 
 const mapDropdownForms: Record<PropForm, SelectDropdownPropForm> = {

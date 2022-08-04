@@ -17,7 +17,7 @@ import {
 
 const cnExample = cn('HeaderWithoutSearchExample');
 
-export function HeaderWithoutSearchExample() {
+export const HeaderWithoutSearchExample = () => {
   const [isLogged, setIsLogged] = useState<boolean>(false);
 
   const handleLogin = () => setIsLogged(!isLogged);
@@ -78,4 +78,4 @@ export function HeaderWithoutSearchExample() {
       }
     />
   );
-}
+};

@@ -1,9 +1,14 @@
-import React, { MutableRefObject, useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  MutableRefObject,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import { useComponentSize } from '../../../hooks/useComponentSize/useComponentSize';
 import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
 import { SliderValue, TrackPosition } from '../helper';
-
 import {
   ActiveButton,
   getActiveValue,
@@ -17,7 +22,9 @@ import {
   UseSliderValues,
 } from './helper';
 
-export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): UseSliderValues {
+export function useSlider<RANGE extends boolean>(
+  props: UseSliderProps<RANGE>,
+): UseSliderValues {
   const {
     disabled,
     range,
@@ -34,7 +41,9 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
   const minValue = max > min ? min : 0;
   const maxValue = max > min ? max : 100;
 
-  const [currentValue, setCurrentValue] = useState<number | [number, number]>(value);
+  const [currentValue, setCurrentValue] = useState<number | [number, number]>(
+    value,
+  );
   const [leftPopover, setLeftPopover] = useState<TrackPosition>(null);
   const [rightPopover, setRightPopover] = useState<TrackPosition>(null);
 
@@ -82,7 +91,14 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
             getNewValue(currentValue[0], currentValue[0], step, min, max, 0),
             getNewValue(currentValue[1], currentValue[1], step, min, max, 1),
           ] as SliderValue<RANGE>)
-        : (getNewValue(currentValue, currentValue, step, min, max, 0) as SliderValue<RANGE>),
+        : (getNewValue(
+            currentValue,
+            currentValue,
+            step,
+            min,
+            max,
+            0,
+          ) as SliderValue<RANGE>),
     });
   }, [step]);
 
@@ -109,7 +125,11 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
 
   const onKeyPress = useCallback(
     (event: React.KeyboardEvent, typeButton: ActiveButton) => {
-      if (!disabled && typeof typeButton === 'number' && typeof currentValue !== 'undefined') {
+      if (
+        !disabled &&
+        typeof typeButton === 'number' &&
+        typeof currentValue !== 'undefined'
+      ) {
         let stepIncrement = !Array.isArray(step) ? step || 1 : 1;
         let validKeyCode = false;
         const changedValue = getActiveValue(currentValue, typeButton);
@@ -131,21 +151,26 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
         if (validKeyCode) {
           if (Array.isArray(step)) {
             step.forEach((stepPoint, index) => {
-              if (typeof typeButton === 'number' && changedValue === stepPoint) {
+              if (
+                typeof typeButton === 'number' &&
+                changedValue === stepPoint
+              ) {
                 if (stepIncrement >= 0) {
                   if (index === 0) {
                     stepIncrement = step[1] - minValue;
                   } else {
                     stepIncrement =
-                      (typeof step[index + 1] !== 'undefined' ? step[index + 1] : maxValue) -
-                      stepPoint;
+                      (typeof step[index + 1] !== 'undefined'
+                        ? step[index + 1]
+                        : maxValue) - stepPoint;
                   }
                 } else if (index === 0) {
                   stepIncrement = minValue - step[1];
                 } else {
                   stepIncrement =
-                    (typeof step[index - 1] !== 'undefined' ? step[index - 1] : minValue) -
-                    stepPoint;
+                    (typeof step[index - 1] !== 'undefined'
+                      ? step[index - 1]
+                      : minValue) - stepPoint;
                 }
               }
             });
@@ -192,15 +217,33 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
       return value;
     }
     const position = trackPosition(nativeEvent);
-    const positionValue = getValueByPosition(position, sliderRef, minValue, maxValue);
-    return getNewValue(positionValue, currentValue, step, min, max, activeButton.current);
+    const positionValue = getValueByPosition(
+      position,
+      sliderRef,
+      minValue,
+      maxValue,
+    );
+    return getNewValue(
+      positionValue,
+      currentValue,
+      step,
+      min,
+      max,
+      activeButton.current,
+    );
   };
 
-  const onFocus = (e: React.FocusEvent | React.MouseEvent, button: ActiveButton) => {
+  const onFocus = (
+    e: React.FocusEvent | React.MouseEvent,
+    button: ActiveButton,
+  ) => {
     activeButton.current = button;
   };
 
-  const handleTouchMove = (event: MouseEvent | TouchEvent | Event, typeButton?: ActiveButton) => {
+  const handleTouchMove = (
+    event: MouseEvent | TouchEvent | Event,
+    typeButton?: ActiveButton,
+  ) => {
     const button = typeButton || activeButton.current;
     if (typeof button === 'number') {
       const position = changePosition(event);
@@ -216,7 +259,10 @@ export function useSlider<RANGE extends boolean>(props: UseSliderProps<RANGE>): 
   useEffect(() => {
     if (isRangeParams(props)) {
       props.value.forEach((val, index) => {
-        setTooltipPosition(getActiveValue(val, activeButton.current), index === 0 ? 0 : 1);
+        setTooltipPosition(
+          getActiveValue(val, activeButton.current),
+          index === 0 ? 0 : 1,
+        );
       });
     }
     if (isNotRangeParams(props)) {

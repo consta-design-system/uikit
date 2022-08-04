@@ -1,7 +1,11 @@
-import React from 'react';
 import { act, renderHook } from '@testing-library/react-hooks';
+import React from 'react';
 
-import { COLUMNS, generateData, TRANSFORMED_COLUMNS } from '../__mock__/data.mock';
+import {
+  COLUMNS,
+  generateData,
+  TRANSFORMED_COLUMNS,
+} from '../__mock__/data.mock';
 import {
   getColumnLeftOffset,
   getColumnsSize,
@@ -77,7 +81,10 @@ describe('getNewSorting', () => {
   });
 
   it('устанавливает сортировку по полю, если было отсортировано по другому полю', () => {
-    const result = getNewSorting<TestRow>({ by: 'anotherField', order: 'asc' }, 'field');
+    const result = getNewSorting<TestRow>(
+      { by: 'anotherField', order: 'asc' },
+      'field',
+    );
 
     expect(result).toEqual({
       by: 'field',
@@ -86,7 +93,10 @@ describe('getNewSorting', () => {
   });
 
   it('устанавливает сортировку по убыванию, если было отсортировано по возрастанию', () => {
-    const result = getNewSorting<TestRow>({ by: 'field', order: 'asc' }, 'field');
+    const result = getNewSorting<TestRow>(
+      { by: 'field', order: 'asc' },
+      'field',
+    );
 
     expect(result).toEqual({
       by: 'field',
@@ -95,7 +105,10 @@ describe('getNewSorting', () => {
   });
 
   it('убирает сортировку, если было отсортировано по убыванию', () => {
-    const result = getNewSorting<TestRow>({ by: 'field', order: 'desc' }, 'field');
+    const result = getNewSorting<TestRow>(
+      { by: 'field', order: 'desc' },
+      'field',
+    );
 
     expect(result).toEqual(null);
   });

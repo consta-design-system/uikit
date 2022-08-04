@@ -10,7 +10,6 @@ import { IconArrowRight } from '../../icons/IconArrowRight/IconArrowRight';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { Button } from '../Button/Button';
-
 import { StepsStep } from './StepsStep/StepsStep';
 
 export const stepsSizes = ['m', 'l'] as const;
@@ -19,7 +18,10 @@ export const stepsDefaultSize: StepsPropSize = stepsSizes[0];
 
 export type StepsPropGetLabel<ITEM> = (item: ITEM) => string;
 export type StepsPropGetCommon<ITEM> = (item: ITEM) => boolean;
-export type StepsPropOnChange<ITEM> = (props: { e: React.MouseEvent; value: ITEM }) => void;
+export type StepsPropOnChange<ITEM> = (props: {
+  e: React.MouseEvent;
+  value: ITEM;
+}) => void;
 
 type Props<ITEM> = {
   size?: StepsPropSize;
@@ -105,7 +107,11 @@ export const Steps: Steps = React.forwardRef((props, ref) => {
             key={index}
             ref={refs[index] as React.RefObject<HTMLButtonElement>}
             className={cnSteps('Item')}
-            label={getCompleted?.(item) ? getLabel(item) : `${index + 1} ${getLabel(item)}`}
+            label={
+              getCompleted?.(item)
+                ? getLabel(item)
+                : `${index + 1} ${getLabel(item)}`
+            }
             size={size}
             active={activeStep === index}
             onChange={getOnChange(item)}

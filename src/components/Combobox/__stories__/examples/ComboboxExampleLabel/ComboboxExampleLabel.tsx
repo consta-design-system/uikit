@@ -24,7 +24,7 @@ const items: Item[] = [
   },
 ];
 
-export function ComboboxExampleLabel() {
+export const ComboboxExampleLabel = () => {
   const [value, setValue] = useState<Item | null>();
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
@@ -38,4 +38,4 @@ export function ComboboxExampleLabel() {
       />
     </StoryBookExample>
   );
-}
+};

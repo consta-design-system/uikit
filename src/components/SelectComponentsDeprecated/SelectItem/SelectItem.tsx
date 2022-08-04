@@ -33,15 +33,28 @@ const sizeCheckboxMap: Record<PropSize, CheckboxPropSize> = {
   m: 'l',
   l: 'l',
 };
-type SelectItem = <ITEM>(props: SelectItemProps<ITEM>) => React.ReactElement | null;
+type SelectItem = <ITEM>(
+  props: SelectItemProps<ITEM>,
+) => React.ReactElement | null;
 
 export const SelectItem: SelectItem = (props) => {
-  const { className, label, active, hovered, multiple, size, indent, ...otherProps } = props;
+  const {
+    className,
+    label,
+    active,
+    hovered,
+    multiple,
+    size,
+    indent,
+    ...otherProps
+  } = props;
 
   return (
     <div
       {...otherProps}
-      className={cnSelectItem({ active, hovered, multiple, size, indent }, [className])}
+      className={cnSelectItem({ active, hovered, multiple, size, indent }, [
+        className,
+      ])}
       aria-selected={active}
       role="option"
     >

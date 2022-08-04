@@ -1,10 +1,18 @@
-import React, { createRef, forwardRef, useEffect, useMemo, useState } from 'react';
+import React, {
+  createRef,
+  forwardRef,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 
 import { useClickOutside } from '../../hooks/useClickOutside/useClickOutside';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { Direction, directions } from '../Popover/Popover';
-
-import { clearTimers, ContextMenuLevel } from './ContextMenuLevel/ContextMenuLevel';
+import {
+  clearTimers,
+  ContextMenuLevel,
+} from './ContextMenuLevel/ContextMenuLevel';
 import {
   AddLevel,
   ContextMenuComponent,
@@ -24,7 +32,8 @@ export const ContextMenu: ContextMenuComponent = forwardRef((props, ref) => {
     offset,
     getKey: getKeyProp,
     getSubItems,
-    subMenuDirection: propSubMenuDirection = contextMenuPropDefaultSubMenuDirection,
+    subMenuDirection:
+      propSubMenuDirection = contextMenuPropDefaultSubMenuDirection,
     getLabel,
     onClickOutside,
     spareDirection,
@@ -48,7 +57,8 @@ export const ContextMenu: ContextMenuComponent = forwardRef((props, ref) => {
   ] as Level<Item>[];
 
   const [levels, setLevels] = useState<Level<Item>[]>(defaultLevels);
-  const [subMenuDirection, setSubMenuDirection] = useState<Direction>(propSubMenuDirection);
+  const [subMenuDirection, setSubMenuDirection] =
+    useState<Direction>(propSubMenuDirection);
   const [hoveredParenLevel, setHoveredParenLevel] = useState<number>(-1);
 
   const addLevel: AddLevel<Item> = (level, items, anchorRef, activeItem) => {
@@ -141,14 +151,17 @@ export const ContextMenu: ContextMenuComponent = forwardRef((props, ref) => {
   return (
     <>
       {levels.map((level, index) => {
-        const onSetDirection = index > 0 ? setSubMenuDirection : props.onSetDirection;
+        const onSetDirection =
+          index > 0 ? setSubMenuDirection : props.onSetDirection;
 
         return (
           <ContextMenuLevel
             {...otherProps}
             style={{
               ...style,
-              ...(typeof style?.zIndex === 'number' && { zIndex: style?.zIndex + index }),
+              ...(typeof style?.zIndex === 'number' && {
+                zIndex: style.zIndex + index,
+              }),
             }}
             offset={level.offset}
             key={index}

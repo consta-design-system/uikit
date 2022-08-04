@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import * as React from 'react';
 
 import { Calendar, cnCalendar, cnCalendarDay } from '../Calendar';
 
@@ -8,7 +8,8 @@ type CalendarProps = React.ComponentProps<typeof Calendar>;
 const testId = cnCalendar();
 
 const getRender = () => screen.getByTestId(testId);
-const getCalendarDays = () => getRender().querySelectorAll(`.${cnCalendarDay()}`);
+const getCalendarDays = () =>
+  getRender().querySelectorAll(`.${cnCalendarDay()}`);
 const getCalendarDay = (item = 0) => getCalendarDays()[item];
 
 const renderComponent = (props: CalendarProps = {}) => {
@@ -32,7 +33,10 @@ describe('Компонент Calendar', () => {
   describe('проверка onChange', () => {
     it('onChange отрабатывает при клике по дню месяца', () => {
       const handleClick = jest.fn();
-      renderComponent({ onChange: handleClick, currentVisibleDate: new Date(1970, 0) });
+      renderComponent({
+        onChange: handleClick,
+        currentVisibleDate: new Date(1970, 0),
+      });
       // 1 Января
       const calendarDay = getCalendarDay(3);
 
@@ -42,7 +46,10 @@ describe('Компонент Calendar', () => {
     });
     it('onChange не отрабатывает при клике дню вне месяца', () => {
       const handleClick = jest.fn();
-      renderComponent({ onChange: handleClick, currentVisibleDate: new Date(1970, 0) });
+      renderComponent({
+        onChange: handleClick,
+        currentVisibleDate: new Date(1970, 0),
+      });
 
       const calendarDay = getCalendarDay(0);
 

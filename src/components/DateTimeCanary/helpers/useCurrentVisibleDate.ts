@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { DateRange } from '../../../utils/types/Date';
-
 import { isDateInRange } from './isDateInRange';
 
 type GetCurrentVisibleDateProps = {
@@ -73,7 +72,10 @@ export const useCurrentVisibleDate = (props: GetCurrentVisibleDateProps) => {
 
   useEffect(() => state[1](currentVisibleDate), [currentVisibleDate.getTime()]);
 
-  useEffect(() => props.onChangeCurrentVisibleDate?.(state[0]), [state[0].getTime()]);
+  useEffect(
+    () => props.onChangeCurrentVisibleDate?.(state[0]),
+    [state[0].getTime()],
+  );
 
   return state;
 };

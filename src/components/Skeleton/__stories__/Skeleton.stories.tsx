@@ -1,5 +1,5 @@
-import React from 'react';
 import { boolean, number, select, text } from '@storybook/addon-knobs';
+import React from 'react';
 
 import { createMetadata } from '../../../utils/storybook';
 import { Grid } from '../../Grid/Grid';
@@ -13,10 +13,9 @@ import {
 import { SkeletonBrick } from '../Skeleton';
 import { SkeletonCircle } from '../SkeletonCircle/SkeletonCircle';
 import { SkeletonText } from '../SkeletonText/SkeletonText';
-
 import mdx from './Skeleton.docs.mdx';
 
-export function Playground() {
+export const Playground = () => {
   const component = select(
     'component',
     ['SkeletonBrick', 'SkeletonCircle', 'SkeletonText'],
@@ -24,7 +23,12 @@ export function Playground() {
   );
 
   if (component === 'SkeletonBrick') {
-    return <SkeletonBrick width={text('width', '100%')} height={text('height', '100px')} />;
+    return (
+      <SkeletonBrick
+        width={text('width', '100%')}
+        height={text('height', '100px')}
+      />
+    );
   }
 
   if (component === 'SkeletonCircle') {
@@ -34,10 +38,16 @@ export function Playground() {
   if (component === 'SkeletonText') {
     const rows = number('rows', 4);
     const fontSize = select('fontSize', textPropSize, textPropSizeDefault);
-    const lineHeight = select('lineHeight', textPropLineHeight, textPropLineHeightDefault);
+    const lineHeight = select(
+      'lineHeight',
+      textPropLineHeight,
+      textPropLineHeightDefault,
+    );
     const showText = boolean('Показать текст для сравнения размеров', false);
 
-    const skeletonText = <SkeletonText rows={rows} fontSize={fontSize} lineHeight={lineHeight} />;
+    const skeletonText = (
+      <SkeletonText rows={rows} fontSize={fontSize} lineHeight={lineHeight} />
+    );
 
     return showText ? (
       <Grid cols={2} gap="6xl">
@@ -56,7 +66,7 @@ export function Playground() {
   }
 
   return null;
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Отображение данных/Skeleton',

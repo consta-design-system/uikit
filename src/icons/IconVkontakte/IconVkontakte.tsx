@@ -1,5 +1,4 @@
 import { createIcon } from '../createIcon/createIcon';
-
 import IconVkontakteSizeM from './IconVkontakte_size_m';
 import IconVkontakteSizeS from './IconVkontakte_size_s';
 

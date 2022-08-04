@@ -1,7 +1,7 @@
-import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { select } from '@storybook/addon-knobs';
 import { DecoratorFn } from '@storybook/react';
+import React from 'react';
 
 // После переезда на Storybook@6 можно будет импортить типы оттуда
 type CSFStory = {
@@ -30,7 +30,10 @@ type StoryMetadata = {
   };
 };
 
-export const createStory = (Component: CSFStory, params: CSFStory['story'] = {}): CSFStory => {
+export const createStory = (
+  Component: CSFStory,
+  params: CSFStory['story'] = {},
+): CSFStory => {
   const wrapper = () => <Component />;
   wrapper.story = { ...params };
   return wrapper;

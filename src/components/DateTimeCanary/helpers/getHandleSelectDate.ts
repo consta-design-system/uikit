@@ -1,6 +1,5 @@
 import { isDefined } from '../../../utils/type-guards';
 import { DateRange } from '../../../utils/types/Date';
-
 import {
   DateTimePropOnChange,
   DateTimePropOnChangeRange,
@@ -18,7 +17,9 @@ type GetHandleSelectDateProps = {
   maxDate?: Date;
 };
 
-export function getHandleSelectDate(props: GetHandleSelectDateProps): HandleSelectDate {
+export function getHandleSelectDate(
+  props: GetHandleSelectDateProps,
+): HandleSelectDate {
   return (callbackProps) => {
     if (typeof props.onChange === 'function') {
       props.onChange(callbackProps);
@@ -31,14 +32,20 @@ export function getHandleSelectDate(props: GetHandleSelectDateProps): HandleSele
 
       const [startDate, endDate] = currentValue;
 
-      if (isDefined(startDate) && props.isEqualUnit(startDate, callbackProps.value)) {
+      if (
+        isDefined(startDate) &&
+        props.isEqualUnit(startDate, callbackProps.value)
+      ) {
         return props.onChangeRange({
           e: callbackProps.e,
           value: [endDate, undefined],
         });
       }
 
-      if (isDefined(endDate) && props.isEqualUnit(endDate, callbackProps.value)) {
+      if (
+        isDefined(endDate) &&
+        props.isEqualUnit(endDate, callbackProps.value)
+      ) {
         return props.onChangeRange({
           e: callbackProps.e,
           value: [startDate, undefined],
@@ -65,7 +72,10 @@ export function getHandleSelectDate(props: GetHandleSelectDateProps): HandleSele
         });
       }
 
-      props.onChangeRange({ e: callbackProps.e, value: [callbackProps.value, undefined] });
+      props.onChangeRange({
+        e: callbackProps.e,
+        value: [callbackProps.value, undefined],
+      });
     }
   };
 }

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { boolean, object, select } from '@storybook/addon-knobs';
+import React, { useState } from 'react';
 
 import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconCamera } from '../../../icons/IconCamera/IconCamera';
@@ -18,13 +18,16 @@ import {
   tabsSizes,
   tabsViews,
 } from '../Tabs';
-
 import mdx from './Tabs.docs.mdx';
 
 const defaultKnobs = () => ({
   size: select('size', tabsSizes, tabsDefaultSize),
   view: select('view', tabsViews, tabsDefaultView),
-  linePosition: select('linePosition', tabsLinePositions, tabsDefaultLinePosition),
+  linePosition: select(
+    'linePosition',
+    tabsLinePositions,
+    tabsDefaultLinePosition,
+  ),
   withIcon: boolean('withIcon', false),
   onlyIcon: boolean('onlyIcon', false),
 });
@@ -58,7 +61,7 @@ const getItems = (): Item[] => {
   }));
 };
 
-export function Playground() {
+export const Playground = () => {
   const { size, view, linePosition, withIcon, onlyIcon } = defaultKnobs();
   const items = getItems();
   const [value, setValue] = useState<Item | null>(items[0]);
@@ -83,7 +86,7 @@ export function Playground() {
       onlyIcon={onlyIcon}
     />
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Навигация/Tabs',

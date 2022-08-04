@@ -1,17 +1,29 @@
+import {
+  addMonths,
+  endOfMonth,
+  getYear,
+  Locale,
+  startOfMonth,
+  startOfYear,
+} from 'date-fns';
 import React from 'react';
-import { addMonths, endOfMonth, getYear, Locale, startOfMonth, startOfYear } from 'date-fns';
 
 import { range } from '../../../utils/array';
 import { isInMinMaxDade } from '../../../utils/date';
 import { DateRange } from '../../../utils/types/Date';
 import { DateTimeCellPropRange } from '../DateTimeCell/DateTimeCell';
-
 import { getMonthTitleAbbreviated } from './index';
 import { isDateInRange } from './isDateInRange';
 import { isEqualMount } from './isEqualMount';
 import { HandleSelectDate } from './types';
 
-const isSelected = ({ date, value }: { date: Date; value?: Date | DateRange }): boolean => {
+const isSelected = ({
+  date,
+  value,
+}: {
+  date: Date;
+  value?: Date | DateRange;
+}): boolean => {
   if (!value) {
     return false;
   }
@@ -52,10 +64,17 @@ export const getMonthsOfYear = (props: {
   return range(12).map((index) => {
     const date = addMonths(startDate, index);
     const label = getMonthTitleAbbreviated(date, locale);
-    const disabled = !isInMinMaxDade(date, minDate, maxDate, startOfMonth, endOfMonth);
+    const disabled = !isInMinMaxDade(
+      date,
+      minDate,
+      maxDate,
+      startOfMonth,
+      endOfMonth,
+    );
     const onClick =
       !disabled && onChange
-        ? (e: React.MouseEvent<HTMLButtonElement>) => onChange({ e, value: date })
+        ? (e: React.MouseEvent<HTMLButtonElement>) =>
+            onChange({ e, value: date })
         : undefined;
     if (getYear(date) === currentYear) {
       return {

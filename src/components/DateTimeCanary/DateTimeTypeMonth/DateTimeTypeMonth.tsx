@@ -1,6 +1,6 @@
-import React, { forwardRef, useEffect } from 'react';
 import { addYears, startOfYear } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
+import React, { forwardRef, useEffect } from 'react';
 
 import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { DateTime10Years } from '../DateTime10Years/DateTime10Years';
@@ -22,136 +22,188 @@ import {
 import { dateTimePropView, dateTimePropViewDefault } from '../helpers/types';
 import { cnDateTimeMixLayout } from '../mixs';
 
-export const DateTimeTypeMonth: DateTimeTypeComponent<'month'> = forwardRef((props, ref) => {
-  const {
-    minDate,
-    maxDate,
-    value,
-    onChange,
-    onChangeRange,
-    currentVisibleDate: currentVisibleDateProp,
-    events,
-    locale = ruLocale,
-    className,
-    view = dateTimePropViewDefault,
-    onMove,
-    onChangeCurrentVisibleDate,
-    renderAdditionalControls,
-    ...otherProps
-  } = props;
+export const DateTimeTypeMonth: DateTimeTypeComponent<'month'> = forwardRef(
+  (props, ref) => {
+    const {
+      minDate,
+      maxDate,
+      value,
+      onChange,
+      onChangeRange,
+      currentVisibleDate: currentVisibleDateProp,
+      events,
+      locale = ruLocale,
+      className,
+      view = dateTimePropViewDefault,
+      onMove,
+      onChangeCurrentVisibleDate,
+      renderAdditionalControls,
+      ...otherProps
+    } = props;
 
-  const [changeYear, { on, off }] = useFlag();
+    const [changeYear, { on, off }] = useFlag();
 
-  useEffect(() => {
-    !changeYear && onMove?.(moveTypes[1]);
-  }, [changeYear]);
+    useEffect(() => {
+      !changeYear && onMove?.(moveTypes[1]);
+    }, [changeYear]);
 
-  const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate({
-    currentVisibleDate: currentVisibleDateProp,
-    maxDate,
-    minDate,
-    value,
-    startOfUnit: startOfYear,
-    onChangeCurrentVisibleDate,
-  });
+    const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate({
+      currentVisibleDate: currentVisibleDateProp,
+      maxDate,
+      minDate,
+      value,
+      startOfUnit: startOfYear,
+      onChangeCurrentVisibleDate,
+    });
 
-  if (changeYear) {
-    return (
-      <DateTimeTypeYear
-        {...otherProps}
-        ref={ref}
-        className={className}
-        currentVisibleDate={currentVisibleDate}
-        minDate={minDate}
-        maxDate={maxDate}
-        locale={locale}
-        events={events}
-        view={view}
-        onChange={({ value }) => {
-          setCurrentVisibleDate(value);
-          off();
-        }}
-        onMove={onMove}
-      />
-    );
-  }
-
-  const handleSelectDate = getHandleSelectDate({
-    minDate,
-    maxDate,
-    value,
-    onChange,
-    onChangeRange,
-    isEqualUnit: isEqualMount,
-  });
-
-  const pageOneMonthsOfYear = getMonthsOfYear({
-    date: currentVisibleDate,
-    onChange: handleSelectDate,
-    value,
-    events,
-    minDate,
-    maxDate,
-    locale,
-  });
-
-  const pageOneLabel = getYearTitle(currentVisibleDate);
-
-  const handleNext = () => setCurrentVisibleDate(addYears(currentVisibleDate, 1));
-  const handlePrev = () => setCurrentVisibleDate(addYears(currentVisibleDate, -1));
-
-  if (view === dateTimePropView[0]) {
-    return (
-      <div {...otherProps} className={cnDateTimeMixLayout({ view }, [className])} ref={ref}>
-        <DateTimeToggler
-          className={cnDateTimeMixLayout('Label')}
-          prevOnClick={handlePrev}
-          nextOnClick={handleNext}
-          label={pageOneLabel}
-          onLabelClick={on}
-        />
-        <DateTimeYear years={pageOneMonthsOfYear} />
-        <DateTimeAdditionalControls
-          renderAdditionalControls={renderAdditionalControls}
+    if (changeYear) {
+      return (
+        <DateTimeTypeYear
+          {...otherProps}
+          ref={ref}
+          className={className}
           currentVisibleDate={currentVisibleDate}
+          minDate={minDate}
+          maxDate={maxDate}
+          locale={locale}
+          events={events}
+          view={view}
+          onChange={({ value }) => {
+            setCurrentVisibleDate(value);
+            off();
+          }}
+          onMove={onMove}
         />
-      </div>
-    );
-  }
+      );
+    }
 
-  const pageTwoCurrentVisibleDate = addYears(currentVisibleDate, 1);
+    const handleSelectDate = getHandleSelectDate({
+      minDate,
+      maxDate,
+      value,
+      onChange,
+      onChangeRange,
+      isEqualUnit: isEqualMount,
+    });
 
-  const pageTwoLabel = getYearTitle(pageTwoCurrentVisibleDate);
+    const pageOneMonthsOfYear = getMonthsOfYear({
+      date: currentVisibleDate,
+      onChange: handleSelectDate,
+      value,
+      events,
+      minDate,
+      maxDate,
+      locale,
+    });
 
-  const pageTwoMonthsOfYear = getMonthsOfYear({
-    date: pageTwoCurrentVisibleDate,
-    onChange: handleSelectDate,
-    value,
-    events,
-    minDate,
-    maxDate,
-    locale,
-  });
+    const pageOneLabel = getYearTitle(currentVisibleDate);
 
-  if (view === dateTimePropView[1]) {
+    const handleNext = () =>
+      setCurrentVisibleDate(addYears(currentVisibleDate, 1));
+    const handlePrev = () =>
+      setCurrentVisibleDate(addYears(currentVisibleDate, -1));
+
+    if (view === dateTimePropView[0]) {
+      return (
+        <div
+          {...otherProps}
+          className={cnDateTimeMixLayout({ view }, [className])}
+          ref={ref}
+        >
+          <DateTimeToggler
+            className={cnDateTimeMixLayout('Label')}
+            prevOnClick={handlePrev}
+            nextOnClick={handleNext}
+            label={pageOneLabel}
+            onLabelClick={on}
+          />
+          <DateTimeYear years={pageOneMonthsOfYear} />
+          <DateTimeAdditionalControls
+            renderAdditionalControls={renderAdditionalControls}
+            currentVisibleDate={currentVisibleDate}
+          />
+        </div>
+      );
+    }
+
+    const pageTwoCurrentVisibleDate = addYears(currentVisibleDate, 1);
+
+    const pageTwoLabel = getYearTitle(pageTwoCurrentVisibleDate);
+
+    const pageTwoMonthsOfYear = getMonthsOfYear({
+      date: pageTwoCurrentVisibleDate,
+      onChange: handleSelectDate,
+      value,
+      events,
+      minDate,
+      maxDate,
+      locale,
+    });
+
+    if (view === dateTimePropView[1]) {
+      return (
+        <>
+          <div
+            {...otherProps}
+            className={cnDateTimeMixLayout({ view }, [className])}
+            ref={ref}
+          >
+            <div className={cnDateTimeMixLayout('Page')}>
+              <DateTimeToggler
+                className={cnDateTimeMixLayout('Label')}
+                prevOnClick={handlePrev}
+                label={pageOneLabel}
+                onLabelClick={on}
+              />
+              <DateTime10Years years={pageOneMonthsOfYear} />
+            </div>
+            <div className={cnDateTimeMixLayout('Page')}>
+              <DateTimeToggler
+                className={cnDateTimeMixLayout('Label')}
+                nextOnClick={handleNext}
+                label={pageTwoLabel}
+                onLabelClick={on}
+              />
+              <DateTime10Years years={pageTwoMonthsOfYear} />
+            </div>
+          </div>
+          <DateTimeAdditionalControls
+            renderAdditionalControls={renderAdditionalControls}
+            currentVisibleDate={currentVisibleDate}
+          />
+        </>
+      );
+    }
+
     return (
-      <>
-        <div {...otherProps} className={cnDateTimeMixLayout({ view }, [className])} ref={ref}>
+      <div
+        {...otherProps}
+        className={cnDateTimeMixLayout({ view }, [className])}
+        ref={ref}
+      >
+        <DateTime10YearSlider
+          className={cnDateTimeMixLayout('Slider')}
+          currentVisibleDate={currentVisibleDate}
+          onChange={setCurrentVisibleDate}
+          value={value}
+          locale={locale}
+        />
+        <div className={cnDateTimeMixLayout('PageWrapper')}>
           <div className={cnDateTimeMixLayout('Page')}>
-            <DateTimeToggler
+            <DateTimeLabel
               className={cnDateTimeMixLayout('Label')}
-              prevOnClick={handlePrev}
               label={pageOneLabel}
-              onLabelClick={on}
+              onClick={on}
+              cursor="pointer"
             />
             <DateTime10Years years={pageOneMonthsOfYear} />
           </div>
           <div className={cnDateTimeMixLayout('Page')}>
-            <DateTimeToggler
+            <DateTimeLabel
               className={cnDateTimeMixLayout('Label')}
-              nextOnClick={handleNext}
               label={pageTwoLabel}
-              onLabelClick={on}
+              onClick={on}
+              cursor="pointer"
             />
             <DateTime10Years years={pageTwoMonthsOfYear} />
           </div>
@@ -160,43 +212,7 @@ export const DateTimeTypeMonth: DateTimeTypeComponent<'month'> = forwardRef((pro
           renderAdditionalControls={renderAdditionalControls}
           currentVisibleDate={currentVisibleDate}
         />
-      </>
-    );
-  }
-
-  return (
-    <div {...otherProps} className={cnDateTimeMixLayout({ view }, [className])} ref={ref}>
-      <DateTime10YearSlider
-        className={cnDateTimeMixLayout('Slider')}
-        currentVisibleDate={currentVisibleDate}
-        onChange={setCurrentVisibleDate}
-        value={value}
-        locale={locale}
-      />
-      <div className={cnDateTimeMixLayout('PageWrapper')}>
-        <div className={cnDateTimeMixLayout('Page')}>
-          <DateTimeLabel
-            className={cnDateTimeMixLayout('Label')}
-            label={pageOneLabel}
-            onClick={on}
-            cursor="pointer"
-          />
-          <DateTime10Years years={pageOneMonthsOfYear} />
-        </div>
-        <div className={cnDateTimeMixLayout('Page')}>
-          <DateTimeLabel
-            className={cnDateTimeMixLayout('Label')}
-            label={pageTwoLabel}
-            onClick={on}
-            cursor="pointer"
-          />
-          <DateTime10Years years={pageTwoMonthsOfYear} />
-        </div>
       </div>
-      <DateTimeAdditionalControls
-        renderAdditionalControls={renderAdditionalControls}
-        currentVisibleDate={currentVisibleDate}
-      />
-    </div>
-  );
-});
+    );
+  },
+);

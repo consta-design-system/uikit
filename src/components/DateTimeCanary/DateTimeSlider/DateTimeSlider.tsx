@@ -34,7 +34,10 @@ export type DateTimeSliderProps = PropsWithHTMLAttributes<
 export const cnDateTimeSlider = cn('DateTimeSlider');
 
 const getCurrentItem = (data: Data[]) => {
-  const index = data.find((item) => item.current)?.items.findIndex((item) => item.current) || 0;
+  const index =
+    data
+      .find((item) => item.current)
+      ?.items.findIndex((item) => item.current) || 0;
 
   return index < 0 ? 0 : index;
 };
@@ -60,7 +63,9 @@ export const DateTimeSlider: React.FC<DateTimeSliderProps> = (props) => {
           <div className={cnDateTimeSlider('Selector')} />
           {data.map((year, index) => (
             <Text
-              className={cnDateTimeSlider('ParentLabel', { position: index.toString() })}
+              className={cnDateTimeSlider('ParentLabel', {
+                position: index.toString(),
+              })}
               weight="bold"
               size="s"
               key={year.label}

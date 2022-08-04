@@ -5,7 +5,11 @@ import React, { forwardRef } from 'react';
 import { IconArrowRight } from '../../../icons/IconArrowRight/IconArrowRight';
 import { cn } from '../../../utils/bem';
 import { Text } from '../../Text/Text';
-import { contextMenuDefaultSize, ContextMenuItemComponent, ContextMenuItemProps } from '../helpers';
+import {
+  contextMenuDefaultSize,
+  ContextMenuItemComponent,
+  ContextMenuItemProps,
+} from '../helpers';
 
 export const cnContextMenuItem = cn('ContextMenuItem');
 
@@ -63,7 +67,9 @@ export const ContextMenuItem: ContextMenuItemComponent = forwardRef(
         {!rightSide && !leftSide && !withSubMenu ? (
           label
         ) : (
-          <div className={cnContextMenuItem('Side', { position: 'center' })}>{label}</div>
+          <div className={cnContextMenuItem('Side', { position: 'center' })}>
+            {label}
+          </div>
         )}
         {renderSide(rightSide, 'right', withSubMenu)}
       </Text>

@@ -11,16 +11,36 @@ export const TextFieldExampleSize = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <div>
-        <TextField size="xs" placeholder="Размер XS" onChange={handleChange} value={value} />
+        <TextField
+          size="xs"
+          placeholder="Размер XS"
+          onChange={handleChange}
+          value={value}
+        />
       </div>
       <div>
-        <TextField size="s" placeholder="Размер S" onChange={handleChange} value={value} />
+        <TextField
+          size="s"
+          placeholder="Размер S"
+          onChange={handleChange}
+          value={value}
+        />
       </div>
       <div>
-        <TextField size="m" placeholder="Размер M" onChange={handleChange} value={value} />
+        <TextField
+          size="m"
+          placeholder="Размер M"
+          onChange={handleChange}
+          value={value}
+        />
       </div>
       <div>
-        <TextField size="l" placeholder="Размер L" onChange={handleChange} value={value} />
+        <TextField
+          size="l"
+          placeholder="Размер L"
+          onChange={handleChange}
+          value={value}
+        />
       </div>
     </StoryBookExample>
   );
@@ -50,7 +70,13 @@ export const TextFieldExampleSizeRows = () => {
 
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <TextField type="textarea" rows={7} cols={50} onChange={handleChange} value={value} />
+      <TextField
+        type="textarea"
+        rows={7}
+        cols={50}
+        onChange={handleChange}
+        value={value}
+      />
     </StoryBookExample>
   );
 };
@@ -63,7 +89,13 @@ export const TextFieldExampleSizeMinRows = () => {
 
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <TextField type="textarea" minRows={13} cols={25} onChange={handleChange} value={value} />
+      <TextField
+        type="textarea"
+        minRows={13}
+        cols={25}
+        onChange={handleChange}
+        value={value}
+      />
     </StoryBookExample>
   );
 };

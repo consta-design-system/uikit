@@ -1,9 +1,12 @@
 import * as React from 'react';
 
-function SnackBarImage(props: React.SVGProps<SVGSVGElement>) {
+const SnackBarImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
-      <path d="M0 4a4 4 0 014-4h192a4 4 0 014 4v112a4 4 0 01-4 4H4a4 4 0 01-4-4V4z" fill="#fff" />
+      <path
+        d="M0 4a4 4 0 014-4h192a4 4 0 014 4v112a4 4 0 01-4 4H4a4 4 0 01-4-4V4z"
+        fill="#fff"
+      />
       <path
         fill="#002033"
         fillOpacity={0.08}
@@ -13,6 +16,6 @@ function SnackBarImage(props: React.SVGProps<SVGSVGElement>) {
       <path fill="#0078D2" d="M66 95h67v14H66z" />
     </svg>
   );
-}
+};
 
 export default SnackBarImage;

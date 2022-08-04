@@ -1,13 +1,12 @@
-import React, { useRef } from 'react';
 import { array, boolean, number } from '@storybook/addon-knobs';
+import React, { useRef } from 'react';
 
 import { createMetadata } from '../../../utils/storybook';
 import { Attachment } from '../../Attachment/Attachment';
 import { DragNDropField } from '../DragNDropField';
-
 import mdx from './DragNDropField.docs.mdx';
 
-export function Playground() {
+export const Playground = () => {
   const ref = useRef(null);
   const [files, setFiles] = React.useState<File[]>([]);
   const withCustomChildren = boolean('С кастомным контентом', false);
@@ -30,7 +29,10 @@ export function Playground() {
                   <button type="button" onClick={openFileDialog}>
                     Выбрать файл
                   </button>{' '}
-                  <button type="button" onClick={() => alert('Другое действие')}>
+                  <button
+                    type="button"
+                    onClick={() => alert('Другое действие')}
+                  >
                     Другое действие
                   </button>
                 </div>
@@ -50,7 +52,7 @@ export function Playground() {
       ))}
     </>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Базовые/DragNDropField',

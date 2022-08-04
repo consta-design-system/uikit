@@ -16,7 +16,12 @@ export const TextFieldExampleView = () => {
         value={value}
         onChange={handleChange}
       />
-      <TextField view="clear" placeholder="Незаметное поле" value={value} onChange={handleChange} />
+      <TextField
+        view="clear"
+        placeholder="Незаметное поле"
+        value={value}
+        onChange={handleChange}
+      />
     </StoryBookExample>
   );
 };
@@ -27,7 +32,12 @@ export const TextFieldExampleViewDisabled = () => {
 
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <TextField placeholder="Неактивное поле" disabled value={value} onChange={handleChange} />
+      <TextField
+        placeholder="Неактивное поле"
+        disabled
+        value={value}
+        onChange={handleChange}
+      />
     </StoryBookExample>
   );
 };

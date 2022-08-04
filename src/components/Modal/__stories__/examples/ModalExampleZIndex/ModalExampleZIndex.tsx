@@ -8,9 +8,11 @@ import { Button } from '../../../../Button/Button';
 import { Select } from '../../../../Select/Select';
 import { Modal } from '../../../Modal';
 
-const ButtonWithTooltip = withTooltip({ mode: 'click', content: 'Я тултип' })(Button);
+const ButtonWithTooltip = withTooltip({ mode: 'click', content: 'Я тултип' })(
+  Button,
+);
 
-export function ModalExampleZIndex() {
+export const ModalExampleZIndex = () => {
   const [isModalOpen, setIsModalOpen] = useFlag();
   const [isModal2Open, setIsModal2Open] = useFlag();
 
@@ -73,4 +75,4 @@ export function ModalExampleZIndex() {
       </Modal>
     </div>
   );
-}
+};

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { boolean, select } from '@storybook/addon-knobs';
+import React, { useState } from 'react';
 
 import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconCamera } from '../../../icons/IconCamera/IconCamera';
@@ -18,7 +18,6 @@ import {
   choiceGroupWidth,
   choiceGroupWidthDefault,
 } from '../ChoiceGroup';
-
 import mdx from './ChoiceGroup.docs.mdx';
 
 declare type Item = {
@@ -66,7 +65,7 @@ const defaultKnobs = () => ({
 
 const cnChoiceGroupStories = cn('ChoiceGroupStories');
 
-export function Playground() {
+export const Playground = () => {
   const [valueMultiple, setValueMultiple] = useState<Item[] | null>(null);
   const [value, setValue] = useState<Item | null>(null);
   const {
@@ -125,7 +124,7 @@ export function Playground() {
       </form>
     </div>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Базовые/ChoiceGroup',

@@ -46,7 +46,10 @@ export const SelectItem: React.FC<SelectItemProps> = (props) => {
   return (
     <div
       {...otherProps}
-      className={cnSelectItem({ active, hovered, multiple, size, indent, disabled }, [className])}
+      className={cnSelectItem(
+        { active, hovered, multiple, size, indent, disabled },
+        [className],
+      )}
       aria-selected={active}
       aria-disabled={disabled}
       role="option"

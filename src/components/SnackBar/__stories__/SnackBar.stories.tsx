@@ -1,8 +1,8 @@
 import './SnackBar.stories.css';
 
-import React, { useReducer } from 'react';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
+import React, { useReducer } from 'react';
 
 import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconAdd } from '../../../icons/IconAdd/IconAdd';
@@ -19,19 +19,28 @@ import {
 } from '../../EventInterceptor/EventInterceptor';
 import { Text } from '../../Text/Text';
 import { SnackBar } from '../SnackBar';
-import { SnackBarItemDefault, snackBarItemShowProgressProp, SnackBarItemStatus } from '../types';
-
+import {
+  SnackBarItemDefault,
+  snackBarItemShowProgressProp,
+  SnackBarItemStatus,
+} from '../types';
 import mdx from './SnackBar.docs.mdx';
 
 type State = SnackBarItemDefault[];
-type Action = { type: 'add'; item: SnackBarItemDefault } | { type: 'remove'; key: number | string };
+type Action =
+  | { type: 'add'; item: SnackBarItemDefault }
+  | { type: 'remove'; key: number | string };
 
 const defaultKnobs = () => ({
   withIcon: boolean('withIcon', false),
   withActionButtons: boolean('withActionButtons', false),
   withAutoClose: boolean('withAutoClose', false),
   withCloseButton: boolean('withCloseButton', true),
-  showProgress: select('showProgress', ['', ...snackBarItemShowProgressProp], ''),
+  showProgress: select(
+    'showProgress',
+    ['', ...snackBarItemShowProgressProp],
+    '',
+  ),
   withComponentInsteadOfText: boolean('withComponentInsteadOfText', false),
 });
 
@@ -58,7 +67,7 @@ function reducer(state: State, action: Action) {
   }
 }
 
-export function Playground() {
+export const Playground = () => {
   const {
     withIcon,
     withActionButtons,
@@ -99,7 +108,10 @@ export function Playground() {
     dispatchItems({ type: 'remove', key: item.key });
 
   return (
-    <EventInterceptorProvider eventHandler={action('EventInterceptor')} map={eventInterceptorMap}>
+    <EventInterceptorProvider
+      eventHandler={action('EventInterceptor')}
+      map={eventInterceptorMap}
+    >
       <div className={cnSnackBarStories()}>
         <div className={cnSnackBarStories('Buttons')}>
           <Button
@@ -159,7 +171,9 @@ export function Playground() {
             onItemAutoClose: handlerRemoveItem,
           })}
           getItemAutoClose={withAutoClose ? () => 5 : undefined}
-          getItemShowProgress={showProgress !== '' ? () => showProgress : undefined}
+          getItemShowProgress={
+            showProgress !== '' ? () => showProgress : undefined
+          }
           getItemActions={
             withActionButtons
               ? () => [
@@ -182,7 +196,7 @@ export function Playground() {
       </div>
     </EventInterceptorProvider>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Обратная связь/SnackBar',

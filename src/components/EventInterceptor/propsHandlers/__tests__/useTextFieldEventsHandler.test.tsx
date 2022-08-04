@@ -1,6 +1,6 @@
-import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { act, renderHook } from '@testing-library/react-hooks';
+import React from 'react';
 
 import { cnTextField, TextField } from '../../../TextField/TextField';
 import { Props, useTextFieldEventsHandler } from '../useTextFieldEventsHandler';
@@ -24,7 +24,7 @@ describe('useTextFieldEventsHandler', () => {
   );
   const props = result.current;
 
-  it('возвращает пропсы в том же виде, что и получил ', () => {
+  it('возвращает пропсы в том же виде, что и получил', () => {
     expect(props).toEqual({
       ...textFieldProps,
       onBlur: expect.any(Function),

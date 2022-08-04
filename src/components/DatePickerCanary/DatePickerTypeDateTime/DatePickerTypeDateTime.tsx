@@ -1,6 +1,6 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import addMonths from 'date-fns/addMonths';
 import startOfMonth from 'date-fns/startOfMonth';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 
 import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
 import { useFlag } from '../../../hooks/useFlag/useFlag';
@@ -14,8 +14,8 @@ import {
 } from '../helpers';
 import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 
-export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> = forwardRef(
-  (props, ref) => {
+export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
+  forwardRef((props, ref) => {
     const {
       events,
       dateTimeView,
@@ -32,12 +32,13 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> = forw
       ...otherProps
     } = props;
 
-    const [multiplicityHours, multiplicityMinutes, multiplicitySeconds] = getMultiplicityTime(
-      otherProps.format || datePickerPropFormatTypeDateTime,
-      multiplicityHoursProp,
-      multiplicityMinutesProp,
-      multiplicitySecondsProp,
-    );
+    const [multiplicityHours, multiplicityMinutes, multiplicitySeconds] =
+      getMultiplicityTime(
+        otherProps.format || datePickerPropFormatTypeDateTime,
+        multiplicityHoursProp,
+        multiplicityMinutesProp,
+        multiplicitySecondsProp,
+      );
 
     const fieldRef = useRef<HTMLDivElement>(null);
     const calendarRef = useRef<HTMLDivElement>(null);
@@ -49,7 +50,9 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> = forw
       onChangeCurrentVisibleDateProp,
     );
 
-    const [calendarVisibleDate, setCalendarVisibleDate] = useState<Date | undefined>();
+    const [calendarVisibleDate, setCalendarVisibleDate] = useState<
+      Date | undefined
+    >();
 
     const onFocusHandler = (e: React.FocusEvent<HTMLElement>) => {
       onFocus && onFocus(e);
@@ -63,18 +66,27 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> = forw
     }, [ref, fieldRef]);
 
     useEffect(() => {
-      if (props.value && props.dateTimeView === 'classic' && calendarVisibleDate) {
+      if (
+        props.value &&
+        props.dateTimeView === 'classic' &&
+        calendarVisibleDate
+      ) {
         const newVisibleDate = startOfMonth(props.value);
         if (newVisibleDate.getTime() !== calendarVisibleDate.getTime()) {
           setCurrentVisibleDate(newVisibleDate);
         }
         return;
       }
-      if (props.value && props.dateTimeView !== 'classic' && calendarVisibleDate) {
+      if (
+        props.value &&
+        props.dateTimeView !== 'classic' &&
+        calendarVisibleDate
+      ) {
         const newVisibleDate = startOfMonth(props.value);
         if (
           newVisibleDate.getTime() !== calendarVisibleDate.getTime() &&
-          newVisibleDate.getTime() !== addMonths(calendarVisibleDate, 1).getTime()
+          newVisibleDate.getTime() !==
+            addMonths(calendarVisibleDate, 1).getTime()
         ) {
           setCurrentVisibleDate(newVisibleDate);
         }
@@ -120,9 +132,10 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> = forw
           multiplicityHours={multiplicityHours}
           multiplicitySeconds={multiplicitySeconds}
           multiplicityMinutes={multiplicityMinutes}
-          zIndex={typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined}
+          zIndex={
+            typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined
+          }
         />
       </>
     );
-  },
-);
+  });

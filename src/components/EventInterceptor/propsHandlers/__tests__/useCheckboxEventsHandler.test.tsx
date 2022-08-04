@@ -1,6 +1,6 @@
-import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { act, renderHook } from '@testing-library/react-hooks';
+import React from 'react';
 
 import { Checkbox, CheckboxProps } from '../../../Checkbox/Checkbox';
 import { useCheckboxEventsHandler } from '../useCheckboxEventsHandler';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function IconPasteSizeS(props: React.SVGProps<SVGSVGElement>) {
+const IconPasteSizeS = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 16 16" {...props}>
       <path d="M8 0a1 1 0 00-1 1H6a1 1 0 00-1 1v2h6V2a1 1 0 00-1-1H9a1 1 0 00-1-1z" />
@@ -8,6 +8,6 @@ function IconPasteSizeS(props: React.SVGProps<SVGSVGElement>) {
       <path d="M5 8V7h6v1H5zm4 3v-1H5v1h4z" />
     </svg>
   );
-}
+};
 
 export default IconPasteSizeS;

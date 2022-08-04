@@ -13,7 +13,11 @@ export const TextExampleSize = () => {
     >
       {textPropSize.map((item, index) => (
         <div key={index} className={wp.tplGrid('fraction', { row: 'third' })}>
-          <Text size="s" view="ghost" className={wp.decorator({ 'indent-b': 'm' })}>
+          <Text
+            size="s"
+            view="ghost"
+            className={wp.decorator({ 'indent-b': 'm' })}
+          >
             {`text*size*${item}`}
           </Text>
           <Text size={item}>Нефть</Text>

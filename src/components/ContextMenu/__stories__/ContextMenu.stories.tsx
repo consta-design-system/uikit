@@ -1,12 +1,12 @@
-import React, { useRef, useState } from 'react';
 import { boolean, select } from '@storybook/addon-knobs';
+import React, { useRef, useState } from 'react';
 
-import { exampleItems, groups, Item } from '../__mocks__/mock.data';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import { Badge } from '../../Badge/Badge';
 import { Button } from '../../Button/Button';
 import { Switch } from '../../Switch/Switch';
+import { exampleItems, groups, Item } from '../__mocks__/mock.data';
 import { ContextMenu } from '../ContextMenu';
 import {
   contextMenuDefaultSize,
@@ -18,7 +18,6 @@ import {
   ContextMenuPropSize,
   contextMenuSizes,
 } from '../helpers';
-
 import mdx from './ContextMenu.docs.mdx';
 
 const defaultKnobs = () => ({
@@ -49,7 +48,8 @@ function renderRightSide(
   getDisabled?: ContextMenuPropGetDisable<Item>,
 ): React.ReactNode {
   const nodeArray = [];
-  const disabled = typeof getDisabled === 'function' ? getDisabled(item) : false;
+  const disabled =
+    typeof getDisabled === 'function' ? getDisabled(item) : false;
 
   item.switch !== undefined &&
     nodeArray.push(
@@ -77,7 +77,7 @@ function renderRightSide(
 
 const cnChoiceGroupStories = cn('ContextMenuStories');
 
-export function Playground() {
+export const Playground = () => {
   const {
     disabled,
     size,
@@ -95,7 +95,10 @@ export function Playground() {
   const onSwitch = (item: Item) => {
     const itemIndex = items.findIndex((v) => v.name === item.name);
     const newItems = Array.from(items);
-    newItems.splice(itemIndex, 1, { ...items[itemIndex], switch: !items[itemIndex].switch });
+    newItems.splice(itemIndex, 1, {
+      ...items[itemIndex],
+      switch: !items[itemIndex].switch,
+    });
     setItems(newItems);
   };
 
@@ -110,9 +113,10 @@ export function Playground() {
   const getSubItems: ContextMenuPropGetSubItems<Item> | undefined = withSubMenu
     ? (item) => item.subMenu
     : undefined;
-  const getRightSideBar: ContextMenuPropGetSide<Item> | undefined = withRightSide
-    ? (item) => renderRightSide(item, size, onSwitch, getDisabled)
-    : undefined;
+  const getRightSideBar: ContextMenuPropGetSide<Item> | undefined =
+    withRightSide
+      ? (item) => renderRightSide(item, size, onSwitch, getDisabled)
+      : undefined;
   const getLeftSideBar: ContextMenuPropGetSide<Item> | undefined = withLeftSide
     ? (item) => renderLeftSide(item)
     : undefined;
@@ -129,7 +133,11 @@ export function Playground() {
 
   return (
     <div className={cnChoiceGroupStories()}>
-      <Button label="Откройте контекстное меню" ref={ref} onClick={() => setIsOpen(!isOpen)} />
+      <Button
+        label="Откройте контекстное меню"
+        ref={ref}
+        onClick={() => setIsOpen(!isOpen)}
+      />
       {isOpen && (
         <ContextMenu
           items={items}
@@ -149,7 +157,7 @@ export function Playground() {
       )}
     </div>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Базовые/ContextMenu',

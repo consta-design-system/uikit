@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function IconDocExportSizeM(props: React.SVGProps<SVGSVGElement>) {
+const IconDocExportSizeM = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 24 24" {...props}>
       <path
@@ -10,6 +10,6 @@ function IconDocExportSizeM(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default IconDocExportSizeM;

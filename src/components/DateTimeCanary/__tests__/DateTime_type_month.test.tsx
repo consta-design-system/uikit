@@ -1,8 +1,7 @@
-import * as React from 'react';
 import { fireEvent, render } from '@testing-library/react';
+import * as React from 'react';
 
 import { DateTime, DateTimeProps, dateTimePropView } from '../DateTimeCanary';
-
 import {
   getDateTimeCell,
   getDateTimeItem,
@@ -34,7 +33,10 @@ describe('Компонент DateTime_type_month', () => {
 
     dateTimePropView.forEach((view) => {
       it(`выбранный диапазон отображаеся верно для view=${view}`, () => {
-        renderComponent({ value: [new Date(1970, 0, 1), new Date(1970, 2, 1)], view });
+        renderComponent({
+          value: [new Date(1970, 0, 1), new Date(1970, 2, 1)],
+          view,
+        });
         const item1 = getDateTimeItem(0);
         const item2 = getDateTimeItem(1);
         const item3 = getDateTimeItem(2);
@@ -59,7 +61,10 @@ describe('Компонент DateTime_type_month', () => {
 
   describe('проверка currentVisibleDate', () => {
     it(`Дата оображаеся верная при view='classic'`, () => {
-      renderComponent({ currentVisibleDate: new Date(1970, 0), view: 'classic' });
+      renderComponent({
+        currentVisibleDate: new Date(1970, 0),
+        view: 'classic',
+      });
 
       const label = getDateTimeLabel();
 
@@ -76,7 +81,10 @@ describe('Компонент DateTime_type_month', () => {
     });
 
     it(`Дата оображаеся верная при view='slider'`, () => {
-      renderComponent({ currentVisibleDate: new Date(1970, 0), view: 'slider' });
+      renderComponent({
+        currentVisibleDate: new Date(1970, 0),
+        view: 'slider',
+      });
 
       const sliderlabel = getDateTimeSliderLabel();
       const labels = getDateTimeViewSliderLabels();
@@ -87,7 +95,7 @@ describe('Компонент DateTime_type_month', () => {
     });
   });
 
-  describe('проверка onChangeCurrentVisibleDate ', () => {
+  describe('проверка onChangeCurrentVisibleDate', () => {
     it(`верно срабатывает при view='classic`, () => {
       const handleClick = jest.fn();
 
@@ -152,7 +160,10 @@ describe('Компонент DateTime_type_month', () => {
   describe('проверка onChange', () => {
     it('onChange отрабатывает при клике на месяц', () => {
       const handleClick = jest.fn();
-      renderComponent({ onChange: handleClick, currentVisibleDate: new Date(1970, 0) });
+      renderComponent({
+        onChange: handleClick,
+        currentVisibleDate: new Date(1970, 0),
+      });
 
       const DateTimeItem = getDateTimeItem(3);
 

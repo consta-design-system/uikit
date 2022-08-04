@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { select, text } from '@storybook/addon-knobs';
+import * as React from 'react';
 
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
@@ -10,7 +10,6 @@ import {
   avatarPropSize,
   avatarPropSizeDefault,
 } from '../Avatar';
-
 import mdx from './Avatar.docs.mdx';
 
 const defaultKnobs = () => ({
@@ -22,7 +21,7 @@ const defaultKnobs = () => ({
 
 const cnAvatarStories = cn('AvatarStories');
 
-export function Playground() {
+export const Playground = () => {
   const { url, name, size, form } = defaultKnobs();
 
   return (
@@ -30,7 +29,7 @@ export function Playground() {
       <Avatar url={url} name={name} size={size} form={form} />
     </div>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Графика/Avatar',

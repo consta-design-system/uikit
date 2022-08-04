@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { startOfWeek } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
+import React, { useState } from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';

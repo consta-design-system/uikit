@@ -5,7 +5,7 @@ import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsE
 import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Button } from '../../../Button';
 
-export function ButtonExampleSizeBasic() {
+export const ButtonExampleSizeBasic = () => {
   return (
     <div
       className={cnDocsDecorator('Section', [
@@ -26,9 +26,9 @@ export function ButtonExampleSizeBasic() {
       </div>
     </div>
   );
-}
+};
 
-export function ButtonExampleSizeFull() {
+export const ButtonExampleSizeFull = () => {
   return (
     <div className={cnDocsDecorator('Section')}>
       <div className={cnDocsExample()}>
@@ -36,4 +36,4 @@ export function ButtonExampleSizeFull() {
       </div>
     </div>
   );
-}
+};

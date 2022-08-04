@@ -23,7 +23,12 @@ export const ComboboxExampleText = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <p>Цвет фона</p>
-      <Combobox id="colors" options={items} getOptionLabel={getItemLabel} placeholder="Выберите" />
+      <Combobox
+        id="colors"
+        options={items}
+        getOptionLabel={getItemLabel}
+        placeholder="Выберите"
+      />
     </StoryBookExample>
   );
 };

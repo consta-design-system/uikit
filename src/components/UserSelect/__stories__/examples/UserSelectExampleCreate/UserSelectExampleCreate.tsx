@@ -29,7 +29,7 @@ const items: Item[] = [
   },
 ];
 
-export function UserSelectExampleCreate() {
+export const UserSelectExampleCreate = () => {
   const [value, setValue] = useState<Item | null>();
   const [list, setList] = useState<Item[]>(items);
   return (
@@ -39,13 +39,15 @@ export function UserSelectExampleCreate() {
         items={list}
         value={value}
         onChange={({ value }) => setValue(value)}
-        onCreate={({ label }) => setList([{ label, id: `${label}_${list.length + 1}` }, ...list])}
+        onCreate={({ label }) =>
+          setList([{ label, id: `${label}_${list.length + 1}` }, ...list])
+        }
       />
     </div>
   );
-}
+};
 
-export function UserSelectExampleCreateCustomLabel() {
+export const UserSelectExampleCreateCustomLabel = () => {
   const [value, setValue] = useState<Item | null>();
   const [list, setList] = useState<Item[]>(items);
   return (
@@ -55,9 +57,11 @@ export function UserSelectExampleCreateCustomLabel() {
         items={list}
         value={value}
         onChange={({ value }) => setValue(value)}
-        onCreate={({ label }) => setList([{ label, id: `${label}_${list.length + 1}` }, ...list])}
+        onCreate={({ label }) =>
+          setList([{ label, id: `${label}_${list.length + 1}` }, ...list])
+        }
         labelForCreate="Добавить"
       />
     </div>
   );
-}
+};

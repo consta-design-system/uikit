@@ -1,7 +1,14 @@
-import * as React from 'react';
 import { render, screen } from '@testing-library/react';
+import * as React from 'react';
 
-import { cnUser, User, userPropSize, userPropStatus, userPropView, userPropWidth } from '../User';
+import {
+  cnUser,
+  User,
+  userPropSize,
+  userPropStatus,
+  userPropView,
+  userPropWidth,
+} from '../User';
 
 type UserProps = React.ComponentProps<typeof User>;
 

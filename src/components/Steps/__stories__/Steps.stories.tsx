@@ -1,17 +1,16 @@
 import './Steps.stories.css';
 
-import React from 'react';
 import { select } from '@storybook/addon-knobs';
+import React from 'react';
 
-import { SimpleItem, simpleItems } from '../__mocks__/mock.data';
 import { IconBackward } from '../../../icons/IconBackward/IconBackward';
 import { IconForward } from '../../../icons/IconForward/IconForward';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
+import { SimpleItem, simpleItems } from '../__mocks__/mock.data';
 import { Steps, stepsDefaultSize, stepsSizes } from '../Steps';
-
 import mdx from './Steps.docs.mdx';
 
 const cnStepsStories = cn('StepsStories');
@@ -33,7 +32,7 @@ const getStepContent = (stepNumber: number) => {
   }
 };
 
-export function Playground() {
+export const Playground = () => {
   const [activeStep, setActiveStep] = React.useState<number>(0);
   const [skippedSteps, setSkippedSteps] = React.useState<number[]>([]);
   const [completedSteps, setCompletedSteps] = React.useState<number[]>([]);
@@ -66,7 +65,9 @@ export function Playground() {
         getSkipped={(item) => skippedSteps.includes(getStepIndex(item))}
         size={size}
       />
-      <div className={cnStepsStories('Content')}>{getStepContent(activeStep)}</div>
+      <div className={cnStepsStories('Content')}>
+        {getStepContent(activeStep)}
+      </div>
       <div className={cnStepsStories('Actions')}>
         <Button
           onClick={handlePrev}
@@ -84,7 +85,7 @@ export function Playground() {
       </div>
     </div>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Навигация/Steps',

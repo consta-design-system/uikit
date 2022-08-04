@@ -1,6 +1,6 @@
-import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { boolean, select, text } from '@storybook/addon-knobs';
+import React from 'react';
 
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
@@ -17,7 +17,6 @@ import {
   checkboxPropView,
   checkboxPropViewDefault,
 } from '../Checkbox';
-
 import mdx from './Checkbox.docs.mdx';
 
 const defaultKnobs = () => ({
@@ -31,15 +30,19 @@ const defaultKnobs = () => ({
 
 const cnCheckboxStories = cn('CheckboxStories');
 
-export function Playground() {
+export const Playground = () => {
   const { disabled, intermediate, size, view, align, label } = defaultKnobs();
 
   const [checked, setChecked] = React.useState<boolean>(false);
 
-  const handleChange = ({ checked }: { checked: boolean }) => setChecked(checked);
+  const handleChange = ({ checked }: { checked: boolean }) =>
+    setChecked(checked);
 
   return (
-    <EventInterceptorProvider eventHandler={action('EventInterceptor')} map={eventInterceptorMap}>
+    <EventInterceptorProvider
+      eventHandler={action('EventInterceptor')}
+      map={eventInterceptorMap}
+    >
       <div className={cnCheckboxStories()}>
         <Checkbox
           disabled={disabled}
@@ -54,7 +57,7 @@ export function Playground() {
       </div>
     </EventInterceptorProvider>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Базовые/Checkbox',

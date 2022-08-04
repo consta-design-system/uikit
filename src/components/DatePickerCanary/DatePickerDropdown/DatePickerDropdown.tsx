@@ -52,47 +52,61 @@ export type DatePickerDropdownProps = PropsWithHTMLAttributesAndRef<
   HTMLDivElement
 >;
 
-type DatePickerDropdownComponent = (props: DatePickerDropdownProps) => React.ReactElement | null;
+type DatePickerDropdownComponent = (
+  props: DatePickerDropdownProps,
+) => React.ReactElement | null;
 
 const cnDatePickerDropdown = cn('DatePickerDropdown');
 
-export const DatePickerDropdown: DatePickerDropdownComponent = forwardRef((props, componentRef) => {
-  const {
-    form = datePickerPropDropdownFormDefault,
-    anchorRef,
-    isOpen,
-    className,
-    zIndex,
-    ...otherProps
-  } = props;
+export const DatePickerDropdown: DatePickerDropdownComponent = forwardRef(
+  (props, componentRef) => {
+    const {
+      form = datePickerPropDropdownFormDefault,
+      anchorRef,
+      isOpen,
+      className,
+      zIndex,
+      ...otherProps
+    } = props;
 
-  const rootRef = useRef<HTMLDivElement>(null);
-  const [direction, setDirection] = useState<Direction>();
+    const rootRef = useRef<HTMLDivElement>(null);
+    const [direction, setDirection] = useState<Direction>();
 
-  const ref = useForkRef([componentRef, rootRef]);
+    const ref = useForkRef([componentRef, rootRef]);
 
-  return (
-    <Transition in={isOpen} unmountOnExit timeout={animateTimeout} nodeRef={rootRef}>
-      {(animate) => {
-        return (
-          <Popover
-            ref={ref}
-            anchorRef={anchorRef}
-            className={cnDatePickerDropdown({ form }, [
-              className,
-              cnMixPopoverAnimate({ direction, animate }),
-            ])}
-            direction="downStartLeft"
-            spareDirection="downStartLeft"
-            possibleDirections={['downStartLeft', 'upStartLeft', 'downStartRight', 'upStartRight']}
-            style={{ zIndex }}
-            role="listbox"
-            onSetDirection={setDirection}
-          >
-            <DateTime {...otherProps} />
-          </Popover>
-        );
-      }}
-    </Transition>
-  );
-});
+    return (
+      <Transition
+        in={isOpen}
+        unmountOnExit
+        timeout={animateTimeout}
+        nodeRef={rootRef}
+      >
+        {(animate) => {
+          return (
+            <Popover
+              ref={ref}
+              anchorRef={anchorRef}
+              className={cnDatePickerDropdown({ form }, [
+                className,
+                cnMixPopoverAnimate({ direction, animate }),
+              ])}
+              direction="downStartLeft"
+              spareDirection="downStartLeft"
+              possibleDirections={[
+                'downStartLeft',
+                'upStartLeft',
+                'downStartRight',
+                'upStartRight',
+              ]}
+              style={{ zIndex }}
+              role="listbox"
+              onSetDirection={setDirection}
+            >
+              <DateTime {...otherProps} />
+            </Popover>
+          );
+        }}
+      </Transition>
+    );
+  },
+);

@@ -40,10 +40,26 @@ const steps: Item[] = [
 export const ProgressStepBarExampleActive = () => {
   return (
     <div className={cnDocsDecorator('Section')}>
-      <ProgressStepBar direction="horizontal" steps={steps} activeStepIndex={0} />
-      <ProgressStepBar direction="horizontal" steps={steps} activeStepIndex={1} />
-      <ProgressStepBar direction="horizontal" steps={steps} activeStepIndex={2} />
-      <ProgressStepBar direction="horizontal" steps={steps} activeStepIndex={3} />
+      <ProgressStepBar
+        direction="horizontal"
+        steps={steps}
+        activeStepIndex={0}
+      />
+      <ProgressStepBar
+        direction="horizontal"
+        steps={steps}
+        activeStepIndex={1}
+      />
+      <ProgressStepBar
+        direction="horizontal"
+        steps={steps}
+        activeStepIndex={2}
+      />
+      <ProgressStepBar
+        direction="horizontal"
+        steps={steps}
+        activeStepIndex={3}
+      />
     </div>
   );
 };

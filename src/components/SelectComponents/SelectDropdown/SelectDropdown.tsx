@@ -53,7 +53,9 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   hasItems?: boolean;
 }>;
 
-type SelectDropdown = <ITEM, GROUP>(props: Props<ITEM, GROUP>) => React.ReactElement | null;
+type SelectDropdown = <ITEM, GROUP>(
+  props: Props<ITEM, GROUP>,
+) => React.ReactElement | null;
 
 const cnSelectDropdown = cn('SelectDropdown');
 
@@ -89,19 +91,30 @@ export const SelectDropdown: SelectDropdown = (props) => {
     return (
       visibleItems.filter(
         (group) =>
-          isOptionForCreate(group) || (Array.isArray(group.items) && group.items.length > 0),
+          isOptionForCreate(group) ||
+          (Array.isArray(group.items) && group.items.length > 0),
       ).length > 0
     );
   }, [visibleItems]);
 
   return (
-    <Transition in={isOpen} unmountOnExit nodeRef={popoverRef} timeout={animateTimeout}>
+    <Transition
+      in={isOpen}
+      unmountOnExit
+      nodeRef={popoverRef}
+      timeout={animateTimeout}
+    >
       {(animate) => (
         <Popover
           {...otherProps}
           anchorRef={controlRef}
           direction="downStartLeft"
-          possibleDirections={['downStartLeft', 'upStartLeft', 'downStartRight', 'upStartRight']}
+          possibleDirections={[
+            'downStartLeft',
+            'upStartLeft',
+            'downStartRight',
+            'upStartRight',
+          ]}
           offset="2xs"
           ref={popoverRef}
           role="listbox"
@@ -112,8 +125,13 @@ export const SelectDropdown: SelectDropdown = (props) => {
           ])}
           equalAnchorWidth
         >
-          <div className={cnSelectDropdown('List', { size, form })} ref={dropdownRef}>
-            {isLoading && <SelectLoader mode={isListShowed ? 'blur' : 'empty'} />}
+          <div
+            className={cnSelectDropdown('List', { size, form })}
+            ref={dropdownRef}
+          >
+            {isLoading && (
+              <SelectLoader mode={isListShowed ? 'blur' : 'empty'} />
+            )}
             {visibleItems.map((group) => {
               if (isOptionForCreate(group)) {
                 return (
@@ -149,10 +167,14 @@ export const SelectDropdown: SelectDropdown = (props) => {
               );
             })}
             {!isLoading && hasItems && notFound && labelForNotFound && (
-              <Text className={cnSelectDropdown('LabelForNotFound')}>{labelForNotFound}</Text>
+              <Text className={cnSelectDropdown('LabelForNotFound')}>
+                {labelForNotFound}
+              </Text>
             )}
             {!isLoading && !hasItems && labelForEmptyItems && (
-              <Text className={cnSelectDropdown('LabelForEmptyItems')}>{labelForEmptyItems}</Text>
+              <Text className={cnSelectDropdown('LabelForEmptyItems')}>
+                {labelForEmptyItems}
+              </Text>
             )}
           </div>
         </Popover>

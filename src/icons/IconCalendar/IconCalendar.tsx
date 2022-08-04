@@ -1,5 +1,4 @@
 import { createIcon } from '../createIcon/createIcon';
-
 import IconCalendarSizeM from './IconCalendar_size_m';
 import IconCalendarSizeS from './IconCalendar_size_s';
 import IconCalendarSizeXs from './IconCalendar_size_xs';

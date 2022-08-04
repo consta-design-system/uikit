@@ -6,7 +6,15 @@ import { Text } from '../../../Text';
 export const TextExampleCombinedWeightAndStyle = () => {
   return (
     <div className={cnDocsDecorator('Section')}>
-      <Text as="div" align="left" font="primary" lineHeight="l" size="m" view="primary" type="p">
+      <Text
+        as="div"
+        align="left"
+        font="primary"
+        lineHeight="l"
+        size="m"
+        view="primary"
+        type="p"
+      >
         <Text as="span" fontStyle="italic">
           Примечание.&nbsp;
         </Text>

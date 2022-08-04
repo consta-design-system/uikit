@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
 
-import { exampleItems, groups } from '../../../__mocks__/mock.data';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Button } from '../../../../Button/Button';
+import { exampleItems, groups } from '../../../__mocks__/mock.data';
 import { ContextMenu } from '../../../ContextMenuCanary';
 
 export const ContextMenuExampleDefault = () => {

@@ -1,6 +1,6 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import addMonths from 'date-fns/addMonths';
 import startOfMonth from 'date-fns/startOfMonth';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 
 import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
 import { useFlag } from '../../../hooks/useFlag/useFlag';
@@ -13,8 +13,8 @@ import { DatePickerFieldTypeDateRange } from '../DatePickerFieldTypeDateRange/Da
 import { DatePickerTypeComponent, normalizeRangeValue } from '../helpers';
 import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 
-export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = forwardRef(
-  (props, ref) => {
+export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> =
+  forwardRef((props, ref) => {
     const {
       events,
       dateTimeView,
@@ -47,17 +47,25 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = fo
     const endFieldInputRef = useRef<HTMLInputElement>(null);
     const calendarRef = useRef<HTMLDivElement>(null);
 
-    const [fieldFocused, setFieldFocused] = useState<'start' | 'end' | false>(false);
+    const [fieldFocused, setFieldFocused] = useState<'start' | 'end' | false>(
+      false,
+    );
 
     const startFocused = fieldFocused === 'start';
     const endFocused = fieldFocused === 'end';
 
     const hadleChange: DatePickerDropdownPropOnChange = ({ e, value }) => {
       if (startFocused) {
-        props.onChange?.({ e, value: normalizeRangeValue([value, props?.value?.[1]]) });
+        props.onChange?.({
+          e,
+          value: normalizeRangeValue([value, props?.value?.[1]]),
+        });
       }
       if (endFocused) {
-        props.onChange?.({ e, value: normalizeRangeValue([props?.value?.[0], value]) });
+        props.onChange?.({
+          e,
+          value: normalizeRangeValue([props?.value?.[0], value]),
+        });
       }
     };
 
@@ -94,14 +102,22 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = fo
 
     // эфект для того чтобы календарь переключался при вводе с клавиатуры
     useEffect(() => {
-      if (props.value?.[0] && props.dateTimeView === 'classic' && startFocused) {
+      if (
+        props.value?.[0] &&
+        props.dateTimeView === 'classic' &&
+        startFocused
+      ) {
         const newVisibleDate = startOfMonth(props.value[0]);
         if (newVisibleDate.getTime() !== currentVisibleDate?.getTime()) {
           setCurrentVisibleDate(newVisibleDate);
         }
         return;
       }
-      if (props.value?.[0] && props.dateTimeView !== 'classic' && startFocused) {
+      if (
+        props.value?.[0] &&
+        props.dateTimeView !== 'classic' &&
+        startFocused
+      ) {
         const newVisibleDate = startOfMonth(props.value[0]);
         if (
           newVisibleDate.getTime() !== currentVisibleDate?.getTime() &&
@@ -158,8 +174,14 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = fo
           ref={ref}
           startFieldRef={startFieldRef}
           endFieldRef={endFieldRef}
-          startFieldInputRef={useForkRef([startFieldInputRef, startFieldInputRefProp])}
-          endFieldInputRef={useForkRef([endFieldInputRef, endFieldInputRefProp])}
+          startFieldInputRef={useForkRef([
+            startFieldInputRef,
+            startFieldInputRefProp,
+          ])}
+          endFieldInputRef={useForkRef([
+            endFieldInputRef,
+            endFieldInputRefProp,
+          ])}
           startFieldOnFocus={startFieldOnFocusHandler}
           endFieldOnFocus={endFieldOnFocusHandler}
           startFieldRightSide={startFieldRightSide}
@@ -187,9 +209,10 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> = fo
           form={dropdownForm}
           onChange={hadleChange}
           renderAdditionalControls={renderAdditionalControls}
-          zIndex={typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined}
+          zIndex={
+            typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined
+          }
         />
       </>
     );
-  },
-);
+  });

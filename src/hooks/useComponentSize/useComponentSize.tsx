@@ -7,7 +7,9 @@ type ComponentSize = {
   height: number;
 };
 
-const getElementSize = (el: HTMLElement | SVGGraphicsElement | null): ComponentSize => {
+const getElementSize = (
+  el: HTMLElement | SVGGraphicsElement | null,
+): ComponentSize => {
   if (!el) {
     return { width: 0, height: 0 };
   }

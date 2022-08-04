@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
 import { boolean, select } from '@storybook/addon-knobs';
+import React, { useEffect, useRef, useState } from 'react';
 
-import { exampleItems, groups, Item } from '../__mocks__/mock.data';
 import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { IconSelect } from '../../../icons/IconSelect/IconSelect';
 import { IconSelectOpen } from '../../../icons/IconSelectOpen/IconSelectOpen';
@@ -10,6 +9,7 @@ import { createMetadata } from '../../../utils/storybook';
 import { Badge } from '../../Badge/Badge';
 import { Button } from '../../Button/Button';
 import { Switch } from '../../Switch/Switch';
+import { exampleItems, groups, Item } from '../__mocks__/mock.data';
 import { ContextMenu } from '../ContextMenuCanary';
 import {
   contextMenuDefaultSize,
@@ -17,7 +17,6 @@ import {
   ContextMenuPropSize,
   contextMenuSizes,
 } from '../types';
-
 import mdx from './ContextMenu.docs.mdx';
 
 const defaultKnobs = () => ({
@@ -41,7 +40,8 @@ function renderRightSide(
   getDisabled?: ContextMenuPropGetItemDisabled<Item>,
 ): React.ReactNode {
   const nodeArray = [];
-  const disabled = typeof getDisabled === 'function' ? getDisabled(item) : false;
+  const disabled =
+    typeof getDisabled === 'function' ? getDisabled(item) : false;
   const status = item.status === 'alert' ? 'error' : item.status;
   item.switch !== undefined &&
     nodeArray.push(
@@ -67,7 +67,7 @@ function renderRightSide(
   return nodeArray;
 }
 
-export function Playground() {
+export const Playground = () => {
   const {
     disabled,
     size,
@@ -85,7 +85,10 @@ export function Playground() {
   const onSwitch = (item: typeof exampleItems[number]) => {
     const itemIndex = items.findIndex((v) => v.label === item.label);
     const newItems = Array.from(items);
-    newItems.splice(itemIndex, 1, { ...items[itemIndex], switch: !items[itemIndex].switch });
+    newItems.splice(itemIndex, 1, {
+      ...items[itemIndex],
+      switch: !items[itemIndex].switch,
+    });
     setItems(newItems);
   };
 
@@ -201,7 +204,7 @@ export function Playground() {
       />
     </div>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Базовые/ContextMenu(Canary)',

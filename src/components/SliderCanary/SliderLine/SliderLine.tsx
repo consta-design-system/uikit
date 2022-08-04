@@ -8,7 +8,14 @@ import { SliderLineProps } from '../helper';
 const cnSliderLine = cn('SliderLine');
 
 export const SliderLine = (props: SliderLineProps) => {
-  const { hovered, onHover, lines, disabled, view = 'default', ...otherProps } = props;
+  const {
+    hovered,
+    onHover,
+    lines,
+    disabled,
+    view = 'default',
+    ...otherProps
+  } = props;
 
   const handleHover = (active: boolean, hover: boolean) => {
     if (!disabled && active) {

@@ -37,7 +37,9 @@ export type UseSliderValues = {
   popoverPosition: TrackPosition[];
 };
 
-export const isRangeParams = (params: UseSliderProps<boolean>): params is UseSliderProps<true> => {
+export const isRangeParams = (
+  params: UseSliderProps<boolean>,
+): params is UseSliderProps<true> => {
   return !!params.range;
 };
 
@@ -47,7 +49,9 @@ export const isNotRangeParams = (
   return !params.range;
 };
 
-export const trackPosition = (event: TouchEvent | MouseEvent): TrackPosition => {
+export const trackPosition = (
+  event: TouchEvent | MouseEvent,
+): TrackPosition => {
   if ('clientX' in event) {
     return {
       x: event.clientX,
@@ -60,7 +64,10 @@ export const trackPosition = (event: TouchEvent | MouseEvent): TrackPosition => 
   };
 };
 
-export const getActiveValue = (value: number | [number, number], active: ActiveButton) => {
+export const getActiveValue = (
+  value: number | [number, number],
+  active: ActiveButton,
+) => {
   if (Array.isArray(value)) {
     return value[typeof active === 'number' ? active : 0];
   }
@@ -103,7 +110,9 @@ export const getValidValue = (
       const division = step?.toString().split('.')[1];
       const stepValue = step || 1;
       return (
-        Math.ceil(Number(value.toFixed(division ? division.length : 0)) / stepValue) * stepValue
+        Math.ceil(
+          Number(value.toFixed(division ? division.length : 0)) / stepValue,
+        ) * stepValue
       );
     }
     let resultValue = value;
@@ -132,8 +141,12 @@ export const getValidValue = (
   return value;
 };
 
-export const isValidValue = (value: number, min: number, max: number, step?: number | number[]) =>
-  getValidValue(value, min, max, step) === value;
+export const isValidValue = (
+  value: number,
+  min: number,
+  max: number,
+  step?: number | number[],
+) => getValidValue(value, min, max, step) === value;
 
 export const getValueByPosition = (
   position: TrackPosition,
@@ -175,7 +188,9 @@ export const getNewValue = (
     step,
   );
   if (Array.isArray(currentValue)) {
-    return activeButton === 1 ? [currentValue[0], analyzedValue] : [analyzedValue, currentValue[1]];
+    return activeButton === 1
+      ? [currentValue[0], analyzedValue]
+      : [analyzedValue, currentValue[1]];
   }
   return analyzedValue;
 };

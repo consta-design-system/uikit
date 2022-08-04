@@ -1,7 +1,6 @@
-import React from 'react';
 import { boolean, select } from '@storybook/addon-knobs';
+import React from 'react';
 
-import { Item, items } from '../__mocks__/mock.data';
 import { IconAdd } from '../../../icons/IconAdd/IconAdd';
 import { IconRemove } from '../../../icons/IconRemove/IconRemove';
 import { createMetadata } from '../../../utils/storybook';
@@ -18,8 +17,8 @@ import {
   collapsePropView,
   collapsePropViewDefault,
 } from '../../Collapse/Collapse';
+import { Item, items } from '../__mocks__/mock.data';
 import { CollapseGroup } from '../CollapseGroup';
-
 import mdx from './CollapseGroup.docs.mdx';
 
 const defaultKnobs = () => ({
@@ -43,12 +42,16 @@ const defaultKnobs = () => ({
     collapsePropDirectionIcon,
     collapsePropCloseDirectionIconDefault,
   ),
-  iconPosition: select('iconPosition', collapsePropIconPosition, collapsePropIconPositionDefault),
+  iconPosition: select(
+    'iconPosition',
+    collapsePropIconPosition,
+    collapsePropIconPositionDefault,
+  ),
   rightSide: boolean('rightSide', false),
   withCustomIcon: boolean('withCustomIcon', false),
 });
 
-export function Playground() {
+export const Playground = () => {
   const {
     size,
     hoverEffect,
@@ -98,7 +101,7 @@ export function Playground() {
           })}
     />
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Отображение данных/CollapseGroup',

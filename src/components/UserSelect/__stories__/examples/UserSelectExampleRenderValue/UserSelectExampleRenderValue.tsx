@@ -50,7 +50,7 @@ const mapStatus = {
   inOffice: 'success',
 } as const;
 
-export function UserSelectExampleRenderValue() {
+export const UserSelectExampleRenderValue = () => {
   const [value, setValue] = useState<Item | null>();
   return (
     <div className={cnDocsDecorator('Section')}>
@@ -67,10 +67,14 @@ export function UserSelectExampleRenderValue() {
               avatarUrl={item.avatarUrl}
               info={item.subLabel}
             />
-            <Badge status={mapStatus[item.status]} label={mapLabel[item.status]} size="s" />
+            <Badge
+              status={mapStatus[item.status]}
+              label={mapLabel[item.status]}
+              size="s"
+            />
           </div>
         )}
       />
     </div>
   );
-}
+};

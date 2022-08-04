@@ -1,9 +1,12 @@
 import * as React from 'react';
 
-function CheckboxImage(props: React.SVGProps<SVGSVGElement>) {
+const CheckboxImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
-      <path d="M0 4a4 4 0 014-4h192a4 4 0 014 4v112a4 4 0 01-4 4H4a4 4 0 01-4-4V4z" fill="#fff" />
+      <path
+        d="M0 4a4 4 0 014-4h192a4 4 0 014 4v112a4 4 0 01-4 4H4a4 4 0 01-4-4V4z"
+        fill="#fff"
+      />
       <rect
         x={34.5}
         y={34.5}
@@ -22,7 +25,15 @@ function CheckboxImage(props: React.SVGProps<SVGSVGElement>) {
         stroke="#004269"
         strokeOpacity={0.28}
       />
-      <rect x={72} y={34} width={16} height={16} rx={4} fill="#004269" fillOpacity={0.07} />
+      <rect
+        x={72}
+        y={34}
+        width={16}
+        height={16}
+        rx={4}
+        fill="#004269"
+        fillOpacity={0.07}
+      />
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -30,7 +41,15 @@ function CheckboxImage(props: React.SVGProps<SVGSVGElement>) {
         fill="#002033"
         fillOpacity={0.26}
       />
-      <rect x={110} y={34} width={16} height={16} rx={4} fill="#004269" fillOpacity={0.07} />
+      <rect
+        x={110}
+        y={34}
+        width={16}
+        height={16}
+        rx={4}
+        fill="#004269"
+        fillOpacity={0.07}
+      />
       <rect
         x={110.5}
         y={34.5}
@@ -56,7 +75,15 @@ function CheckboxImage(props: React.SVGProps<SVGSVGElement>) {
       />
       <rect x={148} y={70} width={16} height={16} rx={4} fill="#0078D2" />
       <path d="M152.5 77h7v2h-7v-2z" fill="#fff" />
-      <rect x={110} y={70} width={16} height={16} rx={4} fill="#004269" fillOpacity={0.07} />
+      <rect
+        x={110}
+        y={70}
+        width={16}
+        height={16}
+        rx={4}
+        fill="#004269"
+        fillOpacity={0.07}
+      />
       <rect
         x={110.5}
         y={70.5}
@@ -68,10 +95,18 @@ function CheckboxImage(props: React.SVGProps<SVGSVGElement>) {
       />
       <path d="M114.5 77h7v2h-7v-2z" fill="#00395C" fillOpacity={0.8} />
       <path d="M115 77.5h6v1h-6v-1z" stroke="#004269" strokeOpacity={0.28} />
-      <rect x={72} y={70} width={16} height={16} rx={4} fill="#004269" fillOpacity={0.07} />
+      <rect
+        x={72}
+        y={70}
+        width={16}
+        height={16}
+        rx={4}
+        fill="#004269"
+        fillOpacity={0.07}
+      />
       <path d="M76.5 77h7v2h-7v-2z" fill="#002033" fillOpacity={0.26} />
     </svg>
   );
-}
+};
 
 export default CheckboxImage;

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
+import React, { useState } from 'react';
 
 import { createMetadata } from '../../../utils/storybook';
 import {
@@ -11,7 +11,6 @@ import {
   switchPropView,
   switchPropViewDefault,
 } from '../Switch';
-
 import mdx from './Switch.docs.mdx';
 
 const defaultKnobs = () => ({
@@ -22,11 +21,12 @@ const defaultKnobs = () => ({
   label: text('label', 'Это переключатель'),
 });
 
-export function Playground() {
+export const Playground = () => {
   const { disabled, size, view, label, align } = defaultKnobs();
   const [checked, setChecked] = useState<boolean>(false);
 
-  const handleChange = ({ checked }: { checked: boolean }) => setChecked(checked);
+  const handleChange = ({ checked }: { checked: boolean }) =>
+    setChecked(checked);
 
   return (
     <form>
@@ -41,7 +41,7 @@ export function Playground() {
       />
     </form>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Базовые/Switch',

@@ -11,7 +11,7 @@ import { Modal } from '../../../Modal';
 
 const cnModalExample = cn('ModalExample');
 
-export function ModalExample() {
+export const ModalExample = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   return (
@@ -30,12 +30,18 @@ export function ModalExample() {
         onClickOutside={(): void => setIsModalOpen(false)}
         onEsc={(): void => setIsModalOpen(false)}
       >
-        <Text as="p" size="s" view="secondary" className={cnModalExample('Title')}>
+        <Text
+          as="p"
+          size="s"
+          view="secondary"
+          className={cnModalExample('Title')}
+        >
           Это заголовок модального окна
         </Text>
         <Text as="p" size="m" view="primary" className={cnModalExample('Body')}>
-          Это содержимое модального окна. Здесь может быть что угодно: текст, изображение, форма или
-          таблица. Всё, что хочется вынести из контекста и показать поверх основной страницы.
+          Это содержимое модального окна. Здесь может быть что угодно: текст,
+          изображение, форма или таблица. Всё, что хочется вынести из контекста
+          и показать поверх основной страницы.
         </Text>
         <div className={cnModalExample('Action')}>
           <Button
@@ -49,9 +55,9 @@ export function ModalExample() {
       </Modal>
     </div>
   );
-}
+};
 
-export function ModalExampleTop() {
+export const ModalExampleTop = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   return (
@@ -71,7 +77,12 @@ export function ModalExampleTop() {
         onClickOutside={(): void => setIsModalOpen(false)}
         onEsc={(): void => setIsModalOpen(false)}
       >
-        <Text as="p" size="s" view="secondary" className={cnModalExample('Title')}>
+        <Text
+          as="p"
+          size="s"
+          view="secondary"
+          className={cnModalExample('Title')}
+        >
           Я окно
         </Text>
         <Text as="p" size="m" view="primary" className={cnModalExample('Body')}>
@@ -89,9 +100,9 @@ export function ModalExampleTop() {
       </Modal>
     </StoryBookExample>
   );
-}
+};
 
-export function ModalExampleCenter() {
+export const ModalExampleCenter = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   return (
@@ -110,7 +121,12 @@ export function ModalExampleCenter() {
         onClickOutside={(): void => setIsModalOpen(false)}
         onEsc={(): void => setIsModalOpen(false)}
       >
-        <Text as="p" size="s" view="secondary" className={cnModalExample('Title')}>
+        <Text
+          as="p"
+          size="s"
+          view="secondary"
+          className={cnModalExample('Title')}
+        >
           Я окно
         </Text>
         <Text as="p" size="m" view="primary" className={cnModalExample('Body')}>
@@ -128,9 +144,9 @@ export function ModalExampleCenter() {
       </Modal>
     </StoryBookExample>
   );
-}
+};
 
-export function ModalExampleNoOverlay() {
+export const ModalExampleNoOverlay = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   return (
@@ -149,7 +165,12 @@ export function ModalExampleNoOverlay() {
         onClickOutside={(): void => setIsModalOpen(false)}
         onEsc={(): void => setIsModalOpen(false)}
       >
-        <Text as="p" size="s" view="secondary" className={cnModalExample('Title')}>
+        <Text
+          as="p"
+          size="s"
+          view="secondary"
+          className={cnModalExample('Title')}
+        >
           Я окно
         </Text>
         <Text as="p" size="m" view="primary" className={cnModalExample('Body')}>
@@ -167,4 +188,4 @@ export function ModalExampleNoOverlay() {
       </Modal>
     </div>
   );
-}
+};

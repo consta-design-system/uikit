@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import * as React from 'react';
 
 import { cnSidebar, Sidebar, sidebarPropSize } from '../Sidebar';
 
@@ -13,8 +13,12 @@ const overlayAriaLabel = 'Overlay';
 const getComponent = (props: SidebarProps) => {
   return (
     <Sidebar data-testid={testId} isOpen {...props}>
-      <Sidebar.Content data-testid={testContentId}>test content</Sidebar.Content>
-      <Sidebar.Actions data-testid={testActionsId}>test actions</Sidebar.Actions>
+      <Sidebar.Content data-testid={testContentId}>
+        test content
+      </Sidebar.Content>
+      <Sidebar.Actions data-testid={testActionsId}>
+        test actions
+      </Sidebar.Actions>
     </Sidebar>
   );
 };
@@ -91,14 +95,18 @@ describe('Компонент Sidebar', () => {
   describe('проверка размера', () => {
     it('размера по умолчанию - m', () => {
       render(getComponent({}));
-      expect(screen.getByTestId(testId)).toHaveClass(cnSidebar('Window', { size: 'm' }));
+      expect(screen.getByTestId(testId)).toHaveClass(
+        cnSidebar('Window', { size: 'm' }),
+      );
     });
 
     describe('проверка валидных размеров', () => {
       sidebarPropSize.forEach((size) => {
         it(`установлен размер - ${size}`, () => {
           render(getComponent({ size }));
-          expect(screen.getByTestId(testId)).toHaveClass(cnSidebar('Window', { size }));
+          expect(screen.getByTestId(testId)).toHaveClass(
+            cnSidebar('Window', { size }),
+          );
         });
       });
     });

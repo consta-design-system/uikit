@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import * as React from 'react';
 
 import { IconAdd } from '../../../icons/IconAdd/IconAdd';
 import {
@@ -25,7 +25,9 @@ function getRender() {
 }
 
 function getInput() {
-  return screen.getByTestId(testId).querySelector(`input.${cnTextField('Input')}`);
+  return screen
+    .getByTestId(testId)
+    .querySelector(`input.${cnTextField('Input')}`);
 }
 
 function getInputContainer() {
@@ -33,15 +35,21 @@ function getInputContainer() {
 }
 
 function getTextArea() {
-  return screen.getByTestId(testId).querySelector(`textarea.${cnTextField('Input')}`);
+  return screen
+    .getByTestId(testId)
+    .querySelector(`textarea.${cnTextField('Input')}`);
 }
 
 function getleftSide() {
-  return screen.getByTestId(testId).querySelector(`.TextField-Side_position_left`);
+  return screen
+    .getByTestId(testId)
+    .querySelector(`.TextField-Side_position_left`);
 }
 
 function getRightSide() {
-  return screen.getByTestId(testId).querySelector(`.TextField-Side_position_right`);
+  return screen
+    .getByTestId(testId)
+    .querySelector(`.TextField-Side_position_right`);
 }
 
 describe('Компонент Button', () => {
@@ -61,7 +69,9 @@ describe('Компонент Button', () => {
       textFieldPropForm.forEach((form) => {
         it(`присваивает класс для form=${form}`, () => {
           renderComponent({ form });
-          expect(getInputContainer()).toHaveClass(cnTextField('InputContainer', { form }));
+          expect(getInputContainer()).toHaveClass(
+            cnTextField('InputContainer', { form }),
+          );
         });
       });
     });
@@ -69,7 +79,9 @@ describe('Компонент Button', () => {
       textFieldPropStatus.forEach((status) => {
         it(`присваивает класс для status=${status}`, () => {
           renderComponent({ status });
-          expect(getInputContainer()).toHaveClass(cnTextField('InputContainer', { status }));
+          expect(getInputContainer()).toHaveClass(
+            cnTextField('InputContainer', { status }),
+          );
         });
       });
     });
@@ -113,7 +125,9 @@ describe('Компонент Button', () => {
 
         expect(handleChange).toHaveBeenCalled();
         expect(handleChange).toHaveBeenCalledTimes(1);
-        expect(handleChange).toHaveBeenCalledWith(expect.objectContaining({ value }));
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({ value }),
+        );
       });
     });
     describe('проверка className', () => {

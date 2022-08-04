@@ -5,7 +5,9 @@ type UseScrollElementsResult = {
   scrollTo: (index: number) => void;
 };
 
-export function useScrollElements<ITEM>(items: ITEM[]): UseScrollElementsResult {
+export function useScrollElements<ITEM>(
+  items: ITEM[],
+): UseScrollElementsResult {
   const refs = useMemo(() => {
     const refArray: React.RefObject<HTMLElement>[] = [];
 
@@ -21,7 +23,9 @@ export function useScrollElements<ITEM>(items: ITEM[]): UseScrollElementsResult 
     const container = currentRef.current?.parentElement;
     if (currentRef.current && container) {
       const defaultPadding =
-        getComputedStyle(container).position !== 'relative' ? container.offsetLeft : 0;
+        getComputedStyle(container).position !== 'relative'
+          ? container.offsetLeft
+          : 0;
       let scrollLeft = currentRef.current.offsetLeft - defaultPadding;
       if (index === 0) {
         scrollLeft = 0;

@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
+import * as React from 'react';
 
 import { IconLeaf } from '../../../icons/IconLeaf/IconLeaf';
 import { createMetadata } from '../../../utils/storybook';
@@ -12,7 +12,6 @@ import {
   informerPropView,
   informerPropViewDefault,
 } from '../Informer';
-
 import mdx from './Informer.docs.mdx';
 
 const defaultKnobs = () => ({
@@ -24,7 +23,7 @@ const defaultKnobs = () => ({
   icon: boolean('icon', false),
 });
 
-export function Playground() {
+export const Playground = () => {
   const { status, title, label, view, icon, size } = defaultKnobs();
 
   return (
@@ -37,7 +36,7 @@ export function Playground() {
       icon={icon ? IconLeaf : undefined}
     />
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Обратная связь/Informer',

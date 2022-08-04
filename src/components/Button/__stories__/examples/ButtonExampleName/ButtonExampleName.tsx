@@ -8,17 +8,22 @@ import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsE
 import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Button } from '../../../Button';
 
-export function ButtonExampleNameSemantics() {
+export const ButtonExampleNameSemantics = () => {
   return (
     <div
-      className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' })])}
+      className={cnDocsDecorator('Section', [
+        wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
+      ])}
     >
       <div className={cnDocsExample()}>
         <p className={cnDocsExample('Caption')}>Ракета к запуску готова.</p>
         <Button label="OK" />
-        <p className={cnDocsExample('Status', { view: 'wrong' })}>Неправильно</p>
+        <p className={cnDocsExample('Status', { view: 'wrong' })}>
+          Неправильно
+        </p>
         <p className={cnDocsExample('Caption')}>
-          Непонятно, что будет, если нажать на кнопку. Скорее всего, ничего, но это не точно.
+          Непонятно, что будет, если нажать на кнопку. Скорее всего, ничего, но
+          это не точно.
         </p>
       </div>
       <div className={cnDocsExample()}>
@@ -31,19 +36,23 @@ export function ButtonExampleNameSemantics() {
       </div>
     </div>
   );
-}
+};
 
-export function ButtonExampleNameVerb() {
+export const ButtonExampleNameVerb = () => {
   return (
     <div
-      className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' })])}
+      className={cnDocsDecorator('Section', [
+        wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
+      ])}
     >
       <div className={cnDocsExample()}>
         <div className={wp.decorator({ distribute: 'left' })}>
           <Button label="Поиск" className={wp.decorator({ 'indent-r': 's' })} />
           <Button label="Искать" />
         </div>
-        <p className={cnDocsExample('Status', { view: 'wrong' })}>Неправильно</p>
+        <p className={cnDocsExample('Status', { view: 'wrong' })}>
+          Неправильно
+        </p>
         <p className={cnDocsExample('Caption')}>
           Предлагаем поискать, но результат не гарантируем.
         </p>
@@ -57,19 +66,23 @@ export function ButtonExampleNameVerb() {
       </div>
     </div>
   );
-}
+};
 
-export function ButtonExampleNameSingleLine() {
+export const ButtonExampleNameSingleLine = () => {
   return (
     <div
-      className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' })])}
+      className={cnDocsDecorator('Section', [
+        wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
+      ])}
     >
       <div className={cnDocsExample()}>
         <Button
           label="Скачать файл презентации"
           style={{ width: '200px', whiteSpace: 'normal', height: 'auto' }}
         />
-        <p className={cnDocsExample('Status', { view: 'wrong' })}>Неправильно</p>
+        <p className={cnDocsExample('Status', { view: 'wrong' })}>
+          Неправильно
+        </p>
       </div>
       <div className={cnDocsExample()}>
         <Button label="Скачать" />
@@ -77,31 +90,47 @@ export function ButtonExampleNameSingleLine() {
       </div>
     </div>
   );
-}
+};
 
-export function ButtonExampleNameOverflow() {
+export const ButtonExampleNameOverflow = () => {
   return (
     <div
-      className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' })])}
+      className={cnDocsDecorator('Section', [
+        wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
+      ])}
     >
       <div className={cnDocsExample()}>
         <Button label="Редактировать" style={{ width: '130px' }} />
-        <p className={cnDocsExample('Status', { view: 'wrong' })}>Неправильно</p>
+        <p className={cnDocsExample('Status', { view: 'wrong' })}>
+          Неправильно
+        </p>
       </div>
       <div className={cnDocsExample()}>
         <div className={wp.decorator({ distribute: 'left' })}>
-          <Button label="Редактировать" className={wp.decorator({ 'indent-r': 's' })} />
-          <Button label="Редактировать" iconRight={IconEdit} iconSize="s" onlyIcon />
+          <Button
+            label="Редактировать"
+            className={wp.decorator({ 'indent-r': 's' })}
+          />
+          <Button
+            label="Редактировать"
+            iconRight={IconEdit}
+            iconSize="s"
+            onlyIcon
+          />
         </div>
         <p className={cnDocsExample('Status', { view: 'right' })}>Правильно</p>
       </div>
     </div>
   );
-}
+};
 
-export function ButtonExampleNameNavigation() {
+export const ButtonExampleNameNavigation = () => {
   return (
-    <div className={cnDocsDecorator('Section', [wp.decorator({ distribute: 'left' })])}>
+    <div
+      className={cnDocsDecorator('Section', [
+        wp.decorator({ distribute: 'left' }),
+      ])}
+    >
       <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>
         <Button label="Назад" iconLeft={IconArrowLeft} />
       </div>
@@ -110,12 +139,14 @@ export function ButtonExampleNameNavigation() {
       </div>
     </div>
   );
-}
+};
 
-export function ButtonExampleNameAgreement() {
+export const ButtonExampleNameAgreement = () => {
   return (
     <div
-      className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' })])}
+      className={cnDocsDecorator('Section', [
+        wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
+      ])}
     >
       <div className={cnDocsExample()}>
         <p className={cnDocsExample('Caption')}>
@@ -125,10 +156,12 @@ export function ButtonExampleNameAgreement() {
         <p className={cnDocsExample('Status', { view: 'right' })}>Правильно</p>
       </div>
       <div className={cnDocsExample()}>
-        <p className={cnDocsExample('Caption')}>Примите лиценизонное соглашение, ну пожалуйста.</p>
+        <p className={cnDocsExample('Caption')}>
+          Примите лиценизонное соглашение, ну пожалуйста.
+        </p>
         <Button label="Принимаю" />
         <p className={cnDocsExample('Status', { view: 'right' })}>Правильно</p>
       </div>
     </div>
   );
-}
+};

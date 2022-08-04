@@ -1,10 +1,17 @@
-import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import React from 'react';
 
 import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconCamera } from '../../../icons/IconCamera/IconCamera';
 import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
-import { cnTabs, cnTabsTab, Tabs, TabsProps as Props, tabsSizes, tabsViews } from '../Tabs';
+import {
+  cnTabs,
+  cnTabsTab,
+  Tabs,
+  TabsProps as Props,
+  tabsSizes,
+  tabsViews,
+} from '../Tabs';
 
 const testId = cnTabs();
 
@@ -70,7 +77,9 @@ function getItem(index = 0) {
 }
 
 function getIcon(index = 0) {
-  return getRender().querySelectorAll(`.${cnTabsTab('Icon')}`)[index] as HTMLSpanElement;
+  return getRender().querySelectorAll(`.${cnTabsTab('Icon')}`)[
+    index
+  ] as HTMLSpanElement;
 }
 
 describe('Компонент Tabs', () => {
@@ -174,8 +183,11 @@ describe('Компонент Tabs', () => {
     describe('проверка renderItem', () => {
       it(`рендер элемента производится прокинутой функцией`, () => {
         const renderText = 'customRenderItem';
+        // eslint-disable-next-line react/jsx-no-useless-fragment
         renderComponent({ renderItem: () => <>{renderText}</> });
-        expect(getRender().textContent).toEqual(`${renderText}${renderText}${renderText}`);
+        expect(getRender().textContent).toEqual(
+          `${renderText}${renderText}${renderText}`,
+        );
       });
     });
   });

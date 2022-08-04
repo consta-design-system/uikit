@@ -1,9 +1,12 @@
 import * as React from 'react';
 
-function FileImage(props: React.SVGProps<SVGSVGElement>) {
+const FileImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
-      <path d="M0 4a4 4 0 014-4h192a4 4 0 014 4v112a4 4 0 01-4 4H4a4 4 0 01-4-4V4z" fill="#fff" />
+      <path
+        d="M0 4a4 4 0 014-4h192a4 4 0 014 4v112a4 4 0 01-4 4H4a4 4 0 01-4-4V4z"
+        fill="#fff"
+      />
       <rect x={34} y={36} width={36} height={48} rx={2} fill="#0078D2" />
       <path
         d="M67.6 36H36.4a2.4 2.4 0 00-2.4 2.4v43.2a2.4 2.4 0 002.4 2.4h31.2a2.4 2.4 0 002.4-2.4V38.4a2.4 2.4 0 00-2.4-2.4z"
@@ -35,6 +38,6 @@ function FileImage(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default FileImage;

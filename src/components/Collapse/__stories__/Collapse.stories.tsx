@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
+import React, { useState } from 'react';
 
 import { IconAdd } from '../../../icons/IconAdd/IconAdd';
 import { IconRemove } from '../../../icons/IconRemove/IconRemove';
@@ -19,7 +19,6 @@ import {
   collapsePropViewDefault,
   sizeIconMap,
 } from '../Collapse';
-
 import mdx from './Collapse.docs.mdx';
 
 const defaultKnobs = () => ({
@@ -52,7 +51,7 @@ const defaultKnobs = () => ({
   withCustomIcon: boolean('withCustomIcon', false),
 });
 
-export function Playground() {
+export const Playground = () => {
   const {
     size,
     label,
@@ -104,7 +103,7 @@ export function Playground() {
       {children}
     </Collapse>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Отображение данных/Collapse',

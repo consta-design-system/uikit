@@ -20,8 +20,16 @@ export const TabsExampleRenderItem = () => {
         getLabel={(item) => item}
         size="m"
         renderItem={({ label, checked, onChange }) => (
-          <button type="button" onClick={onChange} className={cnTabsTab({ checked })}>
-            <span style={{ marginRight: 'var(--space-m)' }} role="img" aria-label="img">
+          <button
+            type="button"
+            onClick={onChange}
+            className={cnTabsTab({ checked })}
+          >
+            <span
+              style={{ marginRight: 'var(--space-m)' }}
+              role="img"
+              aria-label="img"
+            >
               {checked ? '🤘' : '✋'}
             </span>
             {label}
@@ -67,7 +75,11 @@ export const TabsExampleRenderItemBadge = () => {
         getLabel={(item) => item.text}
         size="m"
         renderItem={({ item, onChange, checked }) => (
-          <button type="button" onClick={onChange} className={cnTabsTab({ checked })}>
+          <button
+            type="button"
+            onClick={onChange}
+            className={cnTabsTab({ checked })}
+          >
             {item.text}
             <Badge
               status={item.badgeStatus}

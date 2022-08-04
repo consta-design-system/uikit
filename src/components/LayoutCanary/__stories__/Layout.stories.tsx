@@ -1,13 +1,16 @@
 import './LayoutStories.css';
 
-import React from 'react';
 import { select } from '@storybook/addon-knobs';
+import React from 'react';
 
 import { cn } from '../../../utils/bem';
 import { createMetadata, createStory } from '../../../utils/storybook';
 import { Text } from '../../Text/Text';
-import { Layout, layoutPropDirection, layoutPropDirectionDefault } from '../LayoutCanary';
-
+import {
+  Layout,
+  layoutPropDirection,
+  layoutPropDirectionDefault,
+} from '../LayoutCanary';
 import { LayoutExampleAnchor } from './examples/LayoutExampleAnchor/LayoutExampleAnchor';
 import { LayoutExampleFixed } from './examples/LayoutExampleFixed/LayoutExampleFixed';
 import { LayoutExampleRowFixed } from './examples/LayoutExampleRowFixed/LayoutExampleRowFixed';
@@ -16,14 +19,18 @@ import mdx from './Layout.docs.mdx';
 const flexArray = [1, 2, 3, 4, 5, 6];
 
 const defaultKnobs = () => ({
-  direction: select('Direction', layoutPropDirection, layoutPropDirectionDefault),
+  direction: select(
+    'Direction',
+    layoutPropDirection,
+    layoutPropDirectionDefault,
+  ),
   flexBlock1: select('Flex Block 1', flexArray, 1),
   flexBlock2: select('Flex Block 2', flexArray, 1),
 });
 
 const cnLayoutStories = cn('LayoutStories');
 
-export function Playground() {
+export const Playground = () => {
   const { direction, flexBlock1, flexBlock2 } = defaultKnobs();
 
   return (
@@ -31,7 +38,10 @@ export function Playground() {
       <Layout className={cnLayoutStories('Header')}>
         <Text>Шапка</Text>
       </Layout>
-      <Layout direction={direction} className={cnLayoutStories('Content', { direction })}>
+      <Layout
+        direction={direction}
+        className={cnLayoutStories('Content', { direction })}
+      >
         <Layout className={cnLayoutStories('Block')} flex={flexBlock1}>
           <Text>Контент</Text>
         </Layout>
@@ -41,7 +51,7 @@ export function Playground() {
       </Layout>
     </Layout>
   );
-}
+};
 
 export const WithFixedVertical = createStory(
   () => {

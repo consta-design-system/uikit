@@ -19,7 +19,14 @@ export const TextExampleLabelAndData = () => {
         >
           ФИО
         </Text>
-        <Text as="div" align="left" font="mono" lineHeight="l" size="l" view="primary">
+        <Text
+          as="div"
+          align="left"
+          font="mono"
+          lineHeight="l"
+          size="l"
+          view="primary"
+        >
           Иванов Дмитрий Петрович
         </Text>
       </div>
@@ -35,7 +42,14 @@ export const TextExampleLabelAndData = () => {
         >
           Должность
         </Text>
-        <Text as="div" align="left" font="mono" lineHeight="l" size="l" view="primary">
+        <Text
+          as="div"
+          align="left"
+          font="mono"
+          lineHeight="l"
+          size="l"
+          view="primary"
+        >
           Инженер по бурению
         </Text>
       </div>
@@ -51,7 +65,14 @@ export const TextExampleLabelAndData = () => {
         >
           Подразделение
         </Text>
-        <Text as="div" align="left" font="mono" lineHeight="l" size="l" view="primary">
+        <Text
+          as="div"
+          align="left"
+          font="mono"
+          lineHeight="l"
+          size="l"
+          view="primary"
+        >
           Группа разведки и бурения
         </Text>
       </div>

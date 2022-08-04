@@ -92,7 +92,12 @@ export const SelectDropdown: SelectDropdown = (props) => {
       <Popover
         anchorRef={controlRef}
         direction="downStartLeft"
-        possibleDirections={['downStartLeft', 'upStartLeft', 'downStartRight', 'upStartRight']}
+        possibleDirections={[
+          'downStartLeft',
+          'upStartLeft',
+          'downStartRight',
+          'upStartRight',
+        ]}
         offset={1}
         ref={popoverRef}
         role="listbox"
@@ -100,18 +105,28 @@ export const SelectDropdown: SelectDropdown = (props) => {
         aria-activedescendant={`${id}-${highlightedIndex}`}
         equalAnchorWidth
       >
-        <div className={cnSelectDropdown('List', { size, form })} ref={dropdownRef}>
+        <div
+          className={cnSelectDropdown('List', { size, form })}
+          ref={dropdownRef}
+        >
           {visibleOptions.length > 0 ? (
             visibleOptions.map((option, index: number) => {
               const isOptionForCreate = 'optionForCreate' in option;
               const currentOption = visibleOptions[index];
               const prevOption = visibleOptions[index - 1];
-              const menuOption = isOptionForCreate ? visibleOptions[index + 1] : currentOption;
+              const menuOption = isOptionForCreate
+                ? visibleOptions[index + 1]
+                : currentOption;
               const isFirstGroup =
-                hasGroup && !isOptionForCreate && !visibleOptions[index - 1] && index === 0;
+                hasGroup &&
+                !isOptionForCreate &&
+                !visibleOptions[index - 1] &&
+                index === 0;
               const shouldShowGroupName =
                 isFirstGroup ||
-                (hasGroup && prevOption && currentOption.group !== prevOption.group);
+                (hasGroup &&
+                  prevOption &&
+                  currentOption.group !== prevOption.group);
               const active = Boolean(
                 !isOptionForCreate &&
                   selectedValues?.some((val) => {
@@ -123,7 +138,11 @@ export const SelectDropdown: SelectDropdown = (props) => {
               return (
                 <React.Fragment key={String(getOptionKey(option))}>
                   {shouldShowGroupName && (
-                    <SelectGroupLabel label={menuOption.group} size={size} indent={indent} />
+                    <SelectGroupLabel
+                      label={menuOption.group}
+                      size={size}
+                      indent={indent}
+                    />
                   )}
                   {isOptionForCreate ? (
                     <SelectCreateButton
@@ -149,7 +168,9 @@ export const SelectDropdown: SelectDropdown = (props) => {
               );
             })
           ) : (
-            <Text className={cnSelectDropdown('LabelForNotFound')}>{labelForNotFound}</Text>
+            <Text className={cnSelectDropdown('LabelForNotFound')}>
+              {labelForNotFound}
+            </Text>
           )}
         </div>
       </Popover>

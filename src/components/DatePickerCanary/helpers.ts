@@ -5,7 +5,10 @@ import { range } from '../../utils/array';
 import { getByMap } from '../../utils/getByMap';
 import { DateRange } from '../../utils/types/Date';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
-import { DateTimeAdditionalControlRenderProp, DateTimePropView } from '../DateTimeCanary/helpers';
+import {
+  DateTimeAdditionalControlRenderProp,
+  DateTimePropView,
+} from '../DateTimeCanary/helpers';
 import {
   TextFieldPropForm,
   TextFieldPropSize,
@@ -44,11 +47,18 @@ export type DatePickerPropOnChange<TYPE extends DatePickerPropType> = (props: {
   e: React.MouseEvent<HTMLButtonElement, MouseEvent> | Event;
 }) => void;
 
-export const datePickerPropDropdownForm = ['default', 'brick', 'round'] as const;
-export type DatePickerPropDropdownForm = typeof datePickerPropDropdownForm[number];
+export const datePickerPropDropdownForm = [
+  'default',
+  'brick',
+  'round',
+] as const;
+export type DatePickerPropDropdownForm =
+  typeof datePickerPropDropdownForm[number];
 export const datePickerPropDropdownFormDefault = datePickerPropDropdownForm[0];
 
-type DatePickerPropCalendarWidth<TYPE> = TYPE extends Range ? TextFieldPropWidth : never;
+type DatePickerPropCalendarWidth<TYPE> = TYPE extends Range
+  ? TextFieldPropWidth
+  : never;
 
 type DatePickerPropCalendarInputRef<TYPE> = TYPE extends Range
   ? never
@@ -66,65 +76,64 @@ type DatePickerPropCalendarStartOnFocus<TYPE> = TYPE extends Range
   ? React.FocusEventHandler<HTMLElement>
   : never;
 
-export type DatePickerProps<
-  TYPE extends DatePickerPropType = 'date'
-> = PropsWithHTMLAttributesAndRef<
-  {
-    type?: TYPE;
-    value?: DatePickerPropValue<TYPE>;
-    onChange?: DatePickerPropOnChange<TYPE>;
-    minDate?: Date;
-    maxDate?: Date;
-    renderAdditionalControls?: DateTimeAdditionalControlRenderProp;
-    events?: Date[];
-    dateTimeView?: DatePickerPropDateTimeView;
-    locale?: Locale;
-    children?: never;
-    onError?: DatePickerPropOnError;
-    id?: string;
-    name?: string;
-    disabled?: boolean;
-    size?: TextFieldPropSize;
-    view?: TextFieldPropView;
-    form?: TextFieldPropForm;
-    status?: TextFieldPropStatus;
-    onFocus?: React.FocusEventHandler<HTMLElement>;
-    onBlur?: React.FocusEventHandler<HTMLElement>;
-    autoFocus?: boolean;
-    placeholder?: string;
-    readOnly?: boolean;
-    required?: boolean;
-    tabIndex?: number;
-    inputRef?: DatePickerPropCalendarInputRef<TYPE>;
-    ariaLabel?: string;
-    iconSize?: IconPropSize;
-    format?: string;
-    separator?: string;
-    dropdownForm?: DatePickerPropDropdownForm;
-    width?: DatePickerPropCalendarWidth<TYPE>;
-    leftSide?: string | IconComponent;
-    rightSide?: string | IconComponent;
-    startFieldInputRef?: DatePickerPropCalendarStartInputRef<TYPE>;
-    endFieldInputRef?: DatePickerPropCalendarStartInputRef<TYPE>;
-    startFieldLeftSide?: DatePickerPropCalendarStartLeftSide<TYPE>;
-    startFieldRightSide?: DatePickerPropCalendarStartLeftSide<TYPE>;
-    endFieldLeftSide?: DatePickerPropCalendarStartLeftSide<TYPE>;
-    endFieldRightSide?: DatePickerPropCalendarStartLeftSide<TYPE>;
-    startFieldOnFocus?: DatePickerPropCalendarStartOnFocus<TYPE>;
-    endFieldOnFocus?: DatePickerPropCalendarStartOnFocus<TYPE>;
-    startFieldOnBlur?: DatePickerPropCalendarStartOnFocus<TYPE>;
-    endFieldOnBlur?: DatePickerPropCalendarStartOnFocus<TYPE>;
-    label?: string;
-    caption?: string;
-    labelPosition?: 'top' | 'left';
-    onChangeCurrentVisibleDate?: (date: Date) => void;
-    currentVisibleDate?: Date;
-    multiplicitySeconds?: number;
-    multiplicityMinutes?: number;
-    multiplicityHours?: number;
-  },
-  HTMLDivElement
->;
+export type DatePickerProps<TYPE extends DatePickerPropType = 'date'> =
+  PropsWithHTMLAttributesAndRef<
+    {
+      type?: TYPE;
+      value?: DatePickerPropValue<TYPE>;
+      onChange?: DatePickerPropOnChange<TYPE>;
+      minDate?: Date;
+      maxDate?: Date;
+      renderAdditionalControls?: DateTimeAdditionalControlRenderProp;
+      events?: Date[];
+      dateTimeView?: DatePickerPropDateTimeView;
+      locale?: Locale;
+      children?: never;
+      onError?: DatePickerPropOnError;
+      id?: string;
+      name?: string;
+      disabled?: boolean;
+      size?: TextFieldPropSize;
+      view?: TextFieldPropView;
+      form?: TextFieldPropForm;
+      status?: TextFieldPropStatus;
+      onFocus?: React.FocusEventHandler<HTMLElement>;
+      onBlur?: React.FocusEventHandler<HTMLElement>;
+      autoFocus?: boolean;
+      placeholder?: string;
+      readOnly?: boolean;
+      required?: boolean;
+      tabIndex?: number;
+      inputRef?: DatePickerPropCalendarInputRef<TYPE>;
+      ariaLabel?: string;
+      iconSize?: IconPropSize;
+      format?: string;
+      separator?: string;
+      dropdownForm?: DatePickerPropDropdownForm;
+      width?: DatePickerPropCalendarWidth<TYPE>;
+      leftSide?: string | IconComponent;
+      rightSide?: string | IconComponent;
+      startFieldInputRef?: DatePickerPropCalendarStartInputRef<TYPE>;
+      endFieldInputRef?: DatePickerPropCalendarStartInputRef<TYPE>;
+      startFieldLeftSide?: DatePickerPropCalendarStartLeftSide<TYPE>;
+      startFieldRightSide?: DatePickerPropCalendarStartLeftSide<TYPE>;
+      endFieldLeftSide?: DatePickerPropCalendarStartLeftSide<TYPE>;
+      endFieldRightSide?: DatePickerPropCalendarStartLeftSide<TYPE>;
+      startFieldOnFocus?: DatePickerPropCalendarStartOnFocus<TYPE>;
+      endFieldOnFocus?: DatePickerPropCalendarStartOnFocus<TYPE>;
+      startFieldOnBlur?: DatePickerPropCalendarStartOnFocus<TYPE>;
+      endFieldOnBlur?: DatePickerPropCalendarStartOnFocus<TYPE>;
+      label?: string;
+      caption?: string;
+      labelPosition?: 'top' | 'left';
+      onChangeCurrentVisibleDate?: (date: Date) => void;
+      currentVisibleDate?: Date;
+      multiplicitySeconds?: number;
+      multiplicityMinutes?: number;
+      multiplicityHours?: number;
+    },
+    HTMLDivElement
+  >;
 
 export type DatePickerComponent = <TYPE extends DatePickerPropType = 'date'>(
   props: DatePickerProps<TYPE>,
@@ -174,7 +183,11 @@ export const datePickerPropFormatTypeDateTime = `${datePickerPropFormatTypeDate}
 export const datePickerPropPlaceholderTypeDateTime = `${datePickerPropPlaceholderTypeDate} ${datePickerPropPlaceholderTypeTime}`;
 
 export const normalizeRangeValue = (dateRange: DateRange): DateRange => {
-  if (dateRange[0] && dateRange[1] && dateRange[0]?.getTime() > dateRange[1]?.getTime()) {
+  if (
+    dateRange[0] &&
+    dateRange[1] &&
+    dateRange[0]?.getTime() > dateRange[1]?.getTime()
+  ) {
     return [dateRange[1], dateRange[0]];
   }
   return dateRange;
@@ -194,7 +207,9 @@ export const getMultiplicityTime = (
     ss: multiplicitySeconds,
   } as const;
 
-  return markers.map((marker) => (formatArray?.indexOf(marker) < 0 ? 0 : map[marker]));
+  return markers.map((marker) =>
+    formatArray?.indexOf(marker) < 0 ? 0 : map[marker],
+  );
 };
 
 export const getTimeEnum = (
@@ -251,24 +266,41 @@ const mapFormForEnd: Record<TextFieldPropForm, TextFieldPropForm> = {
   clearClear: 'brickClear',
 };
 
-export const getFormForStart = (form: TextFieldPropForm) => getByMap(mapFormForStart, form);
-export const getFormForEnd = (form: TextFieldPropForm) => getByMap(mapFormForEnd, form);
+export const getFormForStart = (form: TextFieldPropForm) =>
+  getByMap(mapFormForStart, form);
+export const getFormForEnd = (form: TextFieldPropForm) =>
+  getByMap(mapFormForEnd, form);
 
-const getPartDate = (formatArray: string[], stringArray: string[], marker: string) => {
+const getPartDate = (
+  formatArray: string[],
+  stringArray: string[],
+  marker: string,
+) => {
   const index = formatArray.indexOf(marker);
 
-  if (index >= 0 && stringArray[index] && stringArray[index].length === marker.length) {
+  if (
+    index >= 0 &&
+    stringArray[index] &&
+    stringArray[index].length === marker.length
+  ) {
     return stringArray[index];
   }
 
   return undefined;
 };
 
-export const getParts = (format: string, separator: string, withTime?: boolean) => {
+export const getParts = (
+  format: string,
+  separator: string,
+  withTime?: boolean,
+) => {
   if (withTime) {
     const [date, time] = format.split(' ');
 
-    return [...(date ? date.split(separator) : []), ...(time ? time.split(':') : [])];
+    return [
+      ...(date ? date.split(separator) : []),
+      ...(time ? time.split(':') : []),
+    ];
   }
 
   return format.split(separator);
@@ -287,4 +319,5 @@ export const getPartsDate = (
   return markers.map((marker) => getPartDate(formatArray, stringArray, marker));
 };
 
-export const isTypeWithTime = (type: DatePickerPropType) => type.indexOf('time') !== -1;
+export const isTypeWithTime = (type: DatePickerPropType) =>
+  type.indexOf('time') !== -1;

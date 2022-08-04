@@ -1,15 +1,18 @@
 import './Popover.stories.css';
 
-import React, { useRef, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { boolean, number, object, select, text } from '@storybook/addon-knobs';
+import React, { useRef, useState } from 'react';
 
 import { cn } from '../../../utils/bem';
-import { createMetadata, createStory, getStoryIds } from '../../../utils/storybook';
+import {
+  createMetadata,
+  createStory,
+  getStoryIds,
+} from '../../../utils/storybook';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 import { directions, Popover, popoverPropOffset, Position } from '../Popover';
-
 import mdx from './Popover.docs.mdx';
 
 const cnPopoverStories = cn('PopoverStories');
@@ -128,7 +131,12 @@ export const PopoverBannedPositionsStory = createStory(
 
     return (
       <>
-        <Button label="Нажмите меня" type="button" onClick={handleClickOnAnchor} ref={anchorRef} />
+        <Button
+          label="Нажмите меня"
+          type="button"
+          onClick={handleClickOnAnchor}
+          ref={anchorRef}
+        />
         {isPopoverVisible && (
           <Popover
             anchorRef={anchorRef}

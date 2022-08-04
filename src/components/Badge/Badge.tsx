@@ -1,7 +1,7 @@
 import './Badge.css';
 
-import React from 'react';
 import { classnames } from '@bem-react/classnames';
+import React from 'react';
 
 import { IconComponent } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
@@ -16,7 +16,13 @@ export const badgePropView = ['filled', 'stroked'] as const;
 export type BadgePropView = typeof badgePropView[number];
 export const badgePropViewDefault: BadgePropView = badgePropView[0];
 
-export const badgePropStatus = ['normal', 'success', 'error', 'warning', 'system'] as const;
+export const badgePropStatus = [
+  'normal',
+  'success',
+  'error',
+  'warning',
+  'system',
+] as const;
 export type BadgePropStatus = typeof badgePropStatus[number];
 export const badgePropStatusDefault: BadgePropStatus = badgePropStatus[0];
 

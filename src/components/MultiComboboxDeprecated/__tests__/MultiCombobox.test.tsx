@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { act, fireEvent, render, screen } from '@testing-library/react';
+import React, { useState } from 'react';
 
 import { simpleItems } from '../../ComboboxDeprecated/__mocks__/data.mock';
 import { cnSelect } from '../../SelectComponentsDeprecated/cnSelect';
@@ -32,8 +32,13 @@ const renderComponent = (props: {
   );
 };
 
-const ValueTest = ({ indexElementAfterClick = [0], indexElementBeforeClick = [1] }) => {
-  const [value, setValue] = useState(indexElementAfterClick.map((index) => simpleItems[index]));
+const ValueTest = ({
+  indexElementAfterClick = [0],
+  indexElementBeforeClick = [1],
+}) => {
+  const [value, setValue] = useState(
+    indexElementAfterClick.map((index) => simpleItems[index]),
+  );
   return (
     <div>
       <MultiCombobox
@@ -45,7 +50,9 @@ const ValueTest = ({ indexElementAfterClick = [0], indexElementBeforeClick = [1]
       />
       <button
         data-testid="changerValue"
-        onClick={() => setValue(indexElementBeforeClick.map((index) => simpleItems[index]))}
+        onClick={() =>
+          setValue(indexElementBeforeClick.map((index) => simpleItems[index]))
+        }
         type="button"
       >
         change
@@ -102,7 +109,9 @@ function getInput() {
 }
 
 function getIndicatorsDropdown() {
-  return getRender().querySelector(`.${cnSelect('IndicatorsDropdown')}`) as HTMLElement;
+  return getRender().querySelector(
+    `.${cnSelect('IndicatorsDropdown')}`,
+  ) as HTMLElement;
 }
 
 function getOutside() {
@@ -238,7 +247,9 @@ describe('Компонент MultiCombobox', () => {
 
       expect(handleChange).toHaveBeenCalled();
       expect(handleChange).toHaveBeenCalledTimes(1);
-      expect(handleChange).toHaveBeenCalledWith(expect.objectContaining([simpleItems[1]]));
+      expect(handleChange).toHaveBeenCalledWith(
+        expect.objectContaining([simpleItems[1]]),
+      );
 
       fireEvent.click(getOption(2));
 
@@ -250,7 +261,9 @@ describe('Компонент MultiCombobox', () => {
       fireEvent.click(getOption(1));
 
       expect(handleChange).toHaveBeenCalled();
-      expect(handleChange).toHaveBeenCalledWith(expect.objectContaining([simpleItems[2]]));
+      expect(handleChange).toHaveBeenCalledWith(
+        expect.objectContaining([simpleItems[2]]),
+      );
     });
   });
 });

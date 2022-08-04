@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function IconAllDoneSizeXs(props: React.SVGProps<SVGSVGElement>) {
+const IconAllDoneSizeXs = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 12 12" {...props}>
       <g clipPath="url(#SvgIconAllDone_size_xs__clip0)">
@@ -14,6 +14,6 @@ function IconAllDoneSizeXs(props: React.SVGProps<SVGSVGElement>) {
       </defs>
     </svg>
   );
-}
+};
 
 export default IconAllDoneSizeXs;

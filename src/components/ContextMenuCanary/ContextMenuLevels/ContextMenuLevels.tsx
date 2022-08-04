@@ -4,7 +4,10 @@ import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside'
 import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
 import { useRefs } from '../../../hooks/useRefs/useRefs';
 import { Direction, directions } from '../../Popover/Popover';
-import { clearTimers, ContextMenuLevel } from '../ContextMenuLevel/ContextMenuLevel';
+import {
+  clearTimers,
+  ContextMenuLevel,
+} from '../ContextMenuLevel/ContextMenuLevel';
 import { getLevels, withDefaultGetters } from '../helper';
 import {
   AddLevel,
@@ -15,7 +18,10 @@ import {
   Level,
 } from '../types';
 
-function ContextMenuLevelsRender(propsComponent: ContextMenuProps, ref: React.Ref<HTMLDivElement>) {
+const ContextMenuLevelsRender = (
+  propsComponent: ContextMenuProps,
+  ref: React.Ref<HTMLDivElement>,
+) => {
   const props = withDefaultGetters(propsComponent);
   const {
     items,
@@ -30,7 +36,8 @@ function ContextMenuLevelsRender(propsComponent: ContextMenuProps, ref: React.Re
     getItemSubMenu,
     style,
     spareDirection,
-    subMenuDirection: subMenuDirectionProp = contextMenuPropDefaultSubMenuDirection,
+    subMenuDirection:
+      subMenuDirectionProp = contextMenuPropDefaultSubMenuDirection,
     ...otherProps
   } = props;
 
@@ -48,15 +55,23 @@ function ContextMenuLevelsRender(propsComponent: ContextMenuProps, ref: React.Re
   ] as Level<Item>[];
 
   const [levels, setLevels] = useState<Level<Item>[]>(defaultLevels);
-  const [subMenuDirection, setSubMenuDirection] = useState<Direction>(subMenuDirectionProp);
+  const [subMenuDirection, setSubMenuDirection] =
+    useState<Direction>(subMenuDirectionProp);
   const [hoveredParenLevel, setHoveredParenLevel] = useState<number>(-1);
 
   const levelsRefs = useRefs<HTMLDivElement>(levels.length);
 
-  const addLevel: AddLevel<Item> = ({ level, items, anchorRef, activeItem }) => {
+  const addLevel: AddLevel<Item> = ({
+    level,
+    items,
+    anchorRef,
+    activeItem,
+  }) => {
     const newLevels = [...levels];
     const oldDirection =
-      newLevels[level] && newLevels.length - level > 1 ? newLevels[level].direction : undefined;
+      newLevels[level] && newLevels.length - level > 1
+        ? newLevels[level].direction
+        : undefined;
 
     if (newLevels[level] && newLevels.length - level > 1 && oldDirection) {
       setSubMenuDirection(oldDirection);
@@ -113,14 +128,19 @@ function ContextMenuLevelsRender(propsComponent: ContextMenuProps, ref: React.Re
           style={{
             ...style,
             ...{
-              zIndex: typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined,
+              zIndex:
+                typeof style?.zIndex === 'number'
+                  ? style.zIndex + 1
+                  : undefined,
             },
           }}
           levelDepth={index}
           getItemLabel={getItemLabel}
           addLevel={addLevel}
           deleteLevel={deleteLevel}
-          onSetDirection={index > 0 ? setSubMenuDirection : props.onSetDirection}
+          onSetDirection={
+            index > 0 ? setSubMenuDirection : props.onSetDirection
+          }
           hoveredParenLevel={hoveredParenLevel}
           setHoveredParenLevel={setHoveredParenLevel}
           getItemSubMenu={getItemSubMenu}
@@ -131,6 +151,8 @@ function ContextMenuLevelsRender(propsComponent: ContextMenuProps, ref: React.Re
       ))}
     </>
   );
-}
+};
 
-export const ContextMenuLevels = React.forwardRef(ContextMenuLevelsRender) as ContextMenuComponent;
+export const ContextMenuLevels = React.forwardRef(
+  ContextMenuLevelsRender,
+) as ContextMenuComponent;

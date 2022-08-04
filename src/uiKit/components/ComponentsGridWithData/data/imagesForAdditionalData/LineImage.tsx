@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function LineImage(props: React.SVGProps<SVGSVGElement>) {
+const LineImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <path
@@ -27,6 +27,6 @@ function LineImage(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default LineImage;

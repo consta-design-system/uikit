@@ -27,8 +27,12 @@ export const usePopoverReposition = ({
     if (isActive) {
       window.addEventListener('resize', onRequestReposition);
 
-      const allParents = scrollAnchorRef?.current ? getAllParents(scrollAnchorRef.current) : [];
-      allParents.forEach((parentEl) => parentEl.addEventListener('scroll', onRequestReposition));
+      const allParents = scrollAnchorRef?.current
+        ? getAllParents(scrollAnchorRef.current)
+        : [];
+      allParents.forEach((parentEl) =>
+        parentEl.addEventListener('scroll', onRequestReposition),
+      );
 
       return () => {
         window.removeEventListener('resize', onRequestReposition);

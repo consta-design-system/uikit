@@ -58,7 +58,10 @@ function renderSide(
   return sidesRender;
 }
 
-function ContextMenuItemRender(props: ContextMenuItemProps, ref: React.Ref<HTMLDivElement>) {
+const ContextMenuItemRender = (
+  props: ContextMenuItemProps,
+  ref: React.Ref<HTMLDivElement>,
+) => {
   const {
     label,
     rightSide,
@@ -90,13 +93,18 @@ function ContextMenuItemRender(props: ContextMenuItemProps, ref: React.Ref<HTMLD
       {!rightSide && !leftSide && !withSubMenu && !leftIcon && !rightIcon ? (
         label
       ) : (
-        <div className={cnContextMenuItem('Slot', { position: 'center' })} key="center">
+        <div
+          className={cnContextMenuItem('Slot', { position: 'center' })}
+          key="center"
+        >
           {label}
         </div>
       )}
       {renderSide(rightSide, 'right', withSubMenu, size, rightIcon)}
     </Text>
   );
-}
+};
 
-export const ContextMenuItem = React.forwardRef(ContextMenuItemRender) as ContextMenuItemComponent;
+export const ContextMenuItem = React.forwardRef(
+  ContextMenuItemRender,
+) as ContextMenuItemComponent;

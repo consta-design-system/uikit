@@ -6,7 +6,11 @@ import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
 import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
 import { cn } from '../../../utils/bem';
-import { generateThemeClassNames, ThemeContext, useTheme } from '../../Theme/Theme';
+import {
+  generateThemeClassNames,
+  ThemeContext,
+  useTheme,
+} from '../../Theme/Theme';
 import { Tooltip } from '../../Tooltip/Tooltip';
 import { SliderPointProps, TrackPosition } from '../helper';
 
@@ -65,7 +69,9 @@ export const SliderPoint = (props: SliderPointProps) => {
     focused ? on() : off();
   }, [focused]);
 
-  const handleFocus = (e: React.FocusEvent<HTMLButtonElement> | React.MouseEvent) => {
+  const handleFocus = (
+    e: React.FocusEvent<HTMLButtonElement> | React.MouseEvent,
+  ) => {
     if (!disabled) {
       onFocus?.(e, buttonLabel);
       on();
@@ -82,7 +88,9 @@ export const SliderPoint = (props: SliderPointProps) => {
   };
 
   const handleBlur = (
-    e: React.FocusEvent<HTMLButtonElement> | React.MouseEvent<HTMLButtonElement>,
+    e:
+      | React.FocusEvent<HTMLButtonElement>
+      | React.MouseEvent<HTMLButtonElement>,
   ) => {
     if (!disabled) {
       onFocus?.(e, null);
@@ -97,7 +105,9 @@ export const SliderPoint = (props: SliderPointProps) => {
       <button
         type="button"
         aria-label={`${buttonLabel}-button`}
-        className={cnSliderPoint({ hovered, disabled }, [!disabled ? cnMixFocus() : ''])}
+        className={cnSliderPoint({ hovered, disabled }, [
+          !disabled ? cnMixFocus() : '',
+        ])}
         onMouseOver={() => handleMouseAction(true)}
         onMouseOut={() => handleMouseAction(false)}
         onMouseDown={() => handlePress?.(buttonLabel)}
@@ -115,10 +125,17 @@ export const SliderPoint = (props: SliderPointProps) => {
       />
       {tooltipVisible && withTooltip && popoverPosition && (
         <ThemeContext.Provider
-          value={{ theme: tooltipTheme, themeClassNames: tooltipThemeClassNames }}
+          // eslint-disable-next-line react/jsx-no-constructed-context-values
+          value={{
+            theme: tooltipTheme,
+            themeClassNames: tooltipThemeClassNames,
+          }}
         >
           <Tooltip
-            position={getTooltipPosition(popoverPosition, buttonRef || pointRef)}
+            position={getTooltipPosition(
+              popoverPosition,
+              buttonRef || pointRef,
+            )}
             className={cnSliderPoint('Tooltip')}
             direction="downCenter"
             possibleDirections={['downCenter', 'leftDown', 'rightDown']}

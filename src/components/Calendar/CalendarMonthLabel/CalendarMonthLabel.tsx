@@ -16,7 +16,9 @@ export type CalendarMonthLabelProps = PropsWithHTMLAttributes<
 
 export const cnCalendarMonthLabel = cn('CalendarMonthLabel');
 
-export const CalendarMonthLabel: React.FC<CalendarMonthLabelProps> = (props) => {
+export const CalendarMonthLabel: React.FC<CalendarMonthLabelProps> = (
+  props,
+) => {
   const { label, className, ...otherProps } = props;
 
   return (

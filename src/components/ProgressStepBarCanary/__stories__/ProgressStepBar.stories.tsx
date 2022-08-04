@@ -1,13 +1,17 @@
-import React from 'react';
 import { select } from '@storybook/addon-knobs';
+import React from 'react';
 
 import { IconCheck } from '../../../icons/IconCheck/IconCheck';
 import { IconClose } from '../../../icons/IconClose/IconClose';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
-import { propDirection, propDirectionDefault, propSize, propSizeDefault } from '../helpers';
+import {
+  propDirection,
+  propDirectionDefault,
+  propSize,
+  propSizeDefault,
+} from '../helpers';
 import { ProgressStepBar } from '../ProgressStepBarCanary';
-
 import mdx from './ProgressStepBar.docs.mdx';
 
 const cnProgressStepBarStories = cn('ProgressStepBarStories');
@@ -50,7 +54,7 @@ const defaultKnobs = () => ({
   activeStepIndex: select('activeStepIndex', ['', 0, 1, 2, 3], 3),
 });
 
-export function Playground() {
+export const Playground = () => {
   const { size, direction, activeStepIndex } = defaultKnobs();
 
   return (
@@ -59,10 +63,12 @@ export function Playground() {
       direction={direction}
       size={size}
       steps={stepsExample}
-      activeStepIndex={typeof activeStepIndex === 'number' ? activeStepIndex : undefined}
+      activeStepIndex={
+        typeof activeStepIndex === 'number' ? activeStepIndex : undefined
+      }
     />
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Отображение данных/ProgressStepBar(Canary)',

@@ -27,6 +27,10 @@ export const DateTimeYear: React.FC<DateTimeYearProps> = (props) => {
   const { className, years, ...otherProps } = props;
 
   return (
-    <DateTimeGrid {...otherProps} className={cnDateTimeYear(null, [className])} items={years} />
+    <DateTimeGrid
+      {...otherProps}
+      className={cnDateTimeYear(null, [className])}
+      items={years}
+    />
   );
 };

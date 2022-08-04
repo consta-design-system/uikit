@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function GridImage(props: React.SVGProps<SVGSVGElement>) {
+const GridImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <path
@@ -15,6 +15,6 @@ function GridImage(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default GridImage;

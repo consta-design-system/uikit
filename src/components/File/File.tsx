@@ -2,7 +2,10 @@ import './File.css';
 
 import React from 'react';
 
-import { FileIconProps, fileIconPropSizeDefault } from '../../fileIcons/FileIcon/FileIcon';
+import {
+  FileIconProps,
+  fileIconPropSizeDefault,
+} from '../../fileIcons/FileIcon/FileIcon';
 import { FileIconAvi } from '../../fileIcons/FileIconAvi/FileIconAvi';
 import { FileIconBmp } from '../../fileIcons/FileIconBmp/FileIconBmp';
 import { FileIconCsv } from '../../fileIcons/FileIconCsv/FileIconCsv';
@@ -90,7 +93,11 @@ export const File: React.FC<FileProps> = (props) => {
 
   if (loading) {
     return (
-      <FileIconLoading className={cnFile(null, [className])} size={size} {...otherProps}>
+      <FileIconLoading
+        className={cnFile(null, [className])}
+        size={size}
+        {...otherProps}
+      >
         {loadingWithProgressSpin && (
           <div className={cnFile('Loader', { size })}>
             <ProgressSpin
@@ -107,5 +114,7 @@ export const File: React.FC<FileProps> = (props) => {
 
   const Icon = getIconByExtension(extension);
 
-  return <Icon className={cnFile(null, [className])} size={size} {...otherProps} />;
+  return (
+    <Icon className={cnFile(null, [className])} size={size} {...otherProps} />
+  );
 };

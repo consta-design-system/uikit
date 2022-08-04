@@ -20,8 +20,11 @@ import { SelectContainer } from '../SelectComponents/SelectContainer/SelectConta
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
 import { SelectItem } from '../SelectComponents/SelectItem/SelectItem';
 import { SelectValueTag } from '../SelectComponents/SelectValueTag/SelectValueTag';
-import { defaultPropForm, defaultPropSize, defaultPropView } from '../SelectComponents/types';
-
+import {
+  defaultPropForm,
+  defaultPropSize,
+  defaultPropView,
+} from '../SelectComponents/types';
 import {
   ComboboxComponent,
   ComboboxProps,
@@ -36,10 +39,14 @@ import {
 
 export const COMPONENT_NAME = 'Combobox' as const;
 
-function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE extends boolean = false>(
+const ComboboxRender = <
+  ITEM = DefaultItem,
+  GROUP = DefaultGroup,
+  MULTIPLE extends boolean = false,
+>(
   props: ComboboxProps<ITEM, GROUP, MULTIPLE>,
   ref: React.Ref<HTMLDivElement>,
-) {
+) => {
   const defaultDropdownRef = useRef<HTMLDivElement | null>(null);
   const controlInnerRef = useRef<HTMLDivElement>(null);
   const helperInputFakeElement = useRef<HTMLDivElement>(null);
@@ -141,7 +148,10 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
     );
   };
 
-  const renderValueDefaultMultiple: PropRenderValue<ITEM> = ({ item, handleRemove }) => {
+  const renderValueDefaultMultiple: PropRenderValue<ITEM> = ({
+    item,
+    handleRemove,
+  }) => {
     return (
       <SelectValueTag
         label={getItemLabel(item)}
@@ -163,7 +173,8 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
   };
 
   const renderValue =
-    renderValueProp || (multiple ? renderValueDefaultMultiple : renderValueDefaultNotMultiple);
+    renderValueProp ||
+    (multiple ? renderValueDefaultMultiple : renderValueDefaultNotMultiple);
 
   const inputRefForRender = useForkRef([inputRef, inputRefProp]);
 
@@ -174,7 +185,9 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
   };
 
   const renderControlValue = () => {
-    const width = multiple ? getInputWidth(controlInnerRef, helperInputFakeElement) : undefined;
+    const width = multiple
+      ? getInputWidth(controlInnerRef, helperInputFakeElement)
+      : undefined;
     return (
       <>
         {isMultipleParams(props) &&
@@ -182,12 +195,16 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
           props.value.map((item) =>
             renderValue({ item, handleRemove: getHandleRemoveValue(item) }),
           )}
-        {isNotMultipleParams(props) && props.value && renderValue({ item: props.value })}
-        {(!value || (Array.isArray(value) && value.length === 0)) && !searchValue && placeholder && (
-          <span className={cnSelect('Placeholder')} title="placeholder">
-            {placeholder}
-          </span>
-        )}
+        {isNotMultipleParams(props) &&
+          props.value &&
+          renderValue({ item: props.value })}
+        {(!value || (Array.isArray(value) && value.length === 0)) &&
+          !searchValue &&
+          placeholder && (
+            <span className={cnSelect('Placeholder')} title="placeholder">
+              {placeholder}
+            </span>
+          )}
         <input
           {...getKeyProps()}
           type="text"
@@ -197,7 +214,11 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
           aria-label={ariaLabel}
           onChange={handleChangeValue}
           ref={inputRefForRender}
-          className={cnSelect('Input', { size, hide: !multiple && !!value, multiple })}
+          className={cnSelect('Input', {
+            size,
+            hide: !multiple && !!value,
+            multiple,
+          })}
           value={searchValue}
           style={{ width }}
         />
@@ -234,7 +255,9 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
         >
           <div className={cnSelect('ControlValueContainer')}>
             {multiple ? (
-              <div className={cnSelect('ControlValue')}>{renderControlValue()}</div>
+              <div className={cnSelect('ControlValue')}>
+                {renderControlValue()}
+              </div>
             ) : (
               renderControlValue()
             )}
@@ -257,7 +280,10 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
             tabIndex={-1}
             onClick={handleToggleDropdown}
           >
-            <IconSelect size="xs" className={cnSelect('DropdownIndicatorIcon')} />
+            <IconSelect
+              size="xs"
+              className={cnSelect('DropdownIndicatorIcon')}
+            />
           </button>
         </span>
       </div>
@@ -278,14 +304,21 @@ function ComboboxRender<ITEM = DefaultItem, GROUP = DefaultGroup, MULTIPLE exten
         labelForEmptyItems={labelForEmptyItems}
         notFound={notFound}
         hasItems={hasItems}
-        style={typeof style?.zIndex === 'number' ? { zIndex: style.zIndex + 1 } : undefined}
+        style={
+          typeof style?.zIndex === 'number'
+            ? { zIndex: style.zIndex + 1 }
+            : undefined
+        }
       />
-      <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
+      <div
+        className={cnSelect('HelperInputFakeElement')}
+        ref={helperInputFakeElement}
+      >
         {searchValue}
       </div>
     </SelectContainer>
   );
-}
+};
 
 export const Combobox = forwardRef(ComboboxRender) as ComboboxComponent;
 

@@ -1,8 +1,7 @@
-import * as React from 'react';
 import { act, fireEvent, render } from '@testing-library/react';
+import * as React from 'react';
 
 import { DatePicker, DatePickerProps } from '../DatePickerCanary';
-
 import {
   animateDelay,
   getDateTimeDaySelected,
@@ -14,7 +13,9 @@ import {
 } from './helpers';
 
 const renderComponent = (props: DatePickerProps<'date-time'> = {}) => {
-  return render(<DatePicker {...props} type="date-time" data-testid={testId} />);
+  return render(
+    <DatePicker {...props} type="date-time" data-testid={testId} />,
+  );
 };
 
 describe('Компонент DatePicker_type_dateTime', () => {

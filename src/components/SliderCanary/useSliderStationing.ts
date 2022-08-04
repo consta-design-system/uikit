@@ -9,7 +9,10 @@ type UseSliderStationing = (
   view: PropView,
   range: boolean | undefined,
   step: number | number[] | undefined,
-  buttonRefs: [React.RefObject<HTMLButtonElement>, React.RefObject<HTMLButtonElement>],
+  buttonRefs: [
+    React.RefObject<HTMLButtonElement>,
+    React.RefObject<HTMLButtonElement>,
+  ],
   sliderLineRef: React.RefObject<HTMLDivElement>,
 ) => {
   lineSizes: Line[];
@@ -71,7 +74,9 @@ export const useSliderStationing: UseSliderStationing = (
           endPointArray.push(max);
           for (let i = 0; i < endPointArray.length - 1; i++) {
             sizesArray.push({
-              width: ((endPointArray[i + 1] - endPointArray[i]) / absoluteSize) * 100,
+              width:
+                ((endPointArray[i + 1] - endPointArray[i]) / absoluteSize) *
+                100,
               active: endPointArray[i] !== min && endPointArray[i + 1] !== max,
             });
           }
@@ -88,7 +93,8 @@ export const useSliderStationing: UseSliderStationing = (
             active:
               (typeof value === 'number' || Array.isArray(value)) &&
               (range && Array.isArray(value)
-                ? stepSize.max > value[0] && stepSize.min < value[value.length - 1]
+                ? stepSize.max > value[0] &&
+                  stepSize.min < value[value.length - 1]
                 : stepSize.max <= value),
           });
         });
@@ -120,14 +126,20 @@ export const useSliderStationing: UseSliderStationing = (
         sliderLineRef.current.offsetWidth
       ) {
         defaultPaddingValue =
-          (absoluteSize * buttonRef.current?.offsetWidth) /
-            (2 * sliderLineRef.current?.offsetWidth) || 0;
+          (absoluteSize * buttonRef.current.offsetWidth) /
+            (2 * sliderLineRef.current.offsetWidth) || 0;
       }
       if (typeof value === 'number' || Array.isArray(value)) {
         positions.push(
           typeof value === 'number'
-            ? (1 - (max - getValidValue(value) + defaultPaddingValue) / absoluteSize) * 100
-            : (1 - (max - getValidValue(value[index]) + defaultPaddingValue) / absoluteSize) * 100,
+            ? (1 -
+                (max - getValidValue(value) + defaultPaddingValue) /
+                  absoluteSize) *
+                100
+            : (1 -
+                (max - getValidValue(value[index]) + defaultPaddingValue) /
+                  absoluteSize) *
+                100,
         );
       }
     });

@@ -5,7 +5,6 @@ import React from 'react';
 import { Text } from '../../../components/Text/Text';
 import { cn } from '../../cn';
 import * as wp from '../../whitepaper/whitepaper';
-
 import { ComponentsGridItem } from './ComponentsGridItem/ComponentsGridItem';
 
 const cnComponentsGrid = cn('ComponentsGrid');
@@ -30,7 +29,12 @@ export const ComponentsGrid: React.FC<ComponentsGridProps> = ({ data }) => {
       {data.map(({ title, items }) => (
         <>
           {title && (
-            <Text size="3xl" lineHeight="xs" weight="bold" className={cnComponentsGrid('Title')}>
+            <Text
+              size="3xl"
+              lineHeight="xs"
+              weight="bold"
+              className={cnComponentsGrid('Title')}
+            >
               {title}
             </Text>
           )}

@@ -25,7 +25,10 @@ export function createFileIcon({ m, s, name }: CreateFileIconArguments) {
     const Svg: SizeComponent = getSvgBySize(props.size);
 
     return (
-      <FileIcon {...props} className={cnIconFile(null, [name, props.className])}>
+      <FileIcon
+        {...props}
+        className={cnIconFile(null, [name, props.className])}
+      >
         <Svg className={cnIconFile('Svg')} />
         {props.children}
       </FileIcon>

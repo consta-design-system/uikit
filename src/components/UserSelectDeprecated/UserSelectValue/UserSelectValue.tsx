@@ -20,7 +20,14 @@ type UserValueProps = {
 const cnUserValue = cn('UserSelectValueDeprecated');
 
 export const UserSelectValue: React.FC<UserValueProps> = (props) => {
-  const { size = tagBasePropSizeDefault, label, subLabel, disabled, onCancel, url } = props;
+  const {
+    size = tagBasePropSizeDefault,
+    label,
+    subLabel,
+    disabled,
+    onCancel,
+    url,
+  } = props;
 
   const withCancel = typeof onCancel === 'function';
 

@@ -6,11 +6,16 @@ import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/D
 import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { cn } from '../../../../../utils/bem';
 import { Text } from '../../../../Text/Text';
-import { presetGpnDark, presetGpnDefault, presetGpnDisplay, Theme } from '../../../Theme';
+import {
+  presetGpnDark,
+  presetGpnDefault,
+  presetGpnDisplay,
+  Theme,
+} from '../../../Theme';
 
 const cnExampleColors = cn('ThemeExampleColors');
 
-export function ThemeExampleColors() {
+export const ThemeExampleColors = () => {
   return (
     <div
       className={cnDocsDecorator('Section', [
@@ -71,4 +76,4 @@ export function ThemeExampleColors() {
       </Theme>
     </div>
   );
-}
+};

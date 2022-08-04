@@ -1,9 +1,8 @@
 import './ComboboxStories.css';
 
-import React, { useState } from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
+import React, { useState } from 'react';
 
-import { groups, Item, items, myData, myGroup, MyItem } from '../__mocks__/data.mock';
 import { cn } from '../../../utils/bem';
 import { createMetadata, createStory } from '../../../utils/storybook';
 import {
@@ -14,8 +13,15 @@ import {
   propStatus,
   propView,
 } from '../../SelectComponents/types';
+import {
+  groups,
+  Item,
+  items,
+  myData,
+  myGroup,
+  MyItem,
+} from '../__mocks__/data.mock';
 import { Combobox } from '../Combobox';
-
 import mdx from './Combobox.docs.mdx';
 
 const cnComboboxStories = cn('ComboboxStories');
@@ -35,7 +41,7 @@ const getKnobs = () => ({
   isLoading: boolean('isLoading', false),
 });
 
-export function Playground(): JSX.Element {
+export const Playground = (): JSX.Element => {
   const {
     size,
     disabled,
@@ -97,7 +103,7 @@ export function Playground(): JSX.Element {
       caption={caption}
     />
   );
-}
+};
 
 export const WithRender = createStory(
   () => {
@@ -201,7 +207,9 @@ export const WithCreate = createStory(
         isLoading={isLoading}
         onChange={({ value }) => setValue(value)}
         groups={withGroups ? groups : []}
-        onCreate={({ label }) => setList([{ label, id: `${label}_${list.length + 1}` }, ...list])}
+        onCreate={({ label }) =>
+          setList([{ label, id: `${label}_${list.length + 1}` }, ...list])
+        }
         label={label}
         labelPosition={labelPosition}
         caption={caption}

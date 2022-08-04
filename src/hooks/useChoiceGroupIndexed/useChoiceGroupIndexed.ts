@@ -1,18 +1,26 @@
 import React from 'react';
 
 type ValueMultiple = number[] | null;
-type ValueNotMultiple<IS_NULLABLE_VALUE> = IS_NULLABLE_VALUE extends true ? number | null : number;
+type ValueNotMultiple<IS_NULLABLE_VALUE> = IS_NULLABLE_VALUE extends true
+  ? number | null
+  : number;
 
 type UseChoiceGroupIndexedParams<
   MULTIPLE extends boolean = false,
   IS_NULLABLE_VALUE extends boolean = false,
-  EVENT = React.MouseEvent<HTMLDivElement, MouseEvent>
+  EVENT = React.MouseEvent<HTMLDivElement, MouseEvent>,
 > = {
-  value: (MULTIPLE extends true ? ValueMultiple : ValueNotMultiple<IS_NULLABLE_VALUE>) | undefined;
+  value:
+    | (MULTIPLE extends true
+        ? ValueMultiple
+        : ValueNotMultiple<IS_NULLABLE_VALUE>)
+    | undefined;
   multiple: MULTIPLE;
   callBack: (props: {
     e: EVENT;
-    value: MULTIPLE extends true ? ValueMultiple : ValueNotMultiple<IS_NULLABLE_VALUE>;
+    value: MULTIPLE extends true
+      ? ValueMultiple
+      : ValueNotMultiple<IS_NULLABLE_VALUE>;
   }) => void;
   isNullableValue?: IS_NULLABLE_VALUE;
 };
@@ -42,7 +50,7 @@ function formatValue(value: number[] | number | null | undefined) {
 export function useChoiceGroupIndexed<
   MULTIPLE extends boolean,
   IS_NULLABLE_VALUE extends boolean,
-  EVENT
+  EVENT,
 >(props: UseChoiceGroupIndexedParams<MULTIPLE, IS_NULLABLE_VALUE, EVENT>) {
   const value = formatValue(props.value);
 

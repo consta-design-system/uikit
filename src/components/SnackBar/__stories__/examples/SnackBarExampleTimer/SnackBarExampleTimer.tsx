@@ -10,7 +10,10 @@ import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/D
 import { cn } from '../../../../../utils/bem';
 import { Button } from '../../../../Button/Button';
 import { SnackBar } from '../../../SnackBar';
-import { SnackBarItemShowProgressProp, SnackBarItemStatus } from '../../../types';
+import {
+  SnackBarItemShowProgressProp,
+  SnackBarItemStatus,
+} from '../../../types';
 
 const cnSnackBarExampleTimer = cn('SnackBarExampleTimer');
 
@@ -29,7 +32,10 @@ const mapIconByStatus: Record<SnackBarItemStatus, IconComponent | undefined> = {
   warning: undefined,
 };
 
-function reducer(state: Item[], action: { type: 'add' | 'remove'; item: Item }): Item[] {
+function reducer(
+  state: Item[],
+  action: { type: 'add' | 'remove'; item: Item },
+): Item[] {
   switch (action.type) {
     case 'add':
       return [...state, action.item];
@@ -43,22 +49,24 @@ const getItemShowProgress = (item: Item) => item.progressMode;
 
 export const SnackBarExampleTimer: React.FC = () => {
   const [items, dispatchItems] = useReducer<
-    React.Reducer<Item[], { type: 'add' | 'remove'; item: Item; key?: number | string }>
+    React.Reducer<
+      Item[],
+      { type: 'add' | 'remove'; item: Item; key?: number | string }
+    >
   >(reducer, []);
 
-  const generateHandleAdd = (
-    status: SnackBarItemStatus,
-    progressMode?: SnackBarItemShowProgressProp,
-  ) => () => {
-    const key = items.length + 1;
-    const item: Item = {
-      key,
-      message: `Сейчас эта штука закроется ${key}`,
-      status,
-      progressMode,
+  const generateHandleAdd =
+    (status: SnackBarItemStatus, progressMode?: SnackBarItemShowProgressProp) =>
+    () => {
+      const key = items.length + 1;
+      const item: Item = {
+        key,
+        message: `Сейчас эта штука закроется ${key}`,
+        status,
+        progressMode,
+      };
+      dispatchItems({ type: 'add', item });
     };
-    dispatchItems({ type: 'add', item });
-  };
 
   const handleAlertAdd = generateHandleAdd('alert', 'timer');
   const handleNormalAdd = generateHandleAdd('normal', 'timer');

@@ -35,7 +35,10 @@ export const CalendarMonth: React.FC<CalendarMonthProps> = (props) => {
       ))}
       {daysOfMonth.map(({ range, ...dayProps }, index) => (
         <CalendarCell
-          key={cnCalendarMonth('DayOfMonth', { index, number: dayProps.number })}
+          key={cnCalendarMonth('DayOfMonth', {
+            index,
+            number: dayProps.number,
+          })}
           range={range}
         >
           <CalendarDay {...dayProps} />

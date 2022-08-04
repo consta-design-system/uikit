@@ -1,9 +1,9 @@
-import React from 'react';
 import { action } from '@storybook/addon-actions';
+import React from 'react';
 
-import { items } from '../../../__mocks__/mock.data';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
+import { items } from '../../../__mocks__/mock.data';
 import { Steps } from '../../../Steps';
 
 const emptyFunction = action('emptyFunction');

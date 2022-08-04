@@ -11,7 +11,8 @@ import { Button } from '../Button/Button';
 
 export const breadcrumbPropSize = ['m', 'xs', 's', 'l'] as const;
 export type BreadcrumbPropSize = typeof breadcrumbPropSize[number];
-export const breadcrumbPropSizeDefault: BreadcrumbPropSize = breadcrumbPropSize[0];
+export const breadcrumbPropSizeDefault: BreadcrumbPropSize =
+  breadcrumbPropSize[0];
 
 export const cnBreadcrumbs = cn('Breadcrumbs');
 
@@ -22,10 +23,14 @@ const sizeMap: Record<BreadcrumbPropSize, IconPropSize> = {
   l: 'm',
 };
 
-export type BreadcrumbsPropGetLabel<ITEM> = (item: ITEM) => string | React.ReactNode;
+export type BreadcrumbsPropGetLabel<ITEM> = (
+  item: ITEM,
+) => string | React.ReactNode;
 export type BreadcrumbsPropGetIsActive<ITEM> = (item: ITEM) => boolean;
 export type BreadcrumbsPropGetLink<ITEM> = (item: ITEM) => string;
-export type BreadcrumbsPropGetIcon<ITEM> = (item: ITEM) => IconComponent | undefined;
+export type BreadcrumbsPropGetIcon<ITEM> = (
+  item: ITEM,
+) => IconComponent | undefined;
 
 export type BreadcrumbsProps<ITEM> = {
   pages: ITEM[];
@@ -41,7 +46,10 @@ export type BreadcrumbsProps<ITEM> = {
 };
 
 type Breadcrumbs = <ITEM>(
-  props: PropsWithHTMLAttributesAndRef<BreadcrumbsProps<ITEM>, HTMLUListElement>,
+  props: PropsWithHTMLAttributesAndRef<
+    BreadcrumbsProps<ITEM>,
+    HTMLUListElement
+  >,
 ) => React.ReactElement | null;
 
 export const Breadcrumbs: Breadcrumbs = React.forwardRef((props, ref) => {
@@ -106,14 +114,20 @@ export const Breadcrumbs: Breadcrumbs = React.forwardRef((props, ref) => {
               ) : (
                 <Icon className={cnBreadcrumbs('Icon')} size={iconSize} />
               ))}
-            {(!isFirst || !onlyIconRoot) && <span className={cnBreadcrumbs('Label')}>{label}</span>}
+            {(!isFirst || !onlyIconRoot) && (
+              <span className={cnBreadcrumbs('Label')}>{label}</span>
+            )}
           </a>
         </li>
       );
     });
 
   return (
-    <ul className={cnBreadcrumbs({ size }, [className])} ref={ref} {...restProps}>
+    <ul
+      className={cnBreadcrumbs({ size }, [className])}
+      ref={ref}
+      {...restProps}
+    >
       {renderPages(head, true)}
       {maxCount && rest.length > 1 ? (
         <li className={cnBreadcrumbs('Item')}>

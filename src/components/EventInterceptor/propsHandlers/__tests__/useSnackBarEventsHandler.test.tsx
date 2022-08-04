@@ -1,6 +1,6 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 import { act, renderHook } from '@testing-library/react-hooks';
+import React from 'react';
 
 import { SnackBar } from '../../../SnackBar/SnackBar';
 import { SnackBarItemDefault, SnackBarProps } from '../../../SnackBar/types';
@@ -19,12 +19,22 @@ const defaultProps = {
 };
 
 const eventHandler = jest.fn();
-const renderComponent = (props: SnackBarProps<SnackBarItemDefault> = defaultProps) => {
-  return render(<SnackBar data-testid={testId} {...props} getItemKey={(item) => item.key} />);
+const renderComponent = (
+  props: SnackBarProps<SnackBarItemDefault> = defaultProps,
+) => {
+  return render(
+    <SnackBar
+      data-testid={testId}
+      {...props}
+      getItemKey={(item) => item.key}
+    />,
+  );
 };
 
 describe('useSnackBarEventsHandler', () => {
-  const { result } = renderHook(() => useSnackBarEventsHandler(defaultProps, eventHandler));
+  const { result } = renderHook(() =>
+    useSnackBarEventsHandler(defaultProps, eventHandler),
+  );
 
   it('возвращает пропсы в том же виде, что и получил', () => {
     let props = {};

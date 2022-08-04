@@ -25,7 +25,7 @@ const items: Item[] = [
   },
 ];
 
-export function ComboboxExampleOnInputChange() {
+export const ComboboxExampleOnInputChange = () => {
   const [value, setValue] = useState<Item | null>();
   const [search, setSearch] = useState<string | undefined | null>();
   return (
@@ -40,4 +40,4 @@ export function ComboboxExampleOnInputChange() {
       />
     </StoryBookExample>
   );
-}
+};

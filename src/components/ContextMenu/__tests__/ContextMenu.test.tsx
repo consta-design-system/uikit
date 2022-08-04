@@ -1,8 +1,8 @@
-import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import React from 'react';
 
-import { exampleItems as items, groups, Item } from '../__mocks__/mock.data';
 import { cnText } from '../../Text/Text';
+import { exampleItems as items, groups, Item } from '../__mocks__/mock.data';
 import { ContextMenu } from '../ContextMenu';
 import { cnContextMenuGroupHeader } from '../ContextMenuGroupHeader/ContextMenuGroupHeader';
 import { cnContextMenuItem } from '../ContextMenuItem/ContextMenuItem';
@@ -14,17 +14,15 @@ const additionalClass = 'additionalClass';
 
 const renderComponent = (props: ContextMenuProps<Item> | {}) => {
   return render(
-    <>
-      <ContextMenu
-        {...props}
-        anchorRef={undefined}
-        position={{ x: 0, y: 0 }}
-        items={items}
-        getLabel={(item) => item.name}
-        className={additionalClass}
-        data-testid={testId}
-      />
-    </>,
+    <ContextMenu
+      {...props}
+      anchorRef={undefined}
+      position={{ x: 0, y: 0 }}
+      items={items}
+      getLabel={(item) => item.name}
+      className={additionalClass}
+      data-testid={testId}
+    />,
   );
 };
 
@@ -54,7 +52,9 @@ function getItem(index = 0) {
 }
 
 function getSide(index = 0, sideIndex = 0) {
-  return getItem(index).querySelectorAll(`.${cnContextMenuItem('Side')}`)[sideIndex];
+  return getItem(index).querySelectorAll(`.${cnContextMenuItem('Side')}`)[
+    sideIndex
+  ];
 }
 
 function getGroups() {
@@ -96,7 +96,8 @@ describe('Компонент ContextMenu', () => {
     });
     describe('проверка getGroupLabel', () => {
       it('label совпадает', () => {
-        const getGroupLabel = (id: number) => groups.find((group) => group.id === id)?.name;
+        const getGroupLabel = (id: number) =>
+          groups.find((group) => group.id === id)?.name;
         renderComponent({
           getGroupId: (item) => item.group,
           getGroupLabel,
@@ -116,7 +117,9 @@ describe('Компонент ContextMenu', () => {
 
         expect(handleChange).toHaveBeenCalled();
         expect(handleChange).toHaveBeenCalledTimes(1);
-        expect(handleChange).toHaveBeenCalledWith(expect.objectContaining(items[0]));
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining(items[0]),
+        );
       });
     });
     describe('проверка getAccent', () => {
@@ -150,7 +153,9 @@ describe('Компонент ContextMenu', () => {
           getLeftSideBar: renderSide,
         });
 
-        expect(getSide()).toHaveClass(cnContextMenuItem('Side', { position: 'left' }));
+        expect(getSide()).toHaveClass(
+          cnContextMenuItem('Side', { position: 'left' }),
+        );
       });
     });
     describe('проверка getLeftSideBar', () => {
@@ -159,7 +164,9 @@ describe('Компонент ContextMenu', () => {
           getRightSideBar: renderSide,
         });
 
-        expect(getSide(0, 1)).toHaveClass(cnContextMenuItem('Side', { position: 'right' }));
+        expect(getSide(0, 1)).toHaveClass(
+          cnContextMenuItem('Side', { position: 'right' }),
+        );
       });
     });
     describe('проверка getSubItems', () => {

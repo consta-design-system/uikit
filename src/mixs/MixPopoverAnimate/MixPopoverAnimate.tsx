@@ -22,7 +22,10 @@ type Mods = {
   direction?: Direction;
 };
 
-type CnMixPopoverAnimate = (mods?: Mods | null, mix?: Array<string | undefined>) => string;
+type CnMixPopoverAnimate = (
+  mods?: Mods | null,
+  mix?: Array<string | undefined>,
+) => string;
 
 const cnFn = cn('MixPopoverAnimate');
 

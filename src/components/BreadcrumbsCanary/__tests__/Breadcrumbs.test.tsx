@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { render, screen } from '@testing-library/react';
+import * as React from 'react';
 
 import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconCamera } from '../../../icons/IconCamera/IconCamera';
@@ -53,7 +53,9 @@ const initialProps = {
 };
 
 const renderComponent = (props = {}) => {
-  return render(<Breadcrumbs {...initialProps} {...props} data-testid={testId} />);
+  return render(
+    <Breadcrumbs {...initialProps} {...props} data-testid={testId} />,
+  );
 };
 
 function getRender() {

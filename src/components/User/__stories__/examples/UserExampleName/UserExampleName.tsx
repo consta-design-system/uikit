@@ -14,7 +14,11 @@ export const UserExampleName = () => (
       />
     </div>
     <div>
-      <User avatarUrl="https://i.ibb.co/K2R8Lqb/Rectangle-1496.png" name="Люций" info="Эксперт" />
+      <User
+        avatarUrl="https://i.ibb.co/K2R8Lqb/Rectangle-1496.png"
+        name="Люций"
+        info="Эксперт"
+      />
     </div>
   </StoryBookExample>
 );

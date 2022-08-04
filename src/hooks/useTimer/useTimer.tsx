@@ -29,8 +29,15 @@ const initialConfig: Config = {
   timerType: 'INCREMENTAL',
 };
 
-function getTimeIsOver(timerType: Timer, time: number, endTime: number | null): boolean {
-  return endTime !== null && (timerType === 'INCREMENTAL' ? time >= endTime : time <= endTime);
+function getTimeIsOver(
+  timerType: Timer,
+  time: number,
+  endTime: number | null,
+): boolean {
+  return (
+    endTime !== null &&
+    (timerType === 'INCREMENTAL' ? time >= endTime : time <= endTime)
+  );
 }
 
 export function useTimer(config?: Partial<Config>): Values {
@@ -85,7 +92,9 @@ export function useTimer(config?: Partial<Config>): Values {
     intervalRef.current = window.setInterval(() => {
       setTime((previousTime) => {
         const newTime =
-          timerType === 'INCREMENTAL' ? previousTime + interval : previousTime - interval;
+          timerType === 'INCREMENTAL'
+            ? previousTime + interval
+            : previousTime - interval;
 
         return newTime;
       });

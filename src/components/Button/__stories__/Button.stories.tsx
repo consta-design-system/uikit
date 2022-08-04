@@ -1,6 +1,6 @@
-import * as React from 'react';
 import { action } from '@storybook/addon-actions';
 import { boolean, select, text } from '@storybook/addon-knobs';
+import * as React from 'react';
 
 import { IconSelect } from '../../../icons/IconSelect/IconSelect';
 import { IconUser } from '../../../icons/IconUser/IconUser';
@@ -21,7 +21,6 @@ import {
   buttonPropWidth,
   buttonPropWidthDefault,
 } from '../Button';
-
 import mdx from './Button.docs.mdx';
 
 const defaultKnobs = () => ({
@@ -39,7 +38,7 @@ const defaultKnobs = () => ({
 
 const cnButtonStories = cn('ButtonStories');
 
-export function Playground() {
+export const Playground = () => {
   const {
     width,
     size,
@@ -54,7 +53,10 @@ export function Playground() {
   } = defaultKnobs();
 
   return (
-    <EventInterceptorProvider eventHandler={action('EventInterceptor')} map={eventInterceptorMap}>
+    <EventInterceptorProvider
+      eventHandler={action('EventInterceptor')}
+      map={eventInterceptorMap}
+    >
       <div className={cnButtonStories()}>
         <Button
           width={width}
@@ -72,7 +74,7 @@ export function Playground() {
       </div>
     </EventInterceptorProvider>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Базовые/Button',

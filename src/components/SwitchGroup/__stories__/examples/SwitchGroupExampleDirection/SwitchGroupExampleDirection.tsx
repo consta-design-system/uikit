@@ -15,7 +15,7 @@ const items: Item[] = [
   { name: 'Мигающие заголовки' },
 ];
 
-export function SwitchGroupExampleRow() {
+export const SwitchGroupExampleRow = () => {
   const [value, setValue] = React.useState<Item[] | null>(null);
 
   return (
@@ -31,9 +31,9 @@ export function SwitchGroupExampleRow() {
       />
     </StoryBookExample>
   );
-}
+};
 
-export function SwitchGroupExampleColumn() {
+export const SwitchGroupExampleColumn = () => {
   const [value, setValue] = React.useState<Item[] | null>(null);
 
   return (
@@ -49,4 +49,4 @@ export function SwitchGroupExampleColumn() {
       />
     </StoryBookExample>
   );
-}
+};

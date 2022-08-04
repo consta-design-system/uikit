@@ -99,16 +99,28 @@ export const User = forwardRefWithAs<Props>((props, ref) => {
   return (
     <Tag
       {...otherProps}
-      className={cnUser({ size, view, width, withArrow, minified: onlyAvatar }, [className])}
+      className={cnUser(
+        { size, view, width, withArrow, minified: onlyAvatar },
+        [className],
+      )}
       ref={ref}
     >
       <div className={cnUser('AvatarWrapper', { status })}>
-        <Avatar size={getByMap(avatarSizeMap, size)} url={avatarUrl} name={name} />
+        <Avatar
+          size={getByMap(avatarSizeMap, size)}
+          url={avatarUrl}
+          name={name}
+        />
       </div>
       {!onlyAvatar && (name || info) && (
         <div className={cnUser('Block')}>
           {name && (
-            <Text className={cnUser('Name')} size={size} view="primary" lineHeight="2xs">
+            <Text
+              className={cnUser('Name')}
+              size={size}
+              view="primary"
+              lineHeight="2xs"
+            >
               {name}
             </Text>
           )}
@@ -132,7 +144,11 @@ export const User = forwardRefWithAs<Props>((props, ref) => {
         />
       )}
       {IconRight && !onIconRightClick && (
-        <IconRight className={cnUser('Icon')} size={getByMap(iconSizeMap, size)} view="secondary" />
+        <IconRight
+          className={cnUser('Icon')}
+          size={getByMap(iconSizeMap, size)}
+          view="secondary"
+        />
       )}
       {IconRight && onIconRightClick && (
         <Button

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function StepsImage(props: React.SVGProps<SVGSVGElement>) {
+const StepsImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <g clipPath="url(#SvgStepsImage__clip0_1889_15823)">
@@ -28,7 +28,11 @@ function StepsImage(props: React.SVGProps<SVGSVGElement>) {
           d="M167 67h50v2h-50zM176.616 56.225c0 .442-.085.845-.253 1.21-.164.36-.399.67-.704.93a3.246 3.246 0 01-1.087.594 4.412 4.412 0 01-1.402.212c-.934 0-1.677-.178-2.228-.533v-1.203a3.57 3.57 0 002.269.779c.342 0 .65-.043.923-.13.278-.087.515-.212.711-.376.201-.164.353-.362.458-.595.11-.232.164-.494.164-.786 0-1.28-.911-1.92-2.734-1.92h-.814v-.95h.773c1.613 0 2.42-.602 2.42-1.806 0-1.112-.615-1.668-1.846-1.668-.693 0-1.342.233-1.948.698v-1.087c.624-.374 1.367-.56 2.228-.56.41 0 .782.056 1.115.17.332.114.617.273.854.479.237.205.419.45.547.738.132.287.198.604.198.95 0 1.29-.652 2.12-1.955 2.488v.028c.333.036.64.118.923.246.283.123.526.285.731.485.205.2.365.438.479.711.118.269.178.568.178.896z"
         />
         <path fill="#002033" fillOpacity={0.08} d="M210 52v4h-26v-4z" />
-        <path fill="#002033" fillOpacity={0.08} d="M210 52v4h-26v-4zM43 92h164v34H43z" />
+        <path
+          fill="#002033"
+          fillOpacity={0.08}
+          d="M210 52v4h-26v-4zM43 92h164v34H43z"
+        />
       </g>
       <defs>
         <clipPath id="SvgStepsImage__clip0_1889_15823">
@@ -37,6 +41,6 @@ function StepsImage(props: React.SVGProps<SVGSVGElement>) {
       </defs>
     </svg>
   );
-}
+};
 
 export default StepsImage;

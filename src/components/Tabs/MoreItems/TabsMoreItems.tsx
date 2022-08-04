@@ -1,8 +1,8 @@
 import './TabsMoreItems.css';
 
+import FocusTrap from 'focus-trap-react';
 import React, { useEffect, useRef, useState } from 'react';
 import { Transition } from 'react-transition-group';
-import FocusTrap from 'focus-trap-react';
 
 import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
@@ -47,9 +47,20 @@ export const TabsMoreItems: TabsMoreItems = React.forwardRef(
           className={cnTabsMoreItems('Button')}
           style={{ height }}
         >
-          <Button size="xs" view="ghost" onlyIcon iconLeft={IconMeatball} onClick={toogle} />
+          <Button
+            size="xs"
+            view="ghost"
+            onlyIcon
+            iconLeft={IconMeatball}
+            onClick={toogle}
+          />
         </div>
-        <Transition in={isOpen} unmountOnExit nodeRef={popoverRef} timeout={animateTimeout}>
+        <Transition
+          in={isOpen}
+          unmountOnExit
+          nodeRef={popoverRef}
+          timeout={animateTimeout}
+        >
           {(animate) => (
             <Popover
               anchorRef={buttonRef}
@@ -57,7 +68,9 @@ export const TabsMoreItems: TabsMoreItems = React.forwardRef(
               ref={popoverRef}
               direction="downStartRight"
               spareDirection="downStartLeft"
-              className={cnTabsMoreItems('Popover', [cnMixPopoverAnimate({ animate, direction })])}
+              className={cnTabsMoreItems('Popover', [
+                cnMixPopoverAnimate({ animate, direction }),
+              ])}
               onSetDirection={setDirection}
               possibleDirections={[
                 'downStartRight',
@@ -72,7 +85,9 @@ export const TabsMoreItems: TabsMoreItems = React.forwardRef(
                 focusTrapOptions={{
                   fallbackFocus: buttonRef.current ?? undefined,
                   clickOutsideDeactivates: (e) => {
-                    const isClickInsideButton = buttonRef.current?.contains(e.target as Node);
+                    const isClickInsideButton = buttonRef.current?.contains(
+                      e.target as Node,
+                    );
                     return !isClickInsideButton;
                   },
                   allowOutsideClick: true,
@@ -83,7 +98,9 @@ export const TabsMoreItems: TabsMoreItems = React.forwardRef(
                   {items.map((item) => (
                     <div
                       key={getLabel(item)}
-                      className={cnTabsMoreItems('Item', { active: getChecked(item) })}
+                      className={cnTabsMoreItems('Item', {
+                        active: getChecked(item),
+                      })}
                     >
                       {renderItem(item, off)}
                     </div>

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function IconProcessingSizeS(props: React.SVGProps<SVGSVGElement>) {
+const IconProcessingSizeS = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 16 16" {...props}>
       <g fillRule="evenodd" clipRule="evenodd">
@@ -9,6 +9,6 @@ function IconProcessingSizeS(props: React.SVGProps<SVGSVGElement>) {
       </g>
     </svg>
   );
-}
+};
 
 export default IconProcessingSizeS;

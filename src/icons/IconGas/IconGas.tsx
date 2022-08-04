@@ -1,5 +1,4 @@
 import { createIcon } from '../createIcon/createIcon';
-
 import IconGasSizeM from './IconGas_size_m';
 import IconGasSizeS from './IconGas_size_s';
 

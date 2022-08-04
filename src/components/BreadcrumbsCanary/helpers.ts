@@ -8,10 +8,15 @@ import {
   DefaultItem,
 } from './types';
 
-const defaultGetItemLabel: BreadcrumbsPropGetItemLabel<DefaultItem> = (item) => item.label;
-const defaultGetItemIcon: BreadcrumbsPropGetItemIcon<DefaultItem> = (item) => item.icon;
-const defaultGetItemHref: BreadcrumbsPropGetItemHref<DefaultItem> = (item) => item.href;
-const defaultGetItemOnClick: BreadcrumbsPropGetItemOnClick<DefaultItem> = (item) => item.onClick;
+const defaultGetItemLabel: BreadcrumbsPropGetItemLabel<DefaultItem> = (item) =>
+  item.label;
+const defaultGetItemIcon: BreadcrumbsPropGetItemIcon<DefaultItem> = (item) =>
+  item.icon;
+const defaultGetItemHref: BreadcrumbsPropGetItemHref<DefaultItem> = (item) =>
+  item.href;
+const defaultGetItemOnClick: BreadcrumbsPropGetItemOnClick<DefaultItem> = (
+  item,
+) => item.onClick;
 
 export function withDefaultGetters<ITEM>(props: BreadcrumbsProps<ITEM>) {
   return {

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Select } from '../../../Select';
 
-export function SelectExampleCustomTypes() {
+export const SelectExampleCustomTypes = () => {
   const [value, setValue] = useState<string | null>();
   return (
     <div className={cnDocsDecorator('Section', { indent: 'bottom' })}>
@@ -17,7 +17,7 @@ export function SelectExampleCustomTypes() {
       />
     </div>
   );
-}
+};
 
 // Example 2
 
@@ -39,9 +39,13 @@ export const items: Item[] = [
   { name: 'Десятый', group: 'Вторая группа' },
 ];
 
-export const groups: string[] = ['Первая группа', 'Вторая группа', 'Третья группа'];
+export const groups: string[] = [
+  'Первая группа',
+  'Вторая группа',
+  'Третья группа',
+];
 
-export function SelectExampleCustomTypesWithGroups() {
+export const SelectExampleCustomTypesWithGroups = () => {
   const [value, setValue] = useState<Item | null>();
   return (
     <div className={cnDocsDecorator('Section')}>
@@ -59,4 +63,4 @@ export function SelectExampleCustomTypesWithGroups() {
       />
     </div>
   );
-}
+};

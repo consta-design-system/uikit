@@ -48,7 +48,8 @@ export type TextFieldPropStatus = typeof textFieldPropStatus[number];
 
 export const textFieldPropWidth = ['default', 'full'] as const;
 export type TextFieldPropWidth = typeof textFieldPropWidth[number];
-export const textFieldPropWidthDefault: TextFieldPropWidth = textFieldPropWidth[0];
+export const textFieldPropWidthDefault: TextFieldPropWidth =
+  textFieldPropWidth[0];
 
 export type TextFieldPropsTextareaType<TYPE> = TYPE extends 'textarea'
   ?
@@ -159,7 +160,10 @@ export const getValueByStepArray = (params: {
     return currentValue;
   }
   for (let i = 0; i < steps.length; i++) {
-    if (currentValue === steps[i] || (steps[i] < currentValue && steps[i + 1] > currentValue)) {
+    if (
+      currentValue === steps[i] ||
+      (steps[i] < currentValue && steps[i + 1] > currentValue)
+    ) {
       return steps[i + (isIncrement ? 1 : -1)];
     }
   }
@@ -177,7 +181,8 @@ export const getValueByStepNumber = (params: {
   const minValue = Number(min);
   const maxValue = Number(max);
   const currentValue: number =
-    (typeof value === 'string' ? Number(value) : 0) + Number(step) * (isIncrement ? 1 : -1);
+    (typeof value === 'string' ? Number(value) : 0) +
+    Number(step) * (isIncrement ? 1 : -1);
   if (!Number.isNaN(minValue) && currentValue <= minValue) {
     return minValue;
   }
@@ -191,15 +196,15 @@ export const getValueByStepNumber = (params: {
 на кнопку прибавляется число с погрешностью.
 Здесь мы берем разрядность дробной части шага и ограничиваем
 результирующее число этой разрядностью */
-        Number(step)
-          .toString()
-          .split('.')[1]?.length,
+        Number(step).toString().split('.')[1]?.length,
       ) || 0,
     ),
   );
 };
 
-export const getIncrementFlag = (event: React.KeyboardEvent): boolean | null => {
+export const getIncrementFlag = (
+  event: React.KeyboardEvent,
+): boolean | null => {
   if (event?.key !== 'ArrowUp' && event?.key !== 'ArrowDown') {
     return null;
   }

@@ -17,12 +17,18 @@ export type DateTimeCellProps = PropsWithJsxAttributes<
 
 export const cnDateTimeCell = cn('DateTimeCell');
 
-export const DateTimeCell = React.forwardRef<HTMLDivElement, DateTimeCellProps>((props, ref) => {
-  const { range, children, className, ...otherProps } = props;
+export const DateTimeCell = React.forwardRef<HTMLDivElement, DateTimeCellProps>(
+  (props, ref) => {
+    const { range, children, className, ...otherProps } = props;
 
-  return (
-    <div {...otherProps} ref={ref} className={cnDateTimeCell({ range }, [className])}>
-      {children}
-    </div>
-  );
-});
+    return (
+      <div
+        {...otherProps}
+        ref={ref}
+        className={cnDateTimeCell({ range }, [className])}
+      >
+        {children}
+      </div>
+    );
+  },
+);

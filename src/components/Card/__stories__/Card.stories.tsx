@@ -1,10 +1,15 @@
-import React from 'react';
 import { boolean, select } from '@storybook/addon-knobs';
+import React from 'react';
 
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
-import { Card, cardPropForm, cardPropFormDefault, cardPropSpace, cardPropStatus } from '../Card';
-
+import {
+  Card,
+  cardPropForm,
+  cardPropFormDefault,
+  cardPropSpace,
+  cardPropStatus,
+} from '../Card';
 import mdx from './Card.docs.mdx';
 
 const defaultKnobs = () => ({
@@ -17,8 +22,9 @@ const defaultKnobs = () => ({
 
 const cnCardStories = cn('cnCardStories');
 
-export function Playground() {
-  const { verticalSpace, horizontalSpace, shadow, status, form } = defaultKnobs();
+export const Playground = () => {
+  const { verticalSpace, horizontalSpace, shadow, status, form } =
+    defaultKnobs();
 
   return (
     <div className={cnCardStories()}>
@@ -31,7 +37,7 @@ export function Playground() {
       />
     </div>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Отображение данных/Card',

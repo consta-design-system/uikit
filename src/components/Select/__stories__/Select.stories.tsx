@@ -1,10 +1,9 @@
 import './SelectStories.css';
 
-import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { boolean, select, text } from '@storybook/addon-knobs';
+import React, { useState } from 'react';
 
-import { groups, Item, items, myData, myGroup, MyItem } from '../__mocks__/data.mock';
 import { cn } from '../../../utils/bem';
 import { createMetadata, createStory } from '../../../utils/storybook';
 import {
@@ -20,8 +19,15 @@ import {
   propStatus,
   propView,
 } from '../../SelectComponents/types';
+import {
+  groups,
+  Item,
+  items,
+  myData,
+  myGroup,
+  MyItem,
+} from '../__mocks__/data.mock';
 import { Select } from '../Select';
-
 import mdx from './Select.docs.mdx';
 
 const cnSelectStories = cn('SelectStories');
@@ -41,7 +47,7 @@ const getKnobs = () => ({
   isLoading: boolean('isLoading', false),
 });
 
-export function Playground(): JSX.Element {
+export const Playground = (): JSX.Element => {
   const {
     size,
     disabled,
@@ -59,7 +65,10 @@ export function Playground(): JSX.Element {
   const [value, setValue] = useState<Item | null | undefined>();
 
   return (
-    <EventInterceptorProvider eventHandler={action('EventInterceptor')} map={eventInterceptorMap}>
+    <EventInterceptorProvider
+      eventHandler={action('EventInterceptor')}
+      map={eventInterceptorMap}
+    >
       <div>
         <Select
           size={size}
@@ -81,7 +90,7 @@ export function Playground(): JSX.Element {
       </div>
     </EventInterceptorProvider>
   );
-}
+};
 
 export const WithRender = createStory(
   () => {

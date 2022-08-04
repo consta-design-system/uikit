@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
 import { format, isValid, parse } from 'date-fns';
 import IMask from 'imask';
+import { useEffect, useRef } from 'react';
 
 import { IconComponent, IconPropSize } from '../../../icons/Icon/Icon';
 import { leapYear } from '../../../utils/date';
@@ -20,7 +20,10 @@ import {
   getPartsDate,
 } from '../helpers';
 
-type DatePickerFieldTypeDatePropOnChange = (props: { e: Event; value: Date | null }) => void;
+type DatePickerFieldTypeDatePropOnChange = (props: {
+  e: Event;
+  value: Date | null;
+}) => void;
 
 export type DatePickerFieldTypeDateProps = PropsWithHTMLAttributes<
   {
@@ -68,13 +71,15 @@ export const useImask = (
   stringValue: string | null,
   onError: DatePickerPropOnError | undefined,
 ) => {
-  const imaskRef = useRef<IMask.InputMask<IMask.MaskedDateOptions> | null>(null);
+  const imaskRef = useRef<IMask.InputMask<IMask.MaskedDateOptions> | null>(
+    null,
+  );
 
   // задаем маску и сохраняем обьект маски в ref
   // обнавляем при смене формата
   useEffect(() => {
     if (inputRef.current) {
-      imaskRef.current = (IMask(inputRef.current, {
+      imaskRef.current = IMask(inputRef.current, {
         mask: Date,
         pattern: formatProp,
         blocks: {
@@ -99,11 +104,13 @@ export const useImask = (
         format: (date) => format(date, formatProp),
         parse: (string) => parse(string, formatProp, new Date()),
         validate: (string: string) => {
-          const [dd, MM, yyyy] = getPartsDate(string, formatProp, separator, false, [
-            'dd',
-            'MM',
-            'yyyy',
-          ]);
+          const [dd, MM, yyyy] = getPartsDate(
+            string,
+            formatProp,
+            separator,
+            false,
+            ['dd', 'MM', 'yyyy'],
+          );
 
           if (
             dd &&
@@ -155,7 +162,7 @@ export const useImask = (
           return true;
         },
         // проблема в типах IMask
-      }) as unknown) as IMask.InputMask<IMask.MaskedDateOptions>;
+      }) as unknown as IMask.InputMask<IMask.MaskedDateOptions>;
     }
   }, [formatProp, separator]);
 

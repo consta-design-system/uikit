@@ -19,7 +19,12 @@ export const SelectValueTag: React.FC<SelectValueTagProps> = (props) => {
   const { handleRemove, disabled, size, ...otherProps } = props;
 
   return disabled ? (
-    <Tag {...otherProps} className={cnSelectValueTag({ size, disabled })} size={size} mode="info" />
+    <Tag
+      {...otherProps}
+      className={cnSelectValueTag({ size, disabled })}
+      size={size}
+      mode="info"
+    />
   ) : (
     <Tag
       {...otherProps}

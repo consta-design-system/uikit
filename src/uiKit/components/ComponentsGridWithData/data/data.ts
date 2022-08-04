@@ -113,19 +113,22 @@ export const data: Data = [
         name: 'CollapseGroup',
         componentName: 'CollapseGroup',
         url: '/?path=/docs/components-collapsegroup--playground',
-        description: 'Группа скрытых блоков. Раскрывается по нажатию на заголовок.',
+        description:
+          'Группа скрытых блоков. Раскрывается по нажатию на заголовок.',
       },
       {
         name: 'Combobox',
         componentName: 'Combobox',
         url: '/?path=/docs/components-combobox--playground',
-        description: 'Выпадающий список с поиском. Можно выбрать один или несколько вариантов.',
+        description:
+          'Выпадающий список с поиском. Можно выбрать один или несколько вариантов.',
       },
       {
         name: 'ChoiceGroup',
         componentName: 'ChoiceGroup',
         url: '/?path=/docs/components-choicegroup--playground',
-        description: 'Группа кнопок. Можно выбрать один или несколько вариантов.',
+        description:
+          'Группа кнопок. Можно выбрать один или несколько вариантов.',
       },
       {
         name: 'ContextMenu(Canary)',
@@ -167,13 +170,15 @@ export const data: Data = [
         name: 'Grid',
         componentName: 'Grid',
         url: '/?path=/docs/components-grid--playground',
-        description: 'Модульная сетка. Отвечает за расположение содержимого на странице.',
+        description:
+          'Модульная сетка. Отвечает за расположение содержимого на странице.',
       },
       {
         name: 'Informer',
         componentName: 'Informer',
         url: '/?path=/docs/components-informer--playground',
-        description: 'Сообщение для пользователя. Встраивается в содержимое страницы.',
+        description:
+          'Сообщение для пользователя. Встраивается в содержимое страницы.',
       },
       {
         name: 'Header',
@@ -185,7 +190,8 @@ export const data: Data = [
         name: 'Layout(Canary)',
         componentName: 'Layout',
         url: '/?path=/docs/components-layout--playground',
-        description: 'Лэйаут. Блоки, из которых можно построить каркас страницы.',
+        description:
+          'Лэйаут. Блоки, из которых можно построить каркас страницы.',
       },
       {
         name: 'Loader',
@@ -197,13 +203,15 @@ export const data: Data = [
         name: 'Modal',
         componentName: 'Modal',
         url: '/?path=/docs/components-modal--playground',
-        description: 'Всплывающее окно. Показывает контент поверх основной страницы.',
+        description:
+          'Всплывающее окно. Показывает контент поверх основной страницы.',
       },
       {
         name: 'Popover',
         componentName: 'Popover',
         url: '/?path=/docs/components-popover--playground',
-        description: 'Поповер. Позиционирование элементов по координатам или якорю.',
+        description:
+          'Поповер. Позиционирование элементов по координатам или якорю.',
       },
       {
         name: 'Pagination',
@@ -272,13 +280,15 @@ export const data: Data = [
         name: 'SnackBar',
         componentName: 'SnackBar',
         url: '/?path=/docs/components-snackbar--playground',
-        description: 'Мгновенные сообщения для пользователя. Перекрывает содержимое.',
+        description:
+          'Мгновенные сообщения для пользователя. Перекрывает содержимое.',
       },
       {
         name: 'Steps',
         componentName: 'Steps',
         url: '/?path=/docs/components-steps--playground',
-        description: 'Вкладки по шагам. Показывает контент в определённой последовательности.',
+        description:
+          'Вкладки по шагам. Показывает контент в определённой последовательности.',
       },
       {
         name: 'Switch',
@@ -290,7 +300,8 @@ export const data: Data = [
         name: 'SwitchGroup',
         componentName: 'SwitchGroup',
         url: '/?path=/docs/components-switchgroup--playground',
-        description: 'Группа переключателей. Можно выбрать несколько вариантов.',
+        description:
+          'Группа переключателей. Можно выбрать несколько вариантов.',
       },
       {
         name: 'Table',
@@ -308,13 +319,15 @@ export const data: Data = [
         name: 'Tag',
         componentName: 'Tag',
         url: '/?path=/docs/components-tag--playground',
-        description: 'Тег. Объединяет группы объектов — статьи, документы, фотографии.',
+        description:
+          'Тег. Объединяет группы объектов — статьи, документы, фотографии.',
       },
       {
         name: 'Text',
         componentName: 'Text',
         url: '/?path=/docs/components-text--playground',
-        description: 'Текст. Любые текстовые элементы на странице и стили для них.',
+        description:
+          'Текст. Любые текстовые элементы на странице и стили для них.',
       },
       {
         name: 'TextField',
@@ -326,7 +339,8 @@ export const data: Data = [
         name: 'Theme',
         componentName: 'Theme',
         url: '/?path=/docs/components-theme--playground',
-        description: 'Тема. Набор правил в CSS, который определяет, как выглядит проект.',
+        description:
+          'Тема. Набор правил в CSS, который определяет, как выглядит проект.',
       },
       {
         name: 'ThemeToggler',
@@ -362,7 +376,10 @@ export const data: Data = [
   },
 ];
 
-export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
+export const imageMap: Record<
+  string,
+  React.FC<React.SVGProps<SVGSVGElement>>
+> = {
   Attachment: AttachmentImage,
   Avatar: AvatarImage,
   Badge: BadgeImage,

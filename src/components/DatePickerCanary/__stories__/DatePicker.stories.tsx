@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react';
 import { boolean, date, select, text } from '@storybook/addon-knobs';
 import { addDays, Locale, startOfWeek } from 'date-fns';
 import enUSLocale from 'date-fns/locale/en-US';
 import esLocale from 'date-fns/locale/es';
 import ruLocale from 'date-fns/locale/ru';
 import zhCNLocale from 'date-fns/locale/zh-CN';
+import React, { useEffect, useState } from 'react';
 
 import { IconCalendar } from '../../../icons/IconCalendar/IconCalendar';
 import { maxDateDefault, minDateDefault } from '../../../utils/date';
 import { getByMap } from '../../../utils/getByMap';
 import { createMetadata } from '../../../utils/storybook';
 import { Button } from '../../Button/Button';
-import { dateTimePropView, dateTimePropViewDefault } from '../../DateTimeCanary/helpers';
+import {
+  dateTimePropView,
+  dateTimePropViewDefault,
+} from '../../DateTimeCanary/helpers';
 import {
   textFieldPropForm,
   textFieldPropFormDefault,
@@ -29,7 +32,6 @@ import {
   datePickerPropTypeDefault,
   DatePickerPropValue,
 } from '../helpers';
-
 import mdx from './DatePicker.docs.mdx';
 
 const localeProp = ['ru', 'en-US', 'zh-CN', 'es'] as const;
@@ -60,7 +62,11 @@ const defaultKnobs = () => ({
   maxDate: date('maxDate', maxDateDefault),
   withEvents: boolean('withEvents', false),
   locale: select('locale', localeProp, localeDefault),
-  dateTimeView: select('dateTimeView', dateTimePropView, dateTimePropViewDefault),
+  dateTimeView: select(
+    'dateTimeView',
+    dateTimePropView,
+    dateTimePropViewDefault,
+  ),
   dropdownForm: select(
     'dropdownForm',
     datePickerPropDropdownForm,
@@ -72,7 +78,7 @@ const additionalControls = () => {
   return [<Button label="Кнопка" />, <Button label="Кнопка" />];
 };
 
-export function Playground() {
+export const Playground = () => {
   const {
     form,
     status,
@@ -99,7 +105,11 @@ export function Playground() {
   const currentDay = new Date();
 
   const events = withEvents
-    ? [startOfWeek(currentDay, { locale: ruLocale }), currentDay, addDays(currentDay, 2)]
+    ? [
+        startOfWeek(currentDay, { locale: ruLocale }),
+        currentDay,
+        addDays(currentDay, 2),
+      ]
     : undefined;
 
   const icon = withIcon ? IconCalendar : undefined;
@@ -135,11 +145,13 @@ export function Playground() {
           endFieldRightSide: icon,
           startFieldRightSide: icon,
         })}
-        renderAdditionalControls={withAdditionalControls ? additionalControls : undefined}
+        renderAdditionalControls={
+          withAdditionalControls ? additionalControls : undefined
+        }
       />
     </div>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Базовые/DatePicker(Canary)',

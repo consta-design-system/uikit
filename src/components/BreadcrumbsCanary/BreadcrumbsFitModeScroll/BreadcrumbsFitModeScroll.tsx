@@ -8,8 +8,8 @@ import { BreadcrumbsFitModeScrollComponent } from '../types';
 
 export const cnBreadcrumbsFitModeScroll = cn('BreadcrumbsFitModeScroll');
 
-export const BreadcrumbsFitModeScroll: BreadcrumbsFitModeScrollComponent = forwardRef(
-  (props, ref) => {
+export const BreadcrumbsFitModeScroll: BreadcrumbsFitModeScrollComponent =
+  forwardRef((props, ref) => {
     const { items, className, renderItem, ...otherProps } = props;
 
     const rootRef = useRef<HTMLUListElement>(null);
@@ -31,5 +31,4 @@ export const BreadcrumbsFitModeScroll: BreadcrumbsFitModeScrollComponent = forwa
         )}
       </ul>
     );
-  },
-);
+  });

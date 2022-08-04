@@ -9,7 +9,12 @@ export const TextFieldExampleTypeText = () => {
 
   return (
     <StoryBookExample>
-      <TextField onChange={handleChange} value={value} type="text" placeholder="Одна строчка" />
+      <TextField
+        onChange={handleChange}
+        value={value}
+        type="text"
+        placeholder="Одна строчка"
+      />
     </StoryBookExample>
   );
 };

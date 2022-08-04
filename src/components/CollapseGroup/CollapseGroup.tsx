@@ -9,8 +9,11 @@ import {
   collapsePropSizeDefault,
   collapsePropViewDefault,
 } from '../Collapse/Collapse';
-
-import { CollapseGroupComponent, CollapseGroupRenderFunction, withDefaultGetters } from './helpers';
+import {
+  CollapseGroupComponent,
+  CollapseGroupRenderFunction,
+  withDefaultGetters,
+} from './helpers';
 import { useChoice } from './useChoice';
 
 const CollapseGroupRender: CollapseGroupRenderFunction = (props, ref) => {
@@ -70,6 +73,8 @@ const CollapseGroupRender: CollapseGroupRenderFunction = (props, ref) => {
   );
 };
 
-export const CollapseGroup = forwardRef(CollapseGroupRender) as CollapseGroupComponent;
+export const CollapseGroup = forwardRef(
+  CollapseGroupRender,
+) as CollapseGroupComponent;
 
 export * from './helpers';

@@ -18,11 +18,17 @@ export type LoaderProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
 
 export const cnLoader = cn('Loader');
 
-export const Loader = React.forwardRef<HTMLDivElement, LoaderProps>((props, ref) => {
-  const { className, size = loaderPropSizeDefault, ...otherProps } = props;
-  return (
-    <div {...otherProps} ref={ref} className={cnLoader({ size }, [className])}>
-      <div className={cnLoader('Dot')} />
-    </div>
-  );
-});
+export const Loader = React.forwardRef<HTMLDivElement, LoaderProps>(
+  (props, ref) => {
+    const { className, size = loaderPropSizeDefault, ...otherProps } = props;
+    return (
+      <div
+        {...otherProps}
+        ref={ref}
+        className={cnLoader({ size }, [className])}
+      >
+        <div className={cnLoader('Dot')} />
+      </div>
+    );
+  },
+);

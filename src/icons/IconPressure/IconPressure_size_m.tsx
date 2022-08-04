@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function IconPressureSizeM(props: React.SVGProps<SVGSVGElement>) {
+const IconPressureSizeM = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 24 24" {...props}>
       <path d="M14.071 13.485l-1.428-1.59a2 2 0 01-2.457-2.738L7.382 6.031l.707-.707 3.114 2.84a2 2 0 012.697 2.46l1.585 1.446-1.414 1.414z" />
@@ -11,6 +11,6 @@ function IconPressureSizeM(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default IconPressureSizeM;

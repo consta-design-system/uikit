@@ -11,20 +11,35 @@ export const contextMenuAccent = ['alert', 'warning', 'success'] as const;
 export type ContextMenuAccent = typeof contextMenuAccent[number];
 
 export type ContextMenuPropGetLabel<ITEM> = (item: ITEM) => string | number;
-export type ContextMenuPropGetSide<ITEM> = (item: ITEM) => React.ReactNode | null;
-export type ContextMenuPropGetSubItems<ITEM> = (item: ITEM) => ITEM[] | undefined;
-export type ContextMenuPropGetAccent<ITEM> = (item: ITEM) => ContextMenuAccent | undefined;
-export type ContextMenuPropGetGroupId<ITEM> = (item: ITEM) => string | number | undefined;
+export type ContextMenuPropGetSide<ITEM> = (
+  item: ITEM,
+) => React.ReactNode | null;
+export type ContextMenuPropGetSubItems<ITEM> = (
+  item: ITEM,
+) => ITEM[] | undefined;
+export type ContextMenuPropGetAccent<ITEM> = (
+  item: ITEM,
+) => ContextMenuAccent | undefined;
+export type ContextMenuPropGetGroupId<ITEM> = (
+  item: ITEM,
+) => string | number | undefined;
 export type ContextMenuPropGetKey<ITEM> = (item: ITEM) => string | number;
-export type ContextMenuPropGetDisable<ITEM> = (item: ITEM) => boolean | undefined;
+export type ContextMenuPropGetDisable<ITEM> = (
+  item: ITEM,
+) => boolean | undefined;
 export type ContextMenuPropGetGroupLabel = (
   id: string | number | undefined,
 ) => string | number | undefined;
-export type ContextMenuPropSortGroup = (a: string | number, b: string | number) => number;
+export type ContextMenuPropSortGroup = (
+  a: string | number,
+  b: string | number,
+) => number;
 export type ContextMenuPropGetItemOnClick<ITEM> = (
   item: ITEM,
 ) => React.EventHandler<React.MouseEvent> | undefined;
-export type ContextMenuPropGetItemAs<ITEM> = (item: ITEM) => keyof JSX.IntrinsicElements;
+export type ContextMenuPropGetItemAs<ITEM> = (
+  item: ITEM,
+) => keyof JSX.IntrinsicElements;
 export type ContextMenuPropGetItemHTMLAttributes<ITEM> = (
   item: ITEM,
 ) => JSX.IntrinsicElements[keyof JSX.IntrinsicElements];
@@ -35,7 +50,8 @@ export const contextMenuPropSubMenuDirections = [
   'leftStartUp',
   'leftStartDown',
 ] as const;
-export type ContextMenuPropSubMenuDirection = typeof contextMenuPropSubMenuDirections[number];
+export type ContextMenuPropSubMenuDirection =
+  typeof contextMenuPropSubMenuDirections[number];
 export const contextMenuPropDefaultSubMenuDirection: ContextMenuPropSubMenuDirection =
   contextMenuPropSubMenuDirections[0];
 
@@ -102,7 +118,7 @@ type ContextMenuLevelProps<ITEM> = Omit<
 >;
 
 export type ContextMenuItemProps<
-  AS extends keyof JSX.IntrinsicElements = 'div'
+  AS extends keyof JSX.IntrinsicElements = 'div',
 > = PropsWithAsAttributes<
   {
     label: string | number;
@@ -126,7 +142,9 @@ export type Level<ITEM> = {
   offset?: PopoverPropOffset;
 } & PositioningProps;
 
-export type ContextMenuItemComponent = <AS extends keyof JSX.IntrinsicElements = 'div'>(
+export type ContextMenuItemComponent = <
+  AS extends keyof JSX.IntrinsicElements = 'div',
+>(
   props: ContextMenuItemProps<AS>,
   ref: React.Ref<HTMLElement>,
 ) => React.ReactElement | null;

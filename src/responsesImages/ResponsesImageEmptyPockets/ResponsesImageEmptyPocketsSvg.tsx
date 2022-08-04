@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function ResponsesImageEmptyPockets(props: React.SVGProps<SVGSVGElement>) {
+const ResponsesImageEmptyPockets = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 207 190" {...props}>
       <path
@@ -105,6 +105,6 @@ function ResponsesImageEmptyPockets(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default ResponsesImageEmptyPockets;

@@ -1,5 +1,4 @@
 import { createIcon } from '../createIcon/createIcon';
-
 import IconYoutubeSizeM from './IconYoutube_size_m';
 import IconYoutubeSizeS from './IconYoutube_size_s';
 

@@ -57,98 +57,108 @@ const renderPointContent = (
   return <Icon size="xs" />;
 };
 
-export const ProgressStepBarItem: ProgressStepBarItemComponent = React.forwardRef((props, ref) => {
-  const {
-    content,
-    tooltipContent,
-    label,
-    point,
-    status,
-    progress,
-    direction,
-    size,
-    pointRef,
-    onClick,
-    position = propPositionDefault,
-    tooltipZIndex,
-    ...otherProps
-  } = props;
+export const ProgressStepBarItem: ProgressStepBarItemComponent =
+  React.forwardRef((props, ref) => {
+    const {
+      content,
+      tooltipContent,
+      label,
+      point,
+      status,
+      progress,
+      direction,
+      size,
+      pointRef,
+      onClick,
+      position = propPositionDefault,
+      tooltipZIndex,
+      ...otherProps
+    } = props;
 
-  const [isTooltipVisible, { on: setTooltipVisible, off: setTooltipUnVisible }] = useFlag();
+    const [
+      isTooltipVisible,
+      { on: setTooltipVisible, off: setTooltipUnVisible },
+    ] = useFlag();
 
-  const anchorRef = useRef<HTMLDivElement>(null);
+    const anchorRef = useRef<HTMLDivElement>(null);
 
-  const pointProps = {
-    onMouseEnter: setTooltipVisible,
-    onMouseLeave: setTooltipUnVisible,
-    className: cnProgressStepBarItem(
-      'Point',
-      {
-        size,
-      },
-      [cnMixFocus()],
-    ),
-    children: size !== 'xs' && renderPointContent(point, size, progress),
-  };
-
-  const pointButtonProps = {
-    ref: pointRef as React.RefObject<HTMLButtonElement>,
-    onClick,
-  };
-
-  const pointDivButton = {
-    ref: pointRef as React.RefObject<HTMLDivElement>,
-  };
-
-  return (
-    <>
-      <div
-        ref={ref}
-        className={cnProgressStepBarItem({
-          direction,
-          position,
-          status: status || propStatusDefault,
+    const pointProps = {
+      onMouseEnter: setTooltipVisible,
+      onMouseLeave: setTooltipUnVisible,
+      className: cnProgressStepBarItem(
+        'Point',
+        {
           size,
-        })}
-        {...otherProps}
-      >
-        {onClick ? (
-          <button type="button" {...pointButtonProps} {...pointProps} />
-        ) : (
-          <div {...pointProps} {...pointDivButton} />
-        )}
-        {(label || content) && (
-          <div className={cnProgressStepBarItem('Content', { bottomOffset: !!content })}>
-            {label && (
-              <Text
-                className={cnProgressStepBarItem('Label')}
-                ref={anchorRef}
-                size={size}
-                onMouseEnter={setTooltipVisible}
-                onMouseLeave={setTooltipUnVisible}
-                lineHeight={size === 's' ? 'xs' : size}
-                view="primary"
-              >
-                {label}
-              </Text>
-            )}
-            {content}
-          </div>
-        )}
-      </div>
-      {tooltipContent && isTooltipVisible && (
-        <Tooltip
-          anchorRef={label || content ? anchorRef : pointRef}
-          className={cnProgressStepBarItem('Tooltip')}
-          direction={direction === 'horizontal' ? 'downCenter' : 'leftUp'}
-          style={{ zIndex: tooltipZIndex }}
-          possibleDirections={
-            direction === 'horizontal' ? possibleHorizontalDirections : possibleVerticalDirections
-          }
+        },
+        [cnMixFocus()],
+      ),
+      children: size !== 'xs' && renderPointContent(point, size, progress),
+    };
+
+    const pointButtonProps = {
+      ref: pointRef as React.RefObject<HTMLButtonElement>,
+      onClick,
+    };
+
+    const pointDivButton = {
+      ref: pointRef as React.RefObject<HTMLDivElement>,
+    };
+
+    return (
+      <>
+        <div
+          ref={ref}
+          className={cnProgressStepBarItem({
+            direction,
+            position,
+            status: status || propStatusDefault,
+            size,
+          })}
+          {...otherProps}
         >
-          {tooltipContent}
-        </Tooltip>
-      )}
-    </>
-  );
-});
+          {onClick ? (
+            <button type="button" {...pointButtonProps} {...pointProps} />
+          ) : (
+            <div {...pointProps} {...pointDivButton} />
+          )}
+          {(label || content) && (
+            <div
+              className={cnProgressStepBarItem('Content', {
+                bottomOffset: !!content,
+              })}
+            >
+              {label && (
+                <Text
+                  className={cnProgressStepBarItem('Label')}
+                  ref={anchorRef}
+                  size={size}
+                  onMouseEnter={setTooltipVisible}
+                  onMouseLeave={setTooltipUnVisible}
+                  lineHeight={size === 's' ? 'xs' : size}
+                  view="primary"
+                >
+                  {label}
+                </Text>
+              )}
+              {content}
+            </div>
+          )}
+        </div>
+        {tooltipContent && isTooltipVisible && (
+          <Tooltip
+            anchorRef={label || content ? anchorRef : pointRef}
+            className={cnProgressStepBarItem('Tooltip')}
+            direction={direction === 'horizontal' ? 'downCenter' : 'leftUp'}
+            style={{ zIndex: tooltipZIndex }}
+            possibleDirections={
+              direction === 'horizontal'
+                ? possibleHorizontalDirections
+                : possibleVerticalDirections
+            }
+          >
+            {tooltipContent}
+          </Tooltip>
+        )}
+      </>
+    );
+  });

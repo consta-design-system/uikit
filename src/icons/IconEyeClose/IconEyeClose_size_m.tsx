@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function IconEyeCloseSizeM(props: React.SVGProps<SVGSVGElement>) {
+const IconEyeCloseSizeM = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 24 24" {...props}>
       <path
@@ -10,6 +10,6 @@ function IconEyeCloseSizeM(props: React.SVGProps<SVGSVGElement>) {
       <path d="M4.901 19.998l-1.414-1.414L19.043 3.028l1.414 1.414z" />
     </svg>
   );
-}
+};
 
 export default IconEyeCloseSizeM;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function IconMLSPSizeM(props: React.SVGProps<SVGSVGElement>) {
+const IconMLSPSizeM = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 24 24" {...props}>
       <path
@@ -11,6 +11,6 @@ function IconMLSPSizeM(props: React.SVGProps<SVGSVGElement>) {
       <path d="M7 19.319a2.998 2.998 0 01-1.168-.189l-2.367-.887a1 1 0 00-.798.042L1 19.005v-2l.773-.51a3 3 0 012.395-.125l2.367.887a1 1 0 00.798-.042l1.39-.695a3 3 0 012.523-.074l1.708.732a1 1 0 00.908-.062l.682-.409a3 3 0 012.885-.11l1.309.654a1 1 0 00.734.063L23 16v2l-2.953 1.23a3 3 0 01-2.204-.19L17 18.618V23h-2v-4.234l-.109.065a3 3 0 01-2.725.185l-1.707-.731a1 1 0 00-.841.024L9 18.618V23H7v-3.681z" />
     </svg>
   );
-}
+};
 
 export default IconMLSPSizeM;

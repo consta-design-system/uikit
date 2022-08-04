@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function ResponsesImage403(props: React.SVGProps<SVGSVGElement>) {
+const ResponsesImage403 = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 420 178" {...props}>
       <path
@@ -79,6 +79,6 @@ function ResponsesImage403(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default ResponsesImage403;

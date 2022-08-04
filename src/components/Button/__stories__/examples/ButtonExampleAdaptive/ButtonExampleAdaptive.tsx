@@ -4,7 +4,7 @@ import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/D
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Button } from '../../../Button';
 
-export function ButtonExampleAdaptive() {
+export const ButtonExampleAdaptive = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       {[200, 150, 50].map((width) => (
@@ -14,4 +14,4 @@ export function ButtonExampleAdaptive() {
       ))}
     </StoryBookExample>
   );
-}
+};

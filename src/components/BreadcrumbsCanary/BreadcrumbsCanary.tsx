@@ -3,7 +3,6 @@ import './Breadcrumbs.css';
 import React, { forwardRef } from 'react';
 
 import { cn } from '../../utils/bem';
-
 import { BreadcrumbsFitModeDropdown } from './BreadcrumbsFitModeDropdown/BreadcrumbsFitModeDropdown';
 import { BreadcrumbsFitModeScroll } from './BreadcrumbsFitModeScroll/BreadcrumbsFitModeScroll';
 import { BreadcrumbsItem } from './BreadcrumbsItem/BreadcrumbsItem';
@@ -18,7 +17,10 @@ import {
 
 export const cnBreadcrumbs = cn('Breadcrumbs');
 
-const BreadcrumbsRender = (props: BreadcrumbsProps, ref: React.Ref<HTMLUListElement>) => {
+const BreadcrumbsRender = (
+  props: BreadcrumbsProps,
+  ref: React.Ref<HTMLUListElement>,
+) => {
   const {
     items,
     getItemHref,
@@ -38,7 +40,14 @@ const BreadcrumbsRender = (props: BreadcrumbsProps, ref: React.Ref<HTMLUListElem
 
   const shortList = items.length <= 2;
 
-  const renderItem: RenderItem<Item> = (item, index, isFirst, isLast, ref, hidden) => {
+  const renderItem: RenderItem<Item> = (
+    item,
+    index,
+    isFirst,
+    isLast,
+    ref,
+    hidden,
+  ) => {
     if (item === undefined) {
       return;
     }
@@ -61,7 +70,11 @@ const BreadcrumbsRender = (props: BreadcrumbsProps, ref: React.Ref<HTMLUListElem
 
   if (items.length <= 2) {
     return (
-      <ul {...otherProps} className={cnBreadcrumbs({ shortList }, [className])} ref={ref}>
+      <ul
+        {...otherProps}
+        className={cnBreadcrumbs({ shortList }, [className])}
+        ref={ref}
+      >
         {items.map((item, index) =>
           renderItem(item, index, index === 0, index === items.length - 1),
         )}
@@ -98,6 +111,8 @@ const BreadcrumbsRender = (props: BreadcrumbsProps, ref: React.Ref<HTMLUListElem
   );
 };
 
-export const Breadcrumbs = forwardRef(BreadcrumbsRender) as BreadcrumbsComponent;
+export const Breadcrumbs = forwardRef(
+  BreadcrumbsRender,
+) as BreadcrumbsComponent;
 
 export * from './types';

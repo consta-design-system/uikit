@@ -23,7 +23,7 @@ const items: Item[] = [
   },
 ];
 
-export function SelectExamplePlaceholder() {
+export const SelectExamplePlaceholder = () => {
   const [value, setValue] = useState<Item | null>();
   return (
     <div className={cnDocsDecorator('Section')}>
@@ -35,4 +35,4 @@ export function SelectExamplePlaceholder() {
       />
     </div>
   );
-}
+};

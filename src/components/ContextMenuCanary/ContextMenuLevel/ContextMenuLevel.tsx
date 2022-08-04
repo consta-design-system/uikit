@@ -51,10 +51,10 @@ export function clearTimers() {
 }
 const closeDelay = 300;
 
-function ContextMenuLevelRender<ITEM, GROUP>(
+const ContextMenuLevelRender = <ITEM, GROUP>(
   props: ContextMenuLevelProps<ITEM, GROUP>,
   ref: React.Ref<HTMLDivElement>,
-) {
+) => {
   const {
     size = contextMenuDefaultSize,
     items,
@@ -106,7 +106,10 @@ function ContextMenuLevelRender<ITEM, GROUP>(
     sortGroup && ((a, b) => sortGroup(a.key, b.key)),
   );
 
-  const constructItemRefs: () => Record<string, React.RefObject<HTMLDivElement>> = () => {
+  const constructItemRefs: () => Record<
+    string,
+    React.RefObject<HTMLDivElement>
+  > = () => {
     const refs: Record<string, React.RefObject<HTMLDivElement>> = {};
 
     for (const group of groups) {
@@ -122,7 +125,10 @@ function ContextMenuLevelRender<ITEM, GROUP>(
   useEffect(() => {
     if (levelDepth !== 0 && !hovered && hoveredParenLevel < levelDepth) {
       clearTimeout(timers[levelDepth]);
-      timers[levelDepth] = setTimeout(() => deleteLevel(levelDepth), closeDelay);
+      timers[levelDepth] = setTimeout(
+        () => deleteLevel(levelDepth),
+        closeDelay,
+      );
     }
     return () => clearTimeout(timers[levelDepth]);
   }, [hovered, hoveredParenLevel]);
@@ -146,7 +152,10 @@ function ContextMenuLevelRender<ITEM, GROUP>(
   return (
     <Popover
       anchorRef={anchorRef}
-      className={cnContextMenuLevel({ firstLevel: levelDepth === 0, direction }, [className])}
+      className={cnContextMenuLevel(
+        { firstLevel: levelDepth === 0, direction },
+        [className],
+      )}
       possibleDirections={possibleDirections}
       spareDirection={spareDirection}
       direction={direction}
@@ -159,8 +168,15 @@ function ContextMenuLevelRender<ITEM, GROUP>(
     >
       {groups.map((group, groupIndex) => {
         return (
-          <div className={cnContextMenuLevel('Group', { size })} key={group.key}>
-            {renderHeader(group.group && getGroupLabel(group.group), groupIndex === 0, size)}
+          <div
+            className={cnContextMenuLevel('Group', { size })}
+            key={group.key}
+          >
+            {renderHeader(
+              group.group && getGroupLabel(group.group),
+              groupIndex === 0,
+              size,
+            )}
             {group.items.map((item, index) => {
               const itemIndex = getItemIndex(group.key, index);
               const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -200,6 +216,8 @@ function ContextMenuLevelRender<ITEM, GROUP>(
       })}
     </Popover>
   );
-}
+};
 
-export const ContextMenuLevel = forwardRef(ContextMenuLevelRender) as ContextMenuLevelComponent;
+export const ContextMenuLevel = forwardRef(
+  ContextMenuLevelRender,
+) as ContextMenuLevelComponent;

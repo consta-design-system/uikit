@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function FileIconMovSizeM(props: React.SVGProps<SVGSVGElement>) {
+const FileIconMovSizeM = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 30 40" {...props}>
       <path d="M28 0H2a2 2 0 00-2 2v36a2 2 0 002 2h26a2 2 0 002-2V2a2 2 0 00-2-2z" />
@@ -24,6 +24,6 @@ function FileIconMovSizeM(props: React.SVGProps<SVGSVGElement>) {
       <path d="M19 7h1v3h1V7h1v3l-1 2h-1l-1-2V7z" fill="#fff" />
     </svg>
   );
-}
+};
 
 export default FileIconMovSizeM;

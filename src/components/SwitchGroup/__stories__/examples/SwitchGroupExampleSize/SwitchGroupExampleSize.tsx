@@ -15,7 +15,7 @@ const items: Item[] = [
   { name: 'Мигающие заголовки' },
 ];
 
-export function SwitchGroupExampleSizeM() {
+export const SwitchGroupExampleSizeM = () => {
   const [value, setValue] = React.useState<Item[] | null>(null);
 
   return (
@@ -31,9 +31,9 @@ export function SwitchGroupExampleSizeM() {
       />
     </StoryBookExample>
   );
-}
+};
 
-export function SwitchGroupExampleSizeL() {
+export const SwitchGroupExampleSizeL = () => {
   const [value, setValue] = React.useState<Item[] | null>(null);
 
   return (
@@ -49,4 +49,4 @@ export function SwitchGroupExampleSizeL() {
       />
     </StoryBookExample>
   );
-}
+};

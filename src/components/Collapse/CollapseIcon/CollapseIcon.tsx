@@ -18,7 +18,8 @@ export const collapseIconPropDirection = [
   'upLeft',
   'downLeft',
 ] as const;
-export type CollapseIconPropDirection = typeof collapseIconPropDirection[number];
+export type CollapseIconPropDirection =
+  typeof collapseIconPropDirection[number];
 
 export type CollapseIconProps = PropsWithHTMLAttributes<
   {
@@ -54,7 +55,9 @@ export const CollapseIcon: React.FC<CollapseIconProps> = (props) => {
 
   if (CloseIcon) {
     return (
-      <span className={cnCollapseIcon('Wrapper', [cnIcon({ size }), className])}>
+      <span
+        className={cnCollapseIcon('Wrapper', [cnIcon({ size }), className])}
+      >
         <CSSTransition
           in={!isOpen}
           unmountOnExit
@@ -89,7 +92,9 @@ export const CollapseIcon: React.FC<CollapseIconProps> = (props) => {
   return (
     <Icon
       {...otherProps}
-      className={cnCollapseIcon({ isOpen, direction, closeDirection }, [className])}
+      className={cnCollapseIcon({ isOpen, direction, closeDirection }, [
+        className,
+      ])}
       size={size}
     />
   );

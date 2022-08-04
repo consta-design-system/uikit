@@ -7,7 +7,11 @@ import { Text } from '../../../Text';
 export const TextExampleDecoration = () => {
   return (
     <div className={cnDocsDecorator('Section')}>
-      <Text size="s" view="ghost" className={wp.decorator({ 'indent-b': 'xs' })}>
+      <Text
+        size="s"
+        view="ghost"
+        className={wp.decorator({ 'indent-b': 'xs' })}
+      >
         text_decoration_underline
       </Text>
       <Text decoration="underline">Газпром нефть</Text>

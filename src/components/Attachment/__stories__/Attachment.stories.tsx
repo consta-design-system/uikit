@@ -1,13 +1,12 @@
 import './Attachment.stories.css';
 
-import * as React from 'react';
 import { boolean, number, text } from '@storybook/addon-knobs';
+import * as React from 'react';
 
 import { IconTrash } from '../../../icons/IconTrash/IconTrash';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import { Attachment } from '../Attachment';
-
 import mdx from './Attachment.docs.mdx';
 
 const defaultKnobs = () => ({
@@ -23,7 +22,7 @@ const defaultKnobs = () => ({
 
 const cnAttachStories = cn('AttachStories');
 
-export function Playground() {
+export const Playground = () => {
   const {
     loading,
     loadingText,
@@ -57,7 +56,7 @@ export function Playground() {
       />
     </div>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Базовые/Attachment',

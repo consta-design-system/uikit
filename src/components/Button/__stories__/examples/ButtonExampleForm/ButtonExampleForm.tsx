@@ -6,9 +6,13 @@ import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { TextField } from '../../../../TextField/TextField';
 import { Button } from '../../../Button';
 
-export function ButtonExampleFormBasic() {
+export const ButtonExampleFormBasic = () => {
   return (
-    <div className={cnDocsDecorator('Section', [wp.decorator({ distribute: 'left' })])}>
+    <div
+      className={cnDocsDecorator('Section', [
+        wp.decorator({ distribute: 'left' }),
+      ])}
+    >
       <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>
         <Button label="Default" />
       </div>
@@ -20,17 +24,25 @@ export function ButtonExampleFormBasic() {
       </div>
     </div>
   );
-}
+};
 
-export function ButtonExampleFormHybrid() {
+export const ButtonExampleFormHybrid = () => {
   return (
-    <div className={cnDocsDecorator('Section', [wp.decorator({ distribute: 'left' })])}>
+    <div
+      className={cnDocsDecorator('Section', [
+        wp.decorator({ distribute: 'left' }),
+      ])}
+    >
       <div className={cnDocsExample()}>
-        <TextField placeholder="Электронная почта" form="roundClear" style={{ width: '260px' }} />
+        <TextField
+          placeholder="Электронная почта"
+          form="roundClear"
+          style={{ width: '260px' }}
+        />
       </div>
       <div className={cnDocsExample()}>
         <Button form="brickRound" label="Подписаться" />
       </div>
     </div>
   );
-}
+};

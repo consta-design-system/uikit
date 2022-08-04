@@ -32,7 +32,11 @@ export function createIcon({ m, s, xs, name }: CreateIconArguments) {
   const IconComponent = forwardRef<HTMLSpanElement, IconProps>((props, ref) => {
     const Svg = getSvgBySize(props.size, m, s, xs);
     return (
-      <Icon {...props} className={cnIcon(null, [name, props.className])} ref={ref}>
+      <Icon
+        {...props}
+        className={cnIcon(null, [name, props.className])}
+        ref={ref}
+      >
         <Svg className={cnIcon('Svg')} />
       </Icon>
     );

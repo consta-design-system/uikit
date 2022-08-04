@@ -7,7 +7,8 @@ export const outsideId = 'outside';
 export const getRender = () => screen.getByTestId(testId);
 export const getOutside = () => screen.getByTestId(outsideId);
 export const getDropdown = () => screen.getByRole('listbox');
-export const getInput = () => getRender().querySelector(`input.TextField-Input`) as Element;
+export const getInput = () =>
+  getRender().querySelector(`input.TextField-Input`) as Element;
 export const inputFocus = () => fireEvent.focus(getInput());
 export const inputChange = (value: string) => {
   const input = getInput();
@@ -19,14 +20,22 @@ export const animateDelay = () =>
   act(() => {
     jest.advanceTimersByTime(animateTimeout);
   });
-export const getDateTimeItems = () => getDropdown().querySelectorAll(`.DateTimeItem`);
+export const getDateTimeItems = () =>
+  getDropdown().querySelectorAll(`.DateTimeItem`);
 export const getDateTimeItem = (item = 0) => getDateTimeItems()[item];
 export const getDateTimeItemsSelected = () =>
   getDropdown().querySelectorAll(`.DateTimeItem_selected`);
-export const getDateTimeItemSelected = (item = 0) => getDateTimeItemsSelected()[item];
+export const getDateTimeItemSelected = (item = 0) =>
+  getDateTimeItemsSelected()[item];
 export const getDateTimeDaysSelected = () =>
-  getDropdown().querySelectorAll(`.DateTimeTypeDateTime-Date .DateTimeItem_selected`);
-export const getDateTimeDaySelected = (item = 0) => getDateTimeDaysSelected()[item];
+  getDropdown().querySelectorAll(
+    `.DateTimeTypeDateTime-Date .DateTimeItem_selected`,
+  );
+export const getDateTimeDaySelected = (item = 0) =>
+  getDateTimeDaysSelected()[item];
 export const getDateTimeTimesSelected = () =>
-  getDropdown().querySelectorAll(`.DateTimeTypeDateTime-Time .DateTimeItem_selected`);
-export const getDateTimeTimeSelected = (item = 0) => getDateTimeTimesSelected()[item];
+  getDropdown().querySelectorAll(
+    `.DateTimeTypeDateTime-Time .DateTimeItem_selected`,
+  );
+export const getDateTimeTimeSelected = (item = 0) =>
+  getDateTimeTimesSelected()[item];

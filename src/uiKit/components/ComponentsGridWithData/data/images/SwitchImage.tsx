@@ -1,9 +1,12 @@
 import * as React from 'react';
 
-function SwitchImage(props: React.SVGProps<SVGSVGElement>) {
+const SwitchImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
-      <path d="M0 4a4 4 0 014-4h192a4 4 0 014 4v112a4 4 0 01-4 4H4a4 4 0 01-4-4V4z" fill="#fff" />
+      <path
+        d="M0 4a4 4 0 014-4h192a4 4 0 014 4v112a4 4 0 01-4 4H4a4 4 0 01-4-4V4z"
+        fill="#fff"
+      />
       <rect
         x={44.5}
         y={48.5}
@@ -18,6 +21,6 @@ function SwitchImage(props: React.SVGProps<SVGSVGElement>) {
       <circle cx={144} cy={60} r={10} fill="#fff" />
     </svg>
   );
-}
+};
 
 export default SwitchImage;

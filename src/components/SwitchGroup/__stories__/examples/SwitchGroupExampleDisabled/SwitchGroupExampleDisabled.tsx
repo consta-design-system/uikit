@@ -15,7 +15,7 @@ const items: Item[] = [
   { name: 'Мигающие заголовки', disabled: true },
 ];
 
-export function SwitchGroupExampleDisabled() {
+export const SwitchGroupExampleDisabled = () => {
   const [value, setValue] = React.useState<Item[] | null>(null);
 
   return (
@@ -30,9 +30,9 @@ export function SwitchGroupExampleDisabled() {
       />
     </StoryBookExample>
   );
-}
+};
 
-export function SwitchGroupExampleDisabledGroup() {
+export const SwitchGroupExampleDisabledGroup = () => {
   const [value, setValue] = React.useState<Item[] | null>(null);
 
   return (
@@ -48,4 +48,4 @@ export function SwitchGroupExampleDisabledGroup() {
       />
     </StoryBookExample>
   );
-}
+};

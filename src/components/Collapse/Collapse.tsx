@@ -10,7 +10,6 @@ import { getByMap } from '../../utils/getByMap';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { Text } from '../Text/Text';
-
 import {
   CollapseIcon,
   CollapseIconPropDirection,
@@ -39,7 +38,8 @@ export const collapsePropHorizontalSpace = [
   'xs',
   '2xs',
 ] as const;
-export type CollapsePropHorizontalSpace = typeof collapsePropHorizontalSpace[number];
+export type CollapsePropHorizontalSpace =
+  typeof collapsePropHorizontalSpace[number];
 
 export const collapsePropIconPosition = ['left', 'right'] as const;
 export type CollapsePropIconPosition = typeof collapsePropIconPosition[number];
@@ -47,7 +47,8 @@ export const collapsePropIconPositionDefault = collapsePropIconPosition[0];
 
 export const collapsePropDirectionIcon = collapseIconPropDirection;
 export const collapsePropDirectionIconDefault = collapsePropDirectionIcon[0];
-export const collapsePropCloseDirectionIconDefault = collapsePropDirectionIcon[2];
+export const collapsePropCloseDirectionIconDefault =
+  collapsePropDirectionIcon[2];
 
 export const COMPONENT_NAME = 'Collapse' as const;
 
@@ -108,7 +109,10 @@ function renderSide(side: React.ReactNode): React.ReactNode {
   ));
 }
 
-export const Collapse: Collapse = React.forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
+export const Collapse: Collapse = React.forwardRef<
+  HTMLDivElement,
+  CollapseProps
+>((props, ref) => {
   const collapseRef = useRef<HTMLDivElement>(null);
 
   const {

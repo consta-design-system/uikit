@@ -1,5 +1,6 @@
-import * as React from 'react';
+/* eslint-disable testing-library/no-node-access */
 import { render, screen } from '@testing-library/react';
+import * as React from 'react';
 
 import {
   Avatar,
@@ -62,7 +63,8 @@ describe('Компонент Avatar', () => {
     });
     describe('проверка url', () => {
       it('должен добавиться указанный url', () => {
-        const url = 'https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png';
+        const url =
+          'https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png';
         const name = 'Вадим Матвеев';
 
         renderComponent({ url, name });
@@ -88,7 +90,8 @@ describe('Компонент Avatar', () => {
     });
     describe('проверка name', () => {
       it('должен добавиться указанный name', () => {
-        const url = 'https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png';
+        const url =
+          'https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png';
         const name = 'Вадим Матвеев';
 
         renderComponent({ url, name });
@@ -145,9 +148,15 @@ describe('Компонент Avatar', () => {
           'Ethan Jacob',
           'Benjamin Elijah Lucas',
         ];
-        const colorIndexes: { [value: string]: number } = names.reduce((acc, name) => {
-          return { ...acc, [name]: getColorIndexForName(name, maxColorIndex) };
-        }, {});
+        const colorIndexes: { [value: string]: number } = names.reduce(
+          (acc, name) => {
+            return {
+              ...acc,
+              [name]: getColorIndexForName(name, maxColorIndex),
+            };
+          },
+          {},
+        );
 
         names.reverse().forEach((name) => {
           const colorIndex = getColorIndexForName(name, maxColorIndex);

@@ -13,8 +13,21 @@ export const tagBasePropSizeDefault = tagBasePropSize[0];
 export type TagBasePropSize = typeof tagBasePropSize[number];
 
 export const tagBasePropGroupNumberValue = [1, 2, 3, 4, 5, 6, 7, 8, 9] as const;
-export const tagBasePropGroupStringValue = ['1', '2', '3', '4', '5', '6', '7', '8', '9'] as const;
-export const tagBasePropGroup = [...tagBasePropGroupNumberValue, ...tagBasePropGroupStringValue];
+export const tagBasePropGroupStringValue = [
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+] as const;
+export const tagBasePropGroup = [
+  ...tagBasePropGroupNumberValue,
+  ...tagBasePropGroupStringValue,
+];
 
 export type TagBasePropGroup = typeof tagBasePropGroup[number];
 
@@ -89,8 +102,15 @@ export const TagBase = forwardRefWithAs<Props>((props, ref) => {
           )}
           <span className={cnTagBase('Label')}>{label}</span>
           {withCancel && (
-            <button className={cnTagBase('CancelButton')} type="button" onClick={onCancel}>
-              <IconClose className={cnTagBase('CancelIcon')} size={IconCloseSize} />
+            <button
+              className={cnTagBase('CancelButton')}
+              type="button"
+              onClick={onCancel}
+            >
+              <IconClose
+                className={cnTagBase('CancelIcon')}
+                size={IconCloseSize}
+              />
             </button>
           )}
         </>

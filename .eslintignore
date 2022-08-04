@@ -4,4 +4,6 @@ build/*
 dist/*
 builder/*
 build.config.js
-
+repos/*
+.husky/*
+.github/*

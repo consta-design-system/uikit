@@ -1,5 +1,11 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { format, isValid, isWithinInterval, parse } from 'date-fns';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
 import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
@@ -13,7 +19,6 @@ import {
   getParts,
   getPartsDate,
 } from '../helpers';
-
 import { DatePickerFieldTypeTimeProps, useImask } from './helpers';
 
 export const DatePickerFieldTypeTime = React.forwardRef<
@@ -43,7 +48,10 @@ export const DatePickerFieldTypeTime = React.forwardRef<
     value && isValid(value) ? format(value, formatProp) : null,
   );
 
-  const formatParts = useMemo(() => getParts(formatProp, ':'), [formatProp, separator]);
+  const formatParts = useMemo(
+    () => getParts(formatProp, ':'),
+    [formatProp, separator],
+  );
 
   const handleChange = useCallback(
     (e: Event, stringValue: string | null) => {
@@ -56,7 +64,11 @@ export const DatePickerFieldTypeTime = React.forwardRef<
           return;
         }
 
-        const partsTime = getPartsDate(stringValue, formatProp, ':', false, ['HH', 'mm', 'ss']);
+        const partsTime = getPartsDate(stringValue, formatProp, ':', false, [
+          'HH',
+          'mm',
+          'ss',
+        ]);
 
         const [HH, mm, ss] = partsTime;
 

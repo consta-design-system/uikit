@@ -1,5 +1,5 @@
-import React from 'react';
 import { select } from '@storybook/addon-knobs';
+import React from 'react';
 
 import { createMetadata } from '../../../utils/storybook';
 import { IconAdd } from '../../IconAdd/IconAdd';
@@ -186,15 +186,23 @@ import { IconWorld } from '../../IconWorld/IconWorld';
 import { IconWrench } from '../../IconWrench/IconWrench';
 import { IconYandexDzen } from '../../IconYandexDzen/IconYandexDzen';
 import { IconYoutube } from '../../IconYoutube/IconYoutube';
-
-import { IconsItem } from './Item/Icons-Item';
 import mdx from './Icon.docs.mdx';
+import { IconsItem } from './Item/Icons-Item';
 
 const defaultKnobs = () => ({
   size: select('size', ['xs', 's', 'm'], 'm'),
   view: select(
     'view',
-    ['alert', 'brand', 'ghost', 'link', 'primary', 'secondary', 'success', 'warning'],
+    [
+      'alert',
+      'brand',
+      'ghost',
+      'link',
+      'primary',
+      'secondary',
+      'success',
+      'warning',
+    ],
     'primary',
   ),
 });
@@ -390,15 +398,20 @@ type Name = keyof typeof icons;
 
 const names = Object.keys(icons) as Name[];
 
-export function Playground() {
+export const Playground = () => {
   return (
     <div className="tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full">
       {names.map((name) => (
-        <IconsItem key={name} name={name} icon={icons[name]} {...defaultKnobs()} />
+        <IconsItem
+          key={name}
+          name={name}
+          icon={icons[name]}
+          {...defaultKnobs()}
+        />
       ))}
     </div>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Графика/Icons',

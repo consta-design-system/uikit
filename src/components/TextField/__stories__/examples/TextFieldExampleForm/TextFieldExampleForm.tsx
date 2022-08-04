@@ -10,14 +10,28 @@ export const TextFieldExampleFormBasic = () => {
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <TextField placeholder="Форма default" value={value} onChange={handleChange} />
-      <TextField form="brick" placeholder="Форма brick" value={value} onChange={handleChange} />
-      <TextField form="round" placeholder="Форма round" value={value} onChange={handleChange} />
+      <TextField
+        placeholder="Форма default"
+        value={value}
+        onChange={handleChange}
+      />
+      <TextField
+        form="brick"
+        placeholder="Форма brick"
+        value={value}
+        onChange={handleChange}
+      />
+      <TextField
+        form="round"
+        placeholder="Форма round"
+        value={value}
+        onChange={handleChange}
+      />
     </StoryBookExample>
   );
 };
 
-export function TextFieldExampleFormHybrid() {
+export const TextFieldExampleFormHybrid = () => {
   const [value, setValue] = useState<string | null>(null);
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
   return (
@@ -34,4 +48,4 @@ export function TextFieldExampleFormHybrid() {
       </div>
     </StoryBookExample>
   );
-}
+};

@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import {
   addHours,
   addMinutes,
@@ -12,6 +11,7 @@ import {
   startOfSecond,
   startOfToday,
 } from 'date-fns';
+import { useMemo } from 'react';
 
 import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
 import { range } from '../../../utils/array';
@@ -61,7 +61,13 @@ const getItemData = (
     const date = addUnits(startDate, number * multiplicity);
     const label = getItemLabel(date);
     const selected = value ? getItemLabel(date) === getItemLabel(value) : false;
-    const disabled = !isInMinMaxDade(date, minDate, maxDate, startOfUnit, endOfUnit);
+    const disabled = !isInMinMaxDade(
+      date,
+      minDate,
+      maxDate,
+      startOfUnit,
+      endOfUnit,
+    );
     const onClick = (e: React.MouseEvent<HTMLButtonElement>) =>
       !disabled && onChangeRef?.current?.({ e, value: date });
 

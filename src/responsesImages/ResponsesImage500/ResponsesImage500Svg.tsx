@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function ResponsesImage500(props: React.SVGProps<SVGSVGElement>) {
+const ResponsesImage500 = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 420 176" {...props}>
       <path
@@ -89,6 +89,6 @@ function ResponsesImage500(props: React.SVGProps<SVGSVGElement>) {
       <path d="M245.135 162.57C246.483 162.118 247.42 160.891 247.501 159.472C247.605 157.644 248.811 156.064 250.547 155.482L254.631 154.112C254.893 154.024 255.176 154.165 255.264 154.427C255.352 154.689 255.211 154.972 254.949 155.06L250.865 156.43C249.517 156.882 248.58 158.109 248.499 159.528C248.395 161.356 247.188 162.936 245.453 163.518L241.369 164.888C241.107 164.976 240.824 164.835 240.736 164.573C240.648 164.311 240.789 164.028 241.051 163.94L245.135 162.57Z" />
     </svg>
   );
-}
+};
 
 export default ResponsesImage500;

@@ -1,4 +1,7 @@
-export type KeyHandler = (prop: Record<string, unknown>, e: React.KeyboardEvent) => void;
+export type KeyHandler = (
+  prop: Record<string, unknown>,
+  e: React.KeyboardEvent,
+) => void;
 
 export type KeyProps = {
   onKeyDown?: (e: React.KeyboardEvent) => void;

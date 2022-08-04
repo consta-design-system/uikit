@@ -11,22 +11,28 @@ export const cnCheckboxGroup = cn('CheckboxGroup');
 
 export const checkboxGroupDirections = ['column', 'row'] as const;
 export type CheckboxGroupDirection = typeof checkboxGroupDirections[number];
-export const checkboxGroupDefaultDirection: CheckboxGroupDirection = checkboxGroupDirections[0];
+export const checkboxGroupDefaultDirection: CheckboxGroupDirection =
+  checkboxGroupDirections[0];
 
 export const checkboxGroupSizes = ['m', 'l'] as const;
 export type CheckboxGroupPropSize = typeof checkboxGroupSizes[number];
-export const checkboxGroupDefaultSize: CheckboxGroupPropSize = checkboxGroupSizes[0];
+export const checkboxGroupDefaultSize: CheckboxGroupPropSize =
+  checkboxGroupSizes[0];
 
 export const checkboxGroupViews = ['primary', 'ghost'] as const;
 export type CheckboxGroupPropView = typeof checkboxGroupViews[number];
-export const checkboxGroupDefaultView: CheckboxGroupPropView = checkboxGroupViews[0];
+export const checkboxGroupDefaultView: CheckboxGroupPropView =
+  checkboxGroupViews[0];
 
 type CommonProps<ITEM> = {
   value?: ITEM[] | null;
   items: ITEM[];
   getLabel: (item: ITEM) => string;
   getDisabled?: (item: ITEM) => boolean | undefined;
-  onChange: (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM[] | null }) => void;
+  onChange: (props: {
+    e: React.ChangeEvent<HTMLInputElement>;
+    value: ITEM[] | null;
+  }) => void;
   name?: string;
   direction?: CheckboxGroupDirection;
   size?: CheckboxGroupPropSize;
@@ -35,7 +41,10 @@ type CommonProps<ITEM> = {
   className?: string;
 };
 
-type Props<ITEM> = PropsWithHTMLAttributesAndRef<CommonProps<ITEM>, HTMLDivElement>;
+type Props<ITEM> = PropsWithHTMLAttributesAndRef<
+  CommonProps<ITEM>,
+  HTMLDivElement
+>;
 
 type CheckboxGroup = <ITEM>(props: Props<ITEM>) => React.ReactElement | null;
 

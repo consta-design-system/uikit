@@ -10,7 +10,10 @@ type SkeletonCircleProps = {
   size: CSSProperties['width'] & CSSProperties['height'];
 };
 
-export const SkeletonCircle: React.FC<SkeletonCircleProps> = ({ className, size }) => (
+export const SkeletonCircle: React.FC<SkeletonCircleProps> = ({
+  className,
+  size,
+}) => (
   <div
     className={cnSkeletonCircle('', [cnSkeleton(), className])}
     style={{ width: size, height: size }}

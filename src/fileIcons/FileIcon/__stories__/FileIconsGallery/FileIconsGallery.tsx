@@ -1,5 +1,5 @@
-import React from 'react';
 import { select } from '@storybook/addon-knobs';
+import React from 'react';
 
 import { FileIconAvi } from '../../../FileIconAvi/FileIconAvi';
 import { FileIconBmp } from '../../../FileIconBmp/FileIconBmp';
@@ -25,7 +25,6 @@ import { FileIconWav } from '../../../FileIconWav/FileIconWav';
 import { FileIconXls } from '../../../FileIconXls/FileIconXls';
 import { FileIconZip } from '../../../FileIconZip/FileIconZip';
 import { fileIconPropSize, fileIconPropSizeDefault } from '../../FileIcon';
-
 import { FileIconsGalleryItem } from './Item/FileIconsGallery-Item';
 
 const defaultKnobs = () => ({
@@ -62,12 +61,17 @@ type Name = keyof typeof icons;
 
 const names = Object.keys(icons) as Name[];
 
-export function FileIconsGallery() {
+export const FileIconsGallery = () => {
   return (
     <div className="tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full">
       {names.map((name) => (
-        <FileIconsGalleryItem key={name} name={name} icon={icons[name]} {...defaultKnobs()} />
+        <FileIconsGalleryItem
+          key={name}
+          name={name}
+          icon={icons[name]}
+          {...defaultKnobs()}
+        />
       ))}
     </div>
   );
-}
+};

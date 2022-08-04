@@ -47,12 +47,20 @@ function renderLeftSide(item: Item): React.ReactNode {
   return <Icon size="s" />;
 }
 
-function renderRightSide(item: Item, onChange: (item: Item) => void): React.ReactNode {
+function renderRightSide(
+  item: Item,
+  onChange: (item: Item) => void,
+): React.ReactNode {
   const nodeArray = [];
 
   item.switch !== undefined &&
     nodeArray.push(
-      <Switch size="m" checked={item.switch} onChange={() => onChange(item)} key="Switch" />,
+      <Switch
+        size="m"
+        checked={item.switch}
+        onChange={() => onChange(item)}
+        key="Switch"
+      />,
     );
 
   nodeArray.push(<Badge status={item.status} minified key="Badge" size="s" />);
@@ -78,7 +86,9 @@ export const ContextMenuExampleSide = () => {
   };
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section', [cnContextMenuExampleSide()])}>
+    <StoryBookExample
+      className={cnDocsDecorator('Section', [cnContextMenuExampleSide()])}
+    >
       <Button iconLeft={IconAdd} ref={ref} />
       <ContextMenu
         items={items}

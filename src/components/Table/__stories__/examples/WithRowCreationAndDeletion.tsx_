@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+/* eslint-disable no-unused-vars */
 import { action } from '@storybook/addon-actions';
 import { text } from '@storybook/addon-knobs';
+import React, { useState } from 'react';
 
 import { IconComponent } from '../../../../icons/Icon/Icon';
 import { IconAdd } from '../../../../icons/IconAdd/IconAdd';
@@ -50,12 +51,18 @@ type ActionItems = {
 };
 
 // eslint-disable-next-line no-bitwise
-const binaryCheck = (base: number, comparator: number) => (base & comparator) === comparator;
+const binaryCheck = (base: number, comparator: number) =>
+  (base && comparator) === comparator;
 const binarySubtraction = (base: number, subtrahend: number) =>
   // eslint-disable-next-line no-bitwise
   binaryCheck(base, subtrahend) ? base ^ subtrahend : base;
 
-const deepRowAdd = <T extends TableRow>(rows: T[], id: string, level: number, newRow: T): T[] => {
+const deepRowAdd = <T extends TableRow>(
+  rows: T[],
+  id: string,
+  level: number,
+  newRow: T,
+): T[] => {
   if (level === 0) {
     const index = rows.findIndex((val) => val.id === id);
     const newRows = [...rows];
@@ -81,7 +88,11 @@ const deepRowAdd = <T extends TableRow>(rows: T[], id: string, level: number, ne
   return rows;
 };
 
-const deepRowDelete = <T extends TableRow>(rows: T[], id: string, level: number): T[] => {
+const deepRowDelete = <T extends TableRow>(
+  rows: T[],
+  id: string,
+  level: number,
+): T[] => {
   if (level === 0) {
     return [...rows].filter((row) => row.id !== id);
   }
@@ -106,10 +117,15 @@ const deepRowDelete = <T extends TableRow>(rows: T[], id: string, level: number)
 
 const ALL_ACTIONS =
   // eslint-disable-next-line no-bitwise
-  AVAILABLE_ACTIONS.CREATE | AVAILABLE_ACTIONS.CREATE_SUB | AVAILABLE_ACTIONS.DELETE;
+  AVAILABLE_ACTIONS.CREATE |
+  AVAILABLE_ACTIONS.CREATE_SUB |
+  AVAILABLE_ACTIONS.DELETE;
 
-export default () => {
-  const [contextMenuState, setContextMenuState] = useState<ContextMenuState>({});
+// eslint-disable-next-line import/no-anonymous-default-export, react/function-component-definition
+export default function () {
+  const [contextMenuState, setContextMenuState] = useState<ContextMenuState>(
+    {},
+  );
   const [counter, setCounter] = useState(5);
   const [rows, setRows] = useState<RowType[]>([
     {
@@ -164,7 +180,10 @@ export default () => {
     ),
   });
 
-  const actionFunctions: Record<ActionFunctionNames, (id?: string, level?: number) => void> = {
+  const actionFunctions: Record<
+    ActionFunctionNames,
+    (id?: string, level?: number) => void
+  > = {
     addUp: (id) =>
       setRows((prevState) => {
         const newCounter = counter + 1;
@@ -194,7 +213,8 @@ export default () => {
         });
       }
     },
-    remove: (id, level) => setRows((prevState) => deepRowDelete(prevState, id!, level!)),
+    remove: (id, level) =>
+      setRows((prevState) => deepRowDelete(prevState, id!, level!)),
   };
 
   const handleRowCreate = callbackWithSelector(
@@ -229,13 +249,14 @@ export default () => {
     },
   ];
 
-  const handleContextMenuClick = (onClick: () => void, rowId: string, level?: number) => ({
-    type,
-  }: typeof actionItems[number]) => () => {
-    action(`action.${type}`)(rowId);
-    actionFunctions[type](rowId, level);
-    onClick();
-  };
+  const handleContextMenuClick =
+    (onClick: () => void, rowId: string, level?: number) =>
+    ({ type }: typeof actionItems[number]) =>
+    () => {
+      action(`action.${type}`)(rowId);
+      actionFunctions[type](rowId, level);
+      onClick();
+    };
 
   const knobs = {
     columns: [
@@ -286,7 +307,11 @@ export default () => {
 
           const filteredItems = actionItems.filter((action) => {
             if (action.group === AVAILABLE_ACTIONS.CREATE_SUB) {
-              return binaryCheck(row.actions, action.group) && isNumber(row.level) && row.level < 2;
+              return (
+                binaryCheck(row.actions, action.group) &&
+                isNumber(row.level) &&
+                row.level < 2
+              );
             }
 
             return binaryCheck(row.actions, action.group);
@@ -310,8 +335,14 @@ export default () => {
                   items={filteredItems}
                   getLabel={(item) => item.name}
                   getGroupId={(item) => item.group}
-                  getLeftSideBar={({ icon: Icon }) => <Icon view="secondary" size="xs" />}
-                  getOnClick={handleContextMenuClick(setMenuState(false), row.id, row.level)}
+                  getLeftSideBar={({ icon: Icon }) => (
+                    <Icon view="secondary" size="xs" />
+                  )}
+                  getOnClick={handleContextMenuClick(
+                    setMenuState(false),
+                    row.id,
+                    row.level,
+                  )}
                   direction="downLeft"
                   possibleDirections={['upLeft', 'downLeft']}
                   onClickOutside={setMenuState(false)}
@@ -332,4 +363,4 @@ export default () => {
       <Table {...knobs} size="m" />
     </div>
   );
-};
+}

@@ -9,13 +9,19 @@ import { Button } from '../Button/Button';
 import { isNotMultipleParams } from '../Combobox/helpers';
 import { ContextMenu } from '../ContextMenu/ContextMenu';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
-
 import { contextMenuSizeMap, iconSizeMap, withDefaultGetters } from './helpers';
-import { ThemeTogglerComponent, ThemeTogglerProps, themeTogglerPropSizeDefault } from './types';
+import {
+  ThemeTogglerComponent,
+  ThemeTogglerProps,
+  themeTogglerPropSizeDefault,
+} from './types';
 
 export const COMPONENT_NAME = 'ThemeToggler' as const;
 
-function ThemeTogglerRender(props: ThemeTogglerProps, ref: React.Ref<HTMLButtonElement>) {
+const ThemeTogglerRender = (
+  props: ThemeTogglerProps,
+  ref: React.Ref<HTMLButtonElement>,
+) => {
   const anchorRef = useRef<HTMLButtonElement>(null);
   const buttonRef = useForkRef([anchorRef, ref]);
 
@@ -47,7 +53,8 @@ function ThemeTogglerRender(props: ThemeTogglerProps, ref: React.Ref<HTMLButtonE
   const iconSize = getByMap(iconSizeMap, size);
   const contextMenuSize = getByMap(contextMenuSizeMap, size);
 
-  const getButtonIcon = () => getItemIcon(items.find((theme) => getChecked(theme)) ?? items[0]);
+  const getButtonIcon = () =>
+    getItemIcon(items.find((theme) => getChecked(theme)) ?? items[0]);
 
   const onButtonClick = (e: React.MouseEvent<Element, MouseEvent>) => {
     if (items.length > 2) {
@@ -95,13 +102,19 @@ function ThemeTogglerRender(props: ThemeTogglerProps, ref: React.Ref<HTMLButtonE
           onClickOutside={setIsOpen.off}
           getItemOnClick={getOnChange}
           size={contextMenuSize}
-          style={typeof style?.zIndex === 'number' ? { zIndex: style.zIndex + 1 } : undefined}
+          style={
+            typeof style?.zIndex === 'number'
+              ? { zIndex: style.zIndex + 1 }
+              : undefined
+          }
         />
       )}
     </>
   );
-}
+};
 
-export const ThemeToggler = forwardRef(ThemeTogglerRender) as ThemeTogglerComponent;
+export const ThemeToggler = forwardRef(
+  ThemeTogglerRender,
+) as ThemeTogglerComponent;
 
 export * from './types';

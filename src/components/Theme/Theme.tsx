@@ -1,8 +1,7 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useMemo } from 'react';
 
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
-
 import { presetGpnDefault } from './presets/presetGpnDefault';
 
 export { presetGpnDefault } from './presets/presetGpnDefault';
@@ -55,24 +54,29 @@ export const ThemeContext = createContext<{
   themeClassNames: ThemePreset;
 }>(defaultContextValue);
 
-export const Theme = React.forwardRef<HTMLDivElement, ThemeProps>((props, ref) => {
-  const { className, children, preset, ...otherProps } = props;
+export const Theme = React.forwardRef<HTMLDivElement, ThemeProps>(
+  (props, ref) => {
+    const { className, children, preset, ...otherProps } = props;
 
-  const mods = {
-    ...preset,
-    color: preset.color.primary,
-  };
+    const [value, mods] = useMemo(() => {
+      return [
+        { theme: preset, themeClassNames: generateThemeClassNames(preset) },
+        {
+          ...preset,
+          color: preset.color.primary,
+        },
+      ];
+    }, [preset]);
 
-  const themeClassNames = generateThemeClassNames(preset);
-
-  return (
-    <ThemeContext.Provider value={{ theme: preset, themeClassNames }}>
-      <div {...otherProps} ref={ref} className={cnTheme(mods, [className])}>
-        {children}
-      </div>
-    </ThemeContext.Provider>
-  );
-});
+    return (
+      <ThemeContext.Provider value={value}>
+        <div {...otherProps} ref={ref} className={cnTheme(mods, [className])}>
+          {children}
+        </div>
+      </ThemeContext.Provider>
+    );
+  },
+);
 
 export function useTheme() {
   return useContext(ThemeContext);

@@ -1,8 +1,7 @@
-import * as React from 'react';
 import { act, fireEvent, render } from '@testing-library/react';
+import * as React from 'react';
 
 import { DatePicker, DatePickerProps } from '../DatePickerCanary';
-
 import {
   animateDelay,
   getDateTimeItem,
@@ -49,7 +48,10 @@ describe('Компонент DatePicker_type_date', () => {
       jest.useFakeTimers();
 
       act(() => {
-        renderComponent({ value: new Date(1970, 0, 15), currentVisibleDate: new Date(1970, 0) });
+        renderComponent({
+          value: new Date(1970, 0, 15),
+          currentVisibleDate: new Date(1970, 0),
+        });
       });
 
       inputFocus();

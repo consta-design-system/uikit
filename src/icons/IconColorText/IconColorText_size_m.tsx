@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function IconColorTextSizeM(props: React.SVGProps<SVGSVGElement>) {
+const IconColorTextSizeM = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 24 24" {...props}>
       <path
@@ -11,6 +11,6 @@ function IconColorTextSizeM(props: React.SVGProps<SVGSVGElement>) {
       <path d="M24 24v-4H0v4h24z" />
     </svg>
   );
-}
+};
 
 export default IconColorTextSizeM;

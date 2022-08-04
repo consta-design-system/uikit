@@ -1,5 +1,5 @@
-import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import React from 'react';
 
 import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconCamera } from '../../../icons/IconCamera/IconCamera';
@@ -46,7 +46,10 @@ const renderComponent = (props: {
   view?: ChoiceGroupProps['view'];
   form?: ChoiceGroupProps['form'];
   onlyIcon?: ChoiceGroupProps['onlyIcon'];
-  onChange?: (props: { e: React.ChangeEvent<HTMLInputElement>; value: Item | null }) => void;
+  onChange?: (props: {
+    e: React.ChangeEvent<HTMLInputElement>;
+    value: Item | null;
+  }) => void;
   disabled?: boolean;
   getDisabled?: (item: Item) => boolean | undefined;
 }) => {
@@ -55,20 +58,18 @@ const renderComponent = (props: {
   const handleChange = jest.fn();
 
   return render(
-    <>
-      <ChoiceGroup
-        {...otherProps}
-        items={items}
-        value={value}
-        multiple={false}
-        onChange={props.onChange || handleChange}
-        getLabel={(item) => `Name-${item.name}`}
-        getIcon={(item) => item.icon}
-        name={testId}
-        className={additionalClass}
-        data-testid={testId}
-      />
-    </>,
+    <ChoiceGroup
+      {...otherProps}
+      items={items}
+      value={value}
+      multiple={false}
+      onChange={props.onChange || handleChange}
+      getLabel={(item) => `Name-${item.name}`}
+      getIcon={(item) => item.icon}
+      name={testId}
+      className={additionalClass}
+      data-testid={testId}
+    />,
   );
 };
 
@@ -78,7 +79,10 @@ const renderComponentMultiple = (props: {
   view?: ChoiceGroupProps['view'];
   form?: ChoiceGroupProps['form'];
   onlyIcon?: ChoiceGroupProps['onlyIcon'];
-  onChange?: (props: { e: React.ChangeEvent<HTMLInputElement>; value: Item[] | null }) => void;
+  onChange?: (props: {
+    e: React.ChangeEvent<HTMLInputElement>;
+    value: Item[] | null;
+  }) => void;
   value?: Item[];
 }) => {
   const { items = elements, ...otherProps } = props;
@@ -86,20 +90,18 @@ const renderComponentMultiple = (props: {
   const handleChange = jest.fn();
 
   return render(
-    <>
-      <ChoiceGroup
-        {...otherProps}
-        items={items}
-        value={value}
-        multiple
-        onChange={props.onChange || handleChange}
-        getLabel={(item) => `Name-${item.name}`}
-        getIcon={(item) => item.icon}
-        name={testId}
-        className={additionalClass}
-        data-testid={testId}
-      />
-    </>,
+    <ChoiceGroup
+      {...otherProps}
+      items={items}
+      value={value}
+      multiple
+      onChange={props.onChange || handleChange}
+      getLabel={(item) => `Name-${item.name}`}
+      getIcon={(item) => item.icon}
+      name={testId}
+      className={additionalClass}
+      data-testid={testId}
+    />,
   );
 };
 
@@ -116,7 +118,9 @@ function getItem(index = 0) {
 }
 
 function getInputs() {
-  return getRender().querySelectorAll(`.${cnChoiceGroup('Input')}`) as NodeListOf<HTMLInputElement>;
+  return getRender().querySelectorAll(
+    `.${cnChoiceGroup('Input')}`,
+  ) as NodeListOf<HTMLInputElement>;
 }
 
 function getInput(index = 0) {
@@ -124,7 +128,9 @@ function getInput(index = 0) {
 }
 
 function getIcon(index = 0) {
-  return getRender().querySelectorAll(`.${cnChoiceGroup('Icon')}`)[index] as HTMLSpanElement;
+  return getRender().querySelectorAll(`.${cnChoiceGroup('Icon')}`)[
+    index
+  ] as HTMLSpanElement;
 }
 
 describe('Компонент ChoiceGroup', () => {
@@ -142,7 +148,9 @@ describe('Компонент ChoiceGroup', () => {
     describe('проверка value', () => {
       it(`выбранному элементу присвоился модификатор "_checked"`, () => {
         renderComponent({});
-        expect(getItem()).toHaveClass(cnChoiceGroup('Label', { checked: true }));
+        expect(getItem()).toHaveClass(
+          cnChoiceGroup('Label', { checked: true }),
+        );
       });
     });
     describe('проверка getLabel', () => {
@@ -246,7 +254,9 @@ describe('Компонент ChoiceGroup', () => {
         expect(handleChange).toHaveBeenCalled();
         expect(handleChange).toHaveBeenCalledTimes(1);
         expect(handleChange).toHaveBeenCalledWith(
-          expect.objectContaining({ value: [defaultValue, elements[elementIndex]] }),
+          expect.objectContaining({
+            value: [defaultValue, elements[elementIndex]],
+          }),
         );
       });
       it(`клик по выбраному элементу (всего выбран 1 элемент), должен вызвать callback c ожидаемыми параметрами`, () => {
@@ -260,13 +270,18 @@ describe('Компонент ChoiceGroup', () => {
 
         expect(handleChange).toHaveBeenCalled();
         expect(handleChange).toHaveBeenCalledTimes(1);
-        expect(handleChange).toHaveBeenCalledWith(expect.objectContaining({ value: null }));
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({ value: null }),
+        );
       });
       it(`клик по выбраному элементу (всего выбрано 2 элемента), должен вызвать callback c ожидаемыми параметрами`, () => {
         const handleChange = jest.fn();
         const elementIndex = 1;
 
-        renderComponentMultiple({ onChange: handleChange, value: [defaultValue, elements[1]] });
+        renderComponentMultiple({
+          onChange: handleChange,
+          value: [defaultValue, elements[1]],
+        });
 
         const item = getItem(elementIndex);
 
@@ -281,12 +296,16 @@ describe('Компонент ChoiceGroup', () => {
     });
 
     describe('проверка заблокированной группы элементов', () => {
-      it(`группе присваивается класс ${cnChoiceGroup({ disabled: true })}`, () => {
+      it(`группе присваивается класс ${cnChoiceGroup({
+        disabled: true,
+      })}`, () => {
         renderComponent({ disabled: true });
         expect(getRender()).toHaveClass(cnChoiceGroup({ disabled: true }));
       });
 
-      it(`всем лайблам присваивается класс ${cnChoiceGroup('Label', { disabled: true })}`, () => {
+      it(`всем лайблам присваивается класс ${cnChoiceGroup('Label', {
+        disabled: true,
+      })}`, () => {
         renderComponent({ disabled: true });
         getItems().forEach((label) => {
           expect(label).toHaveClass(cnChoiceGroup('Label', { disabled: true }));
@@ -335,9 +354,13 @@ describe('Компонент ChoiceGroup', () => {
         renderComponent({ items, getDisabled: (item) => item.disabled });
         items.forEach((el, i) => {
           if (el.disabled) {
-            expect(getItem(i)).toHaveClass(cnChoiceGroup('Label', { disabled: true }));
+            expect(getItem(i)).toHaveClass(
+              cnChoiceGroup('Label', { disabled: true }),
+            );
           } else {
-            expect(getItem(i)).not.toHaveClass(cnChoiceGroup('Label', { disabled: true }));
+            expect(getItem(i)).not.toHaveClass(
+              cnChoiceGroup('Label', { disabled: true }),
+            );
           }
         });
       });
@@ -355,12 +378,18 @@ describe('Компонент ChoiceGroup', () => {
 
       it('события обрабатываются только у разблокированных элементов', () => {
         const handleChange = jest.fn();
-        renderComponent({ items, getDisabled: (item) => item.disabled, onChange: handleChange });
+        renderComponent({
+          items,
+          getDisabled: (item) => item.disabled,
+          onChange: handleChange,
+        });
         getItems().forEach((label) => {
           fireEvent.click(label);
         });
         expect(handleChange).toHaveBeenCalled();
-        expect(handleChange).toHaveBeenCalledTimes(items.filter((el) => !el.disabled).length);
+        expect(handleChange).toHaveBeenCalledTimes(
+          items.filter((el) => !el.disabled).length,
+        );
       });
     });
   });

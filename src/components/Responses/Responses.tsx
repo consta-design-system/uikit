@@ -24,16 +24,29 @@ export type ResponsesProps = PropsWithHTMLAttributes<
 
 export const cnResponses = cn('Responses');
 
-export const Responses = React.forwardRef<HTMLDivElement, ResponsesProps>((props, ref) => {
-  const { className, title, description, size = responsesPropSizeDefault, image, actions } = props;
-  const Image = image;
+export const Responses = React.forwardRef<HTMLDivElement, ResponsesProps>(
+  (props, ref) => {
+    const {
+      className,
+      title,
+      description,
+      size = responsesPropSizeDefault,
+      image,
+      actions,
+    } = props;
+    const Image = image;
 
-  return (
-    <div className={cnResponses({ size }, [className])} ref={ref}>
-      <Image className={cnResponses('Image')} />
-      {title && <h1 className={cnResponses('Title')}>{title}</h1>}
-      {description && <p className={cnResponses('Description')}>{description}</p>}
-      {actions && <div className={cnResponses('ButtonsWrapper')}>{actions}</div>}
-    </div>
-  );
-});
+    return (
+      <div className={cnResponses({ size }, [className])} ref={ref}>
+        <Image className={cnResponses('Image')} />
+        {title && <h1 className={cnResponses('Title')}>{title}</h1>}
+        {description && (
+          <p className={cnResponses('Description')}>{description}</p>
+        )}
+        {actions && (
+          <div className={cnResponses('ButtonsWrapper')}>{actions}</div>
+        )}
+      </div>
+    );
+  },
+);

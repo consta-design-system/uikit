@@ -13,7 +13,11 @@ export const LayoutExampleAnchor = () => {
   const fixedRef = useRef(null);
 
   return (
-    <Layout direction="column" ref={scrollContainerRef} className={cnLayoutExampleAnchor()}>
+    <Layout
+      direction="column"
+      ref={scrollContainerRef}
+      className={cnLayoutExampleAnchor()}
+    >
       <Layout className={cnLayoutExampleAnchor('Header')}>
         <Text>Заголовок</Text>
       </Layout>

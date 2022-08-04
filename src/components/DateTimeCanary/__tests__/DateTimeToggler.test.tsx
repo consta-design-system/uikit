@@ -1,8 +1,7 @@
-import * as React from 'react';
 import { fireEvent, render } from '@testing-library/react';
+import * as React from 'react';
 
 import { DateTimeToggler } from '../DateTimeToggler/DateTimeToggler';
-
 import {
   getDateTimeTogglerLabel,
   getDateTimeTooglerButtonNext,

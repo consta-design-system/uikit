@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import * as React from 'react';
 
 import { Filters } from '../filtering';
 import { Table, TableProps as Props } from '../Table';
@@ -205,7 +205,9 @@ describe('Компонент Table', () => {
 
     describe('проверка обработчика клика по строке onRowClick', () => {
       it('onRowClick возвращает id текущей строки и имеет event', () => {
-        const onRowClick = jest.fn(({ id, e }: { id: string; e: React.MouseEvent }) => [id, e]);
+        const onRowClick = jest.fn(
+          ({ id, e }: { id: string; e: React.MouseEvent }) => [id, e],
+        );
         renderComponent({ ...defaultProps, onRowClick });
         const nodeRows = getRows();
         nodeRows.forEach((row) => {
@@ -230,7 +232,9 @@ describe('Компонент Table', () => {
     };
     describe('Компонент с выбором фильтра работает', () => {
       const root = renderComponent({ ...defaultProps });
-      const priceCell = screen.getByText(filterColumn.title, { selector: '.TableCell-Wrapper' });
+      const priceCell = screen.getByText(filterColumn.title, {
+        selector: '.TableCell-Wrapper',
+      });
       const buttonFilterPrice = priceCell.querySelector(
         '.TableCell-Wrapper .TableFilterTooltip-Button',
       );
@@ -282,13 +286,17 @@ describe('Компонент Table', () => {
       ] as Filters<Row>;
 
       renderComponent({ ...defaultProps, filters });
-      const priceCell = screen.getByText(filterColumn.title, { selector: '.TableCell-Wrapper' });
+      const priceCell = screen.getByText(filterColumn.title, {
+        selector: '.TableCell-Wrapper',
+      });
       const buttonFilterPrice = priceCell.querySelector(
         '.TableCell-Wrapper .TableFilterTooltip-Button',
       );
       fireEvent.click(buttonFilterPrice!);
       const options = screen.getAllByRole('option');
-      const correctFilters = filters.filter((f) => f.id && f.field).map((f) => f.name);
+      const correctFilters = filters
+        .filter((f) => f.id && f.field)
+        .map((f) => f.name);
       const optionsTexNodes = options.map((o) => o.textContent);
       expect(optionsTexNodes).toEqual(correctFilters);
     });
@@ -296,7 +304,9 @@ describe('Компонент Table', () => {
     it('Кнопка "Сбросить все фильтры" работает (вызывает onFiltersUpdate)', () => {
       const onFiltersUpdated = jest.fn(() => true);
       renderComponent({ ...defaultProps, onFiltersUpdated });
-      const priceCell = screen.getByText(filterColumn.title, { selector: '.TableCell-Wrapper' });
+      const priceCell = screen.getByText(filterColumn.title, {
+        selector: '.TableCell-Wrapper',
+      });
       const buttonFilterPrice = priceCell.querySelector(
         '.TableCell-Wrapper .TableFilterTooltip-Button',
       );

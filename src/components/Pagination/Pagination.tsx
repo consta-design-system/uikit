@@ -9,7 +9,6 @@ import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAt
 import { Button } from '../Button/Button';
 import { Text } from '../Text/Text';
 import { TextField, TextFieldOnChangeArguments } from '../TextField/TextField';
-
 import { getPaginationInfo } from './helpers';
 
 export const paginationForms = ['default', 'round', 'brick'] as const;
@@ -95,10 +94,8 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
   } = props;
 
   const currPage = currentPage + 1;
-  const { prevPage, nextPage, isStartDots, isEndDots, pages, isEmpty } = getPaginationInfo(
-    currPage,
-    totalPages,
-  );
+  const { prevPage, nextPage, isStartDots, isEndDots, pages, isEmpty } =
+    getPaginationInfo(currPage, totalPages);
   const [keys, setKeys] = React.useState<string[]>([]);
 
   const changePage = (page: number | null) => {
@@ -132,11 +129,16 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
   const keyDownListener: EventListener = (event) => {
     const { key } = event as KeyboardEvent;
 
-    if (hotkeys.nextPage.values.includes(key) || hotkeys.prevPage.values.includes(key)) {
+    if (
+      hotkeys.nextPage.values.includes(key) ||
+      hotkeys.prevPage.values.includes(key)
+    ) {
       const newKeys = [...keys, key];
       if (hotkeys.nextPage.values.every((hotKey) => newKeys.includes(hotKey))) {
         changePage(nextPage);
-      } else if (hotkeys.prevPage.values.every((hotKey) => newKeys.includes(hotKey))) {
+      } else if (
+        hotkeys.prevPage.values.every((hotKey) => newKeys.includes(hotKey))
+      ) {
         changePage(prevPage);
       }
       setKeys(newKeys);
@@ -160,7 +162,11 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
     (!isEmpty && (
       <nav
         className={cnPagination(
-          { form, size, position: minified ? paginationDefaultPosition : position },
+          {
+            form,
+            size,
+            position: minified ? paginationDefaultPosition : position,
+          },
           [className],
         )}
         ref={ref}
@@ -214,7 +220,9 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
             {pages.map((page) => (
               <Button
                 key={page}
-                className={cnPagination('Item', { isActive: currPage === page })}
+                className={cnPagination('Item', {
+                  isActive: currPage === page,
+                })}
                 style={{ width: itemWidth }}
                 label={page}
                 title={`${page}`}
@@ -236,7 +244,9 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
             )}
             {isEndDots && (
               <Button
-                className={cnPagination('Item', { isActive: currPage === totalPages })}
+                className={cnPagination('Item', {
+                  isActive: currPage === totalPages,
+                })}
                 style={{ width: itemWidth }}
                 label={totalPages}
                 title={`${totalPages}`}
@@ -256,7 +266,11 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
               value={currPage.toString()}
               onChange={handleChange}
             />
-            <Text size={size} view="linkMinor" className={cnPagination('Total')}>
+            <Text
+              size={size}
+              view="linkMinor"
+              className={cnPagination('Total')}
+            >
               {getLabel}
             </Text>
           </div>

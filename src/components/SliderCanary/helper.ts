@@ -2,7 +2,6 @@ import React from 'react';
 
 import { IconComponent } from '../../icons/Icon/Icon';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
-
 import { ActiveButton } from './useSlider/helper';
 
 export const propStatus = ['alert', 'warning', 'success'] as const;
@@ -18,7 +17,12 @@ export const defaultPropSize: PropSize = propSize[0];
 export type SliderValue<RANGE> = RANGE extends true ? [number, number] : number;
 
 export type PropOnChange<RANGE> = (prop: {
-  e?: Event | React.TouchEvent | React.MouseEvent | React.KeyboardEvent | React.ChangeEvent;
+  e?:
+    | Event
+    | React.TouchEvent
+    | React.MouseEvent
+    | React.KeyboardEvent
+    | React.ChangeEvent;
   value: SliderValue<RANGE>;
 }) => void;
 
@@ -92,15 +96,20 @@ export type SliderComponent = <RANGE extends boolean>(
   props: SliderProps<RANGE>,
 ) => React.ReactElement | null;
 
-export const isRangeParams = (params: Props<boolean>): params is Props<true> => {
+export const isRangeParams = (
+  params: Props<boolean>,
+): params is Props<true> => {
   return !!params.range;
 };
 
-export const isNotRangeParams = (params: Props<boolean>): params is Props<false> => {
+export const isNotRangeParams = (
+  params: Props<boolean>,
+): params is Props<false> => {
   return !params.range;
 };
 
-export const defaultTooltipFormatter: PropToolipFormatter = (value) => value?.toString() || '';
+export const defaultTooltipFormatter: PropToolipFormatter = (value) =>
+  value?.toString() || '';
 
 export type TrackPosition = {
   x: number;

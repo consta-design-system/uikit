@@ -1,11 +1,15 @@
-import * as React from 'react';
 import { act, fireEvent, render, screen } from '@testing-library/react';
+import * as React from 'react';
 
 import { cnIcon } from '../../../icons/Icon/Icon';
 import { IconAdd } from '../../../icons/IconAdd/IconAdd';
 import { cnSnackBar, SnackBar } from '../SnackBar';
 import { cnSnackBarItem } from '../SnackBarItem/SnackBarItem';
-import { SnackBarItemDefault, snackBarItemStatus, SnackBarProps } from '../types';
+import {
+  SnackBarItemDefault,
+  snackBarItemStatus,
+  SnackBarProps,
+} from '../types';
 
 const testId = cnSnackBar();
 
@@ -15,7 +19,9 @@ const items: SnackBarItemDefault[] = [
   },
 ];
 
-const renderComponent = (props: SnackBarProps<SnackBarItemDefault> = { items }) => {
+const renderComponent = (
+  props: SnackBarProps<SnackBarItemDefault> = { items },
+) => {
   return render(<SnackBar data-testid={testId} {...props} />);
 };
 
@@ -46,7 +52,7 @@ describe('Компонент SnackBar', () => {
       });
     });
     describe('проверка message', () => {
-      it(`отображает текст сообщения `, () => {
+      it(`отображает текст сообщения`, () => {
         const messageText = 'Сообщение';
         const items: SnackBarProps['items'] = [
           {
@@ -58,7 +64,9 @@ describe('Компонент SnackBar', () => {
         renderComponent({ items });
 
         const snackBar = screen.getByTestId(testId);
-        const message = snackBar.querySelector(`.${cnSnackBarItem('Message')}`) as HTMLDivElement;
+        const message = snackBar.querySelector(
+          `.${cnSnackBarItem('Message')}`,
+        ) as HTMLDivElement;
 
         expect(message.textContent).toEqual(messageText);
       });
@@ -76,7 +84,9 @@ describe('Компонент SnackBar', () => {
           renderComponent({ items });
 
           const snackBar = screen.getByTestId(testId);
-          const item = snackBar.querySelector(`.${cnSnackBarItem()}`) as HTMLDivElement;
+          const item = snackBar.querySelector(
+            `.${cnSnackBarItem()}`,
+          ) as HTMLDivElement;
           expect(item).toHaveClass(cnSnackBarItem({ status }));
         });
       });
@@ -93,7 +103,9 @@ describe('Компонент SnackBar', () => {
         renderComponent({ items });
 
         const snackBar = screen.getByTestId(testId);
-        const icon = snackBar.querySelector(`.${cnSnackBarItem('Icon')}`) as HTMLSpanElement;
+        const icon = snackBar.querySelector(
+          `.${cnSnackBarItem('Icon')}`,
+        ) as HTMLSpanElement;
 
         expect(icon).toHaveClass(cnIcon());
       });
@@ -116,7 +128,9 @@ describe('Компонент SnackBar', () => {
         renderComponent({ items });
 
         const snackBar = screen.getByTestId(testId);
-        const actionButton = snackBar.querySelector('.SnackBarActionButton') as HTMLButtonElement;
+        const actionButton = snackBar.querySelector(
+          '.SnackBarActionButton',
+        ) as HTMLButtonElement;
 
         expect(actionButton.textContent).toEqual(actionLabel);
       });
@@ -124,7 +138,9 @@ describe('Компонент SnackBar', () => {
         renderComponent({ items });
 
         const snackBar = screen.getByTestId(testId);
-        const actionButton = snackBar.querySelector('.SnackBarActionButton') as HTMLButtonElement;
+        const actionButton = snackBar.querySelector(
+          '.SnackBarActionButton',
+        ) as HTMLButtonElement;
 
         fireEvent.click(actionButton);
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function CardImage(props: React.SVGProps<SVGSVGElement>) {
+const CardImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <path
@@ -18,8 +18,24 @@ function CardImage(props: React.SVGProps<SVGSVGElement>) {
         fillOpacity={0.08}
         d="M44 45h40v3H44zM44 63h40v3H44zM44 54h40v3H44zM44 72h40v3H44z"
       />
-      <rect x={66} y={83} width={18} height={7} rx={2} fill="#002033" fillOpacity={0.08} />
-      <rect x={44} y={83} width={18} height={7} rx={2} fill="#002033" fillOpacity={0.08} />
+      <rect
+        x={66}
+        y={83}
+        width={18}
+        height={7}
+        rx={2}
+        fill="#002033"
+        fillOpacity={0.08}
+      />
+      <rect
+        x={44}
+        y={83}
+        width={18}
+        height={7}
+        rx={2}
+        fill="#002033"
+        fillOpacity={0.08}
+      />
       <path
         d="M156 46c-3.584 0-6.361-11.17-10.602-11.023-4.588.16-6.663 7.742-9.894 7.742-4.493 0-7.169-12.7-11.409-12.719-4.241-.019-5.604 15.484-9.39 15.484-1.868 0-3.585-4.83-5.705-4.83"
         stroke="#DEE4E8"
@@ -31,6 +47,6 @@ function CardImage(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default CardImage;

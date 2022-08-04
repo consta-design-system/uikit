@@ -29,12 +29,17 @@ function getThemeByName(themeName: ThemeName): ThemePreset {
 
 const cnStoryBookRootDecorator = cn('StoryBookRootDecorator');
 
-export const StoryBookRootDecorator: React.FC<StoryBookRootDecoratorProps> = (props) => {
+export const StoryBookRootDecorator: React.FC<StoryBookRootDecoratorProps> = (
+  props,
+) => {
   const { children, themeName, className } = props;
   const content = (
     <Theme
       preset={getThemeByName(themeName)}
-      className={cnStoryBookRootDecorator(null, ['theme_gap_medium', className])}
+      className={cnStoryBookRootDecorator(null, [
+        'theme_gap_medium',
+        className,
+      ])}
     >
       {children}
     </Theme>

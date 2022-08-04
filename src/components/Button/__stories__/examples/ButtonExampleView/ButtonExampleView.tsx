@@ -13,9 +13,13 @@ import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsE
 import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Button } from '../../../Button';
 
-export function ButtonExampleViewPrimary() {
+export const ButtonExampleViewPrimary = () => {
   return (
-    <div className={cnDocsDecorator('Section', [wp.decorator({ distribute: 'left' })])}>
+    <div
+      className={cnDocsDecorator('Section', [
+        wp.decorator({ distribute: 'left' }),
+      ])}
+    >
       <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>
         <Button label="Войти" />
       </div>
@@ -27,11 +31,15 @@ export function ButtonExampleViewPrimary() {
       </div>
     </div>
   );
-}
+};
 
-export function ButtonExampleViewSecondary() {
+export const ButtonExampleViewSecondary = () => {
   return (
-    <div className={cnDocsDecorator('Section', [wp.decorator({ distribute: 'left' })])}>
+    <div
+      className={cnDocsDecorator('Section', [
+        wp.decorator({ distribute: 'left' }),
+      ])}
+    >
       <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>
         <Button view="secondary" label="Читать далее" />
       </div>
@@ -39,15 +47,24 @@ export function ButtonExampleViewSecondary() {
         <Button view="secondary" label="Комментировать" iconLeft={IconChat} />
       </div>
       <div className={cnDocsExample()}>
-        <Button view="secondary" label="Редактировать" iconRight={IconEdit} onlyIcon />
+        <Button
+          view="secondary"
+          label="Редактировать"
+          iconRight={IconEdit}
+          onlyIcon
+        />
       </div>
     </div>
   );
-}
+};
 
-export function ButtonExampleViewGhost() {
+export const ButtonExampleViewGhost = () => {
   return (
-    <div className={cnDocsDecorator('Section', [wp.decorator({ distribute: 'left' })])}>
+    <div
+      className={cnDocsDecorator('Section', [
+        wp.decorator({ distribute: 'left' }),
+      ])}
+    >
       <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>
         <Button view="ghost" label="Отмена" />
       </div>
@@ -59,11 +76,15 @@ export function ButtonExampleViewGhost() {
       </div>
     </div>
   );
-}
+};
 
-export function ButtonExampleViewClear() {
+export const ButtonExampleViewClear = () => {
   return (
-    <div className={cnDocsDecorator('Section', [wp.decorator({ distribute: 'left' })])}>
+    <div
+      className={cnDocsDecorator('Section', [
+        wp.decorator({ distribute: 'left' }),
+      ])}
+    >
       <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>
         <Button view="clear" label="Развернуть" />
       </div>
@@ -71,15 +92,24 @@ export function ButtonExampleViewClear() {
         <Button view="clear" label="Скопировать" iconLeft={IconCopy} />
       </div>
       <div className={cnDocsExample()}>
-        <Button view="clear" label="Добавить в Избранное" iconLeft={IconBookmarkStroked} onlyIcon />
+        <Button
+          view="clear"
+          label="Добавить в Избранное"
+          iconLeft={IconBookmarkStroked}
+          onlyIcon
+        />
       </div>
     </div>
   );
-}
+};
 
-export function ButtonExampleViewDisabled() {
+export const ButtonExampleViewDisabled = () => {
   return (
-    <div className={cnDocsDecorator('Section', [wp.decorator({ distribute: 'left' })])}>
+    <div
+      className={cnDocsDecorator('Section', [
+        wp.decorator({ distribute: 'left' }),
+      ])}
+    >
       <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>
         <Button disabled label="Войти" />
       </div>
@@ -91,4 +121,4 @@ export function ButtonExampleViewDisabled() {
       </div>
     </div>
   );
-}
+};

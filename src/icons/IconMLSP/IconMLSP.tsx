@@ -1,5 +1,4 @@
 import { createIcon } from '../createIcon/createIcon';
-
 import IconMLSPSizeM from './IconMLSP_size_m';
 
 export const IconMLSP = createIcon({

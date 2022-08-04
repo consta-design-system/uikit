@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { Tooltip, TooltipProps as TooltipComponentProps } from '../../components/Tooltip/Tooltip';
+import {
+  Tooltip,
+  TooltipProps as TooltipComponentProps,
+} from '../../components/Tooltip/Tooltip';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 
 export const withTooltipPropMode = ['mouseover', 'click'] as const;
@@ -31,7 +34,9 @@ type ClearTooltip = {
 
 type ClearTooltipRef = React.MutableRefObject<ClearTooltip>;
 
-export type WithTooltipProps<Props> = Omit<Props, 'tooltipProps'> & { tooltipProps?: TooltipProps };
+export type WithTooltipProps<Props> = Omit<Props, 'tooltipProps'> & {
+  tooltipProps?: TooltipProps;
+};
 
 const closeFunctions: ClearTooltipRef[] = [];
 // функция которая закроет все тултипы на странице кроме текущего с которым взаимодействует пользователь
@@ -61,137 +66,157 @@ function clearTooltips(currentRef: ClearTooltipRef, removeCurrent?: boolean) {
 }
 
 export function withTooltip(hocProps?: TooltipProps) {
-  return function<
+  return function <
     COMPONENT_TYPE extends
       | React.ComponentType<React.PropsWithRef<ComponentProps>>
       | ((props: ComponentProps) => React.ReactElement | null),
-    COMPONENT_PROPS extends ComponentProps
+    COMPONENT_PROPS extends ComponentProps,
   >(Component: COMPONENT_TYPE) {
-    return (React.forwardRef<HTMLElement, WithTooltipProps<COMPONENT_PROPS>>((props, ref) => {
-      const { tooltipProps: tooltipPropsFromComponent = {}, ...componentProps } = props;
-      const tooltipProps: TooltipProps = { ...hocProps, ...tooltipPropsFromComponent };
-      const {
-        mode = 'mouseover',
-        content,
-        closeOnClickOutside = true,
-        appearTimeout = appearTimeoutDefault,
-        exitTimeout = exitTimeoutDefault,
-        style,
-        ...otherTooltipProps
-      } = tooltipProps;
+    return React.forwardRef<HTMLElement, WithTooltipProps<COMPONENT_PROPS>>(
+      (props, ref) => {
+        const {
+          tooltipProps: tooltipPropsFromComponent = {},
+          ...componentProps
+        } = props;
+        const tooltipProps: TooltipProps = {
+          ...hocProps,
+          ...tooltipPropsFromComponent,
+        };
+        const {
+          mode = 'mouseover',
+          content,
+          closeOnClickOutside = true,
+          appearTimeout = appearTimeoutDefault,
+          exitTimeout = exitTimeoutDefault,
+          style,
+          ...otherTooltipProps
+        } = tooltipProps;
 
-      const [visible, setVisible] = useState<boolean>(false);
-      const componentRef = useRef<HTMLElement | null>(null);
-      const tooltipRef = useRef<HTMLDivElement | null>(null);
-      const clearRef = useRef<ClearTooltip>({});
+        const [visible, setVisible] = useState<boolean>(false);
+        const componentRef = useRef<HTMLElement | null>(null);
+        const tooltipRef = useRef<HTMLDivElement | null>(null);
+        const clearRef = useRef<ClearTooltip>({});
 
-      const clearTimer = () => {
-        if (clearRef.current.timer) {
-          clearTimeout(clearRef.current.timer);
-        }
-      };
+        const clearTimer = () => {
+          if (clearRef.current.timer) {
+            clearTimeout(clearRef.current.timer);
+          }
+        };
 
-      const setExitTimer = () => {
-        if (mode === 'mouseover' && visible) {
-          clearRef.current.timer = setTimeout(() => setVisible(false), exitTimeout);
-        }
-      };
+        const setExitTimer = () => {
+          if (mode === 'mouseover' && visible) {
+            clearRef.current.timer = setTimeout(
+              () => setVisible(false),
+              exitTimeout,
+            );
+          }
+        };
 
-      const setAppearTimer = () => {
-        if (mode === 'mouseover' && !visible) {
-          clearRef.current.timer = setTimeout(() => setVisible(true), appearTimeout);
-        }
-      };
+        const setAppearTimer = () => {
+          if (mode === 'mouseover' && !visible) {
+            clearRef.current.timer = setTimeout(
+              () => setVisible(true),
+              appearTimeout,
+            );
+          }
+        };
 
-      useEffect(() => {
-        // очищаем ссылку в clearTooltips при размонтировании компонента
-        return () => clearTooltips(clearRef, true);
-      }, []);
+        useEffect(() => {
+          // очищаем ссылку в clearTooltips при размонтировании компонента
+          return () => clearTooltips(clearRef, true);
+        }, []);
 
-      useEffect(() => {
-        if (visible) {
-          clearRef.current.closeFunction = () => setVisible(false);
-          clearTooltips(clearRef);
-        }
-      }, [visible]);
+        useEffect(() => {
+          if (visible) {
+            clearRef.current.closeFunction = () => setVisible(false);
+            clearTooltips(clearRef);
+          }
+        }, [visible]);
 
-      const onClick = (e: React.MouseEvent) => {
-        if (mode === 'click') {
-          setVisible(!visible);
-        }
-        if (props.onClick) {
-          props?.onClick(e);
-        }
-      };
+        const onClick = (e: React.MouseEvent) => {
+          if (mode === 'click') {
+            setVisible(!visible);
+          }
+          if (props.onClick) {
+            props?.onClick(e);
+          }
+        };
 
-      const onClickOutside = () => {
-        if (mode === 'click' && closeOnClickOutside) {
-          setVisible(false);
-        }
-      };
+        const onClickOutside = () => {
+          if (mode === 'click' && closeOnClickOutside) {
+            setVisible(false);
+          }
+        };
 
-      const onMouseEnter = (e: React.MouseEvent) => {
-        if (mode === 'mouseover') {
+        const onMouseEnter = (e: React.MouseEvent) => {
+          if (mode === 'mouseover') {
+            clearTimer();
+            setAppearTimer();
+          }
+
+          if (props.onMouseEnter) {
+            props.onMouseEnter(e);
+          }
+        };
+
+        const onMouseLeave = (e: React.MouseEvent) => {
           clearTimer();
-          setAppearTimer();
-        }
+          setExitTimer();
+          if (props.onMouseLeave) {
+            props.onMouseLeave(e);
+          }
+        };
 
-        if (props.onMouseEnter) {
-          props.onMouseEnter(e);
-        }
-      };
+        const tooltipOnMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+          clearTimer();
+          if (otherTooltipProps.onMouseEnter) {
+            otherTooltipProps.onMouseEnter(e);
+          }
+        };
 
-      const onMouseLeave = (e: React.MouseEvent) => {
-        clearTimer();
-        setExitTimer();
-        if (props.onMouseLeave) {
-          props.onMouseLeave(e);
-        }
-      };
+        const tooltipOnMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+          clearTimer();
+          setExitTimer();
+          if (otherTooltipProps.onMouseLeave) {
+            otherTooltipProps.onMouseLeave(e);
+          }
+        };
 
-      const tooltipOnMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
-        clearTimer();
-        if (otherTooltipProps.onMouseEnter) {
-          otherTooltipProps.onMouseEnter(e);
-        }
-      };
+        const Anchor = Component as React.ComponentType<COMPONENT_PROPS>;
 
-      const tooltipOnMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-        clearTimer();
-        setExitTimer();
-        if (otherTooltipProps.onMouseLeave) {
-          otherTooltipProps.onMouseLeave(e);
-        }
-      };
-
-      const Anchor = Component as React.ComponentType<COMPONENT_PROPS>;
-
-      return (
-        <>
-          <Anchor
-            {...(componentProps as COMPONENT_PROPS)}
-            onClick={onClick}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-            ref={useForkRef([componentRef, ref])}
-            style={style}
-          />
-          {visible && (
-            <Tooltip
-              {...otherTooltipProps}
-              ref={tooltipRef}
-              anchorRef={componentRef}
-              onClickOutside={onClickOutside}
-              onMouseEnter={tooltipOnMouseEnter}
-              onMouseLeave={tooltipOnMouseLeave}
-              style={typeof style?.zIndex === 'number' ? { zIndex: style.zIndex + 1 } : undefined}
-            >
-              {content}
-            </Tooltip>
-          )}
-        </>
-      );
-      // привел к типам, так как прокинутый компонент может иметь джененрики и они потеряются за хоком
-    }) as unknown) as COMPONENT_TYPE | React.ComponentType<WithTooltipProps<COMPONENT_PROPS>>;
+        return (
+          <>
+            <Anchor
+              {...(componentProps as COMPONENT_PROPS)}
+              onClick={onClick}
+              onMouseEnter={onMouseEnter}
+              onMouseLeave={onMouseLeave}
+              ref={useForkRef([componentRef, ref])}
+              style={style}
+            />
+            {visible && (
+              <Tooltip
+                {...otherTooltipProps}
+                ref={tooltipRef}
+                anchorRef={componentRef}
+                onClickOutside={onClickOutside}
+                onMouseEnter={tooltipOnMouseEnter}
+                onMouseLeave={tooltipOnMouseLeave}
+                style={
+                  typeof style?.zIndex === 'number'
+                    ? { zIndex: style.zIndex + 1 }
+                    : undefined
+                }
+              >
+                {content}
+              </Tooltip>
+            )}
+          </>
+        );
+        // привел к типам, так как прокинутый компонент может иметь джененрики и они потеряются за хоком
+      },
+    ) as unknown as
+      | COMPONENT_TYPE
+      | React.ComponentType<WithTooltipProps<COMPONENT_PROPS>>;
   };
 }

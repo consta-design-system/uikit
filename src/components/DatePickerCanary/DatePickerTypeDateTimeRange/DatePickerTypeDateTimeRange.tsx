@@ -1,5 +1,5 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import startOfMonth from 'date-fns/startOfMonth';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 
 import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
 import { useFlag } from '../../../hooks/useFlag/useFlag';
@@ -12,8 +12,8 @@ import { DatePickerFieldTypeDateTimeRange } from '../DatePickerFieldTypeDateTime
 import { DatePickerTypeComponent, normalizeRangeValue } from '../helpers';
 import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 
-export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-range'> = forwardRef(
-  (props, ref) => {
+export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-range'> =
+  forwardRef((props, ref) => {
     const {
       events,
       dateTimeView,
@@ -46,17 +46,25 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
     const endFieldInputRef = useRef<HTMLInputElement>(null);
     const calendarRef = useRef<HTMLDivElement>(null);
 
-    const [fieldFocused, setFieldFocused] = useState<'start' | 'end' | false>(false);
+    const [fieldFocused, setFieldFocused] = useState<'start' | 'end' | false>(
+      false,
+    );
 
     const startFocused = fieldFocused === 'start';
     const endFocused = fieldFocused === 'end';
 
     const hadleChange: DatePickerDropdownPropOnChange = ({ e, value }) => {
       if (startFocused) {
-        props.onChange?.({ e, value: normalizeRangeValue([value, props?.value?.[1]]) });
+        props.onChange?.({
+          e,
+          value: normalizeRangeValue([value, props?.value?.[1]]),
+        });
       }
       if (endFocused) {
-        props.onChange?.({ e, value: normalizeRangeValue([props?.value?.[0], value]) });
+        props.onChange?.({
+          e,
+          value: normalizeRangeValue([props?.value?.[0], value]),
+        });
       }
     };
 
@@ -135,8 +143,14 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
           ref={ref}
           startFieldRef={startFieldRef}
           endFieldRef={endFieldRef}
-          startFieldInputRef={useForkRef([startFieldInputRef, startFieldInputRefProp])}
-          endFieldInputRef={useForkRef([endFieldInputRef, endFieldInputRefProp])}
+          startFieldInputRef={useForkRef([
+            startFieldInputRef,
+            startFieldInputRefProp,
+          ])}
+          endFieldInputRef={useForkRef([
+            endFieldInputRef,
+            endFieldInputRefProp,
+          ])}
           startFieldOnFocus={startFieldOnFocusHandler}
           endFieldOnFocus={endFieldOnFocusHandler}
           startFieldRightSide={startFieldRightSide}
@@ -165,9 +179,10 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
           form={dropdownForm}
           onChange={hadleChange}
           renderAdditionalControls={renderAdditionalControls}
-          zIndex={typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined}
+          zIndex={
+            typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined
+          }
         />
       </>
     );
-  },
-);
+  });

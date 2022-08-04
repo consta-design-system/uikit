@@ -62,15 +62,22 @@ export const TableTextFilter: React.FC<TableTextFilterProps> = ({
     setCheckboxGroupValue(filteredItems);
   };
 
-  const isAllSelected = useMemo(() => filteredItems.length === checkboxGroupValue?.length, [
-    filteredItems,
-    checkboxGroupValue,
-  ]);
+  const isAllSelected = useMemo(
+    () => filteredItems.length === checkboxGroupValue?.length,
+    [filteredItems, checkboxGroupValue],
+  );
 
-  const isSelected = useMemo(() => checkboxGroupValue?.length, [checkboxGroupValue]);
+  const isSelected = useMemo(
+    () => checkboxGroupValue?.length,
+    [checkboxGroupValue],
+  );
 
   return (
-    <TableFilterContainer title={title} onCancel={onCancel} onConfirm={confirmHandler}>
+    <TableFilterContainer
+      title={title}
+      onCancel={onCancel}
+      onConfirm={confirmHandler}
+    >
       {withSearch && (
         <TextField
           value={searchValue}

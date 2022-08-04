@@ -1,5 +1,11 @@
+import {
+  act,
+  fireEvent,
+  render,
+  RenderResult,
+  screen,
+} from '@testing-library/react';
 import * as React from 'react';
-import { act, fireEvent, render, RenderResult, screen } from '@testing-library/react';
 
 import { cnSelect } from '../../SelectComponentsDeprecated/cnSelect';
 import { cnSelectItem } from '../../SelectComponentsDeprecated/SelectItem/SelectItem';
@@ -31,7 +37,9 @@ const defaultProps = {
   ariaLabel: 'test-select',
 };
 
-const renderComponent = (props: SimpleSelectProps<SelectOption> = defaultProps): RenderResult => {
+const renderComponent = (
+  props: SimpleSelectProps<SelectOption> = defaultProps,
+): RenderResult => {
   const { options, onChange, value, getOptionLabel, ...restProps } = props;
   return render(
     <>
@@ -55,7 +63,9 @@ function getRender() {
   return screen.getByTestId(testId);
 }
 function getIndicatorsDropdown() {
-  return getRender().querySelector(`.${cnSelect('IndicatorsDropdown')}`) as HTMLElement;
+  return getRender().querySelector(
+    `.${cnSelect('IndicatorsDropdown')}`,
+  ) as HTMLElement;
 }
 function getOutside() {
   return screen.getByTestId('outside');
@@ -176,7 +186,9 @@ describe('Компонент BasicSelect', () => {
 
     expect(handleChange).toHaveBeenCalled();
     expect(handleChange).toHaveBeenCalledTimes(1);
-    expect(handleChange).toHaveBeenCalledWith(expect.objectContaining(items[elementIndex]));
+    expect(handleChange).toHaveBeenCalledWith(
+      expect.objectContaining(items[elementIndex]),
+    );
   });
 
   it('вызывается onFocus', () => {

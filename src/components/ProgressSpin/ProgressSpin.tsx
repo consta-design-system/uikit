@@ -9,7 +9,8 @@ import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttribut
 
 export const progressSpinPropSize = ['m', 's', 'l', 'xl', '2xl'] as const;
 export type ProgressSpinPropSize = typeof progressSpinPropSize[number];
-export const progressSpinPropSizeDefault: ProgressSpinPropSize = progressSpinPropSize[0];
+export const progressSpinPropSizeDefault: ProgressSpinPropSize =
+  progressSpinPropSize[0];
 
 type Props = {
   size?: ProgressSpinPropSize;
@@ -38,7 +39,9 @@ const strokeWidthMap: Record<ProgressSpinPropSize, number> = {
   '2xl': 3.5,
 };
 
-function getSvgParamsBySize(size: ProgressSpinPropSize): [number, number, number, number] {
+function getSvgParamsBySize(
+  size: ProgressSpinPropSize,
+): [number, number, number, number] {
   const sizeOfPixels = getByMap(sizeMap, size);
   const strokeWidth = getByMap(strokeWidthMap, size);
   const radius = (sizeOfPixels - strokeWidth) / 2;
@@ -47,40 +50,43 @@ function getSvgParamsBySize(size: ProgressSpinPropSize): [number, number, number
   return [sizeOfPixels, strokeWidth, radius, strokeDasharray];
 }
 
-export const ProgressSpin = React.forwardRef<SVGSVGElement, ProgressSpinProps>((props, ref) => {
-  const {
-    size = progressSpinPropSizeDefault,
-    progress,
-    animation,
-    className,
-    ...otherProps
-  } = props;
-  const [sizeOfPixels, strokeWidth, radius, strokeDasharray] = useMemo(
-    () => getSvgParamsBySize(size),
-    [size],
-  );
+export const ProgressSpin = React.forwardRef<SVGSVGElement, ProgressSpinProps>(
+  (props, ref) => {
+    const {
+      size = progressSpinPropSizeDefault,
+      progress,
+      animation,
+      className,
+      ...otherProps
+    } = props;
+    const [sizeOfPixels, strokeWidth, radius, strokeDasharray] = useMemo(
+      () => getSvgParamsBySize(size),
+      [size],
+    );
 
-  const animatedProgress = isNumber(progress) ? progress : 50;
-  const strokeDashoffset = strokeDasharray - (strokeDasharray * animatedProgress) / 100;
+    const animatedProgress = isNumber(progress) ? progress : 50;
+    const strokeDashoffset =
+      strokeDasharray - (strokeDasharray * animatedProgress) / 100;
 
-  return (
-    <svg
-      {...otherProps}
-      className={cnProgressSpin({ spin: !isNumber(progress) }, [className])}
-      width={sizeOfPixels}
-      height={sizeOfPixels}
-      viewBox={`0 0 ${sizeOfPixels} ${sizeOfPixels}`}
-      ref={ref}
-    >
-      <circle
-        className={cnProgressSpin('Circle', { animation })}
-        cx={sizeOfPixels / 2}
-        cy={sizeOfPixels / 2}
-        r={radius}
-        strokeWidth={strokeWidth}
-        strokeDasharray={strokeDasharray}
-        strokeDashoffset={strokeDashoffset}
-      />
-    </svg>
-  );
-});
+    return (
+      <svg
+        {...otherProps}
+        className={cnProgressSpin({ spin: !isNumber(progress) }, [className])}
+        width={sizeOfPixels}
+        height={sizeOfPixels}
+        viewBox={`0 0 ${sizeOfPixels} ${sizeOfPixels}`}
+        ref={ref}
+      >
+        <circle
+          className={cnProgressSpin('Circle', { animation })}
+          cx={sizeOfPixels / 2}
+          cy={sizeOfPixels / 2}
+          r={radius}
+          strokeWidth={strokeWidth}
+          strokeDasharray={strokeDasharray}
+          strokeDashoffset={strokeDashoffset}
+        />
+      </svg>
+    );
+  },
+);

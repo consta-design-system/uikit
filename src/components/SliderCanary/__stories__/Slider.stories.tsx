@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
 import { array, boolean, number, select, text } from '@storybook/addon-knobs';
+import React, { useEffect, useState } from 'react';
 
 import { IconSettings } from '../../../icons/IconSettings/IconSettings';
 import { createMetadata } from '../../../utils/storybook';
 import { defaultPropSize, propSize, propStatus } from '../helper';
 import { Slider } from '../SliderCanary';
-
 import mdx from './Slider.docs.mdx';
 
 const defaultKnobs = () => ({
@@ -32,7 +31,7 @@ const leftSideMap = {
   input: 'input',
 } as const;
 
-export function Playground() {
+export const Playground = () => {
   const {
     view,
     disabled,
@@ -51,7 +50,9 @@ export function Playground() {
     range,
     withFormatter,
   } = defaultKnobs();
-  const [value, setValue] = useState<number | [number, number]>(range ? [10, 40] : 50);
+  const [value, setValue] = useState<number | [number, number]>(
+    range ? [10, 40] : 50,
+  );
   const [stepValue, setStepValue] = useState<number | number[]>(step);
 
   useEffect(() => {
@@ -88,7 +89,7 @@ export function Playground() {
       onChange={({ value }) => setValue(value)}
     />
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Базовые/Slider(Canary)',

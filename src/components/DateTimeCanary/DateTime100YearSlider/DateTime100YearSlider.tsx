@@ -1,8 +1,8 @@
 import './DateTime100YearSlider.css';
 
-import React from 'react';
 import { addYears, format, getDecade, Locale } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
+import React from 'react';
 
 import { range } from '../../../utils/array';
 import { cn } from '../../../utils/bem';
@@ -29,9 +29,14 @@ const isCurrentVisibleCentury = (currentDate: Date, century: Date) =>
   getCentury(currentDate) === getCentury(century);
 
 const isCurrentVisibleDecade = (currentDate: Date, decade: Date) =>
-  isCurrentVisibleCentury(currentDate, decade) && getDecade(currentDate) === getDecade(decade);
+  isCurrentVisibleCentury(currentDate, decade) &&
+  getDecade(currentDate) === getDecade(decade);
 
-const getCenturyItems = (currentVisibleDate: Date, decade: Date, locale: Locale) =>
+const getCenturyItems = (
+  currentVisibleDate: Date,
+  decade: Date,
+  locale: Locale,
+) =>
   range(10).map((year) => {
     const yearDate = addYears(decade, year * 10);
 
@@ -55,7 +60,11 @@ const getSliderData = (
     addYears(currentCentury, 100),
     addYears(currentCentury, 200),
   ].map((date) => ({
-    label: `${format(date, 'yyyy', { locale })}-${format(addYears(date, 100), 'yyyy', { locale })}`,
+    label: `${format(date, 'yyyy', { locale })}-${format(
+      addYears(date, 100),
+      'yyyy',
+      { locale },
+    )}`,
     date,
     items: getCenturyItems(currentVisibleDate, date, locale),
     current: isCurrentVisibleCentury(currentVisibleDate, date),
@@ -63,7 +72,9 @@ const getSliderData = (
   }));
 };
 
-export const DateTime100YearSlider: React.FC<DateTime100YearSliderProps> = (props) => {
+export const DateTime100YearSlider: React.FC<DateTime100YearSliderProps> = (
+  props,
+) => {
   const {
     currentVisibleDate,
     className,

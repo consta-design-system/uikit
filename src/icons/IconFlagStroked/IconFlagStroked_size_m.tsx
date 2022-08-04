@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function IconFlagStrokedSizeM(props: React.SVGProps<SVGSVGElement>) {
+const IconFlagStrokedSizeM = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 24 24" {...props}>
       <path
@@ -10,6 +10,6 @@ function IconFlagStrokedSizeM(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default IconFlagStrokedSizeM;

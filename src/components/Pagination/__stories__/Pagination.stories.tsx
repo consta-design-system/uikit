@@ -1,7 +1,7 @@
 import './Pagination.stories.css';
 
-import React from 'react';
 import { boolean, number, select } from '@storybook/addon-knobs';
+import React from 'react';
 
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
@@ -17,7 +17,6 @@ import {
   paginationSizes,
   paginationTypes,
 } from '../Pagination';
-
 import mdx from './Pagination.docs.mdx';
 
 const cnPaginationStories = cn('PaginationStories');
@@ -29,7 +28,7 @@ const defaultKnobs = () => ({
   type: select('type', paginationTypes, paginationDefaultType),
 });
 
-export function Playground() {
+export const Playground = () => {
   const [currentPage, setCurrentPage] = React.useState<number>(0);
   const { pages, form, size, type } = defaultKnobs();
   const minifiedProp = boolean('minified', false);
@@ -67,7 +66,7 @@ export function Playground() {
       />
     </div>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Навигация/Pagination',

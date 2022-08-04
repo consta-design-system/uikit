@@ -25,11 +25,19 @@ export const propPositionDefault: PropPosition = propPosition[0];
 
 export type PropGetItemLabel<ITEM> = (item: ITEM) => string | undefined;
 export type PropGetItemKey<ITEM> = (item: ITEM) => string | number;
-export type PropGetItemTooltipContent<ITEM> = (item: ITEM) => string | undefined;
-export type PropGetItemLineStatus<ITEM> = (item: ITEM) => PropStatus | undefined;
-export type PropGetItemPoint<ITEM> = (item: ITEM) => PointNumbersMap | IconComponent | undefined;
+export type PropGetItemTooltipContent<ITEM> = (
+  item: ITEM,
+) => string | undefined;
+export type PropGetItemLineStatus<ITEM> = (
+  item: ITEM,
+) => PropStatus | undefined;
+export type PropGetItemPoint<ITEM> = (
+  item: ITEM,
+) => PointNumbersMap | IconComponent | undefined;
 export type PropGetItemProgress<ITEM> = (item: ITEM) => boolean | undefined;
-export type PropGetItemContent<ITEM> = (item: ITEM) => React.ReactNode | undefined;
+export type PropGetItemContent<ITEM> = (
+  item: ITEM,
+) => React.ReactNode | undefined;
 export type PropGetItemStatus<ITEM> = (item: ITEM) => PropStatus | undefined;
 export type PropGetItemOnClick<ITEM> = (
   item: ITEM,
@@ -51,25 +59,32 @@ export type Line = {
   size: number;
 };
 
-export type ProgressStepBarProps<ITEM = DefaultItem> = PropsWithHTMLAttributesAndRef<
-  {
-    steps: ITEM[];
-    direction?: PropDirection;
-    size?: PropSize;
-    activeStepIndex?: number;
-    onItemClick?: (props: { e: React.MouseEvent; item: ITEM; index: number }) => void;
-    getItemLabel?: PropGetItemLabel<ITEM>;
-    getItemLineStatus?: PropGetItemLineStatus<ITEM>;
-    getItemTooltipContent?: PropGetItemTooltipContent<ITEM>;
-    getItemPoint?: PropGetItemPoint<ITEM>;
-    getItemProgress?: PropGetItemProgress<ITEM>;
-    getItemContent?: PropGetItemContent<ITEM>;
-    getItemStatus?: PropGetItemStatus<ITEM>;
-    getItemOnClick?: PropGetItemOnClick<ITEM>;
-  },
-  HTMLDivElement
-> &
-  (ITEM extends { label: DefaultItem['label'] } ? {} : { getItemLabel: PropGetItemLabel<ITEM> });
+export type ProgressStepBarProps<ITEM = DefaultItem> =
+  PropsWithHTMLAttributesAndRef<
+    {
+      steps: ITEM[];
+      direction?: PropDirection;
+      size?: PropSize;
+      activeStepIndex?: number;
+      onItemClick?: (props: {
+        e: React.MouseEvent;
+        item: ITEM;
+        index: number;
+      }) => void;
+      getItemLabel?: PropGetItemLabel<ITEM>;
+      getItemLineStatus?: PropGetItemLineStatus<ITEM>;
+      getItemTooltipContent?: PropGetItemTooltipContent<ITEM>;
+      getItemPoint?: PropGetItemPoint<ITEM>;
+      getItemProgress?: PropGetItemProgress<ITEM>;
+      getItemContent?: PropGetItemContent<ITEM>;
+      getItemStatus?: PropGetItemStatus<ITEM>;
+      getItemOnClick?: PropGetItemOnClick<ITEM>;
+    },
+    HTMLDivElement
+  > &
+    (ITEM extends { label: DefaultItem['label'] }
+      ? {}
+      : { getItemLabel: PropGetItemLabel<ITEM> });
 
 export type ProgressStepBarItemProps = {
   content?: React.ReactNode;
@@ -83,35 +98,50 @@ export type ProgressStepBarItemProps = {
   direction: PropDirection;
   size: PropSize;
   onClick?: (e: React.MouseEvent) => void;
-  pointRef?: React.RefObject<HTMLButtonElement> | React.RefObject<HTMLDivElement>;
+  pointRef?:
+    | React.RefObject<HTMLButtonElement>
+    | React.RefObject<HTMLDivElement>;
 };
 
 export const cnProgressStepBar = cn('ProgressStepBar');
 
-export const defaultGetItemLabel: PropGetItemLabel<DefaultItem> = (item) => item.label;
-export const defaultGetItemTooltipContent: PropGetItemTooltipContent<DefaultItem> = (item) =>
-  item.tooltipContent;
-export const defaultGetItemPoint: PropGetItemPoint<DefaultItem> = (item) => item.point;
-export const defaultGetItemLineStatus: PropGetItemLineStatus<DefaultItem> = (item) =>
-  item.lineStatus;
-export const defaultGetItemProgress: PropGetItemProgress<DefaultItem> = (item) => item.progress;
-export const defaultGetItemContent: PropGetItemContent<DefaultItem> = (item) => item.content;
-export const defaultGetItemStatus: PropGetItemStatus<DefaultItem> = (item) => item.status;
-export const defaultGetItemOnClick: PropGetItemOnClick<DefaultItem> = (item) => item.onClick;
+export const defaultGetItemLabel: PropGetItemLabel<DefaultItem> = (item) =>
+  item.label;
+export const defaultGetItemTooltipContent: PropGetItemTooltipContent<
+  DefaultItem
+> = (item) => item.tooltipContent;
+export const defaultGetItemPoint: PropGetItemPoint<DefaultItem> = (item) =>
+  item.point;
+export const defaultGetItemLineStatus: PropGetItemLineStatus<DefaultItem> = (
+  item,
+) => item.lineStatus;
+export const defaultGetItemProgress: PropGetItemProgress<DefaultItem> = (
+  item,
+) => item.progress;
+export const defaultGetItemContent: PropGetItemContent<DefaultItem> = (item) =>
+  item.content;
+export const defaultGetItemStatus: PropGetItemStatus<DefaultItem> = (item) =>
+  item.status;
+export const defaultGetItemOnClick: PropGetItemOnClick<DefaultItem> = (item) =>
+  item.onClick;
 
 export type ProgressStepBarComponent = <ITEM = DefaultItem>(
   props: ProgressStepBarProps<ITEM>,
 ) => React.ReactElement | null;
 
 export type ProgressStepBarItemComponent = (
-  props: PropsWithHTMLAttributesAndRef<ProgressStepBarItemProps, HTMLDivElement>,
+  props: PropsWithHTMLAttributesAndRef<
+    ProgressStepBarItemProps,
+    HTMLDivElement
+  >,
 ) => React.ReactElement | null;
 
 export function withDefaultGetters<ITEM>(props: ProgressStepBarProps<ITEM>) {
   return {
     ...props,
     getItemLabel: props.getItemLabel || defaultGetItemLabel,
-    getItemTooltipContent: props.getItemTooltipContent || defaultGetItemTooltipContent,
+    getItemTooltipContent:
+      props.getItemTooltipContent || defaultGetItemTooltipContent,
     getItemPoint: props.getItemPoint || defaultGetItemPoint,
     getItemProgress: props.getItemProgress || defaultGetItemProgress,
     getItemContent: props.getItemContent || defaultGetItemContent,
@@ -135,11 +165,19 @@ export const getLineSize: (
   direction: PropDirection,
 ) => number = (container, activeElement, direction) => {
   let size = 0;
-  if (container && container.current && activeElement && activeElement.current) {
+  if (
+    container &&
+    container.current &&
+    activeElement &&
+    activeElement.current
+  ) {
     const containerPosition = container.current.getBoundingClientRect();
     const activeElementPosition = activeElement.current.getBoundingClientRect();
     if (direction === 'vertical')
-      size = activeElementPosition.y - containerPosition.y + activeElementPosition.height;
+      size =
+        activeElementPosition.y -
+        containerPosition.y +
+        activeElementPosition.height;
     else size = activeElementPosition.x - containerPosition.x;
   }
   return size;

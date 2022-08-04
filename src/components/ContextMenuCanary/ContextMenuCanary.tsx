@@ -12,7 +12,6 @@ import {
 import { cn } from '../../utils/bem';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { Direction } from '../Popover/Popover';
-
 import { ContextMenuLevels } from './ContextMenuLevels/ContextMenuLevels';
 import { ContextMenuComponent, ContextMenuProps } from './types';
 
@@ -20,7 +19,10 @@ const cnContextMenu = cn('ContextMenuCanary');
 
 export const COMPONENT_NAME = 'ContextMenu' as const;
 
-function ContextMenuRender(props: ContextMenuProps, ref: React.Ref<HTMLDivElement>) {
+const ContextMenuRender = (
+  props: ContextMenuProps,
+  ref: React.Ref<HTMLDivElement>,
+) => {
   const nodeRef = useRef<HTMLDivElement>(null);
   const levelRef = useForkRef([ref, nodeRef]);
 
@@ -30,7 +32,9 @@ function ContextMenuRender(props: ContextMenuProps, ref: React.Ref<HTMLDivElemen
     levelRef,
   );
   const [playAnimation, setPlayAnimation] = useFlag();
-  const [direction, setDirection] = useState<Direction | undefined>(props.direction);
+  const [direction, setDirection] = useState<Direction | undefined>(
+    props.direction,
+  );
 
   const handleSetDirection = (d: Direction) => {
     setDirection(d);
@@ -59,8 +63,10 @@ function ContextMenuRender(props: ContextMenuProps, ref: React.Ref<HTMLDivElemen
       )}
     </Transition>
   );
-}
+};
 
-export const ContextMenu = React.forwardRef(ContextMenuRender) as ContextMenuComponent;
+export const ContextMenu = React.forwardRef(
+  ContextMenuRender,
+) as ContextMenuComponent;
 
 export * from './types';

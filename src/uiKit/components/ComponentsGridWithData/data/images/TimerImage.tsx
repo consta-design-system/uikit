@@ -1,10 +1,13 @@
 import * as React from 'react';
 
-function TimerImage(props: React.SVGProps<SVGSVGElement>) {
+const TimerImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <g clipPath="url(#SvgTimerImage__clip0_1789_8793)">
-        <path d="M0 5a4 4 0 014-4h192a4 4 0 014 4v112a4 4 0 01-4 4H4a4 4 0 01-4-4V5z" fill="#fff" />
+        <path
+          d="M0 5a4 4 0 014-4h192a4 4 0 014 4v112a4 4 0 01-4 4H4a4 4 0 01-4-4V5z"
+          fill="#fff"
+        />
         <mask id="SvgTimerImage__path-2-inside-1_1789_8793" fill="#fff">
           <path d="M103.804 73.804a14.699 14.699 0 01-18.48-14.965 14.697 14.697 0 1129.353 1.538l-3.817-.2a10.875 10.875 0 10-8.045 9.935l.989 3.692z" />
         </mask>
@@ -32,6 +35,6 @@ function TimerImage(props: React.SVGProps<SVGSVGElement>) {
       </defs>
     </svg>
   );
-}
+};
 
 export default TimerImage;

@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { boolean, select, text } from '@storybook/addon-knobs';
+import * as React from 'react';
 
 import { createMetadata } from '../../../utils/storybook';
 import {
@@ -20,11 +20,14 @@ import {
   textPropViewDefault,
   textPropWeight,
 } from '../Text';
-
 import mdx from './Text.docs.mdx';
 
 const defaultKnobs = () => ({
-  as: select('as', ['p', 'div', 'a', 'span', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'], undefined),
+  as: select(
+    'as',
+    ['p', 'div', 'a', 'span', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+    undefined,
+  ),
   align: select('align', ['', ...textPropAlign], ''),
   cursor: select('cursor', ['', ...textPropCursor], ''),
   decoration: select('decoration', ['', ...textPropDecoration], ''),
@@ -45,7 +48,7 @@ const defaultKnobs = () => ({
   ),
 });
 
-export function Playground() {
+export const Playground = () => {
   const {
     as,
     align,
@@ -86,7 +89,7 @@ export function Playground() {
       {text}
     </Text>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Базовые/Text',
