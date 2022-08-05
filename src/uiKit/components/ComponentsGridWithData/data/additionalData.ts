@@ -10,10 +10,12 @@ import GpnResponsesImage from './imagesForAdditionalData/GpnResponsesImage';
 import HeaderUmdImage from './imagesForAdditionalData/HeaderUmdImage';
 import HistogramImage from './imagesForAdditionalData/HistogramImage';
 import LineImage from './imagesForAdditionalData/LineImage';
+import MixPlotImage from './imagesForAdditionalData/MixPlotImage';
 import PieImage from './imagesForAdditionalData/PieImage';
 import RadarImage from './imagesForAdditionalData/RadarImage';
 import RcTableAdapterImage from './imagesForAdditionalData/RcTableAdapterImage';
 import RcTreeAdapterImage from './imagesForAdditionalData/RcTreeAdapterImage';
+import ReactBigCalendarImage from './imagesForAdditionalData/ReactBigCalendarImage';
 import ScatterImage from './imagesForAdditionalData/ScatterImage';
 import StatsImage from './imagesForAdditionalData/StatsImage';
 import WaterfallImage from './imagesForAdditionalData/WaterfallImage';
@@ -75,6 +77,7 @@ export const additionalData: Data = [
         url: 'http://charts.consta.design/?path=/docs/components-mixplot--playground',
         name: 'MixPlot',
         description: 'Позволяет построить несколько графиков на основе одних данных.',
+        image: MixPlotImage,
       },
       {
         url: 'http://charts.consta.design?path=/docs/components-pie--playground',
@@ -164,6 +167,12 @@ export const additionalData: Data = [
         name: 'gantt-task-react-adapter',
         description: 'Адаптер для gantt-task-react. Диаграмма Ганта.',
         image: GanttImage,
+      },
+      {
+        url: 'http://react-big-calendar-adapter.consta.design/',
+        name: 'react-big-calendar-adapter',
+        description: 'Адаптер для календаря react-big-calendar.',
+        image: ReactBigCalendarImage,
       },
     ],
   },

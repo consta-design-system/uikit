@@ -144,6 +144,18 @@ export const FigmaDataBase = () => {
         <Text
           as="a"
           weight="bold"
+          href="https://www.figma.com/community/file/1122106488653770247"
+          target="_blank"
+          className="FigmaDataLink"
+        >
+          Consta Font Styles
+        </Text>
+        <Text className="FigmaDataText">Рекомендации по использованию текстовых стилей</Text>
+      </div>
+      <div className={wp.tplGrid('fraction', { row: 'third' })}>
+        <Text
+          as="a"
+          weight="bold"
           href="https://www.figma.com/community/file/855575974468435644"
           target="_blank"
           className="FigmaDataLink"
@@ -151,6 +163,20 @@ export const FigmaDataBase = () => {
           Consta Default Spaces
         </Text>
         <Text className="FigmaDataText">Набор отступов для Consta UI Kit.</Text>
+      </div>
+      <div className={wp.tplGrid('fraction', { row: 'third' })}>
+        <Text
+          as="a"
+          weight="bold"
+          href="https://www.figma.com/community/file/1122103480812564994"
+          target="_blank"
+          className="FigmaDataLink"
+        >
+          Consta Drill Elements
+        </Text>
+        <Text className="FigmaDataText">
+          Библиотека элементов компоновки нижней части бурильной колонны (КНБК) и скважин.
+        </Text>
       </div>
     </div>
   );
