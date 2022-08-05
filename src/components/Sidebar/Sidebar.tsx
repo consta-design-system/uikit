@@ -37,6 +37,7 @@ type SidebarProps = PropsWithHTMLAttributes<
     rootClassName?: string;
     children?: React.ReactNode;
     container?: HTMLDivElement | undefined;
+    afterClose?: () => void;
   },
   HTMLDivElement
 >;
@@ -101,6 +102,7 @@ export const Sidebar: SidebarComponent = (props) => {
     container = window.document.body,
     style,
     rootClassName,
+    afterClose,
     ...otherProps
   } = props;
 
@@ -130,6 +132,7 @@ export const Sidebar: SidebarComponent = (props) => {
       classNames={cnForCssTransition(cnSidebar)}
       timeout={240}
       nodeRef={portalRef}
+      onExiting={afterClose}
     >
       <PortalWithTheme
         preset={theme}
