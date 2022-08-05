@@ -8,7 +8,7 @@ import { defaultProgressLinePropSize, progressLinePropSize } from '../types';
 import mdx from './ProgressLine.docs.mdx';
 
 const defaultKnobs = () => ({
-  mode: select('mode', ['determinate', 'indeterminate', 'steps'], 'steps'),
+  mode: select('mode', ['determinate', 'indeterminate', 'steps'], 'determinate'),
   size: select('size', progressLinePropSize, defaultProgressLinePropSize),
   steps: number('steps', 6),
   value: number('progresvalues', 50),
