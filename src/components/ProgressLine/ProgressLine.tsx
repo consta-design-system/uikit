@@ -1,11 +1,14 @@
 import './ProgressLine.css';
 
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 
+import { usePrevious } from '../../hooks/usePrevious/usePrevious';
 import { cn } from '../../utils/bem';
-import { isNumber } from '../../utils/type-guards';
+import { isNotNil, isNumber } from '../../utils/type-guards';
+import { Text } from '../Text/Text';
 
-import { ProgressLineComponent } from './types';
+import { getLineDelay, withDefaultGetters } from './helpers';
+import { ProgressLineComponent, ProgressLineProps } from './types';
 
 const cnProgressLine = cn('ProgressLine');
 
@@ -23,10 +26,33 @@ const getProgress = (progress: number) => {
   return progressNormal / 100;
 };
 
-export const ProgressLine: ProgressLineComponent = forwardRef((props, ref) => {
-  const { size = 'm', value, style, ...otherProps } = props;
+function ProgressLineRender<ITEM>(props: ProgressLineProps<ITEM>, ref: React.Ref<HTMLDivElement>) {
+  const {
+    size = 'm',
+    value,
+    style,
+    steps: stepsProp,
+    getItemLabel,
+    ...otherProps
+  } = withDefaultGetters(props);
 
-  return (
+  const steps = useMemo(() => {
+    if (typeof stepsProp === 'number') {
+      return Array.from(Array(stepsProp).keys()) as ITEM[];
+    }
+    return stepsProp ?? [];
+  }, [stepsProp]);
+
+  const activeIndex =
+    typeof value === 'number'
+      ? Math.min(value, typeof stepsProp === 'number' ? stepsProp : stepsProp?.length ?? 0)
+      : -1;
+
+  const prevValue = usePrevious(activeIndex);
+
+  type Item = Parameters<typeof getItemLabel>[0];
+
+  return !stepsProp ? (
     <div
       {...otherProps}
       ref={ref}
@@ -39,5 +65,49 @@ export const ProgressLine: ProgressLineComponent = forwardRef((props, ref) => {
         mode: isNumber(value) ? 'determinate' : 'indeterminate',
       })}
     />
+  ) : (
+    <div
+      {...otherProps}
+      style={{
+        ...style,
+        ['--progress-line-steps' as string]: steps.length,
+      }}
+      ref={ref}
+      className={cnProgressLine({
+        size,
+        mode: 'step',
+      })}
+    >
+      {steps.map((item, index) => {
+        const label = getItemLabel(item);
+        const active = activeIndex >= index;
+        const delay = getLineDelay(activeIndex, prevValue ?? -1, index);
+        return (
+          <div key={`PrgressLine-Step-${index}`} className={cnProgressLine('Step')}>
+            <div
+              style={{
+                ['--progress-line-delay' as string]: `${Math.max(0, delay) * 0.3}s`,
+              }}
+              className={cnProgressLine('Line', {
+                active,
+              })}
+            />
+            {isNotNil(label) && (
+              <Text
+                className={cnProgressLine('Label')}
+                size="2xs"
+                lineHeight="xs"
+                view="secondary"
+                align="center"
+              >
+                {label}
+              </Text>
+            )}
+          </div>
+        );
+      })}
+    </div>
   );
-});
+}
+
+export const ProgressLine = forwardRef(ProgressLineRender) as ProgressLineComponent;
