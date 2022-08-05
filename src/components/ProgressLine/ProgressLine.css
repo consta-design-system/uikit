@@ -25,6 +25,14 @@
   }
 
   &_mode {
+    &_step {
+      height: auto;
+      background: transparent;
+      display: grid;
+      grid-template-columns: repeat(var(--progress-line-steps), calc(100% / var(--progress-line-steps)));
+      grid-gap: var(--space-3xs);
+    }
+
     &_determinate {
       &::after {
         width: 100%;
@@ -40,6 +48,40 @@
         animation: ProgressLineAnimation 2s linear infinite;
       }
     }
+  }
+
+  &-Step {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  &-Line {
+    height: var(--progress-line-height);
+    width: 100%;
+    position: relative;
+    overflow-x: hidden;
+    background: var(--color-bg-system);
+
+    &:after {
+      width: 0px;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: var(--progress-line-height);
+      transition: width 0.3s linear;
+      transition-delay: var(--progress-line-delay);
+      background: var(--color-bg-brand);
+    }
+
+    &_active:after {
+      width: 100%;
+    }
+  }
+
+  &-Label {
+    margin-top: var(--space-3xs);
   }
 }
 

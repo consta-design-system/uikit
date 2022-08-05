@@ -1,6 +1,7 @@
 import {
   ProgressLineExampleMode,
   ProgressLineExampleModeValue,
+  ProgressLineExampleModeSteps,
 } from './examples/ProgressLineExampleMode/ProgressLineExampleMode';
 import { ProgressLineExampleSize } from './examples/ProgressLineExampleSize/ProgressLineExampleSize';
 
@@ -25,6 +26,10 @@ import { ProgressLine } from '@consta/uikit/ProgressLine';
 передайте соответствующее значение в свойстве `value`.
 В этом случае анимация выключится.
 
+Если нужно отображать прогресс пошагово, передайте массив шагов
+в свойстве `steps`, а также для указания описания шага определите функцию
+`getItemLabel`.
+
 ```tsx
 <ProgressLine />
 ```
@@ -36,6 +41,12 @@ import { ProgressLine } from '@consta/uikit/ProgressLine';
 ```
 
 <ProgressLineExampleModeValue />
+
+```tsx
+<ProgressLine value={3} steps={['Первый', 'Второй', 'Третий']} getItemLabel={(item) => item} />
+```
+
+<ProgressLineExampleModeSteps />
 
 ## Размер
 
@@ -60,12 +71,14 @@ import { ProgressLine } from '@consta/uikit/ProgressLine';
 type ProgressLinePropMode = 'determinate' | 'indeterminate';
 ```
 
-| Свойство           | Тип                         | По умолчанию | Описание                                  |
-| ------------------ | --------------------------- | ------------ | ----------------------------------------- |
-| [`value?`](#тип)   | `number`                    | -            | Процент загрузки или выполнения           |
-| [`size?`](#размер) | `'s', 'm'`                  | `'m'`        | Размер индикатора                         |
-| `className?`       | `string`                    | -            | Дополнительный CSS-класс                  |
-| `ref?`             | `React.Ref<HTMLDivElement>` | -            | Ссылка на корневой DOM-элемент компонента |
+| Свойство                | Тип                         | По умолчанию | Описание                                  |
+| ----------------------- | --------------------------- | ------------ | ----------------------------------------- |
+| [`value?`](#тип)        | `number`                    | -            | Процент загрузки или выполнения           |
+| [`steps?`](#тип)        | `ITEM[]`                    | -            | Массив шагов                              |
+| [`size?`](#размер)      | `'s', 'm'`                  | `'m'`        | Размер индикатора                         |
+| [`getItemLabel?`](#тип) | `(item: ITEM) => string`    | -            | Функция получения лэйбла                  |
+| `className?`            | `string`                    | -            | Дополнительный CSS-класс                  |
+| `ref?`                  | `React.Ref<HTMLDivElement>` | -            | Ссылка на корневой DOM-элемент компонента |
 
 ## Пример
 

@@ -8,15 +8,23 @@ import { defaultProgressLinePropSize, progressLinePropSize } from '../types';
 import mdx from './ProgressLine.docs.mdx';
 
 const defaultKnobs = () => ({
-  mode: select('mode', ['determinate', 'indeterminate'], 'indeterminate'),
+  mode: select('mode', ['determinate', 'indeterminate', 'steps'], 'determinate'),
   size: select('size', progressLinePropSize, defaultProgressLinePropSize),
+  steps: number('steps', 6),
   value: number('progresvalues', 50),
 });
 
 export function Playground() {
-  const { mode, size, value } = defaultKnobs();
+  const { mode, size, value, steps } = defaultKnobs();
 
-  return <ProgressLine size={size} value={mode === 'determinate' ? value : undefined} />;
+  return (
+    <ProgressLine
+      size={size}
+      value={mode !== 'indeterminate' ? value : undefined}
+      steps={mode === 'steps' ? Array.from({ length: steps }, (_, i) => i + 1) : undefined}
+      getItemLabel={(item) => item?.toString()}
+    />
+  );
 }
 
 export default createMetadata({

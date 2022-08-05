@@ -15,8 +15,20 @@ export const ProgressLineExampleMode = () => {
 
 export const ProgressLineExampleModeValue = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <StoryBookExample className={cnDocsDecorator('Section', [cnMixSpace({ mB: '2xl' })])}>
       <ProgressLine value={30} />
+    </StoryBookExample>
+  );
+};
+
+export const ProgressLineExampleModeSteps = () => {
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <ProgressLine
+        value={3}
+        steps={['Первый', 'Второй', 'Третий']}
+        getItemLabel={(item) => item}
+      />
     </StoryBookExample>
   );
 };
