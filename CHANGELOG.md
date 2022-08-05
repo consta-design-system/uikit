@@ -1,5 +1,24 @@
 # Changelog
 
+## v3.27.0 (05/08/2022)
+Самое важное:
+- В `ProgressLine` добавили модификацию `step`. Теперь можно показывать прогресс по шагам.
+- В `Modal` добавили `afterClose`, событие которое отработает после размонтирования окна из дом.
+- В `Badge` добавили `xs` размер
+- Доработали документацию
+
+---
+
+- [feat(ProgressLine): add step modification (#2468)](https://github.com/consta-design-system/uikit/commit/0ed34c40e9cfefec9d7d52e97b967ffb13b464a8) - [@N1MBER](https://github.com/N1MBER)
+- [feat(Modal): add afterClose prop (#2460)](https://github.com/consta-design-system/uikit/commit/49999d8d680312f7acbd935ead5305a1077d60d9) - [@N1MBER](https://github.com/N1MBER)
+- [feat(Badge): add  xs size (#2455)](https://github.com/consta-design-system/uikit/commit/9936f6814adab85eda3bce516005bc1f6cacb09d) - [@N1MBER](https://github.com/N1MBER)
+- [docs(components): fix figma links (#2459)](https://github.com/consta-design-system/uikit/commit/8f78711cab3f6c664ebbfa11a2f9601002d29b92) - [@arhayka](https://github.com/arhayka)
+- [fix(Steps): fix crush with using google translate (#2458)](https://github.com/consta-design-system/uikit/commit/f1062cfc215aa4044492346d9eeebcf111de04d5) - [@N1MBER](https://github.com/N1MBER)
+- [fix(Collapse): fix bug with color of icon on dark theme (#2454)](https://github.com/consta-design-system/uikit/commit/3dac567f3cab77fc96a221d2c9b5e8ed55c611d9) - [@N1MBER](https://github.com/N1MBER)
+- [docs(common): update libraries lists and review (#2451)](https://github.com/consta-design-system/uikit/commit/1c6e6fb4e583658f111217033f92533103b234b5) - [@arhayka](https://github.com/arhayka)
+
+--------------------
+
 ## v3.26.4 (27/07/2022)
 - [docs(about): add important links (#2443)](https://github.com/consta-design-system/uikit/commit/208d5fe5d3c5e3c6021c537f3c40bbccfcf0f595) - [@arhayka](https://github.com/arhayka)
 - [docs(Button): add too big label example (#2442)](https://github.com/consta-design-system/uikit/commit/76cd5c5252516a0dabcec9c12b54908918eb9871) - [@arhayka](https://github.com/arhayka)
@@ -440,26 +459,3 @@ endFieldOnBlur - deleted, use onBlur
 - [docs(common): edit links to github (#1998)](https://github.com/consta-design-system/uikit/commit/43dd100026a67dc42d594ed7c61596ffef992e6a) - [@arhayka](https://github.com/arhayka)
 - [docs(DatePicker): edit docs (#1997)](https://github.com/consta-design-system/uikit/commit/f22b08b40490e6ab76ab2621e6f298737cc2f645) - [@arhayka](https://github.com/arhayka)
 - [feat(ResponsesExit): add new response image (#1995)](https://github.com/consta-design-system/uikit/commit/727c52318ca4d93d46ddb70eac72dd9a1d9fa6d7) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v3.14.0 (26/01/2022)
-Самое важное:
-- в `DatePicker` добавили тип `'date-time'` и возможность добавления своих контролов
-- обновили иконки
-- в `Table` добавили возможность подписки на клик по ячейке
-- обновили документацию
-
----
-
-
-- [feat(DatePicker) add date-time type (#1984)](https://github.com/consta-design-system/uikit/commit/9aff4ba09a09c367303caa831194b6e380f0d995) - [@gizeasy](https://github.com/gizeasy)
-- [feat(components): improvement zIndex API (#1980)](https://github.com/consta-design-system/uikit/commit/b9c93262fff3b37bc328eb6da80566ee4604b053) - [@gizeasy](https://github.com/gizeasy)
-- [fix(Slider): removed warnings about required keys (#1981)](https://github.com/consta-design-system/uikit/commit/dd577d57c08ae5c641e3e10abe398e1fd32d2dbc) - [@gizeasy](https://github.com/gizeasy)
-- [docs(review): add images for charts & section (#1971)](https://github.com/consta-design-system/uikit/commit/8bb01196bc0b548912c22f0a233d10bcca948aa3) - [@arhayka](https://github.com/arhayka)
-- [fix(Table): fix bug with render function (#1979)](https://github.com/consta-design-system/uikit/commit/bcfa9bec719ecf864b2acc1a98d9b3c2c675afef) - [@N1MBER](https://github.com/N1MBER)
-- [feat(icon): add new icons (#1970)](https://github.com/consta-design-system/uikit/commit/6a25de0181a0c583f3b61f2f6dfb750f845ea387) - [@hell0anna](https://github.com/hell0anna)
-- [docs(import): add import react to all missing examples (#1969)](https://github.com/consta-design-system/uikit/commit/1e06364a76266f85698b3290d680cb19a88c484e) - [@N1MBER](https://github.com/N1MBER)
-- [feat(Table): added handle click and contextmenu click in table cell (#1983)](https://github.com/consta-design-system/uikit/commit/9fdd4017477f4f99cf9ebbacd8a5dbce25ab0ab0) - [@SergeyKatugin](https://github.com/SergeyKatugin)
-- [feat(DatePicker): add addtional controls to datepicker / dateTime (#1882)](https://github.com/consta-design-system/uikit/commit/ea1aa86877110aba5821833959912db8f228126f) - [@N1MBER](https://github.com/N1MBER)
-- [chore(CODEOWNERS): update](https://github.com/consta-design-system/uikit/commit/b0b3b7dd215e81f0c05d26ea611204b11ffc88dd) - [@gizeasy](https://github.com/gizeasy)
