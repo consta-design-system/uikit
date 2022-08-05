@@ -21,7 +21,7 @@ export function Playground() {
     <ProgressLine
       size={size}
       value={mode !== 'indeterminate' ? value : undefined}
-      steps={mode === 'steps' ? steps : undefined}
+      steps={mode === 'steps' ? Array.from({ length: steps }, (_, i) => i + 1) : undefined}
       getItemLabel={(item) => item?.toString()}
     />
   );

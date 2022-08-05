@@ -12,19 +12,13 @@ export type ProgressLineItemDefault = {
 
 export type ProgressLinePropGetItemLabel<ITEM> = (item: ITEM) => string | undefined;
 
-export type ProgressLineProps<ITEM> = PropsWithHTMLAttributesAndRef<
+export type ProgressLineProps<ITEM = ProgressLineItemDefault> = PropsWithHTMLAttributesAndRef<
   {
     size?: PropgressLinePropSize;
     value?: number;
-  } & (ITEM extends void
-    ? {
-        steps?: number;
-        getItemLabel?: ProgressLinePropGetItemLabel<number>;
-      }
-    : {
-        steps?: ITEM[];
-        getItemLabel?: ProgressLinePropGetItemLabel<ITEM>;
-      }),
+    steps?: ITEM[];
+    getItemLabel?: ProgressLinePropGetItemLabel<ITEM>;
+  },
   HTMLDivElement
 >;
 

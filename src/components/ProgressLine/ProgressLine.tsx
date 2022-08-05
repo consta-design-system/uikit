@@ -1,6 +1,6 @@
 import './ProgressLine.css';
 
-import React, { forwardRef, useMemo } from 'react';
+import React, { forwardRef } from 'react';
 
 import { usePrevious } from '../../hooks/usePrevious/usePrevious';
 import { cn } from '../../utils/bem';
@@ -26,33 +26,16 @@ const getProgress = (progress: number) => {
   return progressNormal / 100;
 };
 
-function ProgressLineRender<ITEM>(props: ProgressLineProps<ITEM>, ref: React.Ref<HTMLDivElement>) {
-  const {
-    size = 'm',
-    value,
-    style,
-    steps: stepsProp,
-    getItemLabel,
-    ...otherProps
-  } = withDefaultGetters(props);
+function ProgressLineRender(props: ProgressLineProps, ref: React.Ref<HTMLDivElement>) {
+  const { size = 'm', value, style, steps, getItemLabel, ...otherProps } = withDefaultGetters(
+    props,
+  );
 
-  const steps = useMemo(() => {
-    if (typeof stepsProp === 'number') {
-      return Array.from(Array(stepsProp).keys()) as ITEM[];
-    }
-    return stepsProp ?? [];
-  }, [stepsProp]);
-
-  const activeIndex =
-    typeof value === 'number'
-      ? Math.min(value, typeof stepsProp === 'number' ? stepsProp : stepsProp?.length ?? 0)
-      : -1;
+  const activeIndex = typeof value === 'number' ? Math.min(value, steps?.length ?? 0) : -1;
 
   const prevValue = usePrevious(activeIndex);
 
-  type Item = Parameters<typeof getItemLabel>[0];
-
-  return !stepsProp ? (
+  return !steps ? (
     <div
       {...otherProps}
       ref={ref}
@@ -83,7 +66,7 @@ function ProgressLineRender<ITEM>(props: ProgressLineProps<ITEM>, ref: React.Ref
         const active = activeIndex >= index;
         const delay = getLineDelay(activeIndex, prevValue ?? -1, index);
         return (
-          <div key={`PrgressLine-Step-${index}`} className={cnProgressLine('Step')}>
+          <div key={cnProgressLine('Step', { index })} className={cnProgressLine('Step')}>
             <div
               style={{
                 ['--progress-line-delay' as string]: `${Math.max(0, delay) * 0.3}s`,
