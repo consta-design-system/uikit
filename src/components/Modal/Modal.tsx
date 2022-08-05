@@ -34,6 +34,7 @@ type ModalProps = PropsWithHTMLAttributes<
     position?: ModalPropPosition;
     children?: React.ReactNode;
     container?: HTMLDivElement | undefined;
+    afterClose?: () => void;
     refsForExcludeClickOutside?: React.RefObject<HTMLElement>[];
   },
   HTMLDivElement
@@ -77,6 +78,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
     container = window.document.body,
     refsForExcludeClickOutside,
     rootClassName,
+    afterClose,
     style,
     ...otherProps
   } = props;
@@ -104,6 +106,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
       appear
       classNames={cnForCssTransition(cnModal)}
       timeout={240}
+      onExited={afterClose}
       nodeRef={portalRef}
     >
       <PortalWithTheme
