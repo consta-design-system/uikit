@@ -1,15 +1,11 @@
 import { useCallback, useEffect, useRef } from 'react';
 
-type UseDebounce = <T extends (...args: any) => void>(
+export const useDebounce = <T extends (...args: any) => void>(
   fn: T,
   time: number,
-) => (...args: Parameters<T>) => void;
-
-export const useDebounce: UseDebounce = (fn, time) => {
-  type Fn = typeof fn;
-
+) => {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const fnRef = useRef<Fn>();
+  const fnRef = useRef<T>();
 
   fnRef.current = fn;
 
@@ -19,8 +15,8 @@ export const useDebounce: UseDebounce = (fn, time) => {
     };
   }, [time]);
 
-  return useCallback(
-    (...args: Parameters<Fn>) => {
+  return useCallback<T>(
+    ((...args) => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
@@ -31,7 +27,7 @@ export const useDebounce: UseDebounce = (fn, time) => {
           fnRef.current(...args);
         }
       }, time);
-    },
+    }) as T,
     [time],
   );
 };

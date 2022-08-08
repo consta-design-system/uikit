@@ -526,10 +526,10 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
 
     if (isFocused) {
       setIsFocused(false);
+    }
 
-      if (typeof onBlur === 'function') {
-        onBlur(e);
-      }
+    if (typeof onBlur === 'function') {
+      onBlur(e);
     }
   };
 

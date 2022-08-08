@@ -8,5 +8,6 @@ module.exports = {
   testMatch: ['**/*.test.{ts,tsx}'],
   modulePathIgnorePatterns: ['<rootDir>/dist/'],
   collectCoverageFrom: ['**/*.{ts,tsx}', '!**/*.stories.tsx'],
+  testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['./jest.setup.ts'],
 };

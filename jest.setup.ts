@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 
-import ResizeObserver from './__mocks__/ResizeObserver';
-
-jest.mock('resize-observer-polyfill', () => {
-  return ResizeObserver;
-});
+global.ResizeObserver = jest.fn().mockImplementation(() => ({
+  observe: jest.fn(),
+  unobserve: jest.fn(),
+  disconnect: jest.fn(),
+}));

@@ -69,21 +69,4 @@ describe('Компонент Modal', () => {
       expect(onClickOutside).toHaveBeenCalledTimes(1);
     });
   });
-
-  describe('проверка onOpen и onClose', () => {
-    const onOpen = jest.fn();
-    const onClose = jest.fn();
-    const { rerender } = render(getComponent({ onClose, onOpen }));
-
-    it('onOpen должен вызваться после рендера', () => {
-      expect(onOpen).toHaveBeenCalledTimes(1);
-      expect(onClose).toHaveBeenCalledTimes(0);
-    });
-
-    it('onClose должен вызваться после закрытия', () => {
-      rerender(getComponent({ onClose, onOpen, isOpen: false }));
-      expect(onOpen).toHaveBeenCalledTimes(1);
-      expect(onClose).toHaveBeenCalledTimes(1);
-    });
-  });
 });
