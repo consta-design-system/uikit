@@ -1,0 +1,43 @@
+.AvatarGroup {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+
+  --avatar-group-margin: 6px;
+
+  & > .Avatar {
+    outline: var(--space-3xs) solid var(--color-bg-default);
+
+    &:not(:last-child) {
+      margin-left: calc(0 - var(--avatar-group-margin));
+    }
+  }
+
+  &_size {
+    &_xs {
+      --avatar-group-margin: var(--space-3xs);
+    }
+
+    &_s {
+      --avatar-group-margin: var(--space-2xs);
+    }
+
+    &_m {
+      --avatar-group-margin: calc(var(--space-3xs) + var(--space-2xs));
+    }
+
+    &_l {
+      --avatar-group-margin: var(--space-xs);
+    }
+  }
+
+  &-ShowMore {
+    background: var(--color-bg-system);
+    color: var(--color-typo-primary);
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+}
