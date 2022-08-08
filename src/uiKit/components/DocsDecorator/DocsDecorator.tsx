@@ -1,27 +1,24 @@
 import './DocsDecorator.css';
 import '../../whitepaper/whitepaper.css';
 
-import { DocsContainer } from '@storybook/addon-docs/dist/blocks';
 import React from 'react';
 
 import { presetGpnDefault, Theme } from '../../../components/Theme/Theme';
 import { cn } from '../../cn';
 
-type DocsContainerProps = React.ComponentProps<typeof DocsContainer>;
-
 export const cnDocsDecorator = cn('DocsDecorator');
 
-export const DocsDecorator: React.FC<DocsContainerProps> = (props) => {
-  const { children, context } = props;
+export const DocsDecorator: React.FC<{ children?: React.ReactNode }> = (
+  props,
+) => {
+  const { children } = props;
   const content = (
-    <DocsContainer context={context}>
-      <Theme
-        preset={presetGpnDefault}
-        className={cnDocsDecorator(null, ['theme_gap_medium'])}
-      >
-        {children}
-      </Theme>
-    </DocsContainer>
+    <Theme
+      preset={presetGpnDefault}
+      className={cnDocsDecorator(null, ['theme_gap_medium'])}
+    >
+      {children}
+    </Theme>
   );
   if (process.env.NODE_ENV === 'development') {
     return <React.StrictMode>{content}</React.StrictMode>;

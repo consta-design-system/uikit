@@ -283,7 +283,7 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   });
 
   const highlightIndex = React.useCallback(
-    (indexForHighlight: IndexForHighlight, scrollToHighlighted) => {
+    (indexForHighlight: IndexForHighlight, scrollToHighlighted: boolean) => {
       setState((old) => {
         return {
           ...old,

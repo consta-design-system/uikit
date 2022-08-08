@@ -15,6 +15,7 @@ export type TableFilterContainerProps = {
   confirmButtonLabel?: string;
   cancelButtonLabel?: string;
   className?: string;
+  children?: React.ReactNode;
 };
 
 export const TableFilterContainer: React.FC<TableFilterContainerProps> = ({

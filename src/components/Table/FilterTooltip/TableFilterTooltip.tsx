@@ -28,6 +28,7 @@ type Props = {
   onChange: (field: string, values: Values) => void;
   onToggle: () => void;
   className?: string;
+  children?: React.ReactNode;
 };
 
 export const TableFilterTooltip: React.FC<Props> = ({

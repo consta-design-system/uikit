@@ -16,6 +16,7 @@ type ThemeName = 'gpnDefault' | 'gpnDark' | 'gpnDisplay';
 type StoryBookRootDecoratorProps = {
   themeName: ThemeName;
   className: string;
+  children?: React.ReactNode;
 };
 
 function getThemeByName(themeName: ThemeName): ThemePreset {

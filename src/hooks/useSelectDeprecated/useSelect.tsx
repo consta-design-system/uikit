@@ -293,7 +293,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   });
 
   const highlightIndex = React.useCallback(
-    (indexForHighlight: IndexForHighlight, scrollToHighlighted) => {
+    (indexForHighlight: IndexForHighlight, scrollToHighlighted: boolean) => {
       setState((old) => {
         return {
           ...old,
@@ -314,7 +314,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   );
 
   const selectIndex = React.useCallback(
-    (index) => {
+    (index: number) => {
       const option = filteredOptions[index];
       if (option && onChangeRef.current) {
         if (multiple) {
@@ -348,7 +348,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
       setSearch('');
     },
     [filteredOptions, value, setOpen],
-  );
+  ) as (arg: SetHandlerArg<T>) => void;
 
   // Handlers
 
@@ -367,7 +367,7 @@ export function useSelect<T>(params: SelectProps<T>): UseSelectResult<T> {
   const handleValueFieldFocus = (): void => handleValueFieldClick();
 
   const removeValue = React.useCallback(
-    (index) => {
+    (index: number) => {
       onChangeRef.current &&
         onChangeRef.current(value.filter((d, i) => i !== index));
       setSearch('');

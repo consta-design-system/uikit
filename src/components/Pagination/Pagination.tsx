@@ -72,7 +72,7 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
     currentPage = 0,
     totalPages = 0,
     onChange,
-    getLabel = getDefaultLabel(totalPages),
+    getLabel = getDefaultLabel,
     form = paginationDefaultForm,
     size = paginationDefaultSize,
     type = paginationDefaultType,
@@ -271,7 +271,7 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
               view="linkMinor"
               className={cnPagination('Total')}
             >
-              {getLabel}
+              {getLabel(totalPages)}
             </Text>
           </div>
         )}

@@ -6,7 +6,6 @@ import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { IconCheck } from '../../icons/IconCheck/IconCheck';
 import { getByMap } from '../../utils/getByMap';
 import { Button } from '../Button/Button';
-import { isNotMultipleParams } from '../Combobox/helpers';
 import { ContextMenu } from '../ContextMenu/ContextMenu';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { contextMenuSizeMap, iconSizeMap, withDefaultGetters } from './helpers';
@@ -66,7 +65,7 @@ const ThemeTogglerRender = (
 
   const renderIcons = (item: Item) => {
     const Icon = getItemIcon(item);
-    return Icon ? <Icon size={iconSize} /> : isNotMultipleParams;
+    return Icon && <Icon size={iconSize} />;
   };
 
   const renderChecks = (item: Item) => {

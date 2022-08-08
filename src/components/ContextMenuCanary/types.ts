@@ -205,7 +205,7 @@ export type ContextMenuLevelComponent = <ITEM, GROUP>(
 export type ContextMenuItemProps<
   AS extends keyof JSX.IntrinsicElements = 'div',
 > = PropsWithAsAttributes<
-  Omit<ContextMenuItemDefault, 'onClick' | 'attributes'> & {
+  Omit<ContextMenuItemDefault, 'onClick' | 'attributes' | 'key'> & {
     size?: ContextMenuPropSize;
     active: boolean;
     withSubMenu: boolean;

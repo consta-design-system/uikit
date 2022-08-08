@@ -74,7 +74,7 @@ const SliderRender = <RANGE extends boolean>(
 
   const IconRight = rightSide;
   const IconLeft =
-    isNotRangeParams && props.leftSide && props.leftSide !== 'input'
+    isNotRangeParams(props) && props.leftSide && props.leftSide !== 'input'
       ? props.leftSide
       : undefined;
 

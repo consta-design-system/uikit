@@ -44,9 +44,11 @@ export const DragNDropField = React.forwardRef<
   } = usePropsHandler(COMPONENT_NAME, props, dragNDropFieldRef);
 
   const handleDrop: DropzoneOptions['onDrop'] = React.useCallback(
-    (acceptedFiles) => acceptedFiles.length > 0 && onDropFiles(acceptedFiles),
+    (acceptedFiles: File[]) =>
+      acceptedFiles.length > 0 && onDropFiles(acceptedFiles),
     [onDropFiles],
   );
+
   const {
     fileRejections,
     getRootProps,

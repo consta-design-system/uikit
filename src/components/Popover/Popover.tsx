@@ -119,6 +119,7 @@ const isRenderProp = (
  */
 const ContextConsumer: React.FC<{
   onClickOutside?: (event: MouseEvent) => void;
+  children: React.ReactNode;
   ignoreClicksInsideRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
 }> = ({ onClickOutside, children, ignoreClicksInsideRefs }) => {
   const { refs } = usePortalContext();

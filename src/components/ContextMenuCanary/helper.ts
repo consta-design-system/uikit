@@ -109,7 +109,7 @@ export const getGroup = <GROUP>(
 
 const findItem = <ITEM>(
   params: Omit<GetLevelsParams<ITEM>, 'levels'> & {
-    key: ContextMenuItemDefault['key'];
+    key: string | number | undefined;
   },
 ): ITEM | undefined => {
   const { items, getItemKey, getItemSubMenu, key, getItemLabel } = params;

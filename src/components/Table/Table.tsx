@@ -695,7 +695,7 @@ const InternalTable = <T extends TableRow>(
       : row[column.accessor!];
 
     if (!hasNestedRows || columnIdx !== 0) {
-      return cellContent;
+      return cellContent as React.ReactNode;
     }
 
     const collapseRollProps = getCollapseRollProps(
@@ -705,7 +705,7 @@ const InternalTable = <T extends TableRow>(
 
     return (
       <TableRowsCollapse {...collapseRollProps}>
-        {cellContent}
+        {cellContent as React.ReactNode}
       </TableRowsCollapse>
     );
   };

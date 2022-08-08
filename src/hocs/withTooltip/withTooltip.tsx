@@ -182,7 +182,7 @@ export function withTooltip(hocProps?: TooltipProps) {
           }
         };
 
-        const Anchor = Component as React.ComponentType<COMPONENT_PROPS>;
+        const Anchor = Component as React.FC<COMPONENT_PROPS>;
 
         return (
           <>
@@ -217,6 +217,6 @@ export function withTooltip(hocProps?: TooltipProps) {
       },
     ) as unknown as
       | COMPONENT_TYPE
-      | React.ComponentType<WithTooltipProps<COMPONENT_PROPS>>;
+      | React.FC<WithTooltipProps<COMPONENT_PROPS>>;
   };
 }

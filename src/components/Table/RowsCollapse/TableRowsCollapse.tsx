@@ -13,6 +13,7 @@ export type Props = {
   toggleCollapse?: (e: React.SyntheticEvent) => void;
   isExpanded?: boolean;
   withCollapseButton?: boolean;
+  children?: React.ReactNode;
 };
 
 export const cnTableRowsCollapse = cn('TableRowsCollapse');

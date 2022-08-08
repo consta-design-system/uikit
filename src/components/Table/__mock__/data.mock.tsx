@@ -1219,6 +1219,11 @@ export const tableDataWithAdditionalClassName: TableProps<
     }),
 };
 
+const CustomIDs = {
+  fullName: 'fullName',
+  yearOfRegistration: 'yearOfRegistration',
+};
+
 export { CustomIDs };
 
 export const rowsForCustomTagLabelFunction = [
