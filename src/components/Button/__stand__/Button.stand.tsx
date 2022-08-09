@@ -1,11 +1,12 @@
-import { createStand } from '../../../stand/standConfig';
-import Button from '../../../uiKit/components/ComponentsGridWithData/data/images/ButtonImage';
+import { createStand } from '##/stand/standConfig';
+
+import image from './Button.image.svg';
 
 export default createStand({
   title: 'Button',
   id: 'Button',
   group: 'components',
-  image: Button,
+  image,
   description: 'Кнопка. Разные формы, цвета и размеры.',
   version: '4.0.0',
   status: 'stable',

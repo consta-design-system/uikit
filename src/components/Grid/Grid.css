@@ -73,7 +73,7 @@
     }
 
     &_bottom {
-      align-items: end;
+      align-items: flex-end;
     }
   }
 

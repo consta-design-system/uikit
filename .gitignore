@@ -13,6 +13,7 @@ __diff_output__
 # production
 /build
 /dist
+/lib
 
 # misc
 .idea
