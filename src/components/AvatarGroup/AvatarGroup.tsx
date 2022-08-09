@@ -24,7 +24,7 @@ function AvatarGroupRender(props: AvatarGroupProps, ref: React.Ref<HTMLDivElemen
   } = withDefaultGetters(props);
 
   return (
-    <div className={cnAvatarGroup(null, { size })} ref={ref} {...otherProps}>
+    <div className={cnAvatarGroup({ size })} ref={ref} {...otherProps}>
       {items.length > visibleCount && (
         <Avatar
           className={cnAvatarGroup('ShowMore')}
