@@ -17,29 +17,21 @@ function AvatarGroupRender(props: AvatarGroupProps, ref: React.Ref<HTMLDivElemen
     size = avatarGroupPropSizeDefault,
     visibleCount = 4,
     getItemName,
-    getItemAs,
     getItemUrl,
-    onMoreClick,
     ...otherProps
   } = withDefaultGetters(props);
-
-  const ShowMoreTag = onMoreClick ? 'button' : 'div';
 
   return (
     <div className={cnAvatarGroup({ size })} ref={ref} {...otherProps}>
       {items.length > visibleCount && (
-        <ShowMoreTag
-          className={cnAvatar({ size, form }, [cnAvatarGroup('ShowMore')])}
-          onClick={onMoreClick}
-        >
+        <div className={cnAvatar({ size, form }, [cnAvatarGroup('ShowMore')])}>
           {`+${items.length - visibleCount}`}
-        </ShowMoreTag>
+        </div>
       )}
       {items.slice(0, visibleCount).map((item, index) => (
         <Avatar
           key={cnAvatarGroup({ index })}
           url={getItemUrl(item)}
-          as={getItemAs(item) ?? 'div'}
           name={getItemName(item)}
           className={cnAvatarGroup('Avatar')}
           size={size}

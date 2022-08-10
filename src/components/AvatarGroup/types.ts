@@ -12,15 +12,11 @@ export const avatarGroupPropFormDefault: AvatarGroupPropForm = avatarGroupPropFo
 
 export type AvatarGroupDegaultItem = {
   url?: string;
-  as?: keyof JSX.IntrinsicElements;
   name?: string;
 };
 
 export type AvatarGroupPropGetItemUrl<ITEM> = (item: ITEM) => string | undefined;
 export type AvatarGroupPropGetItemName<ITEM> = (item: ITEM) => string | undefined;
-export type AvatarGroupPropGetItemAs<ITEM> = (
-  item: ITEM,
-) => keyof JSX.IntrinsicElements | undefined;
 
 export type AvatarGroupProps<ITEM = AvatarGroupDegaultItem> = PropsWithHTMLAttributesAndRef<
   {
@@ -29,8 +25,6 @@ export type AvatarGroupProps<ITEM = AvatarGroupDegaultItem> = PropsWithHTMLAttri
     visibleCount?: number;
     getItemUrl?: AvatarGroupPropGetItemUrl<ITEM>;
     getItemName?: AvatarGroupPropGetItemName<ITEM>;
-    getItemAs?: AvatarGroupPropGetItemAs<ITEM>;
-    onMoreClick?: React.MouseEventHandler;
     size?: AvatarGroupPropSize;
     form?: AvatarGroupPropForm;
   },

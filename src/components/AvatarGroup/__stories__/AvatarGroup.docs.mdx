@@ -85,7 +85,6 @@ export const avatarGroupPropFormDefault: AvatarGroupPropForm = avatarGroupPropFo
 
 export type AvatarGroupDegaultItem = {
   url?: string;
-  as?: keyof JSX.IntrinsicElements;
   name?: string;
 };
 ```
@@ -98,8 +97,6 @@ export type AvatarGroupDegaultItem = {
 | [`form?`](#форма)           | `'default' , 'round', 'brick'`                                              | `'round'`    | Форма аватара                                                                  |
 | `getItemUrl?`               | `(item: ITEM) => string`<code>&#124;</code>`undefined`                      | -            | Результат функции используется в качестве изображения.                         |
 | `getItemName?`              | `(item: ITEM) => string`<code>&#124;</code>`undefined`                      | -            | Результат функции используется в качестве имени.                               |
-| `getItemAs?`                | `(item: ITEM) => keyof JSX.IntrinsicElements`<code>&#124;</code>`undefined` | -            | Результат функции возвращает то, каким образом будет отрисовываться пункт меню |
-| `onMoreClick?`              | `React.MouseEventHandler`                                                   | -            | Событие обрабатываемое на клик на кнопку "больше"                              |
 | `className`                 | `string`                                                                    | -            | Дополнительный CSS-класс                                                       |
 | `as`                        | `React.ElementType`                                                         | -            | HTML-тег, в виде которого этот компонент будет представлен в DOM               |
 | `ref`                       | `React.Ref<HTMLDivElement>`                                                 | -            | Ссылка на корневой DOM-элемент этого компонента                                |
