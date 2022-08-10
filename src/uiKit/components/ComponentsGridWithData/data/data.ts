@@ -1,6 +1,7 @@
 import React from 'react';
 
 import AttachmentImage from './images/AttachmentImage';
+import AvatarGroupImage from './images/AvatarGroupImage';
 import AvatarImage from './images/AvatarImage';
 import BadgeImage from './images/BadgeImage';
 import BreadcrumbsImage from './images/BreadcrumbsImage';
@@ -16,6 +17,7 @@ import ContextMenuImage from './images/ContextMenuImage';
 import DatePickerImage from './images/DatePickerImage';
 import DateTimeImage from './images/DateTimeImage';
 import DragNDropFieldImage from './images/DragNDropFieldImage';
+import FieldGroupImage from './images/FieldGroupImage';
 import FileFieldImage from './images/FileFieldImage';
 import FileImage from './images/FileImage';
 import GridImage from './images/GridImage';
@@ -26,6 +28,7 @@ import LoaderImage from './images/LoaderImage';
 import ModalImage from './images/ModalImage';
 import PaginationImage from './images/PaginationImage';
 import PopoverImage from './images/PopoverImage';
+import ProgressLineImage from './images/ProgressLineImage';
 import ProgressSpinImage from './images/ProgressSpinImage';
 import ProgressStepBarImage from './images/ProgressStepBarImage';
 import RadioGroupImage from './images/RadioGroupImage';
@@ -62,15 +65,21 @@ export const data: Data = [
         description: 'Показывает загрузку файла или уже загруженный файл.',
       },
       {
+        name: 'Avatar',
+        componentName: 'Avatar',
+        url: '/?path=/docs/components-avatar--playground',
+        description: 'Аватарка. Изображение пользователя.',
+      },
+      {
         name: 'Badge',
         componentName: 'Badge',
         url: '/?path=/docs/components-badge--playground',
         description: 'Бейджик. Показывает статус процесса.',
       },
       {
-        name: 'Avatar',
-        componentName: 'Avatar',
-        url: '/?path=/docs/components-avatar--playground',
+        name: 'AvatarGroup',
+        componentName: 'AvatarGroup',
+        url: '/?path=/docs/components-avatargroup--playground',
         description: 'Аватарка. Изображение пользователя.',
       },
       {
@@ -86,12 +95,6 @@ export const data: Data = [
         description: 'Кнопка. Разные формы, цвета и размеры.',
       },
       {
-        name: 'CheckboxGroup(Canary)',
-        componentName: 'CheckboxGroup',
-        url: '/?path=/docs/components-checkboxgroup--playground',
-        description: 'Группа чекбоксов. Можно выбрать несколько вариантов.',
-      },
-      {
         name: 'Card',
         componentName: 'Card',
         url: '/?path=/docs/components-card--playground',
@@ -102,6 +105,12 @@ export const data: Data = [
         componentName: 'Checkbox',
         url: '/?path=/docs/components-checkbox--playground',
         description: 'Чекбокс. Можно сделать выбор и подтвердить.',
+      },
+      {
+        name: 'CheckboxGroup(Canary)',
+        componentName: 'CheckboxGroup',
+        url: '/?path=/docs/components-checkboxgroup--playground',
+        description: 'Группа чекбоксов. Можно выбрать несколько вариантов.',
       },
       {
         name: 'ChoiceGroup(Canary)',
@@ -116,22 +125,28 @@ export const data: Data = [
         description: 'Скрытый блок. Раскрывается по нажатию на заголовок.',
       },
       {
-        name: 'Combobox',
-        componentName: 'Combobox',
-        url: '/?path=/docs/components-combobox--playground',
-        description: 'Выпадающий список с поиском. Можно выбрать один или несколько вариантов.',
-      },
-      {
         name: 'CollapseGroup',
         componentName: 'CollapseGroup',
         url: '/?path=/docs/components-collapsegroup--playground',
         description: 'Группа скрытых блоков. Раскрывается по нажатию на заголовок.',
       },
       {
+        name: 'Combobox',
+        componentName: 'Combobox',
+        url: '/?path=/docs/components-combobox--playground',
+        description: 'Выпадающий список с поиском. Можно выбрать один или несколько вариантов.',
+      },
+      {
         name: 'ContextMenu(Canary)',
         componentName: 'ContextMenu',
         url: '/?path=/docs/components-contextmenu--playground',
         description: 'Контекстное меню. Дополнительные действия на странице.',
+      },
+      {
+        name: 'DatePicker(Canary)',
+        componentName: 'DatePicker',
+        url: '/?path=/docs/components-datepicker--playground',
+        description: 'Поле, в котором можно выбрать дату или период.',
       },
       {
         name: 'DateTime(Canary)',
@@ -146,22 +161,16 @@ export const data: Data = [
         description: 'Можно перетащить файлы, чтобы загрузить или отправить.',
       },
       {
-        name: 'DatePicker(Canary)',
-        componentName: 'DatePicker',
-        url: '/?path=/docs/components-datepicker--playground',
-        description: 'Поле, в котором можно выбрать дату или период.',
+        name: 'FieldGroup',
+        componentName: 'FieldGroup',
+        url: '/?path=/docs/components-fieldgroup--playground',
+        description: 'Группа полей. Объединяет одно или несколько полей ввода и кнопки.',
       },
       {
         name: 'File',
         componentName: 'File',
         url: '/?path=/docs/components-file--playground',
         description: 'Иконка для файла с расширением.',
-      },
-      {
-        name: 'FieldGroup',
-        componentName: 'FieldGroup',
-        url: '/?path=/docs/components-fieldgroup--playground',
-        description: 'Группа полей. Объединяет одно или несколько полей ввода и кнопки.',
       },
       {
         name: 'FileField',
@@ -182,6 +191,12 @@ export const data: Data = [
         description: 'Шапка. Блок с меню, поиском и аватаркой.',
       },
       {
+        name: 'Informer',
+        componentName: 'Informer',
+        url: '/?path=/docs/components-informer--playground',
+        description: 'Сообщение для пользователя. Встраивается в содержимое страницы.',
+      },
+      {
         name: 'Layout(Canary)',
         componentName: 'Layout',
         url: '/?path=/docs/components-layout--playground',
@@ -192,12 +207,6 @@ export const data: Data = [
         componentName: 'Modal',
         url: '/?path=/docs/components-modal--playground',
         description: 'Всплывающее окно. Показывает контент поверх основной страницы.',
-      },
-      {
-        name: 'Informer',
-        componentName: 'Informer',
-        url: '/?path=/docs/components-informer--playground',
-        description: 'Сообщение для пользователя. Встраивается в содержимое страницы.',
       },
       {
         name: 'Loader',
@@ -243,17 +252,17 @@ export const data: Data = [
         description: 'Радиокнопка. Можно выбрать один вариант.',
       },
       {
+        name: 'RadioGroup(Canary)',
+        componentName: 'RadioGroup',
+        url: '/?path=/docs/components-radiogroup--playground',
+        description: 'Группа радиокнопок. Можно выбрать один вариант.',
+      },
+      {
         name: 'Responses',
         componentName: 'Responses',
         url: '/?path=/docs/components-responses--playground',
         description:
           'Заглушки с сообщениями об ошибках и важных статусах (404, 503, не найдены данные и похожие).',
-      },
-      {
-        name: 'RadioGroup(Canary)',
-        componentName: 'RadioGroup',
-        url: '/?path=/docs/components-radiogroup--playground',
-        description: 'Группа радиокнопок. Можно выбрать один вариант.',
       },
       {
         name: 'Select',
@@ -299,16 +308,16 @@ export const data: Data = [
         description: 'Переключатель. Два положения — включено и выключено.',
       },
       {
-        name: 'Table',
-        componentName: 'Table',
-        url: '/?path=/docs/components-table--playground',
-        description: 'Таблица. Выводит данные с фильтрами и сортировкой.',
-      },
-      {
         name: 'SwitchGroup(Canary)',
         componentName: 'SwitchGroup',
         url: '/?path=/docs/components-switchgroup--playground',
         description: 'Группа переключателей. Можно выбрать несколько вариантов.',
+      },
+      {
+        name: 'Table',
+        componentName: 'Table',
+        url: '/?path=/docs/components-table--playground',
+        description: 'Таблица. Выводит данные с фильтрами и сортировкой.',
       },
       {
         name: 'Tabs(Canary)',
@@ -329,16 +338,16 @@ export const data: Data = [
         description: 'Текст. Любые текстовые элементы на странице и стили для них.',
       },
       {
-        name: 'Theme',
-        componentName: 'Theme',
-        url: '/?path=/docs/components-theme--playground',
-        description: 'Тема. Набор правил в CSS, который определяет, как выглядит проект.',
-      },
-      {
         name: 'TextField',
         componentName: 'TextField',
         url: '/?path=/docs/components-textfield--playground',
         description: 'Поле ввода. Одна или несколько строк.',
+      },
+      {
+        name: 'Theme',
+        componentName: 'Theme',
+        url: '/?path=/docs/components-theme--playground',
+        description: 'Тема. Набор правил в CSS, который определяет, как выглядит проект.',
       },
       {
         name: 'ThemeToggler',
@@ -347,16 +356,16 @@ export const data: Data = [
         description: 'Переключатель тем.',
       },
       {
-        name: 'Tooltip',
-        componentName: 'Tooltip',
-        url: '/?path=/docs/components-tooltip--playground',
-        description: 'Тултип. Всплывающее окно возле элемента или точки.',
-      },
-      {
         name: 'Timer',
         componentName: 'Timer',
         url: '/?path=/docs/components-timer--playground',
         description: 'Таймер. Отсчитывает время до окончания процесса.',
+      },
+      {
+        name: 'Tooltip',
+        componentName: 'Tooltip',
+        url: '/?path=/docs/components-tooltip--playground',
+        description: 'Тултип. Всплывающее окно возле элемента или точки.',
       },
       {
         name: 'User',
@@ -376,36 +385,39 @@ export const data: Data = [
 
 export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
   Attachment: AttachmentImage,
-  Badge: BadgeImage,
   Avatar: AvatarImage,
+  Badge: BadgeImage,
+  AvatarGroup: AvatarGroupImage,
   Breadcrumbs: BreadcrumbsImage,
   Button: ButtonImage,
-  CheckboxGroup: CheckboxGroupImage,
   Card: CardImage,
   Checkbox: CheckboxImage,
+  CheckboxGroup: CheckboxGroupImage,
   ChoiceGroup: ChoiceGroupImage,
   Collapse: CollapseImage,
-  Combobox: ComboboxImage,
   CollapseGroup: CollapseGroupImage,
+  Combobox: ComboboxImage,
   ContextMenu: ContextMenuImage,
+  DatePicker: DatePickerImage,
   DateTime: DateTimeImage,
   DragNDropField: DragNDropFieldImage,
-  DatePicker: DatePickerImage,
+  FieldGroup: FieldGroupImage,
   File: FileImage,
   FileField: FileFieldImage,
   Grid: GridImage,
   Header: HeaderImage,
+  Informer: InformerImage,
   Layout: LayoutImage,
   Modal: ModalImage,
-  Informer: InformerImage,
   Loader: LoaderImage,
   Pagination: PaginationImage,
   Popover: PopoverImage,
+  ProgressLine: ProgressLineImage,
   ProgressSpin: ProgressSpinImage,
   ProgressStepBar: ProgressStepBarImage,
   Radio: RadioImage,
-  Responses: ResponsesImage,
   RadioGroup: RadioGroupImage,
+  Responses: ResponsesImage,
   Select: SelectImage,
   Sidebar: SidebarImage,
   Skeleton: SkeletonImage,
@@ -413,16 +425,16 @@ export const imageMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> =
   SnackBar: SnackBarImage,
   Steps: StepsImage,
   Switch: SwitchImage,
-  Table: TableImage,
   SwitchGroup: SwitchGroupImage,
+  Table: TableImage,
   Tabs: TabsImage,
   Tag: TagImage,
   Text: TextImage,
-  Theme: ThemeImage,
   TextField: TextFieldImage,
+  Theme: ThemeImage,
   ThemeToggler: ThemeTogglerImage,
-  Tooltip: TooltipImage,
   Timer: TimerImage,
+  Tooltip: TooltipImage,
   User: UserImage,
   UserSelect: UserSelectImage,
 };
