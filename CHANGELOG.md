@@ -1,5 +1,16 @@
 # Changelog
 
+## v3.28.0 (10/08/2022)
+Самое важное:
+- Разработали компонент `AvatarGroup`, теперь есть возможность показывать аватарки, группируя их.
+- Доработали документацию
+---
+
+- [docs(review): added new images (#2479)](https://github.com/consta-design-system/uikit/commit/fb475f9f495ff2cba6fbf4182ef064954c3284c1) - [@gizeasy](https://github.com/gizeasy)
+- [feat(AvatarGroup): add component for avatar grouping (#2471)](https://github.com/consta-design-system/uikit/commit/e9c3a6094eb952f7719c269a9296fbbc6b37ad3f) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
 ## v3.27.0 (05/08/2022)
 Самое важное:
 - В `ProgressLine` добавили модификацию `step`. Теперь можно показывать прогресс по шагам.
@@ -433,29 +444,3 @@ endFieldOnBlur - deleted, use onBlur
 - [refactor(DateTime): small code change (#2036)](https://github.com/consta-design-system/uikit/commit/41fc55023cec03a149915a2ade8b23b962632f78) - [@gizeasy](https://github.com/gizeasy)
 - [fix(Storybook): fixed link to Skeleton (#2021)](https://github.com/consta-design-system/uikit/commit/1fe1b336ee55f7028ccc3cea84b1123a01d4c311) - [@gizeasy](https://github.com/gizeasy)
 - [fix(ContextMenuItem): fix cascading styles (#2020)](https://github.com/consta-design-system/uikit/commit/5093c47d3c07f68abf9e2175d3f626c8054184d9) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v3.15.0 (02/02/2022)
-Самое важное:
-
-- научили `Breadcrumbs` адаптироваться к ширине контейнера: теперь хлебные крошки красиво сворачиваются до многоточия  или прокручиваются (это можно настроить)
-- в `SnackBar`  добавили линейный таймер
-- в `ContextMenu` — поддержкау `ref`
-- в `Responses` появилась новая иллюстрация
-- добавили `MixDropdownAnimate`, миксин для анимации всплывающих окон
-- и ещё всякое по мелочи.
-
----
-
-- [docs(repos): add templates (#2017)](https://github.com/consta-design-system/uikit/commit/e28c27534a49aa9be51b51e1b0b4237312edd2ef) - [@arhayka](https://github.com/arhayka)
-- [feat(Breadcrumbs): add props fitMode and lastItemIsLink (#2009)](https://github.com/consta-design-system/uikit/commit/a14df2bde5853337b6ce8e7827ccff2ebe726689) - [@gizeasy](https://github.com/gizeasy)
-- [feat(SnackBar): add progress line timer (#1978)](https://github.com/consta-design-system/uikit/commit/56691134fedae9494c86cd1f7d33d3900ebfc6ef) - [@N1MBER](https://github.com/N1MBER)
-- [feat(TextField): add new type for autoComplete on TextField (#1994)](https://github.com/consta-design-system/uikit/commit/b143f5c90a6da5811efd97ec5ae3318c577eff10) - [@N1MBER](https://github.com/N1MBER)
-- [feat(ContextMenu): add ref for component (#2008)](https://github.com/consta-design-system/uikit/commit/afc39eb3c3f5089498fbb5aefc925085c159317f) - [@gizeasy](https://github.com/gizeasy)
-- [feat(MixDropdownAnimate): add mix  (#2007)](https://github.com/consta-design-system/uikit/commit/c66fc3546bd87bd3aba15333bd765aa9edebf3e2) - [@gizeasy](https://github.com/gizeasy)
-- [feat(useHideElementsInLine): add hook (#2006)](https://github.com/consta-design-system/uikit/commit/e10c1f996f142d4d8ab6e1909a1ef66bafd09d56) - [@gizeasy](https://github.com/gizeasy)
-- [feat(useRefs): add hook useRefs (#2005)](https://github.com/consta-design-system/uikit/commit/01fdc8b03b1f3fbf420955e884b18ff38fb848ee) - [@gizeasy](https://github.com/gizeasy)
-- [docs(common): edit links to github (#1998)](https://github.com/consta-design-system/uikit/commit/43dd100026a67dc42d594ed7c61596ffef992e6a) - [@arhayka](https://github.com/arhayka)
-- [docs(DatePicker): edit docs (#1997)](https://github.com/consta-design-system/uikit/commit/f22b08b40490e6ab76ab2621e6f298737cc2f645) - [@arhayka](https://github.com/arhayka)
-- [feat(ResponsesExit): add new response image (#1995)](https://github.com/consta-design-system/uikit/commit/727c52318ca4d93d46ddb70eac72dd9a1d9fa6d7) - [@N1MBER](https://github.com/N1MBER)
