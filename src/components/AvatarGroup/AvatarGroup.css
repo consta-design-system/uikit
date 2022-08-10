@@ -24,7 +24,7 @@
   }
 
   & > .Avatar {
-    outline: var(--space-3xs) solid var(--color-bg-default);
+    box-shadow: 0 0 0 var(--space-3xs) var(--color-bg-default);
 
     &:not(:last-child) {
       margin-left: calc(-1 * var(--avatar-group-margin));
