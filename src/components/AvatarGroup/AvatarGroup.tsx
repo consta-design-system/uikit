@@ -3,7 +3,7 @@ import './AvatarGroup.css';
 import React, { forwardRef } from 'react';
 
 import { cn } from '../../utils/bem';
-import { Avatar, avatarPropFormDefault } from '../Avatar/Avatar';
+import { Avatar, avatarPropFormDefault, cnAvatar } from '../Avatar/Avatar';
 
 import { withDefaultGetters } from './helpers';
 import { AvatarGroupComponent, AvatarGroupProps, avatarGroupPropSizeDefault } from './types';
@@ -23,17 +23,17 @@ function AvatarGroupRender(props: AvatarGroupProps, ref: React.Ref<HTMLDivElemen
     ...otherProps
   } = withDefaultGetters(props);
 
+  const ShowMoreTag = onMoreClick ? 'button' : 'div';
+
   return (
     <div className={cnAvatarGroup({ size })} ref={ref} {...otherProps}>
       {items.length > visibleCount && (
-        <Avatar
-          className={cnAvatarGroup('ShowMore')}
+        <ShowMoreTag
+          className={cnAvatar({ size, form }, [cnAvatarGroup('ShowMore')])}
           onClick={onMoreClick}
-          name={`+ ${items.length - visibleCount}`}
-          as={onMoreClick ? 'button' : 'div'}
-          size={size}
-          form={form}
-        />
+        >
+          {`+${items.length - visibleCount}`}
+        </ShowMoreTag>
       )}
       {items.slice(0, visibleCount).map((item, index) => (
         <Avatar
