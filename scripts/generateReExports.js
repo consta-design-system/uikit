@@ -52,10 +52,17 @@ const generateReExport = async (src, reexport, ignore, distPath) => {
     const blockDir = join(reexport, componentName);
     const distDir = join(distPath, componentName);
 
-    // writeFile(join(distDir, 'index.js'), exportESMFile);
+    console.log(componentName);
+    console.log(blockDir);
+
+    const exporte = getESMExportTemplate({
+      filePath: `./${componentName}`,
+    });
+
+    writeFile(join(src, blockDir, 'index.ts'), exporte);
 
     if (!existsSync(join(src, blockDir, 'index.ts'))) {
-      return;
+      continue;
     }
 
     const exportESMFile = getESMExportTemplate({
