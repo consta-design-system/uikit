@@ -7,7 +7,6 @@ const {
   iconsFileTransformed,
   responsesImagesTransformed,
 } = require('./helpers');
-const { componentsInfoBuild } = require('./helpers/componentsInfoBuild');
 
 class GenerateCommand extends Command {
   async safeInvokeHook(hook) {
@@ -36,20 +35,17 @@ class GenerateCommand extends Command {
       this.error(`Can't load build config ${configPath}.`);
     }
 
-    const { srcPath, ignore = [], afterBuild } = config;
+    const { src, ignore = [], afterBuild } = config;
 
     try {
       await Promise.all([
-        componentsInfoBuild(srcPath).then(() =>
-          this.log(logSymbols.success, 'component info generated'),
-        ),
-        iconsTransformed(ignore, srcPath).then(() =>
+        iconsTransformed(ignore, src).then(() =>
           this.log(logSymbols.success, 'icons copied & transformed'),
         ),
-        iconsFileTransformed(ignore, srcPath).then(() =>
+        iconsFileTransformed(ignore, src).then(() =>
           this.log(logSymbols.success, 'fileIcons copied & transformed'),
         ),
-        responsesImagesTransformed(ignore, srcPath).then(() =>
+        responsesImagesTransformed(ignore, src).then(() =>
           this.log(logSymbols.success, 'responsesImages copied & transformed'),
         ),
       ]);

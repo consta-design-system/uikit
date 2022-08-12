@@ -1,12 +1,6 @@
 import React from 'react';
-import { select } from '@storybook/addon-knobs';
-import { fileIconPropSize, fileIconPropSizeDefault } from '../../FileIcon';
 #imports#
-import { FileIconsGalleryItem } from './Item/FileIconsGallery-Item';
-
-const defaultKnobs = () => ({
-  size: select('size', fileIconPropSize, fileIconPropSizeDefault),
-});
+import { FileIconsGalleryItem } from './FileIconsGalleryItem';
 
 const icons = {
   #icons#
@@ -20,7 +14,7 @@ export function FileIconsGallery() {
   return (
     <div className="tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full">
       {names.map((name) => (
-        <FileIconsGalleryItem key={name} name={name} icon={icons[name]} {...defaultKnobs()} />
+        <FileIconsGalleryItem key={name} name={name} icon={icons[name]} />
       ))}
     </div>
   );

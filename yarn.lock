@@ -2416,7 +2416,7 @@
     "@svgr/hast-util-to-babel-ast" "^5.5.0"
     svg-parser "^2.0.2"
 
-"@svgr/plugin-jsx@^6.2.1", "@svgr/plugin-jsx@^6.3.1":
+"@svgr/plugin-jsx@^6.3.1":
   version "6.3.1"
   resolved "https://registry.yarnpkg.com/@svgr/plugin-jsx/-/plugin-jsx-6.3.1.tgz#de7b2de824296b836d6b874d498377896e367f50"
   integrity sha512-r9+0mYG3hD4nNtUgsTXWGYJomv/bNd7kC16zvsM70I/bGeoCi/3lhTmYqeN6ChWX317OtQCSZZbH4wq9WwoXbw==
@@ -2426,7 +2426,7 @@
     "@svgr/hast-util-to-babel-ast" "^6.3.1"
     svg-parser "^2.0.4"
 
-"@svgr/plugin-prettier@^6.1.2", "@svgr/plugin-prettier@^6.3.1":
+"@svgr/plugin-prettier@^6.3.1":
   version "6.3.1"
   resolved "https://registry.yarnpkg.com/@svgr/plugin-prettier/-/plugin-prettier-6.3.1.tgz#1e5a783261afa75e46a9b1aa850fe96afe7cd6f7"
   integrity sha512-ao+oyTDw1ouvS4l8Ibto3O4G7EsuebtAwALB0NsBpjC+pqFkJ1WoKmDw7YFG9jMZgwE/3m0Ry1Xdc48gYIff2g==
@@ -2443,7 +2443,7 @@
     deepmerge "^4.2.2"
     svgo "^1.2.2"
 
-"@svgr/plugin-svgo@^6.2.0", "@svgr/plugin-svgo@^6.3.1":
+"@svgr/plugin-svgo@^6.3.1":
   version "6.3.1"
   resolved "https://registry.yarnpkg.com/@svgr/plugin-svgo/-/plugin-svgo-6.3.1.tgz#3c1ff2efaed10e5c5d35a6cae7bacaedc18b5d4a"
   integrity sha512-yJIjTDKPYqzFVjmsbH5EdIwEsmKxjxdXSGJVLeUgwZOZPAkNQmD1v7LDbOdOKbR44FG8465Du+zWPdbYGnbMbw==

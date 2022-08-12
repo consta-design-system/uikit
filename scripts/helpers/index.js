@@ -67,7 +67,10 @@ const transformCSS = async (ignore, src, distPaths, options) => {
   cssFiles.forEach(async (fileName) => {
     const css = await readFile(fileName);
     const distFilename = resolve(firstDistPath, relative(src, fileName));
-    const processedCss = await postcssProcessor.process(css, { from: fileName, to: distFilename });
+    const processedCss = await postcssProcessor.process(css, {
+      from: fileName,
+      to: distFilename,
+    });
     for (const distPath of distPaths) {
       const newPath = resolve(distPath, relative(src, fileName));
       await ensureDir(dirname(newPath));
@@ -87,7 +90,7 @@ function sortComponent(a, b) {
 }
 
 const createIconStories = async (svgComponents, src) => {
-  const templatePath = './builder/templates/Icons.stories.tsx.template';
+  const templatePath = './scripts/templates/Icons.stories.tsx.template';
   const template = await readFile(templatePath, 'utf8');
 
   let imports = '';
@@ -97,19 +100,21 @@ const createIconStories = async (svgComponents, src) => {
     .sort(sortComponent)
     .forEach(async (componentName) => {
       if (iconComponentIsValid(svgComponents[componentName])) {
-        imports += `import { ${componentName} } from '../../${componentName}/${componentName}';\n`;
+        imports += `import { ${componentName} } from '../../../${componentName}';\n`;
         icons += `${componentName},\n`;
       }
     });
 
-  const jsCode = template.replace(/#imports#/g, imports).replace(/#icons#/g, icons);
-  const jsPatch = `${src}/icons/Icon/__stories__/Icons.stories.tsx`;
+  const jsCode = template
+    .replace(/#imports#/g, imports)
+    .replace(/#icons#/g, icons);
+  const jsPatch = `${src}/icons/Icon/__stand__/IconGrid/IconGrid.tsx`;
   await ensureDir(dirname(jsPatch));
   await writeFile(jsPatch, jsCode);
 };
 
 const createFileIconsStories = async (svgComponents, src) => {
-  const templatePath = './builder/templates/FileIconsGallery.tsx.template';
+  const templatePath = './scripts/templates/FileIconsGallery.tsx.template';
   const template = await readFile(templatePath, 'utf8');
 
   let imports = '';
@@ -124,8 +129,10 @@ const createFileIconsStories = async (svgComponents, src) => {
       }
     });
 
-  const jsCode = template.replace(/#imports#/g, imports).replace(/#icons#/g, icons);
-  const jsPatch = `${src}/fileIcons/FileIcon/__stories__/FileIconsGallery/FileIconsGallery.tsx`;
+  const jsCode = template
+    .replace(/#imports#/g, imports)
+    .replace(/#icons#/g, icons);
+  const jsPatch = `${src}/fileIcons/FileIcon/__stand__/FileIconsGallery/FileIconsGallery.tsx`;
   await ensureDir(dirname(jsPatch));
   await writeFile(jsPatch, jsCode);
 };
@@ -229,7 +236,7 @@ const iconsTransformed = async (ignore, src) => {
         sizes,
         componentName,
         pathOutdir: `./src/icons/${componentName}/`,
-        templatePath: './builder/templates/Icon.js.template',
+        templatePath: './scripts/templates/Icon.js.template',
       });
     }
   });
@@ -271,7 +278,7 @@ const iconsFileTransformed = async (ignore, src) => {
       await createComponent({
         componentName,
         pathOutdir: `./src/fileIcons/${componentName}/`,
-        templatePath: './builder/templates/FileIcon.js.template',
+        templatePath: './scripts/templates/FileIcon.js.template',
       });
     }
   });
@@ -307,14 +314,16 @@ const responsesImagesTransformed = async (ignore, src) => {
     await createComponent({
       componentName,
       pathOutdir: `./src/responsesImages/${componentName}/`,
-      templatePath: './builder/templates/ResponsesImage.tsx.template',
+      templatePath: './scripts/templates/ResponsesImage.tsx.template',
     });
   });
   // await createFileIconsStories(svgComponents, src);
 };
 
 const copyAssets = async (ignore, src, distPaths) => {
-  const assetFiles = await fg([`${src}/**/*.{svg,jpg,png,gif,md,woff,woff2}`], { ignore });
+  const assetFiles = await fg([`${src}/**/*.{svg,jpg,png,gif,md,woff,woff2}`], {
+    ignore,
+  });
 
   assetFiles.forEach(async (fileName) => {
     const asset = await readFile(fileName);
@@ -366,7 +375,10 @@ ${blocks.join('\n')}
 `;
 
 const updateGitignore = async (allKeys, gitignorePath) => {
-  let gitignore = await readFile(gitignorePath, { flag: 'a+', encoding: 'utf8' });
+  let gitignore = await readFile(gitignorePath, {
+    flag: 'a+',
+    encoding: 'utf8',
+  });
 
   gitignore = gitignore.split('\n').map((el) => el.trim());
   let startOfBuildPaths = gitignore.indexOf('# build');
@@ -444,7 +456,10 @@ const generateReExports = (
 
         if (tech.match(/^tsx?$/)) {
           if (!components.has(entity.block)) {
-            components.set(entity.block, new Map(platforms.map((p) => [p, new Map()])));
+            components.set(
+              entity.block,
+              new Map(platforms.map((p) => [p, new Map()])),
+            );
           }
           if (layerToPlatform[layer]) {
             for (const platform of layerToPlatform[layer]) {
@@ -468,7 +483,8 @@ const generateReExports = (
       await ensureDir(blockDir);
 
       for (const [platform, entities] of platforms) {
-        const platformDir = platform === 'common' ? blockDir : join(blockDir, platform);
+        const platformDir =
+          platform === 'common' ? blockDir : join(blockDir, platform);
 
         await ensureDir(platformDir);
         await writeFile(
