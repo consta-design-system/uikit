@@ -3,12 +3,12 @@
 
   &_type_border {
     --line-thickness: 1px;
-    background-color: var(--color-bg-border);
+    background-color: var(--color-control-bg-border-default);
   }
 
   &_type_running {
     --line-thickness: 2px;
-    background-color: var(--color-bg-brand);
+    background-color: var(--color-control-bg-primary);
     transition: transform 0.25s, width 0.25s, height 0.25s;
   }
 

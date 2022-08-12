@@ -3,25 +3,33 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  padding: var(--space-xs) 0;
+  padding: var(--tab-padding) 0;
   color: var(--color-typo-secondary);
   background-color: transparent;
   border: none;
   font-family: var(--font);
   font-size: var(--tab-font-size);
-  line-height: var(--line-height-text-s);
+  line-height: var(--size-text-2xl);
   text-align: left;
   cursor: pointer;
   transition: color 0.2s;
 
   &_size {
+    &_xs {
+      --only-icon-size: var(--space-m);
+      --tab-padding: calc(calc(var(--space-xs) - var(--space-3xs)) / 2);
+      --tab-font-size: var(--size-text-xs);
+    }
+
     &_s {
       --only-icon-size: var(--space-l);
+      --tab-padding: calc(var(--space-xs) - var(--space-3xs));
       --tab-font-size: var(--size-text-s);
     }
 
     &_m {
       --only-icon-size: var(--space-xl);
+      --tab-padding: calc(calc(var(--space-m) - var(--space-3xs)) / 2);
       --tab-font-size: var(--size-text-m);
     }
   }
