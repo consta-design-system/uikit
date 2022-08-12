@@ -25,11 +25,6 @@
       { "transform": "typescript-transform-paths", "afterDeclarations": true }
     ]
   },
-  "include": [
-    "src/**/*",
-    "config.js",
-    "scripts/prepareStands.js",
-    "scripts/config.js"
-  ],
+  "include": ["src/**/*", "scripts/**/*"],
   "exclude": ["node_modules", "**/node_modules/*"]
 }

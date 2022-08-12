@@ -1,0 +1,10 @@
+import { createFileIcon } from '../createFileIcon/createFileIcon';
+
+import #componentName#SizeM from './#componentName#_size_m';
+import #componentName#SizeS from './#componentName#_size_s';
+
+export const #componentName# = createFileIcon({
+  m: #componentName#SizeM,
+  s: #componentName#SizeS,
+  name: '#componentName#',
+});

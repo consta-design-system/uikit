@@ -29,7 +29,7 @@ import { MdxMenu } from '@consta/stand';
 
 Это основной тип кнопки (используется по умолчанию). Если на странице одна кнопка, используйте такую. Если несколько, оставьте кнопку `primary` для самого важного, «целевого» действия, на котором нужно сделать акцент. Постарайтесь использовать одну кнопку `primary` на странице или в блоке.
 
-```ts
+```tsx
 <Button label="Войти" />
 <Button label="Продолжить" iconRight={IconForward} />
 <Button label="Добавить" iconRight={IconAdd} onlyIcon />
@@ -41,10 +41,16 @@ import { MdxMenu } from '@consta/stand';
 
 Эта кнопка похожа на `primary`, но не так сильно выделяется. Используйте её, когда хотите сохранить важность действия, но не слишком привлекать к нему внимание.
 
-```ts
+```tsx
 <Button label="Читать далее" view="secondary" />
 <Button label="Комментировать" view="secondary" iconLeft={IconChat} />
 <Button label="Редактировать" view="secondary" iconRight={IconEdit} onlyIcon />
+```
+
+```css
+.css {
+  width: 100%;
+}
 ```
 
 `<ButtonExampleViewSecondary />`

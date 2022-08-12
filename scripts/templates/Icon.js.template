@@ -1,0 +1,9 @@
+import { createIcon } from '../createIcon/createIcon';
+
+#sizesImports#
+export const #componentName# = createIcon({
+  m: #componentName#Size#sizeM#,
+  s: #componentName#Size#sizeS#,
+  xs: #componentName#Size#sizeXs#,
+  name: '#componentName#',
+});
