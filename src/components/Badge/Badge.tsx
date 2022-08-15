@@ -8,7 +8,7 @@ import { cn } from '../../utils/bem';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { useTheme } from '../Theme/Theme';
 
-export const badgePropSize = ['m', 's', 'l'] as const;
+export const badgePropSize = ['m', 'xs', 's', 'l'] as const;
 export type BadgePropSize = typeof badgePropSize[number];
 export const badgePropSizeDefault: BadgePropSize = badgePropSize[0];
 

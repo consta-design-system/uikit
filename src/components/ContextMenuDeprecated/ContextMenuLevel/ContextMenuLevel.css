@@ -1,0 +1,24 @@
+.ContextMenuLevel {
+  z-index: 9999;
+  box-sizing: border-box;
+  width: 240px;
+  padding: var(--space-xs) 0;
+  background: var(--color-bg-default);
+  border:
+    var(--control-border-width) solid
+    var(--color-control-bg-border-default);
+  border-radius: var(--control-radius);
+  box-shadow: var(--shadow-layer);
+
+  &:not(&_firstLevel)&_direction {
+    &_rightStartUp,
+    &_leftStartUp {
+      transform: translateY(calc(-1 * (var(--space-xs) + 1px)));
+    }
+
+    &_rightStartDown,
+    &_leftStartDown {
+      transform: translateY(calc(var(--space-xs) + 1px));
+    }
+  }
+}

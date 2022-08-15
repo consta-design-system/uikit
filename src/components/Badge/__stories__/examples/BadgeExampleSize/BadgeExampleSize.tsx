@@ -8,6 +8,11 @@ import { Badge } from '../../../Badge';
 export const BadgeExampleSize = () => (
   <div className={cnDocsDecorator('Section', [cnDocsExample()])}>
     <Badge
+      size="xs"
+      label="Badge xs"
+      className={wp.decorator({ 'indent-r': 'm' })}
+    />
+    <Badge
       size="s"
       label="Badge s"
       className={wp.decorator({ 'indent-r': 'm' })}

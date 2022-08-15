@@ -1,6 +1,6 @@
 import './Table.stories.css';
 
-import { action } from '@storybook/addon-actions';
+
 import { boolean, number, object, select, text } from '@storybook/addon-knobs';
 import React, { useState } from 'react';
 
@@ -32,10 +32,11 @@ import {
   withHiddenColumnTableMock,
 } from '../__mock__/data.mock';
 import { verticalAligns } from '../Cell/TableCell';
-import { Filters, SortByProps } from '../filtering';
+import { Filters } from '../filtering';
 import {
   headerVerticalAligns,
   sizes,
+  SortByProps,
   Table,
   TableColumn,
   TableProps as Props,
@@ -44,7 +45,7 @@ import {
   zebraStriped,
 } from '../Table';
 import WithAdditionalClassName from './examples/WithAdditionalClassName/WithAdditionalClassName';
-import WithHandleCellClick from './examples/WithHandleCellClick';
+import WithHandleCellClick from './examples/WithHandleCellClick.tsx_';
 import WithRowCreationAndDeletion from './examples/WithRowCreationAndDeletion.tsx_';
 import { cnTableStories } from './helpers';
 import mdx from './Table.docs.mdx';

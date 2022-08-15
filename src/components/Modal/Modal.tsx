@@ -37,6 +37,7 @@ type ModalProps = PropsWithHTMLAttributes<
     position?: ModalPropPosition;
     children?: React.ReactNode;
     container?: HTMLDivElement | undefined;
+    afterClose?: () => void;
     refsForExcludeClickOutside?: React.RefObject<HTMLElement>[];
   },
   HTMLDivElement
@@ -49,11 +50,10 @@ const cnModal = cn('Modal');
  * получает рефы всех вложенных порталов в модалку
  * для дальнейшего исключения их из useClickOutside
  */
-
 const ContextConsumer: React.FC<{
   onClickOutside?: (event: MouseEvent) => void;
-  children: React.ReactNode;
   ignoreClicksInsideRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
+  children: React.ReactNode;
 }> = ({ onClickOutside, children, ignoreClicksInsideRefs }) => {
   const { refs } = usePortalContext();
 
@@ -85,6 +85,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
     container = window.document.body,
     refsForExcludeClickOutside,
     rootClassName,
+    afterClose,
     style,
     ...otherProps
   } = props;
@@ -112,6 +113,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
       appear
       classNames={cnForCssTransition(cnModal)}
       timeout={240}
+      onExited={afterClose}
       nodeRef={portalRef}
     >
       <PortalWithTheme

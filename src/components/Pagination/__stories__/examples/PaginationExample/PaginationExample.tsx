@@ -2,6 +2,7 @@ import React from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
+import { Button } from '../../../../Button/Button';
 import { Pagination } from '../../../Pagination';
 
 export const PaginationExample = () => {
@@ -155,6 +156,14 @@ export const PaginationExampleMinified = () => {
         totalPages={3}
         minified
       />
+    </StoryBookExample>
+  );
+};
+
+export const PaginationExampleButton = () => {
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <Button label="Показать еще" view="ghost" width="full" />
     </StoryBookExample>
   );
 };

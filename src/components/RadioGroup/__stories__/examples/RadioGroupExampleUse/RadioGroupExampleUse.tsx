@@ -40,7 +40,7 @@ export const RadioGroupExampleMore = () => {
           <RadioGroup
             value={value}
             items={itemsOne}
-            getLabel={(item) => item}
+            getItemLabel={(item) => item}
             onChange={({ value }) => setValue(value)}
           />
         </div>
@@ -56,7 +56,7 @@ export const RadioGroupExampleMore = () => {
           <RadioGroup
             value={valueTwo}
             items={itemsTwo}
-            getLabel={(item) => item}
+            getItemLabel={(item) => item}
             onChange={({ value }) => setValueTwo(value)}
           />
         </div>
@@ -84,7 +84,7 @@ export const RadioGroupExampleOne = () => {
           <RadioGroup
             value={value}
             items={itemsThree}
-            getLabel={(item) => item}
+            getItemLabel={(item) => item}
             onChange={({ value }) => setValue(value)}
           />
         </div>
@@ -100,7 +100,7 @@ export const RadioGroupExampleOne = () => {
           <RadioGroup
             value={valueTwo}
             items={itemsFour}
-            getLabel={(item) => item}
+            getItemLabel={(item) => item}
             onChange={({ value }) => setValueTwo(value)}
           />
         </div>
@@ -121,7 +121,7 @@ export const RadioGroupExampleChecked = () => {
       <RadioGroup
         value={value}
         items={itemsChecked}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         onChange={({ value }) => setValue(value)}
       />
     </StoryBookExample>

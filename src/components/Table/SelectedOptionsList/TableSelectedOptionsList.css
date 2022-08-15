@@ -8,13 +8,23 @@
   &-Options {
     display: flex;
     flex: 1;
-    flex-wrap: wrap;
+    box-sizing: border-box;
+    max-width: 100%;
     padding: 0 var(--cell-padding-horizontal);
+    flex-wrap: wrap;
   }
 
   &-Option {
+    max-width: 100%;
     margin: var(--space-2xs) 0;
     margin-right: var(--space-2xs);
+
+    & .TagBase-Label {
+      overflow: hidden;
+      max-width: 100%;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   }
 
   &-Button {
