@@ -1,6 +1,5 @@
 import './Popover.stories.css';
 
-import { action } from '@storybook/addon-actions';
 import { boolean, number, object, select, text } from '@storybook/addon-knobs';
 import React, { useRef, useState } from 'react';
 

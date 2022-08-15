@@ -102,10 +102,7 @@ module.exports = {
     'no-constant-condition': 'off',
     'react/require-default-props': 'off',
     'no-param-reassign': 'off',
-    'react/function-component-definition': [
-      'error',
-      { namedComponents: 'arrow-function' },
-    ],
+    'react/function-component-definition': 'off',
     'jsx-a11y/label-has-associated-control': [
       'error',
       {

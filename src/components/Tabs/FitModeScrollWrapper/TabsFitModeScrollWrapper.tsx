@@ -8,8 +8,8 @@ import { IconArrowLeft } from '../../../icons/IconArrowLeft/IconArrowLeft';
 import { IconArrowRight } from '../../../icons/IconArrowRight/IconArrowRight';
 import { cn } from '../../../utils/bem';
 import { Button } from '../../Button/Button';
-import { getTabsWidth, TabsFitModeWrapperProps } from '../helpers';
-import { getVisibleTabsRange } from './helpers';
+import { getTabsWidth, getVisibleTabsRange } from '../helpers';
+import { TabsFitModeWrapperProps } from '../types';
 
 const cnTabsFitModeScrollWrapper = cn('TabsFitModeScrollWrapper');
 
@@ -17,7 +17,7 @@ export const TabsFitModeScrollWrapper = <ITEM,>({
   tabsDimensions,
   items,
   renderItemsList,
-  getChecked,
+  getItemChecked,
 }: TabsFitModeWrapperProps<ITEM>): React.ReactElement | null => {
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
   const [
@@ -60,7 +60,7 @@ export const TabsFitModeScrollWrapper = <ITEM,>({
   };
 
   // Подскролливаем к выбранному табу
-  const checkedTabIdx = items.findIndex(getChecked);
+  const checkedTabIdx = items.findIndex(getItemChecked);
   React.useEffect(() => {
     if (isScrollable) {
       scrollTabIntoView(checkedTabIdx);

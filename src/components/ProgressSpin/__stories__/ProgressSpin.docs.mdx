@@ -23,19 +23,19 @@ import { ProgressSpin } from '@consta/uikit/ProgressSpin';
 ## Процент готовности
 
 Если хотите показать, сколько ещё ждать, укажите в процентах, насколько процесс
-близок к завершению — с помощью свойства `progress`.
+близок к завершению — с помощью свойства `value`.
 
 Чтобы анимировать индикатор, добавьте `animation` (тогда он плавно прокрутится до величины,
-которую вы указали в `progress`).
+которую вы указали в `value`).
 
 Если опустить это свойство, то индикатор будет бесконечно крутиться.
 
 ```ts
 <ProgressSpin size="m" />
-<ProgressSpin progress={20} size="m" />
-<ProgressSpin progress={40} size="m" />
-<ProgressSpin progress={60} size="m" />
-<ProgressSpin animation progress={80} size="m" />
+<ProgressSpin value={20} size="m" />
+<ProgressSpin value={40} size="m" />
+<ProgressSpin value={60} size="m" />
+<ProgressSpin animation value={80} size="m" />
 ```
 
 <ProgressSpinExampleProgress />
@@ -45,11 +45,11 @@ import { ProgressSpin } from '@consta/uikit/ProgressSpin';
 За размер индикатора отвечает свойство `size`.
 
 ```ts
-<ProgressSpin progress={70} size="2xl" />
-<ProgressSpin progress={70} size="xl" />
-<ProgressSpin progress={70} size="l" />
-<ProgressSpin progress={70} size="m" />
-<ProgressSpin progress={70} size="s" />
+<ProgressSpin value={70} size="2xl" />
+<ProgressSpin value={70} size="xl" />
+<ProgressSpin value={70} size="l" />
+<ProgressSpin value={70} size="m" />
+<ProgressSpin value={70} size="s" />
 ```
 
 <ProgressSpinExampleSize />
@@ -64,7 +64,7 @@ import { ProgressSpin } from '@consta/uikit/ProgressSpin';
 
 | Свойство                            | Тип                        | По умолчанию | Описание                                                                           |
 | ----------------------------------- | -------------------------- | ------------ | ---------------------------------------------------------------------------------- |
-| [`progress?`](#процент-готовности)  | `number`                   | -            | Выполненная часть процесса в процентах (определяет заполненную область индикатора) |
+| [`value?`](#процент-готовности)     | `number`                   | -            | Выполненная часть процесса в процентах (определяет заполненную область индикатора) |
 | [`animation?`](#процент-готовности) | `boolean`                  | -            | Включает плавное изменение индикатора до величины, указанной в `progress`          |
 | [`size?`](#размер)                  | `'m','s','l','xl','2xl'`   | `'m'`        | Размер                                                                             |
 | `className?`                        | `string`                   | -            | Дополнительный класс                                                               |
@@ -78,6 +78,6 @@ import React from 'react';
 import { ProgressSpin } from '@consta/uikit/ProgressSpin';
 
 const App = () => {
-  return <ProgressSpin progress={70} />;
+  return <ProgressSpin value={70} />;
 };
 ```

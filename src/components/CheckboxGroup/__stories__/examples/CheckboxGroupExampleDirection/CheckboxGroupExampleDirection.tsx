@@ -13,8 +13,8 @@ export const CheckboxGroupExampleRow = () => {
       <CheckboxGroup
         value={value}
         items={items}
-        getLabel={(item) => item.name}
-        getDisabled={(item) => item.disabled}
+        getItemLabel={(item) => item.name}
+        getItemDisabled={(item) => item.disabled}
         onChange={({ value }) => setValue(value)}
         direction="row"
       />
@@ -30,8 +30,8 @@ export const CheckboxGroupExampleColumn = () => {
       <CheckboxGroup
         value={value}
         items={items}
-        getLabel={(item) => item.name}
-        getDisabled={(item) => item.disabled}
+        getItemLabel={(item) => item.name}
+        getItemDisabled={(item) => item.disabled}
         onChange={({ value }) => setValue(value)}
         direction="column"
       />
