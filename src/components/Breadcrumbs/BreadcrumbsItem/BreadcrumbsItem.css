@@ -1,0 +1,40 @@
+.BreadcrumbsItem {
+  display: flex;
+  align-items: center;
+
+  &-Delimiter {
+    flex: none;
+  }
+
+  &-Link {
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &_active {
+      pointer-events: none;
+    }
+
+    &:hover {
+      color: var(--color-typo-link-hover);
+    }
+  }
+
+  &-SelectButton {
+    width: vaer(--space-s);
+    height: var(--space-s);
+    margin: 0;
+    margin-left: var(--space-xs);
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    & .Icon {
+      transition: color 0.2s;
+    }
+
+    &:hover .Icon {
+      color: var(--color-typo-link-hover);
+    }
+  }
+}

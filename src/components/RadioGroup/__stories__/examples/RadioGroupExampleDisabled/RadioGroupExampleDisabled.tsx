@@ -13,7 +13,7 @@ export const RadioGroupExampleDisabled = () => {
       <RadioGroup
         value={value}
         items={simpleItems}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         onChange={({ value }) => setValue(value)}
         disabled
       />
@@ -29,8 +29,8 @@ export const RadioGroupExampleDisabledItem = () => {
       <RadioGroup
         value={value}
         items={items}
-        getLabel={(item) => item.name}
-        getDisabled={(item) => item.disabled}
+        getItemLabel={(item) => item.name}
+        getItemDisabled={(item) => item.disabled}
         onChange={({ value }) => setValue(value)}
       />
     </StoryBookExample>

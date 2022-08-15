@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { SortByProps } from '../../../filtering';
-import { Table, TableColumn } from '../../../Table';
+import { SortByProps, Table, TableColumn } from '../../../Table';
 
 type Row = {
   id: string;

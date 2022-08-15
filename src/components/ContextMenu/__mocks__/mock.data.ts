@@ -1,109 +1,108 @@
-import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconAllDone } from '../../../icons/IconAllDone/IconAllDone';
 import { IconAttach } from '../../../icons/IconAttach/IconAttach';
 import { IconBag } from '../../../icons/IconBag/IconBag';
 import { IconEye } from '../../../icons/IconEye/IconEye';
 import { IconSun } from '../../../icons/IconSun/IconSun';
-import { BadgePropStatus } from '../../Badge/Badge';
-import { ContextMenuAccent } from '../helpers';
+import { ContextMenuGroupDefault, ContextMenuItemDefault } from '../types';
 
-export const groups = [
+export const groups: ContextMenuGroupDefault[] = [
   {
-    name: 'Первая группа',
+    label: 'Первая группа',
     id: 1,
   },
   {
-    name: 'Вторая группа',
+    label: 'Вторая группа',
     id: 2,
   },
-] as const;
+];
 
-export declare type Item = {
-  name: string;
-  group?: typeof groups[number]['id'];
-  subMenu?: Item[];
+export type Item = ContextMenuItemDefault & {
   switch?: boolean;
-  status?: BadgePropStatus;
-  icon?: IconComponent | null;
-  accent?: ContextMenuAccent;
-  disabled?: boolean;
 };
 
 export const exampleItems: Item[] = [
   {
-    name: 'Скрепка',
-    icon: IconAttach,
-    accent: 'success',
-    group: 1,
+    label: 'Скрепка',
+    leftIcon: IconAttach,
+    rightIcon: IconAttach,
+    status: 'success',
+    groupId: 1,
     subMenu: [
       {
-        name: 'Пункт - 1',
+        label: 'Пункт - 1',
         status: 'success',
-        accent: 'success',
       },
       {
-        name: 'Пункт - 2',
-        accent: 'success',
+        label: 'Пункт - 2',
+        status: 'success',
         subMenu: [
           {
-            name: 'Пункт - 3',
-            icon: IconSun,
+            label: 'Пункт - 3',
+            leftIcon: IconSun,
+            rightIcon: IconSun,
             subMenu: [
               {
-                name: 'Пункт - 5',
+                label: 'Пункт - 5',
               },
               {
-                name: 'Пункт - 6',
+                label: 'Пункт - 6',
               },
             ],
           },
           {
-            name: 'Пункт - 4',
-            icon: IconSun,
+            label: 'Пункт - 4',
+            leftIcon: IconSun,
+            rightIcon: IconSun,
             subMenu: [
               {
-                name: 'Пункт - 7',
+                label: 'Пункт - 7',
               },
               {
-                name: 'Пункт - 8',
+                label: 'Пункт - 8',
               },
             ],
           },
           {
-            name: 'Пункт - 9',
-            icon: IconSun,
+            label: 'Пункт - 9',
+            leftIcon: IconSun,
+            rightIcon: IconSun,
           },
         ],
       },
     ],
   },
   {
-    name: 'Глаз',
-    status: 'normal',
-    icon: IconEye,
-    accent: 'success',
-    group: 1,
+    label: 'Глаз',
+    leftIcon: IconEye,
+    rightIcon: IconEye,
+    groupId: 1,
   },
   {
-    name: 'Две галочки',
-    group: 2,
-    icon: IconAllDone,
-    switch: false,
-    accent: 'alert',
+    label: 'Две галочки',
+    groupId: 2,
+    leftIcon: IconAllDone,
+    rightIcon: IconAllDone,
+    rightSide: '!',
+    switch: true,
+    status: 'alert',
   },
   {
-    name: 'Чемодан',
-    group: 2,
-    icon: IconBag,
-    switch: false,
-    accent: 'alert',
+    label: 'Чемодан',
+    groupId: 2,
+    leftIcon: IconBag,
+    rightIcon: IconBag,
+    rightSide: '!',
+    switch: true,
+    status: 'alert',
   },
   {
-    name: 'Солнце',
-    group: 2,
-    icon: IconSun,
-    switch: false,
-    accent: 'alert',
+    label: 'Солнце',
+    groupId: 2,
+    leftIcon: IconSun,
+    rightIcon: IconSun,
+    status: 'alert',
+    rightSide: '!',
+    switch: true,
     disabled: true,
   },
 ];

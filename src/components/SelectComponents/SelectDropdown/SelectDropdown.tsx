@@ -1,6 +1,6 @@
 import './SelectDropdown.css';
 
-import React, { Fragment, useMemo, useRef, useState } from 'react';
+import React, { Fragment, useMemo, useRef } from 'react';
 import { Transition } from 'react-transition-group';
 
 import {
@@ -16,7 +16,7 @@ import {
 import { cn } from '../../../utils/bem';
 import { fabricIndex } from '../../../utils/fabricIndex';
 import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
-import { Direction, Popover } from '../../Popover/Popover';
+import { Popover } from '../../Popover/Popover';
 import { Text } from '../../Text/Text';
 import { SelectCreateButton } from '../SelectCreateButton/SelectCreateButton';
 import { SelectGroupLabel } from '../SelectGroupLabel/SelectGroupLabel';
@@ -80,9 +80,6 @@ export const SelectDropdown: SelectDropdown = (props) => {
     ...otherProps
   } = props;
 
-  const getIndex = fabricIndex(-1);
-  const [direction, setDirection] = useState<Direction>('downStartLeft');
-
   const indent = form === 'round' ? 'increased' : 'normal';
 
   const popoverRef = useRef<HTMLDivElement>(null);
@@ -104,81 +101,83 @@ export const SelectDropdown: SelectDropdown = (props) => {
       nodeRef={popoverRef}
       timeout={animateTimeout}
     >
-      {(animate) => (
-        <Popover
-          {...otherProps}
-          anchorRef={controlRef}
-          direction="downStartLeft"
-          possibleDirections={[
-            'downStartLeft',
-            'upStartLeft',
-            'downStartRight',
-            'upStartRight',
-          ]}
-          offset="2xs"
-          ref={popoverRef}
-          role="listbox"
-          onSetDirection={setDirection}
-          className={cnSelectDropdown({ form, size }, [
-            className,
-            cnMixPopoverAnimate({ direction, animate }),
-          ])}
-          equalAnchorWidth
-        >
-          <div
-            className={cnSelectDropdown('List', { size, form })}
-            ref={dropdownRef}
+      {(animate) => {
+        const getIndex = fabricIndex(-1);
+        return (
+          <Popover
+            {...otherProps}
+            anchorRef={controlRef}
+            direction="downStartLeft"
+            possibleDirections={[
+              'downStartLeft',
+              'upStartLeft',
+              'downStartRight',
+              'upStartRight',
+            ]}
+            offset="2xs"
+            ref={popoverRef}
+            role="listbox"
+            className={cnSelectDropdown({ form, size }, [
+              className,
+              cnMixPopoverAnimate({ animate }),
+            ])}
+            equalAnchorWidth
           >
-            {isLoading && (
-              <SelectLoader mode={isListShowed ? 'blur' : 'empty'} />
-            )}
-            {visibleItems.map((group) => {
-              if (isOptionForCreate(group)) {
-                return (
-                  <SelectCreateButton
-                    size={size}
-                    labelForCreate={labelForCreate}
-                    inputValue={group.label}
-                    indent={indent}
-                    {...getOptionProps({ index: getIndex(), item: group })}
-                  />
-                );
-              }
-              return (
-                <Fragment key={group.key}>
-                  {group.group && getGroupLabel && (
-                    <SelectGroupLabel
-                      label={getGroupLabel(group.group)}
+            <div
+              className={cnSelectDropdown('List', { size, form })}
+              ref={dropdownRef}
+            >
+              {isLoading && (
+                <SelectLoader mode={isListShowed ? 'blur' : 'empty'} />
+              )}
+              {visibleItems.map((group) => {
+                if (isOptionForCreate(group)) {
+                  return (
+                    <SelectCreateButton
                       size={size}
+                      labelForCreate={labelForCreate}
+                      inputValue={group.label}
                       indent={indent}
+                      {...getOptionProps({ index: getIndex(), item: group })}
                     />
-                  )}
-                  {group.items.map((item, i) => {
-                    return (
-                      <Fragment key={`${group.key}-${i}`}>
-                        {renderItem({
-                          item,
-                          ...getOptionProps({ index: getIndex(), item }),
-                        })}
-                      </Fragment>
-                    );
-                  })}
-                </Fragment>
-              );
-            })}
-            {!isLoading && hasItems && notFound && labelForNotFound && (
-              <Text className={cnSelectDropdown('LabelForNotFound')}>
-                {labelForNotFound}
-              </Text>
-            )}
-            {!isLoading && !hasItems && labelForEmptyItems && (
-              <Text className={cnSelectDropdown('LabelForEmptyItems')}>
-                {labelForEmptyItems}
-              </Text>
-            )}
-          </div>
-        </Popover>
-      )}
+                  );
+                }
+                return (
+                  <Fragment key={group.key}>
+                    {group.group && getGroupLabel && (
+                      <SelectGroupLabel
+                        label={getGroupLabel(group.group)}
+                        size={size}
+                        indent={indent}
+                      />
+                    )}
+                    {group.items.map((item, i) => {
+                      return (
+                        <Fragment key={`${group.key}-${i}`}>
+                          {renderItem({
+                            item,
+                            ...getOptionProps({ index: getIndex(), item }),
+                          })}
+                        </Fragment>
+                      );
+                    })}
+                  </Fragment>
+                );
+              })}
+              {!isLoading && hasItems && notFound && labelForNotFound && (
+                <Text className={cnSelectDropdown('LabelForNotFound')}>
+                  {labelForNotFound}
+                </Text>
+              )}
+              {!isLoading && !hasItems && labelForEmptyItems && (
+                <Text className={cnSelectDropdown('LabelForEmptyItems')}>
+                  {labelForEmptyItems}
+                </Text>
+              )}
+            </div>
+          </Popover>
+        );
+      }}
     </Transition>
   );
 };

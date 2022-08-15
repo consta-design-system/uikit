@@ -1,113 +1,39 @@
 import './Tabs.css';
 
-import React, { createRef, useMemo } from 'react';
+import React, { createRef, forwardRef, useMemo } from 'react';
 
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
 import { useResizeObserved } from '../../hooks/useResizeObserved/useResizeObserved';
-import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
-import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
-import { TabsFitModeDropdownWrapper } from './FitModeDropdownWrapper/TabsFitModeDropdownWrapper';
-import { TabsFitModeScrollWrapper } from './FitModeScrollWrapper/TabsFitModeScrollWrapper';
 import {
   getTabsDirection,
-  RenderItemsListProp,
-  TabDimensions,
-  TabsDirection,
-  TabsFitModeWrapperProps,
+  getTabsWrapper,
+  withDefaultGetters,
 } from './helpers';
 import { TabsBorderLine, TabsRunningLine } from './Line/TabsLine';
 import { cnTabsTab, TabsTab } from './Tab/TabsTab';
-
-export const tabsSizes = ['m', 's'] as const;
-export type TabsPropSize = typeof tabsSizes[number];
-export const tabsDefaultSize: TabsPropSize = tabsSizes[0];
-
-export const tabsViews = ['bordered', 'clear'] as const;
-export type TabsPropView = typeof tabsViews[number];
-export const tabsDefaultView: TabsPropView = tabsViews[0];
-
-export const tabsLinePositions = ['bottom', 'top', 'left', 'right'] as const;
-export type TabsPropLinePosition = typeof tabsLinePositions[number];
-export const tabsDefaultLinePosition: TabsPropLinePosition = 'bottom';
-
-export const tabsFitModes = ['scroll', 'dropdown'] as const;
-export type TabsPropFitMode = typeof tabsFitModes[number];
-export const tabsDefaultFitMode: TabsPropFitMode = 'dropdown';
-
-export type TabsPropGetLabel<ITEM> = (item: ITEM) => string | number;
-export type TabsPropGetIcon<ITEM> = (item: ITEM) => IconComponent | undefined;
-export type TabsPropOnChange<ITEM, ITEM_ELEMENT> = (props: {
-  e: React.MouseEvent<ITEM_ELEMENT>;
-  value: ITEM;
-}) => void;
-
-type RenderItemProps<ITEM, ELEMENT extends HTMLElement> = {
-  item: ITEM;
-  onChange: React.MouseEventHandler<ELEMENT>;
-  checked: boolean;
-  label: string;
-  icon?: IconComponent;
-  size: TabsPropSize;
-  iconSize?: IconPropSize;
-  onlyIcon?: boolean;
-};
-
-type RenderItem<ITEM, ELEMENT extends HTMLElement> = (
-  props: RenderItemProps<ITEM, ELEMENT>,
-) => React.ReactElement | null;
-
-export type TabsProps<
-  ITEM,
-  ITEM_ELEMENT extends HTMLElement = HTMLButtonElement,
-> = PropsWithHTMLAttributesAndRef<
-  {
-    size?: TabsPropSize;
-    onlyIcon?: boolean;
-    view?: TabsPropView;
-    iconSize?: IconPropSize;
-    items: ITEM[];
-    value?: ITEM | null;
-    getIcon?: TabsPropGetIcon<ITEM>;
-    getLabel: TabsPropGetLabel<ITEM>;
-    children?: never;
-    onChange: TabsPropOnChange<ITEM, ITEM_ELEMENT>;
-    renderItem?: RenderItem<ITEM, ITEM_ELEMENT>;
-  } & (
-    | {
-        linePosition?: Extract<TabsPropLinePosition, 'bottom' | 'top'>;
-        fitMode?: 'dropdown' | 'scroll';
-      }
-    | {
-        linePosition: Extract<TabsPropLinePosition, 'left' | 'right'>;
-        fitMode?: never;
-      }
-  ),
-  HTMLDivElement
->;
-
-type Tabs = <ITEM, ITEMELEMENT extends HTMLElement = HTMLButtonElement>(
-  props: TabsProps<ITEM, ITEMELEMENT>,
-  ref: React.Ref<HTMLDivElement>,
-) => React.ReactElement | null;
+import {
+  RenderItemProps,
+  RenderItemsListProp,
+  TabDimensions,
+  TabsComponent,
+  tabsDefaultFitMode,
+  tabsDefaultLinePosition,
+  tabsDefaultSize,
+  tabsDefaultView,
+  TabsProps,
+} from './types';
 
 export const cnTabs = cn('Tabs');
 
-function renderItemDefault<ITEM, ITEMELEMENT extends HTMLElement>(
-  props: RenderItemProps<ITEM, ITEMELEMENT>,
+function renderItemDefault<ITEM>(
+  props: RenderItemProps<ITEM>,
 ): React.ReactElement {
   const { onChange, ...otherProps } = props;
-  return (
-    <TabsTab
-      {...otherProps}
-      onChange={
-        onChange as unknown as React.MouseEventHandler<HTMLButtonElement>
-      }
-    />
-  );
+  return <TabsTab {...otherProps} onChange={onChange} />;
 }
 
-export const Tabs: Tabs = React.forwardRef((props, ref) => {
+const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
   const {
     size = tabsDefaultSize,
     className,
@@ -117,17 +43,17 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
     linePosition = tabsDefaultLinePosition,
     fitMode = tabsDefaultFitMode,
     onlyIcon,
-    getIcon,
-    getLabel,
+    getItemIcon,
+    getItemLabel,
     onChange,
     iconSize,
     renderItem: renderItemProp = renderItemDefault,
     ...otherProps
-  } = props;
+  } = withDefaultGetters(props);
 
   const { getOnChange, getChecked } = useChoiceGroup({
     value: value || null,
-    getKey: getLabel,
+    getKey: getItemLabel,
     callBack: onChange,
     multiple: false,
   });
@@ -162,8 +88,8 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
         getOnChange(item)(...args);
       },
       checked: getChecked(item),
-      label: getLabel(item).toString(),
-      icon: getIcon && getIcon(item),
+      label: getItemLabel(item).toString(),
+      icon: getItemIcon?.(item),
       onlyIcon,
       size,
       iconSize,
@@ -177,7 +103,7 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
       {items.map((item, idx) => (
         <div
           ref={tabRefs[idx]}
-          key={getLabel(item)}
+          key={getItemLabel(item)}
           className={cnTabs('Tab', { direction: tabsDirection }, [
             getTabClassName?.(idx),
           ])}
@@ -208,32 +134,17 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
         tabsDimensions={tabsDimensions}
         renderItem={renderItem}
         renderItemsList={renderItemsList}
-        getLabel={getLabel}
-        getChecked={getChecked}
+        getItemLabel={getItemLabel}
+        getItemChecked={getChecked}
         items={items}
       />
       {view === 'bordered' && <TabsBorderLine linePosition={linePosition} />}
     </div>
   );
-});
-
-const getTabsWrapper = (
-  tabsDirection: TabsDirection,
-  fitMode: TabsPropFitMode,
-) => {
-  if (tabsDirection === 'vertical') {
-    return OnlyListWrapper;
-  }
-
-  return fitMode === 'scroll'
-    ? TabsFitModeScrollWrapper
-    : TabsFitModeDropdownWrapper;
 };
 
-const OnlyListWrapper = <ITEM,>({
-  renderItemsList,
-}: TabsFitModeWrapperProps<ITEM>): React.ReactElement | null => (
-  <>{renderItemsList({})}</>
-);
+export const Tabs = forwardRef(TabsRender) as TabsComponent;
 
 export { TabsTab, cnTabsTab };
+
+export * from './types';
