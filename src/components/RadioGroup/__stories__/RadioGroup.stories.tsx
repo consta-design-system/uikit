@@ -14,7 +14,7 @@ import {
   radioGroupPropAlignDefault,
   radioGroupSizes,
   radioGroupViews,
-} from '../RadioGroup';
+} from '../RadioGroupCannary';
 import mdx from './RadioGroup.docs.mdx';
 
 const cnRadioGroupStories = cn('RadioGroupStories');
@@ -46,8 +46,8 @@ export const Playground = () => {
           align={align}
           value={value}
           items={items}
-          getLabel={(item) => item.name}
-          getDisabled={disabledItem ? (item) => item.disabled : undefined}
+          getItemLabel={(item) => item.name}
+          getItemDisabled={disabledItem ? (item) => item.disabled : undefined}
           onChange={onChange}
           name={cnRadioGroupStories()}
           direction={direction}
@@ -64,8 +64,8 @@ export const Playground = () => {
 };
 
 export default createMetadata({
-  title: 'Компоненты|/Базовые/RadioGroup',
-  id: 'components/RadioGroup',
+  title: 'Компоненты|/Базовые/RadioGroup(Canary)',
+  id: 'components/RadioGroupCanary',
   parameters: {
     docs: {
       page: mdx,

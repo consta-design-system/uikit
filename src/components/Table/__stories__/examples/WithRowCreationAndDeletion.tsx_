@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import { action } from '@storybook/addon-actions';
+
 import { text } from '@storybook/addon-knobs';
 import React, { useState } from 'react';
 
@@ -52,7 +51,7 @@ type ActionItems = {
 
 // eslint-disable-next-line no-bitwise
 const binaryCheck = (base: number, comparator: number) =>
-  (base && comparator) === comparator;
+  (base & comparator) === comparator;
 const binarySubtraction = (base: number, subtrahend: number) =>
   // eslint-disable-next-line no-bitwise
   binaryCheck(base, subtrahend) ? base ^ subtrahend : base;
@@ -121,7 +120,6 @@ const ALL_ACTIONS =
   AVAILABLE_ACTIONS.CREATE_SUB |
   AVAILABLE_ACTIONS.DELETE;
 
-// eslint-disable-next-line import/no-anonymous-default-export, react/function-component-definition
 export default function () {
   const [contextMenuState, setContextMenuState] = useState<ContextMenuState>(
     {},

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { ChoiceGroup } from '../../../ChoiceGroup';
+import { ChoiceGroup } from '../../../ChoiceGroupCanary';
 
 type Item = string;
 
@@ -22,7 +22,7 @@ export const ChoiceGroupExampleTextOverflow = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         name="ChoiceGroupExampleTextOverflow"
         truncate
       />

@@ -1,0 +1,131 @@
+/*
+задается сверху
+--item-width
+--parent-width
+*/
+
+.DateTimeSlider {
+  --slider-height: var(--control-height-m);
+  --slider-width: calc(var(--date-time-cell-width) * 14 + var(--space-m));
+  display: flex;
+  width: var(--slider-width);
+
+  &-Slider {
+    position: relative;
+    overflow: hidden;
+    flex: 1;
+    height: var(--slider-height);
+    margin: 0 var(--space-xs);
+    background: var(--color-control-bg-ghost);
+    border-radius: var(--control-radius);
+  }
+
+  &-Button_direction_prev {
+    transform: rotate(180deg);
+  }
+
+  &-SliderBody {
+    display: flex;
+    height: 100%;
+  }
+
+  &-Parent {
+    position: absolute;
+    display: flex;
+    width: var(--parent-width);
+    height: 100%;
+    transition: transform 0.5s;
+
+    &_position {
+      &_0 {
+        transform: translateX(calc(var(--parent-width) * -1));
+      }
+
+      &_1 {
+        transform: translateX(0);
+      }
+
+      &_2 {
+        transform: translateX(calc(var(--parent-width)));
+      }
+
+      &_3 {
+        transform: translateX(calc(var(--parent-width) * 2));
+      }
+    }
+
+    &_selected {
+      &::before {
+        content: '';
+        position: absolute;
+        left: var(--value-offset);
+        bottom: 0;
+        width: var(--value-width);
+        height: var(--space-3xs);
+        background-color: var(--color-control-bg-primary);
+        pointer-events: none;
+      }
+
+      /* исправляет разрыв между полосками */
+      & + .DateTimeSlider-Parent_selected::before {
+        left: calc(var(--value-offset) - 1px);
+        width: calc(var(--value-width) + 1px);
+      }
+    }
+  }
+
+  &-ParentLabel {
+    position: absolute;
+    right: 0;
+    transition: transform 0.5s, color 0.2s;
+
+    &_position {
+      &_0 {
+        transform: translateX(calc(var(--item-width) * -13));
+      }
+
+      &_1 {
+        transform:
+          translateX(
+            calc((var(--parent-width) + var(--item-width)) / -2 + 50%)
+          );
+      }
+
+      &_2 {
+        transform: translateX(calc(var(--space-2xs) * -1));
+      }
+
+      &_3 {
+        transform: translateX(calc(var(--parent-width)));
+      }
+    }
+  }
+
+  &-Item {
+    display: flex;
+    align-items: flex-end;
+    width: var(--item-width);
+    height: 100%;
+    margin-bottom: var(--space-3xs);
+    background: transparent;
+    border: none;
+    outline: transparent;
+    cursor: pointer;
+  }
+
+  &-ItemLabel {
+    width: var(--item-width);
+    height: var(--space-m);
+    margin-bottom: var(--space-3xs);
+  }
+
+  &-Selector {
+    position: absolute;
+    width: calc(var(--item-width) * 2);
+    height: var(--slider-height);
+    background-color: var(--color-control-bg-ghost);
+    border-radius: var(--control-radius);
+    transition: transform 0.3s;
+    transform: translateX(calc(var(--item-width) * var(--current-item)));
+  }
+}

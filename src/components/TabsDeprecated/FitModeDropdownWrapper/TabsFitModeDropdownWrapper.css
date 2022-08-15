@@ -1,0 +1,22 @@
+.TabsFitModeDropdownWrapper {
+  display: flex;
+  align-items: center;
+
+  &-Tabs {
+    max-width: 100%;
+  }
+
+  &-MoreItems {
+    position: absolute;
+  }
+
+  &-Tab {
+    &_hidden {
+      position: absolute;
+
+      /* Чтобы из-за скрытых элементов не появлялся скролл экрана */
+      left: -100vw;
+      visibility: hidden;
+    }
+  }
+}

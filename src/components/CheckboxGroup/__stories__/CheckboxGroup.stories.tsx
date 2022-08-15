@@ -50,8 +50,8 @@ export const Playground = () => {
         <CheckboxGroup
           value={value}
           items={items}
-          getLabel={(item) => item.name}
-          getDisabled={(item) => item.disabled}
+          getItemLabel={(item) => item.name}
+          getItemDisabled={(item) => item.disabled}
           onChange={({ value }) => setValue(value)}
           name={cnCheckboxGroupStories()}
           direction={direction}
@@ -65,8 +65,8 @@ export const Playground = () => {
 };
 
 export default createMetadata({
-  title: 'Компоненты|/Базовые/CheckboxGroup',
-  id: 'components/CheckboxGroup',
+  title: 'Компоненты|/Базовые/CheckboxGroup(Canary)',
+  id: 'components/CheckboxGroupCanary',
   parameters: {
     docs: {
       page: mdx,

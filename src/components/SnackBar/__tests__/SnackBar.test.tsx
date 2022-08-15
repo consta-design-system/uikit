@@ -52,7 +52,7 @@ describe('Компонент SnackBar', () => {
       });
     });
     describe('проверка message', () => {
-      it(`отображает текст сообщения`, () => {
+      it(`отображает текст сообщения `, () => {
         const messageText = 'Сообщение';
         const items: SnackBarProps['items'] = [
           {

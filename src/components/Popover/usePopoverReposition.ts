@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import { useMutableRef } from '../../hooks/useMutableRef/useMutableRef';
 
 const getAllParents = (element: HTMLElement): readonly Node[] => {
   const mutableParents: Node[] = [];
@@ -23,25 +25,26 @@ export const usePopoverReposition = ({
   scrollAnchorRef: React.RefObject<HTMLElement | null>;
   onRequestReposition: () => void;
 }) => {
-  React.useEffect(() => {
+  const onRequestRepositionRef = useMutableRef(onRequestReposition);
+
+  useEffect(() => {
+    const fn = () => onRequestRepositionRef.current();
     if (isActive) {
-      window.addEventListener('resize', onRequestReposition);
+      window.addEventListener('resize', fn);
 
       const allParents = scrollAnchorRef?.current
         ? getAllParents(scrollAnchorRef.current)
         : [];
-      allParents.forEach((parentEl) =>
-        parentEl.addEventListener('scroll', onRequestReposition),
-      );
+      allParents.forEach((parentEl) => parentEl.addEventListener('scroll', fn));
 
       return () => {
-        window.removeEventListener('resize', onRequestReposition);
+        window.removeEventListener('resize', fn);
 
         allParents.forEach((parentEl) =>
-          parentEl.removeEventListener('scroll', onRequestReposition),
+          parentEl.removeEventListener('scroll', fn),
         );
       };
     }
     return undefined;
-  }, [isActive, scrollAnchorRef, onRequestReposition]);
+  }, [scrollAnchorRef]);
 };

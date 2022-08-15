@@ -15,7 +15,7 @@
     flex-direction: column;
     flex: 1;
     justify-content: flex-end;
-    align-items: flex-end;
+    align-items: end;
     max-width: 200px;
     padding-right: var(--space-xs);
     padding-left: var(--space-xs);
