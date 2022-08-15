@@ -1,4 +1,3 @@
-import { action } from '@storybook/addon-actions';
 import React from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
@@ -6,7 +5,7 @@ import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExamp
 import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Checkbox } from '../../../Checkbox';
 
-const emptyFunction = action('emptyFunction');
+const emptyFunction = () => {};
 
 export const CheckboxExampleView = () => (
   <StoryBookExample

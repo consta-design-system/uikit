@@ -13,6 +13,7 @@ type CardStatus = typeof cardStatus[number] | string;
 
 type Props = {
   shadow?: boolean;
+  border?: boolean;
   verticalSpace?: Size;
   horizontalSpace?: Size;
   form?: FormMap;

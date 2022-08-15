@@ -6,10 +6,10 @@ import { ProgressSpin } from '../../../ProgressSpin';
 
 export const ProgressSpinExampleSize = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
-    <ProgressSpin progress={70} size="2xl" />
-    <ProgressSpin progress={70} size="xl" />
-    <ProgressSpin progress={70} size="l" />
-    <ProgressSpin progress={70} size="m" />
-    <ProgressSpin progress={70} size="s" />
+    <ProgressSpin value={70} size="2xl" />
+    <ProgressSpin value={70} size="xl" />
+    <ProgressSpin value={70} size="l" />
+    <ProgressSpin value={70} size="m" />
+    <ProgressSpin value={70} size="s" />
   </StoryBookExample>
 );

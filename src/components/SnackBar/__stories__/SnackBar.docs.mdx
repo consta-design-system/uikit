@@ -4,6 +4,7 @@ import { SnackBarExampleIcon } from './examples/SnackBarExampleIcon/SnackBarExam
 import { SnackBarExampleTimer } from './examples/SnackBarExampleTimer/SnackBarExampleTimer';
 import { SnackBarExampleButtons } from './examples/SnackBarExampleButtons/SnackBarExampleButtons';
 import { SnackBarExampleText } from './examples/SnackBarExampleText/SnackBarExampleText';
+import { SnackBarExampleAdaptive } from './examples/SnackBarExampleAdaptive/SnackBarExampleAdaptive';
 
 <!--info
 description: Мгновенные сообщения для пользователя. Перекрывает содержимое.
@@ -31,6 +32,7 @@ import { SnackBar } from '@consta/uikit/SnackBar';
 - [Возможность закрыть снекбар](#возможность-закрыть-снекбар)
 - [Автоматическое закрытие](#автоматическое-закрытие)
   - [Таймер](#таймер)
+- [Адаптивность](#адаптивность)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
@@ -328,6 +330,36 @@ export const SnackBarExampleTimer: React.FC = () => {
 ```
 
 <SnackBarExampleTimer />
+
+## Адаптивность
+
+Компонент подстраивается под ширину контейнера, автоматически проставляются
+горизонтальные отступы `xs`.
+
+```tsx
+import React from 'react';
+
+import { Card } from '../../../../Card/Card';
+import { SnackBar } from '../../../SnackBar';
+
+const items = [
+  {
+    key: '1',
+    message: 'Это пример сообщения в контейнере шириной 450 px',
+    status: 'normal',
+  },
+];
+
+export const SnackBarExampleAdaptive = () => {
+  return (
+    <Card verticalSpace="xs" style={{ maxWidth: 200 }}>
+      <SnackBar items={items} />
+    </Card>
+  );
+};
+```
+
+<SnackBarExampleAdaptive />
 
 ## Импорт
 

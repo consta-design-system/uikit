@@ -26,5 +26,13 @@
     ]
   },
   "include": ["src/**/*", "scripts/**/*"],
-  "exclude": ["node_modules", "**/node_modules/*"]
+  "exclude": [
+    "node_modules",
+    "**/node_modules/*",
+    "*.stories.tsx",
+    "**/*.stories.tsx",
+    "*.stories.ts",
+    "**/__stories__/*",
+    "__stories__"
+  ]
 }

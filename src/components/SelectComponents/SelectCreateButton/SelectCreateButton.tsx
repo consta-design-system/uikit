@@ -18,7 +18,7 @@ type SelectCreateButtonProps = PropsWithHTMLAttributes<
   HTMLDivElement
 >;
 
-const cnSelectCreateButton = cn('SelectCreateButton');
+export const cnSelectCreateButton = cn('SelectCreateButton');
 
 export const SelectCreateButton: React.FC<SelectCreateButtonProps> = (
   props,

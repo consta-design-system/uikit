@@ -16,7 +16,7 @@
   "dependencies": {
     "@bem-react/classname": "^1.5.12",
     "@bem-react/classnames": "^1.3.10",
-    "@consta/stand": "^0.0.23",
+    "@consta/stand": "^0.0.24",
     "compute-scroll-into-view": "^1.0.17",
     "date-fns": "^2.29.1",
     "focus-trap-react": "8.7.0",
@@ -50,7 +50,7 @@
     "pre-push": "yarn run tsc-dry-run",
     "pre-commit": "yarn run lint-staged",
     "pre-build": "node scripts/preBuild.js --config=scripts/generateReExportsConfig.js",
-    "test": "yarn lint && yarn tsc-dry-run && yarn unit",
+    "test": "yarn tsc-dry-run && yarn unit",
     "unit": "jest",
     "unit:watch": "jest --watch",
     "unit:clear": "jest --clearCache",

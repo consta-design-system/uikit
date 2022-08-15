@@ -1,6 +1,5 @@
 import './SnackBar.stories.css';
 
-import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
 import React, { useReducer } from 'react';
 

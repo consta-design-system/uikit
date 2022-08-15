@@ -1,30 +1,37 @@
 import './TextField.css';
 
-import React, { forwardRef, useEffect, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect } from 'react';
 import TextAreaAutoSize from 'react-textarea-autosize';
 
+import { useFlag } from '../../hooks/useFlag/useFlag';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
+import { useMutableRef } from '../../hooks/useMutableRef/useMutableRef';
 import { useSortSteps } from '../../hooks/useSortSteps/useSortSteps';
 import { IconClose } from '../../icons/IconClose/IconClose';
+import { IconEye } from '../../icons/IconEye/IconEye';
+import { IconEyeClose } from '../../icons/IconEyeClose/IconEyeClose';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { IconSelectOpen } from '../../icons/IconSelectOpen/IconSelectOpen';
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
+import { isString } from '../../utils/type-guards';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { FieldCaption } from '../FieldCaption/FieldCaption';
 import { FieldLabel } from '../FieldLabel/FieldLabel';
 import {
   getIncrementFlag,
-  getValueByStepArray,
-  getValueByStepNumber,
+  getTypeForRender,
+  getValueByStep,
   sizeMap,
+} from './helpers';
+import {
   TextFieldComponent,
   textFieldPropFormDefault,
   TextFieldProps,
   textFieldPropSizeDefault,
   textFieldPropViewDefault,
   textFieldPropWidthDefault,
-} from './helpers';
+} from './types';
 
 export const COMPONENT_NAME = 'TextField' as const;
 export const cnTextField = cn(COMPONENT_NAME);
@@ -64,6 +71,7 @@ export const TextFieldRender = <TYPE extends string>(
     rightSide,
     autoComplete,
     withClearButton,
+    incrementButtons = true,
     max,
     min,
     readOnly,
@@ -78,14 +86,36 @@ export const TextFieldRender = <TYPE extends string>(
     iconSize: iconSizeProp,
     focused,
     onClick,
+    // onkey props
+    onKeyDown: onKeyDownProp,
+    onKeyDownCapture,
+    onKeyPress,
+    onKeyPressCapture,
+    onKeyUp,
+    onKeyUpCapture,
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, props, textFieldRef);
-  const [focus, setFocus] = useState<boolean>(autoFocus);
+  const [focus, setFocus] = useFlag(autoFocus);
+  const [passwordVisible, setPasswordVisuble] = useFlag(false);
+
+  const valueRef = useMutableRef(value);
+  const onClickRef = useMutableRef(onClick);
+  const onChangeRef = useMutableRef(onChange);
+
+  const handleEyeClick = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      e.stopPropagation();
+      setPasswordVisuble.toogle();
+      inputRef.current?.focus();
+    },
+    [],
+  );
+
   const textarea = type === 'textarea';
   const LeftIcon = leftSide;
   const RightIcon = rightSide;
-  const leftSideIsString = typeof leftSide === 'string';
-  const rightSideIsString = typeof rightSide === 'string';
+  const leftSideIsString = isString(leftSide);
+  const rightSideIsString = isString(rightSide);
   const iconSize = getByMap(sizeMap, size, iconSizeProp);
 
   const sortedSteps = useSortSteps({
@@ -96,18 +126,21 @@ export const TextFieldRender = <TYPE extends string>(
 
   const handleChange: React.ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement
-  > = (e) => {
-    const { value } = e.target;
-    !disabled && onChange?.({ e, id, name, value: value || null });
-  };
+  > = useCallback(
+    (e) => {
+      !disabled &&
+        onChangeRef.current?.({ e, id, name, value: e.target.value || null });
+    },
+    [id, name, disabled],
+  );
 
   const handleBlur: React.FocusEventHandler<HTMLElement> = (e) => {
-    setFocus(false);
+    setFocus.off();
     onBlur?.(e);
   };
 
   const handleFocus: React.FocusEventHandler<HTMLElement> = (e) => {
-    setFocus(true);
+    setFocus.on();
     onFocus?.(e);
   };
 
@@ -123,28 +156,27 @@ export const TextFieldRender = <TYPE extends string>(
     placeholder,
     autoComplete,
     readOnly,
-    required,
     tabIndex,
     name,
+    onKeyDownCapture,
+    onKeyPress,
+    onKeyPressCapture,
+    onKeyUp,
+    onKeyUpCapture,
     'id': id ? id.toString() : '',
     'aria-label': ariaLabel,
   };
 
-  useEffect(() => {
-    if (autoFocus) {
-      setTimeout(() => {
-        inputRef.current?.focus();
-      });
-    }
-  }, []);
+  const Eye = passwordVisible ? IconEyeClose : IconEye;
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     const flag = getIncrementFlag(e);
+    onKeyDownProp?.(e);
     if (type === 'number' && typeof flag === 'boolean' && !disabled) {
       e.preventDefault();
       onChange?.({
         e,
-        value: getValueByStep(flag).toString(),
+        value: getValueByStep(sortedSteps, value, flag, min, max),
       });
     }
   };
@@ -154,13 +186,13 @@ export const TextFieldRender = <TYPE extends string>(
     cols,
     minRows: minRows || rows,
     maxRows: maxRows || rows,
-    inputRef: useForkRef([inputRef, inputRefProp]) as (
+    ref: useForkRef([inputRef, inputRefProp]) as (
       node: HTMLTextAreaElement,
     ) => void,
   };
 
   const inputProps = {
-    type,
+    type: getTypeForRender(type, passwordVisible),
     max,
     min,
     step: !Array.isArray(sortedSteps) ? sortedSteps : 0,
@@ -171,30 +203,12 @@ export const TextFieldRender = <TYPE extends string>(
     ]) as React.RefCallback<HTMLInputElement>,
   };
 
-  const handleClear = (e: React.MouseEvent<HTMLButtonElement>) => {
-    onChange?.({
+  const handleClear = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+    onChangeRef.current?.({
       e,
-      value: '',
+      value: null,
     });
-  };
-
-  const getValueByStep = (isIncrement?: boolean) => {
-    return Array.isArray(sortedSteps)
-      ? getValueByStepArray({
-          min,
-          max,
-          value,
-          isIncrement,
-          steps: sortedSteps,
-        }) ?? 0
-      : getValueByStepNumber({
-          value,
-          step: sortedSteps,
-          isIncrement,
-          min,
-          max,
-        });
-  };
+  }, []);
 
   const changeNumberValue = (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -202,17 +216,23 @@ export const TextFieldRender = <TYPE extends string>(
   ) => {
     onChange?.({
       e,
-      value: getValueByStep(isIncrement).toString(),
+      value: getValueByStep(sortedSteps, value, isIncrement, min, max),
     });
   };
 
   const rootProps = {
-    // для того чтобы любые клики во внутренним элементам фокусили инпут
-    onClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    onClick: useCallback((e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       inputRef.current?.focus();
-      onClick?.(e);
-    },
+      onClickRef.current?.(e);
+    }, []),
   };
+
+  // при смене passwordVible, перемещаем курсор в конец строки
+  useEffect(() => {
+    if (type === 'password' && inputRef.current) {
+      inputRef.current.selectionStart = valueRef.current?.length || 0;
+    }
+  }, [passwordVisible]);
 
   return (
     <div
@@ -264,7 +284,7 @@ export const TextFieldRender = <TYPE extends string>(
             <input {...commonProps} {...inputProps} />
           )}
 
-          {type === 'number' && (
+          {type === 'number' && incrementButtons && (
             <div className={cnTextField('Counter')}>
               <button
                 onFocus={handleFocus}
@@ -296,7 +316,17 @@ export const TextFieldRender = <TYPE extends string>(
             </button>
           )}
 
-          {RightIcon && type !== 'number' && (
+          {type === 'password' && value && (
+            <button
+              className={cnTextField('ClearButton')}
+              type="button"
+              onClick={handleEyeClick}
+            >
+              <Eye className={cnTextField('Icon')} size={iconSize} />
+            </button>
+          )}
+
+          {RightIcon && type !== 'number' && type !== 'password' && (
             <div
               className={cnTextField('Side', {
                 position: 'right',
@@ -326,4 +356,4 @@ export const TextFieldRender = <TYPE extends string>(
 };
 
 export const TextField = forwardRef(TextFieldRender) as TextFieldComponent;
-export * from './helpers';
+export * from './types';
