@@ -19,10 +19,10 @@ import { RadioGroupExampleView } from './examples/RadioGroupExampleView/RadioGro
 description: Группа радиокнопок. Можно выбрать один вариант.
 -->
 
-# RadioGroup
+# RadioGroup(Canary)
 
 ```tsx
-import { RadioGroup } from '@consta/uikit/RadioGroup';
+import { RadioGroup } from '@consta/uikit/RadioGroupCanary';
 ```
 
 Группа радиокнопок с одним `name`. Пользователь может выбрать один вариант из списка.
@@ -66,11 +66,11 @@ const items = [
 
 ### Название радиокнопки
 
-Надпись рядом с радиокнопкой можно получить с помощью функции `getLabel`. Лучше писать название с заглавной буквы, точка не нужна.
+Надпись рядом с радиокнопкой можно получить с помощью функции `getItemLabel` или указав свойство `label` в элементе списка. Лучше писать название с заглавной буквы, точка не нужна.
 
 ### Неактивная радиокнопка
 
-Одну или несколько радиокнопок можно сделать неактивными — если вы не хотите, чтобы их выбирали. За неактивность отвечает функция `getDisabled`.
+Одну или несколько радиокнопок можно сделать неактивными — если вы не хотите, чтобы их выбирали. За неактивность отвечает функция `getItemDisabled` или свойство `disabled` в элементе списка.
 
 ```tsx
 type Item = {
@@ -104,8 +104,8 @@ function RadioGroupExampleDisabledItem() {
     <RadioGroup
       value={value}
       items={items}
-      getLabel={(item) => item.name}
-      getDisabled={(item) => item.disabled}
+      getItemLabel={(item) => item.name}
+      getItemDisabled={(item) => item.disabled}
       onChange={({ value }) => setValue(value)}
     />
   );
@@ -155,7 +155,7 @@ function RadioGroupExampleChecked() {
       <RadioGroup
         value={value}
         items={itemsChecked}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         onChange={({ value }) => setValue(value)}
       />
     </>
@@ -182,7 +182,7 @@ function RadioGroupExampleColumn() {
     <RadioGroup
       value={value}
       items={simpleItems}
-      getLabel={(item) => item}
+      getItemLabel={(item) => item}
       onChange={({ value }) => setValue(value)}
       direction="column"
     />
@@ -202,7 +202,7 @@ function RadioGroupExampleRow() {
     <RadioGroup
       value={value}
       items={simpleItems}
-      getLabel={(item) => item}
+      getItemLabel={(item) => item}
       onChange={({ value }) => setValue(value)}
       direction="row"
     />
@@ -236,14 +236,14 @@ export function RadioGroupExampleAlign() {
       <RadioGroup
         value={value}
         items={alignItems}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         onChange={({ value }) => setValue(value)}
         align="top"
       />
       <RadioGroup
         value={value}
         items={alignItems}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         onChange={({ value }) => setValue(value)}
         align="center"
       />
@@ -268,7 +268,7 @@ function RadioGroupExampleDisabled() {
     <RadioGroup
       value={value}
       items={simpleItems}
-      getLabel={(item) => item}
+      getItemLabel={(item) => item}
       onChange={({ value }) => setValue(value)}
       disabled
     />
@@ -293,7 +293,7 @@ function RadioGroupExampleSize() {
       <RadioGroup
         value={value}
         items={simpleItems}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         onChange={({ value }) => setValue(value)}
         direction="row"
         size="m"
@@ -301,7 +301,7 @@ function RadioGroupExampleSize() {
       <RadioGroup
         value={value}
         items={simpleItems}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         onChange={({ value }) => setValue(value)}
         direction="row"
         size="l"
@@ -328,7 +328,7 @@ function RadioGroupExampleView() {
       <RadioGroup
         value={value}
         items={simpleItems}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         onChange={({ value }) => setValue(value)}
         direction="row"
         view="primary"
@@ -336,7 +336,7 @@ function RadioGroupExampleView() {
       <RadioGroup
         value={value}
         items={simpleItems}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         onChange={({ value }) => setValue(value)}
         direction="row"
         view="ghost"
@@ -351,26 +351,31 @@ function RadioGroupExampleView() {
 ## Импорт
 
 ```tsx
-import { RadioGroup } from '@consta/uikit/RadioGroup';
+import { RadioGroup } from '@consta/uikit/RadioGroupCanary';
 ```
 
 ## Свойства
 
-```
+```tsx
+export type RadioGroupDefaultItem = {
+  label: string;
+  disabled?: boolean;
+};
+
 type OnChange = (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM }) => void;
 ```
 
-| Свойство                                  | Тип                       | По умолчанию | Описание                                                                                                  |
-| ----------------------------------------- | ------------------------- | ------------ | --------------------------------------------------------------------------------------------------------- |
-| [`align`](#выравнивание)                  | `'center', 'top'`         | `'center'`   | Выравнивание                                                                                              |
-| `value`                                   | `Item`                    | -            | Значение                                                                                                  |
-| [`items`](#содержимое)                    | `Item[]`                  | -            | Радиокнопки                                                                                               |
-| [`getLabel`](#название-радиокнопки)       | `(item: Item) => string`  | -            | Функция для формирования текста для радиокнопки. Также используется в качестве уникального ключа элемента |
-| [`getDisabled?`](#неактивная-радиокнопка) | `(item: Item) => boolean` | -            | Функция для определения неактивного состояния радиокнопки                                                 |
-| `onChange`                                | `OnChange`                | -            | Действие при выборе элемента                                                                              |
-| `name`                                    | `string`                  | -            | Имя `<input>`, указывается для доступности                                                                |
-| [`direction?`](#расположение)             | `'column', 'row'`         | `'column'`   | Направление радиокнопок                                                                                   |
-| [`disabled?`](#неактивная-группа-кнопок)  | `boolean`                 | `false`      | Делает группу радиокнопок неактивной                                                                      |
-| [`size?`](#размер)                        | `'m'`, `'l'`              | `'m'`        | Размер группы радиокнопок                                                                                 |
-| [`view?`](#внешний-вид)                   | `'primary', 'ghost'`      | `'primary'`  | Внешний вид                                                                                               |
-| `className?`                              | `string`                  | -            | Дополнительные CSS-классы                                                                                 |
+| Свойство                                      | Тип                       | По умолчанию | Описание                                                                                                  |
+| --------------------------------------------- | ------------------------- | ------------ | --------------------------------------------------------------------------------------------------------- |
+| [`align`](#выравнивание)                      | `'center', 'top'`         | `'center'`   | Выравнивание                                                                                              |
+| `value`                                       | `ITEM`                    | -            | Значение                                                                                                  |
+| [`items`](#содержимое)                        | `ITEM[]`                  | -            | Радиокнопки                                                                                               |
+| [`getItemLabel?`](#название-радиокнопки)      | `(item: ITEM) => string`  | -            | Функция для формирования текста для радиокнопки. Также используется в качестве уникального ключа элемента |
+| [`getItemDisabled?`](#неактивная-радиокнопка) | `(item: ITEM) => boolean` | -            | Функция для определения неактивного состояния радиокнопки                                                 |
+| `onChange`                                    | `OnChange`                | -            | Действие при выборе элемента                                                                              |
+| `name`                                        | `string`                  | -            | Имя `<input>`, указывается для доступности                                                                |
+| [`direction?`](#расположение)                 | `'column', 'row'`         | `'column'`   | Направление радиокнопок                                                                                   |
+| [`disabled?`](#неактивная-группа-кнопок)      | `boolean`                 | `false`      | Делает группу радиокнопок неактивной                                                                      |
+| [`size?`](#размер)                            | `'m'`, `'l'`              | `'m'`        | Размер группы радиокнопок                                                                                 |
+| [`view?`](#внешний-вид)                       | `'primary', 'ghost'`      | `'primary'`  | Внешний вид                                                                                               |
+| `className?`                                  | `string`                  | -            | Дополнительные CSS-классы                                                                                 |

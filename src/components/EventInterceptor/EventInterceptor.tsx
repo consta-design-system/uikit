@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import { eventInterceptorMap } from './eventInterceptorMap';
 import { EventInterceptorComponentName } from './types';
@@ -32,10 +32,9 @@ const EventInterceptorProvider = ({
   eventHandler: EventInterceptorHandler;
   map: EventInterceptorMap;
 }) => {
-  const value = useMemo(() => ({ eventHandler, map }), [eventHandler, map]);
-
   return (
-    <EventInterceptorContext.Provider value={value}>
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
+    <EventInterceptorContext.Provider value={{ eventHandler, map }}>
       {children}
     </EventInterceptorContext.Provider>
   );

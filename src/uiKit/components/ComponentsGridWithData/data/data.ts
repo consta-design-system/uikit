@@ -1,6 +1,7 @@
 import React from 'react';
 
 import AttachmentImage from './images/AttachmentImage';
+import AvatarGroupImage from './images/AvatarGroupImage';
 import AvatarImage from './images/AvatarImage';
 import BadgeImage from './images/BadgeImage';
 import BreadcrumbsImage from './images/BreadcrumbsImage';
@@ -16,6 +17,7 @@ import ContextMenuImage from './images/ContextMenuImage';
 import DatePickerImage from './images/DatePickerImage';
 import DateTimeImage from './images/DateTimeImage';
 import DragNDropFieldImage from './images/DragNDropFieldImage';
+import FieldGroupImage from './images/FieldGroupImage';
 import FileFieldImage from './images/FileFieldImage';
 import FileImage from './images/FileImage';
 import GridImage from './images/GridImage';
@@ -26,6 +28,7 @@ import LoaderImage from './images/LoaderImage';
 import ModalImage from './images/ModalImage';
 import PaginationImage from './images/PaginationImage';
 import PopoverImage from './images/PopoverImage';
+import ProgressLineImage from './images/ProgressLineImage';
 import ProgressSpinImage from './images/ProgressSpinImage';
 import ProgressStepBarImage from './images/ProgressStepBarImage';
 import RadioGroupImage from './images/RadioGroupImage';
@@ -74,6 +77,12 @@ export const data: Data = [
         description: 'Бейджик. Показывает статус процесса.',
       },
       {
+        name: 'AvatarGroup',
+        componentName: 'AvatarGroup',
+        url: '/?path=/docs/components-avatargroup--playground',
+        description: 'Аватарка. Изображение пользователя.',
+      },
+      {
         name: 'Breadcrumbs(Canary)',
         componentName: 'Breadcrumbs',
         url: '/?path=/docs/components-breadcrumbs--playground',
@@ -98,10 +107,17 @@ export const data: Data = [
         description: 'Чекбокс. Можно сделать выбор и подтвердить.',
       },
       {
-        name: 'CheckboxGroup',
+        name: 'CheckboxGroup(Canary)',
         componentName: 'CheckboxGroup',
         url: '/?path=/docs/components-checkboxgroup--playground',
         description: 'Группа чекбоксов. Можно выбрать несколько вариантов.',
+      },
+      {
+        name: 'ChoiceGroup(Canary)',
+        componentName: 'ChoiceGroup',
+        url: '/?path=/docs/components-choicegroup--playground',
+        description:
+          'Группа кнопок. Можно выбрать один или несколько вариантов.',
       },
       {
         name: 'Collapse',
@@ -122,13 +138,6 @@ export const data: Data = [
         url: '/?path=/docs/components-combobox--playground',
         description:
           'Выпадающий список с поиском. Можно выбрать один или несколько вариантов.',
-      },
-      {
-        name: 'ChoiceGroup',
-        componentName: 'ChoiceGroup',
-        url: '/?path=/docs/components-choicegroup--playground',
-        description:
-          'Группа кнопок. Можно выбрать один или несколько вариантов.',
       },
       {
         name: 'ContextMenu(Canary)',
@@ -155,6 +164,13 @@ export const data: Data = [
         description: 'Можно перетащить файлы, чтобы загрузить или отправить.',
       },
       {
+        name: 'FieldGroup',
+        componentName: 'FieldGroup',
+        url: '/?path=/docs/components-fieldgroup--playground',
+        description:
+          'Группа полей. Объединяет одно или несколько полей ввода и кнопки.',
+      },
+      {
         name: 'File',
         componentName: 'File',
         url: '/?path=/docs/components-file--playground',
@@ -174,6 +190,12 @@ export const data: Data = [
           'Модульная сетка. Отвечает за расположение содержимого на странице.',
       },
       {
+        name: 'Header',
+        componentName: 'Header',
+        url: '/?path=/docs/components-header--playground',
+        description: 'Шапка. Блок с меню, поиском и аватаркой.',
+      },
+      {
         name: 'Informer',
         componentName: 'Informer',
         url: '/?path=/docs/components-informer--playground',
@@ -181,23 +203,11 @@ export const data: Data = [
           'Сообщение для пользователя. Встраивается в содержимое страницы.',
       },
       {
-        name: 'Header',
-        componentName: 'Header',
-        url: '/?path=/docs/components-header--playground',
-        description: 'Шапка. Блок с меню, поиском и аватаркой.',
-      },
-      {
         name: 'Layout(Canary)',
         componentName: 'Layout',
         url: '/?path=/docs/components-layout--playground',
         description:
-          'Лэйаут. Блоки, из которых можно построить каркас страницы.',
-      },
-      {
-        name: 'Loader',
-        componentName: 'Loader',
-        url: '/?path=/docs/components-loader--playground',
-        description: 'Прелоадер. Показывает, что информация загружается.',
+          'Лейаут. Блоки, из которых можно построить каркас страницы.',
       },
       {
         name: 'Modal',
@@ -207,6 +217,18 @@ export const data: Data = [
           'Всплывающее окно. Показывает контент поверх основной страницы.',
       },
       {
+        name: 'Loader',
+        componentName: 'Loader',
+        url: '/?path=/docs/components-loader--playground',
+        description: 'Прелоадер. Показывает, что информация загружается.',
+      },
+      {
+        name: 'Pagination',
+        componentName: 'Pagination',
+        url: '/?path=/docs/components-pagination--playground',
+        description: 'Пагинация. Можно выбрать страницу.',
+      },
+      {
         name: 'Popover',
         componentName: 'Popover',
         url: '/?path=/docs/components-popover--playground',
@@ -214,10 +236,11 @@ export const data: Data = [
           'Поповер. Позиционирование элементов по координатам или якорю.',
       },
       {
-        name: 'Pagination',
-        componentName: 'Pagination',
-        url: '/?path=/docs/components-pagination--playground',
-        description: 'Пагинация. Можно выбрать страницу.',
+        name: 'ProgressLine',
+        componentName: 'ProgressLine',
+        url: '/?path=/docs/components-progressline--playground',
+        description:
+          'Индикатор загрузки в виде линии. Показывает течение процесса.',
       },
       {
         name: 'ProgressSpin',
@@ -239,7 +262,7 @@ export const data: Data = [
         description: 'Радиокнопка. Можно выбрать один вариант.',
       },
       {
-        name: 'RadioGroup',
+        name: 'RadioGroup(Canary)',
         componentName: 'RadioGroup',
         url: '/?path=/docs/components-radiogroup--playground',
         description: 'Группа радиокнопок. Можно выбрать один вариант.',
@@ -284,7 +307,7 @@ export const data: Data = [
           'Мгновенные сообщения для пользователя. Перекрывает содержимое.',
       },
       {
-        name: 'Steps',
+        name: 'Steps(Canary)',
         componentName: 'Steps',
         url: '/?path=/docs/components-steps--playground',
         description:
@@ -297,7 +320,7 @@ export const data: Data = [
         description: 'Переключатель. Два положения — включено и выключено.',
       },
       {
-        name: 'SwitchGroup',
+        name: 'SwitchGroup(Canary)',
         componentName: 'SwitchGroup',
         url: '/?path=/docs/components-switchgroup--playground',
         description:
@@ -310,7 +333,7 @@ export const data: Data = [
         description: 'Таблица. Выводит данные с фильтрами и сортировкой.',
       },
       {
-        name: 'Tabs',
+        name: 'Tabs(Canary)',
         componentName: 'Tabs',
         url: '/?path=/docs/components-tabs--playground',
         description: 'Табы. Переключает вкладки на странице.',
@@ -383,29 +406,32 @@ export const imageMap: Record<
   Attachment: AttachmentImage,
   Avatar: AvatarImage,
   Badge: BadgeImage,
+  AvatarGroup: AvatarGroupImage,
   Breadcrumbs: BreadcrumbsImage,
   Button: ButtonImage,
   Card: CardImage,
   Checkbox: CheckboxImage,
   CheckboxGroup: CheckboxGroupImage,
+  ChoiceGroup: ChoiceGroupImage,
   Collapse: CollapseImage,
   CollapseGroup: CollapseGroupImage,
   Combobox: ComboboxImage,
-  ChoiceGroup: ChoiceGroupImage,
   ContextMenu: ContextMenuImage,
   DatePicker: DatePickerImage,
   DateTime: DateTimeImage,
   DragNDropField: DragNDropFieldImage,
+  FieldGroup: FieldGroupImage,
   File: FileImage,
   FileField: FileFieldImage,
   Grid: GridImage,
-  Informer: InformerImage,
   Header: HeaderImage,
+  Informer: InformerImage,
   Layout: LayoutImage,
-  Loader: LoaderImage,
   Modal: ModalImage,
-  Popover: PopoverImage,
+  Loader: LoaderImage,
   Pagination: PaginationImage,
+  Popover: PopoverImage,
+  ProgressLine: ProgressLineImage,
   ProgressSpin: ProgressSpinImage,
   ProgressStepBar: ProgressStepBarImage,
   Radio: RadioImage,

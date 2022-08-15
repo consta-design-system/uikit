@@ -58,11 +58,11 @@ export const Playground = () => {
     <div className={cnStepsStories()}>
       <Steps
         items={simpleItems}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         value={simpleItems[activeStep]}
         onChange={handleChange}
-        getCompleted={(item) => completedSteps.includes(getStepIndex(item))}
-        getSkipped={(item) => skippedSteps.includes(getStepIndex(item))}
+        getItemCompleted={(item) => completedSteps.includes(getStepIndex(item))}
+        getItemSkipped={(item) => skippedSteps.includes(getStepIndex(item))}
         size={size}
       />
       <div className={cnStepsStories('Content')}>
@@ -88,8 +88,8 @@ export const Playground = () => {
 };
 
 export default createMetadata({
-  title: 'Компоненты|/Навигация/Steps',
-  id: 'components/Steps',
+  title: 'Компоненты|/Навигация/Steps(Canary)',
+  id: 'components/StepsCanary',
   parameters: {
     docs: {
       page: mdx,

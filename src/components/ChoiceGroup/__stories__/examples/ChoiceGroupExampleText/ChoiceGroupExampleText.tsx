@@ -4,7 +4,7 @@ import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/D
 import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
-import { ChoiceGroup } from '../../../ChoiceGroup';
+import { ChoiceGroup } from '../../../ChoiceGroupCanary';
 
 type Item = string;
 

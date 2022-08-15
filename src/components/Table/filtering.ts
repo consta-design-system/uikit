@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { isDefined } from '../../utils/type-guards';
-import { TableColumn, TableRow, ValueOf } from './Table';
+import { SortByProps, TableColumn, TableRow, ValueOf } from './Table';
 
 export type FilterComponentProps = {
   onConfirm: (value: unknown) => void;
@@ -25,11 +25,6 @@ export type Filters<T extends TableRow> = ValueOf<{
       }
   );
 }>[];
-
-export type SortByProps<T extends TableRow> = {
-  sortingBy: keyof T;
-  sortOrder: 'asc' | 'desc';
-};
 
 export type onSortBy<T extends TableRow> = (
   props: SortByProps<T> | null,

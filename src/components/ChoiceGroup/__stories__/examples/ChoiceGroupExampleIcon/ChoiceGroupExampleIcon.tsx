@@ -6,7 +6,7 @@ import { IconPhoto } from '../../../../../icons/IconPhoto/IconPhoto';
 import { IconRing } from '../../../../../icons/IconRing/IconRing';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { ChoiceGroup } from '../../../ChoiceGroup';
+import { ChoiceGroup } from '../../../ChoiceGroupCanary';
 
 type Item = {
   name: string;

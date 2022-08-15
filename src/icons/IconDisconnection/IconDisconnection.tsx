@@ -1,4 +1,5 @@
 import { createIcon } from '../createIcon/createIcon';
+
 import IconDisconnectionSizeM from './IconDisconnection_size_m';
 import IconDisconnectionSizeS from './IconDisconnection_size_s';
 import IconDisconnectionSizeXs from './IconDisconnection_size_xs';

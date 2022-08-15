@@ -7,10 +7,7 @@ import { useSelect } from '../../hooks/useSelect/useSelect';
 import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { cnSelect, COMPONENT_NAME } from '../SelectComponents/cnSelect';
-import {
-  defaultLabelForEmptyItems,
-  getSelectDropdownForm,
-} from '../SelectComponents/helpers';
+import { defaultLabelForEmptyItems } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
 import { SelectItem } from '../SelectComponents/SelectItem/SelectItem';
@@ -66,6 +63,7 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
     renderValue: renderValueProp,
     inputRef: inputRefProp,
     style,
+    dropdownForm = 'default',
     ...restProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
 
@@ -99,8 +97,6 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
     onBlur,
     onFocus,
   });
-
-  const dropdownForm = getSelectDropdownForm(form);
 
   const renderItemDefault: PropRenderItem<ITEM> = (props) => {
     const { item, active, hovered, onClick, onMouseEnter } = props;

@@ -8,7 +8,7 @@ export default createStand({
   image: ContextMenu,
   description: 'Показывает загрузку файла или уже загруженный файл.',
   version: '3.18.0',
-  status: 'stable',
+  status: 'canary',
   sandbox:
     'https://codesandbox.io/embed/react-new?fontsize=14&hidenavigation=1&theme=dark',
   figma:

@@ -2,7 +2,7 @@ import './ChoiceGroupExampleAdaptiveScroll.css';
 
 import React, { useCallback, useState } from 'react';
 
-import { useBreakpoints } from '../../../../../hooks/useBreakpoints/useBreakpoints';
+import { useBreakpoints } from '../../../../../hooks/useBreakpoints/useBreakpoints.ts';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { cn } from '../../../../../utils/bem';
 import { ChoiceGroup } from '../../../ChoiceGroup';
