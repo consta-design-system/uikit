@@ -1,10 +1,10 @@
-export function getByMap<COMPONENT_SIZE extends string | number, SIZE>(
-  map: Record<COMPONENT_SIZE, SIZE>,
-  componentSize: COMPONENT_SIZE,
-  size?: SIZE,
-): SIZE {
-  if (size) {
-    return size;
+export function getByMap<KEY extends string | number, VALUE>(
+  map: Record<KEY, VALUE>,
+  key: KEY,
+  value?: VALUE,
+): VALUE {
+  if (value) {
+    return value;
   }
-  return map[componentSize];
+  return map[key];
 }

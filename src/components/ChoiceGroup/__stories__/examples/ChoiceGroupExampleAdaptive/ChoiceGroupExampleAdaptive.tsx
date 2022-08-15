@@ -2,10 +2,9 @@ import './ChoiceGroupExampleAdaptiveScroll.css';
 
 import React, { useCallback, useState } from 'react';
 
-import { useBreakpoints } from '../../../../../hooks/useBreakpoints/useBreakpoints';
+import { useBreakpoints } from '../../../../../hooks/useBreakpoints/useBreakpoints.ts';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { cn } from '../../../../../utils/bem';
-import { RadioGroup } from '../../../../RadioGroup/RadioGroup';
 import { ChoiceGroup } from '../../../ChoiceGroup';
 
 const items: string[] = [
@@ -24,7 +23,7 @@ const cnChoiceGroupExampleAdaptiveScroll = cn(
   'ChoiceGroupExampleAdaptiveScroll',
 );
 
-const getLabel = (item: string) => item;
+const getItemLabel = (item: string) => item;
 
 export const ChoiceGroupExampleAdaptiveScroll = () => {
   return (
@@ -33,7 +32,7 @@ export const ChoiceGroupExampleAdaptiveScroll = () => {
         <ChoiceGroup
           name="ChoiceGroupExampleAdaptiveScroll"
           items={items}
-          getLabel={getLabel}
+          getItemLabel={getItemLabel}
           form="round"
         />
       </div>
@@ -57,7 +56,7 @@ export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
         <ChoiceGroup
           name="ChoiceGroupExampleAdaptiveUseBreakpoints"
           items={items2}
-          getLabel={getLabel}
+          getItemLabel={getItemLabel}
           form="round"
           value={value}
           onChange={onChandge}
@@ -68,10 +67,10 @@ export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
 
   return (
     <StoryBookExample>
-      <RadioGroup
+      <ChoiceGroup
         name="ChoiceGroupExampleAdaptiveUseBreakpoints"
         items={items2}
-        getLabel={getLabel}
+        getItemLabel={getItemLabel}
         value={value}
         onChange={onChandge}
       />

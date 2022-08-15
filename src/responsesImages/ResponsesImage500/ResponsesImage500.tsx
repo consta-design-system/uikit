@@ -1,4 +1,5 @@
 import { createResponsesImage } from '../createResponsesImage/createResponsesImage';
+
 import component from './ResponsesImage500Svg';
 
 export const ResponsesImage500 = createResponsesImage({

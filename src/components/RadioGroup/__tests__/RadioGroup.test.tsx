@@ -41,8 +41,8 @@ const renderComponent = (props: {
   return render(
     <RadioGroup
       items={items}
-      getLabel={(item) => `${item.name}`}
-      getDisabled={(item) => item.disabled}
+      getItemLabel={(item) => `${item.name}`}
+      getItemDisabled={(item) => item.disabled}
       onChange={props.onChange || handleChange}
       name={testId}
       className={additionalClass}
@@ -72,7 +72,7 @@ describe('Компонент RadioGroup', () => {
       });
     });
 
-    describe('проверка getLabel', () => {
+    describe('проверка getItemLabel', () => {
       it('label совпадает', () => {
         renderComponent({});
         expect(getItems()[0].textContent).toEqual(items[0].name);

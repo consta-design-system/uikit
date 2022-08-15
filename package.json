@@ -50,7 +50,7 @@
     "pre-push": "yarn run tsc-dry-run",
     "pre-commit": "yarn run lint-staged",
     "pre-build": "node scripts/preBuild.js --config=scripts/generateReExportsConfig.js",
-    "test": "yarn lint && yarn tsc-dry-run && yarn unit",
+    "test": "yarn tsc-dry-run && yarn unit",
     "unit": "jest",
     "unit:watch": "jest --watch",
     "unit:clear": "jest --clearCache",

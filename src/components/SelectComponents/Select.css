@@ -6,6 +6,50 @@
   align-items: flex-start;
   width: 100%;
 
+  &_type {
+    &_userselect {
+      &.Select_size_s {
+        --select-element-height: var(--space-xl);
+      }
+
+      &.Select_size_m {
+        --select-element-height: calc(var(--space-2xl) - var(--space-3xs));
+      }
+
+      &.Select_size_l {
+        --select-element-height: calc(var(--space-3xl) - var(--space-2xs));
+      }
+    }
+
+    &_combobox {
+      &.Select_size_s {
+        --select-element-height: var(--space-xl);
+      }
+
+      &.Select_size_m {
+        --select-element-height: calc(var(--space-2xl) - var(--space-2xs));
+      }
+
+      &.Select_size_l {
+        --select-element-height: var(--space-2xl);
+      }
+    }
+
+    &_select {
+      &.Select_size_s {
+        --select-element-height: var(--space-xl);
+      }
+
+      &.Select_size_m {
+        --select-element-height: calc(var(--space-2xl) - var(--space-2xs));
+      }
+
+      &.Select_size_l {
+        --select-element-height: var(--space-2xl);
+      }
+    }
+  }
+
   &_size {
     &_xs {
       --input-height: var(--control-height-xs);
@@ -18,6 +62,10 @@
       --input-space: calc(var(--control-space-s) * 0.5);
       --input-font-size: var(--control-text-size-s);
       --tag-space: calc(var(--space-xs) / 2 - var(--control-border-width));
+      --input-max-height:
+        calc(
+          4 * var(--tag-space) + 4.5 * var(--select-element-height)
+        );
     }
 
     &_m {
@@ -25,6 +73,10 @@
       --input-space: calc(var(--control-space-m) * 0.5);
       --input-font-size: var(--control-text-size-m);
       --tag-space: calc(var(--space-s) / 2 - var(--control-border-width));
+      --input-max-height:
+        calc(
+          4 * var(--tag-space) + 4.5 * calc(var(--space-2xl) - var(--space-2xs))
+        );
     }
 
     &_l {
@@ -32,6 +84,7 @@
       --input-space: calc(var(--control-space-l) * 0.5);
       --input-font-size: var(--control-text-size-l);
       --tag-space: calc(var(--space-m) / 2 - var(--control-border-width));
+      --input-max-height: calc(4 * var(--tag-space) + 4.5 * var(--space-2xl));
     }
   }
 
@@ -266,9 +319,20 @@
     }
 
     &_multiple .Select-ControlValue {
-      overflow: visible;
+      overflow-x: visible;
+      overflow-y: auto;
+      max-height:
+        calc(
+          4 * var(--tag-space) + 4.5 * var(--select-element-height)
+        );
       padding-top: calc(var(--tag-space) - var(--control-border-width));
       white-space: normal;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
 
     &_multiple .Select-ControlValue_isUserSelect {

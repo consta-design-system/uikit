@@ -50,7 +50,7 @@ export const TableChoiceGroupFilter: React.FC<Props> = ({
       <ChoiceGroup
         size="s"
         items={choiceGroupItems}
-        getLabel={(item) => item.name}
+        getItemLabel={(item) => item.name}
         name="choiceGroup"
         onChange={onChange}
         value={value?.value ? value : defaultValue}
