@@ -1,0 +1,100 @@
+.ProgressLine {
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+  height: var(--progress-line-height);
+  background: var(--color-bg-system);
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background-color: var(--color-bg-brand);
+    transition: transform 0.3s;
+  }
+
+  &_size {
+    &_s {
+      --progress-line-height: var(--space-3xs);
+    }
+
+    &_m {
+      --progress-line-height: var(--space-2xs);
+    }
+  }
+
+  &_mode {
+    &_step {
+      display: grid;
+      height: auto;
+      background: transparent;
+      grid-template-columns:
+        repeat(
+          var(--progress-line-steps),
+          calc(100% / var(--progress-line-steps))
+        );
+      grid-gap: var(--space-3xs);
+    }
+
+    &_determinate {
+      &::after {
+        width: 100%;
+        transform: scaleX(var(--progress-line-value));
+        transform-origin: left;
+      }
+    }
+
+    &_indeterminate {
+      &::after {
+        width: 80%;
+        transform-origin: left;
+        animation: ProgressLineAnimation 2s linear infinite;
+      }
+    }
+  }
+
+  &-Step {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  &-Line {
+    position: relative;
+    overflow-x: hidden;
+    width: 100%;
+    height: var(--progress-line-height);
+    background: var(--color-bg-system);
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: var(--progress-line-height);
+      background: var(--color-bg-brand);
+      transition: width 0.3s linear;
+      transition-delay: var(--progress-line-delay);
+    }
+
+    &_active::after {
+      width: 100%;
+    }
+  }
+
+  &-Label {
+    margin-top: var(--space-3xs);
+  }
+}
+
+@keyframes ProgressLineAnimation {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(130%);
+  }
+}

@@ -2,6 +2,7 @@ import { MixCardExampleShadow } from './examples/MixCardExampleShadow/MixCardExa
 import { MixCardExampleStates } from './examples/MixCardExampleStates/MixCardExampleStates';
 import { MixCardExampleForm } from './examples/MixCardExampleForm/MixCardExampleForm';
 import { MixCardExampleSpace } from './examples/MixCardExampleSpace/MixCardExampleSpace';
+import { MixCardExampleBorder } from './examples/MixCardExampleBorder/MixCardExampleBorder';
 
 <Meta title="Mixins|MixCard" id="MixCard" />
 
@@ -18,6 +19,7 @@ import { cnMixCard } from '@consta/uikit/MixCard';
 - [Статус](#статус)
 - [Форма](#форма)
 - [Тень](#тень)
+- [Граница](#граница)
 - [Список свойств](#список-свойств)
 - [Пример использования](#пример-использования)
 
@@ -179,7 +181,43 @@ export const MixCardExampleShadow = () => {
 
 ```
 
-<MixCardExampleShadow />
+## Граница
+
+По умолчанию у карточки отключены границы, за их отображение отвечает свойство `border`.
+
+```tsx
+export const MixCardExampleBorder = () => {
+  return (
+    <div
+        className={cnMixCard({
+          verticalSpace: 'xl',
+          horizontalSpace: '3xl',
+          status: 'success',
+          form: 'round',
+          shadow: false,
+          border: true,
+        })}
+      >
+        <Text>Карточка с границей</Text>
+      </div>
+      <div
+        className={cnMixCard({
+          verticalSpace: 'xl',
+          horizontalSpace: '3xl',
+          status: 'success',
+          form: 'round',
+          shadow: false,
+          border: false,
+        })}
+      >
+        <Text>Карточка без границы</Text>
+      </div>
+  );
+};
+
+```
+
+<MixCardExampleBorder />
 
 ## Импорт
 
@@ -196,6 +234,7 @@ import { cnMixCard } from '@consta/uikit/MixCard';
 | [`status?`](#статус)           | `'alert', 'success', 'warning'`                         | -            | Статус, меняет цвет границ компонента |
 | [`form?`](#форма)              | `'round'`, `'square'`                                   | `'round'`    | Форма                                 |
 | [`shadow?`](#тень)             | `boolean`                                               | `'true'`     | Тень                                  |
+| [`border?`](#границы)          | `boolean`                                               | `'false'`    | Граница                               |
 
 ## Пример использования
 

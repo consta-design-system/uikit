@@ -66,6 +66,7 @@ export type UserSelectProps<
     form?: PropForm;
     size?: Exclude<PropSize, 'xs'>;
     view?: PropView;
+    dropdownForm?: 'default' | 'brick' | 'round';
     placeholder?: string;
     ariaLabel?: string;
     dropdownClassName?: string;

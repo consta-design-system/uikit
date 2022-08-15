@@ -21,7 +21,7 @@ export const TextExampleAlign = () => {
           >
             {`text_align_${item}`}
           </Text>
-          <Text align={item}>Газпром нефть</Text>
+          <Text align={item}>Просто текст</Text>
         </div>
       ))}
     </div>
