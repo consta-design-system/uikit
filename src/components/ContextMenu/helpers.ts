@@ -28,7 +28,7 @@ import {
 
 const defaultGetItemKey: ContextMenuPropGetItemKey<ContextMenuItemDefault> = (
   item,
-) => item.key;
+) => item.key || item.label;
 const defaultGetItemRightSide: ContextMenuPropGetItemRightSide<
   ContextMenuItemDefault
 > = (item) => item.rightSide;
@@ -112,9 +112,9 @@ const findItem = <ITEM>(
     key: ContextMenuItemDefault['key'];
   },
 ): ITEM | undefined => {
-  const { items, getItemKey, getItemSubMenu, key, getItemLabel } = params;
+  const { items, getItemKey, getItemSubMenu, key } = params;
   for (const item of items) {
-    if (getItemKey(item) ?? getItemLabel(item) === key) {
+    if (getItemKey(item) === key) {
       return item;
     }
     const subItems =
@@ -123,7 +123,6 @@ const findItem = <ITEM>(
       const subItem = findItem({
         items: subItems,
         key,
-        getItemLabel,
         getItemKey,
         getItemSubMenu,
       });
@@ -138,7 +137,8 @@ const findItem = <ITEM>(
 export const getLevels = <ITEM>(
   params: GetLevelsParams<ITEM>,
 ): Level<ITEM>[] => {
-  const { levels, items, getItemKey, getItemSubMenu, getItemLabel } = params;
+  const { levels, items, getItemKey, getItemSubMenu } = params;
+
   return levels.map((level) => ({
     ...level,
     items: level.items
@@ -147,8 +147,7 @@ export const getLevels = <ITEM>(
           items,
           getItemSubMenu,
           getItemKey,
-          getItemLabel,
-          key: getItemKey(item) ?? getItemLabel(item),
+          key: getItemKey(item),
         }),
       )
       .filter(isNotNil),

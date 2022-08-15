@@ -226,5 +226,4 @@ export type GetLevelsParams<ITEM> = {
   items: ITEM[];
   getItemSubMenu: ContextMenuPropGetItemSubMenu<ITEM>;
   getItemKey: ContextMenuPropGetItemKey<ITEM>;
-  getItemLabel: ContextMenuPropGetItemLabel<ITEM>;
 };
