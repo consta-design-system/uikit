@@ -2,7 +2,7 @@ import React from 'react';
 
 import { IconAdd } from '../../../../../icons/IconAdd/IconAdd';
 import { IconBookmarkStroked } from '../../../../../icons/IconBookmarkStroked/IconBookmarkStroked';
-import { IconChat } from '../../../../../icons/IconChat/IconChat';
+import { IconChatStroked as IconChat } from '../../../../../icons/IconChatStroked/IconChatStroked';
 import { IconCopy } from '../../../../../icons/IconCopy/IconCopy';
 import { IconEdit } from '../../../../../icons/IconEdit/IconEdit';
 import { IconForward } from '../../../../../icons/IconForward/IconForward';

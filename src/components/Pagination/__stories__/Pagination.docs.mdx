@@ -5,6 +5,7 @@ import {
   PaginationExampleType,
   PaginationExamplePosition,
   PaginationExampleMinified,
+  PaginationExampleButton,
 } from './examples/PaginationExample/PaginationExample';
 
 <!--info
@@ -27,6 +28,7 @@ import { Pagination } from '@consta/uikit/Pagination';
 - [Выравнивание](#выравнивание)
 - [Состояние](#состояние)
 - [Горячие клавиши](#горячие-клавиши)
+- [Адаптивность](#адаптивность)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
@@ -133,6 +135,28 @@ hotkeys = {
   },
 };
 ```
+
+## Адаптивность
+
+При небольшой ширине экрана можно:
+
+- показывать меньше кнопок,
+- использовать версию [minified](#состояние) — только с номерами страниц,
+- показывать [только поле ввода](#тип) (`type="input"`),
+- вместо компонента `Pagination` вывести кнопку **Показать ещё** и подгружать по ней новые страницы.
+
+##### Пример с кнопкой вместо Pagination
+
+```tsx
+import React from 'react';
+import { Button } from '@consta/uikit/Button';
+
+const App = () => {
+  return <Button label="Показать еще" view="ghost" width="full" />;
+};
+```
+
+<PaginationExampleButton />
 
 ## Импорт
 

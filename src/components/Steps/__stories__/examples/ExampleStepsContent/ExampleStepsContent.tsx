@@ -22,7 +22,7 @@ export const ExampleStepsContent = () => {
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Steps
         items={items}
-        getLabel={getLabel}
+        getItemLabel={getLabel}
         value={activeStep}
         onChange={onChange}
       />

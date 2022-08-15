@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { ChoiceGroup } from '../../../ChoiceGroup';
+import { ChoiceGroup } from '../../../ChoiceGroupCanary';
 
 type Item = string;
 
@@ -20,7 +20,7 @@ export const ChoiceGroupExampleSwitchPolar = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         items={itemsPolar}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         name="ChoiceGroupExampleSwitchPolar"
       />
     </StoryBookExample>
@@ -36,7 +36,7 @@ export const ChoiceGroupExampleSwitchLetters = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         items={itemsLetters}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         name="ChoiceGroupExampleSwitchLetters"
       />
     </StoryBookExample>
@@ -51,7 +51,7 @@ export const ChoiceGroupExampleSwitchPr = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         items={itemsPr}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         name="ChoiceGroupExampleSwitchPr"
       />
     </StoryBookExample>
@@ -66,7 +66,7 @@ export const ChoiceGroupExampleSwitchMode = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         items={itemsMode}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         name="ChoiceGroupExampleSwitchMode"
       />
     </StoryBookExample>

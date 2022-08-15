@@ -11,7 +11,7 @@ type Props = {
   size?: PropSize;
 };
 
-const cnSelectLoader = cn('SelectLoader');
+export const cnSelectLoader = cn('SelectLoader');
 
 export const SelectLoader = (props: Props) => {
   const { mode = 'empty', size = defaultPropSize } = props;

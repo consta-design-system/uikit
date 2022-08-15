@@ -1,4 +1,5 @@
 import { createIcon } from '../createIcon/createIcon';
+
 import IconLayersSizeM from './IconLayers_size_m';
 import IconLayersSizeS from './IconLayers_size_s';
 import IconLayersSizeXs from './IconLayers_size_xs';
