@@ -8,7 +8,7 @@ import {
   PropView,
   RenderItemProps,
 } from '../SelectComponents/types';
-import { TextFieldPropOnChange } from '../TextField/helpers';
+import { TextFieldPropOnChange } from '../TextField/TextField';
 
 export type DefaultItem = {
   label: string;
@@ -62,6 +62,7 @@ export type ComboboxProps<
     onChange: PropOnChange<ITEM, MULTIPLE>;
     disabled?: boolean;
     form?: PropForm;
+    dropdownForm?: 'default' | 'brick' | 'round';
     size?: Exclude<PropSize, 'xs'>;
     view?: PropView;
     placeholder?: string;

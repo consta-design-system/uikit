@@ -65,7 +65,10 @@ const ThemeTogglerRender = (
 
   const renderIcons = (item: Item) => {
     const Icon = getItemIcon(item);
-    return Icon && <Icon size={iconSize} />;
+
+    if (Icon) {
+      return <Icon size={iconSize} />;
+    }
   };
 
   const renderChecks = (item: Item) => {
@@ -88,18 +91,19 @@ const ThemeTogglerRender = (
         view="clear"
         style={style}
       />
-      {items.length > 2 && isOpen && (
+      {items.length > 2 && (
         <ContextMenu
+          isOpen={isOpen}
           offset="s"
           items={items}
-          getLabel={getItemLabel}
+          getItemLabel={getItemLabel}
           anchorRef={anchorRef}
           direction={direction}
           possibleDirections={possibleDirections}
-          getLeftSideBar={renderIcons}
-          getRightSideBar={renderChecks}
+          getItemLeftSide={renderIcons}
+          getItemRightSide={renderChecks}
           onClickOutside={setIsOpen.off}
-          getItemOnClick={getOnChange}
+          onItemClick={(params) => getOnChange(params.item)}
           size={contextMenuSize}
           style={
             typeof style?.zIndex === 'number'

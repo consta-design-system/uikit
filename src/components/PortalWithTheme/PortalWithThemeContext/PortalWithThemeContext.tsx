@@ -23,7 +23,7 @@ export function usePortalContext() {
  */
 export const PortalWithThemeProvider: React.FC<{
   zIndex?: number;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }> = (props) => {
   const [refs, setRefs] = useState<React.RefObject<HTMLElement>[]>([]);
   const { addRefs: contextAddRefs } = usePortalContext();

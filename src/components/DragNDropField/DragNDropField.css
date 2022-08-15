@@ -10,7 +10,10 @@
   background: var(--color-control-bg-clear);
   border: 2px dashed var(--color-control-bg-border-default);
   border-radius: var(--control-radius);
-  cursor: pointer;
+
+  &:not(&_disabled) {
+    cursor: pointer;
+  }
 
   &:hover {
     background: var(--color-control-bg-clear-hover);
@@ -20,5 +23,11 @@
   &_active {
     background: var(--color-control-bg-clear-hover);
     border-color: var(--color-control-bg-border-focus);
+  }
+
+  &_disabled,
+  &_disabled:hover {
+    background: var(--color-control-bg-disable);
+    border-color: transparent;
   }
 }

@@ -50,6 +50,7 @@ type SidebarProps = PropsWithHTMLAttributes<
     rootClassName?: string;
     children?: React.ReactNode;
     container?: HTMLDivElement | undefined;
+    afterClose?: () => void;
   },
   HTMLDivElement
 >;
@@ -88,8 +89,8 @@ const SidebarActions: React.FC<SidebarActionsProps> = ({
 
 const ContextConsumer: React.FC<{
   onClickOutside?: (event: MouseEvent) => void;
-  children: React.ReactNode;
   ignoreClicksInsideRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
+  children: React.ReactNode;
 }> = ({ onClickOutside, children, ignoreClicksInsideRefs }) => {
   const { refs } = usePortalContext();
 
@@ -99,7 +100,7 @@ const ContextConsumer: React.FC<{
       ...(ignoreClicksInsideRefs || []),
       ...(refs || []),
     ],
-    handler: (event: MouseEvent) => onClickOutside?.(event),
+    handler: onClickOutside,
   });
 
   return children as React.ReactElement;
@@ -126,6 +127,7 @@ export const Sidebar: SidebarComponent = (props) => {
     container = window.document.body,
     style,
     rootClassName,
+    afterClose,
     ...otherProps
   } = props;
 
@@ -151,16 +153,16 @@ export const Sidebar: SidebarComponent = (props) => {
     <CSSTransition
       in={isOpen}
       unmountOnExit
-      className={cnSidebar({ position, hasOverlay })}
+      className={cnSidebar({ position, hasOverlay }, [rootClassName])}
       classNames={cnForCssTransition(cnSidebar)}
       timeout={240}
       nodeRef={portalRef}
+      onExiting={afterClose}
     >
       <PortalWithTheme
         preset={theme}
         ref={portalRef}
         container={container}
-        className={rootClassName}
         style={
           typeof style?.zIndex === 'number'
             ? { zIndex: style.zIndex }

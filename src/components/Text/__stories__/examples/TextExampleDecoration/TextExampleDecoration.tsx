@@ -14,7 +14,7 @@ export const TextExampleDecoration = () => {
       >
         text_decoration_underline
       </Text>
-      <Text decoration="underline">Газпром нефть</Text>
+      <Text decoration="underline">Просто текст</Text>
     </div>
   );
 };

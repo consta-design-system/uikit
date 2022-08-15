@@ -6,7 +6,7 @@ import {
   ButtonExampleNameNavigation,
   ButtonExampleNameSingleLine,
   ButtonExampleNameAgreement,
-  ButtonExampleNameOverflow,
+  ButtonExampleNameTooBig,
 } from './examples/ButtonExampleName/ButtonExampleName';
 import {
   ButtonExampleViewPrimary,
@@ -89,11 +89,12 @@ import { Button } from '@consta/uikit/Button';
 
 <ButtonExampleNameSingleLine />
 
-Многоточие вместо части названия — плохо. Если название не влезает на кнопку
-при маленьких разрешениях экрана, попробуйте сократить, подобрать другое или
-используйте только иконку.
+Слишком длинный текст — плохо. Если название не влезает на кнопку (например, на мобильном), текст обрезается, в конце добавляется многоточие. Обрезанное название не всегда понятно и может запутать
+пользователей.
 
-<ButtonExampleNameOverflow />
+Можно сократить текст, перформулировать, использовать иконку или донести информацию с помощью других элементов интерфейса.
+
+<ButtonExampleNameTooBig />
 
 ## Внешний вид
 

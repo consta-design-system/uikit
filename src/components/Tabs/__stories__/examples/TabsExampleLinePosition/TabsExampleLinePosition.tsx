@@ -25,7 +25,7 @@ export const TabsExampleLinePosition = () => {
               value={value}
               onChange={({ value }) => setValue(value)}
               items={items}
-              getLabel={(item) => item}
+              getItemLabel={(item) => item}
               linePosition={linePosition}
             />
           </StoryBookExample>

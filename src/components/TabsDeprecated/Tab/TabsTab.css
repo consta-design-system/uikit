@@ -1,0 +1,62 @@
+.TabsTab {
+  --tab-indent: var(--space-m);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-xs) 0;
+  color: var(--color-typo-secondary);
+  background-color: transparent;
+  border: none;
+  font-family: var(--font);
+  font-size: var(--tab-font-size);
+  line-height: var(--line-height-text-s);
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s;
+
+  &_size {
+    &_s {
+      --only-icon-size: var(--space-l);
+      --tab-font-size: var(--size-text-s);
+    }
+
+    &_m {
+      --only-icon-size: var(--space-xl);
+      --tab-font-size: var(--size-text-m);
+    }
+  }
+
+  &_checked,
+  &:hover {
+    color: var(--color-typo-primary);
+  }
+
+  /* Увеличиваем область клика и фокуса */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: calc(-1 * var(--space-2xs));
+    left: calc(-1 * var(--space-2xs));
+    bottom: 0;
+    display: block;
+    border-radius: var(--control-radius);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &-Icon {
+    flex-shrink: 0;
+  }
+
+  &:not(&_onlyIcon) &-Icon {
+    margin-right: calc(var(--tab-indent) * 0.5);
+  }
+
+  &_onlyIcon {
+    justify-content: center;
+    width: var(--only-icon-size);
+  }
+}

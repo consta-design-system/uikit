@@ -8,6 +8,6 @@ export const ResponsesExit = createResponses({
   name: 'ResponsesExit',
   image: ResponsesImageExit,
   title: 'Вы вышли из системы ',
-  description: 'Хотите вернутся?',
+  description: 'Хотите вернуться?',
   actions: <Button label="Войти снова" />,
 });
