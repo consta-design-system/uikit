@@ -9,6 +9,7 @@ import { IconSortUp } from '../../icons/IconSortUp/IconSortUp';
 import { IconUnsort } from '../../icons/IconUnsort/IconUnsort';
 import { sortBy as sortByDefault, updateAt } from '../../utils/array';
 import { cn } from '../../utils/bem';
+import { setRef } from '../../utils/setRef';
 import { isNotNil, isString } from '../../utils/type-guards';
 import { Button, ButtonPropSize } from '../Button/Button';
 import { Text } from '../Text/Text';
@@ -172,6 +173,11 @@ export interface TableControl<T extends TableRow> {
   column: Header<T> & ColumnMetaData;
 }
 
+export type SortByProps<T extends TableRow> = {
+  sortingBy: keyof T;
+  sortOrder: 'asc' | 'desc';
+};
+
 export type TableColumn<T extends TableRow> = {
   title: React.ReactNode;
   align?: HorizontalAlign;
@@ -215,6 +221,7 @@ export type TableProps<T extends TableRow> = {
   onFiltersUpdated?: (filters: SelectedFilters) => void;
   getTagLabel?: GetTagLabel;
   isExpandedRowsByDefault?: boolean;
+  getCellWrap?: (row: T) => 'truncate' | 'break';
 };
 
 type Table = <T extends TableRow>(
@@ -318,7 +325,9 @@ const InternalTable = <T extends TableRow>(
     onSortBy,
     onFiltersUpdated,
     getTagLabel,
+    getCellWrap,
     isExpandedRowsByDefault = false,
+    ...otherProps
   } = props;
   const {
     headers,
@@ -804,13 +813,12 @@ const InternalTable = <T extends TableRow>(
   };
 
   const handleCellClick: onCellClick = (params) => {
-    if (onCellClick) {
-      onCellClick(params);
-    }
+    onCellClick?.(params);
   };
 
   return (
     <div
+      {...otherProps}
       ref={useForkRef([tableRef, ref])}
       className={cnTable(
         {
@@ -939,16 +947,14 @@ const InternalTable = <T extends TableRow>(
                     column,
                     columnIdx,
                   );
-
                   if (show) {
                     return (
                       <TableCell
                         type="content"
                         key={column.accessor}
-                        ref={(ref: HTMLDivElement | null): void => {
+                        ref={(ref: HTMLDivElement | null) => {
                           cellsRefs.current[`${columnIdx}-${row.id}`] = ref;
-
-                          setBoundaryRef(columnIdx, rowIdx);
+                          setRef(setBoundaryRef(columnIdx, rowIdx), ref);
                         }}
                         style={style}
                         wrapperClassName={cnTable('ContentCell', {
@@ -964,6 +970,7 @@ const InternalTable = <T extends TableRow>(
                           row,
                           isActive: activeRow ? activeRow.id === row.id : false,
                         })}
+                        wrap={getCellWrap?.(row)}
                         onContextMenu={(e: React.SyntheticEvent) =>
                           handleCellClick({
                             e,
@@ -995,7 +1002,8 @@ const InternalTable = <T extends TableRow>(
                         isClickable={!!isRowsClickable}
                         showVerticalShadow={
                           showVerticalCellShadow &&
-                          column.position!.gridIndex! +
+                          // eslint-disable-next-line no-unsafe-optional-chaining
+                          column?.position!.gridIndex! +
                             (column?.position!.colSpan || 1) ===
                             stickyColumnsGrid
                         }

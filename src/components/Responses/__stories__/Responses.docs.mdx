@@ -14,6 +14,7 @@ import {
   ExampleResponsesSizeM,
   ExampleResponsesSizeL,
   ExampleResponsesExit,
+  ExampleResponsesAdaptive,
 } from './examples/ResponsesExample/ResponsesExample';
 
 <!--info
@@ -28,6 +29,8 @@ import { Responses404 } from '@consta/uikit/Responses404';
 
 Это набор компонентов, которые нужны, чтобы показывать пользователям сообщения о важных статусах:
 например, об ошибках в работе приложения, результате поиска или процесса.
+
+> Если вам нужны сообщения об ошибках с иллюстрациями в стиле Газпром нефти, используйте библиотеку [@consta/gpn-responses](https://gpn-responses.consta.design/)
 
 - [Типы сообщений](#название)
   - [Нет доступа (ошибка 403)](#нет-доступа-ошибка-403)
@@ -44,6 +47,7 @@ import { Responses404 } from '@consta/uikit/Responses404';
 - [Текст](#текст)
 - [Кнопки](#кнопки)
 - [Размер](#размер)
+- [Адаптивность](#адаптивность)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
@@ -259,6 +263,14 @@ import { Responses404 } from '@consta/uikit/Responses404';
 ```
 
 <ExampleResponsesSizeL />
+
+## Адаптивность
+
+Компонент заполняет всё пространство родительского контейнера и располагается по центру.
+
+Например, в контейнере шириной 300 px `ResponsesExit` выглядит вот так:
+
+<ExampleResponsesAdaptive />
 
 ## Импорт
 

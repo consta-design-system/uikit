@@ -1,11 +1,10 @@
-import { action } from '@storybook/addon-actions';
 import React from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Switch } from '../../../Switch';
 
-const emptyFunction = action('emptyFunction');
+const emptyFunction = () => {};
 
 export const SwitchExampleSize = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>

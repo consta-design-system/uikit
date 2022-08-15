@@ -10,7 +10,7 @@ type Item = {
 };
 type OnChange = (props: { e: React.MouseEvent; value: Item | null }) => void;
 
-const testId = 'Steps';
+const testId = 'StepsCanary';
 
 const items: Item[] = [
   {
@@ -37,8 +37,8 @@ const renderComponent = (props: {
     <Steps
       items={items}
       value={items[0]}
-      getLabel={(item) => item.label}
-      getDisabled={(item) => item.disabled || false}
+      getItemLabel={(item) => item.label}
+      getItemDisabled={(item) => item.disabled || false}
       onChange={props.onChange || handleChange}
       className={additionalClass}
       data-testid={testId}
