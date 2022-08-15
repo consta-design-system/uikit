@@ -1,5 +1,15 @@
 import { MdxMenu } from '@consta/stand';
 
+import { ButtonExample } from '../__stories__/examples/ButtonExampleBasic/ButtonExampleBasic';
+import {
+  ButtonExampleNameSemantics,
+  ButtonExampleNameVerb,
+  ButtonExampleNameNavigation,
+  ButtonExampleNameSingleLine,
+  ButtonExampleNameAgreement,
+  ButtonExampleNameTooBig,
+} from '../__stories__/examples/ButtonExampleName/ButtonExampleName';
+
 Кнопка. Используется, когда человеку нужно сделать выбор, подтвердить или совершить какое-то действие. Например, отправить сообщение, оплатить заказ, сохранить изменения, войти в акканут.
 
 Кнопка в фокусе визуально выделяется, чтобы человек понимал, что вот-вот нажмёт на неё и что-то произойдёт.
@@ -7,7 +17,7 @@ import { MdxMenu } from '@consta/stand';
 <MdxMenu>
 
 - [Текст на кнопке](#текст-на-кнопке)
-- [Внешний вид](#внешний-вид)
+- [Внешний вид](##LIBS.STAND.DEV|stand:uikit-components-button-stable#внешний-вид)
   - [Типы кнопок](#типы-кнопок)
   - [Размер](#размер)
   - [Кнопка с иконкой](#кнопка-с-иконкой)
@@ -20,7 +30,7 @@ import { MdxMenu } from '@consta/stand';
 
 </MdxMenu>
 
-`<красивый интерактивный пример />`
+<ButtonExample />
 
 ## Текст на кнопке
 
@@ -32,31 +42,31 @@ import { MdxMenu } from '@consta/stand';
 Почти всегда для текста на кнопке подходит инфинитив глагола совершенного вида
 (отвечает на вопрос «Что сделать?») Вот такой: **Сохранить**, **Купить**, **Отправить**.
 
-`<ButtonExampleNameVerb />`
+<ButtonExampleNameVerb />
 
 Иногда глаголы не подходят (но редко). Например, если кнопки нужны для навигации.
 
-`<ButtonExampleNameNavigation />`
+<ButtonExampleNameNavigation />
 
 Или когда с помощью кнопки человек выражает согласие, отношение или подтверждает, что
 прочитал текст.
 
-`<ButtonExampleNameAgreement />`
+<ButtonExampleNameAgreement />
 
 #### Как можно точнее
 
 Не используйте общие слова, когда кнопка отвечает за конкретное действие.
 
-`<ButtonExampleNameSemantics />`
+<ButtonExampleNameSemantics />
 
 #### Как можно короче
 
 Две строки — плохо. Сделайте кнопку шире или поменяйте название.
 
-`<ButtonExampleNameSingleLine />`
+<ButtonExampleNameSingleLine />
 
 Многоточие вместо части названия — плохо. Если название не влезает на кнопку
 при маленьких разрешениях экрана, попробуйте сократить, подобрать другое или
 используйте только иконку.
 
-`<ButtonExampleNameOverflow />`
+<ButtonExampleNameTooBig />
