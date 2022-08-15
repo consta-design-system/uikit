@@ -1,13 +1,14 @@
-import { createStand } from '../../../stand/standConfig';
-import Attachment from '../../../uiKit/components/ComponentsGridWithData/data/images/AttachmentImage';
+import { createStand } from '##/stand/standConfig';
+
+import image from './Attachment.image.svg';
 
 export default createStand({
   title: 'Attachment',
   id: 'Attachment',
   group: 'components',
-  image: Attachment,
+  image,
   description: 'Показывает загрузку файла или уже загруженный файл.',
-  version: '3.18.0',
+  version: '4.0.0',
   status: 'stable',
   sandbox:
     'https://codesandbox.io/embed/react-new?fontsize=14&hidenavigation=1&theme=dark',
