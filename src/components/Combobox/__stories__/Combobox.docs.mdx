@@ -56,7 +56,6 @@ import { Combobox } from '@consta/uikit/Combobox';
 - [Размер](#размер)
 - [Форма](#форма)
 - [Внешний вид](#внешний-вид)
-- [Лейбл и подпись](#лейбл-и-подпись)
 - [Поиск](#поиск)
 - [Неактивный выпадающий список](#неактивный-выпадающий-список)
 - [Создание новых вариантов](#создание-новых-вариантов)
@@ -90,6 +89,9 @@ import { Combobox } from '@consta/uikit/Combobox';
 Выбор варианта срабатывает по клику мыши или по нажатию `Enter` на клавиатуре.
 
 ```tsx
+import React, { useState } from 'react';
+import { Combobox } from '@consta/uikit/Combobox';
+
 type Item = {
   label: string;
   id: number;
@@ -112,7 +114,14 @@ const items: Item[] = [
 
 export function ComboboxExampleItems() {
   const [value, setValue] = useState<Item | null>();
-  return <Combobox items={items} value={value} onChange={({ value }) => setValue(value)} />;
+  return (
+    <Combobox
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      placeholder="Выберите что-нибудь хорошее"
+    />
+  );
 }
 ```
 
@@ -126,6 +135,9 @@ export function ComboboxExampleItems() {
 Если не знаете, что написать в подсказке, используйте универсальное **Выберите**.
 
 ```tsx
+import React, { useState } from 'react';
+import { Combobox } from '@consta/uikit/Combobox';
+
 type Item = {
   label: string;
   id: number;
@@ -163,7 +175,7 @@ export function ComboboxExamplePlaceholder() {
 
 ## Заголовок и подпись
 
-Вы можете добавить к выпадающему два необязательных элемента — заголовок и подпись.
+Вы можете добавить к компоненту два необязательных элемента — заголовок и подпись.
 
 Заголовок можно добавить с помощью свойства `label`.
 За его расположение отвечает свойство `labelPosition`.
@@ -172,6 +184,9 @@ export function ComboboxExamplePlaceholder() {
 Подпись можно добавить с помощью свойства `caption`.
 
 ```tsx
+import React, { useState } from 'react';
+import { Combobox } from '@consta/uikit/Combobox';
+
 type Item = {
   label: string;
   id: number;
@@ -195,16 +210,14 @@ const items: Item[] = [
 export function ComboboxExampleLabel() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <Combobox
-        label="Выберите что-нибудь"
-        caption={value?.label}
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        placeholder="Выберите что-нибудь хорошее"
-      />
-    </StoryBookExample>
+    <Combobox
+      label="Выберите что-нибудь"
+      caption={value?.label}
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      placeholder="Выберите что-нибудь хорошее"
+    />
   );
 }
 ```
@@ -216,6 +229,9 @@ export function ComboboxExampleLabel() {
 Чтобы сделать вариант в списке неактивным, добавьте к элементу массива `items` свойство `disabled: true`. Если используете [кастомный тип `items`](#кастомные-типы-данных-для-групп-и-вариантов), можете добавить своё свойство.
 
 ```tsx
+import React, { useState } from 'react';
+import { Combobox } from '@consta/uikit/Combobox';
+
 type Item = {
   label: string;
   id: number;
@@ -224,7 +240,7 @@ type Item = {
 
 const items: Item[] = [
   {
-    label: 'Первый',
+    label: 'Первый — этот вариант не выбрать',
     id: 1,
     disabled: true,
   },
@@ -234,7 +250,7 @@ const items: Item[] = [
     disabled: false,
   },
   {
-    label: 'Третий',
+    label: 'Третий — и этот тоже не выбрать',
     id: 3,
     disabled: true,
   },
@@ -262,6 +278,9 @@ export function ComboboxExampleDisabledItem() {
 > В этом случае `value` становится массивом, а в `onChange` передаётся массив выбранных элементов.
 
 ```tsx
+import React, { useState } from 'react';
+import { Combobox } from '@consta/uikit/Combobox';
+
 type Item = {
   label: string;
   id: number;
@@ -285,15 +304,13 @@ const items: Item[] = [
 export function ComboboxExampleMultiple() {
   const [value, setValue] = useState<Item[] | null>();
   return (
-    <div className={cnDocsDecorator('Section')}>
-      <Combobox
-        placeholder="Выберите вариант"
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        multiple
-      />
-    </div>
+    <Combobox
+      placeholder="Выберите вариант"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      multiple
+    />
   );
 }
 ```
@@ -308,6 +325,9 @@ export function ComboboxExampleMultiple() {
 - `id` — уникальный ключ.
 
 ```tsx
+import React, { useState } from 'react';
+import { Combobox } from '@consta/uikit/Combobox';
+
 type Item = {
   label: string;
   id: number;
@@ -376,6 +396,8 @@ export function ComboboxExampleGroups() {
 }
 ```
 
+<ComboboxExampleGroups />
+
 ## Статус поля
 
 С помощью статуса можно выделить поле: показать, где ошибка, или, наоборот,
@@ -383,9 +405,10 @@ export function ComboboxExampleGroups() {
 
 За статус отвечает свойство `status`. Если оно не указано, поле будет обычным.
 
-<ComboboxExampleStatus />
-
 ```tsx
+import React, { useState } from 'react';
+import { Combobox } from '@consta/uikit/Combobox';
+
 type Item = {
   label: string;
   id: number;
@@ -409,46 +432,46 @@ const items: Item[] = [
 export function ComboboxExampleStatus() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <Combobox
-        placeholder="default"
-        caption="default"
-        size="s"
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-      />
-      <Combobox
-        placeholder="alert"
-        caption="alert"
-        status="alert"
-        size="s"
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-      />
-      <Combobox
-        placeholder="warning"
-        caption="warning"
-        status="warning"
-        size="s"
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-      />
-      <Combobox
-        placeholder="success"
-        caption="success"
-        size="s"
-        status="success"
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-      />
-    </StoryBookExample>
+    <Combobox
+      placeholder="default"
+      caption="default"
+      size="s"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
+    <Combobox
+      placeholder="alert"
+      caption="alert"
+      status="alert"
+      size="s"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
+    <Combobox
+      placeholder="warning"
+      caption="warning"
+      status="warning"
+      size="s"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
+    <Combobox
+      placeholder="success"
+      caption="success"
+      size="s"
+      status="success"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
   );
 }
 ```
+
+<ComboboxExampleStatus />
 
 ## Размер
 
@@ -457,6 +480,9 @@ export function ComboboxExampleStatus() {
 Компонент занимает всю ширину родительского блока.
 
 ```tsx
+import React, { useState } from 'react';
+import { Combobox } from '@consta/uikit/Combobox';
+
 type Item = {
   label: string;
   id: number;
@@ -481,7 +507,7 @@ export function ComboboxExampleSize() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
-      placeholder="Выберите вариант"
+      placeholder="Размер s"
       size="s"
       items={items}
       value={value}
@@ -499,6 +525,9 @@ export function ComboboxExampleSize() {
 `default`, `brick`, `round`, `clearRound`, `roundClear`, `clearDefault`, `defaultClear`, `defaultBrick`, `brickDefault`, `brickClear`, `clearBrick`, `clearClear`. По умолчанию `default`.
 
 ```tsx
+import React, { useState } from 'react';
+import { Combobox } from '@consta/uikit/Combobox';
+
 type Item = {
   label: string;
   id: number;
@@ -523,8 +552,15 @@ export function ComboboxExampleForm() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
-      placeholder="Выберите вариант"
+      placeholder="Форма round"
       form="round"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
+    <Combobox
+      placeholder="Форма defaultBrick"
+      form="defaultBrick"
       items={items}
       value={value}
       onChange={({ value }) => setValue(value)}
@@ -540,6 +576,9 @@ export function ComboboxExampleForm() {
 За вид компонента отвечает свойство `view`. Варианты: `default`, `clear`, по умолчанию `default`.
 
 ```tsx
+import React, { useState } from 'react';
+import { Combobox } from '@consta/uikit/Combobox';
+
 type Item = {
   label: string;
   id: number;
@@ -564,7 +603,14 @@ export function ComboboxExampleView() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
-      placeholder="Выберите вариант"
+      placeholder="Вид default"
+      view="default"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
+    <Combobox
+      placeholder="Вид clear"
       view="clear"
       items={items}
       value={value}
@@ -574,56 +620,16 @@ export function ComboboxExampleView() {
 }
 ```
 
-## Лейбл и подпись
-
-Лейбл к компоненту можно добавить через свойство `label`, а за его позиционирование отвечает
-свойство `labelPosition`. Подпись можно добавить через свойство `caption`.
-
-<ComboboxExampleLabel />
-
-```tsx
-type Item = {
-  label: string;
-  id: number;
-};
-
-const items: Item[] = [
-  {
-    label: 'Первый',
-    id: 1,
-  },
-  {
-    label: 'Второй',
-    id: 2,
-  },
-  {
-    label: 'Третий',
-    id: 3,
-  },
-];
-
-export function ComboboxExampleLabel() {
-  const [value, setValue] = useState<Item | null>();
-  return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <Combobox
-        label="Выберите что-нибудь"
-        caption={value?.label}
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        placeholder="Выберите что-нибудь хорошее"
-      />
-    </StoryBookExample>
-  );
-}
-```
+<ComboboxExampleView />
 
 ## Неактивный выпадающий список
 
 Чтобы сделать весь комбобокс неактивным, добавьте `disabled`.
 
 ```tsx
+import React, { useState } from 'react';
+import { Combobox } from '@consta/uikit/Combobox';
+
 type Item = {
   label: string;
   id: number;
@@ -648,7 +654,7 @@ export function ComboboxExampleDisabled() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
-      placeholder="Выберите вариант"
+      placeholder="Здесь ничего выбрать не получится"
       items={items}
       value={value}
       onChange={({ value }) => setValue(value)}
@@ -666,9 +672,14 @@ export function ComboboxExampleDisabled() {
 
 По умолчанию компонент ищет по `label` элемента. Вы можете поменять параметры поиска с помощью `searchFunction`. Например, если в комбобоксе есть [кастомные элементы](#кастомный-элемент-списка) и нужно искать варианты не только по `label`, но и по другим данным.
 
-Для того чтобы получить значение поисквого поля необходимо указать колбек для `onInputChange`.
+Чтобы получить значение поисквого поля, нужно указать колбек для `onInputChange`.
+
+Если ничего не нашлось, пользователь увидит текст **Не найдено**. Поменять его можно с помощью свойства `labelForNotFound`.
 
 ```tsx
+import React, { useState } from 'react';
+import { Combobox } from '@consta/uikit/Combobox';
+
 type Item = {
   label: string;
   id: number;
@@ -699,7 +710,7 @@ export function ComboboxExampleOnInputChange() {
         placeholder="Выберите вариант"
         items={items}
         value={value}
-        onSearch={({ value }) => setSearch(value)}
+        onInputChange={({ value }) => setSearch(value)}
         onChange={({ value }) => setValue(value)}
       />
     </>
@@ -714,6 +725,9 @@ export function ComboboxExampleOnInputChange() {
 Если при поиске в поле ничего не нашлось, можно показать в комбобоксе кнопку для создания нового значения. Пользователь сможет добавить значение в список, а потом выбрать его. В функцию на вход придёт `label` созданного элемента.
 
 ```tsx
+import React, { useState } from 'react';
+import { Combobox } from '@consta/uikit/Combobox';
+
 type Item = {
   label: string;
   id: number | string;
@@ -749,13 +763,18 @@ export function ComboboxExampleCreate() {
 }
 ```
 
+Начните набирать слово, которого нет в выпадающем списке — рядом с ним появится **+**.
+Если на нажать на строчку с плюсом, элемент добавится в список и его можно будет выбрать.
+
+Поставить свой текст вместо плюса можно с помощью свойства `labelForCreate`.
+
 <ComboboxExampleCreate />
 
 ## Кастомизация
 
 ### Кастомный элемент списка
 
-Для того чтобы сделать свое представление элементов списка, воспользуйтесь свойством `renderItem`.
+Чтобы создать свое представление элементов списка, используйте свойство `renderItem`.
 Свойство принимает [функцию рендера](https://reactjs.org/docs/render-props.html).
 
 > У корневого DOM-элемента должно быть свойство role="option".
@@ -763,6 +782,13 @@ export function ComboboxExampleCreate() {
 #### Пример с кастомным элементом списка и своей функцией поиска
 
 ```tsx
+import React, { useState } from 'react';
+import { Badge } from '@consta/uikit/Badge';
+import { cn } from '../../../../../utils/bem';
+import { Combobox } from '@consta/uikit/Combobox';
+
+import { cn } from '@bem-react/classname';
+
 const cnComboboxExampleRenderItem = cn('ComboboxExampleRenderItem');
 
 type Item = {
@@ -835,6 +861,7 @@ export function ComboboxExampleRenderItem() {
           className={cnComboboxExampleRenderItem('Item', { active, hovered })}
           role="option"
           aria-selected={active}
+          aria-hidden="true"
           onMouseEnter={onMouseEnter}
           onClick={onClick}
         >
@@ -859,10 +886,13 @@ export function ComboboxExampleRenderItem() {
 
 ### Кастомное выбранное значение
 
-Для того чтобы сделать Кастомное выбранное значение, воспользуйтесь свойством `renderValue`.
+Чтобы создать кастомное выбранное значение, используте свойство `renderValue`.
 Свойство принимает [функцию рендера](https://reactjs.org/docs/render-props.html).
 
 ```tsx
+import React, { useState } from 'react';
+import { Combobox } from '@consta/uikit/Combobox';
+
 type Item = {
   label: string;
   id: number;
@@ -926,6 +956,9 @@ const defaultGetGroupLabel = (group) => group.label;
 #### Пример с кастомным Item
 
 ```tsx
+import React, { useState } from 'react';
+import { Combobox } from '@consta/uikit/Combobox';
+
 export function ComboboxExampleCustomTypes() {
   const [value, setValue] = useState<string | null>();
   return (
@@ -946,6 +979,9 @@ export function ComboboxExampleCustomTypes() {
 #### Пример с кастомным Item и Group
 
 ```tsx
+import React, { useState } from 'react';
+import { Combobox } from '@consta/uikit/Combobox';
+
 export type Item = {
   name: string;
   group: string;
@@ -978,8 +1014,8 @@ export function ComboboxExampleCustomTypesWithGroups() {
       getItemKey={(item) => item.name}
       getItemLabel={(item) => item.name}
       getItemGroupKey={(item) => item.group}
-      getGroupKey={(group) => group}
-      getGroupLabel={(group) => group}
+      getGroupKey={(group: string) => group}
+      getGroupLabel={(group: string) => group}
     />
   );
 }
@@ -1067,8 +1103,8 @@ type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | `isLoading?`                                              | `boolean`                                                                                         | -                                                             | При `true` будет отображаться лоудер загрузки                          |
 | `required?`                                               | `boolean`                                                                                         | -                                                             | Нужно заполнить                                                        |
 | `labelForEmptyItems?`                                     | `string`                                                                                          | `Список пуст`                                                 | Текст, который нужно показать, если в списке нет значений              |
-| `labelForNotFound?`                                       | `string`                                                                                          | `Не найдено`                                                  | Текст, который нужно показать, если при поиске ничего не нашлось       |
-| `labelForCreate?`                                         | `string`                                                                                          | `+`                                                           | Текст для кнопки, по которой можно добавить элемент в список           |
+| [`labelForNotFound?`](#поиск)                             | `string`                                                                                          | `Не найдено`                                                  | Текст, который нужно показать, если при поиске ничего не нашлось       |
+| [`labelForCreate?`](#создание-новых-вариантов)            | `string`                                                                                          | `+`                                                           | Текст для кнопки, по которой можно добавить элемент в список           |
 | `onBlur?`                                                 | `(event?: React.FocusEvent<HTMLInputElement>) => void`                                            | -                                                             | Обработчик события `blur`                                              |
 | `onFocus?`                                                | `(event?: React.FocusEvent<HTMLInputElement>) => void`                                            | -                                                             | Обработчик события `focus`                                             |
 | `ariaLabel?`                                              | `string`                                                                                          | -                                                             | `aria` атрибут для поля ввода                                          |

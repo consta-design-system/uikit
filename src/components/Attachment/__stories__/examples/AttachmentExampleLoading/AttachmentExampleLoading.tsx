@@ -2,6 +2,8 @@ import './AttachmentExampleLoading.css';
 
 import React from 'react';
 
+import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
+import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
 import { cn } from '../../../../../utils/bem';
 import { Attachment } from '../../../Attachment';
 
@@ -9,7 +11,7 @@ const cnAttachmentExampleLoading = cn('AttachmentExampleLoading');
 
 export const AttachmentExampleLoading = () => {
   return (
-    <div>
+    <div className={cnDocsDecorator('Section', [cnDocsExample()])}>
       <Attachment
         className={cnAttachmentExampleLoading()}
         fileName="Инструкция по сборке марсохода"

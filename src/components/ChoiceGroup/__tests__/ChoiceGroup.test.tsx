@@ -51,7 +51,7 @@ const renderComponent = (props: {
     value: Item | null;
   }) => void;
   disabled?: boolean;
-  getDisabled?: (item: Item) => boolean | undefined;
+  getItemDisabled?: (item: Item) => boolean | undefined;
 }) => {
   const { items = elements, ...otherProps } = props;
   const value = defaultValue;
@@ -64,8 +64,8 @@ const renderComponent = (props: {
       value={value}
       multiple={false}
       onChange={props.onChange || handleChange}
-      getLabel={(item) => `Name-${item.name}`}
-      getIcon={(item) => item.icon}
+      getItemLabel={(item) => `Name-${item.name}`}
+      getItemIcon={(item) => item.icon}
       name={testId}
       className={additionalClass}
       data-testid={testId}
@@ -96,8 +96,8 @@ const renderComponentMultiple = (props: {
       value={value}
       multiple
       onChange={props.onChange || handleChange}
-      getLabel={(item) => `Name-${item.name}`}
-      getIcon={(item) => item.icon}
+      getItemLabel={(item) => `Name-${item.name}`}
+      getItemIcon={(item) => item.icon}
       name={testId}
       className={additionalClass}
       data-testid={testId}
@@ -153,13 +153,13 @@ describe('Компонент ChoiceGroup', () => {
         );
       });
     });
-    describe('проверка getLabel', () => {
+    describe('проверка getItemLabel', () => {
       it(`label у элемента верный`, () => {
         renderComponent({});
         expect(getItem().textContent).toEqual(`Name-${elements[0].name}`);
       });
     });
-    describe('проверка getIcon', () => {
+    describe('проверка getItemIcon', () => {
       it(`иконка отображается`, () => {
         renderComponent({});
         expect(getIcon()).toHaveClass('IconCamera');
@@ -351,7 +351,7 @@ describe('Компонент ChoiceGroup', () => {
       it(`disabled элементам присваивается класс ${cnChoiceGroup('Label', {
         disabled: true,
       })}`, () => {
-        renderComponent({ items, getDisabled: (item) => item.disabled });
+        renderComponent({ items, getItemDisabled: (item) => item.disabled });
         items.forEach((el, i) => {
           if (el.disabled) {
             expect(getItem(i)).toHaveClass(
@@ -366,7 +366,7 @@ describe('Компонент ChoiceGroup', () => {
       });
 
       it('disabled элементы получают аттрибут disabled', () => {
-        renderComponent({ items, getDisabled: (item) => item.disabled });
+        renderComponent({ items, getItemDisabled: (item) => item.disabled });
         items.forEach((el, i) => {
           if (el.disabled) {
             expect(getInput(i)).toHaveAttribute('disabled');
@@ -380,7 +380,7 @@ describe('Компонент ChoiceGroup', () => {
         const handleChange = jest.fn();
         renderComponent({
           items,
-          getDisabled: (item) => item.disabled,
+          getItemDisabled: (item) => item.disabled,
           onChange: handleChange,
         });
         getItems().forEach((label) => {

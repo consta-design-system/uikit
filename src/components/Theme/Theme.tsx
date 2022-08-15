@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo } from 'react';
+import React, { createContext, useContext } from 'react';
 
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
@@ -58,18 +58,16 @@ export const Theme = React.forwardRef<HTMLDivElement, ThemeProps>(
   (props, ref) => {
     const { className, children, preset, ...otherProps } = props;
 
-    const [value, mods] = useMemo(() => {
-      return [
-        { theme: preset, themeClassNames: generateThemeClassNames(preset) },
-        {
-          ...preset,
-          color: preset.color.primary,
-        },
-      ];
-    }, [preset]);
+    const mods = {
+      ...preset,
+      color: preset.color.primary,
+    };
+
+    const themeClassNames = generateThemeClassNames(preset);
 
     return (
-      <ThemeContext.Provider value={value}>
+      // eslint-disable-next-line react/jsx-no-constructed-context-values
+      <ThemeContext.Provider value={{ theme: preset, themeClassNames }}>
         <div {...otherProps} ref={ref} className={cnTheme(mods, [className])}>
           {children}
         </div>

@@ -1,46 +1,45 @@
-import './ContextMenuExampleGroups.css';
+import React, { useRef, useState } from 'react';
 
-import React, { useRef } from 'react';
-
-import { IconAdd } from '../../../../../icons/IconAdd/IconAdd';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { cn } from '../../../../../utils/bem';
 import { Button } from '../../../../Button/Button';
 import { ContextMenu } from '../../../ContextMenu';
 
-export const groups = [
+type Group = {
+  name: string;
+  key: number;
+};
+
+const groups: Group[] = [
   {
     name: 'Первая группа',
-    id: 1,
+    key: 1,
   },
   {
     name: 'Вторая группа',
-    id: 2,
+    key: 2,
   },
-] as const;
+];
 
-export declare type Item = {
-  name: string;
-  group: typeof groups[number]['id'];
+type Item = {
+  label: string;
+  group: number;
 };
 
 const items: Item[] = [
   {
-    name: 'Пункт 1',
+    label: 'Пункт 1',
     group: 1,
   },
   {
-    name: 'Пункт 2',
+    label: 'Пункт 2',
     group: 2,
   },
   {
-    name: 'Пункт 3',
+    label: 'Пункт 3',
     group: 2,
   },
 ];
-
-const cnContextMenuExampleGroups = cn('ContextMenuExampleGroups');
 
 const sortGroup = (a: number | string, b: number | string) => {
   if (a > b) {
@@ -53,20 +52,19 @@ const sortGroup = (a: number | string, b: number | string) => {
 };
 
 export const ContextMenuExampleGroups = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useRef(null);
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [cnContextMenuExampleGroups()])}
-    >
-      <Button iconLeft={IconAdd} ref={ref} />
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
       <ContextMenu
         items={items}
-        getLabel={(item) => item.name}
-        getGroupId={(item) => item.group}
-        getGroupLabel={(id) => groups.find((group) => group.id === id)?.name}
+        isOpen={isOpen}
+        groups={groups}
+        getItemGroupId={(item) => item.group}
+        getGroupLabel={(group) => group.name}
+        getGroupId={(group) => group.key}
         anchorRef={ref}
-        direction="downStartLeft"
-        possibleDirections={['upStartLeft', 'downStartLeft']}
         sortGroup={sortGroup}
       />
     </StoryBookExample>

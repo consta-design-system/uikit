@@ -16,7 +16,7 @@ export const TabsExampleFitModeScroll = () => {
           value={value}
           onChange={({ value }) => setValue(value)}
           items={items}
-          getLabel={(item) => item}
+          getItemLabel={(item) => item}
         />
       </div>
     </StoryBookExample>
