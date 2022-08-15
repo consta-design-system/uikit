@@ -1,4 +1,3 @@
-import { action } from '@storybook/addon-actions';
 import React from 'react';
 
 import { IconMoon } from '../../../../../icons/IconMoon/IconMoon';
@@ -7,7 +6,7 @@ import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/D
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Tag } from '../../../Tag';
 
-const emptyFunction = action('emptyFunction');
+const emptyFunction = () => {};
 
 export const TagExampleIcon = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>

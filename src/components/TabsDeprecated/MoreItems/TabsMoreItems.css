@@ -1,0 +1,42 @@
+.TabsMoreItems {
+  &-Button {
+    display: flex;
+    align-items: center;
+  }
+
+  &-Content {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-s) 0;
+    background: var(--color-bg-default);
+    border: 1px solid var(--color-bg-border);
+    border-radius: var(--control-radius);
+    box-shadow: var(--shadow-modal);
+
+    /* Если текст будет переноситься на несколько строк,
+    не получится сразу правильно вычислить направление попапа и он будет скакать при открытии */
+    white-space: nowrap;
+  }
+
+  &-Item {
+    padding: 0 var(--space-s);
+
+    &_active {
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -1px;
+        bottom: 0;
+        width: 2px;
+        background: var(--color-bg-brand);
+      }
+    }
+
+    & > * {
+      width: 100%;
+    }
+  }
+}

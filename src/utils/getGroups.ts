@@ -14,6 +14,16 @@ type GetGroupsResult<ITEM, GROUP> = Group<ITEM, GROUP>[];
 
 export const defaultGroupKey = 'no-group';
 
+const getItemGroupKeyGuard = <ITEM>(
+  getter: GetGroupKey<ITEM>,
+  item: ITEM,
+  noGroupKey: string,
+) => {
+  const key = getter(item);
+
+  return typeof key === 'undefined' ? noGroupKey : key;
+};
+
 /**
  * @param items список который нужно групировать
  * @param getItemGroupKey признак принадлежности к группе
@@ -22,6 +32,7 @@ export const defaultGroupKey = 'no-group';
  * @param sortGroups сортировка групп
  * @param noGroupKey ключ группы которая создаться если item небудет принадлежать ни к одной из групп
  */
+
 export function getGroups<ITEM, GROUP>(
   items: ITEM[],
   getItemGroupKey: GetItemGroupKey<ITEM> | undefined,
@@ -36,7 +47,11 @@ export function getGroups<ITEM, GROUP>(
 
   const resultGroups: GetGroupsResult<ITEM, GROUP> = [];
   for (const item of items) {
-    const itemGroupKey = getItemGroupKey(item) || noGroupKey;
+    const itemGroupKey = getItemGroupKeyGuard(
+      getItemGroupKey,
+      item,
+      noGroupKey,
+    );
     const resultGroupIndex = resultGroups.findIndex(
       (group) => group.key === itemGroupKey,
     );
