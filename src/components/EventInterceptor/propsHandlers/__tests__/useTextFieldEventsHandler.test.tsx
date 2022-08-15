@@ -24,7 +24,7 @@ describe('useTextFieldEventsHandler', () => {
   );
   const props = result.current;
 
-  it('возвращает пропсы в том же виде, что и получил', () => {
+  it('возвращает пропсы в том же виде, что и получил ', () => {
     expect(props).toEqual({
       ...textFieldProps,
       onBlur: expect.any(Function),

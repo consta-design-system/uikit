@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { ChoiceGroup } from '../../../ChoiceGroup';
+import { ChoiceGroup } from '../../../ChoiceGroupCanary';
 
 type Item = { name: string; disabled?: boolean };
 
@@ -21,9 +21,9 @@ export const ChoiceGroupExampleSomeDisabled = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getLabel={(item) => item.name}
+        getItemLabel={(item) => item.name}
         name="ChoiceGroupExampleSomeDisabled"
-        getDisabled={(item: Item) => item.disabled}
+        getItemDisabled={(item: Item) => item.disabled}
       />
     </StoryBookExample>
   );

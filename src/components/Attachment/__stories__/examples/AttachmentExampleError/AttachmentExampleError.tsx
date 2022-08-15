@@ -2,6 +2,8 @@ import './AttachmentExampleError.css';
 
 import React from 'react';
 
+import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
+import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
 import { cn } from '../../../../../utils/bem';
 import { Attachment } from '../../../Attachment';
 
@@ -9,7 +11,7 @@ const cnAttachmentExampleError = cn('AttachmentExampleError');
 
 export const AttachmentExampleError = () => {
   return (
-    <div>
+    <div className={cnDocsDecorator('Section', [cnDocsExample()])}>
       <div>
         <Attachment
           className={cnAttachmentExampleError()}

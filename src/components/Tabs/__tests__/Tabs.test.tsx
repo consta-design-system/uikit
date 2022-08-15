@@ -56,8 +56,8 @@ const renderComponent = (props: {
       items={items}
       value={value}
       onChange={props.onChange || handleChange}
-      getLabel={(item) => `Name-${item.name}`}
-      getIcon={(item) => item.icon}
+      getItemLabel={(item) => `Name-${item.name}`}
+      getItemIcon={(item) => item.icon}
       className={additionalClass}
       data-testid={testId}
     />,
@@ -101,14 +101,14 @@ describe('Компонент Tabs', () => {
         expect(item).toHaveClass(cnTabsTab({ checked: true }));
       });
     });
-    describe('проверка getLabel', () => {
+    describe('проверка getItemLabel', () => {
       it(`label у элемента верный`, () => {
         renderComponent({});
         const item = getItem();
         expect(item.textContent).toEqual(`Name-${items[0].name}`);
       });
     });
-    describe('проверка getIcon', () => {
+    describe('проверка getItemIcon', () => {
       it(`иконка отображается`, () => {
         renderComponent({});
         const icon = getIcon();

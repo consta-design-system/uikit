@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { useComponentSize } from '../../../hooks/useComponentSize/useComponentSize';
-import { getTabsWidth, TabDimensions } from '../helpers';
+import { getTabsWidth } from '../helpers';
+import { TabDimensions } from '../types';
 
 export const useFittingItems = ({
   tabsDimensions,
