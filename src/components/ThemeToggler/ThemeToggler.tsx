@@ -72,7 +72,9 @@ const ThemeTogglerRender = (
   };
 
   const renderChecks = (item: Item) => {
-    return getChecked(item) && <IconCheck size={iconSize} />;
+    if (getChecked(item)) {
+      return <IconCheck size={iconSize} />;
+    }
   };
 
   if (items.length <= 1) {
@@ -97,13 +99,14 @@ const ThemeTogglerRender = (
           offset="s"
           items={items}
           getItemLabel={getItemLabel}
+          getItemKey={getItemKey || getItemLabel}
           anchorRef={anchorRef}
           direction={direction}
           possibleDirections={possibleDirections}
           getItemLeftSide={renderIcons}
           getItemRightSide={renderChecks}
           onClickOutside={setIsOpen.off}
-          onItemClick={(params) => getOnChange(params.item)}
+          onItemClick={(params) => getOnChange(params.item)(params.e)}
           size={contextMenuSize}
           style={
             typeof style?.zIndex === 'number'

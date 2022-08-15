@@ -1,9 +1,12 @@
+import './ThemeTogglerExampleGetters.css';
+
 import React, { useState } from 'react';
+
+import { cn } from '##/utils/bem';
 
 import { IconLightningBolt } from '../../../../../icons/IconLightningBolt/IconLightningBolt';
 import { IconMoon } from '../../../../../icons/IconMoon/IconMoon';
 import { IconSun } from '../../../../../icons/IconSun/IconSun';
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import {
   presetGpnDark,
   presetGpnDefault,
@@ -36,11 +39,13 @@ const getTheme = (item: Item) => {
   return presetGpnDisplay;
 };
 
+const cnThemeTogglerExampleGetters = cn('ThemeTogglerExampleGetters');
+
 export const ThemeTogglerExampleGetters = () => {
   const [value, setValue] = useState<Item>(items[0]);
 
   return (
-    <Theme preset={getTheme(value)} className={cnDocsDecorator('Section')}>
+    <Theme preset={getTheme(value)} className={cnThemeTogglerExampleGetters()}>
       <ThemeToggler
         items={items}
         value={value}

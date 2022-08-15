@@ -108,7 +108,6 @@ const ContextMenuLevelsRender = (
       getLevels({
         levels,
         items,
-        getItemLabel,
         getItemKey,
         getItemSubMenu,
       }),
