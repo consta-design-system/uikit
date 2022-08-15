@@ -30,6 +30,7 @@ export type Props = {
   verticalSpace?: CardPropSpace;
   horizontalSpace?: CardPropSpace;
   status?: CardPropStatus;
+  border?: boolean;
   form?: CardPropForm;
   shadow?: boolean;
   children?: React.ReactNode;
@@ -50,6 +51,7 @@ export const Card = forwardRefWithAs<Props>((props, ref) => {
     shadow = true,
     children,
     tabIndex,
+    border,
     className,
     as = 'div',
     ...otherProps
@@ -62,7 +64,14 @@ export const Card = forwardRefWithAs<Props>((props, ref) => {
       tabIndex={tabIndex}
       ref={useForkRef([cardRef, ref])}
       className={cnCard(null, [
-        cnMixCard({ verticalSpace, horizontalSpace, shadow, form, status }),
+        cnMixCard({
+          verticalSpace,
+          horizontalSpace,
+          shadow,
+          form,
+          status,
+          border,
+        }),
         className,
       ])}
       {...otherProps}

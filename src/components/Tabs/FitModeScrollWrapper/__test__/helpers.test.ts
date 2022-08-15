@@ -1,5 +1,5 @@
-import { TabDimensions } from '../../helpers';
-import { getVisibleTabsRange } from '../helpers';
+import { getVisibleTabsRange } from '../../helpers';
+import { TabDimensions } from '../../types';
 
 describe('getVisibleTabsRange', () => {
   const tabsDimensions: TabDimensions[] = [

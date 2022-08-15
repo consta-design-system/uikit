@@ -1,4 +1,5 @@
 .CollapseIcon {
+  color: var(--color-typo-primary);
   transition: transform 0.3s;
   transition-timing-function: cubic-bezier(0.7, 0, 0.5, 1);
   transform: var(--direction-transform);

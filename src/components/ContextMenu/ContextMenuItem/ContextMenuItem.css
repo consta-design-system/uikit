@@ -6,7 +6,8 @@
   text-decoration: none;
   word-break: break-word;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background-color 0.2s;
+  gap: var(--space-xs);
 
   &:hover,
   &_active {
@@ -14,6 +15,10 @@
   }
 
   &_size {
+    &_xs {
+      --vertical-space: var(--space-2xs);
+    }
+
     &_s {
       --vertical-space: var(--space-xs);
     }
@@ -27,6 +32,10 @@
     }
   }
 
+  &-Label {
+    flex: 1;
+  }
+
   &_disabled.Text {
     color: var(--color-control-typo-disable);
     cursor: default;
@@ -36,7 +45,7 @@
     }
   }
 
-  &-Side {
+  &-Slot {
     display: flex;
     align-items: center;
 
@@ -44,18 +53,10 @@
       &_left,
       &_right {
         flex: 0;
-
-        &:not(:last-child) {
-          margin-right: var(--space-xs);
-        }
       }
 
       &_center {
         flex: 1;
-
-        &:not(:last-child) {
-          margin-right: var(--space-s);
-        }
       }
     }
   }

@@ -13,7 +13,7 @@ export const RadioGroupExampleSize = () => {
       <RadioGroup
         value={value}
         items={simpleItems}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         onChange={({ value }) => setValue(value)}
         direction="row"
         size="m"
@@ -21,7 +21,7 @@ export const RadioGroupExampleSize = () => {
       <RadioGroup
         value={value}
         items={simpleItems}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         onChange={({ value }) => setValue(value)}
         direction="row"
         size="l"

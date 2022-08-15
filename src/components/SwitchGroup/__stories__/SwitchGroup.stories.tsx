@@ -50,8 +50,8 @@ export const Playground = () => {
         <SwitchGroup
           value={value}
           items={items}
-          getLabel={(item) => item.name}
-          getDisabled={(item) => item.disabled}
+          getItemLabel={(item) => item.name}
+          getItemDisabled={(item) => item.disabled}
           onChange={({ value }) => setValue(value)}
           name={cnSwitchGroupStories()}
           direction={direction}
@@ -65,8 +65,8 @@ export const Playground = () => {
 };
 
 export default createMetadata({
-  title: 'Компоненты|/Базовые/SwitchGroup',
-  id: 'components/SwitchGroup',
+  title: 'Компоненты|/Базовые/SwitchGroup(Canary)',
+  id: 'components/SwitchGroupCanary',
   parameters: {
     docs: {
       page: mdx,
