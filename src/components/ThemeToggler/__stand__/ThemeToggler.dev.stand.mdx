@@ -1,0 +1,197 @@
+import { MdxMenu } from '@consta/stand';
+import {
+  ThemeTogglerExampleQuantityTwo,
+  ThemeTogglerExampleQuantityThree,
+} from './examples/ThemeTogglerExampleQuantity/ThemeTogglerExampleQuantity';
+
+import { ThemeTogglerExampleSize } from './examples/ThemeTogglerExampleSize/ThemeTogglerExampleSize';
+import { ThemeTogglerExampleGetters } from './examples/ThemeTogglerExampleGetters/ThemeTogglerExampleGetters';
+import { ThemeTogglerExampleDefault } from './examples/ThemeTogglerExampleDefault/ThemeTogglerExampleDefault';
+
+<MdxMenu>
+
+- [Содержимое](#содержимое)
+- [Темы](#темы)
+- [Контекстное меню](#контекстное-меню)
+- [Размер](#размер)
+- [Импорт](#импорт)
+- [Свойства](#свойства)
+- [Пример использования](#пример)
+
+</MdxMenu>
+
+## Содержимое
+
+Переключатель может содержать элементы типа [ThemeTogglerItemDefault](#свойства) с такими атрибутами:
+
+- `key` — идентификатор элемента,
+- `label` — текст элемента, обычно это название темы,
+- `icon` — иконка темы.
+
+Темы, из которых можно сделать выбор, описываются в массиве `items`. Это можно сделать так:
+
+```
+const items = ['Default', 'Dark'];
+```
+
+Тема, которая сейчас выбрана, содержится в `value`.
+
+Иконку темы в переключателе можно получить с помощью функции `getItemIcon` или в атрибуте `icon` в свойстве `items` типа [ThemeTogglerItemDefault](#свойства) — на неё нужно нажать, чтобы переключить тему.
+
+Название темы можно получить с помощью функции `getItemLabel` или в атрибуте `label` в свойстве `items` типа [ThemeTogglerItemDefault](#свойства). Его видно только в [контекстном меню](#контекстное-меню).
+
+У каждой темы может быть уникальный идентификатор. Его можно получить с помощью функции `getItemKey?` или в атрибуте `key`
+в свойстве `items` типа [ThemeTogglerItemDefault](#свойства).
+Если идентификатор не указан, вместо него используется `getItemLabel`.
+
+```tsx
+type Item = 'Default' | 'Dark' | 'Display';
+
+const items: Item[] = ['Default', 'Dark', 'Display'];
+
+const getItemIcon = (item: Item) => {
+  if (item === 'Default') {
+    return IconSun;
+  }
+  if (item === 'Dark') {
+    return IconMoon;
+  }
+  return IconLightningBolt;
+};
+
+const getTheme = (item: Item) => {
+  if (item === 'Default') {
+    return presetGpnDefault;
+  }
+  if (item === 'Dark') {
+    return presetGpnDark;
+  }
+  return presetGpnDisplay;
+};
+
+export const ThemeTogglerExampleGetters = () => {
+  const [value, setValue] = useState<Item>(items[0]);
+
+  return (
+    <Theme preset={getTheme(value)}>
+      <ThemeToggler
+        items={items}
+        value={value}
+        getItemKey={(item) => item}
+        getItemLabel={(item) => item}
+        getItemIcon={getItemIcon}
+        onChange={({ value }) => setValue(value)}
+        direction="downStartLeft"
+      />
+    </Theme>
+  );
+};
+```
+
+<ThemeTogglerExampleGetters />
+
+Если выбрать можно только из двух тем, тема меняется по нажатию на иконку.
+
+<ThemeTogglerExampleQuantityTwo />
+
+## Контекстное меню
+
+Если тем больше двух, по нажатию на иконку появляется контекстное меню, а уже в нём можно сделать выбор.
+
+<ThemeTogglerExampleQuantityThree />
+
+Контекстное меню работает на основе [поповера](?path=/docs/components-popover--popover-positioned-by-coords-story).
+Вы можете управлять направлениями, в котором оно разворачивается.
+
+`direction?` — направление, в котором разворачивается контекстное меню.
+
+`possibleDirections?` — список направлений, в которых его в принципе можно развернуть.
+
+Подробнее — в [описании поповера](?path=/docs/components-popover--popover-positioned-by-coords-story), в разделе «Направления разворачивания».
+
+## Размер
+
+Поменять размер переключателя можно с помощью свойства `size`. Варианты: `'xs'`, `'s'`, `'m'`, `'l'`, по умолчанию `'m'`.
+
+Меняется размер всего компонента: и переключателя, и контекстного меню.
+
+<ThemeTogglerExampleSize />
+
+## Импорт
+
+```tsx
+import { ThemeToggler } from '@consta/uikit/ThemeToggler';
+```
+
+## Свойства
+
+```tsx
+export type ThemeTogglerItemDefault = {
+  key?: string | number;
+  label: string;
+  icon: IconComponent;
+};
+```
+
+| Свойство                                   | Тип и значения                 | По умолчанию   | Описание                                                                                                                                                  |
+| ------------------------------------------ | ------------------------------ | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`size?`](#размер-переключателя)           | `'xs'`, `'s'`, `'m'`, `'l'`    | `'m'`          | Размер переключателя                                                                                                                                      |
+| [`items`](#темы)                           | `ITEM[]`                       | -              | Массив тем для выбора                                                                                                                                     |
+| [`value`](#темы)                           | `ITEM`                         | -              | Текущая тема                                                                                                                                              |
+| `onChange`                                 | `(arg: T) => void`             | -              | Функция для изменения                                                                                                                                     |
+| [`getItemKey?`](#темы)                     | `(arg: T) => string OR number` | `getItemLabel` | Функция для получения ключа, уникального для каждой переданной темы. Если опустить это свойство, то вместо этой функции будет использована `getItemLabel` |
+| [`getItemLabel?`](#темы)                   | `(arg: T) => string`           | -              | Функция для получения названия темы                                                                                                                       |
+| [`getItemIcon?`](#темы)                    | `(arg: T) => IconComponent`    | -              | Функция для получения иконки темы в формате компонента                                                                                                    |
+| [`direction?`](#контекстное-меню)          | `Direction`                    | -              | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) (только если тем больше двух)                                           |
+| [`possibleDirections?`](#контекстное-меню) | `Direction[]`                  | -              | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) (только если тем больше двух)                                           |
+| `className?`                               | `string`                       | -              | Дополнительный CSS-класс для контейнера (если тем всего две) или для кнопки (если тем больше двух)                                                        |
+
+## Пример
+
+<ThemeTogglerExampleDefault />
+
+```tsx
+import React, { useState } from 'react';
+import { ThemeToggler } from '@consta/uikit/ThemeToggler';
+import { IconSun } from '@consta/uikit/IconSun';
+import { IconMoon } from '@consta/uikit/IconMoon';
+
+export type ThemeType = {
+  label: string;
+  theme: ThemePreset;
+  icon: IconComponent;
+};
+
+export const items: ThemeType[] = [
+  {
+    theme: presetGpnDefault,
+    label: 'Default',
+    icon: IconSun,
+  },
+  {
+    theme: presetGpnDark,
+    label: 'Dark',
+    icon: IconMoon,
+  },
+  {
+    theme: presetGpnDisplay,
+    label: 'Display',
+    icon: IconLightningBolt,
+  },
+];
+
+const Examle = () => {
+  const [value, setValue] = useState<ThemeType>(items[0]);
+
+  return (
+    <Theme preset={value.theme} className={cnDocsDecorator('Section')}>
+      <ThemeToggler
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        direction="downStartLeft"
+      />
+    </Theme>
+  );
+};
+```
