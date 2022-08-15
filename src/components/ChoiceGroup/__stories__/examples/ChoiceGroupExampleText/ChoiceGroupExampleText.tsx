@@ -4,7 +4,7 @@ import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/D
 import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
-import { ChoiceGroup } from '../../../ChoiceGroup';
+import { ChoiceGroup } from '../../../ChoiceGroupCanary';
 
 type Item = string;
 
@@ -26,7 +26,7 @@ export const ChoiceGroupExampleText = () => {
           value={value}
           onChange={({ value }) => setValue(value)}
           items={itemsWrong}
-          getLabel={(item) => item}
+          getItemLabel={(item) => item}
           name="ChoiceGroupExampleText"
         />
         <p className={cnDocsExample('Status', { view: 'wrong' })}>
@@ -39,7 +39,7 @@ export const ChoiceGroupExampleText = () => {
           value={value}
           onChange={({ value }) => setValue(value)}
           items={items}
-          getLabel={(item) => item}
+          getItemLabel={(item) => item}
           name="ChoiceGroupExampleText"
         />
         <p className={cnDocsExample('Status', { view: 'right' })}>Правильно</p>
@@ -56,7 +56,7 @@ export const ChoiceGroupExample = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         items={itemsSimple}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         name="ChoiceGroupExampleText"
       />
     </StoryBookExample>

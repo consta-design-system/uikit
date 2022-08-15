@@ -13,7 +13,7 @@ export const RadioGroupExampleView = () => {
       <RadioGroup
         value={value}
         items={simpleItems}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         onChange={({ value }) => setValue(value)}
         direction="row"
         view="primary"
@@ -21,7 +21,7 @@ export const RadioGroupExampleView = () => {
       <RadioGroup
         value={value}
         items={simpleItems}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         onChange={({ value }) => setValue(value)}
         direction="row"
         view="ghost"

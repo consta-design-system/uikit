@@ -30,10 +30,10 @@ import {
 description: Группа кнопок. Можно выбрать один или несколько вариантов.
 -->
 
-# ChoiceGroup
+# ChoiceGroup(Canary)
 
 ```tsx
-import { ChoiceGroup } from '@consta/uikit/ChoiceGroup';
+import { ChoiceGroup } from '@consta/uikit/ChoiceGroupCanary';
 ```
 
 Группа кнопок нужна, чтобы выбрать из списка один или несколько вариантов.
@@ -68,9 +68,9 @@ import { ChoiceGroup } from '@consta/uikit/ChoiceGroup';
 
 ## Текст на кнопках
 
-Текст для всех кнопок указывается в `items` и формируется с помощью функции `getLabel`. Например, так:
+Текст для всех кнопок указывается в `items` и формируется с помощью функции `getItemLabel` или в поле `label` элемента списка. Например, так:
 
-```
+```tsx
 type Item = string;
 
 const items: Item[] = ['один', 'два', 'три', 'четыре', 'пять', 'шесть'];
@@ -78,14 +78,14 @@ const items: Item[] = ['один', 'два', 'три', 'четыре', 'пять
 export const ChoiceGroupExample = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
   return (
-      <ChoiceGroup
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        items={items}
-        getLabel={(item) => item}
-        multiple={false}
-        name="ChoiceGroupExample"
-      />
+    <ChoiceGroup
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      items={items}
+      getItemLabel={(item) => item}
+      multiple={false}
+      name="ChoiceGroupExample"
+    />
   );
 };
 ```
@@ -100,8 +100,9 @@ export const ChoiceGroupExample = () => {
 
 ### Слишком длинный текст
 
-Если группа кнопок слишком большая или текст на кнопке слишком длинный и не помещается в выделенную область,
-текст на кнопке сокращается, в конце появляется многоточие, если включить модификатор `truncate`
+Если группа кнопок слишком большая или текст на кнопке слишком длинный и не помещается в выделенную область, можно включить модификатор `truncate`.
+
+Тогда текст на кнопке сокращается, в конце появляется многоточие.
 
 ```tsx
 type Item = string;
@@ -121,7 +122,7 @@ export const ChoiceGroupExampleTextOverflow = () => {
       value={value}
       onChange={({ value }) => setValue(value)}
       items={items}
-      getLabel={(item) => item}
+      getItemLabel={(item) => item}
       multiple={false}
       name="ChoiceGroupExampleTextOverflow"
       truncate
@@ -134,7 +135,7 @@ export const ChoiceGroupExampleTextOverflow = () => {
 
 ## Иконки
 
-Чтобы показать иконку на кнопке, используйте `getItemIcon`.
+Чтобы показать иконку на кнопке, используйте `getItemIcon` или поле `icon` элемента списка.
 
 Добавьте `onlyIcon`, чтобы убрать текст и оставить только иконку (текст будет показываться по наведению).
 
@@ -166,8 +167,8 @@ export const ChoiceGroupExampleIcon = () => {
       value={value}
       onChange={({ value }) => setValue(value)}
       items={items}
-      getLabel={(item) => item.name}
-      getIcon={(item) => item.icon}
+      getItemLabel={(item) => item.name}
+      getItemIcon={(item) => item.icon}
       name="ChoiceGroupExampleIcon"
       multiple={false}
     />
@@ -175,8 +176,8 @@ export const ChoiceGroupExampleIcon = () => {
       value={value}
       onChange={({ value }) => setValue(value)}
       items={items}
-      getLabel={(item) => item.name}
-      getIcon={(item) => item.icon}
+      getItemLabel={(item) => item.name}
+      getItemIcon={(item) => item.icon}
       onlyIcon
       name="ChoiceGroupExampleIcon"
       multiple={false}
@@ -207,7 +208,7 @@ export const ChoiceGroupExampleOne = () => {
       value={value}
       onChange={({ value }) => setValue(value)}
       items={items}
-      getLabel={(item) => item}
+      getItemLabel={(item) => item}
       multiple={false}
       name="ChoiceGroupExampleOne"
     />
@@ -231,7 +232,7 @@ export const ChoiceGroupExampleMultiple = () => {
       value={value}
       onChange={({ value }) => setValue(value)}
       items={items}
-      getLabel={(item) => item}
+      getItemLabel={(item) => item}
       multiple
       name="ChoiceGroupExampleMultiple"
     />
@@ -267,7 +268,7 @@ export const ChoiceGroupExampleView = () => {
       value={value}
       onChange={({ value }) => setValue(value)}
       items={items}
-      getLabel={(item) => item}
+      getItemLabel={(item) => item}
       view="primary"
       multiple={false}
       name="ChoiceGroupExampleView"
@@ -294,7 +295,7 @@ export const ChoiceGroupExampleForm = () => {
       value={value}
       onChange={({ value }) => setValue(value)}
       items={items}
-      getLabel={(item) => item}
+      getItemLabel={(item) => item}
       form="default"
       name="ChoiceGroupExampleForm"
       multiple={false}
@@ -321,7 +322,7 @@ export const ChoiceGroupExampleSize = () => {
       value={value}
       onChange={({ value }) => setValue(value)}
       items={items}
-      getLabel={(item) => item}
+      getItemLabel={(item) => item}
       size="xs"
       multiple={false}
       name="ChoiceGroupExampleSize"
@@ -335,7 +336,6 @@ export const ChoiceGroupExampleSize = () => {
 ### Группа кнопок в ширину блока
 
 За ширину компонента отвечает свойство `width`. Варианты: `'full', 'default'`.
-Используется для поддержания области формы или отделения наследуемых частей формы от основных.
 
 ```tsx
 type Item = string;
@@ -349,7 +349,7 @@ export const ChoiceGroupExampleWidth = () => {
       value={value}
       onChange={({ value }) => setValue(value)}
       items={items}
-      getLabel={(item) => item}
+      getItemLabel={(item) => item}
       multiple={false}
       width="full"
       name="ChoiceGroupExampleWidth"
@@ -365,7 +365,7 @@ export const ChoiceGroupExampleWidth = () => {
 ### Неактивная кнопка
 
 Одну или несколько кнопок можно сделать неактивными — если вы не хотите, чтобы их выбирали.
-За неактивность отвечает функция `getDisabled`.
+За неактивность отвечает функция `getItemDisabled` или поле `disabled` элемента списка.
 
 ```tsx
 type Item = { name: string; disabled?: boolean };
@@ -384,10 +384,10 @@ export const ChoiceGroupExampleWidth = () => {
       value={value}
       onChange={({ value }) => setValue(value)}
       items={items}
-      getLabel={(item) => item.name}
+      getItemLabel={(item) => item.name}
       multiple={false}
       name="ChoiceGroupExampleSomeDisabled"
-      getDisabled={(item: Item) => item.disabled}
+      getItemDisabled={(item: Item) => item.disabled}
     />
   );
 };
@@ -397,7 +397,7 @@ export const ChoiceGroupExampleWidth = () => {
 
 ### Неактивная группа кнопок
 
-Используйте свойство `disabled` на компоненте `<ChoiceGroup {...props} disabled/>`, что бы сделать группу кнопок неактивной
+Чтобы сделать группу кнопок неактивной, добавьте свойство `disabled` к компоненту `<ChoiceGroup {...props} disabled/>`.
 
 ```tsx
 type Item = string;
@@ -411,7 +411,7 @@ export const ChoiceGroupExampleWidth = () => {
       value={value}
       onChange={({ value }) => setValue(value)}
       items={items}
-      getLabel={(item) => item}
+      getItemLabel={(item) => item}
       multiple={false}
       name="ChoiceGroupExampleDisabled"
       disabled
@@ -425,7 +425,7 @@ export const ChoiceGroupExampleWidth = () => {
 ## Адаптивность
 
 Если компонент не помещается на мобильный экран или в родительский контейнер
-по ширине, он сжимается, текст обрезается, в конце добавляется многоточие. [Посмотреть пример](#слишком-длинный-текст)
+по ширине, можно обрезать текст с помощью свойства `truncate`. В этом случае компонент сжимается, текст обрезается, в конце добавляется многоточие. [Посмотреть пример](#слишком-длинный-текст)
 
 Если кнопки не помещаются на мобильный экран, можно добавить горизонтальную прокрутку или преобразовать в [RadioGroup](?path=/docs/components-radiogroup--playground).
 
@@ -458,7 +458,7 @@ const items: string[] = [
 
 const cnChoiceGroupExampleAdaptiveScroll = cn('ChoiceGroupExampleAdaptiveScroll');
 
-const getLabel = (item: string) => item;
+const getItemLabel = (item: string) => item;
 
 export const ChoiceGroupExampleAdaptiveScroll = () => {
   return (
@@ -466,7 +466,7 @@ export const ChoiceGroupExampleAdaptiveScroll = () => {
       <ChoiceGroup
         name="ChoiceGroupExampleAdaptiveScroll"
         items={items}
-        getLabel={getLabel}
+        getItemLabel={getItemLabel}
         form="round"
       />
     </div>
@@ -480,12 +480,10 @@ export const ChoiceGroupExampleAdaptiveScroll = () => {
 
 Если экран меньше 800 px по ширине, отображаем `ChoiceGroup`, если больше — `RadioGroup`.
 
-> Чтобы посмотреть, как это работает, уменьшите ширину окна в браузере
-
 ```tsx
 const items: string[] = ['один', 'два', 'три', 'четыре', 'пять'];
 
-const getLabel = (item: string) => item;
+const getItemLabel = (item: string) => item;
 
 export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
   const { desktop } = useBreakpoints({ desktop: 800 });
@@ -497,7 +495,7 @@ export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
       <ChoiceGroup
         name="ChoiceGroupExampleAdaptiveUseBreakpoints"
         items={items}
-        getLabel={getLabel}
+        getItemLabel={getItemLabel}
         form="round"
         value={value}
         onChange={onChandge}
@@ -509,7 +507,7 @@ export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
     <RadioGroup
       name="ChoiceGroupExampleAdaptiveUseBreakpoints"
       items={items}
-      getLabel={getLabel}
+      getItemLabel={getItemLabel}
       value={value}
       onChange={onChandge}
     />
@@ -517,41 +515,50 @@ export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
 };
 ```
 
+> Чтобы посмотреть, как это работает, уменьшите ширину окна в браузере
+
 <ChoiceGroupExampleAdaptiveUseBreakpoints />
 
 ## Импорт
 
 ```tsx
-import { ChoiceGroup } from '@consta/uikit/ChoiceGroup';
+import { ChoiceGroup } from '@consta/uikit/ChoiceGroupCanary';
 ```
 
 ## Свойства
 
-```
-type Item = unknown;
+```tsx
+type ChoiceGroupDefaultItem = {
+  label: string;
+  icon?: IconComponent;
+  disabled?: boolean;
+};
 
 type OnChange = (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM }) => void;
 
-type OnChangeMultiple = (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM[] | null }) => void;
-
+type OnChangeMultiple = (props: {
+  e: React.ChangeEvent<HTMLInputElement>;
+  value: ITEM[] | null;
+}) => void;
 ```
 
 | Свойство                                  | Тип                                        | По умолчанию | Описание                                                                                                                                               |
 | ----------------------------------------- | ------------------------------------------ | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `items`                                   | `Item[]`                                   | -            | Элементы                                                                                                                                               |
+| `items`                                   | `ITEM[]`                                   | -            | Элементы                                                                                                                                               |
 | [`multiple`](#один-или-несколько)         | `boolean`                                  | -            | Выбрать несколько вариантов                                                                                                                            |
-| `value`                                   | multiple ? `Item[]` : `Item` or `null`     | -            | Значение                                                                                                                                               |
+| `value`                                   | multiple ? `ITEM[]` : `ITEM` or `null`     | -            | Значение                                                                                                                                               |
 | `onChange`                                | multiple ? `onChangeMultiple` : `OnChange` | -            | Действие при выборе элемента                                                                                                                           |
 | `name`                                    | `string`                                   | -            | Имя `<input>`, указывается для доступности                                                                                                             |
-| [`getLabel`](#текст-на-кнопках)           | `(item: Item) => string, number`           | -            | Функция для формирования текста для кнопки или всплывающей подсказки (при `onlyIcon = true`). Также используется в качестве уникального ключа элемента |
-| [`getIcon`](#иконки)                      | `(item: Item) => IconComponent, undefined` | -            | Функция для формирования иконки                                                                                                                        |
+| [`getItemLabel?`](#текст-на-кнопках)      | `(item: ITEM) => string, number`           | -            | Функция для формирования текста для кнопки или всплывающей подсказки (при `onlyIcon = true`). Также используется в качестве уникального ключа элемента |
+| [`getItemIcon?`](#иконки)                 | `(item: ITEM) => IconComponent, undefined` | -            | Функция для формирования иконки                                                                                                                        |
 | [`onlyIcon?`](#иконки)                    | `boolean`                                  | -            | Показывать только иконку                                                                                                                               |
 | [`size?`](#размер)                        | `'xs', 's', 'm', 'l'`                      | `'m'`        | Размер                                                                                                                                                 |
 | [`form?`](#форма-кнопок)                  | `'default', 'brick', 'round'`              | `'default'`  | Форма                                                                                                                                                  |
 | [`view?`](#внешний-вид)                   | `'primary', 'ghost', 'secondary'`          | `'primary'`  | Внешний вид                                                                                                                                            |
 | [`width?`](#группа-кнопок-в-ширину-блока) | `'default', 'full'`                        | `'default'`  | Ширина компонента                                                                                                                                      |
 | [`disabled?`](#неактивная-группа-кнопок)  | `boolean`                                  | `false`      | Делает группу кнопок неактивной                                                                                                                        |
-| [`getDisabled?`](#неактивная-кнопка)      | `(item: Item) => boolean`                  | -            | Функция для определения неактивного состояния кнопки                                                                                                   |
+| [`getItemDisabled?`](#неактивная-кнопка)  | `(item: ITEM) => boolean`                  | -            | Функция для определения неактивного состояния кнопки                                                                                                   |
+| [`truncate`](#слишком-длинный-текст)      | `boolean`                                  | `false`      | Обрезает длинный текст на кнопках и добавляет многоточие                                                                                               |
 | `className?`                              | `string`                                   | -            | Дополнительный CSS-класс                                                                                                                               |
 | `ref?`                                    | `React.Ref<HTMLDivElement>`                | -            | Ссылка на корневой DOM-элемент этого компонента                                                                                                        |
 
@@ -573,7 +580,7 @@ export function App() {
       value={value}
       onChange={({ value }) => setValue(value)}
       items={items}
-      getLabel={(item) => item}
+      getItemLabel={(item) => item}
     />
   );
 }

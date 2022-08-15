@@ -1,60 +1,52 @@
 import { boolean, select } from '@storybook/addon-knobs';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
+import { useFlag } from '../../../hooks/useFlag/useFlag';
+import { IconSelect } from '../../../icons/IconSelect/IconSelect';
+import { IconSelectOpen } from '../../../icons/IconSelectOpen/IconSelectOpen';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import { Badge } from '../../Badge/Badge';
 import { Button } from '../../Button/Button';
 import { Switch } from '../../Switch/Switch';
 import { exampleItems, groups, Item } from '../__mocks__/mock.data';
-import { ContextMenu } from '../ContextMenu';
+import { ContextMenu } from '../ContextMenuCanary';
 import {
   contextMenuDefaultSize,
-  ContextMenuPropGetDisable,
-  ContextMenuPropGetGroupId,
-  ContextMenuPropGetGroupLabel,
-  ContextMenuPropGetSide,
-  ContextMenuPropGetSubItems,
+  ContextMenuPropGetItemDisabled,
   ContextMenuPropSize,
   contextMenuSizes,
-} from '../helpers';
+} from '../types';
 import mdx from './ContextMenu.docs.mdx';
 
 const defaultKnobs = () => ({
   size: select('size', contextMenuSizes, contextMenuDefaultSize),
   disabled: boolean('disabledLastItem', false),
   withGroup: boolean('withGroup', false),
-  groupWithLabel: boolean('groupWithLabel', false),
+  withGroupLabel: boolean('withGroupLabel', false),
   withSubMenu: boolean('withSubMenu', false),
+  withLeftIcon: boolean('withLeftIcon', false),
   withLeftSide: boolean('withLeftSide', false),
+  withRightIcon: boolean('withRightIcon', false),
   withRightSide: boolean('withRightSide', false),
 });
 
-function renderLeftSide(item: Item): React.ReactNode {
-  const Icon = item.icon;
-  if (Icon) {
-    return <Icon size="s" />;
-  }
-  if (Icon === null) {
-    return <div style={{ width: 16 }} />;
-  }
-  return undefined;
-}
+const cnChoiceGroupStories = cn('ContextMenuStories');
 
 function renderRightSide(
   item: Item,
   size: ContextMenuPropSize,
   onChange: (item: Item) => void,
-  getDisabled?: ContextMenuPropGetDisable<Item>,
+  getDisabled?: ContextMenuPropGetItemDisabled<Item>,
 ): React.ReactNode {
   const nodeArray = [];
   const disabled =
     typeof getDisabled === 'function' ? getDisabled(item) : false;
-
+  const status = item.status === 'alert' ? 'error' : item.status;
   item.switch !== undefined &&
     nodeArray.push(
       <Switch
-        size={size === 'l' ? 'l' : 'm'}
+        size="s"
         checked={item.switch}
         onChange={() => onChange(item)}
         key="Switch"
@@ -62,10 +54,10 @@ function renderRightSide(
       />,
     );
 
-  item.status &&
+  status &&
     nodeArray.push(
       <Badge
-        status={disabled ? 'system' : item.status}
+        status={disabled ? 'system' : status}
         minified
         key="Badge"
         size={size === 'l' ? 'm' : 's'}
@@ -75,25 +67,23 @@ function renderRightSide(
   return nodeArray;
 }
 
-const cnChoiceGroupStories = cn('ContextMenuStories');
-
 export const Playground = () => {
   const {
     disabled,
     size,
     withGroup,
-    groupWithLabel,
+    withGroupLabel,
     withSubMenu,
+    withLeftIcon,
     withLeftSide,
     withRightSide,
+    withRightIcon,
   } = defaultKnobs();
 
-  const ref = useRef<HTMLButtonElement>(null);
-  const [isOpen, setIsOpen] = useState(false);
   const [items, setItems] = useState<Item[]>(exampleItems);
 
-  const onSwitch = (item: Item) => {
-    const itemIndex = items.findIndex((v) => v.name === item.name);
+  const onSwitch = (item: typeof exampleItems[number]) => {
+    const itemIndex = items.findIndex((v) => v.label === item.label);
     const newItems = Array.from(items);
     newItems.splice(itemIndex, 1, {
       ...items[itemIndex],
@@ -102,24 +92,22 @@ export const Playground = () => {
     setItems(newItems);
   };
 
-  const getDisabled: ContextMenuPropGetDisable<Item> = (item) =>
-    disabled ? item.disabled : undefined;
-  const getGroupId: ContextMenuPropGetGroupId<Item> | undefined = withGroup
-    ? (item) => item.group
-    : undefined;
-  const getGroupLabel: ContextMenuPropGetGroupLabel | undefined = groupWithLabel
-    ? (id) => groups.find((group) => group.id === id)?.name
-    : undefined;
-  const getSubItems: ContextMenuPropGetSubItems<Item> | undefined = withSubMenu
-    ? (item) => item.subMenu
-    : undefined;
-  const getRightSideBar: ContextMenuPropGetSide<Item> | undefined =
-    withRightSide
-      ? (item) => renderRightSide(item, size, onSwitch, getDisabled)
-      : undefined;
-  const getLeftSideBar: ContextMenuPropGetSide<Item> | undefined = withLeftSide
-    ? (item) => renderLeftSide(item)
-    : undefined;
+  const ref = useRef<HTMLButtonElement>(null);
+  const [isOpen, setIsOpen] = useFlag();
+
+  useEffect(() => {
+    if (withGroup) {
+      setItems(exampleItems);
+    } else {
+      setItems(
+        items.map((item) => {
+          const copy = { ...item };
+          delete copy.groupId;
+          return copy;
+        }),
+      );
+    }
+  }, [withGroup]);
 
   const sortGroup = (a: number | string, b: number | string) => {
     if (a > b) {
@@ -131,37 +119,96 @@ export const Playground = () => {
     return 0;
   };
 
+  const getItemGroupId = (item: typeof exampleItems[number]) => {
+    if (withGroup) {
+      return item.groupId;
+    }
+    return undefined;
+  };
+
+  const getGroupLabel = (group: typeof groups[number]) => {
+    if (withGroupLabel) {
+      return group.label;
+    }
+    return undefined;
+  };
+
+  const getItemSubMenu = (item: typeof exampleItems[number]) => {
+    if (withSubMenu) {
+      return item.subMenu;
+    }
+    return undefined;
+  };
+
+  const getItemDisabled = (item: typeof exampleItems[number]) => {
+    if (disabled) {
+      return item.disabled;
+    }
+    return undefined;
+  };
+
+  const getItemLeftIcon = (item: typeof exampleItems[number]) => {
+    if (withLeftIcon) {
+      return item.leftIcon;
+    }
+    return undefined;
+  };
+
+  const getItemRightIcon = (item: typeof exampleItems[number]) => {
+    if (withRightIcon) {
+      return item.leftIcon;
+    }
+    return undefined;
+  };
+
+  const getItemRightSide = (item: typeof exampleItems[number]) => {
+    if (withRightSide) {
+      return renderRightSide(item, size, onSwitch, getItemDisabled);
+    }
+    return undefined;
+  };
+
+  const getItemLeftSide = (item: typeof exampleItems[number]) => {
+    if (withLeftSide) {
+      return renderRightSide(item, size, onSwitch, getItemDisabled);
+    }
+    return undefined;
+  };
+
   return (
     <div className={cnChoiceGroupStories()}>
       <Button
         label="Откройте контекстное меню"
         ref={ref}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={setIsOpen.toogle}
+        iconRight={isOpen ? IconSelectOpen : IconSelect}
       />
-      {isOpen && (
-        <ContextMenu
-          items={items}
-          getLabel={(item) => item.name}
-          getGroupId={getGroupId}
-          getGroupLabel={getGroupLabel}
-          anchorRef={ref}
-          getSubItems={getSubItems}
-          size={size}
-          getRightSideBar={getRightSideBar}
-          getLeftSideBar={getLeftSideBar}
-          getDisabled={getDisabled}
-          sortGroup={sortGroup}
-          onClickOutside={() => setIsOpen(false)}
-          offset={8}
-        />
-      )}
+      <ContextMenu
+        items={items}
+        isOpen={isOpen}
+        groups={withGroup ? groups : undefined}
+        getGroupLabel={getGroupLabel}
+        getItemGroupId={getItemGroupId}
+        getItemSubMenu={getItemSubMenu}
+        getItemDisabled={getItemDisabled}
+        getItemLeftIcon={getItemLeftIcon}
+        getItemRightIcon={getItemRightIcon}
+        anchorRef={ref}
+        getItemRightSide={getItemRightSide}
+        getItemLeftSide={getItemLeftSide}
+        size={size}
+        sortGroup={sortGroup}
+        onClickOutside={setIsOpen.off}
+        offset="xs"
+        style={{ zIndex: 100 }}
+      />
     </div>
   );
 };
 
 export default createMetadata({
-  title: 'Компоненты|/Базовые/ContextMenu',
-  id: 'components|/ContextMenuDepricated',
+  title: 'Компоненты|/Базовые/ContextMenu(Canary)',
+  id: 'components|/ContextMenu',
   parameters: {
     docs: {
       page: mdx,
