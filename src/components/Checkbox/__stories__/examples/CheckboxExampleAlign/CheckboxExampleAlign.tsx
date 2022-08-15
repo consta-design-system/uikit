@@ -1,12 +1,9 @@
-import { action } from '@storybook/addon-actions';
 import React from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Checkbox } from '../../../Checkbox';
-
-const emptyFunction = action('emptyFunction');
 
 export const CheckboxExampleAlign = () => (
   <StoryBookExample
@@ -18,13 +15,13 @@ export const CheckboxExampleAlign = () => (
       align="center"
       checked
       label="Длинный текст для чекбокса с выравниванием по центру, здесь несколько строк"
-      onChange={emptyFunction}
+      onChange={() => console.log('onChange')}
     />
     <Checkbox
       align="top"
       checked
       label="Длинный текст для чекбокса с выравниванием по верху, здесь несколько строк"
-      onChange={emptyFunction}
+      onChange={() => console.log('onChange')}
     />
   </StoryBookExample>
 );

@@ -1,12 +1,9 @@
-import { action } from '@storybook/addon-actions';
 import React from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Checkbox } from '../../../Checkbox';
-
-const emptyFunction = action('emptyFunction');
 
 export const CheckboxExampleView = () => (
   <StoryBookExample
@@ -18,13 +15,13 @@ export const CheckboxExampleView = () => (
       view="primary"
       checked
       label="Акцентный чекбокс"
-      onChange={emptyFunction}
+      onChange={() => console.log('onChange')}
     />
     <Checkbox
       view="ghost"
       checked
       label="Второстепенный чекбокс"
-      onChange={emptyFunction}
+      onChange={() => console.log('onChange')}
     />
   </StoryBookExample>
 );

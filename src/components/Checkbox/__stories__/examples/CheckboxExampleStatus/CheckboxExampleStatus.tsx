@@ -1,33 +1,38 @@
-import { action } from '@storybook/addon-actions';
 import React from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Checkbox } from '../../../Checkbox';
 
-const emptyFunction = action('emptyFunction');
-
 export const CheckboxExampleStatus = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
-    <Checkbox label="Checkbox" onChange={emptyFunction} checked={false} />
-    <Checkbox checked label="Checked" onChange={emptyFunction} />
+    <Checkbox
+      label="Checkbox"
+      onChange={() => console.log('onChange')}
+      checked={false}
+    />
+    <Checkbox
+      checked
+      label="Checked"
+      onChange={() => console.log('onChange')}
+    />
     <Checkbox
       intermediate
       label="Intermediate"
-      onChange={emptyFunction}
+      onChange={() => console.log('onChange')}
       checked={false}
     />
     <Checkbox
       disabled
       label="Disabled"
-      onChange={emptyFunction}
+      onChange={() => console.log('onChange')}
       checked={false}
     />
     <Checkbox
       disabled
       checked
       label="Disabled Checked"
-      onChange={emptyFunction}
+      onChange={() => console.log('onChange')}
     />
   </StoryBookExample>
 );

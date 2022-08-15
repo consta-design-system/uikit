@@ -1,22 +1,19 @@
-import { action } from '@storybook/addon-actions';
 import React from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Checkbox } from '../../../Checkbox';
 
-const emptyFunction = action('emptyFunction');
-
 export const CheckboxExampleSize = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
     <Checkbox
-      onChange={emptyFunction}
+      onChange={() => console.log('onChange')}
       size="m"
       label="Размер m"
       checked={false}
     />
     <Checkbox
-      onChange={emptyFunction}
+      onChange={() => console.log('onChange')}
       size="l"
       label="Размер l"
       checked={false}
