@@ -16,7 +16,7 @@ export const ChoiceGroupExampleWidth = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         width="full"
         name="ChoiceGroupExampleWidth"
       />

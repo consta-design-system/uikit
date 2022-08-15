@@ -17,7 +17,7 @@ export const ChoiceGroupExampleView = () => {
           value={value}
           onChange={({ value }) => setValue(value)}
           items={items}
-          getLabel={(item) => item}
+          getItemLabel={(item) => item}
           view="primary"
           name="ChoiceGroupExampleView"
         />
@@ -27,7 +27,7 @@ export const ChoiceGroupExampleView = () => {
           value={value}
           onChange={({ value }) => setValue(value)}
           items={items}
-          getLabel={(item) => item}
+          getItemLabel={(item) => item}
           view="ghost"
           name="ChoiceGroupExampleView"
         />
@@ -37,7 +37,7 @@ export const ChoiceGroupExampleView = () => {
           value={value}
           onChange={({ value }) => setValue(value)}
           items={items}
-          getLabel={(item) => item}
+          getItemLabel={(item) => item}
           view="secondary"
           name="ChoiceGroupExampleView"
         />

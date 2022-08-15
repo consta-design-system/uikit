@@ -21,9 +21,9 @@ export const ChoiceGroupExampleSomeDisabled = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getLabel={(item) => item.name}
+        getItemLabel={(item) => item.name}
         name="ChoiceGroupExampleSomeDisabled"
-        getDisabled={(item: Item) => item.disabled}
+        getItemDisabled={(item: Item) => item.disabled}
       />
     </StoryBookExample>
   );

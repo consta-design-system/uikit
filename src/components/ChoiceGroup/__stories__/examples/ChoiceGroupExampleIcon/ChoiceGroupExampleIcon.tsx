@@ -36,16 +36,16 @@ export const ChoiceGroupExampleIcon = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getLabel={(item) => item.name}
-        getIcon={(item) => item.icon}
+        getItemLabel={(item) => item.name}
+        getItemIcon={(item) => item.icon}
         name="ChoiceGroupExampleIcon"
       />
       <ChoiceGroup
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getLabel={(item) => item.name}
-        getIcon={(item) => item.icon}
+        getItemLabel={(item) => item.name}
+        getItemIcon={(item) => item.icon}
         onlyIcon
         name="ChoiceGroupExampleIcon"
       />

@@ -17,7 +17,7 @@ export const ChoiceGroupExampleForm = () => {
           value={value}
           onChange={({ value }) => setValue(value)}
           items={items}
-          getLabel={(item) => item}
+          getItemLabel={(item) => item}
           form="default"
           name="ChoiceGroupExampleForm"
         />
@@ -27,7 +27,7 @@ export const ChoiceGroupExampleForm = () => {
           value={value}
           onChange={({ value }) => setValue(value)}
           items={items}
-          getLabel={(item) => item}
+          getItemLabel={(item) => item}
           form="brick"
           name="ChoiceGroupExampleForm"
         />
@@ -37,7 +37,7 @@ export const ChoiceGroupExampleForm = () => {
           value={value}
           onChange={({ value }) => setValue(value)}
           items={items}
-          getLabel={(item) => item}
+          getItemLabel={(item) => item}
           form="round"
           name="ChoiceGroupExampleForm"
         />

@@ -15,7 +15,7 @@ export const ChoiceGroupExampleOne = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         name="ChoiceGroupExampleOne"
       />
     </StoryBookExample>
@@ -31,7 +31,7 @@ export const ChoiceGroupExampleMultiple = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         multiple
         name="ChoiceGroupExampleMultiple"
       />
