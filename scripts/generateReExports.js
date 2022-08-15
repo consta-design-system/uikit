@@ -23,13 +23,13 @@ const generateReExport = async (src, reexport, ignore, distPath) => {
 
   const components = [];
 
-  const files = await fg(join(src, reexport, '**/*.tsx'), { ignore });
+  const files = await fg(join(src, reexport, '**/*.{ts,tsx}'), { ignore });
 
   // console.log(files);
 
   files
     .sort()
-    .filter((fileName) => fileName.match(/\.tsx?$/))
+    .filter((fileName) => fileName.match(/\.(ts|tsx)?$/))
     .forEach((fileName) => {
       const filePath = fileName.replace(normalize(src), '');
       const entityName = filePath.replace(`${reexport}/`, '');
@@ -41,7 +41,7 @@ const generateReExport = async (src, reexport, ignore, distPath) => {
       }
 
       if (
-        cell.tech.match(/^tsx?$/) &&
+        cell.tech.match(/^(ts|tsx)?$/) &&
         !components.find((item) => item === cell.entity.block)
       ) {
         components.push(cell.entity.block);
@@ -51,6 +51,17 @@ const generateReExport = async (src, reexport, ignore, distPath) => {
   for (const componentName of components) {
     const blockDir = join(reexport, componentName);
     const distDir = join(distPath, componentName);
+
+    // console.log(componentName);
+    // console.log(blockDir);
+
+    // скрипт для солздания index.ts для всех компонентов
+
+    // const exporte = getESMExportTemplate({
+    //   filePath: `./${componentName}`,
+    // });
+
+    // writeFile(join(src, blockDir, 'index.ts'), exporte);
 
     if (!existsSync(join(src, blockDir, 'index.ts'))) {
       continue;

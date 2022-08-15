@@ -14,7 +14,6 @@ import {
   defaultLabelForEmptyItems,
   defaultlabelForNotFound,
   getInputWidth,
-  getSelectDropdownForm,
 } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
@@ -90,6 +89,7 @@ const UserSelectRender = <
     multiple = false,
     searchFunction,
     style,
+    dropdownForm = 'default',
     ...restProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
 
@@ -139,8 +139,6 @@ const UserSelectRender = <
     onCreate,
     searchFunction: searchFunction || searchFunctionDefault,
   });
-
-  const dropdownForm = getSelectDropdownForm(form);
 
   const renderItemDefault: PropRenderItem<ITEM> = (props) => {
     const { item, active, hovered, onClick, onMouseEnter } = props;
@@ -234,6 +232,7 @@ const UserSelectRender = <
       size={size}
       required={required}
       view={view}
+      type="userselect"
       form={form}
       multiple
       ref={ref}

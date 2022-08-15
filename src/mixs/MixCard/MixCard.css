@@ -5,6 +5,10 @@
     box-shadow: var(--shadow-group);
   }
 
+  &_border {
+    border: var(--control-border-width) solid var(--color-bg-border);
+  }
+
   &_form {
     &_round,
     &_square {

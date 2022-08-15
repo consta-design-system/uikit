@@ -6,66 +6,127 @@ import { IconHand } from '../../../../../icons/IconHand/IconHand';
 import { IconLeaf } from '../../../../../icons/IconLeaf/IconLeaf';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { Breadcrumbs } from '../../../Breadcrumbs';
+import { Breadcrumbs, DefaultItem } from '../../../BreadcrumbsCanary';
 
 const pages = [
   {
     icon: IconHand,
-    label: 'Home',
-    link: 'https://url.com',
+    label: 'Главная',
+    href: 'https://url.com',
   },
   {
     icon: IconLeaf,
-    label: 'Page1',
-    link: 'https://url.com/page-1',
+    label: 'Страница 1',
+    href: 'https://url.com/page-1',
   },
   {
     icon: IconCards,
-    label: 'Page2',
-    link: 'https://url.com/page-2',
+    label: 'Страница 2',
+    href: 'https://url.com/page-2',
   },
   {
     icon: IconDrag,
-    label: 'Page3',
-    link: 'https://url.com/page-3',
+    label: 'Страница 3',
+    href: 'https://url.com/page-3',
   },
 ];
 
 const pagesNoIcon = [
   {
-    label: 'Home',
-    link: 'https://url.com',
+    label: 'Главная',
+    href: 'https://url.com',
   },
   {
-    label: 'Page1',
-    link: 'https://url.com/page-1',
+    label: 'Страница 1',
+    href: 'https://url.com/page-1',
   },
   {
-    label: 'Page2',
-    link: 'https://url.com/page-2',
+    label: 'Страница 2',
+    href: 'https://url.com/page-2',
   },
   {
-    label: 'Page3',
-    link: 'https://url.com/page-3',
-    isActive: true,
+    label: 'Страница 3',
+    href: 'https://url.com/page-3',
   },
 ];
+
+const pagesSubMenu = [
+  {
+    label: 'Главная',
+    href: 'https://url.com',
+    subMenu: [
+      {
+        label: 'Еще одна страница',
+        href: 'https://url.com/1',
+        subMenu: [
+          {
+            label: 'Подпункт',
+            href: 'https://url.com/1-1',
+          },
+        ],
+      },
+      { label: 'Другая страница', href: 'https://url.com/2' },
+    ],
+  },
+  {
+    label: 'Страница 1',
+    href: 'https://url.com/page-1',
+  },
+  {
+    label: 'Страница 2',
+    href: 'https://url.com/page-2',
+  },
+  {
+    label: 'Страница 3',
+    href: 'https://url.com/page-3',
+    subMenu: [
+      { label: 'Страница 3-1', href: 'https://url.com/page-3-1' },
+      { label: 'Страница 3-2', href: 'https://url.com/page-3-2' },
+    ],
+  },
+];
+
+const pagesLongLabels = [
+  {
+    label: 'Главная',
+    href: 'https://url.com',
+  },
+  {
+    label: 'Раздел',
+    href: 'https://url.com/page-1',
+  },
+  {
+    label: 'Элемент раздела',
+    href: 'https://url.com/page-2',
+  },
+  {
+    label: 'Дополнителные свойства элемента раздела',
+    href: 'https://url.com/page-3',
+  },
+  {
+    label: 'Описание свойства элемента раздела',
+    href: 'https://url.com/page-4',
+  },
+];
+
+const pagesSimple = ['Главная', 'Страница 1', 'Страница 2', 'Страница 3'];
+
+const onItemClick = (props: { item: DefaultItem; e: React.MouseEvent }) => {
+  props.e.preventDefault();
+};
+
+export const BreadcrumbsCustomType = () => {
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <Breadcrumbs items={pagesSimple} getItemLabel={(item) => item} />
+    </StoryBookExample>
+  );
+};
 
 export const BreadcrumbsExample = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <Breadcrumbs
-        className="myClassName"
-        pages={pagesNoIcon}
-        size="m"
-        maxCount={8}
-        getLabel={(item) => item.label}
-        getLink={(item) => item.label}
-        onClick={(item, e) => {
-          e.preventDefault();
-          console.log(item.link, e);
-        }}
-      />
+      <Breadcrumbs items={pagesNoIcon} size="m" onItemClick={onItemClick} />
     </StoryBookExample>
   );
 };
@@ -73,37 +134,31 @@ export const BreadcrumbsExample = () => {
 export const BreadcrumbsExampleActive = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <Breadcrumbs
-        className="myClassName"
-        pages={pagesNoIcon}
-        size="m"
-        maxCount={8}
-        getLabel={(item) => item.label}
-        getIsActive={(item) => !!item.isActive}
-        getLink={(item) => item.label}
-        onClick={(item, e) => {
-          e.preventDefault();
-          console.log(item.link, e);
-        }}
-      />
+      <Breadcrumbs items={pagesNoIcon} size="m" onItemClick={onItemClick} />
     </StoryBookExample>
   );
 };
 
-export const BreadcrumbsExampleMax = () => {
+export const BreadcrumbsExampleSubMenu = () => {
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <Breadcrumbs items={pagesSubMenu} size="m" onItemClick={onItemClick} />
+    </StoryBookExample>
+  );
+};
+
+export const BreadcrumbsExampleFitMode = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Breadcrumbs
-        className="myClassName"
-        pages={pagesNoIcon}
-        size="m"
-        maxCount={3}
-        getLabel={(item) => item.label}
-        getLink={(item) => item.label}
-        onClick={(item, e) => {
-          e.preventDefault();
-          console.log(item.link, e);
-        }}
+        items={pagesLongLabels}
+        onItemClick={onItemClick}
+        fitMode="dropdown"
+      />
+      <Breadcrumbs
+        items={pagesLongLabels}
+        onItemClick={onItemClick}
+        fitMode="scroll"
       />
     </StoryBookExample>
   );
@@ -112,19 +167,7 @@ export const BreadcrumbsExampleMax = () => {
 export const BreadcrumbsExampleIcons = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <Breadcrumbs
-        className="myClassName"
-        pages={pages}
-        size="m"
-        maxCount={8}
-        getLabel={(page) => page.label}
-        getLink={(page) => page.label}
-        getIcon={(page) => page.icon}
-        onClick={(page, e) => {
-          e.preventDefault();
-          console.log(page.link, e);
-        }}
-      />
+      <Breadcrumbs items={pages} size="m" onItemClick={onItemClick} />
     </StoryBookExample>
   );
 };
@@ -133,18 +176,23 @@ export const BreadcrumbsExampleIconRoot = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Breadcrumbs
-        className="myClassName"
-        pages={pages}
+        items={pagesNoIcon}
         size="m"
         onlyIconRoot
-        maxCount={8}
-        getLabel={(page) => page.label}
-        getLink={(page) => page.label}
-        getIcon={(page) => page.icon}
-        onClick={(page, e) => {
-          e.preventDefault();
-          console.log(page.link, e);
-        }}
+        onItemClick={onItemClick}
+      />
+    </StoryBookExample>
+  );
+};
+
+export const BreadcrumbsExamplelastItemIsLink = () => {
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <Breadcrumbs
+        items={pagesNoIcon}
+        size="m"
+        lastItemIsLink
+        onItemClick={onItemClick}
       />
     </StoryBookExample>
   );
@@ -154,57 +202,28 @@ export const BreadcrumbsExampleSize = () => {
   return (
     <StoryBookExample>
       <Breadcrumbs
-        pages={pages}
+        items={pages}
         size="xs"
-        maxCount={8}
         onlyIconRoot
-        getLabel={(page) => page.label}
-        getLink={(page) => page.label}
-        getIcon={(page) => page.icon}
-        onClick={(page, e) => {
-          e.preventDefault();
-          console.log(page.link, e);
-        }}
+        onItemClick={onItemClick}
       />
       <Breadcrumbs
-        pages={pages}
+        items={pages}
         size="s"
-        maxCount={8}
         onlyIconRoot
-        getLabel={(page) => page.label}
-        getLink={(page) => page.label}
-        getIcon={(page) => page.icon}
-        onClick={(page, e) => {
-          e.preventDefault();
-          console.log(page.link, e);
-        }}
+        onItemClick={onItemClick}
       />
       <Breadcrumbs
-        pages={pages}
+        items={pages}
         size="m"
-        maxCount={8}
         onlyIconRoot
-        getLabel={(page) => page.label}
-        getLink={(page) => page.label}
-        getIcon={(page) => page.icon}
-        onClick={(page, e) => {
-          e.preventDefault();
-          console.log(page.link, e);
-        }}
+        onItemClick={onItemClick}
       />
       <Breadcrumbs
-        className="myClassName"
-        pages={pages}
+        items={pages}
         size="l"
-        maxCount={8}
         onlyIconRoot
-        getLabel={(page) => page.label}
-        getLink={(page) => page.label}
-        getIcon={(page) => page.icon}
-        onClick={(page, e) => {
-          e.preventDefault();
-          console.log(page.link, e);
-        }}
+        onItemClick={onItemClick}
       />
     </StoryBookExample>
   );

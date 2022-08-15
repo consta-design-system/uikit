@@ -1,11 +1,10 @@
-import { action } from '@storybook/addon-actions';
 import React from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Checkbox } from '../../../Checkbox';
 
-const emptyFunction = action('emptyFunction');
+const emptyFunction = () => {};
 
 export const CheckboxExampleStatus = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>

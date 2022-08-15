@@ -1,4 +1,3 @@
-import { action } from '@storybook/addon-actions';
 import React, { useState } from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
@@ -10,7 +9,7 @@ export const TagExampleMode = () => {
 
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <Tag mode="button" onClick={action('onClick')} label="Button" />
+      <Tag mode="button" onClick={() => {}} label="Button" />
       <Tag mode="link" label="Link" href="#" />
       <Tag
         mode="check"
@@ -18,7 +17,7 @@ export const TagExampleMode = () => {
         label="Check"
         checked={checked}
       />
-      <Tag mode="cancel" onCancel={action('onCancel')} label="Cancel" />
+      <Tag mode="cancel" onCancel={() => {}} label="Cancel" />
     </StoryBookExample>
   );
 };

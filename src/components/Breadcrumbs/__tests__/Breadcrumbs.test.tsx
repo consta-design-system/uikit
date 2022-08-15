@@ -1,19 +1,22 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import * as React from 'react';
 
 import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconCamera } from '../../../icons/IconCamera/IconCamera';
 import { IconUser } from '../../../icons/IconUser/IconUser';
-import { breadcrumbPropSize, Breadcrumbs, cnBreadcrumbs } from '../Breadcrumbs';
+import { Breadcrumbs } from '../Breadcrumbs';
+import { cnBreadcrumbsItem } from '../BreadcrumbsItem/BreadcrumbsItem';
 
-type Page = {
+const testId = 'Breadcrumbs';
+
+type Item = {
   icon?: IconComponent;
   link: string;
   label: string;
   isActive?: boolean;
 };
 
-const pages: Page[] = [
+const items: Item[] = [
   {
     icon: IconUser,
     label: 'Home',
@@ -39,131 +42,76 @@ const pages: Page[] = [
 ];
 
 const initialProps = {
-  pages,
-  getLabel: (page: Page) => page.label,
-  getLink: (page: Page) => page.link,
-  getIcon: (page: Page) => page.icon,
-  getIsActive: (page: Page) => !!page.isActive,
-  onClick: (page: Page, e: React.MouseEvent) => {
-    e.preventDefault();
-    console.log(page.link, e);
+  items,
+  getItemLabel: (item: Item) => item.label,
+  getItemHref: (item: Item) => item.link,
+  getItemIcon: (item: Item) => item.icon,
+  onItemClick: (props: { item: Item; e: React.MouseEvent }) => {
+    props.e.preventDefault();
+    console.log(props.item.link, props.e);
   },
 };
 
 const renderComponent = (props = {}) => {
-  return render(<Breadcrumbs {...initialProps} {...props} />);
+  return render(
+    <Breadcrumbs {...initialProps} {...props} data-testid={testId} />,
+  );
 };
 
-describe('Компонент Breadcrumbs', () => {
+function getRender() {
+  return screen.getByTestId(testId);
+}
+
+function getLinks() {
+  return getRender().querySelectorAll(`.${cnBreadcrumbsItem('Link')}`);
+}
+
+function getLink(index = 0) {
+  return getLinks()[index];
+}
+
+describe('Компонент Breadcrumbs (Canary)', () => {
   it('должен рендериться без ошибок', () => {
     expect(renderComponent).not.toThrow();
   });
 
   describe('проверка props', () => {
-    describe('проверка size', () => {
-      breadcrumbPropSize.forEach((size) => {
-        it(`присваивает класс для size=${size}`, () => {
-          const { container } = renderComponent({ size });
-
-          const breadcrumbs = container.firstChild;
-
-          expect(breadcrumbs).toHaveClass(cnBreadcrumbs({ size }));
-        });
+    it('проверка лэйблов', () => {
+      renderComponent({ items });
+      const links = getLinks();
+      items.forEach((page, i) => {
+        expect(links[i]).toHaveTextContent(page.label);
       });
     });
 
-    describe('проверка maxCount', () => {
-      it('когда maxCount не указан, должны отобразиться все элементы', () => {
-        const { container } = renderComponent({ pages, maxCount: undefined });
-        const links = container.querySelectorAll(`.${cnBreadcrumbs('Link')}`);
-        expect(links.length).toEqual(pages.length);
-      });
-
-      it('когда maxCount не указан, не должно отобразиться многоточие', () => {
-        const { container } = renderComponent({ pages, maxCount: undefined });
-        const links = container.querySelectorAll(`.${cnBreadcrumbs('More')}`);
-
-        expect(links.length).toEqual(0);
-      });
-
-      it('когда maxCount больше или равен количеству страниц, должны отобразиться все элементы', () => {
-        const { container } = renderComponent({ pages, maxCount: 5 });
-        const links = container.querySelectorAll(`.${cnBreadcrumbs('Link')}`);
-
-        expect(links.length).toEqual(pages.length);
-      });
-
-      it('когда maxCount больше или равен количеству страниц, не должно отобразиться многоточие', () => {
-        const { container } = renderComponent({ pages, maxCount: 5 });
-        const links = container.querySelectorAll(`.${cnBreadcrumbs('More')}`);
-
-        expect(links.length).toEqual(0);
-      });
-
-      it('когда maxCount меньше количества страниц, должно отобразиться указанное количество элементов вместе с многоточием', () => {
-        const { container } = renderComponent({ pages, maxCount: 3 });
-        const links = container.querySelectorAll(`.${cnBreadcrumbs('Link')}`);
-
-        expect(links.length).toEqual(2);
-      });
-
-      it('когда maxCount меньше количества страниц, должно отобразиться многоточие', () => {
-        const { container } = renderComponent({ pages, maxCount: 3 });
-        const more = container.querySelectorAll(`.${cnBreadcrumbs('More')}`);
-
-        expect(more.length).toEqual(1);
+    it('проверка url', () => {
+      renderComponent({ items });
+      const links = getLinks();
+      items.forEach((page, i) => {
+        expect(links[i].getAttribute('href')).toEqual(page.link);
       });
     });
 
-    describe('проверка url', () => {
-      const { container } = renderComponent({ pages, maxCount: 5 });
-      const links = container.querySelectorAll(`.${cnBreadcrumbs('Link')}`);
-      pages.forEach((page, i) => {
-        it(`присваивает href=${page.link}`, () => {
-          expect(links[i].getAttribute('href')).toEqual(page.link);
-        });
-      });
-    });
+    it('проверка иконок', () => {
+      renderComponent({ items });
+      const links = getLinks();
 
-    describe('проверка иконок', () => {
-      const { container } = renderComponent({ pages, maxCount: 5 });
-      const links = container.querySelectorAll(`.${cnBreadcrumbs('Link')}`);
-      pages.forEach((page, i) => {
-        it(`наличие иконки=${!!page.icon}`, () => {
-          expect(!!links[i].querySelector(`.${cnBreadcrumbs('Icon')}`)).toEqual(
-            !!page.icon,
-          );
-        });
-      });
-    });
-
-    describe('проверка лэйблов', () => {
-      const { container } = renderComponent({ pages });
-      const links = container.querySelectorAll(`.${cnBreadcrumbs('Link')}`);
-      pages.forEach((page, i) => {
-        it(`лэйбл=${page.label}`, () => {
-          expect(
-            links[i].querySelector(`.${cnBreadcrumbs('Label')}`),
-          ).toContainHTML(page.label);
-        });
+      items.forEach((page, i) => {
+        expect(!!links[i].querySelector('.Icon')).toEqual(!!page.icon);
       });
     });
 
     describe('проверка onlyIconRoot', () => {
       it(`Лэйбл первой ссылки не должен отображаться если выставлен флаг onlyIconRoot`, () => {
-        const { container } = renderComponent({ pages, onlyIconRoot: true });
-        const links = container.querySelectorAll(`.${cnBreadcrumbs('Link')}`);
-        expect(!!links[0].querySelector(`.${cnBreadcrumbs('Label')}`)).toEqual(
-          false,
-        );
+        renderComponent({ items, onlyIconRoot: true });
+        const link = getLink();
+        expect(link).toHaveTextContent('');
       });
 
       it(`Лэйбл первой ссылки должен отображаться если флаг onlyIconRoot не выставлен`, () => {
-        const { container } = renderComponent({ pages, onlyIconRoot: false });
-        const links = container.querySelectorAll(`.${cnBreadcrumbs('Link')}`);
-        expect(!!links[0].querySelector(`.${cnBreadcrumbs('Label')}`)).toEqual(
-          true,
-        );
+        renderComponent({ items, onlyIconRoot: false });
+        const link = getLink();
+        expect(link).toHaveTextContent(items[0].label);
       });
     });
   });
