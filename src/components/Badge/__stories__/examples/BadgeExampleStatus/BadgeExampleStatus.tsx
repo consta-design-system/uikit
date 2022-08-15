@@ -8,18 +8,13 @@ import { Badge } from '../../../Badge';
 export const BadgeExampleStatus = () => (
   <div className={cnDocsDecorator('Section', [cnDocsExample()])}>
     <Badge
+      status="system"
+      label="Черновик"
+      className={wp.decorator({ 'indent-r': 'm' })}
+    />
+    <Badge
       status="normal"
       label="Новый"
-      className={wp.decorator({ 'indent-r': 'm' })}
-    />
-    <Badge
-      status="success"
-      label="Сойдёт"
-      className={wp.decorator({ 'indent-r': 'm' })}
-    />
-    <Badge
-      status="error"
-      label="Отстой"
       className={wp.decorator({ 'indent-r': 'm' })}
     />
     <Badge
@@ -28,8 +23,13 @@ export const BadgeExampleStatus = () => (
       className={wp.decorator({ 'indent-r': 'm' })}
     />
     <Badge
-      status="system"
-      label="Черновик"
+      status="error"
+      label="Есть ошибки"
+      className={wp.decorator({ 'indent-r': 'm' })}
+    />
+    <Badge
+      status="success"
+      label="Готов"
       className={wp.decorator({ 'indent-r': 'm' })}
     />
   </div>

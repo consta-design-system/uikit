@@ -23,8 +23,8 @@ export const SwitchGroupExampleRow = () => {
       <SwitchGroup
         value={value}
         items={items}
-        getLabel={(item) => item.name}
-        getDisabled={(item) => item.disabled}
+        getItemLabel={(item) => item.name}
+        getItemDisabled={(item) => item.disabled}
         onChange={({ value }) => setValue(value)}
         name="SwitchGroupExampleRow"
         direction="row"
@@ -41,8 +41,8 @@ export const SwitchGroupExampleColumn = () => {
       <SwitchGroup
         value={value}
         items={items}
-        getLabel={(item) => item.name}
-        getDisabled={(item) => item.disabled}
+        getItemLabel={(item) => item.name}
+        getItemDisabled={(item) => item.disabled}
         onChange={({ value }) => setValue(value)}
         name="SwitchGroupExampleColumn"
         direction="column"

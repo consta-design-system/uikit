@@ -17,7 +17,7 @@ export const TabsExampleRenderItem = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getLabel={(item) => item}
+        getItemLabel={(item) => item}
         size="m"
         renderItem={({ label, checked, onChange }) => (
           <button
@@ -72,7 +72,7 @@ export const TabsExampleRenderItemBadge = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         items={itemsBadge}
-        getLabel={(item) => item.text}
+        getItemLabel={(item) => item.text}
         size="m"
         renderItem={({ item, onChange, checked }) => (
           <button

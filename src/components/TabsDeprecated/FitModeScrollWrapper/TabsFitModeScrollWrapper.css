@@ -1,0 +1,48 @@
+.TabsFitModeScrollWrapper {
+  --list-padding: var(--space-xs);
+  display: flex;
+  align-items: center;
+
+  &-Content {
+    display: flex;
+    overflow-x: scroll;
+
+    /* Чтобы overflow не обрезал обводку фокуса */
+    margin: calc(-1 * var(--list-padding));
+    padding: var(--list-padding);
+    flex-grow: 1;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar:horizontal {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+
+    &::-webkit-scrollbar-thumb:horizontal {
+      display: none;
+    }
+  }
+
+  &-Button {
+    --button-margin: var(--space-2xs);
+    --button-inner-margin: calc(var(--button-margin) + var(--list-padding));
+    flex-shrink: 0;
+    margin: 0 var(--button-margin);
+
+    &_to_prev {
+      margin-right: var(--button-inner-margin);
+    }
+
+    &_to_next {
+      order: 1;
+      margin-left: var(--button-inner-margin);
+    }
+  }
+
+  &-Tab {
+    &_noMargin {
+      margin-right: 0;
+    }
+  }
+}
