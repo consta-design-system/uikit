@@ -10,3 +10,14 @@ export const CardExample = () => {
     </Card>
   );
 };
+
+export const CardExampleBasic = () => {
+  return (
+    <Card verticalSpace="2xl" horizontalSpace="2xl">
+      <Text>
+        Это карточка, в которой ничего нет, кроме текст. Здесь может быть что
+        угодно.
+      </Text>
+    </Card>
+  );
+};
