@@ -1,0 +1,46 @@
+.TabsLine {
+  position: absolute;
+
+  &_type_border {
+    --line-thickness: 1px;
+    background-color: var(--color-bg-border);
+  }
+
+  &_type_running {
+    --line-thickness: 2px;
+    background-color: var(--color-bg-brand);
+    transition: transform 0.25s, width 0.25s, height 0.25s;
+  }
+
+  &_position_bottom,
+  &_position_top {
+    left: 0;
+    width: var(--line-length);
+    height: var(--line-thickness);
+    transform: translateX(var(--line-offset));
+  }
+
+  &_position_bottom {
+    bottom: 0;
+  }
+
+  &_position_top {
+    top: 0;
+  }
+
+  &_position_left,
+  &_position_right {
+    top: 0;
+    width: var(--line-thickness);
+    height: var(--line-length);
+    transform: translateY(var(--line-offset));
+  }
+
+  &_position_left {
+    left: 0;
+  }
+
+  &_position_right {
+    right: 0;
+  }
+}

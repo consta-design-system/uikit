@@ -4,62 +4,23 @@
   padding: 0;
   list-style: none;
   color: var(--color-typo-secondary);
-  flex-wrap: wrap;
-
-  &_size {
-    &_xs {
-      --delimiter-space: var(--space-xs);
-      font-size: var(--control-text-size-xs);
-    }
-
-    &_s {
-      --delimiter-space: var(--space-s);
-      font-size: var(--control-text-size-s);
-    }
-
-    &_m {
-      --delimiter-space: var(--space-m);
-      font-size: var(--control-text-size-m);
-    }
-
-    &_l {
-      --delimiter-space: var(--space-l);
-      font-size: var(--control-text-size-l);
-    }
-  }
+  flex-wrap: nowrap;
 
   &-Item {
-    display: flex;
-    align-items: center;
-  }
+    max-width: var(--breadcrumbs-item-width, none);
 
-  &-Link {
-    display: flex;
-    align-items: center;
-    color: var(--color-typo-secondary);
-    text-decoration: none;
-    transition: color 0.2s;
-
-    &_active {
-      color: var(--color-typo-primary);
-      pointer-events: none;
+    &_hidden {
+      position: absolute;
+      left: -300vw;
+      visibility: hidden;
     }
 
-    &:hover {
-      color: var(--color-typo-link-hover);
+    &_removed.BreadcrumbsItem {
+      display: none;
     }
-  }
 
-  &-Icon {
-    margin-right: var(--space-xs);
-  }
-
-  &-Delimiter {
-    margin: 0 var(--delimiter-space);
-    color: var(--color-typo-ghost);
-  }
-
-  &-More {
-    color: var(--color-control-typo-clear);
+    &:last-child {
+      max-width: var(--breadcrumbs-item-last-width, none);
+    }
   }
 }

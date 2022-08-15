@@ -1,4 +1,3 @@
-import { action } from '@storybook/addon-actions';
 import React from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
@@ -6,14 +5,13 @@ import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExamp
 import { items } from '../../../__mocks__/mock.data';
 import { Steps } from '../../../Steps';
 
-const emptyFunction = action('emptyFunction');
+const emptyFunction = () => {};
 
 export const ExampleStepsDisabled = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
     <Steps
       items={items}
-      getLabel={(item) => item.label}
-      getDisabled={(item) => item.disabled || false}
+      getItemDisabled={(item) => item.disabled}
       value={items[2]}
       onChange={emptyFunction}
     />

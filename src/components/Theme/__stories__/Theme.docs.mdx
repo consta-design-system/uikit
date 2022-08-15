@@ -210,11 +210,14 @@ $color-base-normal: #56b9f2; /* Цвет нейтральный */
 > - Модификатор: `_font`
 > - CSS: [\_font / Theme_font_gpnDefault.css](https://github.com/consta-design-system/uikit/blob/master/src/components/Theme/_font/Theme_font_gpnDefault.css)
 
-В дизайн-системе используются нативные шрифты. Мы ориентируемся на самый популярный шрифт у наших пользователей — Segoe UI.
+Основной шрифт в дизайн-системе — Inter, шрифт с открытой лицензией.
+[Как его подключить](?path=/docs/common-fonts--page)
+
+Если он вам не подходит, советуем использовать нативные шрифты.
 
 ```css
---font-primary: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
-  'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+--font-primary: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen', 'Ubuntu',
+  'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 --font-mono: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 font-family: var(--font-primary);
 ```
@@ -335,7 +338,15 @@ font-family: var(--font-primary);
 > - Модификатор: `_shadow`
 > - CSS: [\_shadow / Theme_shadow_gpnDefault.css](https://github.com/consta-design-system/uikit/tree/master/src/components/Theme/_shadow)
 
-Модификатор `_shadow` отвечает за тени. Посмотреть, как это выглдяит, можно в [Figma](https://www.figma.com/file/vNZFtFH6w0IjD2Twi5OXXE/Consta-Default-Colors), во вкладке **Default Shadows**.
+Модификатор `_shadow` отвечает за тени. Варианты:
+
+- `--shadow-group` — тень для выделения группы объектов на странице, используется для [карточек](?path=/docs/components-card--playground).
+
+- `--shadow-layer` — тень для выделения объектов в отдельный слой, используется для плавающих кнопок, [боковых панелей](?path=/docs/components-sidebar--playground), [выпадающих списков](?path=/docs/components-select--playground) и временно появляющихся элементов интерфейса.
+
+- `--shadow-modal` — тень для выделения отдельных режимов, используется для [модальных окон](?path=/docs/components-modal--playground) и [поповеров](?path=/docs/components-popover--playground).
+
+Посмотреть, как это выглядит, можно в библиотеке [Consta Default Colors](https://www.figma.com/community/file/855572288089401017), во вкладке **Default Shadows**.
 
 ```css
 --shadow-group: 0 2px 2px rgba(0, 32, 51, 0.02), 0 2px 8px rgba(0, 32, 51, 0.16);

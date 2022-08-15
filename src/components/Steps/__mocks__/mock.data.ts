@@ -9,15 +9,15 @@ export const simpleItems: SimpleItem[] = [
 export type Item = {
   label: string;
   disabled?: boolean;
-  completed?: boolean;
-  skipped?: boolean;
+  finish?: boolean;
+  skip?: boolean;
 };
 
 export const items: Item[] = [
   {
     label: 'Главное',
-    completed: true,
-    skipped: true,
+    finish: true,
+    skip: true,
   },
   {
     label: 'Важное',

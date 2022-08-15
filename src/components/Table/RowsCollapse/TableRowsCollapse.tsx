@@ -43,6 +43,7 @@ export const TableRowsCollapse: React.FC<Props> = (props) => {
       {!isExpandedByDefault && withCollapseButton && (
         <div className={cnTableRowsCollapse('buttonContainer')}>
           <Button
+            aria-expanded={isExpanded}
             iconLeft={isExpanded ? IconArrowUp : IconArrowDown}
             iconSize="s"
             size="xs"

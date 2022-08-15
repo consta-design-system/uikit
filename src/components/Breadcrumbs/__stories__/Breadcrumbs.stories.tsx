@@ -2,88 +2,122 @@ import { boolean, select } from '@storybook/addon-knobs';
 import * as React from 'react';
 
 import { IconComponent } from '../../../icons/Icon/Icon';
-import { IconSettings } from '../../../icons/IconSettings/IconSettings';
+import { IconBag } from '../../../icons/IconBag/IconBag';
+import { IconBook } from '../../../icons/IconBook/IconBook';
+import { IconDocFilled } from '../../../icons/IconDocFilled/IconDocFilled';
+import { IconHome } from '../../../icons/IconHome/IconHome';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
 import {
+  breadcrumbPropFitMode,
+  breadcrumbPropFitModeDefault,
   breadcrumbPropSize,
   breadcrumbPropSizeDefault,
   Breadcrumbs,
-} from '../Breadcrumbs';
+} from '../BreadcrumbsCanary';
 import mdx from './Breadcrumbs.docs.mdx';
-
-const defaultKnobs = () => ({
-  size: select('Size', breadcrumbPropSize, breadcrumbPropSizeDefault),
-  onlyIconRoot: boolean('Only Icon Root', false),
-});
 
 type Page = {
   icon?: IconComponent;
-  link: string;
+  href: string;
   label: string;
-  isActive?: boolean;
+  subMenu?: Page[];
 };
 
 const pages: Page[] = [
   {
-    icon: IconSettings,
-    label: 'Page1',
-    link: 'https://url.com/page-1',
+    icon: IconHome,
+    label: 'Главная',
+    href: 'https://url.com/page-1',
+    subMenu: [
+      { icon: IconBag, label: 'Раздел 1', href: 'https://url.com/page-2-1' },
+      {
+        icon: IconBook,
+        label: 'Раздел',
+        href: 'https://url.com/page-2',
+      },
+    ],
   },
   {
-    label: 'Page2',
-    link: 'https://url.com/page-2',
+    label: 'Раздел',
+    href: 'https://url.com/page-2',
+    subMenu: [
+      { icon: IconBag, label: 'Раздел 1', href: 'https://url.com/page-2-1' },
+      {
+        icon: IconBook,
+        label: 'Раздел',
+        href: 'https://url.com/page-2',
+      },
+    ],
   },
   {
-    label: 'Page3',
-    link: 'https://url.com/page-3',
+    label: 'Подраздел',
+    href: 'https://url.com/page-3',
   },
   {
-    label: 'Page4',
-    link: 'https://url.com/page-4',
+    label: 'Элемент подраздела',
+    href: 'https://url.com/page-4',
   },
   {
-    label: 'Page5',
-    link: 'https://url.com/page-5',
+    label: 'Дополнительные свойства элемента подраздела',
+    href: 'https://url.com/page-5',
+    subMenu: [
+      { icon: IconBag, label: 'Раздел 1', href: 'https://url.com/page-2-1' },
+      {
+        icon: IconBook,
+        label: 'Раздел',
+        href: 'https://url.com/page-2',
+      },
+    ],
   },
   {
-    label: 'Page6',
-    link: 'https://url.com/page-6',
-  },
-  {
-    label: 'Page7',
-    link: 'https://url.com/page-7',
-    isActive: true,
+    label: 'Детальное описание свойства элемента подраздела',
+    href: 'https://url.com/page-6',
   },
 ];
+
+const defaultKnobs = () => ({
+  size: select('size', breadcrumbPropSize, breadcrumbPropSizeDefault),
+  fitMode: select(
+    'fitMode',
+    breadcrumbPropFitMode,
+    breadcrumbPropFitModeDefault,
+  ),
+  withIcon: boolean('withIcon', false),
+  withSubMenu: boolean('withSubMenu', false),
+  onlyIconRoot: boolean('onlyIconRoot', false),
+  lastItemIsLink: boolean('lastItemIsLink', false),
+});
 
 const cnBreadcrumbsStories = cn('BreadcrumbsStories');
 
 export const Playground = () => {
-  const { size, onlyIconRoot } = defaultKnobs();
+  const { withSubMenu, size, onlyIconRoot, fitMode, withIcon, lastItemIsLink } =
+    defaultKnobs();
 
   return (
     <div className={cnBreadcrumbsStories()}>
       <Breadcrumbs
-        pages={pages}
+        items={pages}
         size={size}
         onlyIconRoot={onlyIconRoot}
-        getLabel={(page) => page.label}
-        getIsActive={(page) => !!page.isActive}
-        getLink={(page) => page.label}
-        getIcon={(page) => page.icon}
-        onClick={(page, e) => {
-          e.preventDefault();
-          console.log(page.link, e);
+        fitMode={fitMode}
+        onItemClick={(props) => {
+          props.e.preventDefault();
         }}
+        getItemSubMenu={(item) => (withSubMenu ? item.subMenu : undefined)}
+        lastItemIsLink={lastItemIsLink}
+        getItemIcon={(item) =>
+          withIcon ? item.icon || IconDocFilled : undefined
+        }
       />
     </div>
   );
 };
 
 export default createMetadata({
-  title: 'Компоненты|/Навигация/Breadcrumbs',
-  id: 'components/BreadcrumbsDeprecated',
+  title: 'Компоненты|/Навигация/Breadcrumbs(Canary)',
+  id: 'components/Breadcrumbs',
   parameters: {
     docs: {
       page: mdx,

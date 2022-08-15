@@ -13,7 +13,7 @@ type OnChange = (props: {
   value: Item[] | null;
 }) => void;
 
-const testId = 'CheckboxGroup';
+const testId = 'CheckboxGroupCanary';
 
 const items: Item[] = [
   {
@@ -41,8 +41,8 @@ const renderComponent = (props: {
   return render(
     <CheckboxGroup
       items={items}
-      getLabel={(item) => `${item.name}`}
-      getDisabled={(item) => item.disabled}
+      getItemLabel={(item) => `${item.name}`}
+      getItemDisabled={(item) => item.disabled}
       onChange={props.onChange || handleChange}
       name={testId}
       className={additionalClass}

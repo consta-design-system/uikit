@@ -22,6 +22,11 @@ import { TableExampleIsResizable } from './examples/TableExampleIsResizable/Tabl
 import { TableExampleMerge } from './examples/TableExampleMerge/TableExampleMerge';
 import { TableExampleSort } from './examples/TableExampleSort/TableExampleSort';
 import { TableExampleOnSortBy } from './examples/TableExampleOnSortBy/TableExampleOnSortBy';
+import {
+  TableExampleAdaptiveScroll,
+  TableExampleAdaptiveScrollUseBreakpoints,
+} from './examples/TableExampleAdaptive/TableExampleAdaptive';
+import { TableExampleCellWrap } from './examples/TableExampleCellWrap/TableExampleCellWrap';
 
 <!--info
 description: Таблица. Выводит данные с фильтрами и сортировкой.
@@ -35,7 +40,10 @@ import { Table } from '@consta/uikit/Table';
 
 Таблица — компонент для отображения данных, с возможностью сортировки и фильтрации.
 
-> Если вам не хватает настроек этого компонента, используйте библиотеку[ @consta/table](https://consta-table.vercel.app/) для создания сложных таблиц
+> **Другие варианты для создания таблиц**
+>
+> - [agGridAdapter](https://ag-grid-adapter.consta.design/) — библиотека ag-grid-react, стилизованная для Consta.
+> - [rcTableAdapter](https://rc-table-adapter.consta.design/) — библиотека rc-table, стилизованная для Consta.
 
 - [Как формируется таблица](#как-формируется-таблица)
   - [Колонки](#колонки)
@@ -47,6 +55,7 @@ import { Table } from '@consta/uikit/Table';
   - [Скрытая колонка](#скрытая-колонка)
   - [Объединение ячеек в колонке](#объединение-ячеек)
   - [Рендер ячеек](#рендер-ячеек)
+  - [Перенос текста в ячейке](#перенос-текста-в-ячейке)
   - [Дополнительный элемент рядом с заголовком](#дополнительный-элемент-рядом-с-заголовком)
   - [Изменяемая ширина колонок](#изменяемая-ширина-колонок)
   - [Возможность добавить строку](#возможность-добавить-строку)
@@ -69,6 +78,8 @@ import { Table } from '@consta/uikit/Table';
   - [Выравнивание по вертикали](#выравнивание-по-вертикали)
   - [Выделение строк](#выделение-строк)
   - [Дополнительный CSS-класс по условию](#дополнительный-css-класс-по-условию)
+- [Адаптивность](#адаптивность)
+- [Импорт](#импорт)
 - [Список свойств](#свойства)
 - [Примеры использования](#примеры)
 
@@ -344,6 +355,65 @@ const App = () => {
 ```
 
 <TableExampleRenderCell />
+
+### Перенос текста в ячейке
+
+За перенос текста или другого содержимого в ячейке отвечает функция `getCellWrap`. Варианты переносов:
+
+- ничего не указано — текст подстраивается под ширину ячейки, если что-то не влезает, появляется горизонтальная прокрутка,
+- `truncate` — текст обрезается, в конце появляется троеточие,
+- `break` — переносится любое содержимое, даже непрерывные строки.
+
+```
+const rows = [
+  { id: 'Ссылка', name: 'https://uikit.consta.design/?path=/story/common-about--page' },
+  { id: 'Описание', name: 'Это просто длинный текст. Он нужен, чтобы посмотреть, как работают переносы разного типа. Вот на всякий случай — ещё одно предложение. И ещё одно, чтобы тексты отличались по длине.' },
+  { id: 'Длинная строка', name: 'аааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааа' },
+];
+
+const columns: TableColumn<typeof rows[number]>[] = [
+  {
+    title: 'Что',
+    accessor: 'id',
+    align: 'left',
+    width: 300,
+  },
+  {
+    title: 'Текст',
+    accessor: 'name',
+    align: 'left',
+    width: 300,
+  },
+];
+
+
+export function TableExampleCellWrap() {
+  return (
+    <Table
+      columns={columns}
+      rows={rows}
+      borderBetweenRows
+      borderBetweenColumns
+    />
+      <Table
+        columns={columns}
+        rows={rows}
+        borderBetweenRows
+        borderBetweenColumns
+        getCellWrap={(row) => 'truncate'}
+      />
+      <Table
+        columns={columns}
+        rows={rows}
+        borderBetweenRows
+        borderBetweenColumns
+        getCellWrap={(row) => 'break'}
+      />
+  );
+}
+```
+
+<TableExampleCellWrap />
 
 ### Дополнительный элемент рядом с заголовком
 
@@ -1028,6 +1098,160 @@ const App = () => {
 
 [Посмотреть пример](?path=/story/components-table--with-get-additional-class-name)
 
+## Адаптивность
+
+### Горизонтальная прокрутка
+
+Таблица растягивается на всю доступную ширину (например, при увеличении ширины экрана). Если данные не помещаются по ширине на мобильный экран или в родительский контейнер, появляется горизонтальная прокрутка.
+
+Если у колонок не задана ширина (свойство `width`), сначала перенесутся на новую строку все данные, которые можно перенести, и колонки станут уже, а уже потом появится прокрутка.
+
+##### Пример таблицы в контейнере шириной 500 px
+
+```tsx
+import { Table, TableColumn } from '@consta/uikit/Table';
+
+const rowsProf = [
+  { id: '1', name: 'Антон', profession: 'Cтроитель, который построил дом', status: 'недоступен' },
+  {
+    id: '2',
+    name: 'Василий',
+    profession: 'Отвечает на вопросы, хотя его не спросили',
+    status: 'на связи',
+  },
+];
+
+const columns: TableColumn<typeof rowsProf[number]>[] = [
+  {
+    title: '№',
+    accessor: 'id',
+    align: 'center',
+    width: 30,
+    sortable: true,
+  },
+  {
+    title: 'Имя',
+    accessor: 'name',
+    width: 300,
+    sortable: true,
+  },
+  {
+    title: 'Профессия',
+    accessor: 'profession',
+    width: 200,
+    sortable: true,
+  },
+  {
+    title: 'Статус',
+    accessor: 'status',
+    width: 200,
+    sortable: true,
+  },
+];
+
+export function TableExampleAdaptiveScroll() {
+  return (
+    <div style={{ maxWidth: 500 }}>
+      <Table columns={columns} rows={rowsProf} />
+    </div>
+  );
+}
+```
+
+<TableExampleAdaptiveScroll />
+
+### Правила поведения в зависимости от данных
+
+Вы можете задавать правила поведения таблицы, исходя из данных, которые она содержит. Например:
+
+- зафиксировать первую колонку — при прокрутке она останется на месте,
+- превращать названия столбцов в иконки по достижению определённых брекпойнтов
+- и так далее.
+
+На мобильных устройствах строки таблицы можно превращать в карточки, если данные позволяют (такие решения обычно принимает дизайнер, когда готовит макет).
+
+```tsx
+import React from 'react';
+
+import { useBreakpoints } from '../../../../../hooks/useBreakpoints/useBreakpoints';
+import { Card } from '@consta/uikit/Card';
+import { Text } from '@consta/uikit/Text/Text';
+import { Badge } from '@consta/uikit/Badge';
+import { cnMixSpace } from '@consta/uikit/MixSpace';
+import { Table, TableColumn } from '@consta/uikit/Table';
+
+const rowsProf = [
+  { id: '1', name: 'Антон', profession: 'Cтроитель, который построил дом', status: 'недоступен' },
+  {
+    id: '2',
+    name: 'Василий',
+    profession: 'Отвечает на вопросы, хотя его не спросили',
+    status: 'на связи',
+  },
+];
+
+const columns: TableColumn<typeof rowsProf[number]>[] = [
+  {
+    title: '№',
+    accessor: 'id',
+    align: 'center',
+    width: 30,
+    sortable: true,
+  },
+  {
+    title: 'Имя',
+    accessor: 'name',
+    width: 300,
+    sortable: true,
+  },
+  {
+    title: 'Профессия',
+    accessor: 'profession',
+    width: 200,
+    sortable: true,
+  },
+  {
+    title: 'Статус',
+    accessor: 'status',
+    width: 200,
+    sortable: true,
+  },
+];
+
+export const TableExampleAdaptiveScrollUseBreakpoints = () => {
+  const { desktop } = useBreakpoints({ desktop: 800 });
+
+  if (desktop) {
+    return <Table columns={columns} rows={rowsProf} />;
+  }
+
+  return (
+    <div>
+      {rowsProf.map((item, index) => (
+        <div key={index}>
+          <Card
+            verticalSpace="l"
+            horizontalSpace="l"
+            className={cnMixSpace({ mB: 'l' })}
+            style={{ maxWidth: 400 }}
+          >
+            <Text weight="bold" className={cnMixSpace({ mB: 's' })}>
+              {item.name}
+            </Text>
+            <Text className={cnMixSpace({ mB: 's' })}>{item.profession}</Text>
+            <Badge label={item.status} status="system"></Badge>
+          </Card>
+        </div>
+      ))}
+    </div>
+  );
+};
+```
+
+> Чтобы посмотреть, как это работает, уменьшите ширину окна в браузере
+
+<TableExampleAdaptiveScrollUseBreakpoints />
+
 ## Импорт
 
 ```tsx
@@ -1111,34 +1335,35 @@ type LazyLoad = {
 };
 ```
 
-| Свойство                                                         | Тип или варианты значения                                                                                                    | По умолчанию                                      | Описание                                                                                             |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| [`columns`](#колонки)                                            | `Column[]`                                                                                                                   | -                                                 | Колонки в таблице                                                                                    |
-| [`rows`](#строки)                                                | `Row[]`                                                                                                                      | -                                                 | Строки в таблице                                                                                     |
-| [`filters?`](#фильтры)                                           | `Filter[]`                                                                                                                   | -                                                 | Список фильтров                                                                                      |
-| [`size?`](#размер)                                               | `'s', 'm', 'l'`                                                                                                              | `'l'`                                             | Размер таблицы                                                                                       |
-| [`stickyHeader?`](#зафиксированный-заголовок)                    | `boolean`                                                                                                                    | `false`                                           | Зафиксированный заголовок                                                                            |
-| [`stickyColumns?`](#зафиксированная-колонка)                     | `number`                                                                                                                     | 0                                                 | Количество зафиксированных колонок                                                                   |
-| [`isResizable?`](#изменяемая-ширина-колонок)                     | `boolean`                                                                                                                    | `false`                                           | Возможность изменения размера колонок                                                                |
-| [`activeRow?`](#выделение-строк)                                 | `{ id?: string; onChange: (id?: string) => void; }`                                                                          | -                                                 | Активная строка                                                                                      |
-| [`verticalAlign?`](#выравнивание-по-вертикали)                   | `'center', 'top', 'bottom'`                                                                                                  | `'top'`                                           | Выравнивание по вертикали                                                                            |
-| [`verticalHeaderAlign?`](#выравнивание-по-вертикали)             | `'center'`, `'bottom'`                                                                                                       | `center`                                          | Выравнивание заголовков по вертикали                                                                 |
-| [`zebraStriped?`](#выделение-строк)                              | `'odd', 'even'`                                                                                                              | `false`                                           | Окрашивание строк через одну                                                                         |
-| [`borderBetweenRows?`](#границы-между-колонками)                 | `boolean`                                                                                                                    | `false`                                           | Отображение границ между строками                                                                    |
-| [`borderBetweenColumns?`](#границы-между-строками)               | `boolean`                                                                                                                    | `false`                                           | Отображение границ между колонками                                                                   |
-| [`emptyRowsPlaceholder?`](#возможность-добавить-строку)          | `React.ReactNode`                                                                                                            | -                                                 | Заглушка, показывается, когда в таблице нет данных                                                   |
-| [`onRowCreate?`](#возможность-добавить-строку)                   | `(arg: { id?: string; index: number; e: React.MouseEvent }) => void`                                                         | -                                                 | Функция, которая сработает при нажатии на кнопку создания строки                                     |
-| [`rowCreateText?`](#возможность-добавить-строку)                 | `string`                                                                                                                     | `'+ Добавить строку'`                             | Текст на кнопке для создания новой строки                                                            |
-| [`onRowHover?`](#выделение-строк)                                | `(arg: { id: string` &#124; `undefined; e: React.MouseEvent }) => void`                                                      | -                                                 | Функция, которая сработает при наведении на строку                                                   |
-| [`onRowClick?`](#выделение-строк)                                | `(arg: { id: string; e: React.MouseEvent }) => void`                                                                         | -                                                 | Функция, которая сработает при клике на строку                                                       |
-| [`onCellClick?`](#клик по ячейке)                                | `{ e: React.SyntheticEvent, type: CellClickType, columnIdx: number, ref: React.RefObject<HTMLDivElement>, rowId?: string, }` | -                                                 | Функция, которая сработает при клике на ячейку                                                       |
-| [`getAdditionalClassName`](#дополнительный-css-класс-по-условию) | `(props: {column: any, row: any, isActive: boolean}) => string`                                                              | -                                                 | Функция, которая на основе данных в строке или колонке определяет CSS-класс, который нужно применить |
-| [`onSortBy?`](#сортировка-не-по-алфавиту)                        | `onSortBy`                                                                                                                   | `sortByDefault`                                   | Функция, которая срабатывает при нажатии на иконку сортировки                                        |
-| [`lazyLoad?`](#постепенная-загрузка)                             | `LazyLoad`                                                                                                                   | `{ maxVisibleRows: 210; scrollableEl: tableRef }` | Включает виртуальную прокрутку в таблице                                                             |
-| [`onFiltersUpdated?`](#колбэк-на-применение-фильтра)             | `(filters: { field: string[] }) => void`                                                                                     | -                                                 | Колбэк на изменение фильтров                                                                         |
-| [`getTagLabel?`](#переименование-тегов-в-фильтрах)               | `(id: string, name: string, filterValue:any) => string`                                                                      | `getTagLabelDefault`                              | Функция для создания имени в тегах фильтров                                                          |
-| `className?`                                                     | `string`                                                                                                                     | -                                                 | Дополнительный CSS-класс                                                                             |
-| `ref?`                                                           | `React.Ref<HTMLDivElement>`                                                                                                  | -                                                 | Ссылка на корневой DOM-элемент компонента                                                            |
+| Свойство                                                         | Тип или варианты значения                                                                                                    | По умолчанию                                      | Описание                                                                                                              |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| [`columns`](#колонки)                                            | `Column[]`                                                                                                                   | -                                                 | Колонки в таблице                                                                                                     |
+| [`rows`](#строки)                                                | `Row[]`                                                                                                                      | -                                                 | Строки в таблице                                                                                                      |
+| [`filters?`](#фильтры)                                           | `Filter[]`                                                                                                                   | -                                                 | Список фильтров                                                                                                       |
+| [`size?`](#размер)                                               | `'s', 'm', 'l'`                                                                                                              | `'l'`                                             | Размер таблицы                                                                                                        |
+| [`stickyHeader?`](#зафиксированный-заголовок)                    | `boolean`                                                                                                                    | `false`                                           | Зафиксированный заголовок                                                                                             |
+| [`stickyColumns?`](#зафиксированная-колонка)                     | `number`                                                                                                                     | 0                                                 | Количество зафиксированных колонок                                                                                    |
+| [`isResizable?`](#изменяемая-ширина-колонок)                     | `boolean`                                                                                                                    | `false`                                           | Возможность изменения размера колонок                                                                                 |
+| [`activeRow?`](#выделение-строк)                                 | `{ id?: string; onChange: (id?: string) => void; }`                                                                          | -                                                 | Активная строка                                                                                                       |
+| [`verticalAlign?`](#выравнивание-по-вертикали)                   | `'center', 'top', 'bottom'`                                                                                                  | `'top'`                                           | Выравнивание по вертикали                                                                                             |
+| [`verticalHeaderAlign?`](#выравнивание-по-вертикали)             | `'center'`, `'bottom'`                                                                                                       | `center`                                          | Выравнивание заголовков по вертикали                                                                                  |
+| [`zebraStriped?`](#выделение-строк)                              | `'odd', 'even'`                                                                                                              | `false`                                           | Окрашивание строк через одну                                                                                          |
+| [`borderBetweenRows?`](#границы-между-колонками)                 | `boolean`                                                                                                                    | `false`                                           | Отображение границ между строками                                                                                     |
+| [`borderBetweenColumns?`](#границы-между-строками)               | `boolean`                                                                                                                    | `false`                                           | Отображение границ между колонками                                                                                    |
+| [`emptyRowsPlaceholder?`](#возможность-добавить-строку)          | `React.ReactNode`                                                                                                            | -                                                 | Заглушка, показывается, когда в таблице нет данных                                                                    |
+| [`onRowCreate?`](#возможность-добавить-строку)                   | `(arg: { id?: string; index: number; e: React.MouseEvent }) => void`                                                         | -                                                 | Функция, которая сработает при нажатии на кнопку создания строки                                                      |
+| [`rowCreateText?`](#возможность-добавить-строку)                 | `string`                                                                                                                     | `'+ Добавить строку'`                             | Текст на кнопке для создания новой строки                                                                             |
+| [`onRowHover?`](#выделение-строк)                                | `(arg: { id: string` &#124; `undefined; e: React.MouseEvent }) => void`                                                      | -                                                 | Функция, которая сработает при наведении на строку                                                                    |
+| [`onRowClick?`](#выделение-строк)                                | `(arg: { id: string; e: React.MouseEvent }) => void`                                                                         | -                                                 | Функция, которая сработает при клике на строку                                                                        |
+| [`onCellClick?`](#клик-по-ячейке)                                | `{ e: React.SyntheticEvent, type: CellClickType, columnIdx: number, ref: React.RefObject<HTMLDivElement>, rowId?: string, }` | -                                                 | Функция, которая сработает при клике на ячейку                                                                        |
+| [`getAdditionalClassName`](#дополнительный-css-класс-по-условию) | `(props: {column: any, row: any, isActive: boolean}) => string`                                                              | -                                                 | Функция, которая на основе данных в строке или колонке определяет CSS-класс, который нужно применить                  |
+| [`onSortBy?`](#сортировка-не-по-алфавиту)                        | `onSortBy`                                                                                                                   | `sortByDefault`                                   | Функция, которая срабатывает при нажатии на иконку сортировки                                                         |
+| [`lazyLoad?`](#постепенная-загрузка)                             | `LazyLoad`                                                                                                                   | `{ maxVisibleRows: 210; scrollableEl: tableRef }` | Включает виртуальную прокрутку в таблице                                                                              |
+| [`onFiltersUpdated?`](#колбэк-на-применение-фильтра)             | `(filters: { field: string[] }) => void`                                                                                     | -                                                 | Колбэк на изменение фильтров                                                                                          |
+| [`getTagLabel?`](#переименование-тегов-в-фильтрах)               | `(id: string, name: string, filterValue:any) => string`                                                                      | `getTagLabelDefault`                              | Функция для создания имени в тегах фильтров                                                                           |
+| [`getCellWrap?`](#перенос-текста-в-ячейке)                       | `(row: Row) => 'truncate'` &#124; `'break'`                                                                                  | -                                                 | Функция для определения типа переноса контента в ячейке: `'truncate'` обрезает содержимое, `'break'` переносит слово. |
+| `className?`                                                     | `string`                                                                                                                     | -                                                 | Дополнительный CSS-класс                                                                                              |
+| `ref?`                                                           | `React.Ref<HTMLDivElement>`                                                                                                  | -                                                 | Ссылка на корневой DOM-элемент компонента                                                                             |
 
 ## Примеры
 

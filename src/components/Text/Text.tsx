@@ -68,6 +68,7 @@ export const textPropWeight = [
   'regular',
   'semibold',
   'thin',
+  'medium',
 ] as const;
 export type TextPropWeight = typeof textPropWeight[number];
 

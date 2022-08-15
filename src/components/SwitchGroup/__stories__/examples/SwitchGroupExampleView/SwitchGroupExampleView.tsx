@@ -23,8 +23,8 @@ export const SwitchGroupExampleViewGhost = () => {
       <SwitchGroup
         value={value}
         items={items}
-        getLabel={(item) => item.name}
-        getDisabled={(item) => item.disabled}
+        getItemLabel={(item) => item.name}
+        getItemDisabled={(item) => item.disabled}
         onChange={({ value }) => setValue(value)}
         name="SwitchGroupExampleViewGhost"
         view="ghost"
@@ -41,8 +41,8 @@ export const SwitchGroupExampleViewPrimary = () => {
       <SwitchGroup
         value={value}
         items={items}
-        getLabel={(item) => item.name}
-        getDisabled={(item) => item.disabled}
+        getItemLabel={(item) => item.name}
+        getItemDisabled={(item) => item.disabled}
         onChange={({ value }) => setValue(value)}
         name="SwitchGroupExampleViewPrimary"
         view="primary"
