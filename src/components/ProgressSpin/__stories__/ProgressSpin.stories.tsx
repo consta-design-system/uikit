@@ -11,7 +11,7 @@ import {
 import mdx from './ProgressSpin.docs.mdx';
 
 const defaultKnobs = () => ({
-  progress: number('progress', 50),
+  value: number('value', 50),
   size: select('size', progressSpinPropSize, progressSpinPropSizeDefault),
   animation: boolean('animation', false),
 });
@@ -19,11 +19,11 @@ const defaultKnobs = () => ({
 const cnProgressSpinStories = cn('ProgressSpinStories');
 
 export const Playground = () => {
-  const { progress, size, animation } = defaultKnobs();
+  const { value, size, animation } = defaultKnobs();
 
   return (
     <div className={cnProgressSpinStories()}>
-      <ProgressSpin size={size} progress={progress} animation={animation} />
+      <ProgressSpin size={size} value={value} animation={animation} />
     </div>
   );
 };

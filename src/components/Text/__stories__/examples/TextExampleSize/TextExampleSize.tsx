@@ -20,7 +20,7 @@ export const TextExampleSize = () => {
           >
             {`text*size*${item}`}
           </Text>
-          <Text size={item}>Нефть</Text>
+          <Text size={item}>Просто текст</Text>
         </div>
       ))}
     </div>

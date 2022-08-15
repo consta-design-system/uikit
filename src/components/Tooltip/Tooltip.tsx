@@ -1,6 +1,6 @@
 import './Tooltip.css';
 
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 
 import { ClickOutsideHandler } from '../../hooks/useClickOutside/useClickOutside';
 import { cnMixPopoverArrow } from '../../mixs/MixPopoverArrow/MixPopoverArrow';
@@ -70,38 +70,36 @@ export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
       undefined,
     );
 
+    const tooltipTheme = status
+      ? {
+          ...theme,
+          color: {
+            primary: theme.color.accent,
+            accent: theme.color.accent,
+            invert: theme.color.primary,
+          },
+        }
+      : {
+          ...theme,
+          color: {
+            primary: theme.color.invert,
+            accent: theme.color.accent,
+            invert: theme.color.primary,
+          },
+        };
+
+    const tooltipThemeClassNames = generateThemeClassNames(tooltipTheme);
+
     const onSetDirection = (direction: Direction) => {
       onSetDirectionProp && onSetDirectionProp(direction);
       setDirection(direction);
     };
 
-    const value = useMemo(() => {
-      const tooltipTheme = status
-        ? {
-            ...theme,
-            color: {
-              primary: theme.color.accent,
-              accent: theme.color.accent,
-              invert: theme.color.primary,
-            },
-          }
-        : {
-            ...theme,
-            color: {
-              primary: theme.color.invert,
-              accent: theme.color.accent,
-              invert: theme.color.primary,
-            },
-          };
-
-      return {
-        theme: tooltipTheme,
-        themeClassNames: generateThemeClassNames(tooltipTheme),
-      };
-    }, [theme]);
-
     return (
-      <ThemeContext.Provider value={value}>
+      <ThemeContext.Provider
+        // eslint-disable-next-line react/jsx-no-constructed-context-values
+        value={{ theme: tooltipTheme, themeClassNames: tooltipThemeClassNames }}
+      >
         <Popover
           {...rest}
           arrowOffset={ARROW_OFFSET + ARROW_SIZE}

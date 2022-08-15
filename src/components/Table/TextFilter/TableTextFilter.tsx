@@ -5,7 +5,7 @@ import React, { useMemo, useState } from 'react';
 import { IconSearch } from '../../../icons/IconSearch/IconSearch';
 import { cn } from '../../../utils/bem';
 import { Button } from '../../Button/Button';
-import { CheckboxGroup } from '../../CheckboxGroup/CheckboxGroup';
+import { CheckboxGroup } from '../../CheckboxGroup';
 import { Text } from '../../Text/Text';
 import { TextField } from '../../TextField/TextField';
 import { TableFilterContainer } from '../FilterContainer/TableFilterContainer';
@@ -112,7 +112,7 @@ export const TableTextFilter: React.FC<TableTextFilterProps> = ({
           <CheckboxGroup
             items={filteredItems}
             value={checkboxGroupValue}
-            getLabel={(item) => item.name}
+            getItemLabel={(item) => item.name}
             onChange={({ value }) => {
               setCheckboxGroupValue(value);
             }}

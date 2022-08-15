@@ -1,4 +1,5 @@
 import { createIcon } from '../createIcon/createIcon';
+
 import IconYandexDzenSizeM from './IconYandexDzen_size_m';
 import IconYandexDzenSizeS from './IconYandexDzen_size_s';
 

@@ -19,10 +19,10 @@ import {
 description: Группа переключателей. Можно выбрать несколько вариантов.
 -->
 
-# SwitchGroup
+# SwitchGroup(Canary)
 
 ```tsx
-import { SwitchGroup } from '@consta/uikit/SwitchGroup';
+import { SwitchGroup } from '@consta/uikit/SwitchGroupCanary';
 ```
 
 Группа переключателей, объединённых одним `name`. Пользователь может выбрать несколько вариантов из списка.
@@ -61,7 +61,7 @@ const items: Item[] = [
 
 Сообщите компоненту, из какого объекта брать данные, в свойстве `items`.
 
-Получить заголовки можно с помощью функции `getLabel`.
+Получить заголовки можно с помощью функции `getItemLabel`.
 
 ```tsx
 export function SwitchGroupExampleDisabled() {
@@ -72,8 +72,7 @@ export function SwitchGroupExampleDisabled() {
       <SwitchGroup
         value={value}
         items={items}
-        getLabel={(item) => item.name}
-        getDisabled={(item) => item.disabled}
+        getItemLabel={(item) => item.name}
         onChange={({ value }) => setValue(value)}
         name="SwitchGroupExampleDisabled"
       />
@@ -99,18 +98,18 @@ export function SwitchGroupExampleDisabled() {
 
 ### Неактивный переключатель
 
-Чтобы сделать переключатель неактивным, добавьте `disabled` в объект с описанием этого переключателя.
+Чтобы сделать переключатель неактивным, добавьте `disabled` в объект с описанием этого переключателя или определите функцию `getItemDisabled`.
 
 ```tsx
 type Item = {
-  name: string;
-  disabled?: boolean;
+  label: string;
+  off?: boolean;
 };
 
 const items: Item[] = [
-  { name: 'Тёмная тема' },
-  { name: 'Розовый текст' },
-  { name: 'Мигающие заголовки', disabled: true },
+  { label: 'Тёмная тема' },
+  { label: 'Розовый текст' },
+  { label: 'Мигающие заголовки', off: true },
 ];
 
 export function SwitchGroupExampleDisabled() {
@@ -121,8 +120,7 @@ export function SwitchGroupExampleDisabled() {
       <SwitchGroup
         value={value}
         items={items}
-        getLabel={(item) => item.name}
-        getDisabled={(item) => item.disabled}
+        getItemDisabled={(item) => item.off}
         onChange={({ value }) => setValue(value)}
         name="SwitchGroupExampleDisabled"
       />
@@ -139,14 +137,14 @@ export function SwitchGroupExampleDisabled() {
 
 ```tsx
 type Item = {
-  name: string;
-  disabled?: boolean;
+  label: string;
+  off?: boolean;
 };
 
 const items: Item[] = [
-  { name: 'Тёмная тема' },
-  { name: 'Розовый текст' },
-  { name: 'Мигающие заголовки', disabled: true },
+  { label: 'Тёмная тема' },
+  { label: 'Розовый текст' },
+  { label: 'Мигающие заголовки', off: true },
 ];
 
 export function SwitchGroupExampleDisabledGroup() {
@@ -156,8 +154,7 @@ export function SwitchGroupExampleDisabledGroup() {
     <SwitchGroup
       value={value}
       items={items}
-      getLabel={(item) => item.name}
-      getDisabled={(item) => item.disabled}
+      getItemDisabled={(item) => item.off}
       onChange={({ value }) => setValue(value)}
       name="SwitchGroupExampleDisabledGroup"
       disabled
@@ -187,7 +184,7 @@ export function SwitchGroupExampleDisabledGroup() {
 ## Импорт
 
 ```tsx
-import { SwitchGroup } from '@consta/uikit/SwitchGroup';
+import { SwitchGroup } from '@consta/uikit/SwitchGroupCanary';
 ```
 
 ## Свойства
@@ -198,28 +195,28 @@ type OnChange = (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM[] 
 
 <!-- props:start -->
 
-| Свойство                                     | Тип                       | По умолчанию | Описание                                                                                                     |
-| -------------------------------------------- | ------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------ |
-| `value`                                      | `Item[]`                  | -            | Значение                                                                                                     |
-| [`items`](#содержимое)                       | `Item[]`                  | -            | Элементы                                                                                                     |
-| [`getLabel`](#содержимое)                    | `(item: Item) => string`  | -            | Функция для формирования текста для переключателей. Также используется в качестве уникального ключа элемента |
-| [`getDisabled?`](#неактивный-переключатель)  | `(item: Item) => boolean` | -            | Функция для определения disabled состояния чекбокса                                                          |
-| `onChange`                                   | `OnChange`                | -            | Действие при выборе элемента                                                                                 |
-| `name`                                       | `string`                  | -            | Имя `<input>`, указывается для доступности                                                                   |
-| [`direction?`](#расположение-переключателей) | `'column', 'row'`         | `'column'`   | Направление переключателей                                                                                   |
-| [`disabled?`](#неактивный-переключатель)     | `boolean`                 | `false`      | Делает группу переключателей неактивной                                                                      |
-| [`size?`](#размер)                           | `'m', 'l'`                | `'m'`        | Размер группы переключателей                                                                                 |
-| [`view?`](#внешний-вид)                      | `'primary', 'ghost'`      | `'primary'`  | Внешний вид                                                                                                  |
-| `className?`                                 | `string`                  | -            | Дополнительные CSS-классы                                                                                    |
+| Свойство                                        | Тип                       | По умолчанию | Описание                                                                                                     |
+| ----------------------------------------------- | ------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------ |
+| `value`                                         | `ITEM[]`                  | -            | Значение                                                                                                     |
+| [`items`](#содержимое)                          | `ITEM[]`                  | -            | Элементы                                                                                                     |
+| [`getItemLabel?`](#содержимое)                  | `(item: ITEM) => string`  | -            | Функция для формирования текста для переключателей. Также используется в качестве уникального ключа элемента |
+| [`getItemDisabled?`](#неактивный-переключатель) | `(item: ITEM) => boolean` | -            | Функция для определения disabled состояния чекбокса                                                          |
+| `onChange`                                      | `OnChange`                | -            | Действие при выборе элемента                                                                                 |
+| `name`                                          | `string`                  | -            | Имя `<input>`, указывается для доступности                                                                   |
+| [`direction?`](#расположение-переключателей)    | `'column', 'row'`         | `'column'`   | Направление переключателей                                                                                   |
+| [`disabled?`](#неактивный-переключатель)        | `boolean`                 | `false`      | Делает группу переключателей неактивной                                                                      |
+| [`size?`](#размер)                              | `'m', 'l'`                | `'m'`        | Размер группы переключателей                                                                                 |
+| [`view?`](#внешний-вид)                         | `'primary', 'ghost'`      | `'primary'`  | Внешний вид                                                                                                  |
+| `className?`                                    | `string`                  | -            | Дополнительные CSS-классы                                                                                    |
 
 <!-- props:end -->
 
 ## Пример
 
-```ts
+```tsx
 // src/App.ts
 import React from 'react';
-import { SwitchGroup } from '@consta/uikit/SwitchGroup';
+import { SwitchGroup } from '@consta/uikit/SwitchGroupCanary';
 
 type Item = {
   name: string;
@@ -241,8 +238,7 @@ const App = () => {
     <SwitchGroup
       value={value}
       items={items}
-      getLabel={(item) => item.name}
-      getDisabled={(item) => item.disabled}
+      getItemLabel={(item) => item.name}
       onChange={({ value }) => setValue(value)}
       name={'SwitchGroup'}
     />
