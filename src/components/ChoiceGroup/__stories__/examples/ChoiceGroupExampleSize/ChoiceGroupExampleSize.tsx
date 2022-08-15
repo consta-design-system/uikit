@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { ChoiceGroup } from '../../../ChoiceGroup';
+import { ChoiceGroup } from '../../../ChoiceGroupCanary';
 
 type Item = string;
 
@@ -17,7 +17,7 @@ export const ChoiceGroupExampleSize = () => {
           value={value}
           onChange={({ value }) => setValue(value)}
           items={items}
-          getLabel={(item) => item}
+          getItemLabel={(item) => item}
           size="xs"
           name="ChoiceGroupExampleSize"
         />
@@ -27,7 +27,7 @@ export const ChoiceGroupExampleSize = () => {
           value={value}
           onChange={({ value }) => setValue(value)}
           items={items}
-          getLabel={(item) => item}
+          getItemLabel={(item) => item}
           size="s"
           name="ChoiceGroupExampleSize"
         />
@@ -37,7 +37,7 @@ export const ChoiceGroupExampleSize = () => {
           value={value}
           onChange={({ value }) => setValue(value)}
           items={items}
-          getLabel={(item) => item}
+          getItemLabel={(item) => item}
           size="m"
           name="ChoiceGroupExampleSize"
         />
@@ -47,7 +47,7 @@ export const ChoiceGroupExampleSize = () => {
           value={value}
           onChange={({ value }) => setValue(value)}
           items={items}
-          getLabel={(item) => item}
+          getItemLabel={(item) => item}
           size="l"
           name="ChoiceGroupExampleSize"
         />

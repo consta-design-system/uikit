@@ -1,4 +1,5 @@
 import { createIcon } from '../createIcon/createIcon';
+
 import IconBookmarkStrokedSizeM from './IconBookmarkStroked_size_m';
 import IconBookmarkStrokedSizeS from './IconBookmarkStroked_size_s';
 import IconBookmarkStrokedSizeXs from './IconBookmarkStroked_size_xs';

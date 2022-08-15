@@ -17,7 +17,7 @@ import {
   choiceGroupViews,
   choiceGroupWidth,
   choiceGroupWidthDefault,
-} from '../ChoiceGroup';
+} from '../ChoiceGroupCanary';
 import mdx from './ChoiceGroup.docs.mdx';
 
 declare type Item = {
@@ -90,7 +90,7 @@ export const Playground = () => {
           <ChoiceGroup
             items={items}
             value={valueMultiple}
-            getLabel={getLabel}
+            getItemLabel={getLabel}
             onChange={({ value }) => setValueMultiple(value)}
             name={cnChoiceGroupStories()}
             multiple
@@ -99,15 +99,15 @@ export const Playground = () => {
             width={width}
             form={form}
             onlyIcon={onlyIcon}
-            getIcon={getIcon}
+            getItemIcon={getIcon}
             disabled={disabled}
-            getDisabled={disabledItem ? (item) => item.disabled : undefined}
+            getItemDisabled={disabledItem ? (item) => item.disabled : undefined}
           />
         ) : (
           <ChoiceGroup
             items={items}
             value={value}
-            getLabel={getLabel}
+            getItemLabel={getLabel}
             onChange={({ value }) => setValue(value)}
             name={cnChoiceGroupStories()}
             multiple={false}
@@ -116,9 +116,9 @@ export const Playground = () => {
             width={width}
             form={form}
             onlyIcon={onlyIcon}
-            getIcon={getIcon}
+            getItemIcon={getIcon}
             disabled={disabled}
-            getDisabled={disabledItem ? (item) => item.disabled : undefined}
+            getItemDisabled={disabledItem ? (item) => item.disabled : undefined}
           />
         )}
       </form>
@@ -127,8 +127,8 @@ export const Playground = () => {
 };
 
 export default createMetadata({
-  title: 'Компоненты|/Базовые/ChoiceGroup',
-  id: 'components/ChoiceGroup',
+  title: 'Компоненты|/Базовые/ChoiceGroup(Canary)',
+  id: 'components/ChoiceGroupCanary',
   parameters: {
     docs: {
       page: mdx,

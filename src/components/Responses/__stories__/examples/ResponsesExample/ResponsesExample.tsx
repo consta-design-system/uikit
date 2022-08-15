@@ -143,3 +143,14 @@ export const ExampleResponsesExit = () => {
     </StoryBookExample>
   );
 };
+
+export const ExampleResponsesAdaptive = () => {
+  return (
+    <StoryBookExample
+      className={cnDocsDecorator('Section')}
+      style={{ width: 300 }}
+    >
+      <ResponsesExit />
+    </StoryBookExample>
+  );
+};

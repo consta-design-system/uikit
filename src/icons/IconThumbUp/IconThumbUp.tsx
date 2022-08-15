@@ -1,4 +1,5 @@
 import { createIcon } from '../createIcon/createIcon';
+
 import IconThumbUpSizeM from './IconThumbUp_size_m';
 import IconThumbUpSizeS from './IconThumbUp_size_s';
 import IconThumbUpSizeXs from './IconThumbUp_size_xs';
