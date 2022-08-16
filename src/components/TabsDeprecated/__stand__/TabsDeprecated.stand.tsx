@@ -7,7 +7,7 @@ export default createStand({
   id: 'Tabs',
   group: 'components',
   image,
-  description: 'Кнопка. Разные формы, цвета и размеры.',
+  description: 'Переключатели  вкладок.',
   version: '4.0.0',
   status: 'deprecated',
   sandbox:
