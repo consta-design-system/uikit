@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { content } from '../../../__mocks__/mock.data';
+import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Collapse } from '../../../Collapse';
 
 export const CollapseExampleView = () => {
@@ -10,12 +10,7 @@ export const CollapseExampleView = () => {
 
   return (
     <div className={cnDocsDecorator('Section')}>
-      <Collapse
-        label="Primary"
-        view="primary"
-        isOpen={isOpen}
-        onClick={() => setOpen(!isOpen)}
-      >
+      <Collapse label="Primary" view="primary" isOpen={isOpen} onClick={() => setOpen(!isOpen)}>
         {content}
       </Collapse>
       <Collapse

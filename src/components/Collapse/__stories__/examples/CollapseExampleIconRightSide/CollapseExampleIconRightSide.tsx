@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
+import { content } from '../../../__mocks__/mock.data';
 import { IconAlert } from '../../../../../icons/IconAlert/IconAlert';
 import { IconSettings } from '../../../../../icons/IconSettings/IconSettings';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Badge } from '../../../../Badge/Badge';
 import { Button } from '../../../../Button/Button';
-import { content } from '../../../__mocks__/mock.data';
 import { Collapse } from '../../../Collapse';
 
 export const CollapseExampleIconRightSideBadge = () => {
