@@ -36,7 +36,7 @@ import { RadioGroupExampleView } from './examples/RadioGroupExampleView/RadioGro
 
 Информация об элементах группы — отдельных радиокнопках — описывается в массиве `items`. В нём можно описать название радиокнопки и её неактивность. Например, вот так:
 
-```
+```tsx
 const items = [
   {
     name: 'Один',
@@ -135,7 +135,13 @@ function RadioGroupExampleDisabledItem() {
 Поэтому обязательно отметьте один пункт выбранным.
 
 ```tsx
-const itemsChecked = ['Под бобра', 'В кружок', 'А ля рюс', 'С бакенбардами', 'Только кончики'];
+const itemsChecked = [
+  'Под бобра',
+  'В кружок',
+  'А ля рюс',
+  'С бакенбардами',
+  'Только кончики',
+];
 
 function RadioGroupExampleChecked() {
   const [value, setValue] = React.useState<string | null>(itemsChecked[0]);
@@ -355,7 +361,10 @@ export type RadioGroupDefaultItem = {
   disabled?: boolean;
 };
 
-type OnChange = (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM }) => void;
+type OnChange = (props: {
+  e: React.ChangeEvent<HTMLInputElement>;
+  value: ITEM;
+}) => void;
 ```
 
 | Свойство                                      | Тип                       | По умолчанию | Описание                                                                                                  |
