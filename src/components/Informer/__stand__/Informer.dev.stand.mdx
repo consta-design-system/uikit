@@ -1,0 +1,150 @@
+import { MdxMenu } from '@consta/stand';
+
+import { InformerExampleView } from './examples/InformerExampleView/InformerExampleView';
+import { InformerExampleType } from './examples/InformerExampleType/InformerExampleType';
+import { InformerExampleIcon } from './examples/InformerExampleIcon/InformerExampleIcon';
+import { InformerExampleSuccess } from './examples/InformerExampleText/InformerExampleText';
+import { InformerExampleAlert } from './examples/InformerExampleText/InformerExampleText';
+import { InformerExampleSize } from './examples/InformerExampleSize/InformerExampleSize';
+
+<MdxMenu>
+
+- [Тип сообщения](#тип-сообщения)
+- [Текст сообщения](#текст-сообщения)
+- [Внешний вид](#внешний-вид)
+  - [Тип информера](#тип-информера)
+  - [Иконка](#иконка)
+  - [Размер](#размер)
+- [Импорт](#импорт)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+</MdxMenu>
+
+```tsx
+import { Informer } from '@consta/uikit/Informer';
+```
+
+## Тип сообщения
+
+За тип сообщения отвечает свойство `type`.
+
+```tsx
+<Informer
+  status="success"
+  view="filled"
+  title="Всё хорошо — это 'success'"
+  label="Подходит, чтобы рассказать об успешном результате процесса, в котором сейчас находится пользователь"
+/>
+<Informer
+  status="warning"
+  view="filled"
+  title="Внимание — это 'alert'"
+  label="Здесь можно написать важную информацию, которая может понадобиться прямо сейчас. Например, о каких-то ограничениях"
+/>
+<Informer
+  status="alert"
+  view="filled"
+  title="Не получилось — это 'warning'"
+  label="Подходит, чтобы рассказать об ошибке в процессе"
+/>
+<Informer
+  status="system"
+  view="filled"
+  title="Важно, но не критично — это 'system'"
+  label="Это просто информация, которую стоит выделить"
+/>
+```
+
+<InformerExampleType />
+
+## Текст сообщения
+
+Текст состоит из двух частей:
+
+- заголовок задаётся свойством `title`,
+- основной текст — свойством `label`.
+
+
+## Внешний вид
+
+### Тип информера
+
+За тип информера отвечает свойство `view`. В дизайн-системе есть информеры двух типов:
+с заливкой `filled` или без неё `bordered`.
+
+```tsx
+<Informer label="Ваше сообщение отправлено" view="filled" status="success" />
+```
+
+```tsx
+<Informer label="Всё заполнено" view="bordered" status="success" />
+```
+
+<InformerExampleView />
+
+### Иконка
+
+С помощью свойства `icon` можно добавить иконку — любую из [библиотеки иконок](?path=/story/components-icons--playground).
+
+Не стоит добавлять иконку в информер без заливки.
+
+```tsx
+<Informer label="Сообщение отправлено" view="filled" status="success" icon={IconThumbUp} />
+```
+
+<InformerExampleIcon />
+
+### Размер
+
+За размер сообщения отвечает свойство `size`. Варианты: `m`, `s`, по умолчанию — `m`.
+
+```tsx
+<Informer
+  status="system"
+  view="filled"
+  title="Размер m"
+  label="Это обычное сообщение, и размер обычный"
+  size="m"
+/>
+<Informer
+  status="system"
+  view="filled"
+  title="Размер s"
+  label="Это сообщение поменьше"
+  size="s"
+/>
+```
+
+<InformerExampleSize />
+
+## Импорт
+
+```tsx
+import { Informer } from '@consta/uikit/Informer';
+```
+
+## Свойства
+
+| Свойство                     | Тип или варианты значения                       | По умолчанию | Описание                           |
+| ---------------------------- | ----------------------------------------------- | ------------ | ---------------------------------- |
+| [`status?`](#тип-сообщения)  | `'system'`, `'alert'`, `'warning'`, '`success'` | `'success'`  | Тип сообщения                      |
+| [`title?`](#текст-сообщения) | `string`                                        | -            | Заголовок сообщения                |
+| [`label?`](#текст-сообщения) | `string`                                        | -            | Текст сообщения                    |
+| `children?`                  | `React.ReactNode`                               | -            | Текст сообщения                    |
+| [`view?`](#внешний-вид)      | `'filled'`, `'bordered'`                        | `'filled'`   | Тип информера (с заливкой или без) |
+| [`icon?`](#внешний-вид)      | `IconComponent`                                 | -            | Иконка                             |
+| [`size?`](#размер)           | `'m'`, `'s'`                                    | `'m'`        | Размер                             |
+| `ref?`                       | `React.Ref<HTMLDivElement>`                     | -            | Ссылка на DOM-элемент компонента   |
+| `className`                  | `string`                                        | -            | Дополнительный CSS-класс           |
+
+## Пример
+
+```ts
+import React from 'react';
+import { Informer } from '@consta/uikit/Informer';
+
+const App = () => {
+  return <Informer title="Всё хорошо" label="Уже сейчас всё хорошо, а будет ещё лучше" />;
+};
+```
