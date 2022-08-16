@@ -2,8 +2,11 @@ import './WithAdditionalClassName.css';
 
 import React from 'react';
 
+import { cn } from '##/utils/bem';
+
 import { Table, TableProps, TableRow } from '../../../Table';
-import { cnTableStories } from '../../helpers';
+
+const cnTableStories = cn('TableStories');
 
 const WithAdditionalClassName = <T extends TableRow>(props: TableProps<T>) => {
   return (

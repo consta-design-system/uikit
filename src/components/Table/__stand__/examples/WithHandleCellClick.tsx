@@ -67,7 +67,7 @@ const WithHandleCellClick = <T extends TableRow>() => {
       {show && ref && (
         <ContextMenu
           items={menuItems}
-          getLabel={getLabel}
+          getItemLabel={getLabel}
           anchorRef={ref}
           direction="downStartLeft"
           onClickOutside={() => setIsShow(false)}
