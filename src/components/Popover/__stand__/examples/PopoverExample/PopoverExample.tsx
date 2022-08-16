@@ -32,7 +32,7 @@ export const PopoverPositionedByCoordsExample = () => {
         spareDirection="downStartLeft"
         offset="2xs"
         arrowOffset={0}
-        onClickOutside={action('onClickOutside')}
+        onClickOutside={() => {}}
         isInteractive={false}
         position={position}
       >
@@ -74,7 +74,7 @@ export const PopoverPositionedByAnchorExample = () => {
           spareDirection="downStartLeft"
           offset="2xs"
           arrowOffset={0}
-          onClickOutside={action('onClickOutside')}
+          onClickOutside={() => {}}
           isInteractive
           anchorRef={anchorRef}
           equalAnchorWidth={false}
