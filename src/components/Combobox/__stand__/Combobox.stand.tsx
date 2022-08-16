@@ -1,13 +1,14 @@
 import { createStand } from '../../../stand/standConfig';
-import Combobox from '../../../uiKit/components/ComponentsGridWithData/data/images/ComboboxImage';
+
+import image from './Combobox.image.svg';
 
 export default createStand({
   title: 'Combobox',
   id: 'Combobox',
   group: 'components',
-  image: Combobox,
-  description: 'Показывает загрузку файла или уже загруженный файл.',
-  version: '3.18.0',
+  image,
+  description: 'Выпадающий список с поиском. Можно выбрать один или несколько вариантов.',
+  version: '4.0.0',
   status: 'stable',
   sandbox:
     'https://codesandbox.io/embed/react-new?fontsize=14&hidenavigation=1&theme=dark',

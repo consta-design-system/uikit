@@ -48,17 +48,12 @@ const mapStatus = {
   serviceable: 'success',
 } as const;
 
-export const searchCompare = (
-  searchValue: string,
-  compare?: string,
-): boolean => {
+export const searchCompare = (searchValue: string, compare?: string): boolean => {
   if (!compare) {
     return false;
   }
 
-  return (
-    compare.toLocaleLowerCase().indexOf(searchValue.toLocaleLowerCase()) !== -1
-  );
+  return compare.toLocaleLowerCase().indexOf(searchValue.toLocaleLowerCase()) !== -1;
 };
 
 const searchFunction = (item: Item, searchValue: string): boolean => {
@@ -71,7 +66,7 @@ const searchFunction = (item: Item, searchValue: string): boolean => {
   return searchCompare(searchValue, item.status && mapLabel[item.status]);
 };
 
-export const ComboboxExampleRenderItem = () => {
+export function ComboboxExampleRenderItem() {
   const [value, setValue] = useState<Item | null>();
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
@@ -105,4 +100,4 @@ export const ComboboxExampleRenderItem = () => {
       />
     </StoryBookExample>
   );
-};
+}
