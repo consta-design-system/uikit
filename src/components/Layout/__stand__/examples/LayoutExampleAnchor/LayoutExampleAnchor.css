@@ -1,0 +1,33 @@
+.LayoutExampleAnchor {
+  width: calc(100% + 2 * var(--space-3xl));
+  height: 2000px;
+  margin: calc(var(--space-3xl) * -1);
+
+  &-Header {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 120px;
+    background: var(--color-bg-warning);
+  }
+
+  &-FixedBlock {
+    z-index: 2;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    background: var(--color-bg-normal);
+  }
+
+  &-Container {
+    width: 100%;
+  }
+
+  &-Content {
+    justify-content: center;
+    align-items: center;
+    min-height: 600px;
+    background: var(--color-bg-success);
+  }
+}

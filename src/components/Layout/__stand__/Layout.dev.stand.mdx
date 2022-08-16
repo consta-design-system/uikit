@@ -1,0 +1,180 @@
+import { MdxMenu } from '@consta/stand';
+import { LayoutExampleBasic } from './examples/LayoutExampleBasic/LayoutExampleBasic';
+import {
+  LayoutExampleDirectionRow,
+  LayoutExampleDirectionColumn,
+} from './examples/LayoutExampleDirection/LayoutExampleDirection';
+import { LayoutExampleAnchor } from './examples/LayoutExampleAnchor/LayoutExampleAnchor';
+import { LayoutExampleRowFixed } from './examples/LayoutExampleRowFixed/LayoutExampleRowFixed';
+
+<MdxMenu>
+
+- [Блоки](#блоки)
+- [Расположение блоков](#порядок-блоков)
+- [Фиксация блоков](#фиксация-блоков)
+- [Прикрепление к якорю](#прикрепление-к-якорю)
+- [Адаптивность](#адаптивность)
+- [Импорт](#импорт)
+- [Список свойств](#список-свойств)
+- [Пример использования](#пример)
+
+</MdxMenu>
+
+## Блоки
+
+Блоки лейаута можно вкладывать один в другой, чтобы устанавливать правила,
+по которым они располагаются на странице и по отношению друг к другу.
+
+Внутрь блока можно поместить что угодно: простые компоненты (текст, кнопки) или сложные
+(карточки, таблицы, шапка).
+
+В свойстве `flex` нужно указать долю, которую занимает блок в родительском контейнере.
+
+```tsx
+<Layout>
+  <Layout flex={1}>
+    <Text>Это первый блок</Text>
+  </Layout>
+  <Layout flex={2}>
+    <Text>А это второй блок, он в два раза шире первого</Text>
+  </Layout>
+</Layout>
+```
+
+<LayoutExampleBasic />
+
+## Расположение блоков
+
+Свойство `direction` отвечает за расположение блоков. Варианты:
+
+- `row` — в строку, последовательно,
+- `column` — в столбик, друг под другом.
+
+```tsx
+export const LayoutExampleDirectionRow = () => {
+  return (
+    <Layout direction="row">
+      <Layout flex={1}>
+        <Text>Первый блок</Text>
+      </Layout>
+      <Layout flex={1}>
+        <Text>Второй блок</Text>
+      </Layout>
+    </Layout>
+  );
+};
+
+export const LayoutExampleDirectionColumn = () => {
+  return (
+    <Layout direction="column">
+      <Layout flex={1}>
+        <Text>Первый блок</Text>
+      </Layout>
+      <Layout flex={1}>
+        <Text>Второй блок</Text>
+      </Layout>
+    </Layout>
+  );
+};
+```
+
+| `direction: row`             | `direction: column`             |
+| ---------------------------- | ------------------------------- |
+| <LayoutExampleDirectionRow/> | <LayoutExampleDirectionColumn/> |
+
+## Фиксация блоков
+
+Блоки можно зафиксировать по отношению к контейнеру, в котором они находятся.
+Добавьте `fixed` к блоку, который хотите зафиксировать. Затем укажите, как расположить
+зафиксированный блок.
+
+За фиксацию по вертикали отвечает свойство `verticalAlign`. Варианты:
+
+- `'top'` — фиксирует блок по верхнему краю контейнера (работает по умолчанию),
+- `'bottom'` — по нижнему краю.
+
+[Пример с фиксацией блоков сверху и снизу](?path=/story/components-layout--with-fixed-vertical)
+
+За фиксацию по горизонтали отвечает свойство `horizontalAlign`. Варианты:
+
+- `'left'` — фиксирует блок по левому краю контейнера (работает по умолчанию),
+- `'right'` — по правому краю.
+
+[Пример с фиксацией блоков слева и справа](?path=/story/components-layout--with-fixed-horizontal)
+
+## Прикрепление к якорю
+
+Чтобы прикрепить один блок к другому:
+
+1. добавьте `fixed` к блоку, который нужно зафиксировать, укажите в `ref` идентификатор,
+   по которому можно сослаться на этот блок,
+2. в блоке-якоре укажите идентификатор зафиксированного блока в свойстве `anchorRef`.
+
+[Пример с прикреплением к якорю](?path=/story/components-layout--with-anchor)
+
+```tsx
+import { Layout } from '@consta/uikit/LayoutCanary';
+
+export const LayoutExampleAnchor = () => {
+  const scrollContainerRef = useRef(null);
+  const fixedRef = useRef(null);
+
+  return (
+    <Layout direction="column" ref={scrollContainerRef}>
+      <Layout>
+        <Text>Заголовок</Text>
+      </Layout>
+      <Layout direction="column">
+        <Layout
+          ref={fixedRef}
+          fixed
+          scrollContainerRef={scrollContainerRef}
+          verticalAlign="top"
+        >
+          <Text>Фиксированный элемент</Text>
+        </Layout>
+        <Layout>
+          <Text>Контент</Text>
+        </Layout>
+        <Layout
+          fixed
+          scrollContainerRef={scrollContainerRef}
+          verticalAlign="bottom"
+          anchorRef={fixedRef}
+        >
+          <Text>Фиксированный элемент</Text>
+        </Layout>
+        <Layout>
+          <Text>Контент</Text>
+        </Layout>
+      </Layout>
+    </Layout>
+  );
+};
+```
+
+## Адаптивность
+
+Лейаут сам по себе не адаптируется к ширине экрана. Если проект будут открывать на планшетах и мобильных, дизайнеру при создании макета стоит предусмотреть, как при изменении ширины экрана меняется структура страницы.
+
+## Импорт
+
+```tsx
+import { Layout } from '@consta/uikit/LayoutCanary';
+```
+
+## Список свойств
+
+| Свойство                                  | Тип или варианты значения             | По умолчанию | Описание                                                                          |
+| ----------------------------------------- | ------------------------------------- | ------------ | --------------------------------------------------------------------------------- |
+| [`flex`](#блоки)                          | `string` <code>&#124;</code> `number` | -            | Доля, которую занимает блок во флекс-контейнере                                   |
+| [`fixed`](#фиксация-блока)                | `boolean`                             | -            | Фиксирует блок внутри контейнера                                                  |
+| [`direction`](#расположение-блоков)       | `'row', 'column'`                     | `'row'`      | Расположение блоков внутри компонента                                             |
+| [`verticalAlign`](#расположение-блоков)   | `'top', 'bottom'`                     | `'top'`      | Фиксация по вертикали                                                             |
+| [`horizontalAlign`](#расположение-блоков) | `'left', 'right'`                     | `'left'`     | Фиксация по горизонтали                                                           |
+| `smooth`                                  | `boolean`                             | `'false'`    | Более плавное отображение при прокрутке                                           |
+| [`anchorRef`](#прикрепление-к-якорю)      | `React.RefObject<HTMLElement>`        | -            | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
+| `scrollContainerRef`                      | `React.RefObject<HTMLElement>`        | -            | Контейнер прокрутки, внутри которого фиксируется блок                             |
+| `tabIndex`                                | `number`                              | —            | Порядковый номер при переходе между элементами интерфейса по клавише **tab**      |
+| `as`                                      | `React.ElementType`                   | `div`        | HTML-тег для кнопки                                                               |
+| `className`                               | `string`                              | —            | Дополнительные CSS-классы                                                         |
