@@ -1,0 +1,236 @@
+import { MdxMenu } from '@consta/stand';
+import {
+  SwitchGroupExampleSizeM,
+  SwitchGroupExampleSizeL,
+} from './examples/SwitchGroupExampleSize/SwitchGroupExampleSize';
+import {
+  SwitchGroupExampleDisabled,
+  SwitchGroupExampleDisabledGroup,
+} from './examples/SwitchGroupExampleDisabled/SwitchGroupExampleDisabled';
+import {
+  SwitchGroupExampleRow,
+  SwitchGroupExampleColumn,
+} from './examples/SwitchGroupExampleDirection/SwitchGroupExampleDirection';
+import {
+  SwitchGroupExampleViewGhost,
+  SwitchGroupExampleViewPrimary,
+} from './examples/SwitchGroupExampleView/SwitchGroupExampleView';
+
+<MdxMenu>
+
+- [Содержимое](#содержимое)
+- [Направление](#направление)
+- [Состояние](#состояние)
+  - [Неактивный переключатель](#неактивный-переключатель)
+  - [Неактивная группа](#неактивная-группа-переключателей)
+- [Размер](#размер)
+- [Внешний вид](#внешний-вид)
+- [Импорт](#импорт)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+</MdxMenu>
+
+## Содержимое
+
+Создайте объект с информацией о переключателях. Можно указать название переключателя и его неактивность. Например, вот так:
+
+```tsx
+type Item = {
+  name: string;
+  disabled?: boolean;
+};
+
+const items: Item[] = [
+  { name: 'Тёмная тема' },
+  { name: 'Розовый текст' },
+  { name: 'Мигающие заголовки' },
+];
+```
+
+Сообщите компоненту, из какого объекта брать данные, в свойстве `items`.
+
+Получить заголовки можно с помощью функции `getLabel`.
+
+```tsx
+export function SwitchGroupExampleDisabled() {
+  const [value, setValue] = React.useState<Item[] | null>(null);
+
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <SwitchGroup
+        value={value}
+        items={items}
+        getLabel={(item) => item.name}
+        getDisabled={(item) => item.disabled}
+        onChange={({ value }) => setValue(value)}
+        name="SwitchGroupExampleDisabled"
+      />
+    </StoryBookExample>
+  );
+}
+```
+
+<SwitchGroupExampleDisabled />
+
+## Расположение переключателей
+
+Вы можете расположить переключатели в столбик или на одной строчке, за это отвечает свойство `direction`. Варианты:
+
+- `column` — в столбик, друг под другом (работает по умолчанию),
+- `row` — на одной строке.
+
+| `direction="column"`         | `direction="row"`         |
+| ---------------------------- | ------------------------- |
+| <SwitchGroupExampleColumn /> | <SwitchGroupExampleRow /> |
+
+## Состояние
+
+### Неактивный переключатель
+
+Чтобы сделать переключатель неактивным, добавьте `disabled` в объект с описанием этого переключателя.
+
+```tsx
+type Item = {
+  name: string;
+  disabled?: boolean;
+};
+
+const items: Item[] = [
+  { name: 'Тёмная тема' },
+  { name: 'Розовый текст' },
+  { name: 'Мигающие заголовки', disabled: true },
+];
+
+export function SwitchGroupExampleDisabled() {
+  const [value, setValue] = React.useState<Item[] | null>(null);
+
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <SwitchGroup
+        value={value}
+        items={items}
+        getLabel={(item) => item.name}
+        getDisabled={(item) => item.disabled}
+        onChange={({ value }) => setValue(value)}
+        name="SwitchGroupExampleDisabled"
+      />
+    </StoryBookExample>
+  );
+}
+```
+
+<SwitchGroupExampleDisabled />
+
+### Неактивная группа переключателей
+
+Чтобы сделать все переключатели в группе неактивными, добавьте `disabled`.
+
+```tsx
+type Item = {
+  name: string;
+  disabled?: boolean;
+};
+
+const items: Item[] = [
+  { name: 'Тёмная тема' },
+  { name: 'Розовый текст' },
+  { name: 'Мигающие заголовки', disabled: true },
+];
+
+export function SwitchGroupExampleDisabledGroup() {
+  const [value, setValue] = React.useState<Item[] | null>(null);
+
+  return (
+    <SwitchGroup
+      value={value}
+      items={items}
+      getLabel={(item) => item.name}
+      getDisabled={(item) => item.disabled}
+      onChange={({ value }) => setValue(value)}
+      name="SwitchGroupExampleDisabledGroup"
+      disabled
+    />
+  );
+}
+```
+
+<SwitchGroupExampleDisabledGroup />
+
+## Размер
+
+За размер отвечает свойство `size`. Варианты: `'m'`, `'l'`, по умолчанию `'m'`.
+
+| `size="m"`                  | `size="m"`                  |
+| --------------------------- | --------------------------- |
+| <SwitchGroupExampleSizeM /> | <SwitchGroupExampleSizeL /> |
+
+## Внешний вид
+
+Всего в дизайн-системе два вида групп переключателей: `primary` и `ghost`. За это отвечает свойство `view` (отличия видны, когда переключатель включен).
+
+| `view="primary"`                  | `view="ghost"`                  |
+| --------------------------------- | ------------------------------- |
+| <SwitchGroupExampleViewPrimary /> | <SwitchGroupExampleViewGhost /> |
+
+## Импорт
+
+```tsx
+import { SwitchGroup } from '@consta/uikit/SwitchGroup';
+```
+
+## Свойства
+
+```
+type OnChange = (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM[] | null }) => void;
+```
+
+| Свойство                                     | Тип                       | По умолчанию | Описание                                                                                                     |
+| -------------------------------------------- | ------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------ |
+| `value`                                      | `Item[]`                  | -            | Значение                                                                                                     |
+| [`items`](#содержимое)                       | `Item[]`                  | -            | Элементы                                                                                                     |
+| [`getLabel`](#содержимое)                    | `(item: Item) => string`  | -            | Функция для формирования текста для переключателей. Также используется в качестве уникального ключа элемента |
+| [`getDisabled?`](#неактивный-переключатель)  | `(item: Item) => boolean` | -            | Функция для определения disabled состояния чекбокса                                                          |
+| `onChange`                                   | `OnChange`                | -            | Действие при выборе элемента                                                                                 |
+| `name`                                       | `string`                  | -            | Имя `<input>`, указывается для доступности                                                                   |
+| [`direction?`](#расположение-переключателей) | `'column', 'row'`         | `'column'`   | Направление переключателей                                                                                   |
+| [`disabled?`](#неактивный-переключатель)     | `boolean`                 | `false`      | Делает группу переключателей неактивной                                                                      |
+| [`size?`](#размер)                           | `'m', 'l'`                | `'m'`        | Размер группы переключателей                                                                                 |
+| [`view?`](#внешний-вид)                      | `'primary', 'ghost'`      | `'primary'`  | Внешний вид                                                                                                  |
+| `className?`                                 | `string`                  | -            | Дополнительные CSS-классы                                                                                    |
+
+## Пример
+
+```ts
+// src/App.ts
+import React from 'react';
+import { SwitchGroup } from '@consta/uikit/SwitchGroup';
+
+type Item = {
+  name: string;
+  disabled?: boolean;
+};
+
+const items: Item[] = [
+  { name: 'один' },
+  { name: 'два' },
+  { name: 'три' },
+  { name: 'disabled', disabled: true },
+  { name: 'пять' },
+];
+
+const App = () => {
+  const [value, setValue] = React.useState<Item[] | null>(null);
+
+  return (
+    <SwitchGroup
+      value={value}
+      items={items}
+      getLabel={(item) => item.name}
+      getDisabled={(item) => item.disabled}
+      onChange={({ value }) => setValue(value)}
+      name={'SwitchGroup'}
+    />
+  );
+};
+```
