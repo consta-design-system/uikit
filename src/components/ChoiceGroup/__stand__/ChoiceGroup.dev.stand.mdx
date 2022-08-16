@@ -1,36 +1,32 @@
 import { MdxMenu } from '@consta/stand';
 
-import { ChoiceGroupExampleIcon } from '../__stories__/examples/ChoiceGroupExampleIcon/ChoiceGroupExampleIcon';
-import { ChoiceGroupExampleView } from '../__stories__/examples/ChoiceGroupExampleView/ChoiceGroupExampleView';
-import { ChoiceGroupExampleForm } from '../__stories__/examples/ChoiceGroupExampleForm/ChoiceGroupExampleForm';
-import { ChoiceGroupExampleSize } from '../__stories__/examples/ChoiceGroupExampleSize/ChoiceGroupExampleSize';
+import { ChoiceGroupExampleIcon } from './examples/ChoiceGroupExampleIcon/ChoiceGroupExampleIcon';
+import { ChoiceGroupExampleView } from './examples/ChoiceGroupExampleView/ChoiceGroupExampleView';
+import { ChoiceGroupExampleForm } from './examples/ChoiceGroupExampleForm/ChoiceGroupExampleForm';
+import { ChoiceGroupExampleSize } from './examples/ChoiceGroupExampleSize/ChoiceGroupExampleSize';
 import {
   ChoiceGroupExample,
   ChoiceGroupExampleText,
-} from '../__stories__/examples/ChoiceGroupExampleText/ChoiceGroupExampleText';
-import { ChoiceGroupExampleTextOverflow } from '../__stories__/examples/ChoiceGroupExampleTextOverflow/ChoiceGroupExampleTextOverflow';
-import { ChoiceGroupExampleWidth } from '../__stories__/examples/ChoiceGroupExampleWidth/ChoiceGroupExampleWidth';
+} from './examples/ChoiceGroupExampleText/ChoiceGroupExampleText';
+import { ChoiceGroupExampleTextOverflow } from './examples/ChoiceGroupExampleTextOverflow/ChoiceGroupExampleTextOverflow';
+import { ChoiceGroupExampleWidth } from './examples/ChoiceGroupExampleWidth/ChoiceGroupExampleWidth';
 import {
   ChoiceGroupExampleOne,
   ChoiceGroupExampleMultiple,
-} from '../__stories__/examples/ChoiceGroupExampleMultiple/ChoiceGroupExampleMultiple';
+} from './examples/ChoiceGroupExampleMultiple/ChoiceGroupExampleMultiple';
 
 import {
   ChoiceGroupExampleSwitchPr,
   ChoiceGroupExampleSwitchPolar,
   ChoiceGroupExampleSwitchMode,
   ChoiceGroupExampleSwitchLetters,
-} from '../__stories__/examples/ChoiceGroupExampleSwitch/ChoiceGroupExampleSwitch';
-import { ChoiceGroupExampleDisabled } from '../__stories__/examples/ChoiceGroupExampleDisabled/ChoiceGroupExampleDisabled';
-import { ChoiceGroupExampleSomeDisabled } from '../__stories__/examples/ChoiceGroupExampleSomeDisabled/ChoiseGroupExampleSomeDisabled';
+} from './examples/ChoiceGroupExampleSwitch/ChoiceGroupExampleSwitch';
+import { ChoiceGroupExampleDisabled } from './examples/ChoiceGroupExampleDisabled/ChoiceGroupExampleDisabled';
+import { ChoiceGroupExampleSomeDisabled } from './examples/ChoiceGroupExampleSomeDisabled/ChoiseGroupExampleSomeDisabled';
 import {
   ChoiceGroupExampleAdaptiveScroll,
   ChoiceGroupExampleAdaptiveUseBreakpoints,
-} from '../__stories__/examples/ChoiceGroupExampleAdaptive/ChoiceGroupExampleAdaptive';
-
-```tsx
-import { ChoiceGroup } from '@consta/uikit/ChoiceGroup';
-```
+} from './examples/ChoiceGroupExampleAdaptive/ChoiceGroupExampleAdaptive';
 
 <MdxMenu>
 
@@ -53,6 +49,10 @@ import { ChoiceGroup } from '@consta/uikit/ChoiceGroup';
 - [Пример использования](#пример)
 
 </MdxMenu>
+
+```tsx
+import { ChoiceGroup } from '@consta/uikit/ChoiceGroup';
+```
 
 ## Текст на кнопках
 
@@ -78,7 +78,7 @@ export const ChoiceGroupExample = () => {
 };
 ```
 
-`<ChoiceGroupExample />`
+<ChoiceGroupExample />
 
 ### Слишком длинный текст
 
@@ -113,7 +113,7 @@ export const ChoiceGroupExampleTextOverflow = () => {
 };
 ```
 
-`<ChoiceGroupExampleTextOverflow />`
+<ChoiceGroupExampleTextOverflow />
 
 ## Иконки
 
@@ -168,7 +168,7 @@ export const ChoiceGroupExampleIcon = () => {
 };
 ```
 
-`<ChoiceGroupExampleIcon />`
+<ChoiceGroupExampleIcon />
 
 ## Один или несколько
 
@@ -198,7 +198,7 @@ export const ChoiceGroupExampleOne = () => {
 };
 ```
 
-`<ChoiceGroupExampleOne />`
+<ChoiceGroupExampleOne />
 
 ### Несколько вариантов
 
@@ -222,19 +222,17 @@ export const ChoiceGroupExampleMultiple = () => {
 };
 ```
 
-`<ChoiceGroupExampleMultiple />`
+<ChoiceGroupExampleMultiple />
 
 ### В качестве переключателя
 
 Группу из двух кнопок иногда стоит использовать вместо переключателя
 [Switch](?path=/docs/components-switch--playground) — если в интерфейсе есть место.
 
-```
 <ChoiceGroupExampleSwitchPolar />
 <ChoiceGroupExampleSwitchLetters />
 <ChoiceGroupExampleSwitchPr />
 <ChoiceGroupExampleSwitchMode />
-```
 
 ## Внешний вид
 
@@ -261,7 +259,7 @@ export const ChoiceGroupExampleView = () => {
 };
 ```
 
-`<ChoiceGroupExampleView />`
+<ChoiceGroupExampleView />
 
 ## Форма кнопок
 
@@ -288,7 +286,7 @@ export const ChoiceGroupExampleForm = () => {
 };
 ```
 
-`<ChoiceGroupExampleForm />`
+<ChoiceGroupExampleForm />
 
 ## Размер
 
@@ -315,7 +313,7 @@ export const ChoiceGroupExampleSize = () => {
 };
 ```
 
-`<ChoiceGroupExampleSize />`
+<ChoiceGroupExampleSize />
 
 ### Группа кнопок в ширину блока
 
@@ -342,7 +340,7 @@ export const ChoiceGroupExampleWidth = () => {
 };
 ```
 
-`<ChoiceGroupExampleWidth />`
+<ChoiceGroupExampleWidth />
 
 ## Неактивные кнопки
 
@@ -377,7 +375,7 @@ export const ChoiceGroupExampleWidth = () => {
 };
 ```
 
-`<ChoiceGroupExampleSomeDisabled />`
+<ChoiceGroupExampleSomeDisabled />
 
 ### Неактивная группа кнопок
 
@@ -404,7 +402,7 @@ export const ChoiceGroupExampleWidth = () => {
 };
 ```
 
-`<ChoiceGroupExampleDisabled />`
+<ChoiceGroupExampleDisabled />
 
 ## Адаптивность
 
@@ -440,9 +438,7 @@ const items: string[] = [
   'девять',
 ];
 
-const cnChoiceGroupExampleAdaptiveScroll = cn(
-  'ChoiceGroupExampleAdaptiveScroll',
-);
+const cnChoiceGroupExampleAdaptiveScroll = cn('ChoiceGroupExampleAdaptiveScroll');
 
 const getItemLabel = (item: string) => item;
 
@@ -460,7 +456,7 @@ export const ChoiceGroupExampleAdaptiveScroll = () => {
 };
 ```
 
-`<ChoiceGroupExampleAdaptiveScroll />`
+<ChoiceGroupExampleAdaptiveScroll />
 
 ##### Пример с преобразованием в RadioGroup
 
@@ -474,10 +470,7 @@ const getItemLabel = (item: string) => item;
 export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
   const { desktop } = useBreakpoints({ desktop: 800 });
   const [value, setValue] = useState(items2[0]);
-  const onChandge = useCallback(
-    ({ value }: { value: string }) => setValue(value),
-    [],
-  );
+  const onChandge = useCallback(({ value }: { value: string }) => setValue(value), []);
 
   if (desktop) {
     return (
@@ -506,7 +499,7 @@ export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
 
 > Чтобы посмотреть, как это работает, уменьшите ширину окна в браузере
 
-`<ChoiceGroupExampleAdaptiveUseBreakpoints />`
+<ChoiceGroupExampleAdaptiveUseBreakpoints />
 
 ## Импорт
 
@@ -523,10 +516,7 @@ type ChoiceGroupDefaultItem = {
   disabled?: boolean;
 };
 
-type OnChange = (props: {
-  e: React.ChangeEvent<HTMLInputElement>;
-  value: ITEM;
-}) => void;
+type OnChange = (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM }) => void;
 
 type OnChangeMultiple = (props: {
   e: React.ChangeEvent<HTMLInputElement>;

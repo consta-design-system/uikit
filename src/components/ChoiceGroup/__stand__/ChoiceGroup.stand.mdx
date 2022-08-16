@@ -1,6 +1,9 @@
 import { MdxMenu } from '@consta/stand';
 
-import { ChoiceGroupExampleText } from '../__stories__/examples/ChoiceGroupExampleText/ChoiceGroupExampleText';
+import {
+  ChoiceGroupExample,
+  ChoiceGroupExampleText,
+} from './examples/ChoiceGroupExampleText/ChoiceGroupExampleText';
 
 Группа кнопок нужна, чтобы выбрать из списка один или несколько вариантов.
 Совмещает возможности [Radio](##LIBS.STAND|stand:uikit-components-radio-stable) и
@@ -9,14 +12,13 @@ import { ChoiceGroupExampleText } from '../__stories__/examples/ChoiceGroupExamp
 Занимает больше места, зато по элементам проще попасть, чем по радиокнопкам
 или чекбоксам.
 
-Не рекомендуется использовать в одной группе **больше шести** кнопок.
-
-> Не используйте `ChoiceGroup` для навигации верхнего уровня, например, в шапке сайта
+<ChoiceGroupExample />
 
 <MdxMenu>
 
+- [Как использовать](#как-использовать)
+- [Как писать тексты](#как-писать-тексты)
 - [Текст на кнопках](##LIBS.STAND.DEV|stand:uikit-components-choicegroup-stable|hash:текст-на-кнопках)
-  - [Как писать тексты](#как-писать-тексты)
   - [Слишком длинный текст](##LIBS.STAND.DEV|stand:uikit-components-choicegroup-stable|hash:слишком-длинный-текст)
 - [Иконки](##LIBS.STAND.DEV|stand:uikit-components-choicegroup-stable|hash:иконки)
 - [Один или несколько](##LIBS.STAND.DEV|stand:uikit-components-choicegroup-stable|hash:один-или-несколько)
@@ -36,8 +38,14 @@ import { ChoiceGroupExampleText } from '../__stories__/examples/ChoiceGroupExamp
 
 </MdxMenu>
 
-### Как писать тексты
+## Как использовать
+
+Не стоит использовать в одной группе **больше шести** кнопок.
+
+Не используйте `ChoiceGroup` для навигации верхнего уровня, например, в шапке сайта.
+
+## Как писать тексты
 
 Согласуйте текст на кнопке с заголовком и между собой. Так просто лучше читается, а значит, проще понять смысл.
 
-`<ChoiceGroupExampleText />`
+<ChoiceGroupExampleText />
