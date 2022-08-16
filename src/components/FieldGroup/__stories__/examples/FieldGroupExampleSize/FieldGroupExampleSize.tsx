@@ -1,11 +1,11 @@
 import React from 'react';
 
+import { items } from '../../../__mocks__/data.mock';
 import { cnMixSpace } from '../../../../../mixs/MixSpace/MixSpace';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Button } from '../../../../Button/Button';
 import { Select } from '../../../../Select/Select';
 import { TextField } from '../../../../TextField/TextField';
-import { items } from '../../../__mocks__/data.mock';
 import { FieldGroup } from '../../../FieldGroup';
 
 const sizes = ['xs', 's', 'm', 'l'] as const;
