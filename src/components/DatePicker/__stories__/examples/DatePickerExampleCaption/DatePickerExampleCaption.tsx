@@ -27,11 +27,7 @@ export const DatePickerExampleCaption = () => {
         status="warning"
         caption="Это подпись"
       />
-      <DatePicker
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        caption="Это подпись"
-      />
+      <DatePicker value={value} onChange={({ value }) => setValue(value)} caption="Это подпись" />
     </StoryBookExample>
   );
 };

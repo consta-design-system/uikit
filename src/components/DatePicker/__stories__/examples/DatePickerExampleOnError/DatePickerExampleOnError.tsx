@@ -1,5 +1,5 @@
-import { format } from 'date-fns';
 import React, { useRef, useState } from 'react';
+import { format } from 'date-fns';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
@@ -37,9 +37,9 @@ export const DatePickerExampleOnError = () => {
     }
     if (props.type === 'startDateIsGreaterThanEndDate') {
       setError(
-        `Дата начала (${formatDate(
-          props.date[0],
-        )}) больше чем дата конца (${formatDate(props.date[1])})`,
+        `Дата начала (${formatDate(props.date[0])}) больше чем дата конца (${formatDate(
+          props.date[1],
+        )})`,
       );
     }
   };
