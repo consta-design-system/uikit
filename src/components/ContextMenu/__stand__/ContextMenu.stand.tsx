@@ -1,14 +1,15 @@
 import { createStand } from '../../../stand/standConfig';
-import ContextMenu from '../../../uiKit/components/ComponentsGridWithData/data/images/ContextMenuImage';
+
+import image from './ContextMenu.image.svg';
 
 export default createStand({
   title: 'ContextMenu',
   id: 'ContextMenu',
   group: 'components',
-  image: ContextMenu,
-  description: 'Показывает загрузку файла или уже загруженный файл.',
-  version: '3.18.0',
-  status: 'canary',
+  image,
+  description: 'Контекстное меню. Дополнительные действия на странице.',
+  version: '4.0.0',
+  status: 'stable',
   sandbox:
     'https://codesandbox.io/embed/react-new?fontsize=14&hidenavigation=1&theme=dark',
   figma:

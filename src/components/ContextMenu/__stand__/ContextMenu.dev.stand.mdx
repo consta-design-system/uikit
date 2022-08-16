@@ -1,9 +1,715 @@
-# MDX Attachment.stand
+import { MdxMenu } from '@consta/stand';
 
-## MDX Attachment.stand
+import { ContextMenuExampleLabel } from '../__stories__/examples/ContextMenuExampleLabel/ContextMenuExampleLabel';
+import { ContextMenuExampleSubMenu } from '../__stories__/examples/ContextMenuExampleSubMenu/ContextMenuExampleSubMenu';
+import { ContextMenuExampleOutsideClick } from '../__stories__/examples/ContextMenuExampleOutsideClick/ContextMenuExampleOutsideClick';
+import { ContextMenuExampleSide } from '../__stories__/examples/ContextMenuExampleSide/ContextMenuExampleSide';
+import { ContextMenuExampleStatus } from '../__stories__/examples/ContextMenuExampleStatus/ContextMenuExampleStatus';
+import { ContextMenuExampleGroups } from '../__stories__/examples/ContextMenuExampleGroups/ContextMenuExampleGroups';
+import { ContextMenuExampleIcon } from '../__stories__/examples/ContextMenuExampleIcon/ContextMenuExampleIcon';
+import { ContextMenuExampleSize } from '../__stories__/examples/ContextMenuExampleSize/ContextMenuExampleSize';
+import { ContextMenuExampleDefault } from '../__stories__/examples/ContextMenuExampleDefault/ContextMenuExampleDefault';
+import { ContextMenuExampleDisabled } from '../__stories__/examples/ContextMenuExampleDisabled/ContextMenuExampleDisabled';
 
-### MDX Attachment.stand
+<MdxMenu>
 
-#### MDX Attachment.stand
+- [Содержимое](#содержимое)
+- [Текст пункта](#текст-пункта)
+- [Статус пункта меню](#статус-пункта-меню)
+- [Заблокировать](#заблокировать-пункт-меню)
+- [Иконка](#иконка)
+- [Добавить дополнительные элементы](#добавить-дополнительные-элементы)
+- [Второй уровень меню](#второй-уровень-меню)
+- [Группы пунктов](#группы-пунктов-меню)
+- [Размер меню](#размер-меню)
+- [Закрыть по клику за пределами](#закрыть-меню-по-клику-по-внешней-области)
+- [Импорт](#импорт)
+- [Список свойств](#свойства)
+- [Пример](#пример)
 
-Attachment.stand
+</MdxMenu>
+
+
+```tsx
+import { ContextMenu } from '@consta/uikit/ContextMenu';
+```
+
+## Содержимое
+
+Содержимое меню можно описать в массиве `items`. Что внутри:
+
+- `label` — [текст пункта](#текст-пункта) (обязательный).
+- `key` — идентификатор пункта меню.
+- `rightSide` — добавляет [JSX или текст](#добавить-дополнительные-элементы) справа от текста.
+- `rightIcon` — добавляет [JSX или текст](#добавить-дополнительные-элементы) слева от текста.
+- `leftSide` — добавляет [иконку](#иконка) справа от текста.
+- `leftIcon` — добавляет [иконку](#иконка) слева от текста.
+- `subMenu` — [второй уровень меню](#второй-уровень-меню).
+- `status` — [статус пункта меню](#статус-пункта-меню).
+- `disabled` — [блокирует пункт меню](#заблокировать-пункт-меню).
+- `groupId` — идентификатор [группы, к которой относится пункт](#группы-пунктов-меню).
+- `onClick` — функция, которая вызывается при нажатии на пункт меню.
+- `as` — то, каким образом будет отрисовываться пункт меню.
+- `attributes` — HTML-атрибуты, которые используются в пункте меню.
+
+## Текст пункта
+
+Добавить текст пункта меню можно в атрибуте `label` в свойстве `items` типа [ContextMenuItemDefault](#свойства).
+Если используете кастомный тип, получить название пункта меню можно с помощью функции `getItemLabel`.
+
+```tsx
+const items: string[] = ['Пункт 1', 'Пункт 2', 'Пункт 3'];
+
+export const ContextMenuExampleLabel = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const ref = useRef(null);
+  return (
+    <>
+      <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+      <ContextMenu isOpen={isOpen} items={items} getItemLabel={(item) => item} anchorRef={ref} />
+    </>
+  );
+```
+
+<ContextMenuExampleLabel />
+
+### Статус пункта меню
+
+От статуса зависит цвет текста.
+
+Добавить статус можно в атрибуте `status` в свойстве `items` типа [ContextMenuItemDefault](#свойства).
+Если используете кастомный тип, получить статус можно с помощью функции `getItemStatus`.
+
+```tsx
+type Item = {
+  label: string;
+  accent: 'alert' | 'warning' | 'success';
+};
+
+const items: Item[] = [
+  {
+    label: 'Пункт 1',
+    accent: 'alert',
+  },
+  {
+    label: 'Пункт 2',
+    accent: 'warning',
+  },
+  {
+    label: 'Пункт 3',
+    accent: 'success',
+  },
+];
+
+export const ContextMenuExampleStatus = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const ref = useRef(null);
+  return (
+    <>
+      <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+      <ContextMenu
+        isOpen={isOpen}
+        items={items}
+        getItemStatus={(item) => item.accent}
+        anchorRef={ref}
+        direction="downStartLeft"
+      />
+    </>
+  );
+```
+
+<ContextMenuExampleStatus />
+
+### Заблокировать пункт меню
+
+Чтобы заблокировать пункт меню, можно использовать атрибут `disabled` в свойстве `items` типа [ContextMenuItemDefault](#свойства).
+Если используете кастомный тип, получить это состояние можно с помощью функции `getItemDisabled`.
+
+```tsx
+type Item = {
+  label: string;
+  active?: boolean;
+};
+
+const items: Item[] = [
+  {
+    label: 'Пункт 1',
+    active: true,
+  },
+  {
+    label: 'Пункт 2',
+    active: true,
+  },
+  {
+    label: 'Пункт 3',
+    active: false,
+  },
+];
+
+export const ContextMenuExampleDisabled = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const ref = useRef(null);
+  return (
+    <>
+      <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+      <ContextMenu
+        isOpen={isOpen}
+        items={items}
+        getItemDisabled={(item) => item.active}
+        anchorRef={ref}
+        direction="downStartLeft"
+      />
+    </>
+  );
+```
+
+<ContextMenuExampleDisabled />
+
+## Иконка
+
+Чтобы добавить иконку слева от названия пункта меню, используйте `leftIcon`, а справа — `rightIcon`.
+Если используете кастомный тип, получить иконки можно с помощью функции `getItemLeftIcon` или `getItemRightIcon`.
+
+```tsx
+type Item = {
+  label: string;
+  imageLeft?: IconComponent;
+  imageRight?: IconComponent;
+};
+
+const items: Item[] = [
+  {
+    label: 'Скрепка',
+    imageLeft: IconAttach,
+  },
+  {
+    label: 'Две галочки',
+    imageRight: IconAllDone,
+  },
+  {
+    label: 'Чемодан',
+    imageLeft: IconBag,
+  },
+];
+
+export const ContextMenuExampleIcon = () => {
+  const ref = useRef(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  return (
+    <>
+      <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+      <ContextMenu
+        isOpen={isOpen}
+        items={items}
+        getItemLeftIcon={(item) => item.imageLeft}
+        getItemRightIcon={(item) => item.imageRight}
+        anchorRef={ref}
+        direction="downStartLeft"
+      />
+    </>
+  );
+};
+```
+
+<ContextMenuExampleIcon />
+
+## Добавить дополнительные элементы
+
+К каждому пункту в меню можно добавить дополнительные элементы — 
+например, текст, переключатель, чекбокс или что-то ещё.
+
+Чтобы добавить что-то слева от названия пункта меню, используйте `leftSide`, чтобы добавить что-то справа — `rightSide`.
+Если используете кастомный тип, получить дополнительные элементы можно с помощью функции `getItemLeftSide` или `getItemRightSide`.
+
+Внутри можно передать один элемент или массив элементов. Отступы между ними
+проставятся автоматически.
+
+Если указана иконка, то контент справа или слева (в зависимости от указанных данных) будет заменен.
+
+```tsx
+type Item = {
+  label: string;
+  icon: IconComponent;
+  switch?: boolean;
+  status: 'warning' | 'success';
+};
+
+const menuItems: Item[] = [
+  {
+    label: 'Пункт 1',
+    icon: IconInfo,
+    status: 'success',
+  },
+  {
+    label: 'Пункт 2',
+    icon: IconInfo,
+    status: 'warning',
+    switch: false,
+  },
+  {
+    label: 'Пункт 3',
+    icon: IconInfo,
+    status: 'success',
+    switch: true,
+  },
+];
+
+function renderLeftSide(item: Item): React.ReactNode {
+  const Icon = item.icon;
+  return <Icon size="s" />;
+}
+
+function renderRightSide(item: Item, onChange: (item: Item) => void): React.ReactNode {
+  const nodeArray = [];
+
+  item.switch !== undefined &&
+    nodeArray.push(
+      <Switch size="m" checked={item.switch} onChange={() => onChange(item)} key="Switch" />,
+    );
+
+  nodeArray.push(<Badge status={item.status} minified key="Badge" size="s" />);
+
+  return nodeArray;
+}
+
+export const ContextMenuExampleSide = () => {
+  const [items, setItems] = useState(menuItems);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const ref = useRef(null);
+
+  const onChange = (switchItem: Item) => {
+    const newItems = items.map((item, index) => {
+      if (switchItem.label === item.label) {
+        return { ...items[index], switch: !items[index].switch };
+      }
+      return item;
+    });
+
+    setItems(newItems);
+  };
+
+  return (
+    <>
+      <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+      <ContextMenu
+        isOpen={isOpen}
+        items={items}
+        anchorRef={ref}
+        getItemLeftSide={renderLeftSide}
+        getItemRightSide={(item) => renderRightSide(item, onChange)}
+      />
+    </>
+  );
+};
+```
+
+<ContextMenuExampleSide />
+
+## Второй уровень меню
+
+Чтобы добавить вложенные пункты меню, нужно использовать атрибут `subMenu` в свойстве `items` типа [ContextMenuItemDefault](#свойства).
+Если используете кастомный тип, получить вложенные пункты меню можно с помощью функции `getItemSubMenu`.
+
+С помощью `subMenuDirection` можно указать, в какую сторону разворачивается меню второго (и любого другого) уровня.
+
+```tsx
+type Item = {
+  label: string;
+  menu?: Item[];
+};
+
+const items: Item[] = [
+  {
+    label: 'Пункт 1',
+    menu: [
+      {
+        label: 'Пункт 1-1',
+      },
+      {
+        label: 'Пункт 1-2',
+      },
+      {
+        label: 'Пункт 1-3',
+        menu: [
+          {
+            label: 'Пункт 1-3-1',
+          },
+          {
+            label: 'Пункт 1-3-2',
+          },
+          {
+            label: 'Пункт 1-3-3',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Пункт 2',
+  },
+  {
+    label: 'Пункт 3',
+  },
+];
+
+export const ContextMenuExampleSubMenu = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const ref = useRef(null);
+  return (
+    <>
+      <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+      <ContextMenu
+        isOpen={isOpen}
+        items={items}
+        anchorRef={ref}
+        getItemSubMenu={(item) => item.menu}
+      />
+    </>
+  );
+};
+```
+
+<ContextMenuExampleSubMenu />
+
+## Группы пунктов меню
+
+Добавить группы можно в свойстве `groups` типа [ContextMenuGroupDefault](#свойства).
+Чтобы привязать пункт меню к группе, добавьте атрибут `groupId`
+в свойстве `items` типа [ContextMenuItemDefault](#свойства). Если используете кастомный тип,
+получить идентификатор группы, привязанной к пункту меню, можно с помощью функций `getItemGroupId`.
+
+Получить идентификатор и название группы можно с помощью
+функций `getGroupId` и `getGroupLabel`.
+
+```tsx
+type Group = {
+  name: string;
+  key: number;
+};
+
+const groups: Group[] = [
+  {
+    name: 'Первая группа',
+    key: 1,
+  },
+  {
+    name: 'Вторая группа',
+    key: 2,
+  },
+];
+
+type Item = {
+  label: string;
+  group: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Пункт 1',
+    group: 1,
+  },
+  {
+    label: 'Пункт 2',
+    group: 2,
+  },
+  {
+    label: 'Пункт 3',
+    group: 2,
+  },
+];
+
+const sortGroup = (a: number | string, b: number | string) => {
+  if (a > b) {
+    return 1;
+  }
+  if (a < b) {
+    return -1;
+  }
+  return 0;
+};
+
+export const ContextMenuExampleGroups = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const ref = useRef(null);
+  return (
+    <>
+      <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+      <ContextMenu
+        items={items}
+        isOpen={isOpen}
+        groups={groups}
+        getItemGroupId={(item) => item.group}
+        getGroupLabel={(group) => group.name}
+        getGroupId={(group) => group.key}
+        anchorRef={ref}
+        sortGroup={sortGroup}
+      />
+    </>
+  );
+};
+```
+
+<ContextMenuExampleGroups />
+
+## Размер меню
+
+За размер компонента отвечает свойство `size`. Варианты: `'xs'`, `'s'`, `'m'`, `'l'`.
+
+<ContextMenuExampleSize />
+
+## Закрыть меню по клику по внешней области
+
+Чтобы меню можно было закрыть по клику за его пределами, добавьте `onClickOutside`.
+
+```tsx
+type Item = {
+  label: string;
+};
+
+const items: Item[] = [
+  {
+    label: 'Пункт 1',
+  },
+  {
+    label: 'Пункт 2',
+  },
+  {
+    label: 'Пункт 3',
+  },
+];
+
+export const ContextMenuExampleOutsideClick = () => {
+  const ref = useRef(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+      <ContextMenu
+        isOpen={isOpen}
+        items={items}
+        anchorRef={ref}
+        onClickOutside={() => setIsOpen(false)}
+        direction="downStartLeft"
+      />
+    </StoryBookExample>
+  );
+};
+```
+
+<ContextMenuExampleOutsideClick />
+
+## Импорт
+
+```tsx
+import { ContextMenu } from '@consta/uikit/ContextMenu';
+```
+
+## Свойства
+
+```tsx
+export const contextMenuSizes = ['m', 'xs', 's', 'l'] as const;
+export type ContextMenuPropSize = typeof contextMenuSizes[number];
+export const contextMenuDefaultSize: ContextMenuPropSize = contextMenuSizes[0];
+
+export const contextMenuStatus = ['alert', 'success', 'warning'] as const;
+export type ContextMenuStatus = typeof contextMenuStatus[number];
+export const contextMenuDefaultStatus: ContextMenuStatus = contextMenuStatus[0];
+
+export type ContextMenuPropSide = string | React.ReactNode | undefined;
+
+export const contextMenuPropSubMenuDirections = [
+  'rightStartUp',
+  'rightStartDown',
+  'leftStartUp',
+  'leftStartDown',
+] as const;
+export type ContextMenuPropSubMenuDirection = typeof contextMenuPropSubMenuDirections[number];
+export const contextMenuPropDefaultSubMenuDirection: ContextMenuPropSubMenuDirection =
+  contextMenuPropSubMenuDirections[0];
+
+type ContextMenuGroupDefault = {
+  label?: string;
+  id: number;
+};
+
+type ContextMenuItemDefault = {
+  label: string | number;
+  key?: string | number;
+  rightSide?: ContextMenuPropSide;
+  rightIcon?: IconComponent;
+  leftSide?: ContextMenuPropSide;
+  leftIcon?: IconComponent;
+  subMenu?: ContextMenuItemDefault[];
+  status?: ContextMenuStatus;
+  disabled?: boolean;
+  groupId?: number;
+  onClick?: ContextMenuPropOnClick<ContextMenuItemDefault>;
+  as?: keyof JSX.IntrinsicElements;
+  attributes?: JSX.IntrinsicElements[keyof JSX.IntrinsicElements];
+};
+
+type Direction =
+  | 'downCenter'
+  | 'upCenter'
+  | 'downRight'
+  | 'downLeft'
+  | 'upRight'
+  | 'upLeft'
+  | 'leftUp'
+  | 'leftCenter'
+  | 'leftDown'
+  | 'rightUp'
+  | 'rightCenter'
+  | 'rightDown'
+  | 'downStartLeft'
+  | 'upStartLeft'
+  | 'downStartRight'
+  | 'upStartRight'
+  | 'leftStartUp'’
+  | 'leftStartDown'
+  | 'rightStartUp'
+  | 'rightStartDown';
+```
+
+| Свойство                                                       | Тип                                                                                                                 | По умолчанию     | Описание                                                                                                                                                                     |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`items`](#содержимое)                                         | `ITEM[]`                                                                                                            | -                | Элементы меню                                                                                                                                                                |
+| [`groups`](#группы-пунктов-меню)                               | `GROUP[]`                                                                                                           | -                | Группы пунктов меню                                                                                                                                                          |
+| `anchorRef`                                                    | `React.RefObject<HTMLElement>`                                                                                      | -                | Элемент, относительно которого будет позиционироваться меню, см. [Popover](##LIBS.STAND\|stand:uikit-components-popover-stable)                               |
+| `isOpen?`                                                      | `boolean`                                                                                                           | -                | Показывает, нужно раскрывать меню или нет                                                                                                                                    |
+| `position`                                                     | `{ x: number; y: number }, undefined`                                                                               | -                | Координаты точки, к которой прикрепляется меню (обязательны, если не заполнено anchorRef), см. [Popover](##LIBS.STAND\|stand:uikit-components-popover-stable) |
+| `direction?`                                                   | [`Direction`](#свойства)                                                                                            | -                | Основное направление для разворачивания меню, см. [Popover](##LIBS.STAND\|stand:uikit-components-popover-stable)                                              |
+| `possibleDirections?`                                          | [`Direction`](#свойства)                                                                                            | -                | Дополнительные направления, в которые может разворачиваться меню, см. [Popover](##LIBS.STAND\|stand:uikit-components-popover-stable)                          |
+| `offset?`                                                      | `PopoverPropOffset`                                                                                                 | -                | Отступ от якоря или позиции, см. [Popover](##LIBS.STAND\|stand:uikit-components-popover-stable)                                                               |
+| [`subMenuDirection?`](#второй-уровень-меню)                    | [`SubMenuDirection`](#свойства)                                                                                     | `'rightStartUp'` | Позиция, в которую будет изначально разворачиваться меню второго уровня                                                                                                      |
+| [`size?`](#размер-меню)                                        | `'xs'\|'m'\|'s'\|'l'`                                      | `'m'`            | Размер контекстного меню                                                                                                                                                     |
+| `getItemKey?`                                                  | `(item: ITEM) => string\|number\|undefined`                                   | -                | Результат функции используется в качестве уникального ключа для пункта меню                                                                                                  |
+| [`getItemLabel`](#текст-пункта)                                | `(item: ITEM) => string`                                                                                            | -                | Результат функции используется в качестве названия пункта меню. Если не указано свойство `getItemKey`, то используется в качестве уникального ключа пункта меню              |
+| [`getItemSubItems?`](#второй-уровень-меню)                     | `(item: ITEM) => ITEM[]\|undefined`                                                              | -                | Результат функции используется как пункты меню второго уровня                                                                                                                |
+| [`getItemStatus?`](#статус-пунка-меню)                         | `(item: ITEM) => 'alert'\|'warning'\|'success'\|undefined` | -                | Результат функции используется как статус пункта меню                                                                                                                        |
+| `getItemOnClick?`                                              | `(item: ITEM) => React.EventHandler<React.MouseEvent<HTMLDivElement>>\|undefined`                | -                | Действие по клику на пункт меню                                                                                                                                              |
+| `getItemAs?`                                                   | `(item: ITEM) => keyof JSX.IntrinsicElements\|undefined`                                         | -                | Результат функции возвращает то, каким образом будет отрисовываться пункт меню                                                                                               |
+| `getItemAttributes?`                                           | `(item: ITEM) => JSX.IntrinsicElements[keyof JSX.IntrinsicElements]\|undefined`                  | -                | Результат функции возвращает HTML-атрибуты, которые используются в пункте меню                                                                                               |
+| `getItemGroupId?`                                              | `(item: ITEM) => number\|undefined`                                                              | -                | Результат функции возвращает идентификатор группы, к которой относится пункт меню                                                                                            |
+| [`getItemDisabled?`](#заблокировать-пункт-меню)                | `(item: ITEM) => boolean\|undefined`                                                             | -                | Функция, которая блокирует пункт меню. При значении `false` события пункта меню отключаются                                                                                  |
+| [`getItemLeftIcon?`](#иконка)                                  | `(item: ITEM) => IconComponent\|undefined`                                                       | -                | Результат функции будет использоваться как иконка слева от названия пункта меню                                                                                              |
+| [`getItemRightIcon?`](#иконка)                                 | `(item: ITEM) => IconComponent\|undefined`                                                       | -                | Результат функции будет использоваться как иконка справа от названия пункта меню                                                                                             |
+| [`getItemLeftSide?`](#добавить-дополнительные-элементы)        | `(item: ITEM) => React.ReactNode\|undefined`                                                     | -                | Результат функции будет использоваться как рендер слева от названия пункта меню                                                                                              |
+| [`getItemRightSide?`](#добавить-дополнительные-элементы)       | `(item: ITEM) => React.ReactNode\|undefined`                                                     | -                | Результат функции будет использоваться как рендер справа от названия пункта меню                                                                                             |
+| [`onClickOutside?`](#закрыть-меню-по-клику-по-внешней-области) | `(event: MouseEvent) => void;`                                                                                      | -                | Действие по клику вне меню или вне элемента, привязанного к `anchorRef`                                                                                                      |
+| [`getGroupId?`](#группы-пунктов-меню)                          | `(group: GROUP) => number`                                                                                          | -                | Результат функции используется в качестве ключа группы                                                                                                                       |
+| [`getGroupLabel?`](#группы-пунктов-меню)                       | `(group: GROUP) => string\|undefined`                                                            | -                | Результат функции используется как заголовок группы                                                                                                                          |
+| [`sortGroup?`](#группы-пунктов-меню)                           | `(a: string, number; b: string, number) => number;`                                                                 | -                | Функция сортировки групп                                                                                                                                                     |
+| `className?`                                                   | `string`                                                                                                            | -                | Дополнительный CSS-класс для каждого уровня меню                                                                                                                             |
+
+## Пример
+
+<ContextMenuExampleDefault />
+
+```tsx
+export const groups = [
+  {
+    label: 'Первая группа',
+    id: 1,
+  },
+  {
+    label: 'Вторая группа',
+    id: 2,
+  },
+];
+
+export const exampleItems = [
+  {
+    label: 'Скрепка',
+    leftIcon: IconAttach,
+    status: 'success',
+    groupId: 1,
+    subMenu: [
+      {
+        label: 'Пункт - 1',
+        status: 'success',
+      },
+      {
+        label: 'Пункт - 2',
+        status: 'success',
+        subMenu: [
+          {
+            label: 'Пункт - 3',
+            leftIcon: IconSun,
+            subMenu: [
+              {
+                label: 'Пункт - 5',
+              },
+              {
+                label: 'Пункт - 6',
+              },
+            ],
+          },
+          {
+            label: 'Пункт - 4',
+            leftIcon: IconSun,
+            subMenu: [
+              {
+                label: 'Пункт - 7',
+              },
+              {
+                label: 'Пункт - 8',
+              },
+            ],
+          },
+          {
+            label: 'Пункт - 9',
+            leftIcon: IconSun,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Глаз',
+    leftIcon: IconEye,
+    groupId: 1,
+  },
+  {
+    label: 'Две галочки',
+    groupId: 2,
+    leftIcon: IconAllDone,
+    rightSide: '!',
+    status: 'alert',
+  },
+  {
+    label: 'Чемодан',
+    groupId: 2,
+    leftIcon: IconBag,
+    rightSide: '!',
+    status: 'alert',
+  },
+  {
+    label: 'Солнце',
+    groupId: 2,
+    leftIcon: IconSun,
+    status: 'alert',
+    rightSide: '!',
+    disabled: true,
+  },
+];
+
+export const ContextMenuExampleDefault = () => {
+  const ref = useRef(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  return (
+    <>
+      <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+      <ContextMenu
+        isOpen={isOpen}
+        items={exampleItems}
+        groups={groups}
+        anchorRef={ref}
+        onClickOutside={() => setIsOpen(false)}
+        direction="downStartLeft"
+      />
+    </>
+  );
+};
+```
