@@ -4,7 +4,7 @@ import image from './Steps.image.svg';
 
 export default createStand({
   title: 'Steps',
-  id: 'StepsDeprecated',
+  id: 'Steps',
   group: 'components',
   image,
   description: 'Шаги.',
