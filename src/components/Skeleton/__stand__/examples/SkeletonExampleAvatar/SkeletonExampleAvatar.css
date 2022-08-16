@@ -1,0 +1,12 @@
+.SkeletonExampleAvatar {
+  display: flex;
+  width: 150px;
+
+  &-Avatar {
+    flex-shrink: 0;
+  }
+
+  &-Text {
+    margin-left: var(--space-s);
+  }
+}
