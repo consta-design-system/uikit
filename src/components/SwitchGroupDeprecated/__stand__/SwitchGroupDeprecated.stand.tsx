@@ -4,7 +4,7 @@ import image from './SwitchGroup.image.svg';
 
 export default createStand({
   title: 'SwitchGroup',
-  id: 'SwitchGroupDeprecated',
+  id: 'SwitchGroup',
   group: 'components',
   image,
   description: 'Группа переключателей',
