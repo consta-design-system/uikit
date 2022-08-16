@@ -4,7 +4,7 @@ import image from './RadioGroup.image.svg';
 
 export default createStand({
   title: 'RadioGroup',
-  id: 'RadioGroupDeprecated',
+  id: 'RadioGroup',
   group: 'components',
   image,
   description: 'Группа радиокнопок.',
