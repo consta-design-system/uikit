@@ -5,25 +5,23 @@ import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExamp
 import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Checkbox } from '../../../Checkbox';
 
-const emptyFunction = () => {};
-
-export const CheckboxExampleAlign = () => (
+export const CheckboxExampleView = () => (
   <StoryBookExample
     className={cnDocsDecorator('Section', [
       wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
     ])}
   >
     <Checkbox
-      align="center"
+      view="primary"
       checked
-      label="Длинный текст для чекбокса с выравниванием по центру, здесь несколько строк"
-      onChange={emptyFunction}
+      label="Акцентный чекбокс"
+      onChange={() => console.log('onChange')}
     />
     <Checkbox
-      align="top"
+      view="ghost"
       checked
-      label="Длинный текст для чекбокса с выравниванием по верху, здесь несколько строк"
-      onChange={emptyFunction}
+      label="Второстепенный чекбокс"
+      onChange={() => console.log('onChange')}
     />
   </StoryBookExample>
 );
