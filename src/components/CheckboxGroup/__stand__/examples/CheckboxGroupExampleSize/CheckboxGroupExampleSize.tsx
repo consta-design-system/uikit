@@ -7,7 +7,6 @@ import { CheckboxGroup } from '../../../CheckboxGroup';
 
 export const CheckboxGroupExampleSize = () => {
   const [value, setValue] = React.useState<Item[] | null>(null);
-
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <CheckboxGroup

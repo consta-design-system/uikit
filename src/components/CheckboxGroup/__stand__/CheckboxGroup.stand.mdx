@@ -1,0 +1,57 @@
+import { MdxMenu } from '@consta/stand';
+
+import {
+  CheckboxGroupExampleName,
+  CheckboxGroupExampleHead,
+  CheckboxExampleGroupHead3,
+  CheckboxGroupExampleNeg,
+  CheckboxGroupExampleGeneral,
+} from './examples/CheckboxGroupExampleName/CheckboxGroupExampleName';
+
+Группа чекбоксов, объединённых одним `name`. Пользователь может выбрать несколько вариантов из списка.
+
+Если пользователю нужно выбрать только один вариант из списка, лучше использовать [RadioGroup](##LIBS.STAND|stand:uikit-components-radiogroup-stable).
+
+Если нужен только один чекбокс, можно использовать [Checkbox](##LIBS.STAND|stand:uikit-components-checkbox-stable)
+
+<MdxMenu>
+
+- [Название чекбокса](#название-чекбокса)
+- [Содержимое](##LIBS.STAND.DEV|stand:uikit-components-checkbox-stable|hash:содержимое)
+- [Неактивный чекбокс](##LIBS.STAND.DEV|stand:uikit-components-checkbox-stable|hash:неактивный-чекбокс)
+- [Расположение чекбоксов](##LIBS.STAND.DEV|stand:uikit-components-checkbox-stable|hash:расположение-чекбоксов)
+- [Неактивная группа чекбоксов](##LIBS.STAND.DEV|stand:uikit-components-checkbox-stable|hash:неактивная-группа-чекбоксов)
+- [Размер](##LIBS.STAND.DEV|stand:uikit-components-checkbox-stable|hash:размер)
+- [Внешний вид](##LIBS.STAND.DEV|stand:uikit-components-checkbox-stable|hash:внешний-вид)
+- [Импорт](##LIBS.STAND.DEV|stand:uikit-components-checkbox-stable|hash:импорт)
+- [Список свойств](##LIBS.STAND.DEV|stand:uikit-components-checkbox-stable|hash:свойства)
+
+</MdxMenu>
+
+## Название чекбокса
+
+Надпись рядом с чекбоксом можно получить с помощью функции `getItemLabel` или указав в объектах списка поле `label`. Лучше писать название с заглавной буквы, точка не нужна.
+
+### Согласуйте с заголовком
+
+Это просто лучше читается. Сравните:
+
+<CheckboxGroupExampleHead />
+
+Если не нравится, что пункты начинаются с предлогов, поменяйте заголовок.
+
+<CheckboxExampleGroupHead3 />
+
+### Не используйте отрицания
+
+Чтобы не путать пользователя. Когда выбран чекбокс, рядом с которым написано **Не хочу**,
+приходится мысленно решать равенство:`не + не + хочу = хочу`.
+
+<CheckboxGroupExampleNeg />
+
+### Не обобщайте
+
+Если хотите дать пользователю возможность отметить все элементы в списке
+или, наоборот, удалить все отметки, сделайте это другим способом.
+
+<CheckboxGroupExampleGeneral />
