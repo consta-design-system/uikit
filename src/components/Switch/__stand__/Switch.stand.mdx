@@ -1,4 +1,10 @@
 import { MdxMenu } from '@consta/stand';
+import {
+  SwitchExampleNameEnable,
+  SwitchExampleNameVerb,
+  SwitchExampleNameNoVerb,
+} from './examples/SwitchExampleName/SwitchExampleName';
+import { SwitchExampleView } from './examples/SwitchExampleView/SwitchExampleView';
 
 Переключатель с двумя положениями: **включено** и **выключено**. Нужен, чтобы переключать
 режимы — мгновенно, сразу после того, как пользователь меняет положение переключателя.
@@ -16,7 +22,7 @@ import { MdxMenu } from '@consta/stand';
 
 </MdxMenu>
 
-`<красивый интерактивный пример />`
+<SwitchExampleView />
 
 ## Название
 
@@ -37,12 +43,12 @@ import { MdxMenu } from '@consta/stand';
 а переключатель отвечает на него только **да** и **нет**. Если получившийся
 диалог правильно описывает то, что происходит в интерфейсе, значит, всё в порядке.
 
-`<SwitchExampleNameVerb />`
+<SwitchExampleNameVerb />
 
 > Глагол **включить** лучше не использовать (даже если очень хочется). Потому что
 > с этим глаголом сложно понять, что будет, если нажать на активный переключатель.
 
-`<SwitchExampleNameEnable />`
+<SwitchExampleNameEnable />
 
 ### Без глагола
 
@@ -56,4 +62,4 @@ import { MdxMenu } from '@consta/stand';
   <Switch label="Автоматическая трансформация" />
 ```
 
-`<SwitchExampleNameNoVerb />`
+<SwitchExampleNameNoVerb />
