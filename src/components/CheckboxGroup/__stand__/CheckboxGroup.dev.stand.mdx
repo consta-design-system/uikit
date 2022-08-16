@@ -3,16 +3,29 @@ import { MdxMenu } from '@consta/stand';
 import {
   CheckboxGroupExampleColumn,
   CheckboxGroupExampleRow,
-} from '../__stories__/examples/CheckboxGroupExampleDirection/CheckboxGroupExampleDirection';
-import { CheckboxGroupExampleSize } from '../__stories__/examples/CheckboxGroupExampleSize/CheckboxGroupExampleSize';
-import { CheckboxGroupExampleDisabled } from '../__stories__/examples/CheckboxGroupExampleDisabled/CheckboxGroupExampleDisabled';
-import { CheckboxGroupExampleView } from '../__stories__/examples/CheckboxGroupExampleView/CheckboxGroupExampleView';
+} from './examples/CheckboxGroupExampleDirection/CheckboxGroupExampleDirection';
+import { CheckboxGroupExampleSize } from './examples/CheckboxGroupExampleSize/CheckboxGroupExampleSize';
+import { CheckboxGroupExampleDisabled } from './examples/CheckboxGroupExampleDisabled/CheckboxGroupExampleDisabled';
+import { CheckboxGroupExampleView } from './examples/CheckboxGroupExampleView/CheckboxGroupExampleView';
+import {
+  CheckboxGroupExampleName,
+  CheckboxGroupExampleHead,
+  CheckboxExampleGroupHead3,
+  CheckboxGroupExampleNeg,
+  CheckboxGroupExampleGeneral,
+} from './examples/CheckboxGroupExampleName/CheckboxGroupExampleName';
 
 <MdxMenu>
-  - [Содержимое](#содержимое) - [Неактивный чекбокс](#неактивный-чекбокс) -
-  [Расположение чекбоксов](#расположение-чекбоксов) - [Неактивная группа
-  чекбоксов](#неактивная-группа-чекбоксов) - [Размер](#размер) - [Внешний
-  вид](#внешний-вид) - [Импорт](#импорт) - [Список свойств](#свойства)
+
+- [Содержимое](#содержимое)
+- [Расположение чекбоксов](#расположение-чекбоксов)
+- [Неактивный чекбокс](#неактивный-чекбокс)
+- [Неактивная группа чекбоксов](#неактивная-группа-чекбоксов)
+- [Размер](#размер)
+- [Внешний вид](#внешний-вид)
+- [Импорт](#импорт)
+- [Список свойств](#свойства)
+
 </MdxMenu>
 
 ```tsx
@@ -45,11 +58,10 @@ return (
   />
 ```
 
-`<CheckboxGroupExampleName />`
+<CheckboxGroupExampleName />
 
-## Неактивный чекбокс
+Надпись рядом с чекбоксом —  его название — можно получить с помощью функции `getItemLabel` или указав в объекте списка поле `label`. 
 
-Один или несколько чекбоксов можно сделать неактивными — если вы не хотите, чтобы их выбирали. За неактивность отвечает функция `getItemDisabled` или поле `disabled` в элементе списка.
 
 ## Расположение чекбоксов
 
@@ -59,6 +71,8 @@ return (
 - `row` — на одной строке.
 
 **Чекбоксы в столбик**
+
+<CheckboxGroupExampleColumn />
 
 ```tsx
 type Item = {
@@ -90,9 +104,9 @@ function CheckboxGroupExampleRow() {
 }
 ```
 
-`<CheckboxGroupExampleColumn />`
-
 **Чекбоксы в строчку**
+
+<CheckboxGroupExampleRow />
 
 ```tsx
 type Item = {
@@ -124,11 +138,15 @@ function CheckboxGroupExampleRow() {
 }
 ```
 
-`<CheckboxGroupExampleRow />`
+## Неактивный чекбокс
+
+Один или несколько чекбоксов можно сделать неактивными — если вы не хотите, чтобы их выбирали. За неактивность отвечает функция `getItemDisabled` или поле `disabled` [в элементе списка](#содержимое).
 
 ## Неактивная группа чекбоксов
 
 Чтобы сделать группу чекбоксов неактивной, добавьте `disabled`.
+
+<CheckboxGroupExampleDisabled />
 
 ```tsx
 type Item = {
@@ -161,11 +179,11 @@ function CheckboxGroupExampleDisabled() {
 }
 ```
 
-`<CheckboxGroupExampleDisabled />`
-
 ## Размер
 
 За размер отвечает свойство `size`. Варианты: `'m'`, `'l'`, по умолчанию: `'m'`.
+
+<CheckboxGroupExampleSize />
 
 ```tsx
 type Item = {
@@ -211,11 +229,11 @@ function CheckboxGroupExampleSize() {
 }
 ```
 
-`<CheckboxGroupExampleSize />`
-
 ## Внешний вид
 
 Всего в дизайн-системе два вида групп чекбоксов: `primary` и `ghost`. За это отвечает свойство `view`.
+
+<CheckboxGroupExampleView />
 
 ```tsx
 type Item = {
@@ -267,8 +285,6 @@ function CheckboxGroupExampleView() {
 }
 ```
 
-`<CheckboxGroupExampleView />`
-
 ## Импорт
 
 ```tsx
@@ -283,10 +299,7 @@ export type CheckboxGroupDefaultItem = {
   disabled?: boolean;
 };
 
-type OnChange = (props: {
-  e: React.ChangeEvent<HTMLInputElement>;
-  value: ITEM[] | null;
-}) => void;
+type OnChange = (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM[] | null }) => void;
 ```
 
 | Свойство                                  | Тип                       | По умолчанию | Описание                                                                                                |
