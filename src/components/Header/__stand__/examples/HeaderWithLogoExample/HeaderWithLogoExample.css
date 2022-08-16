@@ -1,0 +1,26 @@
+.HeaderWithLogoExample {
+  margin-bottom: var(--space-3xl);
+
+  &-Login {
+    cursor: pointer;
+
+    &_isLogged {
+      padding: 0;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  & .HeaderMenu {
+    &-Link {
+      line-height: var(--header-height);
+    }
+
+    &-List {
+      margin-bottom: 0;
+      padding-left: 0;
+    }
+  }
+}
