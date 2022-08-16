@@ -1,9 +1,9 @@
 import React from 'react';
 
+import { OwnItem, ownItems } from '../../../__mocks__/mock.data';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Badge } from '../../../../Badge/Badge';
-import { OwnItem, ownItems } from '../../../__mocks__/mock.data';
 import { CollapseGroup } from '../../../CollapseGroup';
 
 const getItemLabel = (item: OwnItem) => item.title;
