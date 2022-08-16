@@ -1,6 +1,6 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './Button.image.svg';
+import image from './RadioGroup.image.svg';
 
 export default createStand({
   title: 'RadioGroup',
