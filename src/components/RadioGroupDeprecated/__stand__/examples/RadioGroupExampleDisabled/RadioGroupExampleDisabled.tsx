@@ -3,7 +3,7 @@ import React from 'react';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Item, items, simpleItems } from '../../../__mocks__/data.mock';
-import { RadioGroup } from '../../../RadioGroup';
+import { RadioGroup } from '../../../RadioGroupDeprecated';
 
 export function RadioGroupExampleDisabled() {
   const [value, setValue] = React.useState<string | null>(simpleItems[0]);

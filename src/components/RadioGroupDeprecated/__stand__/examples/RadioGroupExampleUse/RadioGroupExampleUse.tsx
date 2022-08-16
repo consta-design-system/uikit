@@ -4,7 +4,7 @@ import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/D
 import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
-import { RadioGroup } from '../../../RadioGroup';
+import { RadioGroup } from '../../../RadioGroupDeprecated';
 
 const itemsOne = ['Только ночью'];
 
