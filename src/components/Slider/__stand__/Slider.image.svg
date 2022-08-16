@@ -1,0 +1,54 @@
+<svg width="200" height="120" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path
+    d="M0 4C0 1.79086 1.79086 0 4 0H196C198.209 0 200 1.79086 200 4V116C200 118.209 198.209 120 196 120H4C1.79086 120 0 118.209 0 116V4Z"
+    fill="white"
+  />
+  <rect
+    width="158"
+    height="2.00018"
+    rx="1.00009"
+    transform="matrix(1 0 -0.0117399 0.999931 21 80)"
+    fill="#004166"
+    fill-opacity="0.2"
+  />
+  <rect
+    width="158"
+    height="2.00018"
+    rx="1.00009"
+    transform="matrix(1 0 -0.0117399 0.999931 21.0234 41)"
+    fill="#004166"
+    fill-opacity="0.2"
+  />
+  <rect
+    width="42.616"
+    height="2"
+    transform="matrix(1 0 -0.0117399 0.999931 77.4075 80)"
+    fill="#0078D2"
+  />
+  <g clip-path="url(#clip0_1910_15933)">
+    <rect
+      width="74.6857"
+      height="2"
+      transform="matrix(1 0 -0.0117399 0.999931 21.047 41)"
+      fill="#0078D2"
+    />
+  </g>
+  <ellipse cx="74.5" cy="81.5" rx="5.5" ry="5.5" transform="rotate(-90 74.5 81.5)" fill="#0078D2" />
+  <ellipse
+    cx="122.5"
+    cy="81.5"
+    rx="5.5"
+    ry="5.5"
+    transform="rotate(-90 122.5 81.5)"
+    fill="#0078D2"
+  />
+  <ellipse cx="97.5" cy="42.5" rx="5.5" ry="5.5" transform="rotate(-90 97.5 42.5)" fill="#0078D2" />
+  <defs>
+    <clipPath id="clip0_1910_15933">
+      <path
+        d="M21.0353 41.9999C21.0417 41.4477 21.4947 41 22.047 41H94.7327C95.285 41 95.7275 41.4477 95.721 41.9999C95.7145 42.5522 95.2615 42.9999 94.7093 42.9999H22.0235C21.4712 42.9999 21.0288 42.5522 21.0353 41.9999Z"
+        fill="white"
+      />
+    </clipPath>
+  </defs>
+</svg>
