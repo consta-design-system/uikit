@@ -3,16 +3,22 @@ import { MdxMenu } from '@consta/stand';
 import {
   CheckboxGroupExampleColumn,
   CheckboxGroupExampleRow,
-} from '../__stories__/examples/CheckboxGroupExampleDirection/CheckboxGroupExampleDirection';
-import { CheckboxGroupExampleSize } from '../__stories__/examples/CheckboxGroupExampleSize/CheckboxGroupExampleSize';
-import { CheckboxGroupExampleDisabled } from '../__stories__/examples/CheckboxGroupExampleDisabled/CheckboxGroupExampleDisabled';
-import { CheckboxGroupExampleView } from '../__stories__/examples/CheckboxGroupExampleView/CheckboxGroupExampleView';
+} from './examples/CheckboxGroupExampleDirection/CheckboxGroupExampleDirection';
+import { CheckboxGroupExampleSize } from './examples/CheckboxGroupExampleSize/CheckboxGroupExampleSize';
+import { CheckboxGroupExampleDisabled } from './examples/CheckboxGroupExampleDisabled/CheckboxGroupExampleDisabled';
+import { CheckboxGroupExampleView } from './examples/CheckboxGroupExampleView/CheckboxGroupExampleView';
+import { CheckboxGroupExampleName } from './examples/CheckboxGroupExampleName/CheckboxGroupExampleName';
 
 <MdxMenu>
-  - [Содержимое](#содержимое) - [Неактивный чекбокс](#неактивный-чекбокс) -
-  [Расположение чекбоксов](#расположение-чекбоксов) - [Неактивная группа
-  чекбоксов](#неактивная-группа-чекбоксов) - [Размер](#размер) - [Внешний
-  вид](#внешний-вид) - [Импорт](#импорт) - [Список свойств](#свойства)
+
+- [Содержимое](#содержимое)
+- [Неактивный чекбокс](#неактивный-чекбокс)
+- [Расположение чекбоксов](#расположение-чекбоксов)
+- [Неактивная группа чекбоксов](#неактивная-группа-чекбоксов)
+- [Размер](#размер) - [Внешний вид](#внешний-вид)
+- [Импорт](#импорт)
+- [Список свойств](#свойства)
+
 </MdxMenu>
 
 ```tsx
@@ -45,7 +51,7 @@ return (
   />
 ```
 
-`<CheckboxGroupExampleName />`
+<CheckboxGroupExampleName />
 
 ## Неактивный чекбокс
 
@@ -90,7 +96,7 @@ function CheckboxGroupExampleRow() {
 }
 ```
 
-`<CheckboxGroupExampleColumn />`
+<CheckboxGroupExampleColumn />
 
 **Чекбоксы в строчку**
 
@@ -124,7 +130,7 @@ function CheckboxGroupExampleRow() {
 }
 ```
 
-`<CheckboxGroupExampleRow />`
+<CheckboxGroupExampleRow />
 
 ## Неактивная группа чекбоксов
 
@@ -161,7 +167,7 @@ function CheckboxGroupExampleDisabled() {
 }
 ```
 
-`<CheckboxGroupExampleDisabled />`
+<CheckboxGroupExampleDisabled />
 
 ## Размер
 
@@ -211,7 +217,7 @@ function CheckboxGroupExampleSize() {
 }
 ```
 
-`<CheckboxGroupExampleSize />`
+<CheckboxGroupExampleSize />
 
 ## Внешний вид
 
@@ -267,7 +273,7 @@ function CheckboxGroupExampleView() {
 }
 ```
 
-`<CheckboxGroupExampleView />`
+<CheckboxGroupExampleView />
 
 ## Импорт
 
@@ -278,7 +284,7 @@ import { CheckboxGroup } from '@consta/uikit/CheckboxGroup';
 ## Свойства
 
 ```tsx
-export type CheckboxGroupDefaultItem = {
+type CheckboxGroupDefaultItem = {
   label: string;
   disabled?: boolean;
 };

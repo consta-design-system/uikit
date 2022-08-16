@@ -6,7 +6,7 @@ import {
   CheckboxExampleGroupHead3,
   CheckboxGroupExampleNeg,
   CheckboxGroupExampleGeneral,
-} from '../__stories__/examples/CheckboxGroupExampleName/CheckboxGroupExampleName';
+} from './examples/CheckboxGroupExampleName/CheckboxGroupExampleName';
 
 Группа чекбоксов, объединённых одним `name`. Пользователь может выбрать несколько вариантов из списка.
 
@@ -15,22 +15,17 @@ import {
 Если нужен только один чекбокс, можно использовать [Checkbox](##LIBS.STAND|stand:uikit-components-checkbox-stable)
 
 <MdxMenu>
-  - [Название чекбокса](#название-чекбокса) -
-  [Содержимое](##LIBS.STAND.DEV|stand:uikit-components-checkbox-stable|hash:содержимое)
-  - [Неактивный
-  чекбокс](##LIBS.STAND.DEV|stand:uikit-components-checkbox-stable|hash:неактивный-чекбокс)
-  - [Расположение
-  чекбоксов](##LIBS.STAND.DEV|stand:uikit-components-checkbox-stable|hash:расположение-чекбоксов)
-  - [Неактивная группа
-  чекбоксов](##LIBS.STAND.DEV|stand:uikit-components-checkbox-stable|hash:неактивная-группа-чекбоксов)
-  -
-  [Размер](##LIBS.STAND.DEV|stand:uikit-components-checkbox-stable|hash:размер)
-  - [Внешний
-  вид](##LIBS.STAND.DEV|stand:uikit-components-checkbox-stable|hash:внешний-вид)
-  -
-  [Импорт](##LIBS.STAND.DEV|stand:uikit-components-checkbox-stable|hash:импорт)
-  - [Список
-  свойств](##LIBS.STAND.DEV|stand:uikit-components-checkbox-stable|hash:свойства)
+
+- [Название чекбокса](#название-чекбокса)
+- [Содержимое](##LIBS.STAND.DEV|stand:uikit-components-checkbox-stable|hash:содержимое)
+- [Неактивный чекбокс](##LIBS.STAND.DEV|stand:uikit-components-checkbox-stable|hash:неактивный-чекбокс)
+- [Расположение чекбоксов](##LIBS.STAND.DEV|stand:uikit-components-checkbox-stable|hash:расположение-чекбоксов)
+- [Неактивная группа чекбоксов](##LIBS.STAND.DEV|stand:uikit-components-checkbox-stable|hash:неактивная-группа-чекбоксов)
+- [Размер](##LIBS.STAND.DEV|stand:uikit-components-checkbox-stable|hash:размер)
+- [Внешний вид](##LIBS.STAND.DEV|stand:uikit-components-checkbox-stable|hash:внешний-вид)
+- [Импорт](##LIBS.STAND.DEV|stand:uikit-components-checkbox-stable|hash:импорт)
+- [Список свойств](##LIBS.STAND.DEV|stand:uikit-components-checkbox-stable|hash:свойства)
+
 </MdxMenu>
 
 ## Название чекбокса
@@ -41,22 +36,22 @@ import {
 
 Это просто лучше читается. Сравните:
 
-`<CheckboxGroupExampleHead />`
+<CheckboxGroupExampleHead />
 
 Если не нравится, что пункты начинаются с предлогов, поменяйте заголовок.
 
-`<CheckboxExampleGroupHead3 />`
+<CheckboxExampleGroupHead3 />
 
 ### Не используйте отрицания
 
 Чтобы не путать пользователя. Когда выбран чекбокс, рядом с которым написано **Не хочу**,
 приходится мысленно решать равенство:`не + не + хочу = хочу`.
 
-`<CheckboxGroupExampleNeg />`
+<CheckboxGroupExampleNeg />
 
 ### Не обобщайте
 
 Если хотите дать пользователю возможность отметить все элементы в списке
 или, наоборот, удалить все отметки, сделайте это другим способом.
 
-`<CheckboxGroupExampleGeneral />`
+<CheckboxGroupExampleGeneral />
