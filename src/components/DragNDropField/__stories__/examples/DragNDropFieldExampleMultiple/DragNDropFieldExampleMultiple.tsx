@@ -4,6 +4,7 @@ import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/D
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Text } from '../../../../Text/Text';
 import { DragNDropField } from '../../../DragNDropField';
+
 import imageFile from './images/too_many_files.png';
 
 export default {
@@ -18,10 +19,7 @@ const image = {
 export const DragNDropFieldExampleSingle = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
     <div>
-      <DragNDropField
-        multiple={false}
-        onDropFiles={(files) => console.log(files)}
-      >
+      <DragNDropField multiple={false} onDropFiles={(files) => console.log(files)}>
         <Text>Сюда можно перетащить только один файл</Text>
       </DragNDropField>
     </div>

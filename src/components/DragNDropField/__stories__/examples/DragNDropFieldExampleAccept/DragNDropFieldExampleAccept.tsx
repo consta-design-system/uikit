@@ -4,6 +4,7 @@ import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/D
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Text } from '../../../../Text/Text';
 import { DragNDropField } from '../../../DragNDropField';
+
 import imageFile from './images/wrong_file_format.png';
 
 export default {
@@ -18,10 +19,7 @@ const image = {
 export const DragNDropFieldExampleAcceptDoc = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
     <div>
-      <DragNDropField
-        accept={['.doc', '.docx']}
-        onDropFiles={(files) => console.log(files)}
-      >
+      <DragNDropField accept={['.doc', '.docx']} onDropFiles={(files) => console.log(files)}>
         <Text>Сюда можно перетаскивать только DOC и DOCX</Text>
         <Text view="ghost" font="mono">
           .doc, .docx
@@ -34,10 +32,7 @@ export const DragNDropFieldExampleAcceptDoc = () => (
 export const DragNDropFieldExampleAcceptImage = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
     <div>
-      <DragNDropField
-        accept="image/*"
-        onDropFiles={(files) => console.log(files)}
-      >
+      <DragNDropField accept="image/*" onDropFiles={(files) => console.log(files)}>
         <Text>Сюда можно перетаскивать только картинки,</Text>
         <Text>зато любые (ну почти)</Text>
         <Text view="ghost" font="mono">

@@ -10,10 +10,7 @@ export const DragNDropFieldExampleErrorMessages = () => {
       <DragNDropField
         onDropFiles={(files) => console.log(files)}
         maxSize={10}
-        locale={{
-          'file-too-large': ({ file }) =>
-            `Ой! Похоже ${file.name} слишком большой`,
-        }}
+        locale={{ 'file-too-large': ({ file }) => `Ой! Похоже ${file.name} слишком большой` }}
       />
     </StoryBookExample>
   );
