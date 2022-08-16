@@ -4,7 +4,7 @@ import image from './Tabs.image.svg';
 
 export default createStand({
   title: 'Tabs',
-  id: 'TabsDeprecated',
+  id: 'Tabs',
   group: 'components',
   image,
   description: 'Кнопка. Разные формы, цвета и размеры.',
