@@ -30,11 +30,9 @@ export function HeaderMenuExample() {
     <Header
       className={cnExample()}
       leftSide={
-        <>
-          <HeaderModule indent="l">
-            <HeaderMenu items={menuItems} />
-          </HeaderModule>
-        </>
+        <HeaderModule indent="l">
+          <HeaderMenu items={menuItems} />
+        </HeaderModule>
       }
     />
   );

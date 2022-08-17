@@ -1,4 +1,10 @@
-<svg width="200" height="120" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg
+  width="200"
+  height="120"
+  viewBox="0 0 200 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
   <path
     d="M0 4C0 1.79086 1.79086 0 4 0H196C198.209 0 200 1.79086 200 4V116C200 118.209 198.209 120 196 120H4C1.79086 120 0 118.209 0 116V4Z"
     fill="white"
@@ -12,7 +18,15 @@
     transform="rotate(90 164.5 52.5)"
     stroke="#0078D2"
   />
-  <rect x="160" y="57" width="6" height="6" rx="3" transform="rotate(90 160 57)" fill="#0078D2" />
+  <rect
+    x="160"
+    y="57"
+    width="6"
+    height="6"
+    rx="3"
+    transform="rotate(90 160 57)"
+    fill="#0078D2"
+  />
   <rect
     x="127"
     y="52"

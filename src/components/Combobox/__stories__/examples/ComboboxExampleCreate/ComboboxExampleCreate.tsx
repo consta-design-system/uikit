@@ -34,7 +34,9 @@ export function ComboboxExampleCreate() {
         items={list}
         value={value}
         onChange={({ value }) => setValue(value)}
-        onCreate={({ label }) => setList([{ label, id: `${label}_${list.length + 1}` }, ...list])}
+        onCreate={({ label }) =>
+          setList([{ label, id: `${label}_${list.length + 1}` }, ...list])
+        }
       />
     </StoryBookExample>
   );

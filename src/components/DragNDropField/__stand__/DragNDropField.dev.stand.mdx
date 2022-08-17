@@ -59,7 +59,10 @@ import { DragNDropField } from '@consta/uikit/DragNDropField';
 <DragNDropField>
   {({ openFileDialog }) => (
     <>
-      <Text>Пример с Render Props, открывает окно для выбора файла из дочернего блока</Text>
+      <Text>
+        Пример с Render Props, открывает окно для выбора файла из дочернего
+        блока
+      </Text>
       <br />
       <Button onClick={openFileDialog} label="Выбрать файл" />
     </>
@@ -239,7 +242,10 @@ export const DragNDropFieldExampleErrorMessages = () => {
     <DragNDropField
       onDropFiles={(files) => console.log(files)}
       maxSize={10}
-      locale={{ 'file-too-large': ({ file }) => `Ой! Похоже ${file.name} слишком большой` }}
+      locale={{
+        'file-too-large': ({ file }) =>
+          `Ой! Похоже ${file.name} слишком большой`,
+      }}
     />
   );
 };
@@ -258,14 +264,24 @@ import { DragNDropField } from '@consta/uikit/DragNDropField';
 ```tsx
 export type FileError = {
   message: string;
-  code: 'file-too-large' | 'file-too-small' | 'too-many-files' | 'file-invalid-type' | string;
+  code:
+    | 'file-too-large'
+    | 'file-too-small'
+    | 'too-many-files'
+    | 'file-invalid-type'
+    | string;
 };
 
 export type DragNDropFieldPropErrorMessages = Partial<
-  Record<FileError['code'], string | ((file: File | undefined, error?: FileError) => string)>
+  Record<
+    FileError['code'],
+    string | ((file: File | undefined, error?: FileError) => string)
+  >
 >;
 
-type LocaleError = string | ((props: { file: File; sizes: FileSizes }) => string);
+type LocaleError =
+  | string
+  | ((props: { file: File; sizes: FileSizes }) => string);
 type LocaleLabel = string | ((props: { fileText: string }) => string);
 
 export type Locale = {

@@ -101,7 +101,13 @@ const items: Item[] = [
 
 export function SelectExampleItems() {
   const [value, setValue] = useState<Item | null>();
-  return <Select items={items} value={value} onChange={({ value }) => setValue(value)} />;
+  return (
+    <Select
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
+  );
 }
 ```
 
@@ -734,7 +740,11 @@ export const items: Item[] = [
   { name: 'Десятый', group: 'Вторая группа' },
 ];
 
-export const groups: string[] = ['Первая группа', 'Вторая группа', 'Третья группа'];
+export const groups: string[] = [
+  'Первая группа',
+  'Вторая группа',
+  'Третья группа',
+];
 
 export function SelectExampleCustomTypesWithGroups() {
   const [value, setValue] = useState<Item | null>();
@@ -791,7 +801,9 @@ type PropRenderItem<ITEM = DefaultItem> = (props: {
   onMouseEnter: React.ReactEventHandler;
 }) => React.ReactElement | null;
 
-type PropRenderValue<ITEM> = (props: { item: ITEM }) => React.ReactElement | null;
+type PropRenderValue<ITEM> = (props: {
+  item: ITEM;
+}) => React.ReactElement | null;
 
 type PropGetItemLabel<ITEM> = (item: ITEM) => string;
 type PropGetItemKey<ITEM> = (item: ITEM) => string | number;

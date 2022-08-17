@@ -14,7 +14,10 @@ import {
   HeaderModule,
   HeaderSearchBar,
 } from '../../../Header';
-import { SearchBarPropOnChange, SearchBarPropOnSearch } from '../../../SearchBar/HeaderSearchBar';
+import {
+  SearchBarPropOnChange,
+  SearchBarPropOnSearch,
+} from '../../../SearchBar/HeaderSearchBar';
 
 const cnExample = cn('HeaderWithoutMenuExample');
 

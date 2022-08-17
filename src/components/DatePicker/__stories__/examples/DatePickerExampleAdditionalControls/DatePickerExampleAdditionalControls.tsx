@@ -4,7 +4,10 @@ import { Button } from '../../../../Button/Button';
 import { DatePicker, DatePickerPropValue } from '../../../DatePicker';
 
 export const DatePickerExampleAdditionalControls = () => {
-  const [value, setValue] = useState<DatePickerPropValue<'date-range'>>([undefined, undefined]);
+  const [value, setValue] = useState<DatePickerPropValue<'date-range'>>([
+    undefined,
+    undefined,
+  ]);
 
   const setCuarter = (date: Date) => {
     const year = date.getFullYear();

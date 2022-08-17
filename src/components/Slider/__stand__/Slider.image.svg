@@ -1,4 +1,10 @@
-<svg width="200" height="120" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg
+  width="200"
+  height="120"
+  viewBox="0 0 200 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
   <path
     d="M0 4C0 1.79086 1.79086 0 4 0H196C198.209 0 200 1.79086 200 4V116C200 118.209 198.209 120 196 120H4C1.79086 120 0 118.209 0 116V4Z"
     fill="white"
@@ -33,7 +39,14 @@
       fill="#0078D2"
     />
   </g>
-  <ellipse cx="74.5" cy="81.5" rx="5.5" ry="5.5" transform="rotate(-90 74.5 81.5)" fill="#0078D2" />
+  <ellipse
+    cx="74.5"
+    cy="81.5"
+    rx="5.5"
+    ry="5.5"
+    transform="rotate(-90 74.5 81.5)"
+    fill="#0078D2"
+  />
   <ellipse
     cx="122.5"
     cy="81.5"
@@ -42,7 +55,14 @@
     transform="rotate(-90 122.5 81.5)"
     fill="#0078D2"
   />
-  <ellipse cx="97.5" cy="42.5" rx="5.5" ry="5.5" transform="rotate(-90 97.5 42.5)" fill="#0078D2" />
+  <ellipse
+    cx="97.5"
+    cy="42.5"
+    rx="5.5"
+    ry="5.5"
+    transform="rotate(-90 97.5 42.5)"
+    fill="#0078D2"
+  />
   <defs>
     <clipPath id="clip0_1910_15933">
       <path

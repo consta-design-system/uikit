@@ -49,7 +49,11 @@ export const SliderExampleBasic = () => {
   const [value, setValue] = useState<number>(20);
 
   return (
-    <Slider label={`Значение ${value}`} onChange={({ value }) => setValue(value)} value={value} />
+    <Slider
+      label={`Значение ${value}`}
+      onChange={({ value }) => setValue(value)}
+      value={value}
+    />
   );
 };
 ```

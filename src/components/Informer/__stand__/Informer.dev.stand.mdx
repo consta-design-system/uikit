@@ -65,7 +65,6 @@ import { Informer } from '@consta/uikit/Informer';
 - заголовок задаётся свойством `title`,
 - основной текст — свойством `label`.
 
-
 ## Внешний вид
 
 ### Тип информера
@@ -90,7 +89,12 @@ import { Informer } from '@consta/uikit/Informer';
 Не стоит добавлять иконку в информер без заливки.
 
 ```tsx
-<Informer label="Сообщение отправлено" view="filled" status="success" icon={IconThumbUp} />
+<Informer
+  label="Сообщение отправлено"
+  view="filled"
+  status="success"
+  icon={IconThumbUp}
+/>
 ```
 
 <InformerExampleIcon />
@@ -145,6 +149,11 @@ import React from 'react';
 import { Informer } from '@consta/uikit/Informer';
 
 const App = () => {
-  return <Informer title="Всё хорошо" label="Уже сейчас всё хорошо, а будет ещё лучше" />;
+  return (
+    <Informer
+      title="Всё хорошо"
+      label="Уже сейчас всё хорошо, а будет ещё лучше"
+    />
+  );
 };
 ```

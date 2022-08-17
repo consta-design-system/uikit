@@ -9,7 +9,11 @@ export const DatePickerExampleWithClearButton = () => {
 
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <DatePicker value={value} onChange={({ value }) => setValue(value)} withClearButton />
+      <DatePicker
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        withClearButton
+      />
     </StoryBookExample>
   );
 };

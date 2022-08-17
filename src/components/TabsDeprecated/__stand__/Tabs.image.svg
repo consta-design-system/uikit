@@ -1,14 +1,42 @@
-<svg width="200" height="120" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg
+  width="200"
+  height="120"
+  viewBox="0 0 200 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
   <path
     d="M0 4C0 1.79086 1.79086 0 4 0H196C198.209 0 200 1.79086 200 4V116C200 118.209 198.209 120 196 120H4C1.79086 120 0 118.209 0 116V4Z"
     fill="white"
   />
   <rect x="67" y="56" width="65" height="4" fill="#0078D2" />
-  <rect x="17" y="58" width="50" height="2" fill="#004269" fill-opacity="0.28" />
-  <rect x="132" y="58" width="50" height="2" fill="#004269" fill-opacity="0.28" />
+  <rect
+    x="17"
+    y="58"
+    width="50"
+    height="2"
+    fill="#004269"
+    fill-opacity="0.28"
+  />
+  <rect
+    x="132"
+    y="58"
+    width="50"
+    height="2"
+    fill="#004269"
+    fill-opacity="0.28"
+  />
   <rect x="21" y="25" width="41" height="22" rx="4" fill="#DEE4E8" />
   <rect x="137" y="25" width="41" height="22" rx="4" fill="#DEE4E8" />
-  <rect x="72" y="25" width="54" height="22" rx="4" fill="#002033" fill-opacity="0.35" />
+  <rect
+    x="72"
+    y="25"
+    width="54"
+    height="22"
+    rx="4"
+    fill="#002033"
+    fill-opacity="0.35"
+  />
   <path
     d="M0 78H200V116C200 118.209 198.209 120 196 120H4C1.79086 120 0 118.209 0 116V78Z"
     fill="#004269"

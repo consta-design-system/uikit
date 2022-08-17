@@ -258,7 +258,11 @@ export const TabsExampleRenderItem = () => {
       getLabel={(item) => item}
       size="m"
       renderItem={({ label, checked, onChange }) => (
-        <button type="button" onClick={onChange} className={cnTabsTab({ checked })}>
+        <button
+          type="button"
+          onClick={onChange}
+          className={cnTabsTab({ checked })}
+        >
           <span style={{ marginRight: 4 }} role="img" aria-label="img">
             {checked ? '🤘' : '✋'}
           </span>
@@ -314,7 +318,11 @@ export const TabsExampleRenderItemBadge = () => {
       getLabel={(item) => item.text}
       size="m"
       renderItem={({ item, onChange, checked }) => (
-        <button type="button" onClick={onChange} className={cnTabsTab({ checked })}>
+        <button
+          type="button"
+          onClick={onChange}
+          className={cnTabsTab({ checked })}
+        >
           {item.text}
           <Badge
             status={item.badgeStatus}
@@ -340,7 +348,10 @@ import { Tabs } from '@consta/uikit/Tabs';
 ```ts
 type Item = unknown;
 
-type OnChange = (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM | null }) => void;
+type OnChange = (props: {
+  e: React.ChangeEvent<HTMLInputElement>;
+  value: ITEM | null;
+}) => void;
 
 type RenderItem<ITEM, ELEMENT> = (props: {
   item: ITEM;
@@ -392,5 +403,3 @@ export function App() {
   );
 }
 ```
-
-    

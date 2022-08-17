@@ -12,7 +12,13 @@ const cnGridExampleAlign = cn('GridExampleAlign');
 export function GridExampleAlign() {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <Grid className={cnGridExampleAlign()} cols="2" gap="xl" xAlign="center" yAlign="center">
+      <Grid
+        className={cnGridExampleAlign()}
+        cols="2"
+        gap="xl"
+        xAlign="center"
+        yAlign="center"
+      >
         <GridItem className={cnGridExampleAlign('Item')}>1</GridItem>
         <GridItem className={cnGridExampleAlign('Item')}>2</GridItem>
         <GridItem className={cnGridExampleAlign('Item')}>3</GridItem>

@@ -1,11 +1,45 @@
-<svg width="200" height="120" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg
+  width="200"
+  height="120"
+  viewBox="0 0 200 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
   <path
     d="M0 4C0 1.79086 1.79086 0 4 0H196C198.209 0 200 1.79086 200 4V116C200 118.209 198.209 120 196 120H4C1.79086 120 0 118.209 0 116V4Z"
     fill="white"
   />
-  <rect x="24" y="33" width="151" height="28" fill="#002033" fill-opacity="0.08" />
-  <rect x="24" y="71" width="151" height="11" fill="#002033" fill-opacity="0.08" />
-  <rect x="24" y="89" width="151" height="11" fill="#002033" fill-opacity="0.08" />
-  <rect x="1" y="1" width="198" height="18" fill="#004269" fill-opacity="0.07" />
+  <rect
+    x="24"
+    y="33"
+    width="151"
+    height="28"
+    fill="#002033"
+    fill-opacity="0.08"
+  />
+  <rect
+    x="24"
+    y="71"
+    width="151"
+    height="11"
+    fill="#002033"
+    fill-opacity="0.08"
+  />
+  <rect
+    x="24"
+    y="89"
+    width="151"
+    height="11"
+    fill="#002033"
+    fill-opacity="0.08"
+  />
+  <rect
+    x="1"
+    y="1"
+    width="198"
+    height="18"
+    fill="#004269"
+    fill-opacity="0.07"
+  />
   <rect x="66" y="95" width="67" height="14" fill="#0078D2" />
 </svg>

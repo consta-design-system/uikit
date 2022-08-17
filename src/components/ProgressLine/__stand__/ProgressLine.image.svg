@@ -1,4 +1,10 @@
-<svg width="200" height="120" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg
+  width="200"
+  height="120"
+  viewBox="0 0 200 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
   <rect width="200" height="120" rx="4" fill="#ECF1F4" />
   <g clip-path="url(#clip0_2423_26092)">
     <rect x="16" y="23" width="168" height="118" rx="4" fill="white" />
@@ -22,10 +28,38 @@
       stroke="#002033"
       stroke-opacity="0.08"
     />
-    <rect x="70" y="67" width="62" height="6" fill="#002033" fill-opacity="0.08" />
-    <rect x="70" y="105" width="62" height="6" fill="#002033" fill-opacity="0.08" />
-    <rect x="70" y="115" width="62" height="6" fill="#002033" fill-opacity="0.08" />
-    <rect x="70" y="77" width="62" height="24" fill="#002033" fill-opacity="0.08" />
+    <rect
+      x="70"
+      y="67"
+      width="62"
+      height="6"
+      fill="#002033"
+      fill-opacity="0.08"
+    />
+    <rect
+      x="70"
+      y="105"
+      width="62"
+      height="6"
+      fill="#002033"
+      fill-opacity="0.08"
+    />
+    <rect
+      x="70"
+      y="115"
+      width="62"
+      height="6"
+      fill="#002033"
+      fill-opacity="0.08"
+    />
+    <rect
+      x="70"
+      y="77"
+      width="62"
+      height="24"
+      fill="#002033"
+      fill-opacity="0.08"
+    />
     <circle cx="24" cy="31" r="2" fill="#DEE4E8" />
     <circle cx="30" cy="31" r="2" fill="#DEE4E8" />
     <circle cx="36" cy="31" r="2" fill="#DEE4E8" />

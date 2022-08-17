@@ -7,7 +7,8 @@ export default createStand({
   id: 'Informer',
   group: 'components',
   image,
-  description: 'Сообщение для пользователя. Встраивается в содержимое страницы.',
+  description:
+    'Сообщение для пользователя. Встраивается в содержимое страницы.',
   version: '4.0.0',
   status: 'stable',
   sandbox:

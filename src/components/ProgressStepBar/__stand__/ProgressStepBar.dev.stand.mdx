@@ -149,7 +149,12 @@ const StepContent = () => {
     <div>
       <IconDinosaur size="xs" view="secondary" />
       <Tag mode="button" onClick={() => console.log()} label="Черновик" />
-      <Tag mode="button" onClick={() => console.log()} label="" icon={IconSettings} />
+      <Tag
+        mode="button"
+        onClick={() => console.log()}
+        label=""
+        icon={IconSettings}
+      />
     </div>
   );
 };
@@ -282,11 +287,15 @@ type PropGetItemLabel<ITEM> = (item: ITEM) => string;
 type PropGetItemKey<ITEM> = (item: ITEM) => string | number;
 type PropGetItemTooltipContent<ITEM> = (item: ITEM) => string | undefined;
 type PropGetItemLineStatus<ITEM> = (item: ITEM) => PropStatus | undefined;
-type PropGetItemPoint<ITEM> = (item: ITEM) => PointNumbersMap | IconComponent | undefined;
+type PropGetItemPoint<ITEM> = (
+  item: ITEM,
+) => PointNumbersMap | IconComponent | undefined;
 type PropGetItemProgress<ITEM> = (item: ITEM) => boolean | undefined;
 type PropGetItemContent<ITEM> = (item: ITEM) => React.ReactNode | undefined;
 type PropGetItemStatus<ITEM> = (item: ITEM) => PropStatus | undefined;
-type PropGetItemOnClick<ITEM> = (item: ITEM) => React.EventHandler<React.MouseEvent> | undefined;
+type PropGetItemOnClick<ITEM> = (
+  item: ITEM,
+) => React.EventHandler<React.MouseEvent> | undefined;
 ```
 
 | Свойство                            | Тип или варианты значения                                              | По умолчанию                    | Описание                                                    |

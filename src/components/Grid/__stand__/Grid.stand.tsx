@@ -7,7 +7,8 @@ export default createStand({
   id: 'Grid',
   group: 'components',
   image,
-  description: 'Модульная сетка. Отвечает за расположение содержимого на странице.',
+  description:
+    'Модульная сетка. Отвечает за расположение содержимого на странице.',
   version: '4.0.0',
   status: 'stable',
   sandbox:

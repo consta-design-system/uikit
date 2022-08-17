@@ -19,7 +19,9 @@ const items: string[] = [
   'девять',
 ];
 
-const cnChoiceGroupExampleAdaptiveScroll = cn('ChoiceGroupExampleAdaptiveScroll');
+const cnChoiceGroupExampleAdaptiveScroll = cn(
+  'ChoiceGroupExampleAdaptiveScroll',
+);
 
 const getItemLabel = (item: string) => item;
 
@@ -43,7 +45,10 @@ const items2: string[] = ['один', 'два', 'три', 'четыре', 'пя�
 export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
   const { desktop } = useBreakpoints({ desktop: 800 });
   const [value, setValue] = useState(items2[0]);
-  const onChandge = useCallback(({ value }: { value: string }) => setValue(value), []);
+  const onChandge = useCallback(
+    ({ value }: { value: string }) => setValue(value),
+    [],
+  );
 
   if (desktop) {
     return (

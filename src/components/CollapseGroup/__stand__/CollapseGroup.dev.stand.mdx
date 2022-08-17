@@ -8,7 +8,6 @@ import { CollapseGroupExampleIsAccordion } from '../__stories__/examples/Collaps
 import { CollapseGroupExampleOwnType } from '../__stories__/examples/CollapseGroupExampleOwnType/CollapseGroupExampleOwnType';
 import { CollapseGroupExampleControl } from '../__stories__/examples/CollapseGroupExampleControl/CollapseGroupExampleControl';
 
-
 <MdxMenu>
 
 - [Содержимое](#заголовок)
@@ -90,8 +89,7 @@ type OwnItem = {
 const ownItems: OwnItem[] = [
   {
     title: 'Во-первых',
-    text:
-      'Здесь ошибка. Кажется, с этим пунктом что-то не так: например, пользователь неправильно заполнил форму или не ответил на какой-то вопрос.',
+    text: 'Здесь ошибка. Кажется, с этим пунктом что-то не так: например, пользователь неправильно заполнил форму или не ответил на какой-то вопрос.',
     status: 'error',
   },
   {
@@ -101,8 +99,7 @@ const ownItems: OwnItem[] = [
   },
   {
     title: 'В-третьих',
-    text:
-      'Это не пройдено. Нужно открыть и посмотреть, что здесь нужно прочитать, посмотреть или заполнить.',
+    text: 'Это не пройдено. Нужно открыть и посмотреть, что здесь нужно прочитать, посмотреть или заполнить.',
     status: 'system',
   },
 ];
@@ -206,38 +203,48 @@ type GetItemLabel<ITEM> = (item: ITEM) => string;
 
 type GetItemContent<ITEM> = (item: ITEM) => React.ReactNode;
 
-type GetItemRightSide<ITEM> = (item: ITEM) => React.ReactNode | React.ReactNode[] | undefined;
+type GetItemRightSide<ITEM> = (
+  item: ITEM,
+) => React.ReactNode | React.ReactNode[] | undefined;
 
 type OnOpen<IS_ACCORDION> = (params: {
   e: React.MouseEvent<HTMLDivElement, MouseEvent>;
   value: (IS_ACCORDION extends true ? number : number[]) | null;
 }) => void;
 
-type Opened<IS_ACCORDION> = (IS_ACCORDION extends true ? number : number[]) | null | undefined;
+type Opened<IS_ACCORDION> =
+  | (IS_ACCORDION extends true ? number : number[])
+  | null
+  | undefined;
 
-const defaultGetItemLabel: CollapseGroupPropGetItemLabel<DefaultItem> = (item) => item.label;
-const defaultGetItemContent: CollapseGroupPropGetItemContent<DefaultItem> = (item) => item.content;
-const defaultGetItemRightSide: CollapseGroupPropGetItemContent<DefaultItem> = (item) =>
-  item.rightSide;
+const defaultGetItemLabel: CollapseGroupPropGetItemLabel<DefaultItem> = (
+  item,
+) => item.label;
+const defaultGetItemContent: CollapseGroupPropGetItemContent<DefaultItem> = (
+  item,
+) => item.content;
+const defaultGetItemRightSide: CollapseGroupPropGetItemContent<DefaultItem> = (
+  item,
+) => item.rightSide;
 ```
 
-| Свойство                                    | Тип                                                                           | По умолчанию              | Описание                                                                                                         |
-| ------------------------------------------- | ----------------------------------------------------------------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| [`isAccordion`](#режим-аккордеона)          | `boolean`                                                                     | -                         | Включает режим аккордеона аккордеона                                                                             |
-| [`items`](#содержимое)                      | `Item[]`                                                                      | -                         | Элементы                                                                                                         |
-| [`getItemLabel`](#кастомный-тип-данных)     | `GetItemLabel<ITEM>`                                                          | `defaultGetItemLabel`     | Функция для формирования текста для лейбла                                                                       |
-| [`getItemContent`](#кастомный-тип-данных)   | `GetItemContent<ITEM>`                                                        | `defaultGetItemContent`   | Функция для получения контента коллапса                                                                          |
-| [`getItemRightSide`](#кастомный-тип-данных) | `GetItemRightSide<ITEM>`                                                      | `defaultGetItemRightSide` | Функция для получения дополнительный контента, который помещается рядом с заголовком коллапса                    |
-| `size?`                                     | `'l', 'm', 's', 'xs', '2xs'`                                                  | `'m'`                     | Размер, см. [Collapse](##LIBS.STAND\|stand:uikit-components-collapse-stable)                                              |
-| `view?`                                     | `'primary', 'secondary'`                                                      | `'primary'`               | Внешний вид, см. [Collapse](##LIBS.STAND\|stand:uikit-components-collapse-stable)                                         |
-| `hoverEffect?`                              | `boolean`                                                                     | -                         | Подсвечивает заголовок при наведении, см. [Collapse](##LIBS.STAND\|stand:uikit-components-collapse-stable)                |
-| `divider?`                                  | `boolean`                                                                     | -                         | Добавляет разделитель между заголовком и содержимым, см. [Collapse](##LIBS.STAND\|stand:uikit-components-collapse-stable) |
-| `horizontalSpace?`                          | `'6xl', '5xl', '4xl', '3xl', '2xl', 'xl', 'l', 'm', 's', 'xs', '2xs', '3xs'`  | -                         | Устанавливает боковые отступы, см. [Collapse](##LIBS.STAND\|stand:uikit-components-collapse-stable)                       |
-| `icon?`                                     | `IconComponent`                                                               | `IconComponent`           | Иконка в закрытом состоянии, см. [Collapse](##LIBS.STAND\|stand:uikit-components-collapse-stable)                         |
-| `closeIcon?`                                | `IconComponent`                                                               | -                         | Иконка в открытом состоянии, см. [Collapse](##LIBS.STAND\|stand:uikit-components-collapse-stable)                         |
-| `iconPosition?`                             | `'left', 'right'`                                                             | `'left'`                  | Расположение иконки, см. [Collapse](##LIBS.STAND\|stand:uikit-components-collapse-stable)                                 |
-| `directionIcon?`                            | `'up', 'right', 'down', 'left', 'upRight', 'downRight', 'upLeft', 'downLeft'` | `'up'`                    | Направление иконки в закрытом состоянии см. [Collapse](##LIBS.STAND\|stand:uikit-components-collapse-stable)              |
-| `closeDirectionIcon?`                       | `'up', 'right', 'down', 'left', 'upRight', 'downRight', 'upLeft', 'downLeft'` | `'down'`                  | Направление иконки в открытом состоянии, см. [Collapse](##LIBS.STAND\|stand:uikit-components-collapse-stable)             |
-| `onOpen?`                                   | `OnOpen<IS_ACCORDION>`                                                        | -                         | Функция обратного вызова, которая сработает при клике на коллапс                                                 |
-| `opened?`                                   | `Opened<IS_ACCORDION>`                                                        | -                         | Индексы открытых коллапсов                                                                                       |
-| `className?`                                | `string`                                                                      | -                         | Дополнительный CSS-класс                                                                                         |
+| Свойство                                    | Тип                                                                           | По умолчанию              | Описание                                                                                                                 |
+| ------------------------------------------- | ----------------------------------------------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| [`isAccordion`](#режим-аккордеона)          | `boolean`                                                                     | -                         | Включает режим аккордеона аккордеона                                                                                     |
+| [`items`](#содержимое)                      | `Item[]`                                                                      | -                         | Элементы                                                                                                                 |
+| [`getItemLabel`](#кастомный-тип-данных)     | `GetItemLabel<ITEM>`                                                          | `defaultGetItemLabel`     | Функция для формирования текста для лейбла                                                                               |
+| [`getItemContent`](#кастомный-тип-данных)   | `GetItemContent<ITEM>`                                                        | `defaultGetItemContent`   | Функция для получения контента коллапса                                                                                  |
+| [`getItemRightSide`](#кастомный-тип-данных) | `GetItemRightSide<ITEM>`                                                      | `defaultGetItemRightSide` | Функция для получения дополнительный контента, который помещается рядом с заголовком коллапса                            |
+| `size?`                                     | `'l', 'm', 's', 'xs', '2xs'`                                                  | `'m'`                     | Размер, см. [Collapse](##LIBS.STAND|stand:uikit-components-collapse-stable)                                              |
+| `view?`                                     | `'primary', 'secondary'`                                                      | `'primary'`               | Внешний вид, см. [Collapse](##LIBS.STAND|stand:uikit-components-collapse-stable)                                         |
+| `hoverEffect?`                              | `boolean`                                                                     | -                         | Подсвечивает заголовок при наведении, см. [Collapse](##LIBS.STAND|stand:uikit-components-collapse-stable)                |
+| `divider?`                                  | `boolean`                                                                     | -                         | Добавляет разделитель между заголовком и содержимым, см. [Collapse](##LIBS.STAND|stand:uikit-components-collapse-stable) |
+| `horizontalSpace?`                          | `'6xl', '5xl', '4xl', '3xl', '2xl', 'xl', 'l', 'm', 's', 'xs', '2xs', '3xs'`  | -                         | Устанавливает боковые отступы, см. [Collapse](##LIBS.STAND|stand:uikit-components-collapse-stable)                       |
+| `icon?`                                     | `IconComponent`                                                               | `IconComponent`           | Иконка в закрытом состоянии, см. [Collapse](##LIBS.STAND|stand:uikit-components-collapse-stable)                         |
+| `closeIcon?`                                | `IconComponent`                                                               | -                         | Иконка в открытом состоянии, см. [Collapse](##LIBS.STAND|stand:uikit-components-collapse-stable)                         |
+| `iconPosition?`                             | `'left', 'right'`                                                             | `'left'`                  | Расположение иконки, см. [Collapse](##LIBS.STAND|stand:uikit-components-collapse-stable)                                 |
+| `directionIcon?`                            | `'up', 'right', 'down', 'left', 'upRight', 'downRight', 'upLeft', 'downLeft'` | `'up'`                    | Направление иконки в закрытом состоянии см. [Collapse](##LIBS.STAND|stand:uikit-components-collapse-stable)              |
+| `closeDirectionIcon?`                       | `'up', 'right', 'down', 'left', 'upRight', 'downRight', 'upLeft', 'downLeft'` | `'down'`                  | Направление иконки в открытом состоянии, см. [Collapse](##LIBS.STAND|stand:uikit-components-collapse-stable)             |
+| `onOpen?`                                   | `OnOpen<IS_ACCORDION>`                                                        | -                         | Функция обратного вызова, которая сработает при клике на коллапс                                                         |
+| `opened?`                                   | `Opened<IS_ACCORDION>`                                                        | -                         | Индексы открытых коллапсов                                                                                               |
+| `className?`                                | `string`                                                                      | -                         | Дополнительный CSS-класс                                                                                                 |

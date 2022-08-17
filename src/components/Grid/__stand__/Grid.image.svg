@@ -1,4 +1,10 @@
-<svg width="200" height="120" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg
+  width="200"
+  height="120"
+  viewBox="0 0 200 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
   <rect
     x="30"
     y="18"
@@ -81,15 +87,43 @@
     fill-opacity="0.2"
   />
   <g opacity="0.4">
-    <rect x="174" y="33" width="58" height="44" transform="rotate(90 174 33)" fill="#0078D2" />
+    <rect
+      x="174"
+      y="33"
+      width="58"
+      height="44"
+      transform="rotate(90 174 33)"
+      fill="#0078D2"
+    />
   </g>
   <g opacity="0.4">
-    <rect x="120" y="67" width="24" height="98" transform="rotate(90 120 67)" fill="#0078D2" />
+    <rect
+      x="120"
+      y="67"
+      width="24"
+      height="98"
+      transform="rotate(90 120 67)"
+      fill="#0078D2"
+    />
   </g>
   <g opacity="0.4">
-    <rect x="66" y="33" width="24" height="44" transform="rotate(90 66 33)" fill="#0078D2" />
+    <rect
+      x="66"
+      y="33"
+      width="24"
+      height="44"
+      transform="rotate(90 66 33)"
+      fill="#0078D2"
+    />
   </g>
   <g opacity="0.4">
-    <rect x="120" y="33" width="24" height="44" transform="rotate(90 120 33)" fill="#0078D2" />
+    <rect
+      x="120"
+      y="33"
+      width="24"
+      height="44"
+      transform="rotate(90 120 33)"
+      fill="#0078D2"
+    />
   </g>
 </svg>

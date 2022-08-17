@@ -32,7 +32,11 @@ import { FileField, FileFieldProps } from '@consta/uikit/FileField';
 import { Button } from '@consta/uikit/Button';
 
 const App = () => {
-  return <FileField>{(props) => <Button {...props} label="Выбрать файлы" />}</FileField>;
+  return (
+    <FileField>
+      {(props) => <Button {...props} label="Выбрать файлы" />}
+    </FileField>
+  );
 };
 ```
 
@@ -83,6 +87,10 @@ import { FileField } from '@consta/uikit/FileField';
 import { Button } from '@consta/uikit/Button';
 
 const App = () => {
-  return <FileField>{(props) => <Button {...props} label="Выбрать файл" />}</FileField>;
+  return (
+    <FileField>
+      {(props) => <Button {...props} label="Выбрать файл" />}
+    </FileField>
+  );
 };
 ```

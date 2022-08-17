@@ -7,7 +7,8 @@ export default createStand({
   id: 'FieldGroup',
   group: 'components',
   image,
-  description: 'Группа полей. Объединяет одно или несколько полей ввода и кнопки.',
+  description:
+    'Группа полей. Объединяет одно или несколько полей ввода и кнопки.',
   version: '4.0.0',
   status: 'stable',
   sandbox:

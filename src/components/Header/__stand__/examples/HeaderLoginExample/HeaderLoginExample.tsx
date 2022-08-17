@@ -18,18 +18,16 @@ export function HeaderLoginExample() {
     <Header
       className={cnExample()}
       rightSide={
-        <>
-          <HeaderModule indent="s">
-            <HeaderLogin
-              isLogged={isLogged}
-              personName="Михаил Зерно"
-              personInfo="В другом офисе"
-              personStatus="available"
-              onClick={handleLogin}
-              className={cnExample('Login', { isLogged })}
-            />
-          </HeaderModule>
-        </>
+        <HeaderModule indent="s">
+          <HeaderLogin
+            isLogged={isLogged}
+            personName="Михаил Зерно"
+            personInfo="В другом офисе"
+            personStatus="available"
+            onClick={handleLogin}
+            className={cnExample('Login', { isLogged })}
+          />
+        </HeaderModule>
       }
     />
   );
@@ -38,18 +36,29 @@ export function HeaderLoginExample() {
 export function HeaderLoginExampleType() {
   return (
     <div
-      className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1-1', 'col-gap': 'full' })])}
+      className={cnDocsDecorator('Section', [
+        wp.tplGrid({ 'ratio': '1-1-1', 'col-gap': 'full' }),
+      ])}
     >
       <div className={cnDocsExample()}>
         <p className={cnDocsExample('Caption')}>Полная версия</p>
-        <HeaderLogin isLogged personName="Михаил Зерно" personInfo="В другом офисе" />
+        <HeaderLogin
+          isLogged
+          personName="Михаил Зерно"
+          personInfo="В другом офисе"
+        />
         <p className={cnDocsExample('Caption')}>
           Пользователь авторизован. Есть аватарка, имя и фамилия.
         </p>
       </div>
       <div className={cnDocsExample()}>
         <p className={cnDocsExample('Caption')}>Краткая версия</p>
-        <HeaderLogin isLogged personName="Михаил Зерно" personInfo="В другом офисе" isMinified />
+        <HeaderLogin
+          isLogged
+          personName="Михаил Зерно"
+          personInfo="В другом офисе"
+          isMinified
+        />
         <p className={cnDocsExample('Caption')}>
           Пользователь авторизован. Есть только аватарка и стрелочка.
         </p>
@@ -61,7 +70,9 @@ export function HeaderLoginExampleType() {
           personInfo="В другом офисе"
           personStatus="available"
         />
-        <p className={cnDocsExample('Caption')}>Предлагаем пользователю войти в аккаунт.</p>
+        <p className={cnDocsExample('Caption')}>
+          Предлагаем пользователю войти в аккаунт.
+        </p>
       </div>
     </div>
   );
@@ -76,7 +87,12 @@ export function HeaderLoginExampleStatus() {
     >
       <div className={cnDocsExample()}>
         <p className={cnDocsExample('Caption')}>Без статуса</p>
-        <HeaderLogin isLogged personName="Михаил Зерно" personInfo="В другом офисе" isMinified />
+        <HeaderLogin
+          isLogged
+          personName="Михаил Зерно"
+          personInfo="В другом офисе"
+          isMinified
+        />
         <p className={cnDocsExample('Caption')}>Нет статуса</p>
       </div>
       <div className={cnDocsExample()}>

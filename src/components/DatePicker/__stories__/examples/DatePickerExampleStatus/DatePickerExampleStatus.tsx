@@ -9,9 +9,21 @@ export const DatePickerExampleStatus = () => {
 
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <DatePicker value={value} onChange={({ value }) => setValue(value)} status="success" />
-      <DatePicker value={value} onChange={({ value }) => setValue(value)} status="alert" />
-      <DatePicker value={value} onChange={({ value }) => setValue(value)} status="warning" />
+      <DatePicker
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        status="success"
+      />
+      <DatePicker
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        status="alert"
+      />
+      <DatePicker
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        status="warning"
+      />
       <DatePicker value={value} onChange={({ value }) => setValue(value)} />
     </StoryBookExample>
   );

@@ -42,7 +42,12 @@ export const PopoverPositionedByAnchorExample = () => {
   return (
     <>
       <div>
-        <Button label="Нажмите меня" type="button" onClick={handleClickOnAnchor} ref={anchorRef} />
+        <Button
+          label="Нажмите меня"
+          type="button"
+          onClick={handleClickOnAnchor}
+          ref={anchorRef}
+        />
       </div>
       {isPopoverVisible && (
         <Popover
@@ -57,7 +62,8 @@ export const PopoverPositionedByAnchorExample = () => {
         >
           <div>
             <Text size="xs">
-              Это содержимое поповера: здесь может быть что угодно, например, этот текст.
+              Это содержимое поповера: здесь может быть что угодно, например,
+              этот текст.
             </Text>
           </div>
         </Popover>
@@ -84,7 +90,10 @@ export const PopoverPositionedByCoordsExample = () => {
 
   return (
     <>
-      <div onMouseMove={handleMouseMove} onMouseLeave={() => setPosition(undefined)}>
+      <div
+        onMouseMove={handleMouseMove}
+        onMouseLeave={() => setPosition(undefined)}
+      >
         <Text>Область, в которой работает отслеживание мышки</Text>
       </div>
       <Popover
@@ -99,7 +108,8 @@ export const PopoverPositionedByCoordsExample = () => {
         {(direction) => (
           <div>
             <Text size="xs">
-              Это содержимое поповера: здесь может быть что угодно, например, этот текст.
+              Это содержимое поповера: здесь может быть что угодно, например,
+              этот текст.
             </Text>
             <Text size="xs">Направление: {direction}</Text>
           </div>

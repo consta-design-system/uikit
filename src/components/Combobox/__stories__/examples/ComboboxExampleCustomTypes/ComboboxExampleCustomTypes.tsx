@@ -7,7 +7,9 @@ import { Combobox } from '../../../Combobox';
 export function ComboboxExampleCustomTypes() {
   const [value, setValue] = useState<string | null>();
   return (
-    <StoryBookExample className={cnDocsDecorator('Section', { indent: 'bottom' })}>
+    <StoryBookExample
+      className={cnDocsDecorator('Section', { indent: 'bottom' })}
+    >
       <Combobox
         placeholder="Выберите вариант"
         items={['Первый', 'Второй', 'Третий']}
@@ -40,7 +42,11 @@ export const items: Item[] = [
   { name: 'Десятый', group: 'Вторая группа' },
 ];
 
-export const groups: string[] = ['Первая группа', 'Вторая группа', 'Третья группа'];
+export const groups: string[] = [
+  'Первая группа',
+  'Вторая группа',
+  'Третья группа',
+];
 
 export function ComboboxExampleCustomTypesWithGroups() {
   const [value, setValue] = useState<Item | null>();

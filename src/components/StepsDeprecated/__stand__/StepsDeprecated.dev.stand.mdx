@@ -177,9 +177,18 @@ export const ExampleStepsContent = () => {
 
   return (
     <>
-      <Steps items={items} getLabel={getLabel} value={activeStep} onChange={onChange} />
+      <Steps
+        items={items}
+        getLabel={getLabel}
+        value={activeStep}
+        onChange={onChange}
+      />
       <div>{getContent(activeStepIndex)}</div>
-      <Button label="Предыдущий" onClick={handlePrev} disabled={activeStepIndex === 0} />
+      <Button
+        label="Предыдущий"
+        onClick={handlePrev}
+        disabled={activeStepIndex === 0}
+      />
       <Button
         label="Следующий"
         onClick={handleNext}

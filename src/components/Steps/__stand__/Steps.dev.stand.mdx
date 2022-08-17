@@ -174,9 +174,18 @@ export const ExampleStepsContent = () => {
 
   return (
     <>
-      <Steps items={items} getItemLabel={getLabel} value={activeStep} onChange={onChange} />
+      <Steps
+        items={items}
+        getItemLabel={getLabel}
+        value={activeStep}
+        onChange={onChange}
+      />
       <div>{getContent(activeStepIndex)}</div>
-      <Button label="Предыдущий" onClick={handlePrev} disabled={activeStepIndex === 0} />
+      <Button
+        label="Предыдущий"
+        onClick={handlePrev}
+        disabled={activeStepIndex === 0}
+      />
       <Button
         label="Следующий"
         onClick={handleNext}
@@ -218,7 +227,10 @@ import { Steps } from '@consta/uikit/StepsCanary';
 ## Свойства
 
 ```tsx
-type StepsPropOnChange<ITEM> = (props: { e: React.MouseEvent; value: ITEM }) => void;
+type StepsPropOnChange<ITEM> = (props: {
+  e: React.MouseEvent;
+  value: ITEM;
+}) => void;
 
 type StepsPropGetLabel<ITEM> = (item: ITEM) => string;
 type StepsPropGetDisabled<ITEM> = (item: ITEM) => boolean | undefined;

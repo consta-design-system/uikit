@@ -15,7 +15,6 @@ import {
   CollapseExampleIconCustomIcon,
 } from '../__stories__/examples/CollapseExampleIconCustomIcon/CollapseExampleIconCustomIcon';
 
-
 <MdxMenu>
 
 - [Заголовок](#заголовок)
@@ -102,7 +101,10 @@ export const CollapseExampleIconRightSideBadge = () => {
       label="Здесь справа что-то есть"
       isOpen={isOpen}
       onClick={() => setOpen(!isOpen)}
-      rightSide={[<Badge label="Badge" status="success" />, <IconAlert size="s" view="warning" />]}
+      rightSide={[
+        <Badge label="Badge" status="success" />,
+        <IconAlert size="s" view="warning" />,
+      ]}
     >
       {content}
     </Collapse>
@@ -246,7 +248,12 @@ export const CollapseExampleView = () => {
 
   return (
     <div>
-      <Collapse label="Primary" view="primary" isOpen={isOpen} onClick={() => setOpen(!isOpen)}>
+      <Collapse
+        label="Primary"
+        view="primary"
+        isOpen={isOpen}
+        onClick={() => setOpen(!isOpen)}
+      >
         {content}
       </Collapse>
       <Collapse

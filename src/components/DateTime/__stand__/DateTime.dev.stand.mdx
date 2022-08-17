@@ -217,7 +217,12 @@ export const DateTimeExampleDateMin = () => {
 А если в `multiplicityMinutes` передать `15`, пользователь увидит только четверти часа.
 
 ```tsx
-<DateTime type="time" multiplicityHours={2} multiplicityMinutes={5} multiplicitySeconds={0} />
+<DateTime
+  type="time"
+  multiplicityHours={2}
+  multiplicityMinutes={5}
+  multiplicitySeconds={0}
+/>
 ```
 
 <DateTimeExampleMultiplicity />
@@ -231,7 +236,11 @@ export const DateTimeExampleDateMin = () => {
 ```tsx
 import { addDays, startOfWeek } from 'date-fns';
 
-const events = [startOfWeek(new Date(), { locale: ruLocale }), new Date(), addDays(new Date(), 2)];
+const events = [
+  startOfWeek(new Date(), { locale: ruLocale }),
+  new Date(),
+  addDays(new Date(), 2),
+];
 
 <DateTime events={events} />;
 ```
@@ -280,7 +289,9 @@ type DateTimePropValue = Date | [Date?, Date?];
 
 type СapableRangeType = 'date' | 'month' | 'year';
 
-type DateTimePropValue<TYPE> = TYPE extends СapableRangeType ? Date | DateRange : Date;
+type DateTimePropValue<TYPE> = TYPE extends СapableRangeType
+  ? Date | DateRange
+  : Date;
 
 type DateTimePropOnChange = (props: {
   value: Date;
@@ -288,7 +299,10 @@ type DateTimePropOnChange = (props: {
 }) => void;
 
 type DateTimePropOnChangeRange<TYPE> = TYPE extends СapableRangeType
-  ? (props: { value: DateRange; e: React.MouseEvent<HTMLButtonElement> }) => void
+  ? (props: {
+      value: DateRange;
+      e: React.MouseEvent<HTMLButtonElement>;
+    }) => void
   : never;
 
 type LocaleWords = {
