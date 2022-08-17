@@ -16,7 +16,7 @@
   "dependencies": {
     "@bem-react/classname": "^1.5.12",
     "@bem-react/classnames": "^1.3.10",
-    "@consta/stand": "^0.0.24",
+    "@consta/stand": "^0.0.26",
     "compute-scroll-into-view": "^1.0.17",
     "date-fns": "^2.29.1",
     "focus-trap-react": "8.7.0",
@@ -73,10 +73,30 @@
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-customizable"
-    },
-    "cz-customizable": {
-      "config": "./commitizen.js"
+      "path": "./node_modules/cz-conventional-changelog",
+      "types": {
+        "feat": {
+          "description": "Adding new feature"
+        },
+        "fix": {
+          "description": "Bug fix"
+        },
+        "refactor": {
+          "description": "Editing code without fixing bugs or adding new features"
+        },
+        "docs": {
+          "description": "Documentation Update"
+        },
+        "chore": {
+          "description": "Add / update / customize tools and libraries"
+        },
+        "changelog": {
+          "description": "Add / update / changelog"
+        },
+        "release": {
+          "description": "New release"
+        }
+      }
     }
   },
   "devDependencies": {
@@ -123,7 +143,6 @@
     "css-minimizer-webpack-plugin": "^3.4.1",
     "cssnano": "^5.1.12",
     "cz-conventional-changelog": "3.3.0",
-    "cz-customizable": "^6.9.1",
     "dotenv": "^10.0.0",
     "dotenv-expand": "^5.1.0",
     "eslint": "^8.20.0",
