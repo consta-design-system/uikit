@@ -8,8 +8,16 @@ const groups = [
     id: 'components',
   },
   {
+    title: 'Хуки',
+    id: 'hooks',
+  },
+  {
     title: 'Миксины',
     id: 'mixs',
+  },
+  {
+    title: 'Хоки',
+    id: 'hocs',
   },
 ] as const;
 
