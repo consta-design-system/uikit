@@ -45,67 +45,23 @@
     padding: 0;
     background: var(--color-bg-tone);
     border: none;
-  }
+    transition: 0.2s;
 
-  &_animate {
-    &_appear,
-    &_enter,
-    &_exit,
-    &_appearActive,
-    &_enterActive,
-    &_exitActive {
-      & .Modal-Overlay {
-        transition: opacity 0.24s ease;
-      }
-
-      & .Modal-Window {
-        transition: opacity 0.24s, transform 0.24s;
-      }
-    }
-
-    &_appear,
-    &_enter {
-      & .Modal-Overlay {
+    &_animate {
+      &_exited,
+      &_exiting {
         opacity: 0;
       }
 
-      & .Modal-Window {
-        opacity: 0;
-        transform: translate(0, calc(-1 * var(--modal-window-animate-space)));
-      }
-    }
-
-    &_appearActive,
-    &_enterActive {
-      & .Modal-Overlay {
+      &_entered,
+      &_entering {
         opacity: 1;
       }
 
-      & .Modal-Window {
-        opacity: 1;
-        transform: translate(0, 0);
-      }
-    }
-
-    &_exit {
-      & .Modal-Overlay {
-        opacity: 1;
-      }
-
-      & .Modal-Window {
-        opacity: 1;
-        transform: translate(0, 0);
-      }
-    }
-
-    &_exitActive {
-      & .Modal-Overlay {
-        opacity: 0;
-      }
-
-      & .Modal-Window {
-        opacity: 0;
-        transform: translate(0, var(--modal-window-animate-space));
+      &_entered,
+      &_entering,
+      &_exiting {
+        transition: opacity 0.2s;
       }
     }
   }

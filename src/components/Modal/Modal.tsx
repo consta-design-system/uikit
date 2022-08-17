@@ -1,18 +1,18 @@
 import './Modal.css';
 
 import React, { useEffect, useRef } from 'react';
-import { CSSTransition } from 'react-transition-group';
+import { Transition } from 'react-transition-group';
 
-import { useClickOutside } from '../../hooks/useClickOutside/useClickOutside';
-import { useGlobalKeys } from '../../hooks/useGlobalKeys/useGlobalKeys';
-import { cn } from '../../utils/bem';
-import { cnForCssTransition } from '../../utils/cnForCssTransition';
-import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 import {
   PortalWithTheme,
   usePortalContext,
-} from '../PortalWithTheme/PortalWithTheme';
-import { useTheme } from '../Theme/Theme';
+} from '##/components/PortalWithTheme';
+import { useTheme } from '##/components/Theme/Theme';
+import { useClickOutside } from '##/hooks/useClickOutside';
+import { useGlobalKeys } from '##/hooks/useGlobalKeys';
+import { animateTimeout, cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
+import { cn } from '##/utils/bem';
+import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
 const modalPropWidth = ['auto'] as const;
 type ModalPropWidth = typeof modalPropWidth[number];
@@ -107,49 +107,55 @@ export const Modal: React.FC<ModalProps> = (props) => {
   });
 
   return (
-    <CSSTransition
+    <Transition
       in={isOpen}
       unmountOnExit
-      appear
-      classNames={cnForCssTransition(cnModal)}
-      timeout={240}
-      onExited={afterClose}
       nodeRef={portalRef}
+      timeout={animateTimeout}
+      onExited={afterClose}
     >
-      <PortalWithTheme
-        preset={theme}
-        container={container}
-        className={cnModal({ hasOverlay }, [rootClassName])}
-        ref={portalRef}
-        style={
-          typeof style?.zIndex === 'number'
-            ? { zIndex: style.zIndex }
-            : undefined
-        }
-      >
-        {hasOverlay && (
-          <div className={cnModal('Overlay')} aria-label="Overlay" />
-        )}
-        <div
-          {...otherProps}
-          style={{
-            ...style,
-            zIndex: undefined,
-          }}
-          className={cnModal('Window', { width, position }, [className])}
-          ref={ref}
+      {(animate) => (
+        <PortalWithTheme
+          preset={theme}
+          container={container}
+          className={cnModal({ hasOverlay }, [rootClassName])}
+          ref={portalRef}
+          style={
+            typeof style?.zIndex === 'number'
+              ? { zIndex: style.zIndex }
+              : undefined
+          }
         >
-          <ContextConsumer
-            onClickOutside={onClickOutside || onOverlayClick}
-            ignoreClicksInsideRefs={[
-              ...(refsForExcludeClickOutside || []),
-              ref,
-            ]}
+          {hasOverlay && (
+            <div
+              className={cnModal('Overlay', { animate })}
+              aria-label="Overlay"
+            />
+          )}
+          <div
+            {...otherProps}
+            style={{
+              ...style,
+              zIndex: undefined,
+            }}
+            className={cnModal('Window', { width, position }, [
+              cnMixPopoverAnimate({ animate }),
+              className,
+            ])}
+            ref={ref}
           >
-            {children}
-          </ContextConsumer>
-        </div>
-      </PortalWithTheme>
-    </CSSTransition>
+            <ContextConsumer
+              onClickOutside={onClickOutside || onOverlayClick}
+              ignoreClicksInsideRefs={[
+                ...(refsForExcludeClickOutside || []),
+                ref,
+              ]}
+            >
+              {children}
+            </ContextConsumer>
+          </div>
+        </PortalWithTheme>
+      )}
+    </Transition>
   );
 };
