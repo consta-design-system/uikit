@@ -1,14 +1,14 @@
 import {
-  AvatarGroupDegaultItem,
+  AvatarGroupDefaultItem,
   AvatarGroupPropGetItemName,
   AvatarGroupPropGetItemUrl,
   AvatarGroupProps,
 } from './types';
 
-const defaultGetItemName: AvatarGroupPropGetItemName<AvatarGroupDegaultItem> = (
+const defaultGetItemName: AvatarGroupPropGetItemName<AvatarGroupDefaultItem> = (
   item,
 ) => item.name;
-const defaultGetItemUrl: AvatarGroupPropGetItemUrl<AvatarGroupDegaultItem> = (
+const defaultGetItemUrl: AvatarGroupPropGetItemUrl<AvatarGroupDefaultItem> = (
   item,
 ) => item.url;
 

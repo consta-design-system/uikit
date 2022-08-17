@@ -12,7 +12,7 @@ export type AvatarGroupPropForm = typeof avatarGroupPropForm[number];
 export const avatarGroupPropFormDefault: AvatarGroupPropForm =
   avatarGroupPropForm[0];
 
-export type AvatarGroupDegaultItem = {
+export type AvatarGroupDefaultItem = {
   url?: string;
   name?: string;
 };
@@ -24,7 +24,7 @@ export type AvatarGroupPropGetItemName<ITEM> = (
   item: ITEM,
 ) => string | undefined;
 
-export type AvatarGroupProps<ITEM = AvatarGroupDegaultItem> =
+export type AvatarGroupProps<ITEM = AvatarGroupDefaultItem> =
   PropsWithHTMLAttributesAndRef<
     {
       children?: never;
@@ -38,6 +38,6 @@ export type AvatarGroupProps<ITEM = AvatarGroupDegaultItem> =
     HTMLDivElement
   >;
 
-export type AvatarGroupComponent = <ITEM = AvatarGroupDegaultItem>(
+export type AvatarGroupComponent = <ITEM = AvatarGroupDefaultItem>(
   props: AvatarGroupProps<ITEM>,
 ) => React.ReactElement | null;
