@@ -15,6 +15,10 @@ const groups = [
     title: 'Hocs',
     id: 'hocs',
   },
+  {
+    title: 'Hooks',
+    id: 'hooks',
+  },
 ] as const;
 
 export const { createStand } = createConfig({
