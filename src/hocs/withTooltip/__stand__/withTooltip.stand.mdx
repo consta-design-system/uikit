@@ -1,0 +1,12 @@
+```tsx
+import { withTooltip } from '@consta/uikit/withTooltip';
+```
+
+C помощью `withTooltip` можно добавить `Tooltip` к любому компоненту,
+который умеет обрабатывать события из списка ниже:
+
+```ts
+onClick?: (() => void) | React.EventHandler<React.MouseEvent>;
+onMouseEnter?: (() => void) | React.MouseEventHandler;
+onMouseLeave?: (() => void) | React.MouseEventHandler;
+```
