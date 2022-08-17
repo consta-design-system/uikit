@@ -1,4 +1,8 @@
 import { MdxMenu } from '@consta/stand';
+import { SwitchExampleSize } from './examples/SwitchExampleSize/SwitchExampleSize';
+import { SwitchExampleStatus } from './examples/SwitchExampleStatus/SwitchExampleStatus';
+import { SwitchExampleAlign } from './examples/SwitchExampleAlign/SwitchExampleAlign';
+import { SwitchExampleView } from './examples/SwitchExampleView/SwitchExampleView';
 
 <MdxMenu>
 
@@ -25,7 +29,7 @@ import { MdxMenu } from '@consta/stand';
 <Switch label="Disabled" disabled />
 ```
 
-`<SwitchExampleStatus />`
+<SwitchExampleStatus />
 
 ## Размер
 
@@ -37,7 +41,7 @@ import { MdxMenu } from '@consta/stand';
 <Switch size="l" label="Размер L" />
 ```
 
-`<SwitchExampleSize />`
+<SwitchExampleSize />
 
 ## Внешний вид
 
@@ -48,7 +52,7 @@ import { MdxMenu } from '@consta/stand';
 <Switch view="ghost" checked />
 ```
 
-`<SwitchExampleView />`
+<SwitchExampleView />
 
 ## Выравнивание
 
@@ -65,7 +69,7 @@ import { MdxMenu } from '@consta/stand';
 />
 ```
 
-`<SwitchExampleAlign />`
+<SwitchExampleAlign />
 
 ## Импорт
 
@@ -76,7 +80,7 @@ import { Switch } from '@consta/uikit/Switch';
 ## Свойства
 
 | Свойство                  | Тип и значения                                                                  | По умолчанию | Описание                                                                     |
-| ------------------------- | ------------------------------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------- | --- |
+| ------------------------- | ------------------------------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------- |
 | [`label?`](#название)     | `string`                                                                        | -            | Текст рядом с переключателем                                                 |
 | [`size?`](#размер)        | `'s', 'm', 'l'`                                                                 | `'m'`        | Размер переключателя                                                         |
 | [`view?`](#внешний-вид)   | `'primary', 'view'`                                                             | `'primary'`  | Внешний вид                                                                  |
@@ -85,7 +89,7 @@ import { Switch } from '@consta/uikit/Switch';
 | [`disabled?`](#состояния) | `boolean`                                                                       | -            | Делает переключатель неактивным                                              |
 | `required?`               | `boolean`                                                                       | -            | Такой переключатель обязательно нужно выбрать                                |
 | `autoFocus?`              | `boolean`                                                                       | -            | Переносит фокус на этот переключатель                                        |
-| `tabIndex?`               | `number`                                                                        | -            | Порядковый номер при переходе между элементами интерфейса по клавише **tab** |     |
+| `tabIndex?`               | `number`                                                                        | -            | Порядковый номер при переходе между элементами интерфейса по клавише **tab** |
 | `name?`                   | `string`                                                                        | -            | Имя элемента в DOM                                                           |
 | `onChange?`               | `(object: {e: React.ChangeEvent<HTMLInputElement>;checked: boolean;}) => void;` | -            | Действие при смене состояния переключателя                                   |
 | `onFocus?`                | `React.FocusEventHandler<HTMLInputElement>`                                     | -            | Действие по фокусу                                                           |

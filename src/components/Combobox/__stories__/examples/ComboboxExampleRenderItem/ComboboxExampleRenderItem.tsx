@@ -71,7 +71,7 @@ const searchFunction = (item: Item, searchValue: string): boolean => {
   return searchCompare(searchValue, item.status && mapLabel[item.status]);
 };
 
-export const ComboboxExampleRenderItem = () => {
+export function ComboboxExampleRenderItem() {
   const [value, setValue] = useState<Item | null>();
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
@@ -105,4 +105,4 @@ export const ComboboxExampleRenderItem = () => {
       />
     </StoryBookExample>
   );
-};
+}

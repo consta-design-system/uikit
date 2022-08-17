@@ -24,7 +24,7 @@ const items: Item[] = [
   },
 ];
 
-export const ComboboxExampleCreate = () => {
+export function ComboboxExampleCreate() {
   const [value, setValue] = useState<Item | null>();
   const [list, setList] = useState<Item[]>(items);
   return (
@@ -40,4 +40,4 @@ export const ComboboxExampleCreate = () => {
       />
     </StoryBookExample>
   );
-};
+}

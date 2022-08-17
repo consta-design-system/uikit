@@ -4,7 +4,7 @@ import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/D
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Combobox } from '../../../Combobox';
 
-export const ComboboxExampleCustomTypes = () => {
+export function ComboboxExampleCustomTypes() {
   const [value, setValue] = useState<string | null>();
   return (
     <StoryBookExample
@@ -20,7 +20,7 @@ export const ComboboxExampleCustomTypes = () => {
       />
     </StoryBookExample>
   );
-};
+}
 
 // Example 2
 
@@ -48,7 +48,7 @@ export const groups: string[] = [
   'Третья группа',
 ];
 
-export const ComboboxExampleCustomTypesWithGroups = () => {
+export function ComboboxExampleCustomTypesWithGroups() {
   const [value, setValue] = useState<Item | null>();
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
@@ -66,4 +66,4 @@ export const ComboboxExampleCustomTypesWithGroups = () => {
       />
     </StoryBookExample>
   );
-};
+}

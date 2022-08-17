@@ -1,0 +1,250 @@
+import { MdxMenu } from '@consta/stand';
+
+import {
+  CollapseGroupExampleSimple,
+  CollapseGroupExampleSimple2,
+} from '../__stories__/examples/CollapseGroupExampleSimple/CollapseGroupExampleSimple';
+import { CollapseGroupExampleIsAccordion } from '../__stories__/examples/CollapseGroupExampleIsAccordion/CollapseGroupExampleIsAccordion';
+import { CollapseGroupExampleOwnType } from '../__stories__/examples/CollapseGroupExampleOwnType/CollapseGroupExampleOwnType';
+import { CollapseGroupExampleControl } from '../__stories__/examples/CollapseGroupExampleControl/CollapseGroupExampleControl';
+
+<MdxMenu>
+
+- [Содержимое](#заголовок)
+  - [Блоки с информацией](#блоки-с-информацией)
+  - [Свойства блока](#свойства-блока)
+  - [Кастомный тип данных](#кастомный-тип-данных)
+- [Поведение](#поведение)
+  - [Обычный режим](#обычный-режим)
+  - [Режим аккордеона](#режим-аккордеона)
+  - [Кастомное поведение](#кастомное-поведение)
+- [Импорт](#импорт)
+- [Список свойств](#свойства)
+
+</MdxMenu>
+
+```tsx
+import { CollapseGroup } from '@consta/uikit/CollapseGroup';
+```
+
+## Содержимое
+
+### Блоки с информацией
+
+Содержимое раскрывающихся блоков можно описать в массиве `items`. Тип свойства `items` по умолчанию [DefaultItem](#свойства). Что внутри:
+
+- `label` — заголовок раскрывающегося блока, лучше писать с заглавной буквы, точка не нужна,
+- `content` — содержимое блока, появляется при нажатии на заголовок, здесь может быть что угодно,
+- `rightSide` — дополнительный элемент справа от заголовка.
+
+Вы можете создать [кастомный тип данных](#кастомный-тип-данных) для содержимого коллапса и использовать его.
+
+```tsx
+const items: Item[] = [
+  {
+    label: 'Пункт раз',
+    content: 'Содержимое блока раз',
+    rightSide: 'Я справа',
+  },
+  {
+    label: 'Пункт два',
+    content: 'Содержимое блока два',
+    rightSide: 'Я тоже справа',
+  },
+  {
+    label: 'Пункт три',
+    content: 'Содержимое блока три',
+    rightSide: 'И я :)',
+  },
+];
+
+const CollapseGroupExample = () => {
+  return <CollapseGroup items={items} />;
+};
+```
+
+<CollapseGroupExampleSimple2 />
+
+### Свойства блока
+
+Блок внутри группы коллапсов ведёт себя так же, как обычный [Collapse](/##LIBS.STAND|stand:uikit-components-collapse-stable). Вы можете подсветить заголовок по наведению, добавить разделитель, поменять отступы, вывести дополнительный элемент справа от заголовка, поменять иконку, её расположение и направление.
+
+[Подробнее про Collapse](##LIBS.STAND|stand:uikit-components-collapse-stable)
+
+### Кастомный тип данных
+
+Вы можете создать кастомный тип данных для содержимого коллапса (`items`) — не такой, как в [DefaultItem](#свойства).
+
+В этом случае нужно использовать геттеры `getItemLabel`, `getItemContent`, `getItemRightSide`, чтобы компонент понимал, откуда брать данные.
+
+#### Пример коллапса с кастомным типом данных
+
+```tsx
+type OwnItem = {
+  title: string;
+  text: string;
+  status: 'normal' | 'success' | 'error' | 'warning' | 'system';
+};
+
+const ownItems: OwnItem[] = [
+  {
+    title: 'Во-первых',
+    text: 'Здесь ошибка. Кажется, с этим пунктом что-то не так: например, пользователь неправильно заполнил форму или не ответил на какой-то вопрос.',
+    status: 'error',
+  },
+  {
+    title: 'Во-вторых',
+    text: 'Здесь всё в порядке. Скорее всего, здесь всё сделано и можно больше не открывать.',
+    status: 'success',
+  },
+  {
+    title: 'В-третьих',
+    text: 'Это не пройдено. Нужно открыть и посмотреть, что здесь нужно прочитать, посмотреть или заполнить.',
+    status: 'system',
+  },
+];
+
+const getItemLabel = (item: OwnItem) => item.title;
+const getItemContent = (item: OwnItem) => item.text;
+const getItemRightSide = (item: OwnItem) => (
+  <Badge size="s" status={item.status} label={item.status} />
+);
+
+const CollapseGroupExample = () => {
+  return (
+    <CollapseGroup
+      items={ownItems}
+      getItemLabel={getItemLabel}
+      getItemContent={getItemContent}
+      getItemRightSide={getItemRightSide}
+    />
+  );
+};
+```
+
+<CollapseGroupExampleOwnType />
+
+## Поведение
+
+### Обычный режим
+
+По умолчанию компонент работает так: при клике на заголовок блок раскрывается, если блок уже открыт — наоборот, закрывается.
+
+### Режим аккордеона
+
+В этом режиме коллапс работает как аккордеон: если вы открываете какой-то блок, блок, который был открыт до этого, закрывается. Открытым может быть только один блок.
+
+Чтобы включить этот режим, добавьте `isAccordion`.
+
+```tsx
+type Item = {
+  label: string;
+  content: React.ReactNode;
+};
+
+const items: Item[] = [
+  ..//
+];
+
+const CollapseGroupExampleIsAccordion = () => {
+  return <CollapseGroup items={items} isAccordion />;
+};
+```
+
+<CollapseGroupExampleIsAccordion />
+
+### Кастомное поведение
+
+Если вы хотите, чтобы компонент работал по-другому, используйте обработчик `onOpen` — он срабатывает при клике на коллапс.
+
+Индексы открытых блоков содержит свойство `opened`. В обычном режиме это массив `number[]`, в [режиме аккордеона](#режим-аккордеона) — `number`.
+
+#### Пример коллапса с кастомным поведением
+
+Вот коллапс, у которого все блоки сразу открыты.
+
+```tsx
+type Item = {
+  label: string;
+  content: React.ReactNode;
+};
+
+const items: Item[] = [
+  ..//
+];
+
+const defaultOpened = items.map((_, index) => index);
+
+const CollapseGroupExampleControl = () => {
+  const [opened, setOpened] = useState<number[] | null>(defaultOpened);
+
+  return <CollapseGroup items={items} opened={opened} onOpen={({ value }) => setOpened(value)} />;
+};
+```
+
+<CollapseGroupExampleControl />
+
+## Импорт
+
+```tsx
+import { CollapseGroup } from '@consta/uikit/CollapseGroup';
+```
+
+## Свойства
+
+```ts
+type DefaultItem = {
+  label: string;
+  content: React.ReactNode;
+  rightSide?: React.ReactNode | React.ReactNode[];
+};
+
+type GetItemLabel<ITEM> = (item: ITEM) => string;
+
+type GetItemContent<ITEM> = (item: ITEM) => React.ReactNode;
+
+type GetItemRightSide<ITEM> = (
+  item: ITEM,
+) => React.ReactNode | React.ReactNode[] | undefined;
+
+type OnOpen<IS_ACCORDION> = (params: {
+  e: React.MouseEvent<HTMLDivElement, MouseEvent>;
+  value: (IS_ACCORDION extends true ? number : number[]) | null;
+}) => void;
+
+type Opened<IS_ACCORDION> =
+  | (IS_ACCORDION extends true ? number : number[])
+  | null
+  | undefined;
+
+const defaultGetItemLabel: CollapseGroupPropGetItemLabel<DefaultItem> = (
+  item,
+) => item.label;
+const defaultGetItemContent: CollapseGroupPropGetItemContent<DefaultItem> = (
+  item,
+) => item.content;
+const defaultGetItemRightSide: CollapseGroupPropGetItemContent<DefaultItem> = (
+  item,
+) => item.rightSide;
+```
+
+| Свойство                                    | Тип                                                                           | По умолчанию              | Описание                                                                                                                 |
+| ------------------------------------------- | ----------------------------------------------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| [`isAccordion`](#режим-аккордеона)          | `boolean`                                                                     | -                         | Включает режим аккордеона аккордеона                                                                                     |
+| [`items`](#содержимое)                      | `Item[]`                                                                      | -                         | Элементы                                                                                                                 |
+| [`getItemLabel`](#кастомный-тип-данных)     | `GetItemLabel<ITEM>`                                                          | `defaultGetItemLabel`     | Функция для формирования текста для лейбла                                                                               |
+| [`getItemContent`](#кастомный-тип-данных)   | `GetItemContent<ITEM>`                                                        | `defaultGetItemContent`   | Функция для получения контента коллапса                                                                                  |
+| [`getItemRightSide`](#кастомный-тип-данных) | `GetItemRightSide<ITEM>`                                                      | `defaultGetItemRightSide` | Функция для получения дополнительный контента, который помещается рядом с заголовком коллапса                            |
+| `size?`                                     | `'l', 'm', 's', 'xs', '2xs'`                                                  | `'m'`                     | Размер, см. [Collapse](##LIBS.STAND|stand:uikit-components-collapse-stable)                                              |
+| `view?`                                     | `'primary', 'secondary'`                                                      | `'primary'`               | Внешний вид, см. [Collapse](##LIBS.STAND|stand:uikit-components-collapse-stable)                                         |
+| `hoverEffect?`                              | `boolean`                                                                     | -                         | Подсвечивает заголовок при наведении, см. [Collapse](##LIBS.STAND|stand:uikit-components-collapse-stable)                |
+| `divider?`                                  | `boolean`                                                                     | -                         | Добавляет разделитель между заголовком и содержимым, см. [Collapse](##LIBS.STAND|stand:uikit-components-collapse-stable) |
+| `horizontalSpace?`                          | `'6xl', '5xl', '4xl', '3xl', '2xl', 'xl', 'l', 'm', 's', 'xs', '2xs', '3xs'`  | -                         | Устанавливает боковые отступы, см. [Collapse](##LIBS.STAND|stand:uikit-components-collapse-stable)                       |
+| `icon?`                                     | `IconComponent`                                                               | `IconComponent`           | Иконка в закрытом состоянии, см. [Collapse](##LIBS.STAND|stand:uikit-components-collapse-stable)                         |
+| `closeIcon?`                                | `IconComponent`                                                               | -                         | Иконка в открытом состоянии, см. [Collapse](##LIBS.STAND|stand:uikit-components-collapse-stable)                         |
+| `iconPosition?`                             | `'left', 'right'`                                                             | `'left'`                  | Расположение иконки, см. [Collapse](##LIBS.STAND|stand:uikit-components-collapse-stable)                                 |
+| `directionIcon?`                            | `'up', 'right', 'down', 'left', 'upRight', 'downRight', 'upLeft', 'downLeft'` | `'up'`                    | Направление иконки в закрытом состоянии см. [Collapse](##LIBS.STAND|stand:uikit-components-collapse-stable)              |
+| `closeDirectionIcon?`                       | `'up', 'right', 'down', 'left', 'upRight', 'downRight', 'upLeft', 'downLeft'` | `'down'`                  | Направление иконки в открытом состоянии, см. [Collapse](##LIBS.STAND|stand:uikit-components-collapse-stable)             |
+| `onOpen?`                                   | `OnOpen<IS_ACCORDION>`                                                        | -                         | Функция обратного вызова, которая сработает при клике на коллапс                                                         |
+| `opened?`                                   | `Opened<IS_ACCORDION>`                                                        | -                         | Индексы открытых коллапсов                                                                                               |
+| `className?`                                | `string`                                                                      | -                         | Дополнительный CSS-класс                                                                                                 |
