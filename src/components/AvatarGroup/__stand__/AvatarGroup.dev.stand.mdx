@@ -1,18 +1,14 @@
+import { MdxMenu } from '@consta/stand';
+
 import { AvatarGroupExampleCount } from './examples/AvatarGroupExampleCount/AvatarGroupExampleCount';
 import { AvatarGroupExampleSize } from './examples/AvatarGroupExampleSize/AvatarGroupExampleSize';
 import { AvatarGroupExampleForm } from './examples/AvatarGroupExampleForm/AvatarGroupExampleForm';
-
-<!--info
-description: Аватарка. Изображение пользователя.
--->
-
-# AvatarGroup
 
 ```tsx
 import { AvatarGroup } from '@consta/uikit/AvatarGroup';
 ```
 
-AvatarGroup — группа компонентов [Avatar](?path=/docs/components-avatar--playground).
+<MdxMenu>
 
 - [Аватары](#аватары)
 - [Размер](#размер)
@@ -21,19 +17,72 @@ AvatarGroup — группа компонентов [Avatar](?path=/docs/compone
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
 
+</MdxMenu>
+
 ## Аватары
 
-Для того чтоб использовать компонент передадите список в поле `items`.
+Список аватарок можно передать в поле `items` в объекте типа [AvatarGroupDefaultItem](#свойства). Что можно указать:
 
-Для того чтобы указать имя укажите в элементе списка поле `name` или определите свойство
-`getItemName`.
+- имя пользователя — в поле `name` или с помощью функции `getItemName`,
+- ссылку на изображение — в поле `url` или с помощью функции `getItemUrl`.
 
-Для того чтобы указать изображение укажите в элементе списка поле `url` или определите свойство
-`getItemUrl`.
+Если указаны и имя, и ссылка на изображение, сгенерируется аватарка с изображением.
 
-За количество отображаемых аватаров отвечает свойство `visibleCount`, изначально имеет значение `4`.
+Количество отображаемых аватаров можно указать в свойстве `visibleCount`,
+по умолчанию оно равно `4`.
 
 ```ts
+export const avatarGroupItems: AvatarGroupDefaultItem[] = [
+  {
+    name: 'Вадим Матвеев',
+    url: '',
+  },
+  {
+    name: 'Лидия Индриксон',
+    url: '',
+  },
+  {
+    name: 'Геннадий Морозов',
+    url: '',
+  },
+  {
+    name: 'Аркадий Лушко',
+    url: '',
+  },
+  {
+    name: 'Георгий Калинин',
+    url: '',
+  },
+  {
+    name: 'Виталий Алтуфьев',
+    url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
+  },
+  {
+    name: 'Вадим Матвеев',
+    url: '',
+  },
+  {
+    name: 'Лидия Индриксон',
+    url: '',
+  },
+  {
+    name: 'Геннадий Морозов',
+    url: '',
+  },
+  {
+    name: 'Аркадий Лушко',
+    url: '',
+  },
+  {
+    name: 'Георгий Калинин',
+    url: '',
+  },
+  {
+    name: 'Виталий Алтуфьев',
+    url: '',
+  },
+];
+
 <AvatarGroup items={avatarGroupItems}  />
 <AvatarGroup items={avatarGroupItems} visibleCount={6} />
 <AvatarGroup items={avatarGroupItems.slice(0, 3)} />
@@ -94,11 +143,11 @@ export type AvatarGroupDefaultItem = {
 | Свойство                    | Тип                                                    | По умолчанию | Описание                                                         |
 | --------------------------- | ------------------------------------------------------ | ------------ | ---------------------------------------------------------------- |
 | [`items?`](#аватары)        | `ITEM[]`                                               | -            | Список элементов                                                 |
-| [`visibleCount?`](#аватары) | `number`                                               | `4`          | количество отображаемых элементов                                |
+| [`visibleCount?`](#аватары) | `number`                                               | `4`          | Количество отображаемых элементов                                |
 | [`size?`](#размер)          | `'xs', 's' , 'm', 'l'`                                 | `'m'`        | Размер аватара                                                   |
 | [`form?`](#форма)           | `'default' , 'round', 'brick'`                         | `'round'`    | Форма аватара                                                    |
-| `getItemUrl?`               | `(item: ITEM) => string`<code>&#124;</code>`undefined` | -            | Результат функции используется в качестве изображения.           |
-| `getItemName?`              | `(item: ITEM) => string`<code>&#124;</code>`undefined` | -            | Результат функции используется в качестве имени.                 |
+| `getItemUrl?`               | `(item: ITEM) => string`<code>&#124;</code>`undefined` | -            | Результат функции используется в качестве изображения            |
+| `getItemName?`              | `(item: ITEM) => string`<code>&#124;</code>`undefined` | -            | Результат функции используется в качестве имени                  |
 | `className`                 | `string`                                               | -            | Дополнительный CSS-класс                                         |
 | `as`                        | `React.ElementType`                                    | -            | HTML-тег, в виде которого этот компонент будет представлен в DOM |
 | `ref`                       | `React.Ref<HTMLDivElement>`                            | -            | Ссылка на корневой DOM-элемент этого компонента                  |

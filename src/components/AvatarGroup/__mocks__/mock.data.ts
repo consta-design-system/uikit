@@ -1,6 +1,6 @@
-import { AvatarGroupDegaultItem } from '../types';
+import { AvatarGroupDefaultItem } from '../types';
 
-export const avatarGroupItems: AvatarGroupDegaultItem[] = [
+export const avatarGroupItems: AvatarGroupDefaultItem[] = [
   {
     name: 'Вадим Матвеев',
     url: '',
