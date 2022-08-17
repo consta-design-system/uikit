@@ -67,7 +67,7 @@ $color-base-normal: #0aa5ff; /* Цвет нейтральный */
 $color-base-critical: #33000f;
 
 /* stylelint-disable */
-.Theme_color_myDefault {
+.Theme_color_gpnDark {
   /* //////////////////////////////
   // Цвета фонов /////////////// */
   --color-bg-default: color($palette-g12); /* Цвет дефолта */ /* поставила цвет дашборда */

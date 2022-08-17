@@ -60,7 +60,7 @@ $palette-new-o2-1: #e57124;
 $palette-new-o2-2: #fa8829;
 
 /* stylelint-disable */
-.Theme_color_myDark {
+.Theme_color_gpnDefault {
   /* //////////////////////////////
   // Цвета фонов /////////////// */
   --color-bg-default: color($palette-g1); /* Цвет дефолта */ /* поставила цвет дашборда */
