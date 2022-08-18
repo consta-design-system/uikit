@@ -16,7 +16,6 @@ import {
 } from './examples/ChoiceGroupExampleMultiple/ChoiceGroupExampleMultiple';
 
 import {
-  ChoiceGroupExampleSwitchPr,
   ChoiceGroupExampleSwitchPolar,
   ChoiceGroupExampleSwitchMode,
   ChoiceGroupExampleSwitchLetters,
@@ -27,6 +26,10 @@ import {
   ChoiceGroupExampleAdaptiveScroll,
   ChoiceGroupExampleAdaptiveUseBreakpoints,
 } from './examples/ChoiceGroupExampleAdaptive/ChoiceGroupExampleAdaptive';
+
+```tsx
+import { ChoiceGroup } from '@consta/uikit/ChoiceGroup';
+```
 
 <MdxMenu>
 
@@ -49,10 +52,6 @@ import {
 - [Пример использования](#пример)
 
 </MdxMenu>
-
-```tsx
-import { ChoiceGroup } from '@consta/uikit/ChoiceGroup';
-```
 
 ## Текст на кнопках
 
@@ -175,7 +174,7 @@ export const ChoiceGroupExampleIcon = () => {
 ### Один вариант
 
 По умолчанию пользователь может выбрать только один вариант,
-как в [Radio](?path=/docs/components-radio--playground).
+как в [RadioGroup](##LIBS.STAND|stand:uikit-components-radiogroup-stable).
 
 ```tsx
 type Item = string;
@@ -203,7 +202,7 @@ export const ChoiceGroupExampleOne = () => {
 ### Несколько вариантов
 
 Можно добавить `multiple` — чтобы выбирать из нескольких вариантов,
-как в [Checkbox](?path=/docs/components-checkbox--playground).
+как в [CheckboxGroup](##LIBS.STAND|stand:uikit-components-checkboxgroup-stable).
 
 ```tsx
 export const ChoiceGroupExampleMultiple = () => {
@@ -227,11 +226,10 @@ export const ChoiceGroupExampleMultiple = () => {
 ### В качестве переключателя
 
 Группу из двух кнопок иногда стоит использовать вместо переключателя
-[Switch](?path=/docs/components-switch--playground) — если в интерфейсе есть место.
+[Switch](##LIBS.STAND|stand:uikit-components-switch-stable) — если в интерфейсе есть место.
 
 <ChoiceGroupExampleSwitchPolar />
 <ChoiceGroupExampleSwitchLetters />
-<ChoiceGroupExampleSwitchPr />
 <ChoiceGroupExampleSwitchMode />
 
 ## Внешний вид
@@ -409,7 +407,7 @@ export const ChoiceGroupExampleWidth = () => {
 Если компонент не помещается на мобильный экран или в родительский контейнер
 по ширине, можно обрезать текст с помощью свойства `truncate`. В этом случае компонент сжимается, текст обрезается, в конце добавляется многоточие. [Посмотреть пример](#слишком-длинный-текст)
 
-Если кнопки не помещаются на мобильный экран, можно добавить горизонтальную прокрутку или преобразовать в [RadioGroup](?path=/docs/components-radiogroup--playground).
+Если кнопки не помещаются на мобильный экран, можно добавить горизонтальную прокрутку или преобразовать в [RadioGroup](##LIBS.STAND|stand:uikit-components-radiogroup-stable).
 
 ##### Пример компонента с прокруткой
 

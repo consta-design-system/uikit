@@ -8,7 +8,6 @@ type Item = string;
 
 const itemsPolar: Item[] = ['Включен', 'Выключен'];
 const itemsLetters: Item[] = ['Да', 'Нет'];
-const itemsPr: Item[] = ['Показывать рекламу', 'Не показывать рекламу'];
 const itemsMode: Item[] = ['Тестовый режим', 'Рабочий режим'];
 
 export const ChoiceGroupExampleSwitchPolar = () => {
@@ -38,21 +37,6 @@ export const ChoiceGroupExampleSwitchLetters = () => {
         items={itemsLetters}
         getItemLabel={(item) => item}
         name="ChoiceGroupExampleSwitchLetters"
-      />
-    </StoryBookExample>
-  );
-};
-
-export const ChoiceGroupExampleSwitchPr = () => {
-  const [value, setValue] = useState<Item | null>(itemsPr[0]);
-  return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <ChoiceGroup
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        items={itemsPr}
-        getItemLabel={(item) => item}
-        name="ChoiceGroupExampleSwitchPr"
       />
     </StoryBookExample>
   );

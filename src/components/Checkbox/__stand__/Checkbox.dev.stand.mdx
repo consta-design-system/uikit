@@ -1,12 +1,18 @@
 import { MdxMenu } from '@consta/stand';
 
+import { CheckboxExampleName } from './examples/CheckboxExampleName/CheckboxExampleName';
 import { CheckboxExampleSize } from './examples/CheckboxExampleSize/CheckboxExampleSize';
 import { CheckboxExampleStatus } from './examples/CheckboxExampleStatus/CheckboxExampleStatus';
 import { CheckboxExampleAlign } from './examples/CheckboxExampleAlign/CheckboxExampleAlign';
 import { CheckboxExampleView } from './examples/CheckboxExampleView/CheckboxExampleView';
 
+```tsx
+import { Checkbox } from '@consta/uikit/Checkbox';
+```
+
 <MdxMenu>
 
+- [Название](#название)
 - [Состояния](#состояния)
 - [Размер](#размер)
 - [Внешний вид](#внешний-вид)
@@ -17,9 +23,15 @@ import { CheckboxExampleView } from './examples/CheckboxExampleView/CheckboxExam
 
 </MdxMenu>
 
+## Название
+
+Название — это надпись рядом с чекбоксом, за него отвечает свойство `label`. Пишется с заглавной буквы, без точки.
+
 ```tsx
-import { Checkbox } from '@consta/uikit/Checkbox';
+<Checkbox label="Это чекбокс" />
 ```
+
+<CheckboxExampleName />
 
 ## Состояния
 

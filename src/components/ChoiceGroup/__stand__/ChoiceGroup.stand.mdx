@@ -1,48 +1,37 @@
-import { MdxMenu } from '@consta/stand';
-
 import {
   ChoiceGroupExample,
   ChoiceGroupExampleText,
 } from './examples/ChoiceGroupExampleText/ChoiceGroupExampleText';
+import {
+  ChoiceGroupExampleSwitchPolar,
+  ChoiceGroupExampleSwitchMode,
+  ChoiceGroupExampleSwitchLetters,
+} from './examples/ChoiceGroupExampleSwitch/ChoiceGroupExampleSwitch';
+
+```tsx
+import { ChoiceGroup } from '@consta/uikit/ChoiceGroup';
+```
 
 Группа кнопок нужна, чтобы выбрать из списка один или несколько вариантов.
-Совмещает возможности [Radio](##LIBS.STAND|stand:uikit-components-radio-stable) и
-[Checkbox](##LIBS.STAND|stand:uikit-components-checkbox-stable).
+Совмещает возможности [RadioGroup](##LIBS.STAND|stand:uikit-components-radiogroup-stable) и
+[CheckboxGroup](##LIBS.STAND|stand:uikit-components-checkboxgroup-stable).
 
 Занимает больше места, зато по элементам проще попасть, чем по радиокнопкам
 или чекбоксам.
 
 <ChoiceGroupExample />
 
-<MdxMenu>
-
-- [Как использовать](#как-использовать)
-- [Как писать тексты](#как-писать-тексты)
-- [Текст на кнопках](##LIBS.STAND.DEV|stand:uikit-components-choicegroup-stable|hash:текст-на-кнопках)
-  - [Слишком длинный текст](##LIBS.STAND.DEV|stand:uikit-components-choicegroup-stable|hash:слишком-длинный-текст)
-- [Иконки](##LIBS.STAND.DEV|stand:uikit-components-choicegroup-stable|hash:иконки)
-- [Один или несколько](##LIBS.STAND.DEV|stand:uikit-components-choicegroup-stable|hash:один-или-несколько)
-  - [Один вариант](##LIBS.STAND.DEV|stand:uikit-components-choicegroup-stable|hash:один-вариант)
-  - [Несколько вариантов](##LIBS.STAND.DEV|stand:uikit-components-choicegroup-stable|hash:несколько-вариантов)
-  - [В качестве переключателя](##LIBS.STAND.DEV|stand:uikit-components-choicegroup-stable|hash:в-качестве-переключателя)
-- [Внешний вид](##LIBS.STAND.DEV|stand:uikit-components-choicegroup-stable|hash:внешний-вид)
-- [Форма кнопок](##LIBS.STAND.DEV|stand:uikit-components-choicegroup-stable|hash:форма-кнопок)
-- [Размер](##LIBS.STAND.DEV|stand:uikit-components-choicegroup-stable|hash:размер)
-- [Неактивные кнопки](##LIBS.STAND.DEV|stand:uikit-components-choicegroup-stable|hash:неактивные-кнопки)
-  - [Неактивная кнопка](##LIBS.STAND.DEV|stand:uikit-components-choicegroup-stable|hash:неактивная-кнопка)
-  - [Неактивная группа кнопок](##LIBS.STAND.DEV|stand:uikit-components-choicegroup-stable|hash:неактивная-группа-кнопок)
-- [Адаптивность](##LIBS.STAND.DEV|stand:uikit-components-choicegroup-stable|hash:адаптивность)
-- [Импорт](##LIBS.STAND.DEV|stand:uikit-components-choicegroup-stable|hash:импорт)
-- [Список свойств](##LIBS.STAND.DEV|stand:uikit-components-choicegroup-stable|hash:свойства)
-- [Пример использования](##LIBS.STAND.DEV|stand:uikit-components-choicegroup-stable|hash:пример)
-
-</MdxMenu>
-
 ## Как использовать
 
 Не стоит использовать в одной группе **больше шести** кнопок.
 
 Не используйте `ChoiceGroup` для навигации верхнего уровня, например, в шапке сайта.
+
+Можно использовать в качестве переключателя:
+
+<ChoiceGroupExampleSwitchPolar />
+<ChoiceGroupExampleSwitchLetters />
+<ChoiceGroupExampleSwitchMode />
 
 ## Как писать тексты
 
