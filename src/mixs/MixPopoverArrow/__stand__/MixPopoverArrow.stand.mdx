@@ -1,0 +1,94 @@
+import { MixPopoverArrowExample } from './examples/MixPopoverArrowExample/MixPopoverArrowExample';
+
+```tsx
+import { cnMixPopoverArrow } from '@consta/uikit/MixPopoverArrow';
+```
+
+С помощью миксина `MixPopoverArrow` можно добавить стрелочку указывающую к чему относится элемент.
+Для того чтобы указать размер стрелочки надо выставить значение для CSS-переменной `--popover-arrow-size`.
+Для того чтобы указать отступ надо выставить значение для CSS-переменной `--popover-arrow-offset`.
+Для того чтобы указать цвет стрелочки надо выставить значение для CSS-переменной `--popover-arrow-bg-color`.
+
+## Импорт
+
+```tsx
+import { cnMixPopoverArrow } from '@consta/uikit/MixPopoverArrow';
+```
+
+## Список свойств
+
+```tsx
+type Direction =
+  | 'downCenter'
+  | 'upCenter'
+  | 'downRight'
+  | 'downLeft'
+  | 'upRight'
+  | 'upLeft'
+  | 'leftUp'
+  | 'leftCenter'
+  | 'leftDown'
+  | 'rightUp'
+  | 'rightCenter'
+  | 'rightDown'
+  | 'downStartLeft'
+  | 'upStartLeft'
+  | 'downStartRight'
+  | 'upStartRight'
+  | 'leftStartUp'’
+  | 'leftStartDown'
+  | 'rightStartUp'
+  | 'rightStartDown';
+```
+
+| Свойство     | Тип или варианты значения | По умолчанию | Описание                                                                          |
+| ------------ | ------------------------- | ------------ | --------------------------------------------------------------------------------- |
+| `direction?` | [`Direction`](direction)  | -            | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
+
+## Пример использования
+
+```css
+.MixPopoverArrowExample {
+  --popover-bg-color: var(--color-bg-ghost);
+  --popover-arrow-bg-color: var(--popover-bg-color);
+  --popover-arrow-size: 10px;
+  --popover-arrow-offset: 6px;
+  background: var(--popover-bg-color);
+}
+```
+
+```tsx
+import React, { useRef } from 'react';
+
+import { Button } from '@consta/uikit/Button';
+import { Popover } from '@consta/uikit/Popover';
+import { useFlag } from '@consta/uikit/useFlag';
+import { Text } from '@consta/uikit/Text';
+
+import { cnMixPopoverArrow } from '@consta/uikit/MixPopoverArrow';
+
+export const MixPopoverArrowExample = () => {
+  const [open, setOpen] = useFlag(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  return (
+    <>
+      <Button label="Открыть" onClick={setOpen.toogle} ref={buttonRef} />
+      {open && (
+        <Popover
+          className="MixPopoverArrowExample"
+          anchorRef={buttonRef}
+          direction="downCenter"
+          arrowOffset={16}
+          offset={14}
+        >
+          <Text>Стрелочка по центру сверху</Text>
+          <div className={cnMixPopoverArrow({ direction: 'downCenter' })} />
+        </Popover>
+      )}
+    </>
+  );
+};
+```
+
+<MixPopoverArrowExample />
