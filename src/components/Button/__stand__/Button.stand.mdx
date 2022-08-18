@@ -1,6 +1,6 @@
 import { MdxMenu } from '@consta/stand';
 
-import { ButtonExample } from '../__stories__/examples/ButtonExampleBasic/ButtonExampleBasic';
+import { ButtonExample } from './examples/ButtonExampleBasic/ButtonExampleBasic';
 import {
   ButtonExampleNameSemantics,
   ButtonExampleNameVerb,
@@ -8,31 +8,19 @@ import {
   ButtonExampleNameSingleLine,
   ButtonExampleNameAgreement,
   ButtonExampleNameTooBig,
-} from '../__stories__/examples/ButtonExampleName/ButtonExampleName';
+} from './examples/ButtonExampleName/ButtonExampleName';
 
-Кнопка. Используется, когда человеку нужно сделать выбор, подтвердить или совершить какое-то действие. Например, отправить сообщение, оплатить заказ, сохранить изменения, войти в акканут.
+```tsx
+import { Button } from '@consta/uikit/Button';
+```
+
+Кнопка используется, когда человеку нужно сделать выбор, подтвердить или совершить какое-то действие. Например, отправить сообщение, оплатить заказ, сохранить изменения, войти в акканут.
 
 Кнопка в фокусе визуально выделяется, чтобы человек понимал, что вот-вот нажмёт на неё и что-то произойдёт.
 
-<MdxMenu>
-
-- [Текст на кнопке](#текст-на-кнопке)
-- [Внешний вид](##LIBS.STAND.DEV|stand:uikit-components-button-stable|hash:внешний-вид)
-  - [Типы кнопок](##LIBS.STAND.DEV|stand:uikit-components-button-stable|hash:типы-кнопок)
-  - [Размер](##LIBS.STAND.DEV|stand:uikit-components-button-stable|hash:размер)
-  - [Кнопка с иконкой](##LIBS.STAND.DEV|stand:uikit-components-button-stable|hash:кнопка-с-иконкой)
-  - [Форма](##LIBS.STAND.DEV|stand:uikit-components-button-stable|hash:форма)
-  - [Прелоадер](##LIBS.STAND.DEV|stand:uikit-components-button-stable|hash:прелоадер)
-- [Адаптивность](##LIBS.STAND.DEV|stand:uikit-components-button-stable|hash:адаптивность)
-- [Импорт](##LIBS.STAND.DEV|stand:uikit-components-button-stable|hash:импорт)
-- [Список свойств](##LIBS.STAND.DEV|stand:uikit-components-button-stable|hash:список-свойств)
-- [Пример использования](##LIBS.STAND.DEV|stand:uikit-components-button-stable|hash:пример-использования)
-
-</MdxMenu>
-
 <ButtonExample />
 
-## Текст на кнопке
+## Как писать текст на кнопке
 
 Текст на кнопке показывает, за какое действие она отвечает. Сделайте его однозначным,
 понятным и коротким. Пишите с заглавной буквы, точка не нужна. Не используйте Caps Lock.
