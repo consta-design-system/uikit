@@ -1,0 +1,5 @@
+.IconGrid {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  gap: var(--space-m);
+}

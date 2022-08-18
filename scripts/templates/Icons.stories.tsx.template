@@ -1,4 +1,8 @@
+import './IconGrid.css';
+
 import React from 'react';
+
+import { cn } from '##/utils/bem';
 
 #imports#
 
@@ -10,16 +14,16 @@ const icons = {
 
 type Name = keyof typeof icons;
 
+const cnIconGrid = cn('IconGrid');
+
 const names = Object.keys(icons).sort() as Name[];
 
-export function Playground() {
+export function IconGrid() {
   return (
-    <div className="tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full">
+    <div className={cnIconGrid()}>
       {names.map((name) => (
         <IconGridItem key={name} name={name} icon={icons[name]} />
       ))}
     </div>
   );
 }
-
-
