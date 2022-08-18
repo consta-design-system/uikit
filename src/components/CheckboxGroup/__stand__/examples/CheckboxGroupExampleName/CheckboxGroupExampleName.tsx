@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { cnMixSpace } from '../../../../../mixs/MixSpace/MixSpace';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
@@ -50,39 +51,45 @@ export const CheckboxGroupExampleHead = () => {
         wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
       ])}
     >
-      <div className={cnDocsExample()}>
-        <p className={cnDocsExample('Caption')}>
-          <b>Где деньги?</b>
-        </p>
-        <div className={wp.decorator({ distribute: 'left' })}>
-          <CheckboxGroup
-            value={value}
-            items={itemsHead}
-            getItemLabel={(item) => item.name}
-            getItemDisabled={(item) => item.disabled}
-            onChange={({ value }) => setValue(value)}
-            name="CheckboxGroup"
-          />
+      <div className={cnMixSpace({ m: 'm' })}>
+        <div className={cnDocsExample()}>
+          <p className={cnDocsExample('Caption')}>
+            <b>Где деньги?</b>
+          </p>
+          <div className={wp.decorator({ distribute: 'left' })}>
+            <CheckboxGroup
+              value={value}
+              items={itemsHead}
+              getItemLabel={(item) => item.name}
+              getItemDisabled={(item) => item.disabled}
+              onChange={({ value }) => setValue(value)}
+              name="CheckboxGroup"
+            />
+          </div>
+          <p className={cnDocsExample('Status', { view: 'wrong' })}>
+            Неправильно
+          </p>
         </div>
-        <p className={cnDocsExample('Status', { view: 'wrong' })}>
-          Неправильно
-        </p>
       </div>
-      <div className={cnDocsExample()}>
-        <p className={cnDocsExample('Caption')}>
-          <b>Где деньги?</b>
-        </p>
-        <div className={wp.decorator({ distribute: 'left' })}>
-          <CheckboxGroup
-            value={value}
-            items={itemsHead2}
-            getItemLabel={(item) => item.name}
-            getItemDisabled={(item) => item.disabled}
-            onChange={({ value }) => setValue(value)}
-            name="CheckboxGroup"
-          />
+      <div className={cnMixSpace({ m: 'm' })}>
+        <div className={cnDocsExample()}>
+          <p className={cnDocsExample('Caption')}>
+            <b>Где деньги?</b>
+          </p>
+          <div className={wp.decorator({ distribute: 'left' })}>
+            <CheckboxGroup
+              value={value}
+              items={itemsHead2}
+              getItemLabel={(item) => item.name}
+              getItemDisabled={(item) => item.disabled}
+              onChange={({ value }) => setValue(value)}
+              name="CheckboxGroup"
+            />
+          </div>
+          <p className={cnDocsExample('Status', { view: 'right' })}>
+            Правильно
+          </p>
         </div>
-        <p className={cnDocsExample('Status', { view: 'right' })}>Правильно</p>
       </div>
     </div>
   );
@@ -117,33 +124,39 @@ export const CheckboxGroupExampleNeg = () => {
         wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
       ])}
     >
-      <div className={cnDocsExample()}>
-        <div className={wp.decorator({ distribute: 'left' })}>
-          <CheckboxGroup
-            value={value}
-            items={itemsNeg}
-            getItemLabel={(item) => item.name}
-            getItemDisabled={(item) => item.disabled}
-            onChange={({ value }) => setValue(value)}
-            name="CheckboxGroup"
-          />
+      <div className={cnMixSpace({ m: 'm' })}>
+        <div className={cnDocsExample()}>
+          <div className={wp.decorator({ distribute: 'left' })}>
+            <CheckboxGroup
+              value={value}
+              items={itemsNeg}
+              getItemLabel={(item) => item.name}
+              getItemDisabled={(item) => item.disabled}
+              onChange={({ value }) => setValue(value)}
+              name="CheckboxGroup"
+            />
+          </div>
+          <p className={cnDocsExample('Status', { view: 'wrong' })}>
+            Неправильно
+          </p>
         </div>
-        <p className={cnDocsExample('Status', { view: 'wrong' })}>
-          Неправильно
-        </p>
       </div>
-      <div className={cnDocsExample()}>
-        <div className={wp.decorator({ distribute: 'left' })}>
-          <CheckboxGroup
-            value={value}
-            items={itemsNeg2}
-            getItemLabel={(item) => item.name}
-            getItemDisabled={(item) => item.disabled}
-            onChange={({ value }) => setValue(value)}
-            name="CheckboxGroup"
-          />
+      <div className={cnMixSpace({ m: 'm' })}>
+        <div className={cnDocsExample()}>
+          <div className={wp.decorator({ distribute: 'left' })}>
+            <CheckboxGroup
+              value={value}
+              items={itemsNeg2}
+              getItemLabel={(item) => item.name}
+              getItemDisabled={(item) => item.disabled}
+              onChange={({ value }) => setValue(value)}
+              name="CheckboxGroup"
+            />
+          </div>
+          <p className={cnDocsExample('Status', { view: 'right' })}>
+            Правильно
+          </p>
         </div>
-        <p className={cnDocsExample('Status', { view: 'right' })}>Правильно</p>
       </div>
     </div>
   );
@@ -158,44 +171,52 @@ export const CheckboxGroupExampleGeneral = () => {
         wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
       ])}
     >
-      <div className={cnDocsExample()}>
-        <p className={cnDocsExample('Caption')}>
-          <b>Каких булок ещё съесть</b>
-        </p>
-        <div className={wp.decorator({ distribute: 'left' })}>
-          <CheckboxGroup
-            value={value}
-            items={itemsGen}
-            getItemLabel={(item) => item.name}
-            getItemDisabled={(item) => item.disabled}
-            onChange={({ value }) => setValue(value)}
-            name="CheckboxGroup"
-          />
+      <div className={cnMixSpace({ m: 'm' })}>
+        <div className={cnDocsExample()}>
+          <p className={cnDocsExample('Caption')}>
+            <b>Каких булок ещё съесть</b>
+          </p>
+          <div className={cnMixSpace({ mB: '4xl' })}>
+            <div className={wp.decorator({ distribute: 'left' })}>
+              <CheckboxGroup
+                value={value}
+                items={itemsGen}
+                getItemLabel={(item) => item.name}
+                getItemDisabled={(item) => item.disabled}
+                onChange={({ value }) => setValue(value)}
+                name="CheckboxGroup"
+              />
+            </div>
+          </div>
+          <p className={cnDocsExample('Status', { view: 'wrong' })}>
+            Неправильно
+          </p>
         </div>
-        <p className={cnDocsExample('Status', { view: 'wrong' })}>
-          Неправильно
-        </p>
       </div>
-      <div className={cnDocsExample()}>
-        <p className={cnDocsExample('Caption')}>
-          <b>Каких булок ещё съесть</b>
-        </p>
-        <div className={wp.decorator({ distribute: 'left' })}>
-          <CheckboxGroup
-            value={value}
-            items={itemsGen2}
-            getItemLabel={(item) => item.name}
-            getItemDisabled={(item) => item.disabled}
-            onChange={({ value }) => setValue(value)}
-            name="CheckboxGroup"
-          />
+      <div className={cnMixSpace({ m: 'm' })}>
+        <div className={cnDocsExample()}>
+          <p className={cnDocsExample('Caption')}>
+            <b>Каких булок ещё съесть</b>
+          </p>
+          <div className={wp.decorator({ distribute: 'left' })}>
+            <CheckboxGroup
+              value={value}
+              items={itemsGen2}
+              getItemLabel={(item) => item.name}
+              getItemDisabled={(item) => item.disabled}
+              onChange={({ value }) => setValue(value)}
+              name="CheckboxGroup"
+            />
+          </div>
+          <div
+            className={wp.decorator({ 'distribute': 'left', 'indent-t': 'm' })}
+          >
+            <Button label="Пропустить этот шаг" view="ghost" />
+          </div>
+          <p className={cnDocsExample('Status', { view: 'right' })}>
+            Правильно
+          </p>
         </div>
-        <div
-          className={wp.decorator({ 'distribute': 'left', 'indent-t': 'm' })}
-        >
-          <Button label="Пропустить этот шаг" view="ghost" />
-        </div>
-        <p className={cnDocsExample('Status', { view: 'right' })}>Правильно</p>
       </div>
     </div>
   );

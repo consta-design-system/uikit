@@ -3,27 +3,32 @@ import { MdxMenu } from '@consta/stand';
 import {
   ButtonExampleFormBasic,
   ButtonExampleFormHybrid,
-} from '../__stories__/examples/ButtonExampleForm/ButtonExampleForm';
+} from './examples/ButtonExampleForm/ButtonExampleForm';
 import {
   ButtonExampleSizeBasic,
   ButtonExampleSizeFull,
-} from '../__stories__/examples/ButtonExampleSize/ButtonExampleSize';
+} from './examples/ButtonExampleSize/ButtonExampleSize';
 import {
   ButtonExampleIconBasic,
   ButtonExampleIconOnly,
-} from '../__stories__/examples/ButtonExampleIcon/ButtonExampleIcon';
-import { ButtonExampleLoading } from '../__stories__/examples/ButtonExampleLoading/ButtonExampleLoading';
-import { ButtonExampleAdaptive } from '../__stories__/examples/ButtonExampleAdaptive/ButtonExampleAdaptive';
+} from './examples/ButtonExampleIcon/ButtonExampleIcon';
+import { ButtonExampleLoading } from './examples/ButtonExampleLoading/ButtonExampleLoading';
+import { ButtonExampleAdaptive } from './examples/ButtonExampleAdaptive/ButtonExampleAdaptive';
 import {
   ButtonExampleViewPrimary,
   ButtonExampleViewSecondary,
   ButtonExampleViewGhost,
   ButtonExampleViewClear,
   ButtonExampleViewDisabled,
-} from '../__stories__/examples/ButtonExampleView/ButtonExampleView';
+} from './examples/ButtonExampleView/ButtonExampleView';
+
+```tsx
+import { Button } from '@consta/uikit/Button';
+```
 
 <MdxMenu>
 
+- [Текст на кнопке](#текст-на-кнопке)
 - [Внешний вид](#внешний-вид)
   - [Типы кнопок](#типы-кнопок)
   - [Размер](#размер)
@@ -37,6 +42,10 @@ import {
 
 </MdxMenu>
 
+## Текст на кнопке
+
+За текст на кнопке отвечает свойство `label`. [Посмотреть примеры текстов](##LIBS.STAND|stand:uikit-components-button-stable/hash:как-писать-текст-на-кнопке)
+
 ## Внешний вид
 
 ### Типы кнопок
@@ -44,7 +53,7 @@ import {
 Всего в дизайн-системе четыре типа кнопок: `primary`, `secondary`, `ghost` и `clear`. Этого обычно хватает, чтобы расставить
 акценты пользовательских действий на странице.
 
-За тип кнопки отвечает свойство [view](#список-свойств).
+За тип кнопки отвечает свойство `view`.
 
 #### `primary`
 

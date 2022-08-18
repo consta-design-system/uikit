@@ -18,7 +18,7 @@ import { CollapseGroup } from '@consta/uikit/CollapseGroup';
 
 Группа коллапсов — несколько блоков, которые раскрываются по нажатию на заголовок. Подходит, если нужно показать много информации и помочь быстро найти нужное. Например, сделать блок с вопросами и ответами.
 
-Если вам нужен только один раскрывающийся блок, используйте [Collapse](/?path=/docs/components-collapse--playground).
+Если вам нужен только один раскрывающийся блок, используйте [Collapse](##LIBS.STAND/stand:uikit-components-collapse-stable).
 
 <CollapseGroupExampleSimple />
 
@@ -97,8 +97,7 @@ type OwnItem = {
 const ownItems: OwnItem[] = [
   {
     title: 'Во-первых',
-    text:
-      'Здесь ошибка. Кажется, с этим пунктом что-то не так: например, пользователь неправильно заполнил форму или не ответил на какой-то вопрос.',
+    text: 'Здесь ошибка. Кажется, с этим пунктом что-то не так: например, пользователь неправильно заполнил форму или не ответил на какой-то вопрос.',
     status: 'error',
   },
   {
@@ -108,8 +107,7 @@ const ownItems: OwnItem[] = [
   },
   {
     title: 'В-третьих',
-    text:
-      'Это не пройдено. Нужно открыть и посмотреть, что здесь нужно прочитать, посмотреть или заполнить.',
+    text: 'Это не пройдено. Нужно открыть и посмотреть, что здесь нужно прочитать, посмотреть или заполнить.',
     status: 'system',
   },
 ];
@@ -211,19 +209,29 @@ type GetItemLabel<ITEM> = (item: ITEM) => string;
 
 type GetItemContent<ITEM> = (item: ITEM) => React.ReactNode;
 
-type GetItemRightSide<ITEM> = (item: ITEM) => React.ReactNode | React.ReactNode[] | undefined;
+type GetItemRightSide<ITEM> = (
+  item: ITEM,
+) => React.ReactNode | React.ReactNode[] | undefined;
 
 type OnOpen<IS_ACCORDION> = (params: {
   e: React.MouseEvent<HTMLDivElement, MouseEvent>;
   value: (IS_ACCORDION extends true ? number : number[]) | null;
 }) => void;
 
-type Opened<IS_ACCORDION> = (IS_ACCORDION extends true ? number : number[]) | null | undefined;
+type Opened<IS_ACCORDION> =
+  | (IS_ACCORDION extends true ? number : number[])
+  | null
+  | undefined;
 
-const defaultGetItemLabel: CollapseGroupPropGetItemLabel<DefaultItem> = (item) => item.label;
-const defaultGetItemContent: CollapseGroupPropGetItemContent<DefaultItem> = (item) => item.content;
-const defaultGetItemRightSide: CollapseGroupPropGetItemContent<DefaultItem> = (item) =>
-  item.rightSide;
+const defaultGetItemLabel: CollapseGroupPropGetItemLabel<DefaultItem> = (
+  item,
+) => item.label;
+const defaultGetItemContent: CollapseGroupPropGetItemContent<DefaultItem> = (
+  item,
+) => item.content;
+const defaultGetItemRightSide: CollapseGroupPropGetItemContent<DefaultItem> = (
+  item,
+) => item.rightSide;
 ```
 
 | Свойство                                    | Тип                                                                           | По умолчанию              | Описание                                                                                                         |
