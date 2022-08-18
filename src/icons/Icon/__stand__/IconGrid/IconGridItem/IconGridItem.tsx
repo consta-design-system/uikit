@@ -1,11 +1,17 @@
+import './IconGridItem.css';
+
 import React from 'react';
 
+import { Text } from '##/components/Text';
 import { IconComponent, IconProps } from '##/icons/Icon';
+import { cn } from '##/utils/bem';
 
 export type IconsItemProps = {
   icon: IconComponent;
   name: string;
 } & IconProps;
+
+const cnIconGridItem = cn('IconGridItem');
 
 export const IconGridItem: React.FC<IconsItemProps> = ({
   icon,
@@ -15,9 +21,9 @@ export const IconGridItem: React.FC<IconsItemProps> = ({
 }) => {
   const Icon = icon;
   return (
-    <div className="tpl-grid__fraction text text_align_center">
+    <div className={cnIconGridItem()}>
       <Icon size={size} view={view} />
-      <div className="text_size_s text_view_secondary">{name}</div>
+      <Text view="secondary">{name}</Text>
     </div>
   );
 };

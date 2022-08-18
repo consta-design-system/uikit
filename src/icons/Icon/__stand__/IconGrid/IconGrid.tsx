@@ -1,4 +1,8 @@
+import './IconGrid.css';
+
 import React from 'react';
+
+import { cn } from '##/utils/bem';
 
 import { IconAdd } from '../../../IconAdd';
 import { IconAddToComparison } from '../../../IconAddToComparison';
@@ -87,8 +91,8 @@ import { IconHamburger } from '../../../IconHamburger';
 import { IconHand } from '../../../IconHand';
 import { IconHealth } from '../../../IconHealth';
 import { IconHome } from '../../../IconHome';
-import { IconInComparison } from '../../../IconInComparison';
 import { IconIncident } from '../../../IconIncident';
+import { IconInComparison } from '../../../IconInComparison';
 import { IconInfo } from '../../../IconInfo';
 import { IconIntroduction } from '../../../IconIntroduction';
 import { IconIpad } from '../../../IconIpad';
@@ -108,22 +112,22 @@ import { IconLithologyFilled } from '../../../IconLithologyFilled';
 import { IconLithologyStroked } from '../../../IconLithologyStroked';
 import { IconLock } from '../../../IconLock';
 import { IconLogicalElement } from '../../../IconLogicalElement';
-import { IconMBU } from '../../../IconMBU';
-import { IconMGRP } from '../../../IconMGRP';
-import { IconMLSP } from '../../../IconMLSP';
-import { IconMMP } from '../../../IconMMP';
 import { IconMail } from '../../../IconMail';
 import { IconMap } from '../../../IconMap';
 import { IconMaxHeight } from '../../../IconMaxHeight';
 import { IconMaxWidth } from '../../../IconMaxWidth';
+import { IconMBU } from '../../../IconMBU';
 import { IconMeatball } from '../../../IconMeatball';
+import { IconMGRP } from '../../../IconMGRP';
 import { IconMic } from '../../../IconMic';
+import { IconMLSP } from '../../../IconMLSP';
+import { IconMMP } from '../../../IconMMP';
 import { IconMolecules } from '../../../IconMolecules';
 import { IconMoon } from '../../../IconMoon';
 import { IconNodeEnd } from '../../../IconNodeEnd';
+import { IconNodes } from '../../../IconNodes';
 import { IconNodeStart } from '../../../IconNodeStart';
 import { IconNodeStep } from '../../../IconNodeStep';
-import { IconNodes } from '../../../IconNodes';
 import { IconOilBarrel } from '../../../IconOilBarrel';
 import { IconOpenInNew } from '../../../IconOpenInNew';
 import { IconOperators } from '../../../IconOperators';
@@ -143,8 +147,6 @@ import { IconPriceLabel } from '../../../IconPriceLabel';
 import { IconProcessing } from '../../../IconProcessing';
 import { IconQuestion } from '../../../IconQuestion';
 import { IconQuote } from '../../../IconQuote';
-import { IconRUO } from '../../../IconRUO';
-import { IconRUS } from '../../../IconRUS';
 import { IconRecord } from '../../../IconRecord';
 import { IconRemove } from '../../../IconRemove';
 import { IconRemoveFromComparison } from '../../../IconRemoveFromComparison';
@@ -155,6 +157,8 @@ import { IconRevert } from '../../../IconRevert';
 import { IconRing } from '../../../IconRing';
 import { IconRouble } from '../../../IconRouble';
 import { IconRuler } from '../../../IconRuler';
+import { IconRUO } from '../../../IconRUO';
+import { IconRUS } from '../../../IconRUS';
 import { IconSave } from '../../../IconSave';
 import { IconScreen } from '../../../IconScreen';
 import { IconSearch } from '../../../IconSearch';
@@ -194,8 +198,8 @@ import { IconUnsort } from '../../../IconUnsort';
 import { IconUnsortCenter } from '../../../IconUnsortCenter';
 import { IconUpload } from '../../../IconUpload';
 import { IconUser } from '../../../IconUser';
-import { IconVZD } from '../../../IconVZD';
 import { IconVideo } from '../../../IconVideo';
+import { IconVZD } from '../../../IconVZD';
 import { IconWarning } from '../../../IconWarning';
 import { IconWatch } from '../../../IconWatch';
 import { IconWellOpen } from '../../../IconWellOpen';
@@ -206,232 +210,229 @@ import { IconWorldStroked } from '../../../IconWorldStroked';
 import { IconWrench } from '../../../IconWrench';
 import { IconYandexDzen } from '../../../IconYandexDzen';
 import { IconYoutube } from '../../../IconYoutube';
-
-
 import { IconGridItem } from './IconGridItem';
 
 const icons = {
   IconAdd,
-IconAddToComparison,
-IconAlert,
-IconAlignBlocksLeft,
-IconAlignBlocksRight,
-IconAlignCenter,
-IconAlignJustify,
-IconAlignLeft,
-IconAlignRight,
-IconAllDone,
-IconArrowDown,
-IconArrowLeft,
-IconArrowRight,
-IconArrowUp,
-IconArtBrush,
-IconAttach,
-IconAxesRotate,
-IconBackward,
-IconBag,
-IconBarrier,
-IconBento,
-IconBit,
-IconBold,
-IconBook,
-IconBookmarkFilled,
-IconBookmarkStroked,
-IconCalculator,
-IconCalendar,
-IconCamera,
-IconCancel,
-IconCards,
-IconChatFilled,
-IconChatStroked,
-IconCheck,
-IconClose,
-IconCollapse,
-IconColorFill,
-IconColorText,
-IconColumns,
-IconCommentFilled,
-IconCommentStroked,
-IconConnection,
-IconCopy,
-IconCrown,
-IconCursorMouse,
-IconDataNull,
-IconDiamond,
-IconDinosaur,
-IconDisconnection,
-IconDocAdd,
-IconDocBlank,
-IconDocDelete,
-IconDocExport,
-IconDocFilled,
-IconDown,
-IconDownload,
-IconDrag,
-IconDraggable,
-IconDrillingPartLeftFilled,
-IconDrillingPartLeftStroked,
-IconDrillingPartRightFilled,
-IconDrillingPartRightStroked,
-IconDrillingRig,
-IconDrop,
-IconEdit,
-IconExit,
-IconExpand,
-IconEye,
-IconEyeClose,
-IconFavorite,
-IconFilter,
-IconFishboneFilled,
-IconFishboneStroked,
-IconFitToDefault,
-IconFlagFilled,
-IconFlagStroked,
-IconFolders,
-IconForward,
-IconFunnel,
-IconGas,
-IconGeo,
-IconGradients,
-IconGrouping,
-IconHamburger,
-IconHand,
-IconHealth,
-IconHome,
-IconInComparison,
-IconIncident,
-IconInfo,
-IconIntroduction,
-IconIpad,
-IconItalic,
-IconKebab,
-IconKernFilled,
-IconKernStroked,
-IconLaptop,
-IconLayers,
-IconLeaf,
-IconLightningBolt,
-IconLineAndBarChart,
-IconLink,
-IconList,
-IconListNumbered,
-IconLithologyFilled,
-IconLithologyStroked,
-IconLock,
-IconLogicalElement,
-IconMBU,
-IconMGRP,
-IconMLSP,
-IconMMP,
-IconMail,
-IconMap,
-IconMaxHeight,
-IconMaxWidth,
-IconMeatball,
-IconMic,
-IconMolecules,
-IconMoon,
-IconNodeEnd,
-IconNodeStart,
-IconNodeStep,
-IconNodes,
-IconOilBarrel,
-IconOpenInNew,
-IconOperators,
-IconPanelBottom,
-IconPanelLeft,
-IconPanelRight,
-IconPanelTop,
-IconPaste,
-IconPause,
-IconPhone,
-IconPhoto,
-IconPicture,
-IconPlay,
-IconPressureFilled,
-IconPressureStroked,
-IconPriceLabel,
-IconProcessing,
-IconQuestion,
-IconQuote,
-IconRUO,
-IconRUS,
-IconRecord,
-IconRemove,
-IconRemoveFromComparison,
-IconReply,
-IconResize,
-IconRestart,
-IconRevert,
-IconRing,
-IconRouble,
-IconRuler,
-IconSave,
-IconScreen,
-IconSearch,
-IconSelect,
-IconSelectOpen,
-IconSendMessage,
-IconSettings,
-IconShape,
-IconShuffle,
-IconSmile,
-IconSnowflake,
-IconSortDown,
-IconSortDownCenter,
-IconSortUp,
-IconSortUpCenter,
-IconSpeed,
-IconStop,
-IconStorage,
-IconStrikethrough,
-IconString,
-IconSun,
-IconTable,
-IconTable2,
-IconTarget,
-IconTeam,
-IconTechResponse,
-IconTest,
-IconThumbUp,
-IconTie,
-IconTop,
-IconTrajectory,
-IconTrash,
-IconType,
-IconUnderline,
-IconUnlock,
-IconUnsort,
-IconUnsortCenter,
-IconUpload,
-IconUser,
-IconVZD,
-IconVideo,
-IconWarning,
-IconWatch,
-IconWellOpen,
-IconWellPipe,
-IconWideScreen,
-IconWorldFilled,
-IconWorldStroked,
-IconWrench,
-IconYandexDzen,
-IconYoutube,
-
+  IconAddToComparison,
+  IconAlert,
+  IconAlignBlocksLeft,
+  IconAlignBlocksRight,
+  IconAlignCenter,
+  IconAlignJustify,
+  IconAlignLeft,
+  IconAlignRight,
+  IconAllDone,
+  IconArrowDown,
+  IconArrowLeft,
+  IconArrowRight,
+  IconArrowUp,
+  IconArtBrush,
+  IconAttach,
+  IconAxesRotate,
+  IconBackward,
+  IconBag,
+  IconBarrier,
+  IconBento,
+  IconBit,
+  IconBold,
+  IconBook,
+  IconBookmarkFilled,
+  IconBookmarkStroked,
+  IconCalculator,
+  IconCalendar,
+  IconCamera,
+  IconCancel,
+  IconCards,
+  IconChatFilled,
+  IconChatStroked,
+  IconCheck,
+  IconClose,
+  IconCollapse,
+  IconColorFill,
+  IconColorText,
+  IconColumns,
+  IconCommentFilled,
+  IconCommentStroked,
+  IconConnection,
+  IconCopy,
+  IconCrown,
+  IconCursorMouse,
+  IconDataNull,
+  IconDiamond,
+  IconDinosaur,
+  IconDisconnection,
+  IconDocAdd,
+  IconDocBlank,
+  IconDocDelete,
+  IconDocExport,
+  IconDocFilled,
+  IconDown,
+  IconDownload,
+  IconDrag,
+  IconDraggable,
+  IconDrillingPartLeftFilled,
+  IconDrillingPartLeftStroked,
+  IconDrillingPartRightFilled,
+  IconDrillingPartRightStroked,
+  IconDrillingRig,
+  IconDrop,
+  IconEdit,
+  IconExit,
+  IconExpand,
+  IconEye,
+  IconEyeClose,
+  IconFavorite,
+  IconFilter,
+  IconFishboneFilled,
+  IconFishboneStroked,
+  IconFitToDefault,
+  IconFlagFilled,
+  IconFlagStroked,
+  IconFolders,
+  IconForward,
+  IconFunnel,
+  IconGas,
+  IconGeo,
+  IconGradients,
+  IconGrouping,
+  IconHamburger,
+  IconHand,
+  IconHealth,
+  IconHome,
+  IconInComparison,
+  IconIncident,
+  IconInfo,
+  IconIntroduction,
+  IconIpad,
+  IconItalic,
+  IconKebab,
+  IconKernFilled,
+  IconKernStroked,
+  IconLaptop,
+  IconLayers,
+  IconLeaf,
+  IconLightningBolt,
+  IconLineAndBarChart,
+  IconLink,
+  IconList,
+  IconListNumbered,
+  IconLithologyFilled,
+  IconLithologyStroked,
+  IconLock,
+  IconLogicalElement,
+  IconMBU,
+  IconMGRP,
+  IconMLSP,
+  IconMMP,
+  IconMail,
+  IconMap,
+  IconMaxHeight,
+  IconMaxWidth,
+  IconMeatball,
+  IconMic,
+  IconMolecules,
+  IconMoon,
+  IconNodeEnd,
+  IconNodeStart,
+  IconNodeStep,
+  IconNodes,
+  IconOilBarrel,
+  IconOpenInNew,
+  IconOperators,
+  IconPanelBottom,
+  IconPanelLeft,
+  IconPanelRight,
+  IconPanelTop,
+  IconPaste,
+  IconPause,
+  IconPhone,
+  IconPhoto,
+  IconPicture,
+  IconPlay,
+  IconPressureFilled,
+  IconPressureStroked,
+  IconPriceLabel,
+  IconProcessing,
+  IconQuestion,
+  IconQuote,
+  IconRUO,
+  IconRUS,
+  IconRecord,
+  IconRemove,
+  IconRemoveFromComparison,
+  IconReply,
+  IconResize,
+  IconRestart,
+  IconRevert,
+  IconRing,
+  IconRouble,
+  IconRuler,
+  IconSave,
+  IconScreen,
+  IconSearch,
+  IconSelect,
+  IconSelectOpen,
+  IconSendMessage,
+  IconSettings,
+  IconShape,
+  IconShuffle,
+  IconSmile,
+  IconSnowflake,
+  IconSortDown,
+  IconSortDownCenter,
+  IconSortUp,
+  IconSortUpCenter,
+  IconSpeed,
+  IconStop,
+  IconStorage,
+  IconStrikethrough,
+  IconString,
+  IconSun,
+  IconTable,
+  IconTable2,
+  IconTarget,
+  IconTeam,
+  IconTechResponse,
+  IconTest,
+  IconThumbUp,
+  IconTie,
+  IconTop,
+  IconTrajectory,
+  IconTrash,
+  IconType,
+  IconUnderline,
+  IconUnlock,
+  IconUnsort,
+  IconUnsortCenter,
+  IconUpload,
+  IconUser,
+  IconVZD,
+  IconVideo,
+  IconWarning,
+  IconWatch,
+  IconWellOpen,
+  IconWellPipe,
+  IconWideScreen,
+  IconWorldFilled,
+  IconWorldStroked,
+  IconWrench,
+  IconYandexDzen,
+  IconYoutube,
 } as const;
 
 type Name = keyof typeof icons;
 
+const cnIconGrid = cn('IconGrid');
+
 const names = Object.keys(icons).sort() as Name[];
 
-export function Playground() {
+export function IconGrid() {
   return (
-    <div className="tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full">
+    <div className={cnIconGrid()}>
       {names.map((name) => (
         <IconGridItem key={name} name={name} icon={icons[name]} />
       ))}
     </div>
   );
 }
-
-

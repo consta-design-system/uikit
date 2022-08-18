@@ -32,17 +32,19 @@ import { useHideElementsInLine } from '@consta/uikit/useHideElementsInLine';
 
 ```css
 .ExampleUseHideElementsInLine {
+  margin-bottom: var(--space-l);
+
   &-Tag {
     margin-right: var(--space-xs);
 
     &_display {
-      &_hidden {
+      &_hidden.TagBase {
         position: absolute;
         left: -300vw;
-
         visibility: hidden;
       }
-      &_none {
+
+      &_none.TagBase {
         display: none;
       }
     }

@@ -31,7 +31,7 @@ export const ModalExampleZIndex = () => {
         hasOverlay
         onClickOutside={setIsModalOpen.off}
         onEsc={setIsModalOpen.off}
-        style={{ zIndex: 100 }}
+        style={{ zIndex: 2000 }}
       >
         <Select
           className={cnMixSpace({ mB: 'm' })}
