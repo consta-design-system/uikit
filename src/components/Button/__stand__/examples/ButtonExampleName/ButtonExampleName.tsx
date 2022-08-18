@@ -19,12 +19,7 @@ export const ButtonExampleNameSemantics = () => {
     >
       <div className={cnMixSpace({ m: 'm' })}>
         <div className={cnDocsExample()}>
-          <p
-            className={cnDocsExample('Caption')}
-            className={cnMixSpace({ mB: 'm' })}
-          >
-            Ракета к запуску готова.
-          </p>
+          <p className={cnDocsExample('Caption')}>Ракета к запуску готова.</p>
           <Button label="OK" />
           <p className={cnDocsExample('Status', { view: 'wrong' })}>
             Неправильно
@@ -37,12 +32,7 @@ export const ButtonExampleNameSemantics = () => {
       </div>
       <div className={cnMixSpace({ m: 'm' })}>
         <div className={cnDocsExample()}>
-          <p
-            className={cnDocsExample('Caption')}
-            className={cnMixSpace({ mB: 'm' })}
-          >
-            Ракета к запуску готова.
-          </p>
+          <p className={cnDocsExample('Caption')}>Ракета к запуску готова.</p>
           <Button label="Запустить" />
           <p className={cnDocsExample('Status', { view: 'right' })}>
             Правильно
