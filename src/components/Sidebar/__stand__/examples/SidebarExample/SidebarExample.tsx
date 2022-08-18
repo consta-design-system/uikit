@@ -26,7 +26,7 @@ export const SidebarExample = () => {
         isOpen={isSidebarOpen}
         onClickOutside={() => setIsSidebarOpen(false)}
         onEsc={() => setIsSidebarOpen(false)}
-        style={{ zIndex: 120 }}
+        style={{ zIndex: 2000 }}
       >
         <Sidebar.Content className={cnSidebarExample('Content')}>
           <Text
@@ -155,6 +155,7 @@ export const SidebarExampleLeft = () => {
         onClickOutside={() => setIsSidebarOpen(false)}
         onEsc={() => setIsSidebarOpen(false)}
         position="left"
+        style={{ zIndex: 2000 }}
       >
         <Sidebar.Content className={cnSidebarExample('Content')}>
           <Text
@@ -216,6 +217,7 @@ export const SidebarExampleRight = () => {
         onClickOutside={() => setIsSidebarOpen(false)}
         onEsc={() => setIsSidebarOpen(false)}
         position="right"
+        style={{ zIndex: 2000 }}
       >
         <Sidebar.Content className={cnSidebarExample('Content')}>
           <Text
@@ -277,6 +279,7 @@ export const SidebarExampleTop = () => {
         onClickOutside={() => setIsSidebarOpen(false)}
         onEsc={() => setIsSidebarOpen(false)}
         position="top"
+        style={{ zIndex: 2000 }}
       >
         <Sidebar.Content className={cnSidebarExample('Content')}>
           <Text
@@ -335,6 +338,7 @@ export const SidebarExampleBottom = () => {
         onClickOutside={() => setIsSidebarOpen(false)}
         onEsc={() => setIsSidebarOpen(false)}
         position="bottom"
+        style={{ zIndex: 2000 }}
       >
         <Sidebar.Content className={cnSidebarExample('Content')}>
           <Text
@@ -394,6 +398,7 @@ export const SidebarExampleNoOverlay = () => {
         onEsc={() => setIsSidebarOpen(false)}
         position="right"
         hasOverlay={false}
+        style={{ zIndex: 2000 }}
       >
         <Sidebar.Content className={cnSidebarExample('Content')}>
           <Text

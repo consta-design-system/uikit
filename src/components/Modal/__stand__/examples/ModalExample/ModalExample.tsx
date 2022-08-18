@@ -29,6 +29,7 @@ export const ModalExample = () => {
         hasOverlay
         onClickOutside={(): void => setIsModalOpen(false)}
         onEsc={(): void => setIsModalOpen(false)}
+        style={{ zIndex: 2000 }}
       >
         <Text
           as="p"
