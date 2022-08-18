@@ -2,8 +2,9 @@ import './MixCardExampleBorder.css';
 
 import React from 'react';
 
-import { Text } from '../../../../../components/Text/Text';
-import { cn } from '../../../../../utils/bem';
+import { Text } from '##/components/Text/Text';
+import { cn } from '##/utils/bem';
+
 import { cnMixCard } from '../../../MixCard';
 
 const cnMixCardExampleForm = cn('MixCardExampleBorder');
