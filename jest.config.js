@@ -3,6 +3,7 @@ module.exports = {
   preset: 'ts-jest',
   moduleNameMapper: {
     '\\.css$': '<rootDir>/__mocks__/styleMock.js',
+    '##/(.*)$': '<rootDir>/src/$1',
   },
   coveragePathIgnorePatterns: ['/node_modules/', '/coverage/', '/types/'],
   testMatch: ['**/*.test.{ts,tsx}'],

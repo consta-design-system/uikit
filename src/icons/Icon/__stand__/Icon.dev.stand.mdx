@@ -1,0 +1,70 @@
+import { MdxMenu } from '@consta/stand';
+
+import {
+  IconExampleViewAlert,
+  IconExampleViewLink,
+  IconExampleViewBrand,
+  IconExampleViewGhost,
+  IconExampleViewPrimary,
+  IconExampleViewSuccess,
+  IconExampleViewWarning,
+  IconExampleViewSecondary,
+} from './examples/IconExampleView/IconExampleView';
+import { IconExampleSize } from './examples/IconExampleSize/IconExampleSize';
+
+```tsx
+import { Icon } from '@consta/uikit/Icon';
+```
+
+<MdxMenu>
+
+- [Внешний вид](#внешний-вид)
+- [Размер](#размер)
+- [Список свойств](#свойства)
+- [Пример использования](#примеры)
+  {/* - [Создание своих иконок](?path=/docs/common-develop-icons--page) */}
+
+</MdxMenu>
+
+## Внешний вид
+
+За вид иконки отвечает свойство `view`.
+
+| `'alert'`                | `'brand'`                | `'ghost'`                | `'link'`                | `'primary'`                | `'secondary'`                | `'success'`                | `'warning'`                |
+| ------------------------ | ------------------------ | ------------------------ | ----------------------- | -------------------------- | ---------------------------- | -------------------------- | -------------------------- |
+| <IconExampleViewAlert /> | <IconExampleViewBrand /> | <IconExampleViewGhost /> | <IconExampleViewLink /> | <IconExampleViewPrimary /> | <IconExampleViewSecondary /> | <IconExampleViewSuccess /> | <IconExampleViewWarning /> |
+
+## Размер
+
+За размер иконки отвечает свойство `size`. Варианты: `'xs'`, `'s'`, `'m'`.
+
+<IconExampleSize />
+
+## Импорт
+
+```tsx
+import { Icon } from '@consta/uikit/Icon';
+```
+
+## Свойства
+
+| Свойство                | Тип                                                                                             | По умолчанию | Описание                                  |
+| ----------------------- | ----------------------------------------------------------------------------------------------- | ------------ | ----------------------------------------- |
+| [`size?` ](#размер)     | `'xs'`, `'s'`, `'m'`                                                                            | `'m'`        | Размер                                    |
+| [`view?`](#внешний-вид) | `'alert'`, `'brand'`, `'ghost'`, `'link'`, `'primary'`, `'secondary'`, `'success'`, `'warning'` | -            | Вид иконки                                |
+| `className?`            | `string`                                                                                        | -            | Дополнительный CSS-класс                  |
+| `ref?`                  | `React.Ref<HTMLSpanElement>`                                                                    | -            | Ссылка на корневой DOM-элемент компонента |
+
+## Примеры
+
+### Иконка в кнопке
+
+```tsx
+import { IconCancel } from '@consta/uikit/IconCancel';
+
+const buttonWithIcon = () => {
+  return <Button label="Закрыть" iconLeft={IconCancel} onlyIcon />;
+};
+
+export default buttonWithIcon;
+```

@@ -1,0 +1,17 @@
+.IconGrid {
+  display: grid;
+  grid-template-columns: auto;
+  gap: var(--space-m);
+
+  @media screen and (min-width: 500px) {
+    grid-template-columns: auto auto;
+  }
+
+  @media screen and (min-width: 700px) {
+    grid-template-columns: auto auto auto;
+  }
+
+  @media screen and (min-width: 900px) {
+    grid-template-columns: auto auto auto auto;
+  }
+}
