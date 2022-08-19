@@ -8,7 +8,7 @@
   <rect width="200" height="120" fill="#ECF1F4" />
   <path
     d="M0 4C0 1.79086 1.79086 0 4 0H196C198.209 0 200 1.79086 200 4V116C200 118.209 198.209 120 196 120H4C1.79086 120 0 118.209 0 116V4Z"
-    fill="#ECF1F4"
+    fill="var(--color-bg-secondary)"
   />
   <rect x="75" y="24" width="50" height="73" fill="white" />
   <rect x="83" y="35" width="35" height="23" rx="4" fill="#ECF1F4" />
