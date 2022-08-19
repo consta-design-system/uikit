@@ -11,8 +11,7 @@
     width="88"
     height="8"
     transform="rotate(90 30 18)"
-    fill="#004166"
-    fill-opacity="0.2"
+    fill="var(--color-bg-border)"
   />
   <rect
     x="48"
@@ -20,8 +19,7 @@
     width="88"
     height="8"
     transform="rotate(90 48 18)"
-    fill="#004166"
-    fill-opacity="0.2"
+    fill="var(--color-bg-border)"
   />
   <rect
     x="66"
@@ -29,8 +27,7 @@
     width="88"
     height="8"
     transform="rotate(90 66 18)"
-    fill="#004166"
-    fill-opacity="0.2"
+    fill="var(--color-bg-border)"
   />
   <rect
     x="84"
@@ -38,8 +35,7 @@
     width="88"
     height="8"
     transform="rotate(90 84 18)"
-    fill="#004166"
-    fill-opacity="0.2"
+    fill="var(--color-bg-border)"
   />
   <rect
     x="102"
@@ -47,8 +43,7 @@
     width="88"
     height="8"
     transform="rotate(90 102 18)"
-    fill="#004166"
-    fill-opacity="0.2"
+    fill="var(--color-bg-border)"
   />
   <rect
     x="120"
@@ -56,8 +51,7 @@
     width="88"
     height="8"
     transform="rotate(90 120 18)"
-    fill="#004166"
-    fill-opacity="0.2"
+    fill="var(--color-bg-border)"
   />
   <rect
     x="138"
@@ -65,8 +59,7 @@
     width="88"
     height="8"
     transform="rotate(90 138 18)"
-    fill="#004166"
-    fill-opacity="0.2"
+    fill="var(--color-bg-border)"
   />
   <rect
     x="156"
@@ -74,8 +67,7 @@
     width="88"
     height="8"
     transform="rotate(90 156 18)"
-    fill="#004166"
-    fill-opacity="0.2"
+    fill="var(--color-bg-border)"
   />
   <rect
     x="174"
@@ -83,8 +75,7 @@
     width="88"
     height="8"
     transform="rotate(90 174 18)"
-    fill="#004166"
-    fill-opacity="0.2"
+    fill="var(--color-bg-border)"
   />
   <g opacity="0.4">
     <rect
@@ -93,7 +84,7 @@
       width="58"
       height="44"
       transform="rotate(90 174 33)"
-      fill="#0078D2"
+      fill="var(--color-bg-link)"
     />
   </g>
   <g opacity="0.4">
@@ -103,7 +94,7 @@
       width="24"
       height="98"
       transform="rotate(90 120 67)"
-      fill="#0078D2"
+      fill="var(--color-bg-link)"
     />
   </g>
   <g opacity="0.4">
@@ -113,7 +104,7 @@
       width="24"
       height="44"
       transform="rotate(90 66 33)"
-      fill="#0078D2"
+      fill="var(--color-bg-link)"
     />
   </g>
   <g opacity="0.4">
@@ -123,7 +114,7 @@
       width="24"
       height="44"
       transform="rotate(90 120 33)"
-      fill="#0078D2"
+      fill="var(--color-bg-link)"
     />
   </g>
 </svg>

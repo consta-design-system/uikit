@@ -7,7 +7,7 @@
 >
   <path
     d="M0 4C0 1.79086 1.79086 0 4 0H196C198.209 0 200 1.79086 200 4V116C200 118.209 198.209 120 196 120H4C1.79086 120 0 118.209 0 116V4Z"
-    fill="white"
+    fill="var(--color-bg-default)"
   />
   <rect
     x="164.5"
@@ -16,7 +16,7 @@
     height="15"
     rx="7.5"
     transform="rotate(90 164.5 52.5)"
-    stroke="#0078D2"
+    stroke="var(--color-bg-link)"
   />
   <rect
     x="160"
@@ -25,7 +25,7 @@
     height="6"
     rx="3"
     transform="rotate(90 160 57)"
-    fill="#0078D2"
+    fill="var(--color-bg-link)"
   />
   <rect
     x="127"
@@ -34,8 +34,7 @@
     height="16"
     rx="8"
     transform="rotate(90 127 52)"
-    fill="#004269"
-    fill-opacity="0.07"
+    fill="var(--color-control-bg-ghost)"
   />
   <rect
     x="126.5"
@@ -44,8 +43,7 @@
     height="15"
     rx="7.5"
     transform="rotate(90 126.5 52.5)"
-    stroke="#004269"
-    stroke-opacity="0.28"
+    stroke="var(--color-control-bg-border-default)"
   />
   <rect
     x="122"
@@ -54,7 +52,7 @@
     height="6"
     rx="3"
     transform="rotate(90 122 57)"
-    fill="#00395C"
+    fill="var(--color-bg-ghost)"
     fill-opacity="0.8"
   />
   <rect
@@ -64,8 +62,7 @@
     height="16"
     rx="8"
     transform="rotate(90 88 52)"
-    fill="#004269"
-    fill-opacity="0.07"
+    fill="var(--color-control-bg-ghost)"
   />
   <rect
     x="49.5"
@@ -74,7 +71,6 @@
     height="15"
     rx="7.5"
     transform="rotate(90 49.5 52.5)"
-    stroke="#004269"
-    stroke-opacity="0.28"
+    stroke="var(--color-control-bg-border-default)"
   />
 </svg>
