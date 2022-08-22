@@ -1,4 +1,7 @@
 import { createConfig } from '@consta/stand';
+import React from 'react';
+
+import { Theme } from '##/components/Theme';
 
 import image from './ConstaImage.png';
 
@@ -29,4 +32,7 @@ export const { createStand } = createConfig({
   image,
   description:
     '[тут описание что это такое] Ультра топчик библиотеки с пацанскими кнопками и графиками, качай.',
+  standPageDecoration: ({ children, theme }) => (
+    <Theme preset={theme}>{children}</Theme>
+  ),
 });
