@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import { cnMixSpace } from '../../../../../mixs/MixSpace/MixSpace';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Select } from '../../../Select';
 
@@ -28,6 +29,7 @@ export const SelectExampleSize = () => {
   return (
     <div className={cnDocsDecorator('Section')}>
       <Select
+        className={cnMixSpace({ mB: 'm' })}
         placeholder="Размер xs"
         size="xs"
         items={items}
@@ -35,6 +37,7 @@ export const SelectExampleSize = () => {
         onChange={({ value }) => setValue(value)}
       />
       <Select
+        className={cnMixSpace({ mB: 'm' })}
         placeholder="Размер s"
         size="s"
         items={items}
@@ -42,6 +45,7 @@ export const SelectExampleSize = () => {
         onChange={({ value }) => setValue(value)}
       />
       <Select
+        className={cnMixSpace({ mB: 'm' })}
         placeholder="Размер m"
         size="m"
         items={items}
@@ -49,6 +53,7 @@ export const SelectExampleSize = () => {
         onChange={({ value }) => setValue(value)}
       />
       <Select
+        className={cnMixSpace({ mB: 'm' })}
         placeholder="Размер l"
         size="l"
         items={items}

@@ -6,21 +6,12 @@ import {
 } from './examples/SwitchExampleName/SwitchExampleName';
 import { SwitchExampleView } from './examples/SwitchExampleView/SwitchExampleView';
 
+```tsx
+import { Switch } from '@consta/uikit/Switch';
+```
+
 Переключатель с двумя положениями: **включено** и **выключено**. Нужен, чтобы переключать
 режимы — мгновенно, сразу после того, как пользователь меняет положение переключателя.
-
-<MdxMenu>
-
-- [Название](#название)
-- [Состояния](#состояния)
-- [Размер](#размер)
-- [Внешний вид](#внешний-вид)
-- [Выравнивание](#выравнивание)
-- [Импорт](#импорт)
-- [Список свойств](#свойства)
-- [Пример использования](#пример)
-
-</MdxMenu>
 
 <SwitchExampleView />
 
@@ -34,7 +25,7 @@ import { SwitchExampleView } from './examples/SwitchExampleView/SwitchExampleVie
 
 К сожалению, это не всегда получается, и пользователи могут запутаться. Если можете,
 используйте другой компонент, например,
-[ChoiceGroup](?path=/docs/components-choicegroup--playground)
+[ChoiceGroup](##LIBS.STAND/stand:uikit-components-choicegroup-stable/hash:как-использовать)
 из двух элементов.
 
 ### С глаголом
@@ -55,11 +46,5 @@ import { SwitchExampleView } from './examples/SwitchExampleView/SwitchExampleVie
 Если в названии глагола нет, подставьте вместо переключателя значения **включен** и **выключен**
 и попробуйте прочитать, что получилось. Если фраза правильно описывает то,
 что происходит в интерфейсе, значит, всё в порядке.
-
-```tsx
-  <Switch label="Тестовый режим" checked/>
-  <Switch label="Тёмная тема" />
-  <Switch label="Автоматическая трансформация" />
-```
 
 <SwitchExampleNameNoVerb />

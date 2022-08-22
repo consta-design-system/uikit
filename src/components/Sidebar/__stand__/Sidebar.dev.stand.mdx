@@ -8,6 +8,10 @@ import {
   SidebarExampleNoOverlay,
 } from './examples/SidebarExample/SidebarExample';
 
+```tsx
+import { Sidebar } from '@consta/uikit/Sidebar';
+```
+
 <MdxMenu>
 
 - [Содержимое](#содержимое)
@@ -113,7 +117,12 @@ export const SidebarExample = () => {
           >
             Заголовок сайдбара
           </Text>
-          <Text as="p" size="m" view="secondary" className={cnSidebarExample('Body')}>
+          <Text
+            as="p"
+            size="m"
+            view="secondary"
+            className={cnSidebarExample('Body')}
+          >
             // содержимое сайдбара
           </Text>
         </Sidebar.Content>

@@ -16,6 +16,10 @@ import {
 import { SelectExampleLabel } from './examples/SelectExampleLabel/SelectExampleLabel';
 import { SelectExampleStatus } from './examples/SelectExampleStatus/SelectExampleStatus';
 
+```tsx
+import { Select } from '@consta/uikit/Select';
+```
+
 <MdxMenu>
 
 - [Содержимое](#содержимое-списка)
@@ -285,8 +289,6 @@ export function SelectExampleGroups() {
 
 За статус отвечает свойство `status`. Если оно не указано, поле будет обычным.
 
-<SelectExampleStatus />
-
 ```tsx
 type Item = {
   label: string;
@@ -351,6 +353,8 @@ export function SelectExampleStatus() {
   );
 }
 ```
+
+<SelectExampleStatus />
 
 ## Размер
 
