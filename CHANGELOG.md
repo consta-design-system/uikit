@@ -1,5 +1,15 @@
 # Changelog
 
+## v3.29.0 (23/08/2022)
+Самое важное:
+- в `Tabs` добавили `xs` размер
+---
+
+- [docs(Button): fix misprint, describe icon size (#2590)](https://github.com/consta-design-system/uikit/commit/12efe41277802741581f2f6e48d08fd1f89163e2) - [@arhayka](https://github.com/arhayka)
+- [feat(Tabs): add xs size and fix colors (#2481)](https://github.com/consta-design-system/uikit/commit/ae6ec2cfb446c591dfd8a51eb4cbeaaecc493912) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
 ## v3.28.0 (10/08/2022)
 Самое важное:
 - Разработали компонент `AvatarGroup`, теперь есть возможность показывать аватарки, группируя их.
@@ -424,23 +434,3 @@ endFieldOnBlur - deleted, use onBlur
 - [fix(useTimer): fix bug with memory leak (#2048)](https://github.com/consta-design-system/uikit/commit/9b02c336bc174398077e15ff7d9281219e933733) - [@N1MBER](https://github.com/N1MBER)
 - [test(DatePicker): add tests (#2050)](https://github.com/consta-design-system/uikit/commit/e175753c33e0b89f231ab947ba477c36e99c51ff) - [@gizeasy](https://github.com/gizeasy)
 - [feat(docs): add design contributing docs (#2039)](https://github.com/consta-design-system/uikit/commit/260be28aba02b2c17e18a36aed41b71cce8a5203) - [@kolebayev](https://github.com/kolebayev)
-
---------------------
-
-## v3.15.1 (09/02/2022)
-Самое важное:
-
-- `DateTime`, обновлены тесты
-- Обновлена докуменация
-- Исправлены мелкие недочеты
-
---- 
-
-- [docs(TextField): add autoComplit to the props table (#2040)](https://github.com/consta-design-system/uikit/commit/3c1e56e9ec5b32e82186d8bf01785f3f7501683a) - [@arhayka](https://github.com/arhayka)
-- [docs(Responces): add ResponsesExit to the docs (#2038)](https://github.com/consta-design-system/uikit/commit/3609a932fe231d3bd4016dc58f8afdf66b38562b) - [@arhayka](https://github.com/arhayka)
-- [test(DateTime): add tests (#2037)](https://github.com/consta-design-system/uikit/commit/28133c0531cbef19e61d26d24f06cbdb17850473) - [@gizeasy](https://github.com/gizeasy)
-- [docs(Icons): add create icons page (#2023)](https://github.com/consta-design-system/uikit/commit/50dcfe357f57bd224a60d2e5d71186f13d29539e) - [@arhayka](https://github.com/arhayka)
-- [docs(Breadcrumbs): edit docs (#2022)](https://github.com/consta-design-system/uikit/commit/a11dbcd3cecb33cb311e1c41df3704b6c621a449) - [@gizeasy](https://github.com/gizeasy)
-- [refactor(DateTime): small code change (#2036)](https://github.com/consta-design-system/uikit/commit/41fc55023cec03a149915a2ade8b23b962632f78) - [@gizeasy](https://github.com/gizeasy)
-- [fix(Storybook): fixed link to Skeleton (#2021)](https://github.com/consta-design-system/uikit/commit/1fe1b336ee55f7028ccc3cea84b1123a01d4c311) - [@gizeasy](https://github.com/gizeasy)
-- [fix(ContextMenuItem): fix cascading styles (#2020)](https://github.com/consta-design-system/uikit/commit/5093c47d3c07f68abf9e2175d3f626c8054184d9) - [@N1MBER](https://github.com/N1MBER)
