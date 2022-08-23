@@ -1,12 +1,18 @@
 .Tabs {
   position: relative;
 
-  &_size_s {
-    --list-offset: var(--space-s);
-  }
+  &_size {
+    &_xs {
+      --list-offset: var(--space-xs);
+    }
 
-  &_size_m {
-    --list-offset: var(--space-m);
+    &_s {
+      --list-offset: var(--space-s);
+    }
+
+    &_m {
+      --list-offset: var(--space-m);
+    }
   }
 
   &-List {

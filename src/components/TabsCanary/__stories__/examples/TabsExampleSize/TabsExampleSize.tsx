@@ -26,6 +26,13 @@ export const TabsExampleSize = () => {
         getItemLabel={(item) => item}
         size="s"
       />
+      <Tabs
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        items={items}
+        getItemLabel={(item) => item}
+        size="xs"
+      />
     </StoryBookExample>
   );
 };

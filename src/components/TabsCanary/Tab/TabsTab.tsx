@@ -11,6 +11,7 @@ import { TabsPropSize, TabsTabProps } from '../types';
 export const cnTabsTab = cn('TabsTab');
 
 const sizeMap: Record<TabsPropSize, IconPropSize> = {
+  xs: 'xs',
   s: 'xs',
   m: 's',
 };

@@ -22,6 +22,7 @@ type Props = {
 };
 
 const sizeMap: Record<TabsPropSize, IconPropSize> = {
+  xs: 'xs',
   s: 'xs',
   m: 's',
 };
