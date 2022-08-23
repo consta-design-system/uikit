@@ -4,6 +4,10 @@ import { TagExampleMode } from './examples/TagExampleMode/TagExampleMode';
 import { TagExampleText } from './examples/TagExampleText/TagExampleText';
 import { TagExampleIcon } from './examples/TagExampleIcon/TagExampleIcon';
 
+```tsx
+import { Tag } from '@consta/uikit/Tag';
+```
+
 <MdxMenu>
 
 - [Режим работы](#режим-работы)
@@ -20,19 +24,17 @@ import { TagExampleIcon } from './examples/TagExampleIcon/TagExampleIcon';
 
 За тип тега отвечает свойство `mode`.
 
-`button` делает из тега кнопку, такой тег можно нажимать.
-Это основной тип тега, он включен по умолчанию.
+- `button` делает из тега кнопку, такой тег можно нажимать.
+  Это основной тип тега, он включен по умолчанию.
 
-`link` превращает тег в ссылку.
+- `link` превращает тег в ссылку.
 
-`check` поддерживает два состояния: выбранное и невыбранное. Используйте этот тип,
-если хотите, чтобы пользователь мог отмечать некоторые теги. Чтобы этот режим заработал,
-используйте `onChange`.
+- `check` поддерживает два состояния: выбранное и невыбранное. Используйте этот тип,
+  если хотите, чтобы пользователь мог отмечать некоторые теги. Чтобы этот режим заработал,
+  используйте `onChange`.
 
-`cancel` нужен, чтобы у пользователя была возможность удалить тег. Чтобы этот режим заработал,
-используйте `onCancel`.
-
-<TagExampleMode />
+- `cancel` нужен, чтобы у пользователя была возможность удалить тег. Чтобы этот режим заработал,
+  используйте `onCancel`.
 
 ```ts
 <Tag mode="button" onClick={action('onClick')} label="Button" />
@@ -41,13 +43,13 @@ import { TagExampleIcon } from './examples/TagExampleIcon/TagExampleIcon';
 <Tag mode="cancel" onCancel={action('onCancel')} label="Cancel" />
 ```
 
+<TagExampleMode />
+
 ## Текст
 
 Тег — это характеристика объекта. Поэтому в тексте обычно используются
 существительные и прилагательные в единственном числе.
 Например, в галерее изображений могут быть такие теги:
-
-<TagExampleText />
 
 ```ts
 <Tag label="Рисунок" />
@@ -57,22 +59,22 @@ import { TagExampleIcon } from './examples/TagExampleIcon/TagExampleIcon';
 <Tag label="В клеточку" />
 ```
 
+<TagExampleText />
+
 ### Иконка
 
 Вы можете добавить к тегу иконку — любую из [библиотеки иконок](?path=/story/components-icons--playground).
-
-<TagExampleIcon />
 
 ```ts
 <Tag icon={IconMoon} label="Луна" />
 <Tag icon={IconSun} label="Солнце" />
 ```
 
+<TagExampleIcon />
+
 ## Размер
 
 За размер тега отвечает свойство `size`. По умолчанию — `m`.
-
-<TagExampleSize />
 
 ```ts
 <Tag size="xs" label="Размер XS" />
@@ -80,6 +82,8 @@ import { TagExampleIcon } from './examples/TagExampleIcon/TagExampleIcon';
 <Tag size="m" label="Размер M" />
 <Tag size="l" label="Размер L" />
 ```
+
+<TagExampleSize />
 
 ## Импорт
 

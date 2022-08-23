@@ -7,12 +7,12 @@ export default createStand({
   id: 'Tabs',
   group: 'components',
   image,
-  description: 'Навигация по вкладкам.',
+  description: 'Табы. Навигация по вкладкам.',
   version: '4.0.0',
   status: 'stable',
   sandbox:
     'https://codesandbox.io/embed/react-new?fontsize=14&hidenavigation=1&theme=dark',
   figma:
-    'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=20626%3A3707',
+    'https://www.figma.com/embed?embed_host=uikit.consta.design&url=https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=12745%3A116509',
   order: 10,
 });

@@ -41,7 +41,7 @@ const columns: TableColumn<Row>[] = [
   },
 ];
 
-export const TableExampleOnSortBy = () => {
+export function TableExampleOnSortBy() {
   const [sortSetting, setSortSetting] = useState<SortByProps<Row> | null>(null);
 
   const rows = data
@@ -63,4 +63,4 @@ export const TableExampleOnSortBy = () => {
       <Table rows={rows} columns={columns} onSortBy={setSortSetting} />
     </StoryBookExample>
   );
-};
+}

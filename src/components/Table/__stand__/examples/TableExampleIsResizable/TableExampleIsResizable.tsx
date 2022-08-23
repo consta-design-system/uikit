@@ -20,10 +20,10 @@ const columns: TableColumn<typeof rows[number]>[] = [
   },
 ];
 
-export const TableExampleIsResizable = () => {
+export function TableExampleIsResizable() {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Table columns={columns} rows={rows} isResizable />
     </StoryBookExample>
   );
-};
+}

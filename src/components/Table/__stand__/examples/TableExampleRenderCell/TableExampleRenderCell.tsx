@@ -21,18 +21,18 @@ const columns: TableColumn<typeof rows[number]>[] = [
   },
 ];
 
-export const TableExampleRenderCell = () => {
+export function TableExampleRenderCell() {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Table columns={columns} rows={rows} />
     </StoryBookExample>
   );
-};
+}
 
-export const TableExampleBorderBetweenColumns = () => {
+export function TableExampleBorderBetweenColumns() {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Table columns={columns} rows={rows} borderBetweenColumns />
     </StoryBookExample>
   );
-};
+}

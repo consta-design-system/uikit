@@ -8,9 +8,9 @@ export const TextExampleStyle = () => {
   return (
     <div className={cnDocsDecorator('Section')}>
       <Text size="s" view="ghost" className={wp.decorator({ 'indent-b': 'm' })}>
-        text_style_italic
+        fontStyle=&quot;italic&quot;
       </Text>
-      <Text fontStyle="italic">Газпром нефть</Text>
+      <Text fontStyle="italic">Просто текст</Text>
     </div>
   );
 };

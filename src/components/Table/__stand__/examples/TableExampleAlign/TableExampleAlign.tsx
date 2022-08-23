@@ -78,7 +78,7 @@ const columnsAlignRight: TableColumn<typeof rows[number]>[] = [
   },
 ];
 
-export const TableExampleVerticalAlign = () => {
+export function TableExampleVerticalAlign() {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Table
@@ -104,9 +104,9 @@ export const TableExampleVerticalAlign = () => {
       />
     </StoryBookExample>
   );
-};
+}
 
-export const TableExampleAlignLeft = () => {
+export function TableExampleAlignLeft() {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Table
@@ -118,9 +118,9 @@ export const TableExampleAlignLeft = () => {
       />
     </StoryBookExample>
   );
-};
+}
 
-export const TableExampleAlignCenter = () => {
+export function TableExampleAlignCenter() {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Table
@@ -132,9 +132,9 @@ export const TableExampleAlignCenter = () => {
       />
     </StoryBookExample>
   );
-};
+}
 
-export const TableExampleAlignRight = () => {
+export function TableExampleAlignRight() {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Table
@@ -146,4 +146,4 @@ export const TableExampleAlignRight = () => {
       />
     </StoryBookExample>
   );
-};
+}
