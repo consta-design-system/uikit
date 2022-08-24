@@ -7,7 +7,7 @@ import { Table, TableColumn } from '../../../Table';
 const rows = [
   {
     id: 'Ссылка',
-    name: 'https://uikit.consta.design/?path=/story/common-about--page',
+    name: 'https://uikit.consta.design/',
   },
   {
     id: 'Описание',
