@@ -5,6 +5,10 @@ import { RadioExampleAlign } from './examples/RadioExampleAlign/RadioExampleAlig
 import { RadioExampleView } from './examples/RadioExampleView/RadioExampleView';
 import { RadioExampleOne } from './examples/RadioExampleUse/RadioExampleUse';
 
+```tsx
+import { Radio } from '@consta/uikit/Radio';
+```
+
 <MdxMenu>
 
 - [Название](#название)
@@ -20,21 +24,19 @@ import { RadioExampleOne } from './examples/RadioExampleUse/RadioExampleUse';
 
 ## Название
 
-За название радиокнопки отвечает свойсвто `label`. Лучше его писать с заглавной буквы, точка не нужна.
-
-<RadioExampleOne />
+За название радиокнопки отвечает свойство `label`. Лучше его писать с заглавной буквы, точка не нужна.
 
 ```tsx
 <Radio label="Это радиокнопка" checked />
 ```
+
+<RadioExampleOne />
 
 ## Состояния
 
 Чтобы сделать радиокнопку выбранной, добавьте `checked`.
 
 Чтобы не дать пользователю сделать выбор, добавьте `disabled`.
-
-<RadioExampleStatus />
 
 ```tsx
 <Radio label="Radio" />
@@ -43,16 +45,18 @@ import { RadioExampleOne } from './examples/RadioExampleUse/RadioExampleUse';
 <Radio label="Checked Disabled" checked disabled />
 ```
 
+<RadioExampleStatus />
+
 ## Размер
 
 За размер отвечает свойство `size`. Варианты: `'m'`, `'l'`, по умолчанию `'m'`.
-
-<RadioExampleSize />
 
 ```tsx
 <Radio size="m" label="Размер m" />
 <Radio size="l" label="Размер l" />
 ```
+
+<RadioExampleSize />
 
 ## Внешний вид
 
@@ -60,6 +64,19 @@ import { RadioExampleOne } from './examples/RadioExampleUse/RadioExampleUse';
 
 - `primary` — акцентная радиокнопка (по умолчанию),
 - `ghost` — второстепенная радиокнопка.
+
+```tsx
+<Radio
+  view="primary"
+  checked
+  label="Акцентная радиокнопка"
+/>
+<Radio
+  view="ghost"
+  checked
+  label="Второстепенная радиокнопка"
+/>
+```
 
 <RadioExampleView />
 
@@ -69,8 +86,6 @@ import { RadioExampleOne } from './examples/RadioExampleUse/RadioExampleUse';
 
 - `center` — радиокнопка выровнена по центру контейнера с текстом,
 - `top` — радиокнопка выровнена по верхнему краю контейнера с текстом.
-
-<RadioExampleAlign />
 
 ```tsx
 <Radio
@@ -83,6 +98,8 @@ import { RadioExampleOne } from './examples/RadioExampleUse/RadioExampleUse';
 />
 ```
 
+<RadioExampleAlign />
+
 ## Импорт
 
 ```tsx
@@ -93,23 +110,23 @@ import { Radio } from '@consta/uikit/Radio';
 
 | Свойство                  | Тип                                                                              | По умолчанию | Описание                                                                     |
 | ------------------------- | -------------------------------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------- |
-| [`label?`](#название)     | `string`                                                                         | —            | Текст рядом с радиокнопкой                                                   |
+| [`label?`](#название)     | `string`                                                                         | -            | Текст рядом с радиокнопкой                                                   |
 | [`size?`](#размер)        | `'m', 'l'`                                                                       | `'m'`        | Размер радиокнопки                                                           |
 | [`view?`](#внешний-вид)   | `'primary', 'ghost'`                                                             | `'primary'`  | Внешний вид                                                                  |
 | [`align?`](#выравнивание) | `'center', 'top'`                                                                | `'center'`   | Выравнивание                                                                 |
-| [`checked`](#состояния)   | `boolean, undefined`                                                             | —            | Делает радиокнопку выбранной                                                 |
-| [`disabled?`](#состояния) | `boolean`                                                                        | —            | Делает радиокнопку неактивной                                                |
-| `required?`               | `boolean`                                                                        | —            | Такую радиокнопку обязательно нужно выбрать                                  |
-| `autoFocus?`              | `boolean`                                                                        | —            | Переносит фокус на эту кнопку                                                |
-| `tabIndex?`               | `number`                                                                         | —            | Порядковый номер при переходе между элементами интерфейса по клавише **tab** |
-| `name?`                   | `string`                                                                         | —            | Имя для `<input>` в DOM                                                      |
-| `onChange?`               | `(object: {e: React.ChangeEvent<HTMLInputElement>; checked: boolean;}) => void;` | —            | Действие при выборе радиокнопки                                              |
-| `onFocus?`                | `React.FocusEventHandler<HTMLInputElement>`                                      | —            | Действие по фокусу                                                           |
-| `onBlur?`                 | `React.FocusEventHandler<HTMLInputElement>`                                      | —            | Действие при потере фокуса                                                   |
+| [`checked`](#состояния)   | `boolean, undefined`                                                             | -            | Делает радиокнопку выбранной                                                 |
+| [`disabled?`](#состояния) | `boolean`                                                                        | -            | Делает радиокнопку неактивной                                                |
+| `required?`               | `boolean`                                                                        | -            | Такую радиокнопку обязательно нужно выбрать                                  |
+| `autoFocus?`              | `boolean`                                                                        | -            | Переносит фокус на эту кнопку                                                |
+| `tabIndex?`               | `number`                                                                         | -            | Порядковый номер при переходе между элементами интерфейса по клавише **tab** |
+| `name?`                   | `string`                                                                         | -            | Имя для `<input>` в DOM                                                      |
+| `onChange?`               | `(object: {e: React.ChangeEvent<HTMLInputElement>; checked: boolean;}) => void;` | -            | Действие при выборе радиокнопки                                              |
+| `onFocus?`                | `React.FocusEventHandler<HTMLInputElement>`                                      | -            | Действие по фокусу                                                           |
+| `onBlur?`                 | `React.FocusEventHandler<HTMLInputElement>`                                      | -            | Действие при потере фокуса                                                   |
 | `inputId?`                | `string`                                                                         | -            | Идентификатор для инпута                                                     |
-| `inputRef?`               | `React.FocusEventHandler<HTMLInputElement>`                                      | —            | Ссылка на DOM-элемент `<input>`                                              |
-| `ref?`                    | `React.FocusEventHandler<HTMLLabelElement>`                                      | —            | Ссылка на корневой DOM-элемент этого компонента                              |
-| `className?`              | `string`                                                                         | —            | Дополнительные CSS-классы                                                    |
+| `inputRef?`               | `React.FocusEventHandler<HTMLInputElement>`                                      | -            | Ссылка на DOM-элемент `<input>`                                              |
+| `ref?`                    | `React.FocusEventHandler<HTMLLabelElement>`                                      | -            | Ссылка на корневой DOM-элемент этого компонента                              |
+| `className?`              | `string`                                                                         | -            | Дополнительные CSS-классы                                                    |
 
 ## Пример
 

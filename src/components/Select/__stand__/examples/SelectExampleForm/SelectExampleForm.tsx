@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import { cnMixSpace } from '../../../../../mixs/MixSpace/MixSpace';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Select } from '../../../Select';
 
@@ -28,6 +29,7 @@ export const SelectExampleForm = () => {
   return (
     <div className={cnDocsDecorator('Section')}>
       <Select
+        className={cnMixSpace({ mB: 'm' })}
         placeholder="Форма round"
         form="round"
         items={items}
@@ -35,6 +37,7 @@ export const SelectExampleForm = () => {
         onChange={({ value }) => setValue(value)}
       />
       <Select
+        className={cnMixSpace({ mB: 'm' })}
         placeholder="Форма brickDefault"
         form="brickDefault"
         items={items}

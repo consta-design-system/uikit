@@ -12,6 +12,10 @@ import {
 } from './examples/UserExampleSize/UserExampleSize';
 import { UserExampleArrow } from './examples/UserExampleArrow/UserExampleArrow';
 
+```tsx
+import { User } from '@consta/uikit/User';
+```
+
 <MdxMenu>
 
 - [Аватарка](#аватарка)
@@ -33,22 +37,22 @@ import { UserExampleArrow } from './examples/UserExampleArrow/UserExampleArrow';
 Вы можете убрать имя и оставить только аватарку (например, если в интерфейсе нет места)
 с помощью свойства `onlyAvatar`.
 
-<UserExampleAvatar />
-
 ```ts
 <User avatarUrl="https://i.ibb.co/K2R8Lqb/Rectangle-1496.png" name="Роберт Пласт" info="Cейсмик" />
 <User avatarUrl="https://i.ibb.co/K2R8Lqb/Rectangle-1496.png" name="Роберт Пласт" info="Cейсмик"  onlyAvatar/>
 ```
 
+<UserExampleAvatar />
+
 Если не укажете ссылку на изображение, аватарка сформируется из имени пользователя.
 Цвет фона выбирается автоматически, поменять его не получится.
-
-<UserExampleAvatarName />
 
 ```ts
 <User  name="Роберт Пласт" info="Cейсмик" />
 <User  name="Роберт" info="Cейсмик"  onlyAvatar/>
 ```
+
+<UserExampleAvatarName />
 
 ## Тексты
 
@@ -57,18 +61,16 @@ import { UserExampleArrow } from './examples/UserExampleArrow/UserExampleArrow';
 Вы можете добавить что-то важное в `info` — например, должность, местонахождение
 или статус человека. Этот текст появится под именем.
 
-<UserExampleName />
-
 ```ts
 <User avatarUrl="https://i.ibb.co/K2R8Lqb/Rectangle-1496.png" name="Гюзель Скважина" info="В отпуске" />
 <User avatarUrl="https://i.ibb.co/K2R8Lqb/Rectangle-1496.png" name="Люций" info="Эксперт"  onlyAvatar/>
 ```
 
+<UserExampleName />
+
 ## Статус
 
 `status` показывает, как можно связаться с человеком.
-
-<UserExampleStatus />
 
 ```ts
 <User name="Камилла Флюдиндер" info="Онлайн" status="available" />
@@ -76,16 +78,18 @@ import { UserExampleArrow } from './examples/UserExampleArrow/UserExampleArrow';
 <User name="Камилла Флюдиндер" info="Недоступна" status="out" />
 ```
 
+<UserExampleStatus />
+
 ## Обводка
 
 `view = "ghost"` добавит компоненту обводку.
 Чтобы её убрать, укажите `view = "clear"` (по умолчанию).
 
-<UserExampleView />
-
 ```ts
 <User name="Бон Фишер" info="Старший эксперт" view="ghost" />
 ```
+
+<UserExampleView />
 
 ## Размер
 

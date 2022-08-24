@@ -7,7 +7,7 @@ export default createStand({
   id: 'TextField',
   group: 'components',
   image,
-  description: 'Поле для ввода текста и чисел',
+  description: 'Поле для ввода текста и чисел.',
   version: '4.0.0',
   status: 'stable',
   sandbox:

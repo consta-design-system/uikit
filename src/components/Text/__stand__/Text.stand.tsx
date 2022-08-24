@@ -7,7 +7,7 @@ export default createStand({
   id: 'Text',
   group: 'components',
   image,
-  description: 'Тест. Шрифты, жирность, размеры и цвета',
+  description: 'Текст. Любые текстовые элементы на странице и стили для них.',
   version: '4.0.0',
   status: 'stable',
   sandbox:

@@ -31,7 +31,7 @@ export const TextFieldExampleFormBasic = () => {
   );
 };
 
-export const TextFieldExampleFormHybrid = () => {
+export function TextFieldExampleFormHybrid() {
   const [value, setValue] = useState<string | null>(null);
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
   return (
@@ -48,4 +48,4 @@ export const TextFieldExampleFormHybrid = () => {
       </div>
     </StoryBookExample>
   );
-};
+}

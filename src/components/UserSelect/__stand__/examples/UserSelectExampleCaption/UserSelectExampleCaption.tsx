@@ -29,7 +29,7 @@ const items: Item[] = [
   },
 ];
 
-export const UserSelectExampleCaption = () => {
+export function UserSelectExampleCaption() {
   const [value, setValue] = useState<Item | null>();
   return (
     <>
@@ -74,4 +74,4 @@ export const UserSelectExampleCaption = () => {
       </StoryBookExample>
     </>
   );
-};
+}

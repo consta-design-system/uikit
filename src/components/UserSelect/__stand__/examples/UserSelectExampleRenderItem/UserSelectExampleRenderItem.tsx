@@ -79,7 +79,7 @@ const searchFunction = (item: Item, searchValue: string): boolean => {
   return searchCompare(searchValue, item.status && mapLabel[item.status]);
 };
 
-export const UserSelectExampleRenderItem = () => {
+export function UserSelectExampleRenderItem() {
   const [value, setValue] = useState<Item | null>();
   return (
     <div className={cnDocsDecorator('Section')}>
@@ -117,4 +117,4 @@ export const UserSelectExampleRenderItem = () => {
       />
     </div>
   );
-};
+}

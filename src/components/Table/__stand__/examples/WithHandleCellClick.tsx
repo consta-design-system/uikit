@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { ContextMenu } from '../../../ContextMenu/ContextMenu';
 import { Text } from '../../../Text/Text';
-import { onCellClick, Table, TableColumn, TableRow } from '../../Table';
+import { onCellClick, Table, TableColumn } from '../../Table';
 
 const rows = [
   { id: '1', name: 'Антон' },
@@ -39,8 +39,7 @@ const menuItems: Item[] = [
   },
 ];
 
-// eslint-disable-next-line no-unused-vars
-const WithHandleCellClick = <T extends TableRow>() => {
+const WithHandleCellClick = () => {
   const [ref, setRef] = useState<React.RefObject<HTMLDivElement> | null>(null);
   const [show, setIsShow] = useState<boolean>(false);
 

@@ -16,6 +16,10 @@ import {
   SwitchGroupExampleViewPrimary,
 } from './examples/SwitchGroupExampleView/SwitchGroupExampleView';
 
+```tsx
+import { SwitchGroup } from '@consta/uikit/SwitchGroup';
+```
+
 <MdxMenu>
 
 - [Содержимое](#содержимое)
@@ -57,15 +61,13 @@ export function SwitchGroupExampleDisabled() {
   const [value, setValue] = React.useState<Item[] | null>(null);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <SwitchGroup
-        value={value}
-        items={items}
-        getItemLabel={(item) => item.name}
-        onChange={({ value }) => setValue(value)}
-        name="SwitchGroupExampleDisabled"
-      />
-    </StoryBookExample>
+    <SwitchGroup
+      value={value}
+      items={items}
+      getItemLabel={(item) => item.name}
+      onChange={({ value }) => setValue(value)}
+      name="SwitchGroupExampleDisabled"
+    />
   );
 }
 ```
@@ -105,15 +107,13 @@ export function SwitchGroupExampleDisabled() {
   const [value, setValue] = React.useState<Item[] | null>(null);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <SwitchGroup
-        value={value}
-        items={items}
-        getItemDisabled={(item) => item.off}
-        onChange={({ value }) => setValue(value)}
-        name="SwitchGroupExampleDisabled"
-      />
-    </StoryBookExample>
+    <SwitchGroup
+      value={value}
+      items={items}
+      getItemDisabled={(item) => item.off}
+      onChange={({ value }) => setValue(value)}
+      name="SwitchGroupExampleDisabled"
+    />
   );
 }
 ```
@@ -158,7 +158,7 @@ export function SwitchGroupExampleDisabledGroup() {
 
 За размер отвечает свойство `size`. Варианты: `'m'`, `'l'`, по умолчанию `'m'`.
 
-| `size="m"`                  | `size="m"`                  |
+| `size="m"`                  | `size="l"`                  |
 | --------------------------- | --------------------------- |
 | <SwitchGroupExampleSizeM /> | <SwitchGroupExampleSizeL /> |
 

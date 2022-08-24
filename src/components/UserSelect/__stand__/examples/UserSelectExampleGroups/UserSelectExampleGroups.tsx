@@ -49,7 +49,7 @@ const items: Item[] = [
   },
 ];
 
-export const UserSelectExampleGroups = () => {
+export function UserSelectExampleGroups() {
   const [value, setValue] = useState<Item | null>();
   return (
     <div className={cnDocsDecorator('Section')}>
@@ -62,4 +62,4 @@ export const UserSelectExampleGroups = () => {
       />
     </div>
   );
-};
+}

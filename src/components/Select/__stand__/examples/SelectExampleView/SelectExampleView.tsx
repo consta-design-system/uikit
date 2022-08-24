@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import { cnMixSpace } from '../../../../../mixs/MixSpace/MixSpace';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Select } from '../../../Select';
 
@@ -28,6 +29,7 @@ export const SelectExampleView = () => {
   return (
     <div className={cnDocsDecorator('Section')}>
       <Select
+        className={cnMixSpace({ mB: 'm' })}
         placeholder="Вид default"
         view="default"
         items={items}
@@ -35,6 +37,7 @@ export const SelectExampleView = () => {
         onChange={({ value }) => setValue(value)}
       />
       <Select
+        className={cnMixSpace({ mB: 'm' })}
         placeholder="Вид clear"
         view="clear"
         items={items}

@@ -52,21 +52,21 @@ import { ThemeExampleRoot } from './examples/ThemeExampleRoot/ThemeExampleRoot';
 Файлы хранится в директории компонента `Theme`, в папках с именами модификаторов. В дизайн-системе Consta это выглядит так:
 
 ```
-_color/									# Цвета
-	Theme_color_gpnDark.css
-	Theme_color_gpnDefault.css
-  Theme_color_gpnDisplay.css
-_control/								# Размеры элементов
-	Theme_control_gpnDefault.css
-_font/									# Шрифты
-	Theme_font_gpnDefault.css
-_size/									# Размер текста и междустрочный интервал
-	Theme_size_gpnDefault.css
-_space/									# Отступы
-	Theme_space_gpnDefault.css
-_shadow/								# Тени
-	Theme_shadow_gpnDefault.css
-Theme.css								# Стили темы
+_color/						# Цвета
+    Theme_color_gpnDark.css
+    Theme_color_gpnDefault.css
+    Theme_color_gpnDisplay.css
+_control/					# Размеры элементов
+    Theme_control_gpnDefault.css
+_font/						# Шрифты
+    Theme_font_gpnDefault.css
+_size/						# Размер текста и междустрочный интервал
+    Theme_size_gpnDefault.css
+_space/						# Отступы
+    Theme_space_gpnDefault.css
+_shadow/					# Тени
+    Theme_shadow_gpnDefault.css
+Theme.css					# Стили темы
 ```
 
 [Посмотреть на GitHub](https://github.com/consta-design-system/uikit/tree/master/src/components/Theme)
@@ -219,7 +219,7 @@ font-family: var(--font-primary);
 > Проверьте, что в шрифте есть насыщенность, которую вы используете.
 > Браузер имитирует насыщенность, которой нет в наборе, но неизвестно, как это будет выглядеть.
 >
-> [Посмотреть варианты насыщенности в компоненте `Text`](/?path=/docs/components-text--playground) (см. раздел «Насыщенность»).
+> [Посмотреть варианты насыщенности в компоненте `Text`](##LIBS.STAND.DEV/stand:uikit-components-text-stable/hash:насыщенность).
 
 ### Размеры текста
 
@@ -396,7 +396,7 @@ export const presetGpnDefault: ThemePreset = {
 
 #### Компоненты в инвертной схеме
 
-Некоторые компоненты нужно вынести на другой информационный слой, но так, чтобы не перекрывать остальной интерфейс. Например, [Tooltip](/?path=/story/components-tooltip--playground).
+Некоторые компоненты нужно вынести на другой информационный слой, но так, чтобы не перекрывать остальной интерфейс. Например, [Tooltip](##LIBS.STAND/stand:uikit-components-tooltip-stable).
 
 Такие компоненты должны быть всегда в инвертной схеме по отношению к основной. CSS-файл, который отвечает за отображение таких компонентов, описывается в `color.invert`.
 
@@ -408,9 +408,9 @@ export const presetGpnDefault: ThemePreset = {
 #### Компоненты в акцентной схеме
 
 Некоторые нужно сделать яркими независимо от темы. Например, статусные
-компоненты, на которые пользователю стоит обратить внимание: [Snackbar](/?path=/story/components-snackbar--playground),
-[Informer](/?path=/story/components-informer--playground)
-и [Badge](/?path=/story/components-badge--playground).
+компоненты, на которые пользователю стоит обратить внимание: [Snackbar](##LIBS.STAND/stand:uikit-components-snackbar-stable),
+[Informer](##LIBS.STAND/stand:uikit-components-informer-stable)
+и [Badge](##LIBS.STAND/stand:uikit-components-badge-stable).
 
 Такие компоненты всегда выглядят одинаково, независимо от основной цветовой схемы. CSS-файл, который отвечает за отображение таких компонентов, описывается в `color.accent`.
 
@@ -460,7 +460,7 @@ const App = () => {
 
 Вы можете добавить переключатель тем, чтобы пользователь мог сам решить, какой темой хочет пользоваться — тёмной или светлой. За это отвечает компонент [ThemeToggler](/docs/components-themetoggler--playground).
 
-> Чтобы смена тем работала, все значения в CSS нужно задавать переменными, а переменные использовать по смыслу. [Почитать про смысл цветов](/?path=/story/components-theme--playground)
+> Чтобы смена тем работала, все значения в CSS нужно задавать переменными, а переменные использовать по смыслу. [Почитать про смысл цветов](##LIBS.STAND/stand:uikit-components-theme-stable/hash:цвета-темы-default)
 
 ```tsx
 import './RootTheme.css';

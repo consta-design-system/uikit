@@ -30,7 +30,7 @@ const items: Item[] = [
   },
 ];
 
-export const UserSelectExampleSize = () => {
+export function UserSelectExampleSize() {
   const [value, setValue] = useState<Item | null>();
   return (
     <div className={cnDocsDecorator('Section')}>
@@ -63,4 +63,4 @@ export const UserSelectExampleSize = () => {
       </StoryBookExample>
     </div>
   );
-};
+}

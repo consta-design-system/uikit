@@ -4,6 +4,10 @@ import {
   TooltipPositionedAnchor,
 } from './examples/TooltipPosition/TooltipPosition';
 
+```tsx
+import { Tooltip } from '@consta/uikit/Tooltip';
+```
+
 <MdxMenu>
 
 - [Тема](#тема-тултипа)
@@ -20,7 +24,7 @@ import {
 
 ## Тема тултипа
 
-Содержимое тултипа использует инвертированную тему: в светлой теме тултип будет темным, в темной — светлым.
+Содержимое тултипа использует инвертированную тему: в светлой теме тултип будет тёмным, в тёмной — светлым.
 
 ## Размер
 
@@ -32,7 +36,7 @@ import {
 
 ## Позиционирование тултипа
 
-Для позиционирования тултипа используется компонент [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) и его способы позиционирования.
+Для позиционирования тултипа используется компонент [Popover](##LIBS.STAND.DEV/stand:uikit-components-popover-stable/hash:способы-позиционирования) и его способы позиционирования.
 
 ### По элементу-якорю
 
@@ -59,18 +63,18 @@ import { Tooltip } from '@consta/uikit/Tooltip';
 
 ## Свойства
 
-| Свойство              | Тип или варианты значения                     | По умолчанию            | Описание                                                                          |
-| --------------------- | --------------------------------------------- | ----------------------- | --------------------------------------------------------------------------------- |
-| `anchorRef?`          | `React.RefObject<HTMLElement>`                | —                       | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
-| `position?`           | `{ x: number; y: number }` &#124; `undefined` | —                       | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
-| `size`                | `'s', 'm', 'l'`                               | '`m`'                   | Размер, влияющий на максимальную ширину тултипа                                   |
-| `children`            | `React.ReactNode`                             | —                       | Контент тултипа                                                                   |
-| `direction?`          | `Direction`                                   | `'upCenter'`            | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
-| `possibleDirections?` | `Direction[]`                                 | все возможные Direction | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
-| `spareDirection?`     | `Direction`                                   | `'downStartLeft'`       | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
-| `isInteractive?`      | `boolean`                                     | `true`                  | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
-| `onClickOutside?`     | `(event: MouseEvent) => void`                 | —                       | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
-| `equalAnchorWidth?`   | `boolean`                                     | `fasle`                 | см. [Popover](?path=/docs/components-popover--popover-positioned-by-coords-story) |
+| Свойство              | Тип или варианты значения                     | По умолчанию            | Описание                                                                                              |
+| --------------------- | --------------------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------- |
+| `anchorRef?`          | `React.RefObject<HTMLElement>`                | —                       | см. [Popover](##LIBS.STAND.DEV/stand:uikit-components-popover-stable)                                 |
+| `position?`           | `{ x: number; y: number }` &#124; `undefined` | —                       | см. [Popover](##LIBS.STAND.DEV/stand:uikit-components-popover-stable/)                                |
+| `size`                | `'s', 'm', 'l'`                               | '`m`'                   | Размер, влияющий на максимальную ширину тултипа                                                       |
+| `children`            | `React.ReactNode`                             | —                       | Контент тултипа                                                                                       |
+| `direction?`          | `Direction`                                   | `'upCenter'`            | см. [Popover](##LIBS.STAND.DEV/stand:uikit-components-popover-stable/hash:направление-разворачивания) |
+| `possibleDirections?` | `Direction[]`                                 | все возможные Direction | см. [Popover](##LIBS.STAND.DEV/stand:uikit-components-popover-stable/hash:направление-разворачивания) |
+| `spareDirection?`     | `Direction`                                   | `'downStartLeft'`       | см. [Popover](##LIBS.STAND.DEV/stand:uikit-components-popover-stable/hash:направление-разворачивания) |
+| `isInteractive?`      | `boolean`                                     | `true`                  | см. [Popover](##LIBS.STAND.DEV/stand:uikit-components-popover-stable)                                 |
+| `onClickOutside?`     | `(event: MouseEvent) => void`                 | —                       | см. [Popover](##LIBS.STAND.DEV/stand:uikit-components-popover-stable)                                 |
+| `equalAnchorWidth?`   | `boolean`                                     | `fasle`                 | см. [Popover](##LIBS.STAND.DEV/stand:uikit-components-popover-stable)                                 |
 
 ### Пример
 
