@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { UserSelect } from '../../../UserSelect';
 
-export const UserSelectExampleCustomTypes = () => {
+export function UserSelectExampleCustomTypes() {
   const [value, setValue] = useState<string | null>();
   return (
     <div className={cnDocsDecorator('Section', { indent: 'bottom' })}>
@@ -17,7 +17,7 @@ export const UserSelectExampleCustomTypes = () => {
       />
     </div>
   );
-};
+}
 
 // Example 2
 
@@ -35,7 +35,7 @@ const items: Item[] = [
   { firstName: 'Михаил', lastName: 'Михайлов', group: 'Центр полётов' },
 ];
 
-export const UserSelectExampleCustomTypesWithGroups = () => {
+export function UserSelectExampleCustomTypesWithGroups() {
   const [value, setValue] = useState<Item | null>();
   return (
     <div className={cnDocsDecorator('Section')}>
@@ -54,4 +54,4 @@ export const UserSelectExampleCustomTypesWithGroups = () => {
       />
     </div>
   );
-};
+}

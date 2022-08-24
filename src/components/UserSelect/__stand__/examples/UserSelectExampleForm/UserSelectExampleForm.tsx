@@ -29,7 +29,7 @@ const items: Item[] = [
   },
 ];
 
-export const UserSelectExampleForm = () => {
+export function UserSelectExampleForm() {
   const [value, setValue] = useState<Item | null>();
   return (
     <div className={cnDocsDecorator('Section')}>
@@ -42,4 +42,4 @@ export const UserSelectExampleForm = () => {
       />
     </div>
   );
-};
+}

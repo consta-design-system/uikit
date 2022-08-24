@@ -3,7 +3,33 @@ import { useGlobalKeys } from '@consta/uikit/useGlobalKeys';
 ```
 
 Этот хук может понадобиться в компонентах, где нужно перехватывать нажатия клавиш в глобальной области — за пределами компонента.
-Например, чтобы закрыть модальное окно [Modal](/?path=/story/components-modal--playground) по клавише **Esc**.
+Например, чтобы закрыть модальное окно [Modal](##LIBS.STAND/stand:uikit-components-modal-stable) по клавише **Esc**.
 
 Хук `useGlobalKeys` занимается всей логикой отслеживания событий нажатия заданных кнопок: вы можете использовать его,
 чтобы не обрабатывать эту логику самостоятельно.
+
+```tsx
+import React, { FC } from 'react';
+import { useGlobalKeys } from '../useGlobalKeys';
+
+const Component: FC = () => {
+  useGlobalKeys({
+    Escape: (e: KeyboardEvent) => console.log('Пользователь нажал Escape', e),
+    ArrowUp: (e: KeyboardEvent) =>
+      console.log('Пользователь нажал стрелку вверх', e),
+  });
+
+  return <>Пример компонента</>;
+};
+```
+
+## Свойства
+
+| Свойство      | Тип и значения                                        | По умолчанию | Описание                                                                  |
+| ------------- | ----------------------------------------------------- | ------------ | ------------------------------------------------------------------------- |
+| `keyHandlers` | `Partial<Record<string, (e: KeyboardEvent) => void>>` | `{}`         | Колбек вызывается при совпадении ключа и **event.code** или **event.key** |
+| `eventType`   | `"keyup" \ "keydown"`                                 | `"keyup"`    | Тип события, на которые подписываемся                                     |
+
+## Пример
+
+Пример использования хука `useGlobalKeys` можно посмотреть в компоненте [Modal](https://github.com/consta-design-system/uikit/blob/master/src/components/Modal/Modal.tsx)

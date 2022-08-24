@@ -29,7 +29,7 @@ const items: Item[] = [
   },
 ];
 
-export const UserSelectExampleCreate = () => {
+export function UserSelectExampleCreate() {
   const [value, setValue] = useState<Item | null>();
   const [list, setList] = useState<Item[]>(items);
   return (
@@ -45,9 +45,9 @@ export const UserSelectExampleCreate = () => {
       />
     </div>
   );
-};
+}
 
-export const UserSelectExampleCreateCustomLabel = () => {
+export function UserSelectExampleCreateCustomLabel() {
   const [value, setValue] = useState<Item | null>();
   const [list, setList] = useState<Item[]>(items);
   return (
@@ -64,4 +64,4 @@ export const UserSelectExampleCreateCustomLabel = () => {
       />
     </div>
   );
-};
+}

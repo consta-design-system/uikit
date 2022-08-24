@@ -2,6 +2,8 @@ import './ThemePreview.css';
 
 import React, { useReducer } from 'react';
 
+import { cnMixSpace } from '##/mixs/MixSpace/MixSpace';
+
 import { SnackBar } from '../../../components/SnackBar/SnackBar';
 import { SnackBarItemDefault } from '../../../components/SnackBar/types';
 import { Text } from '../../../components/Text/Text';
@@ -85,7 +87,7 @@ export const ThemePreview: React.FC = () => {
               size="xl"
               view="primary"
               weight="bold"
-              className={wp.decorator({ 'indent-b': '3xl' })}
+              className={cnMixSpace({ mB: 'xl', mT: '3xl' })}
             >
               Цвета фонов
             </Text>
@@ -116,7 +118,7 @@ export const ThemePreview: React.FC = () => {
               size="xl"
               view="primary"
               weight="bold"
-              className={wp.decorator({ 'indent-b': '3xl' })}
+              className={cnMixSpace({ mB: 'xl', mT: '3xl' })}
             >
               Цвета типографики
             </Text>
@@ -148,10 +150,7 @@ export const ThemePreview: React.FC = () => {
               size="xl"
               view="primary"
               weight="bold"
-              className={wp.decorator({
-                'indent-b': '3xl',
-                'decorator_indent-t': '6xl',
-              })}
+              className={cnMixSpace({ mB: 'xl', mT: '3xl' })}
             >
               Цвета скроллбара
             </Text>
@@ -182,10 +181,7 @@ export const ThemePreview: React.FC = () => {
               size="xl"
               view="primary"
               weight="bold"
-              className={wp.decorator({
-                'indent-b': '3xl',
-                'decorator_indent-t': '6xl',
-              })}
+              className={cnMixSpace({ mB: 'xl', mT: '3xl' })}
             >
               Цвета контролов
             </Text>
@@ -262,7 +258,7 @@ export const ThemePreview: React.FC = () => {
                 </div>
               </section>
 
-              <section>
+              <section className={cnMixSpace({ mB: 'xl', mT: '3xl' })}>
                 <h3 className="text text_size_l text_view_secondary text_transform_uppercase text_weight-semibold text_spacing_xs decorator decorator_indent-b_xs">
                   Ghost
                 </h3>
@@ -285,7 +281,7 @@ export const ThemePreview: React.FC = () => {
                 </div>
               </section>
 
-              <section>
+              <section className={cnMixSpace({ mB: 'xl', mT: '3xl' })}>
                 <h3 className="text text_size_l text_view_secondary text_transform_uppercase text_weight-semibold text_spacing_xs decorator decorator_indent-b_xs">
                   Clear
                 </h3>
@@ -308,7 +304,7 @@ export const ThemePreview: React.FC = () => {
                 </div>
               </section>
 
-              <section>
+              <section className={cnMixSpace({ mB: 'xl', mT: '3xl' })}>
                 <h3 className="text text_size_l text_view_secondary text_transform_uppercase text_weight-semibold text_spacing_xs decorator decorator_indent-b_xs">
                   Disable
                 </h3>

@@ -4,7 +4,7 @@ import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/D
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Timer } from '../../../Timer';
 
-export const TimerExampleProgress = () => {
+export function TimerExampleProgress() {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Timer size="m" seconds={5} />
@@ -14,4 +14,4 @@ export const TimerExampleProgress = () => {
       <Timer size="m" seconds={5} progress={80} />
     </StoryBookExample>
   );
-};
+}
