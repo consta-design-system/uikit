@@ -1,0 +1,166 @@
+import { MdxMenu } from '@consta/stand';
+
+> Сначала прочитайте всё [о темах](##LIBS.STAND/stand:uikit-theme-themeabout-stable)
+
+<MdxMenu>
+
+- [Создайте директорию для новых пресетов](#шаг-1--создайте-директорию-для-новых-пресетов)
+- [Создайте CSS-файлы](#шаг-2--создайте-css-файлы)
+- [Настройте переменные](#шаг-3--настройте-переменные-в-css)
+- [Создайте файл пресета](#шаг-4--создайте-файл-пресета)
+
+</MdxMenu>
+
+## Шаг 1. Создайте директорию для новых пресетов
+
+Создайте директорию для пресетов, внутри сделайте папки для каждого модификатора — такие же, как в [компоненте Theme](https://github.com/consta-design-system/uikit/tree/master/src/components/Theme). Например, так:
+
+```
+pathToPresets/
+  _color/
+  _control/
+  _font/
+  _size/
+  _space/
+  _shadow/
+myPresetDefault.js
+myPresetDefault.css
+```
+
+[Подробнее про модификаторы](##LIBS.STAND.DEV/stand:uikit-components-theme-stable/hash:модификаторы)
+
+## Шаг 2. Создайте CSS-файлы
+
+В папки с модификаторами положите CSS-файлы, которые будут отвечать за эти модификаторы. Файлов может быть сколько угодно — столько, сколько вариантов модификаторов (цветов, отступов, теней) нужно для вашего проекта.
+
+Имя файла формируется так:
+
+`Theme_<модификатор>_<значение модификатора>.css`
+
+Значение модификатора понадобится, чтобы подключить этот файл в [пресете](#шаг-4--создайте-файл-пресета).
+
+Получится что-то похожее:
+
+```
+pathToPresets/
+  _color/
+    _Theme_color_myThemeDark.css
+    _Theme_color_myThemeDefault.css
+    _Theme_color_myThemeDisplay.css
+  _control/
+    _Theme_control_myThemeDefault.css
+  _font/
+    _Theme_font_myThemeDefault.css
+  _size/
+    _Theme_size_myThemeDefault.css
+  _space/
+    _Theme_space_myThemeDefault.css
+  _shadow/
+    _Theme_shadow_myThemeDefault.css
+  myPresetDefault.js
+```
+
+## Шаг 3. Настройте переменные в CSS
+
+Настройте переменные в CSS (их иногда называют _дизайн-токенами_). За образец можно взять CSS-файлы из [компонента Theme](https://github.com/consta-design-system/uikit/tree/master/src/components/Theme).
+
+> Лучше давать переменным семантические имена, так их проще контролировать и применять
+
+### Цвета \_color
+
+Это набор переменных, которые применяются к разным частям компонентов Consta. Значения переменных наследуются от базовых `base` цветовых переменных.
+
+Сначала определитесь с базовыми переменными и запишите их в CSS-файл в папке `_color`.
+
+Значения переменных внутри CSS-класса рассчитываются с помощью [postcss-color-function](https://github.com/postcss/postcss-color-function)
+и [postcss-simple-vars](https://github.com/postcss/postcss-simple-vars), **но цвета можно подобрать и вручную.**
+
+Нужно создать хотя бы два варианта CSS для цветов:
+
+- `default` — для светлой цветовой схемы (`color.primary` в [пресете](#шаг-4--создайте-файл-пресета))
+- и `dark` — для тёмной (инверсной) цветовой схемы (`color.invert` в [пресете](#шаг-4--создайте-файл-пресета)).
+
+Это нужно, так как некоторые компоненты используют инверсные цвета (например, [Tooltip](##LIBS.STAND/stand:uikit-components-tooltip-stable)).
+
+### Внешний вид компонентов \_control
+
+Здесь описаны размеры контролов, внутренние отступы и размеры текста внутри контролов.
+Все значения наследуются из модификатора [`_space`](#отступы-space).
+
+### Шрифты \_font
+
+Здесь подключаются все начертания/насыщенности/жирности шрифта.
+
+Для каждого уникального шрифта нужно создать отдельный CSS-файл в папке `_font`.
+
+> Проверьте, что в шрифте есть насыщенность, которую вы используете.
+> Браузер имитирует насыщенность, которой нет в наборе, но неизвестно, как это будет выглядеть.
+>
+> [Посмотреть варианты насыщенности в компоненте `Text`](##LIBS.STAND.DEV/stand:uikit-components-text-stable/hash:насыщенность)
+
+### Размер шрифта и междустрочный интервал \_size
+
+Содержит сетку размеров шрифта и межстрочных интервалов. Значения используются в компоненте [`Text`](##LIBS.STAND.DEV/stand:uikit-components-text-stable) и всех текстовых
+элементах компонентов.
+
+### Отступы \_space
+
+Содержит сетку отступов.
+
+### Тени \_shadow
+
+Содержит сетку теней.
+
+## Шаг 4. Создайте файл пресета
+
+1. Создайте файл пресета, например, `myPresetDefault.js`.
+2. Импортируйте CSS-файлы, которые будете использовать.
+3. Создайте объект пресета. Укажите, какие значения (то есть CSS-файлы) для каких модификаторов нужно использовать в этом пресете.
+
+У модификатора `_color` три обязательных значения:
+
+- `primary` — основная или светлая цветовая схема,
+- `accent` — акцентная цветовая схема,
+- `invert` — тёмная или инвертная цветовая схема.
+
+[Подробнее о модификаторе `_color`](#цвета-_color)
+
+Получится примерно так:
+
+```js
+import './_color/Theme_color_myThemeDefault.css';
+import './_color/Theme_color_myThemeDark.css';
+import './_control/Theme_control_myThemeDefault.css';
+import './_font/Theme_font_myThemeDefault.css';
+import './_size/Theme_size_myThemeDefault.css';
+import './_space/Theme_space_myThemeDefault.css';
+import './_shadow/Theme_shadow_myThemeDefault.css';
+
+export const myNewPreset = {
+  color: {
+    primary: 'myThemeDefault',
+    accent: 'myThemeDark',
+    invert: 'myThemeDark',
+  },
+  control: 'myThemeDefault',
+  font: 'myThemeDefault',
+  size: 'myThemeDefault',
+  space: 'myThemeDefault',
+  shadow: 'myThemeDefault',
+};
+```
+
+4. Подключите тему к вашему проекту и укажите новый пресет.
+
+```ts
+import React from 'react';
+
+import { Theme } from '@consta/uikit/Theme';
+import { myNewPreset } from 'pathToPresets/myPresetDefault';
+
+const App = () => {
+  return <Theme preset={myNewPreset}>your app code</Theme>;
+};
+
+export default App;
+```

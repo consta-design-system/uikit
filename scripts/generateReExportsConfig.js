@@ -8,6 +8,7 @@ module.exports = {
     '/icons',
     '/mixs',
     '/responsesImages',
+    '/docs',
   ],
   ignore: [
     'src/internal/**',

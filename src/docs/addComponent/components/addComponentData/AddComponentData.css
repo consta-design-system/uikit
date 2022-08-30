@@ -1,0 +1,13 @@
+.AddComponentData {
+  margin-bottom: var(--space-xl);
+}
+
+.AddComponentData li {
+  margin-bottom: var(--space-xs);
+  font-size: var(--size-text-s);
+}
+
+.AddComponentDataText {
+  display: inline;
+  margin-left: var(--space-s);
+}
