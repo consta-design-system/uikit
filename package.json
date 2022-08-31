@@ -16,7 +16,6 @@
   "dependencies": {
     "@bem-react/classname": "^1.5.12",
     "@bem-react/classnames": "^1.3.10",
-    "@consta/stand": "^0.0.31",
     "compute-scroll-into-view": "^1.0.17",
     "date-fns": "^2.29.1",
     "focus-trap-react": "8.7.0",
@@ -100,6 +99,7 @@
     }
   },
   "devDependencies": {
+    "@consta/stand": "^0.0.33",
     "@babel/cli": "^7.18.9",
     "@babel/core": "^7.17.9",
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.16.7",
