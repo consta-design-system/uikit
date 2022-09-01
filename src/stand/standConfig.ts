@@ -6,6 +6,10 @@ import { StandPageDecoration as standPageDecoration } from './standPageDecoratio
 
 const groups = [
   {
+    title: 'О дизайн-системе',
+    id: 'about',
+  },
+  {
     title: 'Компоненты',
     id: 'components',
   },
@@ -20,6 +24,22 @@ const groups = [
   {
     title: 'Hooks',
     id: 'hooks',
+  },
+  {
+    title: 'Тематизация',
+    id: 'theme',
+  },
+  {
+    title: 'Как работать с Consta',
+    id: 'workflow',
+  },
+  {
+    title: 'Кастомизация',
+    id: 'custom',
+  },
+  {
+    title: 'Правила и справочники',
+    id: 'reference',
   },
 ] as const;
 
