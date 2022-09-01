@@ -2,6 +2,7 @@ import { createConfig } from '@consta/stand';
 
 import image from './ConstaImage.png';
 import description from './description.mdx';
+import { StandPageDecoration as standPageDecoration } from './standPageDecoration';
 
 const groups = [
   {
@@ -29,4 +30,5 @@ export const { createStand } = createConfig({
   group: 'библиотеки компонентов',
   image,
   description,
+  standPageDecoration,
 });
