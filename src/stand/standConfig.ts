@@ -1,6 +1,8 @@
 import { createConfig } from '@consta/stand';
 
 import image from './ConstaImage.png';
+import description from './description.mdx';
+import { StandPageDecoration as standPageDecoration } from './standPageDecoration';
 
 const groups = [
   {
@@ -27,6 +29,6 @@ export const { createStand } = createConfig({
   groups,
   group: 'библиотеки компонентов',
   image,
-  description:
-    '[тут описание что это такое] Ультра топчик библиотеки с пацанскими кнопками и графиками, качай.',
+  description,
+  standPageDecoration,
 });
