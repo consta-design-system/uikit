@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './ProgressLine.image.svg';
-
 export default createStand({
   title: 'ProgressLine',
   id: 'ProgressLine',
   group: 'components',
-  image,
   description: 'Индикатор загрузки в виде линии. Показывает течение процесса.',
   version: '4.0.0',
   status: 'stable',

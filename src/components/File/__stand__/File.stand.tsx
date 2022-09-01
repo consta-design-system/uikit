@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './File.image.svg';
-
 export default createStand({
   title: 'File',
   id: 'File',
   group: 'components',
-  image,
   description: 'Иконка для файла с расширением.',
   version: '4.0.0',
   status: 'stable',

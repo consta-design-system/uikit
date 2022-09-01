@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './ContextMenu.image.svg';
-
 export default createStand({
   title: 'ContextMenu',
   id: 'ContextMenu',
   group: 'components',
-  image,
   description: 'Контекстное меню. Дополнительные действия на странице.',
   version: '3.0.28',
   status: 'deprecated',

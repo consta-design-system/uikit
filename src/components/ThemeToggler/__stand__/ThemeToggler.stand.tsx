@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './ThemeToggler.image.svg';
-
 export default createStand({
   title: 'ThemeToggler',
   id: 'ThemeToggler',
   group: 'components',
-  image,
   description: 'Переключатель темы.',
   version: '4.0.0',
   status: 'stable',

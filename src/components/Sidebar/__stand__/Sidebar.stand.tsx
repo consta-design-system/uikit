@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './Sidebar.image.svg';
-
 export default createStand({
   title: 'Sidebar',
   id: 'Sidebar',
   group: 'components',
-  image,
   description: 'Всплывающее окно.',
   version: '4.0.0',
   status: 'stable',

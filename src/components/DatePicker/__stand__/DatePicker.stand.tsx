@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './DatePicker.image.svg';
-
 export default createStand({
   title: 'DatePicker',
   id: 'DatePicker',
   group: 'components',
-  image,
   description: 'Поле, в котором можно выбрать дату или период.',
   version: '4.0.0',
   status: 'stable',

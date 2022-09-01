@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './Pagination.image.svg';
-
 export default createStand({
   title: 'Pagination',
   id: 'Pagination',
   group: 'components',
-  image,
   description: 'Пагинация. Можно выбрать страницу.',
   version: '4.0.0',
   status: 'stable',

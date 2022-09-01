@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './Header.image.svg';
-
 export default createStand({
   title: 'Header',
   id: 'Header',
   group: 'components',
-  image,
   description: 'Шапка. Блок с меню, поиском и аватаркой.',
   version: '4.0.0',
   status: 'stable',

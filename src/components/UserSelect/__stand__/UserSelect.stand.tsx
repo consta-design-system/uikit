@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './UserSelect.image.svg';
-
 export default createStand({
   title: 'UserSelect',
   id: 'UserSelect',
   group: 'components',
-  image,
   description:
     'Выпадающий список пользователей, позволяет выбирать пользователей из списка.',
   version: '4.0.0',

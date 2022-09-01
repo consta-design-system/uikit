@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './User.image.svg';
-
 export default createStand({
   title: 'User',
   id: 'User',
   group: 'components',
-  image,
   description:
     'Показывает информацию о человеке: аватарку, имя, должность, статус.',
   version: '4.0.0',

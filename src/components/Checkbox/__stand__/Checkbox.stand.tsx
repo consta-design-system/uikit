@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './Checkbox.image.svg';
-
 export default createStand({
   title: 'Checkbox',
   id: 'Checkbox',
   group: 'components',
-  image,
   description: 'Чекбокс. Можно сделать выбор и подтвердить.',
   version: '4.0.0',
   status: 'stable',

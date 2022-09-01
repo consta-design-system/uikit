@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './Layout.image.svg';
-
 export default createStand({
   title: 'Layout',
   id: 'Layout',
   group: 'components',
-  image,
   description: 'Лейаут. Блоки, из которых можно построить каркас страницы.',
   version: '4.0.0',
   status: 'stable',

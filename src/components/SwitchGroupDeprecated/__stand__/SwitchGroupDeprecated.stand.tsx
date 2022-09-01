@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './SwitchGroup.image.svg';
-
 export default createStand({
   title: 'SwitchGroup',
   id: 'SwitchGroup',
   group: 'components',
-  image,
   description: 'Группа переключателей',
   version: '4.0.0',
   status: 'deprecated',

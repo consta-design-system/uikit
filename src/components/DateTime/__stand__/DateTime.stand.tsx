@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './DateTime.image.svg';
-
 export default createStand({
   title: 'DateTime',
   id: 'DateTime',
   group: 'components',
-  image,
   description: 'Календарь. Можно выбрать дату или период.',
   version: '4.0.0',
   status: 'stable',

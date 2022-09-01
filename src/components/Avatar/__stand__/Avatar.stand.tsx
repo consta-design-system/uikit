@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './Avatar.image.svg';
-
 export default createStand({
   title: 'Avatar',
   id: 'Avatar',
   group: 'components',
-  image,
   description: 'Аватар. Разные формы, цвета и размеры.',
   version: '4.0.0',
   status: 'stable',

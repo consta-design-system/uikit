@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './Steps.image.svg';
-
 export default createStand({
   title: 'Steps',
   id: 'Steps',
   group: 'components',
-  image,
   description: 'Шаги.',
   version: '4.0.0',
   status: 'stable',

@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './Card.image.svg';
-
 export default createStand({
   title: 'Card',
   id: 'Card',
   group: 'components',
-  image,
   description: 'Карточка. Контейнер для любого контента.',
   version: '4.0.0',
   status: 'stable',

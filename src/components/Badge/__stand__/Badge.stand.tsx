@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './Badge.image.svg';
-
 export default createStand({
   title: 'Badge',
   id: 'Badge',
   group: 'components',
-  image,
   description: 'Бейджик. Показывает статус процесса.',
   version: '4.0.0',
   status: 'stable',

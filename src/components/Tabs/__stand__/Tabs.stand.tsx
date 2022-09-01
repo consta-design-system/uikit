@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './Tabs.image.svg';
-
 export default createStand({
   title: 'Tabs',
   id: 'Tabs',
   group: 'components',
-  image,
   description: 'Табы. Навигация по вкладкам.',
   version: '4.0.0',
   status: 'stable',

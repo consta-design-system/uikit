@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './RadioGroup.image.svg';
-
 export default createStand({
   title: 'RadioGroup',
   id: 'RadioGroup',
   group: 'components',
-  image,
   description: 'Группа радиокнопок.',
   version: '4.0.0',
   status: 'stable',

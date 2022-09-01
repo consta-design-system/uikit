@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './Responses.image.svg';
-
 export default createStand({
   title: 'Responses',
   id: 'Responses',
   group: 'components',
-  image,
   description: 'Заглушки с сообщениями об ошибках и важных статусах.',
   version: '4.0.0',
   status: 'stable',

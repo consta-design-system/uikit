@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './Skeleton.image.svg';
-
 export default createStand({
   title: 'Skeleton',
   id: 'Skeleton',
   group: 'components',
-  image,
   description: 'Визуальный плейсхолдер, заглушка.',
   version: '4.0.0',
   status: 'stable',

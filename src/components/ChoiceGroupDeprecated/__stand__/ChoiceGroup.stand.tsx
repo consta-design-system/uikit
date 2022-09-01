@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './ChoiceGroup.image.svg';
-
 export default createStand({
   title: 'ChoiceGroup',
   id: 'ChoiceGroup',
   group: 'components',
-  image,
   description: 'Группа кнопок. Можно выбрать один или несколько вариантов.',
   version: '3.0.28',
   status: 'deprecated',
