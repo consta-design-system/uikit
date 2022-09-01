@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './Loader.image.svg';
-
 export default createStand({
   title: 'Loader',
   id: 'Loader',
   group: 'components',
-  image,
   description: 'Прелоадер. Показывает, что информация загружается.',
   version: '4.0.0',
   status: 'stable',

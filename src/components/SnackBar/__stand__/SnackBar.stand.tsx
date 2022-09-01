@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './SnackBar.image.svg';
-
 export default createStand({
   title: 'SnackBar',
   id: 'SnackBar',
   group: 'components',
-  image,
   description: 'Мгновенные уведомления.',
   version: '4.0.0',
   status: 'stable',

@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './ProgressSpin.image.svg';
-
 export default createStand({
   title: 'ProgressSpin',
   id: 'ProgressSpin',
   group: 'components',
-  image,
   description:
     'Индикатор. Показывает течение процесса — загрузку, отправку или что-то похожее.',
   version: '4.0.0',

@@ -1,11 +1,9 @@
 import { createStand } from '../../../stand/standConfig';
-import image from './Combobox.image.svg';
 
 export default createStand({
   title: 'Combobox',
   id: 'Combobox',
   group: 'components',
-  image,
   description:
     'Выпадающий список с поиском. Можно выбрать один или несколько вариантов.',
   version: '4.0.0',

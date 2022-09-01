@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './TextField.image.svg';
-
 export default createStand({
   title: 'TextField',
   id: 'TextField',
   group: 'components',
-  image,
   description: 'Поле для ввода текста и чисел.',
   version: '4.0.0',
   status: 'stable',

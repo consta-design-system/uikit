@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './Text.image.svg';
-
 export default createStand({
   title: 'Text',
   id: 'Text',
   group: 'components',
-  image,
   description: 'Текст. Любые текстовые элементы на странице и стили для них.',
   version: '4.0.0',
   status: 'stable',

@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './Slider.image.svg';
-
 export default createStand({
   title: 'Slider',
   id: 'Slider',
   group: 'components',
-  image,
   description: 'Ползунок для выбора значений.',
   version: '4.0.0',
   status: 'stable',

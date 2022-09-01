@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './Table.image.svg';
-
 export default createStand({
   title: 'Table',
   id: 'Table',
   group: 'components',
-  image,
   description: 'Таблица. Выводит данные с фильтрами и сортировкой.',
   version: '4.0.0',
   status: 'stable',

@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './DragNDropField.image.svg';
-
 export default createStand({
   title: 'DragNDropField',
   id: 'DragNDropField',
   group: 'components',
-  image,
   description: 'Можно перетащить файлы, чтобы загрузить или отправить.',
   version: '4.0.0',
   status: 'stable',

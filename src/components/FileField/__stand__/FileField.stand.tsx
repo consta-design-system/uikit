@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './FileField.image.svg';
-
 export default createStand({
   title: 'FileField',
   id: 'FileField',
   group: 'components',
-  image,
   description: 'Можно выбрать файлы, чтобы загрузить или отправить.',
   version: '4.0.0',
   status: 'stable',

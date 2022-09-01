@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './Select.image.svg';
-
 export default createStand({
   title: 'Select',
   id: 'Select',
   group: 'components',
-  image,
   description: 'Выпадающий список. Позволяет выбрать один вариант.',
   version: '4.0.0',
   status: 'stable',

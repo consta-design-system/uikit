@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './Modal.image.svg';
-
 export default createStand({
   title: 'Modal',
   id: 'Modal',
   group: 'components',
-  image,
   description: 'Всплывающее окно. Показывает контент поверх основной страницы.',
   version: '4.0.0',
   status: 'stable',

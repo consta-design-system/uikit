@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './Theme.image.svg';
-
 export default createStand({
   title: 'Theme',
   id: 'Theme',
   group: 'components',
-  image,
   description:
     'Тема. Набор правил в CSS, который определяет, как выглядит проект.',
   version: '4.0.0',

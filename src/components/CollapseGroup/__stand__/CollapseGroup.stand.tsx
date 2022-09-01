@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './CollapseGroup.image.svg';
-
 export default createStand({
   title: 'CollapseGroup',
   id: 'CollapseGroup',
   group: 'components',
-  image,
   description: 'Группа скрытых блоков. Раскрывается по нажатию на заголовок.',
   version: '4.0.0',
   status: 'stable',

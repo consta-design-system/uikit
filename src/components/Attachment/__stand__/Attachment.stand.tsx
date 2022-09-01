@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './Attachment.image.svg';
-
 export default createStand({
   title: 'Attachment',
   id: 'Attachment',
   group: 'components',
-  image,
   description: 'Показывает загрузку файла или уже загруженный файл.',
   version: '4.0.0',
   status: 'stable',

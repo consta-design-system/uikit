@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './ProgressStepBar.image.svg';
-
 export default createStand({
   title: 'ProgressStepBar',
   id: 'ProgressStepBar',
   group: 'components',
-  image,
   description: 'Прогресс по шагам. Показывает, на каком шаге процесс.',
   version: '4.0.0',
   status: 'stable',

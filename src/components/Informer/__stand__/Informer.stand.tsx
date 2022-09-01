@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './Informer.image.svg';
-
 export default createStand({
   title: 'Informer',
   id: 'Informer',
   group: 'components',
-  image,
   description:
     'Сообщение для пользователя. Встраивается в содержимое страницы.',
   version: '4.0.0',

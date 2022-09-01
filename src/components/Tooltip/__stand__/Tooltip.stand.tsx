@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './Tooltip.image.svg';
-
 export default createStand({
   title: 'Tooltip',
   id: 'Tooltip',
   group: 'components',
-  image,
   description: 'Тултип. Всплывающее окно.',
   version: '4.0.0',
   status: 'stable',

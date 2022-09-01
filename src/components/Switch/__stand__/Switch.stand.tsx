@@ -1,11 +1,9 @@
 import { createStand } from '../../../stand/standConfig';
-import image from './Switch.image.svg';
 
 export default createStand({
   title: 'Switch',
   id: 'Switch',
   group: 'components',
-  image,
   description: 'Переключатель. Два положения — включено и выключено.',
   version: '4.0.0',
   status: 'stable',

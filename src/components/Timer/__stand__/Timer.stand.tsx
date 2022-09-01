@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './Timer.image.svg';
-
 export default createStand({
   title: 'Timer',
   id: 'Timer',
   group: 'components',
-  image,
   description: 'Таймер.',
   version: '4.0.0',
   status: 'stable',

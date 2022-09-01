@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './AvatarGroup.image.svg';
-
 export default createStand({
   title: 'AvatarGroup',
   id: 'AvatarGroup',
   group: 'components',
-  image,
   description: 'Группа аватарок. Показывает несколько пользователей.',
   version: '4.0.0',
   status: 'stable',

@@ -1,12 +1,9 @@
 import { createStand } from '##/stand/standConfig';
 
-import image from './FieldGroup.image.svg';
-
 export default createStand({
   title: 'FieldGroup',
   id: 'FieldGroup',
   group: 'components',
-  image,
   description:
     'Группа полей. Объединяет одно или несколько полей ввода и кнопки.',
   version: '4.0.0',
