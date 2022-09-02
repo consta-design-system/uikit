@@ -44,7 +44,7 @@ const groups = [
 ] as const;
 
 export const { createStand } = createConfig({
-  title: 'Consta uikit',
+  title: 'Consta UI Kit',
   id: 'uikit',
   groups,
   group: 'библиотеки компонентов',
