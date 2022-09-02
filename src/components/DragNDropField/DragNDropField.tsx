@@ -62,7 +62,7 @@ export const DragNDropField = forwardRef<HTMLDivElement, DragNDropFieldProps>((p
 
   const rootProps = getRootProps({
     ...otherProps,
-    className: cnDragNDropField({ active: isDragActive, disabled }),
+    className: cnDragNDropField({ active: isDragActive, disabled }, [otherProps.className]),
     onClick: handleRootClick,
   });
 
