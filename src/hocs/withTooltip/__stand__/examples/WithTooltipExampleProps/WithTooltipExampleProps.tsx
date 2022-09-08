@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Button } from '../../../../../components/Button/Button';
+import { cnMixSpace } from '../../../../../mixs/MixSpace/MixSpace';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { withTooltip } from '../../../withTooltip';
@@ -14,10 +15,14 @@ export const WithTooltipExampleProps = () => {
         wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
       ])}
     >
-      <ButtonWithTooltip label="Кнопка без свойств" />
+      <ButtonWithTooltip
+        label="Кнопка без свойств"
+        className={cnMixSpace({ m: 'm' })}
+      />
       <ButtonWithTooltip
         label="Свойство описано в кнопке"
         tooltipProps={{ content: 'Тултип снизу', direction: 'downCenter' }}
+        className={cnMixSpace({ m: 'm' })}
       />
     </div>
   );

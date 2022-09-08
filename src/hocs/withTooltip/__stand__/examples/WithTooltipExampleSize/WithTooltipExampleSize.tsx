@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Button } from '../../../../../components/Button/Button';
+import { cnMixSpace } from '../../../../../mixs/MixSpace/MixSpace';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { withTooltip } from '../../../withTooltip';
@@ -30,9 +31,9 @@ export const WithTooltipExampleSize = () => {
         wp.tplGrid({ 'ratio': '1-1-1', 'col-gap': 'full' }),
       ])}
     >
-      <ButtonWithTooltipS label="S" />
-      <ButtonWithTooltipM label="M" />
-      <ButtonWithTooltipL label="L" />
+      <ButtonWithTooltipS label="S" className={cnMixSpace({ m: 'm' })} />
+      <ButtonWithTooltipM label="M" className={cnMixSpace({ m: 'm' })} />
+      <ButtonWithTooltipL label="L" className={cnMixSpace({ m: 'm' })} />
     </div>
   );
 };

@@ -304,7 +304,8 @@ import { Modal } from '@consta/uikit/Modal';
 | `onClickOutside?`            | `(e: React.MouseEvent) => void` | -                      | Действие по нажатию за пределами окна                                |
 | `onEsc?`                     | `(e: KeyboardEvent) => void`    | -                      | Действие при нажатии кнопки **Escape**, когда модальное окно открыто |
 | `isOpen?`                    | `boolean`                       | -                      | Открывает и закрывает окно                                           |
-| `onClose?`                   | `() => void`                    | -                      | Действие при закрытии окна                                           |
+| `onClose?`                   | `() => void`                    | -                      | Действие при закрытии окна (срабатывает в момент начала анимации)    |
+| `afterClose?`                | `() => void`                    | -                      | Действие при закрытии окна (срабатывает после анимации закрытия)     |
 | `onOpen?`                    | `() => void`                    | -                      | Действие при открытии окна                                           |
 | `children?`                  | `React.ReactNode`               | -                      | Дочерние элементы                                                    |
 | `container?`                 | `HTMLDivElement, undefined`     | `window.document.body` | Родительский контейнер для модального окна                           |
