@@ -8,7 +8,7 @@ export default createStand({
   version: '4.0.0',
   status: 'stable',
   sandbox:
-    'https://codesandbox.io/embed/react-new?fontsize=14&hidenavigation=1&theme=dark',
+    'https://codesandbox.io/embed/text-qnu8hp?fontsize=14&hidenavigation=1&theme=dark',
   figma:
     'https://www.figma.com/file/wNIi9rZl30Uq1IPBJRubsl/Consta-Font-Styles?node-id=12%3A8296',
   order: 10,

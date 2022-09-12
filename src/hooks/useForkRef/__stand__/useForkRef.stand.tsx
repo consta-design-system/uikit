@@ -7,5 +7,7 @@ export default createStand({
   description: 'Хук для создания нескольких функций.',
   version: '4.0.0',
   status: 'stable',
+  sandbox:
+    'https://codesandbox.io/embed/useforkref-6lth98?fontsize=14&hidenavigation=1&theme=dark',
   order: 10,
 });
