@@ -1430,10 +1430,10 @@
     date-fns "^2.17.0"
     react-transition-group "^4.4.2"
 
-"@consta/stand@^0.0.37":
-  version "0.0.37"
-  resolved "https://registry.yarnpkg.com/@consta/stand/-/stand-0.0.37.tgz#2c0357bd31d73c1f77e679c603629d7b7b701792"
-  integrity sha512-YBTIOK29VFmWcFRgsUnZLSEMVZwa0kHbKkVEKbEjw8gUcJ0rV4+HP2h3TJq4ZxK4NbZKZUTpwtyHnBLPu59dqQ==
+"@consta/stand@^0.0.39":
+  version "0.0.39"
+  resolved "https://registry.yarnpkg.com/@consta/stand/-/stand-0.0.39.tgz#afac24b392ecaa0bbdb3171ae63458e7e8dff9ff"
+  integrity sha512-W0KfFhCLf0mzu0yVQbMthVj9NmC9/Q9Hixv0wYjl5hqabOLmIKNobxjfrCrUFup0x3P75g78TUDaZsIakprzow==
   dependencies:
     "@bem-react/classname" "^1.5.12"
     "@bem-react/classnames" "^1.3.10"
@@ -1443,8 +1443,8 @@
     "@mdx-js/react" "^2.1.1"
     "@oclif/command" "^1.8.16"
     "@pmmmwh/react-refresh-webpack-plugin" "^0.5.3"
-    "@reatom/core" "^2.0.17"
-    "@reatom/react" "^2.0.15"
+    "@reatom/core" "^2.0.20"
+    "@reatom/react" "^2.0.19"
     "@svgr/core" "^6.2.1"
     "@svgr/plugin-jsx" "^6.3.1"
     "@svgr/plugin-prettier" "^6.3.1"
@@ -2186,12 +2186,12 @@
     schema-utils "^3.0.0"
     source-map "^0.7.3"
 
-"@reatom/core@^2.0.17":
+"@reatom/core@^2.0.20":
   version "2.0.20"
   resolved "https://registry.yarnpkg.com/@reatom/core/-/core-2.0.20.tgz#4280488578456a7048e8c373a8e31ffc3a7afb49"
   integrity sha512-a5+GDeSKH8KRyP34eP6TuxRVfrRQXyJZAJoYRyd4xUUU7tZT/fGAbjovAMKctgilGeGCzDpnG8WiRypPZWqPug==
 
-"@reatom/react@^2.0.15":
+"@reatom/react@^2.0.19":
   version "2.0.19"
   resolved "https://registry.yarnpkg.com/@reatom/react/-/react-2.0.19.tgz#2f7575167248a8762735b7955e1f7eb57f6bd2c3"
   integrity sha512-vwjM1IaDL6qZeYTP2yWqjQhMrjCLvmrl51nzU8lm3nQmILvwZlFzXkooNQc6UpaKJHs2Q8Rrgd7Xsufi9OjBtg==
