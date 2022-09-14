@@ -33,8 +33,8 @@ function getItem(index = 0) {
   return getItems()[index];
 }
 
-function getShowMore() {
-  return getRender().querySelectorAll(`.${cnAvatarGroup('ShowMore')}`)[0];
+function getMore() {
+  return getRender().querySelectorAll(`.${cnAvatarGroup('More')}`)[0];
 }
 
 describe('Компонент Avatar', () => {
@@ -68,8 +68,8 @@ describe('Компонент Avatar', () => {
       });
       it('количество скрытых элементов', () => {
         renderComponent({ visibleCount: 3 });
-        const showMore = getShowMore();
-        expect(showMore.textContent).toEqual(`+${avatarGroupItems.length - 3}`);
+        const more = getMore();
+        expect(more.textContent).toEqual(`+${avatarGroupItems.length - 3}`);
       });
     });
   });

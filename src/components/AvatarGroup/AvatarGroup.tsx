@@ -30,7 +30,7 @@ const AvatarGroupRender = (
   return (
     <div className={cnAvatarGroup({ size })} ref={ref} {...otherProps}>
       {items.length > visibleCount && (
-        <div className={cnAvatar({ size, form }, [cnAvatarGroup('ShowMore')])}>
+        <div className={cnAvatar({ size, form }, [cnAvatarGroup('More')])}>
           {`+${items.length - visibleCount}`}
         </div>
       )}
