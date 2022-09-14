@@ -1,9 +1,14 @@
+import './Attachment.variants.css';
+
 import { useBoolean, useNumber, useText } from '@consta/stand';
 import React from 'react';
 
 import { IconTrash } from '##/icons/IconTrash/IconTrash';
+import { cn } from '##/utils/bem';
 
 import { Attachment } from '../Attachment';
+
+const cnAttachmentVariants = cn('AttachmentVariants');
 
 const Variants = () => {
   const fileName = useText('fileName', 'Приложенный документ');
@@ -20,6 +25,7 @@ const Variants = () => {
 
   return (
     <Attachment
+      className={cnAttachmentVariants()}
       loading={loading}
       loadingText={loadingText}
       fileName={fileName}

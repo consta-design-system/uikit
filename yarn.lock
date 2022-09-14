@@ -1430,10 +1430,10 @@
     date-fns "^2.17.0"
     react-transition-group "^4.4.2"
 
-"@consta/stand@^0.0.40":
-  version "0.0.40"
-  resolved "https://registry.yarnpkg.com/@consta/stand/-/stand-0.0.40.tgz#88a6fcfa76e554f1399627738eb0fb1170c4cd6f"
-  integrity sha512-Q7CBinxmb9owVMAz4bZuGkOkM9xbiuEe0ko5vdyJ3zYNAALJpx6r+fM5psMSDuHW4j4iRd8yNe9P5lp6CCt2yg==
+"@consta/stand@^0.0.41":
+  version "0.0.41"
+  resolved "https://registry.yarnpkg.com/@consta/stand/-/stand-0.0.41.tgz#c31e837f9ea5fce4586aa3e6c47cb67e7ea98956"
+  integrity sha512-KWia9yV07ZZwINwTupgPVk0GaeIJCEhiGd/DQ8RNSZazoQ0qQruBcYOIzcuw8Nvr9eVPtmcw7ZS8OUHhDGv0xg==
   dependencies:
     "@bem-react/classname" "^1.5.12"
     "@bem-react/classnames" "^1.3.10"

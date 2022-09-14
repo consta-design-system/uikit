@@ -31,12 +31,13 @@
     }
   }
 
-  &-ShowMore {
-    margin: 0;
-    padding: 0;
-    color: var(--color-typo-primary);
-    background: var(--color-bg-system);
-    border: none;
-    cursor: pointer;
+  &-More {
+    &.Avatar {
+      --avatar-color: var(--color-bg-system);
+      margin: 0;
+      padding: 0;
+      color: var(--color-typo-primary);
+      border: none;
+    }
   }
 }
