@@ -6,7 +6,6 @@ export default createStand({
   group: 'mixs',
   version: '4.0.0',
   status: 'stable',
-  sandbox:
-    'https://codesandbox.io/embed/mixpopoveranimate-kzfvfk?fontsize=14&hidenavigation=1&theme=dark',
+  sandbox: 'mixpopoveranimate-kzfvfk',
   order: 10,
 });

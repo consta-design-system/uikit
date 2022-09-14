@@ -7,8 +7,7 @@ export default createStand({
   description: 'Таймер.',
   version: '4.0.0',
   status: 'stable',
-  sandbox:
-    'https://codesandbox.io/embed/timer-u46qh1?fontsize=14&hidenavigation=1&theme=dark',
+  sandbox: 'timer-u46qh1',
   figma:
     'https://www.figma.com/embed?embed_host=uikit.consta.design&url=https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=5867%3A11',
   order: 10,

@@ -6,7 +6,6 @@ export default createStand({
   group: 'mixs',
   version: '4.0.0',
   status: 'stable',
-  sandbox:
-    'https://codesandbox.io/embed/mixcard-s3bk4u?fontsize=14&hidenavigation=1&theme=dark',
+  sandbox: 'mixcard-s3bk4u',
   order: 10,
 });

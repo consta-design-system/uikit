@@ -8,8 +8,7 @@ export default createStand({
     'Показывает информацию о человеке: аватарку, имя, должность, статус.',
   version: '4.0.0',
   status: 'stable',
-  sandbox:
-    'https://codesandbox.io/embed/user-fqeoxq?fontsize=14&hidenavigation=1&theme=dark',
+  sandbox: 'user-fqeoxq',
   figma:
     'https://www.figma.com/embed?embed_host=uikit.consta.design&url=https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=58%3A39679',
   order: 10,

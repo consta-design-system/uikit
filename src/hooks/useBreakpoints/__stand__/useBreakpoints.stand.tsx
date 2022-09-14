@@ -7,7 +7,6 @@ export default createStand({
   description: 'Отслеживанние размера экрана.',
   version: '4.0.0',
   status: 'stable',
-  sandbox:
-    'https://codesandbox.io/embed/usebreakpoints-4hqsc5?fontsize=14&hidenavigation=1&theme=dark',
+  sandbox: 'usebreakpoints-4hqsc5',
   order: 10,
 });

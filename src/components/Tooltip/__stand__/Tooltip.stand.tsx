@@ -7,8 +7,7 @@ export default createStand({
   description: 'Тултип. Всплывающее окно.',
   version: '4.0.0',
   status: 'stable',
-  sandbox:
-    'https://codesandbox.io/embed/tooltip-pjejd2?fontsize=14&hidenavigation=1&theme=dark',
+  sandbox: 'tooltip-pjejd2',
   figma:
     'https://www.figma.com/embed?embed_host=uikit.consta.design&url=https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=77648%3A163754',
   order: 10,

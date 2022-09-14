@@ -7,8 +7,7 @@ export default createStand({
   description: 'Группа переключателей.',
   version: '4.0.0',
   status: 'stable',
-  sandbox:
-    'https://codesandbox.io/embed/switchgroup-b4cpro?fontsize=14&hidenavigation=1&theme=dark',
+  sandbox: 'switchgroup-b4cpro',
   figma:
     'https://www.figma.com/embed?embed_host=uikit.consta.design&url=https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=58%3A2269',
   order: 10,

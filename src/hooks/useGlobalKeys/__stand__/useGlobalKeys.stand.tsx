@@ -7,7 +7,6 @@ export default createStand({
   description: 'Хук для перехвата нажатия клавиш.',
   version: '4.0.0',
   status: 'stable',
-  sandbox:
-    'https://codesandbox.io/embed/useglobalkeys-ljhoet?fontsize=14&hidenavigation=1&theme=dark',
+  sandbox: 'useglobalkeys-ljhoet',
   order: 10,
 });
