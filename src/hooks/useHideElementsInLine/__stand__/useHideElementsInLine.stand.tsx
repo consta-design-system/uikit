@@ -7,5 +7,6 @@ export default createStand({
   description: 'Хук для сокрытия элементов.',
   version: '4.0.0',
   status: 'stable',
+  sandbox: 'usehideelementsinline-3mul18',
   order: 10,
 });

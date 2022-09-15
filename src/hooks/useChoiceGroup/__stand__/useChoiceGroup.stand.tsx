@@ -7,5 +7,6 @@ export default createStand({
   description: 'Отслеживанние размера экрана.',
   version: '4.0.0',
   status: 'stable',
+  sandbox: 'usechoicegroup-bzsfsl',
   order: 10,
 });

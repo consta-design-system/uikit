@@ -7,5 +7,6 @@ export default createStand({
   description: 'Хук для создания  массива ссылок.',
   version: '4.0.0',
   status: 'stable',
+  sandbox: 'useref-8h5862',
   order: 10,
 });

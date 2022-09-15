@@ -7,5 +7,6 @@ export default createStand({
   description: 'Хук для создания нескольких функций.',
   version: '4.0.0',
   status: 'stable',
+  sandbox: 'useforkref-6lth98',
   order: 10,
 });

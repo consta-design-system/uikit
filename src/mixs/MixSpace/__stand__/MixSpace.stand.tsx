@@ -6,5 +6,6 @@ export default createStand({
   group: 'mixs',
   version: '4.0.0',
   status: 'stable',
+  sandbox: 'mixspace-4rc067',
   order: 10,
 });
