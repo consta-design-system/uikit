@@ -16,7 +16,6 @@ import {
 } from '../Button';
 
 const Variants = () => {
-  const width = useSelect('width', buttonPropWidth, buttonPropWidthDefault);
   const size = useSelect('size', buttonPropSize, buttonPropSizeDefault);
   const view = useSelect('view', buttonPropView, buttonPropViewDefault);
   const form = useSelect('form', buttonPropForm, buttonPropFormDefault);
@@ -25,7 +24,17 @@ const Variants = () => {
   const label = useText('label', 'Это кнопка');
   const iconLeft = useBoolean('iconLeft', false);
   const iconRight = useBoolean('iconRight', false);
-  const onlyIcon = useBoolean('onlyIcon', false);
+  const onlyIcon = useBoolean(
+    'onlyIcon',
+    false,
+    Boolean(iconLeft) || Boolean(iconRight),
+  );
+  const width = useSelect(
+    'width',
+    buttonPropWidth,
+    buttonPropWidthDefault,
+    !onlyIcon,
+  );
 
   return (
     <Button

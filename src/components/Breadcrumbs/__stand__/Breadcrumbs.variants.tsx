@@ -1,6 +1,8 @@
 import { useBoolean, useSelect } from '@consta/stand';
 import React from 'react';
 
+import { cn } from '##/utils/bem';
+
 import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconBag } from '../../../icons/IconBag/IconBag';
 import { IconBook } from '../../../icons/IconBook/IconBook';
@@ -73,6 +75,8 @@ const pages: Page[] = [
   },
 ];
 
+const cnBreadcrumbsVariants = cn('BreadcrumbsVariants');
+
 const Variants = () => {
   const size = useSelect('size', breadcrumbPropSize, breadcrumbPropSizeDefault);
   const fitMode = useSelect(
@@ -80,13 +84,14 @@ const Variants = () => {
     breadcrumbPropFitMode,
     breadcrumbPropFitModeDefault,
   );
-  const withIcon = useBoolean('withIcon', false);
   const withSubMenu = useBoolean('withSubMenu', false);
-  const onlyIconRoot = useBoolean('onlyIconRoot', false);
+  const withIcon = useBoolean('withIcon', false);
+  const onlyIconRoot = useBoolean('onlyIconRoot', false, Boolean(withIcon));
   const lastItemIsLink = useBoolean('lastItemIsLink', false);
 
   return (
     <Breadcrumbs
+      className={cnBreadcrumbsVariants()}
       items={pages}
       size={size}
       onlyIconRoot={onlyIconRoot}

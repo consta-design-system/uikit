@@ -15,13 +15,23 @@ import {
 } from '../Badge';
 
 const Variants = () => {
-  const label = useText('label', 'это бейджик');
-  const size = useSelect('size', badgePropSize, badgePropSizeDefault);
-  const view = useSelect('view', badgePropView, badgePropViewDefault);
-  const status = useSelect('status', badgePropStatus, badgePropStatusDefault);
-  const form = useSelect('form', badgePropForm, badgePropFormDefault);
   const minified = useBoolean('minified', false);
-  const icon = useBoolean('icon', false);
+  const label = useText('label', 'это бейджик', !minified);
+  const size = useSelect('size', badgePropSize, badgePropSizeDefault);
+  const view = useSelect(
+    'view',
+    badgePropView,
+    badgePropViewDefault,
+    !minified,
+  );
+  const status = useSelect('status', badgePropStatus, badgePropStatusDefault);
+  const form = useSelect(
+    'form',
+    badgePropForm,
+    badgePropFormDefault,
+    !minified,
+  );
+  const icon = useBoolean('icon', false, !minified);
 
   return (
     <Badge

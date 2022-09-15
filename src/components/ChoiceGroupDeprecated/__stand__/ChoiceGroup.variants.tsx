@@ -55,7 +55,7 @@ const Variants = () => {
   const view = useSelect('view', choiceGroupViews, choiceGroupDefaultView);
   const form = useSelect('form', choiceGroupForms, choiceGroupDefaultForm);
   const withIcon = useBoolean('withIcon', false);
-  const onlyIcon = useBoolean('onlyIcon', false);
+  const onlyIcon = useBoolean('onlyIcon', false, Boolean(withIcon));
   const disabled = useBoolean('disabled', false);
   const disabledItem = useBoolean('disabledItem', false);
 

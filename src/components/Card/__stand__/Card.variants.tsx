@@ -24,7 +24,7 @@ const Variants = () => {
   );
   const shadow = useBoolean('shadow', true);
   const border = useBoolean('border', false);
-  const status = useSelect('status', ['', ...cardPropStatus], '');
+  const status = useSelect('status', cardPropStatus);
   const form = useSelect('form', cardPropForm, cardPropFormDefault);
 
   return (

@@ -1,5 +1,9 @@
+import './ContextMenu.variants.css';
+
 import { useBoolean, useSelect } from '@consta/stand';
 import React, { useEffect, useRef, useState } from 'react';
+
+import { cn } from '##/utils/bem';
 
 import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { IconSelect } from '../../../icons/IconSelect/IconSelect';
@@ -49,6 +53,8 @@ function renderRightSide(
 
   return nodeArray;
 }
+
+const cnContextMenuVariants = cn('ContextMenuVariants');
 
 const Variants = () => {
   const size = useSelect('size', contextMenuSizes, contextMenuDefaultSize);
@@ -157,7 +163,7 @@ const Variants = () => {
   };
 
   return (
-    <div>
+    <div className={cnContextMenuVariants()}>
       <Button
         label="Откройте контекстное меню"
         ref={ref}

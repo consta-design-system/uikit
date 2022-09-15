@@ -12,16 +12,16 @@ import {
 } from '../CheckboxGroup';
 
 type Item = {
-  name: string;
+  label: string;
   disabled?: boolean;
 };
 
 const items: Item[] = [
-  { name: 'один' },
-  { name: 'два' },
-  { name: 'три' },
-  { name: 'disabled', disabled: true },
-  { name: 'пять' },
+  { label: 'один' },
+  { label: 'два' },
+  { label: 'три' },
+  { label: 'disabled', disabled: true },
+  { label: 'пять' },
 ];
 
 const Variants = () => {
@@ -41,8 +41,6 @@ const Variants = () => {
       <CheckboxGroup
         value={value}
         items={items}
-        getItemLabel={(item) => item.name}
-        getItemDisabled={(item) => item.disabled}
         onChange={({ value }) => setValue(value)}
         name="CheckboxGroup"
         direction={direction}

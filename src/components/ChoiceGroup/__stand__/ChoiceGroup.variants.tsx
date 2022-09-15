@@ -18,32 +18,32 @@ import {
 } from '../ChoiceGroup';
 
 declare type Item = {
-  name: string;
+  label: string;
   icon: IconComponent;
   disabled?: boolean;
 };
 
-const items = [
+const items: Item[] = [
   {
-    name: 'один',
+    label: 'один',
     icon: IconCamera,
   },
   {
-    name: 'два',
+    label: 'два',
     icon: IconCopy,
     disabled: true,
   },
   {
-    name: 'три',
+    label: 'три',
     icon: IconFavorite,
     disabled: true,
   },
   {
-    name: 'четыре',
+    label: 'четыре',
     icon: IconCamera,
   },
   {
-    name: 'пять',
+    label: 'пять',
     icon: IconCamera,
   },
 ];
@@ -58,12 +58,14 @@ const Variants = () => {
   const view = useSelect('view', choiceGroupViews, choiceGroupDefaultView);
   const form = useSelect('form', choiceGroupForms, choiceGroupDefaultForm);
   const withIcon = useBoolean('withIcon', false);
-  const onlyIcon = useBoolean('onlyIcon', false);
+  const onlyIcon = useBoolean('onlyIcon', false, Boolean(withIcon));
   const disabled = useBoolean('disabled', false);
   const disabledItem = useBoolean('disabledItem', false);
 
-  const getIcon = withIcon ? (item: Item) => item.icon : undefined;
-  const getLabel = (item: Item) => item.name;
+  const getItemIcon = withIcon ? (item: Item) => item.icon : () => undefined;
+  const getItemDisabled = disabledItem
+    ? (item: Item) => item.disabled
+    : () => undefined;
 
   return (
     <form>
@@ -71,7 +73,6 @@ const Variants = () => {
         <ChoiceGroup
           items={items}
           value={valueMultiple}
-          getItemLabel={getLabel}
           onChange={({ value }) => setValueMultiple(value)}
           name="ChoiceGroup"
           multiple
@@ -80,15 +81,14 @@ const Variants = () => {
           width={width}
           form={form}
           onlyIcon={onlyIcon}
-          getItemIcon={getIcon}
+          getItemIcon={getItemIcon}
           disabled={disabled}
-          getItemDisabled={disabledItem ? (item) => item.disabled : undefined}
+          getItemDisabled={getItemDisabled}
         />
       ) : (
         <ChoiceGroup
           items={items}
           value={value}
-          getItemLabel={getLabel}
           onChange={({ value }) => setValue(value)}
           name="ChoiceGroup"
           multiple={false}
@@ -97,9 +97,9 @@ const Variants = () => {
           width={width}
           form={form}
           onlyIcon={onlyIcon}
-          getItemIcon={getIcon}
+          getItemIcon={getItemIcon}
           disabled={disabled}
-          getItemDisabled={disabledItem ? (item) => item.disabled : undefined}
+          getItemDisabled={getItemDisabled}
         />
       )}
     </form>
