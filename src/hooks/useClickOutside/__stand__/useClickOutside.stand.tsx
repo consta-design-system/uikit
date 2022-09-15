@@ -7,5 +7,6 @@ export default createStand({
   description: 'Хук для обработки кликов вне элемента.',
   version: '4.0.0',
   status: 'stable',
+  sandbox: 'useclickoutside-b12t39',
   order: 10,
 });

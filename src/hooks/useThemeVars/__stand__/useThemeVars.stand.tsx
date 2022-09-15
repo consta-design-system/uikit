@@ -7,5 +7,6 @@ export default createStand({
   description: 'Хук для получения переменных темы.',
   version: '4.0.0',
   status: 'stable',
+  sandbox: 'usethemevars-j54pt6',
   order: 10,
 });

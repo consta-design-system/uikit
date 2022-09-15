@@ -7,7 +7,6 @@ export default createStand({
   description: 'Поповер. Позиционирование элементов по координатам или якорю.',
   version: '4.0.0',
   status: 'stable',
-  sandbox:
-    'https://codesandbox.io/embed/react-new?fontsize=14&hidenavigation=1&theme=dark',
+  sandbox: 'popover-m9sjn5',
   order: 10,
 });
