@@ -34,7 +34,7 @@ const Variants = () => {
       <Select
         placeholder="Select"
         items={items}
-        onChange={() => action('onChange')}
+        onChange={() => console.log('onChange')}
       />
       <Button label="Button" />
     </FieldGroup>
