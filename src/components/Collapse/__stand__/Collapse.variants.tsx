@@ -58,7 +58,7 @@ const Variants = () => {
   return (
     <Collapse
       size={size}
-      label={label}
+      label={label || ''}
       isOpen={isOpen}
       onClick={() => setOpen(!isOpen)}
       hoverEffect={hoverEffect}
