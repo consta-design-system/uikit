@@ -1,8 +1,12 @@
 import { InstructionPictures } from './components/InstructionPictures/InstructionPictures';
 
-# Новые иконки
+import Icon1 from './components/InstructionPictures/images/Icon1.image.svg';
+import Icon2 from './components/InstructionPictures/images/Icon2.image.svg';
+import Icon3 from './components/InstructionPictures/images/Icon3.image.svg';
+import Icon5 from './components/InstructionPictures/images/Icon5.image.svg';
+import Icon6 from './components/InstructionPictures/images/Icon6.image.svg';
 
-> Это инструкция по добавлению новых иконок в библиотеки в Figma и в код. Если вам нужна автоматическая генерация компонентов из SVG, загляните в [эту инструкцию](?path=/docs/common-develop-icons--page)
+> Это инструкция по добавлению новых иконок в библиотеки в Figma и в код. Если вам нужна автоматическая генерация компонентов из SVG, загляните в [эту инструкцию](##LIBS.STAND.DEV|stand:uikit-custom-addicons-stable)
 
 - [Правила отрисовки](#правила-отрисовки)
 - [Правила работы с библиотекой](#правила-работы-с-библиотекой)
@@ -14,30 +18,30 @@ import { InstructionPictures } from './components/InstructionPictures/Instructio
 Иконки существуют в трёх размерах: **m 24×24**, **s 16×16** и **xs 12×12**.
 В самом маленьким размере **толщина линии** 1px, а в двух других — 2px.
 
-`<InstructionPictures name="1-icons-grid" />`
+<Icon1 />
 
 Для создания мягких форм используются скругления углов в **1px, 2px**.
 
-`<InstructionPictures name="2-icons-grid" />`
+<Icon2 />
 
 В самих иконках используются приближённые к правильным геометрическим фигурам формы.
 
-`<InstructionPictures name="3-icons-grid" />`
+<Icon3 />
 
 Готовая иконка должна быть одним шейпом с заливкой.
 
-`<InstructionPictures name="4-figma-union" />`
+<InstructionPictures name="4-figma-union" />
 
 Координаты точек фигур иконки должны быть выровнены по пиксельной сетке.
 
-`<InstructionPictures name="5-icons-grid" />`
+<Icon5 />
 
 ## Правила работы с библиотекой
 
 Обязательно нужно отрисовывать иконку сразу в трех размерах. Иначе кому-то потом придется это делать за вас.
 Иконки, которые ждут изменений, красятся в цвет `warning`, а новые, ещё не добавленные в библиотеку — в `alert`.
 
-`<InstructionPictures name="6-examples" />`
+<Icon6 />
 
 ## Добавление в библиотеку в Figma
 
@@ -47,7 +51,7 @@ import { InstructionPictures } from './components/InstructionPictures/Instructio
 
 ## Добавление в библиотеку в коде
 
-> [Прочитать про автоматическую сборку иконок из SVG в компоненты](?path=/docs/common-develop-icons--page)
+> [Прочитать про автоматическую сборку иконок из SVG в компоненты](##LIBS.STAND.DEV|stand:uikit-custom-addicons-stable)
 
 #### 1. Подготовьте иконки в SVG
 
