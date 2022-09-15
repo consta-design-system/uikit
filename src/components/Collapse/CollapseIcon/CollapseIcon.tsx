@@ -1,12 +1,11 @@
 import './CollapseIcon.css';
 
 import React, { useRef } from 'react';
-import { CSSTransition } from 'react-transition-group';
+import { Transition } from 'react-transition-group';
 
-import { cnIcon, IconProps, IconPropSize } from '../../../icons/Icon/Icon';
-import { cn } from '../../../utils/bem';
-import { cnForCssTransition } from '../../../utils/cnForCssTransition';
-import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
+import { cnIcon, IconProps, IconPropSize } from '##/icons/Icon';
+import { cn } from '##/utils/bem';
+import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
 export const collapseIconPropDirection = [
   'up',
@@ -35,7 +34,6 @@ export type CollapseIconProps = PropsWithHTMLAttributes<
 >;
 
 const cnCollapseIcon = cn('CollapseIcon');
-const cssTransitionClassNames = cnForCssTransition(cnCollapseIcon);
 const animateTimeout = 300;
 
 export const CollapseIcon: React.FC<CollapseIconProps> = (props) => {
@@ -58,34 +56,36 @@ export const CollapseIcon: React.FC<CollapseIconProps> = (props) => {
       <span
         className={cnCollapseIcon('Wrapper', [cnIcon({ size }), className])}
       >
-        <CSSTransition
+        <Transition
           in={!isOpen}
           unmountOnExit
-          classNames={cssTransitionClassNames}
           timeout={animateTimeout}
           nodeRef={iconRef}
         >
-          <Icon
-            {...otherProps}
-            className={cnCollapseIcon({ withCloseIcon: true })}
-            size={size}
-            ref={iconRef}
-          />
-        </CSSTransition>
-        <CSSTransition
+          {(animate) => (
+            <Icon
+              {...otherProps}
+              className={cnCollapseIcon({ animate })}
+              size={size}
+              ref={iconRef}
+            />
+          )}
+        </Transition>
+        <Transition
           in={isOpen}
           unmountOnExit
-          classNames={cssTransitionClassNames}
           timeout={animateTimeout}
           nodeRef={closeIconRef}
         >
-          <CloseIcon
-            {...otherProps}
-            className={cnCollapseIcon({ withCloseIcon: true })}
-            size={size}
-            ref={closeIconRef}
-          />
-        </CSSTransition>
+          {(animate) => (
+            <CloseIcon
+              {...otherProps}
+              className={cnCollapseIcon({ animate })}
+              size={size}
+              ref={closeIconRef}
+            />
+          )}
+        </Transition>
       </span>
     );
   }
