@@ -1,3 +1,5 @@
+import './Breadcrumbs.variants.css';
+
 import { useBoolean, useSelect } from '@consta/stand';
 import React from 'react';
 
