@@ -1,3 +1,5 @@
+import './DatePicker.variants.css';
+
 import { useBoolean, useDate, useSelect, useText } from '@consta/stand';
 import { addDays, Locale, startOfWeek } from 'date-fns';
 import enUSLocale from 'date-fns/locale/en-US';
@@ -6,14 +8,11 @@ import ruLocale from 'date-fns/locale/ru';
 import zhCNLocale from 'date-fns/locale/zh-CN';
 import React, { useEffect, useState } from 'react';
 
-import { IconCalendar } from '../../../icons/IconCalendar/IconCalendar';
-import { maxDateDefault, minDateDefault } from '../../../utils/date';
-import { getByMap } from '../../../utils/getByMap';
-import { Button } from '../../Button/Button';
+import { Button } from '##/components/Button/Button';
 import {
   dateTimePropView,
   dateTimePropViewDefault,
-} from '../../DateTime/helpers';
+} from '##/components/DateTime/helpers';
 import {
   textFieldPropForm,
   textFieldPropFormDefault,
@@ -22,7 +21,12 @@ import {
   textFieldPropStatus,
   textFieldPropView,
   textFieldPropViewDefault,
-} from '../../TextField/TextField';
+} from '##/components/TextField/TextField';
+import { IconCalendar } from '##/icons/IconCalendar/IconCalendar';
+import { cn } from '##/utils/bem';
+import { maxDateDefault, minDateDefault } from '##/utils/date';
+import { getByMap } from '##/utils/getByMap';
+
 import {
   DatePicker,
   datePickerPropDropdownForm,
@@ -42,6 +46,8 @@ const localeMap: Record<LocaleProp, Locale> = {
   'zh-CN': zhCNLocale,
   'es': esLocale,
 };
+
+const cnDatePickerVariants = cn('DatePickerVariants');
 
 const Variants = () => {
   const type = useSelect('type', datePickerPropType, datePickerPropTypeDefault);
@@ -103,34 +109,33 @@ const Variants = () => {
   }, [type]);
 
   return (
-    <div style={{ maxWidth: 500 }}>
-      <DatePicker
-        type={type}
-        width="full"
-        form={form}
-        label={label}
-        labelPosition={labelPosition}
-        caption={caption}
-        required={required}
-        value={value}
-        status={status || undefined}
-        view={view}
-        disabled={disabled}
-        size={size}
-        onChange={({ value }) => setValue(value)}
-        leftSide={icon}
-        events={events}
-        locale={getByMap(localeMap, locale)}
-        dateTimeView={dateTimeView}
-        dropdownForm={dropdownForm}
-        minDate={minDate}
-        maxDate={maxDate}
-        renderAdditionalControls={
-          withAdditionalControls ? additionalControls : undefined
-        }
-        withClearButton={withClearButton}
-      />
-    </div>
+    <DatePicker
+      className={cnDatePickerVariants()}
+      type={type}
+      width="full"
+      form={form}
+      label={label}
+      labelPosition={labelPosition}
+      caption={caption}
+      required={required}
+      value={value}
+      status={status || undefined}
+      view={view}
+      disabled={disabled}
+      size={size}
+      onChange={({ value }) => setValue(value)}
+      leftSide={icon}
+      events={events}
+      locale={getByMap(localeMap, locale)}
+      dateTimeView={dateTimeView}
+      dropdownForm={dropdownForm}
+      minDate={minDate}
+      maxDate={maxDate}
+      renderAdditionalControls={
+        withAdditionalControls ? additionalControls : undefined
+      }
+      withClearButton={withClearButton}
+    />
   );
 };
 
