@@ -34,13 +34,22 @@ const componentsNames = Object.keys(components) as Array<
 >;
 
 const Variants = () => {
-  // const component = useSelect('Component', componentsNames, componentsNames[0]);
+  //const component = useSelect('Component', componentsNames, componentsNames[0]);
   const size = useSelect('Size', responsesPropSize, responsesPropSizeDefault);
   const title = useText('Title', '');
   const description = useText('Description', '');
   const actions = useBoolean('Actions', false);
 
-  // const Component = components[componentName];
+  // export const Playground = () => {
+  //   const {
+  //     size,
+  //     title,
+  //     description,
+  //     component: componentName,
+  //     actions,
+  //   } = defaultKnobs();
+
+  //const Component = components[componentName];
   const Component = componentsNames[0];
 
   return (

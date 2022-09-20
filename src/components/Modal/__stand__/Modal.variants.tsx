@@ -24,6 +24,17 @@ const Variants = () => {
   const width = useSelect('width', ['auto'], 'auto');
   const position = useSelect('position', ['center', 'top'], 'center');
 
+  const handleClickOutside = callbackWithSelector(
+    { name: 'onClickOutside' },
+    () => {
+      setIsModalOpen(false);
+    },
+  );
+
+  const handleEscPress = callbackWithSelector({ name: 'onEsc' }, () => {
+    setIsModalOpen(false);
+  });
+
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   return (
@@ -44,8 +55,8 @@ const Variants = () => {
         width={width}
         position={position}
         refsForExcludeClickOutside={[...[]]}
-        onClose={action('onClose')}
-        onOpen={action('onOpen')}
+        onClose={console.log('onClose')}
+        onOpen={console.log('onOpen')}
       >
         <>
           <Text
