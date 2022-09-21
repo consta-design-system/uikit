@@ -152,7 +152,7 @@ export const Tabs: Tabs = React.forwardRef((props, ref) => {
     }),
   );
 
-  const activeTabIdx = items.findIndex(getChecked);
+  const activeTabIdx = items.findIndex((item) => getChecked(item));
 
   const renderItem = (item: typeof items[number], onClick?: () => void) =>
     renderItemProp({

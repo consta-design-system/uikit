@@ -91,13 +91,7 @@ export const useImask = (
   inputRef: React.RefObject<HTMLInputElement>,
   stringValue: string | null,
   onError: DatePickerPropOnError | undefined,
-  handleChanhe: ({
-    e,
-    value: stringValue,
-  }: {
-    e: Event;
-    value: string | null;
-  }) => void,
+  handleChanhe: (props: { e: Event; value: string | null }) => void,
 ) => {
   const imaskRef = useRef<IMask.InputMask<IMask.MaskedDateOptions> | null>(
     null,
