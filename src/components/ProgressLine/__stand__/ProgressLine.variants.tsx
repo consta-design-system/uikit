@@ -5,26 +5,21 @@ import { ProgressLine } from '../ProgressLine';
 import { defaultProgressLinePropSize, progressLinePropSize } from '../types';
 
 const Variants = () => {
-  const mode = useSelect(
-    'mode',
-    ['determinate', 'indeterminate', 'steps'],
-    'determinate',
-  );
+  const steps = useNumber('steps', undefined);
   const size = useSelect(
     'size',
     progressLinePropSize,
     defaultProgressLinePropSize,
   );
-  const steps = useNumber('steps', 6);
-  const value = useNumber('progresvalues', 50);
+  const value = useNumber('value', undefined);
 
   return (
     <ProgressLine
       size={size}
-      value={mode !== 'indeterminate' ? value : undefined}
+      value={value}
       steps={
-        mode === 'steps'
-          ? Array.from({ length: steps }, (_, i) => i + 1)
+        Number(steps) > 0
+          ? Array.from({ length: Number(steps) }, (_, i) => i + 1)
           : undefined
       }
       getItemLabel={(item) => item?.toString()}

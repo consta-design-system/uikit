@@ -20,7 +20,7 @@ import {
 const cnPaginationVariants = cn('PaginationVariants');
 
 const Variants = () => {
-  const pages = useNumber('totalPages', 10);
+  const pages = useNumber('totalPages', 5);
   const form = useSelect('form', paginationForms, paginationDefaultForm);
   const size = useSelect('size', paginationSizes, paginationDefaultSize);
   const type = useSelect('type', paginationTypes, paginationDefaultType);
@@ -54,7 +54,7 @@ const Variants = () => {
       <Pagination
         currentPage={currentPage}
         onChange={handleChange}
-        totalPages={pages}
+        totalPages={Number(pages) > 0 ? Number(pages) : 1}
         form={form}
         size={size}
         type={type}

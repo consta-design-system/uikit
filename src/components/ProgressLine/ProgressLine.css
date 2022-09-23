@@ -1,6 +1,5 @@
 .ProgressLine {
   position: relative;
-  overflow-x: hidden;
   width: 100%;
   height: var(--progress-line-height);
   background: var(--color-bg-system);
@@ -46,6 +45,8 @@
     }
 
     &_indeterminate {
+      overflow-x: hidden;
+
       &::after {
         width: 80%;
         transform-origin: left;

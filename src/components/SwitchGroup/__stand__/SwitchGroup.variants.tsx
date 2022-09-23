@@ -1,8 +1,7 @@
-import React from 'react';
 import { useBoolean, useSelect } from '@consta/stand';
+import React from 'react';
 
 import { cn } from '../../../utils/bem';
-
 import { SwitchGroup } from '../SwitchGroup';
 import {
   switchGroupDefaultDirection,
@@ -29,9 +28,13 @@ const items: Item[] = [
 ];
 
 const Variants = () => {
-  const size =  useSelect('size', switchGroupSizes, switchGroupDefaultSize);
-  const view =  useSelect('view', switchGroupViews, switchGroupDefaultView);
-  const direction =  useSelect('direction', switchGroupDirections, switchGroupDefaultDirection);
+  const size = useSelect('size', switchGroupSizes, switchGroupDefaultSize);
+  const view = useSelect('view', switchGroupViews, switchGroupDefaultView);
+  const direction = useSelect(
+    'direction',
+    switchGroupDirections,
+    switchGroupDefaultDirection,
+  );
   const disabled = useBoolean('disabled', false);
 
   const [value, setValue] = React.useState<Item[] | null>(null);
@@ -54,6 +57,6 @@ const Variants = () => {
       </form>
     </div>
   );
-}
+};
 
 export default Variants;

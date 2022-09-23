@@ -3,6 +3,8 @@ import './Modal.variants.css';
 import { useBoolean, useSelect } from '@consta/stand';
 import React from 'react';
 
+import { useFlag } from '##/hooks/useFlag';
+
 import { cn } from '../../../utils/bem';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
@@ -18,24 +20,11 @@ export type Option = SelectOption | Group;
 
 const cnModalVariants = cn('ModalVariants');
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const Variants = () => {
+  const [open, setOpen] = useFlag();
   const hasOverlay = useBoolean('hasOverlay', true);
   const width = useSelect('width', ['auto'], 'auto');
   const position = useSelect('position', ['center', 'top'], 'center');
-
-  const handleClickOutside = callbackWithSelector(
-    { name: 'onClickOutside' },
-    () => {
-      setIsModalOpen(false);
-    },
-  );
-
-  const handleEscPress = callbackWithSelector({ name: 'onEsc' }, () => {
-    setIsModalOpen(false);
-  });
-
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   return (
     <div className={cnModalVariants()}>
@@ -44,19 +33,17 @@ const Variants = () => {
         view="primary"
         label="Открыть модальное окно"
         width="default"
-        onClick={(): void => setIsModalOpen(true)}
+        onClick={setOpen.on}
       />
       <Modal
         className={cnModalVariants('Modal')}
-        isOpen={isModalOpen}
+        isOpen={open}
         hasOverlay={hasOverlay}
-        onClickOutside={handleClickOutside}
-        onEsc={handleEscPress}
+        onClickOutside={setOpen.off}
+        onEsc={setOpen.off}
         width={width}
         position={position}
         refsForExcludeClickOutside={[...[]]}
-        onClose={console.log('onClose')}
-        onOpen={console.log('onOpen')}
       >
         <>
           <Text
@@ -84,7 +71,7 @@ const Variants = () => {
             view="primary"
             label="Закрыть"
             width="default"
-            onClick={(): void => setIsModalOpen(false)}
+            onClick={setOpen.off}
           />
         </div>
       </Modal>

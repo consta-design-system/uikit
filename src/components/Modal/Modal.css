@@ -16,7 +16,6 @@
   &-Window {
     position: absolute;
     overflow: auto;
-    min-width: 400px;
     max-width: 90%;
     min-height: 200px;
     max-height: 90%;

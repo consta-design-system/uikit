@@ -1,5 +1,9 @@
+import './FieldGroup.variants.css';
+
 import { useSelect } from '@consta/stand';
 import React from 'react';
+
+import { cn } from '##/utils/bem';
 
 import { Button } from '../../Button/Button';
 import { Select } from '../../Select/Select';
@@ -24,12 +28,14 @@ const forms = [
 
 const sizes = ['xs', 's', 'm', 'l'] as const;
 
+const cnFieldGroupVariants = cn('FieldGroupVariants');
+
 const Variants = () => {
   const form = useSelect('form', forms, 'default');
   const size = useSelect('size', sizes, 'm');
 
   return (
-    <FieldGroup form={form} size={size}>
+    <FieldGroup className={cnFieldGroupVariants()} form={form} size={size}>
       <TextField placeholder="TextField" />
       <Select
         placeholder="Select"

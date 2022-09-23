@@ -112,9 +112,11 @@ export const SnackBarItemRender = (
           hidden={hideAutoCloseTimer}
         />
       )}
-      {hideAutoCloseTimer && Icon && (
-        <Icon className={cnSnackBarItem('Icon')} size="m" />
-      )}
+      {Icon &&
+        ((hideAutoCloseTimer && showProgress === 'timer') ||
+          showProgress !== 'timer') && (
+          <Icon className={cnSnackBarItem('Icon')} size="m" />
+        )}
       <div className={cnSnackBarItem('Content')}>
         {isString(message) || isNumber(message) ? (
           <Text className={cnSnackBarItem('Message')} lineHeight="s">

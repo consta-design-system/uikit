@@ -55,6 +55,37 @@ import { Tooltip } from '@consta/uikit/Tooltip';
 
 <TooltipPositionedCoords />
 
+```tsx
+export const TooltipPositionedCoords = () => {
+  const [position, setPosition] = useState<Position>(undefined);
+
+  const handleMouseMove = (event: React.MouseEvent) => {
+    setPosition({ x: event.clientX, y: event.clientY });
+  };
+
+  return (
+    <>
+      <div
+        onMouseMove={handleMouseMove}
+        onMouseLeave={() => setPosition(undefined)}
+      >
+        <Text>Область, в которой работает отслеживание мышки</Text>
+      </div>
+      <Tooltip
+        direction="upCenter"
+        spareDirection="downStartLeft"
+        possibleDirections={directions}
+        size={tooltipPropSizesDefault}
+        position={position}
+        isInteractive={false}
+      >
+        <Text size="xs">Текст тултипа</Text>
+      </Tooltip>
+    </>
+  );
+};
+```
+
 ## Импорт
 
 ```tsx

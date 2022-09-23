@@ -46,7 +46,7 @@ const Variants = () => {
       loading={loading}
       label={label}
       onlyIcon={onlyIcon}
-      onClick={console.log('click')}
+      onClick={() => console.log('click')}
       iconLeft={iconLeft ? IconUser : undefined}
       iconRight={iconRight ? IconSelect : undefined}
     />

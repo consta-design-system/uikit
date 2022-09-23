@@ -1,5 +1,5 @@
-import React from 'react';
 import { useBoolean, useNumber, useSelect } from '@consta/stand';
+import React from 'react';
 
 import { Timer, timerPropsSize, timerPropsSizeDefault } from '../Timer';
 
@@ -9,7 +9,14 @@ const Variants = () => {
   const animation = useBoolean('animation', false);
   const size = useSelect('size', timerPropsSize, timerPropsSizeDefault);
 
-  return <Timer seconds={seconds} progress={progress} animation={animation} size={size} />;
-}
+  return (
+    <Timer
+      seconds={seconds}
+      progress={Number(progress) || 0}
+      animation={animation}
+      size={size}
+    />
+  );
+};
 
 export default Variants;

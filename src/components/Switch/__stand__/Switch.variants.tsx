@@ -1,5 +1,5 @@
+import { useBoolean, useSelect, useText } from '@consta/stand';
 import React, { useState } from 'react';
-import { useSelect, useBoolean, useText } from '@consta/stand';
 
 import {
   Switch,
@@ -12,15 +12,16 @@ import {
 } from '../Switch';
 
 const Variants = () => {
-  const disabled =  useBoolean('disabled', false);
-  const size =  useSelect('size', switchPropSize, switchPropSizeDefault);
-  const view =  useSelect('view', switchPropView, switchPropViewDefault);
-  const align =  useSelect('align', switchPropAlign, switchPropAlignDefault);
-  const label= useText('label', 'Это переключатель');
+  const disabled = useBoolean('disabled', false);
+  const size = useSelect('size', switchPropSize, switchPropSizeDefault);
+  const view = useSelect('view', switchPropView, switchPropViewDefault);
+  const align = useSelect('align', switchPropAlign, switchPropAlignDefault);
+  const label = useText('label', 'Это переключатель');
 
   const [checked, setChecked] = useState<boolean>(false);
 
-  const handleChange = ({ checked }: { checked: boolean }) => setChecked(checked);
+  const handleChange = ({ checked }: { checked: boolean }) =>
+    setChecked(checked);
 
   return (
     <form>
@@ -35,6 +36,6 @@ const Variants = () => {
       />
     </form>
   );
-}
+};
 
 export default Variants;

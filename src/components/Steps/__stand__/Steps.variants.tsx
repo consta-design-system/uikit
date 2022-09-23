@@ -1,15 +1,14 @@
 import './Steps.variants.css';
 
-import React from 'react';
 import { useSelect } from '@consta/stand';
+import React from 'react';
 
-import { SimpleItem, simpleItems } from '../__mocks__/mock.data';
 import { IconBackward } from '../../../icons/IconBackward/IconBackward';
 import { IconForward } from '../../../icons/IconForward/IconForward';
 import { cn } from '../../../utils/bem';
-
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
+import { SimpleItem, simpleItems } from '../__mocks__/mock.data';
 import { Steps, stepsDefaultSize, stepsSizes } from '../Steps';
 
 const cnStepsVariants = cn('StepsVariants');
@@ -17,18 +16,18 @@ const cnStepsVariants = cn('StepsVariants');
 const Variants = () => {
   const size = useSelect('size', stepsSizes, stepsDefaultSize);
 
-const getStepContent = (stepNumber: number) => {
-  switch (stepNumber) {
-    case 0:
-      return <Text view="primary">Содержимое первого шага</Text>;
-    case 1:
-      return <Text view="primary">Содержимое второго шага</Text>;
-    case 2:
-      return <Text view="brand">Содержимое шага № 3</Text>;
-    default:
-      return `unknown ${stepNumber} step`;
-  }
-};
+  const getStepContent = (stepNumber: number) => {
+    switch (stepNumber) {
+      case 0:
+        return <Text view="primary">Содержимое первого шага</Text>;
+      case 1:
+        return <Text view="primary">Содержимое второго шага</Text>;
+      case 2:
+        return <Text view="brand">Содержимое шага № 3</Text>;
+      default:
+        return `unknown ${stepNumber} step`;
+    }
+  };
 
   const [activeStep, setActiveStep] = React.useState<number>(0);
   const [skippedSteps, setSkippedSteps] = React.useState<number[]>([]);
@@ -56,11 +55,13 @@ const getStepContent = (stepNumber: number) => {
         getItemLabel={(item) => item}
         value={simpleItems[activeStep]}
         onChange={handleChange}
-        getCompleted={(item) => completedSteps.includes(getStepIndex(item))}
-        getSkipped={(item) => skippedSteps.includes(getStepIndex(item))}
+        getItemCompleted={(item) => completedSteps.includes(getStepIndex(item))}
+        getItemSkipped={(item) => skippedSteps.includes(getStepIndex(item))}
         size={size}
       />
-      <div className={cnStepsVariants('Content')}>{getStepContent(activeStep)}</div>
+      <div className={cnStepsVariants('Content')}>
+        {getStepContent(activeStep)}
+      </div>
       <div className={cnStepsVariants('Actions')}>
         <Button
           onClick={handlePrev}
@@ -78,6 +79,6 @@ const getStepContent = (stepNumber: number) => {
       </div>
     </div>
   );
-}
+};
 
 export default Variants;

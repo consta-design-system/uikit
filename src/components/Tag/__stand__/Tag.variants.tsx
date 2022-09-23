@@ -1,11 +1,9 @@
+import { useBoolean, useSelect, useText } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { useBoolean, useSelect, useText } from '@consta/stand';
-
 import { IconAttach } from '../../../icons/IconAttach/IconAttach';
-
 import {
-  tagBasePropGroupNumberValue,
+  tagBasePropGroupStringValue,
   tagBasePropSize,
   tagBasePropSizeDefault,
 } from '../../TagBase/TagBase';
@@ -15,11 +13,15 @@ const Variants = () => {
   const label = useText('label', 'Label');
   const size = useSelect('size', tagBasePropSize, tagBasePropSizeDefault);
   const mode = useSelect('mode', tagPropMode, tagPropModeDefault);
-  const group = useSelect('group', ['', ...tagBasePropGroupNumberValue], '');
+  const group = useSelect(
+    'group',
+    ['undefined', ...tagBasePropGroupStringValue],
+    'undefined',
+  );
   const icon = useBoolean('icon', false);
 
   const [checked, setChecked] = useState<boolean>(false);
-  //const group2 = typeof group === 'number' ? group : undefined;
+  // const group2 = typeof group === 'number' ? group : undefined;
   const Icon = icon ? IconAttach : undefined;
 
   function getTag() {
@@ -28,11 +30,11 @@ const Variants = () => {
         return (
           <Tag
             mode={mode}
-            label={label}
+            label={label || ''}
             size={size}
             checked={checked}
             onChange={({ checked }) => setChecked(checked)}
-            group={group}
+            group={group !== 'undefined' ? group : undefined}
             icon={Icon}
           />
         );
@@ -40,10 +42,10 @@ const Variants = () => {
         return (
           <Tag
             mode={mode}
-            label={label}
+            label={label || ''}
             size={size}
-            onCancel={console.log('onCancel')}
-            group={group}
+            onCancel={() => console.log('onCancel')}
+            group={group !== 'undefined' ? group : undefined}
             icon={Icon}
           />
         );
@@ -51,21 +53,38 @@ const Variants = () => {
         return (
           <Tag
             mode={mode}
-            label={label}
+            label={label || ''}
             size={size}
-            onClick={console.log('onClick')}
-            group={group}
+            onClick={() => console.log('onClick')}
+            group={group !== 'undefined' ? group : undefined}
             icon={Icon}
           />
         );
       case 'link':
-        return <Tag mode={mode} href="#" label={label} size={size} group={group} icon={Icon} />;
+        return (
+          <Tag
+            mode={mode}
+            href="#"
+            label={label || ''}
+            size={size}
+            group={group !== 'undefined' ? group : undefined}
+            icon={Icon}
+          />
+        );
       case 'info':
-        return <Tag mode={mode} label={label} size={size} group={group} icon={Icon} />;
+        return (
+          <Tag
+            mode={mode}
+            label={label || ''}
+            size={size}
+            group={group !== 'undefined' ? group : undefined}
+            icon={Icon}
+          />
+        );
     }
   }
 
   return <div>{getTag()}</div>;
-}
+};
 
 export default Variants;

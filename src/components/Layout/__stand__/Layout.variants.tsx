@@ -13,7 +13,7 @@ import {
 
 const cnLayoutVariants = cn('LayoutVariants');
 
-const flexArray = [1, 2, 3, 4, 5, 6];
+const flexArray = ['1', '2', '3', '4', '5', '6'];
 
 const Variants = () => {
   const direction = useSelect(
@@ -21,8 +21,8 @@ const Variants = () => {
     layoutPropDirection,
     layoutPropDirectionDefault,
   );
-  const flexBlock1 = useSelect('Flex Block 1', flexArray, 1);
-  const flexBlock2 = useSelect('Flex Block 2', flexArray, 1);
+  const flexBlock1 = useSelect('Flex Block 1', flexArray, '1');
+  const flexBlock2 = useSelect('Flex Block 2', flexArray, '1');
 
   return (
     <Layout direction="column" className={cnLayoutVariants()}>
@@ -33,10 +33,10 @@ const Variants = () => {
         direction={direction}
         className={cnLayoutVariants('Content', { direction })}
       >
-        <Layout className={cnLayoutVariants('Block')} flex={flexBlock1}>
+        <Layout className={cnLayoutVariants('Block')} flex={Number(flexBlock1)}>
           <Text>Контент</Text>
         </Layout>
-        <Layout className={cnLayoutVariants('Block')} flex={flexBlock2}>
+        <Layout className={cnLayoutVariants('Block')} flex={Number(flexBlock2)}>
           <Text>Контент</Text>
         </Layout>
       </Layout>

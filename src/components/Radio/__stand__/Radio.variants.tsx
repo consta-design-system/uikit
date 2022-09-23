@@ -25,17 +25,15 @@ const Variants = () => {
   };
 
   return (
-    <form>
-      <Radio
-        checked={checked}
-        disabled={disabled}
-        size={size}
-        view={view}
-        label={label}
-        align={align}
-        onChange={handleChange}
-      />
-    </form>
+    <Radio
+      checked={checked}
+      disabled={disabled}
+      size={size}
+      view={view}
+      label={label}
+      align={align}
+      onChange={handleChange}
+    />
   );
 };
 

@@ -1,6 +1,6 @@
 .LayoutVariants {
-  width: calc(100% + 2 * var(--space-3xl));
-  height: 2000px;
+  width: 100%;
+  height: 100%;
   margin: calc(var(--space-3xl) * -1);
 
   &-Block {

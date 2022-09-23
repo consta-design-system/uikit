@@ -9,6 +9,7 @@ import {
 
 const Variants = () => {
   const value = useNumber('value', 50);
+
   const size = useSelect(
     'size',
     progressSpinPropSize,
@@ -16,7 +17,13 @@ const Variants = () => {
   );
   const animation = useBoolean('animation', false);
 
-  return <ProgressSpin size={size} value={value} animation={animation} />;
+  return (
+    <ProgressSpin
+      size={size}
+      value={value ? Number(value) : undefined}
+      animation={animation}
+    />
+  );
 };
 
 export default Variants;
