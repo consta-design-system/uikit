@@ -1,6 +1,6 @@
 import './Tooltip.css';
 
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import { ClickOutsideHandler } from '../../hooks/useClickOutside/useClickOutside';
 import { cnMixPopoverArrow } from '../../mixs/MixPopoverArrow/MixPopoverArrow';
@@ -9,6 +9,7 @@ import { PropsWithJsxAttributes } from '../../utils/types/PropsWithJsxAttributes
 import { Direction, Popover, PositioningProps } from '../Popover/Popover';
 import { Text } from '../Text/Text';
 import {
+  generateDeps,
   generateThemeClassNames,
   ThemeContext,
   useTheme,
@@ -66,40 +67,40 @@ export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
       ...rest
     } = props;
     const { theme } = useTheme();
-    const [direction, setDirection] = useState<Direction | undefined>(
-      undefined,
-    );
-
-    const tooltipTheme = status
-      ? {
-          ...theme,
-          color: {
-            primary: theme.color.accent,
-            accent: theme.color.accent,
-            invert: theme.color.primary,
-          },
-        }
-      : {
-          ...theme,
-          color: {
-            primary: theme.color.invert,
-            accent: theme.color.accent,
-            invert: theme.color.primary,
-          },
-        };
-
-    const tooltipThemeClassNames = generateThemeClassNames(tooltipTheme);
+    const [direction, setDirection] = useState<Direction | undefined>();
 
     const onSetDirection = (direction: Direction) => {
       onSetDirectionProp && onSetDirectionProp(direction);
       setDirection(direction);
     };
 
+    const value = useMemo(() => {
+      const tooltipTheme = status
+        ? {
+            ...theme,
+            color: {
+              primary: theme.color.accent,
+              accent: theme.color.accent,
+              invert: theme.color.primary,
+            },
+          }
+        : {
+            ...theme,
+            color: {
+              primary: theme.color.invert,
+              accent: theme.color.accent,
+              invert: theme.color.primary,
+            },
+          };
+
+      return {
+        theme: tooltipTheme,
+        themeClassNames: generateThemeClassNames(tooltipTheme),
+      };
+    }, [generateDeps(theme), status]);
+
     return (
-      <ThemeContext.Provider
-        // eslint-disable-next-line react/jsx-no-constructed-context-values
-        value={{ theme: tooltipTheme, themeClassNames: tooltipThemeClassNames }}
-      >
+      <ThemeContext.Provider value={value}>
         <Popover
           {...rest}
           arrowOffset={ARROW_OFFSET + ARROW_SIZE}

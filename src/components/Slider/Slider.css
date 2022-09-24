@@ -53,6 +53,9 @@
   }
 
   &-Side {
+    display: flex;
+    align-items: center;
+
     &_position {
       &_left {
         margin-right: var(--slider-side-margin);

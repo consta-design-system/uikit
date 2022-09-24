@@ -1,0 +1,19 @@
+.PopoverVariants {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+
+  &_for_anchor {
+    height: 100%;
+    background: var(--color-bg-secondary);
+  }
+
+  &-Content {
+    max-width: 200px;
+    padding: var(--space-s);
+    background: var(--color-bg-default);
+    border: 1px solid var(--color-bg-border);
+    box-shadow: var(--shadow-modal);
+  }
+}

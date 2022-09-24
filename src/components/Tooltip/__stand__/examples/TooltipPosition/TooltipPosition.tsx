@@ -36,8 +36,9 @@ export const TooltipPositionedCoords = () => {
         possibleDirections={directions}
         size={tooltipPropSizesDefault}
         position={position}
+        isInteractive={false}
       >
-        <Text size="xs">Текст тултипа</Text>,
+        <Text size="xs">Текст тултипа</Text>
       </Tooltip>
     </>
   );

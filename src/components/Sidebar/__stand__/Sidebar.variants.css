@@ -1,0 +1,23 @@
+.SidebarVariants {
+  &-Title {
+    margin: var(--space-m);
+  }
+
+  &-Body {
+    margin: var(--space-m);
+  }
+
+  &-Actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 72px;
+    padding: 0 var(--space-l);
+
+    & button {
+      &:not(:last-child) {
+        margin-right: var(--space-m);
+      }
+    }
+  }
+}

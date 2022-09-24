@@ -4,7 +4,7 @@ import React, { forwardRef } from 'react';
 
 import { usePrevious } from '../../hooks/usePrevious/usePrevious';
 import { cn } from '../../utils/bem';
-import { isNotNil, isNumber } from '../../utils/type-guards';
+import { isNotNil } from '../../utils/type-guards';
 import { Text } from '../Text/Text';
 import { getLineDelay, withDefaultGetters } from './helpers';
 import { ProgressLineComponent, ProgressLineProps } from './types';
@@ -38,8 +38,9 @@ const ProgressLineRender = (
     ...otherProps
   } = withDefaultGetters(props);
 
-  const activeIndex =
-    typeof value === 'number' ? Math.min(value, steps?.length ?? 0) : -1;
+  const activeIndex = isNotNil(value)
+    ? Math.min(value, steps?.length ?? 0)
+    : -1;
 
   const prevValue = usePrevious(activeIndex);
 
@@ -53,7 +54,7 @@ const ProgressLineRender = (
       }}
       className={cnProgressLine({
         size,
-        mode: isNumber(value) ? 'determinate' : 'indeterminate',
+        mode: isNotNil(value) ? 'determinate' : 'indeterminate',
       })}
     />
   ) : (
