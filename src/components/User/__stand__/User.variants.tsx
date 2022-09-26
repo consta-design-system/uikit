@@ -13,33 +13,11 @@ import {
   userPropWidthDefault,
 } from '../User';
 
-type WithUndefindValue = <T extends unknown>(
-  value: T,
-) => Exclude<T, 'undefined'> | undefined;
-
-const valueWithUndefined: WithUndefindValue = (value) => {
-  return value !== 'undefined'
-    ? (value as Exclude<typeof value, 'undefined'>)
-    : undefined;
-};
-
-type OptionsWithUndefined = <T extends unknown>(
-  value: readonly T[] | T[],
-) => Array<T | 'undefined'>;
-
-const optionsWithUndefined: OptionsWithUndefined = (options) => {
-  return ['undefined', ...options];
-};
-
 const Variants = () => {
   const view = useSelect('view', userPropView, userPropViewDefault);
   const width = useSelect('width', userPropWidth, userPropWidthDefault);
   const size = useSelect('size', userPropSize, userPropSizeDefault);
-  const status = useSelect(
-    'status',
-    optionsWithUndefined(userPropStatus),
-    'undefined',
-  );
+  const status = useSelect('status', userPropStatus);
   const avatarUrl = useText('avatarUrl', ``);
   const name = useText('Name', `Имя Фамилия`);
   const info = useText('Info', `Сегодня на Почтамтской`);
@@ -55,7 +33,7 @@ const Variants = () => {
         view={view}
         width={width}
         size={size}
-        status={valueWithUndefined(status)}
+        status={status}
         avatarUrl={avatarUrl}
         name={name}
         info={info}

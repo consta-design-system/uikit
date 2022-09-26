@@ -46,7 +46,7 @@ const Variants = () => {
           view={view}
           form={form}
           required={required}
-          status={status || undefined}
+          status={status}
           placeholder={placeholder}
           items={items}
           value={valueMultiple}

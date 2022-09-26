@@ -34,7 +34,9 @@ const componentsNames = Object.keys(components) as Array<
 >;
 
 const Variants = () => {
-  const component = useSelect('Component', componentsNames, componentsNames[0]);
+  const component =
+    useSelect('Component', componentsNames, componentsNames[0]) ||
+    componentsNames[0];
   const size = useSelect('Size', responsesPropSize, responsesPropSizeDefault);
   const title = useText('Title', '');
   const description = useText('Description', '');

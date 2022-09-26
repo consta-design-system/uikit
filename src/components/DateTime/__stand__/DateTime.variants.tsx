@@ -41,7 +41,8 @@ const Variants = () => {
   const withEvents = useBoolean('withEvents', false);
   const minDate = useDate('minDate', startOfDecade(new Date()));
   const maxDate = useDate('maxDate', endOfDecade(new Date()));
-  const locale = useSelect('locale', localeProp, localeDefault);
+  const locale =
+    useSelect('locale', localeProp, localeDefault) || localeDefault;
 
   const currentDay = new Date();
 

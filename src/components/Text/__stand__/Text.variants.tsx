@@ -20,83 +20,25 @@ import {
   textPropWeight,
 } from '../Text';
 
-type WithUndefindValue = <T extends unknown>(
-  value: T,
-) => Exclude<T, 'undefined'> | undefined;
-
-const valueWithUndefined: WithUndefindValue = (value) => {
-  return value !== 'undefined'
-    ? (value as Exclude<typeof value, 'undefined'>)
-    : undefined;
-};
-
-type OptionsWithUndefined = <T extends unknown>(
-  value: readonly T[] | T[],
-) => Array<T | 'undefined'>;
-
-const optionsWithUndefined: OptionsWithUndefined = (options) => {
-  return ['undefined', ...options];
-};
-
 const Variants = () => {
   const as = useSelect(
     'as',
     ['div', 'p', 'a', 'span', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
     'p',
   );
-  const align = useSelect(
-    'align',
-    optionsWithUndefined(textPropAlign),
-    'undefined',
-  );
-  const cursor = useSelect(
-    'cursor',
-    optionsWithUndefined(textPropCursor),
-    'undefined',
-  );
-  const decoration = useSelect(
-    'decoration',
-    optionsWithUndefined(textPropDecoration),
-    'undefined',
-  );
-  const display = useSelect(
-    'display',
-    optionsWithUndefined(textPropDisplay),
-    'undefined',
-  );
+  const align = useSelect('align', textPropAlign);
+  const cursor = useSelect('cursor', textPropCursor);
+  const decoration = useSelect('decoration', textPropDecoration);
+  const display = useSelect('display', textPropDisplay);
   const font = useSelect('font', textPropFont, 'primary');
-  const lineHeight = useSelect(
-    'lineHeight',
-    optionsWithUndefined(textPropLineHeight),
-    'undefined',
-  );
+  const lineHeight = useSelect('lineHeight', textPropLineHeight);
   const size = useSelect('size', textPropSize, textPropSizeDefault);
-  const spacing = useSelect(
-    'spacing',
-    optionsWithUndefined(textPropSpacing),
-    'undefined',
-  );
-  const fontStyle = useSelect(
-    'fontStyle',
-    optionsWithUndefined(textPropFontStyle),
-    'undefined',
-  );
-  const transform = useSelect(
-    'transform',
-    optionsWithUndefined(textPropTransform),
-    'undefined',
-  );
-  const type = useSelect(
-    'type',
-    optionsWithUndefined(textPropType),
-    'undefined',
-  );
+  const spacing = useSelect('spacing', textPropSpacing);
+  const fontStyle = useSelect('fontStyle', textPropFontStyle);
+  const transform = useSelect('transform', textPropTransform);
+  const type = useSelect('type', textPropType);
   const view = useSelect('View', textPropView, textPropViewDefault);
-  const weight = useSelect(
-    'weight',
-    optionsWithUndefined(textPropWeight),
-    'undefined',
-  );
+  const weight = useSelect('weight', textPropWeight);
   const truncate = useBoolean('truncate', false);
   const text = useText(
     'Content',
@@ -106,19 +48,19 @@ const Variants = () => {
   return (
     <Text
       as={as}
-      align={valueWithUndefined(align)}
-      cursor={valueWithUndefined(cursor)}
-      decoration={valueWithUndefined(decoration)}
-      display={valueWithUndefined(display)}
+      align={align}
+      cursor={cursor}
+      decoration={decoration}
+      display={display}
       font={font}
-      lineHeight={valueWithUndefined(lineHeight)}
-      size={valueWithUndefined(size)}
-      spacing={valueWithUndefined(spacing)}
-      fontStyle={valueWithUndefined(fontStyle)}
-      transform={valueWithUndefined(transform)}
-      type={valueWithUndefined(type)}
-      view={valueWithUndefined(view)}
-      weight={valueWithUndefined(weight)}
+      lineHeight={lineHeight}
+      size={size}
+      spacing={spacing}
+      fontStyle={fontStyle}
+      transform={transform}
+      type={type}
+      view={view}
+      weight={weight}
       truncate={truncate}
     >
       {text}

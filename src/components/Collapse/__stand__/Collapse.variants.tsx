@@ -52,7 +52,7 @@ const Variants = () => {
 
   const defaultRightSide: React.ReactNode = [
     <Badge label="Статус" size="s" />,
-    <IconSun size={getByMap(sizeIconMap, size)} />,
+    <IconSun size={getByMap(sizeIconMap, size || collapsePropSizeDefault)} />,
   ];
 
   return (

@@ -22,11 +22,7 @@ const Variants = () => {
     'downStartLeft',
   );
 
-  const status = useSelect(
-    'status',
-    ['undefined', ...tooltipPropStatus],
-    'undefined',
-  );
+  const status = useSelect('status', tooltipPropStatus);
 
   const children = useText('children', 'Текст тултипа');
 
@@ -48,7 +44,7 @@ const Variants = () => {
           anchorRef={anchorRef}
           direction={direction}
           spareDirection={spareDirection}
-          status={status !== 'undefined' ? status : undefined}
+          status={status}
         >
           {children}
         </Tooltip>

@@ -46,22 +46,14 @@ const stepsExample = [
 const Variants = () => {
   const size = useSelect('size', propSize, propSizeDefault);
   const direction = useSelect('direction', propDirection, propDirectionDefault);
-  const activeStepIndex = useSelect(
-    'activeStepIndex',
-    ['undefined', '0', '1', '2', '3'],
-    '3',
-  );
+  const activeStepIndex = useSelect('activeStepIndex', [0, 1, 2, 3], 3);
 
   return (
     <ProgressStepBar
       direction={direction}
       size={size}
       steps={stepsExample}
-      activeStepIndex={
-        activeStepIndex && activeStepIndex !== 'undefined'
-          ? Number(activeStepIndex)
-          : undefined
-      }
+      activeStepIndex={activeStepIndex}
     />
   );
 };

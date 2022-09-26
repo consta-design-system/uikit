@@ -50,9 +50,11 @@ const localeMap: Record<LocaleProp, Locale> = {
 const cnDatePickerVariants = cn('DatePickerVariants');
 
 const Variants = () => {
-  const type = useSelect('type', datePickerPropType, datePickerPropTypeDefault);
+  const type =
+    useSelect('type', datePickerPropType, datePickerPropTypeDefault) ||
+    datePickerPropTypeDefault;
   const form = useSelect('form', textFieldPropForm, textFieldPropFormDefault);
-  const status = useSelect('status', ['', ...textFieldPropStatus], '');
+  const status = useSelect('status', textFieldPropStatus);
   const withClearButton = useBoolean('withClearButton', false);
   const withAdditionalControls = useBoolean('with additional controls', false);
   const label = useText('label', 'Заголовок');
@@ -71,7 +73,8 @@ const Variants = () => {
   const minDate = useDate('minDate', minDateDefault);
   const maxDate = useDate('maxDate', maxDateDefault);
   const withEvents = useBoolean('withEvents', false);
-  const locale = useSelect('locale', localeProp, localeDefault);
+  const locale =
+    useSelect('locale', localeProp, localeDefault) || localeDefault;
   const dateTimeView = useSelect(
     'dateTimeView',
     dateTimePropView,
@@ -119,7 +122,7 @@ const Variants = () => {
       caption={caption}
       required={required}
       value={value}
-      status={status || undefined}
+      status={status}
       view={view}
       disabled={disabled}
       size={size}

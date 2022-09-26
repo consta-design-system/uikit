@@ -57,7 +57,9 @@ function renderRightSide(
 const cnContextMenuVariants = cn('ContextMenuVariants');
 
 const Variants = () => {
-  const size = useSelect('size', contextMenuSizes, contextMenuDefaultSize);
+  const size =
+    useSelect('size', contextMenuSizes, contextMenuDefaultSize) ||
+    contextMenuDefaultSize;
   const disabled = useBoolean('disabledLastItem', false);
   const withGroup = useBoolean('withGroup', false);
   const withGroupLabel = useBoolean('withGroupLabel', false);

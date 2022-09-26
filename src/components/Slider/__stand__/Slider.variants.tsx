@@ -5,11 +5,16 @@ import { IconSettings } from '../../../icons/IconSettings/IconSettings';
 import { defaultPropSize, propSize, propStatus } from '../helper';
 import { Slider } from '../Slider';
 
+const sideMap = {
+  icon: IconSettings,
+  input: 'input',
+} as const;
+
 const Variants = () => {
   const disabled = useBoolean('disabled', false);
   const label = useText('label', 'Лейбл');
   const caption = useText('caption', 'Подпись');
-  const status = useSelect('status', ['undefined', ...propStatus], 'undefined');
+  const status = useSelect('status', propStatus);
   const size = useSelect('size', propSize, defaultPropSize);
   const min = useNumber('min', -20);
   const max = useNumber('max', 80);
@@ -24,17 +29,8 @@ const Variants = () => {
   const steparray = useBoolean('steparray', false);
 
   const view = useSelect('view', ['default', 'division'], 'default');
-  const leftSide = useSelect(
-    'leftSide',
-    ['undefined', 'input', 'icon'],
-    'undefined',
-  );
-  const rightSide = useSelect('rightSide', ['undefined', 'icon'], 'undefined');
-
-  const leftSideMap = {
-    icon: IconSettings,
-    input: 'input',
-  } as const;
+  const leftSide = useSelect('leftSide', ['input', 'icon']);
+  const rightSide = useSelect('rightSide', ['icon']);
 
   const [value, setValue] = useState<number | [number, number]>(
     range ? [10, 40] : 50,
@@ -64,13 +60,13 @@ const Variants = () => {
       max={max}
       label={label}
       caption={caption}
-      status={status !== 'undefined' ? status : undefined}
+      status={status}
       withTooltip={withTooltip}
       step={stepValue}
       view={view}
       tooltipFormatter={withFormatter ? (value) => `${value}%` : undefined}
-      leftSide={leftSide !== 'undefined' ? leftSideMap[leftSide] : undefined}
-      rightSide={rightSide === 'icon' ? IconSettings : undefined}
+      leftSide={leftSide && sideMap[leftSide]}
+      rightSide={rightSide && sideMap[rightSide]}
       onChange={({ value }) => setValue(value)}
     />
   );
