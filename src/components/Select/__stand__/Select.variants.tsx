@@ -40,7 +40,7 @@ const Variants = () => {
   const view = useSelect('view', propView, defaultPropView);
   const form = useSelect('form', propForm, defaultPropForm);
   const required = useBoolean('required', false);
-  const status = useSelect('status', ['undefined', ...propStatus], 'undefined');
+  const status = useSelect('status', propStatus);
   const caption = useText('caption', 'Подпись');
   const label = useText('label', 'Заголовок');
   const labelPosition = useSelect('labelPosition', ['top', 'left'], 'top');
@@ -60,7 +60,7 @@ const Variants = () => {
         view={view}
         form={form}
         required={required}
-        status={status !== 'undefined' ? status : undefined}
+        status={status}
         placeholder={placeholder}
         items={items}
         isLoading={isLoading}
@@ -83,7 +83,7 @@ const Variants = () => {
         view={view}
         required={required}
         form={form}
-        status={status !== 'undefined' ? status : undefined}
+        status={status}
         placeholder={placeholder}
         items={myData}
         value={value2}

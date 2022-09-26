@@ -34,7 +34,7 @@ const Variants = () => {
   const size = useSelect('size', ['m', 's', 'l'], defaultPropSize);
   const view = useSelect('view', propView, defaultPropView);
   const form = useSelect('form', propForm, defaultPropForm);
-  const status = useSelect('status', ['undefined', ...propStatus], 'undefined');
+  const status = useSelect('status', propStatus);
   const caption = useText('caption', 'Подпись');
   const required = useBoolean('required', false);
   const label = useText('label', 'Заголовок');
@@ -88,7 +88,7 @@ const Variants = () => {
           disabled={disabled}
           view={view}
           form={form}
-          status={status === 'undefined' ? undefined : status}
+          status={status}
           placeholder={placeholder}
           items={items}
           isLoading={isLoading}
@@ -114,7 +114,7 @@ const Variants = () => {
         required={required}
         placeholder={placeholder}
         items={items}
-        status={status === 'undefined' ? undefined : status}
+        status={status}
         value={value}
         isLoading={isLoading}
         onChange={({ value }) => setValue(value)}
@@ -135,7 +135,7 @@ const Variants = () => {
         size={size}
         disabled={disabled}
         view={view}
-        status={status === 'undefined' ? undefined : status}
+        status={status}
         form={form}
         required={required}
         placeholder={placeholder}
@@ -194,7 +194,7 @@ const Variants = () => {
         view={view}
         required={required}
         form={form}
-        status={status === 'undefined' ? undefined : status}
+        status={status}
         placeholder={placeholder}
         items={list}
         value={value}

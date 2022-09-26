@@ -38,7 +38,7 @@ const Variants = () => {
     textFieldPropWidthDefault,
   );
   const form = useSelect('form', textFieldPropForm, textFieldPropFormDefault);
-  const status = useSelect('status', ['', ...textFieldPropStatus], '');
+  const status = useSelect('status', textFieldPropStatus);
   const size = useSelect('size', textFieldPropSize, textFieldPropSizeDefault);
   const view = useSelect('view', textFieldPropView, textFieldPropViewDefault);
   const disabled = useBoolean('disabled', false);
@@ -50,37 +50,28 @@ const Variants = () => {
   const maxLength = useNumber('maxLength', 200);
 
   const placeholder = useText('placeholder', 'Подсказка в поле');
-  const leftSideType = useSelect(
-    'leftSideType',
-    ['icon', 'text', 'false'],
-    'false',
-  );
+  const leftSideType = useSelect('leftSideType', ['icon', 'text']);
   const leftSideText = useText('leftSideText', 'from');
-  const rightSideType = useSelect(
-    'rightSideType',
-    ['icon', 'text', 'false'],
-    'false',
-  );
+  const rightSideType = useSelect('rightSideType', ['icon', 'text']);
   const rightSideText = useText('rightSideText', 'm²');
 
   const [value, setValue] = useState<string | null | undefined>(undefined);
+
   const leftSideSelect = {
     text: leftSideText,
     icon: IconPhoto,
-    false: undefined,
   };
 
   const rightSideSelect = {
     text: rightSideText,
     icon: IconPhoto,
-    false: undefined,
   };
 
   const stepArray = ['10', '50', '100'];
   const numberStepArray = stepArray.map((val) => Number(val));
 
-  const leftSide = leftSideSelect[leftSideType];
-  const rightSide = rightSideSelect[rightSideType];
+  const leftSide = leftSideType && leftSideSelect[leftSideType];
+  const rightSide = rightSideType && rightSideSelect[rightSideType];
 
   const handleChange = ({ value }: { value: string | null }) => {
     setValue(value);
@@ -91,7 +82,7 @@ const Variants = () => {
       value={value}
       width={width}
       form={form}
-      status={status || undefined}
+      status={status}
       size={size}
       view={view}
       type={type}

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import { IconAttach } from '../../../icons/IconAttach/IconAttach';
 import {
-  tagBasePropGroupStringValue,
+  tagBasePropGroupNumberValue,
   tagBasePropSize,
   tagBasePropSizeDefault,
 } from '../../TagBase/TagBase';
@@ -13,11 +13,7 @@ const Variants = () => {
   const label = useText('label', 'Label');
   const size = useSelect('size', tagBasePropSize, tagBasePropSizeDefault);
   const mode = useSelect('mode', tagPropMode, tagPropModeDefault);
-  const group = useSelect(
-    'group',
-    ['undefined', ...tagBasePropGroupStringValue],
-    'undefined',
-  );
+  const group = useSelect('group', tagBasePropGroupNumberValue);
   const icon = useBoolean('icon', false);
 
   const [checked, setChecked] = useState<boolean>(false);
@@ -34,7 +30,7 @@ const Variants = () => {
             size={size}
             checked={checked}
             onChange={({ checked }) => setChecked(checked)}
-            group={group !== 'undefined' ? group : undefined}
+            group={group}
             icon={Icon}
           />
         );
@@ -45,7 +41,7 @@ const Variants = () => {
             label={label || ''}
             size={size}
             onCancel={() => console.log('onCancel')}
-            group={group !== 'undefined' ? group : undefined}
+            group={group}
             icon={Icon}
           />
         );
@@ -56,7 +52,7 @@ const Variants = () => {
             label={label || ''}
             size={size}
             onClick={() => console.log('onClick')}
-            group={group !== 'undefined' ? group : undefined}
+            group={group}
             icon={Icon}
           />
         );
@@ -67,7 +63,7 @@ const Variants = () => {
             href="#"
             label={label || ''}
             size={size}
-            group={group !== 'undefined' ? group : undefined}
+            group={group}
             icon={Icon}
           />
         );
@@ -77,7 +73,7 @@ const Variants = () => {
             mode={mode}
             label={label || ''}
             size={size}
-            group={group !== 'undefined' ? group : undefined}
+            group={group}
             icon={Icon}
           />
         );
