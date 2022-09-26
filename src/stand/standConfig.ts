@@ -51,4 +51,5 @@ export const { createStand } = createConfig({
   image,
   description,
   standPageDecoration,
+  repositoryUrl: 'https://github.com/consta-design-system/uikit',
 });
