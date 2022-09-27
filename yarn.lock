@@ -1313,7 +1313,7 @@
   resolved "https://registry.yarnpkg.com/@bem-react/classname/-/classname-1.5.12.tgz#cd7e8fe68abd5d0ab79d8dc27fb40b12c8fb7715"
   integrity sha512-7wc2zfHwGplXh1izmVfM8cHWOHx9eQEl4b2KiVp4Wa6Va/MEhnz+eFwEK+5A8o1tVKvHX0wiXkwDQLfFDl2wYw==
 
-"@bem-react/classnames@^1.3.10", "@bem-react/classnames@^1.3.9":
+"@bem-react/classnames@^1.3.10":
   version "1.3.10"
   resolved "https://registry.yarnpkg.com/@bem-react/classnames/-/classnames-1.3.10.tgz#858b3c25574dd3f2046cc1bf89300b9c2a3ff0f2"
   integrity sha512-tn+45Ii+S5FcYuO5FMs9YLSMUc355iUho7mwFeMMihi/ZZCQjvdR5AhVexnL9GS7pMtOeV0OsDOPDkW1sXVI3A==
@@ -1430,15 +1430,15 @@
     date-fns "^2.17.0"
     react-transition-group "^4.4.2"
 
-"@consta/stand@^0.0.48":
-  version "0.0.48"
-  resolved "https://registry.yarnpkg.com/@consta/stand/-/stand-0.0.48.tgz#24ae6025eec28f275872e936f2108c03c2f143e6"
-  integrity sha512-5OOBPFaxosLEsrmjD8uidyb25nmNRVmZXXXM+r/N0aqirRC+jFDYlxEldItgeSlKmnAS0uIBKkElRRvWM9ehFA==
+"@consta/stand@^0.0.50":
+  version "0.0.50"
+  resolved "https://registry.yarnpkg.com/@consta/stand/-/stand-0.0.50.tgz#7ef8073c58464c8b0edc4f1848217e363c38b299"
+  integrity sha512-PfAQKQP1NrLj4B4CfbvckmXdTg0oEklT4maM66ZcfW39TOsqPwBRaiWRp9LrW3g/gTiPIEUA/tWfeCQQ27YJ2w==
   dependencies:
     "@bem-react/classname" "^1.5.12"
     "@bem-react/classnames" "^1.3.10"
     "@consta/header" "^0.4.4"
-    "@consta/uikit" "^3.24.0"
+    "@consta/uikit" "^4.0.0"
     "@mdx-js/loader" "^2.1.1"
     "@mdx-js/react" "^2.1.1"
     "@oclif/command" "^1.8.16"
@@ -1502,21 +1502,21 @@
     webpack-manifest-plugin "^4.0.2"
     workbox-webpack-plugin "^6.4.1"
 
-"@consta/uikit@^3.24.0":
-  version "3.26.4"
-  resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-3.26.4.tgz#6f48a7353c54a0e16db0a05f1276c0501aad487b"
-  integrity sha512-fyghYDqjBtaEWG1+O6/hU0Z+02k6WDOlRmM6lMV+wGe4JqeLA2fcVboYn77k/MalIE+AjDlqc1VP0Nznk4d5ew==
+"@consta/uikit@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-4.0.0.tgz#87ad3ba8baef2e41da99ba13e38a99a48d3ce1ad"
+  integrity sha512-iCdxKbn0/vs9kRSpRfmZhGrkWCpqn+PstKVELRtVAQue5st0CcgaRXnTnWrw3pyWE17iIHFt6XrRbKCBRb4THw==
   dependencies:
-    "@bem-react/classname" "^1.5.8"
-    "@bem-react/classnames" "^1.3.9"
-    compute-scroll-into-view "^1.0.14"
-    date-fns "^2.17.0"
+    "@bem-react/classname" "^1.5.12"
+    "@bem-react/classnames" "^1.3.10"
+    compute-scroll-into-view "^1.0.17"
+    date-fns "^2.29.1"
     focus-trap-react "8.7.0"
     imask "^6.4.2"
+    mdx-loader "^3.0.2"
     react-dropzone "11.3.4"
     react-textarea-autosize "^8.3.4"
-    react-transition-group "^4.4.1"
-    tslib "^2.1.0"
+    react-transition-group "^4.4.5"
 
 "@cspotcode/source-map-support@^0.8.0":
   version "0.8.1"
@@ -5196,7 +5196,7 @@ compression@^1.7.4:
     safe-buffer "5.1.2"
     vary "~1.1.2"
 
-compute-scroll-into-view@^1.0.14, compute-scroll-into-view@^1.0.17:
+compute-scroll-into-view@^1.0.17:
   version "1.0.17"
   resolved "https://registry.yarnpkg.com/compute-scroll-into-view/-/compute-scroll-into-view-1.0.17.tgz#6a88f18acd9d42e9cf4baa6bec7e0522607ab7ab"
   integrity sha512-j4dx+Fb0URmzbwwMUrhqWM2BEWHdFGx+qZ9qqASHRPqvTYdqvWnHg0H1hIbcyLnvgnoNAVMlwkepyqM3DaIFUg==
@@ -13525,7 +13525,7 @@ react-textarea-autosize@^8.3.4:
     use-composed-ref "^1.3.0"
     use-latest "^1.2.1"
 
-react-transition-group@^4.4.1, react-transition-group@^4.4.2:
+react-transition-group@^4.4.2:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.2.tgz#8b59a56f09ced7b55cbd53c36768b922890d5470"
   integrity sha512-/RNYfRAMlZwDSr6z4zNKV6xu53/e2BuaBbGhbyYIXTrmgu/bGHzmqOs7mJSJBHy9Ud+ApHx3QjrkKSp1pxvlFg==
