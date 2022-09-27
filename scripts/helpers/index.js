@@ -320,18 +320,23 @@ const responsesImagesTransformed = async (ignore, src) => {
   // await createFileIconsStories(svgComponents, src);
 };
 
-const copyAssets = async (ignore, src, distPaths) => {
-  const assetFiles = await fg([`${src}/**/*.{svg,jpg,png,gif,md,woff,woff2}`], {
+const copyAssets = async ({ ignore, src, distPath }) => {
+  const assetFiles = await fg([`${src}/**/*.{woff,woff2}`], {
     ignore,
   });
 
   assetFiles.forEach(async (fileName) => {
     const asset = await readFile(fileName);
-    for (const distPath of distPaths) {
-      const newPath = resolve(distPath, relative(src, fileName));
-      await ensureDir(dirname(newPath));
-      writeFile(newPath, asset);
-    }
+
+    const newPath = resolve(
+      distPath,
+      '__internal__',
+      'src',
+      relative(src, fileName),
+    );
+
+    await ensureDir(dirname(newPath));
+    writeFile(newPath, asset);
   });
 };
 

@@ -7,6 +7,7 @@ const logSymbols = require('log-symbols');
 const fg = require('fast-glob');
 const { react } = require('@bem/sdk.naming.presets');
 const createMatch = require('@bem/sdk.naming.cell.match');
+const { copyAssets } = require('./helpers');
 
 const enhancedReactNaming = {
   ...react,
@@ -120,6 +121,9 @@ class GenerateCommand extends Command {
       await Promise.all([
         generateReExports(config).then(() =>
           this.log(logSymbols.success, 'reExports generated'),
+        ),
+        copyAssets(config).then(() =>
+          this.log(logSymbols.success, 'assets copied'),
         ),
       ]);
     } catch (err) {

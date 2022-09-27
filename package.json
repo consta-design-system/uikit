@@ -59,7 +59,7 @@
     "build:package.json": "node scripts/prepare-package-json.js",
     "build:reexports": "node scripts/generateReExports.js --config=scripts/generateReExportsConfig.js",
     "build:docs": "cp README.md dist/README.md",
-    "build": "rm -rf dist && yarn build:css && yarn build:js && yarn build:types && yarn build:package.json && yarn build:docs",
+    "build": "rm -rf dist && yarn build:css && yarn build:js && yarn build:types && yarn build:package.json && yarn build:docs && yarn build:reexports",
     "stand:generate": "node node_modules/@consta/stand/scripts/standGenerate.js --config=node_modules/@consta/stand/scripts/config.js",
     "stand:build": "rm -rf ./build && yarn stand:generate && NODE_ENV=production webpack --mode production --config node_modules/@consta/stand/webpack.config.js",
     "stand:start": "NODE_ENV=development webpack serve --open --progress --mode development --hot --progress --config node_modules/@consta/stand/webpack.config.js",

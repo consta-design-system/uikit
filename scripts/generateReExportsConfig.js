@@ -19,7 +19,9 @@ module.exports = {
     'src/uiKit/**',
     'src/**/__tests__/**',
     'src/**/__stories__/**',
+    'src/**/__stand__/**',
     'src/**/__mocks__/**',
     'src/**/__mock__/**',
+    'src/**/__docs__/**',
   ],
 };
