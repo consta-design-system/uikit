@@ -13,6 +13,7 @@ export const cnTabsTab = cn('TabsTab');
 const sizeMap: Record<TabsPropSize, IconPropSize> = {
   s: 'xs',
   m: 's',
+  xs: 'xs',
 };
 
 export const TabsTab = forwardRef<HTMLButtonElement, TabsTabProps>(

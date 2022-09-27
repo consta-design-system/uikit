@@ -19,7 +19,7 @@ import {
 import { TabsBorderLine, TabsRunningLine } from './Line/TabsLine';
 import { cnTabsTab, TabsTab } from './Tab/TabsTab';
 
-export const tabsSizes = ['m', 's'] as const;
+export const tabsSizes = ['m', 's', 'xs'] as const;
 export type TabsPropSize = typeof tabsSizes[number];
 export const tabsDefaultSize: TabsPropSize = tabsSizes[0];
 

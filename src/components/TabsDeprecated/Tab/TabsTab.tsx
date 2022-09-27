@@ -8,7 +8,7 @@ import { cn } from '../../../utils/bem';
 import { getByMap } from '../../../utils/getByMap';
 import { TabsPropSize } from '../TabsDeprecated';
 
-export const cnTabsTab = cn('TabsTab');
+export const cnTabsTab = cn('TabsDeprecatedTab');
 
 type Props = {
   size: TabsPropSize;
@@ -24,6 +24,7 @@ type Props = {
 const sizeMap: Record<TabsPropSize, IconPropSize> = {
   s: 'xs',
   m: 's',
+  xs: 'xs',
 };
 
 export const TabsTab = forwardRef<HTMLButtonElement, Props>((props, ref) => {

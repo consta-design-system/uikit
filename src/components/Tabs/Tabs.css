@@ -8,6 +8,10 @@
   }
 
   &_size {
+    &_xs {
+      --list-offset: var(--space-xs);
+    }
+
     &_s {
       --list-offset: var(--space-s);
     }

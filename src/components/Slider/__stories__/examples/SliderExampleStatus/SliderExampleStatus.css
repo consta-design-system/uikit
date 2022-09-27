@@ -1,8 +1,0 @@
-.SliderExampleStatus {
-  display: inline-flex;
-  flex-direction: column;
-
-  & > div {
-    margin-bottom: var(--space-l);
-  }
-}

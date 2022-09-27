@@ -130,7 +130,7 @@ export const TabsExampleIcon = () => {
 
 Свойство `size` меняет размер шрифта, отступы между элементами и другие связанные с ними параметры.
 
-Есть два размера — `s` и `m` (основной, включен по умолчанию).
+Есть три размера — `xs`, `s` и `m` (основной, включен по умолчанию).
 
 <TabsExampleSize />
 
@@ -159,6 +159,13 @@ export const TabsExampleSize = () => {
         items={items}
         getItemLabel={(item) => item}
         size="s"
+      />
+      <Tabs
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        items={items}
+        getItemLabel={(item) => item}
+        size="xs"
       />
     </>
   );
