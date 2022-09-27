@@ -5,7 +5,7 @@ export default createStand({
   id: 'Slider',
   group: 'components',
   description: 'Ползунок для выбора значений.',
-  version: '4.0.0',
+  version: '0.1.0',
   status: 'stable',
   sandbox: 'slider-np9k5q',
   figma:

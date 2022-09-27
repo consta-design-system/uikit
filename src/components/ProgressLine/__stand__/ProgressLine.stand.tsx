@@ -5,7 +5,7 @@ export default createStand({
   id: 'ProgressLine',
   group: 'components',
   description: 'Индикатор загрузки в виде линии. Показывает течение процесса.',
-  version: '4.0.0',
+  version: '3.26.0',
   status: 'stable',
   sandbox: 'progrssline-nyb35f',
   figma:

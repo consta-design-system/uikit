@@ -5,7 +5,7 @@ export default createStand({
   id: 'Radio',
   group: 'components',
   description: 'Радиокнопка. Разные формы, цвета и размеры.',
-  version: '4.0.0',
+  version: '0.1.0',
   status: 'stable',
   sandbox: 'radio-vpxngs',
   figma:

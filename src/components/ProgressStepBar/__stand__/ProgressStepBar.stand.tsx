@@ -5,7 +5,7 @@ export default createStand({
   id: 'ProgressStepBar',
   group: 'components',
   description: 'Прогресс по шагам. Показывает, на каком шаге процесс.',
-  version: '4.0.0',
+  version: '3.9.0',
   status: 'stable',
   sandbox: 'progressstepbar-9pqndd',
   figma:

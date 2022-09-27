@@ -5,7 +5,7 @@ export default createStand({
   id: 'Layout',
   group: 'components',
   description: 'Лейаут. Блоки, из которых можно построить каркас страницы.',
-  version: '4.0.0',
+  version: '3.5.0',
   status: 'stable',
   sandbox: 'layout-nhip8h',
   figma:

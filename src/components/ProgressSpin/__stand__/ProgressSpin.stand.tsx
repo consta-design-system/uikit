@@ -6,7 +6,7 @@ export default createStand({
   group: 'components',
   description:
     'Индикатор. Показывает течение процесса — загрузку, отправку или что-то похожее.',
-  version: '4.0.0',
+  version: '1.0.0',
   status: 'stable',
   sandbox: 'progressspin-08liqj',
   figma:

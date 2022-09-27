@@ -5,7 +5,7 @@ export default createStand({
   id: 'SwitchGroup',
   group: 'components',
   description: 'Группа переключателей',
-  version: '4.0.0',
+  version: '1.11.4',
   status: 'deprecated',
   sandbox: 'switchgroupdeprecated-efnyql',
   figma:

@@ -5,7 +5,7 @@ export default createStand({
   id: 'File',
   group: 'components',
   description: 'Иконка для файла с расширением.',
-  version: '4.0.0',
+  version: '1.0.0',
   status: 'stable',
   sandbox: 'file-syxv3f',
   figma:

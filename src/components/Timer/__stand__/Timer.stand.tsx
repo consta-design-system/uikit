@@ -5,7 +5,7 @@ export default createStand({
   id: 'Timer',
   group: 'components',
   description: 'Таймер.',
-  version: '4.0.0',
+  version: '1.0.0',
   status: 'stable',
   sandbox: 'timer-u46qh1',
   figma:

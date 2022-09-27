@@ -5,7 +5,7 @@ export default createStand({
   id: 'Loader',
   group: 'components',
   description: 'Прелоадер. Показывает, что информация загружается.',
-  version: '4.0.0',
+  version: '0.1.0',
   status: 'stable',
   sandbox: 'loader-fiypog',
   figma:

@@ -5,7 +5,7 @@ export default createStand({
   id: 'RadioGroup',
   group: 'components',
   description: 'Группа радиокнопок.',
-  version: '4.0.0',
+  version: '1.10.9',
   status: 'deprecated',
   sandbox: 'radiogroupdeprecated-k113tm',
   figma:

@@ -6,7 +6,7 @@ export default createStand({
   group: 'components',
   description:
     'Показывает информацию о человеке: аватарку, имя, должность, статус.',
-  version: '4.0.0',
+  version: '1.0.0',
   status: 'stable',
   sandbox: 'user-fqeoxq',
   figma:

@@ -6,7 +6,7 @@ export default createStand({
   group: 'components',
   description:
     'Сообщение для пользователя. Встраивается в содержимое страницы.',
-  version: '4.0.0',
+  version: '1.0.0',
   status: 'stable',
   sandbox: 'informer-hlkt18',
   figma:

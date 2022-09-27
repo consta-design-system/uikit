@@ -5,7 +5,7 @@ export default createStand({
   id: 'Button',
   group: 'components',
   description: 'Кнопка. Разные формы, цвета и размеры.',
-  version: '4.0.0',
+  version: '1.0.0',
   status: 'stable',
   sandbox: 'button-97pu7g',
   figma:

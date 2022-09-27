@@ -5,7 +5,7 @@ export default createStand({
   id: 'Card',
   group: 'components',
   description: 'Карточка. Контейнер для любого контента.',
-  version: '4.0.0',
+  version: '3.2.0',
   status: 'stable',
   sandbox: 'card-uttoei',
   figma:

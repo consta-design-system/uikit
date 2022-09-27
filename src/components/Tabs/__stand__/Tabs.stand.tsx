@@ -5,7 +5,7 @@ export default createStand({
   id: 'Tabs',
   group: 'components',
   description: 'Табы. Навигация по вкладкам.',
-  version: '4.0.0',
+  version: '1.0.0',
   status: 'stable',
   sandbox: 'tabs-vg1udj',
   figma:

@@ -5,7 +5,7 @@ export default createStand({
   id: 'FileField',
   group: 'components',
   description: 'Можно выбрать файлы, чтобы загрузить или отправить.',
-  version: '4.0.0',
+  version: '1.6.0',
   status: 'stable',
   sandbox: 'filefield-8s0rny',
   figma:

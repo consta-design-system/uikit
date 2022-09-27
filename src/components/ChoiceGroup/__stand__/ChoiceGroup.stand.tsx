@@ -5,7 +5,7 @@ export default createStand({
   id: 'ChoiceGroup',
   group: 'components',
   description: 'Группа кнопок. Можно выбрать один или несколько вариантов.',
-  version: '4.0.0',
+  version: '1.5.0',
   status: 'stable',
   sandbox: 'collapse-e2duqr',
   figma:

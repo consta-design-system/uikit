@@ -5,7 +5,7 @@ export default createStand({
   id: 'Avatar',
   group: 'components',
   description: 'Аватар. Разные формы, цвета и размеры.',
-  version: '4.0.0',
+  version: '1.0.0',
   status: 'stable',
   sandbox: 'avatar-quh7em',
   figma:

@@ -5,7 +5,7 @@ export default createStand({
   id: 'Breadcrumbs',
   group: 'components',
   description: 'Хлебные крошки. Показывают путь к текущей странице.',
-  version: '3.0.28',
+  version: '1.10.20',
   status: 'deprecated',
   sandbox: 'breadcrumbsdeprecated-7vyewg',
   figma:

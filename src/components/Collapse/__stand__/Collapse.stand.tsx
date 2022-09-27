@@ -5,7 +5,7 @@ export default createStand({
   id: 'Collapse',
   group: 'components',
   description: 'Скрытый блок. Раскрывается по нажатию на заголовок.',
-  version: '4.0.0',
+  version: '1.11.12',
   status: 'stable',
   sandbox: 'collapse-e2duqr',
   figma:

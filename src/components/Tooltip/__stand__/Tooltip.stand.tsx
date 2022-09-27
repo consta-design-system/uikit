@@ -5,7 +5,7 @@ export default createStand({
   id: 'Tooltip',
   group: 'components',
   description: 'Тултип. Всплывающее окно.',
-  version: '4.0.0',
+  version: '1.5.0',
   status: 'stable',
   sandbox: 'tooltip-pjejd2',
   figma:

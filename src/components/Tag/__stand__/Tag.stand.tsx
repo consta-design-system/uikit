@@ -4,8 +4,9 @@ export default createStand({
   title: 'Tag',
   id: 'Tag',
   group: 'components',
-  description: 'Кнопка. Разные формы, цвета и размеры.',
-  version: '4.0.0',
+  description:
+    'Тег. Объединяет группы объектов — статьи, документы, фотографии.',
+  version: '1.5.0',
   status: 'stable',
   sandbox: 'tag-9i2i3g',
   figma:

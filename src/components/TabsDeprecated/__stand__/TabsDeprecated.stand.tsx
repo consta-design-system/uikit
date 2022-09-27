@@ -5,7 +5,7 @@ export default createStand({
   id: 'Tabs',
   group: 'components',
   description: 'Переключатели  вкладок.',
-  version: '4.0.0',
+  version: '1.0.0',
   status: 'deprecated',
   sandbox: 'tabsdeprecated-fz8ivg',
   figma:

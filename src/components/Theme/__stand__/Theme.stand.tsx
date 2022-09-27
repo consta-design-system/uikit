@@ -6,7 +6,7 @@ export default createStand({
   group: 'components',
   description:
     'Тема. Набор правил в CSS, который определяет, как выглядит проект.',
-  version: '4.0.0',
+  version: '1.0.0',
   status: 'stable',
   sandbox: 'theme-9wht0p',
   figma:

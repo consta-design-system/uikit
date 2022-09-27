@@ -5,7 +5,7 @@ export default createStand({
   id: 'SnackBar',
   group: 'components',
   description: 'Мгновенные уведомления.',
-  version: '4.0.0',
+  version: '1.0.0',
   status: 'stable',
   sandbox: 'snackbar-frbjdw',
   figma:

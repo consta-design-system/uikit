@@ -6,7 +6,7 @@ export default createStand({
   group: 'components',
   description:
     'Модульная сетка. Отвечает за расположение содержимого на странице.',
-  version: '4.0.0',
+  version: '1.1.18',
   status: 'stable',
   sandbox: 'grid-jysz8l',
   figma:

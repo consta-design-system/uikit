@@ -5,7 +5,7 @@ export default createStand({
   id: 'Table',
   group: 'components',
   description: 'Таблица. Выводит данные с фильтрами и сортировкой.',
-  version: '4.0.0',
+  version: '1.6.0',
   status: 'stable',
   sandbox: 'table-9kmysz',
   figma:

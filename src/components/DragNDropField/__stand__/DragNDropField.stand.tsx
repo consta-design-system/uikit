@@ -5,7 +5,7 @@ export default createStand({
   id: 'DragNDropField',
   group: 'components',
   description: 'Можно перетащить файлы, чтобы загрузить или отправить.',
-  version: '4.0.0',
+  version: '2.1.0',
   status: 'stable',
   sandbox: 'dragndropfield-gst04t',
   figma:

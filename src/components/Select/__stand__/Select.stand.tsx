@@ -5,7 +5,7 @@ export default createStand({
   id: 'Select',
   group: 'components',
   description: 'Выпадающий список. Позволяет выбрать один вариант.',
-  version: '4.0.0',
+  version: '0.1.0',
   status: 'stable',
   sandbox: 'select-ixtbcl',
   figma:
