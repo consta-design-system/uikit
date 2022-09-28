@@ -5,7 +5,7 @@ export default createStand({
   id: 'Sidebar',
   group: 'components',
   description: 'Всплывающее окно.',
-  version: '4.0.0',
+  version: '1.10.0',
   status: 'stable',
   sandbox: 'sidebar-c912un',
   figma:

@@ -5,7 +5,7 @@ export default createStand({
   id: 'TextField',
   group: 'components',
   description: 'Поле для ввода текста и чисел.',
-  version: '4.0.0',
+  version: '1.0.0',
   status: 'stable',
   sandbox: 'textfield-0tb6vl',
   figma:

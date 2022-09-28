@@ -5,7 +5,7 @@ export default createStand({
   id: 'CheckboxGroup',
   group: 'components',
   description: 'Группа чекбоксов. Можно выбрать несколько вариантов.',
-  version: '4.0.0',
+  version: '1.10.11',
   status: 'stable',
   sandbox: 'checkboxgroup-vqb15s',
   figma:

@@ -5,7 +5,7 @@ export default createStand({
   id: 'Skeleton',
   group: 'components',
   description: 'Визуальный плейсхолдер, заглушка.',
-  version: '4.0.0',
+  version: '2.10.0',
   status: 'stable',
   sandbox: 'skeleton-5ebgtr',
   figma:

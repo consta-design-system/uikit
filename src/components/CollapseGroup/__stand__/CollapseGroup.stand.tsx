@@ -5,7 +5,7 @@ export default createStand({
   id: 'CollapseGroup',
   group: 'components',
   description: 'Группа скрытых блоков. Раскрывается по нажатию на заголовок.',
-  version: '4.0.0',
+  version: '2.2.0',
   status: 'stable',
   sandbox: 'collapsegroup-syb9ly',
   figma:

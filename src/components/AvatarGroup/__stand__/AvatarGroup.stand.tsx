@@ -5,7 +5,7 @@ export default createStand({
   id: 'AvatarGroup',
   group: 'components',
   description: 'Группа аватарок. Показывает несколько пользователей.',
-  version: '4.0.0',
+  version: '3.28.0',
   status: 'stable',
   sandbox: 'avatargroup-mqp00f',
   figma:

@@ -5,7 +5,7 @@ export default createStand({
   id: 'Header',
   group: 'components',
   description: 'Шапка. Блок с меню, поиском и аватаркой.',
-  version: '4.0.0',
+  version: '0.1.0',
   status: 'stable',
   sandbox: 'header-n86qkh',
   figma:

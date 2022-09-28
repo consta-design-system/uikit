@@ -5,7 +5,7 @@ export default createStand({
   id: 'Pagination',
   group: 'components',
   description: 'Пагинация. Можно выбрать страницу.',
-  version: '4.0.0',
+  version: '10.10.0',
   status: 'stable',
   sandbox: 'pagination-qp2r9w',
   figma:

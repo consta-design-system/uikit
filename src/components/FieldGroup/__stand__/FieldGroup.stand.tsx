@@ -6,7 +6,7 @@ export default createStand({
   group: 'components',
   description:
     'Группа полей. Объединяет одно или несколько полей ввода и кнопки.',
-  version: '4.0.0',
+  version: '3.25.0',
   status: 'stable',
   sandbox: 'fieldgroup-hmsnz6',
   figma:

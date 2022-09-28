@@ -5,7 +5,7 @@ export default createStand({
   id: 'ThemeToggler',
   group: 'components',
   description: 'Переключатель темы.',
-  version: '4.0.0',
+  version: '1.11.10',
   status: 'stable',
   sandbox: 'themetoggler-4wgsyd',
   figma:

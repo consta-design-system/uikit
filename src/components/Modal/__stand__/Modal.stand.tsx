@@ -5,7 +5,7 @@ export default createStand({
   id: 'Modal',
   group: 'components',
   description: 'Всплывающее окно. Показывает контент поверх основной страницы.',
-  version: '4.0.0',
+  version: '1.10.0',
   status: 'stable',
   sandbox: 'modal-lsp1ut',
   figma:

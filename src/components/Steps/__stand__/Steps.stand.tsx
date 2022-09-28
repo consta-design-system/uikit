@@ -5,7 +5,7 @@ export default createStand({
   id: 'Steps',
   group: 'components',
   description: 'Шаги.',
-  version: '4.0.0',
+  version: '1.10.11',
   status: 'stable',
   sandbox: 'steps-6vynmz',
   figma:

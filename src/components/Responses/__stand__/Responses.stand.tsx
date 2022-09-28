@@ -5,7 +5,7 @@ export default createStand({
   id: 'Responses',
   group: 'components',
   description: 'Заглушки с сообщениями об ошибках и важных статусах.',
-  version: '4.0.0',
+  version: '1.10.11',
   status: 'stable',
   sandbox: 'responses-bvlqo1',
   figma:

@@ -5,7 +5,7 @@ export default createStand({
   id: 'Switch',
   group: 'components',
   description: 'Переключатель. Два положения — включено и выключено.',
-  version: '4.0.0',
+  version: '0.1.0',
   status: 'stable',
   sandbox: 'switch-jwoqx3',
   figma:

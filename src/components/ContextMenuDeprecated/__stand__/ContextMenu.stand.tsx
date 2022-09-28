@@ -5,7 +5,7 @@ export default createStand({
   id: 'ContextMenu',
   group: 'components',
   description: 'Контекстное меню. Дополнительные действия на странице.',
-  version: '3.0.28',
+  version: '1.10.12',
   status: 'deprecated',
   sandbox: 'contextmenudeprecated-d42qxu',
   figma:

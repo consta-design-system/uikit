@@ -6,7 +6,7 @@ export default createStand({
   group: 'components',
   description:
     'Выпадающий список с поиском. Можно выбрать один или несколько вариантов.',
-  version: '4.0.0',
+  version: '1.9.0',
   status: 'stable',
   sandbox: 'combobox-dg4whk',
   figma:
