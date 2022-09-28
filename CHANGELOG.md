@@ -1,5 +1,48 @@
 # Changelog
 
+## v4.0.1 (28/09/2022)
+Очень большое и важное обновление: поднимаем версию, выкладываем новый стенд.
+Сами компоненты не меняются, зато:
+
+- все Canary версии становятся стабильными,
+- все стабильные, которые были на их месте, превращаются в Deprecated,
+- все устаревшие версии удаляются из библиотеки.
+
+А ещё шрифт Inter становится основным, если вы его специально подключали, нужно удалить.
+Если используете какие-то из этих компонентов, поменяйте импорты при обновлении библиотеки:
+
+Canary —> Stable
+BreadcrumbsCanary —> Breadcrumbs
+CheckboxGroupCanary -> CheckboxGroup
+ChoiceGroupCanary -> ChoiceGroup
+ContextMenuCanary -> ContextMenu
+RadioGroupCanary -> RadioGroup
+StepsCanary -> Steps
+SwitchGroupCanary —> SwitchGroup
+TabsCanary —> Tabs
+
+Stable —> Deprecated
+
+Breadcrumbs —> BreadcrumbsDeprecated
+
+Сalendar -> СalendarDepricated
+CheckboxGroup -> CheckboxGroupDeprecated
+ChoiceGroup -> ChoiceGroupDeprecated
+ContextMenu -> ContextMenuDeprecated
+RadioGroup -> RadioGroupDeprecated
+Steps -> StepsDeprecated
+SwitchGroup —> SwitchGroupDeprecated 
+Tabs —> TabsDeprecated
+
+Удалены:
+
+BasicSelectDeprecated
+ComboboxDeprecated
+MultiCombobobxDeprecated
+UserSelectDeprecated
+
+--------------------
+
 ## v3.29.0 (23/08/2022)
 Самое важное:
 - в `Tabs` добавили `xs` размер
@@ -408,29 +451,3 @@ endFieldOnBlur - deleted, use onBlur
 - [feat(icon): add new icons (#2076)](https://github.com/consta-design-system/uikit/commit/a4ec03c929ecbc003549371f0fe45d399360156d) - [@kolebayev](https://github.com/kolebayev)
 - [fix(CssTransition): fix warning with finDOMNode in Transaction children (#2072)](https://github.com/consta-design-system/uikit/commit/766daf499c847fbf9760b5754f1884a6e5820138) - [@N1MBER](https://github.com/N1MBER)
 - [refactor(SnackBar): add other props for detecting item props and also update doc (#2032)](https://github.com/consta-design-system/uikit/commit/fa52bf026c3743c609ea508e0d4c6b5e8468dcf1) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v3.16.0 (16/02/2022)
-Самое важное:
-
-- в `DatePicker` добавили новый тип `date-time-range` (выбор периода дат с временем)
-- `DatePicker` стал стабильнее, добавили тесты
-- в `Select` теперь можно указать текст, который будет выводиться, если нет ни одной опции для выбора
-- в `TextField` теперь можно указывать шаги массивом чисел
-- добавили документацию по хукам `useRefs`, `useHideElementsInLine` и миксину `MixPopoverAnimate`
-- в документацию для дизайнеров добавили раздел "Контрибьюторам" — для тех, кто хочет в развитии дизайн-системы
----
-
-- [docs(MixPopoverAnimate): add docs (#2055)](https://github.com/consta-design-system/uikit/commit/db2c8832881379b88f5a21e94785c90b4105c03b) - [@arhayka](https://github.com/arhayka)
-- [docs(TextField): edit docs: steps, min, max (#2060)](https://github.com/consta-design-system/uikit/commit/5afe9ad2094c75ea2d5259e902d38ca4e67a6cf6) - [@arhayka](https://github.com/arhayka)
-- [docs(useHideElementsInLine): add docs (#2058)](https://github.com/consta-design-system/uikit/commit/0c6c7575c13350705c2b3ac7343cbb4781f94baa) - [@gizeasy](https://github.com/gizeasy)
-- [docs(useRefs): add docs (#2053)](https://github.com/consta-design-system/uikit/commit/a55943f0457bac07defe27f9b61c7a8da6ad3bfd) - [@arhayka](https://github.com/arhayka)
-- [feat(DatePicker): add date-time-range type (#2054)](https://github.com/consta-design-system/uikit/commit/04d1b38fed1edf39be4b025894ff79ed281887e3) - [@gizeasy](https://github.com/gizeasy)
-- [chore(deps): bump ajv from 6.12.2 to 6.12.6 (#2052)](https://github.com/consta-design-system/uikit/commit/67bf0290a9be76137812d22536b1c8cbc6098ddb) - [@dependabot](https://github.com/dependabot[bot])
-- [fix(useSelect): fix bug with Uncaught TypeError (#2047)](https://github.com/consta-design-system/uikit/commit/65f7cf10e41adb7982d19226bbe40346e9316c68) - [@N1MBER](https://github.com/N1MBER)
-- [feat(Selects): add prop labelForEmptyItems (#2046)](https://github.com/consta-design-system/uikit/commit/f77d6b2fc97d46671b1e19abd5223524d0c5925f) - [@N1MBER](https://github.com/N1MBER)
-- [feat(TextField): add step array to textfield props (#1926)](https://github.com/consta-design-system/uikit/commit/0c24f3e76835def89ff973e4f759dd52f96b3d94) - [@N1MBER](https://github.com/N1MBER)
-- [fix(useTimer): fix bug with memory leak (#2048)](https://github.com/consta-design-system/uikit/commit/9b02c336bc174398077e15ff7d9281219e933733) - [@N1MBER](https://github.com/N1MBER)
-- [test(DatePicker): add tests (#2050)](https://github.com/consta-design-system/uikit/commit/e175753c33e0b89f231ab947ba477c36e99c51ff) - [@gizeasy](https://github.com/gizeasy)
-- [feat(docs): add design contributing docs (#2039)](https://github.com/consta-design-system/uikit/commit/260be28aba02b2c17e18a36aed41b71cce8a5203) - [@kolebayev](https://github.com/kolebayev)
