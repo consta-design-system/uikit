@@ -5,7 +5,7 @@ import React, { useMemo, useState } from 'react';
 import { IconSearch } from '../../../icons/IconSearch/IconSearch';
 import { cn } from '../../../utils/bem';
 import { Button } from '../../Button/Button';
-import { CheckboxGroup } from '../../CheckboxGroup/CheckboxGroup';
+import { CheckboxGroup } from '../../CheckboxGroup';
 import { Text } from '../../Text/Text';
 import { TextField } from '../../TextField/TextField';
 import { TableFilterContainer } from '../FilterContainer/TableFilterContainer';
@@ -62,15 +62,22 @@ export const TableTextFilter: React.FC<TableTextFilterProps> = ({
     setCheckboxGroupValue(filteredItems);
   };
 
-  const isAllSelected = useMemo(() => filteredItems.length === checkboxGroupValue?.length, [
-    filteredItems,
-    checkboxGroupValue,
-  ]);
+  const isAllSelected = useMemo(
+    () => filteredItems.length === checkboxGroupValue?.length,
+    [filteredItems, checkboxGroupValue],
+  );
 
-  const isSelected = useMemo(() => checkboxGroupValue?.length, [checkboxGroupValue]);
+  const isSelected = useMemo(
+    () => checkboxGroupValue?.length,
+    [checkboxGroupValue],
+  );
 
   return (
-    <TableFilterContainer title={title} onCancel={onCancel} onConfirm={confirmHandler}>
+    <TableFilterContainer
+      title={title}
+      onCancel={onCancel}
+      onConfirm={confirmHandler}
+    >
       {withSearch && (
         <TextField
           value={searchValue}
@@ -105,7 +112,7 @@ export const TableTextFilter: React.FC<TableTextFilterProps> = ({
           <CheckboxGroup
             items={filteredItems}
             value={checkboxGroupValue}
-            getLabel={(item) => item.name}
+            getItemLabel={(item) => item.name}
             onChange={({ value }) => {
               setCheckboxGroupValue(value);
             }}

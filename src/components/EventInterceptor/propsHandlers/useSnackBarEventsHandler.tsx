@@ -3,7 +3,9 @@ import React from 'react';
 import { SnackBarItemDefault, SnackBarProps } from '../../SnackBar/types';
 import { EventInterceptorHandler } from '../EventInterceptor';
 
-export const useSnackBarEventsHandler = <P extends SnackBarProps<SnackBarItemDefault>>(
+export const useSnackBarEventsHandler = <
+  P extends SnackBarProps<SnackBarItemDefault>,
+>(
   props: P,
   handler: EventInterceptorHandler,
 ): P => {

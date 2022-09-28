@@ -1,15 +1,17 @@
 import './Sidebar.css';
 
 import React, { useEffect, useRef } from 'react';
-import { CSSTransition } from 'react-transition-group';
+import { Transition } from 'react-transition-group';
 
-import { useClickOutside } from '../../hooks/useClickOutside/useClickOutside';
-import { useGlobalKeys } from '../../hooks/useGlobalKeys/useGlobalKeys';
-import { cn } from '../../utils/bem';
-import { cnForCssTransition } from '../../utils/cnForCssTransition';
-import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
-import { PortalWithTheme, usePortalContext } from '../PortalWithTheme/PortalWithTheme';
-import { useTheme } from '../Theme/Theme';
+import {
+  PortalWithTheme,
+  usePortalContext,
+} from '##/components/PortalWithTheme';
+import { useTheme } from '##/components/Theme/Theme';
+import { useClickOutside } from '##/hooks/useClickOutside';
+import { useGlobalKeys } from '##/hooks/useGlobalKeys';
+import { cn } from '##/utils/bem';
+import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
 type DivProps = JSX.IntrinsicElements['div'];
 
@@ -17,7 +19,17 @@ const sidebarPropPosition = ['right', 'bottom', 'left', 'top'] as const;
 type SidebarPropPosition = typeof sidebarPropPosition[number];
 const sidebarPropPositionDefault: SidebarPropPosition = sidebarPropPosition[0];
 
-export const sidebarPropSize = ['s', 'm', 'l', 'full', '1/2', '1/3', '1/4', '2/3', '3/4'] as const;
+export const sidebarPropSize = [
+  's',
+  'm',
+  'l',
+  'full',
+  '1/2',
+  '1/3',
+  '1/4',
+  '2/3',
+  '3/4',
+] as const;
 
 export type SidebarPropSize = typeof sidebarPropSize[number];
 const sidebarPropSizeDefault: SidebarPropSize = sidebarPropSize[1];
@@ -28,8 +40,6 @@ type SidebarProps = PropsWithHTMLAttributes<
     onClose?: () => void;
     onOpen?: () => void;
     hasOverlay?: boolean;
-    /** @deprecated Use onClickOutside */
-    onOverlayClick?: (event: MouseEvent) => void;
     onClickOutside?: (event: MouseEvent) => void;
     onEsc?: (event: KeyboardEvent) => void;
     position?: SidebarPropPosition;
@@ -54,13 +64,21 @@ type SidebarActionsProps = {
 
 export const cnSidebar = cn('Sidebar');
 
-const SidebarContent: React.FC<SidebarContentProps> = ({ className, children, ...rest }) => (
+const SidebarContent: React.FC<SidebarContentProps> = ({
+  className,
+  children,
+  ...rest
+}) => (
   <div className={cnSidebar('Content', null, [className])} {...rest}>
     {children}
   </div>
 );
 
-const SidebarActions: React.FC<SidebarActionsProps> = ({ className, children, ...rest }) => (
+const SidebarActions: React.FC<SidebarActionsProps> = ({
+  className,
+  children,
+  ...rest
+}) => (
   <div className={cnSidebar('Actions', null, [className])} {...rest}>
     {children}
   </div>
@@ -69,16 +87,20 @@ const SidebarActions: React.FC<SidebarActionsProps> = ({ className, children, ..
 const ContextConsumer: React.FC<{
   onClickOutside?: (event: MouseEvent) => void;
   ignoreClicksInsideRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
+  children: React.ReactNode;
 }> = ({ onClickOutside, children, ignoreClicksInsideRefs }) => {
   const { refs } = usePortalContext();
 
   useClickOutside({
     isActive: !!onClickOutside,
-    ignoreClicksInsideRefs: [...(ignoreClicksInsideRefs || []), ...(refs || [])],
-    handler: (event: MouseEvent) => onClickOutside?.(event),
+    ignoreClicksInsideRefs: [
+      ...(ignoreClicksInsideRefs || []),
+      ...(refs || []),
+    ],
+    handler: onClickOutside,
   });
 
-  return <>{children}</>;
+  return children as React.ReactElement;
 };
 
 interface SidebarComponent extends React.FC<SidebarProps>, DivProps {
@@ -92,7 +114,6 @@ export const Sidebar: SidebarComponent = (props) => {
     onClose,
     onOpen,
     hasOverlay = true,
-    onOverlayClick,
     onClickOutside,
     onEsc,
     position = sidebarPropPositionDefault,
@@ -125,40 +146,52 @@ export const Sidebar: SidebarComponent = (props) => {
   });
 
   return (
-    <CSSTransition
+    <Transition
       in={isOpen}
       unmountOnExit
-      className={cnSidebar({ position, hasOverlay }, [rootClassName])}
-      classNames={cnForCssTransition(cnSidebar)}
       timeout={240}
       nodeRef={portalRef}
       onExiting={afterClose}
     >
-      <PortalWithTheme
-        preset={theme}
-        ref={portalRef}
-        container={container}
-        style={typeof style?.zIndex === 'number' ? { zIndex: style.zIndex } : undefined}
-      >
-        {hasOverlay && <div className={cnSidebar('Overlay')} aria-label="Overlay" />}
-        <div
-          {...otherProps}
-          style={{
-            ...style,
-            zIndex: undefined,
-          }}
-          className={cnSidebar('Window', { size, position }, [className])}
-          ref={ref}
+      {(animate) => (
+        <PortalWithTheme
+          preset={theme}
+          ref={portalRef}
+          container={container}
+          className={cnSidebar({ position, hasOverlay }, [rootClassName])}
+          style={
+            typeof style?.zIndex === 'number'
+              ? { zIndex: style.zIndex }
+              : undefined
+          }
         >
-          <ContextConsumer
-            onClickOutside={onClickOutside || onOverlayClick}
-            ignoreClicksInsideRefs={[ref]}
+          {hasOverlay && (
+            <div
+              className={cnSidebar('Overlay', { animate })}
+              aria-label="Overlay"
+            />
+          )}
+          <div
+            {...otherProps}
+            style={{
+              ...style,
+              zIndex: undefined,
+            }}
+            className={cnSidebar('Window', { size, position, animate }, [
+              className,
+            ])}
+            ref={ref}
           >
-            {children}
-          </ContextConsumer>
-        </div>
-      </PortalWithTheme>
-    </CSSTransition>
+            <ContextConsumer
+              onClickOutside={onClickOutside}
+              ignoreClicksInsideRefs={[ref]}
+            >
+              {children}
+            </ContextConsumer>
+          </div>
+        </PortalWithTheme>
+      )}
+    </Transition>
   );
 };
 

@@ -10,7 +10,9 @@ export const getInputWidth = (
     return 20;
   }
   const fakeElWidth = helperInputFakeElement.current.offsetWidth + 20;
-  const maxWidth = controlInnerRef.current ? controlInnerRef.current.offsetWidth - 15 : 2;
+  const maxWidth = controlInnerRef.current
+    ? controlInnerRef.current.offsetWidth - 15
+    : 2;
   const width = fakeElWidth > maxWidth ? maxWidth : fakeElWidth;
   return width;
 };

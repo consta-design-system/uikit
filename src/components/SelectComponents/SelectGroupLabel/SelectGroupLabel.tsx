@@ -21,7 +21,10 @@ export const SelectGroupLabel: React.FC<SelectGroupLabelProps> = (props) => {
   const { className, label, size, indent, ...otherProps } = props;
 
   return (
-    <div {...otherProps} className={cnSelectGroupLabel({ size, indent }, [className])}>
+    <div
+      {...otherProps}
+      className={cnSelectGroupLabel({ size, indent }, [className])}
+    >
       {label}
     </div>
   );

@@ -1,5 +1,5 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
+import React from 'react';
 
 import { IconLeaf } from '../../../icons/IconLeaf/IconLeaf';
 import { cnInformer, Informer, informerPropView } from '../Informer';
@@ -49,7 +49,7 @@ describe('Компонент Informer', () => {
 
         expect(getIcon()).toHaveClass('IconLeaf');
       });
-      it(`присвоился модификатор withIcon `, () => {
+      it(`присвоился модификатор withIcon`, () => {
         renderComponent({ icon: IconLeaf });
 
         expect(getRender()).toHaveClass(cnInformer({ withIcon: true }));

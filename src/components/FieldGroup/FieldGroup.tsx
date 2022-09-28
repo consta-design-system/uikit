@@ -4,7 +4,6 @@ import React, { cloneElement, forwardRef } from 'react';
 
 import { cn } from '../../utils/bem';
 import { isNotNil } from '../../utils/type-guards';
-
 import { getForm } from './getForm';
 import {
   FieldGroupPropChildren,
@@ -36,15 +35,21 @@ const renderChildren = (
   return null;
 };
 
-export const FieldGroup = forwardRef((props: FieldGroupProps, ref: React.Ref<HTMLDivElement>) => {
-  const { children, className, size, form, ...otherProps } = props;
+export const FieldGroup = forwardRef(
+  (props: FieldGroupProps, ref: React.Ref<HTMLDivElement>) => {
+    const { children, className, size, form, ...otherProps } = props;
 
-  return (
-    <div {...otherProps} className={cnFieldGroup(null, [className])} ref={ref}>
-      {renderChildren(children, form, size)}
-    </div>
-  );
-});
+    return (
+      <div
+        {...otherProps}
+        className={cnFieldGroup(null, [className])}
+        ref={ref}
+      >
+        {renderChildren(children, form, size)}
+      </div>
+    );
+  },
+);
 
 export * from './types';
 export * from './getForm';

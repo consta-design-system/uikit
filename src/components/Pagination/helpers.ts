@@ -7,7 +7,10 @@ type PaginationInfo = {
   pages: number[];
 };
 
-export const getPaginationInfo = (currentPage: number, totalPages: number): PaginationInfo => {
+export const getPaginationInfo = (
+  currentPage: number,
+  totalPages: number,
+): PaginationInfo => {
   const maxCount = 10;
   const delta = 3;
 
@@ -15,7 +18,8 @@ export const getPaginationInfo = (currentPage: number, totalPages: number): Pagi
   const nextPage = (currentPage < totalPages && currentPage + 1) || null;
 
   const isStartDots = maxCount < totalPages && prevPage && prevPage > 1 + delta;
-  const isEndDots = maxCount < totalPages && nextPage && nextPage < totalPages - delta - 1;
+  const isEndDots =
+    maxCount < totalPages && nextPage && nextPage < totalPages - delta - 1;
 
   const paginationStart =
     (isStartDots && isEndDots && prevPage && prevPage - 1) ||

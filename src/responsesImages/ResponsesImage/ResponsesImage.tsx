@@ -9,13 +9,18 @@ export type ResponsesImageProps = PropsWithHTMLAttributes<{}, HTMLDivElement>;
 
 export const cnResponsesImage = cn('ResponsesImage');
 
-export const ResponsesImage = React.forwardRef<HTMLDivElement, ResponsesImageProps>(
-  (props, ref) => {
-    const { children, className, ...otherProps } = props;
-    return (
-      <div {...otherProps} className={cnResponsesImage(null, [className])} ref={ref}>
-        {children}
-      </div>
-    );
-  },
-);
+export const ResponsesImage = React.forwardRef<
+  HTMLDivElement,
+  ResponsesImageProps
+>((props, ref) => {
+  const { children, className, ...otherProps } = props;
+  return (
+    <div
+      {...otherProps}
+      className={cnResponsesImage(null, [className])}
+      ref={ref}
+    >
+      {children}
+    </div>
+  );
+});

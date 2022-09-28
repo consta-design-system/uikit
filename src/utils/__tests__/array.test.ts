@@ -2,7 +2,14 @@ import { sortBy, updateAt } from '../array';
 
 describe('sortBy', () => {
   it('сортирует по числовому параметру', () => {
-    const arr = [{ a: 2 }, { a: 200 }, { a: 1 }, { a: 100 }, { a: 10 }, { a: 20 }];
+    const arr = [
+      { a: 2 },
+      { a: 200 },
+      { a: 1 },
+      { a: 100 },
+      { a: 10 },
+      { a: 20 },
+    ];
 
     expect(sortBy(arr, 'a')).toEqual([
       { a: 1 },
@@ -62,7 +69,14 @@ describe('sortBy', () => {
   });
 
   it('сортирует по числовому параметру в убывающем порядке', () => {
-    const arr = [{ a: 2 }, { a: 200 }, { a: 1 }, { a: 100 }, { a: 10 }, { a: 20 }];
+    const arr = [
+      { a: 2 },
+      { a: 200 },
+      { a: 1 },
+      { a: 100 },
+      { a: 10 },
+      { a: 20 },
+    ];
 
     expect(sortBy(arr, 'a', 'desc')).toEqual([
       { a: 200 },

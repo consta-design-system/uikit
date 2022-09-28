@@ -1,0 +1,29 @@
+import './IconGrid.css';
+
+import React from 'react';
+
+import { cn } from '##/utils/bem';
+
+#imports#
+
+import { IconGridItem } from './IconGridItem';
+
+const icons = {
+  #icons#
+} as const;
+
+type Name = keyof typeof icons;
+
+const cnIconGrid = cn('IconGrid');
+
+const names = Object.keys(icons).sort() as Name[];
+
+export function IconGrid() {
+  return (
+    <div className={cnIconGrid()}>
+      {names.map((name) => (
+        <IconGridItem key={name} name={name} icon={icons[name]} />
+      ))}
+    </div>
+  );
+}

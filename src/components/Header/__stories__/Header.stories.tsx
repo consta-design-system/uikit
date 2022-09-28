@@ -2,7 +2,6 @@ import React from 'react';
 
 import { createMetadata } from '../../../utils/storybook';
 import { Text } from '../../Text/Text';
-
 import { HeaderFullExample } from './examples/HeaderFullExample/HeaderFullExample';
 import { HeaderMinifyLoginExample } from './examples/HeaderMinifyLoginExample/HeaderMinifyLoginExample';
 import { HeaderWithLogoExample } from './examples/HeaderWithLogoExample/HeaderWithLogoExample';
@@ -10,7 +9,7 @@ import { HeaderWithoutMenuExample } from './examples/HeaderWithoutMenuExample/He
 import { HeaderWithoutSearchExample } from './examples/HeaderWithoutSearchExample/HeaderWithoutSearchExample';
 import mdx from './Header.docs.mdx';
 
-export function Playground() {
+export const Playground = () => {
   return (
     <div>
       <Text size="3xl" lineHeight="l">
@@ -35,7 +34,7 @@ export function Playground() {
       <HeaderWithLogoExample />
     </div>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Служебные/Header',

@@ -26,7 +26,9 @@ const ButtonWithTooltipL = withTooltip({
 export const WithTooltipExampleSize = () => {
   return (
     <div
-      className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1-1', 'col-gap': 'full' })])}
+      className={cnDocsDecorator('Section', [
+        wp.tplGrid({ 'ratio': '1-1-1', 'col-gap': 'full' }),
+      ])}
     >
       <ButtonWithTooltipS label="S" />
       <ButtonWithTooltipM label="M" />

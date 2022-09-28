@@ -10,7 +10,17 @@ export const cardPropForm = ['round', 'square'] as const;
 export type CardPropForm = typeof cardPropForm[number];
 export const cardPropFormDefault: CardPropForm = cardPropForm[0];
 
-export const cardPropSpace = ['m', 'xs', 's', 'l', 'xl', '2xl', '3xl', '4xl', '5xl'] as const;
+export const cardPropSpace = [
+  'm',
+  'xs',
+  's',
+  'l',
+  'xl',
+  '2xl',
+  '3xl',
+  '4xl',
+  '5xl',
+] as const;
 export type CardPropSpace = typeof cardPropSpace[number];
 
 export const cardPropStatus = ['alert', 'success', 'warning'] as const;
@@ -54,7 +64,14 @@ export const Card = forwardRefWithAs<Props>((props, ref) => {
       tabIndex={tabIndex}
       ref={useForkRef([cardRef, ref])}
       className={cnCard(null, [
-        cnMixCard({ verticalSpace, horizontalSpace, shadow, form, status, border }),
+        cnMixCard({
+          verticalSpace,
+          horizontalSpace,
+          shadow,
+          form,
+          status,
+          border,
+        }),
         className,
       ])}
       {...otherProps}

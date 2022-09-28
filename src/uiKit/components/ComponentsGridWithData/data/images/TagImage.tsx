@@ -1,9 +1,12 @@
 import * as React from 'react';
 
-function TagImage(props: React.SVGProps<SVGSVGElement>) {
+const TagImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
-      <path d="M0 4a4 4 0 014-4h192a4 4 0 014 4v112a4 4 0 01-4 4H4a4 4 0 01-4-4V4z" fill="#fff" />
+      <path
+        d="M0 4a4 4 0 014-4h192a4 4 0 014 4v112a4 4 0 01-4 4H4a4 4 0 01-4-4V4z"
+        fill="#fff"
+      />
       <rect x={37} y={48} width={59} height={24} rx={4} fill="#DEE4E8" />
       <rect x={104} y={48} width={59} height={24} rx={4} fill="#0078D2" />
       <path
@@ -21,6 +24,6 @@ function TagImage(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default TagImage;

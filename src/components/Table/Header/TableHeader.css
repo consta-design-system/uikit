@@ -59,7 +59,10 @@
 
     &_verticalAlign_bottom {
       bottom: var(--cell-padding-vertical);
-      transform: translateY(calc((var(--control-height-xs) - var(--graphics-size-s)) / 2));
+      transform:
+        translateY(
+          calc((var(--control-height-xs) - var(--graphics-size-s)) / 2)
+        );
     }
 
     &_verticalAlign_center {

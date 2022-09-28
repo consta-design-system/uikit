@@ -1,0 +1,227 @@
+import { MdxMenu } from '@consta/stand';
+import {
+  PaginationExample,
+  PaginationExampleForm,
+  PaginationExampleSize,
+  PaginationExampleType,
+  PaginationExamplePosition,
+  PaginationExampleMinified,
+  PaginationExampleButton,
+} from './examples/PaginationExample/PaginationExample';
+
+```tsx
+import { Pagination } from '@consta/uikit/Pagination';
+```
+
+<MdxMenu>
+
+- [Страницы](#страницы)
+- [Форма](#форма)
+- [Размер](#размер)
+- [Тип](#тип)
+- [Выравнивание](#выравнивание)
+- [Состояние](#состояние)
+- [Горячие клавиши](#горячие-клавиши)
+- [Адаптивность](#адаптивность)
+- [Импорт](#импорт)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+</MdxMenu>
+
+## Страницы
+
+За количество страниц отвечает свойство `totalPages`. Текущую страницу можно задать
+с помощью `currentPage`.
+
+<PaginationExample />
+
+## Форма
+
+За форму элементов отвечает свойство `form`.
+
+Варианты: `'default'`, `'round'`, `'brick'`,
+по умолчанию — `'default'`.
+
+Чтобы посмотреть, как меняется форма, наведите курсор на любую кнопку.
+
+<PaginationExampleForm />
+
+```tsx
+<Pagination form="default" />
+<Pagination form="round" />
+<Pagination form="brick" />
+```
+
+## Размер
+
+За размер отвечает свойство `size`.
+
+<PaginationExampleSize />
+
+```tsx
+<Pagination size="xs" />
+<Pagination size="s" />
+<Pagination size="m" />
+<Pagination size="l" />
+```
+
+## Тип
+
+Компонент может выглядеть как набор кнопок с номерами страниц (`'default'`) или как поле, в которое пользователь может ввести номер нужной страницы (`'input'`).
+
+За это отвечает свойство `type`.
+
+<PaginationExampleType />
+
+```tsx
+<Pagination type="default" />
+<Pagination type="input" />
+```
+
+## Выравнивание
+
+Вы можете выровнять компонент относительно родительского блока: расположить по центру (`'center'`),
+прижать к левой (`'left'`) или правой (`'right'`) границе. За это отвечает свойство `position`.
+
+Если используете [`minified`](#состояние), выравнивание не будет работать, такой компонент всегда располагается по центру.
+
+<PaginationExamplePosition />
+
+```tsx
+<Pagination position="left" />
+<Pagination position="center" />
+<Pagination position="right" />
+```
+
+## Состояние
+
+Чтобы скрыть кнопки **Вперёд** и **Назад**, добавьте `minified`. Кнопки появляются при наведении на компонент.
+
+В этом случае [выравнивание](#выравнивание) не работает: компонент с `minified` всегда располагается по центру.
+
+<PaginationExampleMinified />
+
+```tsx
+<Pagination minified />
+```
+
+## Горячие клавиши
+
+Вы можете установить клавиши, с которыми пользователи смогут переключать страницы. Обычно для этого используют **Control** со стрелками.
+
+За горячие клавиши отвечает свойство `hotkeys`. Внутри:
+
+- `nextPage` — описание клавиш для перелистывания страниц «вперёд»,
+- `prevPage` — для перелистывания «назад»,
+- `label` — подсказка, которую увидят пользователи,
+- `values` — сочетание клавиш, их обозначение можно посмотреть в [списке горячих клавиш](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values).
+
+Перелистывание страниц клавишей Alt со стрелками можно описать вот так:
+
+```ts
+hotkeys = {
+  nextPage: {
+    label: 'Alt →',
+    values: ['Alt', 'ArrowRight'],
+  },
+  prevPage: {
+    label: '← Alt',
+    values: ['Alt', 'ArrowLeft'],
+  },
+};
+```
+
+## Адаптивность
+
+При небольшой ширине экрана можно:
+
+- показывать меньше кнопок,
+- использовать версию [minified](#состояние) — только с номерами страниц,
+- показывать [только поле ввода](#тип) (`type="input"`),
+- вместо компонента `Pagination` вывести кнопку **Показать ещё** и подгружать по ней новые страницы.
+
+##### Пример с кнопкой вместо Pagination
+
+```tsx
+import React from 'react';
+import { Button } from '@consta/uikit/Button';
+
+const App = () => {
+  return <Button label="Показать еще" view="ghost" width="full" />;
+};
+```
+
+<PaginationExampleButton />
+
+## Импорт
+
+```tsx
+import { Pagination } from '@consta/uikit/Pagination';
+```
+
+## Свойства
+
+```
+type HotKey = {
+  label: string;
+  values: string[];
+};
+
+type HotKeys = {
+  nextPage: HotKey;
+  prevPage: HotKey;
+};
+```
+
+| Свойство                       | Тип                              | По умолчанию                  | Описание                                                    |
+| ------------------------------ | -------------------------------- | ----------------------------- | ----------------------------------------------------------- |
+| [`currentPage`](#страницы)     | `number`                         | —                             | Номер текущей страницы                                      |
+| [`totalPages`](#страницы)      | `number`                         | —                             | Количество страниц                                          |
+| `onChange`                     | `(pageNumber: number) => void`   | —                             | Функция для смены страницы                                  |
+| `getLabel?`                    | `(totalPages: number) => string` | `из ${totalPages}`            | Функция для получения номера страницы из количества страниц |
+| [`form?`](#форма)              | `'default', 'round', 'brick'`    | `'default'`                   | Форма элементов компонента                                  |
+| [`size?`](#размер)             | `'xs', 's', 'm', 'l'`            | `'m'`                         | Размер элементов компонента                                 |
+| [`type?`](#тип)                | `'default', 'input'`             | `'default'`                   | Тип компонента (кнопки или поле ввода)                      |
+| [`position?`](#выравнивание)   | `'left', 'center', 'right'`      | `'center'`                    | Выравнивание по горизонтали                                 |
+| [`hotkeys?`](#горячие-клавиши) | `HotKeys`                        | [`hotkeys`](#горячие-клавиши) | Горячие клавиши для переключения страниц                    |
+| `containerEventListener?`      | `HTMLElement, Window`            | `window`                      | Элемент, к которому прикрепляется обработчик нажатия клавиш |
+| [`minified?`](#состояние)      | `boolean`                        | `false`                       | Скрывает кнопки, располагает компонент по центру            |
+| `className?`                   | `string`                         | —                             | Дополнительные CSS-классы                                   |
+
+## Пример
+
+```ts
+// src/App.ts
+import React from 'react';
+import { Pagination } from '@consta/uikit/Pagination';
+
+const App = () => {
+  const [currentPage, setCurrentPage] = React.useState<number>(0);
+  const totalPages = 10;
+
+  const hotKeys = {
+    prevPage: {
+      label: '← Shift',
+      values: ['Shift', 'ArrowLeft'],
+    },
+    nextPage: {
+      label: 'Shift →',
+      values: ['Shift', 'ArrowRight'],
+    },
+  };
+
+  const handleChange = ({ pageNumber }: { pageNumber: number }): void => {
+    setCurrentPage(pageNumber);
+  };
+
+  return (
+    <Pagination
+      currentPage={currentPage}
+      onChange={handleChange}
+      totalPages={totalPages}
+      hotkeys={hotKeys}
+    />
+  );
+};
+```

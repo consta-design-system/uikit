@@ -1,0 +1,30 @@
+.DateTimeMixLayout {
+  &_view {
+    &_classic {
+      --date-time-cell-width:
+        calc(
+          var(--control-height-s) + (var(--space-3xs) * 2)
+        );
+      width: calc(var(--date-time-cell-width) * 7);
+    }
+
+    &_book {
+      display: flex;
+    }
+  }
+
+  &-Label,
+  &-Slider {
+    margin-bottom: var(--space-s);
+  }
+
+  &-PageWrapper {
+    display: flex;
+  }
+
+  &-Page {
+    &:not(:last-child) {
+      margin-right: var(--space-m);
+    }
+  }
+}

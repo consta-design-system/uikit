@@ -4,7 +4,9 @@
   min-width: 220px;
   margin: -1px 0 -1px;
   background: var(--color-bg-default);
-  border: var(--control-border-width) solid var(--color-control-bg-border-default);
+  border:
+    var(--control-border-width) solid
+    var(--color-control-bg-border-default);
   outline: none;
   box-shadow: var(--shadow-layer);
   font-size: var(--font-size);

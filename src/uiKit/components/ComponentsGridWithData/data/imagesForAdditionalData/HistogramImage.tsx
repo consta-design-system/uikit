@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function HistogramImage(props: React.SVGProps<SVGSVGElement>) {
+const HistogramImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <path
@@ -24,6 +24,6 @@ function HistogramImage(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default HistogramImage;

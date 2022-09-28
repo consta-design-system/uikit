@@ -1,0 +1,23 @@
+<svg
+  width="200"
+  height="120"
+  viewBox="0 0 200 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M0 4C0 1.79086 1.79086 0 4 0H196C198.209 0 200 1.79086 200 4V116C200 118.209 198.209 120 196 120H4C1.79086 120 0 118.209 0 116V4Z"
+    fill="var(--color-bg-default)"
+  />
+  <rect x="24" y="33" width="151" height="28" fill="var(--color-bg-ghost)" />
+  <rect x="24" y="71" width="151" height="11" fill="var(--color-bg-ghost)" />
+  <rect x="24" y="89" width="151" height="11" fill="var(--color-bg-ghost)" />
+  <rect
+    x="1"
+    y="1"
+    width="198"
+    height="18"
+    fill="var(--color-control-bg-ghost)"
+  />
+  <rect x="66" y="95" width="67" height="14" fill="var(--color-bg-link)" />
+</svg>

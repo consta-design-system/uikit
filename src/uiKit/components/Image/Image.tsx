@@ -12,7 +12,12 @@ export const cnImage = cn('Image');
 export const Image: React.FC<StoryBookModsProps> = (props) => {
   const { className, alt, ...otherProps } = props;
 
-  return <img {...otherProps} className={cnImage(null, [className])} alt={alt} />;
+  return (
+    <img {...otherProps} className={cnImage(null, [className])} alt={alt} />
+  );
 };
 
-export const createImageComponent = (src: string) => () => <Image src={src} />;
+export const createImageComponent = (src: string) =>
+  function () {
+    return <Image src={src} />;
+  };

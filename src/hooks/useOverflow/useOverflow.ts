@@ -50,7 +50,10 @@ export const useOverflow = (props: Props): boolean => {
         right: parseFloat(cs.paddingRight),
         bottom: parseFloat(cs.paddingBottom),
       };
-      if (getMaxWidth(container) - padding.left - padding.right < currentRef.current.scrollWidth) {
+      if (
+        getMaxWidth(container) - padding.left - padding.right <
+        currentRef.current.scrollWidth
+      ) {
         setIsOverflow(true);
       } else {
         setIsOverflow(false);

@@ -1,0 +1,118 @@
+.CalendarSlider {
+  --month-width:
+    calc(
+      (var(--calendar-cell-width) * 14 - var(--control-height-m) * 2) / 13
+    );
+  --year-width: calc(var(--month-width) * 12);
+  --slider-height: var(--control-height-m);
+  display: flex;
+  width: calc(var(--calendar-cell-width) * 14 + var(--space-m));
+
+  &-Slider {
+    position: relative;
+    overflow: hidden;
+    flex: 1;
+    height: var(--slider-height);
+    margin: 0 var(--space-xs);
+    background: var(--color-control-bg-ghost);
+    border-radius: var(--control-radius);
+  }
+
+  &-Button_direction_prev {
+    transform: rotate(180deg);
+  }
+
+  &-SliderBody {
+    display: flex;
+    height: 100%;
+  }
+
+  &-Year {
+    position: absolute;
+    display: flex;
+    width: var(--year-width);
+    height: 100%;
+    transition: transform 0.5s;
+
+    &_position {
+      &_0 {
+        transform: translateX(calc(var(--year-width) * -1));
+      }
+
+      &_1 {
+        transform: translateX(0);
+      }
+
+      &_2 {
+        transform: translateX(calc(var(--year-width)));
+      }
+
+      &_3 {
+        transform: translateX(calc(var(--year-width) * 2));
+      }
+    }
+
+    &_selected::before {
+      content: '';
+      position: absolute;
+      left: var(--value-offset);
+      bottom: 0;
+      width: var(--value-width);
+      height: var(--space-3xs);
+      background-color: var(--color-control-bg-primary);
+      pointer-events: none;
+    }
+  }
+
+  &-YearLabel {
+    position: absolute;
+    right: 0;
+    transition: transform 0.5s, color 0.2s;
+
+    &_position {
+      &_0 {
+        transform: translateX(calc(var(--month-width) * -13));
+      }
+
+      &_1 {
+        transform: translateX(calc(var(--year-width) / -2));
+      }
+
+      &_2 {
+        transform: translateX(calc(var(--space-2xs) * -1));
+      }
+
+      &_3 {
+        transform: translateX(calc(var(--year-width)));
+      }
+    }
+  }
+
+  &-Month {
+    display: flex;
+    align-items: flex-end;
+    width: var(--month-width);
+    height: 100%;
+    margin-bottom: var(--space-3xs);
+    background: transparent;
+    border: none;
+    outline: transparent;
+    cursor: pointer;
+  }
+
+  &-MonthLabel {
+    width: var(--month-width);
+    height: var(--space-m);
+    margin-bottom: var(--space-3xs);
+  }
+
+  &-Selector {
+    position: absolute;
+    width: calc(var(--month-width) * 2);
+    height: var(--slider-height);
+    background-color: var(--color-control-bg-ghost);
+    border-radius: var(--control-radius);
+    transition: transform 0.3s;
+    transform: translateX(var(--selector-offset));
+  }
+}

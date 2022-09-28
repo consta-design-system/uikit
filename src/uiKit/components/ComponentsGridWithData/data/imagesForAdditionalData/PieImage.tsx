@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function PieImage(props: React.SVGProps<SVGSVGElement>) {
+const PieImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <path
@@ -13,6 +13,6 @@ function PieImage(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default PieImage;

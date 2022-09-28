@@ -24,8 +24,12 @@ export const TableNumberFilter: React.FC<TableNumberFilterProps> = ({
   title,
   onCancel,
 }) => {
-  const [minValue, setMinValue] = useState<string | undefined | null>((filterValue as Item)?.min);
-  const [maxValue, setMaxValue] = useState<string | undefined | null>((filterValue as Item)?.max);
+  const [minValue, setMinValue] = useState<string | undefined | null>(
+    (filterValue as Item)?.min,
+  );
+  const [maxValue, setMaxValue] = useState<string | undefined | null>(
+    (filterValue as Item)?.max,
+  );
 
   const textFieldRef = useRef<HTMLInputElement>(null);
 
@@ -37,7 +41,11 @@ export const TableNumberFilter: React.FC<TableNumberFilterProps> = ({
   };
 
   return (
-    <TableFilterContainer title={title} onCancel={onCancel} onConfirm={confirmHandler}>
+    <TableFilterContainer
+      title={title}
+      onCancel={onCancel}
+      onConfirm={confirmHandler}
+    >
       <div className={cnNumberFilter('Inputs')}>
         <TextField
           id="от"

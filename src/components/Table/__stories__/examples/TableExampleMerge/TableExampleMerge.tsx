@@ -24,10 +24,15 @@ const columns: TableColumn<typeof rows[number]>[] = [
   },
 ];
 
-export function TableExampleMerge() {
+export const TableExampleMerge = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <Table columns={columns} rows={rows} borderBetweenRows borderBetweenColumns />
+      <Table
+        columns={columns}
+        rows={rows}
+        borderBetweenRows
+        borderBetweenColumns
+      />
     </StoryBookExample>
   );
-}
+};

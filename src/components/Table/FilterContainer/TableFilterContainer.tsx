@@ -15,6 +15,7 @@ export type TableFilterContainerProps = {
   confirmButtonLabel?: string;
   cancelButtonLabel?: string;
   className?: string;
+  children?: React.ReactNode;
 };
 
 export const TableFilterContainer: React.FC<TableFilterContainerProps> = ({
@@ -29,14 +30,29 @@ export const TableFilterContainer: React.FC<TableFilterContainerProps> = ({
   return (
     <div className={cnTableFilterContainer(null, [className])}>
       {title && (
-        <Text view="primary" size="m" className={cnTableFilterContainer('Title')} lineHeight="l">
+        <Text
+          view="primary"
+          size="m"
+          className={cnTableFilterContainer('Title')}
+          lineHeight="l"
+        >
           {title}
         </Text>
       )}
       {children}
       <div className={cnTableFilterContainer('Buttons')}>
-        <Button label={cancelButtonLabel} size="s" view="ghost" onClick={onCancel} />
-        <Button label={confirmButtonLabel} size="s" view="primary" onClick={onConfirm} />
+        <Button
+          label={cancelButtonLabel}
+          size="s"
+          view="ghost"
+          onClick={onCancel}
+        />
+        <Button
+          label={confirmButtonLabel}
+          size="s"
+          view="primary"
+          onClick={onConfirm}
+        />
       </div>
     </div>
   );

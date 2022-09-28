@@ -1,12 +1,22 @@
+import {
+  act,
+  fireEvent,
+  render,
+  RenderResult,
+  screen,
+} from '@testing-library/react';
 import * as React from 'react';
-import { act, fireEvent, render, RenderResult, screen } from '@testing-library/react';
 
-import { groups, items } from '../__mocks__/data.mock';
 import { cn } from '../../../utils/bem';
 import { cnSelect } from '../../SelectComponents/cnSelect';
 import { cnSelectGroupLabel } from '../../SelectComponents/SelectGroupLabel/SelectGroupLabel';
+import { groups, items } from '../__mocks__/data.mock';
 import { DefaultGroup, DefaultItem } from '../helpers';
-import { defaultGetItemLabel, UserSelect, UserSelectProps } from '../UserSelect';
+import {
+  defaultGetItemLabel,
+  UserSelect,
+  UserSelectProps,
+} from '../UserSelect';
 import { cnUserSelectItem } from '../UserSelectItem/UserSelectItem';
 import { cnUserSelectValue } from '../UserSelectValue/UserSelectValue';
 
@@ -25,7 +35,7 @@ const defaultProps: UserSelectProps = {
 function renderComponent<
   ITEM = DefaultItem,
   GROUP = DefaultGroup,
-  MULTIPLE extends boolean = false
+  MULTIPLE extends boolean = false,
 >(props: UserSelectProps<ITEM, GROUP, MULTIPLE>): RenderResult {
   return render(
     <>
@@ -57,7 +67,9 @@ function getRenderValue() {
   return getRender().querySelector(`.${cnRenderValue()}`) as HTMLDivElement;
 }
 function getIndicatorsDropdown() {
-  return getRender().querySelector(`.${cnSelect('IndicatorsDropdown')}`) as HTMLElement;
+  return getRender().querySelector(
+    `.${cnSelect('IndicatorsDropdown')}`,
+  ) as HTMLElement;
 }
 function indicatorsDropdownClick() {
   fireEvent.click(getIndicatorsDropdown());
@@ -112,7 +124,9 @@ describe('Компонент UserSelect', () => {
       });
     });
 
-    expect(getUserSelectValue().textContent).toContain(defaultGetItemLabel(value));
+    expect(getUserSelectValue().textContent).toContain(
+      defaultGetItemLabel(value),
+    );
 
     inputClick();
     animateDelay();
@@ -134,9 +148,15 @@ describe('Компонент UserSelect', () => {
     });
 
     expect(getSelectValues().length).toEqual(value.length);
-    expect(getSelectValue(0).textContent).toContain(defaultGetItemLabel(value[0]));
-    expect(getSelectValue(1).textContent).toContain(defaultGetItemLabel(value[1]));
-    expect(getSelectValue(2).textContent).toContain(defaultGetItemLabel(value[2]));
+    expect(getSelectValue(0).textContent).toContain(
+      defaultGetItemLabel(value[0]),
+    );
+    expect(getSelectValue(1).textContent).toContain(
+      defaultGetItemLabel(value[1]),
+    );
+    expect(getSelectValue(2).textContent).toContain(
+      defaultGetItemLabel(value[2]),
+    );
 
     inputClick();
     animateDelay();
@@ -296,7 +316,9 @@ describe('Компонент UserSelect', () => {
     renderComponent({
       ...defaultProps,
       value,
-      renderValue: ({ item }) => <div className={cnRenderValue()}>{defaultGetItemLabel(item)}</div>,
+      renderValue: ({ item }) => (
+        <div className={cnRenderValue()}>{defaultGetItemLabel(item)}</div>
+      ),
     });
 
     expect(getRenderValue().textContent).toEqual(defaultGetItemLabel(value));

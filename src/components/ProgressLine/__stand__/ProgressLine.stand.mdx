@@ -1,0 +1,22 @@
+import {
+  ProgressLineExampleMode,
+  ProgressLineExampleModeValue,
+  ProgressLineExampleModeSteps,
+} from './examples/ProgressLineExampleMode/ProgressLineExampleMode';
+
+```tsx
+import { ProgressLine } from '@consta/uikit/ProgressLine';
+```
+
+Линейный индикатор прогресса отображает прогресс, анимируя индикатор по длине фиксированной видимой дорожки.
+
+Поведение индикатора зависит от того, известен ли прогресс процесса.
+
+Линейные показатели прогресса поддерживают как определённые, так и неопределённые операции.
+
+- Определённая операция показывает индикатор, увеличивающийся по ширине от 0 до 100%
+- Неопределённая операция показывает, что индикатор постоянно растёт и уменьшается вдоль дорожки до завершения процесса.
+
+<ProgressLineExampleMode />
+<ProgressLineExampleModeValue />
+<ProgressLineExampleModeSteps />

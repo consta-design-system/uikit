@@ -1,0 +1,36 @@
+/*
+--root-padding-left
+задается из компонента
+*/
+
+.DateTimeTypeDateTime {
+  &_withTime {
+    position: relative;
+    display: flex;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left:
+        calc(
+          (var(--control-height-s) + (var(--space-3xs) * 2)) * 7 + var(--space-s) +
+          var(--root-padding-left)
+        );
+      display: block;
+      width: 1px;
+      height: 100%;
+      background: var(--color-bg-border);
+    }
+  }
+
+  &-Date {
+    &_withTime {
+      padding-right: var(--space-s);
+    }
+  }
+
+  &-Time {
+    padding-left: var(--space-s);
+  }
+}

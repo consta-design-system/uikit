@@ -7,16 +7,18 @@ import { useRefs } from '../../hooks/useRefs/useRefs';
 import { cn } from '../../utils/bem';
 import { cnForCssTransition } from '../../utils/cnForCssTransition';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
-
-import { SnackBarItem } from './SnackBarItem/SnackBarItem';
 import { getItem, withDefaultGetters } from './helper';
+import { SnackBarItem } from './SnackBarItem/SnackBarItem';
 import { SnackBarComponent, SnackBarProps } from './types';
 
 export const cnSnackBar = cn('SnackBar');
 
 const cssTransitionClassNames = cnForCssTransition(cnSnackBar, 'Item');
 
-function SnackBarRender(propsComponent: SnackBarProps, ref: React.Ref<HTMLDivElement>) {
+const SnackBarRender = (
+  propsComponent: SnackBarProps,
+  ref: React.Ref<HTMLDivElement>,
+) => {
   const props = usePropsHandler('SnackBar', withDefaultGetters(propsComponent));
   const {
     items,
@@ -59,7 +61,7 @@ function SnackBarRender(propsComponent: SnackBarProps, ref: React.Ref<HTMLDivEle
       </TransitionGroup>
     </div>
   );
-}
+};
 
 export const SnackBar = forwardRef(SnackBarRender) as SnackBarComponent;
 

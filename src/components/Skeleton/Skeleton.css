@@ -1,13 +1,14 @@
 .Skeleton {
   --loader-width: 100px;
   background-color: var(--color-bg-system);
-  background-image: linear-gradient(
-    to right,
-    transparent 0%,
-    var(--color-bg-stripe) calc(0.2 * var(--loader-width)),
-    var(--color-bg-ghost) calc(0.6 * var(--loader-width)),
-    transparent var(--loader-width)
-  );
+  background-image:
+    linear-gradient(
+      to right,
+      transparent 0%,
+      var(--color-bg-stripe) calc(0.2 * var(--loader-width)),
+      var(--color-bg-ghost) calc(0.6 * var(--loader-width)),
+      transparent var(--loader-width)
+    );
   background-repeat: no-repeat;
   background-attachment: fixed;
   animation: Skeleton-Animation 2.5s linear infinite;

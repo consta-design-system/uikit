@@ -39,14 +39,16 @@ type ScrollToIndexFunctionType = (
   dropdownRef: React.MutableRefObject<HTMLDivElement | null>,
 ) => void;
 
-export const scrollToIndex: ScrollToIndexFunctionType = (index, dropdownRef): void => {
+export const scrollToIndex: ScrollToIndexFunctionType = (
+  index,
+  dropdownRef,
+): void => {
   if (!dropdownRef.current) {
     return;
   }
 
-  const elements: NodeListOf<HTMLDivElement> = dropdownRef.current.querySelectorAll(
-    'div[role=option]',
-  );
+  const elements: NodeListOf<HTMLDivElement> =
+    dropdownRef.current.querySelectorAll('div[role=option]');
 
   scrollIntoView(elements[index], dropdownRef.current);
 };

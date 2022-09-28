@@ -24,8 +24,8 @@ export const ReposDataBase = () => {
           </Text>
         </div>
         <Text className="ReposDataText">
-          Библиотека интерфейсных компонентов. Основные элементы интерфейса: простые контролы,
-          сложные блоки, тематизация, хуки и миксины.
+          Библиотека интерфейсных компонентов. Основные элементы интерфейса:
+          простые контролы, сложные блоки, тематизация, хуки и миксины.
         </Text>
         <Text>
           <Text
@@ -42,7 +42,7 @@ export const ReposDataBase = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="http://uikit.consta.design"
+            href="http://uikit.gizeasy.ru"
             target="_blank"
           >
             Документация и стенд
@@ -83,7 +83,7 @@ export const ReposDataBase = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="http://charts.consta.design"
+            href="http://charts.gizeasy.ru"
             target="_blank"
           >
             Документация
@@ -93,7 +93,11 @@ export const ReposDataBase = () => {
       <div className={wp.tplGrid('fraction', { row: 'third' })}>
         <div
           className={cnDocsDecorator('Section', [
-            wp.tplGrid({ 'xs-columns': 2, 'col-gap': 'full', 'row-gap': 'full' }),
+            wp.tplGrid({
+              'xs-columns': 2,
+              'col-gap': 'full',
+              'row-gap': 'full',
+            }),
           ])}
         >
           <div className={wp.tplGrid('fraction', { row: 'third' })}>
@@ -103,15 +107,17 @@ export const ReposDataBase = () => {
           </div>
           <div
             className={
-              ([wp.tplGrid('fraction', { row: 'third' })], [wp.decorator({ distribute: 'right' })])
+              ([wp.tplGrid('fraction', { row: 'third' })],
+              [wp.decorator({ distribute: 'right' })])
             }
           >
             <Badge label="Не развивается" size="s" status="system" />
           </div>
         </div>
         <Text className="ReposDataText">
-          Библиотека графиков: линейные, столбчатые, круговые диаграммы и другие компоненты, с
-          помощью которых удобно показывать статистику. Библиотека сделана на основе{' '}
+          Библиотека графиков: линейные, столбчатые, круговые диаграммы и другие
+          компоненты, с помощью которых удобно показывать статистику. Библиотека
+          сделана на основе{' '}
           <Text
             className={cnReposData('Link')}
             as="a"
@@ -138,7 +144,7 @@ export const ReposDataBase = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="http://widgets.consta.design/"
+            href="http://widgets.gizeasy.ru/"
             target="_blank"
           >
             Документация
@@ -159,7 +165,11 @@ export const ReposDataSingleComponents = () => {
       <div className={wp.tplGrid('fraction', { row: 'third' })}>
         <div
           className={cnDocsDecorator('Section', [
-            wp.tplGrid({ 'xs-columns': 2, 'col-gap': 'full', 'row-gap': 'full' }),
+            wp.tplGrid({
+              'xs-columns': 2,
+              'col-gap': 'full',
+              'row-gap': 'full',
+            }),
           ])}
         >
           <div className={wp.tplGrid('fraction', { row: 'third' })}>
@@ -169,15 +179,16 @@ export const ReposDataSingleComponents = () => {
           </div>
           <div
             className={
-              ([wp.tplGrid('fraction', { row: 'third' })], [wp.decorator({ distribute: 'right' })])
+              ([wp.tplGrid('fraction', { row: 'third' })],
+              [wp.decorator({ distribute: 'right' })])
             }
           >
             <Badge label="В работе" size="s" status="system" />
           </div>
         </div>
         <Text className="ReposDataText">
-          Компоненты для создания шапки проекта: логотип, меню, поиск, логин и шапка целиком. Можно
-          использовать по отдельности.
+          Компоненты для создания шапки проекта: логотип, меню, поиск, логин и
+          шапка целиком. Можно использовать по отдельности.
         </Text>
         <Text>
           <Text
@@ -194,7 +205,7 @@ export const ReposDataSingleComponents = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="http://header.consta.design/"
+            href="http://header.gizeasy.ru/"
             target="_blank"
           >
             Документация
@@ -207,8 +218,8 @@ export const ReposDataSingleComponents = () => {
         </Text>
 
         <Text className="ReposDataText">
-          Шапка для тех, кто не работает с React. Подходит для веб-проектов, подключается скриптом,
-          есть настройки.
+          Шапка для тех, кто не работает с React. Подходит для веб-проектов,
+          подключается скриптом, есть настройки.
         </Text>
         <Text>
           <Text
@@ -227,8 +238,8 @@ export const ReposDataSingleComponents = () => {
           Stats
         </Text>
         <Text className="ReposDataText">
-          Компонент для отображения чисел, с заголовком, единицами измерения, иконками и другими
-          настройками.
+          Компонент для отображения чисел, с заголовком, единицами измерения,
+          иконками и другими настройками.
         </Text>
         <Text>
           <Text
@@ -245,7 +256,7 @@ export const ReposDataSingleComponents = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="http://stats.consta.design/"
+            href="http://stats.gizeasy.ru/"
             target="_blank"
           >
             Документация
@@ -257,8 +268,8 @@ export const ReposDataSingleComponents = () => {
           Analytic UI
         </Text>
         <Text className="ReposDataText">
-          Компоненты для аналитики, пока включает один компонент — форму для оценки и обратной связи
-          по методикам NPS и CSI.
+          Компоненты для аналитики, пока включает один компонент — форму для
+          оценки и обратной связи по методикам NPS и CSI.
         </Text>
         <Text>
           <Text
@@ -275,7 +286,7 @@ export const ReposDataSingleComponents = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="http://analytic-ui.consta.design/"
+            href="http://analytic-ui.gizeasy.ru/"
             target="_blank"
           >
             Документация
@@ -304,7 +315,7 @@ export const ReposDataSingleComponents = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="http://gpn-responses.consta.design/"
+            href="http://gpn-responses.gizeasy.ru/"
             target="_blank"
           >
             Документация
@@ -356,48 +367,7 @@ export const ReposDataAdapters = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="http://rc-table-adapter.consta.design/"
-            target="_blank"
-          >
-            Документация
-          </Text>
-        </Text>
-      </div>
-      <div className={wp.tplGrid('fraction', { row: 'third' })}>
-        <div>
-          <Text weight="bold" size="l">
-            ag-grid-adapter
-          </Text>
-        </div>
-        <Text className="ReposDataText">
-          Адаптер для таблицы{' '}
-          <Text
-            className={cnReposData('Link')}
-            as="a"
-            view="link"
-            href="https://github.com/react-component/table"
-            target="_blank"
-          >
-            ag-grid-react
-          </Text>
-          .
-        </Text>
-        <Text>
-          <Text
-            className={cnReposData('Link')}
-            as="a"
-            view="link"
-            href="https://github.com/consta-design-system/ag-grid-adapter"
-            target="_blank"
-          >
-            GitHub
-          </Text>
-          {' | '}
-          <Text
-            className={cnReposData('Link')}
-            as="a"
-            view="link"
-            href="https://www.ag-grid.com/react-data-grid/getting-started/"
+            href="http://rc-table-adapter.gizeasy.ru/"
             target="_blank"
           >
             Документация
@@ -436,7 +406,7 @@ export const ReposDataAdapters = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="http://rc-tree-adapter.consta.design/"
+            href="http://rc-tree-adapter.gizeasy.ru/"
             target="_blank"
           >
             Документация
@@ -448,7 +418,7 @@ export const ReposDataAdapters = () => {
           gantt-task-react-adapter
         </Text>
         <Text className="ReposDataText">
-          Адаптер для диаграммы Ганта{' '}
+          Адаптер для{' '}
           <Text
             className={cnReposData('Link')}
             as="a"
@@ -458,7 +428,7 @@ export const ReposDataAdapters = () => {
           >
             gantt-task-react
           </Text>
-          .
+          . Дерево, подходит для создания иерархических структур.
         </Text>
         <Text>
           <Text
@@ -475,46 +445,7 @@ export const ReposDataAdapters = () => {
             className={cnReposData('Link')}
             as="a"
             view="link"
-            href="http://gantt-task-react-adapter.consta.design/"
-            target="_blank"
-          >
-            Документация
-          </Text>
-        </Text>
-      </div>
-      <div className={wp.tplGrid('fraction', { row: 'third' })}>
-        <Text weight="bold" size="l">
-          react-big-calendar-adapter
-        </Text>
-        <Text className="ReposDataText">
-          Адаптер для календаря{' '}
-          <Text
-            className={cnReposData('Link')}
-            as="a"
-            view="link"
-            href="http://jquense.github.io/react-big-calendar/examples/"
-            target="_blank"
-          >
-            react-big-calendar
-          </Text>
-          .
-        </Text>
-        <Text>
-          <Text
-            className={cnReposData('Link')}
-            as="a"
-            view="link"
-            href="https://github.com/consta-design-system/react-big-calendar-adapter"
-            target="_blank"
-          >
-            GitHub
-          </Text>
-          {' | '}
-          <Text
-            className={cnReposData('Link')}
-            as="a"
-            view="link"
-            href="https://react-big-calendar-adapter.consta.design/"
+            href="http://gantt-task-react-adapter.gizeasy.ru/"
             target="_blank"
           >
             Документация

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function DatePickerImage(props: React.SVGProps<SVGSVGElement>) {
+const DatePickerImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <path
@@ -22,6 +22,6 @@ function DatePickerImage(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default DatePickerImage;

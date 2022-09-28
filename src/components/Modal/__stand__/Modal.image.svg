@@ -1,0 +1,46 @@
+<svg
+  width="200"
+  height="120"
+  viewBox="0 0 200 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M0 4C0 1.79086 1.79086 0 4 0H196C198.209 0 200 1.79086 200 4V116C200 118.209 198.209 120 196 120H4C1.79086 120 0 118.209 0 116V4Z"
+    fill="var(--color-bg-secondary)"
+  />
+  <rect
+    x="28"
+    y="25"
+    width="144"
+    height="71"
+    rx="4"
+    fill="var(--color-bg-default)"
+  />
+  <rect
+    x="142"
+    y="79"
+    width="22"
+    height="9"
+    rx="2"
+    fill="var(--color-bg-link)"
+  />
+  <rect
+    x="115"
+    y="79"
+    width="23"
+    height="9"
+    rx="2"
+    fill="var(--color-control-bg-disable)"
+  />
+  <path
+    d="M158.011 38.4597L158.545 38.9998L161 36.5476L163.454 38.9994L163.455 39L164 38.4551L161.545 36.0028L164 33.5505L163.449 33L161 35.4584L158.546 33.0061L158 33.5504L160.456 36.0046L158.011 38.4597Z"
+    fill="var(--color-control-typo-placeholder)"
+  />
+  <rect
+    width="59"
+    height="6"
+    transform="translate(36 33)"
+    fill="var(--color-control-typo-placeholder)"
+  />
+</svg>

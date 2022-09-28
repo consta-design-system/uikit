@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import * as React from 'react';
 
 import { cnHeaderMenu, HeaderMenu } from '../Menu/HeaderMenu';
 
@@ -27,7 +27,13 @@ const renderComponent = (
   props: Omit<HeaderMenuProps, 'items'> & { items?: HeaderMenuProps['items'] },
 ) => {
   const { items, ...otherProps } = props;
-  return render(<HeaderMenu items={items || defaultItems} data-testid={testId} {...otherProps} />);
+  return render(
+    <HeaderMenu
+      items={items || defaultItems}
+      data-testid={testId}
+      {...otherProps}
+    />,
+  );
 };
 
 function getRender() {
@@ -68,7 +74,10 @@ describe('Компонент HeaderMenu', () => {
 
         expect(itemElement.textContent).toEqual(defaultItems[index].label);
         expect(itemElement).toHaveAttribute('href', defaultItems[index].href);
-        expect(itemElement).toHaveAttribute('target', defaultItems[index].target);
+        expect(itemElement).toHaveAttribute(
+          'target',
+          defaultItems[index].target,
+        );
         expect(itemElement).toHaveClass(
           cnHeaderMenu('Link', { active: defaultItems[index].active }),
         );

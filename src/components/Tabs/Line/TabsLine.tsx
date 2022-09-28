@@ -3,8 +3,8 @@ import './TabsLine.css';
 import React from 'react';
 
 import { cn } from '../../../utils/bem';
-import { getTabsWidth, TabDimensions } from '../helpers';
-import { TabsPropLinePosition } from '../Tabs';
+import { getTabsWidth } from '../helpers';
+import { TabDimensions, TabsPropLinePosition } from '../types';
 
 const cnTabsLine = cn('TabsLine');
 
@@ -23,7 +23,14 @@ export const TabsRunningLine: React.FC<{
   const size = tabsDimensions[activeTabIdx]?.size ?? 0;
   const offset = getTabsWidth(previousTabsDimensions);
 
-  return <TabsLine type="running" linePosition={linePosition} size={size} offset={offset} />;
+  return (
+    <TabsLine
+      type="running"
+      linePosition={linePosition}
+      size={size}
+      offset={offset}
+    />
+  );
 };
 
 const TabsLine: React.FC<{
@@ -41,4 +48,5 @@ const TabsLine: React.FC<{
   />
 );
 
-const formatCSSValue = (n: number | string) => (typeof n === 'number' ? `${n}px` : n);
+const formatCSSValue = (n: number | string) =>
+  typeof n === 'number' ? `${n}px` : n;

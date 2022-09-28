@@ -10,17 +10,20 @@ export type ProgressLineItemDefault = {
   label?: string;
 };
 
-export type ProgressLinePropGetItemLabel<ITEM> = (item: ITEM) => string | undefined;
+export type ProgressLinePropGetItemLabel<ITEM> = (
+  item: ITEM,
+) => string | undefined;
 
-export type ProgressLineProps<ITEM = ProgressLineItemDefault> = PropsWithHTMLAttributesAndRef<
-  {
-    size?: PropgressLinePropSize;
-    value?: number;
-    steps?: ITEM[];
-    getItemLabel?: ProgressLinePropGetItemLabel<ITEM>;
-  },
-  HTMLDivElement
->;
+export type ProgressLineProps<ITEM = ProgressLineItemDefault> =
+  PropsWithHTMLAttributesAndRef<
+    {
+      size?: PropgressLinePropSize;
+      value?: number;
+      steps?: ITEM[];
+      getItemLabel?: ProgressLinePropGetItemLabel<ITEM>;
+    },
+    HTMLDivElement
+  >;
 
 export type ProgressLineComponent = <ITEM>(
   props: ProgressLineProps<ITEM>,

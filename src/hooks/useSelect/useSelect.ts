@@ -5,15 +5,21 @@ import { useClickOutside } from '../useClickOutside/useClickOutside';
 import { useDebounce } from '../useDebounce/useDebounce';
 import { KeyHandler, useKeys } from '../useKeys/useKeys';
 import { usePrevious } from '../usePrevious/usePrevious';
-
 import { scrollToIndex, useHoistedState } from './helpers';
 
 type IndexForHighlight = number | ((oldIndex: number) => number);
 
-type Group<ITEM, GROUP> = { items: ITEM[]; key: string | number; group?: GROUP };
+type Group<ITEM, GROUP> = {
+  items: ITEM[];
+  key: string | number;
+  group?: GROUP;
+};
 type GetItemGroupKey<ITEM> = (item: ITEM) => string | number | undefined;
 type GetGroupKey<GROUP> = (item: GROUP) => string | number | undefined;
-type SortGroups<ITEM, GROUP> = (a: Group<ITEM, GROUP>, b: Group<ITEM, GROUP>) => number;
+type SortGroups<ITEM, GROUP> = (
+  a: Group<ITEM, GROUP>,
+  b: Group<ITEM, GROUP>,
+) => number;
 
 type OnChangeProp<ITEM, MULTIPLE extends boolean> = (props: {
   value: (MULTIPLE extends true ? ITEM[] : ITEM) | null;
@@ -93,7 +99,9 @@ const initialState = {
 export const isOptionForCreate = <ITEM, GROUP>(
   params: OptionForCreate | Group<ITEM, GROUP> | ITEM,
 ): params is OptionForCreate => {
-  return params && Object.prototype.hasOwnProperty.call(params, '__optionForCreate');
+  return (
+    params && Object.prototype.hasOwnProperty.call(params, '__optionForCreate')
+  );
 };
 
 export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
@@ -121,10 +129,18 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   const [isFocused, setIsFocused] = useState(false);
 
   const value =
-    (params.value && (Array.isArray(params.value) ? params.value : [params.value])) || [];
+    (params.value &&
+      (Array.isArray(params.value) ? params.value : [params.value])) ||
+    [];
 
   const [
-    { searchValue, isOpen, highlightedIndex, resolvedSearchValue, scrollToHighlighted },
+    {
+      searchValue,
+      isOpen,
+      highlightedIndex,
+      resolvedSearchValue,
+      scrollToHighlighted,
+    },
     setState,
   ] = useHoistedState(initialState);
 
@@ -144,9 +160,8 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
       const matchWithValueSearch = Boolean(
         items.find(
           (option) =>
-            getItemLabel(option)
-              .toString()
-              .toLowerCase() === resolvedSearchValue.toLocaleLowerCase(),
+            getItemLabel(option).toString().toLowerCase() ===
+            resolvedSearchValue.toLocaleLowerCase(),
         ),
       );
 
@@ -173,14 +188,22 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
     );
 
     return optionForCreate ? [optionForCreate, ...resultGroups] : resultGroups;
-  }, [filteredOptions, groups, getItemGroupKey, getGroupKey, sortGroups, optionForCreate]);
+  }, [
+    filteredOptions,
+    groups,
+    getItemGroupKey,
+    getGroupKey,
+    sortGroups,
+    optionForCreate,
+  ]);
 
   const notFound = useMemo(() => {
     let flag = false;
     if (searchValue.length > 0) {
       flag =
         visibleItems.filter(
-          (group) => isOptionForCreate(group) || group.items.length > 0 || group.group,
+          (group) =>
+            isOptionForCreate(group) || group.items.length > 0 || group.group,
         ).length === 0 && !params.onCreate;
     }
     return flag;
@@ -260,7 +283,7 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   });
 
   const highlightIndex = React.useCallback(
-    (indexForHighlight: IndexForHighlight, scrollToHighlighted) => {
+    (indexForHighlight: IndexForHighlight, scrollToHighlighted: boolean) => {
       setState((old) => {
         return {
           ...old,
@@ -271,7 +294,9 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
                 ? indexForHighlight(old.highlightedIndex)
                 : indexForHighlight,
             ),
-            optionForCreate ? filteredOptions.length : filteredOptions.length - 1,
+            optionForCreate
+              ? filteredOptions.length
+              : filteredOptions.length - 1,
           ),
           scrollToHighlighted,
         };
@@ -283,7 +308,9 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   const removeValue = (e: React.SyntheticEvent, valueItem: ITEM) => {
     e.stopPropagation();
     if (isMultipleParams(params)) {
-      const newValue = params.value?.filter((item) => getItemKey(item) !== getItemKey(valueItem));
+      const newValue = params.value?.filter(
+        (item) => getItemKey(item) !== getItemKey(valueItem),
+      );
       params.onChange({
         e,
         value: newValue?.length ? newValue : null,
@@ -296,7 +323,9 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
       return;
     }
     if (isMultipleParams(params)) {
-      const newValue = value.some((value) => getItemKey(value) === getItemKey(item))
+      const newValue = value.some(
+        (value) => getItemKey(value) === getItemKey(item),
+      )
         ? value.filter((value) => getItemKey(value) !== getItemKey(item))
         : [...value, item];
       params.onChange({ value: newValue.length ? newValue : null, e });
@@ -339,7 +368,8 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
     setSearch('');
   };
 
-  const getHandleRemoveValue = (item: ITEM) => (e: React.SyntheticEvent) => removeValue(e, item);
+  const getHandleRemoveValue = (item: ITEM) => (e: React.SyntheticEvent) =>
+    removeValue(e, item);
 
   // Prop Getters
 
@@ -421,7 +451,10 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
     Backspace,
   });
 
-  const getOptionProps = ({ index, item }: OptionProps<ITEM>): GetOptionPropsResult => {
+  const getOptionProps = ({
+    index,
+    item,
+  }: OptionProps<ITEM>): GetOptionPropsResult => {
     if (isOptionForCreate(item)) {
       return {
         onClick: (e: React.SyntheticEvent) => {
@@ -493,10 +526,10 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
 
     if (isFocused) {
       setIsFocused(false);
+    }
 
-      if (typeof onBlur === 'function') {
-        onBlur(e);
-      }
+    if (typeof onBlur === 'function') {
+      onBlur(e);
     }
   };
 

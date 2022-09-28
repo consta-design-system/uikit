@@ -10,7 +10,7 @@ import { Header, HeaderButton, HeaderModule } from '../../../Header';
 
 const cnExample = cn('HeaderButtonExample');
 
-export function HeaderButtonExample() {
+export const HeaderButtonExample = () => {
   return (
     <Header
       className={cnExample()}
@@ -29,4 +29,4 @@ export function HeaderButtonExample() {
       }
     />
   );
-}
+};

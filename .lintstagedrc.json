@@ -1,0 +1,6 @@
+{
+  "*.css": ["stylelint ./src/**/*.css --fix"],
+  "*.{js,jsx,ts,tsx}": ["eslint --fix"],
+  "*.{json,md,mdx}": ["prettier --write"],
+  "*.svg": ["prettier --write --parser html"]
+}

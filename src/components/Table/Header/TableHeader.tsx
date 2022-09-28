@@ -5,10 +5,21 @@ import React from 'react';
 import { cn } from '../../../utils/bem';
 import { Button } from '../../Button/Button';
 import { TableCell } from '../Cell/TableCell';
-import { FieldSelectedValues, Filters, getOptionsForFilters, SelectedFilters } from '../filtering';
+import {
+  FieldSelectedValues,
+  Filters,
+  getOptionsForFilters,
+  SelectedFilters,
+} from '../filtering';
 import { TableFilterTooltip } from '../FilterTooltip/TableFilterTooltip';
 import { Header } from '../helpers';
-import { ColumnMetaData, HeaderVerticalAlign, onCellClick, TableColumn, TableRow } from '../Table';
+import {
+  ColumnMetaData,
+  HeaderVerticalAlign,
+  onCellClick,
+  TableColumn,
+  TableRow,
+} from '../Table';
 
 const cnTableHeader = cn('TableHeader');
 
@@ -24,7 +35,10 @@ type Props<T extends TableRow> = {
   headersWithMetaData: Array<Header<T> & ColumnMetaData>;
   headerRowsHeights: Array<number>;
   headerRowsRefs: React.MutableRefObject<Record<number, HTMLDivElement | null>>;
-  getStickyLeftOffset: (columnIndex: number, topHeaderGridIndex: number) => number | undefined;
+  getStickyLeftOffset: (
+    columnIndex: number,
+    topHeaderGridIndex: number,
+  ) => number | undefined;
   stickyColumnsGrid: number;
   showVerticalCellShadow: boolean;
   headerVerticalAlign: HeaderVerticalAlign;
@@ -64,7 +78,10 @@ export const TableHeader = <T extends TableRow>({
   showHorizontalCellShadow,
   borderBetweenColumns,
 }: Props<T>): React.ReactElement => {
-  const tableHeaderHeight = headerRowsHeights.reduce((a: number, b: number) => a + b, 0);
+  const tableHeaderHeight = headerRowsHeights.reduce(
+    (a: number, b: number) => a + b,
+    0,
+  );
   const tableHeaderStyle: React.CSSProperties & TableCSSCustomProperty = {
     '--table-header-height': `${tableHeaderHeight}px`,
   };
@@ -81,8 +98,9 @@ export const TableHeader = <T extends TableRow>({
       } else {
         header.columns.forEach((col) =>
           build(
-            headersWithMetaData.find((head) => head.title === col.title) as Header<T> &
-              ColumnMetaData,
+            headersWithMetaData.find(
+              (head) => head.title === col.title,
+            ) as Header<T> & ColumnMetaData,
           ),
         );
       }
@@ -91,7 +109,9 @@ export const TableHeader = <T extends TableRow>({
     return headers.some((header) => header.isResized);
   };
 
-  const getFilterPopover = (column: Header<T> & ColumnMetaData): React.ReactNode => {
+  const getFilterPopover = (
+    column: Header<T> & ColumnMetaData,
+  ): React.ReactNode => {
     if (!filters || !column.accessor) {
       return null;
     }
@@ -131,7 +151,11 @@ export const TableHeader = <T extends TableRow>({
 
   const control = (column: Header<T> & ColumnMetaData): React.ReactNode => {
     if (column.control) {
-      return <div className={cnTableHeader('Сontrol')}>{column.control({ column })}</div>;
+      return (
+        <div className={cnTableHeader('Сontrol')}>
+          {column.control({ column })}
+        </div>
+      );
     }
 
     return null;
@@ -139,97 +163,105 @@ export const TableHeader = <T extends TableRow>({
 
   return (
     <>
-      <div className={cnTableHeader('Row', { withVerticalBorder: borderBetweenColumns })}>
-        {headersWithMetaData.map((column: Header<T> & ColumnMetaData, columnIdx: number) => {
-          const style: React.CSSProperties = {};
-          if (column.position!.colSpan) {
-            style.gridColumnEnd = `span ${column.position!.colSpan}`;
-          }
-          if (column.position!.rowSpan) {
-            style.gridRowEnd = `span ${column.position!.rowSpan}`;
-          }
-          if (isStickyHeader) {
-            style.top = headerRowsHeights
-              .slice(0, column.position!.level)
-              .reduce((a: number, b: number) => a + b, 0);
-          }
-          return (
-            <TableCell
-              type="header"
-              key={columnIdx}
-              ref={(ref: HTMLDivElement | null): void => {
-                /* eslint-disable-next-line no-param-reassign */
-                headerRowsRefs.current[columnIdx] = ref;
-              }}
-              style={{
-                ...style,
-                left: getStickyLeftOffset(
-                  column.position!.gridIndex,
-                  column.position!.topHeaderGridIndex,
-                ),
-              }}
-              isSticky={isStickyHeader}
-              isResized={isColumnResized(column)}
-              column={column}
-              verticalAlign={headerVerticalAlign}
-              onContextMenu={(e: React.SyntheticEvent) =>
-                handleCellClick({
-                  e,
-                  type: 'contextMenu',
-                  columnIdx,
-                  ref: { current: headerRowsRefs.current[columnIdx] },
-                })
-              }
-              onClick={(e: React.SyntheticEvent) =>
-                handleCellClick({
-                  e,
-                  type: 'click',
-                  columnIdx,
-                  ref: { current: headerRowsRefs.current[columnIdx] },
-                })
-              }
-              className={cnTableHeader('Cell', {
-                isFirstColumn: column.position!.gridIndex === 0,
-                isFirstRow: column.position!.level === 0,
-                isLastInColumn:
-                  column.position?.topHeaderGridIndex !==
-                  headersWithMetaData[columnIdx + 1]?.position?.topHeaderGridIndex,
-                level: getLevelType(column),
-              })}
-              showVerticalShadow={
-                showVerticalCellShadow &&
-                column?.position!.gridIndex! + (column?.position!.colSpan || 1) ===
-                  stickyColumnsGrid
-              }
-            >
-              {column.title}
-
-              <div
-                className={cnTableHeader('Buttons', {
-                  isSortingActive: column.isSortingActive,
-                  isFilterActive: column.isFilterActive,
-                  verticalAlign: headerVerticalAlign,
-                })}
-              >
-                {column.sortable && (
-                  <Button
-                    size="xs"
-                    iconSize="s"
-                    view="clear"
-                    onlyIcon
-                    onClick={(): void => handleSortClick(column)}
-                    iconLeft={getSortIcon(column)}
-                    className={cnTableHeader('Icon', { type: 'sort' })}
-                  />
-                )}
-
-                {getFilterPopover(column)}
-
-                {control(column)}
-              </div>
-            </TableCell>
-          );
+      <div
+        className={cnTableHeader('Row', {
+          withVerticalBorder: borderBetweenColumns,
         })}
+      >
+        {headersWithMetaData.map(
+          (column: Header<T> & ColumnMetaData, columnIdx: number) => {
+            const style: React.CSSProperties = {};
+            if (column.position!.colSpan) {
+              style.gridColumnEnd = `span ${column.position!.colSpan}`;
+            }
+            if (column.position!.rowSpan) {
+              style.gridRowEnd = `span ${column.position!.rowSpan}`;
+            }
+            if (isStickyHeader) {
+              style.top = headerRowsHeights
+                .slice(0, column.position!.level)
+                .reduce((a: number, b: number) => a + b, 0);
+            }
+            return (
+              <TableCell
+                type="header"
+                key={columnIdx}
+                ref={(ref: HTMLDivElement | null): void => {
+                  /* eslint-disable-next-line no-param-reassign */
+                  headerRowsRefs.current[columnIdx] = ref;
+                }}
+                style={{
+                  ...style,
+                  left: getStickyLeftOffset(
+                    column.position!.gridIndex,
+                    column.position!.topHeaderGridIndex,
+                  ),
+                }}
+                isSticky={isStickyHeader}
+                isResized={isColumnResized(column)}
+                column={column}
+                verticalAlign={headerVerticalAlign}
+                onContextMenu={(e: React.SyntheticEvent) =>
+                  handleCellClick({
+                    e,
+                    type: 'contextMenu',
+                    columnIdx,
+                    ref: { current: headerRowsRefs.current[columnIdx] },
+                  })
+                }
+                onClick={(e: React.SyntheticEvent) =>
+                  handleCellClick({
+                    e,
+                    type: 'click',
+                    columnIdx,
+                    ref: { current: headerRowsRefs.current[columnIdx] },
+                  })
+                }
+                className={cnTableHeader('Cell', {
+                  isFirstColumn: column.position!.gridIndex === 0,
+                  isFirstRow: column.position!.level === 0,
+                  isLastInColumn:
+                    column.position?.topHeaderGridIndex !==
+                    headersWithMetaData[columnIdx + 1]?.position
+                      ?.topHeaderGridIndex,
+                  level: getLevelType(column),
+                })}
+                showVerticalShadow={
+                  showVerticalCellShadow &&
+                  column.position!.gridIndex! +
+                    (column?.position!.colSpan || 1) ===
+                    stickyColumnsGrid
+                }
+              >
+                {column.title}
+
+                <div
+                  className={cnTableHeader('Buttons', {
+                    isSortingActive: column.isSortingActive,
+                    isFilterActive: column.isFilterActive,
+                    verticalAlign: headerVerticalAlign,
+                  })}
+                >
+                  {column.sortable && (
+                    <Button
+                      size="xs"
+                      iconSize="s"
+                      view="clear"
+                      onlyIcon
+                      onClick={(): void => handleSortClick(column)}
+                      iconLeft={getSortIcon(column)}
+                      className={cnTableHeader('Icon', { type: 'sort' })}
+                    />
+                  )}
+
+                  {getFilterPopover(column)}
+
+                  {control(column)}
+                </div>
+              </TableCell>
+            );
+          },
+        )}
       </div>
       {/*
         Рендерим тень заголовка отдельно чтобы избежать возможных наложений
@@ -237,7 +269,9 @@ export const TableHeader = <T extends TableRow>({
       */}
       <div className={cnTableHeader('ShadowWrapper')} style={tableHeaderStyle}>
         <div
-          className={cnTableHeader('Shadow', { show: showHorizontalCellShadow && isStickyHeader })}
+          className={cnTableHeader('Shadow', {
+            show: showHorizontalCellShadow && isStickyHeader,
+          })}
         />
       </div>
     </>

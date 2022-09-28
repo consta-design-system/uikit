@@ -2,7 +2,9 @@ import { formatFileRequirements } from '../formatFileRequirements';
 
 describe('formatFileRequirements', () => {
   it('возвращает undefined, если требований нет', () => {
-    expect(formatFileRequirements(undefined, undefined, undefined)).toBe(undefined);
+    expect(formatFileRequirements(undefined, undefined, undefined)).toBe(
+      undefined,
+    );
     expect(formatFileRequirements('', undefined, undefined)).toBe(undefined);
     expect(formatFileRequirements([], 0, 0)).toBe(undefined);
   });
@@ -11,7 +13,9 @@ describe('formatFileRequirements', () => {
     expect(formatFileRequirements(['.jpg', '.png'], undefined, undefined)).toBe(
       'Подходят файлы .jpg, .png',
     );
-    expect(formatFileRequirements(['.jpg', '.png'], 0, 0)).toBe('Подходят файлы .jpg, .png');
+    expect(formatFileRequirements(['.jpg', '.png'], 0, 0)).toBe(
+      'Подходят файлы .jpg, .png',
+    );
   });
 
   it('возвращает требования по размеру файла', () => {
@@ -29,8 +33,8 @@ describe('formatFileRequirements', () => {
   });
 
   it('возвращает требования по форматам и размеру файла', () => {
-    expect(formatFileRequirements(['.jpg', '.png'], 1024 * 1024, 1024 * 1024)).toBe(
-      'Подходят файлы .jpg, .png от 1 Мб до 1Мб',
-    );
+    expect(
+      formatFileRequirements(['.jpg', '.png'], 1024 * 1024, 1024 * 1024),
+    ).toBe('Подходят файлы .jpg, .png от 1 Мб до 1Мб');
   });
 });

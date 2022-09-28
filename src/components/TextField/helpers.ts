@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { IconPropSize } from '../../icons/Icon/Icon';
-
 import { TextFieldPropSize } from './types';
 
 export const sizeMap: Record<TextFieldPropSize, IconPropSize> = {
@@ -36,7 +35,10 @@ export const getValueByStepArray = (
     return currentValue;
   }
   for (let i = 0; i < steps.length; i++) {
-    if (currentValue === steps[i] || (steps[i] < currentValue && steps[i + 1] > currentValue)) {
+    if (
+      currentValue === steps[i] ||
+      (steps[i] < currentValue && steps[i + 1] > currentValue)
+    ) {
       return steps[i + (isIncrement ? 1 : -1)];
     }
   }
@@ -53,7 +55,8 @@ export const getValueByStepNumber = (
   const minValue = Number(min);
   const maxValue = Number(max);
   const currentValue: number =
-    (typeof value === 'string' ? Number(value) : 0) + Number(step) * (isIncrement ? 1 : -1);
+    (typeof value === 'string' ? Number(value) : 0) +
+    Number(step) * (isIncrement ? 1 : -1);
   if (!Number.isNaN(minValue) && currentValue <= minValue) {
     return minValue;
   }
@@ -67,15 +70,15 @@ export const getValueByStepNumber = (
 на кнопку прибавляется число с погрешностью.
 Здесь мы берем разрядность дробной части шага и ограничиваем
 результирующее число этой разрядностью */
-        Number(step)
-          .toString()
-          .split('.')[1]?.length,
+        Number(step).toString().split('.')[1]?.length,
       ) || 0,
     ),
   );
 };
 
-export const getIncrementFlag = (event: React.KeyboardEvent): boolean | null => {
+export const getIncrementFlag = (
+  event: React.KeyboardEvent,
+): boolean | null => {
   if (event?.key !== 'ArrowUp' && event?.key !== 'ArrowDown') {
     return null;
   }
@@ -99,8 +102,9 @@ export const getValueByStep = (
   min?: number | string,
   max?: number | string,
 ) => {
-  return (Array.isArray(steps)
-    ? getValueByStepArray(steps, value, min, max, isIncrement)
-    : getValueByStepNumber(steps, value, min, max, isIncrement)
+  return (
+    Array.isArray(steps)
+      ? getValueByStepArray(steps, value, min, max, isIncrement)
+      : getValueByStepNumber(steps, value, min, max, isIncrement)
   ).toString();
 };

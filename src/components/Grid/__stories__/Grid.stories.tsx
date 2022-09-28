@@ -1,13 +1,18 @@
 import './Grid.stories.css';
 
-import * as React from 'react';
 import { number, select } from '@storybook/addon-knobs';
+import * as React from 'react';
 
 import { range } from '../../../utils/array';
 import { cn } from '../../../utils/bem';
 import { createMetadata } from '../../../utils/storybook';
-import { Grid, GridItem, gridPropGap, gridPropXAlign, gridPropYAlign } from '../Grid';
-
+import {
+  Grid,
+  GridItem,
+  gridPropGap,
+  gridPropXAlign,
+  gridPropYAlign,
+} from '../Grid';
 import mdx from './Grid.docs.mdx';
 
 const cols = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -32,7 +37,7 @@ const defaultKnobs = () => ({
 
 const cnGridStories = cn('GridStories');
 
-export function Playground() {
+export const Playground = () => {
   const {
     cols,
     gap,
@@ -82,7 +87,7 @@ export function Playground() {
       </Grid>
     </div>
   );
-}
+};
 
 export default createMetadata({
   title: 'Компоненты|/Служебные/Grid',

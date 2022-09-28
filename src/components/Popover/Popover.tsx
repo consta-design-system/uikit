@@ -2,15 +2,20 @@ import './Popover.css';
 
 import React, { forwardRef, useEffect, useLayoutEffect, useMemo } from 'react';
 
-import { ClickOutsideHandler, useClickOutside } from '../../hooks/useClickOutside/useClickOutside';
+import {
+  ClickOutsideHandler,
+  useClickOutside,
+} from '../../hooks/useClickOutside/useClickOutside';
 import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { cn } from '../../utils/bem';
 import { isNumber, isString } from '../../utils/type-guards';
 import { PropsWithJsxAttributes } from '../../utils/types/PropsWithJsxAttributes';
-import { PortalWithTheme, usePortalContext } from '../PortalWithTheme/PortalWithTheme';
+import {
+  PortalWithTheme,
+  usePortalContext,
+} from '../PortalWithTheme/PortalWithTheme';
 import { useTheme } from '../Theme/Theme';
-
 import { getComputedPositionAndDirection } from './helpers';
 import { usePopoverReposition } from './usePopoverReposition';
 
@@ -102,20 +107,27 @@ export type Props = PropsWithJsxAttributes<
   } & PositioningProps
 >;
 
-const getOffset = (ref: React.RefObject<HTMLDivElement>, propOffset: PopoverPropOffset) => {
+const getOffset = (
+  ref: React.RefObject<HTMLDivElement>,
+  propOffset: PopoverPropOffset,
+) => {
   if (isNumber(propOffset)) {
     return propOffset;
   }
 
   if (isString(propOffset) && ref.current) {
-    const cssVar = getComputedStyle(ref.current).getPropertyValue(`--space-${propOffset}`);
+    const cssVar = getComputedStyle(ref.current).getPropertyValue(
+      `--space-${propOffset}`,
+    );
 
     if (cssVar && /px$/.test(cssVar)) {
       return Number(cssVar.slice(0, cssVar.length - 2));
     }
 
     if (cssVar && /rem$/.test(cssVar)) {
-      const fontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+      const fontSize = parseFloat(
+        getComputedStyle(document.documentElement).fontSize,
+      );
       const rem = Number(cssVar.slice(0, cssVar.length - 3));
 
       return fontSize * rem;
@@ -146,138 +158,161 @@ const isRenderProp = (
 const ContextConsumer: React.FC<{
   onClickOutside?: (event: MouseEvent) => void;
   ignoreClicksInsideRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
+  children: React.ReactNode;
 }> = ({ onClickOutside, children, ignoreClicksInsideRefs }) => {
   const { refs } = usePortalContext();
 
   useClickOutside({
     isActive: !!onClickOutside,
-    ignoreClicksInsideRefs: [...(ignoreClicksInsideRefs || []), ...(refs || [])],
-    handler: (event: MouseEvent) => onClickOutside?.(event),
+    ignoreClicksInsideRefs: [
+      ...(ignoreClicksInsideRefs || []),
+      ...(refs || []),
+    ],
+    handler: onClickOutside,
   });
 
-  return <>{children}</>;
+  return children as React.ReactElement;
 };
 
 const cnPopover = cn('Popover');
 
-export const Popover = forwardRef<HTMLDivElement, Props>((props, componentRef) => {
-  const {
-    children,
-    direction: passedDirection = 'upCenter',
-    offset: propOffset = 0,
-    arrowOffset,
-    possibleDirections = directions,
-    isInteractive = true,
-    onClickOutside,
-    spareDirection = 'downStartLeft',
-    style,
-    className,
-    position: passedPosition,
-    anchorRef,
-    equalAnchorWidth,
-    onSetDirection,
-    ...otherProps
-  } = props;
+export const Popover = forwardRef<HTMLDivElement, Props>(
+  (props, componentRef) => {
+    const {
+      children,
+      direction: passedDirection = 'upCenter',
+      offset: propOffset = 0,
+      arrowOffset,
+      possibleDirections = directions,
+      isInteractive = true,
+      onClickOutside,
+      spareDirection = 'downStartLeft',
+      style,
+      className,
+      position: passedPosition,
+      anchorRef,
+      equalAnchorWidth,
+      onSetDirection,
+      ...otherProps
+    } = props;
 
-  const ref = React.useRef<HTMLDivElement>(null);
-  const { theme } = useTheme();
+    const ref = React.useRef<HTMLDivElement>(null);
+    const { theme } = useTheme();
 
-  const [anchorClientRect, setAnchorClientRect] = React.useState<DOMRect | undefined>();
-  const { width, height } = useComponentSize(ref);
-  const anchorSize = useComponentSize(anchorRef || { current: null });
-  const previousDirectionRef = React.useRef<Direction | null>(null);
-  const [bannedDirections, setBannedDirections] = React.useState<readonly Direction[]>([]);
+    const [anchorClientRect, setAnchorClientRect] = React.useState<
+      DOMRect | undefined
+    >();
+    const { width, height } = useComponentSize(ref);
+    const anchorSize = useComponentSize(anchorRef || { current: null });
+    const previousDirectionRef = React.useRef<Direction | null>(null);
+    const [bannedDirections, setBannedDirections] = React.useState<
+      readonly Direction[]
+    >([]);
 
-  const resetBannedDirections = () => {
-    setBannedDirections((state) => (state.length ? [] : state));
-    previousDirectionRef.current = null;
-  };
+    const resetBannedDirections = () => {
+      setBannedDirections((state) => (state.length ? [] : state));
+      previousDirectionRef.current = null;
+    };
 
-  const updateAnchorClientRect = () =>
-    setAnchorClientRect(anchorRef?.current?.getBoundingClientRect());
+    const updateAnchorClientRect = () =>
+      setAnchorClientRect(anchorRef?.current?.getBoundingClientRect());
 
-  const offset = useMemo(() => getOffset(ref, propOffset), [propOffset, Boolean(ref.current)]);
+    const offset = useMemo(
+      () => getOffset(ref, propOffset),
+      [propOffset, Boolean(ref.current)],
+    );
 
-  const { position, direction } = getComputedPositionAndDirection({
-    contentSize: { width, height },
-    viewportSize: {
-      // Размер вьюпорта без скроллбаров
-      width: document.documentElement.clientWidth,
-      height: document.documentElement.clientHeight,
-    },
-    arrowOffset,
-    offset,
-    direction: passedDirection,
-    possibleDirections,
-    bannedDirections,
-    position: anchorClientRect
-      ? { x: anchorClientRect.left, y: anchorClientRect.top }
-      : passedPosition,
-    anchorSize,
-    spareDirection,
-  });
+    const { position, direction } = getComputedPositionAndDirection({
+      contentSize: { width, height },
+      viewportSize: {
+        // Размер вьюпорта без скроллбаров
+        width: document.documentElement.clientWidth,
+        height: document.documentElement.clientHeight,
+      },
+      arrowOffset,
+      offset,
+      direction: passedDirection,
+      possibleDirections,
+      bannedDirections,
+      position: anchorClientRect
+        ? { x: anchorClientRect.left, y: anchorClientRect.top }
+        : passedPosition,
+      anchorSize,
+      spareDirection,
+    });
 
-  useLayoutEffect(() => onSetDirection?.(direction), [direction]);
+    useLayoutEffect(() => onSetDirection?.(direction), [direction]);
 
-  useEffect(updateAnchorClientRect, [anchorSize]);
+    useEffect(updateAnchorClientRect, [anchorSize]);
 
-  usePopoverReposition({
-    isActive: true,
-    scrollAnchorRef: anchorRef || { current: null },
-    onRequestReposition: () => {
-      resetBannedDirections();
-      updateAnchorClientRect();
-    },
-  });
+    usePopoverReposition({
+      isActive: true,
+      scrollAnchorRef: anchorRef || { current: null },
+      onRequestReposition: () => {
+        resetBannedDirections();
+        updateAnchorClientRect();
+      },
+    });
 
-  /**
-   * Может возникнуть ситуация, когда перерасчет поповера всегда будет выдавать 2 направления
-   * и бесконечно зацикливать себя. Для избежания таких кейсов мы запоминаем стороны,
-   * которые не подошли, чтобы не возвращаться к ним и предотвратить бесконечный ререндер.
-   * См. PopoverBannedPositionsStory
-   */
+    /**
+     * Может возникнуть ситуация, когда перерасчет поповера всегда будет выдавать 2 направления
+     * и бесконечно зацикливать себя. Для избежания таких кейсов мы запоминаем стороны,
+     * которые не подошли, чтобы не возвращаться к ним и предотвратить бесконечный ререндер.
+     * См. PopoverBannedPositionsStory
+     */
 
-  useLayoutEffect(() => {
-    if (previousDirectionRef.current !== direction) {
-      if (
-        previousDirectionRef.current &&
-        !bannedDirections.includes(previousDirectionRef.current)
-      ) {
-        setBannedDirections((state) =>
-          previousDirectionRef.current ? [...state, previousDirectionRef.current] : state,
-        );
+    useLayoutEffect(() => {
+      if (previousDirectionRef.current !== direction) {
+        if (
+          previousDirectionRef.current &&
+          !bannedDirections.includes(previousDirectionRef.current)
+        ) {
+          setBannedDirections((state) =>
+            previousDirectionRef.current
+              ? [...state, previousDirectionRef.current]
+              : state,
+          );
+        }
+        previousDirectionRef.current = direction;
       }
-      previousDirectionRef.current = direction;
-    }
-  }, [direction]);
+    }, [direction]);
 
-  // Сбрасываем при любом изменении пропсов, чтобы заново начать перебор направлений
-  // Главное не сбрасывать при изменении размеров поповера, т.к. именно оно может вызвать бесконечный перебор
+    // Сбрасываем при любом изменении пропсов, чтобы заново начать перебор направлений
+    // Главное не сбрасывать при изменении размеров поповера, т.к. именно оно может вызвать бесконечный перебор
 
-  useLayoutEffect(resetBannedDirections, [props]);
+    useLayoutEffect(resetBannedDirections, [props]);
 
-  return (
-    <PortalWithTheme
-      {...otherProps}
-      preset={theme}
-      className={cnPopover({ direction }, [className])}
-      container={window.document.body}
-      ref={useForkRef([ref, componentRef])}
-      style={{
-        ...style,
-        ['--popover-top' as string]: `${(position?.y || 0) + window.scrollY}px`,
-        ['--popover-left' as string]: `${(position?.x || 0) + window.scrollX}px`,
-        [`--popover-width` as string]: equalAnchorWidth ? `${anchorSize.width}px` : undefined,
-        [`--popover-pointer-events` as string]: isInteractive ? undefined : 'none',
-        [`--popover-visibility` as string]: position ? undefined : 'hidden',
-      }}
-    >
-      <ContextConsumer
-        onClickOutside={onClickOutside}
-        ignoreClicksInsideRefs={[ref, anchorRef || { current: null }]}
+    return (
+      <PortalWithTheme
+        {...otherProps}
+        preset={theme}
+        className={cnPopover({ direction }, [className])}
+        container={window.document.body}
+        ref={useForkRef([ref, componentRef])}
+        style={{
+          ...style,
+          ['--popover-top' as string]: `${
+            (position?.y || 0) + window.scrollY
+          }px`,
+          ['--popover-left' as string]: `${
+            (position?.x || 0) + window.scrollX
+          }px`,
+          [`--popover-width` as string]: equalAnchorWidth
+            ? `${anchorSize.width}px`
+            : undefined,
+          [`--popover-pointer-events` as string]: isInteractive
+            ? undefined
+            : 'none',
+          [`--popover-visibility` as string]: position ? undefined : 'hidden',
+        }}
       >
-        {isRenderProp(children) ? children(direction) : children}
-      </ContextConsumer>
-    </PortalWithTheme>
-  );
-});
+        <ContextConsumer
+          onClickOutside={onClickOutside}
+          ignoreClicksInsideRefs={[ref, anchorRef || { current: null }]}
+        >
+          {isRenderProp(children) ? children(direction) : children}
+        </ContextConsumer>
+      </PortalWithTheme>
+    );
+  },
+);

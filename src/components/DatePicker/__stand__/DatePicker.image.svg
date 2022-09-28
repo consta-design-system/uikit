@@ -1,0 +1,32 @@
+<svg
+  width="200"
+  height="120"
+  viewBox="0 0 200 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M0 4C0 1.79086 1.79086 0 4 0H196C198.209 0 200 1.79086 200 4V116C200 118.209 198.209 120 196 120H4C1.79086 120 0 118.209 0 116V4Z"
+    fill="var(--color-bg-secondary)"
+  />
+  <rect
+    x="33"
+    y="40"
+    width="134"
+    height="40"
+    rx="4"
+    fill="var(--color-bg-default)"
+  />
+  <path
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M52 53C51.4477 53 51 53.4477 51 54V55H49C48.4477 55 48 55.4477 48 56V66C48 66.5523 48.4477 67 49 67H61C61.5523 67 62 66.5523 62 66V56C62 55.4477 61.5523 55 61 55H59V54C59 53.4477 58.5523 53 58 53C57.4477 53 57 53.4477 57 54V55H53V54C53 53.4477 52.5523 53 52 53ZM50 59H60V65H50V59Z"
+    fill="var(--color-bg-link)"
+  />
+  <path
+    d="M75 67L78.1753 67L79.7629 67L81.3505 67M83.732 67L90.0825 67M97.2268 67L103.577 67M105.959 67L112.309 67M119.454 67L125.804 67M128.186 67L134.536 67M136.918 67L143.268 67M145.649 67L152 67"
+    stroke="var(--color-bg-link)"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

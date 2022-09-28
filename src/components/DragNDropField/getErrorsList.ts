@@ -1,7 +1,6 @@
 import { FileRejection } from 'react-dropzone';
 
 import { isNotNil, isString } from '../../utils/type-guards';
-
 import { DragNDropFieldPropLocale, FileError, FileSizes } from './types';
 
 const defaultFileSizes: FileSizes = {
@@ -52,7 +51,12 @@ export const getErrorsList = (
 
   if (tooManyFilesErrorsCount) {
     errorsList.unshift(
-      getErrorMessage({ code: 'too-many-files', message: '' }, undefined, sizes, locale),
+      getErrorMessage(
+        { code: 'too-many-files', message: '' },
+        undefined,
+        sizes,
+        locale,
+      ),
     );
   }
 

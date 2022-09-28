@@ -1,10 +1,9 @@
 import React from 'react';
 
 import { ComponentsGrid } from '../ComponentsGrid/ComponentsGrid';
-
+import { additionalData, data, imageMap } from './data';
 import NoImage from './data/images/NoImage';
 import { Data, DataItem } from './data/types';
-import { additionalData, data, imageMap } from './data';
 
 const getImage = (name: string) => imageMap[name] || NoImage;
 

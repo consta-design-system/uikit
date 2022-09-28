@@ -1,0 +1,302 @@
+import { MdxMenu } from '@consta/stand';
+
+import {
+  CheckboxGroupExampleColumn,
+  CheckboxGroupExampleRow,
+} from './examples/CheckboxGroupExampleDirection/CheckboxGroupExampleDirection';
+import { CheckboxGroupExampleSize } from './examples/CheckboxGroupExampleSize/CheckboxGroupExampleSize';
+import { CheckboxGroupExampleDisabled } from './examples/CheckboxGroupExampleDisabled/CheckboxGroupExampleDisabled';
+import { CheckboxGroupExampleView } from './examples/CheckboxGroupExampleView/CheckboxGroupExampleView';
+
+```tsx
+import { CheckboxGroup } from '@consta/uikit/CheckboxGroupDeprecated';
+```
+
+<MdxMenu>
+
+- [Содержимое](#содержимое)
+- [Расположение чекбоксов](#расположение-чекбоксов)
+- [Неактивный чекбокс](#неактивный-чекбокс)
+- [Неактивная группа чекбоксов](#неактивная-группа-чекбоксов)
+- [Размер](#размер)
+- [Внешний вид](#внешний-вид)
+- [Импорт](#импорт)
+- [Список свойств](#свойства)
+
+</MdxMenu>
+
+## Содержимое
+
+Информация об отдельных чекбоксах описывается в массиве `items`. В него можно поместить название чекбокса и его неактивность. Например, вот так:
+
+```tsx
+const items: Item[] = [
+  { name: 'Один' },
+  { name: 'Два' },
+  { name: 'Три' },
+  { name: 'Четыре', disabled: true },
+  { name: 'Пять' },
+];
+
+const [value, setValue] = React.useState<Item | null>(null);
+
+return (
+  <CheckboxGroup
+    value={value}
+    items={items}
+    getLabel={(item) => item.name}
+    getDisabled={(item) => item.disabled}
+    onChange={({ value }) => setValue(value)}
+    name={'CheckboxGroup'}
+  />
+```
+
+Надпись рядом с чекбоксом можно получить с помощью функции `getLabel`.
+
+## Расположение чекбоксов
+
+Вы можете вывести чекбоксы в столбик или расположить на одной строчке с помощью `direction`. Варианты:
+
+- `column` — в столбик, друг под другом (работает по умолчанию),
+- `row` — на одной строке.
+
+**Чекбоксы в столбик**
+
+<CheckboxGroupExampleColumn />
+
+```tsx
+type Item = {
+  name: string;
+  disabled?: boolean;
+};
+
+const items: Item[] = [
+  { name: 'Один' },
+  { name: 'Два' },
+  { name: 'Три' },
+  { name: 'Четыре', disabled: true },
+  { name: 'Пять' },
+];
+
+function CheckboxGroupExampleRow() {
+  const [value, setValue] = React.useState<Item[] | null>(null);
+
+  return (
+    <CheckboxGroup
+      value={value}
+      items={items}
+      getLabel={(item) => item.name}
+      getDisabled={(item) => item.disabled}
+      onChange={({ value }) => setValue(value)}
+      direction="column"
+    />
+  );
+}
+```
+
+**Чекбоксы в строчку**
+
+<CheckboxGroupExampleRow />
+
+```tsx
+type Item = {
+  name: string;
+  disabled?: boolean;
+};
+
+const items: Item[] = [
+  { name: 'Один' },
+  { name: 'Два' },
+  { name: 'Три' },
+  { name: 'Четыре', disabled: true },
+  { name: 'Пять' },
+];
+
+function CheckboxGroupExampleRow() {
+  const [value, setValue] = React.useState<Item[] | null>(null);
+
+  return (
+    <CheckboxGroup
+      value={value}
+      items={items}
+      getLabel={(item) => item.name}
+      getDisabled={(item) => item.disabled}
+      onChange={({ value }) => setValue(value)}
+      direction="row"
+    />
+  );
+}
+```
+
+### Неактивный чекбокс
+
+Один или несколько чекбоксов можно сделать неактивными — если вы не хотите, чтобы их выбирали. За неактивность отвечает функция `getDisabled`.
+
+## Неактивная группа чекбоксов
+
+Чтобы сделать группу чекбоксов неактивной, добавьте `disabled`.
+
+<CheckboxGroupExampleDisabled />
+
+```tsx
+type Item = {
+  name: string;
+  disabled?: boolean;
+};
+
+const items: Item[] = [
+  { name: 'Один' },
+  { name: 'Два' },
+  { name: 'Три' },
+  { name: 'Четыре', disabled: true },
+  { name: 'Пять' },
+];
+
+function CheckboxGroupExampleDisabled() {
+  const [value, setValue] = React.useState<Item[] | null>(null);
+
+  return (
+    <CheckboxGroup
+      value={value}
+      items={items}
+      getLabel={(item) => item.name}
+      getDisabled={(item) => item.disabled}
+      onChange={({ value }) => setValue(value)}
+      direction="row"
+      disabled
+    />
+  );
+}
+```
+
+## Размер
+
+За размер отвечает свойство `size`. Варианты: `'m'`, `'l'`, по умолчанию: `'m'`.
+
+<CheckboxGroupExampleSize />
+
+```tsx
+type Item = {
+  name: string;
+  disabled?: boolean;
+};
+
+const items: Item[] = [
+  { name: 'Один' },
+  { name: 'Два' },
+  { name: 'Три' },
+  { name: 'Четыре', disabled: true },
+  { name: 'Пять' },
+];
+
+function CheckboxGroupExampleSize() {
+  const [value, setValue] = React.useState<Item[] | null>(null);
+
+  return (
+    <>
+      <CheckboxGroup
+        value={value}
+        items={items}
+        getLabel={(item) => item.name}
+        getDisabled={(item) => item.disabled}
+        onChange={({ value }) => setValue(value)}
+        name="CheckboxGroup"
+        direction="row"
+        size="m"
+      />
+      <CheckboxGroup
+        value={value}
+        items={items}
+        getLabel={(item) => item.name}
+        getDisabled={(item) => item.disabled}
+        onChange={({ value }) => setValue(value)}
+        name="CheckboxGroup"
+        direction="row"
+        size="l"
+      />
+    </>
+  );
+}
+```
+
+## Внешний вид
+
+Всего в дизайн-системе два вида групп чекбоксов: `primary` и `ghost`. За это отвечает свойство `view`.
+
+<CheckboxGroupExampleView />
+
+```tsx
+type Item = {
+  name: string;
+  disabled?: boolean;
+};
+
+const items: Item[] = [
+  { name: 'Один' },
+  { name: 'Два' },
+  { name: 'Три' },
+  { name: 'Четыре', disabled: true },
+  { name: 'Пять' },
+];
+
+function CheckboxGroupExampleView() {
+  const [value, setValue] = React.useState<Item[] | null>(null);
+
+  return (
+    <>
+      <p className={cnDocsExample('Caption')}>
+        <b>primary</b>
+      </p>
+      <CheckboxGroup
+        value={value}
+        items={items}
+        getLabel={(item) => item.name}
+        getDisabled={(item) => item.disabled}
+        onChange={({ value }) => setValue(value)}
+        name="CheckboxGroup"
+        direction="row"
+        view="primary"
+      />
+      <p className={cnDocsExample('Caption')}>
+        <b>ghost</b>
+      </p>
+      <CheckboxGroup
+        value={value}
+        items={items}
+        getLabel={(item) => item.name}
+        getDisabled={(item) => item.disabled}
+        onChange={({ value }) => setValue(value)}
+        name="CheckboxGroup"
+        direction="row"
+        view="ghost"
+      />
+    </>
+  );
+}
+```
+
+## Импорт
+
+```tsx
+import { CheckboxGroup } from '@consta/uikit/CheckboxGroupDeprecated';
+```
+
+## Свойства
+
+```
+type OnChange = (props: { e: React.ChangeEvent<HTMLInputElement>; value: ITEM[] | null }) => void;
+```
+
+| Свойство                                    | Тип                       | По умолчанию | Описание                                                                                                |
+| ------------------------------------------- | ------------------------- | ------------ | ------------------------------------------------------------------------------------------------------- |
+| `value`                                     | `Item[]`                  | —            | Значение                                                                                                |
+| [`items`](#содержимое)                      | `Item[]`                  | —            | Элементы                                                                                                |
+| [`getLabel`](#содержимое)                   | `(item: Item) => string`  | —            | Функция для формирования текста для чекбоксов. Также используется в качестве уникального ключа элемента |
+| [`getDisabled?`](#неактивный-чекбокс)       | `(item: Item) => boolean` | —            | Функция для определения disabled состояния чекбокса                                                     |
+| `onChange`                                  | `OnChange`                | —            | Действие при выборе элемента                                                                            |
+| `name`                                      | `string`                  | —            | Имя `<input>`, указывается для доступности                                                              |
+| [`direction?`](#расположение-чекбоксов)     | `'column', 'row'`         | `'column'`   | Направление чекбоксов                                                                                   |
+| [`disabled?`](#неактивная-группа-чекбоксов) | `boolean`                 | `false`      | Делает группу чекбоксов неактивной                                                                      |
+| [`size?`](#размер)                          | `'m', 'l'`                | `'m'`        | Размер группы чекбоксов                                                                                 |
+| [`view?`](#внешний-вид)                     | `'primary', 'ghost'`      | `'primary'`  | Внешний вид                                                                                             |
+| `className?`                                | `string`                  | —            | Дополнительные CSS-классы                                                                               |

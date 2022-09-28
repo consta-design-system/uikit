@@ -1,7 +1,13 @@
 import React from 'react';
 
 const SvgComponent = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg width={200} height={120} fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+  <svg
+    width={200}
+    height={120}
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
     <path fill="#ECF1F4" d="M0 0h200v120H0z" />
     <rect width={200} height={120} rx={4} fill="#ECF1F4" />
     <rect

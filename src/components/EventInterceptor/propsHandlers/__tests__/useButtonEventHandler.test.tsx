@@ -1,6 +1,6 @@
-import React, { createRef } from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { act, renderHook } from '@testing-library/react-hooks';
+import React, { createRef } from 'react';
 
 import { Button } from '../../../Button/Button';
 import { ButtonProps, useButtonEventHandler } from '../useButtonEventHandler';

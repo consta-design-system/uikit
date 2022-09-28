@@ -9,7 +9,7 @@ import { Grid, GridItem } from '../../../Grid';
 
 const cnGridExampleGap = cn('GridExampleGap');
 
-export function GridExampleGap() {
+export const GridExampleGap = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Grid className={cnGridExampleGap()} cols="2" gap="xl">
@@ -20,9 +20,9 @@ export function GridExampleGap() {
       </Grid>
     </StoryBookExample>
   );
-}
+};
 
-export function GridExampleColGap() {
+export const GridExampleColGap = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Grid className={cnGridExampleGap()} cols="2" colGap="xl">
@@ -33,9 +33,9 @@ export function GridExampleColGap() {
       </Grid>
     </StoryBookExample>
   );
-}
+};
 
-export function GridExampleRowGap() {
+export const GridExampleRowGap = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Grid className={cnGridExampleGap()} cols="2" rowGap="xl">
@@ -46,4 +46,4 @@ export function GridExampleRowGap() {
       </Grid>
     </StoryBookExample>
   );
-}
+};

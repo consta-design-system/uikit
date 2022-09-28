@@ -66,22 +66,44 @@ const Attachment = forwardRefWithAs<Props>((props, ref) => {
       />
       <div className={cnAttachment('Content')}>
         {fileName && (
-          <Text className={cnAttachment('FileName')} size="s" view="primary" lineHeight="xs">
+          <Text
+            className={cnAttachment('FileName')}
+            size="s"
+            view="primary"
+            lineHeight="xs"
+          >
             {fileName}
           </Text>
         )}
         {fileDescription && !loading && (
-          <Text className={cnAttachment('FileDescription')} size="xs" lineHeight="xs" view="ghost">
+          <Text
+            className={cnAttachment('FileDescription')}
+            size="xs"
+            lineHeight="xs"
+            view="ghost"
+          >
             {fileDescription}
           </Text>
         )}
         {loadingText && loading && (
-          <Text className={cnAttachment('LoadingText')} size="xs" lineHeight="xs" view="ghost">
-            {loadingProgress ? `${loadingText} ${loadingProgress}%` : `${loadingText}...`}
+          <Text
+            className={cnAttachment('LoadingText')}
+            size="xs"
+            lineHeight="xs"
+            view="ghost"
+          >
+            {loadingProgress
+              ? `${loadingText} ${loadingProgress}%`
+              : `${loadingText}...`}
           </Text>
         )}
         {errorText && (
-          <Text className={cnAttachment('ErrorText')} size="xs" lineHeight="xs" view="alert">
+          <Text
+            className={cnAttachment('ErrorText')}
+            size="xs"
+            lineHeight="xs"
+            view="alert"
+          >
             {errorText}
           </Text>
         )}

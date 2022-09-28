@@ -26,45 +26,47 @@ type Props = Omit<
   'form'
 >;
 
-export const HeaderLogin = React.forwardRef<HTMLButtonElement, Props>((props, ref) => {
-  const {
-    isLogged,
-    onClick,
-    personName,
-    personInfo,
-    personStatus,
-    personAvatarUrl,
-    isMinified,
-    className,
-    authorized,
-    ...otherProps
-  } = props;
+export const HeaderLogin = React.forwardRef<HTMLButtonElement, Props>(
+  (props, ref) => {
+    const {
+      isLogged,
+      onClick,
+      personName,
+      personInfo,
+      personStatus,
+      personAvatarUrl,
+      isMinified,
+      className,
+      authorized,
+      ...otherProps
+    } = props;
 
-  return isLogged || authorized ? (
-    <User
-      {...otherProps}
-      as="button"
-      view="clear"
-      size="m"
-      avatarUrl={personAvatarUrl}
-      status={personStatus}
-      name={personName}
-      info={personInfo}
-      onlyAvatar={isMinified}
-      withArrow={isMinified}
-      onClick={onClick}
-      className={cnHeaderLogin({ authorized: true }, [className])}
-      ref={ref}
-    />
-  ) : (
-    <Button
-      {...otherProps}
-      className={cnHeaderLogin({ authorized: false }, [className])}
-      onClick={onClick}
-      size="s"
-      view="primary"
-      label="Войти"
-      ref={ref}
-    />
-  );
-});
+    return isLogged || authorized ? (
+      <User
+        {...otherProps}
+        as="button"
+        view="clear"
+        size="m"
+        avatarUrl={personAvatarUrl}
+        status={personStatus}
+        name={personName}
+        info={personInfo}
+        onlyAvatar={isMinified}
+        withArrow={isMinified}
+        onClick={onClick}
+        className={cnHeaderLogin({ authorized: true }, [className])}
+        ref={ref}
+      />
+    ) : (
+      <Button
+        {...otherProps}
+        className={cnHeaderLogin({ authorized: false }, [className])}
+        onClick={onClick}
+        size="s"
+        view="primary"
+        label="Войти"
+        ref={ref}
+      />
+    );
+  },
+);

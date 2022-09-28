@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function FieldGroupImage(props: React.SVGProps<SVGSVGElement>) {
+const FieldGroupImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <rect x={20} y={28} width={160} height={22} rx={4} fill="#fff" />
@@ -32,10 +32,18 @@ function FieldGroupImage(props: React.SVGProps<SVGSVGElement>) {
         fillOpacity={0.8}
       />
       <g clipPath="url(#SvgFieldGroupImage__clip1_2425_26122)">
-        <path stroke="#004166" strokeOpacity={0.2} d="M42.5 69.5h115v23h-115z" />
+        <path
+          stroke="#004166"
+          strokeOpacity={0.2}
+          d="M42.5 69.5h115v23h-115z"
+        />
         <path d="M140 79l4.5 5 4.5-5h-9z" fill="#002033" fillOpacity={0.35} />
       </g>
-      <path d="M158 70h18a4 4 0 014 4v14a4 4 0 01-4 4h-18V70z" fill="#004269" fillOpacity={0.05} />
+      <path
+        d="M158 70h18a4 4 0 014 4v14a4 4 0 01-4 4h-18V70z"
+        fill="#004269"
+        fillOpacity={0.05}
+      />
       <path
         d="M164 79l1 5h8l1-5-3 1-2-4-2 4-3-1zM173 85.007h-8v1h8v-1z"
         fill="#00395C"
@@ -60,6 +68,6 @@ function FieldGroupImage(props: React.SVGProps<SVGSVGElement>) {
       </defs>
     </svg>
   );
-}
+};
 
 export default FieldGroupImage;

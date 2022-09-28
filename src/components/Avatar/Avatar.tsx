@@ -78,7 +78,11 @@ export const Avatar = forwardRefWithAs<Props>((props, ref) => {
   return (
     <Tag
       {...otherProps}
-      style={!showImage ? { '--avatar-color': `var(--avatar-color-${colorIndex})` } : {}}
+      style={
+        !showImage
+          ? { '--avatar-color': `var(--avatar-color-${colorIndex})` }
+          : {}
+      }
       className={cnAvatar({ size, form }, [className])}
       ref={ref}
     >

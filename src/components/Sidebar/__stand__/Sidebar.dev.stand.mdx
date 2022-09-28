@@ -1,0 +1,150 @@
+import { MdxMenu } from '@consta/stand';
+import {
+  SidebarExample,
+  SidebarExampleLeft,
+  SidebarExampleRight,
+  SidebarExampleTop,
+  SidebarExampleBottom,
+  SidebarExampleNoOverlay,
+} from './examples/SidebarExample/SidebarExample';
+
+```tsx
+import { Sidebar } from '@consta/uikit/Sidebar';
+```
+
+<MdxMenu>
+
+- [Содержимое](#содержимое)
+- [Расположение](#расположение)
+- [Размер](#размер)
+- [Подложка](#подложка)
+- [Импорт](#импорт)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+</MdxMenu>
+
+## Содержимое
+
+Всё, что вы хотите показать внутри окна, поместите в контейнер `<Sidebar></Sidebar>`.
+
+<SidebarExample />
+
+## Расположение
+
+За расположение компонента отвечает свойство `position`. Варианты: `'right'`, `'bottom'`, `'left'`, `'top'`.
+По умолчанию — `'right'`.
+
+Если укажете `'right'` или `'left'`, компонент растянется на всю высоту экрана.
+
+Если укажете `'top'` или `'bottom'` — на всю его ширину.
+
+<SidebarExampleLeft />
+<SidebarExampleRight />
+<SidebarExampleTop />
+<SidebarExampleBottom />
+
+## Размер
+
+За размер отвечает свойство `size`.
+Принимает значения фиксированного размера: `'s' | 'm' | 'l'`,
+и относительного: `'1/4' | '1/3' | '1/2' | '2/3' | '3/4' | 'full'`.
+
+```tsx
+<Sidebar {...props} size="2/3">
+  ...
+</Sidebar>
+```
+
+## Подложка
+
+За подложку вокруг открытого окна отвечает свойство `hasOverlay`. По умолчанию
+окно открывается с подложкой: она полупрозрачная и закрывает всю страницу.
+
+Чтобы убрать подложку, добавьте `hasOverlay=false`.
+
+<SidebarExampleNoOverlay />
+
+## Импорт
+
+```tsx
+import { Sidebar } from '@consta/uikit/Sidebar';
+```
+
+## Свойства
+
+| Свойство                     | Тип или варианты значения                                  | По умолчанию           |                                                                     |
+| ---------------------------- | ---------------------------------------------------------- | ---------------------- | ------------------------------------------------------------------- |
+| [`position?`](#расположение) | `'right', 'bottom', 'left', 'top'`                         | `right`                | Расположение сайдбара                                               |
+| [`size?`](#размер)           | `'s', 'm', 'l', 'full', '1/2', '1/3', '1/4', '2/3', '3/4'` | `m`                    | Размер сайдбара                                                     |
+| `isOpen?`                    | `boolean`                                                  | -                      | Показывает и убирает всплывающее окно                               |
+| `onClose?`                   | `() => void`                                               | -                      | Действие при закрытии окна                                          |
+| `onOpen?`                    | `() => void`                                               | -                      | Действие при открытии окна                                          |
+| [`hasOverlay?`](#подложка)   | `boolean`                                                  | -                      | Добавляет подложку вокруг окна, поверх основной страницы            |
+| `onClickOutside?`            | `(e: MouseEvent) => void`                                  | -                      | Действие по нажатию за пределами окна                               |
+| `onEsc?`                     | `(e: KeyboardEvent) => void`                               | -                      | Действие при нажатии кнопки **Escape**, когда сайдбар открыт        |
+| `afterClose?`                | `() => void`                                               | -                      | Действие по закрытию сайдбара (срабатывает после анимации закрытия) |
+| `className?`                 | `string`                                                   | -                      | Дополнительный CSS-класс для компонента                             |
+| `children?`                  | `React.ReactNode`                                          | -                      | Дочерние элементы                                                   |
+| `container?`                 | `HTMLDivElement, undefined`                                | `window.document.body` | Родительский контейнер                                              |
+
+## Пример
+
+```tsx
+export const SidebarExample = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
+  return (
+    <div className={cnDocsDecorator('Section')}>
+      <Button
+        size="m"
+        view="primary"
+        label="Открыть Sidebar"
+        width="default"
+        onClick={() => setIsSidebarOpen(true)}
+      />
+      <Sidebar
+        className={cnSidebarExample('Sidebar')}
+        isOpen={isSidebarOpen}
+        onClickOutside={() => setIsSidebarOpen(false)}
+        onEsc={() => setIsSidebarOpen(false)}
+      >
+        <Sidebar.Content className={cnSidebarExample('Content')}>
+          <Text
+            as="p"
+            size="l"
+            view="primary"
+            weight="semibold"
+            className={cnSidebarExample('Title')}
+          >
+            Заголовок сайдбара
+          </Text>
+          <Text
+            as="p"
+            size="m"
+            view="secondary"
+            className={cnSidebarExample('Body')}
+          >
+            // содержимое сайдбара
+          </Text>
+        </Sidebar.Content>
+        <Sidebar.Actions className={cnSidebarExample('Actions')}>
+          <Button
+            size="m"
+            view="clear"
+            label="Понятно"
+            width="default"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+          <Button
+            size="m"
+            view="ghost"
+            label="Закрыть"
+            width="default"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        </Sidebar.Actions>
+      </Sidebar>
+    </div>
+  );
+};
+```

@@ -1,0 +1,32 @@
+<svg
+  width="200"
+  height="120"
+  viewBox="0 0 200 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <rect width="200" height="120" fill="#ECF1F4" />
+  <path
+    d="M0 4C0 1.79086 1.79086 0 4 0H196C198.209 0 200 1.79086 200 4V116C200 118.209 198.209 120 196 120H4C1.79086 120 0 118.209 0 116V4Z"
+    fill="var(--color-bg-secondary)"
+  />
+  <rect x="75" y="24" width="50" height="73" fill="white" />
+  <rect x="83" y="35" width="35" height="23" rx="4" fill="#ECF1F4" />
+  <rect x="83" y="69" width="35" height="4" fill="#002033" />
+  <rect x="83" y="78" width="35" height="8" fill="#002033" fill-opacity="0.3" />
+  <rect opacity="0.75" x="25" y="24" width="50" height="73" fill="#22272B" />
+  <rect x="33" y="35" width="35" height="23" rx="4" fill="#161A1D" />
+  <rect x="33" y="69" width="35" height="4" fill="#FAFAFA" />
+  <rect x="33" y="78" width="35" height="8" fill="white" fill-opacity="0.6" />
+  <rect opacity="0.75" x="125" y="24" width="50" height="73" fill="#002033" />
+  <rect x="133" y="35" width="35" height="23" rx="4" fill="#002D47" />
+  <rect x="133" y="69" width="35" height="4" fill="#EEF8FB" />
+  <rect
+    x="133"
+    y="78"
+    width="35"
+    height="8"
+    fill="#F6FBFD"
+    fill-opacity="0.3"
+  />
+</svg>

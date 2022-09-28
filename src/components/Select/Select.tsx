@@ -11,8 +11,11 @@ import { defaultLabelForEmptyItems } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
 import { SelectItem } from '../SelectComponents/SelectItem/SelectItem';
-import { defaultPropForm, defaultPropSize, defaultPropView } from '../SelectComponents/types';
-
+import {
+  defaultPropForm,
+  defaultPropSize,
+  defaultPropView,
+} from '../SelectComponents/types';
 import {
   DefaultGroup,
   DefaultItem,
@@ -23,10 +26,10 @@ import {
   withDefaultGetters,
 } from './helpers';
 
-function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
+const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
   props: SelectProps<ITEM, GROUP>,
   ref: React.Ref<HTMLDivElement>,
-) {
+) => {
   const defaultDropdownRef = useRef<HTMLDivElement | null>(null);
   const controlRef = useRef<HTMLDivElement | null>(null);
 
@@ -173,7 +176,10 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
             tabIndex={-1}
             onClick={handleToggleDropdown}
           >
-            <IconSelect size="xs" className={cnSelect('DropdownIndicatorIcon')} />
+            <IconSelect
+              size="xs"
+              className={cnSelect('DropdownIndicatorIcon')}
+            />
           </button>
         </span>
       </div>
@@ -192,11 +198,15 @@ function SelectRender<ITEM = DefaultItem, GROUP = DefaultGroup>(
         isLoading={isLoading}
         labelForEmptyItems={labelForEmptyItems}
         hasItems={hasItems}
-        style={typeof style?.zIndex === 'number' ? { zIndex: style.zIndex + 1 } : undefined}
+        style={
+          typeof style?.zIndex === 'number'
+            ? { zIndex: style.zIndex + 1 }
+            : undefined
+        }
       />
     </SelectContainer>
   );
-}
+};
 
 export const Select = forwardRef(SelectRender) as SelectComponent;
 

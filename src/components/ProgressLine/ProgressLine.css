@@ -1,6 +1,5 @@
 .ProgressLine {
   position: relative;
-  overflow-x: hidden;
   width: 100%;
   height: var(--progress-line-height);
   background: var(--color-bg-system);
@@ -29,10 +28,11 @@
       display: grid;
       height: auto;
       background: transparent;
-      grid-template-columns: repeat(
-        var(--progress-line-steps),
-        calc(100% / var(--progress-line-steps))
-      );
+      grid-template-columns:
+        repeat(
+          var(--progress-line-steps),
+          calc(100% / var(--progress-line-steps))
+        );
       grid-gap: var(--space-3xs);
     }
 
@@ -45,6 +45,8 @@
     }
 
     &_indeterminate {
+      overflow-x: hidden;
+
       &::after {
         width: 80%;
         transform-origin: left;

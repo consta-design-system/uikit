@@ -1,11 +1,14 @@
-import React, { createRef } from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { act, renderHook } from '@testing-library/react-hooks';
+import React, { createRef } from 'react';
 
 import { Select, SelectProps } from '../../../Select/Select';
 import { cnSelect } from '../../../SelectComponents/cnSelect';
 import { cnSelectItem } from '../../../SelectComponents/SelectItem/SelectItem';
-import { eventInterceptorMap, EventInterceptorProvider } from '../../EventInterceptor';
+import {
+  eventInterceptorMap,
+  EventInterceptorProvider,
+} from '../../EventInterceptor';
 import { useSelectEventsHandler } from '../useSelectEventsHandler';
 
 const animationDuration = 200;
@@ -17,9 +20,9 @@ const items = [
   { label: 'Americium', id: 3 },
 ];
 
-const TestComponent: React.FC<Omit<Parameters<typeof EventInterceptorProvider>[0], 'children'>> = (
-  eventInterceptorArgs,
-) => {
+const TestComponent: React.FC<
+  Omit<Parameters<typeof EventInterceptorProvider>[0], 'children'>
+> = (eventInterceptorArgs) => {
   const [value, setValue] = React.useState<typeof items[number] | null>(null);
   return (
     <EventInterceptorProvider {...eventInterceptorArgs}>
@@ -34,7 +37,10 @@ const TestComponent: React.FC<Omit<Parameters<typeof EventInterceptorProvider>[0
 };
 
 const renderComponent = (
-  eventInterceptorArgs: Omit<Parameters<typeof EventInterceptorProvider>[0], 'children'>,
+  eventInterceptorArgs: Omit<
+    Parameters<typeof EventInterceptorProvider>[0],
+    'children'
+  >,
 ) => {
   return render(<TestComponent {...eventInterceptorArgs} />);
 };
@@ -44,7 +50,9 @@ function getSelectRender() {
 }
 
 function getInput() {
-  return getSelectRender().querySelector(`.${cnSelect('FakeField')}`) as HTMLElement;
+  return getSelectRender().querySelector(
+    `.${cnSelect('FakeField')}`,
+  ) as HTMLElement;
 }
 
 function getItemsList() {

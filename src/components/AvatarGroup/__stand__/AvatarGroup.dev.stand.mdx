@@ -1,0 +1,187 @@
+import { MdxMenu } from '@consta/stand';
+
+import { AvatarGroupExampleCount } from './examples/AvatarGroupExampleCount/AvatarGroupExampleCount';
+import { AvatarGroupExampleSize } from './examples/AvatarGroupExampleSize/AvatarGroupExampleSize';
+import { AvatarGroupExampleForm } from './examples/AvatarGroupExampleForm/AvatarGroupExampleForm';
+
+```tsx
+import { AvatarGroup } from '@consta/uikit/AvatarGroup';
+```
+
+<MdxMenu>
+
+- [Аватары](#аватары)
+- [Размер](#размер)
+- [Форма](#форма)
+- [Импорт](#импорт)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+</MdxMenu>
+
+## Аватары
+
+Список аватарок можно передать в поле `items` в объекте типа [AvatarGroupDefaultItem](#свойства). Что можно указать:
+
+- имя пользователя — в поле `name` или с помощью функции `getItemName`,
+- ссылку на изображение — в поле `url` или с помощью функции `getItemUrl`.
+
+Если указаны и имя, и ссылка на изображение, сгенерируется аватарка с изображением.
+
+Количество отображаемых аватаров можно указать в свойстве `visibleCount`,
+по умолчанию оно равно `4`.
+
+```ts
+export const avatarGroupItems: AvatarGroupDefaultItem[] = [
+  {
+    name: 'Вадим Матвеев',
+    url: '',
+  },
+  {
+    name: 'Лидия Индриксон',
+    url: '',
+  },
+  {
+    name: 'Геннадий Морозов',
+    url: '',
+  },
+  {
+    name: 'Аркадий Лушко',
+    url: '',
+  },
+  {
+    name: 'Георгий Калинин',
+    url: '',
+  },
+  {
+    name: 'Виталий Алтуфьев',
+    url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
+  },
+  {
+    name: 'Вадим Матвеев',
+    url: '',
+  },
+  {
+    name: 'Лидия Индриксон',
+    url: '',
+  },
+  {
+    name: 'Геннадий Морозов',
+    url: '',
+  },
+  {
+    name: 'Аркадий Лушко',
+    url: '',
+  },
+  {
+    name: 'Георгий Калинин',
+    url: '',
+  },
+  {
+    name: 'Виталий Алтуфьев',
+    url: '',
+  },
+];
+
+<AvatarGroup items={avatarGroupItems}  />
+<AvatarGroup items={avatarGroupItems} visibleCount={6} />
+<AvatarGroup items={avatarGroupItems.slice(0, 3)} />
+```
+
+<AvatarGroupExampleCount />
+
+## Размер
+
+За размер отвечает свойство `size`.
+
+```ts
+<AvatarGroup size="xs" items={avatarGroupItems} />
+<AvatarGroup size="s" items={avatarGroupItems} />
+<AvatarGroup size="m" items={avatarGroupItems} />
+<AvatarGroup size="l" items={avatarGroupItems} />
+```
+
+<AvatarGroupExampleSize />
+
+## Форма
+
+За форму отвечает свойство `form`. По умолчанию аватар **круглый**.
+
+```ts
+<AvatarGroup form="round" items={avatarGroupItems} />
+<AvatarGroup form="default" items={avatarGroupItems} />
+<AvatarGroup form="brick" items={avatarGroupItems} />
+```
+
+<AvatarGroupExampleForm />
+
+## Импорт
+
+```tsx
+import { AvatarGroup } from '@consta/uikit/AvatarGroup';
+```
+
+## Свойства
+
+```tsx
+export const avatarGroupPropSize = ['m', 's', 'xs', 'l'] as const;
+export type AvatarGroupPropSize = typeof avatarGroupPropSize[number];
+export const avatarGroupPropSizeDefault: AvatarGroupPropSize =
+  avatarGroupPropSize[0];
+
+export const avatarGroupPropForm = ['round', 'brick', 'default'] as const;
+export type AvatarGroupPropForm = typeof avatarGroupPropForm[number];
+export const avatarGroupPropFormDefault: AvatarGroupPropForm =
+  avatarGroupPropForm[0];
+
+export type AvatarGroupDefaultItem = {
+  url?: string;
+  name?: string;
+};
+```
+
+| Свойство                    | Тип                                                    | По умолчанию | Описание                                                         |
+| --------------------------- | ------------------------------------------------------ | ------------ | ---------------------------------------------------------------- |
+| [`items?`](#аватары)        | `ITEM[]`                                               | -            | Список элементов                                                 |
+| [`visibleCount?`](#аватары) | `number`                                               | `4`          | Количество отображаемых элементов                                |
+| [`size?`](#размер)          | `'xs', 's' , 'm', 'l'`                                 | `'m'`        | Размер аватара                                                   |
+| [`form?`](#форма)           | `'default' , 'round', 'brick'`                         | `'round'`    | Форма аватара                                                    |
+| `getItemUrl?`               | `(item: ITEM) => string`<code>&#124;</code>`undefined` | -            | Результат функции используется в качестве изображения            |
+| `getItemName?`              | `(item: ITEM) => string`<code>&#124;</code>`undefined` | -            | Результат функции используется в качестве имени                  |
+| `className`                 | `string`                                               | -            | Дополнительный CSS-класс                                         |
+| `as`                        | `React.ElementType`                                    | -            | HTML-тег, в виде которого этот компонент будет представлен в DOM |
+| `ref`                       | `React.Ref<HTMLDivElement>`                            | -            | Ссылка на корневой DOM-элемент этого компонента                  |
+
+## Пример
+
+```ts
+// src/App.ts
+import React from 'react';
+import { AvatarGroup } from '@consta/uikit/AvatarGroup';
+
+const App = () => {
+  const avatarGroupItems: AvatarGroupDefaultItem[] = [
+    {
+      label: 'Вадим Матвеев',
+      image: '',
+    },
+    {
+      label: 'Лидия Индриксон',
+      image: '',
+    },
+    {
+      label: 'Геннадий Морозов',
+      image: '',
+    },
+  ];
+
+  return (
+    <AvatarGroup
+      items={avatarGroupItems}
+      size="m"
+      getItemName={(item) => item.label}
+      getItemUrl={(item) => item.image}
+    />
+  );
+};
+```

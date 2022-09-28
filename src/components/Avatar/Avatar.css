@@ -22,7 +22,8 @@
   width: var(--avatar-size);
   height: var(--avatar-size);
   color: #fff;
-  background: linear-gradient(rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0)),
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0)),
     linear-gradient(var(--avatar-color), var(--avatar-color));
   font-size: var(--avatar-font-size);
   font-weight: var(--font-weight-text-semibold);

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function NoImage(props: React.SVGProps<SVGSVGElement>) {
+const NoImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <path fill="#ECF1F4" d="M0 0h200v120H0z" />
@@ -17,6 +17,6 @@ function NoImage(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default NoImage;

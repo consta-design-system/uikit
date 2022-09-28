@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function FeedbackFormImage(props: React.SVGProps<SVGSVGElement>) {
+const FeedbackFormImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <path
@@ -17,9 +17,13 @@ function FeedbackFormImage(props: React.SVGProps<SVGSVGElement>) {
         fill="#002033"
         fillOpacity={0.3}
       />
-      <path fill="#002033" fillOpacity={0.35} d="M52 42h60.714l-.117 10H51.883z" />
+      <path
+        fill="#002033"
+        fillOpacity={0.35}
+        d="M52 42h60.714l-.117 10H51.883z"
+      />
     </svg>
   );
-}
+};
 
 export default FeedbackFormImage;

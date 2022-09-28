@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import * as React from 'react';
 
 import { cnSwitch, Switch } from '../Switch';
 
@@ -17,7 +17,14 @@ const renderComponent = ({
   onChange?: SwitchProps['onChange'];
   checked?: SwitchProps['checked'];
 }) => {
-  return render(<Switch data-testid={testId} onChange={onChange} checked={checked} {...props} />);
+  return render(
+    <Switch
+      data-testid={testId}
+      onChange={onChange}
+      checked={checked}
+      {...props}
+    />,
+  );
 };
 
 function getRender() {
@@ -63,7 +70,9 @@ describe('Компонент Switch', () => {
         fireEvent.click(element);
         expect(handleChange).toHaveBeenCalled();
         expect(handleChange).toHaveBeenCalledTimes(1);
-        expect(handleChange).toHaveBeenCalledWith(expect.objectContaining({ checked: true }));
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({ checked: true }),
+        );
       });
     });
   });

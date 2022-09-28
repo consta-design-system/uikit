@@ -1,6 +1,6 @@
-import React, { HTMLAttributes } from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
+import React, { HTMLAttributes } from 'react';
 
 import { useKeys } from '../useKeys';
 

@@ -1,9 +1,12 @@
 import * as React from 'react';
 
-function TooltipImage(props: React.SVGProps<SVGSVGElement>) {
+const TooltipImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
-      <path d="M0 4a4 4 0 014-4h192a4 4 0 014 4v112a4 4 0 01-4 4H4a4 4 0 01-4-4V4z" fill="#fff" />
+      <path
+        d="M0 4a4 4 0 014-4h192a4 4 0 014 4v112a4 4 0 01-4 4H4a4 4 0 01-4-4V4z"
+        fill="#fff"
+      />
       <path
         opacity={0.9}
         fillRule="evenodd"
@@ -23,9 +26,13 @@ function TooltipImage(props: React.SVGProps<SVGSVGElement>) {
         d="M1 81h37a2 2 0 002-2V65a2 2 0 00-2-2H1v18zM156 79a2 2 0 002 2h41V63h-41a2 2 0 00-2 2v14z"
         fill="#DEE4E8"
       />
-      <path d="M196 119a3 3 0 003-3V93H1v23a3 3 0 003 3h192z" fill="#004269" fillOpacity={0.07} />
+      <path
+        d="M196 119a3 3 0 003-3V93H1v23a3 3 0 003 3h192z"
+        fill="#004269"
+        fillOpacity={0.07}
+      />
     </svg>
   );
-}
+};
 
 export default TooltipImage;

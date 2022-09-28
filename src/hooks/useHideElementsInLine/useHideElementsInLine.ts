@@ -7,7 +7,7 @@ import { useResizeObserved } from '../useResizeObserved/useResizeObserved';
 export const useHideElementsInLine = <
   ITEM,
   ELEMENT extends HTMLElement = HTMLDivElement,
-  WRAPPER_ELEMENT extends HTMLElement = HTMLDivElement
+  WRAPPER_ELEMENT extends HTMLElement = HTMLDivElement,
 >(
   items: ITEM[],
   busy = 0,

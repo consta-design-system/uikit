@@ -1,13 +1,19 @@
+import {
+  act,
+  fireEvent,
+  render,
+  RenderResult,
+  screen,
+} from '@testing-library/react';
 import * as React from 'react';
-import { act, fireEvent, render, RenderResult, screen } from '@testing-library/react';
 
-import { groups, items } from '../__mocks__/data.mock';
 import { cn } from '../../../utils/bem';
 import { cnSelect } from '../../SelectComponents/cnSelect';
 import { cnSelectGroupLabel } from '../../SelectComponents/SelectGroupLabel/SelectGroupLabel';
 import { cnSelectItem } from '../../SelectComponents/SelectItem/SelectItem';
 import { cnSelectLoader } from '../../SelectComponents/SelectLoader/SelectLoader';
 import { propForm } from '../../SelectComponents/types';
+import { groups, items } from '../__mocks__/data.mock';
 import { defaultGetItemLabel, Select, SelectProps } from '../Select';
 
 const animationDuration = 200;
@@ -50,13 +56,17 @@ function getItemsList() {
   return screen.getByRole('listbox');
 }
 function getControlValue() {
-  return getRender().querySelector(`.${cnSelect('ControlValue')}`) as HTMLDivElement;
+  return getRender().querySelector(
+    `.${cnSelect('ControlValue')}`,
+  ) as HTMLDivElement;
 }
 function getRenderValue() {
   return getRender().querySelector(`.${cnRenderValue()}`) as HTMLDivElement;
 }
 function getIndicatorsDropdown() {
-  return getRender().querySelector(`.${cnSelect('IndicatorsDropdown')}`) as HTMLElement;
+  return getRender().querySelector(
+    `.${cnSelect('IndicatorsDropdown')}`,
+  ) as HTMLElement;
 }
 function indicatorsDropdownClick() {
   fireEvent.click(getIndicatorsDropdown());
@@ -258,7 +268,9 @@ describe('Компонент Select', () => {
     renderComponent({
       ...defaultProps,
       value,
-      renderValue: ({ item }) => <div className={cnRenderValue()}>{defaultGetItemLabel(item)}</div>,
+      renderValue: ({ item }) => (
+        <div className={cnRenderValue()}>{defaultGetItemLabel(item)}</div>
+      ),
     });
 
     expect(getRenderValue().textContent).toEqual(defaultGetItemLabel(value));
@@ -342,7 +354,9 @@ describe('Компонент Select', () => {
     propForm.forEach((form) => {
       it(`присваивает класс для form = ${form}`, () => {
         renderComponent({ ...defaultProps, form });
-        expect(getContainer()).toHaveClass(cnSelect('SelectContainer', { form }));
+        expect(getContainer()).toHaveClass(
+          cnSelect('SelectContainer', { form }),
+        );
       });
     });
   });

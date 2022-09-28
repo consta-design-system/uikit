@@ -6,7 +6,7 @@ import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExamp
 import { Text } from '../../../../Text/Text';
 import { FileField } from '../../../FileField';
 
-export function FileFieldExampleWithoutRenderProp() {
+export const FileFieldExampleWithoutRenderProp = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <FileField id="FileFieldExampleWithoutRenderProp">
@@ -14,9 +14,9 @@ export function FileFieldExampleWithoutRenderProp() {
       </FileField>
     </StoryBookExample>
   );
-}
+};
 
-export function FileFieldExampleWithoutRenderPropIcon() {
+export const FileFieldExampleWithoutRenderPropIcon = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <FileField id="FileFieldExampleWithoutRenderPropIcon">
@@ -24,4 +24,4 @@ export function FileFieldExampleWithoutRenderPropIcon() {
       </FileField>
     </StoryBookExample>
   );
-}
+};

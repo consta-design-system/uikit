@@ -1,0 +1,46 @@
+import { UseDebounceExample } from './examples/UseDebounceExample/UseDebounceExample';
+
+```tsx
+import { useDebounce } from '@consta/uikit/useDebounce';
+```
+
+Этот хук нужен, чтобы задать время, в течение которого функция не будет срабатывать, если её вызвать несколько раз подряд. Например, чтобы не вызывать функцию на каждую букву, когда пользователь вводит слово в строку поиска. Сработает только последний вызов, когда пользователь напишет всё, что хотел, и сделает паузу.
+
+```tsx
+type UseDebounce = <T extends (...args: any) => void>(
+  fn: T,
+  time: number,
+) => (...args: Parameters<T>) => void;
+```
+
+## Свойства
+
+| Параметры | Тип        | По умолчанию | Описание                                                                      |
+| --------- | ---------- | ------------ | ----------------------------------------------------------------------------- |
+| `fn`      | `Function` | -            | Функция, срабатывание которой нужно ограничить                                |
+| `time?`   | `number`   | 0            | Время в миллисекундах, в течение которого вызовы функции не будут срабатывать |
+
+## Пример
+
+```tsx
+export const UseDebounceExample = () => {
+  const [value, setValue] = useState<string | null>(null);
+  const [searchValue, setSearchValue] = useState<string | null>(null);
+  const debounceSetSearchValue = useDebounce(setSearchValue, 300);
+
+  useEffect(() => debounceSetSearchValue(value), [value]);
+
+  return (
+      <TextField
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        placeholder="Поиск"
+      />
+      <Text>
+        Покажем результаты поиска по этому фрагменту: <b>{searchValue}</b>
+      </Text>
+  );
+};
+```
+
+<UseDebounceExample />

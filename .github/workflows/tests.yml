@@ -1,0 +1,39 @@
+name: Tests
+on:
+  push:
+    branches: master
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: rokroskar/workflow-run-cleanup-action@v0.2.2
+        if: "!startsWith(github.ref, 'refs/tags/') && github.ref != 'refs/heads/master'"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+
+      - name: Установка yarn
+        id: yarn-setup
+        run: |
+          yarn policies set-version 1.22.18
+          echo "::set-output name=cache_dir::$(yarn cache dir)"
+      - name: Настройка кэширования yarn
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.yarn-setup.outputs.cache_dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Установка зависимостей
+        run: yarn --frozen-lockfile
+      - name: Тесты
+        run: yarn test

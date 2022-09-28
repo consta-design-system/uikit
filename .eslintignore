@@ -3,5 +3,8 @@ node_modules/*
 build/*
 dist/*
 builder/*
+scripts/*
 build.config.js
-
+repos/*
+.husky/*
+.github/*

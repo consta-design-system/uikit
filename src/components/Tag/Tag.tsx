@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { IconComponent, IconProps } from '../../icons/Icon/Icon';
@@ -7,7 +7,13 @@ import { TagBase } from '../TagBase/TagBase';
 
 type TagBaseProps = React.ComponentProps<typeof TagBase>;
 
-export const tagPropMode = ['button', 'check', 'cancel', 'link', 'info'] as const;
+export const tagPropMode = [
+  'button',
+  'check',
+  'cancel',
+  'link',
+  'info',
+] as const;
 export const tagPropModeDefault = tagPropMode[0];
 type TagPropMode = typeof tagPropMode[number];
 
@@ -37,7 +43,13 @@ type PropsWithModeLink = CommonProps & {
 
 type PropsWithModeCheck = CommonProps & {
   mode: 'check';
-  onChange: ({ e, checked }: { e?: React.MouseEvent; checked: boolean }) => void;
+  onChange: ({
+    e,
+    checked,
+  }: {
+    e?: React.MouseEvent;
+    checked: boolean;
+  }) => void;
   checked: boolean;
   onClick?: never;
   onCancel?: never;
@@ -60,27 +72,28 @@ type PropsWithModeInfo = CommonProps & {
 };
 
 type Props<ROLE extends TagPropMode = 'button'> = ROLE extends 'button'
-  ? PropsWithModeButton & Omit<JSX.IntrinsicElements['button'], keyof PropsWithModeButton>
+  ? PropsWithModeButton &
+      Omit<JSX.IntrinsicElements['button'], keyof PropsWithModeButton>
   : {} & ROLE extends 'check'
-  ? PropsWithModeCheck & Omit<JSX.IntrinsicElements['button'], keyof PropsWithModeCheck>
+  ? PropsWithModeCheck &
+      Omit<JSX.IntrinsicElements['button'], keyof PropsWithModeCheck>
   : {} & ROLE extends 'cancel'
-  ? PropsWithModeCancel & Omit<JSX.IntrinsicElements['span'], keyof PropsWithModeCancel>
+  ? PropsWithModeCancel &
+      Omit<JSX.IntrinsicElements['span'], keyof PropsWithModeCancel>
   : {} & ROLE extends 'link'
-  ? PropsWithModeLink & Omit<JSX.IntrinsicElements['a'], keyof PropsWithModeLink>
+  ? PropsWithModeLink &
+      Omit<JSX.IntrinsicElements['a'], keyof PropsWithModeLink>
   : {} & ROLE extends 'info'
-  ? PropsWithModeInfo & Omit<JSX.IntrinsicElements['span'], keyof PropsWithModeInfo>
+  ? PropsWithModeInfo &
+      Omit<JSX.IntrinsicElements['span'], keyof PropsWithModeInfo>
   : {};
 
-type ForwardRefRender<ROLE extends TagPropMode> = (
+type TagRender = <ROLE extends TagPropMode>(
   props: Props<ROLE>,
   ref: React.Ref<HTMLElement>,
 ) => React.ReactElement | null;
 
-function forwardRef<ROLE extends TagPropMode>(render: ForwardRefRender<ROLE>) {
-  return React.forwardRef<HTMLElement, Props<ROLE>>(render);
-}
-
-type Component = <ROLE extends TagPropMode>(
+type TagComponent = <ROLE extends TagPropMode>(
   props: Props<ROLE> & React.RefAttributes<HTMLElement>,
 ) => React.ReactElement | null;
 
@@ -138,7 +151,7 @@ export function getParams(
 
 export const COMPONENT_NAME = 'Tag' as const;
 
-export const Tag: Component = forwardRef((props, ref) => {
+const TagRenter: TagRender = (props, ref) => {
   const tagRef = useRef<HTMLDivElement>(null);
   const {
     mode = tagPropModeDefault,
@@ -150,5 +163,9 @@ export const Tag: Component = forwardRef((props, ref) => {
   } = usePropsHandler(COMPONENT_NAME, props, tagRef);
   const params = getParams(mode, checked, onClick, onChange, onCancel);
 
-  return <TagBase {...otherProps} {...params} ref={useForkRef([ref, tagRef])} />;
-});
+  return (
+    <TagBase {...otherProps} {...params} ref={useForkRef([ref, tagRef])} />
+  );
+};
+
+export const Tag = forwardRef(TagRenter) as TagComponent;

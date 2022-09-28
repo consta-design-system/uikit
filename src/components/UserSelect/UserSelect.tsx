@@ -17,10 +17,11 @@ import {
 } from '../SelectComponents/helpers';
 import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
 import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
-import { defaultPropForm, defaultPropSize, defaultPropView } from '../SelectComponents/types';
-
-import { UserSelectItem } from './UserSelectItem/UserSelectItem';
-import { UserSelectValue } from './UserSelectValue/UserSelectValue';
+import {
+  defaultPropForm,
+  defaultPropSize,
+  defaultPropView,
+} from '../SelectComponents/types';
 import {
   DefaultGroup,
   DefaultItem,
@@ -33,14 +34,19 @@ import {
   UserSelectProps,
   withDefaultGetters,
 } from './helpers';
+import { UserSelectItem } from './UserSelectItem/UserSelectItem';
+import { UserSelectValue } from './UserSelectValue/UserSelectValue';
 
 export const COMPONENT_NAME = 'UserSelect' as const;
 
-function UserSelectRender<
+const UserSelectRender = <
   ITEM = DefaultItem,
   GROUP = DefaultGroup,
-  MULTIPLE extends boolean = false
->(props: UserSelectProps<ITEM, GROUP, MULTIPLE>, ref: React.Ref<HTMLDivElement>) {
+  MULTIPLE extends boolean = false,
+>(
+  props: UserSelectProps<ITEM, GROUP, MULTIPLE>,
+  ref: React.Ref<HTMLDivElement>,
+) => {
   const defaultDropdownRef = useRef<HTMLDivElement | null>(null);
   const controlInnerRef = useRef<HTMLDivElement>(null);
   const helperInputFakeElement = useRef<HTMLDivElement>(null);
@@ -154,7 +160,10 @@ function UserSelectRender<
     );
   };
 
-  const renderValueDefault: PropRenderValue<ITEM> = ({ item, handleRemove }) => {
+  const renderValueDefault: PropRenderValue<ITEM> = ({
+    item,
+    handleRemove,
+  }) => {
     return (
       <UserSelectValue
         label={getItemLabel(item)}
@@ -174,7 +183,9 @@ function UserSelectRender<
   const inputRefForRender = useForkRef([inputRef, inputRefProp]);
 
   const renderControlValue = () => {
-    const width = multiple ? getInputWidth(controlInnerRef, helperInputFakeElement) : undefined;
+    const width = multiple
+      ? getInputWidth(controlInnerRef, helperInputFakeElement)
+      : undefined;
     return (
       <>
         {isMultipleParams(props) &&
@@ -182,12 +193,16 @@ function UserSelectRender<
           props.value.map((item) =>
             renderValue({ item, handleRemove: getHandleRemoveValue(item) }),
           )}
-        {isNotMultipleParams(props) && props.value && renderValue({ item: props.value })}
-        {(!value || (Array.isArray(value) && value.length === 0)) && !searchValue && placeholder && (
-          <span className={cnSelect('Placeholder')} title="placeholder">
-            {placeholder}
-          </span>
-        )}
+        {isNotMultipleParams(props) &&
+          props.value &&
+          renderValue({ item: props.value })}
+        {(!value || (Array.isArray(value) && value.length === 0)) &&
+          !searchValue &&
+          placeholder && (
+            <span className={cnSelect('Placeholder')} title="placeholder">
+              {placeholder}
+            </span>
+          )}
         <input
           {...getKeyProps()}
           type="text"
@@ -265,7 +280,10 @@ function UserSelectRender<
             tabIndex={-1}
             onClick={handleToggleDropdown}
           >
-            <IconSelect size="xs" className={cnSelect('DropdownIndicatorIcon')} />
+            <IconSelect
+              size="xs"
+              className={cnSelect('DropdownIndicatorIcon')}
+            />
           </button>
         </span>
       </div>
@@ -286,14 +304,21 @@ function UserSelectRender<
         notFound={notFound}
         hasItems={hasItems}
         labelForEmptyItems={labelForEmptyItems}
-        style={typeof style?.zIndex === 'number' ? { zIndex: style.zIndex + 1 } : undefined}
+        style={
+          typeof style?.zIndex === 'number'
+            ? { zIndex: style.zIndex + 1 }
+            : undefined
+        }
       />
-      <div className={cnSelect('HelperInputFakeElement')} ref={helperInputFakeElement}>
+      <div
+        className={cnSelect('HelperInputFakeElement')}
+        ref={helperInputFakeElement}
+      >
         {searchValue}
       </div>
     </SelectContainer>
   );
-}
+};
 
 export const UserSelect = forwardRef(UserSelectRender) as UserSelectComponent;
 

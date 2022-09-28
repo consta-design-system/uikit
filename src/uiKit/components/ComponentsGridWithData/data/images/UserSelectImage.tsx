@@ -1,10 +1,21 @@
 import * as React from 'react';
 
-function UserSelectImage(props: React.SVGProps<SVGSVGElement>) {
+const UserSelectImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
-      <path d="M0 4a4 4 0 014-4h192a4 4 0 014 4v112a4 4 0 01-4 4H4a4 4 0 01-4-4V4z" fill="#fff" />
-      <rect x={46} y={13} width={108} height={20} rx={4} fill="#002033" fillOpacity={0.08} />
+      <path
+        d="M0 4a4 4 0 014-4h192a4 4 0 014 4v112a4 4 0 01-4 4H4a4 4 0 01-4-4V4z"
+        fill="#fff"
+      />
+      <rect
+        x={46}
+        y={13}
+        width={108}
+        height={20}
+        rx={4}
+        fill="#002033"
+        fillOpacity={0.08}
+      />
       <path d="M137 21l4.5 5 4.5-5h-9z" fill="#002033" fillOpacity={0.35} />
       <rect x={46} y={33} width={108} height={72} rx={4} fill="#fff" />
       <path
@@ -23,6 +34,6 @@ function UserSelectImage(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default UserSelectImage;

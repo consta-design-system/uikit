@@ -24,7 +24,10 @@
       --checkbox-checked-background: var(--color-control-bg-primary);
       --checkbox-checked-check: var(--color-control-typo-primary);
       --checkbox-checked-border-hover: var(--color-control-bg-primary-hover);
-      --checkbox-checked-background-hover: var(--color-control-bg-primary-hover);
+      --checkbox-checked-background-hover:
+        var(
+          --color-control-bg-primary-hover
+        );
     }
 
     &_ghost {
@@ -104,7 +107,9 @@
     margin: 0;
     padding: 0;
     background-color: transparent;
-    border: var(--control-border-width) solid var(--color-control-bg-border-default);
+    border:
+      var(--control-border-width) solid
+      var(--color-control-bg-border-default);
     border-radius: var(--control-radius);
     cursor: pointer;
     transition: border-color 0.15s, background-color 0.15s;

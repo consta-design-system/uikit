@@ -1,0 +1,73 @@
+<svg
+  width="200"
+  height="120"
+  viewBox="0 0 200 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M0 4C0 1.79086 1.79086 0 4 0H196C198.209 0 200 1.79086 200 4V116C200 118.209 198.209 120 196 120H4C1.79086 120 0 118.209 0 116V4Z"
+    fill="var(--color-bg-secondary)"
+  />
+  <rect
+    x="104"
+    y="24"
+    width="57"
+    height="30"
+    rx="4"
+    fill="var(--color-bg-default)"
+  />
+  <rect
+    x="35"
+    y="24"
+    width="57"
+    height="72"
+    rx="4"
+    fill="var(--color-bg-default)"
+  />
+  <rect
+    x="104"
+    y="66"
+    width="57"
+    height="30"
+    rx="4"
+    fill="var(--color-bg-default)"
+  />
+  <circle cx="118" cy="81" r="5" fill="var(--color-bg-system)" />
+  <rect
+    x="127"
+    y="78"
+    width="26"
+    height="6"
+    fill="var(--color-control-typo-placeholder)"
+  />
+  <rect x="44" y="30" width="40" height="6" fill="#002033" fill-opacity="0.3" />
+  <rect x="44" y="45" width="40" height="3" fill="var(--color-bg-ghost)" />
+  <rect x="44" y="63" width="40" height="3" fill="var(--color-bg-ghost)" />
+  <rect x="44" y="54" width="40" height="3" fill="var(--color-bg-ghost)" />
+  <rect x="44" y="72" width="40" height="3" fill="var(--color-bg-ghost)" />
+  <rect
+    x="66"
+    y="83"
+    width="18"
+    height="7"
+    rx="2"
+    fill="var(--color-bg-ghost)"
+  />
+  <rect
+    x="44"
+    y="83"
+    width="18"
+    height="7"
+    rx="2"
+    fill="var(--color-bg-ghost)"
+  />
+  <path
+    d="M156 46C152.416 46 149.639 34.8295 145.398 34.977C140.81 35.1366 138.735 42.7189 135.504 42.7189C131.011 42.7189 128.335 30.0186 124.095 30C119.854 29.9814 118.491 45.4839 114.705 45.4839C112.837 45.4839 111.12 40.6544 109 40.6544"
+    stroke="var(--color-bg-system)"
+  />
+  <path
+    d="M109 47C112.584 47 115.361 35.8295 119.602 35.977C124.19 36.1366 126.265 43.7189 129.496 43.7189C133.989 43.7189 136.665 31.0186 140.905 31C145.146 30.9814 146.509 46.4839 150.295 46.4839C152.163 46.4839 153.88 41.6544 156 41.6544"
+    stroke="var(--color-control-typo-placeholder)"
+  />
+</svg>

@@ -30,10 +30,10 @@ const columns: TableColumn<typeof rows[number]>[] = [
   },
 ];
 
-export function TableExampleBasic() {
+export const TableExampleBasic = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Table columns={columns} rows={rows} />
     </StoryBookExample>
   );
-}
+};

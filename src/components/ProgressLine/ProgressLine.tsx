@@ -4,9 +4,8 @@ import React, { forwardRef } from 'react';
 
 import { usePrevious } from '../../hooks/usePrevious/usePrevious';
 import { cn } from '../../utils/bem';
-import { isNotNil, isNumber } from '../../utils/type-guards';
+import { isNotNil } from '../../utils/type-guards';
 import { Text } from '../Text/Text';
-
 import { getLineDelay, withDefaultGetters } from './helpers';
 import { ProgressLineComponent, ProgressLineProps } from './types';
 
@@ -26,12 +25,22 @@ const getProgress = (progress: number) => {
   return progressNormal / 100;
 };
 
-function ProgressLineRender(props: ProgressLineProps, ref: React.Ref<HTMLDivElement>) {
-  const { size = 'm', value, style, steps, getItemLabel, ...otherProps } = withDefaultGetters(
-    props,
-  );
+const ProgressLineRender = (
+  props: ProgressLineProps,
+  ref: React.Ref<HTMLDivElement>,
+) => {
+  const {
+    size = 'm',
+    value,
+    style,
+    steps,
+    getItemLabel,
+    ...otherProps
+  } = withDefaultGetters(props);
 
-  const activeIndex = typeof value === 'number' ? Math.min(value, steps?.length ?? 0) : -1;
+  const activeIndex = isNotNil(value)
+    ? Math.min(value, steps?.length ?? 0)
+    : -1;
 
   const prevValue = usePrevious(activeIndex);
 
@@ -45,7 +54,7 @@ function ProgressLineRender(props: ProgressLineProps, ref: React.Ref<HTMLDivElem
       }}
       className={cnProgressLine({
         size,
-        mode: isNumber(value) ? 'determinate' : 'indeterminate',
+        mode: isNotNil(value) ? 'determinate' : 'indeterminate',
       })}
     />
   ) : (
@@ -66,10 +75,15 @@ function ProgressLineRender(props: ProgressLineProps, ref: React.Ref<HTMLDivElem
         const active = activeIndex >= index;
         const delay = getLineDelay(activeIndex, prevValue ?? -1, index);
         return (
-          <div key={cnProgressLine('Step', { index })} className={cnProgressLine('Step')}>
+          <div
+            key={cnProgressLine('Step', { index })}
+            className={cnProgressLine('Step')}
+          >
             <div
               style={{
-                ['--progress-line-delay' as string]: `${Math.max(0, delay) * 0.3}s`,
+                ['--progress-line-delay' as string]: `${
+                  Math.max(0, delay) * 0.3
+                }s`,
               }}
               className={cnProgressLine('Line', {
                 active,
@@ -91,6 +105,8 @@ function ProgressLineRender(props: ProgressLineProps, ref: React.Ref<HTMLDivElem
       })}
     </div>
   );
-}
+};
 
-export const ProgressLine = forwardRef(ProgressLineRender) as ProgressLineComponent;
+export const ProgressLine = forwardRef(
+  ProgressLineRender,
+) as ProgressLineComponent;

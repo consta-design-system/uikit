@@ -1,9 +1,12 @@
-import React from 'react';
 import { render } from '@testing-library/react';
+import React from 'react';
 
 import { cnLoader } from '../../Loader/Loader';
 import { cnSelectCreateButton } from '../SelectCreateButton/SelectCreateButton';
-import { SelectDropdown, selectDropdownform } from '../SelectDropdown/SelectDropdown';
+import {
+  SelectDropdown,
+  selectDropdownform,
+} from '../SelectDropdown/SelectDropdown';
 
 type Props = React.ComponentProps<typeof SelectDropdown>;
 
@@ -42,7 +45,10 @@ describe('Компонент SelectDropdown', () => {
   describe('проверка props', () => {
     it('проверка labelForEmptyItems', () => {
       const labelForEmptyItems = 'test labelForEmptyItems';
-      const { baseElement } = renderComponent({ labelForEmptyItems, hasItems: false });
+      const { baseElement } = renderComponent({
+        labelForEmptyItems,
+        hasItems: false,
+      });
 
       expect(baseElement).toHaveTextContent(labelForEmptyItems);
     });

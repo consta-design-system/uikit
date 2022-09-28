@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import * as React from 'react';
 
 import { Attachment, cnAttachment } from '../Attachment';
 
@@ -115,7 +115,9 @@ describe('Компонент Attachment', () => {
 
         const loadingTextElement = getLoadingText() as HTMLDivElement;
 
-        expect(loadingTextElement.textContent).toEqual(`${loadingText} ${loadingProgress}%`);
+        expect(loadingTextElement.textContent).toEqual(
+          `${loadingText} ${loadingProgress}%`,
+        );
       });
       it(`loadingText не отображается если loading=false`, () => {
         const loadingText = 'loadingText';

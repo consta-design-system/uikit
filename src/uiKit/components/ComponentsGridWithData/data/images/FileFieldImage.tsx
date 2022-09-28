@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function FileFieldImage(props: React.SVGProps<SVGSVGElement>) {
+const FileFieldImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <g clipPath="url(#SvgFileFieldImage__clip0_1889_15888)">
@@ -14,7 +14,15 @@ function FileFieldImage(props: React.SVGProps<SVGSVGElement>) {
           stroke="#004166"
           strokeOpacity={0.2}
         />
-        <rect x={44.5} y={56.5} width={109} height={22} rx={1.5} fill="#0078D2" stroke="#0078D2" />
+        <rect
+          x={44.5}
+          y={56.5}
+          width={109}
+          height={22}
+          rx={1.5}
+          fill="#0078D2"
+          stroke="#0078D2"
+        />
         <path
           fillRule="evenodd"
           clipRule="evenodd"
@@ -36,6 +44,6 @@ function FileFieldImage(props: React.SVGProps<SVGSVGElement>) {
       </defs>
     </svg>
   );
-}
+};
 
 export default FileFieldImage;

@@ -1,19 +1,23 @@
 export type SimpleItem = string;
 
-export const simpleItems: SimpleItem[] = ['Главное', 'Важное', 'Необязательное'];
+export const simpleItems: SimpleItem[] = [
+  'Главное',
+  'Важное',
+  'Необязательное',
+];
 
 export type Item = {
   label: string;
   disabled?: boolean;
-  completed?: boolean;
-  skipped?: boolean;
+  finish?: boolean;
+  skip?: boolean;
 };
 
 export const items: Item[] = [
   {
     label: 'Главное',
-    completed: true,
-    skipped: true,
+    finish: true,
+    skip: true,
   },
   {
     label: 'Важное',

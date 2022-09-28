@@ -8,7 +8,6 @@ import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 import { DragNDropFieldChildrenRenderProp } from '../DragNDropField';
 import { getText } from '../locale';
-
 import { formatFileRequirements } from './formatFileRequirements';
 
 const cnDragNDropFieldContent = cn('DragNDropFieldContent');

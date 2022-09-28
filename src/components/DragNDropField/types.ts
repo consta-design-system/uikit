@@ -1,12 +1,15 @@
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
-
 import { Locale } from './locale';
 
 export type DragNDropFieldPropLocale = Locale;
 
 export type FileError = {
   message: string;
-  code: 'file-too-large' | 'file-too-small' | 'too-many-files' | 'file-invalid-type';
+  code:
+    | 'file-too-large'
+    | 'file-too-small'
+    | 'too-many-files'
+    | 'file-invalid-type';
 };
 
 export type FileRejection = {
@@ -15,14 +18,20 @@ export type FileRejection = {
 };
 
 export type DragNDropFieldPropErrorMessages = Partial<
-  Record<FileError['code'], string | ((file: File | undefined, error?: FileError) => string)>
+  Record<
+    FileError['code'],
+    string | ((file: File | undefined, error?: FileError) => string)
+  >
 >;
 
 export type DragNDropFieldChildrenRenderProp = (
   props: {
     openFileDialog: () => void;
     locale: Required<DragNDropFieldPropLocale>;
-  } & Pick<DragNDropFieldProps, 'accept' | 'maxSize' | 'multiple' | 'disabled' | 'minSize'>,
+  } & Pick<
+    DragNDropFieldProps,
+    'accept' | 'maxSize' | 'multiple' | 'disabled' | 'minSize'
+  >,
 ) => React.ReactNode;
 
 export type FileSizes = {

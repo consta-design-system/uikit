@@ -17,7 +17,11 @@ export const FigmaDataBase = () => {
       <div className={wp.tplGrid('fraction', { row: 'third' })}>
         <div
           className={cnDocsDecorator('Section', [
-            wp.tplGrid({ 'xs-columns': 2, 'col-gap': 'full', 'row-gap': 'full' }),
+            wp.tplGrid({
+              'xs-columns': 2,
+              'col-gap': 'full',
+              'row-gap': 'full',
+            }),
           ])}
         >
           <div className={wp.tplGrid('fraction', { row: 'third' })}>
@@ -34,15 +38,16 @@ export const FigmaDataBase = () => {
           </div>
           <div
             className={
-              ([wp.tplGrid('fraction', { row: 'third' })], [wp.decorator({ distribute: 'right' })])
+              ([wp.tplGrid('fraction', { row: 'third' })],
+              [wp.decorator({ distribute: 'right' })])
             }
           >
             <Badge label="Основная" size="s" />
           </div>
         </div>
         <Text className="FigmaDataText">
-          Библиотека основных интерфейсных компонентов. В трёх цветовых схемах: тёмной, светлой и
-          акцентной.
+          Библиотека основных интерфейсных компонентов. В трёх цветовых схемах:
+          тёмной, светлой и акцентной.
         </Text>
       </div>
       <div className={wp.tplGrid('fraction', { row: 'third' })}>
@@ -56,7 +61,8 @@ export const FigmaDataBase = () => {
           Consta Components
         </Text>
         <Text className="FigmaDataText">
-          Библиотека составных компонентов на базе Consta UI Kit (например, Tree и FeedbackForm).
+          Библиотека составных компонентов на базе Consta UI Kit (например, Tree
+          и FeedbackForm).
         </Text>
       </div>
       <div className={wp.tplGrid('fraction', { row: 'third' })}>
@@ -70,8 +76,8 @@ export const FigmaDataBase = () => {
           Consta UI Kit: Best Practices
         </Text>
         <Text className="FigmaDataText">
-          Набор рекомендаций, готовых блоков и паттернов для переиспользования, созданных на основе
-          Consta UI Kit.
+          Набор рекомендаций, готовых блоков и паттернов для переиспользования,
+          созданных на основе Consta UI Kit.
         </Text>
       </div>
       <div className={wp.tplGrid('fraction', { row: 'third' })}>
@@ -144,18 +150,6 @@ export const FigmaDataBase = () => {
         <Text
           as="a"
           weight="bold"
-          href="https://www.figma.com/community/file/1122106488653770247"
-          target="_blank"
-          className="FigmaDataLink"
-        >
-          Consta Font Styles
-        </Text>
-        <Text className="FigmaDataText">Рекомендации по использованию текстовых стилей</Text>
-      </div>
-      <div className={wp.tplGrid('fraction', { row: 'third' })}>
-        <Text
-          as="a"
-          weight="bold"
           href="https://www.figma.com/community/file/855575974468435644"
           target="_blank"
           className="FigmaDataLink"
@@ -163,20 +157,6 @@ export const FigmaDataBase = () => {
           Consta Default Spaces
         </Text>
         <Text className="FigmaDataText">Набор отступов для Consta UI Kit.</Text>
-      </div>
-      <div className={wp.tplGrid('fraction', { row: 'third' })}>
-        <Text
-          as="a"
-          weight="bold"
-          href="https://www.figma.com/community/file/1122103480812564994"
-          target="_blank"
-          className="FigmaDataLink"
-        >
-          Consta Drill Elements
-        </Text>
-        <Text className="FigmaDataText">
-          Библиотека элементов компоновки нижней части бурильной колонны (КНБК) и скважин.
-        </Text>
       </div>
     </div>
   );
@@ -201,7 +181,8 @@ export const FigmaDataCharts = () => {
           Consta Charts
         </Text>
         <Text className="FigmaDataText">
-          Библиотека графиков. В трёх цветовых схемах: тёмной, светлой и акцентной.
+          Библиотека графиков. В трёх цветовых схемах: тёмной, светлой и
+          акцентной.
         </Text>
       </div>
       <div className={wp.tplGrid('fraction', { row: 'third' })}>
@@ -216,7 +197,8 @@ export const FigmaDataCharts = () => {
           Consta Charts Light Colors
         </Text>
         <Text className="FigmaDataText">
-          Палитра цветов для библиотеки графиков Consta Charts в светлой цветовой схеме.
+          Палитра цветов для библиотеки графиков Consta Charts в светлой
+          цветовой схеме.
         </Text>
       </div>
       <div className={wp.tplGrid('fraction', { row: 'third' })}>
@@ -231,7 +213,8 @@ export const FigmaDataCharts = () => {
           Consta Charts Dark Colors
         </Text>
         <Text className="FigmaDataText">
-          Палитра цветов для библиотеки графиков Consta Charts в тёмной цветовой схеме.
+          Палитра цветов для библиотеки графиков Consta Charts в тёмной цветовой
+          схеме.
         </Text>
       </div>
       <div className={wp.tplGrid('fraction', { row: 'third' })}>
@@ -245,12 +228,18 @@ export const FigmaDataCharts = () => {
         >
           Consta Geo-Kit
         </Text>
-        <Text className="FigmaDataText">Библиотека геологических графиков.</Text>
+        <Text className="FigmaDataText">
+          Библиотека геологических графиков.
+        </Text>
       </div>
       <div className={wp.tplGrid('fraction', { row: 'third' })}>
         <div
           className={cnDocsDecorator('Section', [
-            wp.tplGrid({ 'xs-columns': 2, 'col-gap': 'full', 'row-gap': 'full' }),
+            wp.tplGrid({
+              'xs-columns': 2,
+              'col-gap': 'full',
+              'row-gap': 'full',
+            }),
           ])}
         >
           <div className={wp.tplGrid('fraction', { row: 'third' })}>
@@ -267,14 +256,16 @@ export const FigmaDataCharts = () => {
           </div>
           <div
             className={
-              ([wp.tplGrid('fraction', { row: 'third' })], [wp.decorator({ distribute: 'right' })])
+              ([wp.tplGrid('fraction', { row: 'third' })],
+              [wp.decorator({ distribute: 'right' })])
             }
           >
             <Badge label="Не развивается" size="s" status="system" />
           </div>
         </div>
         <Text className="FigmaDataText">
-          Библиотека графиков, устаревшая версия. Основная библиотека — Consta Charts.
+          Библиотека графиков, устаревшая версия. Основная библиотека — Consta
+          Charts.
         </Text>
       </div>
     </div>
@@ -315,7 +306,8 @@ export const FigmaDataMobile = () => {
           Consta UI Kit: Android
         </Text>
         <Text className="FigmaDataText">
-          Библиотека интерфейсных компонентов для мобильных устройств на Android.
+          Библиотека интерфейсных компонентов для мобильных устройств на
+          Android.
         </Text>
       </div>
     </div>

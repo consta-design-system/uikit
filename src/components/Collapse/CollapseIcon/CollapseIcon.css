@@ -76,40 +76,24 @@
     transform: var(--close-direction-transform);
   }
 
-  &_withCloseIcon {
-    position: absolute;
-    transition: transform 0.3s, opacity 0.3s;
-  }
-
   &_animate {
-    &_enter {
-      opacity: 0;
-      transform: scale(0.1);
-    }
-
-    &_enterActive {
+    &_entered,
+    &_entering {
       opacity: 1;
       transform: scale(1);
     }
 
-    &_enterDone {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    &_exit {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    &_exitActive {
+    &_exited,
+    &_exiting {
       opacity: 0;
       transform: scale(0.1);
     }
 
-    &_exitDone {
-      opacity: 0;
-      transform: scale(0.1);
+    &_entered,
+    &_entering,
+    &_exiting {
+      position: absolute;
+      transition: transform 0.3s, opacity 0.3s;
     }
   }
 

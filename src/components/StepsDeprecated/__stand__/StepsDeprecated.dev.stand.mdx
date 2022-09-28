@@ -1,0 +1,250 @@
+import { MdxMenu } from '@consta/stand';
+import { ExampleStepsValue } from './examples/ExampleStepsValue/ExampleStepsValue';
+import { ExampleStepsDisabled } from './examples/ExampleStepsDisabled/ExampleStepsDisabled';
+import { ExampleStepsCompleted } from './examples/ExampleStepsCompleted/ExampleStepsCompleted';
+import { ExampleStepsSkipped } from './examples/ExampleStepsSkipped/ExampleStepsSkipped';
+import { ExampleStepsContent } from './examples/ExampleStepsContent/ExampleStepsContent';
+import { ExampleStepsSize } from './examples/ExampleStepsSize/ExampleStepsSize';
+import { ExampleStepsAdaptive } from './examples/ExampleStepsAdaptive/ExampleStepsAdaptive';
+
+```tsx
+import { Steps } from '@consta/uikit/StepsDeprecated';
+```
+
+<MdxMenu>
+
+- [Шаги](#шаги)
+  - [Активный шаг](#активный-шаг)
+  - [Недоступные шаги](#пройденные-шаги)
+  - [Пройденные шаги](#пройденные-шаги)
+  - [Пропущенные шаги](#пропущенные-шаги)
+- [Содержимое](#содержимое)
+- [Размер](#размер)
+- [Адаптивность](#адаптивность)
+- [Импорт](#импорт)
+- [Список свойств](#свойства)
+
+</MdxMenu>
+
+## Шаги
+
+Данные для отображения шагов можно задать в массиве `items`. Названия шагов можно получить с помощью функции `getLabel`.
+
+> 5 шагов — это максимум, больше делать не стоит.
+
+### Активный шаг
+
+Это шаг, в котором находится пользователь, за него отвечает свойство `value`
+
+```tsx
+type Item = string;
+
+const items: Item[] = ['Главное', 'Важное', 'Необязательное'];
+
+<Steps items={items} value={items[1]} getLabel={(item) => item} />;
+```
+
+<ExampleStepsValue />
+
+### Недоступные шаги
+
+Это шаги, которые пока нельзя пройти. Например, они откроются, когда пользователь пройдет предыдущий шаг.
+
+Такие шаги выделены цветом. Их можно получить с помощью функции `getDisabled`.
+
+```tsx
+type Item = {
+  label: string;
+  disabled?: boolean;
+};
+
+const items: Item[] = [
+  {
+    label: 'Главное',
+  },
+  {
+    label: 'Важное',
+    disabled: true,
+  },
+  {
+    label: 'Необязательное',
+  },
+];
+
+<Steps
+  items={items}
+  getLabel={(item) => item.label}
+  getDisabled={(item) => item.disabled || false}
+  value={items[2]}
+  onChange={emptyFunction}
+/>;
+```
+
+<ExampleStepsDisabled />
+
+### Пройденные шаги
+
+Пройденные шаги — те, к которым пользователю не нужно возвращаться. Например,
+те, в которых он ответил на все вопросы или заполнил все обязательные поля в форме.
+
+Такие шаги выделены цветом и иконкой `IconCheck`. Их можно получить с помощью функции `getCompleted`.
+
+```tsx
+type Item = {
+  label: string;
+  completed?: boolean;
+};
+
+const items: Item[] = [
+  {
+    label: 'Главное',
+    completed: true,
+  },
+  {
+    label: 'Важное',
+  },
+  {
+    label: 'Необязательное',
+  },
+];
+
+<Steps
+  items={items}
+  getLabel={(item) => item.label}
+  getCompleted={(item) => item.completed || false}
+  value={items[1]}
+  onChange={emptyFunction}
+/>;
+```
+
+<ExampleStepsCompleted />
+
+### Пропущенные шаги
+
+Пропущенные шаги — те, на которых пользователь побывал, но что-то не доделал: например,
+не ответил на вопросы или не заполнил поля.
+
+Такие шаги выделены цветом. Их можно получить с помощью функции `getSkipped`.
+
+```tsx
+type Item = {
+  label: string;
+  completed?: boolean;
+};
+
+const items: Item[] = [
+  {
+    label: 'Главное',
+    skipped: true,
+  },
+  {
+    label: 'Важное',
+  },
+  {
+    label: 'Необязательное',
+  },
+];
+
+<Steps
+  items={items}
+  getLabel={(item) => item.label}
+  getSkipped={(item) => item.skipped || false}
+  value={items[1]}
+  onChange={emptyFunction}
+/>;
+```
+
+<ExampleStepsSkipped />
+
+## Содержимое
+
+Вы можете поместить компонент шагами в любое место на странице и при их переключении
+отображать что угодно: формы, кнопки, текст, что-то ещё.
+
+Можно добавить дополнительные кнопки для переключения между шагами — например, **Вперёд** и **Назад**.
+По умолчанию таких кнопок нет.
+
+```tsx
+export const Items: string[] = ['Главное', 'Важное', 'Необязательное'];
+
+const getContent = (index: number) => `Контент на шаге №${index + 1}`;
+const getLabel = (item: string) => item;
+
+export const ExampleStepsContent = () => {
+  const [activeStep, setActiveStep] = useState<string>(items[0]);
+
+  const activeStepIndex = items.findIndex((item) => item === activeStep);
+
+  const handleNext = () => setActiveStep(items[activeStepIndex + 1]);
+  const handlePrev = () => setActiveStep(items[activeStepIndex - 1]);
+  const onChange = ({ value }: { value: string }) => setActiveStep(value);
+
+  return (
+    <>
+      <Steps
+        items={items}
+        getLabel={getLabel}
+        value={activeStep}
+        onChange={onChange}
+      />
+      <div>{getContent(activeStepIndex)}</div>
+      <Button
+        label="Предыдущий"
+        onClick={handlePrev}
+        disabled={activeStepIndex === 0}
+      />
+      <Button
+        label="Следующий"
+        onClick={handleNext}
+        disabled={activeStepIndex === items.length - 1}
+      />
+    </>
+  );
+};
+```
+
+<ExampleStepsContent />
+
+## Размер
+
+За размер отвечает свойство `size`.
+
+```tsx
+export const Items: string[] = ['Главное', 'Важное', 'Необязательное'];
+
+<Steps size="m" items={items} getLabel={(item) => item} value={items[1]} />;
+<Steps size="l" items={items} getLabel={(item) => item} value={items[1]} />;
+```
+
+<ExampleStepsSize />
+
+## Адаптивность
+
+На мобильных и компактных экранах компонент заполняет всю доступную ширину.
+Если что-то не помещается, появляется прокрутка. Обозначение шагов и их названия сохраняются. Прокручивать список можно кнопками или свайпами вправо и влево (для мобильных устройств). Например, так:
+
+<ExampleStepsAdaptive />
+
+## Импорт
+
+```tsx
+import { Steps } from '@consta/uikit/StepsDeprecated';
+```
+
+## Свойства
+
+```
+type OnChange = (props: { e: React.MouseEvent; value: ITEM | null }) => void;
+```
+
+| Свойство                            | Тип                       | По умолчанию | Описание                                                                             |
+| ----------------------------------- | ------------------------- | ------------ | ------------------------------------------------------------------------------------ |
+| [`value`](#активный-шаг)            | `Item`                    | —            | Номер шага                                                                           |
+| [`items`](#шаги)                    | `Item[]`                  | —            | Массив с шагами                                                                      |
+| [`getLabel`](#шаги)                 | `(item: Item) => string`  | —            | Получает название для шага. Также используется в качестве уникального ключа элемента |
+| [`getDisabled?`](#недоступные-шаги) | `(item: Item) => boolean` | —            | Получает недоступные шаги                                                            |
+| [`getCompleted?`](#пройденные-шаги) | `(item: Item) => boolean` | —            | Получает завершенные шаги                                                            |
+| [`getSkipped?`](#пропущенные-шаги)  | `(item: Item) => boolean` | —            | Получает пропущенные шаги                                                            |
+| `onChange`                          | `OnChange`                | —            | Меняет шаги                                                                          |
+| [`size?`](#размер)                  | `'m', 'l'`                | `'m'`        | Размер элементов компонента                                                          |
+| `className?`                        | `string`                  | —            | Дополнительные CSS-классы для компонента                                             |

@@ -1,0 +1,19 @@
+```tsx
+import { useClickOutside } from '@consta/uikit/useClickOutside';
+```
+
+Этот хук нужен, чтобы обрабатывать клики за пределами определенных элементов. Например, когда пользователь нажимает на область за границами модального окна, чтобы его закрыть.
+
+## Свойства
+
+| Свойство                  | Тип                                     | По умолчанию | Описание                                                                                                                                          |
+| ------------------------- | --------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `isActive?`               | `boolean`                               | -            | Включает хук                                                                                                                                      |
+| `ignoreClicksInsideRefs?` | `ReadonlyArray<RefObject<HTMLElement>>` | -            | Ссылки на элементы, при клике по которым не вызывается обработчик (`handler`). Обычно это тот элемент, по клику вне которого должен сработать хук |
+| `handler?`                | `(event: MouseEvent) => void;`          | -            | Обработчик, который вызывается по клику за пределами элемента                                                                                     |
+
+## Примеры
+
+Примеры использования хука `useClickOutside` можно посмотреть в компонентах
+[Modal](https://github.com/consta-design-system/uikit/blob/master/src/components/Modal/Modal.tsx) и
+[ContextMenu](https://github.com/consta-design-system/uikit/blob/master/src/components/ContextMenu/ContextMenu.tsx)

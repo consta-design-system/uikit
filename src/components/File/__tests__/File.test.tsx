@@ -1,7 +1,10 @@
-import * as React from 'react';
 import { render, screen } from '@testing-library/react';
+import * as React from 'react';
 
-import { cnIconFile, fileIconPropSize } from '../../../fileIcons/FileIcon/FileIcon';
+import {
+  cnIconFile,
+  fileIconPropSize,
+} from '../../../fileIcons/FileIcon/FileIcon';
 import { cnFile, File } from '../File';
 
 type FileProps = React.ComponentProps<typeof File>;

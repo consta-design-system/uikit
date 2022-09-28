@@ -7,7 +7,12 @@ export type IconsItemProps = {
   name: string;
 } & IconProps;
 
-export const IconsItem: React.FC<IconsItemProps> = ({ icon, name, size, view }) => {
+export const IconsItem: React.FC<IconsItemProps> = ({
+  icon,
+  name,
+  size,
+  view,
+}) => {
   const Icon = icon;
   return (
     <div className="tpl-grid__fraction text text_align_center">

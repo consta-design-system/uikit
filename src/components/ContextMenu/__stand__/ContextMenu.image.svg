@@ -1,0 +1,69 @@
+<svg
+  width="200"
+  height="120"
+  viewBox="0 0 200 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M0 4C0 1.79086 1.79086 0 4 0H196C198.209 0 200 1.79086 200 4V116C200 118.209 198.209 120 196 120H4C1.79086 120 0 118.209 0 116V4Z"
+    fill="var(--color-bg-default)"
+  />
+  <rect
+    x="46"
+    y="14"
+    width="20"
+    height="20"
+    rx="4"
+    fill="var(--color-bg-ghost)"
+  />
+  <rect
+    x="46"
+    y="34"
+    width="108"
+    height="72"
+    rx="4"
+    fill="var(--color-bg-default)"
+  />
+  <rect
+    x="59"
+    y="67"
+    width="82"
+    height="5"
+    fill="var(--color-control-typo-placeholder)"
+  />
+  <rect
+    x="59"
+    y="87"
+    width="82"
+    height="5"
+    fill="var(--color-control-typo-placeholder)"
+  />
+  <rect
+    x="59"
+    y="47"
+    width="82"
+    height="5"
+    fill="var(--color-control-typo-placeholder)"
+  />
+  <rect
+    x="46.5"
+    y="34.5"
+    width="107"
+    height="71"
+    rx="3.5"
+    stroke="var(--color-bg-border)"
+  />
+  <path
+    d="M57 20C57 20.5523 56.5523 21 56 21C55.4477 21 55 20.5523 55 20C55 19.4477 55.4477 19 56 19C56.5523 19 57 19.4477 57 20Z"
+    fill="var(--color-control-typo-placeholder)"
+  />
+  <path
+    d="M57 24C57 24.5523 56.5523 25 56 25C55.4477 25 55 24.5523 55 24C55 23.4477 55.4477 23 56 23C56.5523 23 57 23.4477 57 24Z"
+    fill="var(--color-control-typo-placeholder)"
+  />
+  <path
+    d="M56 29C56.5523 29 57 28.5523 57 28C57 27.4477 56.5523 27 56 27C55.4477 27 55 27.4477 55 28C55 28.5523 55.4477 29 56 29Z"
+    fill="var(--color-control-typo-placeholder)"
+  />
+</svg>

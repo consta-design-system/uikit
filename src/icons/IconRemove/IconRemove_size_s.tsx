@@ -1,11 +1,10 @@
 import * as React from 'react';
+import { SVGProps } from 'react';
 
-function IconRemoveSizeS(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 16 16" {...props}>
-      <path d="M2 7h12v2H2z" />
-    </svg>
-  );
-}
+const IconRemoveSizeS = (props: SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <path d="M2 7h12v2H2z" />
+  </svg>
+);
 
 export default IconRemoveSizeS;

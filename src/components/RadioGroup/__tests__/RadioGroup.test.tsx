@@ -1,5 +1,5 @@
-import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import React from 'react';
 
 import { cnRadioGroup, RadioGroup } from '../RadioGroup';
 
@@ -8,7 +8,10 @@ type Item = {
   name: string;
   disabled?: boolean;
 };
-type OnChange = (props: { e: React.ChangeEvent<HTMLInputElement>; value: Item }) => void;
+type OnChange = (props: {
+  e: React.ChangeEvent<HTMLInputElement>;
+  value: Item;
+}) => void;
 
 const testId = 'RadioGroup';
 
@@ -38,8 +41,8 @@ const renderComponent = (props: {
   return render(
     <RadioGroup
       items={items}
-      getLabel={(item) => `${item.name}`}
-      getDisabled={(item) => item.disabled}
+      getItemLabel={(item) => `${item.name}`}
+      getItemDisabled={(item) => item.disabled}
       onChange={props.onChange || handleChange}
       name={testId}
       className={additionalClass}
@@ -52,7 +55,8 @@ const getRender = () => screen.getByTestId(testId);
 
 const getItems = () => getRender().querySelectorAll(`.${cnRadioGroup('Item')}`);
 
-const getItemInput = () => getRender().querySelectorAll('.Radio-Input')[0] as HTMLInputElement;
+const getItemInput = () =>
+  getRender().querySelectorAll('.Radio-Input')[0] as HTMLInputElement;
 
 describe('Компонент RadioGroup', () => {
   it('должен рендериться без ошибок', () => {
@@ -68,7 +72,7 @@ describe('Компонент RadioGroup', () => {
       });
     });
 
-    describe('проверка getLabel', () => {
+    describe('проверка getItemLabel', () => {
       it('label совпадает', () => {
         renderComponent({});
         expect(getItems()[0].textContent).toEqual(items[0].name);
@@ -99,7 +103,9 @@ describe('Компонент RadioGroup', () => {
         fireEvent.click(item);
 
         expect(handleChange).toHaveBeenCalledTimes(1);
-        expect(handleChange).toHaveBeenCalledWith(expect.objectContaining({ value: items[0] }));
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({ value: items[0] }),
+        );
       });
     });
 

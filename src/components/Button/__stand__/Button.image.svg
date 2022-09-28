@@ -1,0 +1,72 @@
+<svg
+  width="200"
+  height="120"
+  viewBox="0 0 200 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M0 4C0 1.79086 1.79086 0 4 0H196C198.209 0 200 1.79086 200 4V116C200 118.209 198.209 120 196 120H4C1.79086 120 0 118.209 0 116V4Z"
+    fill="var(--color-bg-default)"
+  />
+  <rect
+    x="24"
+    y="29"
+    width="40"
+    height="15"
+    rx="4"
+    fill="var(--color-bg-link)"
+  />
+  <rect
+    x="80"
+    y="29"
+    width="40"
+    height="15"
+    rx="7.5"
+    fill="var(--color-bg-link)"
+  />
+  <path
+    d="M136 29H172C174.209 29 176 30.7909 176 33V40C176 42.2091 174.209 44 172 44H136V29Z"
+    fill="var(--color-bg-link)"
+  />
+  <rect
+    x="24.5"
+    y="75.5"
+    width="39"
+    height="14"
+    rx="3.5"
+    stroke="var(--color-control-bg-border-default)"
+  />
+  <rect
+    x="80.5"
+    y="75.5"
+    width="39"
+    height="14"
+    rx="7"
+    stroke="var(--color-control-bg-border-default)"
+  />
+  <path
+    d="M136.5 75.5H172C173.933 75.5 175.5 77.067 175.5 79V86C175.5 87.933 173.933 89.5 172 89.5H136.5V75.5Z"
+    stroke="var(--color-control-bg-border-default)"
+  />
+  <rect
+    x="24"
+    y="52"
+    width="40"
+    height="15"
+    rx="4"
+    fill="var(--color-control-bg-ghost)"
+  />
+  <rect
+    x="80"
+    y="52"
+    width="40"
+    height="15"
+    rx="7.5"
+    fill="var(--color-control-bg-ghost)"
+  />
+  <path
+    d="M136 52H172C174.209 52 176 53.7909 176 56V63C176 65.2091 174.209 67 172 67H136V52Z"
+    fill="var(--color-control-bg-ghost)"
+  />
+</svg>

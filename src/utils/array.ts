@@ -10,7 +10,12 @@ export const sortBy = <T extends {}>(
   return [...array].sort(compareFn);
 };
 
-export const updateAt = <T>(array: T[], index: number, newItem: T, isExpand = false): T[] => {
+export const updateAt = <T>(
+  array: T[],
+  index: number,
+  newItem: T,
+  isExpand = false,
+): T[] => {
   const fixedIndex = index < 0 ? 0 : index;
   if (fixedIndex >= array.length) {
     return isExpand ? [...array, newItem] : array;
@@ -40,7 +45,10 @@ export const chunk = <T>(array: T[], size: number): T[][] => {
   return result;
 };
 
-export const groupBy = <T, K extends keyof any>(array: T[], iteratee: (elem: T) => K) =>
+export const groupBy = <T, K extends keyof any>(
+  array: T[],
+  iteratee: (elem: T) => K,
+) =>
   array.reduce((result, value) => {
     const key = iteratee(value);
 

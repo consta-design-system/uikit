@@ -1,0 +1,28 @@
+.SnackBarVariants {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: calc(100vh - var(--space-3xl));
+  margin-right: calc(-1 * var(--space-xs));
+  margin-left: calc(-1 * var(--space-xs));
+
+  &-SnackBar {
+    overflow: auto;
+    flex: none;
+  }
+
+  &-Buttons {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: flex-end;
+    align-items: flex-end;
+    max-width: 200px;
+    padding-right: var(--space-xs);
+    padding-left: var(--space-xs);
+  }
+
+  &-ButtonAdd {
+    margin-bottom: var(--space-xs);
+  }
+}

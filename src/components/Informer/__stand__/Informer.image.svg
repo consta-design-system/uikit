@@ -1,0 +1,45 @@
+<svg
+  width="200"
+  height="120"
+  viewBox="0 0 200 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <g clip-path="url(#clip0_1889_15805)">
+    <path
+      d="M0 4C0 1.79086 1.79086 0 4 0H196C198.209 0 200 1.79086 200 4V116C200 118.209 198.209 120 196 120H4C1.79086 120 0 118.209 0 116V4Z"
+      fill="var(--color-bg-default)"
+    />
+    <rect x="24" y="29" width="150" height="12" fill="var(--color-bg-ghost)" />
+    <rect
+      x="-11"
+      y="-4"
+      width="217"
+      height="23"
+      fill="var(--color-control-bg-ghost)"
+    />
+    <rect
+      x="115"
+      y="51"
+      width="59"
+      height="14"
+      fill="var(--color-bg-warning)"
+    />
+    <rect
+      x="24.5"
+      y="51.5"
+      width="80"
+      height="74"
+      rx="3.5"
+      stroke="var(--color-bg-border)"
+    />
+    <rect x="34" y="60" width="62" height="6" fill="var(--color-bg-ghost)" />
+    <rect x="34" y="108" width="62" height="6" fill="var(--color-bg-ghost)" />
+    <rect x="34" y="70" width="62" height="34" fill="var(--color-bg-ghost)" />
+  </g>
+  <defs>
+    <clipPath id="clip0_1889_15805">
+      <rect width="200" height="120" rx="3" fill="var(--color-bg-default)" />
+    </clipPath>
+  </defs>
+</svg>

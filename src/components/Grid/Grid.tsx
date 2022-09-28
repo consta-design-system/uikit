@@ -1,11 +1,10 @@
 import './Grid.css';
 
-import React from 'react';
 import { classnames } from '@bem-react/classnames';
+import React from 'react';
 
 import { cn } from '../../utils/bem';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
-
 import { useBreakpoints } from './useBreakpoints';
 
 export * from './GridItem/GridItem';

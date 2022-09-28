@@ -1,0 +1,22 @@
+.DateTime10Years {
+  --date-time-item-width:
+    calc(
+      var(--control-height-s) * 7 / var(--date-time-grid-columns)
+    );
+  --date-time-item-height: var(--control-height-s);
+  --date-time-cell-vertical-gap: var(--space-3xs);
+  --date-time-cell-horisontal-gap:
+    calc(
+      var(--space-3xs) * 7 / var(--date-time-grid-columns)
+    );
+  --date-time-cell-width:
+    calc(
+      var(--date-time-item-width) + (var(--date-time-cell-horisontal-gap) * 2)
+    );
+  --date-time-cell-height:
+    calc(
+      var(--date-time-item-height) + (var(--date-time-cell-vertical-gap) * 2)
+    );
+  --date-time-grid-columns: 4;
+  --date-time-grid-row-gap: calc(var(--control-height-s) * 5 / 3);
+}

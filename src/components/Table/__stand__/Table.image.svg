@@ -1,0 +1,28 @@
+<svg
+  width="200"
+  height="120"
+  viewBox="0 0 200 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M0 4C0 1.79086 1.79086 0 4 0H196C198.209 0 200 1.79086 200 4V116C200 118.209 198.209 120 196 120H4C1.79086 120 0 118.209 0 116V4Z"
+    fill="var(--color-bg-secondary)"
+  />
+  <rect x="29" y="18" width="142" height="88" fill="var(--color-bg-default)" />
+  <rect x="37" y="48" width="24" height="5" fill="var(--color-bg-system)" />
+  <rect x="37" y="26" width="24" height="5" fill="var(--color-typo-ghost)" />
+  <rect x="37" y="70" width="24" height="5" fill="var(--color-bg-system)" />
+  <rect x="37" y="92" width="24" height="5" fill="var(--color-bg-system)" />
+  <rect x="88" y="48" width="24" height="5" fill="var(--color-bg-system)" />
+  <rect x="88" y="26" width="24" height="5" fill="var(--color-typo-ghost)" />
+  <rect x="88" y="70" width="24" height="5" fill="var(--color-bg-system)" />
+  <rect x="88" y="92" width="24" height="5" fill="var(--color-bg-system)" />
+  <rect x="139" y="48" width="24" height="5" fill="var(--color-bg-system)" />
+  <rect x="139" y="26" width="24" height="5" fill="var(--color-typo-ghost" />
+  <rect x="139" y="70" width="24" height="5" fill="var(--color-bg-system)" />
+  <rect x="139" y="92" width="24" height="5" fill="var(--color-bg-system)" />
+  <rect x="29" y="61" width="142" height="1" fill="var(--color-bg-border)" />
+  <rect x="29" y="39" width="142" height="1" fill="var(--color-bg-border)" />
+  <rect x="29" y="83" width="142" height="1" fill="var(--color-bg-border)" />
+</svg>

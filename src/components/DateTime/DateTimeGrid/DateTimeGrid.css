@@ -1,0 +1,18 @@
+/*
+--date-time-grid-columns
+--date-time-cell-width
+--date-time-grid-row-gap
+
+задаются сверху
+*/
+
+.DateTimeGrid {
+  display: grid;
+  grid-template-columns:
+    repeat(
+      var(--date-time-grid-columns),
+      var(--date-time-cell-width)
+    );
+  grid-row-gap: var(--date-time-grid-row-gap);
+  justify-content: start;
+}

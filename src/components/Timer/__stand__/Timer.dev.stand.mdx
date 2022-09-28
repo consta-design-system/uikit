@@ -1,0 +1,103 @@
+import { MdxMenu } from '@consta/stand';
+import { TimerExampleSize } from './examples/TimerExampleSize/TimerExampleSize';
+import { TimerExampleSeconds } from './examples/TimerExampleSeconds/TimerExampleSeconds';
+import { TimerExampleProgress } from './examples/TimerExampleProgress/TimerExampleProgress';
+
+```tsx
+import { Timer } from '@consta/uikit/Timer';
+```
+
+<MdxMenu>
+
+- [Секунды](#секунды)
+- [Размер](#размер)
+- [Прогрессбар](#прогрессбар)
+- [Импорт](#импорт)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+</MdxMenu>
+
+## Секунды
+
+Вы можете поставить таймер на нужное количество секунд с помощью свойства `seconds`.
+
+Таймер предназначен для очень коротких промежутков времени, до 10 секунд, поэтому
+двузначные числа лучше не использовать.
+
+```ts
+<Timer size="m" seconds={3} progress={80} />
+<Timer size="m" seconds={5} progress={80} />
+<Timer size="m" seconds={7} progress={80} />
+```
+
+<TimerExampleSeconds />
+
+## Размер
+
+За размер таймера отвечает свойство `size`.
+
+```ts
+<Timer size="2xl" seconds={5} progress={80} />
+<Timer size="xl" seconds={5} progress={80} />
+<Timer size="l" seconds={5} progress={80} />
+<Timer size="m" seconds={5} progress={80} />
+<Timer size="s" seconds={5} progress={80} />
+```
+
+<TimerExampleSize />
+
+## Прогрессбар
+
+Вы можете указать процент заполнения прогрессбара в процентах в свойстве `progress`.
+
+```ts
+<StoryBookExample className={cnDocsDecorator('Section')}>
+  <Timer size="m" seconds={5} />
+  <Timer size="m" seconds={5} progress={20} />
+  <Timer size="m" seconds={5} progress={40} />
+  <Timer size="m" seconds={5} progress={60} />
+  <Timer size="m" seconds={5} progress={80} />
+</StoryBookExample>
+```
+
+<TimerExampleProgress />
+
+Включите анимацию с помощью `animation`.
+
+Скорость анимации по умолчанию равна 1 секунде, ее можно поменять в CSS-переменной `--animation-duration`.
+
+```css
+.MyBlock.Timer-Progress.ProgressSpin {
+  --animation-duration: 5s;
+}
+```
+
+## Импорт
+
+```tsx
+import { Timer } from '@consta/uikit/Timer';
+```
+
+## Свойства
+
+| Свойство                     | Тип                         | По умолчанию | Описание                                        |
+| ---------------------------- | --------------------------- | ------------ | ----------------------------------------------- |
+| [`size?`](#размер)           | `'m','s','l','xl','2xl'`    | `'m'`        | Размер                                          |
+| [`seconds?`](#секунды)       | `number`                    | `5`          | Секунды                                         |
+| [`progress?`](#прогрессбар)  | `number`                    | `0`          | Процент заполнения прогрессбара                 |
+| [`animation?`](#прогрессбар) | `boolean`                   | -            | Включает плавное изменение прогрессбара         |
+| `className?`                 | `string`                    | -            | Дополнительный CSS-класс                        |
+| `ref?`                       | `React.Ref<HTMLDivElement>` | -            | Ссылка на корневой DOM-элемент этого компонента |
+
+## Пример
+
+```ts
+// src/App.ts
+import React from 'react';
+import { Timer } from '@consta/uikit/Timer';
+
+const App = () => {
+  return <Timer seconds={5} progress={80} />;
+};
+```

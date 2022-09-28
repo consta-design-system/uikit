@@ -2,7 +2,9 @@ name: Deploy
 
 on:
   push:
-    branches: master
+    branches:
+      - master
+      - v4
   pull_request:
     types:
       - opened
@@ -10,7 +12,7 @@ on:
       - synchronize
 
 env:
-  BUILD_SCRIPT: yarn build:storybook
+  BUILD_SCRIPT: yarn stand:build
   BUILD_SCRIPT_OUTPUT: build
   APP_NAME: uikit
 
@@ -23,12 +25,12 @@ jobs:
       # Устанавливаем Node.JS для сборки приложения
       - uses: actions/setup-node@v1
         with:
-          node-version: '12'
+          node-version: '16'
 
       - name: Install yarn
         id: yarn-setup
         run: |
-          yarn policies set-version 1.19.1
+          yarn policies set-version 1.22.18
           echo "::set-output name=cache_dir::$(yarn cache dir)"
 
       - name: Настройка кэширования yarn

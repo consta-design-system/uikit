@@ -3,12 +3,17 @@ import { DragNDropFieldProps } from '../DragNDropField';
 import { formatFileSize } from '../formatFileSize';
 import { defaultLocale, Locale } from '../locale';
 
-const formatAccept = (strs: string[] | string | undefined): string | undefined => {
+const formatAccept = (
+  strs: string[] | string | undefined,
+): string | undefined => {
   return Array.isArray(strs) ? strs.join(', ') : strs;
 };
 
-const formatSize = (prefix: string, size: number | undefined, locale: Required<Locale>) =>
-  size ? `${prefix} ${formatFileSize(size, locale)}` : undefined;
+const formatSize = (
+  prefix: string,
+  size: number | undefined,
+  locale: Required<Locale>,
+) => (size ? `${prefix} ${formatFileSize(size, locale)}` : undefined);
 
 export const formatFileRequirements = (
   accept: DragNDropFieldProps['accept'],

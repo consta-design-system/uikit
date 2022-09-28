@@ -1,15 +1,26 @@
 import * as React from 'react';
 
-function ThemeTogglerImage(props: React.SVGProps<SVGSVGElement>) {
+const ThemeTogglerImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
-      <path d="M0 4a4 4 0 014-4h192a4 4 0 014 4v112a4 4 0 01-4 4H4a4 4 0 01-4-4V4z" fill="#fff" />
+      <path
+        d="M0 4a4 4 0 014-4h192a4 4 0 014 4v112a4 4 0 01-4 4H4a4 4 0 01-4-4V4z"
+        fill="#fff"
+      />
       <rect x={108} y={41} width={39} height={39} rx={4} fill="#0078D2" />
       <path
         d="M128 48a1 1 0 011 1v2a1 1 0 01-2 0v-2a1 1 0 011-1zM116 60a1 1 0 011-1h2a1 1 0 010 2h-2a1 1 0 01-1-1zM137 59a1 1 0 000 2h2a1 1 0 000-2h-2zM128 68a1 1 0 011 1v2a1 1 0 01-2 0v-2a1 1 0 011-1zM133.683 65.683a1 1 0 011.414 0l1.414 1.414a1 1 0 11-1.414 1.414l-1.414-1.414a1 1 0 010-1.414zM122.321 67.097a1 1 0 10-1.414-1.414l-1.414 1.414a1 1 0 101.414 1.414l1.414-1.414zM119.493 51.493a1 1 0 011.414 0l1.414 1.414a1 1 0 11-1.414 1.414l-1.414-1.414a1 1 0 010-1.414zM136.511 52.907a1 1 0 10-1.414-1.414l-1.414 1.414a1 1 0 101.414 1.414l1.414-1.414zM128 66a6 6 0 100-12 6 6 0 000 12z"
         fill="#fff"
       />
-      <rect x={53} y={41} width={39} height={39} rx={4} fill="#004269" fillOpacity={0.07} />
+      <rect
+        x={53}
+        y={41}
+        width={39}
+        height={39}
+        rx={4}
+        fill="#004269"
+        fillOpacity={0.07}
+      />
       <path
         d="M82.874 61.593a7.5 7.5 0 01-9.481-11.586c-.13-.005-.261-.007-.393-.007-5.523 0-10 4.477-10 10s4.477 10 10 10c4.98 0 9.11-3.641 9.874-8.407z"
         fill="#002033"
@@ -17,6 +28,6 @@ function ThemeTogglerImage(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default ThemeTogglerImage;

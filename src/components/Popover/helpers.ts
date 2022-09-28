@@ -61,11 +61,17 @@ export const getPositionsByDirection = ({
     downRight: getPosition(xForVerticalDirections.right, yForDownDirections),
 
     rightUp: getPosition(xForRightDirections, yForHorizontalDirections.up),
-    rightCenter: getPosition(xForRightDirections, yForHorizontalDirections.center),
+    rightCenter: getPosition(
+      xForRightDirections,
+      yForHorizontalDirections.center,
+    ),
     rightDown: getPosition(xForRightDirections, yForHorizontalDirections.down),
 
     leftUp: getPosition(xForLeftDirections, yForHorizontalDirections.up),
-    leftCenter: getPosition(xForLeftDirections, yForHorizontalDirections.center),
+    leftCenter: getPosition(
+      xForLeftDirections,
+      yForHorizontalDirections.center,
+    ),
     leftDown: getPosition(xForLeftDirections, yForHorizontalDirections.down),
 
     downStartLeft: getPosition(xForStartLeftDirections, yForDownDirections),

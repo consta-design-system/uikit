@@ -32,13 +32,17 @@ export const usePopoverReposition = ({
     if (isActive) {
       window.addEventListener('resize', fn);
 
-      const allParents = scrollAnchorRef?.current ? getAllParents(scrollAnchorRef.current) : [];
+      const allParents = scrollAnchorRef?.current
+        ? getAllParents(scrollAnchorRef.current)
+        : [];
       allParents.forEach((parentEl) => parentEl.addEventListener('scroll', fn));
 
       return () => {
         window.removeEventListener('resize', fn);
 
-        allParents.forEach((parentEl) => parentEl.removeEventListener('scroll', fn));
+        allParents.forEach((parentEl) =>
+          parentEl.removeEventListener('scroll', fn),
+        );
       };
     }
     return undefined;

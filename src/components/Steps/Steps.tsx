@@ -1,6 +1,6 @@
 import './Steps.css';
 
-import React, { useMemo, useRef, useState } from 'react';
+import React, { forwardRef, useMemo, useRef, useState } from 'react';
 
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
 import { useOverflow } from '../../hooks/useOverflow/useOverflow';
@@ -8,56 +8,32 @@ import { useScrollElements } from '../../hooks/useScrollElements/useScrollElemen
 import { IconArrowLeft } from '../../icons/IconArrowLeft/IconArrowLeft';
 import { IconArrowRight } from '../../icons/IconArrowRight/IconArrowRight';
 import { cn } from '../../utils/bem';
-import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { Button } from '../Button/Button';
-
+import { withDefaultGetters } from './helper';
 import { StepsStep } from './StepsStep/StepsStep';
-
-export const stepsSizes = ['m', 'l'] as const;
-export type StepsPropSize = typeof stepsSizes[number];
-export const stepsDefaultSize: StepsPropSize = stepsSizes[0];
-
-export type StepsPropGetLabel<ITEM> = (item: ITEM) => string;
-export type StepsPropGetCommon<ITEM> = (item: ITEM) => boolean;
-export type StepsPropOnChange<ITEM> = (props: { e: React.MouseEvent; value: ITEM }) => void;
-
-type Props<ITEM> = {
-  size?: StepsPropSize;
-  items: ITEM[];
-  value: ITEM;
-  getLabel: StepsPropGetLabel<ITEM>;
-  getDisabled?: StepsPropGetCommon<ITEM>;
-  getCompleted?: StepsPropGetCommon<ITEM>;
-  getSkipped?: StepsPropGetCommon<ITEM>;
-  onChange: StepsPropOnChange<ITEM>;
-  className?: string;
-};
-
-type Steps = <ITEM>(
-  props: PropsWithHTMLAttributesAndRef<Props<ITEM>, HTMLDivElement>,
-) => React.ReactElement | null;
+import { StepsCompnent, stepsDefaultSize, StepsProps } from './types';
 
 export const cnSteps = cn('Steps');
 
-export const Steps: Steps = React.forwardRef((props, ref) => {
+const StepsRender = (props: StepsProps, ref: React.Ref<HTMLDivElement>) => {
   const {
     size = stepsDefaultSize,
     items,
     value,
-    getLabel,
-    getDisabled,
-    getCompleted,
-    getSkipped,
+    getItemLabel,
+    getItemDisabled,
+    getItemCompleted,
+    getItemSkipped,
     onChange,
     className,
     ...otherProps
-  } = props;
+  } = withDefaultGetters(props);
 
   const [activeStep, setActiveStep] = useState<number>(-1);
 
   const { getOnChange, getChecked } = useChoiceGroup({
     value,
-    getKey: getLabel,
+    getKey: getItemLabel,
     callBack: onChange,
     multiple: false,
   });
@@ -105,13 +81,17 @@ export const Steps: Steps = React.forwardRef((props, ref) => {
             key={index}
             ref={refs[index] as React.RefObject<HTMLButtonElement>}
             className={cnSteps('Item')}
-            label={getCompleted?.(item) ? getLabel(item) : `${index + 1} ${getLabel(item)}`}
+            label={
+              getItemCompleted?.(item)
+                ? getItemLabel(item)
+                : `${index + 1} ${getItemLabel(item)}`
+            }
             size={size}
             active={activeStep === index}
             onChange={getOnChange(item)}
-            completed={getCompleted?.(item)}
-            skipped={getSkipped?.(item)}
-            disabled={getDisabled?.(item)}
+            completed={getItemCompleted?.(item)}
+            skipped={getItemSkipped?.(item)}
+            disabled={getItemDisabled?.(item)}
           />
         ))}
       </div>
@@ -127,4 +107,8 @@ export const Steps: Steps = React.forwardRef((props, ref) => {
       )}
     </div>
   );
-});
+};
+
+export const Steps = forwardRef(StepsRender) as StepsCompnent;
+
+export * from './types';

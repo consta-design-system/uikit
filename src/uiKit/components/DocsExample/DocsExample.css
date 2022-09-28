@@ -1,7 +1,13 @@
 .UiKit--DocsExample {
   margin-bottom: 1.4em;
 
+  &-Subscription {
+    color: var(--color-typo-secondary);
+    line-height: var(--line-height-text-s);
+  }
+
   &-Caption {
+    margin-bottom: var(--space-m);
     line-height: var(--line-height-text-s);
   }
 

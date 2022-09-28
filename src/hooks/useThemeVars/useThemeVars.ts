@@ -1,7 +1,7 @@
+/* eslint-disable no-unused-vars */
 import { useMemo } from 'react';
 
 import { cnTheme, useTheme } from '../../components/Theme/Theme';
-
 import { defaultVars } from './helpers';
 
 export { defaultVars } from './helpers';
@@ -76,9 +76,18 @@ export const useThemeVars = <T extends Vars = typeof defaultVars>(
 
     const themeVars: ThemeVars<T> = {
       color: {
-        primary: getVars<T['color']['primary'][number]>(variables.color.primary, elementPrimary),
-        accent: getVars<T['color']['accent'][number]>(variables.color.accent, elementAccent),
-        invert: getVars<T['color']['invert'][number]>(variables.color.invert, elementInvert),
+        primary: getVars<T['color']['primary'][number]>(
+          variables.color.primary,
+          elementPrimary,
+        ),
+        accent: getVars<T['color']['accent'][number]>(
+          variables.color.accent,
+          elementAccent,
+        ),
+        invert: getVars<T['color']['invert'][number]>(
+          variables.color.invert,
+          elementInvert,
+        ),
       },
       control: getVars<T['control'][number]>(variables.control, elementPrimary),
       font: getVars<T['font'][number]>(variables.font, elementPrimary),

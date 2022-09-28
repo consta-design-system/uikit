@@ -1,17 +1,21 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
+node_modules
 /node_modules
+node_modules/
 /.pnp
 .pnp.js
 
 # testing
 /coverage
+/repos
 __diff_output__
 
 # production
 /build
 /dist
+/lib
 
 # misc
 .idea
@@ -30,3 +34,4 @@ package-lock.json
 build-storybook.log
 .yarn/
 .yarnrc
+

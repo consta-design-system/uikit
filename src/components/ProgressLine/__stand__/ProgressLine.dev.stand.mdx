@@ -1,0 +1,99 @@
+import { MdxMenu } from '@consta/stand';
+import {
+  ProgressLineExampleMode,
+  ProgressLineExampleModeValue,
+  ProgressLineExampleModeSteps,
+} from './examples/ProgressLineExampleMode/ProgressLineExampleMode';
+import { ProgressLineExampleSize } from './examples/ProgressLineExampleSize/ProgressLineExampleSize';
+
+```tsx
+import { ProgressLine } from '@consta/uikit/ProgressLine';
+```
+
+<MdxMenu>
+
+- [Тип](#тип)
+- [Размер](#размер)
+- [Импорт](#импорт)
+- [Свойства](#свойства)
+- [Пример](#пример)
+
+</MdxMenu>
+
+## Тип
+
+По умолчанию компонент отображается с бесконечной анимацией — 
+чтобы показать, что процесс идёт.
+
+Если нужно показать процент загрузки или выполнения задачи,
+передайте соответствующее значение в свойстве `value`.
+В этом случае анимация выключится.
+
+Если нужно отображать прогресс пошагово, передайте массив шагов
+в свойстве `steps`, а также для указания описания шага определите функцию
+`getItemLabel`.
+
+```tsx
+<ProgressLine />
+```
+
+<ProgressLineExampleMode />
+
+```tsx
+<ProgressLine value={30} />
+```
+
+<ProgressLineExampleModeValue />
+
+```tsx
+<ProgressLine
+  value={3}
+  steps={['Первый', 'Второй', 'Третий']}
+  getItemLabel={(item) => item}
+/>
+```
+
+<ProgressLineExampleModeSteps />
+
+## Размер
+
+Свойство `size` отвечает за размер индикатора. Доступные размеры: `s` и `m`.
+
+```tsx
+<ProgressLine size="s" />
+<ProgressLine size="m" />
+```
+
+<ProgressLineExampleSize />
+
+## Импорт
+
+```tsx
+import { ProgressLine } from '@consta/uikit/ProgressLine';
+```
+
+## Свойства
+
+```tsx
+type ProgressLinePropMode = 'determinate' | 'indeterminate';
+```
+
+| Свойство                | Тип                         | По умолчанию | Описание                                  |
+| ----------------------- | --------------------------- | ------------ | ----------------------------------------- |
+| [`value?`](#тип)        | `number`                    | -            | Процент загрузки или выполнения           |
+| [`steps?`](#тип)        | `ITEM[]`                    | -            | Массив шагов                              |
+| [`size?`](#размер)      | `'s', 'm'`                  | `'m'`        | Размер индикатора                         |
+| [`getItemLabel?`](#тип) | `(item: ITEM) => string`    | -            | Функция получения лэйбла                  |
+| `className?`            | `string`                    | -            | Дополнительный CSS-класс                  |
+| `ref?`                  | `React.Ref<HTMLDivElement>` | -            | Ссылка на корневой DOM-элемент компонента |
+
+## Пример
+
+```tsx
+import React, { useState } from 'react';
+import { ProgressLine } from '@consta/uikit/ProgressLine';
+
+const App = () => {
+  return <ProgressLine size="s" value={20} />;
+};
+```

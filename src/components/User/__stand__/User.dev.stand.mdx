@@ -1,0 +1,152 @@
+import { MdxMenu } from '@consta/stand';
+import {
+  UserExampleAvatar,
+  UserExampleAvatarName,
+} from './examples/UserExampleAvatar/UserExampleAvatar';
+import { UserExampleName } from './examples/UserExampleName/UserExampleName';
+import { UserExampleStatus } from './examples/UserExampleStatus/UserExampleStatus';
+import { UserExampleView } from './examples/UserExampleView/UserExampleView';
+import {
+  UserExampleSize,
+  UserExampleSizeWidth,
+} from './examples/UserExampleSize/UserExampleSize';
+import { UserExampleArrow } from './examples/UserExampleArrow/UserExampleArrow';
+
+```tsx
+import { User } from '@consta/uikit/User';
+```
+
+<MdxMenu>
+
+- [Аватарка](#аватарка)
+- [Тексты](#тексты)
+- [Статус](#статус)
+- [Размер](#размер)
+- [Обводка](#обводка)
+- [Подробная информация](#подробная-информация)
+- [Импорт](#импорт)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+</MdxMenu>
+
+## Аватарка
+
+Изображение человека (обычно фотография). Подгружается по ссылке из `avatarUrl`.
+
+Вы можете убрать имя и оставить только аватарку (например, если в интерфейсе нет места)
+с помощью свойства `onlyAvatar`.
+
+```ts
+<User avatarUrl="https://i.ibb.co/K2R8Lqb/Rectangle-1496.png" name="Роберт Пласт" info="Cейсмик" />
+<User avatarUrl="https://i.ibb.co/K2R8Lqb/Rectangle-1496.png" name="Роберт Пласт" info="Cейсмик"  onlyAvatar/>
+```
+
+<UserExampleAvatar />
+
+Если не укажете ссылку на изображение, аватарка сформируется из имени пользователя.
+Цвет фона выбирается автоматически, поменять его не получится.
+
+```ts
+<User  name="Роберт Пласт" info="Cейсмик" />
+<User  name="Роберт" info="Cейсмик"  onlyAvatar/>
+```
+
+<UserExampleAvatarName />
+
+## Тексты
+
+За имя человека отвечает `name`. Здесь может быть ник, логин, имя и фамилия.
+
+Вы можете добавить что-то важное в `info` — например, должность, местонахождение
+или статус человека. Этот текст появится под именем.
+
+```ts
+<User avatarUrl="https://i.ibb.co/K2R8Lqb/Rectangle-1496.png" name="Гюзель Скважина" info="В отпуске" />
+<User avatarUrl="https://i.ibb.co/K2R8Lqb/Rectangle-1496.png" name="Люций" info="Эксперт"  onlyAvatar/>
+```
+
+<UserExampleName />
+
+## Статус
+
+`status` показывает, как можно связаться с человеком.
+
+```ts
+<User name="Камилла Флюдиндер" info="Онлайн" status="available" />
+<User name="Камилла Флюдиндер" info="Из дома" status="remote" />
+<User name="Камилла Флюдиндер" info="Недоступна" status="out" />
+```
+
+<UserExampleStatus />
+
+## Обводка
+
+`view = "ghost"` добавит компоненту обводку.
+Чтобы её убрать, укажите `view = "clear"` (по умолчанию).
+
+```ts
+<User name="Бон Фишер" info="Старший эксперт" view="ghost" />
+```
+
+<UserExampleView />
+
+## Размер
+
+У этого блока два размера — `s` и `m`.
+
+<UserExampleSize />
+
+Чтобы растянуть блок на всю ширину, добавьте `width = full`.
+
+<UserExampleSizeWidth />
+
+## Подробная информация
+
+Добавьте стрелочку `withArrow`, чтобы показать, что по клику на аватарку или весь блок
+можно посмотреть подробную информацию о человеке.
+
+Здесь можно показать дополнительное контекстное меню. Например, если блок находится в шапке,
+в нем могут быть пункты **Мой профиль**, **Настройки профиля**, **Выйти** (и другие).
+
+<UserExampleArrow />
+
+## Импорт
+
+```tsx
+import { User } from '@consta/uikit/User';
+```
+
+## Свойства
+
+| Свойство                              | Тип и значения                      | По умолчанию | Описание                                                    |
+| ------------------------------------- | ----------------------------------- | ------------ | ----------------------------------------------------------- |
+| [`avatarUrl?`](#аватарка)             | `string`                            | -            | Ссылка на аватарку                                          |
+| [`onlyAvatar?`](#аватарка)            | `boolean`                           | -            | Показывать только аватарку, без имени                       |
+| [`name?`](#тексты)                    | `string`                            | -            | Имя человека (имя и фамилия)                                |
+| [`info?`](#тексты)                    | `string`                            | `-`          | Дополнительная информация о человеке                        |
+| [`view?`](#обводка)                   | `'ghost', 'clear'`                  | `'clear'`    | Внешний вид компонента                                      |
+| [`withArrow?`](#подробная-информация) | `boolean`                           | -            | Показывать стрелочку, чтобы раскрывать подробную информацию |
+| `iconRight?`                          | `IconComponent`                     | -            | Иконка в правой части компонента, работает без 'withArrow'  |
+| `onIconRightClick?`                   | `(e: React.SyntheticEvent) => void` | -            | Действие на клик по иконке справа, работает без 'withArrow' |
+| [`status?`](#статус)                  | `'available', 'remote', 'out'`      | -            | Статус пользователя                                         |
+| [`size?`](#размер)                    | `'s', 'm', 'l'`                     | `'m'`        | Размер                                                      |
+| [`width?`](#размер)                   | `'full', 'default'`                 | `'default'`  | Ширина блока                                                |
+| `className?`                          | `string`                            | -            | Дополнительный CSS-класс                                    |
+
+## Пример
+
+```ts
+import React from 'react';
+import { User } from '@consta/uikit/User';
+
+const App = () => {
+  return (
+    <User
+      avatarUrl="https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png"
+      name="Винни-Пух"
+      info="И все-все-все"
+    />
+  );
+};
+```

@@ -1,5 +1,5 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
+import React from 'react';
 
 import {
   generateThemeClassNames,
@@ -18,10 +18,16 @@ function getRender() {
 }
 
 const renderComponent = (
-  props: Omit<PortalWithThemeProps, 'preset'> & { preset?: PortalWithThemeProps['preset'] },
+  props: Omit<PortalWithThemeProps, 'preset'> & {
+    preset?: PortalWithThemeProps['preset'];
+  },
 ) => {
   return render(
-    <PortalWithTheme {...props} preset={props.preset || presetGpnDefault} data-testid={testId} />,
+    <PortalWithTheme
+      {...props}
+      preset={props.preset || presetGpnDefault}
+      data-testid={testId}
+    />,
   );
 };
 
@@ -44,7 +50,9 @@ describe('Компонент Theme', () => {
         return <>{JSON.stringify(themeClassNames)}</>;
       };
       renderComponent({ children: <Children />, preset: presetGpnDark });
-      expect(getRender()).toHaveTextContent(JSON.stringify(generateThemeClassNames(presetGpnDark)));
+      expect(getRender()).toHaveTextContent(
+        JSON.stringify(generateThemeClassNames(presetGpnDark)),
+      );
     });
   });
 });

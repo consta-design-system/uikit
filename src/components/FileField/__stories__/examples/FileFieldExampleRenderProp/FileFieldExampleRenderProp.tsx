@@ -5,7 +5,7 @@ import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExamp
 import { Button } from '../../../../Button/Button';
 import { FileField } from '../../../FileField';
 
-export function FileFieldExampleRenderProp() {
+export const FileFieldExampleRenderProp = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <FileField id="FileFieldExampleRenderProp">
@@ -13,4 +13,4 @@ export function FileFieldExampleRenderProp() {
       </FileField>
     </StoryBookExample>
   );
-}
+};

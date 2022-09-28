@@ -45,7 +45,9 @@ type Props<T extends TableRow> = {
 ) &
   React.RefAttributes<HTMLDivElement>;
 
-type TableCell = <T extends TableRow>(props: Props<T>) => React.ReactElement | null;
+type TableCell = <T extends TableRow>(
+  props: Props<T>,
+) => React.ReactElement | null;
 
 const getCellClasses = <T extends TableRow>(props: Props<T>): string => {
   const { column, showVerticalShadow, className } = props;
@@ -58,7 +60,8 @@ const getCellClasses = <T extends TableRow>(props: Props<T>): string => {
       isSortable: column.sortable,
       isHeader: props.type === 'header',
       isResizer: props.type === 'resizer',
-      stickyOnTop: (props.type === 'header' && props.isSticky) || props.type === 'resizer',
+      stickyOnTop:
+        (props.type === 'header' && props.isSticky) || props.type === 'resizer',
       stickyOnLeft: column.isSticky,
       isFilterable: column.filterable,
       isControl: Boolean(column.control),

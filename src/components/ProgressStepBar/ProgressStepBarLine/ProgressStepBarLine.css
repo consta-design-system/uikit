@@ -1,0 +1,66 @@
+.ProgressStepBarLine {
+  position: absolute;
+  top: var(--progress-step-bar-line-top);
+  left: var(--progress-step-bar-line-left);
+  overflow: hidden;
+  width: var(--progress-step-bar-line-width);
+  height: var(--progress-step-bar-line-height);
+  background: var(--line-background);
+
+  &_direction {
+    &_horizontal {
+      --progress-step-bar-line-top: var(--progress-step-bar-line-padding);
+      --progress-step-bar-line-left: 0;
+      --progress-step-bar-line-width: var(--line-size);
+      --progress-step-bar-line-height: var(--progress-step-bar-line-size);
+      --progress-step-bar-line-after-top: 0;
+      --progress-step-bar-line-after-left: var(--line-active-size);
+    }
+
+    &_vertical {
+      --progress-step-bar-line-top: 0;
+      --progress-step-bar-line-left: var(--progress-step-bar-line-padding);
+      --progress-step-bar-line-width: var(--progress-step-bar-line-size);
+      --progress-step-bar-line-height: var(--line-size);
+      --progress-step-bar-line-after-top: var(--line-active-size);
+      --progress-step-bar-line-after-left: 0;
+    }
+  }
+
+  &_size {
+    &_xs {
+      --progress-step-bar-line-size: var(--space-3xs);
+      --progress-step-bar-line-padding:
+        calc(
+          (var(--space-xs) - var(--space-3xs)) * 0.5
+        );
+    }
+
+    &_s {
+      --progress-step-bar-line-size: var(--space-2xs);
+      --progress-step-bar-line-padding:
+        calc(
+          (var(--space-m) - var(--space-2xs)) * 0.5
+        );
+    }
+
+    &_m {
+      --progress-step-bar-line-size: var(--space-2xs);
+      --progress-step-bar-line-padding:
+        calc(
+          (var(--space-xl) - var(--space-2xs)) * 0.5
+        );
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: var(--progress-step-bar-line-after-top);
+    right: 0;
+    left: var(--progress-step-bar-line-after-left);
+    bottom: 0;
+    background: var(--color-bg-system);
+    transition: left 0.3s, top 0.3s;
+  }
+}

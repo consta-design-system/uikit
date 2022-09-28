@@ -1,0 +1,21 @@
+import React from 'react';
+#imports#
+import { FileIconsGalleryItem } from './FileIconsGalleryItem';
+
+const icons = {
+  #icons#
+} as const;
+
+type Name = keyof typeof icons;
+
+const names = Object.keys(icons) as Name[];
+
+export function FileIconsGallery() {
+  return (
+    <div className="tpl-grid tpl-grid_s-ratio_1-1-1-1-1 tpl-grid_row-gap_full">
+      {names.map((name) => (
+        <FileIconsGalleryItem key={name} name={name} icon={icons[name]} />
+      ))}
+    </div>
+  );
+}

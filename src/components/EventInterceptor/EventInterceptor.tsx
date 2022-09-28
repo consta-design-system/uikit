@@ -13,11 +13,14 @@ export type EventInterceptorProps = {
   };
 };
 
-export type EventInterceptorHandler = ((props: EventInterceptorProps) => void) | undefined;
+export type EventInterceptorHandler =
+  | ((props: EventInterceptorProps) => void)
+  | undefined;
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const EventInterceptorContext = React.createContext<
-  { eventHandler: EventInterceptorHandler; map: EventInterceptorMap } | undefined
+  | { eventHandler: EventInterceptorHandler; map: EventInterceptorMap }
+  | undefined
 >(undefined);
 
 const EventInterceptorProvider = ({
@@ -30,6 +33,7 @@ const EventInterceptorProvider = ({
   map: EventInterceptorMap;
 }) => {
   return (
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
     <EventInterceptorContext.Provider value={{ eventHandler, map }}>
       {children}
     </EventInterceptorContext.Provider>

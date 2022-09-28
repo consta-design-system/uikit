@@ -15,7 +15,10 @@ type Props = {
 };
 
 /* Сделано классом, чтобы хэндлеры событий на document могли иметь доступ к актуальному стэйту/пропсам без пересоздания подписок */
-export class TableResizer extends React.Component<Props, { isDragging: boolean }> {
+export class TableResizer extends React.Component<
+  Props,
+  { isDragging: boolean }
+> {
   state = {
     isDragging: false,
   };

@@ -5,7 +5,11 @@ import React, { FormEventHandler } from 'react';
 import { IconSearch } from '../../../icons/IconSearch/IconSearch';
 import { cn } from '../../../utils/bem';
 import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
-import { TextField, TextFieldPropOnChange, TextFieldPropValue } from '../../TextField/TextField';
+import {
+  TextField,
+  TextFieldPropOnChange,
+  TextFieldPropValue,
+} from '../../TextField/TextField';
 
 export const cnHeaderSearchBar = cn('HeaderSearchBar');
 
@@ -45,9 +49,16 @@ export const HeaderSearchBar: React.FC<SearchBarProps> = ({
   };
 
   return (
-    <form {...otherProps} onSubmit={handleSearch} className={cnHeaderSearchBar(null, [className])}>
+    <form
+      {...otherProps}
+      onSubmit={handleSearch}
+      className={cnHeaderSearchBar(null, [className])}
+    >
       {label && (
-        <label className={cnHeaderSearchBar('Label')} htmlFor={cnHeaderSearchBar('Label')}>
+        <label
+          className={cnHeaderSearchBar('Label')}
+          htmlFor={cnHeaderSearchBar('Label')}
+        >
           {label}
         </label>
       )}

@@ -32,7 +32,9 @@ export type PropGetItemLabel<ITEM> = (item: ITEM) => string;
 export type PropGetItemSubLabel<ITEM> = (item: ITEM) => string | undefined;
 export type PropGetItemAvatarUrl<ITEM> = (item: ITEM) => string | undefined;
 export type PropGetItemKey<ITEM> = (item: ITEM) => string | number;
-export type PropGetItemGroupKey<ITEM> = (item: ITEM) => string | number | undefined;
+export type PropGetItemGroupKey<ITEM> = (
+  item: ITEM,
+) => string | number | undefined;
 export type PropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
 export type PropGetGroupKey<GROUP> = (group: GROUP) => string | number;
 export type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
@@ -47,13 +49,17 @@ type PropValue<ITEM, MULTIPLE extends boolean> =
   | null
   | undefined;
 
-export type PropRenderItem<ITEM> = (props: RenderItemProps<ITEM>) => React.ReactElement | null;
-export type PropRenderValue<ITEM> = (props: RenderValueProps<ITEM>) => React.ReactElement | null;
+export type PropRenderItem<ITEM> = (
+  props: RenderItemProps<ITEM>,
+) => React.ReactElement | null;
+export type PropRenderValue<ITEM> = (
+  props: RenderValueProps<ITEM>,
+) => React.ReactElement | null;
 
 export type UserSelectProps<
   ITEM = DefaultItem,
   GROUP = DefaultGroup,
-  MULTIPLE extends boolean = false
+  MULTIPLE extends boolean = false,
 > = PropsWithHTMLAttributesAndRef<
   {
     disabled?: boolean;
@@ -98,30 +104,47 @@ export type UserSelectProps<
   },
   HTMLDivElement
 > &
-  (ITEM extends { label: DefaultItem['label'] } ? {} : { getItemLabel: PropGetItemLabel<ITEM> }) &
-  (ITEM extends { id: DefaultItem['id'] } ? {} : { getItemKey: PropGetItemKey<ITEM> }) &
+  (ITEM extends { label: DefaultItem['label'] }
+    ? {}
+    : { getItemLabel: PropGetItemLabel<ITEM> }) &
+  (ITEM extends { id: DefaultItem['id'] }
+    ? {}
+    : { getItemKey: PropGetItemKey<ITEM> }) &
   (GROUP extends { label: DefaultGroup['label'] }
     ? {}
     : { getGroupLabel: PropGetGroupLabel<GROUP> }) &
-  (GROUP extends { id: DefaultGroup['id'] } ? {} : { getGroupKey: PropGetGroupKey<GROUP> });
+  (GROUP extends { id: DefaultGroup['id'] }
+    ? {}
+    : { getGroupKey: PropGetGroupKey<GROUP> });
 
 export type UserSelectComponent = <
   ITEM = DefaultItem,
   GROUP = DefaultGroup,
-  MULTIPLE extends boolean = false
+  MULTIPLE extends boolean = false,
 >(
   props: UserSelectProps<ITEM, GROUP, MULTIPLE>,
 ) => React.ReactElement | null;
 
 export const defaultGetItemKey: PropGetItemKey<DefaultItem> = (item) => item.id;
-export const defaultGetItemLabel: PropGetItemLabel<DefaultItem> = (item) => item.label;
-export const defaultGetItemSubLabel: PropGetItemSubLabel<DefaultItem> = (item) => item.subLabel;
-export const defaultGetItemAvatarUrl: PropGetItemAvatarUrl<DefaultItem> = (item) => item.avatarUrl;
-export const defaultGetItemGroupKey: PropGetItemGroupKey<DefaultItem> = (item) => item.groupId;
-export const defaultGetItemDisabled: PropGetItemDisabled<DefaultItem> = (item) => item.disabled;
+export const defaultGetItemLabel: PropGetItemLabel<DefaultItem> = (item) =>
+  item.label;
+export const defaultGetItemSubLabel: PropGetItemSubLabel<DefaultItem> = (
+  item,
+) => item.subLabel;
+export const defaultGetItemAvatarUrl: PropGetItemAvatarUrl<DefaultItem> = (
+  item,
+) => item.avatarUrl;
+export const defaultGetItemGroupKey: PropGetItemGroupKey<DefaultItem> = (
+  item,
+) => item.groupId;
+export const defaultGetItemDisabled: PropGetItemDisabled<DefaultItem> = (
+  item,
+) => item.disabled;
 
-export const defaultGetGroupKey: PropGetGroupKey<DefaultGroup> = (group) => group.id;
-export const defaultGetGroupLabel: PropGetGroupLabel<DefaultGroup> = (group) => group.label;
+export const defaultGetGroupKey: PropGetGroupKey<DefaultGroup> = (group) =>
+  group.id;
+export const defaultGetGroupLabel: PropGetGroupLabel<DefaultGroup> = (group) =>
+  group.label;
 
 export const isMultipleParams = <ITEM, GROUP>(
   params: UserSelectProps<ITEM, GROUP, boolean>,
@@ -138,7 +161,7 @@ export const isNotMultipleParams = <ITEM, GROUP>(
 export function withDefaultGetters<
   ITEM = DefaultItem,
   GROUP = DefaultGroup,
-  MULTIPLE extends boolean = false
+  MULTIPLE extends boolean = false,
 >(props: UserSelectProps<ITEM, GROUP, MULTIPLE>) {
   return {
     ...props,
@@ -153,10 +176,15 @@ export function withDefaultGetters<
   };
 }
 
-export const searchCompare = (searchValue: string, compare?: string): boolean => {
+export const searchCompare = (
+  searchValue: string,
+  compare?: string,
+): boolean => {
   if (!compare) {
     return false;
   }
 
-  return compare.toLocaleLowerCase().indexOf(searchValue.toLocaleLowerCase()) !== -1;
+  return (
+    compare.toLocaleLowerCase().indexOf(searchValue.toLocaleLowerCase()) !== -1
+  );
 };

@@ -1,0 +1,55 @@
+/*
+--date-time-cell-width
+--date-time-cell-height
+--date-time-cell-vertical-gap
+--date-time-cell-horisontal-ga
+
+задаются сверху
+*/
+
+.DateTimeCell {
+  --bg-color: var(--color-control-bg-ghost);
+  --visible-height:
+    calc(
+      var(--date-time-cell-height) - (var(--date-time-cell-horisontal-gap) * 2)
+    );
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--date-time-cell-width);
+  height: var(--date-time-cell-height);
+
+  &_range {
+    &::before {
+      content: '';
+      position: absolute;
+      top: var(--date-time-cell-vertical-gap);
+      right: 0;
+      left: 0;
+      bottom: var(--date-time-cell-vertical-gap);
+      background: var(--bg-color);
+    }
+
+    &_first::before,
+    &_last::before {
+      content: '';
+      position: absolute;
+      top: var(--date-time-cell-vertical-gap);
+      bottom: var(--date-time-cell-vertical-gap);
+      background: var(--bg-color);
+    }
+
+    &_first::before {
+      right: 0;
+      left: var(--date-time-cell-horisontal-gap);
+      border-radius: var(--visible-height) 0 0 var(--visible-height);
+    }
+
+    &_last::before {
+      right: var(--date-time-cell-horisontal-gap);
+      left: 0;
+      border-radius: 0 var(--visible-height) var(--visible-height) 0;
+    }
+  }
+}

@@ -1,5 +1,5 @@
-import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import React from 'react';
 
 import { cnSteps, Steps } from '../Steps';
 
@@ -10,7 +10,7 @@ type Item = {
 };
 type OnChange = (props: { e: React.MouseEvent; value: Item | null }) => void;
 
-const testId = 'Steps';
+const testId = 'StepsCanary';
 
 const items: Item[] = [
   {
@@ -27,15 +27,18 @@ const items: Item[] = [
 
 const additionalClass = 'additionalClass';
 
-const renderComponent = (props: { size?: StepsProps['size']; onChange?: OnChange }) => {
+const renderComponent = (props: {
+  size?: StepsProps['size'];
+  onChange?: OnChange;
+}) => {
   const handleChange = jest.fn();
 
   return render(
     <Steps
       items={items}
       value={items[0]}
-      getLabel={(item) => item.label}
-      getDisabled={(item) => item.disabled || false}
+      getItemLabel={(item) => item.label}
+      getItemDisabled={(item) => item.disabled || false}
       onChange={props.onChange || handleChange}
       className={additionalClass}
       data-testid={testId}
@@ -85,7 +88,9 @@ describe('Компонент Steps', () => {
         fireEvent.click(item);
 
         expect(handleChange).toHaveBeenCalledTimes(1);
-        expect(handleChange).toHaveBeenCalledWith(expect.objectContaining({ value: items[1] }));
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({ value: items[1] }),
+        );
       });
     });
 

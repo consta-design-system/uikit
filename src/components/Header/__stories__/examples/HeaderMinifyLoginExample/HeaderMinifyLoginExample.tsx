@@ -15,11 +15,14 @@ import {
   HeaderModule,
   HeaderSearchBar,
 } from '../../../Header';
-import { SearchBarPropOnChange, SearchBarPropOnSearch } from '../../../SearchBar/HeaderSearchBar';
+import {
+  SearchBarPropOnChange,
+  SearchBarPropOnSearch,
+} from '../../../SearchBar/HeaderSearchBar';
 
 const cnExample = cn('HeaderMinifyLoginExample');
 
-export function HeaderMinifyLoginExample() {
+export const HeaderMinifyLoginExample = () => {
   const [value, setValue] = useState<string | null>(null);
   const [authorized, setAuthorized] = useState<boolean>(false);
   const handleChange: SearchBarPropOnChange = ({ value }) => setValue(value);
@@ -93,4 +96,4 @@ export function HeaderMinifyLoginExample() {
       }
     />
   );
-}
+};

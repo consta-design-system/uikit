@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function ProgressLineImage(props: React.SVGProps<SVGSVGElement>) {
+const ProgressLineImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <rect width={200} height={120} rx={4} fill="#ECF1F4" />
@@ -42,6 +42,6 @@ function ProgressLineImage(props: React.SVGProps<SVGSVGElement>) {
       </defs>
     </svg>
   );
-}
+};
 
 export default ProgressLineImage;

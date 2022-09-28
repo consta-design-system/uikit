@@ -9,7 +9,7 @@ import { Grid, GridItem } from '../../../Grid';
 
 const cnGridItemExampleOrder = cn('GridItemExampleOrder');
 
-export function GridItemExampleOrder() {
+export const GridItemExampleOrder = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Grid className={cnGridItemExampleOrder()} cols="3" gap="xl">
@@ -26,4 +26,4 @@ export function GridItemExampleOrder() {
       </Grid>
     </StoryBookExample>
   );
-}
+};

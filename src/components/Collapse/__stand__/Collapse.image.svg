@@ -1,0 +1,38 @@
+<svg
+  width="200"
+  height="120"
+  viewBox="0 0 200 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M0 4C0 1.79086 1.79086 0 4 0H196C198.209 0 200 1.79086 200 4V116C200 118.209 198.209 120 196 120H4C1.79086 120 0 118.209 0 116V4Z"
+    fill="var(--color-bg-default)"
+  />
+  <path
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M34.9791 40L40.9582 45.9428L39.8945 47L34.9791 42.1144L30.0636 47L29 45.9428L34.9791 40Z"
+    fill="var(--color-bg-link)"
+  />
+  <rect
+    width="114.599"
+    height="7"
+    transform="translate(57.4009 40)"
+    fill="var(--color-bg-link)"
+  />
+  <rect
+    x="57.4009"
+    y="40"
+    width="114.599"
+    height="7"
+    fill="var(--color-bg-link)"
+  />
+  <rect
+    width="114"
+    height="30"
+    transform="translate(58 51)"
+    fill="var(--color-bg-link)"
+  />
+  <rect x="58" y="51" width="114" height="30" fill="var(--color-bg-system)" />
+</svg>

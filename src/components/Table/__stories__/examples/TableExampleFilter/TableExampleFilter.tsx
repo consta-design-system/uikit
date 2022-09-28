@@ -29,10 +29,10 @@ const filters: TableFilters<typeof rows[number]> = [
   },
 ];
 
-export function TableExampleFilter() {
+export const TableExampleFilter = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Table columns={columns} rows={rows} filters={filters} />
     </StoryBookExample>
   );
-}
+};

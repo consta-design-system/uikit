@@ -11,7 +11,11 @@ export const ResponsesDeleted = createResponses({
   description: '*Что-то* успешно удалено',
   actions: (
     <>
-      <Button label="Вернуть на место" view="ghost" style={{ marginRight: 'var(--space-m)' }} />
+      <Button
+        label="Вернуть на место"
+        view="ghost"
+        style={{ marginRight: 'var(--space-m)' }}
+      />
       <Button label="Отлично!" view="ghost" />
     </>
   ),

@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 
 import { useChoiceGroupIndexed } from '../../hooks/useChoiceGroupIndexed/useChoiceGroupIndexed';
-
-import { CollapseGroupPropOnOpen, CollapseGroupPropOpened, CollapseGroupProps } from './helpers';
+import {
+  CollapseGroupPropOnOpen,
+  CollapseGroupPropOpened,
+  CollapseGroupProps,
+} from './helpers';
 
 type ChoiceGroupIndexedParams = {
   value: CollapseGroupPropOpened<boolean>;
@@ -14,11 +17,13 @@ type ChoiceGroupIndexedParams = {
 export const useChoice = <ITEM, IS_ACCORDION extends boolean>(
   props: CollapseGroupProps<ITEM, IS_ACCORDION>,
 ) => {
-  const [openedKeys, setOpenedKeys] = useState<typeof props.opened>(props.opened);
+  const [openedKeys, setOpenedKeys] = useState<typeof props.opened>(
+    props.opened,
+  );
 
-  const callBack: CollapseGroupPropOnOpen<Exclude<typeof props.isAccordion, undefined>> = (
-    params,
-  ) => {
+  const callBack: CollapseGroupPropOnOpen<
+    Exclude<typeof props.isAccordion, undefined>
+  > = (params) => {
     setOpenedKeys(params.value);
     props.onOpen?.(params);
   };

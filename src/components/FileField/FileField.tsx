@@ -42,7 +42,9 @@ export const FileField: React.FC<FileFieldProps> = (props) => {
     ...inputProps
   } = usePropsHandler(COMPONENT_NAME, props, fileFieldRef);
 
-  const content = isRenderFn(children) ? children({ role: 'button', as: 'span' }) : children;
+  const content = isRenderFn(children)
+    ? children({ role: 'button', as: 'span' })
+    : children;
 
   return (
     <label htmlFor={id} className={cnFileField(null, [className])}>

@@ -7,7 +7,10 @@ export const cnHeaderButton = cn('HeaderButton');
 
 type ButtonProps = React.ComponentProps<typeof Button>;
 
-type HeaderButtonProps = Omit<ButtonProps, 'size' | 'view' | 'form' | 'onlyIcon'>;
+type HeaderButtonProps = Omit<
+  ButtonProps,
+  'size' | 'view' | 'form' | 'onlyIcon'
+>;
 
 export const HeaderButton: React.FC<HeaderButtonProps> = (props) => {
   const { className, ...otherProps } = props;

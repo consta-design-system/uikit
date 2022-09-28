@@ -1,0 +1,96 @@
+import { MdxMenu } from '@consta/stand';
+
+import { FileFieldExampleRenderProp } from './examples/FileFieldExampleRenderProp/FileFieldExampleRenderProp';
+import {
+  FileFieldExampleWithoutRenderProp,
+  FileFieldExampleWithoutRenderPropIcon,
+} from './examples/FileFieldExampleWithoutRenderProp/FileFieldExampleWithoutRenderProp';
+
+```tsx
+import { FileField } from '@consta/uikit/FileField';
+```
+
+<MdxMenu>
+
+- [Пример с Render Prop](#пример-с-rende-rprop)
+- [Пример без Render Prop](#пример-без-render-prop)
+- [Импорт](#импорт)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+</MdxMenu>
+
+## Пример с Render Prop
+
+Нажмите на кнопку, чтобы открыть выбор файлов.
+
+<FileFieldExampleRenderProp />
+
+```ts
+import React from 'react';
+import { FileField, FileFieldProps } from '@consta/uikit/FileField';
+import { Button } from '@consta/uikit/Button';
+
+const App = () => {
+  return (
+    <FileField>
+      {(props) => <Button {...props} label="Выбрать файлы" />}
+    </FileField>
+  );
+};
+```
+
+## Пример без Render Prop
+
+Нажмите на текст `Нажми меня` или на иконку `+`, чтобы открыть выбор файлов.
+
+<FileFieldExampleWithoutRenderProp />
+<FileFieldExampleWithoutRenderPropIcon />
+
+```ts
+import React from 'react';
+import { FileField, FileFieldProps } from '@consta/uikit/FileField';
+import { Text } from '@consta/uikit/Text';
+import { IconAdd } from '@consta/uikit/IconAdd';
+
+const App = () => {
+  return (
+    <FileField id="FileFieldWithText">
+      <Text>Нажми меня</Text>
+    </FileField>
+    <FileField id="FileFieldWithIcon">
+      <IconAdd view="alert" />
+    </FileField>
+  );
+};
+```
+
+## Импорт
+
+```tsx
+import { FileField } from '@consta/uikit/FileField';
+```
+
+## Свойства
+
+| Свойство    | Тип                                         | По умолчанию | Описание                                           |
+| ----------- | ------------------------------------------- | ------------ | -------------------------------------------------- |
+| `id`        | `string`                                    | -            | Идентификатор компонента                           |
+| `onChange?` | `(e: DragEvent, React.ChangeEvent) => void` | -            | Действие при выборе файла                          |
+| `inputRef?` | `React.Ref<HTMLInputElement>`               | -            | Ссылка на DOM-элемент `<input>` и все его атрибуты |
+
+## Пример
+
+```ts
+import React from 'react';
+import { FileField } from '@consta/uikit/FileField';
+import { Button } from '@consta/uikit/Button';
+
+const App = () => {
+  return (
+    <FileField>
+      {(props) => <Button {...props} label="Выбрать файл" />}
+    </FileField>
+  );
+};
+```

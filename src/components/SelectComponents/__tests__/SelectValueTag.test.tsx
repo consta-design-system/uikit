@@ -1,8 +1,11 @@
-import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
+import React from 'react';
 
 import { cnTagBase } from '../../TagBase/TagBase';
-import { cnSelectValueTag, SelectValueTag } from '../SelectValueTag/SelectValueTag';
+import {
+  cnSelectValueTag,
+  SelectValueTag,
+} from '../SelectValueTag/SelectValueTag';
 
 type Props = React.ComponentProps<typeof SelectValueTag>;
 
@@ -15,7 +18,8 @@ const renderComponent = (props: Partial<Props> = {}) => {
   return render(<SelectValueTag {...defaultProps} {...props} />);
 };
 
-const getTag = (base: HTMLElement) => base.querySelector(`.${cnTagBase()}`) as Element;
+const getTag = (base: HTMLElement) =>
+  base.querySelector(`.${cnTagBase()}`) as Element;
 const getTagCancelButton = (base: HTMLElement) =>
   getTag(base).querySelector(`.${cnTagBase('CancelButton')}`) as Element;
 

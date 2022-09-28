@@ -3,9 +3,9 @@ import './TabsFitModeDropdownWrapper.css';
 import React from 'react';
 
 import { cn } from '../../../utils/bem';
-import { getTabsWidth, TabsFitModeWrapperProps } from '../helpers';
+import { getTabsWidth } from '../helpers';
 import { TabsMoreItems } from '../MoreItems/TabsMoreItems';
-
+import { TabsFitModeWrapperProps } from '../types';
 import { useFittingItems } from './useFittingItems';
 
 const cnTabsFitModeDropdownWrapper = cn('TabsFitModeDropdownWrapper');
@@ -14,8 +14,8 @@ export const TabsFitModeDropdownWrapper = <ITEM,>({
   items,
   tabsDimensions,
   tabRefs,
-  getLabel,
-  getChecked,
+  getItemLabel,
+  getItemChecked,
   renderItem,
   renderItemsList,
 }: TabsFitModeWrapperProps<ITEM>): React.ReactElement | null => {
@@ -28,13 +28,21 @@ export const TabsFitModeDropdownWrapper = <ITEM,>({
   });
   const hiddenItems = items.filter((_item, idx) => isItemHidden(idx));
   const maxTabHeight: number = React.useMemo(() => {
-    return Math.max(...tabRefs.map((tabRef) => tabRef.current?.offsetHeight ?? 0));
+    return Math.max(
+      ...tabRefs.map((tabRef) => tabRef.current?.offsetHeight ?? 0),
+    );
   }, [tabsDimensions]);
-  const checkedItemIsHidden = hiddenItems.some(getChecked);
-  const visibleTabsWidth = getTabsWidth(tabsDimensions.filter((_td, idx) => !isItemHidden(idx)));
+  const checkedItemIsHidden = hiddenItems.some(getItemChecked);
+  const visibleTabsWidth = getTabsWidth(
+    tabsDimensions.filter((_td, idx) => !isItemHidden(idx)),
+  );
 
   return (
-    <div ref={ref} className={cnTabsFitModeDropdownWrapper()} style={{ height: maxTabHeight }}>
+    <div
+      ref={ref}
+      className={cnTabsFitModeDropdownWrapper()}
+      style={{ height: maxTabHeight }}
+    >
       <div className={cnTabsFitModeDropdownWrapper('Tabs')}>
         {renderItemsList({
           withRunningLine: !checkedItemIsHidden,
@@ -55,8 +63,8 @@ export const TabsFitModeDropdownWrapper = <ITEM,>({
           <TabsMoreItems
             items={hiddenItems}
             renderItem={renderItem}
-            getLabel={getLabel}
-            getChecked={getChecked}
+            getItemLabel={getItemLabel}
+            getItemChecked={getItemChecked}
             height={maxTabHeight}
           />
         </div>

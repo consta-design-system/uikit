@@ -1,11 +1,10 @@
 import * as React from 'react';
+import { SVGProps } from 'react';
 
-function IconSelectSizeXs(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 12 12" {...props}>
-      <path d="M6 8.5L10 4H2l4 4.5z" />
-    </svg>
-  );
-}
+const IconSelectSizeXs = (props: SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <path d="M6 8.5 10 4H2l4 4.5z" />
+  </svg>
+);
 
 export default IconSelectSizeXs;

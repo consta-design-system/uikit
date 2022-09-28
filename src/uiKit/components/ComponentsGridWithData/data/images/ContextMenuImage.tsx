@@ -1,12 +1,27 @@
 import * as React from 'react';
 
-function ContextMenuImage(props: React.SVGProps<SVGSVGElement>) {
+const ContextMenuImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
-      <path d="M0 4a4 4 0 014-4h192a4 4 0 014 4v112a4 4 0 01-4 4H4a4 4 0 01-4-4V4z" fill="#fff" />
-      <rect x={46} y={14} width={20} height={20} rx={4} fill="#002033" fillOpacity={0.08} />
+      <path
+        d="M0 4a4 4 0 014-4h192a4 4 0 014 4v112a4 4 0 01-4 4H4a4 4 0 01-4-4V4z"
+        fill="#fff"
+      />
+      <rect
+        x={46}
+        y={14}
+        width={20}
+        height={20}
+        rx={4}
+        fill="#002033"
+        fillOpacity={0.08}
+      />
       <rect x={46} y={34} width={108} height={72} rx={4} fill="#fff" />
-      <path fill="#002033" fillOpacity={0.35} d="M59 67h82v5H59zM59 87h82v5H59zM59 47h82v5H59z" />
+      <path
+        fill="#002033"
+        fillOpacity={0.35}
+        d="M59 67h82v5H59zM59 87h82v5H59zM59 47h82v5H59z"
+      />
       <rect
         x={46.5}
         y={34.5}
@@ -23,6 +38,6 @@ function ContextMenuImage(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default ContextMenuImage;

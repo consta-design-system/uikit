@@ -20,7 +20,9 @@ type SelectCreateButtonProps = PropsWithHTMLAttributes<
 
 export const cnSelectCreateButton = cn('SelectCreateButton');
 
-export const SelectCreateButton: React.FC<SelectCreateButtonProps> = (props) => {
+export const SelectCreateButton: React.FC<SelectCreateButtonProps> = (
+  props,
+) => {
   const {
     className,
     labelForCreate,
@@ -35,7 +37,9 @@ export const SelectCreateButton: React.FC<SelectCreateButtonProps> = (props) => 
   return (
     <div
       {...otherProps}
-      className={cnSelectCreateButton({ active, hovered, size, indent }, [className])}
+      className={cnSelectCreateButton({ active, hovered, size, indent }, [
+        className,
+      ])}
       aria-selected={active}
       role="option"
     >

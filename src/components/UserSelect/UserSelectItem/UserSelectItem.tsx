@@ -26,7 +26,10 @@ type UserSelectItemProps = PropsWithHTMLAttributes<
 
 export const cnUserSelectItem = cn('UserSelectItem');
 
-const cnUserSelectItemCheckIconCssTransition = cnForCssTransition(cnUserSelectItem, 'CheckIcon');
+const cnUserSelectItemCheckIconCssTransition = cnForCssTransition(
+  cnUserSelectItem,
+  'CheckIcon',
+);
 
 export const UserSelectItem: React.FC<UserSelectItemProps> = (props) => {
   const {
@@ -48,12 +51,18 @@ export const UserSelectItem: React.FC<UserSelectItemProps> = (props) => {
   return (
     <div
       {...otherProps}
-      className={cnUserSelectItem({ active, hovered, size, indent, disable }, [className])}
+      className={cnUserSelectItem({ active, hovered, size, indent, disable }, [
+        className,
+      ])}
       aria-selected={active}
       role="option"
     >
       <div className={cnUserSelectItem('AvatarContainer')}>
-        <Avatar className={cnUserSelectItem('Avatar')} url={avatarUrl} name={label} />
+        <Avatar
+          className={cnUserSelectItem('Avatar')}
+          url={avatarUrl}
+          name={label}
+        />
         {multiple && (
           <CSSTransition
             in={active}
@@ -62,17 +71,24 @@ export const UserSelectItem: React.FC<UserSelectItemProps> = (props) => {
             timeout={200}
             nodeRef={iconRef}
           >
-            <IconCheck className={cnUserSelectItem('CheckIcon')} ref={iconRef} />
+            <IconCheck
+              className={cnUserSelectItem('CheckIcon')}
+              ref={iconRef}
+            />
           </CSSTransition>
         )}
-        {!multiple && active && <IconCheck className={cnUserSelectItem('CheckIcon')} />}
+        {!multiple && active && (
+          <IconCheck className={cnUserSelectItem('CheckIcon')} />
+        )}
       </div>
       {!subLabel ? (
         <div className={cnUserSelectItem('Info')}>{label}</div>
       ) : (
         <div className={cnUserSelectItem('Info')}>
           <div>{label}</div>
-          <div className={cnUserSelectItem('SubLabel', { disable })}>{subLabel}</div>
+          <div className={cnUserSelectItem('SubLabel', { disable })}>
+            {subLabel}
+          </div>
         </div>
       )}
     </div>

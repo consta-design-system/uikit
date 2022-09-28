@@ -5,11 +5,13 @@ import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExamp
 import { Table, TableColumn } from '../../../Table';
 
 const rows = [
-  { id: 'Ссылка', name: 'https://uikit.consta.design/?path=/story/common-about--page' },
+  {
+    id: 'Ссылка',
+    name: 'https://uikit.consta.design/?path=/story/common-about--page',
+  },
   {
     id: 'Описание',
-    name:
-      'Это просто длинный текст. Он нужен, чтобы посмотреть, как работают переносы разного типа. Вот на всякий случай — ещё одно предложение. И ещё одно, чтобы тексты отличались по длине.',
+    name: 'Это просто длинный текст. Он нужен, чтобы посмотреть, как работают переносы разного типа. Вот на всякий случай — ещё одно предложение. И ещё одно, чтобы тексты отличались по длине.',
   },
   {
     id: 'Длинная строка',
@@ -32,10 +34,15 @@ const columns: TableColumn<typeof rows[number]>[] = [
   },
 ];
 
-export function TableExampleCellWrap() {
+export const TableExampleCellWrap = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
-      <Table columns={columns} rows={rows} borderBetweenRows borderBetweenColumns />
+      <Table
+        columns={columns}
+        rows={rows}
+        borderBetweenRows
+        borderBetweenColumns
+      />
       <Table
         columns={columns}
         rows={rows}
@@ -52,4 +59,4 @@ export function TableExampleCellWrap() {
       />
     </StoryBookExample>
   );
-}
+};

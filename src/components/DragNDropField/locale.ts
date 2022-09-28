@@ -1,9 +1,10 @@
 import { isDefined, isNotNil, isString } from '../../utils/type-guards';
-
 import { formatFileSize } from './formatFileSize';
 import { FileSizes } from './types';
 
-type LocaleError = string | ((props: { file: File; sizes: FileSizes }) => string);
+type LocaleError =
+  | string
+  | ((props: { file: File; sizes: FileSizes }) => string);
 type LocaleLabel = string | ((props: { fileText: string }) => string);
 
 export type Locale = {
@@ -27,7 +28,10 @@ export type Locale = {
 
 export const defaultLocale: Required<Locale> = {
   'file-invalid-type': (props) =>
-    [`${props.file.name}: формат файла не подходит`, props.file.type && `(${props.file.type})`]
+    [
+      `${props.file.name}: формат файла не подходит`,
+      props.file.type && `(${props.file.type})`,
+    ]
       .filter(isNotNil)
       .join(' '),
   'file-too-large': (props) =>
@@ -51,11 +55,15 @@ export const defaultLocale: Required<Locale> = {
   'megabyte': 'Мб',
   'kilobyte': 'Кб',
   'byte': 'байт',
-  'call-to-action': (props) => `Перетащите ${props.fileText} сюда или загрузите по кнопке`,
+  'call-to-action': (props) =>
+    `Перетащите ${props.fileText} сюда или загрузите по кнопке`,
   'action-button': (props) => `Выбрать ${props.fileText}`,
 };
 
-export const getText = <PROPS>(textOrFn: string | ((props: PROPS) => string), props: PROPS) => {
+export const getText = <PROPS>(
+  textOrFn: string | ((props: PROPS) => string),
+  props: PROPS,
+) => {
   return isString(textOrFn) ? textOrFn : textOrFn(props);
 };
 

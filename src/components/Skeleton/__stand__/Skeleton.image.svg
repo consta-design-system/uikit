@@ -1,0 +1,16 @@
+<svg
+  width="200"
+  height="120"
+  viewBox="0 0 200 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M0 4C0 1.79086 1.79086 0 4 0H196C198.209 0 200 1.79086 200 4V116C200 118.209 198.209 120 196 120H4C1.79086 120 0 118.209 0 116V4Z"
+    fill="var(--color-bg-default)"
+  />
+  <circle cx="38" cy="36" r="16" fill="var(--color-bg-system)" />
+  <rect x="66" y="22" width="56" height="12" fill="var(--color-bg-system)" />
+  <rect x="66" y="38" width="112" height="12" fill="var(--color-bg-system)" />
+  <rect x="22" y="64" width="156" height="35" fill="var(--color-bg-system)" />
+</svg>

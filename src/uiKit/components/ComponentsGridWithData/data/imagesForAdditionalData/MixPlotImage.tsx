@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function MixPlotImage(props: React.SVGProps<SVGSVGElement>) {
+const MixPlotImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <path
@@ -32,6 +32,6 @@ function MixPlotImage(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+};
 
 export default MixPlotImage;

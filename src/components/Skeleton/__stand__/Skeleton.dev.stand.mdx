@@ -1,0 +1,167 @@
+import { MdxMenu } from '@consta/stand';
+import { SkeletonBrick, SkeletonCircle, SkeletonText } from '../Skeleton';
+import { SkeletonExampleAvatar } from './examples/SkeletonExampleAvatar/SkeletonExampleAvatar';
+import { SkeletonExampleImageAndText } from './examples/SkeletonExampleImageAndText';
+import { StoryBookExample } from '../../../uiKit/components/StoryBookExample/StoryBookExample';
+
+```tsx
+import {
+  SkeletonBrick,
+  SkeletonCircle,
+  SkeletonText,
+} from '@consta/uikit/Skeleton';
+```
+
+<MdxMenu>
+
+- [Прямоугольный скелетон](#прямоугольный-скелетон)
+  - [Свойства](#свойства-skeletonbrick)
+- [Круглый скелетон](#круглый-скелетон)
+  - [Свойства](#свойства-skeletoncircle)
+- [Скелетон для текста](#скелетон-для-текста)
+  - [Свойства](#свойства-skeletontext)
+- [Как использовать скелетоны](#как-использовать-скелетоны)
+
+</MdxMenu>
+
+## Прямоугольный скелетон
+
+Чтобы сделать плейсхолдер для картинки или другого прямоугольного блока,
+используйте `<SkeletonBrick />`. У такого скелетона можно менять ширину — в свойстве `width` и высоту — в свойстве `height`.
+
+```tsx
+<SkeletonBrick height={200} />
+```
+
+<StoryBookExample>
+  <SkeletonBrick height={200} />
+</StoryBookExample>
+
+### Импорт
+
+```tsx
+import { SkeletonBrick } from '@consta/uikit/Skeleton';
+```
+
+### Свойства SkeletonBrick
+
+| Свойство     | Тип                       | По умолчанию | Описание                 |
+| ------------ | ------------------------- | ------------ | ------------------------ |
+| `width?`     | `CSSProperties['width']`  | `'100%'`     | Ширина блока             |
+| `height`     | `CSSProperties['height']` | -            | Высота блока в пикселях  |
+| `className?` | `string`                  | -            | Дополнительный CSS-класс |
+
+## Круглый скелетон
+
+Круглый скелетон — `<SkeletonCircle />` — можно показывать на месте аватарок. Диаметр круга меняется в свойстве `size`.
+
+```tsx
+<SkeletonCircle size={60} />
+```
+
+<StoryBookExample>
+  <SkeletonCircle size={60} />
+</StoryBookExample>
+
+### Импорт SkeletonCircle
+
+```tsx
+import { SkeletonCircle } from '@consta/uikit/Skeleton';
+```
+
+### Свойства SkeletonCircle
+
+| Свойство     | Тип                                                | По умолчанию | Описание                 |
+| ------------ | -------------------------------------------------- | ------------ | ------------------------ |
+| `size`       | `CSSProperties['width'] & CSSProperties['height']` | -            | Диаметр круга в пикселях |
+| `className?` | `string`                                           | -            | Дополнительный CSS-класс |
+
+## Скелетон для текста
+
+Вместо незагруженного текста можно показать `<SkeletonText />`. У него можно регулировать:
+
+- количество строк — `rows`,
+- размер шрифта — `fontSize`
+- и высоту строки —  `lineHeight`.
+
+#### Пример скелетона для обычного текста
+
+```tsx
+<SkeletonText rows={4} />
+```
+
+<StoryBookExample>
+  <SkeletonText rows={4} />
+</StoryBookExample>
+
+#### Пример скелетона для мелкого текста
+
+```tsx
+<SkeletonText rows={2} fontSize="2xs" lineHeight="xs" />
+```
+
+<StoryBookExample>
+  <SkeletonText rows={2} fontSize="2xs" lineHeight="xs" />
+</StoryBookExample>
+
+### Импорт SkeletonText
+
+```tsx
+import { SkeletonText } from '@consta/uikit/Skeleton';
+```
+
+### Свойства SkeletonText
+
+| Свойство      | Тип                                                                   | По умолчанию | Описание                 |
+| ------------- | --------------------------------------------------------------------- | ------------ | ------------------------ |
+| `rows`        | `number`                                                              | -            | Количество строк         |
+| `fontSize?`   | `'2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'` | `'m'`        | Размер текста            |
+| `lineHeight?` | `'2xs', 'xs', 's', 'm', 'l'`                                          | `'m'`        | Высота строки            |
+| `className?`  | `string`                                                              | -            | Дополнительный CSS-класс |
+
+## Как использовать скелетоны
+
+Разные скелетоны можно сочетать вместе так, чтобы каркас страницы был похож на то, что пользователь увидит после загрузки.
+
+### Используйте классы компонентов
+
+Если можно, примените к скелетону классы компонента, который он заменяет. Это позволит избежать дублирования и сделает вид компонента и его скелетона максимально похожими.
+
+```tsx
+<div className="main">
+  <SkeletonCircle className="avatar" size={32} />
+  <SkeletonText className="text" rows={2} fontSize="xs" lineHeight="s" />
+</div>
+```
+
+```css
+.main {
+  display: flex;
+  width: 150px;
+}
+
+.avatar {
+  flex-shrink: 0;
+}
+
+.text {
+  margin-left: var(--space-s);
+}
+```
+
+<SkeletonExampleAvatar />
+
+### Меняйте скелетоны на компоненты после загрузки
+
+Если используете компоненты для лейаута (например, [Grid](##LIBS.STAND/stand:uikit-components-grid-stable)), положите внутрь скелетоны, а после загрузки поменяйте их на реальные компоненты.
+
+```tsx
+<Grid gap="m" style={{ width: 200 }}>
+  <SkeletonBrick height={200} />
+  <SkeletonText rows={4} />
+</Grid>
+```
+
+<SkeletonExampleImageAndText />
+
+> Если переиспользовать классы или компоненты лейаута не удаётся, можно написать отдельные стили для обёртки скелетона.

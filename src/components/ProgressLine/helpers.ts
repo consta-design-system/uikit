@@ -1,7 +1,12 @@
-import { ProgressLineItemDefault, ProgressLinePropGetItemLabel, ProgressLineProps } from './types';
+import {
+  ProgressLineItemDefault,
+  ProgressLinePropGetItemLabel,
+  ProgressLineProps,
+} from './types';
 
-const defaultGetItemLabel: ProgressLinePropGetItemLabel<ProgressLineItemDefault> = (item) =>
-  item.label;
+const defaultGetItemLabel: ProgressLinePropGetItemLabel<
+  ProgressLineItemDefault
+> = (item) => item.label;
 
 export function withDefaultGetters<ITEM>(props: ProgressLineProps<ITEM>) {
   return {
@@ -10,7 +15,11 @@ export function withDefaultGetters<ITEM>(props: ProgressLineProps<ITEM>) {
   };
 }
 
-export const getLineDelay = (value: number, prevValue: number, index: number) => {
+export const getLineDelay = (
+  value: number,
+  prevValue: number,
+  index: number,
+) => {
   if (prevValue < value) {
     return Math.max(value < index ? 0 : index - prevValue - 1, 0);
   }

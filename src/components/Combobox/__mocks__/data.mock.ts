@@ -117,7 +117,11 @@ export type MyItem = {
 
 export type MyGroup = string;
 
-export const myGroup: MyGroup[] = ['Первая группа', 'Вторая группа', 'Третья группа'];
+export const myGroup: MyGroup[] = [
+  'Первая группа',
+  'Вторая группа',
+  'Третья группа',
+];
 
 export const myData: MyItem[] = [
   { name: 'Первый', group: 'Первая группа' },

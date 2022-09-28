@@ -1,0 +1,43 @@
+import { RadioGroupExampleView } from './examples/RadioGroupExampleView/RadioGroupExampleView';
+import {
+  RadioGroupExampleMore,
+  RadioGroupExampleChecked,
+  RadioGroupExampleOne,
+} from './examples/RadioGroupExampleUse/RadioGroupExampleUse';
+
+```tsx
+import { RadioGroup } from '@consta/uikit/RadioGroupDeprecated';
+```
+
+Группа радиокнопок с одним `name`. Пользователь может выбрать один вариант из списка.
+
+<RadioGroupExampleView />
+
+## Как использовать
+
+### Только один на выбор
+
+Список должен быть таким, чтобы пользователь мог выбрать только один вариант.
+Это может быть способ доставки заказа, форма пирога, модель телефона.
+
+Если вы понимаете, что в вашем списке можно выбрать несколько вариантов,
+радиокнопки не подойдут. Используйте [CheckboxGroup](##LIBS.STAND/stand:uikit-components-checkboxgroup-stable).
+
+<RadioGroupExampleOne />
+
+### Больше одного варианта
+
+Радиокнопки подходят, если у вас в списке несколько вариантов.
+Если вариант только один, возможно, пользователю не нужно делать выбор,
+а значит, и радиокнопка не нужна. Если нужно выбрать один из двух вариантов,
+используйте [переключатель](##LIBS.STAND/stand:uikit-components-switch-stable).
+
+<RadioGroupExampleMore />
+
+### Хотя бы один выбранный
+
+Радиокнопки обычно предлагают сделать выбор, без которого нельзя обойтись. Например,
+если пользователь не укажет, как доставить товар, вы не сможете выбрать за него.
+Поэтому обязательно отметьте один пункт выбранным.
+
+<RadioGroupExampleChecked />

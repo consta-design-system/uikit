@@ -2,7 +2,9 @@ import { useMemo } from 'react';
 
 import { setRef } from '../../utils/setRef';
 
-export function useForkRef<T>(refs: (React.Ref<T> | undefined)[]): React.RefCallback<T> | null {
+export function useForkRef<T>(
+  refs: (React.Ref<T> | undefined)[],
+): React.RefCallback<T> | null {
   return useMemo(() => {
     if (refs.length < 1) {
       return null;

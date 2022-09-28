@@ -15,7 +15,9 @@ const generateBreakpointCn = (
     return {
       ...previous,
       [`${size}:${current}`]:
-        breakpoint[current] === undefined ? undefined : `${breakpoint[current]}`,
+        breakpoint[current] === undefined
+          ? undefined
+          : `${breakpoint[current]}`,
     };
   }, {});
 
@@ -34,7 +36,10 @@ export const generateBreakpointsCn = (
     const breakpoint = breakpoints[current];
 
     if (breakpoint && !isEmpty(breakpoint)) {
-      return classnames(previous, generateBreakpointCn(cn, current, breakpoint));
+      return classnames(
+        previous,
+        generateBreakpointCn(cn, current, breakpoint),
+      );
     }
     return '';
   }, '');
@@ -70,5 +75,7 @@ export const generateBreakpointsCn = (
  * Grid Grid_xs:gap_0 Grid_xs:cols_12 Grid_xs:xAlign_center Grid_xs:yAlign_center Grid_s:gap_33 Grid_s:cols_12 Grid_s:xAlign_center Grid_s:yAlign_center
  *
  */
-export const useBreakpoints = (cn: ClassNameFormatter, breakpoints?: Breakpoints) =>
-  generateBreakpointsCn(cn, breakpoints);
+export const useBreakpoints = (
+  cn: ClassNameFormatter,
+  breakpoints?: Breakpoints,
+) => generateBreakpointsCn(cn, breakpoints);

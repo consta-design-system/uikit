@@ -11,7 +11,9 @@ const interval = 1000;
 
 const cnSnackBarLine = cn('SnackBarLine');
 
-export const SnackBarLine: React.FC<Omit<SnackBarTimerProps, 'hidden'>> = (props) => {
+export const SnackBarLine: React.FC<Omit<SnackBarTimerProps, 'hidden'>> = (
+  props,
+) => {
   const [running, setRunning] = useState<boolean>(false);
   const { onMount, onTimeIsOver, startTime: startTimeprop, className } = props;
   const startTime = startTimeprop * interval;
@@ -31,11 +33,16 @@ export const SnackBarLine: React.FC<Omit<SnackBarTimerProps, 'hidden'>> = (props
     setRunning(isRunning);
   }, [isRunning]);
 
-  const progress = running ? ((time - interval) / startTime) * 100 : (time / startTime) * 100;
+  const progress = running
+    ? ((time - interval) / startTime) * 100
+    : (time / startTime) * 100;
 
   return (
     <div
-      className={cnSnackBarLine({ running }, [cnTheme({ color: 'gpnDefault' }), className])}
+      className={cnSnackBarLine({ running }, [
+        cnTheme({ color: 'gpnDefault' }),
+        className,
+      ])}
       style={{
         ['--progress-line-progress' as string]: `-${progress / 2}%`,
       }}

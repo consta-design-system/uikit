@@ -1,0 +1,76 @@
+<svg
+  width="200"
+  height="120"
+  viewBox="0 0 200 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <rect
+    x="26"
+    y="48"
+    width="148"
+    height="24"
+    rx="2"
+    fill="var(--color-bg-default)"
+  />
+  <rect
+    x="26.5"
+    y="48.5"
+    width="147"
+    height="23"
+    rx="1.5"
+    stroke="var(--color-bg-border)"
+  />
+  <rect
+    x="26.5"
+    y="48.5"
+    width="49"
+    height="23"
+    rx="1.5"
+    stroke="var(--color-bg-link)"
+  />
+  <rect
+    x="124.25"
+    y="53.25"
+    width="0.5"
+    height="13.5"
+    stroke="var(--color-bg-border)"
+    stroke-width="0.5"
+  />
+  <rect
+    x="62"
+    y="58"
+    width="4"
+    height="23"
+    transform="rotate(90 62 58)"
+    fill="var(--color-bg-link)"
+  />
+  <rect
+    width="4"
+    height="23"
+    transform="translate(111 58) rotate(90)"
+    fill="var(--color-bg-ghost)"
+  />
+  <rect
+    x="111"
+    y="58"
+    width="4"
+    height="23"
+    transform="rotate(90 111 58)"
+    fill="var(--color-bg-ghost)"
+  />
+  <rect
+    width="4"
+    height="23"
+    transform="translate(161 58) rotate(90)"
+    fill="var(--color-bg-ghost)"
+  />
+  <rect
+    x="161"
+    y="58"
+    width="4"
+    height="23"
+    transform="rotate(90 161 58)"
+    fill="var(--color-bg-ghost)"
+  />
+</svg>

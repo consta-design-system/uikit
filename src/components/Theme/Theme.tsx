@@ -1,8 +1,7 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useMemo } from 'react';
 
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
-
 import { presetGpnDefault } from './presets/presetGpnDefault';
 
 export { presetGpnDefault } from './presets/presetGpnDefault';
@@ -30,7 +29,7 @@ export type ThemeProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
 
 export const cnTheme = cn('Theme');
 
-export function generateThemeClassNames(preset: ThemePreset): ThemePreset {
+export const generateThemeClassNames = (preset: ThemePreset): ThemePreset => {
   return {
     color: {
       primary: cnTheme({ color: preset.color.primary }),
@@ -43,7 +42,19 @@ export function generateThemeClassNames(preset: ThemePreset): ThemePreset {
     space: cnTheme({ space: preset.space }),
     shadow: cnTheme({ shadow: preset.shadow }),
   };
-}
+};
+
+export const generateDeps = (preset: ThemePreset) => {
+  let deps = '';
+  Object.keys(preset).map((key) => {
+    if (key === 'color') {
+      deps += preset.color.accent + preset.color.invert + preset.color.primary;
+    } else {
+      deps += preset[key as unknown as keyof ThemePreset];
+    }
+  });
+  return deps;
+};
 
 const defaultContextValue = {
   theme: presetGpnDefault,
@@ -55,24 +66,29 @@ export const ThemeContext = createContext<{
   themeClassNames: ThemePreset;
 }>(defaultContextValue);
 
-export const Theme = React.forwardRef<HTMLDivElement, ThemeProps>((props, ref) => {
-  const { className, children, preset, ...otherProps } = props;
+export const Theme = React.forwardRef<HTMLDivElement, ThemeProps>(
+  (props, ref) => {
+    const { className, children, preset, ...otherProps } = props;
 
-  const mods = {
-    ...preset,
-    color: preset.color.primary,
-  };
+    const [value, mods] = useMemo(() => {
+      return [
+        { theme: preset, themeClassNames: generateThemeClassNames(preset) },
+        {
+          ...preset,
+          color: preset.color.primary,
+        },
+      ];
+    }, [generateDeps(preset)]);
 
-  const themeClassNames = generateThemeClassNames(preset);
-
-  return (
-    <ThemeContext.Provider value={{ theme: preset, themeClassNames }}>
-      <div {...otherProps} ref={ref} className={cnTheme(mods, [className])}>
-        {children}
-      </div>
-    </ThemeContext.Provider>
-  );
-});
+    return (
+      <ThemeContext.Provider value={value}>
+        <div {...otherProps} ref={ref} className={cnTheme(mods, [className])}>
+          {children}
+        </div>
+      </ThemeContext.Provider>
+    );
+  },
+);
 
 export function useTheme() {
   return useContext(ThemeContext);

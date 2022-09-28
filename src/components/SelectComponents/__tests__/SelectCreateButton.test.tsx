@@ -1,7 +1,10 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
+import React from 'react';
 
-import { cnSelectCreateButton, SelectCreateButton } from '../SelectCreateButton/SelectCreateButton';
+import {
+  cnSelectCreateButton,
+  SelectCreateButton,
+} from '../SelectCreateButton/SelectCreateButton';
 import { propSize } from '../types';
 
 type Props = React.ComponentProps<typeof SelectCreateButton>;

@@ -1,0 +1,259 @@
+import { MdxMenu } from '@consta/stand';
+
+import {
+  BreadcrumbsExampleSize,
+  BreadcrumbsExampleIcons,
+  BreadcrumbsExampleIconRoot,
+  BreadcrumbsExampleMax,
+  BreadcrumbsExample,
+  BreadcrumbsExampleActive,
+} from './examples/BreadcrumbsExample/BreadcrumbsExample';
+
+```tsx
+import { Breadcrumbs } from '@consta/uikit/BreadcrumbsDeprecated';
+```
+
+<MdxMenu>
+
+- [Содержимое](#содержимое)
+  - [Страницы](#страницы)
+  - [Иконки](#иконки)
+- [Размер](#размер)
+- [Импорт](#импорт)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+</MdxMenu>
+
+## Содержимое
+
+Хлебные крошки собираются из названий страниц и ссылок на них. К любой странице можно добавить иконку из библиотеки иконок.
+
+<BreadcrumbsExample />
+
+Всё это можно описать в массиве `pages`. Он может выглядеть примерно так:
+
+```tsx
+const pages = [
+  {
+    icon: IconHand,
+    label: 'Главная',
+    link: 'https://url.com',
+  },
+  {
+    icon: IconLeaf,
+    label: 'Страница 1',
+    link: 'https://url.com/page-1',
+  },
+  {
+    icon: IconCards,
+    label: 'Страница 2',
+    link: 'https://url.com/page-2',
+  },
+  {
+    icon: IconDrag,
+    label: 'Страница 3',
+    link: 'https://url.com/page-3',
+  },
+];
+```
+
+### Страницы
+
+Название страницы можно получить из массива `pages` с помощью функции `getLabel`.
+
+Ссылку на страницу — с помощью `getLink`.
+
+Чтобы ограничить количество страниц в хлебных крошках, укажите максимум в `maxCount`.
+
+```tsx
+export const BreadcrumbsExampleMax = () => {
+  return (
+    <Breadcrumbs
+      className="myClassName"
+      pages={pagesNoIcon}
+      size="m"
+      maxCount={3}
+      getLabel={(item) => item.label}
+      getLink={(item) => item.label}
+      onClick={(item, e) => {
+        e.preventDefault();
+        console.log(item.link, e);
+      }}
+    />
+  );
+};
+```
+
+<BreadcrumbsExampleMax />
+
+Если хотите выделить текущую страницу, используйте `getIsActive`.
+
+```tsx
+export const BreadcrumbsExampleActive = () => {
+  return (
+    <Breadcrumbs
+      className="myClassName"
+      pages={pagesNoIcon}
+      size="m"
+      maxCount={8}
+      getLabel={(item) => item.label}
+      getIsActive={(item) => !!item.isActive}
+      getLink={(item) => item.label}
+      onClick={(item, e) => {
+        e.preventDefault();
+        console.log(item.link, e);
+      }}
+    />
+  );
+};
+```
+
+<BreadcrumbsExampleActive />
+
+### Иконки
+
+Иконку указывать необязательно, но, если она есть, можно получить ее с помощью `getIcon`.
+
+```tsx
+export const BreadcrumbsExampleIcons = () => {
+  return (
+    <Breadcrumbs
+      className="myClassName"
+      pages={pages}
+      size="m"
+      maxCount={8}
+      getLabel={(page) => page.label}
+      getLink={(page) => page.label}
+      getIcon={(page) => page.icon}
+      onClick={(page, e) => {
+        e.preventDefault();
+        console.log(page.link, e);
+      }}
+    />
+  );
+};
+```
+
+<BreadcrumbsExampleIcons />
+
+Чтобы показать иконку вместо названия первой страницы, добавьте `onlyIconRoot`.
+
+```tsx
+export const BreadcrumbsExampleIconRoot = () => {
+  return (
+    <Breadcrumbs
+      className="myClassName"
+      pages={pages}
+      size="m"
+      onlyIconRoot
+      maxCount={8}
+      getLabel={(page) => page.label}
+      getLink={(page) => page.label}
+      getIcon={(page) => page.icon}
+      onClick={(page, e) => {
+        e.preventDefault();
+        console.log(page.link, e);
+      }}
+    />
+  );
+};
+```
+
+<BreadcrumbsExampleIconRoot />
+
+## Размер
+
+За размер компонента отвечает свойство `size`. Варианты: `'xs', s', 'm', 'l'`, по умолчанию `'m'`.
+
+```tsx
+export const BreadcrumbsExampleSize = () => {
+  return (
+    <Breadcrumbs
+      pages={pages}
+      size="xs"
+      maxCount={8}
+      onlyIconRoot
+      getLabel={(page) => page.label}
+      getLink={(page) => page.label}
+      getIcon={(page) => page.icon}
+      onClick={(page, e) => {
+        e.preventDefault();
+        console.log(page.link, e);
+      }}
+    />
+  );
+};
+```
+
+<BreadcrumbsExampleSize />
+
+## Импорт
+
+```tsx
+import { Breadcrumbs } from '@consta/uikit/BreadcrumbsDeprecated';
+```
+
+## Свойства
+
+| Свойство                    | Тип или варианты значения                   | По умолчанию | Описание                                                    |
+| --------------------------- | ------------------------------------------- | ------------ | ----------------------------------------------------------- |
+| [`pages`](#содержимое)      | `Page[]`                                    | -            | Массив со списком страниц                                   |
+| [`getLabel`](#страницы)     | `(item: Item) => string, React.ReactNode`   | -            | Функция для получения названия страницы                     |
+| [`getLink`](#страницы)      | `(item: Item) => string`                    | -            | Функция для получения ссылки на страницу                    |
+| [`getIcon?`](#иконки)       | `(item: Item) => IconComponent, undefined`  | -            | Функция для получения иконки                                |
+| [`onlyIconRoot?`](#иконки)  | `boolean`                                   | false        | Показывать иконку вместо названия первой страницы в крошках |
+| [`getIsActive?`](#страницы) | `(item: Item) => boolean`                   | -            | Функция для получения текущей страницы                      |
+| [`size?`](#размер)          | `'xs', s', 'm', 'l'`                        | 'm'          | Размер хлебных крошек                                       |
+| [`maxCount?`](#страницы)    | `number`                                    | 0            | Максимальное количество элементов в хлебных крошках         |
+| `onClick`                   | `(page: Page, e: React.MouseEvent) => void` | -            | Обработчик клика по хлебным крошкам                         |
+| `className?`                | `string`                                    | -            | Дополнительный CSS-класс                                    |
+
+## Пример
+
+```ts
+// src/App.ts
+import React from 'react';
+import { Breadcrumbs } from '@consta/uikit/BreadcrumbsDeprecated';
+
+const App = () => {
+  const pages = [
+    {
+      icon: IconHand,
+      label: 'Home',
+      link: 'https://url.com',
+    },
+    {
+      label: 'Page1',
+      link: 'https://url.com/page-1',
+    },
+    {
+      label: 'Page2',
+      link: 'https://url.com/page-2',
+    },
+    {
+      label: 'Page3',
+      link: 'https://url.com/page-3',
+      isActive: true,
+    },
+  ];
+
+  return (
+    <Breadcrumbs
+      className="myClassName"
+      pages={pages}
+      size={'m'}
+      maxCount={3}
+      onlyIconRoot={true}
+      getLabel={(page) => page.label}
+      getIsActive={(page) => !!page.isActive}
+      getLink={(page) => page.link}
+      getIcon={(page) => page.icon}
+      onClick={(page, e) => {
+        e.preventDefault();
+        console.log(page.link, e);
+      }}
+    />
+  );
+};
+```

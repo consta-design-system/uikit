@@ -1,0 +1,66 @@
+<svg
+  width="200"
+  height="120"
+  viewBox="0 0 200 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M0 4C0 1.79086 1.79086 0 4 0H196C198.209 0 200 1.79086 200 4V116C200 118.209 198.209 120 196 120H4C1.79086 120 0 118.209 0 116V4Z"
+    fill="var(--color-bg-default)"
+  />
+  <rect
+    x="43"
+    y="22"
+    width="16"
+    height="16"
+    rx="4"
+    fill="var(--color-bg-link)"
+  />
+  <rect
+    x="43"
+    y="52"
+    width="16"
+    height="16"
+    rx="4"
+    fill="var(--color-control-bg-disable)"
+  />
+  <rect
+    x="43.5"
+    y="82.5"
+    width="15"
+    height="15"
+    rx="3.5"
+    stroke="var(--color-control-bg-border-default)"
+  />
+  <path
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M49.6058 32.7938L46.4606 29.9303L45.7874 30.6698L49.7026 34.2342L55.8223 26.941L55.0563 26.2982L49.6058 32.7938Z"
+    fill="var(--color-bg-default)"
+  />
+  <rect
+    x="69"
+    y="26"
+    width="89"
+    height="7"
+    rx="3.5"
+    fill="var(--color-control-typo-placeholder)"
+  />
+  <rect
+    x="69"
+    y="56"
+    width="89"
+    height="7"
+    rx="3.5"
+    fill="var(--color-control-typo-placeholder)"
+  />
+  <rect
+    x="69"
+    y="86"
+    width="89"
+    height="7"
+    rx="3.5"
+    fill="var(--color-control-typo-placeholder)"
+  />
+</svg>

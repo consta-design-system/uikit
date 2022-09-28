@@ -1,0 +1,13 @@
+.ChoiceGroupExampleAdaptiveScroll {
+  overflow: auto;
+  width: 100%;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  &-Component {
+    max-width: 100%;
+  }
+}

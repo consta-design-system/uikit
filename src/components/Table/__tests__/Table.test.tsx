@@ -1,8 +1,8 @@
-import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import * as React from 'react';
 
-import { generateData } from '../__mock__/data.mock';
 import { sortBy } from '../../../utils/array';
+import { generateData } from '../__mock__/data.mock';
 import { Filters } from '../filtering';
 import { cnTableRowsCollapse } from '../RowsCollapse/TableRowsCollapse';
 import {
@@ -101,7 +101,9 @@ function getRender() {
 
 function getGridTemplateColumn() {
   // https://github.com/testing-library/jest-dom/issues/322#issuecomment-988212751 - открыто
-  return Object.values(getRender())[1].style['--table-grid-template-columns'].split(' ')[0];
+  return Object.values(getRender())[1].style[
+    '--table-grid-template-columns'
+  ].split(' ')[0];
 }
 
 function getRows() {
@@ -109,7 +111,9 @@ function getRows() {
 }
 
 function getFilterButtons() {
-  return getRender().querySelectorAll(`.TableHeader-Buttons .TableFilterTooltip-Button`);
+  return getRender().querySelectorAll(
+    `.TableHeader-Buttons .TableFilterTooltip-Button`,
+  );
 }
 
 function getSortButtons() {
@@ -125,10 +129,13 @@ function getRowsCollapse() {
 }
 
 function getCollapseButton() {
-  return getRowsCollapse()?.querySelector(`.${cnTableRowsCollapse('buttonContainer')} .Button`);
+  return getRowsCollapse()?.querySelector(
+    `.${cnTableRowsCollapse('buttonContainer')} .Button`,
+  );
 }
 
-const movementDescriptor = Object.getOwnPropertyDescriptor(MouseEvent.prototype, 'movementX') || {};
+const movementDescriptor =
+  Object.getOwnPropertyDescriptor(MouseEvent.prototype, 'movementX') || {};
 
 beforeAll(() => {
   Object.defineProperty(MouseEvent.prototype, 'movementX', {
@@ -303,7 +310,9 @@ describe('Компонент Table', () => {
 
     describe('проверка обработчика клика по строке onRowClick', () => {
       it('onRowClick возвращает id текущей строки и имеет event', () => {
-        const onRowClick = jest.fn(({ id, e }: { id: string; e: React.MouseEvent }) => [id, e]);
+        const onRowClick = jest.fn(
+          ({ id, e }: { id: string; e: React.MouseEvent }) => [id, e],
+        );
         renderComponent({ ...defaultProps, onRowClick });
         const nodeRows = getRows();
         nodeRows.forEach((row) => {
@@ -334,10 +343,9 @@ describe('Компонент Table', () => {
 
     it('Проверка обработчика onRowHover', () => {
       const hoverIdx = 1;
-      const onRowHover = jest.fn(({ id, e }: { id: string | undefined; e: React.MouseEvent }) => [
-        id,
-        e,
-      ]);
+      const onRowHover = jest.fn(
+        ({ id, e }: { id: string | undefined; e: React.MouseEvent }) => [id, e],
+      );
       renderComponent({ ...defaultProps, onRowHover });
       const nodeRow = getRows()[hoverIdx];
       fireEvent.mouseOver(nodeRow);
@@ -494,7 +502,12 @@ describe('Компонент Table', () => {
 
     it('Переопределенная заглушка', () => {
       render(
-        <Table {...defaultProps} rows={[]} emptyRowsPlaceholder="Пусто" data-testid={testId} />,
+        <Table
+          {...defaultProps}
+          rows={[]}
+          emptyRowsPlaceholder="Пусто"
+          data-testid={testId}
+        />,
       );
       expect(screen.getByText('Пусто')).toBeInTheDocument();
     });
@@ -551,7 +564,9 @@ describe('Компонент Table', () => {
         const buttonFilterPrice = getFilterButtons()[0];
         fireEvent.click(buttonFilterPrice);
         const options = screen.getAllByRole('option');
-        const correctFilters = filters.filter((f) => f.id && f.field).map((f) => f.name);
+        const correctFilters = filters
+          .filter((f) => f.id && f.field)
+          .map((f) => f.name);
         const optionsTexNodes = options.map((o) => o.textContent);
         expect(optionsTexNodes).toEqual(correctFilters);
       });
@@ -560,7 +575,10 @@ describe('Компонент Table', () => {
         const { container } = renderComponent({ ...defaultProps });
         fireEvent.click(getFilterButtons()[0]);
         fireEvent.change(screen.getByRole('listbox'), {
-          target: { value: (screen.getAllByRole('option') as HTMLOptionElement[])[1].value },
+          target: {
+            value: (screen.getAllByRole('option') as HTMLOptionElement[])[1]
+              .value,
+          },
         });
         expect(getRows()).toHaveLength(1);
         fireEvent.click(container.querySelectorAll('.TagBase-CancelButton')[0]);
@@ -571,9 +589,14 @@ describe('Компонент Table', () => {
         renderComponent({ ...defaultProps });
         fireEvent.click(getFilterButtons()[0]);
         fireEvent.change(screen.getByRole('listbox'), {
-          target: { value: (screen.getAllByRole('option') as HTMLOptionElement[])[2].value },
+          target: {
+            value: (screen.getAllByRole('option') as HTMLOptionElement[])[2]
+              .value,
+          },
         });
-        const selectedTitle = (screen.getAllByRole('option') as HTMLOptionElement[])[2].title;
+        const selectedTitle = (
+          screen.getAllByRole('option') as HTMLOptionElement[]
+        )[2].title;
         expect(screen.getByText('150')).toBeInTheDocument();
         expect(screen.getAllByText(selectedTitle)).toHaveLength(2);
         const buttonResetAllFilters = screen.getByTitle('Сбросить все фильтры');
@@ -640,8 +663,13 @@ describe('Компонент Table', () => {
             id: 'filterName',
             name: 'Фильтр по имени: ',
             field: 'name',
-            filterer: (cellValue, filterValues: Array<{ value: string; name: string }>) => {
-              return filterValues.some((filterValue) => filterValue.value === cellValue);
+            filterer: (
+              cellValue,
+              filterValues: Array<{ value: string; name: string }>,
+            ) => {
+              return filterValues.some(
+                (filterValue) => filterValue.value === cellValue,
+              );
             },
             component: {
               name: TableTextFilter,
@@ -660,7 +688,10 @@ describe('Компонент Table', () => {
             id: 'filterAge',
             name: 'Диапазон возраста: ',
             field: 'age',
-            filterer: (cellValue, filterValues: { min: string; max: string }) => {
+            filterer: (
+              cellValue,
+              filterValues: { min: string; max: string },
+            ) => {
               const min = Number(filterValues.min) || -Infinity;
               const max = Number(filterValues.max) || Infinity;
               return cellValue >= min && cellValue <= max;
@@ -673,7 +704,10 @@ describe('Компонент Table', () => {
             id: 'filterCountry',
             name: 'Страна проживания: ',
             field: 'country',
-            filterer(cellValue, filterValue: { name: string; value: number }): boolean {
+            filterer(
+              cellValue,
+              filterValue: { name: string; value: number },
+            ): boolean {
               if (filterValue.name === 'Все') return true;
               return cellValue === filterValue.value;
             },
@@ -705,7 +739,9 @@ describe('Компонент Table', () => {
           render(<Table {...props} data-testid={testId} />);
           fireEvent.click(getFilterButtons()[0]);
           fireEvent.click(screen.getByRole('button', { name: /сбросить/i }));
-          fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Alex' } });
+          fireEvent.change(screen.getByRole('textbox'), {
+            target: { value: 'Alex' },
+          });
           fireEvent.click(screen.getByRole('checkbox'));
           fireEvent.click(screen.getByRole('button', { name: /применить/i }));
           expect(getRows()).toHaveLength(1);
@@ -720,7 +756,9 @@ describe('Компонент Table', () => {
         it('Отсутствие данных при поиске', () => {
           render(<Table {...props} data-testid={testId} />);
           fireEvent.click(getFilterButtons()[0]);
-          fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Anna' } });
+          fireEvent.change(screen.getByRole('textbox'), {
+            target: { value: 'Anna' },
+          });
           expect(screen.getByText(/ничего не найдено/i)).toBeInTheDocument();
         });
 
@@ -731,7 +769,9 @@ describe('Компонент Table', () => {
           expect(getRows()).toHaveLength(3);
 
           fireEvent.click(getFilterButtons()[0]);
-          fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Alex' } });
+          fireEvent.change(screen.getByRole('textbox'), {
+            target: { value: 'Alex' },
+          });
           fireEvent.click(screen.getByRole('checkbox'));
           fireEvent.click(screen.getByRole('button', { name: /отмена/i }));
           expect(getRows()).toHaveLength(3);
@@ -742,8 +782,12 @@ describe('Компонент Table', () => {
         it('Функционал фильтрации', () => {
           render(<Table {...props} data-testid={testId} />);
           fireEvent.click(getFilterButtons()[1]);
-          fireEvent.change(screen.getAllByRole('textbox')[0], { target: { value: 20 } });
-          fireEvent.change(screen.getAllByRole('textbox')[1], { target: { value: 30 } });
+          fireEvent.change(screen.getAllByRole('textbox')[0], {
+            target: { value: 20 },
+          });
+          fireEvent.change(screen.getAllByRole('textbox')[1], {
+            target: { value: 30 },
+          });
           fireEvent.click(screen.getByRole('button', { name: /применить/i }));
           expect(getRows()).toHaveLength(1);
           expect(screen.getByText(/^alex$/i)).toBeInTheDocument();
@@ -773,8 +817,15 @@ describe('Компонент Table', () => {
     });
 
     it('Проверка css и style при перетаскивании ползунка', () => {
-      const mockMovementX = jest.spyOn(MouseEvent.prototype, 'movementX', 'get');
-      const { container } = renderComponent({ ...defaultProps, isResizable: true });
+      const mockMovementX = jest.spyOn(
+        MouseEvent.prototype,
+        'movementX',
+        'get',
+      );
+      const { container } = renderComponent({
+        ...defaultProps,
+        isResizable: true,
+      });
       const resBtns = container.querySelectorAll('.TableResizer');
 
       fireEvent.dblClick(resBtns[0]);
@@ -803,7 +854,10 @@ describe('Компонент Table', () => {
 
   describe('Ленивая загрузка', () => {
     it('Проверка функциональности', () => {
-      const mockOffsetHeight = jest.spyOn(HTMLElement.prototype, 'getBoundingClientRect');
+      const mockOffsetHeight = jest.spyOn(
+        HTMLElement.prototype,
+        'getBoundingClientRect',
+      );
       const maxVisibleRows = 20;
 
       const { rows, columns } = generateData(maxVisibleRows, 2);

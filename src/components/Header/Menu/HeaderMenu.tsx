@@ -23,14 +23,21 @@ type MenuProps = PropsWithJsxAttributes<
   'nav'
 >;
 
-export const HeaderMenu: React.FC<MenuProps> = ({ items, className, ...otherProps }) => {
+export const HeaderMenu: React.FC<MenuProps> = ({
+  items,
+  className,
+  ...otherProps
+}) => {
   return (
     <nav {...otherProps} className={cnHeaderMenu(null, [className])}>
       <ul className={cnHeaderMenu('List')}>
         {items.map(({ label, href, target, active, onClick }, index) => {
           const Tag = href ? 'a' : 'div';
           return (
-            <li className={cnHeaderMenu('Item')} key={cnHeaderMenu('Item', { index })}>
+            <li
+              className={cnHeaderMenu('Item')}
+              key={cnHeaderMenu('Item', { index })}
+            >
               <Tag
                 className={cnHeaderMenu('Link', { active })}
                 href={href}

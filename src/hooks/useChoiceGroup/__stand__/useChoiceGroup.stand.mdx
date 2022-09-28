@@ -1,0 +1,49 @@
+```tsx
+import { useChoiceGroup } from '@consta/uikit/useChoiceGroup';
+```
+
+Этот хук может понадобиться в компонентах, где пользователи могут выбрать несколько значений из списка.
+Например, [ChoiceGroup](##LIBS.STAND/stand:uikit-components-choicegroup-stable)
+или [CheckboxGroup](##LIBS.STAND/stand:uikit-components-checkboxgroup-stable).
+
+Хук `useChoiceGroup` занимается всей логикой выбора: вы можете использовать его,
+чтобы не обрабатывать эту логику самостоятельно.
+
+```tsx
+
+type UseChoiceGroupValues<ITEM, EVENT> = {
+  getOnChange: (item: ITEM) => (e: EVENT) => void;
+  getChecked:  (item: ITEM) => boolean;;
+};
+
+type UseChoiceGroupProps<ITEM, EVENT> = {
+    getKey: (item: ITEM) => string | number;
+} & (
+  | {
+      multiple: false;
+      value: ITEM[] | null;
+      callBack: (props: { e: EVENT; value: ITEM[] | null }) => void;
+    }
+  | {
+      multiple: false;
+      value: ITEM | null;
+      callBack: (props: { e: EVENT; value: ITEM }) => void;
+    }
+);
+
+
+useChoiceGroup<ITEM, EVENT>(props: UseChoiceGroupProps<ITEM, EVENT>): UseChoiceGroupValues<ITEM, EVENT>
+```
+
+## Свойства
+
+| Свойство   | Тип и значения                                                                                    | По умолчанию | Описание                                                 |
+| ---------- | ------------------------------------------------------------------------------------------------- | ------------ | -------------------------------------------------------- |
+| `getKey`   | `(item: ITEM) => string, number;`                                                                 | -            | Функция для получения уникального ключа элемента массива |
+| `multiple` | `boolean`                                                                                         | -            | Показывает, что `value` может быть несколько             |
+| `value`    | `ITEM, ITEM[], null;`                                                                             | -            | Текущее значение                                         |
+| `callBack` | `(props: { e: EVENT; value: ITEM[], null }) => void, (props: { e: EVENT; value: ITEM }) => void;` | -            | Обработчик, который нужно вызывать                       |
+
+## Пример
+
+Пример использования хука `useChoiceGroup` можно посмотреть в компоненете [CheckboxGroup](https://github.com/consta-design-system/uikit/blob/master/src/components/CheckboxGroup/CheckboxGroup.tsx)

@@ -1,0 +1,57 @@
+<svg
+  width="200"
+  height="120"
+  viewBox="0 0 200 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M0 4C0 1.79086 1.79086 0 4 0H196C198.209 0 200 1.79086 200 4V116C200 118.209 198.209 120 196 120H4C1.79086 120 0 118.209 0 116V4Z"
+    fill="var(--color-bg-default)"
+  />
+  <rect
+    x="20"
+    y="56"
+    width="44"
+    height="20"
+    rx="2.76923"
+    fill="var(--color-bg-ghost)"
+  />
+  <rect
+    x="78"
+    y="43"
+    width="44"
+    height="20"
+    rx="2.76923"
+    fill="var(--color-bg-ghost)"
+  />
+  <rect
+    x="135"
+    y="56"
+    width="44"
+    height="20"
+    rx="2.76923"
+    fill="var(--color-bg-ghost)"
+  />
+  <rect
+    width="8"
+    height="8"
+    rx="4"
+    transform="matrix(1 0 0 -1 20 51)"
+    fill="var(--color-bg-link)"
+  />
+  <rect
+    width="8"
+    height="8"
+    rx="4"
+    transform="matrix(1 0 0 -1 96 76)"
+    fill="var(--color-bg-link)"
+  />
+  <rect
+    width="8"
+    height="8"
+    rx="4"
+    transform="matrix(1 0 0 -1 171 51)"
+    fill="var(--color-bg-link)"
+  />
+</svg>

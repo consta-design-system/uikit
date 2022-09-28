@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function WaterfallImage(props: React.SVGProps<SVGSVGElement>) {
+const WaterfallImage = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 200 120" fill="none" {...props}>
       <path
@@ -19,6 +19,6 @@ function WaterfallImage(props: React.SVGProps<SVGSVGElement>) {
       <path d="M145 95V37h20v58h-20Z" fill="#DEE4E8" />
     </svg>
   );
-}
+};
 
 export default WaterfallImage;

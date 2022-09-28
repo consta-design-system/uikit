@@ -53,60 +53,64 @@ export type CheckboxProps = PropsWithHTMLAttributes<Props, HTMLLabelElement>;
 export const COMPONENT_NAME = 'Checkbox' as const;
 export const cnCheckbox = cn(COMPONENT_NAME);
 
-export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>((props, ref) => {
-  const checkboxRef = React.useRef<HTMLLabelElement>(null);
+export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>(
+  (props, ref) => {
+    const checkboxRef = React.useRef<HTMLLabelElement>(null);
 
-  const {
-    checked = false,
-    name,
-    size = checkboxPropSizeDefault,
-    view = checkboxPropViewDefault,
-    align = checkboxPropAlignDefault,
-    disabled,
-    intermediate = false,
-    className,
-    label,
-    onChange,
-    onFocus,
-    onBlur,
-    readOnly,
-    required,
-    step,
-    tabIndex,
-    inputId,
-    inputRef,
-    ...otherProps
-  } = usePropsHandler(COMPONENT_NAME, props, checkboxRef);
+    const {
+      checked = false,
+      name,
+      size = checkboxPropSizeDefault,
+      view = checkboxPropViewDefault,
+      align = checkboxPropAlignDefault,
+      disabled,
+      intermediate = false,
+      className,
+      label,
+      onChange,
+      onFocus,
+      onBlur,
+      readOnly,
+      required,
+      step,
+      tabIndex,
+      inputId,
+      inputRef,
+      ...otherProps
+    } = usePropsHandler(COMPONENT_NAME, props, checkboxRef);
 
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    if (onChange) {
-      onChange({ e, checked: !checked });
-    }
-  };
+    const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+      if (onChange) {
+        onChange({ e, checked: !checked });
+      }
+    };
 
-  return (
-    <label
-      {...otherProps}
-      className={cnCheckbox({ size, view, disabled, intermediate, align }, [className])}
-      ref={useForkRef([ref, checkboxRef])}
-    >
-      <input
-        type="checkbox"
-        name={name}
-        className={cnCheckbox('Input', [cnMixFocus()])}
-        checked={checked}
-        id={inputId}
-        disabled={disabled}
-        onChange={handleChange}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        readOnly={readOnly}
-        required={required}
-        step={step}
-        tabIndex={tabIndex}
-        ref={inputRef}
-      />
-      {label && <span className={cnCheckbox('Label')}>{label}</span>}
-    </label>
-  );
-});
+    return (
+      <label
+        {...otherProps}
+        className={cnCheckbox({ size, view, disabled, intermediate, align }, [
+          className,
+        ])}
+        ref={useForkRef([ref, checkboxRef])}
+      >
+        <input
+          type="checkbox"
+          name={name}
+          className={cnCheckbox('Input', [cnMixFocus()])}
+          checked={checked}
+          id={inputId}
+          disabled={disabled}
+          onChange={handleChange}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          readOnly={readOnly}
+          required={required}
+          step={step}
+          tabIndex={tabIndex}
+          ref={inputRef}
+        />
+        {label && <span className={cnCheckbox('Label')}>{label}</span>}
+      </label>
+    );
+  },
+);

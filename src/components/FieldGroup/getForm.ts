@@ -1,6 +1,9 @@
 import { FieldGroupPropForm } from './types';
 
-const mapForm: Record<FieldGroupPropForm, [FieldGroupPropForm, FieldGroupPropForm]> = {
+const mapForm: Record<
+  FieldGroupPropForm,
+  [FieldGroupPropForm, FieldGroupPropForm]
+> = {
   default: ['defaultClear', 'brickDefault'],
   defaultClear: ['defaultClear', 'brickClear'],
   defaultBrick: ['defaultClear', 'brick'],

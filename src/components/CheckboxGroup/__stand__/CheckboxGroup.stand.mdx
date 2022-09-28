@@ -1,0 +1,47 @@
+import {
+  CheckboxGroupExampleName,
+  CheckboxGroupExampleHead,
+  CheckboxExampleGroupHead3,
+  CheckboxGroupExampleNeg,
+  CheckboxGroupExampleGeneral,
+} from './examples/CheckboxGroupExampleName/CheckboxGroupExampleName';
+
+```tsx
+import { CheckboxGroup } from '@consta/uikit/CheckboxGroup';
+```
+
+Группа чекбоксов, объединённых одним `name`. Пользователь может выбрать несколько вариантов из списка.
+
+Если пользователю нужно выбрать только один вариант из списка, лучше использовать [RadioGroup](##LIBS.STAND/stand:uikit-components-radiogroup-stable).
+
+Если нужен только один чекбокс, можно использовать [Checkbox](##LIBS.STAND/stand:uikit-components-checkbox-stable).
+
+<CheckboxGroupExampleName />
+
+## Как писать названия
+
+Лучше писать название чекбоксов с заглавной буквы, точка не нужна.
+
+### Согласуйте с заголовком
+
+Это просто лучше читается. Сравните:
+
+<CheckboxGroupExampleHead />
+
+Если не нравится, что пункты начинаются с предлогов, поменяйте заголовок.
+
+<CheckboxExampleGroupHead3 />
+
+### Не используйте отрицания
+
+Чтобы не путать пользователя. Когда выбран чекбокс, рядом с которым написано **Не хочу**,
+приходится мысленно решать равенство: `не + не + хочу = хочу`.
+
+<CheckboxGroupExampleNeg />
+
+### Не обобщайте
+
+Если хотите дать пользователю возможность отметить все элементы в списке
+или, наоборот, удалить все отметки, сделайте это другим способом.
+
+<CheckboxGroupExampleGeneral />

@@ -117,7 +117,11 @@ const cssSpaceVars = [
   '--space-6xl',
 ] as const;
 
-const cssShadowVars = ['--shadow-group', '--shadow-layer', '--shadow-modal'] as const;
+const cssShadowVars = [
+  '--shadow-group',
+  '--shadow-layer',
+  '--shadow-modal',
+] as const;
 
 export const defaultVars = {
   color: {

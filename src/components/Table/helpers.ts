@@ -1,8 +1,13 @@
 import React from 'react';
 
 import { isNotNil, isNumber, isString } from '../../utils/type-guards';
-
-import { ColumnWidth, SortingState, TableColumn, TableRow, TableTreeRow } from './Table';
+import {
+  ColumnWidth,
+  SortingState,
+  TableColumn,
+  TableRow,
+  TableTreeRow,
+} from './Table';
 
 export const Order = {
   ASC: 'ASC',
@@ -23,7 +28,9 @@ export type Position = {
   height?: number;
 };
 
-export type Header<T extends TableRow> = TableColumn<T> & { position: Position };
+export type Header<T extends TableRow> = TableColumn<T> & {
+  position: Position;
+};
 
 export type HeaderData<T extends TableRow> = {
   headers: Array<Header<T>>[];
@@ -91,7 +98,9 @@ export const getNewSorting = <T extends TableRow>(
   return null;
 };
 
-export const getMaxLevel = <T extends TableRow>(columns: Array<TableColumn<T>>) => {
+export const getMaxLevel = <T extends TableRow>(
+  columns: Array<TableColumn<T>>,
+) => {
   let count = 0;
 
   const traverse = (cols: Array<TableColumn<T>>, level = 1) => {
@@ -108,7 +117,9 @@ export const getMaxLevel = <T extends TableRow>(columns: Array<TableColumn<T>>) 
   return count;
 };
 
-const getLastChildrenCount = <T extends TableRow>(columns: Array<TableColumn<T>>) => {
+const getLastChildrenCount = <T extends TableRow>(
+  columns: Array<TableColumn<T>>,
+) => {
   let count = 0;
 
   const traverse = (cols: Array<TableColumn<T>>) => {
@@ -160,7 +171,9 @@ export const transformColumns = <T extends TableRow>(
         headersArr[level].push(handledItem);
         node.index++;
       } else {
-        handledItem.position.colSpan = getLastChildrenCount(handledItem.columns);
+        handledItem.position.colSpan = getLastChildrenCount(
+          handledItem.columns,
+        );
         headersArr[level].push(handledItem);
         stack.push({ columns: handledItem.columns, index: 0 });
       }
@@ -191,9 +204,13 @@ export const transformColumns = <T extends TableRow>(
 export const useHeaderData = <T extends TableRow>(
   columns: Array<TableColumn<T>>,
 ): HeaderData<T> => {
-  const headerRowsRefs = React.useRef<Record<number, HTMLDivElement | null>>({});
+  const headerRowsRefs = React.useRef<Record<number, HTMLDivElement | null>>(
+    {},
+  );
   const headers = transformColumns(columns, getMaxLevel(columns));
-  const headerColumnsHeights: Array<number> = Object.values(headerRowsRefs.current)
+  const headerColumnsHeights: Array<number> = Object.values(
+    headerRowsRefs.current,
+  )
     .filter(isNotNil)
     .map((ref) => ref.getBoundingClientRect().height);
   const flattenedHeaders = headers
@@ -203,7 +220,8 @@ export const useHeaderData = <T extends TableRow>(
       ...column,
       position: {
         ...column.position,
-        smallTextSize: headers.length > 1 && column.position.level === headers.length - 1,
+        smallTextSize:
+          headers.length > 1 && column.position.level === headers.length - 1,
         height: headerColumnsHeights[index] || 0,
       },
     }));
@@ -211,25 +229,40 @@ export const useHeaderData = <T extends TableRow>(
     return Math.min.apply(
       null,
       flattenedHeaders
-        .filter((col: TableColumn<T> & { position: Position }) => col.position.level === index)
+        .filter(
+          (col: TableColumn<T> & { position: Position }) =>
+            col.position.level === index,
+        )
         .map((item) => item.position.height),
     );
   });
   const lowHeaders = flattenedHeaders
-    .filter(({ position: { colSpan } }: TableColumn<T> & { position: Position }) => !colSpan)
+    .filter(
+      ({ position: { colSpan } }: TableColumn<T> & { position: Position }) =>
+        !colSpan,
+    )
     .sort((a, b) => {
       if (a.position.topHeaderGridIndex !== b.position.topHeaderGridIndex) {
-        return a.position.topHeaderGridIndex > b.position.topHeaderGridIndex ? 1 : -1;
+        return a.position.topHeaderGridIndex > b.position.topHeaderGridIndex
+          ? 1
+          : -1;
       }
       return a.position.gridIndex > b.position.gridIndex ? 1 : -1;
     });
 
   const resizerTopOffsets = lowHeaders.map(
     (header: TableColumn<T> & { position: Position }, index: number) => {
-      const headerHeight = headerRowsHeights.reduce((a: number, b: number) => a + b, 0);
-      if ((header.position.rowSpan || 0) >= (lowHeaders[index + 1]?.position.rowSpan || 0)) {
+      const headerHeight = headerRowsHeights.reduce(
+        (a: number, b: number) => a + b,
+        0,
+      );
+      if (
+        (header.position.rowSpan || 0) >=
+        (lowHeaders[index + 1]?.position.rowSpan || 0)
+      ) {
         return headerHeight - (header.position.height || 0);
       }
+      // eslint-disable-next-line no-unsafe-optional-chaining
       return headerHeight - lowHeaders[index + 1]?.position.height! || 0;
     },
   );
@@ -276,14 +309,19 @@ export const useLazyLoadData = (
       elHeight = scrollableEl.outerHeight;
     }
     const onScrollListener = () => {
-      if (cellsRefEnd.current && elHeight / 2 > cellsRefEnd.current.getBoundingClientRect().top) {
+      if (
+        cellsRefEnd.current &&
+        elHeight / 2 > cellsRefEnd.current.getBoundingClientRect().top
+      ) {
         setVisibleStartIndex((prevIndex) => prevIndex + additionalRowsCount);
       } else if (
         cellsRefStart.current &&
         cellsRefStart.current.getBoundingClientRect().top > elHeight / 2
       ) {
         setVisibleStartIndex((prevIndex) =>
-          prevIndex - additionalRowsCount < 0 ? 0 : prevIndex - additionalRowsCount,
+          prevIndex - additionalRowsCount < 0
+            ? 0
+            : prevIndex - additionalRowsCount,
         );
       }
     };
@@ -294,10 +332,19 @@ export const useLazyLoadData = (
   }, [visibleStartIndex, scrollableEl]);
 
   const setBoundaryRef = (columnIdx: number, rowIdx: number) => {
-    if (enabled && columnIdx === 0 && rowIdx === additionalRowsCount && visibleStartIndex > 0) {
+    if (
+      enabled &&
+      columnIdx === 0 &&
+      rowIdx === additionalRowsCount &&
+      visibleStartIndex > 0
+    ) {
       return cellsRefStart;
     }
-    if (enabled && columnIdx === 0 && rowIdx === maxVisibleRows - additionalRowsCount) {
+    if (
+      enabled &&
+      columnIdx === 0 &&
+      rowIdx === maxVisibleRows - additionalRowsCount
+    ) {
       return cellsRefEnd;
     }
     return undefined;
@@ -335,7 +382,8 @@ export const transformRows = <T extends TableRow>(
       };
 
       const needGoDeeper =
-        Boolean(handledItem.rows) && (isTableExpanded || expandedRowIds.includes(handledItem.id));
+        Boolean(handledItem.rows) &&
+        (isTableExpanded || expandedRowIds.includes(handledItem.id));
 
       if (needGoDeeper) {
         stack.push({ rows: handledItem.rows as T[], index: 0 });

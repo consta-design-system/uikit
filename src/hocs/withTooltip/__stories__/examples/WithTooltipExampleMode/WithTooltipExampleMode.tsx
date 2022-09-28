@@ -10,14 +10,17 @@ const ButtonWithTooltipModeMouseover = withTooltip({
   mode: 'mouseover',
 })(Button);
 
-const ButtonWithTooltipModeClick = withTooltip({ content: 'Тултип по клику', mode: 'click' })(
-  Button,
-);
+const ButtonWithTooltipModeClick = withTooltip({
+  content: 'Тултип по клику',
+  mode: 'click',
+})(Button);
 
 export const WithTooltipExampleMode = () => {
   return (
     <div
-      className={cnDocsDecorator('Section', [wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' })])}
+      className={cnDocsDecorator('Section', [
+        wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
+      ])}
     >
       <ButtonWithTooltipModeMouseover label="Наведите на меня мышку" />
       <ButtonWithTooltipModeClick label="Нажмите меня" />

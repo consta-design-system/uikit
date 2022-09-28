@@ -1,0 +1,155 @@
+import { MdxMenu } from '@consta/stand';
+
+import { BadgeExampleIcon } from './examples/BadgeExampleIcon/BadgeExampleIcon';
+import { BadgeExampleMinified } from './examples/BadgeExampleMinified/BadgeExampleMinified';
+import { BadgeExampleSize } from './examples/BadgeExampleSize/BadgeExampleSize';
+import { BadgeExampleStatus } from './examples/BadgeExampleStatus/BadgeExampleStatus';
+import { BadgeExampleView } from './examples/BadgeExampleView/BadgeExampleView';
+import { BadgeExampleForm } from './examples/BadgeExampleForm/BadgeExampleForm';
+
+```tsx
+import { Badge } from '@consta/uikit/Badge';
+```
+
+<MdxMenu>
+- [Статус и содержимое](#статус-и-содержимое)
+  - [Бейджик с текстом](#бейджик-с-текстом)
+  - [Бейджик без текста](#бейджик-без-текста)
+  - [Бейджик с иконкой](#бейджик-с-иконкой)
+- [Внешний вид](#внешний-вид)
+  - [Типы бейджиков](#типы-бейджиков)
+  - [Размер](#размер)
+  - [Форма](#форма)
+- [Импорт](#импорт)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+</MdxMenu>
+
+## Статус и содержимое
+
+Статус — основное свойство бейджика, его можно менять с помощью свойства `status`.
+
+Какие бывают статусы:
+
+- `normal` — всё в порядке, так и должно быть (статус по умолчанию),
+- `success` — всё прошло успешно,
+- `error` — ничего не получилось, скорее всего, нужно начинать с начала,
+- `warning` — внимание, чтобы процесс прошел успешно, нужно что-то сделать,
+- `system` — системное сообщение.
+
+### Бейджик с текстом
+
+Текст на бейджике называет статус объекта или показывает дополнительную информацию. За текст отвечает свойство `label`.
+
+Например, если в каком-то сервисе есть операция по проверке документа,
+у него могут быть такие статусы:
+
+```ts
+<Badge status="system" label="Черновик" /> /* Документ ещё не готов */
+<Badge status="normal" label="Новый" /> /* Документ готов, отправьте на проверку */
+<Badge status="warning" label="На проверке" /> /* Подождите, документ проверяется */
+<Badge status="error" label="Есть ошибки" /> /* Исправьте ошибки в документе */
+<Badge status="success" label="Готов" /> /* Всё получилось, документ проверен  */
+```
+
+<BadgeExampleStatus />
+
+### Бейджик без текста
+
+Если статусы очевидны и хорошо определяются по цвету (или просто нет места), можно
+сделать бейджик маленьким и круглым, без надписи — с помощью свойства `minified`.
+
+Например, если вы строите пешеходный переход, достаточно двух статусов — `success` и `error`.
+
+```ts
+<Badge minified status="error" label="Стойте" />
+<Badge minified status="success" label="Идите" />
+```
+
+<BadgeExampleMinified />
+
+### Бейджик с иконкой
+
+Слева от надписи на бейджике можно поставить иконку — любую из нашей [библиотеки
+иконок](##LIBS.STAND/stand:uikit-components-icon-stable). За иконку отвечает свойство `icon`.
+
+```ts
+<Badge icon={IconCheck} status="success" label="Съедобно" />
+<Badge icon={IconClose} status="error" label="Отрава" />
+```
+
+<BadgeExampleIcon />
+
+## Внешний вид
+
+### Типы бейджиков
+
+В дизайн-системе два типа беджиков, за них отвечает свойство `view`.
+
+`filled` — основной тип. Используйте его, если статус нужно сделать очень заметным.
+
+`stroked` — второстепенный, такой бейдж не будет так сильно бросаться в глаза.
+
+```ts
+<Badge view="filled" label="Filled badge" />
+<Badge view="stroked" label="Stroked badge" />
+```
+
+<BadgeExampleView />
+
+### Размер
+
+За размер бейджиков отвечает свойство `size`.
+
+```ts
+<Badge size="s" label="Badge S" />
+<Badge size="m" label="Badge M" />
+<Badge size="l" label="Badge L" />
+```
+
+<BadgeExampleSize />
+
+### Форма
+
+За форму бейджиков отвечает свойство `form`.
+
+```ts
+<Badge form="default" label="Default badge" />
+<Badge form="round" label="Round badge" />
+```
+
+<BadgeExampleForm />
+
+## Импорт
+
+```tsx
+import { Badge } from '@consta/uikit/Badge';
+```
+
+## Свойства
+
+| Свойство                          | Тип                                                     | По умолчанию | Описание                                                         |
+| --------------------------------- | ------------------------------------------------------- | ------------ | ---------------------------------------------------------------- |
+| [`size?`](#размер)                | `'s' , 'm' , 'l'`                                       | `'m'`        | Размер                                                           |
+| [`view?`](#типы-бейджиков)        | `'filled' , 'stroked'`                                  | `'filled'`   | Вид                                                              |
+| [`status?`](#статус-и-содержимое) | `'success' , 'error' , 'warning' , 'normal' , 'system'` | `'normal'`   | Статус                                                           |
+| [`form?`](#форма)                 | `'default' , 'round'`                                   | `'default'`  | Форма                                                            |
+| [`minified?`](#типы-бейджиков)    | `boolean`                                               | -            | Отвечает за отрисовку бейджика без надписи, в виде точки         |
+| [`icon?`](#бейджик-с-иконкой)     | `IconComponent`                                         | -            | Добавляет иконку                                                 |
+| [`label?`](#бейджик-с-текстом)    | `string`                                                | -            | Текст на бейджике                                                |
+| `as?`                             | `keyof JSX.IntrinsicElements`                           | `'div'`      | HTML-тег, в виде которого этот компонент будет представлен в DOM |
+| `className?`                      | `string`                                                | -            | Дополнительный CSS-класс (mix)                                   |
+| `ref?`                            | `React.Ref<HTMLElement>`                                | -            | Ссылка на корневой DOM-элемент компонента                        |
+
+## Пример
+
+```ts
+// src/App.ts
+import React from 'react';
+import { Badge } from '@consta/uikit/Badge';
+
+const App = () => {
+  return <Badge label="badge" />;
+};
+```

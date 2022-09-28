@@ -1,0 +1,17 @@
+.HeaderButtonExample {
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin-bottom: var(--space-3xl);
+
+  &-Login {
+    cursor: pointer;
+
+    &_isLogged {
+      padding: 0;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}

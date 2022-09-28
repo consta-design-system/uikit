@@ -14,11 +14,15 @@ describe('formatMaxFileSize', () => {
 
   it('форматирует мегабайты', () => {
     expect(formatFileSize(1024 * 1024, defaultLocale)).toBe('1 Мб');
-    expect(formatFileSize(1024 * 1024 * 1024 - 1, defaultLocale)).toBe('1023.9 Мб');
+    expect(formatFileSize(1024 * 1024 * 1024 - 1, defaultLocale)).toBe(
+      '1023.9 Мб',
+    );
   });
 
   it('форматирует гигабайты', () => {
     expect(formatFileSize(1024 * 1024 * 1024, defaultLocale)).toBe('1 Гб');
-    expect(formatFileSize(1024 * 1024 * 1024 * 234.56, defaultLocale)).toBe('234.5 Гб');
+    expect(formatFileSize(1024 * 1024 * 1024 * 234.56, defaultLocale)).toBe(
+      '234.5 Гб',
+    );
   });
 });

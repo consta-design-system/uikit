@@ -37,7 +37,10 @@ const defaultMap: Map<DefaultPoints> = {
   '5xl': 2400,
 };
 
-const mapping = <POINTS extends string>(width: number, map: Map<POINTS>): Returned<POINTS> => {
+const mapping = <POINTS extends string>(
+  width: number,
+  map: Map<POINTS>,
+): Returned<POINTS> => {
   const points = {} as Returned<POINTS>;
 
   for (const key in map) {
@@ -49,7 +52,10 @@ const mapping = <POINTS extends string>(width: number, map: Map<POINTS>): Return
   return points;
 };
 
-const isEq = <POINTS extends string>(state: Returned<POINTS>, newState: Returned<POINTS>) => {
+const isEq = <POINTS extends string>(
+  state: Returned<POINTS>,
+  newState: Returned<POINTS>,
+) => {
   let eq = true;
   for (const key in newState) {
     if (state[key] !== newState[key]) {
@@ -60,7 +66,9 @@ const isEq = <POINTS extends string>(state: Returned<POINTS>, newState: Returned
   return eq;
 };
 
-export const useBreakpoints = <POINTS extends string = DefaultPoints>(map?: Map<POINTS>) => {
+export const useBreakpoints = <POINTS extends string = DefaultPoints>(
+  map?: Map<POINTS>,
+) => {
   const pointsMap = map || (defaultMap as Map<POINTS>);
 
   const [points, setSetPoints] = useState<Returned<POINTS>>(() =>

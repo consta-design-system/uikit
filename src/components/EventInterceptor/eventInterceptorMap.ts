@@ -5,10 +5,9 @@ import { useSnackBarEventsHandler } from './propsHandlers/useSnackBarEventsHandl
 import { useTextFieldEventsHandler } from './propsHandlers/useTextFieldEventsHandler';
 import { EventInterceptorComponentName } from './types';
 
-export const eventInterceptorMap: Partial<Record<
-  EventInterceptorComponentName,
-  ((...args: any[]) => any) | undefined
->> = {
+export const eventInterceptorMap: Partial<
+  Record<EventInterceptorComponentName, ((...args: any[]) => any) | undefined>
+> = {
   Button: useButtonEventHandler,
   Checkbox: useCheckboxEventsHandler,
   Select: useSelectEventsHandler,

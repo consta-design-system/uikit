@@ -1,0 +1,21 @@
+#### Установите пакет
+
+`yarn add @consta/uikit` или `npm install @consta/uikit`
+
+#### Подключите тему
+
+Тему обязательно нужно подключать в корне приложения, так, чтобы все компоненты `@consta/uikit` были вложены в компонент [Theme](##LIBS.STAND/stand:uikit-components-theme-stable).
+
+```tsx
+import React from 'react';
+import { Theme, presetGpnDefault } from '@consta/uikit/Theme';
+import { Button } from '@consta/uikit/Button';
+
+const App = () => (
+  <Theme preset={presetGpnDefault}>
+    <Button label="Кнопка" />
+  </Theme>
+);
+```
+
+#### Всë!

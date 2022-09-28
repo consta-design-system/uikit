@@ -1,0 +1,318 @@
+import { MdxMenu } from '@consta/stand';
+
+import {
+  DragNDropFieldExampleAcceptImage,
+  DragNDropFieldExampleAcceptDoc,
+  DragNDropFieldExampleAcceptError,
+} from './examples/DragNDropFieldExampleAccept/DragNDropFieldExampleAccept';
+import {
+  DragNDropFieldExampleChildren,
+  DragNDropFieldExampleRenderProps,
+  DragNDropFieldExampleEmpty,
+} from './examples/DragNDropFieldExampleChildren/DragNDropFieldExampleChildren';
+import {
+  DragNDropFieldExampleMaxSize,
+  DragNDropFieldExampleMaxSizeError,
+} from './examples/DragNDropFieldExampleMaxSize/DragNDropFieldExampleMaxSize';
+import {
+  DragNDropFieldExampleMultiple,
+  DragNDropFieldExampleSingle,
+  DragNDropFieldExampleMultipleError,
+} from './examples/DragNDropFieldExampleMultiple/DragNDropFieldExampleMultiple';
+import { DragNDropFieldExampleOnDropFiles } from './examples/DragNDropFieldExampleOnDropFiles/DragNDropFieldExampleOnDropFiles';
+import { DragNDropFieldExampleErrorMessages } from './examples/DragNDropFieldExampleErrorMessages/DragNDropFieldExampleErrorMessages';
+
+```tsx
+import { DragNDropField } from '@consta/uikit/DragNDropField';
+```
+
+<MdxMenu>
+
+- [Содержимое](#содержимое)
+- [Один или несколько](#один-или-несколько)
+- [Типы файлов](#типы-файлов)
+- [Размер файла](#размер-файла)
+- [Обработка загрузки файлов](#обработка-загрузки-файлов)
+- [Обработка ошибок](#обработка-ошибок)
+- [Локализация](#локализация)
+- [Импорт](#импорт)
+- [Свойства](#свойства)
+
+</MdxMenu>
+
+## Содержимое
+
+`DragNDropField` — компонент-контейнер. Всё, что вы добавите в него,
+пользователь увидит внутри рамки для загрузки файлов.
+
+<DragNDropFieldExampleChildren />
+
+```tsx
+<DragNDropField>
+  <Text>Здесь просто текст</Text>
+</DragNDropField>
+```
+
+<DragNDropFieldExampleRenderProps />
+
+```tsx
+<DragNDropField>
+  {({ openFileDialog }) => (
+    <>
+      <Text>
+        Пример с Render Props, открывает окно для выбора файла из дочернего
+        блока
+      </Text>
+      <br />
+      <Button onClick={openFileDialog} label="Выбрать файл" />
+    </>
+  )}
+</DragNDropField>
+```
+
+Если ничего не добавите, в рамке будет такой текст и кнопка:
+
+<DragNDropFieldExampleEmpty />
+
+## Один или несколько
+
+По умолчанию можно загрузить один файл. Чтобы загрузить несколько, добавьте `multiple`.
+
+<DragNDropFieldExampleMultiple />
+
+```tsx
+<DragNDropField multiple>
+  <Text>Сюда можно перетащить много файлов за раз</Text>
+</DragNDropField>
+```
+
+<DragNDropFieldExampleSingle />
+
+```tsx
+<DragNDropField multiple={false}>
+  <Text>Сюда можно перетащить только один файл</Text>
+</DragNDropField>
+```
+
+Если пользователь попробует перетащить несколько файлов, компонент покажет ошибку.
+
+<DragNDropFieldExampleMultipleError />
+
+## Типы файлов
+
+Вы можете ограничить типы файлов, за это отвечает свойство `accept`.
+
+Как обозначить формат:
+
+- указать расширение файла с точкой в начале, например, `.jpg`,
+- MIME-тип без расширения, например `application/xml`,
+- `image/*` — чтобы загружать только изображения,
+- `audio/*` — только аудиофайлы,
+- `video/*` — только видеофайлы.
+
+[Подробнее о типах файлов](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers)
+
+<DragNDropFieldExampleAcceptImage />
+
+```tsx
+<DragNDropField accept="image/*" onDropFiles={(files) => console.log(files)}>
+  <Text>Сюда можно перетаскивать только картинки, зато любые (ну почти)</Text>
+  <Text view="ghost" font="mono">
+    image/*
+  </Text>
+</DragNDropField>
+```
+
+<DragNDropFieldExampleAcceptDoc />
+
+```tsx
+<DragNDropField accept={['.doc', '.docx']}>
+  <Text>Сюда можно перетаскивать только DOC и DOCX</Text>
+  <Text view="ghost" font="mono">
+    .doc, .docx
+  </Text>
+</DragNDropField>
+```
+
+Если пользователь попробует загрузить файл другого типа, компонент покажет ошибку.
+
+<DragNDropFieldExampleAcceptError />
+
+## Размер файла
+
+Вы можете ограничить размер файла, за это отвечает `maxSize` и `minSize`. Укажите размер в байтах.
+
+<DragNDropFieldExampleMaxSize />
+
+```tsx
+<DragNDropField maxSize={1 * 1024 * 1024}>
+  <Text>Сюда можно перетаскивать файлы размером 1 Мб или меньше</Text>
+</DragNDropField>
+```
+
+Если пользователь попробует загрузить файл большего размера, компонент покажет ошибку.
+
+<DragNDropFieldExampleMaxSizeError />
+
+## Обработка загрузки файлов
+
+Обработать загруженные файлы можно с помощью `onDropFiles`.
+
+Например, показать название и иконку.
+
+<DragNDropFieldExampleOnDropFiles />
+
+```tsx
+export function MyComponent() {
+  const [files, setFiles] = React.useState<File[]>([]);
+  return (
+    <>
+      <DragNDropField multiple onDropFiles={setFiles}>
+        <Text>Перетяните файлы сюда</Text>
+      </DragNDropField>
+      {files.map((file) => (
+        <Attachment
+          key={file.name}
+          fileName={file.name}
+          fileExtension={file.name.match(/\.(?!.*\.)(\w*)/)?.[1]}
+          fileDescription={file.type}
+        />
+      ))}
+    </>
+  );
+}
+```
+
+## Обработка ошибок
+
+Если файлы, которые загружает пользователь, не подходят под ваши ограничения, компонент покажет ошибку:
+
+- предупредит, что [файл слишком большой](#размер-файла),
+- подскажет, что [тип файла не подходит](#типы-файлов),
+- или что [можно загрузить только один файл](#один-или-несколько).
+
+## Локализация
+
+Компонент полностью локализован, вы можете переопределить тексты для всех кнопок, сообщений и ошибок. За тексты отвечает свойство `locale`.
+
+##### Пример компонента с текстами по умолчанию
+
+```
+<DragNDropField onDropFiles={(files) => console.log(files)} />
+```
+
+<DragNDropFieldExampleEmpty />
+
+### Параметры locale
+
+| Свойство         | Тип и значения                | По умолчанию                                                                               | Описание                                                             |
+| ---------------- | ----------------------------- | ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| `call-to-action` | `LocaleLabel` &#124; `string` | `Перетащите файл сюда или загрузите по кнопке`                                             | Основной текст в окне компонента                                     |
+| `action-button`  | `LocaleLabel` &#124; `string` | `Выбрать файл`                                                                             | Кнопка в окне компонента                                             |
+| `file`           | `string`                      | `файл`                                                                                     | Входит в `call-to-action` и `action-button` при `multiple=false`     |
+| `files`          | `string`                      | `файлы`                                                                                    | Входит в `call-to-action` и `action-button` при `multiple=true`      |
+| `fit-files`      | `string`                      | `Подходят файлы {from + размер + единица измерения + before + размер + единица измерения}` | Показывается, если есть ограничения                                  |
+| `from`           | `string`                      | `от`                                                                                       | Показывается, если есть ограничения по размеру, входит в `fit-files` |
+| `before`         | `string`                      | `до`                                                                                       | Показывается, если есть ограничения по размеру, входит в `fit-files` |
+
+#### Тексты ошибок
+
+| Свойство            | Тип и значения | По умолчанию                                                                 | Описание                                                      |
+| ------------------- | -------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| `file-invalid-type` | `string`       | `{имя файла}: формат файла не подходит ({тип файла})`                        | Ошибка при неподходящем формате файла                         |
+| `file-too-large`    | `string`       | `{имя файла}: файл слишком большой (максимум {размер + единица измерения})`  | Ошибка, если файл больше `max`                                |
+| `file-too-small`    | `string`       | `{имя файла}: файл слишком маленький (минимум {размер + единица измерения})` | Ошибка, если файл меньше `min`                                |
+| `too-many-files`    | `string`       | `Вы перетащили несколько файлов. Выберите один, пожалуйста`                  | Ошибка, если перетащили несколько файлов при `multiple=false` |
+| `general-error`     | `string`       | `{имя файла}: не получилось добавить файл`                                   | Общая ошибка, если файл не загрузился по какой-то причине     |
+
+#### Тексты для единиц измерения
+
+| Свойство   | Тип и значения | По умолчанию |
+| ---------- | -------------- | ------------ |
+| `gigabyte` | `string`       | `Гб`         |
+| `megabyte` | `string`       | `Мб`         |
+| `kilobyte` | `string`       | `Кб`         |
+| `byte`     | `string`       | `байт`       |
+
+##### Пример с переопределением текста ошибки
+
+```tsx
+export const DragNDropFieldExampleErrorMessages = () => {
+  return (
+    <DragNDropField
+      onDropFiles={(files) => console.log(files)}
+      maxSize={10}
+      locale={{
+        'file-too-large': ({ file }) =>
+          `Ой! Похоже ${file.name} слишком большой`,
+      }}
+    />
+  );
+};
+```
+
+<DragNDropFieldExampleErrorMessages />
+
+## Импорт
+
+```tsx
+import { DragNDropField } from '@consta/uikit/DragNDropField';
+```
+
+## Свойства
+
+```tsx
+export type FileError = {
+  message: string;
+  code:
+    | 'file-too-large'
+    | 'file-too-small'
+    | 'too-many-files'
+    | 'file-invalid-type'
+    | string;
+};
+
+export type DragNDropFieldPropErrorMessages = Partial<
+  Record<
+    FileError['code'],
+    string | ((file: File | undefined, error?: FileError) => string)
+  >
+>;
+
+type LocaleError =
+  | string
+  | ((props: { file: File; sizes: FileSizes }) => string);
+type LocaleLabel = string | ((props: { fileText: string }) => string);
+
+export type Locale = {
+  'file-invalid-type'?: LocaleError; // принимает string
+  'file-too-large'?: LocaleError; // принимает string
+  'file-too-small'?: LocaleError; // принимает string
+  'too-many-files'?: string;
+  'general-error'?: string;
+  'fit-files'?: string;
+  'file'?: string;
+  'files'?: string;
+  'before'?: string;
+  'gigabyte'?: string;
+  'megabyte'?: string;
+  'kilobyte'?: string;
+  'byte'?: string;
+  'max'?: string;
+  'call-to-action'?: LocaleLabel; // принимает string
+  'action-button'?: LocaleLabel; // принимает string
+};
+```
+
+| Свойство                                    | Тип                                                                                   | По умолчанию | Описание                                                                                                                                      |
+| ------------------------------------------- | ------------------------------------------------------------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`multiple?`](#один-или-несколько)          | `boolean`                                                                             | `false`      | Можно ли выбирать сразу несколько файлов (см. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#attr-multiple))      |
+| [`accept?`](#типы-файлов)                   | `string` &#124; `string[]`                                                            | -            | Список разрешённых типов файлов (см. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers)) |
+| [`maxSize?`](#размер-файла)                 | `number`                                                                              | -            | Максимальный размер файла в байтах                                                                                                            |
+| [`minSize?`](#размер-файла)                 | `number`                                                                              | -            | Минимальный размер файла в байтах                                                                                                             |
+| [`onDropFiles`](#обработка-загрузки-файлов) | `(files: File[]) => void`                                                             | -            | Обработчик события выбора файлов                                                                                                              |
+| [`children?`](#содержимое)                  | `React.ReactNode` &#124; `(props: { openFileDialog: () => void }) => React.ReactNode` | -            | Дочерние элементы                                                                                                                             |
+| [`locale?`](#локализация)                   | `Locale`                                                                              | -            | Локализация                                                                                                                                   |
+| `disabled?`                                 | `boolean`                                                                             | -            | Отключение поля                                                                                                                               |
+| `ref?`                                      | `React.Ref<HTMLDivElement>`                                                           | -            | Ссылка на корневой DOM-элемент компонента                                                                                                     |
+| `className?`                                | `string`                                                                              | -            | Дополнительные CSS-классы для компонента                                                                                                      |

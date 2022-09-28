@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import * as React from 'react';
 
 import { IconSun } from '../../../icons/IconSun/IconSun';
 import { getByMap } from '../../../utils/getByMap';
@@ -17,13 +17,11 @@ type Item = {
 export const items: Item[] = [
   {
     name: 'один',
-    text:
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias asperiores delectus eius fuga hic optio qui unde velit vitae voluptatibus! Ab autem dignissimos dolorum eaque, est et fugit ipsum molestias necessitatibus nesciunt ratione, vel veniam. Aspernatur aut consequatur ducimus est explicabo harum nemo, nisi officia placeat quisquam, tempore vitae, voluptates.',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias asperiores delectus eius fuga hic optio qui unde velit vitae voluptatibus! Ab autem dignissimos dolorum eaque, est et fugit ipsum molestias necessitatibus nesciunt ratione, vel veniam. Aspernatur aut consequatur ducimus est explicabo harum nemo, nisi officia placeat quisquam, tempore vitae, voluptates.',
   },
   {
     name: 'два',
-    text:
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur esse explicabo harum illum molestias mollitia pariatur quasi quia tempora vel!',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur esse explicabo harum illum molestias mollitia pariatur quasi quia tempora vel!',
   },
   { name: 'три', text: 'Lorem ipsum dolor sit amet.' },
 ];
@@ -98,14 +96,21 @@ describe('Компонент CollapseGroup', () => {
         const handleClick = jest.fn();
         const index = 0;
 
-        renderComponent({ onOpen: handleClick, items, getItemLabel, getItemContent });
+        renderComponent({
+          onOpen: handleClick,
+          items,
+          getItemLabel,
+          getItemContent,
+        });
 
         const element = getLabelText(index) as HTMLDivElement;
 
         fireEvent.click(element);
         expect(handleClick).toHaveBeenCalled();
         expect(handleClick).toHaveBeenCalledTimes(1);
-        expect(handleClick).toHaveBeenCalledWith(expect.objectContaining({ value: [index] }));
+        expect(handleClick).toHaveBeenCalledWith(
+          expect.objectContaining({ value: [index] }),
+        );
       });
     });
   });

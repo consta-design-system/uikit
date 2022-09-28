@@ -48,7 +48,8 @@ export type TextFieldPropStatus = typeof textFieldPropStatus[number];
 
 export const textFieldPropWidth = ['default', 'full'] as const;
 export type TextFieldPropWidth = typeof textFieldPropWidth[number];
-export const textFieldPropWidthDefault: TextFieldPropWidth = textFieldPropWidth[0];
+export const textFieldPropWidthDefault: TextFieldPropWidth =
+  textFieldPropWidth[0];
 
 export type TextFieldPropsTextareaType<TYPE> = TYPE extends 'textarea'
   ?
@@ -68,7 +69,9 @@ export type TextFieldPropsTextareaType<TYPE> = TYPE extends 'textarea'
       maxRows?: never;
     };
 
-export type TextFieldPropRightSide<TYPE extends string> = TYPE extends 'number' | 'password'
+export type TextFieldPropRightSide<TYPE extends string> = TYPE extends
+  | 'number'
+  | 'password'
   ? {
       rightSide?: never;
     }

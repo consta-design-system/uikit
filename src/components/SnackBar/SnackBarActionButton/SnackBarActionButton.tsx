@@ -8,7 +8,9 @@ import { SnackBarActionButtonProps } from '../types';
 
 const cnSnackBarActionButton = cn('SnackBarActionButton');
 
-export const SnackBarActionButton: React.FC<SnackBarActionButtonProps> = (props) => {
+export const SnackBarActionButton: React.FC<SnackBarActionButtonProps> = (
+  props,
+) => {
   const { actions, className } = props;
 
   if (actions.length < 1) {
@@ -16,7 +18,9 @@ export const SnackBarActionButton: React.FC<SnackBarActionButtonProps> = (props)
   }
 
   return (
-    <div className={cnSnackBarActionButton('ActionButtonsWrapper', [className])}>
+    <div
+      className={cnSnackBarActionButton('ActionButtonsWrapper', [className])}
+    >
       {actions.map((item, index) => (
         <Button
           className={cnSnackBarActionButton()}

@@ -4,13 +4,19 @@ import React, { forwardRef } from 'react';
 
 import { cn } from '../../utils/bem';
 import { Avatar, avatarPropFormDefault, cnAvatar } from '../Avatar/Avatar';
-
 import { withDefaultGetters } from './helpers';
-import { AvatarGroupComponent, AvatarGroupProps, avatarGroupPropSizeDefault } from './types';
+import {
+  AvatarGroupComponent,
+  AvatarGroupProps,
+  avatarGroupPropSizeDefault,
+} from './types';
 
 const cnAvatarGroup = cn('AvatarGroup');
 
-function AvatarGroupRender(props: AvatarGroupProps, ref: React.Ref<HTMLDivElement>) {
+const AvatarGroupRender = (
+  props: AvatarGroupProps,
+  ref: React.Ref<HTMLDivElement>,
+) => {
   const {
     items = [],
     form = avatarPropFormDefault,
@@ -24,7 +30,7 @@ function AvatarGroupRender(props: AvatarGroupProps, ref: React.Ref<HTMLDivElemen
   return (
     <div className={cnAvatarGroup({ size })} ref={ref} {...otherProps}>
       {items.length > visibleCount && (
-        <div className={cnAvatar({ size, form }, [cnAvatarGroup('ShowMore')])}>
+        <div className={cnAvatar({ size, form }, [cnAvatarGroup('More')])}>
           {`+${items.length - visibleCount}`}
         </div>
       )}
@@ -40,8 +46,10 @@ function AvatarGroupRender(props: AvatarGroupProps, ref: React.Ref<HTMLDivElemen
       ))}
     </div>
   );
-}
+};
 
-export const AvatarGroup = forwardRef(AvatarGroupRender) as AvatarGroupComponent;
+export const AvatarGroup = forwardRef(
+  AvatarGroupRender,
+) as AvatarGroupComponent;
 
 export * from './types';

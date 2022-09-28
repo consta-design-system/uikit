@@ -1,6 +1,5 @@
 import { IconPropSize } from '../../icons/Icon/Icon';
-import { ContextMenuPropSize } from '../ContextMenu/helpers';
-
+import { ContextMenuPropSize } from '../ContextMenu';
 import {
   ThemeTogglerItemDefault,
   ThemeTogglerPropGetItemIcon,
@@ -10,11 +9,15 @@ import {
   ThemeTogglerPropSize,
 } from './types';
 
-const defaultGetItemKey: ThemeTogglerPropGetItemKey<ThemeTogglerItemDefault> = (item) => item.key;
-const defaultGetItemLabel: ThemeTogglerPropGetItemLabel<ThemeTogglerItemDefault> = (item) =>
-  item.label;
-const defaultGetItemIcon: ThemeTogglerPropGetItemIcon<ThemeTogglerItemDefault> = (item) =>
-  item.icon;
+const defaultGetItemKey: ThemeTogglerPropGetItemKey<ThemeTogglerItemDefault> = (
+  item,
+) => item.key;
+const defaultGetItemLabel: ThemeTogglerPropGetItemLabel<
+  ThemeTogglerItemDefault
+> = (item) => item.label;
+const defaultGetItemIcon: ThemeTogglerPropGetItemIcon<
+  ThemeTogglerItemDefault
+> = (item) => item.icon;
 
 export function withDefaultGetters(props: ThemeTogglerProps) {
   return {
@@ -32,7 +35,10 @@ export const iconSizeMap: Record<ThemeTogglerPropSize, IconPropSize> = {
   xs: 'xs',
 };
 
-export const contextMenuSizeMap: Record<ThemeTogglerPropSize, ContextMenuPropSize> = {
+export const contextMenuSizeMap: Record<
+  ThemeTogglerPropSize,
+  ContextMenuPropSize
+> = {
   l: 'l',
   m: 'm',
   s: 's',

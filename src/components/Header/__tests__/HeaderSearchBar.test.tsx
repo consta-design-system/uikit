@@ -1,7 +1,10 @@
-import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import * as React from 'react';
 
-import { cnHeaderSearchBar, HeaderSearchBar } from '../SearchBar/HeaderSearchBar';
+import {
+  cnHeaderSearchBar,
+  HeaderSearchBar,
+} from '../SearchBar/HeaderSearchBar';
 
 type HeaderSearchBarProps = React.ComponentProps<typeof HeaderSearchBar>;
 
@@ -46,7 +49,9 @@ describe('Компонент HeaderSearchBar', () => {
 
         expect(handleChange).toHaveBeenCalled();
         expect(handleChange).toHaveBeenCalledTimes(1);
-        expect(handleChange).toHaveBeenCalledWith(expect.objectContaining({ value }));
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({ value }),
+        );
       });
     });
     describe('проверка onSearch', () => {
@@ -62,7 +67,9 @@ describe('Компонент HeaderSearchBar', () => {
 
         expect(handleChange).toHaveBeenCalled();
         expect(handleChange).toHaveBeenCalledTimes(1);
-        expect(handleChange).toHaveBeenCalledWith(expect.objectContaining({ value }));
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({ value }),
+        );
       });
     });
   });

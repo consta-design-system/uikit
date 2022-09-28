@@ -1,0 +1,79 @@
+import { MdxMenu } from '@consta/stand';
+import { ProgressSpinExampleProgress } from './examples/ProgressSpinExampleProgress/ProgressSpinExampleProgress';
+import { ProgressSpinExampleSize } from './examples/ProgressSpinExampleSize/ProgressSpinExampleSize';
+
+```tsx
+import { ProgressSpin } from '@consta/uikit/ProgressSpin';
+```
+
+<MdxMenu>
+
+- [Процент готовности](#процент-готовности)
+- [Размер](#размер)
+- [Импорт](#импорт)
+- [Свойства](#свойства)
+- [Пример использования](#пример-использования)
+
+</MdxMenu>
+
+## Процент готовности
+
+Если хотите показать, сколько ещё ждать, укажите в процентах, насколько процесс
+близок к завершению — с помощью свойства `value`.
+
+Чтобы анимировать индикатор, добавьте `animation` (тогда он плавно прокрутится до величины,
+которую вы указали в `value`).
+
+Если опустить это свойство, то индикатор будет бесконечно крутиться.
+
+```ts
+<ProgressSpin size="m" />
+<ProgressSpin value={20} size="m" />
+<ProgressSpin value={40} size="m" />
+<ProgressSpin value={60} size="m" />
+<ProgressSpin animation value={80} size="m" />
+```
+
+<ProgressSpinExampleProgress />
+
+## Размер
+
+За размер индикатора отвечает свойство `size`.
+
+```ts
+<ProgressSpin value={70} size="2xl" />
+<ProgressSpin value={70} size="xl" />
+<ProgressSpin value={70} size="l" />
+<ProgressSpin value={70} size="m" />
+<ProgressSpin value={70} size="s" />
+```
+
+<ProgressSpinExampleSize />
+
+## Импорт
+
+```tsx
+import { ProgressSpin } from '@consta/uikit/ProgressSpin';
+```
+
+## Свойства
+
+| Свойство                            | Тип                        | По умолчанию | Описание                                                                           |
+| ----------------------------------- | -------------------------- | ------------ | ---------------------------------------------------------------------------------- |
+| [`value?`](#процент-готовности)     | `number`                   | -            | Выполненная часть процесса в процентах (определяет заполненную область индикатора) |
+| [`animation?`](#процент-готовности) | `boolean`                  | -            | Включает плавное изменение индикатора до величины, указанной в `progress`          |
+| [`size?`](#размер)                  | `'m','s','l','xl','2xl'`   | `'m'`        | Размер                                                                             |
+| `className?`                        | `string`                   | -            | Дополнительный класс                                                               |
+| `ref?`                              | `React.Ref<SVGSVGElement>` | -            | Ссылка на корневой DOM-элемент компонента                                          |
+
+## Пример использования
+
+```ts
+// src/App.ts
+import React from 'react';
+import { ProgressSpin } from '@consta/uikit/ProgressSpin';
+
+const App = () => {
+  return <ProgressSpin value={70} />;
+};
+```
