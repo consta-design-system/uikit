@@ -1,4 +1,8 @@
+import './BreadcrumbsExample.css';
+
 import React from 'react';
+
+import { cn } from '##/utils/bem';
 
 import { IconCards } from '../../../../../icons/IconCards/IconCards';
 import { IconDrag } from '../../../../../icons/IconDrag/IconDrag';
@@ -111,13 +115,17 @@ const pagesLongLabels = [
 
 const pagesSimple = ['Главная', 'Страница 1', 'Страница 2', 'Страница 3'];
 
+const cnBreadcrumbsExample = cn('BreadcrumbsExample');
+
 const onItemClick = (props: { item: DefaultItem; e: React.MouseEvent }) => {
   props.e.preventDefault();
 };
 
 export const BreadcrumbsCustomType = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <StoryBookExample
+      className={cnDocsDecorator('Section', [cnBreadcrumbsExample()])}
+    >
       <Breadcrumbs items={pagesSimple} getItemLabel={(item) => item} />
     </StoryBookExample>
   );
@@ -125,7 +133,9 @@ export const BreadcrumbsCustomType = () => {
 
 export const BreadcrumbsExample = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <StoryBookExample
+      className={cnDocsDecorator('Section', [cnBreadcrumbsExample()])}
+    >
       <Breadcrumbs items={pagesNoIcon} size="m" onItemClick={onItemClick} />
     </StoryBookExample>
   );
@@ -133,7 +143,9 @@ export const BreadcrumbsExample = () => {
 
 export const BreadcrumbsExampleActive = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <StoryBookExample
+      className={cnDocsDecorator('Section', [cnBreadcrumbsExample()])}
+    >
       <Breadcrumbs items={pagesNoIcon} size="m" onItemClick={onItemClick} />
     </StoryBookExample>
   );
@@ -141,7 +153,9 @@ export const BreadcrumbsExampleActive = () => {
 
 export const BreadcrumbsExampleSubMenu = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <StoryBookExample
+      className={cnDocsDecorator('Section', [cnBreadcrumbsExample()])}
+    >
       <Breadcrumbs items={pagesSubMenu} size="m" onItemClick={onItemClick} />
     </StoryBookExample>
   );
@@ -149,7 +163,9 @@ export const BreadcrumbsExampleSubMenu = () => {
 
 export const BreadcrumbsExampleFitMode = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <StoryBookExample
+      className={cnDocsDecorator('Section', [cnBreadcrumbsExample()])}
+    >
       <Breadcrumbs
         items={pagesLongLabels}
         onItemClick={onItemClick}
@@ -166,7 +182,9 @@ export const BreadcrumbsExampleFitMode = () => {
 
 export const BreadcrumbsExampleIcons = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <StoryBookExample
+      className={cnDocsDecorator('Section', [cnBreadcrumbsExample()])}
+    >
       <Breadcrumbs items={pages} size="m" onItemClick={onItemClick} />
     </StoryBookExample>
   );
@@ -174,7 +192,9 @@ export const BreadcrumbsExampleIcons = () => {
 
 export const BreadcrumbsExampleIconRoot = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <StoryBookExample
+      className={cnDocsDecorator('Section', [cnBreadcrumbsExample()])}
+    >
       <Breadcrumbs
         items={pagesNoIcon}
         size="m"
@@ -187,7 +207,9 @@ export const BreadcrumbsExampleIconRoot = () => {
 
 export const BreadcrumbsExamplelastItemIsLink = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <StoryBookExample
+      className={cnDocsDecorator('Section', [cnBreadcrumbsExample()])}
+    >
       <Breadcrumbs
         items={pagesNoIcon}
         size="m"
@@ -200,7 +222,7 @@ export const BreadcrumbsExamplelastItemIsLink = () => {
 
 export const BreadcrumbsExampleSize = () => {
   return (
-    <StoryBookExample>
+    <StoryBookExample className={cnBreadcrumbsExample()}>
       <Breadcrumbs
         items={pages}
         size="xs"

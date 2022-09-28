@@ -6,4 +6,8 @@
     width: 0;
     height: 0;
   }
+
+  &-Component {
+    max-width: 100%;
+  }
 }

@@ -1,15 +1,22 @@
+import './ButtonExampleSize.css';
+
 import React from 'react';
+
+import { cn } from '##/utils/bem';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
 import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Button } from '../../../Button';
 
+const cnButtonExampleSize = cn('ButtonExampleSize');
+
 export const ButtonExampleSizeBasic = () => {
   return (
     <div
       className={cnDocsDecorator('Section', [
         wp.tplGrid({ 'ratio': '1-1-1-1', 'col-gap': 'full' }),
+        cnButtonExampleSize(),
       ])}
     >
       <div className={cnDocsExample()}>

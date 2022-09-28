@@ -37,7 +37,7 @@ export const ButtonExampleFormHybrid = () => {
         <TextField
           placeholder="Электронная почта"
           form="roundClear"
-          style={{ width: '260px' }}
+          style={{ width: '100%', maxWidth: '260px' }}
         />
       </div>
       <div className={cnDocsExample()}>

@@ -1,4 +1,8 @@
+import './ChoiceGroupExampleText.css';
+
 import React, { useState } from 'react';
+
+import { cn } from '##/utils/bem';
 
 import { cnMixSpace } from '../../../../../mixs/MixSpace/MixSpace';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
@@ -13,12 +17,15 @@ const itemsWrong: Item[] = ['Сетка', 'Таблицей', 'Карточка'
 const items: Item[] = ['Списком', 'В таблице', 'По одному'];
 const itemsSimple: Item[] = ['один', 'два', 'три', 'четыре', 'пять', 'шесть'];
 
+const cnChoiceGroupExampleText = cn('ChoiceGroupExampleText');
+
 export const ChoiceGroupExampleText = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
   return (
     <div
       className={cnDocsDecorator('Section', [
         wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
+        cnChoiceGroupExampleText(),
       ])}
     >
       <div className={cnMixSpace({ m: 'm' })}>
@@ -65,6 +72,7 @@ export const ChoiceGroupExample = () => {
         items={itemsSimple}
         getItemLabel={(item) => item}
         name="ChoiceGroupExampleText"
+        className={cnChoiceGroupExampleText('Component')}
       />
     </StoryBookExample>
   );

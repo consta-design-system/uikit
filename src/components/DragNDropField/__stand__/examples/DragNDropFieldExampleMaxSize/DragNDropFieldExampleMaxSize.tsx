@@ -1,4 +1,8 @@
+import './DragNDropFieldExampleMaxSize.css';
+
 import React from 'react';
+
+import { cn } from '##/utils/bem';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
@@ -15,8 +19,12 @@ const image = {
   alt: 'Ошибка: файл слишком большой',
 };
 
+const cnDragNDropFieldExampleMaxSize = cn('DragNDropFieldExampleMaxSize');
+
 export const DragNDropFieldExampleMaxSize = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
+  <StoryBookExample
+    className={cnDocsDecorator('Section', [cnDragNDropFieldExampleMaxSize()])}
+  >
     <div>
       <DragNDropField
         maxSize={1 * 1024 * 1024}
@@ -30,9 +38,11 @@ export const DragNDropFieldExampleMaxSize = () => (
 );
 
 export const DragNDropFieldExampleMaxSizeError = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
+  <StoryBookExample
+    className={cnDocsDecorator('Section', [cnDragNDropFieldExampleMaxSize()])}
+  >
     <div>
-      <img src={image.src} alt={image.alt} style={{ maxWidth: 700 }} />
+      <img src={image.src} alt={image.alt} />
     </div>
   </StoryBookExample>
 );

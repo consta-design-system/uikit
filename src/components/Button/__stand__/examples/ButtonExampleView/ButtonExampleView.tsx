@@ -1,4 +1,8 @@
+import './ButtonExampleView.css';
+
 import React from 'react';
+
+import { cn } from '##/utils/bem';
 
 import { IconAdd } from '../../../../../icons/IconAdd/IconAdd';
 import { IconBookmarkStroked } from '../../../../../icons/IconBookmarkStroked/IconBookmarkStroked';
@@ -13,11 +17,14 @@ import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsE
 import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Button } from '../../../Button';
 
+const cnButtonExampleView = cn('ButtonExampleView');
+
 export const ButtonExampleViewPrimary = () => {
   return (
     <div
       className={cnDocsDecorator('Section', [
         wp.decorator({ distribute: 'left' }),
+        cnButtonExampleView(),
       ])}
     >
       <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>
@@ -38,6 +45,7 @@ export const ButtonExampleViewSecondary = () => {
     <div
       className={cnDocsDecorator('Section', [
         wp.decorator({ distribute: 'left' }),
+        cnButtonExampleView(),
       ])}
     >
       <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>
@@ -63,6 +71,7 @@ export const ButtonExampleViewGhost = () => {
     <div
       className={cnDocsDecorator('Section', [
         wp.decorator({ distribute: 'left' }),
+        cnButtonExampleView(),
       ])}
     >
       <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>
@@ -83,6 +92,7 @@ export const ButtonExampleViewClear = () => {
     <div
       className={cnDocsDecorator('Section', [
         wp.decorator({ distribute: 'left' }),
+        cnButtonExampleView(),
       ])}
     >
       <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>
@@ -108,6 +118,7 @@ export const ButtonExampleViewDisabled = () => {
     <div
       className={cnDocsDecorator('Section', [
         wp.decorator({ distribute: 'left' }),
+        cnButtonExampleView(),
       ])}
     >
       <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>

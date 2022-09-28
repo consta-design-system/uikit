@@ -1,4 +1,8 @@
+import './ChoiceGroupExampleIcon.css';
+
 import React, { useState } from 'react';
+
+import { cn } from '##/utils/bem';
 
 import { IconComponent } from '../../../../../icons/Icon/Icon';
 import { IconCamera } from '../../../../../icons/IconCamera/IconCamera';
@@ -28,6 +32,8 @@ const items: Item[] = [
   },
 ];
 
+const cnChoiceGroupExampleIcon = cn('ChoiceGroupExampleIcon');
+
 export const ChoiceGroupExampleIcon = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
   return (
@@ -39,6 +45,7 @@ export const ChoiceGroupExampleIcon = () => {
         getLabel={(item) => item.name}
         getIcon={(item) => item.icon}
         name="ChoiceGroupExampleIcon"
+        className={cnChoiceGroupExampleIcon()}
       />
       <ChoiceGroup
         value={value}
@@ -48,6 +55,7 @@ export const ChoiceGroupExampleIcon = () => {
         getIcon={(item) => item.icon}
         onlyIcon
         name="ChoiceGroupExampleIcon"
+        className={cnChoiceGroupExampleIcon()}
       />
     </StoryBookExample>
   );

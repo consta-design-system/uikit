@@ -1,4 +1,6 @@
 .HeaderWithoutMenuExample {
+  overflow-x: auto;
+  overflow-y: hidden;
   margin-bottom: var(--space-3xl);
 
   &-Login {

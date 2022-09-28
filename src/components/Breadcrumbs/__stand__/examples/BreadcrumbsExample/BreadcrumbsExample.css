@@ -1,0 +1,5 @@
+.BreadcrumbsExample.UiKit--DocsDecorator-Section {
+  @media screen and (max-width: 600px) {
+    max-width: calc(100% - var(--space-3xl));
+  }
+}

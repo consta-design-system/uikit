@@ -3,10 +3,14 @@
   flex-direction: row;
   height: 200px;
 
+  @media screen and (max-width: 600px) {
+    flex-direction: column-reverse;
+  }
+
   &-SnackBar {
     overflow: auto;
     flex: none;
-    width: 400px;
+    max-width: 400px;
     padding-right: var(--space-xs);
     padding-left: var(--space-xs);
   }

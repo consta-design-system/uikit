@@ -1,8 +1,14 @@
+import './TextExampleWeight.css';
+
 import React from 'react';
+
+import { cn } from '##/utils/bem';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Text, TextPropWeight } from '../../../Text';
+
+const cnTextExampleWeight = cn('TextExampleWeight');
 
 export const TextExampleWeight = () => {
   const weight: Array<TextPropWeight> = [
@@ -17,6 +23,7 @@ export const TextExampleWeight = () => {
     <div
       className={cnDocsDecorator('Section', [
         wp.tplGrid({ 'xs-columns': 3, 'col-gap': 'full', 'row-gap': 'full' }),
+        cnTextExampleWeight(),
       ])}
     >
       {weight.map((item, index) => (

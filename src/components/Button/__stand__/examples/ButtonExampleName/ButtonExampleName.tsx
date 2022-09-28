@@ -1,4 +1,8 @@
+import './ButtonExampleName.css';
+
 import React from 'react';
+
+import { cn } from '##/utils/bem';
 
 import { IconArrowLeft } from '../../../../../icons/IconArrowLeft/IconArrowLeft';
 import { IconArrowRight } from '../../../../../icons/IconArrowRight/IconArrowRight';
@@ -10,11 +14,14 @@ import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Text } from '../../../../Text/Text';
 import { Button } from '../../../Button';
 
+const cnButtonExampleName = cn('ButtonExampleName');
+
 export const ButtonExampleNameSemantics = () => {
   return (
     <div
       className={cnDocsDecorator('Section', [
         wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
+        cnButtonExampleName(),
       ])}
     >
       <div className={cnMixSpace({ m: 'm' })}>
@@ -51,6 +58,7 @@ export const ButtonExampleNameVerb = () => {
     <div
       className={cnDocsDecorator('Section', [
         wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
+        cnButtonExampleName(),
       ])}
     >
       <div className={cnMixSpace({ m: 'm' })}>
@@ -90,6 +98,7 @@ export const ButtonExampleNameSingleLine = () => {
     <div
       className={cnDocsDecorator('Section', [
         wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
+        cnButtonExampleName(),
       ])}
     >
       <div className={cnMixSpace({ m: 'm' })}>
@@ -120,6 +129,7 @@ export const ButtonExampleNameOverflow = () => {
     <div
       className={cnDocsDecorator('Section', [
         wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
+        cnButtonExampleName(),
       ])}
     >
       <div className={cnMixSpace({ m: 'm' })}>
@@ -159,11 +169,21 @@ export const ButtonExampleNameTooBig = () => {
       <div
         className={cnDocsDecorator('Section', [
           wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
+          cnButtonExampleName(),
         ])}
       >
         <div className={cnMixSpace({ m: 'm', mB: '2xs' })}>
           <div className={cnDocsExample()}>
             <Button label="Отредактировать больничный лист" />
+          </div>
+          <div className={cnDocsExample()}>
+            <Button
+              label="Отредактировать больничный лист"
+              style={{ width: '240px' }}
+            />
+            <p className={cnDocsExample('Status', { view: 'wrong' })}>
+              Неправильно
+            </p>
           </div>
         </div>
         <div className={cnMixSpace({ m: 'm', mB: '2xs' })}>
@@ -179,25 +199,6 @@ export const ButtonExampleNameTooBig = () => {
               />
             </div>
           </div>
-        </div>
-      </div>
-      <div
-        className={cnDocsDecorator('Section', [
-          wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
-        ])}
-      >
-        <div className={cnMixSpace({ m: 'm', mT: '2xs' })}>
-          <div className={cnDocsExample()}>
-            <Button
-              label="Отредактировать больничный лист"
-              style={{ width: '240px' }}
-            />
-            <p className={cnDocsExample('Status', { view: 'wrong' })}>
-              Неправильно
-            </p>
-          </div>
-        </div>
-        <div className={cnMixSpace({ m: 'm', mT: '2xs' })}>
           <div className={cnDocsExample()}>
             <div className={wp.decorator({ distribute: 'left' })}>
               <Text size="l" weight="bold" lineHeight="l">
@@ -227,6 +228,7 @@ export const ButtonExampleNameNavigation = () => {
     <div
       className={cnDocsDecorator('Section', [
         wp.decorator({ distribute: 'left' }),
+        cnButtonExampleName(),
       ])}
     >
       <div className={cnMixSpace({ m: 'm' })}>
@@ -252,6 +254,7 @@ export const ButtonExampleNameAgreement = () => {
     <div
       className={cnDocsDecorator('Section', [
         wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
+        cnButtonExampleName(),
       ])}
     >
       <div className={cnMixSpace({ m: 'm' })}>

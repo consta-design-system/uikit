@@ -202,8 +202,12 @@ import { Button } from '@consta/uikit/Button';
 В этом примере свойство `form` у кнопки равно `brickRound`.
 
 ```ts
-<div style={{display: 'flex}} >
-  <TextField placeholder="Электронная почта" form="roundClear" style={{ width: '260px' }} />
+<div style={{ display: 'flex' }}>
+  <TextField
+    placeholder="Электронная почта"
+    form="roundClear"
+    style={{ width: '100%', maxWidth: '260px' }}
+  />
   <Button label="Подписаться" form="brickRound" />
 </div>
 ```

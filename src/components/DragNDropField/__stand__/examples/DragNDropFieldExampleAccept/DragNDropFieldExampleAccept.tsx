@@ -51,7 +51,7 @@ export const DragNDropFieldExampleAcceptImage = () => (
 export const DragNDropFieldExampleAcceptError = () => (
   <StoryBookExample className={cnDocsDecorator('Section')}>
     <div>
-      <img src={image.src} alt={image.alt} style={{ maxWidth: 700 }} />
+      <img src={image.src} alt={image.alt} />
     </div>
   </StoryBookExample>
 );

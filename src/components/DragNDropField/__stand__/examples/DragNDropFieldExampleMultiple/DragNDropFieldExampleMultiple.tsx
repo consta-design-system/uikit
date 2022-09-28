@@ -1,4 +1,8 @@
+import './DragNDropFieldExample.css';
+
 import React from 'react';
+
+import { cn } from '##/utils/bem';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
@@ -15,8 +19,12 @@ const image = {
   alt: 'Ошибка: слишком много файлов',
 };
 
+const cnDragNDropFieldExample = cn('DragNDropFieldExample');
+
 export const DragNDropFieldExampleSingle = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
+  <StoryBookExample
+    className={cnDocsDecorator('Section', [cnDragNDropFieldExample()])}
+  >
     <div>
       <DragNDropField
         multiple={false}
@@ -29,7 +37,9 @@ export const DragNDropFieldExampleSingle = () => (
 );
 
 export const DragNDropFieldExampleMultiple = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
+  <StoryBookExample
+    className={cnDocsDecorator('Section', [cnDragNDropFieldExample()])}
+  >
     <div>
       <DragNDropField multiple onDropFiles={(files) => console.log(files)}>
         <Text>Сюда можно перетащить много файлов за раз</Text>
@@ -39,9 +49,11 @@ export const DragNDropFieldExampleMultiple = () => (
 );
 
 export const DragNDropFieldExampleMultipleError = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
+  <StoryBookExample
+    className={cnDocsDecorator('Section', [cnDragNDropFieldExample()])}
+  >
     <div>
-      <img src={image.src} alt={image.alt} style={{ maxWidth: 700 }} />
+      <img src={image.src} alt={image.alt} />
     </div>
   </StoryBookExample>
 );

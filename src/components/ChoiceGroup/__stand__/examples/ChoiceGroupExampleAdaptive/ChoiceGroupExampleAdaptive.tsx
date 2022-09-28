@@ -56,6 +56,7 @@ export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
         <ChoiceGroup
           name="ChoiceGroupExampleAdaptiveUseBreakpoints"
           items={items2}
+          className={cnChoiceGroupExampleAdaptiveScroll('Component')}
           getItemLabel={getItemLabel}
           form="round"
           value={value}
@@ -72,6 +73,7 @@ export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
         items={items2}
         getItemLabel={getItemLabel}
         value={value}
+        className={cnChoiceGroupExampleAdaptiveScroll('Component')}
         onChange={onChandge}
       />
     </StoryBookExample>
