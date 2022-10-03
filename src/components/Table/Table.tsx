@@ -1,6 +1,6 @@
 import './Table.css';
 
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 
 import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
@@ -133,6 +133,7 @@ export type onCellClick = ({
 
 export type TableRow = {
   id: string;
+  defaultExpand?: boolean;
   rows?: TableRow[];
 };
 
@@ -204,6 +205,7 @@ export type TableProps<T extends TableRow> = {
   headerVerticalAlign?: HeaderVerticalAlign;
   zebraStriped?: ZebraStriped;
   borderBetweenRows?: boolean;
+  defaultExpandAll?: boolean;
   borderBetweenColumns?: boolean;
   emptyRowsPlaceholder?: React.ReactNode;
   className?: string;
@@ -314,6 +316,7 @@ const InternalTable = <T extends TableRow>(
     borderBetweenRows = false,
     borderBetweenColumns = false,
     emptyRowsPlaceholder = defaultEmptyRowsPlaceholder,
+    defaultExpandAll,
     className,
     onRowHover,
     onRowClick,
@@ -693,6 +696,32 @@ const InternalTable = <T extends TableRow>(
       toggleCollapse,
     };
   };
+
+  const getExpandedRows = (rows: T[], defaultExpandAll?: boolean): string[] => {
+    let expandedIds: string[] = [];
+    rows.forEach((row) => {
+      if (
+        row.defaultExpand ||
+        ((row.rows?.length ?? 0) > 0 && defaultExpandAll)
+      ) {
+        expandedIds.push(row.id);
+      }
+      if (row.rows) {
+        const ids = getExpandedRows(row.rows as T[], defaultExpandAll);
+        expandedIds = [...expandedIds, ...ids];
+        if (ids.length > 0 && expandedIds.indexOf(row.id) === -1) {
+          expandedIds.push(row.id);
+        }
+      }
+    });
+    return expandedIds;
+  };
+
+  useEffect(() => {
+    if (rows) {
+      setExpandedRowIds(getExpandedRows(rows, defaultExpandAll));
+    }
+  }, [rows, defaultExpandAll]);
 
   const renderCell = (
     column: TableColumn<T>,
