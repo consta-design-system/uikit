@@ -1,5 +1,18 @@
 # Changelog
 
+## v4.1.0 (04/10/2022)
+Самое важное:
+- В таблице появилась возможность отображать строки сразу раскрытыми
+- Обновили стенд
+
+---
+
+- [chore(deps): remove mdx-loader (#2669)](https://github.com/consta-design-system/uikit/commit/1ce33557ca03590383452c24b2d44d22b319f7dc) - [@gizeasy](https://github.com/gizeasy)
+- [chore(deps): update @consta/stand (#2668)](https://github.com/consta-design-system/uikit/commit/c75ffa7d63665b307de197df57cb937cf5759590) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Table): add new props to table props and table row for expands rows (#2667)](https://github.com/consta-design-system/uikit/commit/7b9635d76729c13d30a098a506088aefe4a0a8ce) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
 ## v4.0.1 (28/09/2022)
 Очень большое и важное обновление: поднимаем версию, выкладываем новый стенд.
 Сами компоненты не меняются, зато:
@@ -435,19 +448,3 @@ endFieldOnBlur - deleted, use onBlur
 
 - [ fix(Table): fix bug with column width (#2051)](https://github.com/consta-design-system/uikit/commit/8c6d8593891e3bb7ae24c67903ed64a9af611c89) - [@N1MBER](https://github.com/N1MBER)
 - [feat(Popover): rewrite offset type (#2080)](https://github.com/consta-design-system/uikit/commit/4105c10895cbd66f67277897034d76de9513bc2c) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v3.17.0 (24/02/2022)
-Самое важное:
-- Добавлена возможность указывать кастомный тип `Item` для `SnackBar`
-- Добавлены новые иконки
-- Доработана документация
----
-
-- [docs(Selects): edit text (#2082)](https://github.com/consta-design-system/uikit/commit/943477417ea49e3590b92a4999c7dd8b5c9d62db) - [@arhayka](https://github.com/arhayka)
-- [docs(fix link to the Table): (#2081)](https://github.com/consta-design-system/uikit/commit/a0d54d0ab48441502be42e925b0b9d8f089d2269) - [@arhayka](https://github.com/arhayka)
-- [chore(deps): bump url-parse from 1.5.3 to 1.5.7 (#2073)](https://github.com/consta-design-system/uikit/commit/979d962af025b7d9864a45b037a1c8d398e12e56) - [@dependabot[bot]](https://github.com/dependabot[bot])
-- [feat(icon): add new icons (#2076)](https://github.com/consta-design-system/uikit/commit/a4ec03c929ecbc003549371f0fe45d399360156d) - [@kolebayev](https://github.com/kolebayev)
-- [fix(CssTransition): fix warning with finDOMNode in Transaction children (#2072)](https://github.com/consta-design-system/uikit/commit/766daf499c847fbf9760b5754f1884a6e5820138) - [@N1MBER](https://github.com/N1MBER)
-- [refactor(SnackBar): add other props for detecting item props and also update doc (#2032)](https://github.com/consta-design-system/uikit/commit/fa52bf026c3743c609ea508e0d4c6b5e8468dcf1) - [@N1MBER](https://github.com/N1MBER)
