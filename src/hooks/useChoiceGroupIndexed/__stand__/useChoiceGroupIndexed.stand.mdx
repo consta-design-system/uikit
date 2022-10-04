@@ -5,7 +5,7 @@ import { useChoiceGroupIndexed } from '@consta/uikit/useChoiceGroupIndexed';
 ```
 
 Этот хук может понадобиться в компонентах, где пользователи могут выбрать несколько значений из списка.
-Например, [CollapseGroup](##LIBS.STAND/stand:uikit-components-collapsegroup-stable).
+Например, [CollapseGroup](##LIBS.STAND/stand:uikit--components--collapsegroup--stable).
 
 Хук `useChoiceGroupIndexed` занимается всей логикой выбора: вы можете использовать его,
 чтобы не обрабатывать эту логику самостоятельно.
@@ -22,7 +22,7 @@ import { useChoiceGroupIndexed } from '@consta/uikit/useChoiceGroupIndexed';
 | `isNullableValue?` | `boolean`                                                                                                                              | -            | Показывает, что значение может быть нулевым. Подробности в примечании ниже |
 
 **Примечание про `isNullableValue`:** некоторые компоненты позволяют удалить выбранные значения,
-а некоторые — нет (например, [Radio](##LIBS.STAND/stand:uikit-components-radio-stable)).
+а некоторые — нет (например, [Radio](##LIBS.STAND/stand:uikit--components--radio--stable)).
 Поэтому если установлено `isNullableValue`, свойство `value` может принимать разные значения.
 
 - `isNullableValue` установлено, `multiple="false"` — значение `value` может быть `number` или `null`,

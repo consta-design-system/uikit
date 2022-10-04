@@ -24,7 +24,7 @@ import { Theme } from '@consta/uikit/Theme';
 - [Пресеты](#пресеты)
   - [Пресеты в Consta](#пресеты-в-consta)
   - [Цветовые схемы в пресете](#цветовые-схемы-в-пресете)
-  - [Кастомный пресет](##LIBS.STAND/stand:uikit-theme-createpreset-stable)
+  - [Кастомный пресет](##LIBS.STAND/stand:uikit--theme--createpreset)
 - [Подключение темы](#как-подключить-тему)
   - [Для всего проекта](#как-подключить-основную-тему)
   - [Для отдельного блока](#как-использовать-тему-для-отдельного-блока)
@@ -223,7 +223,7 @@ font-family: var(--font-primary);
 > Проверьте, что в шрифте есть насыщенность, которую вы используете.
 > Браузер имитирует насыщенность, которой нет в наборе, но неизвестно, как это будет выглядеть.
 >
-> [Посмотреть варианты насыщенности в компоненте `Text`](##LIBS.STAND.TAB/tab:dev/stand:uikit-components-text-stable/hash:насыщенность).
+> [Посмотреть варианты насыщенности в компоненте `Text`](##LIBS.STAND.TAB/tab:dev/stand:uikit--components---text----stable/hash:насыщенность).
 
 ### Размеры текста
 
@@ -400,7 +400,7 @@ export const presetGpnDefault: ThemePreset = {
 
 #### Компоненты в инвертной схеме
 
-Некоторые компоненты нужно вынести на другой информационный слой, но так, чтобы не перекрывать остальной интерфейс. Например, [Tooltip](##LIBS.STAND/stand:uikit-components-tooltip-stable).
+Некоторые компоненты нужно вынести на другой информационный слой, но так, чтобы не перекрывать остальной интерфейс. Например, [Tooltip](##LIBS.STAND/stand:uikit--components--tooltip--stable).
 
 Такие компоненты должны быть всегда в инвертной схеме по отношению к основной. CSS-файл, который отвечает за отображение таких компонентов, описывается в `color.invert`.
 
@@ -412,9 +412,9 @@ export const presetGpnDefault: ThemePreset = {
 #### Компоненты в акцентной схеме
 
 Некоторые нужно сделать яркими независимо от темы. Например, статусные
-компоненты, на которые пользователю стоит обратить внимание: [Snackbar](##LIBS.STAND/stand:uikit-components-snackbar-stable),
-[Informer](##LIBS.STAND/stand:uikit-components-informer-stable)
-и [Badge](##LIBS.STAND/stand:uikit-components-badge-stable).
+компоненты, на которые пользователю стоит обратить внимание: [Snackbar](##LIBS.STAND/stand:uikit--components--snackbar--stable),
+[Informer](##LIBS.STAND/stand:uikit--components--informer--stable)
+и [Badge](##LIBS.STAND/stand:uikit--components--badge--stable).
 
 Такие компоненты всегда выглядят одинаково, независимо от основной цветовой схемы. CSS-файл, который отвечает за отображение таких компонентов, описывается в `color.accent`.
 
@@ -422,7 +422,7 @@ export const presetGpnDefault: ThemePreset = {
 
 Вы можете создать свой пресет — по тем же принципам, по которым организованы пресеты в дизайн-системе.
 
-[Как создать свой пресет](##LIBS.STAND/stand:uikit-theme-createpreset-stable)
+[Как создать свой пресет](##LIBS.STAND/stand:uikit--theme--createpreset)
 
 ## Как подключить тему
 
@@ -464,7 +464,7 @@ const App = () => {
 
 Вы можете добавить переключатель тем, чтобы пользователь мог сам решить, какой темой хочет пользоваться — тёмной или светлой. За это отвечает компонент [ThemeToggler](/docs/components-themetoggler--playground).
 
-> Чтобы смена тем работала, все значения в CSS нужно задавать переменными, а переменные использовать по смыслу. [Почитать про смысл цветов](##LIBS.STAND/stand:uikit-components-theme-stable/hash:цвета-темы-default)
+> Чтобы смена тем работала, все значения в CSS нужно задавать переменными, а переменные использовать по смыслу. [Почитать про смысл цветов](##LIBS.STAND/stand:uikit--components--theme--stable/hash:цвета-темы-default)
 
 ```tsx
 import './RootTheme.css';
