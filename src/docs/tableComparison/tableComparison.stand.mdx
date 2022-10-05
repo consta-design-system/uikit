@@ -1,0 +1,71 @@
+import { MdxMenu } from '@consta/stand';
+import { AboutDataGeneral } from './components/AboutData/AboutData.tsx';
+
+Есть несколько вариантов таблиц: компонент `Table` из `@consta/uikit` и
+адаптеры для сторонних библиотек — `ag-grid-adapter` и `rc-table-adapter`.
+
+Вкратце: если вам нужна совсем простая таблица, лучше использовать компонент `Table`.
+Если таблица сложная, с вложенностью, фильтрами, чекбоксами, используйте адаптеры.
+
+> Все эти таблицы устроены по-разному: переходить с одной на другую неудобно,
+> лучше сразу выбрать и использовать один вариант
+
+<MdxMenu>
+  - [Таблицы](#таблицы) - [Компонент Table](#компонент-table) - [Библиотека
+  ag-grid-adapter](#библиотека-ag-grid-adapter) - [Библиотека
+  rc-table-adapter](#библиотека-rc-table-adapter) - [Как выбрать](#как-выбрать)
+</MdxMenu>
+
+## Таблицы
+
+### Компонент Table
+
+Входит в @consta/uikit. [Посмотреть документацию](##LIBS.STAND/stand:uikit-components-table-stable)
+
+##### Плюсы
+
+- Предсказуемо выглядит и работает, развивается вместе с дизайн-системой.
+- Можем доработать.
+- Бесплатная.
+
+##### Не хватает
+
+- Нет горизонтального слияния ячеек (в разных строках, `colspan`).
+
+### Библиотека ag-grid-adapter
+
+Адаптер для таблицы [AG Grid](https://www.ag-grid.com/react-data-grid/getting-started/).
+
+Большая сложная таблица, позволяет сделать почти что угодно:
+добавить кастомные элементы, перетаскивание, объединить ячейки как угодно,
+и многое другое.
+
+Быстро работает, рассчитана на большую нагрузку.
+
+Две версии: Community и Enterprise, почти всё доступно в бесплатной Community.
+
+- [Посмотреть возможности AG Grid](https://www.ag-grid.com/react-data-grid/licensing/#feature-comparison)
+- [Документация адаптера ag-grid-adapter](https://ag-grid-adapter.consta.design/libs/ag-grid-adapter)
+- [GitHub адаптера ag-grid-adapter](https://github.com/consta-design-system/ag-grid-adapter)
+
+### Библиотека rc-table-adapter
+
+Адаптер для таблицы [rc-table](https://github.com/react-component/table).
+
+У этой таблицы чуть больше возможностей, чем у компонента `Table`.
+
+Быстро работает, рассчитана на большую нагрузку.
+
+Распространяется бесплатно.
+
+- [Документация rc-table с примерами](https://table-react-component.vercel.app/)
+- [Документация адаптера rc-table-adapter](https://rc-table-adapter.consta.design/)
+- [GitHub адаптера rc-table-adapter](https://github.com/consta-design-system/rc-table-adapter)
+
+## Как выбрать
+
+Выбор на вашей стороне — зависит от ваших задач и предпочтений. Но можно использовать такой алгоритм:
+
+- Небольшая нагрузка, не нужен colpsan —> Компонент `Table`
+- Большая нагрузка, нужен colpsan —> `rc-table` + `rc-table-adapter` или `ag grid` + `ag-grid-adapter`
+- Сложная таблица со сложной логикой —> `AG Grid` + `ag-grid-adapter`
