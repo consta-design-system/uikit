@@ -1,0 +1,16 @@
+.GridVariants {
+  width: 100%;
+  height: 100%;
+
+  &-Item {
+    --bg-color: var(--color-bg-secondary);
+    --text-color: var(--color-typo-primary);
+    color: var(--text-color);
+    background: var(--bg-color);
+
+    &_selected {
+      --bg-color: var(--color-bg-brand);
+      --text-color: var(--color-bg-secondary);
+    }
+  }
+}
