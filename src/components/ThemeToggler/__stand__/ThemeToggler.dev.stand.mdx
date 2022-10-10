@@ -104,13 +104,13 @@ export const ThemeTogglerExampleGetters = () => {
 
 <ThemeTogglerExampleQuantityThree />
 
-Контекстное меню работает на основе [поповера](##LIBS.STAND.TAB/tab:dev/stand:uikit--components--popover--stable).
+Контекстное меню работает на основе [поповера](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev).
 Вы можете управлять направлениями, в котором оно разворачивается:
 
 - `direction?` — направление, в котором разворачивается контекстное меню,
 - `possibleDirections?` — список направлений, в которых его в принципе можно развернуть.
 
-[Подробнее в описании поповера](##LIBS.STAND.TAB/tab:dev/stand:uikit-components---popover----stable/hash:направление--разворачивания)
+[Подробнее в описании поповера](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev/hash:направление-разворачивания)
 
 ## Размер
 
@@ -145,8 +145,8 @@ export type ThemeTogglerItemDefault = {
 | [`getItemKey?`](#темы)                     | `(arg: T) => string OR number` | `getItemLabel` | Функция для получения ключа, уникального для каждой переданной темы. Если опустить это свойство, то вместо этой функции будет использована `getItemLabel` |
 | [`getItemLabel?`](#темы)                   | `(arg: T) => string`           | -              | Функция для получения названия темы                                                                                                                       |
 | [`getItemIcon?`](#темы)                    | `(arg: T) => IconComponent`    | -              | Функция для получения иконки темы в формате компонента                                                                                                    |
-| [`direction?`](#контекстное-меню)          | `Direction`                    | -              | см. [Popover](##LIBS.STAND.TAB/tab:dev/stand:uikit--components--popover--stable/hash:направление-разворачивания) (только если тем больше двух)            |
-| [`possibleDirections?`](#контекстное-меню) | `Direction[]`                  | -              | см. [Popover](##LIBS.STAND.TAB/tab:dev/stand:uikit--components--popover--stable/hash:направление-разворачивания) (только если тем больше двух)            |
+| [`direction?`](#контекстное-меню)          | `Direction`                    | -              | см. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev/hash:направление-разворачивания) (только если тем больше двух)       |
+| [`possibleDirections?`](#контекстное-меню) | `Direction[]`                  | -              | см. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev/hash:направление-разворачивания) (только если тем больше двух)       |
 | `className?`                               | `string`                       | -              | Дополнительный CSS-класс для контейнера (если тем всего две) или для кнопки (если тем больше двух)                                                        |
 
 ## Пример
