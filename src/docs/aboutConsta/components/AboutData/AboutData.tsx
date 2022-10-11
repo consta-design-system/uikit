@@ -1,5 +1,6 @@
 import './AboutData.css';
 
+import { Link } from '@consta/stand/src/componets/Link';
 import React from 'react';
 
 import { cnMixSpace } from '##/mixs/MixSpace/MixSpace';
@@ -31,44 +32,53 @@ export const AboutDataGeneral = () => {
         </div>
         <ul className={cnMixSpace({ m: 'm', mT: '2xs' })}>
           <li>
-            <Text
+            <Link
               className={cnAboutData('Link')}
-              as="a"
-              view="link"
-              href="uikit-components-text-stable"
+              to="LIBS.LIB.STAND"
+              params={{
+                lib: 'uikit',
+                stand: 'components-text-stable',
+              }}
             >
               типографика
-            </Text>
+            </Link>
           </li>
           <li>
-            <Text
+            <Link
               className={cnAboutData('Link')}
-              as="a"
-              view="link"
-              href="uikit-components-theme-stable?hash=цвета-темы-default"
+              to="LIBS.LIB.STAND"
+              params={{
+                lib: 'uikit',
+                stand: 'components-theme-stable',
+                hash: 'цвета-темы-default',
+              }}
             >
               цвета
-            </Text>
+            </Link>
           </li>
           <li>
-            <Text
+            <Link
               className={cnAboutData('Link')}
-              as="a"
-              view="link"
-              href="uikit-components-icon-stable"
+              to="LIBS.LIB.STAND"
+              params={{
+                lib: 'uikit',
+                stand: 'components-icon-stable',
+              }}
             >
               иконки
-            </Text>
+            </Link>
           </li>
           <li>
-            <Text
+            <Link
               className={cnAboutData('Link')}
-              as="a"
-              view="link"
-              href="uikit-components-theme-stable"
+              to="LIBS.LIB.STAND"
+              params={{
+                lib: 'uikit',
+                stand: 'components-theme-stable',
+              }}
             >
               темы
-            </Text>
+            </Link>
           </li>
           <li>
             <Text className={cnAboutData('Link')} as="a" view="link" href="/">
@@ -85,14 +95,16 @@ export const AboutDataGeneral = () => {
         </div>
         <ul className={cnMixSpace({ m: 'm', mT: '2xs' })}>
           <li>
-            <Text
+            <Link
               className={cnAboutData('Link')}
-              as="a"
-              view="link"
-              href="uikit-about-start-stable"
+              to="LIBS.LIB.STAND"
+              params={{
+                lib: 'uikit',
+                stand: 'about-start-stable',
+              }}
             >
               быстрый старт
-            </Text>
+            </Link>
           </li>
           <li>
             <Text
@@ -117,14 +129,16 @@ export const AboutDataGeneral = () => {
             </Text>
           </li>
           <li>
-            <Text
+            <Link
               className={cnAboutData('Link')}
-              as="a"
-              view="link"
-              href="uikit-workflow-workflow-stable"
+              to="LIBS.LIB.STAND"
+              params={{
+                lib: 'uikit',
+                stand: 'workflow-workflow',
+              }}
             >
               как работать с дизайн-системой
-            </Text>
+            </Link>
           </li>
         </ul>
       </div>
@@ -183,34 +197,42 @@ export const AboutDataGeneral = () => {
         </div>
         <ul className={cnMixSpace({ m: 'm', mT: '2xs' })}>
           <li>
-            <Text
+            <Link
               className={cnAboutData('Link')}
-              as="a"
-              view="link"
-              href="uikit-custom-contribute-stable/design"
+              to="LIBS.LIB.STAND.TAB"
+              params={{
+                lib: 'uikit',
+                stand: 'custom-contribute',
+                tab: 'design',
+              }}
             >
               дизайнерам
-            </Text>
+            </Link>
           </li>
           <li>
-            <Text
+            <Link
               className={cnAboutData('Link')}
-              as="a"
-              view="link"
-              href="uikit-custom-contribute-stable/dev"
+              to="LIBS.LIB.STAND.TAB"
+              params={{
+                lib: 'uikit',
+                stand: 'custom-contribute',
+                tab: 'dev',
+              }}
             >
               разработчикам
-            </Text>
+            </Link>
           </li>
           <li>
-            <Text
+            <Link
               className={cnAboutData('Link')}
-              as="a"
-              view="link"
-              href="uikit-custom-addcomponent-stable"
+              to="LIBS.LIB.STAND"
+              params={{
+                lib: 'uikit',
+                stand: 'custom-addcomponent',
+              }}
             >
               как добавить компонент
-            </Text>
+            </Link>
           </li>
         </ul>
       </div>
