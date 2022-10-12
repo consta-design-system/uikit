@@ -29,7 +29,6 @@ import {
   TextFieldExampleTypePassword,
 } from './examples/TextFieldExampleType/TextFieldExampleType';
 import { TextFieldExampleRequired } from './examples/TextFieldExampleRequired/TextFieldExampleRequired';
-import { TextFieldExampleFocus } from './examples/TextFieldExampleFocus/TextFieldExampleFocus';
 import { TextFieldExampleStepArray } from './examples/TextFieldExampleStepArray/TextFieldExampleStepArray';
 import { TextFieldExampleIncrementButtons } from './examples/TextFieldExampleIncrementButtons/TextFieldExampleIncrementButtons';
 import { TextFieldExampleWithClearButton } from './examples/TextFieldExampleWithClearButton/TextFieldExampleWithClearButton';
@@ -70,11 +69,8 @@ import { TextField } from '@consta/uikit/TextField';
 Свойство `type` определяет тип поля и тег, который будет для него использоваться. Варианты:
 
 - `text` — поле для ввода текста в одну строку,`<input type="text">`.
-
 - `textarea` — текстовое поле из нескольких строк, `<textarea></textarea>`, можно [регулировать количество строк и колонок](#строки-и-колонки).
-
 - `number` — поле для ввода чисел, `<input type="number">`, значение можно менять с помощью кнопок-стрелочек. [Установить шаг](#шаг-набор-значений-и-диапазон) — целое число, на которое стрелочки уменьшают или увеличивают значение, можно в свойстве `step`. [Убрать стрелочки](#шаг-набор-значений-и-диапазон) из поля можно с помощью свойства `incrementButtons`.
-
 - `password` — маскированное поле для ввода пароля.
 
 Здесь описаны основные типы, но вы можете использовать любые `input type`,
@@ -323,8 +319,6 @@ export const TextFieldExampleWtihClearButton = () => {
 <TextField label="Поле раз" type="text" placeholder="В фокусе" autoFocus/>
 <TextField label="Поле два" type="text" placeholder="Не в фокусе" />
 ```
-
-<TextFieldExampleFocus />
 
 ## Статус поля
 

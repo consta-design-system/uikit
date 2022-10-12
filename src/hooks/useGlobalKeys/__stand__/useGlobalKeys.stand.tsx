@@ -5,7 +5,7 @@ export default createStand({
   id: 'useGlobalKeys',
   group: 'hooks',
   description: 'Хук для перехвата нажатия клавиш.',
-  version: '4.0.0',
+  version: '3.3.0',
   status: 'stable',
   sandbox: 'useglobalkeys-ljhoet',
   order: 10,
