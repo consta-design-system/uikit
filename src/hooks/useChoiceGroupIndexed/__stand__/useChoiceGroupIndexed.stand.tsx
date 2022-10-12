@@ -5,7 +5,7 @@ export default createStand({
   id: 'useChoiceGroupIndexed',
   group: 'hooks',
   description: 'Хук для выбора нескольких значений из списка.',
-  version: '4.0.0',
+  version: '2.2.0',
   status: 'stable',
   order: 10,
 });

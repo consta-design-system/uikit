@@ -5,7 +5,7 @@ export default createStand({
   id: 'Icon',
   group: 'components',
   description: 'Иконки на любые случаи.',
-  version: '4.0.0',
+  version: '1.0.0',
   status: 'stable',
   sandbox: 'icon-cxx25f',
   figma:

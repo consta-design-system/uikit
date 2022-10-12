@@ -141,7 +141,7 @@ export const additionalData: Data = [
         url: 'http://gpn-responses.consta.design/',
         name: 'GPN-Responses',
         description:
-          'Заглушки с сообщениями об ошибках и важных статусах в стиле «Газпром нефти».',
+          'Заглушки с сообщениями об ошибках и важных статусах с промышленными иллюстрациями.',
         image: GpnResponsesImage,
       },
     ],
