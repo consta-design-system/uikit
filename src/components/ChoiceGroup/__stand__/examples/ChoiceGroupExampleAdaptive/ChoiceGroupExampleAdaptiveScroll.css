@@ -1,6 +1,6 @@
 .ChoiceGroupExampleAdaptiveScroll {
   overflow: auto;
-  width: 100%;
+  width: 600px;
 
   &::-webkit-scrollbar {
     width: 0;

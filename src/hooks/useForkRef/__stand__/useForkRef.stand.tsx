@@ -5,7 +5,7 @@ export default createStand({
   id: 'useForkRef',
   group: 'hooks',
   description: 'Хук для создания нескольких функций.',
-  version: '4.0.0',
+  version: '1.5.0',
   status: 'stable',
   sandbox: 'useforkref-6lth98',
   order: 10,
