@@ -5,7 +5,7 @@ export default createStand({
   id: 'useHideElementsInLine',
   group: 'hooks',
   description: 'Хук для сокрытия элементов.',
-  version: '4.0.0',
+  version: '3.15.0',
   status: 'stable',
   sandbox: 'usehideelementsinline-3mul18',
   order: 10,
