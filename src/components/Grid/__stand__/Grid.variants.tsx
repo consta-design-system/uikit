@@ -25,14 +25,14 @@ const Variants = () => {
   const gap = useSelect('gap', gridPropGap, 0);
   const colGap = useSelect('colGap', gridPropGap, 0);
   const rowGap = useSelect('rowGap', gridPropGap, 0);
-  const xAlign = useSelect('xAlign', ['', ...gridPropXAlign], '');
-  const yAlign = useSelect('yAlign', ['', ...gridPropYAlign], '');
+  const xAlign = useSelect('xAlign', gridPropXAlign);
+  const yAlign = useSelect('yAlign', gridPropYAlign);
   const itemsCount = useNumber('itemsCount', 30);
   const selectedItem = useNumber('selectedItem', 5);
-  const itemCol = useSelect('itemCol', ['', ...colsArr], '');
-  const itemColStart = useSelect('itemColStart', ['', ...colsArr], '');
-  const itemRow = useSelect('itemRow', ['', ...rows], '');
-  const itemRowStart = useSelect('itemRowStart', ['', ...rows], '');
+  const itemCol = useSelect('itemCol', colsArr);
+  const itemColStart = useSelect('itemColStart', colsArr);
+  const itemRow = useSelect('itemRow', rows);
+  const itemRowStart = useSelect('itemRowStart', rows);
   const itemOrder = useSelect('itemOrder', order, 0);
 
   return (
@@ -42,8 +42,8 @@ const Variants = () => {
         gap={gap}
         colGap={colGap}
         rowGap={rowGap}
-        xAlign={xAlign || undefined}
-        yAlign={yAlign || undefined}
+        xAlign={xAlign}
+        yAlign={yAlign}
       >
         {range(itemsCount ?? 0).map((item) => {
           const selected = selectedItem === item + 1;
@@ -53,11 +53,11 @@ const Variants = () => {
               key={item}
               {...(selected
                 ? {
-                    col: itemCol || undefined,
-                    row: itemRow || undefined,
-                    order: itemOrder || undefined,
-                    colStart: itemColStart || undefined,
-                    rowStart: itemRowStart || undefined,
+                    col: itemCol,
+                    row: itemRow,
+                    order: itemOrder,
+                    colStart: itemColStart,
+                    rowStart: itemRowStart,
                   }
                 : {})}
             >

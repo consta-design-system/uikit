@@ -31,11 +31,7 @@ export const useVariants = <T extends TableRow>(
 ): TableProps<T> => {
   const props = { ...defaultProps, ...replacedProps } as TableProps<T>;
 
-  const zebraStripedProp = useSelect(
-    'zebraStriped',
-    ['', ...zebraStriped],
-    props.zebraStriped,
-  );
+  const zebraStripedProp = useSelect('zebraStriped', zebraStriped);
   const size = useSelect('size', sizes, 'l');
   const isFilterable = useBoolean('filterable', true);
   const borderBetweenColumns = useBoolean(
@@ -64,7 +60,7 @@ export const useVariants = <T extends TableRow>(
     columns: props.columns,
     rows: props.rows,
     filters: isFilterable ? props.filters : undefined,
-    zebraStriped: zebraStripedProp === '' ? undefined : zebraStripedProp,
+    zebraStriped: zebraStripedProp,
     size,
     borderBetweenColumns,
     borderBetweenRows,
