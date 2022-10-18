@@ -34,5 +34,6 @@
     width: 100%;
     min-height: 40px;
     background: var(--color-bg-normal);
+    border-bottom: 2px solid #fff;
   }
 }

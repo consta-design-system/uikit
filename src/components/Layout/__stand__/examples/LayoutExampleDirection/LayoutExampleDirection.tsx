@@ -10,7 +10,7 @@ const cnLayoutExampleDirection = cn('LayoutExampleDirection');
 
 export const LayoutExampleDirectionRow = () => {
   return (
-    <Layout className={cnLayoutExampleDirection()}>
+    <Layout className={cnLayoutExampleDirection({ direction: 'row' })}>
       <Layout flex={1} className={cnLayoutExampleDirection('Block')}>
         <Text>Первый блок</Text>
       </Layout>
@@ -23,7 +23,10 @@ export const LayoutExampleDirectionRow = () => {
 
 export const LayoutExampleDirectionColumn = () => {
   return (
-    <Layout direction="column" className={cnLayoutExampleDirection()}>
+    <Layout
+      direction="column"
+      className={cnLayoutExampleDirection({ direction: 'column' })}
+    >
       <Layout flex={1} className={cnLayoutExampleDirection('Block')}>
         <Text>Первый блок</Text>
       </Layout>
