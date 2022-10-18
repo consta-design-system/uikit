@@ -1,6 +1,7 @@
 .SelectItem {
   --text-color: var(--color-control-typo-default);
   position: relative;
+  min-height: calc(2 * var(--vertical-space) + 1.2 * var(--font-size));
   padding: var(--vertical-space) var(--horizontal-space);
   color: var(--text-color);
   background-color: var(--color-control-bg-clear);
