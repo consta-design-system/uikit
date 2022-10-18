@@ -9,6 +9,7 @@
 
     /* height: 100%; */
     background: var(--color-bg-normal);
+    border-bottom: 2px solid var(--color-bg-default);
   }
 
   &-Content {
@@ -17,5 +18,6 @@
     width: 100%;
     height: 2000px;
     background: var(--color-bg-success);
+    border-bottom: 2px solid var(--color-bg-default);
   }
 }

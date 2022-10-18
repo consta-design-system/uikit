@@ -2,6 +2,10 @@
   width: 100%;
   height: 300px;
 
+  & > .LayoutExampleBasic-Block:first-child {
+    border-right: 2px solid var(--color-bg-default);
+  }
+
   &-Block {
     justify-content: center;
     align-items: center;

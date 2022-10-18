@@ -2,6 +2,20 @@
   width: 100%;
   height: 300px;
 
+  &_direction {
+    &_column {
+      & > .LayoutExampleDirection-Block:first-child {
+        border-bottom: 2px solid var(--color-bg-default);
+      }
+    }
+
+    &_row {
+      & > .LayoutExampleDirection-Block:first-child {
+        border-right: 2px solid var(--color-bg-default);
+      }
+    }
+  }
+
   &-Block {
     justify-content: center;
     align-items: center;
