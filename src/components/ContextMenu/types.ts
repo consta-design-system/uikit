@@ -133,7 +133,7 @@ export type Level<ITEM> = {
   activeItem?: string;
   direction?: Direction;
   possibleDirections?: readonly Direction[];
-  offset?: number;
+  offset?: PopoverPropOffset;
 } & PositioningProps;
 
 export type AddLevel<ITEM> = (params: {
