@@ -1,10 +1,6 @@
 import React, { useRef } from 'react';
 
 import { PropRenderItem } from '##/components/Select';
-import {
-  defaultLabelForEmptyItems,
-  defaultlabelForNotFound,
-} from '##/components/SelectComponents/helpers';
 import { SelectDropdown } from '##/components/SelectComponents/SelectDropdown/SelectDropdown';
 import { SelectItem } from '##/components/SelectComponents/SelectItem/SelectItem';
 import {
@@ -62,8 +58,6 @@ const AutoCompleteRender = <
     onChange,
     inputContainerRef,
     style,
-    labelForNotFound = defaultlabelForNotFound,
-    labelForEmptyItems = defaultLabelForEmptyItems,
     renderItem,
     searchFunction,
     id,
@@ -92,9 +86,6 @@ const AutoCompleteRender = <
     handleInputFocus,
     handleInputBlur,
     inputRef: inputControlRef,
-    handleInputClick,
-    notFound,
-    hasItems,
   } = useAutoComplete({
     items,
     groups,
@@ -148,7 +139,6 @@ const AutoCompleteRender = <
         onFocus={handleInputFocus}
         onChange={onChange}
         value={value}
-        onClick={handleInputClick}
         style={style}
         {...otherProps}
       />
@@ -163,11 +153,8 @@ const AutoCompleteRender = <
         renderItem={renderItem || renderItemDefault}
         getGroupLabel={getGroupLabel}
         visibleItems={visibleItems}
-        notFound={notFound}
-        labelForEmptyItems={labelForEmptyItems}
         isLoading={isLoading}
-        labelForNotFound={labelForNotFound}
-        hasItems={hasItems}
+        hasItems={items.length !== 0}
         style={
           typeof style?.zIndex === 'number'
             ? { zIndex: style.zIndex + 1 }

@@ -26,21 +26,10 @@ export type AutoCompletePropGetGroupId<GROUP> = (
   group: GROUP,
 ) => number | string;
 
-export type MappersItem<ITEM> = {
-  getItemLabel?: AutoCompletePropGetItemLabel<ITEM>;
-  getItemKey?: AutoCompletePropGetItemKey<ITEM>;
-  getItemGroupKey?: AutoCompletePropGetItemGroupId<ITEM>;
-};
-
 export type AutoCompletePropSearchFunction<ITEM> = (
   item: ITEM,
   searchValue: string,
 ) => boolean;
-
-export type MappersGroup<GROUP> = {
-  getGroupLabel?: AutoCompletePropGetGroupLabel<GROUP>;
-  getGroupKey?: AutoCompletePropGetGroupId<GROUP>;
-};
 
 export type AutoCompleteProps<
   TYPE extends string,
@@ -55,11 +44,12 @@ export type AutoCompleteProps<
   isLoading?: boolean;
   searchFunction?: AutoCompletePropSearchFunction<ITEM>;
   dropdownRef?: React.RefObject<HTMLDivElement>;
-  labelForNotFound?: string;
-  labelForEmptyItems?: string;
-} & MappersGroup<GROUP> &
-  MappersItem<ITEM> &
-  Omit<TextFieldProps<TYPE>, 'max' | 'min' | 'step' | 'incrementButtons'> &
+  getItemLabel?: AutoCompletePropGetItemLabel<ITEM>;
+  getItemKey?: AutoCompletePropGetItemKey<ITEM>;
+  getItemGroupKey?: AutoCompletePropGetItemGroupId<ITEM>;
+  getGroupLabel?: AutoCompletePropGetGroupLabel<GROUP>;
+  getGroupKey?: AutoCompletePropGetGroupId<GROUP>;
+} & Omit<TextFieldProps<TYPE>, 'max' | 'min' | 'step' | 'incrementButtons'> &
   (ITEM extends { label: AutoCompleteItemDefault['label'] }
     ? {}
     : {

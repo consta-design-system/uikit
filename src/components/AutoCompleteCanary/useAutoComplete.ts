@@ -104,13 +104,9 @@ export function useAutoComplete<ITEM, GROUP>(
     return resultGroups;
   }, [filteredOptions, groups, getItemGroupKey, getGroupKey]);
 
-  const notFound = useMemo(() => {
-    return (searchValue ?? '')?.length > 0
-      ? !visibleItems.find((group) => group.items.length > 0 || group.group)
-      : false;
+  const hasItems = useMemo(() => {
+    return !!visibleItems.find((group) => group.items.length > 0);
   }, [visibleItems]);
-
-  const hasItems = items.length !== 0;
 
   const highlightIndex = useCallback(
     (indexForHighlight: IndexForHighlight) => {
@@ -133,10 +129,6 @@ export function useAutoComplete<ITEM, GROUP>(
     if (!disabled) {
       params.onChange({ value: item, e });
     }
-  };
-
-  const handleInputClick = (): void => {
-    // !disabled && setIsOpen.toogle();
   };
 
   // Prop Getters
@@ -253,15 +245,13 @@ export function useAutoComplete<ITEM, GROUP>(
   };
 
   return {
-    isOpen: isOpen && !!(searchValue && searchValue.trim() !== ''),
+    isOpen: isOpen && hasItems,
     visibleItems,
     getOptionProps,
     handleInputFocus,
     handleInputBlur,
-    handleInputClick,
     inputRef,
     getKeyProps,
-    notFound,
     hasItems,
   };
 }

@@ -9,4 +9,4 @@ export const withPrefix = (prefix: string) =>
 
 export const cnCanary = withPrefix('canary');
 
-export const cnDeprecated = withPrefix('canary');
+export const cnDeprecated = withPrefix('deprecated');
