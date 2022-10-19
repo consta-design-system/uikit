@@ -12,7 +12,7 @@ export const AutoCompleteExampleGroups = () => {
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <AutoComplete
         type="text"
-        placeholder="Введите значение"
+        placeholder="Начните вводить цвет"
         value={value}
         items={items}
         groups={groups}

@@ -1,6 +1,9 @@
 import { AutoCompleteExampleItems } from './examples/AutoCompleteExampleItems/AutoCompleteExampleItems';
 import { AutoCompleteExampleDisabled } from './examples/AutoCompleteExampleDisabled/AutoCompleteExampleDisabled';
-import { AutoCompleteExampleForm } from './examples/AutoCompleteExampleForm/AutoCompleteExampleForm';
+import {
+  AutoCompleteExampleForm,
+  AutoCompleteExampleDropdownForm,
+} from './examples/AutoCompleteExampleForm/AutoCompleteExampleForm';
 import { AutoCompleteExampleGroups } from './examples/AutoCompleteExampleGroups/AutoCompleteExampleGroups';
 import { AutoCompleteExampleLabel } from './examples/AutoCompleteExampleLabel/AutoCompleteExampleLabel';
 import { AutoCompleteExamplePlaceholder } from './examples/AutoCompleteExamplePlaceholder/AutoCompleteExamplePlaceholder';
@@ -20,15 +23,18 @@ import { AutoComplete } from '@consta/uikit/AutoComplete';
 
 <MdxMenu>
 
-- [Содержимое](#содержимое-списка)
-  - [Варианты](#варианты)
-  - [Подсказка](#подсказка)
-  - [Тип](#тип)
-  - [Заголовок и подпись](#заголовок-и-подпись)
-  - [Группы вариантов](#группы-вариантов)
+- [Подсказки при наборе](#подсказки-при-наборе)
+  - [Объект с подсказками](#объект-с-подсказками)
+  - [Группы подсказок](#группы-подсказок)
+  - [Поиск по подсказкам](#поиск-по-подсказкам)
+- [Подсказка в поле (плейсхолдер)](#подсказка-в-поле-плейсхолдер)
+- [Тип поля](#тип-поля)
+- [Заголовок и подпись](#заголовок-и-подпись)
 - [Статус](#статус-поля)
 - [Размер](#размер)
 - [Форма](#форма)
+  - [Форма поля](#форма-поля)
+  - [Форма списка](#форма-списка)
 - [Внешний вид](#внешний-вид)
 - [Поиск](#поиск)
 - [Неактивный выпадающий список](#неактивный-выпадающий-список)
@@ -39,19 +45,121 @@ import { AutoComplete } from '@consta/uikit/AutoComplete';
 
 </MdxMenu>
 
-## Содержимое
+## Подсказки при наборе
 
-### Варианты
+Компонент выглядит, как обычное поле ввода. Если в этом поле что-то напечатать,
+компонент найдёт все подсказки, в названии которых есть напечатанные символы и
+покажет их в выпадающем списке.
 
-Элементы выпадающего списка можно описать в массиве `items`. Тип свойства `items` по умолчанию равен [DefaultItem](#свойства). Что внутри:
+Подсказки нужно собрать заранее и передать компоненту в свойстве `items`.
 
-- `label` — название элемента списка, лучше писать с заглавной буквы, точка не нужна,
+### Объект с подсказками
+
+Элементы выпадающего списка, то есть подсказки, можно описать в объекте `items` типа [DefaultItem](#свойства). Что внутри:
+
+- `label` — название элемента списка,
 - `id` — уникальный ключ элемента,
-- `groupId` — идентификатор [группы](#группы-вариантов), в которую входит этот элемент (если список разбит на группы),
+- `groupId` — идентификатор [группы](#группы-подсказок), в которую входит этот элемент (если список разбит на группы).
 
-Вы можете сделать [кастомный тип данных для элементов списка](#кастомный-элемент-списка) и использовать его.
+Вы можете создать [кастомный тип данных для подсказок](#кастомный-элемент-списка) и использовать его.
 
-### Подсказка
+### Группы подсказок
+
+Чтобы разбить элементы списка на группы, создайте объект с группами и передайте
+в свойстве `groups` типа [DefaultGroup](#свойства). Что внутри:
+
+- `label` — название группы,
+- `id` — уникальный ключ.
+
+```tsx
+import React, { useState } from 'react';
+
+import { AutoComplete } from '@consta/uikit/AutoComplete';
+
+type Item = {
+  label: string;
+  id: string | number;
+  groupId?: string | number;
+};
+
+type Group = {
+  label: string;
+  id: string | number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Чёрный',
+    groupId: 1,
+    id: 1,
+  },
+  {
+    label: 'Белый',
+    groupId: 1,
+    id: 2,
+  },
+  {
+    label: 'Синий',
+    groupId: 1,
+    id: 3,
+  },
+  {
+    label: 'Красный',
+    groupId: 1,
+    id: 4,
+  },
+  {
+    label: 'Сине-зелёный',
+    groupId: 2,
+    id: 5,
+  },
+  {
+    label: 'Красно-коричневый',
+    groupId: 2,
+    id: 6,
+  },
+  ...
+];
+
+const groups: Group[] = [
+  {
+    id: 1,
+    label: 'Первая группа',
+  },
+  {
+    id: 2,
+    label: 'Вторая группа',
+  },
+  {
+    id: 3,
+    label: 'Третья группа',
+  },
+];
+
+const AutoCompleteExampleGroups = () => {
+  const [value, setValue] = useState<string | null>(null);
+  return (
+      <AutoComplete
+        type="text"
+        placeholder="Начните вводить цвет"
+        value={value}
+        items={items}
+        groups={groups}
+        onChange={({ value }) => setValue(value)}
+      />
+  );
+};
+```
+
+<AutoCompleteExampleGroups />
+
+### Поиск по подсказкам
+
+По умолчанию компонент ищет по `label` подсказки. Вы можете поменять параметры поиска с помощью `searchFunction`.
+
+Если ничего не нашлось, пользователь увидит текст **Не найдено**. Поменять его можно с помощью свойства `labelForNotFound`.
+
+## Подсказка в поле (плейсхолдер)
 
 Подсказка, которая видна, когда ни один вариант не выбран, задаётся в свойстве `placeholder`.
 Сформулируйте подсказку так, чтобы стало понятно, что по клику на поле раскроется список вариантов, один из которых нужно выбрать.
@@ -99,7 +207,7 @@ const AutoCompleteExamplePlaceholder = () => {
 
 <AutoCompleteExamplePlaceholder />
 
-### Тип
+## Тип поля
 
 Свойство `type` определяет тип поля и тег, который будет для него использоваться. Варианты:
 
@@ -235,96 +343,6 @@ const AutoCompleteExampleLabel = () => {
 ```
 
 <AutoCompleteExampleLabel />
-
-### Группы вариантов
-
-Чтобы разбить элементы списка на группы, передайте массив групп в свойство `groups`. Тип свойства `groups` по умолчанию равен [DefaultGroup](#свойства). Что внутри:
-
-- `label` — название группы,
-- `id` — уникальный ключ.
-
-```tsx
-import React, { useState } from 'react';
-
-import { AutoComplete } from '@consta/uikit/AutoComplete';
-
-type Item = {
-  label: string;
-  id: string | number;
-  groupId?: string | number;
-};
-
-type Group = {
-  label: string;
-  id: string | number;
-};
-
-
-const items: Item[] = [
-  {
-    label: 'Чёрный',
-    groupId: 1,
-    id: 1,
-  },
-  {
-    label: 'Белый',
-    groupId: 1,
-    id: 2,
-  },
-  {
-    label: 'Синий',
-    groupId: 1,
-    id: 3,
-  },
-  {
-    label: 'Красный',
-    groupId: 1,
-    id: 4,
-  },
-  {
-    label: 'Сине-зелёный',
-    groupId: 2,
-    id: 5,
-  },
-  {
-    label: 'Красно-коричневый',
-    groupId: 2,
-    id: 6,
-  },
-  ...
-];
-
-const groups: Group[] = [
-  {
-    id: 1,
-    label: 'Первая группа',
-  },
-  {
-    id: 2,
-    label: 'Вторая группа',
-  },
-  {
-    id: 3,
-    label: 'Третья группа',
-  },
-];
-
-const AutoCompleteExampleGroups = () => {
-  const [value, setValue] = useState<string | null>(null);
-  return (
-      <AutoComplete
-        type="text"
-        placeholder="Введите значение"
-        value={value}
-        items={items}
-        groups={groups}
-        onChange={({ value }) => setValue(value)}
-      />
-  );
-};
-```
-
-<AutoCompleteExampleGroups />
 
 ## Статус поля
 
@@ -475,6 +493,8 @@ const AutoCompleteExampleSize = () => {
 
 ## Форма
 
+### Форма поля
+
 За форму селекта отвечает свойство `form`. Варианты:
 `default`, `brick`, `round`, `clearRound`, `roundClear`, `clearDefault`, `defaultClear`, `defaultBrick`, `brickDefault`, `brickClear`, `clearBrick`, `clearClear`. По умолчанию `default`.
 
@@ -528,9 +548,35 @@ const AutoCompleteExampleForm = () => {
 
 <AutoCompleteExampleForm />
 
+### Форма выпадающего списка
+
+За форму выпадающего списка с подсказками отвечает свойство `dropdownForm`.
+Варианты: `default` (по умолчанию), `brick`, `round`.
+
+```tsx
+<AutoComplete
+  type="text"
+  placeholder="Форма списка round"
+  dropdownForm="round"
+  value={value}
+  items={items}
+  onChange={({ value }) => setValue(value)}
+/>
+<AutoComplete
+  type="text"
+  placeholder="Форма списка brick"
+  dropdownForm="brick"
+  value={value}
+  items={items}
+  onChange={({ value }) => setValue(value)}
+/>
+```
+
+<AutoCompleteExampleDropdownForm />
+
 ## Внешний вид
 
-За вид компонента отвечает свойство `view`. Варианты: `default`, `clear` по умолчанию `default`.
+За вид компонента отвечает свойство `view`. Варианты: `default`, `clear`, по умолчанию `default`.
 
 ```tsx
 import React, { useState } from 'react';
@@ -625,14 +671,6 @@ const AutoCompleteExampleDisabled = () => {
 ```
 
 <AutoCompleteExampleDisabled />
-
-## Поиск
-
-Если в поле что-то напечатать, компонент найдёт всех варианты, в названии которых есть напечатанные символы.
-
-По умолчанию компонент ищет по `label` элемента. Вы можете поменять параметры поиска с помощью `searchFunction`.
-
-Если ничего не нашлось, пользователь увидит текст **Не найдено**. Поменять его можно с помощью свойства `labelForNotFound`.
 
 # Кастомизация
 
@@ -753,7 +791,7 @@ const AutoCompleteExampleItems = () => {
 ## Импорт
 
 ```tsx
-import { Combobox } from '@consta/uikit/Combobox';
+import { AutoComplete } from '@consta/uikit/AutoComplete';
 ```
 
 ## Свойства
@@ -779,55 +817,56 @@ type AutoCompletePropGetGroupLabel<GROUP> = (group: GROUP) => string;
 type AutoCompletePropGetGroupId<GROUP> = (group: GROUP) => number | string;
 ```
 
-## Свойства
-
-| Свойство                                                                                                        | Тип                                                                                                                                                                  | По умолчанию                                                  | Описание                                                                                                                                     |
-| --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`type?`](#тип-поля)                                                                                            | `'text'`, `'textarea'`                                                                                                                                               | `'text'`                                                      | Тип поля (и тег для поля в DOM)                                                                                                              |
-| [`status?`](#статус-поля)                                                                                       | `'', 'alert', 'success', 'warning'`                                                                                                                                  | `' '`                                                         | Тип поля                                                                                                                                     |
-| [`disabled?`](#внешний-вид)                                                                                     | `boolean`                                                                                                                                                            | -                                                             | Делает поле неактивным                                                                                                                       |
-| [`size?`](#размеры)                                                                                             | `'xs', 's', 'm', 'l'`                                                                                                                                                | `'m'`                                                         | Размер шрифта, отступы и высота поля                                                                                                         |
-| [`width?`]##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable/hash:(#размеры)                          | `'full', 'default'`                                                                                                                                                  | `'default'`                                                   | Ширина поля                                                                                                                                  |
-| [`rows?`](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable/hash:#строки-и-колонки)                  | `number`                                                                                                                                                             | -                                                             | Количество строк, работает только с `type='textarea'`, нельзя использовать вместе с `minRows` и `maxRows`                                    |
-| [`cols?`](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable/hash:#строки-и-колонки)                  | `number`                                                                                                                                                             | -                                                             | Количество колонок                                                                                                                           |
-| [`minRows?`](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable/hash:#строки-и-колонки)               | `number`                                                                                                                                                             | -                                                             | Минимум видимых строк, работает только с `type='textarea'`, нельзя использовать вместе с `rows`                                              |
-| [`maxRows?`](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable/hash:#строки-и-колонки)               | `number`                                                                                                                                                             | -                                                             | Максимум видимых строк, работает только с `type='textarea'`, нельзя использовать вместе с `rows`                                             |
-| [`maxLength?`](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable/hash:#строки-и-колонки)             | `number`                                                                                                                                                             | -                                                             | Максимальная ширина                                                                                                                          |
-| [`withClearButton?`](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable/hash:кнопка-для-очистки-поля) | `boolean`                                                                                                                                                            | `false`                                                       | Отображать ли кнопку-крестик для очистки поля ввода                                                                                          |
-| [`view?`](#внешний-вид)                                                                                         | `'default', 'clear'`                                                                                                                                                 | `'default'`                                                   | Внешний вид поля                                                                                                                             |
-| [`label?`](#лейбл)                                                                                              | `string`                                                                                                                                                             | -                                                             | Лейбл к полю ввода                                                                                                                           |
-| [`labelPosition?`](#лейбл)                                                                                      | `'top', 'left'`                                                                                                                                                      | `'top'`                                                       | Положение лейбла относительно поля                                                                                                           |
-| [`caption?`](#подпись)                                                                                          | `string`                                                                                                                                                             | -                                                             | Подпись под полем ввода                                                                                                                      |
-| [`form?`](#форма)                                                                                               | `'default', 'brick', 'round', 'clearRound', 'roundClear', 'clearDefault', 'defaultClear', 'defaultBrick', 'brickDefault', 'brickClear', 'clearBrick', 'clearClear'`, | `'default'`                                                   | Форма поля                                                                                                                                   |
-| [`leftSide?`](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable/hash:дополнительная-информация)      | `IconComponent, string`                                                                                                                                              | -                                                             | Иконка или текст слева, внутри поля                                                                                                          |
-| [`rightSide?`](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable/hash:дополнительная-информация)     | `IconComponent, string`                                                                                                                                              | -                                                             | Иконка или текст справа, внутри поля. Не работает с `type='number'`                                                                          |
-| [`value?`](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable/hash:значение)                          | `string`, `null`                                                                                                                                                     | -                                                             | Предустановленное значение в поле                                                                                                            |
-| [`placeholder?`](#подсказка)                                                                                    | `string`                                                                                                                                                             | -                                                             | Подсказка внутри поля                                                                                                                        |
-| `id?`                                                                                                           | `string`                                                                                                                                                             | -                                                             | ID поля в DOM                                                                                                                                |
-| `name?`                                                                                                         | `string`                                                                                                                                                             | -                                                             | Имя поля в DOM                                                                                                                               |
-| [`required?`](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable/hash:обязательность)                 | `boolean`                                                                                                                                                            | -                                                             | Нужно заполнить                                                                                                                              |
-| `tabIndex?`                                                                                                     | `number`                                                                                                                                                             | -                                                             | Порядковый номер при переходе между элементами интерфейса по клавише **tab**                                                                 |
-| [`autoFocus?`](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable/hash:фокус)                         | `boolean`                                                                                                                                                            | -                                                             | Перемещает фокус в поле                                                                                                                      |
-| `onFocus?`                                                                                                      | `React.FocusEventHandler<HTMLElement>`                                                                                                                               | -                                                             | Действие по фокусу                                                                                                                           |
-| `onBlur?`                                                                                                       | `React.FocusEventHandler<HTMLElement>`                                                                                                                               | -                                                             | Действие при потере фокуса                                                                                                                   |
-| `autoComplete?`                                                                                                 | [`AutoCompete`](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)                                                                           | -                                                             | Автозаполнение поля ввода — аналог HTML-атрибута [`autocomplete`](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) |
-| `onChange?`                                                                                                     | `(args: e: React.ChangeEvent; id?: string, number; name?: string; value: string, null;) => void;`                                                                    | -                                                             | Действие при изменении текстового поля                                                                                                       |
-| `className?`                                                                                                    | `string`                                                                                                                                                             | -                                                             | Дополнительный CSS-класс                                                                                                                     |
-| `inputRef?`                                                                                                     | `React.Ref<HTMLTextAreaElement` <code>&#124;</code> `HTMLInputElement>`                                                                                              | -                                                             | Ссылка на DOM-элемент поля ввода                                                                                                             |
-| `inputContainerRef?`                                                                                            | `React.Ref<HTMLDivElement>`                                                                                                                                          | -                                                             | Ссылка на DOM-элемент контейнера поля ввода                                                                                                  |
-| `ref?`                                                                                                          | `React.Ref<HTMLDivElement>`                                                                                                                                          | -                                                             | Ссылка на корневой DOM-элемент компонента                                                                                                    |
-| [`searchFunction?`](#поиск)                                                                                     | `PropSearchFunction<ITEM>`                                                                                                                                           | поиск по `label` элементов, `label` получен из `getItemLabel` | Функция поиска                                                                                                                               |
-| `labelForEmptyItems?`                                                                                           | `string`                                                                                                                                                             | `Список пуст`                                                 | Текст, который нужно показать, если в списке нет значений                                                                                    |
-| [`labelForNotFound?`](#пример-с-кастомным-элементом-списка-и-своей-функцией-поиска)                             | `string`                                                                                                                                                             | `Не найдено`                                                  | Текст, который нужно показать, если при поиске ничего не нашлось                                                                             |
-| [`renderItem?`](#пример-с-кастомным-элементом-списка-и-своей-функцией-поиска)                                   | `PropRenderItem<ITEM>`                                                                                                                                               | рендер по умолчанию                                           | Рендер-функция для элемента списка                                                                                                           |
-| `getItemLabel?`                                                                                                 | `PropGetItemLabel<ITEM>`                                                                                                                                             | `(item) => item.label`                                        | Функция для определения названия элемента                                                                                                    |
-| `getItemKey?`                                                                                                   | `PropGetItemKey<ITEM>`                                                                                                                                               | `(item) => item.id`                                           | Функция для определения уникального ключа элемента                                                                                           |
-| `getItemGroupKey?`                                                                                              | `PropGetItemGroupKey<ITEM>`                                                                                                                                          | `(item) => item.groupId`                                      | Функция для определения ключа группы, к которой будет привязан элемент                                                                       |
-| `getGroupLabel?`                                                                                                | `PropGetGroupKey<GROUP>`                                                                                                                                             | `(group) => group.id`                                         | Функция для определения названия группы                                                                                                      |
-| `getGroupKey?`                                                                                                  | `PropGetGroupLabel<GROUP>`                                                                                                                                           | `(group) => group.label`                                      | Функция для определения уникального ключа группы                                                                                             |
-| `isLoading?`                                                                                                    | `boolean`                                                                                                                                                            | -                                                             | При `true` будет отображаться лоудер загрузки                                                                                                |
-| `dropdownClassName?`                                                                                            | `string`                                                                                                                                                             | -                                                             | Дополнительный CSS-класс для выпадающего блока                                                                                               |
-| `dropdownClassName?`                                                                                            | `'default', 'brick', 'round'`                                                                                                                                        | `'default'`                                                   | Форма для выпадающего блока                                                                                                                  |
+| Свойство                                                                                                        | Тип                                                                                                                                                                  | По умолчанию                                                                         | Описание                                                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`items`](#содержимое)                                                                                          | `ITEM[]`                                                                                                                                                             | -                                                                                    | Объект с подсказками, которые появляются, когда пользователь начинает что-то вводить в поле                                                  |
+| [`groups?`](#группы-подсказок)                                                                                  | `GROUP[]`                                                                                                                                                            | -                                                                                    | Группы подсказок                                                                                                                             |
+| [`type?`](#тип-поля)                                                                                            | `'text'`, `'textarea'`                                                                                                                                               | `'text'`                                                                             | Тип поля (и тег для поля в DOM)                                                                                                              |
+| [`status?`](#статус-поля)                                                                                       | `'', 'alert', 'success', 'warning'`                                                                                                                                  | `' '`                                                                                | Тип поля                                                                                                                                     |
+| [`disabled?`](#внешний-вид)                                                                                     | `boolean`                                                                                                                                                            | -                                                                                    | Делает поле неактивным                                                                                                                       |
+| [`size?`](#размер)                                                                                              | `'xs', 's', 'm', 'l'`                                                                                                                                                | `'m'`                                                                                | Размер шрифта, отступы и высота поля                                                                                                         |
+| [`width?`](#размер)                                                                                             | `'full', 'default'`                                                                                                                                                  | `'default'`                                                                          | Ширина поля                                                                                                                                  |
+| [`rows?`](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable/hash:#строки-и-колонки)                  | `number`                                                                                                                                                             | -                                                                                    | Количество строк, работает только с `type='textarea'`, нельзя использовать вместе с `minRows` и `maxRows`                                    |
+| [`cols?`](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable/hash:#строки-и-колонки)                  | `number`                                                                                                                                                             | -                                                                                    | Количество колонок                                                                                                                           |
+| [`minRows?`](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable/hash:#строки-и-колонки)               | `number`                                                                                                                                                             | -                                                                                    | Минимум видимых строк, работает только с `type='textarea'`, нельзя использовать вместе с `rows`                                              |
+| [`maxRows?`](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable/hash:#строки-и-колонки)               | `number`                                                                                                                                                             | -                                                                                    | Максимум видимых строк, работает только с `type='textarea'`, нельзя использовать вместе с `rows`                                             |
+| [`maxLength?`](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable/hash:#строки-и-колонки)             | `number`                                                                                                                                                             | -                                                                                    | Максимальная ширина                                                                                                                          |
+| [`withClearButton?`](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable/hash:кнопка-для-очистки-поля) | `boolean`                                                                                                                                                            | `false`                                                                              | Отображать ли кнопку-крестик для очистки поля ввода                                                                                          |
+| [`view?`](#внешний-вид)                                                                                         | `'default', 'clear'`                                                                                                                                                 | `'default'`                                                                          | Внешний вид поля                                                                                                                             |
+| [`label?`](#лейбл)                                                                                              | `string`                                                                                                                                                             | -                                                                                    | Лейбл к полю ввода                                                                                                                           |
+| [`labelPosition?`](#лейбл)                                                                                      | `'top', 'left'`                                                                                                                                                      | `'top'`                                                                              | Положение лейбла относительно поля                                                                                                           |
+| [`caption?`](#подпись)                                                                                          | `string`                                                                                                                                                             | -                                                                                    | Подпись под полем ввода                                                                                                                      |
+| [`form?`](#форма)                                                                                               | `'default', 'brick', 'round', 'clearRound', 'roundClear', 'clearDefault', 'defaultClear', 'defaultBrick', 'brickDefault', 'brickClear', 'clearBrick', 'clearClear'`, | `'default'`                                                                          | Форма поля                                                                                                                                   |
+| [`leftSide?`](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable/hash:дополнительная-информация)      | `IconComponent, string`                                                                                                                                              | -                                                                                    | Иконка или текст слева, внутри поля                                                                                                          |
+| [`rightSide?`](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable/hash:дополнительная-информация)     | `IconComponent, string`                                                                                                                                              | -                                                                                    | Иконка или текст справа, внутри поля. Не работает с `type='number'`                                                                          |
+| [`value?`](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable/hash:значение)                          | `string`, `null`                                                                                                                                                     | -                                                                                    | Предустановленное значение в поле                                                                                                            |
+| [`placeholder?`](#подсказка)                                                                                    | `string`                                                                                                                                                             | -                                                                                    | Подсказка внутри поля                                                                                                                        |
+| `id?`                                                                                                           | `string`                                                                                                                                                             | -                                                                                    | ID поля в DOM                                                                                                                                |
+| `name?`                                                                                                         | `string`                                                                                                                                                             | -                                                                                    | Имя поля в DOM                                                                                                                               |
+| [`required?`](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable/hash:обязательность)                 | `boolean`                                                                                                                                                            | -                                                                                    | Нужно заполнить                                                                                                                              |
+| `tabIndex?`                                                                                                     | `number`                                                                                                                                                             | -                                                                                    | Порядковый номер при переходе между элементами интерфейса по клавише **tab**                                                                 |
+| [`autoFocus?`](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable/hash:фокус)                         | `boolean`                                                                                                                                                            | -                                                                                    | Перемещает фокус в поле                                                                                                                      |
+| `onFocus?`                                                                                                      | `React.FocusEventHandler<HTMLElement>`                                                                                                                               | -                                                                                    | Действие по фокусу                                                                                                                           |
+| `onBlur?`                                                                                                       | `React.FocusEventHandler<HTMLElement>`                                                                                                                               | -                                                                                    | Действие при потере фокуса                                                                                                                   |
+| `autoComplete?`                                                                                                 | [`AutoCompete`](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)                                                                           | -                                                                                    | Автозаполнение поля ввода — аналог HTML-атрибута [`autocomplete`](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) |
+| `onChange?`                                                                                                     | `(args: e: React.ChangeEvent; id?: string, number; name?: string; value: string, null;) => void;`                                                                    | -                                                                                    | Действие при изменении текстового поля                                                                                                       |
+| `className?`                                                                                                    | `string`                                                                                                                                                             | -                                                                                    | Дополнительный CSS-класс                                                                                                                     |
+| `inputRef?`                                                                                                     | `React.Ref<HTMLTextAreaElement` <code>&#124;</code> `HTMLInputElement>`                                                                                              | -                                                                                    | Ссылка на DOM-элемент поля ввода                                                                                                             |
+| `inputContainerRef?`                                                                                            | `React.Ref<HTMLDivElement>`                                                                                                                                          | -                                                                                    | Ссылка на DOM-элемент контейнера поля ввода                                                                                                  |
+| `ref?`                                                                                                          | `React.Ref<HTMLDivElement>`                                                                                                                                          | -                                                                                    | Ссылка на корневой DOM-элемент компонента                                                                                                    |
+| [`searchFunction?`](#поиск)                                                                                     | `AutoCompletePropSearchFunction<ITEM>`                                                                                                                               | Поиск по `label` элементов из объекта `item` или полученных с помощью `getItemLabel` | Функция поиска                                                                                                                               |
+| `labelForEmptyItems?`                                                                                           | `string`                                                                                                                                                             | `Список пуст`                                                                        | Текст, который нужно показать, если в списке нет значений                                                                                    |
+| [`labelForNotFound?`](#пример-с-кастомным-элементом-списка-и-своей-функцией-поиска)                             | `string`                                                                                                                                                             | `Не найдено`                                                                         | Текст, который нужно показать, если при поиске ничего не нашлось                                                                             |
+| [`renderItem?`](#пример-с-кастомным-элементом-списка-и-своей-функцией-поиска)                                   | `PropRenderItem<ITEM>`                                                                                                                                               | рендер по умолчанию                                                                  | Рендер-функция для элемента списка                                                                                                           |
+| `getItemLabel?`                                                                                                 | `PropGetItemLabel<ITEM>`                                                                                                                                             | `(item) => item.label`                                                               | Функция для определения названия элемента                                                                                                    |
+| `getItemKey?`                                                                                                   | `PropGetItemKey<ITEM>`                                                                                                                                               | `(item) => item.id`                                                                  | Функция для определения уникального ключа элемента                                                                                           |
+| `getItemGroupKey?`                                                                                              | `PropGetItemGroupKey<ITEM>`                                                                                                                                          | `(item) => item.groupId`                                                             | Функция для определения ключа группы, к которой будет привязан элемент                                                                       |
+| `getGroupLabel?`                                                                                                | `PropGetGroupKey<GROUP>`                                                                                                                                             | `(group) => group.id`                                                                | Функция для определения названия группы                                                                                                      |
+| `getGroupKey?`                                                                                                  | `PropGetGroupLabel<GROUP>`                                                                                                                                           | `(group) => group.label`                                                             | Функция для определения уникального ключа группы                                                                                             |
+| `isLoading?`                                                                                                    | `boolean`                                                                                                                                                            | -                                                                                    | Отображает лоадер при загрузке                                                                                                               |
+| `dropdownClassName?`                                                                                            | `string`                                                                                                                                                             | -                                                                                    | Дополнительный CSS-класс для выпадающего блока с подсказками                                                                                 |
+| `dropdownForm?`                                                                                                 | `'default', 'brick', 'round'`                                                                                                                                        | `'default'`                                                                          | Форма выпадающего блока с подсказками                                                                                                        |
+| `dropdownRef?`                                                                                                  | `React.RefObject<HTMLDivElement>`                                                                                                                                    | -                                                                                    | Ссылка на DOM-элемент выпадающего списка                                                                                                     |
 
 ## Пример
 
