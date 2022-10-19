@@ -53,6 +53,8 @@ export type SelectProps<ITEM, GROUP, MULTIPLE extends boolean> = {
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   multiple: boolean;
+  searchValue?: string;
+  withoutClearSearch?: boolean;
   onChange: OnChangeProp<ITEM, MULTIPLE>;
   value: ValueProp<ITEM, MULTIPLE>;
 };
@@ -123,6 +125,8 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
     getItemDisabled,
     onFocus,
     onBlur,
+    searchValue: searchValueProp,
+    withoutClearSearch,
   } = params;
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -334,15 +338,13 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
       params.onChange({ value: item, e });
       setOpen(false);
     }
-    setResolvedSearch('');
-    setSearch('');
+    !withoutClearSearch && setSearch('');
   };
 
   const onCreate = (e: React.SyntheticEvent, label: string) => {
     params.onCreate && params.onCreate({ e, label });
     setOpen(false);
-    setResolvedSearch('');
-    setSearch('');
+    !withoutClearSearch && setSearch('');
   };
 
   // Handlers
@@ -358,14 +360,13 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
 
     if (multiple) {
       inputRef.current?.focus();
-      setSearch('');
+      !withoutClearSearch && setSearch('');
     }
   };
 
   const clearValue = (e: React.SyntheticEvent) => {
     params.onChange({ value: null, e });
-    setResolvedSearch('');
-    setSearch('');
+    !withoutClearSearch && setSearch('');
   };
 
   const getHandleRemoveValue = (item: ITEM) => (e: React.SyntheticEvent) =>
@@ -543,6 +544,12 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
       inputRef.current?.focus();
     }
   };
+
+  useEffect(() => {
+    if (searchValueProp) {
+      setSearch(searchValueProp);
+    }
+  }, [searchValueProp]);
 
   useEffect(() => {
     if (searchValue) {
