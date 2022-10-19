@@ -1,5 +1,25 @@
 # Changelog
 
+## v4.2.0 (19/10/2022)
+Самое важное:
+- Добавили новый компонент — AutoComplete
+- Исправили баг с репозицией ContextMenu
+- Написали статью о том, как выбрать таблицу для проекта
+
+---
+
+- [docs(TableComparison): write how to choose table (#2710)](https://github.com/consta-design-system/uikit/commit/92507e66684bb46cb50ac6f3a6304400dd7ec2c6) - [@arhayka](https://github.com/arhayka)
+- [feat(AutoComplete): add new Component (#2693)](https://github.com/consta-design-system/uikit/commit/6783a321481649eb60ac0aab81f00521c897d085) - [@N1MBER](https://github.com/N1MBER)
+- [feat(Variants): add missing variants for components (#2676)](https://github.com/consta-design-system/uikit/commit/9c77708c93a033c9a5f163ecfbcd996300990b51) - [@N1MBER](https://github.com/N1MBER)
+- [fix(ContextMenu): fixed reposition (#2706)](https://github.com/consta-design-system/uikit/commit/dc2331e67575816fece73d63db00f8d0f64b54a4) - [@gizeasy](https://github.com/gizeasy)
+- [docs(Layout): fix border on layout examples (#2705)](https://github.com/consta-design-system/uikit/commit/0483b4018030a3cdfddbec2023b6a1385faba5f1) - [@N1MBER](https://github.com/N1MBER)
+- [fix(Select): fix height of item with empty row (#2704)](https://github.com/consta-design-system/uikit/commit/0b6534a94b7e0ad1c0e60bb8f8c233b4bf39e145) - [@N1MBER](https://github.com/N1MBER)
+- [docs(File): add block for extensions with icon (#2702)](https://github.com/consta-design-system/uikit/commit/380d1920a940ae542342fdd672a85e4a12ea5206) - [@N1MBER](https://github.com/N1MBER)
+- [docs: version, links, readme (#2692)](https://github.com/consta-design-system/uikit/commit/d8bc024f3c67900f7e5c04d0763649ecd43e1341) - [@arhayka](https://github.com/arhayka)
+- [chore(deps): update @consta/stand version (#2680)](https://github.com/consta-design-system/uikit/commit/0c112b270496d4979cf6cb93d2040c2f4b59857d) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v4.1.0 (04/10/2022)
 Самое важное:
 - В таблице появилась возможность отображать строки сразу раскрытыми
@@ -436,15 +456,3 @@ endFieldOnBlur - deleted, use onBlur
 
 ## v3.17.2 (04/03/2022)
 - [fix(Tooltip): fixed position (#2110)](https://github.com/consta-design-system/uikit/commit/a73c95ca2aac29c0c6ff2c2424c0aff5e3868925) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v3.17.1 (02/03/2022)
-Самое важное:
-- В `Popover` расширили свойство offset, теперь можно указывать размеры, базирующиеся на теме.
-- В `Table` доработали расчет ширины колонок.
-
----
-
-- [ fix(Table): fix bug with column width (#2051)](https://github.com/consta-design-system/uikit/commit/8c6d8593891e3bb7ae24c67903ed64a9af611c89) - [@N1MBER](https://github.com/N1MBER)
-- [feat(Popover): rewrite offset type (#2080)](https://github.com/consta-design-system/uikit/commit/4105c10895cbd66f67277897034d76de9513bc2c) - [@N1MBER](https://github.com/N1MBER)
