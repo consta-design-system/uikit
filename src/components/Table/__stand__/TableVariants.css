@@ -1,0 +1,8 @@
+.TableVariants {
+  padding-left: 150px;
+
+  &_fixedSize {
+    width: 600px;
+    height: 300px;
+  }
+}
