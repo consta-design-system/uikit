@@ -1,6 +1,6 @@
 {
   "name": "@consta/uikit",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "keywords": [
     "ui-kit",
     "design-system",
@@ -64,10 +64,7 @@
     "stand:start": "NODE_ENV=development webpack serve --open --progress --mode development --hot --progress --config node_modules/@consta/stand/webpack.config.js",
     "stand:dev": "NODE_ENV=standDevelopment webpack serve --open --progress --mode development --hot --progress --config node_modules/@consta/stand/webpack.config.js",
     "start": "yarn stand:generate && yarn stand:start",
-    "start:dev": "yarn stand:generate && yarn stand:dev",
-    "stand:clone": "sh clone.sh",
-    "stand:generate2": "node node_modules/@consta/stand/build.js --config=src/stand/config.js",
-    "stand:start2": "NODE_ENV=development webpack serve --open --progress --mode development --hot --progress --config src/stand/webpack.config.js"
+    "start:dev": "yarn stand:generate && yarn stand:dev"
   },
   "config": {
     "commitizen": {
