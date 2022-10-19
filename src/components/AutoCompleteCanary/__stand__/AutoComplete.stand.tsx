@@ -4,8 +4,8 @@ export default createStand({
   title: 'AutoComplete',
   id: 'AutoComplete',
   group: 'components',
-  description: 'Поле для ввода текста с подсказками.',
-  version: '1.0.0',
+  description: 'Поле для ввода текста с поиском по возможным значениям.',
+  version: '4.0.3',
   status: 'canary',
   // sandbox: 'textfield-0tb6vl',
   figma:

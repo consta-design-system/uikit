@@ -47,3 +47,27 @@ export const AutoCompleteExampleForm = () => {
     </StoryBookExample>
   );
 };
+
+export const AutoCompleteExampleDropdownForm = () => {
+  const [value, setValue] = useState<string | null>(null);
+  return (
+    <StoryBookExample className={cnDocsDecorator('Section')}>
+      <AutoComplete
+        type="text"
+        placeholder="Форма списка round"
+        dropdownForm="round"
+        value={value}
+        items={items}
+        onChange={({ value }) => setValue(value)}
+      />
+      <AutoComplete
+        type="text"
+        placeholder="Форма списка brick"
+        dropdownForm="brick"
+        value={value}
+        items={items}
+        onChange={({ value }) => setValue(value)}
+      />
+    </StoryBookExample>
+  );
+};
