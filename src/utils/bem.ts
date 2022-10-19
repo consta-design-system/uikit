@@ -6,3 +6,7 @@ export const cn = withNaming(reactBemNaming);
 
 export const withPrefix = (prefix: string) =>
   withNaming({ n: `${prefix}--`, ...reactBemNaming });
+
+export const cnCanary = withPrefix('canary');
+
+export const cnDeprecated = withPrefix('canary');
