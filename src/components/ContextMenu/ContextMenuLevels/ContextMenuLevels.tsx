@@ -43,7 +43,7 @@ const ContextMenuLevelsRender = (
 
   type Item = typeof items[number];
 
-  const defaultLevels = [
+  const defaultLevels: Level<Item>[] = [
     {
       items,
       anchorRef,
@@ -51,8 +51,8 @@ const ContextMenuLevelsRender = (
       direction,
       possibleDirections,
       offset,
-    },
-  ] as Level<Item>[];
+    } as Level<Item>,
+  ];
 
   const [levels, setLevels] = useState<Level<Item>[]>(defaultLevels);
   const [subMenuDirection, setSubMenuDirection] =
@@ -116,6 +116,10 @@ const ContextMenuLevelsRender = (
   }, [items]);
 
   const firstLevelRef = useForkRef([levelsRefs[0], ref]);
+
+  useEffect(() => {
+    setLevels(defaultLevels);
+  }, [position]);
 
   return (
     <>
