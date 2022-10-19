@@ -5,7 +5,7 @@ export default createStand({
   id: 'useClickOutside',
   group: 'hooks',
   description: 'Хук для обработки кликов вне элемента.',
-  version: '4.0.0',
+  version: '1.5.0',
   status: 'stable',
   sandbox: 'useclickoutside-b12t39',
   order: 10,

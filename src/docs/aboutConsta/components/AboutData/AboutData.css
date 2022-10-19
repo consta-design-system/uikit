@@ -1,4 +1,13 @@
-.AboutDataText {
+.AboutData {
   margin-top: var(--space-s);
   margin-bottom: var(--space-s);
+
+  &-Link {
+    color: var(--color-typo-link);
+    transition: 0.3s ease;
+
+    :hover {
+      color: var(--color-typo-link-hover);
+    }
+  }
 }

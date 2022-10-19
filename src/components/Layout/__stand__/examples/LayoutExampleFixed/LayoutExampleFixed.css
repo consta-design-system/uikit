@@ -16,6 +16,7 @@
     width: 100%;
     min-height: 50px;
     background: var(--color-bg-normal);
+    border-bottom: 2px solid var(--color-bg-default);
   }
 
   &-Content {

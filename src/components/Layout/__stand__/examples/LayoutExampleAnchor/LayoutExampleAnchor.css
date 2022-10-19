@@ -9,6 +9,7 @@
     width: 100%;
     height: 120px;
     background: var(--color-bg-warning);
+    border-bottom: 2px solid var(--color-bg-default);
   }
 
   &-FixedBlock {
@@ -29,5 +30,9 @@
     align-items: center;
     min-height: 600px;
     background: var(--color-bg-success);
+
+    & > *:not(:last-child) {
+      border-bottom: 2px solid var(--color-bg-default);
+    }
   }
 }

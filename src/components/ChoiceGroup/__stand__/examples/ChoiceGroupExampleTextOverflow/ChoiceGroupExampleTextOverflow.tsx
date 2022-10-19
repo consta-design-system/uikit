@@ -19,6 +19,7 @@ export const ChoiceGroupExampleTextOverflow = () => {
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <ChoiceGroup
+        style={{ maxWidth: 600 }}
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}

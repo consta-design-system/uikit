@@ -5,7 +5,7 @@ export default createStand({
   id: 'withTooltip',
   group: 'hocs',
   description: 'Хок для добавления тултипа.',
-  version: '4.0.0',
+  version: '1.10.13',
   status: 'stable',
   sandbox: 'withtooltip-3hvvbw',
   order: 10,
