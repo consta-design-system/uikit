@@ -235,7 +235,6 @@ export function useAutoComplete<ITEM, GROUP>(
   const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>): void => {
     if (isOpen) {
       inputRef.current?.focus();
-      setIsOpen.off();
       return;
     }
 
