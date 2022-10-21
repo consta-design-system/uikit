@@ -225,67 +225,78 @@ const ComboboxRender = <
   };
 
   return (
-    <SelectContainer
-      focused={isFocused}
-      disabled={disabled}
-      size={size}
-      view={view}
-      required={required}
-      form={form}
-      multiple={multiple}
-      ref={ref}
-      type="combobox"
-      style={style}
-      {...otherProps}
-    >
-      <div
-        className={cnSelect('Control', { hasInput: true })}
-        ref={controlRef}
-        aria-expanded={isOpen}
-        aria-haspopup="listbox"
-        id={id}
+    <>
+      <SelectContainer
+        focused={isFocused}
+        disabled={disabled}
+        size={size}
+        view={view}
+        required={required}
+        form={form}
+        multiple={multiple}
+        ref={ref}
+        type="combobox"
+        style={style}
+        {...otherProps}
       >
         <div
-          className={cnSelect('ControlInner')}
-          onClick={handleInputClick}
-          role="button"
-          ref={controlInnerRef}
-          aria-hidden="true"
+          className={cnSelect('Control', { hasInput: true })}
+          ref={controlRef}
+          aria-expanded={isOpen}
+          aria-haspopup="listbox"
+          id={id}
         >
-          <div className={cnSelect('ControlValueContainer')}>
-            {multiple ? (
-              <div className={cnSelect('ControlValue')}>
-                {renderControlValue()}
-              </div>
-            ) : (
-              renderControlValue()
-            )}
+          <div
+            className={cnSelect('ControlInner')}
+            onClick={handleInputClick}
+            role="button"
+            ref={controlInnerRef}
+            aria-hidden="true"
+          >
+            <div className={cnSelect('ControlValueContainer')}>
+              {multiple ? (
+                <div className={cnSelect('ControlValue')}>
+                  {renderControlValue()}
+                </div>
+              ) : (
+                renderControlValue()
+              )}
+            </div>
           </div>
-        </div>
-        <span className={cnSelect('Indicators')}>
-          {value && (
+          <span className={cnSelect('Indicators')}>
+            {value && (
+              <button
+                type="button"
+                onClick={clearValue}
+                className={cnSelect('ClearIndicator', [cnMixFocus()])}
+              >
+                <IconClose
+                  size="xs"
+                  className={cnSelect('ClearIndicatorIcon')}
+                />
+              </button>
+            )}
+            <span className={cnSelect('Delimiter')} />
             <button
               type="button"
-              onClick={clearValue}
-              className={cnSelect('ClearIndicator', [cnMixFocus()])}
+              className={cnSelect('IndicatorsDropdown')}
+              tabIndex={-1}
+              onClick={handleToggleDropdown}
             >
-              <IconClose size="xs" className={cnSelect('ClearIndicatorIcon')} />
+              <IconSelect
+                size="xs"
+                className={cnSelect('DropdownIndicatorIcon')}
+              />
             </button>
-          )}
-          <span className={cnSelect('Delimiter')} />
-          <button
-            type="button"
-            className={cnSelect('IndicatorsDropdown')}
-            tabIndex={-1}
-            onClick={handleToggleDropdown}
-          >
-            <IconSelect
-              size="xs"
-              className={cnSelect('DropdownIndicatorIcon')}
-            />
-          </button>
-        </span>
-      </div>
+          </span>
+        </div>
+        <div
+          className={cnSelect('HelperInputFakeElement')}
+          ref={helperInputFakeElement}
+        >
+          {searchValue}
+        </div>
+      </SelectContainer>
       <SelectDropdown
         isOpen={isOpen}
         size={size}
@@ -309,13 +320,7 @@ const ComboboxRender = <
             : undefined
         }
       />
-      <div
-        className={cnSelect('HelperInputFakeElement')}
-        ref={helperInputFakeElement}
-      >
-        {searchValue}
-      </div>
-    </SelectContainer>
+    </>
   );
 };
 

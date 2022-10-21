@@ -129,60 +129,62 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
   const renderValue = renderValueProp || renderValueDefault;
 
   return (
-    <SelectContainer
-      focused={isFocused}
-      disabled={disabled}
-      size={size}
-      view={view}
-      form={form}
-      required={required}
-      ref={ref}
-      style={style}
-      {...restProps}
-    >
-      <div
-        className={cnSelect('Control')}
-        ref={controlRef}
-        aria-expanded={isOpen}
-        aria-haspopup="listbox"
-        id={id}
+    <>
+      <SelectContainer
+        focused={isFocused}
+        disabled={disabled}
+        size={size}
+        view={view}
+        form={form}
+        required={required}
+        ref={ref}
+        style={style}
+        {...restProps}
       >
-        <div className={cnSelect('ControlInner')}>
-          <div className={cnSelect('ControlValueContainer')}>
-            <input
-              {...getKeyProps()}
-              type="button"
-              name={name}
-              onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
-              aria-label={ariaLabel}
-              onClick={handleInputClick}
-              ref={useForkRef([inputRef, inputRefProp])}
-              className={cnSelect('FakeField')}
-              readOnly
-            />
-            {value && renderValue({ item: value })}
-            {(typeof value === 'undefined' || value === null) && placeholder && (
-              <span className={cnSelect('Placeholder')} title="placeholder">
-                {placeholder}
-              </span>
-            )}
+        <div
+          className={cnSelect('Control')}
+          ref={controlRef}
+          aria-expanded={isOpen}
+          aria-haspopup="listbox"
+          id={id}
+        >
+          <div className={cnSelect('ControlInner')}>
+            <div className={cnSelect('ControlValueContainer')}>
+              <input
+                {...getKeyProps()}
+                type="button"
+                name={name}
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
+                aria-label={ariaLabel}
+                onClick={handleInputClick}
+                ref={useForkRef([inputRef, inputRefProp])}
+                className={cnSelect('FakeField')}
+                readOnly
+              />
+              {value && renderValue({ item: value })}
+              {(typeof value === 'undefined' || value === null) && placeholder && (
+                <span className={cnSelect('Placeholder')} title="placeholder">
+                  {placeholder}
+                </span>
+              )}
+            </div>
           </div>
+          <span className={cnSelect('Indicators')}>
+            <button
+              type="button"
+              className={cnSelect('IndicatorsDropdown')}
+              tabIndex={-1}
+              onClick={handleToggleDropdown}
+            >
+              <IconSelect
+                size="xs"
+                className={cnSelect('DropdownIndicatorIcon')}
+              />
+            </button>
+          </span>
         </div>
-        <span className={cnSelect('Indicators')}>
-          <button
-            type="button"
-            className={cnSelect('IndicatorsDropdown')}
-            tabIndex={-1}
-            onClick={handleToggleDropdown}
-          >
-            <IconSelect
-              size="xs"
-              className={cnSelect('DropdownIndicatorIcon')}
-            />
-          </button>
-        </span>
-      </div>
+      </SelectContainer>
       <SelectDropdown
         isOpen={isOpen}
         size={size}
@@ -204,7 +206,7 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
             : undefined
         }
       />
-    </SelectContainer>
+    </>
   );
 };
 
