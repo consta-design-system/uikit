@@ -27,7 +27,6 @@ export type IconProps = PropsWithHTMLAttributesAndRef<
   {
     view?: IconPropView;
     size?: IconPropSize;
-    color?: 'mono' | 'multiple'; // Необходимо для того чтобы можно было испоользовать иконки из пакета @consta/icons
   },
   HTMLSpanElement
 >;
