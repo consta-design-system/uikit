@@ -5,17 +5,23 @@ import React, { forwardRef } from 'react';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
-export type IconPropSize = 'xs' | 's' | 'm';
-export type IconPropView =
-  | 'alert'
-  | 'brand'
-  | 'ghost'
-  | 'link'
-  | 'primary'
-  | 'secondary'
-  | 'success'
-  | 'warning'
-  | 'disabled';
+export const iconPropSize = ['m', 's', 'xs', 'l'] as const;
+export type IconPropSize = typeof iconPropSize[number];
+export const iconPropSizeDefault = iconPropSize[0];
+
+export const iconPropView = [
+  'primary',
+  'alert',
+  'brand',
+  'ghost',
+  'link',
+  'secondary',
+  'success',
+  'warning',
+  'disabled',
+] as const;
+export type IconPropView = typeof iconPropView[number];
+export const iconPropViewDefault = iconPropView[0];
 
 export type IconProps = PropsWithHTMLAttributesAndRef<
   {
