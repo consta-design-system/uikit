@@ -45,6 +45,7 @@ export const CollapseIcon: React.FC<CollapseIconProps> = (props) => {
     closeDirection,
     isOpen,
     className,
+    color,
     ...otherProps
   } = props;
 
