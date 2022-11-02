@@ -1,5 +1,15 @@
 # Changelog
 
+## v4.2.2 (02/11/2022)
+Самое важное:
+- Добавлена поддержка иконок из `@consta/icons`
+
+---
+
+- [feat(Icons): update types for usage icons from @consta/icons (#2726)](https://github.com/consta-design-system/uikit/commit/cdeedd5cd588a6cbab656fbeba946ccff1c284c5) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
 ## v4.2.1 (26/10/2022)
 - [fix(selects): select, Combobox, UserSelect fixed dropdown](https://github.com/consta-design-system/uikit/commit/5fb149684e1e12d71088ce85164dba1eaeb7d248) - [@gizeasy](https://github.com/gizeasy)
 
@@ -450,9 +460,3 @@ endFieldOnBlur - deleted, use onBlur
 - [feat(ThemeToggler): rewrite examples, doc and component with getters (#2105)](https://github.com/consta-design-system/uikit/commit/daec7b0a6625b678979808701ffdafe58e94be5d) - [@N1MBER](https://github.com/N1MBER)
 - [chore(CODEOWNERS): edit (#2135)](https://github.com/consta-design-system/uikit/commit/e00ed728e7a6f44622c08f3460b2da155d87c7d8) - [@gizeasy](https://github.com/gizeasy)
 - [docs(principles): add doc (#2104)](https://github.com/consta-design-system/uikit/commit/8843535c6a2ad6ecebc1b41c19a020ccaae6a42c) - [@arhayka](https://github.com/arhayka)
-
---------------------
-
-## v3.17.3 (10/03/2022)
-- [fix(Select): fix width (#2113)](https://github.com/consta-design-system/uikit/commit/0eb45830884cc2e4aa73dcdaa2127d0b919011e7) - [@N1KN](https://github.com/N1KN)
-- [fix(SideBar): fix pointer-events (#2107)](https://github.com/consta-design-system/uikit/commit/f6b7ac20991df669128787e49f23e0e5dfe217cb) - [@N1MBER](https://github.com/N1MBER)
