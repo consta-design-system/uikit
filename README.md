@@ -46,7 +46,7 @@ const App = () => (
 );
 ```
 
-[Что такое темы и как с ними работать](http://uikit.consta.design/?path=/docs/thematization-what-are-themes--page)
+[Что такое темы и как с ними работать](https://portal.consta.design/libs/portal/theme-themeabout)
 
 ## Документация и стенд
 
@@ -56,8 +56,8 @@ const App = () => (
 
 ## Контрибьюторам
 
-Будем рады, если вы захотите принять участие в разработке дизайн-системы =) Но сначала прочитайте [инструкцию для контрибьюторов](https://uikit.consta.design/libs/uikit/custom-contribute).
+Будем рады, если вы захотите принять участие в разработке дизайн-системы =) Но сначала прочитайте [инструкцию для контрибьюторов](https://portal.consta.design/libs/portal/custom-contribute).
 
 ## Лицензия
 
-Дизайн-систему можно использовать бесплатно, она распространяется на условиях открытой [лицензии MIT](https://consta.gazprom-neft.ru/static/licence_mit.pdf).
+Дизайн-систему можно использовать бесплатно, она распространяется на условиях открытой [лицензии MIT](https://consta.design/static/licence_mit.pdf).
