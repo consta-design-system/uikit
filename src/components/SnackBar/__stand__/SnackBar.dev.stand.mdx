@@ -6,6 +6,7 @@ import { SnackBarExampleTimer } from './examples/SnackBarExampleTimer/SnackBarEx
 import { SnackBarExampleButtons } from './examples/SnackBarExampleButtons/SnackBarExampleButtons';
 import { SnackBarExampleText } from './examples/SnackBarExampleText/SnackBarExampleText';
 import { SnackBarExampleAdaptive } from './examples/SnackBarExampleAdaptive/SnackBarExampleAdaptive';
+import { SnackBarExampleForm } from './examples/SnackBarExampleForm/SnackBarExampleForm';
 
 ```tsx
 import { SnackBar } from '@consta/uikit/SnackBar';
@@ -18,6 +19,7 @@ import { SnackBar } from '@consta/uikit/SnackBar';
 - [Статус](#статус)
 - [Иконка](#иконка)
 - [Кнопки](#кнопки)
+- [Форма](#форма)
 - [Возможность закрыть снекбар](#возможность-закрыть-снекбар)
 - [Автоматическое закрытие](#автоматическое-закрытие)
   - [Таймер](#таймер)
@@ -207,6 +209,37 @@ export const SnackBarExampleButtons: React.FC = () => {
 ```
 
 <SnackBarExampleButtons />
+
+## Форма
+
+За форму компонента отвечает свойство `form.` По умолчанию у полей скругленные края,
+но ещё их можно сделать круглыми и квадратными.
+
+```tsx
+type Item = {
+  key: string;
+  message: string;
+  buttons?: string[];
+};
+
+const items: Item[] = [
+  {
+    key: '1',
+    message: 'С этим сообщением нельзя не согласиться',
+    buttons: ['Согласен', 'Не согласен'],
+  },
+];
+
+return (
+  <>
+    <SnackBar items={items} form="default" />
+    <SnackBar items={items} form="round" />
+    <SnackBar items={items} form="brick" />
+  </>
+);
+```
+
+<SnackBarExampleForm />
 
 ## Возможность закрыть снекбар
 
@@ -411,12 +444,16 @@ export type SnackBarPropGetItemOnClose<ITEM> = (
 export type SnackBarPropGetItemOnAutoClose<ITEM> = (
   item: ITEM,
 ) => ((item: ITEM) => void) | undefined;
+
+export const snackBarPropForm = ['default', 'round', 'brick'] as const;
+export type SnackBarPropForm = typeof snackBarPropForm[number];
 ```
 
 | Свойство                                          | Тип                               | По умолчанию | Описание                                                        |
 | ------------------------------------------------- | --------------------------------- | ------------ | --------------------------------------------------------------- |
 | `items`                                           | `Item[]`                          | -            | Массив элементов                                                |
 | `getItemKey?`                                     | `SnackBarPropGetItemKey`          | -            | Функция для получения ключа элемента                            |
+| [`form?`](#форма)                                 | `SnackBarPropForm`                | `default`    | Внешний вид компонента                                          |
 | [`getItemMessage?`](#текст-сообщения)             | `SnackBarPropGetItemMessage`      | -            | Функция для получения текста элемента                           |
 | [`getItemStatus?`](#статус)                       | `SnackBarPropGetItemStatus`       | -            | Функция для получения статуса элемента                          |
 | [`getItemAutoClose?`](#автоматическое-закрытие)   | `SnackBarPropGetItemAutoClose`    | -            | Функция для получения значения таймера элемента                 |

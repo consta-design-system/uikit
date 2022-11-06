@@ -17,6 +17,7 @@ import {
   SnackBarItemComponent,
   SnackBarItemProps,
   snackBarItemStatusDefault,
+  snackBarPropFormDefault,
   SnackBarTimerPropOnMount,
 } from '../types';
 
@@ -45,6 +46,7 @@ export const SnackBarItemRender = (
     autoClose,
     showProgress,
     icon: Icon,
+    form = snackBarPropFormDefault,
     message,
     actions,
     status = snackBarItemStatusDefault,
@@ -95,7 +97,7 @@ export const SnackBarItemRender = (
   return (
     <div
       ref={ref}
-      className={cnSnackBarItem({ status, showProgress }, [
+      className={cnSnackBarItem({ status, showProgress, form }, [
         cnTheme({ color: 'gpnDark' }),
         className,
       ])}
