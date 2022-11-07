@@ -3,14 +3,14 @@ import React from 'react';
 import { IconComponent } from '../../icons/Icon/Icon';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import {
+  CollapseIconPropDirection,
   CollapsePropHorizontalSpace,
   CollapsePropSize,
   CollapsePropView,
 } from '../Collapse/Collapse';
-import { CollapseIconPropDirection } from '../Collapse/CollapseIcon/CollapseIcon';
 
 export type DefaultItem = {
-  label: string;
+  label: React.ReactNode;
   content: React.ReactNode;
   rightSide?: React.ReactNode | React.ReactNode[];
 };
@@ -25,7 +25,7 @@ export type CollapseGroupPropOpened<IS_ACCORDION> =
   | null
   | undefined;
 
-type CollapseGroupPropGetItemLabel<ITEM> = (item: ITEM) => string;
+type CollapseGroupPropGetItemLabel<ITEM> = (item: ITEM) => React.ReactNode;
 type CollapseGroupPropGetItemContent<ITEM> = (item: ITEM) => React.ReactNode;
 type CollapseGroupPropGetItemRightSide<ITEM> = (
   item: ITEM,

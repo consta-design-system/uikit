@@ -6,6 +6,7 @@ import { CollapseExampleHover } from './examples/CollapseExampleHover/CollapseEx
 import { CollapseExampleSize } from './examples/CollapseExampleSize/CollapseExampleSize';
 import { CollapseExampleIconPosition } from './examples/CollapseExampleIconPosition/CollapseExampleIconPosition';
 import { CollapseExampleIconDivider } from './examples/CollapseExampleIconDivider/CollapseExampleIconDivider';
+import { CollapseExampleLabel } from './examples/CollapseExampleLabel/CollapseExampleLabel';
 import {
   CollapseExampleIconRightSideBadge,
   CollapseExampleIconRightSideButton,
@@ -42,7 +43,30 @@ import { Collapse } from '@consta/uikit/Collapse';
 
 Заголовок виден, когда коллапс закрыт.
 
-За текст заголовка отвечает свойство `label`. Заголовок может быть длинным или коротким, его лучше писать с прописной буквы, точка не нужна.
+За текст и контент заголовка отвечает свойство `label`. Заголовок может быть длинным или коротким, его лучше писать с прописной буквы, точка не нужна.
+
+```tsx
+const CollapseExampleLabel = () => {
+  const [isOpen, setOpen] = useState<boolean>(false);
+
+  return (
+    <Collapse
+      label={
+        <>
+          Заголовок
+          <Badge label="Статус" size="s" />
+        </>
+      }
+      isOpen={isOpen}
+      onClick={() => setOpen(!isOpen)}
+    >
+      {content}
+    </Collapse>
+  );
+};
+```
+
+<CollapseExampleLabel />
 
 ### Подсветка
 
@@ -332,7 +356,7 @@ import { Collapse } from '@consta/uikit/Collapse';
 
 | Свойство                                     | Тип                                                                                                | По умолчанию    | Описание                                                                    |
 | -------------------------------------------- | -------------------------------------------------------------------------------------------------- | --------------- | --------------------------------------------------------------------------- |
-| [`label`](#заголовок)                        | `string`                                                                                           | -               | Заголовок коллапса                                                          |
+| [`label`](#заголовок)                        | `React.ReactNode`                                                                                  | -               | Заголовок коллапса                                                          |
 | [`size?`](#размер)                           | `'l'`, `'m'`, `'s'`, `'xs'`, `'2xs'`                                                               | `'m'`           | Размер                                                                      |
 | [`view?`](#внешний-вид)                      | `'primary'`, `'secondary'`                                                                         | `'primary'`     | Внешний вид                                                                 |
 | [`hoverEffect?`](#подсветка)                 | `boolean`                                                                                          | -               | Подсвечивает заголовок при наведении                                        |
