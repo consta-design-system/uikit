@@ -1,4 +1,4 @@
-import { useNumber, useSelect } from '@consta/stand';
+import { useBoolean, useNumber, useSelect } from '@consta/stand';
 import React from 'react';
 
 import { ProgressLine } from '../ProgressLine';
@@ -12,6 +12,9 @@ const Variants = () => {
     defaultProgressLinePropSize,
   );
   const value = useNumber('value', undefined);
+  const withLabel = useBoolean('withLabel', true);
+
+  const getItemLabel = (item: number) => item.toString();
 
   return (
     <ProgressLine
@@ -22,7 +25,7 @@ const Variants = () => {
           ? Array.from({ length: Number(steps) }, (_, i) => i + 1)
           : undefined
       }
-      getItemLabel={(item) => item?.toString()}
+      getItemLabel={withLabel ? getItemLabel : undefined}
     />
   );
 };

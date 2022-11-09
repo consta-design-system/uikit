@@ -25,13 +25,17 @@
 
   &_mode {
     &_step {
+      --progress-line-width-no-gap:
+        calc(
+          100% - calc(calc(var(--progress-line-steps) - 1) * var(--space-3xs))
+        );
       display: grid;
       height: auto;
       background: transparent;
       grid-template-columns:
         repeat(
           var(--progress-line-steps),
-          calc(100% / var(--progress-line-steps))
+          calc(var(--progress-line-width-no-gap) / var(--progress-line-steps))
         );
       grid-gap: var(--space-3xs);
     }
