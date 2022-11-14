@@ -25,7 +25,7 @@ export const TextExampleView = () => {
             view="ghost"
             className={wp.decorator({ 'indent-b': 'xs' })}
           >
-            {`view=&quot;${item}&quot;`}
+            {`view="${item}"`}
           </Text>
           <Text size="l" view={item}>
             Просто текст

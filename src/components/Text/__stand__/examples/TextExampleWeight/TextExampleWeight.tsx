@@ -33,7 +33,7 @@ export const TextExampleWeight = () => {
             view="ghost"
             className={wp.decorator({ 'indent-b': 'xs' })}
           >
-            {`weight=&quot;${item}&quot;`}
+            {`weight="${item}"`}
           </Text>
           <Text size="l" weight={item}>
             Просто текст
