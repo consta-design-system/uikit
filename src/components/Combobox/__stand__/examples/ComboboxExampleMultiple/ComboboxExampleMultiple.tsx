@@ -7,6 +7,7 @@ import { Combobox } from '../../../Combobox';
 type Item = {
   label: string;
   id: number;
+  disabled?: boolean;
 };
 
 const items: Item[] = [
@@ -17,15 +18,20 @@ const items: Item[] = [
   {
     label: 'Второй',
     id: 2,
+    disabled: true,
   },
   {
     label: 'Третий',
     id: 3,
   },
+  {
+    label: 'Четвёртый',
+    id: 4,
+  },
 ];
 
 export function ComboboxExampleMultiple() {
-  const [value, setValue] = useState<Item[] | null>();
+  const [value, setValue] = useState<Item[] | null>([items[1]]);
   return (
     <StoryBookExample className={cnDocsDecorator('Section')}>
       <Combobox
