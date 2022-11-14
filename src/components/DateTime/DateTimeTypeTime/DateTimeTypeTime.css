@@ -4,7 +4,10 @@
 */
 
 .DateTimeTypeTime {
-  width: calc((var(--control-height-s) + (var(--space-3xs) * 2)) * 3);
+  width:
+    calc(
+      (var(--control-height-s) + (var(--space-3xs) * 2)) * 3 + var(--space-xs) * 2
+    );
 
   &-Grid {
     --date-time-item-width: var(--control-height-s);
@@ -24,6 +27,10 @@
     display: flex;
     justify-content: center;
     height: calc(var(--date-time-cell-height) * 7);
+
+    & > *:not(:last-child) {
+      margin-right: var(--space-xs);
+    }
   }
 
   &-Label {
