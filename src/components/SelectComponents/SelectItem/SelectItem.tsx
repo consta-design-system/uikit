@@ -59,6 +59,7 @@ export const SelectItem: React.FC<SelectItemProps> = (props) => {
           className={cnSelectItem('Checkbox')}
           checked={active}
           size={getByMap(sizeCheckboxMap, size)}
+          disabled={disabled}
         />
       )}
       {label}

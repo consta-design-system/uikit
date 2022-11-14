@@ -150,12 +150,13 @@ const ComboboxRender = <
     item,
     handleRemove,
   }) => {
+    const itemDisabled = getItemDisabled(item);
     return (
       <SelectValueTag
         label={getItemLabel(item)}
         key={getItemKey(item)}
         size={size}
-        handleRemove={disabled ? undefined : handleRemove}
+        handleRemove={disabled || itemDisabled ? undefined : handleRemove}
       />
     );
   };
