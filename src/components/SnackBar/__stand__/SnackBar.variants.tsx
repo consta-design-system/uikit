@@ -18,6 +18,8 @@ import {
   SnackBarItemDefault,
   snackBarItemShowProgressProp,
   SnackBarItemStatus,
+  snackBarPropForm,
+  snackBarPropFormDefault,
 } from '../types';
 
 type State = SnackBarItemDefault[];
@@ -27,6 +29,7 @@ type Action =
 
 const Variants = () => {
   const withIcon = useBoolean('withIcon', false);
+  const form = useSelect('form', snackBarPropForm, snackBarPropFormDefault);
   const withActionButtons = useBoolean('withActionButtons', false);
   const withCloseButton = useBoolean('withCloseButton', true);
   const withAutoClose = useBoolean('withAutoClose', false);
@@ -148,6 +151,7 @@ const Variants = () => {
       <SnackBar
         className={cnSnackBarVariants('SnackBar')}
         items={items}
+        form={form}
         getItemIcon={withIcon ? getItemIcon : undefined}
         {...(withCloseButton && {
           onItemClose: handlerRemoveItem,

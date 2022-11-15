@@ -31,6 +31,7 @@ export type SnackBarActionButtonProps = {
 export type SnackBarItemProps = PropsWithHTMLAttributesAndRef<
   Omit<SnackBarItemDefault, 'onClose' | 'onAutoClose'> & {
     onClose?: () => void;
+    form?: SnackBarPropForm;
     onAutoClose?: () => void;
   },
   HTMLDivElement
@@ -89,11 +90,16 @@ export type Mappers<ITEM> = {
   getItemOnAutoClose?: SnackBarPropGetItemOnAutoClose<ITEM>;
 };
 
+export const snackBarPropForm = ['default', 'round', 'brick'] as const;
+export type SnackBarPropForm = typeof snackBarPropForm[number];
+export const snackBarPropFormDefault = snackBarPropForm[0];
+
 export type SnackBarProps<ITEM = SnackBarItemDefault> =
   PropsWithHTMLAttributesAndRef<
     {
       items: ITEM[];
       children?: never;
+      form?: SnackBarPropForm;
       onItemClose?: (item: ITEM) => void;
       onItemAutoClose?: (item: ITEM) => void;
     } & Mappers<ITEM>,

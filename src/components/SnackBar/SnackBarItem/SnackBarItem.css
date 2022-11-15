@@ -1,14 +1,29 @@
 .SnackBarItem {
+  --snack-bar-item-radius: 0;
   position: relative;
   display: flex;
   padding: var(--space-m) var(--space-2xl) var(--space-m) var(--space-m);
   color: var(--color-typo-primary);
-  border-radius: var(--space-xs);
+  border-radius: var(--snack-bar-item-radius);
   box-shadow: var(--shadow-group);
 
   &_showProgress {
     &_line {
       padding-bottom: calc(var(--space-m) + var(--space-2xs));
+    }
+  }
+
+  &_form {
+    &_default {
+      --snack-bar-item-radius: var(--space-xs);
+    }
+
+    &_round {
+      --snack-bar-item-radius: var(--space-m);
+    }
+
+    &_brick {
+      --snack-bar-item-radius: 0;
     }
   }
 
