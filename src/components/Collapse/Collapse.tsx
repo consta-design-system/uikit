@@ -91,9 +91,13 @@ export const Collapse: CollapseComponent = React.forwardRef<
           direction={directionIcon}
           closeDirection={closeDirectionIcon}
         />
-        <Text className={cnCollapse('LabelText')} view={view} size={size}>
-          {label}
-        </Text>
+        {typeof label === 'object' ? (
+          <div className={cnCollapse('LabelText')}>{label}</div>
+        ) : (
+          <Text className={cnCollapse('LabelText')} view={view} size={size}>
+            {label}
+          </Text>
+        )}
         {iconPosition === 'left' && renderSide(rightSide)}
       </div>
       <div className={cnCollapse('Body', { isOpen, divider })}>
