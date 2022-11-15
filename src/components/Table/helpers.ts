@@ -368,7 +368,6 @@ export const transformRows = <T extends TableRow>(
 ): TableTreeRow<T>[] => {
   const stack = [{ rows, index: 0 }];
   const rowsArr: TableTreeRow<T>[] = [];
-
   while (stack.length) {
     const level = stack.length - 1;
     const node = stack[level];
@@ -377,7 +376,7 @@ export const transformRows = <T extends TableRow>(
     if (item) {
       const handledItem: TableTreeRow<T> = {
         ...item,
-        level,
+        options: { level },
         rows: item.rows && [...item.rows],
       };
 

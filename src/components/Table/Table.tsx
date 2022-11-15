@@ -138,8 +138,9 @@ export type TableRow = {
 };
 
 export type TableTreeRow<T extends TableRow> = {
-  level: number;
-  parentId?: string;
+  options: {
+    level: number;
+  };
 } & T;
 
 export type TableFilters<T extends TableRow> = Filters<T>;
@@ -678,7 +679,7 @@ const InternalTable = <T extends TableRow>(
     const withCollapseButton = Boolean(row.rows?.length) && columnIdx === 0;
 
     const baseProps = {
-      level: row.level,
+      level: row.options.level,
       isExpandedByDefault: isExpandedRowsByDefault,
     };
 
