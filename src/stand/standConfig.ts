@@ -36,4 +36,13 @@ export const { createStand } = createConfig({
   standPageDecoration,
   repositoryUrl: 'https://github.com/consta-design-system/uikit',
   order: 1,
+  standTabs: [
+    // табы поумолчанию
+    { id: '', label: 'Обзор' },
+    { id: 'dev', label: 'Разработчикам' },
+    { id: 'design', label: 'Дизайнерам', figma: true },
+    { id: 'sandbox', label: 'Песочница', sandbox: true },
+    // свои табы
+    { id: 'use', label: 'Как использовать' },
+  ],
 });
