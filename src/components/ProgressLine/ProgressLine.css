@@ -1,17 +1,6 @@
 .ProgressLine {
   position: relative;
   width: 100%;
-  height: var(--progress-line-height);
-  background: var(--color-bg-system);
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    height: 100%;
-    background-color: var(--color-bg-brand);
-    transition: transform 0.3s;
-  }
 
   &_size {
     &_s {
@@ -25,24 +14,22 @@
 
   &_mode {
     &_step {
-      --progress-line-width-no-gap:
-        calc(
-          100% - calc(calc(var(--progress-line-steps) - 1) * var(--space-3xs))
-        );
-      display: grid;
-      height: auto;
-      background: transparent;
-      grid-template-columns:
-        repeat(
-          var(--progress-line-steps),
-          calc(var(--progress-line-width-no-gap) / var(--progress-line-steps))
-        );
-      grid-gap: var(--space-3xs);
+      display: flex;
+      flex-direction: column;
     }
 
     &_determinate {
+      height: var(--progress-line-height);
+      background: var(--color-bg-system);
+
       &::after {
+        content: '';
+        position: absolute;
+        top: 0;
         width: 100%;
+        height: 100%;
+        background-color: var(--color-bg-brand);
+        transition: transform 0.3s;
         transform: scaleX(var(--progress-line-value));
         transform-origin: left;
       }
@@ -50,9 +37,17 @@
 
     &_indeterminate {
       overflow-x: hidden;
+      height: var(--progress-line-height);
+      background: var(--color-bg-system);
 
       &::after {
+        content: '';
+        position: absolute;
+        top: 0;
         width: 80%;
+        height: 100%;
+        background-color: var(--color-bg-brand);
+        transition: transform 0.3s;
         transform-origin: left;
         animation: ProgressLineAnimation 2s linear infinite;
       }
@@ -66,27 +61,39 @@
   }
 
   &-Line {
-    position: relative;
-    overflow-x: hidden;
-    width: 100%;
-    height: var(--progress-line-height);
-    background: var(--color-bg-system);
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0;
+    &,
+    & rect {
       height: var(--progress-line-height);
-      background: var(--color-bg-brand);
-      transition: width 0.3s linear;
-      transition-delay: var(--progress-line-delay);
     }
 
-    &_active::after {
-      width: 100%;
+    & mask > rect {
+      transition: width 0.3s;
+      fill: var(--color-bg-default);
     }
+
+    & g {
+      fill: var(--color-bg-system);
+
+      &:last-child {
+        fill: var(--color-control-bg-primary);
+      }
+    }
+  }
+
+  &-Steps {
+    --progress-line-width-no-gap:
+      calc(
+        100% - calc(calc(var(--progress-line-steps) - 1) * var(--space-3xs))
+      );
+    display: grid;
+    height: auto;
+    background: transparent;
+    grid-template-columns:
+      repeat(
+        var(--progress-line-steps),
+        calc(var(--progress-line-width-no-gap) / var(--progress-line-steps))
+      );
+    grid-gap: var(--space-3xs);
   }
 
   &-Label {

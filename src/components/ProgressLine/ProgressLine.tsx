@@ -1,29 +1,21 @@
 import './ProgressLine.css';
 
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo, useRef } from 'react';
 
-import { usePrevious } from '../../hooks/usePrevious/usePrevious';
+import { useComponentSize } from '##/hooks/useComponentSize';
+import { useForkRef } from '##/hooks/useForkRef';
+
 import { cn } from '../../utils/bem';
 import { isNotNil } from '../../utils/type-guards';
 import { Text } from '../Text/Text';
-import { getLineDelay, withDefaultGetters } from './helpers';
+import {
+  calculateLinePositions,
+  getProgress,
+  withDefaultGetters,
+} from './helpers';
 import { ProgressLineComponent, ProgressLineProps } from './types';
 
 const cnProgressLine = cn('ProgressLine');
-
-const getProgress = (progress: number) => {
-  const progressNormal = Math.ceil(progress);
-
-  if (progressNormal >= 100) {
-    return 1;
-  }
-
-  if (progressNormal <= 0) {
-    return 0;
-  }
-
-  return progressNormal / 100;
-};
 
 const ProgressLineRender = (
   props: ProgressLineProps,
@@ -38,71 +30,112 @@ const ProgressLineRender = (
     ...otherProps
   } = withDefaultGetters(props);
 
-  const activeIndex = isNotNil(value)
-    ? Math.min(value, steps?.length ?? 0)
-    : -1;
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const prevValue = usePrevious(activeIndex);
+  const { mode, activeIndex } = useMemo(() => {
+    const data = {
+      mode: isNotNil(value) ? 'determinate' : 'indeterminate',
+      activeIndex: isNotNil(value) ? Math.min(value, steps?.length ?? 0) : -1,
+    };
+    if (steps) {
+      data.mode = 'step';
+      if ((value ?? 0) >= steps.length) {
+        data.activeIndex = steps.length - 1;
+      }
+    }
+    return data;
+  }, [steps, value]);
 
-  return !steps ? (
-    <div
-      {...otherProps}
-      ref={ref}
-      style={{
-        ...style,
-        ['--progress-line-value' as string]: `${getProgress(value ?? 0)}`,
-      }}
-      className={cnProgressLine({
-        size,
-        mode: isNotNil(value) ? 'determinate' : 'indeterminate',
-      })}
-    />
-  ) : (
-    <div
-      {...otherProps}
-      style={{
-        ...style,
-        ['--progress-line-steps' as string]: steps.length,
-      }}
-      ref={ref}
-      className={cnProgressLine({
-        size,
-        mode: 'step',
-      })}
-    >
-      {steps.map((item, index) => {
-        const label = getItemLabel(item);
-        const active = activeIndex >= index;
-        const delay = getLineDelay(activeIndex, prevValue ?? -1, index);
-        return (
-          <div
-            key={cnProgressLine('Step', { index })}
-            className={cnProgressLine('Step')}
+  const containerProps = {
+    ...otherProps,
+    ref: useForkRef([ref, containerRef]),
+    className: cnProgressLine({
+      size,
+      mode,
+    }),
+    style: {
+      ...style,
+      ['--progress-line-value' as string]: `${getProgress(value ?? 0)}`,
+      ['--progress-line-steps' as string]: steps?.length,
+    },
+  };
+
+  const { width: containerWidth } = useComponentSize(containerRef);
+
+  const lines = useMemo(
+    () => calculateLinePositions(steps?.length ?? 0, containerWidth),
+    [containerWidth, steps],
+  );
+
+  return (
+    <div {...containerProps}>
+      {steps && (
+        <>
+          <svg
+            className={cnProgressLine('Line')}
+            width={containerWidth}
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <div
-              style={{
-                ['--progress-line-delay' as string]: `${
-                  Math.max(0, delay) * 0.3
-                }s`,
-              }}
-              className={cnProgressLine('Line', {
-                active,
-              })}
-            />
-            {isNotNil(label) && (
-              <Text
-                className={cnProgressLine('Label')}
-                size="2xs"
-                lineHeight="xs"
-                view="secondary"
-                align="center"
-              >
-                {label}
-              </Text>
-            )}
+            <defs>
+              <mask id="Mask">
+                <rect
+                  x="0"
+                  y="0"
+                  width={
+                    lines[activeIndex]
+                      ? lines[activeIndex].x + lines[activeIndex].width
+                      : 0
+                  }
+                />
+              </mask>
+            </defs>
+            <g>
+              {lines.map(({ x, y, width }, index) => (
+                <rect
+                  key={cnProgressLine('Line', { index })}
+                  x={x}
+                  y={y}
+                  width={width}
+                />
+              ))}
+            </g>
+            <g mask="url(#Mask)">
+              {lines.map(({ x, y, width }, index) => (
+                <rect
+                  key={cnProgressLine('Line', { index, active: true })}
+                  x={x}
+                  y={y}
+                  width={width}
+                />
+              ))}
+            </g>
+          </svg>
+          <div className={cnProgressLine('Steps')}>
+            {steps?.map((item, index) => {
+              const label = getItemLabel(item);
+
+              return (
+                <div
+                  key={cnProgressLine('Step', { index })}
+                  className={cnProgressLine('Step')}
+                >
+                  {isNotNil(label) && (
+                    <Text
+                      className={cnProgressLine('Label')}
+                      size="2xs"
+                      lineHeight="xs"
+                      view="secondary"
+                      align="center"
+                    >
+                      {label}
+                    </Text>
+                  )}
+                </div>
+              );
+            })}
           </div>
-        );
-      })}
+        </>
+      )}
     </div>
   );
 };
