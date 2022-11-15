@@ -1,3 +1,5 @@
+import { isNotNil } from '##/utils/type-guards';
+
 type GetKey<ITEM> = (item: ITEM) => string | number;
 
 type GetOnChange<ITEM, EVENT> = (item: ITEM) => (e: EVENT) => void;
@@ -58,7 +60,7 @@ function formatValue<ITEM>(
   multiple?: boolean,
 ) {
   const valueByKey: FormatedItems<ITEM> = {};
-  if (!valueProp) {
+  if (!isNotNil(valueProp) && !Array.isArray(valueProp)) {
     return valueByKey;
   }
   const value = multiple ? (valueProp as ITEM[]) : [valueProp as ITEM];
