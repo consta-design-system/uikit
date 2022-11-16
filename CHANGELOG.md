@@ -1,5 +1,26 @@
 # Changelog
 
+## v4.3.0 (16/11/2022)
+Самое важное:
+- В `Collapse` в заголовок теперь можно передавать `ReactNode`
+- В `SnackBar` появилась модификация `form`
+- Доработана документация
+- Исправлено несколько багов
+
+---
+
+- [feat(Collapse): rewrite label from string to ReactNode (#2733)](https://github.com/consta-design-system/uikit/commit/c68de442c6f49da5dba1410d526170ab0e3fcb63) - [@N1MBER](https://github.com/N1MBER)
+- [fix(DateTime): fix padding for date-time view (#2748)](https://github.com/consta-design-system/uikit/commit/e916000929af021438058f05d2c7008d434fdbc4) - [@N1MBER](https://github.com/N1MBER)
+- [feat(docs): add new tab (#2758)](https://github.com/consta-design-system/uikit/commit/24735054e19c9a25ed7699a47cd2e97f98f7ec3c) - [@gizeasy](https://github.com/gizeasy)
+- [feat(SnackBar): add prop form (#2730)](https://github.com/consta-design-system/uikit/commit/dea0b8ddb1fac2054286e1ee8ec6f161e56a2562) - [@N1MBER](https://github.com/N1MBER)
+- [fix(Table): fix 'level' accessor (#2732)](https://github.com/consta-design-system/uikit/commit/d2ac4002939a98e1f7cded31f372f93a1eaec023) - [@N1MBER](https://github.com/N1MBER)
+- [docs(review): add images (#2735)](https://github.com/consta-design-system/uikit/commit/daae59b7d130faeca7f7da7ee1f6ffa442994857) - [@arhayka](https://github.com/arhayka)
+- [fix(useChoiceGroup): fix bug with false type variable (#2746)](https://github.com/consta-design-system/uikit/commit/2ab5c307a3f390dd1f1da6b9a91eae7a30d9de7d) - [@N1MBER](https://github.com/N1MBER)
+- [fix(Text): fix quotes in the examples (#2747)](https://github.com/consta-design-system/uikit/commit/31becf53273706cf4301d1e11ccc6a91559ff73f) - [@N1MBER](https://github.com/N1MBER)
+- [docs: rm articles, links, version (#2725)](https://github.com/consta-design-system/uikit/commit/d3d9460984efaf3e7fb72ab9b08a8bc716103a37) - [@arhayka](https://github.com/arhayka)
+
+--------------------
+
 ## v4.2.2 (02/11/2022)
 Самое важное:
 - Добавлена поддержка иконок из `@consta/icons`
@@ -442,21 +463,3 @@ endFieldOnBlur - deleted, use onBlur
 - [fix(Radio): add new prop inputId to Checkbox and Radio (#2142)](https://github.com/consta-design-system/uikit/commit/6df6e9ff87b9851ea95b8117b25bdac28a12c9fa) - [@N1MBER](https://github.com/N1MBER)
 - [feat(EventInterceptor): connect other components to EventInterceptor (#2137)](https://github.com/consta-design-system/uikit/commit/37eb2f5dd0e2350a0e97e7f01c4585b9b9fed005) - [@N1MBER](https://github.com/N1MBER)
 - [fix(ThemeToggler): add reexport types (#2145)](https://github.com/consta-design-system/uikit/commit/fd266c2085a949f19e3af998ecf869fa6e2ba671) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v3.18.0 (16/03/2022)
-Самое важное:
-- Выпустили обновленный `ContextMenu` (с флагом `Canary`) — добавлена  анимация появления и геттеры теперь не обязательны.
-- Сделали миксин `MixPopoverArrow` для добавления уголка к всплывающим окнам
-- В `ThemeToggler` геттеры теперь не обязательны
-- В `EventInterceptor` появилась возможность подписаться на события компонентов `Tag` и `Card`
-
----
-
-- [ feat(ContextMenuCanary): rewrited and updated ContextMenu (#2079)](https://github.com/consta-design-system/uikit/commit/c37e9efe64e7b2927a180425a98f419c8b295d42) - [@N1MBER](https://github.com/N1MBER)
-- [ feat(EventInterceptor): add Tag and Card to EventInterceptor (#2128)](https://github.com/consta-design-system/uikit/commit/ffcbe2badd8896e1523aa0a5dbd4a9e883988f0c) - [@N1MBER](https://github.com/N1MBER)
-- [feat(MixPopoverArrow): add new mixin (#2129)](https://github.com/consta-design-system/uikit/commit/d2012783bce6c887cebf0dd68d5998bc4551fba2) - [@N1MBER](https://github.com/N1MBER)
-- [feat(ThemeToggler): rewrite examples, doc and component with getters (#2105)](https://github.com/consta-design-system/uikit/commit/daec7b0a6625b678979808701ffdafe58e94be5d) - [@N1MBER](https://github.com/N1MBER)
-- [chore(CODEOWNERS): edit (#2135)](https://github.com/consta-design-system/uikit/commit/e00ed728e7a6f44622c08f3460b2da155d87c7d8) - [@gizeasy](https://github.com/gizeasy)
-- [docs(principles): add doc (#2104)](https://github.com/consta-design-system/uikit/commit/8843535c6a2ad6ecebc1b41c19a020ccaae6a42c) - [@arhayka](https://github.com/arhayka)
