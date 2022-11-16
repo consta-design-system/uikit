@@ -3,91 +3,25 @@ import './Collapse.css';
 import React, { useRef } from 'react';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
-import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
+import { IconPropSize } from '../../icons/Icon/Icon';
 import { IconArrowDown } from '../../icons/IconArrowDown/IconArrowDown';
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
-import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { Text } from '../Text/Text';
+import { CollapseIcon } from './CollapseIcon/CollapseIcon';
 import {
-  CollapseIcon,
-  CollapseIconPropDirection,
-  collapseIconPropDirection,
-} from './CollapseIcon/CollapseIcon';
-
-export const collapsePropSize = ['m', 'l', 's', 'xs', '2xs'] as const;
-export type CollapsePropSize = typeof collapsePropSize[number];
-export const collapsePropSizeDefault = collapsePropSize[0];
-
-export const collapsePropView = ['primary', 'secondary'] as const;
-export type CollapsePropView = typeof collapsePropView[number];
-export const collapsePropViewDefault = collapsePropView[0];
-
-export const collapsePropHorizontalSpace = [
-  '3xs',
-  '6xl',
-  '5xl',
-  '4xl',
-  '3xl',
-  '2xl',
-  'xl',
-  'l',
-  'm',
-  's',
-  'xs',
-  '2xs',
-] as const;
-export type CollapsePropHorizontalSpace =
-  typeof collapsePropHorizontalSpace[number];
-
-export const collapsePropIconPosition = ['left', 'right'] as const;
-export type CollapsePropIconPosition = typeof collapsePropIconPosition[number];
-export const collapsePropIconPositionDefault = collapsePropIconPosition[0];
-
-export const collapsePropDirectionIcon = collapseIconPropDirection;
-export const collapsePropDirectionIconDefault = collapsePropDirectionIcon[0];
-export const collapsePropCloseDirectionIconDefault =
-  collapsePropDirectionIcon[2];
+  CollapseComponent,
+  collapsePropCloseDirectionIconDefault,
+  collapsePropDirectionIconDefault,
+  collapsePropIconPositionDefault,
+  CollapseProps,
+  CollapsePropSize,
+  collapsePropSizeDefault,
+  collapsePropViewDefault,
+} from './types';
 
 export const COMPONENT_NAME = 'Collapse' as const;
-
-type CollapseProps = PropsWithHTMLAttributesAndRef<
-  {
-    size?: CollapsePropSize;
-    icon?: IconComponent;
-    view?: CollapsePropView;
-    divider?: boolean;
-    label: string;
-    horizontalSpace?: CollapsePropHorizontalSpace;
-    hoverEffect?: boolean;
-    isOpen?: boolean;
-  } & (
-    | {
-        closeIcon?: IconComponent;
-        directionIcon?: never;
-        closeDirectionIcon?: never;
-      }
-    | {
-        closeIcon?: never;
-        directionIcon?: CollapseIconPropDirection;
-        closeDirectionIcon?: CollapseIconPropDirection;
-      }
-  ) &
-    (
-      | {
-          iconPosition?: 'left';
-          rightSide?: React.ReactNode;
-        }
-      | {
-          iconPosition?: 'right';
-          rightSide?: never;
-        }
-    ),
-  HTMLDivElement
->;
-
-type Collapse = (props: CollapseProps) => React.ReactElement | null;
 
 export const cnCollapse = cn('Collapse');
 
@@ -109,7 +43,7 @@ function renderSide(side: React.ReactNode): React.ReactNode {
   ));
 }
 
-export const Collapse: Collapse = React.forwardRef<
+export const Collapse: CollapseComponent = React.forwardRef<
   HTMLDivElement,
   CollapseProps
 >((props, ref) => {
@@ -157,9 +91,13 @@ export const Collapse: Collapse = React.forwardRef<
           direction={directionIcon}
           closeDirection={closeDirectionIcon}
         />
-        <Text className={cnCollapse('LabelText')} view={view} size={size}>
-          {label}
-        </Text>
+        {typeof label === 'object' ? (
+          <div className={cnCollapse('LabelText')}>{label}</div>
+        ) : (
+          <Text className={cnCollapse('LabelText')} view={view} size={size}>
+            {label}
+          </Text>
+        )}
         {iconPosition === 'left' && renderSide(rightSide)}
       </div>
       <div className={cnCollapse('Body', { isOpen, divider })}>
@@ -168,3 +106,5 @@ export const Collapse: Collapse = React.forwardRef<
     </div>
   );
 });
+
+export * from './types';
