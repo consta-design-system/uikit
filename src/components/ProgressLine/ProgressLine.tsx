@@ -10,6 +10,7 @@ import { isNotNil } from '../../utils/type-guards';
 import { Text } from '../Text/Text';
 import {
   calculateLinePositions,
+  generateMask,
   getProgress,
   withDefaultGetters,
 } from './helpers';
@@ -31,6 +32,13 @@ const ProgressLineRender = (
   } = withDefaultGetters(props);
 
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const { width: containerWidth } = useComponentSize(containerRef);
+
+  const lines = useMemo(
+    () => calculateLinePositions(steps?.length ?? 0, containerWidth),
+    [containerWidth, steps],
+  );
 
   const { mode, activeIndex } = useMemo(() => {
     const data = {
@@ -57,84 +65,43 @@ const ProgressLineRender = (
       ...style,
       ['--progress-line-value' as string]: `${getProgress(value ?? 0)}`,
       ['--progress-line-steps' as string]: steps?.length,
+      ['--progress-line-background-active-width' as string]: `${
+        lines?.[activeIndex]
+          ? lines[activeIndex].x + lines[activeIndex].width
+          : 0
+      }px`,
+      ['--progress-line-background-steps' as string]: lines.length
+        ? generateMask(lines)
+        : '',
     },
   };
-
-  const { width: containerWidth } = useComponentSize(containerRef);
-
-  const lines = useMemo(
-    () => calculateLinePositions(steps?.length ?? 0, containerWidth),
-    [containerWidth, steps],
-  );
 
   return (
     <div {...containerProps}>
       {steps && (
-        <>
-          <svg
-            className={cnProgressLine('Line')}
-            width={containerWidth}
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <defs>
-              <mask id="Mask">
-                <rect
-                  x="0"
-                  y="0"
-                  width={
-                    lines[activeIndex]
-                      ? lines[activeIndex].x + lines[activeIndex].width
-                      : 0
-                  }
-                />
-              </mask>
-            </defs>
-            <g>
-              {lines.map(({ x, y, width }, index) => (
-                <rect
-                  key={cnProgressLine('Line', { index })}
-                  x={x}
-                  y={y}
-                  width={width}
-                />
-              ))}
-            </g>
-            <g mask="url(#Mask)">
-              {lines.map(({ x, y, width }, index) => (
-                <rect
-                  key={cnProgressLine('Line', { index, active: true })}
-                  x={x}
-                  y={y}
-                  width={width}
-                />
-              ))}
-            </g>
-          </svg>
-          <div className={cnProgressLine('Steps')}>
-            {steps?.map((item, index) => {
-              const label = getItemLabel(item);
-
-              return (
-                <div
-                  key={cnProgressLine('Step', { index })}
-                  className={cnProgressLine('Step')}
-                >
-                  {isNotNil(label) && (
-                    <Text
-                      className={cnProgressLine('Label')}
-                      size="2xs"
-                      lineHeight="xs"
-                      view="secondary"
-                      align="center"
-                    >
-                      {label}
-                    </Text>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </>
+        <div className={cnProgressLine('Steps')}>
+          {steps?.map((item, index) => {
+            const label = getItemLabel(item);
+            return (
+              <div
+                key={cnProgressLine('Step', { index })}
+                className={cnProgressLine('Step')}
+              >
+                {isNotNil(label) && (
+                  <Text
+                    className={cnProgressLine('Label')}
+                    size="2xs"
+                    lineHeight="xs"
+                    view="secondary"
+                    align="center"
+                  >
+                    {label}
+                  </Text>
+                )}
+              </div>
+            );
+          })}
+        </div>
       )}
     </div>
   );

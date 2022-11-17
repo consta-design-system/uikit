@@ -1,3 +1,5 @@
+import { generateSvgMask } from '##/utils/generateMask';
+
 import {
   ProgressLineItemDefault,
   ProgressLinePropGetItemLabel,
@@ -38,7 +40,7 @@ type ProgressLineSvgItem = {
 export const calculateLinePositions = (
   steps: number,
   containerWidth: number,
-) => {
+): ProgressLineSvgItem[] => {
   const lines: ProgressLineSvgItem[] = [];
   const gap = 2;
   const widthWithoutGap = Math.max(containerWidth - (steps - 1) * gap, 0);
@@ -53,4 +55,19 @@ export const calculateLinePositions = (
     padding += lineWidth + gap;
   }
   return lines;
+};
+
+export const generateMask = (lines: ProgressLineSvgItem[]): string => {
+  const { length } = lines;
+  if (length > 0) {
+    const width = lines[length - 1].x + lines[length - 1].width;
+    let svg = `<svg width='${width}px' height='4px' xmlns='http://www.w3.org/2000/svg'>`;
+    for (let index = 0; index < length; index++) {
+      const { x, width, y } = lines[index];
+      svg += `<rect x='${x}px' y='${y}px' height='4px' width='${width}px' />`;
+    }
+    svg += '</svg>';
+    return generateSvgMask(svg);
+  }
+  return '';
 };

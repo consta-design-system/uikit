@@ -12,10 +12,33 @@
     }
   }
 
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+  }
+
   &_mode {
     &_step {
-      display: flex;
-      flex-direction: column;
+      min-height: var(--progress-line-height);
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: var(--progress-line-height);
+        background: var(--color-bg-system);
+        mask-image: var(--progress-line-background-steps);
+      }
+
+      &::after {
+        width: var(--progress-line-background-active-width);
+        height: var(--progress-line-height);
+        background: var(--color-control-bg-primary);
+        transition: width 0.3s;
+        mask-image: var(--progress-line-background-steps);
+      }
     }
 
     &_determinate {
@@ -23,9 +46,6 @@
       background: var(--color-bg-system);
 
       &::after {
-        content: '';
-        position: absolute;
-        top: 0;
         width: 100%;
         height: 100%;
         background-color: var(--color-bg-brand);
@@ -41,9 +61,6 @@
       background: var(--color-bg-system);
 
       &::after {
-        content: '';
-        position: absolute;
-        top: 0;
         width: 80%;
         height: 100%;
         background-color: var(--color-bg-brand);
@@ -60,26 +77,6 @@
     justify-content: flex-start;
   }
 
-  &-Line {
-    &,
-    & rect {
-      height: var(--progress-line-height);
-    }
-
-    & mask > rect {
-      transition: width 0.3s;
-      fill: var(--color-bg-default);
-    }
-
-    & g {
-      fill: var(--color-bg-system);
-
-      &:last-child {
-        fill: var(--color-control-bg-primary);
-      }
-    }
-  }
-
   &-Steps {
     --progress-line-width-no-gap:
       calc(
@@ -87,6 +84,7 @@
       );
     display: grid;
     height: auto;
+    margin-top: var(--progress-line-height);
     background: transparent;
     grid-template-columns:
       repeat(
