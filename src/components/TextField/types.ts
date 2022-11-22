@@ -4,7 +4,9 @@ import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
 import { AutoCompete } from '../../utils/types/AutoComplete';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
-export type TextFieldPropValue = string | null;
+export type TextFieldPropValue<TYPE extends string> =
+  | null
+  | (TYPE extends 'number' ? number : string);
 export type TextFieldPropName = string;
 export type TextFieldPropId = string | number;
 
@@ -12,12 +14,14 @@ export const textFieldPropSize = ['m', 'xs', 's', 'l'] as const;
 export type TextFieldPropSize = typeof textFieldPropSize[number];
 export const textFieldPropSizeDefault: TextFieldPropSize = textFieldPropSize[0];
 
-export type TextFieldPropOnChange = (args: TextFieldOnChangeArguments) => void;
-export type TextFieldOnChangeArguments = {
+export type TextFieldPropOnChange<TYPE extends string> = (
+  args: TextFieldOnChangeArguments<TYPE>,
+) => void;
+export type TextFieldOnChangeArguments<TYPE extends string> = {
   e: React.ChangeEvent | React.MouseEvent | React.KeyboardEvent;
   id?: TextFieldPropId;
   name?: TextFieldPropName;
-  value: TextFieldPropValue;
+  value: TextFieldPropValue<TYPE>;
 };
 
 export const textFieldPropView = ['default', 'clear'] as const;
@@ -82,9 +86,9 @@ export type TextFieldPropRightSide<TYPE extends string> = TYPE extends
 export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
   {
     className?: string;
-    value?: TextFieldPropValue;
+    value?: TextFieldPropValue<TYPE>;
     cols?: number;
-    onChange?: TextFieldPropOnChange;
+    onChange?: TextFieldPropOnChange<TYPE>;
     id?: TextFieldPropId;
     name?: TextFieldPropName;
     type?: TYPE;

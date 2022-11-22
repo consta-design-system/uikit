@@ -6,21 +6,21 @@ import {
   TextField,
   textFieldPropForm,
   textFieldPropFormDefault,
+  TextFieldPropOnChange,
   textFieldPropSize,
   textFieldPropSizeDefault,
   textFieldPropStatus,
+  TextFieldPropValue,
   textFieldPropView,
   textFieldPropViewDefault,
   textFieldPropWidth,
   textFieldPropWidthDefault,
 } from '../TextField';
 
+const types = ['text', 'number', 'textarea', 'password'] as const;
+
 const Variants = () => {
-  const type = useSelect(
-    'type',
-    ['text', 'number', 'textarea', 'password'],
-    'text',
-  );
+  const type = useSelect('type', types, 'text');
   const minRows = useNumber('minRows', 1, type === 'textarea');
   const maxRows = useNumber('maxRows', 5, type === 'textarea');
   const step = useNumber('step', 1, type === 'number');
@@ -55,7 +55,8 @@ const Variants = () => {
   const rightSideType = useSelect('rightSideType', ['icon', 'text']);
   const rightSideText = useText('rightSideText', 'm²');
 
-  const [value, setValue] = useState<string | null | undefined>(undefined);
+  const [value, setValue] =
+    useState<TextFieldPropValue<typeof types[number]>>(null);
 
   const leftSideSelect = {
     text: leftSideText,
@@ -73,7 +74,9 @@ const Variants = () => {
   const leftSide = leftSideType && leftSideSelect[leftSideType];
   const rightSide = rightSideType && rightSideSelect[rightSideType];
 
-  const handleChange = ({ value }: { value: string | null }) => {
+  const handleChange: TextFieldPropOnChange<typeof types[number]> = ({
+    value,
+  }) => {
     setValue(value);
   };
 

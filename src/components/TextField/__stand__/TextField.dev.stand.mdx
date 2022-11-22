@@ -122,8 +122,8 @@ export const TextFieldExampleTypeTextarea = () => {
 
 ```tsx
 export const TextFieldExampleTypeNumber = () => {
-  const [value, setValue] = useState<string | null>(null);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
+  const [value, setValue] = useState<number | null>(null);
+  const handleChange = ({ value }: { value: number | null }) => setValue(value);
 
   return (
     <TextField
@@ -244,8 +244,8 @@ const App = () => {
 
 ```tsx
 export const TextFieldExampleStepArray = () => {
-  const [value, setValue] = useState<string | null>(null);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
+  const [value, setValue] = useState<number | null>(null);
+  const handleChange = ({ value }: { value: number | null }) => setValue(value);
 
   return (
     <TextField
@@ -266,8 +266,8 @@ export const TextFieldExampleStepArray = () => {
 
 ```tsx
 export const TextFieldExampleIncrementButtons = () => {
-  const [value, setValue] = useState<string | null>(null);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
+  const [value, setValue] = useState<number | null>(null);
+  const handleChange = ({ value }: { value: number | null }) => setValue(value);
 
   return (
     <TextField
@@ -472,7 +472,7 @@ import { TextField } from '@consta/uikit/TextField';
 | [`form?`](#форма)                                     | `'default', 'brick', 'round', 'clearRound', 'roundClear', 'clearDefault', 'defaultClear', 'defaultBrick', 'brickDefault', 'brickClear', 'clearBrick', 'clearClear'`, | `'default'`  | Форма поля                                                                                                                                   |
 | [`leftSide?`](#дополнительная-информация)             | `IconComponent, string`                                                                                                                                              | -            | Иконка или текст слева, внутри поля                                                                                                          |
 | [`rightSide?`](#дополнительная-информация)            | `IconComponent, string`                                                                                                                                              | -            | Иконка или текст справа, внутри поля. Не работает с `type='number'`                                                                          |
-| [`value?`](#значение)                                 | `string`, `null`                                                                                                                                                     | -            | Предустановленное значение в поле                                                                                                            |
+| [`value?`](#значение)                                 | `number`, `string`, `null`                                                                                                                                           | -            | Предустановленное значение в поле (при `type='number'` поле принимает тип `number`)                                                          |
 | [`placeholder?`](#подсказка)                          | `string`                                                                                                                                                             | -            | Подсказка внутри поля                                                                                                                        |
 | `id?`                                                 | `string`                                                                                                                                                             | -            | ID поля в DOM                                                                                                                                |
 | `name?`                                               | `string`                                                                                                                                                             | -            | Имя поля в DOM                                                                                                                               |

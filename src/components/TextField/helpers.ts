@@ -102,9 +102,7 @@ export const getValueByStep = (
   min?: number | string,
   max?: number | string,
 ) => {
-  return (
-    Array.isArray(steps)
-      ? getValueByStepArray(steps, value, min, max, isIncrement)
-      : getValueByStepNumber(steps, value, min, max, isIncrement)
-  ).toString();
+  return Array.isArray(steps)
+    ? getValueByStepArray(steps, value, min, max, isIncrement)
+    : getValueByStepNumber(steps, value, min, max, isIncrement);
 };

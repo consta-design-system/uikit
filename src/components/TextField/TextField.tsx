@@ -29,6 +29,7 @@ import {
   textFieldPropFormDefault,
   TextFieldProps,
   textFieldPropSizeDefault,
+  TextFieldPropValue,
   textFieldPropViewDefault,
   textFieldPropWidthDefault,
 } from './types';
@@ -128,10 +129,17 @@ export const TextFieldRender = <TYPE extends string>(
     HTMLInputElement | HTMLTextAreaElement
   > = useCallback(
     (e) => {
+      const { value } = e.target;
       !disabled &&
-        onChangeRef.current?.({ e, id, name, value: e.target.value || null });
+        onChangeRef.current?.({
+          e,
+          id,
+          name,
+          value: ((type === 'number' ? Number(value) : value) ??
+            null) as TextFieldPropValue<TYPE>,
+        });
     },
-    [id, name, disabled],
+    [id, name, disabled, type],
   );
 
   const handleBlur: React.FocusEventHandler<HTMLElement> = (e) => {
@@ -176,7 +184,13 @@ export const TextFieldRender = <TYPE extends string>(
       e.preventDefault();
       onChange?.({
         e,
-        value: getValueByStep(sortedSteps, value, flag, min, max),
+        value: getValueByStep(
+          sortedSteps,
+          value,
+          flag,
+          min,
+          max,
+        ) as TextFieldPropValue<TYPE>,
       });
     }
   };
@@ -216,7 +230,13 @@ export const TextFieldRender = <TYPE extends string>(
   ) => {
     onChange?.({
       e,
-      value: getValueByStep(sortedSteps, value, isIncrement, min, max),
+      value: getValueByStep(
+        sortedSteps,
+        value,
+        isIncrement,
+        min,
+        max,
+      ) as TextFieldPropValue<TYPE>,
     });
   };
 
@@ -305,7 +325,7 @@ export const TextFieldRender = <TYPE extends string>(
             </div>
           )}
 
-          {value && withClearButton && type !== 'number' && (
+          {typeof value === 'string' && withClearButton && type !== 'number' && (
             <button
               type="button"
               disabled={disabled}
@@ -316,7 +336,7 @@ export const TextFieldRender = <TYPE extends string>(
             </button>
           )}
 
-          {type === 'password' && value && (
+          {type === 'password' && typeof value === 'string' && (
             <button
               className={cnTextField('ClearButton')}
               type="button"

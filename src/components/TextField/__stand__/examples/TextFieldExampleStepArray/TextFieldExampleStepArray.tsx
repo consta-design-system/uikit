@@ -4,8 +4,8 @@ import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExamp
 import { TextField } from '../../../TextField';
 
 export const TextFieldExampleStepArray = () => {
-  const [value, setValue] = useState<string | undefined | null>(undefined);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
+  const [value, setValue] = useState<number | null>(null);
+  const handleChange = ({ value }: { value: number | null }) => setValue(value);
 
   return (
     <StoryBookExample>
