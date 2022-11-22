@@ -28,6 +28,7 @@ import { TableExampleMerge } from './examples/TableExampleMerge/TableExampleMerg
 import { TableExampleSort } from './examples/TableExampleSort/TableExampleSort';
 import { TableExampleOnSortBy } from './examples/TableExampleOnSortBy/TableExampleOnSortBy';
 import { TableExampleExpandable } from './examples/TableExampleExpandable/TableExampleExpandable';
+import { TableExampleRowSpan } from './examples/TableExampleRowSpan/TableExampleRowSpan';
 
 ```tsx
 import { Table } from '@consta/uikit/Table';
@@ -43,7 +44,9 @@ import { Table } from '@consta/uikit/Table';
   - [Зафиксированная колонка](#зафиксированная-колонка)
   - [Зафиксированный заголовок](#зафиксированный-заголовок)
   - [Скрытая колонка](#скрытая-колонка)
-  - [Объединение ячеек в колонке](#объединение-ячеек)
+  - [Объединение ячеек](#объединение-ячеек)
+    - [По вертикали](#по-вертикали)
+    - [По горизонтали](#по-горизонтали)
   - [Рендер ячеек](#рендер-ячеек)
   - [Перенос текста в ячейке](#перенос-текста-в-ячейке)
   - [Развернутые строки](#развернутые-строки)
@@ -236,6 +239,8 @@ const columns: TableColumn<typeof rows[number]>[] = [
 
 ### Объединение ячеек
 
+#### По вертикали
+
 Чтобы объединить одинаковые ячейки в колонке, добавьте в объект с описанием колонки
 `mergeCells: true`.
 Ячейки в соседних строках, друг под другом, объединятся,
@@ -264,6 +269,92 @@ const columns: TableColumn<typeof rows[number]>[] = [
 ```
 
 <TableExampleMerge />
+
+#### По горизонтали
+
+Чтобы объядинить ячейки по горизонатали не обходимо задать число колонок или функцию оопределения размера в описании колонки `сolSpan: 2`.
+Соседние ячейки слева направо будут объединятся.
+
+```tsx
+const rowsWithColSpan = [
+  {
+    id: 'row1',
+    name: 'Граждане',
+    street: undefined,
+    building: undefined,
+    age: undefined,
+    number: undefined,
+    gender: undefined,
+    rows: [
+      {
+        id: 'row1.1',
+        name: 'Иван',
+        street: 'ул. Мира',
+        building: 1,
+        age: 32,
+        number: 2033,
+        gender: 'муж.',
+      },
+      {
+        id: 'row1.2',
+        name: 'Анна',
+        age: 40,
+        street: 'пл. Ленина',
+        building: 3,
+        number: 2035,
+        gender: 'жен.',
+      },
+    ],
+  },
+];
+
+const withColSpan: TableProps<typeof rowsWithColSpan[number]> = {
+  columns: [
+    {
+      title: 'Имя',
+      accessor: 'name',
+      align: 'left',
+      width: 150,
+    },
+    {
+      title: 'Возраст',
+      accessor: 'age',
+      align: 'center',
+      renderCell: (row) => (row.rows ? '> 30' : row.age),
+    },
+    {
+      title: 'Адрес',
+      columns: [
+        {
+          title: 'Улица',
+          accessor: 'street',
+          align: 'left',
+          colSpan: (row) => (row.rows ? 3 : 1),
+          renderCell: (row) => (row.rows ? 'Ленинский район' : row.street),
+        },
+        {
+          title: 'Дом',
+          accessor: 'building',
+          align: 'center',
+        },
+        {
+          title: 'Квартира',
+          accessor: 'number',
+          align: 'center',
+        },
+      ],
+    },
+    {
+      title: 'Пол',
+      accessor: 'gender',
+      align: 'left',
+    },
+  ],
+  rows: rowsWithColSpan,
+};
+```
+
+<TableExampleRowSpan />
 
 Если в ваших ячейках **нестандартные данные** или вам нужно как-то иначе их сравнивать (например, сравнить строки с разным регистром), вы можете использовать колбэк `getComparisonValue`.
 Он принимает значение текущей ячейки и возвращает строку или число, по которым можно провести сравнение.
@@ -1457,6 +1548,7 @@ type Column = {
   withoutPadding?: boolean;
   width?: number;
   sortable?: boolean;
+  colSpan?: number | ((row: T) => number);
   sortByField?: string;
   sortFn?: (a: FieldValue, b: FieldValue) => number;
   renderCell?: (row: Row) => React.ReactNode;

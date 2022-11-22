@@ -13,6 +13,7 @@ import { TableVariantWithBagde } from './variants/TableVariantWithBagde/TableVar
 import { TableVariantWithBigData } from './variants/TableVariantWithBigData/TableVariantWithBigData';
 import { TableVariantWithCheckboxHeader } from './variants/TableVariantWithCheckboxHeader/TableVariantWithCheckboxHeader';
 import { TableVariantWithCollapcingRows } from './variants/TableVariantWithCollapcingRows/TableVariantWithCollapcingRows';
+import { TableVariantWithColSpan } from './variants/TableVariantWithColSpan/TableVariantWithColSpan';
 import { TableVariantWithCustomFilters } from './variants/TableVariantWithCustomFilters/TableVariantWithCustomFilters';
 import { TableVariantWithCustomRowsPlaceholder } from './variants/TableVariantWithCustomRowsPlaceholder/TableVariantWithCustomRowsPlaceholder';
 import { TableVariantWithCustomTagLabelFunction } from './variants/TableVariantWithCustomTagLabelFunction/TableVariantWithCustomTagLabelFunction';
@@ -53,6 +54,7 @@ export const variantTypes = [
   'с дополнительным элементом в заголовке',
   'с обработкой клика по ячейке',
   'со скрытыми колонками',
+  'с объединеными по горизонтали ячейками',
 ] as const;
 
 const Variants = () => {
@@ -140,6 +142,10 @@ const Variants = () => {
 
   if (type === 'с обработкой клика по ячейке') {
     return <TableVariantWithHandleCellClickExample />;
+  }
+
+  if (type === 'с объединеными по горизонтали ячейками') {
+    return <TableVariantWithColSpan />;
   }
 
   return <TableVariantWithHiddenColumn />;
