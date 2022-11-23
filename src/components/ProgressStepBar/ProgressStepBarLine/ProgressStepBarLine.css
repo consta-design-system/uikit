@@ -63,4 +63,10 @@
     background: var(--color-bg-system);
     transition: left 0.3s, top 0.3s;
   }
+
+  &-Svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 }

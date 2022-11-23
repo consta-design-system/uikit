@@ -9,14 +9,15 @@ import React, {
   useState,
 } from 'react';
 
-import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
-import { useForkRef } from '../../hooks/useForkRef/useForkRef';
-import { useOverflow } from '../../hooks/useOverflow/useOverflow';
-import { useScrollElements } from '../../hooks/useScrollElements/useScrollElements';
-import { IconArrowLeft } from '../../icons/IconArrowLeft/IconArrowLeft';
-import { IconArrowRight } from '../../icons/IconArrowRight/IconArrowRight';
-import { Button } from '../Button/Button';
-import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
+import { Button } from '##/components/Button';
+import { usePropsHandler } from '##/components/EventInterceptor/usePropsHandler';
+import { useComponentSize } from '##/hooks/useComponentSize';
+import { useForkRef } from '##/hooks/useForkRef';
+import { useOverflow } from '##/hooks/useOverflow';
+import { useScrollElements } from '##/hooks/useScrollElements';
+import { IconArrowLeft } from '##/icons/IconArrowLeft';
+import { IconArrowRight } from '##/icons/IconArrowRight';
+
 import {
   cnProgressStepBar,
   DefaultItem,
@@ -60,7 +61,6 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), containerRef);
 
-  const [lines, setLines] = useState<Line[]>([]);
   const [visibleIndex, setVisibleIndex] = useState<number>(
     activeStepIndex || 0,
   );
@@ -79,18 +79,17 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
     [steps.length],
   );
 
-  useEffect(() => {
-    if (steps.length > 0) {
-      const linesArray: Line[] = [];
-      steps.forEach((step, index) => {
-        if (index !== steps.length - 1)
-          linesArray.push({
-            status: getItemLineStatus(step) || 'normal',
-            size: getLineSize(containerRef, stepsRef[index + 1], direction),
-          });
-      });
-      setLines(linesArray);
-    }
+  const lines = useMemo(() => {
+    const linesArray: Line[] = [];
+    steps.forEach((step, index) => {
+      if (index !== steps.length - 1)
+        linesArray.push({
+          status: getItemLineStatus(step) || 'normal',
+          size: getLineSize(containerRef, stepsRef[index + 1], direction),
+        });
+    });
+
+    return linesArray;
   }, [activeStepIndex, steps, direction, size, width, height]);
 
   useEffect(() => {

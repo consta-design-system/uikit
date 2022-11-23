@@ -41,6 +41,34 @@ const stepsExample = [
     lineStatus: 'normal',
     tooltipContent: `Небольшое описание выполнения или состояния текущего этапа`,
   },
+  {
+    label: 'Четвертый пункт',
+    point: 5,
+    status: 'normal',
+    lineStatus: 'normal',
+    tooltipContent: `Небольшое описание выполнения или состояния текущего этапа`,
+  },
+  {
+    label: 'Четвертый пункт Четвертый пункт Четвертый пункт',
+    point: 6,
+    status: 'normal',
+    lineStatus: 'normal',
+    tooltipContent: `Небольшое описание выполнения или состояния текущего этапа`,
+  },
+  {
+    label: 'Четвертый пункт Четвертый пункт Четвертый пункт Четвертый пункт',
+    point: 7,
+    status: 'normal',
+    lineStatus: 'normal',
+    tooltipContent: `Небольшое описание выполнения или состояния текущего этапа`,
+  },
+  {
+    label: 'Четвертый пункт',
+    point: 8,
+    status: 'normal',
+    lineStatus: 'normal',
+    tooltipContent: `Небольшое описание выполнения или состояния текущего этапа`,
+  },
 ];
 
 const Variants = () => {

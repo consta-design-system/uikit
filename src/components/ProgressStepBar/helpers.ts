@@ -173,6 +173,7 @@ export const getLineSize: (
   ) {
     const containerPosition = container.current.getBoundingClientRect();
     const activeElementPosition = activeElement.current.getBoundingClientRect();
+
     if (direction === 'vertical')
       size =
         activeElementPosition.y -
@@ -180,5 +181,6 @@ export const getLineSize: (
         activeElementPosition.height;
     else size = activeElementPosition.x - containerPosition.x;
   }
+
   return size;
 };

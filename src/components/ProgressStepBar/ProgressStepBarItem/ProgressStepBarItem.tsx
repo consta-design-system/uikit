@@ -155,6 +155,7 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent =
                 ? possibleHorizontalDirections
                 : possibleVerticalDirections
             }
+            isInteractive={false}
           >
             {tooltipContent}
           </Tooltip>

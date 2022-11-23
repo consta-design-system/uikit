@@ -3,8 +3,7 @@ import './ProgressStepBarLine.css';
 import React from 'react';
 
 import { cn } from '../../../utils/bem';
-import { getByMap } from '../../../utils/getByMap';
-import { Line, PropDirection, PropSize, PropStatus } from '../helpers';
+import { Line, PropDirection, PropSize } from '../helpers';
 
 type ProgressStepBarLineProps = {
   lines: Line[];
@@ -14,33 +13,6 @@ type ProgressStepBarLineProps = {
 };
 
 const cnProgressStepBarLine = cn('ProgressStepBarLine');
-
-const mapVarsByStatus: Record<PropStatus, string> = {
-  normal: 'var(--color-bg-normal)',
-  success: 'var(--color-bg-success)',
-  warning: 'var(--color-bg-warning)',
-  alert: 'var(--color-bg-alert)',
-};
-
-const backgroundGenerate = (lines: Line[], direction: PropDirection) => {
-  let background = `linear-gradient(${
-    direction === 'horizontal' ? '90' : '180'
-  }deg, `;
-
-  const { length } = lines;
-
-  for (let index = 0; index < length; index++) {
-    const line = lines[index];
-    const color = getByMap(mapVarsByStatus, line.status || 'normal');
-    const from = lines[index - 1] ? lines[index - 1].size : 0;
-    const to = line.size;
-    background += `${color} ${from}px, ${color} ${to}px${
-      index < length - 1 ? ', ' : ')'
-    }`;
-  }
-
-  return background;
-};
 
 const getActiveLineSize = (
   activeStepIndex: number | undefined,
@@ -55,20 +27,45 @@ const getActiveLineSize = (
 };
 
 export const ProgressStepBarLine = (props: ProgressStepBarLineProps) => {
-  const { lines, activeStepIndex, size, direction, ...otherProps } = props;
-  const background = backgroundGenerate(lines, direction);
+  const { lines, activeStepIndex, size, direction } = props;
   const lineSize = lines.length > 0 ? lines[lines.length - 1].size : 0;
   const activeLineSize = getActiveLineSize(activeStepIndex, lines, lineSize);
 
   return (
     <div
-      {...otherProps}
       className={cnProgressStepBarLine({ size, direction })}
       style={{
         ['--line-size' as string]: `${lineSize}px`,
-        ['--line-background' as string]: background,
         ['--line-active-size' as string]: `${activeLineSize}px`,
       }}
-    />
+    >
+      <svg
+        className={cnProgressStepBarLine('Svg')}
+        width="100%"
+        height="100%"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {lines.map((line, index) => {
+          const fill = `var(--color-bg-${line.status || 'normal'})`;
+          const from = lines[index - 1] ? lines[index - 1].size : 0;
+          const to = line.size;
+
+          const x = direction === 'horizontal' ? from : 0;
+          const y = direction === 'horizontal' ? 0 : from;
+          const height =
+            direction === 'horizontal'
+              ? 'var(--progress-step-bar-line-height)'
+              : to;
+
+          const width =
+            direction === 'horizontal'
+              ? to
+              : 'var(--progress-step-bar-line-width)';
+          return (
+            <rect key={index} style={{ height, width, fill }} x={x} y={y} />
+          );
+        })}
+      </svg>
+    </div>
   );
 };
