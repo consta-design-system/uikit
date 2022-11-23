@@ -13,6 +13,7 @@ import { TableVariantWithBagde } from './variants/TableVariantWithBagde/TableVar
 import { TableVariantWithBigData } from './variants/TableVariantWithBigData/TableVariantWithBigData';
 import { TableVariantWithCheckboxHeader } from './variants/TableVariantWithCheckboxHeader/TableVariantWithCheckboxHeader';
 import { TableVariantWithCollapcingRows } from './variants/TableVariantWithCollapcingRows/TableVariantWithCollapcingRows';
+import { TableVariantWithColSpan } from './variants/TableVariantWithColSpan/TableVariantWithColSpan';
 import { TableVariantWithCustomFilters } from './variants/TableVariantWithCustomFilters/TableVariantWithCustomFilters';
 import { TableVariantWithCustomRowsPlaceholder } from './variants/TableVariantWithCustomRowsPlaceholder/TableVariantWithCustomRowsPlaceholder';
 import { TableVariantWithCustomTagLabelFunction } from './variants/TableVariantWithCustomTagLabelFunction/TableVariantWithCustomTagLabelFunction';
@@ -32,7 +33,7 @@ export const cnTableVariants = cn('TableVariants');
 
 export const variantTypes = [
   'обычная',
-  'рендер ячеек',
+  'с рендером ячеек',
   'с разворачиванием строк',
   'с многоуровневым заголовком',
   'с выбором строки',
@@ -53,16 +54,17 @@ export const variantTypes = [
   'с дополнительным элементом в заголовке',
   'с обработкой клика по ячейке',
   'со скрытыми колонками',
+  'с объединеными по горизонтали ячейками',
 ] as const;
 
 const Variants = () => {
-  const type = useSelect('type', [...variantTypes], variantTypes[0]);
+  const type = useSelect('Пример таблицы', [...variantTypes], variantTypes[0]);
 
   if (type === 'обычная') {
     return <TableVariantBasic />;
   }
 
-  if (type === 'рендер ячеек') {
+  if (type === 'с рендером ячеек') {
     return <TableVariantCustomRows />;
   }
 
@@ -140,6 +142,10 @@ const Variants = () => {
 
   if (type === 'с обработкой клика по ячейке') {
     return <TableVariantWithHandleCellClickExample />;
+  }
+
+  if (type === 'с объединеными по горизонтали ячейками') {
+    return <TableVariantWithColSpan />;
   }
 
   return <TableVariantWithHiddenColumn />;

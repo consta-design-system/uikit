@@ -409,3 +409,35 @@ export function getMergedArray<TYPE>(mainArr: TYPE[], mergeArr: TYPE[]) {
   }
   return resultArr;
 }
+
+export function calulateColSpans<T extends TableRow>(
+  columns: TableColumn<T>[],
+  row: TableTreeRow<T>,
+) {
+  const spans: number[] = [];
+  let counter = 0;
+  const { length } = columns;
+  const getAvailableSpan = (span: number, size: number) => {
+    if (size + span > length) return length - size - span;
+    return span;
+  };
+  columns.forEach((column) => {
+    const { colSpan } = column;
+    const size = spans.length > 1 ? spans.reduce((a, b) => a + b) : 0;
+    if (typeof colSpan === 'number' || typeof colSpan === 'function') {
+      const span = typeof colSpan === 'number' ? colSpan : colSpan(row);
+      if (counter === 0) {
+        spans.push(getAvailableSpan(span, size));
+      } else {
+        spans.push(getAvailableSpan(span - counter || 0, size));
+      }
+      counter = span - counter > 0 ? span - 1 : counter - span;
+    } else if (counter !== 0) {
+      spans.push(0);
+      counter--;
+    } else {
+      spans.push(getAvailableSpan(1, size));
+    }
+  });
+  return spans;
+}

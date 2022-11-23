@@ -1391,3 +1391,80 @@ export const withHiddenColumnTableMock: TableProps<
   ],
   rows: rowsForCustomTagLabelFunction,
 };
+
+const rowsWithColSpan = [
+  {
+    id: 'row1',
+    name: 'Граждане',
+    street: undefined,
+    building: undefined,
+    age: undefined,
+    number: undefined,
+    gender: undefined,
+    rows: [
+      {
+        id: 'row1.1',
+        name: 'Иван',
+        street: 'ул. Мира',
+        building: 1,
+        age: 32,
+        number: 2033,
+        gender: 'муж.',
+      },
+      {
+        id: 'row1.2',
+        name: 'Анна',
+        age: 40,
+        street: 'пл. Ленина',
+        building: 3,
+        number: 2035,
+        gender: 'жен.',
+      },
+    ],
+  },
+];
+
+export const withColSpan: TableProps<typeof rowsWithColSpan[number]> = {
+  columns: [
+    {
+      title: 'Имя',
+      accessor: 'name',
+      align: 'left',
+      width: 150,
+    },
+    {
+      title: 'Возраст',
+      accessor: 'age',
+      align: 'center',
+      renderCell: (row) => (row.rows ? '> 30' : row.age),
+    },
+    {
+      title: 'Адрес',
+      columns: [
+        {
+          title: 'Улица',
+          accessor: 'street',
+          align: 'left',
+          colSpan: (row) => (row.rows ? 3 : 1),
+          renderCell: (row) => (row.rows ? 'Ленинский район' : row.street),
+        },
+        {
+          title: 'Дом',
+          accessor: 'building',
+          align: 'center',
+        },
+        {
+          title: 'Квартира',
+          accessor: 'number',
+          align: 'center',
+        },
+      ],
+    },
+    {
+      title: 'Пол',
+      accessor: 'gender',
+      align: 'left',
+    },
+  ],
+  rows: rowsWithColSpan,
+};

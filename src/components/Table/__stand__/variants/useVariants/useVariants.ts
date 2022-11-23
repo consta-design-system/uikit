@@ -15,8 +15,8 @@ const defaultProps: TableProps<typeof tableData.rows[number]> = {
   columns: tableData.columns,
   rows: tableData.rows,
   filters: tableData.filters,
-  borderBetweenColumns: false,
-  borderBetweenRows: false,
+  borderBetweenColumns: true,
+  borderBetweenRows: true,
   isResizable: false,
   stickyColumns: 0,
   stickyHeader: false,
@@ -33,7 +33,7 @@ export const useVariants = <T extends TableRow>(
 
   const zebraStripedProp = useSelect('zebraStriped', zebraStriped);
   const size = useSelect('size', sizes, 'l');
-  const isFilterable = useBoolean('filterable', true);
+  const isFilterable = useBoolean('с фильтрами', true);
   const borderBetweenColumns = useBoolean(
     'borderBetweenColumns',
     props.borderBetweenColumns,
