@@ -46,6 +46,7 @@ import { Table } from '@consta/uikit/Table';
   - [Скрытая колонка](#скрытая-колонка)
   - [Объединение ячеек](#объединение-ячеек)
     - [По вертикали](#по-вертикали)
+    - [С кастомным объединением](#по-вертикали-с-кастомным-объединением)
     - [По горизонтали](#по-горизонтали)
   - [Рендер ячеек](#рендер-ячеек)
   - [Перенос текста в ячейке](#перенос-текста-в-ячейке)
@@ -130,7 +131,11 @@ const rows = [
 
 `mergeCells` — объединяет одинаковые ячейки в колонке.
 
+`сolSpan` — объединяет ячейки по горизонтали (можно указать количество ячеек или функцию).
+
 `renderCell` — создаёт кастомные ячейки в колонке.
+
+`getComparisonValue` — колбэк для сравнения ячеек. Принимает значение ячейки, возвращает строку для сравнения.
 
 Вот так можно создать две колонки для таблицы — номер и имя.
 
@@ -202,7 +207,7 @@ const App = () => {
 <Table columns={columns} rows={rows} stickyHeader />
 ```
 
-[Посмотреть пример](?path=/docs/components-table--with-sticky-header)
+[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-stable) (см. Пример таблицы с зафиксированным заголовком)
 
 ### Зафиксированная колонка
 
@@ -213,11 +218,11 @@ const App = () => {
 <Table columns={columns} rows={rows} stickyColumns=1 />
 ```
 
-[Посмотреть пример](?path=/docs/components-table--with-sticky-column)
+[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-stable) (см. Пример таблицы с зафиксированной колонкой)
 
 ### Скрытая колонка
 
-Чтобы скрыть колонку, добавьте в объект с описанием этой колокни `hidden: true`.
+Чтобы скрыть колонку, добавьте в объект с описанием этой колонки `hidden: true`.
 
 ```tsx
 const columns: TableColumn<typeof rows[number]>[] = [
@@ -235,7 +240,7 @@ const columns: TableColumn<typeof rows[number]>[] = [
 ];
 ```
 
-[Посмотреть пример](?path=/story/components-table--with-hidden-column)
+[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-stable) (см. Пример таблицы со скрытыми колонками)
 
 ### Объединение ячеек
 
@@ -270,10 +275,60 @@ const columns: TableColumn<typeof rows[number]>[] = [
 
 <TableExampleMerge />
 
+#### По вертикали с кастомным объединением
+
+Если в ваших ячейках **нестандартные данные** или вам нужно как-то иначе их сравнивать, чтобы объединить (например, сравнить строки с разным регистром), вы можете использовать колбэк `getComparisonValue`.
+Он принимает значение текущей ячейки и возвращает строку или число, по которым можно провести сравнение.
+
+##### Пример таблицы со своей функцией генерации признака объединения
+
+```tsx
+import React from 'react';
+import { Table } from '@consta/uikit/Table';
+import { Checkbox } from '@consta/uikit/Checkbox';
+
+const rows = [
+  {
+    id: '1',
+    operationConfirmed: { owner: 'user', viewed: false },
+  },
+  {
+    id: '2',
+    operationConfirmed: { owner: 'user', viewed: false },
+  },
+  {
+    id: '3',
+    operationConfirmed: { owner: 'user', viewed: true },
+  },
+  {
+    id: '4',
+    operationConfirmed: { owner: 'admin', viewed: true },
+  },
+];
+
+const columns: TableColumn<typeof rows[number]>[] = [
+  {
+    title: 'Операция подтверждена',
+    accessor: 'operationConfirmed',
+    mergeCells: true,
+    getComparisonValue: ({ owner, viewed }) => `${owner}-${viewed}`,
+    renderCell: ({ operationConfirmed: { viewed } }) => (
+      <Checkbox checked={viewed} />
+    ),
+  },
+];
+
+const App = () => <Table columns={colums} rows={rows} />;
+```
+
+[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-stable) (см. Пример таблицы с ячейками, объединёнными кастомной функцией)
+
+[Посмотреть расширенный пример на GitHub](https://github.com/consta-design-system/uikit/blob/master/src/components/Table/__stand__/variants/TableVariantWithMergedByCustomCallbackCells/TableVariantWithMergedByCustomCallbackCells.tsx) (в переменной `WithMergedByCustomCallbackCells`)
+
 #### По горизонтали
 
-Чтобы объядинить ячейки по горизонатали не обходимо задать число колонок или функцию оопределения размера в описании колонки `сolSpan: 2`.
-Соседние ячейки слева направо будут объединятся.
+Чтобы объединить ячейки по горизонтали, необходимо задать число колонок или функцию определения размера в описании колонки: `сolSpan: 2`.
+Соседние ячейки слева направо объединятся.
 
 ```tsx
 const rowsWithColSpan = [
@@ -356,54 +411,6 @@ const withColSpan: TableProps<typeof rowsWithColSpan[number]> = {
 
 <TableExampleRowSpan />
 
-Если в ваших ячейках **нестандартные данные** или вам нужно как-то иначе их сравнивать (например, сравнить строки с разным регистром), вы можете использовать колбэк `getComparisonValue`.
-Он принимает значение текущей ячейки и возвращает строку или число, по которым можно провести сравнение.
-
-##### Пример таблицы со своей функцией генерации признака объединения
-
-```tsx
-import React from 'react';
-import { Table } from '@consta/uikit/Table';
-import { Checkbox } from '@consta/uikit/Checkbox';
-
-const rows = [
-  {
-    id: '1',
-    operationConfirmed: { owner: 'user', viewed: false },
-  },
-  {
-    id: '2',
-    operationConfirmed: { owner: 'user', viewed: false },
-  },
-  {
-    id: '3',
-    operationConfirmed: { owner: 'user', viewed: true },
-  },
-  {
-    id: '4',
-    operationConfirmed: { owner: 'admin', viewed: true },
-  },
-];
-
-const columns: TableColumn<typeof rows[number]>[] = [
-  {
-    title: 'Операция подтверждена',
-    accessor: 'operationConfirmed',
-    mergeCells: true,
-    getComparisonValue: ({ owner, viewed }) => `${owner}-${viewed}`,
-    renderCell: ({ operationConfirmed: { viewed } }) => (
-      <Checkbox checked={viewed} />
-    ),
-  },
-];
-
-const App = () => <Table columns={colums} rows={rows} />;
-```
-
-[Посмотреть этот пример в работе](/?path=/story/components-table--with-merged-by-custom-callback-cells)
-
-[Посмотреть расширенный пример на GitHub](https://github.com/consta-design-system/uikit/blob/master/src/components/Table/__stories__/Table.stories.tsx) (в переменной `WithMergedByCustomCallbackCells`)
-
 ### Рендер ячеек
 
 Чтобы создать кастомные ячейки в колонке, добавьте в объект с описанием этой колокни функцию `renderCell`.
@@ -452,7 +459,7 @@ const App = () => {
 
 ```tsx
 const rows = [
-  { id: 'Ссылка', name: 'https://uikit.consta.design/?path=/story/common-about--page' },
+  { id: 'Ссылка', name: 'https://portal.consta.design/' },
   { id: 'Описание', name: 'Это просто длинный текст. Он нужен, чтобы посмотреть, как работают переносы разного типа. Вот на всякий случай — ещё одно предложение. И ещё одно, чтобы тексты отличались по длине.' },
   { id: 'Длинная строка', name: 'аааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааа' },
 ];
@@ -680,7 +687,7 @@ const columns: TableColumn<typeof rows[number]>[] = [
 ];
 ```
 
-[Посмотреть пример](?path=/story/components-table--with-icon)
+[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-stable) (см. Пример таблицы с дополнительным элементом в заголовке)
 
 ### Изменяемая ширина колонок
 
@@ -700,7 +707,7 @@ const columns: TableColumn<typeof rows[number]>[] = [
 
 Если нужно удалять строки или добавлять их не только в конец таблицы, можно написать свой код на основе нашего примера. [Посмотреть пример на GitHub](https://github.com/consta-design-system/uikit/tree/dev/src/components/Table/__stories__/examples/WithRowCreationAndDeletion.tsx)
 
-[Пример в работе](/?path=/story/components-table--with-row-actions)
+[Пример в работе](##LIBS.LIB.STAND/lib:uikit/stand:components-table-stable) (см. Пример таблицы с добавлением/удалением строк)
 
 ### Заглушка для пустой таблицы
 
@@ -748,7 +755,7 @@ const App = () => {
 };
 ```
 
-[Посмотреть пример](?path=/story/components-table--with-custom-rows-placeholder)
+[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-stable) (см. Пример таблицы со своим текстом, если нет данных)
 
 ### Постепенная загрузка
 
@@ -765,7 +772,7 @@ const App = () => {
 />
 ```
 
-[Посмотреть пример](?path=/story/components-table--with-big-data)
+[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-stable) (см. Пример таблицы с большим количеством строк)
 
 ### Обработка клика по ячейке
 
@@ -786,7 +793,7 @@ const App = () => {
 <Table columns={columns} rows={rows} onCellClick={({ e, type, columnIdx, ref, rowId }) => ...} />
 ```
 
-[Посмотреть пример](?path=/story/components-table--with-handle-cell-click-example)
+[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-stable) (см. Пример таблицы с обработкой клика по ячейке)
 
 ## Сортировка
 
@@ -1070,7 +1077,7 @@ const filters = [
 ];
 ```
 
-[Пример в работе](?path=/story/components-table--with-custom-filters)
+[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-stable) (см. Пример таблицы с кастомными фильтрами)
 
 #### Свойства кастомного компонента фильтра
 
@@ -1123,7 +1130,7 @@ import { TableFilterContainer } from '@consta/uikit/Table';
 
 В ответ обработчик должен возвращать строку.
 
-[Пример в работе](?path=/story/components-table--with-custom-tag-label-function)
+[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-stable) (см. Пример таблицы со своей функцией переименования тега в фильтре)
 
 ## Внешний вид
 
@@ -1364,7 +1371,7 @@ const App = () => {
 
 Функция должна возвращать название CSS-класса типа `string`.
 
-[Посмотреть пример](?path=/story/components-table--with-get-additional-class-name)
+[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-stable) (см. Пример таблицы с дополнительным классом)
 
 ## Адаптивность
 

@@ -33,7 +33,7 @@ export const cnTableVariants = cn('TableVariants');
 
 export const variantTypes = [
   'обычная',
-  'рендер ячеек',
+  'с рендером ячеек',
   'с разворачиванием строк',
   'с многоуровневым заголовком',
   'с выбором строки',
@@ -58,13 +58,13 @@ export const variantTypes = [
 ] as const;
 
 const Variants = () => {
-  const type = useSelect('type', [...variantTypes], variantTypes[0]);
+  const type = useSelect('Пример таблицы', [...variantTypes], variantTypes[0]);
 
   if (type === 'обычная') {
     return <TableVariantBasic />;
   }
 
-  if (type === 'рендер ячеек') {
+  if (type === 'с рендером ячеек') {
     return <TableVariantCustomRows />;
   }
 
