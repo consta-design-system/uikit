@@ -961,7 +961,6 @@ const InternalTable = <T extends TableRow>(
           const nth = (rowIdx + 1) % 2 === 0 ? 'even' : 'odd';
           const columns = columnsWithMetaData(lowHeaders);
           const spans = calulateColSpans(columns, row);
-          console.log(spans);
           return (
             <div
               key={row.id}

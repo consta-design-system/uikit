@@ -33,18 +33,14 @@ export const TableRowsCollapse: React.FC<Props> = (props) => {
   } = { '--nesting-level': level };
 
   return (
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
-    <div
-      style={style}
-      className={cnTableRowsCollapse()}
-      onClick={toggleCollapse}
-    >
+    <div style={style} className={cnTableRowsCollapse()}>
       {!isExpandedByDefault && withCollapseButton && (
         <div className={cnTableRowsCollapse('buttonContainer')}>
           <Button
             aria-expanded={isExpanded}
             iconLeft={isExpanded ? IconArrowUp : IconArrowDown}
             iconSize="s"
+            onClick={toggleCollapse}
             size="xs"
             onlyIcon
             view="clear"
