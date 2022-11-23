@@ -1,5 +1,3 @@
-import { generateSvgMask } from '##/utils/generateMask';
-
 import {
   ProgressLineItemDefault,
   ProgressLinePropGetItemLabel,
@@ -61,13 +59,13 @@ export const generateMask = (lines: ProgressLineSvgItem[]): string => {
   const { length } = lines;
   if (length > 0) {
     const width = lines[length - 1].x + lines[length - 1].width;
-    let svg = `<svg width='${width}px' height='4px' xmlns='http://www.w3.org/2000/svg'>`;
+    let svg = `%3csvg width='${width}px' height='4px' xmlns='http://www.w3.org/2000/svg'%3e`;
     for (let index = 0; index < length; index++) {
       const { x, width, y } = lines[index];
-      svg += `<rect x='${x}px' y='${y}px' height='4px' width='${width}px' />`;
+      svg += `%3crect x='${x}px' y='${y}px' height='4px' width='${width}px' /%3e`;
     }
-    svg += '</svg>';
-    return generateSvgMask(svg);
+    svg += '%3c/svg%3e';
+    return `url("data:image/svg+xml;charset=UTF-8,${svg}")`;
   }
   return '';
 };

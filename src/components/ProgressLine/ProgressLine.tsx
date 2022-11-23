@@ -35,10 +35,11 @@ const ProgressLineRender = (
 
   const { width: containerWidth } = useComponentSize(containerRef);
 
-  const lines = useMemo(
-    () => calculateLinePositions(steps?.length ?? 0, containerWidth),
-    [containerWidth, steps],
-  );
+  const [lines, mask] = useMemo(() => {
+    const lines = calculateLinePositions(steps?.length ?? 0, containerWidth);
+
+    return [lines, generateMask(lines)];
+  }, [containerWidth, steps]);
 
   const { mode, activeIndex } = useMemo(() => {
     const data = {
@@ -70,9 +71,7 @@ const ProgressLineRender = (
           ? lines[activeIndex].x + lines[activeIndex].width
           : 0
       }px`,
-      ['--progress-line-background-steps' as string]: lines.length
-        ? generateMask(lines)
-        : '',
+      ['--progress-line-mask' as string]: mask,
     },
   };
 

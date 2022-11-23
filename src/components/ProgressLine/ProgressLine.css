@@ -29,7 +29,7 @@
         width: 100%;
         height: var(--progress-line-height);
         background: var(--color-bg-system);
-        mask-image: var(--progress-line-background-steps);
+        mask-image: var(--progress-line-mask);
       }
 
       &::after {
@@ -37,7 +37,7 @@
         height: var(--progress-line-height);
         background: var(--color-control-bg-primary);
         transition: width 0.3s;
-        mask-image: var(--progress-line-background-steps);
+        mask-image: var(--progress-line-mask);
       }
     }
 
