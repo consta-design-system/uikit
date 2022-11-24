@@ -724,7 +724,7 @@ const InternalTable = <T extends TableRow>(
     if (rows) {
       setExpandedRowIds(getExpandedRows(rows, defaultExpandAll));
     }
-  }, [rows, defaultExpandAll]);
+  }, [defaultExpandAll]);
 
   const renderCell = (
     column: TableColumn<T>,
