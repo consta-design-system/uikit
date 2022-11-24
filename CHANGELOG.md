@@ -1,5 +1,21 @@
 # Changelog
 
+## v4.3.1 (24/11/2022)
+Самое важное:
+- Исправили некорректную отрисовку линии в `ProgressLine`
+- По многочисленным просьбам в `Table` добавили возможность объединения ячеек по горизонтали. 
+
+---
+
+- [chore(deps): update @consta/stand (#2777)](https://github.com/consta-design-system/uikit/commit/888e495363eb41c6244c693151904074dcce404d) - [@gizeasy](https://github.com/gizeasy)
+- [docs(AvatarGroup): fix image (#2776)](https://github.com/consta-design-system/uikit/commit/420ab95dea840b04e1d373288bccf563e5ec3a9a) - [@gizeasy](https://github.com/gizeasy)
+- [fix(Table): fix bug with closing collapse rows (#2771)](https://github.com/consta-design-system/uikit/commit/b7ef4913ea995897e4edf006691dee06520f0a08) - [@N1MBER](https://github.com/N1MBER)
+- [feat(Table): add colSpan for columns and also add variants with examples (#2768)](https://github.com/consta-design-system/uikit/commit/38b2426ca1e0ac24d3459dbc6fc299a66cb66174) - [@N1MBER](https://github.com/N1MBER)
+- [docs(autoComplete): add pic for review (#2765)](https://github.com/consta-design-system/uikit/commit/3685f0c028efa32e6db99ffa09ccbf17b2bd9667) - [@arhayka](https://github.com/arhayka)
+- [fix(ProgressLine): fix bug of line width with gaps](https://github.com/consta-design-system/uikit/commit/8a9311bab76eecff120a692dc0ef904acb243d6d) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
 ## v4.3.0 (16/11/2022)
 Самое важное:
 - В `Collapse` в заголовок теперь можно передавать `ReactNode`
@@ -442,24 +458,3 @@ endFieldOnBlur - deleted, use onBlur
 ## v3.18.2 (30/03/2022)
 - [fix(Pagination): conditional rendering moved to the bottom (#2167)](https://github.com/consta-design-system/uikit/commit/530c2e9facdf821af0cdf195e2a701435deec398) - [@gizeasy](https://github.com/gizeasy)
 - [chore(deploy): add deploy automatization (#2166)](https://github.com/consta-design-system/uikit/commit/2d051e3578d5cbf0317b96ef8b3b28750dea5400) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v3.18.1 (23/03/2022)
-Самое важное:
-- в `Select`, `Combobox`, `UserSelect` добавили индикатор загрузки (`isLoading`)
-- в `Combobox`, `UserSelect`  добавили возможность получить значение вводимого текста в поле ввода (`onInputChange`)
-- добавили иконки социальных сетей
-- в `EventInterceptor` добавили поддержку всех компонентов, теперь можно подписаться на все компоненты.
----
-
-- [ feat(cnMixPopoverAnimate): add animation to many components which use Popover component (#2109)](https://github.com/consta-design-system/uikit/commit/7ba359ce6ce41434c33c79d047d13ba00b8a0fae) - [@N1MBER](https://github.com/N1MBER)
-- [chore(deps): bump shelljs from 0.8.4 to 0.8.5 (#1933)](https://github.com/consta-design-system/uikit/commit/f688d2140d99da04bb021bf1acd5d0f6a2d887b8) - [@dependabot](https://github.com/dependabot[bot])
-- [chore(deps): bump url-parse from 1.5.7 to 1.5.10 (#2084)](https://github.com/consta-design-system/uikit/commit/ec533ef734ee90a3b2c9c7c63886bc276e27d0f0) - [@dependabot](https://github.com/dependabot[bot])
-- [feat(Selectors): add isLoading and onInputChange props (#2127)](https://github.com/consta-design-system/uikit/commit/49ea2b6f6e76d87868a78a9a7384a4afb915628f) - [@N1MBER](https://github.com/N1MBER)
-- [feat(Icons): add new icons for social (#2146)](https://github.com/consta-design-system/uikit/commit/f4bc4c4cfe7d3e219947115ef67a757831e94324) - [@N1MBER](https://github.com/N1MBER)
-- [docs(common): add images to review, components, repos and figma libraries (#2143)](https://github.com/consta-design-system/uikit/commit/4c203aaa1029172a993358e87d2a46a2b3803ac2) - [@arhayka](https://github.com/arhayka)
-- [fix(ContextMenu): fixed calculate zIndex (#2136)](https://github.com/consta-design-system/uikit/commit/667200a7c1d6c6783e1d26a31c3be2db96bc1d39) - [@gizeasy](https://github.com/gizeasy)
-- [fix(Radio): add new prop inputId to Checkbox and Radio (#2142)](https://github.com/consta-design-system/uikit/commit/6df6e9ff87b9851ea95b8117b25bdac28a12c9fa) - [@N1MBER](https://github.com/N1MBER)
-- [feat(EventInterceptor): connect other components to EventInterceptor (#2137)](https://github.com/consta-design-system/uikit/commit/37eb2f5dd0e2350a0e97e7f01c4585b9b9fed005) - [@N1MBER](https://github.com/N1MBER)
-- [fix(ThemeToggler): add reexport types (#2145)](https://github.com/consta-design-system/uikit/commit/fd266c2085a949f19e3af998ecf869fa6e2ba671) - [@N1MBER](https://github.com/N1MBER)
