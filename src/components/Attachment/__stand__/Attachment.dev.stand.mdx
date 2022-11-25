@@ -19,7 +19,6 @@ import { Attachment } from '@consta/uikit/Attachment';
 
 <MdxMenu>
 
-- [Как использовать](#как-использовать)
 - [Свойства файла](#свойства-файла)
   - [Иконка](#иконка)
   - [Название](#название)
@@ -36,85 +35,6 @@ import { Attachment } from '@consta/uikit/Attachment';
 - [Пример использования](#пример)
 
 </MdxMenu>
-
-## Как использовать
-
-У компонента четыре основных состояния.
-
-**Файл загружается**. Вместо иконки с расширением файла покажите [индикатор загрузки](#индикаторы-загрузки), если хотите — процент, на который файл загрузился. При наведении появляется кнопка для отмены загрузки с иконкой-крестиком (`IconClose`).
-
-```tsx
-<Attachment
-  className={cnAttachmentExampleBasics()}
-  fileName="Инструкция по сборке марсохода"
-  fileExtension="pdf"
-  loading
-  loadingText="Загружено на 51%"
-  buttonIcon={IconClose}
-  buttonTitle="Отменить"
-  onClick={() => console.log('onClick')}
-  onButtonClick={(e) => {
-    e.stopPropagation();
-    console.log('onButtonClick');
-  }}
-/>
-```
-
-<AttachmentExampleBasicsLoading />
-
-**Файл не загрузился** по причине какой-то ошибки. Тут всё просто: красным цветом напишите [описание ошибки](#ошибка-при-загрузке) и что нужно сделать. В этом состоянии тоже есть кнопка для отмены загрузки.
-
-```tsx
-<Attachment
-  className={cnAttachmentExampleBasics()}
-  fileName="Инструкция по сборке марсохода"
-  fileExtension="pdf"
-  errorText="Файл слишком большой, максимум 100 ТБ"
-  buttonIcon={IconClose}
-  buttonTitle="Отменить"
-  onClick={() => console.log('onClick')}
-  onButtonClick={(e) => {
-    e.stopPropagation();
-    console.log('onButtonClick');
-  }}
-/>
-```
-
-<AttachmentExampleBasicsError />
-
-**Файл успешно загрузился**. В этом состоянии уже точно известно расширение файла — можно показать соответствующую иконку (если она есть). Дополнительно можно вывести метаинформацию о файле: размер, дату, автора или что-то ещё. При наведении появляется кнопка для удаления файла с иконкой корзины (`IconTrash`).
-
-```tsx
-<Attachment
-  className={cnAttachmentExampleBasics()}
-  fileName="Инструкция по сборке марсохода"
-  fileExtension="pdf"
-  fileDescription="1,5 Mб • 21.02.2051, 14:12"
-  buttonIcon={IconTrash}
-  buttonTitle="Удалить"
-  onClick={() => console.log('onClick')}
-  onButtonClick={(e) => {
-    e.stopPropagation();
-    console.log('onButtonClick');
-  }}
-/>
-```
-
-<AttachmentExampleBasicsLoaded />
-
-**Просмотр файла**. На первый взгляд внешне это состояние не отличается от предыдущего. Разница в том, что тут нет никаких кнопок, так как с самим файлом уже нельзя ничего сделать. В этом случае компонент должен стать ссылкой или кнопкой, по которой открывается или скачивается файл.
-
-```tsx
-<Attachment
-  className={cnAttachmentExampleBasics()}
-  fileName="Инструкция по сборке марсохода"
-  fileExtension="pdf"
-  fileDescription="1,5 Mб • 21.02.2051, 14:12"
-  onClick={() => console.log('onClick')}
-/>
-```
-
-<AttachmentExampleBasicsLink />
 
 ## Свойства файла
 
