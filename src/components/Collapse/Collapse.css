@@ -122,7 +122,7 @@
     transition-timing-function: cubic-bezier(0.7, 0, 0.5, 1);
 
     &_isOpen {
-      max-height: 200vh;
+      max-height: var(--collapse-body-max-height);
     }
 
     &_divider {

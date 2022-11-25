@@ -2,6 +2,8 @@ import './Collapse.css';
 
 import React, { useRef } from 'react';
 
+import { useComponentSize } from '##/hooks/useComponentSize';
+
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { IconPropSize } from '../../icons/Icon/Icon';
 import { IconArrowDown } from '../../icons/IconArrowDown/IconArrowDown';
@@ -43,17 +45,27 @@ function renderSide(side: React.ReactNode): React.ReactNode {
   ));
 }
 
+const getMaxHeight = (height: number, maxHeight?: number | string) => {
+  if (maxHeight) {
+    return typeof maxHeight === 'string' ? maxHeight : `${maxHeight}px`;
+  }
+  return `${height}px`;
+};
+
 export const Collapse: CollapseComponent = React.forwardRef<
   HTMLDivElement,
   CollapseProps
 >((props, ref) => {
   const collapseRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const { height: contentHeight } = useComponentSize(contentRef);
 
   const {
     label,
     size = collapsePropSizeDefault,
     view = collapsePropViewDefault,
     className,
+    maxContentHeight,
     isOpen,
     children,
     hoverEffect,
@@ -100,8 +112,18 @@ export const Collapse: CollapseComponent = React.forwardRef<
         )}
         {iconPosition === 'left' && renderSide(rightSide)}
       </div>
-      <div className={cnCollapse('Body', { isOpen, divider })}>
-        <div className={cnCollapse('Content')}>{children}</div>
+      <div
+        style={{
+          ['--collapse-body-max-height' as string]: getMaxHeight(
+            contentHeight,
+            maxContentHeight,
+          ),
+        }}
+        className={cnCollapse('Body', { isOpen, divider })}
+      >
+        <div ref={contentRef} className={cnCollapse('Content')}>
+          {children}
+        </div>
       </div>
     </div>
   );

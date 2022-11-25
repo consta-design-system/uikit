@@ -73,6 +73,7 @@ export type CollapseProps = PropsWithHTMLAttributesAndRef<
     view?: CollapsePropView;
     divider?: boolean;
     label: React.ReactNode;
+    maxContentHeight?: string | number;
     horizontalSpace?: CollapsePropHorizontalSpace;
     hoverEffect?: boolean;
     isOpen?: boolean;
