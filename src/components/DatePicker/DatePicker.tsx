@@ -44,6 +44,7 @@ export const DatePicker: DatePickerComponent = forwardRef((props, ref) => {
     type = datePickerPropTypeDefault,
     minDate = minDateDefault,
     maxDate = maxDateDefault,
+    labelPosition = 'top',
     multiplicityMinutes,
     multiplicitySeconds,
     multiplicityHours,
@@ -68,6 +69,7 @@ export const DatePicker: DatePickerComponent = forwardRef((props, ref) => {
     <Component
       {...otherProps}
       {...timeProps}
+      labelPosition={labelPosition}
       minDate={minDate}
       maxDate={maxDate}
       ref={useForkRef([ref, datePickerRef])}
