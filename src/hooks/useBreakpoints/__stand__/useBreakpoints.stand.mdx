@@ -18,12 +18,41 @@ const breakpoints = useBreakpoints({ isDesktop: 1000 });
 // type breakpoints = Record<"isDesktop", boolean>
 ```
 
-## Свойства
+### getLastPoint
+
+Хелпер `getLastPoint` возвращет последний пересеченный `breakpoint`,
+его удобно использовать когда рендр компонента зависит от одной точки.
+
+> `breakpoints` должны быть отсорированы в порядке возврастания
+
+К примеру:
 
 ```tsx
-Map<POINTS extends string> = Record<POINTS, number>
+import { useBreakpoints, getLastPoint } from '@consta/uikit/useBreakpoints';
+
+const map = {
+  s: ComponentOne,
+  m: ComponentTwo,
+  l: ComponentTree,
+};
+
+const lastPoint = getLastPoint(useBreakpoints({ m: 300, l: 500 }));
+
+const Component = map[lastPoint || s];
 ```
 
-| Свойство | Тип и значения | По умолчанию | Описание                                |
-| -------- | -------------- | ------------ | --------------------------------------- |
-| `map?`   | `Map`          | -            | Набор контрольных точек (`breakpoints`) |
+Или:
+
+```tsx
+import { useBreakpoints, getLastPoint } from '@consta/uikit/useBreakpoints';
+
+const breakpoint = getLastPoint(useBreakpoints({ m: 300, l: 500 }));
+
+<div className={cnComponent({ breakpoint })} />;
+```
+
+## Свойства
+
+| Аргумент | Тип и значения           | По умолчанию | Описание                                |
+| -------- | ------------------------ | ------------ | --------------------------------------- |
+| `map?`   | `Record<POINTS, number>` | -            | Набор контрольных точек (`breakpoints`) |
