@@ -814,29 +814,30 @@ const InternalTable = <T extends TableRow>(
 
     if (
       mergeCells &&
-      ((rowsData[rowIdx - 1] && previousCell !== currentCell) || rowIdx === 0)
+      ((rowsData[rowIdx - 1] && previousCell !== currentCell) ||
+        rowIdx === 0 ||
+        (previousCell === currentCell &&
+          (rowsData[rowIdx - 1]?.rows || rowIdx === 1)))
     ) {
-      for (let i = rowIdx; i < rowsData.length; i++) {
-        if (rowsData[i + 1]) {
-          const nextCell = getComparisonValue(rowsData[i + 1][accessor!]);
-
-          if (currentCell === nextCell) {
-            result.rowSpan++;
+      if (!row.rows) {
+        for (let i = rowIdx; i < rowsData.length; i++) {
+          if (rowsData[i + 1]) {
+            const nextCell = getComparisonValue(rowsData[i + 1][accessor!]);
+            if (currentCell === nextCell) {
+              result.rowSpan++;
+            } else {
+              break;
+            }
           } else {
             break;
           }
-        } else {
-          break;
         }
       }
-
       if (result.rowSpan > 1) {
         result.style['--row-span'] = `span ${result.rowSpan}`;
       }
-
       result.show = true;
     }
-
     if (!mergeCells) {
       result.show = true;
     }
