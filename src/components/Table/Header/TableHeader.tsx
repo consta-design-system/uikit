@@ -218,7 +218,7 @@ export const TableHeader = <T extends TableRow>({
                   })
                 }
                 className={cnTableHeader('Cell', {
-                  isFirstColumn: column.position!.gridIndex === 0,
+                  isFirstColumn: column.position?.isFirst,
                   isFirstRow: column.position!.level === 0,
                   isLastInColumn:
                     column.position?.topHeaderGridIndex !==
