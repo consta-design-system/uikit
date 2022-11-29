@@ -2,15 +2,13 @@ import { useLayoutEffect, useState } from 'react';
 
 import { isEq } from '##/hooks/useBreakpoints/isEq';
 import { mapping } from '##/hooks/useBreakpoints/mapping';
+import { Map, Returned } from '##/hooks/useBreakpoints/types';
 import { useMutableRef } from '##/hooks/useMutableRef';
-
-type Map<POINTS extends string | number> = Record<POINTS, number>;
-type Returned<POINTS extends string | number> = Record<POINTS, boolean>;
 
 const getWidth = (ref: React.RefObject<HTMLElement | SVGGraphicsElement>) =>
   ref.current?.getBoundingClientRect().width || 0;
 
-export const useComponentBreakpoints = <POINTS extends string | number>(
+export const useComponentBreakpoints = <POINTS extends string>(
   ref: React.RefObject<HTMLElement | SVGGraphicsElement>,
   map: Map<POINTS>,
 ) => {

@@ -1,6 +1,6 @@
 import { Map, Returned } from './types';
 
-export const mapping = <POINTS extends string | number>(
+export const mapping = <POINTS extends string>(
   width: number,
   map: Map<POINTS>,
 ): Returned<POINTS> => {

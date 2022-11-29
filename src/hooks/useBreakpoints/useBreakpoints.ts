@@ -38,7 +38,7 @@ const defaultMap: Map<DefaultPoints> = {
   '5xl': 2400,
 };
 
-export const useBreakpoints = <POINTS extends string | number = DefaultPoints>(
+export const useBreakpoints = <POINTS extends string = DefaultPoints>(
   map?: Map<POINTS>,
 ) => {
   const pointsMap = map || (defaultMap as Map<POINTS>);
