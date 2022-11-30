@@ -1,5 +1,4 @@
 import './DocsDecorator.css';
-import '../../whitepaper/whitepaper.css';
 
 import React from 'react';
 
