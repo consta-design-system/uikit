@@ -1,5 +1,23 @@
 # Changelog
 
+## v4.5.0 (30/11/2022)
+Самое важное
+- В Checkbox добавлены размеры `s` и `xs`
+- В CheckboxGroup добавлены размеры `s` и `xs`
+- В Table исправлен баг с неверным отображением бордера
+- Доработана докуменация
+
+---
+
+- [docs(Theme): edit docs about fonts](https://github.com/consta-design-system/uikit/commit/9356c051873fb30ce9d10ec5f9e6b6416a69ef44) - [@gizeasy](https://github.com/gizeasy)
+- [feat(CheckboxGroup): add s and xs sizes (#2800)](https://github.com/consta-design-system/uikit/commit/8ef40e4d65d0eac2f2e5a6073385119dfc3716ad) - [@gizeasy](https://github.com/gizeasy)
+- [fix(Table): fix border on multi level header (#2797)](https://github.com/consta-design-system/uikit/commit/2f6a382b4e89a886f3b94e413bd36132df443e80) - [@N1MBER](https://github.com/N1MBER)
+- [feat(Checkbox): add 's' and 'xs' size (#2790)](https://github.com/consta-design-system/uikit/commit/a4b50e6195682df18dbad13685d0c80a32f31d81) - [@N1MBER](https://github.com/N1MBER)
+- [docs: add how to use tab (#2799)](https://github.com/consta-design-system/uikit/commit/4fe6084492db080c4f188152c16817a45f5dad5d) - [@arhayka](https://github.com/arhayka)
+- [docs(useBreakpoints): edit doc (#2798)](https://github.com/consta-design-system/uikit/commit/afd6d2385a207545eb51c5b35e94d6bf6e5abce5) - [@arhayka](https://github.com/arhayka)
+
+--------------------
+
 ## v4.4.0 (29/11/2022)
 Самое важное:
 - добавили `useComponentBreakpoints`, подписывается на изменение ширины компонента и возвращает набор акивных контрольных точек, в отличии от `useComponentSize` ререндр компонента происходит только при пересечении `breakpoint`, а не на каждый пиксель.
@@ -443,27 +461,3 @@ endFieldOnBlur - deleted, use onBlur
 - [docs(review): add gantt picture (#2206)](https://github.com/consta-design-system/uikit/commit/4e79d1a62bdbbc19c3cfaacc077f104e116eadda) - [@arhayka](https://github.com/arhayka)
 - [feat(BreadcrumbsCanary): add inner submenu (#2183)](https://github.com/consta-design-system/uikit/commit/95a04092be8b38b66a5b6e0c6fd516261991da90) - [@N1MBER](https://github.com/N1MBER)
 - [chore(storybook): chage publick url (#2204)](https://github.com/consta-design-system/uikit/commit/16756a016cd920e03097bd9198067cf2e4caa967) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v3.18.3 (06/04/2022)
-Самое важное:
-- В `DatePicker` добавлен новый тип `time` — когда нужно указать только время.
-- Добавили в документацию к компонентам `ChoiceGroup`, `Card`, `Button `раздел по адаптивности. Постепенно добавим такой раздел во все компоненты. 
-- Теперь если во всплывающие окна (к примеру, `Modal`) положить компоненты с всплывающими окнами (к примеру, `Select`), то `Select` будет всегда выше по `zIndex`, даже если в `Modal` указали свой `zIndex`.
-
----
-
-- [docs(common): change links to vercel (#2199)](https://github.com/consta-design-system/uikit/commit/03c0113b8e80cd0f7decce33b588a5777ebc9a2a) - [@arhayka](https://github.com/arhayka)
-- [feat(Combobox): hide label for not found while items list is empty (#2181)](https://github.com/consta-design-system/uikit/commit/bee7232f6c693ee9ccffb2263fb271e1ee8fdd2e) - [@karpovfv](https://github.com/karpovfv)
-- [feat(DatePicker): added type time (#2174)](https://github.com/consta-design-system/uikit/commit/09ccf9cd26a827f71ac14c45dbb512b287420208) - [@gizeasy](https://github.com/gizeasy)
-- [docs(ContextMenu): fix examples (#2188)](https://github.com/consta-design-system/uikit/commit/43ae44bb1acb44e18db44aef7613e4bafaa0ecce) - [@arhayka](https://github.com/arhayka)
-- [docs(ChoiceGroup): add adaptive section (#2186)](https://github.com/consta-design-system/uikit/commit/d3d5cebfd0ac626ea6116d09afb9b7c8668155bd) - [@arhayka](https://github.com/arhayka)
-- [feat(PortalWithTheme): zIndex processing added (#2191)](https://github.com/consta-design-system/uikit/commit/d2942420986d1537105dd2e2cde15a983bb8cf40) - [@gizeasy](https://github.com/gizeasy)
-- [docs(Card): add adaptive section (#2184)](https://github.com/consta-design-system/uikit/commit/c2e199616357790e7053db3ec60a7e54ee6d68a6) - [@arhayka](https://github.com/arhayka)
-- [docs(Button): add adaptive section (#2182)](https://github.com/consta-design-system/uikit/commit/4b872f338bc2da5f48a1a2cc46ea4c10fbccc27a) - [@arhayka](https://github.com/arhayka)
-- [fix(ContextMenuCanary): fix timeout on close inner levels (#2173)](https://github.com/consta-design-system/uikit/commit/62d6c20f66ea2015a618dcfe80b49a0a7739d2b1) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Pagination): remove usePropsHandler](https://github.com/consta-design-system/uikit/commit/911f3e54ea85ec5a6a0b665a9d278bfe833c6ec0) - [@gizeasy](https://github.com/gizeasy)
-- [chore(deploy): edit public path (#2179)](https://github.com/consta-design-system/uikit/commit/955a0fc47c33ddcfef75cefb313e7ba359e2de2d) - [@gizeasy](https://github.com/gizeasy)
-- [chore(deploy): conditional comment on a pull request (#2176)](https://github.com/consta-design-system/uikit/commit/8bddc476e4b2361888a50d61679c8b9883cf3418) - [@gizeasy](https://github.com/gizeasy)
-- [test(ContextMenuCanary): add tests to ContextMenuCanary (#2175)](https://github.com/consta-design-system/uikit/commit/254639c3428eb47ed74604061871202ddeb4684f) - [@N1MBER](https://github.com/N1MBER)
