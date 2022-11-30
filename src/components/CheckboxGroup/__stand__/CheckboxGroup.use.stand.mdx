@@ -1,0 +1,35 @@
+import {
+  CheckboxGroupExampleName,
+  CheckboxGroupExampleHead,
+  CheckboxExampleGroupHead3,
+  CheckboxGroupExampleNeg,
+  CheckboxGroupExampleGeneral,
+} from './examples/CheckboxGroupExampleName/CheckboxGroupExampleName';
+
+## Как писать названия
+
+Лучше писать название чекбоксов с заглавной буквы, точка не нужна.
+
+### Согласуйте с заголовком
+
+Это просто лучше читается. Сравните:
+
+<CheckboxGroupExampleHead />
+
+Если не нравится, что пункты начинаются с предлогов, поменяйте заголовок.
+
+<CheckboxExampleGroupHead3 />
+
+### Не используйте отрицания
+
+Чтобы не путать пользователя. Когда выбран чекбокс, рядом с которым написано **Не хочу**,
+приходится мысленно решать равенство: `не + не + хочу = хочу`.
+
+<CheckboxGroupExampleNeg />
+
+### Не обобщайте
+
+Если хотите дать пользователю возможность отметить все элементы в списке
+или, наоборот, удалить все отметки, сделайте это другим способом.
+
+<CheckboxGroupExampleGeneral />

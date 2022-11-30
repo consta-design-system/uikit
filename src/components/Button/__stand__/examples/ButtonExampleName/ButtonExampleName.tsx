@@ -260,7 +260,7 @@ export const ButtonExampleNameAgreement = () => {
       <div className={cnMixSpace({ m: 'm' })}>
         <div className={cnDocsExample()}>
           <p className={cnDocsExample('Caption')}>
-            Мы используем куки! Без них всё совсем сломается :(
+            Мы используем куки! Без них всё сломается :(
           </p>
           <Button label="Понятно" />
         </div>

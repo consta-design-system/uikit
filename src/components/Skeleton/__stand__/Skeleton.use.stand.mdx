@@ -1,0 +1,48 @@
+import { MdxMenu } from '@consta/stand';
+import { SkeletonExampleAvatar } from './examples/SkeletonExampleAvatar/SkeletonExampleAvatar';
+import { SkeletonExampleImageAndText } from './examples/SkeletonExampleImageAndText';
+
+Разные скелетоны можно сочетать вместе так, чтобы каркас страницы был похож на то, что пользователь увидит после загрузки.
+
+## Используйте классы компонентов
+
+Если можно, примените к скелетону классы компонента, который он заменяет. Это позволит избежать дублирования и сделает вид компонента и его скелетона максимально похожими.
+
+```tsx
+<div className="main">
+  <SkeletonCircle className="avatar" size={32} />
+  <SkeletonText className="text" rows={2} fontSize="xs" lineHeight="s" />
+</div>
+```
+
+```css
+.main {
+  display: flex;
+  width: 150px;
+}
+
+.avatar {
+  flex-shrink: 0;
+}
+
+.text {
+  margin-left: var(--space-s);
+}
+```
+
+<SkeletonExampleAvatar />
+
+## Меняйте скелетоны на компоненты после загрузки
+
+Если используете компоненты для лейаута (например, [Grid](##LIBS.LIB.STAND/lib:uikit/stand:components-grid-stable)), положите внутрь скелетоны, а после загрузки поменяйте их на реальные компоненты.
+
+```tsx
+<Grid gap="m" style={{ width: 200 }}>
+  <SkeletonBrick height={200} />
+  <SkeletonText rows={4} />
+</Grid>
+```
+
+<SkeletonExampleImageAndText />
+
+> Если переиспользовать классы или компоненты лейаута не удаётся, можно написать отдельные стили для обёртки скелетона.

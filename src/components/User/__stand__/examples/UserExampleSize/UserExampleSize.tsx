@@ -12,6 +12,9 @@ export const UserExampleSize = () => (
     <div>
       <User name="Серж Послоян" info="Размер M" view="ghost" size="m" />
     </div>
+    <div>
+      <User name="Серж Послоян" info="Размер L" view="ghost" size="l" />
+    </div>
   </StoryBookExample>
 );
 
