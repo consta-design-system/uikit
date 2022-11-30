@@ -1723,15 +1723,15 @@
   resolved "https://registry.yarnpkg.com/@consta/header/-/header-1.0.0.tgz#95e3db57857a10aad4c5214c39884630495fc970"
   integrity sha512-JM/JWRxsbBnh2a8Wn99ly8ub0Rrwf17IolU3TFTJd8uj1230n3P5kbdfPXdVMnq38i16k1fD6ubxenLN0612YQ==
 
-"@consta/stand@^0.0.76":
-  version "0.0.76"
-  resolved "https://registry.yarnpkg.com/@consta/stand/-/stand-0.0.76.tgz#cda60ea4a693e2a7f45839f132b8426a7bd18f77"
-  integrity sha512-r4yx11lO/cQZUB9bErP0KfgX/eLQS3OxD7foh8ZuqNMxZTOlnzIJ2Zf+TTh2/oLkuL1FhQggoAP/tRo+1Xpqlw==
+"@consta/stand@^0.0.77":
+  version "0.0.77"
+  resolved "https://registry.yarnpkg.com/@consta/stand/-/stand-0.0.77.tgz#776ff944062dd95849995ef2e6e78c6cc3830723"
+  integrity sha512-VOah/qZn5uPx6L+oy0BgkT55WtuqVRSh7ZonOYHtrWW+YlO25DPfKBfPxy46xAENLPbwcDwy+2QTbewN9Cj//A==
   dependencies:
     "@bem-react/classname" "^1.5.12"
     "@bem-react/classnames" "^1.3.10"
     "@consta/header" "^1.0.0"
-    "@consta/uikit" "^4.2.2"
+    "@consta/uikit" "^4.4.1"
     "@mdx-js/loader" "^2.1.5"
     "@mdx-js/react" "^2.1.5"
     "@oclif/command" "^1.8.16"
@@ -1778,7 +1778,7 @@
     react-router5 "^8.0.1"
     react-syntax-highlighter "^15.5.0"
     react-transition-group "^4.4.5"
-    reatom-router5 "^3.0.0"
+    reatom-router5 "^3.0.2"
     remark-gfm "^1.0.0"
     resolve "^1.20.0"
     resolve-url-loader "^4.0.0"
@@ -1799,10 +1799,10 @@
     webpack-manifest-plugin "^4.0.2"
     workbox-webpack-plugin "^6.4.1"
 
-"@consta/uikit@^4.2.2":
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-4.3.0.tgz#8dff95be478a6eff8ff0db59d8c100b0c8af5f58"
-  integrity sha512-dzGMNnbkvNO2MJRgOXP4YayI74jkB9DvHooA3F+jMkcdu8K2jbk3gBRJooIY/dQqvspxnMk0axdkTq3/5l++dg==
+"@consta/uikit@^4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-4.4.1.tgz#58f2cc00828a015b4326ae175d0b8b24155c907a"
+  integrity sha512-TCIUjgOTyCoeJx7U5K1Vg7VTqlRf5VZyPG8anGmEXBvMKubTYNnAF7sVwUO06yH8WKaaA5OOVW71oGoBjI11Eg==
   dependencies:
     "@bem-react/classname" "^1.5.12"
     "@bem-react/classnames" "^1.3.10"
@@ -13639,10 +13639,10 @@ readdirp@~3.6.0:
   dependencies:
     picomatch "^2.2.1"
 
-reatom-router5@^3.0.0:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/reatom-router5/-/reatom-router5-3.0.1.tgz#f1c70f18cb61d6e2f924f7cf82575334f5dfdc6b"
-  integrity sha512-CMgaeULc0DEXeV9NFslNjuUbm/9tT6iS5Fn+1yVgxQfm1HCmbJ2UA8Vm3DUqjGguXQXSK+R7mKCjmNPAnfTYpQ==
+reatom-router5@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/reatom-router5/-/reatom-router5-3.0.2.tgz#baf55cda3ec187a97b3b952ec9f0f4fe681cb7b8"
+  integrity sha512-zS3BROB4MfSDKNSylrRC3U00RPkQVZgzIm4QTFYAKVZWttYCIwlLNkuiTuKvHJcCcSOytUArirVp7j212lBt+w==
 
 rechoir@^0.7.0:
   version "0.7.1"

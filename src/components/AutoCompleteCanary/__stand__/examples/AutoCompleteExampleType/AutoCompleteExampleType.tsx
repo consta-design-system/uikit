@@ -1,9 +1,8 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
+import { AutoComplete } from '##/components/AutoCompleteCanary';
 import { getMailItems } from '##/components/AutoCompleteCanary/__mocks__/data.mock';
-import { AutoComplete } from '##/components/AutoCompleteCanary/AutoCompleteCanary';
-import { cnDocsDecorator } from '##/uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '##/uiKit/components/StoryBookExample/StoryBookExample';
 
 type Item = {
   label: string;
@@ -27,7 +26,7 @@ const items: Item[] = [
 export const AutoCompleteExampleType = () => {
   const [value, setValue] = useState<string | null>(null);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <AutoComplete
         type="text"
         value={value}
@@ -40,20 +39,20 @@ export const AutoCompleteExampleType = () => {
         items={items}
         onChange={({ value }) => setValue(value)}
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const AutoCompleteExampleTypeEmail = () => {
   const [value, setValue] = useState<string | null>(null);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <AutoComplete
         type="email"
         value={value}
         items={getMailItems(value)}
         onChange={({ value }) => setValue(value)}
       />
-    </StoryBookExample>
+    </Example>
   );
 };
