@@ -20,6 +20,14 @@
   }
 
   &_size {
+    &_xs {
+      --offset: var(--space-3xs);
+    }
+
+    &_s {
+      --offset: var(--space-2xs);
+    }
+
     &_m {
       --offset: var(--space-xs);
     }

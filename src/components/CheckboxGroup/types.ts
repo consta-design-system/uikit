@@ -10,7 +10,7 @@ export type CheckboxGroupDirection = typeof checkboxGroupDirections[number];
 export const checkboxGroupDefaultDirection: CheckboxGroupDirection =
   checkboxGroupDirections[0];
 
-export const checkboxGroupSizes = ['m', 'l'] as const;
+export const checkboxGroupSizes = ['m', 'xs', 's', 'l'] as const;
 export type CheckboxGroupPropSize = typeof checkboxGroupSizes[number];
 export const checkboxGroupDefaultSize: CheckboxGroupPropSize =
   checkboxGroupSizes[0];
