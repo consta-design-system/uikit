@@ -8,7 +8,7 @@ import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 
-export const checkboxPropSize = ['m', 'l'] as const;
+export const checkboxPropSize = ['m', 'xs', 's', 'l'] as const;
 export type CheckboxPropSize = typeof checkboxPropSize[number];
 export const checkboxPropSizeDefault: CheckboxPropSize = checkboxPropSize[0];
 
