@@ -816,14 +816,13 @@ const InternalTable = <T extends TableRow>(
       mergeCells &&
       ((rowsData[rowIdx - 1] && previousCell !== currentCell) ||
         rowIdx === 0 ||
-        (previousCell === currentCell &&
-          (rowsData[rowIdx - 1]?.rows || rowIdx === 1)))
+        (previousCell === currentCell && rowsData[rowIdx - 1]?.rows))
     ) {
       if (!row.rows) {
         for (let i = rowIdx; i < rowsData.length; i++) {
           if (rowsData[i + 1]) {
             const nextCell = getComparisonValue(rowsData[i + 1][accessor!]);
-            if (currentCell === nextCell) {
+            if (currentCell === nextCell && !rowsData[i].rows) {
               result.rowSpan++;
             } else {
               break;
