@@ -1,11 +1,12 @@
 import './SnackBar.css';
 
 import React, { forwardRef } from 'react';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { Transition, TransitionGroup } from 'react-transition-group';
+
+import { cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
 
 import { useRefs } from '../../hooks/useRefs/useRefs';
 import { cn } from '../../utils/bem';
-import { cnForCssTransition } from '../../utils/cnForCssTransition';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { getItem, withDefaultGetters } from './helper';
 import { SnackBarItem } from './SnackBarItem/SnackBarItem';
@@ -16,8 +17,6 @@ import {
 } from './types';
 
 export const cnSnackBar = cn('SnackBar');
-
-const cssTransitionClassNames = cnForCssTransition(cnSnackBar, 'Item');
 
 const SnackBarRender = (
   propsComponent: SnackBarProps,
@@ -47,23 +46,25 @@ const SnackBarRender = (
   return (
     <div className={cnSnackBar(null, [className])} ref={ref} {...otherProps}>
       <TransitionGroup component={null} appear enter exit>
-        {items.map((item, index) => {
-          return (
-            <CSSTransition
-              nodeRef={refs[index]}
-              classNames={cssTransitionClassNames}
-              key={cnSnackBar('Item', { key: getItemKey(item) })}
-              timeout={200}
-            >
+        {items.map((item, index) => (
+          <Transition
+            key={cnSnackBar('Item', { key: getItemKey(item) })}
+            unmountOnExit
+            timeout={200}
+            nodeRef={refs[index]}
+          >
+            {(animate) => (
               <SnackBarItem
                 ref={refs[index]}
                 form={form}
-                className={cnSnackBar('Item')}
+                className={cnSnackBar('Item', [
+                  cnMixPopoverAnimate({ animate }),
+                ])}
                 {...getItem(item, props)}
               />
-            </CSSTransition>
-          );
-        })}
+            )}
+          </Transition>
+        ))}
       </TransitionGroup>
     </div>
   );
