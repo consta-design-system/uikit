@@ -12,4 +12,6 @@ export const SkeletonBrick: React.FC<SkeletonBrickProps> = ({
   className,
   width = '100%',
   height,
-}) => <div className={cnSkeleton('', [className])} style={{ width, height }} />;
+}) => (
+  <div className={cnSkeleton(null, [className])} style={{ width, height }} />
+);

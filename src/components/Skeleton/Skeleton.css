@@ -1,5 +1,6 @@
 .Skeleton {
   --loader-width: 100px;
+  box-sizing: border-box;
   background-color: var(--color-bg-system);
   background-image:
     linear-gradient(
@@ -11,14 +12,14 @@
     );
   background-repeat: no-repeat;
   background-attachment: fixed;
-  animation: Skeleton-Animation 2.5s linear infinite;
+  animation: Skeleton-Animation 1.5s linear infinite;
 
-  @media (max-width: 1280px) {
+  @media (min-width: 720px) {
     animation-duration: 2s;
   }
 
-  @media (max-width: 720px) {
-    animation-duration: 1.5s;
+  @media (min-width: 1280px) {
+    animation-duration: 2.5s;
   }
 }
 

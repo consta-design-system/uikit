@@ -5,6 +5,7 @@
   --control-height-m: var(--space-3xl);
   --control-height-s: var(--space-2xl);
   --control-height-xs: var(--space-xl);
+  --control-box-size-s: var(--space-s);
   --control-box-size-m: var(--space-m);
   --control-box-size-l: var(--space-l);
   --control-space-l: var(--space-xl);
