@@ -1,11 +1,11 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { IconCards } from '../../../../../icons/IconCards/IconCards';
-import { IconDrag } from '../../../../../icons/IconDrag/IconDrag';
-import { IconHand } from '../../../../../icons/IconHand/IconHand';
-import { IconLeaf } from '../../../../../icons/IconLeaf/IconLeaf';
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
+import { IconCards } from '##/icons/IconCards/IconCards';
+import { IconDrag } from '##/icons/IconDrag/IconDrag';
+import { IconHand } from '##/icons/IconHand/IconHand';
+import { IconLeaf } from '##/icons/IconLeaf/IconLeaf';
+
 import { Breadcrumbs } from '../../../BreadcrumbsDeprecated';
 
 const pages = [
@@ -53,7 +53,7 @@ const pagesNoIcon = [
 
 export const BreadcrumbsExample = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <Breadcrumbs
         className="myClassName"
         pages={pagesNoIcon}
@@ -66,13 +66,13 @@ export const BreadcrumbsExample = () => {
           console.log(item.link, e);
         }}
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const BreadcrumbsExampleActive = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <Breadcrumbs
         className="myClassName"
         pages={pagesNoIcon}
@@ -86,13 +86,13 @@ export const BreadcrumbsExampleActive = () => {
           console.log(item.link, e);
         }}
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const BreadcrumbsExampleMax = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <Breadcrumbs
         className="myClassName"
         pages={pagesNoIcon}
@@ -105,13 +105,13 @@ export const BreadcrumbsExampleMax = () => {
           console.log(item.link, e);
         }}
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const BreadcrumbsExampleIcons = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <Breadcrumbs
         className="myClassName"
         pages={pages}
@@ -125,13 +125,13 @@ export const BreadcrumbsExampleIcons = () => {
           console.log(page.link, e);
         }}
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const BreadcrumbsExampleIconRoot = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <Breadcrumbs
         className="myClassName"
         pages={pages}
@@ -146,13 +146,13 @@ export const BreadcrumbsExampleIconRoot = () => {
           console.log(page.link, e);
         }}
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const BreadcrumbsExampleSize = () => {
   return (
-    <StoryBookExample>
+    <Example col={1}>
       <Breadcrumbs
         pages={pages}
         size="xs"
@@ -206,6 +206,6 @@ export const BreadcrumbsExampleSize = () => {
           console.log(page.link, e);
         }}
       />
-    </StoryBookExample>
+    </Example>
   );
 };

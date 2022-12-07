@@ -1,16 +1,10 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Checkbox } from '../../../Checkbox';
 
 export const CheckboxExampleAlign = () => (
-  <StoryBookExample
-    className={cnDocsDecorator('Section', [
-      wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
-    ])}
-  >
+  <Example style={{ width: 300 }}>
     <Checkbox
       align="center"
       checked
@@ -23,5 +17,5 @@ export const CheckboxExampleAlign = () => (
       label="Длинный текст для чекбокса с выравниванием по верху, здесь несколько строк"
       onChange={() => console.log('onChange')}
     />
-  </StoryBookExample>
+  </Example>
 );

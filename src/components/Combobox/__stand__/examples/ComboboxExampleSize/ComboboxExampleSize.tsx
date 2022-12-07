@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Combobox } from '../../../Combobox';
 
 type Item = {
@@ -27,7 +26,7 @@ const items: Item[] = [
 export function ComboboxExampleSize() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Combobox
         placeholder="Размер s"
         size="s"
@@ -49,6 +48,6 @@ export function ComboboxExampleSize() {
         value={value}
         onChange={({ value }) => setValue(value)}
       />
-    </StoryBookExample>
+    </Example>
   );
 }

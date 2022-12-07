@@ -1,39 +1,31 @@
-import './ChoiceGroupExampleMultiple.css';
-
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cn } from '##/utils/bem';
-
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { ChoiceGroup } from '../../../ChoiceGroup';
 
 const items: string[] = ['один', 'два', 'три', 'четыре', 'пять', 'шесть'];
 
-const cnChoiceGroupExampleMultiple = cn('ChoiceGroupExampleMultiple');
-
 export const ChoiceGroupExampleOne = () => {
   const [value, setValue] = useState<string | null>(items[0]);
+
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <p>Выберите один вариант</p>
+    <Example>
       <ChoiceGroup
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
         getItemLabel={(item) => item}
         name="ChoiceGroupExampleOne"
-        className={cnChoiceGroupExampleMultiple()}
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const ChoiceGroupExampleMultiple = () => {
   const [value, setValue] = useState<string[] | null>([]);
+
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <p>Выберите несколько вариантов</p>
+    <Example>
       <ChoiceGroup
         value={value}
         onChange={({ value }) => setValue(value)}
@@ -41,8 +33,7 @@ export const ChoiceGroupExampleMultiple = () => {
         getItemLabel={(item) => item}
         multiple
         name="ChoiceGroupExampleMultiple"
-        className={cnChoiceGroupExampleMultiple()}
       />
-    </StoryBookExample>
+    </Example>
   );
 };

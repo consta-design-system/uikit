@@ -81,10 +81,6 @@ function BreadcrumbsMoreRender<ITEM>(
 
   useEffect(setOpen.off, [items]);
 
-  if (!items.length) {
-    return null;
-  }
-
   const onItemClick = ({
     e,
     item,

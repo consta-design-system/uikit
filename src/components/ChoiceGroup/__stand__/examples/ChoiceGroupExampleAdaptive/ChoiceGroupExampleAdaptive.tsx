@@ -1,10 +1,11 @@
 import './ChoiceGroupExampleAdaptiveScroll.css';
 
+import { Example } from '@consta/stand';
 import React, { useCallback, useState } from 'react';
 
-import { useBreakpoints } from '../../../../../hooks/useBreakpoints/useBreakpoints';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { cn } from '../../../../../utils/bem';
+import { useBreakpoints } from '##/hooks/useBreakpoints';
+import { cn } from '##/utils/bem';
+
 import { ChoiceGroup } from '../../../ChoiceGroup';
 
 const items: string[] = [
@@ -27,7 +28,7 @@ const getItemLabel = (item: string) => item;
 
 export const ChoiceGroupExampleAdaptiveScroll = () => {
   return (
-    <StoryBookExample>
+    <Example>
       <div className={cnChoiceGroupExampleAdaptiveScroll()}>
         <ChoiceGroup
           name="ChoiceGroupExampleAdaptiveScroll"
@@ -36,7 +37,7 @@ export const ChoiceGroupExampleAdaptiveScroll = () => {
           form="round"
         />
       </div>
-    </StoryBookExample>
+    </Example>
   );
 };
 
@@ -52,7 +53,7 @@ export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
 
   if (desktop) {
     return (
-      <StoryBookExample>
+      <Example>
         <ChoiceGroup
           name="ChoiceGroupExampleAdaptiveUseBreakpoints"
           items={items2}
@@ -62,12 +63,12 @@ export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
           value={value}
           onChange={onChandge}
         />
-      </StoryBookExample>
+      </Example>
     );
   }
 
   return (
-    <StoryBookExample>
+    <Example>
       <ChoiceGroup
         name="ChoiceGroupExampleAdaptiveUseBreakpoints"
         items={items2}
@@ -76,6 +77,6 @@ export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
         className={cnChoiceGroupExampleAdaptiveScroll('Component')}
         onChange={onChandge}
       />
-    </StoryBookExample>
+    </Example>
   );
 };

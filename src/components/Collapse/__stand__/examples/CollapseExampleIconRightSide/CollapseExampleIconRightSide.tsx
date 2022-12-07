@@ -1,10 +1,11 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { IconAlert } from '../../../../../icons/IconAlert/IconAlert';
-import { IconSettings } from '../../../../../icons/IconSettings/IconSettings';
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { Badge } from '../../../../Badge/Badge';
-import { Button } from '../../../../Button/Button';
+import { Badge } from '##/components/Badge';
+import { Button } from '##/components/Button';
+import { IconAlert } from '##/icons/IconAlert';
+import { IconSettings } from '##/icons/IconSettings';
+
 import { content } from '../../../__mocks__/mock.data';
 import { Collapse } from '../../../Collapse';
 
@@ -12,7 +13,7 @@ export const CollapseExampleIconRightSideBadge = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
 
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example>
       <Collapse
         label="Здесь справа что-то есть"
         isOpen={isOpen}
@@ -24,7 +25,7 @@ export const CollapseExampleIconRightSideBadge = () => {
       >
         {content}
       </Collapse>
-    </div>
+    </Example>
   );
 };
 
@@ -32,7 +33,7 @@ export const CollapseExampleIconRightSideButton = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
 
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example>
       <Collapse
         label="А здесь вообще справа настройки"
         isOpen={isOpen}
@@ -51,6 +52,6 @@ export const CollapseExampleIconRightSideButton = () => {
       >
         {content}
       </Collapse>
-    </div>
+    </Example>
   );
 };

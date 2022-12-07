@@ -1,11 +1,9 @@
-import './ContextMenuExampleGroups.css';
-
+import { Example } from '@consta/stand';
 import React, { useRef } from 'react';
 
+import { useFlag } from '##/hooks/useFlag';
+
 import { IconAdd } from '../../../../../icons/IconAdd/IconAdd';
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { cn } from '../../../../../utils/bem';
 import { Button } from '../../../../Button/Button';
 import { ContextMenu } from '../../../ContextMenuDeprecated';
 
@@ -40,8 +38,6 @@ const items: Item[] = [
   },
 ];
 
-const cnContextMenuExampleGroups = cn('ContextMenuExampleGroups');
-
 const sortGroup = (a: number | string, b: number | string) => {
   if (a > b) {
     return 1;
@@ -54,21 +50,24 @@ const sortGroup = (a: number | string, b: number | string) => {
 
 export const ContextMenuExampleGroups = () => {
   const ref = useRef(null);
+  const [isOpen, setIsOpen] = useFlag();
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [cnContextMenuExampleGroups()])}
-    >
-      <Button iconLeft={IconAdd} ref={ref} />
-      <ContextMenu
-        items={items}
-        getLabel={(item) => item.name}
-        getGroupId={(item) => item.group}
-        getGroupLabel={(id) => groups.find((group) => group.id === id)?.name}
-        anchorRef={ref}
-        direction="downStartLeft"
-        possibleDirections={['upStartLeft', 'downStartLeft']}
-        sortGroup={sortGroup}
-      />
-    </StoryBookExample>
+    <>
+      <Example>
+        <Button iconLeft={IconAdd} ref={ref} onClick={setIsOpen.toogle} />
+      </Example>
+      {isOpen && (
+        <ContextMenu
+          items={items}
+          getLabel={(item) => item.name}
+          getGroupId={(item) => item.group}
+          getGroupLabel={(id) => groups.find((group) => group.id === id)?.name}
+          anchorRef={ref}
+          direction="downStartLeft"
+          possibleDirections={['upStartLeft', 'downStartLeft']}
+          sortGroup={sortGroup}
+        />
+      )}
+    </>
   );
 };

@@ -1,6 +1,6 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Button } from '../../../../Button/Button';
 import { Select } from '../../../../Select/Select';
 import { TextField } from '../../../../TextField/TextField';
@@ -9,7 +9,7 @@ import { FieldGroup } from '../../../FieldGroup';
 
 export const FieldGroupExampleForm = () => {
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <FieldGroup form="clearBrick">
         <TextField placeholder="TextField" />
         <Select
@@ -21,6 +21,6 @@ export const FieldGroupExampleForm = () => {
         />
         <Button label="Button" />
       </FieldGroup>
-    </div>
+    </Example>
   );
 };

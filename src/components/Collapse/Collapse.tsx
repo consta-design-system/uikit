@@ -84,8 +84,13 @@ export const Collapse: CollapseComponent = React.forwardRef<
   return (
     <div
       ref={useForkRef([ref, collapseRef])}
-      className={cnCollapse({ size, view, horizontalSpace }, [className])}
-      style={style}
+      className={cnCollapse({ size, view }, [className])}
+      style={{
+        ...style,
+        ['--horizontal-space' as string]: horizontalSpace
+          ? `var(--space-${horizontalSpace})`
+          : 0,
+      }}
     >
       <div
         className={cnCollapse('Label', {

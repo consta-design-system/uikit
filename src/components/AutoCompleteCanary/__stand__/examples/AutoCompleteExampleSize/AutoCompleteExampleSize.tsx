@@ -26,7 +26,7 @@ const items: Item[] = [
 export const AutoCompleteExampleSize = () => {
   const [value, setValue] = useState<string | null>(null);
   return (
-    <Example col={{ 4: 880 }}>
+    <Example col={{ 1: 0, 4: 880 }}>
       <AutoComplete
         type="text"
         placeholder="Размер xs"

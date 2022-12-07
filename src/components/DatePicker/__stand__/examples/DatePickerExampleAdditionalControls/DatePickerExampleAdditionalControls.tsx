@@ -1,3 +1,4 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
 import { Button } from '../../../../Button/Button';
@@ -24,16 +25,18 @@ export const DatePickerExampleAdditionalControls = () => {
   };
 
   return (
-    <DatePicker
-      value={value}
-      type="date-range"
-      onChange={({ value }) => setValue(value)}
-      renderAdditionalControls={({ currentVisibleDate }) => (
-        <Button
-          label="Этот квартал"
-          onClick={() => currentVisibleDate && setCuarter(currentVisibleDate)}
-        />
-      )}
-    />
+    <Example>
+      <DatePicker
+        value={value}
+        type="date-range"
+        onChange={({ value }) => setValue(value)}
+        renderAdditionalControls={({ currentVisibleDate }) => (
+          <Button
+            label="Этот квартал"
+            onClick={() => currentVisibleDate && setCuarter(currentVisibleDate)}
+          />
+        )}
+      />
+    </Example>
   );
 };

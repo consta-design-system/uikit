@@ -1,15 +1,12 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Combobox } from '../../../Combobox';
 
 export function ComboboxExampleCustomTypes() {
   const [value, setValue] = useState<string | null>();
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', { indent: 'bottom' })}
-    >
+    <Example col={1}>
       <Combobox
         placeholder="Выберите вариант"
         items={['Первый', 'Второй', 'Третий']}
@@ -18,11 +15,9 @@ export function ComboboxExampleCustomTypes() {
         getItemKey={(item) => item}
         getItemLabel={(item) => item}
       />
-    </StoryBookExample>
+    </Example>
   );
 }
-
-// Example 2
 
 export type Item = {
   name: string;
@@ -51,7 +46,7 @@ export const groups: string[] = [
 export function ComboboxExampleCustomTypesWithGroups() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Combobox
         placeholder="Выберите вариант"
         items={items}
@@ -64,6 +59,6 @@ export function ComboboxExampleCustomTypesWithGroups() {
         getGroupKey={(group: string) => group}
         getGroupLabel={(group: string) => group}
       />
-    </StoryBookExample>
+    </Example>
   );
 }

@@ -1,11 +1,8 @@
-import './CheckboxGroupExampleSize.css';
-
+import { Example } from '@consta/stand';
 import React from 'react';
 
 import { cn } from '##/utils/bem';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Item, items } from '../../../__mocks__/data.mock';
 import { CheckboxGroup } from '../../../CheckboxGroup';
 
@@ -14,7 +11,7 @@ const cnCheckboxGroupExampleSize = cn('CheckboxGroupExampleSize');
 export const CheckboxGroupExampleSize = () => {
   const [value, setValue] = React.useState<Item[] | null>(null);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <CheckboxGroup
         value={value}
         items={items}
@@ -37,6 +34,6 @@ export const CheckboxGroupExampleSize = () => {
         size="l"
         className={cnCheckboxGroupExampleSize()}
       />
-    </StoryBookExample>
+    </Example>
   );
 };

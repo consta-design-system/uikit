@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { ChoiceGroup } from '../../../ChoiceGroupDeprecated';
 
 type Item = string;
@@ -13,7 +12,7 @@ const itemsMode: Item[] = ['Тестовый режим', 'Рабочий реж
 export const ChoiceGroupExampleSwitchPolar = () => {
   const [value, setValue] = useState<Item | null>(itemsPolar[0]);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={{ 1: 0, flex: 600 }}>
       <p>Поляризационный фильтр</p>
       <ChoiceGroup
         value={value}
@@ -22,14 +21,14 @@ export const ChoiceGroupExampleSwitchPolar = () => {
         getLabel={(item) => item}
         name="ChoiceGroupExampleSwitchPolar"
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const ChoiceGroupExampleSwitchLetters = () => {
   const [value, setValue] = useState<Item | null>(itemsLetters[0]);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={{ 1: 0, flex: 600 }}>
       <p>Получать письма</p>
       <ChoiceGroup
         value={value}
@@ -38,14 +37,14 @@ export const ChoiceGroupExampleSwitchLetters = () => {
         getLabel={(item) => item}
         name="ChoiceGroupExampleSwitchLetters"
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const ChoiceGroupExampleSwitchMode = () => {
   const [value, setValue] = useState<Item | null>(itemsMode[0]);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <ChoiceGroup
         value={value}
         onChange={({ value }) => setValue(value)}
@@ -53,6 +52,6 @@ export const ChoiceGroupExampleSwitchMode = () => {
         getLabel={(item) => item}
         name="ChoiceGroupExampleSwitchMode"
       />
-    </StoryBookExample>
+    </Example>
   );
 };

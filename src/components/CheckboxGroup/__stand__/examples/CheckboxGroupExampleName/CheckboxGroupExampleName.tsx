@@ -1,10 +1,9 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnMixSpace } from '../../../../../mixs/MixSpace/MixSpace';
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
+import { cnMixSpace } from '##/mixs/MixSpace/MixSpace';
+import { cnDocsExample } from '##/uiKit/components/DocsExample';
+
 import { Button } from '../../../../Button/Button';
 import {
   items,
@@ -26,10 +25,7 @@ export const CheckboxGroupExampleName = () => {
   const [value, setValue] = React.useState<Item[] | null>(null);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <p className={cnDocsExample('Caption')}>
-        <b>Выберите номер</b>
-      </p>
+    <Example>
       <CheckboxGroup
         value={value}
         items={items}
@@ -38,7 +34,7 @@ export const CheckboxGroupExampleName = () => {
         onChange={({ value }) => setValue(value)}
         name="CheckboxGroup"
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
@@ -46,52 +42,42 @@ export const CheckboxGroupExampleHead = () => {
   const [value, setValue] = React.useState<Item[] | null>(null);
 
   return (
-    <div
-      className={cnDocsDecorator('Section', [
-        wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
-      ])}
-    >
-      <div className={cnMixSpace({ m: 'm' })}>
-        <div className={cnDocsExample()}>
-          <p className={cnDocsExample('Caption')}>
-            <b>Где деньги?</b>
-          </p>
-          <div className={wp.decorator({ distribute: 'left' })}>
-            <CheckboxGroup
-              value={value}
-              items={itemsHead}
-              getItemLabel={(item) => item.name}
-              getItemDisabled={(item) => item.disabled}
-              onChange={({ value }) => setValue(value)}
-              name="CheckboxGroup"
-            />
-          </div>
-          <p className={cnDocsExample('Status', { view: 'wrong' })}>
-            Неправильно
-          </p>
-        </div>
+    <Example col={{ 0: 1, 2: 760 }}>
+      <div>
+        <p className={cnDocsExample('Caption')}>
+          <b>Где деньги?</b>
+        </p>
+
+        <CheckboxGroup
+          value={value}
+          items={itemsHead}
+          getItemLabel={(item) => item.name}
+          getItemDisabled={(item) => item.disabled}
+          onChange={({ value }) => setValue(value)}
+          name="CheckboxGroup"
+        />
+
+        <p className={cnDocsExample('Status', { view: 'wrong' })}>
+          Неправильно
+        </p>
       </div>
-      <div className={cnMixSpace({ m: 'm' })}>
-        <div className={cnDocsExample()}>
-          <p className={cnDocsExample('Caption')}>
-            <b>Где деньги?</b>
-          </p>
-          <div className={wp.decorator({ distribute: 'left' })}>
-            <CheckboxGroup
-              value={value}
-              items={itemsHead2}
-              getItemLabel={(item) => item.name}
-              getItemDisabled={(item) => item.disabled}
-              onChange={({ value }) => setValue(value)}
-              name="CheckboxGroup"
-            />
-          </div>
-          <p className={cnDocsExample('Status', { view: 'right' })}>
-            Правильно
-          </p>
-        </div>
+      <div>
+        <p className={cnDocsExample('Caption')}>
+          <b>Где деньги?</b>
+        </p>
+
+        <CheckboxGroup
+          value={value}
+          items={itemsHead2}
+          getItemLabel={(item) => item.name}
+          getItemDisabled={(item) => item.disabled}
+          onChange={({ value }) => setValue(value)}
+          name="CheckboxGroup"
+        />
+
+        <p className={cnDocsExample('Status', { view: 'right' })}>Правильно</p>
       </div>
-    </div>
+    </Example>
   );
 };
 
@@ -99,10 +85,7 @@ export const CheckboxExampleGroupHead3 = () => {
   const [value, setValue] = React.useState<Item[] | null>(null);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <p className={cnDocsExample('Caption')}>
-        <b>Выберите места для хранения денег</b>
-      </p>
+    <Example>
       <CheckboxGroup
         value={value}
         items={itemsHead}
@@ -111,7 +94,7 @@ export const CheckboxExampleGroupHead3 = () => {
         onChange={({ value }) => setValue(value)}
         name="CheckboxGroup"
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
@@ -119,46 +102,34 @@ export const CheckboxGroupExampleNeg = () => {
   const [value, setValue] = React.useState<Item[] | null>(null);
 
   return (
-    <div
-      className={cnDocsDecorator('Section', [
-        wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
-      ])}
-    >
-      <div className={cnMixSpace({ m: 'm' })}>
-        <div className={cnDocsExample()}>
-          <div className={wp.decorator({ distribute: 'left' })}>
-            <CheckboxGroup
-              value={value}
-              items={itemsNeg}
-              getItemLabel={(item) => item.name}
-              getItemDisabled={(item) => item.disabled}
-              onChange={({ value }) => setValue(value)}
-              name="CheckboxGroup"
-            />
-          </div>
-          <p className={cnDocsExample('Status', { view: 'wrong' })}>
-            Неправильно
-          </p>
-        </div>
+    <Example col={{ 0: 1, 2: 760 }}>
+      <div className={cnDocsExample()}>
+        <CheckboxGroup
+          value={value}
+          items={itemsNeg}
+          getItemLabel={(item) => item.name}
+          getItemDisabled={(item) => item.disabled}
+          onChange={({ value }) => setValue(value)}
+          name="CheckboxGroup"
+        />
+
+        <p className={cnDocsExample('Status', { view: 'wrong' })}>
+          Неправильно
+        </p>
       </div>
-      <div className={cnMixSpace({ m: 'm' })}>
-        <div className={cnDocsExample()}>
-          <div className={wp.decorator({ distribute: 'left' })}>
-            <CheckboxGroup
-              value={value}
-              items={itemsNeg2}
-              getItemLabel={(item) => item.name}
-              getItemDisabled={(item) => item.disabled}
-              onChange={({ value }) => setValue(value)}
-              name="CheckboxGroup"
-            />
-          </div>
-          <p className={cnDocsExample('Status', { view: 'right' })}>
-            Правильно
-          </p>
-        </div>
+      <div className={cnDocsExample()}>
+        <CheckboxGroup
+          value={value}
+          items={itemsNeg2}
+          getItemLabel={(item) => item.name}
+          getItemDisabled={(item) => item.disabled}
+          onChange={({ value }) => setValue(value)}
+          name="CheckboxGroup"
+        />
+
+        <p className={cnDocsExample('Status', { view: 'right' })}>Правильно</p>
       </div>
-    </div>
+    </Example>
   );
 };
 
@@ -166,58 +137,43 @@ export const CheckboxGroupExampleGeneral = () => {
   const [value, setValue] = React.useState<Item[] | null>(null);
 
   return (
-    <div
-      className={cnDocsDecorator('Section', [
-        wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
-      ])}
-    >
-      <div className={cnMixSpace({ m: 'm' })}>
-        <div className={cnDocsExample()}>
-          <p className={cnDocsExample('Caption')}>
-            <b>Каких булок ещё съесть</b>
-          </p>
-          <div className={cnMixSpace({ mB: '4xl' })}>
-            <div className={wp.decorator({ distribute: 'left' })}>
-              <CheckboxGroup
-                value={value}
-                items={itemsGen}
-                getItemLabel={(item) => item.name}
-                getItemDisabled={(item) => item.disabled}
-                onChange={({ value }) => setValue(value)}
-                name="CheckboxGroup"
-              />
-            </div>
-          </div>
-          <p className={cnDocsExample('Status', { view: 'wrong' })}>
-            Неправильно
-          </p>
+    <Example col={{ 0: 1, 2: 760 }}>
+      <div>
+        <p className={cnDocsExample('Caption')}>
+          <b>Каких булок ещё съесть</b>
+        </p>
+        <div className={cnMixSpace({ mB: '4xl' })}>
+          <CheckboxGroup
+            value={value}
+            items={itemsGen}
+            getItemLabel={(item) => item.name}
+            getItemDisabled={(item) => item.disabled}
+            onChange={({ value }) => setValue(value)}
+            name="CheckboxGroup"
+          />
         </div>
+        <p className={cnDocsExample('Status', { view: 'wrong' })}>
+          Неправильно
+        </p>
       </div>
-      <div className={cnMixSpace({ m: 'm' })}>
-        <div className={cnDocsExample()}>
-          <p className={cnDocsExample('Caption')}>
-            <b>Каких булок ещё съесть</b>
-          </p>
-          <div className={wp.decorator({ distribute: 'left' })}>
-            <CheckboxGroup
-              value={value}
-              items={itemsGen2}
-              getItemLabel={(item) => item.name}
-              getItemDisabled={(item) => item.disabled}
-              onChange={({ value }) => setValue(value)}
-              name="CheckboxGroup"
-            />
-          </div>
-          <div
-            className={wp.decorator({ 'distribute': 'left', 'indent-t': 'm' })}
-          >
-            <Button label="Пропустить этот шаг" view="ghost" />
-          </div>
-          <p className={cnDocsExample('Status', { view: 'right' })}>
-            Правильно
-          </p>
-        </div>
+      <div>
+        <p className={cnDocsExample('Caption')}>
+          <b>Каких булок ещё съесть</b>
+        </p>
+
+        <CheckboxGroup
+          value={value}
+          items={itemsGen2}
+          getItemLabel={(item) => item.name}
+          getItemDisabled={(item) => item.disabled}
+          onChange={({ value }) => setValue(value)}
+          name="CheckboxGroup"
+          className={cnMixSpace({ mB: 's' })}
+        />
+        <Button label="Пропустить этот шаг" view="ghost" />
+
+        <p className={cnDocsExample('Status', { view: 'right' })}>Правильно</p>
       </div>
-    </div>
+    </Example>
   );
 };

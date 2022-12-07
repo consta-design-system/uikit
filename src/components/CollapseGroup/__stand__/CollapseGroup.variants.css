@@ -1,0 +1,9 @@
+.CollapseGroupVariants {
+  position: absolute;
+  top: var(--space-m);
+  width: 100%;
+
+  &-Component {
+    margin: 0 auto;
+  }
+}

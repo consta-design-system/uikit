@@ -1,11 +1,9 @@
-import './ContextMenuExampleSubMenu.css';
-
+import { Example } from '@consta/stand';
 import React, { useRef } from 'react';
 
+import { useFlag } from '##/hooks/useFlag';
+
 import { IconAdd } from '../../../../../icons/IconAdd/IconAdd';
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { cn } from '../../../../../utils/bem';
 import { Button } from '../../../../Button/Button';
 import { ContextMenu } from '../../../ContextMenuDeprecated';
 
@@ -48,36 +46,22 @@ const items: Item[] = [
   },
 ];
 
-const cnContextMenuExampleSubMenu = cn('ContextMenuExampleSubMenu');
-
 export const ContextMenuExampleSubMenu = () => {
-  const ref1 = useRef(null);
-  const ref2 = useRef(null);
+  const ref = useRef(null);
+  const [open, setOpen] = useFlag();
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [cnContextMenuExampleSubMenu()])}
-    >
-      <Button iconLeft={IconAdd} ref={ref1} />
-      <ContextMenu
-        items={items}
-        getLabel={(item) => item.name}
-        anchorRef={ref1}
-        direction="downStartRight"
-        subMenuDirection="leftStartUp"
-        possibleDirections={['upStartRight', 'downStartRight']}
-        spareDirection="downStartRight"
-        getSubItems={(item) => item.menu}
-      />
-      <Button iconLeft={IconAdd} ref={ref2} />
-      <ContextMenu
-        items={items}
-        getLabel={(item) => item.name}
-        anchorRef={ref2}
-        direction="downStartLeft"
-        possibleDirections={['upStartLeft', 'downStartLeft']}
-        subMenuDirection="rightStartUp"
-        getSubItems={(item) => item.menu}
-      />
-    </StoryBookExample>
+    <>
+      <Example>
+        <Button iconLeft={IconAdd} ref={ref} onClick={setOpen.toogle} />
+      </Example>
+      {open && (
+        <ContextMenu
+          items={items}
+          getLabel={(item) => item.name}
+          anchorRef={ref}
+          getSubItems={(item) => item.menu}
+        />
+      )}
+    </>
   );
 };

@@ -1,5 +1,9 @@
+import './ChoiceGroup.variants.css';
+
 import { useBoolean, useSelect } from '@consta/stand';
 import React, { useState } from 'react';
+
+import { cn } from '##/utils/bem';
 
 import { IconComponent } from '../../../icons/Icon/Icon';
 import { IconCamera } from '../../../icons/IconCamera/IconCamera';
@@ -48,6 +52,8 @@ const items: Item[] = [
   },
 ];
 
+const cnChoiceGroupVariants = cn('ChoiceGroupVariants');
+
 const Variants = () => {
   const [valueMultiple, setValueMultiple] = useState<Item[] | null>(null);
   const [value, setValue] = useState<Item | null>(null);
@@ -68,40 +74,42 @@ const Variants = () => {
     : () => undefined;
 
   return (
-    <form>
-      {multiple ? (
-        <ChoiceGroup
-          items={items}
-          value={valueMultiple}
-          onChange={({ value }) => setValueMultiple(value)}
-          name="ChoiceGroup"
-          multiple
-          size={size}
-          view={view}
-          width={width}
-          form={form}
-          onlyIcon={onlyIcon}
-          getItemIcon={getItemIcon}
-          disabled={disabled}
-          getItemDisabled={getItemDisabled}
-        />
-      ) : (
-        <ChoiceGroup
-          items={items}
-          value={value}
-          onChange={({ value }) => setValue(value)}
-          name="ChoiceGroup"
-          multiple={false}
-          size={size}
-          view={view}
-          width={width}
-          form={form}
-          onlyIcon={onlyIcon}
-          getItemIcon={getItemIcon}
-          disabled={disabled}
-          getItemDisabled={getItemDisabled}
-        />
-      )}
+    <form className={cnChoiceGroupVariants()}>
+      <div className={cnChoiceGroupVariants('Component')}>
+        {multiple ? (
+          <ChoiceGroup
+            items={items}
+            value={valueMultiple}
+            onChange={({ value }) => setValueMultiple(value)}
+            name="ChoiceGroup"
+            multiple
+            size={size}
+            view={view}
+            width={width}
+            form={form}
+            onlyIcon={onlyIcon}
+            getItemIcon={getItemIcon}
+            disabled={disabled}
+            getItemDisabled={getItemDisabled}
+          />
+        ) : (
+          <ChoiceGroup
+            items={items}
+            value={value}
+            onChange={({ value }) => setValue(value)}
+            name="ChoiceGroup"
+            multiple={false}
+            size={size}
+            view={view}
+            width={width}
+            form={form}
+            onlyIcon={onlyIcon}
+            getItemIcon={getItemIcon}
+            disabled={disabled}
+            getItemDisabled={getItemDisabled}
+          />
+        )}
+      </div>
     </form>
   );
 };
