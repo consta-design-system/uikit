@@ -26,6 +26,7 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
       locale,
       dropdownForm,
       onFocus,
+      dropdownClassName,
       currentVisibleDate: currentVisibleDateProp,
       onChangeCurrentVisibleDate,
       multiplicityHours: multiplicityHoursProp,
@@ -113,6 +114,7 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
           type="date-time"
           view={dateTimeView}
           events={events}
+          className={dropdownClassName}
           locale={locale}
           minDate={props.minDate}
           maxDate={props.maxDate}

@@ -20,6 +20,7 @@ export const DatePickerTypeDate: DatePickerTypeComponent<'date'> = forwardRef(
       events,
       dateTimeView = datePickerPropDateTimeViewDefault,
       locale,
+      dropdownClassName,
       dropdownForm,
       onFocus,
       currentVisibleDate: currentVisibleDateProp,
@@ -97,6 +98,7 @@ export const DatePickerTypeDate: DatePickerTypeComponent<'date'> = forwardRef(
           events={events}
           locale={locale}
           minDate={props.minDate}
+          className={dropdownClassName}
           maxDate={props.maxDate}
           currentVisibleDate={currentVisibleDate}
           form={dropdownForm}
