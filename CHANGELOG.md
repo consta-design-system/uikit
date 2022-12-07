@@ -1,5 +1,15 @@
 # Changelog
 
+## v4.6.0 (07/12/2022)
+Самое важное:
+- В `DatePicker` добавили свойство `dropdownClassName` для установки произвольного класса всплывающего окна.
+
+---
+
+- [feat(DatePicker): add prop dropdownClassName (#2810)](https://github.com/consta-design-system/uikit/commit/469e9d33eb98dc13e176a0c44dcd7868a6826786) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
 ## v4.5.1 (02/12/2022)
 Самое важное:
 - В `Table` исправлена группировка в дочерних элементах
@@ -422,43 +432,3 @@ UserSelectDeprecated
 - [feat(DatePicker): add types year and year-range (#2254)](https://github.com/consta-design-system/uikit/commit/da36fda7386db228b1d3e458bfafe5aff06b4c25) - [@N1MBER](https://github.com/N1MBER)
 - [docs(DatePicker): add docs for type Range fields (#2253)](https://github.com/consta-design-system/uikit/commit/8d97debbb8e107f365ad57e5894913a149e2dc99) - [@arhayka](https://github.com/arhayka)
 - [docs(common): add SVG parameters to create icon docs (#2237)](https://github.com/consta-design-system/uikit/commit/e24316c67a123d368a2a79d4d0b69b054048edb5) - [@arhayka](https://github.com/arhayka)
-
---------------------
-
-## v3.20.0 (22/04/2022)
-- Изменили API для `DatePicker` — настройки для `range`-типов стали удобнее. ⚠️ Осторожно, ломающие изменения:  некоторые свойства поменялись, см. ниже. 
-- Исправили критическую ошибку в `useBreakpoints` —  `CSS` и `JS` брейкпоины теперь переключаются одновременно.
-- `Select` — исправили ошибку с неправильным выделением опций.
-- Добавили докуменацию про адапивность компонентов:  `Responses`,  `Pagination`, `Layout`,  `Grid`
-- в `Table` исправили баг с `lazyload`
-
-⚠️ Какие свойства поменялись в `DatePicker`
-
-```
-startFieldInputRef - deleted, use inputRef
-endFieldInputRef - deleted, use inputRef
-startFieldLeftSide - deleted, use leftSide
-startFieldRightSide - deleted, use rightSide
-endFieldLeftSide - deleted, use leftSide
-endFieldRightSide - deleted, use rightSide
-startFieldOnFocus - deleted, use onFocus
-startFieldOnBlur - deleted, use onBlur
-endFieldOnFocus - deleted, use onFocus
-endFieldOnBlur - deleted, use onBlur
-```
-
----
-
-- [docs(global): remove gpn (#2245)](https://github.com/consta-design-system/uikit/commit/d367ba6b631c602a94460e411a5c57715db95787) - [@arhayka](https://github.com/arhayka)
-- [docs(Responses): add adaptive section (#2239)](https://github.com/consta-design-system/uikit/commit/d83e2b754ea9c8e6041b3b53e8d63609584244c0) - [@arhayka](https://github.com/arhayka)
-- [fix(Table): fix lazyload (#2236)](https://github.com/consta-design-system/uikit/commit/eec933b23553bc40b467404b2cad0341e5fc2a15) - [@N1MBER](https://github.com/N1MBER)
-- [docs(Pagination): add adattive section (#2225)](https://github.com/consta-design-system/uikit/commit/a6bcf44cab2d3ab211ee33e9cf7f3fd160d07421) - [@arhayka](https://github.com/arhayka)
-- [docs(Layout): add adaptive section (#2224)](https://github.com/consta-design-system/uikit/commit/6502713b2305f61228cb0e0c00940d9fc7e1ecce) - [@arhayka](https://github.com/arhayka)
-- [docs(Grid): add adaptive section (#2222)](https://github.com/consta-design-system/uikit/commit/387c4579bdd2b411a8cc58281ef1021436278e13) - [@arhayka](https://github.com/arhayka)
-- [chore(deploy): edit config (#2247)](https://github.com/consta-design-system/uikit/commit/34a860c2ed609376c77d12e8ae650c9dc8410267) - [@gizeasy](https://github.com/gizeasy)
-- [feat(DatePicker): edit api (#2230)](https://github.com/consta-design-system/uikit/commit/6a1c57e061e3a5daa7c3ae6041e1fd1fbdba2591) - [@gizeasy](https://github.com/gizeasy)
-- [fix(useBreakpoints): fixed EventListener (#2234)](https://github.com/consta-design-system/uikit/commit/9e054e422fded782c978f04fd7c25bd0c5258537) - [@gizeasy](https://github.com/gizeasy)
-- [feat(SelectItem): added break-word (#2233)](https://github.com/consta-design-system/uikit/commit/61877e21550d0563dcbf8dd356a427d9fc18d453) - [@gizeasy](https://github.com/gizeasy)
-- [docs(global): change links to the landing (#2226)](https://github.com/consta-design-system/uikit/commit/6e44faf9dd1ec6e6076b902e20f446213d6f5a1d) - [@arhayka](https://github.com/arhayka)
-- [fix(SelectDropdown): fix bug with items index (#2232)](https://github.com/consta-design-system/uikit/commit/8eb24883ee45e843357d4b3ec93c47c3db12eb04) - [@N1MBER](https://github.com/N1MBER)
-- [docs(global): replace url (#2228)](https://github.com/consta-design-system/uikit/commit/720df584d236bf436d0370e469916a16895f9e24) - [@gizeasy](https://github.com/gizeasy)
