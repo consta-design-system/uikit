@@ -22,6 +22,7 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
       dateTimeView = datePickerPropDateTimeViewDefault,
       locale,
       dropdownForm,
+      dropdownClassName,
       onFocus,
       multiplicityHours: multiplicityHoursProp,
       multiplicityMinutes: multiplicityMinutesProp,
@@ -85,6 +86,7 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
           minDate={props.minDate}
           maxDate={props.maxDate}
           form={dropdownForm}
+          className={dropdownClassName}
           onChange={props.onChange}
           renderAdditionalControls={renderAdditionalControls}
           multiplicityHours={multiplicityHours}

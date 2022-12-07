@@ -109,6 +109,7 @@ export type DatePickerProps<TYPE extends DatePickerPropType = 'date'> =
       id?: string;
       name?: DatePickerPropName<TYPE>;
       disabled?: boolean;
+      dropdownClassName?: string;
       size?: TextFieldPropSize;
       view?: TextFieldPropView;
       form?: TextFieldPropForm;
