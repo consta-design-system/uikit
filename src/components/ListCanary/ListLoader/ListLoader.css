@@ -1,0 +1,42 @@
+.ListLoader {
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--loader-height);
+  padding-left: var(--space-l);
+  cursor: wait;
+
+  &-Container {
+    display: inline-flex;
+    align-items: center;
+    width: calc(var(--space-l) + var(--space-xs));
+    height: 100%;
+  }
+
+  &_size {
+    &_xs {
+      --loader-height:
+        calc(
+          var(--control-space-m) / 2 + var(--control-text-size-xs)
+        );
+    }
+
+    &_s {
+      --loader-height: calc(5 * var(--control-space-m) / 4);
+    }
+
+    &_m {
+      --loader-height: calc(7 * var(--control-space-m) / 4);
+    }
+
+    &_l {
+      --loader-height:
+        calc(
+          var(--control-space-m) + var(--control-text-size-l)
+        );
+    }
+  }
+
+  &-Loader.Loader {
+    --backgroundColor: var(--color-control-typo-disable);
+  }
+}

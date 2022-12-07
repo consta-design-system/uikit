@@ -1,0 +1,41 @@
+.ListGroupLabel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  width: calc(100% - var(--list-group-label-horizontal-margin) * 2);
+  margin: 0 var(--list-group-label-horizontal-margin);
+  padding: var(--list-group-label-padding);
+  color: var(--color-typo-secondary);
+  border-bottom: 1px solid var(--color-control-bg-border-default);
+  font-size: var(--list-group-label-font-size);
+  line-height: var(--line-height-text-xs);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+
+  &_size {
+    &_xs {
+      --list-group-label-font-size: var(--size-text-s);
+      --list-group-label-padding: var(--space-s) 0 calc(var(--space-2xs) * 1.5);
+      --list-group-label-horizontal-margin: var(--space-xs);
+    }
+
+    &_s {
+      --list-group-label-font-size: var(--size-text-xs);
+      --list-group-label-padding: var(--space-m) 0 var(--space-2xs);
+      --list-group-label-horizontal-margin: var(--space-xs);
+    }
+
+    &_m {
+      --list-group-label-font-size: var(--size-text-2xs);
+      --list-group-label-padding: var(--space-m) 0 var(--space-xs);
+      --list-group-label-horizontal-margin: var(--space-s);
+    }
+
+    &_l {
+      --list-group-label-font-size: var(--size-text-2xs);
+      --list-group-label-padding: var(--space-l) 0 var(--space-s);
+      --list-group-label-horizontal-margin: var(--space-s);
+    }
+  }
+}

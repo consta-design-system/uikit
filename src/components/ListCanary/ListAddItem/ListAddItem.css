@@ -1,0 +1,69 @@
+.ListAddItem {
+  --list-add-item-color: var(--color-control-typo-default);
+  display: inline-flex;
+  align-items: center;
+  width: calc(100% - var(--list-add-item-horizontal-space) * 2);
+  margin: 0 var(--list-add-item-horizontal-space);
+  padding: var(--list-add-item-verical-space) 0;
+  color: var(--list-add-item-color);
+  border-bottom: 1px solid var(--color-control-bg-border-default);
+  font-size: var(--list-add-item-font-size);
+  line-height: var(--line-height-text-xs);
+  cursor: pointer;
+
+  &_size {
+    &_xs {
+      --list-add-item-font-size: var(--size-text-xs);
+      --list-add-item-verical-space: calc(var(--control-space-m) / 4);
+      --list-add-item-horizontal-space: calc(var(--control-space-s) / 2);
+      --list-add-item-icon-margin: var(--space-3xs);
+
+      &.ListItem_indent_increased {
+        --list-add-item-horizontal-space: var(--control-space-xs);
+      }
+    }
+
+    &_s {
+      --list-add-item-font-size: var(--size-text-s);
+      --list-add-item-verical-space: calc(var(--control-space-m) / 4);
+      --list-add-item-horizontal-space: calc(var(--control-space-s) / 2);
+      --list-add-item-icon-margin: var(--space-2xs);
+
+      &.ListItem_indent_increased {
+        --list-add-item-horizontal-space: var(--control-space-xs);
+      }
+    }
+
+    &_m {
+      --list-add-item-font-size: var(--size-text-m);
+      --list-add-item-verical-space: calc(var(--control-space-m) / 2);
+      --list-add-item-horizontal-space: var(--control-space-xs);
+      --list-add-item-icon-margin: var(--space-xs);
+
+      &.ListItem_indent_increased {
+        --list-add-item-horizontal-space: var(--control-space-s);
+      }
+    }
+
+    &_l {
+      --list-add-item-font-size: var(--size-text-l);
+      --list-add-item-verical-space: var(--control-space-xs);
+      --list-add-item-horizontal-space: var(--control-space-xs);
+      --list-add-item-icon-margin: var(--space-xs);
+
+      &.ListItem_indent_increased {
+        --list-add-item-horizontal-space: var(--control-space-m);
+      }
+    }
+  }
+
+  &_disabled {
+    --list-add-item-color: var(--color-control-typo-disable);
+    pointer-events: none;
+  }
+
+  &-AddIcon {
+    margin-right: var(--list-add-item-icon-margin);
+    color: var(--list-add-item-color);
+  }
+}

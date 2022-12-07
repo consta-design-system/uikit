@@ -1,0 +1,43 @@
+.MixList {
+  overflow: hidden;
+  box-sizing: border-box;
+  min-width: 280px;
+  background: var(--color-bg-default);
+  border:
+    var(--control-border-width) solid
+    var(--color-control-bg-border-default);
+  outline: none;
+  box-shadow: var(--shadow-layer);
+
+  &_form {
+    &_default {
+      border-radius: var(--control-radius);
+    }
+
+    &_brick {
+      border-radius: 0;
+    }
+
+    &_round {
+      border-radius: var(--space-xl);
+    }
+  }
+
+  &_size {
+    &_xs {
+      --list-space: var(--space-2xs);
+    }
+
+    &_s {
+      --list-space: var(--space-2xs);
+    }
+
+    &_m {
+      --list-space: var(--space-xs);
+    }
+
+    &_l {
+      --list-space: var(--space-xs);
+    }
+  }
+}
