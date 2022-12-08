@@ -1,0 +1,24 @@
+```tsx
+import { useComponentSize } from '@consta/uikit/useComponentSize';
+```
+
+Хук `useComponentSize` подписывается на изменение размеров передаваемого элемента и возвращает ширину и высоту объекта, которые имеет элемент в момент этого изменения.
+
+Данный хук нужен для отслеживания размеров конкретного элмента DOM-дерева, если ваша задача состоит в адаптации контента под разные размеры экрана испльзуйте хук [useBreakpoints](##LIBS.LIB.STAND/lib:uikit/stand:hooks-usebreakpoints-stable).
+
+```tsx
+import { useComponentSize } from '@consta/uikit/useComponentSize';
+
+...
+
+const containerRef = useRef<HTMLDivElement>(null);
+const { width, height } = useComponentSize(containerRef);
+
+return <div ref={containerRef}>...</div>;
+```
+
+## Свойства
+
+| Аргумент | Тип и значения                                                        | По умолчанию | Описание          |
+| -------- | --------------------------------------------------------------------- | ------------ | ----------------- |
+| `ref`    | `React.RefObject<HTMLElement`<code>&#124;</code>`SVGGraphicsElement>` | -            | Ссылка на элемент |
