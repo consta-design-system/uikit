@@ -1,5 +1,10 @@
 # Changelog
 
+## v4.6.1 (09/12/2022)
+- [docs: adaptive examples (#2817)](https://github.com/consta-design-system/uikit/commit/4778c61861ab1290590fe9b46855f7a8a15792f6) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v4.6.0 (07/12/2022)
 Самое важное:
 - В `DatePicker` добавили свойство `dropdownClassName` для установки произвольного класса всплывающего окна.
@@ -418,17 +423,3 @@ UserSelectDeprecated
 
 ## v3.21.2 (28/04/2022)
 - [fix(DatePicker): fixed multiplicity on DatePicker type='date-time-range'](https://github.com/consta-design-system/uikit/commit/af801220f13c753fd67d98030057467535f450cf) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v3.21.0 (27/04/2022)
-Самое главное:
-- в `DatePicker` появились типы `year` и `year-range`
-- Доработана документация по `DatePicker` и `Combobox`
----
-
-- [fix(TableSelectedOptionsList): add ellipsis to filter list (#2257)](https://github.com/consta-design-system/uikit/commit/d3e5df5e78211ac79bd342dbc2959f136d9d8082) - [@N1MBER](https://github.com/N1MBER)
-- [docs(Combobox): verify examples (#2256)](https://github.com/consta-design-system/uikit/commit/cedcbfcf14778ab26c297eac6f53b5947f723927) - [@arhayka](https://github.com/arhayka)
-- [feat(DatePicker): add types year and year-range (#2254)](https://github.com/consta-design-system/uikit/commit/da36fda7386db228b1d3e458bfafe5aff06b4c25) - [@N1MBER](https://github.com/N1MBER)
-- [docs(DatePicker): add docs for type Range fields (#2253)](https://github.com/consta-design-system/uikit/commit/8d97debbb8e107f365ad57e5894913a149e2dc99) - [@arhayka](https://github.com/arhayka)
-- [docs(common): add SVG parameters to create icon docs (#2237)](https://github.com/consta-design-system/uikit/commit/e24316c67a123d368a2a79d4d0b69b054048edb5) - [@arhayka](https://github.com/arhayka)
