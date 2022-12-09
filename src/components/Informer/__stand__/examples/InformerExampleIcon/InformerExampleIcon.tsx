@@ -1,20 +1,15 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
 import { IconThumbUp } from '../../../../../icons/IconThumbUp/IconThumbUp';
 import { IconTie } from '../../../../../icons/IconTie/IconTie';
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
-import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Informer } from '../../../Informer';
 
 export function InformerExampleIcon() {
   return (
-    <div
-      className={cnDocsDecorator('Section', [
-        wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
-      ])}
-    >
-      <div className={cnDocsExample()}>
+    <Example col={{ 1: 0, 2: 720 }}>
+      <>
         <Informer
           label="Вы вошли без галстука"
           view="bordered"
@@ -28,8 +23,8 @@ export function InformerExampleIcon() {
           Здесь уже есть один графический элемент — цветная полоска слева.
           Иконка не нужна
         </p>
-      </div>
-      <div className={cnDocsExample()}>
+      </>
+      <>
         <Informer
           label="Сообщение отправлено"
           view="filled"
@@ -40,7 +35,7 @@ export function InformerExampleIcon() {
         <p className={cnDocsExample('Caption')}>
           Здесь графический элемент не спорит с окружением
         </p>
-      </div>
-    </div>
+      </>
+    </Example>
   );
 }

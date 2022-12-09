@@ -1,38 +1,37 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
+import { cnMixSpace } from '##/mixs/MixSpace';
+
 import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
-import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Informer } from '../../../Informer';
 
 export function InformerExampleView() {
   return (
-    <div
-      className={cnDocsDecorator('Section', [
-        wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
-      ])}
-    >
-      <div className={cnDocsExample()}>
+    <Example col={1}>
+      <>
         <Informer
           label="Ваше сообщение отправлено"
           view="filled"
           status="success"
+          className={cnMixSpace({ mB: 'm' })}
         />
-      </div>
-      <div className={cnDocsExample()}>
         <p className={cnDocsExample('Caption')}>
           Такой лучше использовать, когда сообщение — часть контента и находится
           на одном уровне с ним.
         </p>
-      </div>
-      <div className={cnDocsExample()}>
-        <Informer label="Всё заполнено" view="bordered" status="success" />
-      </div>
-      <div className={cnDocsExample()}>
+      </>
+      <>
+        <Informer
+          label="Всё заполнено"
+          view="bordered"
+          status="success"
+          className={cnMixSpace({ mB: 'm' })}
+        />
         <p className={cnDocsExample('Caption')}>
           А такой — когда сообщение должно быть на уровень выше контента.
         </p>
-      </div>
-    </div>
+      </>
+    </Example>
   );
 }

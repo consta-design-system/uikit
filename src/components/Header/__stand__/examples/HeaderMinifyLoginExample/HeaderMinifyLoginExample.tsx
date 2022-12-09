@@ -1,5 +1,6 @@
 import './HeaderMinifyLoginExample.css';
 
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
 import { IconChatStroked } from '../../../../../icons/IconChatStroked/IconChatStroked';
@@ -48,52 +49,54 @@ export function HeaderMinifyLoginExample() {
   ];
 
   return (
-    <Header
-      className={cnExample()}
-      leftSide={
-        <>
-          <HeaderModule>
-            <HeaderLogo>
-              <Text as="p" size="l" weight="bold">
-                Logotype
-              </Text>
-            </HeaderLogo>
-          </HeaderModule>
-          <HeaderModule indent="l">
-            <HeaderSearchBar
-              placeholder="я ищу"
-              label="поиск"
-              value={value}
-              onChange={handleChange}
-              onSearch={handleSearch}
-            />
-          </HeaderModule>
-          <HeaderModule indent="l">
-            <HeaderMenu items={menuItems} />
-          </HeaderModule>
-        </>
-      }
-      rightSide={
-        <>
-          <HeaderModule indent="s">
-            <HeaderButton iconLeft={IconChatStroked} />
-          </HeaderModule>
-          <HeaderModule indent="s">
-            <HeaderButton iconLeft={IconRing} />
-          </HeaderModule>
-          <HeaderModule indent="s">
-            <HeaderLogin
-              className={cnExample('Login', { authorized })}
-              authorized={authorized}
-              personName="Вадим Матвеев"
-              personInfo="В другом офисе"
-              personStatus="available"
-              onClick={handleLogin}
-              isMinified
-            />
-          </HeaderModule>
-        </>
-      }
-    />
+    <Example col={1}>
+      <Header
+        className={cnExample()}
+        leftSide={
+          <>
+            <HeaderModule>
+              <HeaderLogo>
+                <Text as="p" size="l" weight="bold">
+                  Logotype
+                </Text>
+              </HeaderLogo>
+            </HeaderModule>
+            <HeaderModule indent="l">
+              <HeaderSearchBar
+                placeholder="я ищу"
+                label="поиск"
+                value={value}
+                onChange={handleChange}
+                onSearch={handleSearch}
+              />
+            </HeaderModule>
+            <HeaderModule indent="l">
+              <HeaderMenu items={menuItems} />
+            </HeaderModule>
+          </>
+        }
+        rightSide={
+          <>
+            <HeaderModule indent="s">
+              <HeaderButton iconLeft={IconChatStroked} />
+            </HeaderModule>
+            <HeaderModule indent="s">
+              <HeaderButton iconLeft={IconRing} />
+            </HeaderModule>
+            <HeaderModule indent="s">
+              <HeaderLogin
+                className={cnExample('Login', { authorized })}
+                authorized={authorized}
+                personName="Вадим Матвеев"
+                personInfo="В другом офисе"
+                personStatus="available"
+                onClick={handleLogin}
+                isMinified
+              />
+            </HeaderModule>
+          </>
+        }
+      />
+    </Example>
   );
 }

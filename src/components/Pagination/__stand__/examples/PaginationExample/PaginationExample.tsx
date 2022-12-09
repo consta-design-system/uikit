@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Button } from '../../../../Button/Button';
 import { Pagination } from '../../../Pagination';
 
@@ -12,13 +11,14 @@ export const PaginationExample = () => {
   };
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Pagination
         currentPage={currentPage}
         onChange={handleChange}
         totalPages={3}
+        position="left"
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
@@ -29,26 +29,29 @@ export const PaginationExampleForm = () => {
   };
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Pagination
         currentPage={currentPage}
         onChange={handleChange}
         totalPages={5}
         form="default"
+        position="left"
       />
       <Pagination
         currentPage={currentPage}
         onChange={handleChange}
         totalPages={5}
         form="round"
+        position="left"
       />
       <Pagination
         currentPage={currentPage}
         onChange={handleChange}
         totalPages={5}
         form="brick"
+        position="left"
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
@@ -59,32 +62,36 @@ export const PaginationExampleSize = () => {
   };
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Pagination
         currentPage={currentPage}
         onChange={handleChange}
         totalPages={5}
         size="xs"
+        position="left"
       />
       <Pagination
         currentPage={currentPage}
         onChange={handleChange}
         totalPages={5}
         size="s"
+        position="left"
       />
       <Pagination
         currentPage={currentPage}
         onChange={handleChange}
         totalPages={5}
         size="m"
+        position="left"
       />
       <Pagination
         currentPage={currentPage}
         onChange={handleChange}
         totalPages={5}
         size="l"
+        position="left"
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
@@ -95,20 +102,22 @@ export const PaginationExampleType = () => {
   };
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Pagination
         currentPage={currentPage}
         onChange={handleChange}
         totalPages={5}
         type="default"
+        position="left"
       />
       <Pagination
         currentPage={currentPage}
         onChange={handleChange}
         totalPages={5}
         type="input"
+        position="left"
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
@@ -119,7 +128,7 @@ export const PaginationExamplePosition = () => {
   };
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Pagination
         currentPage={currentPage}
         onChange={handleChange}
@@ -138,7 +147,7 @@ export const PaginationExamplePosition = () => {
         totalPages={5}
         position="right"
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
@@ -149,21 +158,21 @@ export const PaginationExampleMinified = () => {
   };
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Pagination
         currentPage={currentPage}
         onChange={handleChange}
         totalPages={3}
         minified
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const PaginationExampleButton = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Button label="Показать еще" view="ghost" width="full" />
-    </StoryBookExample>
+    </Example>
   );
 };

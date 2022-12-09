@@ -1,3 +1,4 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
 import { ProgressStepBar } from '../../../ProgressStepBar';
@@ -43,5 +44,9 @@ const steps: Item[] = [
   },
 ];
 export const ProgressStepBarExampleTooltip = () => {
-  return <ProgressStepBar steps={steps} />;
+  return (
+    <Example col={1}>
+      <ProgressStepBar steps={steps} />
+    </Example>
+  );
 };

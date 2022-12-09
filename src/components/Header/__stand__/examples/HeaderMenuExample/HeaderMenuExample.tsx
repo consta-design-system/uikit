@@ -1,5 +1,6 @@
 import './HeaderMenuExample.css';
 
+import { Example } from '@consta/stand';
 import React from 'react';
 
 import { cn } from '../../../../../utils/bem';
@@ -27,13 +28,15 @@ export function HeaderMenuExample() {
   ];
 
   return (
-    <Header
-      className={cnExample()}
-      leftSide={
-        <HeaderModule indent="l">
-          <HeaderMenu items={menuItems} />
-        </HeaderModule>
-      }
-    />
+    <Example col={1}>
+      <Header
+        className={cnExample()}
+        leftSide={
+          <HeaderModule indent="l">
+            <HeaderMenu items={menuItems} />
+          </HeaderModule>
+        }
+      />
+    </Example>
   );
 }
