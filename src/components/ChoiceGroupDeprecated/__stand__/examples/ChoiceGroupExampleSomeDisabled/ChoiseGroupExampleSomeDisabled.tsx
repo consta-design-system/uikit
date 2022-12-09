@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { ChoiceGroup } from '../../../ChoiceGroupDeprecated';
 
 type Item = { name: string; disabled?: boolean };
@@ -16,7 +15,7 @@ const items: Item[] = [
 export const ChoiceGroupExampleSomeDisabled = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <ChoiceGroup
         value={value}
         onChange={({ value }) => setValue(value)}
@@ -25,6 +24,6 @@ export const ChoiceGroupExampleSomeDisabled = () => {
         name="ChoiceGroupExampleSomeDisabled"
         getDisabled={(item: Item) => item.disabled}
       />
-    </StoryBookExample>
+    </Example>
   );
 };

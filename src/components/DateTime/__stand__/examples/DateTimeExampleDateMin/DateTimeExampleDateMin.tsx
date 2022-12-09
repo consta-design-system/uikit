@@ -1,9 +1,8 @@
+import { Example } from '@consta/stand';
 import { startOfWeek } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { DateTime } from '../../../DateTime';
 
 const minDate = startOfWeek(new Date(), { locale: ruLocale });
@@ -13,7 +12,7 @@ export const DateTimeExampleDateMin = () => {
   const [value, setValue] = useState<Date | undefined>();
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <DateTime
         type="date-time"
         minDate={minDate}
@@ -21,6 +20,6 @@ export const DateTimeExampleDateMin = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
       />
-    </StoryBookExample>
+    </Example>
   );
 };

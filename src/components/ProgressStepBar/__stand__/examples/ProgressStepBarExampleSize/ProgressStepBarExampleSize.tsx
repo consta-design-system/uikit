@@ -1,6 +1,6 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { ProgressStepBar } from '../../../ProgressStepBar';
 
 type Item = {
@@ -39,7 +39,7 @@ const steps: Item[] = [
 
 export const ProgressStepBarExampleSize = () => {
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <ProgressStepBar
         size="xs"
         direction="horizontal"
@@ -58,6 +58,6 @@ export const ProgressStepBarExampleSize = () => {
         steps={steps}
         activeStepIndex={2}
       />
-    </div>
+    </Example>
   );
 };

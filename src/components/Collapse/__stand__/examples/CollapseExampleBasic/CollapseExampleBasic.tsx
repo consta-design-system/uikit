@@ -1,6 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { content } from '../../../__mocks__/mock.data';
 import { Collapse } from '../../../Collapse';
 
@@ -8,7 +8,7 @@ export const CollapseExample = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
 
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example>
       <Collapse
         label="Это самый настоящий коллапс"
         isOpen={isOpen}
@@ -16,6 +16,6 @@ export const CollapseExample = () => {
       >
         {content}
       </Collapse>
-    </div>
+    </Example>
   );
 };

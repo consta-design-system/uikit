@@ -1,15 +1,11 @@
+import { Example } from '@consta/stand';
 import React, { useRef, useState } from 'react';
 
 import { IconAdd } from '../../../../../icons/IconAdd/IconAdd';
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { cn } from '../../../../../utils/bem';
 import { Button } from '../../../../Button/Button';
 import { ContextMenu } from '../../../ContextMenu';
 
 const items: string[] = ['Пункт 1', 'Пункт 2', 'Пункт 3'];
-
-const cnContextMenuExampleSize = cn('ContextMenuExampleSize');
 
 export const ContextMenuExampleSize = () => {
   const refXS = useRef(null);
@@ -22,15 +18,33 @@ export const ContextMenuExampleSize = () => {
   const [isOpenL, setIsOpenL] = useState<boolean>(false);
 
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [cnContextMenuExampleSize()])}
-    >
-      <Button
-        iconLeft={IconAdd}
-        ref={refXS}
-        label="Меню размера XS"
-        onClick={() => setIsOpenXS(!isOpenXS)}
-      />
+    <>
+      <Example>
+        <Button
+          iconLeft={IconAdd}
+          ref={refXS}
+          label="Меню размера XS"
+          onClick={() => setIsOpenXS(!isOpenXS)}
+        />
+        <Button
+          iconLeft={IconAdd}
+          ref={refS}
+          label="Меню размера S"
+          onClick={() => setIsOpenS(!isOpenS)}
+        />
+        <Button
+          iconLeft={IconAdd}
+          ref={refM}
+          label="Меню размера M"
+          onClick={() => setIsOpenM(!isOpenM)}
+        />
+        <Button
+          iconLeft={IconAdd}
+          ref={refL}
+          label="Меню размера L"
+          onClick={() => setIsOpenL(!isOpenL)}
+        />
+      </Example>
       <ContextMenu
         items={items}
         isOpen={isOpenXS}
@@ -38,12 +52,6 @@ export const ContextMenuExampleSize = () => {
         anchorRef={refXS}
         direction="downStartLeft"
         size="xs"
-      />
-      <Button
-        iconLeft={IconAdd}
-        ref={refS}
-        label="Меню размера S"
-        onClick={() => setIsOpenS(!isOpenS)}
       />
       <ContextMenu
         items={items}
@@ -53,12 +61,6 @@ export const ContextMenuExampleSize = () => {
         direction="downStartLeft"
         size="s"
       />
-      <Button
-        iconLeft={IconAdd}
-        ref={refM}
-        label="Меню размера M"
-        onClick={() => setIsOpenM(!isOpenM)}
-      />
       <ContextMenu
         items={items}
         isOpen={isOpenM}
@@ -66,12 +68,6 @@ export const ContextMenuExampleSize = () => {
         anchorRef={refM}
         direction="downStartLeft"
         size="m"
-      />
-      <Button
-        iconLeft={IconAdd}
-        ref={refL}
-        label="Меню размера L"
-        onClick={() => setIsOpenL(!isOpenL)}
       />
       <ContextMenu
         items={items}
@@ -81,6 +77,6 @@ export const ContextMenuExampleSize = () => {
         direction="downStartLeft"
         size="l"
       />
-    </StoryBookExample>
+    </>
   );
 };

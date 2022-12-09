@@ -1,5 +1,9 @@
+import './CollapseGroup.variants.css';
+
 import { useBoolean, useSelect } from '@consta/stand';
 import React from 'react';
+
+import { cn } from '##/utils/bem';
 
 import { IconAdd } from '../../../icons/IconAdd/IconAdd';
 import { IconRemove } from '../../../icons/IconRemove/IconRemove';
@@ -18,6 +22,8 @@ import {
 } from '../../Collapse/Collapse';
 import { Item, items } from '../__mocks__/mock.data';
 import { CollapseGroup } from '../CollapseGroup';
+
+const cnCollapseGroupVariants = cn('CollapseGroupVariants');
 
 const Variants = () => {
   const size = useSelect('size', collapsePropSize, collapsePropSizeDefault);
@@ -57,31 +63,34 @@ const Variants = () => {
   };
 
   return (
-    <CollapseGroup
-      style={{ maxWidth: 300 }}
-      items={items}
-      isAccordion={isAccordion}
-      size={size}
-      hoverEffect={hoverEffect}
-      view={view}
-      divider={divider}
-      horizontalSpace={horizontalSpace}
-      {...(iconPosition === 'left'
-        ? {
-            iconPosition,
-            getItemRightSide,
-          }
-        : { iconPosition })}
-      {...(withCustomIcon
-        ? {
-            icon: IconAdd,
-            closeIcon: IconRemove,
-          }
-        : {
-            directionIcon,
-            closeDirectionIcon,
-          })}
-    />
+    <div style={{ maxWidth: 300 }} className={cnCollapseGroupVariants()}>
+      <div className={cnCollapseGroupVariants('Component')}>
+        <CollapseGroup
+          items={items}
+          isAccordion={isAccordion}
+          size={size}
+          hoverEffect={hoverEffect}
+          view={view}
+          divider={divider}
+          horizontalSpace={horizontalSpace}
+          {...(iconPosition === 'left'
+            ? {
+                iconPosition,
+                getItemRightSide,
+              }
+            : { iconPosition })}
+          {...(withCustomIcon
+            ? {
+                icon: IconAdd,
+                closeIcon: IconRemove,
+              }
+            : {
+                directionIcon,
+                closeDirectionIcon,
+              })}
+        />
+      </div>
+    </div>
   );
 };
 

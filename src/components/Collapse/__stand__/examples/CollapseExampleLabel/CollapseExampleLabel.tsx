@@ -1,11 +1,11 @@
 import './CollapseExampleLabel.css';
 
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
 import { Badge } from '##/components/Badge';
 import { cn } from '##/utils/bem';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { content } from '../../../__mocks__/mock.data';
 import { Collapse } from '../../../Collapse';
 
@@ -15,7 +15,7 @@ export const CollapseExampleLabel = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
 
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example>
       <Collapse
         label={
           <>
@@ -33,6 +33,6 @@ export const CollapseExampleLabel = () => {
       >
         {content}
       </Collapse>
-    </div>
+    </Example>
   );
 };

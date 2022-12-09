@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Text } from '../../../../Text/Text';
 import { Combobox } from '../../../Combobox';
 
@@ -29,7 +28,7 @@ export function ComboboxExampleOnInputChange() {
   const [value, setValue] = useState<Item | null>();
   const [search, setSearch] = useState<string | undefined | null>();
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Text size="l">Значение поиска: {search ?? 'Пусто'}</Text>
       <Combobox
         placeholder="Выберите вариант"
@@ -38,6 +37,6 @@ export function ComboboxExampleOnInputChange() {
         onInputChange={({ value }) => setSearch(value)}
         onChange={({ value }) => setValue(value)}
       />
-    </StoryBookExample>
+    </Example>
   );
 }

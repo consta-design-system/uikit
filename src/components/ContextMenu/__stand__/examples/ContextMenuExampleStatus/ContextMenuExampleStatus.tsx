@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useRef, useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Button } from '../../../../Button/Button';
 import { ContextMenu } from '../../../ContextMenu';
 
@@ -29,8 +28,10 @@ export const ContextMenuExampleStatus = () => {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+    <>
+      <Example>
+        <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+      </Example>
       <ContextMenu
         isOpen={isOpen}
         items={items}
@@ -38,6 +39,6 @@ export const ContextMenuExampleStatus = () => {
         anchorRef={ref}
         direction="downStartLeft"
       />
-    </StoryBookExample>
+    </>
   );
 };

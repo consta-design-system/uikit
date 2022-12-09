@@ -1,11 +1,10 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Checkbox } from '../../../Checkbox';
 
 export const CheckboxExampleStatus = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
+  <Example>
     <Checkbox
       label="Checkbox"
       onChange={() => console.log('onChange')}
@@ -34,5 +33,5 @@ export const CheckboxExampleStatus = () => (
       label="Disabled Checked"
       onChange={() => console.log('onChange')}
     />
-  </StoryBookExample>
+  </Example>
 );

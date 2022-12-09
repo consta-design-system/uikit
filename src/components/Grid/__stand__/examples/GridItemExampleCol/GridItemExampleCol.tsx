@@ -1,9 +1,8 @@
 import './GridItemExampleCol.css';
 
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { cn } from '../../../../../utils/bem';
 import { Grid, GridItem } from '../../../Grid';
 
@@ -11,7 +10,7 @@ const cnGridItemExampleCol = cn('GridItemExampleCol');
 
 export function GridItemExampleCol() {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Grid className={cnGridItemExampleCol()} cols="2" gap="xl">
         <GridItem className={cnGridItemExampleCol('Item')} col="2">
           1
@@ -24,6 +23,6 @@ export function GridItemExampleCol() {
         <GridItem className={cnGridItemExampleCol('Item')}>5</GridItem>
         <GridItem className={cnGridItemExampleCol('Item')}>6</GridItem>
       </Grid>
-    </StoryBookExample>
+    </Example>
   );
 }

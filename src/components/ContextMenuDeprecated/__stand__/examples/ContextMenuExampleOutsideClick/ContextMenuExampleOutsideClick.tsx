@@ -1,28 +1,24 @@
-import './ContextMenuExampleOutsideClick.css';
-
+import { Example } from '@consta/stand';
 import React, { useRef, useState } from 'react';
 
 import { IconAdd } from '../../../../../icons/IconAdd/IconAdd';
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { cn } from '../../../../../utils/bem';
 import { Button } from '../../../../Button/Button';
 import { ContextMenu } from '../../../ContextMenuDeprecated';
 
 const items: string[] = ['Пункт 1', 'Пункт 2', 'Пункт 3'];
 
-const cnContextMenuExampleOutsideClick = cn('ContextMenuExampleOutsideClick');
-
 export const ContextMenuExampleOutsideClick = () => {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState<boolean>(true);
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [
-        cnContextMenuExampleOutsideClick(),
-      ])}
-    >
-      <Button iconLeft={IconAdd} ref={ref} onClick={() => setIsOpen(!isOpen)} />
+    <>
+      <Example>
+        <Button
+          iconLeft={IconAdd}
+          ref={ref}
+          onClick={() => setIsOpen(!isOpen)}
+        />
+      </Example>
       {isOpen && (
         <ContextMenu
           items={items}
@@ -33,6 +29,6 @@ export const ContextMenuExampleOutsideClick = () => {
           possibleDirections={['upStartLeft', 'downStartLeft']}
         />
       )}
-    </StoryBookExample>
+    </>
   );
 };

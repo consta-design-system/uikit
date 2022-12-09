@@ -1,38 +1,32 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnMixSpace } from '../../../../../mixs/MixSpace/MixSpace';
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { ProgressLine } from '../../../ProgressLine';
 
 export const ProgressLineExampleMode = () => {
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [cnMixSpace({ mB: '2xl' })])}
-    >
+    <Example col={1}>
       <ProgressLine />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const ProgressLineExampleModeValue = () => {
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [cnMixSpace({ mB: '2xl' })])}
-    >
+    <Example col={1}>
       <ProgressLine value={30} />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const ProgressLineExampleModeSteps = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <ProgressLine
         value={3}
         steps={['Первый', 'Второй', 'Третий']}
         getItemLabel={(item) => item}
       />
-    </StoryBookExample>
+    </Example>
   );
 };

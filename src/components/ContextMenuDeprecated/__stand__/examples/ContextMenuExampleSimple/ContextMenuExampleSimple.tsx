@@ -1,31 +1,31 @@
-import './ContextMenuExampleSimple.css';
-
+import { Example } from '@consta/stand';
 import React, { useRef } from 'react';
 
+import { useFlag } from '##/hooks/useFlag';
+
 import { IconAdd } from '../../../../../icons/IconAdd/IconAdd';
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { cn } from '../../../../../utils/bem';
 import { Button } from '../../../../Button/Button';
 import { ContextMenu } from '../../../ContextMenuDeprecated';
 
 const items: string[] = ['Пункт 1', 'Пункт 2', 'Пункт 3'];
 
-const cnContextMenuExampleSimple = cn('ContextMenuExampleSimple');
-
 export const ContextMenuExampleSimple = () => {
   const ref = useRef(null);
+  const [isOpen, setIsOpen] = useFlag();
+
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [cnContextMenuExampleSimple()])}
-    >
-      <Button iconLeft={IconAdd} ref={ref} />
-      <ContextMenu
-        items={items}
-        getLabel={(item) => item}
-        anchorRef={ref}
-        direction="downStartLeft"
-      />
-    </StoryBookExample>
+    <>
+      <Example>
+        <Button iconLeft={IconAdd} ref={ref} onClick={setIsOpen.toogle} />
+      </Example>
+      {isOpen && (
+        <ContextMenu
+          items={items}
+          getLabel={(item) => item}
+          anchorRef={ref}
+          direction="downStartLeft"
+        />
+      )}
+    </>
   );
 };

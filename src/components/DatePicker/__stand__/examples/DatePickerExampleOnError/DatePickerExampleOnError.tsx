@@ -1,8 +1,7 @@
+import { Example } from '@consta/stand';
 import { format } from 'date-fns';
 import React, { useRef, useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Tooltip } from '../../../../Tooltip/Tooltip';
 import {
   DatePicker,
@@ -45,22 +44,24 @@ export const DatePickerExampleOnError = () => {
   };
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <DatePicker
-        minDate={minDate}
-        maxDate={maxDate}
-        ref={ref}
-        status={error ? 'alert' : undefined}
-        value={value}
-        onChange={onChange}
-        type="date-range"
-        onError={onError}
-      />
+    <>
+      <Example col={1}>
+        <DatePicker
+          minDate={minDate}
+          maxDate={maxDate}
+          ref={ref}
+          status={error ? 'alert' : undefined}
+          value={value}
+          onChange={onChange}
+          type="date-range"
+          onError={onError}
+        />
+      </Example>
       {error && (
         <Tooltip status="alert" anchorRef={ref}>
           {error}
         </Tooltip>
       )}
-    </StoryBookExample>
+    </>
   );
 };
