@@ -1,12 +1,12 @@
 import './Steps.css';
 
+import { IconArrowLeft } from '@consta/icons/IconArrowLeft';
+import { IconArrowRight } from '@consta/icons/IconArrowRight';
 import React, { forwardRef, useMemo, useRef, useState } from 'react';
 
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
 import { useOverflow } from '../../hooks/useOverflow/useOverflow';
 import { useScrollElements } from '../../hooks/useScrollElements/useScrollElements';
-import { IconArrowLeft } from '../../icons/IconArrowLeft/IconArrowLeft';
-import { IconArrowRight } from '../../icons/IconArrowRight/IconArrowRight';
 import { cn } from '../../utils/bem';
 import { Button } from '../Button/Button';
 import { withDefaultGetters } from './helper';

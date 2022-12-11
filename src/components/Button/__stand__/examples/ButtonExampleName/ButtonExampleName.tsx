@@ -1,12 +1,12 @@
 import './ButtonExampleName.css';
 
+import { IconArrowLeft } from '@consta/icons/IconArrowLeft';
+import { IconArrowRight } from '@consta/icons/IconArrowRight';
+import { IconEdit } from '@consta/icons/IconEdit';
 import React from 'react';
 
 import { cn } from '##/utils/bem';
 
-import { IconArrowLeft } from '../../../../../icons/IconArrowLeft/IconArrowLeft';
-import { IconArrowRight } from '../../../../../icons/IconArrowRight/IconArrowRight';
-import { IconEdit } from '../../../../../icons/IconEdit/IconEdit';
 import { cnMixSpace } from '../../../../../mixs/MixSpace/MixSpace';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';

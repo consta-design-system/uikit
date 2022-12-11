@@ -1,7 +1,7 @@
+import { IconLeaf } from '@consta/icons/IconLeaf';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { IconLeaf } from '../../../icons/IconLeaf/IconLeaf';
 import { cnInformer, Informer, informerPropView } from '../Informer';
 
 type InformerProps = React.ComponentProps<typeof Informer>;

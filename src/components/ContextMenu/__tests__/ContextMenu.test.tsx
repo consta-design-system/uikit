@@ -1,7 +1,7 @@
+import { IconAllDone } from '@consta/icons/IconAllDone';
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { IconAllDone } from '../../../icons/IconAllDone/IconAllDone';
 import { cn } from '../../../utils/bem';
 import { cnText } from '../../Text/Text';
 import { exampleItems as items, groups } from '../__mocks__/mock.data';

@@ -1,5 +1,10 @@
 import './TextField.css';
 
+import { IconClose } from '@consta/icons/IconClose';
+import { IconEye } from '@consta/icons/IconEye';
+import { IconEyeClose } from '@consta/icons/IconEyeClose';
+import { IconSelect } from '@consta/icons/IconSelect';
+import { IconSelectOpen } from '@consta/icons/IconSelectOpen';
 import React, { forwardRef, useCallback, useEffect } from 'react';
 import TextAreaAutoSize from 'react-textarea-autosize';
 
@@ -7,11 +12,6 @@ import { useFlag } from '../../hooks/useFlag/useFlag';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { useMutableRef } from '../../hooks/useMutableRef/useMutableRef';
 import { useSortSteps } from '../../hooks/useSortSteps/useSortSteps';
-import { IconClose } from '../../icons/IconClose/IconClose';
-import { IconEye } from '../../icons/IconEye/IconEye';
-import { IconEyeClose } from '../../icons/IconEyeClose/IconEyeClose';
-import { IconSelect } from '../../icons/IconSelect/IconSelect';
-import { IconSelectOpen } from '../../icons/IconSelectOpen/IconSelectOpen';
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
 import { isString } from '../../utils/type-guards';

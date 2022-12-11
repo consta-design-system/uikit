@@ -1,10 +1,10 @@
 import './HeaderButtonExample.css';
 
+import { IconChatStroked } from '@consta/icons/IconChatStroked';
+import { IconDiamond } from '@consta/icons/IconDiamond';
+import { IconRing } from '@consta/icons/IconRing';
 import React from 'react';
 
-import { IconChatStroked } from '../../../../../icons/IconChatStroked/IconChatStroked';
-import { IconDiamond } from '../../../../../icons/IconDiamond/IconDiamond';
-import { IconRing } from '../../../../../icons/IconRing/IconRing';
 import { cn } from '../../../../../utils/bem';
 import { Header, HeaderButton, HeaderModule } from '../../../Header';
 

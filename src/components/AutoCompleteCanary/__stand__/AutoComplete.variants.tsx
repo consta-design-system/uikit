@@ -1,5 +1,6 @@
 import './AutoComplete.variants.css';
 
+import { IconPhoto } from '@consta/icons/IconPhoto';
 import { useBoolean, useNumber, useSelect, useText } from '@consta/stand';
 import React, { useMemo, useState } from 'react';
 
@@ -14,7 +15,6 @@ import {
   textFieldPropWidth,
   textFieldPropWidthDefault,
 } from '##/components/TextField';
-import { IconPhoto } from '##/icons/IconPhoto';
 import { cn } from '##/utils/bem';
 
 import {

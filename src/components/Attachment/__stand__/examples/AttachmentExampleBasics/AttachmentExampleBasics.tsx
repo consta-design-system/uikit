@@ -1,9 +1,9 @@
 import './AttachmentExampleBasics.css';
 
+import { IconClose } from '@consta/icons/IconClose';
+import { IconTrash } from '@consta/icons/IconTrash';
 import React from 'react';
 
-import { IconClose } from '../../../../../icons/IconClose/IconClose';
-import { IconTrash } from '../../../../../icons/IconTrash/IconTrash';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
 import { cn } from '../../../../../utils/bem';

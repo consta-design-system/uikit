@@ -1,7 +1,7 @@
+import { IconAdd } from '@consta/icons/IconAdd';
+import { IconRemove } from '@consta/icons/IconRemove';
 import React from 'react';
 
-import { IconAdd } from '../../../icons/IconAdd/IconAdd';
-import { IconRemove } from '../../../icons/IconRemove/IconRemove';
 import { cn } from '../../../utils/bem';
 import { isNotNil } from '../../../utils/type-guards';
 import { Badge } from '../../Badge/Badge';

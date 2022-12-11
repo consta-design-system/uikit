@@ -1,6 +1,6 @@
+import { IconComponent, IconPropSize } from '@consta/icons/Icon';
 import React from 'react';
 
-import { IconComponent, IconPropSize } from '../../../icons/Icon/Icon';
 import { AutoCompete } from '../../../utils/types/AutoComplete';
 import {
   TextField,

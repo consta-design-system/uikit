@@ -1430,6 +1430,11 @@
     date-fns "^2.17.0"
     react-transition-group "^4.4.2"
 
+"@consta/icons@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@consta/icons/-/icons-0.0.2.tgz#96269b3538bc63d1fbc92d6b803e497b572f1689"
+  integrity sha512-ZEJlBP0/eQYkO9k71+nv2NsL21w+ftsxwxIh9xuqAOHeLYc5yI2ZxZaqaawgGMK/m5QG4UiX3qMqXYzolRpaXg==
+
 "@consta/stand@^0.0.57":
   version "0.0.57"
   resolved "https://registry.yarnpkg.com/@consta/stand/-/stand-0.0.57.tgz#046baa20ec264836c7797983809663e110e34d56"

@@ -1,17 +1,17 @@
 import './ButtonExampleView.css';
 
+import { IconAdd } from '@consta/icons/IconAdd';
+import { IconBookmarkStroked } from '@consta/icons/IconBookmarkStroked';
+import { IconChatStroked as IconChat } from '@consta/icons/IconChatStroked';
+import { IconCopy } from '@consta/icons/IconCopy';
+import { IconEdit } from '@consta/icons/IconEdit';
+import { IconForward } from '@consta/icons/IconForward';
+import { IconFunnel } from '@consta/icons/IconFunnel';
+import { IconSettings } from '@consta/icons/IconSettings';
 import React from 'react';
 
 import { cn } from '##/utils/bem';
 
-import { IconAdd } from '../../../../../icons/IconAdd/IconAdd';
-import { IconBookmarkStroked } from '../../../../../icons/IconBookmarkStroked/IconBookmarkStroked';
-import { IconChatStroked as IconChat } from '../../../../../icons/IconChatStroked/IconChatStroked';
-import { IconCopy } from '../../../../../icons/IconCopy/IconCopy';
-import { IconEdit } from '../../../../../icons/IconEdit/IconEdit';
-import { IconForward } from '../../../../../icons/IconForward/IconForward';
-import { IconFunnel } from '../../../../../icons/IconFunnel/IconFunnel';
-import { IconSettings } from '../../../../../icons/IconSettings/IconSettings';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
 import * as wp from '../../../../../uiKit/whitepaper/whitepaper';

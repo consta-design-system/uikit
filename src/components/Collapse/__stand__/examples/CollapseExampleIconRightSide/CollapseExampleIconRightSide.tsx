@@ -1,7 +1,7 @@
+import { IconAlert } from '@consta/icons/IconAlert';
+import { IconSettings } from '@consta/icons/IconSettings';
 import React, { useState } from 'react';
 
-import { IconAlert } from '../../../../../icons/IconAlert/IconAlert';
-import { IconSettings } from '../../../../../icons/IconSettings/IconSettings';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Badge } from '../../../../Badge/Badge';
 import { Button } from '../../../../Button/Button';

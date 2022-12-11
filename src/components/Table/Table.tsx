@@ -1,12 +1,12 @@
 import './Table.css';
 
+import { IconSortDown } from '@consta/icons/IconSortDown';
+import { IconSortUp } from '@consta/icons/IconSortUp';
+import { IconUnsort } from '@consta/icons/IconUnsort';
 import React, { useEffect, useMemo } from 'react';
 
 import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
-import { IconSortDown } from '../../icons/IconSortDown/IconSortDown';
-import { IconSortUp } from '../../icons/IconSortUp/IconSortUp';
-import { IconUnsort } from '../../icons/IconUnsort/IconUnsort';
 import { sortBy as sortByDefault, updateAt } from '../../utils/array';
 import { cn } from '../../utils/bem';
 import { setRef } from '../../utils/setRef';

@@ -1,9 +1,9 @@
+import { IconComponent } from '@consta/icons/Icon';
+import { IconCamera } from '@consta/icons/IconCamera';
+import { IconUser } from '@consta/icons/IconUser';
 import { render, screen } from '@testing-library/react';
 import * as React from 'react';
 
-import { IconComponent } from '../../../icons/Icon/Icon';
-import { IconCamera } from '../../../icons/IconCamera/IconCamera';
-import { IconUser } from '../../../icons/IconUser/IconUser';
 import { Breadcrumbs } from '../Breadcrumbs';
 import { cnBreadcrumbsItem } from '../BreadcrumbsItem/BreadcrumbsItem';
 

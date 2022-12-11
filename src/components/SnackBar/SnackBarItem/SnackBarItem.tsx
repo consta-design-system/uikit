@@ -1,10 +1,10 @@
 import '../../Theme/_color/Theme_color_gpnDark.css';
 import './SnackBarItem.css';
 
+import { IconClose } from '@consta/icons/IconClose';
 import React, { useEffect, useState } from 'react';
 
 import { useFlag } from '../../../hooks/useFlag/useFlag';
-import { IconClose } from '../../../icons/IconClose/IconClose';
 import { cn } from '../../../utils/bem';
 import { isNumber, isString } from '../../../utils/type-guards';
 import { Button } from '../../Button/Button';

@@ -1,9 +1,9 @@
 import './AutoCompleteExampleRenderItem.css';
 
+import { IconEdit } from '@consta/icons/IconEdit';
 import React, { useState } from 'react';
 
 import { AutoComplete } from '##/components/AutoCompleteCanary/AutoCompleteCanary';
-import { IconEdit } from '##/icons/IconEdit';
 import { cnDocsDecorator } from '##/uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '##/uiKit/components/StoryBookExample/StoryBookExample';
 import { cn } from '##/utils/bem';

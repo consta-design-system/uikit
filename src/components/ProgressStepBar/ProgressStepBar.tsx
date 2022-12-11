@@ -1,5 +1,7 @@
 import './ProgressStepBar.css';
 
+import { IconArrowLeft } from '@consta/icons/IconArrowLeft';
+import { IconArrowRight } from '@consta/icons/IconArrowRight';
 import React, {
   createRef,
   forwardRef,
@@ -13,8 +15,6 @@ import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize'
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { useOverflow } from '../../hooks/useOverflow/useOverflow';
 import { useScrollElements } from '../../hooks/useScrollElements/useScrollElements';
-import { IconArrowLeft } from '../../icons/IconArrowLeft/IconArrowLeft';
-import { IconArrowRight } from '../../icons/IconArrowRight/IconArrowRight';
 import { Button } from '../Button/Button';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import {

@@ -1,9 +1,9 @@
+import { IconCards } from '@consta/icons/IconCards';
+import { IconDrag } from '@consta/icons/IconDrag';
+import { IconHand } from '@consta/icons/IconHand';
+import { IconLeaf } from '@consta/icons/IconLeaf';
 import React from 'react';
 
-import { IconCards } from '../../../../../icons/IconCards/IconCards';
-import { IconDrag } from '../../../../../icons/IconDrag/IconDrag';
-import { IconHand } from '../../../../../icons/IconHand/IconHand';
-import { IconLeaf } from '../../../../../icons/IconLeaf/IconLeaf';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Breadcrumbs } from '../../../BreadcrumbsDeprecated';

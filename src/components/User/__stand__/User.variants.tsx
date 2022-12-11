@@ -1,7 +1,7 @@
+import { IconCrown } from '@consta/icons/IconCrown';
 import { useBoolean, useSelect, useText } from '@consta/stand';
 import React from 'react';
 
-import { IconCrown } from '../../../icons/IconCrown/IconCrown';
 import {
   User,
   userPropSize,

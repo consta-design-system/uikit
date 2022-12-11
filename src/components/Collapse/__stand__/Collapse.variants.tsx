@@ -1,9 +1,9 @@
+import { IconAdd } from '@consta/icons/IconAdd';
+import { IconRemove } from '@consta/icons/IconRemove';
+import { IconSun } from '@consta/icons/IconSun';
 import { useBoolean, useSelect, useText } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { IconAdd } from '../../../icons/IconAdd/IconAdd';
-import { IconRemove } from '../../../icons/IconRemove/IconRemove';
-import { IconSun } from '../../../icons/IconSun/IconSun';
 import { getByMap } from '../../../utils/getByMap';
 import { Badge } from '../../Badge/Badge';
 import {

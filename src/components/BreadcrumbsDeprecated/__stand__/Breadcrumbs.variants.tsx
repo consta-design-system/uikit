@@ -1,8 +1,8 @@
+import { IconComponent } from '@consta/icons/Icon';
+import { IconSettings } from '@consta/icons/IconSettings';
 import { useBoolean, useSelect } from '@consta/stand';
 import React from 'react';
 
-import { IconComponent } from '../../../icons/Icon/Icon';
-import { IconSettings } from '../../../icons/IconSettings/IconSettings';
 import {
   breadcrumbPropSize,
   breadcrumbPropSizeDefault,

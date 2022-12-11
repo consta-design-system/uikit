@@ -1,10 +1,10 @@
 import './Slider.css';
 
+import { IconPropSize } from '@consta/icons/Icon';
 import React, { forwardRef, useRef } from 'react';
 
 import { useFlag } from '../../hooks/useFlag/useFlag';
 import { useSortSteps } from '../../hooks/useSortSteps/useSortSteps';
-import { IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';

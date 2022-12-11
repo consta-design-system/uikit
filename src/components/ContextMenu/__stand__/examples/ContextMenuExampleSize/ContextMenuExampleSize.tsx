@@ -1,6 +1,6 @@
+import { IconAdd } from '@consta/icons/IconAdd';
 import React, { useRef, useState } from 'react';
 
-import { IconAdd } from '../../../../../icons/IconAdd/IconAdd';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { cn } from '../../../../../utils/bem';

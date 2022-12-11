@@ -1,8 +1,8 @@
+import { IconAdd } from '@consta/icons/IconAdd';
+import { IconRemove } from '@consta/icons/IconRemove';
 import { useBoolean, useSelect } from '@consta/stand';
 import React from 'react';
 
-import { IconAdd } from '../../../icons/IconAdd/IconAdd';
-import { IconRemove } from '../../../icons/IconRemove/IconRemove';
 import { Badge } from '../../Badge/Badge';
 import {
   collapsePropCloseDirectionIconDefault,

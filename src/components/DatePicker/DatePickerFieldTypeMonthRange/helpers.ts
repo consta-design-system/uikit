@@ -1,4 +1,5 @@
-import { IconComponent } from '../../../icons/Icon/Icon';
+import { IconComponent } from '@consta/icons/Icon';
+
 import { DateRange } from '../../../utils/types/Date';
 import { DatePickerFieldTypeMonthProps } from '../DatePickerFieldTypeMonth/helpers';
 

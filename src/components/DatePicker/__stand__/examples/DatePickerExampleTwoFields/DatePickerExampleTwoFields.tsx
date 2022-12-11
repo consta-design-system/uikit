@@ -1,11 +1,11 @@
 import './DatePickerExampleTwoIcons.css';
 
+import { IconBackward } from '@consta/icons/IconBackward';
+import { IconForward } from '@consta/icons/IconForward';
 import React, { useState } from 'react';
 
 import { cn } from '##/utils/bem';
 
-import { IconBackward } from '../../../../../icons/IconBackward/IconBackward';
-import { IconForward } from '../../../../../icons/IconForward/IconForward';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { DatePicker } from '../../../DatePicker';

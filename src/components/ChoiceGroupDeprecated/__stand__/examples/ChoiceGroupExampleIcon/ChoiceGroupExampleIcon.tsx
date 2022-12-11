@@ -1,13 +1,13 @@
 import './ChoiceGroupExampleIcon.css';
 
+import { IconComponent } from '@consta/icons/Icon';
+import { IconCamera } from '@consta/icons/IconCamera';
+import { IconPhoto } from '@consta/icons/IconPhoto';
+import { IconRing } from '@consta/icons/IconRing';
 import React, { useState } from 'react';
 
 import { cn } from '##/utils/bem';
 
-import { IconComponent } from '../../../../../icons/Icon/Icon';
-import { IconCamera } from '../../../../../icons/IconCamera/IconCamera';
-import { IconPhoto } from '../../../../../icons/IconPhoto/IconPhoto';
-import { IconRing } from '../../../../../icons/IconRing/IconRing';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { ChoiceGroup } from '../../../ChoiceGroupDeprecated';

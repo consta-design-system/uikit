@@ -1,10 +1,10 @@
+import { IconBackward } from '@consta/icons/IconBackward';
+import { IconCalendar } from '@consta/icons/IconCalendar';
+import { IconFilter } from '@consta/icons/IconFilter';
+import { IconForward } from '@consta/icons/IconForward';
+import { IconHamburger } from '@consta/icons/IconHamburger';
 import React from 'react';
 
-import { IconBackward } from '../../../../../icons/IconBackward/IconBackward';
-import { IconCalendar } from '../../../../../icons/IconCalendar/IconCalendar';
-import { IconFilter } from '../../../../../icons/IconFilter/IconFilter';
-import { IconForward } from '../../../../../icons/IconForward/IconForward';
-import { IconHamburger } from '../../../../../icons/IconHamburger/IconHamburger';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
 import * as wp from '../../../../../uiKit/whitepaper/whitepaper';

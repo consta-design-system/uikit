@@ -1,9 +1,9 @@
 import './HeaderWithoutSearchExample.css';
 
+import { IconChatStroked } from '@consta/icons/IconChatStroked';
+import { IconRing } from '@consta/icons/IconRing';
 import React, { useState } from 'react';
 
-import { IconChatStroked } from '../../../../../icons/IconChatStroked/IconChatStroked';
-import { IconRing } from '../../../../../icons/IconRing/IconRing';
 import { cn } from '../../../../../utils/bem';
 import { Text } from '../../../../Text/Text';
 import {

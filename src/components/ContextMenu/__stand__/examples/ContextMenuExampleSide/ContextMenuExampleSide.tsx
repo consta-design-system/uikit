@@ -1,7 +1,7 @@
+import { IconComponent } from '@consta/icons/Icon';
+import { IconInfo } from '@consta/icons/IconInfo';
 import React, { useRef, useState } from 'react';
 
-import { IconComponent } from '../../../../../icons/Icon/Icon';
-import { IconInfo } from '../../../../../icons/IconInfo/IconInfo';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Badge } from '../../../../Badge/Badge';

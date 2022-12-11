@@ -1,9 +1,9 @@
+import { IconCheck } from '@consta/icons/IconCheck';
 import React, { forwardRef, useRef } from 'react';
 
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
 import { useFlag } from '../../hooks/useFlag/useFlag';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
-import { IconCheck } from '../../icons/IconCheck/IconCheck';
 import { getByMap } from '../../utils/getByMap';
 import { Button } from '../Button/Button';
 import { ContextMenu } from '../ContextMenu/ContextMenu';

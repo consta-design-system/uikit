@@ -1,7 +1,7 @@
+import { IconCheck } from '@consta/icons/IconCheck';
+import { IconClose } from '@consta/icons/IconClose';
 import React from 'react';
 
-import { IconCheck } from '../../../../../icons/IconCheck/IconCheck';
-import { IconClose } from '../../../../../icons/IconClose/IconClose';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
 import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
